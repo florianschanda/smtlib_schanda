@@ -1,0 +1,27 @@
+(set-logic QF_FP)
+(set-info :source |SPARK inspired floating point problems by Florian Schanda|)
+(set-info :smt-lib-version 2.5)
+(set-info :category crafted)
+(set-info :status unsat)
+
+(define-const f0      Float32 ((_ to_fp 8 24) RNE 0.0))
+(define-const f2      Float32 ((_ to_fp 8 24) RNE 2.0))
+(define-const f3      Float32 ((_ to_fp 8 24) RNE 3.0))
+(define-const f4      Float32 ((_ to_fp 8 24) RNE 4.0))
+(define-const f5      Float32 ((_ to_fp 8 24) RNE 5.0))
+(define-const f60     Float32 ((_ to_fp 8 24) RNE 60.0))
+(define-const f223625 Float32 ((_ to_fp 8 24) RNE 223625.0))
+
+(declare-const x Float32)
+(assert (fp.leq f0 x f60))
+
+(define-const t1 Float32 (fp.add RNE x f2))
+(define-const t2 Float32 (fp.mul RNE t1 x))
+(define-const t3 Float32 (fp.add RNE t2 f3))
+(define-const t4 Float32 (fp.add RNE t3 f4))
+(define-const t5 Float32 (fp.mul RNE t4 x))
+(define-const t6 Float32 (fp.add RNE t5 f5))
+
+(assert (not (fp.leq f5 t6 f223625)))
+(check-sat)
+(exit)

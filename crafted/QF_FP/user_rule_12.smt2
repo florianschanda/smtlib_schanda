@@ -1,0 +1,29 @@
+(set-logic QF_FP)
+(set-info :source |SPARK inspired floating point problems by Florian Schanda|)
+(set-info :smt-lib-version 2.5)
+(set-info :category crafted)
+(set-info :status unsat)
+
+(define-fun finite ((f Float32)) Bool
+  (or (fp.isZero f) (fp.isNormal f) (fp.isSubnormal f)))
+
+(declare-const a Float32)
+(declare-const b Float32)
+(declare-const c Float32)
+(declare-const d Float32)
+
+(assert (finite a))
+(assert (finite b))
+(assert (finite c))
+(assert (finite d))
+(assert (finite (fp.mul RNE c c)))
+(assert (finite (fp.mul RNE d d)))
+
+(assert (fp.geq a (_ +zero 8 24)))
+(assert (fp.geq b (_ +zero 8 24)))
+
+(assert (not (fp.geq (fp.add RNE (fp.mul RNE (fp.mul RNE c c) a)
+                                 (fp.mul RNE (fp.mul RNE d d) b))
+                     (_ +zero 8 24))))
+(check-sat)
+(exit)
