@@ -23,6 +23,11 @@ immediately issue unsat (when run with --rlimit=2 --preprocess-step=0
 --rewrite-step=0 --parse-step=0), otherwise there would be more than a
 GiB of benchmarks in here.
 
+There is also a second set of benchmarks, using the FloatingPoint
+theory in addition to the above. These are all the benchmarks from the
+SPARK testsuite that contain at least one floating point value or
+operation.
+
 ## Hand-crafted
 Hand-crafted problems produced by Florian during reviewing of papers,
 axioms, SPARK 2005 user rules, FP implementations, etc. This also
