@@ -230,12 +230,10 @@
   (forall ((content Int))
   (! (=> (dynamic_invariant1 content true true true)
      (let ((result (mk_result found content)))
-     (and (get_content__function_guard (get_content result) result)
-     (=> (mk_result__function_guard result found content)
      (and
      (=
      (= (rec__private_record__result_ty__found (us_split_discrs1 result)) true)
-     (= found true)) (=> (= found true) (= (get_content result) content))))))) :pattern (
+     (= found true)) (=> (= found true) (= (get_content result) content))))) :pattern (
   (mk_result found content)) ))))
 
 (declare-datatypes ()
@@ -389,8 +387,6 @@
   (! (=> (in_range3 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
                                                               (of_rep1 x))) )))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -413,7 +409,7 @@
 
 (declare-fun first (t) integer)
 
-(declare-fun last1 (t) integer)
+(declare-fun last (t) integer)
 
 (declare-fun mk (Int Int) t)
 
@@ -422,7 +418,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range3 f)
      (=> (in_range3 l)
-     (and (= (to_rep1 (first (mk f l))) f) (= (to_rep1 (last1 (mk f l))) l)))) :pattern (
+     (and (= (to_rep1 (first (mk f l))) f) (= (to_rep1 (last (mk f l))) l)))) :pattern (
   (mk f l)) )))
 
 (define-fun dynamic_property1 ((range_first Int) (range_last Int) (low Int)
@@ -440,10 +436,10 @@
 
 (define-fun first1 ((a us_t)) Int (to_rep1 (first (rt a))))
 
-(define-fun last2 ((a us_t)) Int (to_rep1 (last1 (rt a))))
+(define-fun last1 ((a us_t)) Int (to_rep1 (last (rt a))))
 
-(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last2 a))
-                                  (+ (- (last2 a) (first1 a)) 1) 0))
+(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last1 a))
+                                  (+ (- (last1 a) (first1 a)) 1) 0))
 
 (declare-fun value__size1 () Int)
 
@@ -478,8 +474,8 @@
 
 (define-fun bool_eq6 ((x us_t)
   (y us_t)) Bool (bool_eq3 (elts x) (to_rep1 (first (rt x)))
-                 (to_rep1 (last1 (rt x))) (elts y) (to_rep1 (first (rt y)))
-                 (to_rep1 (last1 (rt y)))))
+                 (to_rep1 (last (rt x))) (elts y) (to_rep1 (first (rt y)))
+                 (to_rep1 (last (rt y)))))
 
 (declare-fun user_eq5 (us_t us_t) Bool)
 
@@ -771,18 +767,18 @@
 (define-fun result_3__ref___projection ((a result_3__ref)) us_rep2 (result_3__content
                                                                    a))
 
-(define-fun dynamic_invariant2 ((temp___expr_169 us_rep2)
-  (temp___is_init_166 Bool) (temp___skip_constant_167 Bool)
-  (temp___do_toplevel_168 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_167 true))
+(define-fun dynamic_invariant2 ((temp___expr_166 us_rep2)
+  (temp___is_init_163 Bool) (temp___skip_constant_164 Bool)
+  (temp___do_toplevel_165 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_164 true))
                                       (in_range5 3
-                                      (to_base temp___expr_169))))
+                                      (to_base temp___expr_166))))
 
-(define-fun default_initial_assumption ((temp___expr_172 us_rep2)
-  (temp___skip_top_level_173 Bool)) Bool (= (to_rep
+(define-fun default_initial_assumption ((temp___expr_169 us_rep2)
+  (temp___skip_top_level_170 Bool)) Bool (= (to_rep
                                             (rec__record_discr__interm_result__upto
                                             (us_split_discrs4
-                                            temp___expr_172))) 3))
+                                            temp___expr_169))) 3))
 
 (declare-fun r () us_rep2)
 
@@ -799,27 +795,27 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range3 temp___expr_15)))
 
-(define-fun dynamic_invariant4 ((temp___expr_163 us_rep1)
-  (temp___is_init_160 Bool) (temp___skip_constant_161 Bool)
-  (temp___do_toplevel_162 Bool)) Bool (let ((temp___164 (rec__record_discr__interm_result__upto
+(define-fun dynamic_invariant4 ((temp___expr_160 us_rep1)
+  (temp___is_init_157 Bool) (temp___skip_constant_158 Bool)
+  (temp___do_toplevel_159 Bool)) Bool (let ((temp___161 (rec__record_discr__interm_result__upto
                                                         (us_split_discrs3
-                                                        temp___expr_163))))
+                                                        temp___expr_160))))
                                       (and (dynamic_property1 1
-                                      (to_rep temp___164)
+                                      (to_rep temp___161)
                                       (first1
                                       (rec__record_discr__interm_result__to_search
-                                      (us_split_fields3 temp___expr_163)))
-                                      (last2
+                                      (us_split_fields3 temp___expr_160)))
+                                      (last1
                                       (rec__record_discr__interm_result__to_search
-                                      (us_split_fields3 temp___expr_163))))
+                                      (us_split_fields3 temp___expr_160))))
                                       (and
                                       (= (first1
                                          (rec__record_discr__interm_result__to_search
-                                         (us_split_fields3 temp___expr_163))) 1)
-                                      (= (last2
+                                         (us_split_fields3 temp___expr_160))) 1)
+                                      (= (last1
                                          (rec__record_discr__interm_result__to_search
-                                         (us_split_fields3 temp___expr_163))) 
-                                      (to_rep temp___164))))))
+                                         (us_split_fields3 temp___expr_160))) 
+                                      (to_rep temp___161))))))
 
 (declare-fun record_discr__search_upto_3__result () Bool)
 
@@ -911,18 +907,6 @@
 (declare-fun result6 () us_main_type)
 
 ;; H
-  (assert (get_content__function_guard (get_content o11) o11))
-
-;; H
-  (assert (get_content__function_guard (get_content o10) o10))
-
-;; H
-  (assert (get_content__function_guard (get_content o9) o9))
-
-;; H
-  (assert (get_content__function_guard (get_content o8) o8))
-
-;; H
   (assert
   (= 3 (to_rep (rec__record_discr__interm_result__upto (us_split_discrs4 r)))))
 
@@ -964,9 +948,7 @@
   (= (to_rep
      (select (rec__record_discr__interm_result__to_search1
              (us_split_fields5 r)) 1)) e)
-  (and
-  (and (= o11 (mk_result (of_int 1) 1)) (mk_result__function_guard o11
-  (of_int 1) 1))
+  (and (= o11 (mk_result (of_int 1) 1))
   (and (= (= o true) (= (of_int 1) true))
   (=> (= (of_int 1) true) (= (get_content o11) 1))))))
 
@@ -1044,9 +1026,7 @@
   (= (to_rep
      (select (rec__record_discr__interm_result__to_search1
              (us_split_fields5 r)) 2)) e)
-  (and
-  (and (= o10 (mk_result (of_int 1) 2)) (mk_result__function_guard o10
-  (of_int 1) 2))
+  (and (= o10 (mk_result (of_int 1) 2))
   (and (= (= o2 true) (= (of_int 1) true))
   (=> (= (of_int 1) true) (= (get_content o10) 2)))))))
 
@@ -1157,9 +1137,7 @@
   (= (to_rep
      (select (rec__record_discr__interm_result__to_search1
              (us_split_fields5 r)) 3)) e)
-  (and
-  (and (= o9 (mk_result (of_int 1) 3)) (mk_result__function_guard o9
-  (of_int 1) 3))
+  (and (= o9 (mk_result (of_int 1) 3))
   (and (= (= o4 true) (= (of_int 1) true))
   (=> (= (of_int 1) true) (= (get_content o9) 3))))))))
 
@@ -1255,9 +1233,7 @@
   (= (to_rep
      (select (rec__record_discr__interm_result__to_search1
              (us_split_fields5 r)) 3)) e))
-  (and
-  (and (= o8 (mk_result (of_int 0) 1)) (mk_result__function_guard o8
-  (of_int 0) 1))
+  (and (= o8 (mk_result (of_int 0) 1))
   (and (= (= o6 true) (= (of_int 0) true))
   (=> (= (of_int 0) true) (= (get_content o8) 1))))))))
 
@@ -1317,11 +1293,6 @@
   (= (rec__private_record__result_ty__found
      (us_split_discrs1
      (result_ty__content record_discr__search_upto_3__result15))) true))
-
-;; H
-  (assert (get_content__function_guard
-  (get_content (result_ty__content record_discr__search_upto_3__result15))
-  (result_ty__content record_discr__search_upto_3__result15)))
 
 (assert
 ;; WP_parameter_def

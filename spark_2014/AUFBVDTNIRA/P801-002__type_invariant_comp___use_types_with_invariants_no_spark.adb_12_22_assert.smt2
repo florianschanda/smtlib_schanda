@@ -149,27 +149,7 @@
   (assert (in_range i))
 
 ;; H
-  (assert (to_integer__function_guard (to_integer e) e))
-
-;; H
-  (assert (to_integer__function_guard (to_integer e) e))
-
-;; H
-  (assert (from_integer__function_guard (from_integer (to_integer e))
-  (to_integer e)))
-
-;; H
   (assert (= (bool_eq1 (from_integer (to_integer e)) e) true))
-
-;; H
-  (assert (from_integer__function_guard (from_integer i) i))
-
-;; H
-  (assert (from_integer__function_guard (from_integer i) i))
-
-;; H
-  (assert (to_integer__function_guard (to_integer (from_integer i))
-  (from_integer i)))
 
 (assert
 ;; WP_parameter_def

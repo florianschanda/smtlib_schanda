@@ -1130,65 +1130,55 @@
   (assert
   (forall ((name us_rep))
   (forall ((people__date us_private))
-  (! (let ((result (new_person__2 name people__date)))
-     (=> (new_person__2__function_guard result name people__date)
-     (= (attr__tag result) us_tag))) :pattern ((new_person__2 name
-                                               people__date)) ))))
+  (! (= (attr__tag (new_person__2 name people__date)) us_tag) :pattern (
+  (new_person__2 name people__date)) ))))
 
 ;; new_person__2__post__dispatch_axiom
   (assert
   (forall ((attr__tag2 Int))
   (forall ((name us_rep))
   (forall ((people__date us_private))
-  (! (let ((result (new_person__21 attr__tag2 name people__date)))
-     (=> (new_person__2__function_guard1 result attr__tag2 name people__date)
-     (= (attr__tag result) attr__tag2))) :pattern ((new_person__21 attr__tag2
-                                                   name people__date)) )))))
+  (! (= (attr__tag (new_person__21 attr__tag2 name people__date)) attr__tag2) :pattern (
+  (new_person__21 attr__tag2 name people__date)) )))))
 
 ;; people__person__compat_axiom
   (assert
   (forall ((name us_rep))
   (forall ((people__date us_private))
-  (! (=> (new_person__2__function_guard1
-     (new_person__21 us_tag name people__date) us_tag name people__date)
-     (and (new_person__2__function_guard (new_person__2 name people__date)
-     name people__date)
-     (= (new_person__2 name people__date) (new_person__21 us_tag name
-                                          people__date)))) :pattern (
-  (new_person__21 us_tag name people__date)) ))))
+  (! (= (new_person__2 name people__date) (new_person__21 us_tag name
+                                          people__date)) :pattern ((new_person__21
+                                                                   us_tag
+                                                                   name
+                                                                   people__date)) ))))
 
 ;; professionals__professional__compat_axiom
   (assert
   (forall ((name us_rep))
   (forall ((people__date us_private))
-  (! (=> (new_person__2__function_guard1
-     (new_person__21 us_tag1 name people__date) us_tag1 name people__date)
-     (and (new_person__2__function_guard2 (new_person__22 name people__date)
-     name people__date)
-     (= (to_base (new_person__22 name people__date)) (new_person__21 
+  (! (= (to_base (new_person__22 name people__date)) (new_person__21 
                                                      us_tag1 name
-                                                     people__date)))) :pattern (
+                                                     people__date)) :pattern (
   (new_person__21 us_tag1 name people__date)) ))))
 
-(define-fun default_initial_assumption1 ((temp___expr_647 us_rep2)
-  (temp___skip_top_level_648 Bool)) Bool (and
-                                         (= (attr__tag1 temp___expr_647) 
+(define-fun default_initial_assumption1 ((temp___expr_637 us_rep2)
+  (temp___skip_top_level_638 Bool)) Bool (and
+                                         (= (attr__tag1 temp___expr_637) 
                                          us_tag1)
                                          (and
                                          (and
                                          (= (rec__people__person__name1
                                             (us_split_fields3
-                                            temp___expr_647)) (to_unbounded_string
+                                            temp___expr_637)) (to_unbounded_string
                                                               (of_array
                                                               (temp___String_Literal_585
                                                               Tuple0) 1 8)))
                                          (= (to_rep1
                                             (rec__people__person__dob1
                                             (us_split_fields3
-                                            temp___expr_647))) (- 1)))
+                                            temp___expr_637))) (- 1)))
                                          (= (rec__people__person__alive1
                                             (us_split_fields3
-                                            temp___expr_647)) (of_int 0)))))
+                                            temp___expr_637)) (of_int 0)))))
 
 (declare-fun print__specific_post (Int us_rep2) Bool)
 
@@ -1202,11 +1192,11 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(define-fun dynamic_invariant2 ((temp___expr_618 Int)
-  (temp___is_init_615 Bool) (temp___skip_constant_616 Bool)
-  (temp___do_toplevel_617 Bool)) Bool (=>
-                                      (or (= temp___is_init_615 true)
-                                      (<= 0 3)) (in_range5 temp___expr_618)))
+(define-fun dynamic_invariant2 ((temp___expr_608 Int)
+  (temp___is_init_605 Bool) (temp___skip_constant_606 Bool)
+  (temp___do_toplevel_607 Bool)) Bool (=>
+                                      (or (= temp___is_init_605 true)
+                                      (<= 0 3)) (in_range5 temp___expr_608)))
 
 (declare-fun new_professional (us_rep Int Int) us_rep2)
 
@@ -1224,10 +1214,8 @@
   (! (=>
      (and (dynamic_invariant1 dob true true true) (dynamic_invariant2 prof
      true true true))
-     (let ((result (new_professional name dob prof)))
-     (=> (new_professional__function_guard result name dob prof)
-     (= (attr__tag1 result) us_tag1)))) :pattern ((new_professional name dob
-                                                  prof)) ))))
+     (= (attr__tag1 (new_professional name dob prof)) us_tag1)) :pattern (
+  (new_professional name dob prof)) ))))
 
 ;; new_professional__post__dispatch_axiom
   (assert
@@ -1236,24 +1224,17 @@
   (! (=>
      (and (dynamic_invariant1 dob true true true) (dynamic_invariant2 prof
      true true true))
-     (let ((result (new_professional1 attr__tag2 name dob prof)))
-     (=> (new_professional__function_guard1 result attr__tag2 name dob prof)
-     (= (attr__tag1 result) attr__tag2)))) :pattern ((new_professional1
-                                                     attr__tag2 name dob
-                                                     prof)) ))))
+     (= (attr__tag1 (new_professional1 attr__tag2 name dob prof)) attr__tag2)) :pattern (
+  (new_professional1 attr__tag2 name dob prof)) ))))
 
 ;; professionals__professional__compat_axiom
   (assert
   (forall ((name us_rep))
   (forall ((dob Int) (prof Int))
-  (! (=> (new_professional__function_guard1
-     (new_professional1 us_tag1 name dob prof) us_tag1 name dob prof)
-     (and (new_professional__function_guard (new_professional name dob prof)
-     name dob prof)
-     (= (new_professional name dob prof) (new_professional1 us_tag1 name dob
-                                         prof)))) :pattern ((new_professional1
-                                                            us_tag1 name dob
-                                                            prof)) ))))
+  (! (= (new_professional name dob prof) (new_professional1 us_tag1 name dob
+                                         prof)) :pattern ((new_professional1
+                                                          us_tag1 name dob
+                                                          prof)) ))))
 
 (declare-fun new_professional__2 (us_rep1 Int) us_rep2)
 
@@ -1269,30 +1250,22 @@
   (forall ((p us_rep1))
   (forall ((prof Int))
   (! (=> (dynamic_invariant2 prof true true true)
-     (let ((result (new_professional__2 p prof)))
-     (=> (new_professional__2__function_guard result p prof)
-     (= (attr__tag1 result) us_tag1)))) :pattern ((new_professional__2 p
-                                                  prof)) ))))
+     (= (attr__tag1 (new_professional__2 p prof)) us_tag1)) :pattern (
+  (new_professional__2 p prof)) ))))
 
 ;; new_professional__2__post__dispatch_axiom
   (assert
   (forall ((attr__tag2 Int) (prof Int))
   (forall ((p us_rep1))
   (! (=> (dynamic_invariant2 prof true true true)
-     (let ((result (new_professional__21 attr__tag2 p prof)))
-     (=> (new_professional__2__function_guard1 result attr__tag2 p prof)
-     (= (attr__tag1 result) attr__tag2)))) :pattern ((new_professional__21
-                                                     attr__tag2 p prof)) ))))
+     (= (attr__tag1 (new_professional__21 attr__tag2 p prof)) attr__tag2)) :pattern (
+  (new_professional__21 attr__tag2 p prof)) ))))
 
 ;; professionals__professional__compat_axiom
   (assert
   (forall ((p us_rep1))
   (forall ((prof Int))
-  (! (=> (new_professional__2__function_guard1
-     (new_professional__21 us_tag1 p prof) us_tag1 p prof)
-     (and (new_professional__2__function_guard (new_professional__2 p prof) p
-     prof)
-     (= (new_professional__2 p prof) (new_professional__21 us_tag1 p prof)))) :pattern (
+  (! (= (new_professional__2 p prof) (new_professional__21 us_tag1 p prof)) :pattern (
   (new_professional__21 us_tag1 p prof)) ))))
 
 (declare-fun has_training (us_rep2 us_private) Bool)
@@ -1314,15 +1287,10 @@
   (assert
   (forall ((p us_rep2))
   (forall ((professionals__state us_private))
-  (! (=> (has_training__function_guard1
-     (has_training1 us_tag1 p professionals__state) us_tag1 p
-     professionals__state)
-     (and (has_training__function_guard (has_training p professionals__state)
-     p professionals__state)
-     (= (to_int1 (has_training p professionals__state)) (to_int1
+  (! (= (to_int1 (has_training p professionals__state)) (to_int1
                                                         (has_training1
                                                         us_tag1 p
-                                                        professionals__state))))) :pattern (
+                                                        professionals__state))) :pattern (
   (has_training1 us_tag1 p professionals__state)) ))))
 
 (declare-fun train__specific_post (Int us_split_fields2 Int us_private
@@ -1367,37 +1335,17 @@
      professionals__another_one_bites_the_dust__killer__old__fields
      professionals__another_one_bites_the_dust__victim__old__fields)
      (and
-     (and (is_alive__function_guard
-     (is_alive
-     (to_base
-     (mk___rep1 professionals__another_one_bites_the_dust__killer__fields
-     killer__attr__tag)))
-     (to_base
-     (mk___rep1 professionals__another_one_bites_the_dust__killer__fields
-     killer__attr__tag)))
      (= (is_alive
         (to_base
         (mk___rep1 professionals__another_one_bites_the_dust__killer__fields
-        killer__attr__tag))) true))
-     (and (is_alive__function_guard1
-     (is_alive1
-     (attr__tag
-     (mk___rep professionals__another_one_bites_the_dust__victim__fields
-     victim__attr__tag))
-     (mk___rep professionals__another_one_bites_the_dust__victim__fields
-     victim__attr__tag))
-     (attr__tag
-     (mk___rep professionals__another_one_bites_the_dust__victim__fields
-     victim__attr__tag))
-     (mk___rep professionals__another_one_bites_the_dust__victim__fields
-     victim__attr__tag))
+        killer__attr__tag))) true)
      (not
      (= (is_alive1
         (attr__tag
         (mk___rep professionals__another_one_bites_the_dust__victim__fields
         victim__attr__tag))
         (mk___rep professionals__another_one_bites_the_dust__victim__fields
-        victim__attr__tag)) true))))) :pattern ((another_one_bites_the_dust__specific_post
+        victim__attr__tag)) true)))) :pattern ((another_one_bites_the_dust__specific_post
   us_tag1 professionals__another_one_bites_the_dust__killer__fields
   killer__attr__tag professionals__another_one_bites_the_dust__victim__fields
   victim__attr__tag
@@ -1426,9 +1374,9 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
 
-(declare-fun temp___String_Literal_710 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_678 (tuple0) (Array Int character))
 
-;; temp___String_Literal_710__def_axiom
+;; temp___String_Literal_678__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -1447,28 +1395,28 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_710 us_void_param) 1)) 75)
-     (= (to_rep (select (temp___String_Literal_710 us_void_param) 2)) 101))
-     (= (to_rep (select (temp___String_Literal_710 us_void_param) 3)) 110))
-     (= (to_rep (select (temp___String_Literal_710 us_void_param) 4)) 110))
-     (= (to_rep (select (temp___String_Literal_710 us_void_param) 5)) 101))
-     (= (to_rep (select (temp___String_Literal_710 us_void_param) 6)) 116))
-     (= (to_rep (select (temp___String_Literal_710 us_void_param) 7)) 104))
-     (= (to_rep (select (temp___String_Literal_710 us_void_param) 8)) 32))
-     (= (to_rep (select (temp___String_Literal_710 us_void_param) 9)) 77))
-     (= (to_rep (select (temp___String_Literal_710 us_void_param) 10)) 99))
-     (= (to_rep (select (temp___String_Literal_710 us_void_param) 11)) 67))
-     (= (to_rep (select (temp___String_Literal_710 us_void_param) 12)) 111))
-     (= (to_rep (select (temp___String_Literal_710 us_void_param) 13)) 114))
-     (= (to_rep (select (temp___String_Literal_710 us_void_param) 14)) 109))
-     (= (to_rep (select (temp___String_Literal_710 us_void_param) 15)) 105))
-     (= (to_rep (select (temp___String_Literal_710 us_void_param) 16)) 99))
-     (= (to_rep (select (temp___String_Literal_710 us_void_param) 17)) 107)) :pattern (
-  (temp___String_Literal_710 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_678 us_void_param) 1)) 75)
+     (= (to_rep (select (temp___String_Literal_678 us_void_param) 2)) 101))
+     (= (to_rep (select (temp___String_Literal_678 us_void_param) 3)) 110))
+     (= (to_rep (select (temp___String_Literal_678 us_void_param) 4)) 110))
+     (= (to_rep (select (temp___String_Literal_678 us_void_param) 5)) 101))
+     (= (to_rep (select (temp___String_Literal_678 us_void_param) 6)) 116))
+     (= (to_rep (select (temp___String_Literal_678 us_void_param) 7)) 104))
+     (= (to_rep (select (temp___String_Literal_678 us_void_param) 8)) 32))
+     (= (to_rep (select (temp___String_Literal_678 us_void_param) 9)) 77))
+     (= (to_rep (select (temp___String_Literal_678 us_void_param) 10)) 99))
+     (= (to_rep (select (temp___String_Literal_678 us_void_param) 11)) 67))
+     (= (to_rep (select (temp___String_Literal_678 us_void_param) 12)) 111))
+     (= (to_rep (select (temp___String_Literal_678 us_void_param) 13)) 114))
+     (= (to_rep (select (temp___String_Literal_678 us_void_param) 14)) 109))
+     (= (to_rep (select (temp___String_Literal_678 us_void_param) 15)) 105))
+     (= (to_rep (select (temp___String_Literal_678 us_void_param) 16)) 99))
+     (= (to_rep (select (temp___String_Literal_678 us_void_param) 17)) 107)) :pattern (
+  (temp___String_Literal_678 us_void_param)) )))
 
-(declare-fun temp___String_Literal_711 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_679 (tuple0) (Array Int character))
 
-;; temp___String_Literal_711__def_axiom
+;; temp___String_Literal_679__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -1481,22 +1429,22 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_711 us_void_param) 1)) 68)
-     (= (to_rep (select (temp___String_Literal_711 us_void_param) 2)) 97))
-     (= (to_rep (select (temp___String_Literal_711 us_void_param) 3)) 100))
-     (= (to_rep (select (temp___String_Literal_711 us_void_param) 4)) 101))
-     (= (to_rep (select (temp___String_Literal_711 us_void_param) 5)) 32))
-     (= (to_rep (select (temp___String_Literal_711 us_void_param) 6)) 77))
-     (= (to_rep (select (temp___String_Literal_711 us_void_param) 7)) 117))
-     (= (to_rep (select (temp___String_Literal_711 us_void_param) 8)) 114))
-     (= (to_rep (select (temp___String_Literal_711 us_void_param) 9)) 112))
-     (= (to_rep (select (temp___String_Literal_711 us_void_param) 10)) 104))
-     (= (to_rep (select (temp___String_Literal_711 us_void_param) 11)) 121)) :pattern (
-  (temp___String_Literal_711 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_679 us_void_param) 1)) 68)
+     (= (to_rep (select (temp___String_Literal_679 us_void_param) 2)) 97))
+     (= (to_rep (select (temp___String_Literal_679 us_void_param) 3)) 100))
+     (= (to_rep (select (temp___String_Literal_679 us_void_param) 4)) 101))
+     (= (to_rep (select (temp___String_Literal_679 us_void_param) 5)) 32))
+     (= (to_rep (select (temp___String_Literal_679 us_void_param) 6)) 77))
+     (= (to_rep (select (temp___String_Literal_679 us_void_param) 7)) 117))
+     (= (to_rep (select (temp___String_Literal_679 us_void_param) 8)) 114))
+     (= (to_rep (select (temp___String_Literal_679 us_void_param) 9)) 112))
+     (= (to_rep (select (temp___String_Literal_679 us_void_param) 10)) 104))
+     (= (to_rep (select (temp___String_Literal_679 us_void_param) 11)) 121)) :pattern (
+  (temp___String_Literal_679 us_void_param)) )))
 
-(declare-fun temp___String_Literal_712 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_680 (tuple0) (Array Int character))
 
-;; temp___String_Literal_712__def_axiom
+;; temp___String_Literal_680__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -1508,21 +1456,21 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_712 us_void_param) 1)) 74)
-     (= (to_rep (select (temp___String_Literal_712 us_void_param) 2)) 111))
-     (= (to_rep (select (temp___String_Literal_712 us_void_param) 3)) 104))
-     (= (to_rep (select (temp___String_Literal_712 us_void_param) 4)) 110))
-     (= (to_rep (select (temp___String_Literal_712 us_void_param) 5)) 32))
-     (= (to_rep (select (temp___String_Literal_712 us_void_param) 6)) 82))
-     (= (to_rep (select (temp___String_Literal_712 us_void_param) 7)) 97))
-     (= (to_rep (select (temp___String_Literal_712 us_void_param) 8)) 109))
-     (= (to_rep (select (temp___String_Literal_712 us_void_param) 9)) 98))
-     (= (to_rep (select (temp___String_Literal_712 us_void_param) 10)) 111)) :pattern (
-  (temp___String_Literal_712 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_680 us_void_param) 1)) 74)
+     (= (to_rep (select (temp___String_Literal_680 us_void_param) 2)) 111))
+     (= (to_rep (select (temp___String_Literal_680 us_void_param) 3)) 104))
+     (= (to_rep (select (temp___String_Literal_680 us_void_param) 4)) 110))
+     (= (to_rep (select (temp___String_Literal_680 us_void_param) 5)) 32))
+     (= (to_rep (select (temp___String_Literal_680 us_void_param) 6)) 82))
+     (= (to_rep (select (temp___String_Literal_680 us_void_param) 7)) 97))
+     (= (to_rep (select (temp___String_Literal_680 us_void_param) 8)) 109))
+     (= (to_rep (select (temp___String_Literal_680 us_void_param) 9)) 98))
+     (= (to_rep (select (temp___String_Literal_680 us_void_param) 10)) 111)) :pattern (
+  (temp___String_Literal_680 us_void_param)) )))
 
-(declare-fun temp___String_Literal_713 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_681 (tuple0) (Array Int character))
 
-;; temp___String_Literal_713__def_axiom
+;; temp___String_Literal_681__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -1537,20 +1485,20 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_713 us_void_param) 1)) 71)
-     (= (to_rep (select (temp___String_Literal_713 us_void_param) 2)) 114))
-     (= (to_rep (select (temp___String_Literal_713 us_void_param) 3)) 101))
-     (= (to_rep (select (temp___String_Literal_713 us_void_param) 4)) 103))
-     (= (to_rep (select (temp___String_Literal_713 us_void_param) 5)) 111))
-     (= (to_rep (select (temp___String_Literal_713 us_void_param) 6)) 114))
-     (= (to_rep (select (temp___String_Literal_713 us_void_param) 7)) 121))
-     (= (to_rep (select (temp___String_Literal_713 us_void_param) 8)) 32))
-     (= (to_rep (select (temp___String_Literal_713 us_void_param) 9)) 72))
-     (= (to_rep (select (temp___String_Literal_713 us_void_param) 10)) 111))
-     (= (to_rep (select (temp___String_Literal_713 us_void_param) 11)) 117))
-     (= (to_rep (select (temp___String_Literal_713 us_void_param) 12)) 115))
-     (= (to_rep (select (temp___String_Literal_713 us_void_param) 13)) 101)) :pattern (
-  (temp___String_Literal_713 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_681 us_void_param) 1)) 71)
+     (= (to_rep (select (temp___String_Literal_681 us_void_param) 2)) 114))
+     (= (to_rep (select (temp___String_Literal_681 us_void_param) 3)) 101))
+     (= (to_rep (select (temp___String_Literal_681 us_void_param) 4)) 103))
+     (= (to_rep (select (temp___String_Literal_681 us_void_param) 5)) 111))
+     (= (to_rep (select (temp___String_Literal_681 us_void_param) 6)) 114))
+     (= (to_rep (select (temp___String_Literal_681 us_void_param) 7)) 121))
+     (= (to_rep (select (temp___String_Literal_681 us_void_param) 8)) 32))
+     (= (to_rep (select (temp___String_Literal_681 us_void_param) 9)) 72))
+     (= (to_rep (select (temp___String_Literal_681 us_void_param) 10)) 111))
+     (= (to_rep (select (temp___String_Literal_681 us_void_param) 11)) 117))
+     (= (to_rep (select (temp___String_Literal_681 us_void_param) 12)) 115))
+     (= (to_rep (select (temp___String_Literal_681 us_void_param) 13)) 101)) :pattern (
+  (temp___String_Literal_681 us_void_param)) )))
 
 (define-fun dynamic_invariant3 ((temp___expr_33 Int) (temp___is_init_30 Bool)
   (temp___skip_constant_31 Bool)
@@ -1581,56 +1529,45 @@
 ;; people__person__compat_axiom
   (assert
   (forall ((p us_rep1))
-  (! (=> (is_alive__function_guard1 (is_alive1 us_tag p) us_tag p)
-     (and (is_alive__function_guard (is_alive p) p)
-     (= (to_int1 (is_alive p)) (to_int1 (is_alive1 us_tag p))))) :pattern (
+  (! (= (to_int1 (is_alive p)) (to_int1 (is_alive1 us_tag p))) :pattern (
   (is_alive1 us_tag p)) )))
 
 ;; professionals__professional__compat_axiom
   (assert
   (forall ((p us_rep1))
-  (! (=> (is_alive__function_guard1 (is_alive1 us_tag1 p) us_tag1 p)
-     (and (is_alive__function_guard (is_alive p) p)
-     (= (to_int1 (is_alive p)) (to_int1 (is_alive1 us_tag1 p))))) :pattern (
+  (! (= (to_int1 (is_alive p)) (to_int1 (is_alive1 us_tag1 p))) :pattern (
   (is_alive1 us_tag1 p)) )))
 
-(define-fun dynamic_invariant6 ((temp___expr_624 Int)
-  (temp___is_init_621 Bool) (temp___skip_constant_622 Bool)
-  (temp___do_toplevel_623 Bool)) Bool (=>
-                                      (or (= temp___is_init_621 true)
-                                      (<= 0 12)) (in_range6 temp___expr_624)))
+(define-fun dynamic_invariant6 ((temp___expr_614 Int)
+  (temp___is_init_611 Bool) (temp___skip_constant_612 Bool)
+  (temp___do_toplevel_613 Bool)) Bool (=>
+                                      (or (= temp___is_init_611 true)
+                                      (<= 0 12)) (in_range6 temp___expr_614)))
 
 ;; new_person__2__post_axiom
   (assert
   (forall ((name us_rep))
   (forall ((people__date us_private))
-  (! (let ((result (new_person__22 name people__date)))
-     (=> (new_person__2__function_guard2 result name people__date)
-     (= (attr__tag1 result) us_tag1))) :pattern ((new_person__22 name
-                                                 people__date)) ))))
+  (! (= (attr__tag1 (new_person__22 name people__date)) us_tag1) :pattern (
+  (new_person__22 name people__date)) ))))
 
 ;; new_person__2__post__dispatch_axiom
   (assert
   (forall ((attr__tag2 Int))
   (forall ((name us_rep))
   (forall ((people__date us_private))
-  (! (let ((result (new_person__23 attr__tag2 name people__date)))
-     (=> (new_person__2__function_guard3 result attr__tag2 name people__date)
-     (= (attr__tag1 result) attr__tag2))) :pattern ((new_person__23
-                                                    attr__tag2 name
-                                                    people__date)) )))))
+  (! (= (attr__tag1 (new_person__23 attr__tag2 name people__date)) attr__tag2) :pattern (
+  (new_person__23 attr__tag2 name people__date)) )))))
 
 ;; professionals__professional__compat_axiom
   (assert
   (forall ((name us_rep))
   (forall ((people__date us_private))
-  (! (=> (new_person__2__function_guard3
-     (new_person__23 us_tag1 name people__date) us_tag1 name people__date)
-     (and (new_person__2__function_guard2 (new_person__22 name people__date)
-     name people__date)
-     (= (new_person__22 name people__date) (new_person__23 us_tag1 name
-                                           people__date)))) :pattern (
-  (new_person__23 us_tag1 name people__date)) ))))
+  (! (= (new_person__22 name people__date) (new_person__23 us_tag1 name
+                                           people__date)) :pattern ((new_person__23
+                                                                    us_tag1
+                                                                    name
+                                                                    people__date)) ))))
 
 ;; has_licence_to_kill__post_axiom
   (assert true)
@@ -1641,11 +1578,8 @@
 ;; professionals__professional__compat_axiom
   (assert
   (forall ((p us_rep2))
-  (! (=> (has_licence_to_kill__function_guard1
-     (has_licence_to_kill1 us_tag1 p) us_tag1 p)
-     (and (has_licence_to_kill__function_guard (has_licence_to_kill p) p)
-     (= (to_int1 (has_licence_to_kill p)) (to_int1
-                                          (has_licence_to_kill1 us_tag1 p))))) :pattern (
+  (! (= (to_int1 (has_licence_to_kill p)) (to_int1
+                                          (has_licence_to_kill1 us_tag1 p))) :pattern (
   (has_licence_to_kill1 us_tag1 p)) )))
 
 (declare-fun date () us_private)
@@ -1786,13 +1720,13 @@
 
 (declare-fun main__dr_house__assume () us_rep2)
 
-(declare-fun temp___717 () us_rep2)
+(declare-fun temp___685 () us_rep2)
 
-(declare-fun temp___716 () us_rep2)
+(declare-fun temp___684 () us_rep2)
 
-(declare-fun temp___715 () us_rep2)
+(declare-fun temp___683 () us_rep2)
 
-(declare-fun temp___714 () us_rep2)
+(declare-fun temp___682 () us_rep2)
 
 (declare-fun state1 () us_private)
 
@@ -1896,56 +1830,17 @@
 
 (declare-fun skill6 () Int)
 
-(define-fun main__rambo__assume8 () us_rep2 (mk___rep1
-                                            (mk___split_fields1
-                                            main__rambo__assume
-                                            main__rambo__assume1
-                                            main__rambo__assume2
-                                            main__rambo__assume3
-                                            main__rambo__assume4
-                                            main__rambo__assume5
-                                            main__rambo__assume6)
-                                            main__rambo__assume7))
-
-(define-fun main__zerocool__assume8 () us_rep2 (mk___rep1
-                                               (mk___split_fields1
-                                               main__zerocool__assume
-                                               main__zerocool__assume1
-                                               main__zerocool__assume2
-                                               main__zerocool__assume3
-                                               main__zerocool__assume4
-                                               main__zerocool__assume5
-                                               main__zerocool__assume6)
-                                               main__zerocool__assume7))
-
-(define-fun main__uni_student__assume8 () us_rep2 (mk___rep1
-                                                  (mk___split_fields1
-                                                  main__uni_student__assume
-                                                  main__uni_student__assume1
-                                                  main__uni_student__assume2
-                                                  main__uni_student__assume3
-                                                  main__uni_student__assume4
-                                                  main__uni_student__assume5
-                                                  main__uni_student__assume6)
-                                                  main__uni_student__assume7))
-
-(define-fun main__kenny__assume5 () us_rep1 (mk___rep
-                                            (mk___split_fields
-                                            main__kenny__assume
-                                            main__kenny__assume1
-                                            main__kenny__assume2
-                                            main__kenny__assume3)
-                                            main__kenny__assume4))
-
 ;; H
   (assert
   (= o (to_unbounded_string
-       (mk___t (temp___String_Literal_710 Tuple0) (mk 1 17)))))
+       (mk___t (temp___String_Literal_678 Tuple0) (mk 1 17)))))
 
 ;; H
   (assert
-  (and (= main__kenny__assume5 (new_person__2 o date))
-  (new_person__2__function_guard main__kenny__assume5 o date)))
+  (= (mk___rep
+     (mk___split_fields main__kenny__assume main__kenny__assume1
+     main__kenny__assume2 main__kenny__assume3) main__kenny__assume4) 
+  (new_person__2 o date)))
 
 ;; H
   (assert
@@ -1964,12 +1859,15 @@
 
 ;; H
   (assert
-  (and
-  (= main__uni_student__assume8 (new_professional__2
-                                (mk___rep kenny__split_fields4
-                                kenny__attr__tag) 0))
-  (new_professional__2__function_guard main__uni_student__assume8
-  (mk___rep kenny__split_fields4 kenny__attr__tag) 0)))
+  (= (mk___rep1
+     (mk___split_fields1 main__uni_student__assume main__uni_student__assume1
+     main__uni_student__assume2 main__uni_student__assume3
+     main__uni_student__assume4 main__uni_student__assume5
+     main__uni_student__assume6) main__uni_student__assume7) (new_professional__2
+                                                             (mk___rep
+                                                             kenny__split_fields4
+                                                             kenny__attr__tag)
+                                                             0)))
 
 ;; H
   (assert
@@ -1995,12 +1893,15 @@
 ;; H
   (assert
   (= o1 (to_unbounded_string
-        (mk___t (temp___String_Literal_711 Tuple0) (mk 1 11)))))
+        (mk___t (temp___String_Literal_679 Tuple0) (mk 1 11)))))
 
 ;; H
   (assert
-  (and (= main__zerocool__assume8 (new_professional o1 1011977 1))
-  (new_professional__function_guard main__zerocool__assume8 o1 1011977 1)))
+  (= (mk___rep1
+     (mk___split_fields1 main__zerocool__assume main__zerocool__assume1
+     main__zerocool__assume2 main__zerocool__assume3 main__zerocool__assume4
+     main__zerocool__assume5 main__zerocool__assume6)
+     main__zerocool__assume7) (new_professional o1 1011977 1)))
 
 ;; H
   (assert
@@ -2023,12 +1924,15 @@
 ;; H
   (assert
   (= o2 (to_unbounded_string
-        (mk___t (temp___String_Literal_712 Tuple0) (mk 1 10)))))
+        (mk___t (temp___String_Literal_680 Tuple0) (mk 1 10)))))
 
 ;; H
   (assert
-  (and (= main__rambo__assume8 (new_professional o2 6071946 2))
-  (new_professional__function_guard main__rambo__assume8 o2 6071946 2)))
+  (= (mk___rep1
+     (mk___split_fields1 main__rambo__assume main__rambo__assume1
+     main__rambo__assume2 main__rambo__assume3 main__rambo__assume4
+     main__rambo__assume5 main__rambo__assume6) main__rambo__assume7) 
+  (new_professional o2 6071946 2)))
 
 ;; H
   (assert
@@ -2050,12 +1954,10 @@
 ;; H
   (assert
   (= o3 (to_unbounded_string
-        (mk___t (temp___String_Literal_713 Tuple0) (mk 1 13)))))
+        (mk___t (temp___String_Literal_681 Tuple0) (mk 1 13)))))
 
 ;; H
-  (assert
-  (and (= main__dr_house__assume (new_professional o3 11061959 3))
-  (new_professional__function_guard main__dr_house__assume o3 11061959 3)))
+  (assert (= main__dr_house__assume (new_professional o3 11061959 3)))
 
 ;; H
   (assert
@@ -2081,22 +1983,22 @@
 ;; H
   (assert
   (=> (and (<= 0 skill1) (<= skill1 12))
-  (= temp___717 (mk___rep1 uni_student__split_fields7 uni_student__attr__tag))))
+  (= temp___685 (mk___rep1 uni_student__split_fields7 uni_student__attr__tag))))
 
 ;; H
   (assert
   (=> (and (<= 0 skill1) (<= skill1 12))
-  (= temp___716 (mk___rep1 dr_house__split_fields7 dr_house__attr__tag))))
+  (= temp___684 (mk___rep1 dr_house__split_fields7 dr_house__attr__tag))))
 
 ;; H
   (assert
   (=> (and (<= 0 skill1) (<= skill1 12))
-  (= temp___715 (mk___rep1 rambo__split_fields7 rambo__attr__tag))))
+  (= temp___683 (mk___rep1 rambo__split_fields7 rambo__attr__tag))))
 
 ;; H
   (assert
   (=> (and (<= 0 skill1) (<= skill1 12))
-  (= temp___714 (mk___rep1 zerocool__split_fields7 zerocool__attr__tag))))
+  (= temp___682 (mk___rep1 zerocool__split_fields7 zerocool__attr__tag))))
 
 ;; H
   (assert
@@ -2105,12 +2007,9 @@
 ;; H
   (assert
   (=> (and (<= 0 skill1) (<= skill1 12))
-  (and
   (= result6 (has_training
              (mk___rep1 uni_student__split_fields8 uni_student__attr__tag)
-             state2))
-  (has_training__function_guard result6
-  (mk___rep1 uni_student__split_fields8 uni_student__attr__tag) state2))))
+             state2))))
 
 ;; H
   (assert
@@ -2121,12 +2020,9 @@
 ;; H
   (assert
   (=> (and (<= 0 skill1) (<= skill1 12))
-  (and
   (= result7 (has_training
              (mk___rep1 zerocool__split_fields8 zerocool__attr__tag) 
-             state2))
-  (has_training__function_guard result7
-  (mk___rep1 zerocool__split_fields8 zerocool__attr__tag) state2))))
+             state2))))
 
 ;; H
   (assert
@@ -2137,11 +2033,8 @@
 ;; H
   (assert
   (=> (and (<= 0 skill1) (<= skill1 12))
-  (and
   (= result8 (has_training (mk___rep1 rambo__split_fields8 rambo__attr__tag)
-             state2))
-  (has_training__function_guard result8
-  (mk___rep1 rambo__split_fields8 rambo__attr__tag) state2))))
+             state2))))
 
 ;; H
   (assert
@@ -2151,12 +2044,9 @@
 ;; H
   (assert
   (=> (and (<= 0 skill1) (<= skill1 12))
-  (and
   (= result9 (has_training
              (mk___rep1 dr_house__split_fields8 dr_house__attr__tag) 
-             state2))
-  (has_training__function_guard result9
-  (mk___rep1 dr_house__split_fields8 dr_house__attr__tag) state2))))
+             state2))))
 
 ;; H
   (assert
@@ -2335,44 +2225,6 @@
 
 ;; H
   (assert (=> (not (and (<= 0 skill1) (<= skill1 12))) (= state6 state1)))
-
-;; H
-  (assert (is_alive__function_guard
-  (is_alive
-  (mk___rep
-  (mk___split_fields
-  (rec__people__person__name1
-  (us_split_fields__content1 rambo__split_fields12))
-  (rec__people__person__dob1
-  (us_split_fields__content1 rambo__split_fields12))
-  (rec__people__person__alive1
-  (us_split_fields__content1 rambo__split_fields12))
-  (hide_ext__
-  (rec__professionals__professional__profession
-  (us_split_fields__content1 rambo__split_fields12))
-  (rec__professionals__professional__skilled_in
-  (us_split_fields__content1 rambo__split_fields12))
-  (rec__professionals__professional__number_of_people_killed
-  (us_split_fields__content1 rambo__split_fields12))
-  (rec__ext__1 (us_split_fields__content1 rambo__split_fields12))))
-  rambo__attr__tag))
-  (mk___rep
-  (mk___split_fields
-  (rec__people__person__name1
-  (us_split_fields__content1 rambo__split_fields12))
-  (rec__people__person__dob1
-  (us_split_fields__content1 rambo__split_fields12))
-  (rec__people__person__alive1
-  (us_split_fields__content1 rambo__split_fields12))
-  (hide_ext__
-  (rec__professionals__professional__profession
-  (us_split_fields__content1 rambo__split_fields12))
-  (rec__professionals__professional__skilled_in
-  (us_split_fields__content1 rambo__split_fields12))
-  (rec__professionals__professional__number_of_people_killed
-  (us_split_fields__content1 rambo__split_fields12))
-  (rec__ext__1 (us_split_fields__content1 rambo__split_fields12))))
-  rambo__attr__tag)))
 
 (assert
 ;; WP_parameter_def

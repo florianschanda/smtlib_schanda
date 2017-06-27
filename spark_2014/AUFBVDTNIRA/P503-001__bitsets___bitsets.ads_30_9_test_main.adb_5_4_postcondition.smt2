@@ -239,8 +239,7 @@
   (assert
   (forall ((s (Array Int Bool)))
   (forall ((e Int))
-  (! (=> (mem__function_guard (mem s e) s e)
-     (= (= (mem s e) true) (= (select s e) true))) :pattern ((mem s e)) ))))
+  (! (= (= (mem s e) true) (= (select s e) true)) :pattern ((mem s e)) ))))
 
 (declare-fun a () (Array Int Bool))
 
@@ -301,16 +300,10 @@
   (assert (<= elt 10))
 
 ;; H
-  (assert (mem__function_guard (mem test_main__my_sets__union__result4 elt)
-  test_main__my_sets__union__result4 elt))
-
-;; H
   (assert (= (mem test_main__my_sets__union__result4 elt) true))
 
 (assert
 ;; WP_parameter_def
  ;; File "bitsets.ads", line 52, characters 0-0
-  (not
-  (or (=> (mem__function_guard (mem a elt) a elt) (= (mem a elt) true))
-  (=> (mem__function_guard (mem b elt) b elt) (= (mem b elt) true)))))
+  (not (or (= (mem a elt) true) (= (mem b elt) true))))
 (check-sat)

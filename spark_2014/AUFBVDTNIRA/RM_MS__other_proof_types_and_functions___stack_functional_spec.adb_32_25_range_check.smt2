@@ -425,18 +425,15 @@
 
 ;; count__post_axiom
   (assert
-  (forall ((s us_rep))
-  (! (let ((result (count s)))
-     (=> (count__function_guard result s) (dynamic_invariant result true
-     false true))) :pattern ((count s)) )))
+  (forall ((s us_rep)) (! (dynamic_invariant (count s) true false
+  true) :pattern ((count s)) )))
 
 ;; count__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (count__function_guard (count s) s)
-     (= (count s) (to_rep1
+  (! (= (count s) (to_rep1
                   (rec__stack_functional_spec__stack_type__pointer
-                  (us_split_fields1 s))))) :pattern ((count s)) )))
+                  (us_split_fields1 s)))) :pattern ((count s)) )))
 
 (declare-fun s () us_rep)
 
@@ -469,9 +466,6 @@
 
 ;; H
   (assert (in_range2 n))
-
-;; H
-  (assert (count__function_guard (count s) s))
 
 ;; H
   (assert (and (<= 1 n) (<= n (count s))))

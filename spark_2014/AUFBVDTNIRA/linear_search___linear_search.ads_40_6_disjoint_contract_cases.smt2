@@ -402,11 +402,9 @@
   (assert
   (forall ((a (Array Int element)))
   (forall ((val__ Int) (low Int) (up Int))
-  (! (=> (value_found_in_range__function_guard
-     (value_found_in_range a val__ low up) a val__ low up)
-     (= (= (value_found_in_range a val__ low up) true)
+  (! (= (= (value_found_in_range a val__ low up) true)
      (exists ((j Int))
-     (and (and (<= low j) (<= j up)) (= (to_rep1 (select a j)) val__))))) :pattern (
+     (and (and (<= low j) (<= j up)) (= (to_rep1 (select a j)) val__)))) :pattern (
   (value_found_in_range a val__ low up)) ))))
 
 (declare-fun a () (Array Int element))
@@ -552,10 +550,6 @@
 
 ;; H
   (assert (<= 0 val__))
-
-;; H
-  (assert (value_found_in_range__function_guard
-  (value_found_in_range a val__ 2 10) a val__ 2 10))
 
 (assert
 ;; WP_parameter_def

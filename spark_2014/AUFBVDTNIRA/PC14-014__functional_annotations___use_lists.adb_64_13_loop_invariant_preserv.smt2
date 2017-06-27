@@ -732,9 +732,8 @@
 ;; is_incr__def_axiom
   (assert
   (forall ((i1 Int) (i2 Int))
-  (! (=> (is_incr__function_guard (is_incr i1 i2) i1 i2)
-     (= (= (is_incr i1 i2) true)
-     (ite (= i1 2147483647) (= i2 2147483647) (= i2 (+ i1 1))))) :pattern (
+  (! (= (= (is_incr i1 i2) true)
+     (ite (= i1 2147483647) (= i2 2147483647) (= i2 (+ i1 1)))) :pattern (
   (is_incr i1 i2)) )))
 
 (declare-fun l__split_discrs () us_split_discrs)
@@ -900,17 +899,6 @@
 
 ;; H
   (assert
-  (forall ((n Int)) (is_incr__function_guard
-  (is_incr
-  (get
-  (model__ (mk___rep l__split_discrs (mk___split_fields l__split_fields))) n)
-  (get (model__ (mk___rep l__split_discrs l__split_fields4)) n))
-  (get
-  (model__ (mk___rep l__split_discrs (mk___split_fields l__split_fields))) n)
-  (get (model__ (mk___rep l__split_discrs l__split_fields4)) n))))
-
-;; H
-  (assert
   (= (length (mk___rep l__split_discrs l__split_fields4)) (length
                                                           (mk___rep
                                                           l__split_discrs
@@ -1048,16 +1036,6 @@
   (assert
   (<= n (- (get1 (positions (mk___rep l__split_discrs l__split_fields3))
            (mk___rep1 cu__split_fields4)) 1)))
-
-;; H
-  (assert (is_incr__function_guard
-  (is_incr
-  (get
-  (model__ (mk___rep l__split_discrs (mk___split_fields l__split_fields))) 
-  n) (get (model__ (mk___rep l__split_discrs l__split_fields3)) n))
-  (get
-  (model__ (mk___rep l__split_discrs (mk___split_fields l__split_fields))) 
-  n) (get (model__ (mk___rep l__split_discrs l__split_fields3)) n)))
 
 (assert
 ;; WP_parameter_def

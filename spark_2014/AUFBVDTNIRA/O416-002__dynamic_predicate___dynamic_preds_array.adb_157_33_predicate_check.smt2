@@ -144,6 +144,24 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
+(declare-fun to_rep (even) Int)
+
+(declare-fun of_rep (Int) even)
+
+;; inversion_axiom
+  (assert
+  (forall ((x even)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x even)) (! (in_range (to_rep x)) :pattern ((to_rep x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                           (of_rep x))) )))
+
 (declare-sort teven_pairD1 0)
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
@@ -165,24 +183,6 @@
  (mk_teven_pairD1__ref (teven_pairD1__content teven_pairD1)))))
 (define-fun teven_pairD1__ref___projection ((a teven_pairD1__ref)) teven_pairD1 
   (teven_pairD1__content a))
-
-(declare-fun to_rep (even) Int)
-
-(declare-fun of_rep (Int) even)
-
-;; inversion_axiom
-  (assert
-  (forall ((x even)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
-
-;; range_axiom
-  (assert
-  (forall ((x even)) (! (in_range (to_rep x)) :pattern ((to_rep x)) )))
-
-;; coerce_axiom
-  (assert
-  (forall ((x Int))
-  (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
-                                                           (of_rep x))) )))
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int even))))))
@@ -333,17 +333,13 @@
 ;; get_even_close_pair__2__post_axiom
   (assert
   (forall ((x (Array Int even)))
-  (! (=> (dynamic_invariant2 x true true true)
-     (let ((result (get_even_close_pair__2 x)))
-     (=> (get_even_close_pair__2__function_guard result x)
-     (dynamic_invariant2 result true false true)))) :pattern ((get_even_close_pair__2
-                                                              x)) )))
+  (! (=> (dynamic_invariant2 x true true true) (dynamic_invariant2
+     (get_even_close_pair__2 x) true false true)) :pattern ((get_even_close_pair__2
+                                                            x)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-fun x () (Array Int even))
-
-(declare-fun temp___331 () (Array Int even))
 
 ;; H
   (assert (dynamic_invariant i11s true false true))
@@ -351,11 +347,8 @@
 ;; H
   (assert (dynamic_invariant1 x true false true))
 
-;; H
-  (assert (= temp___331 x))
-
 (assert
 ;; WP_parameter_def
  ;; File "dynamic_preds_array.adb", line 149, characters 0-0
-  (not (dynamic_predicate1 temp___331)))
+  (not (dynamic_predicate1 x)))
 (check-sat)

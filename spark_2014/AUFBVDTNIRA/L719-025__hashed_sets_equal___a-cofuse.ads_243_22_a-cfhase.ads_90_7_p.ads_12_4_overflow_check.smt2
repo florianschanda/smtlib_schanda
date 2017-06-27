@@ -218,8 +218,7 @@
 ;; my_eq__def_axiom
   (assert
   (forall ((i1 Int) (i2 Int))
-  (! (=> (my_eq__function_guard (my_eq i1 i2) i1 i2)
-     (= (= (my_eq i1 i2) true) (= i1 i2))) :pattern ((my_eq i1 i2)) )))
+  (! (= (= (my_eq i1 i2) true) (= i1 i2)) :pattern ((my_eq i1 i2)) )))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -271,12 +270,11 @@
   (forall ((container us_rep))
   (forall ((item Int))
   (! (=> (dynamic_invariant2 item true true true)
-     (and (forall ((e Int)) (my_eq__function_guard (my_eq e item) e item))
      (=> (= (of_int 1) true)
      (=>
      (exists ((e Int))
      (and (and (in_range4 e) (= (contains container e) true))
-     (= (my_eq e item) true))) (= (contains container item) true))))) :pattern (
+     (= (my_eq e item) true))) (= (contains container item) true)))) :pattern (
   (contains container item)) ))))
 
 ;; ole__post_axiom

@@ -299,24 +299,18 @@
   (! (=>
      (and (dynamic_invariant regnew true true true) (dynamic_invariant1 val__
      true true true))
-     (let ((result (writereg32post regnew val__)))
-     (and (readreg32__function_guard (readreg32 regnew) regnew)
-     (=> (writereg32post__function_guard result regnew val__)
-     (= (= result true)
+     (= (= (writereg32post regnew val__) true)
      (and (= (readreg32 regnew) val__)
-     (= (bvand regnew ((_ int2bv 64) 18446744069414584320)) ((_ int2bv 64) 0)))))))) :pattern (
+     (= (bvand regnew ((_ int2bv 64) 18446744069414584320)) ((_ int2bv 64) 0))))) :pattern (
   (writereg32post regnew val__)) ))))
 
 ;; writereg32post__def_axiom
   (assert
   (forall ((regnew (_ BitVec 64)))
   (forall ((val__ (_ BitVec 32)))
-  (! (=> (writereg32post__function_guard (writereg32post regnew val__) regnew
-     val__)
-     (and (readreg32__function_guard (readreg32 regnew) regnew)
-     (= (= (writereg32post regnew val__) true)
+  (! (= (= (writereg32post regnew val__) true)
      (and (= (readreg32 regnew) val__)
-     (= (bvand regnew ((_ int2bv 64) 18446744069414584320)) ((_ int2bv 64) 0)))))) :pattern (
+     (= (bvand regnew ((_ int2bv 64) 18446744069414584320)) ((_ int2bv 64) 0)))) :pattern (
   (writereg32post regnew val__)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -330,11 +324,9 @@
   (forall ((reg (_ BitVec 64)))
   (! (=> (dynamic_invariant reg true true true)
      (let ((result (readreg32 reg)))
-     (=> (readreg32__function_guard result reg)
      (and
      (= result ((_ extract 31 0) (bvand reg ((_ int2bv 64) 4294967295))))
-     (dynamic_invariant1 result true false true))))) :pattern ((readreg32
-                                                               reg)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((readreg32 reg)) )))
 
 (declare-fun rbp () (_ BitVec 64))
 
@@ -357,10 +349,6 @@
 
 ;; H
   (assert (= rbp3 rbp1))
-
-;; H
-  (assert (writereg32post__function_guard (writereg32post rbp2 val__) 
-  rbp2 val__))
 
 (assert
 ;; WP_parameter_def

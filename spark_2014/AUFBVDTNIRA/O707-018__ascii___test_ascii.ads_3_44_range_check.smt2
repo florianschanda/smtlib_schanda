@@ -345,17 +345,14 @@
 ;; id__post_axiom
   (assert
   (forall ((s us_t))
-  (! (=> (dynamic_invariant s true true true)
-     (let ((result (id s)))
-     (=> (id__function_guard result s) (dynamic_invariant result true false
-     true)))) :pattern ((id s)) )))
+  (! (=> (dynamic_invariant s true true true) (dynamic_invariant (id s) true
+     false true)) :pattern ((id s)) )))
 
 ;; id__def_axiom
   (assert
   (forall ((s us_t))
-  (! (=>
-     (and (dynamic_invariant s true true true) (id__function_guard (id s) s))
-     (= (id s) s)) :pattern ((id s)) )))
+  (! (=> (dynamic_invariant s true true true) (= (id s) s)) :pattern (
+  (id s)) )))
 
 (declare-fun concat2 () us_t)
 
@@ -397,28 +394,25 @@
 
 ;; concat__def_axiom
   (assert
-  (and (id__function_guard
-  (id (of_array (temp___String_Literal_132 Tuple0) 1 4))
-  (of_array (temp___String_Literal_132 Tuple0) 1 4))
-  (= concat2 (let ((temp___135 0))
-             (let ((temp___134 (id
+  (= concat2 (let ((temp___134 0))
+             (let ((temp___133 (id
                                (of_array (temp___String_Literal_132 Tuple0) 1
                                4))))
-             (ite (= (length temp___134) 0)
-             (of_array (singleton1 (of_rep temp___135) 1) 1 1)
+             (ite (= (length temp___133) 0)
+             (of_array (singleton1 (of_rep temp___134) 1) 1 1)
              (of_array
-             (concat1 (to_array temp___134) (first1 temp___134)
-             (last1 temp___134) (singleton1 (of_rep temp___135) 1) 1 1)
-             (first1 temp___134)
-             (- (+ (first1 temp___134) (+ (ite (<= (first1 temp___134) 
-                                          (last1 temp___134))
-                                          (+ (- (last1 temp___134) (first1
-                                                                   temp___134)) 1)
-                                          0) 1)) 1))))))))
+             (concat1 (to_array temp___133) (first1 temp___133)
+             (last1 temp___133) (singleton1 (of_rep temp___134) 1) 1 1)
+             (first1 temp___133)
+             (- (+ (first1 temp___133) (+ (ite (<= (first1 temp___133) 
+                                          (last1 temp___133))
+                                          (+ (- (last1 temp___133) (first1
+                                                                   temp___133)) 1)
+                                          0) 1)) 1)))))))
 
-(declare-fun temp___140 () (Array Int character))
+(declare-fun temp___139 () (Array Int character))
 
-(declare-fun temp___1401 () t)
+(declare-fun temp___1391 () t)
 
 (declare-fun o () Int)
 
@@ -428,37 +422,34 @@
 
 (declare-fun o3 () Int)
 
-(define-fun temp___1402 () us_t (mk___t temp___140 temp___1401))
+(define-fun temp___1392 () us_t (mk___t temp___139 temp___1391))
 
 ;; H
   (assert
   (and
-  (and
-  (= temp___1402 (id (mk___t (temp___String_Literal_132 Tuple0) (mk 1 4))))
-  (id__function_guard temp___1402
-  (mk___t (temp___String_Literal_132 Tuple0) (mk 1 4))))
-  (and (dynamic_invariant temp___1402 true false true)
-  (and (= (temp___String_Literal_132 Tuple0) temp___140)
-  (= (mk 1 4) temp___1401)))))
+  (= temp___1392 (id (mk___t (temp___String_Literal_132 Tuple0) (mk 1 4))))
+  (and (dynamic_invariant temp___1392 true false true)
+  (and (= (temp___String_Literal_132 Tuple0) temp___139)
+  (= (mk 1 4) temp___1391)))))
 
 ;; H
-  (assert (not (= (length temp___1402) 0)))
+  (assert (not (= (length temp___1392) 0)))
 
 ;; H
   (assert
-  (=> (<= (to_rep1 (first temp___1401)) (to_rep1 (last temp___1401)))
-  (= o (+ (- (to_rep1 (last temp___1401)) (to_rep1 (first temp___1401))) 1))))
+  (=> (<= (to_rep1 (first temp___1391)) (to_rep1 (last temp___1391)))
+  (= o (+ (- (to_rep1 (last temp___1391)) (to_rep1 (first temp___1391))) 1))))
 
 ;; H
   (assert
-  (=> (not (<= (to_rep1 (first temp___1401)) (to_rep1 (last temp___1401))))
+  (=> (not (<= (to_rep1 (first temp___1391)) (to_rep1 (last temp___1391))))
   (= o 0)))
 
 ;; H
   (assert (= o1 (+ o 1)))
 
 ;; H
-  (assert (= o2 (+ (to_rep1 (first temp___1401)) o1)))
+  (assert (= o2 (+ (to_rep1 (first temp___1391)) o1)))
 
 ;; H
   (assert (= o3 (- o2 1)))

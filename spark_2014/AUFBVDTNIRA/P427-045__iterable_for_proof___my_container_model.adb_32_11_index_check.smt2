@@ -224,8 +224,7 @@
   (assert
   (forall ((c (Array Int natural)))
   (forall ((p Int))
-  (! (=> (m_has_element__function_guard (m_has_element c p) c p)
-     (= (= (m_has_element c p) true) (and (<= 1 p) (<= p 100)))) :pattern (
+  (! (= (= (m_has_element c p) true) (and (<= 1 p) (<= p 100))) :pattern (
   (m_has_element c p)) ))))
 
 (declare-fun c () (Array Int natural))
@@ -245,9 +244,6 @@
 
 ;; H
   (assert (in_range p))
-
-;; H
-  (assert (m_has_element__function_guard (m_has_element c p) c p))
 
 ;; H
   (assert (= (m_has_element c p) true))

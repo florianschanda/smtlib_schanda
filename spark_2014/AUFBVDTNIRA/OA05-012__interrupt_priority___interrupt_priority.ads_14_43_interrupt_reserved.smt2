@@ -239,10 +239,10 @@
 
 (declare-fun self__ () us_rep)
 
-(declare-fun temp___1554 () Bool)
+(declare-fun temp___1548 () Bool)
 
 (assert
 ;; WP_parameter_def
  ;; File "interrupt_priority.ads", line 12, characters 0-0
-  (not (= temp___1554 false)))
+  (not (= temp___1548 false)))
 (check-sat)

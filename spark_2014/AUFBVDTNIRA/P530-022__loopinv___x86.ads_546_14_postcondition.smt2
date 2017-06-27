@@ -299,24 +299,18 @@
      (and
      (and (dynamic_invariant regold true true true) (dynamic_invariant regnew
      true true true)) (dynamic_invariant1 val__ true true true))
-     (let ((result (writereglow8post regold regnew val__)))
-     (and (readreglow8__function_guard (readreglow8 regnew) regnew)
-     (=> (writereglow8post__function_guard result regold regnew val__)
-     (= (= result true)
+     (= (= (writereglow8post regold regnew val__) true)
      (and (= (readreglow8 regnew) val__)
-     (= (bvand regnew ((_ int2bv 64) 18446744073709551360)) (bvand regold ((_ int2bv 64) 18446744073709551360))))))))) :pattern (
+     (= (bvand regnew ((_ int2bv 64) 18446744073709551360)) (bvand regold ((_ int2bv 64) 18446744073709551360)))))) :pattern (
   (writereglow8post regold regnew val__)) ))))
 
 ;; writereglow8post__def_axiom
   (assert
   (forall ((regold (_ BitVec 64)) (regnew (_ BitVec 64)))
   (forall ((val__ (_ BitVec 8)))
-  (! (=> (writereglow8post__function_guard
-     (writereglow8post regold regnew val__) regold regnew val__)
-     (and (readreglow8__function_guard (readreglow8 regnew) regnew)
-     (= (= (writereglow8post regold regnew val__) true)
+  (! (= (= (writereglow8post regold regnew val__) true)
      (and (= (readreglow8 regnew) val__)
-     (= (bvand regnew ((_ int2bv 64) 18446744073709551360)) (bvand regold ((_ int2bv 64) 18446744073709551360))))))) :pattern (
+     (= (bvand regnew ((_ int2bv 64) 18446744073709551360)) (bvand regold ((_ int2bv 64) 18446744073709551360))))) :pattern (
   (writereglow8post regold regnew val__)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -330,10 +324,9 @@
   (forall ((reg (_ BitVec 64)))
   (! (=> (dynamic_invariant reg true true true)
      (let ((result (readreglow8 reg)))
-     (=> (readreglow8__function_guard result reg)
      (and (= result ((_ extract 7 0) (bvand reg ((_ int2bv 64) 255))))
-     (dynamic_invariant1 result true false true))))) :pattern ((readreglow8
-                                                               reg)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((readreglow8
+                                                              reg)) )))
 
 (declare-fun r13 () (_ BitVec 64))
 
@@ -358,10 +351,6 @@
 
 ;; H
   (assert (= r133 r131))
-
-;; H
-  (assert (writereglow8post__function_guard (writereglow8post r13 r132 val__)
-  r13 r132 val__))
 
 (assert
 ;; WP_parameter_def

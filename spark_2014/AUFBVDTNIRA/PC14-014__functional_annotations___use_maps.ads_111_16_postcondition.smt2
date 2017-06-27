@@ -960,33 +960,22 @@
 
 ;; H
   (assert
-  (forall ((i Int)) (q__function_guard
-  (q (get1 (model__ s) (get (keys s) i)))
-  (get1 (model__ s) (get (keys s) i)))))
-
-;; H
-  (assert
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i (length s)))
   (= (q (get1 (model__ s) (get (keys s) i))) true))))
 
-(define-fun temp___1030 () us_rep1 (keys s))
+(define-fun temp___964 () us_rep1 (keys s))
 
-(declare-fun temp___1029 () Int)
-
-;; H
-  (assert (in_range2 temp___1029))
+(declare-fun temp___963 () Int)
 
 ;; H
-  (assert (= (iter_has_element temp___1030 temp___1029) true))
-
-(define-fun k () Int (get temp___1030 temp___1029))
+  (assert (in_range2 temp___963))
 
 ;; H
-  (assert (q__function_guard (q (get1 (model__ s) k)) (get1 (model__ s) k)))
+  (assert (= (iter_has_element temp___964 temp___963) true))
 
 (assert
 ;; WP_parameter_def
  ;; File "use_maps.adb", line 141, characters 0-0
-  (not (= (q (get1 (model__ s) k)) true)))
+  (not (= (q (get1 (model__ s) (get temp___964 temp___963))) true)))
 (check-sat)

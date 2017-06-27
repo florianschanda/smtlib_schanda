@@ -904,13 +904,13 @@
 
 (declare-fun o5 () Int)
 
-(declare-fun temp___433 () (Array Int cardindex))
+(declare-fun temp___430 () (Array Int cardindex))
 
 (declare-fun o6 () Int)
 
 (declare-fun o7 () cardindex)
 
-(declare-fun temp___434 () Int)
+(declare-fun temp___431 () Int)
 
 (declare-fun result () Bool)
 
@@ -1050,7 +1050,7 @@
 
 ;; H
   (assert
-  (= temp___433 (select (rec__patience__state__stacks (us_split_fields1 s)) 
+  (= temp___430 (select (rec__patience__state__stacks (us_split_fields1 s)) 
   o5)))
 
 ;; H
@@ -1060,13 +1060,13 @@
   (assert (= o6 ip))
 
 ;; H
-  (assert (= o7 (select temp___433 o6)))
+  (assert (= o7 (select temp___430 o6)))
 
 ;; H
-  (assert (= temp___434 (to_rep1 o7)))
+  (assert (= temp___431 (to_rep1 o7)))
 
 (assert
 ;; WP_parameter_def
  ;; File "patience.ads", line 53, characters 0-0
-  (not (<= 0 temp___434)))
+  (not (<= 0 temp___431)))
 (check-sat)

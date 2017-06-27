@@ -78,11 +78,9 @@
 ;; is_ok_to_increase__def_axiom
   (assert
   (forall ((proof_in_legal__body_var Int))
-  (! (=> (is_ok_to_increase__function_guard
-     (is_ok_to_increase proof_in_legal__body_var) proof_in_legal__body_var)
-     (= (= (is_ok_to_increase proof_in_legal__body_var) true)
-     (< 0 proof_in_legal__body_var))) :pattern ((is_ok_to_increase
-                                                proof_in_legal__body_var)) )))
+  (! (= (= (is_ok_to_increase proof_in_legal__body_var) true)
+     (< 0 proof_in_legal__body_var)) :pattern ((is_ok_to_increase
+                                               proof_in_legal__body_var)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
@@ -100,10 +98,6 @@
 
 ;; H
   (assert (in_range x))
-
-;; H
-  (assert (is_ok_to_increase__function_guard (is_ok_to_increase body_var)
-  body_var))
 
 ;; H
   (assert (= (is_ok_to_increase body_var) true))

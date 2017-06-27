@@ -322,10 +322,6 @@
 (define-fun t_array__ref___projection ((a t_array__ref)) us_t (t_array__content
                                                               a))
 
-(declare-fun first3 () Int)
-
-(declare-fun last3 () Int)
-
 (define-fun dynamic_property3 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -343,10 +339,6 @@
 
 (declare-datatypes () ((t1s__ref (mk_t1s__ref (t1s__content integer)))))
 (define-fun t1s__ref___projection ((a t1s__ref)) integer (t1s__content a))
-
-(declare-fun first4 () Int)
-
-(declare-fun last4 () Int)
 
 (define-fun dynamic_property4 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -368,9 +360,9 @@
 
 (declare-sort t2 0)
 
-(declare-fun first5 (t2) integer)
+(declare-fun first3 (t2) integer)
 
-(declare-fun last5 (t2) integer)
+(declare-fun last3 (t2) integer)
 
 (declare-fun mk2 (Int Int) t2)
 
@@ -379,8 +371,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first5 (mk2 f l))) f)
-     (= (to_rep1 (last5 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
+     (and (= (to_rep1 (first3 (mk2 f l))) f)
+     (= (to_rep1 (last3 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
 
 (define-fun dynamic_property5 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -391,9 +383,9 @@
 
 (declare-sort t3 0)
 
-(declare-fun first6 (t3) integer)
+(declare-fun first4 (t3) integer)
 
-(declare-fun last6 (t3) integer)
+(declare-fun last4 (t3) integer)
 
 (declare-fun mk3 (Int Int) t3)
 
@@ -402,8 +394,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first6 (mk3 f l))) f)
-     (= (to_rep1 (last6 (mk3 f l))) l)))) :pattern ((mk3 f l)) )))
+     (and (= (to_rep1 (first4 (mk3 f l))) f)
+     (= (to_rep1 (last4 (mk3 f l))) l)))) :pattern ((mk3 f l)) )))
 
 (define-fun dynamic_property6 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -418,16 +410,16 @@
 (define-fun of_array1 ((a map1) (f Int) (l Int) (f2 Int)
   (l2 Int)) us_t1 (mk___t1 a (mk2 f l) (mk3 f2 l2)))
 
-(define-fun first7 ((a us_t1)) Int (to_rep1 (first5 (rt1 a))))
+(define-fun first5 ((a us_t1)) Int (to_rep1 (first3 (rt1 a))))
 
-(define-fun last7 ((a us_t1)) Int (to_rep1 (last5 (rt1 a))))
+(define-fun last5 ((a us_t1)) Int (to_rep1 (last3 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first7 a) (last7 a))
-                                    (+ (- (last7 a) (first7 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first5 a) (last5 a))
+                                    (+ (- (last5 a) (first5 a)) 1) 0))
 
-(define-fun first_21 ((a us_t1)) Int (to_rep1 (first6 (rt_21 a))))
+(define-fun first_21 ((a us_t1)) Int (to_rep1 (first4 (rt_21 a))))
 
-(define-fun last_21 ((a us_t1)) Int (to_rep1 (last6 (rt_21 a))))
+(define-fun last_21 ((a us_t1)) Int (to_rep1 (last4 (rt_21 a))))
 
 (define-fun length_21 ((a us_t1)) Int (ite (<= (first_21 a) (last_21 a))
                                       (+ (- (last_21 a) (first_21 a)) 1) 0))
@@ -468,11 +460,11 @@
   (assert (forall ((a map1)) (<= 0 (object__alignment1 a))))
 
 (define-fun bool_eq6 ((x us_t1)
-  (y us_t1)) Bool (bool_eq2 (elts1 x) (to_rep1 (first5 (rt1 x)))
-                  (to_rep1 (last5 (rt1 x))) (to_rep1 (first6 (rt_21 x)))
-                  (to_rep1 (last6 (rt_21 x))) (elts1 y)
-                  (to_rep1 (first5 (rt1 y))) (to_rep1 (last5 (rt1 y)))
-                  (to_rep1 (first6 (rt_21 y))) (to_rep1 (last6 (rt_21 y)))))
+  (y us_t1)) Bool (bool_eq2 (elts1 x) (to_rep1 (first3 (rt1 x)))
+                  (to_rep1 (last3 (rt1 x))) (to_rep1 (first4 (rt_21 x)))
+                  (to_rep1 (last4 (rt_21 x))) (elts1 y)
+                  (to_rep1 (first3 (rt1 y))) (to_rep1 (last3 (rt1 y)))
+                  (to_rep1 (first4 (rt_21 y))) (to_rep1 (last4 (rt_21 y)))))
 
 (declare-fun user_eq5 (us_t1 us_t1) Bool)
 
@@ -680,10 +672,10 @@
                                       (and
                                       (and (dynamic_property7
                                       (to_rep temp___146) (to_rep temp___147)
-                                      (first7
+                                      (first5
                                       (rec__discr__t_record__data
                                       (us_split_fields1 temp___expr_145)))
-                                      (last7
+                                      (last5
                                       (rec__discr__t_record__data
                                       (us_split_fields1 temp___expr_145)))
                                       (to_rep temp___148) (to_rep temp___149)
@@ -694,11 +686,11 @@
                                       (rec__discr__t_record__data
                                       (us_split_fields1 temp___expr_145))))
                                       (and
-                                      (= (first7
+                                      (= (first5
                                          (rec__discr__t_record__data
                                          (us_split_fields1 temp___expr_145))) 
                                       (to_rep temp___146))
-                                      (= (last7
+                                      (= (last5
                                          (rec__discr__t_record__data
                                          (us_split_fields1 temp___expr_145))) 
                                       (to_rep temp___147))))
@@ -808,12 +800,12 @@
                                 (first
                                 (mk
                                 (to_rep1
-                                (first5
+                                (first3
                                 (rt1
                                 (rec__discr__t_record__data
                                 (us_split_fields1 rec__)))))
                                 (to_rep1
-                                (last5
+                                (last3
                                 (rt1
                                 (rec__discr__t_record__data
                                 (us_split_fields1 rec__))))))))))
@@ -824,12 +816,12 @@
                                (last
                                (mk
                                (to_rep1
-                               (first5
+                               (first3
                                (rt1
                                (rec__discr__t_record__data
                                (us_split_fields1 rec__)))))
                                (to_rep1
-                               (last5
+                               (last3
                                (rt1
                                (rec__discr__t_record__data
                                (us_split_fields1 rec__))))))))))
@@ -840,12 +832,12 @@
                                   (first1
                                   (mk1
                                   (to_rep1
-                                  (first6
+                                  (first4
                                   (rt_21
                                   (rec__discr__t_record__data
                                   (us_split_fields1 rec__)))))
                                   (to_rep1
-                                  (last6
+                                  (last4
                                   (rt_21
                                   (rec__discr__t_record__data
                                   (us_split_fields1 rec__))))))))))
@@ -856,12 +848,12 @@
                                  (last1
                                  (mk1
                                  (to_rep1
-                                 (first6
+                                 (first4
                                  (rt_21
                                  (rec__discr__t_record__data
                                  (us_split_fields1 rec__)))))
                                  (to_rep1
-                                 (last6
+                                 (last4
                                  (rt_21
                                  (rec__discr__t_record__data
                                  (us_split_fields1 rec__))))))))))
@@ -879,7 +871,7 @@
      (bool_eq2 data_copy1 (to_rep1 data_copy__first)
      (to_rep1 data_copy__last) (to_rep1 data_copy__first_2)
      (to_rep1 data_copy__last_2) (elts1 temp___208)
-     (to_rep1 (first5 (rt1 temp___208))) (to_rep1 (last5 (rt1 temp___208)))
-     (to_rep1 (first6 (rt_21 temp___208)))
-     (to_rep1 (last6 (rt_21 temp___208))))) true)))
+     (to_rep1 (first3 (rt1 temp___208))) (to_rep1 (last3 (rt1 temp___208)))
+     (to_rep1 (first4 (rt_21 temp___208)))
+     (to_rep1 (last4 (rt_21 temp___208))))) true)))
 (check-sat)

@@ -372,7 +372,6 @@
   (forall ((c Int))
   (! (=> (dynamic_invariant2 c true true true)
      (let ((result (is_digit c)))
-     (=> (is_digit__function_guard result c)
      (ite (= c 48) (= result true)
      (ite (= c 49) (= result true)
      (ite (= c 50) (= result true)
@@ -383,7 +382,7 @@
      (ite (= c 55) (= result true)
      (ite (= c 56) (= result true)
      (ite (= c 57) (= result true)
-     (ite (< 57 c) (not (= result true)) (=> (< c 48) (not (= result true))))))))))))))))) :pattern (
+     (ite (< 57 c) (not (= result true)) (=> (< c 48) (not (= result true)))))))))))))))) :pattern (
   (is_digit c)) )))
 
 (declare-fun convert_character_digit_to_integer (Int) Int)
@@ -394,12 +393,10 @@
 ;; convert_character_digit_to_integer__post_axiom
   (assert
   (forall ((source Int))
-  (! (and (is_digit__function_guard (is_digit source) source)
-     (=>
+  (! (=>
      (and (dynamic_invariant2 source true true true)
      (= (is_digit source) true))
      (let ((result (convert_character_digit_to_integer source)))
-     (=> (convert_character_digit_to_integer__function_guard result source)
      (and
      (and (and (<= 0 result) (<= result 9))
      (ite (= source 48) (= result 0)
@@ -411,8 +408,8 @@
      (ite (= source 54) (= result 6)
      (ite (= source 55) (= result 7)
      (ite (= source 56) (= result 8) (=> (= source 57) (= result 9))))))))))))
-     (dynamic_invariant result true false true)))))) :pattern ((convert_character_digit_to_integer
-                                                               source)) )))
+     (dynamic_invariant result true false true)))) :pattern ((convert_character_digit_to_integer
+                                                             source)) )))
 
 (declare-fun source () us_t)
 
@@ -433,7 +430,7 @@
 
 (declare-fun has_failed () Bool)
 
-(declare-fun temp___2110 () Int)
+(declare-fun temp___1805 () Int)
 
 (declare-fun o () Int)
 
@@ -445,7 +442,7 @@
 
 (declare-fun o4 () Int)
 
-(declare-fun temp___2111 () Int)
+(declare-fun temp___1806 () Int)
 
 (declare-fun o5 () Int)
 
@@ -463,7 +460,7 @@
 
 (declare-fun o12 () Int)
 
-(declare-fun temp___2112 () Int)
+(declare-fun temp___1807 () Int)
 
 (declare-fun o13 () Int)
 
@@ -481,7 +478,7 @@
 
 (declare-fun o20 () Int)
 
-(declare-fun temp___2113 () Int)
+(declare-fun temp___1808 () Int)
 
 (declare-fun o21 () Int)
 
@@ -499,7 +496,7 @@
 
 (declare-fun o28 () Int)
 
-(declare-fun temp___2114 () Int)
+(declare-fun temp___1809 () Int)
 
 (declare-fun o29 () Int)
 
@@ -513,7 +510,7 @@
 
 (declare-fun o34 () Int)
 
-(declare-fun temp___2115 () Int)
+(declare-fun temp___1810 () Int)
 
 (declare-fun o35 () Int)
 
@@ -527,7 +524,7 @@
 
 (declare-fun o40 () Int)
 
-(declare-fun temp___2116 () Int)
+(declare-fun temp___1811 () Int)
 
 (declare-fun o41 () Int)
 
@@ -541,7 +538,7 @@
 
 (declare-fun o46 () Int)
 
-(declare-fun temp___2117 () Int)
+(declare-fun temp___1812 () Int)
 
 (declare-fun o47 () Int)
 
@@ -555,7 +552,7 @@
 
 (declare-fun o52 () Int)
 
-(declare-fun temp___2118 () Int)
+(declare-fun temp___1813 () Int)
 
 (declare-fun o53 () Int)
 
@@ -629,288 +626,12 @@
 
 ;; H
   (assert
-  (forall ((index Int)) (is_digit__function_guard
-  (is_digit (to_rep (select (elts source) index)))
-  (to_rep (select (elts source) index)))))
-
-;; H
-  (assert
   (and (and (< 0 (length source)) (< (length source) 10))
   (forall ((index Int))
   (=>
   (and (<= (to_rep1 (first (rt source))) index)
   (<= index (to_rep1 (last (rt source)))))
   (= (is_digit (to_rep (select (elts source) index))) true)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (to_rep1 (first (rt source))))))
-  (to_rep (select (elts source) (to_rep1 (first (rt source)))))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 4))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 4)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 4))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 4)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 5))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 5)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 4))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 4)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 5))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 5)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 6))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 6)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 4))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 4)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 5))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 5)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 6))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 6)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 7))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 7)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 4))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 4)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 5))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 5)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 6))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 6)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 7))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 7)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 8))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 8)))))
 
 ;; H
   (assert
@@ -1323,28 +1044,10 @@
   (assert (= target12 target1))
 
 ;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (to_rep1 (first (rt source))))))
-  (to_rep (select (elts source) (to_rep1 (first (rt source)))))))
-
-;; H
   (assert
   (=> (= (= (length source) 1) true)
   (= target11 (convert_character_digit_to_integer
               (to_rep (select (elts source) (to_rep1 (first (rt source)))))))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1)))))
 
 ;; H
   (assert
@@ -1356,24 +1059,6 @@
   (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1))))))))
 
 ;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2)))))
-
-;; H
   (assert
   (=> (= (= (length source) 3) true)
   (= target11 (+ (+ (* (convert_character_digit_to_integer
@@ -1383,30 +1068,6 @@
   (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1)))) 10)) (* 
   (convert_character_digit_to_integer
   (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2)))) 1)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3)))))
 
 ;; H
   (assert
@@ -1421,36 +1082,6 @@
   (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2)))) 10)) (* 
   (convert_character_digit_to_integer
   (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3)))) 1)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 4))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 4)))))
 
 ;; H
   (assert
@@ -1469,42 +1100,6 @@
   (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 4)))) 1)))))
 
 ;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 4))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 4)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 5))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 5)))))
-
-;; H
   (assert
   (=> (= (= (length source) 6) true)
   (= target11 (+ (+ (+ (+ (+ (* (convert_character_digit_to_integer
@@ -1521,48 +1116,6 @@
   (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 4)))) 10)) (* 
   (convert_character_digit_to_integer
   (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 5)))) 1)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 4))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 4)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 5))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 5)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 6))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 6)))))
 
 ;; H
   (assert
@@ -1584,54 +1137,6 @@
   (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 5)))) 10)) (* 
   (convert_character_digit_to_integer
   (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 6)))) 1)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 0)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 1)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 2)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 3)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 4))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 4)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 5))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 5)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 6))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 6)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 7))))
-  (to_rep (select (elts source) (+ (to_rep1 (first (rt source))) 7)))))
 
 ;; H
   (assert
@@ -1661,16 +1166,16 @@
 
 ;; H
   (assert
-  (and (= temp___2118 (+ (to_rep1 (first (rt source))) 8)) (in_range1
+  (and (= temp___1813 (+ (to_rep1 (first (rt source))) 8)) (in_range1
   (+ (to_rep1 (first (rt source))) 8))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___2118)
-  (<= temp___2118 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___1813)
+  (<= temp___1813 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o53 temp___2118))
+  (assert (= o53 temp___1813))
 
 ;; H
   (assert (= o54 (select (elts source) o53)))
@@ -1680,9 +1185,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o56 (convert_character_digit_to_integer o55))
-  (convert_character_digit_to_integer__function_guard o56 o55))
   (and (in_range1 o56)
   (and (and (<= 0 o56) (<= o56 9))
   (ite (= (= o55 48) true) (= o56 0)
@@ -1703,16 +1206,16 @@
 
 ;; H
   (assert
-  (and (= temp___2117 (+ (to_rep1 (first (rt source))) 7)) (in_range1
+  (and (= temp___1812 (+ (to_rep1 (first (rt source))) 7)) (in_range1
   (+ (to_rep1 (first (rt source))) 7))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___2117)
-  (<= temp___2117 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___1812)
+  (<= temp___1812 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o47 temp___2117))
+  (assert (= o47 temp___1812))
 
 ;; H
   (assert (= o48 (select (elts source) o47)))
@@ -1722,9 +1225,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o50 (convert_character_digit_to_integer o49))
-  (convert_character_digit_to_integer__function_guard o50 o49))
   (and (in_range1 o50)
   (and (and (<= 0 o50) (<= o50 9))
   (ite (= (= o49 48) true) (= o50 0)
@@ -1745,16 +1246,16 @@
 
 ;; H
   (assert
-  (and (= temp___2116 (+ (to_rep1 (first (rt source))) 6)) (in_range1
+  (and (= temp___1811 (+ (to_rep1 (first (rt source))) 6)) (in_range1
   (+ (to_rep1 (first (rt source))) 6))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___2116)
-  (<= temp___2116 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___1811)
+  (<= temp___1811 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o41 temp___2116))
+  (assert (= o41 temp___1811))
 
 ;; H
   (assert (= o42 (select (elts source) o41)))
@@ -1764,9 +1265,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o44 (convert_character_digit_to_integer o43))
-  (convert_character_digit_to_integer__function_guard o44 o43))
   (and (in_range1 o44)
   (and (and (<= 0 o44) (<= o44 9))
   (ite (= (= o43 48) true) (= o44 0)
@@ -1787,16 +1286,16 @@
 
 ;; H
   (assert
-  (and (= temp___2115 (+ (to_rep1 (first (rt source))) 5)) (in_range1
+  (and (= temp___1810 (+ (to_rep1 (first (rt source))) 5)) (in_range1
   (+ (to_rep1 (first (rt source))) 5))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___2115)
-  (<= temp___2115 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___1810)
+  (<= temp___1810 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o35 temp___2115))
+  (assert (= o35 temp___1810))
 
 ;; H
   (assert (= o36 (select (elts source) o35)))
@@ -1806,9 +1305,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o38 (convert_character_digit_to_integer o37))
-  (convert_character_digit_to_integer__function_guard o38 o37))
   (and (in_range1 o38)
   (and (and (<= 0 o38) (<= o38 9))
   (ite (= (= o37 48) true) (= o38 0)
@@ -1829,16 +1326,16 @@
 
 ;; H
   (assert
-  (and (= temp___2114 (+ (to_rep1 (first (rt source))) 4)) (in_range1
+  (and (= temp___1809 (+ (to_rep1 (first (rt source))) 4)) (in_range1
   (+ (to_rep1 (first (rt source))) 4))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___2114)
-  (<= temp___2114 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___1809)
+  (<= temp___1809 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o29 temp___2114))
+  (assert (= o29 temp___1809))
 
 ;; H
   (assert (= o30 (select (elts source) o29)))
@@ -1848,9 +1345,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o32 (convert_character_digit_to_integer o31))
-  (convert_character_digit_to_integer__function_guard o32 o31))
   (and (in_range1 o32)
   (and (and (<= 0 o32) (<= o32 9))
   (ite (= (= o31 48) true) (= o32 0)
@@ -1871,16 +1366,16 @@
 
 ;; H
   (assert
-  (and (= temp___2113 (+ (to_rep1 (first (rt source))) 3)) (in_range1
+  (and (= temp___1808 (+ (to_rep1 (first (rt source))) 3)) (in_range1
   (+ (to_rep1 (first (rt source))) 3))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___2113)
-  (<= temp___2113 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___1808)
+  (<= temp___1808 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o21 temp___2113))
+  (assert (= o21 temp___1808))
 
 ;; H
   (assert (= o22 (select (elts source) o21)))
@@ -1890,9 +1385,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o24 (convert_character_digit_to_integer o23))
-  (convert_character_digit_to_integer__function_guard o24 o23))
   (and (in_range1 o24)
   (and (and (<= 0 o24) (<= o24 9))
   (ite (= (= o23 48) true) (= o24 0)
@@ -1913,16 +1406,16 @@
 
 ;; H
   (assert
-  (and (= temp___2112 (+ (to_rep1 (first (rt source))) 2)) (in_range1
+  (and (= temp___1807 (+ (to_rep1 (first (rt source))) 2)) (in_range1
   (+ (to_rep1 (first (rt source))) 2))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___2112)
-  (<= temp___2112 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___1807)
+  (<= temp___1807 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o13 temp___2112))
+  (assert (= o13 temp___1807))
 
 ;; H
   (assert (= o14 (select (elts source) o13)))
@@ -1932,9 +1425,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o16 (convert_character_digit_to_integer o15))
-  (convert_character_digit_to_integer__function_guard o16 o15))
   (and (in_range1 o16)
   (and (and (<= 0 o16) (<= o16 9))
   (ite (= (= o15 48) true) (= o16 0)
@@ -1955,16 +1446,16 @@
 
 ;; H
   (assert
-  (and (= temp___2111 (+ (to_rep1 (first (rt source))) 1)) (in_range1
+  (and (= temp___1806 (+ (to_rep1 (first (rt source))) 1)) (in_range1
   (+ (to_rep1 (first (rt source))) 1))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___2111)
-  (<= temp___2111 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___1806)
+  (<= temp___1806 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o5 temp___2111))
+  (assert (= o5 temp___1806))
 
 ;; H
   (assert (= o6 (select (elts source) o5)))
@@ -1974,9 +1465,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o8 (convert_character_digit_to_integer o7))
-  (convert_character_digit_to_integer__function_guard o8 o7))
   (and (in_range1 o8)
   (and (and (<= 0 o8) (<= o8 9))
   (ite (= (= o7 48) true) (= o8 0)
@@ -1997,16 +1486,16 @@
 
 ;; H
   (assert
-  (and (= temp___2110 (+ (to_rep1 (first (rt source))) 0)) (in_range1
+  (and (= temp___1805 (+ (to_rep1 (first (rt source))) 0)) (in_range1
   (+ (to_rep1 (first (rt source))) 0))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___2110)
-  (<= temp___2110 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___1805)
+  (<= temp___1805 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o temp___2110))
+  (assert (= o temp___1805))
 
 ;; H
   (assert (= o1 (select (elts source) o)))
@@ -2016,9 +1505,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o3 (convert_character_digit_to_integer o2))
-  (convert_character_digit_to_integer__function_guard o3 o2))
   (and (in_range1 o3)
   (and (and (<= 0 o3) (<= o3 9))
   (ite (= (= o2 48) true) (= o3 0)

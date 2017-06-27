@@ -144,10 +144,8 @@
   (forall ((a Int) (b Int))
   (! (=>
      (and (dynamic_invariant a true true true) (dynamic_invariant b true true
-     true))
-     (let ((result (gcd a b)))
-     (=> (gcd__function_guard result a b) (dynamic_invariant result true
-     false true)))) :pattern ((gcd a b)) )))
+     true)) (dynamic_invariant (gcd a b) true false true)) :pattern (
+  (gcd a b)) )))
 
 (declare-fun m () Int)
 
@@ -173,11 +171,11 @@
 
 (declare-fun r () Int)
 
-(declare-fun temp___135 () Int)
-
 (declare-fun temp___134 () Int)
 
 (declare-fun temp___133 () Int)
+
+(declare-fun temp___132 () Int)
 
 (declare-fun result () Int)
 
@@ -262,18 +260,6 @@
 (define-fun c12 () int__ref (mk_int__ref c5))
 
 ;; H
-  (assert (gcd__function_guard (gcd c2 d2) c2 d2))
-
-;; H
-  (assert (gcd__function_guard (gcd m n) m n))
-
-;; H
-  (assert (gcd__function_guard (gcd c2 d2) c2 d2))
-
-;; H
-  (assert (gcd__function_guard (gcd m n) m n))
-
-;; H
   (assert (in_range m))
 
 ;; H
@@ -304,13 +290,13 @@
   (assert (= d1 n))
 
 ;; H
-  (assert (= temp___135 r))
+  (assert (= temp___134 r))
 
 ;; H
-  (assert (= temp___134 d1))
+  (assert (= temp___133 d1))
 
 ;; H
-  (assert (= temp___133 c1))
+  (assert (= temp___132 c1))
 
 ;; H
   (assert (= (gcd c2 d2) (gcd m n)))
@@ -407,9 +393,6 @@
 
 ;; H
   (assert (= g3 g1))
-
-;; H
-  (assert (gcd__function_guard (gcd m n) m n))
 
 (assert
 ;; WP_parameter_def

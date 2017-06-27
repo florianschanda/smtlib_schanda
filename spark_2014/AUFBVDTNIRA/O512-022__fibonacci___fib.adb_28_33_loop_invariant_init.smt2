@@ -105,9 +105,8 @@
   (assert
   (forall ((n Int))
   (! (=> (and (dynamic_invariant n true true true) (<= n 23))
-     (let ((result (fibonacci n)))
-     (=> (fibonacci__function_guard result n) (dynamic_invariant result true
-     false true)))) :pattern ((fibonacci n)) )))
+     (dynamic_invariant (fibonacci n) true false true)) :pattern ((fibonacci
+                                                                  n)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -268,9 +267,6 @@
 
 ;; H
   (assert (< 2 n1))
-
-;; H
-  (assert (fibonacci__function_guard (fibonacci i1) i1))
 
 (assert
 ;; WP_parameter_def

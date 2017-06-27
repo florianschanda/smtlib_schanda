@@ -266,8 +266,6 @@
      (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -290,7 +288,7 @@
 
 (declare-fun first (t) tdB)
 
-(declare-fun last1 (t) tdB)
+(declare-fun last (t) tdB)
 
 (declare-fun mk (Int Int) t)
 
@@ -299,7 +297,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range2 f)
      (=> (in_range2 l)
-     (and (= (to_rep2 (first (mk f l))) f) (= (to_rep2 (last1 (mk f l))) l)))) :pattern (
+     (and (= (to_rep2 (first (mk f l))) f) (= (to_rep2 (last (mk f l))) l)))) :pattern (
   (mk f l)) )))
 
 (define-fun dynamic_property1 ((range_first Int) (range_last Int) (low Int)
@@ -317,10 +315,10 @@
 
 (define-fun first1 ((a us_t)) Int (to_rep2 (first (rt a))))
 
-(define-fun last2 ((a us_t)) Int (to_rep2 (last1 (rt a))))
+(define-fun last1 ((a us_t)) Int (to_rep2 (last (rt a))))
 
-(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last2 a))
-                                  (+ (- (last2 a) (first1 a)) 1) 0))
+(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last1 a))
+                                  (+ (- (last1 a) (first1 a)) 1) 0))
 
 (declare-fun value__size () Int)
 
@@ -355,8 +353,8 @@
 
 (define-fun bool_eq5 ((x us_t)
   (y us_t)) Bool (bool_eq3 (elts x) (to_rep2 (first (rt x)))
-                 (to_rep2 (last1 (rt x))) (elts y) (to_rep2 (first (rt y)))
-                 (to_rep2 (last1 (rt y)))))
+                 (to_rep2 (last (rt x))) (elts y) (to_rep2 (first (rt y)))
+                 (to_rep2 (last (rt y)))))
 
 (declare-fun user_eq4 (us_t us_t) Bool)
 
@@ -500,14 +498,14 @@
                                       (first1
                                       (rec__mutable__t__arr
                                       (us_split_fields1 temp___expr_150)))
-                                      (last2
+                                      (last1
                                       (rec__mutable__t__arr
                                       (us_split_fields1 temp___expr_150))))
                                       (and
                                       (= (first1
                                          (rec__mutable__t__arr
                                          (us_split_fields1 temp___expr_150))) 1)
-                                      (= (last2
+                                      (= (last1
                                          (rec__mutable__t__arr
                                          (us_split_fields1 temp___expr_150))) 
                                       (to_rep1 temp___151))))))
@@ -724,25 +722,6 @@
 (declare-datatypes () ((t6b__ref (mk_t6b__ref (t6b__content us_rep1)))))
 (define-fun t6b__ref___projection ((a t6b__ref)) us_rep1 (t6b__content a))
 
-(declare-sort t8b 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq9 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq9 (t8b t8b) Bool)
-
-(declare-fun dummy9 () t8b)
-
-(declare-datatypes () ((t8b__ref (mk_t8b__ref (t8b__content t8b)))))
-(define-fun t8b__ref___projection ((a t8b__ref)) t8b (t8b__content a))
-
 (declare-fun temp___190 (Int) (Array Int integer))
 
 ;; def_axiom
@@ -768,23 +747,21 @@
 
 (declare-fun o () d)
 
-(declare-fun o1 () (Array Int integer))
+(declare-fun o1 () integer)
 
 (declare-fun o2 () integer)
 
-(declare-fun o3 () integer)
+(declare-fun o3 () (Array Int integer))
 
-(declare-fun o4 () (Array Int integer))
+(declare-fun o4 () d)
 
 (declare-fun o5 () d)
 
-(declare-fun o6 () d)
+(declare-fun o6 () integer)
 
-(declare-fun o7 () integer)
+(declare-fun o7 () (Array Int integer))
 
-(declare-fun o8 () (Array Int integer))
-
-(declare-fun o9 () Bool)
+(declare-fun o8 () Bool)
 
 (declare-fun temp___194 () d)
 
@@ -810,49 +787,46 @@
   (assert (in_range1 r4b))
 
 ;; H
-  (assert (= o1 (temp___190 0)))
+  (assert (= (to_rep o1) 3))
 
 ;; H
-  (assert (= (to_rep o2) 3))
+  (assert (= o1 o2))
 
 ;; H
-  (assert (= o2 o3))
-
-;; H
-  (assert (= o1 o4))
+  (assert (= (temp___190 0) o3))
 
 ;; H
   (assert (= (to_rep1 o) 5))
 
 ;; H
-  (assert (= o o5))
+  (assert (= o o4))
 
 ;; H
-  (assert (= o6 o5))
+  (assert (= o5 o4))
+
+;; H
+  (assert (= o6 o2))
 
 ;; H
   (assert (= o7 o3))
 
 ;; H
-  (assert (= o8 o4))
+  (assert (= true o8))
 
 ;; H
-  (assert (= true o9))
+  (assert (= o5 temp___194))
 
 ;; H
-  (assert (= o6 temp___194))
+  (assert (= o6 temp___1941))
 
 ;; H
-  (assert (= o7 temp___1941))
-
-;; H
-  (assert (= o8 temp___1942))
+  (assert (= o7 temp___1942))
 
 ;; H
   (assert (= (mk 1 5) temp___1943))
 
 ;; H
-  (assert (= o9 temp___1944))
+  (assert (= o8 temp___1944))
 
 ;; H
   (assert (= x__attr__constrained true))

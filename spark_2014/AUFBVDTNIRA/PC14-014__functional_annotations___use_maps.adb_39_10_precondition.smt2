@@ -1180,16 +1180,13 @@
 ;; f__post_axiom
   (assert
   (forall ((e Int))
-  (! (=> (dynamic_invariant7 e true true true)
-     (let ((result (f e)))
-     (=> (f__function_guard result e) (dynamic_invariant7 result true false
-     true)))) :pattern ((f e)) )))
+  (! (=> (dynamic_invariant7 e true true true) (dynamic_invariant7 (f e) true
+     false true)) :pattern ((f e)) )))
 
 ;; f__def_axiom
   (assert
   (forall ((e Int))
-  (! (=>
-     (and (dynamic_invariant7 e true true true) (f__function_guard (f e) e))
+  (! (=> (dynamic_invariant7 e true true true)
      (= (f e) (ite (and (<= (- 100) e) (<= e 100)) (* e 2) e))) :pattern (
   (f e)) )))
 
@@ -1601,18 +1598,6 @@
 
 ;; H
   (assert
-  (forall ((i Int)) (f__function_guard
-  (f (get2 (model__ s) (get (keys s) i)))
-  (get2 (model__ s) (get (keys s) i)))))
-
-;; H
-  (assert
-  (forall ((i Int)) (f__function_guard
-  (f (get2 (model__ s) (get (keys s) i)))
-  (get2 (model__ s) (get (keys s) i)))))
-
-;; H
-  (assert
   (= (length (mk___rep r__split_discrs r__split_fields2)) (- (get1
                                                              (positions s)
                                                              (mk___rep1
@@ -1624,27 +1609,27 @@
   (=>
   (and (<= 1 i)
   (<= i (- (get1 (positions s) (mk___rep1 cu__split_fields3)) 1)))
-  (let ((temp___792 (keys (mk___rep r__split_discrs r__split_fields2))))
-  (exists ((temp___791 Int))
+  (let ((temp___763 (keys (mk___rep r__split_discrs r__split_fields2))))
+  (exists ((temp___762 Int))
   (and
-  (and (in_range3 temp___791)
-  (= (iter_has_element temp___792 temp___791) true))
+  (and (in_range3 temp___762)
+  (= (iter_has_element temp___763 temp___762) true))
   (= (get2 (model__ (mk___rep r__split_discrs r__split_fields2))
-     (get temp___792 temp___791)) (f (get2 (model__ s) (get (keys s) i))))))))))
+     (get temp___763 temp___762)) (f (get2 (model__ s) (get (keys s) i))))))))))
 
 ;; H
   (assert
-  (let ((temp___801 (keys (mk___rep r__split_discrs r__split_fields2))))
-  (forall ((temp___800 Int))
+  (let ((temp___769 (keys (mk___rep r__split_discrs r__split_fields2))))
+  (forall ((temp___768 Int))
   (=>
-  (and (in_range3 temp___800)
-  (= (iter_has_element temp___801 temp___800) true))
+  (and (in_range3 temp___768)
+  (= (iter_has_element temp___769 temp___768) true))
   (exists ((i Int))
   (and
   (and (<= 1 i)
   (<= i (- (get1 (positions s) (mk___rep1 cu__split_fields3)) 1)))
   (= (get2 (model__ (mk___rep r__split_discrs r__split_fields2))
-     (get temp___801 temp___800)) (f (get2 (model__ s) (get (keys s) i))))))))))
+     (get temp___769 temp___768)) (f (get2 (model__ s) (get (keys s) i))))))))))
 
 ;; H
   (assert
@@ -1667,7 +1652,7 @@
 
 ;; H
   (assert
-  (and (and (= o2 (f o1)) (f__function_guard o2 o1))
+  (and (= o2 (f o1))
   (and (in_range8 o2)
   (= o2 (ite (and (<= (- 100) o1) (<= o1 100)) (* o1 2) o1)))))
 

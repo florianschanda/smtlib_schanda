@@ -35,6 +35,34 @@
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private 
   (us_private__content a))
 
+(declare-sort positive 0)
+
+(define-fun in_range ((x Int)) Bool (and (<= 1 x) (<= x 2147483647)))
+
+(define-fun bool_eq ((x Int) (y Int)) Bool (ite (= x y) true false))
+
+(declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE (us_image) Int)
+
+(declare-fun user_eq (positive positive) Bool)
+
+(declare-fun dummy () positive)
+
+(declare-datatypes ()
+((positive__ref (mk_positive__ref (positive__content positive)))))
+(define-fun positive__ref___projection ((a positive__ref)) positive (positive__content
+                                                                    a))
+
+(define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_36 Bool)
+  (temp___skip_constant_37 Bool)
+  (temp___do_toplevel_38 Bool)) Bool (=>
+                                     (or (= temp___is_init_36 true)
+                                     (<= 1 2147483647)) (in_range
+                                     temp___expr_39)))
+
 (declare-fun nth ((_ BitVec 8) Int) Bool)
 
 (declare-fun lsr ((_ BitVec 8) Int) (_ BitVec 8))
@@ -130,84 +158,6 @@
 
 (define-fun bv_max ((x (_ BitVec 8))
   (y (_ BitVec 8))) (_ BitVec 8) (ite (bvule x y) y x))
-
-(declare-sort positive 0)
-
-(define-fun in_range ((x Int)) Bool (and (<= 1 x) (<= x 2147483647)))
-
-(define-fun bool_eq ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE (us_image) Int)
-
-(declare-fun user_eq (positive positive) Bool)
-
-(declare-fun dummy () positive)
-
-(declare-datatypes ()
-((positive__ref (mk_positive__ref (positive__content positive)))))
-(define-fun positive__ref___projection ((a positive__ref)) positive (positive__content
-                                                                    a))
-
-(define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_36 Bool)
-  (temp___skip_constant_37 Bool)
-  (temp___do_toplevel_38 Bool)) Bool (=>
-                                     (or (= temp___is_init_36 true)
-                                     (<= 1 2147483647)) (in_range
-                                     temp___expr_39)))
-
-(declare-sort x_coord 0)
-
-(define-fun in_range1 ((x (_ BitVec 8))) Bool (and (bvule ((_ int2bv 8) 0) x)
-                                              (bvule x ((_ int2bv 8) 4))))
-
-(define-fun in_range_int ((x Int)) Bool (and (<= 0 x) (<= x 4)))
-
-(define-fun bool_eq1 ((x (_ BitVec 8))
-  (y (_ BitVec 8))) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 ((_ BitVec 8)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) (_ BitVec 8))
-
-(declare-fun user_eq1 (x_coord x_coord) Bool)
-
-(declare-fun dummy1 () x_coord)
-
-(declare-datatypes ()
-((x_coord__ref (mk_x_coord__ref (x_coord__content x_coord)))))
-(define-fun x_coord__ref___projection ((a x_coord__ref)) x_coord (x_coord__content
-                                                                 a))
-
-(declare-sort y_coord 0)
-
-(define-fun in_range2 ((x (_ BitVec 8))) Bool (and (bvule ((_ int2bv 8) 0) x)
-                                              (bvule x ((_ int2bv 8) 4))))
-
-(define-fun in_range_int1 ((x Int)) Bool (and (<= 0 x) (<= x 4)))
-
-(define-fun bool_eq2 ((x (_ BitVec 8))
-  (y (_ BitVec 8))) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 ((_ BitVec 8)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) (_ BitVec 8))
-
-(declare-fun user_eq2 (y_coord y_coord) Bool)
-
-(declare-fun dummy2 () y_coord)
-
-(declare-datatypes ()
-((y_coord__ref (mk_y_coord__ref (y_coord__content y_coord)))))
-(define-fun y_coord__ref___projection ((a y_coord__ref)) y_coord (y_coord__content
-                                                                 a))
 
 (declare-fun nth1 ((_ BitVec 64) Int) Bool)
 
@@ -311,18 +261,18 @@
 
 (declare-fun attr__ATTRIBUTE_MODULUS () (_ BitVec 64))
 
-(define-fun bool_eq3 ((x (_ BitVec 64))
+(define-fun bool_eq1 ((x (_ BitVec 64))
   (y (_ BitVec 64))) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE3 ((_ BitVec 64)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE1 ((_ BitVec 64)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) (_ BitVec 64))
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) (_ BitVec 64))
 
-(declare-fun user_eq3 (lane_type lane_type) Bool)
+(declare-fun user_eq1 (lane_type lane_type) Bool)
 
-(declare-fun dummy3 () lane_type)
+(declare-fun dummy1 () lane_type)
 
 (declare-datatypes ()
 ((lane_type__ref (mk_lane_type__ref (lane_type__content lane_type)))))
@@ -397,7 +347,7 @@
                                                         new_first old_first_2
                                                         new_first_2) i j)) )))))))
 
-(define-fun bool_eq4 ((a map1) (a__first (_ BitVec 8)) (a__last (_ BitVec 8))
+(define-fun bool_eq2 ((a map1) (a__first (_ BitVec 8)) (a__last (_ BitVec 8))
   (a__first_2 (_ BitVec 8)) (a__last_2 (_ BitVec 8)) (b map1)
   (b__first (_ BitVec 8)) (b__last (_ BitVec 8)) (b__first_2 (_ BitVec 8))
   (b__last_2 (_ BitVec 8))) Bool (ite (and
@@ -433,7 +383,7 @@
   (a__first_2 (_ BitVec 8)) (a__last_2 (_ BitVec 8)) (b__first (_ BitVec 8))
   (b__last (_ BitVec 8)) (b__first_2 (_ BitVec 8)) (b__last_2 (_ BitVec 8)))
   (=>
-  (= (bool_eq4 b b__first b__last b__first_2 b__last_2 a a__first a__last
+  (= (bool_eq2 b b__first b__last b__first_2 b__last_2 a a__first a__last
      a__first_2 a__last_2) true)
   (and
   (and
@@ -456,19 +406,19 @@
 
 (declare-sort rate_number 0)
 
-(define-fun in_range3 ((x Int)) Bool (and (<= 3 x) (<= x 1599)))
+(define-fun in_range1 ((x Int)) Bool (and (<= 3 x) (<= x 1599)))
 
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
 
-(declare-fun user_eq4 (rate_number rate_number) Bool)
+(declare-fun user_eq2 (rate_number rate_number) Bool)
 
-(declare-fun dummy4 () rate_number)
+(declare-fun dummy2 () rate_number)
 
 (declare-datatypes ()
 ((rate_number__ref (mk_rate_number__ref (rate_number__content rate_number)))))
@@ -486,16 +436,16 @@
 
 ;; range_axiom
   (assert
-  (forall ((x rate_number)) (! (in_range3
+  (forall ((x rate_number)) (! (in_range1
   (to_rep1 x)) :pattern ((to_rep1 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range3 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
+  (! (=> (in_range1 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
                                                               (of_rep1 x))) )))
 
-(declare-fun dummy5 () map1)
+(declare-fun dummy3 () map1)
 
 (declare-fun value__size () Int)
 
@@ -527,7 +477,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a map1)) (<= 0 (object__alignment a))))
 
-(declare-fun user_eq5 (map1 map1) Bool)
+(declare-fun user_eq3 (map1 map1) Bool)
 
 (declare-datatypes ()
 ((us_split_fields
@@ -550,9 +500,9 @@
 (define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
                                                               a))
 
-(define-fun bool_eq6 ((a us_rep)
+(define-fun bool_eq4 ((a us_rep)
   (b us_rep)) Bool (ite (and
-                        (= (bool_eq4
+                        (= (bool_eq2
                            (rec__keccak__keccak_1600__duplex__context__state
                            (us_split_fields1 a)) ((_ int2bv 8) 0)
                            ((_ int2bv 8) 4) ((_ int2bv 8) 0) ((_ int2bv 8) 4)
@@ -567,7 +517,7 @@
                                                   (us_split_fields1 b)))))
                    true false))
 
-(declare-fun user_eq6 (us_rep us_rep) Bool)
+(declare-fun user_eq4 (us_rep us_rep) Bool)
 
 (declare-fun value__size1 () Int)
 
@@ -621,7 +571,7 @@
 ;; keccak__keccak_1600__duplex__context__rate__position_axiom
   (assert (<= 0 keccak__keccak_1600__duplex__context__rate__position))
 
-(declare-fun dummy6 () us_rep)
+(declare-fun dummy4 () us_rep)
 
 (declare-datatypes ()
 ((context__ref (mk_context__ref (context__content us_rep)))))
@@ -638,63 +588,42 @@
 
 (declare-fun rate_of__function_guard (Int us_rep) Bool)
 
-(define-fun dynamic_invariant1 ((temp___expr_548 Int)
-  (temp___is_init_545 Bool) (temp___skip_constant_546 Bool)
-  (temp___do_toplevel_547 Bool)) Bool (=>
-                                      (or (= temp___is_init_545 true)
-                                      (<= 3 1599)) (in_range3
-                                      temp___expr_548)))
+(define-fun dynamic_invariant1 ((temp___expr_511 Int)
+  (temp___is_init_508 Bool) (temp___skip_constant_509 Bool)
+  (temp___do_toplevel_510 Bool)) Bool (=>
+                                      (or (= temp___is_init_508 true)
+                                      (<= 3 1599)) (in_range1
+                                      temp___expr_511)))
 
 ;; rate_of__post_axiom
   (assert
-  (forall ((ctx us_rep))
-  (! (let ((result (rate_of ctx)))
-     (=> (rate_of__function_guard result ctx) (dynamic_invariant1 result true
-     false true))) :pattern ((rate_of ctx)) )))
+  (forall ((ctx us_rep)) (! (dynamic_invariant1 (rate_of ctx) true false
+  true) :pattern ((rate_of ctx)) )))
 
 ;; rate_of__def_axiom
   (assert
   (forall ((ctx us_rep))
-  (! (=> (rate_of__function_guard (rate_of ctx) ctx)
-     (= (rate_of ctx) (to_rep1
+  (! (= (rate_of ctx) (to_rep1
                       (rec__keccak__keccak_1600__duplex__context__rate
-                      (us_split_fields1 ctx))))) :pattern ((rate_of ctx)) )))
-
-(define-fun dynamic_invariant2 ((temp___expr_288 (_ BitVec 8))
-  (temp___is_init_285 Bool) (temp___skip_constant_286 Bool)
-  (temp___do_toplevel_287 Bool)) Bool (=>
-                                      (or (= temp___is_init_285 true)
-                                      (bvule ((_ int2bv 8) 0) ((_ int2bv 8) 4)))
-                                      (in_range1 temp___expr_288)))
-
-(define-fun dynamic_invariant3 ((temp___expr_294 (_ BitVec 8))
-  (temp___is_init_291 Bool) (temp___skip_constant_292 Bool)
-  (temp___do_toplevel_293 Bool)) Bool (=>
-                                      (or (= temp___is_init_291 true)
-                                      (bvule ((_ int2bv 8) 0) ((_ int2bv 8) 4)))
-                                      (in_range2 temp___expr_294)))
+                      (us_split_fields1 ctx)))) :pattern ((rate_of ctx)) )))
 
 (declare-fun ctx__split_fields () map1)
 
 (declare-fun ctx__split_fields1 () rate_number)
 
-(declare-fun o () map1)
+(declare-fun o () Int)
+
+(declare-fun o1 () rate_number)
+
+(declare-fun o2 () map1)
+
+(declare-fun o3 () rate_number)
+
+(declare-fun temp___1045 () map1)
+
+(declare-fun temp___10451 () rate_number)
 
 (declare-fun keccak__keccak_1600__keccakf_1600__init__a () map1)
-
-(declare-fun o1 () Int)
-
-(declare-fun o2 () rate_number)
-
-(declare-fun o3 () map1)
-
-(declare-fun o4 () rate_number)
-
-(declare-fun temp___1171 () map1)
-
-(declare-fun temp___11711 () rate_number)
-
-(declare-fun keccak__keccak_1600__keccakf_1600__init__a1 () map1)
 
 (declare-fun result () map1)
 
@@ -727,12 +656,6 @@
   (assert (< capacity 1598))
 
 ;; H
-  (assert (= o ctx__split_fields))
-
-;; H
-  (assert (= o keccak__keccak_1600__keccakf_1600__init__a))
-
-;; H
   (assert
   (= (mk___split_fields__ref (mk___split_fields result result1)) (mk___split_fields__ref
                                                                  (mk___split_fields
@@ -740,28 +663,28 @@
                                                                  ctx__split_fields1))))
 
 ;; H
-  (assert (= keccak__keccak_1600__keccakf_1600__init__a1 ctx__split_fields2))
+  (assert (= keccak__keccak_1600__keccakf_1600__init__a ctx__split_fields2))
 
 ;; H
   (assert (= ctx__split_fields1 ctx__split_fields3))
 
 ;; H
-  (assert (and (= o1 (- 1600 capacity)) (in_range3 (- 1600 capacity))))
+  (assert (and (= o (- 1600 capacity)) (in_range1 (- 1600 capacity))))
 
 ;; H
-  (assert (= (to_rep1 o2) o1))
+  (assert (= (to_rep1 o1) o))
 
 ;; H
-  (assert (= ctx__split_fields2 o3))
+  (assert (= ctx__split_fields2 o2))
 
 ;; H
-  (assert (= o2 o4))
+  (assert (= o1 o3))
 
 ;; H
-  (assert (= temp___1171 o3))
+  (assert (= temp___1045 o2))
 
 ;; H
-  (assert (= temp___11711 o4))
+  (assert (= temp___10451 o3))
 
 ;; H
   (assert (= result2 ctx__split_fields2))
@@ -770,10 +693,10 @@
   (assert (= result3 ctx__split_fields3))
 
 ;; H
-  (assert (= temp___1171 ctx__split_fields4))
+  (assert (= temp___1045 ctx__split_fields4))
 
 ;; H
-  (assert (= temp___11711 ctx__split_fields5))
+  (assert (= temp___10451 ctx__split_fields5))
 
 ;; H
   (assert (= ctx__split_fields6 ctx__split_fields4))
@@ -786,12 +709,6 @@
 
 ;; H
   (assert (= ctx__split_fields9 ctx__split_fields5))
-
-;; H
-  (assert (rate_of__function_guard
-  (rate_of
-  (mk___rep (mk___split_fields ctx__split_fields6 ctx__split_fields7)))
-  (mk___rep (mk___split_fields ctx__split_fields6 ctx__split_fields7))))
 
 (assert
 ;; WP_parameter_def

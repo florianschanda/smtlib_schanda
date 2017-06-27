@@ -35,9 +35,9 @@
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private 
   (us_private__content a))
 
-(declare-sort index_type 0)
+(declare-sort extended_index_type 0)
 
-(define-fun in_range ((x Int)) Bool (and (<= 1 x) (<= x 100)))
+(define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 100)))
 
 (define-fun bool_eq ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -47,30 +47,9 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Int)
 
-(declare-fun user_eq (index_type index_type) Bool)
+(declare-fun user_eq (extended_index_type extended_index_type) Bool)
 
-(declare-fun dummy () index_type)
-
-(declare-datatypes ()
-((index_type__ref (mk_index_type__ref (index_type__content index_type)))))
-(define-fun index_type__ref___projection ((a index_type__ref)) index_type 
-  (index_type__content a))
-
-(declare-sort extended_index_type 0)
-
-(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 100)))
-
-(define-fun bool_eq1 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
-
-(declare-fun user_eq1 (extended_index_type extended_index_type) Bool)
-
-(declare-fun dummy1 () extended_index_type)
+(declare-fun dummy () extended_index_type)
 
 (declare-datatypes ()
 ((extended_index_type__ref
@@ -90,30 +69,30 @@
 
 ;; range_axiom
   (assert
-  (forall ((x extended_index_type)) (! (in_range1
+  (forall ((x extended_index_type)) (! (in_range
   (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range1 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
-                                                            (of_rep x))) )))
+  (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                           (of_rep x))) )))
 
 (declare-sort position_type 0)
 
-(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2)))
+(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2)))
 
-(define-fun bool_eq2 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq1 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
 
-(declare-fun user_eq2 (position_type position_type) Bool)
+(declare-fun user_eq1 (position_type position_type) Bool)
 
-(declare-fun dummy2 () position_type)
+(declare-fun dummy1 () position_type)
 
 (declare-datatypes ()
 ((position_type__ref
@@ -132,13 +111,13 @@
 
 ;; range_axiom
   (assert
-  (forall ((x position_type)) (! (in_range2
+  (forall ((x position_type)) (! (in_range1
   (to_rep1 x)) :pattern ((to_rep1 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range2 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
+  (! (=> (in_range1 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
                                                               (of_rep1 x))) )))
 
 (declare-datatypes ()
@@ -168,7 +147,7 @@
 (define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
                                                               a))
 
-(define-fun bool_eq3 ((a us_rep)
+(define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (and
                         (and
@@ -194,7 +173,7 @@
                                                   (us_split_fields1 b)))))
                    true false))
 
-(declare-fun user_eq3 (us_rep us_rep) Bool)
+(declare-fun user_eq2 (us_rep us_rep) Bool)
 
 (declare-fun value__size () Int)
 
@@ -280,7 +259,7 @@
 ;; binary_trees__cell__position__position_axiom
   (assert (<= 0 binary_trees__cell__position__position))
 
-(declare-fun dummy3 () us_rep)
+(declare-fun dummy2 () us_rep)
 
 (declare-datatypes () ((cell__ref (mk_cell__ref (cell__content us_rep)))))
 (define-fun cell__ref___projection ((a cell__ref)) us_rep (cell__content a))
@@ -327,7 +306,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq4 ((a (Array Int us_rep)) (a__first Int) (a__last Int)
+(define-fun bool_eq3 ((a (Array Int us_rep)) (a__first Int) (a__last Int)
   (b (Array Int us_rep)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -338,7 +317,7 @@
                            (=>
                            (and (<= a__first temp___idx_133)
                            (<= temp___idx_133 a__last))
-                           (= (bool_eq3 (select a temp___idx_133)
+                           (= (bool_eq2 (select a temp___idx_133)
                               (select b (+ (- b__first a__first) temp___idx_133))) true))))
                       true false))
 
@@ -346,17 +325,17 @@
   (assert
   (forall ((a (Array Int us_rep)) (b (Array Int us_rep)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq4 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq3 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
   (forall ((temp___idx_133 Int))
   (=> (and (<= a__first temp___idx_133) (<= temp___idx_133 a__last))
-  (= (bool_eq3 (select a temp___idx_133)
+  (= (bool_eq2 (select a temp___idx_133)
      (select b (+ (- b__first a__first) temp___idx_133))) true))))))))
 
-(declare-fun dummy4 () (Array Int us_rep))
+(declare-fun dummy3 () (Array Int us_rep))
 
 (declare-fun value__size1 () Int)
 
@@ -389,7 +368,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int us_rep))) (<= 0 (object__alignment1 a))))
 
-(declare-fun user_eq4 ((Array Int us_rep) (Array Int us_rep)) Bool)
+(declare-fun user_eq3 ((Array Int us_rep) (Array Int us_rep)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields2
@@ -412,21 +391,21 @@
 (define-fun us_rep_3__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
                                                                 a))
 
-(define-fun bool_eq5 ((a us_rep1)
+(define-fun bool_eq4 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
                          (= (to_rep
                             (rec__binary_trees__forest__s
                             (us_split_fields3 a))) (to_rep
                                                    (rec__binary_trees__forest__s
                                                    (us_split_fields3 b))))
-                         (= (bool_eq4
+                         (= (bool_eq3
                             (rec__binary_trees__forest__c
                             (us_split_fields3 a)) 1 100
                             (rec__binary_trees__forest__c
                             (us_split_fields3 b)) 1 100) true))
                     true false))
 
-(declare-fun user_eq5 (us_rep1 us_rep1) Bool)
+(declare-fun user_eq4 (us_rep1 us_rep1) Bool)
 
 (declare-fun value__size2 () Int)
 
@@ -480,12 +459,33 @@
 ;; binary_trees__forest__c__position_axiom
   (assert (<= 0 binary_trees__forest__c__position))
 
-(declare-fun dummy5 () us_rep1)
+(declare-fun dummy4 () us_rep1)
 
 (declare-datatypes ()
 ((forest__ref (mk_forest__ref (forest__content us_rep1)))))
 (define-fun forest__ref___projection ((a forest__ref)) us_rep1 (forest__content
                                                                a))
+
+(declare-sort index_type 0)
+
+(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 100)))
+
+(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
+
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
+
+(declare-fun user_eq5 (index_type index_type) Bool)
+
+(declare-fun dummy5 () index_type)
+
+(declare-datatypes ()
+((index_type__ref (mk_index_type__ref (index_type__content index_type)))))
+(define-fun index_type__ref___projection ((a index_type__ref)) index_type 
+  (index_type__content a))
 
 (declare-fun size (us_rep1) Int)
 
@@ -495,31 +495,21 @@
 
 (declare-fun tree_structure__function_guard (Bool us_rep1) Bool)
 
-;; temp___result_283_def
-  (assert
-  (forall ((temp___282 us_rep1)) (tree_structure__function_guard
-  (tree_structure temp___282) temp___282)))
+(define-fun dynamic_invariant ((temp___expr_273 us_rep1)
+  (temp___is_init_270 Bool) (temp___skip_constant_271 Bool)
+  (temp___do_toplevel_272 Bool)) Bool (= (tree_structure temp___expr_273) true))
 
-(define-fun dynamic_invariant ((temp___expr_281 us_rep1)
-  (temp___is_init_278 Bool) (temp___skip_constant_279 Bool)
-  (temp___do_toplevel_280 Bool)) Bool (= (tree_structure temp___expr_281) true))
-
-;; temp___result_291_def
-  (assert
-  (forall ((temp___290 us_rep1)) (size__function_guard (size temp___290)
-  temp___290)))
-
-(define-fun default_initial_assumption ((temp___expr_285 us_rep1)
-  (temp___skip_top_level_286 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_276 us_rep1)
+  (temp___skip_top_level_277 Bool)) Bool (and
                                          (and
                                          (= (to_rep
                                             (rec__binary_trees__forest__s
                                             (us_split_fields3
-                                            temp___expr_285))) 0)
-                                         (forall ((temp___288 Int))
+                                            temp___expr_276))) 0)
+                                         (forall ((temp___279 Int))
                                          (=>
-                                         (and (<= 1 temp___288)
-                                         (<= temp___288 100))
+                                         (and (<= 1 temp___279)
+                                         (<= temp___279 100))
                                          (and
                                          (and
                                          (and
@@ -528,41 +518,36 @@
                                             (us_split_fields1
                                             (select (rec__binary_trees__forest__c
                                                     (us_split_fields3
-                                                    temp___expr_285)) temp___288)))) 0)
+                                                    temp___expr_276)) temp___279)))) 0)
                                          (= (to_rep
                                             (rec__binary_trees__cell__right
                                             (us_split_fields1
                                             (select (rec__binary_trees__forest__c
                                                     (us_split_fields3
-                                                    temp___expr_285)) temp___288)))) 0))
+                                                    temp___expr_276)) temp___279)))) 0))
                                          (= (to_rep
                                             (rec__binary_trees__cell__parent
                                             (us_split_fields1
                                             (select (rec__binary_trees__forest__c
                                                     (us_split_fields3
-                                                    temp___expr_285)) temp___288)))) 0))
+                                                    temp___expr_276)) temp___279)))) 0))
                                          (= (to_rep1
                                             (rec__binary_trees__cell__position
                                             (us_split_fields1
                                             (select (rec__binary_trees__forest__c
                                                     (us_split_fields3
-                                                    temp___expr_285)) temp___288)))) 2)))))
+                                                    temp___expr_276)) temp___279)))) 2)))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_286 true))
-                                         (= (size temp___expr_285) 0))))
+                                         (= temp___skip_top_level_277 true))
+                                         (= (size temp___expr_276) 0))))
 
-;; temp___result_294_def
-  (assert
-  (forall ((temp___293 us_rep1)) (tree_structure__function_guard
-  (tree_structure temp___293) temp___293)))
+(define-fun type_invariant ((temp___282 us_rep1)) Bool (= (tree_structure
+                                                          temp___282) true))
 
-(define-fun type_invariant ((temp___292 us_rep1)) Bool (= (tree_structure
-                                                          temp___292) true))
+(declare-sort natural 0)
 
-(declare-sort t77s 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 100)))
+(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -572,28 +557,9 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
 
-(declare-fun user_eq6 (t77s t77s) Bool)
+(declare-fun user_eq6 (natural natural) Bool)
 
-(declare-fun dummy6 () t77s)
-
-(declare-datatypes () ((t77s__ref (mk_t77s__ref (t77s__content t77s)))))
-(define-fun t77s__ref___projection ((a t77s__ref)) t77s (t77s__content a))
-
-(declare-sort natural 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq7 (natural natural) Bool)
-
-(declare-fun dummy7 () natural)
+(declare-fun dummy6 () natural)
 
 (declare-datatypes ()
 ((natural__ref (mk_natural__ref (natural__content natural)))))
@@ -611,12 +577,12 @@
 
 ;; range_axiom
   (assert
-  (forall ((x natural)) (! (in_range4 (to_rep2 x)) :pattern ((to_rep2 x)) )))
+  (forall ((x natural)) (! (in_range3 (to_rep2 x)) :pattern ((to_rep2 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range4 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
+  (! (=> (in_range3 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
                                                               (of_rep2 x))) )))
 
 (declare-datatypes ()
@@ -661,7 +627,7 @@
   (forall ((i Int))
   (! (= (select (singleton2 v i) i) v) :pattern ((select (singleton2 v i) i)) ))))
 
-(define-fun bool_eq8 ((a (Array Int natural)) (a__first Int) (a__last Int)
+(define-fun bool_eq7 ((a (Array Int natural)) (a__first Int) (a__last Int)
   (b (Array Int natural)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -680,7 +646,7 @@
   (assert
   (forall ((a (Array Int natural)) (b (Array Int natural)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq8 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq7 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -698,7 +664,7 @@
   (forall ((a (Array Int natural)) (b (Array Int natural)))
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq8 a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq7 a a_first a_last b b_first b_last) true)) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -709,7 +675,7 @@
      (exists ((i Int) (j Int))
      (and (<= i a_last)
      (and (< j b_last)
-     (and (= (bool_eq8 a a_first i b b_first j) true)
+     (and (= (bool_eq7 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
      (< (to_rep2 (select a (+ i 1))) (to_rep2 (select b (+ j 1))))))))))) :pattern (
@@ -723,13 +689,13 @@
      (exists ((i Int) (j Int))
      (and (<= i b_last)
      (and (< j a_last)
-     (and (= (bool_eq8 a a_first j b b_first i) true)
+     (and (= (bool_eq7 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
      (< (to_rep2 (select b (+ i 1))) (to_rep2 (select a (+ j 1))))))))))) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
-(declare-fun dummy8 () (Array Int natural))
+(declare-fun dummy7 () (Array Int natural))
 
 (declare-fun value__size3 () Int)
 
@@ -762,7 +728,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int natural))) (<= 0 (object__alignment3 a))))
 
-(declare-fun user_eq8 ((Array Int natural) (Array Int natural)) Bool)
+(declare-fun user_eq7 ((Array Int natural) (Array Int natural)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields4
@@ -788,7 +754,7 @@
 (define-fun us_rep_4__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
                                                                 a))
 
-(define-fun bool_eq9 ((a us_rep2)
+(define-fun bool_eq8 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
                          (and
                          (= (to_rep
@@ -796,19 +762,19 @@
                             (us_split_fields5 a))) (to_rep
                                                    (rec__search_trees__search_tree__root
                                                    (us_split_fields5 b))))
-                         (= (bool_eq5
+                         (= (bool_eq4
                             (rec__search_trees__search_tree__struct
                             (us_split_fields5 a))
                             (rec__search_trees__search_tree__struct
                             (us_split_fields5 b))) true))
-                         (= (bool_eq8
+                         (= (bool_eq7
                             (rec__search_trees__search_tree__values
                             (us_split_fields5 a)) 1 100
                             (rec__search_trees__search_tree__values
                             (us_split_fields5 b)) 1 100) true))
                     true false))
 
-(declare-fun user_eq9 (us_rep2 us_rep2) Bool)
+(declare-fun user_eq8 (us_rep2 us_rep2) Bool)
 
 (declare-fun value__size4 () Int)
 
@@ -878,7 +844,7 @@
 ;; search_trees__search_tree__values__position_axiom
   (assert (<= 0 search_trees__search_tree__values__position))
 
-(declare-fun dummy9 () us_rep2)
+(declare-fun dummy8 () us_rep2)
 
 (declare-datatypes ()
 ((search_tree__ref (mk_search_tree__ref (search_tree__content us_rep2)))))
@@ -898,43 +864,28 @@
 (declare-fun ordered_leafs__function_guard (Bool us_rep1 Int
   (Array Int natural)) Bool)
 
-(declare-fun temp___575 (Int) (Array Int natural))
+(declare-fun temp___387 (Int) (Array Int natural))
 
 ;; def_axiom
   (assert
-  (forall ((temp___577 Int))
-  (forall ((temp___578 Int))
-  (= (select (temp___575 temp___577) temp___578) (of_rep2 temp___577)))))
+  (forall ((temp___389 Int))
+  (forall ((temp___390 Int))
+  (= (select (temp___387 temp___389) temp___390) (of_rep2 temp___389)))))
 
-;; temp___result_564_def
-  (assert
-  (forall ((temp___563 us_rep1)) (tree_structure__function_guard
-  (tree_structure temp___563) temp___563)))
-
-(define-fun dynamic_invariant1 ((temp___expr_562 us_rep2)
-  (temp___is_init_559 Bool) (temp___skip_constant_560 Bool)
-  (temp___do_toplevel_561 Bool)) Bool (= (tree_structure
+(define-fun dynamic_invariant1 ((temp___expr_376 us_rep2)
+  (temp___is_init_373 Bool) (temp___skip_constant_374 Bool)
+  (temp___do_toplevel_375 Bool)) Bool (= (tree_structure
                                          (rec__search_trees__search_tree__struct
-                                         (us_split_fields5 temp___expr_562))) true))
+                                         (us_split_fields5 temp___expr_376))) true))
 
-;; temp___result_574_def
-  (assert
-  (forall ((temp___573 us_rep1)) (size__function_guard (size temp___573)
-  temp___573)))
-
-;; temp___result_580_def
-  (assert
-  (forall ((temp___579 us_rep2)) (size__function_guard1 (size1 temp___579)
-  temp___579)))
-
-(define-fun default_initial_assumption1 ((temp___expr_567 us_rep2)
-  (temp___skip_top_level_568 Bool)) Bool (and
+(define-fun default_initial_assumption1 ((temp___expr_380 us_rep2)
+  (temp___skip_top_level_381 Bool)) Bool (and
                                          (and
                                          (and
                                          (= (to_rep
                                             (rec__search_trees__search_tree__root
                                             (us_split_fields5
-                                            temp___expr_567))) 0)
+                                            temp___expr_380))) 0)
                                          (and
                                          (and
                                          (= (to_rep
@@ -942,11 +893,11 @@
                                             (us_split_fields3
                                             (rec__search_trees__search_tree__struct
                                             (us_split_fields5
-                                            temp___expr_567))))) 0)
-                                         (forall ((temp___571 Int))
+                                            temp___expr_380))))) 0)
+                                         (forall ((temp___384 Int))
                                          (=>
-                                         (and (<= 1 temp___571)
-                                         (<= temp___571 100))
+                                         (and (<= 1 temp___384)
+                                         (<= temp___384 100))
                                          (and
                                          (and
                                          (and
@@ -957,7 +908,7 @@
                                                     (us_split_fields3
                                                     (rec__search_trees__search_tree__struct
                                                     (us_split_fields5
-                                                    temp___expr_567)))) temp___571)))) 0)
+                                                    temp___expr_380)))) temp___384)))) 0)
                                          (= (to_rep
                                             (rec__binary_trees__cell__right
                                             (us_split_fields1
@@ -965,7 +916,7 @@
                                                     (us_split_fields3
                                                     (rec__search_trees__search_tree__struct
                                                     (us_split_fields5
-                                                    temp___expr_567)))) temp___571)))) 0))
+                                                    temp___expr_380)))) temp___384)))) 0))
                                          (= (to_rep
                                             (rec__binary_trees__cell__parent
                                             (us_split_fields1
@@ -973,7 +924,7 @@
                                                     (us_split_fields3
                                                     (rec__search_trees__search_tree__struct
                                                     (us_split_fields5
-                                                    temp___expr_567)))) temp___571)))) 0))
+                                                    temp___expr_380)))) temp___384)))) 0))
                                          (= (to_rep1
                                             (rec__binary_trees__cell__position
                                             (us_split_fields1
@@ -981,125 +932,87 @@
                                                     (us_split_fields3
                                                     (rec__search_trees__search_tree__struct
                                                     (us_split_fields5
-                                                    temp___expr_567)))) temp___571)))) 2)))))
+                                                    temp___expr_380)))) temp___384)))) 2)))))
                                          (= (size
                                             (rec__search_trees__search_tree__struct
                                             (us_split_fields5
-                                            temp___expr_567))) 0)))
+                                            temp___expr_380))) 0)))
                                          (= (rec__search_trees__search_tree__values
                                             (us_split_fields5
-                                            temp___expr_567)) (temp___575 0)))
+                                            temp___expr_380)) (temp___387 0)))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_568 true))
-                                         (= (size1 temp___expr_567) 0))))
+                                         (= temp___skip_top_level_381 true))
+                                         (= (size1 temp___expr_380) 0))))
 
-;; temp___result_585_def
-  (assert
-  (forall ((temp___582 us_rep2)) (size__function_guard
-  (size
-  (rec__search_trees__search_tree__struct (us_split_fields5 temp___582)))
-  (rec__search_trees__search_tree__struct (us_split_fields5 temp___582)))))
-
-;; temp___result_583_def
-  (assert
-  (forall ((temp___582 us_rep2)) (valid_root__function_guard
-  (valid_root
-  (rec__search_trees__search_tree__struct (us_split_fields5 temp___582))
-  (to_rep
-  (rec__search_trees__search_tree__root (us_split_fields5 temp___582))))
-  (rec__search_trees__search_tree__struct (us_split_fields5 temp___582))
-  (to_rep
-  (rec__search_trees__search_tree__root (us_split_fields5 temp___582))))))
-
-;; temp___result_584_def
-  (assert
-  (forall ((temp___582 us_rep2)) (ordered_leafs__function_guard
-  (ordered_leafs
-  (rec__search_trees__search_tree__struct (us_split_fields5 temp___582))
-  (to_rep
-  (rec__search_trees__search_tree__root (us_split_fields5 temp___582)))
-  (rec__search_trees__search_tree__values (us_split_fields5 temp___582)))
-  (rec__search_trees__search_tree__struct (us_split_fields5 temp___582))
-  (to_rep
-  (rec__search_trees__search_tree__root (us_split_fields5 temp___582)))
-  (rec__search_trees__search_tree__values (us_split_fields5 temp___582)))))
-
-(define-fun type_invariant1 ((temp___581 us_rep2)) Bool (ite (= (size
+(define-fun type_invariant1 ((temp___392 us_rep2)) Bool (ite (= (size
                                                                 (rec__search_trees__search_tree__struct
                                                                 (us_split_fields5
-                                                                temp___581))) 0)
+                                                                temp___392))) 0)
                                                         (= (to_rep
                                                            (rec__search_trees__search_tree__root
                                                            (us_split_fields5
-                                                           temp___581))) 0)
+                                                           temp___392))) 0)
                                                         (and
                                                         (and
                                                         (not
                                                         (= (to_rep
                                                            (rec__search_trees__search_tree__root
                                                            (us_split_fields5
-                                                           temp___581))) 0))
+                                                           temp___392))) 0))
                                                         (= (valid_root
                                                            (rec__search_trees__search_tree__struct
                                                            (us_split_fields5
-                                                           temp___581))
+                                                           temp___392))
                                                            (to_rep
                                                            (rec__search_trees__search_tree__root
                                                            (us_split_fields5
-                                                           temp___581)))) true))
+                                                           temp___392)))) true))
                                                         (= (ordered_leafs
                                                            (rec__search_trees__search_tree__struct
                                                            (us_split_fields5
-                                                           temp___581))
+                                                           temp___392))
                                                            (to_rep
                                                            (rec__search_trees__search_tree__root
                                                            (us_split_fields5
-                                                           temp___581)))
+                                                           temp___392)))
                                                            (rec__search_trees__search_tree__values
                                                            (us_split_fields5
-                                                           temp___581))) true))))
+                                                           temp___392))) true))))
 
-(define-fun dynamic_invariant2 ((temp___expr_158 Int)
-  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
-  (temp___do_toplevel_157 Bool)) Bool (=>
-                                      (or (= temp___is_init_155 true)
-                                      (<= 0 100)) (in_range1
-                                      temp___expr_158)))
+(define-fun dynamic_invariant2 ((temp___expr_156 Int)
+  (temp___is_init_153 Bool) (temp___skip_constant_154 Bool)
+  (temp___do_toplevel_155 Bool)) Bool (=>
+                                      (or (= temp___is_init_153 true)
+                                      (<= 0 100)) (in_range temp___expr_156)))
 
 ;; size__post_axiom
   (assert
   (forall ((t us_rep2))
   (! (=> (and (dynamic_invariant1 t true true true) (type_invariant1 t))
-     (let ((result (size1 t)))
-     (=> (size__function_guard1 result t) (dynamic_invariant2 result true
-     false true)))) :pattern ((size1 t)) )))
+     (dynamic_invariant2 (size1 t) true false true)) :pattern ((size1 t)) )))
 
 ;; size__def_axiom
   (assert
   (forall ((t us_rep2))
-  (! (=>
-     (and (dynamic_invariant1 t true true true) (size__function_guard1
-     (size1 t) t))
-     (and (size__function_guard
-     (size (rec__search_trees__search_tree__struct (us_split_fields5 t)))
-     (rec__search_trees__search_tree__struct (us_split_fields5 t)))
+  (! (=> (dynamic_invariant1 t true true true)
      (= (size1 t) (size
                   (rec__search_trees__search_tree__struct
-                  (us_split_fields5 t)))))) :pattern ((size1 t)) )))
+                  (us_split_fields5 t))))) :pattern ((size1 t)) )))
 
 (define-fun dynamic_invariant3 ((temp___expr_33 Int) (temp___is_init_30 Bool)
   (temp___skip_constant_31 Bool)
   (temp___do_toplevel_32 Bool)) Bool (=>
                                      (or (= temp___is_init_30 true)
-                                     (<= 0 2147483647)) (in_range4
+                                     (<= 0 2147483647)) (in_range3
                                      temp___expr_33)))
 
-(define-fun dynamic_invariant4 ((temp___expr_152 Int)
-  (temp___is_init_149 Bool) (temp___skip_constant_150 Bool)
-  (temp___do_toplevel_151 Bool)) Bool (=>
-                                      (or (= temp___is_init_149 true)
-                                      (<= 1 100)) (in_range temp___expr_152)))
+(define-fun dynamic_invariant4 ((temp___expr_150 Int)
+  (temp___is_init_147 Bool) (temp___skip_constant_148 Bool)
+  (temp___do_toplevel_149 Bool)) Bool (=>
+                                      (or (= temp___is_init_147 true)
+                                      (<= 1 100)) (in_range2
+                                      temp___expr_150)))
 
 (declare-sort us_main_type 0)
 
@@ -1107,9 +1020,9 @@
 
 (declare-sort us_rep3 0)
 
-(declare-fun bool_eq10 (us_rep3 us_rep3) Bool)
+(declare-fun bool_eq9 (us_rep3 us_rep3) Bool)
 
-(declare-fun user_eq10 (us_rep3 us_rep3) Bool)
+(declare-fun user_eq9 (us_rep3 us_rep3) Bool)
 
 (declare-fun value__size5 () Int)
 
@@ -1131,7 +1044,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a us_rep3)) (<= 0 (object__alignment5 a))))
 
-(declare-fun dummy10 () us_rep3)
+(declare-fun dummy9 () us_rep3)
 
 (declare-datatypes ()
 ((sequence__ref (mk_sequence__ref (sequence__content us_rep3)))))
@@ -1150,13 +1063,13 @@
 
 (define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
 
-(define-fun in_range5 ((x Int)) Bool (or (= x 0) (= x 1)))
+(define-fun in_range4 ((x Int)) Bool (or (= x 0) (= x 1)))
 
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Bool) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE4 (Bool) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Bool)
 
 (define-fun last ((container us_rep3)) Int (+ 0 (length container)))
 
@@ -1201,9 +1114,9 @@
 (define-fun us_rep___projection ((a us_rep4)) us_split_fields6 (us_split_fields7
                                                                a))
 
-(define-fun bool_eq11 ((a us_rep4)
+(define-fun bool_eq10 ((a us_rep4)
   (b us_rep4)) Bool (ite (and
-                         (= (user_eq10
+                         (= (user_eq9
                             (rec__tree_model__path_type__a
                             (us_split_fields7 a))
                             (rec__tree_model__path_type__a
@@ -1213,7 +1126,7 @@
                                                   (us_split_fields7 b))))
                     true false))
 
-(declare-fun user_eq11 (us_rep4 us_rep4) Bool)
+(declare-fun user_eq10 (us_rep4 us_rep4) Bool)
 
 (declare-fun value__size6 () Int)
 
@@ -1267,7 +1180,7 @@
 ;; tree_model__path_type__k__position_axiom
   (assert (<= 0 tree_model__path_type__k__position))
 
-(declare-fun dummy11 () us_rep4)
+(declare-fun dummy10 () us_rep4)
 
 (declare-datatypes ()
 ((path_type__ref (mk_path_type__ref (path_type__content us_rep4)))))
@@ -1316,7 +1229,7 @@
   (forall ((i Int))
   (! (= (select (singleton3 v i) i) v) :pattern ((select (singleton3 v i) i)) ))))
 
-(define-fun bool_eq12 ((a (Array Int us_rep4)) (a__first Int) (a__last Int)
+(define-fun bool_eq11 ((a (Array Int us_rep4)) (a__first Int) (a__last Int)
   (b (Array Int us_rep4)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -1327,7 +1240,7 @@
                            (=>
                            (and (<= a__first temp___idx_132)
                            (<= temp___idx_132 a__last))
-                           (= (bool_eq11 (select a temp___idx_132)
+                           (= (bool_eq10 (select a temp___idx_132)
                               (select b (+ (- b__first a__first) temp___idx_132))) true))))
                       true false))
 
@@ -1335,14 +1248,14 @@
   (assert
   (forall ((a (Array Int us_rep4)) (b (Array Int us_rep4)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq12 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq11 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
   (forall ((temp___idx_132 Int))
   (=> (and (<= a__first temp___idx_132) (<= temp___idx_132 a__last))
-  (= (bool_eq11 (select a temp___idx_132)
+  (= (bool_eq10 (select a temp___idx_132)
      (select b (+ (- b__first a__first) temp___idx_132))) true))))))))
 
 (declare-fun model__ (us_rep1 Int) (Array Int us_rep4))
@@ -1350,25 +1263,14 @@
 (declare-fun model____function_guard ((Array Int us_rep4) us_rep1 Int) Bool)
 
 ;; ordered_leafs__post_axiom
-  (assert
-  (forall ((f us_rep1))
-  (forall ((root Int)) (valid_root__function_guard (valid_root f root) f
-  root))))
+  (assert true)
 
 ;; ordered_leafs__def_axiom
   (assert
   (forall ((f us_rep1))
   (forall ((root Int))
   (forall ((values (Array Int natural)))
-  (! (=> (ordered_leafs__function_guard (ordered_leafs f root values) f root
-     values)
-     (and (model____function_guard (model__ f root) f root)
-     (and (model____function_guard (model__ f root) f root)
-     (and (model____function_guard (model__ f root) f root)
-     (and (model____function_guard (model__ f root) f root)
-     (and (model____function_guard (model__ f root) f root)
-     (and (model____function_guard (model__ f root) f root)
-     (= (= (ordered_leafs f root values) true)
+  (! (= (= (ordered_leafs f root values) true)
      (forall ((i Int))
      (=> (and (<= 1 i) (<= i 100))
      (forall ((j Int))
@@ -1378,110 +1280,110 @@
      (and
      (= (rec__tree_model__path_type__k
         (us_split_fields7
-        (let ((temp___909 (model__ f root))) (select temp___909 i)))) true)
+        (let ((temp___482 (model__ f root))) (select temp___482 i)))) true)
      (= (rec__tree_model__path_type__k
         (us_split_fields7
-        (let ((temp___911 (model__ f root))) (select temp___911 j)))) true))
+        (let ((temp___483 (model__ f root))) (select temp___483 j)))) true))
      (= (olt
         (rec__tree_model__path_type__a
         (us_split_fields7
-        (let ((temp___913 (model__ f root))) (select temp___913 i))))
+        (let ((temp___484 (model__ f root))) (select temp___484 i))))
         (rec__tree_model__path_type__a
         (us_split_fields7
-        (let ((temp___915 (model__ f root))) (select temp___915 j))))) true))
+        (let ((temp___485 (model__ f root))) (select temp___485 j))))) true))
      (ite (= (get
              (rec__tree_model__path_type__a
              (us_split_fields7
-             (let ((temp___905 (model__ f root))) (select temp___905 j))))
+             (let ((temp___480 (model__ f root))) (select temp___480 j))))
              (+ (length
                 (rec__tree_model__path_type__a
                 (us_split_fields7
-                (let ((temp___907 (model__ f root))) (select temp___907 i))))) 1)) 0)
+                (let ((temp___481 (model__ f root))) (select temp___481 i))))) 1)) 0)
      (< (to_rep2 (select values j)) (to_rep2 (select values i)))
-     (< (to_rep2 (select values i)) (to_rep2 (select values j))))))))))))))))) :pattern (
+     (< (to_rep2 (select values i)) (to_rep2 (select values j)))))))))) :pattern (
   (ordered_leafs f root values)) )))))
 
-(define-fun dynamic_invariant5 ((temp___expr_164 Int)
-  (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
-  (temp___do_toplevel_163 Bool)) Bool (=>
-                                      (or (= temp___is_init_161 true)
-                                      (<= 0 2)) (in_range2 temp___expr_164)))
+(define-fun dynamic_invariant5 ((temp___expr_162 Int)
+  (temp___is_init_159 Bool) (temp___skip_constant_160 Bool)
+  (temp___do_toplevel_161 Bool)) Bool (=>
+                                      (or (= temp___is_init_159 true)
+                                      (<= 0 2)) (in_range1 temp___expr_162)))
 
 (declare-sort direction 0)
 
-(define-fun in_range6 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
+(define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
 
-(define-fun bool_eq13 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq12 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
 
-(declare-fun user_eq12 (direction direction) Bool)
+(declare-fun user_eq11 (direction direction) Bool)
 
-(declare-fun dummy12 () direction)
+(declare-fun dummy11 () direction)
 
 (declare-datatypes ()
 ((direction__ref (mk_direction__ref (direction__content direction)))))
 (define-fun direction__ref___projection ((a direction__ref)) direction 
   (direction__content a))
 
-(define-fun dynamic_invariant6 ((temp___expr_170 Int)
-  (temp___is_init_167 Bool) (temp___skip_constant_168 Bool)
-  (temp___do_toplevel_169 Bool)) Bool (=>
-                                      (or (= temp___is_init_167 true)
-                                      (<= 0 1)) (in_range6 temp___expr_170)))
+(define-fun dynamic_invariant6 ((temp___expr_168 Int)
+  (temp___is_init_165 Bool) (temp___skip_constant_166 Bool)
+  (temp___do_toplevel_167 Bool)) Bool (=>
+                                      (or (= temp___is_init_165 true)
+                                      (<= 0 1)) (in_range5 temp___expr_168)))
 
-(define-fun dynamic_invariant7 ((temp___expr_207 us_rep4)
-  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
-  (temp___do_toplevel_206 Bool)) Bool (=> (= temp___do_toplevel_206 true)
-                                      (=> (= temp___is_init_204 true)
+(define-fun dynamic_invariant7 ((temp___expr_205 us_rep4)
+  (temp___is_init_202 Bool) (temp___skip_constant_203 Bool)
+  (temp___do_toplevel_204 Bool)) Bool (=> (= temp___do_toplevel_204 true)
+                                      (=> (= temp___is_init_202 true)
                                       (< (length
                                          (rec__tree_model__path_type__a
-                                         (us_split_fields7 temp___expr_207))) 100))))
+                                         (us_split_fields7 temp___expr_205))) 100))))
 
-(define-fun default_initial_assumption2 ((temp___expr_209 us_rep4)
-  (temp___skip_top_level_210 Bool)) Bool (and
+(define-fun default_initial_assumption2 ((temp___expr_207 us_rep4)
+  (temp___skip_top_level_208 Bool)) Bool (and
                                          (= (length
                                             (rec__tree_model__path_type__a
                                             (us_split_fields7
-                                            temp___expr_209))) 0)
+                                            temp___expr_207))) 0)
                                          (= (rec__tree_model__path_type__k
                                             (us_split_fields7
-                                            temp___expr_209)) (of_int 0))))
+                                            temp___expr_207)) (of_int 0))))
 
-(define-fun dynamic_predicate ((temp___213 us_rep4)) Bool (< (length
+(define-fun dynamic_predicate ((temp___211 us_rep4)) Bool (< (length
                                                              (rec__tree_model__path_type__a
                                                              (us_split_fields7
-                                                             temp___213))) 100))
+                                                             temp___211))) 100))
 
-(define-fun dynamic_invariant8 ((temp___expr_218 (Array Int us_rep4))
-  (temp___is_init_215 Bool) (temp___skip_constant_216 Bool)
-  (temp___do_toplevel_217 Bool)) Bool (forall ((temp___219 Int))
+(define-fun dynamic_invariant8 ((temp___expr_216 (Array Int us_rep4))
+  (temp___is_init_213 Bool) (temp___skip_constant_214 Bool)
+  (temp___do_toplevel_215 Bool)) Bool (forall ((temp___217 Int))
                                       (=>
-                                      (and (<= 1 temp___219)
-                                      (<= temp___219 100))
-                                      (=> (= temp___is_init_215 true)
+                                      (and (<= 1 temp___217)
+                                      (<= temp___217 100))
+                                      (=> (= temp___is_init_213 true)
                                       (< (length
                                          (rec__tree_model__path_type__a
                                          (us_split_fields7
-                                         (select temp___expr_218 temp___219)))) 100)))))
+                                         (select temp___expr_216 temp___217)))) 100)))))
 
-(define-fun default_initial_assumption3 ((temp___expr_221 (Array Int us_rep4))
-  (temp___skip_top_level_222 Bool)) Bool (forall ((temp___223 Int))
+(define-fun default_initial_assumption3 ((temp___expr_219 (Array Int us_rep4))
+  (temp___skip_top_level_220 Bool)) Bool (forall ((temp___221 Int))
                                          (=>
-                                         (and (<= 1 temp___223)
-                                         (<= temp___223 100))
+                                         (and (<= 1 temp___221)
+                                         (<= temp___221 100))
                                          (and
                                          (= (length
                                             (rec__tree_model__path_type__a
                                             (us_split_fields7
-                                            (select temp___expr_221 temp___223)))) 0)
+                                            (select temp___expr_219 temp___221)))) 0)
                                          (= (rec__tree_model__path_type__k
                                             (us_split_fields7
-                                            (select temp___expr_221 temp___223))) 
+                                            (select temp___expr_219 temp___221))) 
                                          (of_int 0))))))
 
 (define-fun oeq ((left us_rep3)
@@ -1505,13 +1407,13 @@
 ;; user_eq__def_axiom
   (assert
   (forall ((a us_rep3) (b us_rep3))
-  (! (= (user_eq10 a b) (oeq a b)) :pattern ((user_eq10 a b)) )))
+  (! (= (user_eq9 a b) (oeq a b)) :pattern ((user_eq9 a b)) )))
 
-(define-fun default_initial_assumption4 ((temp___expr_201 us_rep3)
-  (temp___skip_top_level_202 Bool)) Bool (=>
+(define-fun default_initial_assumption4 ((temp___expr_199 us_rep3)
+  (temp___skip_top_level_200 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_202 true))
-                                         (= (length temp___expr_201) 0)))
+                                         (= temp___skip_top_level_200 true))
+                                         (= (length temp___expr_199) 0)))
 
 (declare-fun is_add (us_rep3 Int us_rep3) Bool)
 
@@ -1524,46 +1426,43 @@
   (assert
   (forall ((s1 us_rep3) (s2 us_rep3))
   (forall ((d Int))
-  (! (=> (is_add__function_guard (is_add s1 d s2) s1 d s2)
-     (= (= (is_add s1 d s2) true)
+  (! (= (= (is_add s1 d s2) true)
      (and (and (= (- (length s2) 1) (length s1)) (= (olt s1 s2) true))
-     (= (get s2 (length s2)) d)))) :pattern ((is_add s1 d s2)) ))))
+     (= (get s2 (length s2)) d))) :pattern ((is_add s1 d s2)) ))))
 
 (declare-sort count_type 0)
 
-(define-fun in_range7 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
+(define-fun in_range6 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(define-fun bool_eq14 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq13 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
 
-(declare-fun user_eq13 (count_type count_type) Bool)
+(declare-fun user_eq12 (count_type count_type) Bool)
 
-(declare-fun dummy13 () count_type)
+(declare-fun dummy12 () count_type)
 
 (declare-datatypes ()
 ((count_type__ref (mk_count_type__ref (count_type__content count_type)))))
 (define-fun count_type__ref___projection ((a count_type__ref)) count_type 
   (count_type__content a))
 
-(define-fun dynamic_invariant9 ((temp___expr_146 Int)
-  (temp___is_init_143 Bool) (temp___skip_constant_144 Bool)
-  (temp___do_toplevel_145 Bool)) Bool (=>
-                                      (or (= temp___is_init_143 true)
-                                      (<= 0 2147483647)) (in_range7
-                                      temp___expr_146)))
+(define-fun dynamic_invariant9 ((temp___expr_144 Int)
+  (temp___is_init_141 Bool) (temp___skip_constant_142 Bool)
+  (temp___do_toplevel_143 Bool)) Bool (=>
+                                      (or (= temp___is_init_141 true)
+                                      (<= 0 2147483647)) (in_range6
+                                      temp___expr_144)))
 
 ;; size__post_axiom
   (assert
   (forall ((f us_rep1))
-  (! (=> (dynamic_invariant f true true true)
-     (let ((result (size f)))
-     (=> (size__function_guard result f) (dynamic_invariant2 result true
-     false true)))) :pattern ((size f)) )))
+  (! (=> (dynamic_invariant f true true true) (dynamic_invariant2 (size f)
+     true false true)) :pattern ((size f)) )))
 
 ;; valid_root__post_axiom
   (assert
@@ -1571,11 +1470,8 @@
   (forall ((i Int))
   (! (=>
      (and (dynamic_invariant f true true true) (dynamic_invariant4 i true
-     true true))
-     (let ((result (valid_root f i)))
-     (and (size__function_guard (size f) f)
-     (=> (valid_root__function_guard result f i)
-     (=> (< (size f) i) (not (= result true))))))) :pattern ((valid_root f i)) ))))
+     true true)) (=> (< (size f) i) (not (= (valid_root f i) true)))) :pattern (
+  (valid_root f i)) ))))
 
 (declare-fun parent (us_rep1 Int) Int)
 
@@ -1589,13 +1485,10 @@
      (and (dynamic_invariant f true true true) (dynamic_invariant4 i true
      true true))
      (let ((result (parent f i)))
-     (and (valid_root__function_guard (valid_root f i) f i)
-     (and (size__function_guard (size f) f)
-     (=> (parent__function_guard result f i)
      (and
      (and (=> (= (valid_root f i) true) (= result 0))
      (=> (= (size f) 0) (= result 0))) (dynamic_invariant2 result true false
-     true))))))) :pattern ((parent f i)) ))))
+     true)))) :pattern ((parent f i)) ))))
 
 (declare-fun position (us_rep1 Int) Int)
 
@@ -1605,41 +1498,21 @@
   (assert
   (forall ((f us_rep1))
   (forall ((i Int))
-  (! (and (parent__function_guard (parent f i) f i)
-     (=>
+  (! (=>
      (and
      (and (dynamic_invariant f true true true) (dynamic_invariant4 i true
-     true true)) (not (= (parent f i) 0)))
-     (let ((result (position f i)))
-     (=> (position__function_guard result f i) (dynamic_invariant6 result
-     true false true))))) :pattern ((position f i)) ))))
+     true true)) (not (= (parent f i) 0))) (dynamic_invariant6 (position f i)
+     true false true)) :pattern ((position f i)) ))))
 
 ;; model____post_axiom
   (assert
   (forall ((f us_rep1))
   (forall ((root Int))
-  (! (and (valid_root__function_guard (valid_root f root) f root)
-     (=>
+  (! (=>
      (and
      (and (dynamic_invariant f true true true) (dynamic_invariant4 root true
      true true)) (= (valid_root f root) true))
      (let ((result (model__ f root)))
-     (and (forall ((i Int)) (parent__function_guard (parent f i) f i))
-     (and (forall ((i Int)) (parent__function_guard (parent f i) f i))
-     (and (forall ((i Int)) (parent__function_guard (parent f i) f i))
-     (and (forall ((i Int)) (position__function_guard (position f i) f i))
-     (and (forall ((i Int)) (parent__function_guard (parent f i) f i))
-     (and (forall ((i Int)) (position__function_guard (position f i) f i))
-     (and
-     (forall ((i Int)) (is_add__function_guard
-     (is_add
-     (rec__tree_model__path_type__a
-     (us_split_fields7 (select result (parent f i)))) (position f i)
-     (rec__tree_model__path_type__a (us_split_fields7 (select result i))))
-     (rec__tree_model__path_type__a
-     (us_split_fields7 (select result (parent f i)))) (position f i)
-     (rec__tree_model__path_type__a (us_split_fields7 (select result i)))))
-     (=> (model____function_guard result f root)
      (and
      (and
      (= (rec__tree_model__path_type__k
@@ -1683,73 +1556,73 @@
      (= (oeq
         (rec__tree_model__path_type__a (us_split_fields7 (select result i)))
         (rec__tree_model__path_type__a (us_split_fields7 (select result j)))) true))
-     (= j i))))))))))) (dynamic_invariant8 result true false true))))))))))))) :pattern (
+     (= j i))))))))))) (dynamic_invariant8 result true false true)))) :pattern (
   (model__ f root)) ))))
 
-(define-fun default_initial_assumption5 ((temp___expr_267 us_rep)
-  (temp___skip_top_level_268 Bool)) Bool (and
+(define-fun default_initial_assumption5 ((temp___expr_259 us_rep)
+  (temp___skip_top_level_260 Bool)) Bool (and
                                          (and
                                          (and
                                          (= (to_rep
                                             (rec__binary_trees__cell__left
                                             (us_split_fields1
-                                            temp___expr_267))) 0)
+                                            temp___expr_259))) 0)
                                          (= (to_rep
                                             (rec__binary_trees__cell__right
                                             (us_split_fields1
-                                            temp___expr_267))) 0))
+                                            temp___expr_259))) 0))
                                          (= (to_rep
                                             (rec__binary_trees__cell__parent
                                             (us_split_fields1
-                                            temp___expr_267))) 0))
+                                            temp___expr_259))) 0))
                                          (= (to_rep1
                                             (rec__binary_trees__cell__position
                                             (us_split_fields1
-                                            temp___expr_267))) 2)))
+                                            temp___expr_259))) 2)))
 
-(define-fun default_initial_assumption6 ((temp___expr_274 (Array Int us_rep))
-  (temp___skip_top_level_275 Bool)) Bool (forall ((temp___276 Int))
+(define-fun default_initial_assumption6 ((temp___expr_266 (Array Int us_rep))
+  (temp___skip_top_level_267 Bool)) Bool (forall ((temp___268 Int))
                                          (=>
-                                         (and (<= 1 temp___276)
-                                         (<= temp___276 100))
+                                         (and (<= 1 temp___268)
+                                         (<= temp___268 100))
                                          (and
                                          (and
                                          (and
                                          (= (to_rep
                                             (rec__binary_trees__cell__left
                                             (us_split_fields1
-                                            (select temp___expr_274 temp___276)))) 0)
+                                            (select temp___expr_266 temp___268)))) 0)
                                          (= (to_rep
                                             (rec__binary_trees__cell__right
                                             (us_split_fields1
-                                            (select temp___expr_274 temp___276)))) 0))
+                                            (select temp___expr_266 temp___268)))) 0))
                                          (= (to_rep
                                             (rec__binary_trees__cell__parent
                                             (us_split_fields1
-                                            (select temp___expr_274 temp___276)))) 0))
+                                            (select temp___expr_266 temp___268)))) 0))
                                          (= (to_rep1
                                             (rec__binary_trees__cell__position
                                             (us_split_fields1
-                                            (select temp___expr_274 temp___276)))) 2)))))
+                                            (select temp___expr_266 temp___268)))) 2)))))
 
 ;; tree_structure__post_axiom
   (assert true)
 
 (declare-sort extended_index 0)
 
-(define-fun in_range8 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
+(define-fun in_range7 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(define-fun bool_eq15 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq14 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
 
-(declare-fun user_eq14 (extended_index extended_index) Bool)
+(declare-fun user_eq13 (extended_index extended_index) Bool)
 
-(declare-fun dummy14 () extended_index)
+(declare-fun dummy13 () extended_index)
 
 (declare-datatypes ()
 ((extended_index__ref
@@ -1757,12 +1630,12 @@
 (define-fun extended_index__ref___projection ((a extended_index__ref)) extended_index 
   (extended_index__content a))
 
-(define-fun dynamic_invariant10 ((temp___expr_194 Int)
-  (temp___is_init_191 Bool) (temp___skip_constant_192 Bool)
-  (temp___do_toplevel_193 Bool)) Bool (=>
-                                      (or (= temp___is_init_191 true)
-                                      (<= 0 2147483647)) (in_range8
-                                      temp___expr_194)))
+(define-fun dynamic_invariant10 ((temp___expr_192 Int)
+  (temp___is_init_189 Bool) (temp___skip_constant_190 Bool)
+  (temp___do_toplevel_191 Bool)) Bool (=>
+                                      (or (= temp___is_init_189 true)
+                                      (<= 0 2147483647)) (in_range7
+                                      temp___expr_192)))
 
 ;; length__post_axiom
   (assert
@@ -1773,19 +1646,19 @@
 
 (declare-sort element_type 0)
 
-(define-fun in_range9 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
+(define-fun in_range8 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
 
-(define-fun bool_eq16 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq15 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE9 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
 
-(declare-fun user_eq15 (element_type element_type) Bool)
+(declare-fun user_eq14 (element_type element_type) Bool)
 
-(declare-fun dummy15 () element_type)
+(declare-fun dummy14 () element_type)
 
 (declare-datatypes ()
 ((element_type__ref
@@ -1793,11 +1666,11 @@
 (define-fun element_type__ref___projection ((a element_type__ref)) element_type 
   (element_type__content a))
 
-(define-fun dynamic_invariant11 ((temp___expr_188 Int)
-  (temp___is_init_185 Bool) (temp___skip_constant_186 Bool)
-  (temp___do_toplevel_187 Bool)) Bool (=>
-                                      (or (= temp___is_init_185 true)
-                                      (<= 0 1)) (in_range9 temp___expr_188)))
+(define-fun dynamic_invariant11 ((temp___expr_186 Int)
+  (temp___is_init_183 Bool) (temp___skip_constant_184 Bool)
+  (temp___do_toplevel_185 Bool)) Bool (=>
+                                      (or (= temp___is_init_183 true)
+                                      (<= 0 1)) (in_range8 temp___expr_186)))
 
 ;; get__post_axiom
   (assert
@@ -1809,33 +1682,30 @@
      (dynamic_invariant11 (get container position1) true false true)) :pattern (
   (get container position1)) ))))
 
-(declare-fun temp___1178 () extended_index_type)
+(declare-fun temp___606 () extended_index_type)
 
-(declare-fun temp___11781 () extended_index_type)
+(declare-fun temp___6061 () extended_index_type)
 
-(declare-fun temp___11782 () (Array Int us_rep))
+(declare-fun temp___6062 () (Array Int us_rep))
 
-(declare-fun temp___11783 () (Array Int natural))
-
-(define-fun temp___11784 () us_rep2 (mk___rep2
-                                    (mk___split_fields2 temp___1178
-                                    (mk___rep1
-                                    (mk___split_fields1 temp___11781
-                                    temp___11782)) temp___11783)))
+(declare-fun temp___6063 () (Array Int natural))
 
 ;; H
   (assert
-  (and (dynamic_invariant1 temp___11784 true false true)
   (and
-  (and (= (to_rep temp___1178) 0) (default_initial_assumption
-  (mk___rep1 (mk___split_fields1 temp___11781 temp___11782)) false))
-  (= temp___11783 (temp___575 0)))))
-
-;; H
-  (assert (size__function_guard1 (size1 temp___11784) temp___11784))
+  (= (tree_structure
+     (mk___rep1 (mk___split_fields1 temp___6061 temp___6062))) true)
+  (and
+  (and (= (to_rep temp___606) 0) (default_initial_assumption
+  (mk___rep1 (mk___split_fields1 temp___6061 temp___6062)) false))
+  (= temp___6063 (temp___387 0)))))
 
 (assert
 ;; WP_parameter_def
  ;; File "search_trees.ads", line 311, characters 0-0
-  (not (= (size1 temp___11784) 0)))
+  (not
+  (= (size1
+     (mk___rep2
+     (mk___split_fields2 temp___606
+     (mk___rep1 (mk___split_fields1 temp___6061 temp___6062)) temp___6063))) 0)))
 (check-sat)

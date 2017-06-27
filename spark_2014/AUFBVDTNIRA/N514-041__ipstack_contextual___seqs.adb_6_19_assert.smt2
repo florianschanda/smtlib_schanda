@@ -74,8 +74,7 @@
 ;; seq_le__def_axiom
   (assert
   (forall ((x Int) (y Int))
-  (! (=> (seq_le__function_guard (seq_le x y) x y)
-     (= (= (seq_le x y) true) (<= x y))) :pattern ((seq_le x y)) )))
+  (! (= (= (seq_le x y) true) (<= x y)) :pattern ((seq_le x y)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -110,9 +109,6 @@
 
 ;; H
   (assert (in_range y1))
-
-;; H
-  (assert (seq_le__function_guard (seq_le x1 y1) x1 y1))
 
 (assert
 ;; WP_parameter_def

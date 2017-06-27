@@ -144,21 +144,16 @@
 
 (declare-fun rec_ok__function_guard (Bool us_rep) Bool)
 
-;; temp___result_165_def
-  (assert
-  (forall ((temp___164 us_rep)) (rec_ok__function_guard (rec_ok temp___164)
-  temp___164)))
-
-(define-fun default_initial_assumption ((temp___expr_162 us_rep)
-  (temp___skip_top_level_163 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_159 us_rep)
+  (temp___skip_top_level_160 Bool)) Bool (and
                                          (= (to_rep
                                             (rec__default_init__rec__f
                                             (us_split_fields1
-                                            temp___expr_162))) 0)
+                                            temp___expr_159))) 0)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_163 true))
-                                         (= (rec_ok temp___expr_162) true))))
+                                         (= temp___skip_top_level_160 true))
+                                         (= (rec_ok temp___expr_159) true))))
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int natural))))))
@@ -295,23 +290,18 @@
 
 (declare-fun arr_ok__function_guard (Bool (Array Int natural)) Bool)
 
-;; temp___result_175_def
-  (assert
-  (forall ((temp___174 (Array Int natural))) (arr_ok__function_guard
-  (arr_ok temp___174) temp___174)))
-
-(define-fun default_initial_assumption1 ((temp___expr_171 (Array Int natural))
-  (temp___skip_top_level_172 Bool)) Bool (and
-                                         (forall ((temp___173 Int))
+(define-fun default_initial_assumption1 ((temp___expr_167 (Array Int natural))
+  (temp___skip_top_level_168 Bool)) Bool (and
+                                         (forall ((temp___169 Int))
                                          (=>
-                                         (and (<= 1 temp___173)
-                                         (<= temp___173 3))
+                                         (and (<= 1 temp___169)
+                                         (<= temp___169 3))
                                          (= (to_rep
-                                            (select temp___expr_171 temp___173)) 0)))
+                                            (select temp___expr_167 temp___169)) 0)))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_172 true))
-                                         (= (arr_ok temp___expr_171) true))))
+                                         (= temp___skip_top_level_168 true))
+                                         (= (arr_ok temp___expr_167) true))))
 
 (declare-sort nat 0)
 
@@ -336,24 +326,19 @@
 
 (declare-fun nat_ok__function_guard (Bool Int) Bool)
 
-(define-fun dynamic_invariant ((temp___expr_179 Int)
-  (temp___is_init_176 Bool) (temp___skip_constant_177 Bool)
-  (temp___do_toplevel_178 Bool)) Bool (=>
-                                      (or (= temp___is_init_176 true)
+(define-fun dynamic_invariant ((temp___expr_174 Int)
+  (temp___is_init_171 Bool) (temp___skip_constant_172 Bool)
+  (temp___do_toplevel_173 Bool)) Bool (=>
+                                      (or (= temp___is_init_171 true)
                                       (<= 0 2147483647)) (in_range2
-                                      temp___expr_179)))
+                                      temp___expr_174)))
 
-;; temp___result_183_def
-  (assert
-  (forall ((temp___182 Int)) (nat_ok__function_guard (nat_ok temp___182)
-  temp___182)))
-
-(define-fun default_initial_assumption2 ((temp___expr_180 Int)
-  (temp___skip_top_level_181 Bool)) Bool (and (= temp___expr_180 0)
+(define-fun default_initial_assumption2 ((temp___expr_175 Int)
+  (temp___skip_top_level_176 Bool)) Bool (and (= temp___expr_175 0)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_181 true))
-                                         (= (nat_ok temp___expr_180) true))))
+                                         (= temp___skip_top_level_176 true))
+                                         (= (nat_ok temp___expr_175) true))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -374,9 +359,8 @@
 ;; rec_ok__def_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (rec_ok__function_guard (rec_ok x) x)
-     (= (= (rec_ok x) true)
-     (= (to_rep (rec__default_init__rec__f (us_split_fields1 x))) 0))) :pattern (
+  (! (= (= (rec_ok x) true)
+     (= (to_rep (rec__default_init__rec__f (us_split_fields1 x))) 0)) :pattern (
   (rec_ok x)) )))
 
 ;; arr_ok__post_axiom
@@ -385,9 +369,7 @@
 ;; arr_ok__def_axiom
   (assert
   (forall ((x (Array Int natural)))
-  (! (=> (arr_ok__function_guard (arr_ok x) x)
-     (= (= (arr_ok x) true) (= (to_rep (select x 1)) 0))) :pattern ((arr_ok
-                                                                    x)) )))
+  (! (= (= (arr_ok x) true) (= (to_rep (select x 1)) 0)) :pattern ((arr_ok x)) )))
 
 ;; nat_ok__post_axiom
   (assert true)
@@ -395,8 +377,7 @@
 ;; nat_ok__def_axiom
   (assert
   (forall ((x Int))
-  (! (=> (nat_ok__function_guard (nat_ok x) x)
-     (= (= (nat_ok x) true) (= x 0))) :pattern ((nat_ok x)) )))
+  (! (= (= (nat_ok x) true) (= x 0)) :pattern ((nat_ok x)) )))
 
 (declare-fun r__split_fields () natural)
 

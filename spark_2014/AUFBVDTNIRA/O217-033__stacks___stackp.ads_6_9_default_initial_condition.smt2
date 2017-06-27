@@ -371,11 +371,6 @@
 
 (declare-fun size__function_guard (Int us_rep) Bool)
 
-;; temp___result_165_def
-  (assert
-  (forall ((temp___164 us_rep)) (size__function_guard (size temp___164)
-  temp___164)))
-
 (define-fun default_initial_assumption ((temp___expr_159 us_rep)
   (temp___skip_top_level_160 Bool)) Bool (and
                                          (and
@@ -398,17 +393,14 @@
 
 ;; size__post_axiom
   (assert
-  (forall ((s us_rep))
-  (! (let ((result (size s)))
-     (=> (size__function_guard result s) (dynamic_invariant result true false
-     true))) :pattern ((size s)) )))
+  (forall ((s us_rep)) (! (dynamic_invariant (size s) true false
+  true) :pattern ((size s)) )))
 
 ;; size__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (size__function_guard (size s) s)
-     (= (size s) (to_rep
-                 (rec__stackp__stack_root__length (us_split_fields1 s))))) :pattern (
+  (! (= (size s) (to_rep
+                 (rec__stackp__stack_root__length (us_split_fields1 s)))) :pattern (
   (size s)) )))
 
 (define-fun dynamic_invariant1 ((temp___expr_142 Int)
@@ -418,26 +410,22 @@
                                       (<= 0 2147483647)) (in_range1
                                       temp___expr_142)))
 
-(declare-fun temp___566 () (Array Int element))
+(declare-fun temp___451 () (Array Int element))
 
-(declare-fun temp___5661 () less_than_max)
+(declare-fun temp___4511 () less_than_max)
 
-(declare-fun temp___5662 () us_private)
+(declare-fun temp___4512 () us_private)
 
-(declare-fun temp___5663 () Int)
-
-(define-fun temp___5664 () us_rep (mk___rep
-                                  (mk___split_fields temp___566 temp___5661
-                                  temp___5662) temp___5663))
+(declare-fun temp___4513 () Int)
 
 ;; H
-  (assert (and (= temp___5663 us_tag) (= (to_rep temp___5661) 0)))
-
-;; H
-  (assert (size__function_guard (size temp___5664) temp___5664))
+  (assert (and (= temp___4513 us_tag) (= (to_rep temp___4511) 0)))
 
 (assert
 ;; WP_parameter_def
  ;; File "stackp.ads", line 2, characters 0-0
-  (not (= (size temp___5664) 0)))
+  (not
+  (= (size
+     (mk___rep (mk___split_fields temp___451 temp___4511 temp___4512)
+     temp___4513)) 0)))
 (check-sat)

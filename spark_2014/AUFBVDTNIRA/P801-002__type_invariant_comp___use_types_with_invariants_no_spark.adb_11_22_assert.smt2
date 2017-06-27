@@ -148,16 +148,6 @@
 ;; H
   (assert (in_range i))
 
-;; H
-  (assert (to_integer__function_guard (to_integer e) e))
-
-;; H
-  (assert (to_integer__function_guard (to_integer e) e))
-
-;; H
-  (assert (from_integer__function_guard (from_integer (to_integer e))
-  (to_integer e)))
-
 (assert
 ;; WP_parameter_def
  ;; File "use_types_with_invariants_no_spark.adb", line 3, characters 0-0

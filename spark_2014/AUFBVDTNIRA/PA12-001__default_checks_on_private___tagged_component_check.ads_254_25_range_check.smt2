@@ -92,10 +92,8 @@
 ;; hide__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (hide x)))
-     (=> (hide__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((hide x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (hide x)
+     true false true)) :pattern ((hide x)) )))
 
 (declare-fun to_rep (natural) Int)
 
@@ -501,71 +499,52 @@
                                      (<= 0 2147483647)) (in_range
                                      temp___expr_33)))
 
-;; temp___result_532_def
-  (assert (hide__function_guard (hide 34) 34))
-
-(define-fun default_initial_assumption ((temp___expr_530 us_rep)
-  (temp___skip_top_level_531 Bool)) Bool (and
-                                         (= (attr__tag temp___expr_530) 
+(define-fun default_initial_assumption ((temp___expr_476 us_rep)
+  (temp___skip_top_level_477 Bool)) Bool (and
+                                         (= (attr__tag temp___expr_476) 
                                          us_tag)
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p3__root__f
                                             (us_split_fields1
-                                            temp___expr_530))) (hide 34))))
+                                            temp___expr_476))) (hide 34))))
 
-;; temp___result_543_def
-  (assert (hide__function_guard (hide 35) 35))
-
-;; temp___result_544_def
-  (assert (hide__function_guard (hide 34) 34))
-
-(define-fun default_initial_assumption1 ((temp___expr_541 us_rep1)
-  (temp___skip_top_level_542 Bool)) Bool (and
-                                         (= (attr__tag1 temp___expr_541) 
+(define-fun default_initial_assumption1 ((temp___expr_486 us_rep1)
+  (temp___skip_top_level_487 Bool)) Bool (and
+                                         (= (attr__tag1 temp___expr_486) 
                                          us_tag1)
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p3__c__g
                                             (us_split_fields3
-                                            temp___expr_541))) (hide 35))
+                                            temp___expr_486))) (hide 35))
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p3__root__f1
                                             (us_split_fields3
-                                            temp___expr_541))) (hide 34)))))
+                                            temp___expr_486))) (hide 34)))))
 
-;; temp___result_616_def
-  (assert (hide__function_guard (hide 35) 35))
-
-;; temp___result_617_def
-  (assert (hide__function_guard (hide 42) 42))
-
-;; temp___result_618_def
-  (assert (hide__function_guard (hide 34) 34))
-
-(define-fun default_initial_assumption2 ((temp___expr_614 us_rep2)
-  (temp___skip_top_level_615 Bool)) Bool (and
-                                         (= (attr__tag2 temp___expr_614) 
+(define-fun default_initial_assumption2 ((temp___expr_548 us_rep2)
+  (temp___skip_top_level_549 Bool)) Bool (and
+                                         (= (attr__tag2 temp___expr_548) 
                                          us_tag2)
                                          (and
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p3__c__g1
                                             (us_split_fields5
-                                            temp___expr_614))) (hide 35))
+                                            temp___expr_548))) (hide 35))
                                          (= (to_rep
                                             (rec__tagged_component_check__s__d3__h
                                             (us_split_fields5
-                                            temp___expr_614))) (hide 42)))
+                                            temp___expr_548))) (hide 42)))
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p3__root__f2
                                             (us_split_fields5
-                                            temp___expr_614))) (hide 34)))))
+                                            temp___expr_548))) (hide 34)))))
 
 (declare-fun o () Int)
 
 ;; H
-  (assert
-  (and (and (= o (hide 42)) (hide__function_guard o 42)) (in_range1 o)))
+  (assert (and (= o (hide 42)) (in_range1 o)))
 
 (assert
 ;; WP_parameter_def

@@ -920,7 +920,7 @@
 
 (declare-fun o12 () Int)
 
-(declare-fun temp___480 () (Array Int cardindex))
+(declare-fun temp___477 () (Array Int cardindex))
 
 (declare-fun result () Bool)
 
@@ -1150,7 +1150,7 @@
 
 ;; H
   (assert
-  (= temp___480 (select (rec__patience__state__stacks (us_split_fields1 s)) 
+  (= temp___477 (select (rec__patience__state__stacks (us_split_fields1 s)) 
   o12)))
 
 (assert

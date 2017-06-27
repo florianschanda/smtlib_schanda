@@ -144,6 +144,12 @@
 (define-fun p_intT__ref___projection ((a p_intT__ref)) us_rep (p_intT__content
                                                               a))
 
+(define-fun default_initial_assumption ((temp___expr_172 us_rep)
+  (temp___skip_top_level_173 Bool)) Bool (= (to_rep
+                                            (rec__po_t__p_intT__the_protected_int
+                                            (us_split_fields1
+                                            temp___expr_172))) 0))
+
 (define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)
   (temp___do_toplevel_14 Bool)) Bool (=>
@@ -154,9 +160,6 @@
 (declare-fun not_cae () Bool)
 
 (declare-fun self__ () integer)
-
-;; H
-  (assert (get_not_cae__function_guard (get_not_cae not_cae) not_cae))
 
 ;; H
   (assert (= (get_not_cae not_cae) true))

@@ -88,10 +88,8 @@
 ;; init__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (init x)))
-     (=> (init__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((init x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (init x)
+     true false true)) :pattern ((init x)) )))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -223,34 +221,26 @@
 
 (declare-fun mut_discr_ok__function_guard (Bool us_rep) Bool)
 
-;; temp___result_234_def
-  (assert (init__function_guard (init 0) 0))
-
-;; temp___result_236_def
-  (assert
-  (forall ((temp___235 us_rep)) (mut_discr_ok__function_guard
-  (mut_discr_ok temp___235) temp___235)))
-
-(define-fun default_initial_assumption ((temp___expr_231 us_rep)
-  (temp___skip_top_level_232 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_220 us_rep)
+  (temp___skip_top_level_221 Bool)) Bool (and
                                          (and
                                          (= (attr__constrained
-                                            temp___expr_231) false)
+                                            temp___expr_220) false)
                                          (and
                                          (= (rec__default_init__mut_discr__b
                                             (us_split_discrs1
-                                            temp___expr_231)) (of_int 0))
+                                            temp___expr_220)) (of_int 0))
                                          (=>
                                          (default_init__mut_discr__f__pred
-                                         temp___expr_231)
+                                         temp___expr_220)
                                          (= (to_rep
                                             (rec__default_init__mut_discr__f
                                             (us_split_fields1
-                                            temp___expr_231))) (init 0)))))
+                                            temp___expr_220))) (init 0)))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_232 true))
-                                         (= (mut_discr_ok temp___expr_231) true))))
+                                         (= temp___skip_top_level_221 true))
+                                         (= (mut_discr_ok temp___expr_220) true))))
 
 ;; mut_discr_ok__post_axiom
   (assert true)
@@ -258,42 +248,33 @@
 ;; mut_discr_ok__def_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (mut_discr_ok__function_guard (mut_discr_ok x) x)
-     (= (= (mut_discr_ok x) true)
-     (not (= (rec__default_init__mut_discr__b (us_split_discrs1 x)) true)))) :pattern (
+  (! (= (= (mut_discr_ok x) true)
+     (not (= (rec__default_init__mut_discr__b (us_split_discrs1 x)) true))) :pattern (
   (mut_discr_ok x)) )))
 
-(declare-fun temp___336 () Bool)
+(declare-fun temp___296 () Bool)
 
-(declare-fun temp___335 () Bool)
+(declare-fun temp___295 () Bool)
 
-(declare-fun temp___337 () Bool)
+(declare-fun temp___297 () Bool)
 
-(declare-fun temp___3371 () natural)
+(declare-fun temp___2971 () natural)
 
-(declare-fun temp___3372 () Bool)
-
-(define-fun temp___3373 () us_rep (mk___rep (mk___split_discrs temp___337)
-                                  (mk___split_fields temp___3371)
-                                  temp___3372))
+(declare-fun temp___2972 () Bool)
 
 ;; H
-  (assert (= temp___336 temp___335))
-
-;; H
-  (assert (init__function_guard (init 0) 0))
+  (assert (= temp___296 temp___295))
 
 ;; H
   (assert
-  (and (= temp___3372 false)
-  (=> (= (to_int1 temp___337) 1) (= (to_rep temp___3371) (init 0)))))
-
-;; H
-  (assert (mut_discr_ok__function_guard (mut_discr_ok temp___3373)
-  temp___3373))
+  (and (= temp___2972 false)
+  (=> (= (to_int1 temp___297) 1) (= (to_rep temp___2971) (init 0)))))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (= (mut_discr_ok temp___3373) true)))
+  (not
+  (= (mut_discr_ok
+     (mk___rep (mk___split_discrs temp___297) (mk___split_fields temp___2971)
+     temp___2972)) true)))
 (check-sat)

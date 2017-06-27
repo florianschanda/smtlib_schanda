@@ -289,9 +289,8 @@
      (and (dynamic_invariant3 val__ true true true) (dynamic_invariant
      flatness true true true))
      (and (and (<= 0 val__) (< 0 flatness)) (<= flatness 100)))
-     (let ((result (inverse val__ flatness)))
-     (=> (inverse__function_guard result val__ flatness) (dynamic_invariant4
-     result true false true)))) :pattern ((inverse val__ flatness)) )))
+     (dynamic_invariant4 (inverse val__ flatness) true false true)) :pattern (
+  (inverse val__ flatness)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
@@ -366,9 +365,7 @@
   (assert (=> (<= (- 2147483648) 2147483647) (in_range1 gap1)))
 
 ;; H
-  (assert
-  (and (and (= o (inverse mach 20)) (inverse__function_guard o mach 20))
-  (in_range5 o)))
+  (assert (and (= o (inverse mach 20)) (in_range5 o)))
 
 ;; H
   (assert (= (mk_int__ref result) (mk_int__ref k1)))
@@ -380,9 +377,7 @@
   (assert (and (= o1 gap1) (in_range4 gap1)))
 
 ;; H
-  (assert
-  (and (and (= o2 (inverse o1 20)) (inverse__function_guard o2 o1 20))
-  (in_range5 o2)))
+  (assert (and (= o2 (inverse o1 20)) (in_range5 o2)))
 
 ;; H
   (assert (= (mk_int__ref result1) (mk_int__ref k2)))

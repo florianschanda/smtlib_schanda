@@ -141,9 +141,9 @@
   (! (=> (in_range3 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
 
-(declare-sort x_coord 0)
+(declare-sort y_coord 0)
 
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 50)))
 
 (define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -153,30 +153,9 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
 
-(declare-fun user_eq3 (x_coord x_coord) Bool)
+(declare-fun user_eq3 (y_coord y_coord) Bool)
 
-(declare-fun dummy3 () x_coord)
-
-(declare-datatypes ()
-((x_coord__ref (mk_x_coord__ref (x_coord__content x_coord)))))
-(define-fun x_coord__ref___projection ((a x_coord__ref)) x_coord (x_coord__content
-                                                                 a))
-
-(declare-sort y_coord 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 50)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq4 (y_coord y_coord) Bool)
-
-(declare-fun dummy4 () y_coord)
+(declare-fun dummy3 () y_coord)
 
 (declare-datatypes ()
 ((y_coord__ref (mk_y_coord__ref (y_coord__content y_coord)))))
@@ -187,7 +166,7 @@
   (temp___is_init_535 Bool) (temp___skip_constant_536 Bool)
   (temp___do_toplevel_537 Bool)) Bool (=>
                                       (or (= temp___is_init_535 true)
-                                      (<= 1 50)) (in_range5 temp___expr_538)))
+                                      (<= 1 50)) (in_range4 temp___expr_538)))
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int cell))))))
@@ -231,7 +210,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq5 ((a (Array Int cell)) (a__first Int) (a__last Int)
+(define-fun bool_eq4 ((a (Array Int cell)) (a__first Int) (a__last Int)
   (b (Array Int cell)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -250,7 +229,7 @@
   (assert
   (forall ((a (Array Int cell)) (b (Array Int cell)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq5 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq4 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -267,7 +246,7 @@
   (forall ((a (Array Int cell)) (b (Array Int cell)))
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq5 a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq4 a a_first a_last b b_first b_last) true)) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -278,7 +257,7 @@
      (exists ((i Int) (j Int))
      (and (<= i a_last)
      (and (< j b_last)
-     (and (= (bool_eq5 a a_first i b b_first j) true)
+     (and (= (bool_eq4 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
      (< (to_rep (select a (+ i 1))) (to_rep (select b (+ j 1))))))))))) :pattern (
@@ -292,13 +271,13 @@
      (exists ((i Int) (j Int))
      (and (<= i b_last)
      (and (< j a_last)
-     (and (= (bool_eq5 a a_first j b b_first i) true)
+     (and (= (bool_eq4 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
      (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
-(declare-fun dummy5 () (Array Int cell))
+(declare-fun dummy4 () (Array Int cell))
 
 (declare-fun value__size () Int)
 
@@ -330,7 +309,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int cell))) (<= 0 (object__alignment a))))
 
-(declare-fun user_eq5 ((Array Int cell) (Array Int cell)) Bool)
+(declare-fun user_eq4 ((Array Int cell) (Array Int cell)) Bool)
 
 (declare-datatypes ()
 ((map__ref1 (mk_map__ref1 (map__content1 (Array Int (Array Int cell)))))))
@@ -375,7 +354,7 @@
   (forall ((i Int))
   (! (= (select (singleton2 v i) i) v) :pattern ((select (singleton2 v i) i)) ))))
 
-(define-fun bool_eq6 ((a (Array Int (Array Int cell))) (a__first Int)
+(define-fun bool_eq5 ((a (Array Int (Array Int cell))) (a__first Int)
   (a__last Int) (b (Array Int (Array Int cell))) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -386,7 +365,7 @@
                            (=>
                            (and (<= a__first temp___idx_133)
                            (<= temp___idx_133 a__last))
-                           (= (bool_eq5 (select a temp___idx_133) 1 10
+                           (= (bool_eq4 (select a temp___idx_133) 1 10
                               (select b (+ (- b__first a__first) temp___idx_133))
                               1 10) true))))
                       true false))
@@ -395,33 +374,33 @@
   (assert
   (forall ((a (Array Int (Array Int cell))) (b (Array Int (Array Int cell))))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq6 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq5 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
   (forall ((temp___idx_133 Int))
   (=> (and (<= a__first temp___idx_133) (<= temp___idx_133 a__last))
-  (= (bool_eq5 (select a temp___idx_133) 1 10
+  (= (bool_eq4 (select a temp___idx_133) 1 10
      (select b (+ (- b__first a__first) temp___idx_133)) 1 10) true))))))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
 (declare-sort shape 0)
 
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 7)))
+(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 7)))
 
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
 
-(declare-fun user_eq6 (shape shape) Bool)
+(declare-fun user_eq5 (shape shape) Bool)
 
-(declare-fun dummy6 () shape)
+(declare-fun dummy5 () shape)
 
 (declare-datatypes () ((shape__ref (mk_shape__ref (shape__content shape)))))
 (define-fun shape__ref___projection ((a shape__ref)) shape (shape__content a))
@@ -437,29 +416,29 @@
 
 ;; range_axiom
   (assert
-  (forall ((x shape)) (! (in_range6 (to_rep1 x)) :pattern ((to_rep1 x)) )))
+  (forall ((x shape)) (! (in_range5 (to_rep1 x)) :pattern ((to_rep1 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range6 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
+  (! (=> (in_range5 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
                                                               (of_rep1 x))) )))
 
 (declare-sort px_coord 0)
 
-(define-fun in_range7 ((x Int)) Bool (and (<= (- 1) x) (<= x 9)))
+(define-fun in_range6 ((x Int)) Bool (and (<= (- 1) x) (<= x 9)))
 
-(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
 
-(declare-fun user_eq7 (px_coord px_coord) Bool)
+(declare-fun user_eq6 (px_coord px_coord) Bool)
 
-(declare-fun dummy7 () px_coord)
+(declare-fun dummy6 () px_coord)
 
 (declare-datatypes ()
 ((px_coord__ref (mk_px_coord__ref (px_coord__content px_coord)))))
@@ -477,29 +456,29 @@
 
 ;; range_axiom
   (assert
-  (forall ((x px_coord)) (! (in_range7 (to_rep2 x)) :pattern ((to_rep2 x)) )))
+  (forall ((x px_coord)) (! (in_range6 (to_rep2 x)) :pattern ((to_rep2 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range7 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
+  (! (=> (in_range6 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
                                                               (of_rep2 x))) )))
 
 (declare-sort py_coord 0)
 
-(define-fun in_range8 ((x Int)) Bool (and (<= (- 1) x) (<= x 49)))
+(define-fun in_range7 ((x Int)) Bool (and (<= (- 1) x) (<= x 49)))
 
-(define-fun bool_eq9 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
 
-(declare-fun user_eq8 (py_coord py_coord) Bool)
+(declare-fun user_eq7 (py_coord py_coord) Bool)
 
-(declare-fun dummy8 () py_coord)
+(declare-fun dummy7 () py_coord)
 
 (declare-datatypes ()
 ((py_coord__ref (mk_py_coord__ref (py_coord__content py_coord)))))
@@ -517,29 +496,29 @@
 
 ;; range_axiom
   (assert
-  (forall ((x py_coord)) (! (in_range8 (to_rep3 x)) :pattern ((to_rep3 x)) )))
+  (forall ((x py_coord)) (! (in_range7 (to_rep3 x)) :pattern ((to_rep3 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range8 x) (= (to_rep3 (of_rep3 x)) x)) :pattern ((to_rep3
+  (! (=> (in_range7 x) (= (to_rep3 (of_rep3 x)) x)) :pattern ((to_rep3
                                                               (of_rep3 x))) )))
 
 (declare-sort direction 0)
 
-(define-fun in_range9 ((x Int)) Bool (and (<= 0 x) (<= x 3)))
+(define-fun in_range8 ((x Int)) Bool (and (<= 0 x) (<= x 3)))
 
-(define-fun bool_eq10 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq9 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE9 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
 
-(declare-fun user_eq9 (direction direction) Bool)
+(declare-fun user_eq8 (direction direction) Bool)
 
-(declare-fun dummy9 () direction)
+(declare-fun dummy8 () direction)
 
 (declare-datatypes ()
 ((direction__ref (mk_direction__ref (direction__content direction)))))
@@ -557,13 +536,13 @@
 
 ;; range_axiom
   (assert
-  (forall ((x direction)) (! (in_range9
+  (forall ((x direction)) (! (in_range8
   (to_rep4 x)) :pattern ((to_rep4 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range9 x) (= (to_rep4 (of_rep4 x)) x)) :pattern ((to_rep4
+  (! (=> (in_range8 x) (= (to_rep4 (of_rep4 x)) x)) :pattern ((to_rep4
                                                               (of_rep4 x))) )))
 
 (declare-datatypes ()
@@ -593,7 +572,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_fields (us_split_fields1
                                                              a))
 
-(define-fun bool_eq11 ((a us_rep)
+(define-fun bool_eq10 ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (and
                         (and
@@ -619,7 +598,7 @@
                                                   (us_split_fields1 b)))))
                    true false))
 
-(declare-fun user_eq10 (us_rep us_rep) Bool)
+(declare-fun user_eq9 (us_rep us_rep) Bool)
 
 (declare-fun value__size1 () Int)
 
@@ -705,7 +684,7 @@
 ;; tetris_functional__piece__y__position_axiom
   (assert (<= 0 tetris_functional__piece__y__position))
 
-(declare-fun dummy10 () us_rep)
+(declare-fun dummy9 () us_rep)
 
 (declare-datatypes () ((piece__ref (mk_piece__ref (piece__content us_rep)))))
 (define-fun piece__ref___projection ((a piece__ref)) us_rep (piece__content
@@ -715,19 +694,19 @@
 
 (declare-sort state 0)
 
-(define-fun in_range10 ((x Int)) Bool (and (<= 0 x) (<= x 3)))
+(define-fun in_range9 ((x Int)) Bool (and (<= 0 x) (<= x 3)))
 
-(define-fun bool_eq12 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq11 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE10 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE9 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Int)
 
-(declare-fun user_eq11 (state state) Bool)
+(declare-fun user_eq10 (state state) Bool)
 
-(declare-fun dummy11 () state)
+(declare-fun dummy10 () state)
 
 (declare-datatypes () ((state__ref (mk_state__ref (state__content state)))))
 (define-fun state__ref___projection ((a state__ref)) state (state__content a))
@@ -736,7 +715,7 @@
   (temp___is_init_590 Bool) (temp___skip_constant_591 Bool)
   (temp___do_toplevel_592 Bool)) Bool (=>
                                       (or (= temp___is_init_590 true)
-                                      (<= 0 3)) (in_range10 temp___expr_593)))
+                                      (<= 0 3)) (in_range9 temp___expr_593)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
@@ -750,10 +729,9 @@
 ;; is_complete_line__def_axiom
   (assert
   (forall ((l (Array Int cell)))
-  (! (=> (is_complete_line__function_guard (is_complete_line l) l)
-     (= (= (is_complete_line l) true)
+  (! (= (= (is_complete_line l) true)
      (forall ((x Int))
-     (=> (and (<= 1 x) (<= x 10)) (not (= (to_rep (select l x)) 0)))))) :pattern (
+     (=> (and (<= 1 x) (<= x 10)) (not (= (to_rep (select l x)) 0))))) :pattern (
   (is_complete_line l)) )))
 
 (declare-fun is_empty_line ((Array Int cell)) Bool)
@@ -766,10 +744,9 @@
 ;; is_empty_line__def_axiom
   (assert
   (forall ((l (Array Int cell)))
-  (! (=> (is_empty_line__function_guard (is_empty_line l) l)
-     (= (= (is_empty_line l) true)
+  (! (= (= (is_empty_line l) true)
      (forall ((x Int))
-     (=> (and (<= 1 x) (<= x 10)) (= (to_rep (select l x)) 0))))) :pattern (
+     (=> (and (<= 1 x) (<= x 10)) (= (to_rep (select l x)) 0)))) :pattern (
   (is_empty_line l)) )))
 
 (declare-fun no_complete_lines ((Array Int (Array Int cell))) Bool)
@@ -783,15 +760,11 @@
 ;; no_complete_lines__def_axiom
   (assert
   (forall ((b (Array Int (Array Int cell))))
-  (! (=> (no_complete_lines__function_guard (no_complete_lines b) b)
-     (and
-     (forall ((y Int)) (is_complete_line__function_guard
-     (is_complete_line (select b y)) (select b y)))
-     (= (= (no_complete_lines b) true)
+  (! (= (= (no_complete_lines b) true)
      (forall ((y Int))
      (=> (and (<= 1 y) (<= y 50))
-     (not (= (is_complete_line (select b y)) true))))))) :pattern ((no_complete_lines
-                                                                   b)) )))
+     (not (= (is_complete_line (select b y)) true))))) :pattern ((no_complete_lines
+                                                                 b)) )))
 
 (declare-fun valid_configuration ((Array Int (Array Int cell))
   us_split_fields Int) Bool)
@@ -812,20 +785,7 @@
   (forall ((tetris_functional__cur_board (Array Int (Array Int cell))))
   (forall ((tetris_functional__cur_piece__fields us_split_fields))
   (forall ((tetris_functional__cur_state Int))
-  (! (=> (valid_configuration__function_guard
-     (valid_configuration tetris_functional__cur_board
-     tetris_functional__cur_piece__fields tetris_functional__cur_state)
-     tetris_functional__cur_board tetris_functional__cur_piece__fields
-     tetris_functional__cur_state)
-     (and (no_overlap__function_guard
-     (no_overlap tetris_functional__cur_board
-     (mk___rep tetris_functional__cur_piece__fields))
-     tetris_functional__cur_board
-     (mk___rep tetris_functional__cur_piece__fields))
-     (and (no_complete_lines__function_guard
-     (no_complete_lines tetris_functional__cur_board)
-     tetris_functional__cur_board)
-     (=
+  (! (=
      (= (valid_configuration tetris_functional__cur_board
         tetris_functional__cur_piece__fields tetris_functional__cur_state) true)
      (ite (or (= tetris_functional__cur_state 0)
@@ -833,30 +793,11 @@
      (= (no_overlap tetris_functional__cur_board
         (mk___rep tetris_functional__cur_piece__fields)) true)
      (=> (not (= tetris_functional__cur_state 2))
-     (= (no_complete_lines tetris_functional__cur_board) true))))))) :pattern (
+     (= (no_complete_lines tetris_functional__cur_board) true)))) :pattern (
   (valid_configuration tetris_functional__cur_board
   tetris_functional__cur_piece__fields tetris_functional__cur_state)) )))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
-
-(declare-sort t1b 0)
-
-(define-fun in_range11 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq13 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE11 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check11 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE11 (us_image) Int)
-
-(declare-fun user_eq12 (t1b t1b) Bool)
-
-(declare-fun dummy12 () t1b)
-
-(declare-datatypes () ((t1b__ref (mk_t1b__ref (t1b__content t1b)))))
-(define-fun t1b__ref___projection ((a t1b__ref)) t1b (t1b__content a))
 
 (declare-fun empty_line () (Array Int cell))
 
@@ -900,22 +841,20 @@
   (! (=> (in_range1 x) (= (to_rep5 (of_rep5 x)) x)) :pattern ((to_rep5
                                                               (of_rep5 x))) )))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
-(define-fun bool_eq14 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq12 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE12 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE10 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check12 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE12 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) Int)
 
-(declare-fun user_eq13 (integer integer) Bool)
+(declare-fun user_eq11 (integer integer) Bool)
 
-(declare-fun dummy13 () integer)
+(declare-fun dummy11 () integer)
 
 (declare-datatypes () ((t8b__ref (mk_t8b__ref (t8b__content integer)))))
 (define-fun t8b__ref___projection ((a t8b__ref)) integer (t8b__content a))
@@ -937,33 +876,55 @@
   (temp___is_init_517 Bool) (temp___skip_constant_518 Bool)
   (temp___do_toplevel_519 Bool)) Bool (=>
                                       (or (= temp___is_init_517 true)
-                                      (<= 1 7)) (in_range6 temp___expr_520)))
+                                      (<= 1 7)) (in_range5 temp___expr_520)))
+
+(declare-sort x_coord 0)
+
+(define-fun in_range10 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+
+(define-fun bool_eq13 ((x Int) (y Int)) Bool (ite (= x y) true false))
+
+(declare-fun attr__ATTRIBUTE_IMAGE11 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check11 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE11 (us_image) Int)
+
+(declare-fun user_eq12 (x_coord x_coord) Bool)
+
+(declare-fun dummy12 () x_coord)
+
+(declare-datatypes ()
+((x_coord__ref (mk_x_coord__ref (x_coord__content x_coord)))))
+(define-fun x_coord__ref___projection ((a x_coord__ref)) x_coord (x_coord__content
+                                                                 a))
 
 (define-fun dynamic_invariant6 ((temp___expr_532 Int)
   (temp___is_init_529 Bool) (temp___skip_constant_530 Bool)
   (temp___do_toplevel_531 Bool)) Bool (=>
                                       (or (= temp___is_init_529 true)
-                                      (<= 1 10)) (in_range4 temp___expr_532)))
+                                      (<= 1 10)) (in_range10
+                                      temp___expr_532)))
 
 (define-fun dynamic_invariant7 ((temp___expr_565 Int)
   (temp___is_init_562 Bool) (temp___skip_constant_563 Bool)
   (temp___do_toplevel_564 Bool)) Bool (=>
                                       (or (= temp___is_init_562 true)
-                                      (<= (- 1) 9)) (in_range7
+                                      (<= (- 1) 9)) (in_range6
                                       temp___expr_565)))
 
 (define-fun dynamic_invariant8 ((temp___expr_571 Int)
   (temp___is_init_568 Bool) (temp___skip_constant_569 Bool)
   (temp___do_toplevel_570 Bool)) Bool (=>
                                       (or (= temp___is_init_568 true)
-                                      (<= (- 1) 49)) (in_range8
+                                      (<= (- 1) 49)) (in_range7
                                       temp___expr_571)))
 
 (define-fun dynamic_invariant9 ((temp___expr_577 Int)
   (temp___is_init_574 Bool) (temp___skip_constant_575 Bool)
   (temp___do_toplevel_576 Bool)) Bool (=>
                                       (or (= temp___is_init_574 true)
-                                      (<= 0 3)) (in_range9 temp___expr_577)))
+                                      (<= 0 3)) (in_range8 temp___expr_577)))
 
 (declare-sort map1 0)
 
@@ -1005,7 +966,7 @@
   (get a (- i (- new_first old_first)) (- j (- new_first_2 old_first_2)))) :pattern (
   (get (slide2 a old_first new_first old_first_2 new_first_2) i j)) )))))))
 
-(define-fun bool_eq15 ((a map1) (a__first Int) (a__last Int) (a__first_2 Int)
+(define-fun bool_eq14 ((a map1) (a__first Int) (a__last Int) (a__first_2 Int)
   (a__last_2 Int) (b map1) (b__first Int) (b__last Int) (b__first_2 Int)
   (b__last_2 Int)) Bool (ite (and
                              (and
@@ -1036,7 +997,7 @@
   (forall ((a__first Int) (a__last Int) (a__first_2 Int) (a__last_2 Int)
   (b__first Int) (b__last Int) (b__first_2 Int) (b__last_2 Int))
   (=>
-  (= (bool_eq15 b b__first b__last b__first_2 b__last_2 a a__first a__last
+  (= (bool_eq14 b b__first b__last b__first_2 b__last_2 a a__first a__last
      a__first_2 a__last_2) true)
   (and
   (and
@@ -1055,7 +1016,7 @@
                                            (+ (- b__first a__first) temp___idx_134)
                                            (+ (- b__first_2 a__first_2) temp___idx_135))))))))))
 
-(declare-fun dummy14 () map1)
+(declare-fun dummy13 () map1)
 
 (declare-fun value__size2 () Int)
 
@@ -1087,7 +1048,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a map1)) (<= 0 (object__alignment2 a))))
 
-(declare-fun user_eq14 (map1 map1) Bool)
+(declare-fun user_eq13 (map1 map1) Bool)
 
 (declare-datatypes ()
 ((map__ref3 (mk_map__ref3 (map__content3 (Array Int map1))))))
@@ -1131,7 +1092,7 @@
   (forall ((i Int))
   (! (= (select (singleton3 v i) i) v) :pattern ((select (singleton3 v i) i)) ))))
 
-(define-fun bool_eq16 ((a (Array Int map1)) (a__first Int) (a__last Int)
+(define-fun bool_eq15 ((a (Array Int map1)) (a__first Int) (a__last Int)
   (b (Array Int map1)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -1142,7 +1103,7 @@
                            (=>
                            (and (<= a__first temp___idx_136)
                            (<= temp___idx_136 a__last))
-                           (= (bool_eq15 (select a temp___idx_136) 0 3 0 3
+                           (= (bool_eq14 (select a temp___idx_136) 0 3 0 3
                               (select b (+ (- b__first a__first) temp___idx_136))
                               0 3 0 3) true))))
                       true false))
@@ -1151,14 +1112,14 @@
   (assert
   (forall ((a (Array Int map1)) (b (Array Int map1)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq16 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq15 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
   (forall ((temp___idx_136 Int))
   (=> (and (<= a__first temp___idx_136) (<= temp___idx_136 a__last))
-  (= (bool_eq15 (select a temp___idx_136) 0 3 0 3
+  (= (bool_eq14 (select a temp___idx_136) 0 3 0 3
      (select b (+ (- b__first a__first) temp___idx_136)) 0 3 0 3) true))))))))
 
 (declare-fun possible_i_shapes () (Array Int map1))
@@ -1352,7 +1313,7 @@
                        (of_int 0) (of_int 1) (of_int 0) (of_int 0) (of_int 0)
                        (of_int 1) (of_int 0) (of_int 0)))))
 
-(declare-fun dummy15 () map1)
+(declare-fun dummy14 () map1)
 
 (declare-fun value__size3 () Int)
 
@@ -1384,7 +1345,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a map1)) (<= 0 (object__alignment3 a))))
 
-(declare-fun user_eq15 (map1 map1) Bool)
+(declare-fun user_eq14 (map1 map1) Bool)
 
 (declare-sort map2 0)
 
@@ -1426,7 +1387,7 @@
   (get1 a (- i (- new_first old_first)) (- j (- new_first_2 old_first_2)))) :pattern (
   (get1 (slide4 a old_first new_first old_first_2 new_first_2) i j)) )))))))
 
-(define-fun bool_eq17 ((a map2) (a__first Int) (a__last Int) (a__first_2 Int)
+(define-fun bool_eq16 ((a map2) (a__first Int) (a__last Int) (a__first_2 Int)
   (a__last_2 Int) (b map2) (b__first Int) (b__last Int) (b__first_2 Int)
   (b__last_2 Int)) Bool (ite (and
                              (and
@@ -1446,7 +1407,7 @@
                              (<= temp___idx_223 a__last))
                              (and (<= a__first_2 temp___idx_224)
                              (<= temp___idx_224 a__last_2)))
-                             (= (bool_eq15
+                             (= (bool_eq14
                                 (get1 a temp___idx_223 temp___idx_224) 0 2 0
                                 2
                                 (get1 b
@@ -1461,7 +1422,7 @@
   (forall ((a__first Int) (a__last Int) (a__first_2 Int) (a__last_2 Int)
   (b__first Int) (b__last Int) (b__first_2 Int) (b__last_2 Int))
   (=>
-  (= (bool_eq17 b b__first b__last b__first_2 b__last_2 a a__first a__last
+  (= (bool_eq16 b b__first b__last b__first_2 b__last_2 a a__first a__last
      a__first_2 a__last_2) true)
   (and
   (and
@@ -1476,7 +1437,7 @@
   (=>
   (and (and (<= a__first temp___idx_223) (<= temp___idx_223 a__last))
   (and (<= a__first_2 temp___idx_224) (<= temp___idx_224 a__last_2)))
-  (= (bool_eq15 (get1 a temp___idx_223 temp___idx_224) 0 2 0 2
+  (= (bool_eq14 (get1 a temp___idx_223 temp___idx_224) 0 2 0 2
      (get1 b (+ (- b__first a__first) temp___idx_223)
      (+ (- b__first_2 a__first_2) temp___idx_224)) 0 2 0 2) true))))))))
 
@@ -2027,10 +1988,9 @@
   (assert
   (forall ((b (Array Int (Array Int cell))))
   (forall ((y Int) (x Int))
-  (! (=> (is_empty__function_guard (is_empty b y x) b y x)
-     (= (= (is_empty b y x) true)
-     (and (and (in_range4 x) (in_range5 y))
-     (= (to_rep (let ((temp___635 (select b y))) (select temp___635 x))) 0)))) :pattern (
+  (! (= (= (is_empty b y x) true)
+     (and (and (in_range10 x) (in_range4 y))
+     (= (to_rep (let ((temp___635 (select b y))) (select temp___635 x))) 0))) :pattern (
   (is_empty b y x)) ))))
 
 ;; no_overlap__post_axiom
@@ -2040,49 +2000,7 @@
   (assert
   (forall ((b (Array Int (Array Int cell))))
   (forall ((p us_rep))
-  (! (=> (no_overlap__function_guard (no_overlap b p) b p)
-     (and (is_empty__function_guard
-     (is_empty b
-     (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p)))
-     (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p)))) b
-     (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p)))
-     (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))))
-     (and (is_empty__function_guard
-     (is_empty b
-     (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p)))
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) 1))
-     b (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p)))
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) 1))
-     (and (is_empty__function_guard
-     (is_empty b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) 1)
-     (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p)))) b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) 1)
-     (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))))
-     (and (is_empty__function_guard
-     (is_empty b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) 1)
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) 1))
-     b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) 1)
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) 1))
-     (and
-     (forall ((y Int) (x Int)) (is_empty__function_guard
-     (is_empty b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) y)
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) x))
-     b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) y)
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) x)))
-     (and
-     (forall ((y Int) (x Int)) (is_empty__function_guard
-     (is_empty b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) y)
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) x))
-     b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) y)
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) x)))
-     (= (= (no_overlap b p) true)
+  (! (= (= (no_overlap b p) true)
      (ite (= (to_rep1
              (rec__tetris_functional__piece__s (us_split_fields1 p))) 2)
      (and
@@ -2107,10 +2025,10 @@
      (forall ((x Int))
      (=> (and (<= 0 x) (<= x 3))
      (=>
-     (= (let ((temp___663 (select possible_i_shapes (to_rep4
+     (= (let ((temp___650 (select possible_i_shapes (to_rep4
                                                     (rec__tetris_functional__piece__d
                                                     (us_split_fields1 p))))))
-        (get temp___663 y x)) true)
+        (get temp___650 y x)) true)
      (= (is_empty b
         (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) y)
         (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) x)) true))))))
@@ -2119,17 +2037,17 @@
      (forall ((x Int))
      (=> (and (<= 0 x) (<= x 2))
      (=>
-     (= (let ((temp___665 (get1 possible_three_shapes
+     (= (let ((temp___651 (get1 possible_three_shapes
                           (to_rep1
                           (rec__tetris_functional__piece__s
                           (us_split_fields1 p)))
                           (to_rep4
                           (rec__tetris_functional__piece__d
                           (us_split_fields1 p))))))
-        (get temp___665 y x)) true)
+        (get temp___651 y x)) true)
      (= (is_empty b
         (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) y)
-        (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) x)) true)))))))))))))))) :pattern (
+        (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) x)) true))))))))) :pattern (
   (no_overlap b p)) ))))
 
 (declare-fun cur_board () (Array Int (Array Int cell)))
@@ -2154,15 +2072,13 @@
 
 (declare-fun from_line () Int)
 
-(declare-fun tetris_functional__delete_complete_lines__empty_line__assume () (Array Int cell))
+(declare-fun temp___774 () Int)
 
-(declare-fun temp___812 () Int)
+(declare-fun temp___773 () Int)
 
-(declare-fun temp___811 () Int)
+(declare-fun temp___772 () Bool)
 
-(declare-fun temp___810 () Bool)
-
-(declare-fun temp___808 () (Array Int (Array Int cell)))
+(declare-fun temp___770 () (Array Int (Array Int cell)))
 
 (declare-fun o () Bool)
 
@@ -2275,18 +2191,10 @@
 (define-fun cur_board11 () map__ref1 (mk_map__ref1 cur_board))
 
 ;; H
-  (assert (in_range10 cur_state))
+  (assert (in_range9 cur_state))
 
 ;; H
   (assert (=> (<= 0 2147483647) (in_range2 num_deleted)))
-
-;; H
-  (assert (valid_configuration__function_guard
-  (valid_configuration cur_board
-  (mk___split_fields cur_piece__split_fields cur_piece__split_fields1
-  cur_piece__split_fields2 cur_piece__split_fields3) cur_state) cur_board
-  (mk___split_fields cur_piece__split_fields cur_piece__split_fields1
-  cur_piece__split_fields2 cur_piece__split_fields3) cur_state))
 
 ;; H
   (assert
@@ -2297,12 +2205,8 @@
 
 ;; H
   (assert
-  (= tetris_functional__delete_complete_lines__empty_line__assume (tetris_functional__delete_complete_lines__empty_line__aggregate_def
-                                                                  0)))
-
-;; H
-  (assert
-  (= tetris_functional__delete_complete_lines__empty_line__assume empty_line))
+  (= (tetris_functional__delete_complete_lines__empty_line__aggregate_def 0) 
+  empty_line))
 
 ;; H
   (assert (= (mk_int__ref result) (mk_int__ref to_line)))
@@ -2311,23 +2215,13 @@
   (assert (= to_line1 50))
 
 ;; H
-  (assert (in_range5 to_line1))
+  (assert (in_range4 to_line1))
 
 ;; H
   (assert (= (mk_bool__ref result1) (mk_bool__ref has_complete_lines)))
 
 ;; H
   (assert (= has_complete_lines1 (of_int 0)))
-
-;; H
-  (assert
-  (forall ((y Int)) (is_complete_line__function_guard
-  (is_complete_line (select cur_board3 y)) (select cur_board3 y))))
-
-;; H
-  (assert
-  (forall ((y Int)) (is_complete_line__function_guard
-  (is_complete_line (select cur_board3 y)) (select cur_board3 y))))
 
 ;; H
   (assert (= (mk_int__ref result2) (mk_int__ref del_line)))
@@ -2337,27 +2231,25 @@
 
 ;; H
   (assert
-  (=> (and (<= 1 del_line1) (<= del_line1 50)) (= temp___812 to_line1)))
+  (=> (and (<= 1 del_line1) (<= del_line1 50)) (= temp___774 to_line1)))
 
 ;; H
   (assert
-  (=> (and (<= 1 del_line1) (<= del_line1 50)) (= temp___811 del_line1)))
-
-;; H
-  (assert
-  (=> (and (<= 1 del_line1) (<= del_line1 50))
-  (= temp___810 has_complete_lines1)))
-
-;; H
-  (assert
-  (=> (and (<= 1 del_line1) (<= del_line1 50)) (= temp___808 cur_board)))
+  (=> (and (<= 1 del_line1) (<= del_line1 50)) (= temp___773 del_line1)))
 
 ;; H
   (assert
   (=> (and (<= 1 del_line1) (<= del_line1 50))
-  (and
+  (= temp___772 has_complete_lines1)))
+
+;; H
+  (assert
+  (=> (and (<= 1 del_line1) (<= del_line1 50)) (= temp___770 cur_board)))
+
+;; H
+  (assert
+  (=> (and (<= 1 del_line1) (<= del_line1 50))
   (and (= result3 (is_complete_line (select cur_board del_line1)))
-  (is_complete_line__function_guard result3 (select cur_board del_line1)))
   (= (= result3 true)
   (forall ((x Int))
   (=> (and (<= 1 x) (<= x 10))
@@ -2442,11 +2334,11 @@
   (and
   (and
   (and
-  (forall ((temp___809 Int))
-  (=> (and (<= 1 temp___809) (<= temp___809 50))
-  (=> (< del_line2 temp___809)
-  (= (select cur_board3 temp___809) (select temp___808 temp___809)))))
-  (=> (<= 1 50) (in_range5 del_line2))) (=> (<= 1 50) (in_range5 to_line3)))
+  (forall ((temp___771 Int))
+  (=> (and (<= 1 temp___771) (<= temp___771 50))
+  (=> (< del_line2 temp___771)
+  (= (select cur_board3 temp___771) (select temp___770 temp___771)))))
+  (=> (<= 1 50) (in_range4 del_line2))) (=> (<= 1 50) (in_range4 to_line3)))
   (and (<= 1 del_line2) (<= del_line2 50)))))
 
 ;; H
@@ -2589,10 +2481,6 @@
   (assert (<= from_line1 r7b))
 
 ;; H
-  (assert (no_complete_lines__function_guard (no_complete_lines cur_board8)
-  cur_board8))
-
-;; H
   (assert (= (no_complete_lines cur_board8) true))
 
 ;; H
@@ -2608,14 +2496,12 @@
   (and
   (and (=> (<= 0 2147483647) (in_range2 num_deleted2))
   (=> (<= 1 r7b) (dynamic_property 1 r7b from_line2)))
-  (=> (<= 1 50) (in_range5 to_line8)))
+  (=> (<= 1 50) (in_range4 to_line8)))
   (and (<= 1 from_line2) (<= from_line2 r7b))))
 
 ;; H
   (assert
-  (and
   (and (= o (is_empty_line (select cur_board8 from_line2)))
-  (is_empty_line__function_guard o (select cur_board8 from_line2)))
   (= (= o true)
   (forall ((x Int))
   (=> (and (<= 1 x) (<= x 10))
@@ -2641,7 +2527,7 @@
   (assert (= cur_board10 (store cur_board9 from_line2 empty_line)))
 
 ;; H
-  (assert (and (= o1 (- to_line8 1)) (in_range5 (- to_line8 1))))
+  (assert (and (= o1 (- to_line8 1)) (in_range4 (- to_line8 1))))
 
 ;; H
   (assert (= result12 (mk_int__ref to_line8)))

@@ -847,19 +847,14 @@
 ;; length_with_padding__post_axiom
   (assert
   (forall ((length2 Int))
-  (! (=> (dynamic_invariant3 length2 true true true)
-     (let ((result (length_with_padding length2)))
-     (=> (length_with_padding__function_guard result length2)
-     (dynamic_invariant3 result true false true)))) :pattern ((length_with_padding
-                                                              length2)) )))
+  (! (=> (dynamic_invariant3 length2 true true true) (dynamic_invariant3
+     (length_with_padding length2) true false true)) :pattern ((length_with_padding
+                                                               length2)) )))
 
 ;; length_with_padding__def_axiom
   (assert
   (forall ((length2 Int))
-  (! (=>
-     (and (dynamic_invariant3 length2 true true true)
-     (length_with_padding__function_guard (length_with_padding length2)
-     length2))
+  (! (=> (dynamic_invariant3 length2 true true true)
      (= (length_with_padding length2) (+ length2 (ite (= (mod1 length2 4) 0)
                                                  0 (- 4 (mod1 length2 4)))))) :pattern (
   (length_with_padding length2)) )))
@@ -879,8 +874,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
-
-(declare-fun last4 () Int)
 
 (define-fun dynamic_property2 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -907,7 +900,7 @@
 
 (declare-fun first4 (t2) integer)
 
-(declare-fun last5 (t2) integer)
+(declare-fun last4 (t2) integer)
 
 (declare-fun mk2 (Int Int) t2)
 
@@ -917,7 +910,7 @@
   (! (=> (in_range1 f)
      (=> (in_range1 l)
      (and (= (to_rep1 (first4 (mk2 f l))) f)
-     (= (to_rep1 (last5 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
+     (= (to_rep1 (last4 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
 
 (define-fun dynamic_property3 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -934,10 +927,10 @@
 
 (define-fun first5 ((a us_t2)) Int (to_rep1 (first4 (rt2 a))))
 
-(define-fun last6 ((a us_t2)) Int (to_rep1 (last5 (rt2 a))))
+(define-fun last5 ((a us_t2)) Int (to_rep1 (last4 (rt2 a))))
 
-(define-fun length2 ((a us_t2)) Int (ite (<= (first5 a) (last6 a))
-                                    (+ (- (last6 a) (first5 a)) 1) 0))
+(define-fun length2 ((a us_t2)) Int (ite (<= (first5 a) (last5 a))
+                                    (+ (- (last5 a) (first5 a)) 1) 0))
 
 (declare-fun value__size2 () Int)
 
@@ -972,8 +965,8 @@
 
 (define-fun bool_eq12 ((x us_t2)
   (y us_t2)) Bool (bool_eq9 (elts2 x) (to_rep1 (first4 (rt2 x)))
-                  (to_rep1 (last5 (rt2 x))) (elts2 y)
-                  (to_rep1 (first4 (rt2 y))) (to_rep1 (last5 (rt2 y)))))
+                  (to_rep1 (last4 (rt2 x))) (elts2 y)
+                  (to_rep1 (first4 (rt2 y))) (to_rep1 (last4 (rt2 y)))))
 
 (declare-fun user_eq10 (us_t2 us_t2) Bool)
 
@@ -985,16 +978,16 @@
 (define-fun ttemporary_arrayS__ref___projection ((a ttemporary_arrayS__ref)) us_t2 
   (ttemporary_arrayS__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_366 us_t2)
-  (temp___is_init_363 Bool) (temp___skip_constant_364 Bool)
-  (temp___do_toplevel_365 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_364 true))
+(define-fun dynamic_invariant4 ((temp___expr_358 us_t2)
+  (temp___is_init_355 Bool) (temp___skip_constant_356 Bool)
+  (temp___do_toplevel_357 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_356 true))
                                       (and (dynamic_property3 0
                                       (- (length value) 1)
-                                      (first5 temp___expr_366)
-                                      (last6 temp___expr_366))
-                                      (and (= (first5 temp___expr_366) 0)
-                                      (= (last6 temp___expr_366) (- (length
+                                      (first5 temp___expr_358)
+                                      (last5 temp___expr_358))
+                                      (and (= (first5 temp___expr_358) 0)
+                                      (= (last5 temp___expr_358) (- (length
                                                                     value) 1))))))
 
 (declare-fun temporary_array__first () integer)
@@ -1002,8 +995,6 @@
 (declare-fun temporary_array__last () integer)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
-
-(declare-fun last7 () Int)
 
 (define-fun dynamic_property4 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -1027,7 +1018,7 @@
 
 (declare-fun first6 (t3) integer)
 
-(declare-fun last8 (t3) integer)
+(declare-fun last6 (t3) integer)
 
 (declare-fun mk3 (Int Int) t3)
 
@@ -1037,7 +1028,7 @@
   (! (=> (in_range1 f)
      (=> (in_range1 l)
      (and (= (to_rep1 (first6 (mk3 f l))) f)
-     (= (to_rep1 (last8 (mk3 f l))) l)))) :pattern ((mk3 f l)) )))
+     (= (to_rep1 (last6 (mk3 f l))) l)))) :pattern ((mk3 f l)) )))
 
 (define-fun dynamic_property5 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -1054,10 +1045,10 @@
 
 (define-fun first7 ((a us_t3)) Int (to_rep1 (first6 (rt3 a))))
 
-(define-fun last9 ((a us_t3)) Int (to_rep1 (last8 (rt3 a))))
+(define-fun last7 ((a us_t3)) Int (to_rep1 (last6 (rt3 a))))
 
-(define-fun length3 ((a us_t3)) Int (ite (<= (first7 a) (last9 a))
-                                    (+ (- (last9 a) (first7 a)) 1) 0))
+(define-fun length3 ((a us_t3)) Int (ite (<= (first7 a) (last7 a))
+                                    (+ (- (last7 a) (first7 a)) 1) 0))
 
 (declare-fun value__size3 () Int)
 
@@ -1092,8 +1083,8 @@
 
 (define-fun bool_eq14 ((x us_t3)
   (y us_t3)) Bool (bool_eq9 (elts3 x) (to_rep1 (first6 (rt3 x)))
-                  (to_rep1 (last8 (rt3 x))) (elts3 y)
-                  (to_rep1 (first6 (rt3 y))) (to_rep1 (last8 (rt3 y)))))
+                  (to_rep1 (last6 (rt3 x))) (elts3 y)
+                  (to_rep1 (first6 (rt3 y))) (to_rep1 (last6 (rt3 y)))))
 
 (declare-fun user_eq12 (us_t3 us_t3) Bool)
 
@@ -1104,18 +1095,18 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
 
-(declare-fun temp___509 ((_ BitVec 8) Int Int) us_t3)
+(declare-fun temp___499 ((_ BitVec 8) Int Int) us_t3)
 
 ;; def_axiom
   (assert
-  (forall ((temp___511 (_ BitVec 8)))
-  (forall ((temp___512 Int) (temp___513 Int))
-  (let ((temp___510 (temp___509 temp___511 temp___512 temp___513)))
+  (forall ((temp___501 (_ BitVec 8)))
+  (forall ((temp___502 Int) (temp___503 Int))
+  (let ((temp___500 (temp___499 temp___501 temp___502 temp___503)))
   (and
-  (=> (dynamic_property1 0 65535 temp___512 temp___513)
-  (and (= (first7 temp___510) temp___512) (= (last9 temp___510) temp___513)))
-  (forall ((temp___514 Int))
-  (= (select (to_array3 temp___510) temp___514) (of_rep2 temp___511))))))))
+  (=> (dynamic_property1 0 65535 temp___502 temp___503)
+  (and (= (first7 temp___500) temp___502) (= (last7 temp___500) temp___503)))
+  (forall ((temp___504 Int))
+  (= (select (to_array3 temp___500) temp___504) (of_rep2 temp___501))))))))
 
 (define-fun dynamic_invariant5 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -1149,19 +1140,19 @@
                                       (first3 temp___expr_190)
                                       (last3 temp___expr_190))))
 
-(declare-fun last10 () Int)
+(declare-fun last8 () Int)
 
 (declare-fun temporary_array () (Array Int octet))
 
 (declare-fun i () Int)
 
-(declare-fun temp___516 () (Array Int octet))
+(declare-fun temp___506 () (Array Int octet))
 
-(declare-fun temp___5161 () t3)
+(declare-fun temp___5061 () t3)
 
-(declare-fun temp___517 () (Array Int octet))
+(declare-fun temp___507 () (Array Int octet))
 
-(declare-fun temp___5171 () t2)
+(declare-fun temp___5071 () t2)
 
 (declare-fun o () (Array Int octet))
 
@@ -1169,9 +1160,9 @@
 
 (declare-fun o2 () (Array Int octet))
 
-(declare-fun temp___520 () (Array Int octet))
+(declare-fun temp___510 () (Array Int octet))
 
-(declare-fun temp___518 () Int)
+(declare-fun temp___508 () Int)
 
 (declare-fun o3 () octet)
 
@@ -1213,11 +1204,11 @@
 
 (declare-fun data () (Array Int octet))
 
-(declare-fun last11 () Int)
+(declare-fun last9 () Int)
 
 (declare-fun data1 () (Array Int octet))
 
-(declare-fun last12 () Int)
+(declare-fun last10 () Int)
 
 (declare-fun temporary_array8 () (Array Int octet))
 
@@ -1225,7 +1216,7 @@
 
 (declare-fun data2 () (Array Int octet))
 
-(declare-fun last13 () Int)
+(declare-fun last11 () Int)
 
 (declare-fun temporary_array9 () (Array Int octet))
 
@@ -1234,30 +1225,6 @@
 (define-fun i9 () int__ref (mk_int__ref i5))
 
 (define-fun temporary_array10 () map__ref1 (mk_map__ref1 temporary_array6))
-
-;; H
-  (assert (length_with_padding__function_guard
-  (length_with_padding (length value)) (length value)))
-
-;; H
-  (assert (length_with_padding__function_guard
-  (length_with_padding
-  (length1
-  (mk___t1 temporary_array6
-  (mk1 (to_rep1 temporary_array__first) (to_rep1 temporary_array__last)))))
-  (length1
-  (mk___t1 temporary_array6
-  (mk1 (to_rep1 temporary_array__first) (to_rep1 temporary_array__last))))))
-
-;; H
-  (assert (length_with_padding__function_guard
-  (length_with_padding
-  (length1
-  (mk___t1 temporary_array6
-  (mk1 (to_rep1 temporary_array__first) (to_rep1 temporary_array__last)))))
-  (length1
-  (mk___t1 temporary_array6
-  (mk1 (to_rep1 temporary_array__first) (to_rep1 temporary_array__last))))))
 
 ;; H
   (assert (dynamic_invariant value true false true))
@@ -1270,7 +1237,7 @@
   (assert (in_range4 position))
 
 ;; H
-  (assert (=> (<= (- 1) 65535) (in_range5 last10)))
+  (assert (=> (<= (- 1) 65535) (in_range5 last8)))
 
 ;; H
   (assert
@@ -1299,37 +1266,37 @@
 ;; H
   (assert
   (= (to_rep1
-     (first6 (rt3 (temp___509 ((_ int2bv 8) 0) 0 (- (length value) 1))))) 0))
+     (first6 (rt3 (temp___499 ((_ int2bv 8) 0) 0 (- (length value) 1))))) 0))
 
 ;; H
   (assert
   (= (to_rep1
-     (last8 (rt3 (temp___509 ((_ int2bv 8) 0) 0 (- (length value) 1))))) (- 
+     (last6 (rt3 (temp___499 ((_ int2bv 8) 0) 0 (- (length value) 1))))) (- 
   (length value) 1)))
 
 ;; H
   (assert
-  (= (mk___t3 temp___516 temp___5161) (temp___509 ((_ int2bv 8) 0) 0
+  (= (mk___t3 temp___506 temp___5061) (temp___499 ((_ int2bv 8) 0) 0
                                       (- (length value) 1))))
 
 ;; H
   (assert
-  (= (ite (<= (to_rep1 (first6 temp___5161)) (to_rep1 (last8 temp___5161)))
-     (+ (- (to_rep1 (last8 temp___5161)) (to_rep1 (first6 temp___5161))) 1)
+  (= (ite (<= (to_rep1 (first6 temp___5061)) (to_rep1 (last6 temp___5061)))
+     (+ (- (to_rep1 (last6 temp___5061)) (to_rep1 (first6 temp___5061))) 1)
      0) (ite (<= 0 (- (length value) 1)) (+ (- (- (length value) 1) 0) 1) 0)))
 
 ;; H
-  (assert (= temp___516 temp___517))
+  (assert (= temp___506 temp___507))
 
 ;; H
   (assert
-  (= (mk2 (to_rep1 (first6 temp___5161)) (to_rep1 (last8 temp___5161))) 
-  temp___5171))
+  (= (mk2 (to_rep1 (first6 temp___5061)) (to_rep1 (last6 temp___5061))) 
+  temp___5071))
 
 ;; H
   (assert
-  (= (ite (<= (to_rep1 (first4 temp___5171)) (to_rep1 (last5 temp___5171)))
-     (+ (- (to_rep1 (last5 temp___5171)) (to_rep1 (first4 temp___5171))) 1)
+  (= (ite (<= (to_rep1 (first4 temp___5071)) (to_rep1 (last4 temp___5071)))
+     (+ (- (to_rep1 (last4 temp___5071)) (to_rep1 (first4 temp___5071))) 1)
      0) (ite (<= (to_rep1 temporary_array__first) (to_rep1
                                                   temporary_array__last))
         (+ (- (to_rep1 temporary_array__last) (to_rep1
@@ -1337,7 +1304,7 @@
         0)))
 
 ;; H
-  (assert (= (mk___t2 o o1) (mk___t2 temp___517 temp___5171)))
+  (assert (= (mk___t2 o o1) (mk___t2 temp___507 temp___5071)))
 
 ;; H
   (assert (= o2 o))
@@ -1358,7 +1325,7 @@
   (assert
   (=>
   (and (<= (to_rep1 (first (rt value))) i1)
-  (<= i1 (to_rep1 (last (rt value))))) (= temp___520 temporary_array1)))
+  (<= i1 (to_rep1 (last (rt value))))) (= temp___510 temporary_array1)))
 
 ;; H
   (assert
@@ -1380,7 +1347,7 @@
   (=>
   (and (<= (to_rep1 (first (rt value))) i1)
   (<= i1 (to_rep1 (last (rt value)))))
-  (and (= temp___518 (- i2 (to_rep1 (first (rt value))))) (in_range1
+  (and (= temp___508 (- i2 (to_rep1 (first (rt value))))) (in_range1
   (- i2 (to_rep1 (first (rt value))))))))
 
 ;; H
@@ -1388,14 +1355,14 @@
   (=>
   (and (<= (to_rep1 (first (rt value))) i1)
   (<= i1 (to_rep1 (last (rt value)))))
-  (and (<= (to_rep1 temporary_array__first) temp___518)
-  (<= temp___518 (to_rep1 temporary_array__last)))))
+  (and (<= (to_rep1 temporary_array__first) temp___508)
+  (<= temp___508 (to_rep1 temporary_array__last)))))
 
 ;; H
   (assert
   (=>
   (and (<= (to_rep1 (first (rt value))) i1)
-  (<= i1 (to_rep1 (last (rt value))))) (= o4 temp___518)))
+  (<= i1 (to_rep1 (last (rt value))))) (= o4 temp___508)))
 
 ;; H
   (assert
@@ -1504,12 +1471,12 @@
 ;; H
   (assert
   (and
-  (= last11 (+ position (- (length_with_padding
-                           (length1
-                           (mk___t1 temporary_array6
-                           (mk1 (to_rep1 temporary_array__first)
-                           (to_rep1 temporary_array__last))))) 1)))
-  (in_range5 last11)))
+  (= last9 (+ position (- (length_with_padding
+                          (length1
+                          (mk___t1 temporary_array6
+                          (mk1 (to_rep1 temporary_array__first)
+                          (to_rep1 temporary_array__last))))) 1)))
+  (in_range5 last9)))
 
 ;; H
   (assert (= (mk_int__ref i7) i9))
@@ -1518,7 +1485,7 @@
   (assert (= (mk_map__ref1 temporary_array8) temporary_array10))
 
 ;; H
-  (assert (= last11 last12))
+  (assert (= last9 last10))
 
 ;; H
   (assert (= data data1))
@@ -1530,17 +1497,13 @@
   (assert (= temporary_array9 temporary_array7))
 
 ;; H
-  (assert (= last13 last11))
+  (assert (= last11 last9))
 
 ;; H
   (assert (= data2 data))
 
-;; H
-  (assert (length_with_padding__function_guard
-  (length_with_padding (length value)) (length value)))
-
 (assert
 ;; WP_parameter_def
  ;; File "cubedos-lib-xdr.ads", line 138, characters 0-0
-  (not (= last12 (+ position (- (length_with_padding (length value)) 1)))))
+  (not (= last10 (+ position (- (length_with_padding (length value)) 1)))))
 (check-sat)

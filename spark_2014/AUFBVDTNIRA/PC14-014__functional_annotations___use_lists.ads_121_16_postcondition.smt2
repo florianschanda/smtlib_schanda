@@ -730,24 +730,18 @@
                                                             witness1)) ))))
 
 ;; H
-  (assert (forall ((e Int)) (prop____function_guard (prop__ e) e)))
-
-;; H
   (assert
-  (let ((temp___586 (model__ l)))
-  (forall ((temp___585 Int))
+  (let ((temp___565 (model__ l)))
+  (forall ((temp___564 Int))
   (=>
-  (and (in_range2 temp___585)
-  (= (iter_has_element temp___586 temp___585) true))
-  (= (prop__ (get temp___586 temp___585)) true)))))
+  (and (in_range2 temp___564)
+  (= (iter_has_element temp___565 temp___564) true))
+  (= (prop__ (get temp___565 temp___564)) true)))))
 
 (declare-fun cu () us_rep1)
 
 ;; H
   (assert (= (has_key (positions l) cu) true))
-
-;; H
-  (assert (prop____function_guard (prop__ (element l cu)) (element l cu)))
 
 (assert
 ;; WP_parameter_def

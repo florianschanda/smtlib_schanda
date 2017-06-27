@@ -406,10 +406,6 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -430,9 +426,9 @@
 
 (declare-sort t1 0)
 
-(declare-fun first3 (t1) integer)
+(declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -441,7 +437,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep (first3 (mk1 f l))) f) (= (to_rep (last3 (mk1 f l))) l)))) :pattern (
+     (and (= (to_rep (first2 (mk1 f l))) f) (= (to_rep (last2 (mk1 f l))) l)))) :pattern (
   (mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
@@ -458,12 +454,12 @@
 (define-fun of_array1 ((a (Array Int integer)) (f Int)
   (l Int)) us_t1 (mk___t1 a (mk1 f l)))
 
-(define-fun first4 ((a us_t1)) Int (to_rep (first3 (rt1 a))))
+(define-fun first3 ((a us_t1)) Int (to_rep (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first4 a) (last4 a))
-                                    (+ (- (last4 a) (first4 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size2 () Int)
 
@@ -497,9 +493,9 @@
   (assert (forall ((a (Array Int integer))) (<= 0 (object__alignment2 a))))
 
 (define-fun bool_eq6 ((x us_t1)
-  (y us_t1)) Bool (bool_eq2 (elts1 x) (to_rep (first3 (rt1 x)))
-                  (to_rep (last3 (rt1 x))) (elts1 y)
-                  (to_rep (first3 (rt1 y))) (to_rep (last3 (rt1 y)))))
+  (y us_t1)) Bool (bool_eq2 (elts1 x) (to_rep (first2 (rt1 x)))
+                  (to_rep (last2 (rt1 x))) (elts1 y)
+                  (to_rep (first2 (rt1 y))) (to_rep (last2 (rt1 y)))))
 
 (declare-fun user_eq5 (us_t1 us_t1) Bool)
 
@@ -515,12 +511,11 @@
   (assert
   (forall ((a us_t) (b us_t))
   (forall ((j Int))
-  (! (=> (equal_subrange__function_guard (equal_subrange a j b) a j b)
-     (= (= (equal_subrange a j b) true)
+  (! (= (= (equal_subrange a j b) true)
      (= (let ((temp___153 (let ((temp___152 (+ (- j 1) (length b))))
                           (of_array1 (to_array a) j temp___152))))
-        (bool_eq2 (to_array1 temp___153) (first4 temp___153)
-        (last4 temp___153) (to_array b) (first1 b) (last1 b))) true))) :pattern (
+        (bool_eq2 (to_array1 temp___153) (first3 temp___153)
+        (last3 temp___153) (to_array b) (first1 b) (last1 b))) true)) :pattern (
   (equal_subrange a j b)) ))))
 
 (declare-fun has_sub_range_in_prefix (us_t Int us_t) Bool)
@@ -534,17 +529,12 @@
 ;; has_sub_range_in_prefix__def_axiom
   (assert
   (forall ((a us_t) (b us_t))
-  (forall ((last5 Int))
-  (! (=> (has_sub_range_in_prefix__function_guard
-     (has_sub_range_in_prefix a last5 b) a last5 b)
-     (and
-     (forall ((j Int)) (equal_subrange__function_guard (equal_subrange a j b)
-     a j b))
-     (= (= (has_sub_range_in_prefix a last5 b) true)
+  (forall ((last4 Int))
+  (! (= (= (has_sub_range_in_prefix a last4 b) true)
      (exists ((j Int))
-     (and (and (<= (first1 a) j) (<= j last5))
-     (= (equal_subrange a j b) true)))))) :pattern ((has_sub_range_in_prefix
-                                                    a last5 b)) ))))
+     (and (and (<= (first1 a) j) (<= j last4))
+     (= (equal_subrange a j b) true)))) :pattern ((has_sub_range_in_prefix a
+                                                  last4 b)) ))))
 
 (declare-fun has_sub_range (us_t us_t) Bool)
 
@@ -556,12 +546,8 @@
 ;; has_sub_range__def_axiom
   (assert
   (forall ((a us_t) (b us_t))
-  (! (=> (has_sub_range__function_guard (has_sub_range a b) a b)
-     (and (has_sub_range_in_prefix__function_guard
-     (has_sub_range_in_prefix a (- (+ (last1 a) 1) (length b)) b) a
-     (- (+ (last1 a) 1) (length b)) b)
-     (= (= (has_sub_range a b) true)
-     (= (has_sub_range_in_prefix a (- (+ (last1 a) 1) (length b)) b) true)))) :pattern (
+  (! (= (= (has_sub_range a b) true)
+     (= (has_sub_range_in_prefix a (- (+ (last1 a) 1) (length b)) b) true)) :pattern (
   (has_sub_range a b)) )))
 
 (declare-fun a () us_t)
@@ -573,10 +559,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
-
-(declare-fun first5 () Int)
-
-(declare-fun last5 () Int)
 
 (define-fun dynamic_property3 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -625,7 +607,7 @@
 
 (declare-fun search_ter_p__search__result__assume1 () integer)
 
-(declare-fun temp___215 () Int)
+(declare-fun temp___203 () Int)
 
 (declare-fun o3 () Int)
 
@@ -633,15 +615,15 @@
 
 (declare-fun o5 () Int)
 
-(declare-fun temp___216 () Int)
+(declare-fun temp___204 () Int)
 
-(declare-fun temp___212 () Bool)
+(declare-fun temp___201 () Bool)
 
-(declare-fun temp___2121 () integer)
+(declare-fun temp___2011 () integer)
 
-(declare-fun temp___211 () Int)
+(declare-fun temp___200 () Int)
 
-(declare-fun temp___214 () Int)
+(declare-fun temp___202 () Int)
 
 (declare-fun o6 () integer)
 
@@ -649,9 +631,9 @@
 
 (declare-fun o8 () integer)
 
-(declare-fun temp___210 () Bool)
+(declare-fun temp___199 () Bool)
 
-(declare-fun temp___2101 () integer)
+(declare-fun temp___1991 () integer)
 
 (declare-fun o9 () integer)
 
@@ -659,9 +641,9 @@
 
 (declare-fun o11 () integer)
 
-(declare-fun temp___2102 () Bool)
+(declare-fun temp___1992 () Bool)
 
-(declare-fun temp___2103 () integer)
+(declare-fun temp___1993 () integer)
 
 (declare-fun i1 () Int)
 
@@ -685,7 +667,7 @@
 
 (declare-fun i2 () Int)
 
-(declare-fun temp___2141 () Int)
+(declare-fun temp___2021 () Int)
 
 (declare-fun result5 () Bool)
 
@@ -707,11 +689,11 @@
 
 (declare-fun search_ter_p__search__result6 () us_rep)
 
-(declare-fun temp___2142 () Int)
+(declare-fun temp___2022 () Int)
 
 (declare-fun result9 () int__ref)
 
-(declare-fun temp___2143 () Int)
+(declare-fun temp___2023 () Int)
 
 (declare-fun result10 () int__ref)
 
@@ -737,7 +719,7 @@
 
 (declare-fun search_ter_p__search__result8 () option__ref)
 
-(declare-fun temp___2144 () int__ref)
+(declare-fun temp___2024 () int__ref)
 
 (declare-fun result____split_fields9 () us_split_fields)
 
@@ -745,7 +727,7 @@
 
 (declare-fun search_ter_p__search__result9 () us_rep)
 
-(declare-fun temp___2145 () Int)
+(declare-fun temp___2025 () Int)
 
 (declare-fun result____split_fields10 () us_split_fields__ref)
 
@@ -829,14 +811,6 @@
   (<= (to_rep (first (rt b))) (to_rep (last (rt b))))))
 
 ;; H
-  (assert (has_sub_range_in_prefix__function_guard
-  (has_sub_range_in_prefix a i3 b) a i3 b))
-
-;; H
-  (assert (has_sub_range_in_prefix__function_guard
-  (has_sub_range_in_prefix a i3 b) a i3 b))
-
-;; H
   (assert (= (to_rep o) 1))
 
 ;; H
@@ -914,38 +888,36 @@
   (and (= i11 i5) (= result____split_fields14 result____split_fields8)))
   (and (= search_ter_p__search__result18 search_ter_p__search__result9)
   (and (= i12 i6) (= result____split_fields15 result____split_fields9))))
-  (and (= temp___215 (to_rep (first (rt a))))
+  (and (= temp___203 (to_rep (first (rt a))))
   (and
   (and
   (and (and (= o3 (length b)) (in_range1 (length b)))
   (and
   (and (= o4 (+ (to_rep (last (rt a))) 1)) (in_range1
   (+ (to_rep (last (rt a))) 1))) (= o5 (- o4 o3))))
-  (and (= temp___216 o5) (in_range1 o5)))
-  (and (and (= result4 i17) (= i2 temp___215))
-  (and (and (<= temp___215 i2) (<= i2 temp___216))
-  (and (= result____split_fields2 (mk___split_fields temp___212 temp___2121))
-  (and (= temp___211 i2)
-  (and (= 0 temp___214)
+  (and (= temp___204 o5) (in_range1 o5)))
+  (and (and (= result4 i17) (= i2 temp___203))
+  (and (and (<= temp___203 i2) (<= i2 temp___204))
+  (and (= result____split_fields2 (mk___split_fields temp___201 temp___2011))
+  (and (= temp___200 i2)
+  (and (= 0 temp___202)
   (or
   (and
   (and
-  (and (= temp___2144 (mk_int__ref temp___214))
+  (and (= temp___2024 (mk_int__ref temp___202))
   (and
   (= search_ter_p__search__result8 (mk_option__ref
                                    search_ter_p__search__result5))
   (and (= i5 (mk_int__ref i2))
   (= result____split_fields8 (mk___split_fields__ref result____split_fields4)))))
-  (and (= temp___2145 temp___2141)
+  (and (= temp___2025 temp___2021)
   (and (= search_ter_p__search__result9 search_ter_p__search__result5)
   (and (= i6 i2) (= result____split_fields9 result____split_fields4)))))
   (and
-  (and
-  (and (= result5 (equal_subrange a i2 b)) (equal_subrange__function_guard
-  result5 a i2 b))
+  (and (= result5 (equal_subrange a i2 b))
   (= (= result5 true)
-  (= (bool_eq2 (elts a) (to_rep (first3 (mk1 i2 (+ (- i2 1) (length b)))))
-     (to_rep (last3 (mk1 i2 (+ (- i2 1) (length b))))) (elts b)
+  (= (bool_eq2 (elts a) (to_rep (first2 (mk1 i2 (+ (- i2 1) (length b)))))
+     (to_rep (last2 (mk1 i2 (+ (- i2 1) (length b))))) (elts b)
      (to_rep (first (rt b))) (to_rep (last (rt b)))) true)))
   (and (= result5 true)
   (and
@@ -958,32 +930,30 @@
   (and
   (and (= (to_rep o6) i2)
   (and (= (rec__types__option__exists result____split_fields3) o7) (= o6 o8)))
-  (and (= temp___210 o7) (= temp___2101 o8)))
+  (and (= temp___199 o7) (= temp___1991 o8)))
   (and (= result7 (mk___split_fields__ref result____split_fields3))
-  (= result____split_fields4 (mk___split_fields temp___210 temp___2101))))
+  (= result____split_fields4 (mk___split_fields temp___199 temp___1991))))
   (and (= result8 (mk_option__ref search_ter_p__search__result4))
   (= search_ter_p__search__result5 (mk___rep result____split_fields4))))))))
   (and
   (and
-  (and
-  (and (= result5 (equal_subrange a i2 b)) (equal_subrange__function_guard
-  result5 a i2 b))
+  (and (= result5 (equal_subrange a i2 b))
   (= (= result5 true)
-  (= (bool_eq2 (elts a) (to_rep (first3 (mk1 i2 (+ (- i2 1) (length b)))))
-     (to_rep (last3 (mk1 i2 (+ (- i2 1) (length b))))) (elts b)
+  (= (bool_eq2 (elts a) (to_rep (first2 (mk1 i2 (+ (- i2 1) (length b)))))
+     (to_rep (last2 (mk1 i2 (+ (- i2 1) (length b))))) (elts b)
      (to_rep (first (rt b))) (to_rep (last (rt b)))) true)))
   (and (not (= result5 true))
   (and (= search_ter_p__search__result5 search_ter_p__search__result4)
   (= result____split_fields4 result____split_fields2))))
   (and
   (and
-  (and (= temp___2144 (mk_int__ref temp___2143))
+  (and (= temp___2024 (mk_int__ref temp___2023))
   (and
   (= search_ter_p__search__result8 (mk_option__ref
                                    search_ter_p__search__result7))
   (and (= i5 (mk_int__ref i4))
   (= result____split_fields8 (mk___split_fields__ref result____split_fields7)))))
-  (and (= temp___2145 temp___2143)
+  (and (= temp___2025 temp___2023)
   (and (= search_ter_p__search__result9 search_ter_p__search__result7)
   (and (= i6 i4) (= result____split_fields9 result____split_fields7)))))
   (and
@@ -997,16 +967,14 @@
   (- (+ (to_rep (last (rt a))) 1) (length b)) i3))
   (and (<= (to_rep (first (rt a))) i3)
   (<= i3 (- (+ (to_rep (last (rt a))) 1) (length b)))))
-  (and (and (= result9 (mk_int__ref temp___2142)) (= temp___2143 i3))
-  (and (not (= i3 temp___216))
+  (and (and (= result9 (mk_int__ref temp___2022)) (= temp___2023 i3))
+  (and (not (= i3 temp___204))
   (and (and (= result10 (mk_int__ref i3)) (= i4 (+ i3 1)))
   (and
-  (and
-  (and (= result11 (equal_subrange a i4 b)) (equal_subrange__function_guard
-  result11 a i4 b))
+  (and (= result11 (equal_subrange a i4 b))
   (= (= result11 true)
-  (= (bool_eq2 (elts a) (to_rep (first3 (mk1 i4 (+ (- i4 1) (length b)))))
-     (to_rep (last3 (mk1 i4 (+ (- i4 1) (length b))))) (elts b)
+  (= (bool_eq2 (elts a) (to_rep (first2 (mk1 i4 (+ (- i4 1) (length b)))))
+     (to_rep (last2 (mk1 i4 (+ (- i4 1) (length b))))) (elts b)
      (to_rep (first (rt b))) (to_rep (last (rt b)))) true)))
   (and (= result11 true)
   (and
@@ -1019,9 +987,9 @@
   (and
   (and (= (to_rep o9) i4)
   (and (= (rec__types__option__exists result____split_fields6) o10)
-  (= o9 o11))) (and (= temp___2102 o10) (= temp___2103 o11)))
+  (= o9 o11))) (and (= temp___1992 o10) (= temp___1993 o11)))
   (and (= result13 (mk___split_fields__ref result____split_fields6))
-  (= result____split_fields7 (mk___split_fields temp___2102 temp___2103))))
+  (= result____split_fields7 (mk___split_fields temp___1992 temp___1993))))
   (and (= result14 (mk_option__ref search_ter_p__search__result6))
   (= search_ter_p__search__result7 (mk___rep result____split_fields7)))))))))))))))))))))))
   (and
@@ -1031,22 +999,20 @@
   (and
   (and (= o4 (+ (to_rep (last (rt a))) 1)) (in_range1
   (+ (to_rep (last (rt a))) 1))) (= o5 (- o4 o3))))
-  (and (= temp___216 o5) (in_range1 o5)))
+  (and (= temp___204 o5) (in_range1 o5)))
   (and (and (= result4 i17) (= i2 (to_rep (first (rt a)))))
-  (ite (and (<= (to_rep (first (rt a))) i2) (<= i2 temp___216))
+  (ite (and (<= (to_rep (first (rt a))) i2) (<= i2 temp___204))
   (and
   (and
-  (and (= result____split_fields2 (mk___split_fields temp___212 temp___2121))
-  (and (= temp___211 i2)
-  (and (= 0 temp___214)
+  (and (= result____split_fields2 (mk___split_fields temp___201 temp___2011))
+  (and (= temp___200 i2)
+  (and (= 0 temp___202)
   (and
   (and
-  (and
-  (and (= result5 (equal_subrange a i2 b)) (equal_subrange__function_guard
-  result5 a i2 b))
+  (and (= result5 (equal_subrange a i2 b))
   (= (= result5 true)
-  (= (bool_eq2 (elts a) (to_rep (first3 (mk1 i2 (+ (- i2 1) (length b)))))
-     (to_rep (last3 (mk1 i2 (+ (- i2 1) (length b))))) (elts b)
+  (= (bool_eq2 (elts a) (to_rep (first2 (mk1 i2 (+ (- i2 1) (length b)))))
+     (to_rep (last2 (mk1 i2 (+ (- i2 1) (length b))))) (elts b)
      (to_rep (first (rt b))) (to_rep (last (rt b)))) true)))
   (and (not (= result5 true))
   (and (= search_ter_p__search__result5 search_ter_p__search__result4)
@@ -1062,8 +1028,8 @@
   (- (+ (to_rep (last (rt a))) 1) (length b)) i3))
   (and (<= (to_rep (first (rt a))) i3)
   (<= i3 (- (+ (to_rep (last (rt a))) 1) (length b)))))
-  (and (and (= result9 (mk_int__ref temp___2142)) (= temp___2143 i3))
-  (= i3 temp___216))))))))
+  (and (and (= result9 (mk_int__ref temp___2022)) (= temp___2023 i3))
+  (= i3 temp___204))))))))
   (and
   (and
   (= search_ter_p__search__result10 (mk_option__ref

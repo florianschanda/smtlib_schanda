@@ -295,17 +295,11 @@
 ;; sorted__def_axiom
   (assert
   (forall ((v (Array Int value)))
-  (! (=> (sorted__function_guard (sorted v) v)
-     (= (= (sorted v) true)
+  (! (= (= (sorted v) true)
      (forall ((j Int))
      (=> (and (<= 1 j) (<= j 99))
-     (<= (to_rep (select v j)) (to_rep (select v (+ j 1)))))))) :pattern (
+     (<= (to_rep (select v j)) (to_rep (select v (+ j 1))))))) :pattern (
   (sorted v)) )))
-
-;; temp___result_161_def
-  (assert
-  (forall ((temp___160 (Array Int value))) (sorted__function_guard
-  (sorted temp___160) temp___160)))
 
 (define-fun dynamic_invariant ((temp___expr_159 (Array Int value))
   (temp___is_init_156 Bool) (temp___skip_constant_157 Bool)
@@ -313,13 +307,8 @@
                                       (=> (= temp___is_init_156 true)
                                       (= (sorted temp___expr_159) true))))
 
-;; temp___result_169_def
-  (assert
-  (forall ((temp___168 (Array Int value))) (sorted__function_guard
-  (sorted temp___168) temp___168)))
-
-(define-fun dynamic_predicate ((temp___167 (Array Int value))) Bool (= 
-  (sorted temp___167) true))
+(define-fun dynamic_predicate ((temp___166 (Array Int value))) Bool (= 
+  (sorted temp___166) true))
 
 (declare-fun i5s () (Array Int value))
 
@@ -349,7 +338,7 @@
 
 (declare-fun o () value)
 
-(declare-fun temp___195 () (Array Int value))
+(declare-fun temp___192 () (Array Int value))
 
 (declare-fun result () Int)
 
@@ -360,10 +349,10 @@
 (declare-fun j2 () Int)
 
 ;; H
-  (assert (dynamic_invariant i5s true false true))
+  (assert (= (sorted i5s) true))
 
 ;; H
-  (assert (dynamic_invariant v true false true))
+  (assert (= (sorted v) true))
 
 ;; H
   (assert (= result j))
@@ -380,14 +369,11 @@
 ;; H
   (assert
   (and
-  (and (dynamic_invariant v1 true true true)
-  (forall ((temp___197 Int))
-  (=> (and (<= 1 temp___197) (<= temp___197 100))
-  (=> (<= j2 temp___197) (= (select v1 temp___197) (select v temp___197))))))
+  (and (= (sorted v1) true)
+  (forall ((temp___194 Int))
+  (=> (and (<= 1 temp___194) (<= temp___194 100))
+  (=> (<= j2 temp___194) (= (select v1 temp___194) (select v temp___194))))))
   (and (<= 1 j2) (<= j2 100))))
-
-;; H
-  (assert (sorted__function_guard (sorted v1) v1))
 
 ;; H
   (assert (= (sorted v1) true))
@@ -396,10 +382,10 @@
   (assert (= (to_rep o) (div1 (to_rep (select v1 j2)) 2)))
 
 ;; H
-  (assert (= temp___195 (store v1 j2 o)))
+  (assert (= temp___192 (store v1 j2 o)))
 
 (assert
 ;; WP_parameter_def
  ;; File "math.adb", line 4, characters 0-0
-  (not (dynamic_predicate temp___195)))
+  (not (dynamic_predicate temp___192)))
 (check-sat)

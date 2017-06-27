@@ -288,8 +288,8 @@
 (define-fun child__ref___projection ((a child__ref)) us_rep1 (child__content
                                                              a))
 
-(define-fun default_initial_assumption ((temp___expr_157 us_rep1)
-  (temp___skip_top_level_158 Bool)) Bool (= (attr__tag1 temp___expr_157) 
+(define-fun default_initial_assumption ((temp___expr_151 us_rep1)
+  (temp___skip_top_level_152 Bool)) Bool (= (attr__tag1 temp___expr_151) 
   us_tag1))
 
 (declare-fun less_than_max__2 (us_rep1) Bool)
@@ -336,21 +336,17 @@
 ;; dispatch_in_contract__child__compat_axiom
   (assert
   (forall ((o us_rep1))
-  (! (=> (less_than_max__2__function_guard1 (less_than_max__21 us_tag1 o)
-     us_tag1 o)
-     (and (less_than_max__2__function_guard (less_than_max__2 o) o)
-     (= (to_int1 (less_than_max__2 o)) (to_int1
-                                       (less_than_max__21 us_tag1 o))))) :pattern (
+  (! (= (to_int1 (less_than_max__2 o)) (to_int1
+                                       (less_than_max__21 us_tag1 o))) :pattern (
   (less_than_max__21 us_tag1 o)) )))
 
 ;; less_than_max__2__def_axiom
   (assert
   (forall ((o us_rep1))
-  (! (=> (less_than_max__2__function_guard (less_than_max__2 o) o)
-     (= (= (less_than_max__2 o) true)
+  (! (= (= (less_than_max__2 o) true)
      (and
      (< (to_rep (rec__dispatch_in_contract__root__f11 (us_split_fields3 o))) 2147483647)
-     (< (to_rep (rec__dispatch_in_contract__child__f2 (us_split_fields3 o))) 2147483647)))) :pattern (
+     (< (to_rep (rec__dispatch_in_contract__child__f2 (us_split_fields3 o))) 2147483647))) :pattern (
   (less_than_max__2 o)) )))
 
 (declare-fun o__split_fields () integer)
@@ -369,13 +365,13 @@
 
 (declare-fun o4 () us_private)
 
-(declare-fun temp___181 () integer)
+(declare-fun temp___166 () integer)
 
-(declare-fun temp___1811 () integer)
+(declare-fun temp___1661 () integer)
 
-(declare-fun temp___1812 () us_private)
+(declare-fun temp___1662 () us_private)
 
-(declare-fun temp___1813 () Int)
+(declare-fun temp___1663 () Int)
 
 (declare-fun result () integer)
 
@@ -388,16 +384,6 @@
 (declare-fun o__split_fields4 () integer)
 
 (declare-fun o__split_fields5 () us_private)
-
-;; H
-  (assert (less_than_max__2__function_guard
-  (less_than_max__2
-  (mk___rep1
-  (mk___split_fields1 o__split_fields o__split_fields1 o__split_fields2)
-  o__attr__tag))
-  (mk___rep1
-  (mk___split_fields1 o__split_fields o__split_fields1 o__split_fields2)
-  o__attr__tag)))
 
 ;; H
   (assert
@@ -424,16 +410,16 @@
   (assert (= o__split_fields2 o4))
 
 ;; H
-  (assert (= temp___181 o2))
+  (assert (= temp___166 o2))
 
 ;; H
-  (assert (= temp___1811 o3))
+  (assert (= temp___1661 o3))
 
 ;; H
-  (assert (= temp___1812 o4))
+  (assert (= temp___1662 o4))
 
 ;; H
-  (assert (= o__attr__tag temp___1813))
+  (assert (= o__attr__tag temp___1663))
 
 ;; H
   (assert (= result o__split_fields))
@@ -445,13 +431,13 @@
   (assert (= result2 o__split_fields2))
 
 ;; H
-  (assert (= temp___181 o__split_fields3))
+  (assert (= temp___166 o__split_fields3))
 
 ;; H
-  (assert (= temp___1811 o__split_fields4))
+  (assert (= temp___1661 o__split_fields4))
 
 ;; H
-  (assert (= temp___1812 o__split_fields5))
+  (assert (= temp___1662 o__split_fields5))
 
 (assert
 ;; WP_parameter_def

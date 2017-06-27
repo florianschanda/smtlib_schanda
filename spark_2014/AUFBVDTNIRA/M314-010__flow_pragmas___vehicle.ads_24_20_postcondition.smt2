@@ -131,12 +131,9 @@
 ;; speed_is_valid__def_axiom
   (assert
   (forall ((vehicle__speed Int) (vehicle__state Int))
-  (! (=> (speed_is_valid__function_guard
-     (speed_is_valid vehicle__speed vehicle__state) vehicle__speed
-     vehicle__state)
-     (= (= (speed_is_valid vehicle__speed vehicle__state) true)
+  (! (= (= (speed_is_valid vehicle__speed vehicle__state) true)
      (ite (= vehicle__state 0) (= vehicle__speed 0)
-     (ite (= vehicle__state 1) (< 0 vehicle__speed) (< vehicle__speed 0))))) :pattern (
+     (ite (= vehicle__state 1) (< 0 vehicle__speed) (< vehicle__speed 0)))) :pattern (
   (speed_is_valid vehicle__speed vehicle__state)) )))
 
 (declare-fun i () Int)
@@ -182,10 +179,6 @@
 (declare-fun speed5 () Int)
 
 (declare-fun state6 () Int)
-
-;; H
-  (assert (speed_is_valid__function_guard (speed_is_valid speed state) 
-  speed state))
 
 ;; H
   (assert (in_range2 speed))
@@ -306,10 +299,6 @@
 
 ;; H
   (assert (= speed5 speed2))
-
-;; H
-  (assert (speed_is_valid__function_guard (speed_is_valid speed4 state5)
-  speed4 state5))
 
 (assert
 ;; WP_parameter_def

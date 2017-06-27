@@ -820,9 +820,6 @@
      true))) :pattern ((length2 container)) )))
 
 ;; H
-  (assert (forall ((e Int)) (q__function_guard (q e) e)))
-
-;; H
   (assert
   (forall ((e Int))
   (=> (and (in_range2 e) (= (contains (model__ s) e) true)) (= (q e) true))))
@@ -835,11 +832,8 @@
 ;; H
   (assert (<= i (length s)))
 
-;; H
-  (assert (q__function_guard (q (get (elements s) i)) (get (elements s) i)))
-
 (assert
 ;; WP_parameter_def
- ;; File "use_sets.ads", line 88, characters 0-0
+ ;; File "use_sets.ads", line 80, characters 0-0
   (not (= (q (get (elements s) i)) true)))
 (check-sat)

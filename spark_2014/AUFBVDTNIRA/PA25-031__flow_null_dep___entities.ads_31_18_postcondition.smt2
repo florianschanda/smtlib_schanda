@@ -77,20 +77,16 @@
   (assert
   (forall ((entities__current_cycles Int))
   (! (=> (dynamic_invariant entities__current_cycles true true true)
-     (let ((result (get_current_cycles entities__current_cycles)))
-     (=> (get_current_cycles__function_guard result entities__current_cycles)
-     (dynamic_invariant result true false true)))) :pattern ((get_current_cycles
-                                                             entities__current_cycles)) )))
+     (dynamic_invariant (get_current_cycles entities__current_cycles) true
+     false true)) :pattern ((get_current_cycles entities__current_cycles)) )))
 
 ;; get_current_cycles__post_refine_axiom
   (assert
   (forall ((entities__current_cycles Int))
   (! (=> (dynamic_invariant entities__current_cycles true true true)
      (let ((result (get_current_cycles1 entities__current_cycles)))
-     (=> (get_current_cycles__function_guard1 result
-     entities__current_cycles)
      (and (= result entities__current_cycles) (dynamic_invariant result true
-     false true))))) :pattern ((get_current_cycles1 entities__current_cycles)) )))
+     false true)))) :pattern ((get_current_cycles1 entities__current_cycles)) )))
 
 (declare-fun value () Int)
 
@@ -123,10 +119,6 @@
 
 ;; H
   (assert (= current_cycles3 current_cycles1))
-
-;; H
-  (assert (get_current_cycles__function_guard1
-  (get_current_cycles1 current_cycles2) current_cycles2))
 
 (assert
 ;; WP_parameter_def

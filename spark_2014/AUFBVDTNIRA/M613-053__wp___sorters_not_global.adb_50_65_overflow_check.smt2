@@ -238,10 +238,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
-(declare-fun first () Int)
-
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 

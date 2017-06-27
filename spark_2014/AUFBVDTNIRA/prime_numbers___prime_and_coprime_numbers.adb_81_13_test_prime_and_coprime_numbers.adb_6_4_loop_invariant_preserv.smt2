@@ -334,13 +334,12 @@
 ;; are_coprime__def_axiom
   (assert
   (forall ((v1 Int) (v2 Int))
-  (! (=> (are_coprime__function_guard (are_coprime v1 v2) v1 v2)
-     (= (= (are_coprime v1 v2) true)
+  (! (= (= (are_coprime v1 v2) true)
      (and (and (< 0 v1) (< 0 v2))
      (forall ((v Int))
      (=> (and (<= 2 v) (<= v (ite (< v1 v2) v1 v2)))
-     (not (and (= (mod2 v1 v) 0) (= (mod2 v2 v) 0)))))))) :pattern ((are_coprime
-                                                                    v1 v2)) )))
+     (not (and (= (mod2 v1 v) 0) (= (mod2 v2 v) 0))))))) :pattern ((are_coprime
+                                                                   v1 v2)) )))
 
 (declare-fun value () Int)
 
@@ -428,13 +427,8 @@
   (assert (<= index1 100000))
 
 ;; H
-  (assert (are_coprime__function_guard (are_coprime value index1) value
-  index1))
-
-;; H
   (assert
-  (and
-  (and (= o (euclid value index1)) (euclid__function_guard o value index1))
+  (and (= o (euclid value index1))
   (and (in_range1 o)
   (ite (= (are_coprime value index1) true) (= o 1) (< 1 o)))))
 
@@ -452,27 +446,18 @@
 
 ;; H
   (assert
-  (forall ((v Int)) (are_coprime__function_guard (are_coprime value v) 
-  value v)))
-
-;; H
-  (assert
   (forall ((v Int))
   (=> (and (<= 0 v) (<= v index2))
   (= (= (select result__2 v) true) (= (are_coprime value v) true)))))
 
 ;; H
-  (assert (are_coprime__function_guard (are_coprime value index3) value
-  index3))
-
-;; H
   (assert
   (and
   (and
-  (forall ((temp___253 Int))
-  (=> (and (<= 0 temp___253) (<= temp___253 100000))
-  (=> (< index2 temp___253)
-  (= (select result__2 temp___253) (select result__ temp___253)))))
+  (forall ((temp___226 Int))
+  (=> (and (<= 0 temp___226) (<= temp___226 100000))
+  (=> (< index2 temp___226)
+  (= (select result__2 temp___226) (select result__ temp___226)))))
   (=> (<= 0 100000) (in_range3 index2)))
   (and (<= 0 index2) (<= index2 100000))))
 
@@ -487,8 +472,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o3 (euclid value index3)) (euclid__function_guard o3 value index3))
+  (and (= o3 (euclid value index3))
   (and (in_range1 o3)
   (ite (= (are_coprime value index3) true) (= o3 1) (< 1 o3)))))
 
@@ -514,9 +498,6 @@
 
 ;; H
   (assert (= (select result__3 v) true))
-
-;; H
-  (assert (are_coprime__function_guard (are_coprime value v) value v))
 
 (assert
 ;; WP_parameter_def

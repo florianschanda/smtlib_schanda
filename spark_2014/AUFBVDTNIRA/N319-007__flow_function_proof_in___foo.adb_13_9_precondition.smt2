@@ -81,16 +81,13 @@
 ;; f__post_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (< 0 b)
-     (let ((result (f us_void_param)))
-     (=> (f__function_guard result us_void_param) (dynamic_invariant result
-     true false true)))) :pattern ((f us_void_param)) )))
+  (! (=> (< 0 b) (dynamic_invariant (f us_void_param) true false true)) :pattern (
+  (f us_void_param)) )))
 
 ;; f__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (f__function_guard (f us_void_param) us_void_param)
-     (= (f us_void_param) a)) :pattern ((f us_void_param)) )))
+  (! (= (f us_void_param) a) :pattern ((f us_void_param)) )))
 
 (declare-fun c () Int)
 

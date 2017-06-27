@@ -404,18 +404,18 @@
 (define-fun cont2__ref___projection ((a cont2__ref)) us_rep1 (cont2__content
                                                              a))
 
-(define-fun dynamic_invariant ((temp___expr_205 us_rep1)
-  (temp___is_init_202 Bool) (temp___skip_constant_203 Bool)
-  (temp___do_toplevel_204 Bool)) Bool (=> (= temp___do_toplevel_204 true)
-                                      (=> (= temp___is_init_202 true)
+(define-fun dynamic_invariant ((temp___expr_201 us_rep1)
+  (temp___is_init_198 Bool) (temp___skip_constant_199 Bool)
+  (temp___do_toplevel_200 Bool)) Bool (=> (= temp___do_toplevel_200 true)
+                                      (=> (= temp___is_init_198 true)
                                       (<= (to_rep
                                           (rec__composite_cursors__cont2__length
-                                          (us_split_fields3 temp___expr_205))) 100))))
+                                          (us_split_fields3 temp___expr_201))) 100))))
 
-(define-fun dynamic_predicate ((temp___214 us_rep1)) Bool (<= (to_rep
+(define-fun dynamic_predicate ((temp___210 us_rep1)) Bool (<= (to_rep
                                                               (rec__composite_cursors__cont2__length
                                                               (us_split_fields3
-                                                              temp___214))) 100))
+                                                              temp___210))) 100))
 
 (declare-fun i19s () us_rep1)
 
@@ -432,14 +432,13 @@
   (assert
   (forall ((c us_rep1))
   (forall ((p us_rep))
-  (! (=> (has_element__2__function_guard (has_element__2 c p) c p)
-     (= (= (has_element__2 c p) true)
+  (! (= (= (has_element__2 c p) true)
      (and
      (<= 1 (to_rep
            (rec__composite_cursors__rec_cursor__content (us_split_fields1 p))))
      (<= (to_rep
          (rec__composite_cursors__rec_cursor__content (us_split_fields1 p))) 
-     (to_rep (rec__composite_cursors__cont2__length (us_split_fields3 c))))))) :pattern (
+     (to_rep (rec__composite_cursors__cont2__length (us_split_fields3 c)))))) :pattern (
   (has_element__2 c p)) ))))
 
 (declare-fun c () us_rep1)
@@ -465,9 +464,6 @@
 ;; H
   (assert
   (<= (to_rep (rec__composite_cursors__cont2__length (us_split_fields3 c))) 100))
-
-;; H
-  (assert (has_element__2__function_guard (has_element__2 c p) c p))
 
 ;; H
   (assert (= (has_element__2 c p) true))

@@ -179,8 +179,7 @@
 ;; is_even__def_axiom
   (assert
   (forall ((x Int))
-  (! (=> (is_even__function_guard (is_even x) x)
-     (= (= (is_even x) true) (= (mod2 x 2) 0))) :pattern ((is_even x)) )))
+  (! (= (= (is_even x) true) (= (mod2 x 2) 0)) :pattern ((is_even x)) )))
 
 (declare-fun x () Int)
 
@@ -199,7 +198,7 @@
 
 (declare-fun ghost_legal__is_prime__result () Bool)
 
-(declare-fun temp___135 () Int)
+(declare-fun temp___132 () Int)
 
 (declare-fun o () Int)
 
@@ -292,12 +291,6 @@
 (declare-fun result5 () Bool)
 
 ;; H
-  (assert (is_even__function_guard (is_even x) x))
-
-;; H
-  (assert (is_even__function_guard (is_even x) x))
-
-;; H
   (assert (in_range2 x))
 
 ;; H
@@ -335,7 +328,7 @@
   (and (= ghost_legal__is_prime__result13 ghost_legal__is_prime__result4)
   (= temp10 temp3)))
   (and (< temp2 x)
-  (and (= temp___135 temp2)
+  (and (= temp___132 temp2)
   (and (<= 2 temp3)
   (and (and (=> (<= 0 2147483647) (in_range2 temp3)) (< temp3 x))
   (and (= (mod2 x temp3) 0)
@@ -345,7 +338,7 @@
   (ite (< temp2 x)
   (and
   (and
-  (and (= temp___135 temp2)
+  (and (= temp___132 temp2)
   (and (<= 2 temp3)
   (and (and (=> (<= 0 2147483647) (in_range2 temp3)) (< temp3 x))
   (and
@@ -401,9 +394,6 @@
 
 ;; H
   (assert (= result5 ghost_legal__is_prime__result16))
-
-;; H
-  (assert (is_even__function_guard (is_even x) x))
 
 ;; H
   (assert (= (is_even x) true))

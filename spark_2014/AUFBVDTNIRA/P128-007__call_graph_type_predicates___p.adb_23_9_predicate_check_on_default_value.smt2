@@ -169,9 +169,6 @@
 
 (declare-fun foo__function_guard (Bool tuple0) Bool)
 
-;; temp___result_179_def
-  (assert (foo__function_guard (foo Tuple0) Tuple0))
-
 (define-fun dynamic_invariant ((temp___expr_177 us_rep)
   (temp___is_init_174 Bool) (temp___skip_constant_175 Bool)
   (temp___do_toplevel_176 Bool)) Bool (=> (= temp___do_toplevel_176 true)
@@ -181,21 +178,18 @@
                                          (rec__p__t__dummy
                                          (us_split_fields1 temp___expr_177))) 0)))))
 
-(define-fun default_initial_assumption ((temp___expr_180 us_rep)
-  (temp___skip_top_level_181 Bool)) Bool (= (to_rep
+(define-fun default_initial_assumption ((temp___expr_179 us_rep)
+  (temp___skip_top_level_180 Bool)) Bool (= (to_rep
                                             (rec__p__t__dummy
                                             (us_split_fields1
-                                            temp___expr_180))) 0))
+                                            temp___expr_179))) 0))
 
-;; temp___result_184_def
-  (assert (foo__function_guard (foo Tuple0) Tuple0))
-
-(define-fun dynamic_predicate ((temp___182 us_rep)) Bool (and
+(define-fun dynamic_predicate ((temp___181 us_rep)) Bool (and
                                                          (= (foo Tuple0) true)
                                                          (= (to_rep
                                                             (rec__p__t__dummy
                                                             (us_split_fields1
-                                                            temp___182))) 0)))
+                                                            temp___181))) 0)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -209,13 +203,13 @@
 ;; foo__post_axiom
   (assert true)
 
-(declare-fun temp___187 () integer)
+(declare-fun temp___185 () integer)
 
 ;; H
-  (assert (= (to_rep temp___187) 0))
+  (assert (= (to_rep temp___185) 0))
 
 (assert
 ;; WP_parameter_def
  ;; File "p.ads", line 5, characters 0-0
-  (not (dynamic_predicate (mk___rep (mk___split_fields temp___187)))))
+  (not (= (foo Tuple0) true)))
 (check-sat)

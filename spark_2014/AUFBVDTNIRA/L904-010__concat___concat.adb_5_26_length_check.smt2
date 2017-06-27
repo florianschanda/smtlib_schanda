@@ -336,9 +336,11 @@
 (declare-datatypes () ((ttB__ref (mk_ttB__ref (ttB__content us_t)))))
 (define-fun ttB__ref___projection ((a ttB__ref)) us_t (ttB__content a))
 
-(declare-sort t3b 0)
+(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(declare-sort t5b 0)
+
+(define-fun in_range3 ((x Int)) Bool (and (<= 6 x) (<= x 10)))
 
 (define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -348,18 +350,16 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
 
-(declare-fun user_eq3 (t3b t3b) Bool)
+(declare-fun user_eq3 (t5b t5b) Bool)
 
-(declare-fun dummy3 () t3b)
+(declare-fun dummy3 () t5b)
 
-(declare-datatypes () ((t3b__ref (mk_t3b__ref (t3b__content t3b)))))
-(define-fun t3b__ref___projection ((a t3b__ref)) t3b (t3b__content a))
+(declare-datatypes () ((t5b__ref (mk_t5b__ref (t5b__content t5b)))))
+(define-fun t5b__ref___projection ((a t5b__ref)) t5b (t5b__content a))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-sort t7b 0)
 
-(declare-sort t5b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 6 x) (<= x 10)))
+(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
 
 (define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -369,28 +369,9 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
 
-(declare-fun user_eq4 (t5b t5b) Bool)
+(declare-fun user_eq4 (t7b t7b) Bool)
 
-(declare-fun dummy4 () t5b)
-
-(declare-datatypes () ((t5b__ref (mk_t5b__ref (t5b__content t5b)))))
-(define-fun t5b__ref___projection ((a t5b__ref)) t5b (t5b__content a))
-
-(declare-sort t7b 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq5 (t7b t7b) Bool)
-
-(declare-fun dummy5 () t7b)
+(declare-fun dummy4 () t7b)
 
 (declare-datatypes () ((t7b__ref (mk_t7b__ref (t7b__content t7b)))))
 (define-fun t7b__ref___projection ((a t7b__ref)) t7b (t7b__content a))
@@ -420,11 +401,11 @@
 
 (declare-fun x () (Array Int Bool))
 
-(declare-fun o () (Array Int Bool))
-
 (declare-fun temp___192 () (Array Int Bool))
 
 (declare-fun temp___191 () (Array Int Bool))
+
+(declare-fun o () Int)
 
 (declare-fun o1 () Int)
 
@@ -436,8 +417,6 @@
 
 (declare-fun o5 () Int)
 
-(declare-fun o6 () Int)
-
 (declare-fun temp___193 () (Array Int Bool))
 
 (declare-fun temp___1931 () t)
@@ -447,13 +426,10 @@
 (declare-fun x1 () (Array Int Bool))
 
 ;; H
-  (assert (= o (concat__x__aggregate_def (of_int 1))))
-
-;; H
   (assert (= result x))
 
 ;; H
-  (assert (= x1 o))
+  (assert (= x1 (concat__x__aggregate_def (of_int 1))))
 
 ;; H
   (assert
@@ -470,35 +446,35 @@
   (assert (= temp___191 x1))
 
 ;; H
-  (assert (=> (<= 1 5) (= o1 (+ (- 5 1) 1))))
+  (assert (=> (<= 1 5) (= o (+ (- 5 1) 1))))
 
 ;; H
-  (assert (=> (not (<= 1 5)) (= o1 0)))
+  (assert (=> (not (<= 1 5)) (= o 0)))
 
 ;; H
-  (assert (=> (<= 6 10) (= o2 (+ (- 10 6) 1))))
+  (assert (=> (<= 6 10) (= o1 (+ (- 10 6) 1))))
 
 ;; H
-  (assert (=> (not (<= 6 10)) (= o2 0)))
+  (assert (=> (not (<= 6 10)) (= o1 0)))
 
 ;; H
-  (assert (= o3 (+ o2 o1)))
+  (assert (= o2 (+ o1 o)))
 
 ;; H
-  (assert (= o4 (+ 1 o3)))
+  (assert (= o3 (+ 1 o2)))
 
 ;; H
-  (assert (= o5 (- o4 1)))
+  (assert (= o4 (- o3 1)))
 
 ;; H
-  (assert (and (= o6 o5) (in_range1 o5)))
+  (assert (and (= o5 o4) (in_range1 o4)))
 
 ;; H
   (assert
   (= (slide (concat1 temp___191 6 10 temp___192 1 5) 6 1) temp___193))
 
 ;; H
-  (assert (= (mk 1 o6) temp___1931))
+  (assert (= (mk 1 o5) temp___1931))
 
 (assert
 ;; WP_parameter_def

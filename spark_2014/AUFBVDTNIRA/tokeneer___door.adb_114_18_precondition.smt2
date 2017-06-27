@@ -909,11 +909,11 @@
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t1)))))
 (define-fun t__ref_3__projection ((a t__ref)) t1 (t__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_855 Int)
-  (temp___is_init_852 Bool) (temp___skip_constant_853 Bool)
-  (temp___do_toplevel_854 Bool)) Bool (=>
-                                      (or (= temp___is_init_852 true)
-                                      (<= 0 1)) (in_range12 temp___expr_855)))
+(define-fun dynamic_invariant3 ((temp___expr_839 Int)
+  (temp___is_init_836 Bool) (temp___skip_constant_837 Bool)
+  (temp___do_toplevel_838 Bool)) Bool (=>
+                                      (or (= temp___is_init_836 true)
+                                      (<= 0 1)) (in_range12 temp___expr_839)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
@@ -1092,25 +1092,18 @@
   (assert (=> (<= 0 43) (in_range5 id)))
 
 ;; H
-  (assert
-  (and (= o7 (thecurrenttime currenttime)) (thecurrenttime__function_guard 
-  o7 currenttime)))
+  (assert (= o7 (thecurrenttime currenttime)))
 
 ;; H
   (assert
-  (and
   (= o5 (greaterthanorequal o7
         (mk___rep
         (mk___split_fields alarmtimeout__split_fields
         alarmtimeout__split_fields1 alarmtimeout__split_fields2
-        alarmtimeout__split_fields3))))
-  (greaterthanorequal__function_guard o5 o7
-  (mk___rep
-  (mk___split_fields alarmtimeout__split_fields alarmtimeout__split_fields1
-  alarmtimeout__split_fields2 alarmtimeout__split_fields3)))))
+        alarmtimeout__split_fields3)))))
 
 ;; H
-  (assert (and (= o (islocked state1)) (islocked__function_guard o state1)))
+  (assert (= o (islocked state1)))
 
 ;; H
   (assert (= o6 (ite (= currentdoor 0) o false)))
@@ -1165,10 +1158,6 @@
 
 ;; H
   (assert (not (= dooralarm localalarm1)))
-
-;; H
-  (assert (valid_numberlogentries__function_guard
-  (valid_numberlogentries state) state))
 
 (assert
 ;; WP_parameter_def

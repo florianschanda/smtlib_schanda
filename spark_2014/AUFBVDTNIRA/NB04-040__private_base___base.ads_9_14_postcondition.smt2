@@ -169,31 +169,24 @@
 
 ;; sum__post_axiom
   (assert
-  (forall ((x us_rep))
-  (! (let ((result (sum x)))
-     (=> (sum__function_guard result x) (dynamic_invariant result true false
-     true))) :pattern ((sum x)) )))
+  (forall ((x us_rep)) (! (dynamic_invariant (sum x) true false
+  true) :pattern ((sum x)) )))
 
 ;; sum__post__dispatch_axiom
   (assert
   (forall ((attr__tag1 Int))
-  (forall ((x us_rep))
-  (! (let ((result (sum1 attr__tag1 x)))
-     (=> (sum__function_guard1 result attr__tag1 x) (dynamic_invariant result
-     true false true))) :pattern ((sum1 attr__tag1 x)) ))))
+  (forall ((x us_rep)) (! (dynamic_invariant (sum1 attr__tag1 x) true false
+  true) :pattern ((sum1 attr__tag1 x)) ))))
 
 ;; base__t__compat_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (sum__function_guard1 (sum1 us_tag x) us_tag x)
-     (and (sum__function_guard (sum x) x) (= (sum x) (sum1 us_tag x)))) :pattern (
-  (sum1 us_tag x)) )))
+  (! (= (sum x) (sum1 us_tag x)) :pattern ((sum1 us_tag x)) )))
 
 ;; sum__def_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (sum__function_guard (sum x) x)
-     (= (sum x) (to_rep (rec__base__t__c (us_split_fields1 x))))) :pattern (
+  (! (= (sum x) (to_rep (rec__base__t__c (us_split_fields1 x)))) :pattern (
   (sum x)) )))
 
 (declare-fun c () Int)
@@ -341,14 +334,6 @@
 
 ;; H
   (assert (= result5 base__create__result14))
-
-;; H
-  (assert (sum__function_guard
-  (sum
-  (mk___rep (mk___split_fields base__create__result12 base__create__result13)
-  base__create__result14))
-  (mk___rep (mk___split_fields base__create__result12 base__create__result13)
-  base__create__result14)))
 
 (assert
 ;; WP_parameter_def

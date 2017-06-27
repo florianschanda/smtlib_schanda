@@ -334,13 +334,12 @@
 ;; are_coprime__def_axiom
   (assert
   (forall ((v1 Int) (v2 Int))
-  (! (=> (are_coprime__function_guard (are_coprime v1 v2) v1 v2)
-     (= (= (are_coprime v1 v2) true)
+  (! (= (= (are_coprime v1 v2) true)
      (and (and (< 0 v1) (< 0 v2))
      (forall ((v Int))
      (=> (and (<= 2 v) (<= v (ite (< v1 v2) v1 v2)))
-     (not (and (= (mod2 v1 v) 0) (= (mod2 v2 v) 0)))))))) :pattern ((are_coprime
-                                                                    v1 v2)) )))
+     (not (and (= (mod2 v1 v) 0) (= (mod2 v2 v) 0))))))) :pattern ((are_coprime
+                                                                   v1 v2)) )))
 
 (declare-fun value () Int)
 
@@ -379,9 +378,9 @@
 
 (declare-fun test_prime_and_coprime_numbers__p__initialize_coprime_list__result () (Array Int Bool))
 
-(declare-fun temp___254 () Int)
+(declare-fun temp___227 () Int)
 
-(declare-fun temp___252 () (Array Int Bool))
+(declare-fun temp___225 () (Array Int Bool))
 
 (declare-fun o () Int)
 
@@ -446,24 +445,6 @@
 (declare-fun result3 () (Array Int Bool))
 
 ;; H
-  (assert (are_coprime__function_guard (are_coprime value index1) value
-  index1))
-
-;; H
-  (assert
-  (forall ((v Int)) (are_coprime__function_guard (are_coprime value v) 
-  value v)))
-
-;; H
-  (assert (are_coprime__function_guard (are_coprime value index1) value
-  index1))
-
-;; H
-  (assert
-  (forall ((v Int)) (are_coprime__function_guard (are_coprime value v) 
-  value v)))
-
-;; H
   (assert (in_range1 value))
 
 ;; H
@@ -476,17 +457,16 @@
   (assert (= index1 0))
 
 ;; H
-  (assert (=> (and (<= 0 index1) (<= index1 100000)) (= temp___254 index1)))
+  (assert (=> (and (<= 0 index1) (<= index1 100000)) (= temp___227 index1)))
 
 ;; H
   (assert
-  (=> (and (<= 0 index1) (<= index1 100000)) (= temp___252 result__)))
+  (=> (and (<= 0 index1) (<= index1 100000)) (= temp___225 result__)))
 
 ;; H
   (assert
   (=> (and (<= 0 index1) (<= index1 100000))
-  (and
-  (and (= o (euclid value index1)) (euclid__function_guard o value index1))
+  (and (= o (euclid value index1))
   (and (in_range1 o)
   (ite (= (are_coprime value index1) true) (= o 1) (< 1 o))))))
 
@@ -519,10 +499,10 @@
   (=> (and (<= 0 index1) (<= index1 100000))
   (and
   (and
-  (forall ((temp___253 Int))
-  (=> (and (<= 0 temp___253) (<= temp___253 100000))
-  (=> (< index2 temp___253)
-  (= (select result__3 temp___253) (select temp___252 temp___253)))))
+  (forall ((temp___226 Int))
+  (=> (and (<= 0 temp___226) (<= temp___226 100000))
+  (=> (< index2 temp___226)
+  (= (select result__3 temp___226) (select temp___225 temp___226)))))
   (=> (<= 0 100000) (in_range3 index2)))
   (and (<= 0 index2) (<= index2 100000)))))
 
@@ -635,9 +615,6 @@
   (assert
   (= (select test_prime_and_coprime_numbers__p__initialize_coprime_list__result4 
   v) true))
-
-;; H
-  (assert (are_coprime__function_guard (are_coprime value v) value v))
 
 (assert
 ;; WP_parameter_def

@@ -92,16 +92,14 @@
 
 ;; too_big__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (too_big us_void_param)))
-     (=> (too_big__function_guard result us_void_param) (dynamic_invariant
-     result true false true))) :pattern ((too_big us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant
+  (too_big us_void_param) true false
+  true) :pattern ((too_big us_void_param)) )))
 
 ;; too_big__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (too_big__function_guard (too_big us_void_param) us_void_param)
-     (= (too_big us_void_param) 99)) :pattern ((too_big us_void_param)) )))
+  (! (= (too_big us_void_param) 99) :pattern ((too_big us_void_param)) )))
 
 (declare-fun r1s () Int)
 
@@ -318,12 +316,44 @@
 (declare-datatypes () ((tp1S__ref (mk_tp1S__ref (tp1S__content us_rep1)))))
 (define-fun tp1S__ref___projection ((a tp1S__ref)) us_rep1 (tp1S__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_178 us_rep1)
-  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
-  (temp___do_toplevel_177 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_176 true))
+(declare-fun to_rep1 (integer) Int)
+
+(declare-fun of_rep1 (Int) integer)
+
+;; inversion_axiom
+  (assert
+  (forall ((x integer))
+  (! (= (of_rep1 (to_rep1 x)) x) :pattern ((to_rep1 x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x integer)) (! (in_range (to_rep1 x)) :pattern ((to_rep1 x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (in_range x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
+                                                             (of_rep1 x))) )))
+
+(define-fun dynamic_invariant1 ((temp___expr_176 us_rep1)
+  (temp___is_init_173 Bool) (temp___skip_constant_174 Bool)
+  (temp___do_toplevel_175 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_174 true))
                                       (in_range2 r1s
-                                      (to_base temp___expr_178))))
+                                      (to_base temp___expr_176))))
+
+(define-fun default_initial_assumption ((temp___expr_178 us_rep1)
+  (temp___skip_top_level_179 Bool)) Bool (and
+                                         (= (to_rep
+                                            (rec__interrupt_priority__no_interrupt_needed_1__c
+                                            (us_split_discrs2
+                                            temp___expr_178))) r1s)
+                                         (= (to_rep1
+                                            (rec__interrupt_priority__no_interrupt_needed_1__i1
+                                            (us_split_fields3
+                                            temp___expr_178))) 0)))
+
+(declare-fun p1__split_discrs () us_split_discrs)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -337,9 +367,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= bad__R1s__assume (too_big Tuple0)) (too_big__function_guard
-  bad__R1s__assume Tuple0))
+  (and (= bad__R1s__assume (too_big Tuple0))
   (and (in_range bad__R1s__assume) (= bad__R1s__assume 99))))
 
 ;; H

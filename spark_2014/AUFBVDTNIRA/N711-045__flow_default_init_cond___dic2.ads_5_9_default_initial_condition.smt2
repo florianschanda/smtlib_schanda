@@ -59,24 +59,19 @@
 
 (declare-fun bar__function_guard (Bool Int) Bool)
 
-(define-fun dynamic_invariant ((temp___expr_143 Int)
-  (temp___is_init_140 Bool) (temp___skip_constant_141 Bool)
-  (temp___do_toplevel_142 Bool)) Bool (=>
-                                      (or (= temp___is_init_140 true)
+(define-fun dynamic_invariant ((temp___expr_142 Int)
+  (temp___is_init_139 Bool) (temp___skip_constant_140 Bool)
+  (temp___do_toplevel_141 Bool)) Bool (=>
+                                      (or (= temp___is_init_139 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range temp___expr_143)))
+                                      (in_range temp___expr_142)))
 
-;; temp___result_147_def
-  (assert
-  (forall ((temp___146 Int)) (bar__function_guard (bar temp___146)
-  temp___146)))
-
-(define-fun default_initial_assumption ((temp___expr_144 Int)
-  (temp___skip_top_level_145 Bool)) Bool (and (= temp___expr_144 1)
+(define-fun default_initial_assumption ((temp___expr_143 Int)
+  (temp___skip_top_level_144 Bool)) Bool (and (= temp___expr_143 1)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_145 true))
-                                         (= (bar temp___expr_144) true))))
+                                         (= temp___skip_top_level_144 true))
+                                         (= (bar temp___expr_143) true))))
 
 ;; bar__post_axiom
   (assert true)
@@ -84,24 +79,20 @@
 ;; bar__def_axiom
   (assert
   (forall ((par1 Int))
-  (! (=> (bar__function_guard (bar par1) par1)
-     (= (= (bar par1) true) (= par1 1))) :pattern ((bar par1)) )))
+  (! (= (= (bar par1) true) (= par1 1)) :pattern ((bar par1)) )))
 
 (declare-fun us () Int)
 
-(declare-fun temp___164 () Int)
+(declare-fun temp___158 () Int)
 
 ;; H
   (assert (and (= us 1) (in_range 1)))
 
 ;; H
-  (assert (and (in_range temp___164) (= temp___164 1)))
-
-;; H
-  (assert (bar__function_guard (bar temp___164) temp___164))
+  (assert (and (in_range temp___158) (= temp___158 1)))
 
 (assert
 ;; WP_parameter_def
  ;; File "dic2.ads", line 19, characters 0-0
-  (not (= (bar temp___164) true)))
+  (not (= (bar temp___158) true)))
 (check-sat)

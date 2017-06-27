@@ -78,7 +78,7 @@
 (declare-fun b1 () Bool)
 
 ;; H
-  (assert (and (= o (get x us_HEAP)) (get__function_guard o x us_HEAP)))
+  (assert (= o (get x us_HEAP)))
 
 ;; H
   (assert (= result a))
@@ -87,7 +87,7 @@
   (assert (= a1 o))
 
 ;; H
-  (assert (and (= o1 (get x us_HEAP1)) (get__function_guard o1 x us_HEAP1)))
+  (assert (= o1 (get x us_HEAP1)))
 
 ;; H
   (assert (= result1 b))

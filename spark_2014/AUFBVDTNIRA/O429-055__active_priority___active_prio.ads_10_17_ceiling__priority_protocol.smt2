@@ -116,6 +116,30 @@
 (define-fun p_type__ref___projection ((a p_type__ref)) us_rep (p_type__content
                                                               a))
 
+(declare-fun to_rep (integer) Int)
+
+(declare-fun of_rep (Int) integer)
+
+;; inversion_axiom
+  (assert
+  (forall ((x integer)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x integer)) (! (in_range (to_rep x)) :pattern ((to_rep x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                           (of_rep x))) )))
+
+(define-fun default_initial_assumption ((temp___expr_178 us_rep)
+  (temp___skip_top_level_179 Bool)) Bool (= (to_rep
+                                            (rec__active_prio__p_type__a
+                                            (us_split_fields1
+                                            temp___expr_178))) 0))
+
 (declare-datatypes ()
 ((us_split_fields2
  (mk___split_fields1 (rec__active_prio__q_type__a integer)))))
@@ -177,6 +201,12 @@
                                                                a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+
+(define-fun default_initial_assumption1 ((temp___expr_184 us_rep1)
+  (temp___skip_top_level_185 Bool)) Bool (= (to_rep
+                                            (rec__active_prio__q_type__a
+                                            (us_split_fields3
+                                            temp___expr_184))) 0))
 
 (define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)

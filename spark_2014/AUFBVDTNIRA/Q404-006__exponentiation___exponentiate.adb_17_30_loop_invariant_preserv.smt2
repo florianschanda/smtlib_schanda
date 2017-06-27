@@ -249,17 +249,13 @@
 ;; pow2__post_axiom
   (assert
   (forall ((i Int))
-  (! (=> (dynamic_invariant i true true true)
-     (let ((result (pow21 i)))
-     (=> (pow2__function_guard result i) (dynamic_invariant1 result true
-     false true)))) :pattern ((pow21 i)) )))
+  (! (=> (dynamic_invariant i true true true) (dynamic_invariant1 (pow21 i)
+     true false true)) :pattern ((pow21 i)) )))
 
 ;; pow2__def_axiom
   (assert
   (forall ((i Int))
-  (! (=>
-     (and (dynamic_invariant i true true true) (pow2__function_guard
-     (pow21 i) i))
+  (! (=> (dynamic_invariant i true true true)
      (= (pow21 i) (ite (< i 4294967296)
                   (bvshl ((_ int2bv 32) 1) ((_ int2bv 32) i))
                   ((_ int2bv 32) 0)))) :pattern ((pow21 i)) )))
@@ -363,15 +359,6 @@
   (assert (not (= cur_exp1 ((_ int2bv 32) 0))))
 
 ;; H
-  (assert (pow2__function_guard (pow21 iter2) iter2))
-
-;; H
-  (assert (pow2__function_guard (pow21 iter2) iter2))
-
-;; H
-  (assert (pow2__function_guard (pow21 iter2) iter2))
-
-;; H
   (assert
   (= result__2 (power val__
                (bv2nat (bvurem ((_ int2bv 32) exp) (pow21 iter2))))))
@@ -424,9 +411,6 @@
 
 ;; H
   (assert (not (= cur_exp3 ((_ int2bv 32) 0))))
-
-;; H
-  (assert (pow2__function_guard (pow21 iter3) iter3))
 
 (assert
 ;; WP_parameter_def

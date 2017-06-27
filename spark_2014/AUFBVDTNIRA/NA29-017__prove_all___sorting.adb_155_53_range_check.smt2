@@ -439,21 +439,21 @@
 
 (declare-fun k () Int)
 
-(declare-fun temp___223 () Int)
+(declare-fun temp___217 () Int)
 
-(declare-fun temp___222 () (Array Int integer))
+(declare-fun temp___216 () (Array Int integer))
 
-(declare-fun temp___220 () Int)
+(declare-fun temp___214 () Int)
 
-(declare-fun temp___219 () (Array Int integer))
+(declare-fun temp___213 () (Array Int integer))
 
 (declare-fun o () Int)
 
 (declare-fun o1 () Bool)
 
-(declare-fun o2 () Int)
-
 (declare-fun j () Int)
+
+(declare-fun o2 () Int)
 
 (declare-fun o3 () Int)
 
@@ -473,9 +473,7 @@
 
 (declare-fun o11 () Int)
 
-(declare-fun o12 () Int)
-
-(declare-fun o13 () Bool)
+(declare-fun o12 () Bool)
 
 (declare-fun result () Int)
 
@@ -505,67 +503,63 @@
 
 (declare-fun result2 () Bool)
 
-(declare-fun k3 () Int)
-
 (declare-fun a3 () (Array Int integer))
-
-(declare-fun a4 () (Array Int integer))
 
 (declare-fun b2 () (Array Int integer))
 
 (declare-fun i4 () Int)
 
-(declare-fun k4 () Int)
+(declare-fun k3 () Int)
 
-(declare-fun a5 () (Array Int integer))
+(declare-fun a4 () (Array Int integer))
 
 (declare-fun b3 () (Array Int integer))
 
 (declare-fun i5 () Int)
 
-(declare-fun k5 () Int)
+(declare-fun k4 () Int)
 
-(declare-fun a6 () (Array Int integer))
+(declare-fun a5 () (Array Int integer))
 
 (declare-fun b4 () (Array Int integer))
 
 (declare-fun i6 () Int)
 
-(declare-fun k6 () Int)
+(declare-fun k5 () Int)
 
-(declare-fun a7 () (Array Int integer))
+(declare-fun a6 () (Array Int integer))
 
 (declare-fun b5 () (Array Int integer))
 
 (declare-fun i7 () Int)
 
-(declare-fun k7 () Int)
+(declare-fun k6 () Int)
 
-(declare-fun a8 () map__ref)
+(declare-fun a7 () map__ref)
 
 (declare-fun b6 () map__ref)
 
 (declare-fun i8 () int__ref)
 
-(declare-fun k8 () int__ref)
+(declare-fun k7 () int__ref)
 
-(declare-fun a9 () (Array Int integer))
+(declare-fun a8 () (Array Int integer))
 
 (declare-fun b7 () (Array Int integer))
 
 (declare-fun i9 () Int)
 
-(declare-fun k9 () Int)
+(declare-fun k8 () Int)
 
 (declare-fun result3 () Bool)
 
-(define-fun k10 () int__ref (mk_int__ref k6))
+(define-fun k9 () int__ref (mk_int__ref k5))
 
 (define-fun i10 () int__ref (mk_int__ref i6))
 
 (define-fun b8 () map__ref (mk_map__ref b4))
 
-(define-fun a10 () map__ref (mk_map__ref a6))
+(define-fun a9 () map__ref (mk_map__ref a5))
 
 ;; H
   (assert (dynamic_property 0 2147483647 (to_rep a__first) (to_rep a__last)))
@@ -604,22 +598,6 @@
 
 ;; H
   (assert
-  (forall ((j1 Int)) (sorted__function_guard
-  (sorted (mk___t a1 (mk (to_rep a__first) (to_rep a__last)))
-  (+ a_first (* j1 l2))
-  (ite (< l2 (- length1 (* j1 l2))) l2 (- length1 (* j1 l2))))
-  (mk___t a1 (mk (to_rep a__first) (to_rep a__last))) (+ a_first (* j1 
-  l2)) (ite (< l2 (- length1 (* j1 l2))) l2 (- length1 (* j1 l2))))))
-
-;; H
-  (assert (perm__function_guard
-  (perm (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t a1 (mk (to_rep a__first) (to_rep a__last))) a_first length1)
-  (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t a1 (mk (to_rep a__first) (to_rep a__last))) a_first length1))
-
-;; H
-  (assert
   (and
   (and
   (forall ((j1 Int))
@@ -646,86 +624,16 @@
   (assert (= i2 0))
 
 ;; H
-  (assert
-  (forall ((j1 Int)) (sorted__function_guard
-  (sorted (mk___t a2 (mk (to_rep a__first) (to_rep a__last)))
-  (+ a_first (* (* j1 l2) 2))
-  (ite (< (* l2 2) (- length1 (* (* j1 l2) 2))) (* l2 2) (- length1 (* (* j1 
-  l2) 2)))) (mk___t a2 (mk (to_rep a__first) (to_rep a__last)))
-  (+ a_first (* (* j1 l2) 2))
-  (ite (< (* l2 2) (- length1 (* (* j1 l2) 2))) (* l2 2) (- length1 (* (* j1 
-  l2) 2))))))
+  (assert (= temp___217 k1))
 
 ;; H
-  (assert
-  (forall ((j1 Int)) (sorted__function_guard
-  (sorted (mk___t a2 (mk (to_rep a__first) (to_rep a__last)))
-  (+ (+ a_first i3) (* j1 l2))
-  (ite (< l2 (- (- length1 i3) (* j1 l2))) l2 (- (- length1 i3) (* j1 
-  l2)))) (mk___t a2 (mk (to_rep a__first) (to_rep a__last)))
-  (+ (+ a_first i3) (* j1 l2))
-  (ite (< l2 (- (- length1 i3) (* j1 l2))) l2 (- (- length1 i3) (* j1 
-  l2))))))
+  (assert (= temp___216 a1))
 
 ;; H
-  (assert (perm__function_guard
-  (perm (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t a2 (mk (to_rep a__first) (to_rep a__last))) a_first length1)
-  (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t a2 (mk (to_rep a__first) (to_rep a__last))) a_first length1))
+  (assert (= temp___214 i2))
 
 ;; H
-  (assert
-  (forall ((j1 Int)) (sorted__function_guard
-  (sorted (mk___t a2 (mk (to_rep a__first) (to_rep a__last)))
-  (+ a_first (* (* j1 l2) 2))
-  (ite (< (* l2 2) (- length1 (* (* j1 l2) 2))) (* l2 2) (- length1 (* (* j1 
-  l2) 2)))) (mk___t a2 (mk (to_rep a__first) (to_rep a__last)))
-  (+ a_first (* (* j1 l2) 2))
-  (ite (< (* l2 2) (- length1 (* (* j1 l2) 2))) (* l2 2) (- length1 (* (* j1 
-  l2) 2))))))
-
-;; H
-  (assert
-  (forall ((j1 Int)) (sorted__function_guard
-  (sorted (mk___t a2 (mk (to_rep a__first) (to_rep a__last)))
-  (+ (+ a_first i3) (* j1 l2))
-  (ite (< l2 (- (- length1 i3) (* j1 l2))) l2 (- (- length1 i3) (* j1 
-  l2)))) (mk___t a2 (mk (to_rep a__first) (to_rep a__last)))
-  (+ (+ a_first i3) (* j1 l2))
-  (ite (< l2 (- (- length1 i3) (* j1 l2))) l2 (- (- length1 i3) (* j1 
-  l2))))))
-
-;; H
-  (assert (perm__function_guard
-  (perm (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t a2 (mk (to_rep a__first) (to_rep a__last))) a_first length1)
-  (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t a2 (mk (to_rep a__first) (to_rep a__last))) a_first length1))
-
-;; H
-  (assert (sorted__function_guard
-  (sorted (mk___t a3 (mk (to_rep a__first) (to_rep a__last))) o2 (+ l2 k3))
-  (mk___t a3 (mk (to_rep a__first) (to_rep a__last))) o2 (+ l2 k3)))
-
-;; H
-  (assert (perm__function_guard
-  (perm (mk___t a2 (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t a3 (mk (to_rep a__first) (to_rep a__last))) o2 (+ l2 k3))
-  (mk___t a2 (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t a3 (mk (to_rep a__first) (to_rep a__last))) o2 (+ l2 k3)))
-
-;; H
-  (assert (= temp___223 k1))
-
-;; H
-  (assert (= temp___222 a1))
-
-;; H
-  (assert (= temp___220 i2))
-
-;; H
-  (assert (= temp___219 b))
+  (assert (= temp___213 b))
 
 ;; H
   (assert
@@ -757,7 +665,7 @@
   (=> (<= 0 2147483647) (in_range2 k2))))
 
 ;; H
-  (assert (= k2 k4))
+  (assert (= k2 k3))
 
 ;; H
   (assert (= i3 i4))
@@ -766,10 +674,10 @@
   (assert (= b1 b2))
 
 ;; H
-  (assert (= a2 a4))
+  (assert (= a2 a3))
 
 ;; H
-  (assert (= k5 k2))
+  (assert (= k4 k2))
 
 ;; H
   (assert (= i5 i3))
@@ -778,7 +686,7 @@
   (assert (= b3 b1))
 
 ;; H
-  (assert (= a5 a2))
+  (assert (= a4 a2))
 
 ;; H
   (assert (and (= o (- length1 l2)) (in_range1 (- length1 l2))))
@@ -793,7 +701,7 @@
   (assert (= result2 true))
 
 ;; H
-  (assert (= k10 (mk_int__ref k4)))
+  (assert (= k9 (mk_int__ref k3)))
 
 ;; H
   (assert (= i10 (mk_int__ref i4)))
@@ -802,10 +710,10 @@
   (assert (= b8 (mk_map__ref b2)))
 
 ;; H
-  (assert (= a10 (mk_map__ref a4)))
+  (assert (= a9 (mk_map__ref a3)))
 
 ;; H
-  (assert (= k7 k5))
+  (assert (= k6 k4))
 
 ;; H
   (assert (= i7 i5))
@@ -814,10 +722,10 @@
   (assert (= b5 b3))
 
 ;; H
-  (assert (= a7 a5))
+  (assert (= a6 a4))
 
 ;; H
-  (assert (= k8 k10))
+  (assert (= k7 k9))
 
 ;; H
   (assert (= i8 i10))
@@ -826,10 +734,10 @@
   (assert (= b6 b8))
 
 ;; H
-  (assert (= a8 a10))
+  (assert (= a7 a9))
 
 ;; H
-  (assert (= k9 k7))
+  (assert (= k8 k6))
 
 ;; H
   (assert (= i9 i7))
@@ -838,18 +746,13 @@
   (assert (= b7 b5))
 
 ;; H
-  (assert (= a9 a7))
+  (assert (= a8 a6))
 
 ;; H
   (assert
-  (and
-  (= o13 (perm (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-         (mk___t (map__content a8) (mk (to_rep a__first) (to_rep a__last)))
-         a_first length1))
-  (perm__function_guard o13
-  (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t (map__content a8) (mk (to_rep a__first) (to_rep a__last))) 
-  a_first length1)))
+  (= o12 (perm (mk___t a (mk (to_rep a__first) (to_rep a__last)))
+         (mk___t (map__content a7) (mk (to_rep a__first) (to_rep a__last)))
+         a_first length1)))
 
 ;; H
   (assert (<= 0 j))
@@ -858,43 +761,43 @@
   (assert (<= j 2147483647))
 
 ;; H
-  (assert (and (= o3 (* j l2)) (in_range1 (* j l2))))
+  (assert (and (= o2 (* j l2)) (in_range1 (* j l2))))
 
 ;; H
-  (assert (= o4 (* o3 2)))
+  (assert (= o3 (* o2 2)))
 
 ;; H
-  (assert (and (= o5 o4) (in_range1 o4)))
+  (assert (and (= o4 o3) (in_range1 o3)))
 
 ;; H
-  (assert (= result3 (ite (< o5 length1) true false)))
+  (assert (= result3 (ite (< o4 length1) true false)))
 
 ;; H
   (assert (= result3 true))
 
 ;; H
-  (assert (and (= o6 (* j l2)) (in_range1 (* j l2))))
+  (assert (and (= o5 (* j l2)) (in_range1 (* j l2))))
 
 ;; H
-  (assert (= o7 (* o6 2)))
+  (assert (= o6 (* o5 2)))
 
 ;; H
-  (assert (and (= o8 o7) (in_range1 o7)))
+  (assert (and (= o7 o6) (in_range1 o6)))
 
 ;; H
-  (assert (= o9 (- length1 o8)))
+  (assert (= o8 (- length1 o7)))
 
 ;; H
-  (assert (and (= o10 o9) (in_range1 o9)))
+  (assert (and (= o9 o8) (in_range1 o8)))
 
 ;; H
-  (assert (and (= o11 (* l2 2)) (in_range1 (* l2 2))))
+  (assert (and (= o10 (* l2 2)) (in_range1 (* l2 2))))
 
 ;; H
-  (assert (= o12 (ite (< o11 o10) o11 o10)))
+  (assert (= o11 (ite (< o10 o9) o10 o9)))
 
 (assert
 ;; WP_parameter_def
  ;; File "sorting.ads", line 13, characters 0-0
-  (not (in_range2 o12)))
+  (not (in_range2 o11)))
 (check-sat)

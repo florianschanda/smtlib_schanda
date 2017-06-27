@@ -231,44 +231,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(declare-sort t18s 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 8)))
-
-(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq2 (t18s t18s) Bool)
-
-(declare-fun dummy2 () t18s)
-
-(declare-datatypes () ((t18s__ref (mk_t18s__ref (t18s__content t18s)))))
-(define-fun t18s__ref___projection ((a t18s__ref)) t18s (t18s__content a))
-
-(declare-sort t1b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 8)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq3 (t1b t1b) Bool)
-
-(declare-fun dummy3 () t1b)
-
-(declare-datatypes () ((t1b__ref (mk_t1b__ref (t1b__content t1b)))))
-(define-fun t1b__ref___projection ((a t1b__ref)) t1b (t1b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
 (declare-fun temp___198 (Int Int Int) (Array Int integer))
@@ -307,21 +269,19 @@
 
 (declare-fun arrays__f1__result () (Array Int integer))
 
-(declare-fun o () (Array Int integer))
+(declare-fun o () integer)
 
-(declare-fun o1 () integer)
+(declare-fun o1 () (Array Int integer))
 
-(declare-fun o2 () (Array Int integer))
+(declare-fun o2 () integer)
 
-(declare-fun o3 () integer)
+(declare-fun o3 () (Array Int integer))
 
-(declare-fun o4 () (Array Int integer))
+(declare-fun o4 () Int)
 
-(declare-fun o5 () Int)
+(declare-fun o5 () integer)
 
-(declare-fun o6 () integer)
-
-(declare-fun o7 () (Array Int integer))
+(declare-fun o6 () (Array Int integer))
 
 (declare-fun result () (Array Int integer))
 
@@ -367,52 +327,50 @@
   (assert (< init_val 2147483647))
 
 ;; H
-  (assert (= o (arrays__f1__arr__aggregate_def (to_rep (select an_arr 5)))))
-
-;; H
   (assert (= (mk_map__ref result) (mk_map__ref arr)))
 
 ;; H
-  (assert (= arr1 o))
+  (assert
+  (= arr1 (arrays__f1__arr__aggregate_def (to_rep (select an_arr 5)))))
 
 ;; H
-  (assert (= (to_rep o1) x))
+  (assert (= (to_rep o) x))
 
 ;; H
-  (assert (= o2 (store arr1 1 o1)))
+  (assert (= o1 (store arr1 1 o)))
 
 ;; H
   (assert (= arr1 result1))
 
 ;; H
-  (assert (= arr2 o2))
+  (assert (= arr2 o1))
 
 ;; H
-  (assert (= (to_rep o3) x))
+  (assert (= (to_rep o2) x))
 
 ;; H
-  (assert (= o4 (store arr2 2 o3)))
+  (assert (= o3 (store arr2 2 o2)))
 
 ;; H
   (assert (= arr2 result2))
 
 ;; H
-  (assert (= arr3 o4))
+  (assert (= arr3 o3))
 
 ;; H
-  (assert (and (= o5 (+ init_val 1)) (in_range1 (+ init_val 1))))
+  (assert (and (= o4 (+ init_val 1)) (in_range1 (+ init_val 1))))
 
 ;; H
-  (assert (= (to_rep o6) o5))
+  (assert (= (to_rep o5) o4))
 
 ;; H
-  (assert (= o7 (store arr3 3 o6)))
+  (assert (= o6 (store arr3 3 o5)))
 
 ;; H
   (assert (= arr3 result3))
 
 ;; H
-  (assert (= arr4 o7))
+  (assert (= arr4 o6))
 
 ;; H
   (assert (= arrays__f1__result1 arrays__f1__result2))

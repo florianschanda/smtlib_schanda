@@ -1104,7 +1104,7 @@
 
 (declare-fun o1 () count_type)
 
-(declare-fun temp___656 () count_type)
+(declare-fun temp___631 () count_type)
 
 (declare-fun use_ordered_maps__my_find__cu__assume () count_type)
 
@@ -1128,10 +1128,10 @@
   (assert (= o o1))
 
 ;; H
-  (assert (= temp___656 o1))
+  (assert (= temp___631 o1))
 
 ;; H
-  (assert (= (mk___rep1 (mk___split_fields1 temp___656)) no_element))
+  (assert (= (mk___rep1 (mk___split_fields1 temp___631)) no_element))
 
 ;; H
   (assert (in_range1 k))

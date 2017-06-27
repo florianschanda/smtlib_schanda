@@ -194,16 +194,16 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(define-fun dynamic_invariant ((temp___expr_218 us_rep)
-  (temp___is_init_215 Bool) (temp___skip_constant_216 Bool)
-  (temp___do_toplevel_217 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_216 true))
-                                      (in_range1 (of_int 0) temp___expr_218)))
+(define-fun dynamic_invariant ((temp___expr_210 us_rep)
+  (temp___is_init_207 Bool) (temp___skip_constant_208 Bool)
+  (temp___do_toplevel_209 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_208 true))
+                                      (in_range1 (of_int 0) temp___expr_210)))
 
-(define-fun default_initial_assumption ((temp___expr_220 us_rep)
-  (temp___skip_top_level_221 Bool)) Bool (= (rec__private_record__result_ty__found
+(define-fun default_initial_assumption ((temp___expr_212 us_rep)
+  (temp___skip_top_level_213 Bool)) Bool (= (rec__private_record__result_ty__found
                                             (us_split_discrs1
-                                            temp___expr_220)) (of_int 0)))
+                                            temp___expr_212)) (of_int 0)))
 
 (assert
 ;; WP_parameter_def

@@ -210,19 +210,12 @@
   (assert
   (forall ((buf_read__buffer (Array Int character)))
   (forall ((buf_read__pointer Int) (buf_read__max_read Int))
-  (! (=> (valid_state__function_guard
-     (valid_state buf_read__buffer buf_read__pointer buf_read__max_read)
-     buf_read__buffer buf_read__pointer buf_read__max_read)
-     (and
-     (forall ((index Int)) (valid__function_guard
-     (valid (to_rep (select buf_read__buffer index)))
-     (to_rep (select buf_read__buffer index))))
-     (=
+  (! (=
      (= (valid_state buf_read__buffer buf_read__pointer buf_read__max_read) true)
      (and (<= buf_read__pointer buf_read__max_read)
      (forall ((index Int))
      (=> (and (<= 1 index) (<= index buf_read__max_read))
-     (= (valid (to_rep (select buf_read__buffer index))) true))))))) :pattern (
+     (= (valid (to_rep (select buf_read__buffer index))) true))))) :pattern (
   (valid_state buf_read__buffer buf_read__pointer buf_read__max_read)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
@@ -292,12 +285,12 @@
 (define-fun real_index_type__ref___projection ((a real_index_type__ref)) real_index_type 
   (real_index_type__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_149 Int)
-  (temp___is_init_146 Bool) (temp___skip_constant_147 Bool)
-  (temp___do_toplevel_148 Bool)) Bool (=>
-                                      (or (= temp___is_init_146 true)
+(define-fun dynamic_invariant1 ((temp___expr_144 Int)
+  (temp___is_init_141 Bool) (temp___skip_constant_142 Bool)
+  (temp___do_toplevel_143 Bool)) Bool (=>
+                                      (or (= temp___is_init_141 true)
                                       (<= 1 1000)) (in_range2
-                                      temp___expr_149)))
+                                      temp___expr_144)))
 
 (declare-sort index_type 0)
 
@@ -400,20 +393,20 @@
 (define-fun buffer_type__ref___projection ((a buffer_type__ref)) us_t 
   (buffer_type__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_143 Int)
-  (temp___is_init_140 Bool) (temp___skip_constant_141 Bool)
-  (temp___do_toplevel_142 Bool)) Bool (=>
-                                      (or (= temp___is_init_140 true)
+(define-fun dynamic_invariant2 ((temp___expr_138 Int)
+  (temp___is_init_135 Bool) (temp___skip_constant_136 Bool)
+  (temp___do_toplevel_137 Bool)) Bool (=>
+                                      (or (= temp___is_init_135 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range3 temp___expr_143)))
+                                      (in_range3 temp___expr_138)))
 
-(define-fun dynamic_invariant3 ((temp___expr_155 us_t)
-  (temp___is_init_152 Bool) (temp___skip_constant_153 Bool)
-  (temp___do_toplevel_154 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_153 true))
+(define-fun dynamic_invariant3 ((temp___expr_150 us_t)
+  (temp___is_init_147 Bool) (temp___skip_constant_148 Bool)
+  (temp___do_toplevel_149 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_148 true))
                                       (dynamic_property (- 2147483648)
-                                      2147483647 (first1 temp___expr_155)
-                                      (last1 temp___expr_155))))
+                                      2147483647 (first1 temp___expr_150)
+                                      (last1 temp___expr_150))))
 
 (declare-fun c () Int)
 
@@ -474,16 +467,6 @@
 (declare-fun pointer4 () Int)
 
 (declare-fun max_read4 () Int)
-
-;; H
-  (assert (valid_state__function_guard (valid_state buffer pointer max_read)
-  buffer pointer max_read))
-
-;; H
-  (assert
-  (forall ((index Int)) (valid__function_guard
-  (valid (to_rep (select buf_read__read__b index)))
-  (to_rep (select buf_read__read__b index)))))
 
 ;; H
   (assert (in_range2 pointer))
@@ -601,9 +584,6 @@
 
 ;; H
   (assert (= c3 c1))
-
-;; H
-  (assert (valid__function_guard (valid c2) c2))
 
 (assert
 ;; WP_parameter_def

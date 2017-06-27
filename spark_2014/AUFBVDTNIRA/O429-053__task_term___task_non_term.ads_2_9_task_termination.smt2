@@ -88,11 +88,11 @@
 
 (declare-fun tmp () Int)
 
-(declare-fun temp___182 () Int)
+(declare-fun temp___186 () Int)
 
-(declare-fun temp___181 () Int)
+(declare-fun temp___185 () Int)
 
-(declare-fun temp___180 () Int)
+(declare-fun temp___184 () Int)
 
 (declare-fun o () Int)
 
@@ -152,7 +152,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 81, characters 0-0
+ ;; File "task_non_term.ads", line 3, characters 0-0
   (not
   (not
   (and (and (= (mk_int__ref result) (mk_int__ref a)) (= a1 1))
@@ -163,9 +163,9 @@
   (ite (< f1 1000)
   (and
   (and
-  (and (= temp___182 tmp)
-  (and (= temp___181 f1)
-  (and (= temp___180 a1)
+  (and (= temp___186 tmp)
+  (and (= temp___185 f1)
+  (and (= temp___184 a1)
   (and
   (and
   (and

@@ -511,9 +511,8 @@
 ;; is_empty__def_axiom
   (assert
   (forall ((r us_rep))
-  (! (=> (is_empty__function_guard (is_empty r) r)
-     (= (= (is_empty r) true)
-     (= (to_rep2 (rec__ring_buf__ring_buffer__length (us_split_fields1 r))) 0))) :pattern (
+  (! (= (= (is_empty r) true)
+     (= (to_rep2 (rec__ring_buf__ring_buffer__length (us_split_fields1 r))) 0)) :pattern (
   (is_empty r)) )))
 
 (declare-fun head (us_rep) Int)
@@ -523,22 +522,18 @@
 ;; head__post_axiom
   (assert
   (forall ((r us_rep))
-  (! (and (is_empty__function_guard (is_empty r) r)
-     (=> (not (= (is_empty r) true))
-     (let ((result (head r)))
-     (=> (head__function_guard result r) (dynamic_invariant result true false
-     true))))) :pattern ((head r)) )))
+  (! (=> (not (= (is_empty r) true)) (dynamic_invariant (head r) true false
+     true)) :pattern ((head r)) )))
 
 ;; head__def_axiom
   (assert
   (forall ((r us_rep))
-  (! (=> (head__function_guard (head r) r)
-     (= (head r) (to_rep
-                 (let ((temp___177 (rec__ring_buf__ring_buffer__data
+  (! (= (head r) (to_rep
+                 (let ((temp___174 (rec__ring_buf__ring_buffer__data
                                    (us_split_fields1 r))))
-                 (select temp___177 (to_rep1
+                 (select temp___174 (to_rep1
                                     (rec__ring_buf__ring_buffer__first
-                                    (us_split_fields1 r)))))))) :pattern (
+                                    (us_split_fields1 r))))))) :pattern (
   (head r)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -575,11 +570,11 @@
 
 (declare-fun o3 () length_type)
 
-(declare-fun temp___213 () (Array Int integer))
+(declare-fun temp___204 () (Array Int integer))
 
-(declare-fun temp___2131 () ar_index)
+(declare-fun temp___2041 () ar_index)
 
-(declare-fun temp___2132 () length_type)
+(declare-fun temp___2042 () length_type)
 
 (declare-fun result () Int)
 
@@ -599,14 +594,6 @@
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range element)))
-
-;; H
-  (assert (is_empty__function_guard
-  (is_empty
-  (mk___rep
-  (mk___split_fields r__split_fields r__split_fields1 r__split_fields2)))
-  (mk___rep
-  (mk___split_fields r__split_fields r__split_fields1 r__split_fields2))))
 
 ;; H
   (assert
@@ -635,13 +622,13 @@
   (assert (= r__split_fields2 o3))
 
 ;; H
-  (assert (= temp___213 o1))
+  (assert (= temp___204 o1))
 
 ;; H
-  (assert (= temp___2131 o2))
+  (assert (= temp___2041 o2))
 
 ;; H
-  (assert (= temp___2132 o3))
+  (assert (= temp___2042 o3))
 
 ;; H
   (assert
@@ -650,13 +637,13 @@
   (mk___split_fields r__split_fields r__split_fields1 r__split_fields2))))
 
 ;; H
-  (assert (= temp___213 r__split_fields3))
+  (assert (= temp___204 r__split_fields3))
 
 ;; H
-  (assert (= temp___2131 r__split_fields4))
+  (assert (= temp___2041 r__split_fields4))
 
 ;; H
-  (assert (= temp___2132 r__split_fields5))
+  (assert (= temp___2042 r__split_fields5))
 
 (assert
 ;; WP_parameter_def

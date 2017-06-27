@@ -290,11 +290,10 @@
   (forall ((reg (_ BitVec 64)))
   (! (=> (dynamic_invariant reg true true true)
      (let ((result (readreghigh8 reg)))
-     (=> (readreghigh8__function_guard result reg)
      (and
      (= result ((_ extract 7 0) (bvurem (bvudiv (bvand reg ((_ int2bv 64) 65280)) ((_ int2bv 64) 256)) ((_ int2bv 64) 256))))
-     (dynamic_invariant1 result true false true))))) :pattern ((readreghigh8
-                                                               reg)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((readreghigh8
+                                                              reg)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -337,9 +336,6 @@
 
 ;; H
   (assert (= result1 x86__ah__result4))
-
-;; H
-  (assert (readreghigh8__function_guard (readreghigh8 rax) rax))
 
 (assert
 ;; WP_parameter_def

@@ -358,11 +358,6 @@
 
 (declare-fun valid_combination__function_guard (Bool us_rep1) Bool)
 
-;; temp___result_1480_def
-  (assert
-  (forall ((temp___1479 us_rep1)) (valid_combination__function_guard
-  (valid_combination temp___1479) temp___1479)))
-
 (define-fun dynamic_invariant ((temp___expr_1478 us_rep1)
   (temp___is_init_1475 Bool) (temp___skip_constant_1476 Bool)
   (temp___do_toplevel_1477 Bool)) Bool (=> (= temp___do_toplevel_1477 true)
@@ -370,34 +365,29 @@
                                        (= (valid_combination
                                           temp___expr_1478) true))))
 
-(define-fun default_initial_assumption ((temp___expr_1481 us_rep1)
-  (temp___skip_top_level_1482 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_1480 us_rep1)
+  (temp___skip_top_level_1481 Bool)) Bool (and
                                           (and
                                           (and
                                           (and
                                           (= (rec__traffic_lights__lights_state__vehicles_green
                                              (us_split_fields1
-                                             temp___expr_1481)) (of_int 0))
+                                             temp___expr_1480)) (of_int 0))
                                           (= (rec__traffic_lights__lights_state__vehicles_yellow
                                              (us_split_fields1
-                                             temp___expr_1481)) (of_int 0)))
+                                             temp___expr_1480)) (of_int 0)))
                                           (= (rec__traffic_lights__lights_state__vehicles_red
                                              (us_split_fields1
-                                             temp___expr_1481)) (of_int 1)))
+                                             temp___expr_1480)) (of_int 1)))
                                           (= (rec__traffic_lights__lights_state__pedestrians_green
                                              (us_split_fields1
-                                             temp___expr_1481)) (of_int 1)))
+                                             temp___expr_1480)) (of_int 1)))
                                           (= (rec__traffic_lights__lights_state__pedestrians_red
                                              (us_split_fields1
-                                             temp___expr_1481)) (of_int 0))))
+                                             temp___expr_1480)) (of_int 0))))
 
-;; temp___result_1485_def
-  (assert
-  (forall ((temp___1484 us_rep1)) (valid_combination__function_guard
-  (valid_combination temp___1484) temp___1484)))
-
-(define-fun dynamic_predicate ((temp___1483 us_rep1)) Bool (= (valid_combination
-                                                              temp___1483) true))
+(define-fun dynamic_predicate ((temp___1482 us_rep1)) Bool (= (valid_combination
+                                                              temp___1482) true))
 
 (define-fun default_initial_assumption1 ((temp___expr_1473 us_rep1)
   (temp___skip_top_level_1474 Bool)) Bool (and
@@ -426,8 +416,7 @@
 ;; valid_combination__def_axiom
   (assert
   (forall ((ls us_rep1))
-  (! (=> (valid_combination__function_guard (valid_combination ls) ls)
-     (= (= (valid_combination ls) true)
+  (! (= (= (valid_combination ls) true)
      (ite (= (rec__traffic_lights__lights_state__vehicles_green
              (us_split_fields1 ls)) true)
      (and
@@ -465,44 +454,79 @@
      (= (rec__traffic_lights__lights_state__pedestrians_green
         (us_split_fields1 ls)) true))
      (= (rec__traffic_lights__lights_state__pedestrians_red
-        (us_split_fields1 ls)) true)))))) :pattern ((valid_combination ls)) )))
+        (us_split_fields1 ls)) true))))) :pattern ((valid_combination ls)) )))
 
-;; temp___result_1491_def
-  (assert
-  (forall ((temp___1490 us_rep1)) (valid_combination__function_guard
-  (valid_combination temp___1490) temp___1490)))
-
-(define-fun dynamic_invariant1 ((temp___expr_1489 us_rep2)
-  (temp___is_init_1486 Bool) (temp___skip_constant_1487 Bool)
-  (temp___do_toplevel_1488 Bool)) Bool (= (valid_combination
+(define-fun dynamic_invariant1 ((temp___expr_1487 us_rep2)
+  (temp___is_init_1484 Bool) (temp___skip_constant_1485 Bool)
+  (temp___do_toplevel_1486 Bool)) Bool (= (valid_combination
                                           (rec__traffic_lights__traffic_lightT__lights
-                                          (us_split_fields3 temp___expr_1489))) true))
+                                          (us_split_fields3 temp___expr_1487))) true))
+
+(define-fun default_initial_assumption2 ((temp___expr_1489 us_rep2)
+  (temp___skip_top_level_1490 Bool)) Bool (and
+                                          (and
+                                          (= (rec__traffic_lights__traffic_lightT__last_state_change
+                                             (us_split_fields3
+                                             temp___expr_1489)) time_first)
+                                          (= (rec__traffic_lights__traffic_lightT__change_state
+                                             (us_split_fields3
+                                             temp___expr_1489)) (of_int 0)))
+                                          (and
+                                          (and
+                                          (and
+                                          (and
+                                          (= (rec__traffic_lights__lights_state__vehicles_green
+                                             (us_split_fields1
+                                             (rec__traffic_lights__traffic_lightT__lights
+                                             (us_split_fields3
+                                             temp___expr_1489)))) (of_int 0))
+                                          (= (rec__traffic_lights__lights_state__vehicles_yellow
+                                             (us_split_fields1
+                                             (rec__traffic_lights__traffic_lightT__lights
+                                             (us_split_fields3
+                                             temp___expr_1489)))) (of_int 0)))
+                                          (= (rec__traffic_lights__lights_state__vehicles_red
+                                             (us_split_fields1
+                                             (rec__traffic_lights__traffic_lightT__lights
+                                             (us_split_fields3
+                                             temp___expr_1489)))) (of_int 1)))
+                                          (= (rec__traffic_lights__lights_state__pedestrians_green
+                                             (us_split_fields1
+                                             (rec__traffic_lights__traffic_lightT__lights
+                                             (us_split_fields3
+                                             temp___expr_1489)))) (of_int 1)))
+                                          (= (rec__traffic_lights__lights_state__pedestrians_red
+                                             (us_split_fields1
+                                             (rec__traffic_lights__traffic_lightT__lights
+                                             (us_split_fields3
+                                             temp___expr_1489)))) (of_int 0)))))
 
 (declare-fun self__ () us_rep2)
 
-(declare-fun temp___1508 () Bool)
+(declare-fun temp___1511 () Bool)
 
-(declare-fun temp___15081 () Bool)
+(declare-fun temp___15111 () Bool)
 
-(declare-fun temp___15082 () Bool)
+(declare-fun temp___15112 () Bool)
 
-(declare-fun temp___15083 () Bool)
+(declare-fun temp___15113 () Bool)
 
-(declare-fun temp___15084 () Bool)
+(declare-fun temp___15114 () Bool)
 
 ;; H
   (assert
   (and
   (and
-  (and (and (= temp___1508 (of_int 0)) (= temp___15081 (of_int 0)))
-  (= temp___15082 (of_int 1))) (= temp___15083 (of_int 1)))
-  (= temp___15084 (of_int 0))))
+  (and (and (= temp___1511 (of_int 0)) (= temp___15111 (of_int 0)))
+  (= temp___15112 (of_int 1))) (= temp___15113 (of_int 1)))
+  (= temp___15114 (of_int 0))))
 
 (assert
 ;; WP_parameter_def
  ;; File "traffic_lights.ads", line 33, characters 0-0
-  (not (dynamic_predicate
-  (mk___rep
-  (mk___split_fields temp___1508 temp___15081 temp___15082 temp___15083
-  temp___15084)))))
+  (not
+  (= (valid_combination
+     (mk___rep
+     (mk___split_fields temp___1511 temp___15111 temp___15112 temp___15113
+     temp___15114))) true)))
 (check-sat)

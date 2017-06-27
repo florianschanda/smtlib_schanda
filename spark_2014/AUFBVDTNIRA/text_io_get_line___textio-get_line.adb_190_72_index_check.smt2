@@ -483,12 +483,12 @@
 (define-fun int____ref_2__projection ((a int____ref)) int__ (int____content
                                                             a))
 
-(define-fun dynamic_invariant4 ((temp___expr_340 Int)
-  (temp___is_init_337 Bool) (temp___skip_constant_338 Bool)
-  (temp___do_toplevel_339 Bool)) Bool (=>
-                                      (or (= temp___is_init_337 true)
+(define-fun dynamic_invariant4 ((temp___expr_338 Int)
+  (temp___is_init_335 Bool) (temp___skip_constant_336 Bool)
+  (temp___do_toplevel_337 Bool)) Bool (=>
+                                      (or (= temp___is_init_335 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range5 temp___expr_340)))
+                                      (in_range5 temp___expr_338)))
 
 (declare-fun eof () Int)
 
@@ -822,14 +822,8 @@
   (forall ((helpers__cur_position Int))
   (forall ((helpers__the_file (Array Int character)))
   (! (=> (dynamic_invariant2 helpers__cur_position true true true)
-     (let ((result (end_of_file file helpers__cur_position helpers__the_file)))
-     (and (fpeek__function_guard
-     (fpeek file helpers__cur_position helpers__the_file) file
-     helpers__cur_position helpers__the_file)
-     (=> (end_of_file__function_guard result file helpers__cur_position
-     helpers__the_file)
-     (= (= result true)
-     (= (fpeek file helpers__cur_position helpers__the_file) eof)))))) :pattern (
+     (= (= (end_of_file file helpers__cur_position helpers__the_file) true)
+     (= (fpeek file helpers__cur_position helpers__the_file) eof))) :pattern (
   (end_of_file file helpers__cur_position helpers__the_file)) )))))
 
 (declare-fun cur_position_at_start () Int)
@@ -856,10 +850,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS11 () Int)
 
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -880,9 +870,9 @@
 
 (declare-sort t1 0)
 
-(declare-fun first3 (t1) integer)
+(declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -891,8 +881,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first3 (mk1 f l))) f)
-     (= (to_rep1 (last3 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (and (= (to_rep1 (first2 (mk1 f l))) f)
+     (= (to_rep1 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -908,12 +898,12 @@
 (define-fun of_array1 ((a (Array Int character)) (f Int)
   (l Int)) us_t1 (mk___t1 a (mk1 f l)))
 
-(define-fun first4 ((a us_t1)) Int (to_rep1 (first3 (rt1 a))))
+(define-fun first3 ((a us_t1)) Int (to_rep1 (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep1 (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first4 a) (last4 a))
-                                    (+ (- (last4 a) (first4 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size2 () Int)
 
@@ -947,9 +937,9 @@
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment2 a))))
 
 (define-fun bool_eq11 ((x us_t1)
-  (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep1 (first3 (rt1 x)))
-                  (to_rep1 (last3 (rt1 x))) (elts1 y)
-                  (to_rep1 (first3 (rt1 y))) (to_rep1 (last3 (rt1 y)))))
+  (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep1 (first2 (rt1 x)))
+                  (to_rep1 (last2 (rt1 x))) (elts1 y)
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
 (declare-fun user_eq10 (us_t1 us_t1) Bool)
 
@@ -958,17 +948,17 @@
 (declare-datatypes () ((t50b__ref (mk_t50b__ref (t50b__content us_t1)))))
 (define-fun t50b__ref___projection ((a t50b__ref)) us_t1 (t50b__content a))
 
-(declare-fun temp___593 (Int Int Int) us_t1)
+(declare-fun temp___539 (Int Int Int) us_t1)
 
 ;; def_axiom
   (assert
-  (forall ((temp___595 Int) (temp___596 Int) (temp___597 Int))
-  (let ((temp___594 (temp___593 temp___595 temp___596 temp___597)))
+  (forall ((temp___541 Int) (temp___542 Int) (temp___543 Int))
+  (let ((temp___540 (temp___539 temp___541 temp___542 temp___543)))
   (and
-  (=> (dynamic_property 1 2147483647 temp___596 temp___597)
-  (and (= (first4 temp___594) temp___596) (= (last4 temp___594) temp___597)))
-  (forall ((temp___598 Int))
-  (= (select (to_array1 temp___594) temp___598) (of_rep temp___595)))))))
+  (=> (dynamic_property 1 2147483647 temp___542 temp___543)
+  (and (= (first3 temp___540) temp___542) (= (last3 temp___540) temp___543)))
+  (forall ((temp___544 Int))
+  (= (select (to_array1 temp___540) temp___544) (of_rep temp___541)))))))
 
 (define-fun dynamic_invariant5 ((temp___expr_82 us_t)
   (temp___is_init_79 Bool) (temp___skip_constant_80 Bool)
@@ -978,12 +968,12 @@
                                      (first1 temp___expr_82)
                                      (last1 temp___expr_82))))
 
-(define-fun dynamic_invariant6 ((temp___expr_454 Int)
-  (temp___is_init_451 Bool) (temp___skip_constant_452 Bool)
-  (temp___do_toplevel_453 Bool)) Bool (=>
-                                      (or (= temp___is_init_451 true)
+(define-fun dynamic_invariant6 ((temp___expr_423 Int)
+  (temp___is_init_420 Bool) (temp___skip_constant_421 Bool)
+  (temp___do_toplevel_422 Bool)) Bool (=>
+                                      (or (= temp___is_init_420 true)
                                       (<= 0 2147483647)) (in_range7
-                                      temp___expr_454)))
+                                      temp___expr_423)))
 
 (declare-fun fpeek1 (Int Int (Array Int character)) Int)
 
@@ -995,45 +985,34 @@
   (forall ((helpers__cur_position Int))
   (forall ((helpers__the_file (Array Int character)))
   (! (=> (dynamic_invariant2 helpers__cur_position true true true)
-     (let ((result (fpeek file helpers__cur_position helpers__the_file)))
-     (=> (fpeek__function_guard result file helpers__cur_position
-     helpers__the_file) (dynamic_invariant4 result true false true)))) :pattern (
-  (fpeek file helpers__cur_position helpers__the_file)) )))))
+     (dynamic_invariant4 (fpeek file helpers__cur_position helpers__the_file)
+     true false true)) :pattern ((fpeek file helpers__cur_position
+                                 helpers__the_file)) )))))
 
 ;; fpeek__def_axiom
   (assert
   (forall ((file us_rep))
   (forall ((helpers__cur_position Int))
   (forall ((helpers__the_file (Array Int character)))
-  (! (=>
-     (and (dynamic_invariant2 helpers__cur_position true true true)
-     (fpeek__function_guard
-     (fpeek file helpers__cur_position helpers__the_file) file
-     helpers__cur_position helpers__the_file))
-     (and (fpeek__function_guard1
-     (fpeek1
-     (to_rep2 (rec__textio__file_type__descr (us_split_fields1 file)))
-     helpers__cur_position helpers__the_file)
-     (to_rep2 (rec__textio__file_type__descr (us_split_fields1 file)))
-     helpers__cur_position helpers__the_file)
+  (! (=> (dynamic_invariant2 helpers__cur_position true true true)
      (= (fpeek file helpers__cur_position helpers__the_file) (fpeek1
                                                              (to_rep2
                                                              (rec__textio__file_type__descr
                                                              (us_split_fields1
                                                              file)))
                                                              helpers__cur_position
-                                                             helpers__the_file)))) :pattern (
+                                                             helpers__the_file))) :pattern (
   (fpeek file helpers__cur_position helpers__the_file)) )))))
 
 ;; eof_ch__def_axiom
   (assert (= eof_ch (mod2 eof 256)))
 
-(define-fun dynamic_invariant7 ((temp___expr_388 Int)
-  (temp___is_init_385 Bool) (temp___skip_constant_386 Bool)
-  (temp___do_toplevel_387 Bool)) Bool (=>
-                                      (or (= temp___is_init_385 true)
+(define-fun dynamic_invariant7 ((temp___expr_386 Int)
+  (temp___is_init_383 Bool) (temp___skip_constant_384 Bool)
+  (temp___do_toplevel_385 Bool)) Bool (=>
+                                      (or (= temp___is_init_383 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range6 temp___expr_388)))
+                                      (in_range6 temp___expr_386)))
 
 ;; fpeek__post_axiom
   (assert
@@ -1041,22 +1020,17 @@
   (forall ((helpers__the_file (Array Int character)))
   (! (=>
      (and (dynamic_invariant7 stream true true true) (dynamic_invariant2
-     helpers__cur_position true true true))
-     (let ((result (fpeek1 stream helpers__cur_position helpers__the_file)))
-     (=> (fpeek__function_guard1 result stream helpers__cur_position
-     helpers__the_file) (dynamic_invariant4 result true false true)))) :pattern (
-  (fpeek1 stream helpers__cur_position helpers__the_file)) ))))
+     helpers__cur_position true true true)) (dynamic_invariant4
+     (fpeek1 stream helpers__cur_position helpers__the_file) true false
+     true)) :pattern ((fpeek1 stream helpers__cur_position helpers__the_file)) ))))
 
 ;; fpeek__def_axiom
   (assert
   (forall ((stream Int) (helpers__cur_position Int))
   (forall ((helpers__the_file (Array Int character)))
   (! (=>
-     (and
      (and (dynamic_invariant7 stream true true true) (dynamic_invariant2
-     helpers__cur_position true true true)) (fpeek__function_guard1
-     (fpeek1 stream helpers__cur_position helpers__the_file) stream
-     helpers__cur_position helpers__the_file))
+     helpers__cur_position true true true))
      (= (fpeek1 stream helpers__cur_position helpers__the_file) (ite (= 
                                                                 (to_rep
                                                                 (select helpers__the_file helpers__cur_position)) 
@@ -1073,13 +1047,10 @@
   (assert
   (forall ((ch Int) (from Int) (to__ Int))
   (forall ((helpers__the_file (Array Int character)))
-  (! (=> (no_char_in_slice__function_guard
-     (no_char_in_slice ch from to__ helpers__the_file) ch from to__
-     helpers__the_file)
-     (= (= (no_char_in_slice ch from to__ helpers__the_file) true)
+  (! (= (= (no_char_in_slice ch from to__ helpers__the_file) true)
      (forall ((idx Int))
      (=> (and (<= from idx) (<= idx to__))
-     (not (= (to_rep (select helpers__the_file idx)) ch)))))) :pattern (
+     (not (= (to_rep (select helpers__the_file idx)) ch))))) :pattern (
   (no_char_in_slice ch from to__ helpers__the_file)) ))))
 
 (declare-fun has_char_in_slice (Int Int Int (Array Int character)) Bool)
@@ -1094,42 +1065,30 @@
   (assert
   (forall ((ch Int) (from Int) (to__ Int))
   (forall ((helpers__the_file (Array Int character)))
-  (! (=> (has_char_in_slice__function_guard
-     (has_char_in_slice ch from to__ helpers__the_file) ch from to__
-     helpers__the_file)
-     (= (= (has_char_in_slice ch from to__ helpers__the_file) true)
+  (! (= (= (has_char_in_slice ch from to__ helpers__the_file) true)
      (exists ((idx Int))
      (and (and (<= from idx) (<= idx to__))
-     (= (to_rep (select helpers__the_file idx)) ch))))) :pattern ((has_char_in_slice
-                                                                  ch from
-                                                                  to__
-                                                                  helpers__the_file)) ))))
+     (= (to_rep (select helpers__the_file idx)) ch)))) :pattern ((has_char_in_slice
+                                                                 ch from to__
+                                                                 helpers__the_file)) ))))
 
 ;; find_char_in_slice__post_axiom
   (assert
   (forall ((ch Int) (from Int) (to__ Int))
   (forall ((helpers__the_file (Array Int character)))
-  (! (and (has_char_in_slice__function_guard
-     (has_char_in_slice ch from to__ helpers__the_file) ch from to__
-     helpers__the_file)
-     (=>
+  (! (=>
      (and
      (and
      (and (dynamic_invariant3 ch true true true) (dynamic_invariant2 from
      true true true)) (dynamic_invariant2 to__ true true true))
      (= (has_char_in_slice ch from to__ helpers__the_file) true))
      (let ((result (find_char_in_slice ch from to__ helpers__the_file)))
-     (and (no_char_in_slice__function_guard
-     (no_char_in_slice ch from (- result 1) helpers__the_file) ch from
-     (- result 1) helpers__the_file)
-     (=> (find_char_in_slice__function_guard result ch from to__
-     helpers__the_file)
      (and
      (and (and (<= from result) (<= result to__))
      (and (= (no_char_in_slice ch from (- result 1) helpers__the_file) true)
      (= (to_rep (select helpers__the_file result)) ch))) (dynamic_invariant2
-     result true false true))))))) :pattern ((find_char_in_slice ch from to__
-                                             helpers__the_file)) ))))
+     result true false true)))) :pattern ((find_char_in_slice ch from to__
+                                          helpers__the_file)) ))))
 
 (declare-fun the_file () (Array Int character))
 
@@ -1151,7 +1110,7 @@
 
 (declare-fun item () (Array Int character))
 
-(declare-fun last5 () Int)
+(declare-fun last4 () Int)
 
 (declare-fun ch () Int)
 
@@ -1161,17 +1120,17 @@
 
 (declare-fun textio__get_line__eof_at_start__assume () Bool)
 
-(declare-fun temp___600 () (Array Int character))
+(declare-fun temp___546 () (Array Int character))
 
-(declare-fun temp___6001 () t1)
+(declare-fun temp___5461 () t1)
 
-(declare-fun temp___601 () (Array Int character))
+(declare-fun temp___547 () (Array Int character))
 
-(declare-fun temp___6011 () t)
+(declare-fun temp___5471 () t)
 
-(declare-fun temp___602 () (Array Int character))
+(declare-fun temp___548 () (Array Int character))
 
-(declare-fun temp___6021 () t)
+(declare-fun temp___5481 () t)
 
 (declare-fun o () (Array Int character))
 
@@ -1195,7 +1154,7 @@
 
 (declare-fun result1 () Int)
 
-(declare-fun last6 () Int)
+(declare-fun last5 () Int)
 
 (declare-fun result2 () Int)
 
@@ -1205,7 +1164,7 @@
 
 (declare-fun item2 () (Array Int character))
 
-(declare-fun last7 () Int)
+(declare-fun last6 () Int)
 
 (declare-fun n2 () Int)
 
@@ -1216,7 +1175,7 @@
   (to_rep1 item__last)))
 
 ;; H
-  (assert (=> (<= 0 2147483647) (in_range4 last5)))
+  (assert (=> (<= 0 2147483647) (in_range4 last4)))
 
 ;; H
   (assert (in_range2 cur_position))
@@ -1229,18 +1188,6 @@
 
 ;; H
   (assert (in_range5 eof))
-
-;; H
-  (assert (end_of_file__function_guard
-  (end_of_file
-  (mk___rep
-  (mk___split_fields file__split_fields file__split_fields1
-  file__split_fields2 file__split_fields3 file__split_fields4
-  file__split_fields5 file__split_fields6)) cur_position the_file)
-  (mk___rep
-  (mk___split_fields file__split_fields file__split_fields1
-  file__split_fields2 file__split_fields3 file__split_fields4
-  file__split_fields5 file__split_fields6)) cur_position the_file))
 
 ;; H
   (assert
@@ -1258,20 +1205,7 @@
   (assert (in_range2 cur_position_at_start))
 
 ;; H
-  (assert (fpeek__function_guard
-  (fpeek
-  (mk___rep
-  (mk___split_fields file__split_fields file__split_fields1
-  file__split_fields2 file__split_fields3 file__split_fields4
-  file__split_fields5 file__split_fields6)) cur_position the_file)
-  (mk___rep
-  (mk___split_fields file__split_fields file__split_fields1
-  file__split_fields2 file__split_fields3 file__split_fields4
-  file__split_fields5 file__split_fields6)) cur_position the_file))
-
-;; H
   (assert
-  (and
   (and
   (= textio__get_line__eof_at_start__assume (end_of_file
                                             (mk___rep
@@ -1284,11 +1218,6 @@
                                             file__split_fields5
                                             file__split_fields6))
                                             cur_position the_file))
-  (end_of_file__function_guard textio__get_line__eof_at_start__assume
-  (mk___rep
-  (mk___split_fields file__split_fields file__split_fields1
-  file__split_fields2 file__split_fields3 file__split_fields4
-  file__split_fields5 file__split_fields6)) cur_position the_file))
   (= (= textio__get_line__eof_at_start__assume true)
   (= (fpeek
      (mk___rep
@@ -1312,43 +1241,43 @@
 ;; H
   (assert
   (= (to_rep1
-     (first3
-     (rt1 (temp___593 32 (to_rep1 item__first) (to_rep1 item__last))))) 
+     (first2
+     (rt1 (temp___539 32 (to_rep1 item__first) (to_rep1 item__last))))) 
   (to_rep1 item__first)))
 
 ;; H
   (assert
   (= (to_rep1
-     (last3 (rt1 (temp___593 32 (to_rep1 item__first) (to_rep1 item__last))))) 
+     (last2 (rt1 (temp___539 32 (to_rep1 item__first) (to_rep1 item__last))))) 
   (to_rep1 item__last)))
 
 ;; H
   (assert
-  (= (mk___t1 temp___600 temp___6001) (temp___593 32 (to_rep1 item__first)
+  (= (mk___t1 temp___546 temp___5461) (temp___539 32 (to_rep1 item__first)
                                       (to_rep1 item__last))))
 
 ;; H
-  (assert (= temp___600 temp___601))
+  (assert (= temp___546 temp___547))
 
 ;; H
   (assert
-  (= (mk (to_rep1 (first3 temp___6001)) (to_rep1 (last3 temp___6001))) 
-  temp___6011))
+  (= (mk (to_rep1 (first2 temp___5461)) (to_rep1 (last2 temp___5461))) 
+  temp___5471))
 
 ;; H
   (assert
-  (= (ite (<= (to_rep1 (first temp___6011)) (to_rep1 (last temp___6011)))
-     (+ (- (to_rep1 (last temp___6011)) (to_rep1 (first temp___6011))) 1) 0) 
+  (= (ite (<= (to_rep1 (first temp___5471)) (to_rep1 (last temp___5471)))
+     (+ (- (to_rep1 (last temp___5471)) (to_rep1 (first temp___5471))) 1) 0) 
   (ite (<= (to_rep1 item__first) (to_rep1 item__last))
   (+ (- (to_rep1 item__last) (to_rep1 item__first)) 1) 0)))
 
 ;; H
   (assert
-  (= (mk___t temp___602 temp___6021) (mk___t temp___601 temp___6011)))
+  (= (mk___t temp___548 temp___5481) (mk___t temp___547 temp___5471)))
 
 ;; H
   (assert
-  (= o (slide temp___602 (to_rep1 (first temp___6021)) (to_rep1 item__first))))
+  (= o (slide temp___548 (to_rep1 (first temp___5481)) (to_rep1 item__first))))
 
 ;; H
   (assert (= (mk_map__ref result) (mk_map__ref item)))
@@ -1365,10 +1294,10 @@
   (assert (and (= o2 o1) (in_range4 o1)))
 
 ;; H
-  (assert (= (mk_int__ref result1) (mk_int__ref last5)))
+  (assert (= (mk_int__ref result1) (mk_int__ref last4)))
 
 ;; H
-  (assert (= last6 o2))
+  (assert (= last5 o2))
 
 ;; H
   (assert (not (< (to_rep1 item__last) (to_rep1 item__first))))
@@ -1398,13 +1327,13 @@
 
 ;; H
   (assert
-  (and (<= (to_rep1 item__first) (+ last7 1))
-  (= (+ last7 n2) (to_rep1 item__last))))
+  (and (<= (to_rep1 item__first) (+ last6 1))
+  (= (+ last6 n2) (to_rep1 item__last))))
 
 ;; H
   (assert
   (forall ((idx1 Int))
-  (=> (and (<= (to_rep1 item__first) idx1) (<= idx1 last7))
+  (=> (and (<= (to_rep1 item__first) idx1) (<= idx1 last6))
   (= (to_rep (select item2 idx1)) (to_rep
                                   (select the_file (+ (- idx1 (to_rep1
                                                               item__first)) 
@@ -1412,14 +1341,14 @@
 
 ;; H
   (assert
-  (= cur_position1 (+ (- (+ cur_position last7) (to_rep1 item__first)) 1)))
+  (= cur_position1 (+ (- (+ cur_position last6) (to_rep1 item__first)) 1)))
 
 ;; H
   (assert
   (and
   (and
   (and
-  (and (=> (<= 0 2147483647) (in_range4 last7))
+  (and (=> (<= 0 2147483647) (in_range4 last6))
   (=> (<= 0 2147483647) (in_range4 n2)))
   (=> (<= (- 2147483648) 2147483647) (in_range1 rest1))) (in_range2
   cur_position1)) (<= 80 n2)))
@@ -1428,7 +1357,7 @@
   (assert (<= (to_rep1 item__first) idx))
 
 ;; H
-  (assert (<= idx last7))
+  (assert (<= idx last6))
 
 (assert
 ;; WP_parameter_def

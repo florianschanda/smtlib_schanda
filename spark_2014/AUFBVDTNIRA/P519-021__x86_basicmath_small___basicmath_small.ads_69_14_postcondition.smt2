@@ -593,10 +593,9 @@
   (forall ((x86__rax (_ BitVec 64)))
   (! (=> (dynamic_invariant x86__rax true true true)
      (let ((result (eax x86__rax)))
-     (=> (eax__function_guard result x86__rax)
      (and
      (= result ((_ extract 31 0) (bvand x86__rax ((_ int2bv 64) 4294967295))))
-     (dynamic_invariant1 result true false true))))) :pattern ((eax x86__rax)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((eax x86__rax)) )))
 
 (declare-fun writereg32post ((_ BitVec 64) (_ BitVec 32)) Bool)
 
@@ -629,7 +628,6 @@
   (forall ((x86__memory (Array (_ BitVec 64) unsigned8)))
   (! (=> (dynamic_invariant addr true true true)
      (let ((result (readmem32 addr x86__memory)))
-     (=> (readmem32__function_guard result addr x86__memory)
      (and
      (and
      (and
@@ -642,9 +640,8 @@
      (to_rep (select x86__memory (bvadd addr ((_ int2bv 64) 2))))) ((_ int2bv 32) 65536))))
      (= (bvand result ((_ int2bv 32) 4278190080)) (bvmul ((_ zero_extend 24) 
      (to_rep (select x86__memory (bvadd addr ((_ int2bv 64) 3))))) ((_ int2bv 32) 16777216))))
-     (dynamic_invariant1 result true false true))))) :pattern ((readmem32
-                                                               addr
-                                                               x86__memory)) ))))
+     (dynamic_invariant1 result true false true)))) :pattern ((readmem32 addr
+                                                              x86__memory)) ))))
 
 (declare-fun readmem64 ((_ BitVec 64)
   (Array (_ BitVec 64) unsigned8)) (_ BitVec 64))
@@ -658,7 +655,6 @@
   (forall ((x86__memory (Array (_ BitVec 64) unsigned8)))
   (! (=> (dynamic_invariant addr true true true)
      (let ((result (readmem64 addr x86__memory)))
-     (=> (readmem64__function_guard result addr x86__memory)
      (and
      (and
      (and
@@ -683,8 +679,8 @@
      (to_rep (select x86__memory (bvadd addr ((_ int2bv 64) 6))))) ((_ int2bv 64) 281474976710656))))
      (= (bvand result ((_ int2bv 64) 18374686479671623680)) (bvmul ((_ zero_extend 56) 
      (to_rep (select x86__memory (bvadd addr ((_ int2bv 64) 7))))) ((_ int2bv 64) 72057594037927936))))
-     (dynamic_invariant result true false true))))) :pattern ((readmem64 addr
-                                                              x86__memory)) ))))
+     (dynamic_invariant result true false true)))) :pattern ((readmem64 addr
+                                                             x86__memory)) ))))
 
 (define-fun dynamic_invariant2 ((temp___expr_220 (_ BitVec 8))
   (temp___is_init_217 Bool) (temp___skip_constant_218 Bool)
@@ -699,11 +695,9 @@
   (forall ((reg (_ BitVec 64)))
   (! (=> (dynamic_invariant reg true true true)
      (let ((result (readreg32 reg)))
-     (=> (readreg32__function_guard result reg)
      (and
      (= result ((_ extract 31 0) (bvand reg ((_ int2bv 64) 4294967295))))
-     (dynamic_invariant1 result true false true))))) :pattern ((readreg32
-                                                               reg)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((readreg32 reg)) )))
 
 ;; writereg32post__post_axiom
   (assert
@@ -712,12 +706,9 @@
   (! (=>
      (and (dynamic_invariant regnew true true true) (dynamic_invariant1 val__
      true true true))
-     (let ((result (writereg32post regnew val__)))
-     (and (readreg32__function_guard (readreg32 regnew) regnew)
-     (=> (writereg32post__function_guard result regnew val__)
-     (= (= result true)
+     (= (= (writereg32post regnew val__) true)
      (and (= (readreg32 regnew) val__)
-     (= (bvand regnew ((_ int2bv 64) 18446744069414584320)) ((_ int2bv 64) 0)))))))) :pattern (
+     (= (bvand regnew ((_ int2bv 64) 18446744069414584320)) ((_ int2bv 64) 0))))) :pattern (
   (writereg32post regnew val__)) ))))
 
 (declare-fun zeroflag () Bool)
@@ -754,43 +745,43 @@
 
 (declare-fun memory () (Array (_ BitVec 64) unsigned8))
 
-(declare-fun temp___547 () (_ BitVec 64))
+(declare-fun temp___429 () (_ BitVec 64))
 
-(declare-fun temp___546 () (_ BitVec 64))
+(declare-fun temp___428 () (_ BitVec 64))
 
-(declare-fun temp___545 () (_ BitVec 64))
+(declare-fun temp___427 () (_ BitVec 64))
 
-(declare-fun temp___543 () (Array (_ BitVec 64) unsigned8))
+(declare-fun temp___425 () (Array (_ BitVec 64) unsigned8))
 
-(declare-fun temp___544 () (_ BitVec 64))
+(declare-fun temp___426 () (_ BitVec 64))
 
-(declare-fun temp___549 () (Array (_ BitVec 64) unsigned8))
+(declare-fun temp___431 () (Array (_ BitVec 64) unsigned8))
 
-(declare-fun temp___541 () Bool)
+(declare-fun temp___423 () Bool)
 
-(declare-fun temp___542 () (_ BitVec 64))
+(declare-fun temp___424 () (_ BitVec 64))
 
-(declare-fun temp___539 () Bool)
+(declare-fun temp___421 () Bool)
 
-(declare-fun temp___540 () (_ BitVec 64))
+(declare-fun temp___422 () (_ BitVec 64))
 
-(declare-fun temp___538 () (_ BitVec 64))
+(declare-fun temp___420 () (_ BitVec 64))
 
-(declare-fun temp___536 () Bool)
+(declare-fun temp___418 () Bool)
 
-(declare-fun temp___537 () (_ BitVec 64))
+(declare-fun temp___419 () (_ BitVec 64))
 
-(declare-fun temp___535 () (_ BitVec 64))
+(declare-fun temp___417 () (_ BitVec 64))
 
-(declare-fun temp___533 () (_ BitVec 64))
+(declare-fun temp___415 () (_ BitVec 64))
 
-(declare-fun temp___534 () (_ BitVec 64))
+(declare-fun temp___416 () (_ BitVec 64))
 
-(declare-fun temp___532 () Bool)
+(declare-fun temp___414 () Bool)
 
-(declare-fun temp___548 () (_ BitVec 64))
+(declare-fun temp___430 () (_ BitVec 64))
 
-(declare-fun temp___531 () (_ BitVec 64))
+(declare-fun temp___413 () (_ BitVec 64))
 
 (declare-fun o () (_ BitVec 64))
 
@@ -1159,85 +1150,64 @@
 (declare-fun memory8 () (Array (_ BitVec 64) unsigned8))
 
 ;; H
-  (assert (writereg32post__function_guard
-  (writereg32post rbx1 ((_ int2bv 32) 0)) rbx1 ((_ int2bv 32) 0)))
+  (assert (= temp___429 rbx))
 
 ;; H
-  (assert (writereg32post__function_guard
-  (writereg32post rax1 ((_ int2bv 32) 0)) rax1 ((_ int2bv 32) 0)))
+  (assert (= temp___428 xmm3))
 
 ;; H
-  (assert (writereg32post__function_guard
-  (writereg32post rdi3 ((_ int2bv 32) 4198688)) rdi3
-  ((_ int2bv 32) 4198688)))
+  (assert (= temp___427 rsp))
 
 ;; H
-  (assert (writereg32post__function_guard (writereg32post rax2 o4) rax2 
-  o4))
+  (assert (= temp___425 memory))
 
 ;; H
-  (assert (writereg32post__function_guard
-  (writereg32post rdi4 ((_ int2bv 32) 10)) rdi4 ((_ int2bv 32) 10)))
+  (assert (= temp___426 rsi))
 
 ;; H
-  (assert (= temp___547 rbx))
+  (assert (= temp___431 memory))
 
 ;; H
-  (assert (= temp___546 xmm3))
+  (assert (= temp___423 overflowflag))
 
 ;; H
-  (assert (= temp___545 rsp))
+  (assert (= temp___424 xmm2))
 
 ;; H
-  (assert (= temp___543 memory))
+  (assert (= temp___421 signflag))
 
 ;; H
-  (assert (= temp___544 rsi))
+  (assert (= temp___422 xmm1))
 
 ;; H
-  (assert (= temp___549 memory))
+  (assert (= temp___420 rax))
 
 ;; H
-  (assert (= temp___541 overflowflag))
+  (assert (= temp___418 carryflag))
 
 ;; H
-  (assert (= temp___542 xmm2))
+  (assert (= temp___419 xmm0))
 
 ;; H
-  (assert (= temp___539 signflag))
+  (assert (= temp___417 rbp))
 
 ;; H
-  (assert (= temp___540 xmm1))
+  (assert (= temp___415 r12))
 
 ;; H
-  (assert (= temp___538 rax))
+  (assert (= temp___416 rdi))
 
 ;; H
-  (assert (= temp___536 carryflag))
+  (assert (= temp___414 zeroflag))
 
 ;; H
-  (assert (= temp___537 xmm0))
+  (assert (= temp___430 rsp))
 
 ;; H
-  (assert (= temp___535 rbp))
+  (assert (= temp___413 xmm4))
 
 ;; H
-  (assert (= temp___533 r12))
-
-;; H
-  (assert (= temp___534 rdi))
-
-;; H
-  (assert (= temp___532 zeroflag))
-
-;; H
-  (assert (= temp___548 rsp))
-
-;; H
-  (assert (= temp___531 xmm4))
-
-;; H
-  (assert (= rsp1 temp___548))
+  (assert (= rsp1 temp___430))
 
 ;; H
   (assert
@@ -1258,7 +1228,7 @@
   (not (= i (bvadd rsp1 ((_ int2bv 64) 5)))))
   (not (= i (bvadd rsp1 ((_ int2bv 64) 6)))))
   (not (= i (bvadd rsp1 ((_ int2bv 64) 7)))))
-  (= (to_rep (select memory1 i)) (to_rep (select temp___549 i)))))))
+  (= (to_rep (select memory1 i)) (to_rep (select temp___431 i)))))))
 
 ;; H
   (assert (= rsi1 result))
@@ -1279,9 +1249,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o (readmem64 rsp1 memory1)) (readmem64__function_guard o rsp1
-  memory1))
+  (and (= o (readmem64 rsp1 memory1))
   (and
   (and
   (and
@@ -1327,12 +1295,9 @@
 ;; H
   (assert
   (and
-  (and
   (= o1 (readmem64
         (bvsub (bvadd rsp1 ((_ int2bv 64) 152)) ((_ int2bv 64) 144)) 
         memory1))
-  (readmem64__function_guard o1
-  (bvsub (bvadd rsp1 ((_ int2bv 64) 152)) ((_ int2bv 64) 144)) memory1))
   (and
   (and
   (and
@@ -1376,12 +1341,9 @@
 ;; H
   (assert
   (and
-  (and
   (= o2 (readmem64
         (bvsub (bvadd rsp1 ((_ int2bv 64) 152)) ((_ int2bv 64) 136)) 
         memory1))
-  (readmem64__function_guard o2
-  (bvsub (bvadd rsp1 ((_ int2bv 64) 152)) ((_ int2bv 64) 136)) memory1))
   (and
   (and
   (and
@@ -1425,12 +1387,9 @@
 ;; H
   (assert
   (and
-  (and
   (= o3 (readmem64
         (bvsub (bvadd rsp1 ((_ int2bv 64) 152)) ((_ int2bv 64) 128)) 
         memory1))
-  (readmem64__function_guard o3
-  (bvsub (bvadd rsp1 ((_ int2bv 64) 152)) ((_ int2bv 64) 128)) memory1))
   (and
   (and
   (and
@@ -1498,12 +1457,9 @@
 ;; H
   (assert
   (and
-  (and
   (= o4 (readmem32
         (bvsub (bvadd rsp5 ((_ int2bv 64) 152)) ((_ int2bv 64) 108)) 
         memory1))
-  (readmem32__function_guard o4
-  (bvsub (bvadd rsp5 ((_ int2bv 64) 152)) ((_ int2bv 64) 108)) memory1))
   (and
   (and
   (and
@@ -1527,7 +1483,7 @@
 
 ;; H
   (assert
-  (and (and (= o5 (eax rax2)) (eax__function_guard o5 rax2))
+  (and (= o5 (eax rax2))
   (= o5 ((_ extract 31 0) (bvand rax2 ((_ int2bv 64) 4294967295))))))
 
 ;; H
@@ -1541,7 +1497,7 @@
 
 ;; H
   (assert
-  (and (and (= o7 (eax rax2)) (eax__function_guard o7 rax2))
+  (and (= o7 (eax rax2))
   (= o7 ((_ extract 31 0) (bvand rax2 ((_ int2bv 64) 4294967295))))))
 
 ;; H
@@ -1582,9 +1538,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o9 (readmem64 rsp8 memory1)) (readmem64__function_guard o9 
-  rsp8 memory1))
+  (and (= o9 (readmem64 rsp8 memory1))
   (and
   (and
   (and
@@ -1634,9 +1588,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o10 (readmem64 ((_ int2bv 64) 4198768) memory1))
-  (readmem64__function_guard o10 ((_ int2bv 64) 4198768) memory1))
   (and
   (and
   (and

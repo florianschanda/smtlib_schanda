@@ -325,12 +325,12 @@
 (define-fun seconds_count__ref___projection ((a seconds_count__ref)) seconds_count 
   (seconds_count__content a))
 
-(define-fun dynamic_invariant ((temp___expr_230 Int)
-  (temp___is_init_227 Bool) (temp___skip_constant_228 Bool)
-  (temp___do_toplevel_229 Bool)) Bool (=>
-                                      (or (= temp___is_init_227 true)
+(define-fun dynamic_invariant ((temp___expr_153 Int)
+  (temp___is_init_150 Bool) (temp___skip_constant_151 Bool)
+  (temp___do_toplevel_152 Bool)) Bool (=>
+                                      (or (= temp___is_init_150 true)
                                       (<= (- 9223372036854775808) 9223372036854775807))
-                                      (in_range3 temp___expr_230)))
+                                      (in_range3 temp___expr_153)))
 
 (declare-fun ts_fraction (us_rep) duration)
 
@@ -347,13 +347,10 @@
 ;; ts_fraction__def_axiom
   (assert
   (forall ((ts us_rep))
-  (! (=> (ts_fraction__function_guard (ts_fraction ts) ts)
-     (and (to_duration__2__function_guard (to_duration__2 ts) ts)
-     (and (ts_sc__function_guard (ts_sc ts) ts)
-     (= (ts_fraction ts) (of_fixed
+  (! (= (ts_fraction ts) (of_fixed
                          (- (to_fixed (to_duration__2 ts)) (to_fixed
                                                            (of_fixed
-                                                           (* (ts_sc ts) 1000000000))))))))) :pattern (
+                                                           (* (ts_sc ts) 1000000000)))))) :pattern (
   (ts_fraction ts)) )))
 
 (declare-fun result_sc (Int us_rep) Int)
@@ -364,11 +361,8 @@
   (assert
   (forall ((sc Int))
   (forall ((ts us_rep))
-  (! (=>
-     (and (dynamic_invariant sc true true true) (result_sc__function_guard
-     (result_sc sc ts) sc ts))
-     (and (ts_sc__function_guard (ts_sc ts) ts)
-     (= (result_sc sc ts) (+ sc (ts_sc ts))))) :pattern ((result_sc sc ts)) ))))
+  (! (=> (dynamic_invariant sc true true true)
+     (= (result_sc sc ts) (+ sc (ts_sc ts)))) :pattern ((result_sc sc ts)) ))))
 
 (declare-fun sc () Int)
 
@@ -381,9 +375,7 @@
 ;; ts_sc__def_axiom
   (assert
   (forall ((ts1 us_rep))
-  (! (=> (ts_sc__function_guard (ts_sc ts1) ts1)
-     (and (to_duration__2__function_guard (to_duration__2 ts1) ts1)
-     (= (ts_sc ts1) (to_int2 (to_fixed (to_duration__2 ts1)))))) :pattern (
+  (! (= (ts_sc ts1) (to_int2 (to_fixed (to_duration__2 ts1)))) :pattern (
   (ts_sc ts1)) )))
 
 (declare-fun o () Int)
@@ -457,17 +449,11 @@
   (assert (= result true))
 
 ;; H
-  (assert (ts_sc__function_guard (ts_sc ts) ts))
-
-;; H
-  (assert (ts_sc__function_guard (ts_sc ts) ts))
-
-;; H
   (assert (and (= o13 (+ 9223372036 1)) (in_range2 (+ 9223372036 1))))
 
 ;; H
   (assert
-  (and (and (= o14 (result_sc sc ts)) (result_sc__function_guard o14 sc ts))
+  (and (= o14 (result_sc sc ts))
   (and (in_range3 o14) (= o14 (+ sc (ts_sc ts))))))
 
 ;; H
@@ -475,7 +461,7 @@
 
 ;; H
   (assert
-  (and (and (= o11 (result_sc sc ts)) (result_sc__function_guard o11 sc ts))
+  (and (= o11 (result_sc sc ts))
   (and (in_range3 o11) (= o11 (+ sc (ts_sc ts))))))
 
 ;; H
@@ -492,12 +478,8 @@
   (assert (= result1 true))
 
 ;; H
-  (assert (ts_sc__function_guard (ts_sc ts) ts))
-
-;; H
   (assert
-  (and (and (= o (result_sc sc ts)) (result_sc__function_guard o sc ts))
-  (and (in_range3 o) (= o (+ sc (ts_sc ts))))))
+  (and (= o (result_sc sc ts)) (and (in_range3 o) (= o (+ sc (ts_sc ts))))))
 
 ;; H
   (assert (= result2 (ite (< 0 o) true false)))
@@ -506,17 +488,8 @@
   (assert (not (= result2 true)))
 
 ;; H
-  (assert (to_duration__2__function_guard (to_duration__2 ts) ts))
-
-;; H
-  (assert (ts_sc__function_guard (ts_sc ts) ts))
-
-;; H
-  (assert (ts_sc__function_guard (ts_sc ts) ts))
-
-;; H
   (assert
-  (and (and (= o7 (ts_fraction ts)) (ts_fraction__function_guard o7 ts))
+  (and (= o7 (ts_fraction ts))
   (= o7 (of_fixed
         (- (to_fixed (to_duration__2 ts)) (to_fixed
                                           (of_fixed
@@ -527,7 +500,7 @@
 
 ;; H
   (assert
-  (and (and (= o1 (result_sc sc ts)) (result_sc__function_guard o1 sc ts))
+  (and (= o1 (result_sc sc ts))
   (and (in_range3 o1) (= o1 (+ sc (ts_sc ts))))))
 
 ;; H

@@ -830,6 +830,62 @@
 (define-fun receiver_type__ref___projection ((a receiver_type__ref)) us_rep1 
   (receiver_type__content a))
 
+(define-fun to_int3 ((b Bool)) Int (ite (= b true) 1 0))
+
+(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
+
+(define-fun in_range4 ((x Int)) Bool (or (= x 0) (= x 1)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE5 (Bool) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Bool)
+
+(declare-fun to_rep4 (rx_frame_queue_index) (_ BitVec 8))
+
+(declare-fun of_rep4 ((_ BitVec 8)) rx_frame_queue_index)
+
+;; inversion_axiom
+  (assert
+  (forall ((x rx_frame_queue_index))
+  (! (= (of_rep4 (to_rep4 x)) x) :pattern ((to_rep4 x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x rx_frame_queue_index)) (! (in_range1
+  (to_rep4 x)) :pattern ((to_rep4 x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x (_ BitVec 8)))
+  (! (let ((y (bvurem x ((_ int2bv 8) 2))))
+     (=> (in_range1 y) (= (to_rep4 (of_rep4 x)) y))) :pattern ((to_rep4
+                                                               (of_rep4 x))) )))
+
+(define-fun to_int4 ((x rx_frame_queue_index)) Int (bv2nat (to_rep4 x)))
+
+;; range_int_axiom
+  (assert
+  (forall ((x rx_frame_queue_index)) (! (in_range_int
+  (to_int4 x)) :pattern ((to_int4 x)) )))
+
+(declare-fun temp___4475 (us_rep) (Array (_ BitVec 8) us_rep))
+
+;; def_axiom
+  (assert
+  (forall ((temp___4477 us_rep))
+  (forall ((temp___4478 (_ BitVec 8)))
+  (= (select (temp___4475 temp___4477) temp___4478) temp___4477))))
+
+(declare-fun temp___4479 ((_ BitVec 8)) (Array Int bits_8))
+
+;; def_axiom
+  (assert
+  (forall ((temp___4481 (_ BitVec 8)))
+  (forall ((temp___4482 Int))
+  (= (select (temp___4479 temp___4481) temp___4482) (of_rep3 temp___4481)))))
+
 (define-fun dynamic_invariant ((temp___expr_4469 us_rep1)
   (temp___is_init_4466 Bool) (temp___skip_constant_4467 Bool)
   (temp___do_toplevel_4468 Bool)) Bool (forall ((temp___4470 (_ BitVec 8)))
@@ -849,6 +905,36 @@
                                        (= (to_rep1
                                           (rec__decadriver__rx_frame_type__size
                                           (us_split_fields1 temp___4471))) 0))))))
+
+(define-fun default_initial_assumption ((temp___expr_4473 us_rep1)
+  (temp___skip_top_level_4474 Bool)) Bool (and
+                                          (and
+                                          (and
+                                          (and
+                                          (= (rec__decadriver__receiver_type__frame_queue
+                                             (us_split_fields3
+                                             temp___expr_4473)) (temp___4475
+                                                                (mk___rep
+                                                                (mk___split_fields
+                                                                (of_rep1 0)
+                                                                (temp___4479
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep2 0)
+                                                                (of_int 0)))))
+                                          (= (to_rep4
+                                             (rec__decadriver__receiver_type__queue_head
+                                             (us_split_fields3
+                                             temp___expr_4473))) ((_ int2bv 8) 1)))
+                                          (= (to_rep
+                                             (rec__decadriver__receiver_type__rx_count
+                                             (us_split_fields3
+                                             temp___expr_4473))) 0))
+                                          (= (rec__decadriver__receiver_type__overrun_occurred
+                                             (us_split_fields3
+                                             temp___expr_4473)) (of_int 0)))
+                                          (= (rec__decadriver__receiver_type__frame_ready
+                                             (us_split_fields3
+                                             temp___expr_4473)) (of_int 0))))
 
 (define-fun dynamic_invariant1 ((temp___expr_33 Int) (temp___is_init_30 Bool)
   (temp___skip_constant_31 Bool)

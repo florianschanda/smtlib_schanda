@@ -340,32 +340,25 @@
 ;; dispatch_in_contract__root__compat_axiom
   (assert
   (forall ((o us_rep))
-  (! (=> (less_than_max__function_guard1 (less_than_max1 us_tag o) us_tag o)
-     (and (less_than_max__function_guard (less_than_max o) o)
-     (= (to_int1 (less_than_max o)) (to_int1 (less_than_max1 us_tag o))))) :pattern (
+  (! (= (to_int1 (less_than_max o)) (to_int1 (less_than_max1 us_tag o))) :pattern (
   (less_than_max1 us_tag o)) )))
 
 ;; dispatch_in_contract__child__compat_axiom
   (assert
   (forall ((o us_rep))
-  (! (=> (less_than_max__function_guard1 (less_than_max1 us_tag1 o) us_tag1
-     o)
-     (and (less_than_max__2__function_guard (less_than_max__2 (of_base o))
-     (of_base o))
-     (= (to_int1 (less_than_max__2 (of_base o))) (to_int1
-                                                 (less_than_max1 us_tag1 o))))) :pattern (
+  (! (= (to_int1 (less_than_max__2 (of_base o))) (to_int1
+                                                 (less_than_max1 us_tag1 o))) :pattern (
   (less_than_max1 us_tag1 o)) )))
 
 ;; less_than_max__def_axiom
   (assert
   (forall ((o us_rep))
-  (! (=> (less_than_max__function_guard (less_than_max o) o)
-     (= (= (less_than_max o) true)
-     (< (to_rep (rec__dispatch_in_contract__root__f1 (us_split_fields1 o))) 2147483647))) :pattern (
+  (! (= (= (less_than_max o) true)
+     (< (to_rep (rec__dispatch_in_contract__root__f1 (us_split_fields1 o))) 2147483647)) :pattern (
   (less_than_max o)) )))
 
-(define-fun default_initial_assumption1 ((temp___expr_157 us_rep1)
-  (temp___skip_top_level_158 Bool)) Bool (= (attr__tag1 temp___expr_157) 
+(define-fun default_initial_assumption1 ((temp___expr_151 us_rep1)
+  (temp___skip_top_level_152 Bool)) Bool (= (attr__tag1 temp___expr_151) 
   us_tag1))
 
 ;; less_than_max__2__post_axiom
@@ -377,34 +370,22 @@
 ;; dispatch_in_contract__child__compat_axiom
   (assert
   (forall ((o us_rep1))
-  (! (=> (less_than_max__2__function_guard1 (less_than_max__21 us_tag1 o)
-     us_tag1 o)
-     (and (less_than_max__2__function_guard (less_than_max__2 o) o)
-     (= (to_int1 (less_than_max__2 o)) (to_int1
-                                       (less_than_max__21 us_tag1 o))))) :pattern (
+  (! (= (to_int1 (less_than_max__2 o)) (to_int1
+                                       (less_than_max__21 us_tag1 o))) :pattern (
   (less_than_max__21 us_tag1 o)) )))
 
 ;; less_than_max__2__def_axiom
   (assert
   (forall ((o us_rep1))
-  (! (=> (less_than_max__2__function_guard (less_than_max__2 o) o)
-     (= (= (less_than_max__2 o) true)
+  (! (= (= (less_than_max__2 o) true)
      (and
      (< (to_rep (rec__dispatch_in_contract__root__f11 (us_split_fields3 o))) 2147483647)
-     (< (to_rep (rec__dispatch_in_contract__child__f2 (us_split_fields3 o))) 2147483647)))) :pattern (
+     (< (to_rep (rec__dispatch_in_contract__child__f2 (us_split_fields3 o))) 2147483647))) :pattern (
   (less_than_max__2 o)) )))
 
 (declare-fun o__split_fields () integer)
 
 (declare-fun o__split_fields1 () us_private)
-
-;; H
-  (assert (less_than_max__function_guard
-  (less_than_max
-  (mk___rep (mk___split_fields o__split_fields o__split_fields1)
-  o__attr__tag))
-  (mk___rep (mk___split_fields o__split_fields o__split_fields1)
-  o__attr__tag)))
 
 ;; H
   (assert

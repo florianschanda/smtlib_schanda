@@ -304,9 +304,8 @@
   (forall ((x86__rax (_ BitVec 64)))
   (! (=> (dynamic_invariant x86__rax true true true)
      (let ((result (al x86__rax)))
-     (=> (al__function_guard result x86__rax)
      (and (= result ((_ extract 7 0) (bvand x86__rax ((_ int2bv 64) 255))))
-     (dynamic_invariant1 result true false true))))) :pattern ((al x86__rax)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((al x86__rax)) )))
 
 (declare-fun val__ () (_ BitVec 8))
 
@@ -335,9 +334,6 @@
 
 ;; H
   (assert (= rax3 rax1))
-
-;; H
-  (assert (al__function_guard (al rax2) rax2))
 
 (assert
 ;; WP_parameter_def

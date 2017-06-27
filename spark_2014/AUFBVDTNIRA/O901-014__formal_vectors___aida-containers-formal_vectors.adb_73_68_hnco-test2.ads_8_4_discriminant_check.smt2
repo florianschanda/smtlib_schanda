@@ -4027,220 +4027,164 @@
 ;; length__post_axiom
   (assert
   (forall ((container us_rep1))
-  (! (=> (dynamic_invariant1 container true true true)
-     (let ((result (length container)))
-     (=> (length__function_guard result container) (dynamic_invariant result
-     true false true)))) :pattern ((length container)) )))
+  (! (=> (dynamic_invariant1 container true true true) (dynamic_invariant
+     (length container) true false true)) :pattern ((length container)) )))
 
 ;; length__post__dispatch_axiom
   (assert
   (forall ((attr__tag21 Int))
   (forall ((container us_rep1))
-  (! (=> (dynamic_invariant1 container true true true)
-     (let ((result (length1 attr__tag21 container)))
-     (=> (length__function_guard1 result attr__tag21 container)
-     (dynamic_invariant result true false true)))) :pattern ((length1
-                                                             attr__tag21
-                                                             container)) ))))
+  (! (=> (dynamic_invariant1 container true true true) (dynamic_invariant
+     (length1 attr__tag21 container) true false true)) :pattern ((length1
+                                                                 attr__tag21
+                                                                 container)) ))))
 
 ;; hnco__test2__v_type_owner__vector_type__compat_axiom
   (assert
   (forall ((container us_rep1))
-  (! (=> (length__function_guard1 (length1 us_tag container) us_tag
-     container)
-     (and (length__function_guard (length container) container)
-     (= (length container) (length1 us_tag container)))) :pattern ((length1
-                                                                   us_tag
-                                                                   container)) )))
+  (! (= (length container) (length1 us_tag container)) :pattern ((length1
+                                                                 us_tag
+                                                                 container)) )))
 
 ;; hnco__test2__TvS__compat_axiom
   (assert
   (forall ((container us_rep1))
-  (! (=> (length__function_guard1 (length1 us_tag20 container) us_tag20
-     container)
-     (and (length__function_guard (length container) container)
-     (= (length container) (length1 us_tag20 container)))) :pattern (
-  (length1 us_tag20 container)) )))
+  (! (= (length container) (length1 us_tag20 container)) :pattern ((length1
+                                                                   us_tag20
+                                                                   container)) )))
 
 ;; hnco__test2__v_type_owner__empty_vector__R185s__T187s__compat_axiom
   (assert
   (forall ((container us_rep1))
-  (! (=> (length__function_guard1 (length1 us_tag2 container) us_tag2
-     container)
-     (and (length__function_guard (length container) container)
-     (= (length container) (length1 us_tag2 container)))) :pattern ((length1
-                                                                    us_tag2
-                                                                    container)) )))
+  (! (= (length container) (length1 us_tag2 container)) :pattern ((length1
+                                                                  us_tag2
+                                                                  container)) )))
 
 ;; hnco__test2__v_type_owner__Oeq__2__S190s__compat_axiom
   (assert
   (forall ((container us_rep1))
-  (! (=> (length__function_guard1 (length1 us_tag4 container) us_tag4
-     container)
-     (and (length__function_guard (length container) container)
-     (= (length container) (length1 us_tag4 container)))) :pattern ((length1
-                                                                    us_tag4
-                                                                    container)) )))
+  (! (= (length container) (length1 us_tag4 container)) :pattern ((length1
+                                                                  us_tag4
+                                                                  container)) )))
 
 ;; hnco__test2__v_type_owner__Oeq__2__S193s__compat_axiom
   (assert
   (forall ((container us_rep1))
-  (! (=> (length__function_guard1 (length1 us_tag3 container) us_tag3
-     container)
-     (and (length__function_guard (length container) container)
-     (= (length container) (length1 us_tag3 container)))) :pattern ((length1
-                                                                    us_tag3
-                                                                    container)) )))
+  (! (= (length container) (length1 us_tag3 container)) :pattern ((length1
+                                                                  us_tag3
+                                                                  container)) )))
 
 ;; hnco__test2__v_type_owner__to_vector__R201s__T202s__compat_axiom
   (assert
   (forall ((container us_rep1))
-  (! (=> (length__function_guard1 (length1 us_tag5 container) us_tag5
-     container)
-     (and (length__function_guard (length container) container)
-     (= (length container) (length1 us_tag5 container)))) :pattern ((length1
-                                                                    us_tag5
-                                                                    container)) )))
+  (! (= (length container) (length1 us_tag5 container)) :pattern ((length1
+                                                                  us_tag5
+                                                                  container)) )))
 
 ;; hnco__test2__v_type_owner__capacity__S205s__compat_axiom
   (assert
   (forall ((container us_rep1))
-  (! (=> (length__function_guard1 (length1 us_tag6 container) us_tag6
-     container)
-     (and (length__function_guard (length container) container)
-     (= (length container) (length1 us_tag6 container)))) :pattern ((length1
-                                                                    us_tag6
-                                                                    container)) )))
+  (! (= (length container) (length1 us_tag6 container)) :pattern ((length1
+                                                                  us_tag6
+                                                                  container)) )))
 
 ;; hnco__test2__v_type_owner__length__S212s__compat_axiom
   (assert
   (forall ((container us_rep1))
-  (! (=> (length__function_guard1 (length1 us_tag7 container) us_tag7
-     container)
-     (and (length__function_guard (length container) container)
-     (= (length container) (length1 us_tag7 container)))) :pattern ((length1
-                                                                    us_tag7
-                                                                    container)) )))
+  (! (= (length container) (length1 us_tag7 container)) :pattern ((length1
+                                                                  us_tag7
+                                                                  container)) )))
 
 ;; hnco__test2__v_type_owner__assign__S224s__compat_axiom
   (assert
   (forall ((container us_rep1))
-  (! (=> (length__function_guard1 (length1 us_tag8 container) us_tag8
-     container)
-     (and (length__function_guard (length container) container)
-     (= (length container) (length1 us_tag8 container)))) :pattern ((length1
-                                                                    us_tag8
-                                                                    container)) )))
+  (! (= (length container) (length1 us_tag8 container)) :pattern ((length1
+                                                                  us_tag8
+                                                                  container)) )))
 
 ;; hnco__test2__v_type_owner__copy__S232s__compat_axiom
   (assert
   (forall ((container us_rep1))
-  (! (=> (length__function_guard1 (length1 us_tag9 container) us_tag9
-     container)
-     (and (length__function_guard (length container) container)
-     (= (length container) (length1 us_tag9 container)))) :pattern ((length1
-                                                                    us_tag9
-                                                                    container)) )))
+  (! (= (length container) (length1 us_tag9 container)) :pattern ((length1
+                                                                  us_tag9
+                                                                  container)) )))
 
 ;; hnco__test2__v_type_owner__copy__R235s__T236s__compat_axiom
   (assert
   (forall ((container us_rep1))
-  (! (=> (length__function_guard1 (length1 us_tag1 container) us_tag1
-     container)
-     (and (length__function_guard (length container) container)
-     (= (length container) (length1 us_tag1 container)))) :pattern ((length1
-                                                                    us_tag1
-                                                                    container)) )))
+  (! (= (length container) (length1 us_tag1 container)) :pattern ((length1
+                                                                  us_tag1
+                                                                  container)) )))
 
 ;; hnco__test2__v_type_owner__element__S241s__compat_axiom
   (assert
   (forall ((container us_rep1))
-  (! (=> (length__function_guard1 (length1 us_tag10 container) us_tag10
-     container)
-     (and (length__function_guard (length container) container)
-     (= (length container) (length1 us_tag10 container)))) :pattern (
-  (length1 us_tag10 container)) )))
+  (! (= (length container) (length1 us_tag10 container)) :pattern ((length1
+                                                                   us_tag10
+                                                                   container)) )))
 
 ;; hnco__test2__v_type_owner__append__S250s__compat_axiom
   (assert
   (forall ((container us_rep1))
-  (! (=> (length__function_guard1 (length1 us_tag11 container) us_tag11
-     container)
-     (and (length__function_guard (length container) container)
-     (= (length container) (length1 us_tag11 container)))) :pattern (
-  (length1 us_tag11 container)) )))
+  (! (= (length container) (length1 us_tag11 container)) :pattern ((length1
+                                                                   us_tag11
+                                                                   container)) )))
 
 ;; hnco__test2__v_type_owner__first_index__S270s__compat_axiom
   (assert
   (forall ((container us_rep1))
-  (! (=> (length__function_guard1 (length1 us_tag12 container) us_tag12
-     container)
-     (and (length__function_guard (length container) container)
-     (= (length container) (length1 us_tag12 container)))) :pattern (
-  (length1 us_tag12 container)) )))
+  (! (= (length container) (length1 us_tag12 container)) :pattern ((length1
+                                                                   us_tag12
+                                                                   container)) )))
 
 ;; hnco__test2__v_type_owner__first_element__S276s__compat_axiom
   (assert
   (forall ((container us_rep1))
-  (! (=> (length__function_guard1 (length1 us_tag13 container) us_tag13
-     container)
-     (and (length__function_guard (length container) container)
-     (= (length container) (length1 us_tag13 container)))) :pattern (
-  (length1 us_tag13 container)) )))
+  (! (= (length container) (length1 us_tag13 container)) :pattern ((length1
+                                                                   us_tag13
+                                                                   container)) )))
 
 ;; hnco__test2__v_type_owner__last_index__S282s__compat_axiom
   (assert
   (forall ((container us_rep1))
-  (! (=> (length__function_guard1 (length1 us_tag14 container) us_tag14
-     container)
-     (and (length__function_guard (length container) container)
-     (= (length container) (length1 us_tag14 container)))) :pattern (
-  (length1 us_tag14 container)) )))
+  (! (= (length container) (length1 us_tag14 container)) :pattern ((length1
+                                                                   us_tag14
+                                                                   container)) )))
 
 ;; hnco__test2__v_type_owner__last_element__S288s__compat_axiom
   (assert
   (forall ((container us_rep1))
-  (! (=> (length__function_guard1 (length1 us_tag15 container) us_tag15
-     container)
-     (and (length__function_guard (length container) container)
-     (= (length container) (length1 us_tag15 container)))) :pattern (
-  (length1 us_tag15 container)) )))
+  (! (= (length container) (length1 us_tag15 container)) :pattern ((length1
+                                                                   us_tag15
+                                                                   container)) )))
 
 ;; hnco__test2__v_type_owner__find_index__S294s__compat_axiom
   (assert
   (forall ((container us_rep1))
-  (! (=> (length__function_guard1 (length1 us_tag16 container) us_tag16
-     container)
-     (and (length__function_guard (length container) container)
-     (= (length container) (length1 us_tag16 container)))) :pattern (
-  (length1 us_tag16 container)) )))
+  (! (= (length container) (length1 us_tag16 container)) :pattern ((length1
+                                                                   us_tag16
+                                                                   container)) )))
 
 ;; hnco__test2__v_type_owner__reverse_find_index__S300s__compat_axiom
   (assert
   (forall ((container us_rep1))
-  (! (=> (length__function_guard1 (length1 us_tag17 container) us_tag17
-     container)
-     (and (length__function_guard (length container) container)
-     (= (length container) (length1 us_tag17 container)))) :pattern (
-  (length1 us_tag17 container)) )))
+  (! (= (length container) (length1 us_tag17 container)) :pattern ((length1
+                                                                   us_tag17
+                                                                   container)) )))
 
 ;; hnco__test2__v_type_owner__contains__S306s__compat_axiom
   (assert
   (forall ((container us_rep1))
-  (! (=> (length__function_guard1 (length1 us_tag18 container) us_tag18
-     container)
-     (and (length__function_guard (length container) container)
-     (= (length container) (length1 us_tag18 container)))) :pattern (
-  (length1 us_tag18 container)) )))
+  (! (= (length container) (length1 us_tag18 container)) :pattern ((length1
+                                                                   us_tag18
+                                                                   container)) )))
 
 ;; hnco__test2__v_type_owner__has_element__S312s__compat_axiom
   (assert
   (forall ((container us_rep1))
-  (! (=> (length__function_guard1 (length1 us_tag19 container) us_tag19
-     container)
-     (and (length__function_guard (length container) container)
-     (= (length container) (length1 us_tag19 container)))) :pattern (
-  (length1 us_tag19 container)) )))
+  (! (= (length container) (length1 us_tag19 container)) :pattern ((length1
+                                                                   us_tag19
+                                                                   container)) )))
 
 (declare-fun is_empty (us_rep1) Bool)
 
@@ -4269,11 +4213,11 @@
   (forall ((a us_rep2) (b us_rep2))
   (! (= (user_eq4 a b) (oeq a b)) :pattern ((user_eq4 a b)) )))
 
-(define-fun default_initial_assumption ((temp___expr_757 us_rep2)
-  (temp___skip_top_level_758 Bool)) Bool (=>
+(define-fun default_initial_assumption ((temp___expr_402 us_rep2)
+  (temp___skip_top_level_403 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_758 true))
-                                         (= (length3 temp___expr_757) 0)))
+                                         (= temp___skip_top_level_403 true))
+                                         (= (length3 temp___expr_402) 0)))
 
 ;; model____post_axiom
   (assert
@@ -4313,12 +4257,12 @@
 (define-fun extended_index__ref_3__projection ((a extended_index__ref)) extended_index 
   (extended_index__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_750 Int)
-  (temp___is_init_747 Bool) (temp___skip_constant_748 Bool)
-  (temp___do_toplevel_749 Bool)) Bool (=>
-                                      (or (= temp___is_init_747 true)
+(define-fun dynamic_invariant4 ((temp___expr_395 Int)
+  (temp___is_init_392 Bool) (temp___skip_constant_393 Bool)
+  (temp___do_toplevel_394 Bool)) Bool (=>
+                                      (or (= temp___is_init_392 true)
                                       (<= 0 2147483647)) (in_range45
-                                      temp___expr_750)))
+                                      temp___expr_395)))
 
 ;; length__post_axiom
   (assert
@@ -4350,12 +4294,12 @@
 (define-fun element_type__ref_3__projection ((a element_type__ref)) element_type 
   (element_type__content a))
 
-(define-fun dynamic_invariant5 ((temp___expr_744 Int)
-  (temp___is_init_741 Bool) (temp___skip_constant_742 Bool)
-  (temp___do_toplevel_743 Bool)) Bool (=>
-                                      (or (= temp___is_init_741 true)
+(define-fun dynamic_invariant5 ((temp___expr_389 Int)
+  (temp___is_init_386 Bool) (temp___skip_constant_387 Bool)
+  (temp___do_toplevel_388 Bool)) Bool (=>
+                                      (or (= temp___is_init_386 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range46 temp___expr_744)))
+                                      (in_range46 temp___expr_389)))
 
 ;; get__post_axiom
   (assert
@@ -4371,38 +4315,33 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
-(define-fun dynamic_invariant6 ((temp___expr_777 us_rep6)
-  (temp___is_init_774 Bool) (temp___skip_constant_775 Bool)
-  (temp___do_toplevel_776 Bool)) Bool (and
+(define-fun dynamic_invariant6 ((temp___expr_421 us_rep6)
+  (temp___is_init_418 Bool) (temp___skip_constant_419 Bool)
+  (temp___do_toplevel_420 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_775 true))
+                                      (not (= temp___skip_constant_419 true))
                                       (in_range12
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 left)))
-                                      (to_base3 temp___expr_777)))
+                                      (to_base3 temp___expr_421)))
                                       (in_range11
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 left)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector4
-                                      (us_split_fields11 temp___expr_777)))))
+                                      (us_split_fields11 temp___expr_421)))))
 
-;; temp___result_787_def
-  (assert
-  (forall ((temp___786 us_rep6)) (is_empty__function_guard
-  (is_empty (to_base3 temp___786)) (to_base3 temp___786))))
-
-(define-fun default_initial_assumption1 ((temp___expr_780 us_rep6)
-  (temp___skip_top_level_781 Bool)) Bool (and
+(define-fun default_initial_assumption1 ((temp___expr_424 us_rep6)
+  (temp___skip_top_level_425 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag4 temp___expr_780) 
+                                         (= (attr__tag4 temp___expr_424) 
                                          us_tag4)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs7
-                                            temp___expr_780))) (to_rep
+                                            temp___expr_424))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                left))))
@@ -4412,55 +4351,50 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector4
                                             (us_split_fields11
-                                            temp___expr_780))))) (to_rep
+                                            temp___expr_424))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  left))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector4
                                             (us_split_fields11
-                                            temp___expr_780))) true))))
+                                            temp___expr_424))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_781 true))
+                                         (= temp___skip_top_level_425 true))
                                          (= (is_empty
-                                            (to_base3 temp___expr_780)) true))))
+                                            (to_base3 temp___expr_424)) true))))
 
 (declare-fun right () us_rep1)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
-(define-fun dynamic_invariant7 ((temp___expr_763 us_rep5)
-  (temp___is_init_760 Bool) (temp___skip_constant_761 Bool)
-  (temp___do_toplevel_762 Bool)) Bool (and
+(define-fun dynamic_invariant7 ((temp___expr_408 us_rep5)
+  (temp___is_init_405 Bool) (temp___skip_constant_406 Bool)
+  (temp___do_toplevel_407 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_761 true))
+                                      (not (= temp___skip_constant_406 true))
                                       (in_range10
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 right)))
-                                      (to_base2 temp___expr_763))) (in_range9
+                                      (to_base2 temp___expr_408))) (in_range9
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 right)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector3
-                                      (us_split_fields9 temp___expr_763)))))
+                                      (us_split_fields9 temp___expr_408)))))
 
-;; temp___result_773_def
-  (assert
-  (forall ((temp___772 us_rep5)) (is_empty__function_guard
-  (is_empty (to_base2 temp___772)) (to_base2 temp___772))))
-
-(define-fun default_initial_assumption2 ((temp___expr_766 us_rep5)
-  (temp___skip_top_level_767 Bool)) Bool (and
+(define-fun default_initial_assumption2 ((temp___expr_411 us_rep5)
+  (temp___skip_top_level_412 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag3 temp___expr_766) 
+                                         (= (attr__tag3 temp___expr_411) 
                                          us_tag3)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs6
-                                            temp___expr_766))) (to_rep
+                                            temp___expr_411))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                right))))
@@ -4470,56 +4404,51 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector3
                                             (us_split_fields9
-                                            temp___expr_766))))) (to_rep
+                                            temp___expr_411))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  right))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector3
                                             (us_split_fields9
-                                            temp___expr_766))) true))))
+                                            temp___expr_411))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_767 true))
+                                         (= temp___skip_top_level_412 true))
                                          (= (is_empty
-                                            (to_base2 temp___expr_766)) true))))
+                                            (to_base2 temp___expr_411)) true))))
 
 (declare-fun container () us_rep1)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
 
-(define-fun dynamic_invariant8 ((temp___expr_809 us_rep8)
-  (temp___is_init_806 Bool) (temp___skip_constant_807 Bool)
-  (temp___do_toplevel_808 Bool)) Bool (and
+(define-fun dynamic_invariant8 ((temp___expr_452 us_rep8)
+  (temp___is_init_449 Bool) (temp___skip_constant_450 Bool)
+  (temp___do_toplevel_451 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_807 true))
+                                      (not (= temp___skip_constant_450 true))
                                       (in_range16
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container)))
-                                      (to_base5 temp___expr_809)))
+                                      (to_base5 temp___expr_452)))
                                       (in_range15
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector6
-                                      (us_split_fields15 temp___expr_809)))))
+                                      (us_split_fields15 temp___expr_452)))))
 
-;; temp___result_819_def
-  (assert
-  (forall ((temp___818 us_rep8)) (is_empty__function_guard
-  (is_empty (to_base5 temp___818)) (to_base5 temp___818))))
-
-(define-fun default_initial_assumption3 ((temp___expr_812 us_rep8)
-  (temp___skip_top_level_813 Bool)) Bool (and
+(define-fun default_initial_assumption3 ((temp___expr_455 us_rep8)
+  (temp___skip_top_level_456 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag6 temp___expr_812) 
+                                         (= (attr__tag6 temp___expr_455) 
                                          us_tag6)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs9
-                                            temp___expr_812))) (to_rep
+                                            temp___expr_455))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                container))))
@@ -4529,56 +4458,51 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector6
                                             (us_split_fields15
-                                            temp___expr_812))))) (to_rep
+                                            temp___expr_455))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  container))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector6
                                             (us_split_fields15
-                                            temp___expr_812))) true))))
+                                            temp___expr_455))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_813 true))
+                                         (= temp___skip_top_level_456 true))
                                          (= (is_empty
-                                            (to_base5 temp___expr_812)) true))))
+                                            (to_base5 temp___expr_455)) true))))
 
 (declare-fun container1 () us_rep1)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
 
-(define-fun dynamic_invariant9 ((temp___expr_832 us_rep9)
-  (temp___is_init_829 Bool) (temp___skip_constant_830 Bool)
-  (temp___do_toplevel_831 Bool)) Bool (and
+(define-fun dynamic_invariant9 ((temp___expr_474 us_rep9)
+  (temp___is_init_471 Bool) (temp___skip_constant_472 Bool)
+  (temp___do_toplevel_473 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_830 true))
+                                      (not (= temp___skip_constant_472 true))
                                       (in_range18
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container1)))
-                                      (to_base6 temp___expr_832)))
+                                      (to_base6 temp___expr_474)))
                                       (in_range17
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container1)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector7
-                                      (us_split_fields17 temp___expr_832)))))
+                                      (us_split_fields17 temp___expr_474)))))
 
-;; temp___result_842_def
-  (assert
-  (forall ((temp___841 us_rep9)) (is_empty__function_guard
-  (is_empty (to_base6 temp___841)) (to_base6 temp___841))))
-
-(define-fun default_initial_assumption4 ((temp___expr_835 us_rep9)
-  (temp___skip_top_level_836 Bool)) Bool (and
+(define-fun default_initial_assumption4 ((temp___expr_477 us_rep9)
+  (temp___skip_top_level_478 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag7 temp___expr_835) 
+                                         (= (attr__tag7 temp___expr_477) 
                                          us_tag7)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs10
-                                            temp___expr_835))) (to_rep
+                                            temp___expr_477))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                container1))))
@@ -4588,56 +4512,51 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector7
                                             (us_split_fields17
-                                            temp___expr_835))))) (to_rep
+                                            temp___expr_477))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  container1))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector7
                                             (us_split_fields17
-                                            temp___expr_835))) true))))
+                                            temp___expr_477))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_836 true))
+                                         (= temp___skip_top_level_478 true))
                                          (= (is_empty
-                                            (to_base6 temp___expr_835)) true))))
+                                            (to_base6 temp___expr_477)) true))))
 
 (declare-fun source1 () us_rep1)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
 
-(define-fun dynamic_invariant10 ((temp___expr_873 us_rep10)
-  (temp___is_init_870 Bool) (temp___skip_constant_871 Bool)
-  (temp___do_toplevel_872 Bool)) Bool (and
+(define-fun dynamic_invariant10 ((temp___expr_514 us_rep10)
+  (temp___is_init_511 Bool) (temp___skip_constant_512 Bool)
+  (temp___do_toplevel_513 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_871 true))
+                                      (not (= temp___skip_constant_512 true))
                                       (in_range20
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 source1)))
-                                      (to_base7 temp___expr_873)))
+                                      (to_base7 temp___expr_514)))
                                       (in_range19
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 source1)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector8
-                                      (us_split_fields19 temp___expr_873)))))
+                                      (us_split_fields19 temp___expr_514)))))
 
-;; temp___result_883_def
-  (assert
-  (forall ((temp___882 us_rep10)) (is_empty__function_guard
-  (is_empty (to_base7 temp___882)) (to_base7 temp___882))))
-
-(define-fun default_initial_assumption5 ((temp___expr_876 us_rep10)
-  (temp___skip_top_level_877 Bool)) Bool (and
+(define-fun default_initial_assumption5 ((temp___expr_517 us_rep10)
+  (temp___skip_top_level_518 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag8 temp___expr_876) 
+                                         (= (attr__tag8 temp___expr_517) 
                                          us_tag8)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs11
-                                            temp___expr_876))) (to_rep
+                                            temp___expr_517))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                source1))))
@@ -4647,52 +4566,47 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector8
                                             (us_split_fields19
-                                            temp___expr_876))))) (to_rep
+                                            temp___expr_517))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  source1))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector8
                                             (us_split_fields19
-                                            temp___expr_876))) true))))
+                                            temp___expr_517))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_877 true))
+                                         (= temp___skip_top_level_518 true))
                                          (= (is_empty
-                                            (to_base7 temp___expr_876)) true))))
+                                            (to_base7 temp___expr_517)) true))))
 
-(define-fun dynamic_invariant11 ((temp___expr_905 us_rep11)
-  (temp___is_init_902 Bool) (temp___skip_constant_903 Bool)
-  (temp___do_toplevel_904 Bool)) Bool (and
+(define-fun dynamic_invariant11 ((temp___expr_545 us_rep11)
+  (temp___is_init_542 Bool) (temp___skip_constant_543 Bool)
+  (temp___do_toplevel_544 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_903 true))
+                                      (not (= temp___skip_constant_543 true))
                                       (in_range22
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 source)))
-                                      (to_base8 temp___expr_905)))
+                                      (to_base8 temp___expr_545)))
                                       (in_range21
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 source)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector9
-                                      (us_split_fields21 temp___expr_905)))))
+                                      (us_split_fields21 temp___expr_545)))))
 
-;; temp___result_915_def
-  (assert
-  (forall ((temp___914 us_rep11)) (is_empty__function_guard
-  (is_empty (to_base8 temp___914)) (to_base8 temp___914))))
-
-(define-fun default_initial_assumption6 ((temp___expr_908 us_rep11)
-  (temp___skip_top_level_909 Bool)) Bool (and
+(define-fun default_initial_assumption6 ((temp___expr_548 us_rep11)
+  (temp___skip_top_level_549 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag9 temp___expr_908) 
+                                         (= (attr__tag9 temp___expr_548) 
                                          us_tag9)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs12
-                                            temp___expr_908))) (to_rep
+                                            temp___expr_548))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                source))))
@@ -4702,56 +4616,51 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector9
                                             (us_split_fields21
-                                            temp___expr_908))))) (to_rep
+                                            temp___expr_548))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  source))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector9
                                             (us_split_fields21
-                                            temp___expr_908))) true))))
+                                            temp___expr_548))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_909 true))
+                                         (= temp___skip_top_level_549 true))
                                          (= (is_empty
-                                            (to_base8 temp___expr_908)) true))))
+                                            (to_base8 temp___expr_548)) true))))
 
 (declare-fun container2 () us_rep1)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
 
-(define-fun dynamic_invariant12 ((temp___expr_928 us_rep12)
-  (temp___is_init_925 Bool) (temp___skip_constant_926 Bool)
-  (temp___do_toplevel_927 Bool)) Bool (and
+(define-fun dynamic_invariant12 ((temp___expr_567 us_rep12)
+  (temp___is_init_564 Bool) (temp___skip_constant_565 Bool)
+  (temp___do_toplevel_566 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_926 true))
+                                      (not (= temp___skip_constant_565 true))
                                       (in_range24
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container2)))
-                                      (to_base9 temp___expr_928)))
+                                      (to_base9 temp___expr_567)))
                                       (in_range23
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container2)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector10
-                                      (us_split_fields23 temp___expr_928)))))
+                                      (us_split_fields23 temp___expr_567)))))
 
-;; temp___result_938_def
-  (assert
-  (forall ((temp___937 us_rep12)) (is_empty__function_guard
-  (is_empty (to_base9 temp___937)) (to_base9 temp___937))))
-
-(define-fun default_initial_assumption7 ((temp___expr_931 us_rep12)
-  (temp___skip_top_level_932 Bool)) Bool (and
+(define-fun default_initial_assumption7 ((temp___expr_570 us_rep12)
+  (temp___skip_top_level_571 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag10 temp___expr_931) 
+                                         (= (attr__tag10 temp___expr_570) 
                                          us_tag10)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs13
-                                            temp___expr_931))) (to_rep
+                                            temp___expr_570))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                container2))))
@@ -4761,56 +4670,51 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector10
                                             (us_split_fields23
-                                            temp___expr_931))))) (to_rep
+                                            temp___expr_570))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  container2))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector10
                                             (us_split_fields23
-                                            temp___expr_931))) true))))
+                                            temp___expr_570))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_932 true))
+                                         (= temp___skip_top_level_571 true))
                                          (= (is_empty
-                                            (to_base9 temp___expr_931)) true))))
+                                            (to_base9 temp___expr_570)) true))))
 
 (declare-fun new_item () us_rep1)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS9 () Int)
 
-(define-fun dynamic_invariant13 ((temp___expr_960 us_rep13)
-  (temp___is_init_957 Bool) (temp___skip_constant_958 Bool)
-  (temp___do_toplevel_959 Bool)) Bool (and
+(define-fun dynamic_invariant13 ((temp___expr_598 us_rep13)
+  (temp___is_init_595 Bool) (temp___skip_constant_596 Bool)
+  (temp___do_toplevel_597 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_958 true))
+                                      (not (= temp___skip_constant_596 true))
                                       (in_range26
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 new_item)))
-                                      (to_base10 temp___expr_960)))
+                                      (to_base10 temp___expr_598)))
                                       (in_range25
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 new_item)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector11
-                                      (us_split_fields25 temp___expr_960)))))
+                                      (us_split_fields25 temp___expr_598)))))
 
-;; temp___result_970_def
-  (assert
-  (forall ((temp___969 us_rep13)) (is_empty__function_guard
-  (is_empty (to_base10 temp___969)) (to_base10 temp___969))))
-
-(define-fun default_initial_assumption8 ((temp___expr_963 us_rep13)
-  (temp___skip_top_level_964 Bool)) Bool (and
+(define-fun default_initial_assumption8 ((temp___expr_601 us_rep13)
+  (temp___skip_top_level_602 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag11 temp___expr_963) 
+                                         (= (attr__tag11 temp___expr_601) 
                                          us_tag11)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs14
-                                            temp___expr_963))) (to_rep
+                                            temp___expr_601))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                new_item))))
@@ -4820,499 +4724,451 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector11
                                             (us_split_fields25
-                                            temp___expr_963))))) (to_rep
+                                            temp___expr_601))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  new_item))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector11
                                             (us_split_fields25
-                                            temp___expr_963))) true))))
+                                            temp___expr_601))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_964 true))
+                                         (= temp___skip_top_level_602 true))
                                          (= (is_empty
-                                            (to_base10 temp___expr_963)) true))))
+                                            (to_base10 temp___expr_601)) true))))
 
 (declare-fun container3 () us_rep1)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS10 () Int)
 
-(define-fun dynamic_invariant14 ((temp___expr_1028 us_rep14)
-  (temp___is_init_1025 Bool) (temp___skip_constant_1026 Bool)
-  (temp___do_toplevel_1027 Bool)) Bool (and
-                                       (=>
-                                       (not
-                                       (= temp___skip_constant_1026 true))
-                                       (in_range28
-                                       (to_rep
-                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                       (us_split_discrs3 container3)))
-                                       (to_base11 temp___expr_1028)))
-                                       (in_range27
-                                       (to_rep
-                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                       (us_split_discrs3 container3)))
-                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector12
-                                       (us_split_fields27 temp___expr_1028)))))
+(define-fun dynamic_invariant14 ((temp___expr_665 us_rep14)
+  (temp___is_init_662 Bool) (temp___skip_constant_663 Bool)
+  (temp___do_toplevel_664 Bool)) Bool (and
+                                      (=>
+                                      (not (= temp___skip_constant_663 true))
+                                      (in_range28
+                                      (to_rep
+                                      (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                      (us_split_discrs3 container3)))
+                                      (to_base11 temp___expr_665)))
+                                      (in_range27
+                                      (to_rep
+                                      (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                      (us_split_discrs3 container3)))
+                                      (rec__hnco__test2__v_type_owner__vector_type__hidden_vector12
+                                      (us_split_fields27 temp___expr_665)))))
 
-;; temp___result_1038_def
-  (assert
-  (forall ((temp___1037 us_rep14)) (is_empty__function_guard
-  (is_empty (to_base11 temp___1037)) (to_base11 temp___1037))))
-
-(define-fun default_initial_assumption9 ((temp___expr_1031 us_rep14)
-  (temp___skip_top_level_1032 Bool)) Bool (and
-                                          (and
-                                          (= (attr__tag12 temp___expr_1031) 
-                                          us_tag12)
-                                          (and
-                                          (= (to_rep
-                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                             (us_split_discrs15
-                                             temp___expr_1031))) (to_rep
+(define-fun default_initial_assumption9 ((temp___expr_668 us_rep14)
+  (temp___skip_top_level_669 Bool)) Bool (and
+                                         (and
+                                         (= (attr__tag12 temp___expr_668) 
+                                         us_tag12)
+                                         (and
+                                         (= (to_rep
+                                            (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                            (us_split_discrs15
+                                            temp___expr_668))) (to_rep
+                                                               (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                                               (us_split_discrs3
+                                                               container3))))
+                                         (and
+                                         (= (to_rep1
+                                            (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity
+                                            (us_split_discrs1
+                                            (rec__hnco__test2__v_type_owner__vector_type__hidden_vector12
+                                            (us_split_fields27
+                                            temp___expr_668))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  container3))))
-                                          (and
-                                          (= (to_rep1
-                                             (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity
-                                             (us_split_discrs1
-                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector12
-                                             (us_split_fields27
-                                             temp___expr_1031))))) (to_rep
-                                                                   (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                                                   (us_split_discrs3
-                                                                   container3))))
-                                          (= (is_empty1
-                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector12
-                                             (us_split_fields27
-                                             temp___expr_1031))) true))))
-                                          (=>
-                                          (not
-                                          (= temp___skip_top_level_1032 true))
-                                          (= (is_empty
-                                             (to_base11 temp___expr_1031)) true))))
+                                         (= (is_empty1
+                                            (rec__hnco__test2__v_type_owner__vector_type__hidden_vector12
+                                            (us_split_fields27
+                                            temp___expr_668))) true))))
+                                         (=>
+                                         (not
+                                         (= temp___skip_top_level_669 true))
+                                         (= (is_empty
+                                            (to_base11 temp___expr_668)) true))))
 
 (declare-fun container4 () us_rep1)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS11 () Int)
 
-(define-fun dynamic_invariant15 ((temp___expr_1051 us_rep15)
-  (temp___is_init_1048 Bool) (temp___skip_constant_1049 Bool)
-  (temp___do_toplevel_1050 Bool)) Bool (and
-                                       (=>
-                                       (not
-                                       (= temp___skip_constant_1049 true))
-                                       (in_range30
-                                       (to_rep
-                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                       (us_split_discrs3 container4)))
-                                       (to_base12 temp___expr_1051)))
-                                       (in_range29
-                                       (to_rep
-                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                       (us_split_discrs3 container4)))
-                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector13
-                                       (us_split_fields29 temp___expr_1051)))))
+(define-fun dynamic_invariant15 ((temp___expr_687 us_rep15)
+  (temp___is_init_684 Bool) (temp___skip_constant_685 Bool)
+  (temp___do_toplevel_686 Bool)) Bool (and
+                                      (=>
+                                      (not (= temp___skip_constant_685 true))
+                                      (in_range30
+                                      (to_rep
+                                      (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                      (us_split_discrs3 container4)))
+                                      (to_base12 temp___expr_687)))
+                                      (in_range29
+                                      (to_rep
+                                      (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                      (us_split_discrs3 container4)))
+                                      (rec__hnco__test2__v_type_owner__vector_type__hidden_vector13
+                                      (us_split_fields29 temp___expr_687)))))
 
-;; temp___result_1061_def
-  (assert
-  (forall ((temp___1060 us_rep15)) (is_empty__function_guard
-  (is_empty (to_base12 temp___1060)) (to_base12 temp___1060))))
-
-(define-fun default_initial_assumption10 ((temp___expr_1054 us_rep15)
-  (temp___skip_top_level_1055 Bool)) Bool (and
-                                          (and
-                                          (= (attr__tag13 temp___expr_1054) 
-                                          us_tag13)
-                                          (and
-                                          (= (to_rep
-                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                             (us_split_discrs16
-                                             temp___expr_1054))) (to_rep
+(define-fun default_initial_assumption10 ((temp___expr_690 us_rep15)
+  (temp___skip_top_level_691 Bool)) Bool (and
+                                         (and
+                                         (= (attr__tag13 temp___expr_690) 
+                                         us_tag13)
+                                         (and
+                                         (= (to_rep
+                                            (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                            (us_split_discrs16
+                                            temp___expr_690))) (to_rep
+                                                               (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                                               (us_split_discrs3
+                                                               container4))))
+                                         (and
+                                         (= (to_rep1
+                                            (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity
+                                            (us_split_discrs1
+                                            (rec__hnco__test2__v_type_owner__vector_type__hidden_vector13
+                                            (us_split_fields29
+                                            temp___expr_690))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  container4))))
-                                          (and
-                                          (= (to_rep1
-                                             (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity
-                                             (us_split_discrs1
-                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector13
-                                             (us_split_fields29
-                                             temp___expr_1054))))) (to_rep
-                                                                   (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                                                   (us_split_discrs3
-                                                                   container4))))
-                                          (= (is_empty1
-                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector13
-                                             (us_split_fields29
-                                             temp___expr_1054))) true))))
-                                          (=>
-                                          (not
-                                          (= temp___skip_top_level_1055 true))
-                                          (= (is_empty
-                                             (to_base12 temp___expr_1054)) true))))
+                                         (= (is_empty1
+                                            (rec__hnco__test2__v_type_owner__vector_type__hidden_vector13
+                                            (us_split_fields29
+                                            temp___expr_690))) true))))
+                                         (=>
+                                         (not
+                                         (= temp___skip_top_level_691 true))
+                                         (= (is_empty
+                                            (to_base12 temp___expr_690)) true))))
 
 (declare-fun container5 () us_rep1)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS12 () Int)
 
-(define-fun dynamic_invariant16 ((temp___expr_1074 us_rep16)
-  (temp___is_init_1071 Bool) (temp___skip_constant_1072 Bool)
-  (temp___do_toplevel_1073 Bool)) Bool (and
-                                       (=>
-                                       (not
-                                       (= temp___skip_constant_1072 true))
-                                       (in_range32
-                                       (to_rep
-                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                       (us_split_discrs3 container5)))
-                                       (to_base13 temp___expr_1074)))
-                                       (in_range31
-                                       (to_rep
-                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                       (us_split_discrs3 container5)))
-                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector14
-                                       (us_split_fields31 temp___expr_1074)))))
+(define-fun dynamic_invariant16 ((temp___expr_709 us_rep16)
+  (temp___is_init_706 Bool) (temp___skip_constant_707 Bool)
+  (temp___do_toplevel_708 Bool)) Bool (and
+                                      (=>
+                                      (not (= temp___skip_constant_707 true))
+                                      (in_range32
+                                      (to_rep
+                                      (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                      (us_split_discrs3 container5)))
+                                      (to_base13 temp___expr_709)))
+                                      (in_range31
+                                      (to_rep
+                                      (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                      (us_split_discrs3 container5)))
+                                      (rec__hnco__test2__v_type_owner__vector_type__hidden_vector14
+                                      (us_split_fields31 temp___expr_709)))))
 
-;; temp___result_1084_def
-  (assert
-  (forall ((temp___1083 us_rep16)) (is_empty__function_guard
-  (is_empty (to_base13 temp___1083)) (to_base13 temp___1083))))
-
-(define-fun default_initial_assumption11 ((temp___expr_1077 us_rep16)
-  (temp___skip_top_level_1078 Bool)) Bool (and
-                                          (and
-                                          (= (attr__tag14 temp___expr_1077) 
-                                          us_tag14)
-                                          (and
-                                          (= (to_rep
-                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                             (us_split_discrs17
-                                             temp___expr_1077))) (to_rep
+(define-fun default_initial_assumption11 ((temp___expr_712 us_rep16)
+  (temp___skip_top_level_713 Bool)) Bool (and
+                                         (and
+                                         (= (attr__tag14 temp___expr_712) 
+                                         us_tag14)
+                                         (and
+                                         (= (to_rep
+                                            (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                            (us_split_discrs17
+                                            temp___expr_712))) (to_rep
+                                                               (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                                               (us_split_discrs3
+                                                               container5))))
+                                         (and
+                                         (= (to_rep1
+                                            (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity
+                                            (us_split_discrs1
+                                            (rec__hnco__test2__v_type_owner__vector_type__hidden_vector14
+                                            (us_split_fields31
+                                            temp___expr_712))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  container5))))
-                                          (and
-                                          (= (to_rep1
-                                             (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity
-                                             (us_split_discrs1
-                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector14
-                                             (us_split_fields31
-                                             temp___expr_1077))))) (to_rep
-                                                                   (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                                                   (us_split_discrs3
-                                                                   container5))))
-                                          (= (is_empty1
-                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector14
-                                             (us_split_fields31
-                                             temp___expr_1077))) true))))
-                                          (=>
-                                          (not
-                                          (= temp___skip_top_level_1078 true))
-                                          (= (is_empty
-                                             (to_base13 temp___expr_1077)) true))))
+                                         (= (is_empty1
+                                            (rec__hnco__test2__v_type_owner__vector_type__hidden_vector14
+                                            (us_split_fields31
+                                            temp___expr_712))) true))))
+                                         (=>
+                                         (not
+                                         (= temp___skip_top_level_713 true))
+                                         (= (is_empty
+                                            (to_base13 temp___expr_712)) true))))
 
 (declare-fun container6 () us_rep1)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS13 () Int)
 
-(define-fun dynamic_invariant17 ((temp___expr_1097 us_rep17)
-  (temp___is_init_1094 Bool) (temp___skip_constant_1095 Bool)
-  (temp___do_toplevel_1096 Bool)) Bool (and
-                                       (=>
-                                       (not
-                                       (= temp___skip_constant_1095 true))
-                                       (in_range34
-                                       (to_rep
-                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                       (us_split_discrs3 container6)))
-                                       (to_base14 temp___expr_1097)))
-                                       (in_range33
-                                       (to_rep
-                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                       (us_split_discrs3 container6)))
-                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector15
-                                       (us_split_fields33 temp___expr_1097)))))
+(define-fun dynamic_invariant17 ((temp___expr_731 us_rep17)
+  (temp___is_init_728 Bool) (temp___skip_constant_729 Bool)
+  (temp___do_toplevel_730 Bool)) Bool (and
+                                      (=>
+                                      (not (= temp___skip_constant_729 true))
+                                      (in_range34
+                                      (to_rep
+                                      (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                      (us_split_discrs3 container6)))
+                                      (to_base14 temp___expr_731)))
+                                      (in_range33
+                                      (to_rep
+                                      (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                      (us_split_discrs3 container6)))
+                                      (rec__hnco__test2__v_type_owner__vector_type__hidden_vector15
+                                      (us_split_fields33 temp___expr_731)))))
 
-;; temp___result_1107_def
-  (assert
-  (forall ((temp___1106 us_rep17)) (is_empty__function_guard
-  (is_empty (to_base14 temp___1106)) (to_base14 temp___1106))))
-
-(define-fun default_initial_assumption12 ((temp___expr_1100 us_rep17)
-  (temp___skip_top_level_1101 Bool)) Bool (and
-                                          (and
-                                          (= (attr__tag15 temp___expr_1100) 
-                                          us_tag15)
-                                          (and
-                                          (= (to_rep
-                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                             (us_split_discrs18
-                                             temp___expr_1100))) (to_rep
+(define-fun default_initial_assumption12 ((temp___expr_734 us_rep17)
+  (temp___skip_top_level_735 Bool)) Bool (and
+                                         (and
+                                         (= (attr__tag15 temp___expr_734) 
+                                         us_tag15)
+                                         (and
+                                         (= (to_rep
+                                            (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                            (us_split_discrs18
+                                            temp___expr_734))) (to_rep
+                                                               (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                                               (us_split_discrs3
+                                                               container6))))
+                                         (and
+                                         (= (to_rep1
+                                            (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity
+                                            (us_split_discrs1
+                                            (rec__hnco__test2__v_type_owner__vector_type__hidden_vector15
+                                            (us_split_fields33
+                                            temp___expr_734))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  container6))))
-                                          (and
-                                          (= (to_rep1
-                                             (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity
-                                             (us_split_discrs1
-                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector15
-                                             (us_split_fields33
-                                             temp___expr_1100))))) (to_rep
-                                                                   (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                                                   (us_split_discrs3
-                                                                   container6))))
-                                          (= (is_empty1
-                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector15
-                                             (us_split_fields33
-                                             temp___expr_1100))) true))))
-                                          (=>
-                                          (not
-                                          (= temp___skip_top_level_1101 true))
-                                          (= (is_empty
-                                             (to_base14 temp___expr_1100)) true))))
+                                         (= (is_empty1
+                                            (rec__hnco__test2__v_type_owner__vector_type__hidden_vector15
+                                            (us_split_fields33
+                                            temp___expr_734))) true))))
+                                         (=>
+                                         (not
+                                         (= temp___skip_top_level_735 true))
+                                         (= (is_empty
+                                            (to_base14 temp___expr_734)) true))))
 
 (declare-fun container7 () us_rep1)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS14 () Int)
 
-(define-fun dynamic_invariant18 ((temp___expr_1120 us_rep18)
-  (temp___is_init_1117 Bool) (temp___skip_constant_1118 Bool)
-  (temp___do_toplevel_1119 Bool)) Bool (and
-                                       (=>
-                                       (not
-                                       (= temp___skip_constant_1118 true))
-                                       (in_range36
-                                       (to_rep
-                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                       (us_split_discrs3 container7)))
-                                       (to_base15 temp___expr_1120)))
-                                       (in_range35
-                                       (to_rep
-                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                       (us_split_discrs3 container7)))
-                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector16
-                                       (us_split_fields35 temp___expr_1120)))))
+(define-fun dynamic_invariant18 ((temp___expr_753 us_rep18)
+  (temp___is_init_750 Bool) (temp___skip_constant_751 Bool)
+  (temp___do_toplevel_752 Bool)) Bool (and
+                                      (=>
+                                      (not (= temp___skip_constant_751 true))
+                                      (in_range36
+                                      (to_rep
+                                      (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                      (us_split_discrs3 container7)))
+                                      (to_base15 temp___expr_753)))
+                                      (in_range35
+                                      (to_rep
+                                      (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                      (us_split_discrs3 container7)))
+                                      (rec__hnco__test2__v_type_owner__vector_type__hidden_vector16
+                                      (us_split_fields35 temp___expr_753)))))
 
-;; temp___result_1130_def
-  (assert
-  (forall ((temp___1129 us_rep18)) (is_empty__function_guard
-  (is_empty (to_base15 temp___1129)) (to_base15 temp___1129))))
-
-(define-fun default_initial_assumption13 ((temp___expr_1123 us_rep18)
-  (temp___skip_top_level_1124 Bool)) Bool (and
-                                          (and
-                                          (= (attr__tag16 temp___expr_1123) 
-                                          us_tag16)
-                                          (and
-                                          (= (to_rep
-                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                             (us_split_discrs19
-                                             temp___expr_1123))) (to_rep
+(define-fun default_initial_assumption13 ((temp___expr_756 us_rep18)
+  (temp___skip_top_level_757 Bool)) Bool (and
+                                         (and
+                                         (= (attr__tag16 temp___expr_756) 
+                                         us_tag16)
+                                         (and
+                                         (= (to_rep
+                                            (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                            (us_split_discrs19
+                                            temp___expr_756))) (to_rep
+                                                               (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                                               (us_split_discrs3
+                                                               container7))))
+                                         (and
+                                         (= (to_rep1
+                                            (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity
+                                            (us_split_discrs1
+                                            (rec__hnco__test2__v_type_owner__vector_type__hidden_vector16
+                                            (us_split_fields35
+                                            temp___expr_756))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  container7))))
-                                          (and
-                                          (= (to_rep1
-                                             (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity
-                                             (us_split_discrs1
-                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector16
-                                             (us_split_fields35
-                                             temp___expr_1123))))) (to_rep
-                                                                   (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                                                   (us_split_discrs3
-                                                                   container7))))
-                                          (= (is_empty1
-                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector16
-                                             (us_split_fields35
-                                             temp___expr_1123))) true))))
-                                          (=>
-                                          (not
-                                          (= temp___skip_top_level_1124 true))
-                                          (= (is_empty
-                                             (to_base15 temp___expr_1123)) true))))
+                                         (= (is_empty1
+                                            (rec__hnco__test2__v_type_owner__vector_type__hidden_vector16
+                                            (us_split_fields35
+                                            temp___expr_756))) true))))
+                                         (=>
+                                         (not
+                                         (= temp___skip_top_level_757 true))
+                                         (= (is_empty
+                                            (to_base15 temp___expr_756)) true))))
 
 (declare-fun container8 () us_rep1)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS15 () Int)
 
-(define-fun dynamic_invariant19 ((temp___expr_1143 us_rep19)
-  (temp___is_init_1140 Bool) (temp___skip_constant_1141 Bool)
-  (temp___do_toplevel_1142 Bool)) Bool (and
-                                       (=>
-                                       (not
-                                       (= temp___skip_constant_1141 true))
-                                       (in_range38
-                                       (to_rep
-                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                       (us_split_discrs3 container8)))
-                                       (to_base16 temp___expr_1143)))
-                                       (in_range37
-                                       (to_rep
-                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                       (us_split_discrs3 container8)))
-                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector17
-                                       (us_split_fields37 temp___expr_1143)))))
+(define-fun dynamic_invariant19 ((temp___expr_775 us_rep19)
+  (temp___is_init_772 Bool) (temp___skip_constant_773 Bool)
+  (temp___do_toplevel_774 Bool)) Bool (and
+                                      (=>
+                                      (not (= temp___skip_constant_773 true))
+                                      (in_range38
+                                      (to_rep
+                                      (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                      (us_split_discrs3 container8)))
+                                      (to_base16 temp___expr_775)))
+                                      (in_range37
+                                      (to_rep
+                                      (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                      (us_split_discrs3 container8)))
+                                      (rec__hnco__test2__v_type_owner__vector_type__hidden_vector17
+                                      (us_split_fields37 temp___expr_775)))))
 
-;; temp___result_1153_def
-  (assert
-  (forall ((temp___1152 us_rep19)) (is_empty__function_guard
-  (is_empty (to_base16 temp___1152)) (to_base16 temp___1152))))
-
-(define-fun default_initial_assumption14 ((temp___expr_1146 us_rep19)
-  (temp___skip_top_level_1147 Bool)) Bool (and
-                                          (and
-                                          (= (attr__tag17 temp___expr_1146) 
-                                          us_tag17)
-                                          (and
-                                          (= (to_rep
-                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                             (us_split_discrs20
-                                             temp___expr_1146))) (to_rep
+(define-fun default_initial_assumption14 ((temp___expr_778 us_rep19)
+  (temp___skip_top_level_779 Bool)) Bool (and
+                                         (and
+                                         (= (attr__tag17 temp___expr_778) 
+                                         us_tag17)
+                                         (and
+                                         (= (to_rep
+                                            (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                            (us_split_discrs20
+                                            temp___expr_778))) (to_rep
+                                                               (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                                               (us_split_discrs3
+                                                               container8))))
+                                         (and
+                                         (= (to_rep1
+                                            (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity
+                                            (us_split_discrs1
+                                            (rec__hnco__test2__v_type_owner__vector_type__hidden_vector17
+                                            (us_split_fields37
+                                            temp___expr_778))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  container8))))
-                                          (and
-                                          (= (to_rep1
-                                             (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity
-                                             (us_split_discrs1
-                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector17
-                                             (us_split_fields37
-                                             temp___expr_1146))))) (to_rep
-                                                                   (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                                                   (us_split_discrs3
-                                                                   container8))))
-                                          (= (is_empty1
-                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector17
-                                             (us_split_fields37
-                                             temp___expr_1146))) true))))
-                                          (=>
-                                          (not
-                                          (= temp___skip_top_level_1147 true))
-                                          (= (is_empty
-                                             (to_base16 temp___expr_1146)) true))))
+                                         (= (is_empty1
+                                            (rec__hnco__test2__v_type_owner__vector_type__hidden_vector17
+                                            (us_split_fields37
+                                            temp___expr_778))) true))))
+                                         (=>
+                                         (not
+                                         (= temp___skip_top_level_779 true))
+                                         (= (is_empty
+                                            (to_base16 temp___expr_778)) true))))
 
 (declare-fun container9 () us_rep1)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS16 () Int)
 
-(define-fun dynamic_invariant20 ((temp___expr_1166 us_rep20)
-  (temp___is_init_1163 Bool) (temp___skip_constant_1164 Bool)
-  (temp___do_toplevel_1165 Bool)) Bool (and
-                                       (=>
-                                       (not
-                                       (= temp___skip_constant_1164 true))
-                                       (in_range40
-                                       (to_rep
-                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                       (us_split_discrs3 container9)))
-                                       (to_base17 temp___expr_1166)))
-                                       (in_range39
-                                       (to_rep
-                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                       (us_split_discrs3 container9)))
-                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector18
-                                       (us_split_fields39 temp___expr_1166)))))
+(define-fun dynamic_invariant20 ((temp___expr_797 us_rep20)
+  (temp___is_init_794 Bool) (temp___skip_constant_795 Bool)
+  (temp___do_toplevel_796 Bool)) Bool (and
+                                      (=>
+                                      (not (= temp___skip_constant_795 true))
+                                      (in_range40
+                                      (to_rep
+                                      (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                      (us_split_discrs3 container9)))
+                                      (to_base17 temp___expr_797)))
+                                      (in_range39
+                                      (to_rep
+                                      (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                      (us_split_discrs3 container9)))
+                                      (rec__hnco__test2__v_type_owner__vector_type__hidden_vector18
+                                      (us_split_fields39 temp___expr_797)))))
 
-;; temp___result_1176_def
-  (assert
-  (forall ((temp___1175 us_rep20)) (is_empty__function_guard
-  (is_empty (to_base17 temp___1175)) (to_base17 temp___1175))))
-
-(define-fun default_initial_assumption15 ((temp___expr_1169 us_rep20)
-  (temp___skip_top_level_1170 Bool)) Bool (and
-                                          (and
-                                          (= (attr__tag18 temp___expr_1169) 
-                                          us_tag18)
-                                          (and
-                                          (= (to_rep
-                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                             (us_split_discrs21
-                                             temp___expr_1169))) (to_rep
+(define-fun default_initial_assumption15 ((temp___expr_800 us_rep20)
+  (temp___skip_top_level_801 Bool)) Bool (and
+                                         (and
+                                         (= (attr__tag18 temp___expr_800) 
+                                         us_tag18)
+                                         (and
+                                         (= (to_rep
+                                            (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                            (us_split_discrs21
+                                            temp___expr_800))) (to_rep
+                                                               (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                                               (us_split_discrs3
+                                                               container9))))
+                                         (and
+                                         (= (to_rep1
+                                            (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity
+                                            (us_split_discrs1
+                                            (rec__hnco__test2__v_type_owner__vector_type__hidden_vector18
+                                            (us_split_fields39
+                                            temp___expr_800))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  container9))))
-                                          (and
-                                          (= (to_rep1
-                                             (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity
-                                             (us_split_discrs1
-                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector18
-                                             (us_split_fields39
-                                             temp___expr_1169))))) (to_rep
-                                                                   (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                                                   (us_split_discrs3
-                                                                   container9))))
-                                          (= (is_empty1
-                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector18
-                                             (us_split_fields39
-                                             temp___expr_1169))) true))))
-                                          (=>
-                                          (not
-                                          (= temp___skip_top_level_1170 true))
-                                          (= (is_empty
-                                             (to_base17 temp___expr_1169)) true))))
+                                         (= (is_empty1
+                                            (rec__hnco__test2__v_type_owner__vector_type__hidden_vector18
+                                            (us_split_fields39
+                                            temp___expr_800))) true))))
+                                         (=>
+                                         (not
+                                         (= temp___skip_top_level_801 true))
+                                         (= (is_empty
+                                            (to_base17 temp___expr_800)) true))))
 
 (declare-fun container10 () us_rep1)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS17 () Int)
 
-(define-fun dynamic_invariant21 ((temp___expr_1189 us_rep21)
-  (temp___is_init_1186 Bool) (temp___skip_constant_1187 Bool)
-  (temp___do_toplevel_1188 Bool)) Bool (and
-                                       (=>
-                                       (not
-                                       (= temp___skip_constant_1187 true))
-                                       (in_range42
-                                       (to_rep
-                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                       (us_split_discrs3 container10)))
-                                       (to_base18 temp___expr_1189)))
-                                       (in_range41
-                                       (to_rep
-                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                       (us_split_discrs3 container10)))
-                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector19
-                                       (us_split_fields41 temp___expr_1189)))))
+(define-fun dynamic_invariant21 ((temp___expr_819 us_rep21)
+  (temp___is_init_816 Bool) (temp___skip_constant_817 Bool)
+  (temp___do_toplevel_818 Bool)) Bool (and
+                                      (=>
+                                      (not (= temp___skip_constant_817 true))
+                                      (in_range42
+                                      (to_rep
+                                      (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                      (us_split_discrs3 container10)))
+                                      (to_base18 temp___expr_819)))
+                                      (in_range41
+                                      (to_rep
+                                      (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                      (us_split_discrs3 container10)))
+                                      (rec__hnco__test2__v_type_owner__vector_type__hidden_vector19
+                                      (us_split_fields41 temp___expr_819)))))
 
-;; temp___result_1199_def
-  (assert
-  (forall ((temp___1198 us_rep21)) (is_empty__function_guard
-  (is_empty (to_base18 temp___1198)) (to_base18 temp___1198))))
-
-(define-fun default_initial_assumption16 ((temp___expr_1192 us_rep21)
-  (temp___skip_top_level_1193 Bool)) Bool (and
-                                          (and
-                                          (= (attr__tag19 temp___expr_1192) 
-                                          us_tag19)
-                                          (and
-                                          (= (to_rep
-                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                             (us_split_discrs22
-                                             temp___expr_1192))) (to_rep
+(define-fun default_initial_assumption16 ((temp___expr_822 us_rep21)
+  (temp___skip_top_level_823 Bool)) Bool (and
+                                         (and
+                                         (= (attr__tag19 temp___expr_822) 
+                                         us_tag19)
+                                         (and
+                                         (= (to_rep
+                                            (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                            (us_split_discrs22
+                                            temp___expr_822))) (to_rep
+                                                               (rec__hnco__test2__v_type_owner__vector_type__capacity
+                                                               (us_split_discrs3
+                                                               container10))))
+                                         (and
+                                         (= (to_rep1
+                                            (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity
+                                            (us_split_discrs1
+                                            (rec__hnco__test2__v_type_owner__vector_type__hidden_vector19
+                                            (us_split_fields41
+                                            temp___expr_822))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  container10))))
-                                          (and
-                                          (= (to_rep1
-                                             (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity
-                                             (us_split_discrs1
-                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector19
-                                             (us_split_fields41
-                                             temp___expr_1192))))) (to_rep
-                                                                   (rec__hnco__test2__v_type_owner__vector_type__capacity
-                                                                   (us_split_discrs3
-                                                                   container10))))
-                                          (= (is_empty1
-                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector19
-                                             (us_split_fields41
-                                             temp___expr_1192))) true))))
-                                          (=>
-                                          (not
-                                          (= temp___skip_top_level_1193 true))
-                                          (= (is_empty
-                                             (to_base18 temp___expr_1192)) true))))
+                                         (= (is_empty1
+                                            (rec__hnco__test2__v_type_owner__vector_type__hidden_vector19
+                                            (us_split_fields41
+                                            temp___expr_822))) true))))
+                                         (=>
+                                         (not
+                                         (= temp___skip_top_level_823 true))
+                                         (= (is_empty
+                                            (to_base18 temp___expr_822)) true))))
 
 (declare-fun us () Int)
 
@@ -5337,9 +5193,6 @@
 
 ;; H
   (assert (in_range1 capacity))
-
-;; H
-  (assert (length__function_guard (length source) source))
 
 ;; H
   (assert

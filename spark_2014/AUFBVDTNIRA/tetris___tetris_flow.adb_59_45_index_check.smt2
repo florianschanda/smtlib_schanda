@@ -1787,7 +1787,7 @@
 
 (declare-fun o () Int)
 
-(declare-fun temp___754 () map1)
+(declare-fun temp___733 () map1)
 
 (declare-fun o1 () cell)
 
@@ -1911,10 +1911,10 @@
 ;; H
   (assert
   (and
-  (forall ((temp___759 Int))
-  (=> (and (<= 1 temp___759) (<= temp___759 50))
-  (=> (not (= (+ (to_rep3 cur_piece__split_fields3) y2) temp___759))
-  (= (select cur_board1 temp___759) (select cur_board temp___759)))))
+  (forall ((temp___738 Int))
+  (=> (and (<= 1 temp___738) (<= temp___738 50))
+  (=> (not (= (+ (to_rep3 cur_piece__split_fields3) y2) temp___738))
+  (= (select cur_board1 temp___738) (select cur_board temp___738)))))
   (and (<= 0 x2) (<= x2 2))))
 
 ;; H
@@ -1927,11 +1927,11 @@
 
 ;; H
   (assert
-  (= temp___754 (get1 possible_three_shapes o
+  (= temp___733 (get1 possible_three_shapes o
                 (to_rep4 cur_piece__split_fields1))))
 
 ;; H
-  (assert (= result2 (get temp___754 y2 x2)))
+  (assert (= result2 (get temp___733 y2 x2)))
 
 ;; H
   (assert (= result2 true))

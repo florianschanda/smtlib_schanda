@@ -231,9 +231,9 @@
 ;; H
   (assert
   (and
-  (forall ((temp___189 Int))
-  (=> (and (<= 1 temp___189) (<= temp___189 10))
-  (=> (<= i2 temp___189) (= (select a1 temp___189) (select a temp___189)))))
+  (forall ((temp___187 Int))
+  (=> (and (<= 1 temp___187) (<= temp___187 10))
+  (=> (<= i2 temp___187) (= (select a1 temp___187) (select a temp___187)))))
   (and (<= 1 i2) (<= i2 10))))
 
 (assert

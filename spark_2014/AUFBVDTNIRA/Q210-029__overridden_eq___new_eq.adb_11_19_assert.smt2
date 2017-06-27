@@ -174,8 +174,7 @@
 ;; user_eq__def_axiom
   (assert
   (forall ((a us_rep) (b us_rep))
-  (! (and (oeq__function_guard (oeq a b) a b) (= (user_eq1 a b) (oeq a b))) :pattern (
-  (user_eq1 a b)) )))
+  (! (= (user_eq1 a b) (oeq a b)) :pattern ((user_eq1 a b)) )))
 
 ;; oeq__post_axiom
   (assert true)
@@ -183,12 +182,11 @@
 ;; oeq__def_axiom
   (assert
   (forall ((x us_rep) (y us_rep))
-  (! (=> (oeq__function_guard (oeq x y) x y)
-     (= (= (oeq x y) true)
+  (! (= (= (oeq x y) true)
      (= (to_rep (rec__new_eq__my_rec__f (us_split_fields1 x))) (to_rep
                                                                (rec__new_eq__my_rec__f
                                                                (us_split_fields1
-                                                               y)))))) :pattern (
+                                                               y))))) :pattern (
   (oeq x y)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -250,14 +248,6 @@
 
 (declare-fun y__split_fields3 () integer)
 
-(define-fun y__split_fields4 () us_split_fields (mk___split_fields
-                                                y__split_fields2
-                                                y__split_fields3))
-
-(define-fun x__split_fields4 () us_split_fields (mk___split_fields
-                                                x__split_fields2
-                                                x__split_fields3))
-
 ;; H
   (assert (= (to_rep o) 2))
 
@@ -318,15 +308,11 @@
 ;; H
   (assert (= new_eq__y__assume1 y__split_fields3))
 
-;; H
-  (assert (oeq__function_guard
-  (oeq (mk___rep x__split_fields4) (mk___rep y__split_fields4))
-  (mk___rep x__split_fields4) (mk___rep y__split_fields4)))
-
 (assert
 ;; WP_parameter_def
  ;; File "new_eq.adb", line 6, characters 0-0
   (not
   (not
-  (= (oeq (mk___rep x__split_fields4) (mk___rep y__split_fields4)) true))))
+  (= (oeq (mk___rep (mk___split_fields x__split_fields2 x__split_fields3))
+     (mk___rep (mk___split_fields y__split_fields2 y__split_fields3))) true))))
 (check-sat)

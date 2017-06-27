@@ -244,17 +244,13 @@
 ;; maxvalue__post_axiom
   (assert
   (forall ((len Int))
-  (! (=> (dynamic_invariant2 len true true true)
-     (let ((result (maxvalue len)))
-     (=> (maxvalue__function_guard result len) (dynamic_invariant1 result
-     true false true)))) :pattern ((maxvalue len)) )))
+  (! (=> (dynamic_invariant2 len true true true) (dynamic_invariant1
+     (maxvalue len) true false true)) :pattern ((maxvalue len)) )))
 
 ;; maxvalue__def_axiom
   (assert
   (forall ((len Int))
-  (! (=>
-     (and (dynamic_invariant2 len true true true) (maxvalue__function_guard
-     (maxvalue len) len))
+  (! (=> (dynamic_invariant2 len true true true)
      (= (maxvalue len) (bvshl ((_ int2bv 64) 1) ((_ int2bv 64) len)))) :pattern (
   (maxvalue len)) )))
 
@@ -297,16 +293,7 @@
   (assert (in_range1 len))
 
 ;; H
-  (assert (maxvalue__function_guard (maxvalue len) len))
-
-;; H
   (assert (and (and (<= 0 len) (<= len 63)) (bvult x (maxvalue len))))
-
-;; H
-  (assert (maxvalue__function_guard (maxvalue len) len))
-
-;; H
-  (assert (maxvalue__function_guard (maxvalue len) len))
 
 ;; H
   (assert (and (= o len) (uint_in_range len)))

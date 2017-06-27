@@ -167,9 +167,9 @@
 (define-fun modular__ref_6__projection ((a modular__ref)) modular (modular__content
                                                                   a))
 
-(define-fun dynamic_invariant ((temp___expr_605 (_ BitVec 32))
-  (temp___is_init_602 Bool) (temp___skip_constant_603 Bool)
-  (temp___do_toplevel_604 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_305 (_ BitVec 32))
+  (temp___is_init_302 Bool) (temp___skip_constant_303 Bool)
+  (temp___do_toplevel_304 Bool)) Bool true)
 
 (declare-sort mask_size 0)
 
@@ -192,11 +192,11 @@
 (define-fun mask_size__ref_5__projection ((a mask_size__ref)) mask_size 
   (mask_size__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_617 Int)
-  (temp___is_init_614 Bool) (temp___skip_constant_615 Bool)
-  (temp___do_toplevel_616 Bool)) Bool (=>
-                                      (or (= temp___is_init_614 true)
-                                      (<= 1 32)) (in_range1 temp___expr_617)))
+(define-fun dynamic_invariant1 ((temp___expr_317 Int)
+  (temp___is_init_314 Bool) (temp___skip_constant_315 Bool)
+  (temp___do_toplevel_316 Bool)) Bool (=>
+                                      (or (= temp___is_init_314 true)
+                                      (<= 1 32)) (in_range1 temp___expr_317)))
 
 (declare-fun axiom__ (tuple0) Bool)
 
@@ -205,9 +205,7 @@
 ;; axiom____post_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (let ((result (axiom__ us_void_param)))
-     (=> (axiom____function_guard result us_void_param)
-     (=> (= result true)
+  (! (=> (= (axiom__ us_void_param) true)
      (forall ((v (_ BitVec 32)))
      (=>
      (and (bvule ((_ int2bv 32) 0) v) (bvule v ((_ int2bv 32) 4294967295)))
@@ -223,7 +221,7 @@
                                             (bvshl ((_ int2bv 32) 1) ((_ int2bv 32) n))
                                             ((_ int2bv 32) 0))) (ite (< n 4294967296)
                                                                 (bvshl ((_ int2bv 32) 1) ((_ int2bv 32) n))
-                                                                ((_ int2bv 32) 0))))))))))) :pattern (
+                                                                ((_ int2bv 32) 0))))))))) :pattern (
   (axiom__ us_void_param)) )))
 
 (declare-fun amount () Int)
@@ -271,8 +269,6 @@
   (forall ((x Int))
   (! (=> (in_range2 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
-
-(declare-fun last () Int)
 
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -333,9 +329,6 @@
   (assert (= result__1 ((_ int2bv 32) 0)))
 
 ;; H
-  (assert (axiom____function_guard (axiom__ Tuple0) Tuple0))
-
-;; H
   (assert (= (axiom__ Tuple0) true))
 
 ;; H
@@ -371,11 +364,11 @@
 ;; WP_parameter_def
  ;; File "bits_manipulation.ads", line 3, characters 0-0
   (not
-  (= (bvand result__2 (let ((temp___1325 (- i1 1)))
-                      (ite (< temp___1325 4294967296)
-                      (bvshl ((_ int2bv 32) 1) ((_ int2bv 32) temp___1325))
-                      ((_ int2bv 32) 0)))) (let ((temp___1326 (- i1 1)))
-                                           (ite (< temp___1326 4294967296)
-                                           (bvshl ((_ int2bv 32) 1) ((_ int2bv 32) temp___1326))
+  (= (bvand result__2 (let ((temp___444 (- i1 1)))
+                      (ite (< temp___444 4294967296)
+                      (bvshl ((_ int2bv 32) 1) ((_ int2bv 32) temp___444))
+                      ((_ int2bv 32) 0)))) (let ((temp___445 (- i1 1)))
+                                           (ite (< temp___445 4294967296)
+                                           (bvshl ((_ int2bv 32) 1) ((_ int2bv 32) temp___445))
                                            ((_ int2bv 32) 0))))))
 (check-sat)

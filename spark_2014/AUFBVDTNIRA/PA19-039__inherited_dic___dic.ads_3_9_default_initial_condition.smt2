@@ -129,11 +129,6 @@
 
 (declare-fun is_ok__function_guard1 (Bool Int us_rep) Bool)
 
-;; temp___result_139_def
-  (assert
-  (forall ((temp___138 us_rep)) (is_ok__function_guard (is_ok temp___138)
-  temp___138)))
-
 (define-fun default_initial_assumption ((temp___expr_136 us_rep)
   (temp___skip_top_level_137 Bool)) Bool (and
                                          (and
@@ -207,44 +202,34 @@
 ;; dic__parent__compat_axiom
   (assert
   (forall ((obj us_rep))
-  (! (=> (is_ok__function_guard1 (is_ok1 us_tag obj) us_tag obj)
-     (and (is_ok__function_guard (is_ok obj) obj)
-     (= (to_int1 (is_ok obj)) (to_int1 (is_ok1 us_tag obj))))) :pattern (
+  (! (= (to_int1 (is_ok obj)) (to_int1 (is_ok1 us_tag obj))) :pattern (
   (is_ok1 us_tag obj)) )))
 
 ;; dic__child__compat_axiom
   (assert
   (forall ((obj us_rep))
-  (! (=> (is_ok__function_guard1 (is_ok1 us_tag1 obj) us_tag1 obj)
-     (and (is_ok__2__function_guard (is_ok__2 obj) obj)
-     (= (to_int1 (is_ok__2 obj)) (to_int1 (is_ok1 us_tag1 obj))))) :pattern (
+  (! (= (to_int1 (is_ok__2 obj)) (to_int1 (is_ok1 us_tag1 obj))) :pattern (
   (is_ok1 us_tag1 obj)) )))
 
 ;; is_ok__def_axiom
   (assert
   (forall ((obj us_rep))
-  (! (=> (is_ok__function_guard (is_ok obj) obj)
-     (= (= (is_ok obj) true)
-     (= (rec__dic__parent__b (us_split_fields1 obj)) true))) :pattern (
+  (! (= (= (is_ok obj) true)
+     (= (rec__dic__parent__b (us_split_fields1 obj)) true)) :pattern (
   (is_ok obj)) )))
 
-;; temp___result_149_def
-  (assert
-  (forall ((temp___148 us_rep)) (is_ok__2__function_guard
-  (is_ok__2 temp___148) temp___148)))
-
-(define-fun default_initial_assumption1 ((temp___expr_146 us_rep)
-  (temp___skip_top_level_147 Bool)) Bool (and
+(define-fun default_initial_assumption1 ((temp___expr_143 us_rep)
+  (temp___skip_top_level_144 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag temp___expr_146) 
+                                         (= (attr__tag temp___expr_143) 
                                          us_tag1)
                                          (= (rec__dic__parent__b
                                             (us_split_fields1
-                                            temp___expr_146)) (of_int 1)))
+                                            temp___expr_143)) (of_int 1)))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_147 true))
-                                         (= (is_ok__2 temp___expr_146) true))))
+                                         (= temp___skip_top_level_144 true))
+                                         (= (is_ok__2 temp___expr_143) true))))
 
 ;; is_ok__2__post_axiom
   (assert true)
@@ -255,37 +240,29 @@
 ;; dic__child__compat_axiom
   (assert
   (forall ((obj us_rep))
-  (! (=> (is_ok__2__function_guard1 (is_ok__21 us_tag1 obj) us_tag1 obj)
-     (and (is_ok__2__function_guard (is_ok__2 obj) obj)
-     (= (to_int1 (is_ok__2 obj)) (to_int1 (is_ok__21 us_tag1 obj))))) :pattern (
+  (! (= (to_int1 (is_ok__2 obj)) (to_int1 (is_ok__21 us_tag1 obj))) :pattern (
   (is_ok__21 us_tag1 obj)) )))
 
 ;; is_ok__2__def_axiom
   (assert
   (forall ((obj us_rep))
-  (! (=> (is_ok__2__function_guard (is_ok__2 obj) obj)
-     (= (= (is_ok__2 obj) true)
-     (not (= (rec__dic__parent__b (us_split_fields1 obj)) true)))) :pattern (
+  (! (= (= (is_ok__2 obj) true)
+     (not (= (rec__dic__parent__b (us_split_fields1 obj)) true))) :pattern (
   (is_ok__2 obj)) )))
 
-(declare-fun temp___164 () Bool)
+(declare-fun temp___159 () Bool)
 
-(declare-fun temp___1641 () us_private)
+(declare-fun temp___1591 () us_private)
 
-(declare-fun temp___1642 () Int)
-
-(define-fun temp___1643 () us_rep (mk___rep
-                                  (mk___split_fields temp___164 temp___1641)
-                                  temp___1642))
+(declare-fun temp___1592 () Int)
 
 ;; H
-  (assert (and (= temp___1642 us_tag) (= temp___164 (of_int 1))))
-
-;; H
-  (assert (is_ok__function_guard (is_ok temp___1643) temp___1643))
+  (assert (and (= temp___1592 us_tag) (= temp___159 (of_int 1))))
 
 (assert
 ;; WP_parameter_def
  ;; File "dic.ads", line 27, characters 0-0
-  (not (= (is_ok temp___1643) true)))
+  (not
+  (= (is_ok
+     (mk___rep (mk___split_fields temp___159 temp___1591) temp___1592)) true)))
 (check-sat)

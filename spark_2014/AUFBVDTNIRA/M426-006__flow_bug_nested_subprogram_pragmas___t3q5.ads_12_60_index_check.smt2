@@ -271,7 +271,7 @@
 
 (declare-fun i () Int)
 
-(declare-fun temp___174 () Int)
+(declare-fun temp___171 () Int)
 
 ;; H
   (assert (in_range2 l))
@@ -286,10 +286,10 @@
   (assert (<= i (- u 1)))
 
 ;; H
-  (assert (and (= temp___174 (+ i 1)) (in_range1 (+ i 1))))
+  (assert (and (= temp___171 (+ i 1)) (in_range1 (+ i 1))))
 
 (assert
 ;; WP_parameter_def
  ;; File "t3q5.ads", line 11, characters 0-0
-  (not (<= 1 temp___174)))
+  (not (<= 1 temp___171)))
 (check-sat)

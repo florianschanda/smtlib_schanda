@@ -186,8 +186,7 @@
 ;; divides__def_axiom
   (assert
   (forall ((a Int) (b Int))
-  (! (=> (divides__function_guard (divides a b) a b)
-     (= (= (divides a b) true) (= (mod2 b a) 0))) :pattern ((divides a b)) )))
+  (! (= (= (divides a b) true) (= (mod2 b a) 0)) :pattern ((divides a b)) )))
 
 (declare-fun a () Int)
 
@@ -221,10 +220,6 @@
   (! (=> (in_range2 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
 
-(declare-fun first () Int)
-
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -253,7 +248,7 @@
 
 (declare-fun o1 () Int)
 
-(declare-fun temp___137 () Int)
+(declare-fun temp___132 () Int)
 
 (declare-fun o2 () Int)
 
@@ -318,22 +313,6 @@
   (assert (in_range2 r4b))
 
 ;; H
-  (assert (divides__function_guard (divides o2 o3) o2 o3))
-
-;; H
-  (assert
-  (forall ((x Int)) (divides__function_guard (divides x (ite (< a b) a b)) x
-  (ite (< a b) a b))))
-
-;; H
-  (assert (divides__function_guard (divides o2 o3) o2 o3))
-
-;; H
-  (assert
-  (forall ((x Int)) (divides__function_guard (divides x (ite (< a b) a b)) x
-  (ite (< a b) a b))))
-
-;; H
   (assert (= (mk_int__ref result2) (mk_int__ref j)))
 
 ;; H
@@ -341,7 +320,7 @@
 
 ;; H
   (assert
-  (=> (and (<= r4b j1) (<= j1 (- (ite (< a b) a b) 1))) (= temp___137 j1)))
+  (=> (and (<= r4b j1) (<= j1 (- (ite (< a b) a b) 1))) (= temp___132 j1)))
 
 ;; H
   (assert
@@ -413,12 +392,6 @@
 
 ;; H
   (assert (<= x (ite (< a b) a b)))
-
-;; H
-  (assert (divides__function_guard (divides x a) x a))
-
-;; H
-  (assert (divides__function_guard (divides x b) x b))
 
 (assert
 ;; WP_parameter_def

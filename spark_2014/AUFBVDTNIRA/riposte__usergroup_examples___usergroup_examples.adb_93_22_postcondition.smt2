@@ -461,19 +461,6 @@
 (define-fun v5 () int__ref (mk_int__ref v))
 
 ;; H
-  (assert
-  (forall ((x Int)) (is_valid__function_guard
-  (is_valid (to_rep (select va x))) (to_rep (select va x)))))
-
-;; H
-  (assert (is_valid__function_guard (is_valid (to_rep (select va i)))
-  (to_rep (select va i))))
-
-;; H
-  (assert (is_valid__function_guard (is_valid (to_rep (select va i)))
-  (to_rep (select va i))))
-
-;; H
   (assert (in_range1 i))
 
 ;; H
@@ -647,9 +634,6 @@
 
 ;; H
   (assert (= vca5 vca3))
-
-;; H
-  (assert (is_valid__function_guard (is_valid v3) v3))
 
 (assert
 ;; WP_parameter_def

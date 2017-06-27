@@ -91,16 +91,14 @@
 
 ;; too_small__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (too_small us_void_param)))
-     (=> (too_small__function_guard result us_void_param) (dynamic_invariant
-     result true false true))) :pattern ((too_small us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant
+  (too_small us_void_param) true false
+  true) :pattern ((too_small us_void_param)) )))
 
 ;; too_small__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (too_small__function_guard (too_small us_void_param) us_void_param)
-     (= (too_small us_void_param) 0)) :pattern ((too_small us_void_param)) )))
+  (! (= (too_small us_void_param) 0) :pattern ((too_small us_void_param)) )))
 
 (declare-fun r1s () Int)
 
@@ -327,9 +325,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= bad__R1s__assume (too_small Tuple0)) (too_small__function_guard
-  bad__R1s__assume Tuple0))
+  (and (= bad__R1s__assume (too_small Tuple0))
   (and (in_range bad__R1s__assume) (= bad__R1s__assume 0))))
 
 ;; H

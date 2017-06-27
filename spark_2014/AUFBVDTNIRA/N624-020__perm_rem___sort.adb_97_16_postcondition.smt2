@@ -327,10 +327,6 @@
   (! (=> (in_range5 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
                                                               (of_rep1 x))) )))
 
-(declare-fun first1 () Int)
-
-(declare-fun last1 () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -371,9 +367,9 @@
 
 (declare-fun sort__index_of_minimum__result () Int)
 
-(declare-fun temp___396 () Int)
+(declare-fun temp___272 () Int)
 
-(declare-fun temp___395 () Int)
+(declare-fun temp___271 () Int)
 
 (declare-fun o () Int)
 
@@ -465,10 +461,10 @@
 
 ;; H
   (assert
-  (=> (and (<= first index2) (<= index2 last)) (= temp___396 index2)))
+  (=> (and (<= first index2) (<= index2 last)) (= temp___272 index2)))
 
 ;; H
-  (assert (=> (and (<= first index2) (<= index2 last)) (= temp___395 min1)))
+  (assert (=> (and (<= first index2) (<= index2 last)) (= temp___271 min1)))
 
 ;; H
   (assert

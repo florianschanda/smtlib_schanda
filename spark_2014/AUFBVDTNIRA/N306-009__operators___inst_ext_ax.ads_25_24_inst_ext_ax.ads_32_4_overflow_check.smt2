@@ -130,20 +130,16 @@
   (! (=>
      (and
      (and (dynamic_invariant2 a true true true) (dynamic_invariant2 b true
-     true true)) (dynamic_invariant2 c true true true))
-     (let ((result (addthree a b c)))
-     (=> (addthree__function_guard result a b c) (dynamic_invariant1 result
-     true false true)))) :pattern ((addthree a b c)) )))
+     true true)) (dynamic_invariant2 c true true true)) (dynamic_invariant1
+     (addthree a b c) true false true)) :pattern ((addthree a b c)) )))
 
 ;; addthree__def_axiom
   (assert
   (forall ((a Int) (b Int) (c Int))
   (! (=>
      (and
-     (and
      (and (dynamic_invariant2 a true true true) (dynamic_invariant2 b true
      true true)) (dynamic_invariant2 c true true true))
-     (addthree__function_guard (addthree a b c) a b c))
      (= (addthree a b c) (+ (+ a b) c))) :pattern ((addthree a b c)) )))
 
 (declare-fun i1 () Int)
@@ -166,8 +162,7 @@
 
 ;; H
   (assert
-  (and (and (= o (addthree i1 i2 i1)) (addthree__function_guard o i1 i2 i1))
-  (and (in_range o) (= o (+ (+ i1 i2) i1)))))
+  (and (= o (addthree i1 i2 i1)) (and (in_range o) (= o (+ (+ i1 i2) i1)))))
 
 ;; H
   (assert (= o1 (+ (+ i1 i2) o)))

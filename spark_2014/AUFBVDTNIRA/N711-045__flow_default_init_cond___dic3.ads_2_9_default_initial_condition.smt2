@@ -68,11 +68,6 @@
                                       (<= (- 2147483648) 2147483647))
                                       (in_range temp___expr_135)))
 
-;; temp___result_139_def
-  (assert
-  (forall ((temp___138 Int)) (to_int__function_guard (to_int1 temp___138)
-  temp___138)))
-
 (define-fun default_initial_assumption ((temp___expr_136 Int)
   (temp___skip_top_level_137 Bool)) Bool (and (= temp___expr_136 5)
                                          (=>
@@ -112,33 +107,27 @@
 ;; to_int__post_axiom
   (assert
   (forall ((r Int))
-  (! (=> (dynamic_invariant r true true true)
-     (let ((result (to_int1 r)))
-     (=> (to_int__function_guard result r) (dynamic_invariant1 result true
-     false true)))) :pattern ((to_int1 r)) )))
+  (! (=> (dynamic_invariant r true true true) (dynamic_invariant1 (to_int1 r)
+     true false true)) :pattern ((to_int1 r)) )))
 
 ;; to_int__def_axiom
   (assert
   (forall ((r Int))
-  (! (=>
-     (and (dynamic_invariant r true true true) (to_int__function_guard
-     (to_int1 r) r)) (= (to_int1 r) r)) :pattern ((to_int1 r)) )))
+  (! (=> (dynamic_invariant r true true true) (= (to_int1 r) r)) :pattern (
+  (to_int1 r)) )))
 
 (declare-fun us () Int)
 
-(declare-fun temp___148 () Int)
+(declare-fun temp___146 () Int)
 
 ;; H
   (assert (and (= us 5) (in_range 5)))
 
 ;; H
-  (assert (and (in_range temp___148) (= temp___148 5)))
-
-;; H
-  (assert (to_int__function_guard (to_int1 temp___148) temp___148))
+  (assert (and (in_range temp___146) (= temp___146 5)))
 
 (assert
 ;; WP_parameter_def
  ;; File "dic3.ads", line 12, characters 0-0
-  (not (= (to_int1 temp___148) 5)))
+  (not (= (to_int1 temp___146) 5)))
 (check-sat)

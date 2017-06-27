@@ -831,8 +831,7 @@
 ;; prop____def_axiom
   (assert
   (forall ((e Int))
-  (! (=> (prop____function_guard (prop__ e) e)
-     (= (= (prop__ e) true) (<= 0 e))) :pattern ((prop__ e)) )))
+  (! (= (= (prop__ e) true) (<= 0 e)) :pattern ((prop__ e)) )))
 
 (declare-fun s1__split_discrs () us_split_discrs)
 

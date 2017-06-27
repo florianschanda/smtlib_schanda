@@ -301,12 +301,12 @@
 
 (declare-fun capacity__function_guard (Int us_rep1) Bool)
 
-(define-fun dynamic_invariant ((temp___expr_249 Int)
-  (temp___is_init_246 Bool) (temp___skip_constant_247 Bool)
-  (temp___do_toplevel_248 Bool)) Bool (=>
-                                      (or (= temp___is_init_246 true)
+(define-fun dynamic_invariant ((temp___expr_248 Int)
+  (temp___is_init_245 Bool) (temp___skip_constant_246 Bool)
+  (temp___do_toplevel_247 Bool)) Bool (=>
+                                      (or (= temp___is_init_245 true)
                                       (<= 0 2147483647)) (in_range2
-                                      temp___expr_249)))
+                                      temp___expr_248)))
 
 (declare-fun length (us_rep1) Int)
 
@@ -448,12 +448,12 @@
 (define-fun extended_index__ref___projection ((a extended_index__ref)) extended_index 
   (extended_index__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_243 Int)
-  (temp___is_init_240 Bool) (temp___skip_constant_241 Bool)
-  (temp___do_toplevel_242 Bool)) Bool (=>
-                                      (or (= temp___is_init_240 true)
+(define-fun dynamic_invariant1 ((temp___expr_242 Int)
+  (temp___is_init_239 Bool) (temp___skip_constant_240 Bool)
+  (temp___do_toplevel_241 Bool)) Bool (=>
+                                      (or (= temp___is_init_239 true)
                                       (<= 0 2147483647)) (in_range3
-                                      temp___expr_243)))
+                                      temp___expr_242)))
 
 (declare-fun is_empty (us_rep1) Bool)
 
@@ -511,20 +511,20 @@
 (define-fun index_type__ref___projection ((a index_type__ref)) index_type 
   (index_type__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_233 Int)
-  (temp___is_init_230 Bool) (temp___skip_constant_231 Bool)
-  (temp___do_toplevel_232 Bool)) Bool (=>
-                                      (or (= temp___is_init_230 true)
+(define-fun dynamic_invariant2 ((temp___expr_232 Int)
+  (temp___is_init_229 Bool) (temp___skip_constant_230 Bool)
+  (temp___do_toplevel_231 Bool)) Bool (=>
+                                      (or (= temp___is_init_229 true)
                                       (<= 1 2147483647)) (in_range4
-                                      temp___expr_233)))
+                                      temp___expr_232)))
 
 (define-fun element ((container us_rep1)
   (index Int)) us_rep (get (model__ container) index))
 
 (declare-fun element__function_guard (us_rep us_rep1 Int) Bool)
 
-(define-fun default_initial_assumption ((temp___expr_219 us_rep)
-  (temp___skip_top_level_220 Bool)) Bool (= (attr__tag temp___expr_219) 
+(define-fun default_initial_assumption ((temp___expr_218 us_rep)
+  (temp___skip_top_level_219 Bool)) Bool (= (attr__tag temp___expr_218) 
   us_tag))
 
 (define-fun equal_except ((left us_rep2) (right us_rep2)
@@ -762,9 +762,9 @@
      (= result 0)
      (and
      (and (and (<= index result) (<= result (last_index container)))
-     (= (let ((temp___442 (get (model__ container) result)))
-        (and (ite (= (attr__tag temp___442) (attr__tag item)) true false) 
-        (us_dispatch_eq temp___442 item))) true))
+     (= (let ((temp___441 (get (model__ container) result)))
+        (and (ite (= (attr__tag temp___441) (attr__tag item)) true false) 
+        (us_dispatch_eq temp___441 item))) true))
      (not (= (contains (model__ container) index (- result 1) item) true))))
      (dynamic_invariant1 result true false true)))) :pattern ((find_index
                                                               container item
@@ -792,9 +792,9 @@
      (and
      (and (and (<= 1 result) (<= result index))
      (<= result (last_index container)))
-     (= (let ((temp___446 (get (model__ container) result)))
-        (and (ite (= (attr__tag temp___446) (attr__tag item)) true false) 
-        (us_dispatch_eq temp___446 item))) true))
+     (= (let ((temp___445 (get (model__ container) result)))
+        (and (ite (= (attr__tag temp___445) (attr__tag item)) true false) 
+        (us_dispatch_eq temp___445 item))) true))
      (not
      (= (contains (model__ container) (+ result 1)
         (ite (<= index (last_index container)) index (last_index container))
@@ -840,8 +840,7 @@
 ;; f__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant3 x true true true) (f__function_guard (f x) x))
+  (! (=> (dynamic_invariant3 x true true true)
      (= (f x) (mk___rep (mk___split_fields (of_rep x) us_null_ext__) us_tag))) :pattern (
   (f x)) )))
 
@@ -852,12 +851,6 @@
 (declare-fun lt (us_rep us_rep) Bool)
 
 (declare-fun lt__function_guard (Bool us_rep us_rep) Bool)
-
-;; temp___result_166_def
-  (assert
-  (forall ((container us_rep2) (i Int) (j Int)) (lt__function_guard
-  (lt (get container i) (get container j)) (get container i)
-  (get container j))))
 
 (define-fun m_elements_sorted ((container us_rep2)) Bool (ite (forall
                                                               ((i Int))
@@ -970,22 +963,22 @@
 (declare-datatypes () ((tvS__ref (mk_tvS__ref (tvS__content us_rep1)))))
 (define-fun tvS__ref___projection ((a tvS__ref)) us_rep1 (tvS__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_461 us_rep1)
-  (temp___is_init_458 Bool) (temp___skip_constant_459 Bool)
-  (temp___do_toplevel_460 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_459 true))
-                                      (in_range5 5 temp___expr_461)))
+(define-fun dynamic_invariant4 ((temp___expr_458 us_rep1)
+  (temp___is_init_455 Bool) (temp___skip_constant_456 Bool)
+  (temp___do_toplevel_457 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_456 true))
+                                      (in_range5 5 temp___expr_458)))
 
-(define-fun default_initial_assumption1 ((temp___expr_463 us_rep1)
-  (temp___skip_top_level_464 Bool)) Bool (and
+(define-fun default_initial_assumption1 ((temp___expr_460 us_rep1)
+  (temp___skip_top_level_461 Bool)) Bool (and
                                          (= (to_rep1
                                             (rec__indefinite_bounded_tagged__vect__vector__capacity
                                             (us_split_discrs1
-                                            temp___expr_463))) 5)
+                                            temp___expr_460))) 5)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_464 true))
-                                         (= (is_empty temp___expr_463) true))))
+                                         (= temp___skip_top_level_461 true))
+                                         (= (is_empty temp___expr_460) true))))
 
 (declare-fun v__split_discrs () us_split_discrs)
 
@@ -1001,11 +994,10 @@
 ;; lt__def_axiom
   (assert
   (forall ((left us_rep) (right us_rep))
-  (! (=> (lt__function_guard (lt left right) left right)
-     (= (= (lt left right) true)
+  (! (= (= (lt left right) true)
      (< (to_rep
         (rec__indefinite_bounded_tagged__t__c (us_split_fields1 left))) 
-     (to_rep (rec__indefinite_bounded_tagged__t__c (us_split_fields1 right)))))) :pattern (
+     (to_rep (rec__indefinite_bounded_tagged__t__c (us_split_fields1 right))))) :pattern (
   (lt left right)) )))
 
 (declare-sort count_type 0)
@@ -1029,23 +1021,23 @@
 (define-fun count_type__ref___projection ((a count_type__ref)) count_type 
   (count_type__content a))
 
-(define-fun dynamic_invariant5 ((temp___expr_212 Int)
-  (temp___is_init_209 Bool) (temp___skip_constant_210 Bool)
-  (temp___do_toplevel_211 Bool)) Bool (=>
-                                      (or (= temp___is_init_209 true)
+(define-fun dynamic_invariant5 ((temp___expr_211 Int)
+  (temp___is_init_208 Bool) (temp___skip_constant_209 Bool)
+  (temp___do_toplevel_210 Bool)) Bool (=>
+                                      (or (= temp___is_init_208 true)
                                       (<= 0 2147483647)) (in_range6
-                                      temp___expr_212)))
+                                      temp___expr_211)))
 
 ;; user_eq__def_axiom
   (assert
   (forall ((a us_rep2) (b us_rep2))
   (! (= (user_eq4 a b) (oeq1 a b)) :pattern ((user_eq4 a b)) )))
 
-(define-fun default_initial_assumption2 ((temp___expr_281 us_rep2)
-  (temp___skip_top_level_282 Bool)) Bool (=>
+(define-fun default_initial_assumption2 ((temp___expr_280 us_rep2)
+  (temp___skip_top_level_281 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_282 true))
-                                         (= (length1 temp___expr_281) 0)))
+                                         (= temp___skip_top_level_281 true))
+                                         (= (length1 temp___expr_280) 0)))
 
 ;; model____post_axiom
   (assert
@@ -1075,12 +1067,12 @@
 (define-fun extended_index__ref_2__projection ((a extended_index__ref1)) extended_index1 
   (extended_index__content1 a))
 
-(define-fun dynamic_invariant6 ((temp___expr_274 Int)
-  (temp___is_init_271 Bool) (temp___skip_constant_272 Bool)
-  (temp___do_toplevel_273 Bool)) Bool (=>
-                                      (or (= temp___is_init_271 true)
+(define-fun dynamic_invariant6 ((temp___expr_273 Int)
+  (temp___is_init_270 Bool) (temp___skip_constant_271 Bool)
+  (temp___do_toplevel_272 Bool)) Bool (=>
+                                      (or (= temp___is_init_270 true)
                                       (<= 0 2147483647)) (in_range7
-                                      temp___expr_274)))
+                                      temp___expr_273)))
 
 ;; length__post_axiom
   (assert
@@ -1229,7 +1221,7 @@
 
 ;; H
   (assert
-  (and (and (= o13 (f 1)) (f__function_guard o13 1))
+  (and (= o13 (f 1))
   (and (and (= (of_rep 1) o) (= us_null_ext__ o1)) (= us_tag o2))))
 
 ;; H
@@ -1244,14 +1236,14 @@
      (model__
      (mk___rep1 v__split_discrs
      indefinite_bounded_tagged__vect__append__2__container__fields))) true))
-  (= (let ((temp___411 (get
+  (= (let ((temp___410 (get
                        (model__
                        (mk___rep1 v__split_discrs
                        indefinite_bounded_tagged__vect__append__2__container__fields))
                        (+ (last
                           (model__
                           (mk___rep1 v__split_discrs v__split_fields1))) 1))))
-     (ite (= (attr__tag temp___411) o2) (us_dispatch_eq temp___411 o13)
+     (ite (= (attr__tag temp___410) o2) (us_dispatch_eq temp___410 o13)
      false)) true)))
 
 ;; H
@@ -1263,7 +1255,7 @@
 
 ;; H
   (assert
-  (and (and (= o12 (f 2)) (f__function_guard o12 2))
+  (and (= o12 (f 2))
   (and (and (= (of_rep 2) o3) (= us_null_ext__ o4)) (= us_tag o5))))
 
 ;; H
@@ -1278,14 +1270,14 @@
      (model__
      (mk___rep1 v__split_discrs
      indefinite_bounded_tagged__vect__append__2__container__fields1))) true))
-  (= (let ((temp___411 (get
+  (= (let ((temp___410 (get
                        (model__
                        (mk___rep1 v__split_discrs
                        indefinite_bounded_tagged__vect__append__2__container__fields1))
                        (+ (last
                           (model__
                           (mk___rep1 v__split_discrs v__split_fields2))) 1))))
-     (ite (= (attr__tag temp___411) o5) (us_dispatch_eq temp___411 o12)
+     (ite (= (attr__tag temp___410) o5) (us_dispatch_eq temp___410 o12)
      false)) true)))
 
 ;; H
@@ -1297,7 +1289,7 @@
 
 ;; H
   (assert
-  (and (and (= o11 (f 3)) (f__function_guard o11 3))
+  (and (= o11 (f 3))
   (and (and (= (of_rep 3) o6) (= us_null_ext__ o7)) (= us_tag o8))))
 
 ;; H
@@ -1312,14 +1304,14 @@
      (model__
      (mk___rep1 v__split_discrs
      indefinite_bounded_tagged__vect__append__2__container__fields2))) true))
-  (= (let ((temp___411 (get
+  (= (let ((temp___410 (get
                        (model__
                        (mk___rep1 v__split_discrs
                        indefinite_bounded_tagged__vect__append__2__container__fields2))
                        (+ (last
                           (model__
                           (mk___rep1 v__split_discrs v__split_fields3))) 1))))
-     (ite (= (attr__tag temp___411) o8) (us_dispatch_eq temp___411 o11)
+     (ite (= (attr__tag temp___410) o8) (us_dispatch_eq temp___410 o11)
      false)) true)))
 
 ;; H
@@ -1340,40 +1332,31 @@
   (assert (= (capacity (mk___rep1 v__split_discrs v__split_fields4)) 5))
 
 ;; H
-  (assert (f__function_guard (f 1) 1))
+  (assert
+  (= (let ((temp___530 (f 1)))
+     (let ((temp___529 (get
+                       (model__ (mk___rep1 v__split_discrs v__split_fields4))
+                       1)))
+     (ite (= (attr__tag temp___529) (attr__tag temp___530))
+     (us_dispatch_eq temp___529 temp___530) false))) true))
 
 ;; H
   (assert
-  (= (let ((temp___534 (f 1)))
+  (= (let ((temp___534 (f 2)))
      (let ((temp___533 (get
                        (model__ (mk___rep1 v__split_discrs v__split_fields4))
-                       1)))
+                       2)))
      (ite (= (attr__tag temp___533) (attr__tag temp___534))
      (us_dispatch_eq temp___533 temp___534) false))) true))
 
 ;; H
-  (assert (f__function_guard (f 2) 2))
-
-;; H
   (assert
-  (= (let ((temp___539 (f 2)))
-     (let ((temp___538 (get
-                       (model__ (mk___rep1 v__split_discrs v__split_fields4))
-                       2)))
-     (ite (= (attr__tag temp___538) (attr__tag temp___539))
-     (us_dispatch_eq temp___538 temp___539) false))) true))
-
-;; H
-  (assert (f__function_guard (f 3) 3))
-
-;; H
-  (assert
-  (= (let ((temp___544 (f 3)))
-     (let ((temp___543 (get
+  (= (let ((temp___538 (f 3)))
+     (let ((temp___537 (get
                        (model__ (mk___rep1 v__split_discrs v__split_fields4))
                        3)))
-     (ite (= (attr__tag temp___543) (attr__tag temp___544))
-     (us_dispatch_eq temp___543 temp___544) false))) true))
+     (ite (= (attr__tag temp___537) (attr__tag temp___538))
+     (us_dispatch_eq temp___537 temp___538) false))) true))
 
 ;; H
   (assert
@@ -1399,33 +1382,6 @@
 
 ;; H
   (assert (= (capacity (mk___rep1 v__split_discrs v__split_fields5)) 5))
-
-;; H
-  (assert (f__function_guard (f 1) 1))
-
-;; H
-  (assert (f__function_guard (f 2) 2))
-
-;; H
-  (assert (f__function_guard (f 3) 3))
-
-;; H
-  (assert (f__function_guard (f 1) 1))
-
-;; H
-  (assert (f__function_guard (f 2) 2))
-
-;; H
-  (assert (f__function_guard (f 3) 3))
-
-;; H
-  (assert (f__function_guard (f 1) 1))
-
-;; H
-  (assert (f__function_guard (f 2) 2))
-
-;; H
-  (assert (f__function_guard (f 3) 3))
 
 ;; H
   (assert
@@ -1472,30 +1428,30 @@
 
 ;; H
   (assert
-  (= (let ((temp___550 (f 1)))
-     (let ((temp___549 (get
+  (= (let ((temp___543 (f 1)))
+     (let ((temp___542 (get
                        (model__ (mk___rep1 w__split_discrs w__split_fields1))
                        1)))
-     (ite (= (attr__tag temp___549) (attr__tag temp___550))
-     (us_dispatch_eq temp___549 temp___550) false))) true))
+     (ite (= (attr__tag temp___542) (attr__tag temp___543))
+     (us_dispatch_eq temp___542 temp___543) false))) true))
 
 ;; H
   (assert
-  (= (let ((temp___555 (f 2)))
-     (let ((temp___554 (get
+  (= (let ((temp___547 (f 2)))
+     (let ((temp___546 (get
                        (model__ (mk___rep1 w__split_discrs w__split_fields1))
                        2)))
-     (ite (= (attr__tag temp___554) (attr__tag temp___555))
-     (us_dispatch_eq temp___554 temp___555) false))) true))
+     (ite (= (attr__tag temp___546) (attr__tag temp___547))
+     (us_dispatch_eq temp___546 temp___547) false))) true))
 
 ;; H
   (assert
-  (= (let ((temp___560 (f 3)))
-     (let ((temp___559 (get
+  (= (let ((temp___551 (f 3)))
+     (let ((temp___550 (get
                        (model__ (mk___rep1 w__split_discrs w__split_fields1))
                        3)))
-     (ite (= (attr__tag temp___559) (attr__tag temp___560))
-     (us_dispatch_eq temp___559 temp___560) false))) true))
+     (ite (= (attr__tag temp___550) (attr__tag temp___551))
+     (us_dispatch_eq temp___550 temp___551) false))) true))
 
 ;; H
   (assert
@@ -1526,57 +1482,57 @@
 
 ;; H
   (assert
-  (= (let ((temp___565 (f 1)))
-     (let ((temp___564 (get
+  (= (let ((temp___555 (f 1)))
+     (let ((temp___554 (get
                        (model__ (mk___rep1 w__split_discrs w__split_fields2))
                        1)))
-     (ite (= (attr__tag temp___564) (attr__tag temp___565))
-     (us_dispatch_eq temp___564 temp___565) false))) true))
+     (ite (= (attr__tag temp___554) (attr__tag temp___555))
+     (us_dispatch_eq temp___554 temp___555) false))) true))
 
 ;; H
   (assert
-  (= (let ((temp___570 (f 2)))
-     (let ((temp___569 (get
+  (= (let ((temp___559 (f 2)))
+     (let ((temp___558 (get
                        (model__ (mk___rep1 w__split_discrs w__split_fields2))
                        2)))
-     (ite (= (attr__tag temp___569) (attr__tag temp___570))
-     (us_dispatch_eq temp___569 temp___570) false))) true))
+     (ite (= (attr__tag temp___558) (attr__tag temp___559))
+     (us_dispatch_eq temp___558 temp___559) false))) true))
+
+;; H
+  (assert
+  (= (let ((temp___563 (f 3)))
+     (let ((temp___562 (get
+                       (model__ (mk___rep1 w__split_discrs w__split_fields2))
+                       3)))
+     (ite (= (attr__tag temp___562) (attr__tag temp___563))
+     (us_dispatch_eq temp___562 temp___563) false))) true))
+
+;; H
+  (assert
+  (= (let ((temp___567 (f 1)))
+     (let ((temp___566 (get
+                       (model__ (mk___rep1 w__split_discrs w__split_fields2))
+                       4)))
+     (ite (= (attr__tag temp___566) (attr__tag temp___567))
+     (us_dispatch_eq temp___566 temp___567) false))) true))
+
+;; H
+  (assert
+  (= (let ((temp___571 (f 2)))
+     (let ((temp___570 (get
+                       (model__ (mk___rep1 w__split_discrs w__split_fields2))
+                       5)))
+     (ite (= (attr__tag temp___570) (attr__tag temp___571))
+     (us_dispatch_eq temp___570 temp___571) false))) true))
 
 ;; H
   (assert
   (= (let ((temp___575 (f 3)))
      (let ((temp___574 (get
                        (model__ (mk___rep1 w__split_discrs w__split_fields2))
-                       3)))
+                       6)))
      (ite (= (attr__tag temp___574) (attr__tag temp___575))
      (us_dispatch_eq temp___574 temp___575) false))) true))
-
-;; H
-  (assert
-  (= (let ((temp___580 (f 1)))
-     (let ((temp___579 (get
-                       (model__ (mk___rep1 w__split_discrs w__split_fields2))
-                       4)))
-     (ite (= (attr__tag temp___579) (attr__tag temp___580))
-     (us_dispatch_eq temp___579 temp___580) false))) true))
-
-;; H
-  (assert
-  (= (let ((temp___585 (f 2)))
-     (let ((temp___584 (get
-                       (model__ (mk___rep1 w__split_discrs w__split_fields2))
-                       5)))
-     (ite (= (attr__tag temp___584) (attr__tag temp___585))
-     (us_dispatch_eq temp___584 temp___585) false))) true))
-
-;; H
-  (assert
-  (= (let ((temp___590 (f 3)))
-     (let ((temp___589 (get
-                       (model__ (mk___rep1 w__split_discrs w__split_fields2))
-                       6)))
-     (ite (= (attr__tag temp___589) (attr__tag temp___590))
-     (us_dispatch_eq temp___589 temp___590) false))) true))
 
 ;; H
   (assert (and (= o9 (empty_vector Tuple0)) (= (length o9) 0)))
@@ -1595,7 +1551,7 @@
 
 ;; H
   (assert
-  (and (and (= o10 (f 4)) (f__function_guard o10 4))
+  (and (= o10 (f 4))
   (= o10 (mk___rep (mk___split_fields (of_rep 4) us_null_ext__) us_tag))))
 
 ;; H
@@ -1606,13 +1562,13 @@
      (mk___rep1 v__split_discrs
      indefinite_bounded_tagged__vect__replace_element__container__fields)) 
   (length (mk___rep1 v__split_discrs v__split_fields5)))
-  (= (let ((temp___389 (get
+  (= (let ((temp___388 (get
                        (model__
                        (mk___rep1 v__split_discrs
                        indefinite_bounded_tagged__vect__replace_element__container__fields))
                        2)))
-     (ite (= (attr__tag temp___389) (attr__tag o10))
-     (us_dispatch_eq temp___389 o10) false)) true))
+     (ite (= (attr__tag temp___388) (attr__tag o10))
+     (us_dispatch_eq temp___388 o10) false)) true))
   (= (equal_except (model__ (mk___rep1 v__split_discrs v__split_fields5))
      (model__
      (mk___rep1 v__split_discrs
@@ -1626,40 +1582,31 @@
   (= v__split_fields6 indefinite_bounded_tagged__vect__replace_element__container__fields))
 
 ;; H
-  (assert (f__function_guard (f 1) 1))
-
-;; H
   (assert
-  (= (let ((temp___596 (f 1)))
-     (let ((temp___595 (get
+  (= (let ((temp___580 (f 1)))
+     (let ((temp___579 (get
                        (model__ (mk___rep1 v__split_discrs v__split_fields6))
                        1)))
-     (ite (= (attr__tag temp___595) (attr__tag temp___596))
-     (us_dispatch_eq temp___595 temp___596) false))) true))
-
-;; H
-  (assert (f__function_guard (f 4) 4))
+     (ite (= (attr__tag temp___579) (attr__tag temp___580))
+     (us_dispatch_eq temp___579 temp___580) false))) true))
 
 ;; H
   (assert
-  (= (let ((temp___601 (f 4)))
-     (let ((temp___600 (get
+  (= (let ((temp___584 (f 4)))
+     (let ((temp___583 (get
                        (model__ (mk___rep1 v__split_discrs v__split_fields6))
                        2)))
-     (ite (= (attr__tag temp___600) (attr__tag temp___601))
-     (us_dispatch_eq temp___600 temp___601) false))) true))
-
-;; H
-  (assert (f__function_guard (f 3) 3))
+     (ite (= (attr__tag temp___583) (attr__tag temp___584))
+     (us_dispatch_eq temp___583 temp___584) false))) true))
 
 ;; H
   (assert
-  (= (let ((temp___606 (f 3)))
-     (let ((temp___605 (get
+  (= (let ((temp___588 (f 3)))
+     (let ((temp___587 (get
                        (model__ (mk___rep1 v__split_discrs v__split_fields6))
                        3)))
-     (ite (= (attr__tag temp___605) (attr__tag temp___606))
-     (us_dispatch_eq temp___605 temp___606) false))) true))
+     (ite (= (attr__tag temp___587) (attr__tag temp___588))
+     (us_dispatch_eq temp___587 temp___588) false))) true))
 
 ;; H
   (assert
@@ -1677,40 +1624,31 @@
   (= v__split_fields7 indefinite_bounded_tagged__vect__swap__container__fields))
 
 ;; H
-  (assert (f__function_guard (f 3) 3))
-
-;; H
   (assert
-  (= (let ((temp___612 (f 3)))
-     (let ((temp___611 (get
+  (= (let ((temp___593 (f 3)))
+     (let ((temp___592 (get
                        (model__ (mk___rep1 v__split_discrs v__split_fields7))
                        1)))
-     (ite (= (attr__tag temp___611) (attr__tag temp___612))
-     (us_dispatch_eq temp___611 temp___612) false))) true))
-
-;; H
-  (assert (f__function_guard (f 4) 4))
+     (ite (= (attr__tag temp___592) (attr__tag temp___593))
+     (us_dispatch_eq temp___592 temp___593) false))) true))
 
 ;; H
   (assert
-  (= (let ((temp___617 (f 4)))
-     (let ((temp___616 (get
+  (= (let ((temp___597 (f 4)))
+     (let ((temp___596 (get
                        (model__ (mk___rep1 v__split_discrs v__split_fields7))
                        2)))
-     (ite (= (attr__tag temp___616) (attr__tag temp___617))
-     (us_dispatch_eq temp___616 temp___617) false))) true))
-
-;; H
-  (assert (f__function_guard (f 1) 1))
+     (ite (= (attr__tag temp___596) (attr__tag temp___597))
+     (us_dispatch_eq temp___596 temp___597) false))) true))
 
 ;; H
   (assert
-  (= (let ((temp___622 (f 1)))
-     (let ((temp___621 (get
+  (= (let ((temp___601 (f 1)))
+     (let ((temp___600 (get
                        (model__ (mk___rep1 v__split_discrs v__split_fields7))
                        3)))
-     (ite (= (attr__tag temp___621) (attr__tag temp___622))
-     (us_dispatch_eq temp___621 temp___622) false))) true))
+     (ite (= (attr__tag temp___600) (attr__tag temp___601))
+     (us_dispatch_eq temp___600 temp___601) false))) true))
 
 ;; H
   (assert
@@ -1743,28 +1681,22 @@
   (assert (= (capacity (mk___rep1 v__split_discrs v__split_fields8)) 5))
 
 ;; H
-  (assert (f__function_guard (f 3) 3))
-
-;; H
   (assert
-  (= (let ((temp___628 (f 3)))
-     (let ((temp___627 (get
+  (= (let ((temp___606 (f 3)))
+     (let ((temp___605 (get
                        (model__ (mk___rep1 v__split_discrs v__split_fields8))
                        1)))
-     (ite (= (attr__tag temp___627) (attr__tag temp___628))
-     (us_dispatch_eq temp___627 temp___628) false))) true))
-
-;; H
-  (assert (f__function_guard (f 4) 4))
+     (ite (= (attr__tag temp___605) (attr__tag temp___606))
+     (us_dispatch_eq temp___605 temp___606) false))) true))
 
 ;; H
   (assert
-  (= (let ((temp___633 (f 4)))
-     (let ((temp___632 (get
+  (= (let ((temp___610 (f 4)))
+     (let ((temp___609 (get
                        (model__ (mk___rep1 v__split_discrs v__split_fields8))
                        2)))
-     (ite (= (attr__tag temp___632) (attr__tag temp___633))
-     (us_dispatch_eq temp___632 temp___633) false))) true))
+     (ite (= (attr__tag temp___609) (attr__tag temp___610))
+     (us_dispatch_eq temp___609 temp___610) false))) true))
 
 ;; H
   (assert
@@ -1792,79 +1724,55 @@
   (assert (= (capacity (mk___rep1 v__split_discrs v__split_fields9)) 5))
 
 ;; H
-  (assert (f__function_guard (f 4) 4))
-
-;; H
   (assert
-  (= (let ((temp___639 (f 4)))
-     (let ((temp___638 (get
+  (= (let ((temp___615 (f 4)))
+     (let ((temp___614 (get
                        (model__ (mk___rep1 v__split_discrs v__split_fields9))
                        1)))
-     (ite (= (attr__tag temp___638) (attr__tag temp___639))
-     (us_dispatch_eq temp___638 temp___639) false))) true))
-
-;; H
-  (assert (f__function_guard (f 3) 3))
+     (ite (= (attr__tag temp___614) (attr__tag temp___615))
+     (us_dispatch_eq temp___614 temp___615) false))) true))
 
 ;; H
   (assert
-  (= (let ((temp___644 (f 3)))
-     (let ((temp___643 (get
+  (= (let ((temp___619 (f 3)))
+     (let ((temp___618 (get
                        (model__ (mk___rep1 v__split_discrs v__split_fields9))
                        2)))
-     (ite (= (attr__tag temp___643) (attr__tag temp___644))
-     (us_dispatch_eq temp___643 temp___644) false))) true))
+     (ite (= (attr__tag temp___618) (attr__tag temp___619))
+     (us_dispatch_eq temp___618 temp___619) false))) true))
 
 ;; H
   (assert
   (= (last (model__ (mk___rep1 v__split_discrs v__split_fields9))) 2))
 
 ;; H
-  (assert (f__function_guard (f 4) 4))
-
-;; H
   (assert
-  (= (let ((temp___649 (f 4)))
-     (let ((temp___648 (get
+  (= (let ((temp___623 (f 4)))
+     (let ((temp___622 (get
                        (model__ (mk___rep1 v__split_discrs v__split_fields9))
                        1)))
-     (ite (= (attr__tag temp___648) (attr__tag temp___649))
-     (us_dispatch_eq temp___648 temp___649) false))) true))
-
-;; H
-  (assert (f__function_guard (f 3) 3))
+     (ite (= (attr__tag temp___622) (attr__tag temp___623))
+     (us_dispatch_eq temp___622 temp___623) false))) true))
 
 ;; H
   (assert
-  (= (let ((temp___654 (f 3)))
-     (let ((temp___653 (last_element
+  (= (let ((temp___627 (f 3)))
+     (let ((temp___626 (last_element
                        (mk___rep1 v__split_discrs v__split_fields9))))
-     (ite (= (attr__tag temp___653) (attr__tag temp___654))
-     (us_dispatch_eq temp___653 temp___654) false))) true))
-
-;; H
-  (assert (f__function_guard (f 0) 0))
+     (ite (= (attr__tag temp___626) (attr__tag temp___627))
+     (us_dispatch_eq temp___626 temp___627) false))) true))
 
 ;; H
   (assert
   (= (find_index (mk___rep1 v__split_discrs v__split_fields9) (f 0) 1) 0))
 
 ;; H
-  (assert (f__function_guard (f 4) 4))
-
-;; H
   (assert
   (= (find_index (mk___rep1 v__split_discrs v__split_fields9) (f 4) 1) 1))
 
 ;; H
-  (assert (f__function_guard (f 4) 4))
-
-;; H
   (assert
   (= (find_index (mk___rep1 v__split_discrs v__split_fields9) (f 4) 2) 0))
-
-;; H
-  (assert (f__function_guard (f 0) 0))
 
 ;; H
   (assert
@@ -1872,15 +1780,9 @@
      (f 0) 2147483647) 0))
 
 ;; H
-  (assert (f__function_guard (f 4) 4))
-
-;; H
   (assert
   (= (reverse_find_index (mk___rep1 v__split_discrs v__split_fields9) 
      (f 4) 2147483647) 1))
-
-;; H
-  (assert (f__function_guard (f 4) 4))
 
 (assert
 ;; WP_parameter_def

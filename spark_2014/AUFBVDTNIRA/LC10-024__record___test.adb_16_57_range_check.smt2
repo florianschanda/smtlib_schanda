@@ -623,17 +623,14 @@
 
 ;; get_remaining__post_axiom
   (assert
-  (forall ((s us_rep))
-  (! (let ((result (get_remaining s)))
-     (=> (get_remaining__function_guard result s) (dynamic_invariant result
-     true false true))) :pattern ((get_remaining s)) )))
+  (forall ((s us_rep)) (! (dynamic_invariant (get_remaining s) true false
+  true) :pattern ((get_remaining s)) )))
 
 ;; get_remaining__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (get_remaining__function_guard (get_remaining s) s)
-     (= (get_remaining s) (to_rep
-                          (rec__test__t__remaining (us_split_fields1 s))))) :pattern (
+  (! (= (get_remaining s) (to_rep
+                          (rec__test__t__remaining (us_split_fields1 s)))) :pattern (
   (get_remaining s)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -667,11 +664,11 @@
 
 (declare-fun o4 () (Array (_ BitVec 8) integer))
 
-(declare-fun temp___183 () length_type)
+(declare-fun temp___176 () length_type)
 
-(declare-fun temp___1831 () entry_id)
+(declare-fun temp___1761 () entry_id)
 
-(declare-fun temp___1832 () (Array (_ BitVec 8) integer))
+(declare-fun temp___1762 () (Array (_ BitVec 8) integer))
 
 (declare-fun result () length_type)
 
@@ -711,13 +708,13 @@
   (assert (= s__split_fields2 o4))
 
 ;; H
-  (assert (= temp___183 o2))
+  (assert (= temp___176 o2))
 
 ;; H
-  (assert (= temp___1831 o3))
+  (assert (= temp___1761 o3))
 
 ;; H
-  (assert (= temp___1832 o4))
+  (assert (= temp___1762 o4))
 
 ;; H
   (assert
@@ -726,13 +723,13 @@
   (mk___split_fields s__split_fields s__split_fields1 s__split_fields2))))
 
 ;; H
-  (assert (= temp___183 s__split_fields3))
+  (assert (= temp___176 s__split_fields3))
 
 ;; H
-  (assert (= temp___1831 s__split_fields4))
+  (assert (= temp___1761 s__split_fields4))
 
 ;; H
-  (assert (= temp___1832 s__split_fields5))
+  (assert (= temp___1762 s__split_fields5))
 
 (assert
 ;; WP_parameter_def

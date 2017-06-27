@@ -383,13 +383,13 @@
 
 (declare-fun j () Int)
 
-(declare-fun temp___288 () (Array Int integer))
+(declare-fun temp___266 () (Array Int integer))
 
-(declare-fun temp___286 () (Array Int integer))
+(declare-fun temp___264 () (Array Int integer))
 
-(declare-fun temp___284 () Int)
+(declare-fun temp___262 () Int)
 
-(declare-fun temp___283 () Int)
+(declare-fun temp___261 () Int)
 
 (declare-fun o () Int)
 
@@ -474,154 +474,6 @@
 (define-fun b11 () map__ref (mk_map__ref b4))
 
 ;; H
-  (assert (sorted__function_guard
-  (sorted (mk___t a (mk (to_rep a__first) (to_rep a__last))) a_first length1)
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) a_first length1))
-
-;; H
-  (assert (sorted__function_guard
-  (sorted (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (+ a_first length1) length2)
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (+ a_first length1)
-  length2))
-
-;; H
-  (assert (sorted__function_guard
-  (sorted (mk___t b1 (mk (to_rep b__first) (to_rep b__last)))
-  (to_rep b__first) (+ i2 j2))
-  (mk___t b1 (mk (to_rep b__first) (to_rep b__last))) (to_rep b__first)
-  (+ i2 j2)))
-
-;; H
-  (assert (perm2__function_guard
-  (perm2 (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t b1 (mk (to_rep b__first) (to_rep b__last))) a_first
-  (+ a_first length1) (to_rep b__first) i2 j2)
-  (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t b1 (mk (to_rep b__first) (to_rep b__last))) a_first
-  (+ a_first length1) (to_rep b__first) i2 j2))
-
-;; H
-  (assert (le_array__function_guard
-  (le_array (mk___t b1 (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ a_first i2) (+ i2 j2) (- length1 i2))
-  (mk___t b1 (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ a_first i2) (+ i2 j2) (- length1 i2)))
-
-;; H
-  (assert (le_array__function_guard
-  (le_array (mk___t b1 (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ (+ a_first length1) j2) (+ i2 j2) (- length2 j2))
-  (mk___t b1 (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ (+ a_first length1) j2) (+ i2 j2) (- length2 j2)))
-
-;; H
-  (assert (sorted__function_guard
-  (sorted (mk___t b1 (mk (to_rep b__first) (to_rep b__last)))
-  (to_rep b__first) (+ i2 j2))
-  (mk___t b1 (mk (to_rep b__first) (to_rep b__last))) (to_rep b__first)
-  (+ i2 j2)))
-
-;; H
-  (assert (perm2__function_guard
-  (perm2 (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t b1 (mk (to_rep b__first) (to_rep b__last))) a_first
-  (+ a_first length1) (to_rep b__first) i2 j2)
-  (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t b1 (mk (to_rep b__first) (to_rep b__last))) a_first
-  (+ a_first length1) (to_rep b__first) i2 j2))
-
-;; H
-  (assert (le_array__function_guard
-  (le_array (mk___t b1 (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ a_first i2) (+ i2 j2) (- length1 i2))
-  (mk___t b1 (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ a_first i2) (+ i2 j2) (- length1 i2)))
-
-;; H
-  (assert (le_array__function_guard
-  (le_array (mk___t b1 (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ (+ a_first length1) j2) (+ i2 j2) (- length2 j2))
-  (mk___t b1 (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ (+ a_first length1) j2) (+ i2 j2) (- length2 j2)))
-
-;; H
-  (assert (sorted__function_guard
-  (sorted (mk___t b1 (mk (to_rep b__first) (to_rep b__last)))
-  (to_rep b__first) (+ i2 j2))
-  (mk___t b1 (mk (to_rep b__first) (to_rep b__last))) (to_rep b__first)
-  (+ i2 j2)))
-
-;; H
-  (assert (perm2__function_guard
-  (perm2 (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t b1 (mk (to_rep b__first) (to_rep b__last))) a_first
-  (+ a_first length1) (to_rep b__first) i2 j2)
-  (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t b1 (mk (to_rep b__first) (to_rep b__last))) a_first
-  (+ a_first length1) (to_rep b__first) i2 j2))
-
-;; H
-  (assert (le_array__function_guard
-  (le_array (mk___t b1 (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ a_first i2) (+ i2 j2) (- length1 i2))
-  (mk___t b1 (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ a_first i2) (+ i2 j2) (- length1 i2)))
-
-;; H
-  (assert (le_array__function_guard
-  (le_array (mk___t b1 (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ (+ a_first length1) j2) (+ i2 j2) (- length2 j2))
-  (mk___t b1 (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ (+ a_first length1) j2) (+ i2 j2) (- length2 j2)))
-
-;; H
-  (assert (sorted__function_guard
-  (sorted (mk___t b1 (mk (to_rep b__first) (to_rep b__last)))
-  (to_rep b__first) (+ i2 j2))
-  (mk___t b1 (mk (to_rep b__first) (to_rep b__last))) (to_rep b__first)
-  (+ i2 j2)))
-
-;; H
-  (assert (perm2__function_guard
-  (perm2 (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t b1 (mk (to_rep b__first) (to_rep b__last))) a_first
-  (+ a_first length1) (to_rep b__first) i2 j2)
-  (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t b1 (mk (to_rep b__first) (to_rep b__last))) a_first
-  (+ a_first length1) (to_rep b__first) i2 j2))
-
-;; H
-  (assert (le_array__function_guard
-  (le_array (mk___t b1 (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ a_first i2) (+ i2 j2) (- length1 i2))
-  (mk___t b1 (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ a_first i2) (+ i2 j2) (- length1 i2)))
-
-;; H
-  (assert (le_array__function_guard
-  (le_array (mk___t b1 (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ (+ a_first length1) j2) (+ i2 j2) (- length2 j2))
-  (mk___t b1 (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ (+ a_first length1) j2) (+ i2 j2) (- length2 j2)))
-
-;; H
   (assert (dynamic_property 0 2147483647 (to_rep a__first) (to_rep a__last)))
 
 ;; H
@@ -673,16 +525,16 @@
   (assert (= j1 0))
 
 ;; H
-  (assert (= temp___288 a))
+  (assert (= temp___266 a))
 
 ;; H
-  (assert (= temp___286 b))
+  (assert (= temp___264 b))
 
 ;; H
-  (assert (= temp___284 j1))
+  (assert (= temp___262 j1))
 
 ;; H
-  (assert (= temp___283 i1))
+  (assert (= temp___261 i1))
 
 ;; H
   (assert
@@ -702,7 +554,7 @@
   (= (le_array (mk___t b1 (mk (to_rep b__first) (to_rep b__last)))
      (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
      (+ (+ a_first length1) j2) (+ i2 j2) (- length2 j2)) true))
-  (= (bool_eq2 a (to_rep a__first) (to_rep a__last) temp___288
+  (= (bool_eq2 a (to_rep a__first) (to_rep a__last) temp___266
      (to_rep a__first) (to_rep a__last)) true)))
 
 ;; H
@@ -809,13 +661,6 @@
 
 ;; H
   (assert (= a3 a1))
-
-;; H
-  (assert (sorted__function_guard
-  (sorted (mk___t (map__content a2) (mk (to_rep a__first) (to_rep a__last)))
-  a_first (+ length1 length2))
-  (mk___t (map__content a2) (mk (to_rep a__first) (to_rep a__last))) 
-  a_first (+ length1 length2)))
 
 (assert
 ;; WP_parameter_def

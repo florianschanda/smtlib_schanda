@@ -320,11 +320,9 @@
   (assert
   (forall ((number_list (Array Int Bool)))
   (forall ((low Int) (high Int))
-  (! (=> (has_true__function_guard (has_true number_list low high)
-     number_list low high)
-     (= (= (has_true number_list low high) true)
+  (! (= (= (has_true number_list low high) true)
      (exists ((v Int))
-     (and (and (<= low v) (<= v high)) (= (select number_list v) true))))) :pattern (
+     (and (and (<= low v) (<= v high)) (= (select number_list v) true)))) :pattern (
   (has_true number_list low high)) ))))
 
 (declare-fun number_list () (Array Int Bool))
@@ -396,18 +394,6 @@
 
 ;; H
   (assert (in_range2 value))
-
-;; H
-  (assert (has_true__function_guard (has_true number_list value 100000)
-  number_list value 100000))
-
-;; H
-  (assert (has_true__function_guard (has_true number_list 0 value)
-  number_list 0 value))
-
-;; H
-  (assert (has_true__function_guard (has_true number_list 0 100000)
-  number_list 0 100000))
 
 ;; H
   (assert

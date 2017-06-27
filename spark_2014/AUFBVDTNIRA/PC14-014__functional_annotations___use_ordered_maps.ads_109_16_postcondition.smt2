@@ -822,33 +822,22 @@
 
 ;; H
   (assert
-  (forall ((i Int)) (q__function_guard
-  (q (get1 (model__ s) (get (keys s) i)))
-  (get1 (model__ s) (get (keys s) i)))))
-
-;; H
-  (assert
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i (length s)))
   (= (q (get1 (model__ s) (get (keys s) i))) true))))
 
-(define-fun temp___885 () us_rep1 (keys s))
+(define-fun temp___819 () us_rep1 (keys s))
 
-(declare-fun temp___884 () Int)
-
-;; H
-  (assert (in_range2 temp___884))
+(declare-fun temp___818 () Int)
 
 ;; H
-  (assert (= (iter_has_element temp___885 temp___884) true))
-
-(define-fun k () Int (get temp___885 temp___884))
+  (assert (in_range2 temp___818))
 
 ;; H
-  (assert (q__function_guard (q (get1 (model__ s) k)) (get1 (model__ s) k)))
+  (assert (= (iter_has_element temp___819 temp___818) true))
 
 (assert
 ;; WP_parameter_def
  ;; File "use_ordered_maps.adb", line 138, characters 0-0
-  (not (= (q (get1 (model__ s) k)) true)))
+  (not (= (q (get1 (model__ s) (get temp___819 temp___818))) true)))
 (check-sat)

@@ -336,46 +336,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(declare-sort tTmy_s2SP1 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 35)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq4 (tTmy_s2SP1 tTmy_s2SP1) Bool)
-
-(declare-fun dummy4 () tTmy_s2SP1)
-
-(declare-datatypes ()
-((tTmy_s2SP1__ref (mk_tTmy_s2SP1__ref (tTmy_s2SP1__content tTmy_s2SP1)))))
-(define-fun tTmy_s2SP1__ref___projection ((a tTmy_s2SP1__ref)) tTmy_s2SP1 
-  (tTmy_s2SP1__content a))
-
-(declare-sort t3b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 35)))
-
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq5 (t3b t3b) Bool)
-
-(declare-fun dummy5 () t3b)
-
-(declare-datatypes () ((t3b__ref (mk_t3b__ref (t3b__content t3b)))))
-(define-fun t3b__ref___projection ((a t3b__ref)) t3b (t3b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_36 Bool)

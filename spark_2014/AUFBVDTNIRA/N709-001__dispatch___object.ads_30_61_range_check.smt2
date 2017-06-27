@@ -285,23 +285,16 @@
 ;; object__t__compat_axiom
   (assert
   (forall ((obj1 us_rep))
-  (! (=> (has_stored_area__function_guard1 (has_stored_area1 us_tag obj1)
-     us_tag obj1)
-     (and (has_stored_area__function_guard (has_stored_area obj1) obj1)
-     (= (to_int1 (has_stored_area obj1)) (to_int1
-                                         (has_stored_area1 us_tag obj1))))) :pattern (
+  (! (= (to_int1 (has_stored_area obj1)) (to_int1
+                                         (has_stored_area1 us_tag obj1))) :pattern (
   (has_stored_area1 us_tag obj1)) )))
 
 ;; has_stored_area__def_axiom
   (assert
   (forall ((obj1 us_rep))
-  (! (=> (has_stored_area__function_guard (has_stored_area obj1) obj1)
-     (= (= (has_stored_area obj1) true) (in_range1
-     (to_rep (rec__object__t__area (us_split_fields1 obj1)))))) :pattern (
+  (! (= (= (has_stored_area obj1) true) (in_range1
+     (to_rep (rec__object__t__area (us_split_fields1 obj1))))) :pattern (
   (has_stored_area obj1)) )))
-
-;; H
-  (assert (has_stored_area__function_guard (has_stored_area obj) obj))
 
 ;; H
   (assert (= (has_stored_area obj) true))

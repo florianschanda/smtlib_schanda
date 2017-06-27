@@ -71,8 +71,7 @@
 ;; f__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (f__function_guard (f us_void_param) us_void_param)
-     (= (f us_void_param) 1)) :pattern ((f us_void_param)) )))
+  (! (= (f us_void_param) 1) :pattern ((f us_void_param)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -85,8 +84,7 @@
 (declare-fun x1 () Int)
 
 ;; H
-  (assert
-  (and (and (= o (f Tuple0)) (f__function_guard o Tuple0)) (in_range o)))
+  (assert (and (= o (f Tuple0)) (in_range o)))
 
 ;; H
   (assert (= result x))

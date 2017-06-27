@@ -169,9 +169,9 @@
 (define-fun my_index__ref___projection ((a my_index__ref)) my_index (my_index__content
                                                                     a))
 
-(define-fun dynamic_invariant ((temp___expr_287 (_ BitVec 64))
-  (temp___is_init_284 Bool) (temp___skip_constant_285 Bool)
-  (temp___do_toplevel_286 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_286 (_ BitVec 64))
+  (temp___is_init_283 Bool) (temp___skip_constant_284 Bool)
+  (temp___do_toplevel_285 Bool)) Bool true)
 
 (declare-fun to_rep (my_index) (_ BitVec 64))
 
@@ -454,8 +454,6 @@
 
 (declare-fun attr__ATTRIBUTE_MODULUS1 () (_ BitVec 64))
 
-(declare-fun last3 () (_ BitVec 64))
-
 (define-fun dynamic_property1 ((first_int (_ BitVec 64))
   (last_int (_ BitVec 64))
   (x (_ BitVec 64))) Bool (and (bvule first_int x) (bvule x last_int)))
@@ -485,14 +483,14 @@
 
 (declare-fun first2 (t1) my_index)
 
-(declare-fun last4 (t1) my_index)
+(declare-fun last3 (t1) my_index)
 
 (declare-fun mk1 ((_ BitVec 64) (_ BitVec 64)) t1)
 
 ;; mk_def
   (assert
   (forall ((f (_ BitVec 64)) (l (_ BitVec 64)))
-  (! (and (= (to_rep (first2 (mk1 f l))) f) (= (to_rep (last4 (mk1 f l))) l)) :pattern (
+  (! (and (= (to_rep (first2 (mk1 f l))) f) (= (to_rep (last3 (mk1 f l))) l)) :pattern (
   (mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first (_ BitVec 64))
@@ -511,10 +509,10 @@
 
 (define-fun first3 ((a us_t1)) (_ BitVec 64) (to_rep (first2 (rt1 a))))
 
-(define-fun last5 ((a us_t1)) (_ BitVec 64) (to_rep (last4 (rt1 a))))
+(define-fun last4 ((a us_t1)) (_ BitVec 64) (to_rep (last3 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (bvule (first3 a) (last5 a))
-                                    (+ (- (bv2nat (last5 a)) (bv2nat 
+(define-fun length1 ((a us_t1)) Int (ite (bvule (first3 a) (last4 a))
+                                    (+ (- (bv2nat (last4 a)) (bv2nat 
                                     (first3 a))) 1) 0))
 
 (declare-fun value__size1 () Int)
@@ -552,8 +550,8 @@
 
 (define-fun bool_eq4 ((x us_t1)
   (y us_t1)) Bool (bool_eq1 (elts1 x) (to_rep (first2 (rt1 x)))
-                  (to_rep (last4 (rt1 x))) (elts1 y)
-                  (to_rep (first2 (rt1 y))) (to_rep (last4 (rt1 y)))))
+                  (to_rep (last3 (rt1 x))) (elts1 y)
+                  (to_rep (first2 (rt1 y))) (to_rep (last3 (rt1 y)))))
 
 (declare-fun user_eq3 (us_t1 us_t1) Bool)
 
@@ -563,8 +561,6 @@
 (define-fun trS__ref___projection ((a trS__ref)) us_t1 (trS__content a))
 
 (declare-fun attr__ATTRIBUTE_MODULUS2 () (_ BitVec 64))
-
-(declare-fun last6 () (_ BitVec 64))
 
 (define-fun dynamic_property3 ((first_int (_ BitVec 64))
   (last_int (_ BitVec 64))
@@ -593,14 +589,14 @@
 
 (declare-fun first4 (t2) my_index)
 
-(declare-fun last7 (t2) my_index)
+(declare-fun last5 (t2) my_index)
 
 (declare-fun mk2 ((_ BitVec 64) (_ BitVec 64)) t2)
 
 ;; mk_def
   (assert
   (forall ((f (_ BitVec 64)) (l (_ BitVec 64)))
-  (! (and (= (to_rep (first4 (mk2 f l))) f) (= (to_rep (last7 (mk2 f l))) l)) :pattern (
+  (! (and (= (to_rep (first4 (mk2 f l))) f) (= (to_rep (last5 (mk2 f l))) l)) :pattern (
   (mk2 f l)) )))
 
 (define-fun dynamic_property4 ((range_first (_ BitVec 64))
@@ -619,10 +615,10 @@
 
 (define-fun first5 ((a us_t2)) (_ BitVec 64) (to_rep (first4 (rt2 a))))
 
-(define-fun last8 ((a us_t2)) (_ BitVec 64) (to_rep (last7 (rt2 a))))
+(define-fun last6 ((a us_t2)) (_ BitVec 64) (to_rep (last5 (rt2 a))))
 
-(define-fun length2 ((a us_t2)) Int (ite (bvule (first5 a) (last8 a))
-                                    (+ (- (bv2nat (last8 a)) (bv2nat 
+(define-fun length2 ((a us_t2)) Int (ite (bvule (first5 a) (last6 a))
+                                    (+ (- (bv2nat (last6 a)) (bv2nat 
                                     (first5 a))) 1) 0))
 
 (declare-fun value__size2 () Int)
@@ -660,8 +656,8 @@
 
 (define-fun bool_eq6 ((x us_t2)
   (y us_t2)) Bool (bool_eq1 (elts2 x) (to_rep (first4 (rt2 x)))
-                  (to_rep (last7 (rt2 x))) (elts2 y)
-                  (to_rep (first4 (rt2 y))) (to_rep (last7 (rt2 y)))))
+                  (to_rep (last5 (rt2 x))) (elts2 y)
+                  (to_rep (first4 (rt2 y))) (to_rep (last5 (rt2 y)))))
 
 (declare-fun user_eq5 (us_t2 us_t2) Bool)
 
@@ -681,37 +677,37 @@
 
 ;; def_axiom
   (assert
-  (forall ((temp___633 Bool))
-  (forall ((temp___634 (_ BitVec 64)) (temp___635 (_ BitVec 64)))
-  (let ((temp___632 (fail__create__r__aggregate_def temp___633 temp___634
-                    temp___635)))
+  (forall ((temp___632 Bool))
+  (forall ((temp___633 (_ BitVec 64)) (temp___634 (_ BitVec 64)))
+  (let ((temp___631 (fail__create__r__aggregate_def temp___632 temp___633
+                    temp___634)))
   (and
   (=> (dynamic_property ((_ int2bv 64) 0)
-  ((_ int2bv 64) 18446744073709551615) temp___634 temp___635)
-  (and (= (first5 temp___632) temp___634) (= (last8 temp___632) temp___635)))
-  (forall ((temp___636 (_ BitVec 64)))
-  (= (select (to_array2 temp___632) temp___636) temp___633)))))))
+  ((_ int2bv 64) 18446744073709551615) temp___633 temp___634)
+  (and (= (first5 temp___631) temp___633) (= (last6 temp___631) temp___634)))
+  (forall ((temp___635 (_ BitVec 64)))
+  (= (select (to_array2 temp___631) temp___635) temp___632)))))))
 
-(define-fun dynamic_invariant1 ((temp___expr_293 us_t)
-  (temp___is_init_290 Bool) (temp___skip_constant_291 Bool)
-  (temp___do_toplevel_292 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_291 true))
+(define-fun dynamic_invariant1 ((temp___expr_292 us_t)
+  (temp___is_init_289 Bool) (temp___skip_constant_290 Bool)
+  (temp___do_toplevel_291 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_290 true))
                                       (dynamic_property ((_ int2bv 64) 0)
                                       ((_ int2bv 64) 18446744073709551615)
-                                      (first1 temp___expr_293)
-                                      (last1 temp___expr_293))))
+                                      (first1 temp___expr_292)
+                                      (last1 temp___expr_292))))
 
-(define-fun dynamic_invariant2 ((temp___expr_626 us_t1)
-  (temp___is_init_623 Bool) (temp___skip_constant_624 Bool)
-  (temp___do_toplevel_625 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_624 true))
+(define-fun dynamic_invariant2 ((temp___expr_625 us_t1)
+  (temp___is_init_622 Bool) (temp___skip_constant_623 Bool)
+  (temp___do_toplevel_624 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_623 true))
                                       (and (dynamic_property2
                                       ((_ int2bv 64) 0) last2
-                                      (first3 temp___expr_626)
-                                      (last5 temp___expr_626))
+                                      (first3 temp___expr_625)
+                                      (last4 temp___expr_625))
                                       (and
-                                      (= (first3 temp___expr_626) ((_ int2bv 64) 0))
-                                      (= (last5 temp___expr_626) last2)))))
+                                      (= (first3 temp___expr_625) ((_ int2bv 64) 0))
+                                      (= (last4 temp___expr_625) last2)))))
 
 (declare-fun r () (Array (_ BitVec 64) Bool))
 
@@ -719,9 +715,9 @@
 
 (declare-fun fail__create__result1 () t)
 
-(declare-fun temp___638 () (Array (_ BitVec 64) Bool))
+(declare-fun temp___637 () (Array (_ BitVec 64) Bool))
 
-(declare-fun temp___6381 () t2)
+(declare-fun temp___6371 () t2)
 
 (declare-fun fail__create__r__assume () (Array (_ BitVec 64) Bool))
 
@@ -773,32 +769,32 @@
 ;; H
   (assert
   (= (to_rep
-     (last7
+     (last5
      (rt2
      (fail__create__r__aggregate_def (of_int 0) ((_ int2bv 64) 0) last2)))) 
   last2))
 
 ;; H
   (assert
-  (= (mk___t2 temp___638 temp___6381) (fail__create__r__aggregate_def
+  (= (mk___t2 temp___637 temp___6371) (fail__create__r__aggregate_def
                                       (of_int 0) ((_ int2bv 64) 0) last2)))
 
 ;; H
   (assert
-  (= (ite (<= (bv2nat (to_rep (first4 temp___6381))) (bv2nat (to_rep
-                                                             (last7
-                                                             temp___6381))))
-     (+ (- (bv2nat (to_rep (last7 temp___6381))) (bv2nat (to_rep
-                                                         (first4 temp___6381)))) 1)
+  (= (ite (<= (bv2nat (to_rep (first4 temp___6371))) (bv2nat (to_rep
+                                                             (last5
+                                                             temp___6371))))
+     (+ (- (bv2nat (to_rep (last5 temp___6371))) (bv2nat (to_rep
+                                                         (first4 temp___6371)))) 1)
      0) (ite (<= (bv2nat ((_ int2bv 64) 0)) (bv2nat last2))
         (+ (- (bv2nat last2) (bv2nat ((_ int2bv 64) 0))) 1) 0)))
 
 ;; H
-  (assert (= temp___638 fail__create__r__assume))
+  (assert (= temp___637 fail__create__r__assume))
 
 ;; H
   (assert
-  (= (mk1 (to_rep (first4 temp___6381)) (to_rep (last7 temp___6381))) 
+  (= (mk1 (to_rep (first4 temp___6371)) (to_rep (last5 temp___6371))) 
   fail__create__r__assume1))
 
 ;; H
@@ -811,7 +807,7 @@
   (assert (= (to_rep r__first) (to_rep (first2 fail__create__r__assume1))))
 
 ;; H
-  (assert (= (to_rep r__last) (to_rep (last4 fail__create__r__assume1))))
+  (assert (= (to_rep r__last) (to_rep (last3 fail__create__r__assume1))))
 
 ;; H
   (assert

@@ -152,16 +152,13 @@
 
 ;; sum__post_axiom
   (assert
-  (forall ((x us_rep))
-  (! (let ((result (sum x)))
-     (=> (sum__function_guard result x) (dynamic_invariant result true false
-     true))) :pattern ((sum x)) )))
+  (forall ((x us_rep)) (! (dynamic_invariant (sum x) true false
+  true) :pattern ((sum x)) )))
 
 ;; sum__def_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (sum__function_guard (sum x) x)
-     (= (sum x) (to_rep (rec__notag_base__t__c (us_split_fields1 x))))) :pattern (
+  (! (= (sum x) (to_rep (rec__notag_base__t__c (us_split_fields1 x)))) :pattern (
   (sum x)) )))
 
 (declare-fun c () Int)
@@ -229,11 +226,6 @@
 
 ;; H
   (assert (= result1 notag_base__create__result4))
-
-;; H
-  (assert (sum__function_guard
-  (sum (mk___rep (mk___split_fields notag_base__create__result4)))
-  (mk___rep (mk___split_fields notag_base__create__result4))))
 
 (assert
 ;; WP_parameter_def

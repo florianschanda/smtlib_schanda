@@ -428,7 +428,6 @@
      (and (<= c (last1 a))
      (and (<= (first1 a) (last1 a)) (<= 2 (- (last1 a) (first1 a)))))
      (let ((result (nested us_void_param)))
-     (=> (nested__function_guard result us_void_param)
      (and
      (or
      (and (= result 0)
@@ -436,8 +435,8 @@
      (=> (and (<= (first1 a) i) (<= i c))
      (not (= (to_rep (select (to_array a) i)) 0)))))
      (and (<= (first1 a) result) (= (to_rep (select (to_array a) result)) 0)))
-     (dynamic_invariant2 result true false true))))) :pattern ((nested
-                                                               us_void_param)) )))
+     (dynamic_invariant2 result true false true)))) :pattern ((nested
+                                                              us_void_param)) )))
 
 (define-fun dynamic_invariant3 ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)
@@ -703,7 +702,7 @@
   (assert
   (=> (not (= result true))
   (=> (not (= result2 true))
-  (and (and (= o9 (nested Tuple0)) (nested__function_guard o9 Tuple0))
+  (and (= o9 (nested Tuple0))
   (and (dynamic_property3 0 last4 o9)
   (or
   (and (= o9 0)

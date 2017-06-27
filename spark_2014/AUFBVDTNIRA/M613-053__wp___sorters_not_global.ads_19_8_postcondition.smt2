@@ -244,19 +244,16 @@
      (and (dynamic_invariant starting_at true true true) (dynamic_invariant
      limit1 true true true)) (<= starting_at limit1))
      (let ((result (index_of_minimum starting_at limit1 values)))
-     (=> (index_of_minimum__function_guard result starting_at limit1 values)
      (and
      (and (and (<= starting_at result) (<= result limit1))
      (forall ((j Int))
      (=> (and (<= starting_at j) (<= j limit1))
      (<= (to_rep (select values result)) (to_rep (select values j))))))
-     (dynamic_invariant result true false true))))) :pattern ((index_of_minimum
-                                                              starting_at
-                                                              limit1 values)) ))))
+     (dynamic_invariant result true false true)))) :pattern ((index_of_minimum
+                                                             starting_at
+                                                             limit1 values)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
-
-(declare-fun last () Int)
 
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -390,9 +387,7 @@
 ;; H
   (assert
   (=> (and (<= 1 current1) (<= current1 limit))
-  (and
   (and (= o (index_of_minimum current1 limit values))
-  (index_of_minimum__function_guard o current1 limit values))
   (and (in_range2 o)
   (and (and (<= current1 o) (<= o limit))
   (forall ((j Int))

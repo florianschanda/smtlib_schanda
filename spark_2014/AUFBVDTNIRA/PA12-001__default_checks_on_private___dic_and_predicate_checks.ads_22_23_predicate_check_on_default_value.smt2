@@ -234,40 +234,25 @@
 
 (declare-fun is_valid__function_guard1 (Bool us_rep) Bool)
 
-;; temp___result_144_def
-  (assert
-  (forall ((temp___143 us_rep)) (is_valid__function_guard
-  (is_valid temp___143) temp___143)))
-
 (define-fun dynamic_invariant ((temp___expr_142 us_rep)
   (temp___is_init_139 Bool) (temp___skip_constant_140 Bool)
   (temp___do_toplevel_141 Bool)) Bool (=> (= temp___do_toplevel_141 true)
                                       (=> (= temp___is_init_139 true)
                                       (= (is_valid temp___expr_142) true))))
 
-;; temp___result_149_def
-  (assert
-  (forall ((temp___148 us_rep)) (is_valid__function_guard1
-  (is_valid1 temp___148) temp___148)))
-
-(define-fun default_initial_assumption ((temp___expr_145 us_rep)
-  (temp___skip_top_level_146 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_144 us_rep)
+  (temp___skip_top_level_145 Bool)) Bool (and
                                          (= (to_rep
                                             (rec__dic_and_predicate_checks__r__g
                                             (us_split_fields1
-                                            temp___expr_145))) 0)
+                                            temp___expr_144))) 0)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_146 true))
-                                         (= (is_valid1 temp___expr_145) true))))
+                                         (= temp___skip_top_level_145 true))
+                                         (= (is_valid1 temp___expr_144) true))))
 
-;; temp___result_152_def
-  (assert
-  (forall ((temp___151 us_rep)) (is_valid__function_guard
-  (is_valid temp___151) temp___151)))
-
-(define-fun dynamic_predicate ((temp___150 us_rep)) Bool (= (is_valid
-                                                            temp___150) true))
+(define-fun dynamic_predicate ((temp___148 us_rep)) Bool (= (is_valid
+                                                            temp___148) true))
 
 (declare-datatypes ()
 ((us_split_fields2
@@ -382,29 +367,24 @@
 
 (declare-fun is_valid__function_guard2 (Bool us_rep1) Bool)
 
-(define-fun dynamic_invariant1 ((temp___expr_168 us_rep1)
-  (temp___is_init_165 Bool) (temp___skip_constant_166 Bool)
-  (temp___do_toplevel_167 Bool)) Bool (=> (= temp___do_toplevel_167 true)
-                                      (=> (= temp___is_init_165 true)
+(define-fun dynamic_invariant1 ((temp___expr_163 us_rep1)
+  (temp___is_init_160 Bool) (temp___skip_constant_161 Bool)
+  (temp___do_toplevel_162 Bool)) Bool (=> (= temp___do_toplevel_162 true)
+                                      (=> (= temp___is_init_160 true)
                                       (< 0 (to_rep
                                            (rec__dic_and_predicate_checks__nested_2__r__f
-                                           (us_split_fields3 temp___expr_168)))))))
+                                           (us_split_fields3 temp___expr_163)))))))
 
-;; temp___result_175_def
-  (assert
-  (forall ((temp___174 us_rep1)) (is_valid__function_guard2
-  (is_valid2 temp___174) temp___174)))
-
-(define-fun default_initial_assumption1 ((temp___expr_171 us_rep1)
-  (temp___skip_top_level_172 Bool)) Bool (=>
+(define-fun default_initial_assumption1 ((temp___expr_166 us_rep1)
+  (temp___skip_top_level_167 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_172 true))
-                                         (= (is_valid2 temp___expr_171) true)))
+                                         (= temp___skip_top_level_167 true))
+                                         (= (is_valid2 temp___expr_166) true)))
 
-(define-fun dynamic_predicate1 ((temp___176 us_rep1)) Bool (< 0 (to_rep
+(define-fun dynamic_predicate1 ((temp___170 us_rep1)) Bool (< 0 (to_rep
                                                                 (rec__dic_and_predicate_checks__nested_2__r__f
                                                                 (us_split_fields3
-                                                                temp___176)))))
+                                                                temp___170)))))
 
 (declare-fun value__size4 () Int)
 
@@ -526,40 +506,25 @@
 
 (declare-fun is_valid__function_guard3 (Bool us_rep) Bool)
 
-;; temp___result_195_def
-  (assert
-  (forall ((temp___194 us_rep)) (is_valid__function_guard3
-  (is_valid3 temp___194) temp___194)))
+(define-fun dynamic_invariant2 ((temp___expr_184 us_rep)
+  (temp___is_init_181 Bool) (temp___skip_constant_182 Bool)
+  (temp___do_toplevel_183 Bool)) Bool (=> (= temp___do_toplevel_183 true)
+                                      (=> (= temp___is_init_181 true)
+                                      (= (is_valid3 temp___expr_184) true))))
 
-(define-fun dynamic_invariant2 ((temp___expr_193 us_rep)
-  (temp___is_init_190 Bool) (temp___skip_constant_191 Bool)
-  (temp___do_toplevel_192 Bool)) Bool (=> (= temp___do_toplevel_192 true)
-                                      (=> (= temp___is_init_190 true)
-                                      (= (is_valid3 temp___expr_193) true))))
-
-;; temp___result_200_def
-  (assert
-  (forall ((temp___199 us_rep)) (is_valid__function_guard3
-  (is_valid3 temp___199) temp___199)))
-
-(define-fun default_initial_assumption2 ((temp___expr_196 us_rep)
-  (temp___skip_top_level_197 Bool)) Bool (and
+(define-fun default_initial_assumption2 ((temp___expr_186 us_rep)
+  (temp___skip_top_level_187 Bool)) Bool (and
                                          (= (to_rep
                                             (rec__dic_and_predicate_checks__r__g
                                             (us_split_fields1
-                                            temp___expr_196))) 0)
+                                            temp___expr_186))) 0)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_197 true))
-                                         (= (is_valid3 temp___expr_196) true))))
+                                         (= temp___skip_top_level_187 true))
+                                         (= (is_valid3 temp___expr_186) true))))
 
-;; temp___result_203_def
-  (assert
-  (forall ((temp___202 us_rep)) (is_valid__function_guard3
-  (is_valid3 temp___202) temp___202)))
-
-(define-fun dynamic_predicate2 ((temp___201 us_rep)) Bool (= (is_valid3
-                                                             temp___201) true))
+(define-fun dynamic_predicate2 ((temp___190 us_rep)) Bool (= (is_valid3
+                                                             temp___190) true))
 
 (declare-sort us_main_type 0)
 
@@ -623,9 +588,8 @@
 ;; is_valid__def_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (is_valid__function_guard (is_valid x) x)
-     (= (= (is_valid x) true)
-     (< 0 (to_rep (rec__dic_and_predicate_checks__r__f (us_split_fields1 x)))))) :pattern (
+  (! (= (= (is_valid x) true)
+     (< 0 (to_rep (rec__dic_and_predicate_checks__r__f (us_split_fields1 x))))) :pattern (
   (is_valid x)) )))
 
 ;; is_valid__post_axiom
@@ -634,23 +598,20 @@
 ;; is_valid__def_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (is_valid__function_guard1 (is_valid1 x) x)
-     (and (is_valid__function_guard (is_valid x) x)
-     (= (= (is_valid1 x) true) (= (is_valid x) true)))) :pattern ((is_valid1
-                                                                  x)) )))
+  (! (= (= (is_valid1 x) true) (= (is_valid x) true)) :pattern ((is_valid1 x)) )))
 
-(define-fun dynamic_invariant4 ((temp___expr_158 us_rep1)
-  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
-  (temp___do_toplevel_157 Bool)) Bool (=> (= temp___do_toplevel_157 true)
-                                      (=> (= temp___is_init_155 true)
+(define-fun dynamic_invariant4 ((temp___expr_153 us_rep1)
+  (temp___is_init_150 Bool) (temp___skip_constant_151 Bool)
+  (temp___do_toplevel_152 Bool)) Bool (=> (= temp___do_toplevel_152 true)
+                                      (=> (= temp___is_init_150 true)
                                       (< 0 (to_rep
                                            (rec__dic_and_predicate_checks__nested_2__r__f
-                                           (us_split_fields3 temp___expr_158)))))))
+                                           (us_split_fields3 temp___expr_153)))))))
 
-(define-fun dynamic_predicate3 ((temp___163 us_rep1)) Bool (< 0 (to_rep
+(define-fun dynamic_predicate3 ((temp___158 us_rep1)) Bool (< 0 (to_rep
                                                                 (rec__dic_and_predicate_checks__nested_2__r__f
                                                                 (us_split_fields3
-                                                                temp___163)))))
+                                                                temp___158)))))
 
 ;; is_valid__post_axiom
   (assert true)
@@ -658,27 +619,21 @@
 ;; is_valid__def_axiom
   (assert
   (forall ((x us_rep1))
-  (! (=> (is_valid__function_guard2 (is_valid2 x) x)
-     (= (= (is_valid2 x) true)
+  (! (= (= (is_valid2 x) true)
      (< 0 (to_rep
           (rec__dic_and_predicate_checks__nested_2__r__f
-          (us_split_fields3 x)))))) :pattern ((is_valid2 x)) )))
+          (us_split_fields3 x))))) :pattern ((is_valid2 x)) )))
 
-;; temp___result_187_def
-  (assert
-  (forall ((temp___186 us_rep)) (is_valid__function_guard3
-  (is_valid3 temp___186) temp___186)))
-
-(define-fun default_initial_assumption4 ((temp___expr_183 us_rep)
-  (temp___skip_top_level_184 Bool)) Bool (and
+(define-fun default_initial_assumption4 ((temp___expr_177 us_rep)
+  (temp___skip_top_level_178 Bool)) Bool (and
                                          (= (to_rep
                                             (rec__dic_and_predicate_checks__r__g
                                             (us_split_fields1
-                                            temp___expr_183))) 0)
+                                            temp___expr_177))) 0)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_184 true))
-                                         (= (is_valid3 temp___expr_183) true))))
+                                         (= temp___skip_top_level_178 true))
+                                         (= (is_valid3 temp___expr_177) true))))
 
 ;; is_valid__post_axiom
   (assert true)
@@ -686,32 +641,20 @@
 ;; is_valid__def_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (is_valid__function_guard3 (is_valid3 x) x)
-     (and (is_valid__function_guard (is_valid x) x)
-     (= (= (is_valid3 x) true) (= (is_valid x) true)))) :pattern ((is_valid3
-                                                                  x)) )))
+  (! (= (= (is_valid3 x) true) (= (is_valid x) true)) :pattern ((is_valid3 x)) )))
 
 (declare-fun x1__split_fields () integer)
 
 (declare-fun x1__split_fields1 () integer)
 
-(declare-fun temp___222 () integer)
+(declare-fun temp___210 () integer)
 
 ;; H
   (assert (default_initial_assumption
   (mk___rep (mk___split_fields x1__split_fields x1__split_fields1)) false))
 
-;; H
-  (assert (dynamic_invariant
-  (mk___rep (mk___split_fields x1__split_fields x1__split_fields1)) false
-  false true))
-
-;; H
-  (assert (default_initial_assumption1
-  (mk___rep1 (mk___split_fields1 temp___222)) true))
-
 (assert
 ;; WP_parameter_def
  ;; File "dic_and_predicate_checks.ads", line 41, characters 0-0
-  (not (< 0 (to_rep temp___222))))
+  (not (< 0 (to_rep temp___210))))
 (check-sat)

@@ -489,14 +489,6 @@
 ;; H
   (assert (< (* j l1) length1))
 
-;; H
-  (assert (sorted__function_guard
-  (sorted (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (+ a_first (* j l1))
-  (ite (< l1 (- length1 (* j l1))) l1 (- length1 (* j l1))))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (+ a_first (* j 
-  l1)) (ite (< l1 (- length1 (* j l1))) l1 (- length1 (* j l1)))))
-
 (assert
 ;; WP_parameter_def
  ;; File "sorting.ads", line 13, characters 0-0

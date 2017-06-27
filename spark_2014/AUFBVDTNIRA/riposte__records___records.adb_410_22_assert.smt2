@@ -268,11 +268,11 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(define-fun dynamic_invariant ((temp___expr_188 Int)
-  (temp___is_init_185 Bool) (temp___skip_constant_186 Bool)
-  (temp___do_toplevel_187 Bool)) Bool (=>
-                                      (or (= temp___is_init_185 true)
-                                      (<= 0 255)) (in_range temp___expr_188)))
+(define-fun dynamic_invariant ((temp___expr_180 Int)
+  (temp___is_init_177 Bool) (temp___skip_constant_178 Bool)
+  (temp___do_toplevel_179 Bool)) Bool (=>
+                                      (or (= temp___is_init_177 true)
+                                      (<= 0 255)) (in_range temp___expr_180)))
 
 (declare-fun x__split_fields () Bool)
 

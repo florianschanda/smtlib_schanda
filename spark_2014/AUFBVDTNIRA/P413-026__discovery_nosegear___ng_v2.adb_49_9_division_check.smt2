@@ -178,24 +178,17 @@
   (forall ((ng_v2__prevtime (_ BitVec 16)) (ng_v2__thistime (_ BitVec 16)))
   (! (=>
      (and (dynamic_invariant ng_v2__prevtime true true true)
-     (dynamic_invariant ng_v2__thistime true true true))
-     (let ((result (timefromlastclicktolastupdate ng_v2__prevtime
-                   ng_v2__thistime)))
-     (=> (timefromlastclicktolastupdate__function_guard result
-     ng_v2__prevtime ng_v2__thistime) (dynamic_invariant result true false
-     true)))) :pattern ((timefromlastclicktolastupdate ng_v2__prevtime
-                        ng_v2__thistime)) )))
+     (dynamic_invariant ng_v2__thistime true true true)) (dynamic_invariant
+     (timefromlastclicktolastupdate ng_v2__prevtime ng_v2__thistime) true
+     false true)) :pattern ((timefromlastclicktolastupdate ng_v2__prevtime
+                            ng_v2__thistime)) )))
 
 ;; timefromlastclicktolastupdate__def_axiom
   (assert
   (forall ((ng_v2__prevtime (_ BitVec 16)) (ng_v2__thistime (_ BitVec 16)))
   (! (=>
-     (and
      (and (dynamic_invariant ng_v2__prevtime true true true)
      (dynamic_invariant ng_v2__thistime true true true))
-     (timefromlastclicktolastupdate__function_guard
-     (timefromlastclicktolastupdate ng_v2__prevtime ng_v2__thistime)
-     ng_v2__prevtime ng_v2__thistime))
      (= (timefromlastclicktolastupdate ng_v2__prevtime ng_v2__thistime) (bvsub ng_v2__thistime ng_v2__prevtime))) :pattern (
   (timefromlastclicktolastupdate ng_v2__prevtime ng_v2__thistime)) )))
 
@@ -209,22 +202,16 @@
   (forall ((ng_v2__currtime (_ BitVec 16)) (ng_v2__thistime (_ BitVec 16)))
   (! (=>
      (and (dynamic_invariant ng_v2__currtime true true true)
-     (dynamic_invariant ng_v2__thistime true true true))
-     (let ((result (timesincelastupdate ng_v2__currtime ng_v2__thistime)))
-     (=> (timesincelastupdate__function_guard result ng_v2__currtime
-     ng_v2__thistime) (dynamic_invariant result true false true)))) :pattern (
+     (dynamic_invariant ng_v2__thistime true true true)) (dynamic_invariant
+     (timesincelastupdate ng_v2__currtime ng_v2__thistime) true false true)) :pattern (
   (timesincelastupdate ng_v2__currtime ng_v2__thistime)) )))
 
 ;; timesincelastupdate__def_axiom
   (assert
   (forall ((ng_v2__currtime (_ BitVec 16)) (ng_v2__thistime (_ BitVec 16)))
   (! (=>
-     (and
      (and (dynamic_invariant ng_v2__currtime true true true)
      (dynamic_invariant ng_v2__thistime true true true))
-     (timesincelastupdate__function_guard
-     (timesincelastupdate ng_v2__currtime ng_v2__thistime) ng_v2__currtime
-     ng_v2__thistime))
      (= (timesincelastupdate ng_v2__currtime ng_v2__thistime) (bvsub ng_v2__currtime ng_v2__thistime))) :pattern (
   (timesincelastupdate ng_v2__currtime ng_v2__thistime)) )))
 
@@ -239,24 +226,17 @@
   (forall ((ng_v2__prevcount (_ BitVec 16)) (ng_v2__thiscount (_ BitVec 16)))
   (! (=>
      (and (dynamic_invariant ng_v2__prevcount true true true)
-     (dynamic_invariant ng_v2__thiscount true true true))
-     (let ((result (distancefromlastclicktolastupdate ng_v2__prevcount
-                   ng_v2__thiscount)))
-     (=> (distancefromlastclicktolastupdate__function_guard result
-     ng_v2__prevcount ng_v2__thiscount) (dynamic_invariant result true false
-     true)))) :pattern ((distancefromlastclicktolastupdate ng_v2__prevcount
-                        ng_v2__thiscount)) )))
+     (dynamic_invariant ng_v2__thiscount true true true)) (dynamic_invariant
+     (distancefromlastclicktolastupdate ng_v2__prevcount ng_v2__thiscount)
+     true false true)) :pattern ((distancefromlastclicktolastupdate
+                                 ng_v2__prevcount ng_v2__thiscount)) )))
 
 ;; distancefromlastclicktolastupdate__def_axiom
   (assert
   (forall ((ng_v2__prevcount (_ BitVec 16)) (ng_v2__thiscount (_ BitVec 16)))
   (! (=>
-     (and
      (and (dynamic_invariant ng_v2__prevcount true true true)
      (dynamic_invariant ng_v2__thiscount true true true))
-     (distancefromlastclicktolastupdate__function_guard
-     (distancefromlastclicktolastupdate ng_v2__prevcount ng_v2__thiscount)
-     ng_v2__prevcount ng_v2__thiscount))
      (= (distancefromlastclicktolastupdate ng_v2__prevcount ng_v2__thiscount) (bvmul ((_ int2bv 16) 207) (bvsub ng_v2__thiscount ng_v2__prevcount)))) :pattern (
   (distancefromlastclicktolastupdate ng_v2__prevcount ng_v2__thiscount)) )))
 
@@ -283,23 +263,17 @@
 
 ;; H
   (assert
-  (and
   (and (= o3 (timefromlastclicktolastupdate prevtime thistime))
-  (timefromlastclicktolastupdate__function_guard o3 prevtime thistime))
   (= o3 (bvsub thistime prevtime))))
 
 ;; H
   (assert
-  (and
   (and (= o (timesincelastupdate currtime thistime))
-  (timesincelastupdate__function_guard o currtime thistime))
   (= o (bvsub currtime thistime))))
 
 ;; H
   (assert
-  (and
   (and (= o1 (distancefromlastclicktolastupdate prevcount thiscount))
-  (distancefromlastclicktolastupdate__function_guard o1 prevcount thiscount))
   (= o1 (bvmul ((_ int2bv 16) 207) (bvsub thiscount prevcount)))))
 
 ;; H

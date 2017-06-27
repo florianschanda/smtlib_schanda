@@ -994,8 +994,7 @@
 ;; inv__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (inv__function_guard (inv s) s)
-     (= (= (inv s) true)
+  (! (= (= (inv s) true)
      (and
      (and
      (and
@@ -1245,7 +1244,7 @@
                                                          (let ((temp___351 
                                                          (rec__patience__state__posstack
                                                          (us_split_fields1 s))))
-                                                         (select temp___351 i))) 1)))))))))) :pattern (
+                                                         (select temp___351 i))) 1))))))))) :pattern (
   (inv s)) )))
 
 (declare-fun cards () us_t)
@@ -1253,10 +1252,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
-
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -1366,39 +1361,39 @@
 
 (declare-fun o9 () (Array Int cardindex))
 
-(declare-fun temp___845 () cardindex)
+(declare-fun temp___839 () cardindex)
 
-(declare-fun temp___8451 () (Array Int card))
+(declare-fun temp___8391 () (Array Int card))
 
-(declare-fun temp___8452 () cardindex)
+(declare-fun temp___8392 () cardindex)
 
-(declare-fun temp___8453 () (Array Int cardindex))
+(declare-fun temp___8393 () (Array Int cardindex))
 
-(declare-fun temp___8454 () (Array Int (Array Int cardindex)))
+(declare-fun temp___8394 () (Array Int (Array Int cardindex)))
 
-(declare-fun temp___8455 () (Array Int cardindex))
+(declare-fun temp___8395 () (Array Int cardindex))
 
-(declare-fun temp___8456 () (Array Int cardindex))
+(declare-fun temp___8396 () (Array Int cardindex))
 
-(declare-fun temp___8457 () (Array Int cardindex))
+(declare-fun temp___8397 () (Array Int cardindex))
 
-(declare-fun temp___833 () Int)
+(declare-fun temp___828 () Int)
 
-(declare-fun temp___832 () cardindex)
+(declare-fun temp___827 () cardindex)
 
-(declare-fun temp___8321 () (Array Int card))
+(declare-fun temp___8271 () (Array Int card))
 
-(declare-fun temp___8322 () cardindex)
+(declare-fun temp___8272 () cardindex)
 
-(declare-fun temp___8323 () (Array Int cardindex))
+(declare-fun temp___8273 () (Array Int cardindex))
 
-(declare-fun temp___8324 () (Array Int (Array Int cardindex)))
+(declare-fun temp___8274 () (Array Int (Array Int cardindex)))
 
-(declare-fun temp___8325 () (Array Int cardindex))
+(declare-fun temp___8275 () (Array Int cardindex))
 
-(declare-fun temp___8326 () (Array Int cardindex))
+(declare-fun temp___8276 () (Array Int cardindex))
 
-(declare-fun temp___8327 () (Array Int cardindex))
+(declare-fun temp___8277 () (Array Int cardindex))
 
 (declare-fun result () cardindex)
 
@@ -1517,16 +1512,6 @@
                                                  s__split_fields31))
 
 (define-fun s__split_fields39 () us_split_fields (mk___split_fields
-                                                 s__split_fields16
-                                                 s__split_fields17
-                                                 s__split_fields18
-                                                 s__split_fields19
-                                                 s__split_fields20
-                                                 s__split_fields21
-                                                 s__split_fields22
-                                                 s__split_fields23))
-
-(define-fun s__split_fields40 () us_split_fields (mk___split_fields
                                                  s__split_fields8
                                                  s__split_fields9
                                                  s__split_fields10
@@ -1551,14 +1536,6 @@
 (declare-fun result16 () (Array Int cardindex))
 
 (declare-fun result17 () (Array Int cardindex))
-
-;; H
-  (assert (inv__function_guard (inv (mk___rep s__split_fields39))
-  (mk___rep s__split_fields39)))
-
-;; H
-  (assert (inv__function_guard (inv (mk___rep s__split_fields38))
-  (mk___rep s__split_fields38)))
 
 ;; H
   (assert (= (to_rep2 o) 0))
@@ -1591,34 +1568,34 @@
   (assert (= (temp___159 (- 1)) o9))
 
 ;; H
-  (assert (= temp___845 o2))
+  (assert (= temp___839 o2))
 
 ;; H
-  (assert (= temp___8451 o3))
+  (assert (= temp___8391 o3))
 
 ;; H
-  (assert (= temp___8452 o4))
+  (assert (= temp___8392 o4))
 
 ;; H
-  (assert (= temp___8453 o5))
+  (assert (= temp___8393 o5))
 
 ;; H
-  (assert (= temp___8454 o6))
+  (assert (= temp___8394 o6))
 
 ;; H
-  (assert (= temp___8455 o7))
+  (assert (= temp___8395 o7))
 
 ;; H
-  (assert (= temp___8456 o8))
+  (assert (= temp___8396 o8))
 
 ;; H
-  (assert (= temp___8457 o9))
+  (assert (= temp___8397 o9))
 
 ;; H
   (assert
   (= (mk___rep
-     (mk___split_fields temp___845 temp___8451 temp___8452 temp___8453
-     temp___8454 temp___8455 temp___8456 temp___8457)) null_state))
+     (mk___split_fields temp___839 temp___8391 temp___8392 temp___8393
+     temp___8394 temp___8395 temp___8396 temp___8397)) null_state))
 
 ;; H
   (assert (dynamic_invariant cards true false true))
@@ -1636,7 +1613,7 @@
                        s__split_fields5 s__split_fields6 s__split_fields7))))
 
 ;; H
-  (assert (= s__split_fields40 (us_split_fields1 null_state)))
+  (assert (= s__split_fields39 (us_split_fields1 null_state)))
 
 ;; H
   (assert (= (mk_int__ref result8) (mk_int__ref i)))
@@ -1648,20 +1625,20 @@
   (assert
   (=>
   (and (<= (to_rep1 (first (rt cards))) i1)
-  (<= i1 (to_rep1 (last (rt cards))))) (= temp___833 i1)))
+  (<= i1 (to_rep1 (last (rt cards))))) (= temp___828 i1)))
 
 ;; H
   (assert
   (=>
   (and (<= (to_rep1 (first (rt cards))) i1)
   (<= i1 (to_rep1 (last (rt cards)))))
-  (and (= temp___832 s__split_fields8)
-  (and (= temp___8321 s__split_fields9)
-  (and (= temp___8322 s__split_fields10)
-  (and (= temp___8323 s__split_fields11)
-  (and (= temp___8324 s__split_fields12)
-  (and (= temp___8325 s__split_fields13)
-  (and (= temp___8326 s__split_fields14) (= temp___8327 s__split_fields15))))))))))
+  (and (= temp___827 s__split_fields8)
+  (and (= temp___8271 s__split_fields9)
+  (and (= temp___8272 s__split_fields10)
+  (and (= temp___8273 s__split_fields11)
+  (and (= temp___8274 s__split_fields12)
+  (and (= temp___8275 s__split_fields13)
+  (and (= temp___8276 s__split_fields14) (= temp___8277 s__split_fields15))))))))))
 
 ;; H
   (assert
@@ -1675,7 +1652,11 @@
   (=>
   (and (<= (to_rep1 (first (rt cards))) i1)
   (<= i1 (to_rep1 (last (rt cards)))))
-  (= (inv (mk___rep s__split_fields39)) true)))
+  (= (inv
+     (mk___rep
+     (mk___split_fields s__split_fields16 s__split_fields17 s__split_fields18
+     s__split_fields19 s__split_fields20 s__split_fields21 s__split_fields22
+     s__split_fields23))) true)))
 
 ;; H
   (assert
@@ -1771,7 +1752,7 @@
   (not
   (and (<= (to_rep1 (first (rt cards))) i1)
   (<= i1 (to_rep1 (last (rt cards))))))
-  (= s__split_fields34 (mk___split_fields__ref s__split_fields40))))
+  (= s__split_fields34 (mk___split_fields__ref s__split_fields39))))
 
 ;; H
   (assert
@@ -1786,7 +1767,7 @@
   (not
   (and (<= (to_rep1 (first (rt cards))) i1)
   (<= i1 (to_rep1 (last (rt cards))))))
-  (= s__split_fields35 s__split_fields40)))
+  (= s__split_fields35 s__split_fields39)))
 
 ;; H
   (assert
@@ -1834,11 +1815,6 @@
      (mk___split_fields result10 result11 result12 result13 result14 
      result15 result16 result17)) (state__content
                                   patience__playgame__result11)))
-
-;; H
-  (assert (inv__function_guard
-  (inv (state__content patience__playgame__result11))
-  (state__content patience__playgame__result11)))
 
 (assert
 ;; WP_parameter_def

@@ -121,10 +121,8 @@
 ;; double1__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant1 x true true true)
-     (let ((result (double1 x)))
-     (=> (double1__function_guard result x) (dynamic_invariant1 result true
-     false true)))) :pattern ((double1 x)) )))
+  (! (=> (dynamic_invariant1 x true true true) (dynamic_invariant1
+     (double1 x) true false true)) :pattern ((double1 x)) )))
 
 (declare-sort t1 0)
 
@@ -160,10 +158,8 @@
 ;; double2__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant2 x true true true)
-     (let ((result (double2 x)))
-     (=> (double2__function_guard result x) (dynamic_invariant2 result true
-     false true)))) :pattern ((double2 x)) )))
+  (! (=> (dynamic_invariant2 x true true true) (dynamic_invariant2
+     (double2 x) true false true)) :pattern ((double2 x)) )))
 
 (declare-sort t2 0)
 
@@ -197,10 +193,8 @@
 ;; ten1__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant3 x true true true)
-     (let ((result (ten1 x)))
-     (=> (ten1__function_guard result x) (dynamic_invariant3 result true
-     false true)))) :pattern ((ten1 x)) )))
+  (! (=> (dynamic_invariant3 x true true true) (dynamic_invariant3 (ten1 x)
+     true false true)) :pattern ((ten1 x)) )))
 
 (declare-sort t3 0)
 
@@ -234,10 +228,8 @@
 ;; ten2__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant4 x true true true)
-     (let ((result (ten2 x)))
-     (=> (ten2__function_guard result x) (dynamic_invariant4 result true
-     false true)))) :pattern ((ten2 x)) )))
+  (! (=> (dynamic_invariant4 x true true true) (dynamic_invariant4 (ten2 x)
+     true false true)) :pattern ((ten2 x)) )))
 
 (declare-fun false1 (Int) Bool)
 
@@ -529,8 +521,7 @@
   (assert (in_range a))
 
 ;; H
-  (assert
-  (and (and (= o (double1 a)) (double1__function_guard o a)) (in_range2 o)))
+  (assert (and (= o (double1 a)) (in_range2 o)))
 
 ;; H
   (assert (= result a))
@@ -539,9 +530,7 @@
   (assert (= a1 o))
 
 ;; H
-  (assert
-  (and (and (= o1 (double2 a1)) (double2__function_guard o1 a1)) (in_range3
-  o1)))
+  (assert (and (= o1 (double2 a1)) (in_range3 o1)))
 
 ;; H
   (assert (= result1 a1))

@@ -399,24 +399,18 @@
      (and
      (and (dynamic_invariant regold true true true) (dynamic_invariant regnew
      true true true)) (dynamic_invariant1 val__1 true true true))
-     (let ((result (writereghigh8post regold regnew val__1)))
-     (and (readreghigh8__function_guard (readreghigh8 regnew) regnew)
-     (=> (writereghigh8post__function_guard result regold regnew val__1)
-     (= (= result true)
+     (= (= (writereghigh8post regold regnew val__1) true)
      (and (= (readreghigh8 regnew) val__1)
-     (= (bvand regnew ((_ int2bv 64) 18446744073709486335)) (bvand regold ((_ int2bv 64) 18446744073709486335))))))))) :pattern (
+     (= (bvand regnew ((_ int2bv 64) 18446744073709486335)) (bvand regold ((_ int2bv 64) 18446744073709486335)))))) :pattern (
   (writereghigh8post regold regnew val__1)) ))))
 
 ;; writereghigh8post__def_axiom
   (assert
   (forall ((regold (_ BitVec 64)) (regnew (_ BitVec 64)))
   (forall ((val__1 (_ BitVec 8)))
-  (! (=> (writereghigh8post__function_guard
-     (writereghigh8post regold regnew val__1) regold regnew val__1)
-     (and (readreghigh8__function_guard (readreghigh8 regnew) regnew)
-     (= (= (writereghigh8post regold regnew val__1) true)
+  (! (= (= (writereghigh8post regold regnew val__1) true)
      (and (= (readreghigh8 regnew) val__1)
-     (= (bvand regnew ((_ int2bv 64) 18446744073709486335)) (bvand regold ((_ int2bv 64) 18446744073709486335))))))) :pattern (
+     (= (bvand regnew ((_ int2bv 64) 18446744073709486335)) (bvand regold ((_ int2bv 64) 18446744073709486335))))) :pattern (
   (writereghigh8post regold regnew val__1)) ))))
 
 ;; readreghigh8__post_axiom
@@ -424,11 +418,10 @@
   (forall ((reg (_ BitVec 64)))
   (! (=> (dynamic_invariant reg true true true)
      (let ((result (readreghigh8 reg)))
-     (=> (readreghigh8__function_guard result reg)
      (and
      (= result ((_ extract 7 0) (bvurem (bvudiv (bvand reg ((_ int2bv 64) 65280)) ((_ int2bv 64) 256)) ((_ int2bv 64) 256))))
-     (dynamic_invariant1 result true false true))))) :pattern ((readreghigh8
-                                                               reg)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((readreghigh8
+                                                              reg)) )))
 
 (declare-fun reg () (_ BitVec 64))
 
@@ -453,10 +446,6 @@
 
 ;; H
   (assert (= reg3 reg1))
-
-;; H
-  (assert (writereghigh8post__function_guard
-  (writereghigh8post reg reg2 val__) reg reg2 val__))
 
 (assert
 ;; WP_parameter_def

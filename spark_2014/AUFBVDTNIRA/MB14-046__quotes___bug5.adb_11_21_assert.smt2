@@ -379,11 +379,6 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range temp___expr_15)))
 
-;; H
-  (assert (p__function_guard
-  (p (mk___t (temp___String_Literal_143 Tuple0) (mk 1 4)))
-  (mk___t (temp___String_Literal_143 Tuple0) (mk 1 4))))
-
 (assert
 ;; WP_parameter_def
  ;; File "bug5.ads", line 4, characters 0-0

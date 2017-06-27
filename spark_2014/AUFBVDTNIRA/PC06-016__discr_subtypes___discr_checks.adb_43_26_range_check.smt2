@@ -91,16 +91,13 @@
 
 ;; bad__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (bad us_void_param)))
-     (=> (bad__function_guard result us_void_param) (dynamic_invariant result
-     true false true))) :pattern ((bad us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant (bad us_void_param)
+  true false true) :pattern ((bad us_void_param)) )))
 
 ;; bad__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (bad__function_guard (bad us_void_param) us_void_param)
-     (= (bad us_void_param) 6)) :pattern ((bad us_void_param)) )))
+  (! (= (bad us_void_param) 6) :pattern ((bad us_void_param)) )))
 
 (declare-fun r11b () Int)
 
@@ -116,10 +113,7 @@
 
 ;; H
   (assert
-  (and
   (and (= discr_checks__check_subtype_task__R11b__assume (bad Tuple0))
-  (bad__function_guard discr_checks__check_subtype_task__R11b__assume
-  Tuple0))
   (and (in_range discr_checks__check_subtype_task__R11b__assume)
   (= discr_checks__check_subtype_task__R11b__assume 6))))
 

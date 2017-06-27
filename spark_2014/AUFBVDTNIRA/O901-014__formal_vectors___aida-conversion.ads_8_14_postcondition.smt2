@@ -83,7 +83,6 @@
   (forall ((c Int))
   (! (=> (dynamic_invariant c true true true)
      (let ((result (is_digit c)))
-     (=> (is_digit__function_guard result c)
      (ite (= c 48) (= result true)
      (ite (= c 49) (= result true)
      (ite (= c 50) (= result true)
@@ -94,7 +93,7 @@
      (ite (= c 55) (= result true)
      (ite (= c 56) (= result true)
      (ite (= c 57) (= result true)
-     (ite (< 57 c) (not (= result true)) (=> (< c 48) (not (= result true))))))))))))))))) :pattern (
+     (ite (< 57 c) (not (= result true)) (=> (< c 48) (not (= result true)))))))))))))))) :pattern (
   (is_digit c)) )))
 
 (declare-fun source () Int)
@@ -116,9 +115,6 @@
 (declare-fun aida__conversion__convert_character_digit_to_integer__result5 () Int)
 
 (declare-fun result1 () Int)
-
-;; H
-  (assert (is_digit__function_guard (is_digit source) source))
 
 ;; H
   (assert (in_range1 source))

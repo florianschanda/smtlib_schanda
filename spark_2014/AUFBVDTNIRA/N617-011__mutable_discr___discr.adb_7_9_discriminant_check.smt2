@@ -304,7 +304,7 @@
 
 (declare-fun o3 () natural)
 
-(declare-fun temp___261 () natural)
+(declare-fun temp___260 () natural)
 
 ;; H
   (assert (in_range c))
@@ -328,10 +328,10 @@
   (assert (= o2 o3))
 
 ;; H
-  (assert (= temp___261 o3))
+  (assert (= temp___260 o3))
 
 (assert
 ;; WP_parameter_def
  ;; File "discr.adb", line 130, characters 0-0
-  (not (= temp___261 (rec__discr__no_default__c d__split_discrs))))
+  (not (= temp___260 (rec__discr__no_default__c d__split_discrs))))
 (check-sat)

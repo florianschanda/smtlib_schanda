@@ -416,15 +416,15 @@
 
 (declare-fun c () Int)
 
-(declare-fun temp___216 () (Array Int us_rep))
+(declare-fun temp___210 () (Array Int us_rep))
 
-(declare-fun temp___2161 () (Array Int us_rep))
+(declare-fun temp___2101 () (Array Int us_rep))
 
-(declare-fun temp___215 () Int)
+(declare-fun temp___209 () Int)
 
-(declare-fun temp___213 () (Array Int us_rep))
+(declare-fun temp___207 () (Array Int us_rep))
 
-(declare-fun temp___2131 () (Array Int us_rep))
+(declare-fun temp___2071 () (Array Int us_rep))
 
 (declare-fun p__split_fields2 () (Array Int us_rep))
 
@@ -493,20 +493,20 @@
 ;; H
   (assert
   (=> (and (<= 0 c1) (<= c1 2))
-  (and (= p__split_fields temp___216) (= p__split_fields1 temp___2161))))
+  (and (= p__split_fields temp___210) (= p__split_fields1 temp___2101))))
 
 ;; H
-  (assert (=> (and (<= 0 c1) (<= c1 2)) (= temp___215 c1)))
-
-;; H
-  (assert
-  (=> (and (<= 0 c1) (<= c1 2))
-  (and (= p__split_fields temp___213) (= p__split_fields1 temp___2131))))
+  (assert (=> (and (<= 0 c1) (<= c1 2)) (= temp___209 c1)))
 
 ;; H
   (assert
   (=> (and (<= 0 c1) (<= c1 2))
-  (and (= (bool_eq3 p__split_fields4 0 2 temp___216 0 2) true)
+  (and (= p__split_fields temp___207) (= p__split_fields1 temp___2071))))
+
+;; H
+  (assert
+  (=> (and (<= 0 c1) (<= c1 2))
+  (and (= (bool_eq3 p__split_fields4 0 2 temp___210 0 2) true)
   (forall ((j Int))
   (=> (and (<= 0 j) (<= j (- c2 1)))
   (=> (= (bool_eq1 (select p__split_fields4 j) d) true)
@@ -517,11 +517,11 @@
   (=> (and (<= 0 c1) (<= c1 2))
   (and
   (and
-  (and (= p__split_fields4 temp___213)
-  (forall ((temp___214 Int))
-  (=> (and (<= 0 temp___214) (<= temp___214 2))
-  (=> (<= c2 temp___214)
-  (= (select p__split_fields5 temp___214) (select temp___2131 temp___214))))))
+  (and (= p__split_fields4 temp___207)
+  (forall ((temp___208 Int))
+  (=> (and (<= 0 temp___208) (<= temp___208 2))
+  (=> (<= c2 temp___208)
+  (= (select p__split_fields5 temp___208) (select temp___2071 temp___208))))))
   (=> (<= 0 2) (in_range2 c2))) (and (<= 0 c2) (<= c2 2)))))
 
 ;; H

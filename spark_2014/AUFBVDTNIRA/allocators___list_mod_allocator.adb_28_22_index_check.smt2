@@ -68,12 +68,12 @@
 (define-fun resource__ref___projection ((a resource__ref)) resource (resource__content
                                                                     a))
 
-(define-fun dynamic_invariant ((temp___expr_150 Int)
-  (temp___is_init_147 Bool) (temp___skip_constant_148 Bool)
-  (temp___do_toplevel_149 Bool)) Bool (=>
-                                      (or (= temp___is_init_147 true)
+(define-fun dynamic_invariant ((temp___expr_148 Int)
+  (temp___is_init_145 Bool) (temp___skip_constant_146 Bool)
+  (temp___do_toplevel_147 Bool)) Bool (=>
+                                      (or (= temp___is_init_145 true)
                                       (<= 0 10000)) (in_range1
-                                      temp___expr_150)))
+                                      temp___expr_148)))
 
 (declare-fun to_rep (resource) Int)
 
@@ -325,18 +325,18 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_279 Int)
-  (temp___is_init_276 Bool) (temp___skip_constant_277 Bool)
-  (temp___do_toplevel_278 Bool)) Bool (=>
-                                      (or (= temp___is_init_276 true)
-                                      (<= 0 1)) (in_range3 temp___expr_279)))
+(define-fun dynamic_invariant1 ((temp___expr_234 Int)
+  (temp___is_init_231 Bool) (temp___skip_constant_232 Bool)
+  (temp___do_toplevel_233 Bool)) Bool (=>
+                                      (or (= temp___is_init_231 true)
+                                      (<= 0 1)) (in_range3 temp___expr_234)))
 
-(define-fun dynamic_invariant2 ((temp___expr_156 Int)
-  (temp___is_init_153 Bool) (temp___skip_constant_154 Bool)
-  (temp___do_toplevel_155 Bool)) Bool (=>
-                                      (or (= temp___is_init_153 true)
+(define-fun dynamic_invariant2 ((temp___expr_154 Int)
+  (temp___is_init_151 Bool) (temp___skip_constant_152 Bool)
+  (temp___do_toplevel_153 Bool)) Bool (=>
+                                      (or (= temp___is_init_151 true)
                                       (<= 1 10000)) (in_range2
-                                      temp___expr_156)))
+                                      temp___expr_154)))
 
 (declare-fun first_available () Int)
 

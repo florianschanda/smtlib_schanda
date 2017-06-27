@@ -185,8 +185,7 @@
 ;; divides__def_axiom
   (assert
   (forall ((a Int) (b Int))
-  (! (=> (divides__function_guard (divides a b) a b)
-     (= (= (divides a b) true) (= (mod2 b a) 0))) :pattern ((divides a b)) )))
+  (! (= (= (divides a b) true) (= (mod2 b a) 0)) :pattern ((divides a b)) )))
 
 (declare-fun a () Int)
 
@@ -314,23 +313,6 @@
   (assert (= bn2 o2))
 
 ;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x c1) x c1)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x an2) x an2)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x an2) x an2)))
-
-;; H
-  (assert (divides__function_guard (divides an2 c1) an2 c1))
-
-;; H
-  (assert
-  (forall ((x Int)) (divides__function_guard (divides x (mod2 c1 an2)) x
-  (mod2 c1 an2))))
-
-;; H
   (assert
   (forall ((x Int))
   (=> (and (<= 1 x) (<= x 2147483647))
@@ -339,40 +321,11 @@
   (or (= (divides an2 c1) true) (= (divides x (mod2 c1 an2)) true)))))))
 
 ;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x a) x a)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x b) x b)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x an3) x an3)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x bn3) x bn3)))
-
-;; H
   (assert
   (forall ((x Int))
   (=> (and (<= 1 x) (<= x 2147483647))
   (= (and (= (divides x a) true) (= (divides x b) true))
   (and (= (divides x an3) true) (or (= bn3 0) (= (divides x bn3) true)))))))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x c3) x c3)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x an4) x an4)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x an4) x an4)))
-
-;; H
-  (assert (divides__function_guard (divides an4 c3) an4 c3))
-
-;; H
-  (assert
-  (forall ((x Int)) (divides__function_guard (divides x (mod2 c3 an4)) x
-  (mod2 c3 an4))))
 
 ;; H
   (assert
@@ -425,19 +378,10 @@
   (assert (<= x 2147483647))
 
 ;; H
-  (assert (divides__function_guard (divides x a) x a))
-
-;; H
-  (assert (divides__function_guard (divides x b) x b))
-
-;; H
   (assert (= (divides x a) true))
 
 ;; H
   (assert (= (divides x b) true))
-
-;; H
-  (assert (divides__function_guard (divides x an4) x an4))
 
 (assert
 ;; WP_parameter_def

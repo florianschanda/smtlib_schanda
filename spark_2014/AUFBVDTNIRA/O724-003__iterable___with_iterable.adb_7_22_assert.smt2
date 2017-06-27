@@ -514,11 +514,10 @@
   (assert
   (forall ((a us_rep))
   (forall ((cu us_rep1))
-  (! (=> (has_element__function_guard (has_element a cu) a cu)
-     (= (= (has_element a cu) true)
+  (! (= (= (has_element a cu) true)
      (and
      (<= 1 (to_rep (rec__with_iterable__cursor__i (us_split_fields3 cu))))
-     (<= (to_rep (rec__with_iterable__cursor__i (us_split_fields3 cu))) 100)))) :pattern (
+     (<= (to_rep (rec__with_iterable__cursor__i (us_split_fields3 cu))) 100))) :pattern (
   (has_element a cu)) ))))
 
 (declare-fun contains_0 (us_rep) Bool)
@@ -535,20 +534,12 @@
 ;; contains_0__def_axiom
   (assert
   (forall ((a us_rep))
-  (! (=> (contains_0__function_guard (contains_0 a) a)
-     (and
-     (forall ((cu us_rep1)) (has_element__function_guard (has_element a cu) a
-     cu))
-     (and
-     (forall ((cu us_rep1)) (get__function_guard
-     (get a (to_rep (rec__with_iterable__cursor__i (us_split_fields3 cu)))) a
-     (to_rep (rec__with_iterable__cursor__i (us_split_fields3 cu)))))
-     (= (= (contains_0 a) true)
+  (! (= (= (contains_0 a) true)
      (exists ((cu us_rep1))
      (and
      (and (dynamic_invariant cu true false true) (= (has_element a cu) true))
      (= (get a
-        (to_rep (rec__with_iterable__cursor__i (us_split_fields3 cu)))) 0))))))) :pattern (
+        (to_rep (rec__with_iterable__cursor__i (us_split_fields3 cu)))) 0)))) :pattern (
   (contains_0 a)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -615,19 +606,19 @@
 (declare-datatypes () ((t1b__ref (mk_t1b__ref (t1b__content us_rep1)))))
 (define-fun t1b__ref___projection ((a t1b__ref)) us_rep1 (t1b__content a))
 
-(define-fun dynamic_predicate1 ((temp___209 us_rep1)) Bool (and
+(define-fun dynamic_predicate1 ((temp___202 us_rep1)) Bool (and
                                                            (<= 1 (to_rep
                                                                  (rec__with_iterable__cursor__i
                                                                  (us_split_fields3
-                                                                 temp___209))))
+                                                                 temp___202))))
                                                            (<= (to_rep
                                                                (rec__with_iterable__cursor__i
                                                                (us_split_fields3
-                                                               temp___209))) 
+                                                               temp___202))) 
                                                            (to_rep
                                                            (rec__with_iterable__cursor__c
                                                            (us_split_discrs1
-                                                           temp___209))))))
+                                                           temp___202))))))
 
 (declare-fun first__split_discrs () us_split_discrs)
 
@@ -676,17 +667,13 @@
   (forall ((i Int))
   (! (=>
      (and (dynamic_invariant1 i true true true) (and (<= 1 i) (<= i 100)))
-     (let ((result (get a i)))
-     (=> (get__function_guard result a i) (dynamic_invariant1 result true
-     false true)))) :pattern ((get a i)) ))))
+     (dynamic_invariant1 (get a i) true false true)) :pattern ((get a i)) ))))
 
 ;; get__def_axiom
   (assert
   (forall ((a us_rep))
   (forall ((i Int))
-  (! (=>
-     (and (dynamic_invariant1 i true true true) (get__function_guard
-     (get a i) a i))
+  (! (=> (dynamic_invariant1 i true true true)
      (= (get a i) (to_rep
                   (let ((temp___181 (rec__with_iterable__container__content
                                     (us_split_fields1 a))))
@@ -704,9 +691,9 @@
 
 (declare-fun o3 () natural)
 
-(declare-fun temp___231 () natural)
+(declare-fun temp___221 () natural)
 
-(declare-fun temp___2311 () natural)
+(declare-fun temp___2211 () natural)
 
 (declare-fun o4 () natural)
 
@@ -720,9 +707,9 @@
 
 (declare-fun o9 () natural)
 
-(declare-fun temp___232 () natural)
+(declare-fun temp___222 () natural)
 
-(declare-fun temp___2321 () natural)
+(declare-fun temp___2221 () natural)
 
 (declare-fun with_iterable__set_to_0__first__assume () us_rep1)
 
@@ -732,7 +719,7 @@
 
 (declare-fun o12 () us_split_fields)
 
-(declare-fun temp___235 () us_rep)
+(declare-fun temp___225 () us_rep)
 
 (declare-fun result () us_split_fields__ref1)
 
@@ -742,8 +729,8 @@
 
 (declare-fun a__split_fields1 () us_split_fields)
 
-(define-fun temp___2322 () us_rep1 (mk___rep1 (mk___split_discrs temp___232)
-                                   (mk___split_fields1 temp___2321)))
+(define-fun temp___2222 () us_rep1 (mk___rep1 (mk___split_discrs temp___222)
+                                   (mk___split_fields1 temp___2221)))
 
 (define-fun o13 () us_rep1 (mk___rep1 (mk___split_discrs o8)
                            (mk___split_fields1 o9)))
@@ -754,8 +741,8 @@
 (define-fun o15 () us_rep1 (mk___rep1 (mk___split_discrs o4)
                            (mk___split_fields1 o5)))
 
-(define-fun temp___2312 () us_rep1 (mk___rep1 (mk___split_discrs temp___231)
-                                   (mk___split_fields1 temp___2311)))
+(define-fun temp___2212 () us_rep1 (mk___rep1 (mk___split_discrs temp___221)
+                                   (mk___split_fields1 temp___2211)))
 
 ;; H
   (assert (= (to_rep o1) 1))
@@ -770,16 +757,16 @@
   (assert (= o o3))
 
 ;; H
-  (assert (= temp___231 o3))
+  (assert (= temp___221 o3))
 
 ;; H
-  (assert (= temp___2311 o2))
+  (assert (= temp___2211 o2))
 
 ;; H
-  (assert (dynamic_predicate1 temp___2312))
+  (assert (dynamic_predicate1 temp___2212))
 
 ;; H
-  (assert (= o15 temp___2312))
+  (assert (= o15 temp___2212))
 
 ;; H
   (assert (= o14 o15))
@@ -788,13 +775,13 @@
   (assert (= o13 o14))
 
 ;; H
-  (assert (= temp___2322 o13))
+  (assert (= temp___2222 o13))
 
 ;; H
-  (assert (dynamic_predicate temp___2322))
+  (assert (dynamic_predicate temp___2222))
 
 ;; H
-  (assert (= with_iterable__set_to_0__first__assume temp___2322))
+  (assert (= with_iterable__set_to_0__first__assume temp___2222))
 
 ;; H
   (assert
@@ -825,21 +812,14 @@
   (assert (= o12 (mk___split_fields o11)))
 
 ;; H
-  (assert (= temp___235 (mk___rep o12)))
+  (assert (= temp___225 (mk___rep o12)))
 
 ;; H
   (assert
   (= result1 (mk___split_fields__ref (mk___split_fields a__split_fields))))
 
 ;; H
-  (assert (= a__split_fields1 (us_split_fields1 temp___235)))
-
-;; H
-  (assert (has_element__function_guard
-  (has_element (mk___rep a__split_fields1)
-  (mk___rep1 first__split_discrs first__split_fields1))
-  (mk___rep a__split_fields1)
-  (mk___rep1 first__split_discrs first__split_fields1)))
+  (assert (= a__split_fields1 (us_split_fields1 temp___225)))
 
 (assert
 ;; WP_parameter_def

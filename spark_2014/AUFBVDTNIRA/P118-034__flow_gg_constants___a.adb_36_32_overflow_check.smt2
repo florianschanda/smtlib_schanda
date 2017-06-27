@@ -117,84 +117,64 @@
   (forall ((x Int) (y Int))
   (! (=>
      (and (dynamic_invariant x true true true) (dynamic_invariant y true true
-     true))
-     (let ((result (add_annotated_local x y)))
-     (=> (add_annotated_local__function_guard result x y) (dynamic_invariant
-     result true false true)))) :pattern ((add_annotated_local x y)) )))
+     true)) (dynamic_invariant (add_annotated_local x y) true false true)) :pattern (
+  (add_annotated_local x y)) )))
 
 ;; add_annotated_local__def_axiom
   (assert
   (forall ((x Int) (y Int))
   (! (=>
-     (and
      (and (dynamic_invariant x true true true) (dynamic_invariant y true true
-     true)) (add_annotated_local__function_guard (add_annotated_local x y) x
-     y)) (= (add_annotated_local x y) (+ x y))) :pattern ((add_annotated_local
-                                                          x y)) )))
+     true)) (= (add_annotated_local x y) (+ x y))) :pattern ((add_annotated_local
+                                                             x y)) )))
 
 ;; c3__def_axiom
-  (assert
-  (and (add_annotated_local__function_guard (add_annotated_local 42 44) 42
-  44) (= c3 (add_annotated_local 42 44))))
+  (assert (= c3 (add_annotated_local 42 44)))
 
 ;; c4__def_axiom
-  (assert
-  (and (add_annotated_local__function_guard (add_annotated_local 42 c3) 42
-  c3) (= c4 (add_annotated_local 42 c3))))
+  (assert (= c4 (add_annotated_local 42 c3)))
 
 ;; c5__def_axiom
-  (assert
-  (and (add_annotated__function_guard (add_annotated c3 c4) c3 c4)
-  (= c5 (add_annotated c3 c4))))
+  (assert (= c5 (add_annotated c3 c4)))
 
 ;; c6__def_axiom
-  (assert
-  (and (add_annotated__function_guard (add_annotated c3 c5) c3 c5)
-  (= c6 (add_annotated c3 c5))))
+  (assert (= c6 (add_annotated c3 c5)))
 
 ;; c7__def_axiom
-  (assert (and (add__function_guard (add c5 c6) c5 c6) (= c7 (add c5 c6))))
+  (assert (= c7 (add c5 c6)))
 
 ;; c8__def_axiom
-  (assert (and (add__function_guard (add c5 c7) c5 c7) (= c8 (add c5 c7))))
+  (assert (= c8 (add c5 c7)))
 
 ;; add__post_axiom
   (assert
   (forall ((x Int) (y Int))
   (! (=>
      (and (dynamic_invariant x true true true) (dynamic_invariant y true true
-     true))
-     (let ((result (add x y)))
-     (=> (add__function_guard result x y) (dynamic_invariant result true
-     false true)))) :pattern ((add x y)) )))
+     true)) (dynamic_invariant (add x y) true false true)) :pattern (
+  (add x y)) )))
 
 ;; add__def_axiom
   (assert
   (forall ((x Int) (y Int))
   (! (=>
-     (and
      (and (dynamic_invariant x true true true) (dynamic_invariant y true true
-     true)) (add__function_guard (add x y) x y)) (= (add x y) (+ x y))) :pattern (
-  (add x y)) )))
+     true)) (= (add x y) (+ x y))) :pattern ((add x y)) )))
 
 ;; add_annotated__post_axiom
   (assert
   (forall ((x Int) (y Int))
   (! (=>
      (and (dynamic_invariant x true true true) (dynamic_invariant y true true
-     true))
-     (let ((result (add_annotated x y)))
-     (=> (add_annotated__function_guard result x y) (dynamic_invariant result
-     true false true)))) :pattern ((add_annotated x y)) )))
+     true)) (dynamic_invariant (add_annotated x y) true false true)) :pattern (
+  (add_annotated x y)) )))
 
 ;; add_annotated__def_axiom
   (assert
   (forall ((x Int) (y Int))
   (! (=>
-     (and
      (and (dynamic_invariant x true true true) (dynamic_invariant y true true
-     true)) (add_annotated__function_guard (add_annotated x y) x y))
-     (= (add_annotated x y) (+ x y))) :pattern ((add_annotated x y)) )))
+     true)) (= (add_annotated x y) (+ x y))) :pattern ((add_annotated x y)) )))
 
 (declare-fun o () Int)
 

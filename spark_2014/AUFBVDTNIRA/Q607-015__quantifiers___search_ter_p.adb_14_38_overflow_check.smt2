@@ -406,10 +406,6 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -430,9 +426,9 @@
 
 (declare-sort t1 0)
 
-(declare-fun first3 (t1) integer)
+(declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -441,7 +437,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep (first3 (mk1 f l))) f) (= (to_rep (last3 (mk1 f l))) l)))) :pattern (
+     (and (= (to_rep (first2 (mk1 f l))) f) (= (to_rep (last2 (mk1 f l))) l)))) :pattern (
   (mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
@@ -458,12 +454,12 @@
 (define-fun of_array1 ((a (Array Int integer)) (f Int)
   (l Int)) us_t1 (mk___t1 a (mk1 f l)))
 
-(define-fun first4 ((a us_t1)) Int (to_rep (first3 (rt1 a))))
+(define-fun first3 ((a us_t1)) Int (to_rep (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first4 a) (last4 a))
-                                    (+ (- (last4 a) (first4 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size2 () Int)
 
@@ -497,9 +493,9 @@
   (assert (forall ((a (Array Int integer))) (<= 0 (object__alignment2 a))))
 
 (define-fun bool_eq6 ((x us_t1)
-  (y us_t1)) Bool (bool_eq2 (elts1 x) (to_rep (first3 (rt1 x)))
-                  (to_rep (last3 (rt1 x))) (elts1 y)
-                  (to_rep (first3 (rt1 y))) (to_rep (last3 (rt1 y)))))
+  (y us_t1)) Bool (bool_eq2 (elts1 x) (to_rep (first2 (rt1 x)))
+                  (to_rep (last2 (rt1 x))) (elts1 y)
+                  (to_rep (first2 (rt1 y))) (to_rep (last2 (rt1 y)))))
 
 (declare-fun user_eq5 (us_t1 us_t1) Bool)
 
@@ -515,12 +511,11 @@
   (assert
   (forall ((a us_t) (b us_t))
   (forall ((j Int))
-  (! (=> (equal_subrange__function_guard (equal_subrange a j b) a j b)
-     (= (= (equal_subrange a j b) true)
+  (! (= (= (equal_subrange a j b) true)
      (= (let ((temp___153 (let ((temp___152 (+ (- j 1) (length b))))
                           (of_array1 (to_array a) j temp___152))))
-        (bool_eq2 (to_array1 temp___153) (first4 temp___153)
-        (last4 temp___153) (to_array b) (first1 b) (last1 b))) true))) :pattern (
+        (bool_eq2 (to_array1 temp___153) (first3 temp___153)
+        (last3 temp___153) (to_array b) (first1 b) (last1 b))) true)) :pattern (
   (equal_subrange a j b)) ))))
 
 (declare-fun has_sub_range_in_prefix (us_t Int us_t) Bool)
@@ -534,17 +529,12 @@
 ;; has_sub_range_in_prefix__def_axiom
   (assert
   (forall ((a us_t) (b us_t))
-  (forall ((last5 Int))
-  (! (=> (has_sub_range_in_prefix__function_guard
-     (has_sub_range_in_prefix a last5 b) a last5 b)
-     (and
-     (forall ((j Int)) (equal_subrange__function_guard (equal_subrange a j b)
-     a j b))
-     (= (= (has_sub_range_in_prefix a last5 b) true)
+  (forall ((last4 Int))
+  (! (= (= (has_sub_range_in_prefix a last4 b) true)
      (exists ((j Int))
-     (and (and (<= (first1 a) j) (<= j last5))
-     (= (equal_subrange a j b) true)))))) :pattern ((has_sub_range_in_prefix
-                                                    a last5 b)) ))))
+     (and (and (<= (first1 a) j) (<= j last4))
+     (= (equal_subrange a j b) true)))) :pattern ((has_sub_range_in_prefix a
+                                                  last4 b)) ))))
 
 (declare-fun has_sub_range (us_t us_t) Bool)
 
@@ -556,12 +546,8 @@
 ;; has_sub_range__def_axiom
   (assert
   (forall ((a us_t) (b us_t))
-  (! (=> (has_sub_range__function_guard (has_sub_range a b) a b)
-     (and (has_sub_range_in_prefix__function_guard
-     (has_sub_range_in_prefix a (- (+ (last1 a) 1) (length b)) b) a
-     (- (+ (last1 a) 1) (length b)) b)
-     (= (= (has_sub_range a b) true)
-     (= (has_sub_range_in_prefix a (- (+ (last1 a) 1) (length b)) b) true)))) :pattern (
+  (! (= (= (has_sub_range a b) true)
+     (= (has_sub_range_in_prefix a (- (+ (last1 a) 1) (length b)) b) true)) :pattern (
   (has_sub_range a b)) )))
 
 (declare-fun a () us_t)
@@ -573,10 +559,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
-
-(declare-fun first5 () Int)
-
-(declare-fun last5 () Int)
 
 (define-fun dynamic_property3 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))

@@ -989,25 +989,6 @@
 (define-fun tTsearch_stringSP1__ref___projection ((a tTsearch_stringSP1__ref)) tTsearch_stringSP1 
   (tTsearch_stringSP1__content a))
 
-(declare-sort t6b 0)
-
-(define-fun in_range7 ((x Int)) Bool (and (<= 1 x) (<= x 1)))
-
-(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
-
-(declare-fun user_eq7 (t6b t6b) Bool)
-
-(declare-fun dummy7 () t6b)
-
-(declare-datatypes () ((t6b__ref (mk_t6b__ref (t6b__content t6b)))))
-(define-fun t6b__ref___projection ((a t6b__ref)) t6b (t6b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
@@ -1037,11 +1018,9 @@
 
 (declare-fun contains3__result () Bool)
 
-(declare-fun o () (Array Int character))
+(declare-fun o () Int)
 
 (declare-fun o1 () Int)
-
-(declare-fun o2 () Int)
 
 (declare-fun result () (Array Int character))
 
@@ -1086,13 +1065,10 @@
   (assert (< 0 (length s)))
 
 ;; H
-  (assert (= o (contains3__search_string__aggregate_def ch)))
-
-;; H
   (assert (= (mk_map__ref result) (mk_map__ref search_string)))
 
 ;; H
-  (assert (= search_string1 o))
+  (assert (= search_string1 (contains3__search_string__aggregate_def ch)))
 
 ;; H
   (assert (=> (<= 0 2147483647) (in_range4 result_index)))
@@ -1104,18 +1080,18 @@
 
 ;; H
   (assert
-  (and (= o1 (to_rep1 (first (rt s)))) (in_range2 (to_rep1 (first (rt s))))))
+  (and (= o (to_rep1 (first (rt s)))) (in_range2 (to_rep1 (first (rt s))))))
 
 ;; H
   (assert
-  (and (= o2 (index__4 s (mk___t search_string1 (mk 1 1)) o1 0 identity))
-  (in_range4 o2)))
+  (and (= o1 (index__4 s (mk___t search_string1 (mk 1 1)) o 0 identity))
+  (in_range4 o1)))
 
 ;; H
   (assert (= (mk_int__ref result1) (mk_int__ref result_index)))
 
 ;; H
-  (assert (= result_index1 o2))
+  (assert (= result_index1 o1))
 
 ;; H
   (assert

@@ -972,11 +972,6 @@
 
 ;; H
   (assert
-  (forall ((k Int)) (q__function_guard (q (get1 (model__ s) k))
-  (get1 (model__ s) k))))
-
-;; H
-  (assert
   (forall ((k Int))
   (=> (and (in_range2 k) (= (has_key (model__ s) k) true))
   (= (q (get1 (model__ s) k)) true))))

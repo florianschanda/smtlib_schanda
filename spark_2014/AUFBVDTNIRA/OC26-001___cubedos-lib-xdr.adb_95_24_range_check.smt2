@@ -694,11 +694,11 @@
 
 (declare-fun i () Int)
 
-(declare-fun temp___478 () (_ BitVec 64))
+(declare-fun temp___470 () (_ BitVec 64))
 
-(declare-fun temp___476 () (Array Int octet))
+(declare-fun temp___468 () (Array Int octet))
 
-(declare-fun temp___474 () (_ BitVec 64))
+(declare-fun temp___466 () (_ BitVec 64))
 
 (declare-fun o () octet)
 
@@ -808,13 +808,13 @@
   (assert (= i1 1))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 8)) (= temp___478 temporary_11)))
+  (assert (=> (and (<= 1 i1) (<= i1 8)) (= temp___470 temporary_11)))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 8)) (= temp___476 data)))
+  (assert (=> (and (<= 1 i1) (<= i1 8)) (= temp___468 data)))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 8)) (= temp___474 temporary_2)))
+  (assert (=> (and (<= 1 i1) (<= i1 8)) (= temp___466 temporary_2)))
 
 ;; H
   (assert (=> (and (<= 1 i1) (<= i1 8)) (and (<= 1 i2) (<= i2 8))))

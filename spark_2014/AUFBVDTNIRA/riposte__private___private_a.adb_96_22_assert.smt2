@@ -361,10 +361,8 @@
 
 ;; get_length__post_axiom
   (assert
-  (forall ((the_stack us_rep))
-  (! (let ((result (get_length the_stack)))
-     (=> (get_length__function_guard result the_stack) (dynamic_invariant
-     result true false true))) :pattern ((get_length the_stack)) )))
+  (forall ((the_stack us_rep)) (! (dynamic_invariant (get_length the_stack)
+  true false true) :pattern ((get_length the_stack)) )))
 
 (declare-datatypes ()
 ((map__ref1 (mk_map__ref1 (map__content1 (Array Int us_rep))))))
@@ -474,10 +472,6 @@
 
 ;; H
   (assert (= x__split_fields4 (us_split_fields1 (select a 5))))
-
-;; H
-  (assert (get_length__function_guard
-  (get_length (mk___rep x__split_fields4)) (mk___rep x__split_fields4)))
 
 (assert
 ;; WP_parameter_def

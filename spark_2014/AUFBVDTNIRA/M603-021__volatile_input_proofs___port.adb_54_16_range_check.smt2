@@ -260,10 +260,8 @@
 ;; c__post_axiom
   (assert
   (forall ((s (_ BitVec 32)))
-  (! (=> (dynamic_invariant2 s true true true)
-     (let ((result (c s)))
-     (=> (c__function_guard result s) (dynamic_invariant3 result true false
-     true)))) :pattern ((c s)) )))
+  (! (=> (dynamic_invariant2 s true true true) (dynamic_invariant3 (c s) true
+     false true)) :pattern ((c s)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
@@ -301,8 +299,7 @@
   (assert (= tmp1 o))
 
 ;; H
-  (assert
-  (and (and (= o1 (c tmp1)) (c__function_guard o1 tmp1)) (in_range2 o1)))
+  (assert (and (= o1 (c tmp1)) (in_range2 o1)))
 
 (assert
 ;; WP_parameter_def

@@ -606,6 +606,38 @@
 (define-fun mailboxT__ref___projection ((a mailboxT__ref)) us_rep1 (mailboxT__content
                                                                    a))
 
+(declare-fun temp___207 (us_rep) (Array (_ BitVec 8) us_rep))
+
+;; def_axiom
+  (assert
+  (forall ((temp___209 us_rep))
+  (forall ((temp___210 (_ BitVec 8)))
+  (= (select (temp___207 temp___209) temp___210) temp___209))))
+
+(define-fun default_initial_assumption ((temp___expr_205 us_rep1)
+  (temp___skip_top_level_206 Bool)) Bool (and
+                                         (and
+                                         (and
+                                         (= (rec__core__mailboxT__messages
+                                            (us_split_fields3
+                                            temp___expr_205)) (temp___207
+                                                              (mk___rep
+                                                              (mk___split_fields
+                                                              (of_rep 0)
+                                                              (of_rep3 0)))))
+                                         (= (to_rep1
+                                            (rec__core__mailboxT__next_in
+                                            (us_split_fields3
+                                            temp___expr_205))) ((_ int2bv 8) 0)))
+                                         (= (to_rep1
+                                            (rec__core__mailboxT__next_out
+                                            (us_split_fields3
+                                            temp___expr_205))) ((_ int2bv 8) 0)))
+                                         (= (to_rep2
+                                            (rec__core__mailboxT__count
+                                            (us_split_fields3
+                                            temp___expr_205))) 0)))
+
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
 (define-fun dynamic_invariant1 ((temp___expr_33 Int) (temp___is_init_30 Bool)

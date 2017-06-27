@@ -267,8 +267,8 @@
 (define-fun widget_t__ref___projection ((a widget_t__ref)) us_rep1 (widget_t__content
                                                                    a))
 
-(define-fun default_initial_assumption ((temp___expr_152 us_rep1)
-  (temp___skip_top_level_153 Bool)) Bool (= (attr__tag1 temp___expr_152) 
+(define-fun default_initial_assumption ((temp___expr_148 us_rep1)
+  (temp___skip_top_level_149 Bool)) Bool (= (attr__tag1 temp___expr_148) 
   us_tag1))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
@@ -458,8 +458,8 @@
 (define-fun nice_widget_t__ref___projection ((a nice_widget_t__ref)) us_rep2 
   (nice_widget_t__content a))
 
-(define-fun default_initial_assumption1 ((temp___expr_170 us_rep2)
-  (temp___skip_top_level_171 Bool)) Bool (= (attr__tag2 temp___expr_170) 
+(define-fun default_initial_assumption1 ((temp___expr_163 us_rep2)
+  (temp___skip_top_level_164 Bool)) Bool (= (attr__tag2 temp___expr_163) 
   us_tag2))
 
 (declare-datatypes ()
@@ -550,16 +550,16 @@
 (declare-datatypes () ((pair__ref (mk_pair__ref (pair__content us_rep3)))))
 (define-fun pair__ref___projection ((a pair__ref)) us_rep3 (pair__content a))
 
-(define-fun default_initial_assumption2 ((temp___expr_207 us_rep3)
-  (temp___skip_top_level_208 Bool)) Bool (and
+(define-fun default_initial_assumption2 ((temp___expr_198 us_rep3)
+  (temp___skip_top_level_199 Bool)) Bool (and
                                          (= (attr__tag1
                                             (rec__tests__pair__a
                                             (us_split_fields7
-                                            temp___expr_207))) us_tag1)
+                                            temp___expr_198))) us_tag1)
                                          (= (attr__tag2
                                             (rec__tests__pair__b
                                             (us_split_fields7
-                                            temp___expr_207))) us_tag2)))
+                                            temp___expr_198))) us_tag2)))
 
 (declare-fun a__attr__tag () Int)
 

@@ -119,18 +119,15 @@
 
 ;; bad_priority__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (bad_priority us_void_param)))
-     (=> (bad_priority__function_guard result us_void_param)
-     (dynamic_invariant result true false true))) :pattern ((bad_priority
-                                                            us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant
+  (bad_priority us_void_param) true false
+  true) :pattern ((bad_priority us_void_param)) )))
 
 ;; bad_priority__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (bad_priority__function_guard (bad_priority us_void_param)
-     us_void_param) (= (bad_priority us_void_param) 98)) :pattern ((bad_priority
-                                                                   us_void_param)) )))
+  (! (= (bad_priority us_void_param) 98) :pattern ((bad_priority
+                                                   us_void_param)) )))
 
 (define-fun dynamic_invariant1 ((temp___expr_153 Int)
   (temp___is_init_150 Bool) (temp___skip_constant_151 Bool)
@@ -139,9 +136,6 @@
                                       (<= 0 98)) (in_range temp___expr_153)))
 
 (declare-fun self__ () pt1)
-
-;; H
-  (assert (bad_priority__function_guard (bad_priority Tuple0) Tuple0))
 
 (assert
 ;; WP_parameter_def

@@ -407,9 +407,6 @@
 
 (declare-fun us_HEAP () us_type_of_heap)
 
-;; H
-  (assert (length__function_guard (length1 this us_HEAP) this us_HEAP))
-
 (assert
 ;; WP_parameter_def
  ;; File "shared_ptr.ads", line 12, characters 0-0

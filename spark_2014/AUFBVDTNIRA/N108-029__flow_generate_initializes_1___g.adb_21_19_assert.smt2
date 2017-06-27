@@ -73,26 +73,19 @@
 ;; foo__post_axiom
   (assert
   (forall ((g__inst__tmp Int))
-  (! (=> (dynamic_invariant g__inst__tmp true true true)
-     (let ((result (foo g__inst__tmp)))
-     (=> (foo__function_guard result g__inst__tmp) (dynamic_invariant result
-     true false true)))) :pattern ((foo g__inst__tmp)) )))
+  (! (=> (dynamic_invariant g__inst__tmp true true true) (dynamic_invariant
+     (foo g__inst__tmp) true false true)) :pattern ((foo g__inst__tmp)) )))
 
 ;; foo__def_axiom
   (assert
   (forall ((g__inst__tmp Int))
-  (! (=>
-     (and (dynamic_invariant g__inst__tmp true true true)
-     (foo__function_guard (foo g__inst__tmp) g__inst__tmp))
+  (! (=> (dynamic_invariant g__inst__tmp true true true)
      (= (foo g__inst__tmp) g__inst__tmp)) :pattern ((foo g__inst__tmp)) )))
 
 (declare-fun tmp () Int)
 
 ;; H
   (assert (in_range tmp))
-
-;; H
-  (assert (foo__function_guard (foo tmp) tmp))
 
 (assert
 ;; WP_parameter_def

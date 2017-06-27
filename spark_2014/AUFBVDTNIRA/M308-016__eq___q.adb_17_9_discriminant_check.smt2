@@ -282,9 +282,6 @@
 
 (declare-fun x__split_fields3 () Bool)
 
-(define-fun temp___1653 () us_rep (mk___rep (mk___split_discrs temp___165)
-                                  (mk___split_fields temp___1651 temp___1652)))
-
 (define-fun temp___1623 () us_rep (mk___rep (mk___split_discrs temp___162)
                                   (mk___split_fields temp___1621 temp___1622)))
 
@@ -301,13 +298,9 @@
 
 ;; H
   (assert
-  (and
   (= temp___1623 (change
                  (mk___rep x__split_discrs
-                 (mk___split_fields x__split_fields x__split_fields1))))
-  (change__function_guard temp___1623
-  (mk___rep x__split_discrs
-  (mk___split_fields x__split_fields x__split_fields1)))))
+                 (mk___split_fields x__split_fields x__split_fields1)))))
 
 ;; H
   (assert (= temp___162 (rec__q__t__b x__split_discrs)))
@@ -338,13 +331,12 @@
 
 ;; H
   (assert
-  (and
-  (= temp___1653 (change
-                 (mk___rep y__split_discrs
-                 (mk___split_fields y__split_fields y__split_fields1))))
-  (change__function_guard temp___1653
-  (mk___rep y__split_discrs
-  (mk___split_fields y__split_fields y__split_fields1)))))
+  (= (mk___rep (mk___split_discrs temp___165)
+     (mk___split_fields temp___1651 temp___1652)) (change
+                                                  (mk___rep y__split_discrs
+                                                  (mk___split_fields
+                                                  y__split_fields
+                                                  y__split_fields1)))))
 
 (assert
 ;; WP_parameter_def

@@ -325,13 +325,9 @@
 
 ;; H
   (assert
-  (and
   (= temp___1623 (change
                  (mk___rep x__split_discrs
-                 (mk___split_fields x__split_fields x__split_fields1))))
-  (change__function_guard temp___1623
-  (mk___rep x__split_discrs
-  (mk___split_fields x__split_fields x__split_fields1)))))
+                 (mk___split_fields x__split_fields x__split_fields1)))))
 
 ;; H
   (assert (= temp___162 (rec__q__t__b x__split_discrs)))
@@ -362,13 +358,9 @@
 
 ;; H
   (assert
-  (and
   (= temp___1653 (change
                  (mk___rep y__split_discrs
-                 (mk___split_fields y__split_fields y__split_fields1))))
-  (change__function_guard temp___1653
-  (mk___rep y__split_discrs
-  (mk___split_fields y__split_fields y__split_fields1)))))
+                 (mk___split_fields y__split_fields y__split_fields1)))))
 
 ;; H
   (assert (= temp___165 (rec__q__t__b y__split_discrs)))

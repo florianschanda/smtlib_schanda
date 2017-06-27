@@ -211,8 +211,7 @@
   (assert
   (forall ((b (Array Int index)))
   (forall ((k Int))
-  (! (=> (consistent__function_guard (consistent b k) b k)
-     (= (= (consistent b k) true)
+  (! (= (= (consistent b k) true)
      (forall ((i Int))
      (=> (and (<= 1 i) (<= i k))
      (forall ((j Int))
@@ -220,7 +219,7 @@
      (and
      (and (not (= (to_rep (select b i)) (to_rep (select b j))))
      (not (= (- i j) (- (to_rep (select b i)) (to_rep (select b j))))))
-     (not (= (- i j) (- (to_rep (select b j)) (to_rep (select b i)))))))))))) :pattern (
+     (not (= (- i j) (- (to_rep (select b j)) (to_rep (select b i))))))))))) :pattern (
   (consistent b k)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -245,9 +244,6 @@
   (assert (in_range1 i))
 
 ;; H
-  (assert (consistent__function_guard (consistent b (- i 1)) b (- i 1)))
-
-;; H
   (assert
   (and
   (and (not (= done__ true))
@@ -258,8 +254,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= result (consistent b i)) (consistent__function_guard result b i))
+  (and (= result (consistent b i))
   (= (= result true)
   (forall ((i1 Int))
   (=> (and (<= 1 i1) (<= i1 i))
@@ -272,9 +267,6 @@
 
 ;; H
   (assert (not (= result true)))
-
-;; H
-  (assert (consistent__function_guard (consistent c i) c i))
 
 (assert
 ;; WP_parameter_def

@@ -463,9 +463,8 @@
      (and (dynamic_invariant1 v0 true true true) (dynamic_invariant1 v1 true
      true true))
      (let ((result (xor2 v0 v1)))
-     (=> (xor2__function_guard result v0 v1)
      (and (= result (bvxor v0 v1)) (dynamic_invariant1 result true false
-     true))))) :pattern ((xor2 v0 v1)) )))
+     true)))) :pattern ((xor2 v0 v1)) )))
 
 (declare-fun left () us_t)
 
@@ -480,10 +479,6 @@
 (declare-fun result____last () tindexB)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
-
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -606,9 +601,7 @@
   (assert (= o2 (to_rep1 o1)))
 
 ;; H
-  (assert
-  (and (and (= o6 (xor2 o2 o5)) (xor2__function_guard o6 o2 o5))
-  (= o6 (bvxor o2 o5))))
+  (assert (and (= o6 (xor2 o2 o5)) (= o6 (bvxor o2 o5))))
 
 ;; H
   (assert (= (to_rep1 o7) o6))
@@ -621,13 +614,6 @@
 
 ;; H
   (assert (= result__1 o8))
-
-;; H
-  (assert
-  (forall ((pos1 Int)) (xor2__function_guard
-  (xor2 (to_rep1 (select (elts left) pos1))
-  (to_rep1 (select (elts right) pos1))) (to_rep1 (select (elts left) pos1))
-  (to_rep1 (select (elts right) pos1)))))
 
 ;; H
   (assert
@@ -644,12 +630,12 @@
   (=> (<= (to_rep result____first) (to_rep result____last))
   (dynamic_property1 (to_rep result____first) (to_rep result____last) 
   i2))
-  (forall ((temp___297 Int))
+  (forall ((temp___291 Int))
   (=>
-  (and (<= (to_rep result____first) temp___297)
-  (<= temp___297 (to_rep result____last)))
-  (=> (< i2 temp___297)
-  (= (select result__2 temp___297) (select result__ temp___297))))))
+  (and (<= (to_rep result____first) temp___291)
+  (<= temp___291 (to_rep result____last)))
+  (=> (< i2 temp___291)
+  (= (select result__2 temp___291) (select result__ temp___291))))))
   (and (<= (to_rep result____first) i2) (<= i2 (to_rep result____last)))))
 
 ;; H

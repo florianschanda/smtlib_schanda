@@ -306,10 +306,6 @@
 
 (declare-fun remove_last__function_guard (us_t us_t) Bool)
 
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -330,9 +326,9 @@
 
 (declare-sort t1 0)
 
-(declare-fun first3 (t1) integer)
+(declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -341,7 +337,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range f)
      (=> (in_range l)
-     (and (= (to_rep (first3 (mk1 f l))) f) (= (to_rep (last3 (mk1 f l))) l)))) :pattern (
+     (and (= (to_rep (first2 (mk1 f l))) f) (= (to_rep (last2 (mk1 f l))) l)))) :pattern (
   (mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
@@ -358,12 +354,12 @@
 (define-fun of_array1 ((a (Array Int integer)) (f Int)
   (l Int)) us_t1 (mk___t1 a (mk1 f l)))
 
-(define-fun first4 ((a us_t1)) Int (to_rep (first3 (rt1 a))))
+(define-fun first3 ((a us_t1)) Int (to_rep (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first4 a) (last4 a))
-                                    (+ (- (last4 a) (first4 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size1 () Int)
 
@@ -397,9 +393,9 @@
   (assert (forall ((a (Array Int integer))) (<= 0 (object__alignment1 a))))
 
 (define-fun bool_eq5 ((x us_t1)
-  (y us_t1)) Bool (bool_eq1 (elts1 x) (to_rep (first3 (rt1 x)))
-                  (to_rep (last3 (rt1 x))) (elts1 y)
-                  (to_rep (first3 (rt1 y))) (to_rep (last3 (rt1 y)))))
+  (y us_t1)) Bool (bool_eq1 (elts1 x) (to_rep (first2 (rt1 x)))
+                  (to_rep (last2 (rt1 x))) (elts1 y)
+                  (to_rep (first2 (rt1 y))) (to_rep (last2 (rt1 y)))))
 
 (declare-fun user_eq4 (us_t1 us_t1) Bool)
 
@@ -412,22 +408,19 @@
   (assert
   (forall ((a us_t))
   (! (=> (and (dynamic_invariant1 a true true true) (< 0 (length a)))
-     (let ((result (remove_last a)))
-     (=> (remove_last__function_guard result a) (dynamic_invariant1 result
-     true false true)))) :pattern ((remove_last a)) )))
+     (dynamic_invariant1 (remove_last a) true false true)) :pattern (
+  (remove_last a)) )))
 
 ;; remove_last__def_axiom
   (assert
   (forall ((a us_t))
-  (! (=>
-     (and (dynamic_invariant1 a true true true) (remove_last__function_guard
-     (remove_last a) a))
+  (! (=> (dynamic_invariant1 a true true true)
      (= (remove_last a) (let ((temp___164 (let ((temp___163 (- (last1 a) 1)))
                                           (let ((temp___162 (first1 a)))
                                           (of_array1 (to_array a) temp___162
                                           temp___163)))))
-                        (of_array (to_array1 temp___164) (first4 temp___164)
-                        (last4 temp___164))))) :pattern ((remove_last a)) )))
+                        (of_array (to_array1 temp___164) (first3 temp___164)
+                        (last3 temp___164))))) :pattern ((remove_last a)) )))
 
 (declare-fun occ (us_t Int) Int)
 
@@ -473,8 +466,7 @@
      (and (dynamic_invariant1 a true true true) (dynamic_invariant e true
      true true))
      (let ((result (occ a e)))
-     (=> (occ__function_guard result a e)
-     (and (<= result (length a)) (dynamic_invariant2 result true false true))))) :pattern (
+     (and (<= result (length a)) (dynamic_invariant2 result true false true)))) :pattern (
   (occ a e)) ))))
 
 ;; occ__def_axiom
@@ -482,11 +474,8 @@
   (forall ((a us_t))
   (forall ((e Int))
   (! (=>
-     (and
      (and (dynamic_invariant1 a true true true) (dynamic_invariant e true
-     true true)) (occ__function_guard (occ a e) a e))
-     (and (occ_def__function_guard (occ_def a e) a e)
-     (= (occ a e) (occ_def a e)))) :pattern ((occ a e)) ))))
+     true true)) (= (occ a e) (occ_def a e))) :pattern ((occ a e)) ))))
 
 (declare-fun a () us_t)
 
@@ -505,22 +494,13 @@
   (forall ((a1 us_t))
   (forall ((e1 Int))
   (! (=>
-     (and
      (and (dynamic_invariant1 a1 true true true) (dynamic_invariant e1 true
-     true true)) (occ_def__function_guard (occ_def a1 e1) a1 e1))
-     (and (remove_last__function_guard (remove_last a1) a1)
-     (and (remove_last__function_guard (remove_last a1) a1)
-     (and (occ_def__function_guard (occ_def (remove_last a1) e1)
-     (remove_last a1) e1)
-     (and (remove_last__function_guard (remove_last a1) a1)
-     (and (remove_last__function_guard (remove_last a1) a1)
-     (and (occ_def__function_guard (occ_def (remove_last a1) e1)
-     (remove_last a1) e1)
+     true true))
      (= (occ_def a1 e1) (ite (= (length a1) 0) 0
                         (ite (= (to_rep (select (to_array a1) (last1 a1))) e1)
                         (+ (occ_def (remove_last a1) e1) 1)
-                        (occ_def (remove_last a1) e1))))))))))) :pattern (
-  (occ_def a1 e1)) ))))
+                        (occ_def (remove_last a1) e1))))) :pattern ((occ_def
+                                                                    a1 e1)) ))))
 
 (define-fun dynamic_invariant3 ((temp___expr_136 Int)
   (temp___is_init_133 Bool) (temp___skip_constant_134 Bool)
@@ -548,18 +528,6 @@
 (define-fun o7 () us_t (mk___t o5 o6))
 
 (define-fun o8 () us_t (mk___t o3 o4))
-
-;; H
-  (assert (occ__function_guard (occ o8 e) o8 e))
-
-;; H
-  (assert (occ__function_guard (occ o7 e) o7 e))
-
-;; H
-  (assert (occ__function_guard (occ o8 e) o8 e))
-
-;; H
-  (assert (occ__function_guard (occ o7 e) o7 e))
 
 ;; H
   (assert (dynamic_invariant1 a true false true))
@@ -593,31 +561,25 @@
   (= (to_rep (select (elts b) (to_rep (last (rt b))))) e)
   (not (= (to_rep (select (elts b) (to_rep (last (rt b))))) e))))
   (and
-  (and (and (= o7 (remove_last b)) (remove_last__function_guard o7 b))
+  (and (= o7 (remove_last b))
   (and (dynamic_invariant1 o7 true false true)
   (and (= (elts b) o5)
   (= (mk
      (to_rep
-     (first3 (mk1 (to_rep (first (rt b))) (- (to_rep (last (rt b))) 1))))
+     (first2 (mk1 (to_rep (first (rt b))) (- (to_rep (last (rt b))) 1))))
      (to_rep
-     (last3 (mk1 (to_rep (first (rt b))) (- (to_rep (last (rt b))) 1))))) 
+     (last2 (mk1 (to_rep (first (rt b))) (- (to_rep (last (rt b))) 1))))) 
   o6))))
   (and
-  (and (and (= o8 (remove_last a)) (remove_last__function_guard o8 a))
+  (and (= o8 (remove_last a))
   (and (dynamic_invariant1 o8 true false true)
   (and (= (elts a) o3)
   (= (mk
      (to_rep
-     (first3 (mk1 (to_rep (first (rt a))) (- (to_rep (last (rt a))) 1))))
+     (first2 (mk1 (to_rep (first (rt a))) (- (to_rep (last (rt a))) 1))))
      (to_rep
-     (last3 (mk1 (to_rep (first (rt a))) (- (to_rep (last (rt a))) 1))))) 
+     (last2 (mk1 (to_rep (first (rt a))) (- (to_rep (last (rt a))) 1))))) 
   o4)))) (= (occ o8 e) (occ o7 e))))))))
-
-;; H
-  (assert (occ__function_guard (occ a e) a e))
-
-;; H
-  (assert (occ__function_guard (occ b e) b e))
 
 (assert
 ;; WP_parameter_def

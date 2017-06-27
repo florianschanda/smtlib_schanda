@@ -84,13 +84,7 @@
   (assert (in_range1 z))
 
 ;; H
-  (assert (forall ((x Int)) (pred__function_guard (pred x) x)))
-
-;; H
   (assert (forall ((x Int)) (=> (and (<= 1 x) (<= x 10)) (= (pred x) true))))
-
-;; H
-  (assert (pred__function_guard (pred z) z))
 
 (assert
 ;; WP_parameter_def

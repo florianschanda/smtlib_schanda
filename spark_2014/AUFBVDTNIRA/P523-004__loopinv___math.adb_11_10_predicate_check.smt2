@@ -224,24 +224,14 @@
 
 (declare-fun sorted__function_guard (Bool (Array Int value)) Bool)
 
-;; temp___result_161_def
-  (assert
-  (forall ((temp___160 (Array Int value))) (sorted__function_guard
-  (sorted temp___160) temp___160)))
-
 (define-fun dynamic_invariant1 ((temp___expr_159 (Array Int value))
   (temp___is_init_156 Bool) (temp___skip_constant_157 Bool)
   (temp___do_toplevel_158 Bool)) Bool (=> (= temp___do_toplevel_158 true)
                                       (=> (= temp___is_init_156 true)
                                       (= (sorted temp___expr_159) true))))
 
-;; temp___result_169_def
-  (assert
-  (forall ((temp___168 (Array Int value))) (sorted__function_guard
-  (sorted temp___168) temp___168)))
-
-(define-fun dynamic_predicate ((temp___167 (Array Int value))) Bool (= 
-  (sorted temp___167) true))
+(define-fun dynamic_predicate ((temp___166 (Array Int value))) Bool (= 
+  (sorted temp___166) true))
 
 (declare-fun i5s () (Array Int value))
 
@@ -268,11 +258,10 @@
 ;; sorted__def_axiom
   (assert
   (forall ((v (Array Int value)))
-  (! (=> (sorted__function_guard (sorted v) v)
-     (= (= (sorted v) true)
+  (! (= (= (sorted v) true)
      (forall ((j Int))
      (=> (and (<= 1 j) (<= j 99))
-     (<= (to_rep (select v j)) (to_rep (select v (+ j 1)))))))) :pattern (
+     (<= (to_rep (select v j)) (to_rep (select v (+ j 1))))))) :pattern (
   (sorted v)) )))
 
 (declare-fun v () (Array Int value))
@@ -285,7 +274,7 @@
 
 (declare-fun o () value)
 
-(declare-fun temp___180 () (Array Int value))
+(declare-fun temp___178 () (Array Int value))
 
 (declare-fun result () Int)
 
@@ -304,10 +293,10 @@
 (declare-fun prev_value2 () Int)
 
 ;; H
-  (assert (dynamic_invariant1 i5s true false true))
+  (assert (= (sorted i5s) true))
 
 ;; H
-  (assert (dynamic_invariant1 v true false true))
+  (assert (= (sorted v) true))
 
 ;; H
   (assert (= result prev_value))
@@ -349,10 +338,10 @@
   (assert (= (to_rep o) tmp_value1))
 
 ;; H
-  (assert (= temp___180 (store v j1 o)))
+  (assert (= temp___178 (store v j1 o)))
 
 (assert
 ;; WP_parameter_def
  ;; File "math.ads", line 11, characters 0-0
-  (not (dynamic_predicate temp___180)))
+  (not (dynamic_predicate temp___178)))
 (check-sat)

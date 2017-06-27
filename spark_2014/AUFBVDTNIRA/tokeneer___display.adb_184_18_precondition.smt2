@@ -475,11 +475,11 @@
 (declare-datatypes () ((msgt__ref (mk_msgt__ref (msgt__content msgt)))))
 (define-fun msgt__ref___projection ((a msgt__ref)) msgt (msgt__content a))
 
-(define-fun dynamic_invariant ((temp___expr_864 Int)
-  (temp___is_init_861 Bool) (temp___skip_constant_862 Bool)
-  (temp___do_toplevel_863 Bool)) Bool (=>
-                                      (or (= temp___is_init_861 true)
-                                      (<= 0 7)) (in_range4 temp___expr_864)))
+(define-fun dynamic_invariant ((temp___expr_857 Int)
+  (temp___is_init_854 Bool) (temp___skip_constant_855 Bool)
+  (temp___do_toplevel_856 Bool)) Bool (=>
+                                      (or (= temp___is_init_854 true)
+                                      (<= 0 7)) (in_range4 temp___expr_857)))
 
 (declare-sort msgtextcount 0)
 
@@ -1679,9 +1679,10 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
 
-(declare-sort t31b 0)
+(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
 
-(define-fun in_range8 ((x Int)) Bool (and (<= 1 x) (<= x 50)))
+(define-fun dynamic_property1 ((first_int Int) (last_int Int)
+  (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
 (define-fun bool_eq13 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -1691,18 +1692,16 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
 
-(declare-fun user_eq13 (t31b t31b) Bool)
+(declare-fun user_eq13 (integer integer) Bool)
 
-(declare-fun dummy13 () t31b)
+(declare-fun dummy13 () integer)
 
-(declare-datatypes () ((t31b__ref (mk_t31b__ref (t31b__content t31b)))))
-(define-fun t31b__ref___projection ((a t31b__ref)) t31b (t31b__content a))
+(declare-datatypes () ((t33b__ref (mk_t33b__ref (t33b__content integer)))))
+(define-fun t33b__ref___projection ((a t33b__ref)) integer (t33b__content a))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
+(declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
 
-(declare-fun last2 () Int)
-
-(define-fun dynamic_property1 ((first_int Int) (last_int Int)
+(define-fun dynamic_property2 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
 (define-fun bool_eq14 ((x Int) (y Int)) Bool (ite (= x y) true false))
@@ -1717,40 +1716,18 @@
 
 (declare-fun dummy14 () integer)
 
-(declare-datatypes () ((t33b__ref (mk_t33b__ref (t33b__content integer)))))
-(define-fun t33b__ref___projection ((a t33b__ref)) integer (t33b__content a))
-
-(declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
-
-(declare-fun last3 () Int)
-
-(define-fun dynamic_property2 ((first_int Int) (last_int Int)
-  (x Int)) Bool (and (<= first_int x) (<= x last_int)))
-
-(define-fun bool_eq15 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE10 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) Int)
-
-(declare-fun user_eq15 (integer integer) Bool)
-
-(declare-fun dummy15 () integer)
-
 (declare-datatypes () ((t34b__ref (mk_t34b__ref (t34b__content integer)))))
 (define-fun t34b__ref___projection ((a t34b__ref)) integer (t34b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS9 () Int)
 
-(declare-fun temp___1022 (Int) (Array Int character))
+(declare-fun temp___1015 (Int) (Array Int character))
 
 ;; def_axiom
   (assert
-  (forall ((temp___1024 Int))
-  (forall ((temp___1025 Int))
-  (= (select (temp___1022 temp___1024) temp___1025) (of_rep temp___1024)))))
+  (forall ((temp___1017 Int))
+  (forall ((temp___1018 Int))
+  (= (select (temp___1015 temp___1017) temp___1018) (of_rep temp___1017)))))
 
 (define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -1836,11 +1813,11 @@
                   (mk___split_fields (temp___String_Literal_172 Tuple0)
                   (of_rep2 13))))))))
 
-(define-fun dynamic_invariant5 ((temp___expr_870 Int)
-  (temp___is_init_867 Bool) (temp___skip_constant_868 Bool)
-  (temp___do_toplevel_869 Bool)) Bool (=>
-                                      (or (= temp___is_init_867 true)
-                                      (<= 0 23)) (in_range5 temp___expr_870)))
+(define-fun dynamic_invariant5 ((temp___expr_863 Int)
+  (temp___is_init_860 Bool) (temp___skip_constant_861 Bool)
+  (temp___do_toplevel_862 Bool)) Bool (=>
+                                      (or (= temp___is_init_860 true)
+                                      (<= 0 23)) (in_range5 temp___expr_863)))
 
 (declare-fun temp___String_Literal_149 (tuple0) (Array Int character))
 
@@ -1900,17 +1877,17 @@
                (mk___split_fields (temp___String_Literal_149 Tuple0)
                (of_rep2 0)))))
 
-(define-fun dynamic_invariant6 ((temp___expr_920 Int)
-  (temp___is_init_917 Bool) (temp___skip_constant_918 Bool)
-  (temp___do_toplevel_919 Bool)) Bool (=>
-                                      (or (= temp___is_init_917 true)
-                                      (<= 0 50)) (in_range6 temp___expr_920)))
+(define-fun dynamic_invariant6 ((temp___expr_913 Int)
+  (temp___is_init_910 Bool) (temp___skip_constant_911 Bool)
+  (temp___do_toplevel_912 Bool)) Bool (=>
+                                      (or (= temp___is_init_910 true)
+                                      (<= 0 50)) (in_range6 temp___expr_913)))
 
-(define-fun dynamic_invariant7 ((temp___expr_926 Int)
-  (temp___is_init_923 Bool) (temp___skip_constant_924 Bool)
-  (temp___do_toplevel_925 Bool)) Bool (=>
-                                      (or (= temp___is_init_923 true)
-                                      (<= 1 50)) (in_range7 temp___expr_926)))
+(define-fun dynamic_invariant7 ((temp___expr_919 Int)
+  (temp___is_init_916 Bool) (temp___skip_constant_917 Bool)
+  (temp___do_toplevel_918 Bool)) Bool (=>
+                                      (or (= temp___is_init_916 true)
+                                      (<= 1 50)) (in_range7 temp___expr_919)))
 
 ;; valid_numberlogentries__post_axiom
   (assert true)
@@ -2056,99 +2033,97 @@
 
 (declare-fun o60 () us_rep1)
 
-(declare-fun temp___1026 () (Array Int us_rep1))
+(declare-fun temp___1019 () (Array Int us_rep1))
 
 (declare-fun o61 () scrolltextcount)
 
-(declare-fun o62 () (Array Int character))
-
-(declare-fun o63 () us_split_fields4)
+(declare-fun o62 () us_split_fields4)
 
 (declare-fun display__setvalue__B30b__result__assume () us_rep2)
 
-(declare-fun temp___988 () Int)
+(declare-fun temp___981 () Int)
+
+(declare-fun temp___979 () us_rep2)
+
+(declare-fun temp___982 () us_rep1)
+
+(declare-fun o63 () character)
+
+(declare-fun o64 () (Array Int character))
+
+(declare-fun o65 () us_split_fields4)
+
+(declare-fun temp___978 () us_rep2)
+
+(declare-fun o66 () scrolltextcount)
+
+(declare-fun o67 () us_split_fields4)
 
 (declare-fun temp___986 () us_rep2)
 
-(declare-fun temp___989 () us_rep1)
+(declare-fun o68 () character)
 
-(declare-fun o64 () character)
+(declare-fun o69 () Int)
 
-(declare-fun o65 () (Array Int character))
+(declare-fun o70 () (Array Int character))
 
-(declare-fun o66 () us_split_fields4)
+(declare-fun o71 () us_split_fields4)
 
-(declare-fun temp___985 () us_rep2)
+(declare-fun temp___990 () us_rep2)
 
-(declare-fun o67 () scrolltextcount)
+(declare-fun o72 () character)
 
-(declare-fun o68 () us_split_fields4)
+(declare-fun o73 () Int)
 
-(declare-fun temp___993 () us_rep2)
+(declare-fun o74 () (Array Int character))
 
-(declare-fun o69 () character)
+(declare-fun o75 () us_split_fields4)
 
-(declare-fun o70 () Int)
+(declare-fun temp___994 () us_rep2)
 
-(declare-fun o71 () (Array Int character))
+(declare-fun o76 () character)
 
-(declare-fun o72 () us_split_fields4)
+(declare-fun o77 () Int)
 
-(declare-fun temp___997 () us_rep2)
+(declare-fun o78 () (Array Int character))
 
-(declare-fun o73 () character)
+(declare-fun o79 () us_split_fields4)
 
-(declare-fun o74 () Int)
+(declare-fun temp___998 () us_rep2)
 
-(declare-fun o75 () (Array Int character))
+(declare-fun o80 () Int)
 
-(declare-fun o76 () us_split_fields4)
+(declare-fun o81 () scrolltextcount)
 
-(declare-fun temp___1001 () us_rep2)
+(declare-fun o82 () us_split_fields4)
 
-(declare-fun o77 () character)
+(declare-fun temp___1000 () us_rep2)
 
-(declare-fun o78 () Int)
+(declare-fun temp___1008 () Int)
 
-(declare-fun o79 () (Array Int character))
+(declare-fun temp___1006 () us_rep2)
 
-(declare-fun o80 () us_split_fields4)
+(declare-fun temp___1009 () us_rep1)
+
+(declare-fun temp___1003 () Int)
+
+(declare-fun o83 () character)
+
+(declare-fun o84 () Int)
+
+(declare-fun o85 () (Array Int character))
+
+(declare-fun o86 () us_split_fields4)
 
 (declare-fun temp___1005 () us_rep2)
 
-(declare-fun o81 () Int)
+(declare-fun o87 () Int)
 
-(declare-fun o82 () scrolltextcount)
+(declare-fun o88 () scrolltextcount)
 
-(declare-fun o83 () us_split_fields4)
-
-(declare-fun temp___1007 () us_rep2)
-
-(declare-fun temp___1015 () Int)
+(declare-fun o89 () us_split_fields4)
 
 (declare-fun temp___1013 () us_rep2)
-
-(declare-fun temp___1016 () us_rep1)
-
-(declare-fun temp___1010 () Int)
-
-(declare-fun o84 () character)
-
-(declare-fun o85 () Int)
-
-(declare-fun o86 () (Array Int character))
-
-(declare-fun o87 () us_split_fields4)
-
-(declare-fun temp___1012 () us_rep2)
-
-(declare-fun o88 () Int)
-
-(declare-fun o89 () scrolltextcount)
-
-(declare-fun o90 () us_split_fields4)
-
-(declare-fun temp___1020 () us_rep2)
 
 (declare-fun result () us_split_fields__ref2)
 
@@ -2425,11 +2400,11 @@
 
 ;; H
   (assert
-  (= temp___1026 (display__msgtostrings__aggregate_def o60 o59 o58 o57 
+  (= temp___1019 (display__msgtostrings__aggregate_def o60 o59 o58 o57 
                  o56 o55 o54 o53)))
 
 ;; H
-  (assert (= temp___1026 msgtostrings))
+  (assert (= temp___1019 msgtostrings))
 
 ;; H
   (assert (= (temp___String_Literal_135 Tuple0) nouser))
@@ -2450,13 +2425,10 @@
   (assert (= (to_rep3 o61) 0))
 
 ;; H
-  (assert (= o62 (temp___1022 32)))
+  (assert (= o62 (mk___split_fields2 (temp___1015 32) o61)))
 
 ;; H
-  (assert (= o63 (mk___split_fields2 o62 o61)))
-
-;; H
-  (assert (= display__setvalue__B30b__result__assume (mk___rep2 o63)))
+  (assert (= display__setvalue__B30b__result__assume (mk___rep2 o62)))
 
 ;; H
   (assert
@@ -2483,7 +2455,7 @@
          (rec__display__msglinet__len
          (us_split_fields1
          (rec__display__msgstrt__top (us_split_fields3 c27b)))))))
-  (= temp___988 i2)))
+  (= temp___981 i2)))
 
 ;; H
   (assert
@@ -2493,7 +2465,7 @@
          (rec__display__msglinet__len
          (us_split_fields1
          (rec__display__msgstrt__top (us_split_fields3 c27b)))))))
-  (= temp___986 (mk___rep2 result____split_fields2))))
+  (= temp___979 (mk___rep2 result____split_fields2))))
 
 ;; H
   (assert
@@ -2503,7 +2475,7 @@
          (rec__display__msglinet__len
          (us_split_fields1
          (rec__display__msgstrt__top (us_split_fields3 c27b)))))))
-  (= temp___989 c27b)))
+  (= temp___982 c27b)))
 
 ;; H
   (assert
@@ -2519,7 +2491,7 @@
          (rec__display__msglinet__len
          (us_split_fields1
          (rec__display__msgstrt__top (us_split_fields3 c27b)))))))
-  (= (bool_eq8 c27b temp___989) true))))
+  (= (bool_eq8 c27b temp___982) true))))
 
 ;; H
   (assert
@@ -2532,14 +2504,14 @@
   (and
   (and
   (and
-  (forall ((temp___987 Int))
-  (=> (and (<= 1 temp___987) (<= temp___987 50))
-  (=> (<= i3 temp___987)
-  (= (select (rec__display__scrollstrt__text result____split_fields3) temp___987) (select 
-  (rec__display__scrollstrt__text (us_split_fields5 temp___986)) temp___987)))))
+  (forall ((temp___980 Int))
+  (=> (and (<= 1 temp___980) (<= temp___980 50))
+  (=> (<= i3 temp___980)
+  (= (select (rec__display__scrollstrt__text result____split_fields3) temp___980) (select 
+  (rec__display__scrollstrt__text (us_split_fields5 temp___979)) temp___980)))))
   (= (rec__display__scrollstrt__len result____split_fields3) (rec__display__scrollstrt__len
                                                              (us_split_fields5
-                                                             temp___986))))
+                                                             temp___979))))
   (=>
   (<= 1 (to_rep2
         (rec__display__msglinet__len
@@ -2564,7 +2536,7 @@
          (rec__display__msglinet__len
          (us_split_fields1
          (rec__display__msgstrt__top (us_split_fields3 c27b)))))))
-  (= (to_rep o64) (to_rep
+  (= (to_rep o63) (to_rep
                   (select (rec__display__msglinet__text
                           (us_split_fields1
                           (rec__display__msgstrt__top
@@ -2578,8 +2550,8 @@
          (rec__display__msglinet__len
          (us_split_fields1
          (rec__display__msgstrt__top (us_split_fields3 c27b)))))))
-  (= o65 (store (rec__display__scrollstrt__text result____split_fields3) 
-  i3 o64))))
+  (= o64 (store (rec__display__scrollstrt__text result____split_fields3) 
+  i3 o63))))
 
 ;; H
   (assert
@@ -2589,7 +2561,7 @@
          (rec__display__msglinet__len
          (us_split_fields1
          (rec__display__msgstrt__top (us_split_fields3 c27b)))))))
-  (= o66 (mk___split_fields2 o65
+  (= o65 (mk___split_fields2 o64
          (rec__display__scrollstrt__len result____split_fields3)))))
 
 ;; H
@@ -2600,7 +2572,7 @@
          (rec__display__msglinet__len
          (us_split_fields1
          (rec__display__msgstrt__top (us_split_fields3 c27b)))))))
-  (= temp___985 (mk___rep2 o66))))
+  (= temp___978 (mk___rep2 o65))))
 
 ;; H
   (assert
@@ -2620,7 +2592,7 @@
          (rec__display__msglinet__len
          (us_split_fields1
          (rec__display__msgstrt__top (us_split_fields3 c27b)))))))
-  (= result____split_fields4 (us_split_fields5 temp___985))))
+  (= result____split_fields4 (us_split_fields5 temp___978))))
 
 ;; H
   (assert
@@ -2763,28 +2735,28 @@
 
 ;; H
   (assert
-  (= (to_rep3 o67) (to_rep2
+  (= (to_rep3 o66) (to_rep2
                    (rec__display__msglinet__len
                    (us_split_fields1
                    (rec__display__msgstrt__top (us_split_fields3 c27b)))))))
 
 ;; H
   (assert
-  (= o68 (mk___split_fields2
+  (= o67 (mk___split_fields2
          (rec__display__scrollstrt__text
-         (us_split_fields__content2 result____split_fields7)) o67)))
+         (us_split_fields__content2 result____split_fields7)) o66)))
 
 ;; H
-  (assert (= temp___993 (mk___rep2 o68)))
+  (assert (= temp___986 (mk___rep2 o67)))
 
 ;; H
   (assert (= result3 result____split_fields7))
 
 ;; H
-  (assert (= result____split_fields9 (us_split_fields5 temp___993)))
+  (assert (= result____split_fields9 (us_split_fields5 temp___986)))
 
 ;; H
-  (assert (= (to_rep o69) 32))
+  (assert (= (to_rep o68) 32))
 
 ;; H
   (assert
@@ -2794,29 +2766,29 @@
 
 ;; H
   (assert
-  (= o70 (+ (to_rep3 (rec__display__scrollstrt__len result____split_fields9)) 1)))
+  (= o69 (+ (to_rep3 (rec__display__scrollstrt__len result____split_fields9)) 1)))
 
 ;; H
   (assert
-  (= o71 (store (rec__display__scrollstrt__text result____split_fields9) 
-  o70 o69)))
+  (= o70 (store (rec__display__scrollstrt__text result____split_fields9) 
+  o69 o68)))
 
 ;; H
   (assert
-  (= o72 (mk___split_fields2 o71
+  (= o71 (mk___split_fields2 o70
          (rec__display__scrollstrt__len result____split_fields9))))
 
 ;; H
-  (assert (= temp___997 (mk___rep2 o72)))
+  (assert (= temp___990 (mk___rep2 o71)))
 
 ;; H
   (assert (= result4 (mk___split_fields__ref2 result____split_fields9)))
 
 ;; H
-  (assert (= result____split_fields10 (us_split_fields5 temp___997)))
+  (assert (= result____split_fields10 (us_split_fields5 temp___990)))
 
 ;; H
-  (assert (= (to_rep o73) 47))
+  (assert (= (to_rep o72) 47))
 
 ;; H
   (assert
@@ -2826,30 +2798,30 @@
 
 ;; H
   (assert
-  (= o74 (+ (to_rep3
+  (= o73 (+ (to_rep3
             (rec__display__scrollstrt__len result____split_fields10)) 2)))
 
 ;; H
   (assert
-  (= o75 (store (rec__display__scrollstrt__text result____split_fields10) 
-  o74 o73)))
+  (= o74 (store (rec__display__scrollstrt__text result____split_fields10) 
+  o73 o72)))
 
 ;; H
   (assert
-  (= o76 (mk___split_fields2 o75
+  (= o75 (mk___split_fields2 o74
          (rec__display__scrollstrt__len result____split_fields10))))
 
 ;; H
-  (assert (= temp___1001 (mk___rep2 o76)))
+  (assert (= temp___994 (mk___rep2 o75)))
 
 ;; H
   (assert (= result5 (mk___split_fields__ref2 result____split_fields10)))
 
 ;; H
-  (assert (= result____split_fields11 (us_split_fields5 temp___1001)))
+  (assert (= result____split_fields11 (us_split_fields5 temp___994)))
 
 ;; H
-  (assert (= (to_rep o77) 32))
+  (assert (= (to_rep o76) 32))
 
 ;; H
   (assert
@@ -2859,52 +2831,52 @@
 
 ;; H
   (assert
-  (= o78 (+ (to_rep3
+  (= o77 (+ (to_rep3
             (rec__display__scrollstrt__len result____split_fields11)) 3)))
 
 ;; H
   (assert
-  (= o79 (store (rec__display__scrollstrt__text result____split_fields11) 
-  o78 o77)))
+  (= o78 (store (rec__display__scrollstrt__text result____split_fields11) 
+  o77 o76)))
 
 ;; H
   (assert
-  (= o80 (mk___split_fields2 o79
+  (= o79 (mk___split_fields2 o78
          (rec__display__scrollstrt__len result____split_fields11))))
 
 ;; H
-  (assert (= temp___1005 (mk___rep2 o80)))
+  (assert (= temp___998 (mk___rep2 o79)))
 
 ;; H
   (assert (= result6 (mk___split_fields__ref2 result____split_fields11)))
 
 ;; H
-  (assert (= result____split_fields12 (us_split_fields5 temp___1005)))
+  (assert (= result____split_fields12 (us_split_fields5 temp___998)))
 
 ;; H
   (assert
   (and
-  (= o81 (+ (to_rep3
+  (= o80 (+ (to_rep3
             (rec__display__scrollstrt__len result____split_fields12)) 3))
   (in_range6
   (+ (to_rep3 (rec__display__scrollstrt__len result____split_fields12)) 3))))
 
 ;; H
-  (assert (= (to_rep3 o82) o81))
+  (assert (= (to_rep3 o81) o80))
 
 ;; H
   (assert
-  (= o83 (mk___split_fields2
-         (rec__display__scrollstrt__text result____split_fields12) o82)))
+  (= o82 (mk___split_fields2
+         (rec__display__scrollstrt__text result____split_fields12) o81)))
 
 ;; H
-  (assert (= temp___1007 (mk___rep2 o83)))
+  (assert (= temp___1000 (mk___rep2 o82)))
 
 ;; H
   (assert (= result7 (mk___split_fields__ref2 result____split_fields12)))
 
 ;; H
-  (assert (= result____split_fields13 (us_split_fields5 temp___1007)))
+  (assert (= result____split_fields13 (us_split_fields5 temp___1000)))
 
 ;; H
   (assert (= result8 (mk_int__ref i1)))
@@ -2920,7 +2892,7 @@
          (rec__display__msglinet__len
          (us_split_fields1
          (rec__display__msgstrt__bottom (us_split_fields3 c27b)))))))
-  (= temp___1015 i8)))
+  (= temp___1008 i8)))
 
 ;; H
   (assert
@@ -2930,7 +2902,7 @@
          (rec__display__msglinet__len
          (us_split_fields1
          (rec__display__msgstrt__bottom (us_split_fields3 c27b)))))))
-  (= temp___1013 (mk___rep2 result____split_fields13))))
+  (= temp___1006 (mk___rep2 result____split_fields13))))
 
 ;; H
   (assert
@@ -2940,7 +2912,7 @@
          (rec__display__msglinet__len
          (us_split_fields1
          (rec__display__msgstrt__bottom (us_split_fields3 c27b)))))))
-  (= temp___1016 c27b)))
+  (= temp___1009 c27b)))
 
 ;; H
   (assert
@@ -2957,7 +2929,7 @@
          (rec__display__msglinet__len
          (us_split_fields1
          (rec__display__msgstrt__bottom (us_split_fields3 c27b)))))))
-  (= (bool_eq8 c27b temp___1016) true))
+  (= (bool_eq8 c27b temp___1009) true))
   (= (to_rep3 (rec__display__scrollstrt__len result____split_fields14)) (+ 
   (to_rep2
   (rec__display__msglinet__len
@@ -2975,7 +2947,7 @@
   (and
   (= (rec__display__scrollstrt__len result____split_fields14) (rec__display__scrollstrt__len
                                                               (us_split_fields5
-                                                              temp___1013)))
+                                                              temp___1006)))
   (=>
   (<= 1 (to_rep2
         (rec__display__msglinet__len
@@ -3000,7 +2972,7 @@
          (rec__display__msglinet__len
          (us_split_fields1
          (rec__display__msgstrt__bottom (us_split_fields3 c27b)))))))
-  (= (to_rep o84) (to_rep
+  (= (to_rep o83) (to_rep
                   (select (rec__display__msglinet__text
                           (us_split_fields1
                           (rec__display__msgstrt__bottom
@@ -3015,7 +2987,7 @@
          (us_split_fields1
          (rec__display__msgstrt__bottom (us_split_fields3 c27b)))))))
   (and
-  (= temp___1010 (+ (to_rep3
+  (= temp___1003 (+ (to_rep3
                     (rec__display__scrollstrt__len result____split_fields14)) 
   i9)) (in_range1
   (+ (to_rep3 (rec__display__scrollstrt__len result____split_fields14)) 
@@ -3029,7 +3001,7 @@
          (rec__display__msglinet__len
          (us_split_fields1
          (rec__display__msgstrt__bottom (us_split_fields3 c27b)))))))
-  (and (<= 1 temp___1010) (<= temp___1010 50))))
+  (and (<= 1 temp___1003) (<= temp___1003 50))))
 
 ;; H
   (assert
@@ -3039,7 +3011,7 @@
          (rec__display__msglinet__len
          (us_split_fields1
          (rec__display__msgstrt__bottom (us_split_fields3 c27b)))))))
-  (= o85 temp___1010)))
+  (= o84 temp___1003)))
 
 ;; H
   (assert
@@ -3049,8 +3021,8 @@
          (rec__display__msglinet__len
          (us_split_fields1
          (rec__display__msgstrt__bottom (us_split_fields3 c27b)))))))
-  (= o86 (store (rec__display__scrollstrt__text result____split_fields14) 
-  o85 o84))))
+  (= o85 (store (rec__display__scrollstrt__text result____split_fields14) 
+  o84 o83))))
 
 ;; H
   (assert
@@ -3060,7 +3032,7 @@
          (rec__display__msglinet__len
          (us_split_fields1
          (rec__display__msgstrt__bottom (us_split_fields3 c27b)))))))
-  (= o87 (mk___split_fields2 o86
+  (= o86 (mk___split_fields2 o85
          (rec__display__scrollstrt__len result____split_fields14)))))
 
 ;; H
@@ -3071,7 +3043,7 @@
          (rec__display__msglinet__len
          (us_split_fields1
          (rec__display__msgstrt__bottom (us_split_fields3 c27b)))))))
-  (= temp___1012 (mk___rep2 o87))))
+  (= temp___1005 (mk___rep2 o86))))
 
 ;; H
   (assert
@@ -3091,7 +3063,7 @@
          (rec__display__msglinet__len
          (us_split_fields1
          (rec__display__msgstrt__bottom (us_split_fields3 c27b)))))))
-  (= result____split_fields15 (us_split_fields5 temp___1012))))
+  (= result____split_fields15 (us_split_fields5 temp___1005))))
 
 ;; H
   (assert
@@ -3235,7 +3207,7 @@
 ;; H
   (assert
   (and
-  (= o88 (+ (to_rep3
+  (= o87 (+ (to_rep3
             (rec__display__scrollstrt__len
             (us_split_fields__content2 result____split_fields18))) (to_rep2
                                                                    (rec__display__msglinet__len
@@ -3254,22 +3226,22 @@
                                                             c27b)))))))))
 
 ;; H
-  (assert (= (to_rep3 o89) o88))
+  (assert (= (to_rep3 o88) o87))
 
 ;; H
   (assert
-  (= o90 (mk___split_fields2
+  (= o89 (mk___split_fields2
          (rec__display__scrollstrt__text
-         (us_split_fields__content2 result____split_fields18)) o89)))
+         (us_split_fields__content2 result____split_fields18)) o88)))
 
 ;; H
-  (assert (= temp___1020 (mk___rep2 o90)))
+  (assert (= temp___1013 (mk___rep2 o89)))
 
 ;; H
   (assert (= result10 result____split_fields18))
 
 ;; H
-  (assert (= result____split_fields20 (us_split_fields5 temp___1020)))
+  (assert (= result____split_fields20 (us_split_fields5 temp___1013)))
 
 ;; H
   (assert
@@ -3278,10 +3250,6 @@
 
 ;; H
   (assert (= c28b__split_fields2 result____split_fields20))
-
-;; H
-  (assert (valid_numberlogentries__function_guard
-  (valid_numberlogentries state) state))
 
 (assert
 ;; WP_parameter_def

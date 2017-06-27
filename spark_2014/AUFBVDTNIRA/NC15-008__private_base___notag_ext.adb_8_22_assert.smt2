@@ -152,16 +152,13 @@
 
 ;; sum__post_axiom
   (assert
-  (forall ((x us_rep))
-  (! (let ((result (sum x)))
-     (=> (sum__function_guard result x) (dynamic_invariant result true false
-     true))) :pattern ((sum x)) )))
+  (forall ((x us_rep)) (! (dynamic_invariant (sum x) true false
+  true) :pattern ((sum x)) )))
 
 ;; sum__def_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (sum__function_guard (sum x) x)
-     (= (sum x) (to_rep (rec__notag_base__t__c (us_split_fields1 x))))) :pattern (
+  (! (= (sum x) (to_rep (rec__notag_base__t__c (us_split_fields1 x)))) :pattern (
   (sum x)) )))
 
 (declare-fun value__size1 () Int)
@@ -218,10 +215,7 @@
 ;; create__def_axiom
   (assert
   (forall ((c Int))
-  (! (=>
-     (and (dynamic_invariant c true true true) (create__function_guard1
-     (create1 c) c))
-     (and (create__function_guard (create c) c) (= (create1 c) (create c)))) :pattern (
+  (! (=> (dynamic_invariant c true true true) (= (create1 c) (create c))) :pattern (
   (create1 c)) )))
 
 (declare-fun a () us_rep)
@@ -233,26 +227,22 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 ;; a__def_axiom
-  (assert (and (create__function_guard1 (create1 1) 1) (= a (create1 1))))
+  (assert (= a (create1 1)))
 
 ;; b__def_axiom
-  (assert (and (create__function_guard1 (create1 2) 2) (= b (create1 2))))
+  (assert (= b (create1 2)))
 
 ;; create__post_axiom
   (assert
   (forall ((c Int))
-  (! (=> (dynamic_invariant c true true true)
-     (let ((result (create c)))
-     (and (sum__function_guard (sum result) result)
-     (=> (create__function_guard result c) (= (sum result) c))))) :pattern (
+  (! (=> (dynamic_invariant c true true true) (= (sum (create c)) c)) :pattern (
   (create c)) )))
 
 ;; create__def_axiom
   (assert
   (forall ((c Int))
-  (! (=>
-     (and (dynamic_invariant c true true true) (create__function_guard
-     (create c) c)) (= (create c) (mk___rep (mk___split_fields (of_rep c))))) :pattern (
+  (! (=> (dynamic_invariant c true true true)
+     (= (create c) (mk___rep (mk___split_fields (of_rep c))))) :pattern (
   (create c)) )))
 
 (declare-fun notag_ext__test__a__assume () integer)
@@ -268,34 +258,20 @@
                                                   notag_ext__test__a__assume)))
 
 ;; H
-  (assert (create__function_guard (create 1) 1))
-
-;; H
   (assert
-  (and
-  (and (= notag_ext__test__a__assume1 (create1 1)) (create__function_guard1
-  notag_ext__test__a__assume1 1)) (= notag_ext__test__a__assume1 (create 1))))
+  (and (= notag_ext__test__a__assume1 (create1 1))
+  (= notag_ext__test__a__assume1 (create 1))))
 
 ;; H
   (assert (= notag_ext__test__a__assume1 a))
 
 ;; H
-  (assert (create__function_guard (create 2) 2))
-
-;; H
   (assert
-  (and
-  (and (= notag_ext__test__b__assume1 (create1 2)) (create__function_guard1
-  notag_ext__test__b__assume1 2)) (= notag_ext__test__b__assume1 (create 2))))
+  (and (= notag_ext__test__b__assume1 (create1 2))
+  (= notag_ext__test__b__assume1 (create 2))))
 
 ;; H
   (assert (= notag_ext__test__b__assume1 b))
-
-;; H
-  (assert (sum__function_guard (sum a) a))
-
-;; H
-  (assert (sum__function_guard (sum b) b))
 
 (assert
 ;; WP_parameter_def

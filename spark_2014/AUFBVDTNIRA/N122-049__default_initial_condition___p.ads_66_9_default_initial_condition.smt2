@@ -164,26 +164,21 @@
 
 (declare-fun p12__function_guard (Bool us_rep) Bool)
 
-;; temp___result_221_def
-  (assert
-  (forall ((temp___220 us_rep)) (p12__function_guard (p12 temp___220)
-  temp___220)))
-
-(define-fun default_initial_assumption ((temp___expr_218 us_rep)
-  (temp___skip_top_level_219 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_216 us_rep)
+  (temp___skip_top_level_217 Bool)) Bool (and
                                          (and
                                          (= (to_rep
                                             (rec__p__t12__f1
                                             (us_split_fields1
-                                            temp___expr_218))) 0)
+                                            temp___expr_216))) 0)
                                          (= (to_rep
                                             (rec__p__t12__f2
                                             (us_split_fields1
-                                            temp___expr_218))) 0))
+                                            temp___expr_216))) 0))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_219 true))
-                                         (= (p12 temp___expr_218) true))))
+                                         (= temp___skip_top_level_217 true))
+                                         (= (p12 temp___expr_216) true))))
 
 ;; p12__post_axiom
   (assert true)
@@ -195,21 +190,15 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range temp___expr_15)))
 
-(declare-fun temp___245 () integer)
+(declare-fun temp___238 () integer)
 
-(declare-fun temp___2451 () integer)
-
-(define-fun temp___2452 () us_rep (mk___rep
-                                  (mk___split_fields temp___245 temp___2451)))
+(declare-fun temp___2381 () integer)
 
 ;; H
-  (assert (and (= (to_rep temp___245) 0) (= (to_rep temp___2451) 0)))
-
-;; H
-  (assert (p12__function_guard (p12 temp___2452) temp___2452))
+  (assert (and (= (to_rep temp___238) 0) (= (to_rep temp___2381) 0)))
 
 (assert
 ;; WP_parameter_def
  ;; File "p.ads", line 63, characters 0-0
-  (not (= (p12 temp___2452) true)))
+  (not (= (p12 (mk___rep (mk___split_fields temp___238 temp___2381))) true)))
 (check-sat)

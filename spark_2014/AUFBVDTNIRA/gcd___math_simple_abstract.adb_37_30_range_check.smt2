@@ -157,9 +157,8 @@
 ;; divides__def_axiom
   (assert
   (forall ((a Int) (b Int))
-  (! (=> (divides__function_guard (divides a b) a b)
-     (= (= (divides a b) true)
-     (exists ((c Int)) (and (and (<= 1 c) (<= c 2147483647)) (= (* a c) b))))) :pattern (
+  (! (= (= (divides a b) true)
+     (exists ((c Int)) (and (and (<= 1 c) (<= c 2147483647)) (= (* a c) b)))) :pattern (
   (divides a b)) )))
 
 (declare-fun a () Int)

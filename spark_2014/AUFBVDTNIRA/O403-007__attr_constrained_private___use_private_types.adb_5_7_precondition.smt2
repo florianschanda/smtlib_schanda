@@ -246,9 +246,8 @@
 ;; d_zero__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (d_zero__function_guard (d_zero s) s)
-     (= (= (d_zero s) true)
-     (= (to_rep (rec__private_types__simple__d (us_split_discrs1 s))) 0))) :pattern (
+  (! (= (= (d_zero s) true)
+     (= (to_rep (rec__private_types__simple__d (us_split_discrs1 s))) 0)) :pattern (
   (d_zero s)) )))
 
 (define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool)

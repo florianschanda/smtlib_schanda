@@ -122,17 +122,14 @@
 ;; query_x1__post_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (let ((result (query_x1 us_void_param)))
-     (=> (query_x1__function_guard result us_void_param) (= result true))) :pattern (
-  (query_x1 us_void_param)) )))
+  (! (= (query_x1 us_void_param) true) :pattern ((query_x1 us_void_param)) )))
 
 ;; query_x1__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (query_x1__function_guard (query_x1 us_void_param) us_void_param)
-     (= (= (query_x1 us_void_param) true)
-     (= (rec__pack__t1__x (us_split_fields1 x1)) true))) :pattern ((query_x1
-                                                                   us_void_param)) )))
+  (! (= (= (query_x1 us_void_param) true)
+     (= (rec__pack__t1__x (us_split_fields1 x1)) true)) :pattern ((query_x1
+                                                                  us_void_param)) )))
 
 (declare-fun query_x2 (tuple0) Int)
 
@@ -167,8 +164,7 @@
   (assert
   (forall ((us_void_param tuple0))
   (! (let ((result (query_x2 us_void_param)))
-     (=> (query_x2__function_guard result us_void_param)
-     (and (= result 3) (dynamic_invariant result true false true)))) :pattern (
+     (and (= result 3) (dynamic_invariant result true false true))) :pattern (
   (query_x2 us_void_param)) )))
 
 (declare-fun b () Bool)
@@ -185,13 +181,7 @@
   (assert (not (= b true)))
 
 ;; H
-  (assert (query_x1__function_guard (query_x1 Tuple0) Tuple0))
-
-;; H
   (assert (= (query_x1 Tuple0) true))
-
-;; H
-  (assert (query_x2__function_guard (query_x2 Tuple0) Tuple0))
 
 (assert
 ;; WP_parameter_def

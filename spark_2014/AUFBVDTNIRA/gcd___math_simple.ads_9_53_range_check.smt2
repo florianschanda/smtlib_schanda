@@ -157,8 +157,7 @@
 ;; divides__def_axiom
   (assert
   (forall ((a Int) (b Int))
-  (! (=> (divides__function_guard (divides a b) a b)
-     (= (= (divides a b) true) (= (mod2 b a) 0))) :pattern ((divides a b)) )))
+  (! (= (= (divides a b) true) (= (mod2 b a) 0)) :pattern ((divides a b)) )))
 
 (declare-fun a () Int)
 
@@ -176,7 +175,7 @@
 
 (declare-fun o () Int)
 
-(declare-fun temp___136 () Int)
+(declare-fun temp___132 () Int)
 
 (declare-fun o1 () Int)
 
@@ -235,18 +234,6 @@
   (assert (in_range1 b))
 
 ;; H
-  (assert (forall ((x1 Int)) (divides__function_guard (divides x1 a) x1 a)))
-
-;; H
-  (assert (forall ((x1 Int)) (divides__function_guard (divides x1 b) x1 b)))
-
-;; H
-  (assert (forall ((x1 Int)) (divides__function_guard (divides x1 a) x1 a)))
-
-;; H
-  (assert (forall ((x1 Int)) (divides__function_guard (divides x1 b) x1 b)))
-
-;; H
   (assert (and (= o (ite (< a b) a b)) (in_range1 (ite (< a b) a b))))
 
 ;; H
@@ -259,7 +246,7 @@
   (assert (in_range1 c1))
 
 ;; H
-  (assert (=> (< 1 c1) (= temp___136 c1)))
+  (assert (=> (< 1 c1) (= temp___132 c1)))
 
 ;; H
   (assert
@@ -325,9 +312,7 @@
 
 ;; H
   (assert
-  (and
   (and (= result3 (divides math_simple__gcd__result4 a))
-  (divides__function_guard result3 math_simple__gcd__result4 a))
   (= (= result3 true) (= (mod2 a math_simple__gcd__result4) 0))))
 
 ;; H
@@ -335,9 +320,7 @@
 
 ;; H
   (assert
-  (and
   (and (= result4 (divides math_simple__gcd__result4 b))
-  (divides__function_guard result4 math_simple__gcd__result4 b))
   (= (= result4 true) (= (mod2 b math_simple__gcd__result4) 0))))
 
 ;; H

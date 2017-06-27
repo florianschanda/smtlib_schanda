@@ -308,8 +308,7 @@
 (declare-fun result1 () Bool)
 
 ;; H
-  (assert
-  (and (= o (to_duration right)) (to_duration__function_guard o right)))
+  (assert (= o (to_duration right)))
 
 ;; H
   (assert (= o1 (to_fixed o)))
@@ -321,8 +320,7 @@
   (assert (not (= result true)))
 
 ;; H
-  (assert
-  (and (= o2 (to_duration right)) (to_duration__function_guard o2 right)))
+  (assert (= o2 (to_duration right)))
 
 ;; H
   (assert (= o3 (to_fixed o2)))
@@ -334,8 +332,7 @@
   (assert (= result1 true))
 
 ;; H
-  (assert
-  (and (= o4 (to_duration right)) (to_duration__function_guard o4 right)))
+  (assert (= o4 (to_duration right)))
 
 ;; H
   (assert (= o5 (to_fixed o4)))

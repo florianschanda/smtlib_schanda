@@ -71,16 +71,13 @@
   (assert
   (forall ((x Int))
   (! (=> (and (dynamic_invariant x true true true) (< 0 x))
-     (let ((result (id x)))
-     (=> (id__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((id x)) )))
+     (dynamic_invariant (id x) true false true)) :pattern ((id x)) )))
 
 ;; id__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true) (id__function_guard (id x) x))
-     (= (id x) x)) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (id x) x)) :pattern (
+  (id x)) )))
 
 (declare-datatypes ()
 ((us_split_fields
@@ -141,6 +138,30 @@
 ((wrong_initT__ref (mk_wrong_initT__ref (wrong_initT__content us_rep)))))
 (define-fun wrong_initT__ref___projection ((a wrong_initT__ref)) us_rep 
   (wrong_initT__content a))
+
+(declare-fun to_rep (natural) Int)
+
+(declare-fun of_rep (Int) natural)
+
+;; inversion_axiom
+  (assert
+  (forall ((x natural)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x natural)) (! (in_range (to_rep x)) :pattern ((to_rep x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                           (of_rep x))) )))
+
+(define-fun default_initial_assumption ((temp___expr_172 us_rep)
+  (temp___skip_top_level_173 Bool)) Bool (= (to_rep
+                                            (rec__init_concurrent__wrong_initT__v
+                                            (us_split_fields1
+                                            temp___expr_172))) (id 0)))
 
 (declare-fun self__ () us_rep)
 

@@ -431,17 +431,13 @@
   (assert (< 0 left))
 
 ;; H
-  (assert
-  (and (= result (ogt__2 right time_span_zero)) (ogt__2__function_guard
-  result right time_span_zero)))
+  (assert (= result (ogt__2 right time_span_zero)))
 
 ;; H
   (assert (= result true))
 
 ;; H
-  (assert
-  (and (= o (to_duration__2 time_span_last)) (to_duration__2__function_guard
-  o time_span_last)))
+  (assert (= o (to_duration__2 time_span_last)))
 
 ;; H
   (assert (= o1 (to_fixed o)))

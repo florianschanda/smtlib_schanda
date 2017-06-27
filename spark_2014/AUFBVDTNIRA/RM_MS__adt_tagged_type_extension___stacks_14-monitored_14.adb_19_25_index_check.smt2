@@ -619,8 +619,8 @@
 ;; stacks_14__stack__compat_axiom
   (assert true)
 
-(define-fun default_initial_assumption1 ((temp___expr_194 us_rep1)
-  (temp___skip_top_level_195 Bool)) Bool (= (attr__tag1 temp___expr_194) 
+(define-fun default_initial_assumption1 ((temp___expr_190 us_rep1)
+  (temp___skip_top_level_191 Bool)) Bool (= (attr__tag1 temp___expr_190) 
   us_tag1))
 
 (declare-fun s__attr__tag () Int)

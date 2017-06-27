@@ -441,9 +441,7 @@
   (assert
   (forall ((l (Array Int light)))
   (forall ((road_traffic__conflicts (Array Int us_rep)))
-  (! (=> (safety_property__function_guard
-     (safety_property l road_traffic__conflicts) l road_traffic__conflicts)
-     (= (= (safety_property l road_traffic__conflicts) true)
+  (! (= (= (safety_property l road_traffic__conflicts) true)
      (forall ((temp___188 Int))
      (=> (and (<= 1 temp___188) (<= temp___188 8))
      (let ((c (select road_traffic__conflicts temp___188)))
@@ -453,7 +451,7 @@
                   (rec__road_traffic__conflict__left (us_split_fields1 c))))) 0)
      (= (to_rep1
         (select l (to_rep
-                  (rec__road_traffic__conflict__right (us_split_fields1 c))))) 0))))))) :pattern (
+                  (rec__road_traffic__conflict__right (us_split_fields1 c))))) 0)))))) :pattern (
   (safety_property l road_traffic__conflicts)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -485,19 +483,15 @@
 (declare-fun l3 () (Array Int light))
 
 ;; H
-  (assert (safety_property__function_guard (safety_property l conflicts) 
-  l conflicts))
-
-;; H
   (assert (in_range1 p))
 
 ;; H
   (assert
   (and
   (and (= (safety_property l conflicts) true) (= (to_rep1 (select l p)) 0))
-  (forall ((temp___230 Int))
-  (=> (and (<= 1 temp___230) (<= temp___230 8))
-  (let ((c (select conflicts temp___230)))
+  (forall ((temp___223 Int))
+  (=> (and (<= 1 temp___223) (<= temp___223 8))
+  (let ((c (select conflicts temp___223)))
   (and
   (and
   (not
@@ -532,10 +526,6 @@
 
 ;; H
   (assert (= l3 l1))
-
-;; H
-  (assert (safety_property__function_guard (safety_property l2 conflicts) 
-  l2 conflicts))
 
 (assert
 ;; WP_parameter_def

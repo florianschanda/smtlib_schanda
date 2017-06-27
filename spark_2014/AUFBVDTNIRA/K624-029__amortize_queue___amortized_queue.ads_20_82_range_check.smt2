@@ -467,22 +467,22 @@
 
 (declare-fun is_empty__function_guard (Bool us_rep) Bool)
 
-(define-fun dynamic_invariant3 ((temp___expr_440 us_rep)
-  (temp___is_init_437 Bool) (temp___skip_constant_438 Bool)
-  (temp___do_toplevel_439 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_438 true))
-                                      (in_range7 r2b temp___expr_440)))
+(define-fun dynamic_invariant3 ((temp___expr_410 us_rep)
+  (temp___is_init_407 Bool) (temp___skip_constant_408 Bool)
+  (temp___do_toplevel_409 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_408 true))
+                                      (in_range7 r2b temp___expr_410)))
 
-(define-fun default_initial_assumption ((temp___expr_442 us_rep)
-  (temp___skip_top_level_443 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_412 us_rep)
+  (temp___skip_top_level_413 Bool)) Bool (and
                                          (= (to_rep
                                             (rec__amortized_queue__my_vectors__vector__capacity
                                             (us_split_discrs1
-                                            temp___expr_442))) r2b)
+                                            temp___expr_412))) r2b)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_443 true))
-                                         (= (is_empty temp___expr_442) true))))
+                                         (= temp___skip_top_level_413 true))
+                                         (= (is_empty temp___expr_412) true))))
 
 (declare-fun result____split_discrs () us_split_discrs)
 
@@ -511,8 +511,6 @@
   (! (=> (in_range1 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
                                                               (of_rep1 x))) )))
 
-(declare-fun last1 () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -536,8 +534,6 @@
 (declare-fun r10b () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -740,11 +736,11 @@
 
 (declare-fun amortized_queue__Oconcat__L_1__R4b__assume () Int)
 
-(declare-fun temp___525 () Int)
+(declare-fun temp___495 () Int)
 
-(declare-fun temp___524 () capacity_range)
+(declare-fun temp___494 () capacity_range)
 
-(declare-fun temp___5241 () us_main_type)
+(declare-fun temp___4941 () us_main_type)
 
 (declare-fun o2 () Int)
 
@@ -752,11 +748,11 @@
 
 (declare-fun amortized_queue__Oconcat__L_2__R10b__assume () Int)
 
-(declare-fun temp___530 () Int)
+(declare-fun temp___500 () Int)
 
-(declare-fun temp___529 () capacity_range)
+(declare-fun temp___499 () capacity_range)
 
-(declare-fun temp___5291 () us_main_type)
+(declare-fun temp___4991 () us_main_type)
 
 (declare-fun o4 () Int)
 
@@ -979,13 +975,13 @@
   (assert (= idx2 1))
 
 ;; H
-  (assert (=> (and (<= 1 idx2) (<= idx2 r4b)) (= temp___525 idx2)))
+  (assert (=> (and (<= 1 idx2) (<= idx2 r4b)) (= temp___495 idx2)))
 
 ;; H
   (assert
   (=> (and (<= 1 idx2) (<= idx2 r4b))
-  (and (= result____split_discrs (mk___split_discrs temp___524))
-  (= result____split_fields temp___5241))))
+  (and (= result____split_discrs (mk___split_discrs temp___494))
+  (= result____split_fields temp___4941))))
 
 ;; H
   (assert
@@ -1134,14 +1130,14 @@
   (assert (= idx8 1))
 
 ;; H
-  (assert (=> (and (<= 1 idx8) (<= idx8 r10b)) (= temp___530 idx8)))
+  (assert (=> (and (<= 1 idx8) (<= idx8 r10b)) (= temp___500 idx8)))
 
 ;; H
   (assert
   (=> (and (<= 1 idx8) (<= idx8 r10b))
-  (and (= result____split_discrs (mk___split_discrs temp___529))
+  (and (= result____split_discrs (mk___split_discrs temp___499))
   (= (us_split_fields__content result____split_fields6) (mk___split_fields
-                                                        temp___5291)))))
+                                                        temp___4991)))))
 
 ;; H
   (assert

@@ -334,13 +334,12 @@
 ;; are_coprime__def_axiom
   (assert
   (forall ((v1 Int) (v2 Int))
-  (! (=> (are_coprime__function_guard (are_coprime v1 v2) v1 v2)
-     (= (= (are_coprime v1 v2) true)
+  (! (= (= (are_coprime v1 v2) true)
      (and (and (< 0 v1) (< 0 v2))
      (forall ((v Int))
      (=> (and (<= 2 v) (<= v (ite (< v1 v2) v1 v2)))
-     (not (and (= (mod2 v1 v) 0) (= (mod2 v2 v) 0)))))))) :pattern ((are_coprime
-                                                                    v1 v2)) )))
+     (not (and (= (mod2 v1 v) 0) (= (mod2 v2 v) 0))))))) :pattern ((are_coprime
+                                                                   v1 v2)) )))
 
 (declare-fun value () Int)
 
@@ -410,13 +409,8 @@
   (assert (<= index1 100000))
 
 ;; H
-  (assert (are_coprime__function_guard (are_coprime value index1) value
-  index1))
-
-;; H
   (assert
-  (and
-  (and (= o (euclid value index1)) (euclid__function_guard o value index1))
+  (and (= o (euclid value index1))
   (and (in_range1 o)
   (ite (= (are_coprime value index1) true) (= o 1) (< 1 o)))))
 
@@ -442,9 +436,6 @@
 
 ;; H
   (assert (= (select result__1 v) true))
-
-;; H
-  (assert (are_coprime__function_guard (are_coprime value v) value v))
 
 (assert
 ;; WP_parameter_def

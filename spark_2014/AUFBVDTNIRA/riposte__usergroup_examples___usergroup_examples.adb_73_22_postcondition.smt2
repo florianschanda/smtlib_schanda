@@ -459,11 +459,6 @@
 (declare-fun v4 () Int)
 
 ;; H
-  (assert
-  (forall ((x Int)) (is_valid__function_guard
-  (is_valid (to_rep (select va x))) (to_rep (select va x)))))
-
-;; H
   (assert (in_range1 i))
 
 ;; H
@@ -634,9 +629,6 @@
 
 ;; H
   (assert (= vca5 vca3))
-
-;; H
-  (assert (is_valid__function_guard (is_valid v3) v3))
 
 (assert
 ;; WP_parameter_def

@@ -86,10 +86,8 @@
   (assert
   (forall ((levels__nested_1__x1 Int))
   (! (=> (dynamic_invariant levels__nested_1__x1 true true true)
-     (let ((result (read_partial_1 levels__nested_1__x1)))
-     (=> (read_partial_1__function_guard result levels__nested_1__x1)
-     (dynamic_invariant result true false true)))) :pattern ((read_partial_1
-                                                             levels__nested_1__x1)) )))
+     (dynamic_invariant (read_partial_1 levels__nested_1__x1) true false
+     true)) :pattern ((read_partial_1 levels__nested_1__x1)) )))
 
 (declare-fun x () Int)
 
@@ -137,9 +135,7 @@
   (assert (in_range y))
 
 ;; H
-  (assert
-  (and (and (= o (read_partial_1 x1)) (read_partial_1__function_guard o x1))
-  (in_range o)))
+  (assert (and (= o (read_partial_1 x1)) (in_range o)))
 
 ;; H
   (assert (= o1 (+ x0 o)))

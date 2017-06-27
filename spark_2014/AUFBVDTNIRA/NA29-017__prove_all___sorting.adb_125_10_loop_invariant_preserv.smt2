@@ -536,22 +536,6 @@
 
 ;; H
   (assert
-  (forall ((j Int)) (sorted__function_guard
-  (sorted (mk___t a1 (mk (to_rep a__first) (to_rep a__last)))
-  (+ a_first (* j l2))
-  (ite (< l2 (- length1 (* j l2))) l2 (- length1 (* j l2))))
-  (mk___t a1 (mk (to_rep a__first) (to_rep a__last))) (+ a_first (* j 
-  l2)) (ite (< l2 (- length1 (* j l2))) l2 (- length1 (* j l2))))))
-
-;; H
-  (assert (perm__function_guard
-  (perm (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t a1 (mk (to_rep a__first) (to_rep a__last))) a_first length1)
-  (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t a1 (mk (to_rep a__first) (to_rep a__last))) a_first length1))
-
-;; H
-  (assert
   (and
   (and
   (forall ((j Int))
@@ -563,26 +547,6 @@
   (= (perm (mk___t a (mk (to_rep a__first) (to_rep a__last)))
      (mk___t a1 (mk (to_rep a__first) (to_rep a__last))) a_first length1) true))
   (<= 1 l2)))
-
-;; H
-  (assert
-  (forall ((j Int)) (sorted__function_guard
-  (sorted (mk___t (map__content a2) (mk (to_rep a__first) (to_rep a__last)))
-  (+ a_first (* (* j l2) 2))
-  (ite (< (* l2 2) (- length1 (* (* j l2) 2))) (* l2 2) (- length1 (* (* j 
-  l2) 2))))
-  (mk___t (map__content a2) (mk (to_rep a__first) (to_rep a__last)))
-  (+ a_first (* (* j l2) 2))
-  (ite (< (* l2 2) (- length1 (* (* j l2) 2))) (* l2 2) (- length1 (* (* j 
-  l2) 2))))))
-
-;; H
-  (assert (perm__function_guard
-  (perm (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t (map__content a2) (mk (to_rep a__first) (to_rep a__last))) 
-  a_first length1) (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t (map__content a2) (mk (to_rep a__first) (to_rep a__last))) 
-  a_first length1))
 
 ;; H
   (assert
@@ -672,19 +636,6 @@
 
 ;; H
   (assert (< (* j (int__content l4)) length1))
-
-;; H
-  (assert (sorted__function_guard
-  (sorted (mk___t (map__content a4) (mk (to_rep a__first) (to_rep a__last)))
-  (+ a_first (* j (int__content l4)))
-  (ite (< (int__content l4) (- length1 (* j (int__content l4)))) (int__content
-                                                                 l4) (- 
-  length1 (* j (int__content l4)))))
-  (mk___t (map__content a4) (mk (to_rep a__first) (to_rep a__last)))
-  (+ a_first (* j (int__content l4)))
-  (ite (< (int__content l4) (- length1 (* j (int__content l4)))) (int__content
-                                                                 l4) (- 
-  length1 (* j (int__content l4))))))
 
 (assert
 ;; WP_parameter_def

@@ -211,8 +211,7 @@
   (assert
   (forall ((b (Array Int index)))
   (forall ((k Int))
-  (! (=> (consistent__function_guard (consistent b k) b k)
-     (= (= (consistent b k) true)
+  (! (= (= (consistent b k) true)
      (forall ((i Int))
      (=> (and (<= 1 i) (<= i k))
      (forall ((j Int))
@@ -220,7 +219,7 @@
      (and
      (and (not (= (to_rep (select b i)) (to_rep (select b j))))
      (not (= (- i j) (- (to_rep (select b i)) (to_rep (select b j))))))
-     (not (= (- i j) (- (to_rep (select b j)) (to_rep (select b i)))))))))))) :pattern (
+     (not (= (- i j) (- (to_rep (select b j)) (to_rep (select b i))))))))))) :pattern (
   (consistent b k)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -272,22 +271,6 @@
 (declare-fun done__7 () Bool)
 
 ;; H
-  (assert (consistent__function_guard (consistent b (- i 1)) b (- i 1)))
-
-;; H
-  (assert (consistent__function_guard (consistent b2 8) b2 8))
-
-;; H
-  (assert (consistent__function_guard (consistent c 8) c 8))
-
-;; H
-  (assert (consistent__function_guard (consistent c i) c i))
-
-;; H
-  (assert
-  (forall ((j Int)) (consistent__function_guard (consistent c j) c j)))
-
-;; H
   (assert (in_range1 i))
 
 ;; H
@@ -306,8 +289,7 @@
   (and (and (= done__2 done__4) (= b2 b3))
   (and (= done__5 done__2) (= b4 b2)))
   (and
-  (and
-  (and (= result (consistent b i)) (consistent__function_guard result b i))
+  (and (= result (consistent b i))
   (= (= result true)
   (forall ((i1 Int))
   (=> (and (<= 1 i1) (<= i1 i))
@@ -332,8 +314,7 @@
   (= (to_rep (select b2 j)) (to_rep (select b j))))))) (= done__2 done__3))))))
   (and
   (and
-  (and
-  (and (= result (consistent b i)) (consistent__function_guard result b i))
+  (and (= result (consistent b i))
   (= (= result true)
   (forall ((i1 Int))
   (=> (and (<= 1 i1) (<= i1 i))
@@ -366,9 +347,6 @@
 
 ;; H
   (assert (= done__6 true))
-
-;; H
-  (assert (consistent__function_guard (consistent b5 8) b5 8))
 
 (assert
 ;; WP_parameter_def

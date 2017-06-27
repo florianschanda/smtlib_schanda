@@ -70,19 +70,13 @@
 
 ;; zero__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (zero us_void_param)))
-     (=> (zero__function_guard result us_void_param) (dynamic_invariant
-     result true false true))) :pattern ((zero us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant (zero us_void_param)
+  true false true) :pattern ((zero us_void_param)) )))
 
 ;; zero__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (zero__function_guard (zero us_void_param) us_void_param)
-     (= (zero us_void_param) 0)) :pattern ((zero us_void_param)) )))
-
-;; H
-  (assert (zero__function_guard (zero Tuple0) Tuple0))
+  (! (= (zero us_void_param) 0) :pattern ((zero us_void_param)) )))
 
 (assert
 ;; WP_parameter_def

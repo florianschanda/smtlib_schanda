@@ -402,12 +402,12 @@
 (define-fun index_type__ref_2__projection ((a index_type__ref)) index_type 
   (index_type__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_720 Int)
-  (temp___is_init_717 Bool) (temp___skip_constant_718 Bool)
-  (temp___do_toplevel_719 Bool)) Bool (=>
-                                      (or (= temp___is_init_717 true)
+(define-fun dynamic_invariant1 ((temp___expr_365 Int)
+  (temp___is_init_362 Bool) (temp___skip_constant_363 Bool)
+  (temp___do_toplevel_364 Bool)) Bool (=>
+                                      (or (= temp___is_init_362 true)
                                       (<= 1 2147483647)) (in_range3
-                                      temp___expr_720)))
+                                      temp___expr_365)))
 
 (declare-fun first_index__function_guard (Int us_rep) Bool)
 

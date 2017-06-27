@@ -1651,34 +1651,7 @@
 ;; within_bounds__2__def_axiom
   (assert
   (forall ((p us_rep))
-  (! (=> (within_bounds__2__function_guard (within_bounds__2 p) p)
-     (and (within_bounds__function_guard
-     (within_bounds
-     (to_rep3 (rec__tetris_integrity__piece__y (us_split_fields1 p)))
-     (to_rep2 (rec__tetris_integrity__piece__x (us_split_fields1 p))))
-     (to_rep3 (rec__tetris_integrity__piece__y (us_split_fields1 p)))
-     (to_rep2 (rec__tetris_integrity__piece__x (us_split_fields1 p))))
-     (and (within_bounds__function_guard
-     (within_bounds
-     (+ (to_rep3 (rec__tetris_integrity__piece__y (us_split_fields1 p))) 1)
-     (+ (to_rep2 (rec__tetris_integrity__piece__x (us_split_fields1 p))) 1))
-     (+ (to_rep3 (rec__tetris_integrity__piece__y (us_split_fields1 p))) 1)
-     (+ (to_rep2 (rec__tetris_integrity__piece__x (us_split_fields1 p))) 1))
-     (and
-     (forall ((y Int) (x Int)) (within_bounds__function_guard
-     (within_bounds
-     (+ (to_rep3 (rec__tetris_integrity__piece__y (us_split_fields1 p))) y)
-     (+ (to_rep2 (rec__tetris_integrity__piece__x (us_split_fields1 p))) x))
-     (+ (to_rep3 (rec__tetris_integrity__piece__y (us_split_fields1 p))) y)
-     (+ (to_rep2 (rec__tetris_integrity__piece__x (us_split_fields1 p))) x)))
-     (and
-     (forall ((y Int) (x Int)) (within_bounds__function_guard
-     (within_bounds
-     (+ (to_rep3 (rec__tetris_integrity__piece__y (us_split_fields1 p))) y)
-     (+ (to_rep2 (rec__tetris_integrity__piece__x (us_split_fields1 p))) x))
-     (+ (to_rep3 (rec__tetris_integrity__piece__y (us_split_fields1 p))) y)
-     (+ (to_rep2 (rec__tetris_integrity__piece__x (us_split_fields1 p))) x)))
-     (= (= (within_bounds__2 p) true)
+  (! (= (= (within_bounds__2 p) true)
      (ite (= (to_rep1 (rec__tetris_integrity__piece__s (us_split_fields1 p))) 2)
      (and
      (= (within_bounds
@@ -1693,10 +1666,10 @@
      (forall ((x Int))
      (=> (and (<= 0 x) (<= x 3))
      (=>
-     (= (let ((temp___663 (select possible_i_shapes (to_rep4
+     (= (let ((temp___644 (select possible_i_shapes (to_rep4
                                                     (rec__tetris_integrity__piece__d
                                                     (us_split_fields1 p))))))
-        (get temp___663 y x)) true)
+        (get temp___644 y x)) true)
      (= (within_bounds
         (+ (to_rep3 (rec__tetris_integrity__piece__y (us_split_fields1 p))) y)
         (+ (to_rep2 (rec__tetris_integrity__piece__x (us_split_fields1 p))) x)) true))))))
@@ -1705,17 +1678,17 @@
      (forall ((x Int))
      (=> (and (<= 0 x) (<= x 2))
      (=>
-     (= (let ((temp___665 (get1 possible_three_shapes
+     (= (let ((temp___645 (get1 possible_three_shapes
                           (to_rep1
                           (rec__tetris_integrity__piece__s
                           (us_split_fields1 p)))
                           (to_rep4
                           (rec__tetris_integrity__piece__d
                           (us_split_fields1 p))))))
-        (get temp___665 y x)) true)
+        (get temp___645 y x)) true)
      (= (within_bounds
         (+ (to_rep3 (rec__tetris_integrity__piece__y (us_split_fields1 p))) y)
-        (+ (to_rep2 (rec__tetris_integrity__piece__x (us_split_fields1 p))) x)) true)))))))))))))) :pattern (
+        (+ (to_rep2 (rec__tetris_integrity__piece__x (us_split_fields1 p))) x)) true))))))))) :pattern (
   (within_bounds__2 p)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
@@ -1895,8 +1868,7 @@
 ;; within_bounds__def_axiom
   (assert
   (forall ((y Int) (x Int))
-  (! (=> (within_bounds__function_guard (within_bounds y x) y x)
-     (= (= (within_bounds y x) true) (and (in_range5 y) (in_range4 x)))) :pattern (
+  (! (= (= (within_bounds y x) true) (and (in_range5 y) (in_range4 x))) :pattern (
   (within_bounds y x)) )))
 
 (declare-fun cur_board () (Array Int (Array Int cell)))
@@ -1974,16 +1946,6 @@
      (of_int 0) (of_int 0) (of_int 1) (of_int 1))
      (temp___495 (of_int 0) (of_int 1) (of_int 0) (of_int 1) (of_int 1)
      (of_int 0) (of_int 1) (of_int 0) (of_int 0))) possible_three_shapes))
-
-;; H
-  (assert (within_bounds__2__function_guard
-  (within_bounds__2
-  (mk___rep
-  (mk___split_fields cur_piece__split_fields cur_piece__split_fields1
-  cur_piece__split_fields2 cur_piece__split_fields3)))
-  (mk___rep
-  (mk___split_fields cur_piece__split_fields cur_piece__split_fields1
-  cur_piece__split_fields2 cur_piece__split_fields3))))
 
 ;; H
   (assert

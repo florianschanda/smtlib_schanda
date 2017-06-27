@@ -527,10 +527,8 @@
 
 ;; rolepresent__post_axiom
   (assert
-  (forall ((theadmin us_rep))
-  (! (let ((result (rolepresent theadmin)))
-     (=> (rolepresent__function_guard result theadmin) (dynamic_invariant
-     result true false true))) :pattern ((rolepresent theadmin)) )))
+  (forall ((theadmin us_rep)) (! (dynamic_invariant (rolepresent theadmin)
+  true false true) :pattern ((rolepresent theadmin)) )))
 
 (declare-fun isdoingop (us_rep) Bool)
 
@@ -708,11 +706,9 @@
 
 ;; theauthcertrole__post_axiom
   (assert
-  (forall ((admintoken__state us_private))
-  (! (let ((result (theauthcertrole admintoken__state)))
-     (=> (theauthcertrole__function_guard result admintoken__state)
-     (dynamic_invariant result true false true))) :pattern ((theauthcertrole
-                                                            admintoken__state)) )))
+  (forall ((admintoken__state us_private)) (! (dynamic_invariant
+  (theauthcertrole admintoken__state) true false
+  true) :pattern ((theauthcertrole admintoken__state)) )))
 
 (declare-fun isgood (us_private) Bool)
 
@@ -1014,12 +1010,12 @@
 ;; valid_numberlogentries__post_axiom
   (assert true)
 
-(define-fun dynamic_invariant7 ((temp___expr_354 Int)
-  (temp___is_init_351 Bool) (temp___skip_constant_352 Bool)
-  (temp___do_toplevel_353 Bool)) Bool (=>
-                                      (or (= temp___is_init_351 true)
+(define-fun dynamic_invariant7 ((temp___expr_324 Int)
+  (temp___is_init_321 Bool) (temp___skip_constant_322 Bool)
+  (temp___do_toplevel_323 Bool)) Bool (=>
+                                      (or (= temp___is_init_321 true)
                                       (<= 1 150)) (in_range6
-                                      temp___expr_354)))
+                                      temp___expr_324)))
 
 ;; nodescription__def_axiom
   (assert (= nodescription (audittypes__nodescription__aggregate_def 32)))
@@ -1027,12 +1023,12 @@
 ;; nouser__def_axiom
   (assert (= nouser (temp___String_Literal_158 Tuple0)))
 
-(define-fun dynamic_invariant8 ((temp___expr_1352 Int)
-  (temp___is_init_1349 Bool) (temp___skip_constant_1350 Bool)
-  (temp___do_toplevel_1351 Bool)) Bool (=>
-                                       (or (= temp___is_init_1349 true)
+(define-fun dynamic_invariant8 ((temp___expr_1240 Int)
+  (temp___is_init_1237 Bool) (temp___skip_constant_1238 Bool)
+  (temp___do_toplevel_1239 Bool)) Bool (=>
+                                       (or (= temp___is_init_1237 true)
                                        (<= 0 2147483647)) (in_range8
-                                       temp___expr_1352)))
+                                       temp___expr_1240)))
 
 (declare-fun theadmin__split_fields () us_split_fields__ref)
 
@@ -1061,18 +1057,6 @@
   (assert (= (temp___String_Literal_158 Tuple0) nouser))
 
 ;; H
-  (assert (ispresent__function_guard
-  (ispresent
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields1)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields1))))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields1)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields1))))
-
-;; H
   (assert
   (and
   (not
@@ -1085,52 +1069,19 @@
      (let ((subject theadmin__split_fields)) theadmin__split_fields1))) true))))
 
 ;; H
-  (assert (valid_numberlogentries__function_guard
-  (valid_numberlogentries state) state))
-
-;; H
   (assert (= (valid_numberlogentries state) true))
 
 ;; H
-  (assert
-  (and (= o (privatekeypresent state1)) (privatekeypresent__function_guard 
-  o state1)))
+  (assert (= o (privatekeypresent state1)))
 
 ;; H
-  (assert
-  (and (= o1 (privatekeypresent state1)) (privatekeypresent__function_guard
-  o1 state1)))
-
-;; H
-  (assert (isgood__function_guard (isgood state3) state3))
-
-;; H
-  (assert (authcertvalid__function_guard (authcertvalid state3) state3))
-
-;; H
-  (assert (theauthcertrole__function_guard (theauthcertrole state3) state3))
+  (assert (= o1 (privatekeypresent state1)))
 
 ;; H
   (assert
   (and
   (and (not (= (isgood state3) true)) (not (= (authcertvalid state3) true)))
   (not (in_range7 (theauthcertrole state3)))))
-
-;; H
-  (assert (privatekeypresent__function_guard (privatekeypresent state1)
-  state1))
-
-;; H
-  (assert (enrolmentisinprogress__function_guard
-  (enrolmentisinprogress state4) state4))
-
-;; H
-  (assert (enrolmentisinprogress__function_guard
-  (enrolmentisinprogress state4) state4))
-
-;; H
-  (assert (statusisenclavequiescent__function_guard
-  (statusisenclavequiescent state4) state4))
 
 ;; H
   (assert
@@ -1141,16 +1092,10 @@
   (= (statusisenclavequiescent state4) true))))
 
 ;; H
-  (assert
-  (and (= result (privatekeypresent state1))
-  (privatekeypresent__function_guard result state1)))
+  (assert (= result (privatekeypresent state1)))
 
 ;; H
   (assert (= result true))
-
-;; H
-  (assert (valid_numberlogentries__function_guard
-  (valid_numberlogentries state2) state2))
 
 (assert
 ;; WP_parameter_def

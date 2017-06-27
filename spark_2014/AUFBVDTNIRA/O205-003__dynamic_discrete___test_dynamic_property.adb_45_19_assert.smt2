@@ -184,10 +184,8 @@
 ;; dyn_return__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (dyn_return x)))
-     (=> (dyn_return__function_guard result x) (dynamic_invariant1 result
-     true false true)))) :pattern ((dyn_return x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant1
+     (dyn_return x) true false true)) :pattern ((dyn_return x)) )))
 
 (define-fun dynamic_invariant3 ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)
@@ -236,9 +234,7 @@
   (assert (dynamic_property1 0 last1 y))
 
 ;; H
-  (assert
-  (and (and (= o1 (dyn_return 30)) (dyn_return__function_guard o1 30))
-  (dynamic_property 1 last o1)))
+  (assert (and (= o1 (dyn_return 30)) (dynamic_property 1 last o1)))
 
 ;; H
   (assert (= result1 x1))
@@ -248,9 +244,6 @@
 
 ;; H
   (assert (<= x2 c))
-
-;; H
-  (assert (dyn_return__function_guard (dyn_return 40) 40))
 
 (assert
 ;; WP_parameter_def

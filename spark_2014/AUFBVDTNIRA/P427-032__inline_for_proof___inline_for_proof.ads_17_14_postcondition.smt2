@@ -240,11 +240,11 @@
 
 ;; H
   (assert
-  (forall ((temp___175 Int))
-  (=> (and (<= 1 temp___175) (<= temp___175 100))
-  (exists ((temp___176 Int))
-  (and (and (<= 1 temp___176) (<= temp___176 100))
-  (= (to_rep (select x temp___175)) (to_rep (select y temp___176))))))))
+  (forall ((temp___173 Int))
+  (=> (and (<= 1 temp___173) (<= temp___173 100))
+  (exists ((temp___174 Int))
+  (and (and (<= 1 temp___174) (<= temp___174 100))
+  (= (to_rep (select x temp___173)) (to_rep (select y temp___174))))))))
 
 (declare-fun i () Int)
 

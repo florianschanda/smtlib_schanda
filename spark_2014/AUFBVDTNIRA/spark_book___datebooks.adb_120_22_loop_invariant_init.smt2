@@ -932,12 +932,12 @@
 (define-fun description_count_type__ref___projection ((a description_count_type__ref)) description_count_type 
   (description_count_type__content a))
 
-(define-fun dynamic_invariant ((temp___expr_235 Int)
-  (temp___is_init_232 Bool) (temp___skip_constant_233 Bool)
-  (temp___do_toplevel_234 Bool)) Bool (=>
-                                      (or (= temp___is_init_232 true)
+(define-fun dynamic_invariant ((temp___expr_231 Int)
+  (temp___is_init_228 Bool) (temp___skip_constant_229 Bool)
+  (temp___do_toplevel_230 Bool)) Bool (=>
+                                      (or (= temp___is_init_228 true)
                                       (<= 0 128)) (in_range10
-                                      temp___expr_235)))
+                                      temp___expr_231)))
 
 (declare-fun to_rep8 (description_count_type) Int)
 
@@ -1160,12 +1160,12 @@
 (define-fun event_index_type__ref___projection ((a event_index_type__ref)) event_index_type 
   (event_index_type__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_262 Int)
-  (temp___is_init_259 Bool) (temp___skip_constant_260 Bool)
-  (temp___do_toplevel_261 Bool)) Bool (=>
-                                      (or (= temp___is_init_259 true)
+(define-fun dynamic_invariant1 ((temp___expr_258 Int)
+  (temp___is_init_255 Bool) (temp___skip_constant_256 Bool)
+  (temp___do_toplevel_257 Bool)) Bool (=>
+                                      (or (= temp___is_init_255 true)
                                       (<= 1 64)) (in_range11
-                                      temp___expr_262)))
+                                      temp___expr_258)))
 
 (declare-datatypes ()
 ((map__ref1 (mk_map__ref1 (map__content1 (Array Int us_rep3))))))
@@ -1259,11 +1259,11 @@
 (define-fun status_type__ref___projection ((a status_type__ref)) status_type 
   (status_type__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_298 Int)
-  (temp___is_init_295 Bool) (temp___skip_constant_296 Bool)
-  (temp___do_toplevel_297 Bool)) Bool (=>
-                                      (or (= temp___is_init_295 true)
-                                      (<= 0 3)) (in_range12 temp___expr_298)))
+(define-fun dynamic_invariant2 ((temp___expr_294 Int)
+  (temp___is_init_291 Bool) (temp___skip_constant_292 Bool)
+  (temp___do_toplevel_293 Bool)) Bool (=>
+                                      (or (= temp___is_init_291 true)
+                                      (<= 0 3)) (in_range12 temp___expr_294)))
 
 (declare-fun book () (Array Int us_rep3))
 
@@ -1282,10 +1282,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
-
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -1307,9 +1303,9 @@
 
 (declare-sort t1 0)
 
-(declare-fun first3 (t1) integer)
+(declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -1318,8 +1314,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first3 (mk1 f l))) f)
-     (= (to_rep1 (last3 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (and (= (to_rep1 (first2 (mk1 f l))) f)
+     (= (to_rep1 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -1335,12 +1331,12 @@
 (define-fun of_array1 ((a (Array Int character)) (f Int)
   (l Int)) us_t1 (mk___t1 a (mk1 f l)))
 
-(define-fun first4 ((a us_t1)) Int (to_rep1 (first3 (rt1 a))))
+(define-fun first3 ((a us_t1)) Int (to_rep1 (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep1 (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first4 a) (last4 a))
-                                    (+ (- (last4 a) (first4 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size6 () Int)
 
@@ -1374,9 +1370,9 @@
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment6 a))))
 
 (define-fun bool_eq20 ((x us_t1)
-  (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep1 (first3 (rt1 x)))
-                  (to_rep1 (last3 (rt1 x))) (elts1 y)
-                  (to_rep1 (first3 (rt1 y))) (to_rep1 (last3 (rt1 y)))))
+  (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep1 (first2 (rt1 x)))
+                  (to_rep1 (last2 (rt1 x))) (elts1 y)
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
 (declare-fun user_eq19 (us_t1 us_t1) Bool)
 
@@ -1388,8 +1384,6 @@
 (declare-fun r12b () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
-
-(declare-fun last5 () Int)
 
 (define-fun dynamic_property3 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -1411,17 +1405,17 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
 
-(declare-fun temp___410 (Int Int Int) us_t1)
+(declare-fun temp___406 (Int Int Int) us_t1)
 
 ;; def_axiom
   (assert
-  (forall ((temp___412 Int) (temp___413 Int) (temp___414 Int))
-  (let ((temp___411 (temp___410 temp___412 temp___413 temp___414)))
+  (forall ((temp___408 Int) (temp___409 Int) (temp___410 Int))
+  (let ((temp___407 (temp___406 temp___408 temp___409 temp___410)))
   (and
-  (=> (dynamic_property 1 2147483647 temp___413 temp___414)
-  (and (= (first4 temp___411) temp___413) (= (last4 temp___411) temp___414)))
-  (forall ((temp___415 Int))
-  (= (select (to_array1 temp___411) temp___415) (of_rep temp___412)))))))
+  (=> (dynamic_property 1 2147483647 temp___409 temp___410)
+  (and (= (first3 temp___407) temp___409) (= (last3 temp___407) temp___410)))
+  (forall ((temp___411 Int))
+  (= (select (to_array1 temp___407) temp___411) (of_rep temp___408)))))))
 
 (define-fun dynamic_invariant3 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -1494,17 +1488,17 @@
 
 (declare-fun i () Int)
 
-(declare-fun temp___417 () (Array Int character))
+(declare-fun temp___413 () (Array Int character))
 
-(declare-fun temp___4171 () t1)
+(declare-fun temp___4131 () t1)
 
-(declare-fun temp___418 () (Array Int character))
+(declare-fun temp___414 () (Array Int character))
 
-(declare-fun temp___4181 () t)
+(declare-fun temp___4141 () t)
 
-(declare-fun temp___419 () (Array Int character))
+(declare-fun temp___415 () (Array Int character))
 
-(declare-fun temp___4191 () t)
+(declare-fun temp___4151 () t)
 
 (declare-fun o () (Array Int character))
 
@@ -1555,47 +1549,47 @@
 ;; H
   (assert
   (= (to_rep1
-     (first3
+     (first2
      (rt1
-     (temp___410 32 (to_rep1 description__first) (to_rep1 description__last))))) 
+     (temp___406 32 (to_rep1 description__first) (to_rep1 description__last))))) 
   (to_rep1 description__first)))
 
 ;; H
   (assert
   (= (to_rep1
-     (last3
+     (last2
      (rt1
-     (temp___410 32 (to_rep1 description__first) (to_rep1 description__last))))) 
+     (temp___406 32 (to_rep1 description__first) (to_rep1 description__last))))) 
   (to_rep1 description__last)))
 
 ;; H
   (assert
-  (= (mk___t1 temp___417 temp___4171) (temp___410 32
+  (= (mk___t1 temp___413 temp___4131) (temp___406 32
                                       (to_rep1 description__first)
                                       (to_rep1 description__last))))
 
 ;; H
-  (assert (= temp___417 temp___418))
+  (assert (= temp___413 temp___414))
 
 ;; H
   (assert
-  (= (mk (to_rep1 (first3 temp___4171)) (to_rep1 (last3 temp___4171))) 
-  temp___4181))
+  (= (mk (to_rep1 (first2 temp___4131)) (to_rep1 (last2 temp___4131))) 
+  temp___4141))
 
 ;; H
   (assert
-  (= (ite (<= (to_rep1 (first temp___4181)) (to_rep1 (last temp___4181)))
-     (+ (- (to_rep1 (last temp___4181)) (to_rep1 (first temp___4181))) 1) 0) 
+  (= (ite (<= (to_rep1 (first temp___4141)) (to_rep1 (last temp___4141)))
+     (+ (- (to_rep1 (last temp___4141)) (to_rep1 (first temp___4141))) 1) 0) 
   (ite (<= (to_rep1 description__first) (to_rep1 description__last))
   (+ (- (to_rep1 description__last) (to_rep1 description__first)) 1) 0)))
 
 ;; H
   (assert
-  (= (mk___t temp___419 temp___4191) (mk___t temp___418 temp___4181)))
+  (= (mk___t temp___415 temp___4151) (mk___t temp___414 temp___4141)))
 
 ;; H
   (assert
-  (= o (slide temp___419 (to_rep1 (first temp___4191))
+  (= o (slide temp___415 (to_rep1 (first temp___4151))
        (to_rep1 description__first))))
 
 ;; H

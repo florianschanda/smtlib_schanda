@@ -459,10 +459,7 @@
 
 ;; id__post_axiom
   (assert
-  (forall ((x us_rep))
-  (! (let ((result (id x)))
-     (=> (id__function_guard result x) (= (bool_eq3 result x) true))) :pattern (
-  (id x)) )))
+  (forall ((x us_rep)) (! (= (bool_eq3 (id x) x) true) :pattern ((id x)) )))
 
 (define-fun in_range4 ((rec__basic__r__x1 Int)
   (a us_rep)) Bool (= rec__basic__r__x1 (to_rep1

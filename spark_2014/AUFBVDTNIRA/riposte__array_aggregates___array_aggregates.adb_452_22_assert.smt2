@@ -224,59 +224,21 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(declare-sort t139b 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 255)))
-
-(define-fun bool_eq2 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
-
-(declare-fun user_eq1 (t139b t139b) Bool)
-
-(declare-fun dummy1 () t139b)
-
-(declare-datatypes () ((t139b__ref (mk_t139b__ref (t139b__content t139b)))))
-(define-fun t139b__ref___projection ((a t139b__ref)) t139b (t139b__content a))
-
-(declare-sort t142b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 255)))
-
-(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq2 (t142b t142b) Bool)
-
-(declare-fun dummy2 () t142b)
-
-(declare-datatypes () ((t142b__ref (mk_t142b__ref (t142b__content t142b)))))
-(define-fun t142b__ref___projection ((a t142b__ref)) t142b (t142b__content a))
-
-(declare-fun temp___689 (Bool) (Array Int Bool))
+(declare-fun temp___680 (Bool) (Array Int Bool))
 
 ;; def_axiom
   (assert
-  (forall ((temp___691 Bool))
-  (forall ((temp___692 Int))
-  (= (select (temp___689 temp___691) temp___692) temp___691))))
+  (forall ((temp___682 Bool))
+  (forall ((temp___683 Int))
+  (= (select (temp___680 temp___682) temp___683) temp___682))))
 
-(declare-fun temp___693 (Bool) (Array Int Bool))
+(declare-fun temp___684 (Bool) (Array Int Bool))
 
 ;; def_axiom
   (assert
-  (forall ((temp___695 Bool))
-  (forall ((temp___696 Int))
-  (= (select (temp___693 temp___695) temp___696) temp___695))))
+  (forall ((temp___686 Bool))
+  (forall ((temp___687 Int))
+  (= (select (temp___684 temp___686) temp___687) temp___686))))
 
 (define-fun dynamic_invariant ((temp___expr_63 Int) (temp___is_init_60 Bool)
   (temp___skip_constant_61 Bool)
@@ -286,20 +248,15 @@
 
 (declare-fun x () (Array Int Bool))
 
-(declare-fun o () (Array Int Bool))
-
 (declare-fun result () (Array Int Bool))
 
 (declare-fun x1 () (Array Int Bool))
 
 ;; H
-  (assert (= o (temp___689 (of_int 1))))
-
-;; H
   (assert (= result x))
 
 ;; H
-  (assert (= x1 o))
+  (assert (= x1 (temp___680 (of_int 1))))
 
 (declare-fun n () Int)
 
@@ -312,5 +269,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "array_aggregates.adb", line 432, characters 0-0
-  (not (= (bool_eq1 x1 0 255 (temp___693 (= n n)) 0 255) true)))
+  (not (= (bool_eq1 x1 0 255 (temp___684 (= n n)) 0 255) true)))
 (check-sat)

@@ -251,25 +251,6 @@
      (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
-(declare-sort t3b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq2 (t3b t3b) Bool)
-
-(declare-fun dummy2 () t3b)
-
-(declare-datatypes () ((t3b__ref (mk_t3b__ref (t3b__content t3b)))))
-(define-fun t3b__ref___projection ((a t3b__ref)) t3b (t3b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
 
 (declare-datatypes ()
@@ -314,7 +295,7 @@
   (forall ((i Int))
   (! (= (select (singleton2 v i) i) v) :pattern ((select (singleton2 v i) i)) ))))
 
-(define-fun bool_eq4 ((a (Array Int Bool)) (a__first Int) (a__last Int)
+(define-fun bool_eq3 ((a (Array Int Bool)) (a__first Int) (a__last Int)
   (b (Array Int Bool)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -332,7 +313,7 @@
   (assert
   (forall ((a (Array Int Bool)) (b (Array Int Bool)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq4 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq3 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -349,7 +330,7 @@
   (forall ((a (Array Int Bool)) (b (Array Int Bool)))
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (! (= (= (compare1 a a_first a_last b b_first b_last) 0)
-     (= (bool_eq4 a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq3 a a_first a_last b b_first b_last) true)) :pattern (
   (compare1 a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -360,7 +341,7 @@
      (exists ((i Int) (j Int))
      (and (<= i a_last)
      (and (< j b_last)
-     (and (= (bool_eq4 a a_first i b b_first j) true)
+     (and (= (bool_eq3 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
      (< (to_int1 (select a (+ i 1))) (to_int1 (select b (+ j 1))))))))))) :pattern (
@@ -374,7 +355,7 @@
      (exists ((i Int) (j Int))
      (and (<= i b_last)
      (and (< j a_last)
-     (and (= (bool_eq4 a a_first j b b_first i) true)
+     (and (= (bool_eq3 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
      (< (to_int1 (select b (+ i 1))) (to_int1 (select a (+ j 1))))))))))) :pattern (
@@ -446,19 +427,17 @@
 
 (declare-fun a () (Array Int integer))
 
-(declare-fun o () (Array Int integer))
+(declare-fun o () integer)
 
-(declare-fun o1 () integer)
+(declare-fun o1 () Int)
 
-(declare-fun o2 () Int)
-
-(declare-fun o3 () (Array Int integer))
+(declare-fun o2 () (Array Int integer))
 
 (declare-fun j () Int)
 
-(declare-fun o4 () Int)
+(declare-fun o3 () Int)
 
-(declare-fun o5 () Bool)
+(declare-fun o4 () Bool)
 
 (declare-fun result () (Array Int integer))
 
@@ -479,13 +458,10 @@
   (assert (in_range1 y))
 
 ;; H
-  (assert (= o (actions__a__aggregate_def 0)))
-
-;; H
   (assert (= result a))
 
 ;; H
-  (assert (= a1 o))
+  (assert (= a1 (actions__a__aggregate_def 0)))
 
 ;; H
   (assert (not (not (<= 1 x))))
@@ -500,22 +476,22 @@
   (assert (not (not (<= y 9))))
 
 ;; H
-  (assert (= (to_rep o1) 1))
+  (assert (= (to_rep o) 1))
 
 ;; H
   (assert (and (<= 1 x) (<= x 10)))
 
 ;; H
-  (assert (= o2 x))
+  (assert (= o1 x))
 
 ;; H
-  (assert (= o3 (store a1 o2 o1)))
+  (assert (= o2 (store a1 o1 o)))
 
 ;; H
   (assert (= result1 a1))
 
 ;; H
-  (assert (= a2 o3))
+  (assert (= a2 o2))
 
 ;; H
   (assert (not (= b1 true)))
@@ -536,13 +512,13 @@
   (assert (not (<= x 5)))
 
 ;; H
-  (assert (and (= o4 (+ y 1)) (in_range1 (+ y 1))))
+  (assert (and (= o3 (+ y 1)) (in_range1 (+ y 1))))
 
 ;; H
-  (assert (= o5 (ite (<= j o4) true false)))
+  (assert (= o4 (ite (<= j o3) true false)))
 
 ;; H
-  (assert (= result3 (ite (<= 6 j) o5 false)))
+  (assert (= result3 (ite (<= 6 j) o4 false)))
 
 ;; H
   (assert

@@ -508,9 +508,9 @@
 (define-fun modular__ref_8__projection ((a modular__ref)) modular (modular__content
                                                                   a))
 
-(define-fun dynamic_invariant1 ((temp___expr_793 (_ BitVec 64))
-  (temp___is_init_790 Bool) (temp___skip_constant_791 Bool)
-  (temp___do_toplevel_792 Bool)) Bool true)
+(define-fun dynamic_invariant1 ((temp___expr_345 (_ BitVec 64))
+  (temp___is_init_342 Bool) (temp___skip_constant_343 Bool)
+  (temp___do_toplevel_344 Bool)) Bool true)
 
 ;; shift_right__post_axiom
   (assert
@@ -518,20 +518,16 @@
   (forall ((amount Int))
   (! (=>
      (and (dynamic_invariant1 v true true true) (dynamic_invariant amount
-     true true true))
-     (let ((result (shift_right v amount)))
-     (=> (shift_right__function_guard result v amount) (dynamic_invariant1
-     result true false true)))) :pattern ((shift_right v amount)) ))))
+     true true true)) (dynamic_invariant1 (shift_right v amount) true false
+     true)) :pattern ((shift_right v amount)) ))))
 
 ;; shift_right__def_axiom
   (assert
   (forall ((v (_ BitVec 64)))
   (forall ((amount Int))
   (! (=>
-     (and
      (and (dynamic_invariant1 v true true true) (dynamic_invariant amount
-     true true true)) (shift_right__function_guard (shift_right v amount) v
-     amount))
+     true true true))
      (= (shift_right v amount) (ite (and (<= 1 64) (<= 64 8))
                                ((_ zero_extend 56) (ite (< amount 8)
                                                    (bvlshr ((_ extract 7 0) v) ((_ int2bv 8) amount))
@@ -556,20 +552,16 @@
   (forall ((amount Int))
   (! (=>
      (and (dynamic_invariant1 v true true true) (dynamic_invariant amount
-     true true true))
-     (let ((result (shift_left v amount)))
-     (=> (shift_left__function_guard result v amount) (dynamic_invariant1
-     result true false true)))) :pattern ((shift_left v amount)) ))))
+     true true true)) (dynamic_invariant1 (shift_left v amount) true false
+     true)) :pattern ((shift_left v amount)) ))))
 
 ;; shift_left__def_axiom
   (assert
   (forall ((v (_ BitVec 64)))
   (forall ((amount Int))
   (! (=>
-     (and
      (and (dynamic_invariant1 v true true true) (dynamic_invariant amount
-     true true true)) (shift_left__function_guard (shift_left v amount) v
-     amount))
+     true true true))
      (= (shift_left v amount) (ite (and (<= 1 64) (<= 64 8))
                               ((_ zero_extend 56) (ite (< amount 8)
                                                   (bvshl ((_ extract 7 0) v) ((_ int2bv 8) amount))
@@ -587,33 +579,26 @@
 
 (declare-fun make_mask__function_guard ((_ BitVec 64) Int) Bool)
 
-(define-fun dynamic_invariant2 ((temp___expr_805 Int)
-  (temp___is_init_802 Bool) (temp___skip_constant_803 Bool)
-  (temp___do_toplevel_804 Bool)) Bool (=>
-                                      (or (= temp___is_init_802 true)
-                                      (<= 1 64)) (in_range1 temp___expr_805)))
+(define-fun dynamic_invariant2 ((temp___expr_357 Int)
+  (temp___is_init_354 Bool) (temp___skip_constant_355 Bool)
+  (temp___do_toplevel_356 Bool)) Bool (=>
+                                      (or (= temp___is_init_354 true)
+                                      (<= 1 64)) (in_range1 temp___expr_357)))
 
 ;; make_mask__post_axiom
   (assert
   (forall ((num_bits Int))
-  (! (=> (dynamic_invariant2 num_bits true true true)
-     (let ((result (make_mask num_bits)))
-     (=> (make_mask__function_guard result num_bits) (dynamic_invariant1
-     result true false true)))) :pattern ((make_mask num_bits)) )))
+  (! (=> (dynamic_invariant2 num_bits true true true) (dynamic_invariant1
+     (make_mask num_bits) true false true)) :pattern ((make_mask num_bits)) )))
 
 ;; make_mask__def_axiom
   (assert
   (forall ((num_bits Int))
-  (! (=>
-     (and (dynamic_invariant2 num_bits true true true)
-     (make_mask__function_guard (make_mask num_bits) num_bits))
-     (and (shift_right__function_guard
-     (shift_right ((_ int2bv 64) 18446744073709551615) (- 64 num_bits))
-     ((_ int2bv 64) 18446744073709551615) (- 64 num_bits))
+  (! (=> (dynamic_invariant2 num_bits true true true)
      (= (make_mask num_bits) (shift_right
                              ((_ int2bv 64) 18446744073709551615)
-                             (- 64 num_bits))))) :pattern ((make_mask
-                                                           num_bits)) )))
+                             (- 64 num_bits)))) :pattern ((make_mask
+                                                          num_bits)) )))
 
 (declare-fun value () (_ BitVec 64))
 

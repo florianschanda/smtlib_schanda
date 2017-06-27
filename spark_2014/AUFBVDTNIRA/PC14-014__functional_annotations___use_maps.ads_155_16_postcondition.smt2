@@ -1272,11 +1272,6 @@
 
 ;; H
   (assert
-  (forall ((cu us_rep1)) (q__function_guard (q (element s cu))
-  (element s cu))))
-
-;; H
-  (assert
   (forall ((cu us_rep1))
   (=> (= (has_key1 (positions s) cu) true) (= (q (element s cu)) true))))
 
@@ -1291,23 +1286,18 @@
   (and (= (has_key1 (positions s) i) true)
   (= (get (keys s) (get1 (positions s) i)) (get temp___444 temp___443))))))))
 
-(define-fun temp___1072 () us_rep2 (keys s))
+(define-fun temp___986 () us_rep2 (keys s))
 
-(declare-fun temp___1071 () Int)
-
-;; H
-  (assert (in_range2 temp___1071))
+(declare-fun temp___985 () Int)
 
 ;; H
-  (assert (= (iter_has_element temp___1072 temp___1071) true))
-
-(define-fun k () Int (get temp___1072 temp___1071))
+  (assert (in_range2 temp___985))
 
 ;; H
-  (assert (q__function_guard (q (get2 (model__ s) k)) (get2 (model__ s) k)))
+  (assert (= (iter_has_element temp___986 temp___985) true))
 
 (assert
 ;; WP_parameter_def
  ;; File "use_maps.ads", line 143, characters 0-0
-  (not (= (q (get2 (model__ s) k)) true)))
+  (not (= (q (get2 (model__ s) (get temp___986 temp___985))) true)))
 (check-sat)

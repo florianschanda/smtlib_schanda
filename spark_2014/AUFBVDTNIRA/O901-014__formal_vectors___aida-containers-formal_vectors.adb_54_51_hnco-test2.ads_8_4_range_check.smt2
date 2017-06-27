@@ -402,14 +402,14 @@
                                       (<= 0 2147483647)) (in_range
                                       temp___expr_213)))
 
-(define-fun dynamic_invariant2 ((temp___expr_315 us_rep1)
-  (temp___is_init_312 Bool) (temp___skip_constant_313 Bool)
-  (temp___do_toplevel_314 Bool)) Bool (in_range2
+(define-fun dynamic_invariant2 ((temp___expr_252 us_rep1)
+  (temp___is_init_249 Bool) (temp___skip_constant_250 Bool)
+  (temp___do_toplevel_251 Bool)) Bool (in_range2
   (to_rep
   (rec__hnco__test2__v_type_owner__vector_type__capacity
-  (us_split_discrs3 temp___expr_315)))
+  (us_split_discrs3 temp___expr_252)))
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector
-  (us_split_fields3 temp___expr_315))))
+  (us_split_fields3 temp___expr_252))))
 
 (define-fun dynamic_invariant3 ((temp___expr_219 Int)
   (temp___is_init_216 Bool) (temp___skip_constant_217 Bool)

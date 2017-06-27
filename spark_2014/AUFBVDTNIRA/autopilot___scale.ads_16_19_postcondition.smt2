@@ -289,9 +289,8 @@
      (and (dynamic_invariant3 val__ true true true) (dynamic_invariant
      flatness true true true))
      (and (and (<= 0 val__) (< 0 flatness)) (<= flatness 100)))
-     (let ((result (inverse val__ flatness)))
-     (=> (inverse__function_guard result val__ flatness) (dynamic_invariant4
-     result true false true)))) :pattern ((inverse val__ flatness)) )))
+     (dynamic_invariant4 (inverse val__ flatness) true false true)) :pattern (
+  (inverse val__ flatness)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 

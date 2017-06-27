@@ -338,13 +338,11 @@
 ;; is_permutation_1__post_axiom
   (assert
   (forall ((r1 (Array Int group1_id)))
-  (! (let ((result (is_permutation_1 r1)))
-     (=> (is_permutation_1__function_guard result r1)
-     (= (= result true)
+  (! (= (= (is_permutation_1 r1) true)
      (forall ((g1 Int))
      (=> (and (<= 1 g1) (<= g1 64))
      (exists ((rank Int))
-     (and (and (<= 1 rank) (<= rank 64)) (= (to_rep (select r1 rank)) g1)))))))) :pattern (
+     (and (and (<= 1 rank) (<= rank 64)) (= (to_rep (select r1 rank)) g1)))))) :pattern (
   (is_permutation_1 r1)) )))
 
 (declare-sort ranking 0)
@@ -505,17 +503,15 @@
 ;; invert_1__post_axiom
   (assert
   (forall ((r1 (Array Int group1_id)))
-  (! (and (is_permutation_1__function_guard (is_permutation_1 r1) r1)
-     (=> (= (is_permutation_1 r1) true)
+  (! (=> (= (is_permutation_1 r1) true)
      (let ((result (invert_1 r1)))
-     (=> (invert_1__function_guard result r1)
      (and
      (forall ((rank Int))
      (=> (and (<= 1 rank) (<= rank 64))
      (= (to_rep1 (select result (to_rep (select r1 rank)))) rank)))
      (forall ((g1 Int))
      (=> (and (<= 1 g1) (<= g1 64))
-     (= (to_rep (select r1 (to_rep1 (select result g1)))) g1)))))))) :pattern (
+     (= (to_rep (select r1 (to_rep1 (select result g1)))) g1)))))) :pattern (
   (invert_1 r1)) )))
 
 (declare-fun dummy4 () (Array Int ranking))
@@ -635,61 +631,23 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(declare-sort t98b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 64)))
-
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq5 (t98b t98b) Bool)
-
-(declare-fun dummy5 () t98b)
-
-(declare-datatypes () ((t98b__ref (mk_t98b__ref (t98b__content t98b)))))
-(define-fun t98b__ref___projection ((a t98b__ref)) t98b (t98b__content a))
-
-(declare-sort t96b 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 64)))
-
-(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq6 (t96b t96b) Bool)
-
-(declare-fun dummy6 () t96b)
-
-(declare-datatypes () ((t96b__ref (mk_t96b__ref (t96b__content t96b)))))
-(define-fun t96b__ref___projection ((a t96b__ref)) t96b (t96b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(declare-fun temp___587 ((Array Int ranking)) (Array Int (Array Int ranking)))
+(declare-fun temp___524 ((Array Int ranking)) (Array Int (Array Int ranking)))
 
 ;; def_axiom
   (assert
-  (forall ((temp___589 (Array Int ranking)))
-  (forall ((temp___590 Int))
-  (= (select (temp___587 temp___589) temp___590) temp___589))))
+  (forall ((temp___526 (Array Int ranking)))
+  (forall ((temp___527 Int))
+  (= (select (temp___524 temp___526) temp___527) temp___526))))
 
-(declare-fun temp___591 (Int) (Array Int ranking))
+(declare-fun temp___528 (Int) (Array Int ranking))
 
 ;; def_axiom
   (assert
-  (forall ((temp___593 Int))
-  (forall ((temp___594 Int))
-  (= (select (temp___591 temp___593) temp___594) (of_rep1 temp___593)))))
+  (forall ((temp___530 Int))
+  (forall ((temp___531 Int))
+  (= (select (temp___528 temp___530) temp___531) (of_rep1 temp___530)))))
 
 (define-fun dynamic_invariant ((temp___expr_143 Int)
   (temp___is_init_140 Bool) (temp___skip_constant_141 Bool)
@@ -717,10 +675,6 @@
 
 (declare-fun o1 () (Array Int (Array Int ranking)))
 
-(declare-fun o2 () (Array Int ranking))
-
-(declare-fun o3 () (Array Int (Array Int ranking)))
-
 (declare-fun result () (Array Int (Array Int ranking)))
 
 (declare-fun result__1 () (Array Int (Array Int ranking)))
@@ -743,26 +697,15 @@
 
 ;; H
   (assert
-  (forall ((g24 Int)) (is_permutation_1__function_guard
-  (is_permutation_1 (select r2 g24)) (select r2 g24))))
-
-;; H
-  (assert
   (forall ((g24 Int))
   (=> (and (<= 1 g24) (<= g24 64))
   (= (is_permutation_1 (select r2 g24)) true))))
 
 ;; H
-  (assert (= o (temp___591 64)))
-
-;; H
-  (assert (= o1 (temp___587 o)))
-
-;; H
   (assert (= (mk_map__ref3 result) (mk_map__ref3 result__)))
 
 ;; H
-  (assert (= result__1 o1))
+  (assert (= result__1 (temp___524 (temp___528 64))))
 
 ;; H
   (assert (= (mk_int__ref result1) (mk_int__ref g2)))
@@ -778,11 +721,6 @@
 
 ;; H
   (assert
-  (forall ((prev Int)) (invert_1__function_guard (invert_1 (select r2 prev))
-  (select r2 prev))))
-
-;; H
-  (assert
   (forall ((prev Int))
   (=> (and (<= 1 prev) (<= prev (- g22 1)))
   (= (bool_eq5 (select result__2 prev) 1 64 (invert_1 (select r2 prev)) 1 64) true))))
@@ -791,33 +729,31 @@
   (assert
   (and
   (and (=> (<= 1 64) (in_range2 g22))
-  (forall ((temp___597 Int))
-  (=> (and (<= 1 temp___597) (<= temp___597 64))
-  (=> (<= g22 temp___597)
-  (= (select result__2 temp___597) (select result__1 temp___597))))))
+  (forall ((temp___534 Int))
+  (=> (and (<= 1 temp___534) (<= temp___534 64))
+  (=> (<= g22 temp___534)
+  (= (select result__2 temp___534) (select result__1 temp___534))))))
   (and (<= 1 g22) (<= g22 64))))
 
 ;; H
   (assert
-  (and
-  (and (= o2 (invert_1 (select r2 g22))) (invert_1__function_guard o2
-  (select r2 g22)))
+  (and (= o (invert_1 (select r2 g22)))
   (and
   (forall ((rank Int))
   (=> (and (<= 1 rank) (<= rank 64))
-  (= (to_rep1 (select o2 (to_rep (select (select r2 g22) rank)))) rank)))
+  (= (to_rep1 (select o (to_rep (select (select r2 g22) rank)))) rank)))
   (forall ((g1 Int))
   (=> (and (<= 1 g1) (<= g1 64))
-  (= (to_rep (select (select r2 g22) (to_rep1 (select o2 g1)))) g1))))))
+  (= (to_rep (select (select r2 g22) (to_rep1 (select o g1)))) g1))))))
 
 ;; H
-  (assert (= o3 (store result__2 g22 o2)))
+  (assert (= o1 (store result__2 g22 o)))
 
 ;; H
   (assert (= result__2 result2))
 
 ;; H
-  (assert (= result__3 o3))
+  (assert (= result__3 o1))
 
 ;; H
   (assert (not (= g22 64)))
@@ -835,10 +771,6 @@
 
 ;; H
   (assert (<= prev (- g23 1)))
-
-;; H
-  (assert (invert_1__function_guard (invert_1 (select r2 prev))
-  (select r2 prev)))
 
 (assert
 ;; WP_parameter_def

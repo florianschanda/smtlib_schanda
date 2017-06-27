@@ -157,8 +157,7 @@
 ;; divides__def_axiom
   (assert
   (forall ((a Int) (b Int))
-  (! (=> (divides__function_guard (divides a b) a b)
-     (= (= (divides a b) true) (= (mod2 b a) 0))) :pattern ((divides a b)) )))
+  (! (= (= (divides a b) true) (= (mod2 b a) 0)) :pattern ((divides a b)) )))
 
 (declare-fun a () Int)
 
@@ -176,7 +175,7 @@
 
 (declare-fun o () Int)
 
-(declare-fun temp___136 () Int)
+(declare-fun temp___132 () Int)
 
 (declare-fun o1 () Int)
 
@@ -225,18 +224,6 @@
 (declare-fun result3 () Int)
 
 ;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x a) x a)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x b) x b)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x a) x a)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x b) x b)))
-
-;; H
   (assert (in_range1 a))
 
 ;; H
@@ -255,7 +242,7 @@
   (assert (in_range1 c1))
 
 ;; H
-  (assert (=> (< 1 c1) (= temp___136 c1)))
+  (assert (=> (< 1 c1) (= temp___132 c1)))
 
 ;; H
   (assert
@@ -321,10 +308,6 @@
 
 ;; H
   (assert (= result3 math_simple__gcd__result4))
-
-;; H
-  (assert (divides__function_guard (divides math_simple__gcd__result4 a)
-  math_simple__gcd__result4 a))
 
 (assert
 ;; WP_parameter_def

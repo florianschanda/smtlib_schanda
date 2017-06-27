@@ -1367,7 +1367,7 @@
 
 (declare-fun o1 () Int)
 
-(declare-fun temp___970 () count_type)
+(declare-fun temp___937 () count_type)
 
 (declare-fun o2 () Bool)
 
@@ -1395,8 +1395,8 @@
 
 (declare-fun result3 () Bool)
 
-(define-fun temp___9701 () us_rep1 (mk___rep1
-                                   (mk___split_fields1 temp___970)))
+(define-fun temp___9371 () us_rep1 (mk___rep1
+                                   (mk___split_fields1 temp___937)))
 
 (define-fun use_sets__move__cu__assume1 () us_rep1 (mk___rep1
                                                    (mk___split_fields1
@@ -1607,20 +1607,20 @@
 
 ;; H
   (assert
-  (and (= temp___9701 (first (mk___rep s1__split_discrs s1__split_fields2)))
+  (and (= temp___9371 (first (mk___rep s1__split_discrs s1__split_fields2)))
   (ite (= (= (length (mk___rep s1__split_discrs s1__split_fields2)) 0) true)
-  (= (bool_eq4 temp___9701 no_element) true)
+  (= (bool_eq4 temp___9371 no_element) true)
   (and
   (= (has_key (positions (mk___rep s1__split_discrs s1__split_fields2))
-     temp___9701) true)
+     temp___9371) true)
   (= (get1 (positions (mk___rep s1__split_discrs s1__split_fields2))
-     temp___9701) 1)))))
+     temp___9371) 1)))))
 
 ;; H
   (assert (= result2 (mk___split_fields__ref1 cu__split_fields2)))
 
 ;; H
-  (assert (= cu__split_fields3 (mk___split_fields1 temp___970)))
+  (assert (= cu__split_fields3 (mk___split_fields1 temp___937)))
 
 ;; H
   (assert
@@ -1639,7 +1639,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "use_sets.ads", line 51, characters 0-0
+ ;; File "use_sets.ads", line 44, characters 0-0
   (not
   (= (length (mk___rep s1__split_discrs s1__split_fields2)) (- (length
                                                                (mk___rep

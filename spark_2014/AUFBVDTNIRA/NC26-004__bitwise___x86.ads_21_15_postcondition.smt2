@@ -180,10 +180,9 @@
   (forall ((x86__al_test (_ BitVec 8)))
   (! (=> (dynamic_invariant x86__al_test true true true)
      (let ((result (al x86__al_test)))
-     (=> (al__function_guard result x86__al_test)
      (and (= result (bvand x86__al_test ((_ int2bv 8) 255)))
-     (dynamic_invariant result true false true))))) :pattern ((al
-                                                              x86__al_test)) )))
+     (dynamic_invariant result true false true)))) :pattern ((al
+                                                             x86__al_test)) )))
 
 (declare-fun val__ () (_ BitVec 8))
 
@@ -213,9 +212,6 @@
 
 ;; H
   (assert (= al_test3 al_test1))
-
-;; H
-  (assert (al__function_guard (al al_test2) al_test2))
 
 (assert
 ;; WP_parameter_def

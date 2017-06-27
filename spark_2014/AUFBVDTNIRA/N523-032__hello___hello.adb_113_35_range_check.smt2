@@ -385,14 +385,11 @@
   (forall ((str us_t))
   (! (=> (dynamic_invariant str true true true)
      (let ((result (to_camel_case str)))
-     (and (to_caml_char2__function_guard
-     (to_caml_char2 str result (last1 str)) str result (last1 str))
-     (=> (to_camel_case__function_guard result str)
      (and
      (and (= (first1 result) (first1 str))
      (and (= (last1 result) (last1 str))
      (= (to_caml_char2 str result (last1 str)) true))) (dynamic_invariant
-     result true false true)))))) :pattern ((to_camel_case str)) )))
+     result true false true)))) :pattern ((to_camel_case str)) )))
 
 (declare-fun hello () us_t)
 
@@ -441,13 +438,13 @@
   (! (= (to_rep (select (temp___String_Literal_154 us_void_param) 1)) 32) :pattern (
   (temp___String_Literal_154 us_void_param)) )))
 
-(declare-fun temp___String_Literal_587 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_585 (tuple0) (Array Int character))
 
-;; temp___String_Literal_587__def_axiom
+;; temp___String_Literal_585__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (= (to_rep (select (temp___String_Literal_587 us_void_param) 1)) 33) :pattern (
-  (temp___String_Literal_587 us_void_param)) )))
+  (! (= (to_rep (select (temp___String_Literal_585 us_void_param) 1)) 33) :pattern (
+  (temp___String_Literal_585 us_void_param)) )))
 
 (define-fun dynamic_invariant2 ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)
@@ -496,9 +493,7 @@
   (assert
   (forall ((str us_t) (res us_t))
   (forall ((last2 Int))
-  (! (=> (to_caml_char2__function_guard (to_caml_char2 str res last2) str res
-     last2)
-     (= (= (to_caml_char2 str res last2) true)
+  (! (= (= (to_caml_char2 str res last2) true)
      (forall ((j Int))
      (=> (and (<= (first1 str) j) (<= j last2))
      (ite (= j (first1 str))
@@ -516,7 +511,7 @@
      (= (to_rep (select (to_array res) j)) (to_upper
                                            (to_rep (select (to_array str) j))))
      (= (to_rep (select (to_array res) j)) (to_lower
-                                           (to_rep (select (to_array str) j)))))))))) :pattern (
+                                           (to_rep (select (to_array str) j))))))))) :pattern (
   (to_caml_char2 str res last2)) ))))
 
 ;; prefix__def_axiom
@@ -547,9 +542,9 @@
 
 (declare-fun hello__say_hello__prefix__assume1 () t)
 
-(declare-fun temp___586 () (Array Int character))
+(declare-fun temp___584 () (Array Int character))
 
-(declare-fun temp___5861 () t)
+(declare-fun temp___5841 () t)
 
 (declare-fun o () Int)
 
@@ -561,7 +556,7 @@
 
 (declare-fun o4 () Int)
 
-(define-fun temp___5862 () us_t (mk___t temp___586 temp___5861))
+(define-fun temp___5842 () us_t (mk___t temp___584 temp___5841))
 
 ;; H
   (assert (in_range3 g_lang_level))
@@ -623,19 +618,12 @@
   (assert (dynamic_invariant prefix true false true))
 
 ;; H
-  (assert (to_caml_char2__function_guard
-  (to_caml_char2 who temp___5862 (to_rep1 (last (rt who)))) who temp___5862
-  (to_rep1 (last (rt who)))))
-
-;; H
   (assert
-  (and
-  (and (= temp___5862 (to_camel_case who)) (to_camel_case__function_guard
-  temp___5862 who))
-  (and (dynamic_invariant temp___5862 true false true)
-  (and (= (to_rep1 (first temp___5861)) (to_rep1 (first (rt who))))
-  (and (= (to_rep1 (last temp___5861)) (to_rep1 (last (rt who))))
-  (= (to_caml_char2 who temp___5862 (to_rep1 (last (rt who)))) true))))))
+  (and (= temp___5842 (to_camel_case who))
+  (and (dynamic_invariant temp___5842 true false true)
+  (and (= (to_rep1 (first temp___5841)) (to_rep1 (first (rt who))))
+  (and (= (to_rep1 (last temp___5841)) (to_rep1 (last (rt who))))
+  (= (to_caml_char2 who temp___5842 (to_rep1 (last (rt who)))) true))))))
 
 ;; H
   (assert (not (= (length hello) 0)))

@@ -1044,7 +1044,7 @@
 
 (declare-fun o () Int)
 
-(declare-fun temp___738 () count_type)
+(declare-fun temp___711 () count_type)
 
 (declare-fun o1 () Bool)
 
@@ -1077,8 +1077,8 @@
 (define-fun cu__split_fields6 () us_split_fields2 (mk___split_fields1
                                                   cu__split_fields1))
 
-(define-fun temp___7381 () us_rep1 (mk___rep1
-                                   (mk___split_fields1 temp___738)))
+(define-fun temp___7111 () us_rep1 (mk___rep1
+                                   (mk___split_fields1 temp___711)))
 
 (define-fun use_ordered_sets__are_disjoint__cu__assume1 () us_rep1 (mk___rep1
                                                                    (mk___split_fields1
@@ -1143,19 +1143,19 @@
 
 ;; H
   (assert
-  (and (= temp___7381 (next s1 (mk___rep1 cu__split_fields5)))
+  (and (= temp___7111 (next s1 (mk___rep1 cu__split_fields5)))
   (ite (= (ite (= (bool_eq2 (mk___rep1 cu__split_fields5) no_element) false) (= 
           (get1 (positions s1) (mk___rep1 cu__split_fields5)) (length3 s1)) true) true)
-  (= (bool_eq2 temp___7381 no_element) true)
-  (and (= (has_key (positions s1) temp___7381) true)
-  (= (get1 (positions s1) temp___7381) (+ (get1 (positions s1)
+  (= (bool_eq2 temp___7111 no_element) true)
+  (and (= (has_key (positions s1) temp___7111) true)
+  (= (get1 (positions s1) temp___7111) (+ (get1 (positions s1)
                                           (mk___rep1 cu__split_fields5)) 1))))))
 
 ;; H
   (assert (= result3 cu__split_fields2))
 
 ;; H
-  (assert (= temp___738 cu__split_fields3))
+  (assert (= temp___711 cu__split_fields3))
 
 ;; H
   (assert

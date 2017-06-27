@@ -135,6 +135,30 @@
 (define-fun protT__ref___projection ((a protT__ref)) us_rep (protT__content
                                                             a))
 
+(declare-fun to_rep (natural) Int)
+
+(declare-fun of_rep (Int) natural)
+
+;; inversion_axiom
+  (assert
+  (forall ((x natural)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x natural)) (! (in_range1 (to_rep x)) :pattern ((to_rep x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (in_range1 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                            (of_rep x))) )))
+
+(define-fun default_initial_assumption ((temp___expr_173 us_rep)
+  (temp___skip_top_level_174 Bool)) Bool (= (to_rep
+                                            (rec__support__protT__summary
+                                            (us_split_fields1
+                                            temp___expr_173))) 0))
+
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
 (define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool)
@@ -152,10 +176,21 @@
 
 (declare-fun o () natural)
 
-(declare-fun prot () natural)
+(declare-fun us_self__compl () natural)
+
+(declare-fun prot__split_fields () natural)
+
+(declare-fun us_self__compl1 () natural)
+
+(declare-fun result () natural)
+
+(declare-fun prot__split_fields1 () natural)
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (not (= o prot))))
+  (not
+  (not
+  (and (and (= o prot__split_fields) (= us_self__compl o))
+  (and (= result prot__split_fields) (= prot__split_fields1 us_self__compl1))))))
 (check-sat)

@@ -490,8 +490,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -514,7 +512,7 @@
 
 (declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -524,7 +522,7 @@
   (! (=> (in_range3 f)
      (=> (in_range3 l)
      (and (= (to_rep1 (first2 (mk1 f l))) f)
-     (= (to_rep1 (last3 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (= (to_rep1 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range3 low)
@@ -542,10 +540,10 @@
 
 (define-fun first3 ((a us_t1)) Int (to_rep1 (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep1 (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last4 a))
-                                    (+ (- (last4 a) (first3 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size3 () Int)
 
@@ -580,8 +578,8 @@
 
 (define-fun bool_eq8 ((x us_t1)
   (y us_t1)) Bool (bool_eq4 (elts1 x) (to_rep1 (first2 (rt1 x)))
-                  (to_rep1 (last3 (rt1 x))) (elts1 y)
-                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last3 (rt1 y)))))
+                  (to_rep1 (last2 (rt1 x))) (elts1 y)
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
 (declare-fun user_eq8 (us_t1 us_t1) Bool)
 
@@ -628,9 +626,9 @@
 
 (declare-fun o () (Array Int integer))
 
-(declare-fun temp___223 () (Array Int integer))
+(declare-fun temp___214 () (Array Int integer))
 
-(declare-fun temp___2231 () t1)
+(declare-fun temp___2141 () t1)
 
 ;; H
   (assert
@@ -643,16 +641,16 @@
   (assert (= o (rec__stack__stack__content (us_split_fields1 s))))
 
 ;; H
-  (assert (= o temp___223))
+  (assert (= o temp___214))
 
 ;; H
   (assert
   (= (mk1 1 (- (to_rep (rec__stack__stack__top (us_split_fields1 s))) 1)) 
-  temp___2231))
+  temp___2141))
 
 (assert
 ;; WP_parameter_def
  ;; File "stack.ads", line 5, characters 0-0
-  (not (dynamic_property 1 2147483647 (to_rep1 (first2 temp___2231))
-  (to_rep1 (last3 temp___2231)))))
+  (not (dynamic_property 1 2147483647 (to_rep1 (first2 temp___2141))
+  (to_rep1 (last2 temp___2141)))))
 (check-sat)

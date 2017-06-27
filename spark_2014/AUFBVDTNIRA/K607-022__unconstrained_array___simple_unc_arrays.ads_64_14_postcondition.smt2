@@ -384,8 +384,6 @@
   (! (=> (in_range4 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
                                                               (of_rep2 x))) )))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -408,7 +406,7 @@
 
 (declare-fun first (t) integer)
 
-(declare-fun last1 (t) integer)
+(declare-fun last (t) integer)
 
 (declare-fun mk (Int Int) t)
 
@@ -417,7 +415,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range4 f)
      (=> (in_range4 l)
-     (and (= (to_rep2 (first (mk f l))) f) (= (to_rep2 (last1 (mk f l))) l)))) :pattern (
+     (and (= (to_rep2 (first (mk f l))) f) (= (to_rep2 (last (mk f l))) l)))) :pattern (
   (mk f l)) )))
 
 (define-fun dynamic_property1 ((range_first Int) (range_last Int) (low Int)
@@ -435,10 +433,10 @@
 
 (define-fun first1 ((a us_t)) Int (to_rep2 (first (rt a))))
 
-(define-fun last2 ((a us_t)) Int (to_rep2 (last1 (rt a))))
+(define-fun last1 ((a us_t)) Int (to_rep2 (last (rt a))))
 
-(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last2 a))
-                                  (+ (- (last2 a) (first1 a)) 1) 0))
+(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last1 a))
+                                  (+ (- (last1 a) (first1 a)) 1) 0))
 
 (declare-fun value__size () Int)
 
@@ -473,8 +471,8 @@
 
 (define-fun bool_eq6 ((x us_t)
   (y us_t)) Bool (bool_eq3 (elts x) (to_rep2 (first (rt x)))
-                 (to_rep2 (last1 (rt x))) (elts y) (to_rep2 (first (rt y)))
-                 (to_rep2 (last1 (rt y)))))
+                 (to_rep2 (last (rt x))) (elts y) (to_rep2 (first (rt y)))
+                 (to_rep2 (last (rt y)))))
 
 (declare-fun user_eq5 (us_t us_t) Bool)
 
@@ -601,14 +599,14 @@
                                       (first1
                                       (rec__simple_unc_arrays__table__v
                                       (us_split_fields1 temp___expr_542)))
-                                      (last2
+                                      (last1
                                       (rec__simple_unc_arrays__table__v
                                       (us_split_fields1 temp___expr_542))))
                                       (and
                                       (= (first1
                                          (rec__simple_unc_arrays__table__v
                                          (us_split_fields1 temp___expr_542))) 1)
-                                      (= (last2
+                                      (= (last1
                                          (rec__simple_unc_arrays__table__v
                                          (us_split_fields1 temp___expr_542))) 
                                       (to_rep temp___543))))))
@@ -623,9 +621,8 @@
 ;; empty__def_axiom
   (assert
   (forall ((a us_rep))
-  (! (=> (empty__function_guard (empty a) a)
-     (= (= (empty a) true)
-     (< (to_rep (rec__simple_unc_arrays__table__last (us_split_discrs1 a))) 1))) :pattern (
+  (! (= (= (empty a) true)
+     (< (to_rep (rec__simple_unc_arrays__table__last (us_split_discrs1 a))) 1)) :pattern (
   (empty a)) )))
 
 (declare-fun min (us_rep) Int)
@@ -635,10 +632,8 @@
 ;; min__post_axiom
   (assert
   (forall ((a us_rep))
-  (! (and (empty__function_guard (empty a) a)
-     (=> (and (dynamic_invariant2 a true true true) (not (= (empty a) true)))
+  (! (=> (and (dynamic_invariant2 a true true true) (not (= (empty a) true)))
      (let ((result (min a)))
-     (=> (min__function_guard result a)
      (and
      (and
      (forall ((j Int))
@@ -647,19 +642,19 @@
      (<= j (to_rep
            (rec__simple_unc_arrays__table__last (us_split_discrs1 a)))))
      (<= result (to_rep1
-                (let ((temp___592 (rec__simple_unc_arrays__table__v
+                (let ((temp___586 (rec__simple_unc_arrays__table__v
                                   (us_split_fields1 a))))
-                (select (to_array temp___592) j))))))
+                (select (to_array temp___586) j))))))
      (exists ((j Int))
      (and
      (and (<= 1 j)
      (<= j (to_rep
            (rec__simple_unc_arrays__table__last (us_split_discrs1 a)))))
      (= result (to_rep1
-               (let ((temp___591 (rec__simple_unc_arrays__table__v
+               (let ((temp___585 (rec__simple_unc_arrays__table__v
                                  (us_split_fields1 a))))
-               (select (to_array temp___591) j)))))))
-     (dynamic_invariant1 result true false true)))))) :pattern ((min a)) )))
+               (select (to_array temp___585) j)))))))
+     (dynamic_invariant1 result true false true)))) :pattern ((min a)) )))
 
 (declare-fun max (us_rep) Int)
 
@@ -668,10 +663,8 @@
 ;; max__post_axiom
   (assert
   (forall ((a us_rep))
-  (! (and (empty__function_guard (empty a) a)
-     (=> (and (dynamic_invariant2 a true true true) (not (= (empty a) true)))
+  (! (=> (and (dynamic_invariant2 a true true true) (not (= (empty a) true)))
      (let ((result (max a)))
-     (=> (max__function_guard result a)
      (and
      (and
      (forall ((j Int))
@@ -680,19 +673,19 @@
      (<= j (to_rep
            (rec__simple_unc_arrays__table__last (us_split_discrs1 a)))))
      (<= (to_rep1
-         (let ((temp___602 (rec__simple_unc_arrays__table__v
+         (let ((temp___594 (rec__simple_unc_arrays__table__v
                            (us_split_fields1 a))))
-         (select (to_array temp___602) j))) result)))
+         (select (to_array temp___594) j))) result)))
      (exists ((j Int))
      (and
      (and (<= 1 j)
      (<= j (to_rep
            (rec__simple_unc_arrays__table__last (us_split_discrs1 a)))))
      (= result (to_rep1
-               (let ((temp___601 (rec__simple_unc_arrays__table__v
+               (let ((temp___593 (rec__simple_unc_arrays__table__v
                                  (us_split_fields1 a))))
-               (select (to_array temp___601) j)))))))
-     (dynamic_invariant1 result true false true)))))) :pattern ((max a)) )))
+               (select (to_array temp___593) j)))))))
+     (dynamic_invariant1 result true false true)))) :pattern ((max a)) )))
 
 (declare-fun a () us_rep)
 
@@ -721,7 +714,7 @@
 
 (declare-fun us () Int)
 
-(declare-fun temp___906 () Int)
+(declare-fun temp___884 () Int)
 
 (declare-fun o () Int)
 
@@ -792,9 +785,6 @@
 (declare-fun result4 () Int)
 
 ;; H
-  (assert (empty__function_guard (empty a) a))
-
-;; H
   (assert (dynamic_invariant2 a true false true))
 
 ;; H
@@ -831,7 +821,7 @@
   (assert (= i1 1))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 r43b)) (= temp___906 sum1)))
+  (assert (=> (and (<= 1 i1) (<= i1 r43b)) (= temp___884 sum1)))
 
 ;; H
   (assert
@@ -847,7 +837,7 @@
       (first (rt (rec__simple_unc_arrays__table__v (us_split_fields1 a))))) 
   i2)
   (<= i2 (to_rep2
-         (last1 (rt (rec__simple_unc_arrays__table__v (us_split_fields1 a)))))))))
+         (last (rt (rec__simple_unc_arrays__table__v (us_split_fields1 a)))))))))
 
 ;; H
   (assert (=> (and (<= 1 i1) (<= i1 r43b)) (= o i2)))
@@ -955,9 +945,6 @@
 
 ;; H
   (assert (= result4 simple_unc_arrays__average__result4))
-
-;; H
-  (assert (min__function_guard (min a) a))
 
 (assert
 ;; WP_parameter_def

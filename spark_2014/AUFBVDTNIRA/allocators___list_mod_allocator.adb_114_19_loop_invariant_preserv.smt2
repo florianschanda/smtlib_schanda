@@ -90,12 +90,12 @@
 (define-fun resource__ref___projection ((a resource__ref)) resource (resource__content
                                                                     a))
 
-(define-fun dynamic_invariant ((temp___expr_150 Int)
-  (temp___is_init_147 Bool) (temp___skip_constant_148 Bool)
-  (temp___do_toplevel_149 Bool)) Bool (=>
-                                      (or (= temp___is_init_147 true)
+(define-fun dynamic_invariant ((temp___expr_148 Int)
+  (temp___is_init_145 Bool) (temp___skip_constant_146 Bool)
+  (temp___do_toplevel_147 Bool)) Bool (=>
+                                      (or (= temp___is_init_145 true)
                                       (<= 0 10000)) (in_range2
-                                      temp___expr_150)))
+                                      temp___expr_148)))
 
 (declare-fun to_rep (resource) Int)
 
@@ -417,11 +417,11 @@
   (forall ((a us_rep1) (b us_rep1))
   (! (= (user_eq5 a b) (oeq a b)) :pattern ((user_eq5 a b)) )))
 
-(define-fun default_initial_assumption ((temp___expr_187 us_rep1)
-  (temp___skip_top_level_188 Bool)) Bool (=>
+(define-fun default_initial_assumption ((temp___expr_185 us_rep1)
+  (temp___skip_top_level_186 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_188 true))
-                                         (= (length temp___expr_187) 0)))
+                                         (= temp___skip_top_level_186 true))
+                                         (= (length temp___expr_185) 0)))
 
 (declare-sort count_type 0)
 
@@ -444,12 +444,12 @@
 (define-fun count_type__ref___projection ((a count_type__ref)) count_type 
   (count_type__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_144 Int)
-  (temp___is_init_141 Bool) (temp___skip_constant_142 Bool)
-  (temp___do_toplevel_143 Bool)) Bool (=>
-                                      (or (= temp___is_init_141 true)
+(define-fun dynamic_invariant1 ((temp___expr_142 Int)
+  (temp___is_init_139 Bool) (temp___skip_constant_140 Bool)
+  (temp___do_toplevel_141 Bool)) Bool (=>
+                                      (or (= temp___is_init_139 true)
                                       (<= 0 2147483647)) (in_range5
-                                      temp___expr_144)))
+                                      temp___expr_142)))
 
 ;; length__post_axiom
   (assert
@@ -480,12 +480,12 @@
 (define-fun element_type__ref___projection ((a element_type__ref)) element_type 
   (element_type__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_174 Int)
-  (temp___is_init_171 Bool) (temp___skip_constant_172 Bool)
-  (temp___do_toplevel_173 Bool)) Bool (=>
-                                      (or (= temp___is_init_171 true)
+(define-fun dynamic_invariant2 ((temp___expr_172 Int)
+  (temp___is_init_169 Bool) (temp___skip_constant_170 Bool)
+  (temp___do_toplevel_171 Bool)) Bool (=>
+                                      (or (= temp___is_init_169 true)
                                       (<= 0 10000)) (in_range6
-                                      temp___expr_174)))
+                                      temp___expr_172)))
 
 (declare-sort extended_index 0)
 
@@ -509,12 +509,12 @@
 (define-fun extended_index__ref___projection ((a extended_index__ref)) extended_index 
   (extended_index__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_180 Int)
-  (temp___is_init_177 Bool) (temp___skip_constant_178 Bool)
-  (temp___do_toplevel_179 Bool)) Bool (=>
-                                      (or (= temp___is_init_177 true)
+(define-fun dynamic_invariant3 ((temp___expr_178 Int)
+  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
+  (temp___do_toplevel_177 Bool)) Bool (=>
+                                      (or (= temp___is_init_175 true)
                                       (<= 0 2147483647)) (in_range7
-                                      temp___expr_180)))
+                                      temp___expr_178)))
 
 ;; get__post_axiom
   (assert
@@ -621,22 +621,22 @@
 
 (declare-fun is_empty__function_guard (Bool us_rep2) Bool)
 
-(define-fun default_initial_assumption1 ((temp___expr_200 us_rep2)
-  (temp___skip_top_level_201 Bool)) Bool (=>
+(define-fun default_initial_assumption1 ((temp___expr_198 us_rep2)
+  (temp___skip_top_level_199 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_201 true))
-                                         (= (is_empty temp___expr_200) true)))
+                                         (= temp___skip_top_level_199 true))
+                                         (= (is_empty temp___expr_198) true)))
 
 (declare-fun contains (us_rep2 Int) Bool)
 
 (declare-fun contains__function_guard (Bool us_rep2 Int) Bool)
 
-(define-fun dynamic_invariant4 ((temp___expr_193 Int)
-  (temp___is_init_190 Bool) (temp___skip_constant_191 Bool)
-  (temp___do_toplevel_192 Bool)) Bool (=>
-                                      (or (= temp___is_init_190 true)
+(define-fun dynamic_invariant4 ((temp___expr_191 Int)
+  (temp___is_init_188 Bool) (temp___skip_constant_189 Bool)
+  (temp___do_toplevel_190 Bool)) Bool (=>
+                                      (or (= temp___is_init_188 true)
                                       (<= 0 10000)) (in_range8
-                                      temp___expr_193)))
+                                      temp___expr_191)))
 
 ;; contains__post_axiom
   (assert
@@ -813,10 +813,9 @@
   (assert
   (forall ((s us_rep1))
   (forall ((e Int))
-  (! (=> (contains__function_guard1 (contains1 s e) s e)
-     (= (= (contains1 s e) true)
+  (! (= (= (contains1 s e) true)
      (exists ((i Int))
-     (and (and (<= 1 i) (<= i (length s))) (= (get s i) e))))) :pattern (
+     (and (and (<= 1 i) (<= i (length s))) (= (get s i) e)))) :pattern (
   (contains1 s e)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -833,11 +832,7 @@
   (assert
   (forall ((list_mod_allocator__data (Array Int us_rep)))
   (forall ((list_mod_allocator__first_available Int))
-  (! (=> (is_well_formed__function_guard
-     (is_well_formed list_mod_allocator__data
-     list_mod_allocator__first_available) list_mod_allocator__data
-     list_mod_allocator__first_available)
-     (=
+  (! (=
      (= (is_well_formed list_mod_allocator__data
         list_mod_allocator__first_available) true)
      (and
@@ -863,7 +858,7 @@
         (select list_mod_allocator__data (to_rep
                                          (rec__list_mod_allocator__cell__next
                                          (us_split_fields1
-                                         (select list_mod_allocator__data r)))))))) 0))))))) :pattern (
+                                         (select list_mod_allocator__data r)))))))) 0)))))) :pattern (
   (is_well_formed list_mod_allocator__data
   list_mod_allocator__first_available)) ))))
 
@@ -879,19 +874,18 @@
 ;; user_eq__def_axiom
   (assert
   (forall ((a us_rep3) (b us_rep3))
-  (! (and (oeq__function_guard1 (oeq1 a b) a b)
-     (= (user_eq11 a b) (oeq1 a b))) :pattern ((user_eq11 a b)) )))
+  (! (= (user_eq11 a b) (oeq1 a b)) :pattern ((user_eq11 a b)) )))
 
-(define-fun default_initial_assumption2 ((temp___expr_214 us_rep3)
-  (temp___skip_top_level_215 Bool)) Bool (and
+(define-fun default_initial_assumption2 ((temp___expr_211 us_rep3)
+  (temp___skip_top_level_212 Bool)) Bool (and
                                          (= (length
                                             (rec__list_mod_allocator__m__t__available
                                             (us_split_fields3
-                                            temp___expr_214))) 0)
+                                            temp___expr_211))) 0)
                                          (= (is_empty
                                             (rec__list_mod_allocator__m__t__allocated
                                             (us_split_fields3
-                                            temp___expr_214))) true)))
+                                            temp___expr_211))) true)))
 
 ;; model_is_well_formed__post_axiom
   (assert true)
@@ -901,38 +895,7 @@
   (forall ((m us_rep3))
   (forall ((list_mod_allocator__data (Array Int us_rep)))
   (forall ((list_mod_allocator__first_available Int))
-  (! (=> (model_is_well_formed__function_guard
-     (model_is_well_formed m list_mod_allocator__data
-     list_mod_allocator__first_available) m list_mod_allocator__data
-     list_mod_allocator__first_available)
-     (and (contains__function_guard1
-     (contains1
-     (rec__list_mod_allocator__m__t__available (us_split_fields3 m))
-     (to_rep
-     (rec__list_mod_allocator__cell__next
-     (us_split_fields1
-     (select list_mod_allocator__data (get
-                                      (rec__list_mod_allocator__m__t__available
-                                      (us_split_fields3 m))
-                                      (length
-                                      (rec__list_mod_allocator__m__t__available
-                                      (us_split_fields3 m)))))))))
-     (rec__list_mod_allocator__m__t__available (us_split_fields3 m))
-     (to_rep
-     (rec__list_mod_allocator__cell__next
-     (us_split_fields1
-     (select list_mod_allocator__data (get
-                                      (rec__list_mod_allocator__m__t__available
-                                      (us_split_fields3 m))
-                                      (length
-                                      (rec__list_mod_allocator__m__t__available
-                                      (us_split_fields3 m)))))))))
-     (and
-     (forall ((r Int)) (contains__function_guard1
-     (contains1
-     (rec__list_mod_allocator__m__t__available (us_split_fields3 m)) r)
-     (rec__list_mod_allocator__m__t__available (us_split_fields3 m)) r))
-     (=
+  (! (=
      (= (model_is_well_formed m list_mod_allocator__data
         list_mod_allocator__first_available) true)
      (and
@@ -1042,7 +1005,7 @@
      (= (contains1
         (rec__list_mod_allocator__m__t__available (us_split_fields3 m)) r) true))
      (= (contains
-        (rec__list_mod_allocator__m__t__allocated (us_split_fields3 m)) r) true)))))))))) :pattern (
+        (rec__list_mod_allocator__m__t__allocated (us_split_fields3 m)) r) true))))))) :pattern (
   (model_is_well_formed m list_mod_allocator__data
   list_mod_allocator__first_available)) )))))
 
@@ -1063,18 +1026,18 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(define-fun dynamic_invariant6 ((temp___expr_279 Int)
-  (temp___is_init_276 Bool) (temp___skip_constant_277 Bool)
-  (temp___do_toplevel_278 Bool)) Bool (=>
-                                      (or (= temp___is_init_276 true)
-                                      (<= 0 1)) (in_range4 temp___expr_279)))
+(define-fun dynamic_invariant6 ((temp___expr_234 Int)
+  (temp___is_init_231 Bool) (temp___skip_constant_232 Bool)
+  (temp___do_toplevel_233 Bool)) Bool (=>
+                                      (or (= temp___is_init_231 true)
+                                      (<= 0 1)) (in_range4 temp___expr_234)))
 
-(define-fun dynamic_invariant7 ((temp___expr_156 Int)
-  (temp___is_init_153 Bool) (temp___skip_constant_154 Bool)
-  (temp___do_toplevel_155 Bool)) Bool (=>
-                                      (or (= temp___is_init_153 true)
+(define-fun dynamic_invariant7 ((temp___expr_154 Int)
+  (temp___is_init_151 Bool) (temp___skip_constant_152 Bool)
+  (temp___do_toplevel_153 Bool)) Bool (=>
+                                      (or (= temp___is_init_151 true)
                                       (<= 1 10000)) (in_range3
-                                      temp___expr_156)))
+                                      temp___expr_154)))
 
 (declare-fun oeq2 (us_rep2 us_rep2) Bool)
 
@@ -1086,13 +1049,12 @@
 ;; oeq__def_axiom
   (assert
   (forall ((x us_rep3) (y us_rep3))
-  (! (=> (oeq__function_guard1 (oeq1 x y) x y)
-     (= (= (oeq1 x y) true)
+  (! (= (= (oeq1 x y) true)
      (and
      (= (oeq (rec__list_mod_allocator__m__t__available (us_split_fields3 x))
         (rec__list_mod_allocator__m__t__available (us_split_fields3 y))) true)
      (= (oeq2 (rec__list_mod_allocator__m__t__allocated (us_split_fields3 x))
-        (rec__list_mod_allocator__m__t__allocated (us_split_fields3 y))) true)))) :pattern (
+        (rec__list_mod_allocator__m__t__allocated (us_split_fields3 y))) true))) :pattern (
   (oeq1 x y)) )))
 
 ;; ole__post_axiom
@@ -1147,11 +1109,11 @@
 
 (declare-fun r1 () Int)
 
-(declare-fun temp___340 () Int)
+(declare-fun temp___290 () Int)
 
-(declare-fun temp___339 () us_rep2)
+(declare-fun temp___289 () us_rep2)
 
-(declare-fun temp___338 () us_rep2)
+(declare-fun temp___288 () us_rep2)
 
 (declare-fun o () us_rep2)
 
@@ -1271,11 +1233,11 @@
 
 (declare-fun r10 () Int)
 
-(declare-fun temp___353 () Int)
+(declare-fun temp___299 () Int)
 
 (declare-fun result8 () int__ref)
 
-(declare-fun temp___3531 () Int)
+(declare-fun temp___2991 () Int)
 
 (declare-fun result9 () Bool)
 
@@ -1297,7 +1259,7 @@
 
 (declare-fun r12 () int__ref)
 
-(declare-fun temp___3532 () int__ref)
+(declare-fun temp___2992 () int__ref)
 
 (declare-fun avail5 () us_rep1)
 
@@ -1305,14 +1267,10 @@
 
 (declare-fun r13 () Int)
 
-(declare-fun temp___3533 () Int)
+(declare-fun temp___2993 () Int)
 
 ;; H
   (assert (in_range2 first_available))
-
-;; H
-  (assert (is_well_formed__function_guard
-  (is_well_formed data first_available) data first_available))
 
 ;; H
   (assert (= (is_well_formed data first_available) true))
@@ -1333,13 +1291,13 @@
   (assert (= r2 1))
 
 ;; H
-  (assert (=> (and (<= 1 r2) (<= r2 10000)) (= temp___340 r2)))
+  (assert (=> (and (<= 1 r2) (<= r2 10000)) (= temp___290 r2)))
 
 ;; H
-  (assert (=> (and (<= 1 r2) (<= r2 10000)) (= temp___339 unseen)))
+  (assert (=> (and (<= 1 r2) (<= r2 10000)) (= temp___289 unseen)))
 
 ;; H
-  (assert (=> (and (<= 1 r2) (<= r2 10000)) (= temp___338 alloc)))
+  (assert (=> (and (<= 1 r2) (<= r2 10000)) (= temp___288 alloc)))
 
 ;; H
   (assert
@@ -1540,8 +1498,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o2 (contains1 avail r8)) (contains__function_guard1 o2 avail r8))
+  (and (= o2 (contains1 avail r8))
   (= (= o2 true)
   (exists ((i Int))
   (and (and (<= 1 i) (<= i (length avail))) (= (get avail i) r8))))))
@@ -1610,16 +1567,6 @@
   (assert (= r9 o12))
 
 ;; H
-  (assert
-  (forall ((e Int)) (contains__function_guard1 (contains1 avail2 e) avail2
-  e)))
-
-;; H
-  (assert
-  (forall ((e Int)) (contains__function_guard1 (contains1 avail2 e) avail2
-  e)))
-
-;; H
   (assert (<= (length1 unseen9) 10000))
 
 ;; H
@@ -1686,16 +1633,14 @@
   (assert (=> (<= 0 10000) (in_range2 r10)))
 
 ;; H
-  (assert (= result8 (mk_int__ref temp___353)))
+  (assert (= result8 (mk_int__ref temp___299)))
 
 ;; H
-  (assert (= temp___3531 (length avail2)))
+  (assert (= temp___2991 (length avail2)))
 
 ;; H
   (assert
-  (and
-  (and (= o13 (contains1 avail2 r10)) (contains__function_guard1 o13 
-  avail2 r10))
+  (and (= o13 (contains1 avail2 r10))
   (= (= o13 true)
   (exists ((i Int))
   (and (and (<= 1 i) (<= i (length avail2))) (= (get avail2 i) r10))))))
@@ -1764,7 +1709,7 @@
   (assert (= r11 o23))
 
 ;; H
-  (assert (= temp___3532 (mk_int__ref temp___3531)))
+  (assert (= temp___2992 (mk_int__ref temp___2991)))
 
 ;; H
   (assert (= r12 (mk_int__ref r11)))
@@ -1776,7 +1721,7 @@
   (assert (= avail4 (mk_sequence__ref avail3)))
 
 ;; H
-  (assert (= temp___3533 temp___3531))
+  (assert (= temp___2993 temp___2991))
 
 ;; H
   (assert (= r13 r11))
@@ -1794,10 +1739,6 @@
 
 ;; H
   (assert (<= e 10000))
-
-;; H
-  (assert (contains__function_guard1 (contains1 (sequence__content avail4) e)
-  (sequence__content avail4) e))
 
 ;; H
   (assert

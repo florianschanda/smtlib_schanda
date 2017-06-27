@@ -474,34 +474,24 @@
 ;; user_eq__def_axiom
   (assert
   (forall ((a us_rep1) (b us_rep1))
-  (! (and (oeq__function_guard (oeq a b) a b) (= (user_eq6 a b) (oeq a b))) :pattern (
-  (user_eq6 a b)) )))
+  (! (= (user_eq6 a b) (oeq a b)) :pattern ((user_eq6 a b)) )))
 
-;; temp___result_313_def
-  (assert
-  (forall ((temp___312 us_rep1)) (length__function_guard (length temp___312)
-  temp___312)))
-
-(define-fun default_initial_assumption ((temp___expr_310 us_rep1)
-  (temp___skip_top_level_311 Bool)) Bool (=>
+(define-fun default_initial_assumption ((temp___expr_309 us_rep1)
+  (temp___skip_top_level_310 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_311 true))
-                                         (= (length temp___expr_310) 0)))
+                                         (= temp___skip_top_level_310 true))
+                                         (= (length temp___expr_309) 0)))
 
 ;; length__post_axiom
   (assert
-  (forall ((s us_rep1))
-  (! (let ((result (length s)))
-     (=> (length__function_guard result s) (dynamic_invariant1 result true
-     false true))) :pattern ((length s)) )))
+  (forall ((s us_rep1)) (! (dynamic_invariant1 (length s) true false
+  true) :pattern ((length s)) )))
 
 ;; length__post__dispatch_axiom
   (assert
   (forall ((attr__tag Int))
-  (forall ((s us_rep1))
-  (! (let ((result (length1 attr__tag s)))
-     (=> (length__function_guard1 result attr__tag s) (dynamic_invariant1
-     result true false true))) :pattern ((length1 attr__tag s)) ))))
+  (forall ((s us_rep1)) (! (dynamic_invariant1 (length1 attr__tag s) true
+  false true) :pattern ((length1 attr__tag s)) ))))
 
 (declare-fun get (us_rep1 Int) Int)
 
@@ -550,22 +540,17 @@
   (assert
   (forall ((s us_rep1))
   (forall ((n Int))
-  (! (and (length__function_guard (length s) s)
-     (=>
+  (! (=>
      (and (dynamic_invariant2 n true true true)
-     (and (<= 1 n) (<= n (length s))))
-     (let ((result (get s n)))
-     (=> (get__function_guard result s n) (dynamic_invariant3 result true
-     false true))))) :pattern ((get s n)) ))))
+     (and (<= 1 n) (<= n (length s)))) (dynamic_invariant3 (get s n) true
+     false true)) :pattern ((get s n)) ))))
 
 ;; get__post__dispatch_axiom
   (assert
   (forall ((attr__tag Int) (n Int))
   (forall ((s us_rep1))
-  (! (=> (dynamic_invariant2 n true true true)
-     (let ((result (get1 attr__tag s n)))
-     (=> (get__function_guard1 result attr__tag s n) (dynamic_invariant3
-     result true false true)))) :pattern ((get1 attr__tag s n)) ))))
+  (! (=> (dynamic_invariant2 n true true true) (dynamic_invariant3
+     (get1 attr__tag s n) true false true)) :pattern ((get1 attr__tag s n)) ))))
 
 (declare-datatypes ()
 ((us_split_fields2
@@ -668,29 +653,18 @@
 ;; user_eq__def_axiom
   (assert
   (forall ((a us_rep2) (b us_rep2))
-  (! (and (oeq__function_guard2 (oeq2 a b) a b)
-     (= (user_eq9 a b) (oeq2 a b))) :pattern ((user_eq9 a b)) )))
+  (! (= (user_eq9 a b) (oeq2 a b)) :pattern ((user_eq9 a b)) )))
 
-;; temp___result_403_def
-  (assert
-  (forall ((temp___402 us_rep1)) (length__function_guard (length temp___402)
-  temp___402)))
-
-;; temp___result_406_def
-  (assert
-  (forall ((temp___405 us_rep1)) (length__function_guard (length temp___405)
-  temp___405)))
-
-(define-fun default_initial_assumption1 ((temp___expr_399 us_rep2)
-  (temp___skip_top_level_400 Bool)) Bool (and
+(define-fun default_initial_assumption1 ((temp___expr_316 us_rep2)
+  (temp___skip_top_level_317 Bool)) Bool (and
                                          (= (length
                                             (rec__list_allocator__m__t__available
                                             (us_split_fields3
-                                            temp___expr_399))) 0)
+                                            temp___expr_316))) 0)
                                          (= (length
                                             (rec__list_allocator__m__t__allocated
                                             (us_split_fields3
-                                            temp___expr_399))) 0)))
+                                            temp___expr_316))) 0)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -705,12 +679,9 @@
   (assert
   (forall ((s us_rep1))
   (forall ((r Int))
-  (! (=> (mem__function_guard (mem s r) s r)
-     (and (length__function_guard (length s) s)
-     (and (forall ((j Int)) (get__function_guard (get s j) s j))
-     (= (= (mem s r) true)
+  (! (= (= (mem s r) true)
      (exists ((j Int))
-     (and (and (<= 1 j) (<= j (length s))) (= (get s j) r))))))) :pattern (
+     (and (and (<= 1 j) (<= j (length s))) (= (get s j) r)))) :pattern (
   (mem s r)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
@@ -724,11 +695,11 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(define-fun dynamic_invariant5 ((temp___expr_507 Int)
-  (temp___is_init_504 Bool) (temp___skip_constant_505 Bool)
-  (temp___do_toplevel_506 Bool)) Bool (=>
-                                      (or (= temp___is_init_504 true)
-                                      (<= 0 1)) (in_range5 temp___expr_507)))
+(define-fun dynamic_invariant5 ((temp___expr_331 Int)
+  (temp___is_init_328 Bool) (temp___skip_constant_329 Bool)
+  (temp___do_toplevel_330 Bool)) Bool (=>
+                                      (or (= temp___is_init_328 true)
+                                      (<= 0 1)) (in_range5 temp___expr_331)))
 
 (define-fun dynamic_invariant6 ((temp___expr_290 Int)
   (temp___is_init_287 Bool) (temp___skip_constant_288 Bool)
@@ -742,39 +713,21 @@
 ;; oeq__def_axiom
   (assert
   (forall ((x us_rep2) (y us_rep2))
-  (! (=> (oeq__function_guard2 (oeq2 x y) x y)
-     (and (oeq__function_guard
-     (oeq (rec__list_allocator__m__t__available (us_split_fields3 x))
-     (rec__list_allocator__m__t__available (us_split_fields3 y)))
-     (rec__list_allocator__m__t__available (us_split_fields3 x))
-     (rec__list_allocator__m__t__available (us_split_fields3 y)))
-     (and (oeq__function_guard
-     (oeq (rec__list_allocator__m__t__allocated (us_split_fields3 x))
-     (rec__list_allocator__m__t__allocated (us_split_fields3 y)))
-     (rec__list_allocator__m__t__allocated (us_split_fields3 x))
-     (rec__list_allocator__m__t__allocated (us_split_fields3 y)))
-     (= (= (oeq2 x y) true)
+  (! (= (= (oeq2 x y) true)
      (and
      (= (oeq (rec__list_allocator__m__t__available (us_split_fields3 x))
         (rec__list_allocator__m__t__available (us_split_fields3 y))) true)
      (= (oeq (rec__list_allocator__m__t__allocated (us_split_fields3 x))
-        (rec__list_allocator__m__t__allocated (us_split_fields3 y))) true)))))) :pattern (
+        (rec__list_allocator__m__t__allocated (us_split_fields3 y))) true))) :pattern (
   (oeq2 x y)) )))
 
 ;; oeq__post_axiom
   (assert
   (forall ((s1 us_rep1) (s2 us_rep1))
-  (! (let ((result (oeq s1 s2)))
-     (and (length__function_guard (length s1) s1)
-     (and (length__function_guard (length s2) s2)
-     (and (length__function_guard (length s1) s1)
-     (and (forall ((n Int)) (get__function_guard (get s1 n) s1 n))
-     (and (forall ((n Int)) (get__function_guard (get s2 n) s2 n))
-     (=> (oeq__function_guard result s1 s2)
-     (= (= result true)
+  (! (= (= (oeq s1 s2) true)
      (and (= (length s1) (length s2))
      (forall ((n Int))
-     (=> (and (<= 1 n) (<= n (length s1))) (= (get s1 n) (get s2 n))))))))))))) :pattern (
+     (=> (and (<= 1 n) (<= n (length s1))) (= (get s1 n) (get s2 n)))))) :pattern (
   (oeq s1 s2)) )))
 
 ;; oeq__post__dispatch_axiom
@@ -796,7 +749,7 @@
 
 (declare-fun o1 () Bool)
 
-(declare-fun temp___576 () Int)
+(declare-fun temp___385 () Int)
 
 (declare-fun o2 () Int)
 
@@ -861,9 +814,7 @@
 ;; H
   (assert
   (=> (not (= first_available 0))
-  (and
-  (and (= o19 (length model____split_fields)) (length__function_guard 
-  o19 model____split_fields)) (in_range6 o19))))
+  (and (= o19 (length model____split_fields)) (in_range6 o19))))
 
 ;; H
   (assert
@@ -873,9 +824,7 @@
   (assert
   (=> (not (= first_available 0))
   (=> (= result2 true)
-  (and
-  (and (= o18 (get model____split_fields 1)) (get__function_guard o18
-  model____split_fields 1)) (in_range7 o18)))))
+  (and (= o18 (get model____split_fields 1)) (in_range7 o18)))))
 
 ;; H
   (assert
@@ -890,9 +839,7 @@
 ;; H
   (assert
   (=> (not (not (= first_available 0)))
-  (and
-  (and (= o20 (length model____split_fields)) (length__function_guard 
-  o20 model____split_fields)) (in_range6 o20))))
+  (and (= o20 (length model____split_fields)) (in_range6 o20))))
 
 ;; H
   (assert
@@ -903,9 +850,7 @@
   (assert
   (=> (= result1 true)
   (=> (not (= first_allocated 0))
-  (and
-  (and (= o16 (length model____split_fields1)) (length__function_guard 
-  o16 model____split_fields1)) (in_range6 o16)))))
+  (and (= o16 (length model____split_fields1)) (in_range6 o16)))))
 
 ;; H
   (assert
@@ -917,9 +862,7 @@
   (=> (= result1 true)
   (=> (not (= first_allocated 0))
   (=> (= result3 true)
-  (and
-  (and (= o15 (get model____split_fields1 1)) (get__function_guard o15
-  model____split_fields1 1)) (in_range7 o15))))))
+  (and (= o15 (get model____split_fields1 1)) (in_range7 o15))))))
 
 ;; H
   (assert
@@ -937,9 +880,7 @@
   (assert
   (=> (= result1 true)
   (=> (not (not (= first_allocated 0)))
-  (and
-  (and (= o17 (length model____split_fields1)) (length__function_guard 
-  o17 model____split_fields1)) (in_range6 o17)))))
+  (and (= o17 (length model____split_fields1)) (in_range6 o17)))))
 
 ;; H
   (assert
@@ -954,10 +895,7 @@
   (assert (= result true))
 
 ;; H
-  (assert
-  (and
-  (and (= o (length model____split_fields)) (length__function_guard o
-  model____split_fields)) (in_range6 o)))
+  (assert (and (= o (length model____split_fields)) (in_range6 o)))
 
 ;; H
   (assert (= o1 (ite (<= j o) true false)))
@@ -969,10 +907,7 @@
   (assert (= result4 true))
 
 ;; H
-  (assert
-  (and
-  (and (= o14 (get model____split_fields j)) (get__function_guard o14
-  model____split_fields j)) (in_range7 o14)))
+  (assert (and (= o14 (get model____split_fields j)) (in_range7 o14)))
 
 ;; H
   (assert (= result6 (ite (in_range4 o14) true false)))
@@ -980,9 +915,7 @@
 ;; H
   (assert
   (=> (= result6 true)
-  (and
-  (and (= o10 (length model____split_fields)) (length__function_guard 
-  o10 model____split_fields)) (in_range6 o10))))
+  (and (= o10 (length model____split_fields)) (in_range6 o10))))
 
 ;; H
   (assert (=> (= result6 true) (= result7 (ite (< j o10) true false))))
@@ -996,9 +929,7 @@
   (assert
   (=> (= result6 true)
   (=> (= result7 true)
-  (and
-  (and (= o12 (get model____split_fields o11)) (get__function_guard o12
-  model____split_fields o11)) (in_range7 o12)))))
+  (and (= o12 (get model____split_fields o11)) (in_range7 o12)))))
 
 ;; H
   (assert (=> (= result6 true) (=> (not (= result7 true)) (= o12 0))))
@@ -1006,15 +937,13 @@
 ;; H
   (assert
   (=> (= result6 true)
-  (and
-  (and (= temp___576 (get model____split_fields j)) (get__function_guard
-  temp___576 model____split_fields j)) (in_range7 temp___576))))
+  (and (= temp___385 (get model____split_fields j)) (in_range7 temp___385))))
 
 ;; H
-  (assert (=> (= result6 true) (and (<= 1 temp___576) (<= temp___576 3))))
+  (assert (=> (= result6 true) (and (<= 1 temp___385) (<= temp___385 3))))
 
 ;; H
-  (assert (=> (= result6 true) (= o2 temp___576)))
+  (assert (=> (= result6 true) (= o2 temp___385)))
 
 ;; H
   (assert

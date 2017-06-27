@@ -95,11 +95,11 @@
 (define-fun category__ref___projection ((a category__ref)) category (category__content
                                                                     a))
 
-(define-fun dynamic_invariant ((temp___expr_148 Int)
-  (temp___is_init_145 Bool) (temp___skip_constant_146 Bool)
-  (temp___do_toplevel_147 Bool)) Bool (=>
-                                      (or (= temp___is_init_145 true)
-                                      (<= 1 8)) (in_range1 temp___expr_148)))
+(define-fun dynamic_invariant ((temp___expr_146 Int)
+  (temp___is_init_143 Bool) (temp___skip_constant_144 Bool)
+  (temp___do_toplevel_145 Bool)) Bool (=>
+                                      (or (= temp___is_init_143 true)
+                                      (<= 1 8)) (in_range1 temp___expr_146)))
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int natural))))))
@@ -331,13 +331,13 @@
 (define-fun num_item_t__ref___projection ((a num_item_t__ref)) us_t (num_item_t__content
                                                                     a))
 
-(define-fun dynamic_invariant1 ((temp___expr_154 us_t)
-  (temp___is_init_151 Bool) (temp___skip_constant_152 Bool)
-  (temp___do_toplevel_153 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_152 true))
+(define-fun dynamic_invariant1 ((temp___expr_152 us_t)
+  (temp___is_init_149 Bool) (temp___skip_constant_150 Bool)
+  (temp___do_toplevel_151 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_150 true))
                                       (dynamic_property 1 8
-                                      (first1 temp___expr_154)
-                                      (last1 temp___expr_154))))
+                                      (first1 temp___expr_152)
+                                      (last1 temp___expr_152))))
 
 (declare-sort t3s 0)
 

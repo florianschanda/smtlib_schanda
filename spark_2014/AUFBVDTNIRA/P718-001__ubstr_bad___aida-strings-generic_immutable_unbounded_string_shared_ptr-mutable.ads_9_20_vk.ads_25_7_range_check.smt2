@@ -404,16 +404,11 @@
 
 (declare-fun length__function_guard (Int us_rep) Bool)
 
-;; temp___result_825_def
-  (assert
-  (forall ((temp___824 us_rep)) (length__function_guard (length1 temp___824)
-  temp___824)))
-
-(define-fun default_initial_assumption ((temp___expr_822 us_rep)
-  (temp___skip_top_level_823 Bool)) Bool (=>
+(define-fun default_initial_assumption ((temp___expr_807 us_rep)
+  (temp___skip_top_level_808 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_823 true))
-                                         (= (length1 temp___expr_822) 0)))
+                                         (= temp___skip_top_level_808 true))
+                                         (= (length1 temp___expr_807) 0)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -469,16 +464,11 @@
                                       (<= 0 2147483647)) (in_range3
                                       temp___expr_158)))
 
-;; temp___result_813_def
-  (assert
-  (forall ((temp___812 us_rep)) (length__function_guard (length1 temp___812)
-  temp___812)))
-
-(define-fun default_initial_assumption1 ((temp___expr_810 us_rep)
-  (temp___skip_top_level_811 Bool)) Bool (=>
+(define-fun default_initial_assumption1 ((temp___expr_799 us_rep)
+  (temp___skip_top_level_800 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_811 true))
-                                         (= (length1 temp___expr_810) 0)))
+                                         (= temp___skip_top_level_800 true))
+                                         (= (length1 temp___expr_799) 0)))
 
 ;; H
   (assert (dynamic_invariant text true false true))

@@ -73,31 +73,21 @@
 
 (declare-fun to_int__2__function_guard (Int Int) Bool)
 
-(define-fun dynamic_invariant ((temp___expr_143 Int)
-  (temp___is_init_140 Bool) (temp___skip_constant_141 Bool)
-  (temp___do_toplevel_142 Bool)) Bool (=>
-                                      (or (= temp___is_init_140 true)
+(define-fun dynamic_invariant ((temp___expr_142 Int)
+  (temp___is_init_139 Bool) (temp___skip_constant_140 Bool)
+  (temp___do_toplevel_141 Bool)) Bool (=>
+                                      (or (= temp___is_init_139 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range1 temp___expr_143)))
+                                      (in_range1 temp___expr_142)))
 
-;; temp___result_147_def
-  (assert
-  (forall ((temp___146 Int)) (to_int__2__function_guard
-  (to_int__2 temp___146) temp___146)))
-
-;; temp___result_147_def
-  (assert
-  (forall ((temp___146 Int)) (to_int__2__function_guard
-  (to_int__2 temp___146) temp___146)))
-
-(define-fun default_initial_assumption ((temp___expr_144 Int)
-  (temp___skip_top_level_145 Bool)) Bool (and (= temp___expr_144 5)
+(define-fun default_initial_assumption ((temp___expr_143 Int)
+  (temp___skip_top_level_144 Bool)) Bool (and (= temp___expr_143 5)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_145 true))
+                                         (= temp___skip_top_level_144 true))
                                          (and
-                                         (<= 1 (to_int__2 temp___expr_144))
-                                         (<= (to_int__2 temp___expr_144) 10)))))
+                                         (<= 1 (to_int__2 temp___expr_143))
+                                         (<= (to_int__2 temp___expr_143) 10)))))
 
 (declare-sort integer 0)
 
@@ -131,33 +121,27 @@
 ;; to_int__2__post_axiom
   (assert
   (forall ((d Int))
-  (! (=> (dynamic_invariant d true true true)
-     (let ((result (to_int__2 d)))
-     (=> (to_int__2__function_guard result d) (dynamic_invariant1 result true
-     false true)))) :pattern ((to_int__2 d)) )))
+  (! (=> (dynamic_invariant d true true true) (dynamic_invariant1
+     (to_int__2 d) true false true)) :pattern ((to_int__2 d)) )))
 
 ;; to_int__2__def_axiom
   (assert
   (forall ((d Int))
-  (! (=>
-     (and (dynamic_invariant d true true true) (to_int__2__function_guard
-     (to_int__2 d) d)) (= (to_int__2 d) d)) :pattern ((to_int__2 d)) )))
+  (! (=> (dynamic_invariant d true true true) (= (to_int__2 d) d)) :pattern (
+  (to_int__2 d)) )))
 
 (declare-fun us () Int)
 
-(declare-fun temp___152 () Int)
+(declare-fun temp___148 () Int)
 
 ;; H
   (assert (and (= us 5) (in_range1 5)))
 
 ;; H
-  (assert (and (in_range1 temp___152) (= temp___152 5)))
-
-;; H
-  (assert (to_int__2__function_guard (to_int__2 temp___152) temp___152))
+  (assert (and (in_range1 temp___148) (= temp___148 5)))
 
 (assert
 ;; WP_parameter_def
  ;; File "dic3.ads", line 14, characters 0-0
-  (not (<= 1 (to_int__2 temp___152))))
+  (not (<= 1 (to_int__2 temp___148))))
 (check-sat)

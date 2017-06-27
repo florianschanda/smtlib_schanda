@@ -245,19 +245,9 @@
 
 ;; H
   (assert
-  (forall ((j Int)) (property__function_guard
-  (property (to_rep (select x j)) j) (to_rep (select x j)) j)))
-
-;; H
-  (assert
   (not
   (exists ((j Int))
   (and (and (<= 1 j) (<= j 10)) (= (property (to_rep (select x j)) j) true)))))
-
-;; H
-  (assert
-  (forall ((j Int)) (property__function_guard
-  (property (to_rep (select x j)) j) (to_rep (select x j)) j)))
 
 (assert
 ;; WP_parameter_def

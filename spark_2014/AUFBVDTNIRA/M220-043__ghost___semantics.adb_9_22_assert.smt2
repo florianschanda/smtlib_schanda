@@ -82,10 +82,9 @@
 
 ;; ghost_func__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (ghost_func us_void_param)))
-     (=> (ghost_func__function_guard result us_void_param) (dynamic_invariant
-     result true false true))) :pattern ((ghost_func us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant
+  (ghost_func us_void_param) true false
+  true) :pattern ((ghost_func us_void_param)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -116,13 +115,7 @@
   (assert (in_range1 formal))
 
 ;; H
-  (assert (ghost_func__function_guard (ghost_func Tuple0) Tuple0))
-
-;; H
   (assert (= formal (ghost_func Tuple0)))
-
-;; H
-  (assert (ghost_func__function_guard (ghost_func Tuple0) Tuple0))
 
 (assert
 ;; WP_parameter_def

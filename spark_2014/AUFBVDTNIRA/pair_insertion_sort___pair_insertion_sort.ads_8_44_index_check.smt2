@@ -339,7 +339,7 @@
 
 (declare-fun o1 () Bool)
 
-(declare-fun temp___280 () Int)
+(declare-fun temp___251 () Int)
 
 (declare-fun result () Bool)
 
@@ -372,10 +372,10 @@
   (assert (= result true))
 
 ;; H
-  (assert (and (= temp___280 (+ k 1)) (in_range1 (+ k 1))))
+  (assert (and (= temp___251 (+ k 1)) (in_range1 (+ k 1))))
 
 (assert
 ;; WP_parameter_def
  ;; File "pair_insertion_sort.ads", line 7, characters 0-0
-  (not (<= (to_rep (first (rt a))) temp___280)))
+  (not (<= (to_rep (first (rt a))) temp___251)))
 (check-sat)

@@ -96,12 +96,12 @@
 (define-fun index_type__ref___projection ((a index_type__ref)) index_type 
   (index_type__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_157 Int)
-  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
-  (temp___do_toplevel_156 Bool)) Bool (=>
-                                      (or (= temp___is_init_154 true)
+(define-fun dynamic_invariant1 ((temp___expr_152 Int)
+  (temp___is_init_149 Bool) (temp___skip_constant_150 Bool)
+  (temp___do_toplevel_151 Bool)) Bool (=>
+                                      (or (= temp___is_init_149 true)
                                       (<= 1 100)) (in_range2
-                                      temp___expr_157)))
+                                      temp___expr_152)))
 
 (declare-sort extended_index_type 0)
 
@@ -126,12 +126,12 @@
 (define-fun extended_index_type__ref___projection ((a extended_index_type__ref)) extended_index_type 
   (extended_index_type__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_163 Int)
-  (temp___is_init_160 Bool) (temp___skip_constant_161 Bool)
-  (temp___do_toplevel_162 Bool)) Bool (=>
-                                      (or (= temp___is_init_160 true)
+(define-fun dynamic_invariant2 ((temp___expr_158 Int)
+  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
+  (temp___do_toplevel_157 Bool)) Bool (=>
+                                      (or (= temp___is_init_155 true)
                                       (<= 0 100)) (in_range3
-                                      temp___expr_163)))
+                                      temp___expr_158)))
 
 (declare-fun to_rep (extended_index_type) Int)
 
@@ -398,11 +398,11 @@
 
 (declare-fun is_empty__function_guard (Bool us_rep2) Bool)
 
-(define-fun default_initial_assumption ((temp___expr_252 us_rep2)
-  (temp___skip_top_level_253 Bool)) Bool (=>
+(define-fun default_initial_assumption ((temp___expr_241 us_rep2)
+  (temp___skip_top_level_242 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_253 true))
-                                         (= (is_empty temp___expr_252) true)))
+                                         (= temp___skip_top_level_242 true))
+                                         (= (is_empty temp___expr_241) true)))
 
 (declare-fun ole (us_rep2 us_rep2) Bool)
 
@@ -432,11 +432,11 @@
 
 (declare-fun included_except__function_guard (Bool us_rep2 us_rep2 Int) Bool)
 
-(define-fun default_initial_assumption1 ((temp___expr_265 us_rep2)
-  (temp___skip_top_level_266 Bool)) Bool (=>
+(define-fun default_initial_assumption1 ((temp___expr_254 us_rep2)
+  (temp___skip_top_level_255 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_266 true))
-                                         (= (is_empty temp___expr_265) true)))
+                                         (= temp___skip_top_level_255 true))
+                                         (= (is_empty temp___expr_254) true)))
 
 ;; is_add__2__post_axiom
   (assert true)
@@ -445,11 +445,10 @@
   (assert
   (forall ((s1 us_rep2) (s2 us_rep2))
   (forall ((e Int))
-  (! (=> (is_add__2__function_guard (is_add__2 s1 e s2) s1 e s2)
-     (= (= (is_add__2 s1 e s2) true)
+  (! (= (= (is_add__2 s1 e s2) true)
      (and
      (and (and (not (= (contains s1 e) true)) (= (contains s2 e) true))
-     (= (ole s1 s2) true)) (= (included_except s2 s1 e) true)))) :pattern (
+     (= (ole s1 s2) true)) (= (included_except s2 s1 e) true))) :pattern (
   (is_add__2 s1 e s2)) ))))
 
 (declare-sort position_type 0)
@@ -1146,102 +1145,56 @@
 (declare-fun ordered_leafs__function_guard (Bool us_rep4 Int
   (Array Int natural)) Bool)
 
-(declare-fun temp___584 (Int) (Array Int natural))
+(declare-fun temp___390 (Int) (Array Int natural))
 
 ;; def_axiom
   (assert
-  (forall ((temp___586 Int))
-  (forall ((temp___587 Int))
-  (= (select (temp___584 temp___586) temp___587) (of_rep2 temp___586)))))
+  (forall ((temp___392 Int))
+  (forall ((temp___393 Int))
+  (= (select (temp___390 temp___392) temp___393) (of_rep2 temp___392)))))
 
-;; temp___result_571_def
-  (assert
-  (forall ((temp___568 us_rep5)) (size__function_guard1
-  (size1
-  (rec__search_trees__search_tree__struct (us_split_fields7 temp___568)))
-  (rec__search_trees__search_tree__struct (us_split_fields7 temp___568)))))
-
-;; temp___result_569_def
-  (assert
-  (forall ((temp___568 us_rep5)) (valid_root__function_guard
-  (valid_root
-  (rec__search_trees__search_tree__struct (us_split_fields7 temp___568))
-  (to_rep
-  (rec__search_trees__search_tree__root (us_split_fields7 temp___568))))
-  (rec__search_trees__search_tree__struct (us_split_fields7 temp___568))
-  (to_rep
-  (rec__search_trees__search_tree__root (us_split_fields7 temp___568))))))
-
-;; temp___result_570_def
-  (assert
-  (forall ((temp___568 us_rep5)) (ordered_leafs__function_guard
-  (ordered_leafs
-  (rec__search_trees__search_tree__struct (us_split_fields7 temp___568))
-  (to_rep
-  (rec__search_trees__search_tree__root (us_split_fields7 temp___568)))
-  (rec__search_trees__search_tree__values (us_split_fields7 temp___568)))
-  (rec__search_trees__search_tree__struct (us_split_fields7 temp___568))
-  (to_rep
-  (rec__search_trees__search_tree__root (us_split_fields7 temp___568)))
-  (rec__search_trees__search_tree__values (us_split_fields7 temp___568)))))
-
-;; temp___result_573_def
-  (assert
-  (forall ((temp___572 us_rep4)) (tree_structure__function_guard
-  (tree_structure temp___572) temp___572)))
-
-(define-fun dynamic_invariant3 ((temp___expr_567 us_rep5)
-  (temp___is_init_564 Bool) (temp___skip_constant_565 Bool)
-  (temp___do_toplevel_566 Bool)) Bool (and
+(define-fun dynamic_invariant3 ((temp___expr_378 us_rep5)
+  (temp___is_init_375 Bool) (temp___skip_constant_376 Bool)
+  (temp___do_toplevel_377 Bool)) Bool (and
                                       (ite (= (size1
                                               (rec__search_trees__search_tree__struct
                                               (us_split_fields7
-                                              temp___expr_567))) 0)
+                                              temp___expr_378))) 0)
                                       (= (to_rep
                                          (rec__search_trees__search_tree__root
-                                         (us_split_fields7 temp___expr_567))) 0)
+                                         (us_split_fields7 temp___expr_378))) 0)
                                       (and
                                       (and
                                       (not
                                       (= (to_rep
                                          (rec__search_trees__search_tree__root
-                                         (us_split_fields7 temp___expr_567))) 0))
+                                         (us_split_fields7 temp___expr_378))) 0))
                                       (= (valid_root
                                          (rec__search_trees__search_tree__struct
-                                         (us_split_fields7 temp___expr_567))
+                                         (us_split_fields7 temp___expr_378))
                                          (to_rep
                                          (rec__search_trees__search_tree__root
-                                         (us_split_fields7 temp___expr_567)))) true))
+                                         (us_split_fields7 temp___expr_378)))) true))
                                       (= (ordered_leafs
                                          (rec__search_trees__search_tree__struct
-                                         (us_split_fields7 temp___expr_567))
+                                         (us_split_fields7 temp___expr_378))
                                          (to_rep
                                          (rec__search_trees__search_tree__root
-                                         (us_split_fields7 temp___expr_567)))
+                                         (us_split_fields7 temp___expr_378)))
                                          (rec__search_trees__search_tree__values
-                                         (us_split_fields7 temp___expr_567))) true)))
+                                         (us_split_fields7 temp___expr_378))) true)))
                                       (= (tree_structure
                                          (rec__search_trees__search_tree__struct
-                                         (us_split_fields7 temp___expr_567))) true)))
+                                         (us_split_fields7 temp___expr_378))) true)))
 
-;; temp___result_583_def
-  (assert
-  (forall ((temp___582 us_rep4)) (size__function_guard1 (size1 temp___582)
-  temp___582)))
-
-;; temp___result_589_def
-  (assert
-  (forall ((temp___588 us_rep5)) (size__function_guard (size temp___588)
-  temp___588)))
-
-(define-fun default_initial_assumption2 ((temp___expr_576 us_rep5)
-  (temp___skip_top_level_577 Bool)) Bool (and
+(define-fun default_initial_assumption2 ((temp___expr_383 us_rep5)
+  (temp___skip_top_level_384 Bool)) Bool (and
                                          (and
                                          (and
                                          (= (to_rep
                                             (rec__search_trees__search_tree__root
                                             (us_split_fields7
-                                            temp___expr_576))) 0)
+                                            temp___expr_383))) 0)
                                          (and
                                          (and
                                          (= (to_rep
@@ -1249,11 +1202,11 @@
                                             (us_split_fields5
                                             (rec__search_trees__search_tree__struct
                                             (us_split_fields7
-                                            temp___expr_576))))) 0)
-                                         (forall ((temp___580 Int))
+                                            temp___expr_383))))) 0)
+                                         (forall ((temp___387 Int))
                                          (=>
-                                         (and (<= 1 temp___580)
-                                         (<= temp___580 100))
+                                         (and (<= 1 temp___387)
+                                         (<= temp___387 100))
                                          (and
                                          (and
                                          (and
@@ -1264,7 +1217,7 @@
                                                     (us_split_fields5
                                                     (rec__search_trees__search_tree__struct
                                                     (us_split_fields7
-                                                    temp___expr_576)))) temp___580)))) 0)
+                                                    temp___expr_383)))) temp___387)))) 0)
                                          (= (to_rep
                                             (rec__binary_trees__cell__right
                                             (us_split_fields3
@@ -1272,7 +1225,7 @@
                                                     (us_split_fields5
                                                     (rec__search_trees__search_tree__struct
                                                     (us_split_fields7
-                                                    temp___expr_576)))) temp___580)))) 0))
+                                                    temp___expr_383)))) temp___387)))) 0))
                                          (= (to_rep
                                             (rec__binary_trees__cell__parent
                                             (us_split_fields3
@@ -1280,7 +1233,7 @@
                                                     (us_split_fields5
                                                     (rec__search_trees__search_tree__struct
                                                     (us_split_fields7
-                                                    temp___expr_576)))) temp___580)))) 0))
+                                                    temp___expr_383)))) temp___387)))) 0))
                                          (= (to_rep1
                                             (rec__binary_trees__cell__position
                                             (us_split_fields3
@@ -1288,105 +1241,67 @@
                                                     (us_split_fields5
                                                     (rec__search_trees__search_tree__struct
                                                     (us_split_fields7
-                                                    temp___expr_576)))) temp___580)))) 2)))))
+                                                    temp___expr_383)))) temp___387)))) 2)))))
                                          (= (size1
                                             (rec__search_trees__search_tree__struct
                                             (us_split_fields7
-                                            temp___expr_576))) 0)))
+                                            temp___expr_383))) 0)))
                                          (= (rec__search_trees__search_tree__values
                                             (us_split_fields7
-                                            temp___expr_576)) (temp___584 0)))
+                                            temp___expr_383)) (temp___390 0)))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_577 true))
-                                         (= (size temp___expr_576) 0))))
+                                         (= temp___skip_top_level_384 true))
+                                         (= (size temp___expr_383) 0))))
 
-;; temp___result_594_def
-  (assert
-  (forall ((temp___591 us_rep5)) (size__function_guard1
-  (size1
-  (rec__search_trees__search_tree__struct (us_split_fields7 temp___591)))
-  (rec__search_trees__search_tree__struct (us_split_fields7 temp___591)))))
-
-;; temp___result_592_def
-  (assert
-  (forall ((temp___591 us_rep5)) (valid_root__function_guard
-  (valid_root
-  (rec__search_trees__search_tree__struct (us_split_fields7 temp___591))
-  (to_rep
-  (rec__search_trees__search_tree__root (us_split_fields7 temp___591))))
-  (rec__search_trees__search_tree__struct (us_split_fields7 temp___591))
-  (to_rep
-  (rec__search_trees__search_tree__root (us_split_fields7 temp___591))))))
-
-;; temp___result_593_def
-  (assert
-  (forall ((temp___591 us_rep5)) (ordered_leafs__function_guard
-  (ordered_leafs
-  (rec__search_trees__search_tree__struct (us_split_fields7 temp___591))
-  (to_rep
-  (rec__search_trees__search_tree__root (us_split_fields7 temp___591)))
-  (rec__search_trees__search_tree__values (us_split_fields7 temp___591)))
-  (rec__search_trees__search_tree__struct (us_split_fields7 temp___591))
-  (to_rep
-  (rec__search_trees__search_tree__root (us_split_fields7 temp___591)))
-  (rec__search_trees__search_tree__values (us_split_fields7 temp___591)))))
-
-(define-fun type_invariant ((temp___590 us_rep5)) Bool (ite (= (size1
+(define-fun type_invariant ((temp___395 us_rep5)) Bool (ite (= (size1
                                                                (rec__search_trees__search_tree__struct
                                                                (us_split_fields7
-                                                               temp___590))) 0)
+                                                               temp___395))) 0)
                                                        (= (to_rep
                                                           (rec__search_trees__search_tree__root
                                                           (us_split_fields7
-                                                          temp___590))) 0)
+                                                          temp___395))) 0)
                                                        (and
                                                        (and
                                                        (not
                                                        (= (to_rep
                                                           (rec__search_trees__search_tree__root
                                                           (us_split_fields7
-                                                          temp___590))) 0))
+                                                          temp___395))) 0))
                                                        (= (valid_root
                                                           (rec__search_trees__search_tree__struct
                                                           (us_split_fields7
-                                                          temp___590))
+                                                          temp___395))
                                                           (to_rep
                                                           (rec__search_trees__search_tree__root
                                                           (us_split_fields7
-                                                          temp___590)))) true))
+                                                          temp___395)))) true))
                                                        (= (ordered_leafs
                                                           (rec__search_trees__search_tree__struct
                                                           (us_split_fields7
-                                                          temp___590))
+                                                          temp___395))
                                                           (to_rep
                                                           (rec__search_trees__search_tree__root
                                                           (us_split_fields7
-                                                          temp___590)))
+                                                          temp___395)))
                                                           (rec__search_trees__search_tree__values
                                                           (us_split_fields7
-                                                          temp___590))) true))))
+                                                          temp___395))) true))))
 
 ;; size__post_axiom
   (assert
   (forall ((t us_rep5))
-  (! (=> (dynamic_invariant3 t true true true)
-     (let ((result (size t)))
-     (=> (size__function_guard result t) (dynamic_invariant2 result true
-     false true)))) :pattern ((size t)) )))
+  (! (=> (dynamic_invariant3 t true true true) (dynamic_invariant2 (size t)
+     true false true)) :pattern ((size t)) )))
 
 ;; size__def_axiom
   (assert
   (forall ((t us_rep5))
-  (! (=>
-     (and (dynamic_invariant3 t true true true) (size__function_guard
-     (size t) t))
-     (and (size__function_guard1
-     (size1 (rec__search_trees__search_tree__struct (us_split_fields7 t)))
-     (rec__search_trees__search_tree__struct (us_split_fields7 t)))
+  (! (=> (dynamic_invariant3 t true true true)
      (= (size t) (size1
                  (rec__search_trees__search_tree__struct
-                 (us_split_fields7 t)))))) :pattern ((size t)) )))
+                 (us_split_fields7 t))))) :pattern ((size t)) )))
 
 (declare-fun root (us_rep5) Int)
 
@@ -1395,18 +1310,13 @@
 ;; root__post_axiom
   (assert
   (forall ((t us_rep5))
-  (! (and (size__function_guard (size t) t)
-     (=> (and (dynamic_invariant3 t true true true) (not (= (size t) 0)))
-     (let ((result (root t)))
-     (=> (root__function_guard result t) (dynamic_invariant1 result true
-     false true))))) :pattern ((root t)) )))
+  (! (=> (and (dynamic_invariant3 t true true true) (not (= (size t) 0)))
+     (dynamic_invariant1 (root t) true false true)) :pattern ((root t)) )))
 
 ;; root__def_axiom
   (assert
   (forall ((t us_rep5))
-  (! (=>
-     (and (dynamic_invariant3 t true true true) (root__function_guard
-     (root t) t))
+  (! (=> (dynamic_invariant3 t true true true)
      (= (root t) (to_rep
                  (rec__search_trees__search_tree__root (us_split_fields7 t))))) :pattern (
   (root t)) )))
@@ -1427,25 +1337,19 @@
      (and (dynamic_invariant3 t true true true) (dynamic_invariant1 i true
      true true))
      (let ((result (parent t i)))
-     (and (size__function_guard (size t) t)
-     (=> (parent__function_guard result t i)
      (and (=> (= (size t) 0) (= result 0)) (dynamic_invariant2 result true
-     false true)))))) :pattern ((parent t i)) ))))
+     false true)))) :pattern ((parent t i)) ))))
 
 ;; parent__def_axiom
   (assert
   (forall ((t us_rep5))
   (forall ((i Int))
   (! (=>
-     (and
      (and (dynamic_invariant3 t true true true) (dynamic_invariant1 i true
-     true true)) (parent__function_guard (parent t i) t i))
-     (and (parent__function_guard1
-     (parent1 (rec__search_trees__search_tree__struct (us_split_fields7 t))
-     i) (rec__search_trees__search_tree__struct (us_split_fields7 t)) i)
+     true true))
      (= (parent t i) (parent1
                      (rec__search_trees__search_tree__struct
-                     (us_split_fields7 t)) i)))) :pattern ((parent t i)) ))))
+                     (us_split_fields7 t)) i))) :pattern ((parent t i)) ))))
 
 (declare-sort direction 0)
 
@@ -1468,11 +1372,11 @@
 (define-fun direction__ref___projection ((a direction__ref)) direction 
   (direction__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_175 Int)
-  (temp___is_init_172 Bool) (temp___skip_constant_173 Bool)
-  (temp___do_toplevel_174 Bool)) Bool (=>
-                                      (or (= temp___is_init_172 true)
-                                      (<= 0 1)) (in_range5 temp___expr_175)))
+(define-fun dynamic_invariant4 ((temp___expr_170 Int)
+  (temp___is_init_167 Bool) (temp___skip_constant_168 Bool)
+  (temp___do_toplevel_169 Bool)) Bool (=>
+                                      (or (= temp___is_init_167 true)
+                                      (<= 0 1)) (in_range5 temp___expr_170)))
 
 (declare-fun position (us_rep4 Int) Int)
 
@@ -1486,29 +1390,22 @@
   (assert
   (forall ((t us_rep5))
   (forall ((i Int))
-  (! (and (parent__function_guard (parent t i) t i)
-     (=>
+  (! (=>
      (and
      (and (dynamic_invariant3 t true true true) (dynamic_invariant1 i true
-     true true)) (not (= (parent t i) 0)))
-     (let ((result (position1 t i)))
-     (=> (position__function_guard1 result t i) (dynamic_invariant4 result
-     true false true))))) :pattern ((position1 t i)) ))))
+     true true)) (not (= (parent t i) 0))) (dynamic_invariant4
+     (position1 t i) true false true)) :pattern ((position1 t i)) ))))
 
 ;; position__def_axiom
   (assert
   (forall ((t us_rep5))
   (forall ((i Int))
   (! (=>
-     (and
      (and (dynamic_invariant3 t true true true) (dynamic_invariant1 i true
-     true true)) (position__function_guard1 (position1 t i) t i))
-     (and (position__function_guard
-     (position (rec__search_trees__search_tree__struct (us_split_fields7 t))
-     i) (rec__search_trees__search_tree__struct (us_split_fields7 t)) i)
+     true true))
      (= (position1 t i) (position
                         (rec__search_trees__search_tree__struct
-                        (us_split_fields7 t)) i)))) :pattern ((position1 t i)) ))))
+                        (us_split_fields7 t)) i))) :pattern ((position1 t i)) ))))
 
 (declare-fun model__ (us_rep5) (Array Int us_rep1))
 
@@ -1518,31 +1415,31 @@
 
 (declare-fun length__function_guard (Int us_rep) Bool)
 
-(define-fun dynamic_invariant5 ((temp___expr_223 (Array Int us_rep1))
-  (temp___is_init_220 Bool) (temp___skip_constant_221 Bool)
-  (temp___do_toplevel_222 Bool)) Bool (forall ((temp___224 Int))
+(define-fun dynamic_invariant5 ((temp___expr_218 (Array Int us_rep1))
+  (temp___is_init_215 Bool) (temp___skip_constant_216 Bool)
+  (temp___do_toplevel_217 Bool)) Bool (forall ((temp___219 Int))
                                       (=>
-                                      (and (<= 1 temp___224)
-                                      (<= temp___224 100))
-                                      (=> (= temp___is_init_220 true)
+                                      (and (<= 1 temp___219)
+                                      (<= temp___219 100))
+                                      (=> (= temp___is_init_215 true)
                                       (< (length
                                          (rec__tree_model__path_type__a
                                          (us_split_fields1
-                                         (select temp___expr_223 temp___224)))) 100)))))
+                                         (select temp___expr_218 temp___219)))) 100)))))
 
-(define-fun default_initial_assumption3 ((temp___expr_226 (Array Int us_rep1))
-  (temp___skip_top_level_227 Bool)) Bool (forall ((temp___228 Int))
+(define-fun default_initial_assumption3 ((temp___expr_221 (Array Int us_rep1))
+  (temp___skip_top_level_222 Bool)) Bool (forall ((temp___223 Int))
                                          (=>
-                                         (and (<= 1 temp___228)
-                                         (<= temp___228 100))
+                                         (and (<= 1 temp___223)
+                                         (<= temp___223 100))
                                          (and
                                          (= (length
                                             (rec__tree_model__path_type__a
                                             (us_split_fields1
-                                            (select temp___expr_226 temp___228)))) 0)
+                                            (select temp___expr_221 temp___223)))) 0)
                                          (= (rec__tree_model__path_type__k
                                             (us_split_fields1
-                                            (select temp___expr_226 temp___228))) 
+                                            (select temp___expr_221 temp___223))) 
                                          (of_int 0))))))
 
 (declare-fun model__1 (us_rep4 Int) (Array Int us_rep1))
@@ -1552,29 +1449,19 @@
 ;; model____post_axiom
   (assert
   (forall ((t us_rep5))
-  (! (and (size__function_guard (size t) t)
-     (=> (and (dynamic_invariant3 t true true true) (not (= (size t) 0)))
-     (let ((result (model__ t)))
-     (=> (model____function_guard result t) (dynamic_invariant5 result true
-     false true))))) :pattern ((model__ t)) )))
+  (! (=> (and (dynamic_invariant3 t true true true) (not (= (size t) 0)))
+     (dynamic_invariant5 (model__ t) true false true)) :pattern ((model__ t)) )))
 
 ;; model____def_axiom
   (assert
   (forall ((t us_rep5))
-  (! (=>
-     (and (dynamic_invariant3 t true true true) (model____function_guard
-     (model__ t) t))
-     (and (model____function_guard1
-     (model__1 (rec__search_trees__search_tree__struct (us_split_fields7 t))
-     (to_rep (rec__search_trees__search_tree__root (us_split_fields7 t))))
-     (rec__search_trees__search_tree__struct (us_split_fields7 t))
-     (to_rep (rec__search_trees__search_tree__root (us_split_fields7 t))))
+  (! (=> (dynamic_invariant3 t true true true)
      (= (model__ t) (model__1
                     (rec__search_trees__search_tree__struct
                     (us_split_fields7 t))
                     (to_rep
                     (rec__search_trees__search_tree__root
-                    (us_split_fields7 t))))))) :pattern ((model__ t)) )))
+                    (us_split_fields7 t)))))) :pattern ((model__ t)) )))
 
 (declare-fun peek (us_rep5 Int Int) Int)
 
@@ -1588,9 +1475,7 @@
   (assert
   (forall ((t us_rep5))
   (forall ((i Int) (d Int))
-  (! (and (size__function_guard (size t) t)
-     (and (model____function_guard (model__ t) t)
-     (=>
+  (! (=>
      (and
      (and
      (and (dynamic_invariant3 t true true true) (dynamic_invariant1 i true
@@ -1598,10 +1483,9 @@
      (and (not (= (size t) 0))
      (= (rec__tree_model__path_type__k
         (us_split_fields1
-        (let ((temp___640 (model__ t))) (select temp___640 i)))) true)))
-     (let ((result (peek t i d)))
-     (=> (peek__function_guard result t i d) (dynamic_invariant2 result true
-     false true)))))) :pattern ((peek t i d)) ))))
+        (let ((temp___422 (model__ t))) (select temp___422 i)))) true)))
+     (dynamic_invariant2 (peek t i d) true false true)) :pattern ((peek t i
+                                                                  d)) ))))
 
 ;; peek__def_axiom
   (assert
@@ -1609,16 +1493,11 @@
   (forall ((i Int) (d Int))
   (! (=>
      (and
-     (and
      (and (dynamic_invariant3 t true true true) (dynamic_invariant1 i true
-     true true)) (dynamic_invariant4 d true true true)) (peek__function_guard
-     (peek t i d) t i d))
-     (and (peek__function_guard1
-     (peek1 (rec__search_trees__search_tree__struct (us_split_fields7 t)) i
-     d) (rec__search_trees__search_tree__struct (us_split_fields7 t)) i d)
+     true true)) (dynamic_invariant4 d true true true))
      (= (peek t i d) (peek1
                      (rec__search_trees__search_tree__struct
-                     (us_split_fields7 t)) i d)))) :pattern ((peek t i d)) ))))
+                     (us_split_fields7 t)) i d))) :pattern ((peek t i d)) ))))
 
 (declare-fun values (us_rep5) us_rep2)
 
@@ -1628,10 +1507,7 @@
   (assert
   (forall ((t us_rep5))
   (! (=> (dynamic_invariant3 t true true true)
-     (let ((result (values t)))
-     (and (size__function_guard (size t) t)
-     (=> (values__function_guard result t)
-     (=> (= (size t) 0) (= (is_empty result) true)))))) :pattern ((values t)) )))
+     (=> (= (size t) 0) (= (is_empty (values t)) true))) :pattern ((values t)) )))
 
 (declare-sort color_type 0)
 
@@ -1918,100 +1794,54 @@
 
 (declare-fun invariant____function_guard (Bool us_rep6) Bool)
 
-(declare-fun temp___926 (Int) (Array Int color_type))
+(declare-fun temp___502 (Int) (Array Int color_type))
 
 ;; def_axiom
   (assert
-  (forall ((temp___928 Int))
-  (forall ((temp___929 Int))
-  (= (select (temp___926 temp___928) temp___929) (of_rep3 temp___928)))))
+  (forall ((temp___504 Int))
+  (forall ((temp___505 Int))
+  (= (select (temp___502 temp___504) temp___505) (of_rep3 temp___504)))))
 
-;; temp___result_909_def
-  (assert
-  (forall ((temp___906 us_rep5)) (size__function_guard1
-  (size1
-  (rec__search_trees__search_tree__struct (us_split_fields7 temp___906)))
-  (rec__search_trees__search_tree__struct (us_split_fields7 temp___906)))))
-
-;; temp___result_907_def
-  (assert
-  (forall ((temp___906 us_rep5)) (valid_root__function_guard
-  (valid_root
-  (rec__search_trees__search_tree__struct (us_split_fields7 temp___906))
-  (to_rep
-  (rec__search_trees__search_tree__root (us_split_fields7 temp___906))))
-  (rec__search_trees__search_tree__struct (us_split_fields7 temp___906))
-  (to_rep
-  (rec__search_trees__search_tree__root (us_split_fields7 temp___906))))))
-
-;; temp___result_908_def
-  (assert
-  (forall ((temp___906 us_rep5)) (ordered_leafs__function_guard
-  (ordered_leafs
-  (rec__search_trees__search_tree__struct (us_split_fields7 temp___906))
-  (to_rep
-  (rec__search_trees__search_tree__root (us_split_fields7 temp___906)))
-  (rec__search_trees__search_tree__values (us_split_fields7 temp___906)))
-  (rec__search_trees__search_tree__struct (us_split_fields7 temp___906))
-  (to_rep
-  (rec__search_trees__search_tree__root (us_split_fields7 temp___906)))
-  (rec__search_trees__search_tree__values (us_split_fields7 temp___906)))))
-
-;; temp___result_911_def
-  (assert
-  (forall ((temp___910 us_rep4)) (tree_structure__function_guard
-  (tree_structure temp___910) temp___910)))
-
-(define-fun dynamic_invariant6 ((temp___expr_905 us_rep6)
-  (temp___is_init_902 Bool) (temp___skip_constant_903 Bool)
-  (temp___do_toplevel_904 Bool)) Bool (and
-                                      (let ((temp___906 (rec__red_black_trees__rbt__struct
+(define-fun dynamic_invariant6 ((temp___expr_487 us_rep6)
+  (temp___is_init_484 Bool) (temp___skip_constant_485 Bool)
+  (temp___do_toplevel_486 Bool)) Bool (and
+                                      (let ((temp___488 (rec__red_black_trees__rbt__struct
                                                         (us_split_fields9
-                                                        temp___expr_905))))
+                                                        temp___expr_487))))
                                       (ite (= (size1
                                               (rec__search_trees__search_tree__struct
-                                              (us_split_fields7 temp___906))) 0)
+                                              (us_split_fields7 temp___488))) 0)
                                       (= (to_rep
                                          (rec__search_trees__search_tree__root
-                                         (us_split_fields7 temp___906))) 0)
+                                         (us_split_fields7 temp___488))) 0)
                                       (and
                                       (and
                                       (not
                                       (= (to_rep
                                          (rec__search_trees__search_tree__root
-                                         (us_split_fields7 temp___906))) 0))
+                                         (us_split_fields7 temp___488))) 0))
                                       (= (valid_root
                                          (rec__search_trees__search_tree__struct
-                                         (us_split_fields7 temp___906))
+                                         (us_split_fields7 temp___488))
                                          (to_rep
                                          (rec__search_trees__search_tree__root
-                                         (us_split_fields7 temp___906)))) true))
+                                         (us_split_fields7 temp___488)))) true))
                                       (= (ordered_leafs
                                          (rec__search_trees__search_tree__struct
-                                         (us_split_fields7 temp___906))
+                                         (us_split_fields7 temp___488))
                                          (to_rep
                                          (rec__search_trees__search_tree__root
-                                         (us_split_fields7 temp___906)))
+                                         (us_split_fields7 temp___488)))
                                          (rec__search_trees__search_tree__values
-                                         (us_split_fields7 temp___906))) true))))
+                                         (us_split_fields7 temp___488))) true))))
                                       (= (tree_structure
                                          (rec__search_trees__search_tree__struct
                                          (us_split_fields7
                                          (rec__red_black_trees__rbt__struct
-                                         (us_split_fields9 temp___expr_905))))) true)))
+                                         (us_split_fields9 temp___expr_487))))) true)))
 
-;; temp___result_923_def
-  (assert
-  (forall ((temp___922 us_rep4)) (size__function_guard1 (size1 temp___922)
-  temp___922)))
-
-;; temp___result_925_def
-  (assert
-  (forall ((temp___924 us_rep5)) (size__function_guard (size temp___924)
-  temp___924)))
-
-(define-fun default_initial_assumption4 ((temp___expr_915 us_rep6)
-  (temp___skip_top_level_916 Bool)) Bool (and
+(define-fun default_initial_assumption4 ((temp___expr_493 us_rep6)
+  (temp___skip_top_level_494 Bool)) Bool (and
                                          (and
                                          (and
                                          (and
@@ -2020,7 +1850,7 @@
                                             (us_split_fields7
                                             (rec__red_black_trees__rbt__struct
                                             (us_split_fields9
-                                            temp___expr_915))))) 0)
+                                            temp___expr_493))))) 0)
                                          (and
                                          (and
                                          (= (to_rep
@@ -2030,11 +1860,11 @@
                                             (us_split_fields7
                                             (rec__red_black_trees__rbt__struct
                                             (us_split_fields9
-                                            temp___expr_915))))))) 0)
-                                         (forall ((temp___920 Int))
+                                            temp___expr_493))))))) 0)
+                                         (forall ((temp___498 Int))
                                          (=>
-                                         (and (<= 1 temp___920)
-                                         (<= temp___920 100))
+                                         (and (<= 1 temp___498)
+                                         (<= temp___498 100))
                                          (and
                                          (and
                                          (and
@@ -2047,7 +1877,7 @@
                                                     (us_split_fields7
                                                     (rec__red_black_trees__rbt__struct
                                                     (us_split_fields9
-                                                    temp___expr_915)))))) temp___920)))) 0)
+                                                    temp___expr_493)))))) temp___498)))) 0)
                                          (= (to_rep
                                             (rec__binary_trees__cell__right
                                             (us_split_fields3
@@ -2057,7 +1887,7 @@
                                                     (us_split_fields7
                                                     (rec__red_black_trees__rbt__struct
                                                     (us_split_fields9
-                                                    temp___expr_915)))))) temp___920)))) 0))
+                                                    temp___expr_493)))))) temp___498)))) 0))
                                          (= (to_rep
                                             (rec__binary_trees__cell__parent
                                             (us_split_fields3
@@ -2067,7 +1897,7 @@
                                                     (us_split_fields7
                                                     (rec__red_black_trees__rbt__struct
                                                     (us_split_fields9
-                                                    temp___expr_915)))))) temp___920)))) 0))
+                                                    temp___expr_493)))))) temp___498)))) 0))
                                          (= (to_rep1
                                             (rec__binary_trees__cell__position
                                             (us_split_fields3
@@ -2077,34 +1907,29 @@
                                                     (us_split_fields7
                                                     (rec__red_black_trees__rbt__struct
                                                     (us_split_fields9
-                                                    temp___expr_915)))))) temp___920)))) 2)))))
+                                                    temp___expr_493)))))) temp___498)))) 2)))))
                                          (= (size1
                                             (rec__search_trees__search_tree__struct
                                             (us_split_fields7
                                             (rec__red_black_trees__rbt__struct
                                             (us_split_fields9
-                                            temp___expr_915))))) 0)))
+                                            temp___expr_493))))) 0)))
                                          (= (rec__search_trees__search_tree__values
                                             (us_split_fields7
                                             (rec__red_black_trees__rbt__struct
                                             (us_split_fields9
-                                            temp___expr_915)))) (temp___584
+                                            temp___expr_493)))) (temp___390
                                                                 0)))
                                          (= (size
                                             (rec__red_black_trees__rbt__struct
                                             (us_split_fields9
-                                            temp___expr_915))) 0))
+                                            temp___expr_493))) 0))
                                          (= (rec__red_black_trees__rbt__color
                                             (us_split_fields9
-                                            temp___expr_915)) (temp___926 0))))
+                                            temp___expr_493)) (temp___502 0))))
 
-;; temp___result_933_def
-  (assert
-  (forall ((temp___932 us_rep6)) (invariant____function_guard
-  (invariant__ temp___932) temp___932)))
-
-(define-fun type_invariant1 ((temp___931 us_rep6)) Bool (= (invariant__
-                                                           temp___931) true))
+(define-fun type_invariant1 ((temp___507 us_rep6)) Bool (= (invariant__
+                                                           temp___507) true))
 
 (declare-fun size2 (us_rep6) Int)
 
@@ -2114,21 +1939,14 @@
   (assert
   (forall ((t us_rep6))
   (! (=> (and (dynamic_invariant6 t true true true) (type_invariant1 t))
-     (let ((result (size2 t)))
-     (=> (size__function_guard2 result t) (dynamic_invariant2 result true
-     false true)))) :pattern ((size2 t)) )))
+     (dynamic_invariant2 (size2 t) true false true)) :pattern ((size2 t)) )))
 
 ;; size__def_axiom
   (assert
   (forall ((t us_rep6))
-  (! (=>
-     (and (dynamic_invariant6 t true true true) (size__function_guard2
-     (size2 t) t))
-     (and (size__function_guard
-     (size (rec__red_black_trees__rbt__struct (us_split_fields9 t)))
-     (rec__red_black_trees__rbt__struct (us_split_fields9 t)))
+  (! (=> (dynamic_invariant6 t true true true)
      (= (size2 t) (size
-                  (rec__red_black_trees__rbt__struct (us_split_fields9 t)))))) :pattern (
+                  (rec__red_black_trees__rbt__struct (us_split_fields9 t))))) :pattern (
   (size2 t)) )))
 
 (declare-fun values1 (us_rep6) us_rep2)
@@ -2139,23 +1957,15 @@
   (assert
   (forall ((t us_rep6))
   (! (=> (and (dynamic_invariant6 t true true true) (type_invariant1 t))
-     (let ((result (values1 t)))
-     (and (size__function_guard2 (size2 t) t)
-     (=> (values__function_guard1 result t)
-     (=> (= (size2 t) 0) (= (is_empty result) true)))))) :pattern ((values1
-                                                                   t)) )))
+     (=> (= (size2 t) 0) (= (is_empty (values1 t)) true))) :pattern (
+  (values1 t)) )))
 
 ;; values__def_axiom
   (assert
   (forall ((t us_rep6))
-  (! (=>
-     (and (dynamic_invariant6 t true true true) (values__function_guard1
-     (values1 t) t))
-     (and (values__function_guard
-     (values (rec__red_black_trees__rbt__struct (us_split_fields9 t)))
-     (rec__red_black_trees__rbt__struct (us_split_fields9 t)))
+  (! (=> (dynamic_invariant6 t true true true)
      (= (values1 t) (values
-                    (rec__red_black_trees__rbt__struct (us_split_fields9 t)))))) :pattern (
+                    (rec__red_black_trees__rbt__struct (us_split_fields9 t))))) :pattern (
   (values1 t)) )))
 
 (declare-fun contains1 (us_rep6 Int) Bool)
@@ -2174,23 +1984,16 @@
      (and
      (and (dynamic_invariant6 t true true true) (dynamic_invariant v true
      true true)) (type_invariant1 t))
-     (let ((result (contains1 t v)))
-     (and (values__function_guard1 (values1 t) t)
-     (=> (contains__function_guard1 result t v)
-     (= (= result true) (= (contains (values1 t) v) true)))))) :pattern (
+     (= (= (contains1 t v) true) (= (contains (values1 t) v) true))) :pattern (
   (contains1 t v)) ))))
 
 ;; contains__def_axiom
   (assert
   (forall ((t us_rep6))
   (forall ((v Int))
-  (! (=> (contains__function_guard1 (contains1 t v) t v)
-     (and (contains__function_guard2
-     (contains2 (rec__red_black_trees__rbt__struct (us_split_fields9 t)) v)
-     (rec__red_black_trees__rbt__struct (us_split_fields9 t)) v)
-     (= (= (contains1 t v) true)
+  (! (= (= (contains1 t v) true)
      (= (contains2 (rec__red_black_trees__rbt__struct (us_split_fields9 t))
-        v) true)))) :pattern ((contains1 t v)) ))))
+        v) true)) :pattern ((contains1 t v)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -2202,11 +2005,11 @@
 
 (declare-fun color__function_guard (Int us_rep6 Int) Bool)
 
-(define-fun dynamic_invariant7 ((temp___expr_890 Int)
-  (temp___is_init_887 Bool) (temp___skip_constant_888 Bool)
-  (temp___do_toplevel_889 Bool)) Bool (=>
-                                      (or (= temp___is_init_887 true)
-                                      (<= 0 1)) (in_range6 temp___expr_890)))
+(define-fun dynamic_invariant7 ((temp___expr_472 Int)
+  (temp___is_init_469 Bool) (temp___skip_constant_470 Bool)
+  (temp___do_toplevel_471 Bool)) Bool (=>
+                                      (or (= temp___is_init_469 true)
+                                      (<= 0 1)) (in_range6 temp___expr_472)))
 
 ;; color__post_axiom
   (assert
@@ -2214,24 +2017,21 @@
   (forall ((i Int))
   (! (=>
      (and (dynamic_invariant6 t true true true) (dynamic_invariant2 i true
-     true true))
-     (let ((result (color t i)))
-     (=> (color__function_guard result t i) (dynamic_invariant7 result true
-     false true)))) :pattern ((color t i)) ))))
+     true true)) (dynamic_invariant7 (color t i) true false true)) :pattern (
+  (color t i)) ))))
 
 ;; color__def_axiom
   (assert
   (forall ((t us_rep6))
   (forall ((i Int))
   (! (=>
-     (and
      (and (dynamic_invariant6 t true true true) (dynamic_invariant2 i true
-     true true)) (color__function_guard (color t i) t i))
+     true true))
      (= (color t i) (ite (= i 0) 0
                     (to_rep3
-                    (let ((temp___976 (rec__red_black_trees__rbt__color
+                    (let ((temp___534 (rec__red_black_trees__rbt__color
                                       (us_split_fields9 t))))
-                    (select temp___976 i)))))) :pattern ((color t i)) ))))
+                    (select temp___534 i)))))) :pattern ((color t i)) ))))
 
 (declare-fun same_nb_blacks (us_rep6) Bool)
 
@@ -2437,15 +2237,7 @@
 ;; same_nb_blacks__def_axiom
   (assert
   (forall ((t us_rep6))
-  (! (=> (same_nb_blacks__function_guard (same_nb_blacks t) t)
-     (and (size__function_guard
-     (size (rec__red_black_trees__rbt__struct (us_split_fields9 t)))
-     (rec__red_black_trees__rbt__struct (us_split_fields9 t)))
-     (and (model____function_guard
-     (model__ (rec__red_black_trees__rbt__struct (us_split_fields9 t)))
-     (rec__red_black_trees__rbt__struct (us_split_fields9 t)))
-     (and (nb_blacks__function_guard (nb_blacks t) t)
-     (= (= (same_nb_blacks t) true)
+  (! (= (= (same_nb_blacks t) true)
      (or
      (= (size (rec__red_black_trees__rbt__struct (us_split_fields9 t))) 0)
      (forall ((i Int))
@@ -2453,13 +2245,13 @@
      (=>
      (= (rec__tree_model__path_type__k
         (us_split_fields1
-        (let ((temp___986 (model__
+        (let ((temp___538 (model__
                           (rec__red_black_trees__rbt__struct
                           (us_split_fields9 t)))))
-        (select temp___986 i)))) true)
+        (select temp___538 i)))) true)
      (= (rec__red_black_trees__black_count__status
         (us_split_fields11
-        (let ((temp___984 (nb_blacks t))) (select temp___984 i)))) true)))))))))) :pattern (
+        (let ((temp___537 (nb_blacks t))) (select temp___537 i)))) true)))))) :pattern (
   (same_nb_blacks t)) )))
 
 (declare-fun eq (us_rep7 us_rep7) Bool)
@@ -2472,8 +2264,7 @@
 ;; eq__def_axiom
   (assert
   (forall ((x us_rep7) (y us_rep7))
-  (! (=> (eq__function_guard (eq x y) x y)
-     (= (= (eq x y) true)
+  (! (= (= (eq x y) true)
      (and
      (=
      (= (rec__red_black_trees__black_count__status (us_split_fields11 x)) true)
@@ -2481,44 +2272,17 @@
      (= (to_rep
         (rec__red_black_trees__black_count__count (us_split_fields11 x))) 
      (to_rep
-     (rec__red_black_trees__black_count__count (us_split_fields11 y))))))) :pattern (
+     (rec__red_black_trees__black_count__count (us_split_fields11 y)))))) :pattern (
   (eq x y)) )))
 
 ;; nb_blacks__post_axiom
   (assert
   (forall ((t us_rep6))
-  (! (and (size__function_guard
-     (size (rec__red_black_trees__rbt__struct (us_split_fields9 t)))
-     (rec__red_black_trees__rbt__struct (us_split_fields9 t)))
-     (=>
+  (! (=>
      (and (dynamic_invariant6 t true true true)
      (not
      (= (size (rec__red_black_trees__rbt__struct (us_split_fields9 t))) 0)))
      (let ((result (nb_blacks t)))
-     (and (model____function_guard
-     (model__ (rec__red_black_trees__rbt__struct (us_split_fields9 t)))
-     (rec__red_black_trees__rbt__struct (us_split_fields9 t)))
-     (and
-     (forall ((i Int)) (peek__function_guard
-     (peek (rec__red_black_trees__rbt__struct (us_split_fields9 t)) i 0)
-     (rec__red_black_trees__rbt__struct (us_split_fields9 t)) i 0))
-     (and
-     (forall ((i Int)) (peek__function_guard
-     (peek (rec__red_black_trees__rbt__struct (us_split_fields9 t)) i 1)
-     (rec__red_black_trees__rbt__struct (us_split_fields9 t)) i 1))
-     (and
-     (forall ((i Int)) (peek__function_guard
-     (peek (rec__red_black_trees__rbt__struct (us_split_fields9 t)) i 0)
-     (rec__red_black_trees__rbt__struct (us_split_fields9 t)) i 0))
-     (and
-     (forall ((i Int)) (peek__function_guard
-     (peek (rec__red_black_trees__rbt__struct (us_split_fields9 t)) i 1)
-     (rec__red_black_trees__rbt__struct (us_split_fields9 t)) i 1))
-     (and
-     (forall ((i Int)) (peek__function_guard
-     (peek (rec__red_black_trees__rbt__struct (us_split_fields9 t)) i 0)
-     (rec__red_black_trees__rbt__struct (us_split_fields9 t)) i 0))
-     (=> (nb_blacks__function_guard result t)
      (and
      (= (bool_eq17 (select result 0)
         (mk___rep5 (mk___split_fields5 (of_int 1) (of_rep 0) (of_rep 0)))) true)
@@ -2527,10 +2291,10 @@
      (=>
      (= (rec__tree_model__path_type__k
         (us_split_fields1
-        (let ((temp___1035 (model__
-                           (rec__red_black_trees__rbt__struct
-                           (us_split_fields9 t)))))
-        (select temp___1035 i)))) true)
+        (let ((temp___567 (model__
+                          (rec__red_black_trees__rbt__struct
+                          (us_split_fields9 t)))))
+        (select temp___567 i)))) true)
      (and
      (and
      (=
@@ -2579,11 +2343,11 @@
      (= (to_rep
         (rec__red_black_trees__black_count__count
         (us_split_fields11 (select result i)))) (+ (ite (= (to_rep3
-                                                           (let ((temp___1032 
+                                                           (let ((temp___566 
                                                            (rec__red_black_trees__rbt__color
                                                            (us_split_fields9
                                                            t))))
-                                                           (select temp___1032 i))) 0)
+                                                           (select temp___566 i))) 0)
                                                    1 0) (to_rep
                                                         (rec__red_black_trees__black_count__count
                                                         (us_split_fields11
@@ -2591,7 +2355,7 @@
                                                         (peek
                                                         (rec__red_black_trees__rbt__struct
                                                         (us_split_fields9 t))
-                                                        i 0)))))))))))))))))))))) :pattern (
+                                                        i 0)))))))))))))) :pattern (
   (nb_blacks t)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
@@ -2736,17 +2500,7 @@
 ;; invariant____def_axiom
   (assert
   (forall ((t us_rep6))
-  (! (=> (invariant____function_guard (invariant__ t) t)
-     (and
-     (forall ((i Int)) (parent__function_guard
-     (parent (rec__red_black_trees__rbt__struct (us_split_fields9 t)) i)
-     (rec__red_black_trees__rbt__struct (us_split_fields9 t)) i))
-     (and
-     (forall ((i Int)) (parent__function_guard
-     (parent (rec__red_black_trees__rbt__struct (us_split_fields9 t)) i)
-     (rec__red_black_trees__rbt__struct (us_split_fields9 t)) i))
-     (and (same_nb_blacks__function_guard (same_nb_blacks t) t)
-     (= (= (invariant__ t) true)
+  (! (= (= (invariant__ t) true)
      (and
      (forall ((i Int))
      (=> (and (<= 1 i) (<= i 100))
@@ -2754,45 +2508,45 @@
      (or
      (= (parent (rec__red_black_trees__rbt__struct (us_split_fields9 t)) i) 0)
      (= (to_rep3
-        (let ((temp___994 (rec__red_black_trees__rbt__color
+        (let ((temp___542 (rec__red_black_trees__rbt__color
                           (us_split_fields9 t))))
-        (select temp___994 (parent
+        (select temp___542 (parent
                            (rec__red_black_trees__rbt__struct
                            (us_split_fields9 t)) i)))) 1))
      (= (to_rep3
-        (let ((temp___992 (rec__red_black_trees__rbt__color
+        (let ((temp___541 (rec__red_black_trees__rbt__color
                           (us_split_fields9 t))))
-        (select temp___992 i))) 0))))
-     (= (same_nb_blacks t) true))))))) :pattern ((invariant__ t)) )))
+        (select temp___541 i))) 0))))
+     (= (same_nb_blacks t) true))) :pattern ((invariant__ t)) )))
 
-(define-fun dynamic_invariant8 ((temp___expr_169 Int)
-  (temp___is_init_166 Bool) (temp___skip_constant_167 Bool)
-  (temp___do_toplevel_168 Bool)) Bool (=>
-                                      (or (= temp___is_init_166 true)
-                                      (<= 0 2)) (in_range4 temp___expr_169)))
+(define-fun dynamic_invariant8 ((temp___expr_164 Int)
+  (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
+  (temp___do_toplevel_163 Bool)) Bool (=>
+                                      (or (= temp___is_init_161 true)
+                                      (<= 0 2)) (in_range4 temp___expr_164)))
 
-(define-fun dynamic_invariant9 ((temp___expr_212 us_rep1)
-  (temp___is_init_209 Bool) (temp___skip_constant_210 Bool)
-  (temp___do_toplevel_211 Bool)) Bool (=> (= temp___do_toplevel_211 true)
-                                      (=> (= temp___is_init_209 true)
+(define-fun dynamic_invariant9 ((temp___expr_207 us_rep1)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)) Bool (=> (= temp___do_toplevel_206 true)
+                                      (=> (= temp___is_init_204 true)
                                       (< (length
                                          (rec__tree_model__path_type__a
-                                         (us_split_fields1 temp___expr_212))) 100))))
+                                         (us_split_fields1 temp___expr_207))) 100))))
 
-(define-fun default_initial_assumption5 ((temp___expr_214 us_rep1)
-  (temp___skip_top_level_215 Bool)) Bool (and
+(define-fun default_initial_assumption5 ((temp___expr_209 us_rep1)
+  (temp___skip_top_level_210 Bool)) Bool (and
                                          (= (length
                                             (rec__tree_model__path_type__a
                                             (us_split_fields1
-                                            temp___expr_214))) 0)
+                                            temp___expr_209))) 0)
                                          (= (rec__tree_model__path_type__k
                                             (us_split_fields1
-                                            temp___expr_214)) (of_int 0))))
+                                            temp___expr_209)) (of_int 0))))
 
-(define-fun dynamic_predicate ((temp___218 us_rep1)) Bool (< (length
+(define-fun dynamic_predicate ((temp___213 us_rep1)) Bool (< (length
                                                              (rec__tree_model__path_type__a
                                                              (us_split_fields1
-                                                             temp___218))) 100))
+                                                             temp___213))) 100))
 
 (define-fun last ((container us_rep)) Int (+ 0 (length container)))
 
@@ -2824,11 +2578,11 @@
   (forall ((a us_rep) (b us_rep))
   (! (= (user_eq3 a b) (oeq1 a b)) :pattern ((user_eq3 a b)) )))
 
-(define-fun default_initial_assumption6 ((temp___expr_206 us_rep)
-  (temp___skip_top_level_207 Bool)) Bool (=>
+(define-fun default_initial_assumption6 ((temp___expr_201 us_rep)
+  (temp___skip_top_level_202 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_207 true))
-                                         (= (length temp___expr_206) 0)))
+                                         (= temp___skip_top_level_202 true))
+                                         (= (length temp___expr_201) 0)))
 
 (define-fun olt ((left us_rep)
   (right us_rep)) Bool (and (< (length left) (length right)) (ite (forall
@@ -2858,10 +2612,9 @@
   (assert
   (forall ((s1 us_rep) (s2 us_rep))
   (forall ((d Int))
-  (! (=> (is_add__function_guard (is_add s1 d s2) s1 d s2)
-     (= (= (is_add s1 d s2) true)
+  (! (= (= (is_add s1 d s2) true)
      (and (and (= (- (length s2) 1) (length s1)) (= (olt s1 s2) true))
-     (= (get s2 (length s2)) d)))) :pattern ((is_add s1 d s2)) ))))
+     (= (get s2 (length s2)) d))) :pattern ((is_add s1 d s2)) ))))
 
 (declare-sort count_type 0)
 
@@ -2884,12 +2637,12 @@
 (define-fun count_type__ref___projection ((a count_type__ref)) count_type 
   (count_type__content a))
 
-(define-fun dynamic_invariant10 ((temp___expr_151 Int)
-  (temp___is_init_148 Bool) (temp___skip_constant_149 Bool)
-  (temp___do_toplevel_150 Bool)) Bool (=>
-                                      (or (= temp___is_init_148 true)
+(define-fun dynamic_invariant10 ((temp___expr_146 Int)
+  (temp___is_init_143 Bool) (temp___skip_constant_144 Bool)
+  (temp___do_toplevel_145 Bool)) Bool (=>
+                                      (or (= temp___is_init_143 true)
                                       (<= 0 2147483647)) (in_range7
-                                      temp___expr_151)))
+                                      temp___expr_146)))
 
 ;; contains__post_axiom
   (assert
@@ -2898,37 +2651,24 @@
   (! (=>
      (and (dynamic_invariant3 t true true true) (dynamic_invariant v1 true
      true true))
-     (let ((result (contains2 t v1)))
-     (and (values__function_guard (values t) t)
-     (=> (contains__function_guard2 result t v1)
-     (= (= result true) (= (contains (values t) v1) true)))))) :pattern (
+     (= (= (contains2 t v1) true) (= (contains (values t) v1) true))) :pattern (
   (contains2 t v1)) ))))
 
-;; temp___result_288_def
-  (assert
-  (forall ((temp___287 us_rep4)) (tree_structure__function_guard
-  (tree_structure temp___287) temp___287)))
+(define-fun dynamic_invariant11 ((temp___expr_275 us_rep4)
+  (temp___is_init_272 Bool) (temp___skip_constant_273 Bool)
+  (temp___do_toplevel_274 Bool)) Bool (= (tree_structure temp___expr_275) true))
 
-(define-fun dynamic_invariant11 ((temp___expr_286 us_rep4)
-  (temp___is_init_283 Bool) (temp___skip_constant_284 Bool)
-  (temp___do_toplevel_285 Bool)) Bool (= (tree_structure temp___expr_286) true))
-
-;; temp___result_296_def
-  (assert
-  (forall ((temp___295 us_rep4)) (size__function_guard1 (size1 temp___295)
-  temp___295)))
-
-(define-fun default_initial_assumption7 ((temp___expr_290 us_rep4)
-  (temp___skip_top_level_291 Bool)) Bool (and
+(define-fun default_initial_assumption7 ((temp___expr_278 us_rep4)
+  (temp___skip_top_level_279 Bool)) Bool (and
                                          (and
                                          (= (to_rep
                                             (rec__binary_trees__forest__s
                                             (us_split_fields5
-                                            temp___expr_290))) 0)
-                                         (forall ((temp___293 Int))
+                                            temp___expr_278))) 0)
+                                         (forall ((temp___281 Int))
                                          (=>
-                                         (and (<= 1 temp___293)
-                                         (<= temp___293 100))
+                                         (and (<= 1 temp___281)
+                                         (<= temp___281 100))
                                          (and
                                          (and
                                          (and
@@ -2937,51 +2677,41 @@
                                             (us_split_fields3
                                             (select (rec__binary_trees__forest__c
                                                     (us_split_fields5
-                                                    temp___expr_290)) temp___293)))) 0)
+                                                    temp___expr_278)) temp___281)))) 0)
                                          (= (to_rep
                                             (rec__binary_trees__cell__right
                                             (us_split_fields3
                                             (select (rec__binary_trees__forest__c
                                                     (us_split_fields5
-                                                    temp___expr_290)) temp___293)))) 0))
+                                                    temp___expr_278)) temp___281)))) 0))
                                          (= (to_rep
                                             (rec__binary_trees__cell__parent
                                             (us_split_fields3
                                             (select (rec__binary_trees__forest__c
                                                     (us_split_fields5
-                                                    temp___expr_290)) temp___293)))) 0))
+                                                    temp___expr_278)) temp___281)))) 0))
                                          (= (to_rep1
                                             (rec__binary_trees__cell__position
                                             (us_split_fields3
                                             (select (rec__binary_trees__forest__c
                                                     (us_split_fields5
-                                                    temp___expr_290)) temp___293)))) 2)))))
+                                                    temp___expr_278)) temp___281)))) 2)))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_291 true))
-                                         (= (size1 temp___expr_290) 0))))
+                                         (= temp___skip_top_level_279 true))
+                                         (= (size1 temp___expr_278) 0))))
 
-;; temp___result_299_def
-  (assert
-  (forall ((temp___298 us_rep4)) (tree_structure__function_guard
-  (tree_structure temp___298) temp___298)))
-
-(define-fun type_invariant2 ((temp___297 us_rep4)) Bool (= (tree_structure
-                                                           temp___297) true))
+(define-fun type_invariant2 ((temp___284 us_rep4)) Bool (= (tree_structure
+                                                           temp___284) true))
 
 ;; ordered_leafs__post_axiom
-  (assert
-  (forall ((f us_rep4))
-  (forall ((root1 Int)) (valid_root__function_guard (valid_root f root1) f
-  root1))))
+  (assert true)
 
 ;; size__post_axiom
   (assert
   (forall ((f us_rep4))
-  (! (=> (dynamic_invariant11 f true true true)
-     (let ((result (size1 f)))
-     (=> (size__function_guard1 result f) (dynamic_invariant2 result true
-     false true)))) :pattern ((size1 f)) )))
+  (! (=> (dynamic_invariant11 f true true true) (dynamic_invariant2 (size1 f)
+     true false true)) :pattern ((size1 f)) )))
 
 ;; valid_root__post_axiom
   (assert
@@ -2989,12 +2719,8 @@
   (forall ((i Int))
   (! (=>
      (and (dynamic_invariant11 f true true true) (dynamic_invariant1 i true
-     true true))
-     (let ((result (valid_root f i)))
-     (and (size__function_guard1 (size1 f) f)
-     (=> (valid_root__function_guard result f i)
-     (=> (< (size1 f) i) (not (= result true))))))) :pattern ((valid_root f
-                                                              i)) ))))
+     true true)) (=> (< (size1 f) i) (not (= (valid_root f i) true)))) :pattern (
+  (valid_root f i)) ))))
 
 ;; parent__post_axiom
   (assert
@@ -3004,26 +2730,20 @@
      (and (dynamic_invariant11 f true true true) (dynamic_invariant1 i true
      true true))
      (let ((result (parent1 f i)))
-     (and (valid_root__function_guard (valid_root f i) f i)
-     (and (size__function_guard1 (size1 f) f)
-     (=> (parent__function_guard1 result f i)
      (and
      (and (=> (= (valid_root f i) true) (= result 0))
      (=> (= (size1 f) 0) (= result 0))) (dynamic_invariant2 result true false
-     true))))))) :pattern ((parent1 f i)) ))))
+     true)))) :pattern ((parent1 f i)) ))))
 
 ;; position__post_axiom
   (assert
   (forall ((f us_rep4))
   (forall ((i Int))
-  (! (and (parent__function_guard1 (parent1 f i) f i)
-     (=>
+  (! (=>
      (and
      (and (dynamic_invariant11 f true true true) (dynamic_invariant1 i true
-     true true)) (not (= (parent1 f i) 0)))
-     (let ((result (position f i)))
-     (=> (position__function_guard result f i) (dynamic_invariant4 result
-     true false true))))) :pattern ((position f i)) ))))
+     true true)) (not (= (parent1 f i) 0))) (dynamic_invariant4
+     (position f i) true false true)) :pattern ((position f i)) ))))
 
 ;; peek__post_axiom
   (assert
@@ -3034,13 +2754,6 @@
      (and (dynamic_invariant11 f true true true) (dynamic_invariant1 i true
      true true)) (dynamic_invariant4 d true true true))
      (let ((result (peek1 f i d)))
-     (and (position__function_guard (position f result) f result)
-     (and (parent__function_guard1 (parent1 f result) f result)
-     (and (forall ((j Int)) (parent__function_guard1 (parent1 f j) f j))
-     (and (forall ((j Int)) (position__function_guard (position f j) f j))
-     (and (forall ((j Int)) (parent__function_guard1 (parent1 f j) f j))
-     (and (forall ((j Int)) (position__function_guard (position f j) f j))
-     (=> (peek__function_guard1 result f i d)
      (and
      (and
      (ite (not (= result 0))
@@ -3051,35 +2764,17 @@
      (forall ((j Int))
      (=> (and (<= 1 j) (<= j 100))
      (=> (and (= (parent1 f j) i) (= (position f j) d)) (= result j)))))
-     (dynamic_invariant2 result true false true))))))))))) :pattern (
-  (peek1 f i d)) ))))
+     (dynamic_invariant2 result true false true)))) :pattern ((peek1 f i d)) ))))
 
 ;; model____post_axiom
   (assert
   (forall ((f us_rep4))
   (forall ((root1 Int))
-  (! (and (valid_root__function_guard (valid_root f root1) f root1)
-     (=>
+  (! (=>
      (and
      (and (dynamic_invariant11 f true true true) (dynamic_invariant1 root1
      true true true)) (= (valid_root f root1) true))
      (let ((result (model__1 f root1)))
-     (and (forall ((i Int)) (parent__function_guard1 (parent1 f i) f i))
-     (and (forall ((i Int)) (parent__function_guard1 (parent1 f i) f i))
-     (and (forall ((i Int)) (parent__function_guard1 (parent1 f i) f i))
-     (and (forall ((i Int)) (position__function_guard (position f i) f i))
-     (and (forall ((i Int)) (parent__function_guard1 (parent1 f i) f i))
-     (and (forall ((i Int)) (position__function_guard (position f i) f i))
-     (and
-     (forall ((i Int)) (is_add__function_guard
-     (is_add
-     (rec__tree_model__path_type__a
-     (us_split_fields1 (select result (parent1 f i)))) (position f i)
-     (rec__tree_model__path_type__a (us_split_fields1 (select result i))))
-     (rec__tree_model__path_type__a
-     (us_split_fields1 (select result (parent1 f i)))) (position f i)
-     (rec__tree_model__path_type__a (us_split_fields1 (select result i)))))
-     (=> (model____function_guard1 result f root1)
      (and
      (and
      (= (rec__tree_model__path_type__k
@@ -3123,54 +2818,54 @@
      (= (oeq1
         (rec__tree_model__path_type__a (us_split_fields1 (select result i)))
         (rec__tree_model__path_type__a (us_split_fields1 (select result j)))) true))
-     (= j i))))))))))) (dynamic_invariant5 result true false true))))))))))))) :pattern (
+     (= j i))))))))))) (dynamic_invariant5 result true false true)))) :pattern (
   (model__1 f root1)) ))))
 
-(define-fun default_initial_assumption8 ((temp___expr_272 us_rep3)
-  (temp___skip_top_level_273 Bool)) Bool (and
+(define-fun default_initial_assumption8 ((temp___expr_261 us_rep3)
+  (temp___skip_top_level_262 Bool)) Bool (and
                                          (and
                                          (and
                                          (= (to_rep
                                             (rec__binary_trees__cell__left
                                             (us_split_fields3
-                                            temp___expr_272))) 0)
+                                            temp___expr_261))) 0)
                                          (= (to_rep
                                             (rec__binary_trees__cell__right
                                             (us_split_fields3
-                                            temp___expr_272))) 0))
+                                            temp___expr_261))) 0))
                                          (= (to_rep
                                             (rec__binary_trees__cell__parent
                                             (us_split_fields3
-                                            temp___expr_272))) 0))
+                                            temp___expr_261))) 0))
                                          (= (to_rep1
                                             (rec__binary_trees__cell__position
                                             (us_split_fields3
-                                            temp___expr_272))) 2)))
+                                            temp___expr_261))) 2)))
 
-(define-fun default_initial_assumption9 ((temp___expr_279 (Array Int us_rep3))
-  (temp___skip_top_level_280 Bool)) Bool (forall ((temp___281 Int))
+(define-fun default_initial_assumption9 ((temp___expr_268 (Array Int us_rep3))
+  (temp___skip_top_level_269 Bool)) Bool (forall ((temp___270 Int))
                                          (=>
-                                         (and (<= 1 temp___281)
-                                         (<= temp___281 100))
+                                         (and (<= 1 temp___270)
+                                         (<= temp___270 100))
                                          (and
                                          (and
                                          (and
                                          (= (to_rep
                                             (rec__binary_trees__cell__left
                                             (us_split_fields3
-                                            (select temp___expr_279 temp___281)))) 0)
+                                            (select temp___expr_268 temp___270)))) 0)
                                          (= (to_rep
                                             (rec__binary_trees__cell__right
                                             (us_split_fields3
-                                            (select temp___expr_279 temp___281)))) 0))
+                                            (select temp___expr_268 temp___270)))) 0))
                                          (= (to_rep
                                             (rec__binary_trees__cell__parent
                                             (us_split_fields3
-                                            (select temp___expr_279 temp___281)))) 0))
+                                            (select temp___expr_268 temp___270)))) 0))
                                          (= (to_rep1
                                             (rec__binary_trees__cell__position
                                             (us_split_fields3
-                                            (select temp___expr_279 temp___281)))) 2)))))
+                                            (select temp___expr_268 temp___270)))) 2)))))
 
 ;; tree_structure__post_axiom
   (assert true)
@@ -3197,12 +2892,12 @@
 (define-fun extended_index__ref___projection ((a extended_index__ref)) extended_index 
   (extended_index__content a))
 
-(define-fun dynamic_invariant12 ((temp___expr_199 Int)
-  (temp___is_init_196 Bool) (temp___skip_constant_197 Bool)
-  (temp___do_toplevel_198 Bool)) Bool (=>
-                                      (or (= temp___is_init_196 true)
+(define-fun dynamic_invariant12 ((temp___expr_194 Int)
+  (temp___is_init_191 Bool) (temp___skip_constant_192 Bool)
+  (temp___do_toplevel_193 Bool)) Bool (=>
+                                      (or (= temp___is_init_191 true)
                                       (<= 0 2147483647)) (in_range8
-                                      temp___expr_199)))
+                                      temp___expr_194)))
 
 ;; length__post_axiom
   (assert
@@ -3233,11 +2928,11 @@
 (define-fun element_type__ref___projection ((a element_type__ref)) element_type 
   (element_type__content a))
 
-(define-fun dynamic_invariant13 ((temp___expr_193 Int)
-  (temp___is_init_190 Bool) (temp___skip_constant_191 Bool)
-  (temp___do_toplevel_192 Bool)) Bool (=>
-                                      (or (= temp___is_init_190 true)
-                                      (<= 0 1)) (in_range9 temp___expr_193)))
+(define-fun dynamic_invariant13 ((temp___expr_188 Int)
+  (temp___is_init_185 Bool) (temp___skip_constant_186 Bool)
+  (temp___do_toplevel_187 Bool)) Bool (=>
+                                      (or (= temp___is_init_185 true)
+                                      (<= 0 1)) (in_range9 temp___expr_188)))
 
 ;; get__post_axiom
   (assert
@@ -3271,12 +2966,12 @@
 (define-fun element_type__ref_2__projection ((a element_type__ref1)) element_type1 
   (element_type__content1 a))
 
-(define-fun dynamic_invariant14 ((temp___expr_245 Int)
-  (temp___is_init_242 Bool) (temp___skip_constant_243 Bool)
-  (temp___do_toplevel_244 Bool)) Bool (=>
-                                      (or (= temp___is_init_242 true)
+(define-fun dynamic_invariant14 ((temp___expr_234 Int)
+  (temp___is_init_231 Bool) (temp___skip_constant_232 Bool)
+  (temp___do_toplevel_233 Bool)) Bool (=>
+                                      (or (= temp___is_init_231 true)
                                       (<= 0 2147483647)) (in_range10
-                                      temp___expr_245)))
+                                      temp___expr_234)))
 
 ;; contains__post_axiom
   (assert
@@ -3364,7 +3059,7 @@
 
 (declare-fun o3 () us_split_fields8)
 
-(declare-fun temp___1089 () us_rep6)
+(declare-fun temp___604 () us_rep6)
 
 (declare-fun o4 () Int)
 
@@ -3519,29 +3214,14 @@
   (assert (in_range1 v))
 
 ;; H
-  (assert (type_invariant1
-  (mk___rep4
-  (mk___split_fields4
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)) t__split_fields4))))
-
-;; H
-  (assert (size__function_guard2
-  (size2
-  (mk___rep4
-  (mk___split_fields4
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)) t__split_fields4)))
-  (mk___rep4
-  (mk___split_fields4
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)) t__split_fields4))))
+  (assert
+  (= (invariant__
+     (mk___rep4
+     (mk___split_fields4
+     (mk___rep3
+     (mk___split_fields3 t__split_fields
+     (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
+     t__split_fields3)) t__split_fields4))) true))
 
 ;; H
   (assert
@@ -3582,477 +3262,6 @@
 ;; H
   (assert (dynamic_invariant6 (mk___rep4 t_old__split_fields5) true false
   true))
-
-;; H
-  (assert (values__function_guard
-  (values
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)))
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3))))
-
-;; H
-  (assert (values__function_guard
-  (values (mk___rep3 search_trees__insert__t__fields))
-  (mk___rep3 search_trees__insert__t__fields)))
-
-;; H
-  (assert (values__function_guard
-  (values
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)))
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3))))
-
-;; H
-  (assert
-  (forall ((j Int)) (parent__function_guard
-  (parent (mk___rep3 search_trees__insert__t__fields) j)
-  (mk___rep3 search_trees__insert__t__fields) j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (parent__function_guard
-  (parent
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)) j)
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)) j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (parent__function_guard
-  (parent (mk___rep3 search_trees__insert__t__fields) j)
-  (mk___rep3 search_trees__insert__t__fields) j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (position__function_guard1
-  (position1 (mk___rep3 search_trees__insert__t__fields) j)
-  (mk___rep3 search_trees__insert__t__fields) j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (position__function_guard1
-  (position1
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)) j)
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)) j)))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep3 search_trees__insert__t__fields))
-  (mk___rep3 search_trees__insert__t__fields)))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)))
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3))))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)))
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3))))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep3 search_trees__insert__t__fields))
-  (mk___rep3 search_trees__insert__t__fields)))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep3 search_trees__insert__t__fields))
-  (mk___rep3 search_trees__insert__t__fields)))
-
-;; H
-  (assert
-  (forall ((j Int) (d Int)) (peek__function_guard
-  (peek
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)) j d)
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)) j d)))
-
-;; H
-  (assert
-  (forall ((j Int) (d Int)) (peek__function_guard
-  (peek (mk___rep3 search_trees__insert__t__fields) j d)
-  (mk___rep3 search_trees__insert__t__fields) j d)))
-
-;; H
-  (assert (size__function_guard
-  (size
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)))
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3))))
-
-;; H
-  (assert (size__function_guard
-  (size (mk___rep3 search_trees__insert__t__fields))
-  (mk___rep3 search_trees__insert__t__fields)))
-
-;; H
-  (assert (root__function_guard
-  (root (mk___rep3 search_trees__insert__t__fields))
-  (mk___rep3 search_trees__insert__t__fields)))
-
-;; H
-  (assert (values__function_guard
-  (values
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)))
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3))))
-
-;; H
-  (assert (values__function_guard
-  (values (mk___rep3 search_trees__insert__t__fields))
-  (mk___rep3 search_trees__insert__t__fields)))
-
-;; H
-  (assert (values__function_guard
-  (values
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)))
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3))))
-
-;; H
-  (assert (values__function_guard
-  (values (mk___rep3 search_trees__insert__t__fields))
-  (mk___rep3 search_trees__insert__t__fields)))
-
-;; H
-  (assert (is_add__2__function_guard
-  (is_add__2
-  (values
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3))) v (values (mk___rep3 search_trees__insert__t__fields)))
-  (values
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3))) v
-  (values (mk___rep3 search_trees__insert__t__fields))))
-
-;; H
-  (assert (root__function_guard
-  (root (mk___rep3 search_trees__insert__t__fields))
-  (mk___rep3 search_trees__insert__t__fields)))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep3 search_trees__insert__t__fields))
-  (mk___rep3 search_trees__insert__t__fields)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep3 search_trees__insert__t__fields) i)
-  (mk___rep3 search_trees__insert__t__fields) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)) i)
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)) i)))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep3 search_trees__insert__t__fields))
-  (mk___rep3 search_trees__insert__t__fields)))
-
-;; H
-  (assert (root__function_guard
-  (root (mk___rep3 search_trees__insert__t__fields))
-  (mk___rep3 search_trees__insert__t__fields)))
-
-;; H
-  (assert (root__function_guard
-  (root
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)))
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3))))
-
-;; H
-  (assert (size__function_guard
-  (size (mk___rep3 search_trees__insert__t__fields))
-  (mk___rep3 search_trees__insert__t__fields)))
-
-;; H
-  (assert (size__function_guard
-  (size
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)))
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3))))
-
-;; H
-  (assert (values__function_guard
-  (values
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)))
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3))))
-
-;; H
-  (assert (values__function_guard
-  (values (mk___rep3 search_trees__insert__t__fields))
-  (mk___rep3 search_trees__insert__t__fields)))
-
-;; H
-  (assert (values__function_guard
-  (values
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)))
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3))))
-
-;; H
-  (assert (values__function_guard
-  (values (mk___rep3 search_trees__insert__t__fields))
-  (mk___rep3 search_trees__insert__t__fields)))
-
-;; H
-  (assert (is_add__2__function_guard
-  (is_add__2
-  (values
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3))) v (values (mk___rep3 search_trees__insert__t__fields)))
-  (values
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3))) v
-  (values (mk___rep3 search_trees__insert__t__fields))))
-
-;; H
-  (assert
-  (forall ((j Int)) (parent__function_guard
-  (parent (mk___rep3 search_trees__insert__t__fields) j)
-  (mk___rep3 search_trees__insert__t__fields) j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (parent__function_guard
-  (parent
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)) j)
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)) j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (parent__function_guard
-  (parent (mk___rep3 search_trees__insert__t__fields) j)
-  (mk___rep3 search_trees__insert__t__fields) j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (position__function_guard1
-  (position1 (mk___rep3 search_trees__insert__t__fields) j)
-  (mk___rep3 search_trees__insert__t__fields) j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (position__function_guard1
-  (position1
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)) j)
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)) j)))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep3 search_trees__insert__t__fields))
-  (mk___rep3 search_trees__insert__t__fields)))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)))
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3))))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)))
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3))))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep3 search_trees__insert__t__fields))
-  (mk___rep3 search_trees__insert__t__fields)))
-
-;; H
-  (assert
-  (forall ((d Int)) (peek__function_guard
-  (peek (mk___rep3 search_trees__insert__t__fields) x1 d)
-  (mk___rep3 search_trees__insert__t__fields) x1 d)))
-
-;; H
-  (assert (parent__function_guard
-  (parent (mk___rep3 search_trees__insert__t__fields) x1)
-  (mk___rep3 search_trees__insert__t__fields) x1))
-
-;; H
-  (assert (position__function_guard1
-  (position1 (mk___rep3 search_trees__insert__t__fields) x1)
-  (mk___rep3 search_trees__insert__t__fields) x1))
-
-;; H
-  (assert (parent__function_guard
-  (parent (mk___rep3 search_trees__insert__t__fields) x1)
-  (mk___rep3 search_trees__insert__t__fields) x1))
-
-;; H
-  (assert (position__function_guard1
-  (position1 (mk___rep3 search_trees__insert__t__fields) x1)
-  (mk___rep3 search_trees__insert__t__fields) x1))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)) (parent (mk___rep3 search_trees__insert__t__fields) x1)
-  (position1 (mk___rep3 search_trees__insert__t__fields) x1))
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)) (parent (mk___rep3 search_trees__insert__t__fields) x1)
-  (position1 (mk___rep3 search_trees__insert__t__fields) x1)))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep3 search_trees__insert__t__fields))
-  (mk___rep3 search_trees__insert__t__fields)))
-
-;; H
-  (assert (parent__function_guard
-  (parent (mk___rep3 search_trees__insert__t__fields) x1)
-  (mk___rep3 search_trees__insert__t__fields) x1))
-
-;; H
-  (assert (position__function_guard1
-  (position1 (mk___rep3 search_trees__insert__t__fields) x1)
-  (mk___rep3 search_trees__insert__t__fields) x1))
-
-;; H
-  (assert
-  (forall ((j Int) (d Int)) (peek__function_guard
-  (peek
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)) j d)
-  (mk___rep3
-  (mk___split_fields3 t__split_fields
-  (mk___rep2 (mk___split_fields2 t__split_fields1 t__split_fields2))
-  t__split_fields3)) j d)))
-
-;; H
-  (assert
-  (forall ((j Int) (d Int)) (peek__function_guard
-  (peek (mk___rep3 search_trees__insert__t__fields) j d)
-  (mk___rep3 search_trees__insert__t__fields) j d)))
 
 ;; H
   (assert
@@ -4328,9 +3537,6 @@
                       t__split_fields4)))
 
 ;; H
-  (assert (same_nb_blacks__function_guard (same_nb_blacks c61b) c61b))
-
-;; H
   (assert (not (= x1 0)))
 
 ;; H
@@ -4359,13 +3565,13 @@
         (rec__red_black_trees__rbt__struct t__split_fields5) o2)))
 
 ;; H
-  (assert (= temp___1089 (mk___rep4 o3)))
+  (assert (= temp___604 (mk___rep4 o3)))
 
 ;; H
   (assert (= result2 (mk___split_fields__ref4 t__split_fields5)))
 
 ;; H
-  (assert (= t__split_fields6 (us_split_fields9 temp___1089)))
+  (assert (= t__split_fields6 (us_split_fields9 temp___604)))
 
 ;; H
   (assert (= (mk___rep4 t_old__split_fields5) c66b))
@@ -4380,22 +3586,7 @@
   (assert (dynamic_invariant6 c67b true false true))
 
 ;; H
-  (assert (same_nb_blacks__function_guard (same_nb_blacks c67b) c67b))
-
-;; H
   (assert (= (same_nb_blacks c67b) true))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (rec__red_black_trees__rbt__struct t__split_fields6) i)
-  (rec__red_black_trees__rbt__struct t__split_fields6) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (rec__red_black_trees__rbt__struct t__split_fields6) i)
-  (rec__red_black_trees__rbt__struct t__split_fields6) i)))
 
 ;; H
   (assert
@@ -4412,26 +3603,8 @@
   (= (to_rep3 (select (rec__red_black_trees__rbt__color t__split_fields6) i)) 0)))))
 
 ;; H
-  (assert (parent__function_guard1
-  (parent1
-  (rec__search_trees__search_tree__struct
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields6)))
-  o4)
-  (rec__search_trees__search_tree__struct
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields6)))
-  o4))
-
-;; H
-  (assert (size__function_guard
-  (size (rec__red_black_trees__rbt__struct t__split_fields6))
-  (rec__red_black_trees__rbt__struct t__split_fields6)))
-
-;; H
   (assert
-  (and
   (and (= o7 (root (rec__red_black_trees__rbt__struct t__split_fields6)))
-  (root__function_guard o7
-  (rec__red_black_trees__rbt__struct t__split_fields6)))
   (and (in_range2 o7)
   (= o7 (to_rep
         (rec__search_trees__search_tree__root
@@ -4451,10 +3624,7 @@
   (assert
   (=> (= result4 true)
   (and
-  (and
   (= o5 (parent (rec__red_black_trees__rbt__struct t__split_fields6) o4))
-  (parent__function_guard o5
-  (rec__red_black_trees__rbt__struct t__split_fields6) o4))
   (and (in_range3 o5)
   (and
   (= o5 (parent1
@@ -4467,9 +3637,7 @@
 ;; H
   (assert
   (=> (= result4 true)
-  (and
-  (and (= o6 (color (mk___rep4 t__split_fields6) o5)) (color__function_guard
-  o6 (mk___rep4 t__split_fields6) o5))
+  (and (= o6 (color (mk___rep4 t__split_fields6) o5))
   (and (in_range6 o6)
   (= o6 (ite (= o5 0) 0
         (to_rep3
@@ -4483,79 +3651,6 @@
 
 ;; H
   (assert (= result3 true))
-
-;; H
-  (assert (size__function_guard
-  (size (rec__red_black_trees__rbt__struct t__split_fields7))
-  (rec__red_black_trees__rbt__struct t__split_fields7)))
-
-;; H
-  (assert (size__function_guard
-  (size (rec__red_black_trees__rbt__struct t__split_fields6))
-  (rec__red_black_trees__rbt__struct t__split_fields6)))
-
-;; H
-  (assert (root__function_guard
-  (root (rec__red_black_trees__rbt__struct t__split_fields7))
-  (rec__red_black_trees__rbt__struct t__split_fields7)))
-
-;; H
-  (assert (root__function_guard
-  (root (rec__red_black_trees__rbt__struct t__split_fields6))
-  (rec__red_black_trees__rbt__struct t__split_fields6)))
-
-;; H
-  (assert (model____function_guard
-  (model__ (rec__red_black_trees__rbt__struct t__split_fields7))
-  (rec__red_black_trees__rbt__struct t__split_fields7)))
-
-;; H
-  (assert (color__function_guard (color (mk___rep4 t__split_fields7) x2)
-  (mk___rep4 t__split_fields7) x2))
-
-;; H
-  (assert (root__function_guard
-  (root (rec__red_black_trees__rbt__struct t__split_fields7))
-  (rec__red_black_trees__rbt__struct t__split_fields7)))
-
-;; H
-  (assert (root__function_guard
-  (root (rec__red_black_trees__rbt__struct t__split_fields7))
-  (rec__red_black_trees__rbt__struct t__split_fields7)))
-
-;; H
-  (assert (color__function_guard
-  (color (mk___rep4 t__split_fields7)
-  (root (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (mk___rep4 t__split_fields7)
-  (root (rec__red_black_trees__rbt__struct t__split_fields7))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (rec__red_black_trees__rbt__struct t__split_fields7) i)
-  (rec__red_black_trees__rbt__struct t__split_fields7) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (rec__red_black_trees__rbt__struct t__split_fields7) i)
-  (rec__red_black_trees__rbt__struct t__split_fields7) i)))
-
-;; H
-  (assert (values__function_guard
-  (values (rec__red_black_trees__rbt__struct t__split_fields7))
-  (rec__red_black_trees__rbt__struct t__split_fields7)))
-
-;; H
-  (assert (values__function_guard
-  (values (rec__red_black_trees__rbt__struct t__split_fields6))
-  (rec__red_black_trees__rbt__struct t__split_fields6)))
-
-;; H
-  (assert (same_nb_blacks__function_guard
-  (same_nb_blacks (mk___rep4 t__split_fields7))
-  (mk___rep4 t__split_fields7)))
 
 ;; H
   (assert (not (= x2 0)))
@@ -4610,28 +3705,6 @@
   (assert (= (same_nb_blacks (mk___rep4 t__split_fields7)) true))
 
 ;; H
-  (assert (root__function_guard
-  (root (rec__red_black_trees__rbt__struct t__split_fields7))
-  (rec__red_black_trees__rbt__struct t__split_fields7)))
-
-;; H
-  (assert (parent__function_guard
-  (parent (rec__red_black_trees__rbt__struct t__split_fields7) x2)
-  (rec__red_black_trees__rbt__struct t__split_fields7) x2))
-
-;; H
-  (assert (parent__function_guard
-  (parent (rec__red_black_trees__rbt__struct t__split_fields7) x2)
-  (rec__red_black_trees__rbt__struct t__split_fields7) x2))
-
-;; H
-  (assert (color__function_guard
-  (color (mk___rep4 t__split_fields7)
-  (parent (rec__red_black_trees__rbt__struct t__split_fields7) x2))
-  (mk___rep4 t__split_fields7)
-  (parent (rec__red_black_trees__rbt__struct t__split_fields7) x2)))
-
-;; H
   (assert
   (and
   (and
@@ -4652,40 +3725,12 @@
   (assert (= t_old__split_fields7 t__split_fields7))
 
 ;; H
-  (assert (parent__function_guard1
-  (parent1
-  (rec__search_trees__search_tree__struct
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o9)
-  (rec__search_trees__search_tree__struct
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o9))
-
-;; H
-  (assert (size__function_guard
-  (size (rec__red_black_trees__rbt__struct t__split_fields7))
-  (rec__red_black_trees__rbt__struct t__split_fields7)))
-
-;; H
-  (assert (position__function_guard
-  (position
-  (rec__search_trees__search_tree__struct
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o11)
-  (rec__search_trees__search_tree__struct
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o11))
-
-;; H
   (assert (and (= o9 x2) (in_range2 x2)))
 
 ;; H
   (assert
   (and
-  (and
   (= o10 (parent (rec__red_black_trees__rbt__struct t__split_fields7) o9))
-  (parent__function_guard o10
-  (rec__red_black_trees__rbt__struct t__split_fields7) o9))
   (and (in_range3 o10)
   (and
   (= o10 (parent1
@@ -4701,10 +3746,7 @@
 ;; H
   (assert
   (and
-  (and
   (= o12 (position1 (rec__red_black_trees__rbt__struct t__split_fields7) o11))
-  (position__function_guard1 o12
-  (rec__red_black_trees__rbt__struct t__split_fields7) o11))
   (and (in_range5 o12)
   (= o12 (position
          (rec__search_trees__search_tree__struct
@@ -4718,55 +3760,12 @@
   (assert (not (= result6 true)))
 
 ;; H
-  (assert (parent__function_guard1
-  (parent1
-  (rec__search_trees__search_tree__struct
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o13)
-  (rec__search_trees__search_tree__struct
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o13))
-
-;; H
-  (assert (size__function_guard
-  (size (rec__red_black_trees__rbt__struct t__split_fields7))
-  (rec__red_black_trees__rbt__struct t__split_fields7)))
-
-;; H
-  (assert (parent__function_guard1
-  (parent1
-  (rec__search_trees__search_tree__struct
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o15)
-  (rec__search_trees__search_tree__struct
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o15))
-
-;; H
-  (assert (size__function_guard
-  (size (rec__red_black_trees__rbt__struct t__split_fields7))
-  (rec__red_black_trees__rbt__struct t__split_fields7)))
-
-;; H
-  (assert (peek__function_guard1
-  (peek1
-  (rec__search_trees__search_tree__struct
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o17 0)
-  (rec__search_trees__search_tree__struct
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o17 0))
-
-;; H
   (assert (and (= o13 x2) (in_range2 x2)))
 
 ;; H
   (assert
   (and
-  (and
   (= o14 (parent (rec__red_black_trees__rbt__struct t__split_fields7) o13))
-  (parent__function_guard o14
-  (rec__red_black_trees__rbt__struct t__split_fields7) o13))
   (and (in_range3 o14)
   (and
   (= o14 (parent1
@@ -4782,10 +3781,7 @@
 ;; H
   (assert
   (and
-  (and
   (= o16 (parent (rec__red_black_trees__rbt__struct t__split_fields7) o15))
-  (parent__function_guard o16
-  (rec__red_black_trees__rbt__struct t__split_fields7) o15))
   (and (in_range3 o16)
   (and
   (= o16 (parent1
@@ -4801,10 +3797,7 @@
 ;; H
   (assert
   (and
-  (and
   (= o18 (peek (rec__red_black_trees__rbt__struct t__split_fields7) o17 0))
-  (peek__function_guard o18
-  (rec__red_black_trees__rbt__struct t__split_fields7) o17 0))
   (and (in_range3 o18)
   (= o18 (peek1
          (rec__search_trees__search_tree__struct
@@ -4819,9 +3812,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o19 (color (mk___rep4 t__split_fields7) y6)) (color__function_guard
-  o19 (mk___rep4 t__split_fields7) y6))
+  (and (= o19 (color (mk___rep4 t__split_fields7) y6))
   (and (in_range6 o19)
   (= o19 (ite (= y6 0) 0
          (to_rep3
@@ -4835,946 +3826,12 @@
   (assert (not (= result8 true)))
 
 ;; H
-  (assert (parent__function_guard1
-  (parent1
-  (rec__search_trees__search_tree__struct
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o20)
-  (rec__search_trees__search_tree__struct
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o20))
-
-;; H
-  (assert (size__function_guard
-  (size (rec__red_black_trees__rbt__struct t__split_fields7))
-  (rec__red_black_trees__rbt__struct t__split_fields7)))
-
-;; H
-  (assert (peek__function_guard1
-  (peek1
-  (rec__search_trees__search_tree__struct
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o22 0)
-  (rec__search_trees__search_tree__struct
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o22 0))
-
-;; H
-  (assert (parent__function_guard1
-  (parent1
-  (rec__search_trees__search_tree__struct
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o24)
-  (rec__search_trees__search_tree__struct
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o24))
-
-;; H
-  (assert (size__function_guard
-  (size (rec__red_black_trees__rbt__struct t__split_fields7))
-  (rec__red_black_trees__rbt__struct t__split_fields7)))
-
-;; H
-  (assert (size__function_guard
-  (size (mk___rep3 search_trees__right_rotate__t__fields))
-  (mk___rep3 search_trees__right_rotate__t__fields)))
-
-;; H
-  (assert (size__function_guard
-  (size
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))))
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))))
-
-;; H
-  (assert (root__function_guard
-  (root
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))))
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))))
-
-;; H
-  (assert (root__function_guard
-  (root (mk___rep3 search_trees__right_rotate__t__fields))
-  (mk___rep3 search_trees__right_rotate__t__fields)))
-
-;; H
-  (assert (root__function_guard
-  (root
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))))
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))))
-
-;; H
-  (assert (root__function_guard
-  (root (mk___rep3 search_trees__right_rotate__t__fields))
-  (mk___rep3 search_trees__right_rotate__t__fields)))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0))
-
-;; H
-  (assert (parent__function_guard
-  (parent (mk___rep3 search_trees__right_rotate__t__fields) o26)
-  (mk___rep3 search_trees__right_rotate__t__fields) o26))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0))
-
-;; H
-  (assert (position__function_guard1
-  (position1 (mk___rep3 search_trees__right_rotate__t__fields) o26)
-  (mk___rep3 search_trees__right_rotate__t__fields) o26))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0))
-
-;; H
-  (assert (parent__function_guard
-  (parent (mk___rep3 search_trees__right_rotate__t__fields)
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)) (mk___rep3 search_trees__right_rotate__t__fields)
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)))
-
-;; H
-  (assert (parent__function_guard
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26))
-
-;; H
-  (assert (root__function_guard
-  (root
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))))
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0))
-
-;; H
-  (assert (position__function_guard1
-  (position1 (mk___rep3 search_trees__right_rotate__t__fields)
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)) (mk___rep3 search_trees__right_rotate__t__fields)
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)))
-
-;; H
-  (assert (position__function_guard1
-  (position1
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0) 1)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0) 1))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0) 1)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0) 1))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0) 1)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0) 1))
-
-;; H
-  (assert (parent__function_guard
-  (parent (mk___rep3 search_trees__right_rotate__t__fields)
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0) 1)) (mk___rep3 search_trees__right_rotate__t__fields)
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0) 1)))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0) 1)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0) 1))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0) 1)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0) 1))
-
-;; H
-  (assert (position__function_guard1
-  (position1 (mk___rep3 search_trees__right_rotate__t__fields)
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0) 1)) (mk___rep3 search_trees__right_rotate__t__fields)
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0) 1)))
-
-;; H
-  (assert
-  (forall ((j Int)) (parent__function_guard
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (position__function_guard1
-  (position1
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (parent__function_guard
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (parent__function_guard
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (parent__function_guard
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (parent__function_guard
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j))
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j))))
-
-;; H
-  (assert
-  (forall ((j Int)) (parent__function_guard
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (parent__function_guard
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (position__function_guard1
-  (position1
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j))
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j))))
-
-;; H
-  (assert
-  (forall ((j Int)) (position__function_guard1
-  (position1
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (parent__function_guard
-  (parent (mk___rep3 search_trees__right_rotate__t__fields) j)
-  (mk___rep3 search_trees__right_rotate__t__fields) j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (parent__function_guard
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (parent__function_guard
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (parent__function_guard
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (position__function_guard1
-  (position1
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (parent__function_guard
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (parent__function_guard
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (parent__function_guard
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j))
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j))))
-
-;; H
-  (assert
-  (forall ((j Int)) (parent__function_guard
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (parent__function_guard
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (position__function_guard1
-  (position1
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j))
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j))))
-
-;; H
-  (assert
-  (forall ((j Int)) (position__function_guard1
-  (position1
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (position__function_guard1
-  (position1 (mk___rep3 search_trees__right_rotate__t__fields) j)
-  (mk___rep3 search_trees__right_rotate__t__fields) j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (position__function_guard1
-  (position1
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  j)))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep3 search_trees__right_rotate__t__fields))
-  (mk___rep3 search_trees__right_rotate__t__fields)))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))))
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))))
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep3 search_trees__right_rotate__t__fields))
-  (mk___rep3 search_trees__right_rotate__t__fields)))
-
-;; H
-  (assert (values__function_guard
-  (values (mk___rep3 search_trees__right_rotate__t__fields))
-  (mk___rep3 search_trees__right_rotate__t__fields)))
-
-;; H
-  (assert (values__function_guard
-  (values
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))))
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))))
-
-;; H
-  (assert (peek__function_guard
-  (peek (mk___rep3 search_trees__right_rotate__t__fields) o26 0)
-  (mk___rep3 search_trees__right_rotate__t__fields) o26 0))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0) 1)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0) 1))
-
-;; H
-  (assert (parent__function_guard
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26))
-
-;; H
-  (assert (parent__function_guard
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26))
-
-;; H
-  (assert (position__function_guard1
-  (position1
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26))
-
-;; H
-  (assert (parent__function_guard
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26))
-
-;; H
-  (assert (position__function_guard1
-  (position1
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26))
-
-;; H
-  (assert (peek__function_guard
-  (peek (mk___rep3 search_trees__right_rotate__t__fields)
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26)
-  (position1
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26)) (mk___rep3 search_trees__right_rotate__t__fields)
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26)
-  (position1
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26)))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0))
-
-;; H
-  (assert (peek__function_guard
-  (peek (mk___rep3 search_trees__right_rotate__t__fields)
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0) 1) (mk___rep3 search_trees__right_rotate__t__fields)
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0) 1))
-
-;; H
-  (assert (parent__function_guard
-  (parent
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26))
-
-;; H
-  (assert (position__function_guard1
-  (position1
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7)))
-  o26 0))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep3 search_trees__right_rotate__t__fields))
-  (mk___rep3 search_trees__right_rotate__t__fields)))
-
-;; H
-  (assert
-  (forall ((j Int) (d Int)) (peek__function_guard
-  (peek (mk___rep3 search_trees__right_rotate__t__fields) j d)
-  (mk___rep3 search_trees__right_rotate__t__fields) j d)))
-
-;; H
-  (assert
-  (forall ((j Int) (d Int)) (peek__function_guard
-  (peek
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j
-  d)
-  (mk___rep3
-  (us_split_fields7 (rec__red_black_trees__rbt__struct t__split_fields7))) j
-  d)))
-
-;; H
-  (assert (parent__function_guard1
-  (parent1
-  (rec__search_trees__search_tree__struct
-  (us_split_fields7
-  (rec__red_black_trees__rbt__struct (us_split_fields9 c100b)))) c101b)
-  (rec__search_trees__search_tree__struct
-  (us_split_fields7
-  (rec__red_black_trees__rbt__struct (us_split_fields9 c100b)))) c101b))
-
-;; H
-  (assert (size__function_guard
-  (size (rec__red_black_trees__rbt__struct (us_split_fields9 c100b)))
-  (rec__red_black_trees__rbt__struct (us_split_fields9 c100b))))
-
-;; H
-  (assert (same_nb_blacks__function_guard (same_nb_blacks c100b) c100b))
-
-;; H
   (assert (and (= o20 x2) (in_range2 x2)))
 
 ;; H
   (assert
   (and
-  (and
   (= o21 (parent (rec__red_black_trees__rbt__struct t__split_fields7) o20))
-  (parent__function_guard o21
-  (rec__red_black_trees__rbt__struct t__split_fields7) o20))
   (and (in_range3 o21)
   (and
   (= o21 (parent1
@@ -5790,10 +3847,7 @@
 ;; H
   (assert
   (and
-  (and
   (= o23 (peek (rec__red_black_trees__rbt__struct t__split_fields7) o22 0))
-  (peek__function_guard o23
-  (rec__red_black_trees__rbt__struct t__split_fields7) o22 0))
   (and (in_range3 o23)
   (= o23 (peek1
          (rec__search_trees__search_tree__struct
@@ -5810,10 +3864,7 @@
   (assert
   (=> (= result9 true)
   (and
-  (and
   (= o25 (parent (rec__red_black_trees__rbt__struct t__split_fields7) o24))
-  (parent__function_guard o25
-  (rec__red_black_trees__rbt__struct t__split_fields7) o24))
   (and (in_range3 o25)
   (and
   (= o25 (parent1
@@ -6160,11 +4211,8 @@
   (assert
   (=> (= result9 true)
   (and
-  (and
   (= o27 (parent (rec__red_black_trees__rbt__struct (us_split_fields9 c100b))
          c101b))
-  (parent__function_guard o27
-  (rec__red_black_trees__rbt__struct (us_split_fields9 c100b)) c101b))
   (and (in_range3 o27)
   (and
   (= o27 (parent1
@@ -6266,36 +4314,6 @@
   (assert (=> (not (= result9 true)) (= t__split_fields10 t__split_fields7)))
 
 ;; H
-  (assert (parent__function_guard
-  (parent
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9)) (int__content x4))
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9)) (int__content x4)))
-
-;; H
-  (assert (parent__function_guard
-  (parent
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9)) (int__content x4))
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9)) (int__content x4)))
-
-;; H
-  (assert (parent__function_guard
-  (parent
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9))
-  (parent
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9)) (int__content x4)))
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9))
-  (parent
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9)) (int__content x4))))
-
-;; H
   (assert
   (not
   (= (parent
@@ -6304,86 +4322,6 @@
      (parent
      (rec__red_black_trees__rbt__struct
      (us_split_fields__content4 t__split_fields9)) (int__content x4))) 0)))
-
-;; H
-  (assert (parent__function_guard
-  (parent
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9)) (int__content x4))
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9)) (int__content x4)))
-
-;; H
-  (assert (parent__function_guard
-  (parent
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9)) (int__content x4))
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9)) (int__content x4)))
-
-;; H
-  (assert (parent__function_guard
-  (parent
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9))
-  (parent
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9)) (int__content x4)))
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9))
-  (parent
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9)) (int__content x4))))
-
-;; H
-  (assert (parent__function_guard
-  (parent
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9)) (int__content x4))
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9)) (int__content x4)))
-
-;; H
-  (assert (parent__function_guard
-  (parent
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9)) (int__content x4))
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9)) (int__content x4)))
-
-;; H
-  (assert (parent__function_guard
-  (parent
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9))
-  (parent
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9)) (int__content x4)))
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9))
-  (parent
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9)) (int__content x4))))
-
-;; H
-  (assert (peek__function_guard
-  (peek
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9))
-  (parent
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9))
-  (parent
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9)) (int__content x4))) 1)
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9))
-  (parent
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9))
-  (parent
-  (rec__red_black_trees__rbt__struct
-  (us_split_fields__content4 t__split_fields9)) (int__content x4))) 1))
 
 (assert
 ;; WP_parameter_def

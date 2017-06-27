@@ -182,11 +182,6 @@
 
 (declare-fun foo__function_guard (Bool us_rep Int) Bool)
 
-;; temp___result_152_def
-  (assert
-  (forall ((dic__g Int) (temp___151 us_rep)) (foo__function_guard
-  (foo temp___151 dic__g) temp___151 dic__g)))
-
 (define-fun default_initial_assumption ((temp___expr_149 us_rep)
   (temp___skip_top_level_150 Bool)
   (dic__g Int)) Bool (and
@@ -211,10 +206,9 @@
   (assert
   (forall ((par2 us_rep))
   (forall ((dic__g Int))
-  (! (=> (foo__function_guard (foo par2 dic__g) par2 dic__g)
-     (= (= (foo par2 dic__g) true)
+  (! (= (= (foo par2 dic__g) true)
      (= (+ (to_rep (rec__dic__pr_record_t2__x (us_split_fields1 par2))) 
-     (to_rep (rec__dic__pr_record_t2__y (us_split_fields1 par2)))) dic__g))) :pattern (
+     (to_rep (rec__dic__pr_record_t2__y (us_split_fields1 par2)))) dic__g)) :pattern (
   (foo par2 dic__g)) ))))
 
 (declare-fun g () Int)

@@ -356,11 +356,10 @@
   (assert
   (forall ((a (Array Int integer)))
   (forall ((max Int))
-  (! (=> (all_elements_in__function_guard (all_elements_in a max) a max)
-     (= (= (all_elements_in a max) true)
+  (! (= (= (all_elements_in a max) true)
      (forall ((k Int))
      (=> (and (<= 0 k) (<= k 7))
-     (and (<= (- max) (to_rep (select a k))) (<= (to_rep (select a k)) max)))))) :pattern (
+     (and (<= (- max) (to_rep (select a k))) (<= (to_rep (select a k)) max))))) :pattern (
   (all_elements_in a max)) ))))
 
 (declare-fun all_left_elements_in ((Array Int integer) Int Int) Bool)
@@ -382,13 +381,11 @@
   (assert
   (forall ((a (Array Int integer)))
   (forall ((right Int) (max Int))
-  (! (=> (all_left_elements_in__function_guard
-     (all_left_elements_in a right max) a right max)
-     (= (= (all_left_elements_in a right max) true)
+  (! (= (= (all_left_elements_in a right max) true)
      (forall ((k Int))
      (=> (and (<= 0 k) (<= k 7))
      (=> (< k right)
-     (and (<= (- max) (to_rep (select a k))) (<= (to_rep (select a k)) max))))))) :pattern (
+     (and (<= (- max) (to_rep (select a k))) (<= (to_rep (select a k)) max)))))) :pattern (
   (all_left_elements_in a right max)) ))))
 
 (declare-fun all_right_elements_in ((Array Int integer) Int Int) Bool)
@@ -403,13 +400,11 @@
   (assert
   (forall ((a (Array Int integer)))
   (forall ((left Int) (max Int))
-  (! (=> (all_right_elements_in__function_guard
-     (all_right_elements_in a left max) a left max)
-     (= (= (all_right_elements_in a left max) true)
+  (! (= (= (all_right_elements_in a left max) true)
      (forall ((k Int))
      (=> (and (<= 0 k) (<= k 7))
      (=> (< left k)
-     (and (<= (- max) (to_rep (select a k))) (<= (to_rep (select a k)) max))))))) :pattern (
+     (and (<= (- max) (to_rep (select a k))) (<= (to_rep (select a k)) max)))))) :pattern (
   (all_right_elements_in a left max)) ))))
 
 (declare-fun intermediate_form ((Array Int integer)
@@ -419,17 +414,12 @@
   (Array Int integer)) Bool)
 
 ;; intermediate_form__post_axiom
-  (assert
-  (forall ((a (Array Int integer)) (b (Array Int integer)))
-  (! (and (all_elements_in__function_guard (all_elements_in a 8000000) a
-     8000000) (all_elements_in__function_guard (all_elements_in b 1000000) b
-     1000000)) :pattern ((intermediate_form a b)) )))
+  (assert true)
 
 ;; intermediate_form__def_axiom
   (assert
   (forall ((a (Array Int integer)) (b (Array Int integer)))
-  (! (=> (intermediate_form__function_guard (intermediate_form a b) a b)
-     (= (= (intermediate_form a b) true)
+  (! (= (= (intermediate_form a b) true)
      (forall ((k Int))
      (=> (and (<= 0 k) (<= k 7))
      (ite (= (mod2 (+ k 1) 8) 0)
@@ -444,7 +434,7 @@
      (ite (= (mod2 (+ k 1) 2) 0)
      (= (to_rep (select a k)) (+ (to_rep (select b k)) (to_rep
                                                        (select b (- k 1)))))
-     (= (to_rep (select a k)) (to_rep (select b k)))))))))) :pattern (
+     (= (to_rep (select a k)) (to_rep (select b k))))))))) :pattern (
   (intermediate_form a b)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -495,11 +485,11 @@
 
 (declare-fun right1 () Int)
 
-(declare-fun temp___220 () Int)
+(declare-fun temp___205 () Int)
 
 (declare-fun result1 () Int)
 
-(declare-fun temp___2201 () Int)
+(declare-fun temp___2051 () Int)
 
 (declare-fun result2 () Int)
 
@@ -523,10 +513,6 @@
   (assert (=> (<= 1 2147483647) (in_range3 output_space)))
 
 ;; H
-  (assert (all_elements_in__function_guard (all_elements_in a 1000000) 
-  a 1000000))
-
-;; H
   (assert (= (all_elements_in a 1000000) true))
 
 ;; H
@@ -546,10 +532,6 @@
 
 ;; H
   (assert (< space1 8))
-
-;; H
-  (assert (all_elements_in__function_guard
-  (all_elements_in a1 (* space2 1000000)) a1 (* space2 1000000)))
 
 ;; H
   (assert
@@ -582,10 +564,10 @@
   (=> (<= 0 2147483647) (in_range2 right1))) (< space2 8)))
 
 ;; H
-  (assert (= temp___220 result1))
+  (assert (= temp___205 result1))
 
 ;; H
-  (assert (= temp___2201 space2))
+  (assert (= temp___2051 space2))
 
 ;; H
   (assert (= left1 result2))
@@ -595,16 +577,6 @@
 
 ;; H
   (assert (< left2 8))
-
-;; H
-  (assert (all_left_elements_in__function_guard
-  (all_left_elements_in a2 left3 (* (* space2 2) 1000000)) a2 left3
-  (* (* space2 2) 1000000)))
-
-;; H
-  (assert (all_right_elements_in__function_guard
-  (all_right_elements_in a2 (- left3 1) (* space2 1000000)) a2 (- left3 1)
-  (* space2 1000000)))
 
 ;; H
   (assert
@@ -639,9 +611,7 @@
 ;; H
   (assert
   (=> (= (mod2 (+ left3 1) space2) 0)
-  (and
   (and (= result5 (all_left_elements_in a2 left3 o1))
-  (all_left_elements_in__function_guard result5 a2 left3 o1))
   (= (= result5 true)
   (forall ((k1 Int))
   (=> (and (<= 0 k1) (<= k1 7))
@@ -659,9 +629,7 @@
 ;; H
   (assert
   (=> (= result5 true)
-  (and
   (and (= result4 (all_right_elements_in a2 (- left3 1) o))
-  (all_right_elements_in__function_guard result4 a2 (- left3 1) o))
   (= (= result4 true)
   (forall ((k1 Int))
   (=> (and (<= 0 k1) (<= k1 7))

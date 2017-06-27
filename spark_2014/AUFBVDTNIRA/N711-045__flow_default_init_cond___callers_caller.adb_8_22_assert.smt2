@@ -195,26 +195,19 @@
 
 ;; add3__post_axiom
   (assert
-  (forall ((r us_rep))
-  (! (let ((result (add3 r)))
-     (=> (add3__function_guard result r) (dynamic_invariant result true false
-     true))) :pattern ((add3 r)) )))
+  (forall ((r us_rep)) (! (dynamic_invariant (add3 r) true false
+  true) :pattern ((add3 r)) )))
 
 ;; add3__def_axiom
   (assert
-  (forall ((r us_rep))
-  (! (=> (add3__function_guard (add3 r) r)
-     (and (add2__function_guard (add2 r) r) (= (add3 r) (add2 r)))) :pattern (
-  (add3 r)) )))
+  (forall ((r us_rep)) (! (= (add3 r) (add2 r)) :pattern ((add3 r)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
 ;; add2__post_axiom
   (assert
-  (forall ((r us_rep))
-  (! (let ((result (add2 r)))
-     (=> (add2__function_guard result r) (dynamic_invariant result true false
-     true))) :pattern ((add2 r)) )))
+  (forall ((r us_rep)) (! (dynamic_invariant (add2 r) true false
+  true) :pattern ((add2 r)) )))
 
 (declare-fun r__split_fields () integer)
 
@@ -223,11 +216,6 @@
 ;; H
   (assert
   (and (= (to_rep r__split_fields) 0) (= (to_rep r__split_fields1) 0)))
-
-;; H
-  (assert (add3__function_guard
-  (add3 (mk___rep (mk___split_fields r__split_fields r__split_fields1)))
-  (mk___rep (mk___split_fields r__split_fields r__split_fields1))))
 
 (assert
 ;; WP_parameter_def

@@ -74,13 +74,8 @@
 ;; returning_precondition__def_axiom
   (assert
   (forall ((a Int) (b Int))
-  (! (=> (returning_precondition__function_guard (returning_precondition a b)
-     a b) (= (= (returning_precondition a b) true) (= a b))) :pattern (
-  (returning_precondition a b)) )))
-
-;; H
-  (assert (returning_precondition__function_guard
-  (returning_precondition 4 4) 4 4))
+  (! (= (= (returning_precondition a b) true) (= a b)) :pattern ((returning_precondition
+                                                                 a b)) )))
 
 (assert
 ;; WP_parameter_def

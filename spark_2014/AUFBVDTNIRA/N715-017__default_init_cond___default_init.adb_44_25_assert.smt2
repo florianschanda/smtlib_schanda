@@ -252,48 +252,32 @@
 
 (declare-fun rte_ok__function_guard (Bool (Array Int nat) Int) Bool)
 
-;; temp___result_202_def
-  (assert
-  (forall ((temp___201 nat)) (nat_ok__function_guard
-  (nat_ok (to_rep temp___201)) (to_rep temp___201))))
-
-;; temp___result_204_def
-  (assert
-  (forall ((default_init__n Int) (temp___203 (Array Int nat)))
-  (rte_ok__function_guard (rte_ok temp___203 default_init__n) temp___203
-  default_init__n)))
-
-(define-fun default_initial_assumption ((temp___expr_197 (Array Int nat))
-  (temp___skip_top_level_198 Bool)
+(define-fun default_initial_assumption ((temp___expr_190 (Array Int nat))
+  (temp___skip_top_level_191 Bool)
   (default_init__n Int)) Bool (and
-                              (forall ((temp___199 Int))
-                              (=> (and (<= 1 temp___199) (<= temp___199 3))
-                              (let ((temp___200 (select temp___expr_197 temp___199)))
-                              (and (= (to_rep temp___200) 0)
-                              (= (nat_ok (to_rep temp___200)) true)))))
-                              (=> (not (= temp___skip_top_level_198 true))
-                              (= (rte_ok temp___expr_197 default_init__n) true))))
+                              (forall ((temp___192 Int))
+                              (=> (and (<= 1 temp___192) (<= temp___192 3))
+                              (let ((temp___193 (select temp___expr_190 temp___192)))
+                              (and (= (to_rep temp___193) 0)
+                              (= (nat_ok (to_rep temp___193)) true)))))
+                              (=> (not (= temp___skip_top_level_191 true))
+                              (= (rte_ok temp___expr_190 default_init__n) true))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_179 Int)
-  (temp___is_init_176 Bool) (temp___skip_constant_177 Bool)
-  (temp___do_toplevel_178 Bool)) Bool (=>
-                                      (or (= temp___is_init_176 true)
+(define-fun dynamic_invariant1 ((temp___expr_174 Int)
+  (temp___is_init_171 Bool) (temp___skip_constant_172 Bool)
+  (temp___do_toplevel_173 Bool)) Bool (=>
+                                      (or (= temp___is_init_171 true)
                                       (<= 0 2147483647)) (in_range2
-                                      temp___expr_179)))
+                                      temp___expr_174)))
 
-;; temp___result_183_def
-  (assert
-  (forall ((temp___182 Int)) (nat_ok__function_guard (nat_ok temp___182)
-  temp___182)))
-
-(define-fun default_initial_assumption1 ((temp___expr_180 Int)
-  (temp___skip_top_level_181 Bool)) Bool (and (= temp___expr_180 0)
+(define-fun default_initial_assumption1 ((temp___expr_175 Int)
+  (temp___skip_top_level_176 Bool)) Bool (and (= temp___expr_175 0)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_181 true))
-                                         (= (nat_ok temp___expr_180) true))))
+                                         (= temp___skip_top_level_176 true))
+                                         (= (nat_ok temp___expr_175) true))))
 
 ;; nat_ok__post_axiom
   (assert true)
@@ -301,8 +285,7 @@
 ;; nat_ok__def_axiom
   (assert
   (forall ((x Int))
-  (! (=> (nat_ok__function_guard (nat_ok x) x)
-     (= (= (nat_ok x) true) (= x 0))) :pattern ((nat_ok x)) )))
+  (! (= (= (nat_ok x) true) (= x 0)) :pattern ((nat_ok x)) )))
 
 (declare-fun pre_rte_ok (Int) Bool)
 
@@ -314,26 +297,18 @@
 ;; pre_rte_ok__def_axiom
   (assert
   (forall ((default_init__n Int))
-  (! (=> (pre_rte_ok__function_guard (pre_rte_ok default_init__n)
-     default_init__n)
-     (= (= (pre_rte_ok default_init__n) true)
-     (and (<= 1 default_init__n) (<= default_init__n 3)))) :pattern (
-  (pre_rte_ok default_init__n)) )))
+  (! (= (= (pre_rte_ok default_init__n) true)
+     (and (<= 1 default_init__n) (<= default_init__n 3))) :pattern ((pre_rte_ok
+                                                                    default_init__n)) )))
 
 ;; rte_ok__post_axiom
-  (assert
-  (forall ((x (Array Int nat)))
-  (forall ((default_init__n Int)) (! (pre_rte_ok__function_guard
-  (pre_rte_ok default_init__n)
-  default_init__n) :pattern ((rte_ok x default_init__n)) ))))
+  (assert true)
 
 ;; rte_ok__def_axiom
   (assert
   (forall ((x (Array Int nat)))
   (forall ((default_init__n Int))
-  (! (=> (rte_ok__function_guard (rte_ok x default_init__n) x
-     default_init__n)
-     (= (= (rte_ok x default_init__n) true) (= (to_rep (select x 1)) 0))) :pattern (
+  (! (= (= (rte_ok x default_init__n) true) (= (to_rep (select x 1)) 0)) :pattern (
   (rte_ok x default_init__n)) ))))
 
 (declare-fun n () Int)

@@ -486,9 +486,9 @@
 (define-fun modular__ref_4__projection ((a modular__ref)) modular (modular__content
                                                                   a))
 
-(define-fun dynamic_invariant1 ((temp___expr_417 (_ BitVec 16))
-  (temp___is_init_414 Bool) (temp___skip_constant_415 Bool)
-  (temp___do_toplevel_416 Bool)) Bool true)
+(define-fun dynamic_invariant1 ((temp___expr_265 (_ BitVec 16))
+  (temp___is_init_262 Bool) (temp___skip_constant_263 Bool)
+  (temp___do_toplevel_264 Bool)) Bool true)
 
 ;; shift_right__post_axiom
   (assert
@@ -496,20 +496,16 @@
   (forall ((amount Int))
   (! (=>
      (and (dynamic_invariant1 v true true true) (dynamic_invariant amount
-     true true true))
-     (let ((result (shift_right v amount)))
-     (=> (shift_right__function_guard result v amount) (dynamic_invariant1
-     result true false true)))) :pattern ((shift_right v amount)) ))))
+     true true true)) (dynamic_invariant1 (shift_right v amount) true false
+     true)) :pattern ((shift_right v amount)) ))))
 
 ;; shift_right__def_axiom
   (assert
   (forall ((v (_ BitVec 16)))
   (forall ((amount Int))
   (! (=>
-     (and
      (and (dynamic_invariant1 v true true true) (dynamic_invariant amount
-     true true true)) (shift_right__function_guard (shift_right v amount) v
-     amount))
+     true true true))
      (= (shift_right v amount) (ite (and (<= 1 16) (<= 16 8))
                                ((_ zero_extend 8) (ite (< amount 8)
                                                   (bvlshr ((_ extract 7 0) v) ((_ int2bv 8) amount))
@@ -545,11 +541,6 @@
 
 ;; H
   (assert (<= n 15))
-
-;; H
-  (assert
-  (forall ((j1 Int)) (shift_right__function_guard (shift_right val__ j1)
-  val__ j1)))
 
 ;; H
   (assert

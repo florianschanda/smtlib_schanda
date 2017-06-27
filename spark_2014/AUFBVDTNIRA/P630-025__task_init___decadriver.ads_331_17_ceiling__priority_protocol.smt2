@@ -1926,6 +1926,81 @@
 (define-fun receiver_type__ref___projection ((a receiver_type__ref)) us_rep2 
   (receiver_type__content a))
 
+(define-fun to_int5 ((b Bool)) Int (ite (= b true) 1 0))
+
+(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
+
+(define-fun in_range8 ((x Int)) Bool (or (= x 0) (= x 1)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE9 (Bool) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Bool)
+
+(declare-fun to_rep5 (natural) Int)
+
+(declare-fun of_rep5 (Int) natural)
+
+;; inversion_axiom
+  (assert
+  (forall ((x natural))
+  (! (= (of_rep5 (to_rep5 x)) x) :pattern ((to_rep5 x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x natural)) (! (in_range4 (to_rep5 x)) :pattern ((to_rep5 x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (in_range4 x) (= (to_rep5 (of_rep5 x)) x)) :pattern ((to_rep5
+                                                              (of_rep5 x))) )))
+
+(declare-fun to_rep6 (rx_frame_queue_index) (_ BitVec 8))
+
+(declare-fun of_rep6 ((_ BitVec 8)) rx_frame_queue_index)
+
+;; inversion_axiom
+  (assert
+  (forall ((x rx_frame_queue_index))
+  (! (= (of_rep6 (to_rep6 x)) x) :pattern ((to_rep6 x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x rx_frame_queue_index)) (! (in_range5
+  (to_rep6 x)) :pattern ((to_rep6 x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x (_ BitVec 8)))
+  (! (let ((y (bvurem x ((_ int2bv 8) 2))))
+     (=> (in_range5 y) (= (to_rep6 (of_rep6 x)) y))) :pattern ((to_rep6
+                                                               (of_rep6 x))) )))
+
+(define-fun to_int6 ((x rx_frame_queue_index)) Int (bv2nat (to_rep6 x)))
+
+;; range_int_axiom
+  (assert
+  (forall ((x rx_frame_queue_index)) (! (in_range_int2
+  (to_int6 x)) :pattern ((to_int6 x)) )))
+
+(declare-fun temp___4475 (us_rep1) (Array (_ BitVec 8) us_rep1))
+
+;; def_axiom
+  (assert
+  (forall ((temp___4477 us_rep1))
+  (forall ((temp___4478 (_ BitVec 8)))
+  (= (select (temp___4475 temp___4477) temp___4478) temp___4477))))
+
+(declare-fun temp___4479 ((_ BitVec 8)) (Array Int bits_8))
+
+;; def_axiom
+  (assert
+  (forall ((temp___4481 (_ BitVec 8)))
+  (forall ((temp___4482 Int))
+  (= (select (temp___4479 temp___4481) temp___4482) (of_rep4 temp___4481)))))
+
 (define-fun dynamic_invariant ((temp___expr_4469 us_rep2)
   (temp___is_init_4466 Bool) (temp___skip_constant_4467 Bool)
   (temp___do_toplevel_4468 Bool)) Bool (forall ((temp___4470 (_ BitVec 8)))
@@ -1945,6 +2020,36 @@
                                        (= (to_rep2
                                           (rec__decadriver__rx_frame_type__size
                                           (us_split_fields3 temp___4471))) 0))))))
+
+(define-fun default_initial_assumption ((temp___expr_4473 us_rep2)
+  (temp___skip_top_level_4474 Bool)) Bool (and
+                                          (and
+                                          (and
+                                          (and
+                                          (= (rec__decadriver__receiver_type__frame_queue
+                                             (us_split_fields5
+                                             temp___expr_4473)) (temp___4475
+                                                                (mk___rep1
+                                                                (mk___split_fields1
+                                                                (of_rep2 0)
+                                                                (temp___4479
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep3 0)
+                                                                (of_int 0)))))
+                                          (= (to_rep6
+                                             (rec__decadriver__receiver_type__queue_head
+                                             (us_split_fields5
+                                             temp___expr_4473))) ((_ int2bv 8) 1)))
+                                          (= (to_rep5
+                                             (rec__decadriver__receiver_type__rx_count
+                                             (us_split_fields5
+                                             temp___expr_4473))) 0))
+                                          (= (rec__decadriver__receiver_type__overrun_occurred
+                                             (us_split_fields5
+                                             temp___expr_4473)) (of_int 0)))
+                                          (= (rec__decadriver__receiver_type__frame_ready
+                                             (us_split_fields5
+                                             temp___expr_4473)) (of_int 0))))
 
 (declare-datatypes ()
 ((us_split_fields6
@@ -2007,6 +2112,11 @@
 (define-fun transmitter_type__ref___projection ((a transmitter_type__ref)) us_rep3 
   (transmitter_type__content a))
 
+(define-fun default_initial_assumption1 ((temp___expr_4490 us_rep3)
+  (temp___skip_top_level_4491 Bool)) Bool (= (rec__decadriver__transmitter_type__tx_idle
+                                             (us_split_fields7
+                                             temp___expr_4490)) (of_int 1)))
+
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -2023,7 +2133,7 @@
 
 (declare-fun rotate_left2 ((_ BitVec 16) Int) (_ BitVec 16))
 
-(declare-fun to_int5 ((_ BitVec 16)) Int)
+(declare-fun to_int7 ((_ BitVec 16)) Int)
 
 (define-fun uint_in_range1 ((i Int)) Bool (and (<= 0 i) (<= i 65535)))
 
@@ -2113,11 +2223,11 @@
 (define-fun bool_eq13 ((x (_ BitVec 16))
   (y (_ BitVec 16))) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE9 ((_ BitVec 16)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE10 ((_ BitVec 16)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) (_ BitVec 16))
+(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) (_ BitVec 16))
 
 (declare-fun user_eq14 (bits_16 bits_16) Bool)
 
@@ -2140,7 +2250,7 @@
 
 (declare-fun rotate_left3 ((_ BitVec 32) Int) (_ BitVec 32))
 
-(declare-fun to_int6 ((_ BitVec 32)) Int)
+(declare-fun to_int8 ((_ BitVec 32)) Int)
 
 (define-fun uint_in_range2 ((i Int)) Bool (and (<= 0 i) (<= i 4294967295)))
 
@@ -2231,11 +2341,11 @@
 (define-fun bool_eq14 ((x (_ BitVec 32))
   (y (_ BitVec 32))) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE10 ((_ BitVec 32)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE11 ((_ BitVec 32)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check11 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) (_ BitVec 32))
+(declare-fun attr__ATTRIBUTE_VALUE11 (us_image) (_ BitVec 32))
 
 (declare-fun user_eq15 (bits_32 bits_32) Bool)
 
@@ -2248,7 +2358,7 @@
 
 (declare-sort bits_2 0)
 
-(define-fun in_range8 ((x (_ BitVec 8))) Bool (and (bvule ((_ int2bv 8) 0) x)
+(define-fun in_range9 ((x (_ BitVec 8))) Bool (and (bvule ((_ int2bv 8) 0) x)
                                               (bvule x ((_ int2bv 8) 3))))
 
 (define-fun in_range_int3 ((x Int)) Bool (and (<= 0 x) (<= x 3)))
@@ -2256,11 +2366,11 @@
 (define-fun bool_eq15 ((x (_ BitVec 8))
   (y (_ BitVec 8))) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE11 ((_ BitVec 8)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE12 ((_ BitVec 8)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check11 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check12 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE11 (us_image) (_ BitVec 8))
+(declare-fun attr__ATTRIBUTE_VALUE12 (us_image) (_ BitVec 8))
 
 (declare-fun user_eq16 (bits_2 bits_2) Bool)
 
@@ -2271,48 +2381,49 @@
 (define-fun bits_2__ref___projection ((a bits_2__ref)) bits_2 (bits_2__content
                                                               a))
 
-(declare-fun to_rep5 (bits_2) (_ BitVec 8))
+(declare-fun to_rep7 (bits_2) (_ BitVec 8))
 
-(declare-fun of_rep5 ((_ BitVec 8)) bits_2)
+(declare-fun of_rep7 ((_ BitVec 8)) bits_2)
 
 ;; inversion_axiom
   (assert
   (forall ((x bits_2))
-  (! (= (of_rep5 (to_rep5 x)) x) :pattern ((to_rep5 x)) )))
+  (! (= (of_rep7 (to_rep7 x)) x) :pattern ((to_rep7 x)) )))
 
 ;; range_axiom
   (assert
-  (forall ((x bits_2)) (! (in_range8 (to_rep5 x)) :pattern ((to_rep5 x)) )))
+  (forall ((x bits_2)) (! (in_range9 (to_rep7 x)) :pattern ((to_rep7 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x (_ BitVec 8)))
   (! (let ((y (bvurem x ((_ int2bv 8) 4))))
-     (=> (in_range8 y) (= (to_rep5 (of_rep5 x)) y))) :pattern ((to_rep5
-                                                               (of_rep5 x))) )))
+     (=> (in_range9 y) (= (to_rep7 (of_rep7 x)) y))) :pattern ((to_rep7
+                                                               (of_rep7 x))) )))
 
-(define-fun to_int7 ((x bits_2)) Int (bv2nat (to_rep5 x)))
+(define-fun to_int9 ((x bits_2)) Int (bv2nat (to_rep7 x)))
 
 ;; range_int_axiom
   (assert
   (forall ((x bits_2)) (! (in_range_int3
-  (to_int7 x)) :pattern ((to_int7 x)) )))
+  (to_int9 x)) :pattern ((to_int9 x)) )))
 
 (declare-sort bits_3 0)
 
-(define-fun in_range9 ((x (_ BitVec 8))) Bool (and (bvule ((_ int2bv 8) 0) x)
-                                              (bvule x ((_ int2bv 8) 7))))
+(define-fun in_range10 ((x (_ BitVec 8))) Bool (and
+                                               (bvule ((_ int2bv 8) 0) x)
+                                               (bvule x ((_ int2bv 8) 7))))
 
 (define-fun in_range_int4 ((x Int)) Bool (and (<= 0 x) (<= x 7)))
 
 (define-fun bool_eq16 ((x (_ BitVec 8))
   (y (_ BitVec 8))) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE12 ((_ BitVec 8)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE13 ((_ BitVec 8)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check12 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check13 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE12 (us_image) (_ BitVec 8))
+(declare-fun attr__ATTRIBUTE_VALUE13 (us_image) (_ BitVec 8))
 
 (declare-fun user_eq17 (bits_3 bits_3) Bool)
 
@@ -2323,32 +2434,32 @@
 (define-fun bits_3__ref___projection ((a bits_3__ref)) bits_3 (bits_3__content
                                                               a))
 
-(declare-fun to_rep6 (bits_3) (_ BitVec 8))
+(declare-fun to_rep8 (bits_3) (_ BitVec 8))
 
-(declare-fun of_rep6 ((_ BitVec 8)) bits_3)
+(declare-fun of_rep8 ((_ BitVec 8)) bits_3)
 
 ;; inversion_axiom
   (assert
   (forall ((x bits_3))
-  (! (= (of_rep6 (to_rep6 x)) x) :pattern ((to_rep6 x)) )))
+  (! (= (of_rep8 (to_rep8 x)) x) :pattern ((to_rep8 x)) )))
 
 ;; range_axiom
   (assert
-  (forall ((x bits_3)) (! (in_range9 (to_rep6 x)) :pattern ((to_rep6 x)) )))
+  (forall ((x bits_3)) (! (in_range10 (to_rep8 x)) :pattern ((to_rep8 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x (_ BitVec 8)))
   (! (let ((y (bvurem x ((_ int2bv 8) 8))))
-     (=> (in_range9 y) (= (to_rep6 (of_rep6 x)) y))) :pattern ((to_rep6
-                                                               (of_rep6 x))) )))
+     (=> (in_range10 y) (= (to_rep8 (of_rep8 x)) y))) :pattern ((to_rep8
+                                                                (of_rep8 x))) )))
 
-(define-fun to_int8 ((x bits_3)) Int (bv2nat (to_rep6 x)))
+(define-fun to_int10 ((x bits_3)) Int (bv2nat (to_rep8 x)))
 
 ;; range_int_axiom
   (assert
   (forall ((x bits_3)) (! (in_range_int4
-  (to_int8 x)) :pattern ((to_int8 x)) )))
+  (to_int10 x)) :pattern ((to_int10 x)) )))
 
 (declare-datatypes ()
 ((us_split_fields8
@@ -2545,9 +2656,9 @@
                             (us_split_fields9 a))) (to_rep
                                                    (rec__dw1000__register_types__sys_cfg_type__fcs_int2f
                                                    (us_split_fields9 b)))))
-                         (= (to_rep5
+                         (= (to_rep7
                             (rec__dw1000__register_types__sys_cfg_type__phr_mode
-                            (us_split_fields9 a))) (to_rep5
+                            (us_split_fields9 a))) (to_rep7
                                                    (rec__dw1000__register_types__sys_cfg_type__phr_mode
                                                    (us_split_fields9 b)))))
                          (= (to_rep
@@ -2580,9 +2691,9 @@
                             (us_split_fields9 a))) (to_rep
                                                    (rec__dw1000__register_types__sys_cfg_type__aackpend
                                                    (us_split_fields9 b)))))
-                         (= (to_rep6
+                         (= (to_rep8
                             (rec__dw1000__register_types__sys_cfg_type__reserved_1
-                            (us_split_fields9 a))) (to_rep6
+                            (us_split_fields9 a))) (to_rep8
                                                    (rec__dw1000__register_types__sys_cfg_type__reserved_1
                                                    (us_split_fields9 b)))))
                          (= (to_rep1
@@ -3023,14 +3134,14 @@
 (define-fun sys_cfg_type__ref___projection ((a sys_cfg_type__ref)) us_rep4 
   (sys_cfg_type__content a))
 
-(declare-fun to_rep7 (bits_32) (_ BitVec 32))
+(declare-fun to_rep9 (bits_32) (_ BitVec 32))
 
-(declare-fun of_rep7 ((_ BitVec 32)) bits_32)
+(declare-fun of_rep9 ((_ BitVec 32)) bits_32)
 
 ;; inversion_axiom
   (assert
   (forall ((x bits_32))
-  (! (= (of_rep7 (to_rep7 x)) x) :pattern ((to_rep7 x)) )))
+  (! (= (of_rep9 (to_rep9 x)) x) :pattern ((to_rep9 x)) )))
 
 ;; range_axiom
   (assert true)
@@ -3038,14 +3149,14 @@
 ;; coerce_axiom
   (assert
   (forall ((x (_ BitVec 32)))
-  (! (= (to_rep7 (of_rep7 x)) x) :pattern ((to_rep7 (of_rep7 x))) )))
+  (! (= (to_rep9 (of_rep9 x)) x) :pattern ((to_rep9 (of_rep9 x))) )))
 
-(define-fun to_int9 ((x bits_32)) Int (bv2nat (to_rep7 x)))
+(define-fun to_int11 ((x bits_32)) Int (bv2nat (to_rep9 x)))
 
 ;; range_int_axiom
   (assert
   (forall ((x bits_32)) (! (uint_in_range2
-  (to_int9 x)) :pattern ((to_int9 x)) )))
+  (to_int11 x)) :pattern ((to_int11 x)) )))
 
 (declare-datatypes ()
 ((map__ref2 (mk_map__ref2 (map__content2 (Array Int bits_32))))))
@@ -3100,7 +3211,7 @@
                            (=>
                            (and (<= a__first temp___idx_184)
                            (<= temp___idx_184 a__last))
-                           (= (to_rep7 (select a temp___idx_184)) (to_rep7
+                           (= (to_rep9 (select a temp___idx_184)) (to_rep9
                                                                   (select b (+ (- b__first a__first) temp___idx_184)))))))
                       true false))
 
@@ -3115,7 +3226,7 @@
   (< b__last b__first))
   (forall ((temp___idx_184 Int))
   (=> (and (<= a__first temp___idx_184) (<= temp___idx_184 a__last))
-  (= (to_rep7 (select a temp___idx_184)) (to_rep7
+  (= (to_rep9 (select a temp___idx_184)) (to_rep9
                                          (select b (+ (- b__first a__first) temp___idx_184)))))))))))
 
 (declare-fun compare1 ((Array Int bits_32) Int Int (Array Int bits_32) Int
@@ -3140,7 +3251,7 @@
      (and (= (bool_eq18 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
-     (bvult (to_rep7 (select a (+ i 1))) (to_rep7 (select b (+ j 1))))))))))) :pattern (
+     (bvult (to_rep9 (select a (+ i 1))) (to_rep9 (select b (+ j 1))))))))))) :pattern (
   (compare1 a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_gt
@@ -3154,7 +3265,7 @@
      (and (= (bool_eq18 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
-     (bvugt (to_rep7 (select a (+ j 1))) (to_rep7 (select b (+ i 1))))))))))) :pattern (
+     (bvugt (to_rep9 (select a (+ j 1))) (to_rep9 (select b (+ i 1))))))))))) :pattern (
   (compare1 a a_first a_last b b_first b_last)) ))))
 
 (declare-datatypes ()
@@ -3484,6 +3595,156 @@
 (define-fun driver_type__ref___projection ((a driver_type__ref)) us_rep5 
   (driver_type__content a))
 
+(declare-fun to_rep10 (bits_16) (_ BitVec 16))
+
+(declare-fun of_rep10 ((_ BitVec 16)) bits_16)
+
+;; inversion_axiom
+  (assert
+  (forall ((x bits_16))
+  (! (= (of_rep10 (to_rep10 x)) x) :pattern ((to_rep10 x)) )))
+
+;; range_axiom
+  (assert true)
+
+;; coerce_axiom
+  (assert
+  (forall ((x (_ BitVec 16)))
+  (! (= (to_rep10 (of_rep10 x)) x) :pattern ((to_rep10 (of_rep10 x))) )))
+
+(define-fun to_int12 ((x bits_16)) Int (bv2nat (to_rep10 x)))
+
+;; range_int_axiom
+  (assert
+  (forall ((x bits_16)) (! (uint_in_range1
+  (to_int12 x)) :pattern ((to_int12 x)) )))
+
+(declare-fun temp___4500 ((_ BitVec 32)) (Array Int bits_32))
+
+;; def_axiom
+  (assert
+  (forall ((temp___4502 (_ BitVec 32)))
+  (forall ((temp___4503 Int))
+  (= (select (temp___4500 temp___4502) temp___4503) (of_rep9 temp___4502)))))
+
+(define-fun default_initial_assumption2 ((temp___expr_4498 us_rep5)
+  (temp___skip_top_level_4499 Bool)) Bool (and
+                                          (and
+                                          (and
+                                          (and
+                                          (and
+                                          (and
+                                          (and
+                                          (and
+                                          (and
+                                          (and
+                                          (and
+                                          (and
+                                          (and
+                                          (and
+                                          (= (to_rep9
+                                             (rec__decadriver__driver_type__part_id
+                                             (us_split_fields11
+                                             temp___expr_4498))) ((_ int2bv 32) 0))
+                                          (= (to_rep9
+                                             (rec__decadriver__driver_type__lot_id
+                                             (us_split_fields11
+                                             temp___expr_4498))) ((_ int2bv 32) 0)))
+                                          (= (to_rep10
+                                             (rec__decadriver__driver_type__antenna_delay_prf_64
+                                             (us_split_fields11
+                                             temp___expr_4498))) ((_ int2bv 16) 0)))
+                                          (= (to_rep10
+                                             (rec__decadriver__driver_type__antenna_delay_prf_16
+                                             (us_split_fields11
+                                             temp___expr_4498))) ((_ int2bv 16) 0)))
+                                          (= (to_rep1
+                                             (rec__decadriver__driver_type__xtal_trim
+                                             (us_split_fields11
+                                             temp___expr_4498))) ((_ int2bv 8) 16)))
+                                          (= (rec__decadriver__driver_type__otp_tx_power_levels
+                                             (us_split_fields11
+                                             temp___expr_4498)) (temp___4500
+                                                                ((_ int2bv 32) 0))))
+                                          (= (rec__decadriver__driver_type__long_frames
+                                             (us_split_fields11
+                                             temp___expr_4498)) (of_int 0)))
+                                          (= (rec__decadriver__driver_type__sys_cfg_reg
+                                             (us_split_fields11
+                                             temp___expr_4498)) (mk___rep4
+                                                                (mk___split_fields4
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep7
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep8
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep1
+                                                                ((_ int2bv 8) 0))))))
+                                          (= (rec__decadriver__driver_type__use_otp_xtal_trim
+                                             (us_split_fields11
+                                             temp___expr_4498)) (of_int 0)))
+                                          (= (rec__decadriver__driver_type__use_otp_antenna_delay
+                                             (us_split_fields11
+                                             temp___expr_4498)) (of_int 0)))
+                                          (= (rec__decadriver__driver_type__detect_frame_timeout
+                                             (us_split_fields11
+                                             temp___expr_4498)) (of_int 0)))
+                                          (= (rec__decadriver__driver_type__detect_sfd_timeout
+                                             (us_split_fields11
+                                             temp___expr_4498)) (of_int 0)))
+                                          (= (rec__decadriver__driver_type__detect_phr_error
+                                             (us_split_fields11
+                                             temp___expr_4498)) (of_int 0)))
+                                          (= (rec__decadriver__driver_type__detect_rs_error
+                                             (us_split_fields11
+                                             temp___expr_4498)) (of_int 0)))
+                                          (= (rec__decadriver__driver_type__detect_fcs_error
+                                             (us_split_fields11
+                                             temp___expr_4498)) (of_int 0))))
+
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
@@ -3570,14 +3831,14 @@
   (temp___do_toplevel_286 Bool)) Bool (=>
                                       (or (= temp___is_init_284 true)
                                       (bvule ((_ int2bv 8) 0) ((_ int2bv 8) 3)))
-                                      (in_range8 temp___expr_287)))
+                                      (in_range9 temp___expr_287)))
 
 (define-fun dynamic_invariant10 ((temp___expr_293 (_ BitVec 8))
   (temp___is_init_290 Bool) (temp___skip_constant_291 Bool)
   (temp___do_toplevel_292 Bool)) Bool (=>
                                       (or (= temp___is_init_290 true)
                                       (bvule ((_ int2bv 8) 0) ((_ int2bv 8) 7)))
-                                      (in_range9 temp___expr_293)))
+                                      (in_range10 temp___expr_293)))
 
 (define-fun dynamic_invariant11 ((temp___expr_305 (_ BitVec 8))
   (temp___is_init_302 Bool) (temp___skip_constant_303 Bool)
@@ -3598,21 +3859,22 @@
   (temp___is_init_464 Bool) (temp___skip_constant_465 Bool)
   (temp___do_toplevel_466 Bool)) Bool true)
 
-(declare-fun receiver () (Array (_ BitVec 8) us_rep1))
+(declare-fun receiver__split_fields () (Array (_ BitVec 8) us_rep1))
 
-(declare-fun receiver1 () rx_frame_queue_index)
+(declare-fun receiver__split_fields1 () rx_frame_queue_index)
 
-(declare-fun receiver2 () natural)
+(declare-fun receiver__split_fields2 () natural)
 
-(declare-fun receiver3 () Bool)
+(declare-fun receiver__split_fields3 () Bool)
 
-(declare-fun receiver4 () Bool)
+(declare-fun receiver__split_fields4 () Bool)
 
 ;; H
   (assert (dynamic_invariant
   (mk___rep2
-  (mk___split_fields2 receiver receiver1 receiver2 receiver3 receiver4)) true
-  false true))
+  (mk___split_fields2 receiver__split_fields receiver__split_fields1
+  receiver__split_fields2 receiver__split_fields3 receiver__split_fields4))
+  true false true))
 
 (assert
 ;; WP_parameter_def

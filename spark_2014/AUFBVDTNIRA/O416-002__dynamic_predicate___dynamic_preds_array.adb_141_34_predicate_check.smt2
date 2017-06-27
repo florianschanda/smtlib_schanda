@@ -144,6 +144,24 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
+(declare-fun to_rep (even) Int)
+
+(declare-fun of_rep (Int) even)
+
+;; inversion_axiom
+  (assert
+  (forall ((x even)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x even)) (! (in_range (to_rep x)) :pattern ((to_rep x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                           (of_rep x))) )))
+
 (declare-sort teven_pairD1 0)
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
@@ -165,24 +183,6 @@
  (mk_teven_pairD1__ref (teven_pairD1__content teven_pairD1)))))
 (define-fun teven_pairD1__ref___projection ((a teven_pairD1__ref)) teven_pairD1 
   (teven_pairD1__content a))
-
-(declare-fun to_rep (even) Int)
-
-(declare-fun of_rep (Int) even)
-
-;; inversion_axiom
-  (assert
-  (forall ((x even)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
-
-;; range_axiom
-  (assert
-  (forall ((x even)) (! (in_range (to_rep x)) :pattern ((to_rep x)) )))
-
-;; coerce_axiom
-  (assert
-  (forall ((x Int))
-  (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
-                                                           (of_rep x))) )))
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int even))))))
@@ -333,21 +333,13 @@
 
 (declare-fun x () (Array Int even))
 
-(declare-fun o () (Array Int even))
-
 (declare-fun dynamic_preds_array__update_even_pair__x () (Array Int even))
-
-(declare-fun o1 () (Array Int even))
-
-(declare-fun dynamic_preds_array__update_constant_even_pair__x () (Array Int even))
-
-(declare-fun dynamic_preds_array__update_even_pair__x1 () (Array Int even))
 
 (declare-fun result () (Array Int even))
 
 (declare-fun x1 () (Array Int even))
 
-(declare-fun dynamic_preds_array__update_constant_even_pair__x1 () (Array Int even))
+(declare-fun dynamic_preds_array__update_constant_even_pair__x () (Array Int even))
 
 (declare-fun result1 () (Array Int even))
 
@@ -363,44 +355,32 @@
   (assert (dynamic_invariant1 x true false true))
 
 ;; H
-  (assert (= o x))
-
-;; H
-  (assert (= o dynamic_preds_array__update_even_pair__x))
-
-;; H
-  (assert (dynamic_invariant2 dynamic_preds_array__update_even_pair__x1 true
+  (assert (dynamic_invariant2 dynamic_preds_array__update_even_pair__x true
   true true))
 
 ;; H
   (assert (= (mk_map__ref result) (mk_map__ref x)))
 
 ;; H
-  (assert (= x1 dynamic_preds_array__update_even_pair__x1))
+  (assert (= x1 dynamic_preds_array__update_even_pair__x))
 
 ;; H
   (assert (dynamic_predicate1 x1))
 
 ;; H
-  (assert (= o1 x1))
-
-;; H
-  (assert (= o1 dynamic_preds_array__update_constant_even_pair__x))
-
-;; H
   (assert
   (and
   (and
-  (= (to_rep (select dynamic_preds_array__update_constant_even_pair__x1 1)) 0)
-  (= (to_rep (select dynamic_preds_array__update_constant_even_pair__x1 2)) 2))
-  (dynamic_invariant2 dynamic_preds_array__update_constant_even_pair__x1 true
+  (= (to_rep (select dynamic_preds_array__update_constant_even_pair__x 1)) 0)
+  (= (to_rep (select dynamic_preds_array__update_constant_even_pair__x 2)) 2))
+  (dynamic_invariant2 dynamic_preds_array__update_constant_even_pair__x true
   true true)))
 
 ;; H
   (assert (= result1 x1))
 
 ;; H
-  (assert (= x2 dynamic_preds_array__update_constant_even_pair__x1))
+  (assert (= x2 dynamic_preds_array__update_constant_even_pair__x))
 
 (assert
 ;; WP_parameter_def

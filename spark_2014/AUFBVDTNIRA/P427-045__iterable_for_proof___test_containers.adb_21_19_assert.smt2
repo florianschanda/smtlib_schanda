@@ -222,12 +222,10 @@
   (assert
   (forall ((c (Array Int natural)))
   (forall ((p Int))
-  (! (and (m_has_element__function_guard (m_has_element c p) c p)
-     (=>
+  (! (=>
      (and (dynamic_invariant p true true true) (= (m_has_element c p) true))
-     (let ((result (m_element c p)))
-     (=> (m_element__function_guard result c p) (dynamic_invariant result
-     true false true))))) :pattern ((m_element c p)) ))))
+     (dynamic_invariant (m_element c p) true false true)) :pattern ((m_element
+                                                                    c p)) ))))
 
 (declare-fun mem ((Array Int natural) Int) Bool)
 
@@ -336,11 +334,8 @@
   (assert
   (forall ((c (Array Int natural)))
   (forall ((p us_rep))
-  (! (and (has_element__function_guard (has_element c p) c p)
-     (=> (= (has_element c p) true)
-     (let ((result (element c p)))
-     (=> (element__function_guard result c p) (dynamic_invariant result true
-     false true))))) :pattern ((element c p)) ))))
+  (! (=> (= (has_element c p) true) (dynamic_invariant (element c p) true
+     false true)) :pattern ((element c p)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -374,56 +369,17 @@
 
 ;; H
   (assert
-  (forall ((temp___276 us_rep)) (has_element__function_guard
-  (has_element c1 temp___276) c1 temp___276)))
-
-;; H
-  (assert
-  (forall ((temp___276 us_rep)) (element__function_guard
-  (element c1 temp___276) c1 temp___276)))
-
-;; H
-  (assert (forall ((e Int)) (valid__function_guard2 (valid2 e) e)))
-
-;; H
-  (assert
-  (forall ((temp___276 us_rep))
-  (=> (= (has_element c1 temp___276) true)
-  (= (valid2 (element c1 temp___276)) true))))
-
-;; H
-  (assert (has_element__function_guard
-  (has_element c1 (mk___rep (mk___split_fields p1__split_fields))) c1
-  (mk___rep (mk___split_fields p1__split_fields))))
+  (forall ((temp___252 us_rep))
+  (=> (= (has_element c1 temp___252) true)
+  (= (valid2 (element c1 temp___252)) true))))
 
 ;; H
   (assert
   (= (has_element c1 (mk___rep (mk___split_fields p1__split_fields))) true))
 
 ;; H
-  (assert (element__function_guard
-  (element c1 (mk___rep (mk___split_fields p1__split_fields))) c1
-  (mk___rep (mk___split_fields p1__split_fields))))
-
-;; H
-  (assert (element__function_guard
-  (element c1 (mk___rep (mk___split_fields p1__split_fields))) c1
-  (mk___rep (mk___split_fields p1__split_fields))))
-
-;; H
-  (assert (valid__function_guard2
-  (valid2 (element c1 (mk___rep (mk___split_fields p1__split_fields))))
-  (element c1 (mk___rep (mk___split_fields p1__split_fields)))))
-
-;; H
   (assert
   (= (valid2 (element c1 (mk___rep (mk___split_fields p1__split_fields)))) true))
-
-;; H
-  (assert (forall ((e Int)) (mem__function_guard (mem c2 e) c2 e)))
-
-;; H
-  (assert (forall ((e Int)) (valid__function_guard1 (valid1 e) e)))
 
 ;; H
   (assert
@@ -431,79 +387,21 @@
   (=> (and (in_range e) (= (mem c2 e) true)) (= (valid1 e) true))))
 
 ;; H
-  (assert (mem__function_guard (mem c2 p2) c2 p2))
-
-;; H
   (assert (= (mem c2 p2) true))
-
-;; H
-  (assert (valid__function_guard1 (valid1 p2) p2))
 
 ;; H
   (assert (= (valid1 p2) true))
 
 ;; H
-  (assert (get_model__function_guard (get_model c3) c3))
-
-;; H
   (assert
-  (forall ((temp___182 (Array Int natural)) (temp___181 Int))
-  (m_has_element__function_guard (m_has_element temp___182 temp___181)
-  temp___182 temp___181)))
-
-;; H
-  (assert
-  (forall ((temp___182 (Array Int natural)) (temp___181 Int))
-  (m_element__function_guard (m_element temp___182 temp___181) temp___182
-  temp___181)))
-
-;; H
-  (assert (forall ((e Int)) (valid__function_guard (valid e) e)))
-
-;; H
-  (assert
-  (let ((temp___182 (get_model c3)))
-  (forall ((temp___181 Int))
+  (let ((temp___177 (get_model c3)))
+  (forall ((temp___176 Int))
   (=>
-  (and (in_range temp___181) (= (m_has_element temp___182 temp___181) true))
-  (= (valid (m_element temp___182 temp___181)) true)))))
-
-;; H
-  (assert (get_model__function_guard (get_model c3) c3))
-
-;; H
-  (assert (get_model__function_guard (get_model c3) c3))
-
-;; H
-  (assert (m_has_element__function_guard (m_has_element (get_model c3) p3)
-  (get_model c3) p3))
+  (and (in_range temp___176) (= (m_has_element temp___177 temp___176) true))
+  (= (valid (m_element temp___177 temp___176)) true)))))
 
 ;; H
   (assert (= (m_has_element (get_model c3) p3) true))
-
-;; H
-  (assert (get_model__function_guard (get_model c3) c3))
-
-;; H
-  (assert (get_model__function_guard (get_model c3) c3))
-
-;; H
-  (assert (m_element__function_guard (m_element (get_model c3) p3)
-  (get_model c3) p3))
-
-;; H
-  (assert (get_model__function_guard (get_model c3) c3))
-
-;; H
-  (assert (get_model__function_guard (get_model c3) c3))
-
-;; H
-  (assert (m_element__function_guard (m_element (get_model c3) p3)
-  (get_model c3) p3))
-
-;; H
-  (assert (valid__function_guard (valid (m_element (get_model c3) p3))
-  (m_element (get_model c3) p3)))
 
 (assert
 ;; WP_parameter_def

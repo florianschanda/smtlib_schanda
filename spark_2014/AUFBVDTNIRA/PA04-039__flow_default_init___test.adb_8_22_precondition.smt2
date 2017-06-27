@@ -308,8 +308,6 @@
   (! (=> (in_range2 x) (= (to_rep3 (of_rep3 x)) x)) :pattern ((to_rep3
                                                               (of_rep3 x))) )))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -332,7 +330,7 @@
 
 (declare-fun first (t) integer)
 
-(declare-fun last1 (t) integer)
+(declare-fun last (t) integer)
 
 (declare-fun mk (Int Int) t)
 
@@ -341,7 +339,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range2 f)
      (=> (in_range2 l)
-     (and (= (to_rep3 (first (mk f l))) f) (= (to_rep3 (last1 (mk f l))) l)))) :pattern (
+     (and (= (to_rep3 (first (mk f l))) f) (= (to_rep3 (last (mk f l))) l)))) :pattern (
   (mk f l)) )))
 
 (define-fun dynamic_property1 ((range_first Int) (range_last Int) (low Int)
@@ -359,10 +357,10 @@
 
 (define-fun first1 ((a us_t)) Int (to_rep3 (first (rt a))))
 
-(define-fun last2 ((a us_t)) Int (to_rep3 (last1 (rt a))))
+(define-fun last1 ((a us_t)) Int (to_rep3 (last (rt a))))
 
-(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last2 a))
-                                  (+ (- (last2 a) (first1 a)) 1) 0))
+(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last1 a))
+                                  (+ (- (last1 a) (first1 a)) 1) 0))
 
 (declare-fun value__size () Int)
 
@@ -397,8 +395,8 @@
 
 (define-fun bool_eq6 ((x us_t)
   (y us_t)) Bool (bool_eq4 (elts x) (to_rep3 (first (rt x)))
-                 (to_rep3 (last1 (rt x))) (elts y) (to_rep3 (first (rt y)))
-                 (to_rep3 (last1 (rt y)))))
+                 (to_rep3 (last (rt x))) (elts y) (to_rep3 (first (rt y)))
+                 (to_rep3 (last (rt y)))))
 
 (declare-fun user_eq5 (us_t us_t) Bool)
 
@@ -553,14 +551,14 @@
                                       (first1
                                       (rec__bounded_strings__bounded_string__text
                                       (us_split_fields1 temp___expr_148)))
-                                      (last2
+                                      (last1
                                       (rec__bounded_strings__bounded_string__text
                                       (us_split_fields1 temp___expr_148))))
                                       (and
                                       (= (first1
                                          (rec__bounded_strings__bounded_string__text
                                          (us_split_fields1 temp___expr_148))) 1)
-                                      (= (last2
+                                      (= (last1
                                          (rec__bounded_strings__bounded_string__text
                                          (us_split_fields1 temp___expr_148))) 
                                       (to_rep temp___149))))))
@@ -839,8 +837,6 @@
 (define-fun tlv_record__ref___projection ((a tlv_record__ref)) us_rep2 
   (tlv_record__content a))
 
-(declare-fun last3 () Int)
-
 (define-fun dynamic_property2 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -863,7 +859,7 @@
 
 (declare-fun first2 (t1) integer)
 
-(declare-fun last4 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -873,7 +869,7 @@
   (! (=> (in_range2 f)
      (=> (in_range2 l)
      (and (= (to_rep3 (first2 (mk1 f l))) f)
-     (= (to_rep3 (last4 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (= (to_rep3 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property3 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range2 low)
@@ -891,10 +887,10 @@
 
 (define-fun first3 ((a us_t1)) Int (to_rep3 (first2 (rt1 a))))
 
-(define-fun last5 ((a us_t1)) Int (to_rep3 (last4 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep3 (last2 (rt1 a))))
 
-(define-fun length2 ((a us_t1)) Int (ite (<= (first3 a) (last5 a))
-                                    (+ (- (last5 a) (first3 a)) 1) 0))
+(define-fun length2 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size5 () Int)
 
@@ -929,8 +925,8 @@
 
 (define-fun bool_eq12 ((x us_t1)
   (y us_t1)) Bool (bool_eq4 (elts1 x) (to_rep3 (first2 (rt1 x)))
-                  (to_rep3 (last4 (rt1 x))) (elts1 y)
-                  (to_rep3 (first2 (rt1 y))) (to_rep3 (last4 (rt1 y)))))
+                  (to_rep3 (last2 (rt1 x))) (elts1 y)
+                  (to_rep3 (first2 (rt1 y))) (to_rep3 (last2 (rt1 y)))))
 
 (declare-fun user_eq12 (us_t1 us_t1) Bool)
 
@@ -964,7 +960,7 @@
 
 (declare-fun first4 (t2) integer)
 
-(declare-fun last6 (t2) integer)
+(declare-fun last4 (t2) integer)
 
 (declare-fun mk2 (Int Int) t2)
 
@@ -974,7 +970,7 @@
   (! (=> (in_range2 f)
      (=> (in_range2 l)
      (and (= (to_rep3 (first4 (mk2 f l))) f)
-     (= (to_rep3 (last6 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
+     (= (to_rep3 (last4 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
 
 (define-fun dynamic_property4 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range2 low)
@@ -990,10 +986,10 @@
 
 (define-fun first5 ((a us_t2)) Int (to_rep3 (first4 (rt2 a))))
 
-(define-fun last7 ((a us_t2)) Int (to_rep3 (last6 (rt2 a))))
+(define-fun last5 ((a us_t2)) Int (to_rep3 (last4 (rt2 a))))
 
-(define-fun length3 ((a us_t2)) Int (ite (<= (first5 a) (last7 a))
-                                    (+ (- (last7 a) (first5 a)) 1) 0))
+(define-fun length3 ((a us_t2)) Int (ite (<= (first5 a) (last5 a))
+                                    (+ (- (last5 a) (first5 a)) 1) 0))
 
 (declare-fun value__size6 () Int)
 
@@ -1028,8 +1024,8 @@
 
 (define-fun bool_eq14 ((x us_t2)
   (y us_t2)) Bool (bool_eq4 (elts2 x) (to_rep3 (first4 (rt2 x)))
-                  (to_rep3 (last6 (rt2 x))) (elts2 y)
-                  (to_rep3 (first4 (rt2 y))) (to_rep3 (last6 (rt2 y)))))
+                  (to_rep3 (last4 (rt2 x))) (elts2 y)
+                  (to_rep3 (first4 (rt2 y))) (to_rep3 (last4 (rt2 y)))))
 
 (declare-fun user_eq14 (us_t2 us_t2) Bool)
 
@@ -1044,32 +1040,27 @@
 (define-fun string__ref___projection ((a string__ref)) us_t2 (string__content
                                                              a))
 
-(declare-fun temp___175 (Int Int Int) us_t1)
+(declare-fun temp___171 (Int Int Int) us_t1)
 
 ;; def_axiom
   (assert
-  (forall ((temp___177 Int) (temp___178 Int) (temp___179 Int))
-  (let ((temp___176 (temp___175 temp___177 temp___178 temp___179)))
+  (forall ((temp___173 Int) (temp___174 Int) (temp___175 Int))
+  (let ((temp___172 (temp___171 temp___173 temp___174 temp___175)))
   (and
-  (=> (dynamic_property4 1 2147483647 temp___178 temp___179)
-  (and (= (first3 temp___176) temp___178) (= (last5 temp___176) temp___179)))
-  (forall ((temp___180 Int))
-  (= (select (to_array1 temp___176) temp___180) (of_rep2 temp___177)))))))
+  (=> (dynamic_property4 1 2147483647 temp___174 temp___175)
+  (and (= (first3 temp___172) temp___174) (= (last3 temp___172) temp___175)))
+  (forall ((temp___176 Int))
+  (= (select (to_array1 temp___172) temp___176) (of_rep2 temp___173)))))))
 
-(define-fun dynamic_invariant1 ((temp___expr_168 us_rep2)
-  (temp___is_init_165 Bool) (temp___skip_constant_166 Bool)
-  (temp___do_toplevel_167 Bool)) Bool (in_range5 60
+(define-fun dynamic_invariant1 ((temp___expr_164 us_rep2)
+  (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
+  (temp___do_toplevel_163 Bool)) Bool (in_range5 60
   (to_base
   (rec__test__tlv_record__filestore_message
-  (us_split_fields5 temp___expr_168)))))
+  (us_split_fields5 temp___expr_164)))))
 
-;; temp___result_183_def
-  (assert
-  (forall ((temp___182 us_rep1)) (length__function_guard
-  (length1 (to_base temp___182)) (to_base temp___182))))
-
-(define-fun default_initial_assumption ((temp___expr_171 us_rep2)
-  (temp___skip_top_level_172 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_167 us_rep2)
+  (temp___skip_top_level_168 Bool)) Bool (and
                                          (and
                                          (and
                                          (= (to_rep
@@ -1077,33 +1068,33 @@
                                             (us_split_discrs2
                                             (rec__test__tlv_record__filestore_message
                                             (us_split_fields5
-                                            temp___expr_171))))) 60)
+                                            temp___expr_167))))) 60)
                                          (= (rec__bounded_strings__bounded_string__text1
                                             (us_split_fields3
                                             (rec__test__tlv_record__filestore_message
                                             (us_split_fields5
-                                            temp___expr_171)))) (let ((temp___181 
-                                                                (temp___175
+                                            temp___expr_167)))) (let ((temp___177 
+                                                                (temp___171
                                                                 32 1
                                                                 (to_rep
                                                                 (rec__bounded_strings__bounded_string__bound
                                                                 (us_split_discrs2
                                                                 (rec__test__tlv_record__filestore_message
                                                                 (us_split_fields5
-                                                                temp___expr_171))))))))
+                                                                temp___expr_167))))))))
                                                                 (to_array1
-                                                                temp___181))))
+                                                                temp___177))))
                                          (= (to_rep1
                                             (rec__bounded_strings__bounded_string__length1
                                             (us_split_fields3
                                             (rec__test__tlv_record__filestore_message
                                             (us_split_fields5
-                                            temp___expr_171))))) 0))
+                                            temp___expr_167))))) 0))
                                          (= (length1
                                             (to_base
                                             (rec__test__tlv_record__filestore_message
                                             (us_split_fields5
-                                            temp___expr_171)))) 0)))
+                                            temp___expr_167)))) 0)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -1137,17 +1128,13 @@
 ;; length__post_axiom
   (assert
   (forall ((source us_rep))
-  (! (=> (dynamic_invariant source true true true)
-     (let ((result (length1 source)))
-     (=> (length__function_guard result source) (dynamic_invariant5 result
-     true false true)))) :pattern ((length1 source)) )))
+  (! (=> (dynamic_invariant source true true true) (dynamic_invariant5
+     (length1 source) true false true)) :pattern ((length1 source)) )))
 
 ;; length__def_axiom
   (assert
   (forall ((source us_rep))
-  (! (=>
-     (and (dynamic_invariant source true true true) (length__function_guard
-     (length1 source) source))
+  (! (=> (dynamic_invariant source true true true)
      (= (length1 source) (to_rep1
                          (rec__bounded_strings__bounded_string__length
                          (us_split_fields1 source))))) :pattern ((length1
@@ -1161,16 +1148,6 @@
 
 ;; H
   (assert (= 60 (to_rep tlv_information__split_fields)))
-
-;; H
-  (assert (length__function_guard
-  (length1
-  (mk___rep (mk___split_discrs tlv_information__split_fields)
-  (mk___split_fields (mk___t tlv_information__split_fields1 (mk 1 60))
-  tlv_information__split_fields2)))
-  (mk___rep (mk___split_discrs tlv_information__split_fields)
-  (mk___split_fields (mk___t tlv_information__split_fields1 (mk 1 60))
-  tlv_information__split_fields2))))
 
 (assert
 ;; WP_parameter_def

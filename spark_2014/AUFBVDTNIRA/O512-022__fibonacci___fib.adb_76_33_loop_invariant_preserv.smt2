@@ -105,9 +105,8 @@
   (assert
   (forall ((n Int))
   (! (=> (and (dynamic_invariant n true true true) (<= n 7))
-     (let ((result (factorial n)))
-     (=> (factorial__function_guard result n) (dynamic_invariant result true
-     false true)))) :pattern ((factorial n)) )))
+     (dynamic_invariant (factorial n) true false true)) :pattern ((factorial
+                                                                  n)) )))
 
 (declare-fun n1 () Int)
 
@@ -139,8 +138,6 @@
   (! (=> (in_range1 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -160,8 +157,6 @@
 (define-fun t5b__ref___projection ((a t5b__ref)) integer (t5b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
-
-(declare-fun last1 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -254,9 +249,6 @@
   (assert (<= i1 n1))
 
 ;; H
-  (assert (factorial__function_guard (factorial (- i2 1)) (- i2 1)))
-
-;; H
   (assert (= p12 (factorial (- i2 1))))
 
 ;; H
@@ -285,9 +277,6 @@
 
 ;; H
   (assert (= i3 (+ i2 1)))
-
-;; H
-  (assert (factorial__function_guard (factorial (- i3 1)) (- i3 1)))
 
 (assert
 ;; WP_parameter_def

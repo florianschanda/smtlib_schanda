@@ -35,29 +35,17 @@
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private 
   (us_private__content a))
 
-(define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
-
-(define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
-
 (declare-sort unsigned_byte 0)
 
-(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 255)))
+(define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 255)))
 
 (define-fun bool_eq ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE (us_image) Int)
 
 (declare-fun user_eq (unsigned_byte unsigned_byte) Bool)
 
@@ -80,14 +68,14 @@
 
 ;; range_axiom
   (assert
-  (forall ((x unsigned_byte)) (! (in_range1
+  (forall ((x unsigned_byte)) (! (in_range
   (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range1 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
-                                                            (of_rep x))) )))
+  (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                           (of_rep x))) )))
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int unsigned_byte))))))
@@ -202,59 +190,34 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(declare-sort t107b 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
-
-(define-fun bool_eq2 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
-
-(declare-fun user_eq1 (t107b t107b) Bool)
-
-(declare-fun dummy1 () t107b)
-
-(declare-datatypes () ((t107b__ref (mk_t107b__ref (t107b__content t107b)))))
-(define-fun t107b__ref___projection ((a t107b__ref)) t107b (t107b__content a))
-
-(declare-fun temp___617 (Int Int) (Array Int unsigned_byte))
+(declare-fun temp___609 (Int Int) (Array Int unsigned_byte))
 
 ;; def_axiom
   (assert
-  (forall ((temp___619 Int) (temp___620 Int))
-  (let ((temp___618 (temp___617 temp___619 temp___620)))
-  (forall ((temp___621 Int))
-  (ite (= temp___621 0)
-  (= (select temp___618 temp___621) (of_rep temp___619))
-  (= (select temp___618 temp___621) (of_rep temp___620)))))))
+  (forall ((temp___611 Int) (temp___612 Int))
+  (let ((temp___610 (temp___609 temp___611 temp___612)))
+  (forall ((temp___613 Int))
+  (ite (= temp___613 0)
+  (= (select temp___610 temp___613) (of_rep temp___611))
+  (= (select temp___610 temp___613) (of_rep temp___612)))))))
 
-(define-fun dynamic_invariant ((temp___expr_200 Int)
-  (temp___is_init_197 Bool) (temp___skip_constant_198 Bool)
-  (temp___do_toplevel_199 Bool)) Bool (=>
-                                      (or (= temp___is_init_197 true)
-                                      (<= 0 255)) (in_range1
-                                      temp___expr_200)))
+(define-fun dynamic_invariant ((temp___expr_192 Int)
+  (temp___is_init_189 Bool) (temp___skip_constant_190 Bool)
+  (temp___do_toplevel_191 Bool)) Bool (=>
+                                      (or (= temp___is_init_189 true)
+                                      (<= 0 255)) (in_range temp___expr_192)))
 
 (declare-fun x () (Array Int unsigned_byte))
-
-(declare-fun o () (Array Int unsigned_byte))
 
 (declare-fun result () (Array Int unsigned_byte))
 
 (declare-fun x1 () (Array Int unsigned_byte))
 
 ;; H
-  (assert (= o (temp___617 10 5)))
-
-;; H
   (assert (= result x))
 
 ;; H
-  (assert (= x1 o))
+  (assert (= x1 (temp___609 10 5)))
 
 (assert
 ;; WP_parameter_def

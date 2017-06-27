@@ -393,10 +393,6 @@
 (define-fun dyn3__ref___projection ((a1 dyn3__ref)) integer (dyn3__content
                                                             a1))
 
-(declare-fun first2 () Int)
-
-(declare-fun last5 () Int)
-
 (define-fun dynamic_property4 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 

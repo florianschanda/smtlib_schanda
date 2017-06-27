@@ -191,7 +191,7 @@
   (assert (=> (<= 1 10) (in_range1 tmp)))
 
 ;; H
-  (assert (and (= o (get_my_t2 x)) (get_my_t2__function_guard o x)))
+  (assert (= o (get_my_t2 x)))
 
 (assert
 ;; WP_parameter_def

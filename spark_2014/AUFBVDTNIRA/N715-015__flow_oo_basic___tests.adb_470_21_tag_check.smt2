@@ -91,8 +91,8 @@
 (declare-datatypes () ((t1__ref (mk_t1__ref (t1__content us_rep)))))
 (define-fun t1__ref_2__projection ((a t1__ref)) us_rep (t1__content a))
 
-(define-fun default_initial_assumption ((temp___expr_352 us_rep)
-  (temp___skip_top_level_353 Bool)) Bool (= (attr__tag temp___expr_352) 
+(define-fun default_initial_assumption ((temp___expr_337 us_rep)
+  (temp___skip_top_level_338 Bool)) Bool (= (attr__tag temp___expr_337) 
   us_tag))
 
 (declare-fun us_tag1 () Int)
@@ -122,8 +122,8 @@
 (declare-datatypes () ((t2__ref (mk_t2__ref (t2__content us_rep)))))
 (define-fun t2__ref___projection ((a t2__ref)) us_rep (t2__content a))
 
-(define-fun default_initial_assumption1 ((temp___expr_362 us_rep)
-  (temp___skip_top_level_363 Bool)) Bool (= (attr__tag temp___expr_362) 
+(define-fun default_initial_assumption1 ((temp___expr_347 us_rep)
+  (temp___skip_top_level_348 Bool)) Bool (= (attr__tag temp___expr_347) 
   us_tag1))
 
 (declare-fun x__attr__tag () Int)

@@ -129,12 +129,10 @@
 ;; always_true__post_axiom
   (assert
   (forall ((x us_rep) (y us_rep))
-  (! (let ((result (always_true x y)))
-     (=> (always_true__function_guard result x y)
-     (and (= result true)
+  (! (and (= (always_true x y) true)
      (=>
      (= (= (rec__p1__t1__d (us_split_discrs1 x)) true)
-     (= (rec__p1__t1__d (us_split_discrs1 y)) true)) (= (bool_eq x y) true))))) :pattern (
+     (= (rec__p1__t1__d (us_split_discrs1 y)) true)) (= (bool_eq x y) true))) :pattern (
   (always_true x y)) )))
 
 (declare-sort us_main_type1 0)
@@ -231,9 +229,7 @@
 ;; always_true__post_axiom
   (assert
   (forall ((x us_rep1) (y us_rep1))
-  (! (let ((result (always_true1 x y)))
-     (=> (always_true__function_guard1 result x y)
-     (and (= result true) (not (= (bool_eq1 x y) true))))) :pattern (
+  (! (and (= (always_true1 x y) true) (not (= (bool_eq1 x y) true))) :pattern (
   (always_true1 x y)) )))
 
 (declare-fun x () us_rep)
@@ -245,13 +241,7 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 ;; H
-  (assert (always_true__function_guard (always_true x x) x x))
-
-;; H
   (assert (= (always_true x x) true))
-
-;; H
-  (assert (always_true__function_guard1 (always_true1 y y) y y))
 
 (assert
 ;; WP_parameter_def

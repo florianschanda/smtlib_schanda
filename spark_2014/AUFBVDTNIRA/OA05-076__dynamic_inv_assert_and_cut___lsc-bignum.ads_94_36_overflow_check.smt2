@@ -470,13 +470,13 @@
 (define-fun big_int__ref___projection ((a big_int__ref)) us_t (big_int__content
                                                               a))
 
-(define-fun dynamic_invariant1 ((temp___expr_293 us_t)
-  (temp___is_init_290 Bool) (temp___skip_constant_291 Bool)
-  (temp___do_toplevel_292 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_291 true))
+(define-fun dynamic_invariant1 ((temp___expr_289 us_t)
+  (temp___is_init_286 Bool) (temp___skip_constant_287 Bool)
+  (temp___do_toplevel_288 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_287 true))
                                       (dynamic_property 0 2147483646
-                                      (first1 temp___expr_293)
-                                      (last1 temp___expr_293))))
+                                      (first1 temp___expr_289)
+                                      (last1 temp___expr_289))))
 
 (declare-fun a () us_t)
 
@@ -499,10 +499,6 @@
 (declare-fun b_first () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
-
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -532,12 +528,12 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(define-fun dynamic_invariant3 ((temp___expr_287 Int)
-  (temp___is_init_284 Bool) (temp___skip_constant_285 Bool)
-  (temp___do_toplevel_286 Bool)) Bool (=>
-                                      (or (= temp___is_init_284 true)
+(define-fun dynamic_invariant3 ((temp___expr_283 Int)
+  (temp___is_init_280 Bool) (temp___skip_constant_281 Bool)
+  (temp___do_toplevel_282 Bool)) Bool (=>
+                                      (or (= temp___is_init_280 true)
                                       (<= 0 2147483646)) (in_range3
-                                      temp___expr_287)))
+                                      temp___expr_283)))
 
 (define-fun dynamic_invariant4 ((temp___expr_217 (_ BitVec 32))
   (temp___is_init_214 Bool) (temp___skip_constant_215 Bool)
@@ -547,13 +543,13 @@
 
 (declare-fun i () Int)
 
-(declare-fun temp___680 () (Array Int word32))
+(declare-fun temp___566 () (Array Int word32))
 
-(declare-fun temp___678 () Int)
+(declare-fun temp___564 () Int)
 
-(declare-fun temp___676 () (Array Int word32))
+(declare-fun temp___562 () (Array Int word32))
 
-(declare-fun temp___672 () (Array Int word32))
+(declare-fun temp___558 () (Array Int word32))
 
 (declare-fun k () Int)
 
@@ -669,16 +665,16 @@
   (assert (= i1 a_first))
 
 ;; H
-  (assert (=> (and (<= a_first i1) (<= i1 a_last)) (= temp___680 b)))
+  (assert (=> (and (<= a_first i1) (<= i1 a_last)) (= temp___566 b)))
 
 ;; H
-  (assert (=> (and (<= a_first i1) (<= i1 a_last)) (= temp___678 i1)))
+  (assert (=> (and (<= a_first i1) (<= i1 a_last)) (= temp___564 i1)))
 
 ;; H
-  (assert (=> (and (<= a_first i1) (<= i1 a_last)) (= temp___676 b)))
+  (assert (=> (and (<= a_first i1) (<= i1 a_last)) (= temp___562 b)))
 
 ;; H
-  (assert (=> (and (<= a_first i1) (<= i1 a_last)) (= temp___672 b)))
+  (assert (=> (and (<= a_first i1) (<= i1 a_last)) (= temp___558 b)))
 
 ;; H
   (assert
@@ -690,7 +686,7 @@
   (= (to_rep1 (select b2 k1)) (to_rep1
                               (select (elts a) (- (+ a_first k1) b_first)))))
   (=> (=> (<= b_first k1) (not (<= k1 (- (- (+ b_first i2) a_first) 1))))
-  (= (to_rep1 (select b2 k1)) (to_rep1 (select temp___680 k1)))))))))
+  (= (to_rep1 (select b2 k1)) (to_rep1 (select temp___566 k1)))))))))
 
 ;; H
   (assert
@@ -709,7 +705,7 @@
                               (select (elts a) (- (+ a_first k1) b_first)))))
   (=>
   (=> (<= b_first k1) (not (<= k1 (- (- (+ b_first (+ i2 1)) a_first) 1))))
-  (= (to_rep1 (select b3 k1)) (to_rep1 (select temp___672 k1)))))))))
+  (= (to_rep1 (select b3 k1)) (to_rep1 (select temp___558 k1)))))))))
 
 ;; H
   (assert

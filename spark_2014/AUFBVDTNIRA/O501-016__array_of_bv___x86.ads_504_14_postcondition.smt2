@@ -294,9 +294,8 @@
   (forall ((x86__rdx (_ BitVec 64)))
   (! (=> (dynamic_invariant x86__rdx true true true)
      (let ((result (dl x86__rdx)))
-     (=> (dl__function_guard result x86__rdx)
      (and (= result ((_ extract 7 0) (bvand x86__rdx ((_ int2bv 64) 255))))
-     (dynamic_invariant1 result true false true))))) :pattern ((dl x86__rdx)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((dl x86__rdx)) )))
 
 (declare-fun carryflag () Bool)
 
@@ -331,9 +330,6 @@
 
 ;; H
   (assert (= carryflag true))
-
-;; H
-  (assert (dl__function_guard (dl rdx3) rdx3))
 
 (assert
 ;; WP_parameter_def

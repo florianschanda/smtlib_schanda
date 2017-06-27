@@ -1248,8 +1248,7 @@
 ;; prop____def_axiom
   (assert
   (forall ((e Int))
-  (! (=> (prop____function_guard (prop__ e) e)
-     (= (= (prop__ e) true) (<= 0 e))) :pattern ((prop__ e)) )))
+  (! (= (= (prop__ e) true) (<= 0 e)) :pattern ((prop__ e)) )))
 
 (declare-fun s1__split_discrs () us_split_discrs)
 
@@ -1546,7 +1545,7 @@
 
 (declare-fun o1 () Int)
 
-(declare-fun temp___959 () count_type)
+(declare-fun temp___904 () count_type)
 
 (declare-fun o2 () Bool)
 
@@ -1580,8 +1579,8 @@
 (define-fun cu__split_fields5 () us_split_fields2 (mk___split_fields1
                                                   cu__split_fields1))
 
-(define-fun temp___9591 () us_rep1 (mk___rep1
-                                   (mk___split_fields1 temp___959)))
+(define-fun temp___9041 () us_rep1 (mk___rep1
+                                   (mk___split_fields1 temp___904)))
 
 (define-fun use_maps__union_prop__cu__assume1 () us_rep1 (mk___rep1
                                                          (mk___split_fields1
@@ -1589,42 +1588,26 @@
 
 ;; H
   (assert
-  (forall ((k Int)) (prop____function_guard
-  (prop__
-  (get
-  (model__ (mk___rep s1__split_discrs (mk___split_fields s1__split_fields)))
-  k))
-  (get
-  (model__ (mk___rep s1__split_discrs (mk___split_fields s1__split_fields)))
-  k))))
-
-;; H
-  (assert
-  (forall ((k Int)) (prop____function_guard (prop__ (get (model__ s2) k))
-  (get (model__ s2) k))))
-
-;; H
-  (assert
   (and
   (and
-  (let ((temp___993 (keys
+  (let ((temp___933 (keys
                     (mk___rep s1__split_discrs
                     (mk___split_fields s1__split_fields)))))
-  (forall ((temp___992 Int))
+  (forall ((temp___932 Int))
   (=>
-  (and (in_range5 temp___992)
-  (= (iter_has_element temp___993 temp___992) true))
+  (and (in_range5 temp___932)
+  (= (iter_has_element temp___933 temp___932) true))
   (= (prop__
      (get
      (model__
      (mk___rep s1__split_discrs (mk___split_fields s1__split_fields)))
-     (get1 temp___993 temp___992))) true))))
-  (let ((temp___996 (keys s2)))
-  (forall ((temp___995 Int))
+     (get1 temp___933 temp___932))) true))))
+  (let ((temp___935 (keys s2)))
+  (forall ((temp___934 Int))
   (=>
-  (and (in_range5 temp___995)
-  (= (iter_has_element temp___996 temp___995) true))
-  (= (prop__ (get (model__ s2) (get1 temp___996 temp___995))) true)))))
+  (and (in_range5 temp___934)
+  (= (iter_has_element temp___935 temp___934) true))
+  (= (prop__ (get (model__ s2) (get1 temp___935 temp___934))) true)))))
   (< (length s2) (- (to_rep
                     (rec__use_maps__my_maps__map__capacity s1__split_discrs)) 
   (length (mk___rep s1__split_discrs (mk___split_fields s1__split_fields)))))))
@@ -1657,12 +1640,6 @@
 
 ;; H
   (assert
-  (forall ((k Int)) (prop____function_guard
-  (prop__ (get (model__ (mk___rep s1__split_discrs s1__split_fields4)) k))
-  (get (model__ (mk___rep s1__split_discrs s1__split_fields4)) k))))
-
-;; H
-  (assert
   (< (length (mk___rep s1__split_discrs s1__split_fields4)) (+ (length
                                                                (mk___rep
                                                                s1__split_discrs
@@ -1672,14 +1649,14 @@
 
 ;; H
   (assert
-  (let ((temp___969 (keys (mk___rep s1__split_discrs s1__split_fields4))))
-  (forall ((temp___968 Int))
+  (let ((temp___913 (keys (mk___rep s1__split_discrs s1__split_fields4))))
+  (forall ((temp___912 Int))
   (=>
-  (and (in_range5 temp___968)
-  (= (iter_has_element temp___969 temp___968) true))
+  (and (in_range5 temp___912)
+  (= (iter_has_element temp___913 temp___912) true))
   (= (prop__
      (get (model__ (mk___rep s1__split_discrs s1__split_fields4))
-     (get1 temp___969 temp___968))) true)))))
+     (get1 temp___913 temp___912))) true)))))
 
 ;; H
   (assert (= (has_key1 (positions s2) (mk___rep1 cu__split_fields4)) true))
@@ -1750,19 +1727,19 @@
 
 ;; H
   (assert
-  (and (= temp___9591 (next s2 (mk___rep1 cu__split_fields4)))
+  (and (= temp___9041 (next s2 (mk___rep1 cu__split_fields4)))
   (ite (= (ite (= (bool_eq4 (mk___rep1 cu__split_fields4) no_element) false) (= 
           (get2 (positions s2) (mk___rep1 cu__split_fields4)) (length s2)) true) true)
-  (= (bool_eq4 temp___9591 no_element) true)
-  (and (= (has_key1 (positions s2) temp___9591) true)
-  (= (get2 (positions s2) temp___9591) (+ (get2 (positions s2)
+  (= (bool_eq4 temp___9041 no_element) true)
+  (and (= (has_key1 (positions s2) temp___9041) true)
+  (= (get2 (positions s2) temp___9041) (+ (get2 (positions s2)
                                           (mk___rep1 cu__split_fields4)) 1))))))
 
 ;; H
   (assert (= result2 cu__split_fields2))
 
 ;; H
-  (assert (= cu__split_fields3 (mk___split_fields1 temp___959)))
+  (assert (= cu__split_fields3 (mk___split_fields1 temp___904)))
 
 ;; H
   (assert

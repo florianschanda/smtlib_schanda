@@ -258,27 +258,23 @@
 (define-fun tlastS__ref___projection ((a tlastS__ref)) tlastS (tlastS__content
                                                               a))
 
-(define-fun dynamic_invariant1 ((temp___expr_157 Int)
-  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
-  (temp___do_toplevel_156 Bool)) Bool (=>
-                                      (or (= temp___is_init_154 true)
+(define-fun dynamic_invariant1 ((temp___expr_149 Int)
+  (temp___is_init_146 Bool) (temp___skip_constant_147 Bool)
+  (temp___do_toplevel_148 Bool)) Bool (=>
+                                      (or (= temp___is_init_146 true)
                                       (<= 0 200)) (in_range2
-                                      temp___expr_157)))
+                                      temp___expr_149)))
 
 ;; size__post_axiom
   (assert
   (forall ((stack__last Int))
-  (! (=> (dynamic_invariant1 stack__last true true true)
-     (let ((result (size stack__last)))
-     (=> (size__function_guard result stack__last) (dynamic_invariant result
-     true false true)))) :pattern ((size stack__last)) )))
+  (! (=> (dynamic_invariant1 stack__last true true true) (dynamic_invariant
+     (size stack__last) true false true)) :pattern ((size stack__last)) )))
 
 ;; size__def_axiom
   (assert
   (forall ((stack__last Int))
-  (! (=>
-     (and (dynamic_invariant1 stack__last true true true)
-     (size__function_guard (size stack__last) stack__last))
+  (! (=> (dynamic_invariant1 stack__last true true true)
      (= (size stack__last) stack__last)) :pattern ((size stack__last)) )))
 
 (declare-fun full (Int) Bool)
@@ -310,11 +306,11 @@
 (define-fun operation__ref___projection ((a operation__ref)) operation 
   (operation__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_167 Int)
-  (temp___is_init_164 Bool) (temp___skip_constant_165 Bool)
-  (temp___do_toplevel_166 Bool)) Bool (=>
-                                      (or (= temp___is_init_164 true)
-                                      (<= 0 3)) (in_range3 temp___expr_167)))
+(define-fun dynamic_invariant2 ((temp___expr_158 Int)
+  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
+  (temp___do_toplevel_157 Bool)) Bool (=>
+                                      (or (= temp___is_init_155 true)
+                                      (<= 0 3)) (in_range3 temp___expr_158)))
 
 (declare-fun op () Int)
 
@@ -332,9 +328,8 @@
 ;; empty__def_axiom
   (assert
   (forall ((stack__last Int))
-  (! (=> (empty__function_guard (empty stack__last) stack__last)
-     (= (= (empty stack__last) true) (< stack__last 1))) :pattern ((empty
-                                                                   stack__last)) )))
+  (! (= (= (empty stack__last) true) (< stack__last 1)) :pattern ((empty
+                                                                  stack__last)) )))
 
 ;; full__post_axiom
   (assert true)
@@ -342,9 +337,8 @@
 ;; full__def_axiom
   (assert
   (forall ((stack__last Int))
-  (! (=> (full__function_guard (full stack__last) stack__last)
-     (= (= (full stack__last) true) (<= 200 stack__last))) :pattern (
-  (full stack__last)) )))
+  (! (= (= (full stack__last) true) (<= 200 stack__last)) :pattern ((full
+                                                                    stack__last)) )))
 
 (declare-fun last () Int)
 
@@ -365,28 +359,13 @@
   (assert (in_range2 last))
 
 ;; H
-  (assert (size__function_guard (size last) last))
-
-;; H
   (assert (<= 2 (size last)))
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range1 result__)))
 
 ;; H
-  (assert (size__function_guard (size last1) last1))
-
-;; H
-  (assert (size__function_guard (size last) last))
-
-;; H
   (assert (and (= (size last1) (- (size last) 1)) (in_range2 last1)))
-
-;; H
-  (assert (size__function_guard (size last2) last2))
-
-;; H
-  (assert (size__function_guard (size last1) last1))
 
 ;; H
   (assert (and (= (size last2) (- (size last1) 1)) (in_range2 last2)))

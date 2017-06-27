@@ -87,21 +87,17 @@
   (forall ((p__nest__pr_var Int) (p__nest__gn Int))
   (! (=>
      (and (dynamic_invariant p__nest__pr_var true true true)
-     (dynamic_invariant p__nest__gn true true true))
-     (let ((result (foo p__nest__pr_var p__nest__gn)))
-     (=> (foo__function_guard result p__nest__pr_var p__nest__gn)
-     (dynamic_invariant result true false true)))) :pattern ((foo
-                                                             p__nest__pr_var
-                                                             p__nest__gn)) )))
+     (dynamic_invariant p__nest__gn true true true)) (dynamic_invariant
+     (foo p__nest__pr_var p__nest__gn) true false true)) :pattern ((foo
+                                                                   p__nest__pr_var
+                                                                   p__nest__gn)) )))
 
 ;; foo__def_axiom
   (assert
   (forall ((p__nest__pr_var Int) (p__nest__gn Int))
   (! (=>
-     (and
      (and (dynamic_invariant p__nest__pr_var true true true)
-     (dynamic_invariant p__nest__gn true true true)) (foo__function_guard
-     (foo p__nest__pr_var p__nest__gn) p__nest__pr_var p__nest__gn))
+     (dynamic_invariant p__nest__gn true true true))
      (= (foo p__nest__pr_var p__nest__gn) (+ p__nest__gn p__nest__pr_var))) :pattern (
   (foo p__nest__pr_var p__nest__gn)) )))
 
@@ -125,9 +121,6 @@
 
 ;; H
   (assert (in_range y))
-
-;; H
-  (assert (foo__function_guard (foo pr_var gn) pr_var gn))
 
 ;; H
   (assert (= g (+ 0 (foo pr_var gn))))

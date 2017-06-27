@@ -439,43 +439,37 @@
   (! (= (= (is_empty1 container) true) (= (length container) 0)) :pattern (
   (is_empty1 container)) )))
 
-(declare-fun temp___1232 () Int)
+(declare-fun temp___860 () Int)
 
-(declare-fun temp___1235 () capacity_range)
+(declare-fun temp___863 () capacity_range)
 
-(declare-fun temp___12351 () capacity_range1)
+(declare-fun temp___8631 () capacity_range1)
 
-(declare-fun temp___12352 () us_main_type)
+(declare-fun temp___8632 () us_main_type)
 
-(declare-fun temp___12353 () us_private)
+(declare-fun temp___8633 () us_private)
 
-(declare-fun temp___12354 () Int)
-
-(define-fun temp___12355 () us_rep1 (mk___rep1
-                                    (mk___split_discrs1 temp___1235)
-                                    (mk___split_fields1
-                                    (mk___rep
-                                    (mk___split_discrs temp___12351)
-                                    (mk___split_fields temp___12352))
-                                    temp___12353) temp___12354))
+(declare-fun temp___8634 () Int)
 
 ;; H
-  (assert (in_range temp___1232))
+  (assert (in_range temp___860))
 
 ;; H
   (assert
-  (and (= (to_rep temp___1235) (to_rep1 temp___12351))
-  (and (= temp___12354 us_tag)
-  (and (= (to_rep1 temp___12351) (to_rep temp___1235))
+  (and (= (to_rep temp___863) (to_rep1 temp___8631))
+  (and (= temp___8634 us_tag)
+  (and (= (to_rep1 temp___8631) (to_rep temp___863))
   (= (is_empty1
-     (mk___rep (mk___split_discrs temp___12351)
-     (mk___split_fields temp___12352))) true)))))
-
-;; H
-  (assert (is_empty__function_guard (is_empty temp___12355) temp___12355))
+     (mk___rep (mk___split_discrs temp___8631)
+     (mk___split_fields temp___8632))) true)))))
 
 (assert
 ;; WP_parameter_def
  ;; File "a-cofove.ads", line 74, characters 0-0
-  (not (= (is_empty temp___12355) true)))
+  (not
+  (= (is_empty
+     (mk___rep1 (mk___split_discrs1 temp___863)
+     (mk___split_fields1
+     (mk___rep (mk___split_discrs temp___8631)
+     (mk___split_fields temp___8632)) temp___8633) temp___8634)) true)))
 (check-sat)

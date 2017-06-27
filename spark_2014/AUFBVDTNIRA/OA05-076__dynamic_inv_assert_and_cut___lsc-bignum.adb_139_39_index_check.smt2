@@ -448,14 +448,7 @@
 ;; base__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (base__function_guard (base us_void_param) us_void_param)
-     (and (from_word32__function_guard (from_word32 ((_ int2bv 32) 2))
-     ((_ int2bv 32) 2))
-     (and (from_word32__function_guard (from_word32 ((_ int2bv 32) 2))
-     ((_ int2bv 32) 2))
-     (and (oexpon__function_guard (oexpon (from_word32 ((_ int2bv 32) 2)) 32)
-     (from_word32 ((_ int2bv 32) 2)) 32)
-     (= (base us_void_param) (oexpon (from_word32 ((_ int2bv 32) 2)) 32)))))) :pattern (
+  (! (= (base us_void_param) (oexpon (from_word32 ((_ int2bv 32) 2)) 32)) :pattern (
   (base us_void_param)) )))
 
 (declare-sort big_int_range 0)
@@ -559,13 +552,13 @@
 (define-fun big_int__ref___projection ((a big_int__ref)) us_t (big_int__content
                                                               a))
 
-(define-fun dynamic_invariant1 ((temp___expr_293 us_t)
-  (temp___is_init_290 Bool) (temp___skip_constant_291 Bool)
-  (temp___do_toplevel_292 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_291 true))
+(define-fun dynamic_invariant1 ((temp___expr_289 us_t)
+  (temp___is_init_286 Bool) (temp___skip_constant_287 Bool)
+  (temp___do_toplevel_288 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_287 true))
                                       (dynamic_property 0 2147483646
-                                      (first1 temp___expr_293)
-                                      (last1 temp___expr_293))))
+                                      (first1 temp___expr_289)
+                                      (last1 temp___expr_289))))
 
 (declare-fun num_of_big_int (us_t Int Int) us_rep)
 
@@ -617,24 +610,13 @@
   (assert
   (forall ((b1 Bool))
   (! (let ((result (word_of_boolean b1)))
-     (and (from_word32__function_guard (from_word32 result) result)
-     (and (num_of_boolean__function_guard (num_of_boolean b1) b1)
-     (and (from_word32__function_guard (from_word32 result) result)
-     (and (num_of_boolean__function_guard (num_of_boolean b1) b1)
-     (and (oeq__function_guard (oeq (from_word32 result) (num_of_boolean b1))
-     (from_word32 result) (num_of_boolean b1))
-     (=> (word_of_boolean__function_guard result b1)
      (and (= (oeq (from_word32 result) (num_of_boolean b1)) true)
-     (dynamic_invariant2 result true false true))))))))) :pattern ((word_of_boolean
-                                                                   b1)) )))
+     (dynamic_invariant2 result true false true))) :pattern ((word_of_boolean
+                                                             b1)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
-
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -663,12 +645,12 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(define-fun dynamic_invariant4 ((temp___expr_287 Int)
-  (temp___is_init_284 Bool) (temp___skip_constant_285 Bool)
-  (temp___do_toplevel_286 Bool)) Bool (=>
-                                      (or (= temp___is_init_284 true)
+(define-fun dynamic_invariant4 ((temp___expr_283 Int)
+  (temp___is_init_280 Bool) (temp___skip_constant_281 Bool)
+  (temp___do_toplevel_282 Bool)) Bool (=>
+                                      (or (= temp___is_init_280 true)
                                       (<= 0 2147483646)) (in_range3
-                                      temp___expr_287)))
+                                      temp___expr_283)))
 
 ;; from_word32__post_axiom
   (assert true)
@@ -749,248 +731,6 @@
   (assert (<= i1 a_last))
 
 ;; H
-  (assert (num_of_big_int__function_guard
-  (num_of_big_int (mk___t a (mk (to_rep a__first) (to_rep a__last))) 
-  a_first (- i2 a_first)) (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  a_first (- i2 a_first)))
-
-;; H
-  (assert (num_of_big_int__function_guard
-  (num_of_big_int b b_first (- i2 a_first)) b b_first (- i2 a_first)))
-
-;; H
-  (assert (num_of_big_int__function_guard
-  (num_of_big_int (mk___t a (mk (to_rep a__first) (to_rep a__last))) 
-  a_first (- i2 a_first)) (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  a_first (- i2 a_first)))
-
-;; H
-  (assert (num_of_big_int__function_guard
-  (num_of_big_int b b_first (- i2 a_first)) b b_first (- i2 a_first)))
-
-;; H
-  (assert (osubtract__function_guard
-  (osubtract
-  (num_of_big_int (mk___t a (mk (to_rep a__first) (to_rep a__last))) 
-  a_first (- i2 a_first)) (num_of_big_int b b_first (- i2 a_first)))
-  (num_of_big_int (mk___t a (mk (to_rep a__first) (to_rep a__last))) 
-  a_first (- i2 a_first)) (num_of_big_int b b_first (- i2 a_first))))
-
-;; H
-  (assert (num_of_big_int__function_guard
-  (num_of_big_int (mk___t a1 (mk (to_rep a__first) (to_rep a__last))) 
-  a_first (- i2 a_first)) (mk___t a1 (mk (to_rep a__first) (to_rep a__last)))
-  a_first (- i2 a_first)))
-
-;; H
-  (assert (base__function_guard (base Tuple0) Tuple0))
-
-;; H
-  (assert (base__function_guard (base Tuple0) Tuple0))
-
-;; H
-  (assert (oexpon__function_guard (oexpon (base Tuple0) (- i2 a_first))
-  (base Tuple0) (- i2 a_first)))
-
-;; H
-  (assert (num_of_boolean__function_guard (num_of_boolean carry2) carry2))
-
-;; H
-  (assert (base__function_guard (base Tuple0) Tuple0))
-
-;; H
-  (assert (base__function_guard (base Tuple0) Tuple0))
-
-;; H
-  (assert (oexpon__function_guard (oexpon (base Tuple0) (- i2 a_first))
-  (base Tuple0) (- i2 a_first)))
-
-;; H
-  (assert (num_of_boolean__function_guard (num_of_boolean carry2) carry2))
-
-;; H
-  (assert (omultiply__function_guard
-  (omultiply (oexpon (base Tuple0) (- i2 a_first)) (num_of_boolean carry2))
-  (oexpon (base Tuple0) (- i2 a_first)) (num_of_boolean carry2)))
-
-;; H
-  (assert (num_of_big_int__function_guard
-  (num_of_big_int (mk___t a1 (mk (to_rep a__first) (to_rep a__last))) 
-  a_first (- i2 a_first)) (mk___t a1 (mk (to_rep a__first) (to_rep a__last)))
-  a_first (- i2 a_first)))
-
-;; H
-  (assert (base__function_guard (base Tuple0) Tuple0))
-
-;; H
-  (assert (base__function_guard (base Tuple0) Tuple0))
-
-;; H
-  (assert (oexpon__function_guard (oexpon (base Tuple0) (- i2 a_first))
-  (base Tuple0) (- i2 a_first)))
-
-;; H
-  (assert (num_of_boolean__function_guard (num_of_boolean carry2) carry2))
-
-;; H
-  (assert (base__function_guard (base Tuple0) Tuple0))
-
-;; H
-  (assert (base__function_guard (base Tuple0) Tuple0))
-
-;; H
-  (assert (oexpon__function_guard (oexpon (base Tuple0) (- i2 a_first))
-  (base Tuple0) (- i2 a_first)))
-
-;; H
-  (assert (num_of_boolean__function_guard (num_of_boolean carry2) carry2))
-
-;; H
-  (assert (omultiply__function_guard
-  (omultiply (oexpon (base Tuple0) (- i2 a_first)) (num_of_boolean carry2))
-  (oexpon (base Tuple0) (- i2 a_first)) (num_of_boolean carry2)))
-
-;; H
-  (assert (osubtract__function_guard
-  (osubtract
-  (num_of_big_int (mk___t a1 (mk (to_rep a__first) (to_rep a__last))) 
-  a_first (- i2 a_first))
-  (omultiply (oexpon (base Tuple0) (- i2 a_first)) (num_of_boolean carry2)))
-  (num_of_big_int (mk___t a1 (mk (to_rep a__first) (to_rep a__last))) 
-  a_first (- i2 a_first))
-  (omultiply (oexpon (base Tuple0) (- i2 a_first)) (num_of_boolean carry2))))
-
-;; H
-  (assert (num_of_big_int__function_guard
-  (num_of_big_int (mk___t a (mk (to_rep a__first) (to_rep a__last))) 
-  a_first (- i2 a_first)) (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  a_first (- i2 a_first)))
-
-;; H
-  (assert (num_of_big_int__function_guard
-  (num_of_big_int b b_first (- i2 a_first)) b b_first (- i2 a_first)))
-
-;; H
-  (assert (num_of_big_int__function_guard
-  (num_of_big_int (mk___t a (mk (to_rep a__first) (to_rep a__last))) 
-  a_first (- i2 a_first)) (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  a_first (- i2 a_first)))
-
-;; H
-  (assert (num_of_big_int__function_guard
-  (num_of_big_int b b_first (- i2 a_first)) b b_first (- i2 a_first)))
-
-;; H
-  (assert (osubtract__function_guard
-  (osubtract
-  (num_of_big_int (mk___t a (mk (to_rep a__first) (to_rep a__last))) 
-  a_first (- i2 a_first)) (num_of_big_int b b_first (- i2 a_first)))
-  (num_of_big_int (mk___t a (mk (to_rep a__first) (to_rep a__last))) 
-  a_first (- i2 a_first)) (num_of_big_int b b_first (- i2 a_first))))
-
-;; H
-  (assert (num_of_big_int__function_guard
-  (num_of_big_int (mk___t a1 (mk (to_rep a__first) (to_rep a__last))) 
-  a_first (- i2 a_first)) (mk___t a1 (mk (to_rep a__first) (to_rep a__last)))
-  a_first (- i2 a_first)))
-
-;; H
-  (assert (base__function_guard (base Tuple0) Tuple0))
-
-;; H
-  (assert (base__function_guard (base Tuple0) Tuple0))
-
-;; H
-  (assert (oexpon__function_guard (oexpon (base Tuple0) (- i2 a_first))
-  (base Tuple0) (- i2 a_first)))
-
-;; H
-  (assert (num_of_boolean__function_guard (num_of_boolean carry2) carry2))
-
-;; H
-  (assert (base__function_guard (base Tuple0) Tuple0))
-
-;; H
-  (assert (base__function_guard (base Tuple0) Tuple0))
-
-;; H
-  (assert (oexpon__function_guard (oexpon (base Tuple0) (- i2 a_first))
-  (base Tuple0) (- i2 a_first)))
-
-;; H
-  (assert (num_of_boolean__function_guard (num_of_boolean carry2) carry2))
-
-;; H
-  (assert (omultiply__function_guard
-  (omultiply (oexpon (base Tuple0) (- i2 a_first)) (num_of_boolean carry2))
-  (oexpon (base Tuple0) (- i2 a_first)) (num_of_boolean carry2)))
-
-;; H
-  (assert (num_of_big_int__function_guard
-  (num_of_big_int (mk___t a1 (mk (to_rep a__first) (to_rep a__last))) 
-  a_first (- i2 a_first)) (mk___t a1 (mk (to_rep a__first) (to_rep a__last)))
-  a_first (- i2 a_first)))
-
-;; H
-  (assert (base__function_guard (base Tuple0) Tuple0))
-
-;; H
-  (assert (base__function_guard (base Tuple0) Tuple0))
-
-;; H
-  (assert (oexpon__function_guard (oexpon (base Tuple0) (- i2 a_first))
-  (base Tuple0) (- i2 a_first)))
-
-;; H
-  (assert (num_of_boolean__function_guard (num_of_boolean carry2) carry2))
-
-;; H
-  (assert (base__function_guard (base Tuple0) Tuple0))
-
-;; H
-  (assert (base__function_guard (base Tuple0) Tuple0))
-
-;; H
-  (assert (oexpon__function_guard (oexpon (base Tuple0) (- i2 a_first))
-  (base Tuple0) (- i2 a_first)))
-
-;; H
-  (assert (num_of_boolean__function_guard (num_of_boolean carry2) carry2))
-
-;; H
-  (assert (omultiply__function_guard
-  (omultiply (oexpon (base Tuple0) (- i2 a_first)) (num_of_boolean carry2))
-  (oexpon (base Tuple0) (- i2 a_first)) (num_of_boolean carry2)))
-
-;; H
-  (assert (osubtract__function_guard
-  (osubtract
-  (num_of_big_int (mk___t a1 (mk (to_rep a__first) (to_rep a__last))) 
-  a_first (- i2 a_first))
-  (omultiply (oexpon (base Tuple0) (- i2 a_first)) (num_of_boolean carry2)))
-  (num_of_big_int (mk___t a1 (mk (to_rep a__first) (to_rep a__last))) 
-  a_first (- i2 a_first))
-  (omultiply (oexpon (base Tuple0) (- i2 a_first)) (num_of_boolean carry2))))
-
-;; H
-  (assert (oeq__function_guard
-  (oeq
-  (osubtract
-  (num_of_big_int (mk___t a (mk (to_rep a__first) (to_rep a__last))) 
-  a_first (- i2 a_first)) (num_of_big_int b b_first (- i2 a_first)))
-  (osubtract
-  (num_of_big_int (mk___t a1 (mk (to_rep a__first) (to_rep a__last))) 
-  a_first (- i2 a_first))
-  (omultiply (oexpon (base Tuple0) (- i2 a_first)) (num_of_boolean carry2))))
-  (osubtract
-  (num_of_big_int (mk___t a (mk (to_rep a__first) (to_rep a__last))) 
-  a_first (- i2 a_first)) (num_of_big_int b b_first (- i2 a_first)))
-  (osubtract
-  (num_of_big_int (mk___t a1 (mk (to_rep a__first) (to_rep a__last))) 
-  a_first (- i2 a_first))
-  (omultiply (oexpon (base Tuple0) (- i2 a_first)) (num_of_boolean carry2)))))
-
-;; H
   (assert
   (and
   (= (oeq
@@ -1011,10 +751,10 @@
   (and
   (and
   (and (=> (<= a_first a_last) (dynamic_property1 a_first a_last i2))
-  (forall ((temp___717 Int))
+  (forall ((temp___583 Int))
   (=>
-  (and (<= (to_rep a__first) temp___717) (<= temp___717 (to_rep a__last)))
-  (=> (<= i2 temp___717) (= (select a1 temp___717) (select a temp___717))))))
+  (and (<= (to_rep a__first) temp___583) (<= temp___583 (to_rep a__last)))
+  (=> (<= i2 temp___583) (= (select a1 temp___583) (select a temp___583))))))
   (=> (<= 0 2147483647) (in_range2 j1)))
   (and (<= a_first i2) (<= i2 a_last))))
 

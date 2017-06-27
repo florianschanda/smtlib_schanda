@@ -329,10 +329,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
 
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -352,10 +348,6 @@
 (define-fun t42b__ref___projection ((a t42b__ref)) integer (t42b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS9 () Int)
-
-(declare-fun first3 () Int)
-
-(declare-fun last3 () Int)
 
 (define-fun dynamic_property2 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -377,10 +369,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS10 () Int)
 
-(declare-fun first4 () Int)
-
-(declare-fun last4 () Int)
-
 (define-fun dynamic_property3 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -400,10 +388,6 @@
 (define-fun t62b__ref___projection ((a t62b__ref)) integer (t62b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS11 () Int)
-
-(declare-fun first5 () Int)
-
-(declare-fun last5 () Int)
 
 (define-fun dynamic_property4 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))

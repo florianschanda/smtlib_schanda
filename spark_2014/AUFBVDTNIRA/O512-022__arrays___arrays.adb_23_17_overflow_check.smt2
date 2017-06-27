@@ -347,9 +347,8 @@
   (forall ((x us_t))
   (! (=> (dynamic_invariant x true true true)
      (let ((result (count_even x)))
-     (=> (count_even__function_guard result x)
      (and (and (<= result (length x)) (=> (= (length x) 0) (= result 0)))
-     (dynamic_invariant1 result true false true))))) :pattern ((count_even x)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((count_even x)) )))
 
 (declare-fun x () us_t)
 
@@ -380,7 +379,7 @@
 
 ;; H
   (assert
-  (and (and (= o (count_even x)) (count_even__function_guard o x))
+  (and (= o (count_even x))
   (and (in_range1 o) (and (<= o (length x)) (=> (= (length x) 0) (= o 0))))))
 
 ;; H

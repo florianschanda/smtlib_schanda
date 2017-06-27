@@ -215,10 +215,6 @@
 ;; H
   (assert (and (<= 1 exp2) (<= exp2 100)))
 
-;; H
-  (assert (exponentiate__function_guard (exponentiate val__1 exp2) val__1
-  exp2))
-
 (assert
 ;; WP_parameter_def
  ;; File "test_exponentiate.adb", line 4, characters 0-0

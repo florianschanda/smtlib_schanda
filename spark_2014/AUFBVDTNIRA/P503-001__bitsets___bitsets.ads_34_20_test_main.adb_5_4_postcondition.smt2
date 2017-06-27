@@ -47,27 +47,6 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
-(declare-sort element 0)
-
-(define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
-
-(declare-fun user_eq (element element) Bool)
-
-(declare-fun dummy () element)
-
-(declare-datatypes ()
-((element__ref (mk_element__ref (element__content element)))))
-(define-fun element__ref___projection ((a element__ref)) element (element__content
-                                                                 a))
-
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int Bool))))))
 (declare-fun slide ((Array Int Bool) Int Int) (Array Int Bool))
@@ -110,7 +89,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq1 ((a (Array Int Bool)) (a__first Int) (a__last Int)
+(define-fun bool_eq ((a (Array Int Bool)) (a__first Int) (a__last Int)
   (b (Array Int Bool)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -128,7 +107,7 @@
   (assert
   (forall ((a (Array Int Bool)) (b (Array Int Bool)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq1 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -144,7 +123,7 @@
   (forall ((a (Array Int Bool)) (b (Array Int Bool)))
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq1 a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq a a_first a_last b b_first b_last) true)) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -155,7 +134,7 @@
      (exists ((i Int) (j Int))
      (and (<= i a_last)
      (and (< j b_last)
-     (and (= (bool_eq1 a a_first i b b_first j) true)
+     (and (= (bool_eq a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
      (< (to_int1 (select a (+ i 1))) (to_int1 (select b (+ j 1))))))))))) :pattern (
@@ -169,7 +148,7 @@
      (exists ((i Int) (j Int))
      (and (<= i b_last)
      (and (< j a_last)
-     (and (= (bool_eq1 a a_first j b b_first i) true)
+     (and (= (bool_eq a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
      (< (to_int1 (select b (+ i 1))) (to_int1 (select a (+ j 1))))))))))) :pattern (
@@ -226,6 +205,27 @@
 
 (declare-fun mem__function_guard (Bool (Array Int Bool) Int) Bool)
 
+(declare-sort element 0)
+
+(define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+
+(define-fun bool_eq1 ((x Int) (y Int)) Bool (ite (= x y) true false))
+
+(declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
+
+(declare-fun user_eq (element element) Bool)
+
+(declare-fun dummy () element)
+
+(declare-datatypes ()
+((element__ref (mk_element__ref (element__content element)))))
+(define-fun element__ref___projection ((a element__ref)) element (element__content
+                                                                 a))
+
 (define-fun dynamic_invariant ((temp___expr_267 Int)
   (temp___is_init_264 Bool) (temp___skip_constant_265 Bool)
   (temp___do_toplevel_266 Bool)) Bool (=>
@@ -239,39 +239,17 @@
   (assert
   (forall ((s (Array Int Bool)))
   (forall ((e Int))
-  (! (=> (mem__function_guard (mem s e) s e)
-     (= (= (mem s e) true) (= (select s e) true))) :pattern ((mem s e)) ))))
+  (! (= (= (mem s e) true) (= (select s e) true)) :pattern ((mem s e)) ))))
 
-(declare-sort t18b 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq2 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
-
-(declare-fun user_eq1 (t18b t18b) Bool)
-
-(declare-fun dummy1 () t18b)
-
-(declare-datatypes () ((t18b__ref (mk_t18b__ref (t18b__content t18b)))))
-(define-fun t18b__ref___projection ((a t18b__ref)) t18b (t18b__content a))
-
-(declare-fun temp___367 (Bool) (Array Int Bool))
+(declare-fun temp___316 (Bool) (Array Int Bool))
 
 ;; def_axiom
   (assert
-  (forall ((temp___369 Bool))
-  (forall ((temp___370 Int))
-  (= (select (temp___367 temp___369) temp___370) temp___369))))
+  (forall ((temp___318 Bool))
+  (forall ((temp___319 Int))
+  (= (select (temp___316 temp___318) temp___319) temp___318))))
 
 (declare-fun test_main__my_sets__empty__result () (Array Int Bool))
-
-(declare-fun o () (Array Int Bool))
 
 (declare-fun result () (Array Int Bool))
 
@@ -296,13 +274,10 @@
   (= test_main__my_sets__empty__result3 test_main__my_sets__empty__result1))
 
 ;; H
-  (assert (= o (temp___367 (of_int 0))))
-
-;; H
   (assert (= result test_main__my_sets__empty__result))
 
 ;; H
-  (assert (= test_main__my_sets__empty__result1 o))
+  (assert (= test_main__my_sets__empty__result1 (temp___316 (of_int 0))))
 
 ;; H
   (assert
@@ -323,10 +298,6 @@
 
 ;; H
   (assert (<= elt 10))
-
-;; H
-  (assert (mem__function_guard (mem test_main__my_sets__empty__result4 elt)
-  test_main__my_sets__empty__result4 elt))
 
 (assert
 ;; WP_parameter_def

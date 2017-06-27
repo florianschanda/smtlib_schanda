@@ -71,28 +71,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(declare-sort tsmall_arrayD1 0)
-
-(define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq1 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
-
-(declare-fun user_eq1 (tsmall_arrayD1 tsmall_arrayD1) Bool)
-
-(declare-fun dummy1 () tsmall_arrayD1)
-
-(declare-datatypes ()
-((tsmall_arrayD1__ref
- (mk_tsmall_arrayD1__ref (tsmall_arrayD1__content tsmall_arrayD1)))))
-(define-fun tsmall_arrayD1__ref___projection ((a tsmall_arrayD1__ref)) tsmall_arrayD1 
-  (tsmall_arrayD1__content a))
-
 (declare-fun div1 (Int Int) Int)
 
 (declare-fun mod1 (Int Int) Int)
@@ -182,6 +160,28 @@
   (forall ((x Int))
   (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                            (of_rep x))) )))
+
+(declare-sort tsmall_arrayD1 0)
+
+(define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
+
+(define-fun bool_eq1 ((x Int) (y Int)) Bool (ite (= x y) true false))
+
+(declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
+
+(declare-fun user_eq1 (tsmall_arrayD1 tsmall_arrayD1) Bool)
+
+(declare-fun dummy1 () tsmall_arrayD1)
+
+(declare-datatypes ()
+((tsmall_arrayD1__ref
+ (mk_tsmall_arrayD1__ref (tsmall_arrayD1__content tsmall_arrayD1)))))
+(define-fun tsmall_arrayD1__ref___projection ((a tsmall_arrayD1__ref)) tsmall_arrayD1 
+  (tsmall_arrayD1__content a))
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int small))))))
@@ -317,25 +317,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
-
-(declare-sort t3b 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
-
-(declare-fun user_eq2 (t3b t3b) Bool)
-
-(declare-fun dummy2 () t3b)
-
-(declare-datatypes () ((t3b__ref (mk_t3b__ref (t3b__content t3b)))))
-(define-fun t3b__ref___projection ((a t3b__ref)) t3b (t3b__content a))
 
 (declare-fun temp___224 (Int Int) (Array Int small))
 

@@ -96,9 +96,8 @@
 ;; id__def_axiom
   (assert
   (forall ((n1 Int))
-  (! (=>
-     (and (dynamic_invariant n1 true true true) (id__function_guard (id n1)
-     n1)) (= (id n1) n1)) :pattern ((id n1)) )))
+  (! (=> (dynamic_invariant n1 true true true) (= (id n1) n1)) :pattern (
+  (id n1)) )))
 
 (define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)
@@ -146,9 +145,6 @@
 
 ;; H
   (assert (= result1 p__id__result4))
-
-;; H
-  (assert (id__function_guard (id (- n 1)) (- n 1)))
 
 (assert
 ;; WP_parameter_def

@@ -100,8 +100,8 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(define-fun default_initial_assumption ((temp___expr_137 us_rep)
-  (temp___skip_top_level_138 Bool)) Bool (= (attr__tag temp___expr_137) 
+(define-fun default_initial_assumption ((temp___expr_136 us_rep)
+  (temp___skip_top_level_137 Bool)) Bool (= (attr__tag temp___expr_136) 
   us_tag))
 
 (declare-fun get (us_rep Bool) Bool)
@@ -117,12 +117,7 @@
 (declare-fun op_wrapper__function_guard (Bool us_rep Bool) Bool)
 
 ;; op_wrapper__post_axiom
-  (assert
-  (forall ((y us_rep))
-  (forall ((extension_pkg__body_elaborated Bool)) (! (get__function_guard1
-  (get1 (attr__tag y) y extension_pkg__body_elaborated) (attr__tag y) y
-  extension_pkg__body_elaborated) :pattern ((op_wrapper y
-                                            extension_pkg__body_elaborated)) ))))
+  (assert true)
 
 (declare-datatypes ()
 ((us_split_fields2
@@ -230,8 +225,8 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(define-fun default_initial_assumption1 ((temp___expr_157 us_rep1)
-  (temp___skip_top_level_158 Bool)) Bool (= (attr__tag1 temp___expr_157) 
+(define-fun default_initial_assumption1 ((temp___expr_146 us_rep1)
+  (temp___skip_top_level_147 Bool)) Bool (= (attr__tag1 temp___expr_146) 
   us_tag1))
 
 (declare-fun get2 (us_rep1 Bool) Bool)
@@ -252,25 +247,18 @@
   (assert
   (forall ((x us_rep1))
   (forall ((extension_pkg__body_elaborated Bool))
-  (! (=> (get__function_guard3
-     (get3 us_tag1 x extension_pkg__body_elaborated) us_tag1 x
-     extension_pkg__body_elaborated)
-     (and (get__function_guard2 (get2 x extension_pkg__body_elaborated) x
-     extension_pkg__body_elaborated)
-     (= (to_int1 (get2 x extension_pkg__body_elaborated)) (to_int1
+  (! (= (to_int1 (get2 x extension_pkg__body_elaborated)) (to_int1
                                                           (get3 us_tag1 x
-                                                          extension_pkg__body_elaborated))))) :pattern (
+                                                          extension_pkg__body_elaborated))) :pattern (
   (get3 us_tag1 x extension_pkg__body_elaborated)) ))))
 
 ;; get__def_axiom
   (assert
   (forall ((x us_rep1))
   (forall ((extension_pkg__body_elaborated Bool))
-  (! (=> (get__function_guard2 (get2 x extension_pkg__body_elaborated) x
-     extension_pkg__body_elaborated)
-     (= (= (get2 x extension_pkg__body_elaborated) true)
-     (= extension_pkg__body_elaborated true))) :pattern ((get2 x
-                                                         extension_pkg__body_elaborated)) ))))
+  (! (= (= (get2 x extension_pkg__body_elaborated) true)
+     (= extension_pkg__body_elaborated true)) :pattern ((get2 x
+                                                        extension_pkg__body_elaborated)) ))))
 
 ;; get__post_axiom
   (assert true)
@@ -282,39 +270,27 @@
   (assert
   (forall ((x us_rep))
   (forall ((extension_pkg__body_elaborated Bool))
-  (! (=> (get__function_guard1
-     (get1 us_tag1 x extension_pkg__body_elaborated) us_tag1 x
-     extension_pkg__body_elaborated)
-     (and (get__function_guard2
-     (get2 (of_base x) extension_pkg__body_elaborated) (of_base x)
-     extension_pkg__body_elaborated)
-     (= (to_int1 (get2 (of_base x) extension_pkg__body_elaborated)) (to_int1
+  (! (= (to_int1 (get2 (of_base x) extension_pkg__body_elaborated)) (to_int1
                                                                     (get1
                                                                     us_tag1 x
-                                                                    extension_pkg__body_elaborated))))) :pattern (
+                                                                    extension_pkg__body_elaborated))) :pattern (
   (get1 us_tag1 x extension_pkg__body_elaborated)) ))))
 
 ;; root_pkg__root__compat_axiom
   (assert
   (forall ((x us_rep))
   (forall ((extension_pkg__body_elaborated Bool))
-  (! (=> (get__function_guard1 (get1 us_tag x extension_pkg__body_elaborated)
-     us_tag x extension_pkg__body_elaborated)
-     (and (get__function_guard (get x extension_pkg__body_elaborated) x
-     extension_pkg__body_elaborated)
-     (= (to_int1 (get x extension_pkg__body_elaborated)) (to_int1
+  (! (= (to_int1 (get x extension_pkg__body_elaborated)) (to_int1
                                                          (get1 us_tag x
-                                                         extension_pkg__body_elaborated))))) :pattern (
+                                                         extension_pkg__body_elaborated))) :pattern (
   (get1 us_tag x extension_pkg__body_elaborated)) ))))
 
 ;; get__def_axiom
   (assert
   (forall ((x us_rep))
   (forall ((extension_pkg__body_elaborated Bool))
-  (! (=> (get__function_guard (get x extension_pkg__body_elaborated) x
-     extension_pkg__body_elaborated)
-     (= (get x extension_pkg__body_elaborated) true)) :pattern ((get x
-                                                                extension_pkg__body_elaborated)) ))))
+  (! (= (get x extension_pkg__body_elaborated) true) :pattern ((get x
+                                                               extension_pkg__body_elaborated)) ))))
 
 (declare-fun body_elaborated () Bool)
 
@@ -327,14 +303,6 @@
 
 ;; H
   (assert (= body_elaborated1 (of_int 0)))
-
-;; H
-  (assert (get__function_guard1
-  (get1 us_tag1
-  (mk___rep (mk___split_fields (hide_ext__ (of_int 0) us_null_ext__))
-  us_tag1) body_elaborated1) us_tag1
-  (mk___rep (mk___split_fields (hide_ext__ (of_int 0) us_null_ext__))
-  us_tag1) body_elaborated1))
 
 (assert
 ;; WP_parameter_def

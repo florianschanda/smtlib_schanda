@@ -229,53 +229,15 @@
   (= (bool_eq1 (select a temp___idx_132)
      (select b (+ (- b__first a__first) temp___idx_132))) true))))))))
 
-(define-fun default_initial_assumption ((temp___expr_154 (Array Int us_rep))
-  (temp___skip_top_level_155 Bool)) Bool (forall ((temp___156 Int))
+(define-fun default_initial_assumption ((temp___expr_153 (Array Int us_rep))
+  (temp___skip_top_level_154 Bool)) Bool (forall ((temp___155 Int))
                                          (=>
-                                         (and (<= 1 temp___156)
-                                         (<= temp___156 10))
+                                         (and (<= 1 temp___155)
+                                         (<= temp___155 10))
                                          (= (to_rep
                                             (rec__main__rec__comp
                                             (us_split_fields1
-                                            (select temp___expr_154 temp___156)))) 1234))))
-
-(declare-sort t6b 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
-
-(declare-fun user_eq3 (t6b t6b) Bool)
-
-(declare-fun dummy3 () t6b)
-
-(declare-datatypes () ((t6b__ref (mk_t6b__ref (t6b__content t6b)))))
-(define-fun t6b__ref___projection ((a t6b__ref)) t6b (t6b__content a))
-
-(declare-sort t9b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq4 (t9b t9b) Bool)
-
-(declare-fun dummy4 () t9b)
-
-(declare-datatypes () ((t9b__ref (mk_t9b__ref (t9b__content t9b)))))
-(define-fun t9b__ref___projection ((a t9b__ref)) t9b (t9b__content a))
+                                            (select temp___expr_153 temp___155)))) 1234))))
 
 (declare-fun result__ () (Array Int us_rep))
 
@@ -289,13 +251,13 @@
   (forall ((temp___135 Int))
   (= (select (main__get_arr__result__aggregate_def temp___134) temp___135) temp___134))))
 
-(declare-fun temp___158 (us_rep) (Array Int us_rep))
+(declare-fun temp___157 (us_rep) (Array Int us_rep))
 
 ;; def_axiom
   (assert
-  (forall ((temp___160 us_rep))
-  (forall ((temp___161 Int))
-  (= (select (temp___158 temp___160) temp___161) temp___160))))
+  (forall ((temp___159 us_rep))
+  (forall ((temp___160 Int))
+  (= (select (temp___157 temp___159) temp___160) temp___159))))
 
 (define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool)
   (temp___skip_constant_31 Bool)
@@ -304,17 +266,17 @@
                                      (<= 0 2147483647)) (in_range
                                      temp___expr_33)))
 
-(define-fun default_initial_assumption1 ((temp___expr_141 us_rep)
-  (temp___skip_top_level_142 Bool)) Bool (= (to_rep
+(define-fun default_initial_assumption1 ((temp___expr_140 us_rep)
+  (temp___skip_top_level_141 Bool)) Bool (= (to_rep
                                             (rec__main__rec__comp
                                             (us_split_fields1
-                                            temp___expr_141))) 1234))
+                                            temp___expr_140))) 1234))
 
-(define-fun dynamic_invariant1 ((temp___expr_146 Int)
-  (temp___is_init_143 Bool) (temp___skip_constant_144 Bool)
-  (temp___do_toplevel_145 Bool)) Bool (=>
-                                      (or (= temp___is_init_143 true)
-                                      (<= 1 10)) (in_range1 temp___expr_146)))
+(define-fun dynamic_invariant1 ((temp___expr_145 Int)
+  (temp___is_init_142 Bool) (temp___skip_constant_143 Bool)
+  (temp___do_toplevel_144 Bool)) Bool (=>
+                                      (or (= temp___is_init_142 true)
+                                      (<= 1 10)) (in_range1 temp___expr_145)))
 
 ;; result____def_axiom
   (assert
@@ -369,7 +331,7 @@
   (assert (= main__get_arr__result3 main__get_arr__result1))
 
 ;; H
-  (assert (= (mk_map__ref result) (mk_map__ref main__get_arr__result)))
+  (assert (= result main__get_arr__result))
 
 ;; H
   (assert (= main__get_arr__result1 result__))
@@ -390,5 +352,5 @@
  ;; File "main.adb", line 7, characters 0-0
   (not
   (= (bool_eq3 main__get_arr__result4 1 10
-     (temp___158 (mk___rep (mk___split_fields (of_rep 9012)))) 1 10) true)))
+     (temp___157 (mk___rep (mk___split_fields (of_rep 9012)))) 1 10) true)))
 (check-sat)

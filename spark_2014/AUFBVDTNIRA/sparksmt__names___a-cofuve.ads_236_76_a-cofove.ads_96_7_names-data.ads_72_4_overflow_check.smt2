@@ -91,12 +91,12 @@
 (define-fun index_type__ref_4__projection ((a index_type__ref)) index_type 
   (index_type__content a))
 
-(define-fun dynamic_invariant ((temp___expr_411 Int)
-  (temp___is_init_408 Bool) (temp___skip_constant_409 Bool)
-  (temp___do_toplevel_410 Bool)) Bool (=>
-                                      (or (= temp___is_init_408 true)
+(define-fun dynamic_invariant ((temp___expr_407 Int)
+  (temp___is_init_404 Bool) (temp___skip_constant_405 Bool)
+  (temp___do_toplevel_406 Bool)) Bool (=>
+                                      (or (= temp___is_init_404 true)
                                       (<= 1 2147483647)) (in_range2
-                                      temp___expr_411)))
+                                      temp___expr_407)))
 
 (declare-sort extended_index 0)
 
@@ -120,12 +120,12 @@
 (define-fun extended_index__ref_4__projection ((a extended_index__ref)) extended_index 
   (extended_index__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_426 Int)
-  (temp___is_init_423 Bool) (temp___skip_constant_424 Bool)
-  (temp___do_toplevel_425 Bool)) Bool (=>
-                                      (or (= temp___is_init_423 true)
+(define-fun dynamic_invariant1 ((temp___expr_422 Int)
+  (temp___is_init_419 Bool) (temp___skip_constant_420 Bool)
+  (temp___do_toplevel_421 Bool)) Bool (=>
+                                      (or (= temp___is_init_419 true)
                                       (<= 0 2147483647)) (in_range3
-                                      temp___expr_426)))
+                                      temp___expr_422)))
 
 (declare-sort us_main_type 0)
 
@@ -447,11 +447,11 @@
   (forall ((a us_rep) (b us_rep))
   (! (= (user_eq3 a b) (oeq a b)) :pattern ((user_eq3 a b)) )))
 
-(define-fun default_initial_assumption ((temp___expr_433 us_rep)
-  (temp___skip_top_level_434 Bool)) Bool (=>
+(define-fun default_initial_assumption ((temp___expr_429 us_rep)
+  (temp___skip_top_level_430 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_434 true))
-                                         (= (length temp___expr_433) 0)))
+                                         (= temp___skip_top_level_430 true))
+                                         (= (length temp___expr_429) 0)))
 
 (declare-sort count_type 0)
 
@@ -515,12 +515,12 @@
                                      (<= 1 2147483647)) (in_range4
                                      temp___expr_39)))
 
-(define-fun dynamic_invariant4 ((temp___expr_218 Int)
-  (temp___is_init_215 Bool) (temp___skip_constant_216 Bool)
-  (temp___do_toplevel_217 Bool)) Bool (=>
-                                      (or (= temp___is_init_215 true)
+(define-fun dynamic_invariant4 ((temp___expr_214 Int)
+  (temp___is_init_211 Bool) (temp___skip_constant_212 Bool)
+  (temp___do_toplevel_213 Bool)) Bool (=>
+                                      (or (= temp___is_init_211 true)
                                       (<= 0 2147483646)) (in_range6
-                                      temp___expr_218)))
+                                      temp___expr_214)))
 
 (define-fun dynamic_invariant5 ((temp___expr_148 Int)
   (temp___is_init_145 Bool) (temp___skip_constant_146 Bool)

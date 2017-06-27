@@ -404,19 +404,19 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(define-fun dynamic_invariant ((temp___expr_203 (_ BitVec 8))
-  (temp___is_init_200 Bool) (temp___skip_constant_201 Bool)
-  (temp___do_toplevel_202 Bool)) Bool (=>
-                                      (or (= temp___is_init_200 true)
+(define-fun dynamic_invariant ((temp___expr_202 (_ BitVec 8))
+  (temp___is_init_199 Bool) (temp___skip_constant_200 Bool)
+  (temp___do_toplevel_201 Bool)) Bool (=>
+                                      (or (= temp___is_init_199 true)
                                       (bvule ((_ int2bv 8) 0) ((_ int2bv 8) 10)))
-                                      (in_range1 temp___expr_203)))
+                                      (in_range1 temp___expr_202)))
 
-(define-fun dynamic_invariant1 ((temp___expr_209 (_ BitVec 8))
-  (temp___is_init_206 Bool) (temp___skip_constant_207 Bool)
-  (temp___do_toplevel_208 Bool)) Bool (=>
-                                      (or (= temp___is_init_206 true)
+(define-fun dynamic_invariant1 ((temp___expr_208 (_ BitVec 8))
+  (temp___is_init_205 Bool) (temp___skip_constant_206 Bool)
+  (temp___do_toplevel_207 Bool)) Bool (=>
+                                      (or (= temp___is_init_205 true)
                                       (bvule ((_ int2bv 8) 1) ((_ int2bv 8) 10)))
-                                      (in_range2 temp___expr_209)))
+                                      (in_range2 temp___expr_208)))
 
 (declare-fun inputs () (Array (_ BitVec 8) Bool))
 
@@ -465,12 +465,12 @@
   (assert
   (and
   (and
-  (forall ((temp___241 (_ BitVec 8)))
+  (forall ((temp___236 (_ BitVec 8)))
   (=>
-  (and (bvule ((_ int2bv 8) 1) temp___241)
-  (bvule temp___241 ((_ int2bv 8) 10)))
-  (=> (bvule i2 temp___241)
-  (= (select inputs1 temp___241) (select inputs temp___241)))))
+  (and (bvule ((_ int2bv 8) 1) temp___236)
+  (bvule temp___236 ((_ int2bv 8) 10)))
+  (=> (bvule i2 temp___236)
+  (= (select inputs1 temp___236) (select inputs temp___236)))))
   (=> (bvule ((_ int2bv 8) 1) ((_ int2bv 8) 9)) (in_range3 i2)))
   (and (bvule ((_ int2bv 8) 1) i2) (bvule i2 ((_ int2bv 8) 9)))))
 

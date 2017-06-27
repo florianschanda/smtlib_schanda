@@ -1196,12 +1196,12 @@
 (define-fun screenxcoordt__ref___projection ((a screenxcoordt__ref)) screenxcoordt 
   (screenxcoordt__content a))
 
-(define-fun dynamic_invariant6 ((temp___expr_1100 Int)
-  (temp___is_init_1097 Bool) (temp___skip_constant_1098 Bool)
-  (temp___do_toplevel_1099 Bool)) Bool (=>
-                                       (or (= temp___is_init_1097 true)
+(define-fun dynamic_invariant6 ((temp___expr_1019 Int)
+  (temp___is_init_1016 Bool) (temp___skip_constant_1017 Bool)
+  (temp___do_toplevel_1018 Bool)) Bool (=>
+                                       (or (= temp___is_init_1016 true)
                                        (<= 0 79)) (in_range11
-                                       temp___expr_1100)))
+                                       temp___expr_1019)))
 
 (declare-fun to_rep7 (screenxcoordt) Int)
 
@@ -1245,12 +1245,12 @@
 (define-fun screenycoordt__ref___projection ((a screenycoordt__ref)) screenycoordt 
   (screenycoordt__content a))
 
-(define-fun dynamic_invariant7 ((temp___expr_1106 Int)
-  (temp___is_init_1103 Bool) (temp___skip_constant_1104 Bool)
-  (temp___do_toplevel_1105 Bool)) Bool (=>
-                                       (or (= temp___is_init_1103 true)
+(define-fun dynamic_invariant7 ((temp___expr_1025 Int)
+  (temp___is_init_1022 Bool) (temp___skip_constant_1023 Bool)
+  (temp___do_toplevel_1024 Bool)) Bool (=>
+                                       (or (= temp___is_init_1022 true)
                                        (<= 0 29)) (in_range12
-                                       temp___expr_1106)))
+                                       temp___expr_1025)))
 
 (declare-fun to_rep8 (screenycoordt) Int)
 
@@ -1539,8 +1539,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS29 () Int)
 
-(declare-fun first2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -1563,7 +1561,7 @@
 
 (declare-sort t1 0)
 
-(declare-fun first3 (t1) integer)
+(declare-fun first2 (t1) integer)
 
 (declare-fun last2 (t1) integer)
 
@@ -1574,7 +1572,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first3 (mk1 f l))) f)
+     (and (= (to_rep1 (first2 (mk1 f l))) f)
      (= (to_rep1 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
@@ -1591,12 +1589,12 @@
 (define-fun of_array1 ((a (Array Int character)) (f Int)
   (l Int)) us_t1 (mk___t1 a (mk1 f l)))
 
-(define-fun first4 ((a us_t1)) Int (to_rep1 (first3 (rt1 a))))
+(define-fun first3 ((a us_t1)) Int (to_rep1 (first2 (rt1 a))))
 
 (define-fun last3 ((a us_t1)) Int (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first4 a) (last3 a))
-                                    (+ (- (last3 a) (first4 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size4 () Int)
 
@@ -1630,9 +1628,9 @@
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment4 a))))
 
 (define-fun bool_eq22 ((x us_t1)
-  (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep1 (first3 (rt1 x)))
+  (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep1 (first2 (rt1 x)))
                   (to_rep1 (last2 (rt1 x))) (elts1 y)
-                  (to_rep1 (first3 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
 (declare-fun user_eq21 (us_t1 us_t1) Bool)
 
@@ -1640,8 +1638,6 @@
 
 (declare-datatypes () ((t117b__ref (mk_t117b__ref (t117b__content us_t1)))))
 (define-fun t117b__ref___projection ((a t117b__ref)) us_t1 (t117b__content a))
-
-(declare-fun last4 () Int)
 
 (define-fun dynamic_property3 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -1665,9 +1661,9 @@
 
 (declare-sort t2 0)
 
-(declare-fun first5 (t2) integer)
+(declare-fun first4 (t2) integer)
 
-(declare-fun last5 (t2) integer)
+(declare-fun last4 (t2) integer)
 
 (declare-fun mk2 (Int Int) t2)
 
@@ -1676,8 +1672,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first5 (mk2 f l))) f)
-     (= (to_rep1 (last5 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
+     (and (= (to_rep1 (first4 (mk2 f l))) f)
+     (= (to_rep1 (last4 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
 
 (define-fun dynamic_property4 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -1693,12 +1689,12 @@
 (define-fun of_array2 ((a (Array Int character)) (f Int)
   (l Int)) us_t2 (mk___t2 a (mk2 f l)))
 
-(define-fun first6 ((a us_t2)) Int (to_rep1 (first5 (rt2 a))))
+(define-fun first5 ((a us_t2)) Int (to_rep1 (first4 (rt2 a))))
 
-(define-fun last6 ((a us_t2)) Int (to_rep1 (last5 (rt2 a))))
+(define-fun last5 ((a us_t2)) Int (to_rep1 (last4 (rt2 a))))
 
-(define-fun length2 ((a us_t2)) Int (ite (<= (first6 a) (last6 a))
-                                    (+ (- (last6 a) (first6 a)) 1) 0))
+(define-fun length2 ((a us_t2)) Int (ite (<= (first5 a) (last5 a))
+                                    (+ (- (last5 a) (first5 a)) 1) 0))
 
 (declare-fun value__size5 () Int)
 
@@ -1732,9 +1728,9 @@
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment5 a))))
 
 (define-fun bool_eq24 ((x us_t2)
-  (y us_t2)) Bool (bool_eq3 (elts2 x) (to_rep1 (first5 (rt2 x)))
-                  (to_rep1 (last5 (rt2 x))) (elts2 y)
-                  (to_rep1 (first5 (rt2 y))) (to_rep1 (last5 (rt2 y)))))
+  (y us_t2)) Bool (bool_eq3 (elts2 x) (to_rep1 (first4 (rt2 x)))
+                  (to_rep1 (last4 (rt2 x))) (elts2 y)
+                  (to_rep1 (first4 (rt2 y))) (to_rep1 (last4 (rt2 y)))))
 
 (declare-fun user_eq23 (us_t2 us_t2) Bool)
 
@@ -1756,8 +1752,6 @@
 (declare-fun valuestr__last1 () integer)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS33 () Int)
-
-(declare-fun first7 () Int)
 
 (define-fun dynamic_property5 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -1781,9 +1775,9 @@
 
 (declare-sort t3 0)
 
-(declare-fun first8 (t3) integer)
+(declare-fun first6 (t3) integer)
 
-(declare-fun last7 (t3) integer)
+(declare-fun last6 (t3) integer)
 
 (declare-fun mk3 (Int Int) t3)
 
@@ -1792,8 +1786,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first8 (mk3 f l))) f)
-     (= (to_rep1 (last7 (mk3 f l))) l)))) :pattern ((mk3 f l)) )))
+     (and (= (to_rep1 (first6 (mk3 f l))) f)
+     (= (to_rep1 (last6 (mk3 f l))) l)))) :pattern ((mk3 f l)) )))
 
 (define-fun dynamic_property6 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -1809,12 +1803,12 @@
 (define-fun of_array3 ((a (Array Int character)) (f Int)
   (l Int)) us_t3 (mk___t3 a (mk3 f l)))
 
-(define-fun first9 ((a us_t3)) Int (to_rep1 (first8 (rt3 a))))
+(define-fun first7 ((a us_t3)) Int (to_rep1 (first6 (rt3 a))))
 
-(define-fun last8 ((a us_t3)) Int (to_rep1 (last7 (rt3 a))))
+(define-fun last7 ((a us_t3)) Int (to_rep1 (last6 (rt3 a))))
 
-(define-fun length3 ((a us_t3)) Int (ite (<= (first9 a) (last8 a))
-                                    (+ (- (last8 a) (first9 a)) 1) 0))
+(define-fun length3 ((a us_t3)) Int (ite (<= (first7 a) (last7 a))
+                                    (+ (- (last7 a) (first7 a)) 1) 0))
 
 (declare-fun value__size6 () Int)
 
@@ -1848,9 +1842,9 @@
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment6 a))))
 
 (define-fun bool_eq26 ((x us_t3)
-  (y us_t3)) Bool (bool_eq3 (elts3 x) (to_rep1 (first8 (rt3 x)))
-                  (to_rep1 (last7 (rt3 x))) (elts3 y)
-                  (to_rep1 (first8 (rt3 y))) (to_rep1 (last7 (rt3 y)))))
+  (y us_t3)) Bool (bool_eq3 (elts3 x) (to_rep1 (first6 (rt3 x)))
+                  (to_rep1 (last6 (rt3 x))) (elts3 y)
+                  (to_rep1 (first6 (rt3 y))) (to_rep1 (last6 (rt3 y)))))
 
 (declare-fun user_eq25 (us_t3 us_t3) Bool)
 
@@ -1858,8 +1852,6 @@
 
 (declare-datatypes () ((t127b__ref (mk_t127b__ref (t127b__content us_t3)))))
 (define-fun t127b__ref___projection ((a t127b__ref)) us_t3 (t127b__content a))
-
-(declare-fun last9 () Int)
 
 (define-fun dynamic_property7 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -1883,9 +1875,9 @@
 
 (declare-sort t4 0)
 
-(declare-fun first10 (t4) integer)
+(declare-fun first8 (t4) integer)
 
-(declare-fun last10 (t4) integer)
+(declare-fun last8 (t4) integer)
 
 (declare-fun mk4 (Int Int) t4)
 
@@ -1894,8 +1886,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first10 (mk4 f l))) f)
-     (= (to_rep1 (last10 (mk4 f l))) l)))) :pattern ((mk4 f l)) )))
+     (and (= (to_rep1 (first8 (mk4 f l))) f)
+     (= (to_rep1 (last8 (mk4 f l))) l)))) :pattern ((mk4 f l)) )))
 
 (define-fun dynamic_property8 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -1911,12 +1903,12 @@
 (define-fun of_array4 ((a (Array Int character)) (f Int)
   (l Int)) us_t4 (mk___t4 a (mk4 f l)))
 
-(define-fun first11 ((a us_t4)) Int (to_rep1 (first10 (rt4 a))))
+(define-fun first9 ((a us_t4)) Int (to_rep1 (first8 (rt4 a))))
 
-(define-fun last11 ((a us_t4)) Int (to_rep1 (last10 (rt4 a))))
+(define-fun last9 ((a us_t4)) Int (to_rep1 (last8 (rt4 a))))
 
-(define-fun length4 ((a us_t4)) Int (ite (<= (first11 a) (last11 a))
-                                    (+ (- (last11 a) (first11 a)) 1) 0))
+(define-fun length4 ((a us_t4)) Int (ite (<= (first9 a) (last9 a))
+                                    (+ (- (last9 a) (first9 a)) 1) 0))
 
 (declare-fun value__size7 () Int)
 
@@ -1950,9 +1942,9 @@
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment7 a))))
 
 (define-fun bool_eq28 ((x us_t4)
-  (y us_t4)) Bool (bool_eq3 (elts4 x) (to_rep1 (first10 (rt4 x)))
-                  (to_rep1 (last10 (rt4 x))) (elts4 y)
-                  (to_rep1 (first10 (rt4 y))) (to_rep1 (last10 (rt4 y)))))
+  (y us_t4)) Bool (bool_eq3 (elts4 x) (to_rep1 (first8 (rt4 x)))
+                  (to_rep1 (last8 (rt4 x))) (elts4 y)
+                  (to_rep1 (first8 (rt4 y))) (to_rep1 (last8 (rt4 y)))))
 
 (declare-fun user_eq27 (us_t4 us_t4) Bool)
 
@@ -1974,8 +1966,6 @@
 (declare-fun valuestr__last2 () integer)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS37 () Int)
-
-(declare-fun first12 () Int)
 
 (define-fun dynamic_property9 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -1999,9 +1989,9 @@
 
 (declare-sort t5 0)
 
-(declare-fun first13 (t5) integer)
+(declare-fun first10 (t5) integer)
 
-(declare-fun last12 (t5) integer)
+(declare-fun last10 (t5) integer)
 
 (declare-fun mk5 (Int Int) t5)
 
@@ -2010,8 +2000,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first13 (mk5 f l))) f)
-     (= (to_rep1 (last12 (mk5 f l))) l)))) :pattern ((mk5 f l)) )))
+     (and (= (to_rep1 (first10 (mk5 f l))) f)
+     (= (to_rep1 (last10 (mk5 f l))) l)))) :pattern ((mk5 f l)) )))
 
 (define-fun dynamic_property10 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -2027,12 +2017,12 @@
 (define-fun of_array5 ((a (Array Int character)) (f Int)
   (l Int)) us_t5 (mk___t5 a (mk5 f l)))
 
-(define-fun first14 ((a us_t5)) Int (to_rep1 (first13 (rt5 a))))
+(define-fun first11 ((a us_t5)) Int (to_rep1 (first10 (rt5 a))))
 
-(define-fun last13 ((a us_t5)) Int (to_rep1 (last12 (rt5 a))))
+(define-fun last11 ((a us_t5)) Int (to_rep1 (last10 (rt5 a))))
 
-(define-fun length5 ((a us_t5)) Int (ite (<= (first14 a) (last13 a))
-                                    (+ (- (last13 a) (first14 a)) 1) 0))
+(define-fun length5 ((a us_t5)) Int (ite (<= (first11 a) (last11 a))
+                                    (+ (- (last11 a) (first11 a)) 1) 0))
 
 (declare-fun value__size8 () Int)
 
@@ -2066,9 +2056,9 @@
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment8 a))))
 
 (define-fun bool_eq30 ((x us_t5)
-  (y us_t5)) Bool (bool_eq3 (elts5 x) (to_rep1 (first13 (rt5 x)))
-                  (to_rep1 (last12 (rt5 x))) (elts5 y)
-                  (to_rep1 (first13 (rt5 y))) (to_rep1 (last12 (rt5 y)))))
+  (y us_t5)) Bool (bool_eq3 (elts5 x) (to_rep1 (first10 (rt5 x)))
+                  (to_rep1 (last10 (rt5 x))) (elts5 y)
+                  (to_rep1 (first10 (rt5 y))) (to_rep1 (last10 (rt5 y)))))
 
 (declare-fun user_eq29 (us_t5 us_t5) Bool)
 
@@ -2076,8 +2066,6 @@
 
 (declare-datatypes () ((t137b__ref (mk_t137b__ref (t137b__content us_t5)))))
 (define-fun t137b__ref___projection ((a t137b__ref)) us_t5 (t137b__content a))
-
-(declare-fun last14 () Int)
 
 (define-fun dynamic_property11 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -2101,9 +2089,9 @@
 
 (declare-sort t6 0)
 
-(declare-fun first15 (t6) integer)
+(declare-fun first12 (t6) integer)
 
-(declare-fun last15 (t6) integer)
+(declare-fun last12 (t6) integer)
 
 (declare-fun mk6 (Int Int) t6)
 
@@ -2112,8 +2100,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first15 (mk6 f l))) f)
-     (= (to_rep1 (last15 (mk6 f l))) l)))) :pattern ((mk6 f l)) )))
+     (and (= (to_rep1 (first12 (mk6 f l))) f)
+     (= (to_rep1 (last12 (mk6 f l))) l)))) :pattern ((mk6 f l)) )))
 
 (define-fun dynamic_property12 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -2129,12 +2117,12 @@
 (define-fun of_array6 ((a (Array Int character)) (f Int)
   (l Int)) us_t6 (mk___t6 a (mk6 f l)))
 
-(define-fun first16 ((a us_t6)) Int (to_rep1 (first15 (rt6 a))))
+(define-fun first13 ((a us_t6)) Int (to_rep1 (first12 (rt6 a))))
 
-(define-fun last16 ((a us_t6)) Int (to_rep1 (last15 (rt6 a))))
+(define-fun last13 ((a us_t6)) Int (to_rep1 (last12 (rt6 a))))
 
-(define-fun length6 ((a us_t6)) Int (ite (<= (first16 a) (last16 a))
-                                    (+ (- (last16 a) (first16 a)) 1) 0))
+(define-fun length6 ((a us_t6)) Int (ite (<= (first13 a) (last13 a))
+                                    (+ (- (last13 a) (first13 a)) 1) 0))
 
 (declare-fun value__size9 () Int)
 
@@ -2168,9 +2156,9 @@
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment9 a))))
 
 (define-fun bool_eq32 ((x us_t6)
-  (y us_t6)) Bool (bool_eq3 (elts6 x) (to_rep1 (first15 (rt6 x)))
-                  (to_rep1 (last15 (rt6 x))) (elts6 y)
-                  (to_rep1 (first15 (rt6 y))) (to_rep1 (last15 (rt6 y)))))
+  (y us_t6)) Bool (bool_eq3 (elts6 x) (to_rep1 (first12 (rt6 x)))
+                  (to_rep1 (last12 (rt6 x))) (elts6 y)
+                  (to_rep1 (first12 (rt6 y))) (to_rep1 (last12 (rt6 y)))))
 
 (declare-fun user_eq31 (us_t6 us_t6) Bool)
 
@@ -2192,8 +2180,6 @@
 (declare-fun valuestr__last3 () integer)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS41 () Int)
-
-(declare-fun first17 () Int)
 
 (define-fun dynamic_property13 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -2217,9 +2203,9 @@
 
 (declare-sort t7 0)
 
-(declare-fun first18 (t7) integer)
+(declare-fun first14 (t7) integer)
 
-(declare-fun last17 (t7) integer)
+(declare-fun last14 (t7) integer)
 
 (declare-fun mk7 (Int Int) t7)
 
@@ -2228,8 +2214,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first18 (mk7 f l))) f)
-     (= (to_rep1 (last17 (mk7 f l))) l)))) :pattern ((mk7 f l)) )))
+     (and (= (to_rep1 (first14 (mk7 f l))) f)
+     (= (to_rep1 (last14 (mk7 f l))) l)))) :pattern ((mk7 f l)) )))
 
 (define-fun dynamic_property14 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -2245,12 +2231,12 @@
 (define-fun of_array7 ((a (Array Int character)) (f Int)
   (l Int)) us_t7 (mk___t7 a (mk7 f l)))
 
-(define-fun first19 ((a us_t7)) Int (to_rep1 (first18 (rt7 a))))
+(define-fun first15 ((a us_t7)) Int (to_rep1 (first14 (rt7 a))))
 
-(define-fun last18 ((a us_t7)) Int (to_rep1 (last17 (rt7 a))))
+(define-fun last15 ((a us_t7)) Int (to_rep1 (last14 (rt7 a))))
 
-(define-fun length7 ((a us_t7)) Int (ite (<= (first19 a) (last18 a))
-                                    (+ (- (last18 a) (first19 a)) 1) 0))
+(define-fun length7 ((a us_t7)) Int (ite (<= (first15 a) (last15 a))
+                                    (+ (- (last15 a) (first15 a)) 1) 0))
 
 (declare-fun value__size10 () Int)
 
@@ -2285,9 +2271,9 @@
   (forall ((a (Array Int character))) (<= 0 (object__alignment10 a))))
 
 (define-fun bool_eq34 ((x us_t7)
-  (y us_t7)) Bool (bool_eq3 (elts7 x) (to_rep1 (first18 (rt7 x)))
-                  (to_rep1 (last17 (rt7 x))) (elts7 y)
-                  (to_rep1 (first18 (rt7 y))) (to_rep1 (last17 (rt7 y)))))
+  (y us_t7)) Bool (bool_eq3 (elts7 x) (to_rep1 (first14 (rt7 x)))
+                  (to_rep1 (last14 (rt7 x))) (elts7 y)
+                  (to_rep1 (first14 (rt7 y))) (to_rep1 (last14 (rt7 y)))))
 
 (declare-fun user_eq33 (us_t7 us_t7) Bool)
 
@@ -2295,8 +2281,6 @@
 
 (declare-datatypes () ((t147b__ref (mk_t147b__ref (t147b__content us_t7)))))
 (define-fun t147b__ref___projection ((a t147b__ref)) us_t7 (t147b__content a))
-
-(declare-fun last19 () Int)
 
 (define-fun dynamic_property15 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -2320,9 +2304,9 @@
 
 (declare-sort t8 0)
 
-(declare-fun first20 (t8) integer)
+(declare-fun first16 (t8) integer)
 
-(declare-fun last20 (t8) integer)
+(declare-fun last16 (t8) integer)
 
 (declare-fun mk8 (Int Int) t8)
 
@@ -2331,8 +2315,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first20 (mk8 f l))) f)
-     (= (to_rep1 (last20 (mk8 f l))) l)))) :pattern ((mk8 f l)) )))
+     (and (= (to_rep1 (first16 (mk8 f l))) f)
+     (= (to_rep1 (last16 (mk8 f l))) l)))) :pattern ((mk8 f l)) )))
 
 (define-fun dynamic_property16 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -2348,12 +2332,12 @@
 (define-fun of_array8 ((a (Array Int character)) (f Int)
   (l Int)) us_t8 (mk___t8 a (mk8 f l)))
 
-(define-fun first21 ((a us_t8)) Int (to_rep1 (first20 (rt8 a))))
+(define-fun first17 ((a us_t8)) Int (to_rep1 (first16 (rt8 a))))
 
-(define-fun last21 ((a us_t8)) Int (to_rep1 (last20 (rt8 a))))
+(define-fun last17 ((a us_t8)) Int (to_rep1 (last16 (rt8 a))))
 
-(define-fun length8 ((a us_t8)) Int (ite (<= (first21 a) (last21 a))
-                                    (+ (- (last21 a) (first21 a)) 1) 0))
+(define-fun length8 ((a us_t8)) Int (ite (<= (first17 a) (last17 a))
+                                    (+ (- (last17 a) (first17 a)) 1) 0))
 
 (declare-fun value__size11 () Int)
 
@@ -2388,9 +2372,9 @@
   (forall ((a (Array Int character))) (<= 0 (object__alignment11 a))))
 
 (define-fun bool_eq36 ((x us_t8)
-  (y us_t8)) Bool (bool_eq3 (elts8 x) (to_rep1 (first20 (rt8 x)))
-                  (to_rep1 (last20 (rt8 x))) (elts8 y)
-                  (to_rep1 (first20 (rt8 y))) (to_rep1 (last20 (rt8 y)))))
+  (y us_t8)) Bool (bool_eq3 (elts8 x) (to_rep1 (first16 (rt8 x)))
+                  (to_rep1 (last16 (rt8 x))) (elts8 y)
+                  (to_rep1 (first16 (rt8 y))) (to_rep1 (last16 (rt8 y)))))
 
 (declare-fun user_eq35 (us_t8 us_t8) Bool)
 
@@ -2411,9 +2395,10 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS44 () Int)
 
-(declare-sort t155b 0)
+(declare-fun attr__ATTRIBUTE_ADDRESS45 () Int)
 
-(define-fun in_range17 ((x Int)) Bool (and (<= 1 x) (<= x 12)))
+(define-fun dynamic_property17 ((first_int Int) (last_int Int)
+  (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
 (define-fun bool_eq37 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -2423,31 +2408,9 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE25 (us_image) Int)
 
-(declare-fun user_eq36 (t155b t155b) Bool)
+(declare-fun user_eq36 (integer integer) Bool)
 
-(declare-fun dummy36 () t155b)
-
-(declare-datatypes () ((t155b__ref (mk_t155b__ref (t155b__content t155b)))))
-(define-fun t155b__ref___projection ((a t155b__ref)) t155b (t155b__content a))
-
-(declare-fun attr__ATTRIBUTE_ADDRESS45 () Int)
-
-(declare-fun last22 () Int)
-
-(define-fun dynamic_property17 ((first_int Int) (last_int Int)
-  (x Int)) Bool (and (<= first_int x) (<= x last_int)))
-
-(define-fun bool_eq38 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE26 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check26 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE26 (us_image) Int)
-
-(declare-fun user_eq37 (integer integer) Bool)
-
-(declare-fun dummy37 () integer)
+(declare-fun dummy36 () integer)
 
 (declare-datatypes ()
 ((t157b__ref (mk_t157b__ref (t157b__content integer)))))
@@ -2456,9 +2419,9 @@
 
 (declare-sort t9 0)
 
-(declare-fun first22 (t9) integer)
+(declare-fun first18 (t9) integer)
 
-(declare-fun last23 (t9) integer)
+(declare-fun last18 (t9) integer)
 
 (declare-fun mk9 (Int Int) t9)
 
@@ -2467,8 +2430,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first22 (mk9 f l))) f)
-     (= (to_rep1 (last23 (mk9 f l))) l)))) :pattern ((mk9 f l)) )))
+     (and (= (to_rep1 (first18 (mk9 f l))) f)
+     (= (to_rep1 (last18 (mk9 f l))) l)))) :pattern ((mk9 f l)) )))
 
 (define-fun dynamic_property18 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -2484,12 +2447,12 @@
 (define-fun of_array9 ((a (Array Int character)) (f Int)
   (l Int)) us_t9 (mk___t9 a (mk9 f l)))
 
-(define-fun first23 ((a us_t9)) Int (to_rep1 (first22 (rt9 a))))
+(define-fun first19 ((a us_t9)) Int (to_rep1 (first18 (rt9 a))))
 
-(define-fun last24 ((a us_t9)) Int (to_rep1 (last23 (rt9 a))))
+(define-fun last19 ((a us_t9)) Int (to_rep1 (last18 (rt9 a))))
 
-(define-fun length9 ((a us_t9)) Int (ite (<= (first23 a) (last24 a))
-                                    (+ (- (last24 a) (first23 a)) 1) 0))
+(define-fun length9 ((a us_t9)) Int (ite (<= (first19 a) (last19 a))
+                                    (+ (- (last19 a) (first19 a)) 1) 0))
 
 (declare-fun value__size12 () Int)
 
@@ -2523,14 +2486,14 @@
   (assert
   (forall ((a (Array Int character))) (<= 0 (object__alignment12 a))))
 
-(define-fun bool_eq39 ((x us_t9)
-  (y us_t9)) Bool (bool_eq3 (elts9 x) (to_rep1 (first22 (rt9 x)))
-                  (to_rep1 (last23 (rt9 x))) (elts9 y)
-                  (to_rep1 (first22 (rt9 y))) (to_rep1 (last23 (rt9 y)))))
+(define-fun bool_eq38 ((x us_t9)
+  (y us_t9)) Bool (bool_eq3 (elts9 x) (to_rep1 (first18 (rt9 x)))
+                  (to_rep1 (last18 (rt9 x))) (elts9 y)
+                  (to_rep1 (first18 (rt9 y))) (to_rep1 (last18 (rt9 y)))))
 
-(declare-fun user_eq38 (us_t9 us_t9) Bool)
+(declare-fun user_eq37 (us_t9 us_t9) Bool)
 
-(declare-fun dummy38 () us_t9)
+(declare-fun dummy37 () us_t9)
 
 (declare-datatypes () ((t158b__ref (mk_t158b__ref (t158b__content us_t9)))))
 (define-fun t158b__ref___projection ((a t158b__ref)) us_t9 (t158b__content a))
@@ -2540,6 +2503,29 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS46 () Int)
 
 (declare-sort t163b 0)
+
+(define-fun in_range17 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
+
+(define-fun bool_eq39 ((x Int) (y Int)) Bool (ite (= x y) true false))
+
+(declare-fun attr__ATTRIBUTE_IMAGE26 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check26 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE26 (us_image) Int)
+
+(declare-fun user_eq38 (t163b t163b) Bool)
+
+(declare-fun dummy38 () t163b)
+
+(declare-datatypes () ((t163b__ref (mk_t163b__ref (t163b__content t163b)))))
+(define-fun t163b__ref___projection ((a t163b__ref)) t163b (t163b__content a))
+
+(declare-fun c165b () Int)
+
+(declare-fun attr__ATTRIBUTE_ADDRESS47 () Int)
+
+(declare-sort t169b 0)
 
 (define-fun in_range18 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
 
@@ -2551,18 +2537,18 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE27 (us_image) Int)
 
-(declare-fun user_eq39 (t163b t163b) Bool)
+(declare-fun user_eq39 (t169b t169b) Bool)
 
-(declare-fun dummy39 () t163b)
+(declare-fun dummy39 () t169b)
 
-(declare-datatypes () ((t163b__ref (mk_t163b__ref (t163b__content t163b)))))
-(define-fun t163b__ref___projection ((a t163b__ref)) t163b (t163b__content a))
+(declare-datatypes () ((t169b__ref (mk_t169b__ref (t169b__content t169b)))))
+(define-fun t169b__ref___projection ((a t169b__ref)) t169b (t169b__content a))
 
-(declare-fun c165b () Int)
+(declare-fun c171b () Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS47 () Int)
+(declare-fun attr__ATTRIBUTE_ADDRESS48 () Int)
 
-(declare-sort t169b 0)
+(declare-sort t175b 0)
 
 (define-fun in_range19 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
 
@@ -2574,32 +2560,9 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE28 (us_image) Int)
 
-(declare-fun user_eq40 (t169b t169b) Bool)
+(declare-fun user_eq40 (t175b t175b) Bool)
 
-(declare-fun dummy40 () t169b)
-
-(declare-datatypes () ((t169b__ref (mk_t169b__ref (t169b__content t169b)))))
-(define-fun t169b__ref___projection ((a t169b__ref)) t169b (t169b__content a))
-
-(declare-fun c171b () Int)
-
-(declare-fun attr__ATTRIBUTE_ADDRESS48 () Int)
-
-(declare-sort t175b 0)
-
-(define-fun in_range20 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq42 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE29 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check29 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE29 (us_image) Int)
-
-(declare-fun user_eq41 (t175b t175b) Bool)
-
-(declare-fun dummy41 () t175b)
+(declare-fun dummy40 () t175b)
 
 (declare-datatypes () ((t175b__ref (mk_t175b__ref (t175b__content t175b)))))
 (define-fun t175b__ref___projection ((a t175b__ref)) t175b (t175b__content a))
@@ -2616,43 +2579,22 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS51 () Int)
 
-(declare-sort t181b 0)
-
-(define-fun in_range21 ((x Int)) Bool (and (<= 1 x) (<= x 12)))
-
-(define-fun bool_eq43 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE30 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check30 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE30 (us_image) Int)
-
-(declare-fun user_eq42 (t181b t181b) Bool)
-
-(declare-fun dummy42 () t181b)
-
-(declare-datatypes () ((t181b__ref (mk_t181b__ref (t181b__content t181b)))))
-(define-fun t181b__ref___projection ((a t181b__ref)) t181b (t181b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS52 () Int)
-
-(declare-fun last25 () Int)
 
 (define-fun dynamic_property19 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
-(define-fun bool_eq44 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq42 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE31 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE29 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check31 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check29 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE31 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE29 (us_image) Int)
 
-(declare-fun user_eq43 (integer integer) Bool)
+(declare-fun user_eq41 (integer integer) Bool)
 
-(declare-fun dummy43 () integer)
+(declare-fun dummy41 () integer)
 
 (declare-datatypes ()
 ((t183b__ref (mk_t183b__ref (t183b__content integer)))))
@@ -2661,9 +2603,9 @@
 
 (declare-sort t10 0)
 
-(declare-fun first24 (t10) integer)
+(declare-fun first20 (t10) integer)
 
-(declare-fun last26 (t10) integer)
+(declare-fun last20 (t10) integer)
 
 (declare-fun mk10 (Int Int) t10)
 
@@ -2672,8 +2614,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first24 (mk10 f l))) f)
-     (= (to_rep1 (last26 (mk10 f l))) l)))) :pattern ((mk10 f l)) )))
+     (and (= (to_rep1 (first20 (mk10 f l))) f)
+     (= (to_rep1 (last20 (mk10 f l))) l)))) :pattern ((mk10 f l)) )))
 
 (define-fun dynamic_property20 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -2689,12 +2631,12 @@
 (define-fun of_array10 ((a (Array Int character)) (f Int)
   (l Int)) us_t10 (mk___t10 a (mk10 f l)))
 
-(define-fun first25 ((a us_t10)) Int (to_rep1 (first24 (rt10 a))))
+(define-fun first21 ((a us_t10)) Int (to_rep1 (first20 (rt10 a))))
 
-(define-fun last27 ((a us_t10)) Int (to_rep1 (last26 (rt10 a))))
+(define-fun last21 ((a us_t10)) Int (to_rep1 (last20 (rt10 a))))
 
-(define-fun length10 ((a us_t10)) Int (ite (<= (first25 a) (last27 a))
-                                      (+ (- (last27 a) (first25 a)) 1) 0))
+(define-fun length10 ((a us_t10)) Int (ite (<= (first21 a) (last21 a))
+                                      (+ (- (last21 a) (first21 a)) 1) 0))
 
 (declare-fun value__size13 () Int)
 
@@ -2728,14 +2670,14 @@
   (assert
   (forall ((a (Array Int character))) (<= 0 (object__alignment13 a))))
 
-(define-fun bool_eq45 ((x us_t10)
-  (y us_t10)) Bool (bool_eq3 (elts10 x) (to_rep1 (first24 (rt10 x)))
-                   (to_rep1 (last26 (rt10 x))) (elts10 y)
-                   (to_rep1 (first24 (rt10 y))) (to_rep1 (last26 (rt10 y)))))
+(define-fun bool_eq43 ((x us_t10)
+  (y us_t10)) Bool (bool_eq3 (elts10 x) (to_rep1 (first20 (rt10 x)))
+                   (to_rep1 (last20 (rt10 x))) (elts10 y)
+                   (to_rep1 (first20 (rt10 y))) (to_rep1 (last20 (rt10 y)))))
 
-(declare-fun user_eq44 (us_t10 us_t10) Bool)
+(declare-fun user_eq42 (us_t10 us_t10) Bool)
 
-(declare-fun dummy44 () us_t10)
+(declare-fun dummy42 () us_t10)
 
 (declare-datatypes () ((t184b__ref (mk_t184b__ref (t184b__content us_t10)))))
 (define-fun t184b__ref___projection ((a t184b__ref)) us_t10 (t184b__content
@@ -2753,43 +2695,22 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS55 () Int)
 
-(declare-sort t189b 0)
-
-(define-fun in_range22 ((x Int)) Bool (and (<= 1 x) (<= x 12)))
-
-(define-fun bool_eq46 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE32 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check32 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE32 (us_image) Int)
-
-(declare-fun user_eq45 (t189b t189b) Bool)
-
-(declare-fun dummy45 () t189b)
-
-(declare-datatypes () ((t189b__ref (mk_t189b__ref (t189b__content t189b)))))
-(define-fun t189b__ref___projection ((a t189b__ref)) t189b (t189b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS56 () Int)
-
-(declare-fun last28 () Int)
 
 (define-fun dynamic_property21 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
-(define-fun bool_eq47 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq44 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE33 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE30 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check33 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check30 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE33 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE30 (us_image) Int)
 
-(declare-fun user_eq46 (integer integer) Bool)
+(declare-fun user_eq43 (integer integer) Bool)
 
-(declare-fun dummy46 () integer)
+(declare-fun dummy43 () integer)
 
 (declare-datatypes ()
 ((t191b__ref (mk_t191b__ref (t191b__content integer)))))
@@ -2798,9 +2719,9 @@
 
 (declare-sort t11 0)
 
-(declare-fun first26 (t11) integer)
+(declare-fun first22 (t11) integer)
 
-(declare-fun last29 (t11) integer)
+(declare-fun last22 (t11) integer)
 
 (declare-fun mk11 (Int Int) t11)
 
@@ -2809,8 +2730,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first26 (mk11 f l))) f)
-     (= (to_rep1 (last29 (mk11 f l))) l)))) :pattern ((mk11 f l)) )))
+     (and (= (to_rep1 (first22 (mk11 f l))) f)
+     (= (to_rep1 (last22 (mk11 f l))) l)))) :pattern ((mk11 f l)) )))
 
 (define-fun dynamic_property22 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -2826,12 +2747,12 @@
 (define-fun of_array11 ((a (Array Int character)) (f Int)
   (l Int)) us_t11 (mk___t11 a (mk11 f l)))
 
-(define-fun first27 ((a us_t11)) Int (to_rep1 (first26 (rt11 a))))
+(define-fun first23 ((a us_t11)) Int (to_rep1 (first22 (rt11 a))))
 
-(define-fun last30 ((a us_t11)) Int (to_rep1 (last29 (rt11 a))))
+(define-fun last23 ((a us_t11)) Int (to_rep1 (last22 (rt11 a))))
 
-(define-fun length11 ((a us_t11)) Int (ite (<= (first27 a) (last30 a))
-                                      (+ (- (last30 a) (first27 a)) 1) 0))
+(define-fun length11 ((a us_t11)) Int (ite (<= (first23 a) (last23 a))
+                                      (+ (- (last23 a) (first23 a)) 1) 0))
 
 (declare-fun value__size14 () Int)
 
@@ -2865,14 +2786,14 @@
   (assert
   (forall ((a (Array Int character))) (<= 0 (object__alignment14 a))))
 
-(define-fun bool_eq48 ((x us_t11)
-  (y us_t11)) Bool (bool_eq3 (elts11 x) (to_rep1 (first26 (rt11 x)))
-                   (to_rep1 (last29 (rt11 x))) (elts11 y)
-                   (to_rep1 (first26 (rt11 y))) (to_rep1 (last29 (rt11 y)))))
+(define-fun bool_eq45 ((x us_t11)
+  (y us_t11)) Bool (bool_eq3 (elts11 x) (to_rep1 (first22 (rt11 x)))
+                   (to_rep1 (last22 (rt11 x))) (elts11 y)
+                   (to_rep1 (first22 (rt11 y))) (to_rep1 (last22 (rt11 y)))))
 
-(declare-fun user_eq47 (us_t11 us_t11) Bool)
+(declare-fun user_eq44 (us_t11 us_t11) Bool)
 
-(declare-fun dummy47 () us_t11)
+(declare-fun dummy44 () us_t11)
 
 (declare-datatypes () ((t192b__ref (mk_t192b__ref (t192b__content us_t11)))))
 (define-fun t192b__ref___projection ((a t192b__ref)) us_t11 (t192b__content
@@ -2890,43 +2811,22 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS59 () Int)
 
-(declare-sort t198b 0)
-
-(define-fun in_range23 ((x Int)) Bool (and (<= 1 x) (<= x 15)))
-
-(define-fun bool_eq49 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE34 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check34 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE34 (us_image) Int)
-
-(declare-fun user_eq48 (t198b t198b) Bool)
-
-(declare-fun dummy48 () t198b)
-
-(declare-datatypes () ((t198b__ref (mk_t198b__ref (t198b__content t198b)))))
-(define-fun t198b__ref___projection ((a t198b__ref)) t198b (t198b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS60 () Int)
-
-(declare-fun last31 () Int)
 
 (define-fun dynamic_property23 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
-(define-fun bool_eq50 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq46 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE35 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE31 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check35 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check31 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE35 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE31 (us_image) Int)
 
-(declare-fun user_eq49 (integer integer) Bool)
+(declare-fun user_eq45 (integer integer) Bool)
 
-(declare-fun dummy49 () integer)
+(declare-fun dummy45 () integer)
 
 (declare-datatypes ()
 ((t200b__ref (mk_t200b__ref (t200b__content integer)))))
@@ -2935,9 +2835,9 @@
 
 (declare-sort t12 0)
 
-(declare-fun first28 (t12) integer)
+(declare-fun first24 (t12) integer)
 
-(declare-fun last32 (t12) integer)
+(declare-fun last24 (t12) integer)
 
 (declare-fun mk12 (Int Int) t12)
 
@@ -2946,8 +2846,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first28 (mk12 f l))) f)
-     (= (to_rep1 (last32 (mk12 f l))) l)))) :pattern ((mk12 f l)) )))
+     (and (= (to_rep1 (first24 (mk12 f l))) f)
+     (= (to_rep1 (last24 (mk12 f l))) l)))) :pattern ((mk12 f l)) )))
 
 (define-fun dynamic_property24 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -2963,12 +2863,12 @@
 (define-fun of_array12 ((a (Array Int character)) (f Int)
   (l Int)) us_t12 (mk___t12 a (mk12 f l)))
 
-(define-fun first29 ((a us_t12)) Int (to_rep1 (first28 (rt12 a))))
+(define-fun first25 ((a us_t12)) Int (to_rep1 (first24 (rt12 a))))
 
-(define-fun last33 ((a us_t12)) Int (to_rep1 (last32 (rt12 a))))
+(define-fun last25 ((a us_t12)) Int (to_rep1 (last24 (rt12 a))))
 
-(define-fun length12 ((a us_t12)) Int (ite (<= (first29 a) (last33 a))
-                                      (+ (- (last33 a) (first29 a)) 1) 0))
+(define-fun length12 ((a us_t12)) Int (ite (<= (first25 a) (last25 a))
+                                      (+ (- (last25 a) (first25 a)) 1) 0))
 
 (declare-fun value__size15 () Int)
 
@@ -3002,35 +2902,33 @@
   (assert
   (forall ((a (Array Int character))) (<= 0 (object__alignment15 a))))
 
-(define-fun bool_eq51 ((x us_t12)
-  (y us_t12)) Bool (bool_eq3 (elts12 x) (to_rep1 (first28 (rt12 x)))
-                   (to_rep1 (last32 (rt12 x))) (elts12 y)
-                   (to_rep1 (first28 (rt12 y))) (to_rep1 (last32 (rt12 y)))))
+(define-fun bool_eq47 ((x us_t12)
+  (y us_t12)) Bool (bool_eq3 (elts12 x) (to_rep1 (first24 (rt12 x)))
+                   (to_rep1 (last24 (rt12 x))) (elts12 y)
+                   (to_rep1 (first24 (rt12 y))) (to_rep1 (last24 (rt12 y)))))
 
-(declare-fun user_eq50 (us_t12 us_t12) Bool)
+(declare-fun user_eq46 (us_t12 us_t12) Bool)
 
-(declare-fun dummy50 () us_t12)
+(declare-fun dummy46 () us_t12)
 
 (declare-datatypes () ((t201b__ref (mk_t201b__ref (t201b__content us_t12)))))
 (define-fun t201b__ref___projection ((a t201b__ref)) us_t12 (t201b__content
                                                             a))
 
-(declare-fun last34 () Int)
-
 (define-fun dynamic_property25 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
-(define-fun bool_eq52 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq48 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE36 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE32 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check36 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check32 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE36 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE32 (us_image) Int)
 
-(declare-fun user_eq51 (integer integer) Bool)
+(declare-fun user_eq47 (integer integer) Bool)
 
-(declare-fun dummy51 () integer)
+(declare-fun dummy47 () integer)
 
 (declare-datatypes ()
 ((t203b__ref (mk_t203b__ref (t203b__content integer)))))
@@ -3039,9 +2937,9 @@
 
 (declare-sort t13 0)
 
-(declare-fun first30 (t13) integer)
+(declare-fun first26 (t13) integer)
 
-(declare-fun last35 (t13) integer)
+(declare-fun last26 (t13) integer)
 
 (declare-fun mk13 (Int Int) t13)
 
@@ -3050,8 +2948,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first30 (mk13 f l))) f)
-     (= (to_rep1 (last35 (mk13 f l))) l)))) :pattern ((mk13 f l)) )))
+     (and (= (to_rep1 (first26 (mk13 f l))) f)
+     (= (to_rep1 (last26 (mk13 f l))) l)))) :pattern ((mk13 f l)) )))
 
 (define-fun dynamic_property26 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -3067,12 +2965,12 @@
 (define-fun of_array13 ((a (Array Int character)) (f Int)
   (l Int)) us_t13 (mk___t13 a (mk13 f l)))
 
-(define-fun first31 ((a us_t13)) Int (to_rep1 (first30 (rt13 a))))
+(define-fun first27 ((a us_t13)) Int (to_rep1 (first26 (rt13 a))))
 
-(define-fun last36 ((a us_t13)) Int (to_rep1 (last35 (rt13 a))))
+(define-fun last27 ((a us_t13)) Int (to_rep1 (last26 (rt13 a))))
 
-(define-fun length13 ((a us_t13)) Int (ite (<= (first31 a) (last36 a))
-                                      (+ (- (last36 a) (first31 a)) 1) 0))
+(define-fun length13 ((a us_t13)) Int (ite (<= (first27 a) (last27 a))
+                                      (+ (- (last27 a) (first27 a)) 1) 0))
 
 (declare-fun value__size16 () Int)
 
@@ -3106,14 +3004,14 @@
   (assert
   (forall ((a (Array Int character))) (<= 0 (object__alignment16 a))))
 
-(define-fun bool_eq53 ((x us_t13)
-  (y us_t13)) Bool (bool_eq3 (elts13 x) (to_rep1 (first30 (rt13 x)))
-                   (to_rep1 (last35 (rt13 x))) (elts13 y)
-                   (to_rep1 (first30 (rt13 y))) (to_rep1 (last35 (rt13 y)))))
+(define-fun bool_eq49 ((x us_t13)
+  (y us_t13)) Bool (bool_eq3 (elts13 x) (to_rep1 (first26 (rt13 x)))
+                   (to_rep1 (last26 (rt13 x))) (elts13 y)
+                   (to_rep1 (first26 (rt13 y))) (to_rep1 (last26 (rt13 y)))))
 
-(declare-fun user_eq52 (us_t13 us_t13) Bool)
+(declare-fun user_eq48 (us_t13 us_t13) Bool)
 
-(declare-fun dummy52 () us_t13)
+(declare-fun dummy48 () us_t13)
 
 (declare-datatypes () ((t204b__ref (mk_t204b__ref (t204b__content us_t13)))))
 (define-fun t204b__ref___projection ((a t204b__ref)) us_t13 (t204b__content
@@ -3131,43 +3029,22 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS63 () Int)
 
-(declare-sort t210b 0)
-
-(define-fun in_range24 ((x Int)) Bool (and (<= 1 x) (<= x 15)))
-
-(define-fun bool_eq54 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE37 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check37 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE37 (us_image) Int)
-
-(declare-fun user_eq53 (t210b t210b) Bool)
-
-(declare-fun dummy53 () t210b)
-
-(declare-datatypes () ((t210b__ref (mk_t210b__ref (t210b__content t210b)))))
-(define-fun t210b__ref___projection ((a t210b__ref)) t210b (t210b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS64 () Int)
-
-(declare-fun last37 () Int)
 
 (define-fun dynamic_property27 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
-(define-fun bool_eq55 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq50 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE38 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE33 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check38 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check33 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE38 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE33 (us_image) Int)
 
-(declare-fun user_eq54 (integer integer) Bool)
+(declare-fun user_eq49 (integer integer) Bool)
 
-(declare-fun dummy54 () integer)
+(declare-fun dummy49 () integer)
 
 (declare-datatypes ()
 ((t212b__ref (mk_t212b__ref (t212b__content integer)))))
@@ -3176,9 +3053,9 @@
 
 (declare-sort t14 0)
 
-(declare-fun first32 (t14) integer)
+(declare-fun first28 (t14) integer)
 
-(declare-fun last38 (t14) integer)
+(declare-fun last28 (t14) integer)
 
 (declare-fun mk14 (Int Int) t14)
 
@@ -3187,8 +3064,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first32 (mk14 f l))) f)
-     (= (to_rep1 (last38 (mk14 f l))) l)))) :pattern ((mk14 f l)) )))
+     (and (= (to_rep1 (first28 (mk14 f l))) f)
+     (= (to_rep1 (last28 (mk14 f l))) l)))) :pattern ((mk14 f l)) )))
 
 (define-fun dynamic_property28 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -3204,12 +3081,12 @@
 (define-fun of_array14 ((a (Array Int character)) (f Int)
   (l Int)) us_t14 (mk___t14 a (mk14 f l)))
 
-(define-fun first33 ((a us_t14)) Int (to_rep1 (first32 (rt14 a))))
+(define-fun first29 ((a us_t14)) Int (to_rep1 (first28 (rt14 a))))
 
-(define-fun last39 ((a us_t14)) Int (to_rep1 (last38 (rt14 a))))
+(define-fun last29 ((a us_t14)) Int (to_rep1 (last28 (rt14 a))))
 
-(define-fun length14 ((a us_t14)) Int (ite (<= (first33 a) (last39 a))
-                                      (+ (- (last39 a) (first33 a)) 1) 0))
+(define-fun length14 ((a us_t14)) Int (ite (<= (first29 a) (last29 a))
+                                      (+ (- (last29 a) (first29 a)) 1) 0))
 
 (declare-fun value__size17 () Int)
 
@@ -3243,35 +3120,33 @@
   (assert
   (forall ((a (Array Int character))) (<= 0 (object__alignment17 a))))
 
-(define-fun bool_eq56 ((x us_t14)
-  (y us_t14)) Bool (bool_eq3 (elts14 x) (to_rep1 (first32 (rt14 x)))
-                   (to_rep1 (last38 (rt14 x))) (elts14 y)
-                   (to_rep1 (first32 (rt14 y))) (to_rep1 (last38 (rt14 y)))))
+(define-fun bool_eq51 ((x us_t14)
+  (y us_t14)) Bool (bool_eq3 (elts14 x) (to_rep1 (first28 (rt14 x)))
+                   (to_rep1 (last28 (rt14 x))) (elts14 y)
+                   (to_rep1 (first28 (rt14 y))) (to_rep1 (last28 (rt14 y)))))
 
-(declare-fun user_eq55 (us_t14 us_t14) Bool)
+(declare-fun user_eq50 (us_t14 us_t14) Bool)
 
-(declare-fun dummy55 () us_t14)
+(declare-fun dummy50 () us_t14)
 
 (declare-datatypes () ((t213b__ref (mk_t213b__ref (t213b__content us_t14)))))
 (define-fun t213b__ref___projection ((a t213b__ref)) us_t14 (t213b__content
                                                             a))
 
-(declare-fun last40 () Int)
-
 (define-fun dynamic_property29 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
-(define-fun bool_eq57 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq52 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE39 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE34 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check39 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check34 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE39 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE34 (us_image) Int)
 
-(declare-fun user_eq56 (integer integer) Bool)
+(declare-fun user_eq51 (integer integer) Bool)
 
-(declare-fun dummy56 () integer)
+(declare-fun dummy51 () integer)
 
 (declare-datatypes ()
 ((t215b__ref (mk_t215b__ref (t215b__content integer)))))
@@ -3280,9 +3155,9 @@
 
 (declare-sort t15 0)
 
-(declare-fun first34 (t15) integer)
+(declare-fun first30 (t15) integer)
 
-(declare-fun last41 (t15) integer)
+(declare-fun last30 (t15) integer)
 
 (declare-fun mk15 (Int Int) t15)
 
@@ -3291,8 +3166,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first34 (mk15 f l))) f)
-     (= (to_rep1 (last41 (mk15 f l))) l)))) :pattern ((mk15 f l)) )))
+     (and (= (to_rep1 (first30 (mk15 f l))) f)
+     (= (to_rep1 (last30 (mk15 f l))) l)))) :pattern ((mk15 f l)) )))
 
 (define-fun dynamic_property30 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -3308,12 +3183,12 @@
 (define-fun of_array15 ((a (Array Int character)) (f Int)
   (l Int)) us_t15 (mk___t15 a (mk15 f l)))
 
-(define-fun first35 ((a us_t15)) Int (to_rep1 (first34 (rt15 a))))
+(define-fun first31 ((a us_t15)) Int (to_rep1 (first30 (rt15 a))))
 
-(define-fun last42 ((a us_t15)) Int (to_rep1 (last41 (rt15 a))))
+(define-fun last31 ((a us_t15)) Int (to_rep1 (last30 (rt15 a))))
 
-(define-fun length15 ((a us_t15)) Int (ite (<= (first35 a) (last42 a))
-                                      (+ (- (last42 a) (first35 a)) 1) 0))
+(define-fun length15 ((a us_t15)) Int (ite (<= (first31 a) (last31 a))
+                                      (+ (- (last31 a) (first31 a)) 1) 0))
 
 (declare-fun value__size18 () Int)
 
@@ -3347,14 +3222,14 @@
   (assert
   (forall ((a (Array Int character))) (<= 0 (object__alignment18 a))))
 
-(define-fun bool_eq58 ((x us_t15)
-  (y us_t15)) Bool (bool_eq3 (elts15 x) (to_rep1 (first34 (rt15 x)))
-                   (to_rep1 (last41 (rt15 x))) (elts15 y)
-                   (to_rep1 (first34 (rt15 y))) (to_rep1 (last41 (rt15 y)))))
+(define-fun bool_eq53 ((x us_t15)
+  (y us_t15)) Bool (bool_eq3 (elts15 x) (to_rep1 (first30 (rt15 x)))
+                   (to_rep1 (last30 (rt15 x))) (elts15 y)
+                   (to_rep1 (first30 (rt15 y))) (to_rep1 (last30 (rt15 y)))))
 
-(declare-fun user_eq57 (us_t15 us_t15) Bool)
+(declare-fun user_eq52 (us_t15 us_t15) Bool)
 
-(declare-fun dummy57 () us_t15)
+(declare-fun dummy52 () us_t15)
 
 (declare-datatypes () ((t216b__ref (mk_t216b__ref (t216b__content us_t15)))))
 (define-fun t216b__ref___projection ((a t216b__ref)) us_t15 (t216b__content
@@ -3372,43 +3247,22 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS67 () Int)
 
-(declare-sort t221b 0)
-
-(define-fun in_range25 ((x Int)) Bool (and (<= 1 x) (<= x 12)))
-
-(define-fun bool_eq59 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE40 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check40 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE40 (us_image) Int)
-
-(declare-fun user_eq58 (t221b t221b) Bool)
-
-(declare-fun dummy58 () t221b)
-
-(declare-datatypes () ((t221b__ref (mk_t221b__ref (t221b__content t221b)))))
-(define-fun t221b__ref___projection ((a t221b__ref)) t221b (t221b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS68 () Int)
-
-(declare-fun last43 () Int)
 
 (define-fun dynamic_property31 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
-(define-fun bool_eq60 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq54 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE41 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE35 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check41 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check35 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE41 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE35 (us_image) Int)
 
-(declare-fun user_eq59 (integer integer) Bool)
+(declare-fun user_eq53 (integer integer) Bool)
 
-(declare-fun dummy59 () integer)
+(declare-fun dummy53 () integer)
 
 (declare-datatypes ()
 ((t223b__ref (mk_t223b__ref (t223b__content integer)))))
@@ -3417,9 +3271,9 @@
 
 (declare-sort t16 0)
 
-(declare-fun first36 (t16) integer)
+(declare-fun first32 (t16) integer)
 
-(declare-fun last44 (t16) integer)
+(declare-fun last32 (t16) integer)
 
 (declare-fun mk16 (Int Int) t16)
 
@@ -3428,8 +3282,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first36 (mk16 f l))) f)
-     (= (to_rep1 (last44 (mk16 f l))) l)))) :pattern ((mk16 f l)) )))
+     (and (= (to_rep1 (first32 (mk16 f l))) f)
+     (= (to_rep1 (last32 (mk16 f l))) l)))) :pattern ((mk16 f l)) )))
 
 (define-fun dynamic_property32 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -3445,12 +3299,12 @@
 (define-fun of_array16 ((a (Array Int character)) (f Int)
   (l Int)) us_t16 (mk___t16 a (mk16 f l)))
 
-(define-fun first37 ((a us_t16)) Int (to_rep1 (first36 (rt16 a))))
+(define-fun first33 ((a us_t16)) Int (to_rep1 (first32 (rt16 a))))
 
-(define-fun last45 ((a us_t16)) Int (to_rep1 (last44 (rt16 a))))
+(define-fun last33 ((a us_t16)) Int (to_rep1 (last32 (rt16 a))))
 
-(define-fun length16 ((a us_t16)) Int (ite (<= (first37 a) (last45 a))
-                                      (+ (- (last45 a) (first37 a)) 1) 0))
+(define-fun length16 ((a us_t16)) Int (ite (<= (first33 a) (last33 a))
+                                      (+ (- (last33 a) (first33 a)) 1) 0))
 
 (declare-fun value__size19 () Int)
 
@@ -3484,35 +3338,33 @@
   (assert
   (forall ((a (Array Int character))) (<= 0 (object__alignment19 a))))
 
-(define-fun bool_eq61 ((x us_t16)
-  (y us_t16)) Bool (bool_eq3 (elts16 x) (to_rep1 (first36 (rt16 x)))
-                   (to_rep1 (last44 (rt16 x))) (elts16 y)
-                   (to_rep1 (first36 (rt16 y))) (to_rep1 (last44 (rt16 y)))))
+(define-fun bool_eq55 ((x us_t16)
+  (y us_t16)) Bool (bool_eq3 (elts16 x) (to_rep1 (first32 (rt16 x)))
+                   (to_rep1 (last32 (rt16 x))) (elts16 y)
+                   (to_rep1 (first32 (rt16 y))) (to_rep1 (last32 (rt16 y)))))
 
-(declare-fun user_eq60 (us_t16 us_t16) Bool)
+(declare-fun user_eq54 (us_t16 us_t16) Bool)
 
-(declare-fun dummy60 () us_t16)
+(declare-fun dummy54 () us_t16)
 
 (declare-datatypes () ((t224b__ref (mk_t224b__ref (t224b__content us_t16)))))
 (define-fun t224b__ref___projection ((a t224b__ref)) us_t16 (t224b__content
                                                             a))
 
-(declare-fun last46 () Int)
-
 (define-fun dynamic_property33 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
-(define-fun bool_eq62 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq56 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE42 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE36 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check42 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check36 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE42 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE36 (us_image) Int)
 
-(declare-fun user_eq61 (integer integer) Bool)
+(declare-fun user_eq55 (integer integer) Bool)
 
-(declare-fun dummy61 () integer)
+(declare-fun dummy55 () integer)
 
 (declare-datatypes ()
 ((t226b__ref (mk_t226b__ref (t226b__content integer)))))
@@ -3521,9 +3373,9 @@
 
 (declare-sort t17 0)
 
-(declare-fun first38 (t17) integer)
+(declare-fun first34 (t17) integer)
 
-(declare-fun last47 (t17) integer)
+(declare-fun last34 (t17) integer)
 
 (declare-fun mk17 (Int Int) t17)
 
@@ -3532,8 +3384,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first38 (mk17 f l))) f)
-     (= (to_rep1 (last47 (mk17 f l))) l)))) :pattern ((mk17 f l)) )))
+     (and (= (to_rep1 (first34 (mk17 f l))) f)
+     (= (to_rep1 (last34 (mk17 f l))) l)))) :pattern ((mk17 f l)) )))
 
 (define-fun dynamic_property34 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -3549,12 +3401,12 @@
 (define-fun of_array17 ((a (Array Int character)) (f Int)
   (l Int)) us_t17 (mk___t17 a (mk17 f l)))
 
-(define-fun first39 ((a us_t17)) Int (to_rep1 (first38 (rt17 a))))
+(define-fun first35 ((a us_t17)) Int (to_rep1 (first34 (rt17 a))))
 
-(define-fun last48 ((a us_t17)) Int (to_rep1 (last47 (rt17 a))))
+(define-fun last35 ((a us_t17)) Int (to_rep1 (last34 (rt17 a))))
 
-(define-fun length17 ((a us_t17)) Int (ite (<= (first39 a) (last48 a))
-                                      (+ (- (last48 a) (first39 a)) 1) 0))
+(define-fun length17 ((a us_t17)) Int (ite (<= (first35 a) (last35 a))
+                                      (+ (- (last35 a) (first35 a)) 1) 0))
 
 (declare-fun value__size20 () Int)
 
@@ -3588,22 +3440,22 @@
   (assert
   (forall ((a (Array Int character))) (<= 0 (object__alignment20 a))))
 
-(define-fun bool_eq63 ((x us_t17)
-  (y us_t17)) Bool (bool_eq3 (elts17 x) (to_rep1 (first38 (rt17 x)))
-                   (to_rep1 (last47 (rt17 x))) (elts17 y)
-                   (to_rep1 (first38 (rt17 y))) (to_rep1 (last47 (rt17 y)))))
+(define-fun bool_eq57 ((x us_t17)
+  (y us_t17)) Bool (bool_eq3 (elts17 x) (to_rep1 (first34 (rt17 x)))
+                   (to_rep1 (last34 (rt17 x))) (elts17 y)
+                   (to_rep1 (first34 (rt17 y))) (to_rep1 (last34 (rt17 y)))))
 
-(declare-fun user_eq62 (us_t17 us_t17) Bool)
+(declare-fun user_eq56 (us_t17 us_t17) Bool)
 
-(declare-fun dummy62 () us_t17)
+(declare-fun dummy56 () us_t17)
 
 (declare-datatypes () ((t227b__ref (mk_t227b__ref (t227b__content us_t17)))))
 (define-fun t227b__ref___projection ((a t227b__ref)) us_t17 (t227b__content
                                                             a))
 
-(declare-fun temp___String_Literal_1353 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_1272 (tuple0) (Array Int character))
 
-;; temp___String_Literal_1353__def_axiom
+;; temp___String_Literal_1272__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -3612,18 +3464,18 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_1353 us_void_param) 1)) 32)
-     (= (to_rep (select (temp___String_Literal_1353 us_void_param) 2)) 32))
-     (= (to_rep (select (temp___String_Literal_1353 us_void_param) 3)) 48))
-     (= (to_rep (select (temp___String_Literal_1353 us_void_param) 4)) 46))
-     (= (to_rep (select (temp___String_Literal_1353 us_void_param) 5)) 48))
-     (= (to_rep (select (temp___String_Literal_1353 us_void_param) 6)) 32))
-     (= (to_rep (select (temp___String_Literal_1353 us_void_param) 7)) 115)) :pattern (
-  (temp___String_Literal_1353 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_1272 us_void_param) 1)) 32)
+     (= (to_rep (select (temp___String_Literal_1272 us_void_param) 2)) 32))
+     (= (to_rep (select (temp___String_Literal_1272 us_void_param) 3)) 48))
+     (= (to_rep (select (temp___String_Literal_1272 us_void_param) 4)) 46))
+     (= (to_rep (select (temp___String_Literal_1272 us_void_param) 5)) 48))
+     (= (to_rep (select (temp___String_Literal_1272 us_void_param) 6)) 32))
+     (= (to_rep (select (temp___String_Literal_1272 us_void_param) 7)) 115)) :pattern (
+  (temp___String_Literal_1272 us_void_param)) )))
 
-(declare-fun temp___String_Literal_1365 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_1284 (tuple0) (Array Int character))
 
-;; temp___String_Literal_1365__def_axiom
+;; temp___String_Literal_1284__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -3632,18 +3484,18 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_1365 us_void_param) 1)) 32)
-     (= (to_rep (select (temp___String_Literal_1365 us_void_param) 2)) 32))
-     (= (to_rep (select (temp___String_Literal_1365 us_void_param) 3)) 48))
-     (= (to_rep (select (temp___String_Literal_1365 us_void_param) 4)) 46))
-     (= (to_rep (select (temp___String_Literal_1365 us_void_param) 5)) 48))
-     (= (to_rep (select (temp___String_Literal_1365 us_void_param) 6)) 32))
-     (= (to_rep (select (temp___String_Literal_1365 us_void_param) 7)) 115)) :pattern (
-  (temp___String_Literal_1365 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_1284 us_void_param) 1)) 32)
+     (= (to_rep (select (temp___String_Literal_1284 us_void_param) 2)) 32))
+     (= (to_rep (select (temp___String_Literal_1284 us_void_param) 3)) 48))
+     (= (to_rep (select (temp___String_Literal_1284 us_void_param) 4)) 46))
+     (= (to_rep (select (temp___String_Literal_1284 us_void_param) 5)) 48))
+     (= (to_rep (select (temp___String_Literal_1284 us_void_param) 6)) 32))
+     (= (to_rep (select (temp___String_Literal_1284 us_void_param) 7)) 115)) :pattern (
+  (temp___String_Literal_1284 us_void_param)) )))
 
-(declare-fun temp___String_Literal_1377 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_1296 (tuple0) (Array Int character))
 
-;; temp___String_Literal_1377__def_axiom
+;; temp___String_Literal_1296__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -3652,18 +3504,18 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_1377 us_void_param) 1)) 32)
-     (= (to_rep (select (temp___String_Literal_1377 us_void_param) 2)) 32))
-     (= (to_rep (select (temp___String_Literal_1377 us_void_param) 3)) 48))
-     (= (to_rep (select (temp___String_Literal_1377 us_void_param) 4)) 46))
-     (= (to_rep (select (temp___String_Literal_1377 us_void_param) 5)) 48))
-     (= (to_rep (select (temp___String_Literal_1377 us_void_param) 6)) 32))
-     (= (to_rep (select (temp___String_Literal_1377 us_void_param) 7)) 115)) :pattern (
-  (temp___String_Literal_1377 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_1296 us_void_param) 1)) 32)
+     (= (to_rep (select (temp___String_Literal_1296 us_void_param) 2)) 32))
+     (= (to_rep (select (temp___String_Literal_1296 us_void_param) 3)) 48))
+     (= (to_rep (select (temp___String_Literal_1296 us_void_param) 4)) 46))
+     (= (to_rep (select (temp___String_Literal_1296 us_void_param) 5)) 48))
+     (= (to_rep (select (temp___String_Literal_1296 us_void_param) 6)) 32))
+     (= (to_rep (select (temp___String_Literal_1296 us_void_param) 7)) 115)) :pattern (
+  (temp___String_Literal_1296 us_void_param)) )))
 
-(declare-fun temp___String_Literal_1389 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_1308 (tuple0) (Array Int character))
 
-;; temp___String_Literal_1389__def_axiom
+;; temp___String_Literal_1308__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -3672,54 +3524,54 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_1389 us_void_param) 1)) 32)
-     (= (to_rep (select (temp___String_Literal_1389 us_void_param) 2)) 32))
-     (= (to_rep (select (temp___String_Literal_1389 us_void_param) 3)) 48))
-     (= (to_rep (select (temp___String_Literal_1389 us_void_param) 4)) 46))
-     (= (to_rep (select (temp___String_Literal_1389 us_void_param) 5)) 48))
-     (= (to_rep (select (temp___String_Literal_1389 us_void_param) 6)) 32))
-     (= (to_rep (select (temp___String_Literal_1389 us_void_param) 7)) 115)) :pattern (
-  (temp___String_Literal_1389 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_1308 us_void_param) 1)) 32)
+     (= (to_rep (select (temp___String_Literal_1308 us_void_param) 2)) 32))
+     (= (to_rep (select (temp___String_Literal_1308 us_void_param) 3)) 48))
+     (= (to_rep (select (temp___String_Literal_1308 us_void_param) 4)) 46))
+     (= (to_rep (select (temp___String_Literal_1308 us_void_param) 5)) 48))
+     (= (to_rep (select (temp___String_Literal_1308 us_void_param) 6)) 32))
+     (= (to_rep (select (temp___String_Literal_1308 us_void_param) 7)) 115)) :pattern (
+  (temp___String_Literal_1308 us_void_param)) )))
 
 (declare-fun screen__writeconfigdata__B154b__result__aggregate_def (Int) (Array Int character))
 
 ;; def_axiom
   (assert
-  (forall ((temp___1397 Int))
-  (forall ((temp___1398 Int))
+  (forall ((temp___1316 Int))
+  (forall ((temp___1317 Int))
   (= (select (screen__writeconfigdata__B154b__result__aggregate_def
-             temp___1397) temp___1398) (of_rep temp___1397)))))
+             temp___1316) temp___1317) (of_rep temp___1316)))))
 
 (declare-fun screen__writeconfigdata__B180b__result__aggregate_def (Int) (Array Int character))
 
 ;; def_axiom
   (assert
-  (forall ((temp___1416 Int))
-  (forall ((temp___1417 Int))
+  (forall ((temp___1335 Int))
+  (forall ((temp___1336 Int))
   (= (select (screen__writeconfigdata__B180b__result__aggregate_def
-             temp___1416) temp___1417) (of_rep temp___1416)))))
+             temp___1335) temp___1336) (of_rep temp___1335)))))
 
 (declare-fun screen__writeconfigdata__B188b__result__aggregate_def (Int) (Array Int character))
 
 ;; def_axiom
   (assert
-  (forall ((temp___1426 Int))
-  (forall ((temp___1427 Int))
+  (forall ((temp___1345 Int))
+  (forall ((temp___1346 Int))
   (= (select (screen__writeconfigdata__B188b__result__aggregate_def
-             temp___1426) temp___1427) (of_rep temp___1426)))))
+             temp___1345) temp___1346) (of_rep temp___1345)))))
 
 (declare-fun screen__writeconfigdata__B196b__result__aggregate_def (Int) (Array Int character))
 
 ;; def_axiom
   (assert
-  (forall ((temp___1439 Int))
-  (forall ((temp___1440 Int))
+  (forall ((temp___1358 Int))
+  (forall ((temp___1359 Int))
   (= (select (screen__writeconfigdata__B196b__result__aggregate_def
-             temp___1439) temp___1440) (of_rep temp___1439)))))
+             temp___1358) temp___1359) (of_rep temp___1358)))))
 
-(declare-fun temp___String_Literal_1441 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_1360 (tuple0) (Array Int character))
 
-;; temp___String_Literal_1441__def_axiom
+;; temp___String_Literal_1360__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -3728,27 +3580,27 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_1441 us_void_param) 1)) 32)
-     (= (to_rep (select (temp___String_Literal_1441 us_void_param) 2)) 107))
-     (= (to_rep (select (temp___String_Literal_1441 us_void_param) 3)) 66))
-     (= (to_rep (select (temp___String_Literal_1441 us_void_param) 4)) 121))
-     (= (to_rep (select (temp___String_Literal_1441 us_void_param) 5)) 116))
-     (= (to_rep (select (temp___String_Literal_1441 us_void_param) 6)) 101))
-     (= (to_rep (select (temp___String_Literal_1441 us_void_param) 7)) 115)) :pattern (
-  (temp___String_Literal_1441 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_1360 us_void_param) 1)) 32)
+     (= (to_rep (select (temp___String_Literal_1360 us_void_param) 2)) 107))
+     (= (to_rep (select (temp___String_Literal_1360 us_void_param) 3)) 66))
+     (= (to_rep (select (temp___String_Literal_1360 us_void_param) 4)) 121))
+     (= (to_rep (select (temp___String_Literal_1360 us_void_param) 5)) 116))
+     (= (to_rep (select (temp___String_Literal_1360 us_void_param) 6)) 101))
+     (= (to_rep (select (temp___String_Literal_1360 us_void_param) 7)) 115)) :pattern (
+  (temp___String_Literal_1360 us_void_param)) )))
 
 (declare-fun screen__writeconfigdata__B208b__result__aggregate_def (Int) (Array Int character))
 
 ;; def_axiom
   (assert
-  (forall ((temp___1455 Int))
-  (forall ((temp___1456 Int))
+  (forall ((temp___1374 Int))
+  (forall ((temp___1375 Int))
   (= (select (screen__writeconfigdata__B208b__result__aggregate_def
-             temp___1455) temp___1456) (of_rep temp___1455)))))
+             temp___1374) temp___1375) (of_rep temp___1374)))))
 
-(declare-fun temp___String_Literal_1457 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_1376 (tuple0) (Array Int character))
 
-;; temp___String_Literal_1457__def_axiom
+;; temp___String_Literal_1376__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -3757,23 +3609,23 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_1457 us_void_param) 1)) 32)
-     (= (to_rep (select (temp___String_Literal_1457 us_void_param) 2)) 107))
-     (= (to_rep (select (temp___String_Literal_1457 us_void_param) 3)) 66))
-     (= (to_rep (select (temp___String_Literal_1457 us_void_param) 4)) 121))
-     (= (to_rep (select (temp___String_Literal_1457 us_void_param) 5)) 116))
-     (= (to_rep (select (temp___String_Literal_1457 us_void_param) 6)) 101))
-     (= (to_rep (select (temp___String_Literal_1457 us_void_param) 7)) 115)) :pattern (
-  (temp___String_Literal_1457 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_1376 us_void_param) 1)) 32)
+     (= (to_rep (select (temp___String_Literal_1376 us_void_param) 2)) 107))
+     (= (to_rep (select (temp___String_Literal_1376 us_void_param) 3)) 66))
+     (= (to_rep (select (temp___String_Literal_1376 us_void_param) 4)) 121))
+     (= (to_rep (select (temp___String_Literal_1376 us_void_param) 5)) 116))
+     (= (to_rep (select (temp___String_Literal_1376 us_void_param) 6)) 101))
+     (= (to_rep (select (temp___String_Literal_1376 us_void_param) 7)) 115)) :pattern (
+  (temp___String_Literal_1376 us_void_param)) )))
 
 (declare-fun screen__writeconfigdata__B220b__result__aggregate_def (Int) (Array Int character))
 
 ;; def_axiom
   (assert
-  (forall ((temp___1471 Int))
-  (forall ((temp___1472 Int))
+  (forall ((temp___1390 Int))
+  (forall ((temp___1391 Int))
   (= (select (screen__writeconfigdata__B220b__result__aggregate_def
-             temp___1471) temp___1472) (of_rep temp___1471)))))
+             temp___1390) temp___1391) (of_rep temp___1390)))))
 
 (define-fun dynamic_invariant8 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -3803,33 +3655,33 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(define-fun dynamic_invariant12 ((temp___expr_1199 Int)
-  (temp___is_init_1196 Bool) (temp___skip_constant_1197 Bool)
-  (temp___do_toplevel_1198 Bool)) Bool (=>
-                                       (or (= temp___is_init_1196 true)
+(define-fun dynamic_invariant12 ((temp___expr_1118 Int)
+  (temp___is_init_1115 Bool) (temp___skip_constant_1116 Bool)
+  (temp___do_toplevel_1117 Bool)) Bool (=>
+                                       (or (= temp___is_init_1115 true)
                                        (<= 1 7)) (in_range13
-                                       temp___expr_1199)))
+                                       temp___expr_1118)))
 
-(define-fun dynamic_invariant13 ((temp___expr_1229 Int)
-  (temp___is_init_1226 Bool) (temp___skip_constant_1227 Bool)
-  (temp___do_toplevel_1228 Bool)) Bool (=>
-                                       (or (= temp___is_init_1226 true)
+(define-fun dynamic_invariant13 ((temp___expr_1148 Int)
+  (temp___is_init_1145 Bool) (temp___skip_constant_1146 Bool)
+  (temp___do_toplevel_1147 Bool)) Bool (=>
+                                       (or (= temp___is_init_1145 true)
                                        (<= 1 12)) (in_range14
-                                       temp___expr_1229)))
+                                       temp___expr_1148)))
 
-(define-fun dynamic_invariant14 ((temp___expr_1244 Int)
-  (temp___is_init_1241 Bool) (temp___skip_constant_1242 Bool)
-  (temp___do_toplevel_1243 Bool)) Bool (=>
-                                       (or (= temp___is_init_1241 true)
+(define-fun dynamic_invariant14 ((temp___expr_1163 Int)
+  (temp___is_init_1160 Bool) (temp___skip_constant_1161 Bool)
+  (temp___do_toplevel_1162 Bool)) Bool (=>
+                                       (or (= temp___is_init_1160 true)
                                        (<= 1 15)) (in_range15
-                                       temp___expr_1244)))
+                                       temp___expr_1163)))
 
-(define-fun dynamic_invariant15 ((temp___expr_1274 Int)
-  (temp___is_init_1271 Bool) (temp___skip_constant_1272 Bool)
-  (temp___do_toplevel_1273 Bool)) Bool (=>
-                                       (or (= temp___is_init_1271 true)
+(define-fun dynamic_invariant15 ((temp___expr_1193 Int)
+  (temp___is_init_1190 Bool) (temp___skip_constant_1191 Bool)
+  (temp___do_toplevel_1192 Bool)) Bool (=>
+                                       (or (= temp___is_init_1190 true)
                                        (<= 1 12)) (in_range16
-                                       temp___expr_1274)))
+                                       temp___expr_1193)))
 
 ;; column1__def_axiom
   (assert (= column1 25))
@@ -3988,79 +3840,73 @@
 
 (declare-fun o13 () us_split_fields)
 
-(declare-fun temp___1341 () us_rep)
+(declare-fun temp___1260 () us_rep)
 
 (declare-fun screen__writeconfigdata__C111b__assume () Int)
 
-(declare-fun o14 () (Array Int character))
+(declare-fun o14 () Int)
 
-(declare-fun o15 () Int)
+(declare-fun o15 () character)
 
-(declare-fun o16 () character)
+(declare-fun o16 () Int)
 
-(declare-fun o17 () Int)
+(declare-fun o17 () character)
 
-(declare-fun o18 () character)
+(declare-fun o18 () (Array Int character))
+
+(declare-fun temp___1263 () Int)
 
 (declare-fun o19 () (Array Int character))
 
-(declare-fun temp___1344 () Int)
+(declare-fun temp___1264 () us_t2)
+
+(declare-fun temp___1265 () us_t1)
+
+(declare-fun temp___1269 () us_t1)
 
 (declare-fun o20 () (Array Int character))
 
-(declare-fun temp___1345 () us_t2)
+(declare-fun o21 () screenycoordt)
 
-(declare-fun temp___1346 () us_t1)
+(declare-fun o22 () screenxcoordt)
 
-(declare-fun temp___1350 () us_t1)
+(declare-fun o23 () us_split_fields4)
 
-(declare-fun o21 () (Array Int character))
-
-(declare-fun o22 () screenycoordt)
-
-(declare-fun o23 () screenxcoordt)
-
-(declare-fun o24 () us_split_fields4)
-
-(declare-fun o25 () us_rep2)
+(declare-fun o24 () us_rep2)
 
 (declare-fun screen__writeconfigdata__C121b__assume () Int)
 
-(declare-fun o26 () (Array Int character))
+(declare-fun o25 () Int)
+
+(declare-fun o26 () character)
 
 (declare-fun o27 () Int)
 
 (declare-fun o28 () character)
 
-(declare-fun o29 () Int)
+(declare-fun o29 () (Array Int character))
 
-(declare-fun o30 () character)
+(declare-fun temp___1275 () Int)
+
+(declare-fun o30 () (Array Int character))
+
+(declare-fun temp___1276 () us_t4)
+
+(declare-fun temp___1277 () us_t3)
+
+(declare-fun temp___1281 () us_t3)
 
 (declare-fun o31 () (Array Int character))
 
-(declare-fun temp___1356 () Int)
+(declare-fun o32 () screenycoordt)
 
-(declare-fun o32 () (Array Int character))
+(declare-fun o33 () screenxcoordt)
 
-(declare-fun temp___1357 () us_t4)
+(declare-fun o34 () us_split_fields4)
 
-(declare-fun temp___1358 () us_t3)
-
-(declare-fun temp___1362 () us_t3)
-
-(declare-fun o33 () (Array Int character))
-
-(declare-fun o34 () screenycoordt)
-
-(declare-fun o35 () screenxcoordt)
-
-(declare-fun o36 () us_split_fields4)
-
-(declare-fun o37 () us_rep2)
+(declare-fun o35 () us_rep2)
 
 (declare-fun screen__writeconfigdata__C131b__assume () Int)
-
-(declare-fun o38 () (Array Int character))
 
 (declare-fun workstart1 () Int)
 
@@ -4335,7 +4181,7 @@
   (= o13 (mk___split_fields o12 o11 o10 o9 o8 o7 o6 o5 o4 o3 o2 o1 o)))
 
 ;; H
-  (assert (= temp___1341 (mk___rep o13)))
+  (assert (= temp___1260 (mk___rep o13)))
 
 ;; H
   (assert
@@ -4349,7 +4195,7 @@
              newconfig__split_fields11 newconfig__split_fields12))))
 
 ;; H
-  (assert (= newconfig__split_fields13 (us_split_fields1 temp___1341)))
+  (assert (= newconfig__split_fields13 (us_split_fields1 temp___1260)))
 
 ;; H
   (assert
@@ -4384,13 +4230,10 @@
   (assert (in_range9 c111b))
 
 ;; H
-  (assert (= o14 (temp___String_Literal_1353 Tuple0)))
-
-;; H
   (assert (= result6 str))
 
 ;; H
-  (assert (= (let ((subject str)) str3) o14))
+  (assert (= (let ((subject str)) str3) (temp___String_Literal_1272 Tuple0)))
 
 ;; H
   (assert (= result7 valuestr))
@@ -4424,96 +4267,96 @@
   (<= (to_rep1 valuestr__last) (to_rep1 valuestr__last))))
 
 ;; H
-  (assert (= o15 (to_rep1 valuestr__last)))
+  (assert (= o14 (to_rep1 valuestr__last)))
 
 ;; H
-  (assert (= o16 (select (let ((subject valuestr)) valuestr3) o15)))
+  (assert (= o15 (select (let ((subject valuestr)) valuestr3) o14)))
 
 ;; H
-  (assert (= o17 (to_rep o16)))
+  (assert (= o16 (to_rep o15)))
 
 ;; H
-  (assert (= (to_rep o18) o17))
+  (assert (= (to_rep o17) o16))
 
 ;; H
-  (assert (= o19 (store (let ((subject str)) str3) 5 o18)))
+  (assert (= o18 (store (let ((subject str)) str3) 5 o17)))
 
 ;; H
   (assert (= result8 (let ((subject str)) (mk_map__ref str3))))
 
 ;; H
-  (assert (= (let ((subject str)) str4) o19))
+  (assert (= (let ((subject str)) str4) o18))
 
 ;; H
   (assert
   (=> (<= 10 c111b)
-  (and (= temp___1344 (- (to_rep1 valuestr__last) 1)) (in_range1
+  (and (= temp___1263 (- (to_rep1 valuestr__last) 1)) (in_range1
   (- (to_rep1 valuestr__last) 1)))))
 
 ;; H
   (assert
   (=> (<= 10 c111b)
-  (=> (<= 2 temp___1344)
+  (=> (<= 2 temp___1263)
   (and (and (<= (to_rep1 valuestr__first) 2) (<= 2 (to_rep1 valuestr__last)))
-  (and (<= (to_rep1 valuestr__first) temp___1344)
-  (<= temp___1344 (to_rep1 valuestr__last)))))))
+  (and (<= (to_rep1 valuestr__first) temp___1263)
+  (<= temp___1263 (to_rep1 valuestr__last)))))))
 
 ;; H
-  (assert (=> (<= 10 c111b) (= o20 (let ((subject valuestr)) valuestr3))))
+  (assert (=> (<= 10 c111b) (= o19 (let ((subject valuestr)) valuestr3))))
 
 ;; H
   (assert
-  (=> (<= 10 c111b) (= temp___1345 (mk___t2 o20 (mk2 2 temp___1344)))))
+  (=> (<= 10 c111b) (= temp___1264 (mk___t2 o19 (mk2 2 temp___1263)))))
 
 ;; H
   (assert
   (=> (<= 10 c111b)
-  (= (ite (<= (to_rep1 (first5 (rt2 temp___1345))) (to_rep1
-                                                   (last5 (rt2 temp___1345))))
-     (+ (- (to_rep1 (last5 (rt2 temp___1345))) (to_rep1
-                                               (first5 (rt2 temp___1345)))) 1)
+  (= (ite (<= (to_rep1 (first4 (rt2 temp___1264))) (to_rep1
+                                                   (last4 (rt2 temp___1264))))
+     (+ (- (to_rep1 (last4 (rt2 temp___1264))) (to_rep1
+                                               (first4 (rt2 temp___1264)))) 1)
      0) (ite (<= (- 6 (to_rep1 valuestr__last)) 3)
         (+ (- 3 (- 6 (to_rep1 valuestr__last))) 1) 0))))
 
 ;; H
   (assert
   (=> (<= 10 c111b)
-  (= temp___1346 (mk___t1
-                 (slide (elts2 temp___1345)
-                 (to_rep1 (first5 (rt2 temp___1345)))
+  (= temp___1265 (mk___t1
+                 (slide (elts2 temp___1264)
+                 (to_rep1 (first4 (rt2 temp___1264)))
                  (- 6 (to_rep1 valuestr__last)))
                  (mk1 (- 6 (to_rep1 valuestr__last)) 3)))))
 
 ;; H
   (assert
   (=> (<= 10 c111b)
-  (= (ite (<= (to_rep1 (first3 (rt1 temp___1346))) (to_rep1
-                                                   (last2 (rt1 temp___1346))))
-     (+ (- (to_rep1 (last2 (rt1 temp___1346))) (to_rep1
-                                               (first3 (rt1 temp___1346)))) 1)
-     0) (ite (<= (to_rep1 (first3 (mk1 (- 6 (to_rep1 valuestr__last)) 3))) 
+  (= (ite (<= (to_rep1 (first2 (rt1 temp___1265))) (to_rep1
+                                                   (last2 (rt1 temp___1265))))
+     (+ (- (to_rep1 (last2 (rt1 temp___1265))) (to_rep1
+                                               (first2 (rt1 temp___1265)))) 1)
+     0) (ite (<= (to_rep1 (first2 (mk1 (- 6 (to_rep1 valuestr__last)) 3))) 
         (to_rep1 (last2 (mk1 (- 6 (to_rep1 valuestr__last)) 3))))
         (+ (- (to_rep1 (last2 (mk1 (- 6 (to_rep1 valuestr__last)) 3))) 
-        (to_rep1 (first3 (mk1 (- 6 (to_rep1 valuestr__last)) 3)))) 1) 0))))
+        (to_rep1 (first2 (mk1 (- 6 (to_rep1 valuestr__last)) 3)))) 1) 0))))
 
 ;; H
-  (assert (=> (<= 10 c111b) (= temp___1350 temp___1346)))
+  (assert (=> (<= 10 c111b) (= temp___1269 temp___1265)))
 
 ;; H
   (assert
   (=> (<= 10 c111b)
-  (forall ((temp___1351 Int))
-  (ite (and (<= (- 6 (to_rep1 valuestr__last)) temp___1351)
-       (<= temp___1351 3))
-  (= (select o21 temp___1351) (select (elts1 temp___1350) temp___1351))
-  (= (select o21 temp___1351) (select (let ((subject str)) str4) temp___1351))))))
+  (forall ((temp___1270 Int))
+  (ite (and (<= (- 6 (to_rep1 valuestr__last)) temp___1270)
+       (<= temp___1270 3))
+  (= (select o20 temp___1270) (select (elts1 temp___1269) temp___1270))
+  (= (select o20 temp___1270) (select (let ((subject str)) str4) temp___1270))))))
 
 ;; H
   (assert
   (=> (<= 10 c111b) (= result9 (let ((subject str)) (mk_map__ref str4)))))
 
 ;; H
-  (assert (=> (<= 10 c111b) (= (let ((subject str)) str5) o21)))
+  (assert (=> (<= 10 c111b) (= (let ((subject str)) str5) o20)))
 
 ;; H
   (assert
@@ -4531,16 +4374,16 @@
   (assert (= (let ((subject c112b)) c112b1) (let ((subject str)) str5)))
 
 ;; H
-  (assert (= (to_rep8 o22) 9))
+  (assert (= (to_rep8 o21) 9))
 
 ;; H
-  (assert (= (to_rep7 o23) 25))
+  (assert (= (to_rep7 o22) 25))
 
 ;; H
-  (assert (= o24 (mk___split_fields2 o23 o22)))
+  (assert (= o23 (mk___split_fields2 o22 o21)))
 
 ;; H
-  (assert (= o25 (mk___rep2 o24)))
+  (assert (= o24 (mk___rep2 o23)))
 
 ;; H
   (assert (= result11 (mk_bool__ref ok1)))
@@ -4560,13 +4403,11 @@
   (assert (in_range9 c121b))
 
 ;; H
-  (assert (= o26 (temp___String_Literal_1365 Tuple0)))
-
-;; H
   (assert (= result12 str1))
 
 ;; H
-  (assert (= (let ((subject str1)) str6) o26))
+  (assert
+  (= (let ((subject str1)) str6) (temp___String_Literal_1284 Tuple0)))
 
 ;; H
   (assert (= result13 valuestr1))
@@ -4601,98 +4442,97 @@
   (<= (to_rep1 valuestr__last1) (to_rep1 valuestr__last1))))
 
 ;; H
-  (assert (= o27 (to_rep1 valuestr__last1)))
+  (assert (= o25 (to_rep1 valuestr__last1)))
 
 ;; H
-  (assert (= o28 (select (let ((subject valuestr1)) valuestr4) o27)))
+  (assert (= o26 (select (let ((subject valuestr1)) valuestr4) o25)))
 
 ;; H
-  (assert (= o29 (to_rep o28)))
+  (assert (= o27 (to_rep o26)))
 
 ;; H
-  (assert (= (to_rep o30) o29))
+  (assert (= (to_rep o28) o27))
 
 ;; H
-  (assert (= o31 (store (let ((subject str1)) str6) 5 o30)))
+  (assert (= o29 (store (let ((subject str1)) str6) 5 o28)))
 
 ;; H
   (assert (= result14 (let ((subject str1)) (mk_map__ref str6))))
 
 ;; H
-  (assert (= (let ((subject str1)) str7) o31))
+  (assert (= (let ((subject str1)) str7) o29))
 
 ;; H
   (assert
   (=> (<= 10 c121b)
-  (and (= temp___1356 (- (to_rep1 valuestr__last1) 1)) (in_range1
+  (and (= temp___1275 (- (to_rep1 valuestr__last1) 1)) (in_range1
   (- (to_rep1 valuestr__last1) 1)))))
 
 ;; H
   (assert
   (=> (<= 10 c121b)
-  (=> (<= 2 temp___1356)
+  (=> (<= 2 temp___1275)
   (and
   (and (<= (to_rep1 valuestr__first1) 2) (<= 2 (to_rep1 valuestr__last1)))
-  (and (<= (to_rep1 valuestr__first1) temp___1356)
-  (<= temp___1356 (to_rep1 valuestr__last1)))))))
+  (and (<= (to_rep1 valuestr__first1) temp___1275)
+  (<= temp___1275 (to_rep1 valuestr__last1)))))))
 
 ;; H
-  (assert (=> (<= 10 c121b) (= o32 (let ((subject valuestr1)) valuestr4))))
+  (assert (=> (<= 10 c121b) (= o30 (let ((subject valuestr1)) valuestr4))))
 
 ;; H
   (assert
-  (=> (<= 10 c121b) (= temp___1357 (mk___t4 o32 (mk4 2 temp___1356)))))
+  (=> (<= 10 c121b) (= temp___1276 (mk___t4 o30 (mk4 2 temp___1275)))))
 
 ;; H
   (assert
   (=> (<= 10 c121b)
-  (= (ite (<= (to_rep1 (first10 (rt4 temp___1357))) (to_rep1
-                                                    (last10
-                                                    (rt4 temp___1357))))
-     (+ (- (to_rep1 (last10 (rt4 temp___1357))) (to_rep1
-                                                (first10 (rt4 temp___1357)))) 1)
+  (= (ite (<= (to_rep1 (first8 (rt4 temp___1276))) (to_rep1
+                                                   (last8 (rt4 temp___1276))))
+     (+ (- (to_rep1 (last8 (rt4 temp___1276))) (to_rep1
+                                               (first8 (rt4 temp___1276)))) 1)
      0) (ite (<= (- 6 (to_rep1 valuestr__last1)) 3)
         (+ (- 3 (- 6 (to_rep1 valuestr__last1))) 1) 0))))
 
 ;; H
   (assert
   (=> (<= 10 c121b)
-  (= temp___1358 (mk___t3
-                 (slide (elts4 temp___1357)
-                 (to_rep1 (first10 (rt4 temp___1357)))
+  (= temp___1277 (mk___t3
+                 (slide (elts4 temp___1276)
+                 (to_rep1 (first8 (rt4 temp___1276)))
                  (- 6 (to_rep1 valuestr__last1)))
                  (mk3 (- 6 (to_rep1 valuestr__last1)) 3)))))
 
 ;; H
   (assert
   (=> (<= 10 c121b)
-  (= (ite (<= (to_rep1 (first8 (rt3 temp___1358))) (to_rep1
-                                                   (last7 (rt3 temp___1358))))
-     (+ (- (to_rep1 (last7 (rt3 temp___1358))) (to_rep1
-                                               (first8 (rt3 temp___1358)))) 1)
-     0) (ite (<= (to_rep1 (first8 (mk3 (- 6 (to_rep1 valuestr__last1)) 3))) 
-        (to_rep1 (last7 (mk3 (- 6 (to_rep1 valuestr__last1)) 3))))
-        (+ (- (to_rep1 (last7 (mk3 (- 6 (to_rep1 valuestr__last1)) 3))) 
-        (to_rep1 (first8 (mk3 (- 6 (to_rep1 valuestr__last1)) 3)))) 1) 0))))
+  (= (ite (<= (to_rep1 (first6 (rt3 temp___1277))) (to_rep1
+                                                   (last6 (rt3 temp___1277))))
+     (+ (- (to_rep1 (last6 (rt3 temp___1277))) (to_rep1
+                                               (first6 (rt3 temp___1277)))) 1)
+     0) (ite (<= (to_rep1 (first6 (mk3 (- 6 (to_rep1 valuestr__last1)) 3))) 
+        (to_rep1 (last6 (mk3 (- 6 (to_rep1 valuestr__last1)) 3))))
+        (+ (- (to_rep1 (last6 (mk3 (- 6 (to_rep1 valuestr__last1)) 3))) 
+        (to_rep1 (first6 (mk3 (- 6 (to_rep1 valuestr__last1)) 3)))) 1) 0))))
 
 ;; H
-  (assert (=> (<= 10 c121b) (= temp___1362 temp___1358)))
+  (assert (=> (<= 10 c121b) (= temp___1281 temp___1277)))
 
 ;; H
   (assert
   (=> (<= 10 c121b)
-  (forall ((temp___1363 Int))
-  (ite (and (<= (- 6 (to_rep1 valuestr__last1)) temp___1363)
-       (<= temp___1363 3))
-  (= (select o33 temp___1363) (select (elts3 temp___1362) temp___1363))
-  (= (select o33 temp___1363) (select (let ((subject str1)) str7) temp___1363))))))
+  (forall ((temp___1282 Int))
+  (ite (and (<= (- 6 (to_rep1 valuestr__last1)) temp___1282)
+       (<= temp___1282 3))
+  (= (select o31 temp___1282) (select (elts3 temp___1281) temp___1282))
+  (= (select o31 temp___1282) (select (let ((subject str1)) str7) temp___1282))))))
 
 ;; H
   (assert
   (=> (<= 10 c121b) (= result15 (let ((subject str1)) (mk_map__ref str7)))))
 
 ;; H
-  (assert (=> (<= 10 c121b) (= (let ((subject str1)) str8) o33)))
+  (assert (=> (<= 10 c121b) (= (let ((subject str1)) str8) o31)))
 
 ;; H
   (assert
@@ -4710,16 +4550,16 @@
   (assert (= (let ((subject c122b)) c122b1) (let ((subject str1)) str8)))
 
 ;; H
-  (assert (= (to_rep8 o34) 10))
+  (assert (= (to_rep8 o32) 10))
 
 ;; H
-  (assert (= (to_rep7 o35) 25))
+  (assert (= (to_rep7 o33) 25))
 
 ;; H
-  (assert (= o36 (mk___split_fields2 o35 o34)))
+  (assert (= o34 (mk___split_fields2 o33 o32)))
 
 ;; H
-  (assert (= o37 (mk___rep2 o36)))
+  (assert (= o35 (mk___rep2 o34)))
 
 ;; H
   (assert (= result17 (mk_bool__ref ok2)))
@@ -4739,13 +4579,11 @@
   (assert (in_range9 c131b))
 
 ;; H
-  (assert (= o38 (temp___String_Literal_1377 Tuple0)))
-
-;; H
   (assert (= result18 str2))
 
 ;; H
-  (assert (= (let ((subject str2)) str9) o38))
+  (assert
+  (= (let ((subject str2)) str9) (temp___String_Literal_1296 Tuple0)))
 
 ;; H
   (assert (= result19 valuestr2))

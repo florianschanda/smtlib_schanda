@@ -368,46 +368,6 @@
 ;; is_empty__post_axiom
   (assert true)
 
-(declare-sort index_range 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 100)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
-
-(declare-fun user_eq4 (index_range index_range) Bool)
-
-(declare-fun dummy4 () index_range)
-
-(declare-datatypes ()
-((index_range__ref (mk_index_range__ref (index_range__content index_range)))))
-(define-fun index_range__ref___projection ((a index_range__ref)) index_range 
-  (index_range__content a))
-
-(declare-sort t3b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 100)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq5 (t3b t3b) Bool)
-
-(declare-fun dummy5 () t3b)
-
-(declare-datatypes () ((t3b__ref (mk_t3b__ref (t3b__content t3b)))))
-(define-fun t3b__ref___projection ((a t3b__ref)) t3b (t3b__content a))
-
 (declare-fun initial_stack () us_rep)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -427,18 +387,11 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(define-fun dynamic_invariant1 ((temp___expr_175 Int)
-  (temp___is_init_172 Bool) (temp___skip_constant_173 Bool)
-  (temp___do_toplevel_174 Bool)) Bool (=>
-                                      (or (= temp___is_init_172 true)
-                                      (<= 0 100)) (in_range temp___expr_175)))
-
-(define-fun dynamic_invariant2 ((temp___expr_181 Int)
-  (temp___is_init_178 Bool) (temp___skip_constant_179 Bool)
-  (temp___do_toplevel_180 Bool)) Bool (=>
-                                      (or (= temp___is_init_178 true)
-                                      (<= 1 100)) (in_range2
-                                      temp___expr_181)))
+(define-fun dynamic_invariant1 ((temp___expr_154 Int)
+  (temp___is_init_151 Bool) (temp___skip_constant_152 Bool)
+  (temp___do_toplevel_153 Bool)) Bool (=>
+                                      (or (= temp___is_init_151 true)
+                                      (<= 0 100)) (in_range temp___expr_154)))
 
 ;; initial_stack__def_axiom
   (assert
@@ -452,9 +405,7 @@
 
 (declare-fun o1 () (Array Int integer))
 
-(declare-fun o2 () (Array Int integer))
-
-(declare-fun o3 () pointer_range)
+(declare-fun o2 () pointer_range)
 
 (declare-fun stack_external_prover__initial_stack__assume () (Array Int integer))
 
@@ -478,19 +429,16 @@
   (assert (= (to_rep o) 0))
 
 ;; H
-  (assert (= o1 (temp___133 0)))
+  (assert (= (temp___133 0) o1))
 
 ;; H
-  (assert (= o1 o2))
+  (assert (= o o2))
 
 ;; H
-  (assert (= o o3))
+  (assert (= stack_external_prover__initial_stack__assume o1))
 
 ;; H
-  (assert (= stack_external_prover__initial_stack__assume o2))
-
-;; H
-  (assert (= stack_external_prover__initial_stack__assume1 o3))
+  (assert (= stack_external_prover__initial_stack__assume1 o2))
 
 ;; H
   (assert
@@ -508,13 +456,7 @@
   (assert (= my_stack__split_fields4 (us_split_fields1 initial_stack)))
 
 ;; H
-  (assert
-  (and (= result2 (is_empty my_stack__split_fields4))
-  (is_empty__function_guard result2 my_stack__split_fields4)))
-
-;; H
-  (assert (is_empty__function_guard (is_empty my_stack__split_fields4)
-  my_stack__split_fields4))
+  (assert (= result2 (is_empty my_stack__split_fields4)))
 
 (assert
 ;; WP_parameter_def

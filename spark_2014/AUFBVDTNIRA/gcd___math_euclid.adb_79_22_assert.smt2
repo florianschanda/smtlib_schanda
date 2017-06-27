@@ -185,8 +185,7 @@
 ;; divides__def_axiom
   (assert
   (forall ((a Int) (b Int))
-  (! (=> (divides__function_guard (divides a b) a b)
-     (= (= (divides a b) true) (= (mod2 b a) 0))) :pattern ((divides a b)) )))
+  (! (= (= (divides a b) true) (= (mod2 b a) 0)) :pattern ((divides a b)) )))
 
 (declare-fun a () Int)
 
@@ -210,11 +209,11 @@
 
 (declare-fun o () Int)
 
-(declare-fun temp___154 () Int)
+(declare-fun temp___134 () Int)
 
-(declare-fun temp___153 () Int)
+(declare-fun temp___133 () Int)
 
-(declare-fun temp___152 () Int)
+(declare-fun temp___132 () Int)
 
 (declare-fun o1 () Int)
 
@@ -307,71 +306,13 @@
   (assert (=> (<= 1 2147483647) (in_range2 c)))
 
 ;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x c2) x c2)))
+  (assert (=> (not (= bn1 0)) (= temp___134 c)))
 
 ;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x an2) x an2)))
+  (assert (=> (not (= bn1 0)) (= temp___133 bn1)))
 
 ;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x an2) x an2)))
-
-;; H
-  (assert (divides__function_guard (divides an2 c2) an2 c2))
-
-;; H
-  (assert
-  (forall ((x Int)) (divides__function_guard (divides x (mod2 c2 an2)) x
-  (mod2 c2 an2))))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x a) x a)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x b) x b)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x an3) x an3)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x bn3) x bn3)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x c2) x c2)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x an2) x an2)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x an2) x an2)))
-
-;; H
-  (assert (divides__function_guard (divides an2 c2) an2 c2))
-
-;; H
-  (assert
-  (forall ((x Int)) (divides__function_guard (divides x (mod2 c2 an2)) x
-  (mod2 c2 an2))))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x a) x a)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x b) x b)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x an3) x an3)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x bn3) x bn3)))
-
-;; H
-  (assert (=> (not (= bn1 0)) (= temp___154 c)))
-
-;; H
-  (assert (=> (not (= bn1 0)) (= temp___153 bn1)))
-
-;; H
-  (assert (=> (not (= bn1 0)) (= temp___152 an1)))
+  (assert (=> (not (= bn1 0)) (= temp___132 an1)))
 
 ;; H
   (assert (=> (not (= bn1 0)) (= (mk_int__ref result2) c9)))
@@ -481,19 +422,10 @@
   (assert (=> (not (not (= bn1 0))) (= an7 an1)))
 
 ;; H
-  (assert (divides__function_guard (divides an6 an6) an6 an6))
-
-;; H
   (assert (= (divides an6 an6) true))
 
 ;; H
-  (assert (divides__function_guard (divides an6 a) an6 a))
-
-;; H
   (assert (= (divides an6 a) true))
-
-;; H
-  (assert (divides__function_guard (divides an6 b) an6 b))
 
 (assert
 ;; WP_parameter_def

@@ -434,11 +434,11 @@
 (define-fun returnt__ref___projection ((a returnt__ref)) returnt (returnt__content
                                                                  a))
 
-(define-fun dynamic_invariant2 ((temp___expr_842 Int)
-  (temp___is_init_839 Bool) (temp___skip_constant_840 Bool)
-  (temp___do_toplevel_841 Bool)) Bool (=>
-                                      (or (= temp___is_init_839 true)
-                                      (<= 0 16)) (in_range6 temp___expr_842)))
+(define-fun dynamic_invariant2 ((temp___expr_835 Int)
+  (temp___is_init_832 Bool) (temp___skip_constant_833 Bool)
+  (temp___do_toplevel_834 Bool)) Bool (=>
+                                      (or (= temp___is_init_832 true)
+                                      (<= 0 16)) (in_range6 temp___expr_835)))
 
 (declare-fun text () us_t)
 
@@ -487,11 +487,11 @@
 (define-fun source__ref_3__projection ((a source__ref)) source (source__content
                                                                a))
 
-(define-fun dynamic_invariant3 ((temp___expr_881 Int)
-  (temp___is_init_878 Bool) (temp___skip_constant_879 Bool)
-  (temp___do_toplevel_880 Bool)) Bool (=>
-                                      (or (= temp___is_init_878 true)
-                                      (<= 0 16)) (in_range7 temp___expr_881)))
+(define-fun dynamic_invariant3 ((temp___expr_874 Int)
+  (temp___is_init_871 Bool) (temp___skip_constant_872 Bool)
+  (temp___do_toplevel_873 Bool)) Bool (=>
+                                      (or (= temp___is_init_871 true)
+                                      (<= 0 16)) (in_range7 temp___expr_874)))
 
 (declare-sort target 0)
 
@@ -514,12 +514,12 @@
 (define-fun target__ref_3__projection ((a target__ref)) target (target__content
                                                                a))
 
-(define-fun dynamic_invariant4 ((temp___expr_887 Int)
-  (temp___is_init_884 Bool) (temp___skip_constant_885 Bool)
-  (temp___do_toplevel_886 Bool)) Bool (=>
-                                      (or (= temp___is_init_884 true)
+(define-fun dynamic_invariant4 ((temp___expr_880 Int)
+  (temp___is_init_877 Bool) (temp___skip_constant_878 Bool)
+  (temp___do_toplevel_879 Bool)) Bool (=>
+                                      (or (= temp___is_init_877 true)
                                       (<= 0 4294967295)) (in_range8
-                                      temp___expr_887)))
+                                      temp___expr_880)))
 
 (declare-fun codetoval (Int) Int)
 
@@ -528,18 +528,14 @@
 ;; codetoval__post_axiom
   (assert
   (forall ((s Int))
-  (! (=> (dynamic_invariant3 s true true true)
-     (let ((result (codetoval s)))
-     (=> (codetoval__function_guard result s) (dynamic_invariant4 result true
-     false true)))) :pattern ((codetoval s)) )))
+  (! (=> (dynamic_invariant3 s true true true) (dynamic_invariant4
+     (codetoval s) true false true)) :pattern ((codetoval s)) )))
 
 (declare-fun fullstring__first () integer)
 
 (declare-fun fullstring__last () integer)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS10 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -563,7 +559,7 @@
 
 (declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -573,7 +569,7 @@
   (! (=> (in_range1 f)
      (=> (in_range1 l)
      (and (= (to_rep1 (first2 (mk1 f l))) f)
-     (= (to_rep1 (last3 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (= (to_rep1 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -591,10 +587,10 @@
 
 (define-fun first3 ((a us_t1)) Int (to_rep1 (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep1 (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last4 a))
-                                    (+ (- (last4 a) (first3 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size1 () Int)
 
@@ -629,8 +625,8 @@
 
 (define-fun bool_eq11 ((x us_t1)
   (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep1 (first2 (rt1 x)))
-                  (to_rep1 (last3 (rt1 x))) (elts1 y)
-                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last3 (rt1 y)))))
+                  (to_rep1 (last2 (rt1 x))) (elts1 y)
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
 (declare-fun user_eq10 (us_t1 us_t1) Bool)
 
@@ -639,56 +635,37 @@
 (declare-datatypes () ((t38b__ref (mk_t38b__ref (t38b__content us_t1)))))
 (define-fun t38b__ref___projection ((a t38b__ref)) us_t1 (t38b__content a))
 
-(declare-sort t40b 0)
+(declare-fun temp___String_Literal_912 (tuple0) (Array Int character))
 
-(define-fun in_range9 ((x Int)) Bool (and (<= 1 x) (<= x 150)))
-
-(define-fun bool_eq12 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE10 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) Int)
-
-(declare-fun user_eq11 (t40b t40b) Bool)
-
-(declare-fun dummy11 () t40b)
-
-(declare-datatypes () ((t40b__ref (mk_t40b__ref (t40b__content t40b)))))
-(define-fun t40b__ref___projection ((a t40b__ref)) t40b (t40b__content a))
-
-(declare-fun temp___String_Literal_919 (tuple0) (Array Int character))
-
-;; temp___String_Literal_919__def_axiom
+;; temp___String_Literal_912__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
-     (= (to_rep (select (temp___String_Literal_919 us_void_param) 1)) 58)
-     (= (to_rep (select (temp___String_Literal_919 us_void_param) 2)) 32)) :pattern (
-  (temp___String_Literal_919 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_912 us_void_param) 1)) 58)
+     (= (to_rep (select (temp___String_Literal_912 us_void_param) 2)) 32)) :pattern (
+  (temp___String_Literal_912 us_void_param)) )))
 
-(declare-fun temp___String_Literal_923 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_916 (tuple0) (Array Int character))
 
-;; temp___String_Literal_923__def_axiom
+;; temp___String_Literal_916__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
      (and
-     (= (to_rep (select (temp___String_Literal_923 us_void_param) 1)) 32)
-     (= (to_rep (select (temp___String_Literal_923 us_void_param) 2)) 40))
-     (= (to_rep (select (temp___String_Literal_923 us_void_param) 3)) 32)) :pattern (
-  (temp___String_Literal_923 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_916 us_void_param) 1)) 32)
+     (= (to_rep (select (temp___String_Literal_916 us_void_param) 2)) 40))
+     (= (to_rep (select (temp___String_Literal_916 us_void_param) 3)) 32)) :pattern (
+  (temp___String_Literal_916 us_void_param)) )))
 
-(declare-fun temp___String_Literal_928 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_921 (tuple0) (Array Int character))
 
-;; temp___String_Literal_928__def_axiom
+;; temp___String_Literal_921__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
-     (= (to_rep (select (temp___String_Literal_928 us_void_param) 1)) 32)
-     (= (to_rep (select (temp___String_Literal_928 us_void_param) 2)) 41)) :pattern (
-  (temp___String_Literal_928 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_921 us_void_param) 1)) 32)
+     (= (to_rep (select (temp___String_Literal_921 us_void_param) 2)) 41)) :pattern (
+  (temp___String_Literal_921 us_void_param)) )))
 
 (define-fun dynamic_invariant5 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -730,9 +707,9 @@
 
 (declare-fun c30b () Int)
 
-(declare-fun temp___907 () Int)
+(declare-fun temp___900 () Int)
 
-(declare-fun temp___906 () Int)
+(declare-fun temp___899 () Int)
 
 (declare-fun o () Int)
 
@@ -748,9 +725,9 @@
 
 (declare-fun o6 () Int)
 
-(declare-fun temp___921 () (Array Int character))
+(declare-fun temp___914 () (Array Int character))
 
-(declare-fun temp___9211 () t)
+(declare-fun temp___9141 () t)
 
 (declare-fun o7 () Int)
 
@@ -764,9 +741,9 @@
 
 (declare-fun o12 () Int)
 
-(declare-fun temp___924 () (Array Int character))
+(declare-fun temp___917 () (Array Int character))
 
-(declare-fun temp___9241 () t)
+(declare-fun temp___9171 () t)
 
 (declare-fun o13 () Int)
 
@@ -780,9 +757,9 @@
 
 (declare-fun o18 () Int)
 
-(declare-fun temp___926 () (Array Int character))
+(declare-fun temp___919 () (Array Int character))
 
-(declare-fun temp___9261 () t)
+(declare-fun temp___9191 () t)
 
 (declare-fun o19 () Int)
 
@@ -796,9 +773,9 @@
 
 (declare-fun o24 () Int)
 
-(declare-fun temp___929 () (Array Int character))
+(declare-fun temp___922 () (Array Int character))
 
-(declare-fun temp___9291 () t)
+(declare-fun temp___9221 () t)
 
 (declare-fun o25 () Int)
 
@@ -910,10 +887,10 @@
   (assert (= code1 0))
 
 ;; H
-  (assert (=> (and (<= 0 code1) (<= code1 16)) (= temp___907 result__3)))
+  (assert (=> (and (<= 0 code1) (<= code1 16)) (= temp___900 result__3)))
 
 ;; H
-  (assert (=> (and (<= 0 code1) (<= code1 16)) (= temp___906 code1)))
+  (assert (=> (and (<= 0 code1) (<= code1 16)) (= temp___899 code1)))
 
 ;; H
   (assert
@@ -941,8 +918,7 @@
 ;; H
   (assert
   (=> (and (<= 0 code1) (<= code1 16))
-  (and (and (= o (codetoval c29b)) (codetoval__function_guard o c29b))
-  (in_range8 o))))
+  (and (= o (codetoval c29b)) (in_range8 o))))
 
 ;; H
   (assert (=> (and (<= 0 code1) (<= code1 16)) (= c30b2 result3)))
@@ -1029,10 +1005,10 @@
 
 ;; H
   (assert
-  (=> (= (length text) 0) (= (temp___String_Literal_919 Tuple0) temp___921)))
+  (=> (= (length text) 0) (= (temp___String_Literal_912 Tuple0) temp___914)))
 
 ;; H
-  (assert (=> (= (length text) 0) (= (mk 1 2) temp___9211)))
+  (assert (=> (= (length text) 0) (= (mk 1 2) temp___9141)))
 
 ;; H
   (assert (=> (not (= (length text) 0)) (=> (<= 1 2) (= o1 (+ (- 2 1) 1)))))
@@ -1069,30 +1045,30 @@
   (assert
   (=> (not (= (length text) 0))
   (= (concat1 (elts text) (to_rep1 (first (rt text)))
-     (to_rep1 (last (rt text))) (temp___String_Literal_919 Tuple0) 1 2) 
-  temp___921)))
+     (to_rep1 (last (rt text))) (temp___String_Literal_912 Tuple0) 1 2) 
+  temp___914)))
 
 ;; H
   (assert
   (=> (not (= (length text) 0))
-  (= (mk (to_rep1 (first (rt text))) o6) temp___9211)))
+  (= (mk (to_rep1 (first (rt text))) o6) temp___9141)))
 
 ;; H
   (assert
-  (=> (= (length (mk___t temp___921 temp___9211)) 0)
-  (= (elts (to_string (attr__ATTRIBUTE_IMAGE6 thecodename1))) temp___924)))
+  (=> (= (length (mk___t temp___914 temp___9141)) 0)
+  (= (elts (to_string (attr__ATTRIBUTE_IMAGE6 thecodename1))) temp___917)))
 
 ;; H
   (assert
-  (=> (= (length (mk___t temp___921 temp___9211)) 0)
+  (=> (= (length (mk___t temp___914 temp___9141)) 0)
   (= (mk
      (to_rep1 (first (rt (to_string (attr__ATTRIBUTE_IMAGE6 thecodename1)))))
      (to_rep1 (last (rt (to_string (attr__ATTRIBUTE_IMAGE6 thecodename1)))))) 
-  temp___9241)))
+  temp___9171)))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___921 temp___9211)) 0))
+  (=> (not (= (length (mk___t temp___914 temp___9141)) 0))
   (=>
   (<= (to_rep1
       (first (rt (to_string (attr__ATTRIBUTE_IMAGE6 thecodename1))))) 
@@ -1103,7 +1079,7 @@
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___921 temp___9211)) 0))
+  (=> (not (= (length (mk___t temp___914 temp___9141)) 0))
   (=>
   (not
   (<= (to_rep1
@@ -1113,128 +1089,128 @@
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___921 temp___9211)) 0))
-  (=> (<= (to_rep1 (first temp___9211)) (to_rep1 (last temp___9211)))
-  (= o8 (+ (- (to_rep1 (last temp___9211)) (to_rep1 (first temp___9211))) 1)))))
+  (=> (not (= (length (mk___t temp___914 temp___9141)) 0))
+  (=> (<= (to_rep1 (first temp___9141)) (to_rep1 (last temp___9141)))
+  (= o8 (+ (- (to_rep1 (last temp___9141)) (to_rep1 (first temp___9141))) 1)))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___921 temp___9211)) 0))
-  (=> (not (<= (to_rep1 (first temp___9211)) (to_rep1 (last temp___9211))))
+  (=> (not (= (length (mk___t temp___914 temp___9141)) 0))
+  (=> (not (<= (to_rep1 (first temp___9141)) (to_rep1 (last temp___9141))))
   (= o8 0))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___921 temp___9211)) 0)) (= o9 (+ o8 o7))))
+  (=> (not (= (length (mk___t temp___914 temp___9141)) 0)) (= o9 (+ o8 o7))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___921 temp___9211)) 0))
-  (= o10 (+ (to_rep1 (first temp___9211)) o9))))
+  (=> (not (= (length (mk___t temp___914 temp___9141)) 0))
+  (= o10 (+ (to_rep1 (first temp___9141)) o9))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___921 temp___9211)) 0)) (= o11 (- o10 1))))
+  (=> (not (= (length (mk___t temp___914 temp___9141)) 0)) (= o11 (- o10 1))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___921 temp___9211)) 0))
+  (=> (not (= (length (mk___t temp___914 temp___9141)) 0))
   (and (= o12 o11) (in_range2 o11))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___921 temp___9211)) 0))
-  (= (concat1 temp___921 (to_rep1 (first temp___9211))
-     (to_rep1 (last temp___9211))
+  (=> (not (= (length (mk___t temp___914 temp___9141)) 0))
+  (= (concat1 temp___914 (to_rep1 (first temp___9141))
+     (to_rep1 (last temp___9141))
      (elts (to_string (attr__ATTRIBUTE_IMAGE6 thecodename1)))
      (to_rep1 (first (rt (to_string (attr__ATTRIBUTE_IMAGE6 thecodename1)))))
      (to_rep1 (last (rt (to_string (attr__ATTRIBUTE_IMAGE6 thecodename1)))))) 
-  temp___924)))
+  temp___917)))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___921 temp___9211)) 0))
-  (= (mk (to_rep1 (first temp___9211)) o12) temp___9241)))
+  (=> (not (= (length (mk___t temp___914 temp___9141)) 0))
+  (= (mk (to_rep1 (first temp___9141)) o12) temp___9171)))
 
 ;; H
   (assert
-  (=> (= (length (mk___t temp___924 temp___9241)) 0)
-  (= (temp___String_Literal_923 Tuple0) temp___926)))
+  (=> (= (length (mk___t temp___917 temp___9171)) 0)
+  (= (temp___String_Literal_916 Tuple0) temp___919)))
 
 ;; H
   (assert
-  (=> (= (length (mk___t temp___924 temp___9241)) 0)
-  (= (mk 1 3) temp___9261)))
+  (=> (= (length (mk___t temp___917 temp___9171)) 0)
+  (= (mk 1 3) temp___9191)))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___924 temp___9241)) 0))
+  (=> (not (= (length (mk___t temp___917 temp___9171)) 0))
   (=> (<= 1 3) (= o13 (+ (- 3 1) 1)))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___924 temp___9241)) 0))
+  (=> (not (= (length (mk___t temp___917 temp___9171)) 0))
   (=> (not (<= 1 3)) (= o13 0))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___924 temp___9241)) 0))
-  (=> (<= (to_rep1 (first temp___9241)) (to_rep1 (last temp___9241)))
-  (= o14 (+ (- (to_rep1 (last temp___9241)) (to_rep1 (first temp___9241))) 1)))))
+  (=> (not (= (length (mk___t temp___917 temp___9171)) 0))
+  (=> (<= (to_rep1 (first temp___9171)) (to_rep1 (last temp___9171)))
+  (= o14 (+ (- (to_rep1 (last temp___9171)) (to_rep1 (first temp___9171))) 1)))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___924 temp___9241)) 0))
-  (=> (not (<= (to_rep1 (first temp___9241)) (to_rep1 (last temp___9241))))
+  (=> (not (= (length (mk___t temp___917 temp___9171)) 0))
+  (=> (not (<= (to_rep1 (first temp___9171)) (to_rep1 (last temp___9171))))
   (= o14 0))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___924 temp___9241)) 0))
+  (=> (not (= (length (mk___t temp___917 temp___9171)) 0))
   (= o15 (+ o14 o13))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___924 temp___9241)) 0))
-  (= o16 (+ (to_rep1 (first temp___9241)) o15))))
+  (=> (not (= (length (mk___t temp___917 temp___9171)) 0))
+  (= o16 (+ (to_rep1 (first temp___9171)) o15))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___924 temp___9241)) 0)) (= o17 (- o16 1))))
+  (=> (not (= (length (mk___t temp___917 temp___9171)) 0)) (= o17 (- o16 1))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___924 temp___9241)) 0))
+  (=> (not (= (length (mk___t temp___917 temp___9171)) 0))
   (and (= o18 o17) (in_range2 o17))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___924 temp___9241)) 0))
-  (= (concat1 temp___924 (to_rep1 (first temp___9241))
-     (to_rep1 (last temp___9241)) (temp___String_Literal_923 Tuple0) 1 3) 
-  temp___926)))
+  (=> (not (= (length (mk___t temp___917 temp___9171)) 0))
+  (= (concat1 temp___917 (to_rep1 (first temp___9171))
+     (to_rep1 (last temp___9171)) (temp___String_Literal_916 Tuple0) 1 3) 
+  temp___919)))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___924 temp___9241)) 0))
-  (= (mk (to_rep1 (first temp___9241)) o18) temp___9261)))
+  (=> (not (= (length (mk___t temp___917 temp___9171)) 0))
+  (= (mk (to_rep1 (first temp___9171)) o18) temp___9191)))
 
 ;; H
   (assert
-  (=> (= (length (mk___t temp___926 temp___9261)) 0)
-  (= (elts (to_string (attr__ATTRIBUTE_IMAGE4 returnvalue))) temp___929)))
+  (=> (= (length (mk___t temp___919 temp___9191)) 0)
+  (= (elts (to_string (attr__ATTRIBUTE_IMAGE4 returnvalue))) temp___922)))
 
 ;; H
   (assert
-  (=> (= (length (mk___t temp___926 temp___9261)) 0)
+  (=> (= (length (mk___t temp___919 temp___9191)) 0)
   (= (mk
      (to_rep1 (first (rt (to_string (attr__ATTRIBUTE_IMAGE4 returnvalue)))))
      (to_rep1 (last (rt (to_string (attr__ATTRIBUTE_IMAGE4 returnvalue)))))) 
-  temp___9291)))
+  temp___9221)))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___926 temp___9261)) 0))
+  (=> (not (= (length (mk___t temp___919 temp___9191)) 0))
   (=>
   (<= (to_rep1 (first (rt (to_string (attr__ATTRIBUTE_IMAGE4 returnvalue))))) 
   (to_rep1 (last (rt (to_string (attr__ATTRIBUTE_IMAGE4 returnvalue))))))
@@ -1244,7 +1220,7 @@
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___926 temp___9261)) 0))
+  (=> (not (= (length (mk___t temp___919 temp___9191)) 0))
   (=>
   (not
   (<= (to_rep1 (first (rt (to_string (attr__ATTRIBUTE_IMAGE4 returnvalue))))) 
@@ -1253,52 +1229,52 @@
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___926 temp___9261)) 0))
-  (=> (<= (to_rep1 (first temp___9261)) (to_rep1 (last temp___9261)))
-  (= o20 (+ (- (to_rep1 (last temp___9261)) (to_rep1 (first temp___9261))) 1)))))
+  (=> (not (= (length (mk___t temp___919 temp___9191)) 0))
+  (=> (<= (to_rep1 (first temp___9191)) (to_rep1 (last temp___9191)))
+  (= o20 (+ (- (to_rep1 (last temp___9191)) (to_rep1 (first temp___9191))) 1)))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___926 temp___9261)) 0))
-  (=> (not (<= (to_rep1 (first temp___9261)) (to_rep1 (last temp___9261))))
+  (=> (not (= (length (mk___t temp___919 temp___9191)) 0))
+  (=> (not (<= (to_rep1 (first temp___9191)) (to_rep1 (last temp___9191))))
   (= o20 0))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___926 temp___9261)) 0))
+  (=> (not (= (length (mk___t temp___919 temp___9191)) 0))
   (= o21 (+ o20 o19))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___926 temp___9261)) 0))
-  (= o22 (+ (to_rep1 (first temp___9261)) o21))))
+  (=> (not (= (length (mk___t temp___919 temp___9191)) 0))
+  (= o22 (+ (to_rep1 (first temp___9191)) o21))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___926 temp___9261)) 0)) (= o23 (- o22 1))))
+  (=> (not (= (length (mk___t temp___919 temp___9191)) 0)) (= o23 (- o22 1))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___926 temp___9261)) 0))
+  (=> (not (= (length (mk___t temp___919 temp___9191)) 0))
   (and (= o24 o23) (in_range2 o23))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___926 temp___9261)) 0))
-  (= (concat1 temp___926 (to_rep1 (first temp___9261))
-     (to_rep1 (last temp___9261))
+  (=> (not (= (length (mk___t temp___919 temp___9191)) 0))
+  (= (concat1 temp___919 (to_rep1 (first temp___9191))
+     (to_rep1 (last temp___9191))
      (elts (to_string (attr__ATTRIBUTE_IMAGE4 returnvalue)))
      (to_rep1 (first (rt (to_string (attr__ATTRIBUTE_IMAGE4 returnvalue)))))
      (to_rep1 (last (rt (to_string (attr__ATTRIBUTE_IMAGE4 returnvalue)))))) 
-  temp___929)))
+  temp___922)))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___926 temp___9261)) 0))
-  (= (mk (to_rep1 (first temp___9261)) o24) temp___9291)))
+  (=> (not (= (length (mk___t temp___919 temp___9191)) 0))
+  (= (mk (to_rep1 (first temp___9191)) o24) temp___9221)))
 
 ;; H
-  (assert (not (= (length (mk___t temp___929 temp___9291)) 0)))
+  (assert (not (= (length (mk___t temp___922 temp___9221)) 0)))
 
 ;; H
   (assert (=> (<= 1 2) (= o25 (+ (- 2 1) 1))))
@@ -1308,19 +1284,19 @@
 
 ;; H
   (assert
-  (=> (<= (to_rep1 (first temp___9291)) (to_rep1 (last temp___9291)))
-  (= o26 (+ (- (to_rep1 (last temp___9291)) (to_rep1 (first temp___9291))) 1))))
+  (=> (<= (to_rep1 (first temp___9221)) (to_rep1 (last temp___9221)))
+  (= o26 (+ (- (to_rep1 (last temp___9221)) (to_rep1 (first temp___9221))) 1))))
 
 ;; H
   (assert
-  (=> (not (<= (to_rep1 (first temp___9291)) (to_rep1 (last temp___9291))))
+  (=> (not (<= (to_rep1 (first temp___9221)) (to_rep1 (last temp___9221))))
   (= o26 0)))
 
 ;; H
   (assert (= o27 (+ o26 o25)))
 
 ;; H
-  (assert (= o28 (+ (to_rep1 (first temp___9291)) o27)))
+  (assert (= o28 (+ (to_rep1 (first temp___9221)) o27)))
 
 ;; H
   (assert (= o29 (- o28 1)))

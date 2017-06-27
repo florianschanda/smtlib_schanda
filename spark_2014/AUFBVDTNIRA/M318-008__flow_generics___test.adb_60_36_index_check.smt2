@@ -515,7 +515,7 @@
 
 (declare-fun o8 () Int)
 
-(declare-fun temp___407 () Int)
+(declare-fun temp___406 () Int)
 
 (declare-fun result () Int)
 
@@ -610,10 +610,10 @@
   (assert (= o8 (+ o7 (to_rep c__first))))
 
 ;; H
-  (assert (and (= temp___407 o8) (in_range1 o8)))
+  (assert (and (= temp___406 o8) (in_range1 o8)))
 
 (assert
 ;; WP_parameter_def
  ;; File "test.adb", line 31, characters 0-0
-  (not (<= (to_rep c__first) temp___407)))
+  (not (<= (to_rep c__first) temp___406)))
 (check-sat)

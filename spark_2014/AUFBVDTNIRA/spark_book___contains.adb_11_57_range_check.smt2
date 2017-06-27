@@ -977,25 +977,6 @@
 (define-fun tTsearch_stringSP1__ref___projection ((a tTsearch_stringSP1__ref)) tTsearch_stringSP1 
   (tTsearch_stringSP1__content a))
 
-(declare-sort t2b 0)
-
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 1)))
-
-(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq7 (t2b t2b) Bool)
-
-(declare-fun dummy7 () t2b)
-
-(declare-datatypes () ((t2b__ref (mk_t2b__ref (t2b__content t2b)))))
-(define-fun t2b__ref___projection ((a t2b__ref)) t2b (t2b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
@@ -1023,8 +1004,6 @@
 
 (declare-fun result_index () Int)
 
-(declare-fun o () (Array Int character))
-
 (declare-fun result () (Array Int character))
 
 (declare-fun search_string1 () (Array Int character))
@@ -1039,13 +1018,10 @@
   (assert (in_range2 ch))
 
 ;; H
-  (assert (= o (contains__search_string__aggregate_def ch)))
-
-;; H
   (assert (= result search_string))
 
 ;; H
-  (assert (= search_string1 o))
+  (assert (= search_string1 (contains__search_string__aggregate_def ch)))
 
 ;; H
   (assert (=> (<= 0 2147483647) (in_range3 result_index)))

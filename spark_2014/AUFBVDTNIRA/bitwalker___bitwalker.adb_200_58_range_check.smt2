@@ -689,10 +689,9 @@
   (assert
   (forall ((stream us_t))
   (forall ((pos Int))
-  (! (=> (nth8_stream__function_guard (nth8_stream stream pos) stream pos)
-     (= (= (nth8_stream stream pos) true)
+  (! (= (= (nth8_stream stream pos) true)
      (= (nth1 (to_rep1 (select (to_array stream) (div1 pos 8)))
-        (- 7 (mod1 pos 8))) true))) :pattern ((nth8_stream stream pos)) ))))
+        (- 7 (mod1 pos 8))) true)) :pattern ((nth8_stream stream pos)) ))))
 
 (declare-sort unit__ 0)
 
@@ -740,11 +739,6 @@
      (<= (* 8 (length addr)) 2147483647)))))
      (let ((result (peek start length1 addr)))
      (and
-     (forall ((i Int)) (nth8_stream__function_guard
-     (nth8_stream addr (- (- (+ start length1) i) 1)) addr
-     (- (- (+ start length1) i) 1)))
-     (=> (peek__function_guard result start length1 addr)
-     (and
      (ite (< (* 8 (length addr)) (+ start length1))
      (= result ((_ int2bv 64) 0))
      (=> (<= (+ start length1) (* 8 (length addr)))
@@ -755,8 +749,8 @@
      (= (nth result i) true))))
      (forall ((i Int))
      (=> (and (<= length1 i) (<= i 63)) (not (= (nth result i) true)))))))
-     (dynamic_invariant2 result true false true)))))) :pattern ((peek start
-                                                                length1 addr)) ))))
+     (dynamic_invariant2 result true false true)))) :pattern ((peek start
+                                                              length1 addr)) ))))
 
 (declare-fun maxvalue (Int) (_ BitVec 64))
 
@@ -778,10 +772,8 @@
      (forall ((i Int))
      (=> (and (<= len i) (<= i 63)) (not (= (nth x i) true))))))
      (let ((result (lemmafunction x len)))
-     (and (maxvalue__function_guard (maxvalue len) len)
-     (=> (lemmafunction__function_guard result x len)
      (and (and (= result 0) (bvult x (maxvalue len))) (dynamic_invariant4
-     result true false true)))))) :pattern ((lemmafunction x len)) ))))
+     result true false true)))) :pattern ((lemmafunction x len)) ))))
 
 (declare-fun start () Int)
 
@@ -821,17 +813,13 @@
 ;; maxvalue__post_axiom
   (assert
   (forall ((len1 Int))
-  (! (=> (dynamic_invariant1 len1 true true true)
-     (let ((result (maxvalue len1)))
-     (=> (maxvalue__function_guard result len1) (dynamic_invariant2 result
-     true false true)))) :pattern ((maxvalue len1)) )))
+  (! (=> (dynamic_invariant1 len1 true true true) (dynamic_invariant2
+     (maxvalue len1) true false true)) :pattern ((maxvalue len1)) )))
 
 ;; maxvalue__def_axiom
   (assert
   (forall ((len1 Int))
-  (! (=>
-     (and (dynamic_invariant1 len1 true true true) (maxvalue__function_guard
-     (maxvalue len1) len1))
+  (! (=> (dynamic_invariant1 len1 true true true)
      (= (maxvalue len1) (bvshl ((_ int2bv 64) 1) ((_ int2bv 64) len1)))) :pattern (
   (maxvalue len1)) )))
 
@@ -897,20 +885,9 @@
 
 ;; H
   (assert
-  (forall ((i1 Int)) (nth8_stream__function_guard
-  (nth8_stream (mk___t addr (mk (to_rep addr__first) (to_rep addr__last)))
-  (- (- (+ start len) i1) 1))
-  (mk___t addr (mk (to_rep addr__first) (to_rep addr__last)))
-  (- (- (+ start len) i1) 1))))
-
-;; H
-  (assert
-  (and
   (and
   (= o (peek start len
        (mk___t addr (mk (to_rep addr__first) (to_rep addr__last)))))
-  (peek__function_guard o start len
-  (mk___t addr (mk (to_rep addr__first) (to_rep addr__last)))))
   (ite (= (> (+ start len) (* 8 (length
                                 (mk___t addr
                                 (mk (to_rep addr__first) (to_rep addr__last)))))) true)
@@ -936,13 +913,8 @@
   (assert (= value1 o))
 
 ;; H
-  (assert (maxvalue__function_guard (maxvalue len) len))
-
-;; H
   (assert
-  (and
-  (and (= o1 (lemmafunction value1 len)) (lemmafunction__function_guard 
-  o1 value1 len))
+  (and (= o1 (lemmafunction value1 len))
   (and (in_range4 o1) (and (= o1 0) (bvult value1 (maxvalue len))))))
 
 ;; H
@@ -950,42 +922,6 @@
 
 ;; H
   (assert (= v1 o1))
-
-;; H
-  (assert (maxvalue__function_guard (maxvalue len) len))
-
-;; H
-  (assert (maxvalue__function_guard (maxvalue len) len))
-
-;; H
-  (assert
-  (forall ((i1 Int)) (nth8_stream__function_guard
-  (nth8_stream (mk___t addr (mk (to_rep addr__first) (to_rep addr__last)))
-  i1) (mk___t addr (mk (to_rep addr__first) (to_rep addr__last))) i1)))
-
-;; H
-  (assert
-  (forall ((i1 Int)) (nth8_stream__function_guard
-  (nth8_stream (mk___t addr1 (mk (to_rep addr__first) (to_rep addr__last)))
-  i1) (mk___t addr1 (mk (to_rep addr__first) (to_rep addr__last))) i1)))
-
-;; H
-  (assert
-  (forall ((i1 Int)) (nth8_stream__function_guard
-  (nth8_stream (mk___t addr1 (mk (to_rep addr__first) (to_rep addr__last)))
-  i1) (mk___t addr1 (mk (to_rep addr__first) (to_rep addr__last))) i1)))
-
-;; H
-  (assert
-  (forall ((i1 Int)) (nth8_stream__function_guard
-  (nth8_stream (mk___t addr1 (mk (to_rep addr__first) (to_rep addr__last)))
-  i1) (mk___t addr1 (mk (to_rep addr__first) (to_rep addr__last))) i1)))
-
-;; H
-  (assert
-  (forall ((i1 Int)) (nth8_stream__function_guard
-  (nth8_stream (mk___t addr (mk (to_rep addr__first) (to_rep addr__last)))
-  i1) (mk___t addr (mk (to_rep addr__first) (to_rep addr__last))) i1)))
 
 ;; H
   (assert

@@ -361,11 +361,10 @@
 ;; is_prime__def_axiom
   (assert
   (forall ((value Int))
-  (! (=> (is_prime__function_guard (is_prime value) value)
-     (= (= (is_prime value) true)
+  (! (= (= (is_prime value) true)
      (and (<= 2 value)
      (forall ((v Int))
-     (=> (and (<= 2 v) (<= v (- value 1))) (not (= (mod2 value v) 0))))))) :pattern (
+     (=> (and (<= 2 v) (<= v (- value 1))) (not (= (mod2 value v) 0)))))) :pattern (
   (is_prime value)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -381,17 +380,13 @@
   (assert
   (forall
   ((test_prime_and_coprime_numbers__p__set__is_prime (Array Int Bool)))
-  (! (=> (valid_prime_data__function_guard
-     (valid_prime_data test_prime_and_coprime_numbers__p__set__is_prime)
-     test_prime_and_coprime_numbers__p__set__is_prime)
-     (and (forall ((v Int)) (is_prime__function_guard (is_prime v) v))
-     (=
+  (! (=
      (= (valid_prime_data test_prime_and_coprime_numbers__p__set__is_prime) true)
      (forall ((v Int))
      (=> (and (<= 0 v) (<= v 100000))
      (= (= (select test_prime_and_coprime_numbers__p__set__is_prime v) true)
-     (= (is_prime v) true))))))) :pattern ((valid_prime_data
-                                           test_prime_and_coprime_numbers__p__set__is_prime)) )))
+     (= (is_prime v) true))))) :pattern ((valid_prime_data
+                                         test_prime_and_coprime_numbers__p__set__is_prime)) )))
 
 (declare-fun has_prime (Int Int) Bool)
 
@@ -403,11 +398,9 @@
 ;; has_prime__def_axiom
   (assert
   (forall ((low Int) (high Int))
-  (! (=> (has_prime__function_guard (has_prime low high) low high)
-     (and (forall ((v Int)) (is_prime__function_guard (is_prime v) v))
-     (= (= (has_prime low high) true)
+  (! (= (= (has_prime low high) true)
      (exists ((v Int))
-     (and (and (<= low v) (<= v high)) (= (is_prime v) true)))))) :pattern (
+     (and (and (<= low v) (<= v high)) (= (is_prime v) true)))) :pattern (
   (has_prime low high)) )))
 
 (declare-fun has_true ((Array Int Bool) Int Int) Bool)
@@ -441,11 +434,9 @@
   (assert
   (forall ((number_list (Array Int Bool)))
   (forall ((low Int) (high Int))
-  (! (=> (has_true__function_guard (has_true number_list low high)
-     number_list low high)
-     (= (= (has_true number_list low high) true)
+  (! (= (= (has_true number_list low high) true)
      (exists ((v Int))
-     (and (and (<= low v) (<= v high)) (= (select number_list v) true))))) :pattern (
+     (and (and (<= low v) (<= v high)) (= (select number_list v) true)))) :pattern (
   (has_true number_list low high)) ))))
 
 (declare-fun is_prime1 () (Array Int Bool))
@@ -457,36 +448,11 @@
   (assert (in_range3 mode))
 
 ;; H
-  (assert (valid_prime_data__function_guard (valid_prime_data is_prime1)
-  is_prime1))
-
-;; H
-  (assert (has_prime__function_guard (has_prime value 100000) value 100000))
-
-;; H
-  (assert (has_prime__function_guard (has_prime 0 value) 0 value))
-
-;; H
-  (assert (has_prime__function_guard (has_prime 0 100000) 0 100000))
-
-;; H
   (assert
   (and (and (<= 0 value) (<= value 100000))
   (and (= (valid_prime_data is_prime1) true)
   (ite (= mode 0) (= (has_prime value 100000) true)
   (ite (= mode 1) (= (has_prime 0 value) true) (= (has_prime 0 100000) true))))))
-
-;; H
-  (assert (is_prime__function_guard (is_prime value) value))
-
-;; H
-  (assert (is_prime__function_guard (is_prime value) value))
-
-;; H
-  (assert (is_prime__function_guard (is_prime value) value))
-
-;; H
-  (assert (is_prime__function_guard (is_prime value) value))
 
 (assert
 ;; WP_parameter_def

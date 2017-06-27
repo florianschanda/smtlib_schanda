@@ -243,13 +243,13 @@
 
 (declare-fun o3 () integer)
 
-(declare-fun temp___141 () integer)
+(declare-fun temp___140 () integer)
 
 (declare-fun o4 () integer)
 
 (declare-fun o5 () integer)
 
-(declare-fun temp___143 () integer)
+(declare-fun temp___142 () integer)
 
 (declare-fun result () integer)
 
@@ -282,13 +282,13 @@
   (assert (= o2 o3))
 
 ;; H
-  (assert (= temp___141 o3))
+  (assert (= temp___140 o3))
 
 ;; H
   (assert (= result a__split_fields))
 
 ;; H
-  (assert (= temp___141 a__split_fields1))
+  (assert (= temp___140 a__split_fields1))
 
 ;; H
   (assert (= (to_rep o4) (to_rep a__split_fields1)))
@@ -297,13 +297,13 @@
   (assert (= o4 o5))
 
 ;; H
-  (assert (= temp___143 o5))
+  (assert (= temp___142 o5))
 
 ;; H
   (assert (= result1 b__split_fields))
 
 ;; H
-  (assert (= temp___143 b__split_fields1))
+  (assert (= temp___142 b__split_fields1))
 
 ;; H
   (assert (= b__split_fields2 b__split_fields1))
@@ -316,13 +316,6 @@
 
 ;; H
   (assert (= a__split_fields3 a__split_fields1))
-
-;; H
-  (assert (equivalent__function_guard
-  (equivalent (mk___rep (mk___split_fields a__split_fields2))
-  (mk___rep (mk___split_fields b__split_fields2)))
-  (mk___rep (mk___split_fields a__split_fields2))
-  (mk___rep (mk___split_fields b__split_fields2))))
 
 (assert
 ;; WP_parameter_def

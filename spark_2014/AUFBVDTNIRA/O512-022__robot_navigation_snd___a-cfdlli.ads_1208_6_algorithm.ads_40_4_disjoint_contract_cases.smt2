@@ -252,11 +252,11 @@
 (define-fun cursor__ref___projection ((a cursor__ref)) us_rep1 (cursor__content
                                                                a))
 
-(define-fun default_initial_assumption ((temp___expr_429 us_rep1)
-  (temp___skip_top_level_430 Bool)) Bool (= (to_rep
+(define-fun default_initial_assumption ((temp___expr_413 us_rep1)
+  (temp___skip_top_level_414 Bool)) Bool (= (to_rep
                                             (rec__algorithm__gap_vectors__cursor__node
                                             (us_split_fields3
-                                            temp___expr_429))) 0))
+                                            temp___expr_413))) 0))
 
 (declare-fun no_element () us_rep1)
 
@@ -327,12 +327,12 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
-(define-fun dynamic_invariant ((temp___expr_340 Int)
-  (temp___is_init_337 Bool) (temp___skip_constant_338 Bool)
-  (temp___do_toplevel_339 Bool)) Bool (=>
-                                      (or (= temp___is_init_337 true)
+(define-fun dynamic_invariant ((temp___expr_324 Int)
+  (temp___is_init_321 Bool) (temp___skip_constant_322 Bool)
+  (temp___do_toplevel_323 Bool)) Bool (=>
+                                      (or (= temp___is_init_321 true)
                                       (<= 0 2147483647)) (in_range1
-                                      temp___expr_340)))
+                                      temp___expr_324)))
 
 ;; no_element__def_axiom
   (assert (= no_element (mk___rep1 (mk___split_fields1 (of_rep 0)))))
@@ -360,23 +360,23 @@
 
 (declare-fun is_empty__function_guard (Bool us_rep2) Bool)
 
-(define-fun default_initial_assumption1 ((temp___expr_484 us_rep2)
-  (temp___skip_top_level_485 Bool)) Bool (=>
+(define-fun default_initial_assumption1 ((temp___expr_468 us_rep2)
+  (temp___skip_top_level_469 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_485 true))
+                                         (= temp___skip_top_level_469 true))
                                          (and
-                                         (= (is_empty temp___expr_484) true)
-                                         (= (length1 temp___expr_484) 0))))
+                                         (= (is_empty temp___expr_468) true)
+                                         (= (length1 temp___expr_468) 0))))
 
 (declare-fun get (us_rep2 us_rep1) Int)
 
 (declare-fun get__function_guard (Int us_rep2 us_rep1) Bool)
 
-(define-fun default_initial_assumption2 ((temp___expr_472 us_rep1)
-  (temp___skip_top_level_473 Bool)) Bool (= (to_rep
+(define-fun default_initial_assumption2 ((temp___expr_456 us_rep1)
+  (temp___skip_top_level_457 Bool)) Bool (= (to_rep
                                             (rec__algorithm__gap_vectors__cursor__node
                                             (us_split_fields3
-                                            temp___expr_472))) 0))
+                                            temp___expr_456))) 0))
 
 ;; positions__post_axiom
   (assert
@@ -423,12 +423,12 @@
 (define-fun element_type__ref_3__projection ((a element_type__ref)) element_type 
   (element_type__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_477 Int)
-  (temp___is_init_474 Bool) (temp___skip_constant_475 Bool)
-  (temp___do_toplevel_476 Bool)) Bool (=>
-                                      (or (= temp___is_init_474 true)
+(define-fun dynamic_invariant1 ((temp___expr_461 Int)
+  (temp___is_init_458 Bool) (temp___skip_constant_459 Bool)
+  (temp___do_toplevel_460 Bool)) Bool (=>
+                                      (or (= temp___is_init_458 true)
                                       (<= 1 2147483647)) (in_range2
-                                      temp___expr_477)))
+                                      temp___expr_461)))
 
 (declare-fun witness (us_rep2 us_rep1) Int)
 
@@ -498,7 +498,7 @@
 
 (declare-fun o1 () count_type)
 
-(declare-fun temp___769 () count_type)
+(declare-fun temp___752 () count_type)
 
 ;; H
   (assert (= (to_rep o) 0))
@@ -507,10 +507,10 @@
   (assert (= o o1))
 
 ;; H
-  (assert (= temp___769 o1))
+  (assert (= temp___752 o1))
 
 ;; H
-  (assert (= (mk___rep1 (mk___split_fields1 temp___769)) no_element))
+  (assert (= (mk___rep1 (mk___split_fields1 temp___752)) no_element))
 
 ;; H
   (assert

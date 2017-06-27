@@ -55,9 +55,8 @@
   (assert
   (forall ((a Bool) (b Bool))
   (! (let ((result (exclusive_or a b)))
-     (=> (exclusive_or__function_guard result a b)
      (ite (= a true) (= (= result true) (not (= b true)))
-     (= (= result true) (= b true))))) :pattern ((exclusive_or a b)) )))
+     (= (= result true) (= b true)))) :pattern ((exclusive_or a b)) )))
 
 (declare-datatypes ()
 ((us_split_fields
@@ -153,14 +152,6 @@
                                             (us_split_fields1
                                             temp___expr_136)) (of_int 1))))
 
-;; temp___result_140_def
-  (assert
-  (forall ((temp___139 us_rep)) (exclusive_or__function_guard
-  (exclusive_or (rec__test_07__t__a (us_split_fields1 temp___139))
-  (rec__test_07__t__b (us_split_fields1 temp___139)))
-  (rec__test_07__t__a (us_split_fields1 temp___139))
-  (rec__test_07__t__b (us_split_fields1 temp___139)))))
-
 (define-fun type_invariant ((temp___138 us_rep)) Bool (= (exclusive_or
                                                          (rec__test_07__t__a
                                                          (us_split_fields1
@@ -169,16 +160,15 @@
                                                          (us_split_fields1
                                                          temp___138))) true))
 
-(declare-fun temp___141 () Bool)
+(declare-fun temp___140 () Bool)
 
-(declare-fun temp___1411 () Bool)
+(declare-fun temp___1401 () Bool)
 
 ;; H
-  (assert (and (= temp___141 (of_int 0)) (= temp___1411 (of_int 1))))
+  (assert (and (= temp___140 (of_int 0)) (= temp___1401 (of_int 1))))
 
 (assert
 ;; WP_parameter_def
  ;; File "util.ads", line 3, characters 0-0
-  (not (type_invariant
-  (mk___rep (mk___split_fields temp___141 temp___1411)))))
+  (not (= (exclusive_or temp___140 temp___1401) true)))
 (check-sat)

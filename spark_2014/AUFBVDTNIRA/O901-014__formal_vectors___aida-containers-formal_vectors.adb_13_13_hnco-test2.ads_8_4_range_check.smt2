@@ -544,11 +544,11 @@
   (forall ((a us_rep2) (b us_rep2))
   (! (= (user_eq4 a b) (oeq a b)) :pattern ((user_eq4 a b)) )))
 
-(define-fun default_initial_assumption ((temp___expr_757 us_rep2)
-  (temp___skip_top_level_758 Bool)) Bool (=>
+(define-fun default_initial_assumption ((temp___expr_402 us_rep2)
+  (temp___skip_top_level_403 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_758 true))
-                                         (= (length temp___expr_757) 0)))
+                                         (= temp___skip_top_level_403 true))
+                                         (= (length temp___expr_402) 0)))
 
 ;; model____post_axiom
   (assert
@@ -578,12 +578,12 @@
 (define-fun extended_index__ref_3__projection ((a extended_index__ref)) extended_index 
   (extended_index__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_750 Int)
-  (temp___is_init_747 Bool) (temp___skip_constant_748 Bool)
-  (temp___do_toplevel_749 Bool)) Bool (=>
-                                      (or (= temp___is_init_747 true)
+(define-fun dynamic_invariant4 ((temp___expr_395 Int)
+  (temp___is_init_392 Bool) (temp___skip_constant_393 Bool)
+  (temp___do_toplevel_394 Bool)) Bool (=>
+                                      (or (= temp___is_init_392 true)
                                       (<= 0 2147483647)) (in_range5
-                                      temp___expr_750)))
+                                      temp___expr_395)))
 
 ;; length__post_axiom
   (assert
@@ -615,12 +615,12 @@
 (define-fun element_type__ref_3__projection ((a element_type__ref)) element_type 
   (element_type__content a))
 
-(define-fun dynamic_invariant5 ((temp___expr_744 Int)
-  (temp___is_init_741 Bool) (temp___skip_constant_742 Bool)
-  (temp___do_toplevel_743 Bool)) Bool (=>
-                                      (or (= temp___is_init_741 true)
+(define-fun dynamic_invariant5 ((temp___expr_389 Int)
+  (temp___is_init_386 Bool) (temp___skip_constant_387 Bool)
+  (temp___do_toplevel_388 Bool)) Bool (=>
+                                      (or (= temp___is_init_386 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range6 temp___expr_744)))
+                                      (in_range6 temp___expr_389)))
 
 ;; get__post_axiom
   (assert

@@ -245,11 +245,9 @@
   (forall ((y Int) (array_arith__init3__one Int))
   (! (=>
      (and (dynamic_invariant1 y true true true) (dynamic_invariant
-     array_arith__init3__one true true true))
-     (let ((result (ident y array_arith__init3__one)))
-     (=> (ident__function_guard result y array_arith__init3__one)
-     (dynamic_invariant1 result true false true)))) :pattern ((ident y
-                                                              array_arith__init3__one)) )))
+     array_arith__init3__one true true true)) (dynamic_invariant1
+     (ident y array_arith__init3__one) true false true)) :pattern ((ident y
+                                                                   array_arith__init3__one)) )))
 
 (declare-fun x () (Array Int natural))
 
@@ -377,9 +375,7 @@
   (assert (in_range1 one1))
 
 ;; H
-  (assert
-  (and (and (= o (ident 1 one1)) (ident__function_guard o 1 one1)) (in_range2
-  o)))
+  (assert (and (= o (ident 1 one1)) (in_range2 o)))
 
 ;; H
   (assert (= (to_rep o1) o))
@@ -394,9 +390,7 @@
   (assert (= x1 o2))
 
 ;; H
-  (assert
-  (and (and (= o3 (ident 2 one1)) (ident__function_guard o3 2 one1))
-  (in_range2 o3)))
+  (assert (and (= o3 (ident 2 one1)) (in_range2 o3)))
 
 ;; H
   (assert (= (to_rep o4) o3))
@@ -411,9 +405,7 @@
   (assert (= x2 o5))
 
 ;; H
-  (assert
-  (and (and (= o6 (ident 3 one1)) (ident__function_guard o6 3 one1))
-  (in_range2 o6)))
+  (assert (and (= o6 (ident 3 one1)) (in_range2 o6)))
 
 ;; H
   (assert (= (to_rep o7) o6))
@@ -428,9 +420,7 @@
   (assert (= x3 o8))
 
 ;; H
-  (assert
-  (and (and (= o9 (ident 4 one1)) (ident__function_guard o9 4 one1))
-  (in_range2 o9)))
+  (assert (and (= o9 (ident 4 one1)) (in_range2 o9)))
 
 ;; H
   (assert (= (to_rep o10) o9))
@@ -445,9 +435,7 @@
   (assert (= x4 o11))
 
 ;; H
-  (assert
-  (and (and (= o12 (ident 5 one1)) (ident__function_guard o12 5 one1))
-  (in_range2 o12)))
+  (assert (and (= o12 (ident 5 one1)) (in_range2 o12)))
 
 ;; H
   (assert (= (to_rep o13) o12))
@@ -462,9 +450,7 @@
   (assert (= x5 o14))
 
 ;; H
-  (assert
-  (and (and (= o15 (ident 6 one1)) (ident__function_guard o15 6 one1))
-  (in_range2 o15)))
+  (assert (and (= o15 (ident 6 one1)) (in_range2 o15)))
 
 ;; H
   (assert (= (to_rep o16) o15))
@@ -479,9 +465,7 @@
   (assert (= x6 o17))
 
 ;; H
-  (assert
-  (and (and (= o18 (ident 7 one1)) (ident__function_guard o18 7 one1))
-  (in_range2 o18)))
+  (assert (and (= o18 (ident 7 one1)) (in_range2 o18)))
 
 ;; H
   (assert (= (to_rep o19) o18))
@@ -496,9 +480,7 @@
   (assert (= x7 o20))
 
 ;; H
-  (assert
-  (and (and (= o21 (ident 8 one1)) (ident__function_guard o21 8 one1))
-  (in_range2 o21)))
+  (assert (and (= o21 (ident 8 one1)) (in_range2 o21)))
 
 ;; H
   (assert (= (to_rep o22) o21))
@@ -513,9 +495,7 @@
   (assert (= x8 o23))
 
 ;; H
-  (assert
-  (and (and (= o24 (ident 9 one1)) (ident__function_guard o24 9 one1))
-  (in_range2 o24)))
+  (assert (and (= o24 (ident 9 one1)) (in_range2 o24)))
 
 ;; H
   (assert (= (to_rep o25) o24))
@@ -530,9 +510,7 @@
   (assert (= x9 o26))
 
 ;; H
-  (assert
-  (and (and (= o27 (ident 10 one1)) (ident__function_guard o27 10 one1))
-  (in_range2 o27)))
+  (assert (and (= o27 (ident 10 one1)) (in_range2 o27)))
 
 ;; H
   (assert (= (to_rep o28) o27))

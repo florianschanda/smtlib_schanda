@@ -208,10 +208,8 @@
 ;; f__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant1 x true true true)
-     (let ((result (f x)))
-     (=> (f__function_guard result x) (dynamic_invariant1 result true false
-     true)))) :pattern ((f x)) )))
+  (! (=> (dynamic_invariant1 x true true true) (dynamic_invariant1 (f x) true
+     false true)) :pattern ((f x)) )))
 
 (declare-fun x () Int)
 

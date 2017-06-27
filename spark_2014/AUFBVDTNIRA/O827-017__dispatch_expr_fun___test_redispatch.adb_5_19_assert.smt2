@@ -315,42 +315,30 @@
 
 ;; g__post_axiom
   (assert
-  (forall ((x us_rep))
-  (! (let ((result (g x)))
-     (=> (g__function_guard result x) (dynamic_invariant result true false
-     true))) :pattern ((g x)) )))
+  (forall ((x us_rep)) (! (dynamic_invariant (g x) true false
+  true) :pattern ((g x)) )))
 
 ;; g__post__dispatch_axiom
   (assert
   (forall ((attr__tag2 Int))
-  (forall ((x us_rep))
-  (! (let ((result (g1 attr__tag2 x)))
-     (=> (g__function_guard1 result attr__tag2 x) (dynamic_invariant result
-     true false true))) :pattern ((g1 attr__tag2 x)) ))))
+  (forall ((x us_rep)) (! (dynamic_invariant (g1 attr__tag2 x) true false
+  true) :pattern ((g1 attr__tag2 x)) ))))
 
 ;; tagged_types__root__compat_axiom
   (assert
-  (forall ((x us_rep))
-  (! (=> (g__function_guard1 (g1 us_tag x) us_tag x)
-     (and (g__function_guard (g x) x) (= (g x) (g1 us_tag x)))) :pattern (
-  (g1 us_tag x)) )))
+  (forall ((x us_rep)) (! (= (g x) (g1 us_tag x)) :pattern ((g1 us_tag x)) )))
 
 ;; tagged_types__child__compat_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (g__function_guard1 (g1 us_tag1 x) us_tag1 x)
-     (and (g__function_guard (g x) x) (= (g x) (g1 us_tag1 x)))) :pattern (
-  (g1 us_tag1 x)) )))
+  (! (= (g x) (g1 us_tag1 x)) :pattern ((g1 us_tag1 x)) )))
 
 ;; g__def_axiom
   (assert
-  (forall ((x us_rep))
-  (! (=> (g__function_guard (g x) x)
-     (and (f__function_guard1 (f1 (attr__tag x) x) (attr__tag x) x)
-     (= (g x) (f1 (attr__tag x) x)))) :pattern ((g x)) )))
+  (forall ((x us_rep)) (! (= (g x) (f1 (attr__tag x) x)) :pattern ((g x)) )))
 
-(define-fun default_initial_assumption1 ((temp___expr_153 us_rep1)
-  (temp___skip_top_level_154 Bool)) Bool (= (attr__tag1 temp___expr_153) 
+(define-fun default_initial_assumption1 ((temp___expr_147 us_rep1)
+  (temp___skip_top_level_148 Bool)) Bool (= (attr__tag1 temp___expr_147) 
   us_tag1))
 
 (declare-fun x__attr__tag () Int)
@@ -367,67 +355,50 @@
 
 ;; f__post_axiom
   (assert
-  (forall ((x us_rep))
-  (! (let ((result (f x)))
-     (=> (f__function_guard result x) (dynamic_invariant result true false
-     true))) :pattern ((f x)) )))
+  (forall ((x us_rep)) (! (dynamic_invariant (f x) true false
+  true) :pattern ((f x)) )))
 
 ;; f__post__dispatch_axiom
   (assert
   (forall ((attr__tag2 Int))
-  (forall ((x us_rep))
-  (! (let ((result (f1 attr__tag2 x)))
-     (=> (f__function_guard1 result attr__tag2 x) (dynamic_invariant result
-     true false true))) :pattern ((f1 attr__tag2 x)) ))))
+  (forall ((x us_rep)) (! (dynamic_invariant (f1 attr__tag2 x) true false
+  true) :pattern ((f1 attr__tag2 x)) ))))
 
 ;; tagged_types__root__compat_axiom
   (assert
-  (forall ((x us_rep))
-  (! (=> (f__function_guard1 (f1 us_tag x) us_tag x)
-     (and (f__function_guard (f x) x) (= (f x) (f1 us_tag x)))) :pattern (
-  (f1 us_tag x)) )))
+  (forall ((x us_rep)) (! (= (f x) (f1 us_tag x)) :pattern ((f1 us_tag x)) )))
 
 ;; tagged_types__child__compat_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (f__function_guard1 (f1 us_tag1 x) us_tag1 x)
-     (and (f__2__function_guard (f__2 (of_base x)) (of_base x))
-     (= (f__2 (of_base x)) (f1 us_tag1 x)))) :pattern ((f1 us_tag1 x)) )))
+  (! (= (f__2 (of_base x)) (f1 us_tag1 x)) :pattern ((f1 us_tag1 x)) )))
 
 ;; f__def_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (f__function_guard (f x) x)
-     (= (f x) (to_rep (rec__tagged_types__root__i (us_split_fields1 x))))) :pattern (
+  (! (= (f x) (to_rep (rec__tagged_types__root__i (us_split_fields1 x)))) :pattern (
   (f x)) )))
 
 ;; f__2__post_axiom
   (assert
-  (forall ((x us_rep1))
-  (! (let ((result (f__2 x)))
-     (=> (f__2__function_guard result x) (dynamic_invariant result true false
-     true))) :pattern ((f__2 x)) )))
+  (forall ((x us_rep1)) (! (dynamic_invariant (f__2 x) true false
+  true) :pattern ((f__2 x)) )))
 
 ;; f__2__post__dispatch_axiom
   (assert
   (forall ((attr__tag2 Int))
-  (forall ((x us_rep1))
-  (! (let ((result (f__21 attr__tag2 x)))
-     (=> (f__2__function_guard1 result attr__tag2 x) (dynamic_invariant
-     result true false true))) :pattern ((f__21 attr__tag2 x)) ))))
+  (forall ((x us_rep1)) (! (dynamic_invariant (f__21 attr__tag2 x) true false
+  true) :pattern ((f__21 attr__tag2 x)) ))))
 
 ;; tagged_types__child__compat_axiom
   (assert
   (forall ((x us_rep1))
-  (! (=> (f__2__function_guard1 (f__21 us_tag1 x) us_tag1 x)
-     (and (f__2__function_guard (f__2 x) x) (= (f__2 x) (f__21 us_tag1 x)))) :pattern (
-  (f__21 us_tag1 x)) )))
+  (! (= (f__2 x) (f__21 us_tag1 x)) :pattern ((f__21 us_tag1 x)) )))
 
 ;; f__2__def_axiom
   (assert
   (forall ((x us_rep1))
-  (! (=> (f__2__function_guard (f__2 x) x)
-     (= (f__2 x) (to_rep (rec__tagged_types__child__j (us_split_fields3 x))))) :pattern (
+  (! (= (f__2 x) (to_rep (rec__tagged_types__child__j (us_split_fields3 x)))) :pattern (
   (f__2 x)) )))
 
 (declare-fun x__split_fields () integer)
@@ -513,16 +484,6 @@
 
 ;; H
   (assert (= x__attr__tag us_tag1))
-
-;; H
-  (assert (g__function_guard
-  (g
-  (mk___rep
-  (mk___split_fields x__split_fields4
-  (hide_ext__ x__split_fields3 x__split_fields5)) x__attr__tag))
-  (mk___rep
-  (mk___split_fields x__split_fields4
-  (hide_ext__ x__split_fields3 x__split_fields5)) x__attr__tag)))
 
 (assert
 ;; WP_parameter_def

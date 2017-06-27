@@ -375,14 +375,11 @@
   (assert
   (forall ((a us_t))
   (forall ((lastindex Int) (val__ Int))
-  (! (=> (has_value_inc__function_guard (has_value_inc a lastindex val__) a
-     lastindex val__)
-     (= (= (has_value_inc a lastindex val__) true)
+  (! (= (= (has_value_inc a lastindex val__) true)
      (exists ((i Int))
      (and (and (<= (first1 a) i) (<= i lastindex))
-     (= (to_rep (select (to_array a) i)) val__))))) :pattern ((has_value_inc
-                                                              a lastindex
-                                                              val__)) ))))
+     (= (to_rep (select (to_array a) i)) val__)))) :pattern ((has_value_inc a
+                                                             lastindex val__)) ))))
 
 (declare-fun has_value_exc (us_t Int Int) Bool)
 
@@ -395,12 +392,10 @@
   (assert
   (forall ((a us_t))
   (forall ((lastindex Int) (val__ Int))
-  (! (=> (has_value_exc__function_guard (has_value_exc a lastindex val__) a
-     lastindex val__)
-     (= (= (has_value_exc a lastindex val__) true)
+  (! (= (= (has_value_exc a lastindex val__) true)
      (exists ((i Int))
      (and (and (<= (first1 a) i) (<= i lastindex))
-     (and (< i lastindex) (= (to_rep (select (to_array a) i)) val__)))))) :pattern (
+     (and (< i lastindex) (= (to_rep (select (to_array a) i)) val__))))) :pattern (
   (has_value_exc a lastindex val__)) ))))
 
 (declare-fun a () us_t)
@@ -414,10 +409,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
-
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -446,11 +437,11 @@
 
 (declare-fun i () Int)
 
-(declare-fun temp___204 () Bool)
+(declare-fun temp___201 () Bool)
 
-(declare-fun temp___203 () Int)
+(declare-fun temp___200 () Int)
 
-(declare-fun temp___202 () Int)
+(declare-fun temp___199 () Int)
 
 (declare-fun o () Bool)
 
@@ -594,17 +585,17 @@
 ;; H
   (assert
   (=> (and (<= (to_rep1 (first (rt a))) i1) (<= i1 (to_rep1 (last (rt a)))))
-  (= temp___204 found1)))
+  (= temp___201 found1)))
 
 ;; H
   (assert
   (=> (and (<= (to_rep1 (first (rt a))) i1) (<= i1 (to_rep1 (last (rt a)))))
-  (= temp___203 i1)))
+  (= temp___200 i1)))
 
 ;; H
   (assert
   (=> (and (<= (to_rep1 (first (rt a))) i1) (<= i1 (to_rep1 (last (rt a)))))
-  (= temp___202 location1)))
+  (= temp___199 location1)))
 
 ;; H
   (assert
@@ -776,9 +767,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o1 (has_value_exc a (int__content location13) val__))
-  (has_value_exc__function_guard o1 a (int__content location13) val__))
   (= (= o1 true)
   (exists ((i15 Int))
   (and
@@ -791,9 +780,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o (has_value_inc a (to_rep1 (last (rt a))) val__))
-  (has_value_inc__function_guard o a (to_rep1 (last (rt a))) val__))
   (= (= o true)
   (exists ((i15 Int))
   (and

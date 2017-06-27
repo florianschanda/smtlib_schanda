@@ -225,25 +225,6 @@
      (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
-(declare-sort t4s 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
-
-(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
-
-(declare-fun user_eq2 (t4s t4s) Bool)
-
-(declare-fun dummy2 () t4s)
-
-(declare-datatypes () ((t4s__ref (mk_t4s__ref (t4s__content t4s)))))
-(define-fun t4s__ref___projection ((a t4s__ref)) t4s (t4s__content a))
-
 (declare-fun cpu_lsid_last () (Array Int max_lsid_type))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -260,7 +241,28 @@
 
 (declare-sort natural 0)
 
-(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
+(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
+
+(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
+
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
+
+(declare-fun user_eq2 (natural natural) Bool)
+
+(declare-fun dummy2 () natural)
+
+(declare-datatypes ()
+((natural__ref (mk_natural__ref (natural__content natural)))))
+(define-fun natural__ref___projection ((a natural__ref)) natural (natural__content
+                                                                 a))
+
+(declare-sort tmax_lsid_typeB 0)
+
+(define-fun in_range3 ((x Int)) Bool (and (<= (- 128) x) (<= x 127)))
 
 (define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -270,30 +272,9 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
 
-(declare-fun user_eq3 (natural natural) Bool)
+(declare-fun user_eq3 (tmax_lsid_typeB tmax_lsid_typeB) Bool)
 
-(declare-fun dummy3 () natural)
-
-(declare-datatypes ()
-((natural__ref (mk_natural__ref (natural__content natural)))))
-(define-fun natural__ref___projection ((a natural__ref)) natural (natural__content
-                                                                 a))
-
-(declare-sort tmax_lsid_typeB 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= (- 128) x) (<= x 127)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq4 (tmax_lsid_typeB tmax_lsid_typeB) Bool)
-
-(declare-fun dummy4 () tmax_lsid_typeB)
+(declare-fun dummy3 () tmax_lsid_typeB)
 
 (declare-datatypes ()
 ((tmax_lsid_typeB__ref
@@ -312,13 +293,13 @@
 
 ;; range_axiom
   (assert
-  (forall ((x tmax_lsid_typeB)) (! (in_range4
+  (forall ((x tmax_lsid_typeB)) (! (in_range3
   (to_rep1 x)) :pattern ((to_rep1 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range4 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
+  (! (=> (in_range3 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
                                                               (of_rep1 x))) )))
 
 (declare-fun to_rep2 (natural) Int)
@@ -332,12 +313,12 @@
 
 ;; range_axiom
   (assert
-  (forall ((x natural)) (! (in_range3 (to_rep2 x)) :pattern ((to_rep2 x)) )))
+  (forall ((x natural)) (! (in_range2 (to_rep2 x)) :pattern ((to_rep2 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range3 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
+  (! (=> (in_range2 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
                                                               (of_rep2 x))) )))
 
 (declare-datatypes ()
@@ -382,7 +363,7 @@
   (forall ((i Int))
   (! (= (select (singleton2 v i) i) v) :pattern ((select (singleton2 v i) i)) ))))
 
-(define-fun bool_eq6 ((a (Array Int natural)) (a__first Int) (a__last Int)
+(define-fun bool_eq5 ((a (Array Int natural)) (a__first Int) (a__last Int)
   (b (Array Int natural)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -401,7 +382,7 @@
   (assert
   (forall ((a (Array Int natural)) (b (Array Int natural)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq6 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq5 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -419,7 +400,7 @@
   (forall ((a (Array Int natural)) (b (Array Int natural)))
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (! (= (= (compare1 a a_first a_last b b_first b_last) 0)
-     (= (bool_eq6 a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq5 a a_first a_last b b_first b_last) true)) :pattern (
   (compare1 a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -430,7 +411,7 @@
      (exists ((i Int) (j Int))
      (and (<= i a_last)
      (and (< j b_last)
-     (and (= (bool_eq6 a a_first i b b_first j) true)
+     (and (= (bool_eq5 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
      (< (to_rep2 (select a (+ i 1))) (to_rep2 (select b (+ j 1))))))))))) :pattern (
@@ -444,28 +425,26 @@
      (exists ((i Int) (j Int))
      (and (<= i b_last)
      (and (< j a_last)
-     (and (= (bool_eq6 a a_first j b b_first i) true)
+     (and (= (bool_eq5 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
      (< (to_rep2 (select b (+ i 1))) (to_rep2 (select a (+ j 1))))))))))) :pattern (
   (compare1 a a_first a_last b b_first b_last)) ))))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
 
-(declare-fun user_eq5 (tmax_lsid_typeB tmax_lsid_typeB) Bool)
+(declare-fun user_eq4 (tmax_lsid_typeB tmax_lsid_typeB) Bool)
 
-(declare-fun dummy5 () tmax_lsid_typeB)
+(declare-fun dummy4 () tmax_lsid_typeB)
 
 (declare-datatypes ()
 ((t8s__ref (mk_t8s__ref (t8s__content tmax_lsid_typeB)))))
@@ -476,21 +455,21 @@
 
 (declare-fun first (t) tmax_lsid_typeB)
 
-(declare-fun last1 (t) tmax_lsid_typeB)
+(declare-fun last (t) tmax_lsid_typeB)
 
 (declare-fun mk (Int Int) t)
 
 ;; mk_def
   (assert
   (forall ((f Int) (l Int))
-  (! (=> (in_range4 f)
-     (=> (in_range4 l)
-     (and (= (to_rep1 (first (mk f l))) f) (= (to_rep1 (last1 (mk f l))) l)))) :pattern (
+  (! (=> (in_range3 f)
+     (=> (in_range3 l)
+     (and (= (to_rep1 (first (mk f l))) f) (= (to_rep1 (last (mk f l))) l)))) :pattern (
   (mk f l)) )))
 
 (define-fun dynamic_property1 ((range_first Int) (range_last Int) (low Int)
-  (high Int)) Bool (and (in_range4 low)
-                   (and (in_range4 high)
+  (high Int)) Bool (and (in_range3 low)
+                   (and (in_range3 high)
                    (=> (<= low high)
                    (and (dynamic_property range_first range_last low)
                    (dynamic_property range_first range_last high))))))
@@ -503,10 +482,10 @@
 
 (define-fun first1 ((a us_t)) Int (to_rep1 (first (rt a))))
 
-(define-fun last2 ((a us_t)) Int (to_rep1 (last1 (rt a))))
+(define-fun last1 ((a us_t)) Int (to_rep1 (last (rt a))))
 
-(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last2 a))
-                                  (+ (- (last2 a) (first1 a)) 1) 0))
+(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last1 a))
+                                  (+ (- (last1 a) (first1 a)) 1) 0))
 
 (declare-fun value__size () Int)
 
@@ -539,14 +518,14 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int natural))) (<= 0 (object__alignment a))))
 
-(define-fun bool_eq8 ((x us_t)
-  (y us_t)) Bool (bool_eq6 (elts x) (to_rep1 (first (rt x)))
-                 (to_rep1 (last1 (rt x))) (elts y) (to_rep1 (first (rt y)))
-                 (to_rep1 (last1 (rt y)))))
+(define-fun bool_eq7 ((x us_t)
+  (y us_t)) Bool (bool_eq5 (elts x) (to_rep1 (first (rt x)))
+                 (to_rep1 (last (rt x))) (elts y) (to_rep1 (first (rt y)))
+                 (to_rep1 (last (rt y)))))
 
-(declare-fun user_eq6 (us_t us_t) Bool)
+(declare-fun user_eq5 (us_t us_t) Bool)
 
-(declare-fun dummy6 () us_t)
+(declare-fun dummy5 () us_t)
 
 (declare-datatypes () ((t9s__ref (mk_t9s__ref (t9s__content us_t)))))
 (define-fun t9s__ref___projection ((a t9s__ref)) us_t (t9s__content a))
@@ -584,21 +563,21 @@
 (define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
                                                               a))
 
-(define-fun bool_eq9 ((a us_rep)
+(define-fun bool_eq8 ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (= (to_rep
                            (rec__foo__subject_state__max_id
                            (us_split_discrs1 a))) (to_rep
                                                   (rec__foo__subject_state__max_id
                                                   (us_split_discrs1 b))))
-                        (= (bool_eq8
+                        (= (bool_eq7
                            (rec__foo__subject_state__states
                            (us_split_fields1 a))
                            (rec__foo__subject_state__states
                            (us_split_fields1 b))) true))
                    true false))
 
-(declare-fun user_eq7 (us_rep us_rep) Bool)
+(declare-fun user_eq6 (us_rep us_rep) Bool)
 
 (declare-fun value__size1 () Int)
 
@@ -652,29 +631,27 @@
 ;; foo__subject_state__states__position_axiom
   (assert (<= 0 foo__subject_state__states__position))
 
-(declare-fun dummy7 () us_rep)
+(declare-fun dummy6 () us_rep)
 
 (declare-datatypes ()
 ((subject_state__ref (mk_subject_state__ref (subject_state__content us_rep)))))
 (define-fun subject_state__ref___projection ((a subject_state__ref)) us_rep 
   (subject_state__content a))
 
-(declare-fun last3 () Int)
-
 (define-fun dynamic_property2 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
-(define-fun bool_eq10 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq9 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
 
-(declare-fun user_eq8 (tmax_lsid_typeB tmax_lsid_typeB) Bool)
+(declare-fun user_eq7 (tmax_lsid_typeB tmax_lsid_typeB) Bool)
 
-(declare-fun dummy8 () tmax_lsid_typeB)
+(declare-fun dummy7 () tmax_lsid_typeB)
 
 (declare-datatypes ()
 ((tT10sP1__ref (mk_tT10sP1__ref (tT10sP1__content tmax_lsid_typeB)))))
@@ -685,21 +662,21 @@
 
 (declare-fun first2 (t1) tmax_lsid_typeB)
 
-(declare-fun last4 (t1) tmax_lsid_typeB)
+(declare-fun last2 (t1) tmax_lsid_typeB)
 
 (declare-fun mk1 (Int Int) t1)
 
 ;; mk_def
   (assert
   (forall ((f Int) (l Int))
-  (! (=> (in_range4 f)
-     (=> (in_range4 l)
+  (! (=> (in_range3 f)
+     (=> (in_range3 l)
      (and (= (to_rep1 (first2 (mk1 f l))) f)
-     (= (to_rep1 (last4 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (= (to_rep1 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property3 ((range_first Int) (range_last Int) (low Int)
-  (high Int)) Bool (and (in_range4 low)
-                   (and (in_range4 high)
+  (high Int)) Bool (and (in_range3 low)
+                   (and (in_range3 high)
                    (=> (<= low high)
                    (and (dynamic_property2 range_first range_last low)
                    (dynamic_property2 range_first range_last high))))))
@@ -713,10 +690,10 @@
 
 (define-fun first3 ((a us_t1)) Int (to_rep1 (first2 (rt1 a))))
 
-(define-fun last5 ((a us_t1)) Int (to_rep1 (last4 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last5 a))
-                                    (+ (- (last5 a) (first3 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size2 () Int)
 
@@ -749,14 +726,14 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int natural))) (<= 0 (object__alignment2 a))))
 
-(define-fun bool_eq11 ((x us_t1)
-  (y us_t1)) Bool (bool_eq6 (elts1 x) (to_rep1 (first2 (rt1 x)))
-                  (to_rep1 (last4 (rt1 x))) (elts1 y)
-                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last4 (rt1 y)))))
+(define-fun bool_eq10 ((x us_t1)
+  (y us_t1)) Bool (bool_eq5 (elts1 x) (to_rep1 (first2 (rt1 x)))
+                  (to_rep1 (last2 (rt1 x))) (elts1 y)
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
-(declare-fun user_eq9 (us_t1 us_t1) Bool)
+(declare-fun user_eq8 (us_t1 us_t1) Bool)
 
-(declare-fun dummy9 () us_t1)
+(declare-fun dummy8 () us_t1)
 
 (declare-datatypes () ((t10s__ref (mk_t10s__ref (t10s__content us_t1)))))
 (define-fun t10s__ref___projection ((a t10s__ref)) us_t1 (t10s__content a))
@@ -790,7 +767,7 @@
                                                            a))))
                                          (of_array (to_array1 temp___139)
                                          (first3 temp___139)
-                                         (last5 temp___139))))))
+                                         (last3 temp___139))))))
 
 (define-fun of_base ((r us_rep)) us_rep1 (mk___rep1 (us_split_discrs1 r)
                                          (mk___split_fields1
@@ -799,25 +776,25 @@
                                                            r))))
                                          (of_array1 (to_array temp___138)
                                          (first1 temp___138)
-                                         (last2 temp___138))))))
+                                         (last1 temp___138))))))
 
-(define-fun bool_eq12 ((a us_rep1)
+(define-fun bool_eq11 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
                          (= (to_rep
                             (rec__foo__subject_state__max_id
                             (us_split_discrs2 a))) (to_rep
                                                    (rec__foo__subject_state__max_id
                                                    (us_split_discrs2 b))))
-                         (= (bool_eq11
+                         (= (bool_eq10
                             (rec__foo__subject_state__states1
                             (us_split_fields3 a))
                             (rec__foo__subject_state__states1
                             (us_split_fields3 b))) true))
                     true false))
 
-(declare-fun user_eq10 (us_rep1 us_rep1) Bool)
+(declare-fun user_eq9 (us_rep1 us_rep1) Bool)
 
-(define-fun in_range5 ((rec__foo__subject_state__max_id1 Int)
+(define-fun in_range4 ((rec__foo__subject_state__max_id1 Int)
   (a us_rep)) Bool (= rec__foo__subject_state__max_id1 (to_rep
                                                        (rec__foo__subject_state__max_id
                                                        (us_split_discrs1 a)))))
@@ -874,7 +851,7 @@
 ;; foo__subject_state__states__position_axiom
   (assert (<= 0 foo__subject_state__states__position1))
 
-(declare-fun dummy10 () us_rep1)
+(declare-fun dummy9 () us_rep1)
 
 (declare-datatypes ()
 ((tstatesS__ref (mk_tstatesS__ref (tstatesS__content us_rep1)))))
@@ -886,7 +863,7 @@
   (temp___do_toplevel_183 Bool)) Bool (and
                                       (=>
                                       (not (= temp___skip_constant_182 true))
-                                      (in_range5
+                                      (in_range4
                                       (to_rep (select cpu_lsid_last cpu_id))
                                       (to_base temp___expr_184)))
                                       (and (dynamic_property3 0
@@ -894,14 +871,14 @@
                                       (first3
                                       (rec__foo__subject_state__states1
                                       (us_split_fields3 temp___expr_184)))
-                                      (last5
+                                      (last3
                                       (rec__foo__subject_state__states1
                                       (us_split_fields3 temp___expr_184))))
                                       (and
                                       (= (first3
                                          (rec__foo__subject_state__states1
                                          (us_split_fields3 temp___expr_184))) 0)
-                                      (= (last5
+                                      (= (last3
                                          (rec__foo__subject_state__states1
                                          (us_split_fields3 temp___expr_184))) 
                                       (to_rep (select cpu_lsid_last cpu_id)))))))
@@ -923,7 +900,7 @@
   (temp___skip_constant_31 Bool)
   (temp___do_toplevel_32 Bool)) Bool (=>
                                      (or (= temp___is_init_30 true)
-                                     (<= 0 2147483647)) (in_range3
+                                     (<= 0 2147483647)) (in_range2
                                      temp___expr_33)))
 
 ;; cpu_lsid_last__def_axiom
@@ -939,34 +916,28 @@
                                       (first1
                                       (rec__foo__subject_state__states
                                       (us_split_fields1 temp___expr_178)))
-                                      (last2
+                                      (last1
                                       (rec__foo__subject_state__states
                                       (us_split_fields1 temp___expr_178))))
                                       (and
                                       (= (first1
                                          (rec__foo__subject_state__states
                                          (us_split_fields1 temp___expr_178))) 0)
-                                      (= (last2
+                                      (= (last1
                                          (rec__foo__subject_state__states
                                          (us_split_fields1 temp___expr_178))) 
                                       (to_rep temp___179))))))
 
-(declare-fun foo__cpu_lsid_last__assume () (Array Int max_lsid_type))
-
-(declare-fun temp___max_id_214 () Int)
+(declare-fun temp___max_id_212 () Int)
 
 ;; H
   (assert (=> (<= 0 1) (in_range cpu_id)))
 
 ;; H
-  (assert
-  (= foo__cpu_lsid_last__assume (foo__cpu_lsid_last__aggregate_def 3 4)))
+  (assert (= (foo__cpu_lsid_last__aggregate_def 3 4) cpu_lsid_last))
 
 ;; H
-  (assert (= foo__cpu_lsid_last__assume cpu_lsid_last))
-
-;; H
-  (assert (in_range1 temp___max_id_214))
+  (assert (in_range1 temp___max_id_212))
 
 (assert
 ;; WP_parameter_def

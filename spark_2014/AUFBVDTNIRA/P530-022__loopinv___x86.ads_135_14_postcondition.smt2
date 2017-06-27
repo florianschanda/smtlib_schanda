@@ -305,24 +305,18 @@
      (and
      (and (dynamic_invariant regold true true true) (dynamic_invariant regnew
      true true true)) (dynamic_invariant1 val__1 true true true))
-     (let ((result (writereg16post regold regnew val__1)))
-     (and (readreg16__function_guard (readreg16 regnew) regnew)
-     (=> (writereg16post__function_guard result regold regnew val__1)
-     (= (= result true)
+     (= (= (writereg16post regold regnew val__1) true)
      (and (= (readreg16 regnew) val__1)
-     (= (bvand regnew ((_ int2bv 64) 18446744073709486080)) (bvand regold ((_ int2bv 64) 18446744073709486080))))))))) :pattern (
+     (= (bvand regnew ((_ int2bv 64) 18446744073709486080)) (bvand regold ((_ int2bv 64) 18446744073709486080)))))) :pattern (
   (writereg16post regold regnew val__1)) ))))
 
 ;; writereg16post__def_axiom
   (assert
   (forall ((regold (_ BitVec 64)) (regnew (_ BitVec 64)))
   (forall ((val__1 (_ BitVec 16)))
-  (! (=> (writereg16post__function_guard
-     (writereg16post regold regnew val__1) regold regnew val__1)
-     (and (readreg16__function_guard (readreg16 regnew) regnew)
-     (= (= (writereg16post regold regnew val__1) true)
+  (! (= (= (writereg16post regold regnew val__1) true)
      (and (= (readreg16 regnew) val__1)
-     (= (bvand regnew ((_ int2bv 64) 18446744073709486080)) (bvand regold ((_ int2bv 64) 18446744073709486080))))))) :pattern (
+     (= (bvand regnew ((_ int2bv 64) 18446744073709486080)) (bvand regold ((_ int2bv 64) 18446744073709486080))))) :pattern (
   (writereg16post regold regnew val__1)) ))))
 
 ;; readreg16__post_axiom
@@ -330,10 +324,8 @@
   (forall ((reg (_ BitVec 64)))
   (! (=> (dynamic_invariant reg true true true)
      (let ((result (readreg16 reg)))
-     (=> (readreg16__function_guard result reg)
      (and (= result ((_ extract 15 0) (bvand reg ((_ int2bv 64) 65535))))
-     (dynamic_invariant1 result true false true))))) :pattern ((readreg16
-                                                               reg)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((readreg16 reg)) )))
 
 (declare-fun reg () (_ BitVec 64))
 
@@ -358,10 +350,6 @@
 
 ;; H
   (assert (= reg3 reg1))
-
-;; H
-  (assert (writereg16post__function_guard (writereg16post reg reg2 val__) 
-  reg reg2 val__))
 
 (assert
 ;; WP_parameter_def

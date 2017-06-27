@@ -93,10 +93,21 @@
 
 (declare-fun o () poT)
 
+(declare-fun us_self__compl () poT)
+
 (declare-fun po () poT)
+
+(declare-fun us_self__compl1 () poT)
+
+(declare-fun result () poT)
+
+(declare-fun po1 () poT)
 
 (assert
 ;; WP_parameter_def
  ;; File "two_tasks_single_po.ads", line 3, characters 0-0
-  (not (not (= o po))))
+  (not
+  (not
+  (and (and (= o po) (= o us_self__compl))
+  (and (= result po) (= po1 us_self__compl1))))))
 (check-sat)

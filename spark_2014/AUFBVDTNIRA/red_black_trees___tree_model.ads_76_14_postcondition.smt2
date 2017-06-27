@@ -196,8 +196,7 @@
 ;; is_concat__def_axiom
   (assert
   (forall ((q us_rep) (v us_rep) (p us_rep))
-  (! (=> (is_concat__function_guard (is_concat q v p) q v p)
-     (= (= (is_concat q v p) true)
+  (! (= (= (is_concat q v p) true)
      (and
      (and
      (and (= (- (length p) (length v)) (length q))
@@ -208,7 +207,7 @@
      (= (get p (+ i (length q))) (get v i)))))
      (forall ((i Int))
      (=> (and (<= (+ (length q) 1) i) (<= i (length p)))
-     (= (get v (- i (length q))) (get p i))))))) :pattern ((is_concat q v p)) )))
+     (= (get v (- i (length q))) (get p i)))))) :pattern ((is_concat q v p)) )))
 
 (declare-fun is_add (us_rep Int us_rep) Bool)
 
@@ -238,10 +237,9 @@
   (assert
   (forall ((s1 us_rep) (s2 us_rep))
   (forall ((d Int))
-  (! (=> (is_add__function_guard (is_add s1 d s2) s1 d s2)
-     (= (= (is_add s1 d s2) true)
+  (! (= (= (is_add s1 d s2) true)
      (and (and (= (- (length s2) 1) (length s1)) (= (olt s1 s2) true))
-     (= (get s2 (length s2)) d)))) :pattern ((is_add s1 d s2)) ))))
+     (= (get s2 (length s2)) d))) :pattern ((is_add s1 d s2)) ))))
 
 (declare-fun s1 () us_rep)
 
@@ -335,15 +333,6 @@
   (get container position)) ))))
 
 ;; H
-  (assert (is_concat__function_guard (is_concat t s1 s2) t s1 s2))
-
-;; H
-  (assert (is_add__function_guard (is_add s1 d s3) s1 d s3))
-
-;; H
-  (assert (is_add__function_guard (is_add s2 d s4) s2 d s4))
-
-;; H
   (assert (in_range d))
 
 ;; H
@@ -351,9 +340,6 @@
   (and (<= (length t) 100)
   (and (= (is_concat t s1 s2) true)
   (and (= (is_add s1 d s3) true) (= (is_add s2 d s4) true)))))
-
-;; H
-  (assert (is_concat__function_guard (is_concat t s3 s4) t s3 s4))
 
 (assert
 ;; WP_parameter_def

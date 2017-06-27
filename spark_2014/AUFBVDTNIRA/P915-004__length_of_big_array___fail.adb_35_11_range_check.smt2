@@ -762,14 +762,14 @@
 (declare-datatypes () ((a__ref (mk_a__ref (a__content us_t1)))))
 (define-fun a__ref___projection ((a a__ref)) us_t1 (a__content a))
 
-(define-fun dynamic_invariant ((temp___expr_293 us_t1)
-  (temp___is_init_290 Bool) (temp___skip_constant_291 Bool)
-  (temp___do_toplevel_292 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_291 true))
+(define-fun dynamic_invariant ((temp___expr_292 us_t1)
+  (temp___is_init_289 Bool) (temp___skip_constant_290 Bool)
+  (temp___do_toplevel_291 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_290 true))
                                       (dynamic_property1 ((_ int2bv 64) 0)
                                       ((_ int2bv 64) 18446744073709551615)
-                                      (first3 temp___expr_293)
-                                      (last3 temp___expr_293))))
+                                      (first3 temp___expr_292)
+                                      (last3 temp___expr_292))))
 
 (declare-fun create ((_ BitVec 64)) us_t1)
 
@@ -779,6 +779,20 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
+(declare-fun temp___String_Literal_647 (tuple0) (Array Int character))
+
+;; temp___String_Literal_647__def_axiom
+  (assert
+  (forall ((us_void_param tuple0))
+  (! (and
+     (and
+     (and
+     (= (to_rep (select (temp___String_Literal_647 us_void_param) 1)) 122)
+     (= (to_rep (select (temp___String_Literal_647 us_void_param) 2)) 101))
+     (= (to_rep (select (temp___String_Literal_647 us_void_param) 3)) 114))
+     (= (to_rep (select (temp___String_Literal_647 us_void_param) 4)) 111)) :pattern (
+  (temp___String_Literal_647 us_void_param)) )))
+
 (declare-fun temp___String_Literal_648 (tuple0) (Array Int character))
 
 ;; temp___String_Literal_648__def_axiom
@@ -786,24 +800,10 @@
   (forall ((us_void_param tuple0))
   (! (and
      (and
-     (and
-     (= (to_rep (select (temp___String_Literal_648 us_void_param) 1)) 122)
-     (= (to_rep (select (temp___String_Literal_648 us_void_param) 2)) 101))
-     (= (to_rep (select (temp___String_Literal_648 us_void_param) 3)) 114))
-     (= (to_rep (select (temp___String_Literal_648 us_void_param) 4)) 111)) :pattern (
+     (= (to_rep (select (temp___String_Literal_648 us_void_param) 1)) 109)
+     (= (to_rep (select (temp___String_Literal_648 us_void_param) 2)) 97))
+     (= (to_rep (select (temp___String_Literal_648 us_void_param) 3)) 120)) :pattern (
   (temp___String_Literal_648 us_void_param)) )))
-
-(declare-fun temp___String_Literal_649 (tuple0) (Array Int character))
-
-;; temp___String_Literal_649__def_axiom
-  (assert
-  (forall ((us_void_param tuple0))
-  (! (and
-     (and
-     (= (to_rep (select (temp___String_Literal_649 us_void_param) 1)) 109)
-     (= (to_rep (select (temp___String_Literal_649 us_void_param) 2)) 97))
-     (= (to_rep (select (temp___String_Literal_649 us_void_param) 3)) 120)) :pattern (
-  (temp___String_Literal_649 us_void_param)) )))
 
 (define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -840,25 +840,21 @@
                                      (<= (- 9223372036854775808) 9223372036854775807))
                                      (in_range4 temp___expr_27)))
 
-(define-fun dynamic_invariant6 ((temp___expr_287 (_ BitVec 64))
-  (temp___is_init_284 Bool) (temp___skip_constant_285 Bool)
-  (temp___do_toplevel_286 Bool)) Bool true)
+(define-fun dynamic_invariant6 ((temp___expr_286 (_ BitVec 64))
+  (temp___is_init_283 Bool) (temp___skip_constant_284 Bool)
+  (temp___do_toplevel_285 Bool)) Bool true)
 
 ;; create__post_axiom
   (assert
   (forall ((last4 (_ BitVec 64)))
   (! (=> (dynamic_invariant6 last4 true true true)
      (let ((result (create last4)))
-     (=> (create__function_guard result last4)
      (and
      (and (= (last3 result) last4) (= (first3 result) ((_ int2bv 64) 0)))
-     (dynamic_invariant result true false true))))) :pattern ((create last4)) )))
+     (dynamic_invariant result true false true)))) :pattern ((create last4)) )))
 
 ;; c__def_axiom
-  (assert
-  (and (create__function_guard (create ((_ int2bv 64) 18446744073709551615))
-  ((_ int2bv 64) 18446744073709551615))
-  (= c (create ((_ int2bv 64) 18446744073709551615)))))
+  (assert (= c (create ((_ int2bv 64) 18446744073709551615))))
 
 ;; H
   (assert (dynamic_invariant c true false true))

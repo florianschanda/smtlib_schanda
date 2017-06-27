@@ -978,26 +978,21 @@
 
 ;; get_f2__post_axiom
   (assert
-  (forall ((g us_rep6))
-  (! (let ((result (get_f2 g)))
-     (=> (get_f2__function_guard result g) (dynamic_invariant result true
-     false true))) :pattern ((get_f2 g)) )))
+  (forall ((g us_rep6)) (! (dynamic_invariant (get_f2 g) true false
+  true) :pattern ((get_f2 g)) )))
 
 ;; get_f2__post__dispatch_axiom
   (assert
   (forall ((attr__tag7 Int))
-  (forall ((g us_rep6))
-  (! (let ((result (get_f21 attr__tag7 g)))
-     (=> (get_f2__function_guard1 result attr__tag7 g) (dynamic_invariant
-     result true false true))) :pattern ((get_f21 attr__tag7 g)) ))))
+  (forall ((g us_rep6)) (! (dynamic_invariant (get_f21 attr__tag7 g) true
+  false true) :pattern ((get_f21 attr__tag7 g)) ))))
 
 ;; get_f2__def_axiom
   (assert
   (forall ((g us_rep6))
-  (! (=> (get_f2__function_guard (get_f2 g) g)
-     (= (get_f2 g) (to_rep
+  (! (= (get_f2 g) (to_rep
                    (rec__public_derives_private__private_grand_child_private_tagged__f2
-                   (us_split_fields13 g))))) :pattern ((get_f2 g)) )))
+                   (us_split_fields13 g)))) :pattern ((get_f2 g)) )))
 
 (declare-fun c () Int)
 

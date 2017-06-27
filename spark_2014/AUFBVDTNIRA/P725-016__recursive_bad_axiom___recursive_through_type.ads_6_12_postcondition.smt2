@@ -106,11 +106,6 @@
 
 (declare-fun bad_f__function_guard (Bool Int) Bool)
 
-;; temp___result_137_def
-  (assert
-  (forall ((temp___136 Int)) (bad_f__function_guard (bad_f temp___136)
-  temp___136)))
-
 (define-fun dynamic_invariant1 ((temp___expr_135 Int)
   (temp___is_init_132 Bool) (temp___skip_constant_133 Bool)
   (temp___do_toplevel_134 Bool)) Bool (and
@@ -122,21 +117,12 @@
                                       (=> (= temp___is_init_132 true)
                                       (= (bad_f temp___expr_135) true)))))
 
-;; temp___result_142_def
-  (assert
-  (forall ((temp___141 Int)) (bad_f__function_guard (bad_f temp___141)
-  temp___141)))
-
-(define-fun dynamic_predicate ((temp___140 Int)) Bool (= (bad_f temp___140) true))
+(define-fun dynamic_predicate ((temp___139 Int)) Bool (= (bad_f temp___139) true))
 
 ;; bad_f__def_axiom
   (assert
   (forall ((x1 Int))
-  (! (=> (bad_f__function_guard (bad_f x1) x1)
-     (and
-     (forall ((temp___145 Int)) (bad_f__function_guard (bad_f temp___145)
-     temp___145))
-     (= (= (bad_f x1) true) (and (in_range2 x1) (= (bad_f x1) true))))) :pattern (
+  (! (= (= (bad_f x1) true) (and (in_range2 x1) (= (bad_f x1) true))) :pattern (
   (bad_f x1)) )))
 
 (declare-fun recursive_through_type__bad_f__result () Bool)
@@ -158,11 +144,6 @@
 (declare-fun recursive_through_type__bad_f__result5 () Bool)
 
 (declare-fun result1 () Bool)
-
-;; H
-  (assert
-  (forall ((temp___147 Int)) (bad_f__function_guard (bad_f temp___147)
-  temp___147)))
 
 (assert
 ;; WP_parameter_def

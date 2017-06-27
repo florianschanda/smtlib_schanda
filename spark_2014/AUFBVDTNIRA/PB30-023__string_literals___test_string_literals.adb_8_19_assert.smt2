@@ -374,17 +374,14 @@
 ;; id__post_axiom
   (assert
   (forall ((x us_t))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (id x)))
-     (=> (id__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (id x) true
+     false true)) :pattern ((id x)) )))
 
 ;; id__def_axiom
   (assert
   (forall ((x us_t))
-  (! (=>
-     (and (dynamic_invariant x true true true) (id__function_guard (id x) x))
-     (= (id x) x)) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (id x) x)) :pattern (
+  (id x)) )))
 
 (declare-fun temp___String_Literal_181 (tuple0) (Array Int character))
 
@@ -438,8 +435,6 @@
 
 (declare-fun t1 () (Array Int character))
 
-(declare-fun o () (Array Int character))
-
 (declare-fun result () (Array Int character))
 
 (declare-fun s1 () (Array Int character))
@@ -465,27 +460,15 @@
   (to_rep1 s__last)))
 
 ;; H
-  (assert (= o (temp___String_Literal_183 Tuple0)))
-
-;; H
   (assert (= result1 t1))
 
 ;; H
-  (assert (= t2 o))
-
-;; H
-  (assert (id__function_guard
-  (id (mk___t s1 (mk (to_rep1 s__first) (to_rep1 s__last))))
-  (mk___t s1 (mk (to_rep1 s__first) (to_rep1 s__last)))))
+  (assert (= t2 (temp___String_Literal_183 Tuple0)))
 
 ;; H
   (assert
   (= (to_rep1
      (first (rt (id (mk___t s1 (mk (to_rep1 s__first) (to_rep1 s__last))))))) 1))
-
-;; H
-  (assert (id__function_guard (id (mk___t t2 (mk 5 8)))
-  (mk___t t2 (mk 5 8))))
 
 (assert
 ;; WP_parameter_def

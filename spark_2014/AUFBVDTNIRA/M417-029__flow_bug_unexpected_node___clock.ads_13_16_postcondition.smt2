@@ -284,11 +284,8 @@
 ;; get_current_time__def_axiom
   (assert
   (forall ((clock__current_time__fields us_split_fields))
-  (! (=> (get_current_time__function_guard
-     (get_current_time clock__current_time__fields)
-     clock__current_time__fields)
-     (= (get_current_time clock__current_time__fields) (mk___rep
-                                                       clock__current_time__fields))) :pattern (
+  (! (= (get_current_time clock__current_time__fields) (mk___rep
+                                                       clock__current_time__fields)) :pattern (
   (get_current_time clock__current_time__fields)) )))
 
 (define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool)
@@ -332,11 +329,11 @@
 
 (declare-fun o5 () seconds_t)
 
-(declare-fun temp___160 () natural)
+(declare-fun temp___155 () natural)
 
-(declare-fun temp___1601 () minutes_t)
+(declare-fun temp___1551 () minutes_t)
 
-(declare-fun temp___1602 () seconds_t)
+(declare-fun temp___1552 () seconds_t)
 
 (declare-fun result () natural)
 
@@ -381,17 +378,17 @@
   (assert (= o o5))
 
 ;; H
-  (assert (= temp___160 o3))
+  (assert (= temp___155 o3))
 
 ;; H
-  (assert (= temp___1601 o4))
+  (assert (= temp___1551 o4))
 
 ;; H
-  (assert (= temp___1602 o5))
+  (assert (= temp___1552 o5))
 
 ;; H
   (assert
-  (= (mk___rep (mk___split_fields temp___160 temp___1601 temp___1602)) 
+  (= (mk___rep (mk___split_fields temp___155 temp___1551 temp___1552)) 
   zero))
 
 ;; H
@@ -426,14 +423,6 @@
 
 ;; H
   (assert (= current_time__split_fields11 current_time__split_fields5))
-
-;; H
-  (assert (get_current_time__function_guard
-  (get_current_time
-  (mk___split_fields current_time__split_fields6 current_time__split_fields7
-  current_time__split_fields8))
-  (mk___split_fields current_time__split_fields6 current_time__split_fields7
-  current_time__split_fields8)))
 
 (assert
 ;; WP_parameter_def

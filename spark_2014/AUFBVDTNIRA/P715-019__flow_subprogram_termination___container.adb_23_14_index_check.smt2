@@ -431,11 +431,10 @@
   (assert
   (forall ((c us_rep))
   (forall ((p us_rep1))
-  (! (=> (has_element__function_guard (has_element c p) c p)
-     (= (= (has_element c p) true)
+  (! (= (= (has_element c p) true)
      (and
      (<= 1 (to_rep (rec__container__cursor__index (us_split_fields3 p))))
-     (<= (to_rep (rec__container__cursor__index (us_split_fields3 p))) 200)))) :pattern (
+     (<= (to_rep (rec__container__cursor__index (us_split_fields3 p))) 200))) :pattern (
   (has_element c p)) ))))
 
 (declare-fun c () us_rep)
@@ -466,9 +465,6 @@
                                       (or (= temp___is_init_512 true)
                                       (<= 1 200)) (in_range2
                                       temp___expr_515)))
-
-;; H
-  (assert (has_element__function_guard (has_element c p) c p))
 
 ;; H
   (assert (= (has_element c p) true))

@@ -359,14 +359,12 @@
 ;; all_available__def_axiom
   (assert
   (forall ((list_allocator__data (Array Int us_rep)))
-  (! (=> (all_available__function_guard (all_available list_allocator__data)
-     list_allocator__data)
-     (= (= (all_available list_allocator__data) true)
+  (! (= (= (all_available list_allocator__data) true)
      (forall ((r Int))
      (=> (and (<= 1 r) (<= r 10000))
      (= (to_rep1
         (rec__list_allocator__cell__stat
-        (us_split_fields1 (select list_allocator__data r)))) 0))))) :pattern (
+        (us_split_fields1 (select list_allocator__data r)))) 0)))) :pattern (
   (all_available list_allocator__data)) )))
 
 (declare-sort us_main_type 0)
@@ -558,19 +556,18 @@
 ;; user_eq__def_axiom
   (assert
   (forall ((a us_rep3) (b us_rep3))
-  (! (and (oeq__function_guard (oeq a b) a b) (= (user_eq7 a b) (oeq a b))) :pattern (
-  (user_eq7 a b)) )))
+  (! (= (user_eq7 a b) (oeq a b)) :pattern ((user_eq7 a b)) )))
 
-(define-fun default_initial_assumption ((temp___expr_212 us_rep3)
-  (temp___skip_top_level_213 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_211 us_rep3)
+  (temp___skip_top_level_212 Bool)) Bool (and
                                          (= (length
                                             (rec__list_allocator__m__t__available
                                             (us_split_fields3
-                                            temp___expr_212))) 0)
+                                            temp___expr_211))) 0)
                                          (= (is_empty
                                             (rec__list_allocator__m__t__allocated
                                             (us_split_fields3
-                                            temp___expr_212))) true)))
+                                            temp___expr_211))) true)))
 
 (declare-fun contains (us_rep1 Int) Bool)
 
@@ -619,25 +616,7 @@
   (forall ((list_allocator__data (Array Int us_rep)))
   (forall ((list_allocator__first_available Int))
   (forall ((list_allocator__m__model__fields us_split_fields2))
-  (! (=> (is_valid__function_guard
-     (is_valid list_allocator__data list_allocator__first_available
-     list_allocator__m__model__fields) list_allocator__data
-     list_allocator__first_available list_allocator__m__model__fields)
-     (and
-     (forall ((r Int)) (contains__function_guard
-     (contains
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) r)
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) r))
-     (and
-     (forall ((r Int)) (contains__function_guard
-     (contains
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) r)
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) r))
-     (=
+  (! (=
      (= (is_valid list_allocator__data list_allocator__first_available
         list_allocator__m__model__fields) true)
      (and
@@ -732,28 +711,9 @@
         (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) r) true))
      (= (contains1
         (rec__list_allocator__m__t__allocated
-        (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) r) true)))))))))) :pattern (
+        (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) r) true))))))) :pattern (
   (is_valid list_allocator__data list_allocator__first_available
   list_allocator__m__model__fields)) )))))
-
-(declare-sort t3b 0)
-
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 10000)))
-
-(define-fun bool_eq10 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq9 (t3b t3b) Bool)
-
-(declare-fun dummy9 () t3b)
-
-(declare-datatypes () ((t3b__ref (mk_t3b__ref (t3b__content t3b)))))
-(define-fun t3b__ref___projection ((a t3b__ref)) t3b (t3b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
@@ -761,15 +721,15 @@
 
 ;; def_axiom
   (assert
-  (forall ((temp___275 us_rep))
-  (forall ((temp___276 Int))
-  (= (select (list_allocator__data__aggregate_def temp___275) temp___276) temp___275))))
+  (forall ((temp___257 us_rep))
+  (forall ((temp___258 Int))
+  (= (select (list_allocator__data__aggregate_def temp___257) temp___258) temp___257))))
 
-(define-fun dynamic_invariant1 ((temp___expr_243 Int)
-  (temp___is_init_240 Bool) (temp___skip_constant_241 Bool)
-  (temp___do_toplevel_242 Bool)) Bool (=>
-                                      (or (= temp___is_init_240 true)
-                                      (<= 0 1)) (in_range4 temp___expr_243)))
+(define-fun dynamic_invariant1 ((temp___expr_228 Int)
+  (temp___is_init_225 Bool) (temp___skip_constant_226 Bool)
+  (temp___do_toplevel_227 Bool)) Bool (=>
+                                      (or (= temp___is_init_225 true)
+                                      (<= 0 1)) (in_range4 temp___expr_228)))
 
 (define-fun dynamic_invariant2 ((temp___expr_154 Int)
   (temp___is_init_151 Bool) (temp___skip_constant_152 Bool)
@@ -821,10 +781,9 @@
   (assert
   (forall ((s us_rep1))
   (forall ((e Int))
-  (! (=> (contains__function_guard (contains s e) s e)
-     (= (= (contains s e) true)
+  (! (= (= (contains s e) true)
      (exists ((i Int))
-     (and (and (<= 1 i) (<= i (length s))) (= (get s i) e))))) :pattern (
+     (and (and (<= 1 i) (<= i (length s))) (= (get s i) e)))) :pattern (
   (contains s e)) ))))
 
 (declare-fun oeq2 (us_rep2 us_rep2) Bool)
@@ -837,16 +796,43 @@
 ;; oeq__def_axiom
   (assert
   (forall ((x us_rep3) (y us_rep3))
-  (! (=> (oeq__function_guard (oeq x y) x y)
-     (= (= (oeq x y) true)
+  (! (= (= (oeq x y) true)
      (and
      (= (oeq1 (rec__list_allocator__m__t__available (us_split_fields3 x))
         (rec__list_allocator__m__t__available (us_split_fields3 y))) true)
      (= (oeq2 (rec__list_allocator__m__t__allocated (us_split_fields3 x))
-        (rec__list_allocator__m__t__allocated (us_split_fields3 y))) true)))) :pattern (
+        (rec__list_allocator__m__t__allocated (us_split_fields3 y))) true))) :pattern (
   (oeq x y)) )))
 
 (declare-sort count_type 0)
+
+(define-fun in_range6 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
+
+(define-fun bool_eq10 ((x Int) (y Int)) Bool (ite (= x y) true false))
+
+(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
+
+(declare-fun user_eq9 (count_type count_type) Bool)
+
+(declare-fun dummy9 () count_type)
+
+(declare-datatypes ()
+((count_type__ref (mk_count_type__ref (count_type__content count_type)))))
+(define-fun count_type__ref___projection ((a count_type__ref)) count_type 
+  (count_type__content a))
+
+(define-fun dynamic_invariant3 ((temp___expr_142 Int)
+  (temp___is_init_139 Bool) (temp___skip_constant_140 Bool)
+  (temp___do_toplevel_141 Bool)) Bool (=>
+                                      (or (= temp___is_init_139 true)
+                                      (<= 0 2147483647)) (in_range6
+                                      temp___expr_142)))
+
+(declare-sort extended_index 0)
 
 (define-fun in_range7 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
@@ -858,37 +844,9 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
 
-(declare-fun user_eq10 (count_type count_type) Bool)
+(declare-fun user_eq10 (extended_index extended_index) Bool)
 
-(declare-fun dummy10 () count_type)
-
-(declare-datatypes ()
-((count_type__ref (mk_count_type__ref (count_type__content count_type)))))
-(define-fun count_type__ref___projection ((a count_type__ref)) count_type 
-  (count_type__content a))
-
-(define-fun dynamic_invariant3 ((temp___expr_142 Int)
-  (temp___is_init_139 Bool) (temp___skip_constant_140 Bool)
-  (temp___do_toplevel_141 Bool)) Bool (=>
-                                      (or (= temp___is_init_139 true)
-                                      (<= 0 2147483647)) (in_range7
-                                      temp___expr_142)))
-
-(declare-sort extended_index 0)
-
-(define-fun in_range8 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
-(define-fun bool_eq12 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
-
-(declare-fun user_eq11 (extended_index extended_index) Bool)
-
-(declare-fun dummy11 () extended_index)
+(declare-fun dummy10 () extended_index)
 
 (declare-datatypes ()
 ((extended_index__ref
@@ -900,7 +858,7 @@
   (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
   (temp___do_toplevel_177 Bool)) Bool (=>
                                       (or (= temp___is_init_175 true)
-                                      (<= 0 2147483647)) (in_range8
+                                      (<= 0 2147483647)) (in_range7
                                       temp___expr_178)))
 
 ;; length__post_axiom
@@ -912,19 +870,19 @@
 
 (declare-sort element_type1 0)
 
-(define-fun in_range9 ((x Int)) Bool (and (<= 0 x) (<= x 10000)))
+(define-fun in_range8 ((x Int)) Bool (and (<= 0 x) (<= x 10000)))
 
-(define-fun bool_eq13 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq12 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE9 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
 
-(declare-fun user_eq12 (element_type1 element_type1) Bool)
+(declare-fun user_eq11 (element_type1 element_type1) Bool)
 
-(declare-fun dummy12 () element_type1)
+(declare-fun dummy11 () element_type1)
 
 (declare-datatypes ()
 ((element_type__ref1
@@ -936,7 +894,7 @@
   (temp___is_init_169 Bool) (temp___skip_constant_170 Bool)
   (temp___do_toplevel_171 Bool)) Bool (=>
                                       (or (= temp___is_init_169 true)
-                                      (<= 0 10000)) (in_range9
+                                      (<= 0 10000)) (in_range8
                                       temp___expr_172)))
 
 ;; get__post_axiom
@@ -1112,11 +1070,6 @@
 
 ;; H
   (assert
-  (forall ((rr1 Int)) (contains__function_guard
-  (contains model____split_fields rr1) model____split_fields rr1)))
-
-;; H
-  (assert
   (and
   (and
   (and
@@ -1204,14 +1157,14 @@
   (assert
   (and
   (and
-  (forall ((temp___269 Int))
-  (=> (and (<= 1 temp___269) (<= temp___269 10000))
-  (ite (< r2 temp___269)
-  (= (select data3 temp___269) (select data1 temp___269))
+  (forall ((temp___252 Int))
+  (=> (and (<= 1 temp___252) (<= temp___252 10000))
+  (ite (< r2 temp___252)
+  (= (select data3 temp___252) (select data1 temp___252))
   (= (rec__list_allocator__cell__stat
-     (us_split_fields1 (select data3 temp___269))) (rec__list_allocator__cell__stat
+     (us_split_fields1 (select data3 temp___252))) (rec__list_allocator__cell__stat
                                                    (us_split_fields1
-                                                   (select data1 temp___269)))))))
+                                                   (select data1 temp___252)))))))
   (=> (<= 1 10000) (in_range3 r2))) (and (<= 1 r2) (<= r2 10000))))
 
 ;; H

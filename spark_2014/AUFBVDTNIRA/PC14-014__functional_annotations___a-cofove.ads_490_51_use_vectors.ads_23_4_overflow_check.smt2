@@ -185,12 +185,12 @@
 (define-fun vector__ref___projection ((a vector__ref)) us_rep (vector__content
                                                               a))
 
-(define-fun dynamic_invariant ((temp___expr_233 us_rep)
-  (temp___is_init_230 Bool) (temp___skip_constant_231 Bool)
-  (temp___do_toplevel_232 Bool)) Bool (dynamic_property 0 last
+(define-fun dynamic_invariant ((temp___expr_231 us_rep)
+  (temp___is_init_228 Bool) (temp___skip_constant_229 Bool)
+  (temp___do_toplevel_230 Bool)) Bool (dynamic_property 0 last
   (to_rep
   (rec__use_vectors__my_vectors__vector__capacity
-  (us_split_discrs1 temp___expr_233)))))
+  (us_split_discrs1 temp___expr_231)))))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -216,12 +216,12 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_227 Int)
-  (temp___is_init_224 Bool) (temp___skip_constant_225 Bool)
-  (temp___do_toplevel_226 Bool)) Bool (=>
-                                      (or (= temp___is_init_224 true)
+(define-fun dynamic_invariant1 ((temp___expr_225 Int)
+  (temp___is_init_222 Bool) (temp___skip_constant_223 Bool)
+  (temp___do_toplevel_224 Bool)) Bool (=>
+                                      (or (= temp___is_init_222 true)
                                       (<= 0 last)) (dynamic_property 0 
-                                      last temp___expr_227)))
+                                      last temp___expr_225)))
 
 ;; last__def_axiom
   (assert (= last last_count))
@@ -287,27 +287,22 @@
      (and (dynamic_invariant2 x true true true) (dynamic_invariant2 f true
      true true)) (dynamic_invariant2 l true true true))
      (let ((result (id x f l)))
-     (=> (id__function_guard result x f l)
      (and (=> (and (<= f x) (<= x l)) (and (<= f result) (<= result l)))
-     (dynamic_invariant2 result true false true))))) :pattern ((id x f l)) )))
+     (dynamic_invariant2 result true false true)))) :pattern ((id x f l)) )))
 
 (declare-fun fst () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
 ;; fst__def_axiom
-  (assert
-  (and (id__function_guard (id 1 (- 2147483647) 2147483647) 1 (- 2147483647)
-  2147483647) (= fst (id 1 (- 2147483647) 2147483647))))
+  (assert (= fst (id 1 (- 2147483647) 2147483647)))
 
 (declare-fun lst () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
 ;; lst__def_axiom
-  (assert
-  (and (id__function_guard (id 2147483647 fst 2147483647) 2147483647 
-  fst 2147483647) (= lst (id 2147483647 fst 2147483647))))
+  (assert (= lst (id 2147483647 fst 2147483647)))
 
 (declare-fun to_rep1 (integer) Int)
 
@@ -358,12 +353,12 @@
                 (ite (or (< last1 (- 1)) (< (- last1 2147483647) first))
                 (+ (- last1 first) 1) 2147483647))))
 
-(define-fun dynamic_invariant3 ((temp___expr_209 Int)
-  (temp___is_init_206 Bool) (temp___skip_constant_207 Bool)
-  (temp___do_toplevel_208 Bool)) Bool (=>
-                                      (or (= temp___is_init_206 true)
+(define-fun dynamic_invariant3 ((temp___expr_207 Int)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)) Bool (=>
+                                      (or (= temp___is_init_204 true)
                                       (<= first last1)) (dynamic_property1
-                                      first last1 temp___expr_209)))
+                                      first last1 temp___expr_207)))
 
 ;; first__def_axiom
   (assert (= first fst))

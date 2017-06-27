@@ -165,16 +165,13 @@
 (declare-fun is_valid__function_guard (Bool us_rep) Bool)
 
 ;; f__post_axiom
-  (assert
-  (forall ((x us_rep)) (! (is_valid__function_guard (is_valid x)
-  x) :pattern ((f x)) )))
+  (assert true)
 
 ;; f__def_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (f__function_guard (f x) x)
-     (= (= (f x) true)
-     (< 0 (to_rep (rec__generic_instance__root__f (us_split_fields1 x)))))) :pattern (
+  (! (= (= (f x) true)
+     (< 0 (to_rep (rec__generic_instance__root__f (us_split_fields1 x))))) :pattern (
   (f x)) )))
 
 (declare-fun x__attr__tag () Int)
@@ -194,9 +191,8 @@
 ;; is_valid__def_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (is_valid__function_guard (is_valid x) x)
-     (= (= (is_valid x) true)
-     (< (to_rep (rec__generic_instance__root__f (us_split_fields1 x))) 2147483647))) :pattern (
+  (! (= (= (is_valid x) true)
+     (< (to_rep (rec__generic_instance__root__f (us_split_fields1 x))) 2147483647)) :pattern (
   (is_valid x)) )))
 
 (declare-fun x__split_fields () natural)
@@ -208,16 +204,7 @@
                                                 x__split_fields1))
 
 ;; H
-  (assert (f__function_guard (f (mk___rep x__split_fields2 x__attr__tag))
-  (mk___rep x__split_fields2 x__attr__tag)))
-
-;; H
   (assert (= (f (mk___rep x__split_fields2 x__attr__tag)) true))
-
-;; H
-  (assert (is_valid__function_guard
-  (is_valid (mk___rep x__split_fields2 x__attr__tag))
-  (mk___rep x__split_fields2 x__attr__tag)))
 
 (assert
 ;; WP_parameter_def

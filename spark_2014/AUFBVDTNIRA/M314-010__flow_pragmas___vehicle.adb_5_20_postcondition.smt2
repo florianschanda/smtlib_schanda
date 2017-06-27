@@ -116,21 +116,18 @@
 ;; speed_is_valid__def_axiom
   (assert
   (forall ((vehicle__speed Int) (vehicle__state Int))
-  (! (=> (speed_is_valid__function_guard
-     (speed_is_valid vehicle__speed vehicle__state) vehicle__speed
-     vehicle__state)
-     (= (= (speed_is_valid vehicle__speed vehicle__state) true)
+  (! (= (= (speed_is_valid vehicle__speed vehicle__state) true)
      (ite (= vehicle__state 0) (= vehicle__speed 0)
-     (ite (= vehicle__state 1) (< 0 vehicle__speed) (< vehicle__speed 0))))) :pattern (
+     (ite (= vehicle__state 1) (< 0 vehicle__speed) (< vehicle__speed 0)))) :pattern (
   (speed_is_valid vehicle__speed vehicle__state)) )))
 
 (declare-fun speed () Int)
 
 (declare-fun state () Int)
 
-(declare-fun temp___163 () Int)
+(declare-fun temp___157 () Int)
 
-(declare-fun temp___162 () Int)
+(declare-fun temp___156 () Int)
 
 (declare-fun speed1 () Int)
 
@@ -177,26 +174,6 @@
 (define-fun speed11 () int__ref (mk_int__ref speed7))
 
 ;; H
-  (assert (speed_is_valid__function_guard (speed_is_valid speed state) 
-  speed state))
-
-;; H
-  (assert (speed_is_valid__function_guard (speed_is_valid speed2 state2)
-  speed2 state2))
-
-;; H
-  (assert (speed_is_valid__function_guard (speed_is_valid speed2 state2)
-  speed2 state2))
-
-;; H
-  (assert (speed_is_valid__function_guard (speed_is_valid speed3 state3)
-  speed3 state3))
-
-;; H
-  (assert (speed_is_valid__function_guard (speed_is_valid speed4 state4)
-  speed4 state4))
-
-;; H
   (assert (in_range2 speed))
 
 ;; H
@@ -206,10 +183,10 @@
   (assert (= (speed_is_valid speed state) true))
 
 ;; H
-  (assert (=> (not (= state 0)) (= temp___163 speed)))
+  (assert (=> (not (= state 0)) (= temp___157 speed)))
 
 ;; H
-  (assert (=> (not (= state 0)) (= temp___162 state)))
+  (assert (=> (not (= state 0)) (= temp___156 state)))
 
 ;; H
   (assert (=> (not (= state 0)) (= (speed_is_valid speed2 state2) true)))

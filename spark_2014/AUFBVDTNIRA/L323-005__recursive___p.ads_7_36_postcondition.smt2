@@ -54,16 +54,8 @@
 ;; bad__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (bad__function_guard (bad us_void_param) us_void_param)
-     (and (bad__function_guard (bad Tuple0) Tuple0)
-     (= (= (bad us_void_param) true) (not (= (bad Tuple0) true))))) :pattern (
+  (! (= (= (bad us_void_param) true) (not (= (bad Tuple0) true))) :pattern (
   (bad us_void_param)) )))
-
-;; H
-  (assert (bad__function_guard (bad Tuple0) Tuple0))
-
-;; H
-  (assert (bad__function_guard (bad Tuple0) Tuple0))
 
 (assert
 ;; WP_parameter_def

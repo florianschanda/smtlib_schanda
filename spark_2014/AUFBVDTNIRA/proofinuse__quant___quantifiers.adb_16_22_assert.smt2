@@ -254,19 +254,13 @@
 ;; all_zero__post_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (let ((result (all_zero us_void_param)))
-     (=> (all_zero__function_guard result us_void_param)
-     (forall ((j Int))
-     (=> (and (<= 1 j) (<= j 10)) (= (to_rep (select result j)) 0))))) :pattern (
-  (all_zero us_void_param)) )))
+  (! (forall ((j Int))
+     (=> (and (<= 1 j) (<= j 10))
+     (= (to_rep (select (all_zero us_void_param) j)) 0))) :pattern ((all_zero
+                                                                    us_void_param)) )))
 
 ;; H
   (assert (in_range2 y))
-
-;; H
-  (assert
-  (forall ((j Int) (k Int)) (property__function_guard
-  (property (to_rep (select x k)) j) (to_rep (select x k)) j)))
 
 ;; H
   (assert
@@ -275,9 +269,6 @@
   (=> (= (to_rep (select x j)) 0)
   (exists ((k Int))
   (and (and (<= 1 k) (<= k 10)) (= (property (to_rep (select x k)) j) true)))))))
-
-;; H
-  (assert (all_zero__function_guard (all_zero Tuple0) Tuple0))
 
 ;; H
   (assert (= (bool_eq2 x 1 10 (all_zero Tuple0) 1 10) true))
@@ -289,11 +280,6 @@
 
 ;; H
   (assert (<= j 10))
-
-;; H
-  (assert
-  (forall ((k Int)) (property__function_guard
-  (property (to_rep (select x k)) j) (to_rep (select x k)) j)))
 
 (assert
 ;; WP_parameter_def

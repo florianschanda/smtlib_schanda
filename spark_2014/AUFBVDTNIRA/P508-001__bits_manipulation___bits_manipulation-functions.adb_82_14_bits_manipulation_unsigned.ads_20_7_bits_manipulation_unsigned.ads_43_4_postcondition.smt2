@@ -237,9 +237,9 @@
 (define-fun modular__ref_4__projection ((a modular__ref)) modular (modular__content
                                                                   a))
 
-(define-fun dynamic_invariant ((temp___expr_417 (_ BitVec 16))
-  (temp___is_init_414 Bool) (temp___skip_constant_415 Bool)
-  (temp___do_toplevel_416 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_265 (_ BitVec 16))
+  (temp___is_init_262 Bool) (temp___skip_constant_263 Bool)
+  (temp___do_toplevel_264 Bool)) Bool true)
 
 (declare-sort bit_position 0)
 
@@ -263,11 +263,11 @@
 (define-fun bit_position__ref_3__projection ((a bit_position__ref)) bit_position 
   (bit_position__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_423 Int)
-  (temp___is_init_420 Bool) (temp___skip_constant_421 Bool)
-  (temp___do_toplevel_422 Bool)) Bool (=>
-                                      (or (= temp___is_init_420 true)
-                                      (<= 0 15)) (in_range1 temp___expr_423)))
+(define-fun dynamic_invariant1 ((temp___expr_271 Int)
+  (temp___is_init_268 Bool) (temp___skip_constant_269 Bool)
+  (temp___do_toplevel_270 Bool)) Bool (=>
+                                      (or (= temp___is_init_268 true)
+                                      (<= 0 15)) (in_range1 temp___expr_271)))
 
 (declare-fun shift_right ((_ BitVec 16) Int) (_ BitVec 16))
 
@@ -596,20 +596,16 @@
   (forall ((amount Int))
   (! (=>
      (and (dynamic_invariant v true true true) (dynamic_invariant2 amount
-     true true true))
-     (let ((result (shift_right v amount)))
-     (=> (shift_right__function_guard result v amount) (dynamic_invariant
-     result true false true)))) :pattern ((shift_right v amount)) ))))
+     true true true)) (dynamic_invariant (shift_right v amount) true false
+     true)) :pattern ((shift_right v amount)) ))))
 
 ;; shift_right__def_axiom
   (assert
   (forall ((v (_ BitVec 16)))
   (forall ((amount Int))
   (! (=>
-     (and
      (and (dynamic_invariant v true true true) (dynamic_invariant2 amount
-     true true true)) (shift_right__function_guard (shift_right v amount) v
-     amount))
+     true true true))
      (= (shift_right v amount) (ite (and (<= 1 16) (<= 16 8))
                                ((_ zero_extend 8) (ite (< amount 8)
                                                   (bvlshr ((_ extract 7 0) v) ((_ int2bv 8) amount))
@@ -645,13 +641,13 @@
 
 (declare-fun bits_manipulation_unsigned__unsigned_16__functions__msb_index_fast_inline_always__result () Int)
 
-(declare-fun temp___1182 () (_ BitVec 16))
+(declare-fun temp___408 () (_ BitVec 16))
 
-(declare-fun temp___1181 () Int)
+(declare-fun temp___407 () Int)
 
-(declare-fun temp___1180 () Int)
+(declare-fun temp___406 () Int)
 
-(declare-fun temp___1179 () (_ BitVec 16))
+(declare-fun temp___405 () (_ BitVec 16))
 
 (declare-fun o () (_ BitVec 16))
 
@@ -791,22 +787,22 @@
 ;; H
   (assert
   (=> (and (not (= shift_amount1 0)) (not (= v1 ((_ int2bv 16) 0))))
-  (= temp___1182 v1)))
+  (= temp___408 v1)))
 
 ;; H
   (assert
   (=> (and (not (= shift_amount1 0)) (not (= v1 ((_ int2bv 16) 0))))
-  (= temp___1181 result__1)))
+  (= temp___407 result__1)))
 
 ;; H
   (assert
   (=> (and (not (= shift_amount1 0)) (not (= v1 ((_ int2bv 16) 0))))
-  (= temp___1180 shift_amount1)))
+  (= temp___406 shift_amount1)))
 
 ;; H
   (assert
   (=> (and (not (= shift_amount1 0)) (not (= v1 ((_ int2bv 16) 0))))
-  (= temp___1179 new_v)))
+  (= temp___405 new_v)))
 
 ;; H
   (assert
@@ -819,9 +815,7 @@
 ;; H
   (assert
   (=> (and (not (= shift_amount1 0)) (not (= v1 ((_ int2bv 16) 0))))
-  (and
-  (and (= o (shift_right v2 shift_amount2)) (shift_right__function_guard 
-  o v2 shift_amount2))
+  (and (= o (shift_right v2 shift_amount2))
   (= o (ite (and (<= 1 16) (<= 16 8))
        ((_ zero_extend 8) (ite (< shift_amount2 8)
                           (bvlshr ((_ extract 7 0) v2) ((_ int2bv 8) 
@@ -1092,15 +1086,6 @@
   (assert
   (= result8 (int__content
              bits_manipulation_unsigned__unsigned_16__functions__msb_index_fast_inline_always__result4)))
-
-;; H
-  (assert (shift_right__function_guard
-  (shift_right value
-  (int__content
-  bits_manipulation_unsigned__unsigned_16__functions__msb_index_fast_inline_always__result4))
-  value
-  (int__content
-  bits_manipulation_unsigned__unsigned_16__functions__msb_index_fast_inline_always__result4)))
 
 (assert
 ;; WP_parameter_def

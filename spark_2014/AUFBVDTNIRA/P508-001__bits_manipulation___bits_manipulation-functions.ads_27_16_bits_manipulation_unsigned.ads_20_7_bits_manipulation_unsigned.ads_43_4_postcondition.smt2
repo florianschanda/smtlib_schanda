@@ -153,9 +153,9 @@
 (define-fun modular__ref_4__projection ((a modular__ref)) modular (modular__content
                                                                   a))
 
-(define-fun dynamic_invariant ((temp___expr_417 (_ BitVec 16))
-  (temp___is_init_414 Bool) (temp___skip_constant_415 Bool)
-  (temp___do_toplevel_416 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_265 (_ BitVec 16))
+  (temp___is_init_262 Bool) (temp___skip_constant_263 Bool)
+  (temp___do_toplevel_264 Bool)) Bool true)
 
 (declare-sort bit_position 0)
 
@@ -179,11 +179,11 @@
 (define-fun bit_position__ref_3__projection ((a bit_position__ref)) bit_position 
   (bit_position__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_423 Int)
-  (temp___is_init_420 Bool) (temp___skip_constant_421 Bool)
-  (temp___do_toplevel_422 Bool)) Bool (=>
-                                      (or (= temp___is_init_420 true)
-                                      (<= 0 15)) (in_range temp___expr_423)))
+(define-fun dynamic_invariant1 ((temp___expr_271 Int)
+  (temp___is_init_268 Bool) (temp___skip_constant_269 Bool)
+  (temp___do_toplevel_270 Bool)) Bool (=>
+                                      (or (= temp___is_init_268 true)
+                                      (<= 0 15)) (in_range temp___expr_271)))
 
 (declare-fun shift_right ((_ BitVec 16) Int) (_ BitVec 16))
 
@@ -512,20 +512,16 @@
   (forall ((amount Int))
   (! (=>
      (and (dynamic_invariant v true true true) (dynamic_invariant2 amount
-     true true true))
-     (let ((result (shift_right v amount)))
-     (=> (shift_right__function_guard result v amount) (dynamic_invariant
-     result true false true)))) :pattern ((shift_right v amount)) ))))
+     true true true)) (dynamic_invariant (shift_right v amount) true false
+     true)) :pattern ((shift_right v amount)) ))))
 
 ;; shift_right__def_axiom
   (assert
   (forall ((v (_ BitVec 16)))
   (forall ((amount Int))
   (! (=>
-     (and
      (and (dynamic_invariant v true true true) (dynamic_invariant2 amount
-     true true true)) (shift_right__function_guard (shift_right v amount) v
-     amount))
+     true true true))
      (= (shift_right v amount) (ite (and (<= 1 16) (<= 16 8))
                                ((_ zero_extend 8) (ite (< amount 8)
                                                   (bvlshr ((_ extract 7 0) v) ((_ int2bv 8) amount))
@@ -555,13 +551,8 @@
 ;; msb_index_fast_inline__def_axiom
   (assert
   (forall ((value1 (_ BitVec 16)))
-  (! (=>
-     (and (dynamic_invariant value1 true true true)
-     (msb_index_fast_inline__function_guard (msb_index_fast_inline value1)
-     value1))
-     (and (msb_index_fast_inline_always__function_guard
-     (msb_index_fast_inline_always value1) value1)
-     (= (msb_index_fast_inline value1) (msb_index_fast_inline_always value1)))) :pattern (
+  (! (=> (dynamic_invariant value1 true true true)
+     (= (msb_index_fast_inline value1) (msb_index_fast_inline_always value1))) :pattern (
   (msb_index_fast_inline value1)) )))
 
 (declare-fun msb_index_fast_not_inline ((_ BitVec 16)) Int)
@@ -572,15 +563,10 @@
 ;; msb_index_fast_not_inline__def_axiom
   (assert
   (forall ((value1 (_ BitVec 16)))
-  (! (=>
-     (and (dynamic_invariant value1 true true true)
-     (msb_index_fast_not_inline__function_guard
-     (msb_index_fast_not_inline value1) value1))
-     (and (msb_index_fast_inline_always__function_guard
-     (msb_index_fast_inline_always value1) value1)
+  (! (=> (dynamic_invariant value1 true true true)
      (= (msb_index_fast_not_inline value1) (msb_index_fast_inline_always
-                                           value1)))) :pattern ((msb_index_fast_not_inline
-                                                                value1)) )))
+                                           value1))) :pattern ((msb_index_fast_not_inline
+                                                               value1)) )))
 
 (declare-fun msb_index_slow_inline_always ((_ BitVec 16)) Int)
 
@@ -594,12 +580,9 @@
      (and (dynamic_invariant value1 true true true)
      (not (= value1 ((_ int2bv 16) 0))))
      (let ((result (msb_index_slow_inline_always value1)))
-     (and (shift_right__function_guard (shift_right value1 result) value1
-     result)
-     (=> (msb_index_slow_inline_always__function_guard result value1)
      (and (= (shift_right value1 result) ((_ int2bv 16) 1))
-     (dynamic_invariant1 result true false true)))))) :pattern ((msb_index_slow_inline_always
-                                                                value1)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((msb_index_slow_inline_always
+                                                              value1)) )))
 
 (declare-fun msb_index_slow_inline ((_ BitVec 16)) Int)
 
@@ -612,23 +595,15 @@
      (and (dynamic_invariant value1 true true true)
      (not (= value1 ((_ int2bv 16) 0))))
      (let ((result (msb_index_slow_inline value1)))
-     (and (shift_right__function_guard (shift_right value1 result) value1
-     result)
-     (=> (msb_index_slow_inline__function_guard result value1)
      (and (= (shift_right value1 result) ((_ int2bv 16) 1))
-     (dynamic_invariant1 result true false true)))))) :pattern ((msb_index_slow_inline
-                                                                value1)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((msb_index_slow_inline
+                                                              value1)) )))
 
 ;; msb_index_slow_inline__def_axiom
   (assert
   (forall ((value1 (_ BitVec 16)))
-  (! (=>
-     (and (dynamic_invariant value1 true true true)
-     (msb_index_slow_inline__function_guard (msb_index_slow_inline value1)
-     value1))
-     (and (msb_index_slow_inline_always__function_guard
-     (msb_index_slow_inline_always value1) value1)
-     (= (msb_index_slow_inline value1) (msb_index_slow_inline_always value1)))) :pattern (
+  (! (=> (dynamic_invariant value1 true true true)
+     (= (msb_index_slow_inline value1) (msb_index_slow_inline_always value1))) :pattern (
   (msb_index_slow_inline value1)) )))
 
 (declare-fun msb_index_slow_not_inline ((_ BitVec 16)) Int)
@@ -643,25 +618,17 @@
      (and (dynamic_invariant value1 true true true)
      (not (= value1 ((_ int2bv 16) 0))))
      (let ((result (msb_index_slow_not_inline value1)))
-     (and (shift_right__function_guard (shift_right value1 result) value1
-     result)
-     (=> (msb_index_slow_not_inline__function_guard result value1)
      (and (= (shift_right value1 result) ((_ int2bv 16) 1))
-     (dynamic_invariant1 result true false true)))))) :pattern ((msb_index_slow_not_inline
-                                                                value1)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((msb_index_slow_not_inline
+                                                              value1)) )))
 
 ;; msb_index_slow_not_inline__def_axiom
   (assert
   (forall ((value1 (_ BitVec 16)))
-  (! (=>
-     (and (dynamic_invariant value1 true true true)
-     (msb_index_slow_not_inline__function_guard
-     (msb_index_slow_not_inline value1) value1))
-     (and (msb_index_slow_inline_always__function_guard
-     (msb_index_slow_inline_always value1) value1)
+  (! (=> (dynamic_invariant value1 true true true)
      (= (msb_index_slow_not_inline value1) (msb_index_slow_inline_always
-                                           value1)))) :pattern ((msb_index_slow_not_inline
-                                                                value1)) )))
+                                           value1))) :pattern ((msb_index_slow_not_inline
+                                                               value1)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -704,12 +671,6 @@
 (declare-fun result3 () Int)
 
 ;; H
-  (assert (shift_right__function_guard (shift_right value o) value o))
-
-;; H
-  (assert (shift_right__function_guard (shift_right value o1) value o1))
-
-;; H
   (assert (not (= value ((_ int2bv 16) 0))))
 
 ;; H
@@ -734,9 +695,7 @@
 ;; H
   (assert
   (=> (= 2 0)
-  (and
   (and (= o (msb_index_slow_inline_always value))
-  (msb_index_slow_inline_always__function_guard o value))
   (and (in_range o) (= (shift_right value o) ((_ int2bv 16) 1))))))
 
 ;; H
@@ -748,9 +707,7 @@
 ;; H
   (assert
   (=> (not (= 2 0))
-  (and
   (and (= o1 (msb_index_fast_inline_always value))
-  (msb_index_fast_inline_always__function_guard o1 value))
   (and (in_range o1) (= (shift_right value o1) ((_ int2bv 16) 1))))))
 
 ;; H
@@ -792,13 +749,6 @@
 ;; H
   (assert
   (= result3 bits_manipulation_unsigned__unsigned_16__functions__msb_index__result4))
-
-;; H
-  (assert (shift_right__function_guard
-  (shift_right value
-  bits_manipulation_unsigned__unsigned_16__functions__msb_index__result4)
-  value
-  bits_manipulation_unsigned__unsigned_16__functions__msb_index__result4))
 
 (assert
 ;; WP_parameter_def

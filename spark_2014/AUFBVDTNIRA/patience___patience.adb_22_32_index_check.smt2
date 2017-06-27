@@ -894,8 +894,7 @@
 ;; inv__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (inv__function_guard (inv s) s)
-     (= (= (inv s) true)
+  (! (= (= (inv s) true)
      (and
      (and
      (and
@@ -1145,7 +1144,7 @@
                                                          (let ((temp___351 
                                                          (rec__patience__state__posstack
                                                          (us_split_fields1 s))))
-                                                         (select temp___351 i))) 1)))))))))) :pattern (
+                                                         (select temp___351 i))) 1))))))))) :pattern (
   (inv s)) )))
 
 (declare-fun c () Int)
@@ -1190,7 +1189,7 @@
 
 (declare-fun topstacki () Int)
 
-(declare-fun temp___573 () Int)
+(declare-fun temp___570 () Int)
 
 (declare-fun result () int__ref)
 
@@ -1210,18 +1209,6 @@
 
 ;; H
   (assert (in_range2 c))
-
-;; H
-  (assert (inv__function_guard
-  (inv
-  (mk___rep
-  (mk___split_fields s__split_fields s__split_fields1 s__split_fields2
-  s__split_fields3 s__split_fields4 s__split_fields5 s__split_fields6
-  s__split_fields7)))
-  (mk___rep
-  (mk___split_fields s__split_fields s__split_fields1 s__split_fields2
-  s__split_fields3 s__split_fields4 s__split_fields5 s__split_fields6
-  s__split_fields7))))
 
 ;; H
   (assert
@@ -1300,10 +1287,10 @@
   (assert (<= pred2 (- (to_rep1 s__split_fields) 1)))
 
 ;; H
-  (assert (and (= temp___573 (- i2 1)) (in_range1 (- i2 1))))
+  (assert (and (= temp___570 (- i2 1)) (in_range1 (- i2 1))))
 
 (assert
 ;; WP_parameter_def
  ;; File "patience.ads", line 53, characters 0-0
-  (not (<= 0 temp___573)))
+  (not (<= 0 temp___570)))
 (check-sat)

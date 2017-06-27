@@ -233,9 +233,9 @@
 
 (declare-fun o1 () natural)
 
-(declare-fun temp___349 () natural)
+(declare-fun temp___348 () natural)
 
-(declare-fun temp___3491 () Bool)
+(declare-fun temp___3481 () Bool)
 
 ;; H
   (assert (= (to_rep d__split_discrs) r14b))
@@ -250,10 +250,10 @@
   (assert (= o o1))
 
 ;; H
-  (assert (= temp___349 o1))
+  (assert (= temp___348 o1))
 
 ;; H
-  (assert (= true temp___3491))
+  (assert (= true temp___3481))
 
 ;; H
   (assert (= d__attr__constrained true))
@@ -261,5 +261,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "discr.adb", line 145, characters 0-0
-  (not (= temp___349 d__split_discrs)))
+  (not (= temp___348 d__split_discrs)))
 (check-sat)

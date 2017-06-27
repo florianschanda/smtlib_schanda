@@ -434,12 +434,12 @@
 (define-fun tlastS__ref___projection ((a tlastS__ref)) tlastS (tlastS__content
                                                               a))
 
-(define-fun dynamic_invariant ((temp___expr_157 Int)
-  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
-  (temp___do_toplevel_156 Bool)) Bool (=>
-                                      (or (= temp___is_init_154 true)
+(define-fun dynamic_invariant ((temp___expr_149 Int)
+  (temp___is_init_146 Bool) (temp___skip_constant_147 Bool)
+  (temp___do_toplevel_148 Bool)) Bool (=>
+                                      (or (= temp___is_init_146 true)
                                       (<= 0 200)) (in_range4
-                                      temp___expr_157)))
+                                      temp___expr_149)))
 
 ;; empty__post_axiom
   (assert true)
@@ -447,19 +447,15 @@
 ;; empty__def_axiom
   (assert
   (forall ((stack__last Int))
-  (! (=> (empty__function_guard (empty stack__last) stack__last)
-     (= (= (empty stack__last) true) (< stack__last 1))) :pattern ((empty
-                                                                   stack__last)) )))
+  (! (= (= (empty stack__last) true) (< stack__last 1)) :pattern ((empty
+                                                                  stack__last)) )))
 
 (declare-fun top (us_private Int) us_rep)
 
 (declare-fun top__function_guard (us_rep us_private Int) Bool)
 
 ;; top__post_axiom
-  (assert
-  (forall ((stack__tab us_private))
-  (forall ((stack__last Int)) (! (empty__function_guard (empty stack__last)
-  stack__last) :pattern ((top stack__tab stack__last)) ))))
+  (assert true)
 
 (define-fun dynamic_invariant1 ((temp___expr_82 us_t)
   (temp___is_init_79 Bool) (temp___skip_constant_80 Bool)
@@ -475,10 +471,8 @@
 
 ;; to_string__post_axiom
   (assert
-  (forall ((v us_rep))
-  (! (let ((result (to_string1 v)))
-     (=> (to_string__function_guard result v) (dynamic_invariant1 result true
-     false true))) :pattern ((to_string1 v)) )))
+  (forall ((v us_rep)) (! (dynamic_invariant1 (to_string1 v) true false
+  true) :pattern ((to_string1 v)) )))
 
 (declare-sort instruction 0)
 
@@ -501,43 +495,43 @@
 (define-fun instruction__ref___projection ((a instruction__ref)) instruction 
   (instruction__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_167 Int)
-  (temp___is_init_164 Bool) (temp___skip_constant_165 Bool)
-  (temp___do_toplevel_166 Bool)) Bool (=>
-                                      (or (= temp___is_init_164 true)
-                                      (<= 0 2)) (in_range5 temp___expr_167)))
+(define-fun dynamic_invariant2 ((temp___expr_158 Int)
+  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
+  (temp___do_toplevel_157 Bool)) Bool (=>
+                                      (or (= temp___is_init_155 true)
+                                      (<= 0 2)) (in_range5 temp___expr_158)))
 
 (declare-fun i () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(declare-fun temp___String_Literal_185 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_176 (tuple0) (Array Int character))
 
-;; temp___String_Literal_185__def_axiom
+;; temp___String_Literal_176__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_185 us_void_param) 1)) 32)
-     (= (to_rep (select (temp___String_Literal_185 us_void_param) 2)) 45))
-     (= (to_rep (select (temp___String_Literal_185 us_void_param) 3)) 62))
-     (= (to_rep (select (temp___String_Literal_185 us_void_param) 4)) 32)) :pattern (
-  (temp___String_Literal_185 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_176 us_void_param) 1)) 32)
+     (= (to_rep (select (temp___String_Literal_176 us_void_param) 2)) 45))
+     (= (to_rep (select (temp___String_Literal_176 us_void_param) 3)) 62))
+     (= (to_rep (select (temp___String_Literal_176 us_void_param) 4)) 32)) :pattern (
+  (temp___String_Literal_176 us_void_param)) )))
 
-(declare-fun temp___String_Literal_186 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_177 (tuple0) (Array Int character))
 
-;; temp___String_Literal_186__def_axiom
+;; temp___String_Literal_177__def_axiom
   (assert true)
 
-(declare-fun temp___String_Literal_187 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_178 (tuple0) (Array Int character))
 
-;; temp___String_Literal_187__def_axiom
+;; temp___String_Literal_178__def_axiom
   (assert true)
 
-(declare-fun temp___String_Literal_188 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_179 (tuple0) (Array Int character))
 
-;; temp___String_Literal_188__def_axiom
+;; temp___String_Literal_179__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -553,25 +547,25 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_188 us_void_param) 1)) 115)
-     (= (to_rep (select (temp___String_Literal_188 us_void_param) 2)) 116))
-     (= (to_rep (select (temp___String_Literal_188 us_void_param) 3)) 97))
-     (= (to_rep (select (temp___String_Literal_188 us_void_param) 4)) 99))
-     (= (to_rep (select (temp___String_Literal_188 us_void_param) 5)) 107))
-     (= (to_rep (select (temp___String_Literal_188 us_void_param) 6)) 32))
-     (= (to_rep (select (temp___String_Literal_188 us_void_param) 7)) 105))
-     (= (to_rep (select (temp___String_Literal_188 us_void_param) 8)) 115))
-     (= (to_rep (select (temp___String_Literal_188 us_void_param) 9)) 32))
-     (= (to_rep (select (temp___String_Literal_188 us_void_param) 10)) 101))
-     (= (to_rep (select (temp___String_Literal_188 us_void_param) 11)) 109))
-     (= (to_rep (select (temp___String_Literal_188 us_void_param) 12)) 112))
-     (= (to_rep (select (temp___String_Literal_188 us_void_param) 13)) 116))
-     (= (to_rep (select (temp___String_Literal_188 us_void_param) 14)) 121)) :pattern (
-  (temp___String_Literal_188 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 1)) 115)
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 2)) 116))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 3)) 97))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 4)) 99))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 5)) 107))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 6)) 32))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 7)) 105))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 8)) 115))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 9)) 32))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 10)) 101))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 11)) 109))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 12)) 112))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 13)) 116))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 14)) 121)) :pattern (
+  (temp___String_Literal_179 us_void_param)) )))
 
-(declare-fun temp___String_Literal_189 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_180 (tuple0) (Array Int character))
 
-;; temp___String_Literal_189__def_axiom
+;; temp___String_Literal_180__def_axiom
   (assert true)
 
 (define-fun dynamic_invariant3 ((temp___expr_15 Int) (temp___is_init_12 Bool)

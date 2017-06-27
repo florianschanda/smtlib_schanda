@@ -105,9 +105,8 @@
   (assert
   (forall ((n Int))
   (! (=> (and (dynamic_invariant n true true true) (<= n 23))
-     (let ((result (fibonacci n)))
-     (=> (fibonacci__function_guard result n) (dynamic_invariant result true
-     false true)))) :pattern ((fibonacci n)) )))
+     (dynamic_invariant (fibonacci n) true false true)) :pattern ((fibonacci
+                                                                  n)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -168,7 +167,7 @@
 
 (declare-fun temp___162 () Int)
 
-(declare-fun temp___168 () Int)
+(declare-fun temp___166 () Int)
 
 (declare-fun o () Int)
 
@@ -228,11 +227,11 @@
 
 (declare-fun i2 () Int)
 
-(declare-fun temp___1681 () Int)
+(declare-fun temp___1661 () Int)
 
 (declare-fun result7 () Int)
 
-(declare-fun temp___1682 () Int)
+(declare-fun temp___1662 () Int)
 
 (declare-fun result8 () int__ref)
 
@@ -294,11 +293,11 @@
 
 (declare-fun i9 () Int)
 
-(declare-fun temp___175 () Int)
+(declare-fun temp___171 () Int)
 
 (declare-fun result13 () int__ref)
 
-(declare-fun temp___1751 () Int)
+(declare-fun temp___1711 () Int)
 
 (declare-fun result14 () int__ref)
 
@@ -324,7 +323,7 @@
 
 (declare-fun i11 () int__ref)
 
-(declare-fun temp___1752 () int__ref)
+(declare-fun temp___1712 () int__ref)
 
 (declare-fun n24 () Int)
 
@@ -334,7 +333,7 @@
 
 (declare-fun i12 () Int)
 
-(declare-fun temp___1753 () Int)
+(declare-fun temp___1713 () Int)
 
 ;; H
   (assert (in_range2 n1))
@@ -415,18 +414,6 @@
   (assert (= i1 2))
 
 ;; H
-  (assert (fibonacci__function_guard (fibonacci i2) i2))
-
-;; H
-  (assert (fibonacci__function_guard (fibonacci (- i2 1)) (- i2 1)))
-
-;; H
-  (assert (fibonacci__function_guard (fibonacci i2) i2))
-
-;; H
-  (assert (fibonacci__function_guard (fibonacci (- i2 1)) (- i2 1)))
-
-;; H
   (assert (=> (< 2 n1) (= temp___165 i1)))
 
 ;; H
@@ -439,7 +426,7 @@
   (assert (=> (< 2 n1) (= temp___162 a11)))
 
 ;; H
-  (assert (=> (< 2 n1) (= 0 temp___168)))
+  (assert (=> (< 2 n1) (= 0 temp___166)))
 
 ;; H
   (assert
@@ -458,10 +445,10 @@
   (=> (<= 0 2147483647) (in_range2 i2))) (< 2 n12))))
 
 ;; H
-  (assert (=> (< 2 n1) (= temp___1681 result7)))
+  (assert (=> (< 2 n1) (= temp___1661 result7)))
 
 ;; H
-  (assert (=> (< 2 n1) (= temp___1682 n12)))
+  (assert (=> (< 2 n1) (= temp___1662 n12)))
 
 ;; H
   (assert (=> (< 2 n1) (and (= o (+ a12 b12)) (in_range1 (+ a12 b12)))))
@@ -587,12 +574,6 @@
   (assert (< 2 n2))
 
 ;; H
-  (assert (fibonacci__function_guard (fibonacci i9) i9))
-
-;; H
-  (assert (fibonacci__function_guard (fibonacci (- i9 1)) (- i9 1)))
-
-;; H
   (assert
   (and
   (and (and (= a22 (fibonacci i9)) (= b22 (fibonacci (- i9 1)))) (<= i9 23))
@@ -607,10 +588,10 @@
   (=> (<= 0 2147483647) (in_range2 i9))) (< 2 n21)))
 
 ;; H
-  (assert (= result13 (mk_int__ref temp___175)))
+  (assert (= result13 (mk_int__ref temp___171)))
 
 ;; H
-  (assert (= temp___1751 n21))
+  (assert (= temp___1711 n21))
 
 ;; H
   (assert (and (= o5 (+ a22 b22)) (in_range1 (+ a22 b22))))
@@ -655,7 +636,7 @@
   (assert (< 2 n22))
 
 ;; H
-  (assert (= temp___1752 (mk_int__ref temp___1751)))
+  (assert (= temp___1712 (mk_int__ref temp___1711)))
 
 ;; H
   (assert (= i11 (mk_int__ref i10)))
@@ -670,7 +651,7 @@
   (assert (= n23 (mk_int__ref n22)))
 
 ;; H
-  (assert (= temp___1753 temp___1751))
+  (assert (= temp___1713 temp___1711))
 
 ;; H
   (assert (= i12 i10))
@@ -683,10 +664,6 @@
 
 ;; H
   (assert (= n24 n22))
-
-;; H
-  (assert (fibonacci__function_guard (fibonacci (int__content i11))
-  (int__content i11)))
 
 (assert
 ;; WP_parameter_def

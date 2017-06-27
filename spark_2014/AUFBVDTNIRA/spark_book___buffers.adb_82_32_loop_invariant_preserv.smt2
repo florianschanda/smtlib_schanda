@@ -270,25 +270,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
 
-(declare-sort t7b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 1024)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq3 (t7b t7b) Bool)
-
-(declare-fun dummy3 () t7b)
-
-(declare-datatypes () ((t7b__ref (mk_t7b__ref (t7b__content t7b)))))
-(define-fun t7b__ref___projection ((a t7b__ref)) t7b (t7b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
 
 (declare-fun r9b () Int)
@@ -322,15 +303,13 @@
 
 (declare-fun i () Int)
 
-(declare-fun o () (Array Int character))
+(declare-fun o () character)
 
-(declare-fun o1 () character)
+(declare-fun o1 () Int)
 
-(declare-fun o2 () Int)
+(declare-fun o2 () (Array Int character))
 
-(declare-fun o3 () (Array Int character))
-
-(declare-fun o4 () Int)
+(declare-fun o3 () Int)
 
 (declare-fun result () (Array Int character))
 
@@ -375,13 +354,10 @@
   (assert (=> (<= 0 1024) (in_range2 offset)))
 
 ;; H
-  (assert (= o (temp___235 32)))
-
-;; H
   (assert (= result workspace))
 
 ;; H
-  (assert (= workspace1 o))
+  (assert (= workspace1 (temp___235 32)))
 
 ;; H
   (assert (= result1 offset))
@@ -413,7 +389,7 @@
 ;; H
   (assert
   (=> (not (= (to_rep (select buffer i2)) erase_character))
-  (= (to_rep o1) (to_rep (select buffer i2)))))
+  (= (to_rep o) (to_rep (select buffer i2)))))
 
 ;; H
   (assert
@@ -423,12 +399,12 @@
 ;; H
   (assert
   (=> (not (= (to_rep (select buffer i2)) erase_character))
-  (= o2 (+ 1 offset2))))
+  (= o1 (+ 1 offset2))))
 
 ;; H
   (assert
   (=> (not (= (to_rep (select buffer i2)) erase_character))
-  (= o3 (store workspace2 o2 o1))))
+  (= o2 (store workspace2 o1 o))))
 
 ;; H
   (assert
@@ -438,12 +414,12 @@
 ;; H
   (assert
   (=> (not (= (to_rep (select buffer i2)) erase_character))
-  (= workspace3 o3)))
+  (= workspace3 o2)))
 
 ;; H
   (assert
   (=> (not (= (to_rep (select buffer i2)) erase_character))
-  (and (= o4 (+ offset2 1)) (in_range2 (+ offset2 1)))))
+  (and (= o3 (+ offset2 1)) (in_range2 (+ offset2 1)))))
 
 ;; H
   (assert
@@ -452,7 +428,7 @@
 
 ;; H
   (assert
-  (=> (not (= (to_rep (select buffer i2)) erase_character)) (= offset3 o4)))
+  (=> (not (= (to_rep (select buffer i2)) erase_character)) (= offset3 o3)))
 
 ;; H
   (assert

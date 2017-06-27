@@ -95,15 +95,10 @@
      (and
      (and (dynamic_invariant a true true true) (dynamic_invariant b true true
      true)) (dynamic_invariant c true true true))
-     (let ((result (prop_transitive a b c)))
-     (and (property__function_guard (property a b) a b)
-     (and (property__function_guard (property b c) b c)
-     (and (property__function_guard (property a c) a c)
-     (=> (prop_transitive__function_guard result a b c)
      (=>
-     (and (and (= result true) (= (property a b) true))
-     (= (property b c) true)) (= (property a c) true)))))))) :pattern (
-  (prop_transitive a b c)) )))
+     (and (and (= (prop_transitive a b c) true) (= (property a b) true))
+     (= (property b c) true)) (= (property a c) true))) :pattern ((prop_transitive
+                                                                  a b c)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -161,9 +156,6 @@
   (assert (=> (<= 0 2147483647) (in_range1 x_last)))
 
 ;; H
-  (assert (property__function_guard (property x x) x x))
-
-;; H
   (assert (= (property x x) true))
 
 ;; H
@@ -179,17 +171,7 @@
   (assert (<= i1 10))
 
 ;; H
-  (assert (property__function_guard (property x x1) x x1))
-
-;; H
   (assert (= (property x x1) true))
-
-;; H
-  (assert (property__function_guard (property x1 x2) x1 x2))
-
-;; H
-  (assert (prop_transitive__function_guard (prop_transitive x x_last2 x2) 
-  x x_last2 x2))
 
 ;; H
   (assert
@@ -218,9 +200,6 @@
 
 ;; H
   (assert (= i3 (+ i2 1)))
-
-;; H
-  (assert (property__function_guard (property x x2) x x2))
 
 (assert
 ;; WP_parameter_def

@@ -286,8 +286,7 @@
 ;; in_bounds__def_axiom
   (assert
   (forall ((c us_rep))
-  (! (=> (in_bounds__function_guard (in_bounds c) c)
-     (= (= (in_bounds c) true)
+  (! (= (= (in_bounds c) true)
      (and
      (and
      (and (in_range1
@@ -301,7 +300,7 @@
      (to_rep1 (rec__shapes3__circle__radius (us_split_fields1 c))))))
      (in_range1
      (- (to_rep (rec__shapes3__circle__center_y (us_split_fields1 c))) 
-     (to_rep1 (rec__shapes3__circle__radius (us_split_fields1 c)))))))) :pattern (
+     (to_rep1 (rec__shapes3__circle__radius (us_split_fields1 c))))))) :pattern (
   (in_bounds c)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
@@ -360,11 +359,6 @@
   (assert
   (= (mk___rep (mk___split_fields result result1 result2)) (circle__content
                                                            shapes3__make_circle__result)))
-
-;; H
-  (assert (in_bounds__function_guard
-  (in_bounds (circle__content shapes3__make_circle__result))
-  (circle__content shapes3__make_circle__result)))
 
 (assert
 ;; WP_parameter_def

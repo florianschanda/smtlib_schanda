@@ -551,17 +551,14 @@
 
 ;; get_remaining__post_axiom
   (assert
-  (forall ((s us_rep))
-  (! (let ((result (get_remaining s)))
-     (=> (get_remaining__function_guard result s) (dynamic_invariant result
-     true false true))) :pattern ((get_remaining s)) )))
+  (forall ((s us_rep)) (! (dynamic_invariant (get_remaining s) true false
+  true) :pattern ((get_remaining s)) )))
 
 ;; get_remaining__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (get_remaining__function_guard (get_remaining s) s)
-     (= (get_remaining s) (to_rep
-                          (rec__test__t__remaining (us_split_fields1 s))))) :pattern (
+  (! (= (get_remaining s) (to_rep
+                          (rec__test__t__remaining (us_split_fields1 s)))) :pattern (
   (get_remaining s)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -584,14 +581,6 @@
 (declare-fun s__split_fields1 () entry_id)
 
 (declare-fun s__split_fields2 () (Array (_ BitVec 8) integer))
-
-;; H
-  (assert (get_remaining__function_guard
-  (get_remaining
-  (mk___rep
-  (mk___split_fields s__split_fields s__split_fields1 s__split_fields2)))
-  (mk___rep
-  (mk___split_fields s__split_fields s__split_fields1 s__split_fields2))))
 
 ;; H
   (assert

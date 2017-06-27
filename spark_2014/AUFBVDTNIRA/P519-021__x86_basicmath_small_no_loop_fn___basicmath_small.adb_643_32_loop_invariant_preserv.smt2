@@ -730,10 +730,9 @@
   (forall ((x86__rax (_ BitVec 64)))
   (! (=> (dynamic_invariant x86__rax true true true)
      (let ((result (eax x86__rax)))
-     (=> (eax__function_guard result x86__rax)
      (and
      (= result ((_ extract 31 0) (bvand x86__rax ((_ int2bv 64) 4294967295))))
-     (dynamic_invariant2 result true false true))))) :pattern ((eax x86__rax)) )))
+     (dynamic_invariant2 result true false true)))) :pattern ((eax x86__rax)) )))
 
 (declare-fun writereg32post ((_ BitVec 64) (_ BitVec 32)) Bool)
 
@@ -755,10 +754,8 @@
   (forall ((x86__rcx (_ BitVec 64)))
   (! (=> (dynamic_invariant x86__rcx true true true)
      (let ((result (ecx x86__rcx)))
-     (and (readreg32__function_guard (readreg32 x86__rcx) x86__rcx)
-     (=> (ecx__function_guard result x86__rcx)
      (and (= result (readreg32 x86__rcx)) (dynamic_invariant2 result true
-     false true)))))) :pattern ((ecx x86__rcx)) )))
+     false true)))) :pattern ((ecx x86__rcx)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS19 () Int)
 
@@ -771,10 +768,8 @@
   (forall ((x86__rdx (_ BitVec 64)))
   (! (=> (dynamic_invariant x86__rdx true true true)
      (let ((result (edx x86__rdx)))
-     (and (readreg32__function_guard (readreg32 x86__rdx) x86__rdx)
-     (=> (edx__function_guard result x86__rdx)
      (and (= result (readreg32 x86__rdx)) (dynamic_invariant2 result true
-     false true)))))) :pattern ((edx x86__rdx)) )))
+     false true)))) :pattern ((edx x86__rdx)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS20 () Int)
 
@@ -792,10 +787,8 @@
   (forall ((x86__rbx (_ BitVec 64)))
   (! (=> (dynamic_invariant x86__rbx true true true)
      (let ((result (ebx x86__rbx)))
-     (and (readreg32__function_guard (readreg32 x86__rbx) x86__rbx)
-     (=> (ebx__function_guard result x86__rbx)
      (and (= result (readreg32 x86__rbx)) (dynamic_invariant2 result true
-     false true)))))) :pattern ((ebx x86__rbx)) )))
+     false true)))) :pattern ((ebx x86__rbx)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS21 () Int)
 
@@ -808,10 +801,8 @@
   (forall ((x86__rsp (_ BitVec 64)))
   (! (=> (dynamic_invariant x86__rsp true true true)
      (let ((result (esp x86__rsp)))
-     (and (readreg32__function_guard (readreg32 x86__rsp) x86__rsp)
-     (=> (esp__function_guard result x86__rsp)
      (and (= result (readreg32 x86__rsp)) (dynamic_invariant2 result true
-     false true)))))) :pattern ((esp x86__rsp)) )))
+     false true)))) :pattern ((esp x86__rsp)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS22 () Int)
 
@@ -826,10 +817,8 @@
   (forall ((x86__rsi (_ BitVec 64)))
   (! (=> (dynamic_invariant x86__rsi true true true)
      (let ((result (esi x86__rsi)))
-     (and (readreg32__function_guard (readreg32 x86__rsi) x86__rsi)
-     (=> (esi__function_guard result x86__rsi)
      (and (= result (readreg32 x86__rsi)) (dynamic_invariant2 result true
-     false true)))))) :pattern ((esi x86__rsi)) )))
+     false true)))) :pattern ((esi x86__rsi)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS24 () Int)
 
@@ -842,10 +831,8 @@
   (forall ((x86__rdi (_ BitVec 64)))
   (! (=> (dynamic_invariant x86__rdi true true true)
      (let ((result (edi x86__rdi)))
-     (and (readreg32__function_guard (readreg32 x86__rdi) x86__rdi)
-     (=> (edi__function_guard result x86__rdi)
      (and (= result (readreg32 x86__rdi)) (dynamic_invariant2 result true
-     false true)))))) :pattern ((edi x86__rdi)) )))
+     false true)))) :pattern ((edi x86__rdi)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS25 () Int)
 
@@ -881,9 +868,8 @@
   (forall ((x86__memory (Array (_ BitVec 64) unsigned8)))
   (! (=> (dynamic_invariant addr true true true)
      (let ((result (readmem8 addr x86__memory)))
-     (=> (readmem8__function_guard result addr x86__memory)
      (and (= result (to_rep (select x86__memory addr))) (dynamic_invariant3
-     result true false true))))) :pattern ((readmem8 addr x86__memory)) ))))
+     result true false true)))) :pattern ((readmem8 addr x86__memory)) ))))
 
 (declare-fun readmem32 ((_ BitVec 64)
   (Array (_ BitVec 64) unsigned8)) (_ BitVec 32))
@@ -897,7 +883,6 @@
   (forall ((x86__memory (Array (_ BitVec 64) unsigned8)))
   (! (=> (dynamic_invariant addr true true true)
      (let ((result (readmem32 addr x86__memory)))
-     (=> (readmem32__function_guard result addr x86__memory)
      (and
      (and
      (and
@@ -910,9 +895,8 @@
      (to_rep (select x86__memory (bvadd addr ((_ int2bv 64) 2))))) ((_ int2bv 32) 65536))))
      (= (bvand result ((_ int2bv 32) 4278190080)) (bvmul ((_ zero_extend 24) 
      (to_rep (select x86__memory (bvadd addr ((_ int2bv 64) 3))))) ((_ int2bv 32) 16777216))))
-     (dynamic_invariant2 result true false true))))) :pattern ((readmem32
-                                                               addr
-                                                               x86__memory)) ))))
+     (dynamic_invariant2 result true false true)))) :pattern ((readmem32 addr
+                                                              x86__memory)) ))))
 
 (declare-fun readmem64 ((_ BitVec 64)
   (Array (_ BitVec 64) unsigned8)) (_ BitVec 64))
@@ -926,7 +910,6 @@
   (forall ((x86__memory (Array (_ BitVec 64) unsigned8)))
   (! (=> (dynamic_invariant addr true true true)
      (let ((result (readmem64 addr x86__memory)))
-     (=> (readmem64__function_guard result addr x86__memory)
      (and
      (and
      (and
@@ -951,8 +934,8 @@
      (to_rep (select x86__memory (bvadd addr ((_ int2bv 64) 6))))) ((_ int2bv 64) 281474976710656))))
      (= (bvand result ((_ int2bv 64) 18374686479671623680)) (bvmul ((_ zero_extend 56) 
      (to_rep (select x86__memory (bvadd addr ((_ int2bv 64) 7))))) ((_ int2bv 64) 72057594037927936))))
-     (dynamic_invariant result true false true))))) :pattern ((readmem64 addr
-                                                              x86__memory)) ))))
+     (dynamic_invariant result true false true)))) :pattern ((readmem64 addr
+                                                             x86__memory)) ))))
 
 (declare-sort unsigned641 0)
 
@@ -976,9 +959,9 @@
 (define-fun unsigned64__ref_2__projection ((a unsigned64__ref1)) unsigned641 
   (unsigned64__content1 a))
 
-(define-fun dynamic_invariant4 ((temp___expr_390 (_ BitVec 64))
-  (temp___is_init_387 Bool) (temp___skip_constant_388 Bool)
-  (temp___do_toplevel_389 Bool)) Bool true)
+(define-fun dynamic_invariant4 ((temp___expr_274 (_ BitVec 64))
+  (temp___is_init_271 Bool) (temp___skip_constant_272 Bool)
+  (temp___do_toplevel_273 Bool)) Bool true)
 
 (declare-sort unsigned81 0)
 
@@ -1002,9 +985,9 @@
 (define-fun unsigned8__ref_2__projection ((a unsigned8__ref1)) unsigned81 
   (unsigned8__content1 a))
 
-(define-fun dynamic_invariant5 ((temp___expr_408 (_ BitVec 8))
-  (temp___is_init_405 Bool) (temp___skip_constant_406 Bool)
-  (temp___do_toplevel_407 Bool)) Bool true)
+(define-fun dynamic_invariant5 ((temp___expr_292 (_ BitVec 8))
+  (temp___is_init_289 Bool) (temp___skip_constant_290 Bool)
+  (temp___do_toplevel_291 Bool)) Bool true)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS34 () Int)
 
@@ -1053,16 +1036,14 @@
      (and
      (and (dynamic_invariant var true true true) (dynamic_invariant bottom
      true true true)) (dynamic_invariant range_size true true true))
-     (let ((result (inrange64 var bottom range_size)))
-     (=> (inrange64__function_guard result var bottom range_size)
-     (= (= result true)
+     (= (= (inrange64 var bottom range_size) true)
      (ite (bvule bottom (bvadd (bvsub ((_ int2bv 64) 18446744073709551615) range_size) ((_ int2bv 64) 1)))
      (and (bvule bottom var)
      (bvule var (bvadd bottom (bvsub range_size ((_ int2bv 64) 1)))))
      (or
      (and (bvule bottom var)
      (bvule var ((_ int2bv 64) 18446744073709551615)))
-     (bvule var (bvsub (bvsub range_size (bvsub ((_ int2bv 64) 18446744073709551615) bottom)) ((_ int2bv 64) 2))))))))) :pattern (
+     (bvule var (bvsub (bvsub range_size (bvsub ((_ int2bv 64) 18446744073709551615) bottom)) ((_ int2bv 64) 2))))))) :pattern (
   (inrange64 var bottom range_size)) )))
 
 (declare-fun readreg16 ((_ BitVec 64)) (_ BitVec 16))
@@ -1074,10 +1055,8 @@
   (forall ((reg (_ BitVec 64)))
   (! (=> (dynamic_invariant reg true true true)
      (let ((result (readreg16 reg)))
-     (=> (readreg16__function_guard result reg)
      (and (= result ((_ extract 15 0) (bvand reg ((_ int2bv 64) 65535))))
-     (dynamic_invariant1 result true false true))))) :pattern ((readreg16
-                                                               reg)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((readreg16 reg)) )))
 
 ;; writereg16post__post_axiom
   (assert
@@ -1087,12 +1066,9 @@
      (and
      (and (dynamic_invariant regold true true true) (dynamic_invariant regnew
      true true true)) (dynamic_invariant1 val__ true true true))
-     (let ((result (writereg16post regold regnew val__)))
-     (and (readreg16__function_guard (readreg16 regnew) regnew)
-     (=> (writereg16post__function_guard result regold regnew val__)
-     (= (= result true)
+     (= (= (writereg16post regold regnew val__) true)
      (and (= (readreg16 regnew) val__)
-     (= (bvand regnew ((_ int2bv 64) 18446744073709486080)) (bvand regold ((_ int2bv 64) 18446744073709486080))))))))) :pattern (
+     (= (bvand regnew ((_ int2bv 64) 18446744073709486080)) (bvand regold ((_ int2bv 64) 18446744073709486080)))))) :pattern (
   (writereg16post regold regnew val__)) ))))
 
 ;; readreg32__post_axiom
@@ -1100,11 +1076,9 @@
   (forall ((reg (_ BitVec 64)))
   (! (=> (dynamic_invariant reg true true true)
      (let ((result (readreg32 reg)))
-     (=> (readreg32__function_guard result reg)
      (and
      (= result ((_ extract 31 0) (bvand reg ((_ int2bv 64) 4294967295))))
-     (dynamic_invariant2 result true false true))))) :pattern ((readreg32
-                                                               reg)) )))
+     (dynamic_invariant2 result true false true)))) :pattern ((readreg32 reg)) )))
 
 ;; writereg32post__post_axiom
   (assert
@@ -1113,12 +1087,9 @@
   (! (=>
      (and (dynamic_invariant regnew true true true) (dynamic_invariant2 val__
      true true true))
-     (let ((result (writereg32post regnew val__)))
-     (and (readreg32__function_guard (readreg32 regnew) regnew)
-     (=> (writereg32post__function_guard result regnew val__)
-     (= (= result true)
+     (= (= (writereg32post regnew val__) true)
      (and (= (readreg32 regnew) val__)
-     (= (bvand regnew ((_ int2bv 64) 18446744069414584320)) ((_ int2bv 64) 0)))))))) :pattern (
+     (= (bvand regnew ((_ int2bv 64) 18446744069414584320)) ((_ int2bv 64) 0))))) :pattern (
   (writereg32post regnew val__)) ))))
 
 (declare-fun zeroflag () Bool)
@@ -1267,27 +1238,27 @@
 
 (declare-fun o38 () Bool)
 
-(declare-fun temp___511 () (_ BitVec 64))
+(declare-fun temp___393 () (_ BitVec 64))
 
-(declare-fun temp___512 () (_ BitVec 64))
+(declare-fun temp___394 () (_ BitVec 64))
 
-(declare-fun temp___510 () (_ BitVec 64))
+(declare-fun temp___392 () (_ BitVec 64))
 
-(declare-fun temp___509 () Bool)
+(declare-fun temp___391 () Bool)
 
-(declare-fun temp___508 () Bool)
+(declare-fun temp___390 () Bool)
 
-(declare-fun temp___507 () (_ BitVec 64))
+(declare-fun temp___389 () (_ BitVec 64))
 
-(declare-fun temp___505 () Bool)
+(declare-fun temp___387 () Bool)
 
-(declare-fun temp___506 () (_ BitVec 64))
+(declare-fun temp___388 () (_ BitVec 64))
 
-(declare-fun temp___504 () (_ BitVec 64))
+(declare-fun temp___386 () (_ BitVec 64))
 
-(declare-fun temp___503 () (_ BitVec 64))
+(declare-fun temp___385 () (_ BitVec 64))
 
-(declare-fun temp___502 () Bool)
+(declare-fun temp___384 () Bool)
 
 (declare-fun o39 () (_ BitVec 64))
 
@@ -1363,27 +1334,27 @@
 
 (declare-fun o75 () Bool)
 
-(declare-fun temp___522 () (_ BitVec 64))
+(declare-fun temp___404 () (_ BitVec 64))
 
-(declare-fun temp___521 () (_ BitVec 64))
+(declare-fun temp___403 () (_ BitVec 64))
 
-(declare-fun temp___520 () Bool)
+(declare-fun temp___402 () Bool)
 
-(declare-fun temp___519 () Bool)
+(declare-fun temp___401 () Bool)
 
-(declare-fun temp___518 () (_ BitVec 64))
+(declare-fun temp___400 () (_ BitVec 64))
 
-(declare-fun temp___516 () Bool)
+(declare-fun temp___398 () Bool)
 
-(declare-fun temp___517 () (_ BitVec 64))
+(declare-fun temp___399 () (_ BitVec 64))
 
-(declare-fun temp___515 () (_ BitVec 64))
+(declare-fun temp___397 () (_ BitVec 64))
 
-(declare-fun temp___514 () (_ BitVec 64))
+(declare-fun temp___396 () (_ BitVec 64))
 
-(declare-fun temp___513 () Bool)
+(declare-fun temp___395 () Bool)
 
-(declare-fun temp___523 () (_ BitVec 64))
+(declare-fun temp___405 () (_ BitVec 64))
 
 (declare-fun o76 () (_ BitVec 64))
 
@@ -1459,27 +1430,27 @@
 
 (declare-fun o112 () Bool)
 
-(declare-fun temp___533 () (_ BitVec 64))
+(declare-fun temp___415 () (_ BitVec 64))
 
-(declare-fun temp___532 () (_ BitVec 64))
+(declare-fun temp___414 () (_ BitVec 64))
 
-(declare-fun temp___531 () Bool)
+(declare-fun temp___413 () Bool)
 
-(declare-fun temp___530 () Bool)
+(declare-fun temp___412 () Bool)
 
-(declare-fun temp___529 () (_ BitVec 64))
+(declare-fun temp___411 () (_ BitVec 64))
 
-(declare-fun temp___527 () Bool)
+(declare-fun temp___409 () Bool)
 
-(declare-fun temp___528 () (_ BitVec 64))
+(declare-fun temp___410 () (_ BitVec 64))
 
-(declare-fun temp___526 () (_ BitVec 64))
+(declare-fun temp___408 () (_ BitVec 64))
 
-(declare-fun temp___525 () (_ BitVec 64))
+(declare-fun temp___407 () (_ BitVec 64))
 
-(declare-fun temp___534 () (_ BitVec 64))
+(declare-fun temp___416 () (_ BitVec 64))
 
-(declare-fun temp___524 () Bool)
+(declare-fun temp___406 () Bool)
 
 (declare-fun o113 () (_ BitVec 64))
 
@@ -1553,27 +1524,27 @@
 
 (declare-fun o148 () Bool)
 
-(declare-fun temp___544 () (_ BitVec 64))
+(declare-fun temp___426 () (_ BitVec 64))
 
-(declare-fun temp___543 () (_ BitVec 64))
+(declare-fun temp___425 () (_ BitVec 64))
 
-(declare-fun temp___542 () Bool)
+(declare-fun temp___424 () Bool)
 
-(declare-fun temp___541 () Bool)
+(declare-fun temp___423 () Bool)
 
-(declare-fun temp___540 () (_ BitVec 64))
+(declare-fun temp___422 () (_ BitVec 64))
 
-(declare-fun temp___545 () (_ BitVec 64))
+(declare-fun temp___427 () (_ BitVec 64))
 
-(declare-fun temp___538 () Bool)
+(declare-fun temp___420 () Bool)
 
-(declare-fun temp___539 () (_ BitVec 64))
+(declare-fun temp___421 () (_ BitVec 64))
 
-(declare-fun temp___537 () (_ BitVec 64))
+(declare-fun temp___419 () (_ BitVec 64))
 
-(declare-fun temp___536 () (_ BitVec 64))
+(declare-fun temp___418 () (_ BitVec 64))
 
-(declare-fun temp___535 () Bool)
+(declare-fun temp___417 () Bool)
 
 (declare-fun o149 () (_ BitVec 64))
 
@@ -1627,139 +1598,139 @@
 
 (declare-fun o174 () (_ BitVec 64))
 
-(declare-fun temp___619 () (_ BitVec 64))
+(declare-fun temp___501 () (_ BitVec 64))
 
-(declare-fun temp___621 () (Array (_ BitVec 64) unsigned8))
+(declare-fun temp___503 () (Array (_ BitVec 64) unsigned8))
 
-(declare-fun temp___620 () (_ BitVec 64))
+(declare-fun temp___502 () (_ BitVec 64))
 
-(declare-fun temp___618 () (_ BitVec 64))
+(declare-fun temp___500 () (_ BitVec 64))
 
-(declare-fun temp___617 () (_ BitVec 64))
+(declare-fun temp___499 () (_ BitVec 64))
 
-(declare-fun temp___615 () (_ BitVec 64))
+(declare-fun temp___497 () (_ BitVec 64))
 
-(declare-fun temp___616 () (Array (_ BitVec 64) unsigned8))
+(declare-fun temp___498 () (Array (_ BitVec 64) unsigned8))
 
-(declare-fun temp___613 () Bool)
+(declare-fun temp___495 () Bool)
 
-(declare-fun temp___614 () (_ BitVec 64))
+(declare-fun temp___496 () (_ BitVec 64))
 
-(declare-fun temp___611 () (_ BitVec 64))
+(declare-fun temp___493 () (_ BitVec 64))
 
-(declare-fun temp___612 () (_ BitVec 64))
+(declare-fun temp___494 () (_ BitVec 64))
 
-(declare-fun temp___609 () Bool)
+(declare-fun temp___491 () Bool)
 
-(declare-fun temp___610 () (_ BitVec 64))
+(declare-fun temp___492 () (_ BitVec 64))
 
-(declare-fun temp___608 () (_ BitVec 64))
+(declare-fun temp___490 () (_ BitVec 64))
 
-(declare-fun temp___607 () (_ BitVec 64))
+(declare-fun temp___489 () (_ BitVec 64))
 
-(declare-fun temp___605 () Bool)
+(declare-fun temp___487 () Bool)
 
-(declare-fun temp___606 () (_ BitVec 64))
+(declare-fun temp___488 () (_ BitVec 64))
 
-(declare-fun temp___604 () (_ BitVec 64))
+(declare-fun temp___486 () (_ BitVec 64))
 
-(declare-fun temp___601 () (_ BitVec 64))
+(declare-fun temp___483 () (_ BitVec 64))
 
-(declare-fun temp___602 () (_ BitVec 64))
+(declare-fun temp___484 () (_ BitVec 64))
 
-(declare-fun temp___603 () (_ BitVec 64))
+(declare-fun temp___485 () (_ BitVec 64))
 
-(declare-fun temp___600 () Bool)
+(declare-fun temp___482 () Bool)
 
-(declare-fun temp___599 () (_ BitVec 64))
+(declare-fun temp___481 () (_ BitVec 64))
 
-(declare-fun temp___598 () (_ BitVec 64))
+(declare-fun temp___480 () (_ BitVec 64))
 
 (declare-fun o175 () (_ BitVec 64))
 
-(declare-fun temp___595 () (_ BitVec 64))
+(declare-fun temp___477 () (_ BitVec 64))
 
-(declare-fun temp___594 () (_ BitVec 64))
+(declare-fun temp___476 () (_ BitVec 64))
 
-(declare-fun temp___596 () (_ BitVec 64))
+(declare-fun temp___478 () (_ BitVec 64))
 
-(declare-fun temp___593 () (_ BitVec 64))
+(declare-fun temp___475 () (_ BitVec 64))
 
-(declare-fun temp___591 () (_ BitVec 64))
+(declare-fun temp___473 () (_ BitVec 64))
 
-(declare-fun temp___592 () (Array (_ BitVec 64) unsigned8))
+(declare-fun temp___474 () (Array (_ BitVec 64) unsigned8))
 
-(declare-fun temp___589 () Bool)
+(declare-fun temp___471 () Bool)
 
-(declare-fun temp___590 () (_ BitVec 64))
+(declare-fun temp___472 () (_ BitVec 64))
 
-(declare-fun temp___597 () (Array (_ BitVec 64) unsigned8))
+(declare-fun temp___479 () (Array (_ BitVec 64) unsigned8))
 
-(declare-fun temp___587 () (_ BitVec 64))
+(declare-fun temp___469 () (_ BitVec 64))
 
-(declare-fun temp___588 () (_ BitVec 64))
+(declare-fun temp___470 () (_ BitVec 64))
 
-(declare-fun temp___585 () Bool)
+(declare-fun temp___467 () Bool)
 
-(declare-fun temp___586 () (_ BitVec 64))
+(declare-fun temp___468 () (_ BitVec 64))
 
-(declare-fun temp___584 () (_ BitVec 64))
+(declare-fun temp___466 () (_ BitVec 64))
 
-(declare-fun temp___582 () Bool)
+(declare-fun temp___464 () Bool)
 
-(declare-fun temp___583 () (_ BitVec 64))
+(declare-fun temp___465 () (_ BitVec 64))
 
-(declare-fun temp___581 () (_ BitVec 64))
+(declare-fun temp___463 () (_ BitVec 64))
 
-(declare-fun temp___578 () (_ BitVec 64))
+(declare-fun temp___460 () (_ BitVec 64))
 
-(declare-fun temp___579 () (_ BitVec 64))
+(declare-fun temp___461 () (_ BitVec 64))
 
-(declare-fun temp___580 () (_ BitVec 64))
+(declare-fun temp___462 () (_ BitVec 64))
 
-(declare-fun temp___577 () Bool)
+(declare-fun temp___459 () Bool)
 
-(declare-fun temp___576 () (_ BitVec 64))
+(declare-fun temp___458 () (_ BitVec 64))
 
 (declare-fun o176 () (_ BitVec 64))
 
-(declare-fun temp___573 () (_ BitVec 64))
+(declare-fun temp___455 () (_ BitVec 64))
 
-(declare-fun temp___572 () (_ BitVec 64))
+(declare-fun temp___454 () (_ BitVec 64))
 
-(declare-fun temp___571 () (_ BitVec 64))
+(declare-fun temp___453 () (_ BitVec 64))
 
-(declare-fun temp___569 () (Array (_ BitVec 64) unsigned8))
+(declare-fun temp___451 () (Array (_ BitVec 64) unsigned8))
 
-(declare-fun temp___570 () (_ BitVec 64))
+(declare-fun temp___452 () (_ BitVec 64))
 
-(declare-fun temp___567 () Bool)
+(declare-fun temp___449 () Bool)
 
-(declare-fun temp___568 () (_ BitVec 64))
+(declare-fun temp___450 () (_ BitVec 64))
 
-(declare-fun temp___565 () Bool)
+(declare-fun temp___447 () Bool)
 
-(declare-fun temp___566 () (_ BitVec 64))
+(declare-fun temp___448 () (_ BitVec 64))
 
-(declare-fun temp___574 () (_ BitVec 64))
+(declare-fun temp___456 () (_ BitVec 64))
 
-(declare-fun temp___564 () (_ BitVec 64))
+(declare-fun temp___446 () (_ BitVec 64))
 
-(declare-fun temp___562 () Bool)
+(declare-fun temp___444 () Bool)
 
-(declare-fun temp___563 () (_ BitVec 64))
+(declare-fun temp___445 () (_ BitVec 64))
 
-(declare-fun temp___561 () (_ BitVec 64))
+(declare-fun temp___443 () (_ BitVec 64))
 
-(declare-fun temp___559 () (_ BitVec 64))
+(declare-fun temp___441 () (_ BitVec 64))
 
-(declare-fun temp___560 () (_ BitVec 64))
+(declare-fun temp___442 () (_ BitVec 64))
 
-(declare-fun temp___558 () Bool)
+(declare-fun temp___440 () Bool)
 
-(declare-fun temp___557 () (_ BitVec 64))
+(declare-fun temp___439 () (_ BitVec 64))
 
-(declare-fun temp___575 () (Array (_ BitVec 64) unsigned8))
+(declare-fun temp___457 () (Array (_ BitVec 64) unsigned8))
 
 (declare-fun o177 () (_ BitVec 64))
 
@@ -1779,27 +1750,27 @@
 
 (declare-fun o185 () Bool)
 
-(declare-fun temp___555 () (_ BitVec 64))
+(declare-fun temp___437 () (_ BitVec 64))
 
-(declare-fun temp___556 () (_ BitVec 64))
+(declare-fun temp___438 () (_ BitVec 64))
 
-(declare-fun temp___554 () (_ BitVec 64))
+(declare-fun temp___436 () (_ BitVec 64))
 
-(declare-fun temp___553 () Bool)
+(declare-fun temp___435 () Bool)
 
-(declare-fun temp___552 () Bool)
+(declare-fun temp___434 () Bool)
 
-(declare-fun temp___551 () (_ BitVec 64))
+(declare-fun temp___433 () (_ BitVec 64))
 
-(declare-fun temp___549 () Bool)
+(declare-fun temp___431 () Bool)
 
-(declare-fun temp___550 () (_ BitVec 64))
+(declare-fun temp___432 () (_ BitVec 64))
 
-(declare-fun temp___548 () (_ BitVec 64))
+(declare-fun temp___430 () (_ BitVec 64))
 
-(declare-fun temp___547 () (_ BitVec 64))
+(declare-fun temp___429 () (_ BitVec 64))
 
-(declare-fun temp___546 () Bool)
+(declare-fun temp___428 () Bool)
 
 (declare-fun o186 () (_ BitVec 64))
 
@@ -3862,9 +3833,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o1 (readmem8 (t__content3 rsp) (map__content memory)))
-  (readmem8__function_guard o1 (t__content3 rsp) (map__content memory)))
   (= o1 (to_rep (select (map__content memory) (t__content3 rsp))))))
 
 ;; H
@@ -3879,11 +3848,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o3 (readmem8 (bvadd (t__content3 rsp) ((_ int2bv 64) 1))
         (map__content memory)))
-  (readmem8__function_guard o3 (bvadd (t__content3 rsp) ((_ int2bv 64) 1))
-  (map__content memory)))
   (= o3 (to_rep
         (select (map__content memory) (bvadd (t__content3 rsp) ((_ int2bv 64) 1)))))))
 
@@ -3899,11 +3865,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o5 (readmem8 (bvadd (t__content3 rsp) ((_ int2bv 64) 2))
         (map__content memory)))
-  (readmem8__function_guard o5 (bvadd (t__content3 rsp) ((_ int2bv 64) 2))
-  (map__content memory)))
   (= o5 (to_rep
         (select (map__content memory) (bvadd (t__content3 rsp) ((_ int2bv 64) 2)))))))
 
@@ -3919,11 +3882,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o7 (readmem8 (bvadd (t__content3 rsp) ((_ int2bv 64) 3))
         (map__content memory)))
-  (readmem8__function_guard o7 (bvadd (t__content3 rsp) ((_ int2bv 64) 3))
-  (map__content memory)))
   (= o7 (to_rep
         (select (map__content memory) (bvadd (t__content3 rsp) ((_ int2bv 64) 3)))))))
 
@@ -3939,11 +3899,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o9 (readmem8 (bvadd (t__content3 rsp) ((_ int2bv 64) 4))
         (map__content memory)))
-  (readmem8__function_guard o9 (bvadd (t__content3 rsp) ((_ int2bv 64) 4))
-  (map__content memory)))
   (= o9 (to_rep
         (select (map__content memory) (bvadd (t__content3 rsp) ((_ int2bv 64) 4)))))))
 
@@ -3959,11 +3916,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o11 (readmem8 (bvadd (t__content3 rsp) ((_ int2bv 64) 5))
          (map__content memory)))
-  (readmem8__function_guard o11 (bvadd (t__content3 rsp) ((_ int2bv 64) 5))
-  (map__content memory)))
   (= o11 (to_rep
          (select (map__content memory) (bvadd (t__content3 rsp) ((_ int2bv 64) 5)))))))
 
@@ -3979,11 +3933,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o13 (readmem8 (bvadd (t__content3 rsp) ((_ int2bv 64) 6))
          (map__content memory)))
-  (readmem8__function_guard o13 (bvadd (t__content3 rsp) ((_ int2bv 64) 6))
-  (map__content memory)))
   (= o13 (to_rep
          (select (map__content memory) (bvadd (t__content3 rsp) ((_ int2bv 64) 6)))))))
 
@@ -3999,11 +3950,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o15 (readmem8 (bvadd (t__content3 rsp) ((_ int2bv 64) 7))
          (map__content memory)))
-  (readmem8__function_guard o15 (bvadd (t__content3 rsp) ((_ int2bv 64) 7))
-  (map__content memory)))
   (= o15 (to_rep
          (select (map__content memory) (bvadd (t__content3 rsp) ((_ int2bv 64) 7)))))))
 
@@ -4222,11 +4170,6 @@
 ;; H
   (assert
   (= (let ((subject rsp)) rsp2) (bvsub (let ((subject rsp)) rsp1) ((_ int2bv 64) 8))))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rdi)) rdi1) ((_ int2bv 32) 4198504))
-  (let ((subject rdi)) rdi1) ((_ int2bv 32) 4198504)))
 
 ;; H
   (assert
@@ -4549,11 +4492,6 @@
   (= (let ((subject rsp)) rsp6) (bvsub (let ((subject rsp)) rsp5) ((_ int2bv 64) 8))))
 
 ;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rbx)) rbx1) ((_ int2bv 32) 0))
-  (let ((subject rbx)) rbx1) ((_ int2bv 32) 0)))
-
-;; H
   (assert
   (= (writereg32post (let ((subject rbx)) rbx1) ((_ int2bv 32) 0)) true))
 
@@ -4599,10 +4537,7 @@
 ;; H
   (assert
   (and
-  (and
   (= o23 (readmem64 ((_ int2bv 64) 4198776) (let ((subject memory)) memory6)))
-  (readmem64__function_guard o23 ((_ int2bv 64) 4198776)
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -4647,10 +4582,7 @@
 ;; H
   (assert
   (and
-  (and
   (= o24 (readmem64 ((_ int2bv 64) 4198784) (let ((subject memory)) memory6)))
-  (readmem64__function_guard o24 ((_ int2bv 64) 4198784)
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -4695,10 +4627,7 @@
 ;; H
   (assert
   (and
-  (and
   (= o25 (readmem64 ((_ int2bv 64) 4198792) (let ((subject memory)) memory6)))
-  (readmem64__function_guard o25 ((_ int2bv 64) 4198792)
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -4743,10 +4672,7 @@
 ;; H
   (assert
   (and
-  (and
   (= o26 (readmem64 ((_ int2bv 64) 4198768) (let ((subject memory)) memory6)))
-  (readmem64__function_guard o26 ((_ int2bv 64) 4198768)
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -4800,17 +4726,8 @@
   (= (let ((subject rsp)) rsp11) (bvadd (let ((subject rsp)) rsp10) ((_ int2bv 64) 8))))
 
 ;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rdi)) rdi3) ((_ int2bv 32) 4198688))
-  (let ((subject rdi)) rdi3) ((_ int2bv 32) 4198688)))
-
-;; H
   (assert
   (= (writereg32post (let ((subject rdi)) rdi3) ((_ int2bv 32) 4198688)) true))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post rax ((_ int2bv 32) 0)) rax ((_ int2bv 32) 0)))
 
 ;; H
   (assert (= (writereg32post rax ((_ int2bv 32) 0)) true))
@@ -4827,19 +4744,8 @@
   (= (let ((subject rsp)) rsp13) (bvadd (let ((subject rsp)) rsp12) ((_ int2bv 64) 8))))
 
 ;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rsp)) rsp13))
-  (let ((subject rsp)) rsp13)))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rdi)) rdi4) o30) (let ((subject rdi)) rdi4)
-  o30))
-
-;; H
   (assert
-  (and
-  (and (= o27 (esp (let ((subject rsp)) rsp13))) (esp__function_guard 
-  o27 (let ((subject rsp)) rsp13)))
+  (and (= o27 (esp (let ((subject rsp)) rsp13)))
   (= o27 (readreg32 (let ((subject rsp)) rsp13)))))
 
 ;; H
@@ -4850,9 +4756,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o30 (readmem32 o29 (let ((subject memory)) memory6)))
-  (readmem32__function_guard o30 o29 (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -4878,25 +4782,13 @@
   (assert (= (writereg32post (let ((subject rdi)) rdi4) o30) true))
 
 ;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rdi)) rdi4))
-  (let ((subject rdi)) rdi4)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rdi)) rdi4))
-  (let ((subject rdi)) rdi4)))
-
-;; H
   (assert
-  (and
-  (and (= o31 (edi (let ((subject rdi)) rdi4))) (edi__function_guard 
-  o31 (let ((subject rdi)) rdi4)))
+  (and (= o31 (edi (let ((subject rdi)) rdi4)))
   (= o31 (readreg32 (let ((subject rdi)) rdi4)))))
 
 ;; H
   (assert
-  (and
-  (and (= o32 (edi (let ((subject rdi)) rdi4))) (edi__function_guard 
-  o32 (let ((subject rdi)) rdi4)))
+  (and (= o32 (edi (let ((subject rdi)) rdi4)))
   (= o32 (readreg32 (let ((subject rdi)) rdi4)))))
 
 ;; H
@@ -4912,25 +4804,13 @@
   (assert (= zeroflag1 o34))
 
 ;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rdi)) rdi4))
-  (let ((subject rdi)) rdi4)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rdi)) rdi4))
-  (let ((subject rdi)) rdi4)))
-
-;; H
   (assert
-  (and
-  (and (= o35 (edi (let ((subject rdi)) rdi4))) (edi__function_guard 
-  o35 (let ((subject rdi)) rdi4)))
+  (and (= o35 (edi (let ((subject rdi)) rdi4)))
   (= o35 (readreg32 (let ((subject rdi)) rdi4)))))
 
 ;; H
   (assert
-  (and
-  (and (= o36 (edi (let ((subject rdi)) rdi4))) (edi__function_guard 
-  o36 (let ((subject rdi)) rdi4)))
+  (and (= o36 (edi (let ((subject rdi)) rdi4)))
   (= o36 (readreg32 (let ((subject rdi)) rdi4)))))
 
 ;; H
@@ -4958,121 +4838,83 @@
   (assert (= overflowflag1 (of_int 0)))
 
 ;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rdi)) rdi5) ((_ int2bv 32) 4198699))
-  (let ((subject rdi)) rdi5) ((_ int2bv 32) 4198699)))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post rax1 ((_ int2bv 32) 1)) rax1 ((_ int2bv 32) 1)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx2))
-  (let ((subject rbx)) rbx2)))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rbx)) rbx3) o41) (let ((subject rbx)) rbx3)
-  o41))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx3))
-  (let ((subject rbx)) rbx3)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx3))
-  (let ((subject rbx)) rbx3)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx3))
-  (let ((subject rbx)) rbx3)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx3))
-  (let ((subject rbx)) rbx3)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx3))
-  (let ((subject rbx)) rbx3)))
+  (assert
+  (=>
+  (and (not (= zeroflag1 true))
+  (= (to_int5 signflag1) (to_int5 overflowflag1)))
+  (= temp___393 (let ((subject rbx)) rbx1))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag1 true))
   (= (to_int5 signflag1) (to_int5 overflowflag1)))
-  (= temp___511 (let ((subject rbx)) rbx1))))
+  (= temp___394 (let ((subject rsp)) rsp13))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag1 true))
   (= (to_int5 signflag1) (to_int5 overflowflag1)))
-  (= temp___512 (let ((subject rsp)) rsp13))))
+  (= temp___392 (let ((subject rsp)) rsp13))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag1 true))
   (= (to_int5 signflag1) (to_int5 overflowflag1)))
-  (= temp___510 (let ((subject rsp)) rsp13))))
+  (= temp___391 overflowflag1)))
+
+;; H
+  (assert
+  (=>
+  (and (not (= zeroflag1 true))
+  (= (to_int5 signflag1) (to_int5 overflowflag1))) (= temp___390 signflag1)))
+
+;; H
+  (assert
+  (=>
+  (and (not (= zeroflag1 true))
+  (= (to_int5 signflag1) (to_int5 overflowflag1))) (= temp___389 rax)))
+
+;; H
+  (assert
+  (=>
+  (and (not (= zeroflag1 true))
+  (= (to_int5 signflag1) (to_int5 overflowflag1))) (= temp___387 carryflag1)))
+
+;; H
+  (assert
+  (=>
+  (and (not (= zeroflag1 true))
+  (= (to_int5 signflag1) (to_int5 overflowflag1))) (= temp___388 xmm01)))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag1 true))
   (= (to_int5 signflag1) (to_int5 overflowflag1)))
-  (= temp___509 overflowflag1)))
-
-;; H
-  (assert
-  (=>
-  (and (not (= zeroflag1 true))
-  (= (to_int5 signflag1) (to_int5 overflowflag1))) (= temp___508 signflag1)))
-
-;; H
-  (assert
-  (=>
-  (and (not (= zeroflag1 true))
-  (= (to_int5 signflag1) (to_int5 overflowflag1))) (= temp___507 rax)))
-
-;; H
-  (assert
-  (=>
-  (and (not (= zeroflag1 true))
-  (= (to_int5 signflag1) (to_int5 overflowflag1))) (= temp___505 carryflag1)))
-
-;; H
-  (assert
-  (=>
-  (and (not (= zeroflag1 true))
-  (= (to_int5 signflag1) (to_int5 overflowflag1))) (= temp___506 xmm01)))
+  (= temp___386 (let ((subject rbp)) rbp1))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag1 true))
   (= (to_int5 signflag1) (to_int5 overflowflag1)))
-  (= temp___504 (let ((subject rbp)) rbp1))))
+  (= temp___385 (let ((subject rdi)) rdi4))))
+
+;; H
+  (assert
+  (=>
+  (and (not (= zeroflag1 true))
+  (= (to_int5 signflag1) (to_int5 overflowflag1))) (= temp___384 zeroflag1)))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag1 true))
   (= (to_int5 signflag1) (to_int5 overflowflag1)))
-  (= temp___503 (let ((subject rdi)) rdi4))))
-
-;; H
-  (assert
-  (=>
-  (and (not (= zeroflag1 true))
-  (= (to_int5 signflag1) (to_int5 overflowflag1))) (= temp___502 zeroflag1)))
-
-;; H
-  (assert
-  (=>
-  (and (not (= zeroflag1 true))
-  (= (to_int5 signflag1) (to_int5 overflowflag1)))
-  (= (let ((subject rsp)) rsp14) temp___512)))
+  (= (let ((subject rsp)) rsp14) temp___394)))
 
 ;; H
   (assert
@@ -5088,11 +4930,8 @@
   (and (not (= zeroflag1 true))
   (= (to_int5 signflag1) (to_int5 overflowflag1)))
   (and
-  (and
   (= o39 (readmem64 (let ((subject rbp)) rbp2)
          (let ((subject memory)) memory6)))
-  (readmem64__function_guard o39 (let ((subject rbp)) rbp2)
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -5165,9 +5004,7 @@
   (=>
   (and (not (= zeroflag1 true))
   (= (to_int5 signflag1) (to_int5 overflowflag1)))
-  (and
-  (and (= o40 (ebx (let ((subject rbx)) rbx2))) (ebx__function_guard 
-  o40 (let ((subject rbx)) rbx2)))
+  (and (= o40 (ebx (let ((subject rbx)) rbx2)))
   (= o40 (readreg32 (let ((subject rbx)) rbx2))))))
 
 ;; H
@@ -5224,9 +5061,7 @@
   (=>
   (and (not (= zeroflag1 true))
   (= (to_int5 signflag1) (to_int5 overflowflag1)))
-  (and
-  (and (= o42 (ebx (let ((subject rbx)) rbx3))) (ebx__function_guard 
-  o42 (let ((subject rbx)) rbx3)))
+  (and (= o42 (ebx (let ((subject rbx)) rbx3)))
   (= o42 (readreg32 (let ((subject rbx)) rbx3))))))
 
 ;; H
@@ -5235,13 +5070,9 @@
   (and (not (= zeroflag1 true))
   (= (to_int5 signflag1) (to_int5 overflowflag1)))
   (and
-  (and
   (= o43 (readmem32
          (bvsub (bvadd (let ((subject rsp)) rsp16) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
          (let ((subject memory)) memory6)))
-  (readmem32__function_guard o43
-  (bvsub (bvadd (let ((subject rsp)) rsp16) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -5302,9 +5133,7 @@
   (=>
   (and (not (= zeroflag1 true))
   (= (to_int5 signflag1) (to_int5 overflowflag1)))
-  (and
-  (and (= o46 (ebx (let ((subject rbx)) rbx3))) (ebx__function_guard 
-  o46 (let ((subject rbx)) rbx3)))
+  (and (= o46 (ebx (let ((subject rbx)) rbx3)))
   (= o46 (readreg32 (let ((subject rbx)) rbx3))))))
 
 ;; H
@@ -5313,13 +5142,9 @@
   (and (not (= zeroflag1 true))
   (= (to_int5 signflag1) (to_int5 overflowflag1)))
   (and
-  (and
   (= o47 (readmem32
          (bvsub (bvadd (let ((subject rsp)) rsp16) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
          (let ((subject memory)) memory6)))
-  (readmem32__function_guard o47
-  (bvsub (bvadd (let ((subject rsp)) rsp16) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -5380,9 +5205,7 @@
   (=>
   (and (not (= zeroflag1 true))
   (= (to_int5 signflag1) (to_int5 overflowflag1)))
-  (and
-  (and (= o50 (ebx (let ((subject rbx)) rbx3))) (ebx__function_guard 
-  o50 (let ((subject rbx)) rbx3)))
+  (and (= o50 (ebx (let ((subject rbx)) rbx3)))
   (= o50 (readreg32 (let ((subject rbx)) rbx3))))))
 
 ;; H
@@ -5391,13 +5214,9 @@
   (and (not (= zeroflag1 true))
   (= (to_int5 signflag1) (to_int5 overflowflag1)))
   (and
-  (and
   (= o51 (readmem32
          (bvsub (bvadd (let ((subject rsp)) rsp16) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
          (let ((subject memory)) memory6)))
-  (readmem32__function_guard o51
-  (bvsub (bvadd (let ((subject rsp)) rsp16) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -5453,13 +5272,9 @@
   (= (to_int5 signflag1) (to_int5 overflowflag1)))
   (=> (not (= signflag3 true))
   (and
-  (and
   (= o56 (readmem32
          (bvsub (bvadd (let ((subject rsp)) rsp16) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
          (let ((subject memory)) memory6)))
-  (readmem32__function_guard o56
-  (bvsub (bvadd (let ((subject rsp)) rsp16) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -5509,9 +5324,7 @@
   (and (not (= zeroflag1 true))
   (= (to_int5 signflag1) (to_int5 overflowflag1)))
   (=> (= result42 true)
-  (and
-  (and (= o55 (ebx (let ((subject rbx)) rbx3))) (ebx__function_guard 
-  o55 (let ((subject rbx)) rbx3)))
+  (and (= o55 (ebx (let ((subject rbx)) rbx3)))
   (= o55 (readreg32 (let ((subject rbx)) rbx3)))))))
 
 ;; H
@@ -5535,9 +5348,7 @@
   (and (not (= zeroflag1 true))
   (= (to_int5 signflag1) (to_int5 overflowflag1)))
   (=> (= signflag3 true)
-  (and
-  (and (= o54 (ebx (let ((subject rbx)) rbx3))) (ebx__function_guard 
-  o54 (let ((subject rbx)) rbx3)))
+  (and (= o54 (ebx (let ((subject rbx)) rbx3)))
   (= o54 (readreg32 (let ((subject rbx)) rbx3)))))))
 
 ;; H
@@ -5562,13 +5373,9 @@
   (= (to_int5 signflag1) (to_int5 overflowflag1)))
   (=> (= result43 true)
   (and
-  (and
   (= o53 (readmem32
          (bvsub (bvadd (let ((subject rsp)) rsp16) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
          (let ((subject memory)) memory6)))
-  (readmem32__function_guard o53
-  (bvsub (bvadd (let ((subject rsp)) rsp16) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -6047,18 +5854,8 @@
   (= (to_int5 signflag1) (to_int5 overflowflag1)))) (= zeroflag7 zeroflag1)))
 
 ;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rdi)) rdi10) ((_ int2bv 32) 10))
-  (let ((subject rdi)) rdi10) ((_ int2bv 32) 10)))
-
-;; H
   (assert
   (= (writereg32post (let ((subject rdi)) rdi10) ((_ int2bv 32) 10)) true))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rbx)) rbx8) ((_ int2bv 32) 0))
-  (let ((subject rbx)) rbx8) ((_ int2bv 32) 0)))
 
 ;; H
   (assert
@@ -6099,10 +5896,7 @@
 ;; H
   (assert
   (and
-  (and
   (= o60 (readmem64 ((_ int2bv 64) 4198776) (let ((subject memory)) memory6)))
-  (readmem64__function_guard o60 ((_ int2bv 64) 4198776)
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -6147,10 +5941,7 @@
 ;; H
   (assert
   (and
-  (and
   (= o61 (readmem64 ((_ int2bv 64) 4198800) (let ((subject memory)) memory6)))
-  (readmem64__function_guard o61 ((_ int2bv 64) 4198800)
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -6195,10 +5986,7 @@
 ;; H
   (assert
   (and
-  (and
   (= o62 (readmem64 ((_ int2bv 64) 4198808) (let ((subject memory)) memory6)))
-  (readmem64__function_guard o62 ((_ int2bv 64) 4198808)
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -6243,10 +6031,7 @@
 ;; H
   (assert
   (and
-  (and
   (= o63 (readmem64 ((_ int2bv 64) 4198768) (let ((subject memory)) memory6)))
-  (readmem64__function_guard o63 ((_ int2bv 64) 4198768)
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -6300,16 +6085,7 @@
   (= (let ((subject rsp)) rsp24) (bvadd (let ((subject rsp)) rsp23) ((_ int2bv 64) 8))))
 
 ;; H
-  (assert (writereg32post__function_guard
-  (writereg32post rax6 ((_ int2bv 32) 0)) rax6 ((_ int2bv 32) 0)))
-
-;; H
   (assert (= (writereg32post rax6 ((_ int2bv 32) 0)) true))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rdi)) rdi12) ((_ int2bv 32) 4198688))
-  (let ((subject rdi)) rdi12) ((_ int2bv 32) 4198688)))
 
 ;; H
   (assert
@@ -6327,19 +6103,8 @@
   (= (let ((subject rsp)) rsp26) (bvadd (let ((subject rsp)) rsp25) ((_ int2bv 64) 8))))
 
 ;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rsp)) rsp26))
-  (let ((subject rsp)) rsp26)))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rsi)) rsi3) o67) (let ((subject rsi)) rsi3)
-  o67))
-
-;; H
   (assert
-  (and
-  (and (= o64 (esp (let ((subject rsp)) rsp26))) (esp__function_guard 
-  o64 (let ((subject rsp)) rsp26)))
+  (and (= o64 (esp (let ((subject rsp)) rsp26)))
   (= o64 (readreg32 (let ((subject rsp)) rsp26)))))
 
 ;; H
@@ -6350,9 +6115,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o67 (readmem32 o66 (let ((subject memory)) memory6)))
-  (readmem32__function_guard o67 o66 (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -6378,25 +6141,13 @@
   (assert (= (writereg32post (let ((subject rsi)) rsi3) o67) true))
 
 ;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rsi)) rsi3))
-  (let ((subject rsi)) rsi3)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rsi)) rsi3))
-  (let ((subject rsi)) rsi3)))
-
-;; H
   (assert
-  (and
-  (and (= o68 (esi (let ((subject rsi)) rsi3))) (esi__function_guard 
-  o68 (let ((subject rsi)) rsi3)))
+  (and (= o68 (esi (let ((subject rsi)) rsi3)))
   (= o68 (readreg32 (let ((subject rsi)) rsi3)))))
 
 ;; H
   (assert
-  (and
-  (and (= o69 (esi (let ((subject rsi)) rsi3))) (esi__function_guard 
-  o69 (let ((subject rsi)) rsi3)))
+  (and (= o69 (esi (let ((subject rsi)) rsi3)))
   (= o69 (readreg32 (let ((subject rsi)) rsi3)))))
 
 ;; H
@@ -6412,25 +6163,13 @@
   (assert (= zeroflag8 o71))
 
 ;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rsi)) rsi3))
-  (let ((subject rsi)) rsi3)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rsi)) rsi3))
-  (let ((subject rsi)) rsi3)))
-
-;; H
   (assert
-  (and
-  (and (= o72 (esi (let ((subject rsi)) rsi3))) (esi__function_guard 
-  o72 (let ((subject rsi)) rsi3)))
+  (and (= o72 (esi (let ((subject rsi)) rsi3)))
   (= o72 (readreg32 (let ((subject rsi)) rsi3)))))
 
 ;; H
   (assert
-  (and
-  (and (= o73 (esi (let ((subject rsi)) rsi3))) (esi__function_guard 
-  o73 (let ((subject rsi)) rsi3)))
+  (and (= o73 (esi (let ((subject rsi)) rsi3)))
   (= o73 (readreg32 (let ((subject rsi)) rsi3)))))
 
 ;; H
@@ -6458,121 +6197,83 @@
   (assert (= overflowflag8 (of_int 0)))
 
 ;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rdi)) rdi13) ((_ int2bv 32) 4198699))
-  (let ((subject rdi)) rdi13) ((_ int2bv 32) 4198699)))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post rax7 ((_ int2bv 32) 1)) rax7 ((_ int2bv 32) 1)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx9))
-  (let ((subject rbx)) rbx9)))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rbx)) rbx10) o78)
-  (let ((subject rbx)) rbx10) o78))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx10))
-  (let ((subject rbx)) rbx10)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx10))
-  (let ((subject rbx)) rbx10)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx10))
-  (let ((subject rbx)) rbx10)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx10))
-  (let ((subject rbx)) rbx10)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx10))
-  (let ((subject rbx)) rbx10)))
+  (assert
+  (=>
+  (and (not (= zeroflag8 true))
+  (= (to_int5 signflag8) (to_int5 overflowflag8)))
+  (= temp___404 (let ((subject rbx)) rbx8))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag8 true))
   (= (to_int5 signflag8) (to_int5 overflowflag8)))
-  (= temp___522 (let ((subject rbx)) rbx8))))
+  (= temp___403 (let ((subject rsp)) rsp26))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag8 true))
   (= (to_int5 signflag8) (to_int5 overflowflag8)))
-  (= temp___521 (let ((subject rsp)) rsp26))))
+  (= temp___402 overflowflag8)))
+
+;; H
+  (assert
+  (=>
+  (and (not (= zeroflag8 true))
+  (= (to_int5 signflag8) (to_int5 overflowflag8))) (= temp___401 signflag8)))
+
+;; H
+  (assert
+  (=>
+  (and (not (= zeroflag8 true))
+  (= (to_int5 signflag8) (to_int5 overflowflag8))) (= temp___400 rax6)))
+
+;; H
+  (assert
+  (=>
+  (and (not (= zeroflag8 true))
+  (= (to_int5 signflag8) (to_int5 overflowflag8))) (= temp___398 carryflag8)))
+
+;; H
+  (assert
+  (=>
+  (and (not (= zeroflag8 true))
+  (= (to_int5 signflag8) (to_int5 overflowflag8))) (= temp___399 xmm08)))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag8 true))
   (= (to_int5 signflag8) (to_int5 overflowflag8)))
-  (= temp___520 overflowflag8)))
-
-;; H
-  (assert
-  (=>
-  (and (not (= zeroflag8 true))
-  (= (to_int5 signflag8) (to_int5 overflowflag8))) (= temp___519 signflag8)))
-
-;; H
-  (assert
-  (=>
-  (and (not (= zeroflag8 true))
-  (= (to_int5 signflag8) (to_int5 overflowflag8))) (= temp___518 rax6)))
-
-;; H
-  (assert
-  (=>
-  (and (not (= zeroflag8 true))
-  (= (to_int5 signflag8) (to_int5 overflowflag8))) (= temp___516 carryflag8)))
-
-;; H
-  (assert
-  (=>
-  (and (not (= zeroflag8 true))
-  (= (to_int5 signflag8) (to_int5 overflowflag8))) (= temp___517 xmm08)))
+  (= temp___397 (let ((subject rbp)) rbp8))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag8 true))
   (= (to_int5 signflag8) (to_int5 overflowflag8)))
-  (= temp___515 (let ((subject rbp)) rbp8))))
+  (= temp___396 (let ((subject rdi)) rdi12))))
+
+;; H
+  (assert
+  (=>
+  (and (not (= zeroflag8 true))
+  (= (to_int5 signflag8) (to_int5 overflowflag8))) (= temp___395 zeroflag8)))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag8 true))
   (= (to_int5 signflag8) (to_int5 overflowflag8)))
-  (= temp___514 (let ((subject rdi)) rdi12))))
-
-;; H
-  (assert
-  (=>
-  (and (not (= zeroflag8 true))
-  (= (to_int5 signflag8) (to_int5 overflowflag8))) (= temp___513 zeroflag8)))
+  (= temp___405 (let ((subject rsp)) rsp26))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag8 true))
   (= (to_int5 signflag8) (to_int5 overflowflag8)))
-  (= temp___523 (let ((subject rsp)) rsp26))))
-
-;; H
-  (assert
-  (=>
-  (and (not (= zeroflag8 true))
-  (= (to_int5 signflag8) (to_int5 overflowflag8)))
-  (= (let ((subject rsp)) rsp27) temp___523)))
+  (= (let ((subject rsp)) rsp27) temp___405)))
 
 ;; H
   (assert
@@ -6588,11 +6289,8 @@
   (and (not (= zeroflag8 true))
   (= (to_int5 signflag8) (to_int5 overflowflag8)))
   (and
-  (and
   (= o76 (readmem64 (let ((subject rbp)) rbp9)
          (let ((subject memory)) memory6)))
-  (readmem64__function_guard o76 (let ((subject rbp)) rbp9)
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -6665,9 +6363,7 @@
   (=>
   (and (not (= zeroflag8 true))
   (= (to_int5 signflag8) (to_int5 overflowflag8)))
-  (and
-  (and (= o77 (ebx (let ((subject rbx)) rbx9))) (ebx__function_guard 
-  o77 (let ((subject rbx)) rbx9)))
+  (and (= o77 (ebx (let ((subject rbx)) rbx9)))
   (= o77 (readreg32 (let ((subject rbx)) rbx9))))))
 
 ;; H
@@ -6724,9 +6420,7 @@
   (=>
   (and (not (= zeroflag8 true))
   (= (to_int5 signflag8) (to_int5 overflowflag8)))
-  (and
-  (and (= o79 (ebx (let ((subject rbx)) rbx10))) (ebx__function_guard 
-  o79 (let ((subject rbx)) rbx10)))
+  (and (= o79 (ebx (let ((subject rbx)) rbx10)))
   (= o79 (readreg32 (let ((subject rbx)) rbx10))))))
 
 ;; H
@@ -6735,13 +6429,9 @@
   (and (not (= zeroflag8 true))
   (= (to_int5 signflag8) (to_int5 overflowflag8)))
   (and
-  (and
   (= o80 (readmem32
          (bvsub (bvadd (let ((subject rsp)) rsp29) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
          (let ((subject memory)) memory6)))
-  (readmem32__function_guard o80
-  (bvsub (bvadd (let ((subject rsp)) rsp29) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -6802,9 +6492,7 @@
   (=>
   (and (not (= zeroflag8 true))
   (= (to_int5 signflag8) (to_int5 overflowflag8)))
-  (and
-  (and (= o83 (ebx (let ((subject rbx)) rbx10))) (ebx__function_guard 
-  o83 (let ((subject rbx)) rbx10)))
+  (and (= o83 (ebx (let ((subject rbx)) rbx10)))
   (= o83 (readreg32 (let ((subject rbx)) rbx10))))))
 
 ;; H
@@ -6813,13 +6501,9 @@
   (and (not (= zeroflag8 true))
   (= (to_int5 signflag8) (to_int5 overflowflag8)))
   (and
-  (and
   (= o84 (readmem32
          (bvsub (bvadd (let ((subject rsp)) rsp29) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
          (let ((subject memory)) memory6)))
-  (readmem32__function_guard o84
-  (bvsub (bvadd (let ((subject rsp)) rsp29) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -6880,9 +6564,7 @@
   (=>
   (and (not (= zeroflag8 true))
   (= (to_int5 signflag8) (to_int5 overflowflag8)))
-  (and
-  (and (= o87 (ebx (let ((subject rbx)) rbx10))) (ebx__function_guard 
-  o87 (let ((subject rbx)) rbx10)))
+  (and (= o87 (ebx (let ((subject rbx)) rbx10)))
   (= o87 (readreg32 (let ((subject rbx)) rbx10))))))
 
 ;; H
@@ -6891,13 +6573,9 @@
   (and (not (= zeroflag8 true))
   (= (to_int5 signflag8) (to_int5 overflowflag8)))
   (and
-  (and
   (= o88 (readmem32
          (bvsub (bvadd (let ((subject rsp)) rsp29) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
          (let ((subject memory)) memory6)))
-  (readmem32__function_guard o88
-  (bvsub (bvadd (let ((subject rsp)) rsp29) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -6953,13 +6631,9 @@
   (= (to_int5 signflag8) (to_int5 overflowflag8)))
   (=> (not (= signflag10 true))
   (and
-  (and
   (= o93 (readmem32
          (bvsub (bvadd (let ((subject rsp)) rsp29) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
          (let ((subject memory)) memory6)))
-  (readmem32__function_guard o93
-  (bvsub (bvadd (let ((subject rsp)) rsp29) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -7009,9 +6683,7 @@
   (and (not (= zeroflag8 true))
   (= (to_int5 signflag8) (to_int5 overflowflag8)))
   (=> (= result65 true)
-  (and
-  (and (= o92 (ebx (let ((subject rbx)) rbx10))) (ebx__function_guard 
-  o92 (let ((subject rbx)) rbx10)))
+  (and (= o92 (ebx (let ((subject rbx)) rbx10)))
   (= o92 (readreg32 (let ((subject rbx)) rbx10)))))))
 
 ;; H
@@ -7035,9 +6707,7 @@
   (and (not (= zeroflag8 true))
   (= (to_int5 signflag8) (to_int5 overflowflag8)))
   (=> (= signflag10 true)
-  (and
-  (and (= o91 (ebx (let ((subject rbx)) rbx10))) (ebx__function_guard 
-  o91 (let ((subject rbx)) rbx10)))
+  (and (= o91 (ebx (let ((subject rbx)) rbx10)))
   (= o91 (readreg32 (let ((subject rbx)) rbx10)))))))
 
 ;; H
@@ -7062,13 +6732,9 @@
   (= (to_int5 signflag8) (to_int5 overflowflag8)))
   (=> (= result66 true)
   (and
-  (and
   (= o90 (readmem32
          (bvsub (bvadd (let ((subject rsp)) rsp29) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
          (let ((subject memory)) memory6)))
-  (readmem32__function_guard o90
-  (bvsub (bvadd (let ((subject rsp)) rsp29) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -7551,18 +7217,8 @@
   (= (to_int5 signflag8) (to_int5 overflowflag8)))) (= zeroflag14 zeroflag8)))
 
 ;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rdi)) rdi18) ((_ int2bv 32) 10))
-  (let ((subject rdi)) rdi18) ((_ int2bv 32) 10)))
-
-;; H
   (assert
   (= (writereg32post (let ((subject rdi)) rdi18) ((_ int2bv 32) 10)) true))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rbx)) rbx15) ((_ int2bv 32) 0))
-  (let ((subject rbx)) rbx15) ((_ int2bv 32) 0)))
 
 ;; H
   (assert
@@ -7603,10 +7259,7 @@
 ;; H
   (assert
   (and
-  (and
   (= o97 (readmem64 ((_ int2bv 64) 4198816) (let ((subject memory)) memory6)))
-  (readmem64__function_guard o97 ((_ int2bv 64) 4198816)
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -7651,10 +7304,7 @@
 ;; H
   (assert
   (and
-  (and
   (= o98 (readmem64 ((_ int2bv 64) 4198824) (let ((subject memory)) memory6)))
-  (readmem64__function_guard o98 ((_ int2bv 64) 4198824)
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -7699,10 +7349,7 @@
 ;; H
   (assert
   (and
-  (and
   (= o99 (readmem64 ((_ int2bv 64) 4198832) (let ((subject memory)) memory6)))
-  (readmem64__function_guard o99 ((_ int2bv 64) 4198832)
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -7747,11 +7394,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o100 (readmem64 ((_ int2bv 64) 4198768)
           (let ((subject memory)) memory6)))
-  (readmem64__function_guard o100 ((_ int2bv 64) 4198768)
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -7805,16 +7449,7 @@
   (= (let ((subject rsp)) rsp37) (bvadd (let ((subject rsp)) rsp36) ((_ int2bv 64) 8))))
 
 ;; H
-  (assert (writereg32post__function_guard
-  (writereg32post rax12 ((_ int2bv 32) 0)) rax12 ((_ int2bv 32) 0)))
-
-;; H
   (assert (= (writereg32post rax12 ((_ int2bv 32) 0)) true))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rdi)) rdi20) ((_ int2bv 32) 4198688))
-  (let ((subject rdi)) rdi20) ((_ int2bv 32) 4198688)))
 
 ;; H
   (assert
@@ -7832,18 +7467,8 @@
   (= (let ((subject rsp)) rsp39) (bvadd (let ((subject rsp)) rsp38) ((_ int2bv 64) 8))))
 
 ;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rsp)) rsp39))
-  (let ((subject rsp)) rsp39)))
-
-;; H
-  (assert (writereg32post__function_guard (writereg32post rcx o104) rcx
-  o104))
-
-;; H
   (assert
-  (and
-  (and (= o101 (esp (let ((subject rsp)) rsp39))) (esp__function_guard 
-  o101 (let ((subject rsp)) rsp39)))
+  (and (= o101 (esp (let ((subject rsp)) rsp39)))
   (= o101 (readreg32 (let ((subject rsp)) rsp39)))))
 
 ;; H
@@ -7854,9 +7479,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o104 (readmem32 o103 (let ((subject memory)) memory6)))
-  (readmem32__function_guard o104 o103 (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -7882,20 +7505,10 @@
   (assert (= (writereg32post rcx o104) true))
 
 ;; H
-  (assert (readreg32__function_guard (readreg32 rcx) rcx))
+  (assert (and (= o105 (ecx rcx)) (= o105 (readreg32 rcx))))
 
 ;; H
-  (assert (readreg32__function_guard (readreg32 rcx) rcx))
-
-;; H
-  (assert
-  (and (and (= o105 (ecx rcx)) (ecx__function_guard o105 rcx))
-  (= o105 (readreg32 rcx))))
-
-;; H
-  (assert
-  (and (and (= o106 (ecx rcx)) (ecx__function_guard o106 rcx))
-  (= o106 (readreg32 rcx))))
+  (assert (and (= o106 (ecx rcx)) (= o106 (readreg32 rcx))))
 
 ;; H
   (assert (= o107 (bvand o106 o105)))
@@ -7910,20 +7523,10 @@
   (assert (= zeroflag15 o108))
 
 ;; H
-  (assert (readreg32__function_guard (readreg32 rcx) rcx))
+  (assert (and (= o109 (ecx rcx)) (= o109 (readreg32 rcx))))
 
 ;; H
-  (assert (readreg32__function_guard (readreg32 rcx) rcx))
-
-;; H
-  (assert
-  (and (and (= o109 (ecx rcx)) (ecx__function_guard o109 rcx))
-  (= o109 (readreg32 rcx))))
-
-;; H
-  (assert
-  (and (and (= o110 (ecx rcx)) (ecx__function_guard o110 rcx))
-  (= o110 (readreg32 rcx))))
+  (assert (and (= o110 (ecx rcx)) (= o110 (readreg32 rcx))))
 
 ;; H
   (assert (= o111 (bvand o110 o109)))
@@ -7950,124 +7553,86 @@
   (assert (= overflowflag15 (of_int 0)))
 
 ;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rdi)) rdi21) ((_ int2bv 32) 4198699))
-  (let ((subject rdi)) rdi21) ((_ int2bv 32) 4198699)))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post rax13 ((_ int2bv 32) 1)) rax13 ((_ int2bv 32) 1)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx16))
-  (let ((subject rbx)) rbx16)))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rbx)) rbx17) o115)
-  (let ((subject rbx)) rbx17) o115))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx17))
-  (let ((subject rbx)) rbx17)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx17))
-  (let ((subject rbx)) rbx17)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx17))
-  (let ((subject rbx)) rbx17)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx17))
-  (let ((subject rbx)) rbx17)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx17))
-  (let ((subject rbx)) rbx17)))
+  (assert
+  (=>
+  (and (not (= zeroflag15 true))
+  (= (to_int5 signflag15) (to_int5 overflowflag15)))
+  (= temp___415 (let ((subject rbx)) rbx15))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag15 true))
   (= (to_int5 signflag15) (to_int5 overflowflag15)))
-  (= temp___533 (let ((subject rbx)) rbx15))))
+  (= temp___414 (let ((subject rsp)) rsp39))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag15 true))
   (= (to_int5 signflag15) (to_int5 overflowflag15)))
-  (= temp___532 (let ((subject rsp)) rsp39))))
+  (= temp___413 overflowflag15)))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag15 true))
   (= (to_int5 signflag15) (to_int5 overflowflag15)))
-  (= temp___531 overflowflag15)))
+  (= temp___412 signflag15)))
+
+;; H
+  (assert
+  (=>
+  (and (not (= zeroflag15 true))
+  (= (to_int5 signflag15) (to_int5 overflowflag15))) (= temp___411 rax12)))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag15 true))
   (= (to_int5 signflag15) (to_int5 overflowflag15)))
-  (= temp___530 signflag15)))
+  (= temp___409 carryflag15)))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag15 true))
-  (= (to_int5 signflag15) (to_int5 overflowflag15))) (= temp___529 rax12)))
-
-;; H
-  (assert
-  (=>
-  (and (not (= zeroflag15 true))
-  (= (to_int5 signflag15) (to_int5 overflowflag15)))
-  (= temp___527 carryflag15)))
-
-;; H
-  (assert
-  (=>
-  (and (not (= zeroflag15 true))
-  (= (to_int5 signflag15) (to_int5 overflowflag15))) (= temp___528 xmm015)))
+  (= (to_int5 signflag15) (to_int5 overflowflag15))) (= temp___410 xmm015)))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag15 true))
   (= (to_int5 signflag15) (to_int5 overflowflag15)))
-  (= temp___526 (let ((subject rbp)) rbp15))))
+  (= temp___408 (let ((subject rbp)) rbp15))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag15 true))
   (= (to_int5 signflag15) (to_int5 overflowflag15)))
-  (= temp___525 (let ((subject rdi)) rdi20))))
+  (= temp___407 (let ((subject rdi)) rdi20))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag15 true))
   (= (to_int5 signflag15) (to_int5 overflowflag15)))
-  (= temp___534 (let ((subject rsp)) rsp39))))
+  (= temp___416 (let ((subject rsp)) rsp39))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag15 true))
   (= (to_int5 signflag15) (to_int5 overflowflag15)))
-  (= temp___524 zeroflag15)))
+  (= temp___406 zeroflag15)))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag15 true))
   (= (to_int5 signflag15) (to_int5 overflowflag15)))
-  (= (let ((subject rsp)) rsp40) temp___534)))
+  (= (let ((subject rsp)) rsp40) temp___416)))
 
 ;; H
   (assert
@@ -8083,11 +7648,8 @@
   (and (not (= zeroflag15 true))
   (= (to_int5 signflag15) (to_int5 overflowflag15)))
   (and
-  (and
   (= o113 (readmem64 (let ((subject rbp)) rbp16)
           (let ((subject memory)) memory6)))
-  (readmem64__function_guard o113 (let ((subject rbp)) rbp16)
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -8160,9 +7722,7 @@
   (=>
   (and (not (= zeroflag15 true))
   (= (to_int5 signflag15) (to_int5 overflowflag15)))
-  (and
-  (and (= o114 (ebx (let ((subject rbx)) rbx16))) (ebx__function_guard 
-  o114 (let ((subject rbx)) rbx16)))
+  (and (= o114 (ebx (let ((subject rbx)) rbx16)))
   (= o114 (readreg32 (let ((subject rbx)) rbx16))))))
 
 ;; H
@@ -8219,9 +7779,7 @@
   (=>
   (and (not (= zeroflag15 true))
   (= (to_int5 signflag15) (to_int5 overflowflag15)))
-  (and
-  (and (= o116 (ebx (let ((subject rbx)) rbx17))) (ebx__function_guard 
-  o116 (let ((subject rbx)) rbx17)))
+  (and (= o116 (ebx (let ((subject rbx)) rbx17)))
   (= o116 (readreg32 (let ((subject rbx)) rbx17))))))
 
 ;; H
@@ -8230,13 +7788,9 @@
   (and (not (= zeroflag15 true))
   (= (to_int5 signflag15) (to_int5 overflowflag15)))
   (and
-  (and
   (= o117 (readmem32
           (bvsub (bvadd (let ((subject rsp)) rsp42) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
           (let ((subject memory)) memory6)))
-  (readmem32__function_guard o117
-  (bvsub (bvadd (let ((subject rsp)) rsp42) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -8297,9 +7851,7 @@
   (=>
   (and (not (= zeroflag15 true))
   (= (to_int5 signflag15) (to_int5 overflowflag15)))
-  (and
-  (and (= o120 (ebx (let ((subject rbx)) rbx17))) (ebx__function_guard 
-  o120 (let ((subject rbx)) rbx17)))
+  (and (= o120 (ebx (let ((subject rbx)) rbx17)))
   (= o120 (readreg32 (let ((subject rbx)) rbx17))))))
 
 ;; H
@@ -8308,13 +7860,9 @@
   (and (not (= zeroflag15 true))
   (= (to_int5 signflag15) (to_int5 overflowflag15)))
   (and
-  (and
   (= o121 (readmem32
           (bvsub (bvadd (let ((subject rsp)) rsp42) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
           (let ((subject memory)) memory6)))
-  (readmem32__function_guard o121
-  (bvsub (bvadd (let ((subject rsp)) rsp42) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -8375,9 +7923,7 @@
   (=>
   (and (not (= zeroflag15 true))
   (= (to_int5 signflag15) (to_int5 overflowflag15)))
-  (and
-  (and (= o124 (ebx (let ((subject rbx)) rbx17))) (ebx__function_guard 
-  o124 (let ((subject rbx)) rbx17)))
+  (and (= o124 (ebx (let ((subject rbx)) rbx17)))
   (= o124 (readreg32 (let ((subject rbx)) rbx17))))))
 
 ;; H
@@ -8386,13 +7932,9 @@
   (and (not (= zeroflag15 true))
   (= (to_int5 signflag15) (to_int5 overflowflag15)))
   (and
-  (and
   (= o125 (readmem32
           (bvsub (bvadd (let ((subject rsp)) rsp42) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
           (let ((subject memory)) memory6)))
-  (readmem32__function_guard o125
-  (bvsub (bvadd (let ((subject rsp)) rsp42) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -8448,13 +7990,9 @@
   (= (to_int5 signflag15) (to_int5 overflowflag15)))
   (=> (not (= signflag17 true))
   (and
-  (and
   (= o130 (readmem32
           (bvsub (bvadd (let ((subject rsp)) rsp42) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
           (let ((subject memory)) memory6)))
-  (readmem32__function_guard o130
-  (bvsub (bvadd (let ((subject rsp)) rsp42) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -8504,9 +8042,7 @@
   (and (not (= zeroflag15 true))
   (= (to_int5 signflag15) (to_int5 overflowflag15)))
   (=> (= result88 true)
-  (and
-  (and (= o129 (ebx (let ((subject rbx)) rbx17))) (ebx__function_guard 
-  o129 (let ((subject rbx)) rbx17)))
+  (and (= o129 (ebx (let ((subject rbx)) rbx17)))
   (= o129 (readreg32 (let ((subject rbx)) rbx17)))))))
 
 ;; H
@@ -8530,9 +8066,7 @@
   (and (not (= zeroflag15 true))
   (= (to_int5 signflag15) (to_int5 overflowflag15)))
   (=> (= signflag17 true)
-  (and
-  (and (= o128 (ebx (let ((subject rbx)) rbx17))) (ebx__function_guard 
-  o128 (let ((subject rbx)) rbx17)))
+  (and (= o128 (ebx (let ((subject rbx)) rbx17)))
   (= o128 (readreg32 (let ((subject rbx)) rbx17)))))))
 
 ;; H
@@ -8557,13 +8091,9 @@
   (= (to_int5 signflag15) (to_int5 overflowflag15)))
   (=> (= result89 true)
   (and
-  (and
   (= o127 (readmem32
           (bvsub (bvadd (let ((subject rsp)) rsp42) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
           (let ((subject memory)) memory6)))
-  (readmem32__function_guard o127
-  (bvsub (bvadd (let ((subject rsp)) rsp42) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -9054,18 +8584,8 @@
   (= zeroflag21 zeroflag15)))
 
 ;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rdi)) rdi26) ((_ int2bv 32) 10))
-  (let ((subject rdi)) rdi26) ((_ int2bv 32) 10)))
-
-;; H
   (assert
   (= (writereg32post (let ((subject rdi)) rdi26) ((_ int2bv 32) 10)) true))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rbx)) rbx22) ((_ int2bv 32) 0))
-  (let ((subject rbx)) rbx22) ((_ int2bv 32) 0)))
 
 ;; H
   (assert
@@ -9092,11 +8612,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o134 (readmem64 ((_ int2bv 64) 4198768)
           (let ((subject memory)) memory6)))
-  (readmem64__function_guard o134 ((_ int2bv 64) 4198768)
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -9155,11 +8672,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o135 (readmem64 ((_ int2bv 64) 4198840)
           (let ((subject memory)) memory6)))
-  (readmem64__function_guard o135 ((_ int2bv 64) 4198840)
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -9204,11 +8718,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o136 (readmem64 ((_ int2bv 64) 4198848)
           (let ((subject memory)) memory6)))
-  (readmem64__function_guard o136 ((_ int2bv 64) 4198848)
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -9268,16 +8779,7 @@
   (= (let ((subject rsp)) rsp50) (bvadd (let ((subject rsp)) rsp49) ((_ int2bv 64) 8))))
 
 ;; H
-  (assert (writereg32post__function_guard
-  (writereg32post rax18 ((_ int2bv 32) 0)) rax18 ((_ int2bv 32) 0)))
-
-;; H
   (assert (= (writereg32post rax18 ((_ int2bv 32) 0)) true))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rdi)) rdi28) ((_ int2bv 32) 4198688))
-  (let ((subject rdi)) rdi28) ((_ int2bv 32) 4198688)))
 
 ;; H
   (assert
@@ -9295,18 +8797,8 @@
   (= (let ((subject rsp)) rsp52) (bvadd (let ((subject rsp)) rsp51) ((_ int2bv 64) 8))))
 
 ;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rsp)) rsp52))
-  (let ((subject rsp)) rsp52)))
-
-;; H
-  (assert (writereg32post__function_guard (writereg32post rdx o140) rdx
-  o140))
-
-;; H
   (assert
-  (and
-  (and (= o137 (esp (let ((subject rsp)) rsp52))) (esp__function_guard 
-  o137 (let ((subject rsp)) rsp52)))
+  (and (= o137 (esp (let ((subject rsp)) rsp52)))
   (= o137 (readreg32 (let ((subject rsp)) rsp52)))))
 
 ;; H
@@ -9317,9 +8809,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o140 (readmem32 o139 (let ((subject memory)) memory6)))
-  (readmem32__function_guard o140 o139 (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -9345,20 +8835,10 @@
   (assert (= (writereg32post rdx o140) true))
 
 ;; H
-  (assert (readreg32__function_guard (readreg32 rdx) rdx))
+  (assert (and (= o141 (edx rdx)) (= o141 (readreg32 rdx))))
 
 ;; H
-  (assert (readreg32__function_guard (readreg32 rdx) rdx))
-
-;; H
-  (assert
-  (and (and (= o141 (edx rdx)) (edx__function_guard o141 rdx))
-  (= o141 (readreg32 rdx))))
-
-;; H
-  (assert
-  (and (and (= o142 (edx rdx)) (edx__function_guard o142 rdx))
-  (= o142 (readreg32 rdx))))
+  (assert (and (= o142 (edx rdx)) (= o142 (readreg32 rdx))))
 
 ;; H
   (assert (= o143 (bvand o142 o141)))
@@ -9373,20 +8853,10 @@
   (assert (= zeroflag22 o144))
 
 ;; H
-  (assert (readreg32__function_guard (readreg32 rdx) rdx))
+  (assert (and (= o145 (edx rdx)) (= o145 (readreg32 rdx))))
 
 ;; H
-  (assert (readreg32__function_guard (readreg32 rdx) rdx))
-
-;; H
-  (assert
-  (and (and (= o145 (edx rdx)) (edx__function_guard o145 rdx))
-  (= o145 (readreg32 rdx))))
-
-;; H
-  (assert
-  (and (and (= o146 (edx rdx)) (edx__function_guard o146 rdx))
-  (= o146 (readreg32 rdx))))
+  (assert (and (= o146 (edx rdx)) (= o146 (readreg32 rdx))))
 
 ;; H
   (assert (= o147 (bvand o146 o145)))
@@ -9413,124 +8883,86 @@
   (assert (= overflowflag22 (of_int 0)))
 
 ;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rdi)) rdi29) ((_ int2bv 32) 4198699))
-  (let ((subject rdi)) rdi29) ((_ int2bv 32) 4198699)))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post rax19 ((_ int2bv 32) 1)) rax19 ((_ int2bv 32) 1)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx23))
-  (let ((subject rbx)) rbx23)))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rbx)) rbx24) o151)
-  (let ((subject rbx)) rbx24) o151))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx24))
-  (let ((subject rbx)) rbx24)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx24))
-  (let ((subject rbx)) rbx24)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx24))
-  (let ((subject rbx)) rbx24)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx24))
-  (let ((subject rbx)) rbx24)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx24))
-  (let ((subject rbx)) rbx24)))
+  (assert
+  (=>
+  (and (not (= zeroflag22 true))
+  (= (to_int5 signflag22) (to_int5 overflowflag22)))
+  (= temp___426 (let ((subject rbx)) rbx22))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag22 true))
   (= (to_int5 signflag22) (to_int5 overflowflag22)))
-  (= temp___544 (let ((subject rbx)) rbx22))))
+  (= temp___425 (let ((subject rsp)) rsp52))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag22 true))
   (= (to_int5 signflag22) (to_int5 overflowflag22)))
-  (= temp___543 (let ((subject rsp)) rsp52))))
+  (= temp___424 overflowflag22)))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag22 true))
   (= (to_int5 signflag22) (to_int5 overflowflag22)))
-  (= temp___542 overflowflag22)))
+  (= temp___423 signflag22)))
+
+;; H
+  (assert
+  (=>
+  (and (not (= zeroflag22 true))
+  (= (to_int5 signflag22) (to_int5 overflowflag22))) (= temp___422 rax18)))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag22 true))
   (= (to_int5 signflag22) (to_int5 overflowflag22)))
-  (= temp___541 signflag22)))
-
-;; H
-  (assert
-  (=>
-  (and (not (= zeroflag22 true))
-  (= (to_int5 signflag22) (to_int5 overflowflag22))) (= temp___540 rax18)))
+  (= temp___427 (let ((subject rsp)) rsp52))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag22 true))
   (= (to_int5 signflag22) (to_int5 overflowflag22)))
-  (= temp___545 (let ((subject rsp)) rsp52))))
+  (= temp___420 carryflag22)))
+
+;; H
+  (assert
+  (=>
+  (and (not (= zeroflag22 true))
+  (= (to_int5 signflag22) (to_int5 overflowflag22))) (= temp___421 xmm022)))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag22 true))
   (= (to_int5 signflag22) (to_int5 overflowflag22)))
-  (= temp___538 carryflag22)))
-
-;; H
-  (assert
-  (=>
-  (and (not (= zeroflag22 true))
-  (= (to_int5 signflag22) (to_int5 overflowflag22))) (= temp___539 xmm022)))
+  (= temp___419 (let ((subject rbp)) rbp22))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag22 true))
   (= (to_int5 signflag22) (to_int5 overflowflag22)))
-  (= temp___537 (let ((subject rbp)) rbp22))))
+  (= temp___418 (let ((subject rdi)) rdi28))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag22 true))
   (= (to_int5 signflag22) (to_int5 overflowflag22)))
-  (= temp___536 (let ((subject rdi)) rdi28))))
+  (= temp___417 zeroflag22)))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag22 true))
   (= (to_int5 signflag22) (to_int5 overflowflag22)))
-  (= temp___535 zeroflag22)))
-
-;; H
-  (assert
-  (=>
-  (and (not (= zeroflag22 true))
-  (= (to_int5 signflag22) (to_int5 overflowflag22)))
-  (= (let ((subject rsp)) rsp53) temp___545)))
+  (= (let ((subject rsp)) rsp53) temp___427)))
 
 ;; H
   (assert
@@ -9546,11 +8978,8 @@
   (and (not (= zeroflag22 true))
   (= (to_int5 signflag22) (to_int5 overflowflag22)))
   (and
-  (and
   (= o149 (readmem64 (let ((subject rbp)) rbp23)
           (let ((subject memory)) memory6)))
-  (readmem64__function_guard o149 (let ((subject rbp)) rbp23)
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -9623,9 +9052,7 @@
   (=>
   (and (not (= zeroflag22 true))
   (= (to_int5 signflag22) (to_int5 overflowflag22)))
-  (and
-  (and (= o150 (ebx (let ((subject rbx)) rbx23))) (ebx__function_guard 
-  o150 (let ((subject rbx)) rbx23)))
+  (and (= o150 (ebx (let ((subject rbx)) rbx23)))
   (= o150 (readreg32 (let ((subject rbx)) rbx23))))))
 
 ;; H
@@ -9682,9 +9109,7 @@
   (=>
   (and (not (= zeroflag22 true))
   (= (to_int5 signflag22) (to_int5 overflowflag22)))
-  (and
-  (and (= o152 (ebx (let ((subject rbx)) rbx24))) (ebx__function_guard 
-  o152 (let ((subject rbx)) rbx24)))
+  (and (= o152 (ebx (let ((subject rbx)) rbx24)))
   (= o152 (readreg32 (let ((subject rbx)) rbx24))))))
 
 ;; H
@@ -9693,13 +9118,9 @@
   (and (not (= zeroflag22 true))
   (= (to_int5 signflag22) (to_int5 overflowflag22)))
   (and
-  (and
   (= o153 (readmem32
           (bvsub (bvadd (let ((subject rsp)) rsp55) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
           (let ((subject memory)) memory6)))
-  (readmem32__function_guard o153
-  (bvsub (bvadd (let ((subject rsp)) rsp55) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -9760,9 +9181,7 @@
   (=>
   (and (not (= zeroflag22 true))
   (= (to_int5 signflag22) (to_int5 overflowflag22)))
-  (and
-  (and (= o156 (ebx (let ((subject rbx)) rbx24))) (ebx__function_guard 
-  o156 (let ((subject rbx)) rbx24)))
+  (and (= o156 (ebx (let ((subject rbx)) rbx24)))
   (= o156 (readreg32 (let ((subject rbx)) rbx24))))))
 
 ;; H
@@ -9771,13 +9190,9 @@
   (and (not (= zeroflag22 true))
   (= (to_int5 signflag22) (to_int5 overflowflag22)))
   (and
-  (and
   (= o157 (readmem32
           (bvsub (bvadd (let ((subject rsp)) rsp55) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
           (let ((subject memory)) memory6)))
-  (readmem32__function_guard o157
-  (bvsub (bvadd (let ((subject rsp)) rsp55) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -9838,9 +9253,7 @@
   (=>
   (and (not (= zeroflag22 true))
   (= (to_int5 signflag22) (to_int5 overflowflag22)))
-  (and
-  (and (= o160 (ebx (let ((subject rbx)) rbx24))) (ebx__function_guard 
-  o160 (let ((subject rbx)) rbx24)))
+  (and (= o160 (ebx (let ((subject rbx)) rbx24)))
   (= o160 (readreg32 (let ((subject rbx)) rbx24))))))
 
 ;; H
@@ -9849,13 +9262,9 @@
   (and (not (= zeroflag22 true))
   (= (to_int5 signflag22) (to_int5 overflowflag22)))
   (and
-  (and
   (= o161 (readmem32
           (bvsub (bvadd (let ((subject rsp)) rsp55) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
           (let ((subject memory)) memory6)))
-  (readmem32__function_guard o161
-  (bvsub (bvadd (let ((subject rsp)) rsp55) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -9911,13 +9320,9 @@
   (= (to_int5 signflag22) (to_int5 overflowflag22)))
   (=> (not (= signflag24 true))
   (and
-  (and
   (= o166 (readmem32
           (bvsub (bvadd (let ((subject rsp)) rsp55) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
           (let ((subject memory)) memory6)))
-  (readmem32__function_guard o166
-  (bvsub (bvadd (let ((subject rsp)) rsp55) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -9967,9 +9372,7 @@
   (and (not (= zeroflag22 true))
   (= (to_int5 signflag22) (to_int5 overflowflag22)))
   (=> (= result111 true)
-  (and
-  (and (= o165 (ebx (let ((subject rbx)) rbx24))) (ebx__function_guard 
-  o165 (let ((subject rbx)) rbx24)))
+  (and (= o165 (ebx (let ((subject rbx)) rbx24)))
   (= o165 (readreg32 (let ((subject rbx)) rbx24)))))))
 
 ;; H
@@ -9993,9 +9396,7 @@
   (and (not (= zeroflag22 true))
   (= (to_int5 signflag22) (to_int5 overflowflag22)))
   (=> (= signflag24 true)
-  (and
-  (and (= o164 (ebx (let ((subject rbx)) rbx24))) (ebx__function_guard 
-  o164 (let ((subject rbx)) rbx24)))
+  (and (= o164 (ebx (let ((subject rbx)) rbx24)))
   (= o164 (readreg32 (let ((subject rbx)) rbx24)))))))
 
 ;; H
@@ -10020,13 +9421,9 @@
   (= (to_int5 signflag22) (to_int5 overflowflag22)))
   (=> (= result112 true)
   (and
-  (and
   (= o163 (readmem32
           (bvsub (bvadd (let ((subject rsp)) rsp55) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
           (let ((subject memory)) memory6)))
-  (readmem32__function_guard o163
-  (bvsub (bvadd (let ((subject rsp)) rsp55) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -10517,11 +9914,6 @@
   (= zeroflag28 zeroflag22)))
 
 ;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rdi)) rdi34) ((_ int2bv 32) 10))
-  (let ((subject rdi)) rdi34) ((_ int2bv 32) 10)))
-
-;; H
   (assert
   (= (writereg32post (let ((subject rdi)) rdi34) ((_ int2bv 32) 10)) true))
 
@@ -10545,11 +9937,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o170 (readmem64 ((_ int2bv 64) 4198768)
           (let ((subject memory)) memory6)))
-  (readmem64__function_guard o170 ((_ int2bv 64) 4198768)
-  (let ((subject memory)) memory6)))
   (and
   (and
   (and
@@ -10592,14 +9981,8 @@
   (assert (= xmm61 o170))
 
 ;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rsp)) rsp61))
-  (let ((subject rsp)) rsp61)))
-
-;; H
   (assert
-  (and
-  (and (= o171 (esp (let ((subject rsp)) rsp61))) (esp__function_guard 
-  o171 (let ((subject rsp)) rsp61)))
+  (and (= o171 (esp (let ((subject rsp)) rsp61)))
   (= o171 (readreg32 (let ((subject rsp)) rsp61)))))
 
 ;; H
@@ -10747,74 +10130,10 @@
                                                                   memory7) i)))))))
 
 ;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rbx)) rbx32) ((_ int2bv 32) 0))
-  (let ((subject rbx)) rbx32) ((_ int2bv 32) 0)))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post rax27 ((_ int2bv 32) 0)) rax27 ((_ int2bv 32) 0)))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rdi)) rdi40) ((_ int2bv 32) 4198688))
-  (let ((subject rdi)) rdi40) ((_ int2bv 32) 4198688)))
-
-;; H
-  (assert (writereg32post__function_guard (writereg32post rax28 o181) 
-  rax28 o181))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rdi)) rdi41) ((_ int2bv 32) 4198699))
-  (let ((subject rdi)) rdi41) ((_ int2bv 32) 4198699)))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post rax29 ((_ int2bv 32) 1)) rax29 ((_ int2bv 32) 1)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx33))
-  (let ((subject rbx)) rbx33)))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rbx)) rbx34) o188)
-  (let ((subject rbx)) rbx34) o188))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx34))
-  (let ((subject rbx)) rbx34)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx34))
-  (let ((subject rbx)) rbx34)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx34))
-  (let ((subject rbx)) rbx34)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx34))
-  (let ((subject rbx)) rbx34)))
-
-;; H
-  (assert (readreg32__function_guard (readreg32 (let ((subject rbx)) rbx34))
-  (let ((subject rbx)) rbx34)))
-
-;; H
-  (assert (writereg32post__function_guard
-  (writereg32post (let ((subject rdi)) rdi46) ((_ int2bv 32) 10))
-  (let ((subject rdi)) rdi46) ((_ int2bv 32) 10)))
-
-;; H
   (assert
-  (and
   (and
   (= o174 (readmem64 ((_ int2bv 64) 4198760)
           (let ((subject memory)) memory8)))
-  (readmem64__function_guard o174 ((_ int2bv 64) 4198760)
-  (let ((subject memory)) memory8)))
   (and
   (and
   (and
@@ -10950,79 +10269,79 @@
                                                                   memory8) i))))))))
 
 ;; H
-  (assert (= temp___619 (let ((subject rbx)) rbx29)))
+  (assert (= temp___501 (let ((subject rbx)) rbx29)))
 
 ;; H
-  (assert (= temp___621 (let ((subject memory)) memory9)))
+  (assert (= temp___503 (let ((subject memory)) memory9)))
 
 ;; H
-  (assert (= temp___620 (let ((subject rsp)) rsp62)))
+  (assert (= temp___502 (let ((subject rsp)) rsp62)))
 
 ;; H
-  (assert (= temp___618 xmm35))
+  (assert (= temp___500 xmm35))
 
 ;; H
-  (assert (= temp___617 (let ((subject rsp)) rsp62)))
+  (assert (= temp___499 (let ((subject rsp)) rsp62)))
 
 ;; H
-  (assert (= temp___615 (let ((subject rsi)) rsi6)))
+  (assert (= temp___497 (let ((subject rsi)) rsi6)))
 
 ;; H
-  (assert (= temp___616 (let ((subject memory)) memory9)))
+  (assert (= temp___498 (let ((subject memory)) memory9)))
 
 ;; H
-  (assert (= temp___613 overflowflag29))
+  (assert (= temp___495 overflowflag29))
 
 ;; H
-  (assert (= temp___614 xmm25))
+  (assert (= temp___496 xmm25))
 
 ;; H
-  (assert (= temp___611 (let ((subject r13)) r131)))
+  (assert (= temp___493 (let ((subject r13)) r131)))
 
 ;; H
-  (assert (= temp___612 xmm71))
+  (assert (= temp___494 xmm71))
 
 ;; H
-  (assert (= temp___609 signflag29))
+  (assert (= temp___491 signflag29))
 
 ;; H
-  (assert (= temp___610 xmm15))
+  (assert (= temp___492 xmm15))
 
 ;; H
-  (assert (= temp___608 xmm62))
+  (assert (= temp___490 xmm62))
 
 ;; H
-  (assert (= temp___607 rax24))
+  (assert (= temp___489 rax24))
 
 ;; H
-  (assert (= temp___605 carryflag29))
+  (assert (= temp___487 carryflag29))
 
 ;; H
-  (assert (= temp___606 xmm029))
+  (assert (= temp___488 xmm029))
 
 ;; H
-  (assert (= temp___604 (let ((subject rbp)) rbp29)))
+  (assert (= temp___486 (let ((subject rbp)) rbp29)))
 
 ;; H
-  (assert (= temp___601 xmm5))
+  (assert (= temp___483 xmm5))
 
 ;; H
-  (assert (= temp___602 (let ((subject rdi)) rdi35)))
+  (assert (= temp___484 (let ((subject rdi)) rdi35)))
 
 ;; H
-  (assert (= temp___603 (let ((subject r12)) r121)))
+  (assert (= temp___485 (let ((subject r12)) r121)))
 
 ;; H
-  (assert (= temp___600 zeroflag29))
+  (assert (= temp___482 zeroflag29))
 
 ;; H
-  (assert (= temp___599 xmm4))
+  (assert (= temp___481 xmm4))
 
 ;; H
-  (assert (= temp___598 (let ((subject r14)) r142)))
+  (assert (= temp___480 (let ((subject r14)) r142)))
 
 ;; H
-  (assert (= (let ((subject rsp)) rsp63) temp___620))
+  (assert (= (let ((subject rsp)) rsp63) temp___502))
 
 ;; H
   (assert
@@ -11078,16 +10397,13 @@
   (not (= i (bvadd (let ((subject rsp)) rsp63) ((_ int2bv 64) 22)))))
   (not (= i (bvadd (let ((subject rsp)) rsp63) ((_ int2bv 64) 23)))))
   (= (to_rep (select (let ((subject memory)) memory10) i)) (to_rep
-                                                           (select temp___621 i)))))))
+                                                           (select temp___503 i)))))))
 
 ;; H
   (assert
   (and
-  (and
   (= o175 (readmem64 ((_ int2bv 64) 4198752)
           (let ((subject memory)) memory10)))
-  (readmem64__function_guard o175 ((_ int2bv 64) 4198752)
-  (let ((subject memory)) memory10)))
   (and
   (and
   (and
@@ -11223,73 +10539,73 @@
                                                                    memory10) i))))))))
 
 ;; H
-  (assert (= temp___595 (let ((subject rbx)) rbx30)))
+  (assert (= temp___477 (let ((subject rbx)) rbx30)))
 
 ;; H
-  (assert (= temp___594 xmm36))
+  (assert (= temp___476 xmm36))
 
 ;; H
-  (assert (= temp___596 (let ((subject rsp)) rsp63)))
+  (assert (= temp___478 (let ((subject rsp)) rsp63)))
 
 ;; H
-  (assert (= temp___593 (let ((subject rsp)) rsp63)))
+  (assert (= temp___475 (let ((subject rsp)) rsp63)))
 
 ;; H
-  (assert (= temp___591 (let ((subject rsi)) rsi7)))
+  (assert (= temp___473 (let ((subject rsi)) rsi7)))
 
 ;; H
-  (assert (= temp___592 (let ((subject memory)) memory11)))
+  (assert (= temp___474 (let ((subject memory)) memory11)))
 
 ;; H
-  (assert (= temp___589 overflowflag30))
+  (assert (= temp___471 overflowflag30))
 
 ;; H
-  (assert (= temp___590 xmm26))
+  (assert (= temp___472 xmm26))
 
 ;; H
-  (assert (= temp___597 (let ((subject memory)) memory11)))
+  (assert (= temp___479 (let ((subject memory)) memory11)))
 
 ;; H
-  (assert (= temp___587 (let ((subject r13)) r133)))
+  (assert (= temp___469 (let ((subject r13)) r133)))
 
 ;; H
-  (assert (= temp___588 xmm73))
+  (assert (= temp___470 xmm73))
 
 ;; H
-  (assert (= temp___585 signflag30))
+  (assert (= temp___467 signflag30))
 
 ;; H
-  (assert (= temp___586 xmm16))
+  (assert (= temp___468 xmm16))
 
 ;; H
-  (assert (= temp___584 rax25))
+  (assert (= temp___466 rax25))
 
 ;; H
-  (assert (= temp___582 carryflag30))
+  (assert (= temp___464 carryflag30))
 
 ;; H
-  (assert (= temp___583 xmm030))
+  (assert (= temp___465 xmm030))
 
 ;; H
-  (assert (= temp___581 (let ((subject rbp)) rbp30)))
+  (assert (= temp___463 (let ((subject rbp)) rbp30)))
 
 ;; H
-  (assert (= temp___578 xmm51))
+  (assert (= temp___460 xmm51))
 
 ;; H
-  (assert (= temp___579 (let ((subject rdi)) rdi36)))
+  (assert (= temp___461 (let ((subject rdi)) rdi36)))
 
 ;; H
-  (assert (= temp___580 (let ((subject r12)) r122)))
+  (assert (= temp___462 (let ((subject r12)) r122)))
 
 ;; H
-  (assert (= temp___577 zeroflag30))
+  (assert (= temp___459 zeroflag30))
 
 ;; H
-  (assert (= temp___576 xmm41))
+  (assert (= temp___458 xmm41))
 
 ;; H
-  (assert (= (let ((subject rsp)) rsp64) temp___596))
+  (assert (= (let ((subject rsp)) rsp64) temp___478))
 
 ;; H
   (assert
@@ -11329,16 +10645,13 @@
   (not (= i (bvadd (let ((subject rsp)) rsp64) ((_ int2bv 64) 14)))))
   (not (= i (bvadd (let ((subject rsp)) rsp64) ((_ int2bv 64) 15)))))
   (= (to_rep (select (let ((subject memory)) memory12) i)) (to_rep
-                                                           (select temp___597 i)))))))
+                                                           (select temp___479 i)))))))
 
 ;; H
   (assert
   (and
-  (and
   (= o176 (readmem64 ((_ int2bv 64) 4198744)
           (let ((subject memory)) memory12)))
-  (readmem64__function_guard o176 ((_ int2bv 64) 4198744)
-  (let ((subject memory)) memory12)))
   (and
   (and
   (and
@@ -11459,64 +10772,64 @@
                                                                    memory12) i))))))))
 
 ;; H
-  (assert (= temp___573 (let ((subject rbx)) rbx31)))
+  (assert (= temp___455 (let ((subject rbx)) rbx31)))
 
 ;; H
-  (assert (= temp___572 xmm37))
+  (assert (= temp___454 xmm37))
 
 ;; H
-  (assert (= temp___571 (let ((subject rsp)) rsp64)))
+  (assert (= temp___453 (let ((subject rsp)) rsp64)))
 
 ;; H
-  (assert (= temp___569 (let ((subject memory)) memory13)))
+  (assert (= temp___451 (let ((subject memory)) memory13)))
 
 ;; H
-  (assert (= temp___570 (let ((subject rsi)) rsi8)))
+  (assert (= temp___452 (let ((subject rsi)) rsi8)))
 
 ;; H
-  (assert (= temp___567 overflowflag31))
+  (assert (= temp___449 overflowflag31))
 
 ;; H
-  (assert (= temp___568 xmm27))
+  (assert (= temp___450 xmm27))
 
 ;; H
-  (assert (= temp___565 signflag31))
+  (assert (= temp___447 signflag31))
 
 ;; H
-  (assert (= temp___566 xmm17))
+  (assert (= temp___448 xmm17))
 
 ;; H
-  (assert (= temp___574 (let ((subject rsp)) rsp64)))
+  (assert (= temp___456 (let ((subject rsp)) rsp64)))
 
 ;; H
-  (assert (= temp___564 rax26))
+  (assert (= temp___446 rax26))
 
 ;; H
-  (assert (= temp___562 carryflag31))
+  (assert (= temp___444 carryflag31))
 
 ;; H
-  (assert (= temp___563 xmm031))
+  (assert (= temp___445 xmm031))
 
 ;; H
-  (assert (= temp___561 (let ((subject rbp)) rbp31)))
+  (assert (= temp___443 (let ((subject rbp)) rbp31)))
 
 ;; H
-  (assert (= temp___559 (let ((subject r12)) r124)))
+  (assert (= temp___441 (let ((subject r12)) r124)))
 
 ;; H
-  (assert (= temp___560 (let ((subject rdi)) rdi37)))
+  (assert (= temp___442 (let ((subject rdi)) rdi37)))
 
 ;; H
-  (assert (= temp___558 zeroflag31))
+  (assert (= temp___440 zeroflag31))
 
 ;; H
-  (assert (= temp___557 xmm42))
+  (assert (= temp___439 xmm42))
 
 ;; H
-  (assert (= temp___575 (let ((subject memory)) memory13)))
+  (assert (= temp___457 (let ((subject memory)) memory13)))
 
 ;; H
-  (assert (= (let ((subject rsp)) rsp65) temp___574))
+  (assert (= (let ((subject rsp)) rsp65) temp___456))
 
 ;; H
   (assert
@@ -11540,7 +10853,7 @@
   (not (= i (bvadd (let ((subject rsp)) rsp65) ((_ int2bv 64) 6)))))
   (not (= i (bvadd (let ((subject rsp)) rsp65) ((_ int2bv 64) 7)))))
   (= (to_rep (select (let ((subject memory)) memory14) i)) (to_rep
-                                                           (select temp___575 i)))))))
+                                                           (select temp___457 i)))))))
 
 ;; H
   (assert (= result123 (let ((subject rsi)) (mk_t__ref3 rsi9))))
@@ -11563,11 +10876,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o177 (readmem64 (let ((subject rsp)) rsp65)
           (let ((subject memory)) memory14)))
-  (readmem64__function_guard o177 (let ((subject rsp)) rsp65)
-  (let ((subject memory)) memory14)))
   (and
   (and
   (and
@@ -11630,13 +10940,9 @@
 ;; H
   (assert
   (and
-  (and
   (= o178 (readmem64
           (bvsub (bvadd (let ((subject rsp)) rsp65) ((_ int2bv 64) 152)) ((_ int2bv 64) 144))
           (let ((subject memory)) memory14)))
-  (readmem64__function_guard o178
-  (bvsub (bvadd (let ((subject rsp)) rsp65) ((_ int2bv 64) 152)) ((_ int2bv 64) 144))
-  (let ((subject memory)) memory14)))
   (and
   (and
   (and
@@ -11698,13 +11004,9 @@
 ;; H
   (assert
   (and
-  (and
   (= o179 (readmem64
           (bvsub (bvadd (let ((subject rsp)) rsp65) ((_ int2bv 64) 152)) ((_ int2bv 64) 136))
           (let ((subject memory)) memory14)))
-  (readmem64__function_guard o179
-  (bvsub (bvadd (let ((subject rsp)) rsp65) ((_ int2bv 64) 152)) ((_ int2bv 64) 136))
-  (let ((subject memory)) memory14)))
   (and
   (and
   (and
@@ -11766,13 +11068,9 @@
 ;; H
   (assert
   (and
-  (and
   (= o180 (readmem64
           (bvsub (bvadd (let ((subject rsp)) rsp65) ((_ int2bv 64) 152)) ((_ int2bv 64) 128))
           (let ((subject memory)) memory14)))
-  (readmem64__function_guard o180
-  (bvsub (bvadd (let ((subject rsp)) rsp65) ((_ int2bv 64) 152)) ((_ int2bv 64) 128))
-  (let ((subject memory)) memory14)))
   (and
   (and
   (and
@@ -11863,13 +11161,9 @@
 ;; H
   (assert
   (and
-  (and
   (= o181 (readmem32
           (bvsub (bvadd (let ((subject rsp)) rsp69) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
           (let ((subject memory)) memory14)))
-  (readmem32__function_guard o181
-  (bvsub (bvadd (let ((subject rsp)) rsp69) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory14)))
   (and
   (and
   (and
@@ -11903,7 +11197,7 @@
 
 ;; H
   (assert
-  (and (and (= o182 (eax rax28)) (eax__function_guard o182 rax28))
+  (and (= o182 (eax rax28))
   (= o182 ((_ extract 31 0) (bvand rax28 ((_ int2bv 64) 4294967295))))))
 
 ;; H
@@ -11917,7 +11211,7 @@
 
 ;; H
   (assert
-  (and (and (= o184 (eax rax28)) (eax__function_guard o184 rax28))
+  (and (= o184 (eax rax28))
   (= o184 ((_ extract 31 0) (bvand rax28 ((_ int2bv 64) 4294967295))))))
 
 ;; H
@@ -11946,82 +11240,82 @@
   (=>
   (and (not (= zeroflag33 true))
   (= (to_int5 signflag33) (to_int5 overflowflag33)))
-  (= temp___555 (let ((subject rbx)) rbx32))))
+  (= temp___437 (let ((subject rbx)) rbx32))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag33 true))
   (= (to_int5 signflag33) (to_int5 overflowflag33)))
-  (= temp___556 (let ((subject rsp)) rsp69))))
+  (= temp___438 (let ((subject rsp)) rsp69))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag33 true))
   (= (to_int5 signflag33) (to_int5 overflowflag33)))
-  (= temp___554 (let ((subject rsp)) rsp69))))
+  (= temp___436 (let ((subject rsp)) rsp69))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag33 true))
   (= (to_int5 signflag33) (to_int5 overflowflag33)))
-  (= temp___553 overflowflag33)))
+  (= temp___435 overflowflag33)))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag33 true))
   (= (to_int5 signflag33) (to_int5 overflowflag33)))
-  (= temp___552 signflag33)))
+  (= temp___434 signflag33)))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag33 true))
-  (= (to_int5 signflag33) (to_int5 overflowflag33))) (= temp___551 rax28)))
-
-;; H
-  (assert
-  (=>
-  (and (not (= zeroflag33 true))
-  (= (to_int5 signflag33) (to_int5 overflowflag33)))
-  (= temp___549 carryflag33)))
-
-;; H
-  (assert
-  (=>
-  (and (not (= zeroflag33 true))
-  (= (to_int5 signflag33) (to_int5 overflowflag33))) (= temp___550 xmm033)))
+  (= (to_int5 signflag33) (to_int5 overflowflag33))) (= temp___433 rax28)))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag33 true))
   (= (to_int5 signflag33) (to_int5 overflowflag33)))
-  (= temp___548 (let ((subject rbp)) rbp33))))
+  (= temp___431 carryflag33)))
+
+;; H
+  (assert
+  (=>
+  (and (not (= zeroflag33 true))
+  (= (to_int5 signflag33) (to_int5 overflowflag33))) (= temp___432 xmm033)))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag33 true))
   (= (to_int5 signflag33) (to_int5 overflowflag33)))
-  (= temp___547 (let ((subject rdi)) rdi40))))
+  (= temp___430 (let ((subject rbp)) rbp33))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag33 true))
   (= (to_int5 signflag33) (to_int5 overflowflag33)))
-  (= temp___546 zeroflag33)))
+  (= temp___429 (let ((subject rdi)) rdi40))))
 
 ;; H
   (assert
   (=>
   (and (not (= zeroflag33 true))
   (= (to_int5 signflag33) (to_int5 overflowflag33)))
-  (= (let ((subject rsp)) rsp70) temp___556)))
+  (= temp___428 zeroflag33)))
+
+;; H
+  (assert
+  (=>
+  (and (not (= zeroflag33 true))
+  (= (to_int5 signflag33) (to_int5 overflowflag33)))
+  (= (let ((subject rsp)) rsp70) temp___438)))
 
 ;; H
   (assert
@@ -12037,11 +11331,8 @@
   (and (not (= zeroflag33 true))
   (= (to_int5 signflag33) (to_int5 overflowflag33)))
   (and
-  (and
   (= o186 (readmem64 (let ((subject rbp)) rbp34)
           (let ((subject memory)) memory14)))
-  (readmem64__function_guard o186 (let ((subject rbp)) rbp34)
-  (let ((subject memory)) memory14)))
   (and
   (and
   (and
@@ -12120,9 +11411,7 @@
   (=>
   (and (not (= zeroflag33 true))
   (= (to_int5 signflag33) (to_int5 overflowflag33)))
-  (and
-  (and (= o187 (ebx (let ((subject rbx)) rbx33))) (ebx__function_guard 
-  o187 (let ((subject rbx)) rbx33)))
+  (and (= o187 (ebx (let ((subject rbx)) rbx33)))
   (= o187 (readreg32 (let ((subject rbx)) rbx33))))))
 
 ;; H
@@ -12179,9 +11468,7 @@
   (=>
   (and (not (= zeroflag33 true))
   (= (to_int5 signflag33) (to_int5 overflowflag33)))
-  (and
-  (and (= o189 (ebx (let ((subject rbx)) rbx34))) (ebx__function_guard 
-  o189 (let ((subject rbx)) rbx34)))
+  (and (= o189 (ebx (let ((subject rbx)) rbx34)))
   (= o189 (readreg32 (let ((subject rbx)) rbx34))))))
 
 ;; H
@@ -12190,13 +11477,9 @@
   (and (not (= zeroflag33 true))
   (= (to_int5 signflag33) (to_int5 overflowflag33)))
   (and
-  (and
   (= o190 (readmem32
           (bvsub (bvadd (let ((subject rsp)) rsp72) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
           (let ((subject memory)) memory14)))
-  (readmem32__function_guard o190
-  (bvsub (bvadd (let ((subject rsp)) rsp72) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory14)))
   (and
   (and
   (and
@@ -12257,9 +11540,7 @@
   (=>
   (and (not (= zeroflag33 true))
   (= (to_int5 signflag33) (to_int5 overflowflag33)))
-  (and
-  (and (= o193 (ebx (let ((subject rbx)) rbx34))) (ebx__function_guard 
-  o193 (let ((subject rbx)) rbx34)))
+  (and (= o193 (ebx (let ((subject rbx)) rbx34)))
   (= o193 (readreg32 (let ((subject rbx)) rbx34))))))
 
 ;; H
@@ -12268,13 +11549,9 @@
   (and (not (= zeroflag33 true))
   (= (to_int5 signflag33) (to_int5 overflowflag33)))
   (and
-  (and
   (= o194 (readmem32
           (bvsub (bvadd (let ((subject rsp)) rsp72) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
           (let ((subject memory)) memory14)))
-  (readmem32__function_guard o194
-  (bvsub (bvadd (let ((subject rsp)) rsp72) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory14)))
   (and
   (and
   (and
@@ -12335,9 +11612,7 @@
   (=>
   (and (not (= zeroflag33 true))
   (= (to_int5 signflag33) (to_int5 overflowflag33)))
-  (and
-  (and (= o197 (ebx (let ((subject rbx)) rbx34))) (ebx__function_guard 
-  o197 (let ((subject rbx)) rbx34)))
+  (and (= o197 (ebx (let ((subject rbx)) rbx34)))
   (= o197 (readreg32 (let ((subject rbx)) rbx34))))))
 
 ;; H
@@ -12346,13 +11621,9 @@
   (and (not (= zeroflag33 true))
   (= (to_int5 signflag33) (to_int5 overflowflag33)))
   (and
-  (and
   (= o198 (readmem32
           (bvsub (bvadd (let ((subject rsp)) rsp72) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
           (let ((subject memory)) memory14)))
-  (readmem32__function_guard o198
-  (bvsub (bvadd (let ((subject rsp)) rsp72) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory14)))
   (and
   (and
   (and
@@ -12408,13 +11679,9 @@
   (= (to_int5 signflag33) (to_int5 overflowflag33)))
   (=> (not (= signflag35 true))
   (and
-  (and
   (= o203 (readmem32
           (bvsub (bvadd (let ((subject rsp)) rsp72) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
           (let ((subject memory)) memory14)))
-  (readmem32__function_guard o203
-  (bvsub (bvadd (let ((subject rsp)) rsp72) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory14)))
   (and
   (and
   (and
@@ -12464,9 +11731,7 @@
   (and (not (= zeroflag33 true))
   (= (to_int5 signflag33) (to_int5 overflowflag33)))
   (=> (= result142 true)
-  (and
-  (and (= o202 (ebx (let ((subject rbx)) rbx34))) (ebx__function_guard 
-  o202 (let ((subject rbx)) rbx34)))
+  (and (= o202 (ebx (let ((subject rbx)) rbx34)))
   (= o202 (readreg32 (let ((subject rbx)) rbx34)))))))
 
 ;; H
@@ -12490,9 +11755,7 @@
   (and (not (= zeroflag33 true))
   (= (to_int5 signflag33) (to_int5 overflowflag33)))
   (=> (= signflag35 true)
-  (and
-  (and (= o201 (ebx (let ((subject rbx)) rbx34))) (ebx__function_guard 
-  o201 (let ((subject rbx)) rbx34)))
+  (and (= o201 (ebx (let ((subject rbx)) rbx34)))
   (= o201 (readreg32 (let ((subject rbx)) rbx34)))))))
 
 ;; H
@@ -12517,13 +11780,9 @@
   (= (to_int5 signflag33) (to_int5 overflowflag33)))
   (=> (= result143 true)
   (and
-  (and
   (= o200 (readmem32
           (bvsub (bvadd (let ((subject rsp)) rsp72) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
           (let ((subject memory)) memory14)))
-  (readmem32__function_guard o200
-  (bvsub (bvadd (let ((subject rsp)) rsp72) ((_ int2bv 64) 152)) ((_ int2bv 64) 108))
-  (let ((subject memory)) memory14)))
   (and
   (and
   (and
@@ -13031,11 +12290,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o207 (readmem64 (let ((subject rsp)) rsp78)
           (let ((subject memory)) memory14)))
-  (readmem64__function_guard o207 (let ((subject rsp)) rsp78)
-  (let ((subject memory)) memory14)))
   (and
   (and
   (and
@@ -13106,11 +12362,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o208 (readmem64 ((_ int2bv 64) 4198768)
           (let ((subject memory)) memory14)))
-  (readmem64__function_guard o208 ((_ int2bv 64) 4198768)
-  (let ((subject memory)) memory14)))
   (and
   (and
   (and
@@ -13436,10 +12689,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o210 (readmem64 ((_ int2bv 64) 4198856) (map__content memory18)))
-  (readmem64__function_guard o210 ((_ int2bv 64) 4198856)
-  (map__content memory18)))
   (and
   (and
   (and
@@ -13497,13 +12747,9 @@
 ;; H
   (assert
   (and
-  (and
   (= o211 (readmem64
           (bvsub (bvadd (t__content3 rsp81) ((_ int2bv 64) 152)) ((_ int2bv 64) 144))
           (map__content memory18)))
-  (readmem64__function_guard o211
-  (bvsub (bvadd (t__content3 rsp81) ((_ int2bv 64) 152)) ((_ int2bv 64) 144))
-  (map__content memory18)))
   (and
   (and
   (and
@@ -13875,13 +13121,9 @@
 ;; H
   (assert
   (and
-  (and
   (= o213 (readmem64
           (bvsub (bvadd (t__content3 rsp85) ((_ int2bv 64) 152)) ((_ int2bv 64) 136))
           (map__content memory23)))
-  (readmem64__function_guard o213
-  (bvsub (bvadd (t__content3 rsp85) ((_ int2bv 64) 152)) ((_ int2bv 64) 136))
-  (map__content memory23)))
   (and
   (and
   (and
@@ -13942,10 +13184,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o214 (readmem64 ((_ int2bv 64) 4198768) (map__content memory23)))
-  (readmem64__function_guard o214 ((_ int2bv 64) 4198768)
-  (map__content memory23)))
   (and
   (and
   (and
@@ -14336,10 +13575,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o216 (readmem64 ((_ int2bv 64) 4198768) (map__content memory28)))
-  (readmem64__function_guard o216 ((_ int2bv 64) 4198768)
-  (map__content memory28)))
   (and
   (and
   (and
@@ -14397,13 +13633,9 @@
 ;; H
   (assert
   (and
-  (and
   (= o217 (readmem64
           (bvsub (bvadd (t__content3 rsp89) ((_ int2bv 64) 152)) ((_ int2bv 64) 128))
           (map__content memory28)))
-  (readmem64__function_guard o217
-  (bvsub (bvadd (t__content3 rsp89) ((_ int2bv 64) 152)) ((_ int2bv 64) 128))
-  (map__content memory28)))
   (and
   (and
   (and

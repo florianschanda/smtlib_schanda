@@ -166,16 +166,28 @@
                                       (or (= temp___is_init_158 true)
                                       (<= 0 97)) (in_range temp___expr_161)))
 
-(declare-fun temp___201 () (Array Int pt))
+(declare-fun temp___202 () (Array Int pt))
 
 (declare-fun o () pt)
 
+(declare-fun us_self__compl () pt)
+
 (declare-fun pos () (Array Int pt))
+
+(declare-fun us_self__compl1 () pt)
+
+(declare-fun result () (Array Int pt))
+
+(declare-fun pos1 () (Array Int pt))
 
 (assert
 ;; WP_parameter_def
  ;; File "task_and_po_arrays.ads", line 12, characters 0-0
   (not
   (not
-  (and (in_range1 id) (and (= temp___201 pos) (= o (select temp___201 id)))))))
+  (and (in_range1 id)
+  (and
+  (and (and (= temp___202 pos) (= o (select temp___202 id)))
+  (= o us_self__compl))
+  (and (= result pos) (= pos1 (store pos id us_self__compl1))))))))
 (check-sat)

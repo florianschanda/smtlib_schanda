@@ -249,22 +249,22 @@
 (declare-datatypes () ((td2S__ref (mk_td2S__ref (td2S__content us_rep)))))
 (define-fun td2S__ref_2__projection ((a td2S__ref)) us_rep (td2S__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_246 us_rep)
-  (temp___is_init_243 Bool) (temp___skip_constant_244 Bool)
-  (temp___do_toplevel_245 Bool)) Bool (and
+(define-fun dynamic_invariant1 ((temp___expr_245 us_rep)
+  (temp___is_init_242 Bool) (temp___skip_constant_243 Bool)
+  (temp___do_toplevel_244 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_244 true))
-                                      (in_range1 c temp___expr_246))
-                                      (= (attr__constrained temp___expr_246) true)))
+                                      (not (= temp___skip_constant_243 true))
+                                      (in_range1 c temp___expr_245))
+                                      (= (attr__constrained temp___expr_245) true)))
 
-(define-fun default_initial_assumption1 ((temp___expr_248 us_rep)
-  (temp___skip_top_level_249 Bool)) Bool (and
+(define-fun default_initial_assumption1 ((temp___expr_247 us_rep)
+  (temp___skip_top_level_248 Bool)) Bool (and
                                          (= (attr__constrained
-                                            temp___expr_248) true)
+                                            temp___expr_247) true)
                                          (= (to_rep
                                             (rec__private_discr__p_with_default__c
                                             (us_split_discrs1
-                                            temp___expr_248))) c)))
+                                            temp___expr_247))) c)))
 
 (declare-fun d2__split_discrs () us_split_discrs)
 
@@ -330,22 +330,15 @@
 (define-fun o7 () us_rep (mk___rep (mk___split_discrs o)
                          (mk___split_fields o1) o2))
 
-(define-fun discr__p4__d1__assume3 () us_rep (mk___rep
-                                             (mk___split_discrs
-                                             discr__p4__d1__assume)
-                                             (mk___split_fields
-                                             discr__p4__d1__assume1)
-                                             discr__p4__d1__assume2))
-
 ;; H
   (assert (in_range c))
 
 ;; H
   (assert
   (and
-  (and (= discr__p4__d1__assume3 (new_with_default c))
-  (new_with_default__function_guard discr__p4__d1__assume3 c))
-  (= (to_rep discr__p4__d1__assume) c)))
+  (= (mk___rep (mk___split_discrs discr__p4__d1__assume)
+     (mk___split_fields discr__p4__d1__assume1) discr__p4__d1__assume2) 
+  (new_with_default c)) (= (to_rep discr__p4__d1__assume) c)))
 
 ;; H
   (assert (= result d1__split_fields))
@@ -367,10 +360,7 @@
   (assert (and (= us c) (in_range c)))
 
 ;; H
-  (assert
-  (and
-  (and (= o7 (new_with_default c)) (new_with_default__function_guard o7 c))
-  (= (to_rep o) c)))
+  (assert (and (= o7 (new_with_default c)) (= (to_rep o) c)))
 
 ;; H
   (assert (= o6 o7))

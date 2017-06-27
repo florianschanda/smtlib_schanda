@@ -402,10 +402,8 @@
 ;; count__post_axiom
   (assert
   (forall ((stack_external_prover__my_stack__fields us_split_fields))
-  (! (let ((result (count stack_external_prover__my_stack__fields)))
-     (=> (count__function_guard result
-     stack_external_prover__my_stack__fields) (dynamic_invariant1 result true
-     false true))) :pattern ((count stack_external_prover__my_stack__fields)) )))
+  (! (dynamic_invariant1 (count stack_external_prover__my_stack__fields) true
+  false true) :pattern ((count stack_external_prover__my_stack__fields)) )))
 
 (declare-fun is_empty (us_split_fields) Bool)
 
@@ -437,19 +435,19 @@
 (define-fun index_range__ref___projection ((a index_range__ref)) index_range 
   (index_range__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_175 Int)
-  (temp___is_init_172 Bool) (temp___skip_constant_173 Bool)
-  (temp___do_toplevel_174 Bool)) Bool (=>
-                                      (or (= temp___is_init_172 true)
+(define-fun dynamic_invariant2 ((temp___expr_154 Int)
+  (temp___is_init_151 Bool) (temp___skip_constant_152 Bool)
+  (temp___do_toplevel_153 Bool)) Bool (=>
+                                      (or (= temp___is_init_151 true)
                                       (<= 0 100)) (in_range1
-                                      temp___expr_175)))
+                                      temp___expr_154)))
 
-(define-fun dynamic_invariant3 ((temp___expr_181 Int)
-  (temp___is_init_178 Bool) (temp___skip_constant_179 Bool)
-  (temp___do_toplevel_180 Bool)) Bool (=>
-                                      (or (= temp___is_init_178 true)
+(define-fun dynamic_invariant3 ((temp___expr_160 Int)
+  (temp___is_init_157 Bool) (temp___skip_constant_158 Bool)
+  (temp___do_toplevel_159 Bool)) Bool (=>
+                                      (or (= temp___is_init_157 true)
                                       (<= 1 100)) (in_range3
-                                      temp___expr_181)))
+                                      temp___expr_160)))
 
 (declare-fun x () Int)
 
@@ -459,12 +457,6 @@
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range x)))
-
-;; H
-  (assert (is_empty__function_guard
-  (is_empty
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1))
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1)))
 
 ;; H
   (assert

@@ -718,7 +718,7 @@
 
 ;; H
   (assert
-  (and (and (= o1 (search l)) (search__function_guard o1 l))
+  (and (= o1 (search l))
   (ite (forall ((cu us_rep1))
        (=> (= (has_key (positions l) cu) true) (not (= (element l cu) 0))))
   (not (= (has_key (positions l) o1) true))

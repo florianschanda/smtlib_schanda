@@ -293,7 +293,6 @@
   (forall ((x us_rep))
   (! (=> (not (= (bool_eq3 x max) true))
      (let ((result (t_increment x)))
-     (=> (t_increment__function_guard result x)
      (ite (< (to_rep2 (rec__time__t__seconds (us_split_fields1 x))) 59)
      (and
      (and
@@ -326,7 +325,7 @@
      (= (to_rep (rec__time__t__hours (us_split_fields1 result))) (+ (to_rep
                                                                     (rec__time__t__hours
                                                                     (us_split_fields1
-                                                                    x))) 1))))))))) :pattern (
+                                                                    x))) 1)))))))) :pattern (
   (t_increment x)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -341,11 +340,8 @@
 ;; get_current_time__def_axiom
   (assert
   (forall ((clock__current_time__fields us_split_fields))
-  (! (=> (get_current_time__function_guard
-     (get_current_time clock__current_time__fields)
-     clock__current_time__fields)
-     (= (get_current_time clock__current_time__fields) (mk___rep
-                                                       clock__current_time__fields))) :pattern (
+  (! (= (get_current_time clock__current_time__fields) (mk___rep
+                                                       clock__current_time__fields)) :pattern (
   (get_current_time clock__current_time__fields)) )))
 
 (define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool)
@@ -390,17 +386,17 @@
 
 (declare-fun o5 () seconds_t)
 
-(declare-fun temp___166 () natural)
+(declare-fun temp___158 () natural)
 
-(declare-fun temp___1661 () minutes_t)
+(declare-fun temp___1581 () minutes_t)
 
-(declare-fun temp___1662 () seconds_t)
+(declare-fun temp___1582 () seconds_t)
 
-(declare-fun temp___162 () natural)
+(declare-fun temp___156 () natural)
 
-(declare-fun temp___1621 () minutes_t)
+(declare-fun temp___1561 () minutes_t)
 
-(declare-fun temp___1622 () seconds_t)
+(declare-fun temp___1562 () seconds_t)
 
 (declare-fun result () natural)
 
@@ -426,18 +422,6 @@
 
 (declare-fun current_time__split_fields11 () seconds_t)
 
-(define-fun temp___1623 () us_rep (mk___rep
-                                  (mk___split_fields temp___162 temp___1621
-                                  temp___1622)))
-
-;; H
-  (assert (get_current_time__function_guard
-  (get_current_time
-  (mk___split_fields current_time__split_fields current_time__split_fields1
-  current_time__split_fields2))
-  (mk___split_fields current_time__split_fields current_time__split_fields1
-  current_time__split_fields2)))
-
 ;; H
   (assert (= (to_rep2 o) 59))
 
@@ -457,17 +441,17 @@
   (assert (= o o5))
 
 ;; H
-  (assert (= temp___166 o3))
+  (assert (= temp___158 o3))
 
 ;; H
-  (assert (= temp___1661 o4))
+  (assert (= temp___1581 o4))
 
 ;; H
-  (assert (= temp___1662 o5))
+  (assert (= temp___1582 o5))
 
 ;; H
   (assert
-  (= (mk___rep (mk___split_fields temp___166 temp___1661 temp___1662)) 
+  (= (mk___rep (mk___split_fields temp___158 temp___1581 temp___1582)) 
   max))
 
 ;; H
@@ -481,31 +465,27 @@
 ;; H
   (assert
   (and
-  (and
-  (= temp___1623 (t_increment
-                 (mk___rep
-                 (mk___split_fields current_time__split_fields
-                 current_time__split_fields1 current_time__split_fields2))))
-  (t_increment__function_guard temp___1623
+  (= (mk___rep (mk___split_fields temp___156 temp___1561 temp___1562)) 
+  (t_increment
   (mk___rep
   (mk___split_fields current_time__split_fields current_time__split_fields1
   current_time__split_fields2))))
   (ite (= (< (to_rep2 current_time__split_fields2) 59) true)
   (and
-  (and (= (to_rep2 temp___1622) (+ (to_rep2 current_time__split_fields2) 1))
-  (= (to_rep1 temp___1621) (to_rep1 current_time__split_fields1)))
-  (= (to_rep temp___162) (to_rep current_time__split_fields)))
+  (and (= (to_rep2 temp___1562) (+ (to_rep2 current_time__split_fields2) 1))
+  (= (to_rep1 temp___1561) (to_rep1 current_time__split_fields1)))
+  (= (to_rep temp___156) (to_rep current_time__split_fields)))
   (ite (= (ite (= (= (to_rep2 current_time__split_fields2) 59) true) (< 
           (to_rep1 current_time__split_fields1) 59) false) true)
   (and
-  (and (= (to_rep2 temp___1622) 0)
-  (= (to_rep1 temp___1621) (+ (to_rep1 current_time__split_fields1) 1)))
-  (= (to_rep temp___162) (to_rep current_time__split_fields)))
+  (and (= (to_rep2 temp___1562) 0)
+  (= (to_rep1 temp___1561) (+ (to_rep1 current_time__split_fields1) 1)))
+  (= (to_rep temp___156) (to_rep current_time__split_fields)))
   (=>
   (= (ite (= (= (to_rep2 current_time__split_fields2) 59) true) (= (to_rep1
                                                                    current_time__split_fields1) 59) false) true)
-  (and (and (= (to_rep2 temp___1622) 0) (= (to_rep1 temp___1621) 0))
-  (= (to_rep temp___162) (+ (to_rep current_time__split_fields) 1))))))))
+  (and (and (= (to_rep2 temp___1562) 0) (= (to_rep1 temp___1561) 0))
+  (= (to_rep temp___156) (+ (to_rep current_time__split_fields) 1))))))))
 
 ;; H
   (assert
@@ -515,13 +495,13 @@
   current_time__split_fields2))))
 
 ;; H
-  (assert (= temp___162 current_time__split_fields3))
+  (assert (= temp___156 current_time__split_fields3))
 
 ;; H
-  (assert (= temp___1621 current_time__split_fields4))
+  (assert (= temp___1561 current_time__split_fields4))
 
 ;; H
-  (assert (= temp___1622 current_time__split_fields5))
+  (assert (= temp___1562 current_time__split_fields5))
 
 ;; H
   (assert (= current_time__split_fields6 current_time__split_fields3))
@@ -539,40 +519,6 @@
                                                                 current_time__split_fields3
                                                                 current_time__split_fields4
                                                                 current_time__split_fields5)))
-
-;; H
-  (assert (get_current_time__function_guard
-  (get_current_time
-  (mk___split_fields current_time__split_fields6 current_time__split_fields7
-  current_time__split_fields8))
-  (mk___split_fields current_time__split_fields6 current_time__split_fields7
-  current_time__split_fields8)))
-
-;; H
-  (assert (get_current_time__function_guard
-  (get_current_time
-  (mk___split_fields current_time__split_fields current_time__split_fields1
-  current_time__split_fields2))
-  (mk___split_fields current_time__split_fields current_time__split_fields1
-  current_time__split_fields2)))
-
-;; H
-  (assert (get_current_time__function_guard
-  (get_current_time
-  (mk___split_fields current_time__split_fields current_time__split_fields1
-  current_time__split_fields2))
-  (mk___split_fields current_time__split_fields current_time__split_fields1
-  current_time__split_fields2)))
-
-;; H
-  (assert (t_increment__function_guard
-  (t_increment
-  (get_current_time
-  (mk___split_fields current_time__split_fields current_time__split_fields1
-  current_time__split_fields2)))
-  (get_current_time
-  (mk___split_fields current_time__split_fields current_time__split_fields1
-  current_time__split_fields2))))
 
 (assert
 ;; WP_parameter_def

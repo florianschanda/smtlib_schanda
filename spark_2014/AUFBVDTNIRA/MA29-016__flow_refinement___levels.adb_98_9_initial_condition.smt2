@@ -76,10 +76,8 @@
   (assert
   (forall ((levels__nested_1__nested_2__x2 Int))
   (! (=> (dynamic_invariant levels__nested_1__nested_2__x2 true true true)
-     (let ((result (read_partial_2 levels__nested_1__nested_2__x2)))
-     (=> (read_partial_2__function_guard result
-     levels__nested_1__nested_2__x2) (dynamic_invariant result true false
-     true)))) :pattern ((read_partial_2 levels__nested_1__nested_2__x2)) )))
+     (dynamic_invariant (read_partial_2 levels__nested_1__nested_2__x2) true
+     false true)) :pattern ((read_partial_2 levels__nested_1__nested_2__x2)) )))
 
 (declare-fun x2 () Int)
 
@@ -116,16 +114,10 @@
   (assert (in_range y21))
 
 ;; H
-  (assert
-  (and
-  (and (= o (read_partial_2 x21)) (read_partial_2__function_guard o x21))
-  (in_range o)))
+  (assert (and (= o (read_partial_2 x21)) (in_range o)))
 
 ;; H
   (assert (= result2 (ite (= o 0) true false)))
-
-;; H
-  (assert (read_partial_2__function_guard (read_partial_2 x21) x21))
 
 (assert
 ;; WP_parameter_def

@@ -1688,20 +1688,7 @@
   (forall ((tetris_functional__cur_board (Array Int (Array Int cell))))
   (forall ((tetris_functional__cur_piece__fields us_split_fields))
   (forall ((tetris_functional__cur_state Int))
-  (! (=> (valid_configuration__function_guard
-     (valid_configuration tetris_functional__cur_board
-     tetris_functional__cur_piece__fields tetris_functional__cur_state)
-     tetris_functional__cur_board tetris_functional__cur_piece__fields
-     tetris_functional__cur_state)
-     (and (no_overlap__function_guard
-     (no_overlap tetris_functional__cur_board
-     (mk___rep tetris_functional__cur_piece__fields))
-     tetris_functional__cur_board
-     (mk___rep tetris_functional__cur_piece__fields))
-     (and (no_complete_lines__function_guard
-     (no_complete_lines tetris_functional__cur_board)
-     tetris_functional__cur_board)
-     (=
+  (! (=
      (= (valid_configuration tetris_functional__cur_board
         tetris_functional__cur_piece__fields tetris_functional__cur_state) true)
      (ite (or (= tetris_functional__cur_state 0)
@@ -1709,7 +1696,7 @@
      (= (no_overlap tetris_functional__cur_board
         (mk___rep tetris_functional__cur_piece__fields)) true)
      (=> (not (= tetris_functional__cur_state 2))
-     (= (no_complete_lines tetris_functional__cur_board) true))))))) :pattern (
+     (= (no_complete_lines tetris_functional__cur_board) true)))) :pattern (
   (valid_configuration tetris_functional__cur_board
   tetris_functional__cur_piece__fields tetris_functional__cur_state)) )))))
 
@@ -1896,10 +1883,9 @@
   (assert
   (forall ((b (Array Int (Array Int cell))))
   (forall ((y Int) (x Int))
-  (! (=> (is_empty__function_guard (is_empty b y x) b y x)
-     (= (= (is_empty b y x) true)
+  (! (= (= (is_empty b y x) true)
      (and (and (in_range4 x) (in_range5 y))
-     (= (to_rep (let ((temp___635 (select b y))) (select temp___635 x))) 0)))) :pattern (
+     (= (to_rep (let ((temp___635 (select b y))) (select temp___635 x))) 0))) :pattern (
   (is_empty b y x)) ))))
 
 (declare-fun is_complete_line ((Array Int cell)) Bool)
@@ -1912,10 +1898,9 @@
 ;; is_complete_line__def_axiom
   (assert
   (forall ((l (Array Int cell)))
-  (! (=> (is_complete_line__function_guard (is_complete_line l) l)
-     (= (= (is_complete_line l) true)
+  (! (= (= (is_complete_line l) true)
      (forall ((x Int))
-     (=> (and (<= 1 x) (<= x 10)) (not (= (to_rep (select l x)) 0)))))) :pattern (
+     (=> (and (<= 1 x) (<= x 10)) (not (= (to_rep (select l x)) 0))))) :pattern (
   (is_complete_line l)) )))
 
 ;; no_complete_lines__post_axiom
@@ -1924,15 +1909,11 @@
 ;; no_complete_lines__def_axiom
   (assert
   (forall ((b (Array Int (Array Int cell))))
-  (! (=> (no_complete_lines__function_guard (no_complete_lines b) b)
-     (and
-     (forall ((y Int)) (is_complete_line__function_guard
-     (is_complete_line (select b y)) (select b y)))
-     (= (= (no_complete_lines b) true)
+  (! (= (= (no_complete_lines b) true)
      (forall ((y Int))
      (=> (and (<= 1 y) (<= y 50))
-     (not (= (is_complete_line (select b y)) true))))))) :pattern ((no_complete_lines
-                                                                   b)) )))
+     (not (= (is_complete_line (select b y)) true))))) :pattern ((no_complete_lines
+                                                                 b)) )))
 
 ;; no_overlap__post_axiom
   (assert true)
@@ -1941,49 +1922,7 @@
   (assert
   (forall ((b (Array Int (Array Int cell))))
   (forall ((p us_rep))
-  (! (=> (no_overlap__function_guard (no_overlap b p) b p)
-     (and (is_empty__function_guard
-     (is_empty b
-     (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p)))
-     (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p)))) b
-     (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p)))
-     (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))))
-     (and (is_empty__function_guard
-     (is_empty b
-     (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p)))
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) 1))
-     b (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p)))
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) 1))
-     (and (is_empty__function_guard
-     (is_empty b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) 1)
-     (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p)))) b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) 1)
-     (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))))
-     (and (is_empty__function_guard
-     (is_empty b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) 1)
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) 1))
-     b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) 1)
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) 1))
-     (and
-     (forall ((y Int) (x Int)) (is_empty__function_guard
-     (is_empty b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) y)
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) x))
-     b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) y)
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) x)))
-     (and
-     (forall ((y Int) (x Int)) (is_empty__function_guard
-     (is_empty b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) y)
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) x))
-     b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) y)
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) x)))
-     (= (= (no_overlap b p) true)
+  (! (= (= (no_overlap b p) true)
      (ite (= (to_rep1
              (rec__tetris_functional__piece__s (us_split_fields1 p))) 2)
      (and
@@ -2008,10 +1947,10 @@
      (forall ((x Int))
      (=> (and (<= 0 x) (<= x 3))
      (=>
-     (= (let ((temp___663 (select possible_i_shapes (to_rep4
+     (= (let ((temp___650 (select possible_i_shapes (to_rep4
                                                     (rec__tetris_functional__piece__d
                                                     (us_split_fields1 p))))))
-        (get temp___663 y x)) true)
+        (get temp___650 y x)) true)
      (= (is_empty b
         (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) y)
         (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) x)) true))))))
@@ -2020,17 +1959,17 @@
      (forall ((x Int))
      (=> (and (<= 0 x) (<= x 2))
      (=>
-     (= (let ((temp___665 (get1 possible_three_shapes
+     (= (let ((temp___651 (get1 possible_three_shapes
                           (to_rep1
                           (rec__tetris_functional__piece__s
                           (us_split_fields1 p)))
                           (to_rep4
                           (rec__tetris_functional__piece__d
                           (us_split_fields1 p))))))
-        (get temp___665 y x)) true)
+        (get temp___651 y x)) true)
      (= (is_empty b
         (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) y)
-        (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) x)) true)))))))))))))))) :pattern (
+        (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) x)) true))))))))) :pattern (
   (no_overlap b p)) ))))
 
 (declare-fun cur_board () (Array Int (Array Int cell)))
@@ -2049,7 +1988,7 @@
 
 (declare-fun o () Int)
 
-(declare-fun temp___781 () map1)
+(declare-fun temp___745 () map1)
 
 (declare-fun o1 () cell)
 
@@ -2137,14 +2076,6 @@
   (assert (in_range9 cur_state))
 
 ;; H
-  (assert (valid_configuration__function_guard
-  (valid_configuration cur_board
-  (mk___split_fields cur_piece__split_fields cur_piece__split_fields1
-  cur_piece__split_fields2 cur_piece__split_fields3) cur_state) cur_board
-  (mk___split_fields cur_piece__split_fields cur_piece__split_fields1
-  cur_piece__split_fields2 cur_piece__split_fields3) cur_state))
-
-;; H
   (assert
   (and (= cur_state 1)
   (= (valid_configuration cur_board
@@ -2187,10 +2118,10 @@
 ;; H
   (assert
   (and
-  (forall ((temp___786 Int))
-  (=> (and (<= 1 temp___786) (<= temp___786 50))
-  (=> (not (= (+ (to_rep3 cur_piece__split_fields3) y2) temp___786))
-  (= (select cur_board2 temp___786) (select cur_board1 temp___786)))))
+  (forall ((temp___750 Int))
+  (=> (and (<= 1 temp___750) (<= temp___750 50))
+  (=> (not (= (+ (to_rep3 cur_piece__split_fields3) y2) temp___750))
+  (= (select cur_board2 temp___750) (select cur_board1 temp___750)))))
   (and (<= 0 x2) (<= x2 2))))
 
 ;; H
@@ -2203,11 +2134,11 @@
 
 ;; H
   (assert
-  (= temp___781 (get1 possible_three_shapes o
+  (= temp___745 (get1 possible_three_shapes o
                 (to_rep4 cur_piece__split_fields1))))
 
 ;; H
-  (assert (= result2 (get temp___781 y2 x2)))
+  (assert (= result2 (get temp___745 y2 x2)))
 
 ;; H
   (assert (= result2 true))

@@ -128,11 +128,47 @@
 (define-fun p_intT__ref___projection ((a p_intT__ref)) us_rep (p_intT__content
                                                               a))
 
-(declare-fun the_protected_int () Int)
+(define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
+
+(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
+
+(define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE1 (Bool) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Bool)
+
+(declare-fun to_rep (integer) Int)
+
+(declare-fun of_rep (Int) integer)
+
+;; inversion_axiom
+  (assert
+  (forall ((x integer)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x integer)) (! (in_range (to_rep x)) :pattern ((to_rep x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                           (of_rep x))) )))
+
+(define-fun default_initial_assumption ((temp___expr_172 us_rep)
+  (temp___skip_top_level_173 Bool)) Bool (and
+                                         (= (rec__po_t__p_intT__condition
+                                            (us_split_fields1
+                                            temp___expr_172)) (of_int 1))
+                                         (= (to_rep
+                                            (rec__po_t__the_protected_int
+                                            (us_split_fields1
+                                            temp___expr_172))) 0)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
-
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-fun get (us_rep) Int)
 
@@ -140,17 +176,21 @@
 
 ;; get__post_axiom
   (assert
-  (forall ((self__ us_rep))
-  (! (let ((result (get self__)))
-     (=> (get__function_guard result self__) (dynamic_invariant result true
-     false true))) :pattern ((get self__)) )))
+  (forall ((self__ us_rep)) (! (dynamic_invariant (get self__) true false
+  true) :pattern ((get self__)) )))
 
 ;; get__def_axiom
   (assert
   (forall ((self__ us_rep))
-  (! (=> (get__function_guard (get self__) self__)
-     (= (get self__) (ite (<= 0 the_protected_int) the_protected_int
-                     (+ the_protected_int 10)))) :pattern ((get self__)) )))
+  (! (= (get self__) (ite (<= 0 (to_rep
+                                (rec__po_t__the_protected_int
+                                (us_split_fields1 self__))))
+                     (to_rep
+                     (rec__po_t__the_protected_int (us_split_fields1 self__)))
+                     (+ (to_rep
+                        (rec__po_t__the_protected_int
+                        (us_split_fields1 self__))) 10))) :pattern ((get
+                                                                    self__)) )))
 
 (declare-datatypes ()
 ((us_split_fields2
@@ -232,25 +272,17 @@
 (define-fun hidden_poT__ref___projection ((a hidden_poT__ref)) us_rep1 
   (hidden_poT__content a))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(define-fun default_initial_assumption1 ((temp___expr_178 us_rep1)
+  (temp___skip_top_level_179 Bool)) Bool (and
+                                         (= (to_rep
+                                            (rec__po_t__hidden_poT__the_protected_int
+                                            (us_split_fields3
+                                            temp___expr_178))) 0)
+                                         (= (rec__po_t__hidden_poT__switch
+                                            (us_split_fields3
+                                            temp___expr_178)) (of_int 1))))
 
-(declare-fun to_rep (integer) Int)
-
-(declare-fun of_rep (Int) integer)
-
-;; inversion_axiom
-  (assert
-  (forall ((x integer)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
-
-;; range_axiom
-  (assert
-  (forall ((x integer)) (! (in_range (to_rep x)) :pattern ((to_rep x)) )))
-
-;; coerce_axiom
-  (assert
-  (forall ((x Int))
-  (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
-                                                           (of_rep x))) )))
+(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-fun get1 (us_rep1) Int)
 
@@ -258,16 +290,13 @@
 
 ;; get__post_axiom
   (assert
-  (forall ((self__ us_rep1))
-  (! (let ((result (get1 self__)))
-     (=> (get__function_guard1 result self__) (dynamic_invariant result true
-     false true))) :pattern ((get1 self__)) )))
+  (forall ((self__ us_rep1)) (! (dynamic_invariant (get1 self__) true false
+  true) :pattern ((get1 self__)) )))
 
 ;; get__def_axiom
   (assert
   (forall ((self__ us_rep1))
-  (! (=> (get__function_guard1 (get1 self__) self__)
-     (= (get1 self__) (ite (<= 0 (to_rep
+  (! (= (get1 self__) (ite (<= 0 (to_rep
                                  (rec__po_t__hidden_poT__the_protected_int
                                  (us_split_fields3 self__))))
                       (to_rep
@@ -275,24 +304,40 @@
                       (us_split_fields3 self__)))
                       (+ (to_rep
                          (rec__po_t__hidden_poT__the_protected_int
-                         (us_split_fields3 self__))) 10)))) :pattern (
+                         (us_split_fields3 self__))) 10))) :pattern (
   (get1 self__)) )))
 
 (declare-fun x () Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
 (declare-fun y () Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+
+(declare-fun p_int__split_fields () Bool)
+
+(declare-fun p_int__split_fields1 () integer)
+
+(declare-fun hidden_po__split_fields () integer)
+
+(declare-fun hidden_po__split_fields1 () Bool)
 
 (declare-fun o () Bool)
 
 (declare-fun o1 () integer)
 
+(declare-fun us_self__compl () Bool)
+
+(declare-fun us_self__compl1 () integer)
+
 (declare-fun o2 () integer)
 
 (declare-fun o3 () Bool)
+
+(declare-fun us_self__compl2 () integer)
+
+(declare-fun us_self__compl3 () Bool)
 
 (declare-fun o4 () Bool)
 
@@ -306,52 +351,85 @@
 
 (declare-fun po_t__B_1__y__assume () Int)
 
-(declare-fun p_int () Bool)
+(declare-fun p_int__split_fields2 () Bool)
 
-(declare-fun p_int1 () integer)
+(declare-fun p_int__split_fields3 () integer)
 
-(declare-fun hidden_po () integer)
+(declare-fun us_self__compl4 () Bool)
 
-(declare-fun hidden_po1 () Bool)
+(declare-fun us_self__compl5 () integer)
 
-(declare-fun p_int2 () Bool)
+(declare-fun result () us_split_fields__ref)
 
-(declare-fun p_int3 () integer)
+(declare-fun p_int__split_fields4 () us_split_fields)
 
-(declare-fun hidden_po2 () integer)
+(declare-fun hidden_po__split_fields2 () us_split_fields2)
 
-(declare-fun hidden_po3 () Bool)
+(declare-fun us_self__compl6 () us_rep1)
 
-(define-fun o8 () us_rep1 (mk___rep1 (mk___split_fields1 o6 o7)))
+(declare-fun result1 () us_split_fields__ref1)
 
-(define-fun o9 () us_rep (mk___rep (mk___split_fields o4 o5)))
+(declare-fun hidden_po__split_fields3 () us_split_fields2)
 
-;; H
-  (assert (in_range the_protected_int))
+(declare-fun p_int__split_fields5 () us_split_fields)
 
-;; H
-  (assert (= o p_int))
-
-;; H
-  (assert (= o1 p_int1))
-
-;; H
-  (assert (= o2 hidden_po))
-
-;; H
-  (assert (= o3 hidden_po1))
-
-;; H
-  (assert (= o9 (mk___rep (mk___split_fields p_int2 p_int3))))
+(declare-fun hidden_po__split_fields4 () us_split_fields2)
 
 ;; H
   (assert
-  (and
-  (and (= po_t__B_1__x__assume (get o9)) (get__function_guard
-  po_t__B_1__x__assume o9))
+  (and (= p_int__split_fields (of_int 1))
+  (= (to_rep p_int__split_fields1) 0)))
+
+;; H
+  (assert
+  (and (= (to_rep hidden_po__split_fields) 0)
+  (= hidden_po__split_fields1 (of_int 1))))
+
+;; H
+  (assert (= o p_int__split_fields2))
+
+;; H
+  (assert (= o1 p_int__split_fields3))
+
+;; H
+  (assert (= us_self__compl o))
+
+;; H
+  (assert (= us_self__compl1 o1))
+
+;; H
+  (assert
+  (= result (mk___split_fields__ref
+            (mk___split_fields p_int__split_fields2 p_int__split_fields3))))
+
+;; H
+  (assert
+  (= p_int__split_fields4 (mk___split_fields us_self__compl4 us_self__compl5)))
+
+;; H
+  (assert (= hidden_po__split_fields2 (mk___split_fields1 o2 o3)))
+
+;; H
+  (assert (= us_self__compl2 o2))
+
+;; H
+  (assert (= us_self__compl3 o3))
+
+;; H
+  (assert (= result1 (mk___split_fields__ref1 hidden_po__split_fields2)))
+
+;; H
+  (assert (= hidden_po__split_fields3 (us_split_fields3 us_self__compl6)))
+
+;; H
+  (assert (= p_int__split_fields5 (mk___split_fields o4 o5)))
+
+;; H
+  (assert
+  (and (= po_t__B_1__x__assume (get (mk___rep (mk___split_fields o4 o5))))
   (and (in_range po_t__B_1__x__assume)
-  (= po_t__B_1__x__assume (ite (<= 0 the_protected_int) the_protected_int
-                          (+ the_protected_int 10))))))
+  (= po_t__B_1__x__assume (ite (<= 0 (to_rep o5)) (to_rep o5)
+                          (+ (to_rep o5) 10))))))
 
 ;; H
   (assert (= po_t__B_1__x__assume x))
@@ -360,13 +438,11 @@
   (assert (in_range x))
 
 ;; H
-  (assert (= o8 (mk___rep1 (mk___split_fields1 hidden_po2 hidden_po3))))
+  (assert (= hidden_po__split_fields4 (mk___split_fields1 o6 o7)))
 
 ;; H
   (assert
-  (and
-  (and (= po_t__B_1__y__assume (get1 o8)) (get__function_guard1
-  po_t__B_1__y__assume o8))
+  (and (= po_t__B_1__y__assume (get1 (mk___rep1 (mk___split_fields1 o6 o7))))
   (and (in_range po_t__B_1__y__assume)
   (= po_t__B_1__y__assume (ite (<= 0 (to_rep o6)) (to_rep o6)
                           (+ (to_rep o6) 10))))))
@@ -379,6 +455,6 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "po_t.ads", line 56, characters 0-0
   (not (= x y)))
 (check-sat)

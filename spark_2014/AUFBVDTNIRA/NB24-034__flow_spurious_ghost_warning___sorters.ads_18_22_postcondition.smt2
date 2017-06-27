@@ -336,13 +336,10 @@
      (and
      (and (dynamic_invariant1 a true true true) (dynamic_invariant1 b true
      true true)) (dynamic_invariant1 c true true true))
-     (let ((result (perm_transitive a b c)))
-     (and (perm__function_guard (perm a b) a b)
-     (and (perm__function_guard (perm b c) b c)
-     (and (perm__function_guard (perm a c) a c)
-     (=> (perm_transitive__function_guard result a b c)
-     (=> (and (and (= result true) (= (perm a b) true)) (= (perm b c) true))
-     (= (perm a c) true)))))))) :pattern ((perm_transitive a b c)) )))
+     (=>
+     (and (and (= (perm_transitive a b c) true) (= (perm a b) true))
+     (= (perm b c) true)) (= (perm a c) true))) :pattern ((perm_transitive a
+                                                          b c)) )))
 
 (declare-fun index_of_minimum (us_t) Int)
 
@@ -355,7 +352,6 @@
      (and (dynamic_invariant1 unsorted true true true)
      (<= (first1 unsorted) (last1 unsorted)))
      (let ((result (index_of_minimum unsorted)))
-     (=> (index_of_minimum__function_guard result unsorted)
      (and
      (and (and (<= (first1 unsorted) result) (<= result (last1 unsorted)))
      (forall ((j Int))
@@ -363,12 +359,8 @@
      (<= (to_rep (select (to_array unsorted) result)) (to_rep
                                                       (select (to_array
                                                               unsorted) j))))))
-     (dynamic_invariant result true false true))))) :pattern ((index_of_minimum
-                                                              unsorted)) )))
-
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
+     (dynamic_invariant result true false true)))) :pattern ((index_of_minimum
+                                                             unsorted)) )))
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -393,9 +385,9 @@
 
 (declare-sort t1 0)
 
-(declare-fun first3 (t1) integer)
+(declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -404,7 +396,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep (first3 (mk1 f l))) f) (= (to_rep (last3 (mk1 f l))) l)))) :pattern (
+     (and (= (to_rep (first2 (mk1 f l))) f) (= (to_rep (last2 (mk1 f l))) l)))) :pattern (
   (mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
@@ -421,12 +413,12 @@
 (define-fun of_array1 ((a (Array Int integer)) (f Int)
   (l Int)) us_t1 (mk___t1 a (mk1 f l)))
 
-(define-fun first4 ((a us_t1)) Int (to_rep (first3 (rt1 a))))
+(define-fun first3 ((a us_t1)) Int (to_rep (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first4 a) (last4 a))
-                                    (+ (- (last4 a) (first4 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size1 () Int)
 
@@ -460,9 +452,9 @@
   (assert (forall ((a (Array Int integer))) (<= 0 (object__alignment1 a))))
 
 (define-fun bool_eq5 ((x us_t1)
-  (y us_t1)) Bool (bool_eq2 (elts1 x) (to_rep (first3 (rt1 x)))
-                  (to_rep (last3 (rt1 x))) (elts1 y)
-                  (to_rep (first3 (rt1 y))) (to_rep (last3 (rt1 y)))))
+  (y us_t1)) Bool (bool_eq2 (elts1 x) (to_rep (first2 (rt1 x)))
+                  (to_rep (last2 (rt1 x))) (elts1 y)
+                  (to_rep (first2 (rt1 y))) (to_rep (last2 (rt1 y)))))
 
 (declare-fun user_eq4 (us_t1 us_t1) Bool)
 
@@ -473,19 +465,19 @@
 (define-fun tvalues_lastS__ref___projection ((a tvalues_lastS__ref)) us_t1 
   (tvalues_lastS__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_187 us_t1)
-  (temp___is_init_184 Bool) (temp___skip_constant_185 Bool)
-  (temp___do_toplevel_186 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_185 true))
+(define-fun dynamic_invariant2 ((temp___expr_179 us_t1)
+  (temp___is_init_176 Bool) (temp___skip_constant_177 Bool)
+  (temp___do_toplevel_178 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_177 true))
                                       (and (dynamic_property2
                                       (to_rep values__first)
                                       (to_rep values__last)
-                                      (first4 temp___expr_187)
-                                      (last4 temp___expr_187))
+                                      (first3 temp___expr_179)
+                                      (last3 temp___expr_179))
                                       (and
-                                      (= (first4 temp___expr_187) (to_rep
+                                      (= (first3 temp___expr_179) (to_rep
                                                                   values__first))
-                                      (= (last4 temp___expr_187) (to_rep
+                                      (= (last3 temp___expr_179) (to_rep
                                                                  values__last))))))
 
 (declare-fun values_last__first () integer)
@@ -495,10 +487,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
-
-(declare-fun first5 () Int)
-
-(declare-fun last5 () Int)
 
 (define-fun dynamic_property3 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -520,10 +508,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
-(declare-fun first6 (Int) Int)
-
-(declare-fun last6 () Int)
-
 (define-fun dynamic_property4 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -544,9 +528,9 @@
 
 (declare-sort t2 0)
 
-(declare-fun first7 (t2) integer)
+(declare-fun first4 (t2) integer)
 
-(declare-fun last7 (t2) integer)
+(declare-fun last4 (t2) integer)
 
 (declare-fun mk2 (Int Int) t2)
 
@@ -555,7 +539,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep (first7 (mk2 f l))) f) (= (to_rep (last7 (mk2 f l))) l)))) :pattern (
+     (and (= (to_rep (first4 (mk2 f l))) f) (= (to_rep (last4 (mk2 f l))) l)))) :pattern (
   (mk2 f l)) )))
 
 (define-fun dynamic_property5 ((range_first Int) (range_last Int) (low Int)
@@ -572,12 +556,12 @@
 (define-fun of_array2 ((a (Array Int integer)) (f Int)
   (l Int)) us_t2 (mk___t2 a (mk2 f l)))
 
-(define-fun first8 ((a us_t2)) Int (to_rep (first7 (rt2 a))))
+(define-fun first5 ((a us_t2)) Int (to_rep (first4 (rt2 a))))
 
-(define-fun last8 ((a us_t2)) Int (to_rep (last7 (rt2 a))))
+(define-fun last5 ((a us_t2)) Int (to_rep (last4 (rt2 a))))
 
-(define-fun length2 ((a us_t2)) Int (ite (<= (first8 a) (last8 a))
-                                    (+ (- (last8 a) (first8 a)) 1) 0))
+(define-fun length2 ((a us_t2)) Int (ite (<= (first5 a) (last5 a))
+                                    (+ (- (last5 a) (first5 a)) 1) 0))
 
 (declare-fun value__size2 () Int)
 
@@ -611,9 +595,9 @@
   (assert (forall ((a (Array Int integer))) (<= 0 (object__alignment2 a))))
 
 (define-fun bool_eq8 ((x us_t2)
-  (y us_t2)) Bool (bool_eq2 (elts2 x) (to_rep (first7 (rt2 x)))
-                  (to_rep (last7 (rt2 x))) (elts2 y)
-                  (to_rep (first7 (rt2 y))) (to_rep (last7 (rt2 y)))))
+  (y us_t2)) Bool (bool_eq2 (elts2 x) (to_rep (first4 (rt2 x)))
+                  (to_rep (last4 (rt2 x))) (elts2 y)
+                  (to_rep (first4 (rt2 y))) (to_rep (last4 (rt2 y)))))
 
 (declare-fun user_eq7 (us_t2 us_t2) Bool)
 
@@ -637,23 +621,23 @@
 
 (declare-fun current () Int)
 
-(declare-fun temp___213 () Int)
+(declare-fun temp___202 () Int)
 
-(declare-fun temp___208 () Int)
+(declare-fun temp___198 () Int)
 
-(declare-fun temp___207 () (Array Int integer))
+(declare-fun temp___197 () (Array Int integer))
 
-(declare-fun temp___209 () (Array Int integer))
+(declare-fun temp___199 () (Array Int integer))
 
-(declare-fun temp___205 () (Array Int integer))
+(declare-fun temp___195 () (Array Int integer))
 
-(declare-fun temp___203 () Int)
+(declare-fun temp___193 () Int)
 
-(declare-fun temp___201 () (Array Int integer))
+(declare-fun temp___192 () (Array Int integer))
 
-(declare-fun temp___198 () (Array Int integer))
+(declare-fun temp___189 () (Array Int integer))
 
-(declare-fun temp___1981 () t1)
+(declare-fun temp___1891 () t1)
 
 (declare-fun o () (Array Int integer))
 
@@ -663,9 +647,9 @@
 
 (declare-fun o3 () (Array Int integer))
 
-(declare-fun temp___200 () (Array Int integer))
+(declare-fun temp___191 () (Array Int integer))
 
-(declare-fun temp___2001 () t2)
+(declare-fun temp___1911 () t2)
 
 (declare-fun o4 () (Array Int integer))
 
@@ -751,44 +735,9 @@
 
 (declare-fun current8 () Int)
 
-(define-fun o8 () us_t (mk___t o4 o5))
-
 (define-fun smallest10 () int__ref (mk_int__ref smallest))
 
 (define-fun values_last10 () map__ref (mk_map__ref values_last))
-
-;; H
-  (assert (perm__function_guard
-  (perm (mk___t values (mk (to_rep values__first) (to_rep values__last)))
-  (mk___t values (mk (to_rep values__first) (to_rep values__last))))
-  (mk___t values (mk (to_rep values__first) (to_rep values__last)))
-  (mk___t values (mk (to_rep values__first) (to_rep values__last)))))
-
-;; H
-  (assert (perm__function_guard
-  (perm (mk___t values (mk (to_rep values__first) (to_rep values__last)))
-  (mk___t values2 (mk (to_rep values__first) (to_rep values__last))))
-  (mk___t values (mk (to_rep values__first) (to_rep values__last)))
-  (mk___t values2 (mk (to_rep values__first) (to_rep values__last)))))
-
-;; H
-  (assert (perm_transitive__function_guard
-  (perm_transitive
-  (mk___t temp___201 (mk (to_rep values__first) (to_rep values__last)))
-  (mk___t values_last2
-  (mk (to_rep values_last__first) (to_rep values_last__last)))
-  (mk___t values2 (mk (to_rep values__first) (to_rep values__last))))
-  (mk___t temp___201 (mk (to_rep values__first) (to_rep values__last)))
-  (mk___t values_last2
-  (mk (to_rep values_last__first) (to_rep values_last__last)))
-  (mk___t values2 (mk (to_rep values__first) (to_rep values__last)))))
-
-;; H
-  (assert (perm__function_guard
-  (perm (mk___t temp___209 (mk (to_rep values__first) (to_rep values__last)))
-  (mk___t values3 (mk (to_rep values__first) (to_rep values__last))))
-  (mk___t temp___209 (mk (to_rep values__first) (to_rep values__last)))
-  (mk___t values3 (mk (to_rep values__first) (to_rep values__last)))))
 
 ;; H
   (assert (dynamic_property 1 2147483647 (to_rep values__first)
@@ -818,7 +767,7 @@
 
 ;; H
   (assert
-  (and (= temp___213 (- (to_rep values__last) 1)) (in_range1
+  (and (= temp___202 (- (to_rep values__last) 1)) (in_range1
   (- (to_rep values__last) 1))))
 
 ;; H
@@ -829,75 +778,75 @@
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
-  (= temp___208 smallest)))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
+  (= temp___198 smallest)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
-  (= temp___207 values_last)))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
+  (= temp___197 values_last)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
-  (= temp___209 values)))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
+  (= temp___199 values)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
-  (= temp___205 values)))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
+  (= temp___195 values)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
-  (= temp___203 current1)))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
+  (= temp___193 current1)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
-  (= temp___201 values)))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
+  (= temp___192 values)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
-  (= (slide values (to_rep values__first) (to_rep values__first)) temp___198)))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
+  (= (slide values (to_rep values__first) (to_rep values__first)) temp___189)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
-  (= (mk1 (to_rep values__first) (to_rep values__last)) temp___1981)))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
+  (= (mk1 (to_rep values__first) (to_rep values__last)) temp___1891)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
-  (= (ite (<= (to_rep (first3 temp___1981)) (to_rep (last3 temp___1981)))
-     (+ (- (to_rep (last3 temp___1981)) (to_rep (first3 temp___1981))) 1) 0) 
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
+  (= (ite (<= (to_rep (first2 temp___1891)) (to_rep (last2 temp___1891)))
+     (+ (- (to_rep (last2 temp___1891)) (to_rep (first2 temp___1891))) 1) 0) 
   (ite (<= (to_rep values_last__first) (to_rep values_last__last))
   (+ (- (to_rep values_last__last) (to_rep values_last__first)) 1) 0))))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
-  (= (mk___t1 o o1) (mk___t1 temp___198 temp___1981))))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
+  (= (mk___t1 o o1) (mk___t1 temp___189 temp___1891))))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= o2 o)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= (mk_map__ref result1) values_last10)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= values_last2 o2)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (=> (<= current1 (to_rep values__last))
   (and
   (and (<= (to_rep values__first) current1)
@@ -907,35 +856,34 @@
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= o3 values)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
-  (= o3 temp___200)))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
+  (= o3 temp___191)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
-  (= (mk2 current1 (to_rep values__last)) temp___2001)))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
+  (= (mk2 current1 (to_rep values__last)) temp___1911)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
-  (= temp___200 o4)))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
+  (= temp___191 o4)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
-  (= (mk (to_rep (first7 temp___2001)) (to_rep (last7 temp___2001))) 
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
+  (= (mk (to_rep (first4 temp___1911)) (to_rep (last4 temp___1911))) 
   o5)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
-  (and
-  (and (= o6 (index_of_minimum o8)) (index_of_minimum__function_guard o6 o8))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
+  (and (= o6 (index_of_minimum (mk___t o4 o5)))
   (and (in_range2 o6)
   (and (and (<= (to_rep (first o5)) o6) (<= o6 (to_rep (last o5))))
   (forall ((j Int))
@@ -944,23 +892,23 @@
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= (mk_int__ref result2) smallest10)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= smallest2 o6)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (=> (not (= smallest2 current1))
   (and (= o7 current1) (in_range2 current1)))))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (=> (not (= smallest2 current1))
   (and
   (= (perm (mk___t values (mk (to_rep values__first) (to_rep values__last)))
@@ -974,47 +922,47 @@
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (=> (not (not (= smallest2 current1))) (= values2 values))))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (=> (not (not (= smallest2 current1))) (= values2 values1))))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= (perm_transitive
-     (mk___t temp___201 (mk (to_rep values__first) (to_rep values__last)))
+     (mk___t temp___192 (mk (to_rep values__first) (to_rep values__last)))
      (mk___t values_last2
      (mk (to_rep values_last__first) (to_rep values_last__last)))
      (mk___t values2 (mk (to_rep values__first) (to_rep values__last)))) true)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= (perm
-     (mk___t temp___209 (mk (to_rep values__first) (to_rep values__last)))
+     (mk___t temp___199 (mk (to_rep values__first) (to_rep values__last)))
      (mk___t values3 (mk (to_rep values__first) (to_rep values__last)))) true)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (forall ((j Int))
   (=> (and (<= current2 j) (<= j (to_rep values__last)))
   (<= (to_rep (select values3 current2)) (to_rep (select values3 j)))))))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (forall ((j Int))
   (=> (and (<= (to_rep values__first) j) (<= j current2))
   (<= (to_rep (select values3 j)) (to_rep (select values3 (+ j 1))))))))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (and
   (and
   (=> (<= (to_rep values__first) (- (to_rep values__last) 1))
@@ -1025,135 +973,135 @@
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
-  (= current2 temp___213)))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
+  (= current2 temp___202)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= current3 (mk_int__ref current2))))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= smallest4 (mk_int__ref smallest3))))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= values_last4 (mk_map__ref values_last3))))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= values4 (mk_map__ref values3))))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= current4 current2)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= smallest5 smallest3)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= values_last5 values_last3)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= values5 values3)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= current5 current3)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= smallest6 smallest4)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= values_last6 values_last4)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= values6 values4)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= current6 current4)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= smallest7 smallest5)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= values_last7 values_last5)))
 
 ;; H
   (assert
-  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___213))
+  (=> (and (<= (to_rep values__first) current1) (<= current1 temp___202))
   (= values7 values5)))
 
 ;; H
   (assert
   (=>
-  (not (and (<= (to_rep values__first) current1) (<= current1 temp___213)))
+  (not (and (<= (to_rep values__first) current1) (<= current1 temp___202)))
   (= current5 (mk_int__ref current1))))
 
 ;; H
   (assert
   (=>
-  (not (and (<= (to_rep values__first) current1) (<= current1 temp___213)))
+  (not (and (<= (to_rep values__first) current1) (<= current1 temp___202)))
   (= smallest6 smallest10)))
 
 ;; H
   (assert
   (=>
-  (not (and (<= (to_rep values__first) current1) (<= current1 temp___213)))
+  (not (and (<= (to_rep values__first) current1) (<= current1 temp___202)))
   (= values_last6 values_last10)))
 
 ;; H
   (assert
   (=>
-  (not (and (<= (to_rep values__first) current1) (<= current1 temp___213)))
+  (not (and (<= (to_rep values__first) current1) (<= current1 temp___202)))
   (= values6 (mk_map__ref values))))
 
 ;; H
   (assert
   (=>
-  (not (and (<= (to_rep values__first) current1) (<= current1 temp___213)))
+  (not (and (<= (to_rep values__first) current1) (<= current1 temp___202)))
   (= current6 current1)))
 
 ;; H
   (assert
   (=>
-  (not (and (<= (to_rep values__first) current1) (<= current1 temp___213)))
+  (not (and (<= (to_rep values__first) current1) (<= current1 temp___202)))
   (= smallest7 smallest1)))
 
 ;; H
   (assert
   (=>
-  (not (and (<= (to_rep values__first) current1) (<= current1 temp___213)))
+  (not (and (<= (to_rep values__first) current1) (<= current1 temp___202)))
   (= values_last7 values_last1)))
 
 ;; H
   (assert
   (=>
-  (not (and (<= (to_rep values__first) current1) (<= current1 temp___213)))
+  (not (and (<= (to_rep values__first) current1) (<= current1 temp___202)))
   (= values7 values1)))
 
 ;; H
@@ -1179,15 +1127,6 @@
 
 ;; H
   (assert (= values9 values7))
-
-;; H
-  (assert (perm__function_guard
-  (perm (mk___t values (mk (to_rep values__first) (to_rep values__last)))
-  (mk___t (map__content values8)
-  (mk (to_rep values__first) (to_rep values__last))))
-  (mk___t values (mk (to_rep values__first) (to_rep values__last)))
-  (mk___t (map__content values8)
-  (mk (to_rep values__first) (to_rep values__last)))))
 
 (assert
 ;; WP_parameter_def

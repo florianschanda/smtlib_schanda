@@ -100,17 +100,14 @@
 ;; t_not__post_axiom
   (assert
   (forall ((op Int))
-  (! (=> (dynamic_invariant op true true true)
-     (let ((result (t_not op)))
-     (=> (t_not__function_guard result op) (dynamic_invariant result true
-     false true)))) :pattern ((t_not op)) )))
+  (! (=> (dynamic_invariant op true true true) (dynamic_invariant (t_not op)
+     true false true)) :pattern ((t_not op)) )))
 
 ;; t_not__def_axiom
   (assert
   (forall ((op Int))
-  (! (=>
-     (and (dynamic_invariant op true true true) (t_not__function_guard
-     (t_not op) op)) (= (t_not op) (ite (= op 0) 1 0))) :pattern ((t_not op)) )))
+  (! (=> (dynamic_invariant op true true true)
+     (= (t_not op) (ite (= op 0) 1 0))) :pattern ((t_not op)) )))
 
 (declare-fun t_or (Int Int) Int)
 
@@ -121,18 +118,15 @@
   (forall ((left Int) (right Int))
   (! (=>
      (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true))
-     (let ((result (t_or left right)))
-     (=> (t_or__function_guard result left right) (dynamic_invariant result
-     true false true)))) :pattern ((t_or left right)) )))
+     true true true)) (dynamic_invariant (t_or left right) true false true)) :pattern (
+  (t_or left right)) )))
 
 ;; t_or__def_axiom
   (assert
   (forall ((left Int) (right Int))
   (! (=>
-     (and
      (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (t_or__function_guard (t_or left right) left right))
+     true true true))
      (= (t_or left right) (ite (= left 0) 0 (ite (= left 1) right 2)))) :pattern (
   (t_or left right)) )))
 
@@ -145,18 +139,15 @@
   (forall ((left Int) (right Int))
   (! (=>
      (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true))
-     (let ((result (t_and left right)))
-     (=> (t_and__function_guard result left right) (dynamic_invariant result
-     true false true)))) :pattern ((t_and left right)) )))
+     true true true)) (dynamic_invariant (t_and left right) true false true)) :pattern (
+  (t_and left right)) )))
 
 ;; t_and__def_axiom
   (assert
   (forall ((left Int) (right Int))
   (! (=>
-     (and
      (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (t_and__function_guard (t_and left right) left right))
+     true true true))
      (= (t_and left right) (ite (= left 1) 1 (ite (= left 0) right 2)))) :pattern (
   (t_and left right)) )))
 
@@ -898,18 +889,15 @@
   (=> (not (= kind1 0))
   (=> (= kind1 1)
   (and
-  (and
   (= o (decision_eval (to_rep2 d__split_fields5) decision_table
        condition_values))
-  (decision_eval__function_guard o (to_rep2 d__split_fields5) decision_table
-  condition_values)) (and (in_range1 o) (not (= o 2)))))))
+  (and (in_range1 o) (not (= o 2)))))))
 
 ;; H
   (assert
   (=> (not (= kind1 0))
   (=> (= kind1 1)
-  (and (and (= o1 (t_not o)) (t_not__function_guard o1 o))
-  (and (in_range1 o1) (= o1 (ite (= o 0) 1 0)))))))
+  (and (= o1 (t_not o)) (and (in_range1 o1) (= o1 (ite (= o 0) 1 0)))))))
 
 ;; H
   (assert
@@ -954,30 +942,26 @@
   (=> (not (= kind1 1))
   (=> (= kind1 2)
   (and
-  (and
   (= o3 (decision_eval (to_rep2 d__split_fields7) decision_table
         condition_values))
-  (decision_eval__function_guard o3 (to_rep2 d__split_fields7) decision_table
-  condition_values)) (and (in_range1 o3) (not (= o3 2))))))))
+  (and (in_range1 o3) (not (= o3 2))))))))
 
 ;; H
   (assert
   (=> (not (= kind1 0))
   (=> (not (= kind1 1))
   (=> (= kind1 2)
-  (and
   (and
   (= o2 (decision_eval (to_rep2 d__split_fields6) decision_table
         condition_values))
-  (decision_eval__function_guard o2 (to_rep2 d__split_fields6) decision_table
-  condition_values)) (and (in_range1 o2) (not (= o2 2))))))))
+  (and (in_range1 o2) (not (= o2 2))))))))
 
 ;; H
   (assert
   (=> (not (= kind1 0))
   (=> (not (= kind1 1))
   (=> (= kind1 2)
-  (and (and (= o4 (t_or o2 o3)) (t_or__function_guard o4 o2 o3))
+  (and (= o4 (t_or o2 o3))
   (and (in_range1 o4) (= o4 (ite (= o2 0) 0 (ite (= o2 1) o3 2)))))))))
 
 ;; H
@@ -1012,30 +996,26 @@
   (=> (not (= kind1 1))
   (=> (not (= kind1 2))
   (and
-  (and
   (= o6 (decision_eval (to_rep2 d__split_fields7) decision_table
         condition_values))
-  (decision_eval__function_guard o6 (to_rep2 d__split_fields7) decision_table
-  condition_values)) (and (in_range1 o6) (not (= o6 2))))))))
+  (and (in_range1 o6) (not (= o6 2))))))))
 
 ;; H
   (assert
   (=> (not (= kind1 0))
   (=> (not (= kind1 1))
   (=> (not (= kind1 2))
-  (and
   (and
   (= o5 (decision_eval (to_rep2 d__split_fields6) decision_table
         condition_values))
-  (decision_eval__function_guard o5 (to_rep2 d__split_fields6) decision_table
-  condition_values)) (and (in_range1 o5) (not (= o5 2))))))))
+  (and (in_range1 o5) (not (= o5 2))))))))
 
 ;; H
   (assert
   (=> (not (= kind1 0))
   (=> (not (= kind1 1))
   (=> (not (= kind1 2))
-  (and (and (= o7 (t_and o5 o6)) (t_and__function_guard o7 o5 o6))
+  (and (= o7 (t_and o5 o6))
   (and (in_range1 o7) (= o7 (ite (= o5 1) 1 (ite (= o5 0) o6 2)))))))))
 
 ;; H

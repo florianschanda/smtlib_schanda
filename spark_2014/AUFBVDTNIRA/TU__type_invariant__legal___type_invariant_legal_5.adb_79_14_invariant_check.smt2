@@ -115,11 +115,9 @@
   (forall ((type_invariant_legal_5__x Int))
   (! (=>
      (and (dynamic_invariant1 type_invariant_legal_5__x true true true)
-     (type_invariant type_invariant_legal_5__x))
-     (let ((result (pub type_invariant_legal_5__x)))
-     (=> (pub__function_guard result type_invariant_legal_5__x)
-     (dynamic_invariant result true false true)))) :pattern ((pub
-                                                             type_invariant_legal_5__x)) )))
+     (type_invariant type_invariant_legal_5__x)) (dynamic_invariant
+     (pub type_invariant_legal_5__x) true false true)) :pattern ((pub
+                                                                 type_invariant_legal_5__x)) )))
 
 (declare-fun e_pub (Int) Int)
 
@@ -130,19 +128,14 @@
   (forall ((type_invariant_legal_5__x Int))
   (! (=>
      (and (dynamic_invariant1 type_invariant_legal_5__x true true true)
-     (type_invariant type_invariant_legal_5__x))
-     (let ((result (e_pub type_invariant_legal_5__x)))
-     (=> (e_pub__function_guard result type_invariant_legal_5__x)
-     (dynamic_invariant result true false true)))) :pattern ((e_pub
-                                                             type_invariant_legal_5__x)) )))
+     (type_invariant type_invariant_legal_5__x)) (dynamic_invariant
+     (e_pub type_invariant_legal_5__x) true false true)) :pattern ((e_pub
+                                                                   type_invariant_legal_5__x)) )))
 
 ;; e_pub__def_axiom
   (assert
   (forall ((type_invariant_legal_5__x Int))
-  (! (=>
-     (and (dynamic_invariant1 type_invariant_legal_5__x true true true)
-     (e_pub__function_guard (e_pub type_invariant_legal_5__x)
-     type_invariant_legal_5__x))
+  (! (=> (dynamic_invariant1 type_invariant_legal_5__x true true true)
      (= (e_pub type_invariant_legal_5__x) type_invariant_legal_5__x)) :pattern (
   (e_pub type_invariant_legal_5__x)) )))
 
@@ -155,11 +148,9 @@
   (forall ((type_invariant_legal_5__x Int))
   (! (=>
      (and (dynamic_invariant1 type_invariant_legal_5__x true true true)
-     (type_invariant type_invariant_legal_5__x))
-     (let ((result (priv type_invariant_legal_5__x)))
-     (=> (priv__function_guard result type_invariant_legal_5__x)
-     (dynamic_invariant result true false true)))) :pattern ((priv
-                                                             type_invariant_legal_5__x)) )))
+     (type_invariant type_invariant_legal_5__x)) (dynamic_invariant
+     (priv type_invariant_legal_5__x) true false true)) :pattern ((priv
+                                                                  type_invariant_legal_5__x)) )))
 
 (declare-fun e_priv (Int) Int)
 
@@ -170,19 +161,14 @@
   (forall ((type_invariant_legal_5__x Int))
   (! (=>
      (and (dynamic_invariant1 type_invariant_legal_5__x true true true)
-     (type_invariant type_invariant_legal_5__x))
-     (let ((result (e_priv type_invariant_legal_5__x)))
-     (=> (e_priv__function_guard result type_invariant_legal_5__x)
-     (dynamic_invariant result true false true)))) :pattern ((e_priv
-                                                             type_invariant_legal_5__x)) )))
+     (type_invariant type_invariant_legal_5__x)) (dynamic_invariant
+     (e_priv type_invariant_legal_5__x) true false true)) :pattern ((e_priv
+                                                                    type_invariant_legal_5__x)) )))
 
 ;; e_priv__def_axiom
   (assert
   (forall ((type_invariant_legal_5__x Int))
-  (! (=>
-     (and (dynamic_invariant1 type_invariant_legal_5__x true true true)
-     (e_priv__function_guard (e_priv type_invariant_legal_5__x)
-     type_invariant_legal_5__x))
+  (! (=> (dynamic_invariant1 type_invariant_legal_5__x true true true)
      (= (e_priv type_invariant_legal_5__x) type_invariant_legal_5__x)) :pattern (
   (e_priv type_invariant_legal_5__x)) )))
 

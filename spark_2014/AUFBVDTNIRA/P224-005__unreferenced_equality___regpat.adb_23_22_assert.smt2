@@ -130,9 +130,6 @@
 ;; H
   (assert (in_range1 right1))
 
-;; H
-  (assert (oeq__function_guard (oeq left1 right1) left1 right1))
-
 (assert
 ;; WP_parameter_def
  ;; File "regpat.adb", line 9, characters 0-0

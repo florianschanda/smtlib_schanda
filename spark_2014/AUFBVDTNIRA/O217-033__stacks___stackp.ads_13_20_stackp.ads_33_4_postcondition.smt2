@@ -594,30 +594,23 @@
 (define-fun stack__ref___projection ((a stack__ref)) us_rep (stack__content
                                                             a))
 
-;; temp___result_323_def
-  (assert
-  (forall ((temp___322 us_rep)) (size__function_guard (size temp___322)
-  temp___322)))
-
-(define-fun default_initial_assumption ((temp___expr_317 us_rep)
-  (temp___skip_top_level_318 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_276 us_rep)
+  (temp___skip_top_level_277 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag temp___expr_317) 
+                                         (= (attr__tag temp___expr_276) 
                                          us_tag1)
                                          (= (to_rep
                                             (rec__stackp__stack_root__length
                                             (us_split_fields1
-                                            temp___expr_317))) 0))
+                                            temp___expr_276))) 0))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_318 true))
-                                         (= (size temp___expr_317) 0))))
+                                         (= temp___skip_top_level_277 true))
+                                         (= (size temp___expr_276) 0))))
 
 (declare-fun s () us_rep)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -641,7 +634,7 @@
 
 (declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -651,7 +644,7 @@
   (! (=> (in_range3 f)
      (=> (in_range3 l)
      (and (= (to_rep1 (first2 (mk1 f l))) f)
-     (= (to_rep1 (last3 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (= (to_rep1 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range3 low)
@@ -669,10 +662,10 @@
 
 (define-fun first3 ((a us_t1)) Int (to_rep1 (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep1 (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last4 a))
-                                    (+ (- (last4 a) (first3 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size4 () Int)
 
@@ -707,8 +700,8 @@
 
 (define-fun bool_eq9 ((x us_t1)
   (y us_t1)) Bool (bool_eq5 (elts1 x) (to_rep1 (first2 (rt1 x)))
-                  (to_rep1 (last3 (rt1 x))) (elts1 y)
-                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last3 (rt1 y)))))
+                  (to_rep1 (last2 (rt1 x))) (elts1 y)
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
 (declare-fun user_eq9 (us_t1 us_t1) Bool)
 
@@ -745,18 +738,13 @@
                                       (<= 0 2147483647)) (in_range4
                                       temp___expr_142)))
 
-(define-fun dynamic_invariant4 ((temp___expr_169 us_t)
-  (temp___is_init_166 Bool) (temp___skip_constant_167 Bool)
-  (temp___do_toplevel_168 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_167 true))
+(define-fun dynamic_invariant4 ((temp___expr_168 us_t)
+  (temp___is_init_165 Bool) (temp___skip_constant_166 Bool)
+  (temp___do_toplevel_167 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_166 true))
                                       (dynamic_property 1 2147483647
-                                      (first1 temp___expr_169)
-                                      (last1 temp___expr_169))))
-
-;; temp___result_165_def
-  (assert
-  (forall ((temp___164 us_rep)) (size__function_guard (size temp___164)
-  temp___164)))
+                                      (first1 temp___expr_168)
+                                      (last1 temp___expr_168))))
 
 (define-fun default_initial_assumption1 ((temp___expr_159 us_rep)
   (temp___skip_top_level_160 Bool)) Bool (and
@@ -774,17 +762,14 @@
 
 ;; size__post_axiom
   (assert
-  (forall ((s1 us_rep))
-  (! (let ((result (size s1)))
-     (=> (size__function_guard result s1) (dynamic_invariant2 result true
-     false true))) :pattern ((size s1)) )))
+  (forall ((s1 us_rep)) (! (dynamic_invariant2 (size s1) true false
+  true) :pattern ((size s1)) )))
 
 ;; size__def_axiom
   (assert
   (forall ((s1 us_rep))
-  (! (=> (size__function_guard (size s1) s1)
-     (= (size s1) (to_rep
-                  (rec__stackp__stack_root__length (us_split_fields1 s1))))) :pattern (
+  (! (= (size s1) (to_rep
+                  (rec__stackp__stack_root__length (us_split_fields1 s1)))) :pattern (
   (size s1)) )))
 
 (declare-fun stackp__get_model__2__result () (Array Int element))
@@ -793,9 +778,9 @@
 
 (declare-fun o () (Array Int element))
 
-(declare-fun temp___578 () (Array Int element))
+(declare-fun temp___461 () (Array Int element))
 
-(declare-fun temp___5781 () t1)
+(declare-fun temp___4611 () t1)
 
 (declare-fun o1 () (Array Int element))
 
@@ -855,23 +840,23 @@
   (assert (= o (rec__stackp__stack_root__content (us_split_fields1 s))))
 
 ;; H
-  (assert (= o temp___578))
+  (assert (= o temp___461))
 
 ;; H
   (assert
   (= (mk1 1 (to_rep (rec__stackp__stack_root__length (us_split_fields1 s)))) 
-  temp___5781))
+  temp___4611))
 
 ;; H
-  (assert (dynamic_property 1 2147483647 (to_rep1 (first2 temp___5781))
-  (to_rep1 (last3 temp___5781))))
+  (assert (dynamic_property 1 2147483647 (to_rep1 (first2 temp___4611))
+  (to_rep1 (last2 temp___4611))))
 
 ;; H
-  (assert (= temp___578 o1))
+  (assert (= temp___461 o1))
 
 ;; H
   (assert
-  (= (mk (to_rep1 (first2 temp___5781)) (to_rep1 (last3 temp___5781))) 
+  (= (mk (to_rep1 (first2 temp___4611)) (to_rep1 (last2 temp___4611))) 
   o2))
 
 ;; H
@@ -901,9 +886,6 @@
 
 ;; H
   (assert (= result3 stackp__get_model__2__result9))
-
-;; H
-  (assert (size__function_guard (size s) s))
 
 (assert
 ;; WP_parameter_def

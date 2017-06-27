@@ -73,10 +73,8 @@
 ;; read_partial_0__post_axiom
   (assert
   (forall ((levels__x0 Int))
-  (! (=> (dynamic_invariant levels__x0 true true true)
-     (let ((result (read_partial_0 levels__x0)))
-     (=> (read_partial_0__function_guard result levels__x0)
-     (dynamic_invariant result true false true)))) :pattern ((read_partial_0
+  (! (=> (dynamic_invariant levels__x0 true true true) (dynamic_invariant
+     (read_partial_0 levels__x0) true false true)) :pattern ((read_partial_0
                                                              levels__x0)) )))
 
 (declare-fun x0 () Int)
@@ -89,9 +87,7 @@
   (assert (in_range x0))
 
 ;; H
-  (assert
-  (and (and (= o (read_partial_0 x0)) (read_partial_0__function_guard o x0))
-  (in_range o)))
+  (assert (and (= o (read_partial_0 x0)) (in_range o)))
 
 ;; H
   (assert (= o1 (+ o 1)))

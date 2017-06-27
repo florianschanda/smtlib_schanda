@@ -612,8 +612,7 @@
 ;; my_eq__def_axiom
   (assert
   (forall ((i1 Int) (i2 Int))
-  (! (=> (my_eq__function_guard (my_eq i1 i2) i1 i2)
-     (= (= (my_eq i1 i2) true) (= i1 i2))) :pattern ((my_eq i1 i2)) )))
+  (! (= (= (my_eq i1 i2) true) (= i1 i2)) :pattern ((my_eq i1 i2)) )))
 
 (define-fun dynamic_invariant2 ((temp___expr_167 (_ BitVec 32))
   (temp___is_init_164 Bool) (temp___skip_constant_165 Bool)
@@ -684,11 +683,11 @@
   (forall ((a us_rep2) (b us_rep2))
   (! (= (user_eq5 a b) (oeq2 a b)) :pattern ((user_eq5 a b)) )))
 
-(define-fun default_initial_assumption ((temp___expr_398 us_rep2)
-  (temp___skip_top_level_399 Bool)) Bool (=>
+(define-fun default_initial_assumption ((temp___expr_392 us_rep2)
+  (temp___skip_top_level_393 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_399 true))
-                                         (= (length2 temp___expr_398) 0)))
+                                         (= temp___skip_top_level_393 true))
+                                         (= (length2 temp___expr_392) 0)))
 
 ;; find__post_axiom
   (assert
@@ -697,12 +696,10 @@
   (! (=> (dynamic_invariant3 item true true true)
      (let ((result (find container item)))
      (and
-     (and (my_eq__function_guard (my_eq item (get container result)) item
-     (get container result))
      (=> (< 0 result)
      (and (<= result (length2 container))
-     (= (my_eq item (get container result)) true)))) (dynamic_invariant
-     result true false true)))) :pattern ((find container item)) ))))
+     (= (my_eq item (get container result)) true))) (dynamic_invariant result
+     true false true)))) :pattern ((find container item)) ))))
 
 (declare-fun is_empty (us_rep1) Bool)
 
@@ -783,17 +780,15 @@
      (and
      (and
      (and (= (length2 result) (length container))
-     (forall ((temp___439 Int))
+     (forall ((temp___429 Int))
      (=>
-     (and (in_range6 temp___439)
-     (= (iter_has_element result temp___439) true))
-     (= (contains (model__ container) (get result temp___439)) true))))
+     (and (in_range6 temp___429)
+     (= (iter_has_element result temp___429) true))
+     (= (contains (model__ container) (get result temp___429)) true))))
      (forall ((item Int))
      (=> (and (in_range5 item) (= (contains (model__ container) item) true))
      (and (< 0 (find result item))
-     (and (my_eq__function_guard (my_eq (get result (find result item)) item)
-     (get result (find result item)) item)
-     (= (my_eq (get result (find result item)) item) true))))))
+     (= (my_eq (get result (find result item)) item) true)))))
      (forall ((i Int))
      (=> (and (<= 1 i) (<= i (length container)))
      (= (find result (get result i)) i))))
@@ -801,9 +796,7 @@
      (=> (and (<= 1 i) (<= i (length container)))
      (forall ((j Int))
      (=> (and (<= 1 j) (<= j (length container)))
-     (and (my_eq__function_guard (my_eq (get result i) (get result j))
-     (get result i) (get result j))
-     (=> (= (my_eq (get result i) (get result j)) true) (= i j))))))))) :pattern (
+     (=> (= (my_eq (get result i) (get result j)) true) (= i j)))))))) :pattern (
   (elements container)) )))
 
 ;; oeq__post_axiom
@@ -834,12 +827,11 @@
   (forall ((container us_rep1))
   (forall ((item Int))
   (! (=> (dynamic_invariant4 item true true true)
-     (and (forall ((e Int)) (my_eq__function_guard (my_eq e item) e item))
      (=> (= (of_int 1) true)
      (=>
      (exists ((e Int))
      (and (and (in_range5 e) (= (contains container e) true))
-     (= (my_eq e item) true))) (= (contains container item) true))))) :pattern (
+     (= (my_eq e item) true))) (= (contains container item) true)))) :pattern (
   (contains container item)) ))))
 
 ;; length__post_axiom
@@ -916,12 +908,12 @@
                                                                     left
                                                                     right)) )))
 
-(define-fun dynamic_invariant5 ((temp___expr_391 Int)
-  (temp___is_init_388 Bool) (temp___skip_constant_389 Bool)
-  (temp___do_toplevel_390 Bool)) Bool (=>
-                                      (or (= temp___is_init_388 true)
+(define-fun dynamic_invariant5 ((temp___expr_385 Int)
+  (temp___is_init_382 Bool) (temp___skip_constant_383 Bool)
+  (temp___do_toplevel_384 Bool)) Bool (=>
+                                      (or (= temp___is_init_382 true)
                                       (<= 0 2147483647)) (in_range6
-                                      temp___expr_391)))
+                                      temp___expr_385)))
 
 ;; length__post_axiom
   (assert
@@ -952,12 +944,12 @@
 (define-fun element_type__ref_4__projection ((a element_type__ref3)) element_type3 
   (element_type__content3 a))
 
-(define-fun dynamic_invariant6 ((temp___expr_385 Int)
-  (temp___is_init_382 Bool) (temp___skip_constant_383 Bool)
-  (temp___do_toplevel_384 Bool)) Bool (=>
-                                      (or (= temp___is_init_382 true)
+(define-fun dynamic_invariant6 ((temp___expr_379 Int)
+  (temp___is_init_376 Bool) (temp___skip_constant_377 Bool)
+  (temp___do_toplevel_378 Bool)) Bool (=>
+                                      (or (= temp___is_init_376 true)
                                       (<= 1 100)) (in_range7
-                                      temp___expr_385)))
+                                      temp___expr_379)))
 
 ;; get__post_axiom
   (assert

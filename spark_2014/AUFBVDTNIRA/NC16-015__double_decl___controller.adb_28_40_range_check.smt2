@@ -399,13 +399,11 @@
   (assert
   (forall ((the_board (Array Int (Array Int us_rep))))
   (forall ((xpos Int) (ypos Int))
-  (! (=> (is_empty_cell__function_guard (is_empty_cell the_board xpos ypos)
-     the_board xpos ypos)
-     (= (= (is_empty_cell the_board xpos ypos) true)
+  (! (= (= (is_empty_cell the_board xpos ypos) true)
      (= (to_rep
         (rec__tetris__cell__kind
         (us_split_fields1
-        (let ((temp___223 (select the_board ypos))) (select temp___223 xpos))))) 0))) :pattern (
+        (let ((temp___222 (select the_board ypos))) (select temp___222 xpos))))) 0)) :pattern (
   (is_empty_cell the_board xpos ypos)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -436,12 +434,12 @@
 (define-fun piece_count_type__ref___projection ((a piece_count_type__ref)) piece_count_type 
   (piece_count_type__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_331 Int)
-  (temp___is_init_328 Bool) (temp___skip_constant_329 Bool)
-  (temp___do_toplevel_330 Bool)) Bool (=>
-                                      (or (= temp___is_init_328 true)
+(define-fun dynamic_invariant2 ((temp___expr_330 Int)
+  (temp___is_init_327 Bool) (temp___skip_constant_328 Bool)
+  (temp___do_toplevel_329 Bool)) Bool (=>
+                                      (or (= temp___is_init_327 true)
                                       (<= 0 1000)) (in_range4
-                                      temp___expr_331)))
+                                      temp___expr_330)))
 
 (define-fun dynamic_invariant3 ((temp___expr_161 Int)
   (temp___is_init_158 Bool) (temp___skip_constant_159 Bool)
@@ -469,9 +467,7 @@
 
 ;; H
   (assert
-  (and
   (and (= result (is_empty_cell game_board 4 1))
-  (is_empty_cell__function_guard result game_board 4 1))
   (= (= result true)
   (= (to_rep
      (rec__tetris__cell__kind

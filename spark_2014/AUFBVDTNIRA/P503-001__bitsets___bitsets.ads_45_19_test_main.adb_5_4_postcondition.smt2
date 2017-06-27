@@ -242,15 +242,10 @@
   (forall ((s (Array Int Bool)))
   (forall ((e Int))
   (! (=> (dynamic_invariant e true true true)
-     (let ((result (remove s e)))
-     (and
-     (forall ((elt Int)) (mem__function_guard (mem result elt) result elt))
-     (and (forall ((elt Int)) (mem__function_guard (mem s elt) s elt))
-     (=> (remove__function_guard result s e)
      (forall ((elt Int))
      (=> (and (<= 1 elt) (<= elt 10))
-     (= (= (mem result elt) true) (and (not (= elt e)) (= (mem s elt) true)))))))))) :pattern (
-  (remove s e)) ))))
+     (= (= (mem (remove s e) elt) true)
+     (and (not (= elt e)) (= (mem s elt) true)))))) :pattern ((remove s e)) ))))
 
 (declare-fun ext_equal ((Array Int Bool) (Array Int Bool)) Bool)
 
@@ -263,14 +258,11 @@
 ;; ext_equal__def_axiom
   (assert
   (forall ((a (Array Int Bool)) (b (Array Int Bool)))
-  (! (=> (ext_equal__function_guard (ext_equal a b) a b)
-     (and (forall ((elt Int)) (mem__function_guard (mem a elt) a elt))
-     (and (forall ((elt Int)) (mem__function_guard (mem b elt) b elt))
-     (= (= (ext_equal a b) true)
+  (! (= (= (ext_equal a b) true)
      (forall ((elt Int))
      (=> (and (<= 1 elt) (<= elt 10))
-     (= (= (mem a elt) true) (= (mem b elt) true)))))))) :pattern ((ext_equal
-                                                                   a b)) )))
+     (= (= (mem a elt) true) (= (mem b elt) true))))) :pattern ((ext_equal a
+                                                                b)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -285,8 +277,7 @@
   (assert
   (forall ((s (Array Int Bool)))
   (forall ((e1 Int))
-  (! (=> (mem__function_guard (mem s e1) s e1)
-     (= (= (mem s e1) true) (= (select s e1) true))) :pattern ((mem s e1)) ))))
+  (! (= (= (mem s e1) true) (= (select s e1) true)) :pattern ((mem s e1)) ))))
 
 (declare-fun s () (Array Int Bool))
 
@@ -312,16 +303,6 @@
 
 ;; H
   (assert (= s3 s1))
-
-;; H
-  (assert (remove__function_guard (remove s e) s e))
-
-;; H
-  (assert (remove__function_guard (remove s e) s e))
-
-;; H
-  (assert (ext_equal__function_guard (ext_equal s2 (remove s e)) s2
-  (remove s e)))
 
 (assert
 ;; WP_parameter_def

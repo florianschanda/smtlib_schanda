@@ -368,9 +368,11 @@
 (define-fun tTxSP1__ref___projection ((a tTxSP1__ref)) tTxSP1 (tTxSP1__content
                                                               a))
 
-(declare-sort t23b 0)
+(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
+(declare-sort tTySP1 0)
+
+(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
 (define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -380,18 +382,20 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
 
-(declare-fun user_eq4 (t23b t23b) Bool)
+(declare-fun user_eq4 (tTySP1 tTySP1) Bool)
 
-(declare-fun dummy4 () t23b)
+(declare-fun dummy4 () tTySP1)
 
-(declare-datatypes () ((t23b__ref (mk_t23b__ref (t23b__content t23b)))))
-(define-fun t23b__ref___projection ((a t23b__ref)) t23b (t23b__content a))
+(declare-datatypes ()
+((tTySP1__ref (mk_tTySP1__ref (tTySP1__content tTySP1)))))
+(define-fun tTySP1__ref___projection ((a tTySP1__ref)) tTySP1 (tTySP1__content
+                                                              a))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(declare-sort tTySP1 0)
+(declare-sort tTxSP11 0)
 
-(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
 (define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -401,18 +405,20 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
 
-(declare-fun user_eq5 (tTySP1 tTySP1) Bool)
+(declare-fun user_eq5 (tTxSP11 tTxSP11) Bool)
 
-(declare-fun dummy5 () tTySP1)
+(declare-fun dummy5 () tTxSP11)
 
 (declare-datatypes ()
-((tTySP1__ref (mk_tTySP1__ref (tTySP1__content tTySP1)))))
-(define-fun tTySP1__ref___projection ((a tTySP1__ref)) tTySP1 (tTySP1__content
-                                                              a))
+((tTxSP1__ref1 (mk_tTxSP1__ref1 (tTxSP1__content1 tTxSP11)))))
+(define-fun tTxSP1__ref_2__projection ((a tTxSP1__ref1)) tTxSP11 (tTxSP1__content1
+                                                                 a))
 
-(declare-sort t25b 0)
+(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(declare-sort tTySP11 0)
+
+(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 11)))
 
 (define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -422,18 +428,20 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
 
-(declare-fun user_eq6 (t25b t25b) Bool)
+(declare-fun user_eq6 (tTySP11 tTySP11) Bool)
 
-(declare-fun dummy6 () t25b)
+(declare-fun dummy6 () tTySP11)
 
-(declare-datatypes () ((t25b__ref (mk_t25b__ref (t25b__content t25b)))))
-(define-fun t25b__ref___projection ((a t25b__ref)) t25b (t25b__content a))
+(declare-datatypes ()
+((tTySP1__ref1 (mk_tTySP1__ref1 (tTySP1__content1 tTySP11)))))
+(define-fun tTySP1__ref_2__projection ((a tTySP1__ref1)) tTySP11 (tTySP1__content1
+                                                                 a))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
-(declare-sort tTxSP11 0)
+(declare-sort tTxSP12 0)
 
-(define-fun in_range7 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
+(define-fun in_range7 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
 (define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -443,18 +451,22 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
 
-(declare-fun user_eq7 (tTxSP11 tTxSP11) Bool)
+(declare-fun user_eq7 (tTxSP12 tTxSP12) Bool)
 
-(declare-fun dummy7 () tTxSP11)
+(declare-fun dummy7 () tTxSP12)
 
 (declare-datatypes ()
-((tTxSP1__ref1 (mk_tTxSP1__ref1 (tTxSP1__content1 tTxSP11)))))
-(define-fun tTxSP1__ref_2__projection ((a tTxSP1__ref1)) tTxSP11 (tTxSP1__content1
+((tTxSP1__ref2 (mk_tTxSP1__ref2 (tTxSP1__content2 tTxSP12)))))
+(define-fun tTxSP1__ref_3__projection ((a tTxSP1__ref2)) tTxSP12 (tTxSP1__content2
                                                                  a))
 
-(declare-sort t30b 0)
+(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
 
-(define-fun in_range8 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
+(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+
+(declare-sort tTxSP13 0)
+
+(define-fun in_range8 ((x Int)) Bool (and (<= 1 x) (<= x 11)))
 
 (define-fun bool_eq9 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -464,18 +476,22 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
 
-(declare-fun user_eq8 (t30b t30b) Bool)
+(declare-fun user_eq8 (tTxSP13 tTxSP13) Bool)
 
-(declare-fun dummy8 () t30b)
+(declare-fun dummy8 () tTxSP13)
 
-(declare-datatypes () ((t30b__ref (mk_t30b__ref (t30b__content t30b)))))
-(define-fun t30b__ref___projection ((a t30b__ref)) t30b (t30b__content a))
+(declare-datatypes ()
+((tTxSP1__ref3 (mk_tTxSP1__ref3 (tTxSP1__content3 tTxSP13)))))
+(define-fun tTxSP1__ref_4__projection ((a tTxSP1__ref3)) tTxSP13 (tTxSP1__content3
+                                                                 a))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
 
-(declare-sort tTySP11 0)
+(declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
 
-(define-fun in_range9 ((x Int)) Bool (and (<= 1 x) (<= x 11)))
+(declare-sort tTxSP14 0)
+
+(define-fun in_range9 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
 (define-fun bool_eq10 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -485,16 +501,18 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Int)
 
-(declare-fun user_eq9 (tTySP11 tTySP11) Bool)
+(declare-fun user_eq9 (tTxSP14 tTxSP14) Bool)
 
-(declare-fun dummy9 () tTySP11)
+(declare-fun dummy9 () tTxSP14)
 
 (declare-datatypes ()
-((tTySP1__ref1 (mk_tTySP1__ref1 (tTySP1__content1 tTySP11)))))
-(define-fun tTySP1__ref_2__projection ((a tTySP1__ref1)) tTySP11 (tTySP1__content1
+((tTxSP1__ref4 (mk_tTxSP1__ref4 (tTxSP1__content4 tTxSP14)))))
+(define-fun tTxSP1__ref_5__projection ((a tTxSP1__ref4)) tTxSP14 (tTxSP1__content4
                                                                  a))
 
-(declare-sort t32b 0)
+(declare-fun attr__ATTRIBUTE_ADDRESS9 () Int)
+
+(declare-sort tTxSP15 0)
 
 (define-fun in_range10 ((x Int)) Bool (and (<= 1 x) (<= x 11)))
 
@@ -506,184 +524,14 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE10 (us_image) Int)
 
-(declare-fun user_eq10 (t32b t32b) Bool)
+(declare-fun user_eq10 (tTxSP15 tTxSP15) Bool)
 
-(declare-fun dummy10 () t32b)
-
-(declare-datatypes () ((t32b__ref (mk_t32b__ref (t32b__content t32b)))))
-(define-fun t32b__ref___projection ((a t32b__ref)) t32b (t32b__content a))
-
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
-
-(declare-sort tTxSP12 0)
-
-(define-fun in_range11 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq12 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE11 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check11 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE11 (us_image) Int)
-
-(declare-fun user_eq11 (tTxSP12 tTxSP12) Bool)
-
-(declare-fun dummy11 () tTxSP12)
-
-(declare-datatypes ()
-((tTxSP1__ref2 (mk_tTxSP1__ref2 (tTxSP1__content2 tTxSP12)))))
-(define-fun tTxSP1__ref_3__projection ((a tTxSP1__ref2)) tTxSP12 (tTxSP1__content2
-                                                                 a))
-
-(declare-sort t36b 0)
-
-(define-fun in_range12 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq13 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE12 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check12 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE12 (us_image) Int)
-
-(declare-fun user_eq12 (t36b t36b) Bool)
-
-(declare-fun dummy12 () t36b)
-
-(declare-datatypes () ((t36b__ref (mk_t36b__ref (t36b__content t36b)))))
-(define-fun t36b__ref___projection ((a t36b__ref)) t36b (t36b__content a))
-
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
-
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
-
-(declare-sort tTxSP13 0)
-
-(define-fun in_range13 ((x Int)) Bool (and (<= 1 x) (<= x 11)))
-
-(define-fun bool_eq14 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE13 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check13 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE13 (us_image) Int)
-
-(declare-fun user_eq13 (tTxSP13 tTxSP13) Bool)
-
-(declare-fun dummy13 () tTxSP13)
-
-(declare-datatypes ()
-((tTxSP1__ref3 (mk_tTxSP1__ref3 (tTxSP1__content3 tTxSP13)))))
-(define-fun tTxSP1__ref_4__projection ((a tTxSP1__ref3)) tTxSP13 (tTxSP1__content3
-                                                                 a))
-
-(declare-sort t40b 0)
-
-(define-fun in_range14 ((x Int)) Bool (and (<= 1 x) (<= x 11)))
-
-(define-fun bool_eq15 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE14 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check14 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE14 (us_image) Int)
-
-(declare-fun user_eq14 (t40b t40b) Bool)
-
-(declare-fun dummy14 () t40b)
-
-(declare-datatypes () ((t40b__ref (mk_t40b__ref (t40b__content t40b)))))
-(define-fun t40b__ref___projection ((a t40b__ref)) t40b (t40b__content a))
-
-(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
-
-(declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
-
-(declare-sort tTxSP14 0)
-
-(define-fun in_range15 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq16 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE15 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check15 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE15 (us_image) Int)
-
-(declare-fun user_eq15 (tTxSP14 tTxSP14) Bool)
-
-(declare-fun dummy15 () tTxSP14)
-
-(declare-datatypes ()
-((tTxSP1__ref4 (mk_tTxSP1__ref4 (tTxSP1__content4 tTxSP14)))))
-(define-fun tTxSP1__ref_5__projection ((a tTxSP1__ref4)) tTxSP14 (tTxSP1__content4
-                                                                 a))
-
-(declare-sort t45b 0)
-
-(define-fun in_range16 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq17 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE16 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check16 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE16 (us_image) Int)
-
-(declare-fun user_eq16 (t45b t45b) Bool)
-
-(declare-fun dummy16 () t45b)
-
-(declare-datatypes () ((t45b__ref (mk_t45b__ref (t45b__content t45b)))))
-(define-fun t45b__ref___projection ((a t45b__ref)) t45b (t45b__content a))
-
-(declare-fun attr__ATTRIBUTE_ADDRESS9 () Int)
-
-(declare-sort tTxSP15 0)
-
-(define-fun in_range17 ((x Int)) Bool (and (<= 1 x) (<= x 11)))
-
-(define-fun bool_eq18 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE17 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check17 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE17 (us_image) Int)
-
-(declare-fun user_eq17 (tTxSP15 tTxSP15) Bool)
-
-(declare-fun dummy17 () tTxSP15)
+(declare-fun dummy10 () tTxSP15)
 
 (declare-datatypes ()
 ((tTxSP1__ref5 (mk_tTxSP1__ref5 (tTxSP1__content5 tTxSP15)))))
 (define-fun tTxSP1__ref_6__projection ((a tTxSP1__ref5)) tTxSP15 (tTxSP1__content5
                                                                  a))
-
-(declare-sort t50b 0)
-
-(define-fun in_range18 ((x Int)) Bool (and (<= 1 x) (<= x 11)))
-
-(define-fun bool_eq19 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE18 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check18 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE18 (us_image) Int)
-
-(declare-fun user_eq18 (t50b t50b) Bool)
-
-(declare-fun dummy18 () t50b)
-
-(declare-datatypes () ((t50b__ref (mk_t50b__ref (t50b__content t50b)))))
-(define-fun t50b__ref___projection ((a t50b__ref)) t50b (t50b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS10 () Int)
 
@@ -770,8 +618,6 @@
 
 (declare-fun x () (Array Int Bool))
 
-(declare-fun o () (Array Int Bool))
-
 (declare-fun result () (Array Int Bool))
 
 (declare-fun x1 () (Array Int Bool))
@@ -792,14 +638,11 @@
   (assert (= branch 103))
 
 ;; H
-  (assert
-  (= o (do_checks__do_length_check__B_22__x__aggregate_def (of_int 0))))
-
-;; H
   (assert (= result x))
 
 ;; H
-  (assert (= x1 o))
+  (assert
+  (= x1 (do_checks__do_length_check__B_22__x__aggregate_def (of_int 0))))
 
 (assert
 ;; WP_parameter_def

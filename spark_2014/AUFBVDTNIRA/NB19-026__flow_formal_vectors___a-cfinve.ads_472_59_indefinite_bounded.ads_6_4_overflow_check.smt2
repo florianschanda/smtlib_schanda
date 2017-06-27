@@ -79,12 +79,12 @@
 (define-fun count_type__ref___projection ((a count_type__ref)) count_type 
   (count_type__content a))
 
-(define-fun dynamic_invariant ((temp___expr_178 Int)
-  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
-  (temp___do_toplevel_177 Bool)) Bool (=>
-                                      (or (= temp___is_init_175 true)
+(define-fun dynamic_invariant ((temp___expr_177 Int)
+  (temp___is_init_174 Bool) (temp___skip_constant_175 Bool)
+  (temp___do_toplevel_176 Bool)) Bool (=>
+                                      (or (= temp___is_init_174 true)
                                       (<= 0 2147483647)) (in_range1
-                                      temp___expr_178)))
+                                      temp___expr_177)))
 
 (declare-sort element_type 0)
 
@@ -109,12 +109,12 @@
 (define-fun element_type__ref___projection ((a element_type__ref)) element_type 
   (element_type__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_190 Int)
-  (temp___is_init_187 Bool) (temp___skip_constant_188 Bool)
-  (temp___do_toplevel_189 Bool)) Bool (=>
-                                      (or (= temp___is_init_187 true)
+(define-fun dynamic_invariant1 ((temp___expr_189 Int)
+  (temp___is_init_186 Bool) (temp___skip_constant_187 Bool)
+  (temp___do_toplevel_188 Bool)) Bool (=>
+                                      (or (= temp___is_init_186 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range2 temp___expr_190)))
+                                      (in_range2 temp___expr_189)))
 
 (declare-sort capacity_range 0)
 
@@ -262,12 +262,12 @@
 
 (declare-fun capacity__function_guard (Int us_rep) Bool)
 
-(define-fun dynamic_invariant2 ((temp___expr_202 Int)
-  (temp___is_init_199 Bool) (temp___skip_constant_200 Bool)
-  (temp___do_toplevel_201 Bool)) Bool (=>
-                                      (or (= temp___is_init_199 true)
+(define-fun dynamic_invariant2 ((temp___expr_201 Int)
+  (temp___is_init_198 Bool) (temp___skip_constant_199 Bool)
+  (temp___do_toplevel_200 Bool)) Bool (=>
+                                      (or (= temp___is_init_198 true)
                                       (<= 0 2147483647)) (in_range3
-                                      temp___expr_202)))
+                                      temp___expr_201)))
 
 (declare-fun length (us_rep) Int)
 

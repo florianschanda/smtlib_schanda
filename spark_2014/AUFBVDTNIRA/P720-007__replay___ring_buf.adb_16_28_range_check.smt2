@@ -511,9 +511,8 @@
 ;; is_full__def_axiom
   (assert
   (forall ((r us_rep))
-  (! (=> (is_full__function_guard (is_full r) r)
-     (= (= (is_full r) true)
-     (= (to_rep2 (rec__ring_buf__ring_buffer__length (us_split_fields1 r))) 10000))) :pattern (
+  (! (= (= (is_full r) true)
+     (= (to_rep2 (rec__ring_buf__ring_buffer__length (us_split_fields1 r))) 10000)) :pattern (
   (is_full r)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -552,11 +551,11 @@
 
 (declare-fun o4 () length_type)
 
-(declare-fun temp___204 () (Array Int integer))
+(declare-fun temp___196 () (Array Int integer))
 
-(declare-fun temp___2041 () ar_index)
+(declare-fun temp___1961 () ar_index)
 
-(declare-fun temp___2042 () length_type)
+(declare-fun temp___1962 () length_type)
 
 (declare-fun result () (Array Int integer))
 
@@ -572,14 +571,6 @@
 
 ;; H
   (assert (in_range x))
-
-;; H
-  (assert (is_full__function_guard
-  (is_full
-  (mk___rep
-  (mk___split_fields r__split_fields r__split_fields1 r__split_fields2)))
-  (mk___rep
-  (mk___split_fields r__split_fields r__split_fields1 r__split_fields2))))
 
 ;; H
   (assert
@@ -608,13 +599,13 @@
   (assert (= r__split_fields2 o4))
 
 ;; H
-  (assert (= temp___204 o2))
+  (assert (= temp___196 o2))
 
 ;; H
-  (assert (= temp___2041 o3))
+  (assert (= temp___1961 o3))
 
 ;; H
-  (assert (= temp___2042 o4))
+  (assert (= temp___1962 o4))
 
 ;; H
   (assert
@@ -623,13 +614,13 @@
   (mk___split_fields r__split_fields r__split_fields1 r__split_fields2))))
 
 ;; H
-  (assert (= temp___204 r__split_fields3))
+  (assert (= temp___196 r__split_fields3))
 
 ;; H
-  (assert (= temp___2041 r__split_fields4))
+  (assert (= temp___1961 r__split_fields4))
 
 ;; H
-  (assert (= temp___2042 r__split_fields5))
+  (assert (= temp___1962 r__split_fields5))
 
 (assert
 ;; WP_parameter_def

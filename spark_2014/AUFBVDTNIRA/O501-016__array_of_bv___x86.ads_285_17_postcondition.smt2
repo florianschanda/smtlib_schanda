@@ -306,10 +306,9 @@
   (forall ((x86__rdi (_ BitVec 64)))
   (! (=> (dynamic_invariant x86__rdi true true true)
      (let ((result (edi x86__rdi)))
-     (=> (edi__function_guard result x86__rdi)
      (and
      (= result ((_ extract 31 0) (bvand x86__rdi ((_ int2bv 64) 4294967295))))
-     (dynamic_invariant1 result true false true))))) :pattern ((edi x86__rdi)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((edi x86__rdi)) )))
 
 (declare-fun val__ () (_ BitVec 32))
 
@@ -338,9 +337,6 @@
 
 ;; H
   (assert (= rdi3 rdi1))
-
-;; H
-  (assert (edi__function_guard (edi rdi2) rdi2))
 
 (assert
 ;; WP_parameter_def

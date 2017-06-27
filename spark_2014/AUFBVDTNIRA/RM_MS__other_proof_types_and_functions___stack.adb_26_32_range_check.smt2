@@ -406,21 +406,17 @@
 
 ;; count__post_axiom
   (assert
-  (forall ((stack__my_stack__fields us_split_fields))
-  (! (let ((result (count stack__my_stack__fields)))
-     (=> (count__function_guard result stack__my_stack__fields)
-     (dynamic_invariant result true false true))) :pattern ((count
-                                                            stack__my_stack__fields)) )))
+  (forall ((stack__my_stack__fields us_split_fields)) (! (dynamic_invariant
+  (count stack__my_stack__fields) true false
+  true) :pattern ((count stack__my_stack__fields)) )))
 
 ;; count__def_axiom
   (assert
   (forall ((stack__my_stack__fields us_split_fields))
-  (! (=> (count__function_guard (count stack__my_stack__fields)
-     stack__my_stack__fields)
-     (= (count stack__my_stack__fields) (to_rep1
+  (! (= (count stack__my_stack__fields) (to_rep1
                                         (rec__stack__stack_type__pointer
                                         (us_split_fields1
-                                        (mk___rep stack__my_stack__fields)))))) :pattern (
+                                        (mk___rep stack__my_stack__fields))))) :pattern (
   (count stack__my_stack__fields)) )))
 
 (declare-fun n () Int)
@@ -455,19 +451,19 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(define-fun dynamic_invariant2 ((temp___expr_185 Int)
-  (temp___is_init_182 Bool) (temp___skip_constant_183 Bool)
-  (temp___do_toplevel_184 Bool)) Bool (=>
-                                      (or (= temp___is_init_182 true)
+(define-fun dynamic_invariant2 ((temp___expr_156 Int)
+  (temp___is_init_153 Bool) (temp___skip_constant_154 Bool)
+  (temp___do_toplevel_155 Bool)) Bool (=>
+                                      (or (= temp___is_init_153 true)
                                       (<= 0 100)) (in_range3
-                                      temp___expr_185)))
+                                      temp___expr_156)))
 
-(define-fun dynamic_invariant3 ((temp___expr_191 Int)
-  (temp___is_init_188 Bool) (temp___skip_constant_189 Bool)
-  (temp___do_toplevel_190 Bool)) Bool (=>
-                                      (or (= temp___is_init_188 true)
+(define-fun dynamic_invariant3 ((temp___expr_162 Int)
+  (temp___is_init_159 Bool) (temp___skip_constant_160 Bool)
+  (temp___do_toplevel_161 Bool)) Bool (=>
+                                      (or (= temp___is_init_159 true)
                                       (<= 1 100)) (in_range4
-                                      temp___expr_191)))
+                                      temp___expr_162)))
 
 (declare-fun my_stack__split_fields () (Array Int integer))
 
@@ -475,11 +471,6 @@
 
 ;; H
   (assert (in_range2 n))
-
-;; H
-  (assert (count__function_guard
-  (count (mk___split_fields my_stack__split_fields my_stack__split_fields1))
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1)))
 
 ;; H
   (assert

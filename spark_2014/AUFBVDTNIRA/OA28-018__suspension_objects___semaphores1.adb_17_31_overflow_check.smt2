@@ -189,6 +189,16 @@
 (define-fun protected_naturalT__ref___projection ((a protected_naturalT__ref)) us_rep 
   (protected_naturalT__content a))
 
+(define-fun default_initial_assumption ((temp___expr_1494 us_rep)
+  (temp___skip_top_level_1495 Bool)) Bool (and
+                                          (= (to_rep
+                                             (rec__semaphores1__protected_naturalT__the_data
+                                             (us_split_fields1
+                                             temp___expr_1494))) 0)
+                                          (= (rec__semaphores1__protected_naturalT__not_full
+                                             (us_split_fields1
+                                             temp___expr_1494)) (of_int 1))))
+
 (define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool)
   (temp___skip_constant_31 Bool)
   (temp___do_toplevel_32 Bool)) Bool (=>

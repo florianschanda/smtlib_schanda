@@ -548,11 +548,10 @@
   (assert
   (forall ((a1 us_rep))
   (forall ((cu1 us_rep1))
-  (! (=> (has_element__function_guard (has_element a1 cu1) a1 cu1)
-     (= (= (has_element a1 cu1) true)
+  (! (= (= (has_element a1 cu1) true)
      (and
      (<= 1 (to_rep (rec__with_iterable__cursor__i (us_split_fields3 cu1))))
-     (<= (to_rep (rec__with_iterable__cursor__i (us_split_fields3 cu1))) 100)))) :pattern (
+     (<= (to_rep (rec__with_iterable__cursor__i (us_split_fields3 cu1))) 100))) :pattern (
   (has_element a1 cu1)) ))))
 
 (define-fun dynamic_invariant1 ((temp___expr_33 Int) (temp___is_init_30 Bool)
@@ -607,18 +606,15 @@
 
 (declare-fun o3 () natural)
 
-(declare-fun temp___223 () natural)
+(declare-fun temp___216 () natural)
 
-(declare-fun temp___2231 () natural)
+(declare-fun temp___2161 () natural)
 
 ;; H
   (assert (dynamic_invariant i10s true false true))
 
 ;; H
   (assert (dynamic_invariant cu true false true))
-
-;; H
-  (assert (has_element__function_guard (has_element a cu) a cu))
 
 ;; H
   (assert (= (has_element a cu) true))
@@ -640,14 +636,14 @@
   (assert (= o2 o3))
 
 ;; H
-  (assert (= (us_split_discrs1 cu) (mk___split_discrs temp___223)))
+  (assert (= (us_split_discrs1 cu) (mk___split_discrs temp___216)))
 
 ;; H
-  (assert (= temp___2231 o3))
+  (assert (= temp___2161 o3))
 
 (assert
 ;; WP_parameter_def
  ;; File "with_iterable.ads", line 14, characters 0-0
   (not (dynamic_predicate
-  (mk___rep1 (mk___split_discrs temp___223) (mk___split_fields1 temp___2231)))))
+  (mk___rep1 (mk___split_discrs temp___216) (mk___split_fields1 temp___2161)))))
 (check-sat)

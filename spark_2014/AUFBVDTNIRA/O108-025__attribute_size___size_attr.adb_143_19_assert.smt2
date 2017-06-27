@@ -2156,49 +2156,9 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS10 () Int)
 
-(declare-sort t6b 0)
-
-(define-fun in_range8 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq19 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq19 (t6b t6b) Bool)
-
-(declare-fun dummy21 () t6b)
-
-(declare-datatypes () ((t6b__ref (mk_t6b__ref (t6b__content t6b)))))
-(define-fun t6b__ref___projection ((a t6b__ref)) t6b (t6b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS11 () Int)
 
-(declare-sort tTuaSP1 0)
-
-(define-fun in_range9 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq20 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
-
-(declare-fun user_eq20 (tTuaSP1 tTuaSP1) Bool)
-
-(declare-fun dummy22 () tTuaSP1)
-
-(declare-datatypes ()
-((tTuaSP1__ref (mk_tTuaSP1__ref (tTuaSP1__content tTuaSP1)))))
-(define-fun tTuaSP1__ref___projection ((a tTuaSP1__ref)) tTuaSP1 (tTuaSP1__content
-                                                                 a))
-
-(declare-fun dummy23 () (Array Int natural))
+(declare-fun dummy21 () (Array Int natural))
 
 (declare-fun value__size16 () Int)
 
@@ -2231,135 +2191,17 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int natural))) (<= 0 (object__alignment16 a))))
 
-(declare-fun user_eq21 ((Array Int natural) (Array Int natural)) Bool)
-
-(declare-sort t8b 0)
-
-(define-fun in_range10 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq21 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
-
-(declare-fun user_eq22 (t8b t8b) Bool)
-
-(declare-fun dummy24 () t8b)
-
-(declare-datatypes () ((t8b__ref (mk_t8b__ref (t8b__content t8b)))))
-(define-fun t8b__ref___projection ((a t8b__ref)) t8b (t8b__content a))
+(declare-fun user_eq19 ((Array Int natural) (Array Int natural)) Bool)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS12 () Int)
 
-(declare-sort t10b 0)
-
-(define-fun in_range11 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq22 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE9 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Int)
-
-(declare-fun user_eq23 (t10b t10b) Bool)
-
-(declare-fun dummy25 () t10b)
-
-(declare-datatypes () ((t10b__ref (mk_t10b__ref (t10b__content t10b)))))
-(define-fun t10b__ref___projection ((a t10b__ref)) t10b (t10b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS13 () Int)
-
-(declare-sort t12b 0)
-
-(define-fun in_range12 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq23 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE10 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) Int)
-
-(declare-fun user_eq24 (t12b t12b) Bool)
-
-(declare-fun dummy26 () t12b)
-
-(declare-datatypes () ((t12b__ref (mk_t12b__ref (t12b__content t12b)))))
-(define-fun t12b__ref___projection ((a t12b__ref)) t12b (t12b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS14 () Int)
 
-(declare-sort t14b 0)
-
-(define-fun in_range13 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq24 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE11 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check11 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE11 (us_image) Int)
-
-(declare-fun user_eq25 (t14b t14b) Bool)
-
-(declare-fun dummy27 () t14b)
-
-(declare-datatypes () ((t14b__ref (mk_t14b__ref (t14b__content t14b)))))
-(define-fun t14b__ref___projection ((a t14b__ref)) t14b (t14b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS15 () Int)
 
-(declare-sort tTua2SP1 0)
-
-(define-fun in_range14 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq25 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE12 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check12 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE12 (us_image) Int)
-
-(declare-fun user_eq26 (tTua2SP1 tTua2SP1) Bool)
-
-(declare-fun dummy28 () tTua2SP1)
-
-(declare-datatypes ()
-((tTua2SP1__ref (mk_tTua2SP1__ref (tTua2SP1__content tTua2SP1)))))
-(define-fun tTua2SP1__ref___projection ((a tTua2SP1__ref)) tTua2SP1 (tTua2SP1__content
-                                                                    a))
-
-(declare-sort tTua2SP2 0)
-
-(define-fun in_range15 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq26 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE13 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check13 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE13 (us_image) Int)
-
-(declare-fun user_eq27 (tTua2SP2 tTua2SP2) Bool)
-
-(declare-fun dummy29 () tTua2SP2)
-
-(declare-datatypes ()
-((tTua2SP2__ref (mk_tTua2SP2__ref (tTua2SP2__content tTua2SP2)))))
-(define-fun tTua2SP2__ref___projection ((a tTua2SP2__ref)) tTua2SP2 (tTua2SP2__content
-                                                                    a))
-
-(declare-fun dummy30 () map1)
+(declare-fun dummy22 () map1)
 
 (declare-fun value__size17 () Int)
 
@@ -2391,112 +2233,11 @@
 ;; object__alignment_axiom
   (assert (forall ((a map1)) (<= 0 (object__alignment17 a))))
 
-(declare-fun user_eq28 (map1 map1) Bool)
-
-(declare-sort t16b 0)
-
-(define-fun in_range16 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq27 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE14 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check14 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE14 (us_image) Int)
-
-(declare-fun user_eq29 (t16b t16b) Bool)
-
-(declare-fun dummy31 () t16b)
-
-(declare-datatypes () ((t16b__ref (mk_t16b__ref (t16b__content t16b)))))
-(define-fun t16b__ref___projection ((a t16b__ref)) t16b (t16b__content a))
-
-(declare-sort t17b 0)
-
-(define-fun in_range17 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq28 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE15 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check15 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE15 (us_image) Int)
-
-(declare-fun user_eq30 (t17b t17b) Bool)
-
-(declare-fun dummy32 () t17b)
-
-(declare-datatypes () ((t17b__ref (mk_t17b__ref (t17b__content t17b)))))
-(define-fun t17b__ref___projection ((a t17b__ref)) t17b (t17b__content a))
+(declare-fun user_eq20 (map1 map1) Bool)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS16 () Int)
 
-(declare-sort tTua3SP1 0)
-
-(define-fun in_range18 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq29 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE16 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check16 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE16 (us_image) Int)
-
-(declare-fun user_eq31 (tTua3SP1 tTua3SP1) Bool)
-
-(declare-fun dummy33 () tTua3SP1)
-
-(declare-datatypes ()
-((tTua3SP1__ref (mk_tTua3SP1__ref (tTua3SP1__content tTua3SP1)))))
-(define-fun tTua3SP1__ref___projection ((a tTua3SP1__ref)) tTua3SP1 (tTua3SP1__content
-                                                                    a))
-
-(declare-sort tTua3SP2 0)
-
-(define-fun in_range19 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq30 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE17 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check17 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE17 (us_image) Int)
-
-(declare-fun user_eq32 (tTua3SP2 tTua3SP2) Bool)
-
-(declare-fun dummy34 () tTua3SP2)
-
-(declare-datatypes ()
-((tTua3SP2__ref (mk_tTua3SP2__ref (tTua3SP2__content tTua3SP2)))))
-(define-fun tTua3SP2__ref___projection ((a tTua3SP2__ref)) tTua3SP2 (tTua3SP2__content
-                                                                    a))
-
-(declare-sort tTua3SP3 0)
-
-(define-fun in_range20 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq31 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE18 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check18 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE18 (us_image) Int)
-
-(declare-fun user_eq33 (tTua3SP3 tTua3SP3) Bool)
-
-(declare-fun dummy35 () tTua3SP3)
-
-(declare-datatypes ()
-((tTua3SP3__ref (mk_tTua3SP3__ref (tTua3SP3__content tTua3SP3)))))
-(define-fun tTua3SP3__ref___projection ((a tTua3SP3__ref)) tTua3SP3 (tTua3SP3__content
-                                                                    a))
-
-(declare-fun dummy36 () map2)
+(declare-fun dummy23 () map2)
 
 (declare-fun value__size18 () Int)
 
@@ -2528,152 +2269,11 @@
 ;; object__alignment_axiom
   (assert (forall ((a map2)) (<= 0 (object__alignment18 a))))
 
-(declare-fun user_eq34 (map2 map2) Bool)
-
-(declare-sort t19b 0)
-
-(define-fun in_range21 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq32 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE19 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check19 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE19 (us_image) Int)
-
-(declare-fun user_eq35 (t19b t19b) Bool)
-
-(declare-fun dummy37 () t19b)
-
-(declare-datatypes () ((t19b__ref (mk_t19b__ref (t19b__content t19b)))))
-(define-fun t19b__ref___projection ((a t19b__ref)) t19b (t19b__content a))
-
-(declare-sort t20b 0)
-
-(define-fun in_range22 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq33 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE20 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check20 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE20 (us_image) Int)
-
-(declare-fun user_eq36 (t20b t20b) Bool)
-
-(declare-fun dummy38 () t20b)
-
-(declare-datatypes () ((t20b__ref (mk_t20b__ref (t20b__content t20b)))))
-(define-fun t20b__ref___projection ((a t20b__ref)) t20b (t20b__content a))
-
-(declare-sort t21b 0)
-
-(define-fun in_range23 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq34 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE21 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check21 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE21 (us_image) Int)
-
-(declare-fun user_eq37 (t21b t21b) Bool)
-
-(declare-fun dummy39 () t21b)
-
-(declare-datatypes () ((t21b__ref (mk_t21b__ref (t21b__content t21b)))))
-(define-fun t21b__ref___projection ((a t21b__ref)) t21b (t21b__content a))
+(declare-fun user_eq21 (map2 map2) Bool)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS17 () Int)
 
-(declare-sort tTua4SP1 0)
-
-(define-fun in_range24 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq35 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE22 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check22 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE22 (us_image) Int)
-
-(declare-fun user_eq38 (tTua4SP1 tTua4SP1) Bool)
-
-(declare-fun dummy40 () tTua4SP1)
-
-(declare-datatypes ()
-((tTua4SP1__ref (mk_tTua4SP1__ref (tTua4SP1__content tTua4SP1)))))
-(define-fun tTua4SP1__ref___projection ((a tTua4SP1__ref)) tTua4SP1 (tTua4SP1__content
-                                                                    a))
-
-(declare-sort tTua4SP2 0)
-
-(define-fun in_range25 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq36 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE23 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check23 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE23 (us_image) Int)
-
-(declare-fun user_eq39 (tTua4SP2 tTua4SP2) Bool)
-
-(declare-fun dummy41 () tTua4SP2)
-
-(declare-datatypes ()
-((tTua4SP2__ref (mk_tTua4SP2__ref (tTua4SP2__content tTua4SP2)))))
-(define-fun tTua4SP2__ref___projection ((a tTua4SP2__ref)) tTua4SP2 (tTua4SP2__content
-                                                                    a))
-
-(declare-sort tTua4SP3 0)
-
-(define-fun in_range26 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq37 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE24 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check24 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE24 (us_image) Int)
-
-(declare-fun user_eq40 (tTua4SP3 tTua4SP3) Bool)
-
-(declare-fun dummy42 () tTua4SP3)
-
-(declare-datatypes ()
-((tTua4SP3__ref (mk_tTua4SP3__ref (tTua4SP3__content tTua4SP3)))))
-(define-fun tTua4SP3__ref___projection ((a tTua4SP3__ref)) tTua4SP3 (tTua4SP3__content
-                                                                    a))
-
-(declare-sort tTua4SP4 0)
-
-(define-fun in_range27 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq38 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE25 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check25 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE25 (us_image) Int)
-
-(declare-fun user_eq41 (tTua4SP4 tTua4SP4) Bool)
-
-(declare-fun dummy43 () tTua4SP4)
-
-(declare-datatypes ()
-((tTua4SP4__ref (mk_tTua4SP4__ref (tTua4SP4__content tTua4SP4)))))
-(define-fun tTua4SP4__ref___projection ((a tTua4SP4__ref)) tTua4SP4 (tTua4SP4__content
-                                                                    a))
-
-(declare-fun dummy44 () map3)
+(declare-fun dummy24 () map3)
 
 (declare-fun value__size19 () Int)
 
@@ -2705,83 +2305,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a map3)) (<= 0 (object__alignment19 a))))
 
-(declare-fun user_eq42 (map3 map3) Bool)
-
-(declare-sort t23b 0)
-
-(define-fun in_range28 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq39 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE26 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check26 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE26 (us_image) Int)
-
-(declare-fun user_eq43 (t23b t23b) Bool)
-
-(declare-fun dummy45 () t23b)
-
-(declare-datatypes () ((t23b__ref (mk_t23b__ref (t23b__content t23b)))))
-(define-fun t23b__ref___projection ((a t23b__ref)) t23b (t23b__content a))
-
-(declare-sort t24b 0)
-
-(define-fun in_range29 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq40 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE27 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check27 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE27 (us_image) Int)
-
-(declare-fun user_eq44 (t24b t24b) Bool)
-
-(declare-fun dummy46 () t24b)
-
-(declare-datatypes () ((t24b__ref (mk_t24b__ref (t24b__content t24b)))))
-(define-fun t24b__ref___projection ((a t24b__ref)) t24b (t24b__content a))
-
-(declare-sort t25b 0)
-
-(define-fun in_range30 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq41 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE28 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check28 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE28 (us_image) Int)
-
-(declare-fun user_eq45 (t25b t25b) Bool)
-
-(declare-fun dummy47 () t25b)
-
-(declare-datatypes () ((t25b__ref (mk_t25b__ref (t25b__content t25b)))))
-(define-fun t25b__ref___projection ((a t25b__ref)) t25b (t25b__content a))
-
-(declare-sort t26b 0)
-
-(define-fun in_range31 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq42 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE29 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check29 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE29 (us_image) Int)
-
-(declare-fun user_eq46 (t26b t26b) Bool)
-
-(declare-fun dummy48 () t26b)
-
-(declare-datatypes () ((t26b__ref (mk_t26b__ref (t26b__content t26b)))))
-(define-fun t26b__ref___projection ((a t26b__ref)) t26b (t26b__content a))
+(declare-fun user_eq22 (map3 map3) Bool)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS18 () Int)
 
@@ -2988,22 +2512,6 @@
 
 (declare-fun size_attr__v4__assume () us_rep1)
 
-(declare-fun o2 () (Array Int natural))
-
-(declare-fun o3 () (Array Int natural))
-
-(declare-fun o4 () (Array Int natural))
-
-(declare-fun o5 () (Array Int natural))
-
-(declare-fun o6 () (Array Int natural))
-
-(declare-fun o7 () map1)
-
-(declare-fun o8 () map2)
-
-(declare-fun o9 () map3)
-
 (declare-fun result () bool__ref)
 
 (declare-fun b1 () Bool)
@@ -3143,76 +2651,52 @@
   (assert (= v6__attr__tag us_tag1))
 
 ;; H
-  (assert (= o2 (size_attr__ca__aggregate_def 1)))
-
-;; H
   (assert (= result5 (mk_map__ref1 ca)))
 
 ;; H
-  (assert (= ca1 o2))
-
-;; H
-  (assert (= o3 (size_attr__ua__aggregate_def 1)))
+  (assert (= ca1 (size_attr__ca__aggregate_def 1)))
 
 ;; H
   (assert (= result6 (mk_map__ref1 ua)))
 
 ;; H
-  (assert (= ua1 o3))
-
-;; H
-  (assert (= o4 (size_attr__ca2__aggregate_def 1)))
+  (assert (= ua1 (size_attr__ua__aggregate_def 1)))
 
 ;; H
   (assert (= result7 ca2))
 
 ;; H
-  (assert (= (let ((subject ca2)) ca21) o4))
-
-;; H
-  (assert (= o5 (size_attr__ca3__aggregate_def 1)))
+  (assert (= (let ((subject ca2)) ca21) (size_attr__ca2__aggregate_def 1)))
 
 ;; H
   (assert (= result8 ca3))
 
 ;; H
-  (assert (= (let ((subject ca3)) ca31) o5))
-
-;; H
-  (assert (= o6 (size_attr__ca4__aggregate_def 1)))
+  (assert (= (let ((subject ca3)) ca31) (size_attr__ca3__aggregate_def 1)))
 
 ;; H
   (assert (= result9 ca4))
 
 ;; H
-  (assert (= (let ((subject ca4)) ca41) o6))
-
-;; H
-  (assert (= o7 (size_attr__ua2__aggregate_def 1)))
+  (assert (= (let ((subject ca4)) ca41) (size_attr__ca4__aggregate_def 1)))
 
 ;; H
   (assert (= result10 ua2))
 
 ;; H
-  (assert (= (let ((subject ua2)) ua21) o7))
-
-;; H
-  (assert (= o8 (size_attr__ua3__aggregate_def 1)))
+  (assert (= (let ((subject ua2)) ua21) (size_attr__ua2__aggregate_def 1)))
 
 ;; H
   (assert (= result11 ua3))
 
 ;; H
-  (assert (= (let ((subject ua3)) ua31) o8))
-
-;; H
-  (assert (= o9 (size_attr__ua4__aggregate_def 1)))
+  (assert (= (let ((subject ua3)) ua31) (size_attr__ua3__aggregate_def 1)))
 
 ;; H
   (assert (= result12 ua4))
 
 ;; H
-  (assert (= (let ((subject ua4)) ua41) o9))
+  (assert (= (let ((subject ua4)) ua41) (size_attr__ua4__aggregate_def 1)))
 
 ;; H
   (assert (<= 0 value__size1))

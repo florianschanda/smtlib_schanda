@@ -167,19 +167,15 @@
   (forall ((a (_ BitVec 8)) (b (_ BitVec 8)))
   (! (=>
      (and (dynamic_invariant a true true true) (dynamic_invariant b true true
-     true))
-     (let ((result (subst a b)))
-     (=> (subst__function_guard result a b) (dynamic_invariant result true
-     false true)))) :pattern ((subst a b)) )))
+     true)) (dynamic_invariant (subst a b) true false true)) :pattern (
+  (subst a b)) )))
 
 ;; subst__def_axiom
   (assert
   (forall ((a (_ BitVec 8)) (b (_ BitVec 8)))
   (! (=>
-     (and
      (and (dynamic_invariant a true true true) (dynamic_invariant b true true
-     true)) (subst__function_guard (subst a b) a b))
-     (= (subst a b) (bvsub a b))) :pattern ((subst a b)) )))
+     true)) (= (subst a b) (bvsub a b))) :pattern ((subst a b)) )))
 
 (declare-fun a () (_ BitVec 8))
 
@@ -195,9 +191,7 @@
   (assert (not (= a b)))
 
 ;; H
-  (assert
-  (and (and (= o (subst a b)) (subst__function_guard o a b))
-  (= o (bvsub a b))))
+  (assert (and (= o (subst a b)) (= o (bvsub a b))))
 
 (assert
 ;; WP_parameter_def

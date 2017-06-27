@@ -349,16 +349,6 @@
 ;; oeq__post_axiom
   (assert true)
 
-;; H
-  (assert (oeq__function_guard
-  (oeq
-  (to_rep
-  (select (rec__regpat__pattern_matcher__program (us_split_fields1 self)) 1))
-  0)
-  (to_rep
-  (select (rec__regpat__pattern_matcher__program (us_split_fields1 self)) 1))
-  0))
-
 (assert
 ;; WP_parameter_def
  ;; File "regpat.adb", line 9, characters 0-0

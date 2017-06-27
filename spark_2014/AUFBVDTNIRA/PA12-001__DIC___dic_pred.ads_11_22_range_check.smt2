@@ -185,30 +185,27 @@
 ;; id__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (id x)))
-     (=> (id__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (id x) true
+     false true)) :pattern ((id x)) )))
 
 ;; id__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true) (id__function_guard (id x) x))
-     (= (id x) x)) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (id x) x)) :pattern (
+  (id x)) )))
 
 ;; c__def_axiom
-  (assert (and (id__function_guard (id 0) 0) (= c (id 0))))
+  (assert (= c (id 0)))
 
-(define-fun default_initial_assumption ((temp___expr_150 us_rep)
-  (temp___skip_top_level_151 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_146 us_rep)
+  (temp___skip_top_level_147 Bool)) Bool (and
                                          (= (to_rep
                                             (rec__dic_pred__s__f
                                             (us_split_fields1
-                                            temp___expr_150))) c)
+                                            temp___expr_146))) c)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_151 true))
+                                         (= temp___skip_top_level_147 true))
                                          (<= 0 c))))
 
 ;; H

@@ -70,10 +70,8 @@
 
 ;; foo__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (foo us_void_param)))
-     (=> (foo__function_guard result us_void_param) (dynamic_invariant result
-     true false true))) :pattern ((foo us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant (foo us_void_param)
+  true false true) :pattern ((foo us_void_param)) )))
 
 (declare-fun x () Int)
 
@@ -83,8 +81,7 @@
   (assert (=> (<= 0 2) (in_range x)))
 
 ;; H
-  (assert
-  (and (and (= o (foo Tuple0)) (foo__function_guard o Tuple0)) (in_range o)))
+  (assert (and (= o (foo Tuple0)) (in_range o)))
 
 (assert
 ;; WP_parameter_def

@@ -422,8 +422,7 @@
 ;; valid__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (valid__function_guard (valid s) s)
-     (= (= (valid s) true)
+  (! (= (= (valid s) true)
      (and
      (forall ((i Int))
      (=>
@@ -440,7 +439,7 @@
      (<= i 10))
      (= (to_rep1
         (let ((temp___176 (rec__natural_set__t__m (us_split_fields1 s))))
-        (select temp___176 i))) (- 1))))))) :pattern ((valid s)) )))
+        (select temp___176 i))) (- 1)))))) :pattern ((valid s)) )))
 
 (declare-fun full (us_rep) Bool)
 
@@ -456,9 +455,7 @@
 ;; full__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (full__function_guard (full s) s)
-     (and (members__function_guard (members s) s)
-     (= (= (full s) true) (= (members s) 10)))) :pattern ((full s)) )))
+  (! (= (= (full s) true) (= (members s) 10)) :pattern ((full s)) )))
 
 (declare-fun contains (us_rep Int) Bool)
 
@@ -471,15 +468,14 @@
   (assert
   (forall ((s us_rep))
   (forall ((value Int))
-  (! (=> (contains__function_guard (contains s value) s value)
-     (= (= (contains s value) true)
+  (! (= (= (contains s value) true)
      (exists ((i Int))
      (and
      (and (<= 1 i)
      (<= i (to_rep (rec__natural_set__t__len (us_split_fields1 s)))))
      (= (to_rep1
-        (let ((temp___190 (rec__natural_set__t__m (us_split_fields1 s))))
-        (select temp___190 i))) value))))) :pattern ((contains s value)) ))))
+        (let ((temp___185 (rec__natural_set__t__m (us_split_fields1 s))))
+        (select temp___185 i))) value)))) :pattern ((contains s value)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -491,15 +487,13 @@
   (assert
   (forall ((s us_rep))
   (! (let ((result (members s)))
-     (=> (members__function_guard result s)
      (and (and (<= 0 result) (<= result 10)) (dynamic_invariant result true
-     false true)))) :pattern ((members s)) )))
+     false true))) :pattern ((members s)) )))
 
 ;; members__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (members__function_guard (members s) s)
-     (= (members s) (to_rep (rec__natural_set__t__len (us_split_fields1 s))))) :pattern (
+  (! (= (members s) (to_rep (rec__natural_set__t__len (us_split_fields1 s)))) :pattern (
   (members s)) )))
 
 (define-fun dynamic_invariant1 ((temp___expr_142 Int)
@@ -535,9 +529,9 @@
 
 (declare-fun o4 () (Array Int element_t))
 
-(declare-fun temp___217 () set_length)
+(declare-fun temp___206 () set_length)
 
-(declare-fun temp___2171 () (Array Int element_t))
+(declare-fun temp___2061 () (Array Int element_t))
 
 (declare-fun o5 () element_t)
 
@@ -549,9 +543,9 @@
 
 (declare-fun o9 () (Array Int element_t))
 
-(declare-fun temp___221 () set_length)
+(declare-fun temp___210 () set_length)
 
-(declare-fun temp___2211 () (Array Int element_t))
+(declare-fun temp___2101 () (Array Int element_t))
 
 (declare-fun s__split_fields2 () set_length)
 
@@ -583,25 +577,6 @@
 
 (declare-fun s__split_fields11 () (Array Int element_t))
 
-(define-fun s__split_fields12 () us_split_fields (mk___split_fields
-                                                 s__split_fields6
-                                                 s__split_fields7))
-
-;; H
-  (assert (valid__function_guard
-  (valid (mk___rep (mk___split_fields s__split_fields s__split_fields1)))
-  (mk___rep (mk___split_fields s__split_fields s__split_fields1))))
-
-;; H
-  (assert (full__function_guard
-  (full (mk___rep (mk___split_fields s__split_fields s__split_fields1)))
-  (mk___rep (mk___split_fields s__split_fields s__split_fields1))))
-
-;; H
-  (assert (contains__function_guard
-  (contains (mk___rep s__split_fields12) value) (mk___rep s__split_fields12)
-  value))
-
 ;; H
   (assert (in_range1 value))
 
@@ -615,12 +590,9 @@
 ;; H
   (assert
   (and
-  (and
   (= o (contains
        (mk___rep (mk___split_fields s__split_fields s__split_fields1)) 
        value))
-  (contains__function_guard o
-  (mk___rep (mk___split_fields s__split_fields s__split_fields1)) value))
   (= (= o true)
   (exists ((i Int))
   (and (and (<= 1 i) (<= i (to_rep s__split_fields)))
@@ -645,10 +617,10 @@
   (assert (=> (= result true) (= s__split_fields1 o4)))
 
 ;; H
-  (assert (=> (= result true) (= temp___217 o3)))
+  (assert (=> (= result true) (= temp___206 o3)))
 
 ;; H
-  (assert (=> (= result true) (= temp___2171 o4)))
+  (assert (=> (= result true) (= temp___2061 o4)))
 
 ;; H
   (assert
@@ -659,10 +631,10 @@
                                                                   s__split_fields1)))))
 
 ;; H
-  (assert (=> (= result true) (= temp___217 s__split_fields4)))
+  (assert (=> (= result true) (= temp___206 s__split_fields4)))
 
 ;; H
-  (assert (=> (= result true) (= temp___2171 s__split_fields5)))
+  (assert (=> (= result true) (= temp___2061 s__split_fields5)))
 
 ;; H
   (assert (=> (= result true) (= (to_rep1 o5) value)))
@@ -685,10 +657,10 @@
   (assert (=> (= result true) (= o7 o9)))
 
 ;; H
-  (assert (=> (= result true) (= temp___221 o8)))
+  (assert (=> (= result true) (= temp___210 o8)))
 
 ;; H
-  (assert (=> (= result true) (= temp___2211 o9)))
+  (assert (=> (= result true) (= temp___2101 o9)))
 
 ;; H
   (assert (=> (= result true) (= result3 s__split_fields4)))
@@ -697,14 +669,17 @@
   (assert (=> (= result true) (= result4 s__split_fields5)))
 
 ;; H
-  (assert (=> (= result true) (= temp___221 s__split_fields6)))
+  (assert (=> (= result true) (= temp___210 s__split_fields6)))
 
 ;; H
-  (assert (=> (= result true) (= temp___2211 s__split_fields7)))
+  (assert (=> (= result true) (= temp___2101 s__split_fields7)))
 
 ;; H
   (assert
-  (=> (= result true) (= (contains (mk___rep s__split_fields12) value) true)))
+  (=> (= result true)
+  (= (contains
+     (mk___rep (mk___split_fields s__split_fields6 s__split_fields7)) 
+     value) true)))
 
 ;; H
   (assert (=> (not (= result true)) (= s__split_fields s__split_fields6)))
@@ -729,12 +704,6 @@
 
 ;; H
   (assert (= s__split_fields11 s__split_fields7))
-
-;; H
-  (assert (contains__function_guard
-  (contains (mk___rep (mk___split_fields s__split_fields8 s__split_fields9))
-  value) (mk___rep (mk___split_fields s__split_fields8 s__split_fields9))
-  value))
 
 (assert
 ;; WP_parameter_def

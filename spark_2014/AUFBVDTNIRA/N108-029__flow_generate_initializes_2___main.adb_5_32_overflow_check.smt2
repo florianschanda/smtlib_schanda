@@ -96,8 +96,7 @@
   (assert (in_range visible_var))
 
 ;; H
-  (assert
-  (and (and (= o (foo Tuple0)) (foo__function_guard o Tuple0)) (in_range o)))
+  (assert (and (= o (foo Tuple0)) (in_range o)))
 
 ;; H
   (assert (and (= o1 (+ a visible_var)) (in_range (+ a visible_var))))

@@ -1887,9 +1887,8 @@
 ;; add_in_range__def_axiom
   (assert
   (forall ((x (_ BitVec 64)) (y (_ BitVec 64)))
-  (! (=> (add_in_range__function_guard (add_in_range x y) x y)
-     (= (= (add_in_range x y) true)
-     (bvule y (bvsub ((_ int2bv 64) 18446744073709551615) x)))) :pattern (
+  (! (= (= (add_in_range x y) true)
+     (bvule y (bvsub ((_ int2bv 64) 18446744073709551615) x))) :pattern (
   (add_in_range x y)) )))
 
 (declare-fun hash_bit_len_of (us_rep2) (_ BitVec 64))
@@ -1906,17 +1905,13 @@
 ;; hash_bit_len_of__post_axiom
   (assert
   (forall ((ctx us_rep2))
-  (! (=> (dynamic_invariant5 ctx true true true)
-     (let ((result (hash_bit_len_of ctx)))
-     (=> (hash_bit_len_of__function_guard result ctx) (dynamic_invariant6
-     result true false true)))) :pattern ((hash_bit_len_of ctx)) )))
+  (! (=> (dynamic_invariant5 ctx true true true) (dynamic_invariant6
+     (hash_bit_len_of ctx) true false true)) :pattern ((hash_bit_len_of ctx)) )))
 
 ;; hash_bit_len_of__def_axiom
   (assert
   (forall ((ctx us_rep2))
-  (! (=>
-     (and (dynamic_invariant5 ctx true true true)
-     (hash_bit_len_of__function_guard (hash_bit_len_of ctx) ctx))
+  (! (=> (dynamic_invariant5 ctx true true true)
      (= (hash_bit_len_of ctx) (to_rep3
                               (rec__skein__context_header__hash_bit_len
                               (us_split_fields3
@@ -1931,17 +1926,13 @@
 ;; byte_count_of__post_axiom
   (assert
   (forall ((ctx us_rep2))
-  (! (=> (dynamic_invariant5 ctx true true true)
-     (let ((result (byte_count_of ctx)))
-     (=> (byte_count_of__function_guard result ctx) (dynamic_invariant result
-     true false true)))) :pattern ((byte_count_of ctx)) )))
+  (! (=> (dynamic_invariant5 ctx true true true) (dynamic_invariant
+     (byte_count_of ctx) true false true)) :pattern ((byte_count_of ctx)) )))
 
 ;; byte_count_of__def_axiom
   (assert
   (forall ((ctx us_rep2))
-  (! (=>
-     (and (dynamic_invariant5 ctx true true true)
-     (byte_count_of__function_guard (byte_count_of ctx) ctx))
+  (! (=> (dynamic_invariant5 ctx true true true)
      (= (byte_count_of ctx) (to_rep1
                             (rec__skein__context_header__byte_count
                             (us_split_fields3
@@ -2109,55 +2100,6 @@
 
 ;; H
   (assert (dynamic_invariant1 msg true false true))
-
-;; H
-  (assert (hash_bit_len_of__function_guard
-  (hash_bit_len_of
-  (mk___rep2
-  (mk___split_fields2
-  (mk___rep1
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields ctx__split_fields ctx__split_fields1 ctx__split_fields2
-  ctx__split_fields3 ctx__split_fields4 ctx__split_fields5 ctx__split_fields6
-  ctx__split_fields7)) ctx__split_fields8 ctx__split_fields9))
-  ctx__split_fields10 ctx__split_fields11)))
-  (mk___rep2
-  (mk___split_fields2
-  (mk___rep1
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields ctx__split_fields ctx__split_fields1 ctx__split_fields2
-  ctx__split_fields3 ctx__split_fields4 ctx__split_fields5 ctx__split_fields6
-  ctx__split_fields7)) ctx__split_fields8 ctx__split_fields9))
-  ctx__split_fields10 ctx__split_fields11))))
-
-;; H
-  (assert (byte_count_of__function_guard
-  (byte_count_of
-  (mk___rep2
-  (mk___split_fields2
-  (mk___rep1
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields ctx__split_fields ctx__split_fields1 ctx__split_fields2
-  ctx__split_fields3 ctx__split_fields4 ctx__split_fields5 ctx__split_fields6
-  ctx__split_fields7)) ctx__split_fields8 ctx__split_fields9))
-  ctx__split_fields10 ctx__split_fields11)))
-  (mk___rep2
-  (mk___split_fields2
-  (mk___rep1
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields ctx__split_fields ctx__split_fields1 ctx__split_fields2
-  ctx__split_fields3 ctx__split_fields4 ctx__split_fields5 ctx__split_fields6
-  ctx__split_fields7)) ctx__split_fields8 ctx__split_fields9))
-  ctx__split_fields10 ctx__split_fields11))))
-
-;; H
-  (assert (add_in_range__function_guard
-  (add_in_range (to_rep2 (last (rt msg))) ((_ int2bv 64) 64))
-  (to_rep2 (last (rt msg))) ((_ int2bv 64) 64)))
 
 ;; H
   (assert

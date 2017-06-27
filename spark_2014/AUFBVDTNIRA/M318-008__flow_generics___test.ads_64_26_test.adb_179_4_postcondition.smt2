@@ -164,9 +164,7 @@
 ;; found_none__def_axiom
   (assert
   (forall ((fruit Int))
-  (! (=> (found_none__function_guard (found_none fruit) fruit)
-     (= (= (found_none fruit) true) (= fruit 0))) :pattern ((found_none
-                                                            fruit)) )))
+  (! (= (= (found_none fruit) true) (= fruit 0)) :pattern ((found_none fruit)) )))
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int fruits))))))
@@ -422,7 +420,7 @@
 
 (declare-fun i () Int)
 
-(declare-fun temp___435 () (Array Int fruits))
+(declare-fun temp___434 () (Array Int fruits))
 
 (declare-fun o () fruits)
 
@@ -492,28 +490,26 @@
   (assert
   (=>
   (and (<= (to_rep inventory__first) i1) (<= i1 (to_rep inventory__last)))
-  (= temp___435 inventory)))
+  (= temp___434 inventory)))
 
 ;; H
   (assert
   (=>
   (and (<= (to_rep inventory__first) i1) (<= i1 (to_rep inventory__last)))
   (and
-  (forall ((temp___436 Int))
+  (forall ((temp___435 Int))
   (=>
-  (and (<= (to_rep inventory__first) temp___436)
-  (<= temp___436 (to_rep inventory__last)))
-  (=> (<= i2 temp___436)
-  (= (select inventory2 temp___436) (select temp___435 temp___436)))))
+  (and (<= (to_rep inventory__first) temp___435)
+  (<= temp___435 (to_rep inventory__last)))
+  (=> (<= i2 temp___435)
+  (= (select inventory2 temp___435) (select temp___434 temp___435)))))
   (and (<= (to_rep inventory__first) i2) (<= i2 (to_rep inventory__last))))))
 
 ;; H
   (assert
   (=>
   (and (<= (to_rep inventory__first) i1) (<= i1 (to_rep inventory__last)))
-  (and
   (and (= result1 (found_none (to_rep1 (select inventory2 i2))))
-  (found_none__function_guard result1 (to_rep1 (select inventory2 i2))))
   (= (= result1 true) (= (to_rep1 (select inventory2 i2)) 0)))))
 
 ;; H
@@ -647,11 +643,6 @@
 
 ;; H
   (assert (<= i10 (to_rep inventory__last)))
-
-;; H
-  (assert (found_none__function_guard
-  (found_none (to_rep1 (select inventory8 i10)))
-  (to_rep1 (select inventory8 i10))))
 
 (assert
 ;; WP_parameter_def

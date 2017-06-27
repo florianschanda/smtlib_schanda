@@ -79,12 +79,12 @@
 (define-fun count_type__ref___projection ((a count_type__ref)) count_type 
   (count_type__content a))
 
-(define-fun dynamic_invariant ((temp___expr_142 Int)
-  (temp___is_init_139 Bool) (temp___skip_constant_140 Bool)
-  (temp___do_toplevel_141 Bool)) Bool (=>
-                                      (or (= temp___is_init_139 true)
+(define-fun dynamic_invariant ((temp___expr_141 Int)
+  (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
+  (temp___do_toplevel_140 Bool)) Bool (=>
+                                      (or (= temp___is_init_138 true)
                                       (<= 0 2147483647)) (in_range1
-                                      temp___expr_142)))
+                                      temp___expr_141)))
 
 (declare-fun to_rep (count_type) Int)
 
@@ -127,12 +127,12 @@
 (define-fun element_type__ref_2__projection ((a element_type__ref)) element_type 
   (element_type__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_190 Int)
-  (temp___is_init_187 Bool) (temp___skip_constant_188 Bool)
-  (temp___do_toplevel_189 Bool)) Bool (=>
-                                      (or (= temp___is_init_187 true)
+(define-fun dynamic_invariant1 ((temp___expr_189 Int)
+  (temp___is_init_186 Bool) (temp___skip_constant_187 Bool)
+  (temp___do_toplevel_188 Bool)) Bool (=>
+                                      (or (= temp___is_init_186 true)
                                       (<= 1 100)) (in_range2
-                                      temp___expr_190)))
+                                      temp___expr_189)))
 
 (declare-sort us_main_type 0)
 

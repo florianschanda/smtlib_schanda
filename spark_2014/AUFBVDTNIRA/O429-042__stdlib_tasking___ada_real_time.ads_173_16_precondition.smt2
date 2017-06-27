@@ -422,9 +422,7 @@
   (assert (< left 0))
 
 ;; H
-  (assert
-  (and (= result (ogt__2 right time_span_zero)) (ogt__2__function_guard
-  result right time_span_zero)))
+  (assert (= result (ogt__2 right time_span_zero)))
 
 ;; H
   (assert (= result true))

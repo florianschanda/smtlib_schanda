@@ -307,8 +307,8 @@
 (define-fun widget_t__ref___projection ((a widget_t__ref)) us_rep1 (widget_t__content
                                                                    a))
 
-(define-fun default_initial_assumption ((temp___expr_152 us_rep1)
-  (temp___skip_top_level_153 Bool)) Bool (= (attr__tag1 temp___expr_152) 
+(define-fun default_initial_assumption ((temp___expr_148 us_rep1)
+  (temp___skip_top_level_149 Bool)) Bool (= (attr__tag1 temp___expr_148) 
   us_tag1))
 
 (declare-fun hash__2 (us_rep1) Int)
@@ -699,47 +699,35 @@
 
 ;; hash__2__post_axiom
   (assert
-  (forall ((obj us_rep1))
-  (! (let ((result (hash__2 obj)))
-     (=> (hash__2__function_guard result obj) (dynamic_invariant1 result true
-     false true))) :pattern ((hash__2 obj)) )))
+  (forall ((obj us_rep1)) (! (dynamic_invariant1 (hash__2 obj) true false
+  true) :pattern ((hash__2 obj)) )))
 
 ;; hash__2__post__dispatch_axiom
   (assert
   (forall ((attr__tag4 Int))
-  (forall ((obj us_rep1))
-  (! (let ((result (hash__21 attr__tag4 obj)))
-     (=> (hash__2__function_guard1 result attr__tag4 obj) (dynamic_invariant1
-     result true false true))) :pattern ((hash__21 attr__tag4 obj)) ))))
+  (forall ((obj us_rep1)) (! (dynamic_invariant1 (hash__21 attr__tag4 obj)
+  true false true) :pattern ((hash__21 attr__tag4 obj)) ))))
 
 ;; foo__widget_t__compat_axiom
   (assert
   (forall ((obj us_rep1))
-  (! (=> (hash__2__function_guard1 (hash__21 us_tag1 obj) us_tag1 obj)
-     (and (hash__2__function_guard (hash__2 obj) obj)
-     (= (hash__2 obj) (hash__21 us_tag1 obj)))) :pattern ((hash__21 us_tag1
-                                                          obj)) )))
+  (! (= (hash__2 obj) (hash__21 us_tag1 obj)) :pattern ((hash__21 us_tag1
+                                                        obj)) )))
 
 ;; foo__nice_widget_t__compat_axiom
   (assert
   (forall ((obj us_rep1))
-  (! (=> (hash__2__function_guard1 (hash__21 us_tag2 obj) us_tag2 obj)
-     (and (hash__3__function_guard (hash__3 (of_base1 (to_base obj)))
-     (of_base1 (to_base obj)))
-     (= (hash__3 (of_base1 (to_base obj))) (hash__21 us_tag2 obj)))) :pattern (
+  (! (= (hash__3 (of_base1 (to_base obj))) (hash__21 us_tag2 obj)) :pattern (
   (hash__21 us_tag2 obj)) )))
 
 ;; foo__magic_widget_t__compat_axiom
   (assert
   (forall ((obj us_rep1))
-  (! (=> (hash__2__function_guard1 (hash__21 us_tag3 obj) us_tag3 obj)
-     (and (hash__4__function_guard (hash__4 (of_base2 (to_base obj)))
-     (of_base2 (to_base obj)))
-     (= (hash__4 (of_base2 (to_base obj))) (hash__21 us_tag3 obj)))) :pattern (
+  (! (= (hash__4 (of_base2 (to_base obj))) (hash__21 us_tag3 obj)) :pattern (
   (hash__21 us_tag3 obj)) )))
 
-(define-fun default_initial_assumption1 ((temp___expr_170 us_rep2)
-  (temp___skip_top_level_171 Bool)) Bool (= (attr__tag2 temp___expr_170) 
+(define-fun default_initial_assumption1 ((temp___expr_163 us_rep2)
+  (temp___skip_top_level_164 Bool)) Bool (= (attr__tag2 temp___expr_163) 
   us_tag2))
 
 (declare-fun a () Int)
@@ -774,53 +762,41 @@
 
 ;; hash__3__post_axiom
   (assert
-  (forall ((obj us_rep2))
-  (! (let ((result (hash__3 obj)))
-     (=> (hash__3__function_guard result obj) (dynamic_invariant1 result true
-     false true))) :pattern ((hash__3 obj)) )))
+  (forall ((obj us_rep2)) (! (dynamic_invariant1 (hash__3 obj) true false
+  true) :pattern ((hash__3 obj)) )))
 
 ;; hash__3__post__dispatch_axiom
   (assert
   (forall ((attr__tag4 Int))
-  (forall ((obj us_rep2))
-  (! (let ((result (hash__31 attr__tag4 obj)))
-     (=> (hash__3__function_guard1 result attr__tag4 obj) (dynamic_invariant1
-     result true false true))) :pattern ((hash__31 attr__tag4 obj)) ))))
+  (forall ((obj us_rep2)) (! (dynamic_invariant1 (hash__31 attr__tag4 obj)
+  true false true) :pattern ((hash__31 attr__tag4 obj)) ))))
 
 ;; foo__nice_widget_t__compat_axiom
   (assert
   (forall ((obj us_rep2))
-  (! (=> (hash__3__function_guard1 (hash__31 us_tag2 obj) us_tag2 obj)
-     (and (hash__3__function_guard (hash__3 obj) obj)
-     (= (hash__3 obj) (hash__31 us_tag2 obj)))) :pattern ((hash__31 us_tag2
-                                                          obj)) )))
+  (! (= (hash__3 obj) (hash__31 us_tag2 obj)) :pattern ((hash__31 us_tag2
+                                                        obj)) )))
 
-(define-fun default_initial_assumption3 ((temp___expr_185 us_rep3)
-  (temp___skip_top_level_186 Bool)) Bool (= (attr__tag3 temp___expr_185) 
+(define-fun default_initial_assumption3 ((temp___expr_177 us_rep3)
+  (temp___skip_top_level_178 Bool)) Bool (= (attr__tag3 temp___expr_177) 
   us_tag3))
 
 ;; hash__4__post_axiom
   (assert
-  (forall ((obj us_rep3))
-  (! (let ((result (hash__4 obj)))
-     (=> (hash__4__function_guard result obj) (dynamic_invariant1 result true
-     false true))) :pattern ((hash__4 obj)) )))
+  (forall ((obj us_rep3)) (! (dynamic_invariant1 (hash__4 obj) true false
+  true) :pattern ((hash__4 obj)) )))
 
 ;; hash__4__post__dispatch_axiom
   (assert
   (forall ((attr__tag4 Int))
-  (forall ((obj us_rep3))
-  (! (let ((result (hash__41 attr__tag4 obj)))
-     (=> (hash__4__function_guard1 result attr__tag4 obj) (dynamic_invariant1
-     result true false true))) :pattern ((hash__41 attr__tag4 obj)) ))))
+  (forall ((obj us_rep3)) (! (dynamic_invariant1 (hash__41 attr__tag4 obj)
+  true false true) :pattern ((hash__41 attr__tag4 obj)) ))))
 
 ;; foo__magic_widget_t__compat_axiom
   (assert
   (forall ((obj us_rep3))
-  (! (=> (hash__4__function_guard1 (hash__41 us_tag3 obj) us_tag3 obj)
-     (and (hash__4__function_guard (hash__4 obj) obj)
-     (= (hash__4 obj) (hash__41 us_tag3 obj)))) :pattern ((hash__41 us_tag3
-                                                          obj)) )))
+  (! (= (hash__4 obj) (hash__41 us_tag3 obj)) :pattern ((hash__41 us_tag3
+                                                        obj)) )))
 
 (declare-fun n () Int)
 

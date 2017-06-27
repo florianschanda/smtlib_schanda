@@ -146,48 +146,31 @@
 
 (declare-fun get__function_guard (Int us_rep) Bool)
 
-;; temp___result_138_def
-  (assert
-  (forall ((temp___137 us_rep)) (id__function_guard
-  (id (to_rep (rec__dic_pred__t__f (us_split_fields1 temp___137))))
-  (to_rep (rec__dic_pred__t__f (us_split_fields1 temp___137))))))
-
-(define-fun dynamic_invariant ((temp___expr_136 us_rep)
-  (temp___is_init_133 Bool) (temp___skip_constant_134 Bool)
-  (temp___do_toplevel_135 Bool)) Bool (=> (= temp___do_toplevel_135 true)
-                                      (=> (= temp___is_init_133 true)
+(define-fun dynamic_invariant ((temp___expr_135 us_rep)
+  (temp___is_init_132 Bool) (temp___skip_constant_133 Bool)
+  (temp___do_toplevel_134 Bool)) Bool (=> (= temp___do_toplevel_134 true)
+                                      (=> (= temp___is_init_132 true)
                                       (< 0 (id
                                            (to_rep
                                            (rec__dic_pred__t__f
-                                           (us_split_fields1 temp___expr_136))))))))
+                                           (us_split_fields1 temp___expr_135))))))))
 
-;; temp___result_142_def
-  (assert
-  (forall ((temp___141 us_rep)) (get__function_guard (get temp___141)
-  temp___141)))
-
-(define-fun default_initial_assumption ((temp___expr_139 us_rep)
-  (temp___skip_top_level_140 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_137 us_rep)
+  (temp___skip_top_level_138 Bool)) Bool (and
                                          (= (to_rep
                                             (rec__dic_pred__t__f
                                             (us_split_fields1
-                                            temp___expr_139))) 0)
+                                            temp___expr_137))) 0)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_140 true))
-                                         (< 0 (get temp___expr_139)))))
+                                         (= temp___skip_top_level_138 true))
+                                         (< 0 (get temp___expr_137)))))
 
-;; temp___result_145_def
-  (assert
-  (forall ((temp___144 us_rep)) (id__function_guard
-  (id (to_rep (rec__dic_pred__t__f (us_split_fields1 temp___144))))
-  (to_rep (rec__dic_pred__t__f (us_split_fields1 temp___144))))))
-
-(define-fun dynamic_predicate ((temp___143 us_rep)) Bool (< 0 (id
+(define-fun dynamic_predicate ((temp___140 us_rep)) Bool (< 0 (id
                                                               (to_rep
                                                               (rec__dic_pred__t__f
                                                               (us_split_fields1
-                                                              temp___143))))))
+                                                              temp___140))))))
 
 (declare-sort integer 0)
 
@@ -221,21 +204,14 @@
 ;; get__post_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (get x)))
-     (=> (get__function_guard result x) (dynamic_invariant1 result true false
-     true)))) :pattern ((get x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant1 (get x)
+     true false true)) :pattern ((get x)) )))
 
 ;; get__def_axiom
   (assert
   (forall ((x us_rep))
-  (! (=>
-     (and (dynamic_invariant x true true true) (get__function_guard (get x)
-     x))
-     (and (id__function_guard
-     (id (to_rep (rec__dic_pred__t__f (us_split_fields1 x))))
-     (to_rep (rec__dic_pred__t__f (us_split_fields1 x))))
-     (= (get x) (id (to_rep (rec__dic_pred__t__f (us_split_fields1 x))))))) :pattern (
+  (! (=> (dynamic_invariant x true true true)
+     (= (get x) (id (to_rep (rec__dic_pred__t__f (us_split_fields1 x)))))) :pattern (
   (get x)) )))
 
 (define-fun dynamic_invariant2 ((temp___expr_33 Int) (temp___is_init_30 Bool)
@@ -248,40 +224,30 @@
 ;; id__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant1 x true true true)
-     (let ((result (id x)))
-     (=> (id__function_guard result x) (dynamic_invariant1 result true false
-     true)))) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant1 x true true true) (dynamic_invariant1 (id x)
+     true false true)) :pattern ((id x)) )))
 
 ;; id__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant1 x true true true) (id__function_guard (id x)
-     x)) (= (id x) x)) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant1 x true true true) (= (id x) x)) :pattern (
+  (id x)) )))
 
-(declare-fun temp___156 () natural)
+(declare-fun temp___150 () natural)
 
-(declare-fun temp___159 () natural)
-
-(define-fun temp___1591 () us_rep (mk___rep (mk___split_fields temp___159)))
+(declare-fun temp___152 () natural)
 
 ;; H
-  (assert (= (to_rep temp___156) 0))
+  (assert (= (to_rep temp___150) 0))
 
 ;; H
-  (assert (dynamic_predicate (mk___rep (mk___split_fields temp___156))))
+  (assert (< 0 (id (to_rep temp___150))))
 
 ;; H
-  (assert
-  (and (dynamic_invariant temp___1591 true false true)
-  (= (to_rep temp___159) 0)))
-
-;; H
-  (assert (get__function_guard (get temp___1591) temp___1591))
+  (assert (and (< 0 (id (to_rep temp___152))) (= (to_rep temp___152) 0)))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (< 0 (get temp___1591))))
+  (not (< 0 (get (mk___rep (mk___split_fields temp___152))))))
 (check-sat)

@@ -339,7 +339,7 @@
 
 (declare-fun o1 () Bool)
 
-(declare-fun temp___280 () Int)
+(declare-fun temp___251 () Int)
 
 (declare-fun o2 () Int)
 
@@ -378,15 +378,15 @@
   (assert (= result true))
 
 ;; H
-  (assert (and (= temp___280 (+ k 1)) (in_range1 (+ k 1))))
+  (assert (and (= temp___251 (+ k 1)) (in_range1 (+ k 1))))
 
 ;; H
   (assert
-  (and (<= (to_rep (first (rt a))) temp___280)
-  (<= temp___280 (to_rep (last (rt a))))))
+  (and (<= (to_rep (first (rt a))) temp___251)
+  (<= temp___251 (to_rep (last (rt a))))))
 
 ;; H
-  (assert (= o2 temp___280))
+  (assert (= o2 temp___251))
 
 ;; H
   (assert (= o3 (select (elts a) o2)))

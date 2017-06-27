@@ -85,9 +85,7 @@
 
 ;; f1__def_axiom
   (assert
-  (forall ((x Int))
-  (! (=> (f1__function_guard (f1 x) x) (= (= (f1 x) true) (< 0 x))) :pattern (
-  (f1 x)) )))
+  (forall ((x Int)) (! (= (= (f1 x) true) (< 0 x)) :pattern ((f1 x)) )))
 
 (declare-fun f2 (Int) Bool)
 
@@ -98,9 +96,7 @@
 
 ;; f2__def_axiom
   (assert
-  (forall ((x Int))
-  (! (=> (f2__function_guard (f2 x) x) (= (= (f2 x) true) (< 0 x))) :pattern (
-  (f2 x)) )))
+  (forall ((x Int)) (! (= (= (f2 x) true) (< 0 x)) :pattern ((f2 x)) )))
 
 (declare-fun f5 (Int) Bool)
 
@@ -121,8 +117,7 @@
 ;; g1__def_axiom
   (assert
   (forall ((x Int) (funcs__g Int))
-  (! (=> (g1__function_guard (g1 x funcs__g) x funcs__g)
-     (= (= (g1 x funcs__g) true) (< 0 funcs__g))) :pattern ((g1 x funcs__g)) )))
+  (! (= (= (g1 x funcs__g) true) (< 0 funcs__g)) :pattern ((g1 x funcs__g)) )))
 
 (declare-fun g2 (Int Int) Bool)
 
@@ -134,8 +129,7 @@
 ;; g2__def_axiom
   (assert
   (forall ((x Int) (funcs__g Int))
-  (! (=> (g2__function_guard (g2 x funcs__g) x funcs__g)
-     (= (= (g2 x funcs__g) true) (< 0 funcs__g))) :pattern ((g2 x funcs__g)) )))
+  (! (= (= (g2 x funcs__g) true) (< 0 funcs__g)) :pattern ((g2 x funcs__g)) )))
 
 (declare-fun g5 (Int Int) Bool)
 
@@ -153,9 +147,7 @@
 
 ;; p2__def_axiom
   (assert
-  (forall ((x Int))
-  (! (=> (p2__function_guard (p2 x) x) (= (= (p2 x) true) (< 0 x))) :pattern (
-  (p2 x)) )))
+  (forall ((x Int)) (! (= (= (p2 x) true) (< 0 x)) :pattern ((p2 x)) )))
 
 (declare-fun p5 (Int) Bool)
 
@@ -171,16 +163,12 @@
 ;; q2__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (q2 x)))
-     (=> (q2__function_guard result x) (= (= result true) (< 0 x))))) :pattern (
+  (! (=> (dynamic_invariant x true true true) (= (= (q2 x) true) (< 0 x))) :pattern (
   (q2 x)) )))
 
 ;; q2__def_axiom
   (assert
-  (forall ((x Int))
-  (! (=> (q2__function_guard (q2 x) x) (= (= (q2 x) true) (< 0 x))) :pattern (
-  (q2 x)) )))
+  (forall ((x Int)) (! (= (= (q2 x) true) (< 0 x)) :pattern ((q2 x)) )))
 
 (declare-fun q5 (Int) Bool)
 
@@ -189,9 +177,7 @@
 ;; q5__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (q5 x)))
-     (=> (q5__function_guard result x) (= (= result true) (< 0 x))))) :pattern (
+  (! (=> (dynamic_invariant x true true true) (= (= (q5 x) true) (< 0 x))) :pattern (
   (q5 x)) )))
 
 (declare-fun f3 (Int) Bool)
@@ -203,9 +189,7 @@
 
 ;; f3__def_axiom
   (assert
-  (forall ((x Int))
-  (! (=> (f3__function_guard (f3 x) x) (= (= (f3 x) true) (< 0 x))) :pattern (
-  (f3 x)) )))
+  (forall ((x Int)) (! (= (= (f3 x) true) (< 0 x)) :pattern ((f3 x)) )))
 
 (declare-fun f4 (Int) Bool)
 
@@ -216,9 +200,7 @@
 
 ;; f4__def_axiom
   (assert
-  (forall ((x Int))
-  (! (=> (f4__function_guard (f4 x) x) (= (= (f4 x) true) (< 0 x))) :pattern (
-  (f4 x)) )))
+  (forall ((x Int)) (! (= (= (f4 x) true) (< 0 x)) :pattern ((f4 x)) )))
 
 (declare-fun g3 (Int Int) Bool)
 
@@ -230,8 +212,7 @@
 ;; g3__def_axiom
   (assert
   (forall ((x Int) (funcs__g Int))
-  (! (=> (g3__function_guard (g3 x funcs__g) x funcs__g)
-     (= (= (g3 x funcs__g) true) (< 0 funcs__g))) :pattern ((g3 x funcs__g)) )))
+  (! (= (= (g3 x funcs__g) true) (< 0 funcs__g)) :pattern ((g3 x funcs__g)) )))
 
 (declare-fun g4 (Int Int) Bool)
 
@@ -243,8 +224,7 @@
 ;; g4__def_axiom
   (assert
   (forall ((x Int) (funcs__g Int))
-  (! (=> (g4__function_guard (g4 x funcs__g) x funcs__g)
-     (= (= (g4 x funcs__g) true) (< 0 funcs__g))) :pattern ((g4 x funcs__g)) )))
+  (! (= (= (g4 x funcs__g) true) (< 0 funcs__g)) :pattern ((g4 x funcs__g)) )))
 
 (declare-fun p4 (Int) Bool)
 
@@ -255,9 +235,7 @@
 
 ;; p4__def_axiom
   (assert
-  (forall ((x Int))
-  (! (=> (p4__function_guard (p4 x) x) (= (= (p4 x) true) (< 0 x))) :pattern (
-  (p4 x)) )))
+  (forall ((x Int)) (! (= (= (p4 x) true) (< 0 x)) :pattern ((p4 x)) )))
 
 (declare-fun q4 (Int) Bool)
 
@@ -266,16 +244,12 @@
 ;; q4__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (q4 x)))
-     (=> (q4__function_guard result x) (= (= result true) (< 0 x))))) :pattern (
+  (! (=> (dynamic_invariant x true true true) (= (= (q4 x) true) (< 0 x))) :pattern (
   (q4 x)) )))
 
 ;; q4__def_axiom
   (assert
-  (forall ((x Int))
-  (! (=> (q4__function_guard (q4 x) x) (= (= (q4 x) true) (< 0 x))) :pattern (
-  (q4 x)) )))
+  (forall ((x Int)) (! (= (= (q4 x) true) (< 0 x)) :pattern ((q4 x)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -333,14 +307,10 @@
   (assert (in_range1 g))
 
 ;; H
-  (assert (f1__function_guard (f1 3) 3))
-
-;; H
   (assert (= (f1 3) true))
 
 ;; H
-  (assert
-  (and (and (= o (f1 3)) (f1__function_guard o 3)) (= (= o true) (< 0 3))))
+  (assert (and (= o (f1 3)) (= (= o true) (< 0 3))))
 
 ;; H
   (assert (= result y))
@@ -349,20 +319,13 @@
   (assert (= y1 o))
 
 ;; H
-  (assert (f1__function_guard (f1 3) 3))
-
-;; H
   (assert (= (= y1 true) (= (f1 3) true)))
-
-;; H
-  (assert (f2__function_guard (f2 3) 3))
 
 ;; H
   (assert (= (f2 3) true))
 
 ;; H
-  (assert
-  (and (and (= o1 (f2 3)) (f2__function_guard o1 3)) (= (= o1 true) (< 0 3))))
+  (assert (and (= o1 (f2 3)) (= (= o1 true) (< 0 3))))
 
 ;; H
   (assert (= result1 y1))
@@ -371,20 +334,13 @@
   (assert (= y2 o1))
 
 ;; H
-  (assert (f2__function_guard (f2 3) 3))
-
-;; H
   (assert (= (= y2 true) (= (f2 3) true)))
-
-;; H
-  (assert (f3__function_guard (f3 3) 3))
 
 ;; H
   (assert (= (f3 3) true))
 
 ;; H
-  (assert
-  (and (and (= o2 (f3 3)) (f3__function_guard o2 3)) (= (= o2 true) (< 0 3))))
+  (assert (and (= o2 (f3 3)) (= (= o2 true) (< 0 3))))
 
 ;; H
   (assert (= result2 y2))
@@ -393,20 +349,13 @@
   (assert (= y3 o2))
 
 ;; H
-  (assert (f3__function_guard (f3 3) 3))
-
-;; H
   (assert (= (= y3 true) (= (f3 3) true)))
-
-;; H
-  (assert (f4__function_guard (f4 3) 3))
 
 ;; H
   (assert (= (f4 3) true))
 
 ;; H
-  (assert
-  (and (and (= o3 (f4 3)) (f4__function_guard o3 3)) (= (= o3 true) (< 0 3))))
+  (assert (and (= o3 (f4 3)) (= (= o3 true) (< 0 3))))
 
 ;; H
   (assert (= result3 y3))
@@ -415,28 +364,16 @@
   (assert (= y4 o3))
 
 ;; H
-  (assert (f4__function_guard (f4 3) 3))
-
-;; H
   (assert (= (= y4 true) (= (f4 3) true)))
 
 ;; H
-  (assert (f5__function_guard (f5 3) 3))
-
-;; H
-  (assert (f5__function_guard (f5 3) 3))
-
-;; H
-  (assert (and (= o4 (f5 3)) (f5__function_guard o4 3)))
+  (assert (= o4 (f5 3)))
 
 ;; H
   (assert (= result4 y4))
 
 ;; H
   (assert (= y5 o4))
-
-;; H
-  (assert (f5__function_guard (f5 3) 3))
 
 ;; H
   (assert (= (= y5 true) (= (f5 3) true)))
@@ -448,15 +385,10 @@
   (assert (= g6 3))
 
 ;; H
-  (assert (g1__function_guard (g1 3 g6) 3 g6))
-
-;; H
   (assert (= (g1 3 g6) true))
 
 ;; H
-  (assert
-  (and (and (= o5 (g1 3 g6)) (g1__function_guard o5 3 g6))
-  (= (= o5 true) (< 0 g6))))
+  (assert (and (= o5 (g1 3 g6)) (= (= o5 true) (< 0 g6))))
 
 ;; H
   (assert (= result6 y5))
@@ -465,21 +397,13 @@
   (assert (= y6 o5))
 
 ;; H
-  (assert (g1__function_guard (g1 3 g6) 3 g6))
-
-;; H
   (assert (= (= y6 true) (= (g1 3 g6) true)))
-
-;; H
-  (assert (g2__function_guard (g2 3 g6) 3 g6))
 
 ;; H
   (assert (= (g2 3 g6) true))
 
 ;; H
-  (assert
-  (and (and (= o6 (g2 3 g6)) (g2__function_guard o6 3 g6))
-  (= (= o6 true) (< 0 g6))))
+  (assert (and (= o6 (g2 3 g6)) (= (= o6 true) (< 0 g6))))
 
 ;; H
   (assert (= result7 y6))
@@ -488,13 +412,7 @@
   (assert (= y7 o6))
 
 ;; H
-  (assert (g2__function_guard (g2 3 g6) 3 g6))
-
-;; H
   (assert (= (= y7 true) (= (g2 3 g6) true)))
-
-;; H
-  (assert (g3__function_guard (g3 3 g6) 3 g6))
 
 (assert
 ;; WP_parameter_def

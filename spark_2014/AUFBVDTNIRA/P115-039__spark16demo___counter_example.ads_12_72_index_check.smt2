@@ -344,13 +344,13 @@
 (define-fun num_item_t__ref___projection ((a num_item_t__ref)) us_t (num_item_t__content
                                                                     a))
 
-(define-fun dynamic_invariant ((temp___expr_154 us_t)
-  (temp___is_init_151 Bool) (temp___skip_constant_152 Bool)
-  (temp___do_toplevel_153 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_152 true))
+(define-fun dynamic_invariant ((temp___expr_152 us_t)
+  (temp___is_init_149 Bool) (temp___skip_constant_150 Bool)
+  (temp___do_toplevel_151 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_150 true))
                                       (dynamic_property 1 8
-                                      (first1 temp___expr_154)
-                                      (last1 temp___expr_154))))
+                                      (first1 temp___expr_152)
+                                      (last1 temp___expr_152))))
 
 (declare-sort t3s 0)
 
@@ -495,28 +495,28 @@
 (declare-datatypes () ((item__ref (mk_item__ref (item__content us_rep)))))
 (define-fun item__ref___projection ((a item__ref)) us_rep (item__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_159 us_rep)
-  (temp___is_init_156 Bool) (temp___skip_constant_157 Bool)
-  (temp___do_toplevel_158 Bool)) Bool (=> (= temp___do_toplevel_158 true)
-                                      (=> (= temp___is_init_156 true)
+(define-fun dynamic_invariant1 ((temp___expr_157 us_rep)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)) Bool (=> (= temp___do_toplevel_156 true)
+                                      (=> (= temp___is_init_154 true)
                                       (<= (to_rep
                                           (rec__counter_example__item__idx
-                                          (us_split_fields1 temp___expr_159))) 
+                                          (us_split_fields1 temp___expr_157))) 
                                       (to_rep
                                       (select (to_array
                                               num_item_per_category) 
                                       (to_rep1
                                       (rec__counter_example__item__cat
-                                      (us_split_fields1 temp___expr_159)))))))))
+                                      (us_split_fields1 temp___expr_157)))))))))
 
-(define-fun dynamic_predicate ((temp___165 us_rep)) Bool (<= (to_rep
+(define-fun dynamic_predicate ((temp___163 us_rep)) Bool (<= (to_rep
                                                              (rec__counter_example__item__idx
                                                              (us_split_fields1
-                                                             temp___165))) 
+                                                             temp___163))) 
   (to_rep
   (select (to_array num_item_per_category) (to_rep1
                                            (rec__counter_example__item__cat
-                                           (us_split_fields1 temp___165)))))))
+                                           (us_split_fields1 temp___163)))))))
 
 (declare-fun i5s () us_rep)
 
@@ -536,11 +536,11 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range2 temp___expr_15)))
 
-(define-fun dynamic_invariant4 ((temp___expr_148 Int)
-  (temp___is_init_145 Bool) (temp___skip_constant_146 Bool)
-  (temp___do_toplevel_147 Bool)) Bool (=>
-                                      (or (= temp___is_init_145 true)
-                                      (<= 1 8)) (in_range1 temp___expr_148)))
+(define-fun dynamic_invariant4 ((temp___expr_146 Int)
+  (temp___is_init_143 Bool) (temp___skip_constant_144 Bool)
+  (temp___do_toplevel_145 Bool)) Bool (=>
+                                      (or (= temp___is_init_143 true)
+                                      (<= 1 8)) (in_range1 temp___expr_146)))
 
 ;; num_item_per_category__def_axiom
   (assert

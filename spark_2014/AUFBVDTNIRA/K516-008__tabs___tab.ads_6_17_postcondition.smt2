@@ -248,17 +248,14 @@
 ;; prev__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant1 x true true true)
-     (let ((result (prev x)))
-     (=> (prev__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((prev x)) )))
+  (! (=> (dynamic_invariant1 x true true true) (dynamic_invariant (prev x)
+     true false true)) :pattern ((prev x)) )))
 
 ;; prev__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant1 x true true true) (prev__function_guard
-     (prev x) x)) (= (prev x) (- x 1))) :pattern ((prev x)) )))
+  (! (=> (dynamic_invariant1 x true true true) (= (prev x) (- x 1))) :pattern (
+  (prev x)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
@@ -345,12 +342,6 @@
 (declare-fun i8 () Int)
 
 (define-fun a10 () map__ref (mk_map__ref a6))
-
-;; H
-  (assert (prev__function_guard (prev i2) i2))
-
-;; H
-  (assert (prev__function_guard (prev i2) i2))
 
 ;; H
   (assert (in_range1 threshold))

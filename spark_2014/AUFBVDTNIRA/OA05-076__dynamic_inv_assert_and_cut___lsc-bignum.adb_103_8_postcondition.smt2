@@ -300,28 +300,6 @@
 ;; H
   (assert (= result3 lsc__bignum__word_of_boolean__result4))
 
-;; H
-  (assert (from_word32__function_guard
-  (from_word32 lsc__bignum__word_of_boolean__result4)
-  lsc__bignum__word_of_boolean__result4))
-
-;; H
-  (assert (num_of_boolean__function_guard (num_of_boolean b) b))
-
-;; H
-  (assert (from_word32__function_guard
-  (from_word32 lsc__bignum__word_of_boolean__result4)
-  lsc__bignum__word_of_boolean__result4))
-
-;; H
-  (assert (num_of_boolean__function_guard (num_of_boolean b) b))
-
-;; H
-  (assert (oeq__function_guard
-  (oeq (from_word32 lsc__bignum__word_of_boolean__result4)
-  (num_of_boolean b)) (from_word32 lsc__bignum__word_of_boolean__result4)
-  (num_of_boolean b)))
-
 (assert
 ;; WP_parameter_def
  ;; File "lsc-types.ads", line 54, characters 0-0

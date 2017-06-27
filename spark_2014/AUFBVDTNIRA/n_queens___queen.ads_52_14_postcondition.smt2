@@ -211,8 +211,7 @@
   (assert
   (forall ((b (Array Int index)))
   (forall ((k Int))
-  (! (=> (consistent__function_guard (consistent b k) b k)
-     (= (= (consistent b k) true)
+  (! (= (= (consistent b k) true)
      (forall ((i Int))
      (=> (and (<= 1 i) (<= i k))
      (forall ((j Int))
@@ -220,7 +219,7 @@
      (and
      (and (not (= (to_rep (select b i)) (to_rep (select b j))))
      (not (= (- i j) (- (to_rep (select b i)) (to_rep (select b j))))))
-     (not (= (- i j) (- (to_rep (select b j)) (to_rep (select b i)))))))))))) :pattern (
+     (not (= (- i j) (- (to_rep (select b j)) (to_rep (select b i))))))))))) :pattern (
   (consistent b k)) ))))
 
 (declare-fun copy_until ((Array Int index) Int
@@ -234,11 +233,9 @@
   (forall ((b (Array Int index)) (c (Array Int index)))
   (forall ((i Int))
   (! (=> (dynamic_invariant i true true true)
-     (let ((result (copy_until b i c)))
-     (=> (copy_until__function_guard result b i c)
      (forall ((j Int))
      (=> (and (<= 1 j) (<= j i))
-     (= (to_rep (select result j)) (to_rep (select b j)))))))) :pattern (
+     (= (to_rep (select (copy_until b i c) j)) (to_rep (select b j)))))) :pattern (
   (copy_until b i c)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -261,13 +258,13 @@
 
 (declare-fun r () Int)
 
-(declare-fun temp___204 () (Array Int index))
+(declare-fun temp___192 () (Array Int index))
 
-(declare-fun temp___203 () Bool)
+(declare-fun temp___191 () Bool)
 
-(declare-fun temp___202 () Int)
+(declare-fun temp___190 () Int)
 
-(declare-fun temp___201 () (Array Int index))
+(declare-fun temp___189 () (Array Int index))
 
 (declare-fun o () index)
 
@@ -344,27 +341,6 @@
 (define-fun b12 () map__ref (mk_map__ref b8))
 
 ;; H
-  (assert (consistent__function_guard (consistent b (- i 1)) b (- i 1)))
-
-;; H
-  (assert (consistent__function_guard (consistent c 8) c 8))
-
-;; H
-  (assert (consistent__function_guard (consistent c 8) c 8))
-
-;; H
-  (assert (consistent__function_guard (consistent b4 8) b4 8))
-
-;; H
-  (assert (consistent__function_guard (consistent c 8) c 8))
-
-;; H
-  (assert (consistent__function_guard (consistent b5 8) b5 8))
-
-;; H
-  (assert (consistent__function_guard (consistent o2 8) o2 8))
-
-;; H
   (assert (in_range1 i))
 
 ;; H
@@ -383,16 +359,16 @@
   (assert (= r1 1))
 
 ;; H
-  (assert (=> (and (<= 1 r1) (<= r1 8)) (= temp___204 b)))
+  (assert (=> (and (<= 1 r1) (<= r1 8)) (= temp___192 b)))
 
 ;; H
-  (assert (=> (and (<= 1 r1) (<= r1 8)) (= temp___203 done__)))
+  (assert (=> (and (<= 1 r1) (<= r1 8)) (= temp___191 done__)))
 
 ;; H
-  (assert (=> (and (<= 1 r1) (<= r1 8)) (= temp___202 r1)))
+  (assert (=> (and (<= 1 r1) (<= r1 8)) (= temp___190 r1)))
 
 ;; H
-  (assert (=> (and (<= 1 r1) (<= r1 8)) (= temp___201 b)))
+  (assert (=> (and (<= 1 r1) (<= r1 8)) (= temp___189 b)))
 
 ;; H
   (assert
@@ -401,7 +377,7 @@
   (and (not (= done__2 true))
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j (- i 1)))
-  (= (to_rep (select b2 j)) (to_rep (select temp___204 j))))))
+  (= (to_rep (select b2 j)) (to_rep (select temp___192 j))))))
   (=> (< (to_rep (select c i)) r2) (not (= (consistent c 8) true))))))
 
 ;; H
@@ -436,8 +412,7 @@
   (assert
   (=> (and (<= 1 r1) (<= r1 8))
   (=> (not (= (to_rep (select c i)) r2))
-  (and
-  (and (= o2 (copy_until b3 i c)) (copy_until__function_guard o2 b3 i c))
+  (and (= o2 (copy_until b3 i c))
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j i))
   (= (to_rep (select o2 j)) (to_rep (select b3 j)))))))))
@@ -543,9 +518,6 @@
 
 ;; H
   (assert (= done__9 true))
-
-;; H
-  (assert (consistent__function_guard (consistent b10 8) b10 8))
 
 (assert
 ;; WP_parameter_def

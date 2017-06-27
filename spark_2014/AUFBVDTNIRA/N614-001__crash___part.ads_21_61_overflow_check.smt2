@@ -317,13 +317,13 @@
 (define-fun partition__ref___projection ((a partition__ref)) us_t (partition__content
                                                                   a))
 
-(define-fun dynamic_invariant ((temp___expr_543 us_t)
-  (temp___is_init_540 Bool) (temp___skip_constant_541 Bool)
-  (temp___do_toplevel_542 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_541 true))
+(define-fun dynamic_invariant ((temp___expr_535 us_t)
+  (temp___is_init_532 Bool) (temp___skip_constant_533 Bool)
+  (temp___do_toplevel_534 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_533 true))
                                       (dynamic_property 1 2147483647
-                                      (first1 temp___expr_543)
-                                      (last1 temp___expr_543))))
+                                      (first1 temp___expr_535)
+                                      (last1 temp___expr_535))))
 
 (declare-fun p () us_t)
 

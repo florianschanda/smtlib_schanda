@@ -894,8 +894,7 @@
 ;; inv__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (inv__function_guard (inv s) s)
-     (= (= (inv s) true)
+  (! (= (= (inv s) true)
      (and
      (and
      (and
@@ -1145,7 +1144,7 @@
                                                          (let ((temp___351 
                                                          (rec__patience__state__posstack
                                                          (us_split_fields1 s))))
-                                                         (select temp___351 i))) 1)))))))))) :pattern (
+                                                         (select temp___351 i))) 1))))))))) :pattern (
   (inv s)) )))
 
 (declare-fun c () Int)
@@ -1190,13 +1189,13 @@
 
 (declare-fun topstacki () Int)
 
-(declare-fun temp___571 () Int)
-
-(declare-fun temp___570 () Int)
-
-(declare-fun temp___569 () Int)
-
 (declare-fun temp___568 () Int)
+
+(declare-fun temp___567 () Int)
+
+(declare-fun temp___566 () Int)
+
+(declare-fun temp___565 () Int)
 
 (declare-fun o () Int)
 
@@ -1206,7 +1205,7 @@
 
 (declare-fun o3 () Int)
 
-(declare-fun temp___538 () (Array Int cardindex))
+(declare-fun temp___535 () (Array Int cardindex))
 
 (declare-fun o4 () Int)
 
@@ -1310,18 +1309,6 @@
   (assert (in_range2 c))
 
 ;; H
-  (assert (inv__function_guard
-  (inv
-  (mk___rep
-  (mk___split_fields s__split_fields s__split_fields1 s__split_fields2
-  s__split_fields3 s__split_fields4 s__split_fields5 s__split_fields6
-  s__split_fields7)))
-  (mk___rep
-  (mk___split_fields s__split_fields s__split_fields1 s__split_fields2
-  s__split_fields3 s__split_fields4 s__split_fields5 s__split_fields6
-  s__split_fields7))))
-
-;; H
   (assert
   (and
   (= (inv
@@ -1359,16 +1346,16 @@
   (assert (= i1 0))
 
 ;; H
-  (assert (=> (< i1 (to_rep1 s__split_fields2)) (= temp___571 topstacki)))
+  (assert (=> (< i1 (to_rep1 s__split_fields2)) (= temp___568 topstacki)))
 
 ;; H
-  (assert (=> (< i1 (to_rep1 s__split_fields2)) (= temp___570 stackisize)))
+  (assert (=> (< i1 (to_rep1 s__split_fields2)) (= temp___567 stackisize)))
 
 ;; H
-  (assert (=> (< i1 (to_rep1 s__split_fields2)) (= temp___569 i1)))
+  (assert (=> (< i1 (to_rep1 s__split_fields2)) (= temp___566 i1)))
 
 ;; H
-  (assert (=> (< i1 (to_rep1 s__split_fields2)) (= temp___568 pred1)))
+  (assert (=> (< i1 (to_rep1 s__split_fields2)) (= temp___565 pred1)))
 
 ;; H
   (assert
@@ -1431,7 +1418,7 @@
 ;; H
   (assert
   (=> (< i1 (to_rep1 s__split_fields2))
-  (= temp___538 (select s__split_fields4 o3))))
+  (= temp___535 (select s__split_fields4 o3))))
 
 ;; H
   (assert
@@ -1443,7 +1430,7 @@
 
 ;; H
   (assert
-  (=> (< i1 (to_rep1 s__split_fields2)) (= o5 (select temp___538 o4))))
+  (=> (< i1 (to_rep1 s__split_fields2)) (= o5 (select temp___535 o4))))
 
 ;; H
   (assert (=> (< i1 (to_rep1 s__split_fields2)) (= o6 (to_rep1 o5))))

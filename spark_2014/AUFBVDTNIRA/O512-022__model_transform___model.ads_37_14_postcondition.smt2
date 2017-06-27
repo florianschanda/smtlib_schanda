@@ -186,18 +186,15 @@
 
 ;; from__post_axiom
   (assert
-  (forall ((self us_rep))
-  (! (let ((result (from self)))
-     (=> (from__function_guard result self) (dynamic_invariant result true
-     false true))) :pattern ((from self)) )))
+  (forall ((self us_rep)) (! (dynamic_invariant (from self) true false
+  true) :pattern ((from self)) )))
 
 ;; from__def_axiom
   (assert
   (forall ((self us_rep))
-  (! (=> (from__function_guard (from self) self)
-     (= (from self) (to_rep
+  (! (= (from self) (to_rep
                     (rec__model__uml_transition__from_data
-                    (us_split_fields1 self))))) :pattern ((from self)) )))
+                    (us_split_fields1 self)))) :pattern ((from self)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -215,9 +212,9 @@
 
 (declare-fun o2 () uml_state_access)
 
-(declare-fun temp___415 () uml_state_access)
+(declare-fun temp___367 () uml_state_access)
 
-(declare-fun temp___4151 () uml_state_access)
+(declare-fun temp___3671 () uml_state_access)
 
 (declare-fun result () uml_state_access)
 
@@ -248,10 +245,10 @@
   (assert (= self__split_fields1 o2))
 
 ;; H
-  (assert (= temp___415 o1))
+  (assert (= temp___367 o1))
 
 ;; H
-  (assert (= temp___4151 o2))
+  (assert (= temp___3671 o2))
 
 ;; H
   (assert (= result self__split_fields))
@@ -260,10 +257,10 @@
   (assert (= result1 self__split_fields1))
 
 ;; H
-  (assert (= temp___415 self__split_fields2))
+  (assert (= temp___367 self__split_fields2))
 
 ;; H
-  (assert (= temp___4151 self__split_fields3))
+  (assert (= temp___3671 self__split_fields3))
 
 ;; H
   (assert (= self__split_fields4 self__split_fields2))
@@ -276,12 +273,6 @@
 
 ;; H
   (assert (= self__split_fields7 self__split_fields3))
-
-;; H
-  (assert (from__function_guard
-  (from
-  (mk___rep (mk___split_fields self__split_fields4 self__split_fields5)))
-  (mk___rep (mk___split_fields self__split_fields4 self__split_fields5))))
 
 (assert
 ;; WP_parameter_def

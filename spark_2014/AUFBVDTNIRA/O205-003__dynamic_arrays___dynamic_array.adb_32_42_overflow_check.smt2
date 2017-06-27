@@ -283,35 +283,35 @@
 (define-fun rec____ref___projection ((a rec____ref)) us_rep (rec____content
                                                             a))
 
-(define-fun dynamic_invariant1 ((temp___expr_151 us_rep)
-  (temp___is_init_148 Bool) (temp___skip_constant_149 Bool)
-  (temp___do_toplevel_150 Bool)) Bool (and
+(define-fun dynamic_invariant1 ((temp___expr_150 us_rep)
+  (temp___is_init_147 Bool) (temp___skip_constant_148 Bool)
+  (temp___do_toplevel_149 Bool)) Bool (and
                                       (=> (dynamic_array__rec__f1__pred
-                                      temp___expr_151)
+                                      temp___expr_150)
                                       (=>
-                                      (or (= temp___is_init_148 true)
+                                      (or (= temp___is_init_147 true)
                                       (<= 0 last)) (dynamic_property 0 
                                       last
                                       (to_rep
                                       (rec__dynamic_array__rec__f1
-                                      (us_split_fields1 temp___expr_151))))))
+                                      (us_split_fields1 temp___expr_150))))))
                                       (=> (dynamic_array__rec__f2__pred
-                                      temp___expr_151)
+                                      temp___expr_150)
                                       (=>
-                                      (or (= temp___is_init_148 true)
+                                      (or (= temp___is_init_147 true)
                                       (<= 0 last)) (dynamic_property 0 
                                       last
                                       (to_rep
                                       (rec__dynamic_array__rec__f2
-                                      (us_split_fields1 temp___expr_151))))))))
+                                      (us_split_fields1 temp___expr_150))))))))
 
-(define-fun default_initial_assumption ((temp___expr_153 us_rep)
-  (temp___skip_top_level_154 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_152 us_rep)
+  (temp___skip_top_level_153 Bool)) Bool (and
                                          (= (attr__constrained
-                                            temp___expr_153) false)
+                                            temp___expr_152) false)
                                          (= (rec__dynamic_array__rec__b
                                             (us_split_discrs1
-                                            temp___expr_153)) (of_int 1))))
+                                            temp___expr_152)) (of_int 1))))
 
 (declare-fun r () us_rep)
 
@@ -324,12 +324,12 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range temp___expr_15)))
 
-(define-fun dynamic_invariant3 ((temp___expr_145 Int)
-  (temp___is_init_142 Bool) (temp___skip_constant_143 Bool)
-  (temp___do_toplevel_144 Bool)) Bool (=>
-                                      (or (= temp___is_init_142 true)
+(define-fun dynamic_invariant3 ((temp___expr_144 Int)
+  (temp___is_init_141 Bool) (temp___skip_constant_142 Bool)
+  (temp___do_toplevel_143 Bool)) Bool (=>
+                                      (or (= temp___is_init_141 true)
                                       (<= 0 last)) (dynamic_property 0 
-                                      last temp___expr_145)))
+                                      last temp___expr_144)))
 
 ;; last__def_axiom
   (assert (= last c))

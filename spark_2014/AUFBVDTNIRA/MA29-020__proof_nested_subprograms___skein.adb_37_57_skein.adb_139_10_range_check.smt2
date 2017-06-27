@@ -1921,10 +1921,6 @@
 
 (declare-fun attr__ATTRIBUTE_MODULUS11 () (_ BitVec 64))
 
-(declare-fun first2 () (_ BitVec 64))
-
-(declare-fun last2 () (_ BitVec 64))
-
 (define-fun dynamic_property1 ((first_int (_ BitVec 64))
   (last_int (_ BitVec 64))
   (x (_ BitVec 64))) Bool (and (bvule first_int x) (bvule x last_int)))
@@ -1952,16 +1948,16 @@
 
 (declare-sort t1 0)
 
-(declare-fun first3 (t1) unsigned_64)
+(declare-fun first2 (t1) unsigned_64)
 
-(declare-fun last3 (t1) unsigned_64)
+(declare-fun last2 (t1) unsigned_64)
 
 (declare-fun mk1 ((_ BitVec 64) (_ BitVec 64)) t1)
 
 ;; mk_def
   (assert
   (forall ((f (_ BitVec 64)) (l (_ BitVec 64)))
-  (! (and (= (to_rep (first3 (mk1 f l))) f) (= (to_rep (last3 (mk1 f l))) l)) :pattern (
+  (! (and (= (to_rep (first2 (mk1 f l))) f) (= (to_rep (last2 (mk1 f l))) l)) :pattern (
   (mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first (_ BitVec 64))
@@ -1978,13 +1974,13 @@
 (define-fun of_array1 ((a (Array (_ BitVec 64) byte)) (f (_ BitVec 64))
   (l (_ BitVec 64))) us_t1 (mk___t1 a (mk1 f l)))
 
-(define-fun first4 ((a us_t1)) (_ BitVec 64) (to_rep (first3 (rt1 a))))
+(define-fun first3 ((a us_t1)) (_ BitVec 64) (to_rep (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) (_ BitVec 64) (to_rep (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) (_ BitVec 64) (to_rep (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (bvule (first4 a) (last4 a))
-                                    (+ (- (bv2nat (last4 a)) (bv2nat 
-                                    (first4 a))) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (bvule (first3 a) (last3 a))
+                                    (+ (- (bv2nat (last3 a)) (bv2nat 
+                                    (first3 a))) 1) 0))
 
 (declare-fun value__size6 () Int)
 
@@ -2020,9 +2016,9 @@
   (forall ((a (Array (_ BitVec 64) byte))) (<= 0 (object__alignment6 a))))
 
 (define-fun bool_eq21 ((x us_t1)
-  (y us_t1)) Bool (bool_eq6 (elts1 x) (to_rep (first3 (rt1 x)))
-                  (to_rep (last3 (rt1 x))) (elts1 y)
-                  (to_rep (first3 (rt1 y))) (to_rep (last3 (rt1 y)))))
+  (y us_t1)) Bool (bool_eq6 (elts1 x) (to_rep (first2 (rt1 x)))
+                  (to_rep (last2 (rt1 x))) (elts1 y)
+                  (to_rep (first2 (rt1 y))) (to_rep (last2 (rt1 y)))))
 
 (declare-fun user_eq21 (us_t1 us_t1) Bool)
 
@@ -2036,32 +2032,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS9 () Int)
-
-(declare-sort t16b 0)
-
-(declare-fun attr__ATTRIBUTE_MODULUS12 () (_ BitVec 64))
-
-(define-fun in_range10 ((x (_ BitVec 64))) Bool (and
-                                                (bvule ((_ int2bv 64) 0) x)
-                                                (bvule x ((_ int2bv 64) 63))))
-
-(define-fun in_range_int8 ((x Int)) Bool (and (<= 0 x) (<= x 63)))
-
-(define-fun bool_eq22 ((x (_ BitVec 64))
-  (y (_ BitVec 64))) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE16 ((_ BitVec 64)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check16 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE16 (us_image) (_ BitVec 64))
-
-(declare-fun user_eq22 (t16b t16b) Bool)
-
-(declare-fun dummy22 () t16b)
-
-(declare-datatypes () ((t16b__ref (mk_t16b__ref (t16b__content t16b)))))
-(define-fun t16b__ref___projection ((a t16b__ref)) t16b (t16b__content a))
 
 (declare-fun c18b () (_ BitVec 64))
 
@@ -2095,7 +2065,7 @@
   (and
   (=> (dynamic_property ((_ int2bv 64) 0)
   ((_ int2bv 64) 18446744073709551615) temp___694 temp___695)
-  (and (= (first4 temp___692) temp___694) (= (last4 temp___692) temp___695)))
+  (and (= (first3 temp___692) temp___694) (= (last3 temp___692) temp___695)))
   (forall ((temp___696 (_ BitVec 64)))
   (= (select (to_array1 temp___692) temp___696) (of_rep1 temp___693))))))))
 
@@ -2251,105 +2221,99 @@
 
 (declare-fun o4 () (_ BitVec 64))
 
-(declare-fun o5 () (Array (_ BitVec 64) byte))
+(declare-fun o5 () byte)
 
-(declare-fun o6 () us_split_fields4)
+(declare-fun o6 () (Array (_ BitVec 64) byte))
 
-(declare-fun temp___717 () us_rep2)
-
-(declare-fun o7 () byte)
-
-(declare-fun o8 () (Array (_ BitVec 64) byte))
-
-(declare-fun o9 () us_split_fields4)
+(declare-fun o7 () us_split_fields4)
 
 (declare-fun temp___720 () us_rep2)
 
-(declare-fun o10 () byte)
+(declare-fun o8 () byte)
 
-(declare-fun o11 () (Array (_ BitVec 64) byte))
+(declare-fun o9 () (Array (_ BitVec 64) byte))
 
-(declare-fun o12 () us_split_fields4)
+(declare-fun o10 () us_split_fields4)
 
 (declare-fun temp___723 () us_rep2)
 
-(declare-fun o13 () byte)
+(declare-fun o11 () byte)
 
-(declare-fun o14 () (Array (_ BitVec 64) byte))
+(declare-fun o12 () (Array (_ BitVec 64) byte))
 
-(declare-fun o15 () us_split_fields4)
+(declare-fun o13 () us_split_fields4)
 
 (declare-fun temp___726 () us_rep2)
 
-(declare-fun o16 () byte)
+(declare-fun o14 () byte)
 
-(declare-fun o17 () (Array (_ BitVec 64) byte))
+(declare-fun o15 () (Array (_ BitVec 64) byte))
 
-(declare-fun o18 () us_split_fields4)
+(declare-fun o16 () us_split_fields4)
 
 (declare-fun temp___729 () us_rep2)
 
-(declare-fun o19 () byte)
+(declare-fun o17 () byte)
 
-(declare-fun o20 () (Array (_ BitVec 64) byte))
+(declare-fun o18 () (Array (_ BitVec 64) byte))
 
-(declare-fun o21 () us_split_fields4)
+(declare-fun o19 () us_split_fields4)
 
 (declare-fun temp___732 () us_rep2)
 
-(declare-fun o22 () byte)
+(declare-fun o20 () byte)
 
-(declare-fun o23 () (Array (_ BitVec 64) byte))
+(declare-fun o21 () (Array (_ BitVec 64) byte))
 
-(declare-fun o24 () us_split_fields4)
+(declare-fun o22 () us_split_fields4)
 
 (declare-fun temp___735 () us_rep2)
 
-(declare-fun o25 () byte)
+(declare-fun o23 () byte)
 
-(declare-fun o26 () (Array (_ BitVec 64) byte))
+(declare-fun o24 () (Array (_ BitVec 64) byte))
 
-(declare-fun o27 () us_split_fields4)
+(declare-fun o25 () us_split_fields4)
 
 (declare-fun temp___738 () us_rep2)
 
-(declare-fun o28 () byte)
+(declare-fun o26 () byte)
 
-(declare-fun o29 () (Array (_ BitVec 64) byte))
+(declare-fun o27 () (Array (_ BitVec 64) byte))
 
-(declare-fun o30 () us_split_fields4)
+(declare-fun o28 () us_split_fields4)
 
 (declare-fun temp___741 () us_rep2)
 
-(declare-fun o31 () u6)
+(declare-fun o29 () u6)
 
-(declare-fun o32 () u7)
+(declare-fun o30 () u7)
 
-(declare-fun o33 () u16)
+(declare-fun o31 () u16)
 
-(declare-fun o34 () u32)
+(declare-fun o32 () u32)
 
-(declare-fun o35 () u64)
+(declare-fun o33 () u64)
 
-(declare-fun o36 () us_split_fields)
+(declare-fun o34 () us_split_fields)
 
-(declare-fun o37 () us_rep)
+(declare-fun o35 () us_rep)
 
-(declare-fun o38 () us_split_fields2)
+(declare-fun o36 () us_split_fields2)
 
-(declare-fun o39 () us_rep1)
+(declare-fun o37 () us_rep1)
 
-(declare-fun o40 () us_split_fields4)
+(declare-fun o38 () us_split_fields4)
 
 (declare-fun temp___744 () us_rep2)
 
-(declare-fun o41 () u64)
+(declare-fun o39 () u64)
 
-(declare-fun o42 () us_split_fields2)
+(declare-fun o40 () us_split_fields2)
 
-(declare-fun o43 () us_rep1)
+(declare-fun o41 () us_rep1)
 
-(declare-fun o44 () us_split_fields4)
+(declare-fun o42 () us_split_fields4)
 
 (declare-fun temp___747 () us_rep2)
 
@@ -2532,7 +2496,7 @@
 ;; H
   (assert
   (= (to_rep
-     (first3
+     (first2
      (rt1
      (temp___691 ((_ int2bv 8) 0) (to_rep hash__first) (to_rep hash__last))))) 
   (to_rep hash__first)))
@@ -2540,7 +2504,7 @@
 ;; H
   (assert
   (= (to_rep
-     (last3
+     (last2
      (rt1
      (temp___691 ((_ int2bv 8) 0) (to_rep hash__first) (to_rep hash__last))))) 
   (to_rep hash__last)))
@@ -2556,7 +2520,7 @@
 
 ;; H
   (assert
-  (= (mk (to_rep (first3 temp___6981)) (to_rep (last3 temp___6981))) 
+  (= (mk (to_rep (first2 temp___6981)) (to_rep (last2 temp___6981))) 
   temp___6991))
 
 ;; H
@@ -3024,24 +2988,18 @@
   (assert (= byte_count1 o4))
 
 ;; H
-  (assert (= o5 (temp___712 ((_ int2bv 8) 0))))
-
-;; H
-  (assert
-  (= o6 (mk___split_fields2
-        (rec__skein__skein_512_context__h
-        (us_split_fields__content2 local_ctx__split_fields20))
-        (rec__skein__skein_512_context__x
-        (us_split_fields__content2 local_ctx__split_fields20)) o5)))
-
-;; H
-  (assert (= temp___717 (mk___rep2 o6)))
-
-;; H
   (assert (= result6 local_ctx__split_fields20))
 
 ;; H
-  (assert (= local_ctx__split_fields22 (us_split_fields5 temp___717)))
+  (assert
+  (= local_ctx__split_fields22 (mk___split_fields2
+                               (rec__skein__skein_512_context__h
+                               (us_split_fields__content2
+                               local_ctx__split_fields20))
+                               (rec__skein__skein_512_context__x
+                               (us_split_fields__content2
+                               local_ctx__split_fields20))
+                               (temp___712 ((_ int2bv 8) 0)))))
 
 ;; H
   (assert (= result7 (mk_map__ref1 x)))
@@ -3096,22 +3054,22 @@
 
 ;; H
   (assert
-  (= (to_rep1 o7) ((_ extract 7 0) (bvand c18b ((_ int2bv 64) 255)))))
+  (= (to_rep1 o5) ((_ extract 7 0) (bvand c18b ((_ int2bv 64) 255)))))
 
 ;; H
   (assert
-  (= o8 (store (rec__skein__skein_512_context__b local_ctx__split_fields23) ((_ int2bv 64) 0) 
-  o7)))
+  (= o6 (store (rec__skein__skein_512_context__b local_ctx__split_fields23) ((_ int2bv 64) 0) 
+  o5)))
 
 ;; H
   (assert
-  (= o9 (mk___split_fields2
+  (= o7 (mk___split_fields2
         (rec__skein__skein_512_context__h local_ctx__split_fields23)
         (rec__skein__skein_512_context__x local_ctx__split_fields23) 
-        o8)))
+        o6)))
 
 ;; H
-  (assert (= temp___720 (mk___rep2 o9)))
+  (assert (= temp___720 (mk___rep2 o7)))
 
 ;; H
   (assert (= result10 (mk___split_fields__ref2 local_ctx__split_fields23)))
@@ -3121,22 +3079,22 @@
 
 ;; H
   (assert
-  (= (to_rep1 o10) ((_ extract 7 0) (bvand (bvlshr c18b ((_ int2bv 64) 8)) ((_ int2bv 64) 255)))))
+  (= (to_rep1 o8) ((_ extract 7 0) (bvand (bvlshr c18b ((_ int2bv 64) 8)) ((_ int2bv 64) 255)))))
 
 ;; H
   (assert
-  (= o11 (store (rec__skein__skein_512_context__b local_ctx__split_fields24) ((_ int2bv 64) 1) 
-  o10)))
+  (= o9 (store (rec__skein__skein_512_context__b local_ctx__split_fields24) ((_ int2bv 64) 1) 
+  o8)))
 
 ;; H
   (assert
-  (= o12 (mk___split_fields2
+  (= o10 (mk___split_fields2
          (rec__skein__skein_512_context__h local_ctx__split_fields24)
          (rec__skein__skein_512_context__x local_ctx__split_fields24) 
-         o11)))
+         o9)))
 
 ;; H
-  (assert (= temp___723 (mk___rep2 o12)))
+  (assert (= temp___723 (mk___rep2 o10)))
 
 ;; H
   (assert (= result11 (mk___split_fields__ref2 local_ctx__split_fields24)))
@@ -3146,22 +3104,22 @@
 
 ;; H
   (assert
-  (= (to_rep1 o13) ((_ extract 7 0) (bvand (bvlshr c18b ((_ int2bv 64) 16)) ((_ int2bv 64) 255)))))
+  (= (to_rep1 o11) ((_ extract 7 0) (bvand (bvlshr c18b ((_ int2bv 64) 16)) ((_ int2bv 64) 255)))))
 
 ;; H
   (assert
-  (= o14 (store (rec__skein__skein_512_context__b local_ctx__split_fields25) ((_ int2bv 64) 2) 
-  o13)))
+  (= o12 (store (rec__skein__skein_512_context__b local_ctx__split_fields25) ((_ int2bv 64) 2) 
+  o11)))
 
 ;; H
   (assert
-  (= o15 (mk___split_fields2
+  (= o13 (mk___split_fields2
          (rec__skein__skein_512_context__h local_ctx__split_fields25)
          (rec__skein__skein_512_context__x local_ctx__split_fields25) 
-         o14)))
+         o12)))
 
 ;; H
-  (assert (= temp___726 (mk___rep2 o15)))
+  (assert (= temp___726 (mk___rep2 o13)))
 
 ;; H
   (assert (= result12 (mk___split_fields__ref2 local_ctx__split_fields25)))
@@ -3171,22 +3129,22 @@
 
 ;; H
   (assert
-  (= (to_rep1 o16) ((_ extract 7 0) (bvand (bvlshr c18b ((_ int2bv 64) 24)) ((_ int2bv 64) 255)))))
+  (= (to_rep1 o14) ((_ extract 7 0) (bvand (bvlshr c18b ((_ int2bv 64) 24)) ((_ int2bv 64) 255)))))
 
 ;; H
   (assert
-  (= o17 (store (rec__skein__skein_512_context__b local_ctx__split_fields26) ((_ int2bv 64) 3) 
-  o16)))
+  (= o15 (store (rec__skein__skein_512_context__b local_ctx__split_fields26) ((_ int2bv 64) 3) 
+  o14)))
 
 ;; H
   (assert
-  (= o18 (mk___split_fields2
+  (= o16 (mk___split_fields2
          (rec__skein__skein_512_context__h local_ctx__split_fields26)
          (rec__skein__skein_512_context__x local_ctx__split_fields26) 
-         o17)))
+         o15)))
 
 ;; H
-  (assert (= temp___729 (mk___rep2 o18)))
+  (assert (= temp___729 (mk___rep2 o16)))
 
 ;; H
   (assert (= result13 (mk___split_fields__ref2 local_ctx__split_fields26)))
@@ -3196,22 +3154,22 @@
 
 ;; H
   (assert
-  (= (to_rep1 o19) ((_ extract 7 0) (bvand (bvlshr c18b ((_ int2bv 64) 32)) ((_ int2bv 64) 255)))))
+  (= (to_rep1 o17) ((_ extract 7 0) (bvand (bvlshr c18b ((_ int2bv 64) 32)) ((_ int2bv 64) 255)))))
 
 ;; H
   (assert
-  (= o20 (store (rec__skein__skein_512_context__b local_ctx__split_fields27) ((_ int2bv 64) 4) 
-  o19)))
+  (= o18 (store (rec__skein__skein_512_context__b local_ctx__split_fields27) ((_ int2bv 64) 4) 
+  o17)))
 
 ;; H
   (assert
-  (= o21 (mk___split_fields2
+  (= o19 (mk___split_fields2
          (rec__skein__skein_512_context__h local_ctx__split_fields27)
          (rec__skein__skein_512_context__x local_ctx__split_fields27) 
-         o20)))
+         o18)))
 
 ;; H
-  (assert (= temp___732 (mk___rep2 o21)))
+  (assert (= temp___732 (mk___rep2 o19)))
 
 ;; H
   (assert (= result14 (mk___split_fields__ref2 local_ctx__split_fields27)))
@@ -3221,22 +3179,22 @@
 
 ;; H
   (assert
-  (= (to_rep1 o22) ((_ extract 7 0) (bvand (bvlshr c18b ((_ int2bv 64) 40)) ((_ int2bv 64) 255)))))
+  (= (to_rep1 o20) ((_ extract 7 0) (bvand (bvlshr c18b ((_ int2bv 64) 40)) ((_ int2bv 64) 255)))))
 
 ;; H
   (assert
-  (= o23 (store (rec__skein__skein_512_context__b local_ctx__split_fields28) ((_ int2bv 64) 5) 
-  o22)))
+  (= o21 (store (rec__skein__skein_512_context__b local_ctx__split_fields28) ((_ int2bv 64) 5) 
+  o20)))
 
 ;; H
   (assert
-  (= o24 (mk___split_fields2
+  (= o22 (mk___split_fields2
          (rec__skein__skein_512_context__h local_ctx__split_fields28)
          (rec__skein__skein_512_context__x local_ctx__split_fields28) 
-         o23)))
+         o21)))
 
 ;; H
-  (assert (= temp___735 (mk___rep2 o24)))
+  (assert (= temp___735 (mk___rep2 o22)))
 
 ;; H
   (assert (= result15 (mk___split_fields__ref2 local_ctx__split_fields28)))
@@ -3246,22 +3204,22 @@
 
 ;; H
   (assert
-  (= (to_rep1 o25) ((_ extract 7 0) (bvand (bvlshr c18b ((_ int2bv 64) 48)) ((_ int2bv 64) 255)))))
+  (= (to_rep1 o23) ((_ extract 7 0) (bvand (bvlshr c18b ((_ int2bv 64) 48)) ((_ int2bv 64) 255)))))
 
 ;; H
   (assert
-  (= o26 (store (rec__skein__skein_512_context__b local_ctx__split_fields29) ((_ int2bv 64) 6) 
-  o25)))
+  (= o24 (store (rec__skein__skein_512_context__b local_ctx__split_fields29) ((_ int2bv 64) 6) 
+  o23)))
 
 ;; H
   (assert
-  (= o27 (mk___split_fields2
+  (= o25 (mk___split_fields2
          (rec__skein__skein_512_context__h local_ctx__split_fields29)
          (rec__skein__skein_512_context__x local_ctx__split_fields29) 
-         o26)))
+         o24)))
 
 ;; H
-  (assert (= temp___738 (mk___rep2 o27)))
+  (assert (= temp___738 (mk___rep2 o25)))
 
 ;; H
   (assert (= result16 (mk___split_fields__ref2 local_ctx__split_fields29)))
@@ -3271,22 +3229,22 @@
 
 ;; H
   (assert
-  (= (to_rep1 o28) ((_ extract 7 0) (bvand (bvlshr c18b ((_ int2bv 64) 56)) ((_ int2bv 64) 255)))))
+  (= (to_rep1 o26) ((_ extract 7 0) (bvand (bvlshr c18b ((_ int2bv 64) 56)) ((_ int2bv 64) 255)))))
 
 ;; H
   (assert
-  (= o29 (store (rec__skein__skein_512_context__b local_ctx__split_fields30) ((_ int2bv 64) 7) 
-  o28)))
+  (= o27 (store (rec__skein__skein_512_context__b local_ctx__split_fields30) ((_ int2bv 64) 7) 
+  o26)))
 
 ;; H
   (assert
-  (= o30 (mk___split_fields2
+  (= o28 (mk___split_fields2
          (rec__skein__skein_512_context__h local_ctx__split_fields30)
          (rec__skein__skein_512_context__x local_ctx__split_fields30) 
-         o29)))
+         o27)))
 
 ;; H
-  (assert (= temp___741 (mk___rep2 o30)))
+  (assert (= temp___741 (mk___rep2 o28)))
 
 ;; H
   (assert (= result17 (mk___split_fields__ref2 local_ctx__split_fields30)))
@@ -3298,31 +3256,31 @@
   (assert (in_range6 c20b))
 
 ;; H
-  (assert (= (to_rep7 o31) ((_ int2bv 8) 63)))
+  (assert (= (to_rep7 o29) ((_ int2bv 8) 63)))
 
 ;; H
-  (assert (= (to_rep6 o32) ((_ int2bv 8) 0)))
+  (assert (= (to_rep6 o30) ((_ int2bv 8) 0)))
 
 ;; H
-  (assert (= (to_rep2 o33) ((_ int2bv 16) 0)))
+  (assert (= (to_rep2 o31) ((_ int2bv 16) 0)))
 
 ;; H
-  (assert (= (to_rep3 o34) ((_ int2bv 32) 0)))
+  (assert (= (to_rep3 o32) ((_ int2bv 32) 0)))
 
 ;; H
-  (assert (= (to_rep4 o35) ((_ int2bv 64) 0)))
+  (assert (= (to_rep4 o33) ((_ int2bv 64) 0)))
 
 ;; H
   (assert
-  (= o36 (mk___split_fields o35 o34 o33 o32 (of_int 0) o31 (of_int 1)
+  (= o34 (mk___split_fields o33 o32 o31 o30 (of_int 0) o29 (of_int 1)
          (of_int 1))))
 
 ;; H
-  (assert (= o37 (mk___rep o36)))
+  (assert (= o35 (mk___rep o34)))
 
 ;; H
   (assert
-  (= o38 (mk___split_fields1 o37
+  (= o36 (mk___split_fields1 o35
          (rec__skein__context_header__hash_bit_len
          (us_split_fields3
          (rec__skein__skein_512_context__h local_ctx__split_fields31)))
@@ -3331,16 +3289,16 @@
          (rec__skein__skein_512_context__h local_ctx__split_fields31))))))
 
 ;; H
-  (assert (= o39 (mk___rep1 o38)))
+  (assert (= o37 (mk___rep1 o36)))
 
 ;; H
   (assert
-  (= o40 (mk___split_fields2 o39
+  (= o38 (mk___split_fields2 o37
          (rec__skein__skein_512_context__x local_ctx__split_fields31)
          (rec__skein__skein_512_context__b local_ctx__split_fields31))))
 
 ;; H
-  (assert (= temp___744 (mk___rep2 o40)))
+  (assert (= temp___744 (mk___rep2 o38)))
 
 ;; H
   (assert (= result18 (mk___split_fields__ref2 local_ctx__split_fields31)))
@@ -3349,30 +3307,30 @@
   (assert (= local_ctx__split_fields32 (us_split_fields5 temp___744)))
 
 ;; H
-  (assert (= (to_rep4 o41) ((_ int2bv 64) 0)))
+  (assert (= (to_rep4 o39) ((_ int2bv 64) 0)))
 
 ;; H
   (assert
-  (= o42 (mk___split_fields1
+  (= o40 (mk___split_fields1
          (rec__skein__context_header__tweak_words
          (us_split_fields3
          (rec__skein__skein_512_context__h local_ctx__split_fields32)))
          (rec__skein__context_header__hash_bit_len
          (us_split_fields3
          (rec__skein__skein_512_context__h local_ctx__split_fields32))) 
-         o41)))
+         o39)))
 
 ;; H
-  (assert (= o43 (mk___rep1 o42)))
+  (assert (= o41 (mk___rep1 o40)))
 
 ;; H
   (assert
-  (= o44 (mk___split_fields2 o43
+  (= o42 (mk___split_fields2 o41
          (rec__skein__skein_512_context__x local_ctx__split_fields32)
          (rec__skein__skein_512_context__b local_ctx__split_fields32))))
 
 ;; H
-  (assert (= temp___747 (mk___rep2 o44)))
+  (assert (= temp___747 (mk___rep2 o42)))
 
 ;; H
   (assert (= result19 (mk___split_fields__ref2 local_ctx__split_fields32)))

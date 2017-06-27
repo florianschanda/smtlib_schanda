@@ -334,8 +334,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -367,7 +365,7 @@
 
 (declare-fun i () Int)
 
-(declare-fun temp___259 () Int)
+(declare-fun temp___237 () Int)
 
 (declare-fun o () Int)
 
@@ -438,15 +436,15 @@
   (and (<= 0 i2) (<= i2 (- length1 1)))))
 
 ;; H
-  (assert (and (= temp___259 (+ a_first i2)) (in_range1 (+ a_first i2))))
+  (assert (and (= temp___237 (+ a_first i2)) (in_range1 (+ a_first i2))))
 
 ;; H
   (assert
-  (and (<= (to_rep (first (rt a))) temp___259)
-  (<= temp___259 (to_rep (last (rt a))))))
+  (and (<= (to_rep (first (rt a))) temp___237)
+  (<= temp___237 (to_rep (last (rt a))))))
 
 ;; H
-  (assert (= o temp___259))
+  (assert (= o temp___237))
 
 ;; H
   (assert (= o1 (select (elts a) o)))

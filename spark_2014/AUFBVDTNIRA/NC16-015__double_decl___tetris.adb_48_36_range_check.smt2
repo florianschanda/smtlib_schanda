@@ -336,12 +336,10 @@
   (assert
   (forall ((the_piece us_rep))
   (forall ((direction1 Int))
-  (! (=> (is_valid_move__function_guard (is_valid_move the_piece direction1)
-     the_piece direction1)
-     (= (= (is_valid_move the_piece direction1) true)
+  (! (= (= (is_valid_move the_piece direction1) true)
      (not
      (and (= direction1 3)
-     (= (to_rep1 (rec__tetris__piece__y (us_split_fields1 the_piece))) 16))))) :pattern (
+     (= (to_rep1 (rec__tetris__piece__y (us_split_fields1 the_piece))) 16)))) :pattern (
   (is_valid_move the_piece direction1)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
@@ -374,16 +372,6 @@
 
 ;; H
   (assert (in_range3 direction))
-
-;; H
-  (assert (is_valid_move__function_guard
-  (is_valid_move
-  (mk___rep
-  (mk___split_fields the_piece__split_fields the_piece__split_fields1
-  the_piece__split_fields2)) direction)
-  (mk___rep
-  (mk___split_fields the_piece__split_fields the_piece__split_fields1
-  the_piece__split_fields2)) direction))
 
 ;; H
   (assert

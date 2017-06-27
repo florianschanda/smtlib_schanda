@@ -60,11 +60,11 @@
 (declare-datatypes () ((ptr_t__ref (mk_ptr_t__ref (ptr_t__content ptr_t)))))
 (define-fun ptr_t__ref___projection ((a ptr_t__ref)) ptr_t (ptr_t__content a))
 
-(define-fun dynamic_invariant ((temp___expr_158 Int)
-  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
-  (temp___do_toplevel_157 Bool)) Bool (=>
-                                      (or (= temp___is_init_155 true)
-                                      (<= 0 100)) (in_range temp___expr_158)))
+(define-fun dynamic_invariant ((temp___expr_153 Int)
+  (temp___is_init_150 Bool) (temp___skip_constant_151 Bool)
+  (temp___do_toplevel_152 Bool)) Bool (=>
+                                      (or (= temp___is_init_150 true)
+                                      (<= 0 100)) (in_range temp___expr_153)))
 
 ;; is_empty__post_axiom
   (assert true)
@@ -93,9 +93,6 @@
 
 ;; H
   (assert (= the_ptr3 the_ptr1))
-
-;; H
-  (assert (is_empty__function_guard (is_empty the_ptr2) the_ptr2))
 
 (assert
 ;; WP_parameter_def

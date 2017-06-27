@@ -68,21 +68,22 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(declare-fun sum_state (Int) Int)
+(declare-fun sum_state (Int us_private) Int)
 
-(declare-fun sum_state__function_guard (Int Int) Bool)
+(declare-fun sum_state__function_guard (Int Int us_private) Bool)
 
 ;; sum_state__post_axiom
   (assert
   (forall ((init__b Int))
-  (! (=> (dynamic_invariant init__b true true true)
-     (let ((result (sum_state init__b)))
-     (=> (sum_state__function_guard result init__b) (dynamic_invariant result
-     true false true)))) :pattern ((sum_state init__b)) )))
+  (forall ((init__state us_private))
+  (! (=> (dynamic_invariant init__b true true true) (dynamic_invariant
+     (sum_state init__b init__state) true false true)) :pattern ((sum_state
+                                                                 init__b
+                                                                 init__state)) ))))
 
-(declare-fun sum_all (Int Int) Int)
+(declare-fun sum_all (Int us_private Int) Int)
 
-(declare-fun sum_all__function_guard (Int Int Int) Bool)
+(declare-fun sum_all__function_guard (Int Int us_private Int) Bool)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
@@ -93,12 +94,14 @@
 ;; sum_all__post_axiom
   (assert
   (forall ((init__b Int) (init__a Int))
+  (forall ((init__state us_private))
   (! (=>
      (and (dynamic_invariant init__b true true true) (dynamic_invariant
-     init__a true true true))
-     (let ((result (sum_all init__b init__a)))
-     (=> (sum_all__function_guard result init__b init__a) (dynamic_invariant
-     result true false true)))) :pattern ((sum_all init__b init__a)) )))
+     init__a true true true)) (dynamic_invariant
+     (sum_all init__b init__state init__a) true false true)) :pattern (
+  (sum_all init__b init__state init__a)) ))))
+
+(declare-fun state () us_private)
 
 (declare-fun a () Int)
 
@@ -127,10 +130,7 @@
   (assert (in_range b))
 
 ;; H
-  (assert (sum_all__function_guard (sum_all b a) b a))
-
-;; H
-  (assert (= (sum_all b a) 0))
+  (assert (= (sum_all b state a) 0))
 
 ;; H
   (assert (= (mk_int__ref result) (mk_int__ref x)))
@@ -142,9 +142,7 @@
   (assert (in_range x1))
 
 ;; H
-  (assert
-  (and (and (= o (sum_state b)) (sum_state__function_guard o b)) (in_range
-  o)))
+  (assert (and (= o (sum_state b state)) (in_range o)))
 
 ;; H
   (assert (= (mk_int__ref result1) (mk_int__ref y)))

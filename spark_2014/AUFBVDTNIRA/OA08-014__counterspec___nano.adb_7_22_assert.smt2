@@ -110,11 +110,9 @@
 
 ;; ticks_per_second__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (ticks_per_second us_void_param)))
-     (=> (ticks_per_second__function_guard result us_void_param)
-     (dynamic_invariant1 result true false true))) :pattern ((ticks_per_second
-                                                             us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant1
+  (ticks_per_second us_void_param) true false
+  true) :pattern ((ticks_per_second us_void_param)) )))
 
 (declare-fun x () Int)
 
@@ -122,10 +120,6 @@
 
 ;; H
   (assert (in_range1 x))
-
-;; H
-  (assert (ticks_per_second__function_guard (ticks_per_second Tuple0)
-  Tuple0))
 
 (assert
 ;; WP_parameter_def

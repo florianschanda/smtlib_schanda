@@ -973,9 +973,6 @@
                                                             witness1)) ))))
 
 ;; H
-  (assert (forall ((e Int)) (q__function_guard (q e) e)))
-
-;; H
   (assert
   (forall ((e Int))
   (=> (and (in_range2 e) (= (contains (model__ s) e) true)) (= (q e) true))))
@@ -984,9 +981,6 @@
 
 ;; H
   (assert (= (has_key (positions s) cu) true))
-
-;; H
-  (assert (q__function_guard (q (element s cu)) (element s cu)))
 
 (assert
 ;; WP_parameter_def

@@ -89,10 +89,8 @@
 ;; qf1__post_axiom
   (assert
   (forall ((j Int))
-  (! (=> (dynamic_invariant j true true true)
-     (let ((result (qf1 j)))
-     (=> (qf1__function_guard result j) (dynamic_invariant result true false
-     true)))) :pattern ((qf1 j)) )))
+  (! (=> (dynamic_invariant j true true true) (dynamic_invariant (qf1 j) true
+     false true)) :pattern ((qf1 j)) )))
 
 (declare-sort t2 0)
 
@@ -364,7 +362,7 @@
   (assert (= tmp1 4))
 
 ;; H
-  (assert (and (and (= o (qf1 3)) (qf1__function_guard o 3)) (in_range o)))
+  (assert (and (= o (qf1 3)) (in_range o)))
 
 ;; H
   (assert (= o1 (+ tmp1 o)))

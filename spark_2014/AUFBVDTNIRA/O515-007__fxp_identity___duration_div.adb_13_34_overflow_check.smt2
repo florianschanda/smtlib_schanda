@@ -269,8 +269,7 @@
 ;; id__def_axiom
   (assert
   (forall ((ts duration))
-  (! (=> (id__function_guard (id ts) ts)
-     (= (to_fixed (id ts)) (to_fixed ts))) :pattern ((id ts)) )))
+  (! (= (to_fixed (id ts)) (to_fixed ts)) :pattern ((id ts)) )))
 
 (declare-fun right () Int)
 
@@ -294,7 +293,7 @@
   (assert (= (to_fixed o) (- 9223372036854775808)))
 
 ;; H
-  (assert (and (and (= o1 (id o)) (id__function_guard o1 o)) (= o1 o)))
+  (assert (and (= o1 (id o)) (= o1 o)))
 
 ;; H
   (assert (= o2 (to_fixed o1)))

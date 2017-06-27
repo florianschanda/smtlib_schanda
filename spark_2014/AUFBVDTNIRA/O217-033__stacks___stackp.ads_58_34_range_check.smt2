@@ -724,29 +724,24 @@
 
 (declare-fun size__function_guard (Int us_rep) Bool)
 
-;; temp___result_439_def
-  (assert
-  (forall ((temp___438 us_rep1)) (size__function_guard
-  (size (to_base temp___438)) (to_base temp___438))))
-
-(define-fun default_initial_assumption ((temp___expr_433 us_rep1)
-  (temp___skip_top_level_434 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_361 us_rep1)
+  (temp___skip_top_level_362 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag1 temp___expr_433) 
+                                         (= (attr__tag1 temp___expr_361) 
                                          us_tag1)
                                          (and
                                          (= (to_rep3
                                             (rec__stackp__buffer__first
                                             (us_split_fields3
-                                            temp___expr_433))) 1)
+                                            temp___expr_361))) 1)
                                          (= (to_rep2
                                             (rec__stackp__stack_root__length1
                                             (us_split_fields3
-                                            temp___expr_433))) 0)))
+                                            temp___expr_361))) 0)))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_434 true))
-                                         (= (size (to_base temp___expr_433)) 0))))
+                                         (= temp___skip_top_level_362 true))
+                                         (= (size (to_base temp___expr_361)) 0))))
 
 (declare-fun get_model__3 (us_rep1) us_t)
 
@@ -859,13 +854,13 @@
 (define-fun telement_arrayB__ref___projection ((a telement_arrayB__ref)) us_t1 
   (telement_arrayB__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_169 us_t)
-  (temp___is_init_166 Bool) (temp___skip_constant_167 Bool)
-  (temp___do_toplevel_168 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_167 true))
+(define-fun dynamic_invariant1 ((temp___expr_168 us_t)
+  (temp___is_init_165 Bool) (temp___skip_constant_166 Bool)
+  (temp___do_toplevel_167 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_166 true))
                                       (dynamic_property 1 2147483647
-                                      (first1 temp___expr_169)
-                                      (last1 temp___expr_169))))
+                                      (first1 temp___expr_168)
+                                      (last1 temp___expr_168))))
 
 (declare-fun wraps_around (us_rep1) Bool)
 
@@ -882,8 +877,6 @@
 (declare-fun last5 (Int us_rep1) Int)
 
 (declare-fun last__function_guard1 (Int Int us_rep1) Bool)
-
-(declare-fun first4 () Int)
 
 (define-fun dynamic_property2 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -905,7 +898,7 @@
 
 (declare-sort t2 0)
 
-(declare-fun first5 (t2) integer)
+(declare-fun first4 (t2) integer)
 
 (declare-fun last6 (t2) integer)
 
@@ -916,7 +909,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range2 f)
      (=> (in_range2 l)
-     (and (= (to_rep1 (first5 (mk2 f l))) f)
+     (and (= (to_rep1 (first4 (mk2 f l))) f)
      (= (to_rep1 (last6 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
 
 (define-fun dynamic_property3 ((range_first Int) (range_last Int) (low Int)
@@ -933,12 +926,12 @@
 (define-fun of_array2 ((a (Array Int element)) (f Int)
   (l Int)) us_t2 (mk___t2 a (mk2 f l)))
 
-(define-fun first6 ((a us_t2)) Int (to_rep1 (first5 (rt2 a))))
+(define-fun first5 ((a us_t2)) Int (to_rep1 (first4 (rt2 a))))
 
 (define-fun last7 ((a us_t2)) Int (to_rep1 (last6 (rt2 a))))
 
-(define-fun length2 ((a us_t2)) Int (ite (<= (first6 a) (last7 a))
-                                    (+ (- (last7 a) (first6 a)) 1) 0))
+(define-fun length2 ((a us_t2)) Int (ite (<= (first5 a) (last7 a))
+                                    (+ (- (last7 a) (first5 a)) 1) 0))
 
 (declare-fun value__size5 () Int)
 
@@ -972,9 +965,9 @@
   (assert (forall ((a (Array Int element))) (<= 0 (object__alignment5 a))))
 
 (define-fun bool_eq12 ((x us_t2)
-  (y us_t2)) Bool (bool_eq2 (elts2 x) (to_rep1 (first5 (rt2 x)))
+  (y us_t2)) Bool (bool_eq2 (elts2 x) (to_rep1 (first4 (rt2 x)))
                   (to_rep1 (last6 (rt2 x))) (elts2 y)
-                  (to_rep1 (first5 (rt2 y))) (to_rep1 (last6 (rt2 y)))))
+                  (to_rep1 (first4 (rt2 y))) (to_rep1 (last6 (rt2 y)))))
 
 (declare-fun user_eq12 (us_t2 us_t2) Bool)
 
@@ -982,8 +975,6 @@
 
 (declare-datatypes () ((t83s__ref (mk_t83s__ref (t83s__content us_t2)))))
 (define-fun t83s__ref___projection ((a t83s__ref)) us_t2 (t83s__content a))
-
-(declare-fun last8 () Int)
 
 (define-fun dynamic_property4 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -1005,9 +996,9 @@
 
 (declare-sort t3 0)
 
-(declare-fun first7 (t3) integer)
+(declare-fun first6 (t3) integer)
 
-(declare-fun last9 (t3) integer)
+(declare-fun last8 (t3) integer)
 
 (declare-fun mk3 (Int Int) t3)
 
@@ -1016,8 +1007,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range2 f)
      (=> (in_range2 l)
-     (and (= (to_rep1 (first7 (mk3 f l))) f)
-     (= (to_rep1 (last9 (mk3 f l))) l)))) :pattern ((mk3 f l)) )))
+     (and (= (to_rep1 (first6 (mk3 f l))) f)
+     (= (to_rep1 (last8 (mk3 f l))) l)))) :pattern ((mk3 f l)) )))
 
 (define-fun dynamic_property5 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range2 low)
@@ -1033,12 +1024,12 @@
 (define-fun of_array3 ((a (Array Int element)) (f Int)
   (l Int)) us_t3 (mk___t3 a (mk3 f l)))
 
-(define-fun first8 ((a us_t3)) Int (to_rep1 (first7 (rt3 a))))
+(define-fun first7 ((a us_t3)) Int (to_rep1 (first6 (rt3 a))))
 
-(define-fun last10 ((a us_t3)) Int (to_rep1 (last9 (rt3 a))))
+(define-fun last9 ((a us_t3)) Int (to_rep1 (last8 (rt3 a))))
 
-(define-fun length3 ((a us_t3)) Int (ite (<= (first8 a) (last10 a))
-                                    (+ (- (last10 a) (first8 a)) 1) 0))
+(define-fun length3 ((a us_t3)) Int (ite (<= (first7 a) (last9 a))
+                                    (+ (- (last9 a) (first7 a)) 1) 0))
 
 (declare-fun value__size6 () Int)
 
@@ -1072,9 +1063,9 @@
   (assert (forall ((a (Array Int element))) (<= 0 (object__alignment6 a))))
 
 (define-fun bool_eq14 ((x us_t3)
-  (y us_t3)) Bool (bool_eq2 (elts3 x) (to_rep1 (first7 (rt3 x)))
-                  (to_rep1 (last9 (rt3 x))) (elts3 y)
-                  (to_rep1 (first7 (rt3 y))) (to_rep1 (last9 (rt3 y)))))
+  (y us_t3)) Bool (bool_eq2 (elts3 x) (to_rep1 (first6 (rt3 x)))
+                  (to_rep1 (last8 (rt3 x))) (elts3 y)
+                  (to_rep1 (first6 (rt3 y))) (to_rep1 (last8 (rt3 y)))))
 
 (declare-fun user_eq14 (us_t3 us_t3) Bool)
 
@@ -1082,10 +1073,6 @@
 
 (declare-datatypes () ((t86s__ref (mk_t86s__ref (t86s__content us_t3)))))
 (define-fun t86s__ref___projection ((a t86s__ref)) us_t3 (t86s__content a))
-
-(declare-fun first9 () Int)
-
-(declare-fun last11 () Int)
 
 (define-fun dynamic_property6 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -1107,9 +1094,9 @@
 
 (declare-sort t4 0)
 
-(declare-fun first10 (t4) integer)
+(declare-fun first8 (t4) integer)
 
-(declare-fun last12 (t4) integer)
+(declare-fun last10 (t4) integer)
 
 (declare-fun mk4 (Int Int) t4)
 
@@ -1118,8 +1105,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range2 f)
      (=> (in_range2 l)
-     (and (= (to_rep1 (first10 (mk4 f l))) f)
-     (= (to_rep1 (last12 (mk4 f l))) l)))) :pattern ((mk4 f l)) )))
+     (and (= (to_rep1 (first8 (mk4 f l))) f)
+     (= (to_rep1 (last10 (mk4 f l))) l)))) :pattern ((mk4 f l)) )))
 
 (define-fun dynamic_property7 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range2 low)
@@ -1135,12 +1122,12 @@
 (define-fun of_array4 ((a (Array Int element)) (f Int)
   (l Int)) us_t4 (mk___t4 a (mk4 f l)))
 
-(define-fun first11 ((a us_t4)) Int (to_rep1 (first10 (rt4 a))))
+(define-fun first9 ((a us_t4)) Int (to_rep1 (first8 (rt4 a))))
 
-(define-fun last13 ((a us_t4)) Int (to_rep1 (last12 (rt4 a))))
+(define-fun last11 ((a us_t4)) Int (to_rep1 (last10 (rt4 a))))
 
-(define-fun length4 ((a us_t4)) Int (ite (<= (first11 a) (last13 a))
-                                    (+ (- (last13 a) (first11 a)) 1) 0))
+(define-fun length4 ((a us_t4)) Int (ite (<= (first9 a) (last11 a))
+                                    (+ (- (last11 a) (first9 a)) 1) 0))
 
 (declare-fun value__size7 () Int)
 
@@ -1174,9 +1161,9 @@
   (assert (forall ((a (Array Int element))) (<= 0 (object__alignment7 a))))
 
 (define-fun bool_eq16 ((x us_t4)
-  (y us_t4)) Bool (bool_eq2 (elts4 x) (to_rep1 (first10 (rt4 x)))
-                  (to_rep1 (last12 (rt4 x))) (elts4 y)
-                  (to_rep1 (first10 (rt4 y))) (to_rep1 (last12 (rt4 y)))))
+  (y us_t4)) Bool (bool_eq2 (elts4 x) (to_rep1 (first8 (rt4 x)))
+                  (to_rep1 (last10 (rt4 x))) (elts4 y)
+                  (to_rep1 (first8 (rt4 y))) (to_rep1 (last10 (rt4 y)))))
 
 (declare-fun user_eq16 (us_t4 us_t4) Bool)
 
@@ -1189,102 +1176,91 @@
   (assert
   (forall ((s us_rep1))
   (! (let ((result (get_model__3 s)))
-     (and (size__function_guard (size (to_base s)) (to_base s))
-     (=> (get_model__3__function_guard result s)
      (and (= (length result) (size (to_base s))) (dynamic_invariant1 result
-     true false true))))) :pattern ((get_model__3 s)) )))
+     true false true))) :pattern ((get_model__3 s)) )))
 
 ;; get_model__3__post__dispatch_axiom
   (assert
   (forall ((attr__tag2 Int))
   (forall ((s us_rep1))
   (! (let ((result (get_model__31 attr__tag2 s)))
-     (and (size__function_guard (size (to_base s)) (to_base s))
-     (=> (get_model__3__function_guard1 result attr__tag2 s)
      (and (= (length result) (size (to_base s))) (dynamic_invariant1 result
-     true false true))))) :pattern ((get_model__31 attr__tag2 s)) ))))
+     true false true))) :pattern ((get_model__31 attr__tag2 s)) ))))
 
 ;; stackp__buffer__compat_axiom
   (assert
   (forall ((s us_rep1))
-  (! (=> (get_model__3__function_guard1 (get_model__31 us_tag1 s) us_tag1 s)
-     (and (get_model__3__function_guard (get_model__3 s) s)
-     (= (get_model__3 s) (get_model__31 us_tag1 s)))) :pattern ((get_model__31
-                                                                us_tag1 s)) )))
+  (! (= (get_model__3 s) (get_model__31 us_tag1 s)) :pattern ((get_model__31
+                                                              us_tag1 s)) )))
 
 ;; get_model__3__def_axiom
   (assert
   (forall ((s us_rep1))
-  (! (=> (get_model__3__function_guard (get_model__3 s) s)
-     (and (wraps_around__function_guard (wraps_around s) s)
-     (and (last__function_guard (last4 s) s)
-     (and (last__function_guard (last4 s) s)
-     (= (get_model__3 s) (ite (= (wraps_around s) true)
+  (! (= (get_model__3 s) (ite (= (wraps_around s) true)
                          (let ((stackp__get_model__3__R84s (last4 s)))
-                         (let ((temp___475 (let ((temp___474 (let ((temp___471 1))
-                                                             (let ((temp___472 
+                         (let ((temp___394 (let ((temp___393 (let ((temp___390 1))
+                                                             (let ((temp___391 
                                                              (rec__stackp__stack_root__content1
                                                              (us_split_fields3
                                                              s))))
                                                              (of_array3
-                                                             temp___472
-                                                             temp___471
+                                                             temp___391
+                                                             temp___390
                                                              stackp__get_model__3__R84s)))))
-                                           (let ((temp___473 (let ((temp___469 100))
-                                                             (let ((temp___468 
+                                           (let ((temp___392 (let ((temp___388 100))
+                                                             (let ((temp___387 
                                                              (to_rep3
                                                              (rec__stackp__buffer__first
                                                              (us_split_fields3
                                                              s)))))
-                                                             (let ((temp___470 
+                                                             (let ((temp___389 
                                                              (rec__stackp__stack_root__content1
                                                              (us_split_fields3
                                                              s))))
                                                              (of_array2
-                                                             temp___470
-                                                             temp___468
-                                                             temp___469))))))
-                                           (ite (= (length2 temp___473) 0)
-                                           (of_array1 (to_array3 temp___474)
-                                           (first8 temp___474)
-                                           (last10 temp___474))
+                                                             temp___389
+                                                             temp___387
+                                                             temp___388))))))
+                                           (ite (= (length2 temp___392) 0)
+                                           (of_array1 (to_array3 temp___393)
+                                           (first7 temp___393)
+                                           (last9 temp___393))
                                            (of_array1
                                            (slide
-                                           (concat1 (to_array2 temp___473)
-                                           (first6 temp___473)
-                                           (last7 temp___473)
-                                           (to_array3 temp___474)
-                                           (first8 temp___474)
-                                           (last10 temp___474))
-                                           (first6 temp___473) 1) 1
-                                           (- (+ 1 (+ (ite (<= (first6
-                                                               temp___473) 
-                                                      (last7 temp___473))
+                                           (concat1 (to_array2 temp___392)
+                                           (first5 temp___392)
+                                           (last7 temp___392)
+                                           (to_array3 temp___393)
+                                           (first7 temp___393)
+                                           (last9 temp___393))
+                                           (first5 temp___392) 1) 1
+                                           (- (+ 1 (+ (ite (<= (first5
+                                                               temp___392) 
+                                                      (last7 temp___392))
                                                       (+ (- (last7
-                                                            temp___473) 
-                                                      (first6 temp___473)) 1)
-                                                      0) (ite (<= (first8
-                                                                  temp___474) 
-                                                         (last10 temp___474))
-                                                         (+ (- (last10
-                                                               temp___474) 
-                                                         (first8 temp___474)) 1)
+                                                            temp___392) 
+                                                      (first5 temp___392)) 1)
+                                                      0) (ite (<= (first7
+                                                                  temp___393) 
+                                                         (last9 temp___393))
+                                                         (+ (- (last9
+                                                               temp___393) 
+                                                         (first7 temp___393)) 1)
                                                          0))) 1)))))))
-                         (of_array (to_array1 temp___475) (first3 temp___475)
-                         (last3 temp___475))))
+                         (of_array (to_array1 temp___394) (first3 temp___394)
+                         (last3 temp___394))))
                          (let ((stackp__get_model__3__R87s (last4 s)))
-                         (let ((temp___479 (let ((temp___477 (to_rep3
+                         (let ((temp___397 (let ((temp___395 (to_rep3
                                                              (rec__stackp__buffer__first
                                                              (us_split_fields3
                                                              s)))))
-                                           (let ((temp___478 (rec__stackp__stack_root__content1
+                                           (let ((temp___396 (rec__stackp__stack_root__content1
                                                              (us_split_fields3
                                                              s))))
-                                           (of_array4 temp___478 temp___477
+                                           (of_array4 temp___396 temp___395
                                            stackp__get_model__3__R87s)))))
-                         (of_array (to_array4 temp___479)
-                         (first11 temp___479) (last13 temp___479)))))))))) :pattern (
-  (get_model__3 s)) )))
+                         (of_array (to_array4 temp___397) (first9 temp___397)
+                         (last11 temp___397)))))) :pattern ((get_model__3 s)) )))
 
 (declare-fun s__attr__tag () Int)
 
@@ -1330,19 +1306,19 @@
 (declare-datatypes () ((t23s__ref (mk_t23s__ref (t23s__content t23s)))))
 (define-fun t23s__ref___projection ((a t23s__ref)) t23s (t23s__content a))
 
-(declare-fun temp___250 (Int) (Array Int element))
+(declare-fun temp___222 (Int) (Array Int element))
 
 ;; def_axiom
   (assert
-  (forall ((temp___252 Int))
-  (= (select (temp___250 temp___252) 1) (of_rep temp___252))))
+  (forall ((temp___224 Int))
+  (= (select (temp___222 temp___224) 1) (of_rep temp___224))))
 
-(declare-fun temp___719 (Int) (Array Int element))
+(declare-fun temp___567 (Int) (Array Int element))
 
 ;; def_axiom
   (assert
-  (forall ((temp___721 Int))
-  (= (select (temp___719 temp___721) 1) (of_rep temp___721))))
+  (forall ((temp___569 Int))
+  (= (select (temp___567 temp___569) 1) (of_rep temp___569))))
 
 (define-fun dynamic_invariant2 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -1365,11 +1341,6 @@
                                       (<= 0 100)) (in_range3
                                       temp___expr_136)))
 
-;; temp___result_165_def
-  (assert
-  (forall ((temp___164 us_rep)) (size__function_guard (size temp___164)
-  temp___164)))
-
 (define-fun default_initial_assumption1 ((temp___expr_159 us_rep)
   (temp___skip_top_level_160 Bool)) Bool (and
                                          (and
@@ -1386,25 +1357,22 @@
 
 ;; size__post_axiom
   (assert
-  (forall ((s us_rep))
-  (! (let ((result (size s)))
-     (=> (size__function_guard result s) (dynamic_invariant4 result true
-     false true))) :pattern ((size s)) )))
+  (forall ((s us_rep)) (! (dynamic_invariant4 (size s) true false
+  true) :pattern ((size s)) )))
 
 ;; size__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (size__function_guard (size s) s)
-     (= (size s) (to_rep2
-                 (rec__stackp__stack_root__length (us_split_fields1 s))))) :pattern (
+  (! (= (size s) (to_rep2
+                 (rec__stackp__stack_root__length (us_split_fields1 s)))) :pattern (
   (size s)) )))
 
-(define-fun dynamic_invariant5 ((temp___expr_425 Int)
-  (temp___is_init_422 Bool) (temp___skip_constant_423 Bool)
-  (temp___do_toplevel_424 Bool)) Bool (=>
-                                      (or (= temp___is_init_422 true)
+(define-fun dynamic_invariant5 ((temp___expr_353 Int)
+  (temp___is_init_350 Bool) (temp___skip_constant_351 Bool)
+  (temp___do_toplevel_352 Bool)) Bool (=>
+                                      (or (= temp___is_init_350 true)
                                       (<= 1 100)) (in_range4
-                                      temp___expr_425)))
+                                      temp___expr_353)))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -1427,48 +1395,37 @@
 ;; stackp__buffer__compat_axiom
   (assert
   (forall ((s us_rep1))
-  (! (=> (wraps_around__function_guard1 (wraps_around1 us_tag1 s) us_tag1 s)
-     (and (wraps_around__function_guard (wraps_around s) s)
-     (= (to_int1 (wraps_around s)) (to_int1 (wraps_around1 us_tag1 s))))) :pattern (
+  (! (= (to_int1 (wraps_around s)) (to_int1 (wraps_around1 us_tag1 s))) :pattern (
   (wraps_around1 us_tag1 s)) )))
 
 ;; wraps_around__def_axiom
   (assert
   (forall ((s us_rep1))
-  (! (=> (wraps_around__function_guard (wraps_around s) s)
-     (= (= (wraps_around s) true)
+  (! (= (= (wraps_around s) true)
      (< 100 (- (+ (to_rep3 (rec__stackp__buffer__first (us_split_fields3 s))) 
-     (to_rep2 (rec__stackp__stack_root__length1 (us_split_fields3 s)))) 1)))) :pattern (
+     (to_rep2 (rec__stackp__stack_root__length1 (us_split_fields3 s)))) 1))) :pattern (
   (wraps_around s)) )))
 
 ;; last__post_axiom
   (assert
-  (forall ((s us_rep1))
-  (! (let ((result (last4 s)))
-     (=> (last__function_guard result s) (dynamic_invariant4 result true
-     false true))) :pattern ((last4 s)) )))
+  (forall ((s us_rep1)) (! (dynamic_invariant4 (last4 s) true false
+  true) :pattern ((last4 s)) )))
 
 ;; last__post__dispatch_axiom
   (assert
   (forall ((attr__tag2 Int))
-  (forall ((s us_rep1))
-  (! (let ((result (last5 attr__tag2 s)))
-     (=> (last__function_guard1 result attr__tag2 s) (dynamic_invariant4
-     result true false true))) :pattern ((last5 attr__tag2 s)) ))))
+  (forall ((s us_rep1)) (! (dynamic_invariant4 (last5 attr__tag2 s) true
+  false true) :pattern ((last5 attr__tag2 s)) ))))
 
 ;; stackp__buffer__compat_axiom
   (assert
   (forall ((s us_rep1))
-  (! (=> (last__function_guard1 (last5 us_tag1 s) us_tag1 s)
-     (and (last__function_guard (last4 s) s) (= (last4 s) (last5 us_tag1 s)))) :pattern (
-  (last5 us_tag1 s)) )))
+  (! (= (last4 s) (last5 us_tag1 s)) :pattern ((last5 us_tag1 s)) )))
 
 ;; last__def_axiom
   (assert
   (forall ((s us_rep1))
-  (! (=> (last__function_guard (last4 s) s)
-     (and (wraps_around__function_guard (wraps_around s) s)
-     (= (last4 s) (ite (not (= (wraps_around s) true))
+  (! (= (last4 s) (ite (not (= (wraps_around s) true))
                   (- (+ (to_rep3
                         (rec__stackp__buffer__first (us_split_fields3 s))) 
                   (to_rep2
@@ -1476,14 +1433,14 @@
                   (- (- (+ (to_rep3
                            (rec__stackp__buffer__first (us_split_fields3 s))) 
                   (to_rep2
-                  (rec__stackp__stack_root__length1 (us_split_fields3 s)))) 1) 100))))) :pattern (
+                  (rec__stackp__stack_root__length1 (us_split_fields3 s)))) 1) 100))) :pattern (
   (last4 s)) )))
 
 (declare-fun e () Int)
 
-(declare-fun temp___732 () (Array Int element))
+(declare-fun temp___579 () (Array Int element))
 
-(declare-fun temp___7321 () t)
+(declare-fun temp___5791 () t)
 
 (declare-fun o () Int)
 
@@ -1511,7 +1468,7 @@
                                                  s__split_fields2
                                                  s__split_fields3))
 
-(define-fun temp___7322 () us_t (mk___t temp___732 temp___7321))
+(define-fun temp___5792 () us_t (mk___t temp___579 temp___5791))
 
 ;; H
   (assert (=> (<= 0 2147483647) (in_range1 e)))
@@ -1520,40 +1477,12 @@
   (assert (in_range1 e1))
 
 ;; H
-  (assert (wraps_around__function_guard
-  (wraps_around (mk___rep1 s__split_fields4 s__attr__tag))
-  (mk___rep1 s__split_fields4 s__attr__tag)))
-
-;; H
-  (assert (last__function_guard
-  (last4 (mk___rep1 s__split_fields4 s__attr__tag))
-  (mk___rep1 s__split_fields4 s__attr__tag)))
-
-;; H
-  (assert (last__function_guard
-  (last4 (mk___rep1 s__split_fields4 s__attr__tag))
-  (mk___rep1 s__split_fields4 s__attr__tag)))
-
-;; H
-  (assert (size__function_guard
-  (size
-  (mk___rep
-  (mk___split_fields s__split_fields1 s__split_fields2
-  (hide_ext__ s__split_fields s__split_fields3)) s__attr__tag))
-  (mk___rep
-  (mk___split_fields s__split_fields1 s__split_fields2
-  (hide_ext__ s__split_fields s__split_fields3)) s__attr__tag)))
-
-;; H
   (assert
   (and
+  (= temp___5792 (get_model__3 (mk___rep1 s__split_fields4 s__attr__tag)))
+  (and (dynamic_invariant1 temp___5792 true false true)
   (and
-  (= temp___7322 (get_model__3 (mk___rep1 s__split_fields4 s__attr__tag)))
-  (get_model__3__function_guard temp___7322
-  (mk___rep1 s__split_fields4 s__attr__tag)))
-  (and (dynamic_invariant1 temp___7322 true false true)
-  (and
-  (= temp___7322 (ite (= (wraps_around
+  (= temp___5792 (ite (= (wraps_around
                          (mk___rep1 s__split_fields4 s__attr__tag)) true)
                  (let ((stackp__get_model__3__R84s (last4
                                                    (mk___rep1
@@ -1566,68 +1495,68 @@
                  s__split_fields1
                  (slide
                  (concat1 s__split_fields1
-                 (to_rep1 (first5 (mk2 (to_rep3 s__split_fields) 100)))
+                 (to_rep1 (first4 (mk2 (to_rep3 s__split_fields) 100)))
                  (to_rep1 (last6 (mk2 (to_rep3 s__split_fields) 100)))
                  s__split_fields1
-                 (to_rep1 (first7 (mk3 1 stackp__get_model__3__R84s)))
-                 (to_rep1 (last9 (mk3 1 stackp__get_model__3__R84s))))
-                 (to_rep1 (first5 (mk2 (to_rep3 s__split_fields) 100))) 1))
+                 (to_rep1 (first6 (mk3 1 stackp__get_model__3__R84s)))
+                 (to_rep1 (last8 (mk3 1 stackp__get_model__3__R84s))))
+                 (to_rep1 (first4 (mk2 (to_rep3 s__split_fields) 100))) 1))
                  (mk
                  (to_rep1
                  (first2
                  (ite (= (length2
                          (mk___t2 s__split_fields1
                          (mk2 (to_rep3 s__split_fields) 100))) 0)
-                 (mk1 (to_rep1 (first7 (mk3 1 stackp__get_model__3__R84s)))
-                 (to_rep1 (last9 (mk3 1 stackp__get_model__3__R84s))))
+                 (mk1 (to_rep1 (first6 (mk3 1 stackp__get_model__3__R84s)))
+                 (to_rep1 (last8 (mk3 1 stackp__get_model__3__R84s))))
                  (mk1 1
                  (- (+ 1 (+ (ite (<= (to_rep1
-                                     (first5
+                                     (first4
                                      (mk2 (to_rep3 s__split_fields) 100))) 
                             (to_rep1
                             (last6 (mk2 (to_rep3 s__split_fields) 100))))
                             (+ (- (to_rep1
                                   (last6 (mk2 (to_rep3 s__split_fields) 100))) 
                             (to_rep1
-                            (first5 (mk2 (to_rep3 s__split_fields) 100)))) 1)
+                            (first4 (mk2 (to_rep3 s__split_fields) 100)))) 1)
                             0) (ite (<= (to_rep1
-                                        (first7
+                                        (first6
                                         (mk3 1 stackp__get_model__3__R84s))) 
                                (to_rep1
-                               (last9 (mk3 1 stackp__get_model__3__R84s))))
+                               (last8 (mk3 1 stackp__get_model__3__R84s))))
                                (+ (- (to_rep1
-                                     (last9
+                                     (last8
                                      (mk3 1 stackp__get_model__3__R84s))) 
                                (to_rep1
-                               (first7 (mk3 1 stackp__get_model__3__R84s)))) 1)
+                               (first6 (mk3 1 stackp__get_model__3__R84s)))) 1)
                                0))) 1)))))
                  (to_rep1
                  (last2
                  (ite (= (length2
                          (mk___t2 s__split_fields1
                          (mk2 (to_rep3 s__split_fields) 100))) 0)
-                 (mk1 (to_rep1 (first7 (mk3 1 stackp__get_model__3__R84s)))
-                 (to_rep1 (last9 (mk3 1 stackp__get_model__3__R84s))))
+                 (mk1 (to_rep1 (first6 (mk3 1 stackp__get_model__3__R84s)))
+                 (to_rep1 (last8 (mk3 1 stackp__get_model__3__R84s))))
                  (mk1 1
                  (- (+ 1 (+ (ite (<= (to_rep1
-                                     (first5
+                                     (first4
                                      (mk2 (to_rep3 s__split_fields) 100))) 
                             (to_rep1
                             (last6 (mk2 (to_rep3 s__split_fields) 100))))
                             (+ (- (to_rep1
                                   (last6 (mk2 (to_rep3 s__split_fields) 100))) 
                             (to_rep1
-                            (first5 (mk2 (to_rep3 s__split_fields) 100)))) 1)
+                            (first4 (mk2 (to_rep3 s__split_fields) 100)))) 1)
                             0) (ite (<= (to_rep1
-                                        (first7
+                                        (first6
                                         (mk3 1 stackp__get_model__3__R84s))) 
                                (to_rep1
-                               (last9 (mk3 1 stackp__get_model__3__R84s))))
+                               (last8 (mk3 1 stackp__get_model__3__R84s))))
                                (+ (- (to_rep1
-                                     (last9
+                                     (last8
                                      (mk3 1 stackp__get_model__3__R84s))) 
                                (to_rep1
-                               (first7 (mk3 1 stackp__get_model__3__R84s)))) 1)
+                               (first6 (mk3 1 stackp__get_model__3__R84s)))) 1)
                                0))) 1))))))))
                  (let ((stackp__get_model__3__R87s (last4
                                                    (mk___rep1
@@ -1636,12 +1565,12 @@
                  (mk___t s__split_fields1
                  (mk
                  (to_rep1
-                 (first10
+                 (first8
                  (mk4 (to_rep3 s__split_fields) stackp__get_model__3__R87s)))
                  (to_rep1
-                 (last12
+                 (last10
                  (mk4 (to_rep3 s__split_fields) stackp__get_model__3__R87s))))))))
-  (= (length temp___7322) (size
+  (= (length temp___5792) (size
                           (mk___rep
                           (mk___split_fields s__split_fields1
                           s__split_fields2
@@ -1649,7 +1578,7 @@
                           s__attr__tag)))))))
 
 ;; H
-  (assert (not (= (length temp___7322) 0)))
+  (assert (not (= (length temp___5792) 0)))
 
 ;; H
   (assert (=> (<= 1 1) (= o (+ (- 1 1) 1))))
@@ -1659,19 +1588,19 @@
 
 ;; H
   (assert
-  (=> (<= (to_rep1 (first temp___7321)) (to_rep1 (last temp___7321)))
-  (= o1 (+ (- (to_rep1 (last temp___7321)) (to_rep1 (first temp___7321))) 1))))
+  (=> (<= (to_rep1 (first temp___5791)) (to_rep1 (last temp___5791)))
+  (= o1 (+ (- (to_rep1 (last temp___5791)) (to_rep1 (first temp___5791))) 1))))
 
 ;; H
   (assert
-  (=> (not (<= (to_rep1 (first temp___7321)) (to_rep1 (last temp___7321))))
+  (=> (not (<= (to_rep1 (first temp___5791)) (to_rep1 (last temp___5791))))
   (= o1 0)))
 
 ;; H
   (assert (= o2 (+ o1 o)))
 
 ;; H
-  (assert (= o3 (+ (to_rep1 (first temp___7321)) o2)))
+  (assert (= o3 (+ (to_rep1 (first temp___5791)) o2)))
 
 ;; H
   (assert (= o4 (- o3 1)))

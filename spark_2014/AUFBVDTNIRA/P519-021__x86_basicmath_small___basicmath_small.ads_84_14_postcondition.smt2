@@ -494,7 +494,6 @@
   (forall ((x86__memory (Array (_ BitVec 64) unsigned8)))
   (! (=> (dynamic_invariant addr true true true)
      (let ((result (readmem64 addr x86__memory)))
-     (=> (readmem64__function_guard result addr x86__memory)
      (and
      (and
      (and
@@ -519,8 +518,8 @@
      (to_rep (select x86__memory (bvadd addr ((_ int2bv 64) 6))))) ((_ int2bv 64) 281474976710656))))
      (= (bvand result ((_ int2bv 64) 18374686479671623680)) (bvmul ((_ zero_extend 56) 
      (to_rep (select x86__memory (bvadd addr ((_ int2bv 64) 7))))) ((_ int2bv 64) 72057594037927936))))
-     (dynamic_invariant result true false true))))) :pattern ((readmem64 addr
-                                                              x86__memory)) ))))
+     (dynamic_invariant result true false true)))) :pattern ((readmem64 addr
+                                                             x86__memory)) ))))
 
 (define-fun dynamic_invariant1 ((temp___expr_220 (_ BitVec 8))
   (temp___is_init_217 Bool) (temp___skip_constant_218 Bool)
@@ -566,49 +565,49 @@
 
 (declare-fun memory () (Array (_ BitVec 64) unsigned8))
 
-(declare-fun temp___574 () (_ BitVec 64))
+(declare-fun temp___456 () (_ BitVec 64))
 
-(declare-fun temp___575 () (_ BitVec 64))
+(declare-fun temp___457 () (_ BitVec 64))
 
-(declare-fun temp___573 () (_ BitVec 64))
+(declare-fun temp___455 () (_ BitVec 64))
 
-(declare-fun temp___572 () (_ BitVec 64))
+(declare-fun temp___454 () (_ BitVec 64))
 
-(declare-fun temp___576 () (Array (_ BitVec 64) unsigned8))
+(declare-fun temp___458 () (Array (_ BitVec 64) unsigned8))
 
-(declare-fun temp___570 () (_ BitVec 64))
+(declare-fun temp___452 () (_ BitVec 64))
 
-(declare-fun temp___571 () (Array (_ BitVec 64) unsigned8))
+(declare-fun temp___453 () (Array (_ BitVec 64) unsigned8))
 
-(declare-fun temp___568 () (_ BitVec 64))
+(declare-fun temp___450 () (_ BitVec 64))
 
-(declare-fun temp___569 () Bool)
+(declare-fun temp___451 () Bool)
 
-(declare-fun temp___566 () (_ BitVec 64))
+(declare-fun temp___448 () (_ BitVec 64))
 
-(declare-fun temp___567 () (_ BitVec 64))
+(declare-fun temp___449 () (_ BitVec 64))
 
-(declare-fun temp___564 () (_ BitVec 64))
+(declare-fun temp___446 () (_ BitVec 64))
 
-(declare-fun temp___565 () Bool)
+(declare-fun temp___447 () Bool)
 
-(declare-fun temp___563 () (_ BitVec 64))
+(declare-fun temp___445 () (_ BitVec 64))
 
-(declare-fun temp___561 () (_ BitVec 64))
+(declare-fun temp___443 () (_ BitVec 64))
 
-(declare-fun temp___562 () Bool)
+(declare-fun temp___444 () Bool)
 
-(declare-fun temp___560 () (_ BitVec 64))
+(declare-fun temp___442 () (_ BitVec 64))
 
-(declare-fun temp___557 () (_ BitVec 64))
+(declare-fun temp___439 () (_ BitVec 64))
 
-(declare-fun temp___558 () (_ BitVec 64))
+(declare-fun temp___440 () (_ BitVec 64))
 
-(declare-fun temp___559 () (_ BitVec 64))
+(declare-fun temp___441 () (_ BitVec 64))
 
-(declare-fun temp___556 () Bool)
+(declare-fun temp___438 () Bool)
 
-(declare-fun temp___555 () (_ BitVec 64))
+(declare-fun temp___437 () (_ BitVec 64))
 
 (declare-fun o () (_ BitVec 64))
 
@@ -933,73 +932,73 @@
 (declare-fun memory10 () (Array (_ BitVec 64) unsigned8))
 
 ;; H
-  (assert (= temp___574 rbx))
+  (assert (= temp___456 rbx))
 
 ;; H
-  (assert (= temp___575 rsp))
+  (assert (= temp___457 rsp))
 
 ;; H
-  (assert (= temp___573 xmm3))
+  (assert (= temp___455 xmm3))
 
 ;; H
-  (assert (= temp___572 rsp))
+  (assert (= temp___454 rsp))
 
 ;; H
-  (assert (= temp___576 memory))
+  (assert (= temp___458 memory))
 
 ;; H
-  (assert (= temp___570 rsi))
+  (assert (= temp___452 rsi))
 
 ;; H
-  (assert (= temp___571 memory))
+  (assert (= temp___453 memory))
 
 ;; H
-  (assert (= temp___568 xmm2))
+  (assert (= temp___450 xmm2))
 
 ;; H
-  (assert (= temp___569 overflowflag))
+  (assert (= temp___451 overflowflag))
 
 ;; H
-  (assert (= temp___566 r13))
+  (assert (= temp___448 r13))
 
 ;; H
-  (assert (= temp___567 xmm7))
+  (assert (= temp___449 xmm7))
 
 ;; H
-  (assert (= temp___564 xmm1))
+  (assert (= temp___446 xmm1))
 
 ;; H
-  (assert (= temp___565 signflag))
+  (assert (= temp___447 signflag))
 
 ;; H
-  (assert (= temp___563 rax))
+  (assert (= temp___445 rax))
 
 ;; H
-  (assert (= temp___561 xmm0))
+  (assert (= temp___443 xmm0))
 
 ;; H
-  (assert (= temp___562 carryflag))
+  (assert (= temp___444 carryflag))
 
 ;; H
-  (assert (= temp___560 rbp))
+  (assert (= temp___442 rbp))
 
 ;; H
-  (assert (= temp___557 xmm5))
+  (assert (= temp___439 xmm5))
 
 ;; H
-  (assert (= temp___558 rdi))
+  (assert (= temp___440 rdi))
 
 ;; H
-  (assert (= temp___559 r12))
+  (assert (= temp___441 r12))
 
 ;; H
-  (assert (= temp___556 zeroflag))
+  (assert (= temp___438 zeroflag))
 
 ;; H
-  (assert (= temp___555 xmm4))
+  (assert (= temp___437 xmm4))
 
 ;; H
-  (assert (= rsp1 temp___575))
+  (assert (= rsp1 temp___457))
 
 ;; H
   (assert
@@ -1036,13 +1035,11 @@
   (not (= i (bvadd rsp1 ((_ int2bv 64) 13)))))
   (not (= i (bvadd rsp1 ((_ int2bv 64) 14)))))
   (not (= i (bvadd rsp1 ((_ int2bv 64) 15)))))
-  (= (to_rep (select memory1 i)) (to_rep (select temp___576 i)))))))
+  (= (to_rep (select memory1 i)) (to_rep (select temp___458 i)))))))
 
 ;; H
   (assert
-  (and
   (and (= o (readmem64 ((_ int2bv 64) 4198744) memory1))
-  (readmem64__function_guard o ((_ int2bv 64) 4198744) memory1))
   (and
   (and
   (and
@@ -1154,9 +1151,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o1 (readmem64 ((_ int2bv 64) 4198856) memory3))
-  (readmem64__function_guard o1 ((_ int2bv 64) 4198856) memory3))
   (and
   (and
   (and
@@ -1204,12 +1199,9 @@
 ;; H
   (assert
   (and
-  (and
   (= o2 (readmem64
         (bvsub (bvadd rsp2 ((_ int2bv 64) 152)) ((_ int2bv 64) 144)) 
         memory3))
-  (readmem64__function_guard o2
-  (bvsub (bvadd rsp2 ((_ int2bv 64) 152)) ((_ int2bv 64) 144)) memory3))
   (and
   (and
   (and

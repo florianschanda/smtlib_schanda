@@ -446,60 +446,6 @@
 (define-fun mod_string__ref___projection ((a mod_string__ref)) us_t (mod_string__content
                                                                     a))
 
-(declare-sort tfiveP1 0)
-
-(declare-fun attr__ATTRIBUTE_MODULUS1 () (_ BitVec 8))
-
-(define-fun in_range2 ((x (_ BitVec 8))) Bool (and (bvule ((_ int2bv 8) 1) x)
-                                              (bvule x ((_ int2bv 8) 5))))
-
-(define-fun in_range_int ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq5 ((x (_ BitVec 8))
-  (y (_ BitVec 8))) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 ((_ BitVec 8)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) (_ BitVec 8))
-
-(declare-fun user_eq4 (tfiveP1 tfiveP1) Bool)
-
-(declare-fun dummy4 () tfiveP1)
-
-(declare-datatypes ()
-((tfiveP1__ref (mk_tfiveP1__ref (tfiveP1__content tfiveP1)))))
-(define-fun tfiveP1__ref___projection ((a tfiveP1__ref)) tfiveP1 (tfiveP1__content
-                                                                 a))
-
-(declare-sort tTxSP1 0)
-
-(declare-fun attr__ATTRIBUTE_MODULUS2 () (_ BitVec 8))
-
-(define-fun in_range3 ((x (_ BitVec 8))) Bool (and (bvule ((_ int2bv 8) 1) x)
-                                              (bvule x ((_ int2bv 8) 10))))
-
-(define-fun in_range_int1 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq6 ((x (_ BitVec 8))
-  (y (_ BitVec 8))) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 ((_ BitVec 8)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) (_ BitVec 8))
-
-(declare-fun user_eq5 (tTxSP1 tTxSP1) Bool)
-
-(declare-fun dummy5 () tTxSP1)
-
-(declare-datatypes ()
-((tTxSP1__ref (mk_tTxSP1__ref (tTxSP1__content tTxSP1)))))
-(define-fun tTxSP1__ref___projection ((a tTxSP1__ref)) tTxSP1 (tTxSP1__content
-                                                              a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
 (declare-fun y__first () mod_8)
@@ -679,11 +625,7 @@
 
 (declare-fun f () (Array (_ BitVec 8) character))
 
-(declare-fun o () (Array (_ BitVec 8) character))
-
-(declare-fun o1 () (Array (_ BitVec 8) character))
-
-(declare-fun o2 () Int)
+(declare-fun o () Int)
 
 (declare-fun result () (Array (_ BitVec 8) character))
 
@@ -702,13 +644,10 @@
 (declare-fun f1 () (Array (_ BitVec 8) character))
 
 ;; H
-  (assert (= o (temp___String_Literal_162 Tuple0)))
-
-;; H
   (assert (= (mk_map__ref result) (mk_map__ref x)))
 
 ;; H
-  (assert (= x1 o))
+  (assert (= x1 (temp___String_Literal_162 Tuple0)))
 
 ;; H
   (assert (= (mk_map__ref result1) (mk_map__ref y)))
@@ -749,13 +688,10 @@
   (to_rep z__first) (to_rep z__last)))
 
 ;; H
-  (assert (= o1 (temp___String_Literal_167 Tuple0)))
-
-;; H
   (assert (= (mk_map__ref result3) (mk_map__ref f)))
 
 ;; H
-  (assert (= f1 o1))
+  (assert (= f1 (temp___String_Literal_167 Tuple0)))
 
 ;; H
   (assert (= (to_rep y__first) ((_ int2bv 8) 0)))
@@ -763,15 +699,15 @@
 ;; H
   (assert
   (=> (<= (bv2nat (to_rep z__first)) (bv2nat (to_rep z__last)))
-  (= o2 (+ (- (bv2nat (to_rep z__last)) (bv2nat (to_rep z__first))) 1))))
+  (= o (+ (- (bv2nat (to_rep z__last)) (bv2nat (to_rep z__first))) 1))))
 
 ;; H
   (assert
   (=> (not (<= (bv2nat (to_rep z__first)) (bv2nat (to_rep z__last))))
-  (= o2 0)))
+  (= o 0)))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (in_range o2)))
+  (not (in_range o)))
 (check-sat)

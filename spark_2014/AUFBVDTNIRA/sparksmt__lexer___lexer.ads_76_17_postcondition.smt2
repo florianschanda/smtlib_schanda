@@ -578,14 +578,14 @@
 (define-fun read_result__ref___projection ((a read_result__ref)) us_rep1 
   (read_result__content a))
 
-(define-fun default_initial_assumption ((temp___expr_470 us_rep1)
-  (temp___skip_top_level_471 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_469 us_rep1)
+  (temp___skip_top_level_470 Bool)) Bool (and
                                          (= (attr__constrained
-                                            temp___expr_470) false)
+                                            temp___expr_469) false)
                                          (= (to_rep2
                                             (rec__file_io__read_result__status
                                             (us_split_discrs1
-                                            temp___expr_470))) 2)))
+                                            temp___expr_469))) 2)))
 
 (declare-sort name_id 0)
 
@@ -608,12 +608,12 @@
 (define-fun name_id__ref___projection ((a name_id__ref)) name_id (name_id__content
                                                                  a))
 
-(define-fun dynamic_invariant3 ((temp___expr_569 Int)
-  (temp___is_init_566 Bool) (temp___skip_constant_567 Bool)
-  (temp___do_toplevel_568 Bool)) Bool (=>
-                                      (or (= temp___is_init_566 true)
+(define-fun dynamic_invariant3 ((temp___expr_563 Int)
+  (temp___is_init_560 Bool) (temp___skip_constant_561 Bool)
+  (temp___do_toplevel_562 Bool)) Bool (=>
+                                      (or (= temp___is_init_560 true)
                                       (<= 0 2147483647)) (in_range6
-                                      temp___expr_569)))
+                                      temp___expr_563)))
 
 (declare-fun invariant__ (us_private) Bool)
 
@@ -666,22 +666,7 @@
   (lexer__next_read__fields us_split_fields))
   (forall ((lexer__current_read__discrs us_split_discrs)
   (lexer__next_read__discrs us_split_discrs))
-  (! (=> (invariant____function_guard1
-     (invariant__1 names__name_table lexer__the_filename lexer__the_file
-     lexer__current_read__fields lexer__current_read__discrs
-     lexer__current_line lexer__current_col lexer__current_pos
-     lexer__next_read__fields lexer__next_read__discrs) names__name_table
-     lexer__the_filename lexer__the_file lexer__current_read__fields
-     lexer__current_read__discrs lexer__current_line lexer__current_col
-     lexer__current_pos lexer__next_read__fields lexer__next_read__discrs)
-     (and (invariant____function_guard (invariant__ names__name_table)
-     names__name_table)
-     (and (local_invariant__function_guard
-     (local_invariant lexer__current_read__fields lexer__current_read__discrs
-     lexer__next_read__fields lexer__next_read__discrs)
-     lexer__current_read__fields lexer__current_read__discrs
-     lexer__next_read__fields lexer__next_read__discrs)
-     (=
+  (! (=
      (= (invariant__1 names__name_table lexer__the_filename lexer__the_file
         lexer__current_read__fields lexer__current_read__discrs
         lexer__current_line lexer__current_col lexer__current_pos
@@ -689,17 +674,17 @@
      (and (= (invariant__ names__name_table) true)
      (= (local_invariant lexer__current_read__fields
         lexer__current_read__discrs lexer__next_read__fields
-        lexer__next_read__discrs) true)))))) :pattern ((invariant__1
-                                                       names__name_table
-                                                       lexer__the_filename
-                                                       lexer__the_file
-                                                       lexer__current_read__fields
-                                                       lexer__current_read__discrs
-                                                       lexer__current_line
-                                                       lexer__current_col
-                                                       lexer__current_pos
-                                                       lexer__next_read__fields
-                                                       lexer__next_read__discrs)) )))))))
+        lexer__next_read__discrs) true))) :pattern ((invariant__1
+                                                    names__name_table
+                                                    lexer__the_filename
+                                                    lexer__the_file
+                                                    lexer__current_read__fields
+                                                    lexer__current_read__discrs
+                                                    lexer__current_line
+                                                    lexer__current_col
+                                                    lexer__current_pos
+                                                    lexer__next_read__fields
+                                                    lexer__next_read__discrs)) )))))))
 
 (declare-fun filename () us_t)
 
@@ -727,12 +712,7 @@
   (lexer__next_read__fields us_split_fields))
   (forall ((lexer__current_read__discrs us_split_discrs)
   (lexer__next_read__discrs us_split_discrs))
-  (! (=> (local_invariant__function_guard
-     (local_invariant lexer__current_read__fields lexer__current_read__discrs
-     lexer__next_read__fields lexer__next_read__discrs)
-     lexer__current_read__fields lexer__current_read__discrs
-     lexer__next_read__fields lexer__next_read__discrs)
-     (=
+  (! (=
      (= (local_invariant lexer__current_read__fields
         lexer__current_read__discrs lexer__next_read__fields
         lexer__next_read__discrs) true)
@@ -744,17 +724,17 @@
      (not
      (= (attr__constrained
         (mk___rep lexer__next_read__discrs lexer__next_read__fields
-        next_read__attr__constrained)) true))))) :pattern ((local_invariant
-                                                           lexer__current_read__fields
-                                                           lexer__current_read__discrs
-                                                           lexer__next_read__fields
-                                                           lexer__next_read__discrs)) ))))
+        next_read__attr__constrained)) true)))) :pattern ((local_invariant
+                                                          lexer__current_read__fields
+                                                          lexer__current_read__discrs
+                                                          lexer__next_read__fields
+                                                          lexer__next_read__discrs)) ))))
 
-(define-fun dynamic_invariant6 ((temp___expr_462 Int)
-  (temp___is_init_459 Bool) (temp___skip_constant_460 Bool)
-  (temp___do_toplevel_461 Bool)) Bool (=>
-                                      (or (= temp___is_init_459 true)
-                                      (<= 0 2)) (in_range5 temp___expr_462)))
+(define-fun dynamic_invariant6 ((temp___expr_461 Int)
+  (temp___is_init_458 Bool) (temp___skip_constant_459 Bool)
+  (temp___do_toplevel_460 Bool)) Bool (=>
+                                      (or (= temp___is_init_458 true)
+                                      (<= 0 2)) (in_range5 temp___expr_461)))
 
 (declare-fun name_table () us_private)
 
@@ -849,17 +829,6 @@
 
 (define-fun current_read__split_fields3 () us_split_fields (mk___split_fields
                                                            current_read__split_fields))
-
-;; H
-  (assert (invariant____function_guard (invariant__ name_table) name_table))
-
-;; H
-  (assert (invariant____function_guard (invariant__ name_table1)
-  name_table1))
-
-;; H
-  (assert (invariant____function_guard (invariant__ name_table1)
-  name_table1))
 
 ;; H
   (assert (=> (<= 0 2147483647) (in_range6 the_filename)))
@@ -984,25 +953,6 @@
 
 ;; H
   (assert (= name_table3 name_table1))
-
-;; H
-  (assert (invariant____function_guard1
-  (invariant__1 (us_private__content name_table2)
-  (int__content the_filename2) (file__content the_file1)
-  (us_split_fields__content current_read__split_fields1)
-  (us_split_discrs__content current_read__split_discrs1)
-  (int__content current_line3) (int__content current_col3)
-  (int__content current_pos3)
-  (us_split_fields__content next_read__split_fields1)
-  (us_split_discrs__content next_read__split_discrs1))
-  (us_private__content name_table2) (int__content the_filename2)
-  (file__content the_file1)
-  (us_split_fields__content current_read__split_fields1)
-  (us_split_discrs__content current_read__split_discrs1)
-  (int__content current_line3) (int__content current_col3)
-  (int__content current_pos3)
-  (us_split_fields__content next_read__split_fields1)
-  (us_split_discrs__content next_read__split_discrs1)))
 
 (assert
 ;; WP_parameter_def

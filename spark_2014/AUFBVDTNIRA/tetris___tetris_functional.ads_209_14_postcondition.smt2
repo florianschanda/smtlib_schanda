@@ -984,49 +984,7 @@
   (assert
   (forall ((b (Array Int (Array Int cell))))
   (forall ((p us_rep))
-  (! (=> (no_overlap__function_guard (no_overlap b p) b p)
-     (and (is_empty__function_guard
-     (is_empty b
-     (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p)))
-     (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p)))) b
-     (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p)))
-     (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))))
-     (and (is_empty__function_guard
-     (is_empty b
-     (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p)))
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) 1))
-     b (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p)))
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) 1))
-     (and (is_empty__function_guard
-     (is_empty b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) 1)
-     (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p)))) b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) 1)
-     (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))))
-     (and (is_empty__function_guard
-     (is_empty b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) 1)
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) 1))
-     b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) 1)
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) 1))
-     (and
-     (forall ((y Int) (x Int)) (is_empty__function_guard
-     (is_empty b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) y)
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) x))
-     b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) y)
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) x)))
-     (and
-     (forall ((y Int) (x Int)) (is_empty__function_guard
-     (is_empty b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) y)
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) x))
-     b
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) y)
-     (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) x)))
-     (= (= (no_overlap b p) true)
+  (! (= (= (no_overlap b p) true)
      (ite (= (to_rep1
              (rec__tetris_functional__piece__s (us_split_fields1 p))) 2)
      (and
@@ -1051,10 +1009,10 @@
      (forall ((x Int))
      (=> (and (<= 0 x) (<= x 3))
      (=>
-     (= (let ((temp___663 (select possible_i_shapes (to_rep4
+     (= (let ((temp___650 (select possible_i_shapes (to_rep4
                                                     (rec__tetris_functional__piece__d
                                                     (us_split_fields1 p))))))
-        (get temp___663 y x)) true)
+        (get temp___650 y x)) true)
      (= (is_empty b
         (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) y)
         (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) x)) true))))))
@@ -1063,17 +1021,17 @@
      (forall ((x Int))
      (=> (and (<= 0 x) (<= x 2))
      (=>
-     (= (let ((temp___665 (get1 possible_three_shapes
+     (= (let ((temp___651 (get1 possible_three_shapes
                           (to_rep1
                           (rec__tetris_functional__piece__s
                           (us_split_fields1 p)))
                           (to_rep4
                           (rec__tetris_functional__piece__d
                           (us_split_fields1 p))))))
-        (get temp___665 y x)) true)
+        (get temp___651 y x)) true)
      (= (is_empty b
         (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) y)
-        (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) x)) true)))))))))))))))) :pattern (
+        (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) x)) true))))))))) :pattern (
   (no_overlap b p)) ))))
 
 (declare-fun valid_configuration ((Array Int (Array Int cell))
@@ -1095,20 +1053,7 @@
   (forall ((tetris_functional__cur_board (Array Int (Array Int cell))))
   (forall ((tetris_functional__cur_piece__fields us_split_fields))
   (forall ((tetris_functional__cur_state Int))
-  (! (=> (valid_configuration__function_guard
-     (valid_configuration tetris_functional__cur_board
-     tetris_functional__cur_piece__fields tetris_functional__cur_state)
-     tetris_functional__cur_board tetris_functional__cur_piece__fields
-     tetris_functional__cur_state)
-     (and (no_overlap__function_guard
-     (no_overlap tetris_functional__cur_board
-     (mk___rep tetris_functional__cur_piece__fields))
-     tetris_functional__cur_board
-     (mk___rep tetris_functional__cur_piece__fields))
-     (and (no_complete_lines__function_guard
-     (no_complete_lines tetris_functional__cur_board)
-     tetris_functional__cur_board)
-     (=
+  (! (=
      (= (valid_configuration tetris_functional__cur_board
         tetris_functional__cur_piece__fields tetris_functional__cur_state) true)
      (ite (or (= tetris_functional__cur_state 0)
@@ -1116,7 +1061,7 @@
      (= (no_overlap tetris_functional__cur_board
         (mk___rep tetris_functional__cur_piece__fields)) true)
      (=> (not (= tetris_functional__cur_state 2))
-     (= (no_complete_lines tetris_functional__cur_board) true))))))) :pattern (
+     (= (no_complete_lines tetris_functional__cur_board) true)))) :pattern (
   (valid_configuration tetris_functional__cur_board
   tetris_functional__cur_piece__fields tetris_functional__cur_state)) )))))
 
@@ -1141,11 +1086,11 @@
 (define-fun action__ref___projection ((a action__ref)) action (action__content
                                                               a))
 
-(define-fun dynamic_invariant1 ((temp___expr_677 Int)
-  (temp___is_init_674 Bool) (temp___skip_constant_675 Bool)
-  (temp___do_toplevel_676 Bool)) Bool (=>
-                                      (or (= temp___is_init_674 true)
-                                      (<= 0 4)) (in_range7 temp___expr_677)))
+(define-fun dynamic_invariant1 ((temp___expr_659 Int)
+  (temp___is_init_656 Bool) (temp___skip_constant_657 Bool)
+  (temp___do_toplevel_658 Bool)) Bool (=>
+                                      (or (= temp___is_init_656 true)
+                                      (<= 0 4)) (in_range7 temp___expr_659)))
 
 (declare-fun move_is_possible (us_rep Int) Bool)
 
@@ -1158,14 +1103,13 @@
   (assert
   (forall ((p us_rep))
   (forall ((a Int))
-  (! (=> (move_is_possible__function_guard (move_is_possible p a) p a)
-     (= (= (move_is_possible p a) true)
+  (! (= (= (move_is_possible p a) true)
      (ite (= a 0) (in_range3
      (- (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) 1))
      (ite (= a 1) (in_range3
      (+ (to_rep2 (rec__tetris_functional__piece__x (us_split_fields1 p))) 1))
      (=> (= a 2) (in_range4
-     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) 1))))))) :pattern (
+     (+ (to_rep3 (rec__tetris_functional__piece__y (us_split_fields1 p))) 1)))))) :pattern (
   (move_is_possible p a)) ))))
 
 (declare-fun turn_direction (Int Int) Int)
@@ -1177,22 +1121,13 @@
 (declare-fun move__function_guard (us_rep us_rep Int) Bool)
 
 ;; move__post_axiom
-  (assert
-  (forall ((p us_rep))
-  (forall ((a Int)) (! (move_is_possible__function_guard
-  (move_is_possible p a) p a) :pattern ((move p a)) ))))
+  (assert true)
 
 ;; move__def_axiom
   (assert
   (forall ((p us_rep))
   (forall ((a Int))
-  (! (=>
-     (and (dynamic_invariant1 a true true true) (move__function_guard
-     (move p a) p a))
-     (and (turn_direction__function_guard
-     (turn_direction
-     (to_rep4 (rec__tetris_functional__piece__d (us_split_fields1 p))) a)
-     (to_rep4 (rec__tetris_functional__piece__d (us_split_fields1 p))) a)
+  (! (=> (dynamic_invariant1 a true true true)
      (= (move p a) (ite (= a 0)
                    (mk___rep
                    (let ((usq_ (us_split_fields1 p)))
@@ -1228,7 +1163,7 @@
                    (to_rep4
                    (rec__tetris_functional__piece__d (us_split_fields1 p)))
                    a)) (rec__tetris_functional__piece__x usq_)
-                   (rec__tetris_functional__piece__y usq_)))))))))) :pattern (
+                   (rec__tetris_functional__piece__y usq_))))))))) :pattern (
   (move p a)) ))))
 
 (declare-fun a () Int)
@@ -2080,10 +2015,9 @@
   (assert
   (forall ((b (Array Int (Array Int cell))))
   (forall ((y Int) (x Int))
-  (! (=> (is_empty__function_guard (is_empty b y x) b y x)
-     (= (= (is_empty b y x) true)
+  (! (= (= (is_empty b y x) true)
      (and (and (in_range9 x) (in_range10 y))
-     (= (to_rep (let ((temp___635 (select b y))) (select temp___635 x))) 0)))) :pattern (
+     (= (to_rep (let ((temp___635 (select b y))) (select temp___635 x))) 0))) :pattern (
   (is_empty b y x)) ))))
 
 (declare-fun is_complete_line ((Array Int cell)) Bool)
@@ -2096,10 +2030,9 @@
 ;; is_complete_line__def_axiom
   (assert
   (forall ((l (Array Int cell)))
-  (! (=> (is_complete_line__function_guard (is_complete_line l) l)
-     (= (= (is_complete_line l) true)
+  (! (= (= (is_complete_line l) true)
      (forall ((x Int))
-     (=> (and (<= 1 x) (<= x 10)) (not (= (to_rep (select l x)) 0)))))) :pattern (
+     (=> (and (<= 1 x) (<= x 10)) (not (= (to_rep (select l x)) 0))))) :pattern (
   (is_complete_line l)) )))
 
 ;; no_complete_lines__post_axiom
@@ -2108,15 +2041,11 @@
 ;; no_complete_lines__def_axiom
   (assert
   (forall ((b (Array Int (Array Int cell))))
-  (! (=> (no_complete_lines__function_guard (no_complete_lines b) b)
-     (and
-     (forall ((y Int)) (is_complete_line__function_guard
-     (is_complete_line (select b y)) (select b y)))
-     (= (= (no_complete_lines b) true)
+  (! (= (= (no_complete_lines b) true)
      (forall ((y Int))
      (=> (and (<= 1 y) (<= y 50))
-     (not (= (is_complete_line (select b y)) true))))))) :pattern ((no_complete_lines
-                                                                   b)) )))
+     (not (= (is_complete_line (select b y)) true))))) :pattern ((no_complete_lines
+                                                                 b)) )))
 
 (declare-sort turn_action 0)
 
@@ -2139,29 +2068,26 @@
 (define-fun turn_action__ref___projection ((a1 turn_action__ref)) turn_action 
   (turn_action__content a1))
 
-(define-fun dynamic_invariant10 ((temp___expr_689 Int)
-  (temp___is_init_686 Bool) (temp___skip_constant_687 Bool)
-  (temp___do_toplevel_688 Bool)) Bool (=>
-                                      (or (= temp___is_init_686 true)
-                                      (<= 3 4)) (in_range11 temp___expr_689)))
+(define-fun dynamic_invariant10 ((temp___expr_671 Int)
+  (temp___is_init_668 Bool) (temp___skip_constant_669 Bool)
+  (temp___do_toplevel_670 Bool)) Bool (=>
+                                      (or (= temp___is_init_668 true)
+                                      (<= 3 4)) (in_range11 temp___expr_671)))
 
 ;; turn_direction__post_axiom
   (assert
   (forall ((d Int) (t Int))
   (! (=>
      (and (dynamic_invariant9 d true true true) (dynamic_invariant10 t true
-     true true))
-     (let ((result (turn_direction d t)))
-     (=> (turn_direction__function_guard result d t) (dynamic_invariant9
-     result true false true)))) :pattern ((turn_direction d t)) )))
+     true true)) (dynamic_invariant9 (turn_direction d t) true false true)) :pattern (
+  (turn_direction d t)) )))
 
 ;; turn_direction__def_axiom
   (assert
   (forall ((d Int) (t Int))
   (! (=>
-     (and
      (and (dynamic_invariant9 d true true true) (dynamic_invariant10 t true
-     true true)) (turn_direction__function_guard (turn_direction d t) d t))
+     true true))
      (= (turn_direction d t) (ite (= t 3) (ite (= d 0) 3 (- d 1))
                              (ite (= d 3) 0 (+ d 1))))) :pattern ((turn_direction
                                                                   d t)) )))
@@ -2188,13 +2114,13 @@
 
 (declare-fun candidate__split_fields3 () py_coord)
 
-(declare-fun temp___748 () shape)
+(declare-fun temp___714 () shape)
 
-(declare-fun temp___7481 () direction)
+(declare-fun temp___7141 () direction)
 
-(declare-fun temp___7482 () px_coord)
+(declare-fun temp___7142 () px_coord)
 
-(declare-fun temp___7483 () py_coord)
+(declare-fun temp___7143 () py_coord)
 
 (declare-fun cur_piece__split_fields4 () shape)
 
@@ -2310,9 +2236,9 @@
                                                          cur_piece__split_fields6
                                                          cur_piece__split_fields7))
 
-(define-fun temp___7484 () us_rep (mk___rep
-                                  (mk___split_fields temp___748 temp___7481
-                                  temp___7482 temp___7483)))
+(define-fun temp___7144 () us_rep (mk___rep
+                                  (mk___split_fields temp___714 temp___7141
+                                  temp___7142 temp___7143)))
 
 (define-fun candidate__split_fields17 () us_split_fields__ref (mk___split_fields__ref
                                                               (mk___split_fields
@@ -2320,110 +2246,6 @@
                                                               candidate__split_fields1
                                                               candidate__split_fields2
                                                               candidate__split_fields3)))
-
-;; H
-  (assert (valid_configuration__function_guard
-  (valid_configuration cur_board
-  (mk___split_fields cur_piece__split_fields cur_piece__split_fields1
-  cur_piece__split_fields2 cur_piece__split_fields3) cur_state) cur_board
-  (mk___split_fields cur_piece__split_fields cur_piece__split_fields1
-  cur_piece__split_fields2 cur_piece__split_fields3) cur_state))
-
-;; H
-  (assert (turn_direction__function_guard
-  (turn_direction (to_rep4 cur_piece__split_fields1) a)
-  (to_rep4 cur_piece__split_fields1) a))
-
-;; H
-  (assert (is_empty__function_guard
-  (is_empty cur_board (to_rep3 candidate__split_fields11)
-  (to_rep2 candidate__split_fields10)) cur_board
-  (to_rep3 candidate__split_fields11) (to_rep2 candidate__split_fields10)))
-
-;; H
-  (assert (is_empty__function_guard
-  (is_empty cur_board (to_rep3 candidate__split_fields11)
-  (+ (to_rep2 candidate__split_fields10) 1)) cur_board
-  (to_rep3 candidate__split_fields11)
-  (+ (to_rep2 candidate__split_fields10) 1)))
-
-;; H
-  (assert (is_empty__function_guard
-  (is_empty cur_board (+ (to_rep3 candidate__split_fields11) 1)
-  (to_rep2 candidate__split_fields10)) cur_board
-  (+ (to_rep3 candidate__split_fields11) 1)
-  (to_rep2 candidate__split_fields10)))
-
-;; H
-  (assert (is_empty__function_guard
-  (is_empty cur_board (+ (to_rep3 candidate__split_fields11) 1)
-  (+ (to_rep2 candidate__split_fields10) 1)) cur_board
-  (+ (to_rep3 candidate__split_fields11) 1)
-  (+ (to_rep2 candidate__split_fields10) 1)))
-
-;; H
-  (assert
-  (forall ((y Int) (x Int)) (is_empty__function_guard
-  (is_empty cur_board (+ (to_rep3 candidate__split_fields11) y)
-  (+ (to_rep2 candidate__split_fields10) x)) cur_board
-  (+ (to_rep3 candidate__split_fields11) y)
-  (+ (to_rep2 candidate__split_fields10) x))))
-
-;; H
-  (assert
-  (forall ((y Int) (x Int)) (is_empty__function_guard
-  (is_empty cur_board (+ (to_rep3 candidate__split_fields11) y)
-  (+ (to_rep2 candidate__split_fields10) x)) cur_board
-  (+ (to_rep3 candidate__split_fields11) y)
-  (+ (to_rep2 candidate__split_fields10) x))))
-
-;; H
-  (assert (turn_direction__function_guard
-  (turn_direction (to_rep4 cur_piece__split_fields1) a)
-  (to_rep4 cur_piece__split_fields1) a))
-
-;; H
-  (assert (is_empty__function_guard
-  (is_empty cur_board (to_rep3 candidate__split_fields11)
-  (to_rep2 candidate__split_fields10)) cur_board
-  (to_rep3 candidate__split_fields11) (to_rep2 candidate__split_fields10)))
-
-;; H
-  (assert (is_empty__function_guard
-  (is_empty cur_board (to_rep3 candidate__split_fields11)
-  (+ (to_rep2 candidate__split_fields10) 1)) cur_board
-  (to_rep3 candidate__split_fields11)
-  (+ (to_rep2 candidate__split_fields10) 1)))
-
-;; H
-  (assert (is_empty__function_guard
-  (is_empty cur_board (+ (to_rep3 candidate__split_fields11) 1)
-  (to_rep2 candidate__split_fields10)) cur_board
-  (+ (to_rep3 candidate__split_fields11) 1)
-  (to_rep2 candidate__split_fields10)))
-
-;; H
-  (assert (is_empty__function_guard
-  (is_empty cur_board (+ (to_rep3 candidate__split_fields11) 1)
-  (+ (to_rep2 candidate__split_fields10) 1)) cur_board
-  (+ (to_rep3 candidate__split_fields11) 1)
-  (+ (to_rep2 candidate__split_fields10) 1)))
-
-;; H
-  (assert
-  (forall ((y Int) (x Int)) (is_empty__function_guard
-  (is_empty cur_board (+ (to_rep3 candidate__split_fields11) y)
-  (+ (to_rep2 candidate__split_fields10) x)) cur_board
-  (+ (to_rep3 candidate__split_fields11) y)
-  (+ (to_rep2 candidate__split_fields10) x))))
-
-;; H
-  (assert
-  (forall ((y Int) (x Int)) (is_empty__function_guard
-  (is_empty cur_board (+ (to_rep3 candidate__split_fields11) y)
-  (+ (to_rep2 candidate__split_fields10) x)) cur_board
-  (+ (to_rep3 candidate__split_fields11) y)
-  (+ (to_rep2 candidate__split_fields10) x))))
 
 ;; H
   (assert (in_range6 cur_state))
@@ -2455,16 +2277,11 @@
   (= cur_piece__split_fields16 cur_piece__split_fields19))))
   (and
   (and
-  (and
   (= result (move_is_possible
             (mk___rep
             (mk___split_fields cur_piece__split_fields
             cur_piece__split_fields1 cur_piece__split_fields2
             cur_piece__split_fields3)) a))
-  (move_is_possible__function_guard result
-  (mk___rep
-  (mk___split_fields cur_piece__split_fields cur_piece__split_fields1
-  cur_piece__split_fields2 cur_piece__split_fields3)) a))
   (= (= result true)
   (ite (= a 0) (in_range3 (- (to_rep2 cur_piece__split_fields2) 1))
   (ite (= a 1) (in_range3 (+ (to_rep2 cur_piece__split_fields2) 1))
@@ -2473,17 +2290,12 @@
   (and
   (and
   (and
-  (and
-  (= temp___7484 (move
+  (= temp___7144 (move
                  (mk___rep
                  (mk___split_fields cur_piece__split_fields
                  cur_piece__split_fields1 cur_piece__split_fields2
                  cur_piece__split_fields3)) a))
-  (move__function_guard temp___7484
-  (mk___rep
-  (mk___split_fields cur_piece__split_fields cur_piece__split_fields1
-  cur_piece__split_fields2 cur_piece__split_fields3)) a))
-  (= temp___7484 (ite (= a 0)
+  (= temp___7144 (ite (= a 0)
                  (mk___rep
                  (mk___split_fields cur_piece__split_fields
                  cur_piece__split_fields1
@@ -2506,16 +2318,13 @@
                  (turn_direction (to_rep4 cur_piece__split_fields1) a))
                  cur_piece__split_fields2 cur_piece__split_fields3)))))))
   (and (= result12 candidate__split_fields17)
-  (and (= temp___748 candidate__split_fields8)
-  (and (= temp___7481 candidate__split_fields9)
-  (and (= temp___7482 candidate__split_fields10)
-  (= temp___7483 candidate__split_fields11))))))
-  (and
+  (and (= temp___714 candidate__split_fields8)
+  (and (= temp___7141 candidate__split_fields9)
+  (and (= temp___7142 candidate__split_fields10)
+  (= temp___7143 candidate__split_fields11))))))
   (and
   (and
   (= result5 (no_overlap cur_board (mk___rep candidate__split_fields16)))
-  (no_overlap__function_guard result5 cur_board
-  (mk___rep candidate__split_fields16)))
   (= (= result5 true)
   (ite (= (to_rep1 candidate__split_fields8) 2)
   (and
@@ -2560,16 +2369,11 @@
   (and
   (and
   (and
-  (and
   (= result (move_is_possible
             (mk___rep
             (mk___split_fields cur_piece__split_fields
             cur_piece__split_fields1 cur_piece__split_fields2
             cur_piece__split_fields3)) a))
-  (move_is_possible__function_guard result
-  (mk___rep
-  (mk___split_fields cur_piece__split_fields cur_piece__split_fields1
-  cur_piece__split_fields2 cur_piece__split_fields3)) a))
   (= (= result true)
   (ite (= a 0) (in_range3 (- (to_rep2 cur_piece__split_fields2) 1))
   (ite (= a 1) (in_range3 (+ (to_rep2 cur_piece__split_fields2) 1))
@@ -2578,17 +2382,12 @@
   (and
   (and
   (and
-  (and
-  (= temp___7484 (move
+  (= temp___7144 (move
                  (mk___rep
                  (mk___split_fields cur_piece__split_fields
                  cur_piece__split_fields1 cur_piece__split_fields2
                  cur_piece__split_fields3)) a))
-  (move__function_guard temp___7484
-  (mk___rep
-  (mk___split_fields cur_piece__split_fields cur_piece__split_fields1
-  cur_piece__split_fields2 cur_piece__split_fields3)) a))
-  (= temp___7484 (ite (= a 0)
+  (= temp___7144 (ite (= a 0)
                  (mk___rep
                  (mk___split_fields cur_piece__split_fields
                  cur_piece__split_fields1
@@ -2611,16 +2410,13 @@
                  (turn_direction (to_rep4 cur_piece__split_fields1) a))
                  cur_piece__split_fields2 cur_piece__split_fields3)))))))
   (and (= result12 candidate__split_fields17)
-  (and (= temp___748 candidate__split_fields8)
-  (and (= temp___7481 candidate__split_fields9)
-  (and (= temp___7482 candidate__split_fields10)
-  (= temp___7483 candidate__split_fields11))))))
-  (and
+  (and (= temp___714 candidate__split_fields8)
+  (and (= temp___7141 candidate__split_fields9)
+  (and (= temp___7142 candidate__split_fields10)
+  (= temp___7143 candidate__split_fields11))))))
   (and
   (and
   (= result5 (no_overlap cur_board (mk___rep candidate__split_fields16)))
-  (no_overlap__function_guard result5 cur_board
-  (mk___rep candidate__split_fields16)))
   (= (= result5 true)
   (ite (= (to_rep1 candidate__split_fields8) 2)
   (and
@@ -2717,12 +2513,6 @@
 
 ;; H
   (assert (= cur_piece__split_fields18 cur_piece__split_fields16))
-
-;; H
-  (assert (valid_configuration__function_guard
-  (valid_configuration cur_board
-  (us_split_fields__content cur_piece__split_fields17) cur_state) cur_board
-  (us_split_fields__content cur_piece__split_fields17) cur_state))
 
 (assert
 ;; WP_parameter_def

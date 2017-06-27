@@ -186,59 +186,35 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(declare-sort t34b 0)
-
-(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2)))
-
-(define-fun bool_eq2 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
-
-(declare-fun user_eq1 (t34b t34b) Bool)
-
-(declare-fun dummy1 () t34b)
-
-(declare-datatypes () ((t34b__ref (mk_t34b__ref (t34b__content t34b)))))
-(define-fun t34b__ref___projection ((a t34b__ref)) t34b (t34b__content a))
-
-(declare-fun temp___417 (Int Int) (Array Int enum_t))
+(declare-fun temp___409 (Int Int) (Array Int enum_t))
 
 ;; def_axiom
   (assert
-  (forall ((temp___419 Int) (temp___420 Int))
-  (let ((temp___418 (temp___417 temp___419 temp___420)))
-  (forall ((temp___421 Int))
-  (ite (or (= temp___421 1) (= temp___421 2))
-  (= (select temp___418 temp___421) (of_rep temp___420))
-  (=> (= temp___421 0)
-  (= (select temp___418 temp___421) (of_rep temp___419))))))))
+  (forall ((temp___411 Int) (temp___412 Int))
+  (let ((temp___410 (temp___409 temp___411 temp___412)))
+  (forall ((temp___413 Int))
+  (ite (or (= temp___413 1) (= temp___413 2))
+  (= (select temp___410 temp___413) (of_rep temp___412))
+  (=> (= temp___413 0)
+  (= (select temp___410 temp___413) (of_rep temp___411))))))))
 
-(define-fun dynamic_invariant ((temp___expr_212 Int)
-  (temp___is_init_209 Bool) (temp___skip_constant_210 Bool)
-  (temp___do_toplevel_211 Bool)) Bool (=>
-                                      (or (= temp___is_init_209 true)
-                                      (<= 0 2)) (in_range temp___expr_212)))
+(define-fun dynamic_invariant ((temp___expr_204 Int)
+  (temp___is_init_201 Bool) (temp___skip_constant_202 Bool)
+  (temp___do_toplevel_203 Bool)) Bool (=>
+                                      (or (= temp___is_init_201 true)
+                                      (<= 0 2)) (in_range temp___expr_204)))
 
 (declare-fun m () (Array Int enum_t))
-
-(declare-fun o () (Array Int enum_t))
 
 (declare-fun result () (Array Int enum_t))
 
 (declare-fun m1 () (Array Int enum_t))
 
 ;; H
-  (assert (= o (temp___417 0 1)))
-
-;; H
   (assert (= result m))
 
 ;; H
-  (assert (= m1 o))
+  (assert (= m1 (temp___409 0 1)))
 
 (assert
 ;; WP_parameter_def

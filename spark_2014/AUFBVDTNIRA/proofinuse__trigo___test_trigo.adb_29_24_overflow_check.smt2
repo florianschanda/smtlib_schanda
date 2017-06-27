@@ -51,14 +51,10 @@
 
 (declare-fun pow2 (Int) Int)
 
-(declare-datatypes () ((mode (RNE2) (RNA2) (RTP2) (RTN2) (RTZ2))))
-(define-fun to_nearest ((m mode)) Bool (or (= m RNE2) (= m RNA2)))
+(declare-datatypes () ((mode (RNE1) (RNA1) (RTP1) (RTN1) (RTZ1))))
+(define-fun to_nearest ((m mode)) Bool (or (= m RNE1) (= m RNA1)))
 
 (declare-fun zeroF () t)
-
-(declare-fun abs1 (t) t)
-
-(declare-fun neg (t) t)
 
 (declare-fun add (mode t t) t)
 
@@ -67,6 +63,10 @@
 (declare-fun mul (mode t t) t)
 
 (declare-fun div1 (mode t t) t)
+
+(declare-fun abs1 (t) t)
+
+(declare-fun neg (t) t)
 
 (declare-fun fma (mode t t t) t)
 
@@ -175,16 +175,16 @@
   (=> (tqtisFinite x) (= (round m (tqtreal x)) (tqtreal x)))))
 
 ;; Round_down_le
-  (assert (forall ((x Real)) (<= (round RTN2 x) x)))
+  (assert (forall ((x Real)) (<= (round RTN1 x) x)))
 
 ;; Round_up_ge
-  (assert (forall ((x Real)) (<= x (round RTP2 x))))
+  (assert (forall ((x Real)) (<= x (round RTP1 x))))
 
 ;; Round_down_neg
-  (assert (forall ((x Real)) (= (round RTN2 (- x)) (- (round RTP2 x)))))
+  (assert (forall ((x Real)) (= (round RTN1 (- x)) (- (round RTP1 x)))))
 
 ;; Round_up_neg
-  (assert (forall ((x Real)) (= (round RTP2 (- x)) (- (round RTN2 x)))))
+  (assert (forall ((x Real)) (= (round RTP1 (- x)) (- (round RTN1 x)))))
 
 (define-fun in_safe_int_range ((i Int)) Bool (and (<= (- 16777216) i)
                                              (<= i 16777216)))
@@ -322,10 +322,10 @@
               (=> (diff_sign x y) (is_negative z))))
 
 (define-fun overflow_value ((m mode)
-  (x t)) Bool (ite (is-RTN2 m) (ite (is_positive x)
+  (x t)) Bool (ite (is-RTN1 m) (ite (is_positive x)
                                (and (tqtisFinite x)
                                (= (tqtreal x) (* 33554430.0 10141204801825835211973625643008.0)))
-                               (is_infinite x)) (ite (is-RTP2 m) (ite (is_positive
+                               (is_infinite x)) (ite (is-RTP1 m) (ite (is_positive
                                                                  x)
                                                                  (is_infinite
                                                                  x)
@@ -334,7 +334,7 @@
                                                                  x)
                                                                  (= (tqtreal
                                                                     x) (- (* 33554430.0 10141204801825835211973625643008.0))))) 
-                                                (ite (is-RTZ2 m) (ite (is_positive
+                                                (ite (is-RTZ1 m) (ite (is_positive
                                                                  x)
                                                                  (and
                                                                  (tqtisFinite
@@ -346,12 +346,12 @@
                                                                  x)
                                                                  (= (tqtreal
                                                                     x) (- (* 33554430.0 10141204801825835211973625643008.0))))) 
-                                                (ite (is-RNA2 m) (is_infinite
+                                                (ite (is-RNA1 m) (is_infinite
                                                 x) (is_infinite x))))))
 
 (define-fun sign_zero_result ((m mode)
   (x t)) Bool (=> (is_zero x)
-              (ite (is-RTN2 m) (is_negative x) (is_positive x))))
+              (ite (is-RTN1 m) (is_negative x) (is_positive x))))
 
 ;; add_finite
   (assert
@@ -645,84 +645,84 @@
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (=> (is_negative x) (= (roundToIntegral RTZ2 x) (roundToIntegral RTP2 x))))))
+  (=> (is_negative x) (= (roundToIntegral RTZ1 x) (roundToIntegral RTP1 x))))))
 
 ;; truncate_pos
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (=> (is_positive x) (= (roundToIntegral RTZ2 x) (roundToIntegral RTN2 x))))))
+  (=> (is_positive x) (= (roundToIntegral RTZ1 x) (roundToIntegral RTN1 x))))))
 
 ;; ceil_le
   (assert
-  (forall ((x t)) (=> (tqtisFinite x) (le x (roundToIntegral RTP2 x)))))
+  (forall ((x t)) (=> (tqtisFinite x) (le x (roundToIntegral RTP1 x)))))
 
 ;; ceil_lest
   (assert
   (forall ((x t) (y t))
-  (=> (and (le x y) (is_int1 y)) (le (roundToIntegral RTP2 x) y))))
+  (=> (and (le x y) (is_int1 y)) (le (roundToIntegral RTP1 x) y))))
 
 ;; ceil_to_real
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (= (tqtreal (roundToIntegral RTP2 x)) (to_real (- 1 (to_int (- 1.0 
+  (= (tqtreal (roundToIntegral RTP1 x)) (to_real (- 1 (to_int (- 1.0 
   (tqtreal x)))))))))
 
 ;; ceil_to_int
   (assert
   (forall ((m mode) (x t))
   (=> (tqtisFinite x)
-  (= (to_int1 m (roundToIntegral RTP2 x)) (- 1 (to_int (- 1.0 (tqtreal x))))))))
+  (= (to_int1 m (roundToIntegral RTP1 x)) (- 1 (to_int (- 1.0 (tqtreal x))))))))
 
 ;; floor_le
   (assert
-  (forall ((x t)) (=> (tqtisFinite x) (le (roundToIntegral RTN2 x) x))))
+  (forall ((x t)) (=> (tqtisFinite x) (le (roundToIntegral RTN1 x) x))))
 
 ;; floor_lest
   (assert
   (forall ((x t) (y t))
-  (=> (and (le y x) (is_int1 y)) (le y (roundToIntegral RTN2 x)))))
+  (=> (and (le y x) (is_int1 y)) (le y (roundToIntegral RTN1 x)))))
 
 ;; floor_to_real
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (= (tqtreal (roundToIntegral RTN2 x)) (to_real (to_int (tqtreal x)))))))
+  (= (tqtreal (roundToIntegral RTN1 x)) (to_real (to_int (tqtreal x)))))))
 
 ;; floor_to_int
   (assert
   (forall ((m mode) (x t))
   (=> (tqtisFinite x)
-  (= (to_int1 m (roundToIntegral RTN2 x)) (to_int (tqtreal x))))))
+  (= (to_int1 m (roundToIntegral RTN1 x)) (to_int (tqtreal x))))))
 
 ;; RNA_down
   (assert
   (forall ((x t))
-  (=> (lt (sub RNE2 x (roundToIntegral RTN2 x))
-  (sub RNE2 (roundToIntegral RTP2 x) x))
-  (= (roundToIntegral RNA2 x) (roundToIntegral RTN2 x)))))
+  (=> (lt (sub RNE1 x (roundToIntegral RTN1 x))
+  (sub RNE1 (roundToIntegral RTP1 x) x))
+  (= (roundToIntegral RNA1 x) (roundToIntegral RTN1 x)))))
 
 ;; RNA_up
   (assert
   (forall ((x t))
-  (=> (lt (sub RNE2 (roundToIntegral RTP2 x) x)
-  (sub RNE2 x (roundToIntegral RTN2 x)))
-  (= (roundToIntegral RNA2 x) (roundToIntegral RTP2 x)))))
+  (=> (lt (sub RNE1 (roundToIntegral RTP1 x) x)
+  (sub RNE1 x (roundToIntegral RTN1 x)))
+  (= (roundToIntegral RNA1 x) (roundToIntegral RTP1 x)))))
 
 ;; RNA_down_tie
   (assert
   (forall ((x t))
-  (=> (eq (sub RNE2 x (roundToIntegral RTN2 x))
-  (sub RNE2 (roundToIntegral RTP2 x) x))
-  (=> (is_negative x) (= (roundToIntegral RNA2 x) (roundToIntegral RTN2 x))))))
+  (=> (eq (sub RNE1 x (roundToIntegral RTN1 x))
+  (sub RNE1 (roundToIntegral RTP1 x) x))
+  (=> (is_negative x) (= (roundToIntegral RNA1 x) (roundToIntegral RTN1 x))))))
 
 ;; RNA_up_tie
   (assert
   (forall ((x t))
-  (=> (eq (sub RNE2 (roundToIntegral RTP2 x) x)
-  (sub RNE2 x (roundToIntegral RTN2 x)))
-  (=> (is_positive x) (= (roundToIntegral RNA2 x) (roundToIntegral RTP2 x))))))
+  (=> (eq (sub RNE1 (roundToIntegral RTP1 x) x)
+  (sub RNE1 x (roundToIntegral RTN1 x)))
+  (=> (is_positive x) (= (roundToIntegral RNA1 x) (roundToIntegral RTP1 x))))))
 
 ;; to_int_roundToIntegral
   (assert
@@ -758,12 +758,12 @@
 ;; round_bound_ne
   (assert
   (forall ((x Real))
-  (! (=> (no_overflow RNE2 x)
+  (! (=> (no_overflow RNE1 x)
      (and
      (<= (- (- x (* (/ 1.0 16777216.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 1427247692705959881058285969449495136382746624.0)) 
-     (round RNE2 x))
-     (<= (round RNE2 x) (+ (+ x (* (/ 1.0 16777216.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 1427247692705959881058285969449495136382746624.0))))) :pattern (
-  (round RNE2 x)) )))
+     (round RNE1 x))
+     (<= (round RNE1 x) (+ (+ x (* (/ 1.0 16777216.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 1427247692705959881058285969449495136382746624.0))))) :pattern (
+  (round RNE1 x)) )))
 
 (define-fun neq ((x t) (y t)) Bool (not (eq x y)))
 
@@ -790,7 +790,7 @@
   (assert (is_int1 fliteral))
 
 ;; one_of_int
-  (assert (= fliteral (of_int RNA2 1)))
+  (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
 (declare-fun max_value () t)
@@ -1195,10 +1195,8 @@
      (and (dynamic_invariant x true true true)
      (and (le (neg fliteral) x) (le x fliteral)))
      (let ((result (sin1 x)))
-     (and (approx_sin__function_guard (approx_sin x) x)
-     (=> (sin__function_guard result x)
-     (and (lt (abs1 (sub RNE2 result (approx_sin x))) fliteral2)
-     (dynamic_invariant result true false true)))))) :pattern ((sin1 x)) )))
+     (and (lt (abs1 (sub RNE1 result (approx_sin x))) fliteral2)
+     (dynamic_invariant result true false true)))) :pattern ((sin1 x)) )))
 
 (declare-fun cos1 (t) t)
 
@@ -1215,10 +1213,8 @@
      (and (dynamic_invariant x true true true)
      (and (le (neg fliteral) x) (le x fliteral)))
      (let ((result (cos1 x)))
-     (and (approx_cos__function_guard (approx_cos x) x)
-     (=> (cos__function_guard result x)
-     (and (lt (abs1 (sub RNE2 result (approx_cos x))) fliteral2)
-     (dynamic_invariant result true false true)))))) :pattern ((cos1 x)) )))
+     (and (lt (abs1 (sub RNE1 result (approx_cos x))) fliteral2)
+     (dynamic_invariant result true false true)))) :pattern ((cos1 x)) )))
 
 (declare-fun tan1 (t) t)
 
@@ -1249,18 +1245,16 @@
      (and (dynamic_invariant x true true true)
      (and (le (neg fliteral3) x) (le x fliteral3)))
      (let ((result (tan1 x)))
-     (and (approx_tan__function_guard (approx_tan x) x)
-     (=> (tan__function_guard result x)
-     (and (lt (abs1 (sub RNE2 result (approx_tan x))) fliteral4)
-     (dynamic_invariant result true false true)))))) :pattern ((tan1 x)) )))
+     (and (lt (abs1 (sub RNE1 result (approx_tan x))) fliteral4)
+     (dynamic_invariant result true false true)))) :pattern ((tan1 x)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(declare-fun temp___String_Literal_545 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_517 (tuple0) (Array Int character))
 
-;; temp___String_Literal_545__def_axiom
+;; temp___String_Literal_517__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -1270,69 +1264,19 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_545 us_void_param) 1)) 116)
-     (= (to_rep (select (temp___String_Literal_545 us_void_param) 2)) 101))
-     (= (to_rep (select (temp___String_Literal_545 us_void_param) 3)) 115))
-     (= (to_rep (select (temp___String_Literal_545 us_void_param) 4)) 116))
-     (= (to_rep (select (temp___String_Literal_545 us_void_param) 5)) 32))
-     (= (to_rep (select (temp___String_Literal_545 us_void_param) 6)) 115))
-     (= (to_rep (select (temp___String_Literal_545 us_void_param) 7)) 105))
-     (= (to_rep (select (temp___String_Literal_545 us_void_param) 8)) 110)) :pattern (
-  (temp___String_Literal_545 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_517 us_void_param) 1)) 116)
+     (= (to_rep (select (temp___String_Literal_517 us_void_param) 2)) 101))
+     (= (to_rep (select (temp___String_Literal_517 us_void_param) 3)) 115))
+     (= (to_rep (select (temp___String_Literal_517 us_void_param) 4)) 116))
+     (= (to_rep (select (temp___String_Literal_517 us_void_param) 5)) 32))
+     (= (to_rep (select (temp___String_Literal_517 us_void_param) 6)) 115))
+     (= (to_rep (select (temp___String_Literal_517 us_void_param) 7)) 105))
+     (= (to_rep (select (temp___String_Literal_517 us_void_param) 8)) 110)) :pattern (
+  (temp___String_Literal_517 us_void_param)) )))
 
-(declare-fun temp___String_Literal_548 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_520 (tuple0) (Array Int character))
 
-;; temp___String_Literal_548__def_axiom
-  (assert
-  (forall ((us_void_param tuple0))
-  (! (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (= (to_rep (select (temp___String_Literal_548 us_void_param) 1)) 116)
-     (= (to_rep (select (temp___String_Literal_548 us_void_param) 2)) 101))
-     (= (to_rep (select (temp___String_Literal_548 us_void_param) 3)) 115))
-     (= (to_rep (select (temp___String_Literal_548 us_void_param) 4)) 116))
-     (= (to_rep (select (temp___String_Literal_548 us_void_param) 5)) 32))
-     (= (to_rep (select (temp___String_Literal_548 us_void_param) 6)) 115))
-     (= (to_rep (select (temp___String_Literal_548 us_void_param) 7)) 105))
-     (= (to_rep (select (temp___String_Literal_548 us_void_param) 8)) 110))
-     (= (to_rep (select (temp___String_Literal_548 us_void_param) 9)) 32))
-     (= (to_rep (select (temp___String_Literal_548 us_void_param) 10)) 111))
-     (= (to_rep (select (temp___String_Literal_548 us_void_param) 11)) 107)) :pattern (
-  (temp___String_Literal_548 us_void_param)) )))
-
-(declare-fun temp___String_Literal_549 (tuple0) (Array Int character))
-
-;; temp___String_Literal_549__def_axiom
-  (assert
-  (forall ((us_void_param tuple0))
-  (! (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (= (to_rep (select (temp___String_Literal_549 us_void_param) 1)) 116)
-     (= (to_rep (select (temp___String_Literal_549 us_void_param) 2)) 101))
-     (= (to_rep (select (temp___String_Literal_549 us_void_param) 3)) 115))
-     (= (to_rep (select (temp___String_Literal_549 us_void_param) 4)) 116))
-     (= (to_rep (select (temp___String_Literal_549 us_void_param) 5)) 32))
-     (= (to_rep (select (temp___String_Literal_549 us_void_param) 6)) 99))
-     (= (to_rep (select (temp___String_Literal_549 us_void_param) 7)) 111))
-     (= (to_rep (select (temp___String_Literal_549 us_void_param) 8)) 115)) :pattern (
-  (temp___String_Literal_549 us_void_param)) )))
-
-(declare-fun temp___String_Literal_552 (tuple0) (Array Int character))
-
-;; temp___String_Literal_552__def_axiom
+;; temp___String_Literal_520__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -1345,22 +1289,22 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_552 us_void_param) 1)) 116)
-     (= (to_rep (select (temp___String_Literal_552 us_void_param) 2)) 101))
-     (= (to_rep (select (temp___String_Literal_552 us_void_param) 3)) 115))
-     (= (to_rep (select (temp___String_Literal_552 us_void_param) 4)) 116))
-     (= (to_rep (select (temp___String_Literal_552 us_void_param) 5)) 32))
-     (= (to_rep (select (temp___String_Literal_552 us_void_param) 6)) 99))
-     (= (to_rep (select (temp___String_Literal_552 us_void_param) 7)) 111))
-     (= (to_rep (select (temp___String_Literal_552 us_void_param) 8)) 115))
-     (= (to_rep (select (temp___String_Literal_552 us_void_param) 9)) 32))
-     (= (to_rep (select (temp___String_Literal_552 us_void_param) 10)) 111))
-     (= (to_rep (select (temp___String_Literal_552 us_void_param) 11)) 107)) :pattern (
-  (temp___String_Literal_552 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_520 us_void_param) 1)) 116)
+     (= (to_rep (select (temp___String_Literal_520 us_void_param) 2)) 101))
+     (= (to_rep (select (temp___String_Literal_520 us_void_param) 3)) 115))
+     (= (to_rep (select (temp___String_Literal_520 us_void_param) 4)) 116))
+     (= (to_rep (select (temp___String_Literal_520 us_void_param) 5)) 32))
+     (= (to_rep (select (temp___String_Literal_520 us_void_param) 6)) 115))
+     (= (to_rep (select (temp___String_Literal_520 us_void_param) 7)) 105))
+     (= (to_rep (select (temp___String_Literal_520 us_void_param) 8)) 110))
+     (= (to_rep (select (temp___String_Literal_520 us_void_param) 9)) 32))
+     (= (to_rep (select (temp___String_Literal_520 us_void_param) 10)) 111))
+     (= (to_rep (select (temp___String_Literal_520 us_void_param) 11)) 107)) :pattern (
+  (temp___String_Literal_520 us_void_param)) )))
 
-(declare-fun temp___String_Literal_553 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_521 (tuple0) (Array Int character))
 
-;; temp___String_Literal_553__def_axiom
+;; temp___String_Literal_521__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -1370,47 +1314,19 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_553 us_void_param) 1)) 116)
-     (= (to_rep (select (temp___String_Literal_553 us_void_param) 2)) 101))
-     (= (to_rep (select (temp___String_Literal_553 us_void_param) 3)) 115))
-     (= (to_rep (select (temp___String_Literal_553 us_void_param) 4)) 116))
-     (= (to_rep (select (temp___String_Literal_553 us_void_param) 5)) 32))
-     (= (to_rep (select (temp___String_Literal_553 us_void_param) 6)) 116))
-     (= (to_rep (select (temp___String_Literal_553 us_void_param) 7)) 97))
-     (= (to_rep (select (temp___String_Literal_553 us_void_param) 8)) 110)) :pattern (
-  (temp___String_Literal_553 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_521 us_void_param) 1)) 116)
+     (= (to_rep (select (temp___String_Literal_521 us_void_param) 2)) 101))
+     (= (to_rep (select (temp___String_Literal_521 us_void_param) 3)) 115))
+     (= (to_rep (select (temp___String_Literal_521 us_void_param) 4)) 116))
+     (= (to_rep (select (temp___String_Literal_521 us_void_param) 5)) 32))
+     (= (to_rep (select (temp___String_Literal_521 us_void_param) 6)) 99))
+     (= (to_rep (select (temp___String_Literal_521 us_void_param) 7)) 111))
+     (= (to_rep (select (temp___String_Literal_521 us_void_param) 8)) 115)) :pattern (
+  (temp___String_Literal_521 us_void_param)) )))
 
-(declare-fun temp___String_Literal_556 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_524 (tuple0) (Array Int character))
 
-;; temp___String_Literal_556__def_axiom
-  (assert
-  (forall ((us_void_param tuple0))
-  (! (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (= (to_rep (select (temp___String_Literal_556 us_void_param) 1)) 116)
-     (= (to_rep (select (temp___String_Literal_556 us_void_param) 2)) 101))
-     (= (to_rep (select (temp___String_Literal_556 us_void_param) 3)) 115))
-     (= (to_rep (select (temp___String_Literal_556 us_void_param) 4)) 116))
-     (= (to_rep (select (temp___String_Literal_556 us_void_param) 5)) 32))
-     (= (to_rep (select (temp___String_Literal_556 us_void_param) 6)) 116))
-     (= (to_rep (select (temp___String_Literal_556 us_void_param) 7)) 97))
-     (= (to_rep (select (temp___String_Literal_556 us_void_param) 8)) 110))
-     (= (to_rep (select (temp___String_Literal_556 us_void_param) 9)) 32))
-     (= (to_rep (select (temp___String_Literal_556 us_void_param) 10)) 111))
-     (= (to_rep (select (temp___String_Literal_556 us_void_param) 11)) 107)) :pattern (
-  (temp___String_Literal_556 us_void_param)) )))
-
-(declare-fun temp___String_Literal_557 (tuple0) (Array Int character))
-
-;; temp___String_Literal_557__def_axiom
+;; temp___String_Literal_524__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -1423,40 +1339,72 @@
      (and
      (and
      (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (= (to_rep (select (temp___String_Literal_557 us_void_param) 1)) 116)
-     (= (to_rep (select (temp___String_Literal_557 us_void_param) 2)) 101))
-     (= (to_rep (select (temp___String_Literal_557 us_void_param) 3)) 115))
-     (= (to_rep (select (temp___String_Literal_557 us_void_param) 4)) 116))
-     (= (to_rep (select (temp___String_Literal_557 us_void_param) 5)) 32))
-     (= (to_rep (select (temp___String_Literal_557 us_void_param) 6)) 116))
-     (= (to_rep (select (temp___String_Literal_557 us_void_param) 7)) 97))
-     (= (to_rep (select (temp___String_Literal_557 us_void_param) 8)) 110))
-     (= (to_rep (select (temp___String_Literal_557 us_void_param) 9)) 32))
-     (= (to_rep (select (temp___String_Literal_557 us_void_param) 10)) 61))
-     (= (to_rep (select (temp___String_Literal_557 us_void_param) 11)) 32))
-     (= (to_rep (select (temp___String_Literal_557 us_void_param) 12)) 115))
-     (= (to_rep (select (temp___String_Literal_557 us_void_param) 13)) 105))
-     (= (to_rep (select (temp___String_Literal_557 us_void_param) 14)) 110))
-     (= (to_rep (select (temp___String_Literal_557 us_void_param) 15)) 32))
-     (= (to_rep (select (temp___String_Literal_557 us_void_param) 16)) 47))
-     (= (to_rep (select (temp___String_Literal_557 us_void_param) 17)) 32))
-     (= (to_rep (select (temp___String_Literal_557 us_void_param) 18)) 99))
-     (= (to_rep (select (temp___String_Literal_557 us_void_param) 19)) 111))
-     (= (to_rep (select (temp___String_Literal_557 us_void_param) 20)) 115)) :pattern (
-  (temp___String_Literal_557 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_524 us_void_param) 1)) 116)
+     (= (to_rep (select (temp___String_Literal_524 us_void_param) 2)) 101))
+     (= (to_rep (select (temp___String_Literal_524 us_void_param) 3)) 115))
+     (= (to_rep (select (temp___String_Literal_524 us_void_param) 4)) 116))
+     (= (to_rep (select (temp___String_Literal_524 us_void_param) 5)) 32))
+     (= (to_rep (select (temp___String_Literal_524 us_void_param) 6)) 99))
+     (= (to_rep (select (temp___String_Literal_524 us_void_param) 7)) 111))
+     (= (to_rep (select (temp___String_Literal_524 us_void_param) 8)) 115))
+     (= (to_rep (select (temp___String_Literal_524 us_void_param) 9)) 32))
+     (= (to_rep (select (temp___String_Literal_524 us_void_param) 10)) 111))
+     (= (to_rep (select (temp___String_Literal_524 us_void_param) 11)) 107)) :pattern (
+  (temp___String_Literal_524 us_void_param)) )))
 
-(declare-fun temp___String_Literal_562 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_525 (tuple0) (Array Int character))
 
-;; temp___String_Literal_562__def_axiom
+;; temp___String_Literal_525__def_axiom
+  (assert
+  (forall ((us_void_param tuple0))
+  (! (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (= (to_rep (select (temp___String_Literal_525 us_void_param) 1)) 116)
+     (= (to_rep (select (temp___String_Literal_525 us_void_param) 2)) 101))
+     (= (to_rep (select (temp___String_Literal_525 us_void_param) 3)) 115))
+     (= (to_rep (select (temp___String_Literal_525 us_void_param) 4)) 116))
+     (= (to_rep (select (temp___String_Literal_525 us_void_param) 5)) 32))
+     (= (to_rep (select (temp___String_Literal_525 us_void_param) 6)) 116))
+     (= (to_rep (select (temp___String_Literal_525 us_void_param) 7)) 97))
+     (= (to_rep (select (temp___String_Literal_525 us_void_param) 8)) 110)) :pattern (
+  (temp___String_Literal_525 us_void_param)) )))
+
+(declare-fun temp___String_Literal_528 (tuple0) (Array Int character))
+
+;; temp___String_Literal_528__def_axiom
+  (assert
+  (forall ((us_void_param tuple0))
+  (! (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (= (to_rep (select (temp___String_Literal_528 us_void_param) 1)) 116)
+     (= (to_rep (select (temp___String_Literal_528 us_void_param) 2)) 101))
+     (= (to_rep (select (temp___String_Literal_528 us_void_param) 3)) 115))
+     (= (to_rep (select (temp___String_Literal_528 us_void_param) 4)) 116))
+     (= (to_rep (select (temp___String_Literal_528 us_void_param) 5)) 32))
+     (= (to_rep (select (temp___String_Literal_528 us_void_param) 6)) 116))
+     (= (to_rep (select (temp___String_Literal_528 us_void_param) 7)) 97))
+     (= (to_rep (select (temp___String_Literal_528 us_void_param) 8)) 110))
+     (= (to_rep (select (temp___String_Literal_528 us_void_param) 9)) 32))
+     (= (to_rep (select (temp___String_Literal_528 us_void_param) 10)) 111))
+     (= (to_rep (select (temp___String_Literal_528 us_void_param) 11)) 107)) :pattern (
+  (temp___String_Literal_528 us_void_param)) )))
+
+(declare-fun temp___String_Literal_529 (tuple0) (Array Int character))
+
+;; temp___String_Literal_529__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -1478,33 +1426,79 @@
      (and
      (and
      (and
+     (= (to_rep (select (temp___String_Literal_529 us_void_param) 1)) 116)
+     (= (to_rep (select (temp___String_Literal_529 us_void_param) 2)) 101))
+     (= (to_rep (select (temp___String_Literal_529 us_void_param) 3)) 115))
+     (= (to_rep (select (temp___String_Literal_529 us_void_param) 4)) 116))
+     (= (to_rep (select (temp___String_Literal_529 us_void_param) 5)) 32))
+     (= (to_rep (select (temp___String_Literal_529 us_void_param) 6)) 116))
+     (= (to_rep (select (temp___String_Literal_529 us_void_param) 7)) 97))
+     (= (to_rep (select (temp___String_Literal_529 us_void_param) 8)) 110))
+     (= (to_rep (select (temp___String_Literal_529 us_void_param) 9)) 32))
+     (= (to_rep (select (temp___String_Literal_529 us_void_param) 10)) 61))
+     (= (to_rep (select (temp___String_Literal_529 us_void_param) 11)) 32))
+     (= (to_rep (select (temp___String_Literal_529 us_void_param) 12)) 115))
+     (= (to_rep (select (temp___String_Literal_529 us_void_param) 13)) 105))
+     (= (to_rep (select (temp___String_Literal_529 us_void_param) 14)) 110))
+     (= (to_rep (select (temp___String_Literal_529 us_void_param) 15)) 32))
+     (= (to_rep (select (temp___String_Literal_529 us_void_param) 16)) 47))
+     (= (to_rep (select (temp___String_Literal_529 us_void_param) 17)) 32))
+     (= (to_rep (select (temp___String_Literal_529 us_void_param) 18)) 99))
+     (= (to_rep (select (temp___String_Literal_529 us_void_param) 19)) 111))
+     (= (to_rep (select (temp___String_Literal_529 us_void_param) 20)) 115)) :pattern (
+  (temp___String_Literal_529 us_void_param)) )))
+
+(declare-fun temp___String_Literal_531 (tuple0) (Array Int character))
+
+;; temp___String_Literal_531__def_axiom
+  (assert
+  (forall ((us_void_param tuple0))
+  (! (and
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 1)) 116)
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 2)) 101))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 3)) 115))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 4)) 116))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 5)) 32))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 6)) 116))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 7)) 97))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 8)) 110))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 9)) 32))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 10)) 61))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 11)) 32))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 12)) 115))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 13)) 105))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 14)) 110))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 15)) 32))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 16)) 47))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 17)) 32))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 18)) 99))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 19)) 111))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 20)) 115))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 21)) 32))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 22)) 111))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 23)) 107)) :pattern (
-  (temp___String_Literal_562 us_void_param)) )))
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 1)) 116)
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 2)) 101))
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 3)) 115))
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 4)) 116))
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 5)) 32))
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 6)) 116))
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 7)) 97))
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 8)) 110))
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 9)) 32))
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 10)) 61))
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 11)) 32))
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 12)) 115))
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 13)) 105))
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 14)) 110))
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 15)) 32))
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 16)) 47))
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 17)) 32))
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 18)) 99))
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 19)) 111))
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 20)) 115))
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 21)) 32))
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 22)) 111))
+     (= (to_rep (select (temp___String_Literal_531 us_void_param) 23)) 107)) :pattern (
+  (temp___String_Literal_531 us_void_param)) )))
 
 (define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -1541,17 +1535,14 @@
 ;; pow2__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (pow21 x)))
-     (=> (pow2__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((pow21 x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (pow21 x)
+     true false true)) :pattern ((pow21 x)) )))
 
 ;; pow2__def_axiom
   (assert
   (forall ((x t))
-  (! (=>
-     (and (dynamic_invariant x true true true) (pow2__function_guard
-     (pow21 x) x)) (= (pow21 x) (mul RNE2 x x))) :pattern ((pow21 x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (pow21 x) (mul RNE1 x x))) :pattern (
+  (pow21 x)) )))
 
 (declare-fun pow3 (t) t)
 
@@ -1560,18 +1551,14 @@
 ;; pow3__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (pow3 x)))
-     (=> (pow3__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((pow3 x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (pow3 x)
+     true false true)) :pattern ((pow3 x)) )))
 
 ;; pow3__def_axiom
   (assert
   (forall ((x t))
-  (! (=>
-     (and (dynamic_invariant x true true true) (pow3__function_guard 
-     (pow3 x) x)) (= (pow3 x) (mul RNE2 (mul RNE2 x x) x))) :pattern (
-  (pow3 x)) )))
+  (! (=> (dynamic_invariant x true true true)
+     (= (pow3 x) (mul RNE1 (mul RNE1 x x) x))) :pattern ((pow3 x)) )))
 
 (declare-fun pow4 (t) t)
 
@@ -1580,17 +1567,14 @@
 ;; pow4__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (pow4 x)))
-     (=> (pow4__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((pow4 x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (pow4 x)
+     true false true)) :pattern ((pow4 x)) )))
 
 ;; pow4__def_axiom
   (assert
   (forall ((x t))
-  (! (=>
-     (and (dynamic_invariant x true true true) (pow4__function_guard 
-     (pow4 x) x)) (= (pow4 x) (mul RNE2 (mul RNE2 (mul RNE2 x x) x) x))) :pattern (
+  (! (=> (dynamic_invariant x true true true)
+     (= (pow4 x) (mul RNE1 (mul RNE1 (mul RNE1 x x) x) x))) :pattern (
   (pow4 x)) )))
 
 (declare-fun pow5 (t) t)
@@ -1600,18 +1584,14 @@
 ;; pow5__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (pow5 x)))
-     (=> (pow5__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((pow5 x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (pow5 x)
+     true false true)) :pattern ((pow5 x)) )))
 
 ;; pow5__def_axiom
   (assert
   (forall ((x t))
-  (! (=>
-     (and (dynamic_invariant x true true true) (pow5__function_guard 
-     (pow5 x) x))
-     (= (pow5 x) (mul RNE2 (mul RNE2 (mul RNE2 (mul RNE2 x x) x) x) x))) :pattern (
+  (! (=> (dynamic_invariant x true true true)
+     (= (pow5 x) (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 x x) x) x) x))) :pattern (
   (pow5 x)) )))
 
 (declare-fun pow6 (t) t)
@@ -1621,19 +1601,15 @@
 ;; pow6__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (pow6 x)))
-     (=> (pow6__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((pow6 x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (pow6 x)
+     true false true)) :pattern ((pow6 x)) )))
 
 ;; pow6__def_axiom
   (assert
   (forall ((x t))
-  (! (=>
-     (and (dynamic_invariant x true true true) (pow6__function_guard 
-     (pow6 x) x))
-     (= (pow6 x) (mul RNE2
-                 (mul RNE2 (mul RNE2 (mul RNE2 (mul RNE2 x x) x) x) x) x))) :pattern (
+  (! (=> (dynamic_invariant x true true true)
+     (= (pow6 x) (mul RNE1
+                 (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 x x) x) x) x) x))) :pattern (
   (pow6 x)) )))
 
 (declare-fun pow7 (t) t)
@@ -1643,20 +1619,16 @@
 ;; pow7__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (pow7 x)))
-     (=> (pow7__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((pow7 x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (pow7 x)
+     true false true)) :pattern ((pow7 x)) )))
 
 ;; pow7__def_axiom
   (assert
   (forall ((x t))
-  (! (=>
-     (and (dynamic_invariant x true true true) (pow7__function_guard 
-     (pow7 x) x))
-     (= (pow7 x) (mul RNE2
-                 (mul RNE2
-                 (mul RNE2 (mul RNE2 (mul RNE2 (mul RNE2 x x) x) x) x) x) x))) :pattern (
+  (! (=> (dynamic_invariant x true true true)
+     (= (pow7 x) (mul RNE1
+                 (mul RNE1
+                 (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 x x) x) x) x) x) x))) :pattern (
   (pow7 x)) )))
 
 (declare-fun pow8 (t) t)
@@ -1666,21 +1638,17 @@
 ;; pow8__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (pow8 x)))
-     (=> (pow8__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((pow8 x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (pow8 x)
+     true false true)) :pattern ((pow8 x)) )))
 
 ;; pow8__def_axiom
   (assert
   (forall ((x t))
-  (! (=>
-     (and (dynamic_invariant x true true true) (pow8__function_guard 
-     (pow8 x) x))
-     (= (pow8 x) (mul RNE2
-                 (mul RNE2
-                 (mul RNE2
-                 (mul RNE2 (mul RNE2 (mul RNE2 (mul RNE2 x x) x) x) x) x) x)
+  (! (=> (dynamic_invariant x true true true)
+     (= (pow8 x) (mul RNE1
+                 (mul RNE1
+                 (mul RNE1
+                 (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 x x) x) x) x) x) x)
                  x))) :pattern ((pow8 x)) )))
 
 (declare-fun pow9 (t) t)
@@ -1690,31 +1658,25 @@
 ;; pow9__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (pow9 x)))
-     (=> (pow9__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((pow9 x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (pow9 x)
+     true false true)) :pattern ((pow9 x)) )))
 
 ;; pow9__def_axiom
   (assert
   (forall ((x t))
-  (! (=>
-     (and (dynamic_invariant x true true true) (pow9__function_guard 
-     (pow9 x) x))
-     (= (pow9 x) (mul RNE2
-                 (mul RNE2
-                 (mul RNE2
-                 (mul RNE2
-                 (mul RNE2 (mul RNE2 (mul RNE2 (mul RNE2 x x) x) x) x) x) x)
+  (! (=> (dynamic_invariant x true true true)
+     (= (pow9 x) (mul RNE1
+                 (mul RNE1
+                 (mul RNE1
+                 (mul RNE1
+                 (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 x x) x) x) x) x) x)
                  x) x))) :pattern ((pow9 x)) )))
 
 ;; approx_sin__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (approx_sin x)))
-     (=> (approx_sin__function_guard result x) (dynamic_invariant result true
-     false true)))) :pattern ((approx_sin x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant
+     (approx_sin x) true false true)) :pattern ((approx_sin x)) )))
 
 (declare-fun fliteral5 () t)
 
@@ -1734,25 +1696,18 @@
 ;; approx_sin__def_axiom
   (assert
   (forall ((x t))
-  (! (=>
-     (and (dynamic_invariant x true true true) (approx_sin__function_guard
-     (approx_sin x) x))
-     (and (pow3__function_guard (pow3 x) x)
-     (and (pow5__function_guard (pow5 x) x)
-     (and (pow7__function_guard (pow7 x) x)
-     (= (approx_sin x) (sub RNE2
-                       (add RNE2 (sub RNE2 x (div1 RNE2 (pow3 x) fliteral5))
-                       (div1 RNE2 (pow5 x) fliteral6))
-                       (div1 RNE2 (pow7 x) fliteral7))))))) :pattern (
-  (approx_sin x)) )))
+  (! (=> (dynamic_invariant x true true true)
+     (= (approx_sin x) (sub RNE1
+                       (add RNE1 (sub RNE1 x (div1 RNE1 (pow3 x) fliteral5))
+                       (div1 RNE1 (pow5 x) fliteral6))
+                       (div1 RNE1 (pow7 x) fliteral7)))) :pattern ((approx_sin
+                                                                   x)) )))
 
 ;; approx_cos__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (approx_cos x)))
-     (=> (approx_cos__function_guard result x) (dynamic_invariant result true
-     false true)))) :pattern ((approx_cos x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant
+     (approx_cos x) true false true)) :pattern ((approx_cos x)) )))
 
 (declare-fun fliteral8 () t)
 
@@ -1777,29 +1732,21 @@
 ;; approx_cos__def_axiom
   (assert
   (forall ((x t))
-  (! (=>
-     (and (dynamic_invariant x true true true) (approx_cos__function_guard
-     (approx_cos x) x))
-     (and (pow2__function_guard (pow21 x) x)
-     (and (pow4__function_guard (pow4 x) x)
-     (and (pow6__function_guard (pow6 x) x)
-     (and (pow8__function_guard (pow8 x) x)
-     (= (approx_cos x) (add RNE2
-                       (sub RNE2
-                       (add RNE2
-                       (sub RNE2 fliteral (div1 RNE2 (pow21 x) fliteral8))
-                       (div1 RNE2 (pow4 x) fliteral9))
-                       (div1 RNE2 (pow6 x) fliteral10))
-                       (div1 RNE2 (pow8 x) fliteral11)))))))) :pattern (
-  (approx_cos x)) )))
+  (! (=> (dynamic_invariant x true true true)
+     (= (approx_cos x) (add RNE1
+                       (sub RNE1
+                       (add RNE1
+                       (sub RNE1 fliteral (div1 RNE1 (pow21 x) fliteral8))
+                       (div1 RNE1 (pow4 x) fliteral9))
+                       (div1 RNE1 (pow6 x) fliteral10))
+                       (div1 RNE1 (pow8 x) fliteral11)))) :pattern ((approx_cos
+                                                                    x)) )))
 
 ;; approx_tan__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (approx_tan x)))
-     (=> (approx_tan__function_guard result x) (dynamic_invariant result true
-     false true)))) :pattern ((approx_tan x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant
+     (approx_tan x) true false true)) :pattern ((approx_tan x)) )))
 
 (declare-fun fliteral12 () t)
 
@@ -1834,34 +1781,28 @@
 ;; approx_tan__def_axiom
   (assert
   (forall ((x t))
-  (! (=>
-     (and (dynamic_invariant x true true true) (approx_tan__function_guard
-     (approx_tan x) x))
-     (and (pow3__function_guard (pow3 x) x)
-     (and (pow5__function_guard (pow5 x) x)
-     (and (pow7__function_guard (pow7 x) x)
-     (and (pow9__function_guard (pow9 x) x)
-     (= (approx_tan x) (add RNE2
-                       (add RNE2
-                       (add RNE2 (add RNE2 x (div1 RNE2 (pow3 x) fliteral12))
-                       (div1 RNE2 (mul RNE2 fliteral8 (pow5 x)) fliteral13))
-                       (div1 RNE2 (mul RNE2 fliteral14 (pow7 x)) fliteral15))
-                       (div1 RNE2 (mul RNE2 fliteral16 (pow9 x)) fliteral17)))))))) :pattern (
+  (! (=> (dynamic_invariant x true true true)
+     (= (approx_tan x) (add RNE1
+                       (add RNE1
+                       (add RNE1 (add RNE1 x (div1 RNE1 (pow3 x) fliteral12))
+                       (div1 RNE1 (mul RNE1 fliteral8 (pow5 x)) fliteral13))
+                       (div1 RNE1 (mul RNE1 fliteral14 (pow7 x)) fliteral15))
+                       (div1 RNE1 (mul RNE1 fliteral16 (pow9 x)) fliteral17)))) :pattern (
   (approx_tan x)) )))
 
 (declare-fun f () t)
 
 (declare-fun dummy5 () t)
 
-(declare-fun temp___547 () t)
+(declare-fun temp___519 () t)
 
-(declare-fun temp___546 () t)
+(declare-fun temp___518 () t)
 
 (declare-fun o () t)
 
-(declare-fun temp___551 () t)
+(declare-fun temp___523 () t)
 
-(declare-fun temp___550 () t)
+(declare-fun temp___522 () t)
 
 (declare-fun o1 () t)
 
@@ -1962,13 +1903,10 @@
   (assert (= f1 (neg fliteral)))
 
 ;; H
-  (assert (approx_sin__function_guard (approx_sin f2) f2))
+  (assert (=> (le f1 fliteral) (= temp___519 dummy5)))
 
 ;; H
-  (assert (=> (le f1 fliteral) (= temp___547 dummy5)))
-
-;; H
-  (assert (=> (le f1 fliteral) (= temp___546 f1)))
+  (assert (=> (le f1 fliteral) (= temp___518 f1)))
 
 ;; H
   (assert
@@ -1980,8 +1918,8 @@
 ;; H
   (assert
   (=> (le f1 fliteral)
-  (and (and (= o (sin1 f2)) (sin__function_guard o f2))
-  (and (tqtisFinite o) (lt (abs1 (sub RNE2 o (approx_sin f2))) fliteral2)))))
+  (and (= o (sin1 f2))
+  (and (tqtisFinite o) (lt (abs1 (sub RNE1 o (approx_sin f2))) fliteral2)))))
 
 ;; H
   (assert (=> (le f1 fliteral) (= dummy7 result1)))
@@ -2041,13 +1979,10 @@
   (assert (= f8 (neg fliteral)))
 
 ;; H
-  (assert (approx_cos__function_guard (approx_cos f9) f9))
+  (assert (=> (le f8 fliteral) (= temp___523 dummy11)))
 
 ;; H
-  (assert (=> (le f8 fliteral) (= temp___551 dummy11)))
-
-;; H
-  (assert (=> (le f8 fliteral) (= temp___550 f8)))
+  (assert (=> (le f8 fliteral) (= temp___522 f8)))
 
 ;; H
   (assert
@@ -2060,8 +1995,8 @@
 ;; H
   (assert
   (=> (le f8 fliteral)
-  (and (and (= o1 (cos1 f9)) (cos__function_guard o1 f9))
-  (and (tqtisFinite o1) (lt (abs1 (sub RNE2 o1 (approx_cos f9))) fliteral2)))))
+  (and (= o1 (cos1 f9))
+  (and (tqtisFinite o1) (lt (abs1 (sub RNE1 o1 (approx_cos f9))) fliteral2)))))
 
 ;; H
   (assert (=> (le f8 fliteral) (= dummy13 result4)))
@@ -2131,12 +2066,9 @@
   fliteral3)))
 
 ;; H
-  (assert (approx_tan__function_guard (approx_tan f16) f16))
-
-;; H
   (assert
-  (and (and (= o2 (tan1 f16)) (tan__function_guard o2 f16))
-  (and (tqtisFinite o2) (lt (abs1 (sub RNE2 o2 (approx_tan f16))) fliteral4))))
+  (and (= o2 (tan1 f16))
+  (and (tqtisFinite o2) (lt (abs1 (sub RNE1 o2 (approx_tan f16))) fliteral4))))
 
 ;; H
   (assert (= result7 (mk_t__ref dummy19)))

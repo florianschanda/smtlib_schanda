@@ -305,48 +305,29 @@
 (define-fun tTaSP1__ref___projection ((a tTaSP1__ref)) tTaSP1 (tTaSP1__content
                                                               a))
 
-(define-fun dynamic_invariant ((temp___expr_254 (Array Int us_rep))
-  (temp___is_init_251 Bool) (temp___skip_constant_252 Bool)
-  (temp___do_toplevel_253 Bool)) Bool (forall ((temp___255 Int))
+(define-fun dynamic_invariant ((temp___expr_239 (Array Int us_rep))
+  (temp___is_init_236 Bool) (temp___skip_constant_237 Bool)
+  (temp___do_toplevel_238 Bool)) Bool (forall ((temp___240 Int))
                                       (=>
-                                      (and (<= 1 temp___255)
-                                      (<= temp___255 1))
+                                      (and (<= 1 temp___240)
+                                      (<= temp___240 1))
                                       (= (attr__constrained
-                                         (select temp___expr_254 temp___255)) false))))
+                                         (select temp___expr_239 temp___240)) false))))
 
-(define-fun default_initial_assumption ((temp___expr_257 (Array Int us_rep))
-  (temp___skip_top_level_258 Bool)) Bool (forall ((temp___259 Int))
+(define-fun default_initial_assumption ((temp___expr_242 (Array Int us_rep))
+  (temp___skip_top_level_243 Bool)) Bool (forall ((temp___244 Int))
                                          (=>
-                                         (and (<= 1 temp___259)
-                                         (<= temp___259 1))
+                                         (and (<= 1 temp___244)
+                                         (<= temp___244 1))
                                          (and
                                          (= (attr__constrained
-                                            (select temp___expr_257 temp___259)) false)
+                                            (select temp___expr_242 temp___244)) false)
                                          (= (rec__tests__test_14__record_with_mutable_discrs__present
                                             (us_split_discrs1
-                                            (select temp___expr_257 temp___259))) 
+                                            (select temp___expr_242 temp___244))) 
                                          (of_int 0))))))
 
-(declare-sort t11b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 1)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq3 (t11b t11b) Bool)
-
-(declare-fun dummy3 () t11b)
-
-(declare-datatypes () ((t11b__ref (mk_t11b__ref (t11b__content t11b)))))
-(define-fun t11b__ref___projection ((a t11b__ref)) t11b (t11b__content a))
-
-(define-fun in_range4 ((rec__tests__test_14__record_with_mutable_discrs__present1 Bool)
+(define-fun in_range3 ((rec__tests__test_14__record_with_mutable_discrs__present1 Bool)
   (a us_rep)) Bool (= rec__tests__test_14__record_with_mutable_discrs__present1 
   (rec__tests__test_14__record_with_mutable_discrs__present
   (us_split_discrs1 a))))
@@ -408,14 +389,14 @@
   (assert
   (<= 0 tests__test_14__record_with_mutable_discrs__field__position1))
 
-(declare-fun dummy4 () us_rep)
+(declare-fun dummy3 () us_rep)
 
 (declare-datatypes () ((t10b__ref (mk_t10b__ref (t10b__content us_rep)))))
 (define-fun t10b__ref___projection ((a t10b__ref)) us_rep (t10b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(define-fun in_range5 ((rec__tests__test_14__record_with_mutable_discrs__present1 Bool)
+(define-fun in_range4 ((rec__tests__test_14__record_with_mutable_discrs__present1 Bool)
   (a us_rep)) Bool (= rec__tests__test_14__record_with_mutable_discrs__present1 
   (rec__tests__test_14__record_with_mutable_discrs__present
   (us_split_discrs1 a))))
@@ -477,7 +458,7 @@
   (assert
   (<= 0 tests__test_14__record_with_mutable_discrs__field__position2))
 
-(declare-fun dummy5 () us_rep)
+(declare-fun dummy4 () us_rep)
 
 (declare-datatypes () ((t13b__ref (mk_t13b__ref (t13b__content us_rep)))))
 (define-fun t13b__ref___projection ((a t13b__ref)) us_rep (t13b__content a))
@@ -486,8 +467,8 @@
 
 ;; def_axiom
   (assert
-  (forall ((temp___399 us_rep))
-  (= (select (tests__test_14__a__aggregate_def temp___399) 1) temp___399)))
+  (forall ((temp___384 us_rep))
+  (= (select (tests__test_14__a__aggregate_def temp___384) 1) temp___384)))
 
 (define-fun dynamic_invariant1 ((temp___expr_33 Int) (temp___is_init_30 Bool)
   (temp___skip_constant_31 Bool)
@@ -496,33 +477,28 @@
                                      (<= 0 2147483647)) (in_range1
                                      temp___expr_33)))
 
-(define-fun default_initial_assumption1 ((temp___expr_241 us_rep)
-  (temp___skip_top_level_242 Bool)) Bool (and
+(define-fun default_initial_assumption1 ((temp___expr_226 us_rep)
+  (temp___skip_top_level_227 Bool)) Bool (and
                                          (= (attr__constrained
-                                            temp___expr_241) false)
+                                            temp___expr_226) false)
                                          (= (rec__tests__test_14__record_with_mutable_discrs__present
                                             (us_split_discrs1
-                                            temp___expr_241)) (of_int 0))))
+                                            temp___expr_226)) (of_int 0))))
 
 (declare-fun a () (Array Int us_rep))
-
-(declare-fun o () (Array Int us_rep))
 
 (declare-fun result () (Array Int us_rep))
 
 (declare-fun a1 () (Array Int us_rep))
 
 ;; H
-  (assert
-  (= o (tests__test_14__a__aggregate_def
-       (mk___rep (mk___split_discrs (of_int 0)) (mk___split_fields dummy)
-       false))))
-
-;; H
   (assert (= result a))
 
 ;; H
-  (assert (= a1 o))
+  (assert
+  (= a1 (tests__test_14__a__aggregate_def
+        (mk___rep (mk___split_discrs (of_int 0)) (mk___split_fields dummy)
+        false))))
 
 ;; H
   (assert (dynamic_invariant a1 true false true))

@@ -718,96 +718,6 @@
      (select b (bvadd (bvsub b__first a__first) temp___idx_135)) 1 3
      ((_ int2bv 16) 1) ((_ int2bv 16) 3)) true))))))))
 
-(declare-sort t10b 0)
-
-(declare-fun attr__ATTRIBUTE_MODULUS2 () (_ BitVec 32))
-
-(define-fun in_range5 ((x (_ BitVec 32))) Bool (and
-                                               (bvule ((_ int2bv 32) 1) x)
-                                               (bvule x ((_ int2bv 32) 3))))
-
-(define-fun in_range_int2 ((x Int)) Bool (and (<= 1 x) (<= x 3)))
-
-(define-fun bool_eq7 ((x (_ BitVec 32))
-  (y (_ BitVec 32))) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 ((_ BitVec 32)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) (_ BitVec 32))
-
-(declare-fun user_eq6 (t10b t10b) Bool)
-
-(declare-fun dummy6 () t10b)
-
-(declare-datatypes () ((t10b__ref (mk_t10b__ref (t10b__content t10b)))))
-(define-fun t10b__ref___projection ((a t10b__ref)) t10b (t10b__content a))
-
-(declare-sort t7b 0)
-
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 3)))
-
-(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq7 (t7b t7b) Bool)
-
-(declare-fun dummy7 () t7b)
-
-(declare-datatypes () ((t7b__ref (mk_t7b__ref (t7b__content t7b)))))
-(define-fun t7b__ref___projection ((a t7b__ref)) t7b (t7b__content a))
-
-(declare-sort t8b 0)
-
-(declare-fun attr__ATTRIBUTE_MODULUS3 () (_ BitVec 16))
-
-(define-fun in_range7 ((x (_ BitVec 16))) Bool (and
-                                               (bvule ((_ int2bv 16) 1) x)
-                                               (bvule x ((_ int2bv 16) 3))))
-
-(define-fun in_range_int3 ((x Int)) Bool (and (<= 1 x) (<= x 3)))
-
-(define-fun bool_eq9 ((x (_ BitVec 16))
-  (y (_ BitVec 16))) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE7 ((_ BitVec 16)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) (_ BitVec 16))
-
-(declare-fun user_eq8 (t8b t8b) Bool)
-
-(declare-fun dummy8 () t8b)
-
-(declare-datatypes () ((t8b__ref (mk_t8b__ref (t8b__content t8b)))))
-(define-fun t8b__ref___projection ((a t8b__ref)) t8b (t8b__content a))
-
-(declare-sort t5b 0)
-
-(define-fun in_range8 ((x Int)) Bool (and (<= 1 x) (<= x 3)))
-
-(define-fun bool_eq10 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
-
-(declare-fun user_eq9 (t5b t5b) Bool)
-
-(declare-fun dummy9 () t5b)
-
-(declare-datatypes () ((t5b__ref (mk_t5b__ref (t5b__content t5b)))))
-(define-fun t5b__ref___projection ((a t5b__ref)) t5b (t5b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
 (declare-fun y () (Array (_ BitVec 32) map1))
@@ -824,20 +734,20 @@
 
 (declare-sort u32 0)
 
-(declare-fun attr__ATTRIBUTE_MODULUS4 () (_ BitVec 32))
+(declare-fun attr__ATTRIBUTE_MODULUS2 () (_ BitVec 32))
 
-(define-fun bool_eq11 ((x (_ BitVec 32))
+(define-fun bool_eq7 ((x (_ BitVec 32))
   (y1 (_ BitVec 32))) Bool (ite (= x y1) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE9 ((_ BitVec 32)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE5 ((_ BitVec 32)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) (_ BitVec 32))
+(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) (_ BitVec 32))
 
-(declare-fun user_eq10 (u32 u32) Bool)
+(declare-fun user_eq6 (u32 u32) Bool)
 
-(declare-fun dummy10 () u32)
+(declare-fun dummy6 () u32)
 
 (declare-datatypes () ((u32__ref (mk_u32__ref (u32__content u32)))))
 (define-fun u32__ref___projection ((a u32__ref)) u32 (u32__content a))
@@ -864,9 +774,7 @@
   (assert
   (forall ((x u32)) (! (uint_in_range1 (to_int4 x)) :pattern ((to_int4 x)) )))
 
-(declare-fun attr__ATTRIBUTE_MODULUS5 () (_ BitVec 32))
-
-(declare-fun first ((_ BitVec 32)) (_ BitVec 32))
+(declare-fun attr__ATTRIBUTE_MODULUS3 () (_ BitVec 32))
 
 (define-fun dynamic_property ((first_int (_ BitVec 32))
   (last_int (_ BitVec 32))
@@ -875,25 +783,25 @@
 (define-fun dynamic_property_int ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
-(define-fun bool_eq12 ((x (_ BitVec 32))
+(define-fun bool_eq8 ((x (_ BitVec 32))
   (y1 (_ BitVec 32))) Bool (ite (= x y1) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE10 ((_ BitVec 32)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE6 ((_ BitVec 32)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) (_ BitVec 32))
+(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) (_ BitVec 32))
 
-(declare-fun user_eq11 (u32 u32) Bool)
+(declare-fun user_eq7 (u32 u32) Bool)
 
-(declare-fun dummy11 () u32)
+(declare-fun dummy7 () u32)
 
 (declare-datatypes () ((t12b__ref (mk_t12b__ref (t12b__content u32)))))
 (define-fun t12b__ref___projection ((a t12b__ref)) u32 (t12b__content a))
 
 (declare-sort t 0)
 
-(declare-fun first1 (t) u32)
+(declare-fun first (t) u32)
 
 (declare-fun last (t) u32)
 
@@ -902,7 +810,7 @@
 ;; mk_def
   (assert
   (forall ((f (_ BitVec 32)) (l (_ BitVec 32)))
-  (! (and (= (to_rep1 (first1 (mk f l))) f) (= (to_rep1 (last (mk f l))) l)) :pattern (
+  (! (and (= (to_rep1 (first (mk f l))) f) (= (to_rep1 (last (mk f l))) l)) :pattern (
   (mk f l)) )))
 
 (define-fun dynamic_property1 ((range_first (_ BitVec 32))
@@ -919,12 +827,12 @@
 (define-fun of_array ((a (Array (_ BitVec 32) map1)) (f (_ BitVec 32))
   (l (_ BitVec 32))) us_t (mk___t a (mk f l)))
 
-(define-fun first2 ((a us_t)) (_ BitVec 32) (to_rep1 (first1 (rt a))))
+(define-fun first1 ((a us_t)) (_ BitVec 32) (to_rep1 (first (rt a))))
 
 (define-fun last1 ((a us_t)) (_ BitVec 32) (to_rep1 (last (rt a))))
 
-(define-fun length ((a us_t)) Int (ite (bvule (first2 a) (last1 a))
-                                  (+ (- (bv2nat (last1 a)) (bv2nat (first2 a))) 1)
+(define-fun length ((a us_t)) Int (ite (bvule (first1 a) (last1 a))
+                                  (+ (- (bv2nat (last1 a)) (bv2nat (first1 a))) 1)
                                   0))
 
 (declare-fun value__size2 () Int)
@@ -960,21 +868,19 @@
   (assert
   (forall ((a (Array (_ BitVec 32) map1))) (<= 0 (object__alignment2 a))))
 
-(define-fun bool_eq13 ((x us_t)
-  (y1 us_t)) Bool (bool_eq6 (elts x) (to_rep1 (first1 (rt x)))
-                  (to_rep1 (last (rt x))) (elts y1)
-                  (to_rep1 (first1 (rt y1))) (to_rep1 (last (rt y1)))))
+(define-fun bool_eq9 ((x us_t)
+  (y1 us_t)) Bool (bool_eq6 (elts x) (to_rep1 (first (rt x)))
+                  (to_rep1 (last (rt x))) (elts y1) (to_rep1 (first (rt y1)))
+                  (to_rep1 (last (rt y1)))))
 
-(declare-fun user_eq12 (us_t us_t) Bool)
+(declare-fun user_eq8 (us_t us_t) Bool)
 
-(declare-fun dummy12 () us_t)
+(declare-fun dummy8 () us_t)
 
 (declare-datatypes () ((t13b__ref (mk_t13b__ref (t13b__content us_t)))))
 (define-fun t13b__ref___projection ((a t13b__ref)) us_t (t13b__content a))
 
-(declare-fun attr__ATTRIBUTE_MODULUS6 () (_ BitVec 32))
-
-(declare-fun first3 ((_ BitVec 32)) (_ BitVec 32))
+(declare-fun attr__ATTRIBUTE_MODULUS4 () (_ BitVec 32))
 
 (define-fun dynamic_property2 ((first_int (_ BitVec 32))
   (last_int (_ BitVec 32))
@@ -983,25 +889,25 @@
 (define-fun dynamic_property_int1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
-(define-fun bool_eq14 ((x (_ BitVec 32))
+(define-fun bool_eq10 ((x (_ BitVec 32))
   (y1 (_ BitVec 32))) Bool (ite (= x y1) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE11 ((_ BitVec 32)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE7 ((_ BitVec 32)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check11 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE11 (us_image) (_ BitVec 32))
+(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) (_ BitVec 32))
 
-(declare-fun user_eq13 (u32 u32) Bool)
+(declare-fun user_eq9 (u32 u32) Bool)
 
-(declare-fun dummy13 () u32)
+(declare-fun dummy9 () u32)
 
 (declare-datatypes () ((t14b__ref (mk_t14b__ref (t14b__content u32)))))
 (define-fun t14b__ref___projection ((a t14b__ref)) u32 (t14b__content a))
 
 (declare-sort t1 0)
 
-(declare-fun first4 (t1) u32)
+(declare-fun first2 (t1) u32)
 
 (declare-fun last2 (t1) u32)
 
@@ -1010,7 +916,7 @@
 ;; mk_def
   (assert
   (forall ((f (_ BitVec 32)) (l (_ BitVec 32)))
-  (! (and (= (to_rep1 (first4 (mk1 f l))) f)
+  (! (and (= (to_rep1 (first2 (mk1 f l))) f)
      (= (to_rep1 (last2 (mk1 f l))) l)) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property3 ((range_first (_ BitVec 32))
@@ -1027,13 +933,13 @@
 (define-fun of_array1 ((a (Array (_ BitVec 32) map1)) (f (_ BitVec 32))
   (l (_ BitVec 32))) us_t1 (mk___t1 a (mk1 f l)))
 
-(define-fun first5 ((a us_t1)) (_ BitVec 32) (to_rep1 (first4 (rt1 a))))
+(define-fun first3 ((a us_t1)) (_ BitVec 32) (to_rep1 (first2 (rt1 a))))
 
 (define-fun last3 ((a us_t1)) (_ BitVec 32) (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (bvule (first5 a) (last3 a))
+(define-fun length1 ((a us_t1)) Int (ite (bvule (first3 a) (last3 a))
                                     (+ (- (bv2nat (last3 a)) (bv2nat 
-                                    (first5 a))) 1) 0))
+                                    (first3 a))) 1) 0))
 
 (declare-fun value__size3 () Int)
 
@@ -1068,14 +974,14 @@
   (assert
   (forall ((a (Array (_ BitVec 32) map1))) (<= 0 (object__alignment3 a))))
 
-(define-fun bool_eq15 ((x us_t1)
-  (y1 us_t1)) Bool (bool_eq6 (elts1 x) (to_rep1 (first4 (rt1 x)))
+(define-fun bool_eq11 ((x us_t1)
+  (y1 us_t1)) Bool (bool_eq6 (elts1 x) (to_rep1 (first2 (rt1 x)))
                    (to_rep1 (last2 (rt1 x))) (elts1 y1)
-                   (to_rep1 (first4 (rt1 y1))) (to_rep1 (last2 (rt1 y1)))))
+                   (to_rep1 (first2 (rt1 y1))) (to_rep1 (last2 (rt1 y1)))))
 
-(declare-fun user_eq14 (us_t1 us_t1) Bool)
+(declare-fun user_eq10 (us_t1 us_t1) Bool)
 
-(declare-fun dummy14 () us_t1)
+(declare-fun dummy10 () us_t1)
 
 (declare-datatypes () ((t15b__ref (mk_t15b__ref (t15b__content us_t1)))))
 (define-fun t15b__ref___projection ((a t15b__ref)) us_t1 (t15b__content a))
@@ -1140,25 +1046,19 @@
 
 (declare-fun i3 () (_ BitVec 32))
 
-(declare-fun o () (Array Int integer))
-
-(declare-fun o1 () map1)
-
-(declare-fun o2 () (Array (_ BitVec 32) map1))
-
 (declare-fun temp___271 () (Array (_ BitVec 32) map1))
 
 (declare-fun temp___264 () (Array (_ BitVec 32) map1))
 
 (declare-fun temp___257 () (Array (_ BitVec 32) map1))
 
-(declare-fun o3 () integer)
+(declare-fun o () integer)
 
-(declare-fun o4 () (Array Int integer))
+(declare-fun o1 () (Array Int integer))
 
-(declare-fun o5 () map1)
+(declare-fun o2 () map1)
 
-(declare-fun o6 () (Array (_ BitVec 32) map1))
+(declare-fun o3 () (Array (_ BitVec 32) map1))
 
 (declare-fun result () (Array (_ BitVec 32) map1))
 
@@ -1289,19 +1189,10 @@
 (define-fun x19 () map__ref2 (mk_map__ref2 x9))
 
 ;; H
-  (assert (= o (temp___250 0)))
-
-;; H
-  (assert (= o1 (temp___245 o)))
-
-;; H
-  (assert (= o2 (p_bv__x__aggregate_def o1)))
-
-;; H
   (assert (= result x))
 
 ;; H
-  (assert (= x1 o2))
+  (assert (= x1 (p_bv__x__aggregate_def (temp___245 (temp___250 0)))))
 
 ;; H
   (assert (= x1 y))
@@ -1449,26 +1340,26 @@
   (assert
   (=> (and (<= 1 i211) (<= i211 3))
   (=> (and (bvule ((_ int2bv 16) 1) i222) (bvule i222 ((_ int2bv 16) 3)))
-  (=> (and (<= 1 i13) (<= i13 3)) (= (to_rep o3) 1)))))
+  (=> (and (<= 1 i13) (<= i13 3)) (= (to_rep o) 1)))))
 
 ;; H
   (assert
   (=> (and (<= 1 i211) (<= i211 3))
   (=> (and (bvule ((_ int2bv 16) 1) i222) (bvule i222 ((_ int2bv 16) 3)))
   (=> (and (<= 1 i13) (<= i13 3))
-  (= o4 (store (get (select x5 i32) i212 i223) i14 o3))))))
+  (= o1 (store (get (select x5 i32) i212 i223) i14 o))))))
 
 ;; H
   (assert
   (=> (and (<= 1 i211) (<= i211 3))
   (=> (and (bvule ((_ int2bv 16) 1) i222) (bvule i222 ((_ int2bv 16) 3)))
-  (=> (and (<= 1 i13) (<= i13 3)) (= o5 (set (select x5 i32) i212 i223 o4))))))
+  (=> (and (<= 1 i13) (<= i13 3)) (= o2 (set (select x5 i32) i212 i223 o1))))))
 
 ;; H
   (assert
   (=> (and (<= 1 i211) (<= i211 3))
   (=> (and (bvule ((_ int2bv 16) 1) i222) (bvule i222 ((_ int2bv 16) 3)))
-  (=> (and (<= 1 i13) (<= i13 3)) (= o6 (store x5 i32 o5))))))
+  (=> (and (<= 1 i13) (<= i13 3)) (= o3 (store x5 i32 o2))))))
 
 ;; H
   (assert
@@ -1480,7 +1371,7 @@
   (assert
   (=> (and (<= 1 i211) (<= i211 3))
   (=> (and (bvule ((_ int2bv 16) 1) i222) (bvule i222 ((_ int2bv 16) 3)))
-  (=> (and (<= 1 i13) (<= i13 3)) (= x6 o6)))))
+  (=> (and (<= 1 i13) (<= i13 3)) (= x6 o3)))))
 
 ;; H
   (assert
@@ -1761,9 +1652,9 @@
  ;; File "p_bv.adb", line 1, characters 0-0
   (not
   (= (bool_eq6 (map__content2 x17)
-     (to_rep1 (first1 (mk (bvadd i32 ((_ int2bv 32) 1)) ((_ int2bv 32) 3))))
+     (to_rep1 (first (mk (bvadd i32 ((_ int2bv 32) 1)) ((_ int2bv 32) 3))))
      (to_rep1 (last (mk (bvadd i32 ((_ int2bv 32) 1)) ((_ int2bv 32) 3)))) 
      y
-     (to_rep1 (first4 (mk1 (bvadd i32 ((_ int2bv 32) 1)) ((_ int2bv 32) 3))))
+     (to_rep1 (first2 (mk1 (bvadd i32 ((_ int2bv 32) 1)) ((_ int2bv 32) 3))))
      (to_rep1 (last2 (mk1 (bvadd i32 ((_ int2bv 32) 1)) ((_ int2bv 32) 3))))) true)))
 (check-sat)

@@ -89,18 +89,14 @@
   (forall ((x Int))
   (! (=>
      (and (dynamic_invariant x true true true)
-     (and (<= (- 100) x) (<= x 100)))
-     (let ((result (do_something x)))
-     (=> (do_something__function_guard result x) (dynamic_invariant result
-     true false true)))) :pattern ((do_something x)) )))
+     (and (<= (- 100) x) (<= x 100))) (dynamic_invariant (do_something x)
+     true false true)) :pattern ((do_something x)) )))
 
 ;; do_something__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true) (do_something__function_guard
-     (do_something x) x)) (= (do_something x) (* x 2))) :pattern ((do_something
-                                                                  x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (do_something x) (* x 2))) :pattern (
+  (do_something x)) )))
 
 (declare-fun x () Int)
 

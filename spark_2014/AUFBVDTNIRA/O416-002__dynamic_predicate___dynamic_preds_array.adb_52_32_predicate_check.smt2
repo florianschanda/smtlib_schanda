@@ -144,6 +144,24 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
+(declare-fun to_rep (even) Int)
+
+(declare-fun of_rep (Int) even)
+
+;; inversion_axiom
+  (assert
+  (forall ((x even)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x even)) (! (in_range (to_rep x)) :pattern ((to_rep x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                           (of_rep x))) )))
+
 (declare-sort teven_pairD1 0)
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
@@ -165,24 +183,6 @@
  (mk_teven_pairD1__ref (teven_pairD1__content teven_pairD1)))))
 (define-fun teven_pairD1__ref___projection ((a teven_pairD1__ref)) teven_pairD1 
   (teven_pairD1__content a))
-
-(declare-fun to_rep (even) Int)
-
-(declare-fun of_rep (Int) even)
-
-;; inversion_axiom
-  (assert
-  (forall ((x even)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
-
-;; range_axiom
-  (assert
-  (forall ((x even)) (! (in_range (to_rep x)) :pattern ((to_rep x)) )))
-
-;; coerce_axiom
-  (assert
-  (forall ((x Int))
-  (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
-                                                           (of_rep x))) )))
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int even))))))
@@ -340,11 +340,10 @@
   (assert
   (forall ((us_void_param tuple0))
   (! (let ((result (get_constant_even_pair us_void_param)))
-     (=> (get_constant_even_pair__function_guard result us_void_param)
      (and
      (and (= (to_rep (select result 1)) 0) (= (to_rep (select result 2)) 0))
-     (dynamic_invariant2 result true false true)))) :pattern ((get_constant_even_pair
-                                                              us_void_param)) )))
+     (dynamic_invariant2 result true false true))) :pattern ((get_constant_even_pair
+                                                             us_void_param)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
@@ -363,9 +362,7 @@
 
 ;; H
   (assert
-  (and
   (and (= temp___270 (get_constant_even_pair Tuple0))
-  (get_constant_even_pair__function_guard temp___270 Tuple0))
   (and (dynamic_invariant2 temp___270 true false true)
   (and (= (to_rep (select temp___270 1)) 0)
   (= (to_rep (select temp___270 2)) 0)))))

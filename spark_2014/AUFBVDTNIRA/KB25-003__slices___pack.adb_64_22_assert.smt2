@@ -336,7 +336,9 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(declare-sort tTgSP1 0)
+(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+
+(declare-sort tTmy_s4SP1 0)
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
 
@@ -348,115 +350,16 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
 
-(declare-fun user_eq4 (tTgSP1 tTgSP1) Bool)
+(declare-fun user_eq4 (tTmy_s4SP1 tTmy_s4SP1) Bool)
 
-(declare-fun dummy4 () tTgSP1)
-
-(declare-datatypes ()
-((tTgSP1__ref (mk_tTgSP1__ref (tTgSP1__content tTgSP1)))))
-(define-fun tTgSP1__ref___projection ((a tTgSP1__ref)) tTgSP1 (tTgSP1__content
-                                                              a))
-
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
-
-(declare-sort tTmy_s4SP1 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq5 (tTmy_s4SP1 tTmy_s4SP1) Bool)
-
-(declare-fun dummy5 () tTmy_s4SP1)
+(declare-fun dummy4 () tTmy_s4SP1)
 
 (declare-datatypes ()
 ((tTmy_s4SP1__ref (mk_tTmy_s4SP1__ref (tTmy_s4SP1__content tTmy_s4SP1)))))
 (define-fun tTmy_s4SP1__ref___projection ((a tTmy_s4SP1__ref)) tTmy_s4SP1 
   (tTmy_s4SP1__content a))
 
-(declare-sort t134b 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq6 (t134b t134b) Bool)
-
-(declare-fun dummy6 () t134b)
-
-(declare-datatypes () ((t134b__ref (mk_t134b__ref (t134b__content t134b)))))
-(define-fun t134b__ref___projection ((a t134b__ref)) t134b (t134b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
-
-(declare-sort t136b 0)
-
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq7 (t136b t136b) Bool)
-
-(declare-fun dummy7 () t136b)
-
-(declare-datatypes () ((t136b__ref (mk_t136b__ref (t136b__content t136b)))))
-(define-fun t136b__ref___projection ((a t136b__ref)) t136b (t136b__content a))
-
-(declare-sort t138b 0)
-
-(define-fun in_range7 ((x Int)) Bool (and (<= 2 x) (<= x 3)))
-
-(define-fun bool_eq9 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
-
-(declare-fun user_eq8 (t138b t138b) Bool)
-
-(declare-fun dummy8 () t138b)
-
-(declare-datatypes () ((t138b__ref (mk_t138b__ref (t138b__content t138b)))))
-(define-fun t138b__ref___projection ((a t138b__ref)) t138b (t138b__content a))
-
-(declare-sort t141b 0)
-
-(define-fun in_range8 ((x Int)) Bool (and (<= 2 x) (<= x 3)))
-
-(define-fun bool_eq10 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
-
-(declare-fun user_eq9 (t141b t141b) Bool)
-
-(declare-fun dummy9 () t141b)
-
-(declare-datatypes () ((t141b__ref (mk_t141b__ref (t141b__content t141b)))))
-(define-fun t141b__ref___projection ((a t141b__ref)) t141b (t141b__content a))
 
 (declare-fun pack__a4__my_s4__aggregate_def (Int) (Array Int character))
 
@@ -501,10 +404,6 @@
 
 (declare-fun o () (Array Int character))
 
-(declare-fun temp___495 () (Array Int character))
-
-(declare-fun o1 () (Array Int character))
-
 (declare-fun result () (Array Int character))
 
 (declare-fun my_s41 () (Array Int character))
@@ -518,29 +417,23 @@
   (to_rep1 glob__last)))
 
 ;; H
-  (assert (= o (pack__a4__my_s4__aggregate_def 32)))
-
-;; H
   (assert (= result my_s4))
 
 ;; H
-  (assert (= my_s41 o))
-
-;; H
-  (assert (= temp___495 g))
+  (assert (= my_s41 (pack__a4__my_s4__aggregate_def 32)))
 
 ;; H
   (assert
   (forall ((temp___496 Int))
   (ite (and (<= 1 temp___496) (<= temp___496 4))
-  (= (select o1 temp___496) (select temp___495 temp___496))
-  (= (select o1 temp___496) (select my_s41 temp___496)))))
+  (= (select o temp___496) (select g temp___496))
+  (= (select o temp___496) (select my_s41 temp___496)))))
 
 ;; H
   (assert (= result1 my_s41))
 
 ;; H
-  (assert (= my_s42 o1))
+  (assert (= my_s42 o))
 
 (assert
 ;; WP_parameter_def

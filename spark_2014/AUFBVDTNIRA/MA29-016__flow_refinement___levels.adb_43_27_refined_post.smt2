@@ -73,10 +73,8 @@
 ;; read_partial_0__post_axiom
   (assert
   (forall ((levels__x0 Int))
-  (! (=> (dynamic_invariant levels__x0 true true true)
-     (let ((result (read_partial_0 levels__x0)))
-     (=> (read_partial_0__function_guard result levels__x0)
-     (dynamic_invariant result true false true)))) :pattern ((read_partial_0
+  (! (=> (dynamic_invariant levels__x0 true true true) (dynamic_invariant
+     (read_partial_0 levels__x0) true false true)) :pattern ((read_partial_0
                                                              levels__x0)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -108,16 +106,13 @@
      (dynamic_invariant levels__x0 true true true)) (dynamic_invariant
      levels__y0 true true true)) (dynamic_invariant levels__nested_1__x1 true
      true true)) (dynamic_invariant levels__nested_1__y1 true true true))
-     (let ((result (wibble_0 levels__nested_1__nested_2__x2
-                   levels__nested_1__nested_2__y2 levels__x0 levels__y0
-                   levels__nested_1__x1 levels__nested_1__y1)))
-     (=> (wibble_0__function_guard result levels__nested_1__nested_2__x2
-     levels__nested_1__nested_2__y2 levels__x0 levels__y0
-     levels__nested_1__x1 levels__nested_1__y1) (dynamic_invariant result
-     true false true)))) :pattern ((wibble_0 levels__nested_1__nested_2__x2
-                                   levels__nested_1__nested_2__y2 levels__x0
-                                   levels__y0 levels__nested_1__x1
-                                   levels__nested_1__y1)) )))
+     (dynamic_invariant
+     (wibble_0 levels__nested_1__nested_2__x2 levels__nested_1__nested_2__y2
+     levels__x0 levels__y0 levels__nested_1__x1 levels__nested_1__y1) true
+     false true)) :pattern ((wibble_0 levels__nested_1__nested_2__x2
+                            levels__nested_1__nested_2__y2 levels__x0
+                            levels__y0 levels__nested_1__x1
+                            levels__nested_1__y1)) )))
 
 ;; wibble_0__def_axiom
   (assert
@@ -129,23 +124,15 @@
      (and
      (and
      (and
-     (and
      (and (dynamic_invariant levels__nested_1__nested_2__x2 true true true)
      (dynamic_invariant levels__nested_1__nested_2__y2 true true true))
      (dynamic_invariant levels__x0 true true true)) (dynamic_invariant
      levels__y0 true true true)) (dynamic_invariant levels__nested_1__x1 true
      true true)) (dynamic_invariant levels__nested_1__y1 true true true))
-     (wibble_0__function_guard
-     (wibble_0 levels__nested_1__nested_2__x2 levels__nested_1__nested_2__y2
-     levels__x0 levels__y0 levels__nested_1__x1 levels__nested_1__y1)
-     levels__nested_1__nested_2__x2 levels__nested_1__nested_2__y2 levels__x0
-     levels__y0 levels__nested_1__x1 levels__nested_1__y1))
-     (and (read_partial_0__function_guard (read_partial_0 levels__x0)
-     levels__x0)
      (= (wibble_0 levels__nested_1__nested_2__x2
         levels__nested_1__nested_2__y2 levels__x0 levels__y0
         levels__nested_1__x1 levels__nested_1__y1) (+ (read_partial_0
-                                                      levels__x0) 1)))) :pattern (
+                                                      levels__x0) 1))) :pattern (
   (wibble_0 levels__nested_1__nested_2__x2 levels__nested_1__nested_2__y2
   levels__x0 levels__y0 levels__nested_1__x1 levels__nested_1__y1)) )))
 
@@ -178,13 +165,6 @@
 
 ;; H
   (assert (in_range y2))
-
-;; H
-  (assert (read_partial_0__function_guard (read_partial_0 x0) x0))
-
-;; H
-  (assert (wibble_0__function_guard (wibble_0 x2 y2 x0 y0 x1 y1) x2 y2 
-  x0 y0 x1 y1))
 
 (assert
 ;; WP_parameter_def

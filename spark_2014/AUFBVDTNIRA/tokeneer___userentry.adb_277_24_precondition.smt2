@@ -707,11 +707,9 @@
 
 ;; thefingerwaitduration__post_axiom
   (assert
-  (forall ((configdata__state us_private))
-  (! (let ((result (thefingerwaitduration configdata__state)))
-     (=> (thefingerwaitduration__function_guard result configdata__state)
-     (dynamic_invariant result true false true))) :pattern ((thefingerwaitduration
-                                                            configdata__state)) )))
+  (forall ((configdata__state us_private)) (! (dynamic_invariant
+  (thefingerwaitduration configdata__state) true false
+  true) :pattern ((thefingerwaitduration configdata__state)) )))
 
 (declare-fun valid_numberlogentries (us_private) Bool)
 
@@ -937,12 +935,12 @@
 (define-fun statust__ref_2__projection ((a statust__ref)) statust (statust__content
                                                                   a))
 
-(define-fun dynamic_invariant1 ((temp___expr_1767 Int)
-  (temp___is_init_1764 Bool) (temp___skip_constant_1765 Bool)
-  (temp___do_toplevel_1766 Bool)) Bool (=>
-                                       (or (= temp___is_init_1764 true)
+(define-fun dynamic_invariant1 ((temp___expr_1683 Int)
+  (temp___is_init_1680 Bool) (temp___skip_constant_1681 Bool)
+  (temp___do_toplevel_1682 Bool)) Bool (=>
+                                       (or (= temp___is_init_1680 true)
                                        (<= 0 7)) (in_range10
-                                       temp___expr_1767)))
+                                       temp___expr_1683)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
@@ -1019,12 +1017,12 @@
                                       (<= 0 86399999)) (in_range7
                                       temp___expr_412)))
 
-(define-fun dynamic_invariant11 ((temp___expr_1085 Int)
-  (temp___is_init_1082 Bool) (temp___skip_constant_1083 Bool)
-  (temp___do_toplevel_1084 Bool)) Bool (=>
-                                       (or (= temp___is_init_1082 true)
+(define-fun dynamic_invariant11 ((temp___expr_1028 Int)
+  (temp___is_init_1025 Bool) (temp___skip_constant_1026 Bool)
+  (temp___do_toplevel_1027 Bool)) Bool (=>
+                                       (or (= temp___is_init_1025 true)
                                        (<= 0 2147483647)) (in_range9
-                                       temp___expr_1085)))
+                                       temp___expr_1028)))
 
 (declare-fun state () us_private)
 
@@ -1051,7 +1049,7 @@
   (assert (=> (<= 0 7) (in_range10 status)))
 
 ;; H
-  (assert (and (= o (ispresent state)) (ispresent__function_guard o state)))
+  (assert (= o (ispresent state)))
 
 ;; H
   (assert (= result (ite (not (= o true)) true false)))
@@ -1066,12 +1064,7 @@
   (assert (not (= tokenok true)))
 
 ;; H
-  (assert
-  (and (= o1 (extractuser state2)) (extractuser__function_guard o1 state2)))
-
-;; H
-  (assert (valid_numberlogentries__function_guard
-  (valid_numberlogentries state1) state1))
+  (assert (= o1 (extractuser state2)))
 
 (assert
 ;; WP_parameter_def

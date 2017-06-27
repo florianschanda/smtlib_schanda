@@ -153,9 +153,9 @@
 (define-fun modular__ref_4__projection ((a modular__ref)) modular (modular__content
                                                                   a))
 
-(define-fun dynamic_invariant ((temp___expr_417 (_ BitVec 16))
-  (temp___is_init_414 Bool) (temp___skip_constant_415 Bool)
-  (temp___do_toplevel_416 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_265 (_ BitVec 16))
+  (temp___is_init_262 Bool) (temp___skip_constant_263 Bool)
+  (temp___do_toplevel_264 Bool)) Bool true)
 
 (declare-sort bit_position 0)
 
@@ -179,11 +179,11 @@
 (define-fun bit_position__ref_3__projection ((a bit_position__ref)) bit_position 
   (bit_position__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_423 Int)
-  (temp___is_init_420 Bool) (temp___skip_constant_421 Bool)
-  (temp___do_toplevel_422 Bool)) Bool (=>
-                                      (or (= temp___is_init_420 true)
-                                      (<= 0 15)) (in_range temp___expr_423)))
+(define-fun dynamic_invariant1 ((temp___expr_271 Int)
+  (temp___is_init_268 Bool) (temp___skip_constant_269 Bool)
+  (temp___do_toplevel_270 Bool)) Bool (=>
+                                      (or (= temp___is_init_268 true)
+                                      (<= 0 15)) (in_range temp___expr_271)))
 
 (declare-sort mask_size 0)
 
@@ -533,20 +533,16 @@
   (forall ((amount Int))
   (! (=>
      (and (dynamic_invariant v true true true) (dynamic_invariant2 amount
-     true true true))
-     (let ((result (shift_right v amount)))
-     (=> (shift_right__function_guard result v amount) (dynamic_invariant
-     result true false true)))) :pattern ((shift_right v amount)) ))))
+     true true true)) (dynamic_invariant (shift_right v amount) true false
+     true)) :pattern ((shift_right v amount)) ))))
 
 ;; shift_right__def_axiom
   (assert
   (forall ((v (_ BitVec 16)))
   (forall ((amount Int))
   (! (=>
-     (and
      (and (dynamic_invariant v true true true) (dynamic_invariant2 amount
-     true true true)) (shift_right__function_guard (shift_right v amount) v
-     amount))
+     true true true))
      (= (shift_right v amount) (ite (and (<= 1 16) (<= 16 8))
                                ((_ zero_extend 8) (ite (< amount 8)
                                                   (bvlshr ((_ extract 7 0) v) ((_ int2bv 8) amount))
@@ -571,20 +567,16 @@
   (forall ((amount Int))
   (! (=>
      (and (dynamic_invariant v true true true) (dynamic_invariant2 amount
-     true true true))
-     (let ((result (shift_left v amount)))
-     (=> (shift_left__function_guard result v amount) (dynamic_invariant
-     result true false true)))) :pattern ((shift_left v amount)) ))))
+     true true true)) (dynamic_invariant (shift_left v amount) true false
+     true)) :pattern ((shift_left v amount)) ))))
 
 ;; shift_left__def_axiom
   (assert
   (forall ((v (_ BitVec 16)))
   (forall ((amount Int))
   (! (=>
-     (and
      (and (dynamic_invariant v true true true) (dynamic_invariant2 amount
-     true true true)) (shift_left__function_guard (shift_left v amount) v
-     amount))
+     true true true))
      (= (shift_left v amount) (ite (and (<= 1 16) (<= 16 8))
                               ((_ zero_extend 8) (ite (< amount 8)
                                                  (bvshl ((_ extract 7 0) v) ((_ int2bv 8) amount))
@@ -602,32 +594,25 @@
 
 (declare-fun make_mask__function_guard ((_ BitVec 16) Int) Bool)
 
-(define-fun dynamic_invariant3 ((temp___expr_429 Int)
-  (temp___is_init_426 Bool) (temp___skip_constant_427 Bool)
-  (temp___do_toplevel_428 Bool)) Bool (=>
-                                      (or (= temp___is_init_426 true)
-                                      (<= 1 16)) (in_range1 temp___expr_429)))
+(define-fun dynamic_invariant3 ((temp___expr_277 Int)
+  (temp___is_init_274 Bool) (temp___skip_constant_275 Bool)
+  (temp___do_toplevel_276 Bool)) Bool (=>
+                                      (or (= temp___is_init_274 true)
+                                      (<= 1 16)) (in_range1 temp___expr_277)))
 
 ;; make_mask__post_axiom
   (assert
   (forall ((num_bits Int))
-  (! (=> (dynamic_invariant3 num_bits true true true)
-     (let ((result (make_mask num_bits)))
-     (=> (make_mask__function_guard result num_bits) (dynamic_invariant
-     result true false true)))) :pattern ((make_mask num_bits)) )))
+  (! (=> (dynamic_invariant3 num_bits true true true) (dynamic_invariant
+     (make_mask num_bits) true false true)) :pattern ((make_mask num_bits)) )))
 
 ;; make_mask__def_axiom
   (assert
   (forall ((num_bits Int))
-  (! (=>
-     (and (dynamic_invariant3 num_bits true true true)
-     (make_mask__function_guard (make_mask num_bits) num_bits))
-     (and (shift_right__function_guard
-     (shift_right ((_ int2bv 16) 65535) (- 16 num_bits))
-     ((_ int2bv 16) 65535) (- 16 num_bits))
+  (! (=> (dynamic_invariant3 num_bits true true true)
      (= (make_mask num_bits) (shift_right ((_ int2bv 16) 65535)
-                             (- 16 num_bits))))) :pattern ((make_mask
-                                                           num_bits)) )))
+                             (- 16 num_bits)))) :pattern ((make_mask
+                                                          num_bits)) )))
 
 (declare-fun value () (_ BitVec 16))
 
@@ -658,22 +643,6 @@
      true true true)) (dynamic_invariant1 to__1 true true true))
      (<= from1 to__1))
      (let ((result (extract_bits_inline_always value1 from1 to__1)))
-     (and (shift_right__function_guard (shift_right value1 from1) value1
-     from1)
-     (and (make_mask__function_guard (make_mask (+ (- to__1 from1) 1))
-     (+ (- to__1 from1) 1))
-     (and (make_mask__function_guard (make_mask (+ (- to__1 from1) 1))
-     (+ (- to__1 from1) 1))
-     (and (shift_left__function_guard (shift_left result from1) result from1)
-     (and (make_mask__function_guard (make_mask (+ (- to__1 from1) 1))
-     (+ (- to__1 from1) 1))
-     (and (make_mask__function_guard (make_mask (+ (- to__1 from1) 1))
-     (+ (- to__1 from1) 1))
-     (and (shift_left__function_guard
-     (shift_left (make_mask (+ (- to__1 from1) 1)) from1)
-     (make_mask (+ (- to__1 from1) 1)) from1)
-     (=> (extract_bits_inline_always__function_guard result value1 from1
-     to__1)
      (and
      (and
      (= result (bvand (shift_right value1 from1) (make_mask
@@ -682,8 +651,9 @@
      (= (shift_left result from1) (bvand value1 (shift_left
                                                 (make_mask
                                                 (+ (- to__1 from1) 1)) from1)))))
-     (dynamic_invariant result true false true)))))))))))) :pattern (
-  (extract_bits_inline_always value1 from1 to__1)) ))))
+     (dynamic_invariant result true false true)))) :pattern ((extract_bits_inline_always
+                                                             value1 from1
+                                                             to__1)) ))))
 
 (declare-fun extract_bits_inline ((_ BitVec 16) Int Int) (_ BitVec 16))
 
@@ -701,21 +671,6 @@
      true true true)) (dynamic_invariant1 to__1 true true true))
      (<= from1 to__1))
      (let ((result (extract_bits_inline value1 from1 to__1)))
-     (and (shift_right__function_guard (shift_right value1 from1) value1
-     from1)
-     (and (make_mask__function_guard (make_mask (+ (- to__1 from1) 1))
-     (+ (- to__1 from1) 1))
-     (and (make_mask__function_guard (make_mask (+ (- to__1 from1) 1))
-     (+ (- to__1 from1) 1))
-     (and (shift_left__function_guard (shift_left result from1) result from1)
-     (and (make_mask__function_guard (make_mask (+ (- to__1 from1) 1))
-     (+ (- to__1 from1) 1))
-     (and (make_mask__function_guard (make_mask (+ (- to__1 from1) 1))
-     (+ (- to__1 from1) 1))
-     (and (shift_left__function_guard
-     (shift_left (make_mask (+ (- to__1 from1) 1)) from1)
-     (make_mask (+ (- to__1 from1) 1)) from1)
-     (=> (extract_bits_inline__function_guard result value1 from1 to__1)
      (and
      (and
      (= result (bvand (shift_right value1 from1) (make_mask
@@ -724,8 +679,9 @@
      (= (shift_left result from1) (bvand value1 (shift_left
                                                 (make_mask
                                                 (+ (- to__1 from1) 1)) from1)))))
-     (dynamic_invariant result true false true)))))))))))) :pattern (
-  (extract_bits_inline value1 from1 to__1)) ))))
+     (dynamic_invariant result true false true)))) :pattern ((extract_bits_inline
+                                                             value1 from1
+                                                             to__1)) ))))
 
 ;; extract_bits_inline__def_axiom
   (assert
@@ -733,15 +689,10 @@
   (forall ((from1 Int) (to__1 Int))
   (! (=>
      (and
-     (and
      (and (dynamic_invariant value1 true true true) (dynamic_invariant1 from1
      true true true)) (dynamic_invariant1 to__1 true true true))
-     (extract_bits_inline__function_guard
-     (extract_bits_inline value1 from1 to__1) value1 from1 to__1))
-     (and (extract_bits_inline_always__function_guard
-     (extract_bits_inline_always value1 from1 to__1) value1 from1 to__1)
      (= (extract_bits_inline value1 from1 to__1) (extract_bits_inline_always
-                                                 value1 from1 to__1)))) :pattern (
+                                                 value1 from1 to__1))) :pattern (
   (extract_bits_inline value1 from1 to__1)) ))))
 
 (declare-fun extract_bits_not_inline ((_ BitVec 16) Int Int) (_ BitVec 16))
@@ -760,21 +711,6 @@
      true true true)) (dynamic_invariant1 to__1 true true true))
      (<= from1 to__1))
      (let ((result (extract_bits_not_inline value1 from1 to__1)))
-     (and (shift_right__function_guard (shift_right value1 from1) value1
-     from1)
-     (and (make_mask__function_guard (make_mask (+ (- to__1 from1) 1))
-     (+ (- to__1 from1) 1))
-     (and (make_mask__function_guard (make_mask (+ (- to__1 from1) 1))
-     (+ (- to__1 from1) 1))
-     (and (shift_left__function_guard (shift_left result from1) result from1)
-     (and (make_mask__function_guard (make_mask (+ (- to__1 from1) 1))
-     (+ (- to__1 from1) 1))
-     (and (make_mask__function_guard (make_mask (+ (- to__1 from1) 1))
-     (+ (- to__1 from1) 1))
-     (and (shift_left__function_guard
-     (shift_left (make_mask (+ (- to__1 from1) 1)) from1)
-     (make_mask (+ (- to__1 from1) 1)) from1)
-     (=> (extract_bits_not_inline__function_guard result value1 from1 to__1)
      (and
      (and
      (= result (bvand (shift_right value1 from1) (make_mask
@@ -783,8 +719,9 @@
      (= (shift_left result from1) (bvand value1 (shift_left
                                                 (make_mask
                                                 (+ (- to__1 from1) 1)) from1)))))
-     (dynamic_invariant result true false true)))))))))))) :pattern (
-  (extract_bits_not_inline value1 from1 to__1)) ))))
+     (dynamic_invariant result true false true)))) :pattern ((extract_bits_not_inline
+                                                             value1 from1
+                                                             to__1)) ))))
 
 ;; extract_bits_not_inline__def_axiom
   (assert
@@ -792,15 +729,10 @@
   (forall ((from1 Int) (to__1 Int))
   (! (=>
      (and
-     (and
      (and (dynamic_invariant value1 true true true) (dynamic_invariant1 from1
      true true true)) (dynamic_invariant1 to__1 true true true))
-     (extract_bits_not_inline__function_guard
-     (extract_bits_not_inline value1 from1 to__1) value1 from1 to__1))
-     (and (extract_bits_inline_always__function_guard
-     (extract_bits_inline_always value1 from1 to__1) value1 from1 to__1)
      (= (extract_bits_not_inline value1 from1 to__1) (extract_bits_inline_always
-                                                     value1 from1 to__1)))) :pattern (
+                                                     value1 from1 to__1))) :pattern (
   (extract_bits_not_inline value1 from1 to__1)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
@@ -852,98 +784,6 @@
 (declare-fun result4 () (_ BitVec 16))
 
 ;; H
-  (assert (extract_bits_inline_always__function_guard
-  (extract_bits_inline_always value from to__) value from to__))
-
-;; H
-  (assert (shift_right__function_guard (shift_right value from) value 
-  from))
-
-;; H
-  (assert (make_mask__function_guard (make_mask (+ (- to__ from) 1))
-  (+ (- to__ from) 1)))
-
-;; H
-  (assert (make_mask__function_guard (make_mask (+ (- to__ from) 1))
-  (+ (- to__ from) 1)))
-
-;; H
-  (assert (shift_left__function_guard (shift_left o from) o from))
-
-;; H
-  (assert (make_mask__function_guard (make_mask (+ (- to__ from) 1))
-  (+ (- to__ from) 1)))
-
-;; H
-  (assert (make_mask__function_guard (make_mask (+ (- to__ from) 1))
-  (+ (- to__ from) 1)))
-
-;; H
-  (assert (shift_left__function_guard
-  (shift_left (make_mask (+ (- to__ from) 1)) from)
-  (make_mask (+ (- to__ from) 1)) from))
-
-;; H
-  (assert (extract_bits_inline_always__function_guard
-  (extract_bits_inline_always value from to__) value from to__))
-
-;; H
-  (assert (shift_right__function_guard (shift_right value from) value 
-  from))
-
-;; H
-  (assert (make_mask__function_guard (make_mask (+ (- to__ from) 1))
-  (+ (- to__ from) 1)))
-
-;; H
-  (assert (make_mask__function_guard (make_mask (+ (- to__ from) 1))
-  (+ (- to__ from) 1)))
-
-;; H
-  (assert (shift_left__function_guard (shift_left o1 from) o1 from))
-
-;; H
-  (assert (make_mask__function_guard (make_mask (+ (- to__ from) 1))
-  (+ (- to__ from) 1)))
-
-;; H
-  (assert (make_mask__function_guard (make_mask (+ (- to__ from) 1))
-  (+ (- to__ from) 1)))
-
-;; H
-  (assert (shift_left__function_guard
-  (shift_left (make_mask (+ (- to__ from) 1)) from)
-  (make_mask (+ (- to__ from) 1)) from))
-
-;; H
-  (assert (shift_right__function_guard (shift_right value from) value 
-  from))
-
-;; H
-  (assert (make_mask__function_guard (make_mask (+ (- to__ from) 1))
-  (+ (- to__ from) 1)))
-
-;; H
-  (assert (make_mask__function_guard (make_mask (+ (- to__ from) 1))
-  (+ (- to__ from) 1)))
-
-;; H
-  (assert (shift_left__function_guard (shift_left o2 from) o2 from))
-
-;; H
-  (assert (make_mask__function_guard (make_mask (+ (- to__ from) 1))
-  (+ (- to__ from) 1)))
-
-;; H
-  (assert (make_mask__function_guard (make_mask (+ (- to__ from) 1))
-  (+ (- to__ from) 1)))
-
-;; H
-  (assert (shift_left__function_guard
-  (shift_left (make_mask (+ (- to__ from) 1)) from)
-  (make_mask (+ (- to__ from) 1)) from))
-
-;; H
   (assert (in_range from))
 
 ;; H
@@ -971,9 +811,7 @@
 ;; H
   (assert
   (=> (= 2 0)
-  (and
   (and (= o (extract_bits_not_inline value from to__))
-  (extract_bits_not_inline__function_guard o value from to__))
   (and (= o (extract_bits_inline_always value from to__))
   (and (= o (bvand (shift_right value from) (make_mask (+ (- to__ from) 1))))
   (and (bvule o (make_mask (+ (- to__ from) 1)))
@@ -991,9 +829,7 @@
   (assert
   (=> (not (= 2 0))
   (=> (= 2 1)
-  (and
   (and (= o1 (extract_bits_inline value from to__))
-  (extract_bits_inline__function_guard o1 value from to__))
   (and (= o1 (extract_bits_inline_always value from to__))
   (and
   (= o1 (bvand (shift_right value from) (make_mask (+ (- to__ from) 1))))
@@ -1012,9 +848,7 @@
   (assert
   (=> (not (= 2 0))
   (=> (not (= 2 1))
-  (and
   (and (= o2 (extract_bits_inline_always value from to__))
-  (extract_bits_inline_always__function_guard o2 value from to__))
   (and
   (= o2 (bvand (shift_right value from) (make_mask (+ (- to__ from) 1))))
   (and (bvule o2 (make_mask (+ (- to__ from) 1)))
@@ -1066,14 +900,6 @@
 ;; H
   (assert
   (= result4 bits_manipulation_unsigned__unsigned_16__functions__extract_bits__result4))
-
-;; H
-  (assert (shift_right__function_guard (shift_right value from) value 
-  from))
-
-;; H
-  (assert (make_mask__function_guard (make_mask (+ (- to__ from) 1))
-  (+ (- to__ from) 1)))
 
 (assert
 ;; WP_parameter_def

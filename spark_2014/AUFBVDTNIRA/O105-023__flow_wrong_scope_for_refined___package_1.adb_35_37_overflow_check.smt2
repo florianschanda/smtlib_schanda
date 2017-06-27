@@ -78,13 +78,10 @@
 ;; invariant____def_axiom
   (assert
   (forall ((package_1__state_var_1 Int) (package_1__state_var_2 Int))
-  (! (=> (invariant____function_guard
-     (invariant__ package_1__state_var_1 package_1__state_var_2)
-     package_1__state_var_1 package_1__state_var_2)
-     (= (= (invariant__ package_1__state_var_1 package_1__state_var_2) true)
-     (<= package_1__state_var_1 package_1__state_var_2))) :pattern ((invariant__
-                                                                    package_1__state_var_1
-                                                                    package_1__state_var_2)) )))
+  (! (= (= (invariant__ package_1__state_var_1 package_1__state_var_2) true)
+     (<= package_1__state_var_1 package_1__state_var_2)) :pattern ((invariant__
+                                                                   package_1__state_var_1
+                                                                   package_1__state_var_2)) )))
 
 (declare-fun state_var_1 () Int)
 
@@ -95,10 +92,6 @@
 
 ;; H
   (assert (in_range state_var_2))
-
-;; H
-  (assert (invariant____function_guard (invariant__ state_var_1 state_var_2)
-  state_var_1 state_var_2))
 
 ;; H
   (assert (= (invariant__ state_var_1 state_var_2) true))

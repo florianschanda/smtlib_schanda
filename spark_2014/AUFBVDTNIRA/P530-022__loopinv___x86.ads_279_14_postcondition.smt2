@@ -299,24 +299,18 @@
      (and
      (and (dynamic_invariant regold true true true) (dynamic_invariant regnew
      true true true)) (dynamic_invariant1 val__ true true true))
-     (let ((result (writereg16post regold regnew val__)))
-     (and (readreg16__function_guard (readreg16 regnew) regnew)
-     (=> (writereg16post__function_guard result regold regnew val__)
-     (= (= result true)
+     (= (= (writereg16post regold regnew val__) true)
      (and (= (readreg16 regnew) val__)
-     (= (bvand regnew ((_ int2bv 64) 18446744073709486080)) (bvand regold ((_ int2bv 64) 18446744073709486080))))))))) :pattern (
+     (= (bvand regnew ((_ int2bv 64) 18446744073709486080)) (bvand regold ((_ int2bv 64) 18446744073709486080)))))) :pattern (
   (writereg16post regold regnew val__)) ))))
 
 ;; writereg16post__def_axiom
   (assert
   (forall ((regold (_ BitVec 64)) (regnew (_ BitVec 64)))
   (forall ((val__ (_ BitVec 16)))
-  (! (=> (writereg16post__function_guard (writereg16post regold regnew val__)
-     regold regnew val__)
-     (and (readreg16__function_guard (readreg16 regnew) regnew)
-     (= (= (writereg16post regold regnew val__) true)
+  (! (= (= (writereg16post regold regnew val__) true)
      (and (= (readreg16 regnew) val__)
-     (= (bvand regnew ((_ int2bv 64) 18446744073709486080)) (bvand regold ((_ int2bv 64) 18446744073709486080))))))) :pattern (
+     (= (bvand regnew ((_ int2bv 64) 18446744073709486080)) (bvand regold ((_ int2bv 64) 18446744073709486080))))) :pattern (
   (writereg16post regold regnew val__)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -330,10 +324,8 @@
   (forall ((reg (_ BitVec 64)))
   (! (=> (dynamic_invariant reg true true true)
      (let ((result (readreg16 reg)))
-     (=> (readreg16__function_guard result reg)
      (and (= result ((_ extract 15 0) (bvand reg ((_ int2bv 64) 65535))))
-     (dynamic_invariant1 result true false true))))) :pattern ((readreg16
-                                                               reg)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((readreg16 reg)) )))
 
 (declare-fun rdx () (_ BitVec 64))
 
@@ -358,10 +350,6 @@
 
 ;; H
   (assert (= rdx3 rdx1))
-
-;; H
-  (assert (writereg16post__function_guard (writereg16post rdx rdx2 val__) 
-  rdx rdx2 val__))
 
 (assert
 ;; WP_parameter_def

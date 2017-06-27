@@ -179,34 +179,24 @@
 ;; user_eq__def_axiom
   (assert
   (forall ((a us_rep) (b us_rep))
-  (! (and (oeq__function_guard (oeq a b) a b) (= (user_eq3 a b) (oeq a b))) :pattern (
-  (user_eq3 a b)) )))
+  (! (= (user_eq3 a b) (oeq a b)) :pattern ((user_eq3 a b)) )))
 
-;; temp___result_313_def
-  (assert
-  (forall ((temp___312 us_rep)) (length__function_guard (length temp___312)
-  temp___312)))
-
-(define-fun default_initial_assumption ((temp___expr_310 us_rep)
-  (temp___skip_top_level_311 Bool)) Bool (=>
+(define-fun default_initial_assumption ((temp___expr_309 us_rep)
+  (temp___skip_top_level_310 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_311 true))
-                                         (= (length temp___expr_310) 0)))
+                                         (= temp___skip_top_level_310 true))
+                                         (= (length temp___expr_309) 0)))
 
 ;; length__post_axiom
   (assert
-  (forall ((s us_rep))
-  (! (let ((result (length s)))
-     (=> (length__function_guard result s) (dynamic_invariant result true
-     false true))) :pattern ((length s)) )))
+  (forall ((s us_rep)) (! (dynamic_invariant (length s) true false
+  true) :pattern ((length s)) )))
 
 ;; length__post__dispatch_axiom
   (assert
   (forall ((attr__tag Int))
-  (forall ((s us_rep))
-  (! (let ((result (length1 attr__tag s)))
-     (=> (length__function_guard1 result attr__tag s) (dynamic_invariant
-     result true false true))) :pattern ((length1 attr__tag s)) ))))
+  (forall ((s us_rep)) (! (dynamic_invariant (length1 attr__tag s) true false
+  true) :pattern ((length1 attr__tag s)) ))))
 
 (declare-fun get (us_rep Int) Int)
 
@@ -255,22 +245,17 @@
   (assert
   (forall ((s us_rep))
   (forall ((n Int))
-  (! (and (length__function_guard (length s) s)
-     (=>
+  (! (=>
      (and (dynamic_invariant2 n true true true)
-     (and (<= 1 n) (<= n (length s))))
-     (let ((result (get s n)))
-     (=> (get__function_guard result s n) (dynamic_invariant3 result true
-     false true))))) :pattern ((get s n)) ))))
+     (and (<= 1 n) (<= n (length s)))) (dynamic_invariant3 (get s n) true
+     false true)) :pattern ((get s n)) ))))
 
 ;; get__post__dispatch_axiom
   (assert
   (forall ((attr__tag Int) (n Int))
   (forall ((s us_rep))
-  (! (=> (dynamic_invariant2 n true true true)
-     (let ((result (get1 attr__tag s n)))
-     (=> (get__function_guard1 result attr__tag s n) (dynamic_invariant3
-     result true false true)))) :pattern ((get1 attr__tag s n)) ))))
+  (! (=> (dynamic_invariant2 n true true true) (dynamic_invariant3
+     (get1 attr__tag s n) true false true)) :pattern ((get1 attr__tag s n)) ))))
 
 (declare-fun mem (us_rep Int) Bool)
 
@@ -283,12 +268,9 @@
   (assert
   (forall ((s us_rep))
   (forall ((r Int))
-  (! (=> (mem__function_guard (mem s r) s r)
-     (and (length__function_guard (length s) s)
-     (and (forall ((j Int)) (get__function_guard (get s j) s j))
-     (= (= (mem s r) true)
+  (! (= (= (mem s r) true)
      (exists ((j Int))
-     (and (and (<= 1 j) (<= j (length s))) (= (get s j) r))))))) :pattern (
+     (and (and (<= 1 j) (<= j (length s))) (= (get s j) r)))) :pattern (
   (mem s r)) ))))
 
 (declare-fun s () us_rep)
@@ -343,8 +325,6 @@
   (! (=> (in_range5 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -375,17 +355,10 @@
 ;; oeq__post_axiom
   (assert
   (forall ((s1 us_rep) (s2 us_rep))
-  (! (let ((result (oeq s1 s2)))
-     (and (length__function_guard (length s1) s1)
-     (and (length__function_guard (length s2) s2)
-     (and (length__function_guard (length s1) s1)
-     (and (forall ((n Int)) (get__function_guard (get s1 n) s1 n))
-     (and (forall ((n Int)) (get__function_guard (get s2 n) s2 n))
-     (=> (oeq__function_guard result s1 s2)
-     (= (= result true)
+  (! (= (= (oeq s1 s2) true)
      (and (= (length s1) (length s2))
      (forall ((n Int))
-     (=> (and (<= 1 n) (<= n (length s1))) (= (get s1 n) (get s2 n))))))))))))) :pattern (
+     (=> (and (<= 1 n) (<= n (length s1))) (= (get s1 n) (get s2 n)))))) :pattern (
   (oeq s1 s2)) )))
 
 ;; oeq__post__dispatch_axiom
@@ -397,11 +370,11 @@
 
 (declare-fun list_allocator__m__find__L_1__R19b__assume () Int)
 
-(declare-fun temp___571 () Int)
+(declare-fun temp___383 () Int)
 
-(declare-fun temp___572 () Int)
+(declare-fun temp___384 () Int)
 
-(declare-fun temp___568 () Int)
+(declare-fun temp___382 () Int)
 
 (declare-fun o () Int)
 
@@ -499,20 +472,9 @@
   (assert (in_range3 r))
 
 ;; H
-  (assert (forall ((k Int)) (get__function_guard (get s k) s k)))
-
-;; H
-  (assert (forall ((k Int)) (get__function_guard (get s k) s k)))
-
-;; H
-  (assert (forall ((k Int)) (get__function_guard (get s k) s k)))
-
-;; H
   (assert
-  (and
-  (and (= list_allocator__m__find__L_1__R19b__assume (length s))
-  (length__function_guard list_allocator__m__find__L_1__R19b__assume 
-  s)) (in_range1 list_allocator__m__find__L_1__R19b__assume)))
+  (and (= list_allocator__m__find__L_1__R19b__assume (length s)) (in_range1
+  list_allocator__m__find__L_1__R19b__assume)))
 
 ;; H
   (assert (= list_allocator__m__find__L_1__R19b__assume r19b))
@@ -531,11 +493,11 @@
   (= j14 (mk_int__ref j4)))
   (and (= list_allocator__m__find__result15 list_allocator__m__find__result6)
   (= j11 j5)))
-  (and (= temp___571 1)
-  (and (= temp___572 r19b)
-  (and (and (= result7 j16) (= j1 temp___571))
-  (and (and (<= temp___571 j1) (<= j1 temp___572))
-  (and (= temp___568 j1)
+  (and (= temp___383 1)
+  (and (= temp___384 r19b)
+  (and (and (= result7 j16) (= j1 temp___383))
+  (and (and (<= temp___383 j1) (<= j1 temp___384))
+  (and (= temp___382 j1)
   (or
   (and
   (and
@@ -544,16 +506,14 @@
   (and (= list_allocator__m__find__result6 list_allocator__m__find__result2)
   (= j5 j1)))
   (and
-  (and
-  (and (and (= o (get s j1)) (get__function_guard o s j1)) (in_range4 o))
+  (and (and (= o (get s j1)) (in_range4 o))
   (= result1 (ite (= o r) true false)))
   (and (= result1 true)
   (and (= result2 list_allocator__m__find__result)
   (= list_allocator__m__find__result2 j1)))))
   (and
   (and
-  (and
-  (and (and (= o (get s j1)) (get__function_guard o s j1)) (in_range4 o))
+  (and (and (= o (get s j1)) (in_range4 o))
   (= result1 (ite (= o r) true false)))
   (and (not (= result1 true))
   (and (= list_allocator__m__find__result2 list_allocator__m__find__result)
@@ -568,11 +528,10 @@
   (and
   (and (=> (<= 1 r19b) (dynamic_property 1 r19b j2))
   (and (<= 1 j2) (<= j2 r19b)))
-  (and (not (= j2 temp___572))
+  (and (not (= j2 temp___384))
   (and (and (= j2 result3) (= j3 (+ j2 1)))
   (and
-  (and
-  (and (and (= o1 (get s j3)) (get__function_guard o1 s j3)) (in_range4 o1))
+  (and (and (= o1 (get s j3)) (in_range4 o1))
   (= result4 (ite (= o1 r) true false)))
   (and (= result4 true)
   (and (= result5 list_allocator__m__find__result3)
@@ -582,11 +541,10 @@
   (ite (and (<= 1 j1) (<= j1 r19b))
   (and
   (and
-  (and (= temp___568 j1)
+  (and (= temp___382 j1)
   (and
   (and
-  (and
-  (and (and (= o (get s j1)) (get__function_guard o s j1)) (in_range4 o))
+  (and (and (= o (get s j1)) (in_range4 o))
   (= result1 (ite (= o r) true false)))
   (and (not (= result1 true))
   (and (= list_allocator__m__find__result2 list_allocator__m__find__result)
@@ -645,25 +603,12 @@
   (assert (= j13 j11))
 
 ;; H
-  (assert (mem__function_guard (mem s r) s r))
-
-;; H
-  (assert (length__function_guard (length s) s))
-
-;; H
-  (assert (get__function_guard (get s list_allocator__m__find__result16) 
-  s list_allocator__m__find__result16))
-
-;; H
   (assert
   (=> (= (mem s r) true)
   (and
   (and (<= 1 list_allocator__m__find__result16)
   (<= list_allocator__m__find__result16 (length s)))
   (= (get s list_allocator__m__find__result16) r))))
-
-;; H
-  (assert (mem__function_guard (mem s r) s r))
 
 ;; H
   (assert (not (= (mem s r) true)))

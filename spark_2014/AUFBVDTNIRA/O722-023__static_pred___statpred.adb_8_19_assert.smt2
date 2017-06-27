@@ -103,17 +103,14 @@
 ;; id__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (id x)))
-     (=> (id__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (id x) true
+     false true)) :pattern ((id x)) )))
 
 ;; id__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true) (id__function_guard (id x) x))
-     (= (id x) x)) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (id x) x)) :pattern (
+  (id x)) )))
 
 (define-fun dynamic_invariant1 ((temp___expr_171 Int)
   (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
@@ -139,23 +136,11 @@
                                                       (<= temp___175 2147483647))))
 
 ;; H
-  (assert (id__function_guard (id 2) 2))
-
-;; H
-  (assert (id__function_guard (id 2) 2))
-
-;; H
   (assert
-  (let ((temp___180 (id 2)))
+  (let ((temp___179 (id 2)))
   (and (in_range1 (id 2))
-  (or (and (<= (- 2147483648) temp___180) (<= temp___180 (- 2)))
-  (and (<= 2 temp___180) (<= temp___180 2147483647))))))
-
-;; H
-  (assert (id__function_guard (id (- 2)) (- 2)))
-
-;; H
-  (assert (id__function_guard (id (- 2)) (- 2)))
+  (or (and (<= (- 2147483648) temp___179) (<= temp___179 (- 2)))
+  (and (<= 2 temp___179) (<= temp___179 2147483647))))))
 
 (assert
 ;; WP_parameter_def

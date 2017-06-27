@@ -173,6 +173,24 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
+(declare-fun to_rep (even) Int)
+
+(declare-fun of_rep (Int) even)
+
+;; inversion_axiom
+  (assert
+  (forall ((x even)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x even)) (! (in_range1 (to_rep x)) :pattern ((to_rep x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (in_range1 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                            (of_rep x))) )))
+
 (declare-sort teven_pairD1 0)
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
@@ -194,24 +212,6 @@
  (mk_teven_pairD1__ref (teven_pairD1__content teven_pairD1)))))
 (define-fun teven_pairD1__ref___projection ((a teven_pairD1__ref)) teven_pairD1 
   (teven_pairD1__content a))
-
-(declare-fun to_rep (even) Int)
-
-(declare-fun of_rep (Int) even)
-
-;; inversion_axiom
-  (assert
-  (forall ((x even)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
-
-;; range_axiom
-  (assert
-  (forall ((x even)) (! (in_range1 (to_rep x)) :pattern ((to_rep x)) )))
-
-;; coerce_axiom
-  (assert
-  (forall ((x Int))
-  (! (=> (in_range1 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
-                                                            (of_rep x))) )))
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int even))))))
@@ -343,25 +343,6 @@
 (declare-fun b () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
-
-(declare-sort t1b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq3 (t1b t1b) Bool)
-
-(declare-fun dummy3 () t1b)
-
-(declare-datatypes () ((t1b__ref (mk_t1b__ref (t1b__content t1b)))))
-(define-fun t1b__ref___projection ((a1 t1b__ref)) t1b (t1b__content a1))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 

@@ -198,6 +198,15 @@
 (define-fun my_task_type__ref___projection ((a my_task_type__ref)) us_rep 
   (my_task_type__content a))
 
+(define-fun default_initial_assumption ((temp___expr_516 us_rep)
+  (temp___skip_top_level_517 Bool)) Bool (and
+                                         (= (attr__constrained
+                                            temp___expr_516) false)
+                                         (= (to_rep
+                                            (rec__task_types__my_task_type__c
+                                            (us_split_discrs1
+                                            temp___expr_516))) 0)))
+
 (declare-fun t1 () us_rep)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)

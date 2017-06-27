@@ -378,9 +378,7 @@
   (assert (not (= (bool_eq2 right time_span_zero) true)))
 
 ;; H
-  (assert
-  (and (= o (osubtract__4 time_span_unit)) (osubtract__4__function_guard 
-  o time_span_unit)))
+  (assert (= o (osubtract__4 time_span_unit)))
 
 ;; H
   (assert (= o1 (bool_eq2 right o)))
@@ -394,16 +392,13 @@
   (assert (not (= result true)))
 
 ;; H
-  (assert
-  (and (= o4 (to_duration__2 right)) (to_duration__2__function_guard 
-  o4 right)))
+  (assert (= o4 (to_duration__2 right)))
 
 ;; H
   (assert (= o5 (to_fixed o4)))
 
 ;; H
-  (assert
-  (and (= o2 (to_duration__2 left)) (to_duration__2__function_guard o2 left)))
+  (assert (= o2 (to_duration__2 left)))
 
 ;; H
   (assert (= o3 (to_fixed o2)))

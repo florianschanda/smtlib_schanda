@@ -97,11 +97,11 @@
 
 (declare-fun is_empty__function_guard (Bool us_rep) Bool)
 
-(define-fun default_initial_assumption ((temp___expr_176 us_rep)
-  (temp___skip_top_level_177 Bool)) Bool (=>
+(define-fun default_initial_assumption ((temp___expr_173 us_rep)
+  (temp___skip_top_level_174 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_177 true))
-                                         (= (is_empty temp___expr_176) true)))
+                                         (= temp___skip_top_level_174 true))
+                                         (= (is_empty temp___expr_173) true)))
 
 (declare-fun length (us_rep) Int)
 
@@ -218,8 +218,7 @@
 ;; my_equal_02__def_axiom
   (assert
   (forall ((a Int) (b Int))
-  (! (=> (my_equal_02__function_guard (my_equal_02 a b) a b)
-     (= (= (my_equal_02 a b) true) (= a b))) :pattern ((my_equal_02 a b)) )))
+  (! (= (= (my_equal_02 a b) true) (= a b)) :pattern ((my_equal_02 a b)) )))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -256,12 +255,12 @@
 (define-fun element_type__ref_2__projection ((a element_type__ref)) element_type 
   (element_type__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_169 Int)
-  (temp___is_init_166 Bool) (temp___skip_constant_167 Bool)
-  (temp___do_toplevel_168 Bool)) Bool (=>
-                                      (or (= temp___is_init_166 true)
+(define-fun dynamic_invariant2 ((temp___expr_166 Int)
+  (temp___is_init_163 Bool) (temp___skip_constant_164 Bool)
+  (temp___do_toplevel_165 Bool)) Bool (=>
+                                      (or (= temp___is_init_163 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range4 temp___expr_169)))
+                                      (in_range4 temp___expr_166)))
 
 (declare-fun contains (us_rep Int) Bool)
 
@@ -272,14 +271,11 @@
   (forall ((container us_rep))
   (forall ((item Int))
   (! (=> (dynamic_invariant2 item true true true)
-     (and
-     (forall ((e Int)) (my_equal_02__function_guard (my_equal_02 e item) e
-     item))
      (=> (= (of_int 1) true)
      (=>
      (exists ((e Int))
      (and (and (in_range4 e) (= (contains container e) true))
-     (= (my_equal_02 e item) true))) (= (contains container item) true))))) :pattern (
+     (= (my_equal_02 e item) true))) (= (contains container item) true)))) :pattern (
   (contains container item)) ))))
 
 ;; ole__post_axiom

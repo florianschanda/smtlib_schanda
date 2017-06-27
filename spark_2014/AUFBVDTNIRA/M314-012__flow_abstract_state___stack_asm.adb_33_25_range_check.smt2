@@ -107,12 +107,12 @@
 (declare-datatypes () ((ptr_t__ref (mk_ptr_t__ref (ptr_t__content ptr_t)))))
 (define-fun ptr_t__ref___projection ((a ptr_t__ref)) ptr_t (ptr_t__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_158 Int)
-  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
-  (temp___do_toplevel_157 Bool)) Bool (=>
-                                      (or (= temp___is_init_155 true)
+(define-fun dynamic_invariant1 ((temp___expr_153 Int)
+  (temp___is_init_150 Bool) (temp___skip_constant_151 Bool)
+  (temp___do_toplevel_152 Bool)) Bool (=>
+                                      (or (= temp___is_init_150 true)
                                       (<= 0 100)) (in_range1
-                                      temp___expr_158)))
+                                      temp___expr_153)))
 
 ;; is_empty__post_axiom
   (assert true)
@@ -254,12 +254,12 @@
 (define-fun index_t__ref___projection ((a index_t__ref)) index_t (index_t__content
                                                                  a))
 
-(define-fun dynamic_invariant2 ((temp___expr_152 Int)
-  (temp___is_init_149 Bool) (temp___skip_constant_150 Bool)
-  (temp___do_toplevel_151 Bool)) Bool (=>
-                                      (or (= temp___is_init_149 true)
+(define-fun dynamic_invariant2 ((temp___expr_147 Int)
+  (temp___is_init_144 Bool) (temp___skip_constant_145 Bool)
+  (temp___do_toplevel_146 Bool)) Bool (=>
+                                      (or (= temp___is_init_144 true)
                                       (<= 1 100)) (in_range2
-                                      temp___expr_152)))
+                                      temp___expr_147)))
 
 (declare-fun the_ptr () Int)
 

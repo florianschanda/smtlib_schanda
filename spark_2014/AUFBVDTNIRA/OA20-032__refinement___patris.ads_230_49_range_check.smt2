@@ -351,12 +351,12 @@
 (define-fun action__ref___projection ((a action__ref)) action (action__content
                                                               a))
 
-(define-fun dynamic_invariant ((temp___expr_2044 Int)
-  (temp___is_init_2041 Bool) (temp___skip_constant_2042 Bool)
-  (temp___do_toplevel_2043 Bool)) Bool (=>
-                                       (or (= temp___is_init_2041 true)
+(define-fun dynamic_invariant ((temp___expr_2016 Int)
+  (temp___is_init_2013 Bool) (temp___skip_constant_2014 Bool)
+  (temp___do_toplevel_2015 Bool)) Bool (=>
+                                       (or (= temp___is_init_2013 true)
                                        (<= 0 4)) (in_range4
-                                       temp___expr_2044)))
+                                       temp___expr_2016)))
 
 (declare-sort turn_action 0)
 
@@ -386,12 +386,12 @@
                                        (<= 0 3)) (in_range2
                                        temp___expr_1926)))
 
-(define-fun dynamic_invariant2 ((temp___expr_2056 Int)
-  (temp___is_init_2053 Bool) (temp___skip_constant_2054 Bool)
-  (temp___do_toplevel_2055 Bool)) Bool (=>
-                                       (or (= temp___is_init_2053 true)
+(define-fun dynamic_invariant2 ((temp___expr_2028 Int)
+  (temp___is_init_2025 Bool) (temp___skip_constant_2026 Bool)
+  (temp___do_toplevel_2027 Bool)) Bool (=>
+                                       (or (= temp___is_init_2025 true)
                                        (<= 3 4)) (in_range5
-                                       temp___expr_2056)))
+                                       temp___expr_2028)))
 
 (declare-fun turn_direction (Int Int) Int)
 
@@ -402,18 +402,15 @@
   (forall ((d Int) (t Int))
   (! (=>
      (and (dynamic_invariant1 d true true true) (dynamic_invariant2 t true
-     true true))
-     (let ((result (turn_direction d t)))
-     (=> (turn_direction__function_guard result d t) (dynamic_invariant1
-     result true false true)))) :pattern ((turn_direction d t)) )))
+     true true)) (dynamic_invariant1 (turn_direction d t) true false true)) :pattern (
+  (turn_direction d t)) )))
 
 ;; turn_direction__def_axiom
   (assert
   (forall ((d Int) (t Int))
   (! (=>
-     (and
      (and (dynamic_invariant1 d true true true) (dynamic_invariant2 t true
-     true true)) (turn_direction__function_guard (turn_direction d t) d t))
+     true true))
      (= (turn_direction d t) (ite (= t 3) (ite (= d 0) 3 (- d 1))
                              (ite (= d 3) 0 (+ d 1))))) :pattern ((turn_direction
                                                                   d t)) )))
@@ -429,14 +426,13 @@
   (assert
   (forall ((p us_rep))
   (forall ((a Int))
-  (! (=> (move_is_possible__function_guard (move_is_possible p a) p a)
-     (= (= (move_is_possible p a) true)
+  (! (= (= (move_is_possible p a) true)
      (ite (= a 0) (in_range
      (- (to_rep (rec__patris__piece__x (us_split_fields1 p))) 1))
      (ite (= a 1) (in_range
      (+ (to_rep (rec__patris__piece__x (us_split_fields1 p))) 1))
      (=> (= a 2) (in_range1
-     (+ (to_rep1 (rec__patris__piece__y (us_split_fields1 p))) 1))))))) :pattern (
+     (+ (to_rep1 (rec__patris__piece__y (us_split_fields1 p))) 1)))))) :pattern (
   (move_is_possible p a)) ))))
 
 (declare-fun p () us_rep)
@@ -470,9 +466,6 @@
 
 ;; H
   (assert (in_range4 a))
-
-;; H
-  (assert (move_is_possible__function_guard (move_is_possible p a) p a))
 
 ;; H
   (assert (= (move_is_possible p a) true))

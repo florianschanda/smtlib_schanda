@@ -157,8 +157,7 @@
 ;; divides__def_axiom
   (assert
   (forall ((a Int) (b Int))
-  (! (=> (divides__function_guard (divides a b) a b)
-     (= (= (divides a b) true) (= (mod2 b a) 0))) :pattern ((divides a b)) )))
+  (! (= (= (divides a b) true) (= (mod2 b a) 0)) :pattern ((divides a b)) )))
 
 (declare-fun a () Int)
 
@@ -203,12 +202,6 @@
 
 ;; H
   (assert (not (and (= (mod2 a c1) 0) (= (mod2 b c1) 0))))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x a) x a)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x b) x b)))
 
 ;; H
   (assert

@@ -64,7 +64,7 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range temp___expr_15)))
 
-(declare-sort ta2D1 0)
+(declare-sort ta3D1 0)
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
 
@@ -76,28 +76,9 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
 
-(declare-fun user_eq1 (ta2D1 ta2D1) Bool)
+(declare-fun user_eq1 (ta3D1 ta3D1) Bool)
 
-(declare-fun dummy1 () ta2D1)
-
-(declare-datatypes () ((ta2D1__ref (mk_ta2D1__ref (ta2D1__content ta2D1)))))
-(define-fun ta2D1__ref___projection ((a ta2D1__ref)) ta2D1 (ta2D1__content a))
-
-(declare-sort ta3D1 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq2 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
-
-(declare-fun user_eq2 (ta3D1 ta3D1) Bool)
-
-(declare-fun dummy2 () ta3D1)
+(declare-fun dummy1 () ta3D1)
 
 (declare-datatypes () ((ta3D1__ref (mk_ta3D1__ref (ta3D1__content ta3D1)))))
 (define-fun ta3D1__ref___projection ((a ta3D1__ref)) ta3D1 (ta3D1__content a))
@@ -162,7 +143,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq3 ((a (Array Int integer)) (a__first Int) (a__last Int)
+(define-fun bool_eq2 ((a (Array Int integer)) (a__first Int) (a__last Int)
   (b (Array Int integer)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -181,7 +162,7 @@
   (assert
   (forall ((a (Array Int integer)) (b (Array Int integer)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq3 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq2 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -199,7 +180,7 @@
   (forall ((a (Array Int integer)) (b (Array Int integer)))
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq3 a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq2 a a_first a_last b b_first b_last) true)) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -210,7 +191,7 @@
      (exists ((i Int) (j Int))
      (and (<= i a_last)
      (and (< j b_last)
-     (and (= (bool_eq3 a a_first i b b_first j) true)
+     (and (= (bool_eq2 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
      (< (to_rep (select a (+ i 1))) (to_rep (select b (+ j 1))))))))))) :pattern (
@@ -224,13 +205,13 @@
      (exists ((i Int) (j Int))
      (and (<= i b_last)
      (and (< j a_last)
-     (and (= (bool_eq3 a a_first j b b_first i) true)
+     (and (= (bool_eq2 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
      (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
-(declare-fun dummy3 () (Array Int integer))
+(declare-fun dummy2 () (Array Int integer))
 
 (declare-fun value__size () Int)
 
@@ -263,7 +244,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int integer))) (<= 0 (object__alignment a))))
 
-(declare-fun user_eq3 ((Array Int integer) (Array Int integer)) Bool)
+(declare-fun user_eq2 ((Array Int integer) (Array Int integer)) Bool)
 
 (declare-datatypes ()
 ((map__ref1 (mk_map__ref1 (map__content1 (Array Int (Array Int integer)))))))
@@ -310,7 +291,7 @@
   (forall ((i Int))
   (! (= (select (singleton2 v i) i) v) :pattern ((select (singleton2 v i) i)) ))))
 
-(define-fun bool_eq4 ((a (Array Int (Array Int integer))) (a__first Int)
+(define-fun bool_eq3 ((a (Array Int (Array Int integer))) (a__first Int)
   (a__last Int) (b (Array Int (Array Int integer))) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -321,7 +302,7 @@
                            (=>
                            (and (<= a__first temp___idx_133)
                            (<= temp___idx_133 a__last))
-                           (= (bool_eq3 (select a temp___idx_133) 1 2
+                           (= (bool_eq2 (select a temp___idx_133) 1 2
                               (select b (+ (- b__first a__first) temp___idx_133))
                               1 2) true))))
                       true false))
@@ -331,14 +312,14 @@
   (forall ((a (Array Int (Array Int integer)))
   (b (Array Int (Array Int integer))))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq4 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq3 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
   (forall ((temp___idx_133 Int))
   (=> (and (<= a__first temp___idx_133) (<= temp___idx_133 a__last))
-  (= (bool_eq3 (select a temp___idx_133) 1 2
+  (= (bool_eq2 (select a temp___idx_133) 1 2
      (select b (+ (- b__first a__first) temp___idx_133)) 1 2) true))))))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -351,6 +332,25 @@
 
 (declare-sort t59s 0)
 
+(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
+
+(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
+
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
+
+(declare-fun user_eq3 (t59s t59s) Bool)
+
+(declare-fun dummy3 () t59s)
+
+(declare-datatypes () ((t59s__ref (mk_t59s__ref (t59s__content t59s)))))
+(define-fun t59s__ref___projection ((a t59s__ref)) t59s (t59s__content a))
+
+(declare-sort t65s 0)
+
 (define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
 
 (define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
@@ -361,14 +361,14 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
 
-(declare-fun user_eq4 (t59s t59s) Bool)
+(declare-fun user_eq4 (t65s t65s) Bool)
 
-(declare-fun dummy4 () t59s)
+(declare-fun dummy4 () t65s)
 
-(declare-datatypes () ((t59s__ref (mk_t59s__ref (t59s__content t59s)))))
-(define-fun t59s__ref___projection ((a t59s__ref)) t59s (t59s__content a))
+(declare-datatypes () ((t65s__ref (mk_t65s__ref (t65s__content t65s)))))
+(define-fun t65s__ref___projection ((a t65s__ref)) t65s (t65s__content a))
 
-(declare-sort t55s 0)
+(declare-sort t71s 0)
 
 (define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
 
@@ -380,14 +380,14 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
 
-(declare-fun user_eq5 (t55s t55s) Bool)
+(declare-fun user_eq5 (t71s t71s) Bool)
 
-(declare-fun dummy5 () t55s)
+(declare-fun dummy5 () t71s)
 
-(declare-datatypes () ((t55s__ref (mk_t55s__ref (t55s__content t55s)))))
-(define-fun t55s__ref___projection ((a t55s__ref)) t55s (t55s__content a))
+(declare-datatypes () ((t71s__ref (mk_t71s__ref (t71s__content t71s)))))
+(define-fun t71s__ref___projection ((a t71s__ref)) t71s (t71s__content a))
 
-(declare-sort t57s 0)
+(declare-sort t77s 0)
 
 (define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
 
@@ -399,14 +399,14 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
 
-(declare-fun user_eq6 (t57s t57s) Bool)
+(declare-fun user_eq6 (t77s t77s) Bool)
 
-(declare-fun dummy6 () t57s)
+(declare-fun dummy6 () t77s)
 
-(declare-datatypes () ((t57s__ref (mk_t57s__ref (t57s__content t57s)))))
-(define-fun t57s__ref___projection ((a t57s__ref)) t57s (t57s__content a))
+(declare-datatypes () ((t77s__ref (mk_t77s__ref (t77s__content t77s)))))
+(define-fun t77s__ref___projection ((a t77s__ref)) t77s (t77s__content a))
 
-(declare-sort t65s 0)
+(declare-sort t83s 0)
 
 (define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
 
@@ -418,221 +418,12 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
 
-(declare-fun user_eq7 (t65s t65s) Bool)
+(declare-fun user_eq7 (t83s t83s) Bool)
 
-(declare-fun dummy7 () t65s)
-
-(declare-datatypes () ((t65s__ref (mk_t65s__ref (t65s__content t65s)))))
-(define-fun t65s__ref___projection ((a t65s__ref)) t65s (t65s__content a))
-
-(declare-sort t61s 0)
-
-(define-fun in_range7 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq9 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
-
-(declare-fun user_eq8 (t61s t61s) Bool)
-
-(declare-fun dummy8 () t61s)
-
-(declare-datatypes () ((t61s__ref (mk_t61s__ref (t61s__content t61s)))))
-(define-fun t61s__ref___projection ((a t61s__ref)) t61s (t61s__content a))
-
-(declare-sort t63s 0)
-
-(define-fun in_range8 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq10 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
-
-(declare-fun user_eq9 (t63s t63s) Bool)
-
-(declare-fun dummy9 () t63s)
-
-(declare-datatypes () ((t63s__ref (mk_t63s__ref (t63s__content t63s)))))
-(define-fun t63s__ref___projection ((a t63s__ref)) t63s (t63s__content a))
-
-(declare-sort t71s 0)
-
-(define-fun in_range9 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq11 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE9 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Int)
-
-(declare-fun user_eq10 (t71s t71s) Bool)
-
-(declare-fun dummy10 () t71s)
-
-(declare-datatypes () ((t71s__ref (mk_t71s__ref (t71s__content t71s)))))
-(define-fun t71s__ref___projection ((a t71s__ref)) t71s (t71s__content a))
-
-(declare-sort t67s 0)
-
-(define-fun in_range10 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq12 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE10 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) Int)
-
-(declare-fun user_eq11 (t67s t67s) Bool)
-
-(declare-fun dummy11 () t67s)
-
-(declare-datatypes () ((t67s__ref (mk_t67s__ref (t67s__content t67s)))))
-(define-fun t67s__ref___projection ((a t67s__ref)) t67s (t67s__content a))
-
-(declare-sort t69s 0)
-
-(define-fun in_range11 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq13 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE11 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check11 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE11 (us_image) Int)
-
-(declare-fun user_eq12 (t69s t69s) Bool)
-
-(declare-fun dummy12 () t69s)
-
-(declare-datatypes () ((t69s__ref (mk_t69s__ref (t69s__content t69s)))))
-(define-fun t69s__ref___projection ((a t69s__ref)) t69s (t69s__content a))
-
-(declare-sort t77s 0)
-
-(define-fun in_range12 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq14 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE12 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check12 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE12 (us_image) Int)
-
-(declare-fun user_eq13 (t77s t77s) Bool)
-
-(declare-fun dummy13 () t77s)
-
-(declare-datatypes () ((t77s__ref (mk_t77s__ref (t77s__content t77s)))))
-(define-fun t77s__ref___projection ((a t77s__ref)) t77s (t77s__content a))
-
-(declare-sort t73s 0)
-
-(define-fun in_range13 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq15 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE13 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check13 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE13 (us_image) Int)
-
-(declare-fun user_eq14 (t73s t73s) Bool)
-
-(declare-fun dummy14 () t73s)
-
-(declare-datatypes () ((t73s__ref (mk_t73s__ref (t73s__content t73s)))))
-(define-fun t73s__ref___projection ((a t73s__ref)) t73s (t73s__content a))
-
-(declare-sort t75s 0)
-
-(define-fun in_range14 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq16 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE14 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check14 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE14 (us_image) Int)
-
-(declare-fun user_eq15 (t75s t75s) Bool)
-
-(declare-fun dummy15 () t75s)
-
-(declare-datatypes () ((t75s__ref (mk_t75s__ref (t75s__content t75s)))))
-(define-fun t75s__ref___projection ((a t75s__ref)) t75s (t75s__content a))
-
-(declare-sort t83s 0)
-
-(define-fun in_range15 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq17 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE15 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check15 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE15 (us_image) Int)
-
-(declare-fun user_eq16 (t83s t83s) Bool)
-
-(declare-fun dummy16 () t83s)
+(declare-fun dummy7 () t83s)
 
 (declare-datatypes () ((t83s__ref (mk_t83s__ref (t83s__content t83s)))))
 (define-fun t83s__ref___projection ((a t83s__ref)) t83s (t83s__content a))
-
-(declare-sort t79s 0)
-
-(define-fun in_range16 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq18 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE16 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check16 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE16 (us_image) Int)
-
-(declare-fun user_eq17 (t79s t79s) Bool)
-
-(declare-fun dummy17 () t79s)
-
-(declare-datatypes () ((t79s__ref (mk_t79s__ref (t79s__content t79s)))))
-(define-fun t79s__ref___projection ((a t79s__ref)) t79s (t79s__content a))
-
-(declare-sort t81s 0)
-
-(define-fun in_range17 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq19 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE17 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check17 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE17 (us_image) Int)
-
-(declare-fun user_eq18 (t81s t81s) Bool)
-
-(declare-fun dummy18 () t81s)
-
-(declare-datatypes () ((t81s__ref (mk_t81s__ref (t81s__content t81s)))))
-(define-fun t81s__ref___projection ((a t81s__ref)) t81s (t81s__content a))
 
 (declare-fun temp___224 ((Array Int integer)
   (Array Int integer)) (Array Int (Array Int integer)))
@@ -831,5 +622,5 @@
 ;; WP_parameter_def
  ;; File "arr_aggregate.ads", line 41, characters 0-0
   (not
-  (= (bool_eq4 a1 1 2 (temp___224 (temp___229 one 2) (temp___234 one 2)) 1 2) true)))
+  (= (bool_eq3 a1 1 2 (temp___224 (temp___229 one 2) (temp___234 one 2)) 1 2) true)))
 (check-sat)

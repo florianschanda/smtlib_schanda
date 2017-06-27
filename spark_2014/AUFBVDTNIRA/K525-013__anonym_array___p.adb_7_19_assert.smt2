@@ -231,25 +231,6 @@
      (< (to_rep (select b1 (+ i 1))) (to_rep (select a1 (+ j 1))))))))))) :pattern (
   (compare a1 a_first a_last b1 b_first b_last)) ))))
 
-(declare-sort t3b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 20)))
-
-(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq2 (t3b t3b) Bool)
-
-(declare-fun dummy2 () t3b)
-
-(declare-datatypes () ((t3b__ref (mk_t3b__ref (t3b__content t3b)))))
-(define-fun t3b__ref___projection ((a1 t3b__ref)) t3b (t3b__content a1))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
 (declare-fun p__x__aggregate_def (Int) (Array Int integer))
@@ -262,19 +243,17 @@
 
 (declare-fun x () (Array Int integer))
 
-(declare-fun o () (Array Int integer))
+(declare-fun o () integer)
 
-(declare-fun o1 () integer)
+(declare-fun o1 () Int)
 
-(declare-fun o2 () Int)
+(declare-fun o2 () (Array Int integer))
 
-(declare-fun o3 () (Array Int integer))
+(declare-fun o3 () integer)
 
-(declare-fun o4 () integer)
+(declare-fun o4 () Int)
 
-(declare-fun o5 () Int)
-
-(declare-fun o6 () (Array Int integer))
+(declare-fun o5 () (Array Int integer))
 
 (declare-fun result () (Array Int integer))
 
@@ -301,49 +280,46 @@
   (assert (and (and (<= 1 a) (<= a 20)) (and (<= 1 b) (<= b 20))))
 
 ;; H
-  (assert (= o (p__x__aggregate_def (- 123))))
-
-;; H
   (assert (= result x))
 
 ;; H
-  (assert (= x1 o))
+  (assert (= x1 (p__x__aggregate_def (- 123))))
 
 ;; H
-  (assert (= (to_rep o1) 1))
+  (assert (= (to_rep o) 1))
 
 ;; H
   (assert (and (<= 1 a) (<= a 20)))
 
 ;; H
-  (assert (= o2 a))
+  (assert (= o1 a))
 
 ;; H
-  (assert (= o3 (store x1 o2 o1)))
+  (assert (= o2 (store x1 o1 o)))
 
 ;; H
   (assert (= result1 x1))
 
 ;; H
-  (assert (= x2 o3))
+  (assert (= x2 o2))
 
 ;; H
-  (assert (= (to_rep o4) 2))
+  (assert (= (to_rep o3) 2))
 
 ;; H
   (assert (and (<= 1 b) (<= b 20)))
 
 ;; H
-  (assert (= o5 b))
+  (assert (= o4 b))
 
 ;; H
-  (assert (= o6 (store x2 o5 o4)))
+  (assert (= o5 (store x2 o4 o3)))
 
 ;; H
   (assert (= result2 x2))
 
 ;; H
-  (assert (= x3 o6))
+  (assert (= x3 o5))
 
 ;; H
   (assert (not (= a b)))

@@ -110,8 +110,7 @@
   (assert (in_range var4))
 
 ;; H
-  (assert
-  (and (= result (priv_f pr_state)) (priv_f__function_guard result pr_state)))
+  (assert (= result (priv_f pr_state)))
 
 ;; H
   (assert (= result true))

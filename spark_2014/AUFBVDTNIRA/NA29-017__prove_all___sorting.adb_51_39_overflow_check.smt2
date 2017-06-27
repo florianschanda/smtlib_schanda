@@ -334,8 +334,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -367,9 +365,9 @@
 
 (declare-fun i () Int)
 
-(declare-fun temp___260 () Int)
+(declare-fun temp___238 () Int)
 
-(declare-fun temp___259 () Int)
+(declare-fun temp___237 () Int)
 
 (declare-fun o () Int)
 
@@ -494,15 +492,15 @@
   (and (<= 0 i2) (<= i2 (- length1 1)))))
 
 ;; H
-  (assert (and (= temp___259 (+ a_first i2)) (in_range1 (+ a_first i2))))
+  (assert (and (= temp___237 (+ a_first i2)) (in_range1 (+ a_first i2))))
 
 ;; H
   (assert
-  (and (<= (to_rep (first (rt a))) temp___259)
-  (<= temp___259 (to_rep (last (rt a))))))
+  (and (<= (to_rep (first (rt a))) temp___237)
+  (<= temp___237 (to_rep (last (rt a))))))
 
 ;; H
-  (assert (= o temp___259))
+  (assert (= o temp___237))
 
 ;; H
   (assert (= o1 (select (elts a) o)))
@@ -514,14 +512,14 @@
   (assert (= (to_rep o3) o2))
 
 ;; H
-  (assert (and (= temp___260 (+ b_first i2)) (in_range1 (+ b_first i2))))
+  (assert (and (= temp___238 (+ b_first i2)) (in_range1 (+ b_first i2))))
 
 ;; H
   (assert
-  (and (<= (to_rep b__first) temp___260) (<= temp___260 (to_rep b__last))))
+  (and (<= (to_rep b__first) temp___238) (<= temp___238 (to_rep b__last))))
 
 ;; H
-  (assert (= o4 temp___260))
+  (assert (= o4 temp___238))
 
 ;; H
   (assert (= o5 (store b1 o4 o3)))

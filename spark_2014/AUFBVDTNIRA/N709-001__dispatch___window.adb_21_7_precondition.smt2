@@ -467,24 +467,24 @@
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 us_rep1)))))
 (define-fun t__ref_2__projection ((a t__ref1)) us_rep1 (t__content1 a))
 
-(define-fun default_initial_assumption ((temp___expr_173 us_rep1)
-  (temp___skip_top_level_174 Bool)) Bool (and
-                                         (= (attr__tag1 temp___expr_173) 
+(define-fun default_initial_assumption ((temp___expr_149 us_rep1)
+  (temp___skip_top_level_150 Bool)) Bool (and
+                                         (= (attr__tag1 temp___expr_149) 
                                          us_tag1)
                                          (and
                                          (and
                                          (= (to_rep
                                             (rec__object__t__area1
                                             (us_split_fields3
-                                            temp___expr_173))) (- 1))
+                                            temp___expr_149))) (- 1))
                                          (= (to_rep
                                             (rec__object__t__max_width1
                                             (us_split_fields3
-                                            temp___expr_173))) (- 1)))
+                                            temp___expr_149))) (- 1)))
                                          (= (to_rep
                                             (rec__object__t__max_height1
                                             (us_split_fields3
-                                            temp___expr_173))) (- 1)))))
+                                            temp___expr_149))) (- 1)))))
 
 (declare-fun set_width__specific_post (Int us_split_fields2 Int Int
   us_split_fields2) Bool)
@@ -567,76 +567,56 @@
 ;; object__t__compat_axiom
   (assert
   (forall ((obj us_rep))
-  (! (=> (has_stored_area__function_guard1 (has_stored_area1 us_tag obj)
-     us_tag obj)
-     (and (has_stored_area__function_guard (has_stored_area obj) obj)
-     (= (to_int1 (has_stored_area obj)) (to_int1
-                                        (has_stored_area1 us_tag obj))))) :pattern (
+  (! (= (to_int1 (has_stored_area obj)) (to_int1
+                                        (has_stored_area1 us_tag obj))) :pattern (
   (has_stored_area1 us_tag obj)) )))
 
 ;; rectangle__t__compat_axiom
   (assert
   (forall ((obj us_rep))
-  (! (=> (has_stored_area__function_guard1 (has_stored_area1 us_tag1 obj)
-     us_tag1 obj)
-     (and (has_stored_area__function_guard (has_stored_area obj) obj)
-     (= (to_int1 (has_stored_area obj)) (to_int1
-                                        (has_stored_area1 us_tag1 obj))))) :pattern (
+  (! (= (to_int1 (has_stored_area obj)) (to_int1
+                                        (has_stored_area1 us_tag1 obj))) :pattern (
   (has_stored_area1 us_tag1 obj)) )))
 
 ;; has_stored_area__def_axiom
   (assert
   (forall ((obj us_rep))
-  (! (=> (has_stored_area__function_guard (has_stored_area obj) obj)
-     (= (= (has_stored_area obj) true) (in_range
-     (to_rep (rec__object__t__area (us_split_fields1 obj)))))) :pattern (
+  (! (= (= (has_stored_area obj) true) (in_range
+     (to_rep (rec__object__t__area (us_split_fields1 obj))))) :pattern (
   (has_stored_area obj)) )))
 
 ;; get_stored_area__post_axiom
   (assert
   (forall ((obj us_rep))
-  (! (and (has_stored_area__function_guard (has_stored_area obj) obj)
-     (=> (= (has_stored_area obj) true)
-     (let ((result (get_stored_area obj)))
-     (=> (get_stored_area__function_guard result obj) (dynamic_invariant
-     result true false true))))) :pattern ((get_stored_area obj)) )))
+  (! (=> (= (has_stored_area obj) true) (dynamic_invariant
+     (get_stored_area obj) true false true)) :pattern ((get_stored_area obj)) )))
 
 ;; get_stored_area__post__dispatch_axiom
   (assert
   (forall ((attr__tag2 Int))
   (forall ((obj us_rep))
-  (! (and (has_stored_area__function_guard1
-     (has_stored_area1 (attr__tag obj) obj) (attr__tag obj) obj)
-     (=> (= (has_stored_area1 (attr__tag obj) obj) true)
-     (let ((result (get_stored_area1 attr__tag2 obj)))
-     (=> (get_stored_area__function_guard1 result attr__tag2 obj)
-     (dynamic_invariant result true false true))))) :pattern ((get_stored_area1
-                                                              attr__tag2 obj)) ))))
+  (! (=> (= (has_stored_area1 (attr__tag obj) obj) true) (dynamic_invariant
+     (get_stored_area1 attr__tag2 obj) true false true)) :pattern ((get_stored_area1
+                                                                   attr__tag2
+                                                                   obj)) ))))
 
 ;; object__t__compat_axiom
   (assert
   (forall ((obj us_rep))
-  (! (=> (get_stored_area__function_guard1 (get_stored_area1 us_tag obj)
-     us_tag obj)
-     (and (get_stored_area__function_guard (get_stored_area obj) obj)
-     (= (get_stored_area obj) (get_stored_area1 us_tag obj)))) :pattern (
+  (! (= (get_stored_area obj) (get_stored_area1 us_tag obj)) :pattern (
   (get_stored_area1 us_tag obj)) )))
 
 ;; rectangle__t__compat_axiom
   (assert
   (forall ((obj us_rep))
-  (! (=> (get_stored_area__function_guard1 (get_stored_area1 us_tag1 obj)
-     us_tag1 obj)
-     (and (get_stored_area__function_guard (get_stored_area obj) obj)
-     (= (get_stored_area obj) (get_stored_area1 us_tag1 obj)))) :pattern (
+  (! (= (get_stored_area obj) (get_stored_area1 us_tag1 obj)) :pattern (
   (get_stored_area1 us_tag1 obj)) )))
 
 ;; get_stored_area__def_axiom
   (assert
   (forall ((obj us_rep))
-  (! (=> (get_stored_area__function_guard (get_stored_area obj) obj)
-     (= (get_stored_area obj) (to_rep
-                              (rec__object__t__area (us_split_fields1 obj))))) :pattern (
+  (! (= (get_stored_area obj) (to_rep
+                              (rec__object__t__area (us_split_fields1 obj)))) :pattern (
   (get_stored_area obj)) )))
 
 (declare-fun total_area () Int)
@@ -711,13 +691,6 @@
   (= (to_rep rec____split_fields2) (- 1)))))
 
 ;; H
-  (assert (has_stored_area__function_guard1
-  (has_stored_area1 rec____attr__tag
-  (mk___rep window__prepare_to_draw__obj__fields4 rec____attr__tag))
-  rec____attr__tag
-  (mk___rep window__prepare_to_draw__obj__fields4 rec____attr__tag)))
-
-;; H
   (assert
   (= (has_stored_area1 rec____attr__tag
      (mk___rep window__prepare_to_draw__obj__fields4 rec____attr__tag)) true))
@@ -748,20 +721,6 @@
                             (of_base
                             (mk___rep window__prepare_to_draw__obj__fields4
                             rec____attr__tag)))))
-
-;; H
-  (assert (has_stored_area__function_guard1
-  (has_stored_area1 rec____attr__tag
-  (mk___rep
-  (mk___split_fields rec____split_fields9 rec____split_fields10
-  rec____split_fields11
-  (hide_ext__ rec____split_fields12 rec____split_fields13
-  rec____split_fields14)) rec____attr__tag)) rec____attr__tag
-  (mk___rep
-  (mk___split_fields rec____split_fields9 rec____split_fields10
-  rec____split_fields11
-  (hide_ext__ rec____split_fields12 rec____split_fields13
-  rec____split_fields14)) rec____attr__tag)))
 
 (assert
 ;; WP_parameter_def

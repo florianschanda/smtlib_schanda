@@ -516,7 +516,7 @@
 
 (declare-fun o () Int)
 
-(declare-fun temp___225 () Int)
+(declare-fun temp___221 () Int)
 
 (declare-fun result () (_ BitVec 64))
 
@@ -534,10 +534,10 @@
   (assert (and (= o (bv2nat tmp1)) (in_range (bv2nat tmp1))))
 
 ;; H
-  (assert (= temp___225 (mod2 o 256)))
+  (assert (= temp___221 (mod2 o 256)))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (<= 1 temp___225)))
+  (not (<= 1 temp___221)))
 (check-sat)

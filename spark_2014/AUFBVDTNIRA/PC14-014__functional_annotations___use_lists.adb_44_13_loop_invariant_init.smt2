@@ -720,9 +720,8 @@
 ;; is_incr__def_axiom
   (assert
   (forall ((i1 Int) (i2 Int))
-  (! (=> (is_incr__function_guard (is_incr i1 i2) i1 i2)
-     (= (= (is_incr i1 i2) true)
-     (ite (= i1 2147483647) (= i2 2147483647) (= i2 (+ i1 1))))) :pattern (
+  (! (= (= (is_incr i1 i2) true)
+     (ite (= i1 2147483647) (= i2 2147483647) (= i2 (+ i1 1)))) :pattern (
   (is_incr i1 i2)) )))
 
 (declare-fun l__split_discrs () us_split_discrs)
@@ -875,22 +874,6 @@
            (positions
            (mk___rep l__split_discrs (mk___split_fields l__split_fields)))
            (mk___rep1 cu__split_fields2)) 1)))
-
-;; H
-  (assert (is_incr__function_guard
-  (is_incr
-  (get
-  (model__ (mk___rep l__split_discrs (mk___split_fields l__split_fields))) 
-  n)
-  (get
-  (model__ (mk___rep l__split_discrs (mk___split_fields l__split_fields))) 
-  n))
-  (get
-  (model__ (mk___rep l__split_discrs (mk___split_fields l__split_fields))) 
-  n)
-  (get
-  (model__ (mk___rep l__split_discrs (mk___split_fields l__split_fields))) 
-  n)))
 
 (assert
 ;; WP_parameter_def

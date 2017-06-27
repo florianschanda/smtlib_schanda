@@ -847,19 +847,14 @@
 ;; length_with_padding__post_axiom
   (assert
   (forall ((length2 Int))
-  (! (=> (dynamic_invariant3 length2 true true true)
-     (let ((result (length_with_padding length2)))
-     (=> (length_with_padding__function_guard result length2)
-     (dynamic_invariant3 result true false true)))) :pattern ((length_with_padding
-                                                              length2)) )))
+  (! (=> (dynamic_invariant3 length2 true true true) (dynamic_invariant3
+     (length_with_padding length2) true false true)) :pattern ((length_with_padding
+                                                               length2)) )))
 
 ;; length_with_padding__def_axiom
   (assert
   (forall ((length2 Int))
-  (! (=>
-     (and (dynamic_invariant3 length2 true true true)
-     (length_with_padding__function_guard (length_with_padding length2)
-     length2))
+  (! (=> (dynamic_invariant3 length2 true true true)
      (= (length_with_padding length2) (+ length2 (ite (= (mod1 length2 4) 0)
                                                  0 (- 4 (mod1 length2 4)))))) :pattern (
   (length_with_padding length2)) )))
@@ -879,10 +874,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
-
-(declare-fun first4 () Int)
-
-(declare-fun last4 () Int)
 
 (define-fun dynamic_property2 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -904,9 +895,9 @@
 
 (declare-sort t2 0)
 
-(declare-fun first5 (t2) integer)
+(declare-fun first4 (t2) integer)
 
-(declare-fun last5 (t2) integer)
+(declare-fun last4 (t2) integer)
 
 (declare-fun mk2 (Int Int) t2)
 
@@ -915,8 +906,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first5 (mk2 f l))) f)
-     (= (to_rep1 (last5 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
+     (and (= (to_rep1 (first4 (mk2 f l))) f)
+     (= (to_rep1 (last4 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
 
 (define-fun dynamic_property3 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -932,12 +923,12 @@
 (define-fun of_array2 ((a (Array Int character)) (f Int)
   (l Int)) us_t2 (mk___t2 a (mk2 f l)))
 
-(define-fun first6 ((a us_t2)) Int (to_rep1 (first5 (rt2 a))))
+(define-fun first5 ((a us_t2)) Int (to_rep1 (first4 (rt2 a))))
 
-(define-fun last6 ((a us_t2)) Int (to_rep1 (last5 (rt2 a))))
+(define-fun last5 ((a us_t2)) Int (to_rep1 (last4 (rt2 a))))
 
-(define-fun length2 ((a us_t2)) Int (ite (<= (first6 a) (last6 a))
-                                    (+ (- (last6 a) (first6 a)) 1) 0))
+(define-fun length2 ((a us_t2)) Int (ite (<= (first5 a) (last5 a))
+                                    (+ (- (last5 a) (first5 a)) 1) 0))
 
 (declare-fun value__size2 () Int)
 
@@ -971,9 +962,9 @@
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment2 a))))
 
 (define-fun bool_eq12 ((x us_t2)
-  (y us_t2)) Bool (bool_eq3 (elts2 x) (to_rep1 (first5 (rt2 x)))
-                  (to_rep1 (last5 (rt2 x))) (elts2 y)
-                  (to_rep1 (first5 (rt2 y))) (to_rep1 (last5 (rt2 y)))))
+  (y us_t2)) Bool (bool_eq3 (elts2 x) (to_rep1 (first4 (rt2 x)))
+                  (to_rep1 (last4 (rt2 x))) (elts2 y)
+                  (to_rep1 (first4 (rt2 y))) (to_rep1 (last4 (rt2 y)))))
 
 (declare-fun user_eq10 (us_t2 us_t2) Bool)
 
@@ -984,17 +975,17 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
-(declare-fun temp___556 (Int Int Int) us_t2)
+(declare-fun temp___542 (Int Int Int) us_t2)
 
 ;; def_axiom
   (assert
-  (forall ((temp___558 Int) (temp___559 Int) (temp___560 Int))
-  (let ((temp___557 (temp___556 temp___558 temp___559 temp___560)))
+  (forall ((temp___544 Int) (temp___545 Int) (temp___546 Int))
+  (let ((temp___543 (temp___542 temp___544 temp___545 temp___546)))
   (and
-  (=> (dynamic_property 1 2147483647 temp___559 temp___560)
-  (and (= (first6 temp___557) temp___559) (= (last6 temp___557) temp___560)))
-  (forall ((temp___561 Int))
-  (= (select (to_array2 temp___557) temp___561) (of_rep temp___558)))))))
+  (=> (dynamic_property 1 2147483647 temp___545 temp___546)
+  (and (= (first5 temp___543) temp___545) (= (last5 temp___543) temp___546)))
+  (forall ((temp___547 Int))
+  (= (select (to_array2 temp___543) temp___547) (of_rep temp___544)))))))
 
 (define-fun dynamic_invariant4 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -1030,21 +1021,21 @@
 
 (declare-fun value () (Array Int character))
 
-(declare-fun last7 () Int)
+(declare-fun last6 () Int)
 
 (declare-fun i () Int)
 
-(declare-fun temp___563 () (Array Int character))
+(declare-fun temp___549 () (Array Int character))
 
-(declare-fun temp___5631 () t2)
+(declare-fun temp___5491 () t2)
 
-(declare-fun temp___564 () (Array Int character))
+(declare-fun temp___550 () (Array Int character))
 
-(declare-fun temp___5641 () t)
+(declare-fun temp___5501 () t)
 
-(declare-fun temp___565 () (Array Int character))
+(declare-fun temp___551 () (Array Int character))
 
-(declare-fun temp___5651 () t)
+(declare-fun temp___5511 () t)
 
 (declare-fun o () (Array Int character))
 
@@ -1056,15 +1047,15 @@
 
 (declare-fun o4 () Int)
 
-(declare-fun temp___571 () Int)
+(declare-fun temp___557 () Int)
 
-(declare-fun temp___568 () (Array Int character))
+(declare-fun temp___554 () (Array Int character))
 
 (declare-fun o5 () Int)
 
 (declare-fun o6 () Int)
 
-(declare-fun temp___566 () Int)
+(declare-fun temp___552 () Int)
 
 (declare-fun o7 () Int)
 
@@ -1133,15 +1124,7 @@
   (to_rep1 value__last)))
 
 ;; H
-  (assert (=> (<= (- 1) 65535) (in_range5 last7)))
-
-;; H
-  (assert (length_with_padding__function_guard
-  (length_with_padding
-  (ite (<= (to_rep1 value__first) (to_rep1 value__last))
-  (+ (- (to_rep1 value__last) (to_rep1 value__first)) 1) 0))
-  (ite (<= (to_rep1 value__first) (to_rep1 value__last))
-  (+ (- (to_rep1 value__last) (to_rep1 value__first)) 1) 0)))
+  (assert (=> (<= (- 1) 65535) (in_range5 last6)))
 
 ;; H
   (assert
@@ -1165,44 +1148,44 @@
 ;; H
   (assert
   (= (to_rep1
-     (first5
-     (rt2 (temp___556 32 (to_rep1 value__first) (to_rep1 value__last))))) 
+     (first4
+     (rt2 (temp___542 32 (to_rep1 value__first) (to_rep1 value__last))))) 
   (to_rep1 value__first)))
 
 ;; H
   (assert
   (= (to_rep1
-     (last5
-     (rt2 (temp___556 32 (to_rep1 value__first) (to_rep1 value__last))))) 
+     (last4
+     (rt2 (temp___542 32 (to_rep1 value__first) (to_rep1 value__last))))) 
   (to_rep1 value__last)))
 
 ;; H
   (assert
-  (= (mk___t2 temp___563 temp___5631) (temp___556 32 (to_rep1 value__first)
+  (= (mk___t2 temp___549 temp___5491) (temp___542 32 (to_rep1 value__first)
                                       (to_rep1 value__last))))
 
 ;; H
-  (assert (= temp___563 temp___564))
+  (assert (= temp___549 temp___550))
 
 ;; H
   (assert
-  (= (mk (to_rep1 (first5 temp___5631)) (to_rep1 (last5 temp___5631))) 
-  temp___5641))
+  (= (mk (to_rep1 (first4 temp___5491)) (to_rep1 (last4 temp___5491))) 
+  temp___5501))
 
 ;; H
   (assert
-  (= (ite (<= (to_rep1 (first temp___5641)) (to_rep1 (last temp___5641)))
-     (+ (- (to_rep1 (last temp___5641)) (to_rep1 (first temp___5641))) 1) 0) 
+  (= (ite (<= (to_rep1 (first temp___5501)) (to_rep1 (last temp___5501)))
+     (+ (- (to_rep1 (last temp___5501)) (to_rep1 (first temp___5501))) 1) 0) 
   (ite (<= (to_rep1 value__first) (to_rep1 value__last))
   (+ (- (to_rep1 value__last) (to_rep1 value__first)) 1) 0)))
 
 ;; H
   (assert
-  (= (mk___t temp___565 temp___5651) (mk___t temp___564 temp___5641)))
+  (= (mk___t temp___551 temp___5511) (mk___t temp___550 temp___5501)))
 
 ;; H
   (assert
-  (= o (slide temp___565 (to_rep1 (first temp___5651))
+  (= o (slide temp___551 (to_rep1 (first temp___5511))
        (to_rep1 value__first))))
 
 ;; H
@@ -1230,7 +1213,7 @@
   (assert (and (= o4 o3) (in_range1 o3)))
 
 ;; H
-  (assert (= temp___571 (- o4 1)))
+  (assert (= temp___557 (- o4 1)))
 
 ;; H
   (assert (= (mk_int__ref result1) (mk_int__ref i)))
@@ -1240,11 +1223,11 @@
 
 ;; H
   (assert
-  (=> (and (<= position i1) (<= i1 temp___571)) (= temp___568 value1)))
+  (=> (and (<= position i1) (<= i1 temp___557)) (= temp___554 value1)))
 
 ;; H
   (assert
-  (=> (and (<= position i1) (<= i1 temp___571))
+  (=> (and (<= position i1) (<= i1 temp___557))
   (and (<= position i2)
   (<= i2 (- (+ position (ite (<= (to_rep1 value__first) (to_rep1 value__last))
                         (+ (- (to_rep1 value__last) (to_rep1 value__first)) 1)
@@ -1252,107 +1235,107 @@
 
 ;; H
   (assert
-  (=> (and (<= position i1) (<= i1 temp___571))
+  (=> (and (<= position i1) (<= i1 temp___557))
   (and (<= (to_rep1 (first2 (rt1 data))) i2)
   (<= i2 (to_rep1 (last2 (rt1 data)))))))
 
 ;; H
-  (assert (=> (and (<= position i1) (<= i1 temp___571)) (= o7 i2)))
+  (assert (=> (and (<= position i1) (<= i1 temp___557)) (= o7 i2)))
 
 ;; H
   (assert
-  (=> (and (<= position i1) (<= i1 temp___571))
+  (=> (and (<= position i1) (<= i1 temp___557))
   (= o8 (select (elts1 data) o7))))
 
 ;; H
-  (assert (=> (and (<= position i1) (<= i1 temp___571)) (= o9 (to_rep2 o8))))
+  (assert (=> (and (<= position i1) (<= i1 temp___557)) (= o9 (to_rep2 o8))))
 
 ;; H
-  (assert (=> (and (<= position i1) (<= i1 temp___571)) (= o10 (bv2nat o9))))
-
-;; H
-  (assert
-  (=> (and (<= position i1) (<= i1 temp___571)) (= (to_rep o11) o10)))
+  (assert (=> (and (<= position i1) (<= i1 temp___557)) (= o10 (bv2nat o9))))
 
 ;; H
   (assert
-  (=> (and (<= position i1) (<= i1 temp___571))
+  (=> (and (<= position i1) (<= i1 temp___557)) (= (to_rep o11) o10)))
+
+;; H
+  (assert
+  (=> (and (<= position i1) (<= i1 temp___557))
   (and (= o5 (- i2 position)) (in_range1 (- i2 position)))))
 
 ;; H
   (assert
-  (=> (and (<= position i1) (<= i1 temp___571))
+  (=> (and (<= position i1) (<= i1 temp___557))
   (= o6 (+ (to_rep1 value__first) o5))))
 
 ;; H
   (assert
-  (=> (and (<= position i1) (<= i1 temp___571))
-  (and (= temp___566 o6) (in_range1 o6))))
+  (=> (and (<= position i1) (<= i1 temp___557))
+  (and (= temp___552 o6) (in_range1 o6))))
 
 ;; H
   (assert
-  (=> (and (<= position i1) (<= i1 temp___571))
-  (and (<= (to_rep1 value__first) temp___566)
-  (<= temp___566 (to_rep1 value__last)))))
+  (=> (and (<= position i1) (<= i1 temp___557))
+  (and (<= (to_rep1 value__first) temp___552)
+  (<= temp___552 (to_rep1 value__last)))))
 
 ;; H
-  (assert (=> (and (<= position i1) (<= i1 temp___571)) (= o12 temp___566)))
+  (assert (=> (and (<= position i1) (<= i1 temp___557)) (= o12 temp___552)))
 
 ;; H
   (assert
-  (=> (and (<= position i1) (<= i1 temp___571))
+  (=> (and (<= position i1) (<= i1 temp___557))
   (= o13 (store value2 o12 o11))))
 
 ;; H
-  (assert (=> (and (<= position i1) (<= i1 temp___571)) (= value2 result2)))
+  (assert (=> (and (<= position i1) (<= i1 temp___557)) (= value2 result2)))
 
 ;; H
-  (assert (=> (and (<= position i1) (<= i1 temp___571)) (= value3 o13)))
+  (assert (=> (and (<= position i1) (<= i1 temp___557)) (= value3 o13)))
 
 ;; H
-  (assert (=> (and (<= position i1) (<= i1 temp___571)) (= i2 temp___571)))
+  (assert (=> (and (<= position i1) (<= i1 temp___557)) (= i2 temp___557)))
 
 ;; H
-  (assert (=> (and (<= position i1) (<= i1 temp___571)) (= i2 i3)))
+  (assert (=> (and (<= position i1) (<= i1 temp___557)) (= i2 i3)))
 
 ;; H
-  (assert (=> (and (<= position i1) (<= i1 temp___571)) (= value3 value4)))
+  (assert (=> (and (<= position i1) (<= i1 temp___557)) (= value3 value4)))
 
 ;; H
-  (assert (=> (and (<= position i1) (<= i1 temp___571)) (= i4 i2)))
+  (assert (=> (and (<= position i1) (<= i1 temp___557)) (= i4 i2)))
 
 ;; H
-  (assert (=> (and (<= position i1) (<= i1 temp___571)) (= value5 value3)))
+  (assert (=> (and (<= position i1) (<= i1 temp___557)) (= value5 value3)))
 
 ;; H
   (assert
-  (=> (and (<= position i1) (<= i1 temp___571))
+  (=> (and (<= position i1) (<= i1 temp___557))
   (= (mk_int__ref i5) (mk_int__ref i3))))
 
 ;; H
   (assert
-  (=> (and (<= position i1) (<= i1 temp___571))
+  (=> (and (<= position i1) (<= i1 temp___557))
   (= (mk_map__ref value6) (mk_map__ref value4))))
 
 ;; H
-  (assert (=> (and (<= position i1) (<= i1 temp___571)) (= i6 i4)))
+  (assert (=> (and (<= position i1) (<= i1 temp___557)) (= i6 i4)))
 
 ;; H
-  (assert (=> (and (<= position i1) (<= i1 temp___571)) (= value7 value5)))
+  (assert (=> (and (<= position i1) (<= i1 temp___557)) (= value7 value5)))
 
 ;; H
-  (assert (=> (not (and (<= position i1) (<= i1 temp___571))) (= i1 i5)))
-
-;; H
-  (assert
-  (=> (not (and (<= position i1) (<= i1 temp___571))) (= value1 value6)))
-
-;; H
-  (assert (=> (not (and (<= position i1) (<= i1 temp___571))) (= i6 i1)))
+  (assert (=> (not (and (<= position i1) (<= i1 temp___557))) (= i1 i5)))
 
 ;; H
   (assert
-  (=> (not (and (<= position i1) (<= i1 temp___571))) (= value7 value1)))
+  (=> (not (and (<= position i1) (<= i1 temp___557))) (= value1 value6)))
+
+;; H
+  (assert (=> (not (and (<= position i1) (<= i1 temp___557))) (= i6 i1)))
+
+;; H
+  (assert
+  (=> (not (and (<= position i1) (<= i1 temp___557))) (= value7 value1)))
 
 ;; H
   (assert
@@ -1368,9 +1351,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o16 (length_with_padding o15)) (length_with_padding__function_guard
-  o16 o15))
+  (and (= o16 (length_with_padding o15))
   (and (in_range6 o16)
   (= o16 (+ o15 (ite (= (mod1 o15 4) 0) 0 (- 4 (mod1 o15 4))))))))
 

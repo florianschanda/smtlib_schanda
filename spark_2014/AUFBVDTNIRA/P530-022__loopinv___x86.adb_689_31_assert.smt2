@@ -487,8 +487,7 @@
 ;; nooverlap8__def_axiom
   (assert
   (forall ((addr1 (_ BitVec 64)) (addr2 (_ BitVec 64)))
-  (! (=> (nooverlap8__function_guard (nooverlap8 addr1 addr2) addr1 addr2)
-     (= (= (nooverlap8 addr1 addr2) true)
+  (! (= (= (nooverlap8 addr1 addr2) true)
      (and
      (and
      (and
@@ -502,9 +501,8 @@
      (not (= addr1 (bvadd addr2 ((_ int2bv 64) 4)))))
      (not (= addr1 (bvadd addr2 ((_ int2bv 64) 5)))))
      (not (= addr1 (bvadd addr2 ((_ int2bv 64) 6)))))
-     (not (= addr1 (bvadd addr2 ((_ int2bv 64) 7))))))) :pattern ((nooverlap8
-                                                                  addr1
-                                                                  addr2)) )))
+     (not (= addr1 (bvadd addr2 ((_ int2bv 64) 7)))))) :pattern ((nooverlap8
+                                                                 addr1 addr2)) )))
 
 (declare-fun nooverlap8equal ((Array (_ BitVec 64) unsigned8)
   (Array (_ BitVec 64) unsigned8) (_ BitVec 64)) Bool)
@@ -521,18 +519,13 @@
   (forall ((mem1 (Array (_ BitVec 64) unsigned8))
   (mem2 (Array (_ BitVec 64) unsigned8)))
   (forall ((addr (_ BitVec 64)))
-  (! (=> (nooverlap8equal__function_guard (nooverlap8equal mem1 mem2 addr)
-     mem1 mem2 addr)
-     (and
-     (forall ((i (_ BitVec 64))) (nooverlap8__function_guard
-     (nooverlap8 i addr) i addr))
-     (= (= (nooverlap8equal mem1 mem2 addr) true)
+  (! (= (= (nooverlap8equal mem1 mem2 addr) true)
      (forall ((i (_ BitVec 64)))
      (=>
      (and (bvule ((_ int2bv 64) 0) i)
      (bvule i ((_ int2bv 64) 18446744073709551615)))
      (=> (= (nooverlap8 i addr) true)
-     (= (to_rep (select mem1 i)) (to_rep (select mem2 i))))))))) :pattern (
+     (= (to_rep (select mem1 i)) (to_rep (select mem2 i))))))) :pattern (
   (nooverlap8equal mem1 mem2 addr)) ))))
 
 (declare-fun hasmem64 ((Array (_ BitVec 64) unsigned8) (_ BitVec 64)
@@ -548,8 +541,7 @@
   (assert
   (forall ((mem (Array (_ BitVec 64) unsigned8)))
   (forall ((addr (_ BitVec 64)) (val__ (_ BitVec 64)))
-  (! (=> (hasmem64__function_guard (hasmem64 mem addr val__) mem addr val__)
-     (= (= (hasmem64 mem addr val__) true)
+  (! (= (= (hasmem64 mem addr val__) true)
      (and
      (and
      (and
@@ -572,7 +564,7 @@
      (= (bvand val__ ((_ int2bv 64) 71776119061217280)) (bvmul ((_ zero_extend 56) 
      (to_rep (select mem (bvadd addr ((_ int2bv 64) 6))))) ((_ int2bv 64) 281474976710656))))
      (= (bvand val__ ((_ int2bv 64) 18374686479671623680)) (bvmul ((_ zero_extend 56) 
-     (to_rep (select mem (bvadd addr ((_ int2bv 64) 7))))) ((_ int2bv 64) 72057594037927936)))))) :pattern (
+     (to_rep (select mem (bvadd addr ((_ int2bv 64) 7))))) ((_ int2bv 64) 72057594037927936))))) :pattern (
   (hasmem64 mem addr val__)) ))))
 
 (declare-fun readmem64 ((_ BitVec 64)
@@ -587,11 +579,8 @@
   (forall ((x86__memory (Array (_ BitVec 64) unsigned8)))
   (! (=> (dynamic_invariant1 addr true true true)
      (let ((result (readmem64 addr x86__memory)))
-     (and (hasmem64__function_guard (hasmem64 x86__memory addr result)
-     x86__memory addr result)
-     (=> (readmem64__function_guard result addr x86__memory)
      (and (= (hasmem64 x86__memory addr result) true) (dynamic_invariant1
-     result true false true)))))) :pattern ((readmem64 addr x86__memory)) ))))
+     result true false true)))) :pattern ((readmem64 addr x86__memory)) ))))
 
 (declare-fun rcx_start () (_ BitVec 64))
 
@@ -632,8 +621,6 @@
   (to_int5 x)) :pattern ((to_int5 x)) )))
 
 (declare-fun attr__ATTRIBUTE_MODULUS3 () (_ BitVec 64))
-
-(declare-fun last () (_ BitVec 64))
 
 (define-fun dynamic_property ((first_int (_ BitVec 64))
   (last_int (_ BitVec 64))
@@ -681,22 +668,6 @@
 (declare-fun result () (_ BitVec 64))
 
 (declare-fun i1 () (_ BitVec 64))
-
-;; H
-  (assert
-  (forall ((i2 (_ BitVec 64))) (hasmem64__function_guard
-  (hasmem64 mem (bvadd rdi_start (bvmul i2 ((_ int2bv 64) 8))) rax) mem
-  (bvadd rdi_start (bvmul i2 ((_ int2bv 64) 8))) rax)))
-
-;; H
-  (assert (nooverlap8equal__function_guard (nooverlap8equal memory mem rdi)
-  memory mem rdi))
-
-;; H
-  (assert
-  (forall ((i2 (_ BitVec 64))) (nooverlap8__function_guard
-  (nooverlap8 (bvadd rdi_start (bvmul i2 ((_ int2bv 64) 8))) rdi)
-  (bvadd rdi_start (bvmul i2 ((_ int2bv 64) 8))) rdi)))
 
 ;; H
   (assert

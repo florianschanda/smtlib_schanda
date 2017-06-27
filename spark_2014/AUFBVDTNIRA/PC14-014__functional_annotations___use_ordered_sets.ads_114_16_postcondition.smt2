@@ -683,11 +683,6 @@
 
 ;; H
   (assert
-  (forall ((i Int)) (q__function_guard (q (get (elements s) i))
-  (get (elements s) i))))
-
-;; H
-  (assert
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i (length s))) (= (q (get (elements s) i)) true))))
 
@@ -698,9 +693,6 @@
 
 ;; H
   (assert (= (contains (model__ s) e) true))
-
-;; H
-  (assert (q__function_guard (q e) e))
 
 (assert
 ;; WP_parameter_def

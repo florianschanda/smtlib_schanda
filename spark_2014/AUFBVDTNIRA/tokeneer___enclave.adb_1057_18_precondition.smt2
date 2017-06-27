@@ -527,10 +527,8 @@
 
 ;; rolepresent__post_axiom
   (assert
-  (forall ((theadmin us_rep))
-  (! (let ((result (rolepresent theadmin)))
-     (=> (rolepresent__function_guard result theadmin) (dynamic_invariant
-     result true false true))) :pattern ((rolepresent theadmin)) )))
+  (forall ((theadmin us_rep)) (! (dynamic_invariant (rolepresent theadmin)
+  true false true) :pattern ((rolepresent theadmin)) )))
 
 (declare-fun isdoingop (us_rep) Bool)
 
@@ -571,11 +569,9 @@
 ;; thecurrentop__post_axiom
   (assert
   (forall ((theadmin us_rep))
-  (! (and (isdoingop__function_guard (isdoingop theadmin) theadmin)
-     (=> (= (isdoingop theadmin) true)
-     (let ((result (thecurrentop theadmin)))
-     (=> (thecurrentop__function_guard result theadmin) (dynamic_invariant1
-     result true false true))))) :pattern ((thecurrentop theadmin)) )))
+  (! (=> (= (isdoingop theadmin) true) (dynamic_invariant1
+     (thecurrentop theadmin) true false true)) :pattern ((thecurrentop
+                                                         theadmin)) )))
 
 (declare-fun ispresent (us_rep) Bool)
 
@@ -939,11 +935,9 @@
 
 ;; theauthcertrole__post_axiom
   (assert
-  (forall ((admintoken__state us_private))
-  (! (let ((result (theauthcertrole admintoken__state)))
-     (=> (theauthcertrole__function_guard result admintoken__state)
-     (dynamic_invariant result true false true))) :pattern ((theauthcertrole
-                                                            admintoken__state)) )))
+  (forall ((admintoken__state us_private)) (! (dynamic_invariant
+  (theauthcertrole admintoken__state) true false
+  true) :pattern ((theauthcertrole admintoken__state)) )))
 
 (declare-fun isgood (us_private) Bool)
 
@@ -1004,20 +998,18 @@
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 t1)))))
 (define-fun t__ref_4__projection ((a t__ref1)) t1 (t__content1 a))
 
-(define-fun dynamic_invariant2 ((temp___expr_1107 Int)
-  (temp___is_init_1104 Bool) (temp___skip_constant_1105 Bool)
-  (temp___do_toplevel_1106 Bool)) Bool (=>
-                                       (or (= temp___is_init_1104 true)
+(define-fun dynamic_invariant2 ((temp___expr_1036 Int)
+  (temp___is_init_1033 Bool) (temp___skip_constant_1034 Bool)
+  (temp___do_toplevel_1035 Bool)) Bool (=>
+                                       (or (= temp___is_init_1033 true)
                                        (<= 0 1)) (in_range12
-                                       temp___expr_1107)))
+                                       temp___expr_1036)))
 
 ;; thecurrentdoor__post_axiom
   (assert
-  (forall ((door__state us_private))
-  (! (let ((result (thecurrentdoor door__state)))
-     (=> (thecurrentdoor__function_guard result door__state)
-     (dynamic_invariant2 result true false true))) :pattern ((thecurrentdoor
-                                                             door__state)) )))
+  (forall ((door__state us_private)) (! (dynamic_invariant2
+  (thecurrentdoor door__state) true false
+  true) :pattern ((thecurrentdoor door__state)) )))
 
 (declare-fun thedooralarm (us_private) Int)
 
@@ -1044,19 +1036,17 @@
 (define-fun statust__ref___projection ((a statust__ref)) statust (statust__content
                                                                  a))
 
-(define-fun dynamic_invariant3 ((temp___expr_336 Int)
-  (temp___is_init_333 Bool) (temp___skip_constant_334 Bool)
-  (temp___do_toplevel_335 Bool)) Bool (=>
-                                      (or (= temp___is_init_333 true)
-                                      (<= 0 1)) (in_range13 temp___expr_336)))
+(define-fun dynamic_invariant3 ((temp___expr_306 Int)
+  (temp___is_init_303 Bool) (temp___skip_constant_304 Bool)
+  (temp___do_toplevel_305 Bool)) Bool (=>
+                                      (or (= temp___is_init_303 true)
+                                      (<= 0 1)) (in_range13 temp___expr_306)))
 
 ;; thedooralarm__post_axiom
   (assert
-  (forall ((door__state us_private))
-  (! (let ((result (thedooralarm door__state)))
-     (=> (thedooralarm__function_guard result door__state)
-     (dynamic_invariant3 result true false true))) :pattern ((thedooralarm
-                                                             door__state)) )))
+  (forall ((door__state us_private)) (! (dynamic_invariant3
+  (thedooralarm door__state) true false
+  true) :pattern ((thedooralarm door__state)) )))
 
 (declare-fun latch_timeout (us_private) us_rep1)
 
@@ -1083,12 +1073,12 @@
 (define-fun statust__ref_2__projection ((a statust__ref1)) statust1 (statust__content1
                                                                     a))
 
-(define-fun dynamic_invariant4 ((temp___expr_1903 Int)
-  (temp___is_init_1900 Bool) (temp___skip_constant_1901 Bool)
-  (temp___do_toplevel_1902 Bool)) Bool (=>
-                                       (or (= temp___is_init_1900 true)
+(define-fun dynamic_invariant4 ((temp___expr_1792 Int)
+  (temp___is_init_1789 Bool) (temp___skip_constant_1790 Bool)
+  (temp___do_toplevel_1791 Bool)) Bool (=>
+                                       (or (= temp___is_init_1789 true)
                                        (<= 0 8)) (in_range14
-                                       temp___expr_1903)))
+                                       temp___expr_1792)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -1134,42 +1124,42 @@
 ;; valid_numberlogentries__post_axiom
   (assert true)
 
-(define-fun dynamic_invariant10 ((temp___expr_354 Int)
-  (temp___is_init_351 Bool) (temp___skip_constant_352 Bool)
-  (temp___do_toplevel_353 Bool)) Bool (=>
-                                      (or (= temp___is_init_351 true)
+(define-fun dynamic_invariant10 ((temp___expr_324 Int)
+  (temp___is_init_321 Bool) (temp___skip_constant_322 Bool)
+  (temp___do_toplevel_323 Bool)) Bool (=>
+                                      (or (= temp___is_init_321 true)
                                       (<= 1 150)) (in_range7
-                                      temp___expr_354)))
+                                      temp___expr_324)))
 
 ;; nodescription__def_axiom
   (assert (= nodescription (audittypes__nodescription__aggregate_def 32)))
 
-(define-fun dynamic_invariant11 ((temp___expr_396 Int)
-  (temp___is_init_393 Bool) (temp___skip_constant_394 Bool)
-  (temp___do_toplevel_395 Bool)) Bool (=>
-                                      (or (= temp___is_init_393 true)
+(define-fun dynamic_invariant11 ((temp___expr_366 Int)
+  (temp___is_init_363 Bool) (temp___skip_constant_364 Bool)
+  (temp___do_toplevel_365 Bool)) Bool (=>
+                                      (or (= temp___is_init_363 true)
                                       (<= 1901 2099)) (in_range8
-                                      temp___expr_396)))
+                                      temp___expr_366)))
 
-(define-fun dynamic_invariant12 ((temp___expr_402 Int)
+(define-fun dynamic_invariant12 ((temp___expr_372 Int)
+  (temp___is_init_369 Bool) (temp___skip_constant_370 Bool)
+  (temp___do_toplevel_371 Bool)) Bool (=>
+                                      (or (= temp___is_init_369 true)
+                                      (<= 1 12)) (in_range9 temp___expr_372)))
+
+(define-fun dynamic_invariant13 ((temp___expr_378 Int)
+  (temp___is_init_375 Bool) (temp___skip_constant_376 Bool)
+  (temp___do_toplevel_377 Bool)) Bool (=>
+                                      (or (= temp___is_init_375 true)
+                                      (<= 1 31)) (in_range10
+                                      temp___expr_378)))
+
+(define-fun dynamic_invariant14 ((temp___expr_402 Int)
   (temp___is_init_399 Bool) (temp___skip_constant_400 Bool)
   (temp___do_toplevel_401 Bool)) Bool (=>
                                       (or (= temp___is_init_399 true)
-                                      (<= 1 12)) (in_range9 temp___expr_402)))
-
-(define-fun dynamic_invariant13 ((temp___expr_408 Int)
-  (temp___is_init_405 Bool) (temp___skip_constant_406 Bool)
-  (temp___do_toplevel_407 Bool)) Bool (=>
-                                      (or (= temp___is_init_405 true)
-                                      (<= 1 31)) (in_range10
-                                      temp___expr_408)))
-
-(define-fun dynamic_invariant14 ((temp___expr_432 Int)
-  (temp___is_init_429 Bool) (temp___skip_constant_430 Bool)
-  (temp___do_toplevel_431 Bool)) Bool (=>
-                                      (or (= temp___is_init_429 true)
                                       (<= 0 86399999)) (in_range11
-                                      temp___expr_432)))
+                                      temp___expr_402)))
 
 ;; latch_timeout__post_axiom
   (assert true)
@@ -1207,13 +1197,9 @@
 ;; H
   (assert
   (and
-  (and
   (= o (rolepresent
        (mk___rep
        (mk___split_fields theadmin__split_fields theadmin__split_fields1))))
-  (rolepresent__function_guard o
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1))))
   (in_range4 o)))
 
 ;; H
@@ -1222,13 +1208,9 @@
 ;; H
   (assert
   (=> (= result true)
-  (and
   (= o4 (isdoingop
         (mk___rep
-        (mk___split_fields theadmin__split_fields theadmin__split_fields1))))
-  (isdoingop__function_guard o4
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1))))))
+        (mk___split_fields theadmin__split_fields theadmin__split_fields1))))))
 
 ;; H
   (assert (=> (= result true) (= o5 (ite (not (= o4 true)) true false))))
@@ -1237,13 +1219,9 @@
   (assert
   (=> (= result true)
   (and
-  (and
   (= o1 (thecurrentop
         (mk___rep
         (mk___split_fields theadmin__split_fields theadmin__split_fields1))))
-  (thecurrentop__function_guard o1
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1))))
   (in_range6 o1))))
 
 ;; H
@@ -1252,13 +1230,9 @@
 ;; H
   (assert
   (=> (= result true)
-  (and
   (= o3 (isdoingop
         (mk___rep
-        (mk___split_fields theadmin__split_fields theadmin__split_fields1))))
-  (isdoingop__function_guard o3
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1))))))
+        (mk___split_fields theadmin__split_fields theadmin__split_fields1))))))
 
 ;; H
   (assert (=> (= result true) (= o6 (ite (= o3 true) o2 false))))
@@ -1268,14 +1242,6 @@
 
 ;; H
   (assert (=> (not (= result true)) (= o7 (of_int 1))))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1)))
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1))))
 
 (assert
 ;; WP_parameter_def

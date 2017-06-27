@@ -1265,11 +1265,9 @@
 
 ;; theenclaveclearance__post_axiom
   (assert
-  (forall ((configdata__state us_private))
-  (! (let ((result (theenclaveclearance configdata__state)))
-     (=> (theenclaveclearance__function_guard result configdata__state)
-     (dynamic_invariant result true false true))) :pattern ((theenclaveclearance
-                                                            configdata__state)) )))
+  (forall ((configdata__state us_private)) (! (dynamic_invariant
+  (theenclaveclearance configdata__state) true false
+  true) :pattern ((theenclaveclearance configdata__state)) )))
 
 (declare-fun valid_numberlogentries (us_private) Bool)
 
@@ -2160,10 +2158,8 @@
 
 ;; therole__post_axiom
   (assert
-  (forall ((contents us_rep7))
-  (! (let ((result (therole contents)))
-     (=> (therole__function_guard result contents) (dynamic_invariant1 result
-     true false true))) :pattern ((therole contents)) )))
+  (forall ((contents us_rep7)) (! (dynamic_invariant1 (therole contents) true
+  false true) :pattern ((therole contents)) )))
 
 (declare-fun theclearance (us_rep7) us_rep2)
 
@@ -2415,14 +2411,9 @@
 ;; serialnumber__post_axiom
   (assert
   (forall ((certificatestore__state us_private))
-  (! (and (serialnumberhasoverflowed__function_guard
-     (serialnumberhasoverflowed certificatestore__state)
-     certificatestore__state)
-     (=> (not (= (serialnumberhasoverflowed certificatestore__state) true))
-     (let ((result (serialnumber certificatestore__state)))
-     (=> (serialnumber__function_guard result certificatestore__state)
-     (dynamic_invariant2 result true false true))))) :pattern ((serialnumber
-                                                               certificatestore__state)) )))
+  (! (=> (not (= (serialnumberhasoverflowed certificatestore__state) true))
+     (dynamic_invariant2 (serialnumber certificatestore__state) true false
+     true)) :pattern ((serialnumber certificatestore__state)) )))
 
 (declare-sort certificatestatus 0)
 
@@ -2795,9 +2786,9 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS11 () Int)
 
-(declare-fun temp___String_Literal_1961 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_1943 (tuple0) (Array Int character))
 
-;; temp___String_Literal_1961__def_axiom
+;; temp___String_Literal_1943__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -2864,72 +2855,72 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 1)) 78)
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 2)) 111))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 3)) 32))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 4)) 83))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 5)) 101))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 6)) 114))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 7)) 105))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 8)) 97))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 9)) 108))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 10)) 32))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 11)) 78))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 12)) 117))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 13)) 109))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 14)) 98))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 15)) 101))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 16)) 114))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 17)) 115))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 18)) 32))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 19)) 97))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 20)) 118))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 21)) 97))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 22)) 105))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 23)) 97))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 24)) 98))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 25)) 108))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 26)) 101))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 27)) 32))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 28)) 102))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 29)) 111))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 30)) 114))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 31)) 32))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 32)) 105))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 33)) 115))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 34)) 115))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 35)) 117))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 36)) 101))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 37)) 32))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 38)) 111))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 39)) 102))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 40)) 32))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 41)) 65))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 42)) 117))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 43)) 116))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 44)) 104))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 45)) 111))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 46)) 114))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 47)) 105))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 48)) 115))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 49)) 97))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 50)) 116))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 51)) 105))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 52)) 111))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 53)) 110))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 54)) 32))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 55)) 67))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 56)) 101))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 57)) 114))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 58)) 116))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 59)) 105))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 60)) 102))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 61)) 105))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 62)) 99))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 63)) 97))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 64)) 116))
-     (= (to_rep (select (temp___String_Literal_1961 us_void_param) 65)) 101)) :pattern (
-  (temp___String_Literal_1961 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 1)) 78)
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 2)) 111))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 3)) 32))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 4)) 83))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 5)) 101))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 6)) 114))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 7)) 105))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 8)) 97))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 9)) 108))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 10)) 32))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 11)) 78))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 12)) 117))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 13)) 109))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 14)) 98))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 15)) 101))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 16)) 114))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 17)) 115))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 18)) 32))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 19)) 97))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 20)) 118))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 21)) 97))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 22)) 105))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 23)) 97))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 24)) 98))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 25)) 108))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 26)) 101))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 27)) 32))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 28)) 102))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 29)) 111))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 30)) 114))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 31)) 32))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 32)) 105))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 33)) 115))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 34)) 115))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 35)) 117))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 36)) 101))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 37)) 32))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 38)) 111))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 39)) 102))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 40)) 32))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 41)) 65))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 42)) 117))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 43)) 116))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 44)) 104))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 45)) 111))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 46)) 114))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 47)) 105))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 48)) 115))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 49)) 97))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 50)) 116))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 51)) 105))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 52)) 111))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 53)) 110))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 54)) 32))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 55)) 67))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 56)) 101))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 57)) 114))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 58)) 116))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 59)) 105))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 60)) 102))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 61)) 105))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 62)) 99))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 63)) 97))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 64)) 116))
+     (= (to_rep (select (temp___String_Literal_1943 us_void_param) 65)) 101)) :pattern (
+  (temp___String_Literal_1943 us_void_param)) )))
 
 (define-fun dynamic_invariant3 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -2959,12 +2950,12 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(define-fun dynamic_invariant7 ((temp___expr_1656 Int)
-  (temp___is_init_1653 Bool) (temp___skip_constant_1654 Bool)
-  (temp___do_toplevel_1655 Bool)) Bool (=>
-                                       (or (= temp___is_init_1653 true)
+(define-fun dynamic_invariant7 ((temp___expr_1638 Int)
+  (temp___is_init_1635 Bool) (temp___skip_constant_1636 Bool)
+  (temp___do_toplevel_1637 Bool)) Bool (=>
+                                       (or (= temp___is_init_1635 true)
                                        (<= 0 3)) (in_range16
-                                       temp___expr_1656)))
+                                       temp___expr_1638)))
 
 ;; valid_numberlogentries__post_axiom
   (assert true)
@@ -3093,13 +3084,13 @@
 
 (declare-fun o7 () millisecst)
 
-(declare-fun temp___1974 () yearst)
+(declare-fun temp___1955 () yearst)
 
-(declare-fun temp___19741 () monthst)
+(declare-fun temp___19551 () monthst)
 
-(declare-fun temp___19742 () dayst)
+(declare-fun temp___19552 () dayst)
 
-(declare-fun temp___19743 () millisecst)
+(declare-fun temp___19553 () millisecst)
 
 (declare-fun o8 () classt)
 
@@ -3113,7 +3104,7 @@
 
 (declare-fun o13 () us_split_fields4)
 
-(declare-fun temp___1953 () us_rep2)
+(declare-fun temp___1935 () us_rep2)
 
 (declare-fun o14 () Int)
 
@@ -3123,9 +3114,9 @@
 
 (declare-fun o17 () us_split_fields4)
 
-(declare-fun temp___1955 () us_rep2)
+(declare-fun temp___1937 () us_rep2)
 
-(declare-fun temp___1956 () us_rep3)
+(declare-fun temp___1938 () us_rep3)
 
 (declare-fun o18 () us_rep3)
 
@@ -3133,7 +3124,7 @@
 
 (declare-fun o20 () us_split_fields2)
 
-(declare-fun temp___1958 () us_rep1)
+(declare-fun temp___1940 () us_rep1)
 
 (declare-fun o21 () Bool)
 
@@ -3141,7 +3132,7 @@
 
 (declare-fun o23 () us_split_fields2)
 
-(declare-fun temp___1960 () us_rep1)
+(declare-fun temp___1942 () us_rep1)
 
 (declare-fun result () us_split_fields__ref2)
 
@@ -3177,8 +3168,6 @@
 
 (declare-fun id__split_fields5 () us_split_fields2)
 
-(define-fun o24 () us_rep2 (mk___rep2 (mk___split_fields2 o8)))
-
 ;; H
   (assert (= (temp___String_Literal_141 Tuple0) nouser))
 
@@ -3207,39 +3196,32 @@
   (assert (= o o7))
 
 ;; H
-  (assert (= temp___1974 o4))
+  (assert (= temp___1955 o4))
 
 ;; H
-  (assert (= temp___19741 o5))
+  (assert (= temp___19551 o5))
 
 ;; H
-  (assert (= temp___19742 o6))
+  (assert (= temp___19552 o6))
 
 ;; H
-  (assert (= temp___19743 o7))
+  (assert (= temp___19553 o7))
 
 ;; H
   (assert
   (= (mk___rep3
-     (mk___split_fields3 temp___1974 temp___19741 temp___19742 temp___19743)) 
+     (mk___split_fields3 temp___1955 temp___19551 temp___19552 temp___19553)) 
   zerotime))
-
-;; H
-  (assert (privatekeypresent__function_guard (privatekeypresent state2)
-  state2))
 
 ;; H
   (assert (= (privatekeypresent state2) true))
 
 ;; H
   (assert
-  (and
-  (= o24 (theclearance
-         (rec__usertoken__validprivcertt__contents
-         (us_split_fields__content11 privcert__split_fields))))
-  (theclearance__function_guard o24
-  (rec__usertoken__validprivcertt__contents
-  (us_split_fields__content11 privcert__split_fields)))))
+  (= (mk___rep2 (mk___split_fields2 o8)) (theclearance
+                                         (rec__usertoken__validprivcertt__contents
+                                         (us_split_fields__content11
+                                         privcert__split_fields)))))
 
 ;; H
   (assert (= o8 o9))
@@ -3257,7 +3239,7 @@
   (assert (= o13 (mk___split_fields2 o12)))
 
 ;; H
-  (assert (= temp___1953 (mk___rep2 o13)))
+  (assert (= temp___1935 (mk___rep2 o13)))
 
 ;; H
   (assert
@@ -3265,13 +3247,10 @@
             (mk___split_fields2 clearance__split_fields))))
 
 ;; H
-  (assert (= clearance__split_fields1 (us_split_fields5 temp___1953)))
+  (assert (= clearance__split_fields1 (us_split_fields5 temp___1935)))
 
 ;; H
-  (assert
-  (and
-  (and (= o14 (theenclaveclearance state))
-  (theenclaveclearance__function_guard o14 state)) (in_range7 o14)))
+  (assert (and (= o14 (theenclaveclearance state)) (in_range7 o14)))
 
 ;; H
   (assert
@@ -3283,9 +3262,7 @@
 ;; H
   (assert
   (=> (= result1 true)
-  (and
-  (and (= o15 (theenclaveclearance state))
-  (theenclaveclearance__function_guard o15 state)) (in_range7 o15))))
+  (and (= o15 (theenclaveclearance state)) (in_range7 o15))))
 
 ;; H
   (assert (=> (= result1 true) (= (to_rep5 o16) o15)))
@@ -3294,7 +3271,7 @@
   (assert (=> (= result1 true) (= o17 (mk___split_fields2 o16))))
 
 ;; H
-  (assert (=> (= result1 true) (= temp___1955 (mk___rep2 o17))))
+  (assert (=> (= result1 true) (= temp___1937 (mk___rep2 o17))))
 
 ;; H
   (assert
@@ -3304,7 +3281,7 @@
 ;; H
   (assert
   (=> (= result1 true)
-  (= clearance__split_fields2 (us_split_fields5 temp___1955))))
+  (= clearance__split_fields2 (us_split_fields5 temp___1937))))
 
 ;; H
   (assert
@@ -3312,15 +3289,10 @@
   (= clearance__split_fields2 clearance__split_fields1)))
 
 ;; H
-  (assert
-  (and (= result3 (authperiodisempty state))
-  (authperiodisempty__function_guard result3 state)))
+  (assert (= result3 (authperiodisempty state)))
 
 ;; H
-  (assert
-  (=> (= result3 true)
-  (and (= temp___1956 (thecurrenttime currenttime))
-  (thecurrenttime__function_guard temp___1956 currenttime))))
+  (assert (=> (= result3 true) (= temp___1938 (thecurrenttime currenttime))))
 
 ;; H
   (assert
@@ -3333,7 +3305,7 @@
 ;; H
   (assert
   (=> (= result3 true)
-  (= notbefore__split_fields4 (us_split_fields7 temp___1956))))
+  (= notbefore__split_fields4 (us_split_fields7 temp___1938))))
 
 ;; H
   (assert
@@ -3349,10 +3321,7 @@
   (= notafter__split_fields4 (us_split_fields7 zerotime))))
 
 ;; H
-  (assert
-  (=> (not (= result3 true))
-  (and (= o18 (thecurrenttime currenttime)) (thecurrenttime__function_guard
-  o18 currenttime))))
+  (assert (=> (not (= result3 true)) (= o18 (thecurrenttime currenttime))))
 
 ;; H
   (assert
@@ -3365,14 +3334,13 @@
   (= notbefore__split_fields4 notbefore__split_fields5)))
 
 ;; H
-  (assert
-  (and (= o19 (thistis state2)) (thistis__function_guard o19 state2)))
+  (assert (= o19 (thistis state2)))
 
 ;; H
   (assert (= o20 (mk___split_fields1 o19 id__split_fields3)))
 
 ;; H
-  (assert (= temp___1958 (mk___rep1 o20)))
+  (assert (= temp___1940 (mk___rep1 o20)))
 
 ;; H
   (assert
@@ -3383,12 +3351,10 @@
              id__split_fields2)) id__split_fields3))))
 
 ;; H
-  (assert (= id__split_fields4 (us_split_fields3 temp___1958)))
+  (assert (= id__split_fields4 (us_split_fields3 temp___1940)))
 
 ;; H
-  (assert
-  (and (= o21 (serialnumberhasoverflowed state3))
-  (serialnumberhasoverflowed__function_guard o21 state3)))
+  (assert (= o21 (serialnumberhasoverflowed state3)))
 
 ;; H
   (assert (= result7 (ite (not (= o21 true)) true false)))
@@ -3405,17 +3371,13 @@
          o22)))
 
 ;; H
-  (assert (= temp___1960 (mk___rep1 o23)))
+  (assert (= temp___1942 (mk___rep1 o23)))
 
 ;; H
   (assert (= result8 (mk___split_fields__ref1 id__split_fields4)))
 
 ;; H
-  (assert (= id__split_fields5 (us_split_fields3 temp___1960)))
-
-;; H
-  (assert (valid_numberlogentries__function_guard
-  (valid_numberlogentries state1) state1))
+  (assert (= id__split_fields5 (us_split_fields3 temp___1942)))
 
 (assert
 ;; WP_parameter_def

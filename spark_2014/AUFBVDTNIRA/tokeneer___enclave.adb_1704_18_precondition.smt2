@@ -527,10 +527,8 @@
 
 ;; rolepresent__post_axiom
   (assert
-  (forall ((theadmin us_rep))
-  (! (let ((result (rolepresent theadmin)))
-     (=> (rolepresent__function_guard result theadmin) (dynamic_invariant
-     result true false true))) :pattern ((rolepresent theadmin)) )))
+  (forall ((theadmin us_rep)) (! (dynamic_invariant (rolepresent theadmin)
+  true false true) :pattern ((rolepresent theadmin)) )))
 
 (declare-fun isdoingop (us_rep) Bool)
 
@@ -614,12 +612,12 @@
 (define-fun statust__ref_2__projection ((a statust__ref)) statust (statust__content
                                                                   a))
 
-(define-fun dynamic_invariant1 ((temp___expr_1903 Int)
-  (temp___is_init_1900 Bool) (temp___skip_constant_1901 Bool)
-  (temp___do_toplevel_1902 Bool)) Bool (=>
-                                       (or (= temp___is_init_1900 true)
+(define-fun dynamic_invariant1 ((temp___expr_1792 Int)
+  (temp___is_init_1789 Bool) (temp___skip_constant_1790 Bool)
+  (temp___do_toplevel_1791 Bool)) Bool (=>
+                                       (or (= temp___is_init_1789 true)
                                        (<= 0 8)) (in_range7
-                                       temp___expr_1903)))
+                                       temp___expr_1792)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -631,17 +629,13 @@
   (assert
   (forall ((enclave__status Int))
   (! (=> (dynamic_invariant1 enclave__status true true true)
-     (let ((result (getstatus enclave__status)))
-     (=> (getstatus__function_guard result enclave__status)
-     (dynamic_invariant1 result true false true)))) :pattern ((getstatus
-                                                              enclave__status)) )))
+     (dynamic_invariant1 (getstatus enclave__status) true false true)) :pattern (
+  (getstatus enclave__status)) )))
 
 ;; getstatus__def_axiom
   (assert
   (forall ((enclave__status Int))
-  (! (=>
-     (and (dynamic_invariant1 enclave__status true true true)
-     (getstatus__function_guard (getstatus enclave__status) enclave__status))
+  (! (=> (dynamic_invariant1 enclave__status true true true)
      (= (getstatus enclave__status) enclave__status)) :pattern ((getstatus
                                                                 enclave__status)) )))
 
@@ -656,11 +650,9 @@
 ;; statusiswaitingremoveadmintokenfail__def_axiom
   (assert
   (forall ((enclave__status Int))
-  (! (=> (statusiswaitingremoveadmintokenfail__function_guard
-     (statusiswaitingremoveadmintokenfail enclave__status) enclave__status)
-     (= (= (statusiswaitingremoveadmintokenfail enclave__status) true)
-     (= enclave__status 4))) :pattern ((statusiswaitingremoveadmintokenfail
-                                       enclave__status)) )))
+  (! (= (= (statusiswaitingremoveadmintokenfail enclave__status) true)
+     (= enclave__status 4)) :pattern ((statusiswaitingremoveadmintokenfail
+                                      enclave__status)) )))
 
 (declare-fun statusiswaitingstartadminop (Int) Bool)
 
@@ -672,11 +664,9 @@
 ;; statusiswaitingstartadminop__def_axiom
   (assert
   (forall ((enclave__status Int))
-  (! (=> (statusiswaitingstartadminop__function_guard
-     (statusiswaitingstartadminop enclave__status) enclave__status)
-     (= (= (statusiswaitingstartadminop enclave__status) true)
-     (= enclave__status 6))) :pattern ((statusiswaitingstartadminop
-                                       enclave__status)) )))
+  (! (= (= (statusiswaitingstartadminop enclave__status) true)
+     (= enclave__status 6)) :pattern ((statusiswaitingstartadminop
+                                      enclave__status)) )))
 
 (declare-fun statusiswaitingfinishadminop (Int) Bool)
 
@@ -688,11 +678,9 @@
 ;; statusiswaitingfinishadminop__def_axiom
   (assert
   (forall ((enclave__status Int))
-  (! (=> (statusiswaitingfinishadminop__function_guard
-     (statusiswaitingfinishadminop enclave__status) enclave__status)
-     (= (= (statusiswaitingfinishadminop enclave__status) true)
-     (= enclave__status 7))) :pattern ((statusiswaitingfinishadminop
-                                       enclave__status)) )))
+  (! (= (= (statusiswaitingfinishadminop enclave__status) true)
+     (= enclave__status 7)) :pattern ((statusiswaitingfinishadminop
+                                      enclave__status)) )))
 
 (declare-fun statusisenclavequiescent (Int) Bool)
 
@@ -704,11 +692,9 @@
 ;; statusisenclavequiescent__def_axiom
   (assert
   (forall ((enclave__status Int))
-  (! (=> (statusisenclavequiescent__function_guard
-     (statusisenclavequiescent enclave__status) enclave__status)
-     (= (= (statusisenclavequiescent enclave__status) true)
-     (= enclave__status 3))) :pattern ((statusisenclavequiescent
-                                       enclave__status)) )))
+  (! (= (= (statusisenclavequiescent enclave__status) true)
+     (= enclave__status 3)) :pattern ((statusisenclavequiescent
+                                      enclave__status)) )))
 
 (declare-fun enrolmentisinprogress (Int) Bool)
 
@@ -742,10 +728,8 @@
 ;; enrolmentisinprogress__def_axiom
   (assert
   (forall ((enclave__status Int))
-  (! (=> (enrolmentisinprogress__function_guard
-     (enrolmentisinprogress enclave__status) enclave__status)
-     (= (= (enrolmentisinprogress enclave__status) true) (in_range8
-     enclave__status))) :pattern ((enrolmentisinprogress enclave__status)) )))
+  (! (= (= (enrolmentisinprogress enclave__status) true) (in_range8
+     enclave__status)) :pattern ((enrolmentisinprogress enclave__status)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
@@ -785,12 +769,12 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(define-fun dynamic_invariant6 ((temp___expr_2155 Int)
-  (temp___is_init_2152 Bool) (temp___skip_constant_2153 Bool)
-  (temp___do_toplevel_2154 Bool)) Bool (=>
-                                       (or (= temp___is_init_2152 true)
+(define-fun dynamic_invariant6 ((temp___expr_1798 Int)
+  (temp___is_init_1795 Bool) (temp___skip_constant_1796 Bool)
+  (temp___do_toplevel_1797 Bool)) Bool (=>
+                                       (or (= temp___is_init_1795 true)
                                        (<= 0 2)) (in_range8
-                                       temp___expr_2155)))
+                                       temp___expr_1798)))
 
 (define-fun dynamic_invariant7 ((temp___expr_261 Int)
   (temp___is_init_258 Bool) (temp___skip_constant_259 Bool)
@@ -801,12 +785,12 @@
 ;; valid_numberlogentries__post_axiom
   (assert true)
 
-(define-fun dynamic_invariant8 ((temp___expr_354 Int)
-  (temp___is_init_351 Bool) (temp___skip_constant_352 Bool)
-  (temp___do_toplevel_353 Bool)) Bool (=>
-                                      (or (= temp___is_init_351 true)
+(define-fun dynamic_invariant8 ((temp___expr_324 Int)
+  (temp___is_init_321 Bool) (temp___skip_constant_322 Bool)
+  (temp___do_toplevel_323 Bool)) Bool (=>
+                                      (or (= temp___is_init_321 true)
                                       (<= 1 150)) (in_range6
-                                      temp___expr_354)))
+                                      temp___expr_324)))
 
 ;; nodescription__def_axiom
   (assert (= nodescription (audittypes__nodescription__aggregate_def 32)))
@@ -832,34 +816,6 @@
   (assert (in_range7 status))
 
 ;; H
-  (assert (enrolmentisinprogress__function_guard
-  (enrolmentisinprogress status) status))
-
-;; H
-  (assert (statusiswaitingstartadminop__function_guard
-  (statusiswaitingstartadminop status) status))
-
-;; H
-  (assert (statusiswaitingfinishadminop__function_guard
-  (statusiswaitingfinishadminop status) status))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1)))
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1))))
-
-;; H
-  (assert (ispresent__function_guard
-  (ispresent
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1)))
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1))))
-
-;; H
   (assert
   (and (not (= (enrolmentisinprogress status) true))
   (=>
@@ -875,26 +831,16 @@
 
 ;; H
   (assert
-  (and
   (= result (presentadminhasdeparted
             (mk___rep
             (mk___split_fields theadmin__split_fields
-            theadmin__split_fields1)) state1))
-  (presentadminhasdeparted__function_guard result
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1))
-  state1)))
+            theadmin__split_fields1)) state1)))
 
 ;; H
   (assert (not (= result true)))
 
 ;; H
-  (assert
-  (and (= o (extractuser state1)) (extractuser__function_guard o state1)))
-
-;; H
-  (assert (valid_numberlogentries__function_guard
-  (valid_numberlogentries state) state))
+  (assert (= o (extractuser state1)))
 
 (assert
 ;; WP_parameter_def

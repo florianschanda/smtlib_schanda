@@ -681,17 +681,14 @@
   (forall ((n Int))
   (forall ((untangle__g Bool))
   (! (=> (and (dynamic_invariant n true true true) (= untangle__g true))
-     (let ((result (wibble n untangle__g)))
-     (=> (wibble__function_guard result n untangle__g) (dynamic_invariant
-     result true false true)))) :pattern ((wibble n untangle__g)) ))))
+     (dynamic_invariant (wibble n untangle__g) true false true)) :pattern (
+  (wibble n untangle__g)) ))))
 
 ;; wibble__def_axiom
   (assert
   (forall ((n Int))
   (forall ((untangle__g Bool))
-  (! (=>
-     (and (dynamic_invariant n true true true) (wibble__function_guard
-     (wibble n untangle__g) n untangle__g)) (= (wibble n untangle__g) n)) :pattern (
+  (! (=> (dynamic_invariant n true true true) (= (wibble n untangle__g) n)) :pattern (
   (wibble n untangle__g)) ))))
 
 (declare-fun x__attr__constrained () Bool)

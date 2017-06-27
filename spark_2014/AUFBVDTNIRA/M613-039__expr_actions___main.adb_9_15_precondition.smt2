@@ -373,13 +373,12 @@
   (forall ((l us_rep))
   (! (=> (dynamic_invariant1 l true true true)
      (let ((result (reverse_list l)))
-     (=> (reverse_list__function_guard result l)
      (and
      (forall ((i Int))
      (=> (and (<= 1 i) (<= i (last_index l)))
      (= (element l i) (element result (+ (- (last_index l) i) 1)))))
-     (dynamic_invariant1 result true false true))))) :pattern ((reverse_list
-                                                               l)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((reverse_list
+                                                              l)) )))
 
 (declare-fun l__split_discrs () us_split_discrs)
 

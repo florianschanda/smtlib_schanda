@@ -220,16 +220,12 @@
 
 ;; f__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (f us_void_param)))
-     (=> (f__function_guard result us_void_param) (dynamic_invariant result
-     true false true))) :pattern ((f us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant (f us_void_param)
+  true false true) :pattern ((f us_void_param)) )))
 
 (declare-fun r4b () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
-
-(declare-fun first () Int)
 
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -253,7 +249,7 @@
 
 (declare-sort t 0)
 
-(declare-fun first1 (t) integer)
+(declare-fun first (t) integer)
 
 (declare-fun last (t) integer)
 
@@ -264,7 +260,7 @@
   (forall ((f1 Int) (l Int))
   (! (=> (in_range f1)
      (=> (in_range l)
-     (and (= (to_rep (first1 (mk f1 l))) f1) (= (to_rep (last (mk f1 l))) l)))) :pattern (
+     (and (= (to_rep (first (mk f1 l))) f1) (= (to_rep (last (mk f1 l))) l)))) :pattern (
   (mk f1 l)) )))
 
 (define-fun dynamic_property1 ((range_first Int) (range_last Int) (low Int)
@@ -280,12 +276,12 @@
 (define-fun of_array ((a (Array Int integer)) (f1 Int)
   (l Int)) us_t (mk___t a (mk f1 l)))
 
-(define-fun first2 ((a us_t)) Int (to_rep (first1 (rt a))))
+(define-fun first1 ((a us_t)) Int (to_rep (first (rt a))))
 
 (define-fun last1 ((a us_t)) Int (to_rep (last (rt a))))
 
-(define-fun length ((a us_t)) Int (ite (<= (first2 a) (last1 a))
-                                  (+ (- (last1 a) (first2 a)) 1) 0))
+(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last1 a))
+                                  (+ (- (last1 a) (first1 a)) 1) 0))
 
 (declare-fun value__size () Int)
 
@@ -319,8 +315,8 @@
   (assert (forall ((a (Array Int integer))) (<= 0 (object__alignment a))))
 
 (define-fun bool_eq4 ((x us_t)
-  (y us_t)) Bool (bool_eq1 (elts x) (to_rep (first1 (rt x)))
-                 (to_rep (last (rt x))) (elts y) (to_rep (first1 (rt y)))
+  (y us_t)) Bool (bool_eq1 (elts x) (to_rep (first (rt x)))
+                 (to_rep (last (rt x))) (elts y) (to_rep (first (rt y)))
                  (to_rep (last (rt y)))))
 
 (declare-fun user_eq3 (us_t us_t) Bool)
@@ -329,8 +325,6 @@
 
 (declare-datatypes () ((taS__ref (mk_taS__ref (taS__content us_t)))))
 (define-fun taS__ref___projection ((a taS__ref)) us_t (taS__content a))
-
-(declare-fun first3 () Int)
 
 (define-fun dynamic_property2 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -352,7 +346,7 @@
 
 (declare-sort t1 0)
 
-(declare-fun first4 (t1) integer)
+(declare-fun first2 (t1) integer)
 
 (declare-fun last2 (t1) integer)
 
@@ -363,7 +357,7 @@
   (forall ((f1 Int) (l Int))
   (! (=> (in_range f1)
      (=> (in_range l)
-     (and (= (to_rep (first4 (mk1 f1 l))) f1)
+     (and (= (to_rep (first2 (mk1 f1 l))) f1)
      (= (to_rep (last2 (mk1 f1 l))) l)))) :pattern ((mk1 f1 l)) )))
 
 (define-fun dynamic_property3 ((range_first Int) (range_last Int) (low Int)
@@ -380,12 +374,12 @@
 (define-fun of_array1 ((a (Array Int integer)) (f1 Int)
   (l Int)) us_t1 (mk___t1 a (mk1 f1 l)))
 
-(define-fun first5 ((a us_t1)) Int (to_rep (first4 (rt1 a))))
+(define-fun first3 ((a us_t1)) Int (to_rep (first2 (rt1 a))))
 
 (define-fun last3 ((a us_t1)) Int (to_rep (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first5 a) (last3 a))
-                                    (+ (- (last3 a) (first5 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size1 () Int)
 
@@ -419,9 +413,9 @@
   (assert (forall ((a (Array Int integer))) (<= 0 (object__alignment1 a))))
 
 (define-fun bool_eq6 ((x us_t1)
-  (y us_t1)) Bool (bool_eq1 (elts1 x) (to_rep (first4 (rt1 x)))
+  (y us_t1)) Bool (bool_eq1 (elts1 x) (to_rep (first2 (rt1 x)))
                   (to_rep (last2 (rt1 x))) (elts1 y)
-                  (to_rep (first4 (rt1 y))) (to_rep (last2 (rt1 y)))))
+                  (to_rep (first2 (rt1 y))) (to_rep (last2 (rt1 y)))))
 
 (declare-fun user_eq5 (us_t1 us_t1) Bool)
 
@@ -438,7 +432,7 @@
 
 (declare-sort t2 0)
 
-(declare-fun first6 (t2) integer)
+(declare-fun first4 (t2) integer)
 
 (declare-fun last4 (t2) integer)
 
@@ -449,7 +443,7 @@
   (forall ((f1 Int) (l Int))
   (! (=> (in_range f1)
      (=> (in_range l)
-     (and (= (to_rep (first6 (mk2 f1 l))) f1)
+     (and (= (to_rep (first4 (mk2 f1 l))) f1)
      (= (to_rep (last4 (mk2 f1 l))) l)))) :pattern ((mk2 f1 l)) )))
 
 (define-fun dynamic_property4 ((range_first Int) (range_last Int) (low Int)
@@ -464,12 +458,12 @@
 (define-fun of_array2 ((a (Array Int integer)) (f1 Int)
   (l Int)) us_t2 (mk___t2 a (mk2 f1 l)))
 
-(define-fun first7 ((a us_t2)) Int (to_rep (first6 (rt2 a))))
+(define-fun first5 ((a us_t2)) Int (to_rep (first4 (rt2 a))))
 
 (define-fun last5 ((a us_t2)) Int (to_rep (last4 (rt2 a))))
 
-(define-fun length2 ((a us_t2)) Int (ite (<= (first7 a) (last5 a))
-                                    (+ (- (last5 a) (first7 a)) 1) 0))
+(define-fun length2 ((a us_t2)) Int (ite (<= (first5 a) (last5 a))
+                                    (+ (- (last5 a) (first5 a)) 1) 0))
 
 (declare-fun value__size2 () Int)
 
@@ -503,9 +497,9 @@
   (assert (forall ((a (Array Int integer))) (<= 0 (object__alignment2 a))))
 
 (define-fun bool_eq7 ((x us_t2)
-  (y us_t2)) Bool (bool_eq1 (elts2 x) (to_rep (first6 (rt2 x)))
+  (y us_t2)) Bool (bool_eq1 (elts2 x) (to_rep (first4 (rt2 x)))
                   (to_rep (last4 (rt2 x))) (elts2 y)
-                  (to_rep (first6 (rt2 y))) (to_rep (last4 (rt2 y)))))
+                  (to_rep (first4 (rt2 y))) (to_rep (last4 (rt2 y)))))
 
 (declare-fun user_eq6 (us_t2 us_t2) Bool)
 
@@ -522,7 +516,7 @@
   (let ((temp___193 (p__a__aggregate_def temp___194 temp___195 temp___196)))
   (and
   (=> (dynamic_property4 (- 2147483648) 2147483647 temp___195 temp___196)
-  (and (= (first5 temp___193) temp___195) (= (last3 temp___193) temp___196)))
+  (and (= (first3 temp___193) temp___195) (= (last3 temp___193) temp___196)))
   (forall ((temp___197 Int))
   (= (select (to_array1 temp___193) temp___197) (of_rep temp___194)))))))
 
@@ -531,9 +525,9 @@
   (temp___do_toplevel_186 Bool)) Bool (=>
                                       (not (= temp___skip_constant_185 true))
                                       (and (dynamic_property1 r4b 10
-                                      (first2 temp___expr_187)
+                                      (first1 temp___expr_187)
                                       (last1 temp___expr_187))
-                                      (and (= (first2 temp___expr_187) 
+                                      (and (= (first1 temp___expr_187) 
                                       r4b) (= (last1 temp___expr_187) 10)))))
 
 (declare-fun a () (Array Int integer))
@@ -553,10 +547,7 @@
 (declare-fun a1 () (Array Int integer))
 
 ;; H
-  (assert
-  (and
-  (and (= p__R4b__assume (f Tuple0)) (f__function_guard p__R4b__assume
-  Tuple0)) (in_range p__R4b__assume)))
+  (assert (and (= p__R4b__assume (f Tuple0)) (in_range p__R4b__assume)))
 
 ;; H
   (assert (= p__R4b__assume r4b))
@@ -565,7 +556,7 @@
   (assert (in_range r4b))
 
 ;; H
-  (assert (= (to_rep (first4 (rt1 (p__a__aggregate_def 0 r4b 10)))) r4b))
+  (assert (= (to_rep (first2 (rt1 (p__a__aggregate_def 0 r4b 10)))) r4b))
 
 ;; H
   (assert (= (to_rep (last2 (rt1 (p__a__aggregate_def 0 r4b 10)))) 10))
@@ -576,13 +567,13 @@
 
 ;; H
   (assert
-  (= (ite (<= (to_rep (first4 temp___1991)) (to_rep (last2 temp___1991)))
-     (+ (- (to_rep (last2 temp___1991)) (to_rep (first4 temp___1991))) 1) 0) 
+  (= (ite (<= (to_rep (first2 temp___1991)) (to_rep (last2 temp___1991)))
+     (+ (- (to_rep (last2 temp___1991)) (to_rep (first2 temp___1991))) 1) 0) 
   (ite (<= r4b 10) (+ (- 10 r4b) 1) 0)))
 
 ;; H
   (assert
-  (= (slide temp___199 (to_rep (first4 temp___1991)) r4b) p__a__assume))
+  (= (slide temp___199 (to_rep (first2 temp___1991)) r4b) p__a__assume))
 
 ;; H
   (assert (= (mk r4b 10) p__a__assume1))
@@ -594,7 +585,7 @@
   (assert (= a1 p__a__assume))
 
 ;; H
-  (assert (= (to_rep a__first) (to_rep (first1 p__a__assume1))))
+  (assert (= (to_rep a__first) (to_rep (first p__a__assume1))))
 
 ;; H
   (assert (= (to_rep a__last) (to_rep (last p__a__assume1))))

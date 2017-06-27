@@ -111,11 +111,6 @@
 
 (declare-fun is_valid__function_guard (Bool Int) Bool)
 
-;; temp___result_134_def
-  (assert
-  (forall ((temp___133 Int)) (is_valid__function_guard (is_valid temp___133)
-  temp___133)))
-
 (define-fun type_invariant ((temp___132 Int)) Bool (= (is_valid temp___132) true))
 
 (declare-sort t 0)
@@ -137,12 +132,12 @@
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
 (define-fun t__ref___projection ((a t__ref)) t (t__content a))
 
-(define-fun dynamic_invariant ((temp___expr_138 Int)
-  (temp___is_init_135 Bool) (temp___skip_constant_136 Bool)
-  (temp___do_toplevel_137 Bool)) Bool (=>
-                                      (or (= temp___is_init_135 true)
+(define-fun dynamic_invariant ((temp___expr_137 Int)
+  (temp___is_init_134 Bool) (temp___skip_constant_135 Bool)
+  (temp___do_toplevel_136 Bool)) Bool (=>
+                                      (or (= temp___is_init_134 true)
                                       (<= 0 10000)) (in_range
-                                      temp___expr_138)))
+                                      temp___expr_137)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -152,8 +147,7 @@
 ;; is_valid__def_axiom
   (assert
   (forall ((x Int))
-  (! (=> (is_valid__function_guard (is_valid x) x)
-     (= (= (is_valid x) true) (= (mod2 x 2) 0))) :pattern ((is_valid x)) )))
+  (! (= (= (is_valid x) true) (= (mod2 x 2) 0)) :pattern ((is_valid x)) )))
 
 (declare-fun x () Int)
 

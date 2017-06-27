@@ -186,9 +186,9 @@
 (define-fun mod256__ref___projection ((a mod256__ref)) mod256 (mod256__content
                                                               a))
 
-(define-fun dynamic_invariant ((temp___expr_206 (_ BitVec 8))
-  (temp___is_init_203 Bool) (temp___skip_constant_204 Bool)
-  (temp___do_toplevel_205 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_198 (_ BitVec 8))
+  (temp___is_init_195 Bool) (temp___skip_constant_196 Bool)
+  (temp___do_toplevel_197 Bool)) Bool true)
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int Bool))))))
@@ -350,59 +350,21 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(declare-sort t144b 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 255)))
-
-(define-fun bool_eq3 ((x Int) (y1 Int)) Bool (ite (= x y1) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq2 (t144b t144b) Bool)
-
-(declare-fun dummy2 () t144b)
-
-(declare-datatypes () ((t144b__ref (mk_t144b__ref (t144b__content t144b)))))
-(define-fun t144b__ref___projection ((a t144b__ref)) t144b (t144b__content a))
-
-(declare-sort t147b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 255)))
-
-(define-fun bool_eq4 ((x Int) (y1 Int)) Bool (ite (= x y1) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq3 (t147b t147b) Bool)
-
-(declare-fun dummy3 () t147b)
-
-(declare-datatypes () ((t147b__ref (mk_t147b__ref (t147b__content t147b)))))
-(define-fun t147b__ref___projection ((a t147b__ref)) t147b (t147b__content a))
-
-(declare-fun temp___700 (Bool) (Array Int Bool))
+(declare-fun temp___691 (Bool) (Array Int Bool))
 
 ;; def_axiom
   (assert
-  (forall ((temp___702 Bool))
-  (forall ((temp___703 Int))
-  (= (select (temp___700 temp___702) temp___703) temp___702))))
+  (forall ((temp___693 Bool))
+  (forall ((temp___694 Int))
+  (= (select (temp___691 temp___693) temp___694) temp___693))))
 
-(declare-fun temp___704 (Bool) (Array Int Bool))
+(declare-fun temp___695 (Bool) (Array Int Bool))
 
 ;; def_axiom
   (assert
-  (forall ((temp___706 Bool))
-  (forall ((temp___707 Int))
-  (= (select (temp___704 temp___706) temp___707) temp___706))))
+  (forall ((temp___697 Bool))
+  (forall ((temp___698 Int))
+  (= (select (temp___695 temp___697) temp___698) temp___697))))
 
 (define-fun dynamic_invariant1 ((temp___expr_63 Int) (temp___is_init_60 Bool)
   (temp___skip_constant_61 Bool)
@@ -412,21 +374,16 @@
 
 (declare-fun x () (Array Int Bool))
 
-(declare-fun o () (Array Int Bool))
-
 (declare-fun result () (Array Int Bool))
 
 (declare-fun x1 () (Array Int Bool))
 
 ;; H
-  (assert
-  (= o (temp___700 (ite (= (bvxor y y) ((_ int2bv 8) 0)) true false))))
-
-;; H
   (assert (= result x))
 
 ;; H
-  (assert (= x1 o))
+  (assert
+  (= x1 (temp___691 (ite (= (bvxor y y) ((_ int2bv 8) 0)) true false))))
 
 (declare-fun n () Int)
 
@@ -439,5 +396,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "array_aggregates.adb", line 447, characters 0-0
-  (not (= (bool_eq2 x1 0 255 (temp___704 (= n n)) 0 255) true)))
+  (not (= (bool_eq2 x1 0 255 (temp___695 (= n n)) 0 255) true)))
 (check-sat)

@@ -89,11 +89,10 @@
   (! (=>
      (and (dynamic_invariant test__unused_variables_2__x true true true)
      (dynamic_invariant test__unused_variables_2__y true true true))
-     (let ((result (return_x test__unused_variables_2__x
-                   test__unused_variables_2__y)))
-     (=> (return_x__function_guard result test__unused_variables_2__x
-     test__unused_variables_2__y) (dynamic_invariant result true false true)))) :pattern (
-  (return_x test__unused_variables_2__x test__unused_variables_2__y)) )))
+     (dynamic_invariant
+     (return_x test__unused_variables_2__x test__unused_variables_2__y) true
+     false true)) :pattern ((return_x test__unused_variables_2__x
+                            test__unused_variables_2__y)) )))
 
 (declare-fun x () Int)
 
@@ -145,9 +144,7 @@
   (assert (= y1 2))
 
 ;; H
-  (assert
-  (and (and (= o (return_x x1 y1)) (return_x__function_guard o x1 y1))
-  (in_range o)))
+  (assert (and (= o (return_x x1 y1)) (in_range o)))
 
 ;; H
   (assert (= o1 (+ o par1)))

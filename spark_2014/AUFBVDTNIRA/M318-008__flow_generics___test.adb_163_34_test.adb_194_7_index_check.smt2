@@ -207,9 +207,7 @@
 ;; found_none__def_axiom
   (assert
   (forall ((fruit Int))
-  (! (=> (found_none__function_guard (found_none fruit) fruit)
-     (= (= (found_none fruit) true) (= fruit 0))) :pattern ((found_none
-                                                            fruit)) )))
+  (! (= (= (found_none fruit) true) (= fruit 0)) :pattern ((found_none fruit)) )))
 
 (define-fun dynamic_invariant1 ((temp___expr_223 Int)
   (temp___is_init_220 Bool) (temp___skip_constant_221 Bool)
@@ -224,19 +222,14 @@
 ;; fruits_to_fruits_and_weapons__post_axiom
   (assert
   (forall ((fruit Int))
-  (! (=> (dynamic_invariant fruit true true true)
-     (let ((result (fruits_to_fruits_and_weapons fruit)))
-     (=> (fruits_to_fruits_and_weapons__function_guard result fruit)
-     (dynamic_invariant1 result true false true)))) :pattern ((fruits_to_fruits_and_weapons
-                                                              fruit)) )))
+  (! (=> (dynamic_invariant fruit true true true) (dynamic_invariant1
+     (fruits_to_fruits_and_weapons fruit) true false true)) :pattern (
+  (fruits_to_fruits_and_weapons fruit)) )))
 
 ;; fruits_to_fruits_and_weapons__def_axiom
   (assert
   (forall ((fruit Int))
-  (! (=>
-     (and (dynamic_invariant fruit true true true)
-     (fruits_to_fruits_and_weapons__function_guard
-     (fruits_to_fruits_and_weapons fruit) fruit))
+  (! (=> (dynamic_invariant fruit true true true)
      (= (fruits_to_fruits_and_weapons fruit) fruit)) :pattern ((fruits_to_fruits_and_weapons
                                                                fruit)) )))
 
@@ -575,11 +568,11 @@
 (define-fun new_item_t__ref___projection ((a new_item_t__ref)) new_item_t 
   (new_item_t__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_353 Int)
-  (temp___is_init_350 Bool) (temp___skip_constant_351 Bool)
-  (temp___do_toplevel_352 Bool)) Bool (=>
-                                      (or (= temp___is_init_350 true)
-                                      (<= 0 12)) (in_range5 temp___expr_353)))
+(define-fun dynamic_invariant3 ((temp___expr_352 Int)
+  (temp___is_init_349 Bool) (temp___skip_constant_350 Bool)
+  (temp___do_toplevel_351 Bool)) Bool (=>
+                                      (or (= temp___is_init_349 true)
+                                      (<= 0 12)) (in_range5 temp___expr_352)))
 
 (declare-sort t1 0)
 
@@ -695,13 +688,13 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range2 temp___expr_15)))
 
-(define-fun dynamic_invariant6 ((temp___expr_359 us_t1)
-  (temp___is_init_356 Bool) (temp___skip_constant_357 Bool)
-  (temp___do_toplevel_358 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_357 true))
+(define-fun dynamic_invariant6 ((temp___expr_358 us_t1)
+  (temp___is_init_355 Bool) (temp___skip_constant_356 Bool)
+  (temp___do_toplevel_357 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_356 true))
                                       (dynamic_property1 1 2147483647
-                                      (first3 temp___expr_359)
-                                      (last3 temp___expr_359))))
+                                      (first3 temp___expr_358)
+                                      (last3 temp___expr_358))))
 
 (declare-fun new_inventory () (Array Int fruits_and_weapons))
 
@@ -751,21 +744,18 @@
 ;; H
   (assert
   (and
-  (forall ((temp___446 Int))
+  (forall ((temp___443 Int))
   (=>
-  (and (<= (to_rep new_inventory__first) temp___446)
-  (<= temp___446 (to_rep new_inventory__last)))
-  (=> (<= i2 temp___446)
-  (= (select new_inventory1 temp___446) (select new_inventory temp___446)))))
+  (and (<= (to_rep new_inventory__first) temp___443)
+  (<= temp___443 (to_rep new_inventory__last)))
+  (=> (<= i2 temp___443)
+  (= (select new_inventory1 temp___443) (select new_inventory temp___443)))))
   (and (<= (to_rep (first (rt old_inventory))) i2)
   (<= i2 (to_rep (last (rt old_inventory)))))))
 
 ;; H
   (assert
-  (and
   (and (= result1 (found_none (to_rep2 (select (elts old_inventory) i2))))
-  (found_none__function_guard result1
-  (to_rep2 (select (elts old_inventory) i2))))
   (= (= result1 true) (= (to_rep2 (select (elts old_inventory) i2)) 0))))
 
 ;; H
@@ -774,11 +764,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o (fruits_to_fruits_and_weapons
        (to_rep2 (select (elts old_inventory) i2))))
-  (fruits_to_fruits_and_weapons__function_guard o
-  (to_rep2 (select (elts old_inventory) i2))))
   (and (in_range3 o) (= o (to_rep2 (select (elts old_inventory) i2))))))
 
 ;; H

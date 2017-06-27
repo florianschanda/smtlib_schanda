@@ -536,14 +536,14 @@
 (define-fun read_result__ref___projection ((a read_result__ref)) us_rep 
   (read_result__content a))
 
-(define-fun default_initial_assumption ((temp___expr_470 us_rep)
-  (temp___skip_top_level_471 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_469 us_rep)
+  (temp___skip_top_level_470 Bool)) Bool (and
                                          (= (attr__constrained
-                                            temp___expr_470) false)
+                                            temp___expr_469) false)
                                          (= (to_rep3
                                             (rec__file_io__read_result__status
                                             (us_split_discrs1
-                                            temp___expr_470))) 2)))
+                                            temp___expr_469))) 2)))
 
 (declare-sort name_id 0)
 
@@ -566,12 +566,12 @@
 (define-fun name_id__ref___projection ((a name_id__ref)) name_id (name_id__content
                                                                  a))
 
-(define-fun dynamic_invariant1 ((temp___expr_569 Int)
-  (temp___is_init_566 Bool) (temp___skip_constant_567 Bool)
-  (temp___do_toplevel_568 Bool)) Bool (=>
-                                      (or (= temp___is_init_566 true)
+(define-fun dynamic_invariant1 ((temp___expr_563 Int)
+  (temp___is_init_560 Bool) (temp___skip_constant_561 Bool)
+  (temp___do_toplevel_562 Bool)) Bool (=>
+                                      (or (= temp___is_init_560 true)
                                       (<= 0 2147483647)) (in_range5
-                                      temp___expr_569)))
+                                      temp___expr_563)))
 
 (declare-fun invariant__ (us_private) Bool)
 
@@ -588,15 +588,12 @@
   (assert
   (forall ((n Int))
   (forall ((names__name_table us_private))
-  (! (and (invariant____function_guard (invariant__ names__name_table)
-     names__name_table)
-     (=>
+  (! (=>
      (and (dynamic_invariant1 n true true true)
-     (= (invariant__ names__name_table) true))
-     (let ((result (to_string1 n names__name_table)))
-     (=> (to_string__function_guard result n names__name_table)
-     (dynamic_invariant result true false true))))) :pattern ((to_string1 n
-                                                              names__name_table)) ))))
+     (= (invariant__ names__name_table) true)) (dynamic_invariant
+     (to_string1 n names__name_table) true false true)) :pattern ((to_string1
+                                                                  n
+                                                                  names__name_table)) ))))
 
 (declare-sort token_kind 0)
 
@@ -846,14 +843,14 @@
 (define-fun token__ref___projection ((a token__ref)) us_rep1 (token__content
                                                              a))
 
-(define-fun default_initial_assumption1 ((temp___expr_596 us_rep1)
-  (temp___skip_top_level_597 Bool)) Bool (and
+(define-fun default_initial_assumption1 ((temp___expr_586 us_rep1)
+  (temp___skip_top_level_587 Bool)) Bool (and
                                          (= (attr__constrained1
-                                            temp___expr_596) false)
+                                            temp___expr_586) false)
                                          (= (to_rep4
                                             (rec__lexer__token__kind
                                             (us_split_discrs3
-                                            temp___expr_596))) 0)))
+                                            temp___expr_586))) 0)))
 
 (declare-fun current_read__attr__constrained () Bool)
 
@@ -873,31 +870,31 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
-(declare-fun temp___String_Literal_842 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_803 (tuple0) (Array Int character))
 
-;; temp___String_Literal_842__def_axiom
+;; temp___String_Literal_803__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (= (to_rep (select (temp___String_Literal_842 us_void_param) 1)) 58) :pattern (
-  (temp___String_Literal_842 us_void_param)) )))
+  (! (= (to_rep (select (temp___String_Literal_803 us_void_param) 1)) 58) :pattern (
+  (temp___String_Literal_803 us_void_param)) )))
 
-(declare-fun temp___String_Literal_843 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_804 (tuple0) (Array Int character))
 
-;; temp___String_Literal_843__def_axiom
+;; temp___String_Literal_804__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (= (to_rep (select (temp___String_Literal_843 us_void_param) 1)) 58) :pattern (
-  (temp___String_Literal_843 us_void_param)) )))
+  (! (= (to_rep (select (temp___String_Literal_804 us_void_param) 1)) 58) :pattern (
+  (temp___String_Literal_804 us_void_param)) )))
 
-(declare-fun temp___String_Literal_844 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_805 (tuple0) (Array Int character))
 
-;; temp___String_Literal_844__def_axiom
+;; temp___String_Literal_805__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
-     (= (to_rep (select (temp___String_Literal_844 us_void_param) 1)) 58)
-     (= (to_rep (select (temp___String_Literal_844 us_void_param) 2)) 32)) :pattern (
-  (temp___String_Literal_844 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_805 us_void_param) 1)) 58)
+     (= (to_rep (select (temp___String_Literal_805 us_void_param) 2)) 32)) :pattern (
+  (temp___String_Literal_805 us_void_param)) )))
 
 (define-fun dynamic_invariant2 ((temp___expr_33 Int) (temp___is_init_30 Bool)
   (temp___skip_constant_31 Bool)
@@ -926,17 +923,17 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range temp___expr_15)))
 
-(define-fun dynamic_invariant6 ((temp___expr_582 Int)
-  (temp___is_init_579 Bool) (temp___skip_constant_580 Bool)
-  (temp___do_toplevel_581 Bool)) Bool (=>
-                                      (or (= temp___is_init_579 true)
-                                      (<= 0 8)) (in_range6 temp___expr_582)))
+(define-fun dynamic_invariant6 ((temp___expr_572 Int)
+  (temp___is_init_569 Bool) (temp___skip_constant_570 Bool)
+  (temp___do_toplevel_571 Bool)) Bool (=>
+                                      (or (= temp___is_init_569 true)
+                                      (<= 0 8)) (in_range6 temp___expr_572)))
 
-(define-fun dynamic_invariant7 ((temp___expr_462 Int)
-  (temp___is_init_459 Bool) (temp___skip_constant_460 Bool)
-  (temp___do_toplevel_461 Bool)) Bool (=>
-                                      (or (= temp___is_init_459 true)
-                                      (<= 0 2)) (in_range4 temp___expr_462)))
+(define-fun dynamic_invariant7 ((temp___expr_461 Int)
+  (temp___is_init_458 Bool) (temp___skip_constant_459 Bool)
+  (temp___do_toplevel_460 Bool)) Bool (=>
+                                      (or (= temp___is_init_458 true)
+                                      (<= 0 2)) (in_range4 temp___expr_461)))
 
 (declare-fun name_table () us_private)
 
@@ -953,9 +950,6 @@
 
 ;; H
   (assert (dynamic_invariant msg true false true))
-
-;; H
-  (assert (invariant____function_guard (invariant__ name_table) name_table))
 
 ;; H
   (assert (= (invariant__ name_table) true))

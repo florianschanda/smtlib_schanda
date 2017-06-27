@@ -96,11 +96,8 @@
 ;; down__def_axiom
   (assert
   (forall ((x1 Int))
-  (! (=>
-     (and (dynamic_invariant x1 true true true) (down__function_guard
-     (down x1) x1))
-     (and (down__function_guard (down (- x1 1)) (- x1 1))
-     (= (down x1) (ite (= x1 1) x1 (+ (down (- x1 1)) 1))))) :pattern (
+  (! (=> (dynamic_invariant x1 true true true)
+     (= (down x1) (ite (= x1 1) x1 (+ (down (- x1 1)) 1)))) :pattern (
   (down x1)) )))
 
 (define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool)

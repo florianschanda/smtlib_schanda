@@ -239,9 +239,8 @@
   (assert
   (forall ((r us_rep))
   (! (let ((result (get_i r)))
-     (=> (get_i__function_guard result r)
      (and (= result (to_rep (rec__mixed__rec__i (us_split_fields1 r))))
-     (dynamic_invariant result true false true)))) :pattern ((get_i r)) )))
+     (dynamic_invariant result true false true))) :pattern ((get_i r)) )))
 
 (declare-fun r () us_rep)
 
@@ -268,7 +267,7 @@
 
 ;; H
   (assert
-  (and (and (= o (get_i r)) (get_i__function_guard o r))
+  (and (= o (get_i r))
   (and (in_range o) (= o (to_rep (rec__mixed__rec__i (us_split_fields1 r)))))))
 
 ;; H

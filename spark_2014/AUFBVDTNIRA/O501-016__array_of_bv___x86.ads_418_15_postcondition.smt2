@@ -460,9 +460,8 @@
   (forall ((x86__memory (Array (_ BitVec 64) unsigned8)))
   (! (=> (dynamic_invariant addr true true true)
      (let ((result (readmem8 addr x86__memory)))
-     (=> (readmem8__function_guard result addr x86__memory)
      (and (= result (to_rep (select x86__memory addr))) (dynamic_invariant1
-     result true false true))))) :pattern ((readmem8 addr x86__memory)) ))))
+     result true false true)))) :pattern ((readmem8 addr x86__memory)) ))))
 
 (declare-fun addr () (_ BitVec 64))
 
@@ -503,9 +502,6 @@
 
 ;; H
   (assert (= memory3 memory1))
-
-;; H
-  (assert (readmem8__function_guard (readmem8 addr memory2) addr memory2))
 
 (assert
 ;; WP_parameter_def

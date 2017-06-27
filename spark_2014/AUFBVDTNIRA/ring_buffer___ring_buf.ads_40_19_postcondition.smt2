@@ -433,39 +433,19 @@
 ;; is_empty__def_axiom
   (assert
   (forall ((r us_rep))
-  (! (=> (is_empty__function_guard (is_empty r) r)
-     (= (= (is_empty r) true)
-     (= (to_rep1 (rec__ring_buf__ring_buffer__length (us_split_fields1 r))) 0))) :pattern (
+  (! (= (= (is_empty r) true)
+     (= (to_rep1 (rec__ring_buf__ring_buffer__length (us_split_fields1 r))) 0)) :pattern (
   (is_empty r)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(declare-sort t1b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 9999)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq5 (t1b t1b) Bool)
-
-(declare-fun dummy5 () t1b)
-
-(declare-datatypes () ((t1b__ref (mk_t1b__ref (t1b__content t1b)))))
-(define-fun t1b__ref___projection ((a t1b__ref)) t1b (t1b__content a))
-
-(declare-fun temp___191 (Int) (Array Int integer))
+(declare-fun temp___185 (Int) (Array Int integer))
 
 ;; def_axiom
   (assert
-  (forall ((temp___193 Int))
-  (forall ((temp___194 Int))
-  (= (select (temp___191 temp___193) temp___194) (of_rep2 temp___193)))))
+  (forall ((temp___187 Int))
+  (forall ((temp___188 Int))
+  (= (select (temp___185 temp___187) temp___188) (of_rep2 temp___187)))))
 
 (define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)
@@ -502,11 +482,11 @@
 
 (declare-fun o3 () length_type)
 
-(declare-fun temp___188 () (Array Int integer))
+(declare-fun temp___182 () (Array Int integer))
 
-(declare-fun temp___1881 () ar_index)
+(declare-fun temp___1821 () ar_index)
 
-(declare-fun temp___1882 () length_type)
+(declare-fun temp___1822 () length_type)
 
 (declare-fun o4 () ar_index)
 
@@ -516,25 +496,11 @@
 
 (declare-fun o7 () length_type)
 
-(declare-fun temp___190 () (Array Int integer))
+(declare-fun temp___184 () (Array Int integer))
 
-(declare-fun temp___1901 () ar_index)
+(declare-fun temp___1841 () ar_index)
 
-(declare-fun temp___1902 () length_type)
-
-(declare-fun o8 () (Array Int integer))
-
-(declare-fun o9 () (Array Int integer))
-
-(declare-fun o10 () ar_index)
-
-(declare-fun o11 () length_type)
-
-(declare-fun temp___196 () (Array Int integer))
-
-(declare-fun temp___1961 () ar_index)
-
-(declare-fun temp___1962 () length_type)
+(declare-fun temp___1842 () length_type)
 
 (declare-fun result () (Array Int integer))
 
@@ -578,7 +544,11 @@
 
 (declare-fun r__split_fields14 () length_type)
 
-(declare-fun r__split_fields15 () us_split_fields)
+(declare-fun r__split_fields15 () (Array Int integer))
+
+(declare-fun r__split_fields16 () ar_index)
+
+(declare-fun r__split_fields17 () length_type)
 
 ;; H
   (assert (= (to_rep1 o) 0))
@@ -593,28 +563,31 @@
   (assert (= o o3))
 
 ;; H
-  (assert (= temp___188 o1))
+  (assert (= temp___182 o1))
 
 ;; H
-  (assert (= temp___1881 o2))
+  (assert (= temp___1821 o2))
 
 ;; H
-  (assert (= temp___1882 o3))
+  (assert (= temp___1822 o3))
 
 ;; H
-  (assert
-  (= (mk___split_fields__ref (mk___split_fields result result1 result2)) 
-  (mk___split_fields__ref
-  (mk___split_fields r__split_fields r__split_fields1 r__split_fields2))))
+  (assert (= result r__split_fields))
 
 ;; H
-  (assert (= temp___188 r__split_fields3))
+  (assert (= result1 r__split_fields1))
 
 ;; H
-  (assert (= temp___1881 r__split_fields4))
+  (assert (= result2 r__split_fields2))
 
 ;; H
-  (assert (= temp___1882 r__split_fields5))
+  (assert (= temp___182 r__split_fields3))
+
+;; H
+  (assert (= temp___1821 r__split_fields4))
+
+;; H
+  (assert (= temp___1822 r__split_fields5))
 
 ;; H
   (assert (= (to_rep o4) 0))
@@ -629,13 +602,13 @@
   (assert (= r__split_fields5 o7))
 
 ;; H
-  (assert (= temp___190 o5))
+  (assert (= temp___184 o5))
 
 ;; H
-  (assert (= temp___1901 o6))
+  (assert (= temp___1841 o6))
 
 ;; H
-  (assert (= temp___1902 o7))
+  (assert (= temp___1842 o7))
 
 ;; H
   (assert (= result3 r__split_fields3))
@@ -647,34 +620,13 @@
   (assert (= result5 r__split_fields5))
 
 ;; H
-  (assert (= temp___190 r__split_fields6))
+  (assert (= temp___184 r__split_fields6))
 
 ;; H
-  (assert (= temp___1901 r__split_fields7))
+  (assert (= temp___1841 r__split_fields7))
 
 ;; H
-  (assert (= temp___1902 r__split_fields8))
-
-;; H
-  (assert (= o8 (temp___191 0)))
-
-;; H
-  (assert (= o8 o9))
-
-;; H
-  (assert (= r__split_fields7 o10))
-
-;; H
-  (assert (= r__split_fields8 o11))
-
-;; H
-  (assert (= temp___196 o9))
-
-;; H
-  (assert (= temp___1961 o10))
-
-;; H
-  (assert (= temp___1962 o11))
+  (assert (= temp___1842 r__split_fields8))
 
 ;; H
   (assert (= result6 r__split_fields6))
@@ -686,13 +638,13 @@
   (assert (= result8 r__split_fields8))
 
 ;; H
-  (assert (= temp___196 r__split_fields9))
+  (assert (= (temp___185 0) r__split_fields9))
 
 ;; H
-  (assert (= temp___1961 r__split_fields10))
+  (assert (= r__split_fields7 r__split_fields10))
 
 ;; H
-  (assert (= temp___1962 r__split_fields11))
+  (assert (= r__split_fields8 r__split_fields11))
 
 ;; H
   (assert (= r__split_fields12 r__split_fields9))
@@ -704,17 +656,13 @@
   (assert (= r__split_fields14 r__split_fields11))
 
 ;; H
-  (assert
-  (= r__split_fields15 (mk___split_fields r__split_fields9 r__split_fields10
-                       r__split_fields11)))
+  (assert (= r__split_fields15 r__split_fields9))
 
 ;; H
-  (assert (is_empty__function_guard
-  (is_empty
-  (mk___rep
-  (mk___split_fields r__split_fields12 r__split_fields13 r__split_fields14)))
-  (mk___rep
-  (mk___split_fields r__split_fields12 r__split_fields13 r__split_fields14))))
+  (assert (= r__split_fields16 r__split_fields10))
+
+;; H
+  (assert (= r__split_fields17 r__split_fields11))
 
 (assert
 ;; WP_parameter_def

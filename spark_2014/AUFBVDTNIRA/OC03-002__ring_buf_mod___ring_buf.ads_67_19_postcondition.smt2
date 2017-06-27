@@ -652,8 +652,6 @@
 
 (declare-fun attr__ATTRIBUTE_MODULUS1 () (_ BitVec 16))
 
-(declare-fun first2 () (_ BitVec 16))
-
 (define-fun dynamic_property1 ((first_int (_ BitVec 16))
   (last_int (_ BitVec 16))
   (x (_ BitVec 16))) Bool (and (bvule first_int x) (bvule x last_int)))
@@ -679,7 +677,7 @@
 
 (declare-sort t1 0)
 
-(declare-fun first3 (t1) ar_index)
+(declare-fun first2 (t1) ar_index)
 
 (declare-fun last2 (t1) ar_index)
 
@@ -688,7 +686,7 @@
 ;; mk_def
   (assert
   (forall ((f (_ BitVec 16)) (l (_ BitVec 16)))
-  (! (and (= (to_rep1 (first3 (mk1 f l))) f)
+  (! (and (= (to_rep1 (first2 (mk1 f l))) f)
      (= (to_rep1 (last2 (mk1 f l))) l)) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first (_ BitVec 16))
@@ -705,13 +703,13 @@
 (define-fun of_array1 ((a (Array (_ BitVec 16) integer)) (f (_ BitVec 16))
   (l (_ BitVec 16))) us_t1 (mk___t1 a (mk1 f l)))
 
-(define-fun first4 ((a us_t1)) (_ BitVec 16) (to_rep1 (first3 (rt1 a))))
+(define-fun first3 ((a us_t1)) (_ BitVec 16) (to_rep1 (first2 (rt1 a))))
 
 (define-fun last3 ((a us_t1)) (_ BitVec 16) (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (bvule (first4 a) (last3 a))
+(define-fun length1 ((a us_t1)) Int (ite (bvule (first3 a) (last3 a))
                                     (+ (- (bv2nat (last3 a)) (bv2nat 
-                                    (first4 a))) 1) 0))
+                                    (first3 a))) 1) 0))
 
 (declare-fun value__size3 () Int)
 
@@ -748,9 +746,9 @@
   (forall ((a (Array (_ BitVec 16) integer))) (<= 0 (object__alignment3 a))))
 
 (define-fun bool_eq7 ((x us_t1)
-  (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep1 (first3 (rt1 x)))
+  (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep1 (first2 (rt1 x)))
                   (to_rep1 (last2 (rt1 x))) (elts1 y)
-                  (to_rep1 (first3 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
 (declare-fun user_eq7 (us_t1 us_t1) Bool)
 
@@ -760,8 +758,6 @@
 (define-fun t22s__ref___projection ((a t22s__ref)) us_t1 (t22s__content a))
 
 (declare-fun attr__ATTRIBUTE_MODULUS2 () (_ BitVec 16))
-
-(declare-fun last4 () (_ BitVec 16))
 
 (define-fun dynamic_property3 ((first_int (_ BitVec 16))
   (last_int (_ BitVec 16))
@@ -788,17 +784,17 @@
 
 (declare-sort t2 0)
 
-(declare-fun first5 (t2) ar_index)
+(declare-fun first4 (t2) ar_index)
 
-(declare-fun last5 (t2) ar_index)
+(declare-fun last4 (t2) ar_index)
 
 (declare-fun mk2 ((_ BitVec 16) (_ BitVec 16)) t2)
 
 ;; mk_def
   (assert
   (forall ((f (_ BitVec 16)) (l (_ BitVec 16)))
-  (! (and (= (to_rep1 (first5 (mk2 f l))) f)
-     (= (to_rep1 (last5 (mk2 f l))) l)) :pattern ((mk2 f l)) )))
+  (! (and (= (to_rep1 (first4 (mk2 f l))) f)
+     (= (to_rep1 (last4 (mk2 f l))) l)) :pattern ((mk2 f l)) )))
 
 (define-fun dynamic_property4 ((range_first (_ BitVec 16))
   (range_last (_ BitVec 16)) (low (_ BitVec 16))
@@ -814,13 +810,13 @@
 (define-fun of_array2 ((a (Array (_ BitVec 16) integer)) (f (_ BitVec 16))
   (l (_ BitVec 16))) us_t2 (mk___t2 a (mk2 f l)))
 
-(define-fun first6 ((a us_t2)) (_ BitVec 16) (to_rep1 (first5 (rt2 a))))
+(define-fun first5 ((a us_t2)) (_ BitVec 16) (to_rep1 (first4 (rt2 a))))
 
-(define-fun last6 ((a us_t2)) (_ BitVec 16) (to_rep1 (last5 (rt2 a))))
+(define-fun last5 ((a us_t2)) (_ BitVec 16) (to_rep1 (last4 (rt2 a))))
 
-(define-fun length2 ((a us_t2)) Int (ite (bvule (first6 a) (last6 a))
-                                    (+ (- (bv2nat (last6 a)) (bv2nat 
-                                    (first6 a))) 1) 0))
+(define-fun length2 ((a us_t2)) Int (ite (bvule (first5 a) (last5 a))
+                                    (+ (- (bv2nat (last5 a)) (bv2nat 
+                                    (first5 a))) 1) 0))
 
 (declare-fun value__size4 () Int)
 
@@ -857,9 +853,9 @@
   (forall ((a (Array (_ BitVec 16) integer))) (<= 0 (object__alignment4 a))))
 
 (define-fun bool_eq9 ((x us_t2)
-  (y us_t2)) Bool (bool_eq3 (elts2 x) (to_rep1 (first5 (rt2 x)))
-                  (to_rep1 (last5 (rt2 x))) (elts2 y)
-                  (to_rep1 (first5 (rt2 y))) (to_rep1 (last5 (rt2 y)))))
+  (y us_t2)) Bool (bool_eq3 (elts2 x) (to_rep1 (first4 (rt2 x)))
+                  (to_rep1 (last4 (rt2 x))) (elts2 y)
+                  (to_rep1 (first4 (rt2 y))) (to_rep1 (last4 (rt2 y)))))
 
 (declare-fun user_eq9 (us_t2 us_t2) Bool)
 
@@ -869,10 +865,6 @@
 (define-fun t24s__ref___projection ((a t24s__ref)) us_t2 (t24s__content a))
 
 (declare-fun attr__ATTRIBUTE_MODULUS3 () (_ BitVec 16))
-
-(declare-fun first7 () (_ BitVec 16))
-
-(declare-fun last7 () (_ BitVec 16))
 
 (define-fun dynamic_property5 ((first_int (_ BitVec 16))
   (last_int (_ BitVec 16))
@@ -899,17 +891,17 @@
 
 (declare-sort t3 0)
 
-(declare-fun first8 (t3) ar_index)
+(declare-fun first6 (t3) ar_index)
 
-(declare-fun last8 (t3) ar_index)
+(declare-fun last6 (t3) ar_index)
 
 (declare-fun mk3 ((_ BitVec 16) (_ BitVec 16)) t3)
 
 ;; mk_def
   (assert
   (forall ((f (_ BitVec 16)) (l (_ BitVec 16)))
-  (! (and (= (to_rep1 (first8 (mk3 f l))) f)
-     (= (to_rep1 (last8 (mk3 f l))) l)) :pattern ((mk3 f l)) )))
+  (! (and (= (to_rep1 (first6 (mk3 f l))) f)
+     (= (to_rep1 (last6 (mk3 f l))) l)) :pattern ((mk3 f l)) )))
 
 (define-fun dynamic_property6 ((range_first (_ BitVec 16))
   (range_last (_ BitVec 16)) (low (_ BitVec 16))
@@ -925,13 +917,13 @@
 (define-fun of_array3 ((a (Array (_ BitVec 16) integer)) (f (_ BitVec 16))
   (l (_ BitVec 16))) us_t3 (mk___t3 a (mk3 f l)))
 
-(define-fun first9 ((a us_t3)) (_ BitVec 16) (to_rep1 (first8 (rt3 a))))
+(define-fun first7 ((a us_t3)) (_ BitVec 16) (to_rep1 (first6 (rt3 a))))
 
-(define-fun last9 ((a us_t3)) (_ BitVec 16) (to_rep1 (last8 (rt3 a))))
+(define-fun last7 ((a us_t3)) (_ BitVec 16) (to_rep1 (last6 (rt3 a))))
 
-(define-fun length3 ((a us_t3)) Int (ite (bvule (first9 a) (last9 a))
-                                    (+ (- (bv2nat (last9 a)) (bv2nat 
-                                    (first9 a))) 1) 0))
+(define-fun length3 ((a us_t3)) Int (ite (bvule (first7 a) (last7 a))
+                                    (+ (- (bv2nat (last7 a)) (bv2nat 
+                                    (first7 a))) 1) 0))
 
 (declare-fun value__size5 () Int)
 
@@ -968,9 +960,9 @@
   (forall ((a (Array (_ BitVec 16) integer))) (<= 0 (object__alignment5 a))))
 
 (define-fun bool_eq11 ((x us_t3)
-  (y us_t3)) Bool (bool_eq3 (elts3 x) (to_rep1 (first8 (rt3 x)))
-                  (to_rep1 (last8 (rt3 x))) (elts3 y)
-                  (to_rep1 (first8 (rt3 y))) (to_rep1 (last8 (rt3 y)))))
+  (y us_t3)) Bool (bool_eq3 (elts3 x) (to_rep1 (first6 (rt3 x)))
+                  (to_rep1 (last6 (rt3 x))) (elts3 y)
+                  (to_rep1 (first6 (rt3 y))) (to_rep1 (last6 (rt3 y)))))
 
 (declare-fun user_eq11 (us_t3 us_t3) Bool)
 
@@ -981,16 +973,13 @@
 
 ;; to_model__post_axiom
   (assert
-  (forall ((r us_rep))
-  (! (let ((result (to_model r)))
-     (=> (to_model__function_guard result r) (dynamic_invariant1 result true
-     false true))) :pattern ((to_model r)) )))
+  (forall ((r us_rep)) (! (dynamic_invariant1 (to_model r) true false
+  true) :pattern ((to_model r)) )))
 
 ;; to_model__def_axiom
   (assert
   (forall ((r us_rep))
-  (! (=> (to_model__function_guard (to_model r) r)
-     (= (to_model r) (ite (< 65535 (- (+ (bv2nat (to_rep1
+  (! (= (to_model r) (ite (< 65535 (- (+ (bv2nat (to_rep1
                                                  (rec__ring_buf__ring_buffer__first
                                                  (us_split_fields1 r)))) 
                      (to_rep2
@@ -1017,21 +1006,21 @@
                                        (of_array1 temp___189 temp___187
                                        temp___188))))))
                      (ite (= (length1 temp___193) 0)
-                     (of_array (to_array2 temp___194) (first6 temp___194)
-                     (last6 temp___194))
+                     (of_array (to_array2 temp___194) (first5 temp___194)
+                     (last5 temp___194))
                      (of_array
-                     (concat1 (to_array1 temp___193) (first4 temp___193)
+                     (concat1 (to_array1 temp___193) (first3 temp___193)
                      (last3 temp___193) (to_array2 temp___194)
-                     (first6 temp___194) (last6 temp___194))
-                     (first4 temp___193)
-                     ((_ int2bv 16) (- (+ (bv2nat (first4 temp___193)) (+ 
-                     (ite (<= (bv2nat (first4 temp___193)) (bv2nat (last3
+                     (first5 temp___194) (last5 temp___194))
+                     (first3 temp___193)
+                     ((_ int2bv 16) (- (+ (bv2nat (first3 temp___193)) (+ 
+                     (ite (<= (bv2nat (first3 temp___193)) (bv2nat (last3
                                                                    temp___193)))
-                     (+ (- (bv2nat (last3 temp___193)) (bv2nat (first4
+                     (+ (- (bv2nat (last3 temp___193)) (bv2nat (first3
                                                                temp___193))) 1)
-                     0) (ite (<= (bv2nat (first6 temp___194)) (bv2nat 
-                        (last6 temp___194)))
-                        (+ (- (bv2nat (last6 temp___194)) (bv2nat (first6
+                     0) (ite (<= (bv2nat (first5 temp___194)) (bv2nat 
+                        (last5 temp___194)))
+                        (+ (- (bv2nat (last5 temp___194)) (bv2nat (first5
                                                                   temp___194))) 1)
                         0))) 1))))))
                      (let ((temp___198 (let ((temp___196 (bvsub (bvadd 
@@ -1048,8 +1037,8 @@
                                                          (us_split_fields1 r))))
                                        (of_array3 temp___197 temp___195
                                        temp___196))))))
-                     (of_array (to_array3 temp___198) (first9 temp___198)
-                     (last9 temp___198)))))) :pattern ((to_model r)) )))
+                     (of_array (to_array3 temp___198) (first7 temp___198)
+                     (last7 temp___198))))) :pattern ((to_model r)) )))
 
 (declare-fun func_push (us_t Int) us_t)
 
@@ -1061,19 +1050,16 @@
   (forall ((x Int))
   (! (=>
      (and (dynamic_invariant1 m true true true) (dynamic_invariant x true
-     true true))
-     (let ((result (func_push m x)))
-     (=> (func_push__function_guard result m x) (dynamic_invariant1 result
-     true false true)))) :pattern ((func_push m x)) ))))
+     true true)) (dynamic_invariant1 (func_push m x) true false true)) :pattern (
+  (func_push m x)) ))))
 
 ;; func_push__def_axiom
   (assert
   (forall ((m us_t))
   (forall ((x Int))
   (! (=>
-     (and
      (and (dynamic_invariant1 m true true true) (dynamic_invariant x true
-     true true)) (func_push__function_guard (func_push m x) m x))
+     true true))
      (= (func_push m x) (ite (= (length m) 0)
                         (of_array (singleton1 (of_rep x) ((_ int2bv 16) 0))
                         ((_ int2bv 16) 0) ((_ int2bv 16) 0))
@@ -1102,9 +1088,8 @@
 ;; is_full__def_axiom
   (assert
   (forall ((r us_rep))
-  (! (=> (is_full__function_guard (is_full r) r)
-     (= (= (is_full r) true)
-     (= (to_rep2 (rec__ring_buf__ring_buffer__length (us_split_fields1 r))) 65536))) :pattern (
+  (! (= (= (is_full r) true)
+     (= (to_rep2 (rec__ring_buf__ring_buffer__length (us_split_fields1 r))) 65536)) :pattern (
   (is_full r)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -1146,11 +1131,11 @@
 
 (declare-fun o7 () length_type)
 
-(declare-fun temp___303 () (Array (_ BitVec 16) integer))
+(declare-fun temp___282 () (Array (_ BitVec 16) integer))
 
-(declare-fun temp___3031 () ar_index)
+(declare-fun temp___2821 () ar_index)
 
-(declare-fun temp___3032 () length_type)
+(declare-fun temp___2822 () length_type)
 
 (declare-fun o8 () Int)
 
@@ -1162,11 +1147,11 @@
 
 (declare-fun o12 () length_type)
 
-(declare-fun temp___305 () (Array (_ BitVec 16) integer))
+(declare-fun temp___284 () (Array (_ BitVec 16) integer))
 
-(declare-fun temp___3051 () ar_index)
+(declare-fun temp___2841 () ar_index)
 
-(declare-fun temp___3052 () length_type)
+(declare-fun temp___2842 () length_type)
 
 (declare-fun result () (Array (_ BitVec 16) integer))
 
@@ -1205,14 +1190,6 @@
 (declare-fun r__split_fields14 () length_type)
 
 ;; H
-  (assert (is_full__function_guard
-  (is_full
-  (mk___rep
-  (mk___split_fields r__split_fields r__split_fields1 r__split_fields2)))
-  (mk___rep
-  (mk___split_fields r__split_fields r__split_fields1 r__split_fields2))))
-
-;; H
   (assert (in_range x))
 
 ;; H
@@ -1249,13 +1226,13 @@
   (assert (= r__split_fields2 o7))
 
 ;; H
-  (assert (= temp___303 o5))
+  (assert (= temp___282 o5))
 
 ;; H
-  (assert (= temp___3031 o6))
+  (assert (= temp___2821 o6))
 
 ;; H
-  (assert (= temp___3032 o7))
+  (assert (= temp___2822 o7))
 
 ;; H
   (assert
@@ -1264,13 +1241,13 @@
   (mk___split_fields r__split_fields r__split_fields1 r__split_fields2))))
 
 ;; H
-  (assert (= temp___303 r__split_fields3))
+  (assert (= temp___282 r__split_fields3))
 
 ;; H
-  (assert (= temp___3031 r__split_fields4))
+  (assert (= temp___2821 r__split_fields4))
 
 ;; H
-  (assert (= temp___3032 r__split_fields5))
+  (assert (= temp___2822 r__split_fields5))
 
 ;; H
   (assert
@@ -1290,13 +1267,13 @@
   (assert (= o9 o12))
 
 ;; H
-  (assert (= temp___305 o10))
+  (assert (= temp___284 o10))
 
 ;; H
-  (assert (= temp___3051 o11))
+  (assert (= temp___2841 o11))
 
 ;; H
-  (assert (= temp___3052 o12))
+  (assert (= temp___2842 o12))
 
 ;; H
   (assert (= result3 r__split_fields3))
@@ -1308,13 +1285,13 @@
   (assert (= result5 r__split_fields5))
 
 ;; H
-  (assert (= temp___305 r__split_fields6))
+  (assert (= temp___284 r__split_fields6))
 
 ;; H
-  (assert (= temp___3051 r__split_fields7))
+  (assert (= temp___2841 r__split_fields7))
 
 ;; H
-  (assert (= temp___3052 r__split_fields8))
+  (assert (= temp___2842 r__split_fields8))
 
 ;; H
   (assert (= r__split_fields9 r__split_fields6))
@@ -1334,56 +1311,20 @@
 ;; H
   (assert (= r__split_fields14 r__split_fields8))
 
-;; H
-  (assert (to_model__function_guard
-  (to_model
-  (mk___rep
-  (mk___split_fields r__split_fields r__split_fields1 r__split_fields2)))
-  (mk___rep
-  (mk___split_fields r__split_fields r__split_fields1 r__split_fields2))))
-
-;; H
-  (assert (to_model__function_guard
-  (to_model
-  (mk___rep
-  (mk___split_fields r__split_fields r__split_fields1 r__split_fields2)))
-  (mk___rep
-  (mk___split_fields r__split_fields r__split_fields1 r__split_fields2))))
-
-;; H
-  (assert (func_push__function_guard
-  (func_push
-  (to_model
-  (mk___rep
-  (mk___split_fields r__split_fields r__split_fields1 r__split_fields2))) 
-  x)
-  (to_model
-  (mk___rep
-  (mk___split_fields r__split_fields r__split_fields1 r__split_fields2))) 
-  x))
-
-;; H
-  (assert (to_model__function_guard
-  (to_model
-  (mk___rep
-  (mk___split_fields r__split_fields9 r__split_fields10 r__split_fields11)))
-  (mk___rep
-  (mk___split_fields r__split_fields9 r__split_fields10 r__split_fields11))))
-
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
   (not
-  (= (let ((temp___317 (func_push
+  (= (let ((temp___291 (func_push
                        (to_model
                        (mk___rep
                        (mk___split_fields r__split_fields r__split_fields1
                        r__split_fields2))) x)))
-     (let ((temp___316 (to_model
+     (let ((temp___290 (to_model
                        (mk___rep
                        (mk___split_fields r__split_fields9 r__split_fields10
                        r__split_fields11)))))
-     (bool_eq3 (elts temp___316) (to_rep1 (first (rt temp___316)))
-     (to_rep1 (last (rt temp___316))) (elts temp___317)
-     (to_rep1 (first (rt temp___317))) (to_rep1 (last (rt temp___317)))))) true)))
+     (bool_eq3 (elts temp___290) (to_rep1 (first (rt temp___290)))
+     (to_rep1 (last (rt temp___290))) (elts temp___291)
+     (to_rep1 (first (rt temp___291))) (to_rep1 (last (rt temp___291)))))) true)))
 (check-sat)

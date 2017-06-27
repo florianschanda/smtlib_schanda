@@ -223,7 +223,15 @@
 
 (declare-fun o4 () pt)
 
+(declare-fun us_self__compl () pt)
+
 (declare-fun outer_rec__split_fields () pt)
+
+(declare-fun us_self__compl1 () pt)
+
+(declare-fun result () pt)
+
+(declare-fun outer_rec__split_fields1 () us_split_fields2)
 
 (assert
 ;; WP_parameter_def
@@ -231,6 +239,11 @@
   (not
   (not
   (and
+  (and
+  (and
   (and (and (and (= o outer_rec__split_fields) (= o o1)) (= o1 o2))
-  (= o2 o3)) (= o4 o3)))))
+  (= o2 o3)) (= o4 o3)) (= o4 us_self__compl))
+  (and (= result outer_rec__split_fields)
+  (= outer_rec__split_fields1 (mk___split_fields1
+                              (mk___rep (mk___split_fields us_self__compl1)))))))))
 (check-sat)

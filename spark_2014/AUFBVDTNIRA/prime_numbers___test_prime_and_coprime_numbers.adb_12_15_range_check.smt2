@@ -376,11 +376,10 @@
 ;; is_prime__def_axiom
   (assert
   (forall ((value Int))
-  (! (=> (is_prime__function_guard (is_prime value) value)
-     (= (= (is_prime value) true)
+  (! (= (= (is_prime value) true)
      (and (<= 2 value)
      (forall ((v Int))
-     (=> (and (<= 2 v) (<= v (- value 1))) (not (= (mod2 value v) 0))))))) :pattern (
+     (=> (and (<= 2 v) (<= v (- value 1))) (not (= (mod2 value v) 0)))))) :pattern (
   (is_prime value)) )))
 
 ;; valid_prime_data__post_axiom
@@ -390,17 +389,13 @@
   (assert
   (forall
   ((test_prime_and_coprime_numbers__p__set__is_prime (Array Int Bool)))
-  (! (=> (valid_prime_data__function_guard
-     (valid_prime_data test_prime_and_coprime_numbers__p__set__is_prime)
-     test_prime_and_coprime_numbers__p__set__is_prime)
-     (and (forall ((v Int)) (is_prime__function_guard (is_prime v) v))
-     (=
+  (! (=
      (= (valid_prime_data test_prime_and_coprime_numbers__p__set__is_prime) true)
      (forall ((v Int))
      (=> (and (<= 0 v) (<= v 100000))
      (= (= (select test_prime_and_coprime_numbers__p__set__is_prime v) true)
-     (= (is_prime v) true))))))) :pattern ((valid_prime_data
-                                           test_prime_and_coprime_numbers__p__set__is_prime)) )))
+     (= (is_prime v) true))))) :pattern ((valid_prime_data
+                                         test_prime_and_coprime_numbers__p__set__is_prime)) )))
 
 ;; are_coprime__post_axiom
   (assert true)
@@ -408,13 +403,12 @@
 ;; are_coprime__def_axiom
   (assert
   (forall ((v1 Int) (v2 Int))
-  (! (=> (are_coprime__function_guard (are_coprime v1 v2) v1 v2)
-     (= (= (are_coprime v1 v2) true)
+  (! (= (= (are_coprime v1 v2) true)
      (and (and (< 0 v1) (< 0 v2))
      (forall ((v Int))
      (=> (and (<= 2 v) (<= v (ite (< v1 v2) v1 v2)))
-     (not (and (= (mod2 v1 v) 0) (= (mod2 v2 v) 0)))))))) :pattern ((are_coprime
-                                                                    v1 v2)) )))
+     (not (and (= (mod2 v1 v) 0) (= (mod2 v2 v) 0))))))) :pattern ((are_coprime
+                                                                   v1 v2)) )))
 
 ;; has_true__post_axiom
   (assert true)
@@ -423,11 +417,9 @@
   (assert
   (forall ((number_list (Array Int Bool)))
   (forall ((low Int) (high Int))
-  (! (=> (has_true__function_guard (has_true number_list low high)
-     number_list low high)
-     (= (= (has_true number_list low high) true)
+  (! (= (= (has_true number_list low high) true)
      (exists ((v Int))
-     (and (and (<= low v) (<= v high)) (= (select number_list v) true))))) :pattern (
+     (and (and (<= low v) (<= v high)) (= (select number_list v) true)))) :pattern (
   (has_true number_list low high)) ))))
 
 ;; has_prime__post_axiom
@@ -436,11 +428,9 @@
 ;; has_prime__def_axiom
   (assert
   (forall ((low Int) (high Int))
-  (! (=> (has_prime__function_guard (has_prime low high) low high)
-     (and (forall ((v Int)) (is_prime__function_guard (is_prime v) v))
-     (= (= (has_prime low high) true)
+  (! (= (= (has_prime low high) true)
      (exists ((v Int))
-     (and (and (<= low v) (<= v high)) (= (is_prime v) true)))))) :pattern (
+     (and (and (<= low v) (<= v high)) (= (is_prime v) true)))) :pattern (
   (has_prime low high)) )))
 
 (declare-fun is_prime1 () (Array Int Bool))
@@ -450,47 +440,14 @@
 (declare-fun o () Int)
 
 ;; H
-  (assert (valid_prime_data__function_guard (valid_prime_data is_prime1)
-  is_prime1))
-
-;; H
   (assert (= (valid_prime_data is_prime1) true))
 
 ;; H
   (assert (=> (<= 1 2147483647) (in_range result__)))
 
 ;; H
-  (assert (is_prime__function_guard (is_prime o) o))
-
-;; H
-  (assert (is_prime__function_guard (is_prime 555) 555))
-
-;; H
-  (assert (is_prime__function_guard (is_prime 555) 555))
-
-;; H
-  (assert (forall ((v Int)) (is_prime__function_guard (is_prime v) v)))
-
-;; H
-  (assert (is_prime__function_guard (is_prime 555) 555))
-
-;; H
-  (assert (forall ((v Int)) (is_prime__function_guard (is_prime v) v)))
-
-;; H
-  (assert (is_prime__function_guard (is_prime 555) 555))
-
-;; H
-  (assert (forall ((v Int)) (is_prime__function_guard (is_prime v) v)))
-
-;; H
-  (assert (forall ((v Int)) (is_prime__function_guard (is_prime v) v)))
-
-;; H
   (assert
-  (and
   (and (= o (nearest_prime_number 555 1 is_prime1))
-  (nearest_prime_number__function_guard o 555 1 is_prime1))
   (and (in_range2 o)
   (and (and (and (<= 0 o) (<= o 100000)) (= (is_prime o) true))
   (ite (= (is_prime 555) true) (= o 555)

@@ -83,11 +83,11 @@
 (declare-datatypes () ((a__ref (mk_a__ref (a__content a)))))
 (define-fun a__ref___projection ((a1 a__ref)) a (a__content a1))
 
-(define-fun dynamic_invariant1 ((temp___expr_172 Int)
-  (temp___is_init_169 Bool) (temp___skip_constant_170 Bool)
-  (temp___do_toplevel_171 Bool)) Bool (=>
-                                      (or (= temp___is_init_169 true)
-                                      (<= 1 10)) (in_range1 temp___expr_172)))
+(define-fun dynamic_invariant1 ((temp___expr_171 Int)
+  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
+  (temp___do_toplevel_170 Bool)) Bool (=>
+                                      (or (= temp___is_init_168 true)
+                                      (<= 1 10)) (in_range1 temp___expr_171)))
 
 (declare-fun f (tuple0) Int)
 
@@ -95,25 +95,20 @@
 
 ;; f__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (f us_void_param)))
-     (=> (f__function_guard result us_void_param) (dynamic_invariant1 result
-     true false true))) :pattern ((f us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant1 (f us_void_param)
+  true false true) :pattern ((f us_void_param)) )))
 
 (declare-fun x () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
 ;; x__def_axiom
-  (assert (and (f__function_guard (f Tuple0) Tuple0) (= x (f Tuple0))))
+  (assert (= x (f Tuple0)))
 
 (declare-fun main__x__assume () Int)
 
 ;; H
-  (assert
-  (and
-  (and (= main__x__assume (f Tuple0)) (f__function_guard main__x__assume
-  Tuple0)) (in_range1 main__x__assume)))
+  (assert (and (= main__x__assume (f Tuple0)) (in_range1 main__x__assume)))
 
 ;; H
   (assert (= main__x__assume x))

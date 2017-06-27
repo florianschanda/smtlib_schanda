@@ -169,24 +169,22 @@
 (declare-datatypes () ((p__ref (mk_p__ref (p__content us_rep)))))
 (define-fun p__ref___projection ((a p__ref)) us_rep (p__content a))
 
-(declare-fun b () Bool)
+(declare-fun x () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(declare-fun x () Int)
+(declare-fun self__ () Bool)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
-
-(declare-fun self__ () integer)
+(declare-fun self__1 () integer)
 
 ;; H
   (assert (in_range x))
 
 ;; H
-  (assert (= b true))
+  (assert (= self__ true))
 
 (assert
 ;; WP_parameter_def
  ;; File "prot.ads", line 6, characters 0-0
-  (not (in_range (+ (to_rep self__) x))))
+  (not (in_range (+ (to_rep self__1) x))))
 (check-sat)

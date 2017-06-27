@@ -139,11 +139,11 @@
 (define-fun rec____ref___projection ((a rec____ref)) us_rep (rec____content
                                                             a))
 
-(define-fun default_initial_assumption ((temp___expr_141 us_rep)
-  (temp___skip_top_level_142 Bool)) Bool (= (to_rep
+(define-fun default_initial_assumption ((temp___expr_140 us_rep)
+  (temp___skip_top_level_141 Bool)) Bool (= (to_rep
                                             (rec__main__rec__comp
                                             (us_split_fields1
-                                            temp___expr_141))) 1234))
+                                            temp___expr_140))) 1234))
 
 (declare-fun result__ () us_rep)
 

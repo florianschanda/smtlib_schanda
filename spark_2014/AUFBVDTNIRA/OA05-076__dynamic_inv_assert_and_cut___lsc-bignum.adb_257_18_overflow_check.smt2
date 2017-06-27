@@ -455,14 +455,7 @@
 ;; base__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (base__function_guard (base us_void_param) us_void_param)
-     (and (from_word32__function_guard (from_word32 ((_ int2bv 32) 2))
-     ((_ int2bv 32) 2))
-     (and (from_word32__function_guard (from_word32 ((_ int2bv 32) 2))
-     ((_ int2bv 32) 2))
-     (and (oexpon__function_guard (oexpon (from_word32 ((_ int2bv 32) 2)) 32)
-     (from_word32 ((_ int2bv 32) 2)) 32)
-     (= (base us_void_param) (oexpon (from_word32 ((_ int2bv 32) 2)) 32)))))) :pattern (
+  (! (= (base us_void_param) (oexpon (from_word32 ((_ int2bv 32) 2)) 32)) :pattern (
   (base us_void_param)) )))
 
 (declare-sort big_int_range 0)
@@ -566,13 +559,13 @@
 (define-fun big_int__ref___projection ((a big_int__ref)) us_t (big_int__content
                                                               a))
 
-(define-fun dynamic_invariant2 ((temp___expr_293 us_t)
-  (temp___is_init_290 Bool) (temp___skip_constant_291 Bool)
-  (temp___do_toplevel_292 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_291 true))
+(define-fun dynamic_invariant2 ((temp___expr_289 us_t)
+  (temp___is_init_286 Bool) (temp___skip_constant_287 Bool)
+  (temp___do_toplevel_288 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_287 true))
                                       (dynamic_property 0 2147483646
-                                      (first1 temp___expr_293)
-                                      (last1 temp___expr_293))))
+                                      (first1 temp___expr_289)
+                                      (last1 temp___expr_289))))
 
 (declare-fun num_of_big_int (us_t Int Int) us_rep)
 
@@ -625,10 +618,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS11 () Int)
 
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x1 Int)) Bool (and (<= first_int x1) (<= x1 last_int)))
 
@@ -656,12 +645,12 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(define-fun dynamic_invariant4 ((temp___expr_287 Int)
-  (temp___is_init_284 Bool) (temp___skip_constant_285 Bool)
-  (temp___do_toplevel_286 Bool)) Bool (=>
-                                      (or (= temp___is_init_284 true)
+(define-fun dynamic_invariant4 ((temp___expr_283 Int)
+  (temp___is_init_280 Bool) (temp___skip_constant_281 Bool)
+  (temp___do_toplevel_282 Bool)) Bool (=>
+                                      (or (= temp___is_init_280 true)
                                       (<= 0 2147483646)) (in_range3
-                                      temp___expr_287)))
+                                      temp___expr_283)))
 
 (declare-fun o () Int)
 

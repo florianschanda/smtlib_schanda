@@ -111,20 +111,16 @@
 ;; current_status__post_axiom
   (assert
   (forall ((segway__status Int))
-  (! (=> (dynamic_invariant segway__status true true true)
-     (let ((result (current_status segway__status)))
-     (=> (current_status__function_guard result segway__status)
-     (dynamic_invariant result true false true)))) :pattern ((current_status
-                                                             segway__status)) )))
+  (! (=> (dynamic_invariant segway__status true true true) (dynamic_invariant
+     (current_status segway__status) true false true)) :pattern ((current_status
+                                                                 segway__status)) )))
 
 ;; current_status__def_axiom
   (assert
   (forall ((segway__status Int))
-  (! (=>
-     (and (dynamic_invariant segway__status true true true)
-     (current_status__function_guard (current_status segway__status)
-     segway__status)) (= (current_status segway__status) segway__status)) :pattern (
-  (current_status segway__status)) )))
+  (! (=> (dynamic_invariant segway__status true true true)
+     (= (current_status segway__status) segway__status)) :pattern ((current_status
+                                                                   segway__status)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -142,43 +138,26 @@
 ;; speed_is_valid__def_axiom
   (assert
   (forall ((segway__speed Int) (segway__status Int))
-  (! (=> (speed_is_valid__function_guard
-     (speed_is_valid segway__speed segway__status) segway__speed
-     segway__status)
-     (and (current_status__function_guard (current_status segway__status)
-     segway__status)
-     (and (current_speed__function_guard (current_speed segway__speed)
-     segway__speed)
-     (and (current_status__function_guard (current_status segway__status)
-     segway__status)
-     (and (current_speed__function_guard (current_speed segway__speed)
-     segway__speed)
-     (and (current_speed__function_guard (current_speed segway__speed)
-     segway__speed)
-     (= (= (speed_is_valid segway__speed segway__status) true)
+  (! (= (= (speed_is_valid segway__speed segway__status) true)
      (ite (= (current_status segway__status) 0)
      (= (current_speed segway__speed) 0)
      (ite (= (current_status segway__status) 1)
-     (< 0 (current_speed segway__speed)) (< (current_speed segway__speed) 0)))))))))) :pattern (
+     (< 0 (current_speed segway__speed)) (< (current_speed segway__speed) 0)))) :pattern (
   (speed_is_valid segway__speed segway__status)) )))
 
 ;; current_speed__post_axiom
   (assert
   (forall ((segway__speed Int))
   (! (=> (dynamic_invariant1 segway__speed true true true)
-     (let ((result (current_speed segway__speed)))
-     (=> (current_speed__function_guard result segway__speed)
-     (dynamic_invariant1 result true false true)))) :pattern ((current_speed
-                                                              segway__speed)) )))
+     (dynamic_invariant1 (current_speed segway__speed) true false true)) :pattern (
+  (current_speed segway__speed)) )))
 
 ;; current_speed__def_axiom
   (assert
   (forall ((segway__speed Int))
-  (! (=>
-     (and (dynamic_invariant1 segway__speed true true true)
-     (current_speed__function_guard (current_speed segway__speed)
-     segway__speed)) (= (current_speed segway__speed) segway__speed)) :pattern (
-  (current_speed segway__speed)) )))
+  (! (=> (dynamic_invariant1 segway__speed true true true)
+     (= (current_speed segway__speed) segway__speed)) :pattern ((current_speed
+                                                                segway__speed)) )))
 
 (declare-fun speed () Int)
 
@@ -199,10 +178,6 @@
 
 ;; H
   (assert (and (in_range2 speed1) (in_range1 status1)))
-
-;; H
-  (assert (speed_is_valid__function_guard (speed_is_valid speed1 status1)
-  speed1 status1))
 
 (assert
 ;; WP_parameter_def

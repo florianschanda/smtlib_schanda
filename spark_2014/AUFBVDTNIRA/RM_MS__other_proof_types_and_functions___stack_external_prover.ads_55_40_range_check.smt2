@@ -414,10 +414,8 @@
 ;; count__post_axiom
   (assert
   (forall ((stack_external_prover__my_stack__fields us_split_fields))
-  (! (let ((result (count stack_external_prover__my_stack__fields)))
-     (=> (count__function_guard result
-     stack_external_prover__my_stack__fields) (dynamic_invariant1 result true
-     false true))) :pattern ((count stack_external_prover__my_stack__fields)) )))
+  (! (dynamic_invariant1 (count stack_external_prover__my_stack__fields) true
+  false true) :pattern ((count stack_external_prover__my_stack__fields)) )))
 
 (declare-fun stack_entry (Int us_split_fields) Int)
 
@@ -427,12 +425,9 @@
   (assert
   (forall ((n Int))
   (forall ((stack_external_prover__my_stack__fields us_split_fields))
-  (! (=> (dynamic_invariant1 n true true true)
-     (let ((result (stack_entry n stack_external_prover__my_stack__fields)))
-     (=> (stack_entry__function_guard result n
-     stack_external_prover__my_stack__fields) (dynamic_invariant result true
-     false true)))) :pattern ((stack_entry n
-                              stack_external_prover__my_stack__fields)) ))))
+  (! (=> (dynamic_invariant1 n true true true) (dynamic_invariant
+     (stack_entry n stack_external_prover__my_stack__fields) true false
+     true)) :pattern ((stack_entry n stack_external_prover__my_stack__fields)) ))))
 
 (declare-sort index_range 0)
 
@@ -457,19 +452,19 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(define-fun dynamic_invariant2 ((temp___expr_175 Int)
-  (temp___is_init_172 Bool) (temp___skip_constant_173 Bool)
-  (temp___do_toplevel_174 Bool)) Bool (=>
-                                      (or (= temp___is_init_172 true)
+(define-fun dynamic_invariant2 ((temp___expr_154 Int)
+  (temp___is_init_151 Bool) (temp___skip_constant_152 Bool)
+  (temp___do_toplevel_153 Bool)) Bool (=>
+                                      (or (= temp___is_init_151 true)
                                       (<= 0 100)) (in_range3
-                                      temp___expr_175)))
+                                      temp___expr_154)))
 
-(define-fun dynamic_invariant3 ((temp___expr_181 Int)
-  (temp___is_init_178 Bool) (temp___skip_constant_179 Bool)
-  (temp___do_toplevel_180 Bool)) Bool (=>
-                                      (or (= temp___is_init_178 true)
+(define-fun dynamic_invariant3 ((temp___expr_160 Int)
+  (temp___is_init_157 Bool) (temp___skip_constant_158 Bool)
+  (temp___do_toplevel_159 Bool)) Bool (=>
+                                      (or (= temp___is_init_157 true)
                                       (<= 1 100)) (in_range4
-                                      temp___expr_181)))
+                                      temp___expr_160)))
 
 (declare-fun my_stack__split_fields () (Array Int integer))
 
@@ -499,9 +494,9 @@
 
 (declare-fun o10 () pointer_range)
 
-(declare-fun temp___247 () (Array Int integer))
+(declare-fun temp___213 () (Array Int integer))
 
-(declare-fun temp___2471 () pointer_range)
+(declare-fun temp___2131 () pointer_range)
 
 (declare-fun o11 () integer)
 
@@ -513,9 +508,9 @@
 
 (declare-fun o15 () pointer_range)
 
-(declare-fun temp___251 () (Array Int integer))
+(declare-fun temp___217 () (Array Int integer))
 
-(declare-fun temp___2511 () pointer_range)
+(declare-fun temp___2171 () pointer_range)
 
 (declare-fun o16 () Int)
 
@@ -552,11 +547,6 @@
 (declare-fun my_stack__split_fields9 () pointer_range)
 
 (declare-fun temp3 () Int)
-
-;; H
-  (assert (count__function_guard
-  (count (mk___split_fields my_stack__split_fields my_stack__split_fields1))
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1)))
 
 ;; H
   (assert
@@ -621,10 +611,10 @@
   (assert (= my_stack__split_fields1 o10))
 
 ;; H
-  (assert (= temp___247 o9))
+  (assert (= temp___213 o9))
 
 ;; H
-  (assert (= temp___2471 o10))
+  (assert (= temp___2131 o10))
 
 ;; H
   (assert
@@ -634,10 +624,10 @@
                                                                   my_stack__split_fields1))))
 
 ;; H
-  (assert (= temp___247 my_stack__split_fields2))
+  (assert (= temp___213 my_stack__split_fields2))
 
 ;; H
-  (assert (= temp___2471 my_stack__split_fields3))
+  (assert (= temp___2131 my_stack__split_fields3))
 
 ;; H
   (assert (= (to_rep o11) temp1))
@@ -660,10 +650,10 @@
   (assert (= my_stack__split_fields3 o15))
 
 ;; H
-  (assert (= temp___251 o14))
+  (assert (= temp___217 o14))
 
 ;; H
-  (assert (= temp___2511 o15))
+  (assert (= temp___2171 o15))
 
 ;; H
   (assert (= result3 my_stack__split_fields2))
@@ -672,10 +662,10 @@
   (assert (= result4 my_stack__split_fields3))
 
 ;; H
-  (assert (= temp___251 my_stack__split_fields4))
+  (assert (= temp___217 my_stack__split_fields4))
 
 ;; H
-  (assert (= temp___2511 my_stack__split_fields5))
+  (assert (= temp___2171 my_stack__split_fields5))
 
 ;; H
   (assert (= temp1 temp2))
@@ -697,11 +687,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o16 (count
          (mk___split_fields my_stack__split_fields6 my_stack__split_fields7)))
-  (count__function_guard o16
-  (mk___split_fields my_stack__split_fields6 my_stack__split_fields7)))
   (in_range2 o16)))
 
 ;; H

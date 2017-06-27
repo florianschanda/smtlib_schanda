@@ -304,15 +304,15 @@
 
 (declare-fun o3 () natural)
 
-(declare-fun temp___261 () natural)
+(declare-fun temp___260 () natural)
 
-(declare-fun temp___263 () natural)
+(declare-fun temp___262 () natural)
 
 (declare-fun o4 () natural)
 
 (declare-fun o5 () natural)
 
-(declare-fun temp___264 () natural)
+(declare-fun temp___263 () natural)
 
 ;; H
   (assert (in_range c))
@@ -336,18 +336,18 @@
   (assert (= o2 o3))
 
 ;; H
-  (assert (= temp___261 o3))
+  (assert (= temp___260 o3))
 
 ;; H
-  (assert (= temp___261 (rec__discr__no_default__c d__split_discrs)))
+  (assert (= temp___260 (rec__discr__no_default__c d__split_discrs)))
 
 ;; H
   (assert
-  (= (mk___rep (mk___split_discrs temp___263)) (mk___rep
-                                               (mk___split_discrs temp___261))))
+  (= (mk___rep (mk___split_discrs temp___262)) (mk___rep
+                                               (mk___split_discrs temp___260))))
 
 ;; H
-  (assert (= d__split_discrs (mk___split_discrs temp___263)))
+  (assert (= d__split_discrs (mk___split_discrs temp___262)))
 
 ;; H
   (assert (= (to_rep o4) 0))
@@ -356,10 +356,10 @@
   (assert (= o4 o5))
 
 ;; H
-  (assert (= temp___264 o5))
+  (assert (= temp___263 o5))
 
 (assert
 ;; WP_parameter_def
  ;; File "discr.adb", line 130, characters 0-0
-  (not (= temp___264 (rec__discr__no_default__c d__split_discrs))))
+  (not (= temp___263 (rec__discr__no_default__c d__split_discrs))))
 (check-sat)

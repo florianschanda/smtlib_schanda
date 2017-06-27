@@ -151,7 +151,7 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(declare-fun temp___1506 () (Array Int us_rep))
+(declare-fun temp___1507 () (Array Int us_rep))
 
 (declare-fun o () us_rep)
 
@@ -172,7 +172,7 @@
   (not
   (and (in_range id)
   (and
-  (and (and (= temp___1506 sos) (= o (select temp___1506 id)))
+  (and (and (= temp___1507 sos) (= o (select temp___1507 id)))
   (= o ada__synchronous_task_control__suspend_until_true__s))
   (and (= result sos)
   (= sos1 (store sos id ada__synchronous_task_control__suspend_until_true__s1))))))))

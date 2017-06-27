@@ -560,15 +560,15 @@
   (assert
   (forall ((x u64)) (! (uint_in_range1 (to_int7 x)) :pattern ((to_int7 x)) )))
 
-(declare-sort i3 0)
+(declare-sort i8 0)
 
 (declare-fun attr__ATTRIBUTE_MODULUS4 () (_ BitVec 64))
 
 (define-fun in_range1 ((x (_ BitVec 64))) Bool (and
                                                (bvule ((_ int2bv 64) 0) x)
-                                               (bvule x ((_ int2bv 64) 2))))
+                                               (bvule x ((_ int2bv 64) 7))))
 
-(define-fun in_range_int ((x Int)) Bool (and (<= 0 x) (<= x 2)))
+(define-fun in_range_int ((x Int)) Bool (and (<= 0 x) (<= x 7)))
 
 (define-fun bool_eq4 ((x (_ BitVec 64))
   (y (_ BitVec 64))) Bool (ite (= x y) true false))
@@ -579,22 +579,22 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE5 (us_image) (_ BitVec 64))
 
-(declare-fun user_eq4 (i3 i3) Bool)
+(declare-fun user_eq4 (i8 i8) Bool)
 
-(declare-fun dummy4 () i3)
+(declare-fun dummy4 () i8)
 
-(declare-datatypes () ((i3__ref (mk_i3__ref (i3__content i3)))))
-(define-fun i3__ref___projection ((a i3__ref)) i3 (i3__content a))
+(declare-datatypes () ((i8__ref (mk_i8__ref (i8__content i8)))))
+(define-fun i8__ref___projection ((a i8__ref)) i8 (i8__content a))
 
-(declare-sort i8 0)
+(declare-sort i9 0)
 
 (declare-fun attr__ATTRIBUTE_MODULUS5 () (_ BitVec 64))
 
 (define-fun in_range2 ((x (_ BitVec 64))) Bool (and
                                                (bvule ((_ int2bv 64) 0) x)
-                                               (bvule x ((_ int2bv 64) 7))))
+                                               (bvule x ((_ int2bv 64) 8))))
 
-(define-fun in_range_int1 ((x Int)) Bool (and (<= 0 x) (<= x 7)))
+(define-fun in_range_int1 ((x Int)) Bool (and (<= 0 x) (<= x 8)))
 
 (define-fun bool_eq5 ((x (_ BitVec 64))
   (y (_ BitVec 64))) Bool (ite (= x y) true false))
@@ -605,35 +605,9 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE6 (us_image) (_ BitVec 64))
 
-(declare-fun user_eq5 (i8 i8) Bool)
+(declare-fun user_eq5 (i9 i9) Bool)
 
-(declare-fun dummy5 () i8)
-
-(declare-datatypes () ((i8__ref (mk_i8__ref (i8__content i8)))))
-(define-fun i8__ref___projection ((a i8__ref)) i8 (i8__content a))
-
-(declare-sort i9 0)
-
-(declare-fun attr__ATTRIBUTE_MODULUS6 () (_ BitVec 64))
-
-(define-fun in_range3 ((x (_ BitVec 64))) Bool (and
-                                               (bvule ((_ int2bv 64) 0) x)
-                                               (bvule x ((_ int2bv 64) 8))))
-
-(define-fun in_range_int2 ((x Int)) Bool (and (<= 0 x) (<= x 8)))
-
-(define-fun bool_eq6 ((x (_ BitVec 64))
-  (y (_ BitVec 64))) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE7 ((_ BitVec 64)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) (_ BitVec 64))
-
-(declare-fun user_eq6 (i9 i9) Bool)
-
-(declare-fun dummy6 () i9)
+(declare-fun dummy5 () i9)
 
 (declare-datatypes () ((i9__ref (mk_i9__ref (i9__content i9)))))
 (define-fun i9__ref___projection ((a i9__ref)) i9 (i9__content a))
@@ -683,7 +657,7 @@
   (forall ((i (_ BitVec 64)))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq7 ((a (Array (_ BitVec 64) byte)) (a__first (_ BitVec 64))
+(define-fun bool_eq6 ((a (Array (_ BitVec 64) byte)) (a__first (_ BitVec 64))
   (a__last (_ BitVec 64)) (b (Array (_ BitVec 64) byte))
   (b__first (_ BitVec 64))
   (b__last (_ BitVec 64))) Bool (ite (and
@@ -705,7 +679,7 @@
   (forall ((a (Array (_ BitVec 64) byte)) (b (Array (_ BitVec 64) byte)))
   (forall ((a__first (_ BitVec 64)) (a__last (_ BitVec 64))
   (b__first (_ BitVec 64)) (b__last (_ BitVec 64)))
-  (=> (= (bool_eq7 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq6 b b__first b__last a a__first a__last) true)
   (and
   (ite (bvule a__first a__last)
   (and (bvule b__first b__last)
@@ -725,7 +699,7 @@
   (forall ((a_first (_ BitVec 64)) (a_last (_ BitVec 64))
   (b_first (_ BitVec 64)) (b_last (_ BitVec 64)))
   (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq7 a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq6 a a_first a_last b b_first b_last) true)) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -737,7 +711,7 @@
      (exists ((i (_ BitVec 64)) (j (_ BitVec 64)))
      (and (bvule i a_last)
      (and (bvult j b_last)
-     (and (= (bool_eq7 a a_first i b b_first j) true)
+     (and (= (bool_eq6 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (bvult i a_last)
      (bvult (to_rep (select a (bvadd i #x0000000000000001))) (to_rep
@@ -753,7 +727,7 @@
      (exists ((i (_ BitVec 64)) (j (_ BitVec 64)))
      (and (bvule i b_last)
      (and (bvult j a_last)
-     (and (= (bool_eq7 a a_first j b b_first i) true)
+     (and (= (bool_eq6 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (bvult i b_last)
      (bvugt (to_rep (select a (bvadd j #x0000000000000001))) (to_rep
@@ -762,20 +736,20 @@
 
 (declare-sort unsigned_64 0)
 
-(declare-fun attr__ATTRIBUTE_MODULUS7 () (_ BitVec 64))
+(declare-fun attr__ATTRIBUTE_MODULUS6 () (_ BitVec 64))
 
-(define-fun bool_eq8 ((x (_ BitVec 64))
+(define-fun bool_eq7 ((x (_ BitVec 64))
   (y (_ BitVec 64))) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE8 ((_ BitVec 64)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE7 ((_ BitVec 64)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) (_ BitVec 64))
+(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) (_ BitVec 64))
 
-(declare-fun user_eq7 (unsigned_64 unsigned_64) Bool)
+(declare-fun user_eq6 (unsigned_64 unsigned_64) Bool)
 
-(declare-fun dummy7 () unsigned_64)
+(declare-fun dummy6 () unsigned_64)
 
 (declare-datatypes ()
 ((unsigned_64__ref (mk_unsigned_64__ref (unsigned_64__content unsigned_64)))))
@@ -872,14 +846,14 @@
   (assert
   (forall ((a (Array (_ BitVec 64) byte))) (<= 0 (object__alignment a))))
 
-(define-fun bool_eq9 ((x us_t)
-  (y us_t)) Bool (bool_eq7 (elts x) (to_rep2 (first (rt x)))
+(define-fun bool_eq8 ((x us_t)
+  (y us_t)) Bool (bool_eq6 (elts x) (to_rep2 (first (rt x)))
                  (to_rep2 (last (rt x))) (elts y) (to_rep2 (first (rt y)))
                  (to_rep2 (last (rt y)))))
 
-(declare-fun user_eq8 (us_t us_t) Bool)
+(declare-fun user_eq7 (us_t us_t) Bool)
 
-(declare-fun dummy8 () us_t)
+(declare-fun dummy7 () us_t)
 
 (declare-datatypes ()
 ((byte_seq__ref (mk_byte_seq__ref (byte_seq__content us_t)))))
@@ -947,7 +921,7 @@
   (forall ((i (_ BitVec 64)))
   (! (= (select (singleton2 v i) i) v) :pattern ((select (singleton2 v i) i)) ))))
 
-(define-fun bool_eq10 ((a (Array (_ BitVec 64) u64)) (a__first (_ BitVec 64))
+(define-fun bool_eq9 ((a (Array (_ BitVec 64) u64)) (a__first (_ BitVec 64))
   (a__last (_ BitVec 64)) (b (Array (_ BitVec 64) u64))
   (b__first (_ BitVec 64))
   (b__last (_ BitVec 64))) Bool (ite (and
@@ -969,7 +943,7 @@
   (forall ((a (Array (_ BitVec 64) u64)) (b (Array (_ BitVec 64) u64)))
   (forall ((a__first (_ BitVec 64)) (a__last (_ BitVec 64))
   (b__first (_ BitVec 64)) (b__last (_ BitVec 64)))
-  (=> (= (bool_eq10 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq9 b b__first b__last a a__first a__last) true)
   (and
   (ite (bvule a__first a__last)
   (and (bvule b__first b__last)
@@ -989,7 +963,7 @@
   (forall ((a_first (_ BitVec 64)) (a_last (_ BitVec 64))
   (b_first (_ BitVec 64)) (b_last (_ BitVec 64)))
   (! (= (= (compare1 a a_first a_last b b_first b_last) 0)
-     (= (bool_eq10 a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq9 a a_first a_last b b_first b_last) true)) :pattern (
   (compare1 a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -1001,7 +975,7 @@
      (exists ((i (_ BitVec 64)) (j (_ BitVec 64)))
      (and (bvule i a_last)
      (and (bvult j b_last)
-     (and (= (bool_eq10 a a_first i b b_first j) true)
+     (and (= (bool_eq9 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (bvult i a_last)
      (bvult (to_rep1 (select a (bvadd i #x0000000000000001))) (to_rep1
@@ -1017,7 +991,7 @@
      (exists ((i (_ BitVec 64)) (j (_ BitVec 64)))
      (and (bvule i b_last)
      (and (bvult j a_last)
-     (and (= (bool_eq10 a a_first j b b_first i) true)
+     (and (= (bool_eq9 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (bvult i b_last)
      (bvugt (to_rep1 (select a (bvadd j #x0000000000000001))) (to_rep1
@@ -1026,27 +1000,27 @@
 
 (declare-sort word_count_t 0)
 
-(declare-fun attr__ATTRIBUTE_MODULUS8 () (_ BitVec 64))
+(declare-fun attr__ATTRIBUTE_MODULUS7 () (_ BitVec 64))
 
-(define-fun in_range4 ((x (_ BitVec 64))) Bool (and
+(define-fun in_range3 ((x (_ BitVec 64))) Bool (and
                                                (bvule ((_ int2bv 64) 0) x)
                                                (bvule x ((_ int2bv 64) 2305843009213693951))))
 
-(define-fun in_range_int3 ((x Int)) Bool (and (<= 0 x)
+(define-fun in_range_int2 ((x Int)) Bool (and (<= 0 x)
                                          (<= x 2305843009213693951)))
 
-(define-fun bool_eq11 ((x (_ BitVec 64))
+(define-fun bool_eq10 ((x (_ BitVec 64))
   (y (_ BitVec 64))) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE9 ((_ BitVec 64)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE8 ((_ BitVec 64)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) (_ BitVec 64))
+(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) (_ BitVec 64))
 
-(declare-fun user_eq9 (word_count_t word_count_t) Bool)
+(declare-fun user_eq8 (word_count_t word_count_t) Bool)
 
-(declare-fun dummy9 () word_count_t)
+(declare-fun dummy8 () word_count_t)
 
 (declare-datatypes ()
 ((word_count_t__ref
@@ -1071,7 +1045,7 @@
 (define-fun dynamic_property1 ((range_first (_ BitVec 64))
   (range_last (_ BitVec 64)) (low (_ BitVec 64))
   (high (_ BitVec 64))) Bool (=> (bvule low high)
-                             (and (in_range4 low) (in_range4 high))))
+                             (and (in_range3 low) (in_range3 high))))
 
 (declare-datatypes ()
 ((us_t1 (mk___t1 (elts1 (Array (_ BitVec 64) u64))(rt1 t1)))))
@@ -1121,14 +1095,14 @@
   (assert
   (forall ((a (Array (_ BitVec 64) u64))) (<= 0 (object__alignment1 a))))
 
-(define-fun bool_eq12 ((x us_t1)
-  (y us_t1)) Bool (bool_eq10 (elts1 x) (to_rep2 (first2 (rt1 x)))
+(define-fun bool_eq11 ((x us_t1)
+  (y us_t1)) Bool (bool_eq9 (elts1 x) (to_rep2 (first2 (rt1 x)))
                   (to_rep2 (last2 (rt1 x))) (elts1 y)
                   (to_rep2 (first2 (rt1 y))) (to_rep2 (last2 (rt1 y)))))
 
-(declare-fun user_eq10 (us_t1 us_t1) Bool)
+(declare-fun user_eq9 (us_t1 us_t1) Bool)
 
-(declare-fun dummy10 () us_t1)
+(declare-fun dummy9 () us_t1)
 
 (declare-datatypes ()
 ((u64_seq__ref (mk_u64_seq__ref (u64_seq__content us_t1)))))
@@ -1137,27 +1111,27 @@
 
 (declare-sort hash_bit_length 0)
 
-(declare-fun attr__ATTRIBUTE_MODULUS9 () (_ BitVec 64))
+(declare-fun attr__ATTRIBUTE_MODULUS8 () (_ BitVec 64))
 
-(define-fun in_range5 ((x (_ BitVec 64))) Bool (and
+(define-fun in_range4 ((x (_ BitVec 64))) Bool (and
                                                (bvule ((_ int2bv 64) 0) x)
                                                (bvule x ((_ int2bv 64) 18446744073709551608))))
 
-(define-fun in_range_int4 ((x Int)) Bool (and (<= 0 x)
+(define-fun in_range_int3 ((x Int)) Bool (and (<= 0 x)
                                          (<= x 18446744073709551608)))
 
-(define-fun bool_eq13 ((x (_ BitVec 64))
+(define-fun bool_eq12 ((x (_ BitVec 64))
   (y (_ BitVec 64))) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE10 ((_ BitVec 64)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE9 ((_ BitVec 64)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) (_ BitVec 64))
+(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) (_ BitVec 64))
 
-(declare-fun user_eq11 (hash_bit_length hash_bit_length) Bool)
+(declare-fun user_eq10 (hash_bit_length hash_bit_length) Bool)
 
-(declare-fun dummy11 () hash_bit_length)
+(declare-fun dummy10 () hash_bit_length)
 
 (declare-datatypes ()
 ((hash_bit_length__ref
@@ -1176,32 +1150,63 @@
 
 ;; range_axiom
   (assert
-  (forall ((x hash_bit_length)) (! (in_range5
+  (forall ((x hash_bit_length)) (! (in_range4
   (to_rep3 x)) :pattern ((to_rep3 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x (_ BitVec 64)))
-  (! (=> (in_range5 x) (= (to_rep3 (of_rep3 x)) x)) :pattern ((to_rep3
+  (! (=> (in_range4 x) (= (to_rep3 (of_rep3 x)) x)) :pattern ((to_rep3
                                                               (of_rep3 x))) )))
 
 (define-fun to_int9 ((x hash_bit_length)) Int (bv2nat (to_rep3 x)))
 
 ;; range_int_axiom
   (assert
-  (forall ((x hash_bit_length)) (! (in_range_int4
+  (forall ((x hash_bit_length)) (! (in_range_int3
   (to_int9 x)) :pattern ((to_int9 x)) )))
 
 (declare-sort initialized_hash_bit_length 0)
 
-(declare-fun attr__ATTRIBUTE_MODULUS10 () (_ BitVec 64))
+(declare-fun attr__ATTRIBUTE_MODULUS9 () (_ BitVec 64))
 
-(define-fun in_range6 ((x (_ BitVec 64))) Bool (and
+(define-fun in_range5 ((x (_ BitVec 64))) Bool (and
                                                (bvule ((_ int2bv 64) 1) x)
                                                (bvule x ((_ int2bv 64) 18446744073709551608))))
 
-(define-fun in_range_int5 ((x Int)) Bool (and (<= 1 x)
+(define-fun in_range_int4 ((x Int)) Bool (and (<= 1 x)
                                          (<= x 18446744073709551608)))
+
+(define-fun bool_eq13 ((x (_ BitVec 64))
+  (y (_ BitVec 64))) Bool (ite (= x y) true false))
+
+(declare-fun attr__ATTRIBUTE_IMAGE10 ((_ BitVec 64)) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) (_ BitVec 64))
+
+(declare-fun user_eq11 (initialized_hash_bit_length
+  initialized_hash_bit_length) Bool)
+
+(declare-fun dummy11 () initialized_hash_bit_length)
+
+(declare-datatypes ()
+((initialized_hash_bit_length__ref
+ (mk_initialized_hash_bit_length__ref
+ (initialized_hash_bit_length__content initialized_hash_bit_length)))))
+(define-fun initialized_hash_bit_length__ref___projection ((a initialized_hash_bit_length__ref)) initialized_hash_bit_length 
+  (initialized_hash_bit_length__content a))
+
+(declare-sort skein_512_block_bytes_count 0)
+
+(declare-fun attr__ATTRIBUTE_MODULUS10 () (_ BitVec 64))
+
+(define-fun in_range6 ((x (_ BitVec 64))) Bool (and
+                                               (bvule ((_ int2bv 64) 0) x)
+                                               (bvule x ((_ int2bv 64) 64))))
+
+(define-fun in_range_int5 ((x Int)) Bool (and (<= 0 x) (<= x 64)))
 
 (define-fun bool_eq14 ((x (_ BitVec 64))
   (y (_ BitVec 64))) Bool (ite (= x y) true false))
@@ -1212,72 +1217,10 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE11 (us_image) (_ BitVec 64))
 
-(declare-fun user_eq12 (initialized_hash_bit_length
-  initialized_hash_bit_length) Bool)
-
-(declare-fun dummy12 () initialized_hash_bit_length)
-
-(declare-datatypes ()
-((initialized_hash_bit_length__ref
- (mk_initialized_hash_bit_length__ref
- (initialized_hash_bit_length__content initialized_hash_bit_length)))))
-(define-fun initialized_hash_bit_length__ref___projection ((a initialized_hash_bit_length__ref)) initialized_hash_bit_length 
-  (initialized_hash_bit_length__content a))
-
-(declare-sort skein_512_state_words_index 0)
-
-(declare-fun attr__ATTRIBUTE_MODULUS11 () (_ BitVec 64))
-
-(define-fun in_range7 ((x (_ BitVec 64))) Bool (and
-                                               (bvule ((_ int2bv 64) 0) x)
-                                               (bvule x ((_ int2bv 64) 7))))
-
-(define-fun in_range_int6 ((x Int)) Bool (and (<= 0 x) (<= x 7)))
-
-(define-fun bool_eq15 ((x (_ BitVec 64))
-  (y (_ BitVec 64))) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE12 ((_ BitVec 64)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check12 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE12 (us_image) (_ BitVec 64))
-
-(declare-fun user_eq13 (skein_512_state_words_index
-  skein_512_state_words_index) Bool)
-
-(declare-fun dummy13 () skein_512_state_words_index)
-
-(declare-datatypes ()
-((skein_512_state_words_index__ref
- (mk_skein_512_state_words_index__ref
- (skein_512_state_words_index__content skein_512_state_words_index)))))
-(define-fun skein_512_state_words_index__ref___projection ((a skein_512_state_words_index__ref)) skein_512_state_words_index 
-  (skein_512_state_words_index__content a))
-
-(declare-sort skein_512_block_bytes_count 0)
-
-(declare-fun attr__ATTRIBUTE_MODULUS12 () (_ BitVec 64))
-
-(define-fun in_range8 ((x (_ BitVec 64))) Bool (and
-                                               (bvule ((_ int2bv 64) 0) x)
-                                               (bvule x ((_ int2bv 64) 64))))
-
-(define-fun in_range_int7 ((x Int)) Bool (and (<= 0 x) (<= x 64)))
-
-(define-fun bool_eq16 ((x (_ BitVec 64))
-  (y (_ BitVec 64))) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE13 ((_ BitVec 64)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check13 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE13 (us_image) (_ BitVec 64))
-
-(declare-fun user_eq14 (skein_512_block_bytes_count
+(declare-fun user_eq12 (skein_512_block_bytes_count
   skein_512_block_bytes_count) Bool)
 
-(declare-fun dummy14 () skein_512_block_bytes_count)
+(declare-fun dummy12 () skein_512_block_bytes_count)
 
 (declare-datatypes ()
 ((skein_512_block_bytes_count__ref
@@ -1288,27 +1231,27 @@
 
 (declare-sort skein_512_block_bytes_index 0)
 
-(declare-fun attr__ATTRIBUTE_MODULUS13 () (_ BitVec 64))
+(declare-fun attr__ATTRIBUTE_MODULUS11 () (_ BitVec 64))
 
-(define-fun in_range9 ((x (_ BitVec 64))) Bool (and
+(define-fun in_range7 ((x (_ BitVec 64))) Bool (and
                                                (bvule ((_ int2bv 64) 0) x)
                                                (bvule x ((_ int2bv 64) 63))))
 
-(define-fun in_range_int8 ((x Int)) Bool (and (<= 0 x) (<= x 63)))
+(define-fun in_range_int6 ((x Int)) Bool (and (<= 0 x) (<= x 63)))
 
-(define-fun bool_eq17 ((x (_ BitVec 64))
+(define-fun bool_eq15 ((x (_ BitVec 64))
   (y (_ BitVec 64))) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE14 ((_ BitVec 64)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE12 ((_ BitVec 64)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check14 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check12 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE14 (us_image) (_ BitVec 64))
+(declare-fun attr__ATTRIBUTE_VALUE12 (us_image) (_ BitVec 64))
 
-(declare-fun user_eq15 (skein_512_block_bytes_index
+(declare-fun user_eq13 (skein_512_block_bytes_index
   skein_512_block_bytes_index) Bool)
 
-(declare-fun dummy15 () skein_512_block_bytes_index)
+(declare-fun dummy13 () skein_512_block_bytes_index)
 
 (declare-datatypes ()
 ((skein_512_block_bytes_index__ref
@@ -1335,28 +1278,28 @@
 
 (declare-sort positive_block_512_count_t 0)
 
-(declare-fun attr__ATTRIBUTE_MODULUS14 () (_ BitVec 64))
+(declare-fun attr__ATTRIBUTE_MODULUS12 () (_ BitVec 64))
 
-(define-fun in_range10 ((x (_ BitVec 64))) Bool (and
-                                                (bvule ((_ int2bv 64) 1) x)
-                                                (bvule x ((_ int2bv 64) 288230376151711743))))
+(define-fun in_range8 ((x (_ BitVec 64))) Bool (and
+                                               (bvule ((_ int2bv 64) 1) x)
+                                               (bvule x ((_ int2bv 64) 288230376151711743))))
 
-(define-fun in_range_int9 ((x Int)) Bool (and (<= 1 x)
+(define-fun in_range_int7 ((x Int)) Bool (and (<= 1 x)
                                          (<= x 288230376151711743)))
 
-(define-fun bool_eq18 ((x (_ BitVec 64))
+(define-fun bool_eq16 ((x (_ BitVec 64))
   (y (_ BitVec 64))) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE15 ((_ BitVec 64)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE13 ((_ BitVec 64)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check15 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check13 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE15 (us_image) (_ BitVec 64))
+(declare-fun attr__ATTRIBUTE_VALUE13 (us_image) (_ BitVec 64))
 
-(declare-fun user_eq16 (positive_block_512_count_t
+(declare-fun user_eq14 (positive_block_512_count_t
   positive_block_512_count_t) Bool)
 
-(declare-fun dummy16 () positive_block_512_count_t)
+(declare-fun dummy14 () positive_block_512_count_t)
 
 (declare-datatypes ()
 ((positive_block_512_count_t__ref
@@ -1370,52 +1313,51 @@
   (temp___do_toplevel_602 Bool)) Bool (=>
                                       (or (= temp___is_init_600 true)
                                       (bvule ((_ int2bv 64) 1) ((_ int2bv 64) 288230376151711743)))
-                                      (in_range10 temp___expr_603)))
+                                      (in_range8 temp___expr_603)))
 
 (declare-sort u7 0)
 
-(define-fun in_range11 ((x (_ BitVec 8))) Bool (and
-                                               (bvule ((_ int2bv 8) 0) x)
-                                               (bvule x ((_ int2bv 8) 127))))
+(define-fun in_range9 ((x (_ BitVec 8))) Bool (and (bvule ((_ int2bv 8) 0) x)
+                                              (bvule x ((_ int2bv 8) 127))))
 
-(define-fun in_range_int10 ((x Int)) Bool (and (<= 0 x) (<= x 127)))
+(define-fun in_range_int8 ((x Int)) Bool (and (<= 0 x) (<= x 127)))
 
-(define-fun bool_eq19 ((x (_ BitVec 8))
+(define-fun bool_eq17 ((x (_ BitVec 8))
   (y (_ BitVec 8))) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE16 ((_ BitVec 8)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE14 ((_ BitVec 8)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check16 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check14 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE16 (us_image) (_ BitVec 8))
+(declare-fun attr__ATTRIBUTE_VALUE14 (us_image) (_ BitVec 8))
 
-(declare-fun user_eq17 (u7 u7) Bool)
+(declare-fun user_eq15 (u7 u7) Bool)
 
-(declare-fun dummy17 () u7)
+(declare-fun dummy15 () u7)
 
 (declare-datatypes () ((u7__ref (mk_u7__ref (u7__content u7)))))
 (define-fun u7__ref___projection ((a u7__ref)) u7 (u7__content a))
 
 (declare-sort u6 0)
 
-(define-fun in_range12 ((x (_ BitVec 8))) Bool (and
+(define-fun in_range10 ((x (_ BitVec 8))) Bool (and
                                                (bvule ((_ int2bv 8) 0) x)
                                                (bvule x ((_ int2bv 8) 63))))
 
-(define-fun in_range_int11 ((x Int)) Bool (and (<= 0 x) (<= x 63)))
+(define-fun in_range_int9 ((x Int)) Bool (and (<= 0 x) (<= x 63)))
 
-(define-fun bool_eq20 ((x (_ BitVec 8))
+(define-fun bool_eq18 ((x (_ BitVec 8))
   (y (_ BitVec 8))) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE17 ((_ BitVec 8)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE15 ((_ BitVec 8)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check17 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check15 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE17 (us_image) (_ BitVec 8))
+(declare-fun attr__ATTRIBUTE_VALUE15 (us_image) (_ BitVec 8))
 
-(declare-fun user_eq18 (u6 u6) Bool)
+(declare-fun user_eq16 (u6 u6) Bool)
 
-(declare-fun dummy18 () u6)
+(declare-fun dummy16 () u6)
 
 (declare-datatypes () ((u6__ref (mk_u6__ref (u6__content u6)))))
 (define-fun u6__ref___projection ((a u6__ref)) u6 (u6__content a))
@@ -1476,21 +1418,20 @@
 
 ;; range_axiom
   (assert
-  (forall ((x u7)) (! (in_range11 (to_rep6 x)) :pattern ((to_rep6 x)) )))
+  (forall ((x u7)) (! (in_range9 (to_rep6 x)) :pattern ((to_rep6 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x (_ BitVec 8)))
   (! (let ((y (bvurem x ((_ int2bv 8) 128))))
-     (=> (in_range11 y) (= (to_rep6 (of_rep6 x)) y))) :pattern ((to_rep6
-                                                                (of_rep6 x))) )))
+     (=> (in_range9 y) (= (to_rep6 (of_rep6 x)) y))) :pattern ((to_rep6
+                                                               (of_rep6 x))) )))
 
 (define-fun to_int12 ((x u7)) Int (bv2nat (to_rep6 x)))
 
 ;; range_int_axiom
   (assert
-  (forall ((x u7)) (! (in_range_int10
-  (to_int12 x)) :pattern ((to_int12 x)) )))
+  (forall ((x u7)) (! (in_range_int8 (to_int12 x)) :pattern ((to_int12 x)) )))
 
 (declare-fun to_rep7 (u6) (_ BitVec 8))
 
@@ -1502,21 +1443,20 @@
 
 ;; range_axiom
   (assert
-  (forall ((x u6)) (! (in_range12 (to_rep7 x)) :pattern ((to_rep7 x)) )))
+  (forall ((x u6)) (! (in_range10 (to_rep7 x)) :pattern ((to_rep7 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x (_ BitVec 8)))
   (! (let ((y (bvurem x ((_ int2bv 8) 64))))
-     (=> (in_range12 y) (= (to_rep7 (of_rep7 x)) y))) :pattern ((to_rep7
+     (=> (in_range10 y) (= (to_rep7 (of_rep7 x)) y))) :pattern ((to_rep7
                                                                 (of_rep7 x))) )))
 
 (define-fun to_int13 ((x u6)) Int (bv2nat (to_rep7 x)))
 
 ;; range_int_axiom
   (assert
-  (forall ((x u6)) (! (in_range_int11
-  (to_int13 x)) :pattern ((to_int13 x)) )))
+  (forall ((x u6)) (! (in_range_int9 (to_int13 x)) :pattern ((to_int13 x)) )))
 
 (declare-datatypes ()
 ((us_split_fields
@@ -1557,7 +1497,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_fields (us_split_fields1
                                                              a))
 
-(define-fun bool_eq21 ((a us_rep)
+(define-fun bool_eq19 ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (and
                         (and
@@ -1601,7 +1541,7 @@
                                                  (us_split_fields1 b))))
                    true false))
 
-(declare-fun user_eq19 (us_rep us_rep) Bool)
+(declare-fun user_eq17 (us_rep us_rep) Bool)
 
 (declare-fun value__size2 () Int)
 
@@ -1751,7 +1691,7 @@
 ;; skein__tweak_value__final_block__position_axiom
   (assert (<= 0 skein__tweak_value__final_block__position))
 
-(declare-fun dummy19 () us_rep)
+(declare-fun dummy17 () us_rep)
 
 (declare-datatypes ()
 ((tweak_value__ref (mk_tweak_value__ref (tweak_value__content us_rep)))))
@@ -1782,10 +1722,10 @@
 (define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
                                                                 a))
 
-(define-fun bool_eq22 ((a us_rep1)
+(define-fun bool_eq20 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
                          (and
-                         (= (bool_eq21
+                         (= (bool_eq19
                             (rec__skein__context_header__tweak_words
                             (us_split_fields3 a))
                             (rec__skein__context_header__tweak_words
@@ -1802,7 +1742,7 @@
                                                    (us_split_fields3 b)))))
                     true false))
 
-(declare-fun user_eq20 (us_rep1 us_rep1) Bool)
+(declare-fun user_eq18 (us_rep1 us_rep1) Bool)
 
 (declare-fun value__size3 () Int)
 
@@ -1872,7 +1812,7 @@
 ;; skein__context_header__byte_count__position_axiom
   (assert (<= 0 skein__context_header__byte_count__position))
 
-(declare-fun dummy20 () us_rep1)
+(declare-fun dummy18 () us_rep1)
 
 (declare-datatypes ()
 ((context_header__ref
@@ -1880,7 +1820,7 @@
 (define-fun context_header__ref___projection ((a context_header__ref)) us_rep1 
   (context_header__content a))
 
-(declare-fun dummy21 () (Array (_ BitVec 64) u64))
+(declare-fun dummy19 () (Array (_ BitVec 64) u64))
 
 (declare-fun value__size4 () Int)
 
@@ -1915,10 +1855,10 @@
   (assert
   (forall ((a (Array (_ BitVec 64) u64))) (<= 0 (object__alignment4 a))))
 
-(declare-fun user_eq21 ((Array (_ BitVec 64) u64)
+(declare-fun user_eq19 ((Array (_ BitVec 64) u64)
   (Array (_ BitVec 64) u64)) Bool)
 
-(declare-fun dummy22 () (Array (_ BitVec 64) byte))
+(declare-fun dummy20 () (Array (_ BitVec 64) byte))
 
 (declare-fun value__size5 () Int)
 
@@ -1953,7 +1893,7 @@
   (assert
   (forall ((a (Array (_ BitVec 64) byte))) (<= 0 (object__alignment5 a))))
 
-(declare-fun user_eq22 ((Array (_ BitVec 64) byte)
+(declare-fun user_eq20 ((Array (_ BitVec 64) byte)
   (Array (_ BitVec 64) byte)) Bool)
 
 (declare-datatypes ()
@@ -1980,22 +1920,22 @@
 (define-fun us_rep_3__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
                                                                 a))
 
-(define-fun bool_eq23 ((a us_rep2)
+(define-fun bool_eq21 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
                          (and
-                         (= (bool_eq22
+                         (= (bool_eq20
                             (rec__skein__skein_512_context__h
                             (us_split_fields5 a))
                             (rec__skein__skein_512_context__h
                             (us_split_fields5 b))) true)
-                         (= (bool_eq10
+                         (= (bool_eq9
                             (rec__skein__skein_512_context__x
                             (us_split_fields5 a)) ((_ int2bv 64) 0)
                             ((_ int2bv 64) 7)
                             (rec__skein__skein_512_context__x
                             (us_split_fields5 b)) ((_ int2bv 64) 0)
                             ((_ int2bv 64) 7)) true))
-                         (= (bool_eq7
+                         (= (bool_eq6
                             (rec__skein__skein_512_context__b
                             (us_split_fields5 a)) ((_ int2bv 64) 0)
                             ((_ int2bv 64) 63)
@@ -2004,7 +1944,7 @@
                             ((_ int2bv 64) 63)) true))
                     true false))
 
-(declare-fun user_eq23 (us_rep2 us_rep2) Bool)
+(declare-fun user_eq21 (us_rep2 us_rep2) Bool)
 
 (declare-fun value__size6 () Int)
 
@@ -2074,7 +2014,7 @@
 ;; skein__skein_512_context__b__position_axiom
   (assert (<= 0 skein__skein_512_context__b__position))
 
-(declare-fun dummy23 () us_rep2)
+(declare-fun dummy21 () us_rep2)
 
 (declare-datatypes ()
 ((skein_512_context__ref
@@ -2104,33 +2044,32 @@
 ;; add_in_range__def_axiom
   (assert
   (forall ((x (_ BitVec 64)) (y (_ BitVec 64)))
-  (! (=> (add_in_range__function_guard (add_in_range x y) x y)
-     (= (= (add_in_range x y) true)
-     (bvule y (bvsub ((_ int2bv 64) 18446744073709551615) x)))) :pattern (
+  (! (= (= (add_in_range x y) true)
+     (bvule y (bvsub ((_ int2bv 64) 18446744073709551615) x))) :pattern (
   (add_in_range x y)) )))
 
 (declare-sort modifier_words_index 0)
 
-(declare-fun attr__ATTRIBUTE_MODULUS15 () (_ BitVec 64))
+(declare-fun attr__ATTRIBUTE_MODULUS13 () (_ BitVec 64))
 
-(define-fun in_range13 ((x (_ BitVec 64))) Bool (and
+(define-fun in_range11 ((x (_ BitVec 64))) Bool (and
                                                 (bvule ((_ int2bv 64) 0) x)
                                                 (bvule x ((_ int2bv 64) 1))))
 
-(define-fun in_range_int12 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
+(define-fun in_range_int10 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
 
-(define-fun bool_eq24 ((x (_ BitVec 64))
+(define-fun bool_eq22 ((x (_ BitVec 64))
   (y (_ BitVec 64))) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE18 ((_ BitVec 64)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE16 ((_ BitVec 64)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check18 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check16 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE18 (us_image) (_ BitVec 64))
+(declare-fun attr__ATTRIBUTE_VALUE16 (us_image) (_ BitVec 64))
 
-(declare-fun user_eq24 (modifier_words_index modifier_words_index) Bool)
+(declare-fun user_eq22 (modifier_words_index modifier_words_index) Bool)
 
-(declare-fun dummy24 () modifier_words_index)
+(declare-fun dummy22 () modifier_words_index)
 
 (declare-datatypes ()
 ((modifier_words_index__ref
@@ -2190,32 +2129,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS14 () Int)
 
-(declare-sort t202b 0)
-
-(declare-fun attr__ATTRIBUTE_MODULUS16 () (_ BitVec 64))
-
-(define-fun in_range14 ((x (_ BitVec 64))) Bool (and
-                                                (bvule ((_ int2bv 64) 0) x)
-                                                (bvule x ((_ int2bv 64) 2))))
-
-(define-fun in_range_int13 ((x Int)) Bool (and (<= 0 x) (<= x 2)))
-
-(define-fun bool_eq25 ((x (_ BitVec 64))
-  (y (_ BitVec 64))) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE19 ((_ BitVec 64)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check19 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE19 (us_image) (_ BitVec 64))
-
-(declare-fun user_eq25 (t202b t202b) Bool)
-
-(declare-fun dummy25 () t202b)
-
-(declare-datatypes () ((t202b__ref (mk_t202b__ref (t202b__content t202b)))))
-(define-fun t202b__ref___projection ((a t202b__ref)) t202b (t202b__content a))
-
 (declare-fun c206b () (_ BitVec 64))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS15 () Int)
@@ -2226,126 +2139,74 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS17 () Int)
 
-(declare-sort t213b 0)
-
-(declare-fun attr__ATTRIBUTE_MODULUS17 () (_ BitVec 64))
-
-(define-fun in_range15 ((x (_ BitVec 64))) Bool (and
-                                                (bvule ((_ int2bv 64) 0) x)
-                                                (bvule x ((_ int2bv 64) 7))))
-
-(define-fun in_range_int14 ((x Int)) Bool (and (<= 0 x) (<= x 7)))
-
-(define-fun bool_eq26 ((x (_ BitVec 64))
-  (y (_ BitVec 64))) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE20 ((_ BitVec 64)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check20 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE20 (us_image) (_ BitVec 64))
-
-(declare-fun user_eq26 (t213b t213b) Bool)
-
-(declare-fun dummy26 () t213b)
-
-(declare-datatypes () ((t213b__ref (mk_t213b__ref (t213b__content t213b)))))
-(define-fun t213b__ref___projection ((a t213b__ref)) t213b (t213b__content a))
-
-(declare-sort t217b 0)
-
-(declare-fun attr__ATTRIBUTE_MODULUS18 () (_ BitVec 64))
-
-(define-fun in_range16 ((x (_ BitVec 64))) Bool (and
-                                                (bvule ((_ int2bv 64) 0) x)
-                                                (bvule x ((_ int2bv 64) 7))))
-
-(define-fun in_range_int15 ((x Int)) Bool (and (<= 0 x) (<= x 7)))
-
-(define-fun bool_eq27 ((x (_ BitVec 64))
-  (y (_ BitVec 64))) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE21 ((_ BitVec 64)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check21 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE21 (us_image) (_ BitVec 64))
-
-(declare-fun user_eq27 (t217b t217b) Bool)
-
-(declare-fun dummy27 () t217b)
-
-(declare-datatypes () ((t217b__ref (mk_t217b__ref (t217b__content t217b)))))
-(define-fun t217b__ref___projection ((a t217b__ref)) t217b (t217b__content a))
-
-(declare-fun temp___1548 ((_ BitVec 64) (_ BitVec 64)
+(declare-fun temp___1516 ((_ BitVec 64) (_ BitVec 64)
   (_ BitVec 64)) (Array (_ BitVec 64) u64))
 
 ;; def_axiom
   (assert
-  (forall ((temp___1550 (_ BitVec 64)) (temp___1551 (_ BitVec 64))
-  (temp___1552 (_ BitVec 64)))
-  (let ((temp___1549 (temp___1548 temp___1550 temp___1551 temp___1552)))
+  (forall ((temp___1518 (_ BitVec 64)) (temp___1519 (_ BitVec 64))
+  (temp___1520 (_ BitVec 64)))
+  (let ((temp___1517 (temp___1516 temp___1518 temp___1519 temp___1520)))
   (and
-  (and (= (select temp___1549 ((_ int2bv 64) 0)) (of_rep1 temp___1550))
-  (= (select temp___1549 ((_ int2bv 64) 1)) (of_rep1 temp___1551)))
-  (= (select temp___1549 ((_ int2bv 64) 2)) (of_rep1 temp___1552))))))
+  (and (= (select temp___1517 ((_ int2bv 64) 0)) (of_rep1 temp___1518))
+  (= (select temp___1517 ((_ int2bv 64) 1)) (of_rep1 temp___1519)))
+  (= (select temp___1517 ((_ int2bv 64) 2)) (of_rep1 temp___1520))))))
 
-(declare-fun temp___1565 ((_ BitVec 64) (_ BitVec 64) (_ BitVec 64)
+(declare-fun temp___1533 ((_ BitVec 64) (_ BitVec 64) (_ BitVec 64)
   (_ BitVec 64) (_ BitVec 64) (_ BitVec 64) (_ BitVec 64)
   (_ BitVec 64)) (Array (_ BitVec 64) u64))
 
 ;; def_axiom
   (assert
-  (forall ((temp___1567 (_ BitVec 64)) (temp___1568 (_ BitVec 64))
-  (temp___1569 (_ BitVec 64)) (temp___1570 (_ BitVec 64))
-  (temp___1571 (_ BitVec 64)) (temp___1572 (_ BitVec 64))
-  (temp___1573 (_ BitVec 64)) (temp___1574 (_ BitVec 64)))
-  (let ((temp___1566 (temp___1565 temp___1567 temp___1568 temp___1569
-                     temp___1570 temp___1571 temp___1572 temp___1573
-                     temp___1574)))
+  (forall ((temp___1535 (_ BitVec 64)) (temp___1536 (_ BitVec 64))
+  (temp___1537 (_ BitVec 64)) (temp___1538 (_ BitVec 64))
+  (temp___1539 (_ BitVec 64)) (temp___1540 (_ BitVec 64))
+  (temp___1541 (_ BitVec 64)) (temp___1542 (_ BitVec 64)))
+  (let ((temp___1534 (temp___1533 temp___1535 temp___1536 temp___1537
+                     temp___1538 temp___1539 temp___1540 temp___1541
+                     temp___1542)))
   (and
   (and
   (and
   (and
   (and
   (and
-  (and (= (select temp___1566 ((_ int2bv 64) 0)) (of_rep1 temp___1567))
-  (= (select temp___1566 ((_ int2bv 64) 1)) (of_rep1 temp___1568)))
-  (= (select temp___1566 ((_ int2bv 64) 2)) (of_rep1 temp___1569)))
-  (= (select temp___1566 ((_ int2bv 64) 3)) (of_rep1 temp___1570)))
-  (= (select temp___1566 ((_ int2bv 64) 4)) (of_rep1 temp___1571)))
-  (= (select temp___1566 ((_ int2bv 64) 5)) (of_rep1 temp___1572)))
-  (= (select temp___1566 ((_ int2bv 64) 6)) (of_rep1 temp___1573)))
-  (= (select temp___1566 ((_ int2bv 64) 7)) (of_rep1 temp___1574))))))
+  (and (= (select temp___1534 ((_ int2bv 64) 0)) (of_rep1 temp___1535))
+  (= (select temp___1534 ((_ int2bv 64) 1)) (of_rep1 temp___1536)))
+  (= (select temp___1534 ((_ int2bv 64) 2)) (of_rep1 temp___1537)))
+  (= (select temp___1534 ((_ int2bv 64) 3)) (of_rep1 temp___1538)))
+  (= (select temp___1534 ((_ int2bv 64) 4)) (of_rep1 temp___1539)))
+  (= (select temp___1534 ((_ int2bv 64) 5)) (of_rep1 temp___1540)))
+  (= (select temp___1534 ((_ int2bv 64) 6)) (of_rep1 temp___1541)))
+  (= (select temp___1534 ((_ int2bv 64) 7)) (of_rep1 temp___1542))))))
 
-(declare-fun temp___1576 ((_ BitVec 64) (_ BitVec 64) (_ BitVec 64)
+(declare-fun temp___1544 ((_ BitVec 64) (_ BitVec 64) (_ BitVec 64)
   (_ BitVec 64) (_ BitVec 64) (_ BitVec 64) (_ BitVec 64)
   (_ BitVec 64)) (Array (_ BitVec 64) u64))
 
 ;; def_axiom
   (assert
-  (forall ((temp___1578 (_ BitVec 64)) (temp___1579 (_ BitVec 64))
-  (temp___1580 (_ BitVec 64)) (temp___1581 (_ BitVec 64))
-  (temp___1582 (_ BitVec 64)) (temp___1583 (_ BitVec 64))
-  (temp___1584 (_ BitVec 64)) (temp___1585 (_ BitVec 64)))
-  (let ((temp___1577 (temp___1576 temp___1578 temp___1579 temp___1580
-                     temp___1581 temp___1582 temp___1583 temp___1584
-                     temp___1585)))
+  (forall ((temp___1546 (_ BitVec 64)) (temp___1547 (_ BitVec 64))
+  (temp___1548 (_ BitVec 64)) (temp___1549 (_ BitVec 64))
+  (temp___1550 (_ BitVec 64)) (temp___1551 (_ BitVec 64))
+  (temp___1552 (_ BitVec 64)) (temp___1553 (_ BitVec 64)))
+  (let ((temp___1545 (temp___1544 temp___1546 temp___1547 temp___1548
+                     temp___1549 temp___1550 temp___1551 temp___1552
+                     temp___1553)))
   (and
   (and
   (and
   (and
   (and
   (and
-  (and (= (select temp___1577 ((_ int2bv 64) 0)) (of_rep1 temp___1578))
-  (= (select temp___1577 ((_ int2bv 64) 1)) (of_rep1 temp___1579)))
-  (= (select temp___1577 ((_ int2bv 64) 2)) (of_rep1 temp___1580)))
-  (= (select temp___1577 ((_ int2bv 64) 3)) (of_rep1 temp___1581)))
-  (= (select temp___1577 ((_ int2bv 64) 4)) (of_rep1 temp___1582)))
-  (= (select temp___1577 ((_ int2bv 64) 5)) (of_rep1 temp___1583)))
-  (= (select temp___1577 ((_ int2bv 64) 6)) (of_rep1 temp___1584)))
-  (= (select temp___1577 ((_ int2bv 64) 7)) (of_rep1 temp___1585))))))
+  (and (= (select temp___1545 ((_ int2bv 64) 0)) (of_rep1 temp___1546))
+  (= (select temp___1545 ((_ int2bv 64) 1)) (of_rep1 temp___1547)))
+  (= (select temp___1545 ((_ int2bv 64) 2)) (of_rep1 temp___1548)))
+  (= (select temp___1545 ((_ int2bv 64) 3)) (of_rep1 temp___1549)))
+  (= (select temp___1545 ((_ int2bv 64) 4)) (of_rep1 temp___1550)))
+  (= (select temp___1545 ((_ int2bv 64) 5)) (of_rep1 temp___1551)))
+  (= (select temp___1545 ((_ int2bv 64) 6)) (of_rep1 temp___1552)))
+  (= (select temp___1545 ((_ int2bv 64) 7)) (of_rep1 temp___1553))))))
 
 (define-fun dynamic_invariant5 ((temp___expr_290 (_ BitVec 8))
   (temp___is_init_287 Bool) (temp___skip_constant_288 Bool)
@@ -2359,35 +2220,28 @@
   (temp___is_init_299 Bool) (temp___skip_constant_300 Bool)
   (temp___do_toplevel_301 Bool)) Bool true)
 
-(define-fun dynamic_invariant8 ((temp___expr_314 (_ BitVec 64))
-  (temp___is_init_311 Bool) (temp___skip_constant_312 Bool)
-  (temp___do_toplevel_313 Bool)) Bool (=>
-                                      (or (= temp___is_init_311 true)
-                                      (bvule ((_ int2bv 64) 0) ((_ int2bv 64) 2)))
-                                      (in_range1 temp___expr_314)))
-
-(define-fun dynamic_invariant9 ((temp___expr_338 (_ BitVec 64))
+(define-fun dynamic_invariant8 ((temp___expr_338 (_ BitVec 64))
   (temp___is_init_335 Bool) (temp___skip_constant_336 Bool)
   (temp___do_toplevel_337 Bool)) Bool (=>
                                       (or (= temp___is_init_335 true)
                                       (bvule ((_ int2bv 64) 0) ((_ int2bv 64) 7)))
-                                      (in_range2 temp___expr_338)))
+                                      (in_range1 temp___expr_338)))
 
-(define-fun dynamic_invariant10 ((temp___expr_344 (_ BitVec 64))
+(define-fun dynamic_invariant9 ((temp___expr_344 (_ BitVec 64))
   (temp___is_init_341 Bool) (temp___skip_constant_342 Bool)
   (temp___do_toplevel_343 Bool)) Bool (=>
                                       (or (= temp___is_init_341 true)
                                       (bvule ((_ int2bv 64) 0) ((_ int2bv 64) 8)))
-                                      (in_range3 temp___expr_344)))
+                                      (in_range2 temp___expr_344)))
 
-(define-fun dynamic_invariant11 ((temp___expr_458 (_ BitVec 64))
+(define-fun dynamic_invariant10 ((temp___expr_458 (_ BitVec 64))
   (temp___is_init_455 Bool) (temp___skip_constant_456 Bool)
   (temp___do_toplevel_457 Bool)) Bool (=>
                                       (or (= temp___is_init_455 true)
                                       (bvule ((_ int2bv 64) 0) ((_ int2bv 64) 2305843009213693951)))
-                                      (in_range4 temp___expr_458)))
+                                      (in_range3 temp___expr_458)))
 
-(define-fun dynamic_invariant12 ((temp___expr_470 us_t1)
+(define-fun dynamic_invariant11 ((temp___expr_470 us_t1)
   (temp___is_init_467 Bool) (temp___skip_constant_468 Bool)
   (temp___do_toplevel_469 Bool)) Bool (=>
                                       (not (= temp___skip_constant_468 true))
@@ -2396,63 +2250,56 @@
                                       (first3 temp___expr_470)
                                       (last3 temp___expr_470))))
 
-(define-fun dynamic_invariant13 ((temp___expr_520 (_ BitVec 64))
+(define-fun dynamic_invariant12 ((temp___expr_520 (_ BitVec 64))
   (temp___is_init_517 Bool) (temp___skip_constant_518 Bool)
   (temp___do_toplevel_519 Bool)) Bool (=>
                                       (or (= temp___is_init_517 true)
                                       (bvule ((_ int2bv 64) 0) ((_ int2bv 64) 18446744073709551608)))
-                                      (in_range5 temp___expr_520)))
+                                      (in_range4 temp___expr_520)))
 
-(define-fun dynamic_invariant14 ((temp___expr_526 (_ BitVec 64))
+(define-fun dynamic_invariant13 ((temp___expr_526 (_ BitVec 64))
   (temp___is_init_523 Bool) (temp___skip_constant_524 Bool)
   (temp___do_toplevel_525 Bool)) Bool (=>
                                       (or (= temp___is_init_523 true)
                                       (bvule ((_ int2bv 64) 1) ((_ int2bv 64) 18446744073709551608)))
-                                      (in_range6 temp___expr_526)))
+                                      (in_range5 temp___expr_526)))
 
-(define-fun dynamic_invariant15 ((temp___expr_532 (_ BitVec 64))
-  (temp___is_init_529 Bool) (temp___skip_constant_530 Bool)
-  (temp___do_toplevel_531 Bool)) Bool (=>
-                                      (or (= temp___is_init_529 true)
-                                      (bvule ((_ int2bv 64) 0) ((_ int2bv 64) 7)))
-                                      (in_range7 temp___expr_532)))
-
-(define-fun dynamic_invariant16 ((temp___expr_547 (_ BitVec 64))
+(define-fun dynamic_invariant14 ((temp___expr_547 (_ BitVec 64))
   (temp___is_init_544 Bool) (temp___skip_constant_545 Bool)
   (temp___do_toplevel_546 Bool)) Bool (=>
                                       (or (= temp___is_init_544 true)
                                       (bvule ((_ int2bv 64) 0) ((_ int2bv 64) 64)))
-                                      (in_range8 temp___expr_547)))
+                                      (in_range6 temp___expr_547)))
 
-(define-fun dynamic_invariant17 ((temp___expr_553 (_ BitVec 64))
+(define-fun dynamic_invariant15 ((temp___expr_553 (_ BitVec 64))
   (temp___is_init_550 Bool) (temp___skip_constant_551 Bool)
   (temp___do_toplevel_552 Bool)) Bool (=>
                                       (or (= temp___is_init_550 true)
                                       (bvule ((_ int2bv 64) 0) ((_ int2bv 64) 63)))
-                                      (in_range9 temp___expr_553)))
+                                      (in_range7 temp___expr_553)))
 
-(define-fun dynamic_invariant18 ((temp___expr_735 (_ BitVec 64))
-  (temp___is_init_732 Bool) (temp___skip_constant_733 Bool)
-  (temp___do_toplevel_734 Bool)) Bool (=>
-                                      (or (= temp___is_init_732 true)
+(define-fun dynamic_invariant16 ((temp___expr_720 (_ BitVec 64))
+  (temp___is_init_717 Bool) (temp___skip_constant_718 Bool)
+  (temp___do_toplevel_719 Bool)) Bool (=>
+                                      (or (= temp___is_init_717 true)
                                       (bvule ((_ int2bv 64) 0) ((_ int2bv 64) 1)))
-                                      (in_range13 temp___expr_735)))
+                                      (in_range11 temp___expr_720)))
 
-(define-fun dynamic_invariant19 ((temp___expr_615 (_ BitVec 8))
+(define-fun dynamic_invariant17 ((temp___expr_615 (_ BitVec 8))
   (temp___is_init_612 Bool) (temp___skip_constant_613 Bool)
   (temp___do_toplevel_614 Bool)) Bool (=>
                                       (or (= temp___is_init_612 true)
                                       (bvule ((_ int2bv 8) 0) ((_ int2bv 8) 63)))
-                                      (in_range12 temp___expr_615)))
+                                      (in_range10 temp___expr_615)))
 
-(define-fun dynamic_invariant20 ((temp___expr_609 (_ BitVec 8))
+(define-fun dynamic_invariant18 ((temp___expr_609 (_ BitVec 8))
   (temp___is_init_606 Bool) (temp___skip_constant_607 Bool)
   (temp___do_toplevel_608 Bool)) Bool (=>
                                       (or (= temp___is_init_606 true)
                                       (bvule ((_ int2bv 8) 0) ((_ int2bv 8) 127)))
-                                      (in_range11 temp___expr_609)))
+                                      (in_range9 temp___expr_609)))
 
-(define-fun dynamic_invariant21 ((temp___expr_266 (_ BitVec 64))
+(define-fun dynamic_invariant19 ((temp___expr_266 (_ BitVec 64))
   (temp___is_init_263 Bool) (temp___skip_constant_264 Bool)
   (temp___do_toplevel_265 Bool)) Bool true)
 
@@ -2498,37 +2345,37 @@
 
 (declare-fun dst_index () (_ BitVec 64))
 
-(declare-fun temp___1599 () (Array (_ BitVec 64) u64))
+(declare-fun temp___1567 () (Array (_ BitVec 64) u64))
 
-(declare-fun temp___1597 () (Array (_ BitVec 64) u64))
+(declare-fun temp___1565 () (Array (_ BitVec 64) u64))
 
-(declare-fun temp___1596 () u64)
+(declare-fun temp___1564 () u64)
 
-(declare-fun temp___15961 () u32)
+(declare-fun temp___15641 () u32)
 
-(declare-fun temp___15962 () u16)
+(declare-fun temp___15642 () u16)
 
-(declare-fun temp___15963 () u7)
+(declare-fun temp___15643 () u7)
 
-(declare-fun temp___15964 () Bool)
+(declare-fun temp___15644 () Bool)
 
-(declare-fun temp___15965 () u6)
+(declare-fun temp___15645 () u6)
 
-(declare-fun temp___15966 () Bool)
+(declare-fun temp___15646 () Bool)
 
-(declare-fun temp___15967 () Bool)
+(declare-fun temp___15647 () Bool)
 
-(declare-fun temp___15968 () hash_bit_length)
+(declare-fun temp___15648 () hash_bit_length)
 
-(declare-fun temp___15969 () u64)
+(declare-fun temp___15649 () u64)
 
-(declare-fun temp___159610 () (Array (_ BitVec 64) u64))
+(declare-fun temp___156410 () (Array (_ BitVec 64) u64))
 
-(declare-fun temp___159611 () (Array (_ BitVec 64) byte))
+(declare-fun temp___156411 () (Array (_ BitVec 64) byte))
 
-(declare-fun temp___1595 () (Array (_ BitVec 64) u64))
+(declare-fun temp___1563 () (Array (_ BitVec 64) u64))
 
-(declare-fun temp___1593 () (Array (_ BitVec 64) u64))
+(declare-fun temp___1561 () (Array (_ BitVec 64) u64))
 
 (declare-fun skein__skein_512_process_block__B_8__src_offset__assume () (_ BitVec 64))
 
@@ -2544,13 +2391,13 @@
 
 (declare-fun o5 () us_split_fields4)
 
-(declare-fun temp___1539 () us_rep2)
+(declare-fun temp___1507 () us_rep2)
 
 (declare-fun o6 () u64)
 
 (declare-fun o7 () (Array (_ BitVec 64) u64))
 
-(declare-fun temp___1542 () (Array (_ BitVec 64) u64))
+(declare-fun temp___1510 () (Array (_ BitVec 64) u64))
 
 (declare-fun o8 () u64)
 
@@ -2562,7 +2409,7 @@
 
 (declare-fun o12 () (Array (_ BitVec 64) u64))
 
-(declare-fun temp___1546 () us_t1)
+(declare-fun temp___1514 () us_t1)
 
 (declare-fun o13 () u64)
 
@@ -2570,29 +2417,29 @@
 
 (declare-fun o15 () (Array (_ BitVec 64) u64))
 
-(declare-fun temp___1547 () us_t1)
+(declare-fun temp___1515 () us_t1)
 
 (declare-fun o16 () u64)
 
 (declare-fun o17 () (_ BitVec 64))
 
-(declare-fun o18 () (Array (_ BitVec 64) u64))
-
-(declare-fun temp___1561 () (Array (_ BitVec 64) u64))
+(declare-fun temp___1529 () (Array (_ BitVec 64) u64))
 
 (declare-fun skein__skein_512_process_block__B_8__B207b__B_3__src_index__assume () (_ BitVec 64))
 
-(declare-fun o19 () (_ BitVec 64))
+(declare-fun o18 () (_ BitVec 64))
 
-(declare-fun o20 () byte)
+(declare-fun o19 () byte)
 
-(declare-fun o21 () (_ BitVec 8))
+(declare-fun o20 () (_ BitVec 8))
 
-(declare-fun o22 () (_ BitVec 64))
+(declare-fun o21 () (_ BitVec 64))
 
-(declare-fun o23 () byte)
+(declare-fun o22 () byte)
 
-(declare-fun o24 () (_ BitVec 8))
+(declare-fun o23 () (_ BitVec 8))
+
+(declare-fun o24 () (_ BitVec 64))
 
 (declare-fun o25 () (_ BitVec 64))
 
@@ -2600,11 +2447,11 @@
 
 (declare-fun o27 () (_ BitVec 64))
 
-(declare-fun o28 () (_ BitVec 64))
+(declare-fun o28 () byte)
 
-(declare-fun o29 () byte)
+(declare-fun o29 () (_ BitVec 8))
 
-(declare-fun o30 () (_ BitVec 8))
+(declare-fun o30 () (_ BitVec 64))
 
 (declare-fun o31 () (_ BitVec 64))
 
@@ -2612,11 +2459,11 @@
 
 (declare-fun o33 () (_ BitVec 64))
 
-(declare-fun o34 () (_ BitVec 64))
+(declare-fun o34 () byte)
 
-(declare-fun o35 () byte)
+(declare-fun o35 () (_ BitVec 8))
 
-(declare-fun o36 () (_ BitVec 8))
+(declare-fun o36 () (_ BitVec 64))
 
 (declare-fun o37 () (_ BitVec 64))
 
@@ -2624,11 +2471,11 @@
 
 (declare-fun o39 () (_ BitVec 64))
 
-(declare-fun o40 () (_ BitVec 64))
+(declare-fun o40 () byte)
 
-(declare-fun o41 () byte)
+(declare-fun o41 () (_ BitVec 8))
 
-(declare-fun o42 () (_ BitVec 8))
+(declare-fun o42 () (_ BitVec 64))
 
 (declare-fun o43 () (_ BitVec 64))
 
@@ -2636,11 +2483,11 @@
 
 (declare-fun o45 () (_ BitVec 64))
 
-(declare-fun o46 () (_ BitVec 64))
+(declare-fun o46 () byte)
 
-(declare-fun o47 () byte)
+(declare-fun o47 () (_ BitVec 8))
 
-(declare-fun o48 () (_ BitVec 8))
+(declare-fun o48 () (_ BitVec 64))
 
 (declare-fun o49 () (_ BitVec 64))
 
@@ -2648,11 +2495,11 @@
 
 (declare-fun o51 () (_ BitVec 64))
 
-(declare-fun o52 () (_ BitVec 64))
+(declare-fun o52 () byte)
 
-(declare-fun o53 () byte)
+(declare-fun o53 () (_ BitVec 8))
 
-(declare-fun o54 () (_ BitVec 8))
+(declare-fun o54 () (_ BitVec 64))
 
 (declare-fun o55 () (_ BitVec 64))
 
@@ -2660,11 +2507,11 @@
 
 (declare-fun o57 () (_ BitVec 64))
 
-(declare-fun o58 () (_ BitVec 64))
+(declare-fun o58 () byte)
 
-(declare-fun o59 () byte)
+(declare-fun o59 () (_ BitVec 8))
 
-(declare-fun o60 () (_ BitVec 8))
+(declare-fun o60 () (_ BitVec 64))
 
 (declare-fun o61 () (_ BitVec 64))
 
@@ -2672,27 +2519,17 @@
 
 (declare-fun o63 () (_ BitVec 64))
 
-(declare-fun o64 () (_ BitVec 64))
+(declare-fun o64 () u64)
 
-(declare-fun o65 () u64)
+(declare-fun o65 () (Array (_ BitVec 64) u64))
 
-(declare-fun o66 () (Array (_ BitVec 64) u64))
+(declare-fun o66 () u64)
 
 (declare-fun o67 () (Array (_ BitVec 64) u64))
 
 (declare-fun o68 () u64)
 
 (declare-fun o69 () (Array (_ BitVec 64) u64))
-
-(declare-fun o70 () u64)
-
-(declare-fun o71 () (Array (_ BitVec 64) u64))
-
-(declare-fun o72 () (Array (_ BitVec 64) u64))
-
-(declare-fun o73 () us_split_fields4)
-
-(declare-fun temp___1588 () us_rep2)
 
 (declare-fun ctx__split_fields12 () us_split_fields4)
 
@@ -2746,11 +2583,11 @@
 
 (declare-fun result3 () t__ref1)
 
-(declare-fun i4 () (_ BitVec 64))
+(declare-fun i3 () (_ BitVec 64))
 
 (declare-fun ks4 () (Array (_ BitVec 64) u64))
 
-(declare-fun i5 () (_ BitVec 64))
+(declare-fun i4 () (_ BitVec 64))
 
 (declare-fun result4 () map__ref1)
 
@@ -2762,19 +2599,19 @@
 
 (declare-fun ks7 () map__ref1)
 
-(declare-fun i6 () t__ref1)
+(declare-fun i5 () t__ref1)
 
 (declare-fun ks8 () (Array (_ BitVec 64) u64))
 
-(declare-fun i7 () (_ BitVec 64))
+(declare-fun i6 () (_ BitVec 64))
 
 (declare-fun ks9 () map__ref1)
 
-(declare-fun i10 () t__ref1)
+(declare-fun i7 () t__ref1)
 
 (declare-fun ks10 () (Array (_ BitVec 64) u64))
 
-(declare-fun i11 () (_ BitVec 64))
+(declare-fun i10 () (_ BitVec 64))
 
 (declare-fun result6 () t__ref1)
 
@@ -2850,7 +2687,7 @@
 
 (declare-fun j3 () t__ref1)
 
-(declare-fun i12 () t__ref1)
+(declare-fun i11 () t__ref1)
 
 (declare-fun w04 () t__ref1)
 
@@ -2870,7 +2707,7 @@
 
 (declare-fun j4 () (_ BitVec 64))
 
-(declare-fun i13 () (_ BitVec 64))
+(declare-fun i12 () (_ BitVec 64))
 
 (declare-fun w05 () (_ BitVec 64))
 
@@ -2890,7 +2727,7 @@
 
 (declare-fun j5 () t__ref1)
 
-(declare-fun i14 () t__ref1)
+(declare-fun i13 () t__ref1)
 
 (declare-fun w06 () t__ref1)
 
@@ -2910,7 +2747,7 @@
 
 (declare-fun j6 () (_ BitVec 64))
 
-(declare-fun i15 () (_ BitVec 64))
+(declare-fun i14 () (_ BitVec 64))
 
 (declare-fun w07 () (_ BitVec 64))
 
@@ -2930,7 +2767,7 @@
 
 (declare-fun j7 () t__ref1)
 
-(declare-fun i16 () t__ref1)
+(declare-fun i15 () t__ref1)
 
 (declare-fun w08 () t__ref1)
 
@@ -2950,20 +2787,13 @@
 
 (declare-fun j8 () (_ BitVec 64))
 
-(declare-fun i17 () (_ BitVec 64))
+(declare-fun i16 () (_ BitVec 64))
 
 (declare-fun w09 () (_ BitVec 64))
 
 (declare-fun w112 () (_ BitVec 64))
 
 (declare-fun dst_index14 () (_ BitVec 64))
-
-;; H
-  (assert (add_in_range__function_guard
-  (add_in_range starting_offset
-  (bvadd (bvmul (bvsub block_count ((_ int2bv 64) 1)) ((_ int2bv 64) 64)) ((_ int2bv 64) 63)))
-  starting_offset
-  (bvadd (bvmul (bvsub block_count ((_ int2bv 64) 1)) ((_ int2bv 64) 64)) ((_ int2bv 64) 63))))
 
 ;; H
   (assert
@@ -2977,7 +2807,7 @@
   (assert (dynamic_invariant1 block true false true))
 
 ;; H
-  (assert (in_range10 block_count))
+  (assert (in_range8 block_count))
 
 ;; H
   (assert
@@ -2985,7 +2815,7 @@
   (and
   (and
   (and
-  (and (in_range6 (to_rep3 ctx__split_fields8)) (in_range8
+  (and (in_range5 (to_rep3 ctx__split_fields8)) (in_range6
   (to_rep1 ctx__split_fields9)))
   (= (to_rep2 (first (rt block))) ((_ int2bv 64) 0)))
   (= (add_in_range starting_offset
@@ -3004,40 +2834,40 @@
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (= temp___1599 x)))
+  (= temp___1567 x)))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (= temp___1597 ks)))
+  (= temp___1565 ks)))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (and
   (and
-  (and (= ctx__split_fields temp___1596)
-  (and (= ctx__split_fields1 temp___15961)
-  (and (= ctx__split_fields2 temp___15962)
-  (and (= ctx__split_fields3 temp___15963)
-  (and (= ctx__split_fields4 temp___15964)
-  (and (= ctx__split_fields5 temp___15965)
-  (and (= ctx__split_fields6 temp___15966)
-  (= ctx__split_fields7 temp___15967))))))))
-  (and (= ctx__split_fields8 temp___15968)
-  (= ctx__split_fields9 temp___15969)))
-  (and (= ctx__split_fields10 temp___159610)
-  (= ctx__split_fields11 temp___159611)))))
+  (and (= ctx__split_fields temp___1564)
+  (and (= ctx__split_fields1 temp___15641)
+  (and (= ctx__split_fields2 temp___15642)
+  (and (= ctx__split_fields3 temp___15643)
+  (and (= ctx__split_fields4 temp___15644)
+  (and (= ctx__split_fields5 temp___15645)
+  (and (= ctx__split_fields6 temp___15646)
+  (= ctx__split_fields7 temp___15647))))))))
+  (and (= ctx__split_fields8 temp___15648)
+  (= ctx__split_fields9 temp___15649)))
+  (and (= ctx__split_fields10 temp___156410)
+  (= ctx__split_fields11 temp___156411)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (= temp___1595 ts)))
+  (= temp___1563 ts)))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (= temp___1593 w)))
+  (= temp___1561 w)))
 
 ;; H
   (assert
@@ -3057,39 +2887,39 @@
      (us_split_fields1
      (rec__skein__context_header__tweak_words
      (us_split_fields3
-     (rec__skein__skein_512_context__h ctx__split_fields13))))) temp___15961)
+     (rec__skein__skein_512_context__h ctx__split_fields13))))) temp___15641)
   (= (rec__skein__tweak_value__reserved
      (us_split_fields1
      (rec__skein__context_header__tweak_words
      (us_split_fields3
-     (rec__skein__skein_512_context__h ctx__split_fields13))))) temp___15962))
+     (rec__skein__skein_512_context__h ctx__split_fields13))))) temp___15642))
   (= (rec__skein__tweak_value__tree_level
      (us_split_fields1
      (rec__skein__context_header__tweak_words
      (us_split_fields3
-     (rec__skein__skein_512_context__h ctx__split_fields13))))) temp___15963))
+     (rec__skein__skein_512_context__h ctx__split_fields13))))) temp___15643))
   (= (rec__skein__tweak_value__bit_pad
      (us_split_fields1
      (rec__skein__context_header__tweak_words
      (us_split_fields3
-     (rec__skein__skein_512_context__h ctx__split_fields13))))) temp___15964))
+     (rec__skein__skein_512_context__h ctx__split_fields13))))) temp___15644))
   (= (rec__skein__tweak_value__field_type
      (us_split_fields1
      (rec__skein__context_header__tweak_words
      (us_split_fields3
-     (rec__skein__skein_512_context__h ctx__split_fields13))))) temp___15965))
+     (rec__skein__skein_512_context__h ctx__split_fields13))))) temp___15645))
   (= (rec__skein__tweak_value__final_block
      (us_split_fields1
      (rec__skein__context_header__tweak_words
      (us_split_fields3
-     (rec__skein__skein_512_context__h ctx__split_fields13))))) temp___15967))
+     (rec__skein__skein_512_context__h ctx__split_fields13))))) temp___15647))
   (= (rec__skein__context_header__hash_bit_len
      (us_split_fields3
-     (rec__skein__skein_512_context__h ctx__split_fields13))) temp___15968))
+     (rec__skein__skein_512_context__h ctx__split_fields13))) temp___15648))
   (= (rec__skein__context_header__byte_count
      (us_split_fields3
-     (rec__skein__skein_512_context__h ctx__split_fields13))) temp___15969))
-  (= (rec__skein__skein_512_context__b ctx__split_fields13) temp___159611)))
+     (rec__skein__skein_512_context__h ctx__split_fields13))) temp___15649))
+  (= (rec__skein__skein_512_context__b ctx__split_fields13) temp___156411)))
   (and (bvule ((_ int2bv 64) 1) j2) (bvule j2 block_count)))))
 
 ;; H
@@ -3185,7 +3015,7 @@
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (= temp___1539 (mk___rep2 o5))))
+  (= temp___1507 (mk___rep2 o5))))
 
 ;; H
   (assert
@@ -3195,7 +3025,7 @@
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (= ctx__split_fields14 (us_split_fields5 temp___1539))))
+  (= ctx__split_fields14 (us_split_fields5 temp___1507))))
 
 ;; H
   (assert
@@ -3224,180 +3054,176 @@
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (= i4 ((_ int2bv 64) 0))))
+  (= i3 ((_ int2bv 64) 0))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7)))
-  (= temp___1542 ks3))))
+  (=> (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7)))
+  (= temp___1510 ks3))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7)))
+  (=> (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7)))
   (and
-  (forall ((temp___1543 (_ BitVec 64)))
+  (forall ((temp___1511 (_ BitVec 64)))
   (=>
-  (and (bvule ((_ int2bv 64) 0) temp___1543)
-  (bvule temp___1543 ((_ int2bv 64) 8)))
-  (=> (and (bvule i5 temp___1543) (not (= ((_ int2bv 64) 8) temp___1543)))
-  (= (select ks4 temp___1543) (select temp___1542 temp___1543)))))
-  (and (bvule ((_ int2bv 64) 0) i5) (bvule i5 ((_ int2bv 64) 7)))))))
+  (and (bvule ((_ int2bv 64) 0) temp___1511)
+  (bvule temp___1511 ((_ int2bv 64) 8)))
+  (=> (and (bvule i4 temp___1511) (not (= ((_ int2bv 64) 8) temp___1511)))
+  (= (select ks4 temp___1511) (select temp___1510 temp___1511)))))
+  (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7)))))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7)))
+  (=> (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7)))
   (= (to_rep1 o8) (to_rep1
                   (select (rec__skein__skein_512_context__x
-                          ctx__split_fields14) i5))))))
+                          ctx__split_fields14) i4))))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7)))
-  (= o9 (store ks4 i5 o8)))))
+  (=> (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7)))
+  (= o9 (store ks4 i4 o8)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7)))
+  (=> (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7)))
   (= result4 (mk_map__ref1 ks4)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7)))
+  (=> (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7)))
   (= ks5 o9))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7)))
+  (=> (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7)))
   (= (to_rep1 o10) (bvxor (to_rep1 (select ks5 ((_ int2bv 64) 8))) (to_rep1
                                                                    (select 
                                                                    (rec__skein__skein_512_context__x
                                                                    ctx__split_fields14) 
-                                                                   i5)))))))
+                                                                   i4)))))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7)))
+  (=> (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7)))
   (= o11 (store ks5 ((_ int2bv 64) 8) o10)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7)))
+  (=> (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7)))
   (= result5 (mk_map__ref1 ks5)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7)))
+  (=> (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7)))
   (= ks6 o11))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7)))
-  (= i5 ((_ int2bv 64) 7)))))
+  (=> (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7)))
+  (= i4 ((_ int2bv 64) 7)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7)))
-  (= i6 (mk_t__ref1 i5)))))
+  (=> (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7)))
+  (= i5 (mk_t__ref1 i4)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7)))
+  (=> (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7)))
   (= ks7 (mk_map__ref1 ks6)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7)))
-  (= i7 i5))))
+  (=> (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7)))
+  (= i6 i4))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7)))
+  (=> (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7)))
   (= ks8 ks6))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7)))
-  (= i10 i6))))
+  (=> (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7)))
+  (= i7 i5))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7)))
+  (=> (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7)))
   (= ks9 ks7))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7)))
-  (= i11 i7))))
+  (=> (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7)))
+  (= i10 i6))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7)))
+  (=> (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7)))
   (= ks10 ks8))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (not (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7))))
-  (= i10 (mk_t__ref1 i4)))))
+  (=> (not (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7))))
+  (= i7 (mk_t__ref1 i3)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (not (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7))))
+  (=> (not (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7))))
   (= ks9 (mk_map__ref1 ks3)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (not (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7))))
-  (= i11 i4))))
+  (=> (not (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7))))
+  (= i10 i3))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (=> (not (and (bvule ((_ int2bv 64) 0) i4) (bvule i4 ((_ int2bv 64) 7))))
+  (=> (not (and (bvule ((_ int2bv 64) 0) i3) (bvule i3 ((_ int2bv 64) 7))))
   (= ks10 ks3))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (and
   (= o12 (tweak_to_words
          (rec__skein__context_header__tweak_words
          (us_split_fields3
-         (rec__skein__skein_512_context__h ctx__split_fields14)))))
-  (tweak_to_words__function_guard o12
-  (rec__skein__context_header__tweak_words
-  (us_split_fields3 (rec__skein__skein_512_context__h ctx__split_fields14)))))))
+         (rec__skein__skein_512_context__h ctx__split_fields14)))))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (= temp___1546 (mk___t1 o12 (mk1 ((_ int2bv 64) 0) ((_ int2bv 64) 1))))))
+  (= temp___1514 (mk___t1 o12 (mk1 ((_ int2bv 64) 0) ((_ int2bv 64) 1))))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (= o13 (select (elts1 temp___1546) ((_ int2bv 64) 0)))))
+  (= o13 (select (elts1 temp___1514) ((_ int2bv 64) 0)))))
 
 ;; H
   (assert
@@ -3416,24 +3242,20 @@
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (and
   (= o15 (tweak_to_words
          (rec__skein__context_header__tweak_words
          (us_split_fields3
-         (rec__skein__skein_512_context__h ctx__split_fields14)))))
-  (tweak_to_words__function_guard o15
-  (rec__skein__context_header__tweak_words
-  (us_split_fields3 (rec__skein__skein_512_context__h ctx__split_fields14)))))))
+         (rec__skein__skein_512_context__h ctx__split_fields14)))))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (= temp___1547 (mk___t1 o15 (mk1 ((_ int2bv 64) 0) ((_ int2bv 64) 1))))))
+  (= temp___1515 (mk___t1 o15 (mk1 ((_ int2bv 64) 0) ((_ int2bv 64) 1))))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (= o16 (select (elts1 temp___1547) ((_ int2bv 64) 1)))))
+  (= o16 (select (elts1 temp___1515) ((_ int2bv 64) 1)))))
 
 ;; H
   (assert
@@ -3452,16 +3274,12 @@
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (= o18 (temp___1548 w03 w13 (bvxor w03 w13)))))
-
-;; H
-  (assert
-  (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (= result8 (mk_map__ref1 ts2))))
 
 ;; H
   (assert
-  (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count)) (= ts3 o18)))
+  (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
+  (= ts3 (temp___1516 w03 w13 (bvxor w03 w13)))))
 
 ;; H
   (assert
@@ -3483,7 +3301,7 @@
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= temp___1561 w3))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= temp___1529 w3))))
 
 ;; H
   (assert
@@ -3492,12 +3310,12 @@
   (and (bvule ((_ int2bv 64) 0) dst_index3)
   (bvule dst_index3 ((_ int2bv 64) 7)))
   (and
-  (forall ((temp___1562 (_ BitVec 64)))
+  (forall ((temp___1530 (_ BitVec 64)))
   (=>
-  (and (bvule ((_ int2bv 64) 0) temp___1562)
-  (bvule temp___1562 ((_ int2bv 64) 7)))
-  (=> (bvule dst_index4 temp___1562)
-  (= (select w4 temp___1562) (select temp___1561 temp___1562)))))
+  (and (bvule ((_ int2bv 64) 0) temp___1530)
+  (bvule temp___1530 ((_ int2bv 64) 7)))
+  (=> (bvule dst_index4 temp___1530)
+  (= (select w4 temp___1530) (select temp___1529 temp___1530)))))
   (and (bvule ((_ int2bv 64) 0) dst_index4)
   (bvule dst_index4 ((_ int2bv 64) 7)))))))
 
@@ -3535,28 +3353,28 @@
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
   (bvule dst_index3 ((_ int2bv 64) 7)))
-  (= o58 (bvadd src_index ((_ int2bv 64) 7))))))
+  (= o57 (bvadd src_index ((_ int2bv 64) 7))))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o59 (select (elts block) o58)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o58 (select (elts block) o57)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o60 (to_rep o59)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o59 (to_rep o58)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o61 ((_ zero_extend 56) o60)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o60 ((_ zero_extend 56) o59)))))
 
 ;; H
   (assert
@@ -3564,7 +3382,7 @@
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
   (bvule dst_index3 ((_ int2bv 64) 7)))
-  (= o62 (bvshl o61 ((_ int2bv 64) 56))))))
+  (= o61 (bvshl o60 ((_ int2bv 64) 56))))))
 
 ;; H
   (assert
@@ -3582,28 +3400,28 @@
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
   (bvule dst_index3 ((_ int2bv 64) 7)))
-  (= o52 (bvadd src_index ((_ int2bv 64) 6))))))
+  (= o51 (bvadd src_index ((_ int2bv 64) 6))))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o53 (select (elts block) o52)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o52 (select (elts block) o51)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o54 (to_rep o53)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o53 (to_rep o52)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o55 ((_ zero_extend 56) o54)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o54 ((_ zero_extend 56) o53)))))
 
 ;; H
   (assert
@@ -3611,7 +3429,7 @@
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
   (bvule dst_index3 ((_ int2bv 64) 7)))
-  (= o56 (bvshl o55 ((_ int2bv 64) 48))))))
+  (= o55 (bvshl o54 ((_ int2bv 64) 48))))))
 
 ;; H
   (assert
@@ -3629,28 +3447,28 @@
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
   (bvule dst_index3 ((_ int2bv 64) 7)))
-  (= o46 (bvadd src_index ((_ int2bv 64) 5))))))
+  (= o45 (bvadd src_index ((_ int2bv 64) 5))))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o47 (select (elts block) o46)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o46 (select (elts block) o45)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o48 (to_rep o47)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o47 (to_rep o46)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o49 ((_ zero_extend 56) o48)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o48 ((_ zero_extend 56) o47)))))
 
 ;; H
   (assert
@@ -3658,7 +3476,7 @@
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
   (bvule dst_index3 ((_ int2bv 64) 7)))
-  (= o50 (bvshl o49 ((_ int2bv 64) 40))))))
+  (= o49 (bvshl o48 ((_ int2bv 64) 40))))))
 
 ;; H
   (assert
@@ -3676,28 +3494,28 @@
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
   (bvule dst_index3 ((_ int2bv 64) 7)))
-  (= o40 (bvadd src_index ((_ int2bv 64) 4))))))
+  (= o39 (bvadd src_index ((_ int2bv 64) 4))))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o41 (select (elts block) o40)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o40 (select (elts block) o39)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o42 (to_rep o41)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o41 (to_rep o40)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o43 ((_ zero_extend 56) o42)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o42 ((_ zero_extend 56) o41)))))
 
 ;; H
   (assert
@@ -3705,7 +3523,7 @@
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
   (bvule dst_index3 ((_ int2bv 64) 7)))
-  (= o44 (bvshl o43 ((_ int2bv 64) 32))))))
+  (= o43 (bvshl o42 ((_ int2bv 64) 32))))))
 
 ;; H
   (assert
@@ -3723,28 +3541,28 @@
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
   (bvule dst_index3 ((_ int2bv 64) 7)))
-  (= o34 (bvadd src_index ((_ int2bv 64) 3))))))
+  (= o33 (bvadd src_index ((_ int2bv 64) 3))))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o35 (select (elts block) o34)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o34 (select (elts block) o33)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o36 (to_rep o35)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o35 (to_rep o34)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o37 ((_ zero_extend 56) o36)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o36 ((_ zero_extend 56) o35)))))
 
 ;; H
   (assert
@@ -3752,7 +3570,7 @@
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
   (bvule dst_index3 ((_ int2bv 64) 7)))
-  (= o38 (bvshl o37 ((_ int2bv 64) 24))))))
+  (= o37 (bvshl o36 ((_ int2bv 64) 24))))))
 
 ;; H
   (assert
@@ -3770,28 +3588,28 @@
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
   (bvule dst_index3 ((_ int2bv 64) 7)))
-  (= o28 (bvadd src_index ((_ int2bv 64) 2))))))
+  (= o27 (bvadd src_index ((_ int2bv 64) 2))))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o29 (select (elts block) o28)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o28 (select (elts block) o27)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o30 (to_rep o29)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o29 (to_rep o28)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o31 ((_ zero_extend 56) o30)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o30 ((_ zero_extend 56) o29)))))
 
 ;; H
   (assert
@@ -3799,7 +3617,7 @@
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
   (bvule dst_index3 ((_ int2bv 64) 7)))
-  (= o32 (bvshl o31 ((_ int2bv 64) 16))))))
+  (= o31 (bvshl o30 ((_ int2bv 64) 16))))))
 
 ;; H
   (assert
@@ -3817,28 +3635,28 @@
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
   (bvule dst_index3 ((_ int2bv 64) 7)))
-  (= o22 (bvadd src_index ((_ int2bv 64) 1))))))
+  (= o21 (bvadd src_index ((_ int2bv 64) 1))))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o23 (select (elts block) o22)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o22 (select (elts block) o21)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o24 (to_rep o23)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o23 (to_rep o22)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o25 ((_ zero_extend 56) o24)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o24 ((_ zero_extend 56) o23)))))
 
 ;; H
   (assert
@@ -3846,7 +3664,7 @@
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
   (bvule dst_index3 ((_ int2bv 64) 7)))
-  (= o26 (bvshl o25 ((_ int2bv 64) 8))))))
+  (= o25 (bvshl o24 ((_ int2bv 64) 8))))))
 
 ;; H
   (assert
@@ -3862,91 +3680,91 @@
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o19 src_index))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o18 src_index))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o20 (select (elts block) o19)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o19 (select (elts block) o18)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o21 (to_rep o20)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o20 (to_rep o19)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o27 ((_ zero_extend 56) o21)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o26 ((_ zero_extend 56) o20)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o33 (bvadd o27 o26)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o32 (bvadd o26 o25)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o39 (bvadd o33 o32)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o38 (bvadd o32 o31)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o45 (bvadd o39 o38)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o44 (bvadd o38 o37)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o51 (bvadd o45 o44)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o50 (bvadd o44 o43)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o57 (bvadd o51 o50)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o56 (bvadd o50 o49)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o63 (bvadd o57 o56)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o62 (bvadd o56 o55)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o64 (bvadd o63 o62)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o63 (bvadd o62 o61)))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= (to_rep1 o65) o64))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= (to_rep1 o64) o63))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= o66 (store w4 dst_index4 o65)))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= o65 (store w4 dst_index4 o64)))))
 
 ;; H
   (assert
@@ -3960,7 +3778,7 @@
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (=>
   (and (bvule ((_ int2bv 64) 0) dst_index3)
-  (bvule dst_index3 ((_ int2bv 64) 7))) (= w5 o66))))
+  (bvule dst_index3 ((_ int2bv 64) 7))) (= w5 o65))))
 
 ;; H
   (assert
@@ -4062,44 +3880,40 @@
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (= o67 (temp___1565
-         (bvadd (to_rep1 (select (map__content1 w8) ((_ int2bv 64) 0))) 
-         (to_rep1 (select (map__content1 ks9) ((_ int2bv 64) 0))))
-         (bvadd (to_rep1 (select (map__content1 w8) ((_ int2bv 64) 1))) 
-         (to_rep1 (select (map__content1 ks9) ((_ int2bv 64) 1))))
-         (bvadd (to_rep1 (select (map__content1 w8) ((_ int2bv 64) 2))) 
-         (to_rep1 (select (map__content1 ks9) ((_ int2bv 64) 2))))
-         (bvadd (to_rep1 (select (map__content1 w8) ((_ int2bv 64) 3))) 
-         (to_rep1 (select (map__content1 ks9) ((_ int2bv 64) 3))))
-         (bvadd (to_rep1 (select (map__content1 w8) ((_ int2bv 64) 4))) 
-         (to_rep1 (select (map__content1 ks9) ((_ int2bv 64) 4))))
-         (bvadd (to_rep1 (select (map__content1 w8) ((_ int2bv 64) 5))) 
-         (to_rep1 (select (map__content1 ks9) ((_ int2bv 64) 5))))
-         (bvadd (to_rep1 (select (map__content1 w8) ((_ int2bv 64) 6))) 
-         (to_rep1 (select (map__content1 ks9) ((_ int2bv 64) 6))))
-         (bvadd (to_rep1 (select (map__content1 w8) ((_ int2bv 64) 7))) 
-         (to_rep1 (select (map__content1 ks9) ((_ int2bv 64) 7))))))))
-
-;; H
-  (assert
-  (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
   (= result11 (mk_map__ref1 x2))))
 
 ;; H
   (assert
-  (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count)) (= x3 o67)))
+  (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
+  (= x3 (temp___1533
+        (bvadd (to_rep1 (select (map__content1 w8) ((_ int2bv 64) 0))) 
+        (to_rep1 (select (map__content1 ks9) ((_ int2bv 64) 0))))
+        (bvadd (to_rep1 (select (map__content1 w8) ((_ int2bv 64) 1))) 
+        (to_rep1 (select (map__content1 ks9) ((_ int2bv 64) 1))))
+        (bvadd (to_rep1 (select (map__content1 w8) ((_ int2bv 64) 2))) 
+        (to_rep1 (select (map__content1 ks9) ((_ int2bv 64) 2))))
+        (bvadd (to_rep1 (select (map__content1 w8) ((_ int2bv 64) 3))) 
+        (to_rep1 (select (map__content1 ks9) ((_ int2bv 64) 3))))
+        (bvadd (to_rep1 (select (map__content1 w8) ((_ int2bv 64) 4))) 
+        (to_rep1 (select (map__content1 ks9) ((_ int2bv 64) 4))))
+        (bvadd (to_rep1 (select (map__content1 w8) ((_ int2bv 64) 5))) 
+        (to_rep1 (select (map__content1 ks9) ((_ int2bv 64) 5))))
+        (bvadd (to_rep1 (select (map__content1 w8) ((_ int2bv 64) 6))) 
+        (to_rep1 (select (map__content1 ks9) ((_ int2bv 64) 6))))
+        (bvadd (to_rep1 (select (map__content1 w8) ((_ int2bv 64) 7))) 
+        (to_rep1 (select (map__content1 ks9) ((_ int2bv 64) 7))))))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (= (to_rep1 o68) (bvadd (to_rep1 (select x3 ((_ int2bv 64) 5))) (to_rep1
+  (= (to_rep1 o66) (bvadd (to_rep1 (select x3 ((_ int2bv 64) 5))) (to_rep1
                                                                   (select 
                                                                   ts3 ((_ int2bv 64) 0)))))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (= o69 (store x3 ((_ int2bv 64) 5) o68))))
+  (= o67 (store x3 ((_ int2bv 64) 5) o66))))
 
 ;; H
   (assert
@@ -4108,19 +3922,19 @@
 
 ;; H
   (assert
-  (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count)) (= x4 o69)))
+  (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count)) (= x4 o67)))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (= (to_rep1 o70) (bvadd (to_rep1 (select x4 ((_ int2bv 64) 6))) (to_rep1
+  (= (to_rep1 o68) (bvadd (to_rep1 (select x4 ((_ int2bv 64) 6))) (to_rep1
                                                                   (select 
                                                                   ts3 ((_ int2bv 64) 1)))))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (= o71 (store x4 ((_ int2bv 64) 6) o70))))
+  (= o69 (store x4 ((_ int2bv 64) 6) o68))))
 
 ;; H
   (assert
@@ -4129,48 +3943,7 @@
 
 ;; H
   (assert
-  (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count)) (= x5 o71)))
-
-;; H
-  (assert
-  (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (= o72 (temp___1576
-         (bvxor (to_rep1 (select x6 ((_ int2bv 64) 0))) (to_rep1
-                                                        (select (map__content1
-                                                                w8) ((_ int2bv 64) 0))))
-         (bvxor (to_rep1 (select x6 ((_ int2bv 64) 1))) (to_rep1
-                                                        (select (map__content1
-                                                                w8) ((_ int2bv 64) 1))))
-         (bvxor (to_rep1 (select x6 ((_ int2bv 64) 2))) (to_rep1
-                                                        (select (map__content1
-                                                                w8) ((_ int2bv 64) 2))))
-         (bvxor (to_rep1 (select x6 ((_ int2bv 64) 3))) (to_rep1
-                                                        (select (map__content1
-                                                                w8) ((_ int2bv 64) 3))))
-         (bvxor (to_rep1 (select x6 ((_ int2bv 64) 4))) (to_rep1
-                                                        (select (map__content1
-                                                                w8) ((_ int2bv 64) 4))))
-         (bvxor (to_rep1 (select x6 ((_ int2bv 64) 5))) (to_rep1
-                                                        (select (map__content1
-                                                                w8) ((_ int2bv 64) 5))))
-         (bvxor (to_rep1 (select x6 ((_ int2bv 64) 6))) (to_rep1
-                                                        (select (map__content1
-                                                                w8) ((_ int2bv 64) 6))))
-         (bvxor (to_rep1 (select x6 ((_ int2bv 64) 7))) (to_rep1
-                                                        (select (map__content1
-                                                                w8) ((_ int2bv 64) 7))))))))
-
-;; H
-  (assert
-  (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (= o73 (mk___split_fields2
-         (rec__skein__skein_512_context__h ctx__split_fields14) o72
-         (rec__skein__skein_512_context__b ctx__split_fields14)))))
-
-;; H
-  (assert
-  (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (= temp___1588 (mk___rep2 o73))))
+  (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count)) (= x5 o69)))
 
 ;; H
   (assert
@@ -4180,7 +3953,36 @@
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count))
-  (= ctx__split_fields15 (us_split_fields5 temp___1588))))
+  (= ctx__split_fields15 (mk___split_fields2
+                         (rec__skein__skein_512_context__h
+                         ctx__split_fields14)
+                         (temp___1544
+                         (bvxor (to_rep1 (select x6 ((_ int2bv 64) 0))) 
+                         (to_rep1
+                         (select (map__content1 w8) ((_ int2bv 64) 0))))
+                         (bvxor (to_rep1 (select x6 ((_ int2bv 64) 1))) 
+                         (to_rep1
+                         (select (map__content1 w8) ((_ int2bv 64) 1))))
+                         (bvxor (to_rep1 (select x6 ((_ int2bv 64) 2))) 
+                         (to_rep1
+                         (select (map__content1 w8) ((_ int2bv 64) 2))))
+                         (bvxor (to_rep1 (select x6 ((_ int2bv 64) 3))) 
+                         (to_rep1
+                         (select (map__content1 w8) ((_ int2bv 64) 3))))
+                         (bvxor (to_rep1 (select x6 ((_ int2bv 64) 4))) 
+                         (to_rep1
+                         (select (map__content1 w8) ((_ int2bv 64) 4))))
+                         (bvxor (to_rep1 (select x6 ((_ int2bv 64) 5))) 
+                         (to_rep1
+                         (select (map__content1 w8) ((_ int2bv 64) 5))))
+                         (bvxor (to_rep1 (select x6 ((_ int2bv 64) 6))) 
+                         (to_rep1
+                         (select (map__content1 w8) ((_ int2bv 64) 6))))
+                         (bvxor (to_rep1 (select x6 ((_ int2bv 64) 7))) 
+                         (to_rep1
+                         (select (map__content1 w8) ((_ int2bv 64) 7)))))
+                         (rec__skein__skein_512_context__b
+                         ctx__split_fields14)))))
 
 ;; H
   (assert
@@ -4272,7 +4074,7 @@
 
 ;; H
   (assert
-  (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count)) (= i12 i10)))
+  (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count)) (= i11 i7)))
 
 ;; H
   (assert
@@ -4317,7 +4119,7 @@
 
 ;; H
   (assert
-  (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count)) (= i13 i11)))
+  (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count)) (= i12 i10)))
 
 ;; H
   (assert
@@ -4360,7 +4162,7 @@
 
 ;; H
   (assert
-  (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count)) (= i14 i12)))
+  (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count)) (= i13 i11)))
 
 ;; H
   (assert
@@ -4403,7 +4205,7 @@
 
 ;; H
   (assert
-  (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count)) (= i15 i13)))
+  (=> (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count)) (= i14 i12)))
 
 ;; H
   (assert
@@ -4449,7 +4251,7 @@
 ;; H
   (assert
   (=> (not (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count)))
-  (= i14 (mk_t__ref1 i))))
+  (= i13 (mk_t__ref1 i))))
 
 ;; H
   (assert
@@ -4510,7 +4312,7 @@
 ;; H
   (assert
   (=> (not (and (bvule ((_ int2bv 64) 1) j1) (bvule j1 block_count)))
-  (= i15 i1)))
+  (= i14 i1)))
 
 ;; H
   (assert
@@ -4552,7 +4354,7 @@
   (assert (= w08 w06))
 
 ;; H
-  (assert (= i16 i14))
+  (assert (= i15 i13))
 
 ;; H
   (assert (= j7 j5))
@@ -4582,7 +4384,7 @@
   (assert (= w09 w07))
 
 ;; H
-  (assert (= i17 i15))
+  (assert (= i16 i14))
 
 ;; H
   (assert (= j8 j6))
@@ -4605,7 +4407,7 @@
 (assert
 ;; WP_parameter_def
  ;; File "g-bytswa.ads", line 189, characters 0-0
-  (not (in_range6
+  (not (in_range5
   (to_rep3
   (rec__skein__context_header__hash_bit_len
   (us_split_fields3

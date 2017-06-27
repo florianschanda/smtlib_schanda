@@ -57,6 +57,24 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
+(declare-fun to_rep (integer) Int)
+
+(declare-fun of_rep (Int) integer)
+
+;; inversion_axiom
+  (assert
+  (forall ((x integer)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x integer)) (! (in_range (to_rep x)) :pattern ((to_rep x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                           (of_rep x))) )))
+
 (declare-datatypes ()
 ((us_split_fields
  (mk___split_fields
@@ -121,9 +139,27 @@
 (define-fun p_intT__ref___projection ((a p_intT__ref)) us_rep (p_intT__content
                                                               a))
 
-(declare-fun the_protected_int () Int)
+(define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
+
+(define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE1 (Bool) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Bool)
+
+(define-fun default_initial_assumption ((temp___expr_172 us_rep)
+  (temp___skip_top_level_173 Bool)) Bool (and
+                                         (= (rec__po_t__p_intT__condition
+                                            (us_split_fields1
+                                            temp___expr_172)) (of_int 1))
+                                         (= (to_rep
+                                            (rec__po_t__the_protected_int
+                                            (us_split_fields1
+                                            temp___expr_172))) 0)))
 
 (define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)
@@ -132,11 +168,13 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range temp___expr_15)))
 
+(declare-fun self__ () integer)
+
 ;; H
-  (assert (not (<= 0 the_protected_int)))
+  (assert (not (<= 0 (to_rep self__))))
 
 (assert
 ;; WP_parameter_def
  ;; File "po_t.ads", line 43, characters 0-0
-  (not (in_range (+ the_protected_int 10))))
+  (not (in_range (+ (to_rep self__) 10))))
 (check-sat)

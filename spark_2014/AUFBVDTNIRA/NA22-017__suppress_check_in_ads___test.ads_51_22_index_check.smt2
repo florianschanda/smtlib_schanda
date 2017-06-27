@@ -463,9 +463,8 @@
      (and (dynamic_invariant1 v0 true true true) (dynamic_invariant1 v1 true
      true true))
      (let ((result (xor2 v0 v1)))
-     (=> (xor2__function_guard result v0 v1)
      (and (= result (bvxor v0 v1)) (dynamic_invariant1 result true false
-     true))))) :pattern ((xor2 v0 v1)) )))
+     true)))) :pattern ((xor2 v0 v1)) )))
 
 (declare-fun left () us_t)
 
@@ -480,10 +479,6 @@
 (declare-fun result____last () tindexB)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
-
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -515,9 +510,9 @@
 
 (declare-fun i () Int)
 
-(declare-fun temp___296 () (Array Int word32))
+(declare-fun temp___290 () (Array Int word32))
 
-(declare-fun temp___294 () Int)
+(declare-fun temp___288 () Int)
 
 (declare-fun o () Int)
 
@@ -617,20 +612,6 @@
   (= (to_rep (last (rt right))) (to_rep result____last))))
 
 ;; H
-  (assert
-  (forall ((pos Int)) (xor2__function_guard
-  (xor2 (to_rep1 (select (elts left) pos))
-  (to_rep1 (select (elts right) pos))) (to_rep1 (select (elts left) pos))
-  (to_rep1 (select (elts right) pos)))))
-
-;; H
-  (assert
-  (forall ((pos Int)) (xor2__function_guard
-  (xor2 (to_rep1 (select (elts left) pos))
-  (to_rep1 (select (elts right) pos))) (to_rep1 (select (elts left) pos))
-  (to_rep1 (select (elts right) pos)))))
-
-;; H
   (assert (= (mk_int__ref result) (mk_int__ref i)))
 
 ;; H
@@ -639,12 +620,12 @@
 ;; H
   (assert
   (=> (and (<= (to_rep result____first) i2) (<= i2 (to_rep result____last)))
-  (= temp___296 result__)))
+  (= temp___290 result__)))
 
 ;; H
   (assert
   (=> (and (<= (to_rep result____first) i2) (<= i2 (to_rep result____last)))
-  (= temp___294 i2)))
+  (= temp___288 i2)))
 
 ;; H
   (assert
@@ -690,8 +671,7 @@
 ;; H
   (assert
   (=> (and (<= (to_rep result____first) i2) (<= i2 (to_rep result____last)))
-  (and (and (= o6 (xor2 o2 o5)) (xor2__function_guard o6 o2 o5))
-  (= o6 (bvxor o2 o5)))))
+  (and (= o6 (xor2 o2 o5)) (= o6 (bvxor o2 o5)))))
 
 ;; H
   (assert
@@ -730,12 +710,12 @@
   (=> (<= (to_rep result____first) (to_rep result____last))
   (dynamic_property1 (to_rep result____first) (to_rep result____last) 
   i3))
-  (forall ((temp___297 Int))
+  (forall ((temp___291 Int))
   (=>
-  (and (<= (to_rep result____first) temp___297)
-  (<= temp___297 (to_rep result____last)))
-  (=> (< i3 temp___297)
-  (= (select result__3 temp___297) (select temp___296 temp___297))))))
+  (and (<= (to_rep result____first) temp___291)
+  (<= temp___291 (to_rep result____last)))
+  (=> (< i3 temp___291)
+  (= (select result__3 temp___291) (select temp___290 temp___291))))))
   (and (<= (to_rep result____first) i3) (<= i3 (to_rep result____last))))))
 
 ;; H
@@ -857,9 +837,7 @@
   (assert (= o11 (to_rep1 o10)))
 
 ;; H
-  (assert
-  (and (and (= o15 (xor2 o11 o14)) (xor2__function_guard o15 o11 o14))
-  (= o15 (bvxor o11 o14))))
+  (assert (and (= o15 (xor2 o11 o14)) (= o15 (bvxor o11 o14))))
 
 (assert
 ;; WP_parameter_def

@@ -169,9 +169,9 @@
 (define-fun unsigned64__ref___projection ((a unsigned64__ref)) unsigned64 
   (unsigned64__content a))
 
-(define-fun dynamic_invariant ((temp___expr_202 (_ BitVec 64))
-  (temp___is_init_199 Bool) (temp___skip_constant_200 Bool)
-  (temp___do_toplevel_201 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_201 (_ BitVec 64))
+  (temp___is_init_198 Bool) (temp___skip_constant_199 Bool)
+  (temp___do_toplevel_200 Bool)) Bool true)
 
 (declare-fun inrange64 ((_ BitVec 64) (_ BitVec 64) (_ BitVec 64)) Bool)
 
@@ -186,13 +186,10 @@
      (and
      (and (dynamic_invariant var true true true) (dynamic_invariant bottom
      true true true)) (dynamic_invariant range_size true true true))
-     (let ((result (inrange64 var bottom range_size)))
-     (=> (inrange64__function_guard result var bottom range_size)
-     (= (= result true)
+     (= (= (inrange64 var bottom range_size) true)
      (exists ((n (_ BitVec 64)))
      (and (and (bvule ((_ int2bv 64) 0) n) (bvule n range_size))
-     (= var (bvadd bottom n)))))))) :pattern ((inrange64 var bottom
-                                              range_size)) )))
+     (= var (bvadd bottom n)))))) :pattern ((inrange64 var bottom range_size)) )))
 
 (declare-fun var1 () (_ BitVec 64))
 
@@ -262,8 +259,6 @@
 
 (declare-fun attr__ATTRIBUTE_MODULUS2 () (_ BitVec 64))
 
-(declare-fun last () (_ BitVec 64))
-
 (define-fun dynamic_property ((first_int (_ BitVec 64))
   (last_int (_ BitVec 64))
   (x (_ BitVec 64))) Bool (and (bvule first_int x) (bvule x last_int)))
@@ -297,8 +292,6 @@
 
 (declare-fun attr__ATTRIBUTE_MODULUS3 () (_ BitVec 64))
 
-(declare-fun last1 () (_ BitVec 64))
-
 (define-fun dynamic_property1 ((first_int (_ BitVec 64))
   (last_int (_ BitVec 64))
   (x (_ BitVec 64))) Bool (and (bvule first_int x) (bvule x last_int)))
@@ -327,8 +320,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
 
 (declare-fun attr__ATTRIBUTE_MODULUS4 () (_ BitVec 64))
-
-(declare-fun last2 () (_ BitVec 64))
 
 (define-fun dynamic_property2 ((first_int (_ BitVec 64))
   (last_int (_ BitVec 64))
@@ -359,9 +350,9 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS10 () Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_184 (_ BitVec 64))
-  (temp___is_init_181 Bool) (temp___skip_constant_182 Bool)
-  (temp___do_toplevel_183 Bool)) Bool true)
+(define-fun dynamic_invariant1 ((temp___expr_183 (_ BitVec 64))
+  (temp___is_init_180 Bool) (temp___skip_constant_181 Bool)
+  (temp___do_toplevel_182 Bool)) Bool true)
 
 (declare-fun n1 () (_ BitVec 64))
 
@@ -395,13 +386,10 @@
 ;; H
   (assert
   (and
-  (and
   (= x86__rangesintersect__B100b__res__assume (inrange64 var1
                                               (bvsub var2 var1_range_size)
                                               (bvadd var1_range_size 
                                               var2_range_size)))
-  (inrange64__function_guard x86__rangesintersect__B100b__res__assume 
-  var1 (bvsub var2 var1_range_size) (bvadd var1_range_size var2_range_size)))
   (= (= x86__rangesintersect__B100b__res__assume true)
   (exists ((n4 (_ BitVec 64)))
   (and

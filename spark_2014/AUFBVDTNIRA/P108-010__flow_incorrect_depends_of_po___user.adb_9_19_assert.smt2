@@ -143,16 +143,38 @@
 (define-fun po_type__ref___projection ((a po_type__ref)) us_rep (po_type__content
                                                                 a))
 
+(declare-fun to_rep (integer) Int)
+
+(declare-fun of_rep (Int) integer)
+
+;; inversion_axiom
+  (assert
+  (forall ((x integer)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x integer)) (! (in_range (to_rep x)) :pattern ((to_rep x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                           (of_rep x))) )))
+
+(define-fun default_initial_assumption ((temp___expr_172 us_rep)
+  (temp___skip_top_level_173 Bool)) Bool (= (to_rep
+                                            (rec__p__po_type__content
+                                            (us_split_fields1
+                                            temp___expr_172))) 0))
+
 (declare-fun get (us_rep) Int)
 
 (declare-fun get__function_guard (Int us_rep) Bool)
 
 ;; get__post_axiom
   (assert
-  (forall ((self__ us_rep))
-  (! (let ((result (get self__)))
-     (=> (get__function_guard result self__) (dynamic_invariant result true
-     false true))) :pattern ((get self__)) )))
+  (forall ((self__ us_rep)) (! (dynamic_invariant (get self__) true false
+  true) :pattern ((get self__)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -168,35 +190,49 @@
 
 (declare-fun o () integer)
 
+(declare-fun us_self__compl () integer)
+
 (declare-fun o1 () integer)
 
 (declare-fun o2 () Int)
 
-(declare-fun the_po () integer)
+(declare-fun the_po__split_fields () integer)
 
-(declare-fun the_po1 () integer)
+(declare-fun us_self__compl1 () integer)
 
-(declare-fun result () Int)
+(declare-fun result () integer)
+
+(declare-fun the_po__split_fields1 () integer)
+
+(declare-fun the_po__split_fields2 () integer)
+
+(declare-fun result1 () Int)
 
 (declare-fun tmp1 () Int)
-
-(define-fun o3 () us_rep (mk___rep (mk___split_fields o1)))
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range tmp)))
 
 ;; H
-  (assert (= o the_po))
+  (assert (= o the_po__split_fields))
 
 ;; H
-  (assert (= o3 (mk___rep (mk___split_fields the_po1))))
+  (assert (= us_self__compl o))
 
 ;; H
-  (assert
-  (and (and (= o2 (get o3)) (get__function_guard o2 o3)) (in_range o2)))
+  (assert (= result the_po__split_fields))
 
 ;; H
-  (assert (= result tmp))
+  (assert (= the_po__split_fields1 us_self__compl1))
+
+;; H
+  (assert (= o1 the_po__split_fields2))
+
+;; H
+  (assert (and (= o2 (get (mk___rep (mk___split_fields o1)))) (in_range o2)))
+
+;; H
+  (assert (= result1 tmp))
 
 ;; H
   (assert (= tmp1 o2))

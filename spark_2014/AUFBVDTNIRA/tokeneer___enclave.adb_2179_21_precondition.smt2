@@ -769,10 +769,8 @@
 
 ;; rolepresent__post_axiom
   (assert
-  (forall ((theadmin us_rep1))
-  (! (let ((result (rolepresent theadmin)))
-     (=> (rolepresent__function_guard result theadmin) (dynamic_invariant2
-     result true false true))) :pattern ((rolepresent theadmin)) )))
+  (forall ((theadmin us_rep1)) (! (dynamic_invariant2 (rolepresent theadmin)
+  true false true) :pattern ((rolepresent theadmin)) )))
 
 (declare-fun isdoingop (us_rep1) Bool)
 
@@ -794,11 +792,9 @@
 ;; thecurrentop__post_axiom
   (assert
   (forall ((theadmin us_rep1))
-  (! (and (isdoingop__function_guard (isdoingop theadmin) theadmin)
-     (=> (= (isdoingop theadmin) true)
-     (let ((result (thecurrentop theadmin)))
-     (=> (thecurrentop__function_guard result theadmin) (dynamic_invariant3
-     result true false true))))) :pattern ((thecurrentop theadmin)) )))
+  (! (=> (= (isdoingop theadmin) true) (dynamic_invariant3
+     (thecurrentop theadmin) true false true)) :pattern ((thecurrentop
+                                                         theadmin)) )))
 
 (declare-fun ispresent (us_rep1) Bool)
 
@@ -823,22 +819,8 @@
   (assert
   (forall ((theadmin us_rep1))
   (forall ((keyedop us_rep))
-  (! (and (ispresent__function_guard (ispresent theadmin) theadmin)
-     (=> (= (ispresent theadmin) true)
+  (! (=> (= (ispresent theadmin) true)
      (let ((result (opisavailable theadmin keyedop)))
-     (and
-     (forall ((op Int)) (str_comp__function_guard (str_comp keyedop op)
-     keyedop op))
-     (and
-     (forall ((op Int)) (allowedop__function_guard (allowedop theadmin op)
-     theadmin op))
-     (and
-     (forall ((op Int)) (str_comp__function_guard (str_comp keyedop op)
-     keyedop op))
-     (and
-     (forall ((op Int)) (allowedop__function_guard (allowedop theadmin op)
-     theadmin op))
-     (=> (opisavailable__function_guard result theadmin keyedop)
      (and
      (= (and (or (ite (exists ((op Int))
                       (and (and (<= 1 op) (<= op 4))
@@ -857,9 +839,9 @@
                                                              theadmin op) true))
                                                           (= result op))))
                                                      true false) (= result 0)))) true)
-     (dynamic_invariant1 result true false true)))))))))) :pattern ((opisavailable
-                                                                    theadmin
-                                                                    keyedop)) ))))
+     (dynamic_invariant1 result true false true)))) :pattern ((opisavailable
+                                                              theadmin
+                                                              keyedop)) ))))
 
 (declare-fun valid_numberlogentries (us_private) Bool)
 
@@ -871,11 +853,9 @@
 
 ;; theauthcertrole__post_axiom
   (assert
-  (forall ((admintoken__state us_private))
-  (! (let ((result (theauthcertrole admintoken__state)))
-     (=> (theauthcertrole__function_guard result admintoken__state)
-     (dynamic_invariant2 result true false true))) :pattern ((theauthcertrole
-                                                             admintoken__state)) )))
+  (forall ((admintoken__state us_private)) (! (dynamic_invariant2
+  (theauthcertrole admintoken__state) true false
+  true) :pattern ((theauthcertrole admintoken__state)) )))
 
 (declare-fun isgood (us_private) Bool)
 
@@ -920,12 +900,12 @@
 (define-fun statust__ref_2__projection ((a statust__ref)) statust (statust__content
                                                                   a))
 
-(define-fun dynamic_invariant4 ((temp___expr_1903 Int)
-  (temp___is_init_1900 Bool) (temp___skip_constant_1901 Bool)
-  (temp___do_toplevel_1902 Bool)) Bool (=>
-                                       (or (= temp___is_init_1900 true)
+(define-fun dynamic_invariant4 ((temp___expr_1792 Int)
+  (temp___is_init_1789 Bool) (temp___skip_constant_1790 Bool)
+  (temp___do_toplevel_1791 Bool)) Bool (=>
+                                       (or (= temp___is_init_1789 true)
                                        (<= 0 8)) (in_range10
-                                       temp___expr_1903)))
+                                       temp___expr_1792)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -948,23 +928,13 @@
   (forall ((admintoken__state us_private))
   (forall ((enclave__startadminactivity__theadmin__fields us_split_fields2))
   (forall ((enclave__status Int))
-  (! (=> (adminopcanstart__function_guard
-     (adminopcanstart admintoken__state
-     enclave__startadminactivity__theadmin__fields enclave__status)
-     admintoken__state enclave__startadminactivity__theadmin__fields
-     enclave__status)
-     (and (ispresent__function_guard
-     (ispresent (mk___rep1 enclave__startadminactivity__theadmin__fields))
-     (mk___rep1 enclave__startadminactivity__theadmin__fields))
-     (and (ispresent__function_guard1 (ispresent1 admintoken__state)
-     admintoken__state)
-     (=
+  (! (=
      (= (adminopcanstart admintoken__state
         enclave__startadminactivity__theadmin__fields enclave__status) true)
      (and
      (and
      (= (ispresent (mk___rep1 enclave__startadminactivity__theadmin__fields)) true)
-     (= enclave__status 3)) (= (ispresent1 admintoken__state) true)))))) :pattern (
+     (= enclave__status 3)) (= (ispresent1 admintoken__state) true))) :pattern (
   (adminopcanstart admintoken__state
   enclave__startadminactivity__theadmin__fields enclave__status)) )))))
 
@@ -1006,9 +976,7 @@
   (assert true)
 
 ;; allowedop__post_axiom
-  (assert
-  (forall ((theadmin us_rep1)) (ispresent__function_guard
-  (ispresent theadmin) theadmin)))
+  (assert true)
 
 (define-fun dynamic_invariant9 ((temp___expr_228 Int)
   (temp___is_init_225 Bool) (temp___skip_constant_226 Bool)
@@ -1058,13 +1026,9 @@
 ;; H
   (assert
   (and
-  (and
   (= o (rolepresent
        (mk___rep1
        (mk___split_fields1 theadmin__split_fields theadmin__split_fields1))))
-  (rolepresent__function_guard o
-  (mk___rep1
-  (mk___split_fields1 theadmin__split_fields theadmin__split_fields1))))
   (in_range9 o)))
 
 ;; H
@@ -1073,13 +1037,9 @@
 ;; H
   (assert
   (=> (= result true)
-  (and
   (= o4 (isdoingop
         (mk___rep1
-        (mk___split_fields1 theadmin__split_fields theadmin__split_fields1))))
-  (isdoingop__function_guard o4
-  (mk___rep1
-  (mk___split_fields1 theadmin__split_fields theadmin__split_fields1))))))
+        (mk___split_fields1 theadmin__split_fields theadmin__split_fields1))))))
 
 ;; H
   (assert (=> (= result true) (= o5 (ite (not (= o4 true)) true false))))
@@ -1088,13 +1048,9 @@
   (assert
   (=> (= result true)
   (and
-  (and
   (= o1 (thecurrentop
         (mk___rep1
         (mk___split_fields1 theadmin__split_fields theadmin__split_fields1))))
-  (thecurrentop__function_guard o1
-  (mk___rep1
-  (mk___split_fields1 theadmin__split_fields theadmin__split_fields1))))
   (in_range8 o1))))
 
 ;; H
@@ -1103,13 +1059,9 @@
 ;; H
   (assert
   (=> (= result true)
-  (and
   (= o3 (isdoingop
         (mk___rep1
-        (mk___split_fields1 theadmin__split_fields theadmin__split_fields1))))
-  (isdoingop__function_guard o3
-  (mk___rep1
-  (mk___split_fields1 theadmin__split_fields theadmin__split_fields1))))))
+        (mk___split_fields1 theadmin__split_fields theadmin__split_fields1))))))
 
 ;; H
   (assert (=> (= result true) (= o6 (ite (= o3 true) o2 false))))
@@ -1119,14 +1071,6 @@
 
 ;; H
   (assert (=> (not (= result true)) (= o7 (of_int 1))))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep1
-  (mk___split_fields1 theadmin__split_fields theadmin__split_fields1)))
-  (mk___rep1
-  (mk___split_fields1 theadmin__split_fields theadmin__split_fields1))))
 
 (assert
 ;; WP_parameter_def

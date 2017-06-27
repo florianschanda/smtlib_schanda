@@ -155,8 +155,8 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range temp___expr_15)))
 
-(define-fun default_initial_assumption ((temp___expr_138 us_rep)
-  (temp___skip_top_level_139 Bool)) Bool (= (attr__tag temp___expr_138) 
+(define-fun default_initial_assumption ((temp___expr_136 us_rep)
+  (temp___skip_top_level_137 Bool)) Bool (= (attr__tag temp___expr_136) 
   us_tag))
 
 (declare-fun sum (us_rep) Int)
@@ -302,42 +302,33 @@
 
 ;; sum__post_axiom
   (assert
-  (forall ((x us_rep))
-  (! (let ((result (sum x)))
-     (=> (sum__function_guard result x) (dynamic_invariant result true false
-     true))) :pattern ((sum x)) )))
+  (forall ((x us_rep)) (! (dynamic_invariant (sum x) true false
+  true) :pattern ((sum x)) )))
 
 ;; sum__post__dispatch_axiom
   (assert
   (forall ((attr__tag2 Int))
-  (forall ((x us_rep))
-  (! (let ((result (sum1 attr__tag2 x)))
-     (=> (sum__function_guard1 result attr__tag2 x) (dynamic_invariant result
-     true false true))) :pattern ((sum1 attr__tag2 x)) ))))
+  (forall ((x us_rep)) (! (dynamic_invariant (sum1 attr__tag2 x) true false
+  true) :pattern ((sum1 attr__tag2 x)) ))))
 
 ;; ext__u__compat_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (sum__function_guard1 (sum1 us_tag1 x) us_tag1 x)
-     (and (sum__2__function_guard (sum__2 (of_base x)) (of_base x))
-     (= (sum__2 (of_base x)) (sum1 us_tag1 x)))) :pattern ((sum1 us_tag1 x)) )))
+  (! (= (sum__2 (of_base x)) (sum1 us_tag1 x)) :pattern ((sum1 us_tag1 x)) )))
 
 ;; base__t__compat_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (sum__function_guard1 (sum1 us_tag x) us_tag x)
-     (and (sum__function_guard (sum x) x) (= (sum x) (sum1 us_tag x)))) :pattern (
-  (sum1 us_tag x)) )))
+  (! (= (sum x) (sum1 us_tag x)) :pattern ((sum1 us_tag x)) )))
 
 ;; sum__def_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (sum__function_guard (sum x) x)
-     (= (sum x) (to_rep (rec__base__t__c (us_split_fields1 x))))) :pattern (
+  (! (= (sum x) (to_rep (rec__base__t__c (us_split_fields1 x)))) :pattern (
   (sum x)) )))
 
-(define-fun default_initial_assumption1 ((temp___expr_155 us_rep1)
-  (temp___skip_top_level_156 Bool)) Bool (= (attr__tag1 temp___expr_155) 
+(define-fun default_initial_assumption1 ((temp___expr_147 us_rep1)
+  (temp___skip_top_level_148 Bool)) Bool (= (attr__tag1 temp___expr_147) 
   us_tag1))
 
 (declare-fun x () us_rep1)
@@ -346,34 +337,26 @@
 
 ;; sum__2__post_axiom
   (assert
-  (forall ((x1 us_rep1))
-  (! (let ((result (sum__2 x1)))
-     (=> (sum__2__function_guard result x1) (dynamic_invariant result true
-     false true))) :pattern ((sum__2 x1)) )))
+  (forall ((x1 us_rep1)) (! (dynamic_invariant (sum__2 x1) true false
+  true) :pattern ((sum__2 x1)) )))
 
 ;; sum__2__post__dispatch_axiom
   (assert
   (forall ((attr__tag2 Int))
-  (forall ((x1 us_rep1))
-  (! (let ((result (sum__21 attr__tag2 x1)))
-     (=> (sum__2__function_guard1 result attr__tag2 x1) (dynamic_invariant
-     result true false true))) :pattern ((sum__21 attr__tag2 x1)) ))))
+  (forall ((x1 us_rep1)) (! (dynamic_invariant (sum__21 attr__tag2 x1) true
+  false true) :pattern ((sum__21 attr__tag2 x1)) ))))
 
 ;; ext__u__compat_axiom
   (assert
   (forall ((x1 us_rep1))
-  (! (=> (sum__2__function_guard1 (sum__21 us_tag1 x1) us_tag1 x1)
-     (and (sum__2__function_guard (sum__2 x1) x1)
-     (= (sum__2 x1) (sum__21 us_tag1 x1)))) :pattern ((sum__21 us_tag1 x1)) )))
+  (! (= (sum__2 x1) (sum__21 us_tag1 x1)) :pattern ((sum__21 us_tag1 x1)) )))
 
 ;; sum__2__def_axiom
   (assert
   (forall ((x1 us_rep1))
-  (! (=> (sum__2__function_guard (sum__2 x1) x1)
-     (and (sum__function_guard (sum (to_base x1)) (to_base x1))
-     (= (sum__2 x1) (+ (sum (to_base x1)) (to_rep
+  (! (= (sum__2 x1) (+ (sum (to_base x1)) (to_rep
                                           (rec__ext__u__d
-                                          (us_split_fields3 x1))))))) :pattern (
+                                          (us_split_fields3 x1))))) :pattern (
   (sum__2 x1)) )))
 
 (declare-fun o () Int)
@@ -383,17 +366,11 @@
 ;; H
   (assert
   (and
-  (and
   (= o (sum
        (mk___rep
        (mk___split_fields (rec__base__t__c1 (us_split_fields3 x))
        (hide_ext__ (rec__ext__u__d (us_split_fields3 x))
        (rec__ext__1 (us_split_fields3 x)))) (attr__tag1 x))))
-  (sum__function_guard o
-  (mk___rep
-  (mk___split_fields (rec__base__t__c1 (us_split_fields3 x))
-  (hide_ext__ (rec__ext__u__d (us_split_fields3 x))
-  (rec__ext__1 (us_split_fields3 x)))) (attr__tag1 x))))
   (and (in_range o) (= o (to_rep (rec__base__t__c1 (us_split_fields3 x)))))))
 
 ;; H

@@ -411,10 +411,8 @@
 ;; read__post_axiom
   (assert
   (forall ((word us_t))
-  (! (=> (dynamic_invariant1 word true true true)
-     (let ((result (read word)))
-     (=> (read__function_guard result word) (dynamic_invariant2 result true
-     false true)))) :pattern ((read word)) )))
+  (! (=> (dynamic_invariant1 word true true true) (dynamic_invariant2
+     (read word) true false true)) :pattern ((read word)) )))
 
 (declare-datatypes ()
 ((us_split_fields (mk___split_fields (rec__types__value__e integer)))))
@@ -526,11 +524,11 @@
   (! (=> (in_range5 x) (= (to_rep3 (of_rep3 x)) x)) :pattern ((to_rep3
                                                               (of_rep3 x))) )))
 
-(define-fun dynamic_invariant3 ((temp___expr_186 Int)
-  (temp___is_init_183 Bool) (temp___skip_constant_184 Bool)
-  (temp___do_toplevel_185 Bool)) Bool (=>
-                                      (or (= temp___is_init_183 true)
-                                      (<= 0 3)) (in_range5 temp___expr_186)))
+(define-fun dynamic_invariant3 ((temp___expr_177 Int)
+  (temp___is_init_174 Bool) (temp___skip_constant_175 Bool)
+  (temp___do_toplevel_176 Bool)) Bool (=>
+                                      (or (= temp___is_init_174 true)
+                                      (<= 0 3)) (in_range5 temp___expr_177)))
 
 (declare-fun read2 (us_t) Int)
 
@@ -539,10 +537,8 @@
 ;; read__post_axiom
   (assert
   (forall ((op us_t))
-  (! (=> (dynamic_invariant1 op true true true)
-     (let ((result (read2 op)))
-     (=> (read__function_guard2 result op) (dynamic_invariant3 result true
-     false true)))) :pattern ((read2 op)) )))
+  (! (=> (dynamic_invariant1 op true true true) (dynamic_invariant3
+     (read2 op) true false true)) :pattern ((read2 op)) )))
 
 (declare-sort token_kind 0)
 
@@ -565,11 +561,11 @@
 (define-fun token_kind__ref___projection ((a token_kind__ref)) token_kind 
   (token_kind__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_195 Int)
-  (temp___is_init_192 Bool) (temp___skip_constant_193 Bool)
-  (temp___do_toplevel_194 Bool)) Bool (=>
-                                      (or (= temp___is_init_192 true)
-                                      (<= 0 2)) (in_range6 temp___expr_195)))
+(define-fun dynamic_invariant4 ((temp___expr_185 Int)
+  (temp___is_init_182 Bool) (temp___skip_constant_183 Bool)
+  (temp___do_toplevel_184 Bool)) Bool (=>
+                                      (or (= temp___is_init_182 true)
+                                      (<= 0 2)) (in_range6 temp___expr_185)))
 
 (declare-fun to_rep4 (token_kind) Int)
 
@@ -762,14 +758,14 @@
 (define-fun token__ref___projection ((a token__ref)) us_rep1 (token__content
                                                              a))
 
-(define-fun default_initial_assumption ((temp___expr_203 us_rep1)
-  (temp___skip_top_level_204 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_193 us_rep1)
+  (temp___skip_top_level_194 Bool)) Bool (and
                                          (= (attr__constrained
-                                            temp___expr_203) false)
+                                            temp___expr_193) false)
                                          (= (to_rep4
                                             (rec__tokens__token__kind
                                             (us_split_discrs1
-                                            temp___expr_203))) 0)))
+                                            temp___expr_193))) 0)))
 
 (declare-fun v__attr__constrained () Bool)
 
@@ -805,8 +801,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -829,7 +823,7 @@
 
 (declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -839,7 +833,7 @@
   (! (=> (in_range1 f)
      (=> (in_range1 l)
      (and (= (to_rep1 (first2 (mk1 f l))) f)
-     (= (to_rep1 (last3 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (= (to_rep1 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -857,10 +851,10 @@
 
 (define-fun first3 ((a us_t1)) Int (to_rep1 (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep1 (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last4 a))
-                                    (+ (- (last4 a) (first3 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size3 () Int)
 
@@ -895,8 +889,8 @@
 
 (define-fun bool_eq12 ((x us_t1)
   (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep1 (first2 (rt1 x)))
-                  (to_rep1 (last3 (rt1 x))) (elts1 y)
-                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last3 (rt1 y)))))
+                  (to_rep1 (last2 (rt1 x))) (elts1 y)
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
 (declare-fun user_eq11 (us_t1 us_t1) Bool)
 
@@ -1412,9 +1406,9 @@
 
 (declare-fun o2 () (Array Int character))
 
-(declare-fun temp___242 () (Array Int character))
+(declare-fun temp___229 () (Array Int character))
 
-(declare-fun temp___2421 () t1)
+(declare-fun temp___2291 () t1)
 
 (declare-fun tokens__next__read_a_valid_token__word__assume () (Array Int character))
 
@@ -1490,7 +1484,7 @@
 
 (declare-fun o37 () us_split_discrs)
 
-(declare-fun temp___254 () us_rep1)
+(declare-fun temp___241 () us_rep1)
 
 (declare-fun v__split_discrs () us_split_discrs)
 
@@ -1559,17 +1553,17 @@
   (assert (= o2 word_buffer1))
 
 ;; H
-  (assert (= o2 temp___242))
+  (assert (= o2 temp___229))
 
 ;; H
-  (assert (= (mk1 1 r1b) temp___2421))
+  (assert (= (mk1 1 r1b) temp___2291))
 
 ;; H
-  (assert (= temp___242 tokens__next__read_a_valid_token__word__assume))
+  (assert (= temp___229 tokens__next__read_a_valid_token__word__assume))
 
 ;; H
   (assert
-  (= (mk (to_rep1 (first2 temp___2421)) (to_rep1 (last3 temp___2421))) 
+  (= (mk (to_rep1 (first2 temp___2291)) (to_rep1 (last2 temp___2291))) 
   tokens__next__read_a_valid_token__word__assume1))
 
 ;; H
@@ -1772,11 +1766,8 @@
 
 ;; H
   (assert
-  (and
   (= o35 (read1
-         (mk___t word1 (mk (to_rep1 word__first) (to_rep1 word__last)))))
-  (read__function_guard1 o35
-  (mk___t word1 (mk (to_rep1 word__first) (to_rep1 word__last))))))
+         (mk___t word1 (mk (to_rep1 word__first) (to_rep1 word__last))))))
 
 ;; H
   (assert (= o36 (mk___split_fields1 o35 dummy6 dummy4)))
@@ -1788,7 +1779,7 @@
   (assert (= o37 (mk___split_discrs o34)))
 
 ;; H
-  (assert (= temp___254 (mk___rep1 o37 o36 true)))
+  (assert (= temp___241 (mk___rep1 o37 o36 true)))
 
 ;; H
   (assert (= v__attr__constrained true))
@@ -1797,6 +1788,6 @@
 ;; WP_parameter_def
  ;; File "tokens.ads", line 14, characters 0-0
   (not
-  (= (rec__tokens__token__kind (us_split_discrs1 temp___254)) (rec__tokens__token__kind
+  (= (rec__tokens__token__kind (us_split_discrs1 temp___241)) (rec__tokens__token__kind
                                                               v__split_discrs))))
 (check-sat)

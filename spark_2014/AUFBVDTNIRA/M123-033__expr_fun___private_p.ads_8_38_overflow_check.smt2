@@ -70,10 +70,8 @@
 
 ;; g3__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (g3 us_void_param)))
-     (=> (g3__function_guard result us_void_param) (dynamic_invariant result
-     true false true))) :pattern ((g3 us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant (g3 us_void_param)
+  true false true) :pattern ((g3 us_void_param)) )))
 
 (declare-fun f3 (tuple0) Int)
 
@@ -81,16 +79,13 @@
 
 ;; f3__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (f3 us_void_param)))
-     (=> (f3__function_guard result us_void_param) (dynamic_invariant result
-     true false true))) :pattern ((f3 us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant (f3 us_void_param)
+  true false true) :pattern ((f3 us_void_param)) )))
 
 ;; f3__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (f3__function_guard (f3 us_void_param) us_void_param)
-     (= (f3 us_void_param) 1)) :pattern ((f3 us_void_param)) )))
+  (! (= (f3 us_void_param) 1) :pattern ((f3 us_void_param)) )))
 
 (declare-fun o () Int)
 
@@ -99,13 +94,10 @@
 (declare-fun o2 () Int)
 
 ;; H
-  (assert
-  (and (and (= o (g3 Tuple0)) (g3__function_guard o Tuple0)) (in_range o)))
+  (assert (and (= o (g3 Tuple0)) (in_range o)))
 
 ;; H
-  (assert
-  (and (and (= o1 (f3 Tuple0)) (f3__function_guard o1 Tuple0))
-  (and (in_range o1) (= o1 1))))
+  (assert (and (= o1 (f3 Tuple0)) (and (in_range o1) (= o1 1))))
 
 ;; H
   (assert (= o2 (+ o1 o)))

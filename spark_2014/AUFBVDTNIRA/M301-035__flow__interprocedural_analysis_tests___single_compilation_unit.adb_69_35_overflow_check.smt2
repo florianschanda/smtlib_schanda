@@ -92,17 +92,13 @@
   (assert (and (= o1 (- n 2)) (in_range (- n 2))))
 
 ;; H
-  (assert
-  (and (and (= o2 (fibonacci o1)) (fibonacci__function_guard o2 o1))
-  (in_range o2)))
+  (assert (and (= o2 (fibonacci o1)) (in_range o2)))
 
 ;; H
   (assert (and (= o (- n 1)) (in_range (- n 1))))
 
 ;; H
-  (assert
-  (and (and (= o3 (fibonacci o)) (fibonacci__function_guard o3 o)) (in_range
-  o3)))
+  (assert (and (= o3 (fibonacci o)) (in_range o3)))
 
 ;; H
   (assert (= o4 (+ o3 o2)))

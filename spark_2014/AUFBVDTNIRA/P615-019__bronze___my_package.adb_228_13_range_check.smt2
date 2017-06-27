@@ -353,25 +353,6 @@
 (define-fun tTaSP1__ref_2__projection ((a tTaSP1__ref)) tTaSP1 (tTaSP1__content
                                                                a))
 
-(declare-sort t26b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq4 (t26b t26b) Bool)
-
-(declare-fun dummy4 () t26b)
-
-(declare-datatypes () ((t26b__ref (mk_t26b__ref (t26b__content t26b)))))
-(define-fun t26b__ref___projection ((a t26b__ref)) t26b (t26b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
@@ -420,27 +401,29 @@
 
 (declare-fun my_package__bad_aliasing__z__assume1 () integer)
 
-(declare-fun o4 () (Array Int natural))
+(declare-fun o4 () integer)
 
 (declare-fun o5 () integer)
 
 (declare-fun o6 () integer)
 
-(declare-fun o7 () integer)
-
 (declare-fun temp___198 () integer)
 
 (declare-fun temp___1981 () integer)
 
-(declare-fun o8 () Int)
+(declare-fun o7 () Int)
 
-(declare-fun o9 () natural)
+(declare-fun o8 () natural)
+
+(declare-fun o9 () Int)
 
 (declare-fun o10 () Int)
 
+(declare-fun my_package__swap__y () Int)
+
 (declare-fun o11 () Int)
 
-(declare-fun my_package__swap__y () Int)
+(declare-fun my_package__swap__x () Int)
 
 (declare-fun result () integer)
 
@@ -494,6 +477,10 @@
 
 (declare-fun xx__split_fields3 () us_split_fields)
 
+(declare-fun my_package__swap__y1 () Int)
+
+(declare-fun my_package__swap__x1 () Int)
+
 ;; H
   (assert (in_range x))
 
@@ -531,13 +518,10 @@
   (assert (= my_package__bad_aliasing__z__assume1 z__split_fields3))
 
 ;; H
-  (assert (= o4 (my_package__bad_aliasing__a__aggregate_def 0)))
-
-;; H
   (assert (= result2 (mk_map__ref a)))
 
 ;; H
-  (assert (= a1 o4))
+  (assert (= a1 (my_package__bad_aliasing__a__aggregate_def 0)))
 
 ;; H
   (assert (= result3 (mk_int__ref i)))
@@ -592,19 +576,19 @@
   (assert (in_range my_package__only_read_f2_of_x__y))
 
 ;; H
-  (assert (= (to_rep o5) my_package__only_read_f2_of_x__y))
+  (assert (= (to_rep o4) my_package__only_read_f2_of_x__y))
 
 ;; H
-  (assert (= o5 o6))
+  (assert (= o4 o5))
 
 ;; H
-  (assert (= (rec__my_package__t__f2 xx__split_fields2) o7))
+  (assert (= (rec__my_package__t__f2 xx__split_fields2) o6))
 
 ;; H
-  (assert (= temp___198 o6))
+  (assert (= temp___198 o5))
 
 ;; H
-  (assert (= temp___1981 o7))
+  (assert (= temp___1981 o6))
 
 ;; H
   (assert (= result8 (mk___split_fields__ref xx__split_fields2)))
@@ -619,22 +603,33 @@
   (assert (and (<= 1 i1) (<= i1 2)))
 
 ;; H
-  (assert (= o8 i1))
+  (assert (= o7 i1))
 
 ;; H
-  (assert (= o9 (select a1 o8)))
+  (assert (= o8 (select a1 o7)))
 
 ;; H
-  (assert (= o10 (to_rep1 o9)))
+  (assert (= o9 (to_rep1 o8)))
 
 ;; H
-  (assert (and (= o11 o10) (in_range o10)))
+  (assert (and (= o10 o9) (in_range o9)))
 
 ;; H
-  (assert (= o11 my_package__swap__y))
+  (assert (= o10 my_package__swap__y))
+
+;; H
+  (assert
+  (and (= o11 (to_rep1 (select a1 1))) (in_range (to_rep1 (select a1 1)))))
+
+;; H
+  (assert (= o11 my_package__swap__x))
+
+;; H
+  (assert
+  (and (in_range my_package__swap__x1) (in_range my_package__swap__y1)))
 
 (assert
 ;; WP_parameter_def
  ;; File "my_package.adb", line 195, characters 0-0
-  (not (in_range (to_rep1 (select a1 1)))))
+  (not (in_range1 my_package__swap__x1)))
 (check-sat)

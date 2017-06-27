@@ -149,10 +149,7 @@
 
 ;; private_type__root__compat_axiom
   (assert
-  (forall ((r us_rep))
-  (! (=> (f__function_guard1 (f1 us_tag r) us_tag r)
-     (and (f__function_guard (f r) r) (= (f r) (f1 us_tag r)))) :pattern (
-  (f1 us_tag r)) )))
+  (forall ((r us_rep)) (! (= (f r) (f1 us_tag r)) :pattern ((f1 us_tag r)) )))
 
 (declare-fun r () us_rep)
 
@@ -173,13 +170,8 @@
 ;; private_type__root__compat_axiom
   (assert
   (forall ((r1 us_rep))
-  (! (=> (is_valid__function_guard1 (is_valid1 us_tag r1) us_tag r1)
-     (and (is_valid__function_guard (is_valid r1) r1)
-     (= (to_int1 (is_valid r1)) (to_int1 (is_valid1 us_tag r1))))) :pattern (
+  (! (= (to_int1 (is_valid r1)) (to_int1 (is_valid1 us_tag r1))) :pattern (
   (is_valid1 us_tag r1)) )))
-
-;; H
-  (assert (is_valid__function_guard (is_valid r) r))
 
 (assert
 ;; WP_parameter_def

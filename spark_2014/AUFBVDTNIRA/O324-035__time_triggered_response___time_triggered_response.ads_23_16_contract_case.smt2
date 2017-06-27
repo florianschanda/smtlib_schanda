@@ -270,16 +270,12 @@
   (assert
   (forall ((from Int))
   (forall ((time_triggered_response__history__idle_history (Array Int Bool)))
-  (! (=> (always_set_until_now__function_guard
-     (always_set_until_now from
-     time_triggered_response__history__idle_history) from
-     time_triggered_response__history__idle_history)
-     (=
+  (! (=
      (= (always_set_until_now from
         time_triggered_response__history__idle_history) true)
      (forall ((t Int))
      (=> (and (<= 0 t) (<= t from))
-     (= (select time_triggered_response__history__idle_history t) true))))) :pattern (
+     (= (select time_triggered_response__history__idle_history t) true)))) :pattern (
   (always_set_until_now from time_triggered_response__history__idle_history)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -295,18 +291,7 @@
   (assert
   (forall ((time_triggered_response__history__idle_history (Array Int Bool)))
   (forall ((time_triggered_response__time_idle Int))
-  (! (=> (valid__function_guard
-     (valid time_triggered_response__history__idle_history
-     time_triggered_response__time_idle)
-     time_triggered_response__history__idle_history
-     time_triggered_response__time_idle)
-     (and (always_set_until_now__function_guard
-     (always_set_until_now
-     (ite (< 50 (- time_triggered_response__time_idle 1)) 50 (- time_triggered_response__time_idle 1))
-     time_triggered_response__history__idle_history)
-     (ite (< 50 (- time_triggered_response__time_idle 1)) 50 (- time_triggered_response__time_idle 1))
-     time_triggered_response__history__idle_history)
-     (=
+  (! (=
      (= (valid time_triggered_response__history__idle_history
         time_triggered_response__time_idle) true)
      (and
@@ -316,7 +301,7 @@
         time_triggered_response__history__idle_history) true))
      (=> (<= time_triggered_response__time_idle 50)
      (not
-     (= (select time_triggered_response__history__idle_history time_triggered_response__time_idle) true))))))) :pattern (
+     (= (select time_triggered_response__history__idle_history time_triggered_response__time_idle) true))))) :pattern (
   (valid time_triggered_response__history__idle_history
   time_triggered_response__time_idle)) ))))
 
@@ -344,10 +329,6 @@
   (assert (in_range1 time_idle))
 
 ;; H
-  (assert (valid__function_guard (valid idle_history time_idle) idle_history
-  time_idle))
-
-;; H
   (assert (= (valid idle_history time_idle) true))
 
 ;; H
@@ -372,16 +353,8 @@
   (assert (= status4 status1))
 
 ;; H
-  (assert (always_set_until_now__function_guard
-  (always_set_until_now 9 idle_history) 9 idle_history))
-
-;; H
   (assert
   (=> (= (always_set_until_now 9 idle_history) true) (= status3 true)))
-
-;; H
-  (assert (always_set_until_now__function_guard
-  (always_set_until_now 9 idle_history) 9 idle_history))
 
 ;; H
   (assert (not (= (always_set_until_now 9 idle_history) true)))

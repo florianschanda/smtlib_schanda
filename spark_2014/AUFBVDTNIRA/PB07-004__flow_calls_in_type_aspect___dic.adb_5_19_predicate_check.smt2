@@ -59,9 +59,6 @@
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
 (define-fun t__ref___projection ((a t__ref)) t (t__content a))
 
-;; temp___result_173_def
-  (assert (blocking_true__function_guard (blocking_true Tuple0) Tuple0))
-
 (define-fun dynamic_invariant ((temp___expr_171 Int)
   (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
   (temp___do_toplevel_170 Bool)) Bool (and
@@ -73,10 +70,7 @@
                                       (=> (= temp___is_init_168 true)
                                       (= (blocking_true Tuple0) true)))))
 
-;; temp___result_178_def
-  (assert (blocking_true__function_guard (blocking_true Tuple0) Tuple0))
-
-(define-fun dynamic_predicate ((temp___176 Int)) Bool (= (blocking_true
+(define-fun dynamic_predicate ((temp___175 Int)) Bool (= (blocking_true
                                                          Tuple0) true))
 
 (declare-sort pt 0)
@@ -111,12 +105,8 @@
 ;; blocking_true__post_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (let ((result (blocking_true us_void_param)))
-     (=> (blocking_true__function_guard result us_void_param)
-     (= result true))) :pattern ((blocking_true us_void_param)) )))
-
-;; H
-  (assert (blocking_true__function_guard (blocking_true Tuple0) Tuple0))
+  (! (= (blocking_true us_void_param) true) :pattern ((blocking_true
+                                                      us_void_param)) )))
 
 (assert
 ;; WP_parameter_def

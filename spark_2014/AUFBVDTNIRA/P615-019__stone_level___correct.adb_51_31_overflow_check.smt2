@@ -128,21 +128,13 @@
 (declare-fun us_HEAP1 () us_type_of_heap)
 
 ;; H
-  (assert
-  (and (and (= o (get data2 us_HEAP)) (get__function_guard o data2 us_HEAP))
-  (in_range o)))
+  (assert (and (= o (get data2 us_HEAP)) (in_range o)))
 
 ;; H
-  (assert
-  (and
-  (and (= o1 (get data3 us_HEAP1)) (get__function_guard o1 data3 us_HEAP1))
-  (in_range o1)))
+  (assert (and (= o1 (get data3 us_HEAP1)) (in_range o1)))
 
 ;; H
-  (assert
-  (and
-  (and (= o2 (get data2 us_HEAP1)) (get__function_guard o2 data2 us_HEAP1))
-  (in_range o2)))
+  (assert (and (= o2 (get data2 us_HEAP1)) (in_range o2)))
 
 ;; H
   (assert (= o3 (+ o2 o1)))

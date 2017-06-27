@@ -250,13 +250,11 @@
 ;; is_nat32__def_axiom
   (assert
   (forall ((strong_data_type us_rep))
-  (! (=> (is_nat32__function_guard (is_nat32 strong_data_type)
-     strong_data_type)
-     (= (= (is_nat32 strong_data_type) true)
+  (! (= (= (is_nat32 strong_data_type) true)
      (= (to_rep1
         (rec__data__t_strong_data_type__data_type
-        (us_split_discrs1 strong_data_type))) 1))) :pattern ((is_nat32
-                                                             strong_data_type)) )))
+        (us_split_discrs1 strong_data_type))) 1)) :pattern ((is_nat32
+                                                            strong_data_type)) )))
 
 (declare-fun strong_data_type () us_rep)
 
@@ -274,10 +272,6 @@
   (temp___do_toplevel_140 Bool)) Bool (=>
                                       (or (= temp___is_init_138 true)
                                       (<= 0 1)) (in_range1 temp___expr_141)))
-
-;; H
-  (assert (is_nat32__function_guard (is_nat32 strong_data_type)
-  strong_data_type))
 
 ;; H
   (assert (= (is_nat32 strong_data_type) true))

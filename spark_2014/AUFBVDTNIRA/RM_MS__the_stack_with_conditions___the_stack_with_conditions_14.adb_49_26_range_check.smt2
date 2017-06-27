@@ -110,12 +110,12 @@
 (define-fun pointer_range__ref___projection ((a pointer_range__ref)) pointer_range 
   (pointer_range__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_148 Int)
-  (temp___is_init_145 Bool) (temp___skip_constant_146 Bool)
-  (temp___do_toplevel_147 Bool)) Bool (=>
-                                      (or (= temp___is_init_145 true)
+(define-fun dynamic_invariant1 ((temp___expr_143 Int)
+  (temp___is_init_140 Bool) (temp___skip_constant_141 Bool)
+  (temp___do_toplevel_142 Bool)) Bool (=>
+                                      (or (= temp___is_init_140 true)
                                       (<= 0 1024)) (in_range1
-                                      temp___expr_148)))
+                                      temp___expr_143)))
 
 ;; is_full__post_axiom
   (assert true)
@@ -123,12 +123,9 @@
 ;; is_full__def_axiom
   (assert
   (forall ((the_stack_with_conditions_14__pointer Int))
-  (! (=> (is_full__function_guard
-     (is_full the_stack_with_conditions_14__pointer)
-     the_stack_with_conditions_14__pointer)
-     (= (= (is_full the_stack_with_conditions_14__pointer) true)
-     (= the_stack_with_conditions_14__pointer 1024))) :pattern ((is_full
-                                                                the_stack_with_conditions_14__pointer)) )))
+  (! (= (= (is_full the_stack_with_conditions_14__pointer) true)
+     (= the_stack_with_conditions_14__pointer 1024)) :pattern ((is_full
+                                                               the_stack_with_conditions_14__pointer)) )))
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int integer))))))
@@ -267,12 +264,12 @@
 (define-fun index_range__ref___projection ((a index_range__ref)) index_range 
   (index_range__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_154 Int)
-  (temp___is_init_151 Bool) (temp___skip_constant_152 Bool)
-  (temp___do_toplevel_153 Bool)) Bool (=>
-                                      (or (= temp___is_init_151 true)
+(define-fun dynamic_invariant2 ((temp___expr_149 Int)
+  (temp___is_init_146 Bool) (temp___skip_constant_147 Bool)
+  (temp___do_toplevel_148 Bool)) Bool (=>
+                                      (or (= temp___is_init_146 true)
                                       (<= 1 1024)) (in_range2
-                                      temp___expr_154)))
+                                      temp___expr_149)))
 
 (declare-fun pointer () Int)
 
@@ -281,9 +278,6 @@
 
 ;; H
   (assert (in_range x))
-
-;; H
-  (assert (is_full__function_guard (is_full pointer) pointer))
 
 ;; H
   (assert (not (= (is_full pointer) true)))

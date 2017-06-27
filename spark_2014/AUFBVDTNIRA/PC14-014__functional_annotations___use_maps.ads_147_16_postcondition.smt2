@@ -1269,11 +1269,6 @@
 
 ;; H
   (assert
-  (forall ((k Int)) (q__function_guard (q (get (model__ s) k))
-  (get (model__ s) k))))
-
-;; H
-  (assert
   (forall ((k Int))
   (=> (and (in_range2 k) (= (has_key (model__ s) k) true))
   (= (q (get (model__ s) k)) true))))
@@ -1282,9 +1277,6 @@
 
 ;; H
   (assert (= (has_key1 (positions s) cu) true))
-
-;; H
-  (assert (q__function_guard (q (element s cu)) (element s cu)))
 
 (assert
 ;; WP_parameter_def

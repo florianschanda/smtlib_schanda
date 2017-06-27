@@ -51,14 +51,10 @@
 
 (declare-fun pow2 (Int) Int)
 
-(declare-datatypes () ((mode (RNE2) (RNA2) (RTP2) (RTN2) (RTZ2))))
-(define-fun to_nearest ((m mode)) Bool (or (= m RNE2) (= m RNA2)))
+(declare-datatypes () ((mode (RNE1) (RNA1) (RTP1) (RTN1) (RTZ1))))
+(define-fun to_nearest ((m mode)) Bool (or (= m RNE1) (= m RNA1)))
 
 (declare-fun zeroF () t)
-
-(declare-fun abs1 (t) t)
-
-(declare-fun neg (t) t)
 
 (declare-fun add (mode t t) t)
 
@@ -67,6 +63,10 @@
 (declare-fun mul (mode t t) t)
 
 (declare-fun div1 (mode t t) t)
+
+(declare-fun abs1 (t) t)
+
+(declare-fun neg (t) t)
 
 (declare-fun fma (mode t t t) t)
 
@@ -175,16 +175,16 @@
   (=> (tqtisFinite x) (= (round m (tqtreal x)) (tqtreal x)))))
 
 ;; Round_down_le
-  (assert (forall ((x Real)) (<= (round RTN2 x) x)))
+  (assert (forall ((x Real)) (<= (round RTN1 x) x)))
 
 ;; Round_up_ge
-  (assert (forall ((x Real)) (<= x (round RTP2 x))))
+  (assert (forall ((x Real)) (<= x (round RTP1 x))))
 
 ;; Round_down_neg
-  (assert (forall ((x Real)) (= (round RTN2 (- x)) (- (round RTP2 x)))))
+  (assert (forall ((x Real)) (= (round RTN1 (- x)) (- (round RTP1 x)))))
 
 ;; Round_up_neg
-  (assert (forall ((x Real)) (= (round RTP2 (- x)) (- (round RTN2 x)))))
+  (assert (forall ((x Real)) (= (round RTP1 (- x)) (- (round RTN1 x)))))
 
 (define-fun in_safe_int_range ((i Int)) Bool (and (<= (- 16777216) i)
                                              (<= i 16777216)))
@@ -322,10 +322,10 @@
               (=> (diff_sign x y) (is_negative z))))
 
 (define-fun overflow_value ((m mode)
-  (x t)) Bool (ite (is-RTN2 m) (ite (is_positive x)
+  (x t)) Bool (ite (is-RTN1 m) (ite (is_positive x)
                                (and (tqtisFinite x)
                                (= (tqtreal x) (* 33554430.0 10141204801825835211973625643008.0)))
-                               (is_infinite x)) (ite (is-RTP2 m) (ite (is_positive
+                               (is_infinite x)) (ite (is-RTP1 m) (ite (is_positive
                                                                  x)
                                                                  (is_infinite
                                                                  x)
@@ -334,7 +334,7 @@
                                                                  x)
                                                                  (= (tqtreal
                                                                     x) (- (* 33554430.0 10141204801825835211973625643008.0))))) 
-                                                (ite (is-RTZ2 m) (ite (is_positive
+                                                (ite (is-RTZ1 m) (ite (is_positive
                                                                  x)
                                                                  (and
                                                                  (tqtisFinite
@@ -346,12 +346,12 @@
                                                                  x)
                                                                  (= (tqtreal
                                                                     x) (- (* 33554430.0 10141204801825835211973625643008.0))))) 
-                                                (ite (is-RNA2 m) (is_infinite
+                                                (ite (is-RNA1 m) (is_infinite
                                                 x) (is_infinite x))))))
 
 (define-fun sign_zero_result ((m mode)
   (x t)) Bool (=> (is_zero x)
-              (ite (is-RTN2 m) (is_negative x) (is_positive x))))
+              (ite (is-RTN1 m) (is_negative x) (is_positive x))))
 
 ;; add_finite
   (assert
@@ -645,84 +645,84 @@
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (=> (is_negative x) (= (roundToIntegral RTZ2 x) (roundToIntegral RTP2 x))))))
+  (=> (is_negative x) (= (roundToIntegral RTZ1 x) (roundToIntegral RTP1 x))))))
 
 ;; truncate_pos
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (=> (is_positive x) (= (roundToIntegral RTZ2 x) (roundToIntegral RTN2 x))))))
+  (=> (is_positive x) (= (roundToIntegral RTZ1 x) (roundToIntegral RTN1 x))))))
 
 ;; ceil_le
   (assert
-  (forall ((x t)) (=> (tqtisFinite x) (le x (roundToIntegral RTP2 x)))))
+  (forall ((x t)) (=> (tqtisFinite x) (le x (roundToIntegral RTP1 x)))))
 
 ;; ceil_lest
   (assert
   (forall ((x t) (y t))
-  (=> (and (le x y) (is_int1 y)) (le (roundToIntegral RTP2 x) y))))
+  (=> (and (le x y) (is_int1 y)) (le (roundToIntegral RTP1 x) y))))
 
 ;; ceil_to_real
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (= (tqtreal (roundToIntegral RTP2 x)) (to_real (- 1 (to_int (- 1.0 
+  (= (tqtreal (roundToIntegral RTP1 x)) (to_real (- 1 (to_int (- 1.0 
   (tqtreal x)))))))))
 
 ;; ceil_to_int
   (assert
   (forall ((m mode) (x t))
   (=> (tqtisFinite x)
-  (= (to_int1 m (roundToIntegral RTP2 x)) (- 1 (to_int (- 1.0 (tqtreal x))))))))
+  (= (to_int1 m (roundToIntegral RTP1 x)) (- 1 (to_int (- 1.0 (tqtreal x))))))))
 
 ;; floor_le
   (assert
-  (forall ((x t)) (=> (tqtisFinite x) (le (roundToIntegral RTN2 x) x))))
+  (forall ((x t)) (=> (tqtisFinite x) (le (roundToIntegral RTN1 x) x))))
 
 ;; floor_lest
   (assert
   (forall ((x t) (y t))
-  (=> (and (le y x) (is_int1 y)) (le y (roundToIntegral RTN2 x)))))
+  (=> (and (le y x) (is_int1 y)) (le y (roundToIntegral RTN1 x)))))
 
 ;; floor_to_real
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (= (tqtreal (roundToIntegral RTN2 x)) (to_real (to_int (tqtreal x)))))))
+  (= (tqtreal (roundToIntegral RTN1 x)) (to_real (to_int (tqtreal x)))))))
 
 ;; floor_to_int
   (assert
   (forall ((m mode) (x t))
   (=> (tqtisFinite x)
-  (= (to_int1 m (roundToIntegral RTN2 x)) (to_int (tqtreal x))))))
+  (= (to_int1 m (roundToIntegral RTN1 x)) (to_int (tqtreal x))))))
 
 ;; RNA_down
   (assert
   (forall ((x t))
-  (=> (lt (sub RNE2 x (roundToIntegral RTN2 x))
-  (sub RNE2 (roundToIntegral RTP2 x) x))
-  (= (roundToIntegral RNA2 x) (roundToIntegral RTN2 x)))))
+  (=> (lt (sub RNE1 x (roundToIntegral RTN1 x))
+  (sub RNE1 (roundToIntegral RTP1 x) x))
+  (= (roundToIntegral RNA1 x) (roundToIntegral RTN1 x)))))
 
 ;; RNA_up
   (assert
   (forall ((x t))
-  (=> (lt (sub RNE2 (roundToIntegral RTP2 x) x)
-  (sub RNE2 x (roundToIntegral RTN2 x)))
-  (= (roundToIntegral RNA2 x) (roundToIntegral RTP2 x)))))
+  (=> (lt (sub RNE1 (roundToIntegral RTP1 x) x)
+  (sub RNE1 x (roundToIntegral RTN1 x)))
+  (= (roundToIntegral RNA1 x) (roundToIntegral RTP1 x)))))
 
 ;; RNA_down_tie
   (assert
   (forall ((x t))
-  (=> (eq (sub RNE2 x (roundToIntegral RTN2 x))
-  (sub RNE2 (roundToIntegral RTP2 x) x))
-  (=> (is_negative x) (= (roundToIntegral RNA2 x) (roundToIntegral RTN2 x))))))
+  (=> (eq (sub RNE1 x (roundToIntegral RTN1 x))
+  (sub RNE1 (roundToIntegral RTP1 x) x))
+  (=> (is_negative x) (= (roundToIntegral RNA1 x) (roundToIntegral RTN1 x))))))
 
 ;; RNA_up_tie
   (assert
   (forall ((x t))
-  (=> (eq (sub RNE2 (roundToIntegral RTP2 x) x)
-  (sub RNE2 x (roundToIntegral RTN2 x)))
-  (=> (is_positive x) (= (roundToIntegral RNA2 x) (roundToIntegral RTP2 x))))))
+  (=> (eq (sub RNE1 (roundToIntegral RTP1 x) x)
+  (sub RNE1 x (roundToIntegral RTN1 x)))
+  (=> (is_positive x) (= (roundToIntegral RNA1 x) (roundToIntegral RTP1 x))))))
 
 ;; to_int_roundToIntegral
   (assert
@@ -758,12 +758,12 @@
 ;; round_bound_ne
   (assert
   (forall ((x Real))
-  (! (=> (no_overflow RNE2 x)
+  (! (=> (no_overflow RNE1 x)
      (and
      (<= (- (- x (* (/ 1.0 16777216.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 1427247692705959881058285969449495136382746624.0)) 
-     (round RNE2 x))
-     (<= (round RNE2 x) (+ (+ x (* (/ 1.0 16777216.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 1427247692705959881058285969449495136382746624.0))))) :pattern (
-  (round RNE2 x)) )))
+     (round RNE1 x))
+     (<= (round RNE1 x) (+ (+ x (* (/ 1.0 16777216.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 1427247692705959881058285969449495136382746624.0))))) :pattern (
+  (round RNE1 x)) )))
 
 (define-fun neq ((x t) (y t)) Bool (not (eq x y)))
 
@@ -790,7 +790,7 @@
   (assert (is_int1 fliteral))
 
 ;; one_of_int
-  (assert (= fliteral (of_int RNA2 1)))
+  (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -1353,25 +1353,19 @@
 ;; classwide__t__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (is_zero__function_guard1 (is_zero2 us_tag v) us_tag v)
-     (and (is_zero__function_guard (is_zero1 v) v)
-     (= (to_int2 (is_zero1 v)) (to_int2 (is_zero2 us_tag v))))) :pattern (
+  (! (= (to_int2 (is_zero1 v)) (to_int2 (is_zero2 us_tag v))) :pattern (
   (is_zero2 us_tag v)) )))
 
 ;; classwide__u1__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (is_zero__function_guard1 (is_zero2 us_tag1 v) us_tag1 v)
-     (and (is_zero__2__function_guard (is_zero__2 v) v)
-     (= (to_int2 (is_zero__2 v)) (to_int2 (is_zero2 us_tag1 v))))) :pattern (
+  (! (= (to_int2 (is_zero__2 v)) (to_int2 (is_zero2 us_tag1 v))) :pattern (
   (is_zero2 us_tag1 v)) )))
 
 ;; classwide__u2__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (is_zero__function_guard1 (is_zero2 us_tag2 v) us_tag2 v)
-     (and (is_zero__3__function_guard (is_zero__3 (of_base v)) (of_base v))
-     (= (to_int2 (is_zero__3 (of_base v))) (to_int2 (is_zero2 us_tag2 v))))) :pattern (
+  (! (= (to_int2 (is_zero__3 (of_base v))) (to_int2 (is_zero2 us_tag2 v))) :pattern (
   (is_zero2 us_tag2 v)) )))
 
 (declare-fun fliteral1 () t)
@@ -1382,12 +1376,11 @@
 ;; is_zero__def_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (is_zero__function_guard (is_zero1 v) v)
-     (= (= (is_zero1 v) true)
+  (! (= (= (is_zero1 v) true)
      (and
      (and (not (= (rec__classwide__t__z (us_split_fields1 v)) true))
      (= (to_rep (rec__classwide__t__x (us_split_fields1 v))) 0)) (eq
-     (to_rep1 (rec__classwide__t__y (us_split_fields1 v))) fliteral1)))) :pattern (
+     (to_rep1 (rec__classwide__t__y (us_split_fields1 v))) fliteral1))) :pattern (
   (is_zero1 v)) )))
 
 (declare-fun v__attr__tag () Int)
@@ -1415,8 +1408,8 @@
                                      (neg fliteral2) fliteral2)) (tqtisFinite
                                      temp___expr_51)))
 
-(define-fun default_initial_assumption1 ((temp___expr_193 us_rep)
-  (temp___skip_top_level_194 Bool)) Bool (= (attr__tag temp___expr_193) 
+(define-fun default_initial_assumption1 ((temp___expr_165 us_rep)
+  (temp___skip_top_level_166 Bool)) Bool (= (attr__tag temp___expr_165) 
   us_tag1))
 
 ;; is_zero__2__post_axiom
@@ -1428,24 +1421,21 @@
 ;; classwide__u1__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (is_zero__2__function_guard1 (is_zero__21 us_tag1 v) us_tag1 v)
-     (and (is_zero__2__function_guard (is_zero__2 v) v)
-     (= (to_int2 (is_zero__2 v)) (to_int2 (is_zero__21 us_tag1 v))))) :pattern (
+  (! (= (to_int2 (is_zero__2 v)) (to_int2 (is_zero__21 us_tag1 v))) :pattern (
   (is_zero__21 us_tag1 v)) )))
 
 ;; is_zero__2__def_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (is_zero__2__function_guard (is_zero__2 v) v)
-     (= (= (is_zero__2 v) true)
+  (! (= (= (is_zero__2 v) true)
      (and
      (and (not (= (rec__classwide__t__z (us_split_fields1 v)) true))
      (= (to_rep (rec__classwide__t__x (us_split_fields1 v))) 0)) (eq
-     (to_rep1 (rec__classwide__t__y (us_split_fields1 v))) fliteral1)))) :pattern (
+     (to_rep1 (rec__classwide__t__y (us_split_fields1 v))) fliteral1))) :pattern (
   (is_zero__2 v)) )))
 
-(define-fun default_initial_assumption2 ((temp___expr_222 us_rep1)
-  (temp___skip_top_level_223 Bool)) Bool (= (attr__tag1 temp___expr_222) 
+(define-fun default_initial_assumption2 ((temp___expr_184 us_rep1)
+  (temp___skip_top_level_185 Bool)) Bool (= (attr__tag1 temp___expr_184) 
   us_tag2))
 
 ;; is_zero__3__post_axiom
@@ -1457,23 +1447,19 @@
 ;; classwide__u2__compat_axiom
   (assert
   (forall ((v us_rep1))
-  (! (=> (is_zero__3__function_guard1 (is_zero__31 us_tag2 v) us_tag2 v)
-     (and (is_zero__3__function_guard (is_zero__3 v) v)
-     (= (to_int2 (is_zero__3 v)) (to_int2 (is_zero__31 us_tag2 v))))) :pattern (
+  (! (= (to_int2 (is_zero__3 v)) (to_int2 (is_zero__31 us_tag2 v))) :pattern (
   (is_zero__31 us_tag2 v)) )))
 
 ;; is_zero__3__def_axiom
   (assert
   (forall ((v us_rep1))
-  (! (=> (is_zero__3__function_guard (is_zero__3 v) v)
-     (and (is_zero__function_guard (is_zero1 (to_base v)) (to_base v))
-     (= (= (is_zero__3 v) true)
+  (! (= (= (is_zero__3 v) true)
      (and
      (and
      (and (= (is_zero1 (to_base v)) true)
      (= (to_rep (rec__classwide__u2__w (us_split_fields3 v))) 0))
      (= (to_rep (rec__classwide__u2__xx (us_split_fields3 v))) 0)) (eq
-     (to_rep1 (rec__classwide__u2__yy (us_split_fields3 v))) fliteral1))))) :pattern (
+     (to_rep1 (rec__classwide__u2__yy (us_split_fields3 v))) fliteral1))) :pattern (
   (is_zero__3 v)) )))
 
 (declare-fun v__split_fields () Bool)
@@ -1494,15 +1480,15 @@
 
 (declare-fun o4 () us_private)
 
-(declare-fun temp___251 () Bool)
+(declare-fun temp___202 () Bool)
 
-(declare-fun temp___2511 () integer)
+(declare-fun temp___2021 () integer)
 
-(declare-fun temp___2512 () float)
+(declare-fun temp___2022 () float)
 
-(declare-fun temp___2513 () us_private)
+(declare-fun temp___2023 () us_private)
 
-(declare-fun temp___2514 () Int)
+(declare-fun temp___2024 () Int)
 
 (declare-fun o5 () float)
 
@@ -1514,15 +1500,15 @@
 
 (declare-fun o9 () us_private)
 
-(declare-fun temp___253 () Bool)
+(declare-fun temp___204 () Bool)
 
-(declare-fun temp___2531 () integer)
+(declare-fun temp___2041 () integer)
 
-(declare-fun temp___2532 () float)
+(declare-fun temp___2042 () float)
 
-(declare-fun temp___2533 () us_private)
+(declare-fun temp___2043 () us_private)
 
-(declare-fun temp___2534 () Int)
+(declare-fun temp___2044 () Int)
 
 (declare-fun result () Bool)
 
@@ -1628,19 +1614,19 @@
   (assert (= v__split_fields7 o4))
 
 ;; H
-  (assert (= temp___251 o1))
+  (assert (= temp___202 o1))
 
 ;; H
-  (assert (= temp___2511 o2))
+  (assert (= temp___2021 o2))
 
 ;; H
-  (assert (= temp___2512 o3))
+  (assert (= temp___2022 o3))
 
 ;; H
-  (assert (= temp___2513 o4))
+  (assert (= temp___2023 o4))
 
 ;; H
-  (assert (= v__attr__tag temp___2514))
+  (assert (= v__attr__tag temp___2024))
 
 ;; H
   (assert (= result4 v__split_fields4))
@@ -1655,16 +1641,16 @@
   (assert (= result7 v__split_fields7))
 
 ;; H
-  (assert (= temp___251 v__split_fields8))
+  (assert (= temp___202 v__split_fields8))
 
 ;; H
-  (assert (= temp___2511 v__split_fields9))
+  (assert (= temp___2021 v__split_fields9))
 
 ;; H
-  (assert (= temp___2512 v__split_fields10))
+  (assert (= temp___2022 v__split_fields10))
 
 ;; H
-  (assert (= temp___2513 v__split_fields11))
+  (assert (= temp___2023 v__split_fields11))
 
 ;; H
   (assert (= (to_rep1 o5) fliteral1))
@@ -1682,19 +1668,19 @@
   (assert (= v__split_fields11 o9))
 
 ;; H
-  (assert (= temp___253 o6))
+  (assert (= temp___204 o6))
 
 ;; H
-  (assert (= temp___2531 o7))
+  (assert (= temp___2041 o7))
 
 ;; H
-  (assert (= temp___2532 o8))
+  (assert (= temp___2042 o8))
 
 ;; H
-  (assert (= temp___2533 o9))
+  (assert (= temp___2043 o9))
 
 ;; H
-  (assert (= v__attr__tag temp___2534))
+  (assert (= v__attr__tag temp___2044))
 
 ;; H
   (assert (= result8 v__split_fields8))
@@ -1709,16 +1695,16 @@
   (assert (= result11 v__split_fields11))
 
 ;; H
-  (assert (= temp___253 v__split_fields12))
+  (assert (= temp___204 v__split_fields12))
 
 ;; H
-  (assert (= temp___2531 v__split_fields13))
+  (assert (= temp___2041 v__split_fields13))
 
 ;; H
-  (assert (= temp___2532 v__split_fields14))
+  (assert (= temp___2042 v__split_fields14))
 
 ;; H
-  (assert (= temp___2533 v__split_fields15))
+  (assert (= temp___2043 v__split_fields15))
 
 ;; H
   (assert (= v__split_fields16 v__split_fields12))
@@ -1743,16 +1729,6 @@
 
 ;; H
   (assert (= v__split_fields23 v__split_fields15))
-
-;; H
-  (assert (is_zero__function_guard
-  (is_zero1
-  (mk___rep
-  (mk___split_fields v__split_fields16 v__split_fields17 v__split_fields18
-  v__split_fields19) v__attr__tag))
-  (mk___rep
-  (mk___split_fields v__split_fields16 v__split_fields17 v__split_fields18
-  v__split_fields19) v__attr__tag)))
 
 (assert
 ;; WP_parameter_def

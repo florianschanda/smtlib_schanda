@@ -1110,16 +1110,13 @@
 ;; f__post_axiom
   (assert
   (forall ((e Int))
-  (! (=> (dynamic_invariant8 e true true true)
-     (let ((result (f e)))
-     (=> (f__function_guard result e) (dynamic_invariant8 result true false
-     true)))) :pattern ((f e)) )))
+  (! (=> (dynamic_invariant8 e true true true) (dynamic_invariant8 (f e) true
+     false true)) :pattern ((f e)) )))
 
 ;; f__def_axiom
   (assert
   (forall ((e Int))
-  (! (=>
-     (and (dynamic_invariant8 e true true true) (f__function_guard (f e) e))
+  (! (=> (dynamic_invariant8 e true true true)
      (= (f e) (ite (and (<= (- 100) e) (<= e 100)) (* e 2) e))) :pattern (
   (f e)) )))
 
@@ -1400,7 +1397,7 @@
 
 (declare-fun o2 () Int)
 
-(declare-fun temp___749 () count_type)
+(declare-fun temp___706 () count_type)
 
 (declare-fun o3 () Bool)
 
@@ -1434,8 +1431,8 @@
 (define-fun cu__split_fields5 () us_split_fields2 (mk___split_fields1
                                                   cu__split_fields1))
 
-(define-fun temp___7491 () us_rep1 (mk___rep1
-                                   (mk___split_fields1 temp___749)))
+(define-fun temp___7061 () us_rep1 (mk___rep1
+                                   (mk___split_fields1 temp___706)))
 
 (define-fun use_ordered_maps__apply_f_3__cu__assume1 () us_rep1 (mk___rep1
                                                                 (mk___split_fields1
@@ -1485,17 +1482,6 @@
 
 ;; H
   (assert (= result1 true))
-
-;; H
-  (assert
-  (forall ((i Int)) (f__function_guard
-  (f
-  (get
-  (model__ (mk___rep s__split_discrs (mk___split_fields s__split_fields)))
-  (get1 (keys (mk___rep s__split_discrs s__split_fields4)) i)))
-  (get
-  (model__ (mk___rep s__split_discrs (mk___split_fields s__split_fields)))
-  (get1 (keys (mk___rep s__split_discrs s__split_fields4)) i)))))
 
 ;; H
   (assert
@@ -1569,7 +1555,7 @@
 
 ;; H
   (assert
-  (and (and (= o2 (f o1)) (f__function_guard o2 o1))
+  (and (= o2 (f o1))
   (and (in_range9 o2)
   (= o2 (ite (and (<= (- 100) o1) (<= o1 100)) (* o1 2) o1)))))
 
@@ -1638,19 +1624,19 @@
 ;; H
   (assert
   (and
-  (= temp___7491 (next (mk___rep s__split_discrs s__split_fields3)
+  (= temp___7061 (next (mk___rep s__split_discrs s__split_fields3)
                  (mk___rep1 cu__split_fields4)))
   (ite (= (ite (= (bool_eq2 (mk___rep1 cu__split_fields4) no_element) false) (= 
           (get2 (positions (mk___rep s__split_discrs s__split_fields3))
           (mk___rep1 cu__split_fields4)) (length
                                          (mk___rep s__split_discrs
                                          s__split_fields3))) true) true)
-  (= (bool_eq2 temp___7491 no_element) true)
+  (= (bool_eq2 temp___7061 no_element) true)
   (and
   (= (has_key1 (positions (mk___rep s__split_discrs s__split_fields3))
-     temp___7491) true)
+     temp___7061) true)
   (= (get2 (positions (mk___rep s__split_discrs s__split_fields3))
-     temp___7491) (+ (get2
+     temp___7061) (+ (get2
                      (positions (mk___rep s__split_discrs s__split_fields3))
                      (mk___rep1 cu__split_fields4)) 1))))))
 
@@ -1658,7 +1644,7 @@
   (assert (= result2 cu__split_fields2))
 
 ;; H
-  (assert (= cu__split_fields3 (mk___split_fields1 temp___749)))
+  (assert (= cu__split_fields3 (mk___split_fields1 temp___706)))
 
 ;; H
   (assert
@@ -1684,16 +1670,6 @@
   (assert
   (<= i (- (get2 (positions (mk___rep s__split_discrs s__split_fields3))
            (mk___rep1 cu__split_fields3)) 1)))
-
-;; H
-  (assert (f__function_guard
-  (f
-  (get
-  (model__ (mk___rep s__split_discrs (mk___split_fields s__split_fields)))
-  (get1 (keys (mk___rep s__split_discrs s__split_fields3)) i)))
-  (get
-  (model__ (mk___rep s__split_discrs (mk___split_fields s__split_fields)))
-  (get1 (keys (mk___rep s__split_discrs s__split_fields3)) i))))
 
 (assert
 ;; WP_parameter_def

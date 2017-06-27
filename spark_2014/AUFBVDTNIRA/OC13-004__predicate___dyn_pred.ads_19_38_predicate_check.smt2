@@ -159,11 +159,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-;; temp___result_145_def
-  (assert
-  (forall ((temp___143 us_rep)) (is_positive__function_guard
-  (is_positive temp___143) temp___143)))
-
 (define-fun dynamic_predicate ((temp___142 us_rep)) Bool (and
                                                          (not
                                                          (= (to_rep
@@ -201,10 +196,9 @@
 ;; is_positive__def_axiom
   (assert
   (forall ((the_limit us_rep))
-  (! (=> (is_positive__function_guard (is_positive the_limit) the_limit)
-     (= (= (is_positive the_limit) true)
+  (! (= (= (is_positive the_limit) true)
      (< 0 (to_rep
-          (rec__dyn_pred__non_zero_type__val (us_split_fields1 the_limit)))))) :pattern (
+          (rec__dyn_pred__non_zero_type__val (us_split_fields1 the_limit))))) :pattern (
   (is_positive the_limit)) )))
 
 ;; one__def_axiom
@@ -214,7 +208,7 @@
 
 (declare-fun o1 () integer)
 
-(declare-fun temp___149 () integer)
+(declare-fun temp___147 () integer)
 
 ;; H
   (assert (= (to_rep o) 1))
@@ -223,10 +217,10 @@
   (assert (= o o1))
 
 ;; H
-  (assert (= temp___149 o1))
+  (assert (= temp___147 o1))
 
 (assert
 ;; WP_parameter_def
  ;; File "dyn_pred.ads", line 12, characters 0-0
-  (not (dynamic_predicate (mk___rep (mk___split_fields temp___149)))))
+  (not (dynamic_predicate (mk___rep (mk___split_fields temp___147)))))
 (check-sat)

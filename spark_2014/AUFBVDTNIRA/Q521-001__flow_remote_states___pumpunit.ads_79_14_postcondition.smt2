@@ -478,11 +478,11 @@
 (define-fun internal_state__ref___projection ((a internal_state__ref)) internal_state 
   (internal_state__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_589 Int)
-  (temp___is_init_586 Bool) (temp___skip_constant_587 Bool)
-  (temp___do_toplevel_588 Bool)) Bool (=>
-                                      (or (= temp___is_init_586 true)
-                                      (<= 0 3)) (in_range4 temp___expr_589)))
+(define-fun dynamic_invariant1 ((temp___expr_563 Int)
+  (temp___is_init_560 Bool) (temp___skip_constant_561 Bool)
+  (temp___do_toplevel_562 Bool)) Bool (=>
+                                      (or (= temp___is_init_560 true)
+                                      (<= 0 3)) (in_range4 temp___expr_563)))
 
 ;; is_waiting__post_axiom
   (assert true)
@@ -490,9 +490,7 @@
 ;; is_waiting__def_axiom
   (assert
   (forall ((pumpunit__cur_state Int))
-  (! (=> (is_waiting__function_guard (is_waiting pumpunit__cur_state)
-     pumpunit__cur_state)
-     (= (= (is_waiting pumpunit__cur_state) true) (= pumpunit__cur_state 2))) :pattern (
+  (! (= (= (is_waiting pumpunit__cur_state) true) (= pumpunit__cur_state 2)) :pattern (
   (is_waiting pumpunit__cur_state)) )))
 
 (declare-fun is_ready (Int) Bool)
@@ -505,9 +503,7 @@
 ;; is_ready__def_axiom
   (assert
   (forall ((pumpunit__cur_state Int))
-  (! (=> (is_ready__function_guard (is_ready pumpunit__cur_state)
-     pumpunit__cur_state)
-     (= (= (is_ready pumpunit__cur_state) true) (= pumpunit__cur_state 1))) :pattern (
+  (! (= (= (is_ready pumpunit__cur_state) true) (= pumpunit__cur_state 1)) :pattern (
   (is_ready pumpunit__cur_state)) )))
 
 (declare-fun is_base (Int) Bool)
@@ -520,9 +516,7 @@
 ;; is_base__def_axiom
   (assert
   (forall ((pumpunit__cur_state Int))
-  (! (=> (is_base__function_guard (is_base pumpunit__cur_state)
-     pumpunit__cur_state)
-     (= (= (is_base pumpunit__cur_state) true) (= pumpunit__cur_state 3))) :pattern (
+  (! (= (= (is_base pumpunit__cur_state) true) (= pumpunit__cur_state 3)) :pattern (
   (is_base pumpunit__cur_state)) )))
 
 (declare-fun pump_index () Int)
@@ -629,12 +623,6 @@
 (declare-fun cur_pump__split_fields18 () nat_type)
 
 (declare-fun cur_pump__split_fields19 () nat_type)
-
-;; H
-  (assert (is_base__function_guard (is_base cur_state) cur_state))
-
-;; H
-  (assert (is_waiting__function_guard (is_waiting cur_state) cur_state))
 
 ;; H
   (assert (in_range4 cur_state))
@@ -760,9 +748,6 @@
 
 ;; H
   (assert (= cur_state4 cur_state2))
-
-;; H
-  (assert (is_ready__function_guard (is_ready cur_state3) cur_state3))
 
 (assert
 ;; WP_parameter_def

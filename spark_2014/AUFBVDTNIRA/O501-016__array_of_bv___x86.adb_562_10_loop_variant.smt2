@@ -565,9 +565,8 @@
   (forall ((x86__memory (Array (_ BitVec 64) unsigned8)))
   (! (=> (dynamic_invariant addr true true true)
      (let ((result (readmem8 addr x86__memory)))
-     (=> (readmem8__function_guard result addr x86__memory)
      (and (= result (to_rep (select x86__memory addr))) (dynamic_invariant1
-     result true false true))))) :pattern ((readmem8 addr x86__memory)) ))))
+     result true false true)))) :pattern ((readmem8 addr x86__memory)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
 
@@ -595,11 +594,11 @@
 
 (declare-fun val2 () (_ BitVec 8))
 
-(declare-fun temp___410 () (_ BitVec 64))
+(declare-fun temp___340 () (_ BitVec 64))
 
 (declare-fun result () (_ BitVec 64))
 
-(declare-fun temp___4101 () (_ BitVec 64))
+(declare-fun temp___3401 () (_ BitVec 64))
 
 (declare-fun result1 () (_ BitVec 8))
 
@@ -636,16 +635,14 @@
   (assert (bvugt rcx1 ((_ int2bv 64) 0)))
 
 ;; H
-  (assert (= result temp___410))
+  (assert (= result temp___340))
 
 ;; H
-  (assert (= temp___4101 rcx1))
+  (assert (= temp___3401 rcx1))
 
 ;; H
   (assert
-  (and
-  (and (= o (readmem8 rsi memory)) (readmem8__function_guard o rsi memory))
-  (= o (to_rep (select memory rsi)))))
+  (and (= o (readmem8 rsi memory)) (= o (to_rep (select memory rsi)))))
 
 ;; H
   (assert (= result1 val1))
@@ -655,9 +652,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o1 (readmem8 rdi memory)) (readmem8__function_guard o1 rdi memory))
-  (= o1 (to_rep (select memory rdi)))))
+  (and (= o1 (readmem8 rdi memory)) (= o1 (to_rep (select memory rdi)))))
 
 ;; H
   (assert (= result2 val2))
@@ -710,5 +705,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "x86.ads", line 489, characters 0-0
-  (not (bvult rcx2 temp___4101)))
+  (not (bvult rcx2 temp___3401)))
 (check-sat)

@@ -267,8 +267,8 @@
 (define-fun widget_t__ref___projection ((a widget_t__ref)) us_rep1 (widget_t__content
                                                                    a))
 
-(define-fun default_initial_assumption ((temp___expr_152 us_rep1)
-  (temp___skip_top_level_153 Bool)) Bool (= (attr__tag1 temp___expr_152) 
+(define-fun default_initial_assumption ((temp___expr_148 us_rep1)
+  (temp___skip_top_level_149 Bool)) Bool (= (attr__tag1 temp___expr_148) 
   us_tag1))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
@@ -458,8 +458,8 @@
 (define-fun nice_widget_t__ref___projection ((a nice_widget_t__ref)) us_rep2 
   (nice_widget_t__content a))
 
-(define-fun default_initial_assumption1 ((temp___expr_170 us_rep2)
-  (temp___skip_top_level_171 Bool)) Bool (= (attr__tag2 temp___expr_170) 
+(define-fun default_initial_assumption1 ((temp___expr_163 us_rep2)
+  (temp___skip_top_level_164 Bool)) Bool (= (attr__tag2 temp___expr_163) 
   us_tag2))
 
 (declare-datatypes ()
@@ -550,16 +550,16 @@
 (declare-datatypes () ((pair__ref (mk_pair__ref (pair__content us_rep3)))))
 (define-fun pair__ref___projection ((a pair__ref)) us_rep3 (pair__content a))
 
-(define-fun default_initial_assumption2 ((temp___expr_207 us_rep3)
-  (temp___skip_top_level_208 Bool)) Bool (and
+(define-fun default_initial_assumption2 ((temp___expr_198 us_rep3)
+  (temp___skip_top_level_199 Bool)) Bool (and
                                          (= (attr__tag1
                                             (rec__tests__pair__a
                                             (us_split_fields7
-                                            temp___expr_207))) us_tag1)
+                                            temp___expr_198))) us_tag1)
                                          (= (attr__tag2
                                             (rec__tests__pair__b
                                             (us_split_fields7
-                                            temp___expr_207))) us_tag2)))
+                                            temp___expr_198))) us_tag2)))
 
 (declare-fun a__attr__tag () Int)
 
@@ -662,21 +662,21 @@
 
 (declare-fun usq_3 () Int)
 
-(declare-fun temp___466 () integer)
+(declare-fun temp___451 () integer)
 
-(declare-fun temp___4661 () integer)
+(declare-fun temp___4511 () integer)
 
-(declare-fun temp___4662 () us_private)
+(declare-fun temp___4512 () us_private)
 
-(declare-fun temp___4663 () Int)
+(declare-fun temp___4513 () Int)
 
 (declare-fun usq_4 () us_rep1)
 
-(declare-fun temp___468 () us_rep1)
+(declare-fun temp___453 () us_rep1)
 
 (declare-fun usq_5 () us_rep1)
 
-(declare-fun temp___470 () us_rep1)
+(declare-fun temp___455 () us_rep1)
 
 (declare-fun result () us_split_fields__ref3)
 
@@ -776,16 +776,16 @@
                                                              c))))
 
 ;; H
-  (assert (= usq_ temp___466))
+  (assert (= usq_ temp___451))
 
 ;; H
-  (assert (= usq_1 temp___4661))
+  (assert (= usq_1 temp___4511))
 
 ;; H
-  (assert (= usq_2 temp___4662))
+  (assert (= usq_2 temp___4512))
 
 ;; H
-  (assert (= e__attr__tag temp___4663))
+  (assert (= e__attr__tag temp___4513))
 
 ;; H
   (assert
@@ -795,7 +795,7 @@
 
 ;; H
   (assert
-  (= e__split_fields3 (mk___split_fields1 temp___466 temp___4661 temp___4662)))
+  (= e__split_fields3 (mk___split_fields1 temp___451 temp___4511 temp___4512)))
 
 ;; H
   (assert (= f__attr__tag a__attr__tag))
@@ -804,7 +804,7 @@
   (assert (= usq_4 (mk___rep1 a__split_fields3 a__attr__tag)))
 
 ;; H
-  (assert (= temp___468 (mk___rep1 (us_split_fields3 usq_4) f__attr__tag)))
+  (assert (= temp___453 (mk___rep1 (us_split_fields3 usq_4) f__attr__tag)))
 
 ;; H
   (assert
@@ -813,7 +813,7 @@
              f__split_fields2))))
 
 ;; H
-  (assert (= f__split_fields3 (us_split_fields3 temp___468)))
+  (assert (= f__split_fields3 (us_split_fields3 temp___453)))
 
 ;; H
   (assert
@@ -853,7 +853,7 @@
            (attr__tag2 (rec__tests__pair__b (us_split_fields7 c)))))))
 
 ;; H
-  (assert (= temp___470 (mk___rep1 (us_split_fields3 usq_5) g__attr__tag)))
+  (assert (= temp___455 (mk___rep1 (us_split_fields3 usq_5) g__attr__tag)))
 
 ;; H
   (assert
@@ -862,7 +862,7 @@
              g__split_fields2))))
 
 ;; H
-  (assert (= g__split_fields3 (us_split_fields3 temp___470)))
+  (assert (= g__split_fields3 (us_split_fields3 temp___455)))
 
 (assert
 ;; WP_parameter_def

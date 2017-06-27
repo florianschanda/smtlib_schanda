@@ -287,13 +287,12 @@
   (assert
   (forall ((c (Array Int natural)))
   (forall ((p us_rep))
-  (! (=> (has_element__function_guard (has_element c p) c p)
-     (= (= (has_element c p) true)
+  (! (= (= (has_element c p) true)
      (and
      (<= 1 (to_rep
            (rec__my_container_model__cursor__index (us_split_fields1 p))))
      (<= (to_rep
-         (rec__my_container_model__cursor__index (us_split_fields1 p))) 100)))) :pattern (
+         (rec__my_container_model__cursor__index (us_split_fields1 p))) 100))) :pattern (
   (has_element c p)) ))))
 
 (declare-fun c () (Array Int natural))
@@ -317,9 +316,6 @@
                                       (or (= temp___is_init_133 true)
                                       (<= 1 100)) (in_range1
                                       temp___expr_136)))
-
-;; H
-  (assert (has_element__function_guard (has_element c p) c p))
 
 ;; H
   (assert (= (has_element c p) true))

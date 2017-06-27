@@ -1981,7 +1981,7 @@
   (assert (= o12 header2))
 
 ;; H
-  (assert (and (= o13 (to_bytes2 o12)) (to_bytes__function_guard2 o13 o12)))
+  (assert (= o13 (to_bytes2 o12)))
 
 ;; H
   (assert (= o14 (mk___t o13 (mk 1 3))))

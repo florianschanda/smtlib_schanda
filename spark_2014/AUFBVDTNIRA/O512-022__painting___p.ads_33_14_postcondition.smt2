@@ -411,9 +411,7 @@
   (forall ((p us_rep1))
   (forall ((c Int))
   (forall ((d us_rep))
-  (! (=> (plain_is_dot__function_guard (plain_is_dot p c d) p c d)
-     (and (get_plain__function_guard (get_plain p c) p c)
-     (= (= (plain_is_dot p c d) true) (= (bool_eq1 (get_plain p c) d) true)))) :pattern (
+  (! (= (= (plain_is_dot p c d) true) (= (bool_eq1 (get_plain p c) d) true)) :pattern (
   (plain_is_dot p c d)) )))))
 
 (declare-fun some_plain_is_dot (us_rep1 us_rep) Bool)
@@ -427,13 +425,9 @@
   (assert
   (forall ((p us_rep1))
   (forall ((d us_rep))
-  (! (=> (some_plain_is_dot__function_guard (some_plain_is_dot p d) p d)
-     (and
-     (forall ((c Int)) (plain_is_dot__function_guard (plain_is_dot p c d) p c
-     d))
-     (= (= (some_plain_is_dot p d) true)
+  (! (= (= (some_plain_is_dot p d) true)
      (exists ((c Int))
-     (and (and (<= 0 c) (<= c 2)) (= (plain_is_dot p c d) true)))))) :pattern (
+     (and (and (<= 0 c) (<= c 2)) (= (plain_is_dot p c d) true)))) :pattern (
   (some_plain_is_dot p d)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -456,9 +450,7 @@
   (assert
   (forall ((p us_rep1))
   (forall ((c Int))
-  (! (=>
-     (and (dynamic_invariant c true true true) (get_plain__function_guard
-     (get_plain p c) p c))
+  (! (=> (dynamic_invariant c true true true)
      (= (get_plain p c) (let ((temp___188 (rec__p__painting__plain
                                           (us_split_fields3 p))))
                         (select temp___188 c)))) :pattern ((get_plain p c)) ))))
@@ -478,12 +470,6 @@
 (declare-fun p__split_fields6 () (Array Int us_rep))
 
 (declare-fun p__split_fields7 () (Array Int us_rep))
-
-;; H
-  (assert (some_plain_is_dot__function_guard
-  (some_plain_is_dot
-  (mk___rep1 (mk___split_fields1 p__split_fields p__split_fields1)) d)
-  (mk___rep1 (mk___split_fields1 p__split_fields p__split_fields1)) d))
 
 ;; H
   (assert
@@ -517,13 +503,6 @@
 
 ;; H
   (assert (<= c 2))
-
-;; H
-  (assert (plain_is_dot__function_guard
-  (plain_is_dot
-  (mk___rep1 (mk___split_fields1 p__split_fields p__split_fields1)) c 
-  d) (mk___rep1 (mk___split_fields1 p__split_fields p__split_fields1)) 
-  c d))
 
 ;; H
   (assert

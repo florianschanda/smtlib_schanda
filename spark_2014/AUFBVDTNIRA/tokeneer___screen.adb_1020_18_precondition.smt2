@@ -489,11 +489,9 @@
 
 ;; theauditalarm__post_axiom
   (assert
-  (forall ((auditlog__state us_private))
-  (! (let ((result (theauditalarm auditlog__state)))
-     (=> (theauditalarm__function_guard result auditlog__state)
-     (dynamic_invariant result true false true))) :pattern ((theauditalarm
-                                                            auditlog__state)) )))
+  (forall ((auditlog__state us_private)) (! (dynamic_invariant
+  (theauditalarm auditlog__state) true false
+  true) :pattern ((theauditalarm auditlog__state)) )))
 
 (declare-fun thedooralarm (us_private) Int)
 
@@ -501,10 +499,9 @@
 
 ;; thedooralarm__post_axiom
   (assert
-  (forall ((door__state us_private))
-  (! (let ((result (thedooralarm door__state)))
-     (=> (thedooralarm__function_guard result door__state) (dynamic_invariant
-     result true false true))) :pattern ((thedooralarm door__state)) )))
+  (forall ((door__state us_private)) (! (dynamic_invariant
+  (thedooralarm door__state) true false
+  true) :pattern ((thedooralarm door__state)) )))
 
 (declare-sort statscount 0)
 
@@ -893,12 +890,11 @@
 (define-fun msgtextt__ref___projection ((a msgtextt__ref)) msgtextt (msgtextt__content
                                                                     a))
 
-(define-fun dynamic_invariant1 ((temp___expr_1076 Int)
-  (temp___is_init_1073 Bool) (temp___skip_constant_1074 Bool)
-  (temp___do_toplevel_1075 Bool)) Bool (=>
-                                       (or (= temp___is_init_1073 true)
-                                       (<= 0 14)) (in_range8
-                                       temp___expr_1076)))
+(define-fun dynamic_invariant1 ((temp___expr_995 Int)
+  (temp___is_init_992 Bool) (temp___skip_constant_993 Bool)
+  (temp___do_toplevel_994 Bool)) Bool (=>
+                                      (or (= temp___is_init_992 true)
+                                      (<= 0 14)) (in_range8 temp___expr_995)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -1692,9 +1688,9 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS13 () Int)
 
-(declare-fun temp___String_Literal_1312 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_1231 (tuple0) (Array Int character))
 
-;; temp___String_Literal_1312__def_axiom
+;; temp___String_Literal_1231__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -1717,28 +1713,28 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_1312 us_void_param) 1)) 83)
-     (= (to_rep (select (temp___String_Literal_1312 us_void_param) 2)) 99))
-     (= (to_rep (select (temp___String_Literal_1312 us_void_param) 3)) 114))
-     (= (to_rep (select (temp___String_Literal_1312 us_void_param) 4)) 101))
-     (= (to_rep (select (temp___String_Literal_1312 us_void_param) 5)) 101))
-     (= (to_rep (select (temp___String_Literal_1312 us_void_param) 6)) 110))
-     (= (to_rep (select (temp___String_Literal_1312 us_void_param) 7)) 32))
-     (= (to_rep (select (temp___String_Literal_1312 us_void_param) 8)) 85))
-     (= (to_rep (select (temp___String_Literal_1312 us_void_param) 9)) 112))
-     (= (to_rep (select (temp___String_Literal_1312 us_void_param) 10)) 100))
-     (= (to_rep (select (temp___String_Literal_1312 us_void_param) 11)) 97))
-     (= (to_rep (select (temp___String_Literal_1312 us_void_param) 12)) 116))
-     (= (to_rep (select (temp___String_Literal_1312 us_void_param) 13)) 101))
-     (= (to_rep (select (temp___String_Literal_1312 us_void_param) 14)) 32))
-     (= (to_rep (select (temp___String_Literal_1312 us_void_param) 15)) 70))
-     (= (to_rep (select (temp___String_Literal_1312 us_void_param) 16)) 97))
-     (= (to_rep (select (temp___String_Literal_1312 us_void_param) 17)) 105))
-     (= (to_rep (select (temp___String_Literal_1312 us_void_param) 18)) 108))
-     (= (to_rep (select (temp___String_Literal_1312 us_void_param) 19)) 117))
-     (= (to_rep (select (temp___String_Literal_1312 us_void_param) 20)) 114))
-     (= (to_rep (select (temp___String_Literal_1312 us_void_param) 21)) 101)) :pattern (
-  (temp___String_Literal_1312 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_1231 us_void_param) 1)) 83)
+     (= (to_rep (select (temp___String_Literal_1231 us_void_param) 2)) 99))
+     (= (to_rep (select (temp___String_Literal_1231 us_void_param) 3)) 114))
+     (= (to_rep (select (temp___String_Literal_1231 us_void_param) 4)) 101))
+     (= (to_rep (select (temp___String_Literal_1231 us_void_param) 5)) 101))
+     (= (to_rep (select (temp___String_Literal_1231 us_void_param) 6)) 110))
+     (= (to_rep (select (temp___String_Literal_1231 us_void_param) 7)) 32))
+     (= (to_rep (select (temp___String_Literal_1231 us_void_param) 8)) 85))
+     (= (to_rep (select (temp___String_Literal_1231 us_void_param) 9)) 112))
+     (= (to_rep (select (temp___String_Literal_1231 us_void_param) 10)) 100))
+     (= (to_rep (select (temp___String_Literal_1231 us_void_param) 11)) 97))
+     (= (to_rep (select (temp___String_Literal_1231 us_void_param) 12)) 116))
+     (= (to_rep (select (temp___String_Literal_1231 us_void_param) 13)) 101))
+     (= (to_rep (select (temp___String_Literal_1231 us_void_param) 14)) 32))
+     (= (to_rep (select (temp___String_Literal_1231 us_void_param) 15)) 70))
+     (= (to_rep (select (temp___String_Literal_1231 us_void_param) 16)) 97))
+     (= (to_rep (select (temp___String_Literal_1231 us_void_param) 17)) 105))
+     (= (to_rep (select (temp___String_Literal_1231 us_void_param) 18)) 108))
+     (= (to_rep (select (temp___String_Literal_1231 us_void_param) 19)) 117))
+     (= (to_rep (select (temp___String_Literal_1231 us_void_param) 20)) 114))
+     (= (to_rep (select (temp___String_Literal_1231 us_void_param) 21)) 101)) :pattern (
+  (temp___String_Literal_1231 us_void_param)) )))
 
 (define-fun dynamic_invariant2 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -1768,12 +1764,11 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(define-fun dynamic_invariant6 ((temp___expr_1001 Int)
-  (temp___is_init_998 Bool) (temp___skip_constant_999 Bool)
-  (temp___do_toplevel_1000 Bool)) Bool (=>
-                                       (or (= temp___is_init_998 true)
-                                       (<= 0 4)) (in_range7
-                                       temp___expr_1001)))
+(define-fun dynamic_invariant6 ((temp___expr_950 Int)
+  (temp___is_init_947 Bool) (temp___skip_constant_948 Bool)
+  (temp___do_toplevel_949 Bool)) Bool (=>
+                                      (or (= temp___is_init_947 true)
+                                      (<= 0 4)) (in_range7 temp___expr_950)))
 
 (define-fun dynamic_invariant7 ((temp___expr_848 Int)
   (temp___is_init_845 Bool) (temp___skip_constant_846 Bool)
@@ -1820,12 +1815,12 @@
                                       (<= 0 2147483647)) (in_range11
                                       temp___expr_784)))
 
-(define-fun dynamic_invariant13 ((temp___expr_952 Int)
-  (temp___is_init_949 Bool) (temp___skip_constant_950 Bool)
-  (temp___do_toplevel_951 Bool)) Bool (=>
-                                      (or (= temp___is_init_949 true)
+(define-fun dynamic_invariant13 ((temp___expr_901 Int)
+  (temp___is_init_898 Bool) (temp___skip_constant_899 Bool)
+  (temp___do_toplevel_900 Bool)) Bool (=>
+                                      (or (= temp___is_init_898 true)
                                       (<= 0 2147483647)) (in_range5
-                                      temp___expr_952)))
+                                      temp___expr_901)))
 
 (declare-fun state () us_private)
 
@@ -2030,16 +2025,10 @@
   (assert (= screenok1 (ite (= writeok true) screenok false)))
 
 ;; H
-  (assert
-  (and
-  (and (= o1 (theauditalarm state)) (theauditalarm__function_guard o1 state))
-  (in_range4 o1)))
+  (assert (and (= o1 (theauditalarm state)) (in_range4 o1)))
 
 ;; H
-  (assert
-  (and
-  (and (= o (thedooralarm state1)) (thedooralarm__function_guard o state1))
-  (in_range4 o)))
+  (assert (and (= o (thedooralarm state1)) (in_range4 o)))
 
 ;; H
   (assert (and (in_range4 currentdooralarm1) (in_range4 currentlogalarm1)))
@@ -2051,8 +2040,7 @@
   (assert (= screenok2 (ite (= writeok1 true) screenok1 false)))
 
 ;; H
-  (assert
-  (and (= o2 (ispresent theadmin)) (ispresent__function_guard o2 theadmin)))
+  (assert (= o2 (ispresent theadmin)))
 
 ;; H
   (assert (= result2 (mk_bool__ref shoulddisplaystats)))
@@ -2148,9 +2136,7 @@
                                  thestats)))
 
 ;; H
-  (assert
-  (and (= o3 (securityofficerispresent theadmin))
-  (securityofficerispresent__function_guard o3 theadmin)))
+  (assert (= o3 (securityofficerispresent theadmin)))
 
 ;; H
   (assert (= result7 (mk_bool__ref shoulddisplayconfig)))
@@ -2294,10 +2280,6 @@
 
 ;; H
   (assert (not (= screenok7 true)))
-
-;; H
-  (assert (valid_numberlogentries__function_guard
-  (valid_numberlogentries state) state))
 
 (assert
 ;; WP_parameter_def

@@ -183,11 +183,10 @@
      (and (dynamic_invariant a true true true) (dynamic_invariant b true true
      true)) (and (not (= a (- 2147483648))) (not (= b (- 2147483648)))))
      (let ((result (pgcd a b)))
-     (=> (pgcd__function_guard result a b)
      (and
      (or (or (= result 0) (and (<= 1 result) (<= result (abs a))))
      (and (<= 1 result) (<= result (abs b)))) (dynamic_invariant result true
-     false true))))) :pattern ((pgcd a b)) )))
+     false true)))) :pattern ((pgcd a b)) )))
 
 (declare-fun a () Int)
 
@@ -231,7 +230,7 @@
 
 ;; H
   (assert
-  (and (and (= o (pgcd a b)) (pgcd__function_guard o a b))
+  (and (= o (pgcd a b))
   (and (in_range1 o)
   (or (or (= o 0) (and (<= 1 o) (<= o (abs a))))
   (and (<= 1 o) (<= o (abs b)))))))

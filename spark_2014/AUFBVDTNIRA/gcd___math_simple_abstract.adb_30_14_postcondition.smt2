@@ -145,9 +145,8 @@
 ;; divides__def_axiom
   (assert
   (forall ((a Int) (b Int))
-  (! (=> (divides__function_guard (divides a b) a b)
-     (= (= (divides a b) true)
-     (exists ((c Int)) (and (and (<= 1 c) (<= c 2147483647)) (= (* a c) b))))) :pattern (
+  (! (= (= (divides a b) true)
+     (exists ((c Int)) (and (and (<= 1 c) (<= c 2147483647)) (= (* a c) b)))) :pattern (
   (divides a b)) )))
 
 (declare-fun arg1 () Int)
@@ -166,9 +165,6 @@
 
 ;; H
   (assert (= (mod2 arg1 arg2) 0))
-
-;; H
-  (assert (divides__function_guard (divides arg2 arg1) arg2 arg1))
 
 (assert
 ;; WP_parameter_def

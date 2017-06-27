@@ -498,7 +498,7 @@
 
 (declare-fun o1 () count_type)
 
-(declare-fun temp___607 () count_type)
+(declare-fun temp___605 () count_type)
 
 ;; H
   (assert (= (to_rep o) 0))
@@ -507,10 +507,10 @@
   (assert (= o o1))
 
 ;; H
-  (assert (= temp___607 o1))
+  (assert (= temp___605 o1))
 
 ;; H
-  (assert (= (mk___rep1 (mk___split_fields1 temp___607)) no_element))
+  (assert (= (mk___rep1 (mk___split_fields1 temp___605)) no_element))
 
 ;; H
   (assert

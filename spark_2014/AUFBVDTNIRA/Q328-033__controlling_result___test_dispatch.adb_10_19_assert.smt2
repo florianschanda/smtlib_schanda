@@ -305,47 +305,37 @@
 ;; init__post_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (let ((result (init us_void_param)))
-     (=> (init__function_guard result us_void_param)
-     (= (attr__tag result) us_tag))) :pattern ((init us_void_param)) )))
+  (! (= (attr__tag (init us_void_param)) us_tag) :pattern ((init
+                                                           us_void_param)) )))
 
 ;; init__post__dispatch_axiom
   (assert
   (forall ((attr__tag2 Int))
   (forall ((us_void_param tuple0))
-  (! (let ((result (init1 attr__tag2 us_void_param)))
-     (=> (init__function_guard1 result attr__tag2 us_void_param)
-     (= (attr__tag result) attr__tag2))) :pattern ((init1 attr__tag2
-                                                   us_void_param)) ))))
+  (! (= (attr__tag (init1 attr__tag2 us_void_param)) attr__tag2) :pattern (
+  (init1 attr__tag2 us_void_param)) ))))
 
 ;; dispatch__root__compat_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (init__function_guard1 (init1 us_tag us_void_param) us_tag
-     us_void_param)
-     (and (init__function_guard (init us_void_param) us_void_param)
-     (= (init us_void_param) (init1 us_tag us_void_param)))) :pattern (
+  (! (= (init us_void_param) (init1 us_tag us_void_param)) :pattern (
   (init1 us_tag us_void_param)) )))
 
 ;; dispatch__nested__child__compat_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (init__function_guard1 (init1 us_tag1 us_void_param) us_tag1
-     us_void_param)
-     (and (init__function_guard2 (init2 us_void_param) us_void_param)
-     (= (to_base (init2 us_void_param)) (init1 us_tag1 us_void_param)))) :pattern (
+  (! (= (to_base (init2 us_void_param)) (init1 us_tag1 us_void_param)) :pattern (
   (init1 us_tag1 us_void_param)) )))
 
 ;; init__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (init__function_guard (init us_void_param) us_void_param)
-     (= (init us_void_param) (mk___rep
+  (! (= (init us_void_param) (mk___rep
                              (mk___split_fields (of_rep 0) us_null_ext__)
-                             us_tag))) :pattern ((init us_void_param)) )))
+                             us_tag)) :pattern ((init us_void_param)) )))
 
-(define-fun default_initial_assumption1 ((temp___expr_149 us_rep1)
-  (temp___skip_top_level_150 Bool)) Bool (= (attr__tag1 temp___expr_149) 
+(define-fun default_initial_assumption1 ((temp___expr_147 us_rep1)
+  (temp___skip_top_level_148 Bool)) Bool (= (attr__tag1 temp___expr_147) 
   us_tag1))
 
 (declare-fun r__attr__tag () Int)
@@ -374,36 +364,29 @@
 ;; init__post_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (let ((result (init2 us_void_param)))
-     (=> (init__function_guard2 result us_void_param)
-     (= (attr__tag1 result) us_tag1))) :pattern ((init2 us_void_param)) )))
+  (! (= (attr__tag1 (init2 us_void_param)) us_tag1) :pattern ((init2
+                                                              us_void_param)) )))
 
 ;; init__post__dispatch_axiom
   (assert
   (forall ((attr__tag2 Int))
   (forall ((us_void_param tuple0))
-  (! (let ((result (init3 attr__tag2 us_void_param)))
-     (=> (init__function_guard3 result attr__tag2 us_void_param)
-     (= (attr__tag1 result) attr__tag2))) :pattern ((init3 attr__tag2
-                                                    us_void_param)) ))))
+  (! (= (attr__tag1 (init3 attr__tag2 us_void_param)) attr__tag2) :pattern (
+  (init3 attr__tag2 us_void_param)) ))))
 
 ;; dispatch__nested__child__compat_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (init__function_guard3 (init3 us_tag1 us_void_param) us_tag1
-     us_void_param)
-     (and (init__function_guard2 (init2 us_void_param) us_void_param)
-     (= (init2 us_void_param) (init3 us_tag1 us_void_param)))) :pattern (
+  (! (= (init2 us_void_param) (init3 us_tag1 us_void_param)) :pattern (
   (init3 us_tag1 us_void_param)) )))
 
 ;; init__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (init__function_guard2 (init2 us_void_param) us_void_param)
-     (= (init2 us_void_param) (mk___rep1
+  (! (= (init2 us_void_param) (mk___rep1
                               (mk___split_fields1 (of_rep 1) (of_rep 1)
-                              us_null_ext__) us_tag1))) :pattern ((init2
-                                                                  us_void_param)) )))
+                              us_null_ext__) us_tag1)) :pattern ((init2
+                                                                 us_void_param)) )))
 
 (declare-fun r__split_fields () integer)
 
@@ -429,11 +412,11 @@
 
 (declare-fun usq_2 () Int)
 
-(declare-fun temp___198 () integer)
+(declare-fun temp___195 () integer)
 
-(declare-fun temp___1981 () us_private)
+(declare-fun temp___1951 () us_private)
 
-(declare-fun temp___1982 () Int)
+(declare-fun temp___1952 () Int)
 
 (declare-fun usq_3 () integer)
 
@@ -441,11 +424,11 @@
 
 (declare-fun usq_5 () Int)
 
-(declare-fun temp___199 () integer)
+(declare-fun temp___196 () integer)
 
-(declare-fun temp___1991 () us_private)
+(declare-fun temp___1961 () us_private)
 
-(declare-fun temp___1992 () Int)
+(declare-fun temp___1962 () Int)
 
 (declare-fun result () integer)
 
@@ -468,10 +451,6 @@
 (declare-fun result5 () us_split_fields__ref)
 
 (declare-fun cc__split_fields3 () us_split_fields)
-
-(define-fun usq_6 () us_rep (mk___rep (mk___split_fields usq_3 usq_4) usq_5))
-
-(define-fun usq_7 () us_rep (mk___rep (mk___split_fields usq_ usq_1) usq_2))
 
 ;; H
   (assert (= r__attr__tag us_tag))
@@ -510,17 +489,17 @@
 
 ;; H
   (assert
-  (and (= usq_7 (init1 rc__attr__tag Tuple0)) (init__function_guard1 
-  usq_7 rc__attr__tag Tuple0)))
+  (= (mk___rep (mk___split_fields usq_ usq_1) usq_2) (init1 rc__attr__tag
+                                                     Tuple0)))
 
 ;; H
-  (assert (= usq_ temp___198))
+  (assert (= usq_ temp___195))
 
 ;; H
-  (assert (= usq_1 temp___1981))
+  (assert (= usq_1 temp___1951))
 
 ;; H
-  (assert (= rc__attr__tag temp___1982))
+  (assert (= rc__attr__tag temp___1952))
 
 ;; H
   (assert
@@ -528,27 +507,27 @@
              (mk___split_fields rc__split_fields2 rc__split_fields3))))
 
 ;; H
-  (assert (= rc__split_fields4 (mk___split_fields temp___198 temp___1981)))
+  (assert (= rc__split_fields4 (mk___split_fields temp___195 temp___1951)))
 
 ;; H
   (assert
-  (and (= usq_6 (init1 cc__attr__tag Tuple0)) (init__function_guard1 
-  usq_6 cc__attr__tag Tuple0)))
+  (= (mk___rep (mk___split_fields usq_3 usq_4) usq_5) (init1 cc__attr__tag
+                                                      Tuple0)))
 
 ;; H
-  (assert (= usq_3 temp___199))
+  (assert (= usq_3 temp___196))
 
 ;; H
-  (assert (= usq_4 temp___1991))
+  (assert (= usq_4 temp___1961))
 
 ;; H
-  (assert (= cc__attr__tag temp___1992))
+  (assert (= cc__attr__tag temp___1962))
 
 ;; H
   (assert (= result5 (mk___split_fields__ref cc__split_fields2)))
 
 ;; H
-  (assert (= cc__split_fields3 (mk___split_fields temp___199 temp___1991)))
+  (assert (= cc__split_fields3 (mk___split_fields temp___196 temp___1961)))
 
 (assert
 ;; WP_parameter_def

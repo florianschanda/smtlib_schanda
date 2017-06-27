@@ -377,91 +377,34 @@
      (= (select (notb a a_first a_last) i) (not (select a i)))) :pattern ((select 
   (notb a a_first a_last) i)) )))))
 
-(declare-sort t3b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 64)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq2 (t3b t3b) Bool)
-
-(declare-fun dummy2 () t3b)
-
-(declare-datatypes () ((t3b__ref (mk_t3b__ref (t3b__content t3b)))))
-(define-fun t3b__ref___projection ((a t3b__ref)) t3b (t3b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
-
-(declare-sort t13b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 64)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq3 (t13b t13b) Bool)
-
-(declare-fun dummy3 () t13b)
-
-(declare-datatypes () ((t13b__ref (mk_t13b__ref (t13b__content t13b)))))
-(define-fun t13b__ref___projection ((a t13b__ref)) t13b (t13b__content a))
-
-(declare-sort t16b 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 64)))
-
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq4 (t16b t16b) Bool)
-
-(declare-fun dummy4 () t16b)
-
-(declare-datatypes () ((t16b__ref (mk_t16b__ref (t16b__content t16b)))))
-(define-fun t16b__ref___projection ((a t16b__ref)) t16b (t16b__content a))
 
 (declare-fun stable_marriage__is_permutation_1__seen__aggregate_def (Bool) (Array Int Bool))
 
 ;; def_axiom
   (assert
-  (forall ((temp___436 Bool))
-  (forall ((temp___437 Int))
+  (forall ((temp___399 Bool))
+  (forall ((temp___400 Int))
   (= (select (stable_marriage__is_permutation_1__seen__aggregate_def
-             temp___436) temp___437) temp___436))))
+             temp___399) temp___400) temp___399))))
 
-(declare-fun temp___443 (Bool) (Array Int Bool))
-
-;; def_axiom
-  (assert
-  (forall ((temp___445 Bool))
-  (forall ((temp___446 Int))
-  (= (select (temp___443 temp___445) temp___446) temp___445))))
-
-(declare-fun temp___449 (Bool) (Array Int Bool))
+(declare-fun temp___406 (Bool) (Array Int Bool))
 
 ;; def_axiom
   (assert
-  (forall ((temp___451 Bool))
-  (forall ((temp___452 Int))
-  (= (select (temp___449 temp___451) temp___452) temp___451))))
+  (forall ((temp___408 Bool))
+  (forall ((temp___409 Int))
+  (= (select (temp___406 temp___408) temp___409) temp___408))))
+
+(declare-fun temp___412 (Bool) (Array Int Bool))
+
+;; def_axiom
+  (assert
+  (forall ((temp___414 Bool))
+  (forall ((temp___415 Int))
+  (= (select (temp___412 temp___414) temp___415) temp___414))))
 
 (define-fun dynamic_invariant ((temp___expr_143 Int)
   (temp___is_init_140 Bool) (temp___skip_constant_141 Bool)
@@ -479,11 +422,9 @@
 
 (declare-fun rank () Int)
 
-(declare-fun o () (Array Int Bool))
+(declare-fun temp___403 () Int)
 
-(declare-fun temp___440 () Int)
-
-(declare-fun temp___438 () (Array Int Bool))
+(declare-fun temp___401 () (Array Int Bool))
 
 (declare-fun result () (Array Int Bool))
 
@@ -518,14 +459,12 @@
 (declare-fun rank6 () Int)
 
 ;; H
-  (assert
-  (= o (stable_marriage__is_permutation_1__seen__aggregate_def (of_int 0))))
-
-;; H
   (assert (= (mk_map__ref1 result) (mk_map__ref1 seen)))
 
 ;; H
-  (assert (= seen1 o))
+  (assert
+  (= seen1 (stable_marriage__is_permutation_1__seen__aggregate_def
+           (of_int 0))))
 
 ;; H
   (assert (= (mk_int__ref result1) (mk_int__ref rank)))
@@ -534,10 +473,10 @@
   (assert (= rank1 1))
 
 ;; H
-  (assert (=> (and (<= 1 rank1) (<= rank1 64)) (= temp___440 rank1)))
+  (assert (=> (and (<= 1 rank1) (<= rank1 64)) (= temp___403 rank1)))
 
 ;; H
-  (assert (=> (and (<= 1 rank1) (<= rank1 64)) (= temp___438 seen1)))
+  (assert (=> (and (<= 1 rank1) (<= rank1 64)) (= temp___401 seen1)))
 
 ;; H
   (assert
@@ -606,7 +545,7 @@
   (assert (=> (not (and (<= 1 rank1) (<= rank1 64))) (= seen7 seen1)))
 
 ;; H
-  (assert (= (bool_eq3 seen6 1 64 (temp___443 (of_int 1)) 1 64) true))
+  (assert (= (bool_eq3 seen6 1 64 (temp___406 (of_int 1)) 1 64) true))
 
 (declare-fun g1 () Int)
 

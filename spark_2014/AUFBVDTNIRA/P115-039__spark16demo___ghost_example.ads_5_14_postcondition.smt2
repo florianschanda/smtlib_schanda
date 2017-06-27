@@ -86,18 +86,13 @@
   (assert
   (forall ((ghost_example__state Int))
   (! (=> (dynamic_invariant ghost_example__state true true true)
-     (let ((result (cur_state ghost_example__state)))
-     (=> (cur_state__function_guard result ghost_example__state)
-     (dynamic_invariant result true false true)))) :pattern ((cur_state
-                                                             ghost_example__state)) )))
+     (dynamic_invariant (cur_state ghost_example__state) true false true)) :pattern (
+  (cur_state ghost_example__state)) )))
 
 ;; cur_state__def_axiom
   (assert
   (forall ((ghost_example__state Int))
-  (! (=>
-     (and (dynamic_invariant ghost_example__state true true true)
-     (cur_state__function_guard (cur_state ghost_example__state)
-     ghost_example__state))
+  (! (=> (dynamic_invariant ghost_example__state true true true)
      (= (cur_state ghost_example__state) ghost_example__state)) :pattern (
   (cur_state ghost_example__state)) )))
 
@@ -138,9 +133,6 @@
 (declare-fun state4 () Int)
 
 (declare-fun successful3 () Bool)
-
-;; H
-  (assert (cur_state__function_guard (cur_state state) state))
 
 ;; H
   (assert (in_range1 state))
@@ -201,9 +193,6 @@
 
 ;; H
   (assert (= done__4 done__1))
-
-;; H
-  (assert (cur_state__function_guard (cur_state state3) state3))
 
 (assert
 ;; WP_parameter_def

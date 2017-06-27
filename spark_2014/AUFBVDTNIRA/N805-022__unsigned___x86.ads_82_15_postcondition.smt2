@@ -555,11 +555,10 @@
   (forall ((x86__memory (Array (_ BitVec 64) unsigned_8)))
   (! (=> (dynamic_invariant addr true true true)
      (let ((result (readmem8 addr x86__memory)))
-     (=> (readmem8__function_guard result addr x86__memory)
      (and
      (and (= result (to_rep (select x86__memory addr)))
      (bvuge result ((_ int2bv 8) 0))) (dynamic_invariant1 result true false
-     true))))) :pattern ((readmem8 addr x86__memory)) ))))
+     true)))) :pattern ((readmem8 addr x86__memory)) ))))
 
 (declare-fun addr () (_ BitVec 64))
 
@@ -603,9 +602,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o1 (readmem8 (bvadd addr ((_ int2bv 64) 1)) memory))
-  (readmem8__function_guard o1 (bvadd addr ((_ int2bv 64) 1)) memory))
   (and (= o1 (to_rep (select memory (bvadd addr ((_ int2bv 64) 1)))))
   (bvuge o1 ((_ int2bv 8) 0)))))
 
@@ -617,8 +614,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o (readmem8 addr memory)) (readmem8__function_guard o addr memory))
+  (and (= o (readmem8 addr memory))
   (and (= o (to_rep (select memory addr))) (bvuge o ((_ int2bv 8) 0)))))
 
 ;; H

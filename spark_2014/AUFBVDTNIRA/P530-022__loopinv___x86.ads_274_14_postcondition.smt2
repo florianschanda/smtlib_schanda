@@ -290,10 +290,8 @@
   (forall ((reg (_ BitVec 64)))
   (! (=> (dynamic_invariant reg true true true)
      (let ((result (readreg16 reg)))
-     (=> (readreg16__function_guard result reg)
      (and (= result ((_ extract 15 0) (bvand reg ((_ int2bv 64) 65535))))
-     (dynamic_invariant1 result true false true))))) :pattern ((readreg16
-                                                               reg)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((readreg16 reg)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -336,9 +334,6 @@
 
 ;; H
   (assert (= result1 x86__dx__result4))
-
-;; H
-  (assert (readreg16__function_guard (readreg16 rdx) rdx))
 
 (assert
 ;; WP_parameter_def

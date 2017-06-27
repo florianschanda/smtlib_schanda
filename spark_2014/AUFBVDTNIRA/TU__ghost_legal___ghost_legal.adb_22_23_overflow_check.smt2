@@ -179,8 +179,7 @@
 ;; is_even__def_axiom
   (assert
   (forall ((x Int))
-  (! (=> (is_even__function_guard (is_even x) x)
-     (= (= (is_even x) true) (= (mod2 x 2) 0))) :pattern ((is_even x)) )))
+  (! (= (= (is_even x) true) (= (mod2 x 2) 0)) :pattern ((is_even x)) )))
 
 (declare-fun x () Int)
 
@@ -218,9 +217,6 @@
 
 ;; H
   (assert (=> (<= 0 2147483647) (in_range2 temp)))
-
-;; H
-  (assert (is_even__function_guard (is_even x) x))
 
 ;; H
   (assert (not (= (mod2 x 2) 0)))

@@ -397,11 +397,11 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(define-fun dynamic_invariant4 ((temp___expr_167 Int)
-  (temp___is_init_164 Bool) (temp___skip_constant_165 Bool)
-  (temp___do_toplevel_166 Bool)) Bool (=>
-                                      (or (= temp___is_init_164 true)
-                                      (<= 0 2)) (in_range4 temp___expr_167)))
+(define-fun dynamic_invariant4 ((temp___expr_158 Int)
+  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
+  (temp___do_toplevel_157 Bool)) Bool (=>
+                                      (or (= temp___is_init_155 true)
+                                      (<= 0 2)) (in_range4 temp___expr_158)))
 
 (declare-fun i () Int)
 

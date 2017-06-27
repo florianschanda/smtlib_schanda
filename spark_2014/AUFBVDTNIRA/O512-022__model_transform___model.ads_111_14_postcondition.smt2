@@ -69,12 +69,12 @@
 (define-fun uml_action_access__ref___projection ((a uml_action_access__ref)) uml_action_access 
   (uml_action_access__content a))
 
-(define-fun dynamic_invariant ((temp___expr_257 Int)
-  (temp___is_init_254 Bool) (temp___skip_constant_255 Bool)
-  (temp___do_toplevel_256 Bool)) Bool (=>
-                                      (or (= temp___is_init_254 true)
+(define-fun dynamic_invariant ((temp___expr_253 Int)
+  (temp___is_init_250 Bool) (temp___skip_constant_251 Bool)
+  (temp___do_toplevel_252 Bool)) Bool (=>
+                                      (or (= temp___is_init_250 true)
                                       (<= 0 100)) (in_range1
-                                      temp___expr_257)))
+                                      temp___expr_253)))
 
 (declare-fun to_rep (uml_action_access) Int)
 
@@ -199,18 +199,15 @@
 
 ;; from__2__post_axiom
   (assert
-  (forall ((self us_rep))
-  (! (let ((result (from__2 self)))
-     (=> (from__2__function_guard result self) (dynamic_invariant result true
-     false true))) :pattern ((from__2 self)) )))
+  (forall ((self us_rep)) (! (dynamic_invariant (from__2 self) true false
+  true) :pattern ((from__2 self)) )))
 
 ;; from__2__def_axiom
   (assert
   (forall ((self us_rep))
-  (! (=> (from__2__function_guard (from__2 self) self)
-     (= (from__2 self) (to_rep
+  (! (= (from__2 self) (to_rep
                        (rec__model__uml_control_flow__from_data
-                       (us_split_fields1 self))))) :pattern ((from__2 self)) )))
+                       (us_split_fields1 self)))) :pattern ((from__2 self)) )))
 
 (declare-fun to__2 (us_rep) Int)
 
@@ -218,18 +215,15 @@
 
 ;; to__2__post_axiom
   (assert
-  (forall ((self us_rep))
-  (! (let ((result (to__2 self)))
-     (=> (to__2__function_guard result self) (dynamic_invariant result true
-     false true))) :pattern ((to__2 self)) )))
+  (forall ((self us_rep)) (! (dynamic_invariant (to__2 self) true false
+  true) :pattern ((to__2 self)) )))
 
 ;; to__2__def_axiom
   (assert
   (forall ((self us_rep))
-  (! (=> (to__2__function_guard (to__2 self) self)
-     (= (to__2 self) (to_rep
+  (! (= (to__2 self) (to_rep
                      (rec__model__uml_control_flow__to_data
-                     (us_split_fields1 self))))) :pattern ((to__2 self)) )))
+                     (us_split_fields1 self)))) :pattern ((to__2 self)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -247,9 +241,9 @@
 
 (declare-fun o2 () uml_action_access)
 
-(declare-fun temp___447 () uml_action_access)
+(declare-fun temp___395 () uml_action_access)
 
-(declare-fun temp___4471 () uml_action_access)
+(declare-fun temp___3951 () uml_action_access)
 
 (declare-fun result () uml_action_access)
 
@@ -280,10 +274,10 @@
   (assert (= self__split_fields1 o2))
 
 ;; H
-  (assert (= temp___447 o1))
+  (assert (= temp___395 o1))
 
 ;; H
-  (assert (= temp___4471 o2))
+  (assert (= temp___3951 o2))
 
 ;; H
   (assert (= result self__split_fields))
@@ -292,10 +286,10 @@
   (assert (= result1 self__split_fields1))
 
 ;; H
-  (assert (= temp___447 self__split_fields2))
+  (assert (= temp___395 self__split_fields2))
 
 ;; H
-  (assert (= temp___4471 self__split_fields3))
+  (assert (= temp___3951 self__split_fields3))
 
 ;; H
   (assert (= self__split_fields4 self__split_fields2))
@@ -308,12 +302,6 @@
 
 ;; H
   (assert (= self__split_fields7 self__split_fields3))
-
-;; H
-  (assert (from__2__function_guard
-  (from__2
-  (mk___rep (mk___split_fields self__split_fields4 self__split_fields5)))
-  (mk___rep (mk___split_fields self__split_fields4 self__split_fields5))))
 
 (assert
 ;; WP_parameter_def

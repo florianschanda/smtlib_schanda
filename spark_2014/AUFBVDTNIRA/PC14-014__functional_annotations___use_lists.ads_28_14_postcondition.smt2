@@ -748,9 +748,8 @@
 ;; is_incr__def_axiom
   (assert
   (forall ((i1 Int) (i2 Int))
-  (! (=> (is_incr__function_guard (is_incr i1 i2) i1 i2)
-     (= (= (is_incr i1 i2) true)
-     (ite (= i1 2147483647) (= i2 2147483647) (= i2 (+ i1 1))))) :pattern (
+  (! (= (= (is_incr i1 i2) true)
+     (ite (= i1 2147483647) (= i2 2147483647) (= i2 (+ i1 1)))) :pattern (
   (is_incr i1 i2)) )))
 
 (declare-fun l1 () us_rep)
@@ -853,11 +852,11 @@
 
 (declare-fun use_lists__incr_all__cu__assume () count_type)
 
-(declare-fun temp___491 () count_type)
+(declare-fun temp___484 () count_type)
 
-(declare-fun temp___4911 () us_main_type)
+(declare-fun temp___4841 () us_main_type)
 
-(declare-fun temp___490 () count_type)
+(declare-fun temp___483 () count_type)
 
 (declare-fun o () Int)
 
@@ -944,14 +943,6 @@
 
 ;; H
   (assert
-  (forall ((n Int)) (is_incr__function_guard
-  (is_incr (get (model__ l1) n)
-  (get (model__ (mk___rep l2__split_discrs l2__split_fields12)) n))
-  (get (model__ l1) n)
-  (get (model__ (mk___rep l2__split_discrs l2__split_fields12)) n))))
-
-;; H
-  (assert
   (<= (length l1) (to_rep
                   (rec__use_lists__my_lists__list__capacity l2__split_discrs))))
 
@@ -984,11 +975,11 @@
 ;; H
   (assert
   (=> (= result1 true)
-  (and (= l2__split_discrs (mk___split_discrs temp___491))
-  (= temp___4911 l2__split_fields))))
+  (and (= l2__split_discrs (mk___split_discrs temp___484))
+  (= temp___4841 l2__split_fields))))
 
 ;; H
-  (assert (=> (= result1 true) (= temp___490 cu__split_fields1)))
+  (assert (=> (= result1 true) (= temp___483 cu__split_fields1)))
 
 ;; H
   (assert

@@ -178,11 +178,11 @@
 
 (declare-fun usq_2 () Int)
 
-(declare-fun temp___150 () integer)
+(declare-fun temp___149 () integer)
 
-(declare-fun temp___1501 () us_private)
+(declare-fun temp___1491 () us_private)
 
-(declare-fun temp___1502 () Int)
+(declare-fun temp___1492 () Int)
 
 (declare-fun result () integer)
 
@@ -201,8 +201,8 @@
   (and
   (and (= x__attr__tag (attr__tag y))
   (= (mk___rep (mk___split_fields usq_ usq_1) usq_2) y))
-  (and (and (= usq_ temp___150) (= usq_1 temp___1501))
-  (= x__attr__tag temp___1502)))
+  (and (and (= usq_ temp___149) (= usq_1 temp___1491))
+  (= x__attr__tag temp___1492)))
   (and (and (= result x__split_fields) (= result1 x__split_fields1))
-  (and (= x__split_fields2 temp___150) (= x__split_fields3 temp___1501)))))))
+  (and (= x__split_fields2 temp___149) (= x__split_fields3 temp___1491)))))))
 (check-sat)

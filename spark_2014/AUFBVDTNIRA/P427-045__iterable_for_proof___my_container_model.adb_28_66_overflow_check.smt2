@@ -233,8 +233,7 @@
   (assert
   (forall ((c1 (Array Int natural)))
   (forall ((p1 Int))
-  (! (=> (m_has_element__function_guard (m_has_element c1 p1) c1 p1)
-     (= (= (m_has_element c1 p1) true) (and (<= 1 p1) (<= p1 100)))) :pattern (
+  (! (= (= (m_has_element c1 p1) true) (and (<= 1 p1) (<= p1 100))) :pattern (
   (m_has_element c1 p1)) ))))
 
 (define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool)
@@ -246,9 +245,6 @@
 
 ;; H
   (assert (in_range1 p))
-
-;; H
-  (assert (m_has_element__function_guard (m_has_element c p) c p))
 
 ;; H
   (assert (= (m_has_element c p) true))

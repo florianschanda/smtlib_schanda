@@ -161,6 +161,12 @@
 (define-fun protT__ref___projection ((a protT__ref)) us_rep (protT__content
                                                             a))
 
+(define-fun default_initial_assumption ((temp___expr_173 us_rep)
+  (temp___skip_top_level_174 Bool)) Bool (= (to_rep
+                                            (rec__support__protT__summary
+                                            (us_split_fields1
+                                            temp___expr_173))) 0))
+
 (declare-fun x () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)

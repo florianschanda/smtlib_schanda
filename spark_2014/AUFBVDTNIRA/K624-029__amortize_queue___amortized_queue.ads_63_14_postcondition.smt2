@@ -305,7 +305,6 @@
   (forall ((left us_rep) (right us_rep))
   (! (=> (<= (+ (length left) (length right)) 1000)
      (let ((result (oconcat left right)))
-     (=> (oconcat__function_guard result left right)
      (and (= (length result) (+ (length left) (length right)))
      (and
      (forall ((i Int))
@@ -313,7 +312,7 @@
      (= (element result i) (element left i))))
      (forall ((i Int))
      (=> (and (<= 1 i) (<= i (last_index right)))
-     (= (element result (+ (last_index left) i)) (element right i))))))))) :pattern (
+     (= (element result (+ (last_index left) i)) (element right i)))))))) :pattern (
   (oconcat left right)) )))
 
 (define-fun in_range2 ((rec__amortized_queue__my_vectors__vector__capacity1 Int)
@@ -495,8 +494,7 @@
 ;; inv__def_axiom
   (assert
   (forall ((q us_rep2))
-  (! (=> (inv__function_guard (inv q) q)
-     (= (= (inv q) true)
+  (! (= (= (inv q) true)
      (and
      (and
      (<= (length (rec__amortized_queue__queue__rear (us_split_fields3 q))) 
@@ -516,7 +514,7 @@
      (to_rep
      (rec__amortized_queue__my_vectors__vector__capacity
      (us_split_discrs1
-     (rec__amortized_queue__queue__rear (us_split_fields3 q))))))))) :pattern (
+     (rec__amortized_queue__queue__rear (us_split_fields3 q)))))))) :pattern (
   (inv q)) )))
 
 (declare-fun is_model (us_rep2 us_rep) Bool)
@@ -530,8 +528,7 @@
   (assert
   (forall ((q us_rep2))
   (forall ((m us_rep))
-  (! (=> (is_model__function_guard (is_model q m) q m)
-     (= (= (is_model q m) true)
+  (! (= (= (is_model q m) true)
      (and
      (and
      (and
@@ -555,7 +552,7 @@
      (= (element m
         (+ i (length
              (rec__amortized_queue__queue__rear (us_split_fields3 q))))) 
-     (element (rec__amortized_queue__queue__front (us_split_fields3 q)) i))))))) :pattern (
+     (element (rec__amortized_queue__queue__front (us_split_fields3 q)) i)))))) :pattern (
   (is_model q m)) ))))
 
 (declare-fun q () us_rep2)
@@ -877,9 +874,6 @@
 (declare-fun result4 () us_main_type)
 
 ;; H
-  (assert (inv__function_guard (inv q) q))
-
-;; H
   (assert
   (and
   (= 1000 (to_rep
@@ -942,12 +936,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o2 (oconcat (mk___rep revrear__split_discrs revrear__split_fields5)
         (rec__amortized_queue__queue__front (us_split_fields3 q))))
-  (oconcat__function_guard o2
-  (mk___rep revrear__split_discrs revrear__split_fields5)
-  (rec__amortized_queue__queue__front (us_split_fields3 q))))
   (and
   (= (length o2) (+ (length
                     (mk___rep revrear__split_discrs revrear__split_fields5)) 
@@ -999,11 +989,6 @@
 ;; H
   (assert
   (= (mk___rep (mk___split_discrs result3) (mk___split_fields result4)) 
-  (vector__content amortized_queue__model__result6)))
-
-;; H
-  (assert (is_model__function_guard
-  (is_model q (vector__content amortized_queue__model__result6)) q
   (vector__content amortized_queue__model__result6)))
 
 (assert

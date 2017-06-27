@@ -71,10 +71,8 @@
 ;; ident_int__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (ident_int x)))
-     (=> (ident_int__function_guard result x) (dynamic_invariant result true
-     false true)))) :pattern ((ident_int x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant
+     (ident_int x) true false true)) :pattern ((ident_int x)) )))
 
 (declare-sort t 0)
 
@@ -105,9 +103,7 @@
 (declare-fun o () Int)
 
 ;; H
-  (assert
-  (and (and (= o (ident_int 1)) (ident_int__function_guard o 1)) (in_range
-  o)))
+  (assert (and (= o (ident_int 1)) (in_range o)))
 
 (assert
 ;; WP_parameter_def

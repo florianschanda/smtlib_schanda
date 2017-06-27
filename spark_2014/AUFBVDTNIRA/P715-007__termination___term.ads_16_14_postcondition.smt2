@@ -148,9 +148,7 @@
 ;; H
   (assert
   (=> (<= 0 c)
-  (and
-  (and (= o (loop_if_c_is_neg Tuple0)) (loop_if_c_is_neg__function_guard 
-  o Tuple0)) (dynamic_property 0 last o))))
+  (and (= o (loop_if_c_is_neg Tuple0)) (dynamic_property 0 last o))))
 
 ;; H
   (assert (=> (<= 0 c) (= result x)))

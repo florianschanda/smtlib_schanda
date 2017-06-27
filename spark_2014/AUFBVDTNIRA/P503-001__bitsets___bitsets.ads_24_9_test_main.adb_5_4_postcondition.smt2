@@ -239,8 +239,7 @@
   (assert
   (forall ((s (Array Int Bool)))
   (forall ((e Int))
-  (! (=> (mem__function_guard (mem s e) s e)
-     (= (= (mem s e) true) (= (select s e) true))) :pattern ((mem s e)) ))))
+  (! (= (= (mem s e) true) (= (select s e) true)) :pattern ((mem s e)) ))))
 
 (declare-fun s () (Array Int Bool))
 
@@ -336,10 +335,6 @@
 
 ;; H
   (assert (<= elt 10))
-
-;; H
-  (assert (mem__function_guard (mem test_main__my_sets__remove__result4 elt)
-  test_main__my_sets__remove__result4 elt))
 
 ;; H
   (assert (= (mem test_main__my_sets__remove__result4 elt) true))

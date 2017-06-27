@@ -85,19 +85,13 @@
   (assert
   (forall ((refinement__high_reading Int))
   (! (=> (dynamic_invariant refinement__high_reading true true true)
-     (let ((result (get_highest_reading refinement__high_reading)))
-     (=> (get_highest_reading__function_guard result
-     refinement__high_reading) (dynamic_invariant result true false true)))) :pattern (
-  (get_highest_reading refinement__high_reading)) )))
+     (dynamic_invariant (get_highest_reading refinement__high_reading) true
+     false true)) :pattern ((get_highest_reading refinement__high_reading)) )))
 
 ;; get_highest_reading__def_axiom
   (assert
   (forall ((refinement__high_reading Int))
-  (! (=>
-     (and (dynamic_invariant refinement__high_reading true true true)
-     (get_highest_reading__function_guard
-     (get_highest_reading refinement__high_reading)
-     refinement__high_reading))
+  (! (=> (dynamic_invariant refinement__high_reading true true true)
      (= (get_highest_reading refinement__high_reading) refinement__high_reading)) :pattern (
   (get_highest_reading refinement__high_reading)) )))
 
@@ -143,10 +137,6 @@
 
 ;; H
   (assert (= high_reading4 high_reading2))
-
-;; H
-  (assert (get_highest_reading__function_guard
-  (get_highest_reading high_reading3) high_reading3))
 
 (assert
 ;; WP_parameter_def

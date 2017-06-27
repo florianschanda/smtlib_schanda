@@ -73,17 +73,14 @@
 ;; id__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (id x)))
-     (=> (id__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (id x) true
+     false true)) :pattern ((id x)) )))
 
 ;; id__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true) (id__function_guard (id x) x))
-     (= (id x) x)) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (id x) x)) :pattern (
+  (id x)) )))
 
 (declare-fun bump (Int) Int)
 
@@ -94,8 +91,7 @@
   (forall ((x Int))
   (! (=> (and (dynamic_invariant x true true true) (< x 2147483647))
      (let ((result (bump x)))
-     (=> (bump__function_guard result x)
-     (and (= result (+ x 1)) (dynamic_invariant result true false true))))) :pattern (
+     (and (= result (+ x 1)) (dynamic_invariant result true false true)))) :pattern (
   (bump x)) )))
 
 (declare-fun z () Int)
@@ -117,9 +113,7 @@
   (assert (= z 0))
 
 ;; H
-  (assert
-  (and (and (= o (bump z)) (bump__function_guard o z))
-  (and (in_range o) (= o (+ z 1)))))
+  (assert (and (= o (bump z)) (and (in_range o) (= o (+ z 1)))))
 
 ;; H
   (assert (= result z))
@@ -132,9 +126,6 @@
 
 ;; H
   (assert (= z3 z1))
-
-;; H
-  (assert (id__function_guard (id z2) z2))
 
 (assert
 ;; WP_parameter_def

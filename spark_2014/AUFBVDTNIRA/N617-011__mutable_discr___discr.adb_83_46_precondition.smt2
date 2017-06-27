@@ -202,16 +202,13 @@
   (assert
   (forall ((x Int))
   (! (=> (and (dynamic_invariant x true true true) (< 0 x))
-     (let ((result (f x)))
-     (=> (f__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((f x)) )))
+     (dynamic_invariant (f x) true false true)) :pattern ((f x)) )))
 
 ;; f__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true) (f__function_guard (f x) x))
-     (= (f x) (- x 1))) :pattern ((f x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (f x) (- x 1))) :pattern (
+  (f x)) )))
 
 (declare-datatypes ()
 ((us_split_discrs2
@@ -286,9 +283,6 @@
  (mk_with_bad_default2__ref (with_bad_default2__content us_rep1)))))
 (define-fun with_bad_default2__ref___projection ((a with_bad_default2__ref)) us_rep1 
   (with_bad_default2__content a))
-
-;; temp___result_226_def
-  (assert (f__function_guard (f c) c))
 
 (define-fun default_initial_assumption1 ((temp___expr_223 us_rep1)
   (temp___skip_top_level_224 Bool)) Bool (and

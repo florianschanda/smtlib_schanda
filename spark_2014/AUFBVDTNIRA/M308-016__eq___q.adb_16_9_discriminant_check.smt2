@@ -262,9 +262,6 @@
 
 (declare-fun temp___1622 () Bool)
 
-(define-fun temp___1623 () us_rep (mk___rep (mk___split_discrs temp___162)
-                                  (mk___split_fields temp___1621 temp___1622)))
-
 ;; H
   (assert
   (= (bool_eq1
@@ -278,13 +275,12 @@
 
 ;; H
   (assert
-  (and
-  (= temp___1623 (change
-                 (mk___rep x__split_discrs
-                 (mk___split_fields x__split_fields x__split_fields1))))
-  (change__function_guard temp___1623
-  (mk___rep x__split_discrs
-  (mk___split_fields x__split_fields x__split_fields1)))))
+  (= (mk___rep (mk___split_discrs temp___162)
+     (mk___split_fields temp___1621 temp___1622)) (change
+                                                  (mk___rep x__split_discrs
+                                                  (mk___split_fields
+                                                  x__split_fields
+                                                  x__split_fields1)))))
 
 (assert
 ;; WP_parameter_def

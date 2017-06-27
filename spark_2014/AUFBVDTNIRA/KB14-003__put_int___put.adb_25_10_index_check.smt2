@@ -474,8 +474,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
 
-(declare-fun first2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x1 Int)) Bool (and (<= first_int x1) (<= x1 last_int)))
 
@@ -496,7 +494,7 @@
 
 (declare-sort t1 0)
 
-(declare-fun first3 (t1) integer)
+(declare-fun first2 (t1) integer)
 
 (declare-fun last2 (t1) integer)
 
@@ -507,7 +505,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range f)
      (=> (in_range l)
-     (and (= (to_rep1 (first3 (mk1 f l))) f)
+     (and (= (to_rep1 (first2 (mk1 f l))) f)
      (= (to_rep1 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
@@ -524,12 +522,12 @@
 (define-fun of_array1 ((a (Array Int character)) (f Int)
   (l Int)) us_t1 (mk___t1 a (mk1 f l)))
 
-(define-fun first4 ((a us_t1)) Int (to_rep1 (first3 (rt1 a))))
+(define-fun first3 ((a us_t1)) Int (to_rep1 (first2 (rt1 a))))
 
 (define-fun last3 ((a us_t1)) Int (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first4 a) (last3 a))
-                                    (+ (- (last3 a) (first4 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size1 () Int)
 
@@ -563,9 +561,9 @@
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment1 a))))
 
 (define-fun bool_eq8 ((x1 us_t1)
-  (y us_t1)) Bool (bool_eq3 (elts1 x1) (to_rep1 (first3 (rt1 x1)))
+  (y us_t1)) Bool (bool_eq3 (elts1 x1) (to_rep1 (first2 (rt1 x1)))
                   (to_rep1 (last2 (rt1 x1))) (elts1 y)
-                  (to_rep1 (first3 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
 (declare-fun user_eq7 (us_t1 us_t1) Bool)
 
@@ -599,7 +597,7 @@
 
 (declare-fun s () (Array Int character))
 
-(declare-fun first5 () Int)
+(declare-fun first4 () Int)
 
 (declare-fun val__ () Int)
 
@@ -635,7 +633,7 @@
 
 (declare-fun result () Int)
 
-(declare-fun first6 () Int)
+(declare-fun first5 () Int)
 
 (declare-fun result1 () Int)
 
@@ -645,7 +643,7 @@
 
 (declare-fun s1 () (Array Int character))
 
-(declare-fun first7 () Int)
+(declare-fun first6 () Int)
 
 (declare-fun val__1 () Int)
 
@@ -659,7 +657,7 @@
 
 (declare-fun result4 () Int)
 
-(declare-fun first8 () Int)
+(declare-fun first7 () Int)
 
 (declare-fun result5 () (Array Int character))
 
@@ -669,7 +667,7 @@
 
 (declare-fun s3 () (Array Int character))
 
-(declare-fun first9 () Int)
+(declare-fun first8 () Int)
 
 (declare-fun val__3 () Int)
 
@@ -677,7 +675,7 @@
 
 (declare-fun s4 () (Array Int character))
 
-(declare-fun first10 () Int)
+(declare-fun first9 () Int)
 
 (declare-fun val__4 () Int)
 
@@ -685,7 +683,7 @@
 
 (declare-fun s5 () (Array Int character))
 
-(declare-fun first11 () Int)
+(declare-fun first10 () Int)
 
 (declare-fun val__5 () int__ref)
 
@@ -693,15 +691,15 @@
 
 (declare-fun s6 () (Array Int character))
 
-(declare-fun first12 () Int)
+(declare-fun first11 () Int)
 
 (declare-fun val__6 () Int)
 
 (declare-fun result6 () int__ref)
 
-(declare-fun first13 () Int)
+(declare-fun first12 () Int)
 
-(define-fun first14 () int__ref (mk_int__ref first11))
+(define-fun first13 () int__ref (mk_int__ref first10))
 
 ;; H
   (assert (in_range x))
@@ -710,13 +708,13 @@
   (assert (=> (<= (- 2147483648) 2147483647) (in_range int__)))
 
 ;; H
-  (assert (= result first5))
+  (assert (= result first4))
 
 ;; H
-  (assert (= first6 12))
+  (assert (= first5 12))
 
 ;; H
-  (assert (in_range3 first6))
+  (assert (in_range3 first5))
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range val__)))
@@ -737,7 +735,7 @@
   (assert (= temp___524 val__))
 
 ;; H
-  (assert (= temp___523 first6))
+  (assert (= temp___523 first5))
 
 ;; H
   (assert (= temp___521 s))
@@ -749,7 +747,7 @@
   (assert
   (and
   (and (=> (<= (- 2147483648) 2147483647) (in_range int__2))
-  (=> (<= 0 2147483647) (in_range3 first7)))
+  (=> (<= 0 2147483647) (in_range3 first6)))
   (=> (<= (- 2147483648) 2147483647) (in_range val__1))))
 
 ;; H
@@ -771,13 +769,13 @@
   (assert (= int__3 o2))
 
 ;; H
-  (assert (and (= o3 (- first7 1)) (in_range3 (- first7 1))))
+  (assert (and (= o3 (- first6 1)) (in_range3 (- first6 1))))
 
 ;; H
-  (assert (= first7 result4))
+  (assert (= first6 result4))
 
 ;; H
-  (assert (= first8 o3))
+  (assert (= first7 o3))
 
 ;; H
   (assert (and (= o4 (- 48 val__2)) (in_range (- 48 val__2))))
@@ -789,10 +787,10 @@
   (assert (= (to_rep o6) o5))
 
 ;; H
-  (assert (and (<= 1 first8) (<= first8 11)))
+  (assert (and (<= 1 first7) (<= first7 11)))
 
 ;; H
-  (assert (= o7 first8))
+  (assert (= o7 first7))
 
 ;; H
   (assert (= o8 (store s1 o7 o6)))
@@ -810,7 +808,7 @@
   (assert (= val__2 val__3))
 
 ;; H
-  (assert (= first8 first9))
+  (assert (= first7 first8))
 
 ;; H
   (assert (= s2 s3))
@@ -822,7 +820,7 @@
   (assert (= val__4 val__2))
 
 ;; H
-  (assert (= first10 first8))
+  (assert (= first9 first7))
 
 ;; H
   (assert (= s4 s2))
@@ -834,7 +832,7 @@
   (assert (= val__5 (mk_int__ref val__3)))
 
 ;; H
-  (assert (= first14 (mk_int__ref first9)))
+  (assert (= first13 (mk_int__ref first8)))
 
 ;; H
   (assert (= (mk_map__ref s5) (mk_map__ref s3)))
@@ -846,7 +844,7 @@
   (assert (= val__6 val__4))
 
 ;; H
-  (assert (= first12 first10))
+  (assert (= first11 first9))
 
 ;; H
   (assert (= s6 s4))
@@ -858,13 +856,13 @@
   (assert (< x 0))
 
 ;; H
-  (assert (and (= o9 (- first11 1)) (in_range3 (- first11 1))))
+  (assert (and (= o9 (- first10 1)) (in_range3 (- first10 1))))
 
 ;; H
-  (assert (= result6 first14))
+  (assert (= result6 first13))
 
 ;; H
-  (assert (= first13 o9))
+  (assert (= first12 o9))
 
 ;; H
   (assert (= (to_rep o10) 45))
@@ -872,5 +870,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (<= 1 first13)))
+  (not (<= 1 first12)))
 (check-sat)

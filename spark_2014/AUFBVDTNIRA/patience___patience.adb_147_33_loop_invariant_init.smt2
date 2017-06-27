@@ -994,8 +994,7 @@
 ;; inv__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (inv__function_guard (inv s) s)
-     (= (= (inv s) true)
+  (! (= (= (inv s) true)
      (and
      (and
      (and
@@ -1245,7 +1244,7 @@
                                                          (let ((temp___351 
                                                          (rec__patience__state__posstack
                                                          (us_split_fields1 s))))
-                                                         (select temp___351 i))) 1)))))))))) :pattern (
+                                                         (select temp___351 i))) 1))))))))) :pattern (
   (inv s)) )))
 
 (declare-fun cards () us_t)
@@ -1253,10 +1252,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
-
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -1350,21 +1345,21 @@
 
 (declare-fun o9 () (Array Int cardindex))
 
-(declare-fun temp___845 () cardindex)
+(declare-fun temp___839 () cardindex)
 
-(declare-fun temp___8451 () (Array Int card))
+(declare-fun temp___8391 () (Array Int card))
 
-(declare-fun temp___8452 () cardindex)
+(declare-fun temp___8392 () cardindex)
 
-(declare-fun temp___8453 () (Array Int cardindex))
+(declare-fun temp___8393 () (Array Int cardindex))
 
-(declare-fun temp___8454 () (Array Int (Array Int cardindex)))
+(declare-fun temp___8394 () (Array Int (Array Int cardindex)))
 
-(declare-fun temp___8455 () (Array Int cardindex))
+(declare-fun temp___8395 () (Array Int cardindex))
 
-(declare-fun temp___8456 () (Array Int cardindex))
+(declare-fun temp___8396 () (Array Int cardindex))
 
-(declare-fun temp___8457 () (Array Int cardindex))
+(declare-fun temp___8397 () (Array Int cardindex))
 
 (declare-fun result () cardindex)
 
@@ -1443,34 +1438,34 @@
   (assert (= (temp___159 (- 1)) o9))
 
 ;; H
-  (assert (= temp___845 o2))
+  (assert (= temp___839 o2))
 
 ;; H
-  (assert (= temp___8451 o3))
+  (assert (= temp___8391 o3))
 
 ;; H
-  (assert (= temp___8452 o4))
+  (assert (= temp___8392 o4))
 
 ;; H
-  (assert (= temp___8453 o5))
+  (assert (= temp___8393 o5))
 
 ;; H
-  (assert (= temp___8454 o6))
+  (assert (= temp___8394 o6))
 
 ;; H
-  (assert (= temp___8455 o7))
+  (assert (= temp___8395 o7))
 
 ;; H
-  (assert (= temp___8456 o8))
+  (assert (= temp___8396 o8))
 
 ;; H
-  (assert (= temp___8457 o9))
+  (assert (= temp___8397 o9))
 
 ;; H
   (assert
   (= (mk___rep
-     (mk___split_fields temp___845 temp___8451 temp___8452 temp___8453
-     temp___8454 temp___8455 temp___8456 temp___8457)) null_state))
+     (mk___split_fields temp___839 temp___8391 temp___8392 temp___8393
+     temp___8394 temp___8395 temp___8396 temp___8397)) null_state))
 
 ;; H
   (assert (dynamic_invariant cards true false true))
@@ -1501,10 +1496,6 @@
 
 ;; H
   (assert (<= i1 (to_rep1 (last (rt cards)))))
-
-;; H
-  (assert (inv__function_guard (inv (mk___rep s__split_fields16))
-  (mk___rep s__split_fields16)))
 
 (assert
 ;; WP_parameter_def

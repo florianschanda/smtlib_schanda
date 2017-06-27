@@ -96,9 +96,8 @@
 ;; id__def_axiom
   (assert
   (forall ((n1 Int))
-  (! (=>
-     (and (dynamic_invariant n1 true true true) (id__function_guard (id n1)
-     n1)) (= (id n1) n1)) :pattern ((id n1)) )))
+  (! (=> (dynamic_invariant n1 true true true) (= (id n1) n1)) :pattern (
+  (id n1)) )))
 
 (define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)
@@ -152,14 +151,11 @@
   (assert (not (= n 0)))
 
 ;; H
-  (assert (id__function_guard (id (- o 1)) (- o 1)))
-
-;; H
   (assert (and (= o (- n 1)) (in_range1 (- n 1))))
 
 ;; H
   (assert
-  (and (and (= o1 (id o)) (id__function_guard o1 o))
+  (and (= o1 (id o))
   (and (in_range1 o1)
   (and (= o1 o) (= o1 (ite (= o 0) 0 (+ (id (- o 1)) 1)))))))
 

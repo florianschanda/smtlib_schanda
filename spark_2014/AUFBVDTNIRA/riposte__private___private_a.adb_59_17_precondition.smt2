@@ -379,10 +379,8 @@
 ;; create_stack__post_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (let ((result (create_stack us_void_param)))
-     (and (get_length__function_guard (get_length result) result)
-     (=> (create_stack__function_guard result us_void_param)
-     (= (get_length result) 0)))) :pattern ((create_stack us_void_param)) )))
+  (! (= (get_length (create_stack us_void_param)) 0) :pattern ((create_stack
+                                                               us_void_param)) )))
 
 (declare-fun top (us_rep) Int)
 
@@ -391,11 +389,8 @@
 ;; top__post_axiom
   (assert
   (forall ((the_stack us_rep))
-  (! (and (get_length__function_guard (get_length the_stack) the_stack)
-     (=> (< 0 (get_length the_stack))
-     (let ((result (top the_stack)))
-     (=> (top__function_guard result the_stack) (dynamic_invariant result
-     true false true))))) :pattern ((top the_stack)) )))
+  (! (=> (< 0 (get_length the_stack)) (dynamic_invariant (top the_stack) true
+     false true)) :pattern ((top the_stack)) )))
 
 (declare-datatypes ()
 ((us_split_fields2
@@ -505,10 +500,8 @@
 
 ;; get_length__post_axiom
   (assert
-  (forall ((the_stack us_rep))
-  (! (let ((result (get_length the_stack)))
-     (=> (get_length__function_guard result the_stack) (dynamic_invariant1
-     result true false true))) :pattern ((get_length the_stack)) )))
+  (forall ((the_stack us_rep)) (! (dynamic_invariant1 (get_length the_stack)
+  true false true) :pattern ((get_length the_stack)) )))
 
 (declare-fun n () Int)
 
@@ -528,11 +521,11 @@
 
 (declare-fun o4 () (Array Int integer))
 
-(declare-fun temp___248 () Bool)
+(declare-fun temp___234 () Bool)
 
-(declare-fun temp___2481 () length_t)
+(declare-fun temp___2341 () length_t)
 
-(declare-fun temp___2482 () (Array Int integer))
+(declare-fun temp___2342 () (Array Int integer))
 
 (declare-fun result () Bool)
 
@@ -558,13 +551,7 @@
   (assert (in_range1 n))
 
 ;; H
-  (assert (get_length__function_guard (get_length o5) o5))
-
-;; H
-  (assert
-  (and
-  (and (= o5 (create_stack Tuple0)) (create_stack__function_guard o5 Tuple0))
-  (= (get_length o5) 0)))
+  (assert (and (= o5 (create_stack Tuple0)) (= (get_length o5) 0)))
 
 ;; H
   (assert (= (of_int 1) o2))
@@ -576,13 +563,13 @@
   (assert (= o4 o1))
 
 ;; H
-  (assert (= temp___248 o2))
+  (assert (= temp___234 o2))
 
 ;; H
-  (assert (= temp___2481 o3))
+  (assert (= temp___2341 o3))
 
 ;; H
-  (assert (= temp___2482 o4))
+  (assert (= temp___2342 o4))
 
 ;; H
   (assert
@@ -597,32 +584,16 @@
                                                       s__split_fields2))))))
 
 ;; H
-  (assert (= temp___248 s__split_fields3))
+  (assert (= temp___234 s__split_fields3))
 
 ;; H
-  (assert (= temp___2481 s__split_fields4))
+  (assert (= temp___2341 s__split_fields4))
 
 ;; H
-  (assert (= temp___2482 s__split_fields5))
+  (assert (= temp___2342 s__split_fields5))
 
 ;; H
   (assert (= s__split_fields3 true))
-
-;; H
-  (assert (get_length__function_guard
-  (get_length (mk___rep stack__push__the_stack__fields))
-  (mk___rep stack__push__the_stack__fields)))
-
-;; H
-  (assert (get_length__function_guard
-  (get_length
-  (mk___rep (mk___split_fields s__split_fields4 s__split_fields5)))
-  (mk___rep (mk___split_fields s__split_fields4 s__split_fields5))))
-
-;; H
-  (assert (top__function_guard
-  (top (mk___rep stack__push__the_stack__fields))
-  (mk___rep stack__push__the_stack__fields)))
 
 ;; H
   (assert
@@ -644,11 +615,6 @@
   (assert
   (= s__split_fields6 (mk___split_fields1 s__split_fields3
                       (mk___rep stack__push__the_stack__fields))))
-
-;; H
-  (assert (get_length__function_guard
-  (get_length (rec__private_a__optional_stack__the_stack s__split_fields6))
-  (rec__private_a__optional_stack__the_stack s__split_fields6)))
 
 (assert
 ;; WP_parameter_def

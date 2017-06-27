@@ -484,76 +484,33 @@
   (assert
   (forall ((list_handler__integer_list__count Int))
   (! (=> (dynamic_invariant list_handler__integer_list__count true true true)
-     (let ((result (size list_handler__integer_list__count)))
-     (=> (size__function_guard result list_handler__integer_list__count)
-     (dynamic_invariant1 result true false true)))) :pattern ((size
-                                                              list_handler__integer_list__count)) )))
+     (dynamic_invariant1 (size list_handler__integer_list__count) true false
+     true)) :pattern ((size list_handler__integer_list__count)) )))
 
 ;; size__def_axiom
   (assert
   (forall ((list_handler__integer_list__count Int))
-  (! (=>
-     (and (dynamic_invariant list_handler__integer_list__count true true
-     true) (size__function_guard (size list_handler__integer_list__count)
-     list_handler__integer_list__count))
+  (! (=> (dynamic_invariant list_handler__integer_list__count true true true)
      (= (size list_handler__integer_list__count) list_handler__integer_list__count)) :pattern (
   (size list_handler__integer_list__count)) )))
 
-(declare-sort t6b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 128)))
-
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq4 (t6b t6b) Bool)
-
-(declare-fun dummy4 () t6b)
-
-(declare-datatypes () ((t6b__ref (mk_t6b__ref (t6b__content t6b)))))
-(define-fun t6b__ref___projection ((a t6b__ref)) t6b (t6b__content a))
-
-(declare-sort t8b 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 128)))
-
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq5 (t8b t8b) Bool)
-
-(declare-fun dummy5 () t8b)
-
-(declare-datatypes () ((t8b__ref (mk_t8b__ref (t8b__content t8b)))))
-(define-fun t8b__ref___projection ((a t8b__ref)) t8b (t8b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
-(declare-fun temp___216 (us_rep) (Array Int us_rep))
+(declare-fun temp___213 (us_rep) (Array Int us_rep))
 
 ;; def_axiom
   (assert
-  (forall ((temp___218 us_rep))
+  (forall ((temp___215 us_rep))
+  (forall ((temp___216 Int))
+  (= (select (temp___213 temp___215) temp___216) temp___215))))
+
+(declare-fun temp___217 (Int) (Array Int index_type))
+
+;; def_axiom
+  (assert
   (forall ((temp___219 Int))
-  (= (select (temp___216 temp___218) temp___219) temp___218))))
-
-(declare-fun temp___220 (Int) (Array Int index_type))
-
-;; def_axiom
-  (assert
-  (forall ((temp___222 Int))
-  (forall ((temp___223 Int))
-  (= (select (temp___220 temp___222) temp___223) (of_rep1 temp___222)))))
+  (forall ((temp___220 Int))
+  (= (select (temp___217 temp___219) temp___220) (of_rep1 temp___219)))))
 
 (define-fun dynamic_invariant2 ((temp___expr_141 Int)
   (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
@@ -582,10 +539,6 @@
 ;; H
   (assert
   (and (in_range2 (int__content count1)) (in_range2 (int__content free1))))
-
-;; H
-  (assert (size__function_guard (size (int__content count1))
-  (int__content count1)))
 
 (assert
 ;; WP_parameter_def

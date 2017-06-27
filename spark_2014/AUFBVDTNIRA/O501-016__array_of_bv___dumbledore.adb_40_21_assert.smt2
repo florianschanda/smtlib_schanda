@@ -702,18 +702,11 @@
   (forall ((x86__memory (Array (_ BitVec 64) unsigned8)))
   (! (=> (dynamic_invariant addr true true true)
      (let ((result (readmem64 addr x86__memory)))
-     (and (readmem32__function_guard (readmem32 addr x86__memory) addr
-     x86__memory)
-     (and (readmem32__function_guard
-     (readmem32 (bvadd addr ((_ int2bv 64) 4)) x86__memory)
-     (bvadd addr ((_ int2bv 64) 4)) x86__memory)
-     (=> (readmem64__function_guard result addr x86__memory)
      (and
      (= result (bvor ((_ zero_extend 32) (readmem32 addr x86__memory)) (bvshl ((_ zero_extend 32) 
      (readmem32 (bvadd addr ((_ int2bv 64) 4)) x86__memory)) ((_ int2bv 64) 32))))
-     (dynamic_invariant result true false true))))))) :pattern ((readmem64
-                                                                addr
-                                                                x86__memory)) ))))
+     (dynamic_invariant result true false true)))) :pattern ((readmem64 addr
+                                                             x86__memory)) ))))
 
 (declare-sort unsigned32 0)
 
@@ -757,13 +750,12 @@
   (forall ((x86__memory (Array (_ BitVec 64) unsigned8)))
   (! (=> (dynamic_invariant addr true true true)
      (let ((result (readmem16 addr x86__memory)))
-     (=> (readmem16__function_guard result addr x86__memory)
      (and
      (= result (bvor ((_ zero_extend 8) (to_rep (select x86__memory addr))) 
      (ite (< 8 16)
      (bvshl ((_ zero_extend 8) (to_rep
                                (select x86__memory (bvadd addr ((_ int2bv 64) 1))))) ((_ int2bv 16) 8))
-     ((_ int2bv 16) 0)))) (dynamic_invariant1 result true false true))))) :pattern (
+     ((_ int2bv 16) 0)))) (dynamic_invariant1 result true false true)))) :pattern (
   (readmem16 addr x86__memory)) ))))
 
 ;; readmem32__post_axiom
@@ -772,18 +764,11 @@
   (forall ((x86__memory (Array (_ BitVec 64) unsigned8)))
   (! (=> (dynamic_invariant addr true true true)
      (let ((result (readmem32 addr x86__memory)))
-     (and (readmem16__function_guard (readmem16 addr x86__memory) addr
-     x86__memory)
-     (and (readmem16__function_guard
-     (readmem16 (bvadd addr ((_ int2bv 64) 2)) x86__memory)
-     (bvadd addr ((_ int2bv 64) 2)) x86__memory)
-     (=> (readmem32__function_guard result addr x86__memory)
      (and
      (= result (bvor ((_ zero_extend 16) (readmem16 addr x86__memory)) (bvshl ((_ zero_extend 16) 
      (readmem16 (bvadd addr ((_ int2bv 64) 2)) x86__memory)) ((_ int2bv 32) 16))))
-     (dynamic_invariant2 result true false true))))))) :pattern ((readmem32
-                                                                 addr
-                                                                 x86__memory)) ))))
+     (dynamic_invariant2 result true false true)))) :pattern ((readmem32 addr
+                                                              x86__memory)) ))))
 
 (declare-fun rsp () (_ BitVec 64))
 
@@ -817,11 +802,6 @@
   (bvult rsp ((_ int2bv 64) 18446744073709551360)))
   (and (bvult rsi ((_ int2bv 64) 18446462598732840960))
   (bvugt rsi ((_ int2bv 64) 256))))))
-
-;; H
-  (assert (readmem64__function_guard
-  (readmem64 (bvsub rsp ((_ int2bv 64) 8)) memory1)
-  (bvsub rsp ((_ int2bv 64) 8)) memory1))
 
 ;; H
   (assert
@@ -860,11 +840,6 @@
   (assert (= rbp1 rsp1))
 
 ;; H
-  (assert (readmem64__function_guard
-  (readmem64 (bvsub rbp1 ((_ int2bv 64) 16)) memory2)
-  (bvsub rbp1 ((_ int2bv 64) 16)) memory2))
-
-;; H
   (assert
   (and (= (readmem64 (bvsub rbp1 ((_ int2bv 64) 16)) memory2) rsi)
   (forall ((i (_ BitVec 64)))
@@ -889,17 +864,7 @@
   (= (to_rep (select memory2 i)) (to_rep (select memory1 i))))))))
 
 ;; H
-  (assert (readmem64__function_guard
-  (readmem64 (bvsub rbp1 ((_ int2bv 64) 16)) memory2)
-  (bvsub rbp1 ((_ int2bv 64) 16)) memory2))
-
-;; H
   (assert (= (readmem64 (bvsub rbp1 ((_ int2bv 64) 16)) memory2) rsi))
-
-;; H
-  (assert (readmem32__function_guard
-  (readmem32 (bvsub rbp1 ((_ int2bv 64) 52)) memory3)
-  (bvsub rbp1 ((_ int2bv 64) 52)) memory3))
 
 ;; H
   (assert
@@ -917,11 +882,6 @@
   (not (= i (bvadd (bvsub rbp1 ((_ int2bv 64) 52)) ((_ int2bv 64) 2)))))
   (not (= i (bvadd (bvsub rbp1 ((_ int2bv 64) 52)) ((_ int2bv 64) 3)))))
   (= (to_rep (select memory3 i)) (to_rep (select memory2 i))))))))
-
-;; H
-  (assert (readmem64__function_guard
-  (readmem64 (bvsub rbp1 ((_ int2bv 64) 16)) memory3)
-  (bvsub rbp1 ((_ int2bv 64) 16)) memory3))
 
 (assert
 ;; WP_parameter_def

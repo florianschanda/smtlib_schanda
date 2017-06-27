@@ -1186,13 +1186,13 @@
 
 (declare-fun o1 () count_type)
 
-(declare-fun temp___879 () count_type)
+(declare-fun temp___862 () count_type)
 
 (declare-fun use_sets__my_find__cu__assume () count_type)
 
 (declare-fun o2 () Int)
 
-(declare-fun temp___875 () count_type)
+(declare-fun temp___858 () count_type)
 
 (declare-fun o3 () Bool)
 
@@ -1222,8 +1222,8 @@
 (define-fun cu__split_fields5 () us_split_fields2 (mk___split_fields1
                                                   cu__split_fields1))
 
-(define-fun temp___8751 () us_rep1 (mk___rep1
-                                   (mk___split_fields1 temp___875)))
+(define-fun temp___8581 () us_rep1 (mk___rep1
+                                   (mk___split_fields1 temp___858)))
 
 (define-fun use_sets__my_find__cu__assume1 () us_rep1 (mk___rep1
                                                       (mk___split_fields1
@@ -1236,10 +1236,10 @@
   (assert (= o o1))
 
 ;; H
-  (assert (= temp___879 o1))
+  (assert (= temp___862 o1))
 
 ;; H
-  (assert (= (mk___rep1 (mk___split_fields1 temp___879)) no_element))
+  (assert (= (mk___rep1 (mk___split_fields1 temp___862)) no_element))
 
 ;; H
   (assert (in_range2 e))
@@ -1301,19 +1301,19 @@
 
 ;; H
   (assert
-  (and (= temp___8751 (next s (mk___rep1 cu__split_fields4)))
+  (and (= temp___8581 (next s (mk___rep1 cu__split_fields4)))
   (ite (= (ite (= (bool_eq4 (mk___rep1 cu__split_fields4) no_element) false) (= 
           (get1 (positions s) (mk___rep1 cu__split_fields4)) (length2 s)) true) true)
-  (= (bool_eq4 temp___8751 no_element) true)
-  (and (= (has_key (positions s) temp___8751) true)
-  (= (get1 (positions s) temp___8751) (+ (get1 (positions s)
+  (= (bool_eq4 temp___8581 no_element) true)
+  (and (= (has_key (positions s) temp___8581) true)
+  (= (get1 (positions s) temp___8581) (+ (get1 (positions s)
                                          (mk___rep1 cu__split_fields4)) 1))))))
 
 ;; H
   (assert (= result3 (mk___split_fields__ref1 cu__split_fields4)))
 
 ;; H
-  (assert (= cu__split_fields3 (mk___split_fields1 temp___875)))
+  (assert (= cu__split_fields3 (mk___split_fields1 temp___858)))
 
 ;; H
   (assert

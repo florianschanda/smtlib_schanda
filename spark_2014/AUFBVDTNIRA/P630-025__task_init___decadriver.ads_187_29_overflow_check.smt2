@@ -515,6 +515,11 @@
 (define-fun transmitter_type__ref___projection ((a transmitter_type__ref)) us_rep 
   (transmitter_type__content a))
 
+(define-fun default_initial_assumption ((temp___expr_4490 us_rep)
+  (temp___skip_top_level_4491 Bool)) Bool (= (rec__decadriver__transmitter_type__tx_idle
+                                             (us_split_fields1
+                                             temp___expr_4490)) (of_int 1)))
+
 (declare-fun data () us_t)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)

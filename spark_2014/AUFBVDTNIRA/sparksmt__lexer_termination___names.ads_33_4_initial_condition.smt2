@@ -85,12 +85,7 @@
   (assert (in_range no_name))
 
 ;; H
-  (assert
-  (and (= result (invariant__ name_table)) (invariant____function_guard
-  result name_table)))
-
-;; H
-  (assert (invariant____function_guard (invariant__ name_table) name_table))
+  (assert (= result (invariant__ name_table)))
 
 (assert
 ;; WP_parameter_def

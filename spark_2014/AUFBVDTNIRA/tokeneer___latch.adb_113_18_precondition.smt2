@@ -848,11 +848,11 @@
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t1)))))
 (define-fun t__ref_2__projection ((a t__ref)) t1 (t__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_840 Int)
-  (temp___is_init_837 Bool) (temp___skip_constant_838 Bool)
-  (temp___do_toplevel_839 Bool)) Bool (=>
-                                      (or (= temp___is_init_837 true)
-                                      (<= 0 1)) (in_range10 temp___expr_840)))
+(define-fun dynamic_invariant1 ((temp___expr_833 Int)
+  (temp___is_init_830 Bool) (temp___skip_constant_831 Bool)
+  (temp___do_toplevel_832 Bool)) Bool (=>
+                                      (or (= temp___is_init_830 true)
+                                      (<= 0 1)) (in_range10 temp___expr_833)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
@@ -868,10 +868,8 @@
 ;; latch_timeout__def_axiom
   (assert
   (forall ((latch__latchtimeout__fields us_split_fields))
-  (! (=> (latch_timeout__function_guard
-     (latch_timeout latch__latchtimeout__fields) latch__latchtimeout__fields)
-     (= (latch_timeout latch__latchtimeout__fields) (mk___rep
-                                                    latch__latchtimeout__fields))) :pattern (
+  (! (= (latch_timeout latch__latchtimeout__fields) (mk___rep
+                                                    latch__latchtimeout__fields)) :pattern (
   (latch_timeout latch__latchtimeout__fields)) )))
 
 (declare-fun islocked (Int) Bool)
@@ -884,9 +882,7 @@
 ;; islocked__def_axiom
   (assert
   (forall ((latch__currentlatch Int))
-  (! (=> (islocked__function_guard (islocked latch__currentlatch)
-     latch__currentlatch)
-     (= (= (islocked latch__currentlatch) true) (= latch__currentlatch 0))) :pattern (
+  (! (= (= (islocked latch__currentlatch) true) (= latch__currentlatch 0)) :pattern (
   (islocked latch__currentlatch)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
@@ -1029,22 +1025,15 @@
   (assert (=> (<= 0 43) (in_range4 id)))
 
 ;; H
-  (assert
-  (and (= o4 (thecurrenttime currenttime)) (thecurrenttime__function_guard 
-  o4 currenttime)))
+  (assert (= o4 (thecurrenttime currenttime)))
 
 ;; H
   (assert
-  (and
   (= result (greaterthanorequal o4
             (mk___rep
             (mk___split_fields latchtimeout__split_fields
             latchtimeout__split_fields1 latchtimeout__split_fields2
-            latchtimeout__split_fields3))))
-  (greaterthanorequal__function_guard result o4
-  (mk___rep
-  (mk___split_fields latchtimeout__split_fields latchtimeout__split_fields1
-  latchtimeout__split_fields2 latchtimeout__split_fields3)))))
+            latchtimeout__split_fields3)))))
 
 ;; H
   (assert (=> (= result true) (= (mk_int__ref result1) locallatch3)))
@@ -1078,10 +1067,6 @@
 
 ;; H
   (assert (not (= currentlatch locallatch1)))
-
-;; H
-  (assert (valid_numberlogentries__function_guard
-  (valid_numberlogentries state) state))
 
 (assert
 ;; WP_parameter_def

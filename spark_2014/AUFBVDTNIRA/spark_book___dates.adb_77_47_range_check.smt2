@@ -279,11 +279,9 @@
 ;; maximum_date__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (maximum_date__function_guard (maximum_date us_void_param)
-     us_void_param)
-     (= (maximum_date us_void_param) (mk___rep
+  (! (= (maximum_date us_void_param) (mk___rep
                                      (mk___split_fields (of_rep2 31)
-                                     (of_rep1 12) (of_rep 2099))))) :pattern (
+                                     (of_rep1 12) (of_rep 2099)))) :pattern (
   (maximum_date us_void_param)) )))
 
 (define-fun dynamic_invariant ((temp___expr_150 Int)
@@ -316,7 +314,6 @@
      (and (dynamic_invariant year true true true) (dynamic_invariant1 month
      true true true))
      (let ((result (get_month_length year month)))
-     (=> (get_month_length__function_guard result year month)
      (and
      (and
      (and
@@ -335,8 +332,8 @@
      (=> (= month 7) (= result 31))) (=> (= month 8) (= result 31)))
      (=> (= month 9) (= result 30))) (=> (= month 10) (= result 31)))
      (=> (= month 11) (= result 30))) (=> (= month 12) (= result 31)))
-     (dynamic_invariant2 result true false true))))) :pattern ((get_month_length
-                                                               year month)) )))
+     (dynamic_invariant2 result true false true)))) :pattern ((get_month_length
+                                                              year month)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -351,9 +348,6 @@
 (declare-fun result () Bool)
 
 ;; H
-  (assert (maximum_date__function_guard (maximum_date Tuple0) Tuple0))
-
-;; H
   (assert
   (not
   (= (bool_eq3
@@ -365,11 +359,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o (get_month_length (to_rep current_date__split_fields2)
        (to_rep1 current_date__split_fields1)))
-  (get_month_length__function_guard o (to_rep current_date__split_fields2)
-  (to_rep1 current_date__split_fields1)))
   (and (in_range2 o)
   (and
   (and

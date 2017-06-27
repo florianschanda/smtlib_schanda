@@ -231,10 +231,8 @@
 
 ;; rolepresent__post_axiom
   (assert
-  (forall ((theadmin us_rep))
-  (! (let ((result (rolepresent theadmin)))
-     (=> (rolepresent__function_guard result theadmin) (dynamic_invariant
-     result true false true))) :pattern ((rolepresent theadmin)) )))
+  (forall ((theadmin us_rep)) (! (dynamic_invariant (rolepresent theadmin)
+  true false true) :pattern ((rolepresent theadmin)) )))
 
 (declare-fun isdoingop (us_rep) Bool)
 
@@ -275,11 +273,9 @@
 ;; thecurrentop__post_axiom
   (assert
   (forall ((theadmin us_rep))
-  (! (and (isdoingop__function_guard (isdoingop theadmin) theadmin)
-     (=> (= (isdoingop theadmin) true)
-     (let ((result (thecurrentop theadmin)))
-     (=> (thecurrentop__function_guard result theadmin) (dynamic_invariant1
-     result true false true))))) :pattern ((thecurrentop theadmin)) )))
+  (! (=> (= (isdoingop theadmin) true) (dynamic_invariant1
+     (thecurrentop theadmin) true false true)) :pattern ((thecurrentop
+                                                         theadmin)) )))
 
 (declare-fun ispresent (us_rep) Bool)
 
@@ -614,11 +610,9 @@
 
 ;; theauthcertrole__post_axiom
   (assert
-  (forall ((admintoken__state us_private))
-  (! (let ((result (theauthcertrole admintoken__state)))
-     (=> (theauthcertrole__function_guard result admintoken__state)
-     (dynamic_invariant result true false true))) :pattern ((theauthcertrole
-                                                            admintoken__state)) )))
+  (forall ((admintoken__state us_private)) (! (dynamic_invariant
+  (theauthcertrole admintoken__state) true false
+  true) :pattern ((theauthcertrole admintoken__state)) )))
 
 (declare-fun isgood (us_private) Bool)
 
@@ -671,20 +665,18 @@
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 t)))))
 (define-fun t__ref_4__projection ((a t__ref1)) t (t__content1 a))
 
-(define-fun dynamic_invariant2 ((temp___expr_1107 Int)
-  (temp___is_init_1104 Bool) (temp___skip_constant_1105 Bool)
-  (temp___do_toplevel_1106 Bool)) Bool (=>
-                                       (or (= temp___is_init_1104 true)
+(define-fun dynamic_invariant2 ((temp___expr_1036 Int)
+  (temp___is_init_1033 Bool) (temp___skip_constant_1034 Bool)
+  (temp___do_toplevel_1035 Bool)) Bool (=>
+                                       (or (= temp___is_init_1033 true)
                                        (<= 0 1)) (in_range8
-                                       temp___expr_1107)))
+                                       temp___expr_1036)))
 
 ;; thecurrentdoor__post_axiom
   (assert
-  (forall ((door__state us_private))
-  (! (let ((result (thecurrentdoor door__state)))
-     (=> (thecurrentdoor__function_guard result door__state)
-     (dynamic_invariant2 result true false true))) :pattern ((thecurrentdoor
-                                                             door__state)) )))
+  (forall ((door__state us_private)) (! (dynamic_invariant2
+  (thecurrentdoor door__state) true false
+  true) :pattern ((thecurrentdoor door__state)) )))
 
 (declare-fun thedooralarm (us_private) Int)
 
@@ -711,19 +703,17 @@
 (define-fun statust__ref___projection ((a statust__ref)) statust (statust__content
                                                                  a))
 
-(define-fun dynamic_invariant3 ((temp___expr_336 Int)
-  (temp___is_init_333 Bool) (temp___skip_constant_334 Bool)
-  (temp___do_toplevel_335 Bool)) Bool (=>
-                                      (or (= temp___is_init_333 true)
-                                      (<= 0 1)) (in_range9 temp___expr_336)))
+(define-fun dynamic_invariant3 ((temp___expr_306 Int)
+  (temp___is_init_303 Bool) (temp___skip_constant_304 Bool)
+  (temp___do_toplevel_305 Bool)) Bool (=>
+                                      (or (= temp___is_init_303 true)
+                                      (<= 0 1)) (in_range9 temp___expr_306)))
 
 ;; thedooralarm__post_axiom
   (assert
-  (forall ((door__state us_private))
-  (! (let ((result (thedooralarm door__state)))
-     (=> (thedooralarm__function_guard result door__state)
-     (dynamic_invariant3 result true false true))) :pattern ((thedooralarm
-                                                             door__state)) )))
+  (forall ((door__state us_private)) (! (dynamic_invariant3
+  (thedooralarm door__state) true false
+  true) :pattern ((thedooralarm door__state)) )))
 
 (declare-sort statscount 0)
 
@@ -1002,31 +992,31 @@
                                       (or (= temp___is_init_258 true)
                                       (<= 0 4)) (in_range2 temp___expr_261)))
 
-(define-fun dynamic_invariant5 ((temp___expr_396 Int)
-  (temp___is_init_393 Bool) (temp___skip_constant_394 Bool)
-  (temp___do_toplevel_395 Bool)) Bool (=>
-                                      (or (= temp___is_init_393 true)
+(define-fun dynamic_invariant5 ((temp___expr_366 Int)
+  (temp___is_init_363 Bool) (temp___skip_constant_364 Bool)
+  (temp___do_toplevel_365 Bool)) Bool (=>
+                                      (or (= temp___is_init_363 true)
                                       (<= 1901 2099)) (in_range4
-                                      temp___expr_396)))
+                                      temp___expr_366)))
 
-(define-fun dynamic_invariant6 ((temp___expr_402 Int)
+(define-fun dynamic_invariant6 ((temp___expr_372 Int)
+  (temp___is_init_369 Bool) (temp___skip_constant_370 Bool)
+  (temp___do_toplevel_371 Bool)) Bool (=>
+                                      (or (= temp___is_init_369 true)
+                                      (<= 1 12)) (in_range5 temp___expr_372)))
+
+(define-fun dynamic_invariant7 ((temp___expr_378 Int)
+  (temp___is_init_375 Bool) (temp___skip_constant_376 Bool)
+  (temp___do_toplevel_377 Bool)) Bool (=>
+                                      (or (= temp___is_init_375 true)
+                                      (<= 1 31)) (in_range6 temp___expr_378)))
+
+(define-fun dynamic_invariant8 ((temp___expr_402 Int)
   (temp___is_init_399 Bool) (temp___skip_constant_400 Bool)
   (temp___do_toplevel_401 Bool)) Bool (=>
                                       (or (= temp___is_init_399 true)
-                                      (<= 1 12)) (in_range5 temp___expr_402)))
-
-(define-fun dynamic_invariant7 ((temp___expr_408 Int)
-  (temp___is_init_405 Bool) (temp___skip_constant_406 Bool)
-  (temp___do_toplevel_407 Bool)) Bool (=>
-                                      (or (= temp___is_init_405 true)
-                                      (<= 1 31)) (in_range6 temp___expr_408)))
-
-(define-fun dynamic_invariant8 ((temp___expr_432 Int)
-  (temp___is_init_429 Bool) (temp___skip_constant_430 Bool)
-  (temp___do_toplevel_431 Bool)) Bool (=>
-                                      (or (= temp___is_init_429 true)
                                       (<= 0 86399999)) (in_range7
-                                      temp___expr_432)))
+                                      temp___expr_402)))
 
 (declare-sort statust1 0)
 
@@ -1049,27 +1039,25 @@
 (define-fun statust__ref_2__projection ((a statust__ref1)) statust1 (statust__content1
                                                                     a))
 
-(define-fun dynamic_invariant9 ((temp___expr_1907 Int)
-  (temp___is_init_1904 Bool) (temp___skip_constant_1905 Bool)
-  (temp___do_toplevel_1906 Bool)) Bool (=>
-                                       (or (= temp___is_init_1904 true)
+(define-fun dynamic_invariant9 ((temp___expr_1794 Int)
+  (temp___is_init_1791 Bool) (temp___skip_constant_1792 Bool)
+  (temp___do_toplevel_1793 Bool)) Bool (=>
+                                       (or (= temp___is_init_1791 true)
                                        (<= 0 8)) (in_range11
-                                       temp___expr_1907)))
+                                       temp___expr_1794)))
 
 ;; getstatus__post_axiom
   (assert
-  (forall ((enclave__state us_private))
-  (! (let ((result (getstatus enclave__state)))
-     (=> (getstatus__function_guard result enclave__state)
-     (dynamic_invariant9 result true false true))) :pattern ((getstatus
-                                                             enclave__state)) )))
+  (forall ((enclave__state us_private)) (! (dynamic_invariant9
+  (getstatus enclave__state) true false
+  true) :pattern ((getstatus enclave__state)) )))
 
-(define-fun dynamic_invariant10 ((temp___expr_1352 Int)
-  (temp___is_init_1349 Bool) (temp___skip_constant_1350 Bool)
-  (temp___do_toplevel_1351 Bool)) Bool (=>
-                                       (or (= temp___is_init_1349 true)
+(define-fun dynamic_invariant10 ((temp___expr_1240 Int)
+  (temp___is_init_1237 Bool) (temp___skip_constant_1238 Bool)
+  (temp___do_toplevel_1239 Bool)) Bool (=>
+                                       (or (= temp___is_init_1237 true)
                                        (<= 0 2147483647)) (in_range10
-                                       temp___expr_1352)))
+                                       temp___expr_1240)))
 
 (declare-fun currenttime () us_private)
 
@@ -1370,693 +1358,6 @@
 (declare-fun theadmin__split_fields6 () us_split_fields)
 
 ;; H
-  (assert (enrolmentisinprogress__function_guard
-  (enrolmentisinprogress (us_private__content state9))
-  (us_private__content state9)))
-
-;; H
-  (assert (privatekeypresent__function_guard (privatekeypresent state1)
-  state1))
-
-;; H
-  (assert (islocked__function_guard (islocked state3) state3))
-
-;; H
-  (assert (thecurrentdoor__function_guard (thecurrentdoor state4) state4))
-
-;; H
-  (assert (thecurrenttime__function_guard (thecurrenttime currenttime)
-  currenttime))
-
-;; H
-  (assert (alarm_timeout__function_guard (alarm_timeout state4) state4))
-
-;; H
-  (assert (thecurrenttime__function_guard (thecurrenttime currenttime)
-  currenttime))
-
-;; H
-  (assert (alarm_timeout__function_guard (alarm_timeout state4) state4))
-
-;; H
-  (assert (greaterthanorequal__function_guard
-  (greaterthanorequal (thecurrenttime currenttime) (alarm_timeout state4))
-  (thecurrenttime currenttime) (alarm_timeout state4)))
-
-;; H
-  (assert (thedooralarm__function_guard (thedooralarm state4) state4))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (isgood__function_guard (isgood state2) state2))
-
-;; H
-  (assert (authcertvalid__function_guard (authcertvalid state2) state2))
-
-;; H
-  (assert (theauthcertrole__function_guard (theauthcertrole state2) state2))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (thecurrentop__function_guard
-  (thecurrentop (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (thecurrentop__function_guard
-  (thecurrentop (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (ispresent__function_guard
-  (ispresent (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (thecurrentop__function_guard
-  (thecurrentop (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (statusiswaitingstartadminop__function_guard
-  (statusiswaitingstartadminop (us_private__content state9))
-  (us_private__content state9)))
-
-;; H
-  (assert (statusisgotadmintoken__function_guard
-  (statusisgotadmintoken (us_private__content state9))
-  (us_private__content state9)))
-
-;; H
-  (assert (statusiswaitingremoveadmintokenfail__function_guard
-  (statusiswaitingremoveadmintokenfail (us_private__content state9))
-  (us_private__content state9)))
-
-;; H
-  (assert (ispresent__function_guard
-  (ispresent (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (statusiswaitingstartadminop__function_guard
-  (statusiswaitingstartadminop (us_private__content state9))
-  (us_private__content state9)))
-
-;; H
-  (assert (statusiswaitingfinishadminop__function_guard
-  (statusiswaitingfinishadminop (us_private__content state9))
-  (us_private__content state9)))
-
-;; H
-  (assert (ispresent__function_guard
-  (ispresent (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (statusisenclavequiescent__function_guard
-  (statusisenclavequiescent (us_private__content state9))
-  (us_private__content state9)))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (statusisshutdown__function_guard
-  (statusisshutdown (us_private__content state9))
-  (us_private__content state9)))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (enrolmentisinprogress__function_guard
-  (enrolmentisinprogress (us_private__content state9))
-  (us_private__content state9)))
-
-;; H
-  (assert (ispresent__function_guard
-  (ispresent (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (privatekeypresent__function_guard (privatekeypresent state23)
-  state23))
-
-;; H
-  (assert (enrolmentisinprogress__function_guard
-  (enrolmentisinprogress (let ((subject state9)) state27))
-  (let ((subject state9)) state27)))
-
-;; H
-  (assert (enrolmentisinprogress__function_guard
-  (enrolmentisinprogress (let ((subject state9)) state27))
-  (let ((subject state9)) state27)))
-
-;; H
-  (assert (statusisenclavequiescent__function_guard
-  (statusisenclavequiescent (let ((subject state9)) state27))
-  (let ((subject state9)) state27)))
-
-;; H
-  (assert (enrolmentisinprogress__function_guard
-  (enrolmentisinprogress (let ((subject state9)) state29))
-  (let ((subject state9)) state29)))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields2)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields2))))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields2)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields2))))
-
-;; H
-  (assert (statusisenclavequiescent__function_guard
-  (statusisenclavequiescent (let ((subject state9)) state29))
-  (let ((subject state9)) state29)))
-
-;; H
-  (assert (statusiswaitingremoveadmintokenfail__function_guard
-  (statusiswaitingremoveadmintokenfail (let ((subject state9)) state29))
-  (let ((subject state9)) state29)))
-
-;; H
-  (assert (getstatus__function_guard
-  (getstatus (let ((subject state9)) state29))
-  (let ((subject state9)) state29)))
-
-;; H
-  (assert (getstatus__function_guard (getstatus (us_private__content state9))
-  (us_private__content state9)))
-
-;; H
-  (assert (statusiswaitingstartadminop__function_guard
-  (statusiswaitingstartadminop (let ((subject state9)) state29))
-  (let ((subject state9)) state29)))
-
-;; H
-  (assert (statusiswaitingfinishadminop__function_guard
-  (statusiswaitingfinishadminop (let ((subject state9)) state29))
-  (let ((subject state9)) state29)))
-
-;; H
-  (assert (islocked__function_guard (islocked state32) state32))
-
-;; H
-  (assert (thecurrentdoor__function_guard (thecurrentdoor state33) state33))
-
-;; H
-  (assert (thecurrenttime__function_guard (thecurrenttime currenttime)
-  currenttime))
-
-;; H
-  (assert (alarm_timeout__function_guard (alarm_timeout state33) state33))
-
-;; H
-  (assert (thecurrenttime__function_guard (thecurrenttime currenttime)
-  currenttime))
-
-;; H
-  (assert (alarm_timeout__function_guard (alarm_timeout state33) state33))
-
-;; H
-  (assert (greaterthanorequal__function_guard
-  (greaterthanorequal (thecurrenttime currenttime) (alarm_timeout state33))
-  (thecurrenttime currenttime) (alarm_timeout state33)))
-
-;; H
-  (assert (thedooralarm__function_guard (thedooralarm state33) state33))
-
-;; H
-  (assert (enrolmentisinprogress__function_guard
-  (enrolmentisinprogress (let ((subject state9)) state49))
-  (let ((subject state9)) state49)))
-
-;; H
-  (assert (islocked__function_guard (islocked state43) state43))
-
-;; H
-  (assert (thecurrentdoor__function_guard (thecurrentdoor state44) state44))
-
-;; H
-  (assert (thecurrenttime__function_guard (thecurrenttime currenttime)
-  currenttime))
-
-;; H
-  (assert (alarm_timeout__function_guard (alarm_timeout state44) state44))
-
-;; H
-  (assert (thecurrenttime__function_guard (thecurrenttime currenttime)
-  currenttime))
-
-;; H
-  (assert (alarm_timeout__function_guard (alarm_timeout state44) state44))
-
-;; H
-  (assert (greaterthanorequal__function_guard
-  (greaterthanorequal (thecurrenttime currenttime) (alarm_timeout state44))
-  (thecurrenttime currenttime) (alarm_timeout state44)))
-
-;; H
-  (assert (thedooralarm__function_guard (thedooralarm state44) state44))
-
-;; H
-  (assert (statusisgotadmintoken__function_guard
-  (statusisgotadmintoken (let ((subject state9)) state49))
-  (let ((subject state9)) state49)))
-
-;; H
-  (assert (statusiswaitingremoveadmintokenfail__function_guard
-  (statusiswaitingremoveadmintokenfail (let ((subject state9)) state49))
-  (let ((subject state9)) state49)))
-
-;; H
-  (assert (ispresent__function_guard
-  (ispresent
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3))))
-
-;; H
-  (assert (statusiswaitingstartadminop__function_guard
-  (statusiswaitingstartadminop (let ((subject state9)) state49))
-  (let ((subject state9)) state49)))
-
-;; H
-  (assert (statusiswaitingfinishadminop__function_guard
-  (statusiswaitingfinishadminop (let ((subject state9)) state49))
-  (let ((subject state9)) state49)))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3))))
-
-;; H
-  (assert (ispresent__function_guard
-  (ispresent
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3))))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3))))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (statusisenclavequiescent__function_guard
-  (statusisenclavequiescent (let ((subject state9)) state49))
-  (let ((subject state9)) state49)))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3))))
-
-;; H
-  (assert (statusisshutdown__function_guard
-  (statusisshutdown (let ((subject state9)) state49))
-  (let ((subject state9)) state49)))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3))))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3))))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3))))
-
-;; H
-  (assert (thecurrentop__function_guard
-  (thecurrentop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3))))
-
-;; H
-  (assert (statusiswaitingstartadminop__function_guard
-  (statusiswaitingstartadminop (let ((subject state9)) state49))
-  (let ((subject state9)) state49)))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3))))
-
-;; H
-  (assert (isgood__function_guard (isgood state42) state42))
-
-;; H
-  (assert (authcertvalid__function_guard (authcertvalid state42) state42))
-
-;; H
-  (assert (theauthcertrole__function_guard (theauthcertrole state42)
-  state42))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3))))
-
-;; H
-  (assert (thecurrentop__function_guard
-  (thecurrentop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3))))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3))))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3))))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3))))
-
-;; H
-  (assert (thecurrentop__function_guard
-  (thecurrentop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3))))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3))))
-
-;; H
-  (assert (ispresent__function_guard
-  (ispresent
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3))))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields3))))
-
-;; H
-  (assert (islocked__function_guard (islocked state43) state43))
-
-;; H
-  (assert (islocked__function_guard (islocked state3) state3))
-
-;; H
-  (assert (isgood__function_guard (isgood state42) state42))
-
-;; H
-  (assert (authcertvalid__function_guard (authcertvalid state42) state42))
-
-;; H
-  (assert (theauthcertrole__function_guard (theauthcertrole state42)
-  state42))
-
-;; H
-  (assert (islocked__function_guard (islocked state43) state43))
-
-;; H
-  (assert (islocked__function_guard (islocked state3) state3))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (thecurrentop__function_guard
-  (thecurrentop (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (enrolmentisinprogress__function_guard
-  (enrolmentisinprogress (let ((subject state9)) state56))
-  (let ((subject state9)) state56)))
-
-;; H
-  (assert (ispresent__function_guard
-  (ispresent
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4))))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4))))
-
-;; H
-  (assert (statusisgotadmintoken__function_guard
-  (statusisgotadmintoken (let ((subject state9)) state56))
-  (let ((subject state9)) state56)))
-
-;; H
-  (assert (statusiswaitingremoveadmintokenfail__function_guard
-  (statusiswaitingremoveadmintokenfail (let ((subject state9)) state56))
-  (let ((subject state9)) state56)))
-
-;; H
-  (assert (ispresent__function_guard
-  (ispresent
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4))))
-
-;; H
-  (assert (statusiswaitingstartadminop__function_guard
-  (statusiswaitingstartadminop (let ((subject state9)) state56))
-  (let ((subject state9)) state56)))
-
-;; H
-  (assert (statusiswaitingfinishadminop__function_guard
-  (statusiswaitingfinishadminop (let ((subject state9)) state56))
-  (let ((subject state9)) state56)))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4))))
-
-;; H
-  (assert (ispresent__function_guard
-  (ispresent
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4))))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4))))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (statusisenclavequiescent__function_guard
-  (statusisenclavequiescent (let ((subject state9)) state56))
-  (let ((subject state9)) state56)))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4))))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4))))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent (mk___rep (us_split_fields__content theadmin__split_fields)))
-  (mk___rep (us_split_fields__content theadmin__split_fields))))
-
-;; H
-  (assert (statusisshutdown__function_guard
-  (statusisshutdown (let ((subject state9)) state56))
-  (let ((subject state9)) state56)))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4))))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4))))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4))))
-
-;; H
-  (assert (thecurrentop__function_guard
-  (thecurrentop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4))))
-
-;; H
-  (assert (statusiswaitingstartadminop__function_guard
-  (statusiswaitingstartadminop (let ((subject state9)) state56))
-  (let ((subject state9)) state56)))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4))))
-
-;; H
-  (assert (isgood__function_guard (isgood state2) state2))
-
-;; H
-  (assert (authcertvalid__function_guard (authcertvalid state2) state2))
-
-;; H
-  (assert (theauthcertrole__function_guard (theauthcertrole state2) state2))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4))))
-
-;; H
-  (assert (thecurrentop__function_guard
-  (thecurrentop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4))))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4))))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4))))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4))))
-
-;; H
-  (assert (thecurrentop__function_guard
-  (thecurrentop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4))))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4)))
-  (mk___rep (let ((subject theadmin__split_fields)) theadmin__split_fields4))))
-
-;; H
   (assert
   (and
   (and
@@ -2136,10 +1437,7 @@
   (= (isdoingop (mk___rep (us_split_fields__content theadmin__split_fields))) true))))))
 
 ;; H
-  (assert
-  (and (= result (enrolmentisinprogress (us_private__content state9)))
-  (enrolmentisinprogress__function_guard result
-  (us_private__content state9))))
+  (assert (= result (enrolmentisinprogress (us_private__content state9))))
 
 ;; H
   (assert
@@ -2259,13 +1557,9 @@
 ;; H
   (assert
   (=> (not (= result true))
-  (and
   (= result1 (adminmustlogout
              (mk___rep (us_split_fields__content theadmin__split_fields))
-             state2 currenttime (us_private__content state9)))
-  (adminmustlogout__function_guard result1
-  (mk___rep (us_split_fields__content theadmin__split_fields)) state2
-  currenttime (us_private__content state9)))))
+             state2 currenttime (us_private__content state9)))))
 
 ;; H
   (assert
@@ -2432,10 +1726,7 @@
   (assert
   (=> (not (= result true))
   (=> (not (= result1 true))
-  (and
-  (= result2 (currentactivitypossible state8 (us_private__content state10)))
-  (currentactivitypossible__function_guard result2 state8
-  (us_private__content state10))))))
+  (= result2 (currentactivitypossible state8 (us_private__content state10))))))
 
 ;; H
   (assert
@@ -2551,11 +1842,8 @@
   (=> (not (= result true))
   (=> (not (= result1 true))
   (=> (not (= result2 true))
-  (and
   (= result3 (currentadminactivitypossible state2
-             (us_private__content state9)))
-  (currentadminactivitypossible__function_guard result3 state2
-  (us_private__content state9)))))))
+             (us_private__content state9)))))))
 
 ;; H
   (assert
@@ -2697,8 +1985,7 @@
   (=> (not (= result1 true))
   (=> (not (= result2 true))
   (=> (not (= result3 true))
-  (and (= result4 (canstart state8 (us_private__content state10)))
-  (canstart__function_guard result4 state8 (us_private__content state10))))))))
+  (= result4 (canstart state8 (us_private__content state10))))))))
 
 ;; H
   (assert
@@ -3539,21 +2826,15 @@
   (assert (= filestate15 filestate8))
 
 ;; H
-  (assert (enrolmentisinprogress__function_guard
-  (enrolmentisinprogress (us_private__content state68))
-  (us_private__content state68)))
-
-;; H
   (assert
-  (not (= (enrolmentisinprogress (us_private__content state68)) true)))
-
-;; H
-  (assert (privatekeypresent__function_guard
-  (privatekeypresent (us_private__content state59))
-  (us_private__content state59)))
+  (or (= (statusisgotadmintoken (us_private__content state68)) true)
+  (= (statusiswaitingremoveadmintokenfail (us_private__content state68)) true)))
 
 (assert
 ;; WP_parameter_def
  ;; File "admintoken.ads", line 40, characters 0-0
-  (not (= (privatekeypresent (us_private__content state59)) true)))
+  (not
+  (not
+  (= (ispresent
+     (mk___rep (us_split_fields__content theadmin__split_fields5))) true))))
 (check-sat)

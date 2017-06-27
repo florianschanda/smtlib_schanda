@@ -107,8 +107,6 @@
   (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                            (of_rep x))) )))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -131,7 +129,7 @@
 
 (declare-fun first (Int) Int)
 
-(declare-fun last1 (Int) Int)
+(declare-fun last (Int) Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -158,11 +156,11 @@
   (temp___do_toplevel_140 Bool)
   (dyn_bounds__L_1__i Int)) Bool (=>
                                  (or (= temp___is_init_138 true)
-                                 (<= (first dyn_bounds__L_1__i) (last1
+                                 (<= (first dyn_bounds__L_1__i) (last
                                                                 dyn_bounds__L_1__i)))
                                  (dynamic_property1
                                  (first dyn_bounds__L_1__i)
-                                 (last1 dyn_bounds__L_1__i) temp___expr_141)))
+                                 (last dyn_bounds__L_1__i) temp___expr_141)))
 
 ;; first__def_axiom
   (assert
@@ -173,8 +171,8 @@
 ;; last__def_axiom
   (assert
   (forall ((dyn_bounds__L_1__i Int))
-  (! (= (last1 dyn_bounds__L_1__i) dyn_bounds__L_1__i) :pattern ((last1
-                                                                 dyn_bounds__L_1__i)) )))
+  (! (= (last dyn_bounds__L_1__i) dyn_bounds__L_1__i) :pattern ((last
+                                                                dyn_bounds__L_1__i)) )))
 
 (declare-fun c1 () Int)
 
@@ -199,7 +197,7 @@
   (assert (dynamic_invariant1 c1 true false true i))
 
 ;; H
-  (assert (< c1 (last1 i)))
+  (assert (< c1 (last i)))
 
 (assert
 ;; WP_parameter_def

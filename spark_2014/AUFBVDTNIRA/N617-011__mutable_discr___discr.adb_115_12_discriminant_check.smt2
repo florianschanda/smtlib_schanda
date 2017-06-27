@@ -245,22 +245,22 @@
 (declare-datatypes () ((tdS__ref (mk_tdS__ref (tdS__content us_rep)))))
 (define-fun tdS__ref_2__projection ((a tdS__ref)) us_rep (tdS__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_238 us_rep)
-  (temp___is_init_235 Bool) (temp___skip_constant_236 Bool)
-  (temp___do_toplevel_237 Bool)) Bool (and
+(define-fun dynamic_invariant1 ((temp___expr_237 us_rep)
+  (temp___is_init_234 Bool) (temp___skip_constant_235 Bool)
+  (temp___do_toplevel_236 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_236 true))
-                                      (in_range1 c temp___expr_238))
-                                      (= (attr__constrained temp___expr_238) true)))
+                                      (not (= temp___skip_constant_235 true))
+                                      (in_range1 c temp___expr_237))
+                                      (= (attr__constrained temp___expr_237) true)))
 
-(define-fun default_initial_assumption1 ((temp___expr_240 us_rep)
-  (temp___skip_top_level_241 Bool)) Bool (and
+(define-fun default_initial_assumption1 ((temp___expr_239 us_rep)
+  (temp___skip_top_level_240 Bool)) Bool (and
                                          (= (attr__constrained
-                                            temp___expr_240) true)
+                                            temp___expr_239) true)
                                          (= (to_rep
                                             (rec__private_discr__p_with_default__c
                                             (us_split_discrs1
-                                            temp___expr_240))) c)))
+                                            temp___expr_239))) c)))
 
 (declare-fun d__split_discrs () us_split_discrs)
 
@@ -284,11 +284,11 @@
 
 (declare-fun o5 () Bool)
 
-(declare-fun temp___333 () natural)
+(declare-fun temp___332 () natural)
 
-(declare-fun temp___3331 () us_main_type)
+(declare-fun temp___3321 () us_main_type)
 
-(declare-fun temp___3332 () Bool)
+(declare-fun temp___3322 () Bool)
 
 (declare-fun o6 () natural)
 
@@ -300,13 +300,10 @@
 
 (declare-fun d__split_fields1 () us_main_type)
 
-(define-fun o9 () us_rep (mk___rep (mk___split_discrs o6)
-                         (mk___split_fields o7) o8))
+(define-fun o9 () us_rep (mk___rep (mk___split_discrs o3)
+                         (mk___split_fields o4) o5))
 
-(define-fun o10 () us_rep (mk___rep (mk___split_discrs o3)
-                          (mk___split_fields o4) o5))
-
-(define-fun o11 () us_rep (mk___rep (mk___split_discrs o)
+(define-fun o10 () us_rep (mk___rep (mk___split_discrs o)
                           (mk___split_fields o1) o2))
 
 ;; H
@@ -327,32 +324,30 @@
   (= d__attr__constrained true)))
 
 ;; H
-  (assert
-  (and
-  (and (= o11 (new_with_default c)) (new_with_default__function_guard o11 c))
-  (= (to_rep o) c)))
+  (assert (and (= o10 (new_with_default c)) (= (to_rep o) c)))
 
 ;; H
-  (assert (= o10 o11))
+  (assert (= o9 o10))
 
 ;; H
   (assert
-  (= (mk___rep (mk___split_discrs temp___333) (mk___split_fields temp___3331)
-     temp___3332) o10))
+  (= (mk___rep (mk___split_discrs temp___332) (mk___split_fields temp___3321)
+     temp___3322) o9))
 
 ;; H
   (assert (= result d__split_fields))
 
 ;; H
-  (assert (= d__split_fields1 temp___3331))
+  (assert (= d__split_fields1 temp___3321))
 
 ;; H
-  (assert (= d__split_discrs (mk___split_discrs temp___333)))
+  (assert (= d__split_discrs (mk___split_discrs temp___332)))
 
 ;; H
   (assert
   (and
-  (and (= o9 (new_with_default 0)) (new_with_default__function_guard o9 0))
+  (= (mk___rep (mk___split_discrs o6) (mk___split_fields o7) o8) (new_with_default
+                                                                 0))
   (= (to_rep o6) 0)))
 
 (assert

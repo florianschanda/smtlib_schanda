@@ -153,10 +153,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
-(declare-fun first1 () Int)
-
-(declare-fun last1 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -246,9 +242,6 @@
   (assert (<= i1 lst))
 
 ;; H
-  (assert (forall ((j Int)) (id__function_guard (id j) j)))
-
-;; H
   (assert
   (forall ((j Int)) (=> (and (<= first j) (<= j (- fst 2))) (= (id j) j))))
 
@@ -281,9 +274,6 @@
 
 ;; H
   (assert (<= j (- fst 2)))
-
-;; H
-  (assert (id__function_guard (id j) j))
 
 (assert
 ;; WP_parameter_def

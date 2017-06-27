@@ -372,7 +372,6 @@
   (forall ((c Int))
   (! (=> (dynamic_invariant2 c true true true)
      (let ((result (is_digit c)))
-     (=> (is_digit__function_guard result c)
      (ite (= c 48) (= result true)
      (ite (= c 49) (= result true)
      (ite (= c 50) (= result true)
@@ -383,7 +382,7 @@
      (ite (= c 55) (= result true)
      (ite (= c 56) (= result true)
      (ite (= c 57) (= result true)
-     (ite (< 57 c) (not (= result true)) (=> (< c 48) (not (= result true))))))))))))))))) :pattern (
+     (ite (< 57 c) (not (= result true)) (=> (< c 48) (not (= result true)))))))))))))))) :pattern (
   (is_digit c)) )))
 
 (declare-fun convert_character_digit_to_integer (Int) Int)
@@ -394,12 +393,10 @@
 ;; convert_character_digit_to_integer__post_axiom
   (assert
   (forall ((source Int))
-  (! (and (is_digit__function_guard (is_digit source) source)
-     (=>
+  (! (=>
      (and (dynamic_invariant2 source true true true)
      (= (is_digit source) true))
      (let ((result (convert_character_digit_to_integer source)))
-     (=> (convert_character_digit_to_integer__function_guard result source)
      (and
      (and (and (<= 0 result) (<= result 9))
      (ite (= source 48) (= result 0)
@@ -411,8 +408,8 @@
      (ite (= source 54) (= result 6)
      (ite (= source 55) (= result 7)
      (ite (= source 56) (= result 8) (=> (= source 57) (= result 9))))))))))))
-     (dynamic_invariant result true false true)))))) :pattern ((convert_character_digit_to_integer
-                                                               source)) )))
+     (dynamic_invariant result true false true)))) :pattern ((convert_character_digit_to_integer
+                                                             source)) )))
 
 (declare-fun source () us_t)
 
@@ -421,10 +418,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
-
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -445,10 +438,6 @@
 (define-fun t12b__ref___projection ((a t12b__ref)) integer (t12b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
-
-(declare-fun first3 () Int)
-
-(declare-fun last3 () Int)
 
 (define-fun dynamic_property2 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -597,9 +586,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o3 (is_digit (to_rep (select (elts source) i1))))
-  (is_digit__function_guard o3 (to_rep (select (elts source) i1))))
   (ite (= (= (to_rep (select (elts source) i1)) 48) true) (= o3 true)
   (ite (= (= (to_rep (select (elts source) i1)) 49) true) (= o3 true)
   (ite (= (= (to_rep (select (elts source) i1)) 50) true) (= o3 true)
@@ -624,12 +611,6 @@
 
 ;; H
   (assert (= target4 target3))
-
-;; H
-  (assert
-  (forall ((j Int)) (is_digit__function_guard
-  (is_digit (to_rep (select (elts source) j)))
-  (to_rep (select (elts source) j)))))
 
 ;; H
   (assert
@@ -659,9 +640,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o4 (is_digit (to_rep (select (elts source) i3))))
-  (is_digit__function_guard o4 (to_rep (select (elts source) i3))))
   (ite (= (= (to_rep (select (elts source) i3)) 48) true) (= o4 true)
   (ite (= (= (to_rep (select (elts source) i3)) 49) true) (= o4 true)
   (ite (= (= (to_rep (select (elts source) i3)) 50) true) (= o4 true)
@@ -694,11 +673,6 @@
 
 ;; H
   (assert (<= j i3))
-
-;; H
-  (assert (is_digit__function_guard
-  (is_digit (to_rep (select (elts source) j)))
-  (to_rep (select (elts source) j))))
 
 (assert
 ;; WP_parameter_def

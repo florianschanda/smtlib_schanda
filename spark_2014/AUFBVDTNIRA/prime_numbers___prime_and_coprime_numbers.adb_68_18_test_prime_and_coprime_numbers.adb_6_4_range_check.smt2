@@ -157,13 +157,12 @@
 ;; are_coprime__def_axiom
   (assert
   (forall ((v1 Int) (v2 Int))
-  (! (=> (are_coprime__function_guard (are_coprime v1 v2) v1 v2)
-     (= (= (are_coprime v1 v2) true)
+  (! (= (= (are_coprime v1 v2) true)
      (and (and (< 0 v1) (< 0 v2))
      (forall ((v Int))
      (=> (and (<= 2 v) (<= v (ite (< v1 v2) v1 v2)))
-     (not (and (= (mod2 v1 v) 0) (= (mod2 v2 v) 0)))))))) :pattern ((are_coprime
-                                                                    v1 v2)) )))
+     (not (and (= (mod2 v1 v) 0) (= (mod2 v2 v) 0))))))) :pattern ((are_coprime
+                                                                   v1 v2)) )))
 
 (declare-fun left () Int)
 
@@ -192,12 +191,12 @@
 (declare-datatypes () ((taS__ref (mk_taS__ref (taS__content taS)))))
 (define-fun taS__ref___projection ((a taS__ref)) taS (taS__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_228 Int)
-  (temp___is_init_225 Bool) (temp___skip_constant_226 Bool)
-  (temp___do_toplevel_227 Bool)) Bool (=>
-                                      (or (= temp___is_init_225 true)
+(define-fun dynamic_invariant1 ((temp___expr_206 Int)
+  (temp___is_init_203 Bool) (temp___skip_constant_204 Bool)
+  (temp___do_toplevel_205 Bool)) Bool (=>
+                                      (or (= temp___is_init_203 true)
                                       (<= 1 2147483647)) (in_range2
-                                      temp___expr_228)))
+                                      temp___expr_206)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
@@ -220,12 +219,12 @@
 (declare-datatypes () ((tbS__ref (mk_tbS__ref (tbS__content tbS)))))
 (define-fun tbS__ref___projection ((a tbS__ref)) tbS (tbS__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_234 Int)
-  (temp___is_init_231 Bool) (temp___skip_constant_232 Bool)
-  (temp___do_toplevel_233 Bool)) Bool (=>
-                                      (or (= temp___is_init_231 true)
+(define-fun dynamic_invariant2 ((temp___expr_212 Int)
+  (temp___is_init_209 Bool) (temp___skip_constant_210 Bool)
+  (temp___do_toplevel_211 Bool)) Bool (=>
+                                      (or (= temp___is_init_209 true)
                                       (<= 1 2147483647)) (in_range3
-                                      temp___expr_234)))
+                                      temp___expr_212)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
@@ -248,12 +247,12 @@
 (declare-datatypes () ((trS__ref (mk_trS__ref (trS__content trS)))))
 (define-fun trS__ref___projection ((a trS__ref)) trS (trS__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_240 Int)
-  (temp___is_init_237 Bool) (temp___skip_constant_238 Bool)
-  (temp___do_toplevel_239 Bool)) Bool (=>
-                                      (or (= temp___is_init_237 true)
+(define-fun dynamic_invariant3 ((temp___expr_218 Int)
+  (temp___is_init_215 Bool) (temp___skip_constant_216 Bool)
+  (temp___do_toplevel_217 Bool)) Bool (=>
+                                      (or (= temp___is_init_215 true)
                                       (<= 0 2147483647)) (in_range4
-                                      temp___expr_240)))
+                                      temp___expr_218)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
@@ -357,13 +356,6 @@
   (assert (= b1 o1))
 
 ;; H
-  (assert (are_coprime__function_guard (are_coprime a2 b2) a2 b2))
-
-;; H
-  (assert (are_coprime__function_guard (are_coprime left right) left 
-  right))
-
-;; H
   (assert (and (< 0 a2) (< 0 b2)))
 
 ;; H
@@ -390,12 +382,6 @@
 
 ;; H
   (assert (not (= r2 0)))
-
-;; H
-  (assert (are_coprime__function_guard (are_coprime a2 b2) a2 b2))
-
-;; H
-  (assert (are_coprime__function_guard (are_coprime b2 r2) b2 r2))
 
 ;; H
   (assert (= (= (are_coprime a2 b2) true) (= (are_coprime b2 r2) true)))

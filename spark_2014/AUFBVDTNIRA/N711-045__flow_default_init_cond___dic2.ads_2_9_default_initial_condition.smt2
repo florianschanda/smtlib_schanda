@@ -66,11 +66,6 @@
                                       (<= (- 2147483648) 2147483647))
                                       (in_range temp___expr_135)))
 
-;; temp___result_139_def
-  (assert
-  (forall ((temp___138 Int)) (foo__function_guard (foo temp___138)
-  temp___138)))
-
 (define-fun default_initial_assumption ((temp___expr_136 Int)
   (temp___skip_top_level_137 Bool)) Bool (and (= temp___expr_136 0)
                                          (=>
@@ -84,24 +79,20 @@
 ;; foo__def_axiom
   (assert
   (forall ((par1 Int))
-  (! (=> (foo__function_guard (foo par1) par1)
-     (= (= (foo par1) true) (= par1 0))) :pattern ((foo par1)) )))
+  (! (= (= (foo par1) true) (= par1 0)) :pattern ((foo par1)) )))
 
 (declare-fun us () Int)
 
-(declare-fun temp___160 () Int)
+(declare-fun temp___156 () Int)
 
 ;; H
   (assert (and (= us 0) (in_range 0)))
 
 ;; H
-  (assert (and (in_range temp___160) (= temp___160 0)))
-
-;; H
-  (assert (foo__function_guard (foo temp___160) temp___160))
+  (assert (and (in_range temp___156) (= temp___156 0)))
 
 (assert
 ;; WP_parameter_def
  ;; File "dic2.ads", line 17, characters 0-0
-  (not (= (foo temp___160) true)))
+  (not (= (foo temp___156) true)))
 (check-sat)

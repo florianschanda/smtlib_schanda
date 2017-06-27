@@ -180,21 +180,16 @@
 
 (declare-fun is_valid__function_guard (Bool us_rep) Bool)
 
-;; temp___result_187_def
-  (assert
-  (forall ((temp___186 us_rep)) (is_valid__function_guard
-  (is_valid temp___186) temp___186)))
-
-(define-fun default_initial_assumption ((temp___expr_183 us_rep)
-  (temp___skip_top_level_184 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_177 us_rep)
+  (temp___skip_top_level_178 Bool)) Bool (and
                                          (= (to_rep
                                             (rec__dic_and_predicate_checks__r__g
                                             (us_split_fields1
-                                            temp___expr_183))) 0)
+                                            temp___expr_177))) 0)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_184 true))
-                                         (= (is_valid temp___expr_183) true))))
+                                         (= temp___skip_top_level_178 true))
+                                         (= (is_valid temp___expr_177) true))))
 
 (declare-fun value__size1 () Int)
 
@@ -263,10 +258,7 @@
 ;; is_valid__def_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (is_valid__function_guard (is_valid x) x)
-     (and (is_valid__function_guard1 (is_valid1 x) x)
-     (= (= (is_valid x) true) (= (is_valid1 x) true)))) :pattern ((is_valid
-                                                                  x)) )))
+  (! (= (= (is_valid x) true) (= (is_valid1 x) true)) :pattern ((is_valid x)) )))
 
 (define-fun default_initial_assumption1 ((temp___expr_136 us_rep)
   (temp___skip_top_level_137 Bool)) Bool (= (to_rep
@@ -280,26 +272,20 @@
 ;; is_valid__def_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (is_valid__function_guard1 (is_valid1 x) x)
-     (= (= (is_valid1 x) true)
-     (< 0 (to_rep (rec__dic_and_predicate_checks__r__f (us_split_fields1 x)))))) :pattern (
+  (! (= (= (is_valid1 x) true)
+     (< 0 (to_rep (rec__dic_and_predicate_checks__r__f (us_split_fields1 x))))) :pattern (
   (is_valid1 x)) )))
 
-(declare-fun temp___248 () integer)
+(declare-fun temp___230 () integer)
 
-(declare-fun temp___2481 () integer)
-
-(define-fun temp___2482 () us_rep (mk___rep
-                                  (mk___split_fields temp___248 temp___2481)))
+(declare-fun temp___2301 () integer)
 
 ;; H
-  (assert (= (to_rep temp___2481) 0))
-
-;; H
-  (assert (is_valid__function_guard (is_valid temp___2482) temp___2482))
+  (assert (= (to_rep temp___2301) 0))
 
 (assert
 ;; WP_parameter_def
  ;; File "dic_and_predicate_checks.ads", line 28, characters 0-0
-  (not (= (is_valid temp___2482) true)))
+  (not
+  (= (is_valid (mk___rep (mk___split_fields temp___230 temp___2301))) true)))
 (check-sat)

@@ -243,12 +243,12 @@
 (define-fun size_t__ref___projection ((a size_t__ref)) size_t (size_t__content
                                                               a))
 
-(define-fun dynamic_invariant ((temp___expr_137 Int)
-  (temp___is_init_134 Bool) (temp___skip_constant_135 Bool)
-  (temp___do_toplevel_136 Bool)) Bool (=>
-                                      (or (= temp___is_init_134 true)
+(define-fun dynamic_invariant ((temp___expr_136 Int)
+  (temp___is_init_133 Bool) (temp___skip_constant_134 Bool)
+  (temp___do_toplevel_135 Bool)) Bool (=>
+                                      (or (= temp___is_init_133 true)
                                       (<= 0 100)) (in_range3
-                                      temp___expr_137)))
+                                      temp___expr_136)))
 
 ;; valid__post_axiom
   (assert true)
@@ -257,14 +257,13 @@
   (assert
   (forall ((t (Array Int element_t)))
   (forall ((s Int))
-  (! (=> (valid__function_guard (valid t s) t s)
-     (= (= (valid t s) true)
+  (! (= (= (valid t s) true)
      (and
      (forall ((i Int))
      (=> (and (<= 1 i) (<= i s))
      (and (<= 0 (to_rep (select t i))) (<= (to_rep (select t i)) 2147483647))))
      (forall ((i Int))
-     (=> (and (<= (+ s 1) i) (<= i 100)) (= (to_rep (select t i)) (- 1))))))) :pattern (
+     (=> (and (<= (+ s 1) i) (<= i 100)) (= (to_rep (select t i)) (- 1)))))) :pattern (
   (valid t s)) ))))
 
 (declare-fun t () (Array Int element_t))
@@ -292,19 +291,19 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_143 Int)
-  (temp___is_init_140 Bool) (temp___skip_constant_141 Bool)
-  (temp___do_toplevel_142 Bool)) Bool (=>
-                                      (or (= temp___is_init_140 true)
+(define-fun dynamic_invariant1 ((temp___expr_142 Int)
+  (temp___is_init_139 Bool) (temp___skip_constant_140 Bool)
+  (temp___do_toplevel_141 Bool)) Bool (=>
+                                      (or (= temp___is_init_139 true)
                                       (<= (- 1) 2147483647)) (in_range1
-                                      temp___expr_143)))
+                                      temp___expr_142)))
 
-(define-fun dynamic_invariant2 ((temp___expr_149 Int)
-  (temp___is_init_146 Bool) (temp___skip_constant_147 Bool)
-  (temp___do_toplevel_148 Bool)) Bool (=>
-                                      (or (= temp___is_init_146 true)
+(define-fun dynamic_invariant2 ((temp___expr_148 Int)
+  (temp___is_init_145 Bool) (temp___skip_constant_146 Bool)
+  (temp___do_toplevel_147 Bool)) Bool (=>
+                                      (or (= temp___is_init_145 true)
                                       (<= 1 100)) (in_range2
-                                      temp___expr_149)))
+                                      temp___expr_148)))
 
 (declare-fun index () Int)
 
@@ -321,9 +320,6 @@
 (declare-fun result1 () Int)
 
 (declare-fun index3 () Int)
-
-;; H
-  (assert (forall ((s Int)) (valid__function_guard (valid t s) t s)))
 
 ;; H
   (assert

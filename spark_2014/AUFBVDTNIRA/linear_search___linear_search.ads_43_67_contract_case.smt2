@@ -402,11 +402,9 @@
   (assert
   (forall ((a (Array Int element)))
   (forall ((val__ Int) (low Int) (up Int))
-  (! (=> (value_found_in_range__function_guard
-     (value_found_in_range a val__ low up) a val__ low up)
-     (= (= (value_found_in_range a val__ low up) true)
+  (! (= (= (value_found_in_range a val__ low up) true)
      (exists ((j Int))
-     (and (and (<= low j) (<= j up)) (= (to_rep1 (select a j)) val__))))) :pattern (
+     (and (and (<= low j) (<= j up)) (= (to_rep1 (select a j)) val__)))) :pattern (
   (value_found_in_range a val__ low up)) ))))
 
 (declare-fun a () (Array Int element))
@@ -559,15 +557,15 @@
 
 (declare-fun linear_search__search__result2 () Bool)
 
-(declare-fun temp___183 () Bool)
+(declare-fun temp___181 () Bool)
 
-(declare-fun temp___1831 () index)
+(declare-fun temp___1811 () index)
 
-(declare-fun temp___1832 () Bool)
+(declare-fun temp___1812 () Bool)
+
+(declare-fun temp___180 () Int)
 
 (declare-fun temp___182 () Int)
-
-(declare-fun temp___185 () Int)
 
 (declare-fun o () Int)
 
@@ -581,11 +579,11 @@
 
 (declare-fun o5 () index)
 
-(declare-fun temp___179 () Bool)
+(declare-fun temp___177 () Bool)
 
-(declare-fun temp___1791 () index)
+(declare-fun temp___1771 () index)
 
-(declare-fun temp___1792 () Bool)
+(declare-fun temp___1772 () Bool)
 
 (declare-fun usq_ () Bool)
 
@@ -593,11 +591,11 @@
 
 (declare-fun usq_2 () Bool)
 
-(declare-fun temp___181 () Bool)
+(declare-fun temp___179 () Bool)
 
-(declare-fun temp___1811 () index)
+(declare-fun temp___1791 () index)
 
-(declare-fun temp___1812 () Bool)
+(declare-fun temp___1792 () Bool)
 
 (declare-fun o6 () Int)
 
@@ -613,15 +611,15 @@
 
 (declare-fun o12 () us_split_fields)
 
-(declare-fun temp___1793 () us_rep)
+(declare-fun temp___1773 () us_rep)
 
 (declare-fun usq_3 () us_rep)
 
-(declare-fun temp___1813 () us_rep)
+(declare-fun temp___1793 () us_rep)
 
 (declare-fun usq_4 () us_rep)
 
-(declare-fun temp___188 () us_rep)
+(declare-fun temp___185 () us_rep)
 
 (declare-fun res__split_fields1 () us_split_fields)
 
@@ -633,7 +631,7 @@
 
 (declare-fun pos1 () Int)
 
-(declare-fun temp___1851 () Int)
+(declare-fun temp___1821 () Int)
 
 (declare-fun result1 () Bool)
 
@@ -657,11 +655,11 @@
 
 (declare-fun linear_search__search__result5 () us_rep)
 
-(declare-fun temp___1852 () Int)
+(declare-fun temp___1822 () Int)
 
 (declare-fun result5 () int__ref)
 
-(declare-fun temp___1853 () Int)
+(declare-fun temp___1823 () Int)
 
 (declare-fun result6 () int__ref)
 
@@ -689,7 +687,7 @@
 
 (declare-fun linear_search__search__result7 () search_result__ref)
 
-(declare-fun temp___1854 () int__ref)
+(declare-fun temp___1824 () int__ref)
 
 (declare-fun pos5 () Int)
 
@@ -699,7 +697,7 @@
 
 (declare-fun linear_search__search__result8 () us_rep)
 
-(declare-fun temp___1855 () Int)
+(declare-fun temp___1825 () Int)
 
 (declare-fun pos6 () int__ref)
 
@@ -804,18 +802,6 @@
   (assert (<= 0 val__))
 
 ;; H
-  (assert (value_found_in_range__function_guard
-  (value_found_in_range a val__ 1 pos2) a val__ 1 pos2))
-
-;; H
-  (assert (value_found_in_range__function_guard
-  (value_found_in_range a val__ 1 pos2) a val__ 1 pos2))
-
-;; H
-  (assert (value_found_in_range__function_guard
-  (value_found_in_range a val__ 1 pos2) a val__ 1 pos2))
-
-;; H
   (assert (= result (mk_int__ref pos)))
 
 ;; H
@@ -841,22 +827,22 @@
   (and (= res__split_fields13 res__split_fields6) (= pos11 pos5)))))
   (and (<= pos1 10)
   (and
-  (and (= res__split_discrs temp___183)
-  (and (= res__split_fields temp___1831)
-  (= res__attr__constrained temp___1832)))
-  (and (= temp___182 pos1)
-  (and (= 0 temp___185)
+  (and (= res__split_discrs temp___181)
+  (and (= res__split_fields temp___1811)
+  (= res__attr__constrained temp___1812)))
+  (and (= temp___180 pos1)
+  (and (= 0 temp___182)
   (or
   (and
   (and
-  (and (= temp___1854 (mk_int__ref temp___185))
+  (and (= temp___1824 (mk_int__ref temp___182))
   (and
   (= linear_search__search__result7 (mk_search_result__ref
                                     linear_search__search__result4))
   (and (= res__split_discrs5 (mk___split_discrs__ref res__split_discrs2))
   (and (= res__split_fields5 (mk___split_fields__ref res__split_fields2))
   (= pos4 (mk_int__ref pos1))))))
-  (and (= temp___1855 temp___1851)
+  (and (= temp___1825 temp___1821)
   (and (= linear_search__search__result8 linear_search__search__result4)
   (and (= res__split_discrs6 res__split_discrs2)
   (and (= res__split_fields6 res__split_fields2) (= pos5 pos1))))))
@@ -872,19 +858,19 @@
   (and
   (and
   (and (and (and (= o3 pos1) (in_range2 pos1)) (= (to_rep o4) o3)) (= o4 o5))
-  (and (= (of_int 1) temp___179)
-  (and (= temp___1791 o5) (= true temp___1792))))
-  (and (=> (= res__attr__constrained true) (= temp___179 res__split_discrs))
+  (and (= (of_int 1) temp___177)
+  (and (= temp___1771 o5) (= true temp___1772))))
+  (and (=> (= res__attr__constrained true) (= temp___177 res__split_discrs))
   (= (mk___rep (mk___split_discrs usq_) (mk___split_fields usq_1) usq_2) 
-  (mk___rep (mk___split_discrs temp___179) (mk___split_fields temp___1791)
-  temp___1792))))
-  (and (= usq_ temp___181)
-  (and (= usq_1 temp___1811) (= res__attr__constrained temp___1812))))
+  (mk___rep (mk___split_discrs temp___177) (mk___split_fields temp___1771)
+  temp___1772))))
+  (and (= usq_ temp___179)
+  (and (= usq_1 temp___1791) (= res__attr__constrained temp___1792))))
   (and
   (and (= result2 res__split_fields16)
-  (= res__split_fields2 (mk___split_fields temp___1811)))
+  (= res__split_fields2 (mk___split_fields temp___1791)))
   (and (= result3 res__split_discrs16)
-  (= res__split_discrs2 (mk___split_discrs temp___181)))))
+  (= res__split_discrs2 (mk___split_discrs temp___179)))))
   (and (= result4 linear_search__search__result20)
   (= linear_search__search__result4 (mk___rep res__split_discrs2
                                     res__split_fields2
@@ -911,14 +897,14 @@
   (= res__split_fields2 res__split_fields1))))))
   (and
   (and
-  (and (= temp___1854 (mk_int__ref temp___1853))
+  (and (= temp___1824 (mk_int__ref temp___1823))
   (and
   (= linear_search__search__result7 (mk_search_result__ref
                                     linear_search__search__result6))
   (and (= res__split_discrs5 (mk___split_discrs__ref res__split_discrs4))
   (and (= res__split_fields5 (mk___split_fields__ref res__split_fields4))
   (= pos4 (mk_int__ref pos3))))))
-  (and (= temp___1855 temp___1853)
+  (and (= temp___1825 temp___1823)
   (and (= linear_search__search__result8 linear_search__search__result6)
   (and (= res__split_discrs6 res__split_discrs4)
   (and (= res__split_fields6 res__split_fields4) (= pos5 pos3))))))
@@ -926,7 +912,7 @@
   (and (and (<= 1 pos2) (<= pos2 10))
   (not (= (value_found_in_range a val__ 1 pos2) true)))
   (and (=> (<= (- 128) 127) (in_range1 pos2))
-  (and (and (= result5 (mk_int__ref temp___1852)) (= temp___1853 pos2))
+  (and (and (= result5 (mk_int__ref temp___1822)) (= temp___1823 pos2))
   (and
   (and (and (= o6 (+ pos2 1)) (in_range1 (+ pos2 1)))
   (and (= result6 (mk_int__ref pos2)) (= pos3 o6)))
@@ -944,20 +930,20 @@
   (and
   (and (and (and (= o10 pos3) (in_range2 pos3)) (= (to_rep o11) o10))
   (= o12 (mk___split_fields o11)))
-  (= temp___1793 (mk___rep (mk___split_discrs (of_int 1)) o12 true)))
+  (= temp___1773 (mk___rep (mk___split_discrs (of_int 1)) o12 true)))
   (and
   (=> (= res__attr__constrained true)
   (= (rec__linear_search__search_result__found
-     (us_split_discrs1 temp___1793)) (rec__linear_search__search_result__found
+     (us_split_discrs1 temp___1773)) (rec__linear_search__search_result__found
                                      res__split_discrs3)))
-  (= usq_3 temp___1793)))
-  (= temp___1813 (mk___rep (us_split_discrs1 usq_3) (us_split_fields1 usq_3)
+  (= usq_3 temp___1773)))
+  (= temp___1793 (mk___rep (us_split_discrs1 usq_3) (us_split_fields1 usq_3)
                  res__attr__constrained)))
   (and
   (and (= result8 (mk___split_fields__ref res__split_fields3))
-  (= res__split_fields4 (us_split_fields1 temp___1813)))
+  (= res__split_fields4 (us_split_fields1 temp___1793)))
   (and (= result9 (mk___split_discrs__ref res__split_discrs3))
-  (= res__split_discrs4 (us_split_discrs1 temp___1813)))))
+  (= res__split_discrs4 (us_split_discrs1 temp___1793)))))
   (and (= result10 (mk_search_result__ref linear_search__search__result5))
   (= linear_search__search__result6 (mk___rep res__split_discrs4
                                     res__split_fields4
@@ -967,11 +953,11 @@
   (and
   (and
   (and
-  (and (= res__split_discrs temp___183)
-  (and (= res__split_fields temp___1831)
-  (= res__attr__constrained temp___1832)))
-  (and (= temp___182 pos1)
-  (and (= 0 temp___185)
+  (and (= res__split_discrs temp___181)
+  (and (= res__split_fields temp___1811)
+  (= res__attr__constrained temp___1812)))
+  (and (= temp___180 pos1)
+  (and (= 0 temp___182)
   (and
   (and
   (and
@@ -996,7 +982,7 @@
   (and (and (<= 1 pos2) (<= pos2 10))
   (not (= (value_found_in_range a val__ 1 pos2) true)))
   (and (=> (<= (- 128) 127) (in_range1 pos2))
-  (and (and (= result5 (mk_int__ref temp___1852)) (= temp___1853 pos2))
+  (and (and (= result5 (mk_int__ref temp___1822)) (= temp___1823 pos2))
   (and
   (and (and (= o6 (+ pos2 1)) (in_range1 (+ pos2 1)))
   (and (= result6 (mk_int__ref pos2)) (= pos3 o6))) (not (<= pos3 10))))))))))
@@ -1043,13 +1029,13 @@
                 (us_split_discrs__content res__split_discrs9))))
   (= usq_4 (mk___rep (mk___split_discrs (of_int 0))
            (mk___split_fields dummy1) true)))
-  (= temp___188 (mk___rep (us_split_discrs1 usq_4) (us_split_fields1 usq_4)
+  (= temp___185 (mk___rep (us_split_discrs1 usq_4) (us_split_fields1 usq_4)
                 res__attr__constrained)))
   (and
   (and (= result11 res__split_fields9)
-  (= res__split_fields11 (us_split_fields1 temp___188)))
+  (= res__split_fields11 (us_split_fields1 temp___185)))
   (and (= result12 res__split_discrs9)
-  (= res__split_discrs11 (us_split_discrs1 temp___188)))))
+  (= res__split_discrs11 (us_split_discrs1 temp___185)))))
   (and
   (and
   (= linear_search__search__result14 (mk_search_result__ref
@@ -1093,10 +1079,6 @@
      (rec__linear_search__search_result__at_index
      (us_split_fields1
      (search_result__content linear_search__search__result18)))) 1)))
-
-;; H
-  (assert (value_found_in_range__function_guard
-  (value_found_in_range a val__ 2 10) a val__ 2 10))
 
 ;; H
   (assert

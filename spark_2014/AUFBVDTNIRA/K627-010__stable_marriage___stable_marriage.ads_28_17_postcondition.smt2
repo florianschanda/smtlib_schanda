@@ -205,13 +205,11 @@
 ;; is_permutation_1__post_axiom
   (assert
   (forall ((r1 (Array Int group1_id)))
-  (! (let ((result (is_permutation_1 r1)))
-     (=> (is_permutation_1__function_guard result r1)
-     (= (= result true)
+  (! (= (= (is_permutation_1 r1) true)
      (forall ((g1 Int))
      (=> (and (<= 1 g1) (<= g1 64))
      (exists ((rank Int))
-     (and (and (<= 1 rank) (<= rank 64)) (= (to_rep (select r1 rank)) g1)))))))) :pattern (
+     (and (and (<= 1 rank) (<= rank 64)) (= (to_rep (select r1 rank)) g1)))))) :pattern (
   (is_permutation_1 r1)) )))
 
 (declare-fun r1 () (Array Int group1_id))
@@ -223,9 +221,6 @@
   (temp___do_toplevel_142 Bool)) Bool (=>
                                       (or (= temp___is_init_140 true)
                                       (<= 1 64)) (in_range1 temp___expr_143)))
-
-;; H
-  (assert (is_permutation_1__function_guard (is_permutation_1 r1) r1))
 
 ;; H
   (assert (= (is_permutation_1 r1) true))

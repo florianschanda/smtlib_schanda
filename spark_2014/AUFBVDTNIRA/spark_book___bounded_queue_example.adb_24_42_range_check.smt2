@@ -571,8 +571,6 @@
      (< (to_rep4 (select b (+ i 1))) (to_rep4 (select a (+ j 1))))))))))) :pattern (
   (compare1 a a_first a_last b b_first b_last)) ))))
 
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -595,7 +593,7 @@
 
 (declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -605,7 +603,7 @@
   (! (=> (in_range1 f)
      (=> (in_range1 l)
      (and (= (to_rep1 (first2 (mk1 f l))) f)
-     (= (to_rep1 (last3 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (= (to_rep1 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -623,10 +621,10 @@
 
 (define-fun first3 ((a us_t1)) Int (to_rep1 (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep1 (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last4 a))
-                                    (+ (- (last4 a) (first3 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size1 () Int)
 
@@ -662,8 +660,8 @@
 
 (define-fun bool_eq9 ((x us_t1)
   (y us_t1)) Bool (bool_eq7 (elts1 x) (to_rep1 (first2 (rt1 x)))
-                  (to_rep1 (last3 (rt1 x))) (elts1 y)
-                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last3 (rt1 y)))))
+                  (to_rep1 (last2 (rt1 x))) (elts1 y)
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
 (declare-fun user_eq7 (us_t1 us_t1) Bool)
 
@@ -890,14 +888,14 @@
                                       (first3
                                       (rec__bounded_queue_example__char_queue__queue_type__items
                                       (us_split_fields1 temp___expr_537)))
-                                      (last4
+                                      (last3
                                       (rec__bounded_queue_example__char_queue__queue_type__items
                                       (us_split_fields1 temp___expr_537))))
                                       (and
                                       (= (first3
                                          (rec__bounded_queue_example__char_queue__queue_type__items
                                          (us_split_fields1 temp___expr_537))) 1)
-                                      (= (last4
+                                      (= (last3
                                          (rec__bounded_queue_example__char_queue__queue_type__items
                                          (us_split_fields1 temp___expr_537))) 
                                       (to_rep3 temp___538))))))
@@ -909,10 +907,8 @@
 ;; size__post_axiom
   (assert
   (forall ((queue us_rep))
-  (! (=> (dynamic_invariant3 queue true true true)
-     (let ((result (size queue)))
-     (=> (size__function_guard result queue) (dynamic_invariant2 result true
-     false true)))) :pattern ((size queue)) )))
+  (! (=> (dynamic_invariant3 queue true true true) (dynamic_invariant2
+     (size queue) true false true)) :pattern ((size queue)) )))
 
 (declare-fun empty (us_rep) Bool)
 
@@ -1217,9 +1213,9 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
-(declare-fun temp___String_Literal_671 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_656 (tuple0) (Array Int character))
 
-;; temp___String_Literal_671__def_axiom
+;; temp___String_Literal_656__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -1246,32 +1242,32 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 1)) 83)
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 2)) 105))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 3)) 122))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 4)) 101))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 5)) 32))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 6)) 111))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 7)) 102))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 8)) 32))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 9)) 99))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 10)) 108))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 11)) 101))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 12)) 97))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 13)) 114))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 14)) 101))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 15)) 100))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 16)) 32))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 17)) 113))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 18)) 117))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 19)) 101))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 20)) 117))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 21)) 101))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 22)) 32))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 23)) 105))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 24)) 115))
-     (= (to_rep (select (temp___String_Literal_671 us_void_param) 25)) 32)) :pattern (
-  (temp___String_Literal_671 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 1)) 83)
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 2)) 105))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 3)) 122))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 4)) 101))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 5)) 32))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 6)) 111))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 7)) 102))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 8)) 32))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 9)) 99))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 10)) 108))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 11)) 101))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 12)) 97))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 13)) 114))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 14)) 101))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 15)) 100))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 16)) 32))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 17)) 113))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 18)) 117))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 19)) 101))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 20)) 117))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 21)) 101))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 22)) 32))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 23)) 105))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 24)) 115))
+     (= (to_rep (select (temp___String_Literal_656 us_void_param) 25)) 32)) :pattern (
+  (temp___String_Literal_656 us_void_param)) )))
 
 (define-fun dynamic_invariant4 ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)
@@ -1304,24 +1300,18 @@
 ;; first_element__post_axiom
   (assert
   (forall ((queue us_rep))
-  (! (and (empty__function_guard (empty queue) queue)
-     (=>
+  (! (=>
      (and (dynamic_invariant3 queue true true true)
-     (not (= (empty queue) true)))
-     (let ((result (first_element queue)))
-     (=> (first_element__function_guard result queue) (dynamic_invariant1
-     result true false true))))) :pattern ((first_element queue)) )))
+     (not (= (empty queue) true))) (dynamic_invariant1 (first_element queue)
+     true false true)) :pattern ((first_element queue)) )))
 
 ;; last_element__post_axiom
   (assert
   (forall ((queue us_rep))
-  (! (and (empty__function_guard (empty queue) queue)
-     (=>
+  (! (=>
      (and (dynamic_invariant3 queue true true true)
-     (not (= (empty queue) true)))
-     (let ((result (last_element queue)))
-     (=> (last_element__function_guard result queue) (dynamic_invariant1
-     result true false true))))) :pattern ((last_element queue)) )))
+     (not (= (empty queue) true))) (dynamic_invariant1 (last_element queue)
+     true false true)) :pattern ((last_element queue)) )))
 
 (declare-fun my_queue__split_fields () natural)
 
@@ -1339,35 +1329,35 @@
 
 (declare-fun us () Int)
 
-(declare-fun temp___660 () positive)
+(declare-fun temp___645 () positive)
 
-(declare-fun temp___6601 () natural)
+(declare-fun temp___6451 () natural)
 
-(declare-fun temp___6602 () positive)
+(declare-fun temp___6452 () positive)
 
-(declare-fun temp___6603 () positive)
+(declare-fun temp___6453 () positive)
 
-(declare-fun temp___6604 () (Array Int element_type))
+(declare-fun temp___6454 () (Array Int element_type))
 
-(declare-fun temp___667 () positive)
+(declare-fun temp___652 () positive)
 
-(declare-fun temp___6671 () natural)
+(declare-fun temp___6521 () natural)
 
-(declare-fun temp___6672 () positive)
+(declare-fun temp___6522 () positive)
 
-(declare-fun temp___6673 () positive)
+(declare-fun temp___6523 () positive)
 
-(declare-fun temp___6674 () (Array Int element_type))
+(declare-fun temp___6524 () (Array Int element_type))
 
-(declare-fun temp___664 () Int)
+(declare-fun temp___649 () Int)
 
 (declare-fun o () Int)
 
 (declare-fun o1 () us_image)
 
-(declare-fun temp___673 () (Array Int character))
+(declare-fun temp___658 () (Array Int character))
 
-(declare-fun temp___6731 () t)
+(declare-fun temp___6581 () t)
 
 (declare-fun o2 () Int)
 
@@ -1549,22 +1539,6 @@
   (assert (=> (<= 0 255) (in_range3 value)))
 
 ;; H
-  (assert (empty__function_guard
-  (empty
-  (mk___rep my_queue__split_discrs
-  bounded_queue_example__char_queue__clear__queue__fields6))
-  (mk___rep my_queue__split_discrs
-  bounded_queue_example__char_queue__clear__queue__fields6)))
-
-;; H
-  (assert (size__function_guard
-  (size
-  (mk___rep my_queue__split_discrs
-  bounded_queue_example__char_queue__clear__queue__fields6))
-  (mk___rep my_queue__split_discrs
-  bounded_queue_example__char_queue__clear__queue__fields6)))
-
-;; H
   (assert
   (and
   (and
@@ -1607,40 +1581,6 @@
   (= bounded_queue_example__char_queue__clear__queue__fields3 my_queue__split_fields7))
 
 ;; H
-  (assert (empty__function_guard
-  (empty
-  (mk___rep my_queue__split_discrs
-  bounded_queue_example__char_queue__enqueue__queue__fields5))
-  (mk___rep my_queue__split_discrs
-  bounded_queue_example__char_queue__enqueue__queue__fields5)))
-
-;; H
-  (assert (size__function_guard
-  (size
-  (mk___rep my_queue__split_discrs
-  bounded_queue_example__char_queue__enqueue__queue__fields5))
-  (mk___rep my_queue__split_discrs
-  bounded_queue_example__char_queue__enqueue__queue__fields5)))
-
-;; H
-  (assert (size__function_guard
-  (size
-  (mk___rep my_queue__split_discrs
-  (mk___split_fields my_queue__split_fields8 my_queue__split_fields9
-  my_queue__split_fields10 (mk___t1 my_queue__split_fields11 (mk1 1 100)))))
-  (mk___rep my_queue__split_discrs
-  (mk___split_fields my_queue__split_fields8 my_queue__split_fields9
-  my_queue__split_fields10 (mk___t1 my_queue__split_fields11 (mk1 1 100))))))
-
-;; H
-  (assert (last_element__function_guard
-  (last_element
-  (mk___rep my_queue__split_discrs
-  bounded_queue_example__char_queue__enqueue__queue__fields5))
-  (mk___rep my_queue__split_discrs
-  bounded_queue_example__char_queue__enqueue__queue__fields5)))
-
-;; H
   (assert (= (mk_int__ref result4) (mk_int__ref char)))
 
 ;; H
@@ -1649,11 +1589,11 @@
 ;; H
   (assert
   (=> (and (<= 102 char1) (<= char1 112))
-  (and (= (mk___split_discrs temp___660) my_queue__split_discrs)
-  (and (= temp___6601 my_queue__split_fields4)
-  (and (= temp___6602 my_queue__split_fields5)
-  (and (= temp___6603 my_queue__split_fields6)
-  (= temp___6604 my_queue__split_fields7)))))))
+  (and (= (mk___split_discrs temp___645) my_queue__split_discrs)
+  (and (= temp___6451 my_queue__split_fields4)
+  (and (= temp___6452 my_queue__split_fields5)
+  (and (= temp___6453 my_queue__split_fields6)
+  (= temp___6454 my_queue__split_fields7)))))))
 
 ;; H
   (assert
@@ -1759,66 +1699,6 @@
   (= my_queue__split_fields16 my_queue__split_fields24)))
 
 ;; H
-  (assert (first_element__function_guard
-  (first_element
-  (mk___rep my_queue__split_discrs
-  (mk___split_fields
-  (rec__bounded_queue_example__char_queue__queue_type__count1
-  my_queue__split_fields17)
-  (rec__bounded_queue_example__char_queue__queue_type__front1
-  my_queue__split_fields17)
-  (rec__bounded_queue_example__char_queue__queue_type__rear1
-  my_queue__split_fields17)
-  (mk___t1
-  (rec__bounded_queue_example__char_queue__queue_type__items1
-  my_queue__split_fields17) (mk1 1 100)))))
-  (mk___rep my_queue__split_discrs
-  (mk___split_fields
-  (rec__bounded_queue_example__char_queue__queue_type__count1
-  my_queue__split_fields17)
-  (rec__bounded_queue_example__char_queue__queue_type__front1
-  my_queue__split_fields17)
-  (rec__bounded_queue_example__char_queue__queue_type__rear1
-  my_queue__split_fields17)
-  (mk___t1
-  (rec__bounded_queue_example__char_queue__queue_type__items1
-  my_queue__split_fields17) (mk1 1 100))))))
-
-;; H
-  (assert (size__function_guard
-  (size
-  (mk___rep my_queue__split_discrs
-  bounded_queue_example__char_queue__dequeue__queue__fields))
-  (mk___rep my_queue__split_discrs
-  bounded_queue_example__char_queue__dequeue__queue__fields)))
-
-;; H
-  (assert (size__function_guard
-  (size
-  (mk___rep my_queue__split_discrs
-  (mk___split_fields
-  (rec__bounded_queue_example__char_queue__queue_type__count1
-  my_queue__split_fields17)
-  (rec__bounded_queue_example__char_queue__queue_type__front1
-  my_queue__split_fields17)
-  (rec__bounded_queue_example__char_queue__queue_type__rear1
-  my_queue__split_fields17)
-  (mk___t1
-  (rec__bounded_queue_example__char_queue__queue_type__items1
-  my_queue__split_fields17) (mk1 1 100)))))
-  (mk___rep my_queue__split_discrs
-  (mk___split_fields
-  (rec__bounded_queue_example__char_queue__queue_type__count1
-  my_queue__split_fields17)
-  (rec__bounded_queue_example__char_queue__queue_type__front1
-  my_queue__split_fields17)
-  (rec__bounded_queue_example__char_queue__queue_type__rear1
-  my_queue__split_fields17)
-  (mk___t1
-  (rec__bounded_queue_example__char_queue__queue_type__items1
-  my_queue__split_fields17) (mk1 1 100))))))
-
-;; H
   (assert (= result6 (mk_int__ref count)))
 
 ;; H
@@ -1827,12 +1707,12 @@
 ;; H
   (assert
   (=> (and (<= 1 count1) (<= count1 5))
-  (and (= (mk___split_discrs temp___667) my_queue__split_discrs)
-  (= (mk___split_fields1 temp___6671 temp___6672 temp___6673 temp___6674) 
+  (and (= (mk___split_discrs temp___652) my_queue__split_discrs)
+  (= (mk___split_fields1 temp___6521 temp___6522 temp___6523 temp___6524) 
   (us_split_fields__content1 my_queue__split_fields15)))))
 
 ;; H
-  (assert (=> (and (<= 1 count1) (<= count1 5)) (= temp___664 value)))
+  (assert (=> (and (<= 1 count1) (<= count1 5)) (= temp___649 value)))
 
 ;; H
   (assert
@@ -1984,22 +1864,6 @@
   (= my_queue__split_fields22 my_queue__split_fields16)))
 
 ;; H
-  (assert (empty__function_guard
-  (empty
-  (mk___rep my_queue__split_discrs
-  bounded_queue_example__char_queue__clear__queue__fields5))
-  (mk___rep my_queue__split_discrs
-  bounded_queue_example__char_queue__clear__queue__fields5)))
-
-;; H
-  (assert (size__function_guard
-  (size
-  (mk___rep my_queue__split_discrs
-  bounded_queue_example__char_queue__clear__queue__fields5))
-  (mk___rep my_queue__split_discrs
-  bounded_queue_example__char_queue__clear__queue__fields5)))
-
-;; H
   (assert
   (and
   (and
@@ -2032,7 +1896,6 @@
 ;; H
   (assert
   (and
-  (and
   (= o (size
        (mk___rep my_queue__split_discrs
        (mk___split_fields
@@ -2045,33 +1908,22 @@
        (mk___t1
        (rec__bounded_queue_example__char_queue__queue_type__items1
        my_queue__split_fields23) (mk1 1 100))))))
-  (size__function_guard o
-  (mk___rep my_queue__split_discrs
-  (mk___split_fields
-  (rec__bounded_queue_example__char_queue__queue_type__count1
-  my_queue__split_fields23)
-  (rec__bounded_queue_example__char_queue__queue_type__front1
-  my_queue__split_fields23)
-  (rec__bounded_queue_example__char_queue__queue_type__rear1
-  my_queue__split_fields23)
-  (mk___t1
-  (rec__bounded_queue_example__char_queue__queue_type__items1
-  my_queue__split_fields23) (mk1 1 100)))))) (in_range4 o)))
+  (in_range4 o)))
 
 ;; H
   (assert (= o1 (attr__ATTRIBUTE_IMAGE1 o)))
 
 ;; H
-  (assert (= (mk___t temp___673 temp___6731) (to_string o1)))
+  (assert (= (mk___t temp___658 temp___6581) (to_string o1)))
 
 ;; H
   (assert
-  (=> (<= (to_rep1 (first temp___6731)) (to_rep1 (last temp___6731)))
-  (= o2 (+ (- (to_rep1 (last temp___6731)) (to_rep1 (first temp___6731))) 1))))
+  (=> (<= (to_rep1 (first temp___6581)) (to_rep1 (last temp___6581)))
+  (= o2 (+ (- (to_rep1 (last temp___6581)) (to_rep1 (first temp___6581))) 1))))
 
 ;; H
   (assert
-  (=> (not (<= (to_rep1 (first temp___6731)) (to_rep1 (last temp___6731))))
+  (=> (not (<= (to_rep1 (first temp___6581)) (to_rep1 (last temp___6581))))
   (= o2 0)))
 
 ;; H

@@ -429,27 +429,23 @@
 (define-fun tlastS__ref___projection ((a tlastS__ref)) tlastS (tlastS__content
                                                               a))
 
-(define-fun dynamic_invariant1 ((temp___expr_166 Int)
-  (temp___is_init_163 Bool) (temp___skip_constant_164 Bool)
-  (temp___do_toplevel_165 Bool)) Bool (=>
-                                      (or (= temp___is_init_163 true)
+(define-fun dynamic_invariant1 ((temp___expr_158 Int)
+  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
+  (temp___do_toplevel_157 Bool)) Bool (=>
+                                      (or (= temp___is_init_155 true)
                                       (<= 0 200)) (in_range3
-                                      temp___expr_166)))
+                                      temp___expr_158)))
 
 ;; size__post_axiom
   (assert
   (forall ((stack__last Int))
-  (! (=> (dynamic_invariant1 stack__last true true true)
-     (let ((result (size stack__last)))
-     (=> (size__function_guard result stack__last) (dynamic_invariant result
-     true false true)))) :pattern ((size stack__last)) )))
+  (! (=> (dynamic_invariant1 stack__last true true true) (dynamic_invariant
+     (size stack__last) true false true)) :pattern ((size stack__last)) )))
 
 ;; size__def_axiom
   (assert
   (forall ((stack__last Int))
-  (! (=>
-     (and (dynamic_invariant1 stack__last true true true)
-     (size__function_guard (size stack__last) stack__last))
+  (! (=> (dynamic_invariant1 stack__last true true true)
      (= (size stack__last) stack__last)) :pattern ((size stack__last)) )))
 
 (declare-fun v () us_rep)
@@ -466,9 +462,8 @@
 ;; full__def_axiom
   (assert
   (forall ((stack__last Int))
-  (! (=> (full__function_guard (full stack__last) stack__last)
-     (= (= (full stack__last) true) (<= 200 stack__last))) :pattern (
-  (full stack__last)) )))
+  (! (= (= (full stack__last) true) (<= 200 stack__last)) :pattern ((full
+                                                                    stack__last)) )))
 
 (declare-datatypes ()
 ((map__ref1 (mk_map__ref1 (map__content1 (Array Int us_rep))))))
@@ -557,10 +552,8 @@
 
 ;; to_string__post_axiom
   (assert
-  (forall ((v1 us_rep))
-  (! (let ((result (to_string1 v1)))
-     (=> (to_string__function_guard result v1) (dynamic_invariant2 result
-     true false true))) :pattern ((to_string1 v1)) )))
+  (forall ((v1 us_rep)) (! (dynamic_invariant2 (to_string1 v1) true false
+  true) :pattern ((to_string1 v1)) )))
 
 (declare-sort ttabD1 0)
 
@@ -583,9 +576,9 @@
 (define-fun ttabD1__ref___projection ((a ttabD1__ref)) ttabD1 (ttabD1__content
                                                               a))
 
-(declare-fun temp___String_Literal_180 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_171 (tuple0) (Array Int character))
 
-;; temp___String_Literal_180__def_axiom
+;; temp___String_Literal_171__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -598,18 +591,18 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_180 us_void_param) 1)) 80)
-     (= (to_rep (select (temp___String_Literal_180 us_void_param) 2)) 117))
-     (= (to_rep (select (temp___String_Literal_180 us_void_param) 3)) 115))
-     (= (to_rep (select (temp___String_Literal_180 us_void_param) 4)) 104))
-     (= (to_rep (select (temp___String_Literal_180 us_void_param) 5)) 105))
-     (= (to_rep (select (temp___String_Literal_180 us_void_param) 6)) 110))
-     (= (to_rep (select (temp___String_Literal_180 us_void_param) 7)) 103))
-     (= (to_rep (select (temp___String_Literal_180 us_void_param) 8)) 32))
-     (= (to_rep (select (temp___String_Literal_180 us_void_param) 9)) 45))
-     (= (to_rep (select (temp___String_Literal_180 us_void_param) 10)) 62))
-     (= (to_rep (select (temp___String_Literal_180 us_void_param) 11)) 32)) :pattern (
-  (temp___String_Literal_180 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_171 us_void_param) 1)) 80)
+     (= (to_rep (select (temp___String_Literal_171 us_void_param) 2)) 117))
+     (= (to_rep (select (temp___String_Literal_171 us_void_param) 3)) 115))
+     (= (to_rep (select (temp___String_Literal_171 us_void_param) 4)) 104))
+     (= (to_rep (select (temp___String_Literal_171 us_void_param) 5)) 105))
+     (= (to_rep (select (temp___String_Literal_171 us_void_param) 6)) 110))
+     (= (to_rep (select (temp___String_Literal_171 us_void_param) 7)) 103))
+     (= (to_rep (select (temp___String_Literal_171 us_void_param) 8)) 32))
+     (= (to_rep (select (temp___String_Literal_171 us_void_param) 9)) 45))
+     (= (to_rep (select (temp___String_Literal_171 us_void_param) 10)) 62))
+     (= (to_rep (select (temp___String_Literal_171 us_void_param) 11)) 32)) :pattern (
+  (temp___String_Literal_171 us_void_param)) )))
 
 (define-fun dynamic_invariant3 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -628,9 +621,9 @@
 
 (declare-fun tab () (Array Int us_rep))
 
-(declare-fun temp___182 () (Array Int character))
+(declare-fun temp___173 () (Array Int character))
 
-(declare-fun temp___1821 () t)
+(declare-fun temp___1731 () t)
 
 (declare-fun o () Int)
 
@@ -670,13 +663,10 @@
 
 (declare-fun tab3 () (Array Int us_rep))
 
-(define-fun temp___1822 () us_t (mk___t temp___182 temp___1821))
+(define-fun temp___1732 () us_t (mk___t temp___173 temp___1731))
 
 ;; H
   (assert (in_range3 last2))
-
-;; H
-  (assert (full__function_guard (full last2) last2))
 
 ;; H
   (assert (not (= (full last2) true)))
@@ -686,18 +676,17 @@
 
 ;; H
   (assert
-  (and
-  (and (= temp___1822 (to_string1 v)) (to_string__function_guard temp___1822
-  v)) (dynamic_invariant2 temp___1822 true false true)))
+  (and (= temp___1732 (to_string1 v)) (dynamic_invariant2 temp___1732 true
+  false true)))
 
 ;; H
   (assert
-  (=> (<= (to_rep1 (first temp___1821)) (to_rep1 (last temp___1821)))
-  (= o (+ (- (to_rep1 (last temp___1821)) (to_rep1 (first temp___1821))) 1))))
+  (=> (<= (to_rep1 (first temp___1731)) (to_rep1 (last temp___1731)))
+  (= o (+ (- (to_rep1 (last temp___1731)) (to_rep1 (first temp___1731))) 1))))
 
 ;; H
   (assert
-  (=> (not (<= (to_rep1 (first temp___1821)) (to_rep1 (last temp___1821))))
+  (=> (not (<= (to_rep1 (first temp___1731)) (to_rep1 (last temp___1731))))
   (= o 0)))
 
 ;; H
@@ -720,8 +709,8 @@
 
 ;; H
   (assert
-  (= (concat1 (temp___String_Literal_180 Tuple0) 1 11 temp___182
-     (to_rep1 (first temp___1821)) (to_rep1 (last temp___1821))) o6))
+  (= (concat1 (temp___String_Literal_171 Tuple0) 1 11 temp___173
+     (to_rep1 (first temp___1731)) (to_rep1 (last temp___1731))) o6))
 
 ;; H
   (assert (= (mk 1 o5) o7))
@@ -761,9 +750,6 @@
 
 ;; H
   (assert (= last5 last3))
-
-;; H
-  (assert (size__function_guard (size last2) last2))
 
 (assert
 ;; WP_parameter_def

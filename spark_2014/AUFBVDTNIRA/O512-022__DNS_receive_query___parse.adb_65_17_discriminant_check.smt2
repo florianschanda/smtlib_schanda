@@ -767,10 +767,8 @@
   (forall ((query (Array Int us_rep)))
   (forall ((offset Int))
   (! (=> (and (dynamic_invariant3 offset true true true) (<= offset 511))
-     (let ((result (extract_unsigned_16 query offset)))
-     (=> (extract_unsigned_16__function_guard result query offset)
-     (dynamic_invariant1 result true false true)))) :pattern ((extract_unsigned_16
-                                                              query offset)) ))))
+     (dynamic_invariant1 (extract_unsigned_16 query offset) true false true)) :pattern (
+  (extract_unsigned_16 query offset)) ))))
 
 (declare-sort bit_range 0)
 
@@ -814,12 +812,10 @@
      (and
      (and (dynamic_invariant3 offset true true true) (dynamic_invariant4
      bit_shift_right true true true)) (dynamic_invariant bit_mask true true
-     true))
-     (let ((result (extract_bits_of_octet query offset bit_shift_right
-                   bit_mask)))
-     (=> (extract_bits_of_octet__function_guard result query offset
-     bit_shift_right bit_mask) (dynamic_invariant result true false true)))) :pattern (
-  (extract_bits_of_octet query offset bit_shift_right bit_mask)) )))))
+     true)) (dynamic_invariant
+     (extract_bits_of_octet query offset bit_shift_right bit_mask) true false
+     true)) :pattern ((extract_bits_of_octet query offset bit_shift_right
+                      bit_mask)) )))))
 
 (declare-datatypes ()
 ((us_split_discrs
@@ -1655,9 +1651,7 @@
 (declare-fun count2 () (_ BitVec 16))
 
 ;; H
-  (assert
-  (and (= o (extract_unsigned_16 query 0))
-  (extract_unsigned_16__function_guard o query 0)))
+  (assert (= o (extract_unsigned_16 query 0)))
 
 ;; H
   (assert (= (to_rep1 o1) o))
@@ -1692,9 +1686,7 @@
                            temp___3132)))
 
 ;; H
-  (assert
-  (and (= o5 (extract_bits_of_octet query 2 7 ((_ int2bv 8) 1)))
-  (extract_bits_of_octet__function_guard o5 query 2 7 ((_ int2bv 8) 1))))
+  (assert (= o5 (extract_bits_of_octet query 2 7 ((_ int2bv 8) 1))))
 
 ;; H
   (assert (= o6 (ite (= o5 ((_ int2bv 8) 0)) true false)))
@@ -1723,9 +1715,7 @@
   (assert (= result____split_fields4 result____split_fields3))
 
 ;; H
-  (assert
-  (and (= o7 (extract_bits_of_octet query 2 3 ((_ int2bv 8) 15)))
-  (extract_bits_of_octet__function_guard o7 query 2 3 ((_ int2bv 8) 15))))
+  (assert (= o7 (extract_bits_of_octet query 2 3 ((_ int2bv 8) 15))))
 
 ;; H
   (assert (= result2 (mk_t__ref opcode)))
@@ -1818,9 +1808,7 @@
   (= header__split_fields4 header__split_fields5)))
 
 ;; H
-  (assert
-  (and (= o14 (extract_bits_of_octet query 2 0 ((_ int2bv 8) 6)))
-  (extract_bits_of_octet__function_guard o14 query 2 0 ((_ int2bv 8) 6))))
+  (assert (= o14 (extract_bits_of_octet query 2 0 ((_ int2bv 8) 6))))
 
 ;; H
   (assert (= o15 (ite (= o14 ((_ int2bv 8) 0)) true false)))
@@ -1846,9 +1834,7 @@
   (assert (= result____split_fields6 result____split_fields5))
 
 ;; H
-  (assert
-  (and (= o17 (extract_unsigned_16 query 4))
-  (extract_unsigned_16__function_guard o17 query 4)))
+  (assert (= o17 (extract_unsigned_16 query 4)))
 
 ;; H
   (assert (= result6 (mk_t__ref1 qdcount)))
@@ -1890,9 +1876,7 @@
   (assert (= result____split_fields7 result____split_fields6))
 
 ;; H
-  (assert
-  (and (= o21 (extract_unsigned_16 query 6))
-  (extract_unsigned_16__function_guard o21 query 6)))
+  (assert (= o21 (extract_unsigned_16 query 6)))
 
 ;; H
   (assert (= result8 (mk_t__ref1 count)))
@@ -1910,9 +1894,7 @@
   (assert (= result____split_fields8 result____split_fields7))
 
 ;; H
-  (assert
-  (and (= o22 (extract_unsigned_16 query 8))
-  (extract_unsigned_16__function_guard o22 query 8)))
+  (assert (= o22 (extract_unsigned_16 query 8)))
 
 ;; H
   (assert (= result9 (mk_t__ref1 count1)))

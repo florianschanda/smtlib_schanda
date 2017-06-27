@@ -435,24 +435,19 @@
 
 (declare-fun size__function_guard (Int us_rep) Bool)
 
-;; temp___result_323_def
-  (assert
-  (forall ((temp___322 us_rep)) (size__function_guard (size temp___322)
-  temp___322)))
-
-(define-fun default_initial_assumption ((temp___expr_317 us_rep)
-  (temp___skip_top_level_318 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_276 us_rep)
+  (temp___skip_top_level_277 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag temp___expr_317) 
+                                         (= (attr__tag temp___expr_276) 
                                          us_tag1)
                                          (= (to_rep
                                             (rec__stackp__stack_root__length
                                             (us_split_fields1
-                                            temp___expr_317))) 0))
+                                            temp___expr_276))) 0))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_318 true))
-                                         (= (size temp___expr_317) 0))))
+                                         (= temp___skip_top_level_277 true))
+                                         (= (size temp___expr_276) 0))))
 
 (declare-fun s__attr__tag () Int)
 
@@ -471,11 +466,6 @@
                                       (<= 0 2147483647)) (in_range1
                                       temp___expr_142)))
 
-;; temp___result_165_def
-  (assert
-  (forall ((temp___164 us_rep)) (size__function_guard (size temp___164)
-  temp___164)))
-
 (define-fun default_initial_assumption1 ((temp___expr_159 us_rep)
   (temp___skip_top_level_160 Bool)) Bool (and
                                          (and
@@ -492,17 +482,14 @@
 
 ;; size__post_axiom
   (assert
-  (forall ((s us_rep))
-  (! (let ((result (size s)))
-     (=> (size__function_guard result s) (dynamic_invariant result true false
-     true))) :pattern ((size s)) )))
+  (forall ((s us_rep)) (! (dynamic_invariant (size s) true false
+  true) :pattern ((size s)) )))
 
 ;; size__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (size__function_guard (size s) s)
-     (= (size s) (to_rep
-                 (rec__stackp__stack_root__length (us_split_fields1 s))))) :pattern (
+  (! (= (size s) (to_rep
+                 (rec__stackp__stack_root__length (us_split_fields1 s)))) :pattern (
   (size s)) )))
 
 ;; is_empty__post_axiom
@@ -511,9 +498,7 @@
 ;; is_empty__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (is_empty__function_guard (is_empty s) s)
-     (and (size__function_guard (size s) s)
-     (= (= (is_empty s) true) (= (size s) 0)))) :pattern ((is_empty s)) )))
+  (! (= (= (is_empty s) true) (= (size s) 0)) :pattern ((is_empty s)) )))
 
 (declare-fun s__split_fields () (Array Int element))
 
@@ -529,13 +514,13 @@
 
 (declare-fun o3 () us_private)
 
-(declare-fun temp___584 () (Array Int element))
+(declare-fun temp___465 () (Array Int element))
 
-(declare-fun temp___5841 () less_than_max)
+(declare-fun temp___4651 () less_than_max)
 
-(declare-fun temp___5842 () us_private)
+(declare-fun temp___4652 () us_private)
 
-(declare-fun temp___5843 () Int)
+(declare-fun temp___4653 () Int)
 
 (declare-fun result () (Array Int element))
 
@@ -574,16 +559,16 @@
   (assert (= s__split_fields2 o3))
 
 ;; H
-  (assert (= temp___584 o1))
+  (assert (= temp___465 o1))
 
 ;; H
-  (assert (= temp___5841 o2))
+  (assert (= temp___4651 o2))
 
 ;; H
-  (assert (= temp___5842 o3))
+  (assert (= temp___4652 o3))
 
 ;; H
-  (assert (= s__attr__tag temp___5843))
+  (assert (= s__attr__tag temp___4653))
 
 ;; H
   (assert (= result s__split_fields))
@@ -595,13 +580,13 @@
   (assert (= result2 s__split_fields2))
 
 ;; H
-  (assert (= temp___584 s__split_fields3))
+  (assert (= temp___465 s__split_fields3))
 
 ;; H
-  (assert (= temp___5841 s__split_fields4))
+  (assert (= temp___4651 s__split_fields4))
 
 ;; H
-  (assert (= temp___5842 s__split_fields5))
+  (assert (= temp___4652 s__split_fields5))
 
 ;; H
   (assert (= s__split_fields6 s__split_fields3))
@@ -620,16 +605,6 @@
 
 ;; H
   (assert (= s__split_fields11 s__split_fields5))
-
-;; H
-  (assert (is_empty__function_guard
-  (is_empty
-  (mk___rep
-  (mk___split_fields s__split_fields6 s__split_fields7 s__split_fields8)
-  s__attr__tag))
-  (mk___rep
-  (mk___split_fields s__split_fields6 s__split_fields7 s__split_fields8)
-  s__attr__tag)))
 
 (assert
 ;; WP_parameter_def

@@ -165,9 +165,9 @@
 (define-fun modular__ref_2__projection ((a modular__ref)) modular (modular__content
                                                                   a))
 
-(define-fun dynamic_invariant ((temp___expr_229 (_ BitVec 8))
-  (temp___is_init_226 Bool) (temp___skip_constant_227 Bool)
-  (temp___do_toplevel_228 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_225 (_ BitVec 8))
+  (temp___is_init_222 Bool) (temp___skip_constant_223 Bool)
+  (temp___do_toplevel_224 Bool)) Bool true)
 
 (declare-sort bit_position 0)
 
@@ -191,11 +191,11 @@
 (define-fun bit_position__ref___projection ((a bit_position__ref)) bit_position 
   (bit_position__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_235 Int)
-  (temp___is_init_232 Bool) (temp___skip_constant_233 Bool)
-  (temp___do_toplevel_234 Bool)) Bool (=>
-                                      (or (= temp___is_init_232 true)
-                                      (<= 0 7)) (in_range1 temp___expr_235)))
+(define-fun dynamic_invariant1 ((temp___expr_231 Int)
+  (temp___is_init_228 Bool) (temp___skip_constant_229 Bool)
+  (temp___do_toplevel_230 Bool)) Bool (=>
+                                      (or (= temp___is_init_228 true)
+                                      (<= 0 7)) (in_range1 temp___expr_231)))
 
 (declare-fun shift_right ((_ BitVec 8) Int) (_ BitVec 8))
 
@@ -525,20 +525,16 @@
   (forall ((amount Int))
   (! (=>
      (and (dynamic_invariant v true true true) (dynamic_invariant2 amount
-     true true true))
-     (let ((result (shift_right v amount)))
-     (=> (shift_right__function_guard result v amount) (dynamic_invariant
-     result true false true)))) :pattern ((shift_right v amount)) ))))
+     true true true)) (dynamic_invariant (shift_right v amount) true false
+     true)) :pattern ((shift_right v amount)) ))))
 
 ;; shift_right__def_axiom
   (assert
   (forall ((v (_ BitVec 8)))
   (forall ((amount Int))
   (! (=>
-     (and
      (and (dynamic_invariant v true true true) (dynamic_invariant2 amount
-     true true true)) (shift_right__function_guard (shift_right v amount) v
-     amount))
+     true true true))
      (= (shift_right v amount) (ite (and (<= 1 8) (<= 8 8))
                                (ite (< amount 8)
                                (bvlshr v ((_ int2bv 8) amount))
@@ -563,11 +559,8 @@
 ;; lemma6__post_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (let ((result (lemma6 us_void_param)))
-     (and (lemma6__function_guard1 (lemma61 Tuple0) Tuple0)
-     (=> (lemma6__function_guard result us_void_param)
-     (=> (= result true) (= (lemma61 Tuple0) true))))) :pattern ((lemma6
-                                                                 us_void_param)) )))
+  (! (=> (= (lemma6 us_void_param) true) (= (lemma61 Tuple0) true)) :pattern (
+  (lemma6 us_void_param)) )))
 
 (declare-fun value () (_ BitVec 8))
 
@@ -583,20 +576,7 @@
 ;; lemma6__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (lemma6__function_guard1 (lemma61 us_void_param) us_void_param)
-     (and
-     (forall ((val__ (_ BitVec 8))) (shift_right__function_guard
-     (shift_right val__ 0) val__ 0))
-     (and
-     (forall ((val__ (_ BitVec 8)) (n Int)) (shift_right__function_guard
-     (shift_right val__ n) val__ n))
-     (and
-     (forall ((val__ (_ BitVec 8)) (j Int)) (shift_right__function_guard
-     (shift_right val__ j) val__ j))
-     (and
-     (forall ((val__ (_ BitVec 8)) (j Int)) (shift_right__function_guard
-     (shift_right val__ j) val__ j))
-     (= (= (lemma61 us_void_param) true)
+  (! (= (= (lemma61 us_void_param) true)
      (forall ((val__ (_ BitVec 8)))
      (=>
      (and (bvule ((_ int2bv 8) 0) val__) (bvule val__ ((_ int2bv 8) 255)))
@@ -611,7 +591,7 @@
      (bvuge (shift_right val__ j) ((_ int2bv 8) 1)))))
      (forall ((j Int))
      (=> (and (<= n j) (<= j 7))
-     (bvule (shift_right val__ j) ((_ int2bv 8) 1))))))))))))))))) :pattern (
+     (bvule (shift_right val__ j) ((_ int2bv 8) 1)))))))))))) :pattern (
   (lemma61 us_void_param)) )))
 
 (declare-fun result__ () Int)
@@ -620,9 +600,9 @@
 
 (declare-fun bits_manipulation_unsigned__unsigned_8__functions__msb_index_slow_inline_always__result () Int)
 
-(declare-fun temp___1067 () Int)
+(declare-fun temp___384 () Int)
 
-(declare-fun temp___1066 () Int)
+(declare-fun temp___383 () Int)
 
 (declare-fun o () (_ BitVec 8))
 
@@ -721,19 +701,6 @@
 (declare-fun result7 () Int)
 
 ;; H
-  (assert (lemma6__function_guard (lemma6 Tuple0) Tuple0))
-
-;; H
-  (assert
-  (forall ((j Int)) (shift_right__function_guard (shift_right value j) 
-  value j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (shift_right__function_guard (shift_right value j) 
-  value j)))
-
-;; H
   (assert (not (= value ((_ int2bv 8) 0))))
 
 ;; H
@@ -749,10 +716,10 @@
   (assert (= i1 0))
 
 ;; H
-  (assert (=> (and (<= 0 i1) (<= i1 7)) (= temp___1067 result__)))
+  (assert (=> (and (<= 0 i1) (<= i1 7)) (= temp___384 result__)))
 
 ;; H
-  (assert (=> (and (<= 0 i1) (<= i1 7)) (= temp___1066 i1)))
+  (assert (=> (and (<= 0 i1) (<= i1 7)) (= temp___383 i1)))
 
 ;; H
   (assert
@@ -770,8 +737,7 @@
   (and (= i7 i1) (= result__8 result__2)))
   (and
   (and
-  (and
-  (and (= o (shift_right value i1)) (shift_right__function_guard o value i1))
+  (and (= o (shift_right value i1))
   (= o (ite (and (<= 1 8) (<= 8 8))
        (ite (< i1 8) (bvlshr value ((_ int2bv 8) i1)) ((_ int2bv 8) 0))
        (ite (and (<= 9 8) (<= 8 16))
@@ -787,8 +753,7 @@
   (and
   (and
   (and
-  (and
-  (and (= o (shift_right value i1)) (shift_right__function_guard o value i1))
+  (and (= o (shift_right value i1))
   (= o (ite (and (<= 1 8) (<= 8 8))
        (ite (< i1 8) (bvlshr value ((_ int2bv 8) i1)) ((_ int2bv 8) 0))
        (ite (and (<= 9 8) (<= 8 16))
@@ -824,9 +789,7 @@
   (and (and (= result__3 result4) (= result__4 i3))
   (and
   (and
-  (and
-  (and (= o1 (shift_right value i3)) (shift_right__function_guard o1 
-  value i3))
+  (and (= o1 (shift_right value i3))
   (= o1 (ite (and (<= 1 8) (<= 8 8))
         (ite (< i3 8) (bvlshr value ((_ int2bv 8) i3)) ((_ int2bv 8) 0))
         (ite (and (<= 9 8) (<= 8 16))
@@ -922,15 +885,6 @@
   (assert
   (= result7 (int__content
              bits_manipulation_unsigned__unsigned_8__functions__msb_index_slow_inline_always__result4)))
-
-;; H
-  (assert (shift_right__function_guard
-  (shift_right value
-  (int__content
-  bits_manipulation_unsigned__unsigned_8__functions__msb_index_slow_inline_always__result4))
-  value
-  (int__content
-  bits_manipulation_unsigned__unsigned_8__functions__msb_index_slow_inline_always__result4)))
 
 (assert
 ;; WP_parameter_def

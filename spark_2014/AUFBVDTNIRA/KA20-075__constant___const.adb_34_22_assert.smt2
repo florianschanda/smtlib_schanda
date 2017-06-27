@@ -390,64 +390,53 @@
 
 ;; fi__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (fi us_void_param)))
-     (=> (fi__function_guard result us_void_param) (dynamic_invariant result
-     true false true))) :pattern ((fi us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant (fi us_void_param)
+  true false true) :pattern ((fi us_void_param)) )))
 
 ;; fi__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (fi__function_guard (fi us_void_param) us_void_param)
-     (= (fi us_void_param) 1)) :pattern ((fi us_void_param)) )))
+  (! (= (fi us_void_param) 1) :pattern ((fi us_void_param)) )))
 
 ;; i__def_axiom
-  (assert (and (fi__function_guard (fi Tuple0) Tuple0) (= i (fi Tuple0))))
+  (assert (= i (fi Tuple0)))
 
 ;; j__def_axiom
-  (assert
-  (and (fi__function_guard (fi Tuple0) Tuple0) (= j (- (* 2 (fi Tuple0)) 1))))
+  (assert (= j (- (* 2 (fi Tuple0)) 1)))
 
 ;; fk__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (fk us_void_param)))
-     (=> (fk__function_guard result us_void_param) (dynamic_invariant result
-     true false true))) :pattern ((fk us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant (fk us_void_param)
+  true false true) :pattern ((fk us_void_param)) )))
 
 ;; fk__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (fk__function_guard (fk us_void_param) us_void_param)
-     (= (fk us_void_param) 1)) :pattern ((fk us_void_param)) )))
+  (! (= (fk us_void_param) 1) :pattern ((fk us_void_param)) )))
 
 ;; k__def_axiom
-  (assert (and (fk__function_guard (fk Tuple0) Tuple0) (= k (fk Tuple0))))
+  (assert (= k (fk Tuple0)))
 
 ;; l__def_axiom
-  (assert
-  (and (fk__function_guard (fk Tuple0) Tuple0) (= l (- (* 2 (fk Tuple0)) 1))))
+  (assert (= l (- (* 2 (fk Tuple0)) 1)))
 
 ;; fm__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (fm x)))
-     (=> (fm__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((fm x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (fm x) true
+     false true)) :pattern ((fm x)) )))
 
 ;; fm__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true) (fm__function_guard (fm x) x))
-     (= (fm x) x)) :pattern ((fm x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (fm x) x)) :pattern (
+  (fm x)) )))
 
 ;; m__def_axiom
-  (assert (and (fm__function_guard (fm 1) 1) (= m (fm 1))))
+  (assert (= m (fm 1)))
 
 ;; n__def_axiom
-  (assert (and (fm__function_guard (fm 1) 1) (= n (- (* 2 (fm 1)) 1))))
+  (assert (= n (- (* 2 (fm 1)) 1)))
 
 (declare-fun o () Int)
 
@@ -459,9 +448,9 @@
 
 (declare-fun o4 () integer)
 
-(declare-fun temp___175 () integer)
+(declare-fun temp___168 () integer)
 
-(declare-fun temp___1751 () integer)
+(declare-fun temp___1681 () integer)
 
 (declare-fun o5 () integer)
 
@@ -471,9 +460,9 @@
 
 (declare-fun o8 () integer)
 
-(declare-fun temp___176 () integer)
+(declare-fun temp___169 () integer)
 
-(declare-fun temp___1761 () integer)
+(declare-fun temp___1691 () integer)
 
 (declare-fun o9 () integer)
 
@@ -483,9 +472,9 @@
 
 (declare-fun o12 () integer)
 
-(declare-fun temp___177 () integer)
+(declare-fun temp___170 () integer)
 
-(declare-fun temp___1771 () integer)
+(declare-fun temp___1701 () integer)
 
 ;; H
   (assert (= (const__c__aggregate_def 1) c))
@@ -509,13 +498,13 @@
   (assert (= o1 o4))
 
 ;; H
-  (assert (= temp___175 o3))
+  (assert (= temp___168 o3))
 
 ;; H
-  (assert (= temp___1751 o4))
+  (assert (= temp___1681 o4))
 
 ;; H
-  (assert (= (mk___rep (mk___split_fields temp___175 temp___1751)) e))
+  (assert (= (mk___rep (mk___split_fields temp___168 temp___1681)) e))
 
 ;; H
   (assert (= (to_rep o5) 1))
@@ -530,13 +519,13 @@
   (assert (= o5 o8))
 
 ;; H
-  (assert (= temp___176 o7))
+  (assert (= temp___169 o7))
 
 ;; H
-  (assert (= temp___1761 o8))
+  (assert (= temp___1691 o8))
 
 ;; H
-  (assert (= (mk___rep (mk___split_fields temp___176 temp___1761)) f))
+  (assert (= (mk___rep (mk___split_fields temp___169 temp___1691)) f))
 
 ;; H
   (assert (= (to_rep o9) 1))
@@ -551,13 +540,13 @@
   (assert (= o9 o12))
 
 ;; H
-  (assert (= temp___177 o11))
+  (assert (= temp___170 o11))
 
 ;; H
-  (assert (= temp___1771 o12))
+  (assert (= temp___1701 o12))
 
 ;; H
-  (assert (= (mk___rep (mk___split_fields temp___177 temp___1771)) g))
+  (assert (= (mk___rep (mk___split_fields temp___170 temp___1701)) g))
 
 ;; H
   (assert (in_range i))

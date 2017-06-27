@@ -270,16 +270,12 @@
   (assert
   (forall ((from Int))
   (forall ((time_triggered_response__history__idle_history (Array Int Bool)))
-  (! (=> (always_set_until_now__function_guard
-     (always_set_until_now from
-     time_triggered_response__history__idle_history) from
-     time_triggered_response__history__idle_history)
-     (=
+  (! (=
      (= (always_set_until_now from
         time_triggered_response__history__idle_history) true)
      (forall ((t Int))
      (=> (and (<= 0 t) (<= t from))
-     (= (select time_triggered_response__history__idle_history t) true))))) :pattern (
+     (= (select time_triggered_response__history__idle_history t) true)))) :pattern (
   (always_set_until_now from time_triggered_response__history__idle_history)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)

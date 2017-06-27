@@ -1347,66 +1347,7 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
 
-(declare-sort t6b 0)
-
-(define-fun in_range8 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq13 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq12 (t6b t6b) Bool)
-
-(declare-fun dummy14 () t6b)
-
-(declare-datatypes () ((t6b__ref (mk_t6b__ref (t6b__content t6b)))))
-(define-fun t6b__ref___projection ((a t6b__ref)) t6b (t6b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS9 () Int)
-
-(declare-sort tTuaSP1 0)
-
-(define-fun in_range9 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq14 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
-
-(declare-fun user_eq13 (tTuaSP1 tTuaSP1) Bool)
-
-(declare-fun dummy15 () tTuaSP1)
-
-(declare-datatypes ()
-((tTuaSP1__ref (mk_tTuaSP1__ref (tTuaSP1__content tTuaSP1)))))
-(define-fun tTuaSP1__ref___projection ((a tTuaSP1__ref)) tTuaSP1 (tTuaSP1__content
-                                                                 a))
-
-(declare-sort t8b 0)
-
-(define-fun in_range10 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq15 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
-
-(declare-fun user_eq14 (t8b t8b) Bool)
-
-(declare-fun dummy16 () t8b)
-
-(declare-datatypes () ((t8b__ref (mk_t8b__ref (t8b__content t8b)))))
-(define-fun t8b__ref___projection ((a t8b__ref)) t8b (t8b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS10 () Int)
 
@@ -1510,10 +1451,6 @@
 
 (declare-fun us1 () Int)
 
-(declare-fun o () (Array Int positive))
-
-(declare-fun o1 () (Array Int natural))
-
 (declare-fun result () Bool)
 
 (declare-fun b1 () Bool)
@@ -1601,22 +1538,16 @@
   (assert (= rt4__attr__tag us_tag1))
 
 ;; H
-  (assert (= o (alignment_attribute__ca__aggregate_def 2)))
-
-;; H
   (assert (= result3 ca))
 
 ;; H
-  (assert (= ca1 o))
-
-;; H
-  (assert (= o1 (alignment_attribute__ua__aggregate_def 1)))
+  (assert (= ca1 (alignment_attribute__ca__aggregate_def 2)))
 
 ;; H
   (assert (= result4 ua))
 
 ;; H
-  (assert (= ua1 o1))
+  (assert (= ua1 (alignment_attribute__ua__aggregate_def 1)))
 
 ;; H
   (assert (<= 0 value__alignment1))

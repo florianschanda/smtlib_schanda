@@ -100,17 +100,14 @@
 ;; t_not__post_axiom
   (assert
   (forall ((op Int))
-  (! (=> (dynamic_invariant op true true true)
-     (let ((result (t_not op)))
-     (=> (t_not__function_guard result op) (dynamic_invariant result true
-     false true)))) :pattern ((t_not op)) )))
+  (! (=> (dynamic_invariant op true true true) (dynamic_invariant (t_not op)
+     true false true)) :pattern ((t_not op)) )))
 
 ;; t_not__def_axiom
   (assert
   (forall ((op Int))
-  (! (=>
-     (and (dynamic_invariant op true true true) (t_not__function_guard
-     (t_not op) op)) (= (t_not op) (ite (= op 0) 1 0))) :pattern ((t_not op)) )))
+  (! (=> (dynamic_invariant op true true true)
+     (= (t_not op) (ite (= op 0) 1 0))) :pattern ((t_not op)) )))
 
 (declare-fun t_or (Int Int) Int)
 
@@ -121,18 +118,15 @@
   (forall ((left Int) (right Int))
   (! (=>
      (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true))
-     (let ((result (t_or left right)))
-     (=> (t_or__function_guard result left right) (dynamic_invariant result
-     true false true)))) :pattern ((t_or left right)) )))
+     true true true)) (dynamic_invariant (t_or left right) true false true)) :pattern (
+  (t_or left right)) )))
 
 ;; t_or__def_axiom
   (assert
   (forall ((left Int) (right Int))
   (! (=>
-     (and
      (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (t_or__function_guard (t_or left right) left right))
+     true true true))
      (= (t_or left right) (ite (= left 0) 0 (ite (= left 1) right 2)))) :pattern (
   (t_or left right)) )))
 
@@ -145,18 +139,15 @@
   (forall ((left Int) (right Int))
   (! (=>
      (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true))
-     (let ((result (t_and left right)))
-     (=> (t_and__function_guard result left right) (dynamic_invariant result
-     true false true)))) :pattern ((t_and left right)) )))
+     true true true)) (dynamic_invariant (t_and left right) true false true)) :pattern (
+  (t_and left right)) )))
 
 ;; t_and__def_axiom
   (assert
   (forall ((left Int) (right Int))
   (! (=>
-     (and
      (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (t_and__function_guard (t_and left right) left right))
+     true true true))
      (= (t_and left right) (ite (= left 1) 1 (ite (= left 0) right 2)))) :pattern (
   (t_and left right)) )))
 

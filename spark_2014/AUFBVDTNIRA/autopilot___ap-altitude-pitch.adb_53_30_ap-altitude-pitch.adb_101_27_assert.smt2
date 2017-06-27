@@ -301,10 +301,9 @@
      present true true true)) (dynamic_invariant5 target true true true))
      (dynamic_invariant4 max true true true)) (< 0 max))
      (let ((result (scale_movement mach present target max)))
-     (=> (scale_movement__function_guard result mach present target max)
      (and (and (<= (- max) result) (<= result max)) (dynamic_invariant4
-     result true false true))))) :pattern ((scale_movement mach present
-                                           target max)) )))
+     result true false true)))) :pattern ((scale_movement mach present target
+                                          max)) )))
 
 (declare-fun present_altitude () Int)
 

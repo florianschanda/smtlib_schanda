@@ -274,8 +274,8 @@
 (declare-datatypes () ((u__ref (mk_u__ref (u__content us_rep1)))))
 (define-fun u__ref___projection ((a u__ref)) us_rep1 (u__content a))
 
-(define-fun default_initial_assumption ((temp___expr_153 us_rep1)
-  (temp___skip_top_level_154 Bool)) Bool (= (attr__tag1 temp___expr_153) 
+(define-fun default_initial_assumption ((temp___expr_147 us_rep1)
+  (temp___skip_top_level_148 Bool)) Bool (= (attr__tag1 temp___expr_147) 
   us_tag1))
 
 (declare-fun x () us_rep1)

@@ -175,11 +175,6 @@
 
 (declare-fun foo__function_guard (Bool us_rep Int) Bool)
 
-;; temp___result_152_def
-  (assert
-  (forall ((dic__g Int) (temp___151 us_rep)) (foo__function_guard
-  (foo temp___151 dic__g) temp___151 dic__g)))
-
 (define-fun default_initial_assumption ((temp___expr_149 us_rep)
   (temp___skip_top_level_150 Bool)
   (dic__g Int)) Bool (and
@@ -207,29 +202,23 @@
   (assert
   (forall ((par1 us_rep))
   (forall ((dic__g Int))
-  (! (=> (foo__function_guard (foo par1 dic__g) par1 dic__g)
-     (= (= (foo par1 dic__g) true)
+  (! (= (= (foo par1 dic__g) true)
      (= (+ (to_rep (rec__dic__pr_record_t2__x (us_split_fields1 par1))) 
-     (to_rep (rec__dic__pr_record_t2__y (us_split_fields1 par1)))) dic__g))) :pattern (
+     (to_rep (rec__dic__pr_record_t2__y (us_split_fields1 par1)))) dic__g)) :pattern (
   (foo par1 dic__g)) ))))
 
 (declare-fun g () Int)
 
-(declare-fun temp___178 () integer)
+(declare-fun temp___177 () integer)
 
-(declare-fun temp___1781 () integer)
-
-(define-fun temp___1782 () us_rep (mk___rep
-                                  (mk___split_fields temp___178 temp___1781)))
+(declare-fun temp___1771 () integer)
 
 ;; H
-  (assert (and (= (to_rep temp___178) 0) (= (to_rep temp___1781) 0)))
-
-;; H
-  (assert (foo__function_guard (foo temp___1782 g) temp___1782 g))
+  (assert (and (= (to_rep temp___177) 0) (= (to_rep temp___1771) 0)))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (= (foo temp___1782 g) true)))
+  (not
+  (= (foo (mk___rep (mk___split_fields temp___177 temp___1771)) g) true)))
 (check-sat)

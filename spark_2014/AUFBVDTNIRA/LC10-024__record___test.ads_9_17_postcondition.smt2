@@ -623,17 +623,14 @@
 
 ;; get_remaining__post_axiom
   (assert
-  (forall ((s us_rep))
-  (! (let ((result (get_remaining s)))
-     (=> (get_remaining__function_guard result s) (dynamic_invariant result
-     true false true))) :pattern ((get_remaining s)) )))
+  (forall ((s us_rep)) (! (dynamic_invariant (get_remaining s) true false
+  true) :pattern ((get_remaining s)) )))
 
 ;; get_remaining__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (get_remaining__function_guard (get_remaining s) s)
-     (= (get_remaining s) (to_rep
-                          (rec__test__t__remaining (us_split_fields1 s))))) :pattern (
+  (! (= (get_remaining s) (to_rep
+                          (rec__test__t__remaining (us_split_fields1 s)))) :pattern (
   (get_remaining s)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -667,17 +664,17 @@
 
 (declare-fun o4 () (Array (_ BitVec 8) integer))
 
-(declare-fun temp___183 () length_type)
+(declare-fun temp___176 () length_type)
 
-(declare-fun temp___1831 () entry_id)
+(declare-fun temp___1761 () entry_id)
 
-(declare-fun temp___1832 () (Array (_ BitVec 8) integer))
+(declare-fun temp___1762 () (Array (_ BitVec 8) integer))
 
 (declare-fun o5 () Int)
 
 (declare-fun o6 () (_ BitVec 8))
 
-(declare-fun temp___184 () (_ BitVec 8))
+(declare-fun temp___177 () (_ BitVec 8))
 
 (declare-fun o7 () Int)
 
@@ -717,24 +714,6 @@
 
 (declare-fun s__split_fields14 () (Array (_ BitVec 8) integer))
 
-(define-fun s__split_fields15 () us_split_fields (mk___split_fields
-                                                 s__split_fields6
-                                                 s__split_fields7
-                                                 s__split_fields8))
-
-(define-fun s__split_fields16 () us_split_fields (mk___split_fields
-                                                 s__split_fields3
-                                                 s__split_fields4
-                                                 s__split_fields5))
-
-;; H
-  (assert (get_remaining__function_guard
-  (get_remaining (mk___rep s__split_fields15)) (mk___rep s__split_fields15)))
-
-;; H
-  (assert (get_remaining__function_guard
-  (get_remaining (mk___rep s__split_fields16)) (mk___rep s__split_fields16)))
-
 ;; H
   (assert
   (=>
@@ -761,13 +740,13 @@
   (assert (= s__split_fields2 o4))
 
 ;; H
-  (assert (= temp___183 o2))
+  (assert (= temp___176 o2))
 
 ;; H
-  (assert (= temp___1831 o3))
+  (assert (= temp___1761 o3))
 
 ;; H
-  (assert (= temp___1832 o4))
+  (assert (= temp___1762 o4))
 
 ;; H
   (assert
@@ -776,13 +755,13 @@
   (mk___split_fields s__split_fields s__split_fields1 s__split_fields2))))
 
 ;; H
-  (assert (= temp___183 s__split_fields3))
+  (assert (= temp___176 s__split_fields3))
 
 ;; H
-  (assert (= temp___1831 s__split_fields4))
+  (assert (= temp___1761 s__split_fields4))
 
 ;; H
-  (assert (= temp___1832 s__split_fields5))
+  (assert (= temp___1762 s__split_fields5))
 
 ;; H
   (assert
@@ -793,7 +772,7 @@
   (assert (= o6 ((_ int2bv 8) o5)))
 
 ;; H
-  (assert (= temp___184 (bvadd (to_rep1 s__split_fields4) o6)))
+  (assert (= temp___177 (bvadd (to_rep1 s__split_fields4) o6)))
 
 ;; H
   (assert
@@ -809,16 +788,19 @@
              o8) true false)))
 
 ;; H
-  (assert (=> (= result3 true) (= o9 (bvsub temp___184 ((_ int2bv 8) 5)))))
+  (assert (=> (= result3 true) (= o9 (bvsub temp___177 ((_ int2bv 8) 5)))))
 
 ;; H
-  (assert (=> (not (= result3 true)) (= o9 temp___184)))
+  (assert (=> (not (= result3 true)) (= o9 temp___177)))
 
 ;; H
   (assert
-  (= (get_remaining (mk___rep s__split_fields15)) (get_remaining
-                                                  (mk___rep
-                                                  s__split_fields16))))
+  (= (get_remaining
+     (mk___rep
+     (mk___split_fields s__split_fields6 s__split_fields7 s__split_fields8))) 
+  (get_remaining
+  (mk___rep
+  (mk___split_fields s__split_fields3 s__split_fields4 s__split_fields5)))))
 
 ;; H
   (assert (= s__split_fields9 s__split_fields6))
@@ -837,22 +819,6 @@
 
 ;; H
   (assert (= s__split_fields14 s__split_fields8))
-
-;; H
-  (assert (get_remaining__function_guard
-  (get_remaining
-  (mk___rep
-  (mk___split_fields s__split_fields9 s__split_fields10 s__split_fields11)))
-  (mk___rep
-  (mk___split_fields s__split_fields9 s__split_fields10 s__split_fields11))))
-
-;; H
-  (assert (get_remaining__function_guard
-  (get_remaining
-  (mk___rep
-  (mk___split_fields s__split_fields s__split_fields1 s__split_fields2)))
-  (mk___rep
-  (mk___split_fields s__split_fields s__split_fields1 s__split_fields2))))
 
 (assert
 ;; WP_parameter_def

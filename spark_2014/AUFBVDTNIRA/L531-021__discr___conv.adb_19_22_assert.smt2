@@ -459,10 +459,7 @@
 
 ;; id__post_axiom
   (assert
-  (forall ((x us_rep))
-  (! (let ((result (id x)))
-     (=> (id__function_guard result x) (= (bool_eq3 result x) true))) :pattern (
-  (id x)) )))
+  (forall ((x us_rep)) (! (= (bool_eq3 (id x) x) true) :pattern ((id x)) )))
 
 (define-fun in_range4 ((rec__basic__r__x1 Int)
   (a us_rep)) Bool (= rec__basic__r__x1 (to_rep1
@@ -940,9 +937,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o31 (id (mk___rep x__split_discrs x__split_fields4)))
-  (id__function_guard o31 (mk___rep x__split_discrs x__split_fields4)))
   (= (bool_eq3 o31 (mk___rep x__split_discrs x__split_fields4)) true)))
 
 ;; H
@@ -965,16 +960,6 @@
 
 ;; H
   (assert (= 0 (to_rep1 (rec__basic__r__x z__split_discrs))))
-
-;; H
-  (assert (id__function_guard
-  (id (mk___rep x__split_discrs x__split_fields4))
-  (mk___rep x__split_discrs x__split_fields4)))
-
-;; H
-  (assert (id__function_guard
-  (id (mk___rep y__split_discrs y__split_fields4))
-  (mk___rep y__split_discrs y__split_fields4)))
 
 (assert
 ;; WP_parameter_def

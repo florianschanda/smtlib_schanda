@@ -460,11 +460,6 @@
 
 ;; H
   (assert
-  (forall ((x Int)) (is_valid__function_guard
-  (is_valid (to_rep (select va x))) (to_rep (select va x)))))
-
-;; H
-  (assert
   (and
   (forall ((x Int))
   (=> (and (<= 1 x) (<= x 100)) (= (is_valid (to_rep (select va x))) true)))
@@ -616,10 +611,6 @@
   (= (rec__usergroup_examples__value_cache_t__cached
      (us_split_fields1 (select vca i))) true))
   (= v1 v2)))
-
-;; H
-  (assert (is_valid__function_guard (is_valid (to_rep (select va i)))
-  (to_rep (select va i))))
 
 (assert
 ;; WP_parameter_def

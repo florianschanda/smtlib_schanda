@@ -522,40 +522,28 @@
 ;; vk__tag__fs__name__t__compat_axiom
   (assert
   (forall ((this us_rep))
-  (! (=> (length__function_guard1 (length2 us_tag this) us_tag this)
-     (and (length__function_guard (length1 this) this)
-     (= (length1 this) (length2 us_tag this)))) :pattern ((length2 us_tag
-                                                          this)) )))
+  (! (= (length1 this) (length2 us_tag this)) :pattern ((length2 us_tag this)) )))
 
 ;; vk__tag__name_p__mutable_t__compat_axiom
   (assert
   (forall ((this us_rep))
-  (! (=> (length__function_guard1 (length2 us_tag1 this) us_tag1 this)
-     (and (length__function_guard (length1 this) this)
-     (= (length1 this) (length2 us_tag1 this)))) :pattern ((length2 us_tag1
-                                                           this)) )))
+  (! (= (length1 this) (length2 us_tag1 this)) :pattern ((length2 us_tag1
+                                                         this)) )))
 
 ;; extension__mutable_tag_name__mutable_t__compat_axiom
   (assert
   (forall ((this us_rep))
-  (! (=> (length__function_guard1 (length2 us_tag2 this) us_tag2 this)
-     (and (length__function_guard (length1 this) this)
-     (= (length1 this) (length2 us_tag2 this)))) :pattern ((length2 us_tag2
-                                                           this)) )))
+  (! (= (length1 this) (length2 us_tag2 this)) :pattern ((length2 us_tag2
+                                                         this)) )))
 
-;; temp___result_868_def
-  (assert
-  (forall ((temp___867 us_rep)) (length__function_guard (length1 temp___867)
-  temp___867)))
-
-(define-fun default_initial_assumption ((temp___expr_865 us_rep)
-  (temp___skip_top_level_866 Bool)) Bool (and
-                                         (= (attr__tag temp___expr_865) 
+(define-fun default_initial_assumption ((temp___expr_833 us_rep)
+  (temp___skip_top_level_834 Bool)) Bool (and
+                                         (= (attr__tag temp___expr_833) 
                                          us_tag2)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_866 true))
-                                         (= (length1 temp___expr_865) 0))))
+                                         (= temp___skip_top_level_834 true))
+                                         (= (length1 temp___expr_833) 0))))
 
 (declare-fun this__attr__tag () Int)
 
@@ -585,33 +573,23 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range temp___expr_15)))
 
-;; temp___result_813_def
-  (assert
-  (forall ((temp___812 us_rep)) (length__function_guard (length1 temp___812)
-  temp___812)))
-
-(define-fun default_initial_assumption1 ((temp___expr_810 us_rep)
-  (temp___skip_top_level_811 Bool)) Bool (and
-                                         (= (attr__tag temp___expr_810) 
+(define-fun default_initial_assumption1 ((temp___expr_799 us_rep)
+  (temp___skip_top_level_800 Bool)) Bool (and
+                                         (= (attr__tag temp___expr_799) 
                                          us_tag)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_811 true))
-                                         (= (length1 temp___expr_810) 0))))
+                                         (= temp___skip_top_level_800 true))
+                                         (= (length1 temp___expr_799) 0))))
 
-;; temp___result_841_def
-  (assert
-  (forall ((temp___840 us_rep)) (length__function_guard (length1 temp___840)
-  temp___840)))
-
-(define-fun default_initial_assumption2 ((temp___expr_838 us_rep)
-  (temp___skip_top_level_839 Bool)) Bool (and
-                                         (= (attr__tag temp___expr_838) 
+(define-fun default_initial_assumption2 ((temp___expr_811 us_rep)
+  (temp___skip_top_level_812 Bool)) Bool (and
+                                         (= (attr__tag temp___expr_811) 
                                          us_tag1)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_839 true))
-                                         (= (length1 temp___expr_838) 0))))
+                                         (= temp___skip_top_level_812 true))
+                                         (= (length1 temp___expr_811) 0))))
 
 ;; H
   (assert (dynamic_invariant text true false true))

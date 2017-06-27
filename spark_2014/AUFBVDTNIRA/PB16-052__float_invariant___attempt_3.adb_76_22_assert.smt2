@@ -53,14 +53,10 @@
 
 (declare-fun pow2 (Int) Int)
 
-(declare-datatypes () ((mode (RNE2) (RNA2) (RTP2) (RTN2) (RTZ2))))
-(define-fun to_nearest ((m mode)) Bool (or (= m RNE2) (= m RNA2)))
+(declare-datatypes () ((mode (RNE1) (RNA1) (RTP1) (RTN1) (RTZ1))))
+(define-fun to_nearest ((m mode)) Bool (or (= m RNE1) (= m RNA1)))
 
 (declare-fun zeroF () t)
-
-(declare-fun abs1 (t) t)
-
-(declare-fun neg (t) t)
 
 (declare-fun add (mode t t) t)
 
@@ -69,6 +65,10 @@
 (declare-fun mul (mode t t) t)
 
 (declare-fun div1 (mode t t) t)
+
+(declare-fun abs1 (t) t)
+
+(declare-fun neg (t) t)
 
 (declare-fun fma (mode t t t) t)
 
@@ -178,16 +178,16 @@
   (=> (tqtisFinite x) (= (round m (tqtreal x)) (tqtreal x)))))
 
 ;; Round_down_le
-  (assert (forall ((x Real)) (<= (round RTN2 x) x)))
+  (assert (forall ((x Real)) (<= (round RTN1 x) x)))
 
 ;; Round_up_ge
-  (assert (forall ((x Real)) (<= x (round RTP2 x))))
+  (assert (forall ((x Real)) (<= x (round RTP1 x))))
 
 ;; Round_down_neg
-  (assert (forall ((x Real)) (= (round RTN2 (- x)) (- (round RTP2 x)))))
+  (assert (forall ((x Real)) (= (round RTN1 (- x)) (- (round RTP1 x)))))
 
 ;; Round_up_neg
-  (assert (forall ((x Real)) (= (round RTP2 (- x)) (- (round RTN2 x)))))
+  (assert (forall ((x Real)) (= (round RTP1 (- x)) (- (round RTN1 x)))))
 
 (define-fun in_safe_int_range ((i Int)) Bool (and (<= (- 9007199254740992) i)
                                              (<= i 9007199254740992)))
@@ -325,10 +325,10 @@
               (=> (diff_sign x y) (is_negative z))))
 
 (define-fun overflow_value ((m mode)
-  (x t)) Bool (ite (is-RTN2 m) (ite (is_positive x)
+  (x t)) Bool (ite (is-RTN1 m) (ite (is_positive x)
                                (and (tqtisFinite x)
                                (= (tqtreal x) (* 9007199254740991.0 19958403095347198116563727130368385660674512604354575415025472424372118918689640657849579654926357010893424468441924952439724379883935936607391717982848314203200056729510856765175377214443629871826533567445439239933308104551208703888888552684480441575071209068757560416423584952303440099278848.0)))
-                               (is_infinite x)) (ite (is-RTP2 m) (ite (is_positive
+                               (is_infinite x)) (ite (is-RTP1 m) (ite (is_positive
                                                                  x)
                                                                  (is_infinite
                                                                  x)
@@ -337,7 +337,7 @@
                                                                  x)
                                                                  (= (tqtreal
                                                                     x) (- (* 9007199254740991.0 19958403095347198116563727130368385660674512604354575415025472424372118918689640657849579654926357010893424468441924952439724379883935936607391717982848314203200056729510856765175377214443629871826533567445439239933308104551208703888888552684480441575071209068757560416423584952303440099278848.0))))) 
-                                                (ite (is-RTZ2 m) (ite (is_positive
+                                                (ite (is-RTZ1 m) (ite (is_positive
                                                                  x)
                                                                  (and
                                                                  (tqtisFinite
@@ -349,12 +349,12 @@
                                                                  x)
                                                                  (= (tqtreal
                                                                     x) (- (* 9007199254740991.0 19958403095347198116563727130368385660674512604354575415025472424372118918689640657849579654926357010893424468441924952439724379883935936607391717982848314203200056729510856765175377214443629871826533567445439239933308104551208703888888552684480441575071209068757560416423584952303440099278848.0))))) 
-                                                (ite (is-RNA2 m) (is_infinite
+                                                (ite (is-RNA1 m) (is_infinite
                                                 x) (is_infinite x))))))
 
 (define-fun sign_zero_result ((m mode)
   (x t)) Bool (=> (is_zero x)
-              (ite (is-RTN2 m) (is_negative x) (is_positive x))))
+              (ite (is-RTN1 m) (is_negative x) (is_positive x))))
 
 ;; add_finite
   (assert
@@ -649,84 +649,84 @@
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (=> (is_negative x) (= (roundToIntegral RTZ2 x) (roundToIntegral RTP2 x))))))
+  (=> (is_negative x) (= (roundToIntegral RTZ1 x) (roundToIntegral RTP1 x))))))
 
 ;; truncate_pos
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (=> (is_positive x) (= (roundToIntegral RTZ2 x) (roundToIntegral RTN2 x))))))
+  (=> (is_positive x) (= (roundToIntegral RTZ1 x) (roundToIntegral RTN1 x))))))
 
 ;; ceil_le
   (assert
-  (forall ((x t)) (=> (tqtisFinite x) (le x (roundToIntegral RTP2 x)))))
+  (forall ((x t)) (=> (tqtisFinite x) (le x (roundToIntegral RTP1 x)))))
 
 ;; ceil_lest
   (assert
   (forall ((x t) (y t))
-  (=> (and (le x y) (is_int1 y)) (le (roundToIntegral RTP2 x) y))))
+  (=> (and (le x y) (is_int1 y)) (le (roundToIntegral RTP1 x) y))))
 
 ;; ceil_to_real
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (= (tqtreal (roundToIntegral RTP2 x)) (to_real (- 1 (to_int (- 1.0 
+  (= (tqtreal (roundToIntegral RTP1 x)) (to_real (- 1 (to_int (- 1.0 
   (tqtreal x)))))))))
 
 ;; ceil_to_int
   (assert
   (forall ((m mode) (x t))
   (=> (tqtisFinite x)
-  (= (to_int1 m (roundToIntegral RTP2 x)) (- 1 (to_int (- 1.0 (tqtreal x))))))))
+  (= (to_int1 m (roundToIntegral RTP1 x)) (- 1 (to_int (- 1.0 (tqtreal x))))))))
 
 ;; floor_le
   (assert
-  (forall ((x t)) (=> (tqtisFinite x) (le (roundToIntegral RTN2 x) x))))
+  (forall ((x t)) (=> (tqtisFinite x) (le (roundToIntegral RTN1 x) x))))
 
 ;; floor_lest
   (assert
   (forall ((x t) (y t))
-  (=> (and (le y x) (is_int1 y)) (le y (roundToIntegral RTN2 x)))))
+  (=> (and (le y x) (is_int1 y)) (le y (roundToIntegral RTN1 x)))))
 
 ;; floor_to_real
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (= (tqtreal (roundToIntegral RTN2 x)) (to_real (to_int (tqtreal x)))))))
+  (= (tqtreal (roundToIntegral RTN1 x)) (to_real (to_int (tqtreal x)))))))
 
 ;; floor_to_int
   (assert
   (forall ((m mode) (x t))
   (=> (tqtisFinite x)
-  (= (to_int1 m (roundToIntegral RTN2 x)) (to_int (tqtreal x))))))
+  (= (to_int1 m (roundToIntegral RTN1 x)) (to_int (tqtreal x))))))
 
 ;; RNA_down
   (assert
   (forall ((x t))
-  (=> (lt (sub RNE2 x (roundToIntegral RTN2 x))
-  (sub RNE2 (roundToIntegral RTP2 x) x))
-  (= (roundToIntegral RNA2 x) (roundToIntegral RTN2 x)))))
+  (=> (lt (sub RNE1 x (roundToIntegral RTN1 x))
+  (sub RNE1 (roundToIntegral RTP1 x) x))
+  (= (roundToIntegral RNA1 x) (roundToIntegral RTN1 x)))))
 
 ;; RNA_up
   (assert
   (forall ((x t))
-  (=> (lt (sub RNE2 (roundToIntegral RTP2 x) x)
-  (sub RNE2 x (roundToIntegral RTN2 x)))
-  (= (roundToIntegral RNA2 x) (roundToIntegral RTP2 x)))))
+  (=> (lt (sub RNE1 (roundToIntegral RTP1 x) x)
+  (sub RNE1 x (roundToIntegral RTN1 x)))
+  (= (roundToIntegral RNA1 x) (roundToIntegral RTP1 x)))))
 
 ;; RNA_down_tie
   (assert
   (forall ((x t))
-  (=> (eq (sub RNE2 x (roundToIntegral RTN2 x))
-  (sub RNE2 (roundToIntegral RTP2 x) x))
-  (=> (is_negative x) (= (roundToIntegral RNA2 x) (roundToIntegral RTN2 x))))))
+  (=> (eq (sub RNE1 x (roundToIntegral RTN1 x))
+  (sub RNE1 (roundToIntegral RTP1 x) x))
+  (=> (is_negative x) (= (roundToIntegral RNA1 x) (roundToIntegral RTN1 x))))))
 
 ;; RNA_up_tie
   (assert
   (forall ((x t))
-  (=> (eq (sub RNE2 (roundToIntegral RTP2 x) x)
-  (sub RNE2 x (roundToIntegral RTN2 x)))
-  (=> (is_positive x) (= (roundToIntegral RNA2 x) (roundToIntegral RTP2 x))))))
+  (=> (eq (sub RNE1 (roundToIntegral RTP1 x) x)
+  (sub RNE1 x (roundToIntegral RTN1 x)))
+  (=> (is_positive x) (= (roundToIntegral RNA1 x) (roundToIntegral RTP1 x))))))
 
 ;; to_int_roundToIntegral
   (assert
@@ -762,12 +762,12 @@
 ;; round_bound_ne
   (assert
   (forall ((x Real))
-  (! (=> (no_overflow RNE2 x)
+  (! (=> (no_overflow RNE1 x)
      (and
      (<= (- (- x (* (/ 1.0 9007199254740992.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 404804506614621236704990693437834614099113299528284236713802716054860679135990693783920767402874248990374155728633623822779617474771586953734026799881477019843034848553132722728933815484186432682479535356945490137124014966849385397236206711298319112681620113024717539104666829230461005064372655017292012526615415482186989568.0)) 
-     (round RNE2 x))
-     (<= (round RNE2 x) (+ (+ x (* (/ 1.0 9007199254740992.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 404804506614621236704990693437834614099113299528284236713802716054860679135990693783920767402874248990374155728633623822779617474771586953734026799881477019843034848553132722728933815484186432682479535356945490137124014966849385397236206711298319112681620113024717539104666829230461005064372655017292012526615415482186989568.0))))) :pattern (
-  (round RNE2 x)) )))
+     (round RNE1 x))
+     (<= (round RNE1 x) (+ (+ x (* (/ 1.0 9007199254740992.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 404804506614621236704990693437834614099113299528284236713802716054860679135990693783920767402874248990374155728633623822779617474771586953734026799881477019843034848553132722728933815484186432682479535356945490137124014966849385397236206711298319112681620113024717539104666829230461005064372655017292012526615415482186989568.0))))) :pattern (
+  (round RNE1 x)) )))
 
 (define-fun neq ((x t) (y t)) Bool (not (eq x y)))
 
@@ -794,7 +794,7 @@
   (assert (is_int1 fliteral))
 
 ;; one_of_int
-  (assert (= fliteral (of_int RNA2 1)))
+  (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -945,10 +945,8 @@
 ;; low_bound__post_axiom
   (assert
   (forall ((n Int))
-  (! (=> (dynamic_invariant1 n true true true)
-     (let ((result (low_bound n)))
-     (=> (low_bound__function_guard result n) (dynamic_invariant result true
-     false true)))) :pattern ((low_bound n)) )))
+  (! (=> (dynamic_invariant1 n true true true) (dynamic_invariant
+     (low_bound n) true false true)) :pattern ((low_bound n)) )))
 
 (declare-fun fliteral2 () t)
 
@@ -958,10 +956,8 @@
 ;; low_bound__def_axiom
   (assert
   (forall ((n Int))
-  (! (=>
-     (and (dynamic_invariant1 n true true true) (low_bound__function_guard
-     (low_bound n) n))
-     (= (low_bound n) (mul RNE2 (of_int RNE2 n) (neg fliteral2)))) :pattern (
+  (! (=> (dynamic_invariant1 n true true true)
+     (= (low_bound n) (mul RNE1 (of_int RNE1 n) (neg fliteral2)))) :pattern (
   (low_bound n)) )))
 
 (declare-fun high_bound (Int) t)
@@ -971,18 +967,14 @@
 ;; high_bound__post_axiom
   (assert
   (forall ((n Int))
-  (! (=> (dynamic_invariant1 n true true true)
-     (let ((result (high_bound n)))
-     (=> (high_bound__function_guard result n) (dynamic_invariant result true
-     false true)))) :pattern ((high_bound n)) )))
+  (! (=> (dynamic_invariant1 n true true true) (dynamic_invariant
+     (high_bound n) true false true)) :pattern ((high_bound n)) )))
 
 ;; high_bound__def_axiom
   (assert
   (forall ((n Int))
-  (! (=>
-     (and (dynamic_invariant1 n true true true) (high_bound__function_guard
-     (high_bound n) n))
-     (= (high_bound n) (mul RNE2 (of_int RNE2 n) fliteral2))) :pattern (
+  (! (=> (dynamic_invariant1 n true true true)
+     (= (high_bound n) (mul RNE1 (of_int RNE1 n) fliteral2))) :pattern (
   (high_bound n)) )))
 
 (declare-fun invariant__ (Int t) Bool)
@@ -996,11 +988,8 @@
   (assert
   (forall ((n Int))
   (forall ((speed t))
-  (! (=> (invariant____function_guard (invariant__ n speed) n speed)
-     (and (low_bound__function_guard (low_bound n) n)
-     (and (high_bound__function_guard (high_bound n) n)
-     (= (= (invariant__ n speed) true)
-     (and (le (low_bound n) speed) (le speed (high_bound n))))))) :pattern (
+  (! (= (= (invariant__ n speed) true)
+     (and (le (low_bound n) speed) (le speed (high_bound n)))) :pattern (
   (invariant__ n speed)) ))))
 
 (declare-fun in_bounds (t) Bool)
@@ -1018,8 +1007,7 @@
 ;; in_bounds__def_axiom
   (assert
   (forall ((v t))
-  (! (=> (in_bounds__function_guard (in_bounds v) v)
-     (= (= (in_bounds v) true) (and (le (neg fliteral3) v) (le v fliteral3)))) :pattern (
+  (! (= (= (in_bounds v) true) (and (le (neg fliteral3) v) (le v fliteral3))) :pattern (
   (in_bounds v)) )))
 
 (declare-fun n () Int)
@@ -1067,13 +1055,13 @@
   (= (tqtreal fliteral5) (/ 166666666666666664353702032030923874117434024810791015625.0 10000000000000000000000000000000000000000000000000000000000.0))))
 
 ;; delta_speed__def_axiom
-  (assert (= delta_speed (mul RNE2 (mul RNE2 factor fliteral4) fliteral5)))
+  (assert (= delta_speed (mul RNE1 (mul RNE1 factor fliteral4) fliteral5)))
 
 ;; fnt65__def_axiom
-  (assert (= fnt65 (mul RNE2 (of_int RNE2 n) fliteral2)))
+  (assert (= fnt65 (mul RNE1 (of_int RNE1 n) fliteral2)))
 
 ;; fnp1t65__def_axiom
-  (assert (= fnp1t65 (mul RNE2 (of_int RNE2 (+ n 1)) fliteral2)))
+  (assert (= fnp1t65 (mul RNE1 (of_int RNE1 (+ n 1)) fliteral2)))
 
 (declare-fun new_speed () t)
 
@@ -1106,22 +1094,18 @@
   (assert (tqtisFinite distance))
 
 ;; H
-  (assert (invariant____function_guard (invariant__ n old_speed) n
-  old_speed))
-
-;; H
   (assert (and (< n 25000) (= (invariant__ n old_speed) true)))
 
 ;; H
-  (assert (= (mul RNE2 (mul RNE2 factor fliteral4) fliteral5) delta_speed))
+  (assert (= (mul RNE1 (mul RNE1 factor fliteral4) fliteral5) delta_speed))
 
 ;; H
   (assert (tqtisFinite delta_speed))
 
 ;; H
   (assert
-  (and (= o (add RNE2 old_speed delta_speed)) (tqtisFinite
-  (add RNE2 old_speed delta_speed))))
+  (and (= o (add RNE1 old_speed delta_speed)) (tqtisFinite
+  (add RNE1 old_speed delta_speed))))
 
 ;; H
   (assert (= (mk_t__ref result) (mk_t__ref new_speed)))
@@ -1133,67 +1117,35 @@
   (assert (and (le (neg fliteral) delta_speed) (le delta_speed fliteral)))
 
 ;; H
-  (assert (in_bounds__function_guard (in_bounds old_speed) old_speed))
-
-;; H
   (assert (= (in_bounds old_speed) true))
-
-;; H
-  (assert (high_bound__function_guard (high_bound n) n))
-
-;; H
-  (assert (high_bound__function_guard (high_bound n) n))
-
-;; H
-  (assert (in_bounds__function_guard (in_bounds (high_bound n))
-  (high_bound n)))
 
 ;; H
   (assert (= (in_bounds (high_bound n)) true))
 
 ;; H
-  (assert (low_bound__function_guard (low_bound n) n))
-
-;; H
-  (assert (low_bound__function_guard (low_bound n) n))
-
-;; H
-  (assert (in_bounds__function_guard (in_bounds (low_bound n))
-  (low_bound n)))
-
-;; H
   (assert (= (in_bounds (low_bound n)) true))
 
 ;; H
-  (assert (le new_speed1 (add RNE2 old_speed fliteral)))
-
-;; H
-  (assert (high_bound__function_guard (high_bound n) n))
+  (assert (le new_speed1 (add RNE1 old_speed fliteral)))
 
 ;; H
   (assert (le old_speed (high_bound n)))
 
 ;; H
-  (assert (high_bound__function_guard (high_bound n) n))
+  (assert (le (add RNE1 old_speed fliteral)
+  (add RNE1 (high_bound n) fliteral)))
 
 ;; H
-  (assert (le (add RNE2 old_speed fliteral)
-  (add RNE2 (high_bound n) fliteral)))
+  (assert (le new_speed1 (add RNE1 (high_bound n) fliteral)))
 
 ;; H
-  (assert (high_bound__function_guard (high_bound n) n))
-
-;; H
-  (assert (le new_speed1 (add RNE2 (high_bound n) fliteral)))
-
-;; H
-  (assert (= (mul RNE2 (of_int RNE2 n) fliteral2) fnt65))
+  (assert (= (mul RNE1 (of_int RNE1 n) fliteral2) fnt65))
 
 ;; H
   (assert (tqtisFinite fnt65))
 
 ;; H
-  (assert (= (mul RNE2 (of_int RNE2 (+ n 1)) fliteral2) fnp1t65))
+  (assert (= (mul RNE1 (of_int RNE1 (+ n 1)) fliteral2) fnp1t65))
 
 ;; H
   (assert (tqtisFinite fnp1t65))
@@ -1202,46 +1154,31 @@
   (assert (<= (+ (* n 65) 1) (* (+ n 1) 65)))
 
 ;; H
-  (assert (le (of_int RNE2 (+ (* n 65) 1)) (of_int RNE2 (* (+ n 1) 65))))
+  (assert (le (of_int RNE1 (+ (* n 65) 1)) (of_int RNE1 (* (+ n 1) 65))))
 
 ;; H
-  (assert (eq (add RNE2 fnt65 fliteral) (of_int RNE2 (+ (* n 65) 1))))
+  (assert (eq (add RNE1 fnt65 fliteral) (of_int RNE1 (+ (* n 65) 1))))
 
 ;; H
-  (assert (eq fnp1t65 (of_int RNE2 (* (+ n 1) 65))))
+  (assert (eq fnp1t65 (of_int RNE1 (* (+ n 1) 65))))
 
 ;; H
-  (assert (le (add RNE2 fnt65 fliteral) fnp1t65))
+  (assert (le (add RNE1 fnt65 fliteral) fnp1t65))
 
 ;; H
-  (assert (high_bound__function_guard (high_bound n) n))
-
-;; H
-  (assert (high_bound__function_guard (high_bound (+ n 1)) (+ n 1)))
-
-;; H
-  (assert (le (add RNE2 (high_bound n) fliteral) (high_bound (+ n 1))))
-
-;; H
-  (assert (high_bound__function_guard (high_bound (+ n 1)) (+ n 1)))
+  (assert (le (add RNE1 (high_bound n) fliteral) (high_bound (+ n 1))))
 
 ;; H
   (assert (le new_speed1 (high_bound (+ n 1))))
 
 ;; H
-  (assert (le (sub RNE2 old_speed fliteral) new_speed1))
-
-;; H
-  (assert (low_bound__function_guard (low_bound n) n))
+  (assert (le (sub RNE1 old_speed fliteral) new_speed1))
 
 ;; H
   (assert (le (low_bound n) old_speed))
 
-;; H
-  (assert (low_bound__function_guard (low_bound n) n))
-
 (assert
 ;; WP_parameter_def
  ;; File "attempt_3.adb", line 25, characters 0-0
-  (not (le (sub RNE2 (low_bound n) fliteral) (sub RNE2 old_speed fliteral))))
+  (not (le (sub RNE1 (low_bound n) fliteral) (sub RNE1 old_speed fliteral))))
 (check-sat)

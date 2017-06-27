@@ -375,25 +375,6 @@
 (define-fun tTcsSP1__ref___projection ((a tTcsSP1__ref)) tTcsSP1 (tTcsSP1__content
                                                                  a))
 
-(declare-sort t1b 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq5 (t1b t1b) Bool)
-
-(declare-fun dummy5 () t1b)
-
-(declare-datatypes () ((t1b__ref (mk_t1b__ref (t1b__content t1b)))))
-(define-fun t1b__ref___projection ((a t1b__ref)) t1b (t1b__content a))
-
 (declare-fun cs () (Array Int character))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -883,8 +864,6 @@
                                              (first1 temp___153)) 1) 0) 
                 (ite (<= 1 5) (+ (- 5 1) 1) 0))) 1)))))))
 
-(declare-fun main__cs__assume () (Array Int character))
-
 (declare-fun o () Int)
 
 (declare-fun o1 () Int)
@@ -1193,10 +1172,7 @@
   (assert (and (<= (length vstring) 11) (< 0 (length vstring))))
 
 ;; H
-  (assert (= main__cs__assume (main__cs__aggregate_def 32)))
-
-;; H
-  (assert (= main__cs__assume cs))
+  (assert (= (main__cs__aggregate_def 32) cs))
 
 ;; H
   (assert (=> (= (length vstring) 0) (= (elts vstring) temp___200)))

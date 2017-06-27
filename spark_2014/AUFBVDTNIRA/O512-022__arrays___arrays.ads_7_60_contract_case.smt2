@@ -379,7 +379,7 @@
 
 (declare-fun arrays__sum__result () Int)
 
-(declare-fun temp___166 () Int)
+(declare-fun temp___164 () Int)
 
 (declare-fun o () Int)
 
@@ -460,7 +460,7 @@
 ;; H
   (assert
   (=> (and (<= (to_rep1 (first (rt x))) j1) (<= j1 (to_rep1 (last (rt x)))))
-  (= temp___166 s1)))
+  (= temp___164 s1)))
 
 ;; H
   (assert

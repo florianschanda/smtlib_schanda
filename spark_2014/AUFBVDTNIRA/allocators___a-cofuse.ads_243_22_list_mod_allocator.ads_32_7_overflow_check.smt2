@@ -97,11 +97,11 @@
 
 (declare-fun is_empty__function_guard (Bool us_rep) Bool)
 
-(define-fun default_initial_assumption ((temp___expr_200 us_rep)
-  (temp___skip_top_level_201 Bool)) Bool (=>
+(define-fun default_initial_assumption ((temp___expr_198 us_rep)
+  (temp___skip_top_level_199 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_201 true))
-                                         (= (is_empty temp___expr_200) true)))
+                                         (= temp___skip_top_level_199 true))
+                                         (= (is_empty temp___expr_198) true)))
 
 (declare-fun length (us_rep) Int)
 
@@ -128,12 +128,12 @@
 (define-fun count_type__ref___projection ((a count_type__ref)) count_type 
   (count_type__content a))
 
-(define-fun dynamic_invariant ((temp___expr_144 Int)
-  (temp___is_init_141 Bool) (temp___skip_constant_142 Bool)
-  (temp___do_toplevel_143 Bool)) Bool (=>
-                                      (or (= temp___is_init_141 true)
+(define-fun dynamic_invariant ((temp___expr_142 Int)
+  (temp___is_init_139 Bool) (temp___skip_constant_140 Bool)
+  (temp___do_toplevel_141 Bool)) Bool (=>
+                                      (or (= temp___is_init_139 true)
                                       (<= 0 2147483647)) (in_range1
-                                      temp___expr_144)))
+                                      temp___expr_142)))
 
 ;; length__post_axiom
   (assert
@@ -213,12 +213,12 @@
 (define-fun element_type__ref_2__projection ((a element_type__ref)) element_type 
   (element_type__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_193 Int)
-  (temp___is_init_190 Bool) (temp___skip_constant_191 Bool)
-  (temp___do_toplevel_192 Bool)) Bool (=>
-                                      (or (= temp___is_init_190 true)
+(define-fun dynamic_invariant1 ((temp___expr_191 Int)
+  (temp___is_init_188 Bool) (temp___skip_constant_189 Bool)
+  (temp___do_toplevel_190 Bool)) Bool (=>
+                                      (or (= temp___is_init_188 true)
                                       (<= 0 10000)) (in_range3
-                                      temp___expr_193)))
+                                      temp___expr_191)))
 
 (declare-fun contains (us_rep Int) Bool)
 

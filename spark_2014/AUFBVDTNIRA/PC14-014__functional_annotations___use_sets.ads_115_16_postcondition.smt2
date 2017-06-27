@@ -1111,11 +1111,6 @@
 
 ;; H
   (assert
-  (forall ((cu us_rep1)) (q__function_guard (q (element s cu))
-  (element s cu))))
-
-;; H
-  (assert
   (forall ((cu us_rep1))
   (=> (= (has_key (positions s) cu) true) (= (q (element s cu)) true))))
 
@@ -1137,9 +1132,6 @@
 
 ;; H
   (assert (<= i (length s)))
-
-;; H
-  (assert (q__function_guard (q (get (elements s) i)) (get (elements s) i)))
 
 (assert
 ;; WP_parameter_def

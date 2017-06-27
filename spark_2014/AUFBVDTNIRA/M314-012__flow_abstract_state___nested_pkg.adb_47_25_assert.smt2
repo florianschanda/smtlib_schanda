@@ -44,8 +44,7 @@
 ;; g__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (g__function_guard (g us_void_param) us_void_param)
-     (= (g us_void_param) true)) :pattern ((g us_void_param)) )))
+  (! (= (g us_void_param) true) :pattern ((g us_void_param)) )))
 
 (declare-fun f (tuple0) Bool)
 
@@ -57,8 +56,7 @@
 ;; f__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (f__function_guard (f us_void_param) us_void_param)
-     (= (f us_void_param) true)) :pattern ((f us_void_param)) )))
+  (! (= (f us_void_param) true) :pattern ((f us_void_param)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -74,12 +72,8 @@
 ;; h__def_axiom
   (assert
   (forall ((nested_pkg__z__bar Bool))
-  (! (=> (h__function_guard (h nested_pkg__z__bar) nested_pkg__z__bar)
-     (= (= (h nested_pkg__z__bar) true) (= nested_pkg__z__bar true))) :pattern (
+  (! (= (= (h nested_pkg__z__bar) true) (= nested_pkg__z__bar true)) :pattern (
   (h nested_pkg__z__bar)) )))
-
-;; H
-  (assert (f__function_guard (f Tuple0) Tuple0))
 
 (assert
 ;; WP_parameter_def

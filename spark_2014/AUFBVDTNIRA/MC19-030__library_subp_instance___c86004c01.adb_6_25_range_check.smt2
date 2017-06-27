@@ -71,10 +71,8 @@
 ;; c86004c0__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (c86004c0 x)))
-     (=> (c86004c0__function_guard result x) (dynamic_invariant result true
-     false true)))) :pattern ((c86004c0 x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (c86004c0 x)
+     true false true)) :pattern ((c86004c0 x)) )))
 
 (declare-fun intgr () Int)
 
@@ -115,9 +113,7 @@
   (assert (in_range intgr))
 
 ;; H
-  (assert
-  (and (and (= o (c86004c0 10)) (c86004c0__function_guard o 10)) (in_range
-  o)))
+  (assert (and (= o (c86004c0 10)) (in_range o)))
 
 (assert
 ;; WP_parameter_def

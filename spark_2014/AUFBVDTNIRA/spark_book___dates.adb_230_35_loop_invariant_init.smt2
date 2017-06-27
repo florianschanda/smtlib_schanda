@@ -328,11 +328,9 @@
 ;; maximum_date__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (maximum_date__function_guard (maximum_date us_void_param)
-     us_void_param)
-     (= (maximum_date us_void_param) (mk___rep
+  (! (= (maximum_date us_void_param) (mk___rep
                                      (mk___split_fields (of_rep2 31)
-                                     (of_rep1 12) (of_rep 2099))))) :pattern (
+                                     (of_rep1 12) (of_rep 2099)))) :pattern (
   (maximum_date us_void_param)) )))
 
 (declare-fun minimum_date (tuple0) us_rep)
@@ -345,11 +343,9 @@
 ;; minimum_date__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (minimum_date__function_guard (minimum_date us_void_param)
-     us_void_param)
-     (= (minimum_date us_void_param) (mk___rep
+  (! (= (minimum_date us_void_param) (mk___rep
                                      (mk___split_fields (of_rep2 1)
-                                     (of_rep1 1) (of_rep 2000))))) :pattern (
+                                     (of_rep1 1) (of_rep 2000)))) :pattern (
   (minimum_date us_void_param)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
@@ -399,8 +395,6 @@
   (! (=> (in_range5 x) (= (to_rep3 (of_rep3 x)) x)) :pattern ((to_rep3
                                                               (of_rep3 x))) )))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -424,8 +418,6 @@
 (declare-fun r38b () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
-
-(declare-fun last1 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -550,8 +542,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o3 (maximum_date Tuple0)) (maximum_date__function_guard o3 Tuple0))
+  (and (= o3 (maximum_date Tuple0))
   (and (= (of_rep2 31) o) (and (= (of_rep1 12) o1) (= (of_rep 2099) o2)))))
 
 ;; H
@@ -567,9 +558,6 @@
 
 ;; H
   (assert (= valid2 valid1))
-
-;; H
-  (assert (maximum_date__function_guard (maximum_date Tuple0) Tuple0))
 
 (assert
 ;; WP_parameter_def

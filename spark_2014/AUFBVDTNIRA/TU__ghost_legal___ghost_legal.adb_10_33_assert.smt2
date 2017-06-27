@@ -179,8 +179,7 @@
 ;; is_even__def_axiom
   (assert
   (forall ((x Int))
-  (! (=> (is_even__function_guard (is_even x) x)
-     (= (= (is_even x) true) (= (mod2 x 2) 0))) :pattern ((is_even x)) )))
+  (! (= (= (is_even x) true) (= (mod2 x 2) 0)) :pattern ((is_even x)) )))
 
 (declare-fun x () Int)
 
@@ -205,9 +204,6 @@
 
 ;; H
   (assert (= (mod2 x 2) 0))
-
-;; H
-  (assert (is_even__function_guard (is_even x) x))
 
 (assert
 ;; WP_parameter_def

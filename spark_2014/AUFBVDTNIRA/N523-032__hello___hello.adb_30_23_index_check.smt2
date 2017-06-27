@@ -404,7 +404,7 @@
 
 (declare-fun j () Int)
 
-(declare-fun temp___593 () Int)
+(declare-fun temp___591 () Int)
 
 ;; H
   (assert (dynamic_invariant1 str true false true))
@@ -432,10 +432,10 @@
   (assert (not (= j (to_rep1 (first (rt str))))))
 
 ;; H
-  (assert (and (= temp___593 (- j 1)) (in_range1 (- j 1))))
+  (assert (and (= temp___591 (- j 1)) (in_range1 (- j 1))))
 
 (assert
 ;; WP_parameter_def
  ;; File "hello.adb", line 24, characters 0-0
-  (not (<= (to_rep1 (first (rt str))) temp___593)))
+  (not (<= (to_rep1 (first (rt str))) temp___591)))
 (check-sat)

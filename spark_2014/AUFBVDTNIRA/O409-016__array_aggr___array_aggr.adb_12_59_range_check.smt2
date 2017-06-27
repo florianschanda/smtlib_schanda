@@ -253,7 +253,7 @@
                                                      (+ (- b__first a__first) temp___idx_132)
                                                      (+ (- b__first_2 a__first_2) temp___idx_133)))))))))))
 
-(declare-sort tTdSP1 0)
+(declare-sort tTdSP2 0)
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
 
@@ -265,18 +265,18 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
 
-(declare-fun user_eq3 (tTdSP1 tTdSP1) Bool)
+(declare-fun user_eq3 (tTdSP2 tTdSP2) Bool)
 
-(declare-fun dummy3 () tTdSP1)
+(declare-fun dummy3 () tTdSP2)
 
 (declare-datatypes ()
-((tTdSP1__ref (mk_tTdSP1__ref (tTdSP1__content tTdSP1)))))
-(define-fun tTdSP1__ref___projection ((a tTdSP1__ref)) tTdSP1 (tTdSP1__content
+((tTdSP2__ref (mk_tTdSP2__ref (tTdSP2__content tTdSP2)))))
+(define-fun tTdSP2__ref___projection ((a tTdSP2__ref)) tTdSP2 (tTdSP2__content
                                                               a))
 
-(declare-sort tTdSP2 0)
+(declare-sort t9b 0)
 
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
+(define-fun in_range4 ((x Int)) Bool (and (<= 3 x) (<= x 4)))
 
 (define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -286,18 +286,18 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
 
-(declare-fun user_eq4 (tTdSP2 tTdSP2) Bool)
+(declare-fun user_eq4 (t9b t9b) Bool)
 
-(declare-fun dummy4 () tTdSP2)
+(declare-fun dummy4 () t9b)
 
-(declare-datatypes ()
-((tTdSP2__ref (mk_tTdSP2__ref (tTdSP2__content tTdSP2)))))
-(define-fun tTdSP2__ref___projection ((a tTdSP2__ref)) tTdSP2 (tTdSP2__content
-                                                              a))
+(declare-datatypes () ((t9b__ref (mk_t9b__ref (t9b__content t9b)))))
+(define-fun t9b__ref___projection ((a t9b__ref)) t9b (t9b__content a))
 
-(declare-sort t8b 0)
+(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
+(declare-sort tTeSP2 0)
+
+(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
 
 (define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -307,16 +307,18 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
 
-(declare-fun user_eq5 (t8b t8b) Bool)
+(declare-fun user_eq5 (tTeSP2 tTeSP2) Bool)
 
-(declare-fun dummy5 () t8b)
+(declare-fun dummy5 () tTeSP2)
 
-(declare-datatypes () ((t8b__ref (mk_t8b__ref (t8b__content t8b)))))
-(define-fun t8b__ref___projection ((a t8b__ref)) t8b (t8b__content a))
+(declare-datatypes ()
+((tTeSP2__ref (mk_tTeSP2__ref (tTeSP2__content tTeSP2)))))
+(define-fun tTeSP2__ref___projection ((a tTeSP2__ref)) tTeSP2 (tTeSP2__content
+                                                              a))
 
-(declare-sort t9b 0)
+(declare-sort t12b 0)
 
-(define-fun in_range6 ((x Int)) Bool (and (<= 3 x) (<= x 4)))
+(define-fun in_range6 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
 
 (define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -326,91 +328,9 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
 
-(declare-fun user_eq6 (t9b t9b) Bool)
+(declare-fun user_eq6 (t12b t12b) Bool)
 
-(declare-fun dummy6 () t9b)
-
-(declare-datatypes () ((t9b__ref (mk_t9b__ref (t9b__content t9b)))))
-(define-fun t9b__ref___projection ((a t9b__ref)) t9b (t9b__content a))
-
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
-
-(declare-sort tTeSP1 0)
-
-(define-fun in_range7 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
-
-(declare-fun user_eq7 (tTeSP1 tTeSP1) Bool)
-
-(declare-fun dummy7 () tTeSP1)
-
-(declare-datatypes ()
-((tTeSP1__ref (mk_tTeSP1__ref (tTeSP1__content tTeSP1)))))
-(define-fun tTeSP1__ref___projection ((a tTeSP1__ref)) tTeSP1 (tTeSP1__content
-                                                              a))
-
-(declare-sort tTeSP2 0)
-
-(define-fun in_range8 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq9 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE9 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Int)
-
-(declare-fun user_eq8 (tTeSP2 tTeSP2) Bool)
-
-(declare-fun dummy8 () tTeSP2)
-
-(declare-datatypes ()
-((tTeSP2__ref (mk_tTeSP2__ref (tTeSP2__content tTeSP2)))))
-(define-fun tTeSP2__ref___projection ((a tTeSP2__ref)) tTeSP2 (tTeSP2__content
-                                                              a))
-
-(declare-sort t11b 0)
-
-(define-fun in_range9 ((x Int)) Bool (and (<= 3 x) (<= x 4)))
-
-(define-fun bool_eq10 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE10 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) Int)
-
-(declare-fun user_eq9 (t11b t11b) Bool)
-
-(declare-fun dummy9 () t11b)
-
-(declare-datatypes () ((t11b__ref (mk_t11b__ref (t11b__content t11b)))))
-(define-fun t11b__ref___projection ((a t11b__ref)) t11b (t11b__content a))
-
-(declare-sort t12b 0)
-
-(define-fun in_range10 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
-
-(define-fun bool_eq11 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE11 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check11 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE11 (us_image) Int)
-
-(declare-fun user_eq10 (t12b t12b) Bool)
-
-(declare-fun dummy10 () t12b)
+(declare-fun dummy6 () t12b)
 
 (declare-datatypes () ((t12b__ref (mk_t12b__ref (t12b__content t12b)))))
 (define-fun t12b__ref___projection ((a t12b__ref)) t12b (t12b__content a))
@@ -457,8 +377,6 @@
 
 (declare-fun d () map1)
 
-(declare-fun o () map1)
-
 (declare-fun result () map1)
 
 (declare-fun d1 () map1)
@@ -470,20 +388,13 @@
   (assert (<= one 1))
 
 ;; H
-  (assert
-  (and (= (ite (<= 0 1) (+ (- 1 0) 1) 0) (ite (<= 1 2) (+ (- 2 1) 1) 0))
-  (= (ite (<= 3 4) (+ (- 4 3) 1) 0) (ite (<= 1 2) (+ (- 2 1) 1) 0))))
-
-;; H
-  (assert
-  (= o (slide (array_aggr__bi_dim_aggr_ok__aggregate_ko1__d__aggregate_def 0)
-       3 1 3 1)))
-
-;; H
   (assert (= result d))
 
 ;; H
-  (assert (= d1 o))
+  (assert
+  (= d1 (slide
+        (array_aggr__bi_dim_aggr_ok__aggregate_ko1__d__aggregate_def 0) 3 1 3
+        1)))
 
 ;; H
   (assert (<= 0 1))

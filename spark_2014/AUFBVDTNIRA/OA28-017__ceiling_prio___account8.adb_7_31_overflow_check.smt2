@@ -189,6 +189,16 @@
 (define-fun protected_natural__ref___projection ((a protected_natural__ref)) us_rep 
   (protected_natural__content a))
 
+(define-fun default_initial_assumption ((temp___expr_172 us_rep)
+  (temp___skip_top_level_173 Bool)) Bool (and
+                                         (= (to_rep
+                                            (rec__account8__protected_natural__the_data
+                                            (us_split_fields1
+                                            temp___expr_172))) 0)
+                                         (= (rec__account8__protected_natural__not_full
+                                            (us_split_fields1
+                                            temp___expr_172)) (of_int 1))))
+
 (define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool)
   (temp___skip_constant_31 Bool)
   (temp___do_toplevel_32 Bool)) Bool (=>

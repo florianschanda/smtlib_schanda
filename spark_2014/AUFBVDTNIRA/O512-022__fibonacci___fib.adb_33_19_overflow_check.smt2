@@ -105,9 +105,8 @@
   (assert
   (forall ((n Int))
   (! (=> (and (dynamic_invariant n true true true) (<= n 23))
-     (let ((result (fibonacci n)))
-     (=> (fibonacci__function_guard result n) (dynamic_invariant result true
-     false true)))) :pattern ((fibonacci n)) )))
+     (dynamic_invariant (fibonacci n) true false true)) :pattern ((fibonacci
+                                                                  n)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -196,11 +195,11 @@
 
 (declare-fun i2 () Int)
 
-(declare-fun temp___168 () Int)
+(declare-fun temp___166 () Int)
 
 (declare-fun result7 () Int)
 
-(declare-fun temp___1681 () Int)
+(declare-fun temp___1661 () Int)
 
 ;; H
   (assert (in_range2 n1))
@@ -284,12 +283,6 @@
   (assert (< 2 n1))
 
 ;; H
-  (assert (fibonacci__function_guard (fibonacci i2) i2))
-
-;; H
-  (assert (fibonacci__function_guard (fibonacci (- i2 1)) (- i2 1)))
-
-;; H
   (assert
   (and
   (and (and (= a12 (fibonacci i2)) (= b12 (fibonacci (- i2 1)))) (<= i2 23))
@@ -304,10 +297,10 @@
   (=> (<= 0 2147483647) (in_range2 i2))) (< 2 n11)))
 
 ;; H
-  (assert (= temp___168 result7))
+  (assert (= temp___166 result7))
 
 ;; H
-  (assert (= temp___1681 n11))
+  (assert (= temp___1661 n11))
 
 (assert
 ;; WP_parameter_def

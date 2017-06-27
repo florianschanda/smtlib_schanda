@@ -163,8 +163,8 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range temp___expr_15)))
 
-(define-fun default_initial_assumption ((temp___expr_138 us_rep)
-  (temp___skip_top_level_139 Bool)) Bool (= (attr__tag temp___expr_138) 
+(define-fun default_initial_assumption ((temp___expr_136 us_rep)
+  (temp___skip_top_level_137 Bool)) Bool (= (attr__tag temp___expr_136) 
   us_tag))
 
 (declare-datatypes ()
@@ -302,42 +302,33 @@
 
 ;; sum__post_axiom
   (assert
-  (forall ((x us_rep))
-  (! (let ((result (sum x)))
-     (=> (sum__function_guard result x) (dynamic_invariant result true false
-     true))) :pattern ((sum x)) )))
+  (forall ((x us_rep)) (! (dynamic_invariant (sum x) true false
+  true) :pattern ((sum x)) )))
 
 ;; sum__post__dispatch_axiom
   (assert
   (forall ((attr__tag2 Int))
-  (forall ((x us_rep))
-  (! (let ((result (sum1 attr__tag2 x)))
-     (=> (sum__function_guard1 result attr__tag2 x) (dynamic_invariant result
-     true false true))) :pattern ((sum1 attr__tag2 x)) ))))
+  (forall ((x us_rep)) (! (dynamic_invariant (sum1 attr__tag2 x) true false
+  true) :pattern ((sum1 attr__tag2 x)) ))))
 
 ;; ext__u__compat_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (sum__function_guard1 (sum1 us_tag1 x) us_tag1 x)
-     (and (sum__2__function_guard (sum__2 (of_base x)) (of_base x))
-     (= (sum__2 (of_base x)) (sum1 us_tag1 x)))) :pattern ((sum1 us_tag1 x)) )))
+  (! (= (sum__2 (of_base x)) (sum1 us_tag1 x)) :pattern ((sum1 us_tag1 x)) )))
 
 ;; base__t__compat_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (sum__function_guard1 (sum1 us_tag x) us_tag x)
-     (and (sum__function_guard (sum x) x) (= (sum x) (sum1 us_tag x)))) :pattern (
-  (sum1 us_tag x)) )))
+  (! (= (sum x) (sum1 us_tag x)) :pattern ((sum1 us_tag x)) )))
 
 ;; sum__def_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (sum__function_guard (sum x) x)
-     (= (sum x) (to_rep (rec__base__t__c (us_split_fields1 x))))) :pattern (
+  (! (= (sum x) (to_rep (rec__base__t__c (us_split_fields1 x)))) :pattern (
   (sum x)) )))
 
-(define-fun default_initial_assumption1 ((temp___expr_155 us_rep1)
-  (temp___skip_top_level_156 Bool)) Bool (= (attr__tag1 temp___expr_155) 
+(define-fun default_initial_assumption1 ((temp___expr_147 us_rep1)
+  (temp___skip_top_level_148 Bool)) Bool (= (attr__tag1 temp___expr_147) 
   us_tag1))
 
 (declare-fun create (Int) us_rep)
@@ -360,39 +351,30 @@
   (assert
   (forall ((c Int))
   (! (=> (dynamic_invariant c true true true)
-     (let ((result (create__2 c)))
-     (=> (create__2__function_guard result c)
-     (= (attr__tag1 result) us_tag1)))) :pattern ((create__2 c)) )))
+     (= (attr__tag1 (create__2 c)) us_tag1)) :pattern ((create__2 c)) )))
 
 ;; create__2__post__dispatch_axiom
   (assert
   (forall ((attr__tag2 Int) (c Int))
   (! (=> (dynamic_invariant c true true true)
-     (let ((result (create__21 attr__tag2 c)))
-     (=> (create__2__function_guard1 result attr__tag2 c)
-     (= (attr__tag1 result) attr__tag2)))) :pattern ((create__21 attr__tag2
-                                                     c)) )))
+     (= (attr__tag1 (create__21 attr__tag2 c)) attr__tag2)) :pattern (
+  (create__21 attr__tag2 c)) )))
 
 ;; ext__u__compat_axiom
   (assert
   (forall ((c Int))
-  (! (=> (create__2__function_guard1 (create__21 us_tag1 c) us_tag1 c)
-     (and (create__2__function_guard (create__2 c) c)
-     (= (create__2 c) (create__21 us_tag1 c)))) :pattern ((create__21 
-                                                          us_tag1 c)) )))
+  (! (= (create__2 c) (create__21 us_tag1 c)) :pattern ((create__21 us_tag1
+                                                        c)) )))
 
 ;; create__2__def_axiom
   (assert
   (forall ((c Int))
-  (! (=>
-     (and (dynamic_invariant c true true true) (create__2__function_guard
-     (create__2 c) c))
-     (and (create__function_guard (create c) c)
-     (= (create__2 c) (let ((temp___170 (create c)))
+  (! (=> (dynamic_invariant c true true true)
+     (= (create__2 c) (let ((temp___156 (create c)))
                       (mk___rep1
                       (mk___split_fields1 (of_rep 0)
-                      (rec__base__t__c (us_split_fields1 temp___170))
-                      us_null_ext__) us_tag1))))) :pattern ((create__2 c)) )))
+                      (rec__base__t__c (us_split_fields1 temp___156))
+                      us_null_ext__) us_tag1)))) :pattern ((create__2 c)) )))
 
 (declare-fun a () us_rep1)
 
@@ -403,42 +385,32 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 ;; a__def_axiom
-  (assert
-  (and (create__2__function_guard (create__2 1) 1) (= a (create__2 1))))
+  (assert (= a (create__2 1)))
 
 ;; b__def_axiom
-  (assert
-  (and (create__2__function_guard (create__2 2) 2) (= b (create__2 2))))
+  (assert (= b (create__2 2)))
 
 ;; sum__2__post_axiom
   (assert
-  (forall ((x us_rep1))
-  (! (let ((result (sum__2 x)))
-     (=> (sum__2__function_guard result x) (dynamic_invariant result true
-     false true))) :pattern ((sum__2 x)) )))
+  (forall ((x us_rep1)) (! (dynamic_invariant (sum__2 x) true false
+  true) :pattern ((sum__2 x)) )))
 
 ;; sum__2__post__dispatch_axiom
   (assert
   (forall ((attr__tag2 Int))
-  (forall ((x us_rep1))
-  (! (let ((result (sum__21 attr__tag2 x)))
-     (=> (sum__2__function_guard1 result attr__tag2 x) (dynamic_invariant
-     result true false true))) :pattern ((sum__21 attr__tag2 x)) ))))
+  (forall ((x us_rep1)) (! (dynamic_invariant (sum__21 attr__tag2 x) true
+  false true) :pattern ((sum__21 attr__tag2 x)) ))))
 
 ;; ext__u__compat_axiom
   (assert
   (forall ((x us_rep1))
-  (! (=> (sum__2__function_guard1 (sum__21 us_tag1 x) us_tag1 x)
-     (and (sum__2__function_guard (sum__2 x) x)
-     (= (sum__2 x) (sum__21 us_tag1 x)))) :pattern ((sum__21 us_tag1 x)) )))
+  (! (= (sum__2 x) (sum__21 us_tag1 x)) :pattern ((sum__21 us_tag1 x)) )))
 
 ;; sum__2__def_axiom
   (assert
   (forall ((x us_rep1))
-  (! (=> (sum__2__function_guard (sum__2 x) x)
-     (and (sum__function_guard (sum (to_base x)) (to_base x))
-     (= (sum__2 x) (+ (sum (to_base x)) (to_rep
-                                        (rec__ext__u__d (us_split_fields3 x))))))) :pattern (
+  (! (= (sum__2 x) (+ (sum (to_base x)) (to_rep
+                                        (rec__ext__u__d (us_split_fields3 x))))) :pattern (
   (sum__2 x)) )))
 
 ;; create__post_axiom
@@ -446,40 +418,32 @@
   (forall ((c Int))
   (! (=> (dynamic_invariant c true true true)
      (let ((result (create c)))
-     (and (sum__function_guard (sum result) result)
-     (=> (create__function_guard result c)
-     (and (= (sum result) c) (= (attr__tag result) us_tag)))))) :pattern (
+     (and (= (sum result) c) (= (attr__tag result) us_tag)))) :pattern (
   (create c)) )))
 
 ;; create__post__dispatch_axiom
   (assert
   (forall ((attr__tag2 Int) (c Int))
   (! (=> (dynamic_invariant c true true true)
-     (let ((result (create1 attr__tag2 c)))
-     (=> (create__function_guard1 result attr__tag2 c)
-     (= (attr__tag result) attr__tag2)))) :pattern ((create1 attr__tag2 c)) )))
+     (= (attr__tag (create1 attr__tag2 c)) attr__tag2)) :pattern ((create1
+                                                                  attr__tag2
+                                                                  c)) )))
 
 ;; ext__u__compat_axiom
   (assert
   (forall ((c Int))
-  (! (=> (create__function_guard1 (create1 us_tag1 c) us_tag1 c)
-     (and (create__2__function_guard (create__2 c) c)
-     (= (to_base (create__2 c)) (create1 us_tag1 c)))) :pattern ((create1
-                                                                 us_tag1 c)) )))
+  (! (= (to_base (create__2 c)) (create1 us_tag1 c)) :pattern ((create1
+                                                               us_tag1 c)) )))
 
 ;; base__t__compat_axiom
   (assert
   (forall ((c Int))
-  (! (=> (create__function_guard1 (create1 us_tag c) us_tag c)
-     (and (create__function_guard (create c) c)
-     (= (create c) (create1 us_tag c)))) :pattern ((create1 us_tag c)) )))
+  (! (= (create c) (create1 us_tag c)) :pattern ((create1 us_tag c)) )))
 
 ;; create__def_axiom
   (assert
   (forall ((c Int))
-  (! (=>
-     (and (dynamic_invariant c true true true) (create__function_guard
-     (create c) c))
+  (! (=> (dynamic_invariant c true true true)
      (= (create c) (mk___rep (mk___split_fields (of_rep c) us_null_ext__)
                    us_tag))) :pattern ((create c)) )))
 
@@ -499,28 +463,12 @@
 
 (declare-fun ext__test__b__assume3 () Int)
 
-(define-fun ext__test__b__assume4 () us_rep1 (mk___rep1
-                                             (mk___split_fields1
-                                             ext__test__b__assume
-                                             ext__test__b__assume1
-                                             ext__test__b__assume2)
-                                             ext__test__b__assume3))
-
-(define-fun ext__test__a__assume4 () us_rep1 (mk___rep1
-                                             (mk___split_fields1
-                                             ext__test__a__assume
-                                             ext__test__a__assume1
-                                             ext__test__a__assume2)
-                                             ext__test__a__assume3))
-
-;; H
-  (assert (create__function_guard (create 1) 1))
-
 ;; H
   (assert
   (and
-  (and (= ext__test__a__assume4 (create__2 1)) (create__2__function_guard
-  ext__test__a__assume4 1))
+  (= (mk___rep1
+     (mk___split_fields1 ext__test__a__assume ext__test__a__assume1
+     ext__test__a__assume2) ext__test__a__assume3) (create__2 1))
   (and
   (and (= (of_rep 0) ext__test__a__assume)
   (and
@@ -535,13 +483,11 @@
      ext__test__a__assume2) us_tag1) a))
 
 ;; H
-  (assert (create__function_guard (create 2) 2))
-
-;; H
   (assert
   (and
-  (and (= ext__test__b__assume4 (create__2 2)) (create__2__function_guard
-  ext__test__b__assume4 2))
+  (= (mk___rep1
+     (mk___split_fields1 ext__test__b__assume ext__test__b__assume1
+     ext__test__b__assume2) ext__test__b__assume3) (create__2 2))
   (and
   (and (= (of_rep 0) ext__test__b__assume)
   (and
@@ -554,30 +500,6 @@
   (= (mk___rep1
      (mk___split_fields1 ext__test__b__assume ext__test__b__assume1
      ext__test__b__assume2) us_tag1) b))
-
-;; H
-  (assert (sum__function_guard
-  (sum
-  (mk___rep
-  (mk___split_fields (rec__base__t__c1 (us_split_fields3 a))
-  (hide_ext__ (rec__ext__u__d (us_split_fields3 a))
-  (rec__ext__1 (us_split_fields3 a)))) (attr__tag1 a)))
-  (mk___rep
-  (mk___split_fields (rec__base__t__c1 (us_split_fields3 a))
-  (hide_ext__ (rec__ext__u__d (us_split_fields3 a))
-  (rec__ext__1 (us_split_fields3 a)))) (attr__tag1 a))))
-
-;; H
-  (assert (sum__function_guard
-  (sum
-  (mk___rep
-  (mk___split_fields (rec__base__t__c1 (us_split_fields3 b))
-  (hide_ext__ (rec__ext__u__d (us_split_fields3 b))
-  (rec__ext__1 (us_split_fields3 b)))) (attr__tag1 b)))
-  (mk___rep
-  (mk___split_fields (rec__base__t__c1 (us_split_fields3 b))
-  (hide_ext__ (rec__ext__u__d (us_split_fields3 b))
-  (rec__ext__1 (us_split_fields3 b)))) (attr__tag1 b))))
 
 (assert
 ;; WP_parameter_def

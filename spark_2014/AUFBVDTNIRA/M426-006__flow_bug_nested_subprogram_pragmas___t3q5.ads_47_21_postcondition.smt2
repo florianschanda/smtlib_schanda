@@ -262,11 +262,10 @@
   (assert
   (forall ((a (Array Int contents_type)))
   (forall ((l Int) (u Int))
-  (! (=> (ordered__function_guard (ordered a l u) a l u)
-     (= (= (ordered a l u) true)
+  (! (= (= (ordered a l u) true)
      (forall ((i Int))
      (=> (and (<= l i) (<= i (- u 1)))
-     (<= (to_rep (select a i)) (to_rep (select a (+ i 1)))))))) :pattern (
+     (<= (to_rep (select a i)) (to_rep (select a (+ i 1))))))) :pattern (
   (ordered a l u)) ))))
 
 (declare-fun perm ((Array Int contents_type) (Array Int contents_type)) Bool)
@@ -277,9 +276,7 @@
 ;; perm__post_axiom
   (assert
   (forall ((a (Array Int contents_type)) (b (Array Int contents_type)))
-  (! (let ((result (perm a b)))
-     (=> (perm__function_guard result a b)
-     (=> (= (bool_eq3 a 1 100 b 1 100) true) (= result true)))) :pattern (
+  (! (=> (= (bool_eq3 a 1 100 b 1 100) true) (= (perm a b) true)) :pattern (
   (perm a b)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -300,14 +297,13 @@
      (and (dynamic_invariant l true true true) (dynamic_invariant u true true
      true)) (and (and (<= 1 l) (< l u)) (<= u 100)))
      (let ((result (find_smallest arr l u)))
-     (=> (find_smallest__function_guard result arr l u)
      (and
      (and (and (<= l result) (<= result u))
      (forall ((x Int))
      (=> (and (<= l x) (<= x u))
      (<= (to_rep (select arr result)) (to_rep (select arr x))))))
-     (dynamic_invariant result true false true))))) :pattern ((find_smallest
-                                                              arr l u)) ))))
+     (dynamic_invariant result true false true)))) :pattern ((find_smallest
+                                                             arr l u)) ))))
 
 (declare-sort t18b 0)
 
@@ -343,13 +339,13 @@
 
 (declare-fun low () Int)
 
-(declare-fun temp___180 () Int)
+(declare-fun temp___177 () Int)
 
-(declare-fun temp___179 () Int)
+(declare-fun temp___176 () Int)
 
-(declare-fun temp___178 () (Array Int contents_type))
+(declare-fun temp___175 () (Array Int contents_type))
 
-(declare-fun temp___182 () (Array Int contents_type))
+(declare-fun temp___179 () (Array Int contents_type))
 
 (declare-fun o () Int)
 
@@ -416,18 +412,6 @@
 (define-fun key11 () int__ref (mk_int__ref key))
 
 ;; H
-  (assert (perm__function_guard (perm table2 table) table2 table))
-
-;; H
-  (assert (perm__function_guard (perm table3 table) table3 table))
-
-;; H
-  (assert (perm__function_guard (perm table2 table) table2 table))
-
-;; H
-  (assert (perm__function_guard (perm table3 temp___182) table3 temp___182))
-
-;; H
   (assert (=> (<= 1 100) (in_range2 key)))
 
 ;; H
@@ -437,23 +421,21 @@
   (assert (= low1 1))
 
 ;; H
-  (assert (=> (and (<= 1 low1) (<= low1 99)) (= temp___180 low1)))
+  (assert (=> (and (<= 1 low1) (<= low1 99)) (= temp___177 low1)))
 
 ;; H
-  (assert (=> (and (<= 1 low1) (<= low1 99)) (= temp___179 key)))
+  (assert (=> (and (<= 1 low1) (<= low1 99)) (= temp___176 key)))
 
 ;; H
-  (assert (=> (and (<= 1 low1) (<= low1 99)) (= temp___178 table)))
+  (assert (=> (and (<= 1 low1) (<= low1 99)) (= temp___175 table)))
 
 ;; H
-  (assert (=> (and (<= 1 low1) (<= low1 99)) (= temp___182 table)))
+  (assert (=> (and (<= 1 low1) (<= low1 99)) (= temp___179 table)))
 
 ;; H
   (assert
   (=> (and (<= 1 low1) (<= low1 99))
-  (and
-  (and (= o (find_smallest table low1 100)) (find_smallest__function_guard 
-  o table low1 100))
+  (and (= o (find_smallest table low1 100))
   (and (in_range2 o)
   (and (and (<= low1 o) (<= o 100))
   (forall ((x Int))
@@ -501,7 +483,7 @@
   (forall ((x Int))
   (=> (and (<= low2 x) (<= x 100))
   (<= (to_rep (select table3 low2)) (to_rep (select table3 x))))))
-  (= (perm table3 temp___182) true))))
+  (= (perm table3 temp___179) true))))
 
 ;; H
   (assert
@@ -587,9 +569,6 @@
 
 ;; H
   (assert (= table9 table7))
-
-;; H
-  (assert (ordered__function_guard (ordered table8 1 100) table8 1 100))
 
 (assert
 ;; WP_parameter_def

@@ -623,15 +623,9 @@
   (forall ((x hash_bit_length)) (! (in_range_int
   (to_int9 x)) :pattern ((to_int9 x)) )))
 
-(declare-sort skein_512_state_words_index 0)
+(declare-sort unsigned_64 0)
 
 (declare-fun attr__ATTRIBUTE_MODULUS4 () (_ BitVec 64))
-
-(define-fun in_range2 ((x (_ BitVec 64))) Bool (and
-                                               (bvule ((_ int2bv 64) 0) x)
-                                               (bvule x ((_ int2bv 64) 7))))
-
-(define-fun in_range_int1 ((x Int)) Bool (and (<= 0 x) (<= x 7)))
 
 (define-fun bool_eq4 ((x (_ BitVec 64))
   (y (_ BitVec 64))) Bool (ite (= x y) true false))
@@ -642,65 +636,9 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE5 (us_image) (_ BitVec 64))
 
-(declare-fun user_eq4 (skein_512_state_words_index
-  skein_512_state_words_index) Bool)
+(declare-fun user_eq4 (unsigned_64 unsigned_64) Bool)
 
-(declare-fun dummy4 () skein_512_state_words_index)
-
-(declare-datatypes ()
-((skein_512_state_words_index__ref
- (mk_skein_512_state_words_index__ref
- (skein_512_state_words_index__content skein_512_state_words_index)))))
-(define-fun skein_512_state_words_index__ref___projection ((a skein_512_state_words_index__ref)) skein_512_state_words_index 
-  (skein_512_state_words_index__content a))
-
-(declare-sort skein_512_block_bytes_index 0)
-
-(declare-fun attr__ATTRIBUTE_MODULUS5 () (_ BitVec 64))
-
-(define-fun in_range3 ((x (_ BitVec 64))) Bool (and
-                                               (bvule ((_ int2bv 64) 0) x)
-                                               (bvule x ((_ int2bv 64) 63))))
-
-(define-fun in_range_int2 ((x Int)) Bool (and (<= 0 x) (<= x 63)))
-
-(define-fun bool_eq5 ((x (_ BitVec 64))
-  (y (_ BitVec 64))) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 ((_ BitVec 64)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) (_ BitVec 64))
-
-(declare-fun user_eq5 (skein_512_block_bytes_index
-  skein_512_block_bytes_index) Bool)
-
-(declare-fun dummy5 () skein_512_block_bytes_index)
-
-(declare-datatypes ()
-((skein_512_block_bytes_index__ref
- (mk_skein_512_block_bytes_index__ref
- (skein_512_block_bytes_index__content skein_512_block_bytes_index)))))
-(define-fun skein_512_block_bytes_index__ref___projection ((a skein_512_block_bytes_index__ref)) skein_512_block_bytes_index 
-  (skein_512_block_bytes_index__content a))
-
-(declare-sort unsigned_64 0)
-
-(declare-fun attr__ATTRIBUTE_MODULUS6 () (_ BitVec 64))
-
-(define-fun bool_eq6 ((x (_ BitVec 64))
-  (y (_ BitVec 64))) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE7 ((_ BitVec 64)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) (_ BitVec 64))
-
-(declare-fun user_eq6 (unsigned_64 unsigned_64) Bool)
-
-(declare-fun dummy6 () unsigned_64)
+(declare-fun dummy4 () unsigned_64)
 
 (declare-datatypes ()
 ((unsigned_64__ref (mk_unsigned_64__ref (unsigned_64__content unsigned_64)))))
@@ -733,20 +671,20 @@
 
 (declare-sort byte 0)
 
-(declare-fun attr__ATTRIBUTE_MODULUS7 () (_ BitVec 8))
+(declare-fun attr__ATTRIBUTE_MODULUS5 () (_ BitVec 8))
 
-(define-fun bool_eq7 ((x (_ BitVec 8))
+(define-fun bool_eq5 ((x (_ BitVec 8))
   (y (_ BitVec 8))) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE8 ((_ BitVec 8)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE6 ((_ BitVec 8)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) (_ BitVec 8))
+(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) (_ BitVec 8))
 
-(declare-fun user_eq7 (byte byte) Bool)
+(declare-fun user_eq5 (byte byte) Bool)
 
-(declare-fun dummy7 () byte)
+(declare-fun dummy5 () byte)
 
 (declare-datatypes () ((byte__ref (mk_byte__ref (byte__content byte)))))
 (define-fun byte__ref___projection ((a byte__ref)) byte (byte__content a))
@@ -819,7 +757,7 @@
   (forall ((i (_ BitVec 64)))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq8 ((a (Array (_ BitVec 64) byte)) (a__first (_ BitVec 64))
+(define-fun bool_eq6 ((a (Array (_ BitVec 64) byte)) (a__first (_ BitVec 64))
   (a__last (_ BitVec 64)) (b (Array (_ BitVec 64) byte))
   (b__first (_ BitVec 64))
   (b__last (_ BitVec 64))) Bool (ite (and
@@ -841,7 +779,7 @@
   (forall ((a (Array (_ BitVec 64) byte)) (b (Array (_ BitVec 64) byte)))
   (forall ((a__first (_ BitVec 64)) (a__last (_ BitVec 64))
   (b__first (_ BitVec 64)) (b__last (_ BitVec 64)))
-  (=> (= (bool_eq8 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq6 b b__first b__last a a__first a__last) true)
   (and
   (ite (bvule a__first a__last)
   (and (bvule b__first b__last)
@@ -861,7 +799,7 @@
   (forall ((a_first (_ BitVec 64)) (a_last (_ BitVec 64))
   (b_first (_ BitVec 64)) (b_last (_ BitVec 64)))
   (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq8 a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq6 a a_first a_last b b_first b_last) true)) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -873,7 +811,7 @@
      (exists ((i (_ BitVec 64)) (j (_ BitVec 64)))
      (and (bvule i a_last)
      (and (bvult j b_last)
-     (and (= (bool_eq8 a a_first i b b_first j) true)
+     (and (= (bool_eq6 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (bvult i a_last)
      (bvult (to_rep5 (select a (bvadd i #x0000000000000001))) (to_rep5
@@ -889,7 +827,7 @@
      (exists ((i (_ BitVec 64)) (j (_ BitVec 64)))
      (and (bvule i b_last)
      (and (bvult j a_last)
-     (and (= (bool_eq8 a a_first j b b_first i) true)
+     (and (= (bool_eq6 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (bvult i b_last)
      (bvugt (to_rep5 (select a (bvadd j #x0000000000000001))) (to_rep5
@@ -962,19 +900,50 @@
   (assert
   (forall ((a (Array (_ BitVec 64) byte))) (<= 0 (object__alignment a))))
 
-(define-fun bool_eq9 ((x us_t)
-  (y us_t)) Bool (bool_eq8 (elts x) (to_rep4 (first (rt x)))
+(define-fun bool_eq7 ((x us_t)
+  (y us_t)) Bool (bool_eq6 (elts x) (to_rep4 (first (rt x)))
                  (to_rep4 (last (rt x))) (elts y) (to_rep4 (first (rt y)))
                  (to_rep4 (last (rt y)))))
 
-(declare-fun user_eq8 (us_t us_t) Bool)
+(declare-fun user_eq6 (us_t us_t) Bool)
 
-(declare-fun dummy8 () us_t)
+(declare-fun dummy6 () us_t)
 
 (declare-datatypes ()
 ((byte_seq__ref (mk_byte_seq__ref (byte_seq__content us_t)))))
 (define-fun byte_seq__ref___projection ((a byte_seq__ref)) us_t (byte_seq__content
                                                                 a))
+
+(declare-sort skein_512_block_bytes_index 0)
+
+(declare-fun attr__ATTRIBUTE_MODULUS6 () (_ BitVec 64))
+
+(define-fun in_range2 ((x (_ BitVec 64))) Bool (and
+                                               (bvule ((_ int2bv 64) 0) x)
+                                               (bvule x ((_ int2bv 64) 63))))
+
+(define-fun in_range_int1 ((x Int)) Bool (and (<= 0 x) (<= x 63)))
+
+(define-fun bool_eq8 ((x (_ BitVec 64))
+  (y (_ BitVec 64))) Bool (ite (= x y) true false))
+
+(declare-fun attr__ATTRIBUTE_IMAGE7 ((_ BitVec 64)) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) (_ BitVec 64))
+
+(declare-fun user_eq7 (skein_512_block_bytes_index
+  skein_512_block_bytes_index) Bool)
+
+(declare-fun dummy7 () skein_512_block_bytes_index)
+
+(declare-datatypes ()
+((skein_512_block_bytes_index__ref
+ (mk_skein_512_block_bytes_index__ref
+ (skein_512_block_bytes_index__content skein_512_block_bytes_index)))))
+(define-fun skein_512_block_bytes_index__ref___projection ((a skein_512_block_bytes_index__ref)) skein_512_block_bytes_index 
+  (skein_512_block_bytes_index__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_559 (Array (_ BitVec 64) byte))
   (temp___is_init_556 Bool) (temp___skip_constant_557 Bool)
@@ -990,23 +959,23 @@
 
 (declare-sort u7 0)
 
-(define-fun in_range4 ((x (_ BitVec 8))) Bool (and (bvule ((_ int2bv 8) 0) x)
+(define-fun in_range3 ((x (_ BitVec 8))) Bool (and (bvule ((_ int2bv 8) 0) x)
                                               (bvule x ((_ int2bv 8) 127))))
 
-(define-fun in_range_int3 ((x Int)) Bool (and (<= 0 x) (<= x 127)))
+(define-fun in_range_int2 ((x Int)) Bool (and (<= 0 x) (<= x 127)))
 
-(define-fun bool_eq10 ((x (_ BitVec 8))
+(define-fun bool_eq9 ((x (_ BitVec 8))
   (y (_ BitVec 8))) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE9 ((_ BitVec 8)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE8 ((_ BitVec 8)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) (_ BitVec 8))
+(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) (_ BitVec 8))
 
-(declare-fun user_eq9 (u7 u7) Bool)
+(declare-fun user_eq8 (u7 u7) Bool)
 
-(declare-fun dummy9 () u7)
+(declare-fun dummy8 () u7)
 
 (declare-datatypes () ((u7__ref (mk_u7__ref (u7__content u7)))))
 (define-fun u7__ref___projection ((a u7__ref)) u7 (u7__content a))
@@ -1021,40 +990,40 @@
 
 ;; range_axiom
   (assert
-  (forall ((x u7)) (! (in_range4 (to_rep6 x)) :pattern ((to_rep6 x)) )))
+  (forall ((x u7)) (! (in_range3 (to_rep6 x)) :pattern ((to_rep6 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x (_ BitVec 8)))
   (! (let ((y (bvurem x ((_ int2bv 8) 128))))
-     (=> (in_range4 y) (= (to_rep6 (of_rep6 x)) y))) :pattern ((to_rep6
+     (=> (in_range3 y) (= (to_rep6 (of_rep6 x)) y))) :pattern ((to_rep6
                                                                (of_rep6 x))) )))
 
 (define-fun to_int12 ((x u7)) Int (bv2nat (to_rep6 x)))
 
 ;; range_int_axiom
   (assert
-  (forall ((x u7)) (! (in_range_int3 (to_int12 x)) :pattern ((to_int12 x)) )))
+  (forall ((x u7)) (! (in_range_int2 (to_int12 x)) :pattern ((to_int12 x)) )))
 
 (declare-sort u6 0)
 
-(define-fun in_range5 ((x (_ BitVec 8))) Bool (and (bvule ((_ int2bv 8) 0) x)
+(define-fun in_range4 ((x (_ BitVec 8))) Bool (and (bvule ((_ int2bv 8) 0) x)
                                               (bvule x ((_ int2bv 8) 63))))
 
-(define-fun in_range_int4 ((x Int)) Bool (and (<= 0 x) (<= x 63)))
+(define-fun in_range_int3 ((x Int)) Bool (and (<= 0 x) (<= x 63)))
 
-(define-fun bool_eq11 ((x (_ BitVec 8))
+(define-fun bool_eq10 ((x (_ BitVec 8))
   (y (_ BitVec 8))) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE10 ((_ BitVec 8)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE9 ((_ BitVec 8)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) (_ BitVec 8))
+(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) (_ BitVec 8))
 
-(declare-fun user_eq10 (u6 u6) Bool)
+(declare-fun user_eq9 (u6 u6) Bool)
 
-(declare-fun dummy10 () u6)
+(declare-fun dummy9 () u6)
 
 (declare-datatypes () ((u6__ref (mk_u6__ref (u6__content u6)))))
 (define-fun u6__ref___projection ((a u6__ref)) u6 (u6__content a))
@@ -1064,7 +1033,7 @@
   (temp___do_toplevel_614 Bool)) Bool (=>
                                       (or (= temp___is_init_612 true)
                                       (bvule ((_ int2bv 8) 0) ((_ int2bv 8) 63)))
-                                      (in_range5 temp___expr_615)))
+                                      (in_range4 temp___expr_615)))
 
 (declare-fun to_rep7 (u6) (_ BitVec 8))
 
@@ -1076,20 +1045,20 @@
 
 ;; range_axiom
   (assert
-  (forall ((x u6)) (! (in_range5 (to_rep7 x)) :pattern ((to_rep7 x)) )))
+  (forall ((x u6)) (! (in_range4 (to_rep7 x)) :pattern ((to_rep7 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x (_ BitVec 8)))
   (! (let ((y (bvurem x ((_ int2bv 8) 64))))
-     (=> (in_range5 y) (= (to_rep7 (of_rep7 x)) y))) :pattern ((to_rep7
+     (=> (in_range4 y) (= (to_rep7 (of_rep7 x)) y))) :pattern ((to_rep7
                                                                (of_rep7 x))) )))
 
 (define-fun to_int13 ((x u6)) Int (bv2nat (to_rep7 x)))
 
 ;; range_int_axiom
   (assert
-  (forall ((x u6)) (! (in_range_int4 (to_int13 x)) :pattern ((to_int13 x)) )))
+  (forall ((x u6)) (! (in_range_int3 (to_int13 x)) :pattern ((to_int13 x)) )))
 
 (declare-datatypes ()
 ((us_split_fields
@@ -1130,7 +1099,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_fields (us_split_fields1
                                                              a))
 
-(define-fun bool_eq12 ((a us_rep)
+(define-fun bool_eq11 ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (and
                         (and
@@ -1174,7 +1143,7 @@
                                                  (us_split_fields1 b))))
                    true false))
 
-(declare-fun user_eq11 (us_rep us_rep) Bool)
+(declare-fun user_eq10 (us_rep us_rep) Bool)
 
 (declare-fun value__size1 () Int)
 
@@ -1324,7 +1293,7 @@
 ;; skein__tweak_value__final_block__position_axiom
   (assert (<= 0 skein__tweak_value__final_block__position))
 
-(declare-fun dummy11 () us_rep)
+(declare-fun dummy10 () us_rep)
 
 (declare-datatypes ()
 ((tweak_value__ref (mk_tweak_value__ref (tweak_value__content us_rep)))))
@@ -1355,10 +1324,10 @@
 (define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
                                                                 a))
 
-(define-fun bool_eq13 ((a us_rep1)
+(define-fun bool_eq12 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
                          (and
-                         (= (bool_eq12
+                         (= (bool_eq11
                             (rec__skein__context_header__tweak_words
                             (us_split_fields3 a))
                             (rec__skein__context_header__tweak_words
@@ -1375,7 +1344,7 @@
                                                    (us_split_fields3 b)))))
                     true false))
 
-(declare-fun user_eq12 (us_rep1 us_rep1) Bool)
+(declare-fun user_eq11 (us_rep1 us_rep1) Bool)
 
 (declare-fun value__size2 () Int)
 
@@ -1445,7 +1414,7 @@
 ;; skein__context_header__byte_count__position_axiom
   (assert (<= 0 skein__context_header__byte_count__position))
 
-(declare-fun dummy12 () us_rep1)
+(declare-fun dummy11 () us_rep1)
 
 (declare-datatypes ()
 ((context_header__ref
@@ -1498,7 +1467,7 @@
   (forall ((i (_ BitVec 64)))
   (! (= (select (singleton2 v i) i) v) :pattern ((select (singleton2 v i) i)) ))))
 
-(define-fun bool_eq14 ((a (Array (_ BitVec 64) u64)) (a__first (_ BitVec 64))
+(define-fun bool_eq13 ((a (Array (_ BitVec 64) u64)) (a__first (_ BitVec 64))
   (a__last (_ BitVec 64)) (b (Array (_ BitVec 64) u64))
   (b__first (_ BitVec 64))
   (b__last (_ BitVec 64))) Bool (ite (and
@@ -1520,7 +1489,7 @@
   (forall ((a (Array (_ BitVec 64) u64)) (b (Array (_ BitVec 64) u64)))
   (forall ((a__first (_ BitVec 64)) (a__last (_ BitVec 64))
   (b__first (_ BitVec 64)) (b__last (_ BitVec 64)))
-  (=> (= (bool_eq14 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq13 b b__first b__last a a__first a__last) true)
   (and
   (ite (bvule a__first a__last)
   (and (bvule b__first b__last)
@@ -1540,7 +1509,7 @@
   (forall ((a_first (_ BitVec 64)) (a_last (_ BitVec 64))
   (b_first (_ BitVec 64)) (b_last (_ BitVec 64)))
   (! (= (= (compare1 a a_first a_last b b_first b_last) 0)
-     (= (bool_eq14 a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq13 a a_first a_last b b_first b_last) true)) :pattern (
   (compare1 a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -1552,7 +1521,7 @@
      (exists ((i (_ BitVec 64)) (j (_ BitVec 64)))
      (and (bvule i a_last)
      (and (bvult j b_last)
-     (and (= (bool_eq14 a a_first i b b_first j) true)
+     (and (= (bool_eq13 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (bvult i a_last)
      (bvult (to_rep2 (select a (bvadd i #x0000000000000001))) (to_rep2
@@ -1568,14 +1537,14 @@
      (exists ((i (_ BitVec 64)) (j (_ BitVec 64)))
      (and (bvule i b_last)
      (and (bvult j a_last)
-     (and (= (bool_eq14 a a_first j b b_first i) true)
+     (and (= (bool_eq13 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (bvult i b_last)
      (bvugt (to_rep2 (select a (bvadd j #x0000000000000001))) (to_rep2
                                                               (select b (bvadd i #x0000000000000001))))))))))) :pattern (
   (compare1 a a_first a_last b b_first b_last)) ))))
 
-(declare-fun dummy13 () (Array (_ BitVec 64) u64))
+(declare-fun dummy12 () (Array (_ BitVec 64) u64))
 
 (declare-fun value__size3 () Int)
 
@@ -1610,10 +1579,10 @@
   (assert
   (forall ((a (Array (_ BitVec 64) u64))) (<= 0 (object__alignment3 a))))
 
-(declare-fun user_eq13 ((Array (_ BitVec 64) u64)
+(declare-fun user_eq12 ((Array (_ BitVec 64) u64)
   (Array (_ BitVec 64) u64)) Bool)
 
-(declare-fun dummy14 () (Array (_ BitVec 64) byte))
+(declare-fun dummy13 () (Array (_ BitVec 64) byte))
 
 (declare-fun value__size4 () Int)
 
@@ -1648,7 +1617,7 @@
   (assert
   (forall ((a (Array (_ BitVec 64) byte))) (<= 0 (object__alignment4 a))))
 
-(declare-fun user_eq14 ((Array (_ BitVec 64) byte)
+(declare-fun user_eq13 ((Array (_ BitVec 64) byte)
   (Array (_ BitVec 64) byte)) Bool)
 
 (declare-datatypes ()
@@ -1675,22 +1644,22 @@
 (define-fun us_rep_3__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
                                                                 a))
 
-(define-fun bool_eq15 ((a us_rep2)
+(define-fun bool_eq14 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
                          (and
-                         (= (bool_eq13
+                         (= (bool_eq12
                             (rec__skein__skein_512_context__h
                             (us_split_fields5 a))
                             (rec__skein__skein_512_context__h
                             (us_split_fields5 b))) true)
-                         (= (bool_eq14
+                         (= (bool_eq13
                             (rec__skein__skein_512_context__x
                             (us_split_fields5 a)) ((_ int2bv 64) 0)
                             ((_ int2bv 64) 7)
                             (rec__skein__skein_512_context__x
                             (us_split_fields5 b)) ((_ int2bv 64) 0)
                             ((_ int2bv 64) 7)) true))
-                         (= (bool_eq8
+                         (= (bool_eq6
                             (rec__skein__skein_512_context__b
                             (us_split_fields5 a)) ((_ int2bv 64) 0)
                             ((_ int2bv 64) 63)
@@ -1699,7 +1668,7 @@
                             ((_ int2bv 64) 63)) true))
                     true false))
 
-(declare-fun user_eq15 (us_rep2 us_rep2) Bool)
+(declare-fun user_eq14 (us_rep2 us_rep2) Bool)
 
 (declare-fun value__size5 () Int)
 
@@ -1769,7 +1738,7 @@
 ;; skein__skein_512_context__b__position_axiom
   (assert (<= 0 skein__skein_512_context__b__position))
 
-(declare-fun dummy15 () us_rep2)
+(declare-fun dummy14 () us_rep2)
 
 (declare-datatypes ()
 ((skein_512_context__ref
@@ -1787,27 +1756,6 @@
                                              temp___expr_652))
                                              ((_ int2bv 64) 0)
                                              ((_ int2bv 64) 63))) ((_ int2bv 64) 18446744073709551615))))
-
-(declare-sort debug_flag 0)
-
-(define-fun in_range6 ((x Int)) Bool (and (<= 0 x) (<= x 12)))
-
-(define-fun bool_eq16 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE11 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check11 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE11 (us_image) Int)
-
-(declare-fun user_eq16 (debug_flag debug_flag) Bool)
-
-(declare-fun dummy16 () debug_flag)
-
-(declare-datatypes ()
-((debug_flag__ref (mk_debug_flag__ref (debug_flag__content debug_flag)))))
-(define-fun debug_flag__ref___projection ((a debug_flag__ref)) debug_flag 
-  (debug_flag__content a))
 
 (declare-datatypes ()
 ((map__ref2 (mk_map__ref2 (map__content2 (Array Int Bool))))))
@@ -1851,7 +1799,7 @@
   (forall ((i Int))
   (! (= (select (singleton3 v i) i) v) :pattern ((select (singleton3 v i) i)) ))))
 
-(define-fun bool_eq17 ((a (Array Int Bool)) (a__first Int) (a__last Int)
+(define-fun bool_eq15 ((a (Array Int Bool)) (a__first Int) (a__last Int)
   (b (Array Int Bool)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -1869,7 +1817,7 @@
   (assert
   (forall ((a (Array Int Bool)) (b (Array Int Bool)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq17 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq15 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -1886,7 +1834,7 @@
   (forall ((a (Array Int Bool)) (b (Array Int Bool)))
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (! (= (= (compare2 a a_first a_last b b_first b_last) 0)
-     (= (bool_eq17 a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq15 a a_first a_last b b_first b_last) true)) :pattern (
   (compare2 a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -1897,7 +1845,7 @@
      (exists ((i Int) (j Int))
      (and (<= i a_last)
      (and (< j b_last)
-     (and (= (bool_eq17 a a_first i b b_first j) true)
+     (and (= (bool_eq15 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
      (< (to_int5 (select a (+ i 1))) (to_int5 (select b (+ j 1))))))))))) :pattern (
@@ -1911,7 +1859,7 @@
      (exists ((i Int) (j Int))
      (and (<= i b_last)
      (and (< j a_last)
-     (and (= (bool_eq17 a a_first j b b_first i) true)
+     (and (= (bool_eq15 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
      (< (to_int5 (select b (+ i 1))) (to_int5 (select a (+ j 1))))))))))) :pattern (
@@ -1964,25 +1912,6 @@
      (= (select (notb a a_first a_last) i) (not (select a i)))) :pattern ((select 
   (notb a a_first a_last) i)) )))))
 
-(declare-sort t7s 0)
-
-(define-fun in_range7 ((x Int)) Bool (and (<= 0 x) (<= x 12)))
-
-(define-fun bool_eq18 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE12 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check12 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE12 (us_image) Int)
-
-(declare-fun user_eq17 (t7s t7s) Bool)
-
-(declare-fun dummy17 () t7s)
-
-(declare-datatypes () ((t7s__ref (mk_t7s__ref (t7s__content t7s)))))
-(define-fun t7s__ref___projection ((a t7s__ref)) t7s (t7s__content a))
-
 (declare-fun debug_none () (Array Int Bool))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -1994,25 +1923,6 @@
   (forall ((temp___136 Bool))
   (forall ((temp___137 Int))
   (= (select (skein__debug_none__aggregate_def temp___136) temp___137) temp___136))))
-
-(declare-sort t9s 0)
-
-(define-fun in_range8 ((x Int)) Bool (and (<= 0 x) (<= x 12)))
-
-(define-fun bool_eq19 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE13 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check13 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE13 (us_image) Int)
-
-(declare-fun user_eq18 (t9s t9s) Bool)
-
-(declare-fun dummy18 () t9s)
-
-(declare-datatypes () ((t9s__ref (mk_t9s__ref (t9s__content t9s)))))
-(define-fun t9s__ref___projection ((a t9s__ref)) t9s (t9s__content a))
 
 (declare-fun debug_final () (Array Int Bool))
 
@@ -2027,25 +1937,6 @@
   (forall ((temp___141 Int))
   (ite (= temp___141 9) (= (select temp___138 temp___141) temp___139)
   (= (select temp___138 temp___141) temp___140))))))
-
-(declare-sort t11s 0)
-
-(define-fun in_range9 ((x Int)) Bool (and (<= 0 x) (<= x 12)))
-
-(define-fun bool_eq20 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE14 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check14 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE14 (us_image) Int)
-
-(declare-fun user_eq19 (t11s t11s) Bool)
-
-(declare-fun dummy19 () t11s)
-
-(declare-datatypes () ((t11s__ref (mk_t11s__ref (t11s__content t11s)))))
-(define-fun t11s__ref___projection ((a t11s__ref)) t11s (t11s__content a))
 
 (declare-fun debug_all () (Array Int Bool))
 
@@ -2063,25 +1954,6 @@
   (ite (= temp___146 12) (= (select temp___142 temp___146) temp___144)
   (ite (= temp___146 11) (= (select temp___142 temp___146) temp___143)
   (= (select temp___142 temp___146) temp___145)))))))
-
-(declare-sort t13s 0)
-
-(define-fun in_range10 ((x Int)) Bool (and (<= 0 x) (<= x 12)))
-
-(define-fun bool_eq21 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE15 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check15 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE15 (us_image) Int)
-
-(declare-fun user_eq20 (t13s t13s) Bool)
-
-(declare-fun dummy20 () t13s)
-
-(declare-datatypes () ((t13s__ref (mk_t13s__ref (t13s__content t13s)))))
-(define-fun t13s__ref___projection ((a t13s__ref)) t13s (t13s__content a))
 
 (declare-fun threefish_debug_all () (Array Int Bool))
 
@@ -2143,58 +2015,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS14 () Int)
 
-(declare-sort t27s 0)
-
-(declare-fun attr__ATTRIBUTE_MODULUS8 () (_ BitVec 64))
-
-(define-fun in_range11 ((x (_ BitVec 64))) Bool (and
-                                                (bvule ((_ int2bv 64) 0) x)
-                                                (bvule x ((_ int2bv 64) 7))))
-
-(define-fun in_range_int5 ((x Int)) Bool (and (<= 0 x) (<= x 7)))
-
-(define-fun bool_eq22 ((x (_ BitVec 64))
-  (y (_ BitVec 64))) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE16 ((_ BitVec 64)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check16 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE16 (us_image) (_ BitVec 64))
-
-(declare-fun user_eq21 (t27s t27s) Bool)
-
-(declare-fun dummy21 () t27s)
-
-(declare-datatypes () ((t27s__ref (mk_t27s__ref (t27s__content t27s)))))
-(define-fun t27s__ref___projection ((a t27s__ref)) t27s (t27s__content a))
-
-(declare-sort t29s 0)
-
-(declare-fun attr__ATTRIBUTE_MODULUS9 () (_ BitVec 64))
-
-(define-fun in_range12 ((x (_ BitVec 64))) Bool (and
-                                                (bvule ((_ int2bv 64) 0) x)
-                                                (bvule x ((_ int2bv 64) 63))))
-
-(define-fun in_range_int6 ((x Int)) Bool (and (<= 0 x) (<= x 63)))
-
-(define-fun bool_eq23 ((x (_ BitVec 64))
-  (y (_ BitVec 64))) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE17 ((_ BitVec 64)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check17 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE17 (us_image) (_ BitVec 64))
-
-(declare-fun user_eq22 (t29s t29s) Bool)
-
-(declare-fun dummy22 () t29s)
-
-(declare-datatypes () ((t29s__ref (mk_t29s__ref (t29s__content t29s)))))
-(define-fun t29s__ref___projection ((a t29s__ref)) t29s (t29s__content a))
-
 (declare-fun null_skein_512_context () us_rep2)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS15 () Int)
@@ -2217,19 +2037,19 @@
 
 (declare-sort rotation_count 0)
 
-(define-fun in_range13 ((x Int)) Bool (and (<= 2 x) (<= x 60)))
+(define-fun in_range5 ((x Int)) Bool (and (<= 2 x) (<= x 60)))
 
-(define-fun bool_eq24 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq16 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE18 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE10 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check18 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE18 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) Int)
 
-(declare-fun user_eq23 (rotation_count rotation_count) Bool)
+(declare-fun user_eq15 (rotation_count rotation_count) Bool)
 
-(declare-fun dummy23 () rotation_count)
+(declare-fun dummy15 () rotation_count)
 
 (declare-datatypes ()
 ((rotation_count__ref
@@ -2237,12 +2057,12 @@
 (define-fun rotation_count__ref___projection ((a rotation_count__ref)) rotation_count 
   (rotation_count__content a))
 
-(define-fun dynamic_invariant5 ((temp___expr_1122 Int)
-  (temp___is_init_1119 Bool) (temp___skip_constant_1120 Bool)
-  (temp___do_toplevel_1121 Bool)) Bool (=>
-                                       (or (= temp___is_init_1119 true)
-                                       (<= 2 60)) (in_range13
-                                       temp___expr_1122)))
+(define-fun dynamic_invariant5 ((temp___expr_1107 Int)
+  (temp___is_init_1104 Bool) (temp___skip_constant_1105 Bool)
+  (temp___do_toplevel_1106 Bool)) Bool (=>
+                                       (or (= temp___is_init_1104 true)
+                                       (<= 2 60)) (in_range5
+                                       temp___expr_1107)))
 
 (declare-fun r_512_0_0 () Int)
 
@@ -2520,25 +2340,12 @@
                                       (bvule ((_ int2bv 64) 0) ((_ int2bv 64) 18446744073709551608)))
                                       (in_range1 temp___expr_520)))
 
-(define-fun dynamic_invariant10 ((temp___expr_532 (_ BitVec 64))
-  (temp___is_init_529 Bool) (temp___skip_constant_530 Bool)
-  (temp___do_toplevel_531 Bool)) Bool (=>
-                                      (or (= temp___is_init_529 true)
-                                      (bvule ((_ int2bv 64) 0) ((_ int2bv 64) 7)))
-                                      (in_range2 temp___expr_532)))
-
-(define-fun dynamic_invariant11 ((temp___expr_553 (_ BitVec 64))
+(define-fun dynamic_invariant10 ((temp___expr_553 (_ BitVec 64))
   (temp___is_init_550 Bool) (temp___skip_constant_551 Bool)
   (temp___do_toplevel_552 Bool)) Bool (=>
                                       (or (= temp___is_init_550 true)
                                       (bvule ((_ int2bv 64) 0) ((_ int2bv 64) 63)))
-                                      (in_range3 temp___expr_553)))
-
-(define-fun dynamic_invariant12 ((temp___expr_680 Int)
-  (temp___is_init_677 Bool) (temp___skip_constant_678 Bool)
-  (temp___do_toplevel_679 Bool)) Bool (=>
-                                      (or (= temp___is_init_677 true)
-                                      (<= 0 12)) (in_range6 temp___expr_680)))
+                                      (in_range2 temp___expr_553)))
 
 ;; debug_none__def_axiom
   (assert (= debug_none (skein__debug_none__aggregate_def (of_int 0))))
@@ -2557,12 +2364,12 @@
   (= threefish_debug_all (skein__threefish_debug_all__aggregate_def
                          (of_int 0) (of_int 1))))
 
-(define-fun dynamic_invariant13 ((temp___expr_609 (_ BitVec 8))
+(define-fun dynamic_invariant11 ((temp___expr_609 (_ BitVec 8))
   (temp___is_init_606 Bool) (temp___skip_constant_607 Bool)
   (temp___do_toplevel_608 Bool)) Bool (=>
                                       (or (= temp___is_init_606 true)
                                       (bvule ((_ int2bv 8) 0) ((_ int2bv 8) 127)))
-                                      (in_range4 temp___expr_609)))
+                                      (in_range3 temp___expr_609)))
 
 ;; skein_block_type_key__def_axiom
   (assert (= skein_block_type_key ((_ int2bv 8) 0)))
@@ -2613,17 +2420,9 @@
                             (temp___151 ((_ int2bv 64) 0))
                             (temp___155 ((_ int2bv 8) 0))))))
 
-(define-fun dynamic_invariant14 ((temp___expr_266 (_ BitVec 64))
+(define-fun dynamic_invariant12 ((temp___expr_266 (_ BitVec 64))
   (temp___is_init_263 Bool) (temp___skip_constant_264 Bool)
   (temp___do_toplevel_265 Bool)) Bool true)
-
-(declare-fun skein__debug_none__assume () (Array Int Bool))
-
-(declare-fun skein__debug_final__assume () (Array Int Bool))
-
-(declare-fun skein__debug_all__assume () (Array Int Bool))
-
-(declare-fun skein__threefish_debug_all__assume () (Array Int Bool))
 
 (declare-fun o () u6)
 
@@ -2711,65 +2510,49 @@
 
 (declare-fun skein__null_context_header__assume9 () u64)
 
-(declare-fun temp___1329 () (Array (_ BitVec 64) byte))
+;; H
+  (assert (= (skein__debug_none__aggregate_def (of_int 0)) debug_none))
 
 ;; H
   (assert
-  (= skein__debug_none__assume (skein__debug_none__aggregate_def (of_int 0))))
-
-;; H
-  (assert (= skein__debug_none__assume debug_none))
+  (= (skein__debug_final__aggregate_def (of_int 1) (of_int 0)) debug_final))
 
 ;; H
   (assert
-  (= skein__debug_final__assume (skein__debug_final__aggregate_def (of_int 1)
-                                (of_int 0))))
-
-;; H
-  (assert (= skein__debug_final__assume debug_final))
+  (= (skein__debug_all__aggregate_def (of_int 0) (of_int 0) (of_int 1)) 
+  debug_all))
 
 ;; H
   (assert
-  (= skein__debug_all__assume (skein__debug_all__aggregate_def (of_int 0)
-                              (of_int 0) (of_int 1))))
+  (= (skein__threefish_debug_all__aggregate_def (of_int 0) (of_int 1)) 
+  threefish_debug_all))
 
 ;; H
-  (assert (= skein__debug_all__assume debug_all))
+  (assert (in_range4 skein_block_type_key))
 
 ;; H
-  (assert
-  (= skein__threefish_debug_all__assume (skein__threefish_debug_all__aggregate_def
-                                        (of_int 0) (of_int 1))))
+  (assert (in_range4 skein_block_type_cfg))
 
 ;; H
-  (assert (= skein__threefish_debug_all__assume threefish_debug_all))
+  (assert (in_range4 skein_block_type_pers))
 
 ;; H
-  (assert (in_range5 skein_block_type_key))
+  (assert (in_range4 skein_block_type_pk))
 
 ;; H
-  (assert (in_range5 skein_block_type_cfg))
+  (assert (in_range4 skein_block_type_kdf))
 
 ;; H
-  (assert (in_range5 skein_block_type_pers))
+  (assert (in_range4 skein_block_type_nonce))
 
 ;; H
-  (assert (in_range5 skein_block_type_pk))
+  (assert (in_range4 skein_block_type_msg))
 
 ;; H
-  (assert (in_range5 skein_block_type_kdf))
+  (assert (in_range4 skein_block_type_out))
 
 ;; H
-  (assert (in_range5 skein_block_type_nonce))
-
-;; H
-  (assert (in_range5 skein_block_type_msg))
-
-;; H
-  (assert (in_range5 skein_block_type_out))
-
-;; H
-  (assert (in_range5 skein_block_type_mask))
+  (assert (in_range4 skein_block_type_mask))
 
 ;; H
   (assert (= (to_rep7 o) ((_ int2bv 8) 0)))
@@ -2903,11 +2686,8 @@
      skein__null_context_header__assume8 skein__null_context_header__assume9)) 
   null_context_header))
 
-;; H
-  (assert (= temp___1329 (temp___155 ((_ int2bv 8) 0))))
-
 (assert
 ;; WP_parameter_def
  ;; File "skein.adb", line 308, characters 0-0
-  (not (dynamic_predicate temp___1329)))
+  (not (dynamic_predicate (temp___155 ((_ int2bv 8) 0)))))
 (check-sat)

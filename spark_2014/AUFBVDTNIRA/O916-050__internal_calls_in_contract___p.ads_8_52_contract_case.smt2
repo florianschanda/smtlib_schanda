@@ -84,16 +84,12 @@
 ;; internal__def_axiom
   (assert
   (forall ((self__ pt))
-  (! (=> (internal__function_guard (internal self__) self__)
-     (= (internal self__) true)) :pattern ((internal self__)) )))
+  (! (= (internal self__) true) :pattern ((internal self__)) )))
 
 (declare-fun self__ () pt)
 
 ;; H
   (assert (= (of_int 1) true))
-
-;; H
-  (assert (internal__function_guard (internal self__) self__))
 
 (assert
 ;; WP_parameter_def

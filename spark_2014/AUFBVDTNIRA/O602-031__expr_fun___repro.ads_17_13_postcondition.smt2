@@ -57,11 +57,9 @@
 ;; contrainte1__def_axiom
   (assert
   (forall ((sortie1 Bool) (sortie2 Bool))
-  (! (=> (contrainte1__function_guard (contrainte1 sortie1 sortie2) sortie1
-     sortie2)
-     (= (= (contrainte1 sortie1 sortie2) true)
-     (= (= sortie1 true) (= sortie2 true)))) :pattern ((contrainte1 sortie1
-                                                       sortie2)) )))
+  (! (= (= (contrainte1 sortie1 sortie2) true)
+     (= (= sortie1 true) (= sortie2 true))) :pattern ((contrainte1 sortie1
+                                                      sortie2)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -110,10 +108,6 @@
 
 ;; H
   (assert (= sortie13 sortie11))
-
-;; H
-  (assert (contrainte1__function_guard (contrainte1 sortie12 sortie22)
-  sortie12 sortie22))
 
 (assert
 ;; WP_parameter_def

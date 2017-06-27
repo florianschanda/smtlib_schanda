@@ -116,9 +116,7 @@
   (assert (and (= o (- val__ 1)) (in_range1 (- val__ 1))))
 
 ;; H
-  (assert
-  (and (and (= o1 (factorial o)) (factorial__function_guard o1 o)) (in_range1
-  o1)))
+  (assert (and (= o1 (factorial o)) (in_range1 o1)))
 
 ;; H
   (assert (= o2 (* val__ o1)))

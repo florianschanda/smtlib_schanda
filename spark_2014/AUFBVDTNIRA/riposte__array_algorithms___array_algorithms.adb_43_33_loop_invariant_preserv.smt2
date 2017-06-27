@@ -375,14 +375,11 @@
   (assert
   (forall ((a us_t))
   (forall ((lastindex Int) (val__ Int))
-  (! (=> (has_value_inc__function_guard (has_value_inc a lastindex val__) a
-     lastindex val__)
-     (= (= (has_value_inc a lastindex val__) true)
+  (! (= (= (has_value_inc a lastindex val__) true)
      (exists ((i Int))
      (and (and (<= (first1 a) i) (<= i lastindex))
-     (= (to_rep (select (to_array a) i)) val__))))) :pattern ((has_value_inc
-                                                              a lastindex
-                                                              val__)) ))))
+     (= (to_rep (select (to_array a) i)) val__)))) :pattern ((has_value_inc a
+                                                             lastindex val__)) ))))
 
 (declare-fun has_value_exc (us_t Int Int) Bool)
 
@@ -395,12 +392,10 @@
   (assert
   (forall ((a us_t))
   (forall ((lastindex Int) (val__ Int))
-  (! (=> (has_value_exc__function_guard (has_value_exc a lastindex val__) a
-     lastindex val__)
-     (= (= (has_value_exc a lastindex val__) true)
+  (! (= (= (has_value_exc a lastindex val__) true)
      (exists ((i Int))
      (and (and (<= (first1 a) i) (<= i lastindex))
-     (and (< i lastindex) (= (to_rep (select (to_array a) i)) val__)))))) :pattern (
+     (and (< i lastindex) (= (to_rep (select (to_array a) i)) val__))))) :pattern (
   (has_value_exc a lastindex val__)) ))))
 
 (declare-fun a () us_t)
@@ -414,10 +409,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
-
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))

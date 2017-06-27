@@ -196,22 +196,13 @@
 
 (declare-fun discr__p1__d__assume1 () us_main_type)
 
-(declare-fun temp___309 () natural)
+(declare-fun temp___308 () natural)
 
-(declare-fun temp___3091 () us_main_type)
+(declare-fun temp___3081 () us_main_type)
 
 (declare-fun result () us_main_type)
 
 (declare-fun d__split_fields1 () us_main_type)
-
-(define-fun temp___3092 () us_rep (mk___rep (mk___split_discrs temp___309)
-                                  (mk___split_fields temp___3091)))
-
-(define-fun discr__p1__d__assume2 () us_rep (mk___rep
-                                            (mk___split_discrs
-                                            discr__p1__d__assume)
-                                            (mk___split_fields
-                                            discr__p1__d__assume1)))
 
 ;; H
   (assert (in_range c))
@@ -219,8 +210,8 @@
 ;; H
   (assert
   (and
-  (and (= discr__p1__d__assume2 (new_no_default c))
-  (new_no_default__function_guard discr__p1__d__assume2 c))
+  (= (mk___rep (mk___split_discrs discr__p1__d__assume)
+     (mk___split_fields discr__p1__d__assume1)) (new_no_default c))
   (= (to_rep discr__p1__d__assume) c)))
 
 ;; H
@@ -235,11 +226,12 @@
 ;; H
   (assert
   (and
-  (and (= temp___3092 (new_no_default c)) (new_no_default__function_guard
-  temp___3092 c)) (= (to_rep temp___309) c)))
+  (= (mk___rep (mk___split_discrs temp___308)
+     (mk___split_fields temp___3081)) (new_no_default c))
+  (= (to_rep temp___308) c)))
 
 (assert
 ;; WP_parameter_def
  ;; File "discr.adb", line 76, characters 0-0
-  (not (= temp___309 (rec__private_discr__p_no_default__c d__split_discrs))))
+  (not (= temp___308 (rec__private_discr__p_no_default__c d__split_discrs))))
 (check-sat)

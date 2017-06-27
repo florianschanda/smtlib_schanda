@@ -92,17 +92,14 @@
 ;; id__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (id x)))
-     (=> (id__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (id x) true
+     false true)) :pattern ((id x)) )))
 
 ;; id__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true) (id__function_guard (id x) x))
-     (= (id x) x)) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (id x) x)) :pattern (
+  (id x)) )))
 
 (declare-fun d () Int)
 
@@ -116,15 +113,13 @@
                                      temp___expr_39)))
 
 ;; d__def_axiom
-  (assert (and (id__function_guard (id 0) 0) (= d (id 0))))
+  (assert (= d (id 0)))
 
 (declare-fun array_component__d__assume () Int)
 
 ;; H
   (assert
-  (and
-  (and (= array_component__d__assume (id 0)) (id__function_guard
-  array_component__d__assume 0))
+  (and (= array_component__d__assume (id 0))
   (and (in_range array_component__d__assume)
   (= array_component__d__assume 0))))
 

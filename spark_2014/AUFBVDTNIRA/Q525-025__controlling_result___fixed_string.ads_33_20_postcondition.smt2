@@ -563,35 +563,27 @@
 
 ;; elements__post_axiom
   (assert
-  (forall ((this us_rep))
-  (! (let ((result (elements this)))
-     (=> (elements__function_guard result this) (dynamic_invariant result
-     true false true))) :pattern ((elements this)) )))
+  (forall ((this us_rep)) (! (dynamic_invariant (elements this) true false
+  true) :pattern ((elements this)) )))
 
 ;; elements__post__dispatch_axiom
   (assert
   (forall ((attr__tag1 Int))
-  (forall ((this us_rep))
-  (! (let ((result (elements1 attr__tag1 this)))
-     (=> (elements__function_guard1 result attr__tag1 this)
-     (dynamic_invariant result true false true))) :pattern ((elements1
-                                                            attr__tag1 this)) ))))
+  (forall ((this us_rep)) (! (dynamic_invariant (elements1 attr__tag1 this)
+  true false true) :pattern ((elements1 attr__tag1 this)) ))))
 
 ;; fixed_string__object__compat_axiom
   (assert
   (forall ((this us_rep))
-  (! (=> (elements__function_guard1 (elements1 us_tag this) us_tag this)
-     (and (elements__function_guard (elements this) this)
-     (= (elements this) (elements1 us_tag this)))) :pattern ((elements1
-                                                             us_tag this)) )))
+  (! (= (elements this) (elements1 us_tag this)) :pattern ((elements1 
+                                                           us_tag this)) )))
 
 ;; elements__def_axiom
   (assert
   (forall ((this us_rep))
-  (! (=> (elements__function_guard (elements this) this)
-     (= (elements this) (to_rep2
+  (! (= (elements this) (to_rep2
                         (rec__fixed_string__object__width
-                        (us_split_fields1 this))))) :pattern ((elements this)) )))
+                        (us_split_fields1 this)))) :pattern ((elements this)) )))
 
 (declare-fun null_string (us_rep) us_t)
 
@@ -605,29 +597,21 @@
   (assert
   (forall ((this us_rep))
   (! (let ((result (null_string this)))
-     (and (elements__function_guard (elements this) this)
-     (=> (null_string__function_guard result this)
      (and (= (length result) (elements this)) (dynamic_invariant2 result true
-     false true))))) :pattern ((null_string this)) )))
+     false true))) :pattern ((null_string this)) )))
 
 ;; null_string__post__dispatch_axiom
   (assert
   (forall ((attr__tag1 Int))
-  (forall ((this us_rep))
-  (! (let ((result (null_string1 attr__tag1 this)))
-     (=> (null_string__function_guard1 result attr__tag1 this)
-     (dynamic_invariant2 result true false true))) :pattern ((null_string1
-                                                             attr__tag1 this)) ))))
+  (forall ((this us_rep)) (! (dynamic_invariant2
+  (null_string1 attr__tag1 this) true false
+  true) :pattern ((null_string1 attr__tag1 this)) ))))
 
 ;; fixed_string__object__compat_axiom
   (assert
   (forall ((this us_rep))
-  (! (=> (null_string__function_guard1 (null_string1 us_tag this) us_tag
-     this)
-     (and (null_string__function_guard (null_string this) this)
-     (= (null_string this) (null_string1 us_tag this)))) :pattern ((null_string1
-                                                                   us_tag
-                                                                   this)) )))
+  (! (= (null_string this) (null_string1 us_tag this)) :pattern ((null_string1
+                                                                 us_tag this)) )))
 
 (declare-fun this () us_rep)
 
@@ -653,10 +637,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
 
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -677,9 +657,9 @@
 
 (declare-sort t1 0)
 
-(declare-fun first3 (t1) integer)
+(declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -688,8 +668,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range f)
      (=> (in_range l)
-     (and (= (to_rep1 (first3 (mk1 f l))) f)
-     (= (to_rep1 (last3 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (and (= (to_rep1 (first2 (mk1 f l))) f)
+     (= (to_rep1 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range low)
@@ -705,12 +685,12 @@
 (define-fun of_array1 ((a (Array Int character)) (f Int)
   (l Int)) us_t1 (mk___t1 a (mk1 f l)))
 
-(define-fun first4 ((a us_t1)) Int (to_rep1 (first3 (rt1 a))))
+(define-fun first3 ((a us_t1)) Int (to_rep1 (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep1 (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first4 a) (last4 a))
-                                    (+ (- (last4 a) (first4 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size3 () Int)
 
@@ -744,9 +724,9 @@
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment3 a))))
 
 (define-fun bool_eq8 ((x us_t1)
-  (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep1 (first3 (rt1 x)))
-                  (to_rep1 (last3 (rt1 x))) (elts1 y)
-                  (to_rep1 (first3 (rt1 y))) (to_rep1 (last3 (rt1 y)))))
+  (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep1 (first2 (rt1 x)))
+                  (to_rep1 (last2 (rt1 x))) (elts1 y)
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
 (declare-fun user_eq8 (us_t1 us_t1) Bool)
 
@@ -754,10 +734,6 @@
 
 (declare-datatypes () ((t21b__ref (mk_t21b__ref (t21b__content us_t1)))))
 (define-fun t21b__ref___projection ((a t21b__ref)) us_t1 (t21b__content a))
-
-(declare-fun first5 () Int)
-
-(declare-fun last5 () Int)
 
 (define-fun dynamic_property3 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -779,9 +755,9 @@
 
 (declare-sort t2 0)
 
-(declare-fun first6 (t2) integer)
+(declare-fun first4 (t2) integer)
 
-(declare-fun last6 (t2) integer)
+(declare-fun last4 (t2) integer)
 
 (declare-fun mk2 (Int Int) t2)
 
@@ -790,8 +766,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range f)
      (=> (in_range l)
-     (and (= (to_rep1 (first6 (mk2 f l))) f)
-     (= (to_rep1 (last6 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
+     (and (= (to_rep1 (first4 (mk2 f l))) f)
+     (= (to_rep1 (last4 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
 
 (define-fun dynamic_property4 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range low)
@@ -807,12 +783,12 @@
 (define-fun of_array2 ((a (Array Int character)) (f Int)
   (l Int)) us_t2 (mk___t2 a (mk2 f l)))
 
-(define-fun first7 ((a us_t2)) Int (to_rep1 (first6 (rt2 a))))
+(define-fun first5 ((a us_t2)) Int (to_rep1 (first4 (rt2 a))))
 
-(define-fun last7 ((a us_t2)) Int (to_rep1 (last6 (rt2 a))))
+(define-fun last5 ((a us_t2)) Int (to_rep1 (last4 (rt2 a))))
 
-(define-fun length2 ((a us_t2)) Int (ite (<= (first7 a) (last7 a))
-                                    (+ (- (last7 a) (first7 a)) 1) 0))
+(define-fun length2 ((a us_t2)) Int (ite (<= (first5 a) (last5 a))
+                                    (+ (- (last5 a) (first5 a)) 1) 0))
 
 (declare-fun value__size4 () Int)
 
@@ -846,9 +822,9 @@
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment4 a))))
 
 (define-fun bool_eq10 ((x us_t2)
-  (y us_t2)) Bool (bool_eq3 (elts2 x) (to_rep1 (first6 (rt2 x)))
-                  (to_rep1 (last6 (rt2 x))) (elts2 y)
-                  (to_rep1 (first6 (rt2 y))) (to_rep1 (last6 (rt2 y)))))
+  (y us_t2)) Bool (bool_eq3 (elts2 x) (to_rep1 (first4 (rt2 x)))
+                  (to_rep1 (last4 (rt2 x))) (elts2 y)
+                  (to_rep1 (first4 (rt2 y))) (to_rep1 (last4 (rt2 y)))))
 
 (declare-fun user_eq10 (us_t2 us_t2) Bool)
 
@@ -894,17 +870,17 @@
 
 (declare-fun o3 () (Array Int character))
 
-(declare-fun temp___247 () (Array Int character))
+(declare-fun temp___233 () (Array Int character))
 
-(declare-fun temp___2471 () t2)
+(declare-fun temp___2331 () t2)
 
-(declare-fun temp___248 () (Array Int character))
+(declare-fun temp___234 () (Array Int character))
 
-(declare-fun temp___2481 () t1)
+(declare-fun temp___2341 () t1)
 
-(declare-fun temp___251 () (Array Int character))
+(declare-fun temp___237 () (Array Int character))
 
-(declare-fun temp___2511 () t1)
+(declare-fun temp___2371 () t1)
 
 (declare-fun o4 () (Array Int character))
 
@@ -963,9 +939,6 @@
 (declare-fun result6 () t)
 
 ;; H
-  (assert (elements__function_guard (elements this) this))
-
-;; H
   (assert (dynamic_invariant2 in_string true false true))
 
 ;; H
@@ -991,10 +964,7 @@
 
 ;; H
   (assert
-  (and
   (and (= fixed_string__convert__out_string__assume2 (null_string this))
-  (null_string__function_guard fixed_string__convert__out_string__assume2
-  this))
   (and (dynamic_invariant2 fixed_string__convert__out_string__assume2 true
   false true)
   (= (length fixed_string__convert__out_string__assume2) (elements this)))))
@@ -1058,45 +1028,45 @@
   (assert (= o3 (elts in_string)))
 
 ;; H
-  (assert (= o3 temp___247))
+  (assert (= o3 temp___233))
 
 ;; H
-  (assert (= (mk2 (to_rep1 (first (rt in_string))) r22b) temp___2471))
+  (assert (= (mk2 (to_rep1 (first (rt in_string))) r22b) temp___2331))
 
 ;; H
   (assert
-  (= (ite (<= (to_rep1 (first6 temp___2471)) (to_rep1 (last6 temp___2471)))
-     (+ (- (to_rep1 (last6 temp___2471)) (to_rep1 (first6 temp___2471))) 1)
+  (= (ite (<= (to_rep1 (first4 temp___2331)) (to_rep1 (last4 temp___2331)))
+     (+ (- (to_rep1 (last4 temp___2331)) (to_rep1 (first4 temp___2331))) 1)
      0) (ite (<= (to_rep1 out_string__first) r19b)
         (+ (- r19b (to_rep1 out_string__first)) 1) 0)))
 
 ;; H
   (assert
-  (= (slide temp___247 (to_rep1 (first6 temp___2471))
-     (to_rep1 out_string__first)) temp___248))
+  (= (slide temp___233 (to_rep1 (first4 temp___2331))
+     (to_rep1 out_string__first)) temp___234))
 
 ;; H
-  (assert (= (mk1 (to_rep1 out_string__first) r19b) temp___2481))
-
-;; H
-  (assert
-  (= (ite (<= (to_rep1 (first3 temp___2481)) (to_rep1 (last3 temp___2481)))
-     (+ (- (to_rep1 (last3 temp___2481)) (to_rep1 (first3 temp___2481))) 1)
-     0) (ite (<= (to_rep1 (first3 (mk1 (to_rep1 out_string__first) r19b))) 
-        (to_rep1 (last3 (mk1 (to_rep1 out_string__first) r19b))))
-        (+ (- (to_rep1 (last3 (mk1 (to_rep1 out_string__first) r19b))) 
-        (to_rep1 (first3 (mk1 (to_rep1 out_string__first) r19b)))) 1) 0)))
+  (assert (= (mk1 (to_rep1 out_string__first) r19b) temp___2341))
 
 ;; H
   (assert
-  (= (mk___t1 temp___251 temp___2511) (mk___t1 temp___248 temp___2481)))
+  (= (ite (<= (to_rep1 (first2 temp___2341)) (to_rep1 (last2 temp___2341)))
+     (+ (- (to_rep1 (last2 temp___2341)) (to_rep1 (first2 temp___2341))) 1)
+     0) (ite (<= (to_rep1 (first2 (mk1 (to_rep1 out_string__first) r19b))) 
+        (to_rep1 (last2 (mk1 (to_rep1 out_string__first) r19b))))
+        (+ (- (to_rep1 (last2 (mk1 (to_rep1 out_string__first) r19b))) 
+        (to_rep1 (first2 (mk1 (to_rep1 out_string__first) r19b)))) 1) 0)))
 
 ;; H
   (assert
-  (forall ((temp___252 Int))
-  (ite (and (<= (to_rep1 out_string__first) temp___252) (<= temp___252 r19b))
-  (= (select o4 temp___252) (select temp___251 temp___252))
-  (= (select o4 temp___252) (select out_string1 temp___252)))))
+  (= (mk___t1 temp___237 temp___2371) (mk___t1 temp___234 temp___2341)))
+
+;; H
+  (assert
+  (forall ((temp___238 Int))
+  (ite (and (<= (to_rep1 out_string__first) temp___238) (<= temp___238 r19b))
+  (= (select o4 temp___238) (select temp___237 temp___238))
+  (= (select o4 temp___238) (select out_string1 temp___238)))))
 
 ;; H
   (assert (= out_string1 result2))
@@ -1157,9 +1127,6 @@
 
 ;; H
   (assert (= result6 fixed_string__convert__result9))
-
-;; H
-  (assert (elements__function_guard (elements this) this))
 
 (assert
 ;; WP_parameter_def

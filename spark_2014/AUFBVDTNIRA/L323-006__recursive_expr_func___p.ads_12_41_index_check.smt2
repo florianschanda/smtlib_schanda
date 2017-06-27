@@ -389,16 +389,13 @@
   (forall ((lo1 Int) (hi1 Int))
   (! (=>
      (and
-     (and
      (and (dynamic_invariant1 x1 true true true) (dynamic_invariant lo1 true
-     true true)) (dynamic_invariant hi1 true true true)) (sum__function_guard
-     (sum x1 lo1 hi1) x1 lo1 hi1))
-     (and (sum__function_guard (sum x1 lo1 (- hi1 1)) x1 lo1 (- hi1 1))
+     true true)) (dynamic_invariant hi1 true true true))
      (= (sum x1 lo1 hi1) (ite (or (or (< hi1 lo1) (< lo1 (first1 x1)))
                               (< hi1 (last1 x1)))
                          0
                          (+ (sum x1 lo1 (- hi1 1)) (to_rep
-                                                   (select (to_array x1) hi1))))))) :pattern (
+                                                   (select (to_array x1) hi1)))))) :pattern (
   (sum x1 lo1 hi1)) ))))
 
 (define-fun dynamic_invariant3 ((temp___expr_142 Int)

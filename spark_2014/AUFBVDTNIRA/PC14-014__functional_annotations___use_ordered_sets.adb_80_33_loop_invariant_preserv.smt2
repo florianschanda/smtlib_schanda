@@ -1222,7 +1222,7 @@
 
 (declare-fun o1 () Int)
 
-(declare-fun temp___776 () count_type)
+(declare-fun temp___743 () count_type)
 
 (declare-fun o2 () Bool)
 
@@ -1250,8 +1250,8 @@
 
 (declare-fun result3 () Bool)
 
-(define-fun temp___7761 () us_rep1 (mk___rep1
-                                   (mk___split_fields1 temp___776)))
+(define-fun temp___7431 () us_rep1 (mk___rep1
+                                   (mk___split_fields1 temp___743)))
 
 (define-fun use_ordered_sets__move__cu__assume1 () us_rep1 (mk___rep1
                                                            (mk___split_fields1
@@ -1465,20 +1465,20 @@
 
 ;; H
   (assert
-  (and (= temp___7761 (first (mk___rep s1__split_discrs s1__split_fields2)))
+  (and (= temp___7431 (first (mk___rep s1__split_discrs s1__split_fields2)))
   (ite (= (= (length (mk___rep s1__split_discrs s1__split_fields2)) 0) true)
-  (= (bool_eq3 temp___7761 no_element) true)
+  (= (bool_eq3 temp___7431 no_element) true)
   (and
   (= (has_key (positions (mk___rep s1__split_discrs s1__split_fields2))
-     temp___7761) true)
+     temp___7431) true)
   (= (get1 (positions (mk___rep s1__split_discrs s1__split_fields2))
-     temp___7761) 1)))))
+     temp___7431) 1)))))
 
 ;; H
   (assert (= result2 (mk___split_fields__ref1 cu__split_fields2)))
 
 ;; H
-  (assert (= cu__split_fields3 (mk___split_fields1 temp___776)))
+  (assert (= cu__split_fields3 (mk___split_fields1 temp___743)))
 
 ;; H
   (assert
@@ -1497,7 +1497,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "use_ordered_sets.ads", line 50, characters 0-0
+ ;; File "use_ordered_sets.ads", line 43, characters 0-0
   (not
   (= (ole (model__ (mk___rep s1__split_discrs s1__split_fields2))
      (model__

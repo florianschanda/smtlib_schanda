@@ -51,14 +51,10 @@
 
 (declare-fun pow2 (Int) Int)
 
-(declare-datatypes () ((mode (RNE2) (RNA2) (RTP2) (RTN2) (RTZ2))))
-(define-fun to_nearest ((m mode)) Bool (or (= m RNE2) (= m RNA2)))
+(declare-datatypes () ((mode (RNE1) (RNA1) (RTP1) (RTN1) (RTZ1))))
+(define-fun to_nearest ((m mode)) Bool (or (= m RNE1) (= m RNA1)))
 
 (declare-fun zeroF () t)
-
-(declare-fun abs1 (t) t)
-
-(declare-fun neg (t) t)
 
 (declare-fun add (mode t t) t)
 
@@ -67,6 +63,10 @@
 (declare-fun mul (mode t t) t)
 
 (declare-fun div1 (mode t t) t)
+
+(declare-fun abs1 (t) t)
+
+(declare-fun neg (t) t)
 
 (declare-fun fma (mode t t t) t)
 
@@ -175,16 +175,16 @@
   (=> (tqtisFinite x) (= (round m (tqtreal x)) (tqtreal x)))))
 
 ;; Round_down_le
-  (assert (forall ((x Real)) (<= (round RTN2 x) x)))
+  (assert (forall ((x Real)) (<= (round RTN1 x) x)))
 
 ;; Round_up_ge
-  (assert (forall ((x Real)) (<= x (round RTP2 x))))
+  (assert (forall ((x Real)) (<= x (round RTP1 x))))
 
 ;; Round_down_neg
-  (assert (forall ((x Real)) (= (round RTN2 (- x)) (- (round RTP2 x)))))
+  (assert (forall ((x Real)) (= (round RTN1 (- x)) (- (round RTP1 x)))))
 
 ;; Round_up_neg
-  (assert (forall ((x Real)) (= (round RTP2 (- x)) (- (round RTN2 x)))))
+  (assert (forall ((x Real)) (= (round RTP1 (- x)) (- (round RTN1 x)))))
 
 (define-fun in_safe_int_range ((i Int)) Bool (and (<= (- 16777216) i)
                                              (<= i 16777216)))
@@ -322,10 +322,10 @@
               (=> (diff_sign x y) (is_negative z))))
 
 (define-fun overflow_value ((m mode)
-  (x t)) Bool (ite (is-RTN2 m) (ite (is_positive x)
+  (x t)) Bool (ite (is-RTN1 m) (ite (is_positive x)
                                (and (tqtisFinite x)
                                (= (tqtreal x) (* 33554430.0 10141204801825835211973625643008.0)))
-                               (is_infinite x)) (ite (is-RTP2 m) (ite (is_positive
+                               (is_infinite x)) (ite (is-RTP1 m) (ite (is_positive
                                                                  x)
                                                                  (is_infinite
                                                                  x)
@@ -334,7 +334,7 @@
                                                                  x)
                                                                  (= (tqtreal
                                                                     x) (- (* 33554430.0 10141204801825835211973625643008.0))))) 
-                                                (ite (is-RTZ2 m) (ite (is_positive
+                                                (ite (is-RTZ1 m) (ite (is_positive
                                                                  x)
                                                                  (and
                                                                  (tqtisFinite
@@ -346,12 +346,12 @@
                                                                  x)
                                                                  (= (tqtreal
                                                                     x) (- (* 33554430.0 10141204801825835211973625643008.0))))) 
-                                                (ite (is-RNA2 m) (is_infinite
+                                                (ite (is-RNA1 m) (is_infinite
                                                 x) (is_infinite x))))))
 
 (define-fun sign_zero_result ((m mode)
   (x t)) Bool (=> (is_zero x)
-              (ite (is-RTN2 m) (is_negative x) (is_positive x))))
+              (ite (is-RTN1 m) (is_negative x) (is_positive x))))
 
 ;; add_finite
   (assert
@@ -645,84 +645,84 @@
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (=> (is_negative x) (= (roundToIntegral RTZ2 x) (roundToIntegral RTP2 x))))))
+  (=> (is_negative x) (= (roundToIntegral RTZ1 x) (roundToIntegral RTP1 x))))))
 
 ;; truncate_pos
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (=> (is_positive x) (= (roundToIntegral RTZ2 x) (roundToIntegral RTN2 x))))))
+  (=> (is_positive x) (= (roundToIntegral RTZ1 x) (roundToIntegral RTN1 x))))))
 
 ;; ceil_le
   (assert
-  (forall ((x t)) (=> (tqtisFinite x) (le x (roundToIntegral RTP2 x)))))
+  (forall ((x t)) (=> (tqtisFinite x) (le x (roundToIntegral RTP1 x)))))
 
 ;; ceil_lest
   (assert
   (forall ((x t) (y t))
-  (=> (and (le x y) (is_int1 y)) (le (roundToIntegral RTP2 x) y))))
+  (=> (and (le x y) (is_int1 y)) (le (roundToIntegral RTP1 x) y))))
 
 ;; ceil_to_real
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (= (tqtreal (roundToIntegral RTP2 x)) (to_real (- 1 (to_int (- 1.0 
+  (= (tqtreal (roundToIntegral RTP1 x)) (to_real (- 1 (to_int (- 1.0 
   (tqtreal x)))))))))
 
 ;; ceil_to_int
   (assert
   (forall ((m mode) (x t))
   (=> (tqtisFinite x)
-  (= (to_int1 m (roundToIntegral RTP2 x)) (- 1 (to_int (- 1.0 (tqtreal x))))))))
+  (= (to_int1 m (roundToIntegral RTP1 x)) (- 1 (to_int (- 1.0 (tqtreal x))))))))
 
 ;; floor_le
   (assert
-  (forall ((x t)) (=> (tqtisFinite x) (le (roundToIntegral RTN2 x) x))))
+  (forall ((x t)) (=> (tqtisFinite x) (le (roundToIntegral RTN1 x) x))))
 
 ;; floor_lest
   (assert
   (forall ((x t) (y t))
-  (=> (and (le y x) (is_int1 y)) (le y (roundToIntegral RTN2 x)))))
+  (=> (and (le y x) (is_int1 y)) (le y (roundToIntegral RTN1 x)))))
 
 ;; floor_to_real
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (= (tqtreal (roundToIntegral RTN2 x)) (to_real (to_int (tqtreal x)))))))
+  (= (tqtreal (roundToIntegral RTN1 x)) (to_real (to_int (tqtreal x)))))))
 
 ;; floor_to_int
   (assert
   (forall ((m mode) (x t))
   (=> (tqtisFinite x)
-  (= (to_int1 m (roundToIntegral RTN2 x)) (to_int (tqtreal x))))))
+  (= (to_int1 m (roundToIntegral RTN1 x)) (to_int (tqtreal x))))))
 
 ;; RNA_down
   (assert
   (forall ((x t))
-  (=> (lt (sub RNE2 x (roundToIntegral RTN2 x))
-  (sub RNE2 (roundToIntegral RTP2 x) x))
-  (= (roundToIntegral RNA2 x) (roundToIntegral RTN2 x)))))
+  (=> (lt (sub RNE1 x (roundToIntegral RTN1 x))
+  (sub RNE1 (roundToIntegral RTP1 x) x))
+  (= (roundToIntegral RNA1 x) (roundToIntegral RTN1 x)))))
 
 ;; RNA_up
   (assert
   (forall ((x t))
-  (=> (lt (sub RNE2 (roundToIntegral RTP2 x) x)
-  (sub RNE2 x (roundToIntegral RTN2 x)))
-  (= (roundToIntegral RNA2 x) (roundToIntegral RTP2 x)))))
+  (=> (lt (sub RNE1 (roundToIntegral RTP1 x) x)
+  (sub RNE1 x (roundToIntegral RTN1 x)))
+  (= (roundToIntegral RNA1 x) (roundToIntegral RTP1 x)))))
 
 ;; RNA_down_tie
   (assert
   (forall ((x t))
-  (=> (eq (sub RNE2 x (roundToIntegral RTN2 x))
-  (sub RNE2 (roundToIntegral RTP2 x) x))
-  (=> (is_negative x) (= (roundToIntegral RNA2 x) (roundToIntegral RTN2 x))))))
+  (=> (eq (sub RNE1 x (roundToIntegral RTN1 x))
+  (sub RNE1 (roundToIntegral RTP1 x) x))
+  (=> (is_negative x) (= (roundToIntegral RNA1 x) (roundToIntegral RTN1 x))))))
 
 ;; RNA_up_tie
   (assert
   (forall ((x t))
-  (=> (eq (sub RNE2 (roundToIntegral RTP2 x) x)
-  (sub RNE2 x (roundToIntegral RTN2 x)))
-  (=> (is_positive x) (= (roundToIntegral RNA2 x) (roundToIntegral RTP2 x))))))
+  (=> (eq (sub RNE1 (roundToIntegral RTP1 x) x)
+  (sub RNE1 x (roundToIntegral RTN1 x)))
+  (=> (is_positive x) (= (roundToIntegral RNA1 x) (roundToIntegral RTP1 x))))))
 
 ;; to_int_roundToIntegral
   (assert
@@ -758,12 +758,12 @@
 ;; round_bound_ne
   (assert
   (forall ((x Real))
-  (! (=> (no_overflow RNE2 x)
+  (! (=> (no_overflow RNE1 x)
      (and
      (<= (- (- x (* (/ 1.0 16777216.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 1427247692705959881058285969449495136382746624.0)) 
-     (round RNE2 x))
-     (<= (round RNE2 x) (+ (+ x (* (/ 1.0 16777216.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 1427247692705959881058285969449495136382746624.0))))) :pattern (
-  (round RNE2 x)) )))
+     (round RNE1 x))
+     (<= (round RNE1 x) (+ (+ x (* (/ 1.0 16777216.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 1427247692705959881058285969449495136382746624.0))))) :pattern (
+  (round RNE1 x)) )))
 
 (define-fun neq ((x t) (y t)) Bool (not (eq x y)))
 
@@ -790,7 +790,7 @@
   (assert (is_int1 fliteral))
 
 ;; one_of_int
-  (assert (= fliteral (of_int RNA2 1)))
+  (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -835,28 +835,6 @@
                                      (or (= temp___is_init_48 true) (le
                                      (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_51)))
-
-(declare-sort tsmall_arrayP1 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq2 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
-
-(declare-fun user_eq1 (tsmall_arrayP1 tsmall_arrayP1) Bool)
-
-(declare-fun dummy1 () tsmall_arrayP1)
-
-(declare-datatypes ()
-((tsmall_arrayP1__ref
- (mk_tsmall_arrayP1__ref (tsmall_arrayP1__content tsmall_arrayP1)))))
-(define-fun tsmall_arrayP1__ref___projection ((a tsmall_arrayP1__ref)) tsmall_arrayP1 
-  (tsmall_arrayP1__content a))
 
 (declare-fun to_rep (float) t)
 
@@ -918,7 +896,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq3 ((a (Array Int float)) (a__first Int) (a__last Int)
+(define-fun bool_eq2 ((a (Array Int float)) (a__first Int) (a__last Int)
   (b (Array Int float)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -937,7 +915,7 @@
   (assert
   (forall ((a (Array Int float)) (b (Array Int float)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq3 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq2 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -947,64 +925,22 @@
   (= (to_rep (select a temp___idx_132)) (to_rep
                                         (select b (+ (- b__first a__first) temp___idx_132)))))))))))
 
-(declare-sort row_range 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= (- 1) x) (<= x 1)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq2 (row_range row_range) Bool)
-
-(declare-fun dummy2 () row_range)
-
-(declare-datatypes ()
-((row_range__ref (mk_row_range__ref (row_range__content row_range)))))
-(define-fun row_range__ref___projection ((a row_range__ref)) row_range 
-  (row_range__content a))
-
-(declare-sort col_range 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq3 (col_range col_range) Bool)
-
-(declare-fun dummy3 () col_range)
-
-(declare-datatypes ()
-((col_range__ref (mk_col_range__ref (col_range__content col_range)))))
-(define-fun col_range__ref___projection ((a col_range__ref)) col_range 
-  (col_range__content a))
-
 (declare-sort integer 0)
 
-(define-fun in_range5 ((x Int)) Bool (and (<= (- 2147483648) x)
+(define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
 
-(declare-fun user_eq4 (integer integer) Bool)
+(declare-fun user_eq1 (integer integer) Bool)
 
-(declare-fun dummy4 () integer)
+(declare-fun dummy1 () integer)
 
 (declare-datatypes ()
 ((integer__ref (mk_integer__ref (integer__content integer)))))
@@ -1022,12 +958,12 @@
 
 ;; range_axiom
   (assert
-  (forall ((x integer)) (! (in_range5 (to_rep1 x)) :pattern ((to_rep1 x)) )))
+  (forall ((x integer)) (! (in_range2 (to_rep1 x)) :pattern ((to_rep1 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range5 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
+  (! (=> (in_range2 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
                                                               (of_rep1 x))) )))
 
 (declare-sort map1 0)
@@ -1070,7 +1006,7 @@
   (get a (- i (- new_first old_first)) (- j (- new_first_2 old_first_2)))) :pattern (
   (get (slide1 a old_first new_first old_first_2 new_first_2) i j)) )))))))
 
-(define-fun bool_eq7 ((a map1) (a__first Int) (a__last Int) (a__first_2 Int)
+(define-fun bool_eq4 ((a map1) (a__first Int) (a__last Int) (a__first_2 Int)
   (a__last_2 Int) (b map1) (b__first Int) (b__last Int) (b__first_2 Int)
   (b__last_2 Int)) Bool (ite (and
                              (and
@@ -1103,7 +1039,7 @@
   (forall ((a__first Int) (a__last Int) (a__first_2 Int) (a__last_2 Int)
   (b__first Int) (b__last Int) (b__first_2 Int) (b__last_2 Int))
   (=>
-  (= (bool_eq7 b b__first b__last b__first_2 b__last_2 a a__first a__last
+  (= (bool_eq4 b b__first b__last b__first_2 b__last_2 a a__first a__last
      a__first_2 a__last_2) true)
   (and
   (and
@@ -1131,82 +1067,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
-(declare-sort t5b 0)
-
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq5 (t5b t5b) Bool)
-
-(declare-fun dummy5 () t5b)
-
-(declare-datatypes () ((t5b__ref (mk_t5b__ref (t5b__content t5b)))))
-(define-fun t5b__ref___projection ((a t5b__ref)) t5b (t5b__content a))
-
-(declare-sort t7b 0)
-
-(define-fun in_range7 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq9 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
-
-(declare-fun user_eq6 (t7b t7b) Bool)
-
-(declare-fun dummy6 () t7b)
-
-(declare-datatypes () ((t7b__ref (mk_t7b__ref (t7b__content t7b)))))
-(define-fun t7b__ref___projection ((a t7b__ref)) t7b (t7b__content a))
-
-(declare-sort t9b 0)
-
-(define-fun in_range8 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq10 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
-
-(declare-fun user_eq7 (t9b t9b) Bool)
-
-(declare-fun dummy7 () t9b)
-
-(declare-datatypes () ((t9b__ref (mk_t9b__ref (t9b__content t9b)))))
-(define-fun t9b__ref___projection ((a t9b__ref)) t9b (t9b__content a))
-
-(declare-sort t11b 0)
-
-(define-fun in_range9 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq11 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE9 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Int)
-
-(declare-fun user_eq8 (t11b t11b) Bool)
-
-(declare-fun dummy8 () t11b)
-
-(declare-datatypes () ((t11b__ref (mk_t11b__ref (t11b__content t11b)))))
-(define-fun t11b__ref___projection ((a t11b__ref)) t11b (t11b__content a))
-
 (declare-fun c13b () t)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
@@ -1218,215 +1078,6 @@
 (declare-fun tolerance () t)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
-
-(declare-sort t17b 0)
-
-(define-fun in_range10 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq12 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE10 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) Int)
-
-(declare-fun user_eq9 (t17b t17b) Bool)
-
-(declare-fun dummy9 () t17b)
-
-(declare-datatypes () ((t17b__ref (mk_t17b__ref (t17b__content t17b)))))
-(define-fun t17b__ref___projection ((a t17b__ref)) t17b (t17b__content a))
-
-(declare-sort t19b 0)
-
-(define-fun in_range11 ((x Int)) Bool (and (<= (- 1) x) (<= x 1)))
-
-(define-fun bool_eq13 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE11 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check11 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE11 (us_image) Int)
-
-(declare-fun user_eq10 (t19b t19b) Bool)
-
-(declare-fun dummy10 () t19b)
-
-(declare-datatypes () ((t19b__ref (mk_t19b__ref (t19b__content t19b)))))
-(define-fun t19b__ref___projection ((a t19b__ref)) t19b (t19b__content a))
-
-(declare-sort t20b 0)
-
-(define-fun in_range12 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq14 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE12 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check12 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE12 (us_image) Int)
-
-(declare-fun user_eq11 (t20b t20b) Bool)
-
-(declare-fun dummy11 () t20b)
-
-(declare-datatypes () ((t20b__ref (mk_t20b__ref (t20b__content t20b)))))
-(define-fun t20b__ref___projection ((a t20b__ref)) t20b (t20b__content a))
-
-(declare-sort t22b 0)
-
-(define-fun in_range13 ((x Int)) Bool (and (<= (- 1) x) (<= x 1)))
-
-(define-fun bool_eq15 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE13 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check13 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE13 (us_image) Int)
-
-(declare-fun user_eq12 (t22b t22b) Bool)
-
-(declare-fun dummy12 () t22b)
-
-(declare-datatypes () ((t22b__ref (mk_t22b__ref (t22b__content t22b)))))
-(define-fun t22b__ref___projection ((a t22b__ref)) t22b (t22b__content a))
-
-(declare-sort t23b 0)
-
-(define-fun in_range14 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq16 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE14 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check14 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE14 (us_image) Int)
-
-(declare-fun user_eq13 (t23b t23b) Bool)
-
-(declare-fun dummy13 () t23b)
-
-(declare-datatypes () ((t23b__ref (mk_t23b__ref (t23b__content t23b)))))
-(define-fun t23b__ref___projection ((a t23b__ref)) t23b (t23b__content a))
-
-(declare-sort t25b 0)
-
-(define-fun in_range15 ((x Int)) Bool (and (<= (- 1) x) (<= x 1)))
-
-(define-fun bool_eq17 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE15 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check15 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE15 (us_image) Int)
-
-(declare-fun user_eq14 (t25b t25b) Bool)
-
-(declare-fun dummy14 () t25b)
-
-(declare-datatypes () ((t25b__ref (mk_t25b__ref (t25b__content t25b)))))
-(define-fun t25b__ref___projection ((a t25b__ref)) t25b (t25b__content a))
-
-(declare-sort t26b 0)
-
-(define-fun in_range16 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq18 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE16 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check16 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE16 (us_image) Int)
-
-(declare-fun user_eq15 (t26b t26b) Bool)
-
-(declare-fun dummy15 () t26b)
-
-(declare-datatypes () ((t26b__ref (mk_t26b__ref (t26b__content t26b)))))
-(define-fun t26b__ref___projection ((a t26b__ref)) t26b (t26b__content a))
-
-(declare-sort t28b 0)
-
-(define-fun in_range17 ((x Int)) Bool (and (<= (- 1) x) (<= x 1)))
-
-(define-fun bool_eq19 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE17 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check17 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE17 (us_image) Int)
-
-(declare-fun user_eq16 (t28b t28b) Bool)
-
-(declare-fun dummy16 () t28b)
-
-(declare-datatypes () ((t28b__ref (mk_t28b__ref (t28b__content t28b)))))
-(define-fun t28b__ref___projection ((a t28b__ref)) t28b (t28b__content a))
-
-(declare-sort t29b 0)
-
-(define-fun in_range18 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq20 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE18 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check18 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE18 (us_image) Int)
-
-(declare-fun user_eq17 (t29b t29b) Bool)
-
-(declare-fun dummy17 () t29b)
-
-(declare-datatypes () ((t29b__ref (mk_t29b__ref (t29b__content t29b)))))
-(define-fun t29b__ref___projection ((a t29b__ref)) t29b (t29b__content a))
-
-(declare-sort t31b 0)
-
-(define-fun in_range19 ((x Int)) Bool (and (<= (- 1) x) (<= x 1)))
-
-(define-fun bool_eq21 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE19 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check19 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE19 (us_image) Int)
-
-(declare-fun user_eq18 (t31b t31b) Bool)
-
-(declare-fun dummy18 () t31b)
-
-(declare-datatypes () ((t31b__ref (mk_t31b__ref (t31b__content t31b)))))
-(define-fun t31b__ref___projection ((a t31b__ref)) t31b (t31b__content a))
-
-(declare-sort t32b 0)
-
-(define-fun in_range20 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq22 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE20 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check20 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE20 (us_image) Int)
-
-(declare-fun user_eq19 (t32b t32b) Bool)
-
-(declare-fun dummy19 () t32b)
-
-(declare-datatypes () ((t32b__ref (mk_t32b__ref (t32b__content t32b)))))
-(define-fun t32b__ref___projection ((a t32b__ref)) t32b (t32b__content a))
 
 (declare-fun temp___208 (t t t t t t t t t t) (Array Int float))
 
@@ -1606,20 +1257,7 @@
   (temp___do_toplevel_14 Bool)) Bool (=>
                                      (or (= temp___is_init_12 true)
                                      (<= (- 2147483648) 2147483647))
-                                     (in_range5 temp___expr_15)))
-
-(define-fun dynamic_invariant2 ((temp___expr_188 Int)
-  (temp___is_init_185 Bool) (temp___skip_constant_186 Bool)
-  (temp___do_toplevel_187 Bool)) Bool (=>
-                                      (or (= temp___is_init_185 true)
-                                      (<= (- 1) 1)) (in_range3
-                                      temp___expr_188)))
-
-(define-fun dynamic_invariant3 ((temp___expr_194 Int)
-  (temp___is_init_191 Bool) (temp___skip_constant_192 Bool)
-  (temp___do_toplevel_193 Bool)) Bool (=>
-                                      (or (= temp___is_init_191 true)
-                                      (<= 1 4)) (in_range4 temp___expr_194)))
+                                     (in_range2 temp___expr_15)))
 
 (declare-fun fliteral2 () t)
 
@@ -1677,21 +1315,13 @@
 
 (declare-fun approx () t)
 
-(declare-fun o () (Array Int float))
+(declare-fun o () t)
 
-(declare-fun o1 () (Array Int float))
+(declare-fun o1 () t)
 
-(declare-fun o2 () (Array Int float))
+(declare-fun o2 () t)
 
-(declare-fun o3 () (Array Int float))
-
-(declare-fun o4 () t)
-
-(declare-fun o5 () t)
-
-(declare-fun o6 () t)
-
-(declare-fun o7 () t)
+(declare-fun o3 () t)
 
 (declare-fun result () t)
 
@@ -1744,42 +1374,30 @@
   (assert (tqtisFinite b1))
 
 ;; H
-  (assert
-  (= o (temp___208 fliteral4 fliteral fliteral5 fliteral6 fliteral7 fliteral8
-       fliteral7 fliteral6 fliteral5 fliteral)))
-
-;; H
   (assert (= result2 small))
 
 ;; H
-  (assert (= small1 o))
-
-;; H
-  (assert (= o1 (temp___221 fliteral4)))
+  (assert
+  (= small1 (temp___208 fliteral4 fliteral fliteral5 fliteral6 fliteral7
+            fliteral8 fliteral7 fliteral6 fliteral5 fliteral)))
 
 ;; H
   (assert (= result3 small1))
 
 ;; H
-  (assert (= small2 o1))
-
-;; H
-  (assert (= o2 (temp___225 fliteral4 fliteral)))
+  (assert (= small2 (temp___221 fliteral4)))
 
 ;; H
   (assert (= result4 small2))
 
 ;; H
-  (assert (= small3 o2))
-
-;; H
-  (assert (= o3 (temp___230 fliteral4 fliteral)))
+  (assert (= small3 (temp___225 fliteral4 fliteral)))
 
 ;; H
   (assert (= result5 small3))
 
 ;; H
-  (assert (= small4 o3))
+  (assert (= small4 (temp___230 fliteral4 fliteral)))
 
 ;; H
   (assert (= b1 c13b))
@@ -1794,7 +1412,7 @@
   (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite approx)))
 
 ;; H
-  (assert (= (mul RNE2 fliteral9 c13b) tolerance))
+  (assert (= (mul RNE1 fliteral9 c13b) tolerance))
 
 ;; H
   (assert (tqtisFinite tolerance))
@@ -1803,24 +1421,24 @@
   (assert (= (mk_t__ref result6) (mk_t__ref approx)))
 
 ;; H
-  (assert (= approx1 (div1 RNE2 c13b fliteral5)))
+  (assert (= approx1 (div1 RNE1 c13b fliteral5)))
 
 ;; H
   (assert
-  (and (= o4 (mul RNE2 approx1 approx1)) (tqtisFinite
-  (mul RNE2 approx1 approx1))))
+  (and (= o (mul RNE1 approx1 approx1)) (tqtisFinite
+  (mul RNE1 approx1 approx1))))
 
 ;; H
-  (assert (= o5 (sub RNE2 c13b o4)))
+  (assert (= o1 (sub RNE1 c13b o)))
 
 ;; H
-  (assert (and (= o6 o5) (tqtisFinite o5)))
+  (assert (and (= o2 o1) (tqtisFinite o1)))
 
 ;; H
-  (assert (= o7 (abs1 o6)))
+  (assert (= o3 (abs1 o2)))
 
 ;; H
-  (assert (= result7 (ite (lt tolerance o7) true false)))
+  (assert (= result7 (ite (lt tolerance o3) true false)))
 
 ;; H
   (assert (= result7 true))
@@ -1828,7 +1446,7 @@
 ;; H
   (assert
   (and (=> (le (neg fliteral1) fliteral1) (tqtisFinite approx2)) (lt
-  tolerance (abs1 (sub RNE2 c13b (mul RNE2 approx2 approx2))))))
+  tolerance (abs1 (sub RNE1 c13b (mul RNE1 approx2 approx2))))))
 
 (assert
 ;; WP_parameter_def

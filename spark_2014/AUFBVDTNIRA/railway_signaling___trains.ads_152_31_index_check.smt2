@@ -1087,20 +1087,16 @@
   (assert
   (forall ((position us_rep))
   (forall ((id Int))
-  (! (=> (dynamic_invariant2 id true true true)
-     (let ((result (get_previous_track position id)))
-     (=> (get_previous_track__function_guard result position id)
-     (dynamic_invariant1 result true false true)))) :pattern ((get_previous_track
-                                                              position id)) ))))
+  (! (=> (dynamic_invariant2 id true true true) (dynamic_invariant1
+     (get_previous_track position id) true false true)) :pattern ((get_previous_track
+                                                                  position
+                                                                  id)) ))))
 
 ;; get_previous_track__def_axiom
   (assert
   (forall ((position us_rep))
   (forall ((id Int))
-  (! (=>
-     (and (dynamic_invariant2 id true true true)
-     (get_previous_track__function_guard (get_previous_track position id)
-     position id))
+  (! (=> (dynamic_invariant2 id true true true)
      (= (get_previous_track position id) (to_rep5
                                          (let ((temp___261 (select previous_tracks 
                                          (to_rep3
@@ -1121,20 +1117,15 @@
   (assert
   (forall ((position us_rep))
   (forall ((id Int))
-  (! (=> (dynamic_invariant2 id true true true)
-     (let ((result (get_other_previous_track position id)))
-     (=> (get_other_previous_track__function_guard result position id)
-     (dynamic_invariant1 result true false true)))) :pattern ((get_other_previous_track
-                                                              position id)) ))))
+  (! (=> (dynamic_invariant2 id true true true) (dynamic_invariant1
+     (get_other_previous_track position id) true false true)) :pattern (
+  (get_other_previous_track position id)) ))))
 
 ;; get_other_previous_track__def_axiom
   (assert
   (forall ((position us_rep))
   (forall ((id Int))
-  (! (=>
-     (and (dynamic_invariant2 id true true true)
-     (get_other_previous_track__function_guard
-     (get_other_previous_track position id) position id))
+  (! (=> (dynamic_invariant2 id true true true)
      (= (get_other_previous_track position id) (ite (= (to_rep5
                                                        (let ((temp___265 (select 
                                                        previous_tracks 
@@ -1350,7 +1341,7 @@
 
 (declare-fun o9 () track_id)
 
-(declare-fun temp___378 () Int)
+(declare-fun temp___340 () Int)
 
 (declare-fun o10 () Int)
 
@@ -1372,13 +1363,13 @@
 
 (declare-fun o19 () track_id)
 
-(declare-fun temp___376 () Int)
+(declare-fun temp___338 () Int)
 
 (declare-fun o20 () Int)
 
 (declare-fun o21 () signal)
 
-(declare-fun temp___377 () Int)
+(declare-fun temp___339 () Int)
 
 (declare-fun result () Bool)
 
@@ -1420,9 +1411,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o14 (get_previous_track o23 id))
-  (get_previous_track__function_guard o14 o23 id))
   (and (in_range7 o14)
   (= o14 (to_rep5
          (select (select previous_tracks (to_rep3
@@ -1449,11 +1438,9 @@
 ;; H
   (assert
   (=> (= result1 true)
-  (and
-  (and (= temp___376 (get_previous_track o22 id))
-  (get_previous_track__function_guard temp___376 o22 id))
-  (and (in_range7 temp___376)
-  (= temp___376 (to_rep5
+  (and (= temp___338 (get_previous_track o22 id))
+  (and (in_range7 temp___338)
+  (= temp___338 (to_rep5
                 (select (select previous_tracks (to_rep3
                                                 (rec__trains__track__from
                                                 (us_split_fields3
@@ -1461,21 +1448,21 @@
                 id)))))))
 
 ;; H
-  (assert (=> (= result1 true) (and (<= 1 temp___376) (<= temp___376 8))))
+  (assert (=> (= result1 true) (and (<= 1 temp___338) (<= temp___338 8))))
 
 ;; H
-  (assert (=> (= result1 true) (= o20 temp___376)))
+  (assert (=> (= result1 true) (= o20 temp___338)))
 
 ;; H
   (assert (=> (= result1 true) (= o21 (select track_signals o20))))
 
 ;; H
-  (assert (=> (= result1 true) (= temp___377 (to_rep2 o21))))
+  (assert (=> (= result1 true) (= temp___339 (to_rep2 o21))))
 
 ;; H
   (assert
   (=> (= result1 true)
-  (= result (ite (or (= temp___377 1) (= temp___377 2)) true false))))
+  (= result (ite (or (= temp___339 1) (= temp___339 2)) true false))))
 
 ;; H
   (assert (=> (not (= result1 true)) (= result (of_int 1))))
@@ -1494,9 +1481,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o4 (get_other_previous_track o25 id))
-  (get_other_previous_track__function_guard o4 o25 id))
   (and (in_range7 o4)
   (= o4 (ite (= (to_rep5
                 (select (select previous_tracks (to_rep3
@@ -1532,11 +1517,9 @@
 
 ;; H
   (assert
-  (and
-  (and (= temp___378 (get_other_previous_track o24 id))
-  (get_other_previous_track__function_guard temp___378 o24 id))
-  (and (in_range7 temp___378)
-  (= temp___378 (ite (= (to_rep5
+  (and (= temp___340 (get_other_previous_track o24 id))
+  (and (in_range7 temp___340)
+  (= temp___340 (ite (= (to_rep5
                         (select (select previous_tracks (to_rep3
                                                         (rec__trains__track__from
                                                         (us_split_fields3
@@ -1554,5 +1537,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "trains.ads", line 144, characters 0-0
-  (not (<= 1 temp___378)))
+  (not (<= 1 temp___340)))
 (check-sat)

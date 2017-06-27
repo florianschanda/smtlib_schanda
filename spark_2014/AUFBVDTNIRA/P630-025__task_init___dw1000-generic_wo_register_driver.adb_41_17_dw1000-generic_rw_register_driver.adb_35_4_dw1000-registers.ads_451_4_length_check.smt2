@@ -732,8 +732,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -759,7 +757,7 @@
 
 (declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -768,7 +766,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range f)
      (=> (in_range l)
-     (and (= (to_rep (first2 (mk1 f l))) f) (= (to_rep (last3 (mk1 f l))) l)))) :pattern (
+     (and (= (to_rep (first2 (mk1 f l))) f) (= (to_rep (last2 (mk1 f l))) l)))) :pattern (
   (mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
@@ -786,10 +784,10 @@
 
 (define-fun first3 ((a us_t1)) Int (to_rep (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last4 a))
-                                    (+ (- (last4 a) (first3 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size2 () Int)
 
@@ -824,8 +822,8 @@
 
 (define-fun bool_eq9 ((x us_t1)
   (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep (first2 (rt1 x)))
-                  (to_rep (last3 (rt1 x))) (elts1 y)
-                  (to_rep (first2 (rt1 y))) (to_rep (last3 (rt1 y)))))
+                  (to_rep (last2 (rt1 x))) (elts1 y)
+                  (to_rep (first2 (rt1 y))) (to_rep (last2 (rt1 y)))))
 
 (declare-fun user_eq8 (us_t1 us_t1) Bool)
 
@@ -844,15 +842,15 @@
                                        (= temp___skip_constant_5364 true))
                                        (and (dynamic_property2 1 2
                                        (first3 temp___expr_5366)
-                                       (last4 temp___expr_5366))
+                                       (last3 temp___expr_5366))
                                        (and (= (first3 temp___expr_5366) 1)
-                                       (= (last4 temp___expr_5366) 2)))))
+                                       (= (last3 temp___expr_5366) 2)))))
 
 (declare-sort t2 0)
 
 (declare-fun first4 (t2) integer)
 
-(declare-fun last5 (t2) integer)
+(declare-fun last4 (t2) integer)
 
 (declare-fun mk2 (Int Int) t2)
 
@@ -861,7 +859,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range f)
      (=> (in_range l)
-     (and (= (to_rep (first4 (mk2 f l))) f) (= (to_rep (last5 (mk2 f l))) l)))) :pattern (
+     (and (= (to_rep (first4 (mk2 f l))) f) (= (to_rep (last4 (mk2 f l))) l)))) :pattern (
   (mk2 f l)) )))
 
 (define-fun dynamic_property3 ((range_first Int) (range_last Int) (low Int)
@@ -879,10 +877,10 @@
 
 (define-fun first5 ((a us_t2)) Int (to_rep (first4 (rt2 a))))
 
-(define-fun last6 ((a us_t2)) Int (to_rep (last5 (rt2 a))))
+(define-fun last5 ((a us_t2)) Int (to_rep (last4 (rt2 a))))
 
-(define-fun length2 ((a us_t2)) Int (ite (<= (first5 a) (last6 a))
-                                    (+ (- (last6 a) (first5 a)) 1) 0))
+(define-fun length2 ((a us_t2)) Int (ite (<= (first5 a) (last5 a))
+                                    (+ (- (last5 a) (first5 a)) 1) 0))
 
 (declare-fun value__size3 () Int)
 
@@ -917,8 +915,8 @@
 
 (define-fun bool_eq10 ((x us_t2)
   (y us_t2)) Bool (bool_eq3 (elts2 x) (to_rep (first4 (rt2 x)))
-                  (to_rep (last5 (rt2 x))) (elts2 y)
-                  (to_rep (first4 (rt2 y))) (to_rep (last5 (rt2 y)))))
+                  (to_rep (last4 (rt2 x))) (elts2 y)
+                  (to_rep (first4 (rt2 y))) (to_rep (last4 (rt2 y)))))
 
 (declare-fun user_eq9 (us_t2 us_t2) Bool)
 
@@ -941,9 +939,9 @@
                                        (= temp___skip_constant_5381 true))
                                        (and (dynamic_property3 1 2
                                        (first5 temp___expr_5383)
-                                       (last6 temp___expr_5383))
+                                       (last5 temp___expr_5383))
                                        (and (= (first5 temp___expr_5383) 1)
-                                       (= (last6 temp___expr_5383) 2)))))
+                                       (= (last5 temp___expr_5383) 2)))))
 
 (declare-fun register_to_bytes (us_rep) us_t2)
 
@@ -951,10 +949,8 @@
 
 ;; register_to_bytes__post_axiom
   (assert
-  (forall ((s us_rep))
-  (! (let ((result (register_to_bytes s)))
-     (=> (register_to_bytes__function_guard result s) (dynamic_invariant1
-     result true false true))) :pattern ((register_to_bytes s)) )))
+  (forall ((s us_rep)) (! (dynamic_invariant1 (register_to_bytes s) true
+  false true) :pattern ((register_to_bytes s)) )))
 
 (declare-fun reg_bytes__first () integer)
 
@@ -1006,15 +1002,13 @@
 
 ;; H
   (assert
-  (and
-  (and (= temp___78662 (register_to_bytes reg))
-  (register_to_bytes__function_guard temp___78662 reg)) (dynamic_invariant1
+  (and (= temp___78662 (register_to_bytes reg)) (dynamic_invariant1
   temp___78662 true false true)))
 
 ;; H
   (assert
-  (= (ite (<= (to_rep (first4 temp___78661)) (to_rep (last5 temp___78661)))
-     (+ (- (to_rep (last5 temp___78661)) (to_rep (first4 temp___78661))) 1)
+  (= (ite (<= (to_rep (first4 temp___78661)) (to_rep (last4 temp___78661)))
+     (+ (- (to_rep (last4 temp___78661)) (to_rep (first4 temp___78661))) 1)
      0) (ite (<= 1 2) (+ (- 2 1) 1) 0)))
 
 ;; H
@@ -1022,15 +1016,15 @@
 
 ;; H
   (assert
-  (= (mk1 (to_rep (first4 temp___78661)) (to_rep (last5 temp___78661))) 
+  (= (mk1 (to_rep (first4 temp___78661)) (to_rep (last4 temp___78661))) 
   temp___78671))
 
 (assert
 ;; WP_parameter_def
  ;; File "dw1000-generic_wo_register_driver.adb", line 28, characters 0-0
   (not
-  (= (ite (<= (to_rep (first2 temp___78671)) (to_rep (last3 temp___78671)))
-     (+ (- (to_rep (last3 temp___78671)) (to_rep (first2 temp___78671))) 1)
+  (= (ite (<= (to_rep (first2 temp___78671)) (to_rep (last2 temp___78671)))
+     (+ (- (to_rep (last2 temp___78671)) (to_rep (first2 temp___78671))) 1)
      0) (ite (<= (to_rep reg_bytes__first) (to_rep reg_bytes__last))
         (+ (- (to_rep reg_bytes__last) (to_rep reg_bytes__first)) 1) 0))))
 (check-sat)

@@ -262,18 +262,15 @@
 
 ;; name__post_axiom
   (assert
-  (forall ((self us_rep))
-  (! (let ((result (name self)))
-     (=> (name__function_guard result self) (dynamic_invariant result true
-     false true))) :pattern ((name self)) )))
+  (forall ((self us_rep)) (! (dynamic_invariant (name self) true false
+  true) :pattern ((name self)) )))
 
 ;; name__def_axiom
   (assert
   (forall ((self us_rep))
-  (! (=> (name__function_guard (name self) self)
-     (= (name self) (to_rep
+  (! (= (name self) (to_rep
                     (rec__model__uml_state__name_data
-                    (us_split_fields1 self))))) :pattern ((name self)) )))
+                    (us_split_fields1 self)))) :pattern ((name self)) )))
 
 (declare-fun to_rep1 (uml_state_access) Int)
 
@@ -499,18 +496,15 @@
 
 ;; from__post_axiom
   (assert
-  (forall ((self us_rep1))
-  (! (let ((result (from self)))
-     (=> (from__function_guard result self) (dynamic_invariant1 result true
-     false true))) :pattern ((from self)) )))
+  (forall ((self us_rep1)) (! (dynamic_invariant1 (from self) true false
+  true) :pattern ((from self)) )))
 
 ;; from__def_axiom
   (assert
   (forall ((self us_rep1))
-  (! (=> (from__function_guard (from self) self)
-     (= (from self) (to_rep1
+  (! (= (from self) (to_rep1
                     (rec__model__uml_transition__from_data
-                    (us_split_fields3 self))))) :pattern ((from self)) )))
+                    (us_split_fields3 self)))) :pattern ((from self)) )))
 
 (declare-fun to__ (us_rep1) Int)
 
@@ -518,18 +512,15 @@
 
 ;; to____post_axiom
   (assert
-  (forall ((self us_rep1))
-  (! (let ((result (to__ self)))
-     (=> (to____function_guard result self) (dynamic_invariant1 result true
-     false true))) :pattern ((to__ self)) )))
+  (forall ((self us_rep1)) (! (dynamic_invariant1 (to__ self) true false
+  true) :pattern ((to__ self)) )))
 
 ;; to____def_axiom
   (assert
   (forall ((self us_rep1))
-  (! (=> (to____function_guard (to__ self) self)
-     (= (to__ self) (to_rep1
+  (! (= (to__ self) (to_rep1
                     (rec__model__uml_transition__to_data
-                    (us_split_fields3 self))))) :pattern ((to__ self)) )))
+                    (us_split_fields3 self)))) :pattern ((to__ self)) )))
 
 (declare-fun dummy5 () (Array Int us_rep))
 
@@ -708,10 +699,9 @@
 ;; owned_state__def_axiom
   (assert
   (forall ((self us_rep2))
-  (! (=> (owned_state__function_guard (owned_state self) self)
-     (= (owned_state self) (rec__model__uml_state_machine__owned_state_data
-                           (us_split_fields5 self)))) :pattern ((owned_state
-                                                                self)) )))
+  (! (= (owned_state self) (rec__model__uml_state_machine__owned_state_data
+                           (us_split_fields5 self))) :pattern ((owned_state
+                                                               self)) )))
 
 (declare-fun owned_transition (us_rep2) (Array Int us_rep1))
 
@@ -724,10 +714,9 @@
 ;; owned_transition__def_axiom
   (assert
   (forall ((self us_rep2))
-  (! (=> (owned_transition__function_guard (owned_transition self) self)
-     (= (owned_transition self) (rec__model__uml_state_machine__owned_transition_data
-                                (us_split_fields5 self)))) :pattern (
-  (owned_transition self)) )))
+  (! (= (owned_transition self) (rec__model__uml_state_machine__owned_transition_data
+                                (us_split_fields5 self))) :pattern ((owned_transition
+                                                                    self)) )))
 
 (declare-datatypes ()
 ((us_split_fields6
@@ -914,18 +903,15 @@
 
 ;; name__2__post_axiom
   (assert
-  (forall ((self us_rep3))
-  (! (let ((result (name__2 self)))
-     (=> (name__2__function_guard result self) (dynamic_invariant result true
-     false true))) :pattern ((name__2 self)) )))
+  (forall ((self us_rep3)) (! (dynamic_invariant (name__2 self) true false
+  true) :pattern ((name__2 self)) )))
 
 ;; name__2__def_axiom
   (assert
   (forall ((self us_rep3))
-  (! (=> (name__2__function_guard (name__2 self) self)
-     (= (name__2 self) (to_rep
+  (! (= (name__2 self) (to_rep
                        (rec__model__uml_action__name_data
-                       (us_split_fields7 self))))) :pattern ((name__2 self)) )))
+                       (us_split_fields7 self)))) :pattern ((name__2 self)) )))
 
 (declare-fun to_rep2 (uml_action_access) Int)
 
@@ -1159,27 +1145,24 @@
 
 (declare-fun from__2__function_guard (Int us_rep4) Bool)
 
-(define-fun dynamic_invariant2 ((temp___expr_257 Int)
-  (temp___is_init_254 Bool) (temp___skip_constant_255 Bool)
-  (temp___do_toplevel_256 Bool)) Bool (=>
-                                      (or (= temp___is_init_254 true)
+(define-fun dynamic_invariant2 ((temp___expr_253 Int)
+  (temp___is_init_250 Bool) (temp___skip_constant_251 Bool)
+  (temp___do_toplevel_252 Bool)) Bool (=>
+                                      (or (= temp___is_init_250 true)
                                       (<= 0 100)) (in_range4
-                                      temp___expr_257)))
+                                      temp___expr_253)))
 
 ;; from__2__post_axiom
   (assert
-  (forall ((self us_rep4))
-  (! (let ((result (from__2 self)))
-     (=> (from__2__function_guard result self) (dynamic_invariant2 result
-     true false true))) :pattern ((from__2 self)) )))
+  (forall ((self us_rep4)) (! (dynamic_invariant2 (from__2 self) true false
+  true) :pattern ((from__2 self)) )))
 
 ;; from__2__def_axiom
   (assert
   (forall ((self us_rep4))
-  (! (=> (from__2__function_guard (from__2 self) self)
-     (= (from__2 self) (to_rep2
+  (! (= (from__2 self) (to_rep2
                        (rec__model__uml_control_flow__from_data
-                       (us_split_fields9 self))))) :pattern ((from__2 self)) )))
+                       (us_split_fields9 self)))) :pattern ((from__2 self)) )))
 
 (declare-fun to__2 (us_rep4) Int)
 
@@ -1187,18 +1170,15 @@
 
 ;; to__2__post_axiom
   (assert
-  (forall ((self us_rep4))
-  (! (let ((result (to__2 self)))
-     (=> (to__2__function_guard result self) (dynamic_invariant2 result true
-     false true))) :pattern ((to__2 self)) )))
+  (forall ((self us_rep4)) (! (dynamic_invariant2 (to__2 self) true false
+  true) :pattern ((to__2 self)) )))
 
 ;; to__2__def_axiom
   (assert
   (forall ((self us_rep4))
-  (! (=> (to__2__function_guard (to__2 self) self)
-     (= (to__2 self) (to_rep2
+  (! (= (to__2 self) (to_rep2
                      (rec__model__uml_control_flow__to_data
-                     (us_split_fields9 self))))) :pattern ((to__2 self)) )))
+                     (us_split_fields9 self)))) :pattern ((to__2 self)) )))
 
 (declare-fun dummy12 () (Array Int us_rep3))
 
@@ -1380,10 +1360,9 @@
 ;; owned_action__def_axiom
   (assert
   (forall ((self us_rep5))
-  (! (=> (owned_action__function_guard (owned_action self) self)
-     (= (owned_action self) (rec__model__uml_activity__owned_action_data
-                            (us_split_fields11 self)))) :pattern ((owned_action
-                                                                  self)) )))
+  (! (= (owned_action self) (rec__model__uml_activity__owned_action_data
+                            (us_split_fields11 self))) :pattern ((owned_action
+                                                                 self)) )))
 
 (declare-fun owned_flow (us_rep5) (Array Int us_rep4))
 
@@ -1395,10 +1374,9 @@
 ;; owned_flow__def_axiom
   (assert
   (forall ((self us_rep5))
-  (! (=> (owned_flow__function_guard (owned_flow self) self)
-     (= (owned_flow self) (rec__model__uml_activity__owned_flow_data
-                          (us_split_fields11 self)))) :pattern ((owned_flow
-                                                                self)) )))
+  (! (= (owned_flow self) (rec__model__uml_activity__owned_flow_data
+                          (us_split_fields11 self))) :pattern ((owned_flow
+                                                               self)) )))
 
 (declare-fun sm () us_rep2)
 
@@ -1480,12 +1458,12 @@
   (= no_uml_control_flow (mk___rep4
                          (mk___split_fields4 (of_rep2 0) (of_rep2 0)))))
 
-(define-fun dynamic_invariant4 ((temp___expr_281 Int)
-  (temp___is_init_278 Bool) (temp___skip_constant_279 Bool)
-  (temp___do_toplevel_280 Bool)) Bool (=>
-                                      (or (= temp___is_init_278 true)
+(define-fun dynamic_invariant4 ((temp___expr_277 Int)
+  (temp___is_init_274 Bool) (temp___skip_constant_275 Bool)
+  (temp___do_toplevel_276 Bool)) Bool (=>
+                                      (or (= temp___is_init_274 true)
                                       (<= 0 100)) (in_range5
-                                      temp___expr_281)))
+                                      temp___expr_277)))
 
 ;; no_uml_control_flow_vector__def_axiom
   (assert
@@ -1512,11 +1490,11 @@
 
 (declare-fun model__transform__L_1__R1b__assume () (Array Int us_rep))
 
-(declare-fun temp___502 () (Array Int us_rep3))
+(declare-fun temp___436 () (Array Int us_rep3))
 
-(declare-fun temp___501 () Int)
+(declare-fun temp___435 () Int)
 
-(declare-fun temp___500 () (Array Int us_rep))
+(declare-fun temp___434 () (Array Int us_rep))
 
 (declare-fun o () name_t)
 
@@ -1532,13 +1510,13 @@
 
 (declare-fun model__transform__L_2__R7b__assume () (Array Int us_rep1))
 
-(declare-fun temp___515 () (Array Int us_rep1))
+(declare-fun temp___443 () (Array Int us_rep1))
 
 (declare-fun o6 () us_rep1)
 
 (declare-fun o7 () Int)
 
-(declare-fun temp___516 () (Array Int us_rep1))
+(declare-fun temp___444 () (Array Int us_rep1))
 
 (declare-fun o8 () us_rep1)
 
@@ -1659,46 +1637,12 @@
 
 ;; H
   (assert
-  (and
   (and (= model__transform__L_1__R1b__assume (owned_state sm))
-  (owned_state__function_guard model__transform__L_1__R1b__assume sm))
   (= model__transform__L_1__R1b__assume (rec__model__uml_state_machine__owned_state_data
                                         (us_split_fields5 sm)))))
 
 ;; H
   (assert (= model__transform__L_1__R1b__assume r1b))
-
-;; H
-  (assert (owned_state__function_guard (owned_state sm) sm))
-
-;; H
-  (assert (owned_state__function_guard (owned_state sm) sm))
-
-;; H
-  (assert
-  (forall ((t Int)) (name__function_guard (name (select (owned_state sm) t))
-  (select (owned_state sm) t))))
-
-;; H
-  (assert
-  (forall ((t Int)) (name__2__function_guard (name__2 (select av2 t))
-  (select av2 t))))
-
-;; H
-  (assert (owned_state__function_guard (owned_state sm) sm))
-
-;; H
-  (assert (owned_state__function_guard (owned_state sm) sm))
-
-;; H
-  (assert
-  (forall ((t Int)) (name__function_guard (name (select (owned_state sm) t))
-  (select (owned_state sm) t))))
-
-;; H
-  (assert
-  (forall ((t Int)) (name__2__function_guard (name__2 (select av2 t))
-  (select av2 t))))
 
 ;; H
   (assert (= result3 (mk_int__ref s)))
@@ -1707,10 +1651,10 @@
   (assert (= s2 0))
 
 ;; H
-  (assert (=> (and (<= 0 s2) (<= s2 100)) (= temp___502 av1)))
+  (assert (=> (and (<= 0 s2) (<= s2 100)) (= temp___436 av1)))
 
 ;; H
-  (assert (=> (and (<= 0 s2) (<= s2 100)) (= temp___501 s2)))
+  (assert (=> (and (<= 0 s2) (<= s2 100)) (= temp___435 s2)))
 
 ;; H
   (assert
@@ -1727,20 +1671,17 @@
 ;; H
   (assert
   (=> (and (<= 0 s2) (<= s2 100))
-  (and
-  (and (= temp___500 (owned_state sm)) (owned_state__function_guard
-  temp___500 sm))
-  (= temp___500 (rec__model__uml_state_machine__owned_state_data
+  (and (= temp___434 (owned_state sm))
+  (= temp___434 (rec__model__uml_state_machine__owned_state_data
                 (us_split_fields5 sm))))))
 
 ;; H
-  (assert (=> (and (<= 0 s2) (<= s2 100)) (= o10 (select temp___500 s3))))
+  (assert (=> (and (<= 0 s2) (<= s2 100)) (= o10 (select temp___434 s3))))
 
 ;; H
   (assert
   (=> (and (<= 0 s2) (<= s2 100))
-  (and (and (= o1 (name o10)) (name__function_guard o1 o10))
-  (and (in_range1 o1) (= o1 (to_rep o))))))
+  (and (= o1 (name o10)) (and (in_range1 o1) (= o1 (to_rep o))))))
 
 ;; H
   (assert (=> (and (<= 0 s2) (<= s2 100)) (= (to_rep o2) o1)))
@@ -1803,10 +1744,7 @@
 
 ;; H
   (assert
-  (and
   (and (= model__transform__L_2__R7b__assume (owned_transition sm))
-  (owned_transition__function_guard model__transform__L_2__R7b__assume 
-  sm))
   (= model__transform__L_2__R7b__assume (rec__model__uml_state_machine__owned_transition_data
                                         (us_split_fields5 sm)))))
 
@@ -1826,106 +1764,6 @@
   (assert (<= s8 100))
 
 ;; H
-  (assert (owned_state__function_guard (owned_state sm) sm))
-
-;; H
-  (assert (owned_transition__function_guard (owned_transition sm) sm))
-
-;; H
-  (assert (owned_transition__function_guard (owned_transition sm) sm))
-
-;; H
-  (assert
-  (forall ((t Int)) (from__function_guard
-  (from (select (owned_transition sm) t)) (select (owned_transition sm) t))))
-
-;; H
-  (assert (owned_state__function_guard (owned_state sm) sm))
-
-;; H
-  (assert (owned_transition__function_guard (owned_transition sm) sm))
-
-;; H
-  (assert (owned_transition__function_guard (owned_transition sm) sm))
-
-;; H
-  (assert
-  (forall ((t Int)) (from__function_guard
-  (from (select (owned_transition sm) t)) (select (owned_transition sm) t))))
-
-;; H
-  (assert
-  (forall ((t Int)) (name__function_guard
-  (name (select (owned_state sm) (from (select (owned_transition sm) t))))
-  (select (owned_state sm) (from (select (owned_transition sm) t))))))
-
-;; H
-  (assert
-  (forall ((t Int)) (from__2__function_guard (from__2 (select cfv2 t))
-  (select cfv2 t))))
-
-;; H
-  (assert
-  (forall ((t Int)) (from__2__function_guard (from__2 (select cfv2 t))
-  (select cfv2 t))))
-
-;; H
-  (assert
-  (forall ((t Int)) (name__2__function_guard
-  (name__2 (select (map__content2 av6) (from__2 (select cfv2 t))))
-  (select (map__content2 av6) (from__2 (select cfv2 t))))))
-
-;; H
-  (assert (owned_state__function_guard (owned_state sm) sm))
-
-;; H
-  (assert (owned_transition__function_guard (owned_transition sm) sm))
-
-;; H
-  (assert (owned_transition__function_guard (owned_transition sm) sm))
-
-;; H
-  (assert
-  (forall ((t Int)) (to____function_guard
-  (to__ (select (owned_transition sm) t)) (select (owned_transition sm) t))))
-
-;; H
-  (assert (owned_state__function_guard (owned_state sm) sm))
-
-;; H
-  (assert (owned_transition__function_guard (owned_transition sm) sm))
-
-;; H
-  (assert (owned_transition__function_guard (owned_transition sm) sm))
-
-;; H
-  (assert
-  (forall ((t Int)) (to____function_guard
-  (to__ (select (owned_transition sm) t)) (select (owned_transition sm) t))))
-
-;; H
-  (assert
-  (forall ((t Int)) (name__function_guard
-  (name (select (owned_state sm) (to__ (select (owned_transition sm) t))))
-  (select (owned_state sm) (to__ (select (owned_transition sm) t))))))
-
-;; H
-  (assert
-  (forall ((t Int)) (to__2__function_guard (to__2 (select cfv2 t))
-  (select cfv2 t))))
-
-;; H
-  (assert
-  (forall ((t Int)) (to__2__function_guard (to__2 (select cfv2 t))
-  (select cfv2 t))))
-
-;; H
-  (assert
-  (forall ((t Int)) (name__2__function_guard
-  (name__2 (select (map__content2 av6) (to__2 (select cfv2 t))))
-  (select (map__content2 av6) (to__2 (select cfv2 t))))))
-
-;; H
   (assert
   (forall ((t Int))
   (=> (and (<= 0 t) (<= t (- s9 1)))
@@ -1936,52 +1774,20 @@
   (name__2 (select (map__content2 av6) (to__2 (select cfv2 t)))))))))
 
 ;; H
-  (assert (from__2__function_guard
-  (from__2 (mk___rep4 model__set_from__2__self__fields))
-  (mk___rep4 model__set_from__2__self__fields)))
-
-;; H
-  (assert (to__2__function_guard
-  (to__2 (mk___rep4 model__set_from__2__self__fields))
-  (mk___rep4 model__set_from__2__self__fields)))
-
-;; H
-  (assert (to__2__function_guard
-  (to__2 (mk___rep4 (us_split_fields9 (select cfv2 s9))))
-  (mk___rep4 (us_split_fields9 (select cfv2 s9)))))
-
-;; H
-  (assert (to__2__function_guard
-  (to__2 (mk___rep4 model__set_to__2__self__fields))
-  (mk___rep4 model__set_to__2__self__fields)))
-
-;; H
-  (assert (from__2__function_guard
-  (from__2 (mk___rep4 model__set_to__2__self__fields))
-  (mk___rep4 model__set_to__2__self__fields)))
-
-;; H
-  (assert (from__2__function_guard
-  (from__2 (mk___rep4 (us_split_fields9 (select cfv3 s9))))
-  (mk___rep4 (us_split_fields9 (select cfv3 s9)))))
-
-;; H
   (assert (and (=> (<= 0 100) (in_range7 s9)) (and (<= 0 s9) (<= s9 100))))
 
 ;; H
   (assert
-  (and
-  (and (= temp___515 (owned_transition sm)) (owned_transition__function_guard
-  temp___515 sm))
-  (= temp___515 (rec__model__uml_state_machine__owned_transition_data
+  (and (= temp___443 (owned_transition sm))
+  (= temp___443 (rec__model__uml_state_machine__owned_transition_data
                 (us_split_fields5 sm)))))
 
 ;; H
-  (assert (= o6 (select temp___515 s9)))
+  (assert (= o6 (select temp___443 s9)))
 
 ;; H
   (assert
-  (and (and (= o7 (from o6)) (from__function_guard o7 o6))
+  (and (= o7 (from o6))
   (and (in_range2 o7)
   (= o7 (to_rep1
         (rec__model__uml_transition__from_data (us_split_fields3 o6)))))))
@@ -2004,18 +1810,16 @@
 
 ;; H
   (assert
-  (and
-  (and (= temp___516 (owned_transition sm)) (owned_transition__function_guard
-  temp___516 sm))
-  (= temp___516 (rec__model__uml_state_machine__owned_transition_data
+  (and (= temp___444 (owned_transition sm))
+  (= temp___444 (rec__model__uml_state_machine__owned_transition_data
                 (us_split_fields5 sm)))))
 
 ;; H
-  (assert (= o8 (select temp___516 s9)))
+  (assert (= o8 (select temp___444 s9)))
 
 ;; H
   (assert
-  (and (and (= o9 (to__ o8)) (to____function_guard o9 o8))
+  (and (= o9 (to__ o8))
   (and (in_range2 o9)
   (= o9 (to_rep1 (rec__model__uml_transition__to_data (us_split_fields3 o8)))))))
 
@@ -2069,51 +1873,6 @@
 
 ;; H
   (assert (<= t (- (int__content s11) 1)))
-
-;; H
-  (assert (owned_state__function_guard (owned_state sm) sm))
-
-;; H
-  (assert (owned_transition__function_guard (owned_transition sm) sm))
-
-;; H
-  (assert (owned_transition__function_guard (owned_transition sm) sm))
-
-;; H
-  (assert (from__function_guard (from (select (owned_transition sm) t))
-  (select (owned_transition sm) t)))
-
-;; H
-  (assert (owned_state__function_guard (owned_state sm) sm))
-
-;; H
-  (assert (owned_transition__function_guard (owned_transition sm) sm))
-
-;; H
-  (assert (owned_transition__function_guard (owned_transition sm) sm))
-
-;; H
-  (assert (from__function_guard (from (select (owned_transition sm) t))
-  (select (owned_transition sm) t)))
-
-;; H
-  (assert (name__function_guard
-  (name (select (owned_state sm) (from (select (owned_transition sm) t))))
-  (select (owned_state sm) (from (select (owned_transition sm) t)))))
-
-;; H
-  (assert (from__2__function_guard (from__2 (select (map__content3 cfv5) t))
-  (select (map__content3 cfv5) t)))
-
-;; H
-  (assert (from__2__function_guard (from__2 (select (map__content3 cfv5) t))
-  (select (map__content3 cfv5) t)))
-
-;; H
-  (assert (name__2__function_guard
-  (name__2
-  (select (map__content2 av6) (from__2 (select (map__content3 cfv5) t))))
-  (select (map__content2 av6) (from__2 (select (map__content3 cfv5) t)))))
 
 (assert
 ;; WP_parameter_def

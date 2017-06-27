@@ -82,10 +82,9 @@
 
 ;; ghost_func__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (ghost_func us_void_param)))
-     (=> (ghost_func__function_guard result us_void_param) (dynamic_invariant
-     result true false true))) :pattern ((ghost_func us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant
+  (ghost_func us_void_param) true false
+  true) :pattern ((ghost_func us_void_param)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -114,11 +113,11 @@
 
 (declare-fun i () Int)
 
-(declare-fun temp___141 () Int)
+(declare-fun temp___135 () Int)
 
-(declare-fun temp___140 () Int)
+(declare-fun temp___134 () Int)
 
-(declare-fun temp___143 () Int)
+(declare-fun temp___136 () Int)
 
 (declare-fun o () Int)
 
@@ -136,11 +135,11 @@
 
 (declare-fun i2 () Int)
 
-(declare-fun temp___1431 () Int)
+(declare-fun temp___1361 () Int)
 
 (declare-fun result2 () Int)
 
-(declare-fun temp___1432 () Int)
+(declare-fun temp___1362 () Int)
 
 (declare-fun formal4 () Int)
 
@@ -176,25 +175,7 @@
   (assert (in_range1 formal))
 
 ;; H
-  (assert (ghost_func__function_guard (ghost_func Tuple0) Tuple0))
-
-;; H
   (assert (= formal (ghost_func Tuple0)))
-
-;; H
-  (assert (ghost_func__function_guard (ghost_func Tuple0) Tuple0))
-
-;; H
-  (assert (ghost_func__function_guard (ghost_func Tuple0) Tuple0))
-
-;; H
-  (assert (ghost_func__function_guard (ghost_func Tuple0) Tuple0))
-
-;; H
-  (assert (ghost_func__function_guard (ghost_func Tuple0) Tuple0))
-
-;; H
-  (assert (ghost_func__function_guard (ghost_func Tuple0) Tuple0))
 
 ;; H
   (assert (< 0 (+ formal (ghost_func Tuple0))))
@@ -209,13 +190,13 @@
   (assert (= i1 1))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 2)) (= temp___141 i1)))
+  (assert (=> (and (<= 1 i1) (<= i1 2)) (= temp___135 i1)))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 2)) (= temp___140 formal)))
+  (assert (=> (and (<= 1 i1) (<= i1 2)) (= temp___134 formal)))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 2)) (= 0 temp___143)))
+  (assert (=> (and (<= 1 i1) (<= i1 2)) (= 0 temp___136)))
 
 ;; H
   (assert
@@ -239,12 +220,12 @@
   (and (<= 1 i2) (<= i2 2)))))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 2)) (= temp___1431 result2)))
+  (assert (=> (and (<= 1 i1) (<= i1 2)) (= temp___1361 result2)))
 
 ;; H
   (assert
   (=> (and (<= 1 i1) (<= i1 2))
-  (= temp___1432 (+ formal3 (ghost_func Tuple0)))))
+  (= temp___1362 (+ formal3 (ghost_func Tuple0)))))
 
 ;; H
   (assert (=> (and (<= 1 i1) (<= i1 2)) (= i2 2)))
@@ -298,16 +279,10 @@
   (assert (= formal9 formal7))
 
 ;; H
-  (assert (ghost_func__function_guard (ghost_func Tuple0) Tuple0))
-
-;; H
   (assert (=> (= (= formal 0) true) (= formal8 (ghost_func Tuple0))))
 
 ;; H
   (assert (not (= (= formal 0) true)))
-
-;; H
-  (assert (ghost_func__function_guard (ghost_func Tuple0) Tuple0))
 
 (assert
 ;; WP_parameter_def

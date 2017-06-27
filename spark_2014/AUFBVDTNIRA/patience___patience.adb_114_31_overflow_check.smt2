@@ -894,8 +894,7 @@
 ;; inv__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (inv__function_guard (inv s) s)
-     (= (= (inv s) true)
+  (! (= (= (inv s) true)
      (and
      (and
      (and
@@ -1145,7 +1144,7 @@
                                                          (let ((temp___351 
                                                          (rec__patience__state__posstack
                                                          (us_split_fields1 s))))
-                                                         (select temp___351 i))) 1)))))))))) :pattern (
+                                                         (select temp___351 i))) 1))))))))) :pattern (
   (inv s)) )))
 
 (declare-fun c () Int)
@@ -1190,13 +1189,13 @@
 
 (declare-fun topstacki () Int)
 
-(declare-fun temp___571 () Int)
-
-(declare-fun temp___570 () Int)
-
-(declare-fun temp___569 () Int)
-
 (declare-fun temp___568 () Int)
+
+(declare-fun temp___567 () Int)
+
+(declare-fun temp___566 () Int)
+
+(declare-fun temp___565 () Int)
 
 (declare-fun o () Int)
 
@@ -1206,7 +1205,7 @@
 
 (declare-fun o3 () Int)
 
-(declare-fun temp___538 () (Array Int cardindex))
+(declare-fun temp___535 () (Array Int cardindex))
 
 (declare-fun o4 () Int)
 
@@ -1244,21 +1243,21 @@
 
 (declare-fun o21 () (Array Int cardindex))
 
-(declare-fun temp___587 () cardindex)
+(declare-fun temp___584 () cardindex)
 
-(declare-fun temp___5871 () (Array Int card))
+(declare-fun temp___5841 () (Array Int card))
 
-(declare-fun temp___5872 () cardindex)
+(declare-fun temp___5842 () cardindex)
 
-(declare-fun temp___5873 () (Array Int cardindex))
+(declare-fun temp___5843 () (Array Int cardindex))
 
-(declare-fun temp___5874 () (Array Int (Array Int cardindex)))
+(declare-fun temp___5844 () (Array Int (Array Int cardindex)))
 
-(declare-fun temp___5875 () (Array Int cardindex))
+(declare-fun temp___5845 () (Array Int cardindex))
 
-(declare-fun temp___5876 () (Array Int cardindex))
+(declare-fun temp___5846 () (Array Int cardindex))
 
-(declare-fun temp___5877 () (Array Int cardindex))
+(declare-fun temp___5847 () (Array Int cardindex))
 
 (declare-fun o22 () Int)
 
@@ -1282,21 +1281,21 @@
 
 (declare-fun o32 () (Array Int cardindex))
 
-(declare-fun temp___589 () cardindex)
+(declare-fun temp___586 () cardindex)
 
-(declare-fun temp___5891 () (Array Int card))
+(declare-fun temp___5861 () (Array Int card))
 
-(declare-fun temp___5892 () cardindex)
+(declare-fun temp___5862 () cardindex)
 
-(declare-fun temp___5893 () (Array Int cardindex))
+(declare-fun temp___5863 () (Array Int cardindex))
 
-(declare-fun temp___5894 () (Array Int (Array Int cardindex)))
+(declare-fun temp___5864 () (Array Int (Array Int cardindex)))
 
-(declare-fun temp___5895 () (Array Int cardindex))
+(declare-fun temp___5865 () (Array Int cardindex))
 
-(declare-fun temp___5896 () (Array Int cardindex))
+(declare-fun temp___5866 () (Array Int cardindex))
 
-(declare-fun temp___5897 () (Array Int cardindex))
+(declare-fun temp___5867 () (Array Int cardindex))
 
 (declare-fun o33 () Int)
 
@@ -1322,21 +1321,21 @@
 
 (declare-fun o44 () (Array Int cardindex))
 
-(declare-fun temp___592 () cardindex)
+(declare-fun temp___589 () cardindex)
 
-(declare-fun temp___5921 () (Array Int card))
+(declare-fun temp___5891 () (Array Int card))
 
-(declare-fun temp___5922 () cardindex)
+(declare-fun temp___5892 () cardindex)
 
-(declare-fun temp___5923 () (Array Int cardindex))
+(declare-fun temp___5893 () (Array Int cardindex))
 
-(declare-fun temp___5924 () (Array Int (Array Int cardindex)))
+(declare-fun temp___5894 () (Array Int (Array Int cardindex)))
 
-(declare-fun temp___5925 () (Array Int cardindex))
+(declare-fun temp___5895 () (Array Int cardindex))
 
-(declare-fun temp___5926 () (Array Int cardindex))
+(declare-fun temp___5896 () (Array Int cardindex))
 
-(declare-fun temp___5927 () (Array Int cardindex))
+(declare-fun temp___5897 () (Array Int cardindex))
 
 (declare-fun o45 () Int)
 
@@ -1358,21 +1357,21 @@
 
 (declare-fun o54 () (Array Int cardindex))
 
-(declare-fun temp___609 () cardindex)
+(declare-fun temp___606 () cardindex)
 
-(declare-fun temp___6091 () (Array Int card))
+(declare-fun temp___6061 () (Array Int card))
 
-(declare-fun temp___6092 () cardindex)
+(declare-fun temp___6062 () cardindex)
 
-(declare-fun temp___6093 () (Array Int cardindex))
+(declare-fun temp___6063 () (Array Int cardindex))
 
-(declare-fun temp___6094 () (Array Int (Array Int cardindex)))
+(declare-fun temp___6064 () (Array Int (Array Int cardindex)))
 
-(declare-fun temp___6095 () (Array Int cardindex))
+(declare-fun temp___6065 () (Array Int cardindex))
 
-(declare-fun temp___6096 () (Array Int cardindex))
+(declare-fun temp___6066 () (Array Int cardindex))
 
-(declare-fun temp___6097 () (Array Int cardindex))
+(declare-fun temp___6067 () (Array Int cardindex))
 
 (declare-fun o55 () cardindex)
 
@@ -1396,21 +1395,21 @@
 
 (declare-fun o65 () (Array Int cardindex))
 
-(declare-fun temp___612 () cardindex)
+(declare-fun temp___609 () cardindex)
 
-(declare-fun temp___6121 () (Array Int card))
+(declare-fun temp___6091 () (Array Int card))
 
-(declare-fun temp___6122 () cardindex)
+(declare-fun temp___6092 () cardindex)
 
-(declare-fun temp___6123 () (Array Int cardindex))
+(declare-fun temp___6093 () (Array Int cardindex))
 
-(declare-fun temp___6124 () (Array Int (Array Int cardindex)))
+(declare-fun temp___6094 () (Array Int (Array Int cardindex)))
 
-(declare-fun temp___6125 () (Array Int cardindex))
+(declare-fun temp___6095 () (Array Int cardindex))
 
-(declare-fun temp___6126 () (Array Int cardindex))
+(declare-fun temp___6096 () (Array Int cardindex))
 
-(declare-fun temp___6127 () (Array Int cardindex))
+(declare-fun temp___6097 () (Array Int cardindex))
 
 (declare-fun o66 () Int)
 
@@ -1424,7 +1423,7 @@
 
 (declare-fun o71 () us_split_fields)
 
-(declare-fun temp___617 () us_rep)
+(declare-fun temp___614 () us_rep)
 
 (declare-fun o72 () Int)
 
@@ -1436,7 +1435,7 @@
 
 (declare-fun o76 () us_split_fields)
 
-(declare-fun temp___620 () us_rep)
+(declare-fun temp___617 () us_rep)
 
 (declare-fun o77 () cardindex)
 
@@ -1446,7 +1445,7 @@
 
 (declare-fun o80 () us_split_fields)
 
-(declare-fun temp___623 () us_rep)
+(declare-fun temp___620 () us_rep)
 
 (declare-fun o81 () Int)
 
@@ -1464,7 +1463,7 @@
 
 (declare-fun o88 () us_split_fields)
 
-(declare-fun temp___596 () us_rep)
+(declare-fun temp___593 () us_rep)
 
 (declare-fun o89 () Int)
 
@@ -1480,7 +1479,7 @@
 
 (declare-fun o95 () us_split_fields)
 
-(declare-fun temp___601 () us_rep)
+(declare-fun temp___598 () us_rep)
 
 (declare-fun o96 () Int)
 
@@ -1492,7 +1491,7 @@
 
 (declare-fun o100 () us_split_fields)
 
-(declare-fun temp___604 () us_rep)
+(declare-fun temp___601 () us_rep)
 
 (declare-fun o101 () cardindex)
 
@@ -1502,7 +1501,7 @@
 
 (declare-fun o104 () us_split_fields)
 
-(declare-fun temp___607 () us_rep)
+(declare-fun temp___604 () us_rep)
 
 (declare-fun i1 () Int)
 
@@ -1692,18 +1691,6 @@
   (assert (in_range2 c))
 
 ;; H
-  (assert (inv__function_guard
-  (inv
-  (mk___rep
-  (mk___split_fields s__split_fields s__split_fields1 s__split_fields2
-  s__split_fields3 s__split_fields4 s__split_fields5 s__split_fields6
-  s__split_fields7)))
-  (mk___rep
-  (mk___split_fields s__split_fields s__split_fields1 s__split_fields2
-  s__split_fields3 s__split_fields4 s__split_fields5 s__split_fields6
-  s__split_fields7))))
-
-;; H
   (assert
   (and
   (= (inv
@@ -1741,16 +1728,16 @@
   (assert (= i2 0))
 
 ;; H
-  (assert (=> (< i2 (to_rep1 s__split_fields2)) (= temp___571 topstacki)))
+  (assert (=> (< i2 (to_rep1 s__split_fields2)) (= temp___568 topstacki)))
 
 ;; H
-  (assert (=> (< i2 (to_rep1 s__split_fields2)) (= temp___570 stackisize)))
+  (assert (=> (< i2 (to_rep1 s__split_fields2)) (= temp___567 stackisize)))
 
 ;; H
-  (assert (=> (< i2 (to_rep1 s__split_fields2)) (= temp___569 i2)))
+  (assert (=> (< i2 (to_rep1 s__split_fields2)) (= temp___566 i2)))
 
 ;; H
-  (assert (=> (< i2 (to_rep1 s__split_fields2)) (= temp___568 pred1)))
+  (assert (=> (< i2 (to_rep1 s__split_fields2)) (= temp___565 pred1)))
 
 ;; H
   (assert
@@ -1813,7 +1800,7 @@
 ;; H
   (assert
   (=> (< i2 (to_rep1 s__split_fields2))
-  (= temp___538 (select s__split_fields4 o3))))
+  (= temp___535 (select s__split_fields4 o3))))
 
 ;; H
   (assert
@@ -1825,7 +1812,7 @@
 
 ;; H
   (assert
-  (=> (< i2 (to_rep1 s__split_fields2)) (= o5 (select temp___538 o4))))
+  (=> (< i2 (to_rep1 s__split_fields2)) (= o5 (select temp___535 o4))))
 
 ;; H
   (assert (=> (< i2 (to_rep1 s__split_fields2)) (= o6 (to_rep1 o5))))
@@ -2015,28 +2002,28 @@
   (assert (= s__split_fields7 o21))
 
 ;; H
-  (assert (= temp___587 o14))
+  (assert (= temp___584 o14))
 
 ;; H
-  (assert (= temp___5871 o15))
+  (assert (= temp___5841 o15))
 
 ;; H
-  (assert (= temp___5872 o16))
+  (assert (= temp___5842 o16))
 
 ;; H
-  (assert (= temp___5873 o17))
+  (assert (= temp___5843 o17))
 
 ;; H
-  (assert (= temp___5874 o18))
+  (assert (= temp___5844 o18))
 
 ;; H
-  (assert (= temp___5875 o19))
+  (assert (= temp___5845 o19))
 
 ;; H
-  (assert (= temp___5876 o20))
+  (assert (= temp___5846 o20))
 
 ;; H
-  (assert (= temp___5877 o21))
+  (assert (= temp___5847 o21))
 
 ;; H
   (assert
@@ -2047,9 +2034,9 @@
 
 ;; H
   (assert
-  (= s__split_fields8 (mk___split_fields temp___587 temp___5871 temp___5872
-                      temp___5873 temp___5874 temp___5875 temp___5876
-                      temp___5877)))
+  (= s__split_fields8 (mk___split_fields temp___584 temp___5841 temp___5842
+                      temp___5843 temp___5844 temp___5845 temp___5846
+                      temp___5847)))
 
 ;; H
   (assert (and (= o22 (+ idx1 1)) (in_range1 (+ idx1 1))))
@@ -2085,37 +2072,37 @@
   (assert (= (rec__patience__state__preds s__split_fields8) o32))
 
 ;; H
-  (assert (= temp___589 o25))
+  (assert (= temp___586 o25))
 
 ;; H
-  (assert (= temp___5891 o26))
+  (assert (= temp___5861 o26))
 
 ;; H
-  (assert (= temp___5892 o27))
+  (assert (= temp___5862 o27))
 
 ;; H
-  (assert (= temp___5893 o28))
+  (assert (= temp___5863 o28))
 
 ;; H
-  (assert (= temp___5894 o29))
+  (assert (= temp___5864 o29))
 
 ;; H
-  (assert (= temp___5895 o30))
+  (assert (= temp___5865 o30))
 
 ;; H
-  (assert (= temp___5896 o31))
+  (assert (= temp___5866 o31))
 
 ;; H
-  (assert (= temp___5897 o32))
+  (assert (= temp___5867 o32))
 
 ;; H
   (assert (= result9 (mk___split_fields__ref s__split_fields8)))
 
 ;; H
   (assert
-  (= s__split_fields9 (mk___split_fields temp___589 temp___5891 temp___5892
-                      temp___5893 temp___5894 temp___5895 temp___5896
-                      temp___5897)))
+  (= s__split_fields9 (mk___split_fields temp___586 temp___5861 temp___5862
+                      temp___5863 temp___5864 temp___5865 temp___5866
+                      temp___5867)))
 
 ;; H
   (assert
@@ -2159,37 +2146,37 @@
   (assert (= o36 o44))
 
 ;; H
-  (assert (= temp___592 o37))
+  (assert (= temp___589 o37))
 
 ;; H
-  (assert (= temp___5921 o38))
+  (assert (= temp___5891 o38))
 
 ;; H
-  (assert (= temp___5922 o39))
+  (assert (= temp___5892 o39))
 
 ;; H
-  (assert (= temp___5923 o40))
+  (assert (= temp___5893 o40))
 
 ;; H
-  (assert (= temp___5924 o41))
+  (assert (= temp___5894 o41))
 
 ;; H
-  (assert (= temp___5925 o42))
+  (assert (= temp___5895 o42))
 
 ;; H
-  (assert (= temp___5926 o43))
+  (assert (= temp___5896 o43))
 
 ;; H
-  (assert (= temp___5927 o44))
+  (assert (= temp___5897 o44))
 
 ;; H
   (assert (= result10 (mk___split_fields__ref s__split_fields9)))
 
 ;; H
   (assert
-  (= s__split_fields10 (mk___split_fields temp___592 temp___5921 temp___5922
-                       temp___5923 temp___5924 temp___5925 temp___5926
-                       temp___5927)))
+  (= s__split_fields10 (mk___split_fields temp___589 temp___5891 temp___5892
+                       temp___5893 temp___5894 temp___5895 temp___5896
+                       temp___5897)))
 
 ;; H
   (assert
@@ -2283,56 +2270,56 @@
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= temp___609 o47)))
+  (= temp___606 o47)))
 
 ;; H
   (assert
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= temp___6091 o48)))
+  (= temp___6061 o48)))
 
 ;; H
   (assert
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= temp___6092 o49)))
+  (= temp___6062 o49)))
 
 ;; H
   (assert
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= temp___6093 o50)))
+  (= temp___6063 o50)))
 
 ;; H
   (assert
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= temp___6094 o51)))
+  (= temp___6064 o51)))
 
 ;; H
   (assert
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= temp___6095 o52)))
+  (= temp___6065 o52)))
 
 ;; H
   (assert
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= temp___6096 o53)))
+  (= temp___6066 o53)))
 
 ;; H
   (assert
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= temp___6097 o54)))
+  (= temp___6067 o54)))
 
 ;; H
   (assert
@@ -2346,9 +2333,9 @@
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= s__split_fields11 (mk___split_fields temp___609 temp___6091 temp___6092
-                       temp___6093 temp___6094 temp___6095 temp___6096
-                       temp___6097))))
+  (= s__split_fields11 (mk___split_fields temp___606 temp___6061 temp___6062
+                       temp___6063 temp___6064 temp___6065 temp___6066
+                       temp___6067))))
 
 ;; H
   (assert
@@ -2440,56 +2427,56 @@
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= temp___612 o58)))
+  (= temp___609 o58)))
 
 ;; H
   (assert
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= temp___6121 o59)))
+  (= temp___6091 o59)))
 
 ;; H
   (assert
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= temp___6122 o60)))
+  (= temp___6092 o60)))
 
 ;; H
   (assert
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= temp___6123 o61)))
+  (= temp___6093 o61)))
 
 ;; H
   (assert
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= temp___6124 o62)))
+  (= temp___6094 o62)))
 
 ;; H
   (assert
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= temp___6125 o63)))
+  (= temp___6095 o63)))
 
 ;; H
   (assert
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= temp___6126 o64)))
+  (= temp___6096 o64)))
 
 ;; H
   (assert
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= temp___6127 o65)))
+  (= temp___6097 o65)))
 
 ;; H
   (assert
@@ -2503,9 +2490,9 @@
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= s__split_fields12 (mk___split_fields temp___612 temp___6121 temp___6122
-                       temp___6123 temp___6124 temp___6125 temp___6126
-                       temp___6127))))
+  (= s__split_fields12 (mk___split_fields temp___609 temp___6091 temp___6092
+                       temp___6093 temp___6094 temp___6095 temp___6096
+                       temp___6097))))
 
 ;; H
   (assert
@@ -2569,7 +2556,7 @@
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= temp___617 (mk___rep o71))))
+  (= temp___614 (mk___rep o71))))
 
 ;; H
   (assert
@@ -2583,7 +2570,7 @@
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= s__split_fields13 (us_split_fields1 temp___617))))
+  (= s__split_fields13 (us_split_fields1 temp___614))))
 
 ;; H
   (assert
@@ -2639,7 +2626,7 @@
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= temp___620 (mk___rep o76))))
+  (= temp___617 (mk___rep o76))))
 
 ;; H
   (assert
@@ -2653,7 +2640,7 @@
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= s__split_fields14 (us_split_fields1 temp___620))))
+  (= s__split_fields14 (us_split_fields1 temp___617))))
 
 ;; H
   (assert
@@ -2702,7 +2689,7 @@
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= temp___623 (mk___rep o80))))
+  (= temp___620 (mk___rep o80))))
 
 ;; H
   (assert
@@ -2716,7 +2703,7 @@
   (=>
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10)))
-  (= s__split_fields15 (us_split_fields1 temp___623))))
+  (= s__split_fields15 (us_split_fields1 temp___620))))
 
 ;; H
   (assert
@@ -2870,7 +2857,7 @@
   (not
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10))))
-  (= temp___596 (mk___rep o88))))
+  (= temp___593 (mk___rep o88))))
 
 ;; H
   (assert
@@ -2886,7 +2873,7 @@
   (not
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10))))
-  (= s__split_fields16 (us_split_fields1 temp___596))))
+  (= s__split_fields16 (us_split_fields1 temp___593))))
 
 ;; H
   (assert
@@ -2974,7 +2961,7 @@
   (not
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10))))
-  (= temp___601 (mk___rep o95))))
+  (= temp___598 (mk___rep o95))))
 
 ;; H
   (assert
@@ -2990,7 +2977,7 @@
   (not
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10))))
-  (= s__split_fields17 (us_split_fields1 temp___601))))
+  (= s__split_fields17 (us_split_fields1 temp___598))))
 
 ;; H
   (assert
@@ -3054,7 +3041,7 @@
   (not
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10))))
-  (= temp___604 (mk___rep o100))))
+  (= temp___601 (mk___rep o100))))
 
 ;; H
   (assert
@@ -3070,7 +3057,7 @@
   (not
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10))))
-  (= s__split_fields18 (us_split_fields1 temp___604))))
+  (= s__split_fields18 (us_split_fields1 temp___601))))
 
 ;; H
   (assert
@@ -3126,7 +3113,7 @@
   (not
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10))))
-  (= temp___607 (mk___rep o104))))
+  (= temp___604 (mk___rep o104))))
 
 ;; H
   (assert
@@ -3142,7 +3129,7 @@
   (not
   (= (int__content i9) (to_rep1
                        (rec__patience__state__numstacks s__split_fields10))))
-  (= s__split_fields19 (us_split_fields1 temp___607))))
+  (= s__split_fields19 (us_split_fields1 temp___604))))
 
 ;; H
   (assert

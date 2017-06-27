@@ -129,11 +129,10 @@
      (and (dynamic_invariant x true true true) (dynamic_invariant y true true
      true))
      (let ((result (add x y)))
-     (=> (add__function_guard result x y)
      (and
      (ite (< (+ x y) 10000) (= result (+ x y))
      (=> (<= 10000 (+ x y)) (= result 10000))) (dynamic_invariant result true
-     false true))))) :pattern ((add x y)) )))
+     false true)))) :pattern ((add x y)) )))
 
 (declare-fun to_rep (my_int) Int)
 
@@ -257,33 +256,21 @@
   (assert
   (forall ((it us_rep))
   (! (let ((result (price_of_item it)))
-     (and (mult__function_guard
-     (mult (to_rep (rec__pricing__item__price (us_split_fields1 it)))
-     (to_rep (rec__pricing__item__number (us_split_fields1 it))))
-     (to_rep (rec__pricing__item__price (us_split_fields1 it)))
-     (to_rep (rec__pricing__item__number (us_split_fields1 it))))
-     (=> (price_of_item__function_guard result it)
      (and
      (= result (mult
                (to_rep (rec__pricing__item__price (us_split_fields1 it)))
                (to_rep (rec__pricing__item__number (us_split_fields1 it)))))
-     (dynamic_invariant result true false true))))) :pattern ((price_of_item
-                                                              it)) )))
+     (dynamic_invariant result true false true))) :pattern ((price_of_item
+                                                            it)) )))
 
 ;; price_of_item__def_axiom
   (assert
   (forall ((it us_rep))
-  (! (=> (price_of_item__function_guard (price_of_item it) it)
-     (and (mult__function_guard
-     (mult (to_rep (rec__pricing__item__price (us_split_fields1 it)))
-     (to_rep (rec__pricing__item__number (us_split_fields1 it))))
-     (to_rep (rec__pricing__item__price (us_split_fields1 it)))
-     (to_rep (rec__pricing__item__number (us_split_fields1 it))))
-     (= (price_of_item it) (mult
+  (! (= (price_of_item it) (mult
                            (to_rep
                            (rec__pricing__item__price (us_split_fields1 it)))
                            (to_rep
-                           (rec__pricing__item__number (us_split_fields1 it))))))) :pattern (
+                           (rec__pricing__item__number (us_split_fields1 it))))) :pattern (
   (price_of_item it)) )))
 
 (declare-datatypes ()
@@ -455,23 +442,19 @@
 (define-fun basket__ref___projection ((a basket__ref)) us_t (basket__content
                                                             a))
 
-(define-fun dynamic_invariant1 ((temp___expr_154 us_t)
-  (temp___is_init_151 Bool) (temp___skip_constant_152 Bool)
-  (temp___do_toplevel_153 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_152 true))
+(define-fun dynamic_invariant1 ((temp___expr_150 us_t)
+  (temp___is_init_147 Bool) (temp___skip_constant_148 Bool)
+  (temp___do_toplevel_149 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_148 true))
                                       (dynamic_property 1 2147483647
-                                      (first1 temp___expr_154)
-                                      (last1 temp___expr_154))))
+                                      (first1 temp___expr_150)
+                                      (last1 temp___expr_150))))
 
 (declare-fun bk () us_t)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
-
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -514,11 +497,10 @@
      (and (dynamic_invariant x true true true) (dynamic_invariant y true true
      true))
      (let ((result (mult x y)))
-     (=> (mult__function_guard result x y)
      (and
      (ite (< (* x y) 10000) (= result (* x y))
      (=> (<= 10000 (* x y)) (= result 10000))) (dynamic_invariant result true
-     false true))))) :pattern ((mult x y)) )))
+     false true)))) :pattern ((mult x y)) )))
 
 (declare-fun total () Int)
 
@@ -574,26 +556,9 @@
 
 ;; H
   (assert
-  (forall ((k Int)) (price_of_item__function_guard
-  (price_of_item (select (elts bk) k)) (select (elts bk) k))))
-
-;; H
-  (assert
   (forall ((k Int))
   (=> (and (<= (to_rep1 (first (rt bk))) k) (<= k (- it2 1)))
   (<= (price_of_item (select (elts bk) k)) total2))))
-
-;; H
-  (assert (mult__function_guard
-  (mult
-  (to_rep
-  (rec__pricing__item__price (us_split_fields1 (select (elts bk) it2))))
-  (to_rep
-  (rec__pricing__item__number (us_split_fields1 (select (elts bk) it2)))))
-  (to_rep
-  (rec__pricing__item__price (us_split_fields1 (select (elts bk) it2))))
-  (to_rep
-  (rec__pricing__item__number (us_split_fields1 (select (elts bk) it2))))))
 
 ;; H
   (assert
@@ -606,9 +571,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o (price_of_item (select (elts bk) it2)))
-  (price_of_item__function_guard o (select (elts bk) it2)))
   (and (in_range3 o)
   (= o (mult
        (to_rep
@@ -618,7 +581,7 @@
 
 ;; H
   (assert
-  (and (and (= o1 (add total2 o)) (add__function_guard o1 total2 o))
+  (and (= o1 (add total2 o))
   (and (in_range3 o1)
   (ite (= (< (+ total2 o) 10000) true) (= o1 (+ total2 o))
   (=> (= (>= (+ total2 o) 10000) true) (= o1 10000))))))
@@ -645,10 +608,6 @@
 
 ;; H
   (assert (<= k (- it3 1)))
-
-;; H
-  (assert (price_of_item__function_guard (price_of_item (select (elts bk) k))
-  (select (elts bk) k)))
 
 (assert
 ;; WP_parameter_def

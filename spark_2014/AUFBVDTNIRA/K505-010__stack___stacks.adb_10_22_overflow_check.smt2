@@ -300,8 +300,6 @@
   (! (=> (in_range x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
                                                              (of_rep2 x))) )))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -324,7 +322,7 @@
 
 (declare-fun first (t) integer)
 
-(declare-fun last1 (t) integer)
+(declare-fun last (t) integer)
 
 (declare-fun mk (Int Int) t)
 
@@ -333,7 +331,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range f)
      (=> (in_range l)
-     (and (= (to_rep2 (first (mk f l))) f) (= (to_rep2 (last1 (mk f l))) l)))) :pattern (
+     (and (= (to_rep2 (first (mk f l))) f) (= (to_rep2 (last (mk f l))) l)))) :pattern (
   (mk f l)) )))
 
 (define-fun dynamic_property1 ((range_first Int) (range_last Int) (low Int)
@@ -351,10 +349,10 @@
 
 (define-fun first1 ((a us_t)) Int (to_rep2 (first (rt a))))
 
-(define-fun last2 ((a us_t)) Int (to_rep2 (last1 (rt a))))
+(define-fun last1 ((a us_t)) Int (to_rep2 (last (rt a))))
 
-(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last2 a))
-                                  (+ (- (last2 a) (first1 a)) 1) 0))
+(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last1 a))
+                                  (+ (- (last1 a) (first1 a)) 1) 0))
 
 (declare-fun value__size () Int)
 
@@ -389,8 +387,8 @@
 
 (define-fun bool_eq6 ((x us_t)
   (y us_t)) Bool (bool_eq4 (elts x) (to_rep2 (first (rt x)))
-                 (to_rep2 (last1 (rt x))) (elts y) (to_rep2 (first (rt y)))
-                 (to_rep2 (last1 (rt y)))))
+                 (to_rep2 (last (rt x))) (elts y) (to_rep2 (first (rt y)))
+                 (to_rep2 (last (rt y)))))
 
 (declare-fun user_eq5 (us_t us_t) Bool)
 
@@ -584,14 +582,14 @@
                                       (first1
                                       (rec__stacks__stack__data
                                       (us_split_fields1 temp___expr_154)))
-                                      (last2
+                                      (last1
                                       (rec__stacks__stack__data
                                       (us_split_fields1 temp___expr_154))))
                                       (and
                                       (= (first1
                                          (rec__stacks__stack__data
                                          (us_split_fields1 temp___expr_154))) 1)
-                                      (= (last2
+                                      (= (last1
                                          (rec__stacks__stack__data
                                          (us_split_fields1 temp___expr_154))) 
                                       (to_rep3 temp___155))))))
@@ -633,18 +631,14 @@
 ;; stacks__stack__compat_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (is_full__function_guard1 (is_full1 us_tag s) us_tag s)
-     (and (is_full__function_guard (is_full s) s)
-     (= (to_int1 (is_full s)) (to_int1 (is_full1 us_tag s))))) :pattern (
+  (! (= (to_int1 (is_full s)) (to_int1 (is_full1 us_tag s))) :pattern (
   (is_full1 us_tag s)) )))
 
 ;; is_full__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (is_full__function_guard (is_full s) s)
-     (and (size__function_guard (size s) s)
-     (= (= (is_full s) true)
-     (= (size s) (to_rep3 (rec__stacks__stack__max (us_split_discrs1 s))))))) :pattern (
+  (! (= (= (is_full s) true)
+     (= (size s) (to_rep3 (rec__stacks__stack__max (us_split_discrs1 s))))) :pattern (
   (is_full s)) )))
 
 (declare-fun s__split_discrs () us_split_discrs)
@@ -681,33 +675,25 @@
 ;; size__post_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (dynamic_invariant2 s true true true)
-     (let ((result (size s)))
-     (=> (size__function_guard result s) (dynamic_invariant3 result true
-     false true)))) :pattern ((size s)) )))
+  (! (=> (dynamic_invariant2 s true true true) (dynamic_invariant3 (size s)
+     true false true)) :pattern ((size s)) )))
 
 ;; size__post__dispatch_axiom
   (assert
   (forall ((attr__tag1 Int))
   (forall ((s us_rep))
-  (! (=> (dynamic_invariant2 s true true true)
-     (let ((result (size1 attr__tag1 s)))
-     (=> (size__function_guard1 result attr__tag1 s) (dynamic_invariant3
-     result true false true)))) :pattern ((size1 attr__tag1 s)) ))))
+  (! (=> (dynamic_invariant2 s true true true) (dynamic_invariant3
+     (size1 attr__tag1 s) true false true)) :pattern ((size1 attr__tag1 s)) ))))
 
 ;; stacks__stack__compat_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (size__function_guard1 (size1 us_tag s) us_tag s)
-     (and (size__function_guard (size s) s) (= (size s) (size1 us_tag s)))) :pattern (
-  (size1 us_tag s)) )))
+  (! (= (size s) (size1 us_tag s)) :pattern ((size1 us_tag s)) )))
 
 ;; size__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=>
-     (and (dynamic_invariant2 s true true true) (size__function_guard
-     (size s) s))
+  (! (=> (dynamic_invariant2 s true true true)
      (= (size s) (to_rep (rec__stacks__stack__top (us_split_fields1 s))))) :pattern (
   (size s)) )))
 
@@ -741,16 +727,6 @@
   (assert (in_range2 mystate))
 
 ;; H
-  (assert (is_full__function_guard
-  (is_full
-  (mk___rep s__split_discrs
-  (mk___split_fields s__split_fields
-  (mk___t s__split_fields1 s__split_fields2) s__split_fields3) s__attr__tag))
-  (mk___rep s__split_discrs
-  (mk___split_fields s__split_fields
-  (mk___t s__split_fields1 s__split_fields2) s__split_fields3) s__attr__tag)))
-
-;; H
   (assert
   (not
   (= (is_full
@@ -760,28 +736,13 @@
      s__attr__tag)) true)))
 
 ;; H
-  (assert (size__function_guard
-  (size
-  (mk___rep s__split_discrs
-  (mk___split_fields s__split_fields
-  (mk___t s__split_fields1 s__split_fields2) s__split_fields3) s__attr__tag))
-  (mk___rep s__split_discrs
-  (mk___split_fields s__split_fields
-  (mk___t s__split_fields1 s__split_fields2) s__split_fields3) s__attr__tag)))
-
-;; H
   (assert
-  (and
   (and
   (= result (is_full
             (mk___rep s__split_discrs
             (mk___split_fields s__split_fields
             (mk___t s__split_fields1 s__split_fields2) s__split_fields3)
             s__attr__tag)))
-  (is_full__function_guard result
-  (mk___rep s__split_discrs
-  (mk___split_fields s__split_fields
-  (mk___t s__split_fields1 s__split_fields2) s__split_fields3) s__attr__tag)))
   (= (= result true)
   (= (size
      (mk___rep s__split_discrs

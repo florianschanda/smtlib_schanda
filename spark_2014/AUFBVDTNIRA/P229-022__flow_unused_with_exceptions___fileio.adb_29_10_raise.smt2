@@ -327,10 +327,8 @@
 ;; ferror__post_axiom
   (assert
   (forall ((stream Int))
-  (! (=> (dynamic_invariant2 stream true true true)
-     (let ((result (ferror stream)))
-     (=> (ferror__function_guard result stream) (dynamic_invariant1 result
-     true false true)))) :pattern ((ferror stream)) )))
+  (! (=> (dynamic_invariant2 stream true true true) (dynamic_invariant1
+     (ferror stream) true false true)) :pattern ((ferror stream)) )))
 
 (declare-datatypes ()
 ((us_split_fields
@@ -528,11 +526,8 @@
   (assert
   (=> (= ch1 eof)
   (and
-  (and
   (= o (ferror
        (to_rep1 (rec__fileio__file_type__descr (us_split_fields1 file)))))
-  (ferror__function_guard o
-  (to_rep1 (rec__fileio__file_type__descr (us_split_fields1 file)))))
   (in_range3 o))))
 
 ;; H

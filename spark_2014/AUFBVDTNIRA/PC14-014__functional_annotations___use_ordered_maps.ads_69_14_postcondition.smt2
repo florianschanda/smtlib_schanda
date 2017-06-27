@@ -1088,11 +1088,11 @@
 
 (declare-fun use_ordered_maps__are_disjoint__cu__assume () count_type)
 
-(declare-fun temp___817 () count_type)
+(declare-fun temp___762 () count_type)
 
 (declare-fun o () Int)
 
-(declare-fun temp___816 () count_type)
+(declare-fun temp___761 () count_type)
 
 (declare-fun o1 () Bool)
 
@@ -1169,8 +1169,8 @@
 (define-fun cu__split_fields14 () us_split_fields2 (mk___split_fields1
                                                    cu__split_fields1))
 
-(define-fun temp___8161 () us_rep1 (mk___rep1
-                                   (mk___split_fields1 temp___816)))
+(define-fun temp___7611 () us_rep1 (mk___rep1
+                                   (mk___split_fields1 temp___761)))
 
 (define-fun use_ordered_maps__are_disjoint__cu__assume1 () us_rep1 (mk___rep1
                                                                    (mk___split_fields1
@@ -1213,7 +1213,7 @@
   (= (= result1 true)
   (= (has_key1 (positions s1) (mk___rep1 cu__split_fields14)) true)))
   (and (= result1 true)
-  (and (= temp___817 cu__split_fields1)
+  (and (= temp___762 cu__split_fields1)
   (and
   (forall ((i Int))
   (=>
@@ -1239,7 +1239,7 @@
   (ite (= result1 true)
   (and
   (and
-  (and (= temp___817 cu__split_fields1)
+  (and (= temp___762 cu__split_fields1)
   (and
   (forall ((i Int))
   (=>
@@ -1259,14 +1259,14 @@
   (= use_ordered_maps__are_disjoint__result3 use_ordered_maps__are_disjoint__result2)))
   (and
   (and
-  (and (= temp___8161 (next s1 (mk___rep1 cu__split_fields13)))
+  (and (= temp___7611 (next s1 (mk___rep1 cu__split_fields13)))
   (ite (= (ite (= (bool_eq2 (mk___rep1 cu__split_fields13) no_element) false) (= 
           (get1 (positions s1) (mk___rep1 cu__split_fields13)) (length3 s1)) true) true)
-  (= (bool_eq2 temp___8161 no_element) true)
-  (and (= (has_key1 (positions s1) temp___8161) true)
-  (= (get1 (positions s1) temp___8161) (+ (get1 (positions s1)
+  (= (bool_eq2 temp___7611 no_element) true)
+  (and (= (has_key1 (positions s1) temp___7611) true)
+  (= (get1 (positions s1) temp___7611) (+ (get1 (positions s1)
                                           (mk___rep1 cu__split_fields13)) 1)))))
-  (and (= result4 cu__split_fields2) (= temp___816 cu__split_fields3)))
+  (and (= result4 cu__split_fields2) (= temp___761 cu__split_fields3)))
   (and
   (and
   (and (= o1 (has_key1 (positions s1) (mk___rep1 cu__split_fields12)))
@@ -1333,18 +1333,18 @@
 ;; H
   (assert (= (bool__content use_ordered_maps__are_disjoint__result13) true))
 
-(define-fun temp___825 () us_rep3 (keys s2))
+(define-fun temp___770 () us_rep3 (keys s2))
 
-(declare-fun temp___824 () Int)
-
-;; H
-  (assert (in_range3 temp___824))
+(declare-fun temp___769 () Int)
 
 ;; H
-  (assert (= (iter_has_element temp___825 temp___824) true))
+  (assert (in_range3 temp___769))
+
+;; H
+  (assert (= (iter_has_element temp___770 temp___769) true))
 
 (assert
 ;; WP_parameter_def
  ;; File "use_ordered_maps.ads", line 68, characters 0-0
-  (not (not (= (has_key (model__ s1) (get temp___825 temp___824)) true))))
+  (not (not (= (has_key (model__ s1) (get temp___770 temp___769)) true))))
 (check-sat)

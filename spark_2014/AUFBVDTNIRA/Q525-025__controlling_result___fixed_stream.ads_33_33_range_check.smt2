@@ -830,41 +830,31 @@
 
 ;; elements__post_axiom
   (assert
-  (forall ((this us_rep))
-  (! (let ((result (elements this)))
-     (=> (elements__function_guard result this) (dynamic_invariant result
-     true false true))) :pattern ((elements this)) )))
+  (forall ((this us_rep)) (! (dynamic_invariant (elements this) true false
+  true) :pattern ((elements this)) )))
 
 ;; elements__post__dispatch_axiom
   (assert
   (forall ((attr__tag1 Int))
-  (forall ((this us_rep))
-  (! (let ((result (elements1 attr__tag1 this)))
-     (=> (elements__function_guard1 result attr__tag1 this)
-     (dynamic_invariant result true false true))) :pattern ((elements1
-                                                            attr__tag1 this)) ))))
+  (forall ((this us_rep)) (! (dynamic_invariant (elements1 attr__tag1 this)
+  true false true) :pattern ((elements1 attr__tag1 this)) ))))
 
 ;; fixed_stream__object__compat_axiom
   (assert
   (forall ((this us_rep))
-  (! (=> (elements__function_guard1 (elements1 us_tag this) us_tag this)
-     (and (elements__function_guard (elements this) this)
-     (= (elements this) (elements1 us_tag this)))) :pattern ((elements1
-                                                             us_tag this)) )))
+  (! (= (elements this) (elements1 us_tag this)) :pattern ((elements1 
+                                                           us_tag this)) )))
 
 ;; elements__def_axiom
   (assert
   (forall ((this us_rep))
-  (! (=> (elements__function_guard (elements this) this)
-     (= (elements this) (to_rep
+  (! (= (elements this) (to_rep
                         (rec__fixed_stream__object__width
-                        (us_split_fields1 this))))) :pattern ((elements this)) )))
+                        (us_split_fields1 this)))) :pattern ((elements this)) )))
 
 (declare-fun this () us_rep)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -891,7 +881,7 @@
 
 (declare-fun first2 (t1) tstream_element_offsetB)
 
-(declare-fun last3 (t1) tstream_element_offsetB)
+(declare-fun last2 (t1) tstream_element_offsetB)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -901,7 +891,7 @@
   (! (=> (in_range2 f)
      (=> (in_range2 l)
      (and (= (to_rep1 (first2 (mk1 f l))) f)
-     (= (to_rep1 (last3 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (= (to_rep1 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range2 low)
@@ -919,10 +909,10 @@
 
 (define-fun first3 ((a us_t1)) Int (to_rep1 (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep1 (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last4 a))
-                                    (+ (- (last4 a) (first3 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size3 () Int)
 
@@ -959,8 +949,8 @@
 
 (define-fun bool_eq11 ((x us_t1)
   (y us_t1)) Bool (bool_eq5 (elts1 x) (to_rep1 (first2 (rt1 x)))
-                  (to_rep1 (last3 (rt1 x))) (elts1 y)
-                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last3 (rt1 y)))))
+                  (to_rep1 (last2 (rt1 x))) (elts1 y)
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
 (declare-fun user_eq10 (us_t1 us_t1) Bool)
 
@@ -970,8 +960,6 @@
 ((tvalueS__ref (mk_tvalueS__ref (tvalueS__content us_t1)))))
 (define-fun tvalueS__ref___projection ((a tvalueS__ref)) us_t1 (tvalueS__content
                                                                a))
-
-(declare-fun last5 () Int)
 
 (define-fun dynamic_property3 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -998,7 +986,7 @@
 
 (declare-fun first4 (t2) tstream_element_offsetB)
 
-(declare-fun last6 (t2) tstream_element_offsetB)
+(declare-fun last4 (t2) tstream_element_offsetB)
 
 (declare-fun mk2 (Int Int) t2)
 
@@ -1008,7 +996,7 @@
   (! (=> (in_range2 f)
      (=> (in_range2 l)
      (and (= (to_rep1 (first4 (mk2 f l))) f)
-     (= (to_rep1 (last6 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
+     (= (to_rep1 (last4 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
 
 (define-fun dynamic_property4 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range2 low)
@@ -1026,10 +1014,10 @@
 
 (define-fun first5 ((a us_t2)) Int (to_rep1 (first4 (rt2 a))))
 
-(define-fun last7 ((a us_t2)) Int (to_rep1 (last6 (rt2 a))))
+(define-fun last5 ((a us_t2)) Int (to_rep1 (last4 (rt2 a))))
 
-(define-fun length2 ((a us_t2)) Int (ite (<= (first5 a) (last7 a))
-                                    (+ (- (last7 a) (first5 a)) 1) 0))
+(define-fun length2 ((a us_t2)) Int (ite (<= (first5 a) (last5 a))
+                                    (+ (- (last5 a) (first5 a)) 1) 0))
 
 (declare-fun value__size4 () Int)
 
@@ -1066,8 +1054,8 @@
 
 (define-fun bool_eq13 ((x us_t2)
   (y us_t2)) Bool (bool_eq5 (elts2 x) (to_rep1 (first4 (rt2 x)))
-                  (to_rep1 (last6 (rt2 x))) (elts2 y)
-                  (to_rep1 (first4 (rt2 y))) (to_rep1 (last6 (rt2 y)))))
+                  (to_rep1 (last4 (rt2 x))) (elts2 y)
+                  (to_rep1 (first4 (rt2 y))) (to_rep1 (last4 (rt2 y)))))
 
 (declare-fun user_eq12 (us_t2 us_t2) Bool)
 
@@ -1087,16 +1075,16 @@
 
 ;; def_axiom
   (assert
-  (forall ((temp___277 (_ BitVec 8)))
-  (forall ((temp___278 Int) (temp___279 Int))
-  (let ((temp___276 (fixed_stream__null_string__value__aggregate_def
-                    temp___277 temp___278 temp___279)))
+  (forall ((temp___264 (_ BitVec 8)))
+  (forall ((temp___265 Int) (temp___266 Int))
+  (let ((temp___263 (fixed_stream__null_string__value__aggregate_def
+                    temp___264 temp___265 temp___266)))
   (and
   (=> (dynamic_property (- 9223372036854775808) 9223372036854775807
-  temp___278 temp___279)
-  (and (= (first5 temp___276) temp___278) (= (last7 temp___276) temp___279)))
-  (forall ((temp___280 Int))
-  (= (select (to_array2 temp___276) temp___280) (of_rep2 temp___277))))))))
+  temp___265 temp___266)
+  (and (= (first5 temp___263) temp___265) (= (last5 temp___263) temp___266)))
+  (forall ((temp___267 Int))
+  (= (select (to_array2 temp___263) temp___267) (of_rep2 temp___264))))))))
 
 (define-fun dynamic_invariant1 ((temp___expr_63 Int) (temp___is_init_60 Bool)
   (temp___skip_constant_61 Bool)
@@ -1132,18 +1120,18 @@
                                       (first1 temp___expr_160)
                                       (last1 temp___expr_160))))
 
-(define-fun dynamic_invariant6 ((temp___expr_247 us_t1)
-  (temp___is_init_244 Bool) (temp___skip_constant_245 Bool)
-  (temp___do_toplevel_246 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_245 true))
+(define-fun dynamic_invariant6 ((temp___expr_236 us_t1)
+  (temp___is_init_233 Bool) (temp___skip_constant_234 Bool)
+  (temp___do_toplevel_235 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_234 true))
                                       (and (dynamic_property2 1
                                       (to_rep
                                       (rec__fixed_stream__object__width
                                       (us_split_fields1 this)))
-                                      (first3 temp___expr_247)
-                                      (last4 temp___expr_247))
-                                      (and (= (first3 temp___expr_247) 1)
-                                      (= (last4 temp___expr_247) (to_rep
+                                      (first3 temp___expr_236)
+                                      (last3 temp___expr_236))
+                                      (and (= (first3 temp___expr_236) 1)
+                                      (= (last3 temp___expr_236) (to_rep
                                                                  (rec__fixed_stream__object__width
                                                                  (us_split_fields1
                                                                  this))))))))
@@ -1154,9 +1142,9 @@
 
 (declare-fun fixed_stream__null_string__result1 () t)
 
-(declare-fun temp___282 () (Array Int stream_element))
+(declare-fun temp___269 () (Array Int stream_element))
 
-(declare-fun temp___2821 () t2)
+(declare-fun temp___2691 () t2)
 
 (declare-fun fixed_stream__null_string__value__assume () (Array Int stream_element))
 
@@ -1211,7 +1199,7 @@
 ;; H
   (assert
   (= (to_rep1
-     (last6
+     (last4
      (rt2
      (fixed_stream__null_string__value__aggregate_def ((_ int2bv 8) 0) 1
      (to_rep (rec__fixed_stream__object__width (us_split_fields1 this))))))) 
@@ -1219,7 +1207,7 @@
 
 ;; H
   (assert
-  (= (mk___t2 temp___282 temp___2821) (fixed_stream__null_string__value__aggregate_def
+  (= (mk___t2 temp___269 temp___2691) (fixed_stream__null_string__value__aggregate_def
                                       ((_ int2bv 8) 0) 1
                                       (to_rep
                                       (rec__fixed_stream__object__width
@@ -1227,8 +1215,8 @@
 
 ;; H
   (assert
-  (= (ite (<= (to_rep1 (first4 temp___2821)) (to_rep1 (last6 temp___2821)))
-     (+ (- (to_rep1 (last6 temp___2821)) (to_rep1 (first4 temp___2821))) 1)
+  (= (ite (<= (to_rep1 (first4 temp___2691)) (to_rep1 (last4 temp___2691)))
+     (+ (- (to_rep1 (last4 temp___2691)) (to_rep1 (first4 temp___2691))) 1)
      0) (ite (<= 1 (to_rep
                    (rec__fixed_stream__object__width (us_split_fields1 this))))
         (+ (- (to_rep
@@ -1236,11 +1224,11 @@
         0)))
 
 ;; H
-  (assert (= temp___282 fixed_stream__null_string__value__assume))
+  (assert (= temp___269 fixed_stream__null_string__value__assume))
 
 ;; H
   (assert
-  (= (mk1 (to_rep1 (first4 temp___2821)) (to_rep1 (last6 temp___2821))) 
+  (= (mk1 (to_rep1 (first4 temp___2691)) (to_rep1 (last4 temp___2691))) 
   fixed_stream__null_string__value__assume1))
 
 ;; H
@@ -1258,7 +1246,7 @@
 ;; H
   (assert
   (= (to_rep1 value__last) (to_rep1
-                           (last3 fixed_stream__null_string__value__assume1))))
+                           (last2 fixed_stream__null_string__value__assume1))))
 
 ;; H
   (assert
@@ -1320,7 +1308,7 @@
 
 ;; H
   (assert
-  (and (and (= o (elements this)) (elements__function_guard o this))
+  (and (= o (elements this))
   (and (in_range1 o)
   (= o (to_rep (rec__fixed_stream__object__width (us_split_fields1 this)))))))
 

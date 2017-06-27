@@ -102,9 +102,8 @@
   (assert
   (forall ((n Int))
   (! (=> (dynamic_invariant n true true true)
-     (let ((result (is_positive_good n)))
-     (=> (is_positive_good__function_guard result n)
-     (= (= result true) (<= 1 n))))) :pattern ((is_positive_good n)) )))
+     (= (= (is_positive_good n) true) (<= 1 n))) :pattern ((is_positive_good
+                                                           n)) )))
 
 (declare-fun is_positive_bad (Int) Bool)
 
@@ -114,9 +113,7 @@
   (assert
   (forall ((n Int))
   (! (=> (dynamic_invariant n true true true)
-     (let ((result (is_positive_bad n)))
-     (=> (is_positive_bad__function_guard result n)
-     (= (= result true) (<= 1 n))))) :pattern ((is_positive_bad n)) )))
+     (= (= (is_positive_bad n) true) (<= 1 n))) :pattern ((is_positive_bad n)) )))
 
 (declare-fun is_positive_ugly (Int) Bool)
 
@@ -126,9 +123,8 @@
   (assert
   (forall ((n Int))
   (! (=> (dynamic_invariant n true true true)
-     (let ((result (is_positive_ugly n)))
-     (=> (is_positive_ugly__function_guard result n)
-     (= (= result true) (<= 1 n))))) :pattern ((is_positive_ugly n)) )))
+     (= (= (is_positive_ugly n) true) (<= 1 n))) :pattern ((is_positive_ugly
+                                                           n)) )))
 
 (declare-datatypes ()
 ((us_split_fields (mk___split_fields (rec__test_08__t1__n integer)))))
@@ -199,13 +195,6 @@
                                             (rec__test_08__t1__n
                                             (us_split_fields1
                                             temp___expr_136))) 42))
-
-;; temp___result_140_def
-  (assert
-  (forall ((temp___139 us_rep)) (is_positive_good__function_guard
-  (is_positive_good
-  (to_rep (rec__test_08__t1__n (us_split_fields1 temp___139))))
-  (to_rep (rec__test_08__t1__n (us_split_fields1 temp___139))))))
 
 (define-fun type_invariant ((temp___138 us_rep)) Bool (or
                                                       (= (is_positive_good
@@ -282,29 +271,22 @@
 (declare-datatypes () ((t2__ref (mk_t2__ref (t2__content us_rep1)))))
 (define-fun t2__ref___projection ((a t2__ref)) us_rep1 (t2__content a))
 
-(define-fun default_initial_assumption1 ((temp___expr_145 us_rep1)
-  (temp___skip_top_level_146 Bool)) Bool (= (to_rep
+(define-fun default_initial_assumption1 ((temp___expr_144 us_rep1)
+  (temp___skip_top_level_145 Bool)) Bool (= (to_rep
                                             (rec__test_08__t2__n
                                             (us_split_fields3
-                                            temp___expr_145))) 42))
+                                            temp___expr_144))) 42))
 
-;; temp___result_149_def
-  (assert
-  (forall ((temp___148 us_rep1)) (is_positive_bad__function_guard
-  (is_positive_bad
-  (to_rep (rec__test_08__t2__n (us_split_fields3 temp___148))))
-  (to_rep (rec__test_08__t2__n (us_split_fields3 temp___148))))))
-
-(define-fun type_invariant1 ((temp___147 us_rep1)) Bool (or
+(define-fun type_invariant1 ((temp___146 us_rep1)) Bool (or
                                                         (= (is_positive_bad
                                                            (to_rep
                                                            (rec__test_08__t2__n
                                                            (us_split_fields3
-                                                           temp___147)))) true)
+                                                           temp___146)))) true)
                                                         (= (to_rep
                                                            (rec__test_08__t2__n
                                                            (us_split_fields3
-                                                           temp___147))) (- 5))))
+                                                           temp___146))) (- 5))))
 
 (declare-datatypes ()
 ((us_split_fields4 (mk___split_fields2 (rec__test_08__t3__n integer)))))
@@ -370,37 +352,30 @@
 (declare-datatypes () ((t3__ref (mk_t3__ref (t3__content us_rep2)))))
 (define-fun t3__ref___projection ((a t3__ref)) us_rep2 (t3__content a))
 
-(define-fun default_initial_assumption2 ((temp___expr_154 us_rep2)
-  (temp___skip_top_level_155 Bool)) Bool (= (to_rep
+(define-fun default_initial_assumption2 ((temp___expr_152 us_rep2)
+  (temp___skip_top_level_153 Bool)) Bool (= (to_rep
                                             (rec__test_08__t3__n
                                             (us_split_fields5
-                                            temp___expr_154))) 42))
+                                            temp___expr_152))) 42))
 
-;; temp___result_158_def
-  (assert
-  (forall ((temp___157 us_rep2)) (is_positive_ugly__function_guard
-  (is_positive_ugly
-  (to_rep (rec__test_08__t3__n (us_split_fields5 temp___157))))
-  (to_rep (rec__test_08__t3__n (us_split_fields5 temp___157))))))
-
-(define-fun type_invariant2 ((temp___156 us_rep2)) Bool (or
+(define-fun type_invariant2 ((temp___154 us_rep2)) Bool (or
                                                         (= (is_positive_ugly
                                                            (to_rep
                                                            (rec__test_08__t3__n
                                                            (us_split_fields5
-                                                           temp___156)))) true)
+                                                           temp___154)))) true)
                                                         (= (to_rep
                                                            (rec__test_08__t3__n
                                                            (us_split_fields5
-                                                           temp___156))) (- 5))))
+                                                           temp___154))) (- 5))))
 
-(declare-fun temp___159 () integer)
+(declare-fun temp___156 () integer)
 
 ;; H
-  (assert (= (to_rep temp___159) 42))
+  (assert (= (to_rep temp___156) 42))
 
 (assert
 ;; WP_parameter_def
  ;; File "test_08_util.ads", line 9, characters 0-0
-  (not (type_invariant2 (mk___rep2 (mk___split_fields2 temp___159)))))
+  (not (type_invariant2 (mk___rep2 (mk___split_fields2 temp___156)))))
 (check-sat)

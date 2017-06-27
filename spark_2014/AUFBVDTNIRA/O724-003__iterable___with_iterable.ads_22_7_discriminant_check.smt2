@@ -629,9 +629,9 @@
 
 (declare-fun o3 () natural)
 
-(declare-fun temp___217 () natural)
+(declare-fun temp___210 () natural)
 
-(declare-fun temp___2171 () natural)
+(declare-fun temp___2101 () natural)
 
 (declare-fun o4 () natural)
 
@@ -644,8 +644,8 @@
 (define-fun o8 () us_rep1 (mk___rep1 (mk___split_discrs o4)
                           (mk___split_fields1 o5)))
 
-(define-fun temp___2172 () us_rep1 (mk___rep1 (mk___split_discrs temp___217)
-                                   (mk___split_fields1 temp___2171)))
+(define-fun temp___2102 () us_rep1 (mk___rep1 (mk___split_discrs temp___210)
+                                   (mk___split_fields1 temp___2101)))
 
 ;; H
   (assert (= (to_rep o1) 1))
@@ -660,16 +660,16 @@
   (assert (= o o3))
 
 ;; H
-  (assert (= temp___217 o3))
+  (assert (= temp___210 o3))
 
 ;; H
-  (assert (= temp___2171 o2))
+  (assert (= temp___2101 o2))
 
 ;; H
-  (assert (dynamic_predicate1 temp___2172))
+  (assert (dynamic_predicate1 temp___2102))
 
 ;; H
-  (assert (= o8 temp___2172))
+  (assert (= o8 temp___2102))
 
 ;; H
   (assert (= (mk___rep1 (mk___split_discrs o6) (mk___split_fields1 o7)) 

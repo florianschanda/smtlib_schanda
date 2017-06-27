@@ -517,12 +517,12 @@
 (define-fun serialnumbert__ref___projection ((a serialnumbert__ref)) serialnumbert 
   (serialnumbert__content a))
 
-(define-fun dynamic_invariant ((temp___expr_909 Int)
-  (temp___is_init_906 Bool) (temp___skip_constant_907 Bool)
-  (temp___do_toplevel_908 Bool)) Bool (=>
-                                      (or (= temp___is_init_906 true)
+(define-fun dynamic_invariant ((temp___expr_902 Int)
+  (temp___is_init_899 Bool) (temp___skip_constant_900 Bool)
+  (temp___do_toplevel_901 Bool)) Bool (=>
+                                      (or (= temp___is_init_899 true)
                                       (<= 0 4294967295)) (in_range4
-                                      temp___expr_909)))
+                                      temp___expr_902)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -532,9 +532,9 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
-(declare-fun temp___String_Literal_1041 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_1032 (tuple0) (Array Int character))
 
-;; temp___String_Literal_1041__def_axiom
+;; temp___String_Literal_1032__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -553,28 +553,28 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_1041 us_void_param) 1)) 46)
-     (= (to_rep (select (temp___String_Literal_1041 us_void_param) 2)) 47))
-     (= (to_rep (select (temp___String_Literal_1041 us_void_param) 3)) 83))
-     (= (to_rep (select (temp___String_Literal_1041 us_void_param) 4)) 121))
-     (= (to_rep (select (temp___String_Literal_1041 us_void_param) 5)) 115))
-     (= (to_rep (select (temp___String_Literal_1041 us_void_param) 6)) 116))
-     (= (to_rep (select (temp___String_Literal_1041 us_void_param) 7)) 101))
-     (= (to_rep (select (temp___String_Literal_1041 us_void_param) 8)) 109))
-     (= (to_rep (select (temp___String_Literal_1041 us_void_param) 9)) 47))
-     (= (to_rep (select (temp___String_Literal_1041 us_void_param) 10)) 99))
-     (= (to_rep (select (temp___String_Literal_1041 us_void_param) 11)) 101))
-     (= (to_rep (select (temp___String_Literal_1041 us_void_param) 12)) 114))
-     (= (to_rep (select (temp___String_Literal_1041 us_void_param) 13)) 116))
-     (= (to_rep (select (temp___String_Literal_1041 us_void_param) 14)) 46))
-     (= (to_rep (select (temp___String_Literal_1041 us_void_param) 15)) 100))
-     (= (to_rep (select (temp___String_Literal_1041 us_void_param) 16)) 97))
-     (= (to_rep (select (temp___String_Literal_1041 us_void_param) 17)) 116)) :pattern (
-  (temp___String_Literal_1041 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_1032 us_void_param) 1)) 46)
+     (= (to_rep (select (temp___String_Literal_1032 us_void_param) 2)) 47))
+     (= (to_rep (select (temp___String_Literal_1032 us_void_param) 3)) 83))
+     (= (to_rep (select (temp___String_Literal_1032 us_void_param) 4)) 121))
+     (= (to_rep (select (temp___String_Literal_1032 us_void_param) 5)) 115))
+     (= (to_rep (select (temp___String_Literal_1032 us_void_param) 6)) 116))
+     (= (to_rep (select (temp___String_Literal_1032 us_void_param) 7)) 101))
+     (= (to_rep (select (temp___String_Literal_1032 us_void_param) 8)) 109))
+     (= (to_rep (select (temp___String_Literal_1032 us_void_param) 9)) 47))
+     (= (to_rep (select (temp___String_Literal_1032 us_void_param) 10)) 99))
+     (= (to_rep (select (temp___String_Literal_1032 us_void_param) 11)) 101))
+     (= (to_rep (select (temp___String_Literal_1032 us_void_param) 12)) 114))
+     (= (to_rep (select (temp___String_Literal_1032 us_void_param) 13)) 116))
+     (= (to_rep (select (temp___String_Literal_1032 us_void_param) 14)) 46))
+     (= (to_rep (select (temp___String_Literal_1032 us_void_param) 15)) 100))
+     (= (to_rep (select (temp___String_Literal_1032 us_void_param) 16)) 97))
+     (= (to_rep (select (temp___String_Literal_1032 us_void_param) 17)) 116)) :pattern (
+  (temp___String_Literal_1032 us_void_param)) )))
 
-(declare-fun temp___String_Literal_1042 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_1033 (tuple0) (Array Int character))
 
-;; temp___String_Literal_1042__def_axiom
+;; temp___String_Literal_1033__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -604,35 +604,35 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 1)) 67)
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 2)) 101))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 3)) 114))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 4)) 116))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 5)) 105))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 6)) 102))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 7)) 105))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 8)) 99))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 9)) 97))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 10)) 116))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 11)) 101))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 12)) 32))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 13)) 83))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 14)) 116))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 15)) 111))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 16)) 114))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 17)) 101))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 18)) 32))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 19)) 114))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 20)) 101))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 21)) 97))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 22)) 100))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 23)) 32))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 24)) 101))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 25)) 114))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 26)) 114))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 27)) 111))
-     (= (to_rep (select (temp___String_Literal_1042 us_void_param) 28)) 114)) :pattern (
-  (temp___String_Literal_1042 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 1)) 67)
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 2)) 101))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 3)) 114))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 4)) 116))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 5)) 105))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 6)) 102))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 7)) 105))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 8)) 99))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 9)) 97))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 10)) 116))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 11)) 101))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 12)) 32))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 13)) 83))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 14)) 116))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 15)) 111))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 16)) 114))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 17)) 101))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 18)) 32))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 19)) 114))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 20)) 101))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 21)) 97))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 22)) 100))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 23)) 32))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 24)) 101))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 25)) 114))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 26)) 114))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 27)) 111))
+     (= (to_rep (select (temp___String_Literal_1033 us_void_param) 28)) 114)) :pattern (
+  (temp___String_Literal_1033 us_void_param)) )))
 
 (define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -687,9 +687,7 @@
   (assert (=> (<= 0 4294967295) (in_range4 nextserialnumber)))
 
 ;; H
-  (assert
-  (and (= result (exists__ storefile)) (exists____function_guard result
-  storefile)))
+  (assert (= result (exists__ storefile)))
 
 ;; H
   (assert (= result true))
@@ -699,10 +697,6 @@
 
 ;; H
   (assert (not (= readok true)))
-
-;; H
-  (assert (valid_numberlogentries__function_guard
-  (valid_numberlogentries state) state))
 
 (assert
 ;; WP_parameter_def

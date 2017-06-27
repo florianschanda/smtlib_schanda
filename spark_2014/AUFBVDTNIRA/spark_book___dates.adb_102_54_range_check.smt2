@@ -279,11 +279,9 @@
 ;; minimum_date__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (minimum_date__function_guard (minimum_date us_void_param)
-     us_void_param)
-     (= (minimum_date us_void_param) (mk___rep
+  (! (= (minimum_date us_void_param) (mk___rep
                                      (mk___split_fields (of_rep2 1)
-                                     (of_rep1 1) (of_rep 2000))))) :pattern (
+                                     (of_rep1 1) (of_rep 2000)))) :pattern (
   (minimum_date us_void_param)) )))
 
 (define-fun dynamic_invariant ((temp___expr_150 Int)
@@ -316,7 +314,6 @@
      (and (dynamic_invariant year true true true) (dynamic_invariant1 month
      true true true))
      (let ((result (get_month_length year month)))
-     (=> (get_month_length__function_guard result year month)
      (and
      (and
      (and
@@ -335,8 +332,8 @@
      (=> (= month 7) (= result 31))) (=> (= month 8) (= result 31)))
      (=> (= month 9) (= result 30))) (=> (= month 10) (= result 31)))
      (=> (= month 11) (= result 30))) (=> (= month 12) (= result 31)))
-     (dynamic_invariant2 result true false true))))) :pattern ((get_month_length
-                                                               year month)) )))
+     (dynamic_invariant2 result true false true)))) :pattern ((get_month_length
+                                                              year month)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -345,9 +342,6 @@
 (declare-fun current_date__split_fields1 () month_type)
 
 (declare-fun current_date__split_fields2 () year_type)
-
-;; H
-  (assert (minimum_date__function_guard (minimum_date Tuple0) Tuple0))
 
 ;; H
   (assert

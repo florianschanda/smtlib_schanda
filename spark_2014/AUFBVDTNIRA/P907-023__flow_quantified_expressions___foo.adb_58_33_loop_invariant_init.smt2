@@ -270,6 +270,6 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "foo.adb", line 45, characters 0-0
+ ;; File "foo.adb", line 9, characters 0-0
   (not (= (rec__foo__r__x (us_split_fields1 (select a1 j))) true)))
 (check-sat)

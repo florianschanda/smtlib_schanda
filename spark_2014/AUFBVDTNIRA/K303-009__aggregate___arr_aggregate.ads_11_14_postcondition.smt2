@@ -231,44 +231,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(declare-sort t1b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 1)))
-
-(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq2 (t1b t1b) Bool)
-
-(declare-fun dummy2 () t1b)
-
-(declare-datatypes () ((t1b__ref (mk_t1b__ref (t1b__content t1b)))))
-(define-fun t1b__ref___projection ((a t1b__ref)) t1b (t1b__content a))
-
-(declare-sort t3b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 1)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq3 (t3b t3b) Bool)
-
-(declare-fun dummy3 () t3b)
-
-(declare-datatypes () ((t3b__ref (mk_t3b__ref (t3b__content t3b)))))
-(define-fun t3b__ref___projection ((a t3b__ref)) t3b (t3b__content a))
-
 (declare-fun temp___308 (Int) (Array Int integer))
 
 ;; def_axiom
@@ -287,10 +249,6 @@
 (declare-fun one () Int)
 
 (declare-fun a () (Array Int integer))
-
-(declare-fun o () (Array Int integer))
-
-(declare-fun o1 () (Array Int integer))
 
 (declare-fun result () (Array Int integer))
 
@@ -316,22 +274,16 @@
   (assert (= one 1))
 
 ;; H
-  (assert (=> (= b 1) (= o (temp___308 one))))
-
-;; H
   (assert (=> (= b 1) (= (mk_map__ref result) a5)))
 
 ;; H
-  (assert (=> (= b 1) (= a1 o)))
-
-;; H
-  (assert (=> (not (= b 1)) (= o1 (temp___312 one))))
+  (assert (=> (= b 1) (= a1 (temp___308 one))))
 
 ;; H
   (assert (=> (not (= b 1)) (= (mk_map__ref result1) a5)))
 
 ;; H
-  (assert (=> (not (= b 1)) (= a2 o1)))
+  (assert (=> (not (= b 1)) (= a2 (temp___312 one))))
 
 ;; H
   (assert (=> (not (= b 1)) (= a1 a2)))

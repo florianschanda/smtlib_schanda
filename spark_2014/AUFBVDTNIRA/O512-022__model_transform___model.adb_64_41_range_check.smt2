@@ -262,18 +262,15 @@
 
 ;; name__post_axiom
   (assert
-  (forall ((self us_rep))
-  (! (let ((result (name self)))
-     (=> (name__function_guard result self) (dynamic_invariant result true
-     false true))) :pattern ((name self)) )))
+  (forall ((self us_rep)) (! (dynamic_invariant (name self) true false
+  true) :pattern ((name self)) )))
 
 ;; name__def_axiom
   (assert
   (forall ((self us_rep))
-  (! (=> (name__function_guard (name self) self)
-     (= (name self) (to_rep
+  (! (= (name self) (to_rep
                     (rec__model__uml_state__name_data
-                    (us_split_fields1 self))))) :pattern ((name self)) )))
+                    (us_split_fields1 self)))) :pattern ((name self)) )))
 
 (declare-fun to_rep1 (uml_state_access) Int)
 
@@ -499,18 +496,15 @@
 
 ;; from__post_axiom
   (assert
-  (forall ((self us_rep1))
-  (! (let ((result (from self)))
-     (=> (from__function_guard result self) (dynamic_invariant1 result true
-     false true))) :pattern ((from self)) )))
+  (forall ((self us_rep1)) (! (dynamic_invariant1 (from self) true false
+  true) :pattern ((from self)) )))
 
 ;; from__def_axiom
   (assert
   (forall ((self us_rep1))
-  (! (=> (from__function_guard (from self) self)
-     (= (from self) (to_rep1
+  (! (= (from self) (to_rep1
                     (rec__model__uml_transition__from_data
-                    (us_split_fields3 self))))) :pattern ((from self)) )))
+                    (us_split_fields3 self)))) :pattern ((from self)) )))
 
 (declare-fun to__ (us_rep1) Int)
 
@@ -518,18 +512,15 @@
 
 ;; to____post_axiom
   (assert
-  (forall ((self us_rep1))
-  (! (let ((result (to__ self)))
-     (=> (to____function_guard result self) (dynamic_invariant1 result true
-     false true))) :pattern ((to__ self)) )))
+  (forall ((self us_rep1)) (! (dynamic_invariant1 (to__ self) true false
+  true) :pattern ((to__ self)) )))
 
 ;; to____def_axiom
   (assert
   (forall ((self us_rep1))
-  (! (=> (to____function_guard (to__ self) self)
-     (= (to__ self) (to_rep1
+  (! (= (to__ self) (to_rep1
                     (rec__model__uml_transition__to_data
-                    (us_split_fields3 self))))) :pattern ((to__ self)) )))
+                    (us_split_fields3 self)))) :pattern ((to__ self)) )))
 
 (declare-fun dummy5 () (Array Int us_rep))
 
@@ -708,10 +699,9 @@
 ;; owned_state__def_axiom
   (assert
   (forall ((self us_rep2))
-  (! (=> (owned_state__function_guard (owned_state self) self)
-     (= (owned_state self) (rec__model__uml_state_machine__owned_state_data
-                           (us_split_fields5 self)))) :pattern ((owned_state
-                                                                self)) )))
+  (! (= (owned_state self) (rec__model__uml_state_machine__owned_state_data
+                           (us_split_fields5 self))) :pattern ((owned_state
+                                                               self)) )))
 
 (declare-fun owned_transition (us_rep2) (Array Int us_rep1))
 
@@ -724,10 +714,9 @@
 ;; owned_transition__def_axiom
   (assert
   (forall ((self us_rep2))
-  (! (=> (owned_transition__function_guard (owned_transition self) self)
-     (= (owned_transition self) (rec__model__uml_state_machine__owned_transition_data
-                                (us_split_fields5 self)))) :pattern (
-  (owned_transition self)) )))
+  (! (= (owned_transition self) (rec__model__uml_state_machine__owned_transition_data
+                                (us_split_fields5 self))) :pattern ((owned_transition
+                                                                    self)) )))
 
 (declare-datatypes ()
 ((us_split_fields6
@@ -914,18 +903,15 @@
 
 ;; name__2__post_axiom
   (assert
-  (forall ((self us_rep3))
-  (! (let ((result (name__2 self)))
-     (=> (name__2__function_guard result self) (dynamic_invariant result true
-     false true))) :pattern ((name__2 self)) )))
+  (forall ((self us_rep3)) (! (dynamic_invariant (name__2 self) true false
+  true) :pattern ((name__2 self)) )))
 
 ;; name__2__def_axiom
   (assert
   (forall ((self us_rep3))
-  (! (=> (name__2__function_guard (name__2 self) self)
-     (= (name__2 self) (to_rep
+  (! (= (name__2 self) (to_rep
                        (rec__model__uml_action__name_data
-                       (us_split_fields7 self))))) :pattern ((name__2 self)) )))
+                       (us_split_fields7 self)))) :pattern ((name__2 self)) )))
 
 (declare-fun to_rep2 (uml_action_access) Int)
 
@@ -1159,27 +1145,24 @@
 
 (declare-fun from__2__function_guard (Int us_rep4) Bool)
 
-(define-fun dynamic_invariant2 ((temp___expr_257 Int)
-  (temp___is_init_254 Bool) (temp___skip_constant_255 Bool)
-  (temp___do_toplevel_256 Bool)) Bool (=>
-                                      (or (= temp___is_init_254 true)
+(define-fun dynamic_invariant2 ((temp___expr_253 Int)
+  (temp___is_init_250 Bool) (temp___skip_constant_251 Bool)
+  (temp___do_toplevel_252 Bool)) Bool (=>
+                                      (or (= temp___is_init_250 true)
                                       (<= 0 100)) (in_range4
-                                      temp___expr_257)))
+                                      temp___expr_253)))
 
 ;; from__2__post_axiom
   (assert
-  (forall ((self us_rep4))
-  (! (let ((result (from__2 self)))
-     (=> (from__2__function_guard result self) (dynamic_invariant2 result
-     true false true))) :pattern ((from__2 self)) )))
+  (forall ((self us_rep4)) (! (dynamic_invariant2 (from__2 self) true false
+  true) :pattern ((from__2 self)) )))
 
 ;; from__2__def_axiom
   (assert
   (forall ((self us_rep4))
-  (! (=> (from__2__function_guard (from__2 self) self)
-     (= (from__2 self) (to_rep2
+  (! (= (from__2 self) (to_rep2
                        (rec__model__uml_control_flow__from_data
-                       (us_split_fields9 self))))) :pattern ((from__2 self)) )))
+                       (us_split_fields9 self)))) :pattern ((from__2 self)) )))
 
 (declare-fun to__2 (us_rep4) Int)
 
@@ -1187,18 +1170,15 @@
 
 ;; to__2__post_axiom
   (assert
-  (forall ((self us_rep4))
-  (! (let ((result (to__2 self)))
-     (=> (to__2__function_guard result self) (dynamic_invariant2 result true
-     false true))) :pattern ((to__2 self)) )))
+  (forall ((self us_rep4)) (! (dynamic_invariant2 (to__2 self) true false
+  true) :pattern ((to__2 self)) )))
 
 ;; to__2__def_axiom
   (assert
   (forall ((self us_rep4))
-  (! (=> (to__2__function_guard (to__2 self) self)
-     (= (to__2 self) (to_rep2
+  (! (= (to__2 self) (to_rep2
                      (rec__model__uml_control_flow__to_data
-                     (us_split_fields9 self))))) :pattern ((to__2 self)) )))
+                     (us_split_fields9 self)))) :pattern ((to__2 self)) )))
 
 (declare-fun dummy12 () (Array Int us_rep3))
 
@@ -1380,10 +1360,9 @@
 ;; owned_action__def_axiom
   (assert
   (forall ((self us_rep5))
-  (! (=> (owned_action__function_guard (owned_action self) self)
-     (= (owned_action self) (rec__model__uml_activity__owned_action_data
-                            (us_split_fields11 self)))) :pattern ((owned_action
-                                                                  self)) )))
+  (! (= (owned_action self) (rec__model__uml_activity__owned_action_data
+                            (us_split_fields11 self))) :pattern ((owned_action
+                                                                 self)) )))
 
 (declare-fun owned_flow (us_rep5) (Array Int us_rep4))
 
@@ -1395,10 +1374,9 @@
 ;; owned_flow__def_axiom
   (assert
   (forall ((self us_rep5))
-  (! (=> (owned_flow__function_guard (owned_flow self) self)
-     (= (owned_flow self) (rec__model__uml_activity__owned_flow_data
-                          (us_split_fields11 self)))) :pattern ((owned_flow
-                                                                self)) )))
+  (! (= (owned_flow self) (rec__model__uml_activity__owned_flow_data
+                          (us_split_fields11 self))) :pattern ((owned_flow
+                                                               self)) )))
 
 (declare-fun sm () us_rep2)
 
@@ -1480,12 +1458,12 @@
   (= no_uml_control_flow (mk___rep4
                          (mk___split_fields4 (of_rep2 0) (of_rep2 0)))))
 
-(define-fun dynamic_invariant4 ((temp___expr_281 Int)
-  (temp___is_init_278 Bool) (temp___skip_constant_279 Bool)
-  (temp___do_toplevel_280 Bool)) Bool (=>
-                                      (or (= temp___is_init_278 true)
+(define-fun dynamic_invariant4 ((temp___expr_277 Int)
+  (temp___is_init_274 Bool) (temp___skip_constant_275 Bool)
+  (temp___do_toplevel_276 Bool)) Bool (=>
+                                      (or (= temp___is_init_274 true)
                                       (<= 0 100)) (in_range5
-                                      temp___expr_281)))
+                                      temp___expr_277)))
 
 ;; no_uml_control_flow_vector__def_axiom
   (assert
@@ -1569,9 +1547,7 @@
 
 ;; H
   (assert
-  (and
   (and (= model__transform__L_1__R1b__assume (owned_state sm))
-  (owned_state__function_guard model__transform__L_1__R1b__assume sm))
   (= model__transform__L_1__R1b__assume (rec__model__uml_state_machine__owned_state_data
                                         (us_split_fields5 sm)))))
 
@@ -1589,22 +1565,6 @@
 
 ;; H
   (assert (<= s1 100))
-
-;; H
-  (assert (owned_state__function_guard (owned_state sm) sm))
-
-;; H
-  (assert (owned_state__function_guard (owned_state sm) sm))
-
-;; H
-  (assert
-  (forall ((t1 Int)) (name__function_guard
-  (name (select (owned_state sm) t1)) (select (owned_state sm) t1))))
-
-;; H
-  (assert
-  (forall ((t1 Int)) (name__2__function_guard (name__2 (select av2 t1))
-  (select av2 t1))))
 
 ;; H
   (assert

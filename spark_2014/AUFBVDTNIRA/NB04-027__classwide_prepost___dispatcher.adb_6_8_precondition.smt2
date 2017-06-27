@@ -152,18 +152,15 @@
 ;; object__t__compat_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (is_valid__function_guard1 (is_valid1 us_tag x) us_tag x)
-     (and (is_valid__function_guard (is_valid x) x)
-     (= (to_int1 (is_valid x)) (to_int1 (is_valid1 us_tag x))))) :pattern (
+  (! (= (to_int1 (is_valid x)) (to_int1 (is_valid1 us_tag x))) :pattern (
   (is_valid1 us_tag x)) )))
 
 ;; is_valid__def_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (is_valid__function_guard (is_valid x) x)
-     (= (= (is_valid x) true)
-     (= (rec__object__t__b (us_split_fields1 x)) true))) :pattern ((is_valid
-                                                                   x)) )))
+  (! (= (= (is_valid x) true)
+     (= (rec__object__t__b (us_split_fields1 x)) true)) :pattern ((is_valid
+                                                                  x)) )))
 
 (declare-fun x__split_fields () Bool)
 
@@ -171,14 +168,6 @@
 
 ;; H
   (assert (= x__split_fields true))
-
-;; H
-  (assert (is_valid__function_guard1
-  (is_valid1 x__attr__tag
-  (mk___rep (mk___split_fields x__split_fields x__split_fields1)
-  x__attr__tag)) x__attr__tag
-  (mk___rep (mk___split_fields x__split_fields x__split_fields1)
-  x__attr__tag)))
 
 (assert
 ;; WP_parameter_def

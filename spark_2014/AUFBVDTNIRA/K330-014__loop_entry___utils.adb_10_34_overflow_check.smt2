@@ -116,8 +116,7 @@
   (assert (and (= o (- val__ 1)) (in_range1 (- val__ 1))))
 
 ;; H
-  (assert
-  (and (and (= o1 (sum_of o)) (sum_of__function_guard o1 o)) (in_range1 o1)))
+  (assert (and (= o1 (sum_of o)) (in_range1 o1)))
 
 ;; H
   (assert (= o2 (+ o1 val__)))

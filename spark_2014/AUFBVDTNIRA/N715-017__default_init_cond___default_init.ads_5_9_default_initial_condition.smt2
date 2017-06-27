@@ -209,23 +209,18 @@
 
 (declare-fun arr_ok__function_guard (Bool (Array Int natural)) Bool)
 
-;; temp___result_175_def
-  (assert
-  (forall ((temp___174 (Array Int natural))) (arr_ok__function_guard
-  (arr_ok temp___174) temp___174)))
-
-(define-fun default_initial_assumption ((temp___expr_171 (Array Int natural))
-  (temp___skip_top_level_172 Bool)) Bool (and
-                                         (forall ((temp___173 Int))
+(define-fun default_initial_assumption ((temp___expr_167 (Array Int natural))
+  (temp___skip_top_level_168 Bool)) Bool (and
+                                         (forall ((temp___169 Int))
                                          (=>
-                                         (and (<= 1 temp___173)
-                                         (<= temp___173 3))
+                                         (and (<= 1 temp___169)
+                                         (<= temp___169 3))
                                          (= (to_rep
-                                            (select temp___expr_171 temp___173)) 0)))
+                                            (select temp___expr_167 temp___169)) 0)))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_172 true))
-                                         (= (arr_ok temp___expr_171) true))))
+                                         (= temp___skip_top_level_168 true))
+                                         (= (arr_ok temp___expr_167) true))))
 
 ;; arr_ok__post_axiom
   (assert true)
@@ -233,9 +228,7 @@
 ;; arr_ok__def_axiom
   (assert
   (forall ((x (Array Int natural)))
-  (! (=> (arr_ok__function_guard (arr_ok x) x)
-     (= (= (arr_ok x) true) (= (to_rep (select x 1)) 0))) :pattern ((arr_ok
-                                                                    x)) )))
+  (! (= (= (arr_ok x) true) (= (to_rep (select x 1)) 0)) :pattern ((arr_ok x)) )))
 
 (define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool)
   (temp___skip_constant_31 Bool)
@@ -246,7 +239,7 @@
 
 (declare-fun o () Int)
 
-(declare-fun temp___298 () (Array Int natural))
+(declare-fun temp___273 () (Array Int natural))
 
 (declare-fun result () Bool)
 
@@ -261,15 +254,12 @@
 
 ;; H
   (assert
-  (forall ((temp___299 Int))
-  (=> (and (<= 1 temp___299) (<= temp___299 3))
-  (= (to_rep (select temp___298 temp___299)) 0))))
-
-;; H
-  (assert (arr_ok__function_guard (arr_ok temp___298) temp___298))
+  (forall ((temp___274 Int))
+  (=> (and (<= 1 temp___274) (<= temp___274 3))
+  (= (to_rep (select temp___273 temp___274)) 0))))
 
 (assert
 ;; WP_parameter_def
  ;; File "default_init.ads", line 54, characters 0-0
-  (not (= (arr_ok temp___298) true)))
+  (not (= (arr_ok temp___273) true)))
 (check-sat)

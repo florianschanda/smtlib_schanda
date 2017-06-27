@@ -257,12 +257,11 @@
   (forall ((i Int))
   (! (=> (dynamic_invariant1 i true true true)
      (let ((result (create_step_array i)))
-     (=> (create_step_array__function_guard result i)
      (forall ((j Int))
      (=> (and (<= 0 j) (<= j 1001))
      (and (=> (< j i) (= (to_rep (select result j)) (- 23)))
-     (=> (<= i j) (= (to_rep (select result j)) 69)))))))) :pattern (
-  (create_step_array i)) )))
+     (=> (<= i j) (= (to_rep (select result j)) 69))))))) :pattern ((create_step_array
+                                                                    i)) )))
 
 (declare-fun i () Int)
 
@@ -373,8 +372,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o (create_step_array i)) (create_step_array__function_guard o i))
+  (and (= o (create_step_array i))
   (forall ((j9 Int))
   (=> (and (<= 0 j9) (<= j9 1001))
   (and (=> (< j9 i) (= (to_rep (select o j9)) (- 23)))

@@ -483,9 +483,8 @@
   (assert
   (forall ((s us_rep))
   (! (let ((result (to__ s)))
-     (=> (to____function_guard result s)
      (and (and (= (first1 result) 1) (<= 0 (last1 result)))
-     (dynamic_invariant1 result true false true)))) :pattern ((to__ s)) )))
+     (dynamic_invariant1 result true false true))) :pattern ((to__ s)) )))
 
 (declare-fun is_empty (us_rep) Bool)
 
@@ -498,10 +497,8 @@
 ;; empty_stack__post_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (let ((result (empty_stack us_void_param)))
-     (and (is_empty__function_guard (is_empty result) result)
-     (=> (empty_stack__function_guard result us_void_param)
-     (= (is_empty result) true)))) :pattern ((empty_stack us_void_param)) )))
+  (! (= (is_empty (empty_stack us_void_param)) true) :pattern ((empty_stack
+                                                               us_void_param)) )))
 
 (declare-fun top (us_rep) Int)
 
@@ -510,28 +507,23 @@
 ;; top__post_axiom
   (assert
   (forall ((s us_rep))
-  (! (and (is_empty__function_guard (is_empty s) s)
-     (=> (not (= (is_empty s) true))
+  (! (=> (not (= (is_empty s) true))
      (let ((result (top s)))
-     (and (to____function_guard (to__ s) s)
-     (and (to____function_guard (to__ s) s)
-     (=> (top__function_guard result s)
      (and
      (= result (to_rep
-               (let ((temp___190 (to__ s)))
-               (select (to_array temp___190) (last1 (to__ s))))))
-     (dynamic_invariant result true false true)))))))) :pattern ((top s)) )))
+               (let ((temp___179 (to__ s)))
+               (select (to_array temp___179) (last1 (to__ s))))))
+     (dynamic_invariant result true false true)))) :pattern ((top s)) )))
 
 ;; top__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (top__function_guard (top s) s)
-     (= (top s) (to_rep
-                (let ((temp___193 (rec__stack__stack__content
+  (! (= (top s) (to_rep
+                (let ((temp___181 (rec__stack__stack__content
                                   (us_split_fields1 s))))
-                (select temp___193 (to_rep1
+                (select temp___181 (to_rep1
                                    (rec__stack__stack__top
-                                   (us_split_fields1 s)))))))) :pattern (
+                                   (us_split_fields1 s))))))) :pattern (
   (top s)) )))
 
 (declare-fun is_full (us_rep) Bool)
@@ -557,14 +549,12 @@
 (declare-datatypes () ((t12s__ref (mk_t12s__ref (t12s__content t12s)))))
 (define-fun t12s__ref___projection ((a t12s__ref)) t12s (t12s__content a))
 
-(declare-fun temp___197 (Int) (Array Int integer))
+(declare-fun temp___182 (Int) (Array Int integer))
 
 ;; def_axiom
   (assert
-  (forall ((temp___199 Int))
-  (= (select (temp___197 temp___199) 1) (of_rep temp___199))))
-
-(declare-fun last2 () Int)
+  (forall ((temp___184 Int))
+  (= (select (temp___182 temp___184) 1) (of_rep temp___184))))
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -588,7 +578,7 @@
 
 (declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -597,7 +587,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep (first2 (mk1 f l))) f) (= (to_rep (last3 (mk1 f l))) l)))) :pattern (
+     (and (= (to_rep (first2 (mk1 f l))) f) (= (to_rep (last2 (mk1 f l))) l)))) :pattern (
   (mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
@@ -616,10 +606,10 @@
 
 (define-fun first3 ((a us_t1)) Int (to_rep (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last4 a))
-                                    (+ (- (last4 a) (first3 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size3 () Int)
 
@@ -654,8 +644,8 @@
 
 (define-fun bool_eq8 ((x us_t1)
   (y us_t1)) Bool (bool_eq1 (elts1 x) (to_rep (first2 (rt1 x)))
-                  (to_rep (last3 (rt1 x))) (elts1 y)
-                  (to_rep (first2 (rt1 y))) (to_rep (last3 (rt1 y)))))
+                  (to_rep (last2 (rt1 x))) (elts1 y)
+                  (to_rep (first2 (rt1 y))) (to_rep (last2 (rt1 y)))))
 
 (declare-fun user_eq8 (us_t1 us_t1) Bool)
 
@@ -794,12 +784,12 @@
 
 (declare-fun length__function_guard (Int us_rep1) Bool)
 
-(define-fun dynamic_invariant2 ((temp___expr_293 Int)
-  (temp___is_init_290 Bool) (temp___skip_constant_291 Bool)
-  (temp___do_toplevel_292 Bool)) Bool (=>
-                                      (or (= temp___is_init_290 true)
+(define-fun dynamic_invariant2 ((temp___expr_274 Int)
+  (temp___is_init_271 Bool) (temp___skip_constant_272 Bool)
+  (temp___do_toplevel_273 Bool)) Bool (=>
+                                      (or (= temp___is_init_271 true)
                                       (<= 0 100)) (in_range6
-                                      temp___expr_293)))
+                                      temp___expr_274)))
 
 (declare-fun to_rep2 (capacity_range) Int)
 
@@ -877,7 +867,7 @@
 
 (declare-fun length__function_guard1 (Int us_rep2) Bool)
 
-(define-fun last5 ((container us_rep2)) Int (+ 0 (length3 container)))
+(define-fun last4 ((container us_rep2)) Int (+ 0 (length3 container)))
 
 (declare-fun last__function_guard (Int us_rep2) Bool)
 
@@ -885,7 +875,7 @@
 
 (declare-fun model____function_guard (us_rep2 us_rep1) Bool)
 
-(define-fun last_index ((container us_rep1)) Int (last5 (model__ container)))
+(define-fun last_index ((container us_rep1)) Int (last4 (model__ container)))
 
 (declare-fun last_index__function_guard (Int us_rep1) Bool)
 
@@ -911,21 +901,21 @@
 (define-fun extended_index__ref___projection ((a extended_index__ref)) extended_index 
   (extended_index__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_287 Int)
-  (temp___is_init_284 Bool) (temp___skip_constant_285 Bool)
-  (temp___do_toplevel_286 Bool)) Bool (=>
-                                      (or (= temp___is_init_284 true)
+(define-fun dynamic_invariant3 ((temp___expr_268 Int)
+  (temp___is_init_265 Bool) (temp___skip_constant_266 Bool)
+  (temp___do_toplevel_267 Bool)) Bool (=>
+                                      (or (= temp___is_init_265 true)
                                       (<= 0 101)) (in_range7
-                                      temp___expr_287)))
+                                      temp___expr_268)))
 
 (declare-fun first_index__function_guard (Int us_rep1) Bool)
 
-(define-fun dynamic_invariant4 ((temp___expr_275 Int)
-  (temp___is_init_272 Bool) (temp___skip_constant_273 Bool)
-  (temp___do_toplevel_274 Bool)) Bool (=>
-                                      (or (= temp___is_init_272 true)
+(define-fun dynamic_invariant4 ((temp___expr_256 Int)
+  (temp___is_init_253 Bool) (temp___skip_constant_254 Bool)
+  (temp___do_toplevel_255 Bool)) Bool (=>
+                                      (or (= temp___is_init_253 true)
                                       (<= 1 100)) (in_range5
-                                      temp___expr_275)))
+                                      temp___expr_256)))
 
 (declare-fun get (us_rep2 Int) Int)
 
@@ -959,12 +949,12 @@
 (define-fun element_type__ref___projection ((a element_type__ref)) element_type 
   (element_type__content a))
 
-(define-fun dynamic_invariant5 ((temp___expr_281 Int)
-  (temp___is_init_278 Bool) (temp___skip_constant_279 Bool)
-  (temp___do_toplevel_280 Bool)) Bool (=>
-                                      (or (= temp___is_init_278 true)
+(define-fun dynamic_invariant5 ((temp___expr_262 Int)
+  (temp___is_init_259 Bool) (temp___skip_constant_260 Bool)
+  (temp___do_toplevel_261 Bool)) Bool (=>
+                                      (or (= temp___is_init_259 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range8 temp___expr_281)))
+                                      (in_range8 temp___expr_262)))
 
 (define-fun olt ((left us_rep2)
   (right us_rep2)) Bool (and (< (length3 left) (length3 right)) (ite 
@@ -973,7 +963,7 @@
                                                                 (=>
                                                                 (and (<= 1 n)
                                                                 (<= n 
-                                                                (last5 left)))
+                                                                (last4 left)))
                                                                 (= (get left
                                                                    n) 
                                                                 (get right n))))
@@ -1032,22 +1022,22 @@
 
 (declare-fun is_empty__function_guard1 (Bool us_rep1) Bool)
 
-(define-fun dynamic_invariant6 ((temp___expr_417 us_rep1)
-  (temp___is_init_414 Bool) (temp___skip_constant_415 Bool)
-  (temp___do_toplevel_416 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_415 true))
-                                      (in_range9 100 temp___expr_417)))
+(define-fun dynamic_invariant6 ((temp___expr_398 us_rep1)
+  (temp___is_init_395 Bool) (temp___skip_constant_396 Bool)
+  (temp___do_toplevel_397 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_396 true))
+                                      (in_range9 100 temp___expr_398)))
 
-(define-fun default_initial_assumption ((temp___expr_419 us_rep1)
-  (temp___skip_top_level_420 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_400 us_rep1)
+  (temp___skip_top_level_401 Bool)) Bool (and
                                          (= (to_rep2
                                             (rec__list__my_lists__vector__capacity
                                             (us_split_discrs1
-                                            temp___expr_419))) 100)
+                                            temp___expr_400))) 100)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_420 true))
-                                         (= (is_empty1 temp___expr_419) true))))
+                                         (= temp___skip_top_level_401 true))
+                                         (= (is_empty1 temp___expr_400) true))))
 
 (declare-fun l () us_rep1)
 
@@ -1059,17 +1049,13 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(declare-fun last6 () Int)
+(declare-fun last5 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
 (declare-fun res__split_discrs () us_split_discrs)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
-
-(declare-fun first5 () Int)
-
-(declare-fun last7 () Int)
 
 (define-fun dynamic_property3 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -1090,10 +1076,6 @@
 (define-fun t2b__ref___projection ((a t2b__ref)) integer (t2b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
-
-(declare-fun first6 () Int)
-
-(declare-fun last8 () Int)
 
 (define-fun dynamic_property4 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -1126,7 +1108,7 @@
   (assert (= first4 1))
 
 ;; last__def_axiom
-  (assert (= last6 (last_index l)))
+  (assert (= last5 (last_index l)))
 
 (declare-sort count_type 0)
 
@@ -1149,12 +1131,12 @@
 (define-fun count_type__ref___projection ((a count_type__ref)) count_type 
   (count_type__content a))
 
-(define-fun dynamic_invariant8 ((temp___expr_227 Int)
-  (temp___is_init_224 Bool) (temp___skip_constant_225 Bool)
-  (temp___do_toplevel_226 Bool)) Bool (=>
-                                      (or (= temp___is_init_224 true)
+(define-fun dynamic_invariant8 ((temp___expr_208 Int)
+  (temp___is_init_205 Bool) (temp___skip_constant_206 Bool)
+  (temp___do_toplevel_207 Bool)) Bool (=>
+                                      (or (= temp___is_init_205 true)
                                       (<= 0 2147483647)) (in_range10
-                                      temp___expr_227)))
+                                      temp___expr_208)))
 
 ;; is_full__post_axiom
   (assert true)
@@ -1162,10 +1144,7 @@
 ;; is_full__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (is_full__function_guard (is_full s) s)
-     (and (to____function_guard (to__ s) s)
-     (= (= (is_full s) true) (<= 100 (last1 (to__ s)))))) :pattern ((is_full
-                                                                    s)) )))
+  (! (= (= (is_full s) true) (<= 100 (last1 (to__ s)))) :pattern ((is_full s)) )))
 
 ;; is_empty__post_axiom
   (assert true)
@@ -1173,10 +1152,7 @@
 ;; is_empty__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (is_empty__function_guard (is_empty s) s)
-     (and (to____function_guard (to__ s) s)
-     (= (= (is_empty s) true) (< (last1 (to__ s)) 1)))) :pattern ((is_empty
-                                                                  s)) )))
+  (! (= (= (is_empty s) true) (< (last1 (to__ s)) 1)) :pattern ((is_empty s)) )))
 
 (define-fun dynamic_invariant9 ((temp___expr_136 Int)
   (temp___is_init_133 Bool) (temp___skip_constant_134 Bool)
@@ -1192,7 +1168,7 @@
                                                                 (=>
                                                                 (and (<= 1 n)
                                                                 (<= n 
-                                                                (last5 left)))
+                                                                (last4 left)))
                                                                 (= (get left
                                                                    n) 
                                                                 (get right n))))
@@ -1205,11 +1181,11 @@
   (forall ((a us_rep2) (b us_rep2))
   (! (= (user_eq12 a b) (oeq a b)) :pattern ((user_eq12 a b)) )))
 
-(define-fun default_initial_assumption1 ((temp___expr_327 us_rep2)
-  (temp___skip_top_level_328 Bool)) Bool (=>
+(define-fun default_initial_assumption1 ((temp___expr_308 us_rep2)
+  (temp___skip_top_level_309 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_328 true))
-                                         (= (length3 temp___expr_327) 0)))
+                                         (= temp___skip_top_level_309 true))
+                                         (= (length3 temp___expr_308) 0)))
 
 ;; model____post_axiom
   (assert
@@ -1245,12 +1221,12 @@
 (define-fun extended_index__ref_2__projection ((a extended_index__ref1)) extended_index1 
   (extended_index__content1 a))
 
-(define-fun dynamic_invariant10 ((temp___expr_320 Int)
-  (temp___is_init_317 Bool) (temp___skip_constant_318 Bool)
-  (temp___do_toplevel_319 Bool)) Bool (=>
-                                      (or (= temp___is_init_317 true)
+(define-fun dynamic_invariant10 ((temp___expr_301 Int)
+  (temp___is_init_298 Bool) (temp___skip_constant_299 Bool)
+  (temp___do_toplevel_300 Bool)) Bool (=>
+                                      (or (= temp___is_init_298 true)
                                       (<= 0 100)) (in_range11
-                                      temp___expr_320)))
+                                      temp___expr_301)))
 
 ;; length__post_axiom
   (assert
@@ -1282,12 +1258,12 @@
 (define-fun element_type__ref_2__projection ((a element_type__ref1)) element_type1 
   (element_type__content1 a))
 
-(define-fun dynamic_invariant11 ((temp___expr_314 Int)
-  (temp___is_init_311 Bool) (temp___skip_constant_312 Bool)
-  (temp___do_toplevel_313 Bool)) Bool (=>
-                                      (or (= temp___is_init_311 true)
+(define-fun dynamic_invariant11 ((temp___expr_295 Int)
+  (temp___is_init_292 Bool) (temp___skip_constant_293 Bool)
+  (temp___do_toplevel_294 Bool)) Bool (=>
+                                      (or (= temp___is_init_292 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range12 temp___expr_314)))
+                                      (in_range12 temp___expr_295)))
 
 ;; get__post_axiom
   (assert
@@ -1295,7 +1271,7 @@
   (forall ((position Int))
   (! (=>
      (and (dynamic_invariant10 position true true true)
-     (and (<= 1 position) (<= position (last5 container))))
+     (and (<= 1 position) (<= position (last4 container))))
      (dynamic_invariant11 (get container position) true false true)) :pattern (
   (get container position)) ))))
 
@@ -1346,14 +1322,8 @@
          (rec__list__my_lists__vector__capacity (us_split_discrs1 l)))))
 
 ;; H
-  (assert (is_empty__function_guard (is_empty list__reverse_list__s__assume2)
-  list__reverse_list__s__assume2))
-
-;; H
   (assert
-  (and
   (and (= list__reverse_list__s__assume2 (empty_stack Tuple0))
-  (empty_stack__function_guard list__reverse_list__s__assume2 Tuple0))
   (= (is_empty list__reverse_list__s__assume2) true)))
 
 ;; H
@@ -1380,15 +1350,15 @@
 
 ;; H
   (assert
-  (and (= list__reverse_list__last__assume (last5 (model__ l)))
+  (and (= list__reverse_list__last__assume (last4 (model__ l)))
   (and (in_range7 list__reverse_list__last__assume)
-  (= list__reverse_list__last__assume (last5 (model__ l))))))
+  (= list__reverse_list__last__assume (last4 (model__ l))))))
 
 ;; H
-  (assert (= list__reverse_list__last__assume last6))
+  (assert (= list__reverse_list__last__assume last5))
 
 ;; H
-  (assert (in_range1 last6))
+  (assert (in_range1 last5))
 
 ;; H
   (assert (default_initial_assumption
@@ -1421,23 +1391,7 @@
   (assert (<= first4 i1))
 
 ;; H
-  (assert (<= i1 last6))
-
-;; H
-  (assert (to____function_guard (to__ (mk___rep s__split_fields3))
-  (mk___rep s__split_fields3)))
-
-;; H
-  (assert (to____function_guard (to__ (mk___rep s__split_fields2))
-  (mk___rep s__split_fields2)))
-
-;; H
-  (assert (to____function_guard (to__ (mk___rep s__split_fields2))
-  (mk___rep s__split_fields2)))
-
-;; H
-  (assert (to____function_guard (to__ (mk___rep s__split_fields2))
-  (mk___rep s__split_fields2)))
+  (assert (<= i1 last5))
 
 ;; H
   (assert (and (= o i1) (in_range5 i1)))
@@ -1449,50 +1403,46 @@
 
 ;; H
   (assert
-  (= (let ((temp___203 (to__ (mk___rep s__split_fields3))))
-     (bool_eq1 (elts temp___203) (to_rep (first (rt temp___203)))
-     (to_rep (last (rt temp___203)))
-     (let ((temp___202 (temp___197 o1)))
-     (let ((temp___201 (to__ (mk___rep s__split_fields2))))
-     (ite (= (length temp___201) 0) temp___202
-     (concat1 (elts temp___201) (to_rep (first (rt temp___201)))
-     (to_rep (last (rt temp___201))) temp___202 1 1))))
+  (= (let ((temp___188 (to__ (mk___rep s__split_fields3))))
+     (bool_eq1 (elts temp___188) (to_rep (first (rt temp___188)))
+     (to_rep (last (rt temp___188)))
+     (let ((temp___187 (temp___182 o1)))
+     (let ((temp___186 (to__ (mk___rep s__split_fields2))))
+     (ite (= (length temp___186) 0) temp___187
+     (concat1 (elts temp___186) (to_rep (first (rt temp___186)))
+     (to_rep (last (rt temp___186))) temp___187 1 1))))
      (to_rep
      (first
-     (let ((temp___201 (to__ (mk___rep s__split_fields2))))
-     (ite (= (length temp___201) 0) (mk 1 1)
-     (mk (to_rep (first (rt temp___201)))
-     (- (+ (to_rep (first (rt temp___201))) (+ (ite (<= (to_rep
+     (let ((temp___186 (to__ (mk___rep s__split_fields2))))
+     (ite (= (length temp___186) 0) (mk 1 1)
+     (mk (to_rep (first (rt temp___186)))
+     (- (+ (to_rep (first (rt temp___186))) (+ (ite (<= (to_rep
                                                         (first
-                                                        (rt temp___201))) 
+                                                        (rt temp___186))) 
                                                (to_rep
-                                               (last (rt temp___201))))
+                                               (last (rt temp___186))))
                                                (+ (- (to_rep
-                                                     (last (rt temp___201))) 
+                                                     (last (rt temp___186))) 
                                                (to_rep
-                                               (first (rt temp___201)))) 1)
+                                               (first (rt temp___186)))) 1)
                                                0) (ite (<= 1 1) (+ (- 1 1) 1)
                                                   0))) 1))))))
      (to_rep
      (last
-     (let ((temp___201 (to__ (mk___rep s__split_fields2))))
-     (ite (= (length temp___201) 0) (mk 1 1)
-     (mk (to_rep (first (rt temp___201)))
-     (- (+ (to_rep (first (rt temp___201))) (+ (ite (<= (to_rep
+     (let ((temp___186 (to__ (mk___rep s__split_fields2))))
+     (ite (= (length temp___186) 0) (mk 1 1)
+     (mk (to_rep (first (rt temp___186)))
+     (- (+ (to_rep (first (rt temp___186))) (+ (ite (<= (to_rep
                                                         (first
-                                                        (rt temp___201))) 
+                                                        (rt temp___186))) 
                                                (to_rep
-                                               (last (rt temp___201))))
+                                               (last (rt temp___186))))
                                                (+ (- (to_rep
-                                                     (last (rt temp___201))) 
+                                                     (last (rt temp___186))) 
                                                (to_rep
-                                               (first (rt temp___201)))) 1)
+                                               (first (rt temp___186)))) 1)
                                                0) (ite (<= 1 1) (+ (- 1 1) 1)
                                                   0))) 1)))))))) true))
-
-;; H
-  (assert (to____function_guard (to__ (mk___rep s__split_fields3))
-  (mk___rep s__split_fields3)))
 
 (assert
 ;; WP_parameter_def

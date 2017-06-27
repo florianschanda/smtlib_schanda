@@ -44,12 +44,7 @@
 (declare-fun result () Bool)
 
 ;; H
-  (assert
-  (and (= result (found_none Tuple0)) (found_none__function_guard result
-  Tuple0)))
-
-;; H
-  (assert (found_none__function_guard (found_none Tuple0) Tuple0))
+  (assert (= result (found_none Tuple0)))
 
 (assert
 ;; WP_parameter_def

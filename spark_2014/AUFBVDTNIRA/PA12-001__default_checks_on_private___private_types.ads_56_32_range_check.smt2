@@ -104,17 +104,14 @@
 ;; id__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (id x)))
-     (=> (id__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (id x) true
+     false true)) :pattern ((id x)) )))
 
 ;; id__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true) (id__function_guard (id x) x))
-     (= (id x) x)) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (id x) x)) :pattern (
+  (id x)) )))
 
 (declare-fun to_rep (positive) Int)
 
@@ -318,29 +315,26 @@
 (declare-datatypes () ((t2__ref (mk_t2__ref (t2__content us_rep)))))
 (define-fun t2__ref_2__projection ((a t2__ref)) us_rep (t2__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_195 us_rep)
-  (temp___is_init_192 Bool) (temp___skip_constant_193 Bool)
-  (temp___do_toplevel_194 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_193 true))
-                                      (in_range3 (of_int 1) temp___expr_195)))
+(define-fun dynamic_invariant1 ((temp___expr_190 us_rep)
+  (temp___is_init_187 Bool) (temp___skip_constant_188 Bool)
+  (temp___do_toplevel_189 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_188 true))
+                                      (in_range3 (of_int 1) temp___expr_190)))
 
-;; temp___result_200_def
-  (assert (id__function_guard (id 0) 0))
-
-(define-fun default_initial_assumption ((temp___expr_197 us_rep)
-  (temp___skip_top_level_198 Bool)) Bool (and
-                                         (= (attr__tag temp___expr_197) 
+(define-fun default_initial_assumption ((temp___expr_192 us_rep)
+  (temp___skip_top_level_193 Bool)) Bool (and
+                                         (= (attr__tag temp___expr_192) 
                                          us_tag1)
                                          (and
                                          (= (rec__private_types__p4__t__d
                                             (us_split_discrs1
-                                            temp___expr_197)) (of_int 1))
+                                            temp___expr_192)) (of_int 1))
                                          (=> (private_types__p4__t__f__pred
-                                         temp___expr_197)
+                                         temp___expr_192)
                                          (= (to_rep
                                             (rec__private_types__p4__t__f
                                             (us_split_fields1
-                                            temp___expr_197))) (id 0))))))
+                                            temp___expr_192))) (id 0))))))
 
 (declare-fun x__split_discrs () us_split_discrs)
 
@@ -355,20 +349,18 @@
                                      (<= 1 2147483647)) (in_range1
                                      temp___expr_39)))
 
-(declare-fun temp___226 () Bool)
+(declare-fun temp___220 () Bool)
 
 (declare-fun o () Int)
 
 ;; H
-  (assert (= (of_int 1) temp___226))
+  (assert (= (of_int 1) temp___220))
 
 ;; H
-  (assert (= (to_int1 temp___226) 1))
+  (assert (= (to_int1 temp___220) 1))
 
 ;; H
-  (assert
-  (and (and (= o (id 0)) (id__function_guard o 0))
-  (and (in_range2 o) (= o 0))))
+  (assert (and (= o (id 0)) (and (in_range2 o) (= o 0))))
 
 (assert
 ;; WP_parameter_def

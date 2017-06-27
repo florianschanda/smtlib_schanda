@@ -370,12 +370,9 @@
   (assert
   (forall ((account Int))
   (forall ((database__availability__links (Array Int us_rep)))
-  (! (=> (is_available__function_guard
-     (is_available account database__availability__links) account
-     database__availability__links)
-     (= (= (is_available account database__availability__links) true)
+  (! (= (= (is_available account database__availability__links) true)
      (= (rec__database__availability__account_link__available
-        (us_split_fields1 (select database__availability__links account))) true))) :pattern (
+        (us_split_fields1 (select database__availability__links account))) true)) :pattern (
   (is_available account database__availability__links)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -458,9 +455,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= result2 (is_available i2 links)) (is_available__function_guard
-  result2 i2 links))
+  (and (= result2 (is_available i2 links))
   (= (= result2 true)
   (= (rec__database__availability__account_link__available
      (us_split_fields1 (select links i2))) true))))

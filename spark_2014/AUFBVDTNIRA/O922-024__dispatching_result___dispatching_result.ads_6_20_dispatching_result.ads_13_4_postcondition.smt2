@@ -302,8 +302,8 @@
   (temp___skip_top_level_137 Bool)) Bool (= (attr__tag temp___expr_136) 
   us_tag))
 
-(define-fun default_initial_assumption1 ((temp___expr_149 us_rep1)
-  (temp___skip_top_level_150 Bool)) Bool (= (attr__tag1 temp___expr_149) 
+(define-fun default_initial_assumption1 ((temp___expr_147 us_rep1)
+  (temp___skip_top_level_148 Bool)) Bool (= (attr__tag1 temp___expr_147) 
   us_tag1))
 
 (declare-fun dispatching_result__init__2__result () natural)

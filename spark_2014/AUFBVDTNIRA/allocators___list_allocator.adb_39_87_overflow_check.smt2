@@ -749,19 +749,18 @@
 ;; user_eq__def_axiom
   (assert
   (forall ((a us_rep3) (b us_rep3))
-  (! (and (oeq__function_guard1 (oeq1 a b) a b)
-     (= (user_eq12 a b) (oeq1 a b))) :pattern ((user_eq12 a b)) )))
+  (! (= (user_eq12 a b) (oeq1 a b)) :pattern ((user_eq12 a b)) )))
 
-(define-fun default_initial_assumption2 ((temp___expr_212 us_rep3)
-  (temp___skip_top_level_213 Bool)) Bool (and
+(define-fun default_initial_assumption2 ((temp___expr_211 us_rep3)
+  (temp___skip_top_level_212 Bool)) Bool (and
                                          (= (length
                                             (rec__list_allocator__m__t__available
                                             (us_split_fields3
-                                            temp___expr_212))) 0)
+                                            temp___expr_211))) 0)
                                          (= (is_empty
                                             (rec__list_allocator__m__t__allocated
                                             (us_split_fields3
-                                            temp___expr_212))) true)))
+                                            temp___expr_211))) true)))
 
 (declare-fun contains1 (us_rep1 Int) Bool)
 
@@ -774,10 +773,9 @@
   (assert
   (forall ((s us_rep1))
   (forall ((e Int))
-  (! (=> (contains__function_guard1 (contains1 s e) s e)
-     (= (= (contains1 s e) true)
+  (! (= (= (contains1 s e) true)
      (exists ((i Int))
-     (and (and (<= 1 i) (<= i (length s))) (= (get s i) e))))) :pattern (
+     (and (and (<= 1 i) (<= i (length s))) (= (get s i) e)))) :pattern (
   (contains1 s e)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -791,11 +789,11 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(define-fun dynamic_invariant6 ((temp___expr_243 Int)
-  (temp___is_init_240 Bool) (temp___skip_constant_241 Bool)
-  (temp___do_toplevel_242 Bool)) Bool (=>
-                                      (or (= temp___is_init_240 true)
-                                      (<= 0 1)) (in_range5 temp___expr_243)))
+(define-fun dynamic_invariant6 ((temp___expr_228 Int)
+  (temp___is_init_225 Bool) (temp___skip_constant_226 Bool)
+  (temp___do_toplevel_227 Bool)) Bool (=>
+                                      (or (= temp___is_init_225 true)
+                                      (<= 0 1)) (in_range5 temp___expr_228)))
 
 (define-fun dynamic_invariant7 ((temp___expr_154 Int)
   (temp___is_init_151 Bool) (temp___skip_constant_152 Bool)
@@ -814,13 +812,12 @@
 ;; oeq__def_axiom
   (assert
   (forall ((x us_rep3) (y us_rep3))
-  (! (=> (oeq__function_guard1 (oeq1 x y) x y)
-     (= (= (oeq1 x y) true)
+  (! (= (= (oeq1 x y) true)
      (and
      (= (oeq (rec__list_allocator__m__t__available (us_split_fields3 x))
         (rec__list_allocator__m__t__available (us_split_fields3 y))) true)
      (= (oeq2 (rec__list_allocator__m__t__allocated (us_split_fields3 x))
-        (rec__list_allocator__m__t__allocated (us_split_fields3 y))) true)))) :pattern (
+        (rec__list_allocator__m__t__allocated (us_split_fields3 y))) true))) :pattern (
   (oeq1 x y)) )))
 
 (declare-fun ole (us_rep2 us_rep2) Bool)

@@ -142,8 +142,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(declare-fun first () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -171,8 +169,8 @@
 ;; slide_eq
   (assert
   (forall ((a (Array Int integer)))
-  (forall ((first1 Int))
-  (! (= (slide a first1 first1) a) :pattern ((slide a first1 first1)) ))))
+  (forall ((first Int))
+  (! (= (slide a first first) a) :pattern ((slide a first first)) ))))
 
 ;; slide_def
   (assert
@@ -276,7 +274,7 @@
 
 (declare-sort t 0)
 
-(declare-fun first1 (t) integer)
+(declare-fun first (t) integer)
 
 (declare-fun last (t) integer)
 
@@ -287,7 +285,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep (first1 (mk f l))) f) (= (to_rep (last (mk f l))) l)))) :pattern (
+     (and (= (to_rep (first (mk f l))) f) (= (to_rep (last (mk f l))) l)))) :pattern (
   (mk f l)) )))
 
 (define-fun dynamic_property1 ((range_first Int) (range_last Int) (low Int)
@@ -301,12 +299,12 @@
 (define-fun of_array ((a (Array Int integer)) (f Int)
   (l Int)) us_t (mk___t a (mk f l)))
 
-(define-fun first2 ((a us_t)) Int (to_rep (first1 (rt a))))
+(define-fun first1 ((a us_t)) Int (to_rep (first (rt a))))
 
 (define-fun last1 ((a us_t)) Int (to_rep (last (rt a))))
 
-(define-fun length ((a us_t)) Int (ite (<= (first2 a) (last1 a))
-                                  (+ (- (last1 a) (first2 a)) 1) 0))
+(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last1 a))
+                                  (+ (- (last1 a) (first1 a)) 1) 0))
 
 (declare-fun value__size () Int)
 
@@ -340,8 +338,8 @@
   (assert (forall ((a (Array Int integer))) (<= 0 (object__alignment a))))
 
 (define-fun bool_eq5 ((x us_t)
-  (y us_t)) Bool (bool_eq4 (elts x) (to_rep (first1 (rt x)))
-                 (to_rep (last (rt x))) (elts y) (to_rep (first1 (rt y)))
+  (y us_t)) Bool (bool_eq4 (elts x) (to_rep (first (rt x)))
+                 (to_rep (last (rt x))) (elts y) (to_rep (first (rt y)))
                  (to_rep (last (rt y)))))
 
 (declare-fun user_eq4 (us_t us_t) Bool)
@@ -359,12 +357,12 @@
                                       (=>
                                       (not (= temp___skip_constant_157 true))
                                       (dynamic_property1 1 2147483647
-                                      (first2 temp___expr_159)
+                                      (first1 temp___expr_159)
                                       (last1 temp___expr_159)))
                                       (forall ((temp___160 Int))
                                       (=>
                                       (and
-                                      (<= (first2 temp___expr_159) temp___160)
+                                      (<= (first1 temp___expr_159) temp___160)
                                       (<= temp___160 (last1 temp___expr_159)))
                                       (=>
                                       (or (= temp___is_init_156 true)
@@ -379,11 +377,9 @@
 
 ;; init_array__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (init_array us_void_param)))
-     (=> (init_array__function_guard result us_void_param)
-     (dynamic_invariant1 result true false true))) :pattern ((init_array
-                                                             us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant1
+  (init_array us_void_param) true false
+  true) :pattern ((init_array us_void_param)) )))
 
 (declare-fun x__first () integer)
 
@@ -434,10 +430,8 @@
 
 ;; H
   (assert
-  (and
-  (and (= add_field__x__assume2 (init_array Tuple0))
-  (init_array__function_guard add_field__x__assume2 Tuple0))
-  (dynamic_invariant1 add_field__x__assume2 true false true)))
+  (and (= add_field__x__assume2 (init_array Tuple0)) (dynamic_invariant1
+  add_field__x__assume2 true false true)))
 
 ;; H
   (assert (= result x))
@@ -446,7 +440,7 @@
   (assert (= x1 add_field__x__assume))
 
 ;; H
-  (assert (= (to_rep x__first) (to_rep (first1 add_field__x__assume1))))
+  (assert (= (to_rep x__first) (to_rep (first add_field__x__assume1))))
 
 ;; H
   (assert (= (to_rep x__last) (to_rep (last add_field__x__assume1))))

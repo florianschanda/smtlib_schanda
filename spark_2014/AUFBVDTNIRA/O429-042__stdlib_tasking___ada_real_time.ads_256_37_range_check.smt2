@@ -294,12 +294,12 @@
 (define-fun seconds_count__ref___projection ((a seconds_count__ref)) seconds_count 
   (seconds_count__content a))
 
-(define-fun dynamic_invariant ((temp___expr_230 Int)
-  (temp___is_init_227 Bool) (temp___skip_constant_228 Bool)
-  (temp___do_toplevel_229 Bool)) Bool (=>
-                                      (or (= temp___is_init_227 true)
+(define-fun dynamic_invariant ((temp___expr_153 Int)
+  (temp___is_init_150 Bool) (temp___skip_constant_151 Bool)
+  (temp___do_toplevel_152 Bool)) Bool (=>
+                                      (or (= temp___is_init_150 true)
                                       (<= (- 9223372036854775808) 9223372036854775807))
-                                      (in_range1 temp___expr_230)))
+                                      (in_range1 temp___expr_153)))
 
 (declare-fun ts_sc (us_rep) Int)
 
@@ -308,9 +308,7 @@
 ;; ts_sc__def_axiom
   (assert
   (forall ((ts us_rep))
-  (! (=> (ts_sc__function_guard (ts_sc ts) ts)
-     (and (to_duration__2__function_guard (to_duration__2 ts) ts)
-     (= (ts_sc ts) (to_int1 (to_fixed (to_duration__2 ts)))))) :pattern (
+  (! (= (ts_sc ts) (to_int1 (to_fixed (to_duration__2 ts)))) :pattern (
   (ts_sc ts)) )))
 
 (declare-fun ts () us_rep)
@@ -322,11 +320,8 @@
 (declare-fun o1 () Int)
 
 ;; H
-  (assert (to_duration__2__function_guard (to_duration__2 ts) ts))
-
-;; H
   (assert
-  (and (and (= o (ts_sc ts)) (ts_sc__function_guard o ts))
+  (and (= o (ts_sc ts))
   (and (in_range1 o) (= o (to_int1 (to_fixed (to_duration__2 ts)))))))
 
 ;; H

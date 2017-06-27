@@ -54,22 +54,18 @@
 (declare-datatypes () ((t2__ref (mk_t2__ref (t2__content t2)))))
 (define-fun t2__ref___projection ((a t2__ref)) t2 (t2__content a))
 
-(define-fun dynamic_invariant ((temp___expr_147 Int)
-  (temp___is_init_144 Bool) (temp___skip_constant_145 Bool)
-  (temp___do_toplevel_146 Bool)) Bool (=>
-                                      (or (= temp___is_init_144 true)
+(define-fun dynamic_invariant ((temp___expr_145 Int)
+  (temp___is_init_142 Bool) (temp___skip_constant_143 Bool)
+  (temp___do_toplevel_144 Bool)) Bool (=>
+                                      (or (= temp___is_init_142 true)
                                       (<= 0 2147483647)) (in_range
-                                      temp___expr_147)))
+                                      temp___expr_145)))
 
 (declare-fun g (Int) Bool)
 
 (declare-fun g__function_guard (Bool Int) Bool)
 
-;; temp___result_143_def
-  (assert
-  (forall ((temp___142 Int)) (g__function_guard (g temp___142) temp___142)))
-
-(define-fun type_invariant ((temp___141 Int)) Bool (= (g temp___141) true))
+(define-fun type_invariant ((temp___140 Int)) Bool (= (g temp___140) true))
 
 (declare-fun f__2 (Int) Bool)
 
@@ -79,10 +75,7 @@
   (assert true)
 
 ;; f__2__def_axiom
-  (assert
-  (forall ((x Int))
-  (! (=> (f__2__function_guard (f__2 x) x) (= (f__2 x) true)) :pattern (
-  (f__2 x)) )))
+  (assert (forall ((x Int)) (! (= (f__2 x) true) :pattern ((f__2 x)) )))
 
 (declare-fun x () Int)
 
@@ -94,9 +87,7 @@
 ;; g__def_axiom
   (assert
   (forall ((x1 Int))
-  (! (=> (g__function_guard (g x1) x1)
-     (and (f__2__function_guard (f__2 x1) x1)
-     (= (= (g x1) true) (= (f__2 x1) true)))) :pattern ((g x1)) )))
+  (! (= (= (g x1) true) (= (f__2 x1) true)) :pattern ((g x1)) )))
 
 ;; H
   (assert (in_range x))

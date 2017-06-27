@@ -431,11 +431,8 @@
 ;; state__2__def_axiom
   (assert
   (forall ((stack_functional_spec__my_stack__fields us_split_fields))
-  (! (=> (state__2__function_guard
-     (state__2 stack_functional_spec__my_stack__fields)
-     stack_functional_spec__my_stack__fields)
-     (= (state__2 stack_functional_spec__my_stack__fields) (mk___rep
-                                                           stack_functional_spec__my_stack__fields))) :pattern (
+  (! (= (state__2 stack_functional_spec__my_stack__fields) (mk___rep
+                                                           stack_functional_spec__my_stack__fields)) :pattern (
   (state__2 stack_functional_spec__my_stack__fields)) )))
 
 (declare-fun count (us_rep) Int)
@@ -451,18 +448,15 @@
 
 ;; count__post_axiom
   (assert
-  (forall ((s us_rep))
-  (! (let ((result (count s)))
-     (=> (count__function_guard result s) (dynamic_invariant1 result true
-     false true))) :pattern ((count s)) )))
+  (forall ((s us_rep)) (! (dynamic_invariant1 (count s) true false
+  true) :pattern ((count s)) )))
 
 ;; count__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (count__function_guard (count s) s)
-     (= (count s) (to_rep1
+  (! (= (count s) (to_rep1
                   (rec__stack_functional_spec__stack_type__pointer
-                  (us_split_fields1 s))))) :pattern ((count s)) )))
+                  (us_split_fields1 s)))) :pattern ((count s)) )))
 
 (declare-fun stack_entry (us_rep Int) Int)
 
@@ -472,25 +466,20 @@
   (assert
   (forall ((s us_rep))
   (forall ((n Int))
-  (! (and (count__function_guard (count s) s)
-     (=>
+  (! (=>
      (and (dynamic_invariant1 n true true true)
-     (and (<= 1 n) (<= n (count s))))
-     (let ((result (stack_entry s n)))
-     (=> (stack_entry__function_guard result s n) (dynamic_invariant result
-     true false true))))) :pattern ((stack_entry s n)) ))))
+     (and (<= 1 n) (<= n (count s)))) (dynamic_invariant (stack_entry s n)
+     true false true)) :pattern ((stack_entry s n)) ))))
 
 ;; stack_entry__def_axiom
   (assert
   (forall ((s us_rep))
   (forall ((n Int))
-  (! (=>
-     (and (dynamic_invariant1 n true true true) (stack_entry__function_guard
-     (stack_entry s n) s n))
+  (! (=> (dynamic_invariant1 n true true true)
      (= (stack_entry s n) (to_rep
-                          (let ((temp___180 (rec__stack_functional_spec__stack_type__s
+                          (let ((temp___178 (rec__stack_functional_spec__stack_type__s
                                             (us_split_fields1 s))))
-                          (select temp___180 n))))) :pattern ((stack_entry s
+                          (select temp___178 n))))) :pattern ((stack_entry s
                                                               n)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -537,9 +526,9 @@
 
 (declare-fun o10 () pointer_range)
 
-(declare-fun temp___352 () (Array Int integer))
+(declare-fun temp___228 () (Array Int integer))
 
-(declare-fun temp___3521 () pointer_range)
+(declare-fun temp___2281 () pointer_range)
 
 (declare-fun o11 () integer)
 
@@ -551,9 +540,9 @@
 
 (declare-fun o15 () pointer_range)
 
-(declare-fun temp___356 () (Array Int integer))
+(declare-fun temp___232 () (Array Int integer))
 
-(declare-fun temp___3561 () pointer_range)
+(declare-fun temp___2321 () pointer_range)
 
 (declare-fun o16 () (Array Int integer))
 
@@ -632,26 +621,6 @@
 (define-fun o41 () us_rep (mk___rep (mk___split_fields o16 o17)))
 
 ;; H
-  (assert (state__2__function_guard
-  (state__2
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1))
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1)))
-
-;; H
-  (assert (state__2__function_guard
-  (state__2
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1))
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1)))
-
-;; H
-  (assert (count__function_guard
-  (count
-  (state__2
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1)))
-  (state__2
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1))))
-
-;; H
   (assert
   (<= 2 (count
         (state__2
@@ -715,10 +684,10 @@
   (assert (= my_stack__split_fields1 o10))
 
 ;; H
-  (assert (= temp___352 o9))
+  (assert (= temp___228 o9))
 
 ;; H
-  (assert (= temp___3521 o10))
+  (assert (= temp___2281 o10))
 
 ;; H
   (assert
@@ -728,7 +697,7 @@
 
 ;; H
   (assert
-  (= my_stack__split_fields2 (mk___split_fields temp___352 temp___3521)))
+  (= my_stack__split_fields2 (mk___split_fields temp___228 temp___2281)))
 
 ;; H
   (assert (= (to_rep o11) temp1))
@@ -763,17 +732,17 @@
      my_stack__split_fields2) o15))
 
 ;; H
-  (assert (= temp___356 o14))
+  (assert (= temp___232 o14))
 
 ;; H
-  (assert (= temp___3561 o15))
+  (assert (= temp___2321 o15))
 
 ;; H
   (assert (= result2 (mk___split_fields__ref my_stack__split_fields2)))
 
 ;; H
   (assert
-  (= my_stack__split_fields3 (mk___split_fields temp___356 temp___3561)))
+  (= my_stack__split_fields3 (mk___split_fields temp___232 temp___2321)))
 
 ;; H
   (assert (= temp2 (mk_int__ref temp1)))
@@ -789,68 +758,13 @@
   (assert (= my_stack__split_fields5 my_stack__split_fields3))
 
 ;; H
-  (assert (state__2__function_guard
-  (state__2 (us_split_fields__content my_stack__split_fields4))
-  (us_split_fields__content my_stack__split_fields4)))
-
-;; H
-  (assert (state__2__function_guard
-  (state__2 (us_split_fields__content my_stack__split_fields4))
-  (us_split_fields__content my_stack__split_fields4)))
-
-;; H
-  (assert (count__function_guard
-  (count (state__2 (us_split_fields__content my_stack__split_fields4)))
-  (state__2 (us_split_fields__content my_stack__split_fields4))))
-
-;; H
-  (assert (state__2__function_guard
-  (state__2 (us_split_fields__content my_stack__split_fields4))
-  (us_split_fields__content my_stack__split_fields4)))
-
-;; H
-  (assert (state__2__function_guard
-  (state__2 (us_split_fields__content my_stack__split_fields4))
-  (us_split_fields__content my_stack__split_fields4)))
-
-;; H
   (assert
-  (forall ((i1 Int)) (stack_entry__function_guard
-  (stack_entry (state__2 (us_split_fields__content my_stack__split_fields4))
-  i1) (state__2 (us_split_fields__content my_stack__split_fields4)) i1)))
-
-;; H
-  (assert (state__2__function_guard
-  (state__2
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1))
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1)))
-
-;; H
-  (assert (state__2__function_guard
-  (state__2
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1))
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1)))
-
-;; H
-  (assert
-  (forall ((i1 Int)) (stack_entry__function_guard
-  (stack_entry
-  (state__2
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1)) i1)
-  (state__2
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1)) i1)))
-
-;; H
-  (assert
-  (and
   (and (= o33 (state__2 (us_split_fields__content my_stack__split_fields4)))
-  (state__2__function_guard o33
-  (us_split_fields__content my_stack__split_fields4)))
   (= o33 (mk___rep (us_split_fields__content my_stack__split_fields4)))))
 
 ;; H
   (assert
-  (and (and (= o34 (count o33)) (count__function_guard o34 o33))
+  (and (= o34 (count o33))
   (and (in_range2 o34)
   (= o34 (to_rep1
          (rec__stack_functional_spec__stack_type__pointer
@@ -880,49 +794,22 @@
   (mk___split_fields my_stack__split_fields my_stack__split_fields1)) i1))))))
 
 ;; H
-  (assert (state__2__function_guard
-  (state__2
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1))
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1)))
-
-;; H
-  (assert (state__2__function_guard
-  (state__2
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1))
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1)))
-
-;; H
-  (assert (state__2__function_guard
-  (state__2
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1))
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1)))
-
-;; H
   (assert
-  (and
   (and (= o38 (state__2 (us_split_fields__content my_stack__split_fields4)))
-  (state__2__function_guard o38
-  (us_split_fields__content my_stack__split_fields4)))
   (= (us_split_fields__content my_stack__split_fields4) (mk___split_fields
                                                         o27 o28))))
 
 ;; H
   (assert
-  (and (and (= o29 (count o38)) (count__function_guard o29 o38))
-  (and (in_range2 o29) (= o29 (to_rep1 o28)))))
+  (and (= o29 (count o38)) (and (in_range2 o29) (= o29 (to_rep1 o28)))))
 
 ;; H
   (assert
-  (and
   (and
   (= o30 (stack_entry
          (state__2
          (mk___split_fields my_stack__split_fields my_stack__split_fields1))
          o29))
-  (stack_entry__function_guard o30
-  (state__2
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1)) 
-  o29))
   (and (in_range1 o30)
   (= o30 (to_rep
          (select (rec__stack_functional_spec__stack_type__s
@@ -933,17 +820,13 @@
 
 ;; H
   (assert
-  (and
   (and (= o39 (state__2 (us_split_fields__content my_stack__split_fields4)))
-  (state__2__function_guard o39
-  (us_split_fields__content my_stack__split_fields4)))
   (= (us_split_fields__content my_stack__split_fields4) (mk___split_fields
                                                         o22 o23))))
 
 ;; H
   (assert
-  (and (and (= o24 (count o39)) (count__function_guard o24 o39))
-  (and (in_range2 o24) (= o24 (to_rep1 o23)))))
+  (and (= o24 (count o39)) (and (in_range2 o24) (= o24 (to_rep1 o23)))))
 
 ;; H
   (assert (= o25 (- o24 1)))
@@ -953,41 +836,33 @@
 
 ;; H
   (assert
-  (and
   (and (= o40 (state__2 (us_split_fields__content my_stack__split_fields4)))
-  (state__2__function_guard o40
-  (us_split_fields__content my_stack__split_fields4)))
   (= (us_split_fields__content my_stack__split_fields4) (mk___split_fields
                                                         o20 o21))))
 
 ;; H
   (assert
-  (and
-  (and (= o31 (stack_entry o40 o26)) (stack_entry__function_guard o31 
-  o40 o26)) (and (in_range1 o31) (= o31 (to_rep (select o20 o26))))))
+  (and (= o31 (stack_entry o40 o26))
+  (and (in_range1 o31) (= o31 (to_rep (select o20 o26))))))
 
 ;; H
   (assert (= o32 (ite (= o31 o30) true false)))
 
 ;; H
   (assert
-  (and
   (and (= o41 (state__2 (us_split_fields__content my_stack__split_fields4)))
-  (state__2__function_guard o41
-  (us_split_fields__content my_stack__split_fields4)))
   (= (us_split_fields__content my_stack__split_fields4) (mk___split_fields
                                                         o16 o17))))
 
 ;; H
   (assert
-  (and (and (= o18 (count o41)) (count__function_guard o18 o41))
-  (and (in_range2 o18) (= o18 (to_rep1 o17)))))
+  (and (= o18 (count o41)) (and (in_range2 o18) (= o18 (to_rep1 o17)))))
 
 ;; H
   (assert (= o19 (- o18 1)))
 
 (assert
 ;; WP_parameter_def
- ;; File "stack_functional_spec.ads", line 75, characters 0-0
+ ;; File "stack_functional_spec.ads", line 33, characters 0-0
   (not (in_range2 o19)))
 (check-sat)

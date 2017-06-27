@@ -1281,11 +1281,6 @@
 
 ;; H
   (assert
-  (forall ((cu us_rep1)) (q__function_guard (q (element s cu))
-  (element s cu))))
-
-;; H
-  (assert
   (forall ((cu us_rep1))
   (=> (= (has_key1 (positions s) cu) true) (= (q (element s cu)) true))))
 

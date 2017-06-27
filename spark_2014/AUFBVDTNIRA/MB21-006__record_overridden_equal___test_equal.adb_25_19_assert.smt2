@@ -151,8 +151,7 @@
 ;; user_eq__def_axiom
   (assert
   (forall ((a us_rep) (b us_rep))
-  (! (and (oeq__function_guard (oeq a b) a b) (= (user_eq1 a b) (oeq a b))) :pattern (
-  (user_eq1 a b)) )))
+  (! (= (user_eq1 a b) (oeq a b)) :pattern ((user_eq1 a b)) )))
 
 (declare-datatypes ()
 ((us_split_fields2
@@ -230,8 +229,7 @@
 ;; oeq__def_axiom
   (assert
   (forall ((x us_rep) (y us_rep))
-  (! (=> (oeq__function_guard (oeq x y) x y)
-     (= (= (oeq x y) true)
+  (! (= (= (oeq x y) true)
      (or
      (= (to_rep (rec__test_equal__my_int_mod__content (us_split_fields1 x))) 
      (to_rep (rec__test_equal__my_int_mod__content (us_split_fields1 y))))
@@ -243,7 +241,7 @@
      (to_rep (rec__test_equal__my_int_mod__content (us_split_fields1 x)))) 4)
      (= (- (to_rep
            (rec__test_equal__my_int_mod__content (us_split_fields1 x))) 
-     (to_rep (rec__test_equal__my_int_mod__content (us_split_fields1 y)))) 4))))) :pattern (
+     (to_rep (rec__test_equal__my_int_mod__content (us_split_fields1 y)))) 4)))) :pattern (
   (oeq x y)) )))
 
 (declare-fun content_x () us_rep)
@@ -323,10 +321,6 @@
 
 ;; H
   (assert (= (mk___rep1 (mk___split_fields1 content_y)) y))
-
-;; H
-  (assert (oeq__function_guard (oeq content_x content_y) content_x
-  content_y))
 
 (assert
 ;; WP_parameter_def

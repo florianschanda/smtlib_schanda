@@ -1180,16 +1180,13 @@
 ;; f__post_axiom
   (assert
   (forall ((e Int))
-  (! (=> (dynamic_invariant7 e true true true)
-     (let ((result (f e)))
-     (=> (f__function_guard result e) (dynamic_invariant7 result true false
-     true)))) :pattern ((f e)) )))
+  (! (=> (dynamic_invariant7 e true true true) (dynamic_invariant7 (f e) true
+     false true)) :pattern ((f e)) )))
 
 ;; f__def_axiom
   (assert
   (forall ((e Int))
-  (! (=>
-     (and (dynamic_invariant7 e true true true) (f__function_guard (f e) e))
+  (! (=> (dynamic_invariant7 e true true true)
      (= (f e) (ite (and (<= (- 100) e) (<= e 100)) (* e 2) e))) :pattern (
   (f e)) )))
 
@@ -1619,12 +1616,6 @@
 
 ;; H
   (assert
-  (forall ((i1 Int)) (f__function_guard
-  (f (get2 (model__ s) (get (keys s) i1)))
-  (get2 (model__ s) (get (keys s) i1)))))
-
-;; H
-  (assert
   (= (length (mk___rep r__split_discrs r__split_fields2)) (- (get1
                                                              (positions s)
                                                              (mk___rep1
@@ -1644,16 +1635,16 @@
 
 ;; H
   (assert
-  (let ((temp___853 (keys (mk___rep r__split_discrs r__split_fields2))))
-  (forall ((temp___852 Int))
+  (let ((temp___812 (keys (mk___rep r__split_discrs r__split_fields2))))
+  (forall ((temp___811 Int))
   (=>
-  (and (in_range3 temp___852)
-  (= (iter_has_element temp___853 temp___852) true))
+  (and (in_range3 temp___811)
+  (= (iter_has_element temp___812 temp___811) true))
   (exists ((i1 Int))
   (and
   (and (<= 1 i1)
   (<= i1 (- (get1 (positions s) (mk___rep1 cu__split_fields3)) 1)))
-  (= (get temp___853 temp___852) (get (keys s) i1))))))))
+  (= (get temp___812 temp___811) (get (keys s) i1))))))))
 
 ;; H
   (assert (= (has_key1 (positions s) (mk___rep1 cu__split_fields3)) true))

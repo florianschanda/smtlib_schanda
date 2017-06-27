@@ -577,29 +577,24 @@
 
 (declare-fun size__function_guard (Int us_rep) Bool)
 
-;; temp___result_439_def
-  (assert
-  (forall ((temp___438 us_rep1)) (size__function_guard
-  (size (to_base temp___438)) (to_base temp___438))))
-
-(define-fun default_initial_assumption ((temp___expr_433 us_rep1)
-  (temp___skip_top_level_434 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_361 us_rep1)
+  (temp___skip_top_level_362 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag1 temp___expr_433) 
+                                         (= (attr__tag1 temp___expr_361) 
                                          us_tag1)
                                          (and
                                          (= (to_rep1
                                             (rec__stackp__buffer__first
                                             (us_split_fields3
-                                            temp___expr_433))) 1)
+                                            temp___expr_361))) 1)
                                          (= (to_rep
                                             (rec__stackp__stack_root__length1
                                             (us_split_fields3
-                                            temp___expr_433))) 0)))
+                                            temp___expr_361))) 0)))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_434 true))
-                                         (= (size (to_base temp___expr_433)) 0))))
+                                         (= temp___skip_top_level_362 true))
+                                         (= (size (to_base temp___expr_361)) 0))))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -630,18 +625,15 @@
 ;; stackp__buffer__compat_axiom
   (assert
   (forall ((s us_rep1))
-  (! (=> (wraps_around__function_guard1 (wraps_around1 us_tag1 s) us_tag1 s)
-     (and (wraps_around__function_guard (wraps_around s) s)
-     (= (to_int1 (wraps_around s)) (to_int1 (wraps_around1 us_tag1 s))))) :pattern (
+  (! (= (to_int1 (wraps_around s)) (to_int1 (wraps_around1 us_tag1 s))) :pattern (
   (wraps_around1 us_tag1 s)) )))
 
 ;; wraps_around__def_axiom
   (assert
   (forall ((s us_rep1))
-  (! (=> (wraps_around__function_guard (wraps_around s) s)
-     (= (= (wraps_around s) true)
+  (! (= (= (wraps_around s) true)
      (< 100 (- (+ (to_rep1 (rec__stackp__buffer__first (us_split_fields3 s))) 
-     (to_rep (rec__stackp__stack_root__length1 (us_split_fields3 s)))) 1)))) :pattern (
+     (to_rep (rec__stackp__stack_root__length1 (us_split_fields3 s)))) 1))) :pattern (
   (wraps_around s)) )))
 
 (declare-fun s () us_rep1)
@@ -661,11 +653,6 @@
                                       (<= 0 2147483647)) (in_range2
                                       temp___expr_142)))
 
-;; temp___result_165_def
-  (assert
-  (forall ((temp___164 us_rep)) (size__function_guard (size temp___164)
-  temp___164)))
-
 (define-fun default_initial_assumption1 ((temp___expr_159 us_rep)
   (temp___skip_top_level_160 Bool)) Bool (and
                                          (and
@@ -682,25 +669,22 @@
 
 ;; size__post_axiom
   (assert
-  (forall ((s1 us_rep))
-  (! (let ((result (size s1)))
-     (=> (size__function_guard result s1) (dynamic_invariant result true
-     false true))) :pattern ((size s1)) )))
+  (forall ((s1 us_rep)) (! (dynamic_invariant (size s1) true false
+  true) :pattern ((size s1)) )))
 
 ;; size__def_axiom
   (assert
   (forall ((s1 us_rep))
-  (! (=> (size__function_guard (size s1) s1)
-     (= (size s1) (to_rep
-                  (rec__stackp__stack_root__length (us_split_fields1 s1))))) :pattern (
+  (! (= (size s1) (to_rep
+                  (rec__stackp__stack_root__length (us_split_fields1 s1)))) :pattern (
   (size s1)) )))
 
-(define-fun dynamic_invariant2 ((temp___expr_425 Int)
-  (temp___is_init_422 Bool) (temp___skip_constant_423 Bool)
-  (temp___do_toplevel_424 Bool)) Bool (=>
-                                      (or (= temp___is_init_422 true)
+(define-fun dynamic_invariant2 ((temp___expr_353 Int)
+  (temp___is_init_350 Bool) (temp___skip_constant_351 Bool)
+  (temp___do_toplevel_352 Bool)) Bool (=>
+                                      (or (= temp___is_init_350 true)
                                       (<= 1 100)) (in_range1
-                                      temp___expr_425)))
+                                      temp___expr_353)))
 
 (declare-fun o () Bool)
 
@@ -708,7 +692,7 @@
 
 ;; H
   (assert
-  (and (and (= o (wraps_around s)) (wraps_around__function_guard o s))
+  (and (= o (wraps_around s))
   (= (= o true)
   (< 100 (- (+ (to_rep1 (rec__stackp__buffer__first (us_split_fields3 s))) 
   (to_rep (rec__stackp__stack_root__length1 (us_split_fields3 s)))) 1)))))

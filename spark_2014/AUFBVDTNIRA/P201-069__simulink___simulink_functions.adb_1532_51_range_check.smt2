@@ -413,10 +413,8 @@
 ;; u32tou16__post_axiom
   (assert
   (forall ((s (_ BitVec 32)))
-  (! (=> (dynamic_invariant1 s true true true)
-     (let ((result (u32tou16 s)))
-     (=> (u32tou16__function_guard result s) (dynamic_invariant2 result true
-     false true)))) :pattern ((u32tou16 s)) )))
+  (! (=> (dynamic_invariant1 s true true true) (dynamic_invariant2
+     (u32tou16 s) true false true)) :pattern ((u32tou16 s)) )))
 
 (define-fun dynamic_invariant3 ((temp___expr_33 Int) (temp___is_init_30 Bool)
   (temp___skip_constant_31 Bool)

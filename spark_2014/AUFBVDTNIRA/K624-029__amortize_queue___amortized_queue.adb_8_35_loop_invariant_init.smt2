@@ -467,22 +467,22 @@
 
 (declare-fun is_empty__function_guard (Bool us_rep) Bool)
 
-(define-fun dynamic_invariant3 ((temp___expr_440 us_rep)
-  (temp___is_init_437 Bool) (temp___skip_constant_438 Bool)
-  (temp___do_toplevel_439 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_438 true))
-                                      (in_range7 r2b temp___expr_440)))
+(define-fun dynamic_invariant3 ((temp___expr_410 us_rep)
+  (temp___is_init_407 Bool) (temp___skip_constant_408 Bool)
+  (temp___do_toplevel_409 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_408 true))
+                                      (in_range7 r2b temp___expr_410)))
 
-(define-fun default_initial_assumption ((temp___expr_442 us_rep)
-  (temp___skip_top_level_443 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_412 us_rep)
+  (temp___skip_top_level_413 Bool)) Bool (and
                                          (= (to_rep
                                             (rec__amortized_queue__my_vectors__vector__capacity
                                             (us_split_discrs1
-                                            temp___expr_442))) r2b)
+                                            temp___expr_412))) r2b)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_443 true))
-                                         (= (is_empty temp___expr_442) true))))
+                                         (= temp___skip_top_level_413 true))
+                                         (= (is_empty temp___expr_412) true))))
 
 (declare-fun result____split_discrs () us_split_discrs)
 
@@ -511,8 +511,6 @@
   (! (=> (in_range1 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
                                                               (of_rep1 x))) )))
 
-(declare-fun last1 () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -536,8 +534,6 @@
 (declare-fun r10b () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))

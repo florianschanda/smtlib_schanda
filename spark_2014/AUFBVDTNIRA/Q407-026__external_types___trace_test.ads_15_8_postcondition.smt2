@@ -194,10 +194,8 @@
 ;; element__post_axiom
   (assert
   (forall ((t us_rep1))
-  (forall ((c us_rep))
-  (! (let ((result (element t c)))
-     (=> (element__function_guard result t c) (dynamic_invariant result true
-     false true))) :pattern ((element t c)) ))))
+  (forall ((c us_rep)) (! (dynamic_invariant (element t c) true false
+  true) :pattern ((element t c)) ))))
 
 (declare-fun has_element (us_rep1 us_rep) Bool)
 
@@ -237,7 +235,7 @@
 
 (declare-fun o () us_rep1)
 
-(declare-fun temp___158 () us_rep1)
+(declare-fun temp___153 () us_rep1)
 
 (declare-fun o1 () us_rep1)
 
@@ -304,7 +302,7 @@
 (define-fun state8 () us_private__ref (mk___private__ref state4))
 
 ;; H
-  (assert (and (= o (empty Tuple0)) (empty__function_guard o Tuple0)))
+  (assert (= o (empty Tuple0)))
 
 ;; H
   (assert (= (mk_trace__ref result) (mk_trace__ref trace)))
@@ -319,15 +317,13 @@
   (assert (= i1 1))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 100)) (= temp___158 trace1)))
+  (assert (=> (and (<= 1 i1) (<= i1 100)) (= temp___153 trace1)))
 
 ;; H
   (assert (=> (and (<= 1 i1) (<= i1 100)) (and (<= 1 i2) (<= i2 100))))
 
 ;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 100))
-  (and (= o1 (append trace2 i2)) (append__function_guard o1 trace2 i2))))
+  (assert (=> (and (<= 1 i1) (<= i1 100)) (= o1 (append trace2 i2))))
 
 ;; H
   (assert (=> (and (<= 1 i1) (<= i1 100)) (= trace2 result2)))
@@ -415,29 +411,10 @@
 (declare-fun c () us_rep)
 
 ;; H
-  (assert (has_element__function_guard (has_element trace8 c) trace8 c))
-
-;; H
   (assert (= (has_element trace8 c) true))
 
 ;; H
-  (assert (is_first__function_guard (is_first trace8 c) trace8 c))
-
-;; H
   (assert (not (= (is_first trace8 c) true)))
-
-;; H
-  (assert (element__function_guard (element trace8 c) trace8 c))
-
-;; H
-  (assert (previous__function_guard (previous trace8 c) trace8 c))
-
-;; H
-  (assert (previous__function_guard (previous trace8 c) trace8 c))
-
-;; H
-  (assert (element__function_guard (element trace8 (previous trace8 c))
-  trace8 (previous trace8 c)))
 
 (assert
 ;; WP_parameter_def

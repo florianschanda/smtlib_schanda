@@ -105,12 +105,12 @@
 (declare-datatypes () ((index__ref (mk_index__ref (index__content index)))))
 (define-fun index__ref___projection ((a index__ref)) index (index__content a))
 
-(define-fun dynamic_invariant ((temp___expr_172 Int)
-  (temp___is_init_169 Bool) (temp___skip_constant_170 Bool)
-  (temp___do_toplevel_171 Bool)) Bool (=>
-                                      (or (= temp___is_init_169 true)
+(define-fun dynamic_invariant ((temp___expr_142 Int)
+  (temp___is_init_139 Bool) (temp___skip_constant_140 Bool)
+  (temp___do_toplevel_141 Bool)) Bool (=>
+                                      (or (= temp___is_init_139 true)
                                       (<= 1 100)) (in_range2
-                                      temp___expr_172)))
+                                      temp___expr_142)))
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int natural))))))
@@ -342,13 +342,13 @@
 (define-fun nat_array__ref___projection ((a nat_array__ref)) us_t (nat_array__content
                                                                   a))
 
-(define-fun dynamic_invariant1 ((temp___expr_178 us_t)
-  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
-  (temp___do_toplevel_177 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_176 true))
+(define-fun dynamic_invariant1 ((temp___expr_148 us_t)
+  (temp___is_init_145 Bool) (temp___skip_constant_146 Bool)
+  (temp___do_toplevel_147 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_146 true))
                                       (dynamic_property 1 100
-                                      (first1 temp___expr_178)
-                                      (last1 temp___expr_178))))
+                                      (first1 temp___expr_148)
+                                      (last1 temp___expr_148))))
 
 (declare-fun invariant__ (us_t) Bool)
 
@@ -360,8 +360,7 @@
 ;; invariant____def_axiom
   (assert
   (forall ((a us_t))
-  (! (=> (invariant____function_guard (invariant__ a) a)
-     (= (= (invariant__ a) true) (and (= (first1 a) 1) (<= 0 (last1 a))))) :pattern (
+  (! (= (= (invariant__ a) true) (and (= (first1 a) 1) (<= 0 (last1 a)))) :pattern (
   (invariant__ a)) )))
 
 (declare-fun remove (us_t Int) us_t)
@@ -372,15 +371,12 @@
   (assert
   (forall ((a us_t))
   (forall ((i Int))
-  (! (and (invariant____function_guard (invariant__ a) a)
-     (=>
+  (! (=>
      (and
      (and (dynamic_invariant1 a true true true) (dynamic_invariant i true
      true true))
      (and (= (invariant__ a) true) (and (<= (first1 a) i) (<= i (last1 a)))))
      (let ((result (remove a i)))
-     (and (invariant____function_guard (invariant__ result) result)
-     (=> (remove__function_guard result a i)
      (and
      (and (= (invariant__ result) true)
      (and (= (last1 result) (- (last1 a) 1))
@@ -398,7 +394,7 @@
      (=> (and (<= i k) (<= k (- (last1 a) 1)))
      (= (to_rep (select (to_array a) (+ k 1))) (to_rep
                                                (select (to_array result) k)))))))))
-     (dynamic_invariant1 result true false true))))))) :pattern ((remove a i)) ))))
+     (dynamic_invariant1 result true false true)))) :pattern ((remove a i)) ))))
 
 (declare-fun is_perm (us_t us_t) Bool)
 
@@ -407,15 +403,7 @@
 ;; is_perm__def_axiom
   (assert
   (forall ((a us_t) (b us_t))
-  (! (=> (is_perm__function_guard (is_perm a b) a b)
-     (and (forall ((ia Int)) (remove__function_guard (remove a ia) a ia))
-     (and (forall ((ib Int)) (remove__function_guard (remove b ib) b ib))
-     (and (forall ((ia Int)) (remove__function_guard (remove a ia) a ia))
-     (and (forall ((ib Int)) (remove__function_guard (remove b ib) b ib))
-     (and
-     (forall ((ia Int) (ib Int)) (is_perm__function_guard
-     (is_perm (remove a ia) (remove b ib)) (remove a ia) (remove b ib)))
-     (= (= (is_perm a b) true)
+  (! (= (= (is_perm a b) true)
      (or (and (= (length a) 0) (= (length b) 0))
      (exists ((ia Int))
      (and (and (<= (first1 a) ia) (<= ia (last1 a)))
@@ -423,7 +411,7 @@
      (and (and (<= (first1 b) ib) (<= ib (last1 b)))
      (and
      (= (to_rep (select (to_array a) ia)) (to_rep (select (to_array b) ib)))
-     (= (is_perm (remove a ia) (remove b ib)) true)))))))))))))) :pattern (
+     (= (is_perm (remove a ia) (remove b ib)) true)))))))) :pattern (
   (is_perm a b)) )))
 
 (declare-fun a () us_t)
@@ -437,10 +425,6 @@
 (declare-fun ia () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
-
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -481,11 +465,11 @@
 
 (declare-fun perm__get_witness__result () Int)
 
-(declare-fun temp___798 () Int)
+(declare-fun temp___584 () Int)
 
-(declare-fun temp___799 () Int)
+(declare-fun temp___585 () Int)
 
-(declare-fun temp___791 () Int)
+(declare-fun temp___583 () Int)
 
 (declare-fun o () (Array Int natural))
 
@@ -588,132 +572,6 @@
 (declare-fun result8 () Int)
 
 ;; H
-  (assert (invariant____function_guard (invariant__ a) a))
-
-;; H
-  (assert (invariant____function_guard (invariant__ b) b))
-
-;; H
-  (assert (remove__function_guard (remove a ia) a ia))
-
-;; H
-  (assert
-  (forall ((ib10 Int)) (remove__function_guard (remove b ib10) b ib10)))
-
-;; H
-  (assert (remove__function_guard (remove a ia) a ia))
-
-;; H
-  (assert
-  (forall ((ib10 Int)) (remove__function_guard (remove b ib10) b ib10)))
-
-;; H
-  (assert
-  (forall ((ib10 Int)) (is_perm__function_guard
-  (is_perm (remove a ia) (remove b ib10)) (remove a ia) (remove b ib10))))
-
-;; H
-  (assert (invariant____function_guard (invariant__ o20) o20))
-
-;; H
-  (assert (invariant____function_guard (invariant__ o21) o21))
-
-;; H
-  (assert
-  (forall ((ia1 Int)) (remove__function_guard (remove o21 ia1) o21 ia1)))
-
-;; H
-  (assert
-  (forall ((ib10 Int)) (remove__function_guard (remove o20 ib10) o20 ib10)))
-
-;; H
-  (assert
-  (forall ((ia1 Int)) (remove__function_guard (remove o21 ia1) o21 ia1)))
-
-;; H
-  (assert
-  (forall ((ib10 Int)) (remove__function_guard (remove o20 ib10) o20 ib10)))
-
-;; H
-  (assert
-  (forall ((ia1 Int) (ib10 Int)) (is_perm__function_guard
-  (is_perm (remove o21 ia1) (remove o20 ib10)) (remove o21 ia1)
-  (remove o20 ib10))))
-
-;; H
-  (assert (invariant____function_guard (invariant__ o20) o20))
-
-;; H
-  (assert (invariant____function_guard (invariant__ o21) o21))
-
-;; H
-  (assert
-  (forall ((ia1 Int)) (remove__function_guard (remove o21 ia1) o21 ia1)))
-
-;; H
-  (assert
-  (forall ((ib10 Int)) (remove__function_guard (remove o20 ib10) o20 ib10)))
-
-;; H
-  (assert
-  (forall ((ia1 Int)) (remove__function_guard (remove o21 ia1) o21 ia1)))
-
-;; H
-  (assert
-  (forall ((ib10 Int)) (remove__function_guard (remove o20 ib10) o20 ib10)))
-
-;; H
-  (assert
-  (forall ((ia1 Int) (ib10 Int)) (is_perm__function_guard
-  (is_perm (remove o21 ia1) (remove o20 ib10)) (remove o21 ia1)
-  (remove o20 ib10))))
-
-;; H
-  (assert (remove__function_guard (remove a ia) a ia))
-
-;; H
-  (assert (forall ((kb Int)) (remove__function_guard (remove b kb) b kb)))
-
-;; H
-  (assert (remove__function_guard (remove a ia) a ia))
-
-;; H
-  (assert (forall ((kb Int)) (remove__function_guard (remove b kb) b kb)))
-
-;; H
-  (assert
-  (forall ((kb Int)) (is_perm__function_guard
-  (is_perm (remove a ia) (remove b kb)) (remove a ia) (remove b kb))))
-
-;; H
-  (assert (invariant____function_guard (invariant__ o18) o18))
-
-;; H
-  (assert (invariant____function_guard (invariant__ o19) o19))
-
-;; H
-  (assert
-  (forall ((ia1 Int)) (remove__function_guard (remove o19 ia1) o19 ia1)))
-
-;; H
-  (assert
-  (forall ((ib10 Int)) (remove__function_guard (remove o18 ib10) o18 ib10)))
-
-;; H
-  (assert
-  (forall ((ia1 Int)) (remove__function_guard (remove o19 ia1) o19 ia1)))
-
-;; H
-  (assert
-  (forall ((ib10 Int)) (remove__function_guard (remove o18 ib10) o18 ib10)))
-
-;; H
-  (assert
-  (forall ((ia1 Int) (ib10 Int)) (is_perm__function_guard
-  (is_perm (remove o19 ia1) (remove o18 ib10)) (remove o19 ia1)
-  (remove o18 ib10))))
-
-;; H
   (assert (dynamic_invariant1 a true false true))
 
 ;; H
@@ -747,25 +605,25 @@
   (assert (= ib7 ib5))
 
 ;; H
-  (assert (= temp___798 (to_rep1 (first (rt b)))))
+  (assert (= temp___584 (to_rep1 (first (rt b)))))
 
 ;; H
-  (assert (= temp___799 (to_rep1 (last (rt b)))))
+  (assert (= temp___585 (to_rep1 (last (rt b)))))
 
 ;; H
   (assert (= (mk_int__ref result) (mk_int__ref ib)))
 
 ;; H
-  (assert (= ib1 temp___798))
+  (assert (= ib1 temp___584))
 
 ;; H
-  (assert (<= temp___798 ib1))
+  (assert (<= temp___584 ib1))
 
 ;; H
-  (assert (<= ib1 temp___799))
+  (assert (<= ib1 temp___585))
 
 ;; H
-  (assert (= temp___791 ib1))
+  (assert (= temp___583 ib1))
 
 ;; H
   (assert
@@ -785,7 +643,7 @@
   (ite (= result2 true)
   (and
   (and (and (= o2 ib1) (in_range2 ib1))
-  (and (and (= o20 (remove b o2)) (remove__function_guard o20 b o2))
+  (and (= o20 (remove b o2))
   (and (dynamic_invariant1 o20 true false true)
   (and (= (invariant__ o20) true)
   (and (= (to_rep1 (last o4)) (- (to_rep1 (last (rt b))) 1))
@@ -801,7 +659,7 @@
   (=> (and (<= o2 k) (<= k (- (to_rep1 (last (rt b))) 1)))
   (= (to_rep (select (elts b) (+ k 1))) (to_rep (select o3 k))))))))))))
   (and
-  (and (and (= o21 (remove a ia)) (remove__function_guard o21 a ia))
+  (and (= o21 (remove a ia))
   (and (dynamic_invariant1 o21 true false true)
   (and (= (invariant__ o21) true)
   (and (= (to_rep1 (last o1)) (- (to_rep1 (last (rt a))) 1))
@@ -816,9 +674,7 @@
   (forall ((k Int))
   (=> (and (<= ia k) (<= k (- (to_rep1 (last (rt a))) 1)))
   (= (to_rep (select (elts a) (+ k 1))) (to_rep (select o k)))))))))))
-  (and
-  (and (= result1 (is_perm o21 o20)) (is_perm__function_guard result1 
-  o21 o20))
+  (and (= result1 (is_perm o21 o20))
   (= (= result1 true)
   (or (and (= (length o21) 0) (= (length o20) 0))
   (exists ((ia1 Int))
@@ -844,7 +700,7 @@
   (ite (= result2 true)
   (and
   (and (and (= o2 ib1) (in_range2 ib1))
-  (and (and (= o20 (remove b o2)) (remove__function_guard o20 b o2))
+  (and (= o20 (remove b o2))
   (and (dynamic_invariant1 o20 true false true)
   (and (= (invariant__ o20) true)
   (and (= (to_rep1 (last o4)) (- (to_rep1 (last (rt b))) 1))
@@ -860,7 +716,7 @@
   (=> (and (<= o2 k) (<= k (- (to_rep1 (last (rt b))) 1)))
   (= (to_rep (select (elts b) (+ k 1))) (to_rep (select o3 k))))))))))))
   (and
-  (and (and (= o21 (remove a ia)) (remove__function_guard o21 a ia))
+  (and (= o21 (remove a ia))
   (and (dynamic_invariant1 o21 true false true)
   (and (= (invariant__ o21) true)
   (and (= (to_rep1 (last o1)) (- (to_rep1 (last (rt a))) 1))
@@ -875,9 +731,7 @@
   (forall ((k Int))
   (=> (and (<= ia k) (<= k (- (to_rep1 (last (rt a))) 1)))
   (= (to_rep (select (elts a) (+ k 1))) (to_rep (select o k)))))))))))
-  (and
-  (and (= result1 (is_perm o21 o20)) (is_perm__function_guard result1 
-  o21 o20))
+  (and (= result1 (is_perm o21 o20))
   (= (= result1 true)
   (or (and (= (length o21) 0) (= (length o20) 0))
   (exists ((ia1 Int))
@@ -906,7 +760,7 @@
   (dynamic_property1 (to_rep1 (first (rt b))) (to_rep1 (last (rt b))) 
   ib2))
   (and (<= (to_rep1 (first (rt b))) ib2) (<= ib2 (to_rep1 (last (rt b))))))
-  (and (not (= ib2 temp___799))
+  (and (not (= ib2 temp___585))
   (and (and (= ib2 result4) (= ib3 (+ ib2 1)))
   (and
   (and
@@ -919,7 +773,7 @@
   (ite (= result6 true)
   (and
   (and (and (= o11 ib3) (in_range2 ib3))
-  (and (and (= o18 (remove b o11)) (remove__function_guard o18 b o11))
+  (and (= o18 (remove b o11))
   (and (dynamic_invariant1 o18 true false true)
   (and (= (invariant__ o18) true)
   (and (= (to_rep1 (last o13)) (- (to_rep1 (last (rt b))) 1))
@@ -935,7 +789,7 @@
   (=> (and (<= o11 k) (<= k (- (to_rep1 (last (rt b))) 1)))
   (= (to_rep (select (elts b) (+ k 1))) (to_rep (select o12 k))))))))))))
   (and
-  (and (and (= o19 (remove a ia)) (remove__function_guard o19 a ia))
+  (and (= o19 (remove a ia))
   (and (dynamic_invariant1 o19 true false true)
   (and (= (invariant__ o19) true)
   (and (= (to_rep1 (last o10)) (- (to_rep1 (last (rt a))) 1))
@@ -950,9 +804,7 @@
   (forall ((k Int))
   (=> (and (<= ia k) (<= k (- (to_rep1 (last (rt a))) 1)))
   (= (to_rep (select (elts a) (+ k 1))) (to_rep (select o9 k)))))))))))
-  (and
-  (and (= result5 (is_perm o19 o18)) (is_perm__function_guard result5 
-  o19 o18))
+  (and (= result5 (is_perm o19 o18))
   (= (= result5 true)
   (or (and (= (length o19) 0) (= (length o18) 0))
   (exists ((ia1 Int))

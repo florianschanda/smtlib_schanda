@@ -135,11 +135,8 @@
 ;; empty__def_axiom
   (assert
   (forall ((bingo_basket__the_count Int))
-  (! (=> (empty__function_guard (empty bingo_basket__the_count)
-     bingo_basket__the_count)
-     (= (= (empty bingo_basket__the_count) true)
-     (= bingo_basket__the_count 0))) :pattern ((empty
-                                               bingo_basket__the_count)) )))
+  (! (= (= (empty bingo_basket__the_count) true)
+     (= bingo_basket__the_count 0)) :pattern ((empty bingo_basket__the_count)) )))
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int callable_number))))))
@@ -284,15 +281,15 @@
 
 (declare-fun bingo_gen () us_private)
 
-(declare-fun temp___194 () (Array Int callable_number))
+(declare-fun temp___192 () (Array Int callable_number))
 
 (declare-fun o () callable_number)
 
 (declare-fun o1 () (Array Int callable_number))
 
-(declare-fun temp___199 () (Array Int callable_number))
+(declare-fun temp___197 () (Array Int callable_number))
 
-(declare-fun temp___198 () Int)
+(declare-fun temp___196 () Int)
 
 (declare-fun o2 () Int)
 
@@ -444,16 +441,16 @@
 
 ;; H
   (assert
-  (=> (and (<= 1 number1) (<= number1 75)) (= temp___194 the_basket)))
+  (=> (and (<= 1 number1) (<= number1 75)) (= temp___192 the_basket)))
 
 ;; H
   (assert
   (=> (and (<= 1 number1) (<= number1 75))
   (and
-  (forall ((temp___195 Int))
-  (=> (and (<= 1 temp___195) (<= temp___195 75))
-  (=> (<= number2 temp___195)
-  (= (select the_basket2 temp___195) (select temp___194 temp___195)))))
+  (forall ((temp___193 Int))
+  (=> (and (<= 1 temp___193) (<= temp___193 75))
+  (=> (<= number2 temp___193)
+  (= (select the_basket2 temp___193) (select temp___192 temp___193)))))
   (and (<= 1 number2) (<= number2 75)))))
 
 ;; H
@@ -527,11 +524,11 @@
   (assert (= index1 1))
 
 ;; H
-  (assert (=> (and (<= 1 index1) (<= index1 75)) (= temp___199 the_basket6)))
+  (assert (=> (and (<= 1 index1) (<= index1 75)) (= temp___197 the_basket6)))
 
 ;; H
   (assert
-  (=> (and (<= 1 index1) (<= index1 75)) (= temp___198 random_index)))
+  (=> (and (<= 1 index1) (<= index1 75)) (= temp___196 random_index)))
 
 ;; H
   (assert
@@ -542,9 +539,7 @@
 ;; H
   (assert
   (=> (and (<= 1 index1) (<= index1 75))
-  (and
-  (and (= o2 (random_number bingo_gen)) (random_number__function_guard 
-  o2 bingo_gen)) (in_range2 o2))))
+  (and (= o2 (random_number bingo_gen)) (in_range2 o2))))
 
 ;; H
   (assert (=> (and (<= 1 index1) (<= index1 75)) (= result3 random_index2)))
@@ -736,10 +731,6 @@
 
 ;; H
   (assert (= the_basket16 the_basket14))
-
-;; H
-  (assert (empty__function_guard (empty (int__content the_count2))
-  (int__content the_count2)))
 
 (assert
 ;; WP_parameter_def

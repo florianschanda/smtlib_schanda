@@ -312,12 +312,12 @@
 (define-fun int____ref_2__projection ((a int____ref)) int__ (int____content
                                                             a))
 
-(define-fun dynamic_invariant2 ((temp___expr_340 Int)
-  (temp___is_init_337 Bool) (temp___skip_constant_338 Bool)
-  (temp___do_toplevel_339 Bool)) Bool (=>
-                                      (or (= temp___is_init_337 true)
+(define-fun dynamic_invariant2 ((temp___expr_338 Int)
+  (temp___is_init_335 Bool) (temp___skip_constant_336 Bool)
+  (temp___do_toplevel_337 Bool)) Bool (=>
+                                      (or (= temp___is_init_335 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range2 temp___expr_340)))
+                                      (in_range2 temp___expr_338)))
 
 (declare-fun eof () Int)
 
@@ -373,12 +373,12 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
-(define-fun dynamic_invariant3 ((temp___expr_388 Int)
-  (temp___is_init_385 Bool) (temp___skip_constant_386 Bool)
-  (temp___do_toplevel_387 Bool)) Bool (=>
-                                      (or (= temp___is_init_385 true)
+(define-fun dynamic_invariant3 ((temp___expr_386 Int)
+  (temp___is_init_383 Bool) (temp___skip_constant_384 Bool)
+  (temp___do_toplevel_385 Bool)) Bool (=>
+                                      (or (= temp___is_init_383 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range3 temp___expr_388)))
+                                      (in_range3 temp___expr_386)))
 
 (declare-fun ferror (Int) Int)
 
@@ -387,10 +387,8 @@
 ;; ferror__post_axiom
   (assert
   (forall ((stream Int))
-  (! (=> (dynamic_invariant3 stream true true true)
-     (let ((result (ferror stream)))
-     (=> (ferror__function_guard result stream) (dynamic_invariant2 result
-     true false true)))) :pattern ((ferror stream)) )))
+  (! (=> (dynamic_invariant3 stream true true true) (dynamic_invariant2
+     (ferror stream) true false true)) :pattern ((ferror stream)) )))
 
 (declare-sort count 0)
 
@@ -650,12 +648,12 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
 
-(define-fun dynamic_invariant4 ((temp___expr_454 Int)
-  (temp___is_init_451 Bool) (temp___skip_constant_452 Bool)
-  (temp___do_toplevel_453 Bool)) Bool (=>
-                                      (or (= temp___is_init_451 true)
+(define-fun dynamic_invariant4 ((temp___expr_423 Int)
+  (temp___is_init_420 Bool) (temp___skip_constant_421 Bool)
+  (temp___do_toplevel_422 Bool)) Bool (=>
+                                      (or (= temp___is_init_420 true)
                                       (<= 0 2147483647)) (in_range4
-                                      temp___expr_454)))
+                                      temp___expr_423)))
 
 ;; eof_ch__def_axiom
   (assert (= eof_ch (mod2 eof 256)))
@@ -706,11 +704,8 @@
   (assert
   (=> (= ch1 eof)
   (and
-  (and
   (= o (ferror
        (to_rep1 (rec__textio__file_type__descr (us_split_fields1 file)))))
-  (ferror__function_guard o
-  (to_rep1 (rec__textio__file_type__descr (us_split_fields1 file)))))
   (in_range2 o))))
 
 ;; H

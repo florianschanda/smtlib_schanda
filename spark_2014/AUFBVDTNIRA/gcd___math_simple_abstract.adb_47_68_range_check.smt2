@@ -157,9 +157,8 @@
 ;; divides__def_axiom
   (assert
   (forall ((a Int) (b Int))
-  (! (=> (divides__function_guard (divides a b) a b)
-     (= (= (divides a b) true)
-     (exists ((c Int)) (and (and (<= 1 c) (<= c 2147483647)) (= (* a c) b))))) :pattern (
+  (! (= (= (divides a b) true)
+     (exists ((c Int)) (and (and (<= 1 c) (<= c 2147483647)) (= (* a c) b)))) :pattern (
   (divides a b)) )))
 
 (declare-fun a () Int)
@@ -209,22 +208,10 @@
   (assert (not (and (= (mod2 a c1) 0) (= (mod2 b c1) 0))))
 
 ;; H
-  (assert (divides__function_guard (divides c1 a) c1 a))
-
-;; H
-  (assert (divides__function_guard (divides c1 b) c1 b))
-
-;; H
   (assert (=> (not (= (mod2 a c1) 0)) (not (= (divides c1 a) true))))
 
 ;; H
   (assert (=> (not (not (= (mod2 a c1) 0))) (not (= (divides c1 b) true))))
-
-;; H
-  (assert (forall ((x1 Int)) (divides__function_guard (divides x1 a) x1 a)))
-
-;; H
-  (assert (forall ((x1 Int)) (divides__function_guard (divides x1 b) x1 b)))
 
 ;; H
   (assert

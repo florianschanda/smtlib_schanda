@@ -559,10 +559,9 @@
   (assert
   (forall ((stream us_t))
   (forall ((pos Int))
-  (! (=> (nth8_stream__function_guard (nth8_stream stream pos) stream pos)
-     (= (= (nth8_stream stream pos) true)
+  (! (= (= (nth8_stream stream pos) true)
      (= (nth (to_rep (select (to_array stream) (div1 pos 8)))
-        (- 7 (mod1 pos 8))) true))) :pattern ((nth8_stream stream pos)) ))))
+        (- 7 (mod1 pos 8))) true)) :pattern ((nth8_stream stream pos)) ))))
 
 (define-fun dynamic_invariant2 ((temp___expr_160 (_ BitVec 8))
   (temp___is_init_157 Bool) (temp___skip_constant_158 Bool)
@@ -580,9 +579,7 @@
      (and
      (and (dynamic_invariant2 byte true true true) (dynamic_invariant left
      true true true)) (< left 8))
-     (let ((result (peekbit8 byte left)))
-     (=> (peekbit8__function_guard result byte left)
-     (= (= result true) (= (nth byte (- 7 left)) true))))) :pattern (
+     (= (= (peekbit8 byte left) true) (= (nth byte (- 7 left)) true))) :pattern (
   (peekbit8 byte left)) ))))
 
 (declare-fun addr () us_t)

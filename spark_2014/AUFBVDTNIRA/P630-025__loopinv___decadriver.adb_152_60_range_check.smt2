@@ -935,6 +935,22 @@
 (define-fun receiver_type__ref___projection ((a receiver_type__ref)) us_rep1 
   (receiver_type__content a))
 
+(declare-fun temp___4475 (us_rep) (Array (_ BitVec 8) us_rep))
+
+;; def_axiom
+  (assert
+  (forall ((temp___4477 us_rep))
+  (forall ((temp___4478 (_ BitVec 8)))
+  (= (select (temp___4475 temp___4477) temp___4478) temp___4477))))
+
+(declare-fun temp___4479 ((_ BitVec 8)) (Array Int bits_8))
+
+;; def_axiom
+  (assert
+  (forall ((temp___4481 (_ BitVec 8)))
+  (forall ((temp___4482 Int))
+  (= (select (temp___4479 temp___4481) temp___4482) (of_rep3 temp___4481)))))
+
 (define-fun dynamic_invariant3 ((temp___expr_4469 us_rep1)
   (temp___is_init_4466 Bool) (temp___skip_constant_4467 Bool)
   (temp___do_toplevel_4468 Bool)) Bool (forall ((temp___4470 (_ BitVec 8)))
@@ -954,6 +970,36 @@
                                        (= (to_rep1
                                           (rec__decadriver__rx_frame_type__size
                                           (us_split_fields1 temp___4471))) 0))))))
+
+(define-fun default_initial_assumption ((temp___expr_4473 us_rep1)
+  (temp___skip_top_level_4474 Bool)) Bool (and
+                                          (and
+                                          (and
+                                          (and
+                                          (= (rec__decadriver__receiver_type__frame_queue
+                                             (us_split_fields3
+                                             temp___expr_4473)) (temp___4475
+                                                                (mk___rep
+                                                                (mk___split_fields
+                                                                (of_rep1 0)
+                                                                (temp___4479
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep2 0)
+                                                                (of_int 0)))))
+                                          (= (to_rep4
+                                             (rec__decadriver__receiver_type__queue_head
+                                             (us_split_fields3
+                                             temp___expr_4473))) ((_ int2bv 8) 1)))
+                                          (= (to_rep
+                                             (rec__decadriver__receiver_type__rx_count
+                                             (us_split_fields3
+                                             temp___expr_4473))) 0))
+                                          (= (rec__decadriver__receiver_type__overrun_occurred
+                                             (us_split_fields3
+                                             temp___expr_4473)) (of_int 0)))
+                                          (= (rec__decadriver__receiver_type__frame_ready
+                                             (us_split_fields3
+                                             temp___expr_4473)) (of_int 0))))
 
 (declare-fun error () Int)
 

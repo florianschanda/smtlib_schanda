@@ -682,10 +682,9 @@
   (assert
   (forall ((stream us_t))
   (forall ((pos Int))
-  (! (=> (nth8_stream__function_guard (nth8_stream stream pos) stream pos)
-     (= (= (nth8_stream stream pos) true)
+  (! (= (= (nth8_stream stream pos) true)
      (= (nth1 (to_rep1 (select (to_array stream) (div1 pos 8)))
-        (- 7 (mod1 pos 8))) true))) :pattern ((nth8_stream stream pos)) ))))
+        (- 7 (mod1 pos 8))) true)) :pattern ((nth8_stream stream pos)) ))))
 
 (declare-fun peekbit8 ((_ BitVec 8) Int) Bool)
 
@@ -703,24 +702,16 @@
      (and
      (and (dynamic_invariant2 addr true true true) (dynamic_invariant left
      true true true)) (and (= (first1 addr) 0) (< left (* 8 (length addr)))))
-     (let ((result (peekbit8array addr left)))
-     (and (nth8_stream__function_guard (nth8_stream addr left) addr left)
-     (=> (peekbit8array__function_guard result addr left)
-     (= (= result true) (= (nth8_stream addr left) true)))))) :pattern (
+     (= (= (peekbit8array addr left) true) (= (nth8_stream addr left) true))) :pattern (
   (peekbit8array addr left)) ))))
 
 ;; peekbit8array__def_axiom
   (assert
   (forall ((addr us_t))
   (forall ((left Int))
-  (! (=> (peekbit8array__function_guard (peekbit8array addr left) addr left)
-     (and (peekbit8__function_guard
-     (peekbit8 (to_rep1 (select (to_array addr) (div1 left 8)))
-     (mod1 left 8)) (to_rep1 (select (to_array addr) (div1 left 8)))
-     (mod1 left 8))
-     (= (= (peekbit8array addr left) true)
+  (! (= (= (peekbit8array addr left) true)
      (= (peekbit8 (to_rep1 (select (to_array addr) (div1 left 8)))
-        (mod1 left 8)) true)))) :pattern ((peekbit8array addr left)) ))))
+        (mod1 left 8)) true)) :pattern ((peekbit8array addr left)) ))))
 
 (declare-fun pokebit64 ((_ BitVec 64) Int Bool) (_ BitVec 64))
 
@@ -737,7 +728,6 @@
      (and (dynamic_invariant1 value true true true) (dynamic_invariant left
      true true true)) (< left 64))
      (let ((result (pokebit64 value left flag)))
-     (=> (pokebit64__function_guard result value left flag)
      (and
      (and
      (forall ((i Int))
@@ -745,7 +735,7 @@
      (=> (not (= i (- 63 left)))
      (= (= (nth result i) true) (= (nth value i) true)))))
      (= (= flag true) (= (nth result (- 63 left)) true))) (dynamic_invariant1
-     result true false true))))) :pattern ((pokebit64 value left flag)) )))))
+     result true false true)))) :pattern ((pokebit64 value left flag)) )))))
 
 (declare-fun start () Int)
 
@@ -762,8 +752,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -804,9 +792,7 @@
      (and
      (and (dynamic_invariant4 byte true true true) (dynamic_invariant left
      true true true)) (< left 8))
-     (let ((result (peekbit8 byte left)))
-     (=> (peekbit8__function_guard result byte left)
-     (= (= result true) (= (nth1 byte (- 7 left)) true))))) :pattern (
+     (= (= (peekbit8 byte left) true) (= (nth1 byte (- 7 left)) true))) :pattern (
   (peekbit8 byte left)) ))))
 
 (define-fun dynamic_invariant5 ((temp___expr_202 Int)
@@ -931,12 +917,6 @@
 
 ;; H
   (assert
-  (forall ((j Int)) (nth8_stream__function_guard
-  (nth8_stream addr (- (- (+ start length1) j) 1)) addr
-  (- (- (+ start length1) j) 1))))
-
-;; H
-  (assert
   (forall ((j Int))
   (=> (and (<= (- length1 i2) j) (<= j (- length1 1)))
   (= (= (nth8_stream addr (- (- (+ start length1) j) 1)) true)
@@ -948,14 +928,6 @@
   (=> (and (<= length1 j) (<= j 63)) (not (= (nth retval2 j) true)))))
 
 ;; H
-  (assert (peekbit8__function_guard
-  (peekbit8 (to_rep1 (select (elts addr) (div1 o4 8))) (mod1 o4 8))
-  (to_rep1 (select (elts addr) (div1 o4 8))) (mod1 o4 8)))
-
-;; H
-  (assert (nth8_stream__function_guard (nth8_stream addr o4) addr o4))
-
-;; H
   (assert
   (and (=> (<= 0 (- length1 1)) (dynamic_property1 0 (- length1 1) i2))
   (and (<= 0 i2) (<= i2 (- length1 1)))))
@@ -965,9 +937,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o5 (peekbit8array addr o4)) (peekbit8array__function_guard 
-  o5 addr o4))
+  (and (= o5 (peekbit8array addr o4))
   (and
   (= (= o5 true)
   (= (peekbit8 (to_rep1 (select (elts addr) (div1 o4 8))) (mod1 o4 8)) true))
@@ -988,9 +958,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o8 (pokebit64 retval2 o7 flag1)) (pokebit64__function_guard 
-  o8 retval2 o7 flag1))
+  (and (= o8 (pokebit64 retval2 o7 flag1))
   (and
   (forall ((i4 Int))
   (=> (and (<= 0 i4) (<= i4 63))
@@ -1020,11 +988,6 @@
 
 ;; H
   (assert (<= j (- length1 1)))
-
-;; H
-  (assert (nth8_stream__function_guard
-  (nth8_stream addr (- (- (+ start length1) j) 1)) addr
-  (- (- (+ start length1) j) 1)))
 
 ;; H
   (assert (= (nth8_stream addr (- (- (+ start length1) j) 1)) true))

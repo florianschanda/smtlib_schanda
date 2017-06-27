@@ -644,14 +644,6 @@
 
 (declare-fun r2__split_fields7 () integer)
 
-(define-fun temp___1844 () us_rep1 (mk___rep1
-                                   (mk___split_fields1 temp___184 temp___1841
-                                   temp___1842 temp___1843)))
-
-(define-fun temp___1834 () us_rep (mk___rep
-                                  (mk___split_fields temp___183 temp___1831
-                                  temp___1832 temp___1833)))
-
 ;; H
   (assert (in_range x2))
 
@@ -663,8 +655,9 @@
 
 ;; H
   (assert
-  (and (= temp___1834 (pack x2 x1 x3)) (pack__function_guard temp___1834 
-  x2 x1 x3)))
+  (= (mk___rep
+     (mk___split_fields temp___183 temp___1831 temp___1832 temp___1833)) 
+  (pack x2 x1 x3)))
 
 ;; H
   (assert (= result r1__split_fields))
@@ -692,8 +685,9 @@
 
 ;; H
   (assert
-  (and (= temp___1844 (pack1 x1 x2 x3)) (pack__function_guard1 temp___1844 
-  x1 x2 x3)))
+  (= (mk___rep1
+     (mk___split_fields1 temp___184 temp___1841 temp___1842 temp___1843)) 
+  (pack1 x1 x2 x3)))
 
 ;; H
   (assert (= result4 r2__split_fields))

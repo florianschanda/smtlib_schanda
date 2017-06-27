@@ -261,24 +261,19 @@
   (forall ((inline_for_proof__b Bool))
   (! (=> (and (dynamic_invariant i true true true) (and (<= 1 i) (<= i 100)))
      (let ((result (get2 x i inline_for_proof__y inline_for_proof__b)))
-     (=> (get2__function_guard result x i inline_for_proof__y
-     inline_for_proof__b)
      (and
      (= result (ite (= inline_for_proof__b true) (to_rep (select x i))
                (to_rep (select inline_for_proof__y i))))
-     (dynamic_invariant1 result true false true))))) :pattern ((get2 x i
-                                                               inline_for_proof__y
-                                                               inline_for_proof__b)) )))))
+     (dynamic_invariant1 result true false true)))) :pattern ((get2 x i
+                                                              inline_for_proof__y
+                                                              inline_for_proof__b)) )))))
 
 ;; get2__def_axiom
   (assert
   (forall ((x (Array Int t)) (inline_for_proof__y (Array Int t)))
   (forall ((i Int))
   (forall ((inline_for_proof__b Bool))
-  (! (=>
-     (and (dynamic_invariant i true true true) (get2__function_guard
-     (get2 x i inline_for_proof__y inline_for_proof__b) x i
-     inline_for_proof__y inline_for_proof__b))
+  (! (=> (dynamic_invariant i true true true)
      (= (get2 x i inline_for_proof__y inline_for_proof__b) (ite (= inline_for_proof__b true)
                                                            (to_rep
                                                            (select x i))
@@ -296,11 +291,11 @@
 
 ;; H
   (assert
-  (forall ((temp___190 Int))
-  (=> (and (<= 1 temp___190) (<= temp___190 100))
-  (exists ((temp___191 Int))
-  (and (and (<= 1 temp___191) (<= temp___191 100))
-  (= (to_rep (select x temp___190)) (to_rep (select y temp___191))))))))
+  (forall ((temp___184 Int))
+  (=> (and (<= 1 temp___184) (<= temp___184 100))
+  (exists ((temp___185 Int))
+  (and (and (<= 1 temp___185) (<= temp___185 100))
+  (= (to_rep (select x temp___184)) (to_rep (select y temp___185))))))))
 
 (declare-fun i () Int)
 
@@ -309,12 +304,6 @@
 
 ;; H
   (assert (<= i 100))
-
-;; H
-  (assert (get2__function_guard (get2 x i y b) x i y b))
-
-;; H
-  (assert (forall ((j Int)) (get2__function_guard (get2 y j y b) y j y b)))
 
 (assert
 ;; WP_parameter_def

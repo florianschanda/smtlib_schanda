@@ -171,12 +171,12 @@
 (define-fun time_slot_length__ref___projection ((a time_slot_length__ref)) time_slot_length 
   (time_slot_length__content a))
 
-(define-fun dynamic_invariant ((temp___expr_203 (_ BitVec 8))
-  (temp___is_init_200 Bool) (temp___skip_constant_201 Bool)
-  (temp___do_toplevel_202 Bool)) Bool (=>
-                                      (or (= temp___is_init_200 true)
+(define-fun dynamic_invariant ((temp___expr_202 (_ BitVec 8))
+  (temp___is_init_199 Bool) (temp___skip_constant_200 Bool)
+  (temp___do_toplevel_201 Bool)) Bool (=>
+                                      (or (= temp___is_init_199 true)
                                       (bvule ((_ int2bv 8) 0) ((_ int2bv 8) 10)))
-                                      (in_range1 temp___expr_203)))
+                                      (in_range1 temp___expr_202)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -391,7 +391,6 @@
   (assert
   (forall ((counter__model__inputs (Array (_ BitVec 8) Bool)))
   (! (let ((result (current_chain_length counter__model__inputs)))
-     (=> (current_chain_length__function_guard result counter__model__inputs)
      (and
      (ite (not (= (select counter__model__inputs ((_ int2bv 8) 10)) true))
      (= result ((_ int2bv 8) 0))
@@ -403,8 +402,8 @@
      (or (= result ((_ int2bv 8) 10))
      (not
      (= (select counter__model__inputs (bvsub ((_ int2bv 8) 10) result)) true)))))
-     (dynamic_invariant result true false true)))) :pattern ((current_chain_length
-                                                             counter__model__inputs)) )))
+     (dynamic_invariant result true false true))) :pattern ((current_chain_length
+                                                            counter__model__inputs)) )))
 
 (declare-fun input () Bool)
 
@@ -414,12 +413,12 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_209 (_ BitVec 8))
-  (temp___is_init_206 Bool) (temp___skip_constant_207 Bool)
-  (temp___do_toplevel_208 Bool)) Bool (=>
-                                      (or (= temp___is_init_206 true)
+(define-fun dynamic_invariant1 ((temp___expr_208 (_ BitVec 8))
+  (temp___is_init_205 Bool) (temp___skip_constant_206 Bool)
+  (temp___do_toplevel_207 Bool)) Bool (=>
+                                      (or (= temp___is_init_205 true)
                                       (bvule ((_ int2bv 8) 1) ((_ int2bv 8) 10)))
-                                      (in_range2 temp___expr_209)))
+                                      (in_range2 temp___expr_208)))
 
 (declare-fun count () (_ BitVec 8))
 
@@ -445,10 +444,6 @@
 
 ;; H
   (assert (in_range1 count))
-
-;; H
-  (assert (current_chain_length__function_guard (current_chain_length inputs)
-  inputs))
 
 ;; H
   (assert (= (current_chain_length inputs) count))
@@ -500,9 +495,7 @@
 
 ;; H
   (assert
-  (and
   (and (= counter__p__B_3__a__assume (current_chain_length inputs1))
-  (current_chain_length__function_guard counter__p__B_3__a__assume inputs1))
   (and (in_range1 counter__p__B_3__a__assume)
   (ite (not (= (select inputs1 ((_ int2bv 8) 10)) true))
   (= counter__p__B_3__a__assume ((_ int2bv 8) 0))

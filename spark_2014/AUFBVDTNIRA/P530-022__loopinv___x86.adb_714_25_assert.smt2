@@ -455,9 +455,7 @@
      (and
      (and (dynamic_invariant var true true true) (dynamic_invariant bottom
      true true true)) (dynamic_invariant range_size true true true))
-     (let ((result (inrange64 var bottom range_size)))
-     (=> (inrange64__function_guard result var bottom range_size)
-     (= (= result true)
+     (= (= (inrange64 var bottom range_size) true)
      (and (not (= range_size ((_ int2bv 64) 0)))
      (ite (bvule bottom (bvsub ((_ int2bv 64) 18446744073709551615) (bvsub range_size ((_ int2bv 64) 1))))
      (and (bvule bottom var)
@@ -465,22 +463,20 @@
      (or
      (and (bvule bottom var)
      (bvule var ((_ int2bv 64) 18446744073709551615)))
-     (bvule var (bvsub (bvsub range_size (bvsub ((_ int2bv 64) 18446744073709551615) bottom)) ((_ int2bv 64) 2)))))))))) :pattern (
+     (bvule var (bvsub (bvsub range_size (bvsub ((_ int2bv 64) 18446744073709551615) bottom)) ((_ int2bv 64) 2)))))))) :pattern (
   (inrange64 var bottom range_size)) )))
 
 ;; inrange64__def_axiom
   (assert
   (forall ((var (_ BitVec 64)) (bottom (_ BitVec 64))
   (range_size (_ BitVec 64)))
-  (! (=> (inrange64__function_guard (inrange64 var bottom range_size) var
-     bottom range_size)
-     (= (= (inrange64 var bottom range_size) true)
+  (! (= (= (inrange64 var bottom range_size) true)
      (and (not (= range_size ((_ int2bv 64) 0)))
      (ite (bvule bottom (bvsub ((_ int2bv 64) 18446744073709551615) (bvsub range_size ((_ int2bv 64) 1))))
      (and (bvule bottom var)
      (bvule var (bvadd bottom (bvsub range_size ((_ int2bv 64) 1)))))
      (or (bvule bottom var)
-     (bvule var (bvsub (bvsub range_size (bvsub ((_ int2bv 64) 18446744073709551615) bottom)) ((_ int2bv 64) 2)))))))) :pattern (
+     (bvule var (bvsub (bvsub range_size (bvsub ((_ int2bv 64) 18446744073709551615) bottom)) ((_ int2bv 64) 2))))))) :pattern (
   (inrange64 var bottom range_size)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -504,8 +500,7 @@
   (assert
   (forall ((mem (Array (_ BitVec 64) unsigned8)))
   (forall ((addr (_ BitVec 64)) (val__ (_ BitVec 64)))
-  (! (=> (hasmem64__function_guard (hasmem64 mem addr val__) mem addr val__)
-     (= (= (hasmem64 mem addr val__) true)
+  (! (= (= (hasmem64 mem addr val__) true)
      (and
      (and
      (and
@@ -528,7 +523,7 @@
      (= (bvand val__ ((_ int2bv 64) 71776119061217280)) (bvmul ((_ zero_extend 56) 
      (to_rep (select mem (bvadd addr ((_ int2bv 64) 6))))) ((_ int2bv 64) 281474976710656))))
      (= (bvand val__ ((_ int2bv 64) 18374686479671623680)) (bvmul ((_ zero_extend 56) 
-     (to_rep (select mem (bvadd addr ((_ int2bv 64) 7))))) ((_ int2bv 64) 72057594037927936)))))) :pattern (
+     (to_rep (select mem (bvadd addr ((_ int2bv 64) 7))))) ((_ int2bv 64) 72057594037927936))))) :pattern (
   (hasmem64 mem addr val__)) ))))
 
 (declare-fun readmem64 ((_ BitVec 64)
@@ -543,11 +538,8 @@
   (forall ((x86__memory (Array (_ BitVec 64) unsigned8)))
   (! (=> (dynamic_invariant addr true true true)
      (let ((result (readmem64 addr x86__memory)))
-     (and (hasmem64__function_guard (hasmem64 x86__memory addr result)
-     x86__memory addr result)
-     (=> (readmem64__function_guard result addr x86__memory)
      (and (= (hasmem64 x86__memory addr result) true) (dynamic_invariant
-     result true false true)))))) :pattern ((readmem64 addr x86__memory)) ))))
+     result true false true)))) :pattern ((readmem64 addr x86__memory)) ))))
 
 (declare-fun nooverlap8equal ((Array (_ BitVec 64) unsigned8)
   (Array (_ BitVec 64) unsigned8) (_ BitVec 64)) Bool)
@@ -570,17 +562,10 @@
   (forall ((start (_ BitVec 64)) (last (_ BitVec 64))
   (x86__rax (_ BitVec 64)))
   (forall ((x86__memory (Array (_ BitVec 64) unsigned8)))
-  (! (=> (all_equal_rax__function_guard
-     (all_equal_rax start last x86__memory x86__rax) start last x86__memory
-     x86__rax)
-     (and
-     (forall ((i (_ BitVec 64))) (readmem64__function_guard
-     (readmem64 (bvadd start (bvmul i ((_ int2bv 64) 8))) x86__memory)
-     (bvadd start (bvmul i ((_ int2bv 64) 8))) x86__memory))
-     (= (= (all_equal_rax start last x86__memory x86__rax) true)
+  (! (= (= (all_equal_rax start last x86__memory x86__rax) true)
      (forall ((i (_ BitVec 64)))
      (=> (and (bvule ((_ int2bv 64) 0) i) (bvule i last))
-     (= (readmem64 (bvadd start (bvmul i ((_ int2bv 64) 8))) x86__memory) x86__rax)))))) :pattern (
+     (= (readmem64 (bvadd start (bvmul i ((_ int2bv 64) 8))) x86__memory) x86__rax)))) :pattern (
   (all_equal_rax start last x86__memory x86__rax)) ))))
 
 (declare-fun rcx_start () (_ BitVec 64))
@@ -608,8 +593,7 @@
 ;; nooverlap8__def_axiom
   (assert
   (forall ((addr1 (_ BitVec 64)) (addr2 (_ BitVec 64)))
-  (! (=> (nooverlap8__function_guard (nooverlap8 addr1 addr2) addr1 addr2)
-     (= (= (nooverlap8 addr1 addr2) true)
+  (! (= (= (nooverlap8 addr1 addr2) true)
      (and
      (and
      (and
@@ -623,9 +607,8 @@
      (not (= addr1 (bvadd addr2 ((_ int2bv 64) 4)))))
      (not (= addr1 (bvadd addr2 ((_ int2bv 64) 5)))))
      (not (= addr1 (bvadd addr2 ((_ int2bv 64) 6)))))
-     (not (= addr1 (bvadd addr2 ((_ int2bv 64) 7))))))) :pattern ((nooverlap8
-                                                                  addr1
-                                                                  addr2)) )))
+     (not (= addr1 (bvadd addr2 ((_ int2bv 64) 7)))))) :pattern ((nooverlap8
+                                                                 addr1 addr2)) )))
 
 ;; nooverlap8equal__post_axiom
   (assert true)
@@ -635,18 +618,13 @@
   (forall ((mem1 (Array (_ BitVec 64) unsigned8))
   (mem2 (Array (_ BitVec 64) unsigned8)))
   (forall ((addr (_ BitVec 64)))
-  (! (=> (nooverlap8equal__function_guard (nooverlap8equal mem1 mem2 addr)
-     mem1 mem2 addr)
-     (and
-     (forall ((i (_ BitVec 64))) (nooverlap8__function_guard
-     (nooverlap8 i addr) i addr))
-     (= (= (nooverlap8equal mem1 mem2 addr) true)
+  (! (= (= (nooverlap8equal mem1 mem2 addr) true)
      (forall ((i (_ BitVec 64)))
      (=>
      (and (bvule ((_ int2bv 64) 0) i)
      (bvule i ((_ int2bv 64) 18446744073709551615)))
      (=> (= (nooverlap8 i addr) true)
-     (= (to_rep (select mem1 i)) (to_rep (select mem2 i))))))))) :pattern (
+     (= (to_rep (select mem1 i)) (to_rep (select mem2 i))))))) :pattern (
   (nooverlap8equal mem1 mem2 addr)) ))))
 
 (declare-fun rax () (_ BitVec 64))
@@ -679,11 +657,6 @@
 
 ;; H
   (assert (not (= i (bvsub rcx rcx))))
-
-;; H
-  (assert (readmem64__function_guard
-  (readmem64 (bvadd rdi (bvmul i ((_ int2bv 64) 8))) memory)
-  (bvadd rdi (bvmul i ((_ int2bv 64) 8))) memory))
 
 (assert
 ;; WP_parameter_def

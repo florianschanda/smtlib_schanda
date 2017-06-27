@@ -352,25 +352,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(declare-sort t63b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 64)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq2 (t63b t63b) Bool)
-
-(declare-fun dummy2 () t63b)
-
-(declare-datatypes () ((t63b__ref (mk_t63b__ref (t63b__content t63b)))))
-(define-fun t63b__ref___projection ((a t63b__ref)) t63b (t63b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
@@ -379,10 +360,10 @@
 
 ;; def_axiom
   (assert
-  (forall ((temp___503 Int))
-  (forall ((temp___504 Int))
-  (= (select (stable_marriage__invert_map__result__aggregate_def temp___503) temp___504) 
-  (of_rep1 temp___503)))))
+  (forall ((temp___462 Int))
+  (forall ((temp___463 Int))
+  (= (select (stable_marriage__invert_map__result__aggregate_def temp___462) temp___463) 
+  (of_rep1 temp___462)))))
 
 (define-fun dynamic_invariant ((temp___expr_143 Int)
   (temp___is_init_140 Bool) (temp___skip_constant_141 Bool)
@@ -402,15 +383,13 @@
 
 (declare-fun stable_marriage__invert_map__result () (Array Int group2_id))
 
-(declare-fun o () (Array Int group2_id))
+(declare-fun temp___465 () (Array Int group2_id))
 
-(declare-fun temp___506 () (Array Int group2_id))
+(declare-fun temp___464 () Int)
 
-(declare-fun temp___505 () Int)
+(declare-fun o () group2_id)
 
-(declare-fun o1 () group2_id)
-
-(declare-fun o2 () (Array Int group2_id))
+(declare-fun o1 () (Array Int group2_id))
 
 (declare-fun result () (Array Int group2_id))
 
@@ -478,13 +457,11 @@
   (and (and (<= 1 g210) (<= g210 64)) (= (to_rep (select g2_to_g1 g210)) g1))))))
 
 ;; H
-  (assert (= o (stable_marriage__invert_map__result__aggregate_def 64)))
-
-;; H
   (assert (= (mk_map__ref1 result) (mk_map__ref1 result__)))
 
 ;; H
-  (assert (= result__1 o))
+  (assert
+  (= result__1 (stable_marriage__invert_map__result__aggregate_def 64)))
 
 ;; H
   (assert
@@ -502,10 +479,10 @@
   (assert (= g21 1))
 
 ;; H
-  (assert (=> (and (<= 1 g21) (<= g21 64)) (= temp___506 result__1)))
+  (assert (=> (and (<= 1 g21) (<= g21 64)) (= temp___465 result__1)))
 
 ;; H
-  (assert (=> (and (<= 1 g21) (<= g21 64)) (= temp___505 g21)))
+  (assert (=> (and (<= 1 g21) (<= g21 64)) (= temp___464 g21)))
 
 ;; H
   (assert
@@ -531,18 +508,18 @@
   (and (=> (<= 1 64) (in_range2 g22)) (and (<= 1 g22) (<= g22 64)))))
 
 ;; H
-  (assert (=> (and (<= 1 g21) (<= g21 64)) (= (to_rep1 o1) g22)))
+  (assert (=> (and (<= 1 g21) (<= g21 64)) (= (to_rep1 o) g22)))
 
 ;; H
   (assert
   (=> (and (<= 1 g21) (<= g21 64))
-  (= o2 (store result__2 (to_rep (select g2_to_g1 g22)) o1))))
+  (= o1 (store result__2 (to_rep (select g2_to_g1 g22)) o))))
 
 ;; H
   (assert (=> (and (<= 1 g21) (<= g21 64)) (= result__2 result2)))
 
 ;; H
-  (assert (=> (and (<= 1 g21) (<= g21 64)) (= result__3 o2)))
+  (assert (=> (and (<= 1 g21) (<= g21 64)) (= result__3 o1)))
 
 ;; H
   (assert (=> (and (<= 1 g21) (<= g21 64)) (= g22 64)))

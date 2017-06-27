@@ -608,18 +608,13 @@
   (assert
   (forall ((pumpunit__outstanding Int))
   (! (=> (dynamic_invariant pumpunit__outstanding true true true)
-     (let ((result (get_outstanding pumpunit__outstanding)))
-     (=> (get_outstanding__function_guard result pumpunit__outstanding)
-     (dynamic_invariant result true false true)))) :pattern ((get_outstanding
-                                                             pumpunit__outstanding)) )))
+     (dynamic_invariant (get_outstanding pumpunit__outstanding) true false
+     true)) :pattern ((get_outstanding pumpunit__outstanding)) )))
 
 ;; get_outstanding__def_axiom
   (assert
   (forall ((pumpunit__outstanding Int))
-  (! (=>
-     (and (dynamic_invariant pumpunit__outstanding true true true)
-     (get_outstanding__function_guard (get_outstanding pumpunit__outstanding)
-     pumpunit__outstanding))
+  (! (=> (dynamic_invariant pumpunit__outstanding true true true)
      (= (get_outstanding pumpunit__outstanding) pumpunit__outstanding)) :pattern (
   (get_outstanding pumpunit__outstanding)) )))
 
@@ -639,21 +634,17 @@
 ;; get_cur_price__post_axiom
   (assert
   (forall ((pumpunit__cur_pump__fields us_split_fields))
-  (! (let ((result (get_cur_price pumpunit__cur_pump__fields)))
-     (=> (get_cur_price__function_guard result pumpunit__cur_pump__fields)
-     (dynamic_invariant1 result true false true))) :pattern ((get_cur_price
-                                                             pumpunit__cur_pump__fields)) )))
+  (! (dynamic_invariant1 (get_cur_price pumpunit__cur_pump__fields) true
+  false true) :pattern ((get_cur_price pumpunit__cur_pump__fields)) )))
 
 ;; get_cur_price__def_axiom
   (assert
   (forall ((pumpunit__cur_pump__fields us_split_fields))
-  (! (=> (get_cur_price__function_guard
-     (get_cur_price pumpunit__cur_pump__fields) pumpunit__cur_pump__fields)
-     (= (get_cur_price pumpunit__cur_pump__fields) (to_rep2
+  (! (= (get_cur_price pumpunit__cur_pump__fields) (to_rep2
                                                    (rec__pump__pump_record__price
                                                    (us_split_fields1
                                                    (mk___rep
-                                                   pumpunit__cur_pump__fields)))))) :pattern (
+                                                   pumpunit__cur_pump__fields))))) :pattern (
   (get_cur_price pumpunit__cur_pump__fields)) )))
 
 (declare-fun get_cur_resevoir (us_split_fields) Int)
@@ -663,22 +654,17 @@
 ;; get_cur_resevoir__post_axiom
   (assert
   (forall ((pumpunit__cur_pump__fields us_split_fields))
-  (! (let ((result (get_cur_resevoir pumpunit__cur_pump__fields)))
-     (=> (get_cur_resevoir__function_guard result pumpunit__cur_pump__fields)
-     (dynamic_invariant1 result true false true))) :pattern ((get_cur_resevoir
-                                                             pumpunit__cur_pump__fields)) )))
+  (! (dynamic_invariant1 (get_cur_resevoir pumpunit__cur_pump__fields) true
+  false true) :pattern ((get_cur_resevoir pumpunit__cur_pump__fields)) )))
 
 ;; get_cur_resevoir__def_axiom
   (assert
   (forall ((pumpunit__cur_pump__fields us_split_fields))
-  (! (=> (get_cur_resevoir__function_guard
-     (get_cur_resevoir pumpunit__cur_pump__fields)
-     pumpunit__cur_pump__fields)
-     (= (get_cur_resevoir pumpunit__cur_pump__fields) (to_rep2
+  (! (= (get_cur_resevoir pumpunit__cur_pump__fields) (to_rep2
                                                       (rec__pump__pump_record__resevoir
                                                       (us_split_fields1
                                                       (mk___rep
-                                                      pumpunit__cur_pump__fields)))))) :pattern (
+                                                      pumpunit__cur_pump__fields))))) :pattern (
   (get_cur_resevoir pumpunit__cur_pump__fields)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
@@ -709,11 +695,11 @@
 (define-fun internal_state__ref___projection ((a internal_state__ref)) internal_state 
   (internal_state__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_589 Int)
-  (temp___is_init_586 Bool) (temp___skip_constant_587 Bool)
-  (temp___do_toplevel_588 Bool)) Bool (=>
-                                      (or (= temp___is_init_586 true)
-                                      (<= 0 3)) (in_range6 temp___expr_589)))
+(define-fun dynamic_invariant2 ((temp___expr_563 Int)
+  (temp___is_init_560 Bool) (temp___skip_constant_561 Bool)
+  (temp___do_toplevel_562 Bool)) Bool (=>
+                                      (or (= temp___is_init_560 true)
+                                      (<= 0 3)) (in_range6 temp___expr_563)))
 
 ;; is_ready__post_axiom
   (assert true)
@@ -721,9 +707,7 @@
 ;; is_ready__def_axiom
   (assert
   (forall ((pumpunit__cur_state Int))
-  (! (=> (is_ready__function_guard (is_ready pumpunit__cur_state)
-     pumpunit__cur_state)
-     (= (= (is_ready pumpunit__cur_state) true) (= pumpunit__cur_state 1))) :pattern (
+  (! (= (= (is_ready pumpunit__cur_state) true) (= pumpunit__cur_state 1)) :pattern (
   (is_ready pumpunit__cur_state)) )))
 
 (declare-fun is_pumping (Int) Bool)
@@ -736,9 +720,7 @@
 ;; is_pumping__def_axiom
   (assert
   (forall ((pumpunit__cur_state Int))
-  (! (=> (is_pumping__function_guard (is_pumping pumpunit__cur_state)
-     pumpunit__cur_state)
-     (= (= (is_pumping pumpunit__cur_state) true) (= pumpunit__cur_state 0))) :pattern (
+  (! (= (= (is_pumping pumpunit__cur_state) true) (= pumpunit__cur_state 0)) :pattern (
   (is_pumping pumpunit__cur_state)) )))
 
 (define-fun dynamic_invariant3 ((temp___expr_39 Int) (temp___is_init_36 Bool)
@@ -794,29 +776,6 @@
   (assert (in_range3 outstanding))
 
 ;; H
-  (assert (is_ready__function_guard (is_ready cur_state) cur_state))
-
-;; H
-  (assert (get_outstanding__function_guard (get_outstanding outstanding)
-  outstanding))
-
-;; H
-  (assert (get_cur_price__function_guard
-  (get_cur_price
-  (mk___split_fields cur_pump__split_fields cur_pump__split_fields1
-  cur_pump__split_fields2 cur_pump__split_fields3))
-  (mk___split_fields cur_pump__split_fields cur_pump__split_fields1
-  cur_pump__split_fields2 cur_pump__split_fields3)))
-
-;; H
-  (assert (get_cur_resevoir__function_guard
-  (get_cur_resevoir
-  (mk___split_fields cur_pump__split_fields cur_pump__split_fields1
-  cur_pump__split_fields2 cur_pump__split_fields3))
-  (mk___split_fields cur_pump__split_fields cur_pump__split_fields1
-  cur_pump__split_fields2 cur_pump__split_fields3)))
-
-;; H
   (assert
   (and (= (is_ready cur_state) true)
   (and
@@ -832,9 +791,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= result (is_ready cur_state)) (is_ready__function_guard result
-  cur_state)) (= (= result true) (= cur_state 1))))
+  (and (= result (is_ready cur_state)) (= (= result true) (= cur_state 1))))
 
 ;; H
   (assert (= result true))

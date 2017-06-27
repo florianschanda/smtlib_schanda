@@ -296,19 +296,13 @@
 ;; user_eq__def_axiom
   (assert
   (forall ((a us_rep) (b us_rep))
-  (! (and (oeq__function_guard (oeq a b) a b) (= (user_eq3 a b) (oeq a b))) :pattern (
-  (user_eq3 a b)) )))
+  (! (= (user_eq3 a b) (oeq a b)) :pattern ((user_eq3 a b)) )))
 
-;; temp___result_313_def
-  (assert
-  (forall ((temp___312 us_rep)) (is_empty__function_guard
-  (is_empty temp___312) temp___312)))
-
-(define-fun default_initial_assumption ((temp___expr_310 us_rep)
-  (temp___skip_top_level_311 Bool)) Bool (=>
+(define-fun default_initial_assumption ((temp___expr_309 us_rep)
+  (temp___skip_top_level_310 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_311 true))
-                                         (= (is_empty temp___expr_310) true)))
+                                         (= temp___skip_top_level_310 true))
+                                         (= (is_empty temp___expr_309) true)))
 
 (declare-fun mem (us_rep Int) Bool)
 
@@ -329,9 +323,7 @@
   (forall ((s us_rep))
   (forall ((e Int))
   (! (=> (dynamic_invariant e true true true)
-     (let ((result (mem s e)))
-     (=> (mem__function_guard result s e) (=> (= e 0) (not (= result true)))))) :pattern (
-  (mem s e)) ))))
+     (=> (= e 0) (not (= (mem s e) true)))) :pattern ((mem s e)) ))))
 
 ;; mem__post__dispatch_axiom
   (assert true)
@@ -356,14 +348,10 @@
   (assert
   (forall ((s us_rep))
   (forall ((e Int))
-  (! (and (mem__function_guard (mem s e) s e)
-     (=>
+  (! (=>
      (and (dynamic_invariant e true true true)
      (and (not (= e 0)) (not (= (mem s e) true))))
-     (let ((result (add s e)))
-     (and (is_add__function_guard (is_add s e result) s e result)
-     (=> (add__function_guard result s e) (= (is_add s e result) true)))))) :pattern (
-  (add s e)) ))))
+     (= (is_add s e (add s e)) true)) :pattern ((add s e)) ))))
 
 ;; add__post__dispatch_axiom
   (assert true)
@@ -473,29 +461,18 @@
 ;; user_eq__def_axiom
   (assert
   (forall ((a us_rep1) (b us_rep1))
-  (! (and (oeq__function_guard2 (oeq2 a b) a b)
-     (= (user_eq4 a b) (oeq2 a b))) :pattern ((user_eq4 a b)) )))
+  (! (= (user_eq4 a b) (oeq2 a b)) :pattern ((user_eq4 a b)) )))
 
-;; temp___result_382_def
-  (assert
-  (forall ((temp___381 us_rep)) (is_empty__function_guard
-  (is_empty temp___381) temp___381)))
-
-;; temp___result_385_def
-  (assert
-  (forall ((temp___384 us_rep)) (is_empty__function_guard
-  (is_empty temp___384) temp___384)))
-
-(define-fun default_initial_assumption1 ((temp___expr_378 us_rep1)
-  (temp___skip_top_level_379 Bool)) Bool (and
+(define-fun default_initial_assumption1 ((temp___expr_316 us_rep1)
+  (temp___skip_top_level_317 Bool)) Bool (and
                                          (= (is_empty
                                             (rec__allocator__m__t__available
                                             (us_split_fields1
-                                            temp___expr_378))) true)
+                                            temp___expr_316))) true)
                                          (= (is_empty
                                             (rec__allocator__m__t__allocated
                                             (us_split_fields1
-                                            temp___expr_378))) true)))
+                                            temp___expr_316))) true)))
 
 ;; is_valid__post_axiom
   (assert true)
@@ -504,31 +481,7 @@
   (assert
   (forall ((m us_rep1))
   (forall ((allocator__data (Array Int status)))
-  (! (=> (is_valid__function_guard (is_valid m allocator__data) m
-     allocator__data)
-     (and
-     (forall ((temp___400 us_rep) (e Int)) (mem__function_guard
-     (mem temp___400 e) temp___400 e))
-     (and
-     (forall ((temp___402 us_rep) (e Int)) (mem__function_guard
-     (mem temp___402 e) temp___402 e))
-     (and
-     (forall ((r Int)) (mem__function_guard
-     (mem (rec__allocator__m__t__available (us_split_fields1 m)) r)
-     (rec__allocator__m__t__available (us_split_fields1 m)) r))
-     (and
-     (forall ((r Int)) (mem__function_guard
-     (mem (rec__allocator__m__t__allocated (us_split_fields1 m)) r)
-     (rec__allocator__m__t__allocated (us_split_fields1 m)) r))
-     (and
-     (forall ((r Int)) (mem__function_guard
-     (mem (rec__allocator__m__t__available (us_split_fields1 m)) r)
-     (rec__allocator__m__t__available (us_split_fields1 m)) r))
-     (and
-     (forall ((r Int)) (mem__function_guard
-     (mem (rec__allocator__m__t__allocated (us_split_fields1 m)) r)
-     (rec__allocator__m__t__allocated (us_split_fields1 m)) r))
-     (= (= (is_valid m allocator__data) true)
+  (! (= (= (is_valid m allocator__data) true)
      (and
      (and
      (forall ((e Int))
@@ -551,7 +504,7 @@
      (and
      (not
      (= (mem (rec__allocator__m__t__available (us_split_fields1 m)) r) true))
-     (= (mem (rec__allocator__m__t__allocated (us_split_fields1 m)) r) true)))))))))))))) :pattern (
+     (= (mem (rec__allocator__m__t__allocated (us_split_fields1 m)) r) true))))))) :pattern (
   (is_valid m allocator__data)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -560,11 +513,11 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_447 Int)
-  (temp___is_init_444 Bool) (temp___skip_constant_445 Bool)
-  (temp___do_toplevel_446 Bool)) Bool (=>
-                                      (or (= temp___is_init_444 true)
-                                      (<= 0 1)) (in_range2 temp___expr_447)))
+(define-fun dynamic_invariant1 ((temp___expr_339 Int)
+  (temp___is_init_336 Bool) (temp___skip_constant_337 Bool)
+  (temp___do_toplevel_338 Bool)) Bool (=>
+                                      (or (= temp___is_init_336 true)
+                                      (<= 0 1)) (in_range2 temp___expr_339)))
 
 (define-fun dynamic_invariant2 ((temp___expr_290 Int)
   (temp___is_init_287 Bool) (temp___skip_constant_288 Bool)
@@ -578,40 +531,23 @@
 ;; oeq__def_axiom
   (assert
   (forall ((x us_rep1) (y us_rep1))
-  (! (=> (oeq__function_guard2 (oeq2 x y) x y)
-     (and (oeq__function_guard
-     (oeq (rec__allocator__m__t__available (us_split_fields1 x))
-     (rec__allocator__m__t__available (us_split_fields1 y)))
-     (rec__allocator__m__t__available (us_split_fields1 x))
-     (rec__allocator__m__t__available (us_split_fields1 y)))
-     (and (oeq__function_guard
-     (oeq (rec__allocator__m__t__allocated (us_split_fields1 x))
-     (rec__allocator__m__t__allocated (us_split_fields1 y)))
-     (rec__allocator__m__t__allocated (us_split_fields1 x))
-     (rec__allocator__m__t__allocated (us_split_fields1 y)))
-     (= (= (oeq2 x y) true)
+  (! (= (= (oeq2 x y) true)
      (and
      (= (oeq (rec__allocator__m__t__available (us_split_fields1 x))
         (rec__allocator__m__t__available (us_split_fields1 y))) true)
      (= (oeq (rec__allocator__m__t__allocated (us_split_fields1 x))
-        (rec__allocator__m__t__allocated (us_split_fields1 y))) true)))))) :pattern (
+        (rec__allocator__m__t__allocated (us_split_fields1 y))) true))) :pattern (
   (oeq2 x y)) )))
 
 ;; oeq__post_axiom
   (assert
   (forall ((s1 us_rep) (s2 us_rep))
-  (! (let ((result (oeq s1 s2)))
-     (and (forall ((e Int)) (mem__function_guard (mem s1 e) s1 e))
-     (and (forall ((e Int)) (mem__function_guard (mem s2 e) s2 e))
-     (and (forall ((e Int)) (mem__function_guard (mem s2 e) s2 e))
-     (and (forall ((e Int)) (mem__function_guard (mem s1 e) s1 e))
-     (=> (oeq__function_guard result s1 s2)
-     (= (= result true)
+  (! (= (= (oeq s1 s2) true)
      (and
      (forall ((e Int))
      (=> (and (in_range3 e) (= (mem s1 e) true)) (= (mem s2 e) true)))
      (forall ((e Int))
-     (=> (and (in_range3 e) (= (mem s2 e) true)) (= (mem s1 e) true))))))))))) :pattern (
+     (=> (and (in_range3 e) (= (mem s2 e) true)) (= (mem s1 e) true))))) :pattern (
   (oeq s1 s2)) )))
 
 ;; oeq__post__dispatch_axiom
@@ -620,11 +556,8 @@
 ;; is_empty__post_axiom
   (assert
   (forall ((s us_rep))
-  (! (let ((result (is_empty s)))
-     (and (forall ((e Int)) (mem__function_guard (mem s e) s e))
-     (=> (is_empty__function_guard result s)
-     (= (= result true)
-     (forall ((e Int)) (not (and (in_range3 e) (= (mem s e) true)))))))) :pattern (
+  (! (= (= (is_empty s) true)
+     (forall ((e Int)) (not (and (in_range3 e) (= (mem s e) true))))) :pattern (
   (is_empty s)) )))
 
 ;; is_empty__post__dispatch_axiom
@@ -635,17 +568,7 @@
   (forall ((s us_rep) (result__ us_rep))
   (forall ((e Int))
   (! (=> (dynamic_invariant e true true true)
-     (let ((result (is_add s e result__)))
-     (and (mem__function_guard (mem result__ e) result__ e)
-     (and (mem__function_guard (mem s e) s e)
-     (and
-     (forall ((f Int)) (mem__function_guard (mem result__ f) result__ f))
-     (and (forall ((f Int)) (mem__function_guard (mem s f) s f))
-     (and (forall ((e1 Int)) (mem__function_guard (mem s e1) s e1))
-     (and
-     (forall ((e1 Int)) (mem__function_guard (mem result__ e1) result__ e1))
-     (=> (is_add__function_guard result s e result__)
-     (= (= result true)
+     (= (= (is_add s e result__) true)
      (and
      (and
      (and (and (not (= e 0)) (= (mem result__ e) true))
@@ -654,7 +577,7 @@
      (=> (and (in_range3 f) (= (mem result__ f) true))
      (or (= (mem s f) true) (= f e)))))
      (forall ((e1 Int))
-     (=> (and (in_range3 e1) (= (mem s e1) true)) (= (mem result__ e1) true)))))))))))))) :pattern (
+     (=> (and (in_range3 e1) (= (mem s e1) true)) (= (mem result__ e1) true)))))) :pattern (
   (is_add s e result__)) ))))
 
 ;; is_add__post__dispatch_axiom
@@ -711,10 +634,10 @@
 (declare-fun alloc4 () us_rep)
 
 ;; H
-  (assert (default_initial_assumption avail false))
+  (assert (= (is_empty avail) true))
 
 ;; H
-  (assert (default_initial_assumption alloc false))
+  (assert (= (is_empty alloc) true))
 
 ;; H
   (assert (= (mk_int__ref result) (mk_int__ref r)))
@@ -729,16 +652,9 @@
   (assert (<= r1 3))
 
 ;; H
-  (assert (is_add__function_guard (is_add avail r1 o) avail r1 o))
-
-;; H
-  (assert (is_add__function_guard (is_add alloc r1 o1) alloc r1 o1))
-
-;; H
   (assert
   (=> (= (to_rep (select data r1)) 0)
-  (and (and (= o (add avail r1)) (add__function_guard o avail r1))
-  (= (is_add avail r1 o) true))))
+  (and (= o (add avail r1)) (= (is_add avail r1 o) true))))
 
 ;; H
   (assert
@@ -757,8 +673,7 @@
 ;; H
   (assert
   (=> (not (= (to_rep (select data r1)) 0))
-  (and (and (= o1 (add alloc r1)) (add__function_guard o1 alloc r1))
-  (= (is_add alloc r1 o1) true))))
+  (and (= o1 (add alloc r1)) (= (is_add alloc r1 o1) true))))
 
 ;; H
   (assert
@@ -775,28 +690,6 @@
   (assert (=> (not (= (to_rep (select data r1)) 0)) (= avail2 avail1)))
 
 ;; H
-  (assert (forall ((e Int)) (mem__function_guard (mem avail3 e) avail3 e)))
-
-;; H
-  (assert (forall ((e Int)) (mem__function_guard (mem alloc3 e) alloc3 e)))
-
-;; H
-  (assert
-  (forall ((rr Int)) (mem__function_guard (mem avail3 rr) avail3 rr)))
-
-;; H
-  (assert
-  (forall ((rr Int)) (mem__function_guard (mem alloc3 rr) alloc3 rr)))
-
-;; H
-  (assert
-  (forall ((rr Int)) (mem__function_guard (mem avail3 rr) avail3 rr)))
-
-;; H
-  (assert
-  (forall ((rr Int)) (mem__function_guard (mem alloc3 rr) alloc3 rr)))
-
-;; H
   (assert
   (and
   (and
@@ -809,12 +702,6 @@
   (ite (= (to_rep (select data rr)) 0)
   (and (= (mem avail3 rr) true) (not (= (mem alloc3 rr) true)))
   (and (not (= (mem avail3 rr) true)) (= (mem alloc3 rr) true)))))))
-
-;; H
-  (assert (is_add__function_guard (is_add avail3 r3 o2) avail3 r3 o2))
-
-;; H
-  (assert (is_add__function_guard (is_add alloc3 r3 o3) alloc3 r3 o3))
 
 ;; H
   (assert (and (=> (<= 1 3) (in_range1 r2)) (and (<= 1 r2) (<= r2 3))))
@@ -831,8 +718,7 @@
 ;; H
   (assert
   (=> (= (to_rep (select data r3)) 0)
-  (and (and (= o2 (add avail3 r3)) (add__function_guard o2 avail3 r3))
-  (= (is_add avail3 r3 o2) true))))
+  (and (= o2 (add avail3 r3)) (= (is_add avail3 r3 o2) true))))
 
 ;; H
   (assert (=> (= (to_rep (select data r3)) 0) (= result4 avail3)))
@@ -846,8 +732,7 @@
 ;; H
   (assert
   (=> (not (= (to_rep (select data r3)) 0))
-  (and (and (= o3 (add alloc3 r3)) (add__function_guard o3 alloc3 r3))
-  (= (is_add alloc3 r3 o3) true))))
+  (and (= o3 (add alloc3 r3)) (= (is_add alloc3 r3 o3) true))))
 
 ;; H
   (assert (=> (not (= (to_rep (select data r3)) 0)) (= result5 alloc3)))
@@ -859,9 +744,6 @@
   (assert (=> (not (= (to_rep (select data r3)) 0)) (= avail4 avail3)))
 
 (declare-fun e () Int)
-
-;; H
-  (assert (mem__function_guard (mem avail4 e) avail4 e))
 
 ;; H
   (assert (in_range3 e))

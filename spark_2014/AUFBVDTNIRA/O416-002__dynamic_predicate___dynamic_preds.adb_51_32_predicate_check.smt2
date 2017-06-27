@@ -325,13 +325,12 @@
   (assert
   (forall ((us_void_param tuple0))
   (! (let ((result (get_constant_even_pair us_void_param)))
-     (=> (get_constant_even_pair__function_guard result us_void_param)
      (and
      (and
      (= (to_rep (rec__dynamic_preds__even_pair__a (us_split_fields1 result))) 0)
      (= (to_rep (rec__dynamic_preds__even_pair__b (us_split_fields1 result))) 0))
-     (dynamic_invariant2 result true false true)))) :pattern ((get_constant_even_pair
-                                                              us_void_param)) )))
+     (dynamic_invariant2 result true false true))) :pattern ((get_constant_even_pair
+                                                             us_void_param)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
@@ -362,9 +361,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o2 (get_constant_even_pair Tuple0))
-  (get_constant_even_pair__function_guard o2 Tuple0))
   (and (dynamic_invariant2 o2 true false true)
   (and (= (to_rep o) 0) (= (to_rep o1) 0)))))
 

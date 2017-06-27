@@ -99,17 +99,14 @@
 ;; id__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant1 x true true true)
-     (let ((result (id x)))
-     (=> (id__function_guard result x) (dynamic_invariant1 result true false
-     true)))) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant1 x true true true) (dynamic_invariant1 (id x)
+     true false true)) :pattern ((id x)) )))
 
 ;; id__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant1 x true true true) (id__function_guard (id x)
-     x)) (= (id x) x)) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant1 x true true true) (= (id x) x)) :pattern (
+  (id x)) )))
 
 (declare-fun to_rep (integer) Int)
 
@@ -286,39 +283,39 @@
      (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
-(define-fun dynamic_invariant2 ((temp___expr_148 (Array Int integer))
-  (temp___is_init_145 Bool) (temp___skip_constant_146 Bool)
-  (temp___do_toplevel_147 Bool)) Bool (forall ((temp___149 Int))
+(define-fun dynamic_invariant2 ((temp___expr_147 (Array Int integer))
+  (temp___is_init_144 Bool) (temp___skip_constant_145 Bool)
+  (temp___do_toplevel_146 Bool)) Bool (forall ((temp___148 Int))
                                       (=>
-                                      (and (<= 1 temp___149)
-                                      (<= temp___149 2))
+                                      (and (<= 1 temp___148)
+                                      (<= temp___148 2))
                                       (=>
-                                      (or (= temp___is_init_145 true)
+                                      (or (= temp___is_init_144 true)
                                       (<= first 2147483647))
                                       (dynamic_property first 2147483647
                                       (to_rep
-                                      (select temp___expr_148 temp___149)))))))
+                                      (select temp___expr_147 temp___148)))))))
 
-(define-fun default_initial_assumption ((temp___expr_150 (Array Int integer))
-  (temp___skip_top_level_151 Bool)) Bool (forall ((temp___152 Int))
+(define-fun default_initial_assumption ((temp___expr_149 (Array Int integer))
+  (temp___skip_top_level_150 Bool)) Bool (forall ((temp___151 Int))
                                          (=>
-                                         (and (<= 1 temp___152)
-                                         (<= temp___152 2))
+                                         (and (<= 1 temp___151)
+                                         (<= temp___151 2))
                                          (= (to_rep
-                                            (select temp___expr_150 temp___152)) 0))))
+                                            (select temp___expr_149 temp___151)) 0))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 ;; one__def_axiom
-  (assert (and (id__function_guard (id 1) 1) (= one (id 1))))
+  (assert (= one (id 1)))
 
-(define-fun dynamic_invariant3 ((temp___expr_137 Int)
-  (temp___is_init_134 Bool) (temp___skip_constant_135 Bool)
-  (temp___do_toplevel_136 Bool)) Bool (=>
-                                      (or (= temp___is_init_134 true)
+(define-fun dynamic_invariant3 ((temp___expr_136 Int)
+  (temp___is_init_133 Bool) (temp___skip_constant_134 Bool)
+  (temp___do_toplevel_135 Bool)) Bool (=>
+                                      (or (= temp___is_init_133 true)
                                       (<= first 2147483647))
                                       (dynamic_property first 2147483647
-                                      temp___expr_137)))
+                                      temp___expr_136)))
 
 ;; first__def_axiom
   (assert (= first one))
@@ -332,9 +329,7 @@
 (declare-fun result () Bool)
 
 ;; H
-  (assert
-  (and (and (= o (id 1)) (id__function_guard o 1))
-  (and (in_range1 o) (= o 1))))
+  (assert (and (= o (id 1)) (and (in_range1 o) (= o 1))))
 
 ;; H
   (assert

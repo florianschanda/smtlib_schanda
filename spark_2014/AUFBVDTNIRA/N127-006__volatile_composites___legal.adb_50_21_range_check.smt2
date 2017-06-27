@@ -202,9 +202,9 @@
 (define-fun unsigned_32__ref___projection ((a unsigned_32__ref)) unsigned_32 
   (unsigned_32__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_180 (_ BitVec 32))
-  (temp___is_init_177 Bool) (temp___skip_constant_178 Bool)
-  (temp___do_toplevel_179 Bool)) Bool true)
+(define-fun dynamic_invariant1 ((temp___expr_179 (_ BitVec 32))
+  (temp___is_init_176 Bool) (temp___skip_constant_177 Bool)
+  (temp___do_toplevel_178 Bool)) Bool true)
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int integer))))))
@@ -342,12 +342,12 @@
 (define-fun source__ref___projection ((a source__ref)) source (source__content
                                                               a))
 
-(define-fun dynamic_invariant2 ((temp___expr_246 Int)
-  (temp___is_init_243 Bool) (temp___skip_constant_244 Bool)
-  (temp___do_toplevel_245 Bool)) Bool (=>
-                                      (or (= temp___is_init_243 true)
+(define-fun dynamic_invariant2 ((temp___expr_245 Int)
+  (temp___is_init_242 Bool) (temp___skip_constant_243 Bool)
+  (temp___do_toplevel_244 Bool)) Bool (=>
+                                      (or (= temp___is_init_242 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range1 temp___expr_246)))
+                                      (in_range1 temp___expr_245)))
 
 (declare-sort target 0)
 
@@ -371,9 +371,9 @@
 (define-fun target__ref___projection ((a target__ref)) target (target__content
                                                               a))
 
-(define-fun dynamic_invariant3 ((temp___expr_252 (_ BitVec 32))
-  (temp___is_init_249 Bool) (temp___skip_constant_250 Bool)
-  (temp___do_toplevel_251 Bool)) Bool true)
+(define-fun dynamic_invariant3 ((temp___expr_251 (_ BitVec 32))
+  (temp___is_init_248 Bool) (temp___skip_constant_249 Bool)
+  (temp___do_toplevel_250 Bool)) Bool true)
 
 (declare-fun c (Int) (_ BitVec 32))
 
@@ -382,10 +382,8 @@
 ;; c__post_axiom
   (assert
   (forall ((s Int))
-  (! (=> (dynamic_invariant2 s true true true)
-     (let ((result (c s)))
-     (=> (c__function_guard result s) (dynamic_invariant3 result true false
-     true)))) :pattern ((c s)) )))
+  (! (=> (dynamic_invariant2 s true true true) (dynamic_invariant3 (c s) true
+     false true)) :pattern ((c s)) )))
 
 (declare-fun tmp () (_ BitVec 32))
 
@@ -393,7 +391,7 @@
 
 (declare-fun x () Int)
 
-(declare-fun temp___262 () (Array Int integer))
+(declare-fun temp___261 () (Array Int integer))
 
 (declare-fun o () integer)
 
@@ -407,18 +405,16 @@
   (assert (=> (<= (- 2147483648) 2147483647) (in_range x)))
 
 ;; H
-  (assert (= temp___262 v3))
+  (assert (= temp___261 v3))
 
 ;; H
-  (assert (= o (select temp___262 3)))
+  (assert (= o (select temp___261 3)))
 
 ;; H
   (assert (= o1 (to_rep o)))
 
 ;; H
-  (assert
-  (and (= legal__rv3uc__tmp__assume (c o1)) (c__function_guard
-  legal__rv3uc__tmp__assume o1)))
+  (assert (= legal__rv3uc__tmp__assume (c o1)))
 
 ;; H
   (assert (= legal__rv3uc__tmp__assume tmp))

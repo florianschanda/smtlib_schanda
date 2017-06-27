@@ -293,10 +293,9 @@
   (assert
   (forall ((c (Array Int natural)))
   (forall ((e Int))
-  (! (=> (mem__function_guard (mem c e) c e)
-     (= (= (mem c e) true)
+  (! (= (= (mem c e) true)
      (exists ((i Int))
-     (and (and (<= 1 i) (<= i 100)) (= (to_rep (select c i)) e))))) :pattern (
+     (and (and (<= 1 i) (<= i 100)) (= (to_rep (select c i)) e)))) :pattern (
   (mem c e)) ))))
 
 (declare-fun has_element ((Array Int natural) us_rep) Bool)
@@ -311,13 +310,12 @@
   (assert
   (forall ((c (Array Int natural)))
   (forall ((p us_rep))
-  (! (=> (has_element__function_guard (has_element c p) c p)
-     (= (= (has_element c p) true)
+  (! (= (= (has_element c p) true)
      (and
      (<= 1 (to_rep
            (rec__my_container_contains__cursor__index (us_split_fields1 p))))
      (<= (to_rep
-         (rec__my_container_contains__cursor__index (us_split_fields1 p))) 100)))) :pattern (
+         (rec__my_container_contains__cursor__index (us_split_fields1 p))) 100))) :pattern (
   (has_element c p)) ))))
 
 (declare-fun c () (Array Int natural))
@@ -356,9 +354,6 @@
 (declare-fun my_container_contains__element__result5 () Int)
 
 (declare-fun result1 () Int)
-
-;; H
-  (assert (has_element__function_guard (has_element c p) c p))
 
 ;; H
   (assert (= (has_element c p) true))
@@ -407,11 +402,6 @@
 
 ;; H
   (assert (= result1 my_container_contains__element__result4))
-
-;; H
-  (assert (mem__function_guard
-  (mem c my_container_contains__element__result4) c
-  my_container_contains__element__result4))
 
 (assert
 ;; WP_parameter_def

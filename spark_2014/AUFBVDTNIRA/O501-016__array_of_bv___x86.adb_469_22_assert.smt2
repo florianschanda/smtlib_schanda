@@ -705,13 +705,12 @@
   (forall ((x86__memory (Array (_ BitVec 64) unsigned8)))
   (! (=> (dynamic_invariant addr true true true)
      (let ((result (readmem16 addr x86__memory)))
-     (=> (readmem16__function_guard result addr x86__memory)
      (and
      (= result (bvor ((_ zero_extend 8) (to_rep (select x86__memory addr))) 
      (ite (< 8 16)
      (bvshl ((_ zero_extend 8) (to_rep
                                (select x86__memory (bvadd addr ((_ int2bv 64) 1))))) ((_ int2bv 16) 8))
-     ((_ int2bv 16) 0)))) (dynamic_invariant2 result true false true))))) :pattern (
+     ((_ int2bv 16) 0)))) (dynamic_invariant2 result true false true)))) :pattern (
   (readmem16 addr x86__memory)) ))))
 
 (declare-fun readmem32 ((_ BitVec 64)
@@ -726,18 +725,11 @@
   (forall ((x86__memory (Array (_ BitVec 64) unsigned8)))
   (! (=> (dynamic_invariant addr true true true)
      (let ((result (readmem32 addr x86__memory)))
-     (and (readmem16__function_guard (readmem16 addr x86__memory) addr
-     x86__memory)
-     (and (readmem16__function_guard
-     (readmem16 (bvadd addr ((_ int2bv 64) 2)) x86__memory)
-     (bvadd addr ((_ int2bv 64) 2)) x86__memory)
-     (=> (readmem32__function_guard result addr x86__memory)
      (and
      (= result (bvor ((_ zero_extend 16) (readmem16 addr x86__memory)) (bvshl ((_ zero_extend 16) 
      (readmem16 (bvadd addr ((_ int2bv 64) 2)) x86__memory)) ((_ int2bv 32) 16))))
-     (dynamic_invariant1 result true false true))))))) :pattern ((readmem32
-                                                                 addr
-                                                                 x86__memory)) ))))
+     (dynamic_invariant1 result true false true)))) :pattern ((readmem32 addr
+                                                              x86__memory)) ))))
 
 (declare-fun addr () (_ BitVec 64))
 
@@ -757,9 +749,8 @@
   (forall ((x86__memory (Array (_ BitVec 64) unsigned8)))
   (! (=> (dynamic_invariant addr1 true true true)
      (let ((result (readmem8 addr1 x86__memory)))
-     (=> (readmem8__function_guard result addr1 x86__memory)
      (and (= result (to_rep (select x86__memory addr1))) (dynamic_invariant3
-     result true false true))))) :pattern ((readmem8 addr1 x86__memory)) ))))
+     result true false true)))) :pattern ((readmem8 addr1 x86__memory)) ))))
 
 (declare-fun memory () (Array (_ BitVec 64) unsigned8))
 
@@ -772,9 +763,6 @@
 (declare-fun memory4 () (Array (_ BitVec 64) unsigned8))
 
 ;; H
-  (assert (readmem8__function_guard (readmem8 addr memory1) addr memory1))
-
-;; H
   (assert
   (and
   (= (readmem8 addr memory1) ((_ extract 7 0) (bvand val__ ((_ int2bv 32) 255))))
@@ -784,11 +772,6 @@
   (bvule i ((_ int2bv 64) 18446744073709551615)))
   (=> (not (= i addr))
   (= (to_rep (select memory1 i)) (to_rep (select memory i))))))))
-
-;; H
-  (assert (readmem8__function_guard
-  (readmem8 (bvadd addr ((_ int2bv 64) 1)) memory2)
-  (bvadd addr ((_ int2bv 64) 1)) memory2))
 
 ;; H
   (assert
@@ -803,11 +786,6 @@
   (= (to_rep (select memory2 i)) (to_rep (select memory1 i))))))))
 
 ;; H
-  (assert (readmem8__function_guard
-  (readmem8 (bvadd addr ((_ int2bv 64) 2)) memory3)
-  (bvadd addr ((_ int2bv 64) 2)) memory3))
-
-;; H
   (assert
   (and
   (= (readmem8 (bvadd addr ((_ int2bv 64) 2)) memory3) ((_ extract 7 0) (bvand (bvlshr 
@@ -818,11 +796,6 @@
   (bvule i ((_ int2bv 64) 18446744073709551615)))
   (=> (not (= i (bvadd addr ((_ int2bv 64) 2))))
   (= (to_rep (select memory3 i)) (to_rep (select memory2 i))))))))
-
-;; H
-  (assert (readmem8__function_guard
-  (readmem8 (bvadd addr ((_ int2bv 64) 3)) memory4)
-  (bvadd addr ((_ int2bv 64) 3)) memory4))
 
 ;; H
   (assert
@@ -843,19 +816,8 @@
   val__ ((_ int2bv 32) 16711680)) ((_ int2bv 32) 16)))))
 
 ;; H
-  (assert (readmem16__function_guard (readmem16 addr memory4) addr memory4))
-
-;; H
   (assert
   (= (readmem16 addr memory4) ((_ extract 15 0) (bvand val__ ((_ int2bv 32) 65535)))))
-
-;; H
-  (assert (readmem16__function_guard (readmem16 addr memory4) addr memory4))
-
-;; H
-  (assert (readmem16__function_guard
-  (readmem16 (bvadd addr ((_ int2bv 64) 2)) memory4)
-  (bvadd addr ((_ int2bv 64) 2)) memory4))
 
 (assert
 ;; WP_parameter_def

@@ -394,8 +394,6 @@
   (! (=> (in_range2 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
                                                               (of_rep2 x))) )))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -420,7 +418,7 @@
 
 (declare-fun first (t) tdigit_count_typeB)
 
-(declare-fun last1 (t) tdigit_count_typeB)
+(declare-fun last (t) tdigit_count_typeB)
 
 (declare-fun mk (Int Int) t)
 
@@ -429,7 +427,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range2 f)
      (=> (in_range2 l)
-     (and (= (to_rep2 (first (mk f l))) f) (= (to_rep2 (last1 (mk f l))) l)))) :pattern (
+     (and (= (to_rep2 (first (mk f l))) f) (= (to_rep2 (last (mk f l))) l)))) :pattern (
   (mk f l)) )))
 
 (define-fun dynamic_property1 ((range_first Int) (range_last Int) (low Int)
@@ -447,10 +445,10 @@
 
 (define-fun first1 ((a us_t)) Int (to_rep2 (first (rt a))))
 
-(define-fun last2 ((a us_t)) Int (to_rep2 (last1 (rt a))))
+(define-fun last1 ((a us_t)) Int (to_rep2 (last (rt a))))
 
-(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last2 a))
-                                  (+ (- (last2 a) (first1 a)) 1) 0))
+(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last1 a))
+                                  (+ (- (last1 a) (first1 a)) 1) 0))
 
 (declare-fun value__size () Int)
 
@@ -485,8 +483,8 @@
 
 (define-fun bool_eq5 ((x us_t)
   (y us_t)) Bool (bool_eq2 (elts x) (to_rep2 (first (rt x)))
-                 (to_rep2 (last1 (rt x))) (elts y) (to_rep2 (first (rt y)))
-                 (to_rep2 (last1 (rt y)))))
+                 (to_rep2 (last (rt x))) (elts y) (to_rep2 (first (rt y)))
+                 (to_rep2 (last (rt y)))))
 
 (declare-fun user_eq4 (us_t us_t) Bool)
 
@@ -614,14 +612,14 @@
                                       (first1
                                       (rec__very_longs__very_long__long_digits
                                       (us_split_fields1 temp___expr_221)))
-                                      (last2
+                                      (last1
                                       (rec__very_longs__very_long__long_digits
                                       (us_split_fields1 temp___expr_221))))
                                       (and
                                       (= (first1
                                          (rec__very_longs__very_long__long_digits
                                          (us_split_fields1 temp___expr_221))) 1)
-                                      (= (last2
+                                      (= (last1
                                          (rec__very_longs__very_long__long_digits
                                          (us_split_fields1 temp___expr_221))) 
                                       (to_rep temp___222))))))
@@ -667,13 +665,12 @@
      (and (dynamic_invariant1 value true true true) (dynamic_invariant3 count
      true true true))
      (let ((result (shift_right__2 value count)))
-     (=> (shift_right__2__function_guard result value count)
      (and
      (= result (bvudiv value (ite (< count 256)
                              (bvshl ((_ int2bv 8) 1) ((_ int2bv 8) count))
                              ((_ int2bv 8) 0))))
-     (dynamic_invariant1 result true false true))))) :pattern ((shift_right__2
-                                                               value count)) ))))
+     (dynamic_invariant1 result true false true)))) :pattern ((shift_right__2
+                                                              value count)) ))))
 
 (declare-sort shift_type 0)
 
@@ -696,11 +693,11 @@
 (define-fun shift_type__ref___projection ((a shift_type__ref)) shift_type 
   (shift_type__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_703 Int)
-  (temp___is_init_700 Bool) (temp___skip_constant_701 Bool)
-  (temp___do_toplevel_702 Bool)) Bool (=>
-                                      (or (= temp___is_init_700 true)
-                                      (<= 0 7)) (in_range4 temp___expr_703)))
+(define-fun dynamic_invariant4 ((temp___expr_702 Int)
+  (temp___is_init_699 Bool) (temp___skip_constant_700 Bool)
+  (temp___do_toplevel_701 Bool)) Bool (=>
+                                      (or (= temp___is_init_699 true)
+                                      (<= 0 7)) (in_range4 temp___expr_702)))
 
 (declare-fun number () us_rep)
 
@@ -723,8 +720,6 @@
 (declare-fun r117b () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
-
-(declare-fun last3 () Int)
 
 (define-fun dynamic_property2 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -750,7 +745,7 @@
 
 (declare-fun first2 (t1) tdigit_count_typeB)
 
-(declare-fun last4 (t1) tdigit_count_typeB)
+(declare-fun last2 (t1) tdigit_count_typeB)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -760,7 +755,7 @@
   (! (=> (in_range2 f)
      (=> (in_range2 l)
      (and (= (to_rep2 (first2 (mk1 f l))) f)
-     (= (to_rep2 (last4 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (= (to_rep2 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property3 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range2 low)
@@ -777,10 +772,10 @@
 
 (define-fun first3 ((a us_t1)) Int (to_rep2 (first2 (rt1 a))))
 
-(define-fun last5 ((a us_t1)) Int (to_rep2 (last4 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep2 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last5 a))
-                                    (+ (- (last5 a) (first3 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size2 () Int)
 
@@ -815,8 +810,8 @@
 
 (define-fun bool_eq10 ((x us_t1)
   (y us_t1)) Bool (bool_eq2 (elts1 x) (to_rep2 (first2 (rt1 x)))
-                  (to_rep2 (last4 (rt1 x))) (elts1 y)
-                  (to_rep2 (first2 (rt1 y))) (to_rep2 (last4 (rt1 y)))))
+                  (to_rep2 (last2 (rt1 x))) (elts1 y)
+                  (to_rep2 (first2 (rt1 y))) (to_rep2 (last2 (rt1 y)))))
 
 (declare-fun user_eq9 (us_t1 us_t1) Bool)
 
@@ -824,8 +819,6 @@
 
 (declare-datatypes () ((s116b__ref (mk_s116b__ref (s116b__content us_t1)))))
 (define-fun s116b__ref___projection ((a s116b__ref)) us_t1 (s116b__content a))
-
-(declare-fun last6 () Int)
 
 (define-fun dynamic_property4 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -851,7 +844,7 @@
 
 (declare-fun first4 (t2) tdigit_count_typeB)
 
-(declare-fun last7 (t2) tdigit_count_typeB)
+(declare-fun last4 (t2) tdigit_count_typeB)
 
 (declare-fun mk2 (Int Int) t2)
 
@@ -861,7 +854,7 @@
   (! (=> (in_range2 f)
      (=> (in_range2 l)
      (and (= (to_rep2 (first4 (mk2 f l))) f)
-     (= (to_rep2 (last7 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
+     (= (to_rep2 (last4 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
 
 (define-fun dynamic_property5 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range2 low)
@@ -878,10 +871,10 @@
 
 (define-fun first5 ((a us_t2)) Int (to_rep2 (first4 (rt2 a))))
 
-(define-fun last8 ((a us_t2)) Int (to_rep2 (last7 (rt2 a))))
+(define-fun last5 ((a us_t2)) Int (to_rep2 (last4 (rt2 a))))
 
-(define-fun length2 ((a us_t2)) Int (ite (<= (first5 a) (last8 a))
-                                    (+ (- (last8 a) (first5 a)) 1) 0))
+(define-fun length2 ((a us_t2)) Int (ite (<= (first5 a) (last5 a))
+                                    (+ (- (last5 a) (first5 a)) 1) 0))
 
 (declare-fun value__size3 () Int)
 
@@ -916,8 +909,8 @@
 
 (define-fun bool_eq12 ((x us_t2)
   (y us_t2)) Bool (bool_eq2 (elts2 x) (to_rep2 (first4 (rt2 x)))
-                  (to_rep2 (last7 (rt2 x))) (elts2 y)
-                  (to_rep2 (first4 (rt2 y))) (to_rep2 (last7 (rt2 y)))))
+                  (to_rep2 (last4 (rt2 x))) (elts2 y)
+                  (to_rep2 (first4 (rt2 y))) (to_rep2 (last4 (rt2 y)))))
 
 (declare-fun user_eq11 (us_t2 us_t2) Bool)
 
@@ -932,7 +925,7 @@
 
 (declare-fun first6 (t3) tdigit_count_typeB)
 
-(declare-fun last9 (t3) tdigit_count_typeB)
+(declare-fun last6 (t3) tdigit_count_typeB)
 
 (declare-fun mk3 (Int Int) t3)
 
@@ -942,7 +935,7 @@
   (! (=> (in_range2 f)
      (=> (in_range2 l)
      (and (= (to_rep2 (first6 (mk3 f l))) f)
-     (= (to_rep2 (last9 (mk3 f l))) l)))) :pattern ((mk3 f l)) )))
+     (= (to_rep2 (last6 (mk3 f l))) l)))) :pattern ((mk3 f l)) )))
 
 (define-fun dynamic_property6 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range2 low)
@@ -957,10 +950,10 @@
 
 (define-fun first7 ((a us_t3)) Int (to_rep2 (first6 (rt3 a))))
 
-(define-fun last10 ((a us_t3)) Int (to_rep2 (last9 (rt3 a))))
+(define-fun last7 ((a us_t3)) Int (to_rep2 (last6 (rt3 a))))
 
-(define-fun length3 ((a us_t3)) Int (ite (<= (first7 a) (last10 a))
-                                    (+ (- (last10 a) (first7 a)) 1) 0))
+(define-fun length3 ((a us_t3)) Int (ite (<= (first7 a) (last7 a))
+                                    (+ (- (last7 a) (first7 a)) 1) 0))
 
 (declare-fun value__size4 () Int)
 
@@ -995,8 +988,8 @@
 
 (define-fun bool_eq13 ((x us_t3)
   (y us_t3)) Bool (bool_eq2 (elts3 x) (to_rep2 (first6 (rt3 x)))
-                  (to_rep2 (last9 (rt3 x))) (elts3 y)
-                  (to_rep2 (first6 (rt3 y))) (to_rep2 (last9 (rt3 y)))))
+                  (to_rep2 (last6 (rt3 x))) (elts3 y)
+                  (to_rep2 (first6 (rt3 y))) (to_rep2 (last6 (rt3 y)))))
 
 (declare-fun user_eq12 (us_t3 us_t3) Bool)
 
@@ -1008,29 +1001,29 @@
 (define-fun digits_array_type__ref___projection ((a digits_array_type__ref)) us_t3 
   (digits_array_type__content a))
 
-(declare-fun temp___1183 ((_ BitVec 8) Int Int) us_t2)
+(declare-fun temp___1181 ((_ BitVec 8) Int Int) us_t2)
 
 ;; def_axiom
   (assert
-  (forall ((temp___1185 (_ BitVec 8)))
-  (forall ((temp___1186 Int) (temp___1187 Int))
-  (let ((temp___1184 (temp___1183 temp___1185 temp___1186 temp___1187)))
+  (forall ((temp___1183 (_ BitVec 8)))
+  (forall ((temp___1184 Int) (temp___1185 Int))
+  (let ((temp___1182 (temp___1181 temp___1183 temp___1184 temp___1185)))
   (and
-  (=> (dynamic_property6 1 65536 temp___1186 temp___1187)
-  (and (= (first5 temp___1184) temp___1186)
-  (= (last8 temp___1184) temp___1187)))
-  (forall ((temp___1188 Int))
-  (= (select (to_array2 temp___1184) temp___1188) (of_rep1 temp___1185))))))))
+  (=> (dynamic_property6 1 65536 temp___1184 temp___1185)
+  (and (= (first5 temp___1182) temp___1184)
+  (= (last5 temp___1182) temp___1185)))
+  (forall ((temp___1186 Int))
+  (= (select (to_array2 temp___1182) temp___1186) (of_rep1 temp___1183))))))))
 
-(define-fun dynamic_invariant5 ((temp___expr_745 us_t1)
-  (temp___is_init_742 Bool) (temp___skip_constant_743 Bool)
-  (temp___do_toplevel_744 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_743 true))
+(define-fun dynamic_invariant5 ((temp___expr_744 us_t1)
+  (temp___is_init_741 Bool) (temp___skip_constant_742 Bool)
+  (temp___do_toplevel_743 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_742 true))
                                       (and (dynamic_property3 1 r117b
-                                      (first3 temp___expr_745)
-                                      (last5 temp___expr_745))
-                                      (and (= (first3 temp___expr_745) 1)
-                                      (= (last5 temp___expr_745) r117b)))))
+                                      (first3 temp___expr_744)
+                                      (last3 temp___expr_744))
+                                      (and (= (first3 temp___expr_744) 1)
+                                      (= (last3 temp___expr_744) r117b)))))
 
 (declare-fun result____split_fields () (Array Int octet))
 
@@ -1046,17 +1039,17 @@
 
 (declare-fun us () Int)
 
-(declare-fun temp___1190 () (Array Int octet))
+(declare-fun temp___1188 () (Array Int octet))
 
-(declare-fun temp___11901 () t2)
+(declare-fun temp___11881 () t2)
+
+(declare-fun temp___1189 () (Array Int octet))
+
+(declare-fun temp___11891 () t1)
 
 (declare-fun temp___1191 () (Array Int octet))
 
 (declare-fun temp___11911 () t1)
-
-(declare-fun temp___1193 () (Array Int octet))
-
-(declare-fun temp___11931 () t1)
 
 (declare-fun o () (Array Int octet))
 
@@ -1066,23 +1059,23 @@
 
 (declare-fun o3 () t)
 
-(declare-fun temp___1195 () digit_index_type)
+(declare-fun temp___1193 () digit_index_type)
 
-(declare-fun temp___11951 () (Array Int octet))
+(declare-fun temp___11931 () (Array Int octet))
 
-(declare-fun temp___11952 () t)
+(declare-fun temp___11932 () t)
 
 (declare-fun o4 () (_ BitVec 8))
 
-(declare-fun temp___1209 () (_ BitVec 8))
+(declare-fun temp___1207 () (_ BitVec 8))
 
-(declare-fun temp___1206 () digit_index_type)
+(declare-fun temp___1204 () digit_index_type)
 
-(declare-fun temp___12061 () (Array Int octet))
+(declare-fun temp___12041 () (Array Int octet))
 
-(declare-fun temp___12062 () t)
+(declare-fun temp___12042 () t)
 
-(declare-fun temp___1205 () (_ BitVec 8))
+(declare-fun temp___1203 () (_ BitVec 8))
 
 (declare-fun o5 () Int)
 
@@ -1112,7 +1105,7 @@
 
 (declare-fun o18 () us_split_fields)
 
-(declare-fun temp___1200 () us_rep)
+(declare-fun temp___1198 () us_rep)
 
 (declare-fun o19 () Int)
 
@@ -1132,7 +1125,7 @@
 
 (declare-fun o27 () us_split_fields)
 
-(declare-fun temp___1204 () us_rep)
+(declare-fun temp___1202 () us_rep)
 
 (declare-fun o28 () octet)
 
@@ -1251,53 +1244,53 @@
 
 ;; H
   (assert
-  (= (to_rep2 (first4 (rt2 (temp___1183 ((_ int2bv 8) 0) 1 r117b)))) 1))
+  (= (to_rep2 (first4 (rt2 (temp___1181 ((_ int2bv 8) 0) 1 r117b)))) 1))
 
 ;; H
   (assert
-  (= (to_rep2 (last7 (rt2 (temp___1183 ((_ int2bv 8) 0) 1 r117b)))) r117b))
+  (= (to_rep2 (last4 (rt2 (temp___1181 ((_ int2bv 8) 0) 1 r117b)))) r117b))
 
 ;; H
   (assert
-  (= (mk___t2 temp___1190 temp___11901) (temp___1183 ((_ int2bv 8) 0) 1
+  (= (mk___t2 temp___1188 temp___11881) (temp___1181 ((_ int2bv 8) 0) 1
                                         r117b)))
 
 ;; H
   (assert
-  (= (ite (<= (to_rep2 (first4 temp___11901)) (to_rep2 (last7 temp___11901)))
-     (+ (- (to_rep2 (last7 temp___11901)) (to_rep2 (first4 temp___11901))) 1)
+  (= (ite (<= (to_rep2 (first4 temp___11881)) (to_rep2 (last4 temp___11881)))
+     (+ (- (to_rep2 (last4 temp___11881)) (to_rep2 (first4 temp___11881))) 1)
      0) (ite (<= 1 r117b) (+ (- r117b 1) 1) 0)))
 
 ;; H
-  (assert (= temp___1190 temp___1191))
+  (assert (= temp___1188 temp___1189))
 
 ;; H
   (assert
-  (= (mk1 (to_rep2 (first4 temp___11901)) (to_rep2 (last7 temp___11901))) 
-  temp___11911))
+  (= (mk1 (to_rep2 (first4 temp___11881)) (to_rep2 (last4 temp___11881))) 
+  temp___11891))
 
 ;; H
   (assert
-  (= (ite (<= (to_rep2 (first2 temp___11911)) (to_rep2 (last4 temp___11911)))
-     (+ (- (to_rep2 (last4 temp___11911)) (to_rep2 (first2 temp___11911))) 1)
+  (= (ite (<= (to_rep2 (first2 temp___11891)) (to_rep2 (last2 temp___11891)))
+     (+ (- (to_rep2 (last2 temp___11891)) (to_rep2 (first2 temp___11891))) 1)
      0) (ite (<= (to_rep2 (first result____split_fields1)) (to_rep2
-                                                           (last1
+                                                           (last
                                                            result____split_fields1)))
-        (+ (- (to_rep2 (last1 result____split_fields1)) (to_rep2
-                                                        (first
-                                                        result____split_fields1))) 1)
+        (+ (- (to_rep2 (last result____split_fields1)) (to_rep2
+                                                       (first
+                                                       result____split_fields1))) 1)
         0)))
 
 ;; H
   (assert
-  (= (mk___t1 temp___1193 temp___11931) (mk___t1 temp___1191 temp___11911)))
+  (= (mk___t1 temp___1191 temp___11911) (mk___t1 temp___1189 temp___11891)))
 
 ;; H
-  (assert (= temp___1193 o))
+  (assert (= temp___1191 o))
 
 ;; H
   (assert
-  (= (mk (to_rep2 (first2 temp___11931)) (to_rep2 (last4 temp___11931))) 
+  (= (mk (to_rep2 (first2 temp___11911)) (to_rep2 (last2 temp___11911))) 
   o1))
 
 ;; H
@@ -1307,13 +1300,13 @@
   (assert (= o3 o1))
 
 ;; H
-  (assert (= result____split_discrs (mk___split_discrs temp___1195)))
+  (assert (= result____split_discrs (mk___split_discrs temp___1193)))
 
 ;; H
-  (assert (= temp___11951 o2))
+  (assert (= temp___11931 o2))
 
 ;; H
-  (assert (= temp___11952 o3))
+  (assert (= temp___11932 o3))
 
 ;; H
   (assert
@@ -1324,10 +1317,10 @@
 ;; H
   (assert
   (= result____split_fields2 (mk___split_fields
-                             (mk___t temp___11951 temp___11952))))
+                             (mk___t temp___11931 temp___11932))))
 
 ;; H
-  (assert (= result____split_discrs (mk___split_discrs temp___1195)))
+  (assert (= result____split_discrs (mk___split_discrs temp___1193)))
 
 ;; H
   (assert
@@ -1354,64 +1347,64 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
-  (= temp___1209 new_overflow)))
+  (= temp___1207 new_overflow)))
 
 ;; H
   (assert
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
-  (and (= result____split_discrs (mk___split_discrs temp___1206))
+  (and (= result____split_discrs (mk___split_discrs temp___1204))
   (= result____split_fields2 (mk___split_fields
-                             (mk___t temp___12061 temp___12062))))))
+                             (mk___t temp___12041 temp___12042))))))
 
 ;; H
   (assert
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
-  (= temp___1205 old_overflow1)))
+  (= temp___1203 old_overflow1)))
 
 ;; H
   (assert
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (and
   (and (dynamic_invariant2
   (mk___rep result____split_discrs result____split_fields3) false true true)
   (and
-  (= (rec__very_longs__very_long__length result____split_discrs) temp___1206)
-  (forall ((temp___1208 Int))
+  (= (rec__very_longs__very_long__length result____split_discrs) temp___1204)
+  (forall ((temp___1206 Int))
   (=>
   (and
   (<= (to_rep2
       (first
-      (rt (rec__very_longs__very_long__long_digits result____split_fields3)))) temp___1208)
-  (<= temp___1208 (to_rep2
-                  (last1
+      (rt (rec__very_longs__very_long__long_digits result____split_fields3)))) temp___1206)
+  (<= temp___1206 (to_rep2
+                  (last
                   (rt
                   (rec__very_longs__very_long__long_digits
                   result____split_fields3))))))
-  (=> (<= i2 temp___1208)
+  (=> (<= i2 temp___1206)
   (= (select (elts
              (rec__very_longs__very_long__long_digits
-             result____split_fields3)) temp___1208) (select temp___12061 temp___1208)))))))
+             result____split_fields3)) temp___1206) (select temp___12041 temp___1206)))))))
   (and (<= 1 i2)
   (<= i2 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number))))))))))
 
@@ -1420,7 +1413,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (and
@@ -1430,7 +1423,7 @@
       (rec__very_longs__very_long__long_digits (us_split_fields1 number))))) 
   i2)
   (<= i2 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))))
 
@@ -1439,7 +1432,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= o5 i2)))
@@ -1449,7 +1442,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= o6 (select (elts
@@ -1461,7 +1454,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= o7 (to_rep1 o6))))
@@ -1471,7 +1464,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= o8 (bvand o7 overflow_mask1))))
@@ -1481,12 +1474,10 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
-  (and
   (and (= o9 (shift_right__2 o8 (- 8 distance)))
-  (shift_right__2__function_guard o9 o8 (- 8 distance)))
   (= o9 (bvudiv o8 (ite (< (- 8 distance) 256)
                    (bvshl ((_ int2bv 8) 1) ((_ int2bv 8) (- 8 distance)))
                    ((_ int2bv 8) 0)))))))
@@ -1496,7 +1487,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= result4 (mk_t__ref new_overflow2))))
@@ -1506,7 +1497,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= new_overflow3 o9)))
@@ -1516,7 +1507,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (=> (< distance 8)
@@ -1527,7 +1518,7 @@
       (rec__very_longs__very_long__long_digits (us_split_fields1 number))))) 
   i2)
   (<= i2 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number))))))))))
 
@@ -1536,7 +1527,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (=> (< distance 8) (= o10 i2))))
@@ -1546,7 +1537,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (=> (< distance 8)
@@ -1559,7 +1550,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (=> (< distance 8) (= o12 (to_rep1 o11)))))
@@ -1569,7 +1560,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (=> (< distance 8) (= o13 (bvshl o12 ((_ int2bv 8) distance))))))
@@ -1579,7 +1570,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (=> (not (< distance 8)) (= o13 ((_ int2bv 8) 0)))))
@@ -1589,7 +1580,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= (to_rep1 o14) o13)))
@@ -1599,7 +1590,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (and
@@ -1608,7 +1599,7 @@
       (rt (rec__very_longs__very_long__long_digits result____split_fields3)))) 
   i2)
   (<= i2 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits result____split_fields3))))))))
 
@@ -1617,7 +1608,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= o15 i2)))
@@ -1627,7 +1618,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= o16 (store (elts
@@ -1639,7 +1630,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= o17 (mk___t o16
@@ -1651,7 +1642,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= o18 (mk___split_fields o17))))
@@ -1661,17 +1652,17 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
-  (= temp___1200 (mk___rep result____split_discrs o18))))
+  (= temp___1198 (mk___rep result____split_discrs o18))))
 
 ;; H
   (assert
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= result5 (mk___split_fields__ref result____split_fields3))))
@@ -1681,27 +1672,27 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
-  (= result____split_fields4 (us_split_fields1 temp___1200))))
+  (= result____split_fields4 (us_split_fields1 temp___1198))))
 
 ;; H
   (assert
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
-  (= result____split_discrs (us_split_discrs1 temp___1200))))
+  (= result____split_discrs (us_split_discrs1 temp___1198))))
 
 ;; H
   (assert
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (and
@@ -1710,7 +1701,7 @@
       (rt (rec__very_longs__very_long__long_digits result____split_fields4)))) 
   i2)
   (<= i2 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits result____split_fields4))))))))
 
@@ -1719,7 +1710,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= o19 i2)))
@@ -1729,7 +1720,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= o20 (select (elts
@@ -1741,7 +1732,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= o21 (to_rep1 o20))))
@@ -1751,7 +1742,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= o22 (bvor o21 old_overflow2))))
@@ -1761,7 +1752,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= (to_rep1 o23) o22)))
@@ -1771,7 +1762,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (and
@@ -1780,7 +1771,7 @@
       (rt (rec__very_longs__very_long__long_digits result____split_fields4)))) 
   i2)
   (<= i2 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits result____split_fields4))))))))
 
@@ -1789,7 +1780,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= o24 i2)))
@@ -1799,7 +1790,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= o25 (store (elts
@@ -1811,7 +1802,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= o26 (mk___t o25
@@ -1823,7 +1814,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= o27 (mk___split_fields o26))))
@@ -1833,17 +1824,17 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
-  (= temp___1204 (mk___rep result____split_discrs o27))))
+  (= temp___1202 (mk___rep result____split_discrs o27))))
 
 ;; H
   (assert
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= result6 (mk___split_fields__ref result____split_fields4))))
@@ -1853,27 +1844,27 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
-  (= result____split_fields5 (us_split_fields1 temp___1204))))
+  (= result____split_fields5 (us_split_fields1 temp___1202))))
 
 ;; H
   (assert
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
-  (= result____split_discrs (us_split_discrs1 temp___1204))))
+  (= result____split_discrs (us_split_discrs1 temp___1202))))
 
 ;; H
   (assert
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= result7 (mk_t__ref old_overflow2))))
@@ -1883,7 +1874,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= old_overflow3 new_overflow3)))
@@ -1893,11 +1884,11 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= i2 (to_rep2
-        (last1
+        (last
         (rt
         (rec__very_longs__very_long__long_digits (us_split_fields1 number))))))))
 
@@ -1906,7 +1897,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= i3 (mk_int__ref i2))))
@@ -1916,7 +1907,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= new_overflow4 (mk_t__ref new_overflow3))))
@@ -1926,7 +1917,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= old_overflow4 (mk_t__ref old_overflow3))))
@@ -1936,7 +1927,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= result____split_fields6 (mk___split_fields__ref result____split_fields5))))
@@ -1946,7 +1937,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= i4 i2)))
@@ -1956,7 +1947,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= new_overflow5 new_overflow3)))
@@ -1966,7 +1957,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= old_overflow5 old_overflow3)))
@@ -1976,7 +1967,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= result____split_fields7 result____split_fields5)))
@@ -1986,7 +1977,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= i5 i3)))
@@ -1996,7 +1987,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= new_overflow6 new_overflow4)))
@@ -2006,7 +1997,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= old_overflow6 old_overflow4)))
@@ -2016,7 +2007,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= result____split_fields8 result____split_fields6)))
@@ -2026,7 +2017,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= i6 i4)))
@@ -2036,7 +2027,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= new_overflow7 new_overflow5)))
@@ -2046,7 +2037,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= old_overflow7 old_overflow5)))
@@ -2056,7 +2047,7 @@
   (=>
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number)))))))
   (= result____split_fields9 result____split_fields7)))
@@ -2067,7 +2058,7 @@
   (not
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number))))))))
   (= i5 (mk_int__ref i1))))
@@ -2078,7 +2069,7 @@
   (not
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number))))))))
   (= new_overflow6 (mk_t__ref new_overflow))))
@@ -2089,7 +2080,7 @@
   (not
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number))))))))
   (= old_overflow6 (mk_t__ref old_overflow1))))
@@ -2100,7 +2091,7 @@
   (not
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number))))))))
   (= result____split_fields8 (mk___split_fields__ref result____split_fields2))))
@@ -2111,7 +2102,7 @@
   (not
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number))))))))
   (= i6 i1)))
@@ -2122,7 +2113,7 @@
   (not
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number))))))))
   (= new_overflow7 new_overflow1)))
@@ -2133,7 +2124,7 @@
   (not
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number))))))))
   (= old_overflow7 old_overflow1)))
@@ -2144,7 +2135,7 @@
   (not
   (and (<= 1 i1)
   (<= i1 (to_rep2
-         (last1
+         (last
          (rt
          (rec__very_longs__very_long__long_digits (us_split_fields1 number))))))))
   (= result____split_fields9 result____split_fields2)))
@@ -2161,7 +2152,7 @@
       (rt
       (rec__very_longs__very_long__long_digits
       (us_split_fields__content result____split_fields8))))) (to_rep2
-                                                             (last1
+                                                             (last
                                                              (rt
                                                              (rec__very_longs__very_long__long_digits
                                                              (us_split_fields__content

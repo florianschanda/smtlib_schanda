@@ -121,12 +121,36 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range temp___expr_15)))
 
+(declare-fun to_rep (integer) Int)
+
+(declare-fun of_rep (Int) integer)
+
+;; inversion_axiom
+  (assert
+  (forall ((x integer)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x integer)) (! (in_range (to_rep x)) :pattern ((to_rep x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                           (of_rep x))) )))
+
+(define-fun default_initial_assumption ((temp___expr_1535 us_rep)
+  (temp___skip_top_level_1536 Bool)) Bool (= (to_rep
+                                             (rec__attach_test__prot__a
+                                             (us_split_fields1
+                                             temp___expr_1535))) 0))
+
 (declare-fun self__ () us_rep)
 
-(declare-fun temp___1539 () Bool)
+(declare-fun temp___1540 () Bool)
 
 (assert
 ;; WP_parameter_def
  ;; File "attach_test.ads", line 3, characters 0-0
-  (not (= temp___1539 false)))
+  (not (= temp___1540 false)))
 (check-sat)

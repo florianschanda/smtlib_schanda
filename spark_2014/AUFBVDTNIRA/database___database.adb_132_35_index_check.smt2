@@ -329,12 +329,9 @@
   (assert
   (forall ((account Int))
   (forall ((database__availability__links (Array Int us_rep)))
-  (! (=> (is_available__function_guard
-     (is_available account database__availability__links) account
-     database__availability__links)
-     (= (= (is_available account database__availability__links) true)
+  (! (= (= (is_available account database__availability__links) true)
      (= (rec__database__availability__account_link__available
-        (us_split_fields1 (select database__availability__links account))) true))) :pattern (
+        (us_split_fields1 (select database__availability__links account))) true)) :pattern (
   (is_available account database__availability__links)) ))))
 
 (declare-fun account () Int)
@@ -364,10 +361,6 @@
 
 ;; H
   (assert (in_range2 account))
-
-;; H
-  (assert (is_available__function_guard (is_available account links) 
-  account links))
 
 ;; H
   (assert (not (= (is_available account links) true)))

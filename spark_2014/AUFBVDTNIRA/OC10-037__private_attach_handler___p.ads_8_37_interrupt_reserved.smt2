@@ -190,10 +190,10 @@
 
 (declare-fun self__ () us_rep)
 
-(declare-fun temp___1556 () Bool)
+(declare-fun temp___1558 () Bool)
 
 (assert
 ;; WP_parameter_def
  ;; File "p.ads", line 5, characters 0-0
-  (not (= temp___1556 false)))
+  (not (= temp___1558 false)))
 (check-sat)

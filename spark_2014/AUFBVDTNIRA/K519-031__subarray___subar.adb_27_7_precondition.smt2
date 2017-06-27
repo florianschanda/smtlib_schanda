@@ -337,25 +337,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(declare-sort t4b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq4 (t4b t4b) Bool)
-
-(declare-fun dummy4 () t4b)
-
-(declare-datatypes () ((t4b__ref (mk_t4b__ref (t4b__content t4b)))))
-(define-fun t4b__ref___projection ((a t4b__ref)) t4b (t4b__content a))
-
 (declare-fun temp___248 (Int) (Array Int one_ten))
 
 ;; def_axiom
@@ -387,11 +368,9 @@
 
 (declare-fun ad () (Array Int one_ten))
 
-(declare-fun o () (Array Int one_ten))
+(declare-fun o () one_ten)
 
-(declare-fun o1 () one_ten)
-
-(declare-fun o2 () (Array Int one_ten))
+(declare-fun o1 () (Array Int one_ten))
 
 (declare-fun result () (Array Int one_ten))
 
@@ -402,25 +381,22 @@
 (declare-fun ad2 () (Array Int one_ten))
 
 ;; H
-  (assert (= o (temp___248 10)))
-
-;; H
   (assert (= result ad))
 
 ;; H
-  (assert (= ad1 o))
+  (assert (= ad1 (temp___248 10)))
 
 ;; H
-  (assert (= (to_rep o1) 1))
+  (assert (= (to_rep o) 1))
 
 ;; H
-  (assert (= o2 (store ad1 1 o1)))
+  (assert (= o1 (store ad1 1 o)))
 
 ;; H
   (assert (= result1 ad1))
 
 ;; H
-  (assert (= ad2 o2))
+  (assert (= ad2 o1))
 
 (assert
 ;; WP_parameter_def

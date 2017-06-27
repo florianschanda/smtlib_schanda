@@ -351,25 +351,6 @@
 (define-fun tTxSP1__ref___projection ((a tTxSP1__ref)) tTxSP1 (tTxSP1__content
                                                               a))
 
-(declare-sort t1b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 1000)))
-
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq5 (t1b t1b) Bool)
-
-(declare-fun dummy5 () t1b)
-
-(declare-datatypes () ((t1b__ref (mk_t1b__ref (t1b__content t1b)))))
-(define-fun t1b__ref___projection ((a t1b__ref)) t1b (t1b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
 (declare-fun purecat__x__aggregate_def (Int) (Array Int character))
@@ -416,20 +397,15 @@
 
 (declare-fun x () (Array Int character))
 
-(declare-fun o () (Array Int character))
-
 (declare-fun result () (Array Int character))
 
 (declare-fun x1 () (Array Int character))
 
 ;; H
-  (assert (= o (purecat__x__aggregate_def 88)))
-
-;; H
   (assert (= result x))
 
 ;; H
-  (assert (= x1 o))
+  (assert (= x1 (purecat__x__aggregate_def 88)))
 
 (assert
 ;; WP_parameter_def

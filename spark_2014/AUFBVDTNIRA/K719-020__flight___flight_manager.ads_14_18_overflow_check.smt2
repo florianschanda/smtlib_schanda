@@ -287,10 +287,8 @@
 ;; my_abs__post_axiom
   (assert
   (forall ((i Int))
-  (! (=> (dynamic_invariant i true true true)
-     (let ((result (my_abs i)))
-     (=> (my_abs__function_guard result i) (dynamic_invariant result true
-     false true)))) :pattern ((my_abs i)) )))
+  (! (=> (dynamic_invariant i true true true) (dynamic_invariant (my_abs i)
+     true false true)) :pattern ((my_abs i)) )))
 
 (declare-fun c4b () Int)
 
@@ -600,10 +598,8 @@
 
 ;; H
   (assert
-  (and
   (and (= flight_manager__set_engine_speed__C4b__assume (my_abs o12))
-  (my_abs__function_guard flight_manager__set_engine_speed__C4b__assume 
-  o12)) (in_range1 flight_manager__set_engine_speed__C4b__assume)))
+  (in_range1 flight_manager__set_engine_speed__C4b__assume)))
 
 ;; H
   (assert (= flight_manager__set_engine_speed__C4b__assume c4b))
@@ -664,10 +660,8 @@
 
 ;; H
   (assert
-  (and
   (and (= flight_manager__set_engine_speed__C7b__assume (my_abs o18))
-  (my_abs__function_guard flight_manager__set_engine_speed__C7b__assume 
-  o18)) (in_range1 flight_manager__set_engine_speed__C7b__assume)))
+  (in_range1 flight_manager__set_engine_speed__C7b__assume)))
 
 ;; H
   (assert (= flight_manager__set_engine_speed__C7b__assume c7b))

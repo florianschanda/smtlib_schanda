@@ -736,19 +736,17 @@
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t1)))))
 (define-fun t__ref_3__projection ((a t__ref)) t1 (t__content a))
 
-(define-fun dynamic_invariant ((temp___expr_859 Int)
-  (temp___is_init_856 Bool) (temp___skip_constant_857 Bool)
-  (temp___do_toplevel_858 Bool)) Bool (=>
-                                      (or (= temp___is_init_856 true)
-                                      (<= 0 1)) (in_range9 temp___expr_859)))
+(define-fun dynamic_invariant ((temp___expr_843 Int)
+  (temp___is_init_840 Bool) (temp___skip_constant_841 Bool)
+  (temp___do_toplevel_842 Bool)) Bool (=>
+                                      (or (= temp___is_init_840 true)
+                                      (<= 0 1)) (in_range9 temp___expr_843)))
 
 ;; thecurrentdoor__post_axiom
   (assert
-  (forall ((door__state us_private))
-  (! (let ((result (thecurrentdoor door__state)))
-     (=> (thecurrentdoor__function_guard result door__state)
-     (dynamic_invariant result true false true))) :pattern ((thecurrentdoor
-                                                            door__state)) )))
+  (forall ((door__state us_private)) (! (dynamic_invariant
+  (thecurrentdoor door__state) true false
+  true) :pattern ((thecurrentdoor door__state)) )))
 
 (declare-fun thedooralarm (us_private) Int)
 
@@ -783,11 +781,9 @@
 
 ;; thedooralarm__post_axiom
   (assert
-  (forall ((door__state us_private))
-  (! (let ((result (thedooralarm door__state)))
-     (=> (thedooralarm__function_guard result door__state)
-     (dynamic_invariant1 result true false true))) :pattern ((thedooralarm
-                                                             door__state)) )))
+  (forall ((door__state us_private)) (! (dynamic_invariant1
+  (thedooralarm door__state) true false
+  true) :pattern ((thedooralarm door__state)) )))
 
 (declare-fun latch_timeout (us_private) us_rep)
 
@@ -1013,12 +1009,12 @@
 (define-fun statust__ref_2__projection ((a statust__ref1)) statust1 (statust__content1
                                                                     a))
 
-(define-fun dynamic_invariant2 ((temp___expr_1767 Int)
-  (temp___is_init_1764 Bool) (temp___skip_constant_1765 Bool)
-  (temp___do_toplevel_1766 Bool)) Bool (=>
-                                       (or (= temp___is_init_1764 true)
+(define-fun dynamic_invariant2 ((temp___expr_1683 Int)
+  (temp___is_init_1680 Bool) (temp___skip_constant_1681 Bool)
+  (temp___do_toplevel_1682 Bool)) Bool (=>
+                                       (or (= temp___is_init_1680 true)
                                        (<= 0 7)) (in_range12
-                                       temp___expr_1767)))
+                                       temp___expr_1683)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
@@ -1092,12 +1088,12 @@
 ;; latch_timeout__post_axiom
   (assert true)
 
-(define-fun dynamic_invariant12 ((temp___expr_1085 Int)
-  (temp___is_init_1082 Bool) (temp___skip_constant_1083 Bool)
-  (temp___do_toplevel_1084 Bool)) Bool (=>
-                                       (or (= temp___is_init_1082 true)
+(define-fun dynamic_invariant12 ((temp___expr_1028 Int)
+  (temp___is_init_1025 Bool) (temp___skip_constant_1026 Bool)
+  (temp___do_toplevel_1027 Bool)) Bool (=>
+                                       (or (= temp___is_init_1025 true)
                                        (<= 0 2147483647)) (in_range11
-                                       temp___expr_1085)))
+                                       temp___expr_1028)))
 
 (declare-fun currenttime () us_private)
 
@@ -1246,88 +1242,6 @@
 (define-fun o6 () us_rep (mk___rep (mk___split_fields o1 o2 o3 o4)))
 
 ;; H
-  (assert (islocked__function_guard (islocked state1) state1))
-
-;; H
-  (assert (thecurrentdoor__function_guard (thecurrentdoor state2) state2))
-
-;; H
-  (assert (thecurrenttime__function_guard (thecurrenttime currenttime)
-  currenttime))
-
-;; H
-  (assert (alarm_timeout__function_guard (alarm_timeout state2) state2))
-
-;; H
-  (assert (thecurrenttime__function_guard (thecurrenttime currenttime)
-  currenttime))
-
-;; H
-  (assert (alarm_timeout__function_guard (alarm_timeout state2) state2))
-
-;; H
-  (assert (greaterthanorequal__function_guard
-  (greaterthanorequal (thecurrenttime currenttime) (alarm_timeout state2))
-  (thecurrenttime currenttime) (alarm_timeout state2)))
-
-;; H
-  (assert (thedooralarm__function_guard (thedooralarm state2) state2))
-
-;; H
-  (assert (islocked__function_guard (islocked state10) state10))
-
-;; H
-  (assert (thecurrentdoor__function_guard (thecurrentdoor state11) state11))
-
-;; H
-  (assert (thecurrenttime__function_guard (thecurrenttime currenttime)
-  currenttime))
-
-;; H
-  (assert (alarm_timeout__function_guard (alarm_timeout state11) state11))
-
-;; H
-  (assert (thecurrenttime__function_guard (thecurrenttime currenttime)
-  currenttime))
-
-;; H
-  (assert (alarm_timeout__function_guard (alarm_timeout state11) state11))
-
-;; H
-  (assert (greaterthanorequal__function_guard
-  (greaterthanorequal (thecurrenttime currenttime) (alarm_timeout state11))
-  (thecurrenttime currenttime) (alarm_timeout state11)))
-
-;; H
-  (assert (thedooralarm__function_guard (thedooralarm state11) state11))
-
-;; H
-  (assert (islocked__function_guard (islocked state10) state10))
-
-;; H
-  (assert (thecurrenttime__function_guard (thecurrenttime currenttime)
-  currenttime))
-
-;; H
-  (assert (latch_timeout__function_guard (latch_timeout state10) state10))
-
-;; H
-  (assert (thecurrenttime__function_guard (thecurrenttime currenttime)
-  currenttime))
-
-;; H
-  (assert (latch_timeout__function_guard (latch_timeout state10) state10))
-
-;; H
-  (assert (greaterthanorequal__function_guard
-  (greaterthanorequal (thecurrenttime currenttime) (latch_timeout state10))
-  (thecurrenttime currenttime) (latch_timeout state10)))
-
-;; H
-  (assert (valid_numberlogentries__function_guard
-  (valid_numberlogentries state15) state15))
-
-;; H
   (assert (= (audittypes__nodescription__aggregate_def 32) nodescription))
 
 ;; H
@@ -1342,8 +1256,7 @@
   (= (thedooralarm state2) 0))))
 
 ;; H
-  (assert
-  (and (= o (ispresent state4)) (ispresent__function_guard o state4)))
+  (assert (= o (ispresent state4)))
 
 ;; H
   (assert (= result (ite (not (= o true)) true false)))
@@ -1368,32 +1281,22 @@
   (assert (=> (= result true) (= status2 0)))
 
 ;; H
-  (assert
-  (=> (not (= result true))
-  (and (= o6 (thecurrenttime currenttime)) (thecurrenttime__function_guard 
-  o6 currenttime))))
+  (assert (=> (not (= result true)) (= o6 (thecurrenttime currenttime))))
 
 ;; H
   (assert
   (=> (not (= result true))
-  (and
   (= result2 (greaterthan o6
              (mk___rep
              (mk___split_fields tokenremovaltimeout__split_fields
              tokenremovaltimeout__split_fields1
              tokenremovaltimeout__split_fields2
-             tokenremovaltimeout__split_fields3))))
-  (greaterthan__function_guard result2 o6
-  (mk___rep
-  (mk___split_fields tokenremovaltimeout__split_fields
-  tokenremovaltimeout__split_fields1 tokenremovaltimeout__split_fields2
-  tokenremovaltimeout__split_fields3))))))
+             tokenremovaltimeout__split_fields3))))))
 
 ;; H
   (assert
   (=> (not (= result true))
-  (=> (= result2 true)
-  (and (= o5 (extractuser state4)) (extractuser__function_guard o5 state4)))))
+  (=> (= result2 true) (= o5 (extractuser state4)))))
 
 ;; H
   (assert
@@ -1574,38 +1477,6 @@
   (assert (= filestate5 filestate2))
 
 ;; H
-  (assert (islocked__function_guard (islocked state19) state19))
-
-;; H
-  (assert (thecurrentdoor__function_guard
-  (thecurrentdoor (us_private__content state20))
-  (us_private__content state20)))
-
-;; H
-  (assert (thecurrenttime__function_guard (thecurrenttime currenttime)
-  currenttime))
-
-;; H
-  (assert (alarm_timeout__function_guard
-  (alarm_timeout (us_private__content state20))
-  (us_private__content state20)))
-
-;; H
-  (assert (thecurrenttime__function_guard (thecurrenttime currenttime)
-  currenttime))
-
-;; H
-  (assert (alarm_timeout__function_guard
-  (alarm_timeout (us_private__content state20))
-  (us_private__content state20)))
-
-;; H
-  (assert (greaterthanorequal__function_guard
-  (greaterthanorequal (thecurrenttime currenttime)
-  (alarm_timeout (us_private__content state20))) (thecurrenttime currenttime)
-  (alarm_timeout (us_private__content state20))))
-
-;; H
   (assert (= (islocked state19) true))
 
 ;; H
@@ -1615,11 +1486,6 @@
   (assert
   (= (greaterthanorequal (thecurrenttime currenttime)
      (alarm_timeout (us_private__content state20))) true))
-
-;; H
-  (assert (thedooralarm__function_guard
-  (thedooralarm (us_private__content state20))
-  (us_private__content state20)))
 
 (assert
 ;; WP_parameter_def

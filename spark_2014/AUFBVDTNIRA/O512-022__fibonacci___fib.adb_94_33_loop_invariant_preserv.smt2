@@ -283,11 +283,11 @@
 
 (declare-fun k12 () Int)
 
-(declare-fun temp___194 () Int)
+(declare-fun temp___188 () Int)
 
 (declare-fun result3 () Int)
 
-(declare-fun temp___1941 () Int)
+(declare-fun temp___1881 () Int)
 
 (declare-fun result4 () Int)
 
@@ -374,10 +374,10 @@
   (=> (<= (- 2147483648) 2147483647) (in_range1 p12))) (< 0 k12)))
 
 ;; H
-  (assert (= temp___194 result3))
+  (assert (= temp___188 result3))
 
 ;; H
-  (assert (= temp___1941 k12))
+  (assert (= temp___1881 k12))
 
 ;; H
   (assert

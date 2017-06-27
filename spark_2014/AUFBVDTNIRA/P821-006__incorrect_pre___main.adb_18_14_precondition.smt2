@@ -493,22 +493,15 @@
   (assert
   (forall ((bytes us_t))
   (! (=> (and (dynamic_invariant1 bytes true true true) (= (length bytes) 4))
-     (let ((result (tointeger_32 bytes)))
-     (=> (tointeger_32__function_guard result bytes) (dynamic_invariant
-     result true false true)))) :pattern ((tointeger_32 bytes)) )))
+     (dynamic_invariant (tointeger_32 bytes) true false true)) :pattern (
+  (tointeger_32 bytes)) )))
 
 ;; tointeger_32__def_axiom
   (assert
   (forall ((bytes us_t))
-  (! (=>
-     (and (dynamic_invariant1 bytes true true true)
-     (tointeger_32__function_guard (tointeger_32 bytes) bytes))
-     (and (from_byte_array_to_integer_32__function_guard
-     (from_byte_array_to_integer_32
-     (slide (to_array bytes) (first1 bytes) 1))
-     (slide (to_array bytes) (first1 bytes) 1))
+  (! (=> (dynamic_invariant1 bytes true true true)
      (= (tointeger_32 bytes) (from_byte_array_to_integer_32
-                             (slide (to_array bytes) (first1 bytes) 1))))) :pattern (
+                             (slide (to_array bytes) (first1 bytes) 1)))) :pattern (
   (tointeger_32 bytes)) )))
 
 (declare-sort tTarrSP1 0)
@@ -532,9 +525,13 @@
 (define-fun tTarrSP1__ref___projection ((a tTarrSP1__ref)) tTarrSP1 (tTarrSP1__content
                                                                     a))
 
-(declare-sort t7b 0)
+(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 91)))
+(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+
+(declare-sort t13b 0)
+
+(define-fun in_range5 ((x Int)) Bool (and (<= 60 x) (<= x 64)))
 
 (define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -544,51 +541,9 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
 
-(declare-fun user_eq7 (t7b t7b) Bool)
+(declare-fun user_eq7 (t13b t13b) Bool)
 
-(declare-fun dummy7 () t7b)
-
-(declare-datatypes () ((t7b__ref (mk_t7b__ref (t7b__content t7b)))))
-(define-fun t7b__ref___projection ((a t7b__ref)) t7b (t7b__content a))
-
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
-
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
-
-(declare-sort t11b 0)
-
-(define-fun in_range6 ((x Int)) Bool (and (<= 0 x) (<= x 91)))
-
-(define-fun bool_eq9 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
-
-(declare-fun user_eq8 (t11b t11b) Bool)
-
-(declare-fun dummy8 () t11b)
-
-(declare-datatypes () ((t11b__ref (mk_t11b__ref (t11b__content t11b)))))
-(define-fun t11b__ref___projection ((a t11b__ref)) t11b (t11b__content a))
-
-(declare-sort t13b 0)
-
-(define-fun in_range7 ((x Int)) Bool (and (<= 60 x) (<= x 64)))
-
-(define-fun bool_eq10 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
-
-(declare-fun user_eq9 (t13b t13b) Bool)
-
-(declare-fun dummy9 () t13b)
+(declare-fun dummy7 () t13b)
 
 (declare-datatypes () ((t13b__ref (mk_t13b__ref (t13b__content t13b)))))
 (define-fun t13b__ref___projection ((a t13b__ref)) t13b (t13b__content a))
@@ -597,18 +552,18 @@
 
 ;; def_axiom
   (assert
-  (forall ((temp___300 (_ BitVec 8)))
-  (forall ((temp___301 Int))
-  (= (select (main__arr__aggregate_def temp___300) temp___301) (of_rep1
-                                                               temp___300)))))
+  (forall ((temp___298 (_ BitVec 8)))
+  (forall ((temp___299 Int))
+  (= (select (main__arr__aggregate_def temp___298) temp___299) (of_rep1
+                                                               temp___298)))))
 
-(declare-fun temp___302 ((_ BitVec 8)) (Array Int byte))
+(declare-fun temp___300 ((_ BitVec 8)) (Array Int byte))
 
 ;; def_axiom
   (assert
-  (forall ((temp___304 (_ BitVec 8)))
-  (forall ((temp___305 Int))
-  (= (select (temp___302 temp___304) temp___305) (of_rep1 temp___304)))))
+  (forall ((temp___302 (_ BitVec 8)))
+  (forall ((temp___303 Int))
+  (= (select (temp___300 temp___302) temp___303) (of_rep1 temp___302)))))
 
 (define-fun dynamic_invariant2 ((temp___expr_33 Int) (temp___is_init_30 Bool)
   (temp___skip_constant_31 Bool)
@@ -630,20 +585,20 @@
 
 (declare-sort target 0)
 
-(define-fun in_range8 ((x Int)) Bool (and (<= (- 2147483648) x)
+(define-fun in_range6 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
-(define-fun bool_eq11 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq9 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE9 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
 
-(declare-fun user_eq10 (target target) Bool)
+(declare-fun user_eq8 (target target) Bool)
 
-(declare-fun dummy10 () target)
+(declare-fun dummy8 () target)
 
 (declare-datatypes ()
 ((target__ref (mk_target__ref (target__content target)))))
@@ -655,15 +610,13 @@
   (temp___do_toplevel_235 Bool)) Bool (=>
                                       (or (= temp___is_init_233 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range8 temp___expr_236)))
+                                      (in_range6 temp___expr_236)))
 
 ;; from_byte_array_to_integer_32__post_axiom
   (assert
-  (forall ((s (Array Int byte)))
-  (! (let ((result (from_byte_array_to_integer_32 s)))
-     (=> (from_byte_array_to_integer_32__function_guard result s)
-     (dynamic_invariant5 result true false true))) :pattern ((from_byte_array_to_integer_32
-                                                             s)) )))
+  (forall ((s (Array Int byte))) (! (dynamic_invariant5
+  (from_byte_array_to_integer_32 s) true false
+  true) :pattern ((from_byte_array_to_integer_32 s)) )))
 
 (declare-fun arr () (Array Int byte))
 
@@ -673,11 +626,7 @@
 
 (declare-fun o1 () (Array Int byte))
 
-(declare-fun o2 () (Array Int byte))
-
-(declare-fun o3 () (Array Int byte))
-
-(declare-fun o4 () t)
+(declare-fun o2 () t)
 
 (declare-fun result () (Array Int byte))
 
@@ -688,41 +637,35 @@
 (declare-fun arr2 () (Array Int byte))
 
 ;; H
-  (assert (= o (main__arr__aggregate_def ((_ int2bv 8) 0))))
-
-;; H
   (assert (= result arr))
 
 ;; H
-  (assert (= arr1 o))
+  (assert (= arr1 (main__arr__aggregate_def ((_ int2bv 8) 0))))
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range i32)))
 
 ;; H
-  (assert (= o1 (temp___302 ((_ int2bv 8) 0))))
-
-;; H
   (assert (= result1 arr1))
 
 ;; H
-  (assert (= arr2 o1))
+  (assert (= arr2 (temp___300 ((_ int2bv 8) 0))))
 
 ;; H
   (assert
   (=> (<= 60 64) (and (and (<= 0 60) (<= 60 91)) (and (<= 0 64) (<= 64 91)))))
 
 ;; H
-  (assert (= o2 arr2))
+  (assert (= o arr2))
 
 ;; H
-  (assert (= o2 o3))
+  (assert (= o o1))
 
 ;; H
-  (assert (= (mk 60 64) o4))
+  (assert (= (mk 60 64) o2))
 
 (assert
 ;; WP_parameter_def
  ;; File "main.adb", line 5, characters 0-0
-  (not (= (length (mk___t o3 o4)) 4)))
+  (not (= (length (mk___t o1 o2)) 4)))
 (check-sat)

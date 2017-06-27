@@ -558,10 +558,9 @@
   (assert
   (forall ((stream us_t))
   (forall ((pos Int))
-  (! (=> (nth8_stream__function_guard (nth8_stream stream pos) stream pos)
-     (= (= (nth8_stream stream pos) true)
+  (! (= (= (nth8_stream stream pos) true)
      (= (nth (to_rep1 (select (to_array stream) (div1 pos 8)))
-        (- 7 (mod1 pos 8))) true))) :pattern ((nth8_stream stream pos)) ))))
+        (- 7 (mod1 pos 8))) true)) :pattern ((nth8_stream stream pos)) ))))
 
 (define-fun dynamic_invariant2 ((temp___expr_160 (_ BitVec 8))
   (temp___is_init_157 Bool) (temp___skip_constant_158 Bool)
@@ -582,7 +581,6 @@
      (and (dynamic_invariant2 byte true true true) (dynamic_invariant left
      true true true)) (< left 8))
      (let ((result (pokebit8 byte left flag)))
-     (=> (pokebit8__function_guard result byte left flag)
      (and
      (and
      (forall ((i Int))
@@ -590,7 +588,7 @@
      (=> (not (= i (- 7 left)))
      (= (= (nth result i) true) (= (nth byte i) true)))))
      (= (= (nth result (- 7 left)) true) (= flag true))) (dynamic_invariant2
-     result true false true))))) :pattern ((pokebit8 byte left flag)) )))))
+     result true false true)))) :pattern ((pokebit8 byte left flag)) )))))
 
 (declare-fun addr__first () integer)
 
@@ -689,9 +687,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o3 (pokebit8 o2 (mod1 left 8) flag)) (pokebit8__function_guard 
-  o3 o2 (mod1 left 8) flag))
+  (and (= o3 (pokebit8 o2 (mod1 left 8) flag))
   (and
   (forall ((i1 Int))
   (=> (and (<= 0 i1) (<= i1 7))
@@ -724,18 +720,6 @@
 
 ;; H
   (assert (= addr3 addr1))
-
-;; H
-  (assert
-  (forall ((i1 Int)) (nth8_stream__function_guard
-  (nth8_stream (mk___t addr2 (mk (to_rep addr__first) (to_rep addr__last)))
-  i1) (mk___t addr2 (mk (to_rep addr__first) (to_rep addr__last))) i1)))
-
-;; H
-  (assert
-  (forall ((i1 Int)) (nth8_stream__function_guard
-  (nth8_stream (mk___t addr (mk (to_rep addr__first) (to_rep addr__last)))
-  i1) (mk___t addr (mk (to_rep addr__first) (to_rep addr__last))) i1)))
 
 ;; H
   (assert

@@ -169,9 +169,9 @@
 (define-fun modular__ref_8__projection ((a modular__ref)) modular (modular__content
                                                                   a))
 
-(define-fun dynamic_invariant ((temp___expr_793 (_ BitVec 64))
-  (temp___is_init_790 Bool) (temp___skip_constant_791 Bool)
-  (temp___do_toplevel_792 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_345 (_ BitVec 64))
+  (temp___is_init_342 Bool) (temp___skip_constant_343 Bool)
+  (temp___do_toplevel_344 Bool)) Bool true)
 
 (declare-sort bit_position 0)
 
@@ -195,11 +195,11 @@
 (define-fun bit_position__ref_7__projection ((a bit_position__ref)) bit_position 
   (bit_position__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_799 Int)
-  (temp___is_init_796 Bool) (temp___skip_constant_797 Bool)
-  (temp___do_toplevel_798 Bool)) Bool (=>
-                                      (or (= temp___is_init_796 true)
-                                      (<= 0 63)) (in_range1 temp___expr_799)))
+(define-fun dynamic_invariant1 ((temp___expr_351 Int)
+  (temp___is_init_348 Bool) (temp___skip_constant_349 Bool)
+  (temp___do_toplevel_350 Bool)) Bool (=>
+                                      (or (= temp___is_init_348 true)
+                                      (<= 0 63)) (in_range1 temp___expr_351)))
 
 (declare-fun shift_right ((_ BitVec 64) Int) (_ BitVec 64))
 
@@ -525,20 +525,16 @@
   (forall ((amount Int))
   (! (=>
      (and (dynamic_invariant v true true true) (dynamic_invariant2 amount
-     true true true))
-     (let ((result (shift_right v amount)))
-     (=> (shift_right__function_guard result v amount) (dynamic_invariant
-     result true false true)))) :pattern ((shift_right v amount)) ))))
+     true true true)) (dynamic_invariant (shift_right v amount) true false
+     true)) :pattern ((shift_right v amount)) ))))
 
 ;; shift_right__def_axiom
   (assert
   (forall ((v (_ BitVec 64)))
   (forall ((amount Int))
   (! (=>
-     (and
      (and (dynamic_invariant v true true true) (dynamic_invariant2 amount
-     true true true)) (shift_right__function_guard (shift_right v amount) v
-     amount))
+     true true true))
      (= (shift_right v amount) (ite (and (<= 1 64) (<= 64 8))
                                ((_ zero_extend 56) (ite (< amount 8)
                                                    (bvlshr ((_ extract 7 0) v) ((_ int2bv 8) amount))
@@ -563,11 +559,8 @@
 ;; lemma6__post_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (let ((result (lemma6 us_void_param)))
-     (and (lemma6__function_guard1 (lemma61 Tuple0) Tuple0)
-     (=> (lemma6__function_guard result us_void_param)
-     (=> (= result true) (= (lemma61 Tuple0) true))))) :pattern ((lemma6
-                                                                 us_void_param)) )))
+  (! (=> (= (lemma6 us_void_param) true) (= (lemma61 Tuple0) true)) :pattern (
+  (lemma6 us_void_param)) )))
 
 (declare-fun value () (_ BitVec 64))
 
@@ -583,20 +576,7 @@
 ;; lemma6__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (lemma6__function_guard1 (lemma61 us_void_param) us_void_param)
-     (and
-     (forall ((val__ (_ BitVec 64))) (shift_right__function_guard
-     (shift_right val__ 0) val__ 0))
-     (and
-     (forall ((val__ (_ BitVec 64)) (n Int)) (shift_right__function_guard
-     (shift_right val__ n) val__ n))
-     (and
-     (forall ((val__ (_ BitVec 64)) (j Int)) (shift_right__function_guard
-     (shift_right val__ j) val__ j))
-     (and
-     (forall ((val__ (_ BitVec 64)) (j Int)) (shift_right__function_guard
-     (shift_right val__ j) val__ j))
-     (= (= (lemma61 us_void_param) true)
+  (! (= (= (lemma61 us_void_param) true)
      (forall ((val__ (_ BitVec 64)))
      (=>
      (and (bvule ((_ int2bv 64) 0) val__)
@@ -612,7 +592,7 @@
      (bvuge (shift_right val__ j) ((_ int2bv 64) 1)))))
      (forall ((j Int))
      (=> (and (<= n j) (<= j 63))
-     (bvule (shift_right val__ j) ((_ int2bv 64) 1))))))))))))))))) :pattern (
+     (bvule (shift_right val__ j) ((_ int2bv 64) 1)))))))))))) :pattern (
   (lemma61 us_void_param)) )))
 
 (declare-fun result__ () Int)
@@ -638,9 +618,6 @@
   (assert (=> (<= 0 63) (in_range1 result__)))
 
 ;; H
-  (assert (lemma6__function_guard (lemma6 Tuple0) Tuple0))
-
-;; H
   (assert (= (lemma6 Tuple0) true))
 
 ;; H
@@ -663,8 +640,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o (shift_right value i1)) (shift_right__function_guard o value i1))
+  (and (= o (shift_right value i1))
   (= o (ite (and (<= 1 64) (<= 64 8))
        ((_ zero_extend 56) (ite (< i1 8)
                            (bvlshr ((_ extract 7 0) value) ((_ int2bv 8) 
@@ -690,9 +666,6 @@
 
 ;; H
   (assert (<= j i1))
-
-;; H
-  (assert (shift_right__function_guard (shift_right value j) value j))
 
 (assert
 ;; WP_parameter_def

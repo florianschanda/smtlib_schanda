@@ -623,16 +623,14 @@
 ;; maximum_datetime__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (maximum_datetime__function_guard (maximum_datetime us_void_param)
-     us_void_param)
-     (= (maximum_datetime us_void_param) (mk___rep2
+  (! (= (maximum_datetime us_void_param) (mk___rep2
                                          (mk___split_fields2
                                          (mk___rep
                                          (mk___split_fields (of_rep2 31)
                                          (of_rep1 12) (of_rep 2099)))
                                          (mk___rep1
                                          (mk___split_fields1 (of_rep3 23)
-                                         (of_rep4 59) (of_rep5 59))))))) :pattern (
+                                         (of_rep4 59) (of_rep5 59)))))) :pattern (
   (maximum_datetime us_void_param)) )))
 
 (declare-fun minimum_datetime (tuple0) us_rep2)
@@ -645,16 +643,14 @@
 ;; minimum_datetime__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (minimum_datetime__function_guard (minimum_datetime us_void_param)
-     us_void_param)
-     (= (minimum_datetime us_void_param) (mk___rep2
+  (! (= (minimum_datetime us_void_param) (mk___rep2
                                          (mk___split_fields2
                                          (mk___rep
                                          (mk___split_fields (of_rep2 1)
                                          (of_rep1 1) (of_rep 2000)))
                                          (mk___rep1
                                          (mk___split_fields1 (of_rep3 0)
-                                         (of_rep4 0) (of_rep5 0))))))) :pattern (
+                                         (of_rep4 0) (of_rep5 0)))))) :pattern (
   (minimum_datetime us_void_param)) )))
 
 (declare-fun past () us_rep2)
@@ -2334,10 +2330,6 @@
 
 ;; H
   (assert (= dates__is_before__result4 true))
-
-;; H
-  (assert (maximum_datetime__function_guard (maximum_datetime Tuple0)
-  Tuple0))
 
 (assert
 ;; WP_parameter_def

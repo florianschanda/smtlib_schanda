@@ -1087,20 +1087,16 @@
   (assert
   (forall ((position us_rep))
   (forall ((id Int))
-  (! (=> (dynamic_invariant2 id true true true)
-     (let ((result (get_previous_track position id)))
-     (=> (get_previous_track__function_guard result position id)
-     (dynamic_invariant1 result true false true)))) :pattern ((get_previous_track
-                                                              position id)) ))))
+  (! (=> (dynamic_invariant2 id true true true) (dynamic_invariant1
+     (get_previous_track position id) true false true)) :pattern ((get_previous_track
+                                                                  position
+                                                                  id)) ))))
 
 ;; get_previous_track__def_axiom
   (assert
   (forall ((position us_rep))
   (forall ((id Int))
-  (! (=>
-     (and (dynamic_invariant2 id true true true)
-     (get_previous_track__function_guard (get_previous_track position id)
-     position id))
+  (! (=> (dynamic_invariant2 id true true true)
      (= (get_previous_track position id) (to_rep5
                                          (let ((temp___261 (select previous_tracks 
                                          (to_rep3
@@ -1121,20 +1117,15 @@
   (assert
   (forall ((position us_rep))
   (forall ((id Int))
-  (! (=> (dynamic_invariant2 id true true true)
-     (let ((result (get_other_previous_track position id)))
-     (=> (get_other_previous_track__function_guard result position id)
-     (dynamic_invariant1 result true false true)))) :pattern ((get_other_previous_track
-                                                              position id)) ))))
+  (! (=> (dynamic_invariant2 id true true true) (dynamic_invariant1
+     (get_other_previous_track position id) true false true)) :pattern (
+  (get_other_previous_track position id)) ))))
 
 ;; get_other_previous_track__def_axiom
   (assert
   (forall ((position us_rep))
   (forall ((id Int))
-  (! (=>
-     (and (dynamic_invariant2 id true true true)
-     (get_other_previous_track__function_guard
-     (get_other_previous_track position id) position id))
+  (! (=> (dynamic_invariant2 id true true true)
      (= (get_other_previous_track position id) (ite (= (to_rep5
                                                        (let ((temp___265 (select 
                                                        previous_tracks 
@@ -1348,7 +1339,7 @@
 
 (declare-fun o9 () track_id)
 
-(declare-fun temp___376 () Int)
+(declare-fun temp___338 () Int)
 
 (declare-fun result () Bool)
 
@@ -1382,9 +1373,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o4 (get_previous_track o11 id)) (get_previous_track__function_guard
-  o4 o11 id))
+  (and (= o4 (get_previous_track o11 id))
   (and (in_range7 o4)
   (= o4 (to_rep5
         (select (select previous_tracks (to_rep3
@@ -1413,11 +1402,9 @@
 
 ;; H
   (assert
-  (and
-  (and (= temp___376 (get_previous_track o10 id))
-  (get_previous_track__function_guard temp___376 o10 id))
-  (and (in_range7 temp___376)
-  (= temp___376 (to_rep5
+  (and (= temp___338 (get_previous_track o10 id))
+  (and (in_range7 temp___338)
+  (= temp___338 (to_rep5
                 (select (select previous_tracks (to_rep3
                                                 (rec__trains__track__from
                                                 (us_split_fields3
@@ -1427,5 +1414,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "trains.ads", line 144, characters 0-0
-  (not (<= 1 temp___376)))
+  (not (<= 1 temp___338)))
 (check-sat)

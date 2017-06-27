@@ -440,9 +440,7 @@
   (assert
   (forall ((l (Array Int light)))
   (forall ((road_traffic__conflicts (Array Int us_rep)))
-  (! (=> (safety_property__function_guard
-     (safety_property l road_traffic__conflicts) l road_traffic__conflicts)
-     (= (= (safety_property l road_traffic__conflicts) true)
+  (! (= (= (safety_property l road_traffic__conflicts) true)
      (forall ((temp___188 Int))
      (=> (and (<= 1 temp___188) (<= temp___188 8))
      (let ((c (select road_traffic__conflicts temp___188)))
@@ -452,7 +450,7 @@
                   (rec__road_traffic__conflict__left (us_split_fields1 c))))) 0)
      (= (to_rep
         (select l (to_rep1
-                  (rec__road_traffic__conflict__right (us_split_fields1 c))))) 0))))))) :pattern (
+                  (rec__road_traffic__conflict__right (us_split_fields1 c))))) 0)))))) :pattern (
   (safety_property l road_traffic__conflicts)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -461,17 +459,17 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(declare-fun temp___197 ((Array Int light) Int Int) (Array Int light))
+(declare-fun temp___193 ((Array Int light) Int Int) (Array Int light))
 
 ;; def_axiom
   (assert
-  (forall ((temp___199 (Array Int light)))
-  (forall ((temp___200 Int) (temp___201 Int))
-  (let ((temp___198 (temp___197 temp___199 temp___200 temp___201)))
-  (forall ((temp___202 Int))
-  (ite (= temp___202 temp___200)
-  (= (select temp___198 temp___202) (of_rep temp___201))
-  (= (select temp___198 temp___202) (select temp___199 temp___202))))))))
+  (forall ((temp___195 (Array Int light)))
+  (forall ((temp___196 Int) (temp___197 Int))
+  (let ((temp___194 (temp___193 temp___195 temp___196 temp___197)))
+  (forall ((temp___198 Int))
+  (ite (= temp___198 temp___196)
+  (= (select temp___194 temp___198) (of_rep temp___197))
+  (= (select temp___194 temp___198) (select temp___195 temp___198))))))))
 
 (define-fun dynamic_invariant1 ((temp___expr_147 Int)
   (temp___is_init_144 Bool) (temp___skip_constant_145 Bool)
@@ -494,10 +492,6 @@
 (declare-fun l2 () (Array Int light))
 
 (declare-fun l3 () (Array Int light))
-
-;; H
-  (assert (safety_property__function_guard (safety_property l conflicts) 
-  l conflicts))
 
 ;; H
   (assert (in_range1 p))
@@ -523,10 +517,6 @@
 
 ;; H
   (assert (= l3 l1))
-
-;; H
-  (assert (safety_property__function_guard (safety_property l2 conflicts) 
-  l2 conflicts))
 
 (assert
 ;; WP_parameter_def

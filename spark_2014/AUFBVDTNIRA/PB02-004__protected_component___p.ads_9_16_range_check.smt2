@@ -90,16 +90,13 @@
 
 ;; zero__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (zero us_void_param)))
-     (=> (zero__function_guard result us_void_param) (dynamic_invariant
-     result true false true))) :pattern ((zero us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant (zero us_void_param)
+  true false true) :pattern ((zero us_void_param)) )))
 
 ;; zero__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (zero__function_guard (zero us_void_param) us_void_param)
-     (= (zero us_void_param) 0)) :pattern ((zero us_void_param)) )))
+  (! (= (zero us_void_param) 0) :pattern ((zero us_void_param)) )))
 
 (declare-fun r2s () Int)
 
@@ -120,9 +117,8 @@
 
 ;; H
   (assert
-  (and
-  (and (= p__R2s__assume (zero Tuple0)) (zero__function_guard p__R2s__assume
-  Tuple0)) (and (in_range p__R2s__assume) (= p__R2s__assume 0))))
+  (and (= p__R2s__assume (zero Tuple0))
+  (and (in_range p__R2s__assume) (= p__R2s__assume 0))))
 
 ;; H
   (assert (= p__R2s__assume r2s))

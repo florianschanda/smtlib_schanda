@@ -1099,16 +1099,13 @@
 ;; f__post_axiom
   (assert
   (forall ((e Int))
-  (! (=> (dynamic_invariant5 e true true true)
-     (let ((result (f e)))
-     (=> (f__function_guard result e) (dynamic_invariant5 result true false
-     true)))) :pattern ((f e)) )))
+  (! (=> (dynamic_invariant5 e true true true) (dynamic_invariant5 (f e) true
+     false true)) :pattern ((f e)) )))
 
 ;; f__def_axiom
   (assert
   (forall ((e Int))
-  (! (=>
-     (and (dynamic_invariant5 e true true true) (f__function_guard (f e) e))
+  (! (=> (dynamic_invariant5 e true true true)
      (= (f e) (ite (and (<= (- 100) e) (<= e 100)) (* e 2) e))) :pattern (
   (f e)) )))
 
@@ -1440,16 +1437,6 @@
 
 ;; H
   (assert
-  (forall ((i Int)) (f__function_guard (f (get (elements s) i))
-  (get (elements s) i))))
-
-;; H
-  (assert
-  (forall ((i Int)) (f__function_guard (f (get (elements s) i))
-  (get (elements s) i))))
-
-;; H
-  (assert
   (<= (length (mk___rep r__split_discrs r__split_fields3)) (- (get1
                                                               (positions s)
                                                               (mk___rep1
@@ -1466,16 +1453,16 @@
 
 ;; H
   (assert
-  (let ((temp___892 (elements (mk___rep r__split_discrs r__split_fields3))))
-  (forall ((temp___891 Int))
+  (let ((temp___871 (elements (mk___rep r__split_discrs r__split_fields3))))
+  (forall ((temp___870 Int))
   (=>
-  (and (in_range2 temp___891)
-  (= (iter_has_element temp___892 temp___891) true))
+  (and (in_range2 temp___870)
+  (= (iter_has_element temp___871 temp___870) true))
   (exists ((i Int))
   (and
   (and (<= 1 i)
   (<= i (- (get1 (positions s) (mk___rep1 cu__split_fields3)) 1)))
-  (= (get temp___892 temp___891) (f (get (elements s) i)))))))))
+  (= (get temp___871 temp___870) (f (get (elements s) i)))))))))
 
 ;; H
   (assert (= (has_key (positions s) (mk___rep1 cu__split_fields3)) true))
@@ -1488,7 +1475,7 @@
 
 ;; H
   (assert
-  (and (and (= o1 (f o)) (f__function_guard o1 o))
+  (and (= o1 (f o))
   (and (in_range7 o1) (= o1 (ite (and (<= (- 100) o) (<= o 100)) (* o 2) o)))))
 
 (assert

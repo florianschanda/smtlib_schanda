@@ -106,12 +106,12 @@
 (define-fun stack_pointer__ref___projection ((a stack_pointer__ref)) stack_pointer 
   (stack_pointer__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_151 Int)
-  (temp___is_init_148 Bool) (temp___skip_constant_149 Bool)
-  (temp___do_toplevel_150 Bool)) Bool (=>
-                                      (or (= temp___is_init_148 true)
+(define-fun dynamic_invariant1 ((temp___expr_147 Int)
+  (temp___is_init_144 Bool) (temp___skip_constant_145 Bool)
+  (temp___do_toplevel_146 Bool)) Bool (=>
+                                      (or (= temp___is_init_144 true)
                                       (<= 0 100)) (in_range1
-                                      temp___expr_151)))
+                                      temp___expr_147)))
 
 ;; is_full__post_axiom
   (assert true)
@@ -119,12 +119,9 @@
 ;; is_full__def_axiom
   (assert
   (forall ((a_stack_no_spark_contracts_with_body__sp Int))
-  (! (=> (is_full__function_guard
-     (is_full a_stack_no_spark_contracts_with_body__sp)
-     a_stack_no_spark_contracts_with_body__sp)
-     (= (= (is_full a_stack_no_spark_contracts_with_body__sp) true)
-     (= a_stack_no_spark_contracts_with_body__sp 100))) :pattern ((is_full
-                                                                  a_stack_no_spark_contracts_with_body__sp)) )))
+  (! (= (= (is_full a_stack_no_spark_contracts_with_body__sp) true)
+     (= a_stack_no_spark_contracts_with_body__sp 100)) :pattern ((is_full
+                                                                 a_stack_no_spark_contracts_with_body__sp)) )))
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int item))))))
@@ -260,12 +257,12 @@
 (declare-datatypes () ((index__ref (mk_index__ref (index__content index)))))
 (define-fun index__ref___projection ((a index__ref)) index (index__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_157 Int)
-  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
-  (temp___do_toplevel_156 Bool)) Bool (=>
-                                      (or (= temp___is_init_154 true)
+(define-fun dynamic_invariant2 ((temp___expr_153 Int)
+  (temp___is_init_150 Bool) (temp___skip_constant_151 Bool)
+  (temp___do_toplevel_152 Bool)) Bool (=>
+                                      (or (= temp___is_init_150 true)
                                       (<= 1 100)) (in_range2
-                                      temp___expr_157)))
+                                      temp___expr_153)))
 
 (declare-fun sp () Int)
 
@@ -274,9 +271,6 @@
 
 ;; H
   (assert (in_range it))
-
-;; H
-  (assert (is_full__function_guard (is_full sp) sp))
 
 ;; H
   (assert (not (= (is_full sp) true)))

@@ -85,8 +85,7 @@
 ;; wobble__def_axiom
   (assert
   (forall ((x Int) (y Int))
-  (! (=> (wobble__function_guard (wobble x y) x y)
-     (= (= (wobble x y) true) (= x 0))) :pattern ((wobble x y)) )))
+  (! (= (= (wobble x y) true) (= x 0)) :pattern ((wobble x y)) )))
 
 (declare-fun a () Int)
 

@@ -69,11 +69,11 @@
 (define-fun event_count_type__ref___projection ((a event_count_type__ref)) event_count_type 
   (event_count_type__content a))
 
-(define-fun dynamic_invariant ((temp___expr_220 Int)
-  (temp___is_init_217 Bool) (temp___skip_constant_218 Bool)
-  (temp___do_toplevel_219 Bool)) Bool (=>
-                                      (or (= temp___is_init_217 true)
-                                      (<= 0 64)) (in_range1 temp___expr_220)))
+(define-fun dynamic_invariant ((temp___expr_216 Int)
+  (temp___is_init_213 Bool) (temp___skip_constant_214 Bool)
+  (temp___do_toplevel_215 Bool)) Bool (=>
+                                      (or (= temp___is_init_213 true)
+                                      (<= 0 64)) (in_range1 temp___expr_216)))
 
 (declare-sort year_type 0)
 
@@ -1119,19 +1119,19 @@
                                      (or (= temp___is_init_60 true)
                                      (<= 0 255)) (in_range9 temp___expr_63)))
 
-(define-fun dynamic_invariant2 ((temp___expr_261 Int)
-  (temp___is_init_258 Bool) (temp___skip_constant_259 Bool)
-  (temp___do_toplevel_260 Bool)) Bool (=>
-                                      (or (= temp___is_init_258 true)
+(define-fun dynamic_invariant2 ((temp___expr_257 Int)
+  (temp___is_init_254 Bool) (temp___skip_constant_255 Bool)
+  (temp___do_toplevel_256 Bool)) Bool (=>
+                                      (or (= temp___is_init_254 true)
                                       (<= 0 128)) (in_range8
-                                      temp___expr_261)))
+                                      temp___expr_257)))
 
-(define-fun dynamic_invariant3 ((temp___expr_297 Int)
-  (temp___is_init_294 Bool) (temp___skip_constant_295 Bool)
-  (temp___do_toplevel_296 Bool)) Bool (=>
-                                      (or (= temp___is_init_294 true)
+(define-fun dynamic_invariant3 ((temp___expr_293 Int)
+  (temp___is_init_290 Bool) (temp___skip_constant_291 Bool)
+  (temp___do_toplevel_292 Bool)) Bool (=>
+                                      (or (= temp___is_init_290 true)
                                       (<= 1 64)) (in_range10
-                                      temp___expr_297)))
+                                      temp___expr_293)))
 
 (define-fun dynamic_invariant4 ((temp___expr_136 Int)
   (temp___is_init_133 Bool) (temp___skip_constant_134 Bool)

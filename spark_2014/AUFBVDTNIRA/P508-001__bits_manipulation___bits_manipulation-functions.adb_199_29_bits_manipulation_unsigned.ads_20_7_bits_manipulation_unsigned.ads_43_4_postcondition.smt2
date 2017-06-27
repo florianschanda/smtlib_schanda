@@ -165,9 +165,9 @@
 (define-fun modular__ref_4__projection ((a modular__ref)) modular (modular__content
                                                                   a))
 
-(define-fun dynamic_invariant ((temp___expr_417 (_ BitVec 16))
-  (temp___is_init_414 Bool) (temp___skip_constant_415 Bool)
-  (temp___do_toplevel_416 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_265 (_ BitVec 16))
+  (temp___is_init_262 Bool) (temp___skip_constant_263 Bool)
+  (temp___do_toplevel_264 Bool)) Bool true)
 
 (declare-sort mask_size 0)
 
@@ -190,11 +190,11 @@
 (define-fun mask_size__ref_3__projection ((a mask_size__ref)) mask_size 
   (mask_size__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_429 Int)
-  (temp___is_init_426 Bool) (temp___skip_constant_427 Bool)
-  (temp___do_toplevel_428 Bool)) Bool (=>
-                                      (or (= temp___is_init_426 true)
-                                      (<= 1 16)) (in_range1 temp___expr_429)))
+(define-fun dynamic_invariant1 ((temp___expr_277 Int)
+  (temp___is_init_274 Bool) (temp___skip_constant_275 Bool)
+  (temp___do_toplevel_276 Bool)) Bool (=>
+                                      (or (= temp___is_init_274 true)
+                                      (<= 1 16)) (in_range1 temp___expr_277)))
 
 (declare-fun axiom__ (tuple0) Bool)
 
@@ -203,9 +203,7 @@
 ;; axiom____post_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (let ((result (axiom__ us_void_param)))
-     (=> (axiom____function_guard result us_void_param)
-     (=> (= result true)
+  (! (=> (= (axiom__ us_void_param) true)
      (forall ((v (_ BitVec 16)))
      (=> (and (bvule ((_ int2bv 16) 0) v) (bvule v ((_ int2bv 16) 65535)))
      (forall ((n Int))
@@ -219,7 +217,7 @@
                                             (bvshl ((_ int2bv 16) 1) ((_ int2bv 16) n))
                                             ((_ int2bv 16) 0))) (ite (< n 65536)
                                                                 (bvshl ((_ int2bv 16) 1) ((_ int2bv 16) n))
-                                                                ((_ int2bv 16) 0))))))))))) :pattern (
+                                                                ((_ int2bv 16) 0))))))))) :pattern (
   (axiom__ us_void_param)) )))
 
 (declare-fun amount () Int)
@@ -268,8 +266,6 @@
   (! (=> (in_range2 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -305,9 +301,9 @@
 
 (declare-fun bits_manipulation_unsigned__unsigned_16__functions__proofs__make_mask__lemma2__ones__result () (_ BitVec 16))
 
-(declare-fun temp___1201 () Int)
+(declare-fun temp___415 () Int)
 
-(declare-fun temp___1200 () (_ BitVec 16))
+(declare-fun temp___414 () (_ BitVec 16))
 
 (declare-fun o () (_ BitVec 16))
 
@@ -368,9 +364,6 @@
 (declare-fun result4 () (_ BitVec 16))
 
 ;; H
-  (assert (axiom____function_guard (axiom__ Tuple0) Tuple0))
-
-;; H
   (assert (in_range1 amount))
 
 ;; H
@@ -389,10 +382,10 @@
   (assert (= i1 1))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 amount)) (= temp___1201 i1)))
+  (assert (=> (and (<= 1 i1) (<= i1 amount)) (= temp___415 i1)))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 amount)) (= temp___1200 result__1)))
+  (assert (=> (and (<= 1 i1) (<= i1 amount)) (= temp___414 result__1)))
 
 ;; H
   (assert
@@ -417,12 +410,12 @@
 ;; H
   (assert
   (=> (and (<= 1 i1) (<= i1 amount))
-  (= (bvand result__3 (let ((temp___1204 (- i2 1)))
-                      (ite (< temp___1204 65536)
-                      (bvshl ((_ int2bv 16) 1) ((_ int2bv 16) temp___1204))
-                      ((_ int2bv 16) 0)))) (let ((temp___1205 (- i2 1)))
-                                           (ite (< temp___1205 65536)
-                                           (bvshl ((_ int2bv 16) 1) ((_ int2bv 16) temp___1205))
+  (= (bvand result__3 (let ((temp___418 (- i2 1)))
+                      (ite (< temp___418 65536)
+                      (bvshl ((_ int2bv 16) 1) ((_ int2bv 16) temp___418))
+                      ((_ int2bv 16) 0)))) (let ((temp___419 (- i2 1)))
+                                           (ite (< temp___419 65536)
+                                           (bvshl ((_ int2bv 16) 1) ((_ int2bv 16) temp___419))
                                            ((_ int2bv 16) 0))))))
 
 ;; H
@@ -533,10 +526,10 @@
  ;; File "bits_manipulation.ads", line 3, characters 0-0
   (not
   (= (bvand bits_manipulation_unsigned__unsigned_16__functions__proofs__make_mask__lemma2__ones__result4 
-  (let ((temp___1212 (- i9 1)))
-  (ite (< temp___1212 65536)
-  (bvshl ((_ int2bv 16) 1) ((_ int2bv 16) temp___1212)) ((_ int2bv 16) 0)))) 
-  (let ((temp___1213 (- i9 1)))
-  (ite (< temp___1213 65536)
-  (bvshl ((_ int2bv 16) 1) ((_ int2bv 16) temp___1213)) ((_ int2bv 16) 0))))))
+  (let ((temp___426 (- i9 1)))
+  (ite (< temp___426 65536)
+  (bvshl ((_ int2bv 16) 1) ((_ int2bv 16) temp___426)) ((_ int2bv 16) 0)))) 
+  (let ((temp___427 (- i9 1)))
+  (ite (< temp___427 65536)
+  (bvshl ((_ int2bv 16) 1) ((_ int2bv 16) temp___427)) ((_ int2bv 16) 0))))))
 (check-sat)

@@ -377,119 +377,43 @@
 (define-fun string_t__ref___projection ((a string_t__ref)) us_rep (string_t__content
                                                                   a))
 
-(declare-sort t131b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq5 (t131b t131b) Bool)
-
-(declare-fun dummy5 () t131b)
-
-(declare-datatypes () ((t131b__ref (mk_t131b__ref (t131b__content t131b)))))
-(define-fun t131b__ref___projection ((a t131b__ref)) t131b (t131b__content a))
-
-(declare-sort t133b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq6 (t133b t133b) Bool)
-
-(declare-fun dummy6 () t133b)
-
-(declare-datatypes () ((t133b__ref (mk_t133b__ref (t133b__content t133b)))))
-(define-fun t133b__ref___projection ((a t133b__ref)) t133b (t133b__content a))
-
-(declare-sort t135b 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq7 (t135b t135b) Bool)
-
-(declare-fun dummy7 () t135b)
-
-(declare-datatypes () ((t135b__ref (mk_t135b__ref (t135b__content t135b)))))
-(define-fun t135b__ref___projection ((a t135b__ref)) t135b (t135b__content a))
-
-(declare-sort t137b 0)
-
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq8 (t137b t137b) Bool)
-
-(declare-fun dummy8 () t137b)
-
-(declare-datatypes () ((t137b__ref (mk_t137b__ref (t137b__content t137b)))))
-(define-fun t137b__ref___projection ((a t137b__ref)) t137b (t137b__content a))
-
-(declare-fun temp___667 (Int) (Array Int character))
+(declare-fun temp___658 (Int) (Array Int character))
 
 ;; def_axiom
   (assert
-  (forall ((temp___669 Int))
-  (forall ((temp___670 Int))
-  (= (select (temp___667 temp___669) temp___670) (of_rep temp___669)))))
+  (forall ((temp___660 Int))
+  (forall ((temp___661 Int))
+  (= (select (temp___658 temp___660) temp___661) (of_rep temp___660)))))
 
-(declare-fun temp___671 (Int Int) (Array Int character))
-
-;; def_axiom
-  (assert
-  (forall ((temp___673 Int) (temp___674 Int))
-  (let ((temp___672 (temp___671 temp___673 temp___674)))
-  (forall ((temp___675 Int))
-  (ite (= temp___675 1)
-  (= (select temp___672 temp___675) (of_rep temp___673))
-  (= (select temp___672 temp___675) (of_rep temp___674)))))))
-
-(declare-fun temp___680 (Int) (Array Int character))
+(declare-fun temp___662 (Int Int) (Array Int character))
 
 ;; def_axiom
   (assert
-  (forall ((temp___682 Int))
-  (forall ((temp___683 Int))
-  (= (select (temp___680 temp___682) temp___683) (of_rep temp___682)))))
+  (forall ((temp___664 Int) (temp___665 Int))
+  (let ((temp___663 (temp___662 temp___664 temp___665)))
+  (forall ((temp___666 Int))
+  (ite (= temp___666 1)
+  (= (select temp___663 temp___666) (of_rep temp___664))
+  (= (select temp___663 temp___666) (of_rep temp___665)))))))
 
-(declare-fun temp___684 (Int Int) (Array Int character))
+(declare-fun temp___671 (Int) (Array Int character))
 
 ;; def_axiom
   (assert
-  (forall ((temp___686 Int) (temp___687 Int))
-  (let ((temp___685 (temp___684 temp___686 temp___687)))
-  (forall ((temp___688 Int))
-  (ite (= temp___688 1)
-  (= (select temp___685 temp___688) (of_rep temp___686))
-  (= (select temp___685 temp___688) (of_rep temp___687)))))))
+  (forall ((temp___673 Int))
+  (forall ((temp___674 Int))
+  (= (select (temp___671 temp___673) temp___674) (of_rep temp___673)))))
+
+(declare-fun temp___675 (Int Int) (Array Int character))
+
+;; def_axiom
+  (assert
+  (forall ((temp___677 Int) (temp___678 Int))
+  (let ((temp___676 (temp___675 temp___677 temp___678)))
+  (forall ((temp___679 Int))
+  (ite (= temp___679 1)
+  (= (select temp___676 temp___679) (of_rep temp___677))
+  (= (select temp___676 temp___679) (of_rep temp___678)))))))
 
 (define-fun dynamic_invariant ((temp___expr_63 Int) (temp___is_init_60 Bool)
   (temp___skip_constant_61 Bool)
@@ -497,25 +421,25 @@
                                      (or (= temp___is_init_60 true)
                                      (<= 0 255)) (in_range temp___expr_63)))
 
-(define-fun dynamic_invariant1 ((temp___expr_322 Int)
-  (temp___is_init_319 Bool) (temp___skip_constant_320 Bool)
-  (temp___do_toplevel_321 Bool)) Bool (=>
-                                      (or (= temp___is_init_319 true)
-                                      (<= 0 5)) (in_range1 temp___expr_322)))
+(define-fun dynamic_invariant1 ((temp___expr_314 Int)
+  (temp___is_init_311 Bool) (temp___skip_constant_312 Bool)
+  (temp___do_toplevel_313 Bool)) Bool (=>
+                                      (or (= temp___is_init_311 true)
+                                      (<= 0 5)) (in_range1 temp___expr_314)))
 
-(define-fun dynamic_invariant2 ((temp___expr_328 Int)
-  (temp___is_init_325 Bool) (temp___skip_constant_326 Bool)
-  (temp___do_toplevel_327 Bool)) Bool (=>
-                                      (or (= temp___is_init_325 true)
-                                      (<= 1 5)) (in_range2 temp___expr_328)))
+(define-fun dynamic_invariant2 ((temp___expr_320 Int)
+  (temp___is_init_317 Bool) (temp___skip_constant_318 Bool)
+  (temp___do_toplevel_319 Bool)) Bool (=>
+                                      (or (= temp___is_init_317 true)
+                                      (<= 1 5)) (in_range2 temp___expr_320)))
 
 ;; H
-  (assert (= (bool_eq1 (temp___667 32) 1 5 (temp___671 32 32) 1 5) true))
+  (assert (= (bool_eq1 (temp___658 32) 1 5 (temp___662 32 32) 1 5) true))
 
 (assert
 ;; WP_parameter_def
  ;; File "array_aggregates.adb", line 414, characters 0-0
   (not
-  (= (bool_eq4 (mk___rep (mk___split_fields (of_rep1 0) (temp___680 32)))
-     (mk___rep (mk___split_fields (of_rep1 0) (temp___684 32 32)))) true)))
+  (= (bool_eq4 (mk___rep (mk___split_fields (of_rep1 0) (temp___671 32)))
+     (mk___rep (mk___split_fields (of_rep1 0) (temp___675 32 32)))) true)))
 (check-sat)

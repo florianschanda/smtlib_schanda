@@ -157,9 +157,9 @@
 (define-fun modular__ref_8__projection ((a modular__ref)) modular (modular__content
                                                                   a))
 
-(define-fun dynamic_invariant ((temp___expr_793 (_ BitVec 64))
-  (temp___is_init_790 Bool) (temp___skip_constant_791 Bool)
-  (temp___do_toplevel_792 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_345 (_ BitVec 64))
+  (temp___is_init_342 Bool) (temp___skip_constant_343 Bool)
+  (temp___do_toplevel_344 Bool)) Bool true)
 
 (declare-fun shift_right ((_ BitVec 64) Int) (_ BitVec 64))
 
@@ -485,20 +485,16 @@
   (forall ((amount Int))
   (! (=>
      (and (dynamic_invariant v true true true) (dynamic_invariant1 amount
-     true true true))
-     (let ((result (shift_right v amount)))
-     (=> (shift_right__function_guard result v amount) (dynamic_invariant
-     result true false true)))) :pattern ((shift_right v amount)) ))))
+     true true true)) (dynamic_invariant (shift_right v amount) true false
+     true)) :pattern ((shift_right v amount)) ))))
 
 ;; shift_right__def_axiom
   (assert
   (forall ((v (_ BitVec 64)))
   (forall ((amount Int))
   (! (=>
-     (and
      (and (dynamic_invariant v true true true) (dynamic_invariant1 amount
-     true true true)) (shift_right__function_guard (shift_right v amount) v
-     amount))
+     true true true))
      (= (shift_right v amount) (ite (and (<= 1 64) (<= 64 8))
                                ((_ zero_extend 56) (ite (< amount 8)
                                                    (bvlshr ((_ extract 7 0) v) ((_ int2bv 8) amount))
@@ -534,11 +530,11 @@
 (define-fun bit_position__ref_7__projection ((a bit_position__ref)) bit_position 
   (bit_position__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_799 Int)
-  (temp___is_init_796 Bool) (temp___skip_constant_797 Bool)
-  (temp___do_toplevel_798 Bool)) Bool (=>
-                                      (or (= temp___is_init_796 true)
-                                      (<= 0 63)) (in_range1 temp___expr_799)))
+(define-fun dynamic_invariant2 ((temp___expr_351 Int)
+  (temp___is_init_348 Bool) (temp___skip_constant_349 Bool)
+  (temp___do_toplevel_350 Bool)) Bool (=>
+                                      (or (= temp___is_init_348 true)
+                                      (<= 0 63)) (in_range1 temp___expr_351)))
 
 (declare-fun msb_index_fast_inline_always ((_ BitVec 64)) Int)
 
@@ -568,9 +564,6 @@
 (declare-fun result1 () Int)
 
 ;; H
-  (assert (shift_right__function_guard (shift_right value o) value o))
-
-;; H
   (assert (not (= value ((_ int2bv 64) 0))))
 
 ;; H
@@ -585,9 +578,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o (msb_index_fast_inline_always value))
-  (msb_index_fast_inline_always__function_guard o value))
   (and (in_range1 o) (= (shift_right value o) ((_ int2bv 64) 1)))))
 
 ;; H
@@ -614,13 +605,6 @@
 ;; H
   (assert
   (= result1 bits_manipulation_unsigned__unsigned_64__functions__msb_index_fast_inline__result4))
-
-;; H
-  (assert (shift_right__function_guard
-  (shift_right value
-  bits_manipulation_unsigned__unsigned_64__functions__msb_index_fast_inline__result4)
-  value
-  bits_manipulation_unsigned__unsigned_64__functions__msb_index_fast_inline__result4))
 
 (assert
 ;; WP_parameter_def

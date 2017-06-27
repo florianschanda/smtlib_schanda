@@ -478,9 +478,8 @@
 ;; is_full__def_axiom
   (assert
   (forall ((r us_rep))
-  (! (=> (is_full__function_guard (is_full r) r)
-     (= (= (is_full r) true)
-     (= (to_rep1 (rec__ring_buf__ring_buffer__length (us_split_fields1 r))) 10000))) :pattern (
+  (! (= (= (is_full r) true)
+     (= (to_rep1 (rec__ring_buf__ring_buffer__length (us_split_fields1 r))) 10000)) :pattern (
   (is_full r)) )))
 
 ;; is_empty__post_axiom
@@ -489,30 +488,25 @@
 ;; is_empty__def_axiom
   (assert
   (forall ((r us_rep))
-  (! (=> (is_empty__function_guard (is_empty r) r)
-     (= (= (is_empty r) true)
-     (= (to_rep1 (rec__ring_buf__ring_buffer__length (us_split_fields1 r))) 0))) :pattern (
+  (! (= (= (is_empty r) true)
+     (= (to_rep1 (rec__ring_buf__ring_buffer__length (us_split_fields1 r))) 0)) :pattern (
   (is_empty r)) )))
 
 ;; head__post_axiom
   (assert
   (forall ((r us_rep))
-  (! (and (is_empty__function_guard (is_empty r) r)
-     (=> (not (= (is_empty r) true))
-     (let ((result (head r)))
-     (=> (head__function_guard result r) (dynamic_invariant result true false
-     true))))) :pattern ((head r)) )))
+  (! (=> (not (= (is_empty r) true)) (dynamic_invariant (head r) true false
+     true)) :pattern ((head r)) )))
 
 ;; head__def_axiom
   (assert
   (forall ((r us_rep))
-  (! (=> (head__function_guard (head r) r)
-     (= (head r) (to_rep2
-                 (let ((temp___177 (rec__ring_buf__ring_buffer__data
+  (! (= (head r) (to_rep2
+                 (let ((temp___174 (rec__ring_buf__ring_buffer__data
                                    (us_split_fields1 r))))
-                 (select temp___177 (to_rep
+                 (select temp___174 (to_rep
                                     (rec__ring_buf__ring_buffer__first
-                                    (us_split_fields1 r)))))))) :pattern (
+                                    (us_split_fields1 r))))))) :pattern (
   (head r)) )))
 
 (declare-fun h () Int)
@@ -541,21 +535,6 @@
 
 (declare-fun r__split_fields10 () length_type)
 
-(define-fun r__split_fields11 () us_split_fields (mk___split_fields
-                                                 r__split_fields8
-                                                 r__split_fields9
-                                                 r__split_fields10))
-
-(define-fun r__split_fields12 () us_split_fields (mk___split_fields
-                                                 r__split_fields4
-                                                 r__split_fields5
-                                                 r__split_fields6))
-
-(define-fun r__split_fields13 () us_split_fields (mk___split_fields
-                                                 r__split_fields
-                                                 r__split_fields1
-                                                 r__split_fields2))
-
 ;; H
   (assert (in_range x))
 
@@ -569,11 +548,10 @@
   (assert (=> (<= (- 2147483648) 2147483647) (in_range h)))
 
 ;; H
-  (assert (is_empty__function_guard (is_empty (mk___rep r__split_fields13))
-  (mk___rep r__split_fields13)))
-
-;; H
-  (assert (= (is_empty (mk___rep r__split_fields13)) true))
+  (assert
+  (= (is_empty
+     (mk___rep
+     (mk___split_fields r__split_fields r__split_fields1 r__split_fields2))) true))
 
 ;; H
   (assert (= (to_rep1 r__split_fields3) (+ (to_rep1 r__split_fields2) 1)))
@@ -582,14 +560,13 @@
   (assert (= (to_rep1 r__split_fields6) (+ (to_rep1 r__split_fields3) 1)))
 
 ;; H
-  (assert (head__function_guard (head (mk___rep r__split_fields12))
-  (mk___rep r__split_fields12)))
-
-;; H
   (assert
   (and
   (and (= (to_rep1 r__split_fields7) (- (to_rep1 r__split_fields6) 1))
-  (= (head (mk___rep r__split_fields12)) h1)) (in_range h1)))
+  (= (head
+     (mk___rep
+     (mk___split_fields r__split_fields4 r__split_fields5 r__split_fields6))) 
+  h1)) (in_range h1)))
 
 ;; H
   (assert (= h1 x))
@@ -597,12 +574,12 @@
 ;; H
   (assert (= (to_rep1 r__split_fields10) (+ (to_rep1 r__split_fields7) 1)))
 
-;; H
-  (assert (is_empty__function_guard (is_empty (mk___rep r__split_fields11))
-  (mk___rep r__split_fields11)))
-
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (not (= (is_empty (mk___rep r__split_fields11)) true))))
+  (not
+  (not
+  (= (is_empty
+     (mk___rep
+     (mk___split_fields r__split_fields8 r__split_fields9 r__split_fields10))) true))))
 (check-sat)

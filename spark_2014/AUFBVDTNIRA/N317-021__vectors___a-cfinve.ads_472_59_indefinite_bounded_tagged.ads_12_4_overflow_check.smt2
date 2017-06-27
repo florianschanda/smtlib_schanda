@@ -79,12 +79,12 @@
 (define-fun count_type__ref___projection ((a count_type__ref)) count_type 
   (count_type__content a))
 
-(define-fun dynamic_invariant ((temp___expr_212 Int)
-  (temp___is_init_209 Bool) (temp___skip_constant_210 Bool)
-  (temp___do_toplevel_211 Bool)) Bool (=>
-                                      (or (= temp___is_init_209 true)
+(define-fun dynamic_invariant ((temp___expr_211 Int)
+  (temp___is_init_208 Bool) (temp___skip_constant_209 Bool)
+  (temp___do_toplevel_210 Bool)) Bool (=>
+                                      (or (= temp___is_init_208 true)
                                       (<= 0 2147483647)) (in_range1
-                                      temp___expr_212)))
+                                      temp___expr_211)))
 
 (declare-sort integer 0)
 
@@ -204,8 +204,8 @@
 (declare-datatypes () ((t__ref (mk_t__ref (t__content us_rep)))))
 (define-fun t__ref___projection ((a t__ref)) us_rep (t__content a))
 
-(define-fun default_initial_assumption ((temp___expr_219 us_rep)
-  (temp___skip_top_level_220 Bool)) Bool (= (attr__tag temp___expr_219) 
+(define-fun default_initial_assumption ((temp___expr_218 us_rep)
+  (temp___skip_top_level_219 Bool)) Bool (= (attr__tag temp___expr_218) 
   us_tag))
 
 (declare-sort capacity_range 0)
@@ -356,12 +356,12 @@
 
 (declare-fun capacity__function_guard (Int us_rep1) Bool)
 
-(define-fun dynamic_invariant1 ((temp___expr_249 Int)
-  (temp___is_init_246 Bool) (temp___skip_constant_247 Bool)
-  (temp___do_toplevel_248 Bool)) Bool (=>
-                                      (or (= temp___is_init_246 true)
+(define-fun dynamic_invariant1 ((temp___expr_248 Int)
+  (temp___is_init_245 Bool) (temp___skip_constant_246 Bool)
+  (temp___do_toplevel_247 Bool)) Bool (=>
+                                      (or (= temp___is_init_245 true)
                                       (<= 0 2147483647)) (in_range3
-                                      temp___expr_249)))
+                                      temp___expr_248)))
 
 (declare-fun length (us_rep1) Int)
 

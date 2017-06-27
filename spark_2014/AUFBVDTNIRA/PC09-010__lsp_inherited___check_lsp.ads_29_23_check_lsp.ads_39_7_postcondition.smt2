@@ -458,8 +458,8 @@
 (define-fun grand_child__ref_2__projection ((a grand_child__ref)) us_rep2 
   (grand_child__content a))
 
-(define-fun default_initial_assumption ((temp___expr_204 us_rep2)
-  (temp___skip_top_level_205 Bool)) Bool (= (attr__tag2 temp___expr_204) 
+(define-fun default_initial_assumption ((temp___expr_195 us_rep2)
+  (temp___skip_top_level_196 Bool)) Bool (= (attr__tag2 temp___expr_195) 
   us_tag2))
 
 (declare-fun x () us_rep2)
@@ -473,12 +473,12 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range temp___expr_15)))
 
-(define-fun default_initial_assumption1 ((temp___expr_178 us_rep)
-  (temp___skip_top_level_179 Bool)) Bool (= (attr__tag temp___expr_178) 
+(define-fun default_initial_assumption1 ((temp___expr_172 us_rep)
+  (temp___skip_top_level_173 Bool)) Bool (= (attr__tag temp___expr_172) 
   us_tag))
 
-(define-fun default_initial_assumption2 ((temp___expr_192 us_rep1)
-  (temp___skip_top_level_193 Bool)) Bool (= (attr__tag1 temp___expr_192) 
+(define-fun default_initial_assumption2 ((temp___expr_183 us_rep1)
+  (temp___skip_top_level_184 Bool)) Bool (= (attr__tag1 temp___expr_183) 
   us_tag1))
 
 (declare-fun check_lsp__p_inherited__get_f__3__result () Int)

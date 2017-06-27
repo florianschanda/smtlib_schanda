@@ -377,91 +377,34 @@
      (= (select (notb a a_first a_last) i) (not (select a i)))) :pattern ((select 
   (notb a a_first a_last) i)) )))))
 
-(declare-sort t20b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 64)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq2 (t20b t20b) Bool)
-
-(declare-fun dummy2 () t20b)
-
-(declare-datatypes () ((t20b__ref (mk_t20b__ref (t20b__content t20b)))))
-(define-fun t20b__ref___projection ((a t20b__ref)) t20b (t20b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
-
-(declare-sort t30b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 64)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq3 (t30b t30b) Bool)
-
-(declare-fun dummy3 () t30b)
-
-(declare-datatypes () ((t30b__ref (mk_t30b__ref (t30b__content t30b)))))
-(define-fun t30b__ref___projection ((a t30b__ref)) t30b (t30b__content a))
-
-(declare-sort t33b 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 64)))
-
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq4 (t33b t33b) Bool)
-
-(declare-fun dummy4 () t33b)
-
-(declare-datatypes () ((t33b__ref (mk_t33b__ref (t33b__content t33b)))))
-(define-fun t33b__ref___projection ((a t33b__ref)) t33b (t33b__content a))
 
 (declare-fun stable_marriage__is_permutation_2__seen__aggregate_def (Bool) (Array Int Bool))
 
 ;; def_axiom
   (assert
-  (forall ((temp___458 Bool))
-  (forall ((temp___459 Int))
+  (forall ((temp___420 Bool))
+  (forall ((temp___421 Int))
   (= (select (stable_marriage__is_permutation_2__seen__aggregate_def
-             temp___458) temp___459) temp___458))))
+             temp___420) temp___421) temp___420))))
 
-(declare-fun temp___465 (Bool) (Array Int Bool))
-
-;; def_axiom
-  (assert
-  (forall ((temp___467 Bool))
-  (forall ((temp___468 Int))
-  (= (select (temp___465 temp___467) temp___468) temp___467))))
-
-(declare-fun temp___471 (Bool) (Array Int Bool))
+(declare-fun temp___427 (Bool) (Array Int Bool))
 
 ;; def_axiom
   (assert
-  (forall ((temp___473 Bool))
-  (forall ((temp___474 Int))
-  (= (select (temp___471 temp___473) temp___474) temp___473))))
+  (forall ((temp___429 Bool))
+  (forall ((temp___430 Int))
+  (= (select (temp___427 temp___429) temp___430) temp___429))))
+
+(declare-fun temp___433 (Bool) (Array Int Bool))
+
+;; def_axiom
+  (assert
+  (forall ((temp___435 Bool))
+  (forall ((temp___436 Int))
+  (= (select (temp___433 temp___435) temp___436) temp___435))))
 
 (define-fun dynamic_invariant ((temp___expr_149 Int)
   (temp___is_init_146 Bool) (temp___skip_constant_147 Bool)
@@ -478,8 +421,6 @@
 (declare-fun seen () (Array Int Bool))
 
 (declare-fun rank () Int)
-
-(declare-fun o () (Array Int Bool))
 
 (declare-fun result () (Array Int Bool))
 
@@ -502,14 +443,12 @@
 (declare-fun rank3 () Int)
 
 ;; H
-  (assert
-  (= o (stable_marriage__is_permutation_2__seen__aggregate_def (of_int 0))))
-
-;; H
   (assert (= (mk_map__ref1 result) (mk_map__ref1 seen)))
 
 ;; H
-  (assert (= seen1 o))
+  (assert
+  (= seen1 (stable_marriage__is_permutation_2__seen__aggregate_def
+           (of_int 0))))
 
 ;; H
   (assert (= (mk_int__ref result1) (mk_int__ref rank)))

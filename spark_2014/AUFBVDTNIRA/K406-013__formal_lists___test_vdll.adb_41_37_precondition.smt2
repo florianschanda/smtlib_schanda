@@ -987,12 +987,10 @@
   (forall ((container us_rep))
   (forall ((position us_rep1))
   (forall ((result__ Int))
-  (! (=> (test_element__function_guard
-     (test_element container position result__) container position result__)
-     (= (= (test_element container position result__) true)
-     (= (element container position) result__))) :pattern ((test_element
-                                                           container position
-                                                           result__)) )))))
+  (! (= (= (test_element container position result__) true)
+     (= (element container position) result__)) :pattern ((test_element
+                                                          container position
+                                                          result__)) )))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
 
@@ -1392,7 +1390,7 @@
 
 (declare-fun o1 () us_split_fields2)
 
-(declare-fun temp___451 () us_rep1)
+(declare-fun temp___443 () us_rep1)
 
 (declare-fun us () Int)
 
@@ -1433,10 +1431,10 @@
   (assert (= o1 (mk___split_fields1 o)))
 
 ;; H
-  (assert (= temp___451 (mk___rep1 o1)))
+  (assert (= temp___443 (mk___rep1 o1)))
 
 ;; H
-  (assert (= temp___451 no_element))
+  (assert (= temp___443 no_element))
 
 ;; H
   (assert (and (= us 3) (in_range2 3)))

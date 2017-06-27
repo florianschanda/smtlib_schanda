@@ -1110,16 +1110,13 @@
 ;; f__post_axiom
   (assert
   (forall ((e Int))
-  (! (=> (dynamic_invariant8 e true true true)
-     (let ((result (f e)))
-     (=> (f__function_guard result e) (dynamic_invariant8 result true false
-     true)))) :pattern ((f e)) )))
+  (! (=> (dynamic_invariant8 e true true true) (dynamic_invariant8 (f e) true
+     false true)) :pattern ((f e)) )))
 
 ;; f__def_axiom
   (assert
   (forall ((e Int))
-  (! (=>
-     (and (dynamic_invariant8 e true true true) (f__function_guard (f e) e))
+  (! (=> (dynamic_invariant8 e true true true)
      (= (f e) (ite (and (<= (- 100) e) (<= e 100)) (* e 2) e))) :pattern (
   (f e)) )))
 
@@ -1488,17 +1485,6 @@
 
 ;; H
   (assert
-  (forall ((i1 Int)) (f__function_guard
-  (f
-  (get
-  (model__ (mk___rep s__split_discrs (mk___split_fields s__split_fields)))
-  (get1 (keys (mk___rep s__split_discrs s__split_fields2)) i1)))
-  (get
-  (model__ (mk___rep s__split_discrs (mk___split_fields s__split_fields)))
-  (get1 (keys (mk___rep s__split_discrs s__split_fields2)) i1)))))
-
-;; H
-  (assert
   (= (oeq3 (positions (mk___rep s__split_discrs s__split_fields2))
      (positions
      (mk___rep s__split_discrs (mk___split_fields s__split_fields)))) true))
@@ -1650,7 +1636,7 @@
 
 ;; H
   (assert
-  (and (and (= o9 (f o8)) (f__function_guard o9 o8))
+  (and (= o9 (f o8))
   (and (in_range9 o9)
   (= o9 (ite (and (<= (- 100) o8) (<= o8 100)) (* o8 2) o8)))))
 

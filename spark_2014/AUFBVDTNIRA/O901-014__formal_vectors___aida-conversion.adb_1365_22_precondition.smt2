@@ -372,7 +372,6 @@
   (forall ((c Int))
   (! (=> (dynamic_invariant2 c true true true)
      (let ((result (is_digit c)))
-     (=> (is_digit__function_guard result c)
      (ite (= c 48) (= result true)
      (ite (= c 49) (= result true)
      (ite (= c 50) (= result true)
@@ -383,7 +382,7 @@
      (ite (= c 55) (= result true)
      (ite (= c 56) (= result true)
      (ite (= c 57) (= result true)
-     (ite (< 57 c) (not (= result true)) (=> (< c 48) (not (= result true))))))))))))))))) :pattern (
+     (ite (< 57 c) (not (= result true)) (=> (< c 48) (not (= result true)))))))))))))))) :pattern (
   (is_digit c)) )))
 
 (declare-fun convert_character_digit_to_integer (Int) Int)
@@ -411,12 +410,10 @@
 ;; convert_character_digit_to_integer__post_axiom
   (assert
   (forall ((source1 Int))
-  (! (and (is_digit__function_guard (is_digit source1) source1)
-     (=>
+  (! (=>
      (and (dynamic_invariant2 source1 true true true)
      (= (is_digit source1) true))
      (let ((result (convert_character_digit_to_integer source1)))
-     (=> (convert_character_digit_to_integer__function_guard result source1)
      (and
      (and (and (<= 0 result) (<= result 9))
      (ite (= source1 48) (= result 0)
@@ -428,14 +425,14 @@
      (ite (= source1 54) (= result 6)
      (ite (= source1 55) (= result 7)
      (ite (= source1 56) (= result 8) (=> (= source1 57) (= result 9))))))))))))
-     (dynamic_invariant result true false true)))))) :pattern ((convert_character_digit_to_integer
-                                                               source1)) )))
+     (dynamic_invariant result true false true)))) :pattern ((convert_character_digit_to_integer
+                                                             source1)) )))
 
 (declare-fun target () Int)
 
 (declare-fun n () Int)
 
-(declare-fun temp___2130 () Int)
+(declare-fun temp___1814 () Int)
 
 (declare-fun o () Int)
 
@@ -448,12 +445,6 @@
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range1 target)))
-
-;; H
-  (assert
-  (forall ((index Int)) (is_digit__function_guard
-  (is_digit (to_rep (select (elts source) index)))
-  (to_rep (select (elts source) index)))))
 
 ;; H
   (assert
@@ -491,25 +482,22 @@
 
 ;; H
   (assert
-  (and (= temp___2130 (+ (to_rep1 (first (rt source))) 10)) (in_range1
+  (and (= temp___1814 (+ (to_rep1 (first (rt source))) 10)) (in_range1
   (+ (to_rep1 (first (rt source))) 10))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___2130)
-  (<= temp___2130 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___1814)
+  (<= temp___1814 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o temp___2130))
+  (assert (= o temp___1814))
 
 ;; H
   (assert (= o1 (select (elts source) o)))
 
 ;; H
   (assert (= o2 (to_rep o1)))
-
-;; H
-  (assert (is_digit__function_guard (is_digit o2) o2))
 
 (assert
 ;; WP_parameter_def

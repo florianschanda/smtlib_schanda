@@ -439,8 +439,7 @@
 ;; empty__def_axiom
   (assert
   (forall ((a us_t))
-  (! (=> (empty__function_guard (empty a) a)
-     (= (= (empty a) true) (< (last1 a) (first1 a)))) :pattern ((empty a)) )))
+  (! (= (= (empty a) true) (< (last1 a) (first1 a))) :pattern ((empty a)) )))
 
 (declare-fun sorted (us_t) Bool)
 
@@ -452,13 +451,12 @@
 ;; sorted__def_axiom
   (assert
   (forall ((a us_t))
-  (! (=> (sorted__function_guard (sorted a) a)
-     (= (= (sorted a) true)
+  (! (= (= (sorted a) true)
      (forall ((i1 Int))
      (=> (and (<= (first1 a) i1) (<= i1 (last1 a)))
      (forall ((i2 Int))
      (=> (and (<= i1 i2) (<= i2 (last1 a)))
-     (<= (to_rep (select (to_array a) i1)) (to_rep (select (to_array a) i2))))))))) :pattern (
+     (<= (to_rep (select (to_array a) i1)) (to_rep (select (to_array a) i2)))))))) :pattern (
   (sorted a)) )))
 
 (declare-fun a () us_t)
@@ -563,11 +561,11 @@
 
 (declare-fun binary_search__search__result5 () Int)
 
-(declare-fun temp___172 () Int)
+(declare-fun temp___170 () Int)
 
 (declare-fun result5 () Int)
 
-(declare-fun temp___1721 () Int)
+(declare-fun temp___1701 () Int)
 
 (declare-fun result6 () Int)
 
@@ -594,9 +592,6 @@
   (assert (in_range1 i))
 
 ;; H
-  (assert (sorted__function_guard (sorted a) a))
-
-;; H
   (assert (= (sorted a) true))
 
 ;; H
@@ -610,7 +605,7 @@
 
 ;; H
   (assert
-  (and (and (= result (empty a)) (empty__function_guard result a))
+  (and (= result (empty a))
   (= (= result true) (< (to_rep1 (last (rt a))) (to_rep1 (first (rt a)))))))
 
 ;; H
@@ -745,10 +740,10 @@
   (=> (<= 1 2147483646) (in_range3 med1))) (<= left2 right2)))
 
 ;; H
-  (assert (= temp___172 result5))
+  (assert (= temp___170 result5))
 
 ;; H
-  (assert (= temp___1721 (- right2 left2)))
+  (assert (= temp___1701 (- right2 left2)))
 
 ;; H
   (assert

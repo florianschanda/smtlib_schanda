@@ -79,7 +79,7 @@
 (declare-fun y1 () Bool)
 
 ;; H
-  (assert (and (= o (get s)) (get__function_guard o s)))
+  (assert (= o (get s)))
 
 ;; H
   (assert (= result x))
@@ -88,7 +88,7 @@
   (assert (= x1 o))
 
 ;; H
-  (assert (and (= o1 (get s1)) (get__function_guard o1 s1)))
+  (assert (= o1 (get s1)))
 
 ;; H
   (assert (= result1 y))

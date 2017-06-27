@@ -128,6 +128,8 @@
 
 (declare-fun o1 () pt)
 
+(declare-fun us_self__compl () pt)
+
 (declare-fun result () Int)
 
 (declare-fun x1 () Int)
@@ -139,6 +141,12 @@
 (declare-fun po () pt)
 
 (declare-fun inrange__pt__add_out__i1 () Int)
+
+(declare-fun us_self__compl1 () pt)
+
+(declare-fun result2 () pt)
+
+(declare-fun po1 () pt)
 
 ;; H
   (assert (= result x))
@@ -168,9 +176,18 @@
   (assert (= o1 po))
 
 ;; H
+  (assert (= o1 us_self__compl))
+
+;; H
   (assert
   (and (= inrange__pt__add_out__i1 (+ inrange__pt__add_out__i y1)) (in_range
   inrange__pt__add_out__i1)))
+
+;; H
+  (assert (= po result2))
+
+;; H
+  (assert (= po1 us_self__compl1))
 
 (assert
 ;; WP_parameter_def

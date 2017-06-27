@@ -86,8 +86,7 @@
 ;; is_zero__def_axiom
   (assert
   (forall ((x Int))
-  (! (=> (is_zero__function_guard (is_zero x) x)
-     (= (= (is_zero x) true) (= x 0))) :pattern ((is_zero x)) )))
+  (! (= (= (is_zero x) true) (= x 0)) :pattern ((is_zero x)) )))
 
 (declare-fun z () Int)
 
@@ -95,9 +94,6 @@
 
 ;; H
   (assert (in_range1 z))
-
-;; H
-  (assert (is_zero__function_guard (is_zero z) z))
 
 ;; H
   (assert (and (not (= z 1)) (= (is_zero z) true)))

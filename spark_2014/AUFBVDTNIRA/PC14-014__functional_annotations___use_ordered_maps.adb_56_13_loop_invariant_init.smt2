@@ -1056,16 +1056,13 @@
 ;; f__post_axiom
   (assert
   (forall ((e Int))
-  (! (=> (dynamic_invariant7 e true true true)
-     (let ((result (f e)))
-     (=> (f__function_guard result e) (dynamic_invariant7 result true false
-     true)))) :pattern ((f e)) )))
+  (! (=> (dynamic_invariant7 e true true true) (dynamic_invariant7 (f e) true
+     false true)) :pattern ((f e)) )))
 
 ;; f__def_axiom
   (assert
   (forall ((e Int))
-  (! (=>
-     (and (dynamic_invariant7 e true true true) (f__function_guard (f e) e))
+  (! (=> (dynamic_invariant7 e true true true)
      (= (f e) (ite (and (<= (- 100) e) (<= e 100)) (* e 2) e))) :pattern (
   (f e)) )))
 
@@ -1458,16 +1455,16 @@
 ;; H
   (assert (= result1 true))
 
-(define-fun temp___731 () us_rep3 (keys
+(define-fun temp___690 () us_rep3 (keys
                                   (mk___rep r__split_discrs r__split_fields1)))
 
-(declare-fun temp___730 () Int)
+(declare-fun temp___689 () Int)
 
 ;; H
-  (assert (in_range3 temp___730))
+  (assert (in_range3 temp___689))
 
 ;; H
-  (assert (= (iter_has_element temp___731 temp___730) true))
+  (assert (= (iter_has_element temp___690 temp___689) true))
 
 (assert
 ;; WP_parameter_def
@@ -1477,5 +1474,5 @@
   (and
   (and (<= 1 i)
   (<= i (- (get1 (positions s) (mk___rep1 cu__split_fields2)) 1)))
-  (= (get temp___731 temp___730) (get (keys s) i))))))
+  (= (get temp___690 temp___689) (get (keys s) i))))))
 (check-sat)

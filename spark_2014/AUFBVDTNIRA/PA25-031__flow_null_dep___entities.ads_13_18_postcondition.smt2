@@ -104,20 +104,16 @@
   (assert
   (forall ((entities__current_cycles Int))
   (! (=> (dynamic_invariant entities__current_cycles true true true)
-     (let ((result (get_current_cycles entities__current_cycles)))
-     (=> (get_current_cycles__function_guard result entities__current_cycles)
-     (dynamic_invariant result true false true)))) :pattern ((get_current_cycles
-                                                             entities__current_cycles)) )))
+     (dynamic_invariant (get_current_cycles entities__current_cycles) true
+     false true)) :pattern ((get_current_cycles entities__current_cycles)) )))
 
 ;; get_current_cycles__post_refine_axiom
   (assert
   (forall ((entities__current_cycles Int))
   (! (=> (dynamic_invariant entities__current_cycles true true true)
      (let ((result (get_current_cycles1 entities__current_cycles)))
-     (=> (get_current_cycles__function_guard1 result
-     entities__current_cycles)
      (and (= result entities__current_cycles) (dynamic_invariant result true
-     false true))))) :pattern ((get_current_cycles1 entities__current_cycles)) )))
+     false true)))) :pattern ((get_current_cycles1 entities__current_cycles)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -133,19 +129,16 @@
   (assert
   (forall ((entities__current_id Int))
   (! (=> (dynamic_invariant1 entities__current_id true true true)
-     (let ((result (get_current_id entities__current_id)))
-     (=> (get_current_id__function_guard result entities__current_id)
-     (dynamic_invariant1 result true false true)))) :pattern ((get_current_id
-                                                              entities__current_id)) )))
+     (dynamic_invariant1 (get_current_id entities__current_id) true false
+     true)) :pattern ((get_current_id entities__current_id)) )))
 
 ;; get_current_id__post_refine_axiom
   (assert
   (forall ((entities__current_id Int))
   (! (=> (dynamic_invariant1 entities__current_id true true true)
      (let ((result (get_current_id1 entities__current_id)))
-     (=> (get_current_id__function_guard1 result entities__current_id)
      (and (= result entities__current_id) (dynamic_invariant1 result true
-     false true))))) :pattern ((get_current_id1 entities__current_id)) )))
+     false true)))) :pattern ((get_current_id1 entities__current_id)) )))
 
 (declare-fun current_id () Int)
 
@@ -196,10 +189,6 @@
 
 ;; H
   (assert (= current_id3 current_id1))
-
-;; H
-  (assert (get_current_id__function_guard1 (get_current_id1 current_id2)
-  current_id2))
 
 (assert
 ;; WP_parameter_def

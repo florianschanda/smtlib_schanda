@@ -180,12 +180,12 @@
 
 (declare-fun capacity__function_guard (Int us_rep) Bool)
 
-(define-fun dynamic_invariant ((temp___expr_202 Int)
-  (temp___is_init_199 Bool) (temp___skip_constant_200 Bool)
-  (temp___do_toplevel_201 Bool)) Bool (=>
-                                      (or (= temp___is_init_199 true)
+(define-fun dynamic_invariant ((temp___expr_201 Int)
+  (temp___is_init_198 Bool) (temp___skip_constant_199 Bool)
+  (temp___do_toplevel_200 Bool)) Bool (=>
+                                      (or (= temp___is_init_198 true)
                                       (<= 0 2147483647)) (in_range
-                                      temp___expr_202)))
+                                      temp___expr_201)))
 
 (declare-fun length (us_rep) Int)
 
@@ -313,12 +313,12 @@
 (define-fun extended_index__ref___projection ((a extended_index__ref)) extended_index 
   (extended_index__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_196 Int)
-  (temp___is_init_193 Bool) (temp___skip_constant_194 Bool)
-  (temp___do_toplevel_195 Bool)) Bool (=>
-                                      (or (= temp___is_init_193 true)
+(define-fun dynamic_invariant1 ((temp___expr_195 Int)
+  (temp___is_init_192 Bool) (temp___skip_constant_193 Bool)
+  (temp___do_toplevel_194 Bool)) Bool (=>
+                                      (or (= temp___is_init_192 true)
                                       (<= 0 2147483647)) (in_range2
-                                      temp___expr_196)))
+                                      temp___expr_195)))
 
 (declare-fun is_empty (us_rep) Bool)
 
@@ -375,12 +375,12 @@
 (define-fun index_type__ref___projection ((a index_type__ref)) index_type 
   (index_type__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_184 Int)
-  (temp___is_init_181 Bool) (temp___skip_constant_182 Bool)
-  (temp___do_toplevel_183 Bool)) Bool (=>
-                                      (or (= temp___is_init_181 true)
+(define-fun dynamic_invariant2 ((temp___expr_183 Int)
+  (temp___is_init_180 Bool) (temp___skip_constant_181 Bool)
+  (temp___do_toplevel_182 Bool)) Bool (=>
+                                      (or (= temp___is_init_180 true)
                                       (<= 1 2147483647)) (in_range3
-                                      temp___expr_184)))
+                                      temp___expr_183)))
 
 (define-fun element ((container us_rep)
   (index Int)) Int (get (model__ container) index))
@@ -410,12 +410,12 @@
 (define-fun element_type__ref___projection ((a element_type__ref)) element_type 
   (element_type__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_190 Int)
-  (temp___is_init_187 Bool) (temp___skip_constant_188 Bool)
-  (temp___do_toplevel_189 Bool)) Bool (=>
-                                      (or (= temp___is_init_187 true)
+(define-fun dynamic_invariant3 ((temp___expr_189 Int)
+  (temp___is_init_186 Bool) (temp___skip_constant_187 Bool)
+  (temp___do_toplevel_188 Bool)) Bool (=>
+                                      (or (= temp___is_init_186 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range4 temp___expr_190)))
+                                      (in_range4 temp___expr_189)))
 
 (define-fun equal_except ((left us_rep1) (right us_rep1)
   (position Int)) Bool (and (= (length1 left) (length1 right)) (ite (forall
@@ -627,12 +627,6 @@
 
 (declare-fun lt__function_guard (Bool Int Int) Bool)
 
-;; temp___result_132_def
-  (assert
-  (forall ((container us_rep1) (i Int) (j Int)) (lt__function_guard
-  (lt (get container i) (get container j)) (get container i)
-  (get container j))))
-
 (define-fun m_elements_sorted ((container us_rep1)) Bool (ite (forall
                                                               ((i Int))
                                                               (=>
@@ -725,22 +719,22 @@
 (declare-datatypes () ((tvS__ref (mk_tvS__ref (tvS__content us_rep)))))
 (define-fun tvS__ref___projection ((a tvS__ref)) us_rep (tvS__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_328 us_rep)
-  (temp___is_init_325 Bool) (temp___skip_constant_326 Bool)
-  (temp___do_toplevel_327 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_326 true))
-                                      (in_range5 2 temp___expr_328)))
+(define-fun dynamic_invariant4 ((temp___expr_325 us_rep)
+  (temp___is_init_322 Bool) (temp___skip_constant_323 Bool)
+  (temp___do_toplevel_324 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_323 true))
+                                      (in_range5 2 temp___expr_325)))
 
-(define-fun default_initial_assumption ((temp___expr_330 us_rep)
-  (temp___skip_top_level_331 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_327 us_rep)
+  (temp___skip_top_level_328 Bool)) Bool (and
                                          (= (to_rep
                                             (rec__unbounded__vect__vector__capacity
                                             (us_split_discrs1
-                                            temp___expr_330))) 2)
+                                            temp___expr_327))) 2)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_331 true))
-                                         (= (is_empty temp___expr_330) true))))
+                                         (= temp___skip_top_level_328 true))
+                                         (= (is_empty temp___expr_327) true))))
 
 (declare-fun v__split_discrs () us_split_discrs)
 
@@ -785,8 +779,7 @@
 ;; lt__def_axiom
   (assert
   (forall ((left Int) (right Int))
-  (! (=> (lt__function_guard (lt left right) left right)
-     (= (= (lt left right) true) (< left right))) :pattern ((lt left right)) )))
+  (! (= (= (lt left right) true) (< left right)) :pattern ((lt left right)) )))
 
 (declare-sort count_type 0)
 
@@ -809,23 +802,23 @@
 (define-fun count_type__ref___projection ((a count_type__ref)) count_type 
   (count_type__content a))
 
-(define-fun dynamic_invariant6 ((temp___expr_142 Int)
-  (temp___is_init_139 Bool) (temp___skip_constant_140 Bool)
-  (temp___do_toplevel_141 Bool)) Bool (=>
-                                      (or (= temp___is_init_139 true)
+(define-fun dynamic_invariant6 ((temp___expr_141 Int)
+  (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
+  (temp___do_toplevel_140 Bool)) Bool (=>
+                                      (or (= temp___is_init_138 true)
                                       (<= 0 2147483647)) (in_range7
-                                      temp___expr_142)))
+                                      temp___expr_141)))
 
 ;; user_eq__def_axiom
   (assert
   (forall ((a us_rep1) (b us_rep1))
   (! (= (user_eq2 a b) (oeq1 a b)) :pattern ((user_eq2 a b)) )))
 
-(define-fun default_initial_assumption1 ((temp___expr_236 us_rep1)
-  (temp___skip_top_level_237 Bool)) Bool (=>
+(define-fun default_initial_assumption1 ((temp___expr_235 us_rep1)
+  (temp___skip_top_level_236 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_237 true))
-                                         (= (length1 temp___expr_236) 0)))
+                                         (= temp___skip_top_level_236 true))
+                                         (= (length1 temp___expr_235) 0)))
 
 ;; model____post_axiom
   (assert
@@ -855,12 +848,12 @@
 (define-fun extended_index__ref_2__projection ((a extended_index__ref1)) extended_index1 
   (extended_index__content1 a))
 
-(define-fun dynamic_invariant7 ((temp___expr_229 Int)
-  (temp___is_init_226 Bool) (temp___skip_constant_227 Bool)
-  (temp___do_toplevel_228 Bool)) Bool (=>
-                                      (or (= temp___is_init_226 true)
+(define-fun dynamic_invariant7 ((temp___expr_228 Int)
+  (temp___is_init_225 Bool) (temp___skip_constant_226 Bool)
+  (temp___do_toplevel_227 Bool)) Bool (=>
+                                      (or (= temp___is_init_225 true)
                                       (<= 0 2147483647)) (in_range8
-                                      temp___expr_229)))
+                                      temp___expr_228)))
 
 ;; length__post_axiom
   (assert
@@ -892,12 +885,12 @@
 (define-fun element_type__ref_2__projection ((a element_type__ref1)) element_type1 
   (element_type__content1 a))
 
-(define-fun dynamic_invariant8 ((temp___expr_223 Int)
-  (temp___is_init_220 Bool) (temp___skip_constant_221 Bool)
-  (temp___do_toplevel_222 Bool)) Bool (=>
-                                      (or (= temp___is_init_220 true)
+(define-fun dynamic_invariant8 ((temp___expr_222 Int)
+  (temp___is_init_219 Bool) (temp___skip_constant_220 Bool)
+  (temp___do_toplevel_221 Bool)) Bool (=>
+                                      (or (= temp___is_init_219 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range9 temp___expr_223)))
+                                      (in_range9 temp___expr_222)))
 
 ;; get__post_axiom
   (assert

@@ -505,25 +505,6 @@
                                       (to_rep
                                       (select temp___expr_197 temp___198)))))))
 
-(declare-sort t5b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 1)))
-
-(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq6 (t5b t5b) Bool)
-
-(declare-fun dummy6 () t5b)
-
-(declare-datatypes () ((t5b__ref (mk_t5b__ref (t5b__content t5b)))))
-(define-fun t5b__ref___projection ((a1 t5b__ref)) t5b (t5b__content a1))
-
 (declare-fun should_fail2 () (Array Int integer))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)

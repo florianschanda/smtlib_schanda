@@ -309,12 +309,12 @@
 (define-fun full_width_type__ref___projection ((a full_width_type__ref)) full_width_type 
   (full_width_type__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_158 Int)
-  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
-  (temp___do_toplevel_157 Bool)) Bool (=>
-                                      (or (= temp___is_init_155 true)
+(define-fun dynamic_invariant1 ((temp___expr_156 Int)
+  (temp___is_init_153 Bool) (temp___skip_constant_154 Bool)
+  (temp___do_toplevel_155 Bool)) Bool (=>
+                                      (or (= temp___is_init_153 true)
                                       (<= 0 200)) (in_range3
-                                      temp___expr_158)))
+                                      temp___expr_156)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
@@ -342,9 +342,6 @@
 
 ;; H
   (assert (in_range1 y))
-
-;; H
-  (assert (in_bounds__function_guard (in_bounds c) c))
 
 ;; H
   (assert (= (in_bounds c) true))

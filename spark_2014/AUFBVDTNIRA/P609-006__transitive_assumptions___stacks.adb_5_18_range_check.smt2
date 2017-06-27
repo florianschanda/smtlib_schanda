@@ -255,19 +255,15 @@
   (assert
   (forall ((top Int))
   (forall ((data (Array Int integer)))
-  (! (=> (dynamic_invariant1 top true true true)
-     (let ((result (size top data)))
-     (=> (size__function_guard result top data) (dynamic_invariant2 result
-     true false true)))) :pattern ((size top data)) ))))
+  (! (=> (dynamic_invariant1 top true true true) (dynamic_invariant2
+     (size top data) true false true)) :pattern ((size top data)) ))))
 
 ;; size__def_axiom
   (assert
   (forall ((top Int))
   (forall ((data (Array Int integer)))
-  (! (=>
-     (and (dynamic_invariant1 top true true true) (size__function_guard
-     (size top data) top data)) (= (size top data) top)) :pattern ((size top
-                                                                   data)) ))))
+  (! (=> (dynamic_invariant1 top true true true) (= (size top data) top)) :pattern (
+  (size top data)) ))))
 
 (declare-fun is_full (Int (Array Int integer)) Bool)
 
@@ -280,9 +276,7 @@
   (assert
   (forall ((top Int))
   (forall ((data (Array Int integer)))
-  (! (=> (is_full__function_guard (is_full top data) top data)
-     (and (size__function_guard (size top data) top data)
-     (= (= (is_full top data) true) (= (size top data) 10)))) :pattern (
+  (! (= (= (is_full top data) true) (= (size top data) 10)) :pattern (
   (is_full top data)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -302,9 +296,6 @@
 
 ;; H
   (assert (in_range e))
-
-;; H
-  (assert (is_full__function_guard (is_full top data) top data))
 
 ;; H
   (assert (not (= (is_full top data) true)))

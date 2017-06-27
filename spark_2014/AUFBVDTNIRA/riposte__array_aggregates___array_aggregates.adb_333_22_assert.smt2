@@ -218,12 +218,12 @@
 (define-fun small_index_t__ref___projection ((a small_index_t__ref)) small_index_t 
   (small_index_t__content a))
 
-(define-fun dynamic_invariant ((temp___expr_275 Int)
-  (temp___is_init_272 Bool) (temp___skip_constant_273 Bool)
-  (temp___do_toplevel_274 Bool)) Bool (=>
-                                      (or (= temp___is_init_272 true)
+(define-fun dynamic_invariant ((temp___expr_267 Int)
+  (temp___is_init_264 Bool) (temp___skip_constant_265 Bool)
+  (temp___do_toplevel_266 Bool)) Bool (=>
+                                      (or (= temp___is_init_264 true)
                                       (<= 1 1000)) (in_range2
-                                      temp___expr_275)))
+                                      temp___expr_267)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -231,47 +231,26 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(declare-sort t101b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 1000)))
-
-(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq2 (t101b t101b) Bool)
-
-(declare-fun dummy2 () t101b)
-
-(declare-datatypes () ((t101b__ref (mk_t101b__ref (t101b__content t101b)))))
-(define-fun t101b__ref___projection ((a t101b__ref)) t101b (t101b__content a))
-
-(declare-fun temp___601 (Int Int Int) (Array Int enum_t))
+(declare-fun temp___593 (Int Int Int) (Array Int enum_t))
 
 ;; def_axiom
   (assert
-  (forall ((temp___603 Int) (temp___604 Int) (temp___605 Int))
-  (let ((temp___602 (temp___601 temp___603 temp___604 temp___605)))
-  (forall ((temp___606 Int))
-  (ite (= temp___606 1000)
-  (= (select temp___602 temp___606) (of_rep temp___604))
-  (ite (or (= temp___606 2) (and (<= 4 temp___606) (<= temp___606 6)))
-  (= (select temp___602 temp___606) (of_rep temp___603))
-  (= (select temp___602 temp___606) (of_rep temp___605))))))))
+  (forall ((temp___595 Int) (temp___596 Int) (temp___597 Int))
+  (let ((temp___594 (temp___593 temp___595 temp___596 temp___597)))
+  (forall ((temp___598 Int))
+  (ite (= temp___598 1000)
+  (= (select temp___594 temp___598) (of_rep temp___596))
+  (ite (or (= temp___598 2) (and (<= 4 temp___598) (<= temp___598 6)))
+  (= (select temp___594 temp___598) (of_rep temp___595))
+  (= (select temp___594 temp___598) (of_rep temp___597))))))))
 
-(define-fun dynamic_invariant1 ((temp___expr_212 Int)
-  (temp___is_init_209 Bool) (temp___skip_constant_210 Bool)
-  (temp___do_toplevel_211 Bool)) Bool (=>
-                                      (or (= temp___is_init_209 true)
-                                      (<= 0 2)) (in_range1 temp___expr_212)))
+(define-fun dynamic_invariant1 ((temp___expr_204 Int)
+  (temp___is_init_201 Bool) (temp___skip_constant_202 Bool)
+  (temp___do_toplevel_203 Bool)) Bool (=>
+                                      (or (= temp___is_init_201 true)
+                                      (<= 0 2)) (in_range1 temp___expr_204)))
 
 (declare-fun x () (Array Int enum_t))
-
-(declare-fun o () (Array Int enum_t))
 
 (declare-fun result () (Array Int enum_t))
 
@@ -281,13 +260,10 @@
   (assert (in_range2 n))
 
 ;; H
-  (assert (= o (temp___601 0 2 1)))
-
-;; H
   (assert (= result x))
 
 ;; H
-  (assert (= x1 o))
+  (assert (= x1 (temp___593 0 2 1)))
 
 (assert
 ;; WP_parameter_def

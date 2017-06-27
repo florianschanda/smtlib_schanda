@@ -144,10 +144,8 @@
   (forall ((a Int) (b Int))
   (! (=>
      (and (dynamic_invariant a true true true) (dynamic_invariant b true true
-     true))
-     (let ((result (gcd a b)))
-     (=> (gcd__function_guard result a b) (dynamic_invariant result true
-     false true)))) :pattern ((gcd a b)) )))
+     true)) (dynamic_invariant (gcd a b) true false true)) :pattern (
+  (gcd a b)) )))
 
 (declare-fun m () Int)
 
@@ -216,12 +214,6 @@
 
 ;; H
   (assert (= d1 n))
-
-;; H
-  (assert (gcd__function_guard (gcd c2 d2) c2 d2))
-
-;; H
-  (assert (gcd__function_guard (gcd m n) m n))
 
 ;; H
   (assert (= (gcd c2 d2) (gcd m n)))

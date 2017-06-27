@@ -204,10 +204,7 @@
   (assert true)
 
 ;; valid__def_axiom
-  (assert
-  (forall ((x us_rep))
-  (! (=> (valid__function_guard (valid x) x) (= (valid x) true)) :pattern (
-  (valid x)) )))
+  (assert (forall ((x us_rep)) (! (= (valid x) true) :pattern ((valid x)) )))
 
 (declare-fun temp___146 () Int)
 
@@ -219,21 +216,17 @@
 
 (declare-fun temp___1473 () Int)
 
-(define-fun temp___1474 () us_rep (mk___rep (mk___split_discrs temp___147)
-                                  (mk___split_fields temp___1471 temp___1472)
-                                  temp___1473))
-
 ;; H
   (assert (in_range temp___146))
 
 ;; H
   (assert (= temp___1473 us_tag))
 
-;; H
-  (assert (valid__function_guard (valid temp___1474) temp___1474))
-
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (= (valid temp___1474) true)))
+  (not
+  (= (valid
+     (mk___rep (mk___split_discrs temp___147)
+     (mk___split_fields temp___1471 temp___1472) temp___1473)) true)))
 (check-sat)

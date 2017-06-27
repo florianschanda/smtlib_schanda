@@ -474,34 +474,24 @@
 ;; user_eq__def_axiom
   (assert
   (forall ((a us_rep1) (b us_rep1))
-  (! (and (oeq__function_guard (oeq a b) a b) (= (user_eq6 a b) (oeq a b))) :pattern (
-  (user_eq6 a b)) )))
+  (! (= (user_eq6 a b) (oeq a b)) :pattern ((user_eq6 a b)) )))
 
-;; temp___result_313_def
-  (assert
-  (forall ((temp___312 us_rep1)) (length__function_guard (length temp___312)
-  temp___312)))
-
-(define-fun default_initial_assumption ((temp___expr_310 us_rep1)
-  (temp___skip_top_level_311 Bool)) Bool (=>
+(define-fun default_initial_assumption ((temp___expr_309 us_rep1)
+  (temp___skip_top_level_310 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_311 true))
-                                         (= (length temp___expr_310) 0)))
+                                         (= temp___skip_top_level_310 true))
+                                         (= (length temp___expr_309) 0)))
 
 ;; length__post_axiom
   (assert
-  (forall ((s us_rep1))
-  (! (let ((result (length s)))
-     (=> (length__function_guard result s) (dynamic_invariant1 result true
-     false true))) :pattern ((length s)) )))
+  (forall ((s us_rep1)) (! (dynamic_invariant1 (length s) true false
+  true) :pattern ((length s)) )))
 
 ;; length__post__dispatch_axiom
   (assert
   (forall ((attr__tag Int))
-  (forall ((s us_rep1))
-  (! (let ((result (length1 attr__tag s)))
-     (=> (length__function_guard1 result attr__tag s) (dynamic_invariant1
-     result true false true))) :pattern ((length1 attr__tag s)) ))))
+  (forall ((s us_rep1)) (! (dynamic_invariant1 (length1 attr__tag s) true
+  false true) :pattern ((length1 attr__tag s)) ))))
 
 (declare-fun get (us_rep1 Int) Int)
 
@@ -550,22 +540,17 @@
   (assert
   (forall ((s us_rep1))
   (forall ((n Int))
-  (! (and (length__function_guard (length s) s)
-     (=>
+  (! (=>
      (and (dynamic_invariant2 n true true true)
-     (and (<= 1 n) (<= n (length s))))
-     (let ((result (get s n)))
-     (=> (get__function_guard result s n) (dynamic_invariant3 result true
-     false true))))) :pattern ((get s n)) ))))
+     (and (<= 1 n) (<= n (length s)))) (dynamic_invariant3 (get s n) true
+     false true)) :pattern ((get s n)) ))))
 
 ;; get__post__dispatch_axiom
   (assert
   (forall ((attr__tag Int) (n Int))
   (forall ((s us_rep1))
-  (! (=> (dynamic_invariant2 n true true true)
-     (let ((result (get1 attr__tag s n)))
-     (=> (get__function_guard1 result attr__tag s n) (dynamic_invariant3
-     result true false true)))) :pattern ((get1 attr__tag s n)) ))))
+  (! (=> (dynamic_invariant2 n true true true) (dynamic_invariant3
+     (get1 attr__tag s n) true false true)) :pattern ((get1 attr__tag s n)) ))))
 
 (declare-fun is_prepend (us_rep1 Int us_rep1) Bool)
 
@@ -580,22 +565,12 @@
   (forall ((s us_rep1) (result__ us_rep1))
   (forall ((e Int))
   (! (=> (dynamic_invariant3 e true true true)
-     (let ((result (is_prepend s e result__)))
-     (and (length__function_guard (length result__) result__)
-     (and (length__function_guard (length s) s)
-     (and (get__function_guard (get result__ 1) result__ 1)
-     (and (length__function_guard (length result__) result__)
-     (and
-     (forall ((m Int)) (get__function_guard (get result__ m) result__ m))
-     (and (forall ((m Int)) (get__function_guard (get s (- m 1)) s (- m 1)))
-     (=> (is_prepend__function_guard result s e result__)
-     (= (= result true)
+     (= (= (is_prepend s e result__) true)
      (and (and (= (length result__) (+ (length s) 1)) (= (get result__ 1) e))
      (forall ((m Int))
      (=> (and (<= 2 m) (<= m (length result__)))
-     (= (get result__ m) (get s (- m 1)))))))))))))))) :pattern ((is_prepend
-                                                                 s e
-                                                                 result__)) ))))
+     (= (get result__ m) (get s (- m 1)))))))) :pattern ((is_prepend s e
+                                                         result__)) ))))
 
 ;; is_prepend__post__dispatch_axiom
   (assert true)
@@ -613,10 +588,7 @@
   (forall ((s us_rep1))
   (forall ((e Int))
   (! (=> (dynamic_invariant3 e true true true)
-     (let ((result (prepend s e)))
-     (and (is_prepend__function_guard (is_prepend s e result) s e result)
-     (=> (prepend__function_guard result s e)
-     (= (is_prepend s e result) true))))) :pattern ((prepend s e)) ))))
+     (= (is_prepend s e (prepend s e)) true)) :pattern ((prepend s e)) ))))
 
 ;; prepend__post__dispatch_axiom
   (assert true)
@@ -642,15 +614,10 @@
   (assert
   (forall ((s us_rep1))
   (forall ((n Int))
-  (! (and (length__function_guard (length s) s)
-     (=>
+  (! (=>
      (and (dynamic_invariant2 n true true true)
      (and (<= 1 n) (<= n (length s))))
-     (let ((result (remove_at s n)))
-     (and (is_removed_at__function_guard (is_removed_at s n result) s n
-     result)
-     (=> (remove_at__function_guard result s n)
-     (= (is_removed_at s n result) true)))))) :pattern ((remove_at s n)) ))))
+     (= (is_removed_at s n (remove_at s n)) true)) :pattern ((remove_at s n)) ))))
 
 ;; remove_at__post__dispatch_axiom
   (assert true)
@@ -756,29 +723,18 @@
 ;; user_eq__def_axiom
   (assert
   (forall ((a us_rep2) (b us_rep2))
-  (! (and (oeq__function_guard2 (oeq2 a b) a b)
-     (= (user_eq9 a b) (oeq2 a b))) :pattern ((user_eq9 a b)) )))
+  (! (= (user_eq9 a b) (oeq2 a b)) :pattern ((user_eq9 a b)) )))
 
-;; temp___result_403_def
-  (assert
-  (forall ((temp___402 us_rep1)) (length__function_guard (length temp___402)
-  temp___402)))
-
-;; temp___result_406_def
-  (assert
-  (forall ((temp___405 us_rep1)) (length__function_guard (length temp___405)
-  temp___405)))
-
-(define-fun default_initial_assumption1 ((temp___expr_399 us_rep2)
-  (temp___skip_top_level_400 Bool)) Bool (and
+(define-fun default_initial_assumption1 ((temp___expr_316 us_rep2)
+  (temp___skip_top_level_317 Bool)) Bool (and
                                          (= (length
                                             (rec__list_allocator__m__t__available
                                             (us_split_fields3
-                                            temp___expr_399))) 0)
+                                            temp___expr_316))) 0)
                                          (= (length
                                             (rec__list_allocator__m__t__allocated
                                             (us_split_fields3
-                                            temp___expr_399))) 0)))
+                                            temp___expr_316))) 0)))
 
 ;; oeq__post_axiom
   (assert true)
@@ -786,23 +742,12 @@
 ;; oeq__def_axiom
   (assert
   (forall ((x us_rep2) (y us_rep2))
-  (! (=> (oeq__function_guard2 (oeq2 x y) x y)
-     (and (oeq__function_guard
-     (oeq (rec__list_allocator__m__t__available (us_split_fields3 x))
-     (rec__list_allocator__m__t__available (us_split_fields3 y)))
-     (rec__list_allocator__m__t__available (us_split_fields3 x))
-     (rec__list_allocator__m__t__available (us_split_fields3 y)))
-     (and (oeq__function_guard
-     (oeq (rec__list_allocator__m__t__allocated (us_split_fields3 x))
-     (rec__list_allocator__m__t__allocated (us_split_fields3 y)))
-     (rec__list_allocator__m__t__allocated (us_split_fields3 x))
-     (rec__list_allocator__m__t__allocated (us_split_fields3 y)))
-     (= (= (oeq2 x y) true)
+  (! (= (= (oeq2 x y) true)
      (and
      (= (oeq (rec__list_allocator__m__t__available (us_split_fields3 x))
         (rec__list_allocator__m__t__available (us_split_fields3 y))) true)
      (= (oeq (rec__list_allocator__m__t__allocated (us_split_fields3 x))
-        (rec__list_allocator__m__t__allocated (us_split_fields3 y))) true)))))) :pattern (
+        (rec__list_allocator__m__t__allocated (us_split_fields3 y))) true))) :pattern (
   (oeq2 x y)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -818,12 +763,9 @@
   (assert
   (forall ((s us_rep1))
   (forall ((r Int))
-  (! (=> (mem__function_guard (mem s r) s r)
-     (and (length__function_guard (length s) s)
-     (and (forall ((j Int)) (get__function_guard (get s j) s j))
-     (= (= (mem s r) true)
+  (! (= (= (mem s r) true)
      (exists ((j Int))
-     (and (and (<= 1 j) (<= j (length s))) (= (get s j) r))))))) :pattern (
+     (and (and (<= 1 j) (<= j (length s))) (= (get s j) r)))) :pattern (
   (mem s r)) ))))
 
 (declare-fun find (us_rep1 Int) Int)
@@ -836,14 +778,10 @@
   (forall ((r Int))
   (! (=> (dynamic_invariant r true true true)
      (let ((result (find s r)))
-     (and (mem__function_guard (mem s r) s r)
-     (and (length__function_guard (length s) s)
-     (and (get__function_guard (get s result) s result)
-     (=> (find__function_guard result s r)
      (and
      (ite (= (mem s r) true)
      (and (and (<= 1 result) (<= result (length s))) (= (get s result) r))
-     (= result 0)) (dynamic_invariant1 result true false true)))))))) :pattern (
+     (= result 0)) (dynamic_invariant1 result true false true)))) :pattern (
   (find s r)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
@@ -864,218 +802,7 @@
   (forall ((list_allocator__data (Array Int us_rep)))
   (forall ((list_allocator__first_available Int)
   (list_allocator__first_allocated Int))
-  (! (=> (is_valid__function_guard
-     (is_valid list_allocator__m__model__fields list_allocator__data
-     list_allocator__first_available list_allocator__first_allocated)
-     list_allocator__m__model__fields list_allocator__data
-     list_allocator__first_available list_allocator__first_allocated)
-     (and (length__function_guard
-     (length
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))))
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))))
-     (and (get__function_guard
-     (get
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) 1)
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) 1)
-     (and (length__function_guard
-     (length
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))))
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))))
-     (and (length__function_guard
-     (length
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))))
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))))
-     (and (get__function_guard
-     (get
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) 1)
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) 1)
-     (and (length__function_guard
-     (length
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))))
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))))
-     (and (length__function_guard
-     (length
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))))
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))))
-     (and
-     (forall ((j Int)) (get__function_guard
-     (get
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) j)
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) j))
-     (and
-     (forall ((j Int)) (get__function_guard
-     (get
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) j)
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) j))
-     (and (length__function_guard
-     (length
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))))
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))))
-     (and
-     (forall ((j Int)) (get__function_guard
-     (get
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields)))
-     (+ j 1))
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields)))
-     (+ j 1)))
-     (and
-     (forall ((j Int)) (get__function_guard
-     (get
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) j)
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) j))
-     (and
-     (forall ((j Int)) (get__function_guard
-     (get
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields)))
-     (- j 1))
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields)))
-     (- j 1)))
-     (and (length__function_guard
-     (length
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))))
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))))
-     (and
-     (forall ((j Int)) (get__function_guard
-     (get
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) j)
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) j))
-     (and
-     (forall ((k Int)) (get__function_guard
-     (get
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) k)
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) k))
-     (and (length__function_guard
-     (length
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))))
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))))
-     (and
-     (forall ((j Int)) (get__function_guard
-     (get
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) j)
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) j))
-     (and
-     (forall ((j Int)) (get__function_guard
-     (get
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) j)
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) j))
-     (and (length__function_guard
-     (length
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))))
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))))
-     (and
-     (forall ((j Int)) (get__function_guard
-     (get
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields)))
-     (+ j 1))
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields)))
-     (+ j 1)))
-     (and
-     (forall ((j Int)) (get__function_guard
-     (get
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) j)
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) j))
-     (and
-     (forall ((j Int)) (get__function_guard
-     (get
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields)))
-     (- j 1))
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields)))
-     (- j 1)))
-     (and (length__function_guard
-     (length
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))))
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))))
-     (and
-     (forall ((j Int)) (get__function_guard
-     (get
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) j)
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) j))
-     (and
-     (forall ((k Int)) (get__function_guard
-     (get
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) k)
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) k))
-     (and
-     (forall ((r Int)) (mem__function_guard
-     (mem
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) r)
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) r))
-     (and
-     (forall ((r Int)) (mem__function_guard
-     (mem
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) r)
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) r))
-     (and
-     (forall ((r Int)) (mem__function_guard
-     (mem
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) r)
-     (rec__list_allocator__m__t__available
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) r))
-     (and
-     (forall ((r Int)) (mem__function_guard
-     (mem
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) r)
-     (rec__list_allocator__m__t__allocated
-     (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) r))
-     (=
+  (! (=
      (= (is_valid list_allocator__m__model__fields list_allocator__data
         list_allocator__first_available list_allocator__first_allocated) true)
      (and
@@ -1234,7 +961,7 @@
         (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) r) true))
      (= (mem
         (rec__list_allocator__m__t__allocated
-        (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) r) true)))))))))))))))))))))))))))))))))))))) :pattern (
+        (us_split_fields3 (mk___rep1 list_allocator__m__model__fields))) r) true))))))) :pattern (
   (is_valid list_allocator__m__model__fields list_allocator__data
   list_allocator__first_available list_allocator__first_allocated)) )))))
 
@@ -1253,11 +980,11 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(define-fun dynamic_invariant5 ((temp___expr_507 Int)
-  (temp___is_init_504 Bool) (temp___skip_constant_505 Bool)
-  (temp___do_toplevel_506 Bool)) Bool (=>
-                                      (or (= temp___is_init_504 true)
-                                      (<= 0 1)) (in_range5 temp___expr_507)))
+(define-fun dynamic_invariant5 ((temp___expr_331 Int)
+  (temp___is_init_328 Bool) (temp___skip_constant_329 Bool)
+  (temp___do_toplevel_330 Bool)) Bool (=>
+                                      (or (= temp___is_init_328 true)
+                                      (<= 0 1)) (in_range5 temp___expr_331)))
 
 (define-fun dynamic_invariant6 ((temp___expr_290 Int)
   (temp___is_init_287 Bool) (temp___skip_constant_288 Bool)
@@ -1268,17 +995,10 @@
 ;; oeq__post_axiom
   (assert
   (forall ((s1 us_rep1) (s2 us_rep1))
-  (! (let ((result (oeq s1 s2)))
-     (and (length__function_guard (length s1) s1)
-     (and (length__function_guard (length s2) s2)
-     (and (length__function_guard (length s1) s1)
-     (and (forall ((n Int)) (get__function_guard (get s1 n) s1 n))
-     (and (forall ((n Int)) (get__function_guard (get s2 n) s2 n))
-     (=> (oeq__function_guard result s1 s2)
-     (= (= result true)
+  (! (= (= (oeq s1 s2) true)
      (and (= (length s1) (length s2))
      (forall ((n Int))
-     (=> (and (<= 1 n) (<= n (length s1))) (= (get s1 n) (get s2 n))))))))))))) :pattern (
+     (=> (and (<= 1 n) (<= n (length s1))) (= (get s1 n) (get s2 n)))))) :pattern (
   (oeq s1 s2)) )))
 
 ;; oeq__post__dispatch_axiom
@@ -1288,27 +1008,15 @@
   (assert
   (forall ((s us_rep1) (result__ us_rep1))
   (forall ((n Int))
-  (! (and (length__function_guard (length s) s)
-     (=>
+  (! (=>
      (and (dynamic_invariant2 n true true true)
      (and (<= 1 n) (<= n (length s))))
-     (let ((result (is_removed_at s n result__)))
-     (and (length__function_guard (length result__) result__)
-     (and (length__function_guard (length s) s)
-     (and (length__function_guard (length result__) result__)
-     (and
-     (forall ((m Int)) (get__function_guard (get result__ m) result__ m))
-     (and (forall ((m Int)) (get__function_guard (get s m) s m))
-     (and
-     (forall ((m Int)) (get__function_guard (get result__ m) result__ m))
-     (and (forall ((m Int)) (get__function_guard (get s (+ m 1)) s (+ m 1)))
-     (=> (is_removed_at__function_guard result s n result__)
-     (= (= result true)
+     (= (= (is_removed_at s n result__) true)
      (and (= (length result__) (- (length s) 1))
      (forall ((m Int))
      (=> (and (<= 1 m) (<= m (length result__)))
      (ite (< m n) (= (get result__ m) (get s m))
-     (=> (<= n m) (= (get result__ m) (get s (+ m 1)))))))))))))))))))) :pattern (
+     (=> (<= n m) (= (get result__ m) (get s (+ m 1)))))))))) :pattern (
   (is_removed_at s n result__)) ))))
 
 ;; is_removed_at__post__dispatch_axiom
@@ -1440,13 +1148,13 @@
 
 (declare-fun o55 () us_split_fields2)
 
-(declare-fun temp___795 () us_rep2)
+(declare-fun temp___422 () us_rep2)
 
 (declare-fun o56 () us_rep1)
 
 (declare-fun o57 () us_split_fields2)
 
-(declare-fun temp___797 () us_rep2)
+(declare-fun temp___424 () us_rep2)
 
 (declare-fun model____split_fields2 () us_split_fields2)
 
@@ -1521,419 +1229,6 @@
 (declare-fun prev_alloc4 () Int)
 
 (declare-fun next_alloc4 () Int)
-
-;; H
-  (assert (is_valid__function_guard
-  (is_valid (mk___split_fields1 model____split_fields model____split_fields1)
-  data first_available first_allocated)
-  (mk___split_fields1 model____split_fields model____split_fields1) data
-  first_available first_allocated))
-
-;; H
-  (assert (mem__function_guard (mem model____split_fields1 res)
-  model____split_fields1 res))
-
-;; H
-  (assert (length__function_guard (length model____split_fields1)
-  model____split_fields1))
-
-;; H
-  (assert (get__function_guard (get model____split_fields1 o52)
-  model____split_fields1 o52))
-
-;; H
-  (assert (is_removed_at__function_guard
-  (is_removed_at model____split_fields1 o53 o54) model____split_fields1 
-  o53 o54))
-
-;; H
-  (assert (is_prepend__function_guard
-  (is_prepend (rec__list_allocator__m__t__available model____split_fields3)
-  res o56) (rec__list_allocator__m__t__available model____split_fields3) 
-  res o56))
-
-;; H
-  (assert (length__function_guard
-  (length (rec__list_allocator__m__t__available model____split_fields4))
-  (rec__list_allocator__m__t__available model____split_fields4)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__available model____split_fields4) j)
-  (rec__list_allocator__m__t__available model____split_fields4) j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__available model____split_fields4) j)
-  (rec__list_allocator__m__t__available model____split_fields4) j)))
-
-;; H
-  (assert (length__function_guard
-  (length (rec__list_allocator__m__t__available model____split_fields4))
-  (rec__list_allocator__m__t__available model____split_fields4)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__available model____split_fields4) (+ j 1))
-  (rec__list_allocator__m__t__available model____split_fields4) (+ j 1))))
-
-;; H
-  (assert (length__function_guard
-  (length (rec__list_allocator__m__t__allocated model____split_fields4))
-  (rec__list_allocator__m__t__allocated model____split_fields4)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__allocated model____split_fields4) j)
-  (rec__list_allocator__m__t__allocated model____split_fields4) j)))
-
-;; H
-  (assert (length__function_guard
-  (length (rec__list_allocator__m__t__allocated model____split_fields4))
-  (rec__list_allocator__m__t__allocated model____split_fields4)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__allocated model____split_fields4) j)
-  (rec__list_allocator__m__t__allocated model____split_fields4) j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__allocated model____split_fields4) j)
-  (rec__list_allocator__m__t__allocated model____split_fields4) j)))
-
-;; H
-  (assert (length__function_guard
-  (length (rec__list_allocator__m__t__allocated model____split_fields4))
-  (rec__list_allocator__m__t__allocated model____split_fields4)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__allocated model____split_fields4) (+ j 1))
-  (rec__list_allocator__m__t__allocated model____split_fields4) (+ j 1))))
-
-;; H
-  (assert (length__function_guard
-  (length (rec__list_allocator__m__t__available model____split_fields4))
-  (rec__list_allocator__m__t__available model____split_fields4)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__available model____split_fields4) j)
-  (rec__list_allocator__m__t__available model____split_fields4) j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__available model____split_fields4) j)
-  (rec__list_allocator__m__t__available model____split_fields4) j)))
-
-;; H
-  (assert (length__function_guard
-  (length (rec__list_allocator__m__t__available model____split_fields4))
-  (rec__list_allocator__m__t__available model____split_fields4)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__available model____split_fields4) (+ j 1))
-  (rec__list_allocator__m__t__available model____split_fields4) (+ j 1))))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__available model____split_fields4) j)
-  (rec__list_allocator__m__t__available model____split_fields4) j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__available model____split_fields4) (- j 1))
-  (rec__list_allocator__m__t__available model____split_fields4) (- j 1))))
-
-;; H
-  (assert (length__function_guard
-  (length (rec__list_allocator__m__t__available model____split_fields4))
-  (rec__list_allocator__m__t__available model____split_fields4)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__available model____split_fields4) j)
-  (rec__list_allocator__m__t__available model____split_fields4) j)))
-
-;; H
-  (assert
-  (forall ((k Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__available model____split_fields4) k)
-  (rec__list_allocator__m__t__available model____split_fields4) k)))
-
-;; H
-  (assert (length__function_guard
-  (length (rec__list_allocator__m__t__allocated model____split_fields4))
-  (rec__list_allocator__m__t__allocated model____split_fields4)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__allocated model____split_fields4) j)
-  (rec__list_allocator__m__t__allocated model____split_fields4) j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__allocated model____split_fields4) j)
-  (rec__list_allocator__m__t__allocated model____split_fields4) j)))
-
-;; H
-  (assert (length__function_guard
-  (length (rec__list_allocator__m__t__allocated model____split_fields4))
-  (rec__list_allocator__m__t__allocated model____split_fields4)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__allocated model____split_fields4) (+ j 1))
-  (rec__list_allocator__m__t__allocated model____split_fields4) (+ j 1))))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__allocated model____split_fields4) j)
-  (rec__list_allocator__m__t__allocated model____split_fields4) j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__allocated model____split_fields4) (- j 1))
-  (rec__list_allocator__m__t__allocated model____split_fields4) (- j 1))))
-
-;; H
-  (assert (length__function_guard
-  (length (rec__list_allocator__m__t__allocated model____split_fields4))
-  (rec__list_allocator__m__t__allocated model____split_fields4)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__allocated model____split_fields4) j)
-  (rec__list_allocator__m__t__allocated model____split_fields4) j)))
-
-;; H
-  (assert
-  (forall ((k Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__allocated model____split_fields4) k)
-  (rec__list_allocator__m__t__allocated model____split_fields4) k)))
-
-;; H
-  (assert
-  (forall ((r Int)) (mem__function_guard
-  (mem (rec__list_allocator__m__t__available model____split_fields4) r)
-  (rec__list_allocator__m__t__available model____split_fields4) r)))
-
-;; H
-  (assert
-  (forall ((r Int)) (mem__function_guard
-  (mem (rec__list_allocator__m__t__allocated model____split_fields4) r)
-  (rec__list_allocator__m__t__allocated model____split_fields4) r)))
-
-;; H
-  (assert
-  (forall ((r Int)) (mem__function_guard
-  (mem (rec__list_allocator__m__t__available model____split_fields4) r)
-  (rec__list_allocator__m__t__available model____split_fields4) r)))
-
-;; H
-  (assert
-  (forall ((r Int)) (mem__function_guard
-  (mem (rec__list_allocator__m__t__allocated model____split_fields4) r)
-  (rec__list_allocator__m__t__allocated model____split_fields4) r)))
-
-;; H
-  (assert (length__function_guard
-  (length (rec__list_allocator__m__t__available model____split_fields4))
-  (rec__list_allocator__m__t__available model____split_fields4)))
-
-;; H
-  (assert (get__function_guard
-  (get (rec__list_allocator__m__t__available model____split_fields4) 1)
-  (rec__list_allocator__m__t__available model____split_fields4) 1))
-
-;; H
-  (assert (length__function_guard
-  (length (rec__list_allocator__m__t__available model____split_fields4))
-  (rec__list_allocator__m__t__available model____split_fields4)))
-
-;; H
-  (assert (length__function_guard
-  (length (rec__list_allocator__m__t__allocated model____split_fields4))
-  (rec__list_allocator__m__t__allocated model____split_fields4)))
-
-;; H
-  (assert (get__function_guard
-  (get (rec__list_allocator__m__t__allocated model____split_fields4) 1)
-  (rec__list_allocator__m__t__allocated model____split_fields4) 1))
-
-;; H
-  (assert (length__function_guard
-  (length (rec__list_allocator__m__t__allocated model____split_fields4))
-  (rec__list_allocator__m__t__allocated model____split_fields4)))
-
-;; H
-  (assert (length__function_guard
-  (length (rec__list_allocator__m__t__available model____split_fields4))
-  (rec__list_allocator__m__t__available model____split_fields4)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__available model____split_fields4) j)
-  (rec__list_allocator__m__t__available model____split_fields4) j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__available model____split_fields4) j)
-  (rec__list_allocator__m__t__available model____split_fields4) j)))
-
-;; H
-  (assert (length__function_guard
-  (length (rec__list_allocator__m__t__available model____split_fields4))
-  (rec__list_allocator__m__t__available model____split_fields4)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__available model____split_fields4) (+ j 1))
-  (rec__list_allocator__m__t__available model____split_fields4) (+ j 1))))
-
-;; H
-  (assert (length__function_guard
-  (length (rec__list_allocator__m__t__allocated model____split_fields4))
-  (rec__list_allocator__m__t__allocated model____split_fields4)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__allocated model____split_fields4) j)
-  (rec__list_allocator__m__t__allocated model____split_fields4) j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__allocated model____split_fields4) j)
-  (rec__list_allocator__m__t__allocated model____split_fields4) j)))
-
-;; H
-  (assert (length__function_guard
-  (length (rec__list_allocator__m__t__allocated model____split_fields4))
-  (rec__list_allocator__m__t__allocated model____split_fields4)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard
-  (get (rec__list_allocator__m__t__allocated model____split_fields4) (+ j 1))
-  (rec__list_allocator__m__t__allocated model____split_fields4) (+ j 1))))
-
-;; H
-  (assert
-  (forall ((r Int)) (mem__function_guard
-  (mem (rec__list_allocator__m__t__available model____split_fields4) r)
-  (rec__list_allocator__m__t__available model____split_fields4) r)))
-
-;; H
-  (assert
-  (forall ((r Int)) (mem__function_guard
-  (mem (rec__list_allocator__m__t__allocated model____split_fields4) r)
-  (rec__list_allocator__m__t__allocated model____split_fields4) r)))
-
-;; H
-  (assert
-  (forall ((r Int)) (mem__function_guard
-  (mem (rec__list_allocator__m__t__available model____split_fields4) r)
-  (rec__list_allocator__m__t__available model____split_fields4) r)))
-
-;; H
-  (assert
-  (forall ((r Int)) (mem__function_guard
-  (mem (rec__list_allocator__m__t__allocated model____split_fields4) r)
-  (rec__list_allocator__m__t__allocated model____split_fields4) r)))
-
-;; H
-  (assert (mem__function_guard (mem model____split_fields1 res)
-  model____split_fields1 res))
-
-;; H
-  (assert (is_prepend__function_guard
-  (is_prepend model____split_fields res
-  (rec__list_allocator__m__t__available
-  (us_split_fields__content1 model____split_fields5))) model____split_fields
-  res
-  (rec__list_allocator__m__t__available
-  (us_split_fields__content1 model____split_fields5))))
-
-;; H
-  (assert (length__function_guard
-  (length
-  (rec__list_allocator__m__t__allocated
-  (us_split_fields__content1 model____split_fields5)))
-  (rec__list_allocator__m__t__allocated
-  (us_split_fields__content1 model____split_fields5))))
-
-;; H
-  (assert (length__function_guard (length model____split_fields1)
-  model____split_fields1))
-
-;; H
-  (assert (length__function_guard (length model____split_fields1)
-  model____split_fields1))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard (get model____split_fields1 j)
-  model____split_fields1 j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard (get model____split_fields1 j)
-  model____split_fields1 j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (get__function_guard (get model____split_fields1 j)
-  model____split_fields1 j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (mem__function_guard
-  (mem
-  (rec__list_allocator__m__t__allocated
-  (us_split_fields__content1 model____split_fields5))
-  (get model____split_fields1 j))
-  (rec__list_allocator__m__t__allocated
-  (us_split_fields__content1 model____split_fields5))
-  (get model____split_fields1 j))))
-
-;; H
-  (assert (mem__function_guard (mem model____split_fields1 res)
-  model____split_fields1 res))
-
-;; H
-  (assert (oeq__function_guard2
-  (oeq2 (mk___rep1 (us_split_fields__content1 model____split_fields5))
-  (mk___rep1
-  (mk___split_fields1 model____split_fields model____split_fields1)))
-  (mk___rep1 (us_split_fields__content1 model____split_fields5))
-  (mk___rep1
-  (mk___split_fields1 model____split_fields model____split_fields1))))
 
 ;; H
   (assert (in_range3 first_available))
@@ -2228,9 +1523,7 @@
 ;; H
   (assert
   (=> (= result true)
-  (and
-  (and (= o52 (find model____split_fields1 res)) (find__function_guard 
-  o52 model____split_fields1 res))
+  (and (= o52 (find model____split_fields1 res))
   (and (in_range6 o52)
   (ite (= (mem model____split_fields1 res) true)
   (and (and (<= 1 o52) (<= o52 (length model____split_fields1)))
@@ -2242,9 +1535,7 @@
 ;; H
   (assert
   (=> (= result true)
-  (and
   (and (= o54 (remove_at model____split_fields1 o53))
-  (remove_at__function_guard o54 model____split_fields1 o53))
   (= (is_removed_at model____split_fields1 o53 o54) true))))
 
 ;; H
@@ -2252,7 +1543,7 @@
   (=> (= result true) (= o55 (mk___split_fields1 model____split_fields o54))))
 
 ;; H
-  (assert (=> (= result true) (= temp___795 (mk___rep1 o55))))
+  (assert (=> (= result true) (= temp___422 (mk___rep1 o55))))
 
 ;; H
   (assert
@@ -2264,18 +1555,15 @@
 ;; H
   (assert
   (=> (= result true)
-  (= model____split_fields3 (us_split_fields3 temp___795))))
+  (= model____split_fields3 (us_split_fields3 temp___422))))
 
 ;; H
   (assert
   (=> (= result true)
   (and
-  (and
   (= o56 (prepend
          (rec__list_allocator__m__t__available model____split_fields3) 
          res))
-  (prepend__function_guard o56
-  (rec__list_allocator__m__t__available model____split_fields3) res))
   (= (is_prepend
      (rec__list_allocator__m__t__available model____split_fields3) res 
      o56) true))))
@@ -2287,7 +1575,7 @@
          (rec__list_allocator__m__t__allocated model____split_fields3)))))
 
 ;; H
-  (assert (=> (= result true) (= temp___797 (mk___rep1 o57))))
+  (assert (=> (= result true) (= temp___424 (mk___rep1 o57))))
 
 ;; H
   (assert
@@ -2297,7 +1585,7 @@
 ;; H
   (assert
   (=> (= result true)
-  (= model____split_fields4 (us_split_fields3 temp___797))))
+  (= model____split_fields4 (us_split_fields3 temp___424))))
 
 ;; H
   (assert
@@ -2636,14 +1924,6 @@
   (= (oeq2 (mk___rep1 (us_split_fields__content1 model____split_fields5))
      (mk___rep1
      (mk___split_fields1 model____split_fields model____split_fields1))) true)))
-
-;; H
-  (assert (is_valid__function_guard
-  (is_valid (us_split_fields__content1 model____split_fields5)
-  (map__content data5) (int__content first_available3)
-  (int__content first_allocated3))
-  (us_split_fields__content1 model____split_fields5) (map__content data5)
-  (int__content first_available3) (int__content first_allocated3)))
 
 (assert
 ;; WP_parameter_def

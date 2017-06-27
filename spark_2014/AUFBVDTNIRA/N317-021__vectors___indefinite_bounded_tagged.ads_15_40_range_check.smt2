@@ -96,12 +96,12 @@
 (define-fun count_type__ref___projection ((a count_type__ref)) count_type 
   (count_type__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_212 Int)
-  (temp___is_init_209 Bool) (temp___skip_constant_210 Bool)
-  (temp___do_toplevel_211 Bool)) Bool (=>
-                                      (or (= temp___is_init_209 true)
+(define-fun dynamic_invariant1 ((temp___expr_211 Int)
+  (temp___is_init_208 Bool) (temp___skip_constant_209 Bool)
+  (temp___do_toplevel_210 Bool)) Bool (=>
+                                      (or (= temp___is_init_208 true)
                                       (<= 0 2147483647)) (in_range2
-                                      temp___expr_212)))
+                                      temp___expr_211)))
 
 (declare-sort integer 0)
 
@@ -247,12 +247,12 @@
 (define-fun extended_index__ref___projection ((a extended_index__ref)) extended_index 
   (extended_index__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_243 Int)
-  (temp___is_init_240 Bool) (temp___skip_constant_241 Bool)
-  (temp___do_toplevel_242 Bool)) Bool (=>
-                                      (or (= temp___is_init_240 true)
+(define-fun dynamic_invariant2 ((temp___expr_242 Int)
+  (temp___is_init_239 Bool) (temp___skip_constant_240 Bool)
+  (temp___do_toplevel_241 Bool)) Bool (=>
+                                      (or (= temp___is_init_239 true)
                                       (<= 0 2147483647)) (in_range4
-                                      temp___expr_243)))
+                                      temp___expr_242)))
 
 (declare-fun no_index () Int)
 
@@ -269,8 +269,8 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range3 temp___expr_15)))
 
-(define-fun default_initial_assumption ((temp___expr_219 us_rep)
-  (temp___skip_top_level_220 Bool)) Bool (= (attr__tag temp___expr_219) 
+(define-fun default_initial_assumption ((temp___expr_218 us_rep)
+  (temp___skip_top_level_219 Bool)) Bool (= (attr__tag temp___expr_218) 
   us_tag))
 
 ;; no_index__def_axiom

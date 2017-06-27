@@ -517,10 +517,8 @@
 
 ;; to_number__post_axiom
   (assert
-  (forall ((bool__ Bool))
-  (! (let ((result (to_number bool__)))
-     (=> (to_number__function_guard result bool__) (dynamic_invariant1 result
-     true false true))) :pattern ((to_number bool__)) )))
+  (forall ((bool__ Bool)) (! (dynamic_invariant1 (to_number bool__) true
+  false true) :pattern ((to_number bool__)) )))
 
 (declare-fun array_of_bits () us_t)
 

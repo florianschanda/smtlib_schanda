@@ -242,27 +242,21 @@
 ;; types__t1__compat_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (check____function_guard1 (check__1 us_tag x) us_tag x)
-     (and (check____function_guard (check__ x) x)
-     (= (to_int1 (check__ x)) (to_int1 (check__1 us_tag x))))) :pattern (
+  (! (= (to_int1 (check__ x)) (to_int1 (check__1 us_tag x))) :pattern (
   (check__1 us_tag x)) )))
 
 ;; types__t2__compat_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (check____function_guard1 (check__1 us_tag1 x) us_tag1 x)
-     (and (check__2__function_guard (check__2 x) x)
-     (= (to_int1 (check__2 x)) (to_int1 (check__1 us_tag1 x))))) :pattern (
+  (! (= (to_int1 (check__2 x)) (to_int1 (check__1 us_tag1 x))) :pattern (
   (check__1 us_tag1 x)) )))
 
 ;; check____def_axiom
   (assert
-  (forall ((x us_rep))
-  (! (=> (check____function_guard (check__ x) x) (= (check__ x) true)) :pattern (
-  (check__ x)) )))
+  (forall ((x us_rep)) (! (= (check__ x) true) :pattern ((check__ x)) )))
 
-(define-fun default_initial_assumption1 ((temp___expr_155 us_rep)
-  (temp___skip_top_level_156 Bool)) Bool (= (attr__tag temp___expr_155) 
+(define-fun default_initial_assumption1 ((temp___expr_149 us_rep)
+  (temp___skip_top_level_150 Bool)) Bool (= (attr__tag temp___expr_149) 
   us_tag1))
 
 ;; check__2__post_axiom
@@ -274,28 +268,17 @@
 ;; types__t2__compat_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (check__2__function_guard1 (check__21 us_tag1 x) us_tag1 x)
-     (and (check__2__function_guard (check__2 x) x)
-     (= (to_int1 (check__2 x)) (to_int1 (check__21 us_tag1 x))))) :pattern (
+  (! (= (to_int1 (check__2 x)) (to_int1 (check__21 us_tag1 x))) :pattern (
   (check__21 us_tag1 x)) )))
 
 ;; check__2__def_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (check__2__function_guard (check__2 x) x)
-     (not (= (check__2 x) true))) :pattern ((check__2 x)) )))
+  (! (not (= (check__2 x) true)) :pattern ((check__2 x)) )))
 
 (declare-fun x__split_fields () integer)
 
 (declare-fun x__split_fields1 () us_private)
-
-;; H
-  (assert (check____function_guard
-  (check__
-  (mk___rep (mk___split_fields x__split_fields x__split_fields1)
-  x__attr__tag))
-  (mk___rep (mk___split_fields x__split_fields x__split_fields1)
-  x__attr__tag)))
 
 (assert
 ;; WP_parameter_def

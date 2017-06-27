@@ -51,14 +51,10 @@
 
 (declare-fun pow2 (Int) Int)
 
-(declare-datatypes () ((mode (RNE2) (RNA2) (RTP2) (RTN2) (RTZ2))))
-(define-fun to_nearest ((m mode)) Bool (or (= m RNE2) (= m RNA2)))
+(declare-datatypes () ((mode (RNE1) (RNA1) (RTP1) (RTN1) (RTZ1))))
+(define-fun to_nearest ((m mode)) Bool (or (= m RNE1) (= m RNA1)))
 
 (declare-fun zeroF () t)
-
-(declare-fun abs1 (t) t)
-
-(declare-fun neg (t) t)
 
 (declare-fun add (mode t t) t)
 
@@ -67,6 +63,10 @@
 (declare-fun mul (mode t t) t)
 
 (declare-fun div1 (mode t t) t)
+
+(declare-fun abs1 (t) t)
+
+(declare-fun neg (t) t)
 
 (declare-fun fma (mode t t t) t)
 
@@ -175,16 +175,16 @@
   (=> (tqtisFinite x) (= (round m (tqtreal x)) (tqtreal x)))))
 
 ;; Round_down_le
-  (assert (forall ((x Real)) (<= (round RTN2 x) x)))
+  (assert (forall ((x Real)) (<= (round RTN1 x) x)))
 
 ;; Round_up_ge
-  (assert (forall ((x Real)) (<= x (round RTP2 x))))
+  (assert (forall ((x Real)) (<= x (round RTP1 x))))
 
 ;; Round_down_neg
-  (assert (forall ((x Real)) (= (round RTN2 (- x)) (- (round RTP2 x)))))
+  (assert (forall ((x Real)) (= (round RTN1 (- x)) (- (round RTP1 x)))))
 
 ;; Round_up_neg
-  (assert (forall ((x Real)) (= (round RTP2 (- x)) (- (round RTN2 x)))))
+  (assert (forall ((x Real)) (= (round RTP1 (- x)) (- (round RTN1 x)))))
 
 (define-fun in_safe_int_range ((i Int)) Bool (and (<= (- 16777216) i)
                                              (<= i 16777216)))
@@ -322,10 +322,10 @@
               (=> (diff_sign x y) (is_negative z))))
 
 (define-fun overflow_value ((m mode)
-  (x t)) Bool (ite (is-RTN2 m) (ite (is_positive x)
+  (x t)) Bool (ite (is-RTN1 m) (ite (is_positive x)
                                (and (tqtisFinite x)
                                (= (tqtreal x) (* 33554430.0 10141204801825835211973625643008.0)))
-                               (is_infinite x)) (ite (is-RTP2 m) (ite (is_positive
+                               (is_infinite x)) (ite (is-RTP1 m) (ite (is_positive
                                                                  x)
                                                                  (is_infinite
                                                                  x)
@@ -334,7 +334,7 @@
                                                                  x)
                                                                  (= (tqtreal
                                                                     x) (- (* 33554430.0 10141204801825835211973625643008.0))))) 
-                                                (ite (is-RTZ2 m) (ite (is_positive
+                                                (ite (is-RTZ1 m) (ite (is_positive
                                                                  x)
                                                                  (and
                                                                  (tqtisFinite
@@ -346,12 +346,12 @@
                                                                  x)
                                                                  (= (tqtreal
                                                                     x) (- (* 33554430.0 10141204801825835211973625643008.0))))) 
-                                                (ite (is-RNA2 m) (is_infinite
+                                                (ite (is-RNA1 m) (is_infinite
                                                 x) (is_infinite x))))))
 
 (define-fun sign_zero_result ((m mode)
   (x t)) Bool (=> (is_zero x)
-              (ite (is-RTN2 m) (is_negative x) (is_positive x))))
+              (ite (is-RTN1 m) (is_negative x) (is_positive x))))
 
 ;; add_finite
   (assert
@@ -645,84 +645,84 @@
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (=> (is_negative x) (= (roundToIntegral RTZ2 x) (roundToIntegral RTP2 x))))))
+  (=> (is_negative x) (= (roundToIntegral RTZ1 x) (roundToIntegral RTP1 x))))))
 
 ;; truncate_pos
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (=> (is_positive x) (= (roundToIntegral RTZ2 x) (roundToIntegral RTN2 x))))))
+  (=> (is_positive x) (= (roundToIntegral RTZ1 x) (roundToIntegral RTN1 x))))))
 
 ;; ceil_le
   (assert
-  (forall ((x t)) (=> (tqtisFinite x) (le x (roundToIntegral RTP2 x)))))
+  (forall ((x t)) (=> (tqtisFinite x) (le x (roundToIntegral RTP1 x)))))
 
 ;; ceil_lest
   (assert
   (forall ((x t) (y t))
-  (=> (and (le x y) (is_int1 y)) (le (roundToIntegral RTP2 x) y))))
+  (=> (and (le x y) (is_int1 y)) (le (roundToIntegral RTP1 x) y))))
 
 ;; ceil_to_real
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (= (tqtreal (roundToIntegral RTP2 x)) (to_real (- 1 (to_int (- 1.0 
+  (= (tqtreal (roundToIntegral RTP1 x)) (to_real (- 1 (to_int (- 1.0 
   (tqtreal x)))))))))
 
 ;; ceil_to_int
   (assert
   (forall ((m mode) (x t))
   (=> (tqtisFinite x)
-  (= (to_int1 m (roundToIntegral RTP2 x)) (- 1 (to_int (- 1.0 (tqtreal x))))))))
+  (= (to_int1 m (roundToIntegral RTP1 x)) (- 1 (to_int (- 1.0 (tqtreal x))))))))
 
 ;; floor_le
   (assert
-  (forall ((x t)) (=> (tqtisFinite x) (le (roundToIntegral RTN2 x) x))))
+  (forall ((x t)) (=> (tqtisFinite x) (le (roundToIntegral RTN1 x) x))))
 
 ;; floor_lest
   (assert
   (forall ((x t) (y t))
-  (=> (and (le y x) (is_int1 y)) (le y (roundToIntegral RTN2 x)))))
+  (=> (and (le y x) (is_int1 y)) (le y (roundToIntegral RTN1 x)))))
 
 ;; floor_to_real
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (= (tqtreal (roundToIntegral RTN2 x)) (to_real (to_int (tqtreal x)))))))
+  (= (tqtreal (roundToIntegral RTN1 x)) (to_real (to_int (tqtreal x)))))))
 
 ;; floor_to_int
   (assert
   (forall ((m mode) (x t))
   (=> (tqtisFinite x)
-  (= (to_int1 m (roundToIntegral RTN2 x)) (to_int (tqtreal x))))))
+  (= (to_int1 m (roundToIntegral RTN1 x)) (to_int (tqtreal x))))))
 
 ;; RNA_down
   (assert
   (forall ((x t))
-  (=> (lt (sub RNE2 x (roundToIntegral RTN2 x))
-  (sub RNE2 (roundToIntegral RTP2 x) x))
-  (= (roundToIntegral RNA2 x) (roundToIntegral RTN2 x)))))
+  (=> (lt (sub RNE1 x (roundToIntegral RTN1 x))
+  (sub RNE1 (roundToIntegral RTP1 x) x))
+  (= (roundToIntegral RNA1 x) (roundToIntegral RTN1 x)))))
 
 ;; RNA_up
   (assert
   (forall ((x t))
-  (=> (lt (sub RNE2 (roundToIntegral RTP2 x) x)
-  (sub RNE2 x (roundToIntegral RTN2 x)))
-  (= (roundToIntegral RNA2 x) (roundToIntegral RTP2 x)))))
+  (=> (lt (sub RNE1 (roundToIntegral RTP1 x) x)
+  (sub RNE1 x (roundToIntegral RTN1 x)))
+  (= (roundToIntegral RNA1 x) (roundToIntegral RTP1 x)))))
 
 ;; RNA_down_tie
   (assert
   (forall ((x t))
-  (=> (eq (sub RNE2 x (roundToIntegral RTN2 x))
-  (sub RNE2 (roundToIntegral RTP2 x) x))
-  (=> (is_negative x) (= (roundToIntegral RNA2 x) (roundToIntegral RTN2 x))))))
+  (=> (eq (sub RNE1 x (roundToIntegral RTN1 x))
+  (sub RNE1 (roundToIntegral RTP1 x) x))
+  (=> (is_negative x) (= (roundToIntegral RNA1 x) (roundToIntegral RTN1 x))))))
 
 ;; RNA_up_tie
   (assert
   (forall ((x t))
-  (=> (eq (sub RNE2 (roundToIntegral RTP2 x) x)
-  (sub RNE2 x (roundToIntegral RTN2 x)))
-  (=> (is_positive x) (= (roundToIntegral RNA2 x) (roundToIntegral RTP2 x))))))
+  (=> (eq (sub RNE1 (roundToIntegral RTP1 x) x)
+  (sub RNE1 x (roundToIntegral RTN1 x)))
+  (=> (is_positive x) (= (roundToIntegral RNA1 x) (roundToIntegral RTP1 x))))))
 
 ;; to_int_roundToIntegral
   (assert
@@ -758,12 +758,12 @@
 ;; round_bound_ne
   (assert
   (forall ((x Real))
-  (! (=> (no_overflow RNE2 x)
+  (! (=> (no_overflow RNE1 x)
      (and
      (<= (- (- x (* (/ 1.0 16777216.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 1427247692705959881058285969449495136382746624.0)) 
-     (round RNE2 x))
-     (<= (round RNE2 x) (+ (+ x (* (/ 1.0 16777216.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 1427247692705959881058285969449495136382746624.0))))) :pattern (
-  (round RNE2 x)) )))
+     (round RNE1 x))
+     (<= (round RNE1 x) (+ (+ x (* (/ 1.0 16777216.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 1427247692705959881058285969449495136382746624.0))))) :pattern (
+  (round RNE1 x)) )))
 
 (define-fun neq ((x t) (y t)) Bool (not (eq x y)))
 
@@ -790,7 +790,7 @@
   (assert (is_int1 fliteral))
 
 ;; one_of_int
-  (assert (= fliteral (of_int RNA2 1)))
+  (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
 (declare-sort positive_float 0)
@@ -2543,42 +2543,42 @@
 (define-fun t252s__ref___projection ((a t252s__ref)) us_rep (t252s__content
                                                             a))
 
-(declare-fun temp___630 (t) (Array Int nonnegative_float))
+(declare-fun temp___614 (t) (Array Int nonnegative_float))
 
 ;; def_axiom
   (assert
-  (forall ((temp___632 t))
-  (forall ((temp___633 Int))
-  (= (select (temp___630 temp___632) temp___633) (of_rep3 temp___632)))))
+  (forall ((temp___616 t))
+  (forall ((temp___617 Int))
+  (= (select (temp___614 temp___616) temp___617) (of_rep3 temp___616)))))
 
-(declare-fun temp___634 (us_rep4) (Array Int us_rep4))
+(declare-fun temp___618 (us_rep4) (Array Int us_rep4))
 
 ;; def_axiom
   (assert
-  (forall ((temp___636 us_rep4))
-  (forall ((temp___637 Int))
-  (= (select (temp___634 temp___636) temp___637) temp___636))))
+  (forall ((temp___620 us_rep4))
+  (forall ((temp___621 Int))
+  (= (select (temp___618 temp___620) temp___621) temp___620))))
 
-(define-fun dynamic_invariant ((temp___expr_623 us_rep5)
-  (temp___is_init_620 Bool) (temp___skip_constant_621 Bool)
-  (temp___do_toplevel_622 Bool)) Bool (and
+(define-fun dynamic_invariant ((temp___expr_607 us_rep5)
+  (temp___is_init_604 Bool) (temp___skip_constant_605 Bool)
+  (temp___do_toplevel_606 Bool)) Bool (and
                                       (= (attr__constrained
                                          (rec__robot_iface__proxy__speed
                                          (us_split_fields3
                                          (rec__algorithm__controller__robot
-                                         (us_split_fields11 temp___expr_623))))) false)
+                                         (us_split_fields11 temp___expr_607))))) false)
                                       (in_range7 1000
                                       (rec__algorithm__controller__gapvec
-                                      (us_split_fields11 temp___expr_623)))))
+                                      (us_split_fields11 temp___expr_607)))))
 
-(define-fun default_initial_assumption ((temp___expr_628 us_rep5)
-  (temp___skip_top_level_629 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_612 us_rep5)
+  (temp___skip_top_level_613 Bool)) Bool (and
                                          (and
                                          (and
                                          (and
                                          (= (rec__algorithm__controller__robot
                                             (us_split_fields11
-                                            temp___expr_628)) (mk___rep1
+                                            temp___expr_612)) (mk___rep1
                                                               (mk___split_fields1
                                                               (of_rep
                                                               fliteral1)
@@ -2605,7 +2605,7 @@
                                                               fliteral1)
                                                               (of_rep
                                                               fliteral1)
-                                                              (temp___630
+                                                              (temp___614
                                                               fliteral1)
                                                               (of_rep4
                                                               fliteral1)
@@ -2628,7 +2628,7 @@
                                                               (of_int1 0))))
                                          (= (rec__algorithm__controller__laserscan
                                             (us_split_fields11
-                                            temp___expr_628)) (temp___634
+                                            temp___expr_612)) (temp___618
                                                               (mk___rep4
                                                               (mk___split_fields4
                                                               (of_rep3
@@ -2640,18 +2640,18 @@
                                             (us_split_discrs3
                                             (rec__algorithm__controller__gapvec
                                             (us_split_fields11
-                                            temp___expr_628))))) 1000)
+                                            temp___expr_612))))) 1000)
                                          (= (is_empty
                                             (rec__algorithm__controller__gapvec
                                             (us_split_fields11
-                                            temp___expr_628))) true)))
+                                            temp___expr_612))) true)))
                                          (= (to_rep2
                                             (rec__algorithm__controller__obsavoiddelta
                                             (us_split_fields11
-                                            temp___expr_628))) fliteral1))
+                                            temp___expr_612))) fliteral1))
                                          (= (rec__algorithm__controller__driveangle
                                             (us_split_fields11
-                                            temp___expr_628)) null_angle)))
+                                            temp___expr_612)) null_angle)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -2669,95 +2669,95 @@
                                      (neg fliteral2) fliteral2)) (tqtisFinite
                                      temp___expr_51)))
 
-(define-fun dynamic_invariant3 ((temp___expr_593 us_rep3)
-  (temp___is_init_590 Bool) (temp___skip_constant_591 Bool)
-  (temp___do_toplevel_592 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_591 true))
-                                      (in_range7 1000 temp___expr_593)))
+(define-fun dynamic_invariant3 ((temp___expr_577 us_rep3)
+  (temp___is_init_574 Bool) (temp___skip_constant_575 Bool)
+  (temp___do_toplevel_576 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_575 true))
+                                      (in_range7 1000 temp___expr_577)))
 
-(define-fun default_initial_assumption1 ((temp___expr_595 us_rep3)
-  (temp___skip_top_level_596 Bool)) Bool (and
+(define-fun default_initial_assumption1 ((temp___expr_579 us_rep3)
+  (temp___skip_top_level_580 Bool)) Bool (and
                                          (= (to_rep7
                                             (rec__algorithm__gap_vectors__list__capacity
                                             (us_split_discrs3
-                                            temp___expr_595))) 1000)
+                                            temp___expr_579))) 1000)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_596 true))
-                                         (= (is_empty temp___expr_595) true))))
+                                         (= temp___skip_top_level_580 true))
+                                         (= (is_empty temp___expr_579) true))))
 
-(define-fun dynamic_invariant4 ((temp___expr_236 Int)
+(define-fun dynamic_invariant4 ((temp___expr_220 Int)
+  (temp___is_init_217 Bool) (temp___skip_constant_218 Bool)
+  (temp___do_toplevel_219 Bool)) Bool (=>
+                                      (or (= temp___is_init_217 true)
+                                      (<= 0 1)) (in_range4 temp___expr_220)))
+
+(define-fun default_initial_assumption2 ((temp___expr_228 us_rep)
+  (temp___skip_top_level_229 Bool)) Bool (and
+                                         (= (attr__constrained
+                                            temp___expr_228) false)
+                                         (= (to_rep5
+                                            (rec__robot_iface__speed_option__opt
+                                            (us_split_discrs1
+                                            temp___expr_228))) 0)))
+
+(define-fun dynamic_invariant5 ((temp___expr_236 us_rep1)
   (temp___is_init_233 Bool) (temp___skip_constant_234 Bool)
-  (temp___do_toplevel_235 Bool)) Bool (=>
-                                      (or (= temp___is_init_233 true)
-                                      (<= 0 1)) (in_range4 temp___expr_236)))
-
-(define-fun default_initial_assumption2 ((temp___expr_244 us_rep)
-  (temp___skip_top_level_245 Bool)) Bool (and
-                                         (= (attr__constrained
-                                            temp___expr_244) false)
-                                         (= (to_rep5
-                                            (rec__robot_iface__speed_option__opt
-                                            (us_split_discrs1
-                                            temp___expr_244))) 0)))
-
-(define-fun dynamic_invariant5 ((temp___expr_252 us_rep1)
-  (temp___is_init_249 Bool) (temp___skip_constant_250 Bool)
-  (temp___do_toplevel_251 Bool)) Bool (= (attr__constrained
+  (temp___do_toplevel_235 Bool)) Bool (= (attr__constrained
                                          (rec__robot_iface__proxy__speed
-                                         (us_split_fields3 temp___expr_252))) false))
+                                         (us_split_fields3 temp___expr_236))) false))
 
-(define-fun default_initial_assumption3 ((temp___expr_255 us_rep1)
-  (temp___skip_top_level_256 Bool)) Bool (and
+(define-fun default_initial_assumption3 ((temp___expr_239 us_rep1)
+  (temp___skip_top_level_240 Bool)) Bool (and
                                          (= (attr__constrained
                                             (rec__robot_iface__proxy__speed
                                             (us_split_fields3
-                                            temp___expr_255))) false)
+                                            temp___expr_239))) false)
                                          (= (to_rep5
                                             (rec__robot_iface__speed_option__opt
                                             (us_split_discrs1
                                             (rec__robot_iface__proxy__speed
                                             (us_split_fields3
-                                            temp___expr_255))))) 0)))
+                                            temp___expr_239))))) 0)))
 
-(define-fun dynamic_invariant6 ((temp___expr_149 t) (temp___is_init_146 Bool)
-  (temp___skip_constant_147 Bool)
-  (temp___do_toplevel_148 Bool)) Bool (=>
-                                      (or (= temp___is_init_146 true) (le
+(define-fun dynamic_invariant6 ((temp___expr_140 t) (temp___is_init_137 Bool)
+  (temp___skip_constant_138 Bool)
+  (temp___do_toplevel_139 Bool)) Bool (=>
+                                      (or (= temp___is_init_137 true) (le
                                       fliteral1 fliteral2)) (in_range1
-                                      temp___expr_149)))
+                                      temp___expr_140)))
 
-(define-fun dynamic_invariant7 ((temp___expr_155 t) (temp___is_init_152 Bool)
-  (temp___skip_constant_153 Bool)
-  (temp___do_toplevel_154 Bool)) Bool (=>
-                                      (or (= temp___is_init_152 true) (le
+(define-fun dynamic_invariant7 ((temp___expr_146 t) (temp___is_init_143 Bool)
+  (temp___skip_constant_144 Bool)
+  (temp___do_toplevel_145 Bool)) Bool (=>
+                                      (or (= temp___is_init_143 true) (le
                                       fliteral1 fliteral2)) (in_range3
-                                      temp___expr_155)))
+                                      temp___expr_146)))
 
-(define-fun dynamic_invariant8 ((temp___expr_167 t) (temp___is_init_164 Bool)
-  (temp___skip_constant_165 Bool)
-  (temp___do_toplevel_166 Bool)) Bool (=>
-                                      (or (= temp___is_init_164 true) (le
+(define-fun dynamic_invariant8 ((temp___expr_158 t) (temp___is_init_155 Bool)
+  (temp___skip_constant_156 Bool)
+  (temp___do_toplevel_157 Bool)) Bool (=>
+                                      (or (= temp___is_init_155 true) (le
                                       (neg fliteral2) fliteral2))
-                                      (tqtisFinite temp___expr_167)))
+                                      (tqtisFinite temp___expr_158)))
 
 ;; null_angle__def_axiom
   (assert
   (= null_angle (mk___rep2 (mk___split_fields2 (of_rep6 fliteral1)))))
 
-(define-fun dynamic_invariant9 ((temp___expr_179 t) (temp___is_init_176 Bool)
-  (temp___skip_constant_177 Bool)
-  (temp___do_toplevel_178 Bool)) Bool (=>
-                                      (or (= temp___is_init_176 true) (le
+(define-fun dynamic_invariant9 ((temp___expr_170 t) (temp___is_init_167 Bool)
+  (temp___skip_constant_168 Bool)
+  (temp___do_toplevel_169 Bool)) Bool (=>
+                                      (or (= temp___is_init_167 true) (le
                                       fliteral1 fliteral3)) (in_range5
-                                      temp___expr_179)))
+                                      temp___expr_170)))
 
-(define-fun dynamic_invariant10 ((temp___expr_340 Int)
-  (temp___is_init_337 Bool) (temp___skip_constant_338 Bool)
-  (temp___do_toplevel_339 Bool)) Bool (=>
-                                      (or (= temp___is_init_337 true)
+(define-fun dynamic_invariant10 ((temp___expr_324 Int)
+  (temp___is_init_321 Bool) (temp___skip_constant_322 Bool)
+  (temp___do_toplevel_323 Bool)) Bool (=>
+                                      (or (= temp___is_init_321 true)
                                       (<= 0 2147483647)) (in_range6
-                                      temp___expr_340)))
+                                      temp___expr_324)))
 
 (declare-fun length (us_rep3) Int)
 

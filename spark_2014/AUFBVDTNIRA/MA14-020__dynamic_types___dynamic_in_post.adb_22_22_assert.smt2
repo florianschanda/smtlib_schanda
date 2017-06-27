@@ -345,10 +345,6 @@
                                      (first1 temp___expr_82)
                                      (last1 temp___expr_82))))
 
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -369,9 +365,9 @@
 
 (declare-sort t1 0)
 
-(declare-fun first3 (t1) integer)
+(declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -380,8 +376,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range f)
      (=> (in_range l)
-     (and (= (to_rep1 (first3 (mk1 f l))) f)
-     (= (to_rep1 (last3 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (and (= (to_rep1 (first2 (mk1 f l))) f)
+     (= (to_rep1 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range low)
@@ -397,12 +393,12 @@
 (define-fun of_array1 ((a (Array Int character)) (f Int)
   (l Int)) us_t1 (mk___t1 a (mk1 f l)))
 
-(define-fun first4 ((a us_t1)) Int (to_rep1 (first3 (rt1 a))))
+(define-fun first3 ((a us_t1)) Int (to_rep1 (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep1 (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first4 a) (last4 a))
-                                    (+ (- (last4 a) (first4 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size1 () Int)
 
@@ -436,9 +432,9 @@
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment1 a))))
 
 (define-fun bool_eq6 ((x us_t1)
-  (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep1 (first3 (rt1 x)))
-                  (to_rep1 (last3 (rt1 x))) (elts1 y)
-                  (to_rep1 (first3 (rt1 y))) (to_rep1 (last3 (rt1 y)))))
+  (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep1 (first2 (rt1 x)))
+                  (to_rep1 (last2 (rt1 x))) (elts1 y)
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
 (declare-fun user_eq5 (us_t1 us_t1) Bool)
 
@@ -456,13 +452,12 @@
   (forall ((s us_t))
   (! (=> (dynamic_invariant1 s true true true)
      (let ((result (get_last s)))
-     (=> (get_last__function_guard result s)
      (and
-     (= result (last4
+     (= result (last3
                (let ((temp___178 (last1 s)))
                (let ((temp___177 (first1 s)))
                (of_array1 (to_array s) temp___177 temp___178)))))
-     (dynamic_invariant result true false true))))) :pattern ((get_last s)) )))
+     (dynamic_invariant result true false true)))) :pattern ((get_last s)) )))
 
 (declare-fun x__first () integer)
 
@@ -480,6 +475,22 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
+(declare-fun temp___String_Literal_207 (tuple0) (Array Int character))
+
+;; temp___String_Literal_207__def_axiom
+  (assert
+  (forall ((us_void_param tuple0))
+  (! (and
+     (and
+     (and
+     (and
+     (= (to_rep (select (temp___String_Literal_207 us_void_param) 1)) 104)
+     (= (to_rep (select (temp___String_Literal_207 us_void_param) 2)) 101))
+     (= (to_rep (select (temp___String_Literal_207 us_void_param) 3)) 108))
+     (= (to_rep (select (temp___String_Literal_207 us_void_param) 4)) 108))
+     (= (to_rep (select (temp___String_Literal_207 us_void_param) 5)) 111)) :pattern (
+  (temp___String_Literal_207 us_void_param)) )))
+
 (declare-fun temp___String_Literal_209 (tuple0) (Array Int character))
 
 ;; temp___String_Literal_209__def_axiom
@@ -487,26 +498,10 @@
   (forall ((us_void_param tuple0))
   (! (and
      (and
-     (and
-     (and
-     (= (to_rep (select (temp___String_Literal_209 us_void_param) 1)) 104)
-     (= (to_rep (select (temp___String_Literal_209 us_void_param) 2)) 101))
-     (= (to_rep (select (temp___String_Literal_209 us_void_param) 3)) 108))
-     (= (to_rep (select (temp___String_Literal_209 us_void_param) 4)) 108))
-     (= (to_rep (select (temp___String_Literal_209 us_void_param) 5)) 111)) :pattern (
+     (= (to_rep (select (temp___String_Literal_209 us_void_param) 1)) 121)
+     (= (to_rep (select (temp___String_Literal_209 us_void_param) 2)) 111))
+     (= (to_rep (select (temp___String_Literal_209 us_void_param) 3)) 117)) :pattern (
   (temp___String_Literal_209 us_void_param)) )))
-
-(declare-fun temp___String_Literal_211 (tuple0) (Array Int character))
-
-;; temp___String_Literal_211__def_axiom
-  (assert
-  (forall ((us_void_param tuple0))
-  (! (and
-     (and
-     (= (to_rep (select (temp___String_Literal_211 us_void_param) 1)) 121)
-     (= (to_rep (select (temp___String_Literal_211 us_void_param) 2)) 111))
-     (= (to_rep (select (temp___String_Literal_211 us_void_param) 3)) 117)) :pattern (
-  (temp___String_Literal_211 us_void_param)) )))
 
 (define-fun dynamic_invariant2 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -553,7 +548,7 @@
   (assert (= result x))
 
 ;; H
-  (assert (= x1 (temp___String_Literal_209 Tuple0)))
+  (assert (= x1 (temp___String_Literal_207 Tuple0)))
 
 ;; H
   (assert (= (to_rep1 x__first) (to_rep1 (first (mk 1 5)))))
@@ -569,7 +564,7 @@
   (assert (= result1 y))
 
 ;; H
-  (assert (= y1 (temp___String_Literal_211 Tuple0)))
+  (assert (= y1 (temp___String_Literal_209 Tuple0)))
 
 ;; H
   (assert (= (to_rep1 y__first) (to_rep1 (first (mk 1 3)))))
@@ -583,13 +578,10 @@
 
 ;; H
   (assert
-  (and
   (and (= o (get_last (mk___t x1 (mk (to_rep1 x__first) (to_rep1 x__last)))))
-  (get_last__function_guard o
-  (mk___t x1 (mk (to_rep1 x__first) (to_rep1 x__last)))))
   (and (in_range o)
   (= o (to_rep1
-       (last3
+       (last2
        (mk1 (to_rep1 (first (mk (to_rep1 x__first) (to_rep1 x__last))))
        (to_rep1 (last (mk (to_rep1 x__first) (to_rep1 x__last)))))))))))
 
@@ -605,13 +597,10 @@
 ;; H
   (assert
   (and
-  (and
   (= o1 (get_last (mk___t y1 (mk (to_rep1 y__first) (to_rep1 y__last)))))
-  (get_last__function_guard o1
-  (mk___t y1 (mk (to_rep1 y__first) (to_rep1 y__last)))))
   (and (in_range o1)
   (= o1 (to_rep1
-        (last3
+        (last2
         (mk1 (to_rep1 (first (mk (to_rep1 y__first) (to_rep1 y__last))))
         (to_rep1 (last (mk (to_rep1 y__first) (to_rep1 y__last)))))))))))
 

@@ -489,25 +489,6 @@
 (declare-fun intermediate_form__function_guard (Bool (Array Int integer)
   (Array Int integer)) Bool)
 
-(declare-sort t9b 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 7)))
-
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq5 (t9b t9b) Bool)
-
-(declare-fun dummy5 () t9b)
-
-(declare-datatypes () ((t9b__ref (mk_t9b__ref (t9b__content t9b)))))
-(define-fun t9b__ref___projection ((a t9b__ref)) t9b (t9b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -525,41 +506,99 @@
 
 ;; def_axiom
   (assert
-  (forall ((temp___553 Int) (temp___554 Int) (temp___555 Int)
-  (temp___556 Int) (temp___557 Int) (temp___558 Int) (temp___559 Int)
-  (temp___560 Int))
-  (let ((temp___552 (main__a__aggregate_def temp___553 temp___554 temp___555
-                    temp___556 temp___557 temp___558 temp___559 temp___560)))
+  (forall ((temp___543 Int) (temp___544 Int) (temp___545 Int)
+  (temp___546 Int) (temp___547 Int) (temp___548 Int) (temp___549 Int)
+  (temp___550 Int))
+  (let ((temp___542 (main__a__aggregate_def temp___543 temp___544 temp___545
+                    temp___546 temp___547 temp___548 temp___549 temp___550)))
   (and
   (and
   (and
   (and
   (and
   (and
-  (and (= (select temp___552 0) (of_rep1 temp___553))
-  (= (select temp___552 1) (of_rep1 temp___554)))
-  (= (select temp___552 2) (of_rep1 temp___555)))
-  (= (select temp___552 3) (of_rep1 temp___556)))
-  (= (select temp___552 4) (of_rep1 temp___557)))
-  (= (select temp___552 5) (of_rep1 temp___558)))
-  (= (select temp___552 6) (of_rep1 temp___559)))
-  (= (select temp___552 7) (of_rep1 temp___560))))))
+  (and (= (select temp___542 0) (of_rep1 temp___543))
+  (= (select temp___542 1) (of_rep1 temp___544)))
+  (= (select temp___542 2) (of_rep1 temp___545)))
+  (= (select temp___542 3) (of_rep1 temp___546)))
+  (= (select temp___542 4) (of_rep1 temp___547)))
+  (= (select temp___542 5) (of_rep1 temp___548)))
+  (= (select temp___542 6) (of_rep1 temp___549)))
+  (= (select temp___542 7) (of_rep1 temp___550))))))
 
-(declare-fun temp___String_Literal_562 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_552 (tuple0) (Array Int character))
 
-;; temp___String_Literal_562__def_axiom
+;; temp___String_Literal_552__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 1)) 65)
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 2)) 32))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 3)) 61))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 4)) 32))
-     (= (to_rep (select (temp___String_Literal_562 us_void_param) 5)) 40)) :pattern (
-  (temp___String_Literal_562 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_552 us_void_param) 1)) 65)
+     (= (to_rep (select (temp___String_Literal_552 us_void_param) 2)) 32))
+     (= (to_rep (select (temp___String_Literal_552 us_void_param) 3)) 61))
+     (= (to_rep (select (temp___String_Literal_552 us_void_param) 4)) 32))
+     (= (to_rep (select (temp___String_Literal_552 us_void_param) 5)) 40)) :pattern (
+  (temp___String_Literal_552 us_void_param)) )))
+
+(declare-fun temp___String_Literal_555 (tuple0) (Array Int character))
+
+;; temp___String_Literal_555__def_axiom
+  (assert
+  (forall ((us_void_param tuple0))
+  (! (and
+     (= (to_rep (select (temp___String_Literal_555 us_void_param) 1)) 32)
+     (= (to_rep (select (temp___String_Literal_555 us_void_param) 2)) 41)) :pattern (
+  (temp___String_Literal_555 us_void_param)) )))
+
+(declare-fun temp___String_Literal_556 (tuple0) (Array Int character))
+
+;; temp___String_Literal_556__def_axiom
+  (assert true)
+
+(declare-fun temp___String_Literal_557 (tuple0) (Array Int character))
+
+;; temp___String_Literal_557__def_axiom
+  (assert
+  (forall ((us_void_param tuple0))
+  (! (and
+     (and
+     (= (to_rep (select (temp___String_Literal_557 us_void_param) 1)) 76)
+     (= (to_rep (select (temp___String_Literal_557 us_void_param) 2)) 32))
+     (= (to_rep (select (temp___String_Literal_557 us_void_param) 3)) 61)) :pattern (
+  (temp___String_Literal_557 us_void_param)) )))
+
+(declare-fun temp___String_Literal_560 (tuple0) (Array Int character))
+
+;; temp___String_Literal_560__def_axiom
+  (assert
+  (forall ((us_void_param tuple0))
+  (! (and
+     (and
+     (and
+     (and
+     (= (to_rep (select (temp___String_Literal_560 us_void_param) 1)) 65)
+     (= (to_rep (select (temp___String_Literal_560 us_void_param) 2)) 32))
+     (= (to_rep (select (temp___String_Literal_560 us_void_param) 3)) 61))
+     (= (to_rep (select (temp___String_Literal_560 us_void_param) 4)) 32))
+     (= (to_rep (select (temp___String_Literal_560 us_void_param) 5)) 40)) :pattern (
+  (temp___String_Literal_560 us_void_param)) )))
+
+(declare-fun temp___String_Literal_563 (tuple0) (Array Int character))
+
+;; temp___String_Literal_563__def_axiom
+  (assert
+  (forall ((us_void_param tuple0))
+  (! (and
+     (= (to_rep (select (temp___String_Literal_563 us_void_param) 1)) 32)
+     (= (to_rep (select (temp___String_Literal_563 us_void_param) 2)) 41)) :pattern (
+  (temp___String_Literal_563 us_void_param)) )))
+
+(declare-fun temp___String_Literal_564 (tuple0) (Array Int character))
+
+;; temp___String_Literal_564__def_axiom
+  (assert true)
 
 (declare-fun temp___String_Literal_565 (tuple0) (Array Int character))
 
@@ -567,87 +606,29 @@
   (assert
   (forall ((us_void_param tuple0))
   (! (and
-     (= (to_rep (select (temp___String_Literal_565 us_void_param) 1)) 32)
-     (= (to_rep (select (temp___String_Literal_565 us_void_param) 2)) 41)) :pattern (
+     (and
+     (and
+     (and
+     (= (to_rep (select (temp___String_Literal_565 us_void_param) 1)) 65)
+     (= (to_rep (select (temp___String_Literal_565 us_void_param) 2)) 32))
+     (= (to_rep (select (temp___String_Literal_565 us_void_param) 3)) 61))
+     (= (to_rep (select (temp___String_Literal_565 us_void_param) 4)) 32))
+     (= (to_rep (select (temp___String_Literal_565 us_void_param) 5)) 40)) :pattern (
   (temp___String_Literal_565 us_void_param)) )))
 
-(declare-fun temp___String_Literal_566 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_568 (tuple0) (Array Int character))
 
-;; temp___String_Literal_566__def_axiom
-  (assert true)
-
-(declare-fun temp___String_Literal_567 (tuple0) (Array Int character))
-
-;; temp___String_Literal_567__def_axiom
+;; temp___String_Literal_568__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
-     (and
-     (= (to_rep (select (temp___String_Literal_567 us_void_param) 1)) 76)
-     (= (to_rep (select (temp___String_Literal_567 us_void_param) 2)) 32))
-     (= (to_rep (select (temp___String_Literal_567 us_void_param) 3)) 61)) :pattern (
-  (temp___String_Literal_567 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_568 us_void_param) 1)) 32)
+     (= (to_rep (select (temp___String_Literal_568 us_void_param) 2)) 41)) :pattern (
+  (temp___String_Literal_568 us_void_param)) )))
 
-(declare-fun temp___String_Literal_570 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_569 (tuple0) (Array Int character))
 
-;; temp___String_Literal_570__def_axiom
-  (assert
-  (forall ((us_void_param tuple0))
-  (! (and
-     (and
-     (and
-     (and
-     (= (to_rep (select (temp___String_Literal_570 us_void_param) 1)) 65)
-     (= (to_rep (select (temp___String_Literal_570 us_void_param) 2)) 32))
-     (= (to_rep (select (temp___String_Literal_570 us_void_param) 3)) 61))
-     (= (to_rep (select (temp___String_Literal_570 us_void_param) 4)) 32))
-     (= (to_rep (select (temp___String_Literal_570 us_void_param) 5)) 40)) :pattern (
-  (temp___String_Literal_570 us_void_param)) )))
-
-(declare-fun temp___String_Literal_573 (tuple0) (Array Int character))
-
-;; temp___String_Literal_573__def_axiom
-  (assert
-  (forall ((us_void_param tuple0))
-  (! (and
-     (= (to_rep (select (temp___String_Literal_573 us_void_param) 1)) 32)
-     (= (to_rep (select (temp___String_Literal_573 us_void_param) 2)) 41)) :pattern (
-  (temp___String_Literal_573 us_void_param)) )))
-
-(declare-fun temp___String_Literal_574 (tuple0) (Array Int character))
-
-;; temp___String_Literal_574__def_axiom
-  (assert true)
-
-(declare-fun temp___String_Literal_575 (tuple0) (Array Int character))
-
-;; temp___String_Literal_575__def_axiom
-  (assert
-  (forall ((us_void_param tuple0))
-  (! (and
-     (and
-     (and
-     (and
-     (= (to_rep (select (temp___String_Literal_575 us_void_param) 1)) 65)
-     (= (to_rep (select (temp___String_Literal_575 us_void_param) 2)) 32))
-     (= (to_rep (select (temp___String_Literal_575 us_void_param) 3)) 61))
-     (= (to_rep (select (temp___String_Literal_575 us_void_param) 4)) 32))
-     (= (to_rep (select (temp___String_Literal_575 us_void_param) 5)) 40)) :pattern (
-  (temp___String_Literal_575 us_void_param)) )))
-
-(declare-fun temp___String_Literal_578 (tuple0) (Array Int character))
-
-;; temp___String_Literal_578__def_axiom
-  (assert
-  (forall ((us_void_param tuple0))
-  (! (and
-     (= (to_rep (select (temp___String_Literal_578 us_void_param) 1)) 32)
-     (= (to_rep (select (temp___String_Literal_578 us_void_param) 2)) 41)) :pattern (
-  (temp___String_Literal_578 us_void_param)) )))
-
-(declare-fun temp___String_Literal_579 (tuple0) (Array Int character))
-
-;; temp___String_Literal_579__def_axiom
+;; temp___String_Literal_569__def_axiom
   (assert true)
 
 (define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool)
@@ -684,12 +665,11 @@
   (assert
   (forall ((a (Array Int integer)))
   (forall ((max Int))
-  (! (=> (all_elements_in__function_guard (all_elements_in a max) a max)
-     (= (= (all_elements_in a max) true)
+  (! (= (= (all_elements_in a max) true)
      (forall ((k Int))
      (=> (and (<= 0 k) (<= k 7))
      (and (<= (- max) (to_rep1 (select a k)))
-     (<= (to_rep1 (select a k)) max)))))) :pattern ((all_elements_in a max)) ))))
+     (<= (to_rep1 (select a k)) max))))) :pattern ((all_elements_in a max)) ))))
 
 (declare-fun div1 (Int Int) Int)
 
@@ -764,17 +744,12 @@
   (y Int)) Int (ite (< 0 y) (mod x y) (+ (mod x y) y)))
 
 ;; intermediate_form__post_axiom
-  (assert
-  (forall ((a (Array Int integer)) (b (Array Int integer)))
-  (! (and (all_elements_in__function_guard (all_elements_in a 8000000) a
-     8000000) (all_elements_in__function_guard (all_elements_in b 1000000) b
-     1000000)) :pattern ((intermediate_form a b)) )))
+  (assert true)
 
 ;; intermediate_form__def_axiom
   (assert
   (forall ((a (Array Int integer)) (b (Array Int integer)))
-  (! (=> (intermediate_form__function_guard (intermediate_form a b) a b)
-     (= (= (intermediate_form a b) true)
+  (! (= (= (intermediate_form a b) true)
      (forall ((k Int))
      (=> (and (<= 0 k) (<= k 7))
      (ite (= (mod2 (+ k 1) 8) 0)
@@ -789,7 +764,7 @@
      (ite (= (mod2 (+ k 1) 2) 0)
      (= (to_rep1 (select a k)) (+ (to_rep1 (select b k)) (to_rep1
                                                          (select b (- k 1)))))
-     (= (to_rep1 (select a k)) (to_rep1 (select b k)))))))))) :pattern (
+     (= (to_rep1 (select a k)) (to_rep1 (select b k))))))))) :pattern (
   (intermediate_form a b)) )))
 
 (declare-fun a () (Array Int integer))
@@ -799,8 +774,6 @@
 (declare-fun copy () (Array Int integer))
 
 (declare-fun j () Int)
-
-(declare-fun o () (Array Int integer))
 
 (declare-fun result () (Array Int integer))
 
@@ -825,13 +798,10 @@
 (declare-fun j6 () Int)
 
 ;; H
-  (assert (= o (main__a__aggregate_def 3 1 7 0 4 1 6 3)))
-
-;; H
   (assert (= result a))
 
 ;; H
-  (assert (= a1 o))
+  (assert (= a1 (main__a__aggregate_def 3 1 7 0 4 1 6 3)))
 
 ;; H
   (assert (=> (<= 1 2147483647) (in_range2 space)))
@@ -872,10 +842,6 @@
 
 ;; H
   (assert (=> (not (and (<= 0 j1) (<= j1 7))) (= j6 j1)))
-
-;; H
-  (assert (all_elements_in__function_guard (all_elements_in a1 1000000) 
-  a1 1000000))
 
 (assert
 ;; WP_parameter_def

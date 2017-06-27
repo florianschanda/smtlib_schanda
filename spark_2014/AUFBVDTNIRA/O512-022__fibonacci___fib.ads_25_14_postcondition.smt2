@@ -105,9 +105,8 @@
   (assert
   (forall ((n Int))
   (! (=> (and (dynamic_invariant n true true true) (<= n 7))
-     (let ((result (factorial n)))
-     (=> (factorial__function_guard result n) (dynamic_invariant result true
-     false true)))) :pattern ((factorial n)) )))
+     (dynamic_invariant (factorial n) true false true)) :pattern ((factorial
+                                                                  n)) )))
 
 (declare-fun n1 () Int)
 
@@ -139,8 +138,6 @@
   (! (=> (in_range1 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -160,8 +157,6 @@
 (define-fun t5b__ref___projection ((a t5b__ref)) integer (t5b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
-
-(declare-fun last1 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -198,17 +193,17 @@
 
 (declare-fun i1 () Int)
 
-(declare-fun temp___180 () Int)
+(declare-fun temp___176 () Int)
 
-(declare-fun temp___179 () Int)
+(declare-fun temp___175 () Int)
 
 (declare-fun o () Int)
 
 (declare-fun o1 () Int)
 
-(declare-fun temp___185 () Int)
+(declare-fun temp___180 () Int)
 
-(declare-fun temp___184 () Int)
+(declare-fun temp___179 () Int)
 
 (declare-fun o2 () Int)
 
@@ -299,18 +294,6 @@
 (define-fun p110 () int__ref (mk_int__ref p16))
 
 ;; H
-  (assert (factorial__function_guard (factorial (- i3 1)) (- i3 1)))
-
-;; H
-  (assert (factorial__function_guard (factorial (- i3 1)) (- i3 1)))
-
-;; H
-  (assert (factorial__function_guard (factorial (- i9 1)) (- i9 1)))
-
-;; H
-  (assert (factorial__function_guard (factorial (- i9 1)) (- i9 1)))
-
-;; H
   (assert (in_range2 n1))
 
 ;; H
@@ -338,10 +321,10 @@
   (assert (= i2 2))
 
 ;; H
-  (assert (=> (and (<= 2 i2) (<= i2 n1)) (= temp___180 i2)))
+  (assert (=> (and (<= 2 i2) (<= i2 n1)) (= temp___176 i2)))
 
 ;; H
-  (assert (=> (and (<= 2 i2) (<= i2 n1)) (= temp___179 p11)))
+  (assert (=> (and (<= 2 i2) (<= i2 n1)) (= temp___175 p11)))
 
 ;; H
   (assert (=> (and (<= 2 i2) (<= i2 n1)) (= p12 (factorial (- i3 1)))))
@@ -419,10 +402,10 @@
   (assert (= i8 2))
 
 ;; H
-  (assert (=> (and (<= 2 i8) (<= i8 n2)) (= temp___185 p21)))
+  (assert (=> (and (<= 2 i8) (<= i8 n2)) (= temp___180 p21)))
 
 ;; H
-  (assert (=> (and (<= 2 i8) (<= i8 n2)) (= temp___184 i8)))
+  (assert (=> (and (<= 2 i8) (<= i8 n2)) (= temp___179 i8)))
 
 ;; H
   (assert (=> (and (<= 2 i8) (<= i8 n2)) (= p22 (factorial (- i9 1)))))

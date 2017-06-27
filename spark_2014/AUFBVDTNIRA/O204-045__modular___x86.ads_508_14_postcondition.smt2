@@ -308,9 +308,8 @@
   (forall ((x86__rcx (_ BitVec 64)))
   (! (=> (dynamic_invariant x86__rcx true true true)
      (let ((result (cl x86__rcx)))
-     (=> (cl__function_guard result x86__rcx)
      (and (= result ((_ extract 7 0) (bvand x86__rcx ((_ int2bv 64) 255))))
-     (dynamic_invariant1 result true false true))))) :pattern ((cl x86__rcx)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((cl x86__rcx)) )))
 
 (declare-fun zeroflag () Bool)
 
@@ -352,9 +351,6 @@
 
 ;; H
   (assert (not (= zeroflag true)))
-
-;; H
-  (assert (cl__function_guard (cl rcx3) rcx3))
 
 (assert
 ;; WP_parameter_def

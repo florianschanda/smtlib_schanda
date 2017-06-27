@@ -197,12 +197,12 @@
 
 (declare-fun length__function_guard (Int us_rep) Bool)
 
-(define-fun dynamic_invariant ((temp___expr_142 Int)
-  (temp___is_init_139 Bool) (temp___skip_constant_140 Bool)
-  (temp___do_toplevel_141 Bool)) Bool (=>
-                                      (or (= temp___is_init_139 true)
+(define-fun dynamic_invariant ((temp___expr_141 Int)
+  (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
+  (temp___do_toplevel_140 Bool)) Bool (=>
+                                      (or (= temp___is_init_138 true)
                                       (<= 0 2147483647)) (in_range1
-                                      temp___expr_142)))
+                                      temp___expr_141)))
 
 ;; length__post_axiom
   (assert

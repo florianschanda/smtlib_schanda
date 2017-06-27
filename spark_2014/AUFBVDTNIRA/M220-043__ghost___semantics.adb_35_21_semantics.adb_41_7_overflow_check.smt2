@@ -70,10 +70,9 @@
 
 ;; ghost_func__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (ghost_func us_void_param)))
-     (=> (ghost_func__function_guard result us_void_param) (dynamic_invariant
-     result true false true))) :pattern ((ghost_func us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant
+  (ghost_func us_void_param) true false
+  true) :pattern ((ghost_func us_void_param)) )))
 
 (declare-fun c2b () Int)
 
@@ -94,11 +93,8 @@
 ;; H
   (assert
   (and
-  (and
   (= semantics__check_within_ghost_function__C2b__assume (ghost_func Tuple0))
-  (ghost_func__function_guard
-  semantics__check_within_ghost_function__C2b__assume Tuple0)) (in_range
-  semantics__check_within_ghost_function__C2b__assume)))
+  (in_range semantics__check_within_ghost_function__C2b__assume)))
 
 ;; H
   (assert (= semantics__check_within_ghost_function__C2b__assume c2b))
@@ -110,15 +106,10 @@
   (assert (=> (<= (- 2147483648) 2147483647) (in_range obj)))
 
 ;; H
-  (assert
-  (and
-  (and (= o2 (ghost_func Tuple0)) (ghost_func__function_guard o2 Tuple0))
-  (in_range o2)))
+  (assert (and (= o2 (ghost_func Tuple0)) (in_range o2)))
 
 ;; H
-  (assert
-  (and (and (= o (ghost_func Tuple0)) (ghost_func__function_guard o Tuple0))
-  (in_range o)))
+  (assert (and (= o (ghost_func Tuple0)) (in_range o)))
 
 ;; H
   (assert (= o1 (+ c2b o)))

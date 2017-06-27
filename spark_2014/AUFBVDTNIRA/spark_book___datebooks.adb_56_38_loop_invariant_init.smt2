@@ -1296,11 +1296,11 @@
 (define-fun status_type__ref___projection ((a status_type__ref)) status_type 
   (status_type__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_298 Int)
-  (temp___is_init_295 Bool) (temp___skip_constant_296 Bool)
-  (temp___do_toplevel_297 Bool)) Bool (=>
-                                      (or (= temp___is_init_295 true)
-                                      (<= 0 3)) (in_range13 temp___expr_298)))
+(define-fun dynamic_invariant1 ((temp___expr_294 Int)
+  (temp___is_init_291 Bool) (temp___skip_constant_292 Bool)
+  (temp___do_toplevel_293 Bool)) Bool (=>
+                                      (or (= temp___is_init_291 true)
+                                      (<= 0 3)) (in_range13 temp___expr_294)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -1419,9 +1419,8 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
 
-(declare-sort t6b 0)
-
-(define-fun in_range14 ((x Int)) Bool (and (<= 1 x) (<= x 128)))
+(define-fun dynamic_property1 ((first_int Int) (last_int Int)
+  (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
 (define-fun bool_eq21 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -1431,44 +1430,22 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE14 (us_image) Int)
 
-(declare-fun user_eq20 (t6b t6b) Bool)
+(declare-fun user_eq20 (integer integer) Bool)
 
-(declare-fun dummy20 () t6b)
-
-(declare-datatypes () ((t6b__ref (mk_t6b__ref (t6b__content t6b)))))
-(define-fun t6b__ref___projection ((a t6b__ref)) t6b (t6b__content a))
-
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
-
-(define-fun dynamic_property1 ((first_int Int) (last_int Int)
-  (x Int)) Bool (and (<= first_int x) (<= x last_int)))
-
-(define-fun bool_eq22 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE15 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check15 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE15 (us_image) Int)
-
-(declare-fun user_eq21 (integer integer) Bool)
-
-(declare-fun dummy21 () integer)
+(declare-fun dummy20 () integer)
 
 (declare-datatypes () ((t8b__ref (mk_t8b__ref (t8b__content integer)))))
 (define-fun t8b__ref___projection ((a t8b__ref)) integer (t8b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
 
-(declare-fun temp___370 (Int) (Array Int character))
+(declare-fun temp___366 (Int) (Array Int character))
 
 ;; def_axiom
   (assert
-  (forall ((temp___372 Int))
-  (forall ((temp___373 Int))
-  (= (select (temp___370 temp___372) temp___373) (of_rep temp___372)))))
+  (forall ((temp___368 Int))
+  (forall ((temp___369 Int))
+  (= (select (temp___366 temp___368) temp___369) (of_rep temp___368)))))
 
 (define-fun dynamic_invariant2 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -1490,26 +1467,26 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(define-fun dynamic_invariant5 ((temp___expr_220 Int)
-  (temp___is_init_217 Bool) (temp___skip_constant_218 Bool)
-  (temp___do_toplevel_219 Bool)) Bool (=>
-                                      (or (= temp___is_init_217 true)
+(define-fun dynamic_invariant5 ((temp___expr_216 Int)
+  (temp___is_init_213 Bool) (temp___skip_constant_214 Bool)
+  (temp___do_toplevel_215 Bool)) Bool (=>
+                                      (or (= temp___is_init_213 true)
                                       (<= 1 128)) (in_range10
-                                      temp___expr_220)))
+                                      temp___expr_216)))
 
-(define-fun dynamic_invariant6 ((temp___expr_235 Int)
-  (temp___is_init_232 Bool) (temp___skip_constant_233 Bool)
-  (temp___do_toplevel_234 Bool)) Bool (=>
-                                      (or (= temp___is_init_232 true)
+(define-fun dynamic_invariant6 ((temp___expr_231 Int)
+  (temp___is_init_228 Bool) (temp___skip_constant_229 Bool)
+  (temp___do_toplevel_230 Bool)) Bool (=>
+                                      (or (= temp___is_init_228 true)
                                       (<= 0 128)) (in_range11
-                                      temp___expr_235)))
+                                      temp___expr_231)))
 
-(define-fun dynamic_invariant7 ((temp___expr_262 Int)
-  (temp___is_init_259 Bool) (temp___skip_constant_260 Bool)
-  (temp___do_toplevel_261 Bool)) Bool (=>
-                                      (or (= temp___is_init_259 true)
+(define-fun dynamic_invariant7 ((temp___expr_258 Int)
+  (temp___is_init_255 Bool) (temp___skip_constant_256 Bool)
+  (temp___do_toplevel_257 Bool)) Bool (=>
+                                      (or (= temp___is_init_255 true)
                                       (<= 1 64)) (in_range12
-                                      temp___expr_262)))
+                                      temp___expr_258)))
 
 (define-fun dynamic_invariant8 ((temp___expr_136 Int)
   (temp___is_init_133 Bool) (temp___skip_constant_134 Bool)
@@ -1566,15 +1543,15 @@
 
 (declare-fun o2 () Bool)
 
-(declare-fun temp___364 () event_index_type)
+(declare-fun temp___360 () event_index_type)
 
-(declare-fun temp___3641 () Bool)
+(declare-fun temp___3601 () Bool)
 
-(declare-fun temp___367 () Int)
+(declare-fun temp___363 () Int)
 
-(declare-fun temp___366 () event_index_type)
+(declare-fun temp___362 () event_index_type)
 
-(declare-fun temp___3661 () Bool)
+(declare-fun temp___3621 () Bool)
 
 (declare-fun o3 () event_index_type)
 
@@ -1582,33 +1559,9 @@
 
 (declare-fun o5 () Bool)
 
-(declare-fun temp___365 () event_index_type)
+(declare-fun temp___361 () event_index_type)
 
-(declare-fun temp___3651 () Bool)
-
-(declare-fun o6 () (Array Int character))
-
-(declare-fun o7 () (Array Int character))
-
-(declare-fun o8 () description_count_type)
-
-(declare-fun o9 () day_type)
-
-(declare-fun o10 () month_type)
-
-(declare-fun o11 () year_type)
-
-(declare-fun o12 () hour_type)
-
-(declare-fun o13 () minute_type)
-
-(declare-fun o14 () second_type)
-
-(declare-fun o15 () Bool)
-
-(declare-fun o16 () us_rep3)
-
-(declare-fun o17 () (Array Int us_rep3))
+(declare-fun temp___3611 () Bool)
 
 (declare-fun result () us_split_fields__ref4)
 
@@ -1670,10 +1623,10 @@
   (assert (= (of_int 0) o2))
 
 ;; H
-  (assert (= temp___364 o1))
+  (assert (= temp___360 o1))
 
 ;; H
-  (assert (= temp___3641 o2))
+  (assert (= temp___3601 o2))
 
 ;; H
   (assert
@@ -1683,7 +1636,7 @@
 
 ;; H
   (assert
-  (= find_result__split_fields2 (mk___split_fields4 temp___364 temp___3641)))
+  (= find_result__split_fields2 (mk___split_fields4 temp___360 temp___3601)))
 
 ;; H
   (assert (not (< 128 (length description))))
@@ -1695,12 +1648,12 @@
   (assert (= i2 1))
 
 ;; H
-  (assert (=> (and (<= 1 i2) (<= i2 64)) (= temp___367 i2)))
+  (assert (=> (and (<= 1 i2) (<= i2 64)) (= temp___363 i2)))
 
 ;; H
   (assert
   (=> (and (<= 1 i2) (<= i2 64))
-  (= (mk___split_fields4 temp___366 temp___3661) find_result__split_fields2)))
+  (= (mk___split_fields4 temp___362 temp___3621) find_result__split_fields2)))
 
 ;; H
   (assert (=> (and (<= 1 i2) (<= i2 64)) (<= (length description) 128)))
@@ -1725,9 +1678,9 @@
      (us_split_fields7 (select book i3))) true))
   (and
   (and (and (= (to_rep9 o3) i3) (and (= o3 o4) (= (of_int 1) o5)))
-  (and (= temp___365 o4) (= temp___3651 o5)))
+  (and (= temp___361 o4) (= temp___3611 o5)))
   (and (= result2 (mk___split_fields__ref4 find_result__split_fields3))
-  (= find_result__split_fields4 (mk___split_fields4 temp___365 temp___3651))))))
+  (= find_result__split_fields4 (mk___split_fields4 temp___361 temp___3611))))))
   (and
   (and
   (= (rec__datebooks__event_record__is_used
@@ -1794,60 +1747,30 @@
      (us_split_fields__content4 find_result__split_fields9)) true))
 
 ;; H
-  (assert (= o6 (temp___370 32)))
-
-;; H
-  (assert (= o6 o7))
-
-;; H
-  (assert
-  (= (rec__datebooks__event_record__description_size
-     (us_split_fields7
-     (select book (to_rep9
-                  (rec__datebooks__add_event__find_result_record__fresh_index
-                  (us_split_fields__content4 find_result__split_fields9)))))) 
-  o8))
-
-;; H
-  (assert
-  (= (rec__datebooks__event_record__date
-     (us_split_fields7
-     (select book (to_rep9
-                  (rec__datebooks__add_event__find_result_record__fresh_index
-                  (us_split_fields__content4 find_result__split_fields9)))))) 
-  (mk___rep2
-  (mk___split_fields2 (mk___rep (mk___split_fields o9 o10 o11))
-  (mk___rep1 (mk___split_fields1 o12 o13 o14))))))
-
-;; H
-  (assert
-  (= (rec__datebooks__event_record__is_used
-     (us_split_fields7
-     (select book (to_rep9
-                  (rec__datebooks__add_event__find_result_record__fresh_index
-                  (us_split_fields__content4 find_result__split_fields9)))))) 
-  o15))
-
-;; H
-  (assert
-  (= o16 (mk___rep3
-         (mk___split_fields3 o7 o8
-         (mk___rep2
-         (mk___split_fields2 (mk___rep (mk___split_fields o9 o10 o11))
-         (mk___rep1 (mk___split_fields1 o12 o13 o14)))) o15))))
-
-;; H
-  (assert
-  (= o17 (store book (to_rep9
-                     (rec__datebooks__add_event__find_result_record__fresh_index
-                     (us_split_fields__content4 find_result__split_fields9))) 
-  o16)))
-
-;; H
   (assert (= result3 (mk_map__ref1 book)))
 
 ;; H
-  (assert (= book1 o17))
+  (assert
+  (= book1 (store book (to_rep9
+                       (rec__datebooks__add_event__find_result_record__fresh_index
+                       (us_split_fields__content4 find_result__split_fields9))) 
+  (mk___rep3
+  (mk___split_fields3 (temp___366 32)
+  (rec__datebooks__event_record__description_size
+  (us_split_fields7
+  (select book (to_rep9
+               (rec__datebooks__add_event__find_result_record__fresh_index
+               (us_split_fields__content4 find_result__split_fields9))))))
+  (rec__datebooks__event_record__date
+  (us_split_fields7
+  (select book (to_rep9
+               (rec__datebooks__add_event__find_result_record__fresh_index
+               (us_split_fields__content4 find_result__split_fields9))))))
+  (rec__datebooks__event_record__is_used
+  (us_split_fields7
+  (select book (to_rep9
+               (rec__datebooks__add_event__find_result_record__fresh_index
+               (us_split_fields__content4 find_result__split_fields9)))))))))))
 
 ;; H
   (assert (= result4 (mk_int__ref i1)))

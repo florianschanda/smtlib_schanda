@@ -224,24 +224,14 @@
 
 (declare-fun sorted__function_guard (Bool (Array Int value)) Bool)
 
-;; temp___result_161_def
-  (assert
-  (forall ((temp___160 (Array Int value))) (sorted__function_guard
-  (sorted temp___160) temp___160)))
-
 (define-fun dynamic_invariant1 ((temp___expr_159 (Array Int value))
   (temp___is_init_156 Bool) (temp___skip_constant_157 Bool)
   (temp___do_toplevel_158 Bool)) Bool (=> (= temp___do_toplevel_158 true)
                                       (=> (= temp___is_init_156 true)
                                       (= (sorted temp___expr_159) true))))
 
-;; temp___result_169_def
-  (assert
-  (forall ((temp___168 (Array Int value))) (sorted__function_guard
-  (sorted temp___168) temp___168)))
-
-(define-fun dynamic_predicate ((temp___167 (Array Int value))) Bool (= 
-  (sorted temp___167) true))
+(define-fun dynamic_predicate ((temp___166 (Array Int value))) Bool (= 
+  (sorted temp___166) true))
 
 (declare-fun i5s () (Array Int value))
 
@@ -268,11 +258,10 @@
 ;; sorted__def_axiom
   (assert
   (forall ((v (Array Int value)))
-  (! (=> (sorted__function_guard (sorted v) v)
-     (= (= (sorted v) true)
+  (! (= (= (sorted v) true)
      (forall ((j Int))
      (=> (and (<= 1 j) (<= j 99))
-     (<= (to_rep (select v j)) (to_rep (select v (+ j 1)))))))) :pattern (
+     (<= (to_rep (select v j)) (to_rep (select v (+ j 1))))))) :pattern (
   (sorted v)) )))
 
 (declare-fun v () (Array Int value))
@@ -285,13 +274,13 @@
 
 (declare-fun o () value)
 
-(declare-fun temp___180 () (Array Int value))
+(declare-fun temp___178 () (Array Int value))
 
 (declare-fun o1 () (Array Int value))
 
 (declare-fun o2 () value)
 
-(declare-fun temp___1801 () (Array Int value))
+(declare-fun temp___1781 () (Array Int value))
 
 (declare-fun o3 () (Array Int value))
 
@@ -340,10 +329,10 @@
 (declare-fun v3 () (Array Int value))
 
 ;; H
-  (assert (dynamic_invariant1 i5s true false true))
+  (assert (= (sorted i5s) true))
 
 ;; H
-  (assert (dynamic_invariant1 v true false true))
+  (assert (= (sorted v) true))
 
 ;; H
   (assert (= result prev_value))
@@ -385,13 +374,13 @@
   (assert (= (to_rep o) tmp_value1))
 
 ;; H
-  (assert (= temp___180 (store v j1 o)))
+  (assert (= temp___178 (store v j1 o)))
 
 ;; H
-  (assert (dynamic_predicate temp___180))
+  (assert (dynamic_predicate temp___178))
 
 ;; H
-  (assert (= o1 temp___180))
+  (assert (= o1 temp___178))
 
 ;; H
   (assert (= result4 v))
@@ -419,12 +408,10 @@
   (and
   (and
   (and
-  (and
-  (and (=> (<= 0 10000) (in_range1 prev_value3)) (dynamic_invariant1 
-  v2 true true true))
-  (forall ((temp___183 Int))
-  (=> (and (<= 1 temp___183) (<= temp___183 100))
-  (=> (< j2 temp___183) (= (select v2 temp___183) (select v temp___183))))))
+  (and (and (=> (<= 0 10000) (in_range1 prev_value3)) (= (sorted v2) true))
+  (forall ((temp___181 Int))
+  (=> (and (<= 1 temp___181) (<= temp___181 100))
+  (=> (< j2 temp___181) (= (select v2 temp___181) (select v temp___181))))))
   (=> (<= 0 10000) (in_range1 tmp_value2))) (=> (<= 1 100) (in_range2 j2)))
   (and (<= 1 j2) (<= j2 100))))
 
@@ -453,13 +440,13 @@
   (assert (= (to_rep o2) tmp_value3))
 
 ;; H
-  (assert (= temp___1801 (store v2 j3 o2)))
+  (assert (= temp___1781 (store v2 j3 o2)))
 
 ;; H
-  (assert (dynamic_predicate temp___1801))
+  (assert (dynamic_predicate temp___1781))
 
 ;; H
-  (assert (= o3 temp___1801))
+  (assert (= o3 temp___1781))
 
 ;; H
   (assert (= result8 v2))

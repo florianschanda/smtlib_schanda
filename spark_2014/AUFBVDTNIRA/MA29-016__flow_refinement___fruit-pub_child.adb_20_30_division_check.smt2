@@ -167,15 +167,19 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
-(declare-fun number_of_apples (Int Int Int Int Int) Int)
+(declare-fun number_of_apples (Int us_private Int Int Int Int
+  us_private) Int)
 
-(declare-fun number_of_apples__function_guard (Int Int Int Int Int Int) Bool)
+(declare-fun number_of_apples__function_guard (Int Int us_private Int Int Int
+  Int us_private) Bool)
 
 ;; number_of_apples__post_axiom
   (assert
   (forall ((fruit__apples Int) (fruit__oranges Int)
   (fruit__price_of_apple Int) (fruit__price_of_orange Int)
   (fruit__priv_child__extra_cost Int))
+  (forall ((fruit__fruits us_private)
+  (fruit__priv_child__price_related_stuff us_private))
   (! (=>
      (and
      (and
@@ -184,26 +188,29 @@
      fruit__oranges true true true)) (dynamic_invariant fruit__price_of_apple
      true true true)) (dynamic_invariant fruit__price_of_orange true true
      true)) (dynamic_invariant fruit__priv_child__extra_cost true true true))
-     (let ((result (number_of_apples fruit__apples fruit__oranges
-                   fruit__price_of_apple fruit__price_of_orange
-                   fruit__priv_child__extra_cost)))
-     (=> (number_of_apples__function_guard result fruit__apples
-     fruit__oranges fruit__price_of_apple fruit__price_of_orange
-     fruit__priv_child__extra_cost) (dynamic_invariant result true false
-     true)))) :pattern ((number_of_apples fruit__apples fruit__oranges
-                        fruit__price_of_apple fruit__price_of_orange
-                        fruit__priv_child__extra_cost)) )))
+     (dynamic_invariant
+     (number_of_apples fruit__apples fruit__fruits fruit__oranges
+     fruit__price_of_apple fruit__price_of_orange
+     fruit__priv_child__extra_cost fruit__priv_child__price_related_stuff)
+     true false true)) :pattern ((number_of_apples fruit__apples
+                                 fruit__fruits fruit__oranges
+                                 fruit__price_of_apple fruit__price_of_orange
+                                 fruit__priv_child__extra_cost
+                                 fruit__priv_child__price_related_stuff)) ))))
 
-(declare-fun number_of_oranges (Int Int Int Int Int) Int)
+(declare-fun number_of_oranges (Int us_private Int Int Int Int
+  us_private) Int)
 
-(declare-fun number_of_oranges__function_guard (Int Int Int Int Int
-  Int) Bool)
+(declare-fun number_of_oranges__function_guard (Int Int us_private Int Int
+  Int Int us_private) Bool)
 
 ;; number_of_oranges__post_axiom
   (assert
   (forall ((fruit__apples Int) (fruit__oranges Int)
   (fruit__price_of_apple Int) (fruit__price_of_orange Int)
   (fruit__priv_child__extra_cost Int))
+  (forall ((fruit__fruits us_private)
+  (fruit__priv_child__price_related_stuff us_private))
   (! (=>
      (and
      (and
@@ -212,15 +219,15 @@
      fruit__oranges true true true)) (dynamic_invariant fruit__price_of_apple
      true true true)) (dynamic_invariant fruit__price_of_orange true true
      true)) (dynamic_invariant fruit__priv_child__extra_cost true true true))
-     (let ((result (number_of_oranges fruit__apples fruit__oranges
-                   fruit__price_of_apple fruit__price_of_orange
-                   fruit__priv_child__extra_cost)))
-     (=> (number_of_oranges__function_guard result fruit__apples
-     fruit__oranges fruit__price_of_apple fruit__price_of_orange
-     fruit__priv_child__extra_cost) (dynamic_invariant result true false
-     true)))) :pattern ((number_of_oranges fruit__apples fruit__oranges
-                        fruit__price_of_apple fruit__price_of_orange
-                        fruit__priv_child__extra_cost)) )))
+     (dynamic_invariant
+     (number_of_oranges fruit__apples fruit__fruits fruit__oranges
+     fruit__price_of_apple fruit__price_of_orange
+     fruit__priv_child__extra_cost fruit__priv_child__price_related_stuff)
+     true false true)) :pattern ((number_of_oranges fruit__apples
+                                 fruit__fruits fruit__oranges
+                                 fruit__price_of_apple fruit__price_of_orange
+                                 fruit__priv_child__extra_cost
+                                 fruit__priv_child__price_related_stuff)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
 
@@ -235,6 +242,8 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range temp___expr_15)))
 
+(declare-fun fruits () us_private)
+
 (declare-fun apples () Int)
 
 (declare-fun oranges () Int)
@@ -248,6 +257,8 @@
 (declare-fun apples_in_fruit_salad () Int)
 
 (declare-fun oranges_in_fruit_salad () Int)
+
+(declare-fun price_related_stuff () us_private)
 
 (declare-fun extra_cost () Int)
 
@@ -284,11 +295,9 @@
 ;; H
   (assert
   (and
-  (and
-  (= o1 (number_of_oranges apples oranges price_of_apple price_of_orange
-        extra_cost))
-  (number_of_oranges__function_guard o1 apples oranges price_of_apple
-  price_of_orange extra_cost)) (in_range1 o1)))
+  (= o1 (number_of_oranges apples fruits oranges price_of_apple
+        price_of_orange extra_cost price_related_stuff))
+  (in_range1 o1)))
 
 ;; H
   (assert (= o2 (div1 o1 oranges_in_fruit_salad)))
@@ -296,11 +305,9 @@
 ;; H
   (assert
   (and
-  (and
-  (= o (number_of_apples apples oranges price_of_apple price_of_orange
-       extra_cost))
-  (number_of_apples__function_guard o apples oranges price_of_apple
-  price_of_orange extra_cost)) (in_range1 o)))
+  (= o (number_of_apples apples fruits oranges price_of_apple price_of_orange
+       extra_cost price_related_stuff))
+  (in_range1 o)))
 
 (assert
 ;; WP_parameter_def

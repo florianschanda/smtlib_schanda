@@ -314,8 +314,6 @@
   (! (=> (in_range3 x) (= (to_rep3 (of_rep3 x)) x)) :pattern ((to_rep3
                                                               (of_rep3 x))) )))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -338,7 +336,7 @@
 
 (declare-fun first (t) integer)
 
-(declare-fun last1 (t) integer)
+(declare-fun last (t) integer)
 
 (declare-fun mk (Int Int) t)
 
@@ -347,7 +345,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range3 f)
      (=> (in_range3 l)
-     (and (= (to_rep3 (first (mk f l))) f) (= (to_rep3 (last1 (mk f l))) l)))) :pattern (
+     (and (= (to_rep3 (first (mk f l))) f) (= (to_rep3 (last (mk f l))) l)))) :pattern (
   (mk f l)) )))
 
 (define-fun dynamic_property1 ((range_first Int) (range_last Int) (low Int)
@@ -365,10 +363,10 @@
 
 (define-fun first1 ((a us_t)) Int (to_rep3 (first (rt a))))
 
-(define-fun last2 ((a us_t)) Int (to_rep3 (last1 (rt a))))
+(define-fun last1 ((a us_t)) Int (to_rep3 (last (rt a))))
 
-(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last2 a))
-                                  (+ (- (last2 a) (first1 a)) 1) 0))
+(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last1 a))
+                                  (+ (- (last1 a) (first1 a)) 1) 0))
 
 (declare-fun value__size () Int)
 
@@ -403,8 +401,8 @@
 
 (define-fun bool_eq6 ((x us_t)
   (y us_t)) Bool (bool_eq1 (elts x) (to_rep3 (first (rt x)))
-                 (to_rep3 (last1 (rt x))) (elts y) (to_rep3 (first (rt y)))
-                 (to_rep3 (last1 (rt y)))))
+                 (to_rep3 (last (rt x))) (elts y) (to_rep3 (first (rt y)))
+                 (to_rep3 (last (rt y)))))
 
 (declare-fun user_eq5 (us_t us_t) Bool)
 
@@ -559,14 +557,14 @@
                                       (first1
                                       (rec__bounded_strings__bounded_string__text
                                       (us_split_fields1 temp___expr_147)))
-                                      (last2
+                                      (last1
                                       (rec__bounded_strings__bounded_string__text
                                       (us_split_fields1 temp___expr_147))))
                                       (and
                                       (= (first1
                                          (rec__bounded_strings__bounded_string__text
                                          (us_split_fields1 temp___expr_147))) 1)
-                                      (= (last2
+                                      (= (last1
                                          (rec__bounded_strings__bounded_string__text
                                          (us_split_fields1 temp___expr_147))) 
                                       (to_rep1 temp___148))))))
@@ -585,17 +583,13 @@
 ;; length__post_axiom
   (assert
   (forall ((source us_rep))
-  (! (=> (dynamic_invariant1 source true true true)
-     (let ((result (length1 source)))
-     (=> (length__function_guard result source) (dynamic_invariant2 result
-     true false true)))) :pattern ((length1 source)) )))
+  (! (=> (dynamic_invariant1 source true true true) (dynamic_invariant2
+     (length1 source) true false true)) :pattern ((length1 source)) )))
 
 ;; length__def_axiom
   (assert
   (forall ((source us_rep))
-  (! (=>
-     (and (dynamic_invariant1 source true true true) (length__function_guard
-     (length1 source) source))
+  (! (=> (dynamic_invariant1 source true true true)
      (= (length1 source) (to_rep2
                          (rec__bounded_strings__bounded_string__length
                          (us_split_fields1 source))))) :pattern ((length1
@@ -645,13 +639,13 @@
 
 (declare-fun o7 () length_type)
 
-(declare-fun temp___195 () index_type)
+(declare-fun temp___189 () index_type)
 
-(declare-fun temp___1951 () (Array Int character))
+(declare-fun temp___1891 () (Array Int character))
 
-(declare-fun temp___1952 () t)
+(declare-fun temp___1892 () t)
 
-(declare-fun temp___1953 () length_type)
+(declare-fun temp___1893 () length_type)
 
 (declare-fun result () (Array Int character))
 
@@ -675,16 +669,6 @@
   (assert (in_range item))
 
 ;; H
-  (assert (length__function_guard
-  (length1
-  (mk___rep target__split_discrs
-  (mk___split_fields (mk___t target__split_fields target__split_fields1)
-  target__split_fields2)))
-  (mk___rep target__split_discrs
-  (mk___split_fields (mk___t target__split_fields target__split_fields1)
-  target__split_fields2))))
-
-;; H
   (assert
   (<= (+ (length1
          (mk___rep target__split_discrs
@@ -703,7 +687,7 @@
   (<= (to_rep3 (first target__split_fields1)) (+ (to_rep2
                                                  target__split_fields2) 1))
   (<= (+ (to_rep2 target__split_fields2) 1) (to_rep3
-                                            (last1 target__split_fields1)))))
+                                            (last target__split_fields1)))))
 
 ;; H
   (assert (= o1 (+ (to_rep2 target__split_fields2) 1)))
@@ -727,16 +711,16 @@
   (assert (= target__split_fields2 o7))
 
 ;; H
-  (assert (= target__split_discrs (mk___split_discrs temp___195)))
+  (assert (= target__split_discrs (mk___split_discrs temp___189)))
 
 ;; H
-  (assert (= temp___1951 o5))
+  (assert (= temp___1891 o5))
 
 ;; H
-  (assert (= temp___1952 o6))
+  (assert (= temp___1892 o6))
 
 ;; H
-  (assert (= temp___1953 o7))
+  (assert (= temp___1893 o7))
 
 ;; H
   (assert
@@ -749,16 +733,16 @@
                                                           target__split_fields2))))
 
 ;; H
-  (assert (= temp___1951 target__split_fields3))
+  (assert (= temp___1891 target__split_fields3))
 
 ;; H
-  (assert (= temp___1952 target__split_fields4))
+  (assert (= temp___1892 target__split_fields4))
 
 ;; H
-  (assert (= temp___1953 target__split_fields5))
+  (assert (= temp___1893 target__split_fields5))
 
 ;; H
-  (assert (= target__split_discrs (mk___split_discrs temp___195)))
+  (assert (= target__split_discrs (mk___split_discrs temp___189)))
 
 (assert
 ;; WP_parameter_def

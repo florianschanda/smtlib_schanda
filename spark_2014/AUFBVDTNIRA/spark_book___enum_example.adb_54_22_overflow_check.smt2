@@ -517,10 +517,8 @@
 ;; next_day__post_axiom
   (assert
   (forall ((day Int))
-  (! (=> (dynamic_invariant4 day true true true)
-     (let ((result (next_day day)))
-     (=> (next_day__function_guard result day) (dynamic_invariant4 result
-     true false true)))) :pattern ((next_day day)) )))
+  (! (=> (dynamic_invariant4 day true true true) (dynamic_invariant4
+     (next_day day) true false true)) :pattern ((next_day day)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
@@ -819,9 +817,7 @@
   (assert (= today1 enum_example__day_io__get__2__item))
 
 ;; H
-  (assert
-  (and (and (= o (next_day today1)) (next_day__function_guard o today1))
-  (in_range7 o)))
+  (assert (and (= o (next_day today1)) (in_range7 o)))
 
 ;; H
   (assert (= result1 tomorrow))

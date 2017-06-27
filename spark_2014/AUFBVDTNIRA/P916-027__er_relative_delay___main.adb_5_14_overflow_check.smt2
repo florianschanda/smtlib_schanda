@@ -265,16 +265,13 @@
 
 ;; zero__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (zero us_void_param)))
-     (=> (zero__function_guard result us_void_param) (dynamic_invariant
-     result true false true))) :pattern ((zero us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant (zero us_void_param)
+  true false true) :pattern ((zero us_void_param)) )))
 
 ;; zero__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (zero__function_guard (zero us_void_param) us_void_param)
-     (= (zero us_void_param) 0)) :pattern ((zero us_void_param)) )))
+  (! (= (zero us_void_param) 0) :pattern ((zero us_void_param)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -300,9 +297,7 @@
   (assert (= one1 o))
 
 ;; H
-  (assert
-  (and (and (= o1 (zero Tuple0)) (zero__function_guard o1 Tuple0))
-  (and (in_range1 o1) (= o1 0))))
+  (assert (and (= o1 (zero Tuple0)) (and (in_range1 o1) (= o1 0))))
 
 ;; H
   (assert (= o2 (fxp_div_int (to_fixed one1) o1)))

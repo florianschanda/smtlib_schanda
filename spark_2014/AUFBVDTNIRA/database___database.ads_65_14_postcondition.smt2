@@ -519,9 +519,8 @@
 ;; is_empty__def_axiom
   (assert
   (forall ((a us_rep))
-  (! (=> (is_empty__function_guard (is_empty a) a)
-     (= (= (is_empty a) true)
-     (= (to_rep3 (rec__money__amount__raw (us_split_fields1 a))) 0))) :pattern (
+  (! (= (= (is_empty a) true)
+     (= (to_rep3 (rec__money__amount__raw (us_split_fields1 a))) 0)) :pattern (
   (is_empty a)) )))
 
 (declare-sort ext_account_num 0)
@@ -809,14 +808,8 @@
   (assert
   (forall ((account Int))
   (forall ((database__availability__links (Array Int us_rep1)))
-  (! (=> (existing__function_guard
-     (existing account database__availability__links) account
-     database__availability__links)
-     (and (is_available__function_guard
-     (is_available account database__availability__links) account
-     database__availability__links)
-     (= (= (existing account database__availability__links) true)
-     (not (= (is_available account database__availability__links) true))))) :pattern (
+  (! (= (= (existing account database__availability__links) true)
+     (not (= (is_available account database__availability__links) true))) :pattern (
   (existing account database__availability__links)) ))))
 
 (declare-fun dummy8 () (Array Int character))
@@ -1097,12 +1090,9 @@
   (forall ((customer (Array Int character)))
   (forall ((id (Array Int num)))
   (forall ((database__accounts (Array Int us_rep2)))
-  (! (=> (belongs_to__function_guard
-     (belongs_to account customer id database__accounts) account customer id
-     database__accounts)
-     (= (= (belongs_to account customer id database__accounts) true)
+  (! (= (= (belongs_to account customer id database__accounts) true)
      (= (bool_eq11 (select database__accounts account)
-        (mk___rep2 (mk___split_fields2 customer id (of_rep4 account)))) true))) :pattern (
+        (mk___rep2 (mk___split_fields2 customer id (of_rep4 account)))) true)) :pattern (
   (belongs_to account customer id database__accounts)) ))))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
@@ -1121,15 +1111,9 @@
 ;; max_account_reached__def_axiom
   (assert
   (forall ((database__availability__first_available Int))
-  (! (=> (max_account_reached__function_guard
-     (max_account_reached database__availability__first_available)
-     database__availability__first_available)
-     (and (some_available__function_guard
-     (some_available database__availability__first_available)
-     database__availability__first_available)
-     (=
+  (! (=
      (= (max_account_reached database__availability__first_available) true)
-     (not (= (some_available database__availability__first_available) true))))) :pattern (
+     (not (= (some_available database__availability__first_available) true))) :pattern (
   (max_account_reached database__availability__first_available)) )))
 
 (declare-datatypes ()
@@ -1308,23 +1292,14 @@
   (Array Int us_rep3)) Bool)
 
 ;; balance__post_axiom
-  (assert
-  (forall ((account Int))
-  (forall ((database__availability__links (Array Int us_rep1)))
-  (existing__function_guard (existing account database__availability__links)
-  account database__availability__links))))
+  (assert true)
 
 ;; balance__def_axiom
   (assert
   (forall ((account Int))
   (forall ((database__availability__links (Array Int us_rep1)))
   (forall ((database__accounts_balance (Array Int us_rep3)))
-  (! (=>
-     (and (dynamic_invariant2 account true true true)
-     (balance__function_guard
-     (balance account database__availability__links
-     database__accounts_balance) account database__availability__links
-     database__accounts_balance))
+  (! (=> (dynamic_invariant2 account true true true)
      (= (balance account database__availability__links
         database__accounts_balance) (rec__database__account_balance__value
                                     (us_split_fields7
@@ -1357,12 +1332,9 @@
 ;; some_available__def_axiom
   (assert
   (forall ((database__availability__first_available Int))
-  (! (=> (some_available__function_guard
-     (some_available database__availability__first_available)
-     database__availability__first_available)
-     (= (= (some_available database__availability__first_available) true)
-     (not (= database__availability__first_available 0)))) :pattern (
-  (some_available database__availability__first_available)) )))
+  (! (= (= (some_available database__availability__first_available) true)
+     (not (= database__availability__first_available 0))) :pattern ((some_available
+                                                                    database__availability__first_available)) )))
 
 ;; is_available__post_axiom
   (assert true)
@@ -1371,12 +1343,9 @@
   (assert
   (forall ((account Int))
   (forall ((database__availability__links (Array Int us_rep1)))
-  (! (=> (is_available__function_guard
-     (is_available account database__availability__links) account
-     database__availability__links)
-     (= (= (is_available account database__availability__links) true)
+  (! (= (= (is_available account database__availability__links) true)
      (= (rec__database__availability__account_link__available
-        (us_split_fields3 (select database__availability__links account))) true))) :pattern (
+        (us_split_fields3 (select database__availability__links account))) true)) :pattern (
   (is_available account database__availability__links)) ))))
 
 (define-fun dynamic_invariant4 ((temp___expr_162 Int)
@@ -1522,30 +1491,6 @@
 (define-fun accounts7 () map__ref3 (mk_map__ref3 accounts))
 
 ;; H
-  (assert (max_account_reached__function_guard
-  (max_account_reached first_available) first_available))
-
-;; H
-  (assert (some_available__function_guard (some_available first_available)
-  first_available))
-
-;; H
-  (assert (is_available__function_guard (is_available account3 links2)
-  account3 links2))
-
-;; H
-  (assert (some_available__function_guard (some_available first_available)
-  first_available))
-
-;; H
-  (assert (some_available__function_guard (some_available first_available)
-  first_available))
-
-;; H
-  (assert (is_available__function_guard (is_available account3 links2)
-  account3 links2))
-
-;; H
   (assert (in_range4 first_available))
 
 ;; H
@@ -1571,17 +1516,13 @@
   (and (= first_available4 first_available1)
   (and (= links4 links1) (= account5 account2))))))
   (and
-  (and
   (and (= result (max_account_reached first_available))
-  (max_account_reached__function_guard result first_available))
   (= (= result true) (not (= (some_available first_available) true))))
   (and (= result true)
   (and (= (mk_int__ref result1) (mk_int__ref account)) (= account2 200000)))))
   (and
   (and
-  (and
   (and (= result (max_account_reached first_available))
-  (max_account_reached__function_guard result first_available))
   (= (= result true) (not (= (some_available first_available) true))))
   (and (not (= result true))
   (and (= account2 account) (= account2 account1))))
@@ -1663,11 +1604,6 @@
 
 ;; H
   (assert (= account7 account5))
-
-;; H
-  (assert (existing__function_guard
-  (existing (int__content account6) (map__content2 links5))
-  (int__content account6) (map__content2 links5)))
 
 (assert
 ;; WP_parameter_def

@@ -89,28 +89,6 @@
   (! (=> (in_range1 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
 
-(declare-sort small_index_t 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 1000)))
-
-(define-fun bool_eq1 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
-
-(declare-fun user_eq1 (small_index_t small_index_t) Bool)
-
-(declare-fun dummy1 () small_index_t)
-
-(declare-datatypes ()
-((small_index_t__ref
- (mk_small_index_t__ref (small_index_t__content small_index_t)))))
-(define-fun small_index_t__ref___projection ((a small_index_t__ref)) small_index_t 
-  (small_index_t__content a))
-
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int unsigned_byte))))))
 (declare-fun slide ((Array Int unsigned_byte) Int
@@ -154,7 +132,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq2 ((a (Array Int unsigned_byte)) (a__first Int)
+(define-fun bool_eq1 ((a (Array Int unsigned_byte)) (a__first Int)
   (a__last Int) (b (Array Int unsigned_byte)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -173,7 +151,7 @@
   (assert
   (forall ((a (Array Int unsigned_byte)) (b (Array Int unsigned_byte)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq2 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq1 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -191,7 +169,7 @@
   (forall ((a (Array Int unsigned_byte)) (b (Array Int unsigned_byte)))
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq2 a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq1 a a_first a_last b b_first b_last) true)) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -202,7 +180,7 @@
      (exists ((i Int) (j Int))
      (and (<= i a_last)
      (and (< j b_last)
-     (and (= (bool_eq2 a a_first i b b_first j) true)
+     (and (= (bool_eq1 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
      (< (to_rep (select a (+ i 1))) (to_rep (select b (+ j 1))))))))))) :pattern (
@@ -216,13 +194,13 @@
      (exists ((i Int) (j Int))
      (and (<= i b_last)
      (and (< j a_last)
-     (and (= (bool_eq2 a a_first j b b_first i) true)
+     (and (= (bool_eq1 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
      (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
-(declare-fun dummy2 () (Array Int unsigned_byte))
+(declare-fun dummy1 () (Array Int unsigned_byte))
 
 (declare-fun value__size () Int)
 
@@ -256,7 +234,7 @@
   (assert
   (forall ((a (Array Int unsigned_byte))) (<= 0 (object__alignment a))))
 
-(declare-fun user_eq2 ((Array Int unsigned_byte)
+(declare-fun user_eq1 ((Array Int unsigned_byte)
   (Array Int unsigned_byte)) Bool)
 
 (declare-datatypes ()
@@ -306,7 +284,7 @@
   (forall ((i Int))
   (! (= (select (singleton2 v i) i) v) :pattern ((select (singleton2 v i) i)) ))))
 
-(define-fun bool_eq3 ((a (Array Int (Array Int unsigned_byte)))
+(define-fun bool_eq2 ((a (Array Int (Array Int unsigned_byte)))
   (a__first Int) (a__last Int) (b (Array Int (Array Int unsigned_byte)))
   (b__first Int)
   (b__last Int)) Bool (ite (and
@@ -318,7 +296,7 @@
                            (=>
                            (and (<= a__first temp___idx_145)
                            (<= temp___idx_145 a__last))
-                           (= (bool_eq2 (select a temp___idx_145) 1 1000
+                           (= (bool_eq1 (select a temp___idx_145) 1 1000
                               (select b (+ (- b__first a__first) temp___idx_145))
                               1 1000) true))))
                       true false))
@@ -328,155 +306,76 @@
   (forall ((a (Array Int (Array Int unsigned_byte)))
   (b (Array Int (Array Int unsigned_byte))))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq3 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq2 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
   (forall ((temp___idx_145 Int))
   (=> (and (<= a__first temp___idx_145) (<= temp___idx_145 a__last))
-  (= (bool_eq2 (select a temp___idx_145) 1 1000
+  (= (bool_eq1 (select a temp___idx_145) 1 1000
      (select b (+ (- b__first a__first) temp___idx_145)) 1 1000) true))))))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(declare-sort t63b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 1000)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq3 (t63b t63b) Bool)
-
-(declare-fun dummy3 () t63b)
-
-(declare-datatypes () ((t63b__ref (mk_t63b__ref (t63b__content t63b)))))
-(define-fun t63b__ref___projection ((a t63b__ref)) t63b (t63b__content a))
-
-(declare-sort t59b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 1000)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq4 (t59b t59b) Bool)
-
-(declare-fun dummy4 () t59b)
-
-(declare-datatypes () ((t59b__ref (mk_t59b__ref (t59b__content t59b)))))
-(define-fun t59b__ref___projection ((a t59b__ref)) t59b (t59b__content a))
-
-(declare-sort t61b 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 1000)))
-
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq5 (t61b t61b) Bool)
-
-(declare-fun dummy5 () t61b)
-
-(declare-datatypes () ((t61b__ref (mk_t61b__ref (t61b__content t61b)))))
-(define-fun t61b__ref___projection ((a t61b__ref)) t61b (t61b__content a))
-
-(declare-fun temp___479 ((Array Int unsigned_byte)
+(declare-fun temp___471 ((Array Int unsigned_byte)
   (Array Int unsigned_byte)) (Array Int (Array Int unsigned_byte)))
 
 ;; def_axiom
   (assert
-  (forall ((temp___481 (Array Int unsigned_byte))
-  (temp___482 (Array Int unsigned_byte)))
-  (let ((temp___480 (temp___479 temp___481 temp___482)))
-  (forall ((temp___483 Int))
-  (ite (or (= temp___483 2) (and (<= 4 temp___483) (<= temp___483 6)))
-  (= (select temp___480 temp___483) temp___481)
-  (= (select temp___480 temp___483) temp___482))))))
+  (forall ((temp___473 (Array Int unsigned_byte))
+  (temp___474 (Array Int unsigned_byte)))
+  (let ((temp___472 (temp___471 temp___473 temp___474)))
+  (forall ((temp___475 Int))
+  (ite (or (= temp___475 2) (and (<= 4 temp___475) (<= temp___475 6)))
+  (= (select temp___472 temp___475) temp___473)
+  (= (select temp___472 temp___475) temp___474))))))
 
-(declare-fun temp___484 (Int Int Int Int) (Array Int unsigned_byte))
-
-;; def_axiom
-  (assert
-  (forall ((temp___486 Int) (temp___487 Int) (temp___488 Int)
-  (temp___489 Int))
-  (let ((temp___485 (temp___484 temp___486 temp___487 temp___488 temp___489)))
-  (forall ((temp___490 Int))
-  (ite (= temp___490 3)
-  (= (select temp___485 temp___490) (of_rep temp___488))
-  (ite (= temp___490 2)
-  (= (select temp___485 temp___490) (of_rep temp___487))
-  (ite (= temp___490 1)
-  (= (select temp___485 temp___490) (of_rep temp___486))
-  (= (select temp___485 temp___490) (of_rep temp___489)))))))))
-
-(declare-fun temp___491 (Int Int) (Array Int unsigned_byte))
+(declare-fun temp___476 (Int Int Int Int) (Array Int unsigned_byte))
 
 ;; def_axiom
   (assert
-  (forall ((temp___493 Int) (temp___494 Int))
-  (let ((temp___492 (temp___491 temp___493 temp___494)))
-  (forall ((temp___495 Int))
-  (ite (= temp___495 5)
-  (= (select temp___492 temp___495) (of_rep temp___493))
-  (= (select temp___492 temp___495) (of_rep temp___494)))))))
+  (forall ((temp___478 Int) (temp___479 Int) (temp___480 Int)
+  (temp___481 Int))
+  (let ((temp___477 (temp___476 temp___478 temp___479 temp___480 temp___481)))
+  (forall ((temp___482 Int))
+  (ite (= temp___482 3)
+  (= (select temp___477 temp___482) (of_rep temp___480))
+  (ite (= temp___482 2)
+  (= (select temp___477 temp___482) (of_rep temp___479))
+  (ite (= temp___482 1)
+  (= (select temp___477 temp___482) (of_rep temp___478))
+  (= (select temp___477 temp___482) (of_rep temp___481)))))))))
 
-(define-fun dynamic_invariant ((temp___expr_200 Int)
-  (temp___is_init_197 Bool) (temp___skip_constant_198 Bool)
-  (temp___do_toplevel_199 Bool)) Bool (=>
-                                      (or (= temp___is_init_197 true)
+(declare-fun temp___483 (Int Int) (Array Int unsigned_byte))
+
+;; def_axiom
+  (assert
+  (forall ((temp___485 Int) (temp___486 Int))
+  (let ((temp___484 (temp___483 temp___485 temp___486)))
+  (forall ((temp___487 Int))
+  (ite (= temp___487 5)
+  (= (select temp___484 temp___487) (of_rep temp___485))
+  (= (select temp___484 temp___487) (of_rep temp___486)))))))
+
+(define-fun dynamic_invariant ((temp___expr_192 Int)
+  (temp___is_init_189 Bool) (temp___skip_constant_190 Bool)
+  (temp___do_toplevel_191 Bool)) Bool (=>
+                                      (or (= temp___is_init_189 true)
                                       (<= 0 255)) (in_range1
-                                      temp___expr_200)))
-
-(define-fun dynamic_invariant1 ((temp___expr_275 Int)
-  (temp___is_init_272 Bool) (temp___skip_constant_273 Bool)
-  (temp___do_toplevel_274 Bool)) Bool (=>
-                                      (or (= temp___is_init_272 true)
-                                      (<= 1 1000)) (in_range2
-                                      temp___expr_275)))
+                                      temp___expr_192)))
 
 (declare-fun x () (Array Int (Array Int unsigned_byte)))
-
-(declare-fun o () (Array Int unsigned_byte))
-
-(declare-fun o1 () (Array Int unsigned_byte))
-
-(declare-fun o2 () (Array Int (Array Int unsigned_byte)))
 
 (declare-fun result () (Array Int (Array Int unsigned_byte)))
 
 (declare-fun x1 () (Array Int (Array Int unsigned_byte)))
 
 ;; H
-  (assert (= o (temp___491 10 12)))
-
-;; H
-  (assert (= o1 (temp___484 1 2 3 0)))
-
-;; H
-  (assert (= o2 (temp___479 o1 o)))
-
-;; H
   (assert (= result x))
 
 ;; H
-  (assert (= x1 o2))
+  (assert (= x1 (temp___471 (temp___476 1 2 3 0) (temp___483 10 12))))
 
 (assert
 ;; WP_parameter_def

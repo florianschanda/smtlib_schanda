@@ -512,6 +512,34 @@
 (define-fun mailboxT__ref___projection ((a mailboxT__ref)) us_rep (mailboxT__content
                                                                   a))
 
+(declare-fun temp___197 (Int) (Array (_ BitVec 8) integer))
+
+;; def_axiom
+  (assert
+  (forall ((temp___199 Int))
+  (forall ((temp___200 (_ BitVec 8)))
+  (= (select (temp___197 temp___199) temp___200) (of_rep temp___199)))))
+
+(define-fun default_initial_assumption ((temp___expr_195 us_rep)
+  (temp___skip_top_level_196 Bool)) Bool (and
+                                         (and
+                                         (and
+                                         (= (rec__communications__mailboxT__messages
+                                            (us_split_fields1
+                                            temp___expr_195)) (temp___197 0))
+                                         (= (to_rep1
+                                            (rec__communications__mailboxT__next_in
+                                            (us_split_fields1
+                                            temp___expr_195))) ((_ int2bv 8) 0)))
+                                         (= (to_rep1
+                                            (rec__communications__mailboxT__next_out
+                                            (us_split_fields1
+                                            temp___expr_195))) ((_ int2bv 8) 0)))
+                                         (= (to_rep2
+                                            (rec__communications__mailboxT__count
+                                            (us_split_fields1
+                                            temp___expr_195))) 0)))
+
 (declare-fun item_count (us_rep) Int)
 
 (declare-fun item_count__function_guard (Int us_rep) Bool)
@@ -524,19 +552,16 @@
 
 ;; item_count__post_axiom
   (assert
-  (forall ((self__ us_rep))
-  (! (let ((result (item_count self__)))
-     (=> (item_count__function_guard result self__) (dynamic_invariant1
-     result true false true))) :pattern ((item_count self__)) )))
+  (forall ((self__ us_rep)) (! (dynamic_invariant1 (item_count self__) true
+  false true) :pattern ((item_count self__)) )))
 
 ;; item_count__def_axiom
   (assert
   (forall ((self__ us_rep))
-  (! (=> (item_count__function_guard (item_count self__) self__)
-     (= (item_count self__) (to_rep2
+  (! (= (item_count self__) (to_rep2
                             (rec__communications__mailboxT__count
-                            (us_split_fields1 self__))))) :pattern ((item_count
-                                                                    self__)) )))
+                            (us_split_fields1 self__)))) :pattern ((item_count
+                                                                   self__)) )))
 
 (declare-fun n () Int)
 

@@ -135,11 +135,11 @@
 (define-fun token_kind__ref___projection ((a token_kind__ref)) token_kind 
   (token_kind__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_582 Int)
-  (temp___is_init_579 Bool) (temp___skip_constant_580 Bool)
-  (temp___do_toplevel_581 Bool)) Bool (=>
-                                      (or (= temp___is_init_579 true)
-                                      (<= 0 8)) (in_range3 temp___expr_582)))
+(define-fun dynamic_invariant1 ((temp___expr_572 Int)
+  (temp___is_init_569 Bool) (temp___skip_constant_570 Bool)
+  (temp___do_toplevel_571 Bool)) Bool (=>
+                                      (or (= temp___is_init_569 true)
+                                      (<= 0 8)) (in_range3 temp___expr_572)))
 
 (declare-fun to_rep1 (token_kind) Int)
 
@@ -367,14 +367,14 @@
 (define-fun token__ref___projection ((a token__ref)) us_rep (token__content
                                                             a))
 
-(define-fun default_initial_assumption ((temp___expr_596 us_rep)
-  (temp___skip_top_level_597 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_586 us_rep)
+  (temp___skip_top_level_587 Bool)) Bool (and
                                          (= (attr__constrained
-                                            temp___expr_596) false)
+                                            temp___expr_586) false)
                                          (= (to_rep1
                                             (rec__lexer__token__kind
                                             (us_split_discrs1
-                                            temp___expr_596))) 0)))
+                                            temp___expr_586))) 0)))
 
 (declare-fun t__attr__constrained () Bool)
 
@@ -610,12 +610,12 @@
 (declare-datatypes () ((t23b__ref (mk_t23b__ref (t23b__content us_rep)))))
 (define-fun t23b__ref___projection ((a t23b__ref)) us_rep (t23b__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_569 Int)
-  (temp___is_init_566 Bool) (temp___skip_constant_567 Bool)
-  (temp___do_toplevel_568 Bool)) Bool (=>
-                                      (or (= temp___is_init_566 true)
+(define-fun dynamic_invariant2 ((temp___expr_563 Int)
+  (temp___is_init_560 Bool) (temp___skip_constant_561 Bool)
+  (temp___do_toplevel_562 Bool)) Bool (=>
+                                      (or (= temp___is_init_560 true)
                                       (<= 0 2147483647)) (in_range2
-                                      temp___expr_569)))
+                                      temp___expr_563)))
 
 (declare-fun t__split_fields () natural)
 
@@ -649,17 +649,17 @@
 
 (declare-fun o8 () token_kind)
 
-(declare-fun temp___906 () token_kind)
+(declare-fun temp___856 () token_kind)
 
-(declare-fun temp___9061 () natural)
+(declare-fun temp___8561 () natural)
 
-(declare-fun temp___9062 () natural)
+(declare-fun temp___8562 () natural)
 
-(declare-fun temp___9063 () natural)
+(declare-fun temp___8563 () natural)
 
-(declare-fun temp___9064 () name_id)
+(declare-fun temp___8564 () name_id)
 
-(declare-fun temp___9065 () Bool)
+(declare-fun temp___8565 () Bool)
 
 (declare-fun usq_ () token_kind)
 
@@ -673,17 +673,17 @@
 
 (declare-fun usq_5 () Bool)
 
-(declare-fun temp___908 () token_kind)
+(declare-fun temp___858 () token_kind)
 
-(declare-fun temp___9081 () natural)
+(declare-fun temp___8581 () natural)
 
-(declare-fun temp___9082 () natural)
+(declare-fun temp___8582 () natural)
 
-(declare-fun temp___9083 () natural)
+(declare-fun temp___8583 () natural)
 
-(declare-fun temp___9084 () name_id)
+(declare-fun temp___8584 () name_id)
 
-(declare-fun temp___9085 () Bool)
+(declare-fun temp___8585 () Bool)
 
 (declare-fun o9 () token_kind)
 
@@ -703,21 +703,21 @@
 
 (declare-fun o17 () token_kind)
 
-(declare-fun temp___909 () token_kind)
+(declare-fun temp___859 () token_kind)
 
-(declare-fun temp___9091 () natural)
+(declare-fun temp___8591 () natural)
 
-(declare-fun temp___9092 () natural)
+(declare-fun temp___8592 () natural)
 
-(declare-fun temp___9093 () natural)
+(declare-fun temp___8593 () natural)
 
-(declare-fun temp___9094 () name_id)
+(declare-fun temp___8594 () name_id)
 
-(declare-fun temp___9095 () Bool)
+(declare-fun temp___8595 () Bool)
 
 (declare-fun usq_6 () us_rep)
 
-(declare-fun temp___911 () us_rep)
+(declare-fun temp___861 () us_rep)
 
 (declare-fun result () us_split_fields__ref)
 
@@ -801,27 +801,27 @@
   (assert (=> (= kind 1) (= o o8)))
 
 ;; H
-  (assert (=> (= kind 1) (= temp___906 o8)))
+  (assert (=> (= kind 1) (= temp___856 o8)))
 
 ;; H
-  (assert (=> (= kind 1) (= temp___9061 o4)))
+  (assert (=> (= kind 1) (= temp___8561 o4)))
 
 ;; H
-  (assert (=> (= kind 1) (= temp___9062 o5)))
+  (assert (=> (= kind 1) (= temp___8562 o5)))
 
 ;; H
-  (assert (=> (= kind 1) (= temp___9063 o6)))
+  (assert (=> (= kind 1) (= temp___8563 o6)))
 
 ;; H
-  (assert (=> (= kind 1) (= temp___9064 o7)))
+  (assert (=> (= kind 1) (= temp___8564 o7)))
 
 ;; H
-  (assert (=> (= kind 1) (= true temp___9065)))
+  (assert (=> (= kind 1) (= true temp___8565)))
 
 ;; H
   (assert
   (=> (= kind 1)
-  (=> (= t__attr__constrained true) (= temp___906 t__split_discrs))))
+  (=> (= t__attr__constrained true) (= temp___856 t__split_discrs))))
 
 ;; H
   (assert
@@ -829,31 +829,31 @@
   (= (mk___rep (mk___split_discrs usq_)
      (mk___split_fields usq_1 usq_2 usq_3 usq_4) usq_5) (mk___rep
                                                         (mk___split_discrs
-                                                        temp___906)
+                                                        temp___856)
                                                         (mk___split_fields
-                                                        temp___9061
-                                                        temp___9062
-                                                        temp___9063
-                                                        temp___9064)
-                                                        temp___9065))))
+                                                        temp___8561
+                                                        temp___8562
+                                                        temp___8563
+                                                        temp___8564)
+                                                        temp___8565))))
 
 ;; H
-  (assert (=> (= kind 1) (= usq_ temp___908)))
+  (assert (=> (= kind 1) (= usq_ temp___858)))
 
 ;; H
-  (assert (=> (= kind 1) (= usq_1 temp___9081)))
+  (assert (=> (= kind 1) (= usq_1 temp___8581)))
 
 ;; H
-  (assert (=> (= kind 1) (= usq_2 temp___9082)))
+  (assert (=> (= kind 1) (= usq_2 temp___8582)))
 
 ;; H
-  (assert (=> (= kind 1) (= usq_3 temp___9083)))
+  (assert (=> (= kind 1) (= usq_3 temp___8583)))
 
 ;; H
-  (assert (=> (= kind 1) (= usq_4 temp___9084)))
+  (assert (=> (= kind 1) (= usq_4 temp___8584)))
 
 ;; H
-  (assert (=> (= kind 1) (= t__attr__constrained temp___9085)))
+  (assert (=> (= kind 1) (= t__attr__constrained temp___8585)))
 
 ;; H
   (assert (=> (= kind 1) (= result t__split_fields8)))
@@ -861,15 +861,15 @@
 ;; H
   (assert
   (=> (= kind 1)
-  (= t__split_fields4 (mk___split_fields temp___9081 temp___9082 temp___9083
-                      temp___9084))))
+  (= t__split_fields4 (mk___split_fields temp___8581 temp___8582 temp___8583
+                      temp___8584))))
 
 ;; H
   (assert (=> (= kind 1) (= result1 t__split_discrs5)))
 
 ;; H
   (assert
-  (=> (= kind 1) (= t__split_discrs1 (mk___split_discrs temp___908))))
+  (=> (= kind 1) (= t__split_discrs1 (mk___split_discrs temp___858))))
 
 ;; H
   (assert (=> (not (= kind 1)) (= kind 2)))
@@ -908,39 +908,39 @@
   (assert (=> (not (= kind 1)) (= o9 o17)))
 
 ;; H
-  (assert (=> (not (= kind 1)) (= temp___909 o17)))
+  (assert (=> (not (= kind 1)) (= temp___859 o17)))
 
 ;; H
-  (assert (=> (not (= kind 1)) (= temp___9091 o13)))
+  (assert (=> (not (= kind 1)) (= temp___8591 o13)))
 
 ;; H
-  (assert (=> (not (= kind 1)) (= temp___9092 o14)))
+  (assert (=> (not (= kind 1)) (= temp___8592 o14)))
 
 ;; H
-  (assert (=> (not (= kind 1)) (= temp___9093 o15)))
+  (assert (=> (not (= kind 1)) (= temp___8593 o15)))
 
 ;; H
-  (assert (=> (not (= kind 1)) (= temp___9094 o16)))
+  (assert (=> (not (= kind 1)) (= temp___8594 o16)))
 
 ;; H
-  (assert (=> (not (= kind 1)) (= true temp___9095)))
-
-;; H
-  (assert
-  (=> (not (= kind 1))
-  (=> (= t__attr__constrained true) (= temp___909 t__split_discrs))))
+  (assert (=> (not (= kind 1)) (= true temp___8595)))
 
 ;; H
   (assert
   (=> (not (= kind 1))
-  (= usq_6 (mk___rep (mk___split_discrs temp___909)
-           (mk___split_fields temp___9091 temp___9092 temp___9093
-           temp___9094) temp___9095))))
+  (=> (= t__attr__constrained true) (= temp___859 t__split_discrs))))
 
 ;; H
   (assert
   (=> (not (= kind 1))
-  (= temp___911 (mk___rep (us_split_discrs1 usq_6) (us_split_fields1 usq_6)
+  (= usq_6 (mk___rep (mk___split_discrs temp___859)
+           (mk___split_fields temp___8591 temp___8592 temp___8593
+           temp___8594) temp___8595))))
+
+;; H
+  (assert
+  (=> (not (= kind 1))
+  (= temp___861 (mk___rep (us_split_discrs1 usq_6) (us_split_fields1 usq_6)
                 t__attr__constrained))))
 
 ;; H
@@ -948,14 +948,14 @@
 
 ;; H
   (assert
-  (=> (not (= kind 1)) (= t__split_fields5 (us_split_fields1 temp___911))))
+  (=> (not (= kind 1)) (= t__split_fields5 (us_split_fields1 temp___861))))
 
 ;; H
   (assert (=> (not (= kind 1)) (= result3 t__split_discrs5)))
 
 ;; H
   (assert
-  (=> (not (= kind 1)) (= t__split_discrs2 (us_split_discrs1 temp___911))))
+  (=> (not (= kind 1)) (= t__split_discrs2 (us_split_discrs1 temp___861))))
 
 ;; H
   (assert (=> (not (= kind 1)) (= t__split_discrs1 t__split_discrs2)))

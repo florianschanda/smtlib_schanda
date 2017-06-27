@@ -224,6 +224,12 @@
   (! (=> (in_range3 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
 
+(declare-fun pitch () Int)
+
+(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+
+(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int pitchangle))))))
 (declare-fun slide ((Array Int pitchangle) Int Int) (Array Int pitchangle))
@@ -334,12 +340,6 @@
      (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
-
-(declare-fun pitch () Int)
-
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
-
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
 (declare-sort history_range 0)
@@ -376,11 +376,11 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
 
-(define-fun dynamic_invariant3 ((temp___expr_210 Int)
-  (temp___is_init_207 Bool) (temp___skip_constant_208 Bool)
-  (temp___do_toplevel_209 Bool)) Bool (=>
-                                      (or (= temp___is_init_207 true)
-                                      (<= 1 10)) (in_range4 temp___expr_210)))
+(define-fun dynamic_invariant3 ((temp___expr_204 Int)
+  (temp___is_init_201 Bool) (temp___skip_constant_202 Bool)
+  (temp___do_toplevel_203 Bool)) Bool (=>
+                                      (or (= temp___is_init_201 true)
+                                      (<= 1 10)) (in_range4 temp___expr_204)))
 
 (declare-fun present_pitchrate () Int)
 
@@ -398,9 +398,9 @@
 
 (declare-fun i () Int)
 
-(declare-fun temp___227 () Int)
+(declare-fun temp___221 () Int)
 
-(declare-fun temp___226 () Int)
+(declare-fun temp___220 () Int)
 
 (declare-fun o () Int)
 
@@ -490,10 +490,10 @@
   (assert (= i1 1))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 10)) (= temp___227 i1)))
+  (assert (=> (and (<= 1 i1) (<= i1 10)) (= temp___221 i1)))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 10)) (= temp___226 sum1)))
+  (assert (=> (and (<= 1 i1) (<= i1 10)) (= temp___220 sum1)))
 
 ;; H
   (assert

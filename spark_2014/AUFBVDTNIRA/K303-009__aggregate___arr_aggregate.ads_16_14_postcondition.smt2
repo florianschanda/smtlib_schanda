@@ -231,101 +231,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(declare-sort t5b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq2 (t5b t5b) Bool)
-
-(declare-fun dummy2 () t5b)
-
-(declare-datatypes () ((t5b__ref (mk_t5b__ref (t5b__content t5b)))))
-(define-fun t5b__ref___projection ((a t5b__ref)) t5b (t5b__content a))
-
-(declare-sort t7b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq3 (t7b t7b) Bool)
-
-(declare-fun dummy3 () t7b)
-
-(declare-datatypes () ((t7b__ref (mk_t7b__ref (t7b__content t7b)))))
-(define-fun t7b__ref___projection ((a t7b__ref)) t7b (t7b__content a))
-
-(declare-sort t9b 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq4 (t9b t9b) Bool)
-
-(declare-fun dummy4 () t9b)
-
-(declare-datatypes () ((t9b__ref (mk_t9b__ref (t9b__content t9b)))))
-(define-fun t9b__ref___projection ((a t9b__ref)) t9b (t9b__content a))
-
-(declare-sort t11b 0)
-
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq5 (t11b t11b) Bool)
-
-(declare-fun dummy5 () t11b)
-
-(declare-datatypes () ((t11b__ref (mk_t11b__ref (t11b__content t11b)))))
-(define-fun t11b__ref___projection ((a t11b__ref)) t11b (t11b__content a))
-
-(declare-sort t13b 0)
-
-(define-fun in_range7 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
-
-(declare-fun user_eq6 (t13b t13b) Bool)
-
-(declare-fun dummy6 () t13b)
-
-(declare-datatypes () ((t13b__ref (mk_t13b__ref (t13b__content t13b)))))
-(define-fun t13b__ref___projection ((a t13b__ref)) t13b (t13b__content a))
-
 (declare-fun temp___318 (Int Int) (Array Int integer))
 
 ;; def_axiom
@@ -380,16 +285,6 @@
 
 (declare-fun a () (Array Int integer))
 
-(declare-fun o () (Array Int integer))
-
-(declare-fun o1 () (Array Int integer))
-
-(declare-fun o2 () (Array Int integer))
-
-(declare-fun o3 () (Array Int integer))
-
-(declare-fun o4 () (Array Int integer))
-
 (declare-fun result () (Array Int integer))
 
 (declare-fun a1 () (Array Int integer))
@@ -426,27 +321,16 @@
   (assert (= one 1))
 
 ;; H
-  (assert (=> (= b 1) (= o (temp___318 one 2))))
-
-;; H
   (assert (=> (= b 1) (= (mk_map__ref result) a8)))
 
 ;; H
-  (assert (=> (= b 1) (= a1 o)))
-
-;; H
-  (assert (=> (not (= b 1)) (=> (= b 2) (= o1 (temp___323 one)))))
+  (assert (=> (= b 1) (= a1 (temp___318 one 2))))
 
 ;; H
   (assert (=> (not (= b 1)) (=> (= b 2) (= (mk_map__ref result1) a8))))
 
 ;; H
-  (assert (=> (not (= b 1)) (=> (= b 2) (= a2 o1))))
-
-;; H
-  (assert
-  (=> (not (= b 1))
-  (=> (not (= b 2)) (=> (= b 3) (= o2 (temp___327 one one))))))
+  (assert (=> (not (= b 1)) (=> (= b 2) (= a2 (temp___323 one)))))
 
 ;; H
   (assert
@@ -454,13 +338,9 @@
   (=> (not (= b 2)) (=> (= b 3) (= (mk_map__ref result2) a8)))))
 
 ;; H
-  (assert (=> (not (= b 1)) (=> (not (= b 2)) (=> (= b 3) (= a3 o2)))))
-
-;; H
   (assert
   (=> (not (= b 1))
-  (=> (not (= b 2))
-  (=> (not (= b 3)) (=> (= b 4) (= o3 (temp___332 2 one)))))))
+  (=> (not (= b 2)) (=> (= b 3) (= a3 (temp___327 one one))))))
 
 ;; H
   (assert
@@ -471,13 +351,8 @@
 ;; H
   (assert
   (=> (not (= b 1))
-  (=> (not (= b 2)) (=> (not (= b 3)) (=> (= b 4) (= a4 o3))))))
-
-;; H
-  (assert
-  (=> (not (= b 1))
   (=> (not (= b 2))
-  (=> (not (= b 3)) (=> (not (= b 4)) (= o4 (temp___337 2 one)))))))
+  (=> (not (= b 3)) (=> (= b 4) (= a4 (temp___332 2 one)))))))
 
 ;; H
   (assert
@@ -488,7 +363,8 @@
 ;; H
   (assert
   (=> (not (= b 1))
-  (=> (not (= b 2)) (=> (not (= b 3)) (=> (not (= b 4)) (= a5 o4))))))
+  (=> (not (= b 2))
+  (=> (not (= b 3)) (=> (not (= b 4)) (= a5 (temp___337 2 one)))))))
 
 ;; H
   (assert

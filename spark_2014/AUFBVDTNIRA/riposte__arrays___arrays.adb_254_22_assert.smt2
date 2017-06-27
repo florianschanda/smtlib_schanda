@@ -249,25 +249,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(declare-sort t55b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 1000)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq3 (t55b t55b) Bool)
-
-(declare-fun dummy3 () t55b)
-
-(declare-datatypes () ((t55b__ref (mk_t55b__ref (t55b__content t55b)))))
-(define-fun t55b__ref___projection ((a t55b__ref)) t55b (t55b__content a))
-
 (declare-fun temp___319 (Int) (Array Int unsigned_byte))
 
 ;; def_axiom
@@ -292,23 +273,15 @@
 
 (declare-fun a () (Array Int unsigned_byte))
 
-(declare-fun o () (Array Int unsigned_byte))
-
 (declare-fun result () (Array Int unsigned_byte))
 
 (declare-fun a1 () (Array Int unsigned_byte))
 
 ;; H
-  (assert (= o (temp___319 0)))
-
-;; H
   (assert (= result a))
 
 ;; H
-  (assert (= a1 o))
-
-;; H
-  (assert (random_array__function_guard (random_array 5) 5))
+  (assert (= a1 (temp___319 0)))
 
 (assert
 ;; WP_parameter_def

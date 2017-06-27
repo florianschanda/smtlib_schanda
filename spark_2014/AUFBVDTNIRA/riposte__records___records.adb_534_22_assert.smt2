@@ -190,29 +190,18 @@
 ;; f_of_pair__post_axiom
   (assert true)
 
-(define-fun dynamic_invariant ((temp___expr_188 Int)
-  (temp___is_init_185 Bool) (temp___skip_constant_186 Bool)
-  (temp___do_toplevel_187 Bool)) Bool (=>
-                                      (or (= temp___is_init_185 true)
+(define-fun dynamic_invariant ((temp___expr_180 Int)
+  (temp___is_init_177 Bool) (temp___skip_constant_178 Bool)
+  (temp___do_toplevel_179 Bool)) Bool (=>
+                                      (or (= temp___is_init_177 true)
                                       (<= 0 255)) (in_range1
-                                      temp___expr_188)))
-
-;; H
-  (assert
-  (forall ((n Int)) (f_of_pair__function_guard
-  (f_of_pair (mk___rep (mk___split_fields (of_rep 0) (of_rep n))))
-  (mk___rep (mk___split_fields (of_rep 0) (of_rep n))))))
+                                      temp___expr_180)))
 
 ;; H
   (assert
   (forall ((n Int))
   (=> (and (<= 0 n) (<= n 255))
   (= (f_of_pair (mk___rep (mk___split_fields (of_rep 0) (of_rep n)))) true))))
-
-;; H
-  (assert (f_of_pair__function_guard
-  (f_of_pair (mk___rep (mk___split_fields (of_rep 5) (of_rep 5))))
-  (mk___rep (mk___split_fields (of_rep 5) (of_rep 5)))))
 
 (assert
 ;; WP_parameter_def

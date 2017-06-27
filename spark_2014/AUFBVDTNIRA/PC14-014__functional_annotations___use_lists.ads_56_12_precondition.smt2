@@ -789,8 +789,6 @@
   (! (=> (in_range1 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
                                                               (of_rep1 x))) )))
 
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -911,23 +909,23 @@
 
 (declare-fun o () Int)
 
-(declare-fun temp___530 () Int)
+(declare-fun temp___511 () Int)
 
-(declare-fun temp___529 () count_type)
+(declare-fun temp___510 () count_type)
 
-(declare-fun temp___528 () count_type)
+(declare-fun temp___509 () count_type)
 
-(declare-fun temp___5281 () us_main_type)
+(declare-fun temp___5091 () us_main_type)
 
-(declare-fun temp___532 () us_rep2)
+(declare-fun temp___513 () us_rep2)
 
-(declare-fun temp___527 () Int)
+(declare-fun temp___508 () Int)
 
-(declare-fun temp___531 () Int)
+(declare-fun temp___512 () Int)
 
-(declare-fun temp___534 () us_rep2)
+(declare-fun temp___515 () us_rep2)
 
-(declare-fun temp___533 () Int)
+(declare-fun temp___514 () Int)
 
 (declare-fun o1 () Int)
 
@@ -1082,47 +1080,47 @@
 ;; H
   (assert
   (=> (and (<= 1 i2) (<= i2 r27b))
-  (= temp___530 (length
+  (= temp___511 (length
                 (mk___rep l__split_discrs
                 (mk___split_fields l__split_fields))))))
 
 ;; H
-  (assert (=> (and (<= 1 i2) (<= i2 r27b)) (= temp___529 cu__split_fields1)))
+  (assert (=> (and (<= 1 i2) (<= i2 r27b)) (= temp___510 cu__split_fields1)))
 
 ;; H
   (assert
   (=> (and (<= 1 i2) (<= i2 r27b))
-  (and (= l__split_discrs (mk___split_discrs temp___528))
-  (= l__split_fields temp___5281))))
+  (and (= l__split_discrs (mk___split_discrs temp___509))
+  (= l__split_fields temp___5091))))
 
 ;; H
   (assert
   (=> (and (<= 1 i2) (<= i2 r27b))
-  (= temp___532 (model__
+  (= temp___513 (model__
                 (mk___rep l__split_discrs
                 (mk___split_fields l__split_fields))))))
 
 ;; H
-  (assert (=> (and (<= 1 i2) (<= i2 r27b)) (= temp___527 i2)))
+  (assert (=> (and (<= 1 i2) (<= i2 r27b)) (= temp___508 i2)))
 
 ;; H
   (assert
   (=> (and (<= 1 i2) (<= i2 r27b))
-  (= temp___531 (length
-                (mk___rep l__split_discrs
-                (mk___split_fields l__split_fields))))))
-
-;; H
-  (assert
-  (=> (and (<= 1 i2) (<= i2 r27b))
-  (= temp___534 (model__
+  (= temp___512 (length
                 (mk___rep l__split_discrs
                 (mk___split_fields l__split_fields))))))
 
 ;; H
   (assert
   (=> (and (<= 1 i2) (<= i2 r27b))
-  (= temp___533 (length
+  (= temp___515 (model__
+                (mk___rep l__split_discrs
+                (mk___split_fields l__split_fields))))))
+
+;; H
+  (assert
+  (=> (and (<= 1 i2) (<= i2 r27b))
+  (= temp___514 (length
                 (mk___rep l__split_discrs
                 (mk___split_fields l__split_fields))))))
 
@@ -1135,16 +1133,16 @@
 ;; H
   (assert
   (=> (and (<= 1 i2) (<= i2 r27b))
-  (= (length (mk___rep l__split_discrs l__split_fields10)) (- (+ temp___530 
+  (= (length (mk___rep l__split_discrs l__split_fields10)) (- (+ temp___511 
   i3) 1))))
 
 ;; H
   (assert
   (=> (and (<= 1 i2) (<= i2 r27b))
   (forall ((i10 Int))
-  (=> (and (<= 1 i10) (<= i10 temp___531))
+  (=> (and (<= 1 i10) (<= i10 temp___512))
   (= (get (model__ (mk___rep l__split_discrs l__split_fields10)) i10) 
-  (get temp___532 i10))))))
+  (get temp___513 i10))))))
 
 ;; H
   (assert
@@ -1152,7 +1150,7 @@
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j (- i3 1)))
   (= (get (model__ (mk___rep l__split_discrs l__split_fields10))
-     (+ j temp___533)) (get temp___534 j))))))
+     (+ j temp___514)) (get temp___515 j))))))
 
 ;; H
   (assert

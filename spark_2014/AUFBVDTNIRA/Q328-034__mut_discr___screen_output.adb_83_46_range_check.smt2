@@ -392,11 +392,8 @@
 ;; current_line__post_axiom
   (assert
   (forall ((input__line us_private) (input__last_char us_private))
-  (! (let ((result (current_line input__line input__last_char)))
-     (=> (current_line__function_guard result input__line input__last_char)
-     (dynamic_invariant2 result true false true))) :pattern ((current_line
-                                                             input__line
-                                                             input__last_char)) )))
+  (! (dynamic_invariant2 (current_line input__line input__last_char) true
+  false true) :pattern ((current_line input__line input__last_char)) )))
 
 (declare-fun column_number (us_private us_private) Int)
 
@@ -405,11 +402,8 @@
 ;; column_number__post_axiom
   (assert
   (forall ((input__line us_private) (input__first_char us_private))
-  (! (let ((result (column_number input__line input__first_char)))
-     (=> (column_number__function_guard result input__line input__first_char)
-     (dynamic_invariant result true false true))) :pattern ((column_number
-                                                            input__line
-                                                            input__first_char)) )))
+  (! (dynamic_invariant (column_number input__line input__first_char) true
+  false true) :pattern ((column_number input__line input__first_char)) )))
 
 (declare-fun line_number (us_private) Int)
 
@@ -417,11 +411,9 @@
 
 ;; line_number__post_axiom
   (assert
-  (forall ((input__line_num us_private))
-  (! (let ((result (line_number input__line_num)))
-     (=> (line_number__function_guard result input__line_num)
-     (dynamic_invariant result true false true))) :pattern ((line_number
-                                                            input__line_num)) )))
+  (forall ((input__line_num us_private)) (! (dynamic_invariant
+  (line_number input__line_num) true false
+  true) :pattern ((line_number input__line_num)) )))
 
 (declare-fun s () us_t)
 
@@ -637,10 +629,7 @@
 
 ;; H
   (assert
-  (=> (= pos1 0)
-  (and
-  (and (= o (column_number line first_char)) (column_number__function_guard 
-  o line first_char)) (in_range4 o))))
+  (=> (= pos1 0) (and (= o (column_number line first_char)) (in_range4 o))))
 
 ;; H
   (assert (=> (= pos1 0) (= result1 pos1)))
@@ -653,9 +642,8 @@
 
 ;; H
   (assert
-  (and
-  (and (= o10 (current_line line last_char)) (current_line__function_guard
-  o10 line last_char)) (dynamic_invariant2 o10 true false true)))
+  (and (= o10 (current_line line last_char)) (dynamic_invariant2 o10 true
+  false true)))
 
 ;; H
   (assert (= (- pos2 1) r14b))
@@ -695,10 +683,7 @@
   (assert (=> (not (and (<= 1 i1) (<= i1 r14b))) (= i6 i1)))
 
 ;; H
-  (assert
-  (and
-  (and (= o3 (line_number line_num)) (line_number__function_guard o3
-  line_num)) (in_range4 o3)))
+  (assert (and (= o3 (line_number line_num)) (in_range4 o3)))
 
 ;; H
   (assert (= o4 (attr__ATTRIBUTE_IMAGE4 o3)))

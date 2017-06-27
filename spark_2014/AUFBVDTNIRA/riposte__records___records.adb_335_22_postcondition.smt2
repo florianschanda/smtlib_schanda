@@ -266,11 +266,11 @@
 (define-fun optional_pair__ref___projection ((a optional_pair__ref)) us_rep1 
   (optional_pair__content a))
 
-(define-fun dynamic_invariant ((temp___expr_188 Int)
-  (temp___is_init_185 Bool) (temp___skip_constant_186 Bool)
-  (temp___do_toplevel_187 Bool)) Bool (=>
-                                      (or (= temp___is_init_185 true)
-                                      (<= 0 255)) (in_range temp___expr_188)))
+(define-fun dynamic_invariant ((temp___expr_180 Int)
+  (temp___is_init_177 Bool) (temp___skip_constant_178 Bool)
+  (temp___do_toplevel_179 Bool)) Bool (=>
+                                      (or (= temp___is_init_177 true)
+                                      (<= 0 255)) (in_range temp___expr_180)))
 
 (declare-fun update_a (us_rep1 Int) us_rep1)
 
@@ -281,19 +281,17 @@
   (forall ((x us_rep1))
   (forall ((n Int))
   (! (=> (dynamic_invariant n true true true)
-     (let ((result (update_a x n)))
-     (=> (update_a__function_guard result x n)
-     (= (bool_eq2 result
+     (= (bool_eq2 (update_a x n)
         (mk___rep1
         (let ((usq_ (us_split_fields3 x)))
         (mk___split_fields1
         (rec__records_prooffuncs__optional_pair__exists usq_)
-        (let ((temp___258 (rec__records_prooffuncs__optional_pair__the_pair
+        (let ((temp___246 (rec__records_prooffuncs__optional_pair__the_pair
                           (us_split_fields3 x))))
         (mk___rep
-        (let ((usq_1 (us_split_fields1 temp___258)))
+        (let ((usq_1 (us_split_fields1 temp___246)))
         (mk___split_fields (of_rep n)
-        (rec__records_prooffuncs__pair__b usq_1))))))))) true)))) :pattern (
+        (rec__records_prooffuncs__pair__b usq_1))))))))) true)) :pattern (
   (update_a x n)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -304,11 +302,11 @@
 
 (declare-fun x__split_fields2 () unsigned_byte)
 
-(declare-fun temp___409 () Bool)
+(declare-fun temp___392 () Bool)
 
-(declare-fun temp___4091 () unsigned_byte)
+(declare-fun temp___3921 () unsigned_byte)
 
-(declare-fun temp___4092 () unsigned_byte)
+(declare-fun temp___3922 () unsigned_byte)
 
 (declare-fun result () Bool)
 
@@ -334,28 +332,22 @@
 
 (declare-fun x__split_fields11 () unsigned_byte)
 
-(define-fun temp___4093 () us_rep1 (mk___rep1
-                                   (mk___split_fields1 temp___409
+(define-fun temp___3923 () us_rep1 (mk___rep1
+                                   (mk___split_fields1 temp___392
                                    (mk___rep
-                                   (mk___split_fields temp___4091
-                                   temp___4092)))))
+                                   (mk___split_fields temp___3921
+                                   temp___3922)))))
 
 ;; H
   (assert
   (and
-  (and
-  (= temp___4093 (update_a
+  (= temp___3923 (update_a
                  (mk___rep1
                  (mk___split_fields1 x__split_fields
                  (mk___rep
                  (mk___split_fields x__split_fields1 x__split_fields2))))
                  (to_rep x__split_fields2)))
-  (update_a__function_guard temp___4093
-  (mk___rep1
-  (mk___split_fields1 x__split_fields
-  (mk___rep (mk___split_fields x__split_fields1 x__split_fields2))))
-  (to_rep x__split_fields2)))
-  (= (bool_eq2 temp___4093
+  (= (bool_eq2 temp___3923
      (mk___rep1
      (mk___split_fields1 x__split_fields
      (mk___rep
@@ -371,13 +363,13 @@
   (assert (= result2 x__split_fields2))
 
 ;; H
-  (assert (= temp___409 x__split_fields3))
+  (assert (= temp___392 x__split_fields3))
 
 ;; H
-  (assert (= temp___4091 x__split_fields4))
+  (assert (= temp___3921 x__split_fields4))
 
 ;; H
-  (assert (= temp___4092 x__split_fields5))
+  (assert (= temp___3922 x__split_fields5))
 
 ;; H
   (assert (= x__split_fields6 x__split_fields3))

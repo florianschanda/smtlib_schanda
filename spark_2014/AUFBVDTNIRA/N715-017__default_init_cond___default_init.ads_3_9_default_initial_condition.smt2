@@ -144,21 +144,16 @@
 
 (declare-fun rec_ok__function_guard (Bool us_rep) Bool)
 
-;; temp___result_165_def
-  (assert
-  (forall ((temp___164 us_rep)) (rec_ok__function_guard (rec_ok temp___164)
-  temp___164)))
-
-(define-fun default_initial_assumption ((temp___expr_162 us_rep)
-  (temp___skip_top_level_163 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_159 us_rep)
+  (temp___skip_top_level_160 Bool)) Bool (and
                                          (= (to_rep
                                             (rec__default_init__rec__f
                                             (us_split_fields1
-                                            temp___expr_162))) 0)
+                                            temp___expr_159))) 0)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_163 true))
-                                         (= (rec_ok temp___expr_162) true))))
+                                         (= temp___skip_top_level_160 true))
+                                         (= (rec_ok temp___expr_159) true))))
 
 ;; rec_ok__post_axiom
   (assert true)
@@ -166,9 +161,8 @@
 ;; rec_ok__def_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (rec_ok__function_guard (rec_ok x) x)
-     (= (= (rec_ok x) true)
-     (= (to_rep (rec__default_init__rec__f (us_split_fields1 x))) 0))) :pattern (
+  (! (= (= (rec_ok x) true)
+     (= (to_rep (rec__default_init__rec__f (us_split_fields1 x))) 0)) :pattern (
   (rec_ok x)) )))
 
 (define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool)
@@ -178,18 +172,13 @@
                                      (<= 0 2147483647)) (in_range
                                      temp___expr_33)))
 
-(declare-fun temp___294 () natural)
-
-(define-fun temp___2941 () us_rep (mk___rep (mk___split_fields temp___294)))
+(declare-fun temp___271 () natural)
 
 ;; H
-  (assert (= (to_rep temp___294) 0))
-
-;; H
-  (assert (rec_ok__function_guard (rec_ok temp___2941) temp___2941))
+  (assert (= (to_rep temp___271) 0))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (= (rec_ok temp___2941) true)))
+  (not (= (rec_ok (mk___rep (mk___split_fields temp___271))) true)))
 (check-sat)

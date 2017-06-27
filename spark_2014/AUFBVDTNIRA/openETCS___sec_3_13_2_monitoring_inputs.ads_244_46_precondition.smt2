@@ -51,14 +51,10 @@
 
 (declare-fun pow2 (Int) Int)
 
-(declare-datatypes () ((mode (RNE2) (RNA2) (RTP2) (RTN2) (RTZ2))))
-(define-fun to_nearest ((m mode)) Bool (or (= m RNE2) (= m RNA2)))
+(declare-datatypes () ((mode (RNE1) (RNA1) (RTP1) (RTN1) (RTZ1))))
+(define-fun to_nearest ((m mode)) Bool (or (= m RNE1) (= m RNA1)))
 
 (declare-fun zeroF () t)
-
-(declare-fun abs1 (t) t)
-
-(declare-fun neg (t) t)
 
 (declare-fun add (mode t t) t)
 
@@ -67,6 +63,10 @@
 (declare-fun mul (mode t t) t)
 
 (declare-fun div1 (mode t t) t)
+
+(declare-fun abs1 (t) t)
+
+(declare-fun neg (t) t)
 
 (declare-fun fma (mode t t t) t)
 
@@ -175,16 +175,16 @@
   (=> (tqtisFinite x) (= (round m (tqtreal x)) (tqtreal x)))))
 
 ;; Round_down_le
-  (assert (forall ((x Real)) (<= (round RTN2 x) x)))
+  (assert (forall ((x Real)) (<= (round RTN1 x) x)))
 
 ;; Round_up_ge
-  (assert (forall ((x Real)) (<= x (round RTP2 x))))
+  (assert (forall ((x Real)) (<= x (round RTP1 x))))
 
 ;; Round_down_neg
-  (assert (forall ((x Real)) (= (round RTN2 (- x)) (- (round RTP2 x)))))
+  (assert (forall ((x Real)) (= (round RTN1 (- x)) (- (round RTP1 x)))))
 
 ;; Round_up_neg
-  (assert (forall ((x Real)) (= (round RTP2 (- x)) (- (round RTN2 x)))))
+  (assert (forall ((x Real)) (= (round RTP1 (- x)) (- (round RTN1 x)))))
 
 (define-fun in_safe_int_range ((i Int)) Bool (and (<= (- 16777216) i)
                                              (<= i 16777216)))
@@ -322,10 +322,10 @@
               (=> (diff_sign x y) (is_negative z))))
 
 (define-fun overflow_value ((m mode)
-  (x t)) Bool (ite (is-RTN2 m) (ite (is_positive x)
+  (x t)) Bool (ite (is-RTN1 m) (ite (is_positive x)
                                (and (tqtisFinite x)
                                (= (tqtreal x) (* 33554430.0 10141204801825835211973625643008.0)))
-                               (is_infinite x)) (ite (is-RTP2 m) (ite (is_positive
+                               (is_infinite x)) (ite (is-RTP1 m) (ite (is_positive
                                                                  x)
                                                                  (is_infinite
                                                                  x)
@@ -334,7 +334,7 @@
                                                                  x)
                                                                  (= (tqtreal
                                                                     x) (- (* 33554430.0 10141204801825835211973625643008.0))))) 
-                                                (ite (is-RTZ2 m) (ite (is_positive
+                                                (ite (is-RTZ1 m) (ite (is_positive
                                                                  x)
                                                                  (and
                                                                  (tqtisFinite
@@ -346,12 +346,12 @@
                                                                  x)
                                                                  (= (tqtreal
                                                                     x) (- (* 33554430.0 10141204801825835211973625643008.0))))) 
-                                                (ite (is-RNA2 m) (is_infinite
+                                                (ite (is-RNA1 m) (is_infinite
                                                 x) (is_infinite x))))))
 
 (define-fun sign_zero_result ((m mode)
   (x t)) Bool (=> (is_zero x)
-              (ite (is-RTN2 m) (is_negative x) (is_positive x))))
+              (ite (is-RTN1 m) (is_negative x) (is_positive x))))
 
 ;; add_finite
   (assert
@@ -645,84 +645,84 @@
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (=> (is_negative x) (= (roundToIntegral RTZ2 x) (roundToIntegral RTP2 x))))))
+  (=> (is_negative x) (= (roundToIntegral RTZ1 x) (roundToIntegral RTP1 x))))))
 
 ;; truncate_pos
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (=> (is_positive x) (= (roundToIntegral RTZ2 x) (roundToIntegral RTN2 x))))))
+  (=> (is_positive x) (= (roundToIntegral RTZ1 x) (roundToIntegral RTN1 x))))))
 
 ;; ceil_le
   (assert
-  (forall ((x t)) (=> (tqtisFinite x) (le x (roundToIntegral RTP2 x)))))
+  (forall ((x t)) (=> (tqtisFinite x) (le x (roundToIntegral RTP1 x)))))
 
 ;; ceil_lest
   (assert
   (forall ((x t) (y t))
-  (=> (and (le x y) (is_int1 y)) (le (roundToIntegral RTP2 x) y))))
+  (=> (and (le x y) (is_int1 y)) (le (roundToIntegral RTP1 x) y))))
 
 ;; ceil_to_real
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (= (tqtreal (roundToIntegral RTP2 x)) (to_real (- 1 (to_int (- 1.0 
+  (= (tqtreal (roundToIntegral RTP1 x)) (to_real (- 1 (to_int (- 1.0 
   (tqtreal x)))))))))
 
 ;; ceil_to_int
   (assert
   (forall ((m mode) (x t))
   (=> (tqtisFinite x)
-  (= (to_int1 m (roundToIntegral RTP2 x)) (- 1 (to_int (- 1.0 (tqtreal x))))))))
+  (= (to_int1 m (roundToIntegral RTP1 x)) (- 1 (to_int (- 1.0 (tqtreal x))))))))
 
 ;; floor_le
   (assert
-  (forall ((x t)) (=> (tqtisFinite x) (le (roundToIntegral RTN2 x) x))))
+  (forall ((x t)) (=> (tqtisFinite x) (le (roundToIntegral RTN1 x) x))))
 
 ;; floor_lest
   (assert
   (forall ((x t) (y t))
-  (=> (and (le y x) (is_int1 y)) (le y (roundToIntegral RTN2 x)))))
+  (=> (and (le y x) (is_int1 y)) (le y (roundToIntegral RTN1 x)))))
 
 ;; floor_to_real
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (= (tqtreal (roundToIntegral RTN2 x)) (to_real (to_int (tqtreal x)))))))
+  (= (tqtreal (roundToIntegral RTN1 x)) (to_real (to_int (tqtreal x)))))))
 
 ;; floor_to_int
   (assert
   (forall ((m mode) (x t))
   (=> (tqtisFinite x)
-  (= (to_int1 m (roundToIntegral RTN2 x)) (to_int (tqtreal x))))))
+  (= (to_int1 m (roundToIntegral RTN1 x)) (to_int (tqtreal x))))))
 
 ;; RNA_down
   (assert
   (forall ((x t))
-  (=> (lt (sub RNE2 x (roundToIntegral RTN2 x))
-  (sub RNE2 (roundToIntegral RTP2 x) x))
-  (= (roundToIntegral RNA2 x) (roundToIntegral RTN2 x)))))
+  (=> (lt (sub RNE1 x (roundToIntegral RTN1 x))
+  (sub RNE1 (roundToIntegral RTP1 x) x))
+  (= (roundToIntegral RNA1 x) (roundToIntegral RTN1 x)))))
 
 ;; RNA_up
   (assert
   (forall ((x t))
-  (=> (lt (sub RNE2 (roundToIntegral RTP2 x) x)
-  (sub RNE2 x (roundToIntegral RTN2 x)))
-  (= (roundToIntegral RNA2 x) (roundToIntegral RTP2 x)))))
+  (=> (lt (sub RNE1 (roundToIntegral RTP1 x) x)
+  (sub RNE1 x (roundToIntegral RTN1 x)))
+  (= (roundToIntegral RNA1 x) (roundToIntegral RTP1 x)))))
 
 ;; RNA_down_tie
   (assert
   (forall ((x t))
-  (=> (eq (sub RNE2 x (roundToIntegral RTN2 x))
-  (sub RNE2 (roundToIntegral RTP2 x) x))
-  (=> (is_negative x) (= (roundToIntegral RNA2 x) (roundToIntegral RTN2 x))))))
+  (=> (eq (sub RNE1 x (roundToIntegral RTN1 x))
+  (sub RNE1 (roundToIntegral RTP1 x) x))
+  (=> (is_negative x) (= (roundToIntegral RNA1 x) (roundToIntegral RTN1 x))))))
 
 ;; RNA_up_tie
   (assert
   (forall ((x t))
-  (=> (eq (sub RNE2 (roundToIntegral RTP2 x) x)
-  (sub RNE2 x (roundToIntegral RTN2 x)))
-  (=> (is_positive x) (= (roundToIntegral RNA2 x) (roundToIntegral RTP2 x))))))
+  (=> (eq (sub RNE1 (roundToIntegral RTP1 x) x)
+  (sub RNE1 x (roundToIntegral RTN1 x)))
+  (=> (is_positive x) (= (roundToIntegral RNA1 x) (roundToIntegral RTP1 x))))))
 
 ;; to_int_roundToIntegral
   (assert
@@ -758,12 +758,12 @@
 ;; round_bound_ne
   (assert
   (forall ((x Real))
-  (! (=> (no_overflow RNE2 x)
+  (! (=> (no_overflow RNE1 x)
      (and
      (<= (- (- x (* (/ 1.0 16777216.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 1427247692705959881058285969449495136382746624.0)) 
-     (round RNE2 x))
-     (<= (round RNE2 x) (+ (+ x (* (/ 1.0 16777216.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 1427247692705959881058285969449495136382746624.0))))) :pattern (
-  (round RNE2 x)) )))
+     (round RNE1 x))
+     (<= (round RNE1 x) (+ (+ x (* (/ 1.0 16777216.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 1427247692705959881058285969449495136382746624.0))))) :pattern (
+  (round RNE1 x)) )))
 
 (define-fun neq ((x t) (y t)) Bool (not (eq x y)))
 
@@ -790,7 +790,7 @@
   (assert (is_int1 fliteral))
 
 ;; one_of_int
-  (assert (= fliteral (of_int RNA2 1)))
+  (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
@@ -866,12 +866,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_152 t) (temp___is_init_149 Bool)
-  (temp___skip_constant_150 Bool)
-  (temp___do_toplevel_151 Bool)) Bool (=>
-                                      (or (= temp___is_init_149 true) (le
+(define-fun dynamic_invariant ((temp___expr_151 t) (temp___is_init_148 Bool)
+  (temp___skip_constant_149 Bool)
+  (temp___do_toplevel_150 Bool)) Bool (=>
+                                      (or (= temp___is_init_148 true) (le
                                       (neg fliteral1) fliteral1))
-                                      (tqtisFinite temp___expr_152)))
+                                      (tqtisFinite temp___expr_151)))
 
 (declare-sort deceleration_t 0)
 
@@ -901,12 +901,12 @@
 (define-fun deceleration_t__ref___projection ((a deceleration_t__ref)) deceleration_t 
   (deceleration_t__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_170 t) (temp___is_init_167 Bool)
-  (temp___skip_constant_168 Bool)
-  (temp___do_toplevel_169 Bool)) Bool (=>
-                                      (or (= temp___is_init_167 true) (le
+(define-fun dynamic_invariant1 ((temp___expr_169 t) (temp___is_init_166 Bool)
+  (temp___skip_constant_167 Bool)
+  (temp___do_toplevel_168 Bool)) Bool (=>
+                                      (or (= temp___is_init_166 true) (le
                                       fliteral2 fliteral1)) (in_range2
-                                      temp___expr_170)))
+                                      temp___expr_169)))
 
 (declare-sort distance_t 0)
 
@@ -929,12 +929,12 @@
 (define-fun distance_t__ref___projection ((a distance_t__ref)) distance_t 
   (distance_t__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_176 Int)
-  (temp___is_init_173 Bool) (temp___skip_constant_174 Bool)
-  (temp___do_toplevel_175 Bool)) Bool (=>
-                                      (or (= temp___is_init_173 true)
+(define-fun dynamic_invariant2 ((temp___expr_175 Int)
+  (temp___is_init_172 Bool) (temp___skip_constant_173 Bool)
+  (temp___do_toplevel_174 Bool)) Bool (=>
+                                      (or (= temp___is_init_172 true)
                                       (<= 0 2147483647)) (in_range3
-                                      temp___expr_176)))
+                                      temp___expr_175)))
 
 (declare-sort time_t 0)
 
@@ -955,12 +955,12 @@
 (define-fun time_t__ref___projection ((a time_t__ref)) time_t (time_t__content
                                                               a))
 
-(define-fun dynamic_invariant3 ((temp___expr_182 t) (temp___is_init_179 Bool)
-  (temp___skip_constant_180 Bool)
-  (temp___do_toplevel_181 Bool)) Bool (=>
-                                      (or (= temp___is_init_179 true) (le
+(define-fun dynamic_invariant3 ((temp___expr_181 t) (temp___is_init_178 Bool)
+  (temp___skip_constant_179 Bool)
+  (temp___do_toplevel_180 Bool)) Bool (=>
+                                      (or (= temp___is_init_178 true) (le
                                       (neg fliteral1) fliteral1))
-                                      (tqtisFinite temp___expr_182)))
+                                      (tqtisFinite temp___expr_181)))
 
 (declare-sort speed_km_per_h_t 0)
 
@@ -982,12 +982,12 @@
 (define-fun speed_km_per_h_t__ref___projection ((a speed_km_per_h_t__ref)) speed_km_per_h_t 
   (speed_km_per_h_t__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_158 t) (temp___is_init_155 Bool)
-  (temp___skip_constant_156 Bool)
-  (temp___do_toplevel_157 Bool)) Bool (=>
-                                      (or (= temp___is_init_155 true) (le
+(define-fun dynamic_invariant4 ((temp___expr_157 t) (temp___is_init_154 Bool)
+  (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)) Bool (=>
+                                      (or (= temp___is_init_154 true) (le
                                       (neg fliteral1) fliteral1))
-                                      (tqtisFinite temp___expr_158)))
+                                      (tqtisFinite temp___expr_157)))
 
 (declare-fun is_valid_speed_km_per_h (t) Bool)
 
@@ -1000,15 +1000,11 @@
 ;; m_per_s_from_km_per_h__post_axiom
   (assert
   (forall ((speed t))
-  (! (and (is_valid_speed_km_per_h__function_guard
-     (is_valid_speed_km_per_h speed) speed)
-     (=>
+  (! (=>
      (and (dynamic_invariant4 speed true true true)
-     (= (is_valid_speed_km_per_h speed) true))
-     (let ((result (m_per_s_from_km_per_h speed)))
-     (=> (m_per_s_from_km_per_h__function_guard result speed)
-     (dynamic_invariant result true false true))))) :pattern ((m_per_s_from_km_per_h
-                                                              speed)) )))
+     (= (is_valid_speed_km_per_h speed) true)) (dynamic_invariant
+     (m_per_s_from_km_per_h speed) true false true)) :pattern ((m_per_s_from_km_per_h
+                                                               speed)) )))
 
 (declare-fun fliteral3 () t)
 
@@ -1023,11 +1019,8 @@
 ;; m_per_s_from_km_per_h__def_axiom
   (assert
   (forall ((speed t))
-  (! (=>
-     (and (dynamic_invariant4 speed true true true)
-     (m_per_s_from_km_per_h__function_guard (m_per_s_from_km_per_h speed)
-     speed))
-     (= (m_per_s_from_km_per_h speed) (div1 RNE2 (mul RNE2 speed fliteral3)
+  (! (=> (dynamic_invariant4 speed true true true)
+     (= (m_per_s_from_km_per_h speed) (div1 RNE1 (mul RNE1 speed fliteral3)
                                       fliteral4))) :pattern ((m_per_s_from_km_per_h
                                                              speed)) )))
 
@@ -1438,11 +1431,11 @@
 (define-fun breaking_model_t__ref___projection ((a breaking_model_t__ref)) breaking_model_t 
   (breaking_model_t__content a))
 
-(define-fun dynamic_invariant5 ((temp___expr_297 Int)
-  (temp___is_init_294 Bool) (temp___skip_constant_295 Bool)
-  (temp___do_toplevel_296 Bool)) Bool (=>
-                                      (or (= temp___is_init_294 true)
-                                      (<= 0 1)) (in_range6 temp___expr_297)))
+(define-fun dynamic_invariant5 ((temp___expr_280 Int)
+  (temp___is_init_277 Bool) (temp___skip_constant_278 Bool)
+  (temp___do_toplevel_279 Bool)) Bool (=>
+                                      (or (= temp___is_init_277 true)
+                                      (<= 0 1)) (in_range6 temp___expr_280)))
 
 (declare-fun breaking_model () Int)
 
@@ -1451,25 +1444,6 @@
 (declare-fun t_traction_cut_off () t)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
-
-(declare-sort t1s 0)
-
-(define-fun in_range7 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
-
-(define-fun bool_eq13 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE10 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) Int)
-
-(declare-fun user_eq12 (t1s t1s) Bool)
-
-(declare-fun dummy12 () t1s)
-
-(declare-datatypes () ((t1s__ref (mk_t1s__ref (t1s__content t1s)))))
-(define-fun t1s__ref___projection ((a t1s__ref)) t1s (t1s__content a))
 
 (declare-fun a_brake_emergency_model () us_rep1)
 
@@ -1533,25 +1507,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS15 () Int)
 
-(declare-sort t3s 0)
-
-(define-fun in_range8 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
-
-(define-fun bool_eq14 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE11 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check11 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE11 (us_image) Int)
-
-(declare-fun user_eq13 (t3s t3s) Bool)
-
-(declare-fun dummy13 () t3s)
-
-(declare-datatypes () ((t3s__ref (mk_t3s__ref (t3s__content t3s)))))
-(define-fun t3s__ref___projection ((a t3s__ref)) t3s (t3s__content a))
-
 (declare-fun kdry_rst_model () us_rep1)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS16 () Int)
@@ -1565,25 +1520,6 @@
   (forall ((temp___142 Int))
   (ite (= temp___142 0) (= (select temp___139 temp___142) temp___140)
   (= (select temp___139 temp___142) temp___141))))))
-
-(declare-sort t5s 0)
-
-(define-fun in_range9 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
-
-(define-fun bool_eq15 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE12 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check12 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE12 (us_image) Int)
-
-(declare-fun user_eq14 (t5s t5s) Bool)
-
-(declare-fun dummy14 () t5s)
-
-(declare-datatypes () ((t5s__ref (mk_t5s__ref (t5s__content t5s)))))
-(define-fun t5s__ref_2__projection ((a t5s__ref)) t5s (t5s__content a))
 
 (declare-fun kwet_rst_model () us_rep1)
 
@@ -1722,10 +1658,7 @@
   (assert (and (tqtisFinite fliteral9) (= (tqtreal fliteral9) 250.0)))
 
 ;; maximum_train_speed__def_axiom
-  (assert
-  (and (m_per_s_from_km_per_h__function_guard
-  (m_per_s_from_km_per_h fliteral9) fliteral9)
-  (= maximum_train_speed (m_per_s_from_km_per_h fliteral9))))
+  (assert (= maximum_train_speed (m_per_s_from_km_per_h fliteral9)))
 
 ;; is_valid_speed_km_per_h__post_axiom
   (assert true)
@@ -1738,24 +1671,22 @@
 ;; is_valid_speed_km_per_h__def_axiom
   (assert
   (forall ((speed t))
-  (! (=> (is_valid_speed_km_per_h__function_guard
-     (is_valid_speed_km_per_h speed) speed)
-     (= (= (is_valid_speed_km_per_h speed) true)
-     (and (le fliteral2 speed) (le speed fliteral10)))) :pattern ((is_valid_speed_km_per_h
-                                                                  speed)) )))
+  (! (= (= (is_valid_speed_km_per_h speed) true)
+     (and (le fliteral2 speed) (le speed fliteral10))) :pattern ((is_valid_speed_km_per_h
+                                                                 speed)) )))
 
-(define-fun dynamic_invariant7 ((temp___expr_194 Int)
-  (temp___is_init_191 Bool) (temp___skip_constant_192 Bool)
-  (temp___do_toplevel_193 Bool)) Bool (=>
-                                      (or (= temp___is_init_191 true)
-                                      (<= 0 10)) (in_range4 temp___expr_194)))
+(define-fun dynamic_invariant7 ((temp___expr_187 Int)
+  (temp___is_init_184 Bool) (temp___skip_constant_185 Bool)
+  (temp___do_toplevel_186 Bool)) Bool (=>
+                                      (or (= temp___is_init_184 true)
+                                      (<= 0 10)) (in_range4 temp___expr_187)))
 
-(define-fun dynamic_invariant8 ((temp___expr_200 Int)
-  (temp___is_init_197 Bool) (temp___skip_constant_198 Bool)
-  (temp___do_toplevel_199 Bool)) Bool (=>
-                                      (or (= temp___is_init_197 true)
+(define-fun dynamic_invariant8 ((temp___expr_193 Int)
+  (temp___is_init_190 Bool) (temp___skip_constant_191 Bool)
+  (temp___do_toplevel_192 Bool)) Bool (=>
+                                      (or (= temp___is_init_190 true)
                                       (<= 0 2147483647)) (in_range5
-                                      temp___expr_200)))
+                                      temp___expr_193)))
 
 (declare-fun o () float)
 
@@ -2045,10 +1976,6 @@
 
 ;; H
   (assert (in_range3 train_length))
-
-;; H
-  (assert (is_valid_speed_km_per_h__function_guard
-  (is_valid_speed_km_per_h fliteral9) fliteral9))
 
 (assert
 ;; WP_parameter_def

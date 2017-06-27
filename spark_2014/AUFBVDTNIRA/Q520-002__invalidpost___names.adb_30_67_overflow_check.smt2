@@ -416,11 +416,11 @@
 (define-fun state_type__ref___projection ((a state_type__ref)) state_type 
   (state_type__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_192 Int)
-  (temp___is_init_189 Bool) (temp___skip_constant_190 Bool)
-  (temp___do_toplevel_191 Bool)) Bool (=>
-                                      (or (= temp___is_init_189 true)
-                                      (<= 0 2)) (in_range5 temp___expr_192)))
+(define-fun dynamic_invariant2 ((temp___expr_190 Int)
+  (temp___is_init_187 Bool) (temp___skip_constant_188 Bool)
+  (temp___do_toplevel_189 Bool)) Bool (=>
+                                      (or (= temp___is_init_187 true)
+                                      (<= 0 2)) (in_range5 temp___expr_190)))
 
 (declare-sort length_type 0)
 
@@ -443,22 +443,18 @@
 (define-fun length_type__ref___projection ((a length_type__ref)) length_type 
   (length_type__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_198 Int)
-  (temp___is_init_195 Bool) (temp___skip_constant_196 Bool)
-  (temp___do_toplevel_197 Bool)) Bool (=>
-                                      (or (= temp___is_init_195 true)
+(define-fun dynamic_invariant3 ((temp___expr_196 Int)
+  (temp___is_init_193 Bool) (temp___skip_constant_194 Bool)
+  (temp___do_toplevel_195 Bool)) Bool (=>
+                                      (or (= temp___is_init_193 true)
                                       (<= 0 255)) (in_range6
-                                      temp___expr_198)))
+                                      temp___expr_196)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
-
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))

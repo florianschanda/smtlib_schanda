@@ -629,8 +629,6 @@
 
 (declare-fun status2 () Int)
 
-(define-fun o1 () us_rep1 (mk___rep1 (mk___split_fields1 o)))
-
 ;; H
   (assert (in_range1 lower))
 
@@ -668,7 +666,7 @@
   free1)) (=> (<= 0 3) (in_range4 status1))) (<= current2 upper)))
 
 ;; H
-  (assert (and (= o1 (back Tuple0)) (back__function_guard o1 Tuple0)))
+  (assert (= (mk___rep1 (mk___split_fields1 o)) (back Tuple0)))
 
 ;; H
   (assert

@@ -91,9 +91,6 @@
   (assert (in_range x))
 
 ;; H
-  (assert (ogt__function_guard (ogt x t_zero) x t_zero))
-
-;; H
   (assert (= (ogt x t_zero) true))
 
 (assert

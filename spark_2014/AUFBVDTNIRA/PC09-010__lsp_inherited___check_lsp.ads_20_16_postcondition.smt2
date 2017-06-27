@@ -458,8 +458,8 @@
 (define-fun grand_child__ref___projection ((a grand_child__ref)) us_rep2 
   (grand_child__content a))
 
-(define-fun default_initial_assumption ((temp___expr_164 us_rep2)
-  (temp___skip_top_level_165 Bool)) Bool (= (attr__tag2 temp___expr_164) 
+(define-fun default_initial_assumption ((temp___expr_159 us_rep2)
+  (temp___skip_top_level_160 Bool)) Bool (= (attr__tag2 temp___expr_159) 
   us_tag2))
 
 (declare-fun x () us_rep2)
@@ -477,8 +477,8 @@
   (temp___skip_top_level_137 Bool)) Bool (= (attr__tag temp___expr_136) 
   us_tag))
 
-(define-fun default_initial_assumption2 ((temp___expr_150 us_rep1)
-  (temp___skip_top_level_151 Bool)) Bool (= (attr__tag1 temp___expr_150) 
+(define-fun default_initial_assumption2 ((temp___expr_147 us_rep1)
+  (temp___skip_top_level_148 Bool)) Bool (= (attr__tag1 temp___expr_147) 
   us_tag1))
 
 (declare-fun check_lsp__p_overridden__get_f__3__result () Int)

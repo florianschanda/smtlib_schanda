@@ -320,11 +320,9 @@
   (assert
   (forall ((number_list (Array Int Bool)))
   (forall ((low Int) (high Int))
-  (! (=> (has_true__function_guard (has_true number_list low high)
-     number_list low high)
-     (= (= (has_true number_list low high) true)
+  (! (= (= (has_true number_list low high) true)
      (exists ((v Int))
-     (and (and (<= low v) (<= v high)) (= (select number_list v) true))))) :pattern (
+     (and (and (<= low v) (<= v high)) (= (select number_list v) true)))) :pattern (
   (has_true number_list low high)) ))))
 
 (declare-fun number_list () (Array Int Bool))
@@ -363,9 +361,9 @@
 
 (declare-fun o2 () Int)
 
-(declare-fun temp___267 () Int)
+(declare-fun temp___236 () Int)
 
-(declare-fun temp___266 () Bool)
+(declare-fun temp___235 () Bool)
 
 (declare-fun o3 () Int)
 
@@ -379,9 +377,9 @@
 
 (declare-fun o8 () Int)
 
-(declare-fun temp___269 () Int)
+(declare-fun temp___238 () Int)
 
-(declare-fun temp___268 () Bool)
+(declare-fun temp___237 () Bool)
 
 (declare-fun o9 () Int)
 
@@ -658,18 +656,6 @@
   (assert (in_range2 value))
 
 ;; H
-  (assert (has_true__function_guard (has_true number_list value 100000)
-  number_list value 100000))
-
-;; H
-  (assert (has_true__function_guard (has_true number_list 0 value)
-  number_list 0 value))
-
-;; H
-  (assert (has_true__function_guard (has_true number_list 0 100000)
-  number_list 0 100000))
-
-;; H
   (assert
   (and (and (<= 0 value) (<= value 100000))
   (ite (= mode 0) (= (has_true number_list value 100000) true)
@@ -746,8 +732,8 @@
   (and (= right1 result4) (= right2 o2)))
   (and
   (and
-  (and (= temp___267 right2)
-  (and (= temp___266 right_is_out)
+  (and (= temp___236 right2)
+  (and (= temp___235 right_is_out)
   (and
   (and (= (mk_bool__ref result5) right_is_out23)
   (= right_is_out2 (ite (< 100000 right2) true false)))
@@ -805,8 +791,8 @@
   (and (= result11 (mk_int__ref left1)) (= left2 o8)))
   (and
   (and
-  (and (= temp___269 left2)
-  (and (= temp___268 left_is_out)
+  (and (= temp___238 left2)
+  (and (= temp___237 left_is_out)
   (and
   (and (= result12 left_is_out20)
   (= left_is_out2 (ite (< left2 0) true false)))

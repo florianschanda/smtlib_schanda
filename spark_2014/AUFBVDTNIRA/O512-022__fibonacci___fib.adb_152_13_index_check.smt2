@@ -291,7 +291,7 @@
 
 (declare-fun i1 () Int)
 
-(declare-fun temp___227 () (Array Int integer))
+(declare-fun temp___221 () (Array Int integer))
 
 (declare-fun o () Int)
 
@@ -305,9 +305,9 @@
 
 (declare-fun o5 () (Array Int integer))
 
-(declare-fun temp___234 () Int)
+(declare-fun temp___228 () Int)
 
-(declare-fun temp___231 () Int)
+(declare-fun temp___225 () Int)
 
 (declare-fun o6 () Int)
 
@@ -379,16 +379,16 @@
   (assert (= i2 0))
 
 ;; H
-  (assert (=> (and (<= 0 i2) (<= i2 k)) (= temp___227 a1)))
+  (assert (=> (and (<= 0 i2) (<= i2 k)) (= temp___221 a1)))
 
 ;; H
   (assert
   (=> (and (<= 0 i2) (<= i2 k))
   (and
-  (forall ((temp___228 Int))
-  (=> (and (<= 0 temp___228) (<= temp___228 100))
-  (=> (<= i3 temp___228)
-  (= (select a12 temp___228) (select temp___227 temp___228)))))
+  (forall ((temp___222 Int))
+  (=> (and (<= 0 temp___222) (<= temp___222 100))
+  (=> (<= i3 temp___222)
+  (= (select a12 temp___222) (select temp___221 temp___222)))))
   (and (<= 0 i3) (<= i3 k)))))
 
 ;; H
@@ -462,16 +462,16 @@
   (assert (=> (not (and (<= 0 i2) (<= i2 k))) (= a17 a11)))
 
 ;; H
-  (assert (and (= temp___234 (+ k 1)) (in_range1 (+ k 1))))
+  (assert (and (= temp___228 (+ k 1)) (in_range1 (+ k 1))))
 
 ;; H
   (assert (= (mk_int__ref result2) (mk_int__ref i1)))
 
 ;; H
-  (assert (= i8 temp___234))
+  (assert (= i8 temp___228))
 
 ;; H
-  (assert (<= temp___234 i8))
+  (assert (<= temp___228 i8))
 
 ;; H
   (assert (<= i8 100))
@@ -479,19 +479,19 @@
 ;; H
   (assert
   (and
-  (forall ((temp___233 Int))
-  (=> (and (<= 0 temp___233) (<= temp___233 100))
-  (=> (<= i9 temp___233) (= (select a18 temp___233) (select a16 temp___233)))))
+  (forall ((temp___227 Int))
+  (=> (and (<= 0 temp___227) (<= temp___227 100))
+  (=> (<= i9 temp___227) (= (select a18 temp___227) (select a16 temp___227)))))
   (and (<= (+ k 1) i9) (<= i9 100))))
 
 ;; H
-  (assert (and (= temp___231 (- i9 k)) (in_range1 (- i9 k))))
+  (assert (and (= temp___225 (- i9 k)) (in_range1 (- i9 k))))
 
 ;; H
-  (assert (and (<= 0 temp___231) (<= temp___231 100)))
+  (assert (and (<= 0 temp___225) (<= temp___225 100)))
 
 ;; H
-  (assert (= o6 temp___231))
+  (assert (= o6 temp___225))
 
 ;; H
   (assert (= o7 (select c1 o6)))

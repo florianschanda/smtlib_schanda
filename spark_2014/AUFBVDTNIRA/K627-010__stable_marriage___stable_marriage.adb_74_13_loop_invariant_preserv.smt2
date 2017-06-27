@@ -245,13 +245,11 @@
 ;; is_permutation_2__post_axiom
   (assert
   (forall ((r2 (Array Int group2_id)))
-  (! (let ((result (is_permutation_2 r2)))
-     (=> (is_permutation_2__function_guard result r2)
-     (= (= result true)
+  (! (= (= (is_permutation_2 r2) true)
      (forall ((g2 Int))
      (=> (and (<= 1 g2) (<= g2 64))
      (exists ((rank Int))
-     (and (and (<= 1 rank) (<= rank 64)) (= (to_rep (select r2 rank)) g2)))))))) :pattern (
+     (and (and (<= 1 rank) (<= rank 64)) (= (to_rep (select r2 rank)) g2)))))) :pattern (
   (is_permutation_2 r2)) )))
 
 (declare-datatypes ()
@@ -368,25 +366,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(declare-sort t48b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 64)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq2 (t48b t48b) Bool)
-
-(declare-fun dummy2 () t48b)
-
-(declare-datatypes () ((t48b__ref (mk_t48b__ref (t48b__content t48b)))))
-(define-fun t48b__ref___projection ((a t48b__ref)) t48b (t48b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
@@ -395,10 +374,10 @@
 
 ;; def_axiom
   (assert
-  (forall ((temp___491 Int))
-  (forall ((temp___492 Int))
-  (= (select (stable_marriage__invert_2__result__aggregate_def temp___491) temp___492) 
-  (of_rep1 temp___491)))))
+  (forall ((temp___451 Int))
+  (forall ((temp___452 Int))
+  (= (select (stable_marriage__invert_2__result__aggregate_def temp___451) temp___452) 
+  (of_rep1 temp___451)))))
 
 (define-fun dynamic_invariant ((temp___expr_149 Int)
   (temp___is_init_146 Bool) (temp___skip_constant_147 Bool)
@@ -416,11 +395,9 @@
 
 (declare-fun rank () Int)
 
-(declare-fun o () (Array Int ranking))
+(declare-fun o () ranking)
 
-(declare-fun o1 () ranking)
-
-(declare-fun o2 () (Array Int ranking))
+(declare-fun o1 () (Array Int ranking))
 
 (declare-fun result () (Array Int ranking))
 
@@ -443,19 +420,14 @@
 (declare-fun rank3 () Int)
 
 ;; H
-  (assert (is_permutation_2__function_guard (is_permutation_2 r2) r2))
-
-;; H
   (assert (= (is_permutation_2 r2) true))
-
-;; H
-  (assert (= o (stable_marriage__invert_2__result__aggregate_def 64)))
 
 ;; H
   (assert (= (mk_map__ref1 result) (mk_map__ref1 result__)))
 
 ;; H
-  (assert (= result__1 o))
+  (assert
+  (= result__1 (stable_marriage__invert_2__result__aggregate_def 64)))
 
 ;; H
   (assert
@@ -499,16 +471,16 @@
   (and (=> (<= 1 64) (in_range2 rank2)) (and (<= 1 rank2) (<= rank2 64))))
 
 ;; H
-  (assert (= (to_rep1 o1) rank2))
+  (assert (= (to_rep1 o) rank2))
 
 ;; H
-  (assert (= o2 (store result__2 (to_rep (select r2 rank2)) o1)))
+  (assert (= o1 (store result__2 (to_rep (select r2 rank2)) o)))
 
 ;; H
   (assert (= result__2 result2))
 
 ;; H
-  (assert (= result__3 o2))
+  (assert (= result__3 o1))
 
 ;; H
   (assert (not (= rank2 64)))

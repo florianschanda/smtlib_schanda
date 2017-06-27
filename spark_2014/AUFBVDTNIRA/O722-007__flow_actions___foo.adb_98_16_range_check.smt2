@@ -333,8 +333,6 @@
   (! (=> (in_range1 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
                                                               (of_rep1 x))) )))
 
-(declare-fun first () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -355,7 +353,7 @@
 
 (declare-sort t 0)
 
-(declare-fun first1 (t) integer)
+(declare-fun first (t) integer)
 
 (declare-fun last (t) integer)
 
@@ -366,7 +364,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first1 (mk f l))) f) (= (to_rep1 (last (mk f l))) l)))) :pattern (
+     (and (= (to_rep1 (first (mk f l))) f) (= (to_rep1 (last (mk f l))) l)))) :pattern (
   (mk f l)) )))
 
 (define-fun dynamic_property1 ((range_first Int) (range_last Int) (low Int)
@@ -382,12 +380,12 @@
 (define-fun of_array ((a (Array Int character)) (f Int)
   (l Int)) us_t (mk___t a (mk f l)))
 
-(define-fun first2 ((a us_t)) Int (to_rep1 (first1 (rt a))))
+(define-fun first1 ((a us_t)) Int (to_rep1 (first (rt a))))
 
 (define-fun last1 ((a us_t)) Int (to_rep1 (last (rt a))))
 
-(define-fun length ((a us_t)) Int (ite (<= (first2 a) (last1 a))
-                                  (+ (- (last1 a) (first2 a)) 1) 0))
+(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last1 a))
+                                  (+ (- (last1 a) (first1 a)) 1) 0))
 
 (declare-fun value__size () Int)
 
@@ -421,8 +419,8 @@
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment a))))
 
 (define-fun bool_eq7 ((x us_t)
-  (y us_t)) Bool (bool_eq3 (elts x) (to_rep1 (first1 (rt x)))
-                 (to_rep1 (last (rt x))) (elts y) (to_rep1 (first1 (rt y)))
+  (y us_t)) Bool (bool_eq3 (elts x) (to_rep1 (first (rt x)))
+                 (to_rep1 (last (rt x))) (elts y) (to_rep1 (first (rt y)))
                  (to_rep1 (last (rt y)))))
 
 (declare-fun user_eq6 (us_t us_t) Bool)

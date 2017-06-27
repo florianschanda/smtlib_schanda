@@ -289,15 +289,13 @@
 ;; is_valid__post_axiom
   (assert
   (forall ((a us_rep1))
-  (! (let ((result (is_valid a)))
-     (=> (is_valid__function_guard result a)
-     (= (= result true)
+  (! (= (= (is_valid a) true)
      (=>
      (not
      (= (rec__records_prooffuncs__optional_pair__exists (us_split_fields3 a)) true))
      (= (bool_eq1
         (rec__records_prooffuncs__optional_pair__the_pair
-        (us_split_fields3 a)) null_pair) true))))) :pattern ((is_valid a)) )))
+        (us_split_fields3 a)) null_pair) true))) :pattern ((is_valid a)) )))
 
 (declare-fun src () us_rep1)
 
@@ -305,12 +303,12 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(define-fun dynamic_invariant ((temp___expr_188 Int)
-  (temp___is_init_185 Bool) (temp___skip_constant_186 Bool)
-  (temp___do_toplevel_187 Bool)) Bool (=>
-                                      (or (= temp___is_init_185 true)
+(define-fun dynamic_invariant ((temp___expr_180 Int)
+  (temp___is_init_177 Bool) (temp___skip_constant_178 Bool)
+  (temp___do_toplevel_179 Bool)) Bool (=>
+                                      (or (= temp___is_init_177 true)
                                       (<= 0 255)) (in_range1
-                                      temp___expr_188)))
+                                      temp___expr_180)))
 
 ;; null_pair__def_axiom
   (assert (= null_pair (mk___rep (mk___split_fields (of_rep 0) (of_rep 0)))))
@@ -352,9 +350,6 @@
 (declare-fun dst__split_fields11 () unsigned_byte)
 
 (declare-fun dst__split_fields12 () us_split_fields2)
-
-;; H
-  (assert (is_valid__function_guard (is_valid src) src))
 
 ;; H
   (assert (= (is_valid src) true))
@@ -407,16 +402,6 @@
                          (mk___rep
                          (mk___split_fields dst__split_fields7
                          dst__split_fields8)))))
-
-;; H
-  (assert (is_valid__function_guard
-  (is_valid
-  (mk___rep1
-  (mk___split_fields1 dst__split_fields9
-  (mk___rep (mk___split_fields dst__split_fields10 dst__split_fields11)))))
-  (mk___rep1
-  (mk___split_fields1 dst__split_fields9
-  (mk___rep (mk___split_fields dst__split_fields10 dst__split_fields11))))))
 
 (assert
 ;; WP_parameter_def

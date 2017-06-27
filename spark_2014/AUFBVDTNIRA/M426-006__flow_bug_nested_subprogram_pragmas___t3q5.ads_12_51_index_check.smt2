@@ -271,7 +271,7 @@
 
 (declare-fun i () Int)
 
-(declare-fun temp___174 () Int)
+(declare-fun temp___171 () Int)
 
 (declare-fun o () Int)
 
@@ -292,13 +292,13 @@
   (assert (<= i (- u 1)))
 
 ;; H
-  (assert (and (= temp___174 (+ i 1)) (in_range1 (+ i 1))))
+  (assert (and (= temp___171 (+ i 1)) (in_range1 (+ i 1))))
 
 ;; H
-  (assert (and (<= 1 temp___174) (<= temp___174 100)))
+  (assert (and (<= 1 temp___171) (<= temp___171 100)))
 
 ;; H
-  (assert (= o temp___174))
+  (assert (= o temp___171))
 
 ;; H
   (assert (= o1 (select a o)))

@@ -1668,6 +1668,22 @@
 (define-fun receiver_type__ref___projection ((a receiver_type__ref)) us_rep2 
   (receiver_type__content a))
 
+(declare-fun temp___4475 (us_rep1) (Array (_ BitVec 8) us_rep1))
+
+;; def_axiom
+  (assert
+  (forall ((temp___4477 us_rep1))
+  (forall ((temp___4478 (_ BitVec 8)))
+  (= (select (temp___4475 temp___4477) temp___4478) temp___4477))))
+
+(declare-fun temp___4479 ((_ BitVec 8)) (Array Int bits_8))
+
+;; def_axiom
+  (assert
+  (forall ((temp___4481 (_ BitVec 8)))
+  (forall ((temp___4482 Int))
+  (= (select (temp___4479 temp___4481) temp___4482) (of_rep4 temp___4481)))))
+
 (define-fun dynamic_invariant3 ((temp___expr_4469 us_rep2)
   (temp___is_init_4466 Bool) (temp___skip_constant_4467 Bool)
   (temp___do_toplevel_4468 Bool)) Bool (forall ((temp___4470 (_ BitVec 8)))
@@ -1688,6 +1704,36 @@
                                           (rec__decadriver__rx_frame_type__size
                                           (us_split_fields3 temp___4471))) 0))))))
 
+(define-fun default_initial_assumption ((temp___expr_4473 us_rep2)
+  (temp___skip_top_level_4474 Bool)) Bool (and
+                                          (and
+                                          (and
+                                          (and
+                                          (= (rec__decadriver__receiver_type__frame_queue
+                                             (us_split_fields5
+                                             temp___expr_4473)) (temp___4475
+                                                                (mk___rep1
+                                                                (mk___split_fields1
+                                                                (of_rep8 0)
+                                                                (temp___4479
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep9 0)
+                                                                (of_int 0)))))
+                                          (= (to_rep10
+                                             (rec__decadriver__receiver_type__queue_head
+                                             (us_split_fields5
+                                             temp___expr_4473))) ((_ int2bv 8) 1)))
+                                          (= (to_rep
+                                             (rec__decadriver__receiver_type__rx_count
+                                             (us_split_fields5
+                                             temp___expr_4473))) 0))
+                                          (= (rec__decadriver__receiver_type__overrun_occurred
+                                             (us_split_fields5
+                                             temp___expr_4473)) (of_int 0)))
+                                          (= (rec__decadriver__receiver_type__frame_ready
+                                             (us_split_fields5
+                                             temp___expr_4473)) (of_int 0))))
+
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -1697,8 +1743,6 @@
 (declare-fun r15b () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -1722,7 +1766,7 @@
 
 (declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -1732,7 +1776,7 @@
   (! (=> (in_range1 f)
      (=> (in_range1 l)
      (and (= (to_rep1 (first2 (mk1 f l))) f)
-     (= (to_rep1 (last3 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (= (to_rep1 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -1749,10 +1793,10 @@
 
 (define-fun first3 ((a us_t1)) Int (to_rep1 (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep1 (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last4 a))
-                                    (+ (- (last4 a) (first3 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size5 () Int)
 
@@ -1787,8 +1831,8 @@
 
 (define-fun bool_eq17 ((x us_t1)
   (y us_t1)) Bool (bool_eq5 (elts1 x) (to_rep1 (first2 (rt1 x)))
-                  (to_rep1 (last3 (rt1 x))) (elts1 y)
-                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last3 (rt1 y)))))
+                  (to_rep1 (last2 (rt1 x))) (elts1 y)
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
 (declare-fun user_eq17 (us_t1 us_t1) Bool)
 

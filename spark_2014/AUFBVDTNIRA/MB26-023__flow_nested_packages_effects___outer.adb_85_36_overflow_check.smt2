@@ -86,21 +86,15 @@
   (assert
   (forall ((outer__inner__nested_in_body__deep_ref Int))
   (! (=> (dynamic_invariant outer__inner__nested_in_body__deep_ref true true
-     true)
-     (let ((result (get_deep_state outer__inner__nested_in_body__deep_ref)))
-     (=> (get_deep_state__function_guard result
-     outer__inner__nested_in_body__deep_ref) (dynamic_invariant result true
-     false true)))) :pattern ((get_deep_state
-                              outer__inner__nested_in_body__deep_ref)) )))
+     true) (dynamic_invariant
+     (get_deep_state outer__inner__nested_in_body__deep_ref) true false
+     true)) :pattern ((get_deep_state outer__inner__nested_in_body__deep_ref)) )))
 
 ;; get_deep_state__def_axiom
   (assert
   (forall ((outer__inner__nested_in_body__deep_ref Int))
-  (! (=>
-     (and (dynamic_invariant outer__inner__nested_in_body__deep_ref true true
-     true) (get_deep_state__function_guard
-     (get_deep_state outer__inner__nested_in_body__deep_ref)
-     outer__inner__nested_in_body__deep_ref))
+  (! (=> (dynamic_invariant outer__inner__nested_in_body__deep_ref true true
+     true)
      (= (get_deep_state outer__inner__nested_in_body__deep_ref) outer__inner__nested_in_body__deep_ref)) :pattern (
   (get_deep_state outer__inner__nested_in_body__deep_ref)) )))
 
@@ -177,9 +171,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o1 (get_deep_state deep_ref)) (get_deep_state__function_guard 
-  o1 deep_ref)) (and (in_range o1) (= o1 deep_ref))))
+  (and (= o1 (get_deep_state deep_ref)) (and (in_range o1) (= o1 deep_ref))))
 
 ;; H
   (assert (= o2 (+ deep_var o1)))

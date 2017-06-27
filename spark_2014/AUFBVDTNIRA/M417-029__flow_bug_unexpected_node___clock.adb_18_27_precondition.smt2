@@ -293,7 +293,6 @@
   (forall ((x us_rep))
   (! (=> (not (= (bool_eq3 x max) true))
      (let ((result (t_increment x)))
-     (=> (t_increment__function_guard result x)
      (ite (< (to_rep2 (rec__time__t__seconds (us_split_fields1 x))) 59)
      (and
      (and
@@ -326,7 +325,7 @@
      (= (to_rep (rec__time__t__hours (us_split_fields1 result))) (+ (to_rep
                                                                     (rec__time__t__hours
                                                                     (us_split_fields1
-                                                                    x))) 1))))))))) :pattern (
+                                                                    x))) 1)))))))) :pattern (
   (t_increment x)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -341,11 +340,8 @@
 ;; get_current_time__def_axiom
   (assert
   (forall ((clock__current_time__fields us_split_fields))
-  (! (=> (get_current_time__function_guard
-     (get_current_time clock__current_time__fields)
-     clock__current_time__fields)
-     (= (get_current_time clock__current_time__fields) (mk___rep
-                                                       clock__current_time__fields))) :pattern (
+  (! (= (get_current_time clock__current_time__fields) (mk___rep
+                                                       clock__current_time__fields)) :pattern (
   (get_current_time clock__current_time__fields)) )))
 
 (define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool)
@@ -390,11 +386,11 @@
 
 (declare-fun o5 () seconds_t)
 
-(declare-fun temp___166 () natural)
+(declare-fun temp___158 () natural)
 
-(declare-fun temp___1661 () minutes_t)
+(declare-fun temp___1581 () minutes_t)
 
-(declare-fun temp___1662 () seconds_t)
+(declare-fun temp___1582 () seconds_t)
 
 ;; H
   (assert (= (to_rep2 o) 59))
@@ -415,26 +411,18 @@
   (assert (= o o5))
 
 ;; H
-  (assert (= temp___166 o3))
+  (assert (= temp___158 o3))
 
 ;; H
-  (assert (= temp___1661 o4))
+  (assert (= temp___1581 o4))
 
 ;; H
-  (assert (= temp___1662 o5))
+  (assert (= temp___1582 o5))
 
 ;; H
   (assert
-  (= (mk___rep (mk___split_fields temp___166 temp___1661 temp___1662)) 
+  (= (mk___rep (mk___split_fields temp___158 temp___1581 temp___1582)) 
   max))
-
-;; H
-  (assert (get_current_time__function_guard
-  (get_current_time
-  (mk___split_fields current_time__split_fields current_time__split_fields1
-  current_time__split_fields2))
-  (mk___split_fields current_time__split_fields current_time__split_fields1
-  current_time__split_fields2)))
 
 ;; H
   (assert

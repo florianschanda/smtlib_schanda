@@ -83,6 +83,6 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "task_int_prio.ads", line 5, characters 0-0
   (not (<= 0 x)))
 (check-sat)

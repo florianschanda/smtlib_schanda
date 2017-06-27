@@ -527,10 +527,8 @@
 
 ;; rolepresent__post_axiom
   (assert
-  (forall ((theadmin us_rep))
-  (! (let ((result (rolepresent theadmin)))
-     (=> (rolepresent__function_guard result theadmin) (dynamic_invariant
-     result true false true))) :pattern ((rolepresent theadmin)) )))
+  (forall ((theadmin us_rep)) (! (dynamic_invariant (rolepresent theadmin)
+  true false true) :pattern ((rolepresent theadmin)) )))
 
 (declare-fun isdoingop (us_rep) Bool)
 
@@ -571,11 +569,9 @@
 ;; thecurrentop__post_axiom
   (assert
   (forall ((theadmin us_rep))
-  (! (and (isdoingop__function_guard (isdoingop theadmin) theadmin)
-     (=> (= (isdoingop theadmin) true)
-     (let ((result (thecurrentop theadmin)))
-     (=> (thecurrentop__function_guard result theadmin) (dynamic_invariant1
-     result true false true))))) :pattern ((thecurrentop theadmin)) )))
+  (! (=> (= (isdoingop theadmin) true) (dynamic_invariant1
+     (thecurrentop theadmin) true false true)) :pattern ((thecurrentop
+                                                         theadmin)) )))
 
 (declare-fun ispresent (us_rep) Bool)
 
@@ -629,11 +625,9 @@
 
 ;; theauthcertrole__post_axiom
   (assert
-  (forall ((admintoken__state us_private))
-  (! (let ((result (theauthcertrole admintoken__state)))
-     (=> (theauthcertrole__function_guard result admintoken__state)
-     (dynamic_invariant result true false true))) :pattern ((theauthcertrole
-                                                            admintoken__state)) )))
+  (forall ((admintoken__state us_private)) (! (dynamic_invariant
+  (theauthcertrole admintoken__state) true false
+  true) :pattern ((theauthcertrole admintoken__state)) )))
 
 (declare-fun isgood (us_private) Bool)
 
@@ -699,20 +693,12 @@
 ;; getrole__post_axiom
   (assert
   (forall ((admintoken__state us_private))
-  (! (and (isgood__function_guard (isgood admintoken__state)
-     admintoken__state)
-     (and (authcertvalid__function_guard (authcertvalid admintoken__state)
-     admintoken__state)
-     (and (theauthcertrole__function_guard
-     (theauthcertrole admintoken__state) admintoken__state)
-     (=>
+  (! (=>
      (and (= (isgood admintoken__state) true)
      (and (= (authcertvalid admintoken__state) true) (in_range8
-     (theauthcertrole admintoken__state))))
-     (let ((result (getrole admintoken__state)))
-     (=> (getrole__function_guard result admintoken__state)
-     (dynamic_invariant2 result true false true))))))) :pattern ((getrole
-                                                                 admintoken__state)) )))
+     (theauthcertrole admintoken__state)))) (dynamic_invariant2
+     (getrole admintoken__state) true false true)) :pattern ((getrole
+                                                             admintoken__state)) )))
 
 (declare-sort statust 0)
 
@@ -735,12 +721,12 @@
 (define-fun statust__ref_2__projection ((a statust__ref)) statust (statust__content
                                                                   a))
 
-(define-fun dynamic_invariant3 ((temp___expr_1903 Int)
-  (temp___is_init_1900 Bool) (temp___skip_constant_1901 Bool)
-  (temp___do_toplevel_1902 Bool)) Bool (=>
-                                       (or (= temp___is_init_1900 true)
+(define-fun dynamic_invariant3 ((temp___expr_1792 Int)
+  (temp___is_init_1789 Bool) (temp___skip_constant_1790 Bool)
+  (temp___do_toplevel_1791 Bool)) Bool (=>
+                                       (or (= temp___is_init_1789 true)
                                        (<= 0 8)) (in_range9
-                                       temp___expr_1903)))
+                                       temp___expr_1792)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -787,12 +773,12 @@
 ;; valid_numberlogentries__post_axiom
   (assert true)
 
-(define-fun dynamic_invariant9 ((temp___expr_354 Int)
-  (temp___is_init_351 Bool) (temp___skip_constant_352 Bool)
-  (temp___do_toplevel_353 Bool)) Bool (=>
-                                      (or (= temp___is_init_351 true)
+(define-fun dynamic_invariant9 ((temp___expr_324 Int)
+  (temp___is_init_321 Bool) (temp___skip_constant_322 Bool)
+  (temp___do_toplevel_323 Bool)) Bool (=>
+                                      (or (= temp___is_init_321 true)
                                       (<= 1 150)) (in_range7
-                                      temp___expr_354)))
+                                      temp___expr_324)))
 
 ;; nodescription__def_axiom
   (assert (= nodescription (audittypes__nodescription__aggregate_def 32)))
@@ -956,95 +942,6 @@
   (assert (=> (<= 0 8) (in_range9 status1)))
 
 ;; H
-  (assert (ispresent__function_guard
-  (ispresent
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1)))
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1))))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1)))
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1))))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1)))
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1))))
-
-;; H
-  (assert (isgood__function_guard (isgood state) state))
-
-;; H
-  (assert (authcertvalid__function_guard (authcertvalid state) state))
-
-;; H
-  (assert (theauthcertrole__function_guard (theauthcertrole state) state))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1)))
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1))))
-
-;; H
-  (assert (thecurrentop__function_guard
-  (thecurrentop
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1)))
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1))))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1)))
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1))))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1)))
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1))))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1)))
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1))))
-
-;; H
-  (assert (thecurrentop__function_guard
-  (thecurrentop
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1)))
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1))))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1)))
-  (mk___rep
-  (mk___split_fields theadmin__split_fields theadmin__split_fields1))))
-
-;; H
   (assert
   (and
   (and
@@ -1093,44 +990,7 @@
      (mk___split_fields theadmin__split_fields theadmin__split_fields1))) true))))))
 
 ;; H
-  (assert (isgood__function_guard (isgood state5) state5))
-
-;; H
-  (assert (authcertvalid__function_guard (authcertvalid state5) state5))
-
-;; H
-  (assert (theauthcertrole__function_guard (theauthcertrole state5) state5))
-
-;; H
-  (assert (valid_numberlogentries__function_guard
-  (valid_numberlogentries state6) state6))
-
-;; H
-  (assert (valid_numberlogentries__function_guard
-  (valid_numberlogentries state7) state7))
-
-;; H
-  (assert (rolepresent__function_guard
-  (rolepresent (mk___rep theadmin__split_fields9))
-  (mk___rep theadmin__split_fields9)))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop (mk___rep theadmin__split_fields9))
-  (mk___rep theadmin__split_fields9)))
-
-;; H
-  (assert (ispresent__function_guard
-  (ispresent (mk___rep theadmin__split_fields9))
-  (mk___rep theadmin__split_fields9)))
-
-;; H
-  (assert (valid_numberlogentries__function_guard
-  (valid_numberlogentries state10) state10))
-
-;; H
-  (assert
-  (and (= o (ispresent1 state)) (ispresent__function_guard1 o state)))
+  (assert (= o (ispresent1 state)))
 
 ;; H
   (assert (= result (ite (not (= o true)) true false)))
@@ -1182,9 +1042,7 @@
   (in_range8 (theauthcertrole state5))))))
 
 ;; H
-  (assert
-  (=> (not (= result true))
-  (and (= o1 (extractuser state5)) (extractuser__function_guard o1 state5))))
+  (assert (=> (not (= result true)) (= o1 (extractuser state5))))
 
 ;; H
   (assert
@@ -1193,8 +1051,7 @@
 ;; H
   (assert
   (=> (not (= result true))
-  (=> (= tokenok2 true)
-  (and (= o2 (extractuser state5)) (extractuser__function_guard o2 state5)))))
+  (=> (= tokenok2 true) (= o2 (extractuser state5)))))
 
 ;; H
   (assert
@@ -1212,9 +1069,7 @@
 ;; H
   (assert
   (=> (not (= result true))
-  (=> (= tokenok2 true)
-  (and (and (= o3 (getrole state5)) (getrole__function_guard o3 state5))
-  (in_range8 o3)))))
+  (=> (= tokenok2 true) (and (= o3 (getrole state5)) (in_range8 o3)))))
 
 ;; H
   (assert
@@ -1228,8 +1083,7 @@
 ;; H
   (assert
   (=> (not (= result true))
-  (=> (not (= tokenok2 true))
-  (and (= o4 (extractuser state5)) (extractuser__function_guard o4 state5)))))
+  (=> (not (= tokenok2 true)) (= o4 (extractuser state5)))))
 
 ;; H
   (assert
@@ -1369,13 +1223,9 @@
 ;; H
   (assert
   (and
-  (and
   (= o5 (rolepresent
         (mk___rep
         (mk___split_fields theadmin__split_fields6 theadmin__split_fields7))))
-  (rolepresent__function_guard o5
-  (mk___rep
-  (mk___split_fields theadmin__split_fields6 theadmin__split_fields7))))
   (in_range4 o5)))
 
 ;; H
@@ -1384,13 +1234,9 @@
 ;; H
   (assert
   (=> (= result3 true)
-  (and
   (= o9 (isdoingop
         (mk___rep
-        (mk___split_fields theadmin__split_fields6 theadmin__split_fields7))))
-  (isdoingop__function_guard o9
-  (mk___rep
-  (mk___split_fields theadmin__split_fields6 theadmin__split_fields7))))))
+        (mk___split_fields theadmin__split_fields6 theadmin__split_fields7))))))
 
 ;; H
   (assert (=> (= result3 true) (= o10 (ite (not (= o9 true)) true false))))
@@ -1399,13 +1245,9 @@
   (assert
   (=> (= result3 true)
   (and
-  (and
   (= o6 (thecurrentop
         (mk___rep
         (mk___split_fields theadmin__split_fields6 theadmin__split_fields7))))
-  (thecurrentop__function_guard o6
-  (mk___rep
-  (mk___split_fields theadmin__split_fields6 theadmin__split_fields7))))
   (in_range6 o6))))
 
 ;; H
@@ -1414,13 +1256,9 @@
 ;; H
   (assert
   (=> (= result3 true)
-  (and
   (= o8 (isdoingop
         (mk___rep
-        (mk___split_fields theadmin__split_fields6 theadmin__split_fields7))))
-  (isdoingop__function_guard o8
-  (mk___rep
-  (mk___split_fields theadmin__split_fields6 theadmin__split_fields7))))))
+        (mk___split_fields theadmin__split_fields6 theadmin__split_fields7))))))
 
 ;; H
   (assert (=> (= result3 true) (= o11 (ite (= o8 true) o7 false))))
@@ -1430,14 +1268,6 @@
 
 ;; H
   (assert (=> (not (= result3 true)) (= o12 (of_int 1))))
-
-;; H
-  (assert (isdoingop__function_guard
-  (isdoingop
-  (mk___rep
-  (mk___split_fields theadmin__split_fields6 theadmin__split_fields7)))
-  (mk___rep
-  (mk___split_fields theadmin__split_fields6 theadmin__split_fields7))))
 
 (assert
 ;; WP_parameter_def

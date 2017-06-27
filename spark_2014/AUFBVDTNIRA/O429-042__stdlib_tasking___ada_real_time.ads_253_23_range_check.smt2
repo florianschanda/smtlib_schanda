@@ -298,12 +298,12 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(define-fun dynamic_invariant ((temp___expr_230 Int)
-  (temp___is_init_227 Bool) (temp___skip_constant_228 Bool)
-  (temp___do_toplevel_229 Bool)) Bool (=>
-                                      (or (= temp___is_init_227 true)
+(define-fun dynamic_invariant ((temp___expr_153 Int)
+  (temp___is_init_150 Bool) (temp___skip_constant_151 Bool)
+  (temp___do_toplevel_152 Bool)) Bool (=>
+                                      (or (= temp___is_init_150 true)
                                       (<= (- 9223372036854775808) 9223372036854775807))
-                                      (in_range1 temp___expr_230)))
+                                      (in_range1 temp___expr_153)))
 
 (declare-fun o () duration)
 
@@ -312,8 +312,7 @@
 (declare-fun o2 () Int)
 
 ;; H
-  (assert
-  (and (= o (to_duration__2 ts)) (to_duration__2__function_guard o ts)))
+  (assert (= o (to_duration__2 ts)))
 
 ;; H
   (assert (= o1 (to_fixed o)))

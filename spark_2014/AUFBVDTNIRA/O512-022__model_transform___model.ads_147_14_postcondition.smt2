@@ -636,10 +636,9 @@
 ;; owned_action__def_axiom
   (assert
   (forall ((self us_rep2))
-  (! (=> (owned_action__function_guard (owned_action self) self)
-     (= (owned_action self) (rec__model__uml_activity__owned_action_data
-                            (us_split_fields5 self)))) :pattern ((owned_action
-                                                                 self)) )))
+  (! (= (owned_action self) (rec__model__uml_activity__owned_action_data
+                            (us_split_fields5 self))) :pattern ((owned_action
+                                                                self)) )))
 
 (declare-fun owned_flow (us_rep2) (Array Int us_rep1))
 
@@ -651,10 +650,9 @@
 ;; owned_flow__def_axiom
   (assert
   (forall ((self us_rep2))
-  (! (=> (owned_flow__function_guard (owned_flow self) self)
-     (= (owned_flow self) (rec__model__uml_activity__owned_flow_data
-                          (us_split_fields5 self)))) :pattern ((owned_flow
-                                                               self)) )))
+  (! (= (owned_flow self) (rec__model__uml_activity__owned_flow_data
+                          (us_split_fields5 self))) :pattern ((owned_flow
+                                                              self)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -669,19 +667,19 @@
                                       (<= 0 2147483647)) (in_range2
                                       temp___expr_145)))
 
-(define-fun dynamic_invariant1 ((temp___expr_257 Int)
-  (temp___is_init_254 Bool) (temp___skip_constant_255 Bool)
-  (temp___do_toplevel_256 Bool)) Bool (=>
-                                      (or (= temp___is_init_254 true)
+(define-fun dynamic_invariant1 ((temp___expr_253 Int)
+  (temp___is_init_250 Bool) (temp___skip_constant_251 Bool)
+  (temp___do_toplevel_252 Bool)) Bool (=>
+                                      (or (= temp___is_init_250 true)
                                       (<= 0 100)) (in_range1
-                                      temp___expr_257)))
+                                      temp___expr_253)))
 
-(define-fun dynamic_invariant2 ((temp___expr_281 Int)
-  (temp___is_init_278 Bool) (temp___skip_constant_279 Bool)
-  (temp___do_toplevel_280 Bool)) Bool (=>
-                                      (or (= temp___is_init_278 true)
+(define-fun dynamic_invariant2 ((temp___expr_277 Int)
+  (temp___is_init_274 Bool) (temp___skip_constant_275 Bool)
+  (temp___do_toplevel_276 Bool)) Bool (=>
+                                      (or (= temp___is_init_274 true)
                                       (<= 0 100)) (in_range3
-                                      temp___expr_281)))
+                                      temp___expr_277)))
 
 (declare-fun self__split_fields () (Array Int us_rep))
 
@@ -726,12 +724,6 @@
 
 ;; H
   (assert (= self__split_fields7 self__split_fields3))
-
-;; H
-  (assert (owned_flow__function_guard
-  (owned_flow
-  (mk___rep2 (mk___split_fields2 self__split_fields4 self__split_fields5)))
-  (mk___rep2 (mk___split_fields2 self__split_fields4 self__split_fields5))))
 
 (assert
 ;; WP_parameter_def

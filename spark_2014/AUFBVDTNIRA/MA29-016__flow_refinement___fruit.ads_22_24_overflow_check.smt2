@@ -94,20 +94,16 @@
 ;; number_of_apples__post_axiom
   (assert
   (forall ((fruit__apples Int))
-  (! (=> (dynamic_invariant fruit__apples true true true)
-     (let ((result (number_of_apples fruit__apples)))
-     (=> (number_of_apples__function_guard result fruit__apples)
-     (dynamic_invariant result true false true)))) :pattern ((number_of_apples
-                                                             fruit__apples)) )))
+  (! (=> (dynamic_invariant fruit__apples true true true) (dynamic_invariant
+     (number_of_apples fruit__apples) true false true)) :pattern ((number_of_apples
+                                                                  fruit__apples)) )))
 
 ;; number_of_apples__def_axiom
   (assert
   (forall ((fruit__apples Int))
-  (! (=>
-     (and (dynamic_invariant fruit__apples true true true)
-     (number_of_apples__function_guard (number_of_apples fruit__apples)
-     fruit__apples)) (= (number_of_apples fruit__apples) fruit__apples)) :pattern (
-  (number_of_apples fruit__apples)) )))
+  (! (=> (dynamic_invariant fruit__apples true true true)
+     (= (number_of_apples fruit__apples) fruit__apples)) :pattern ((number_of_apples
+                                                                   fruit__apples)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -118,19 +114,15 @@
 ;; number_of_oranges__post_axiom
   (assert
   (forall ((fruit__oranges Int))
-  (! (=> (dynamic_invariant fruit__oranges true true true)
-     (let ((result (number_of_oranges fruit__oranges)))
-     (=> (number_of_oranges__function_guard result fruit__oranges)
-     (dynamic_invariant result true false true)))) :pattern ((number_of_oranges
-                                                             fruit__oranges)) )))
+  (! (=> (dynamic_invariant fruit__oranges true true true) (dynamic_invariant
+     (number_of_oranges fruit__oranges) true false true)) :pattern ((number_of_oranges
+                                                                    fruit__oranges)) )))
 
 ;; number_of_oranges__def_axiom
   (assert
   (forall ((fruit__oranges Int))
-  (! (=>
-     (and (dynamic_invariant fruit__oranges true true true)
-     (number_of_oranges__function_guard (number_of_oranges fruit__oranges)
-     fruit__oranges)) (= (number_of_oranges fruit__oranges) fruit__oranges)) :pattern (
+  (! (=> (dynamic_invariant fruit__oranges true true true)
+     (= (number_of_oranges fruit__oranges) fruit__oranges)) :pattern (
   (number_of_oranges fruit__oranges)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
@@ -179,15 +171,11 @@
 
 ;; H
   (assert
-  (and
-  (and (= o (number_of_oranges oranges)) (number_of_oranges__function_guard 
-  o oranges)) (and (in_range1 o) (= o oranges))))
+  (and (= o (number_of_oranges oranges)) (and (in_range1 o) (= o oranges))))
 
 ;; H
   (assert
-  (and
-  (and (= o1 (number_of_apples apples)) (number_of_apples__function_guard 
-  o1 apples)) (and (in_range1 o1) (= o1 apples))))
+  (and (= o1 (number_of_apples apples)) (and (in_range1 o1) (= o1 apples))))
 
 ;; H
   (assert (= o2 (+ o1 o)))

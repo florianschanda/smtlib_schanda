@@ -685,7 +685,6 @@
      (and (dynamic_invariant from true true true)
      (and (<= (first1 a) from) (<= from (last1 a))))
      (let ((result (search_range from)))
-     (=> (search_range__function_guard result from)
      (and
      (or
      (and
@@ -712,8 +711,8 @@
         (select (to_array a) (to_rep
                              (rec__dynamic_types__search__result_type__result
                              (us_split_fields1 result))))) c)))
-     (dynamic_invariant3 result true false true))))) :pattern ((search_range
-                                                               from)) )))
+     (dynamic_invariant3 result true false true)))) :pattern ((search_range
+                                                              from)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 

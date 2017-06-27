@@ -987,16 +987,13 @@
 ;; f__post_axiom
   (assert
   (forall ((e Int))
-  (! (=> (dynamic_invariant6 e true true true)
-     (let ((result (f e)))
-     (=> (f__function_guard result e) (dynamic_invariant6 result true false
-     true)))) :pattern ((f e)) )))
+  (! (=> (dynamic_invariant6 e true true true) (dynamic_invariant6 (f e) true
+     false true)) :pattern ((f e)) )))
 
 ;; f__def_axiom
   (assert
   (forall ((e Int))
-  (! (=>
-     (and (dynamic_invariant6 e true true true) (f__function_guard (f e) e))
+  (! (=> (dynamic_invariant6 e true true true)
      (= (f e) (ite (and (<= (- 100) e) (<= e 100)) (* e 2) e))) :pattern (
   (f e)) )))
 
@@ -1290,11 +1287,6 @@
 ;; H
   (assert
   (= (contains (model__ (mk___rep r__split_discrs r__split_fields1)) g) true))
-
-;; H
-  (assert
-  (forall ((i Int)) (f__function_guard (f (get (elements s) i))
-  (get (elements s) i))))
 
 (assert
 ;; WP_parameter_def

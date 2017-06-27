@@ -334,8 +334,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -379,7 +377,7 @@
 
 (declare-fun o4 () Int)
 
-(declare-fun temp___269 () Int)
+(declare-fun temp___247 () Int)
 
 (declare-fun o5 () Int)
 
@@ -544,10 +542,10 @@
   (assert (= o4 (- o3 b_first)))
 
 ;; H
-  (assert (and (= temp___269 o4) (in_range1 o4)))
+  (assert (and (= temp___247 o4) (in_range1 o4)))
 
 (assert
 ;; WP_parameter_def
  ;; File "sorting.adb", line 12, characters 0-0
-  (not (<= (to_rep (first (rt a))) temp___269)))
+  (not (<= (to_rep (first (rt a))) temp___247)))
 (check-sat)

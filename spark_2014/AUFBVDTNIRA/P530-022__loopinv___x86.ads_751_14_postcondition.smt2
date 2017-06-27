@@ -312,10 +312,8 @@
   (forall ((x86__rcx (_ BitVec 64)))
   (! (=> (dynamic_invariant x86__rcx true true true)
      (let ((result (cl x86__rcx)))
-     (and (readreglow8__function_guard (readreglow8 x86__rcx) x86__rcx)
-     (=> (cl__function_guard result x86__rcx)
      (and (= result (readreglow8 x86__rcx)) (dynamic_invariant1 result true
-     false true)))))) :pattern ((cl x86__rcx)) )))
+     false true)))) :pattern ((cl x86__rcx)) )))
 
 (declare-fun writereglow8post ((_ BitVec 64) (_ BitVec 64)
   (_ BitVec 8)) Bool)
@@ -328,10 +326,9 @@
   (forall ((reg (_ BitVec 64)))
   (! (=> (dynamic_invariant reg true true true)
      (let ((result (readreglow8 reg)))
-     (=> (readreglow8__function_guard result reg)
      (and (= result ((_ extract 7 0) (bvand reg ((_ int2bv 64) 255))))
-     (dynamic_invariant1 result true false true))))) :pattern ((readreglow8
-                                                               reg)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((readreglow8
+                                                              reg)) )))
 
 ;; writereglow8post__post_axiom
   (assert
@@ -341,24 +338,18 @@
      (and
      (and (dynamic_invariant regold true true true) (dynamic_invariant regnew
      true true true)) (dynamic_invariant1 val__ true true true))
-     (let ((result (writereglow8post regold regnew val__)))
-     (and (readreglow8__function_guard (readreglow8 regnew) regnew)
-     (=> (writereglow8post__function_guard result regold regnew val__)
-     (= (= result true)
+     (= (= (writereglow8post regold regnew val__) true)
      (and (= (readreglow8 regnew) val__)
-     (= (bvand regnew ((_ int2bv 64) 18446744073709551360)) (bvand regold ((_ int2bv 64) 18446744073709551360))))))))) :pattern (
+     (= (bvand regnew ((_ int2bv 64) 18446744073709551360)) (bvand regold ((_ int2bv 64) 18446744073709551360)))))) :pattern (
   (writereglow8post regold regnew val__)) ))))
 
 ;; writereglow8post__def_axiom
   (assert
   (forall ((regold (_ BitVec 64)) (regnew (_ BitVec 64)))
   (forall ((val__ (_ BitVec 8)))
-  (! (=> (writereglow8post__function_guard
-     (writereglow8post regold regnew val__) regold regnew val__)
-     (and (readreglow8__function_guard (readreglow8 regnew) regnew)
-     (= (= (writereglow8post regold regnew val__) true)
+  (! (= (= (writereglow8post regold regnew val__) true)
      (and (= (readreglow8 regnew) val__)
-     (= (bvand regnew ((_ int2bv 64) 18446744073709551360)) (bvand regold ((_ int2bv 64) 18446744073709551360))))))) :pattern (
+     (= (bvand regnew ((_ int2bv 64) 18446744073709551360)) (bvand regold ((_ int2bv 64) 18446744073709551360))))) :pattern (
   (writereglow8post regold regnew val__)) ))))
 
 (declare-fun zeroflag () Bool)
@@ -374,14 +365,6 @@
 (declare-fun rcx3 () (_ BitVec 64))
 
 (declare-fun rcx4 () (_ BitVec 64))
-
-;; H
-  (assert (writereglow8post__function_guard
-  (writereglow8post rcx rcx1 ((_ int2bv 8) 1)) rcx rcx1 ((_ int2bv 8) 1)))
-
-;; H
-  (assert (writereglow8post__function_guard
-  (writereglow8post rcx rcx2 ((_ int2bv 8) 0)) rcx rcx2 ((_ int2bv 8) 0)))
 
 ;; H
   (assert
@@ -409,9 +392,6 @@
 
 ;; H
   (assert (not (= zeroflag true)))
-
-;; H
-  (assert (cl__function_guard (cl rcx3) rcx3))
 
 (assert
 ;; WP_parameter_def

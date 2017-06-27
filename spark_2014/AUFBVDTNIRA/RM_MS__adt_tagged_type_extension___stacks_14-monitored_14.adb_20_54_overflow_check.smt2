@@ -619,8 +619,8 @@
 ;; stacks_14__stack__compat_axiom
   (assert true)
 
-(define-fun default_initial_assumption1 ((temp___expr_194 us_rep1)
-  (temp___skip_top_level_195 Bool)) Bool (= (attr__tag1 temp___expr_194) 
+(define-fun default_initial_assumption1 ((temp___expr_190 us_rep1)
+  (temp___skip_top_level_191 Bool)) Bool (= (attr__tag1 temp___expr_190) 
   us_tag1))
 
 (declare-fun s__attr__tag () Int)
@@ -671,17 +671,17 @@
 
 (declare-fun o7 () us_private)
 
-(declare-fun temp___261 () (Array Int integer))
+(declare-fun temp___253 () (Array Int integer))
 
-(declare-fun temp___2611 () integer)
+(declare-fun temp___2531 () integer)
 
-(declare-fun temp___2612 () (Array Int integer))
+(declare-fun temp___2532 () (Array Int integer))
 
-(declare-fun temp___2613 () pointer_range)
+(declare-fun temp___2533 () pointer_range)
 
-(declare-fun temp___2614 () us_private)
+(declare-fun temp___2534 () us_private)
 
-(declare-fun temp___2615 () Int)
+(declare-fun temp___2535 () Int)
 
 (declare-fun stacks_14__push__s__fields () (Array Int integer))
 
@@ -788,22 +788,22 @@
   (assert (= s__split_fields9 o7))
 
 ;; H
-  (assert (= temp___261 o3))
+  (assert (= temp___253 o3))
 
 ;; H
-  (assert (= temp___2611 o4))
+  (assert (= temp___2531 o4))
 
 ;; H
-  (assert (= temp___2612 o5))
+  (assert (= temp___2532 o5))
 
 ;; H
-  (assert (= temp___2613 o6))
+  (assert (= temp___2533 o6))
 
 ;; H
-  (assert (= temp___2614 o7))
+  (assert (= temp___2534 o7))
 
 ;; H
-  (assert (= s__attr__tag temp___2615))
+  (assert (= s__attr__tag temp___2535))
 
 ;; H
   (assert (= result5 s__split_fields5))
@@ -821,19 +821,19 @@
   (assert (= result9 s__split_fields9))
 
 ;; H
-  (assert (= temp___261 s__split_fields10))
+  (assert (= temp___253 s__split_fields10))
 
 ;; H
-  (assert (= temp___2611 s__split_fields11))
+  (assert (= temp___2531 s__split_fields11))
 
 ;; H
-  (assert (= temp___2612 s__split_fields12))
+  (assert (= temp___2532 s__split_fields12))
 
 ;; H
-  (assert (= temp___2613 s__split_fields13))
+  (assert (= temp___2533 s__split_fields13))
 
 ;; H
-  (assert (= temp___2614 s__split_fields14))
+  (assert (= temp___2534 s__split_fields14))
 
 (assert
 ;; WP_parameter_def

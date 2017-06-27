@@ -36,6 +36,6 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 81, characters 0-0
+ ;; File "t.ads", line 3, characters 0-0
   (not false))
 (check-sat)

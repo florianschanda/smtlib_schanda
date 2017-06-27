@@ -278,8 +278,7 @@
 ;; in_bounds__def_axiom
   (assert
   (forall ((c us_rep))
-  (! (=> (in_bounds__function_guard (in_bounds c) c)
-     (= (= (in_bounds c) true)
+  (! (= (= (in_bounds c) true)
      (and
      (and
      (and (in_range1
@@ -293,7 +292,7 @@
      (to_rep1 (rec__shapes3__circle__radius (us_split_fields1 c))))))
      (in_range1
      (- (to_rep (rec__shapes3__circle__center_y (us_split_fields1 c))) 
-     (to_rep1 (rec__shapes3__circle__radius (us_split_fields1 c)))))))) :pattern (
+     (to_rep1 (rec__shapes3__circle__radius (us_split_fields1 c))))))) :pattern (
   (in_bounds c)) )))
 
 (declare-fun x () Int)
@@ -330,12 +329,12 @@
 (define-fun full_width_type__ref___projection ((a full_width_type__ref)) full_width_type 
   (full_width_type__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_160 Int)
-  (temp___is_init_157 Bool) (temp___skip_constant_158 Bool)
-  (temp___do_toplevel_159 Bool)) Bool (=>
-                                      (or (= temp___is_init_157 true)
+(define-fun dynamic_invariant1 ((temp___expr_156 Int)
+  (temp___is_init_153 Bool) (temp___skip_constant_154 Bool)
+  (temp___do_toplevel_155 Bool)) Bool (=>
+                                      (or (= temp___is_init_153 true)
                                       (<= 0 200)) (in_range3
-                                      temp___expr_160)))
+                                      temp___expr_156)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
@@ -379,9 +378,6 @@
 
 ;; H
   (assert (in_range1 y))
-
-;; H
-  (assert (in_bounds__function_guard (in_bounds c) c))
 
 ;; H
   (assert (= (in_bounds c) true))

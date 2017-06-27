@@ -81,12 +81,12 @@
 (define-fun element_type__ref___projection ((a element_type__ref)) element_type 
   (element_type__content a))
 
-(define-fun dynamic_invariant ((temp___expr_203 Int)
-  (temp___is_init_200 Bool) (temp___skip_constant_201 Bool)
-  (temp___do_toplevel_202 Bool)) Bool (=>
-                                      (or (= temp___is_init_200 true)
+(define-fun dynamic_invariant ((temp___expr_201 Int)
+  (temp___is_init_198 Bool) (temp___skip_constant_199 Bool)
+  (temp___do_toplevel_200 Bool)) Bool (=>
+                                      (or (= temp___is_init_198 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range1 temp___expr_203)))
+                                      (in_range1 temp___expr_201)))
 
 (declare-fun i1 () Int)
 

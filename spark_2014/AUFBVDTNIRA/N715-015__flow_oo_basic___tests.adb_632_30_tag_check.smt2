@@ -267,8 +267,8 @@
 (define-fun widget_t__ref___projection ((a widget_t__ref)) us_rep1 (widget_t__content
                                                                    a))
 
-(define-fun default_initial_assumption ((temp___expr_152 us_rep1)
-  (temp___skip_top_level_153 Bool)) Bool (= (attr__tag1 temp___expr_152) 
+(define-fun default_initial_assumption ((temp___expr_148 us_rep1)
+  (temp___skip_top_level_149 Bool)) Bool (= (attr__tag1 temp___expr_148) 
   us_tag1))
 
 (declare-fun w1 () us_rep1)

@@ -185,42 +185,7 @@
   (section_4_6__note_5_conditions_for_shunting_mode Bool)
   (section_4_6__reception_of_information_shunting_granted_by_rbc Bool)
   (section_4_6__train_is_at_standstill Bool))
-  (! (=> (condition_transition_sb_to_sh__function_guard
-     (condition_transition_sb_to_sh etcs_level__ertms_etcs_level
-     section_4_6__an_acknowledge_request_for_shunting_is_displayed_to_the_driver
-     section_4_6__driver_acknowledges
-     section_4_6__driver_selects_shunting_mode
-     section_4_6__note_5_conditions_for_shunting_mode
-     section_4_6__reception_of_information_shunting_granted_by_rbc
-     section_4_6__train_is_at_standstill section_4_6__priority)
-     etcs_level__ertms_etcs_level
-     section_4_6__an_acknowledge_request_for_shunting_is_displayed_to_the_driver
-     section_4_6__driver_acknowledges
-     section_4_6__driver_selects_shunting_mode
-     section_4_6__note_5_conditions_for_shunting_mode
-     section_4_6__reception_of_information_shunting_granted_by_rbc
-     section_4_6__train_is_at_standstill section_4_6__priority)
-     (and (condition_5__function_guard
-     (condition_5 etcs_level__ertms_etcs_level
-     section_4_6__driver_selects_shunting_mode
-     section_4_6__train_is_at_standstill) etcs_level__ertms_etcs_level
-     section_4_6__driver_selects_shunting_mode
-     section_4_6__train_is_at_standstill)
-     (and (condition_6__function_guard
-     (condition_6 etcs_level__ertms_etcs_level
-     section_4_6__reception_of_information_shunting_granted_by_rbc
-     section_4_6__train_is_at_standstill) etcs_level__ertms_etcs_level
-     section_4_6__reception_of_information_shunting_granted_by_rbc
-     section_4_6__train_is_at_standstill)
-     (and (condition_50__function_guard
-     (condition_50
-     section_4_6__an_acknowledge_request_for_shunting_is_displayed_to_the_driver
-     section_4_6__driver_acknowledges
-     section_4_6__note_5_conditions_for_shunting_mode)
-     section_4_6__an_acknowledge_request_for_shunting_is_displayed_to_the_driver
-     section_4_6__driver_acknowledges
-     section_4_6__note_5_conditions_for_shunting_mode)
-     (=
+  (! (=
      (= (condition_transition_sb_to_sh etcs_level__ertms_etcs_level
         section_4_6__an_acknowledge_request_for_shunting_is_displayed_to_the_driver
         section_4_6__driver_acknowledges
@@ -241,15 +206,15 @@
         section_4_6__an_acknowledge_request_for_shunting_is_displayed_to_the_driver
         section_4_6__driver_acknowledges
         section_4_6__note_5_conditions_for_shunting_mode) true))
-     (= section_4_6__priority 7))))))) :pattern ((condition_transition_sb_to_sh
-                                                 etcs_level__ertms_etcs_level
-                                                 section_4_6__an_acknowledge_request_for_shunting_is_displayed_to_the_driver
-                                                 section_4_6__driver_acknowledges
-                                                 section_4_6__driver_selects_shunting_mode
-                                                 section_4_6__note_5_conditions_for_shunting_mode
-                                                 section_4_6__reception_of_information_shunting_granted_by_rbc
-                                                 section_4_6__train_is_at_standstill
-                                                 section_4_6__priority)) ))))
+     (= section_4_6__priority 7))) :pattern ((condition_transition_sb_to_sh
+                                             etcs_level__ertms_etcs_level
+                                             section_4_6__an_acknowledge_request_for_shunting_is_displayed_to_the_driver
+                                             section_4_6__driver_acknowledges
+                                             section_4_6__driver_selects_shunting_mode
+                                             section_4_6__note_5_conditions_for_shunting_mode
+                                             section_4_6__reception_of_information_shunting_granted_by_rbc
+                                             section_4_6__train_is_at_standstill
+                                             section_4_6__priority)) ))))
 
 (declare-fun condition_transition_sb_to_fs (Bool Bool Bool Int) Bool)
 
@@ -269,21 +234,7 @@
   (section_4_6__no_specific_mode_is_required_by_a_mode_profile Bool)
   (section_4_6__valid_train_data_is_stored_on_board Bool))
   (forall ((section_4_6__priority Int))
-  (! (=> (condition_transition_sb_to_fs__function_guard
-     (condition_transition_sb_to_fs section_4_6__ma_ssp_gardient_on_board
-     section_4_6__no_specific_mode_is_required_by_a_mode_profile
-     section_4_6__valid_train_data_is_stored_on_board section_4_6__priority)
-     section_4_6__ma_ssp_gardient_on_board
-     section_4_6__no_specific_mode_is_required_by_a_mode_profile
-     section_4_6__valid_train_data_is_stored_on_board section_4_6__priority)
-     (and (condition_10__function_guard
-     (condition_10 section_4_6__ma_ssp_gardient_on_board
-     section_4_6__no_specific_mode_is_required_by_a_mode_profile
-     section_4_6__valid_train_data_is_stored_on_board)
-     section_4_6__ma_ssp_gardient_on_board
-     section_4_6__no_specific_mode_is_required_by_a_mode_profile
-     section_4_6__valid_train_data_is_stored_on_board)
-     (=
+  (! (=
      (= (condition_transition_sb_to_fs section_4_6__ma_ssp_gardient_on_board
         section_4_6__no_specific_mode_is_required_by_a_mode_profile
         section_4_6__valid_train_data_is_stored_on_board
@@ -292,11 +243,11 @@
      (= (condition_10 section_4_6__ma_ssp_gardient_on_board
         section_4_6__no_specific_mode_is_required_by_a_mode_profile
         section_4_6__valid_train_data_is_stored_on_board) true)
-     (= section_4_6__priority 7))))) :pattern ((condition_transition_sb_to_fs
-                                               section_4_6__ma_ssp_gardient_on_board
-                                               section_4_6__no_specific_mode_is_required_by_a_mode_profile
-                                               section_4_6__valid_train_data_is_stored_on_board
-                                               section_4_6__priority)) ))))
+     (= section_4_6__priority 7))) :pattern ((condition_transition_sb_to_fs
+                                             section_4_6__ma_ssp_gardient_on_board
+                                             section_4_6__no_specific_mode_is_required_by_a_mode_profile
+                                             section_4_6__valid_train_data_is_stored_on_board
+                                             section_4_6__priority)) ))))
 
 (declare-fun condition_transition_sb_to_is (Bool Int) Bool)
 
@@ -314,25 +265,16 @@
   (assert
   (forall ((section_4_6__driver_isolates_ertms_etcs_on_board_equipment Bool))
   (forall ((section_4_6__priority Int))
-  (! (=> (condition_transition_sb_to_is__function_guard
-     (condition_transition_sb_to_is
-     section_4_6__driver_isolates_ertms_etcs_on_board_equipment
-     section_4_6__priority)
-     section_4_6__driver_isolates_ertms_etcs_on_board_equipment
-     section_4_6__priority)
-     (and (condition_1__function_guard
-     (condition_1 section_4_6__driver_isolates_ertms_etcs_on_board_equipment)
-     section_4_6__driver_isolates_ertms_etcs_on_board_equipment)
-     (=
+  (! (=
      (= (condition_transition_sb_to_is
         section_4_6__driver_isolates_ertms_etcs_on_board_equipment
         section_4_6__priority) true)
      (and
      (= (condition_1
         section_4_6__driver_isolates_ertms_etcs_on_board_equipment) true)
-     (= section_4_6__priority 1))))) :pattern ((condition_transition_sb_to_is
-                                               section_4_6__driver_isolates_ertms_etcs_on_board_equipment
-                                               section_4_6__priority)) ))))
+     (= section_4_6__priority 1))) :pattern ((condition_transition_sb_to_is
+                                             section_4_6__driver_isolates_ertms_etcs_on_board_equipment
+                                             section_4_6__priority)) ))))
 
 (declare-fun mode () Int)
 
@@ -344,13 +286,10 @@
 ;; condition_1__def_axiom
   (assert
   (forall ((section_4_6__driver_isolates_ertms_etcs_on_board_equipment Bool))
-  (! (=> (condition_1__function_guard
-     (condition_1 section_4_6__driver_isolates_ertms_etcs_on_board_equipment)
-     section_4_6__driver_isolates_ertms_etcs_on_board_equipment)
-     (=
+  (! (=
      (= (condition_1
         section_4_6__driver_isolates_ertms_etcs_on_board_equipment) true)
-     (= section_4_6__driver_isolates_ertms_etcs_on_board_equipment true))) :pattern (
+     (= section_4_6__driver_isolates_ertms_etcs_on_board_equipment true)) :pattern (
   (condition_1 section_4_6__driver_isolates_ertms_etcs_on_board_equipment)) )))
 
 ;; condition_5__post_axiom
@@ -361,13 +300,7 @@
   (forall ((etcs_level__ertms_etcs_level Int))
   (forall ((section_4_6__driver_selects_shunting_mode Bool)
   (section_4_6__train_is_at_standstill Bool))
-  (! (=> (condition_5__function_guard
-     (condition_5 etcs_level__ertms_etcs_level
-     section_4_6__driver_selects_shunting_mode
-     section_4_6__train_is_at_standstill) etcs_level__ertms_etcs_level
-     section_4_6__driver_selects_shunting_mode
-     section_4_6__train_is_at_standstill)
-     (=
+  (! (=
      (= (condition_5 etcs_level__ertms_etcs_level
         section_4_6__driver_selects_shunting_mode
         section_4_6__train_is_at_standstill) true)
@@ -376,10 +309,10 @@
      (or
      (or (= etcs_level__ertms_etcs_level 0)
      (= etcs_level__ertms_etcs_level 4)) (= etcs_level__ertms_etcs_level 1)))
-     (= section_4_6__driver_selects_shunting_mode true)))) :pattern (
-  (condition_5 etcs_level__ertms_etcs_level
-  section_4_6__driver_selects_shunting_mode
-  section_4_6__train_is_at_standstill)) ))))
+     (= section_4_6__driver_selects_shunting_mode true))) :pattern ((condition_5
+                                                                    etcs_level__ertms_etcs_level
+                                                                    section_4_6__driver_selects_shunting_mode
+                                                                    section_4_6__train_is_at_standstill)) ))))
 
 ;; condition_6__post_axiom
   (assert true)
@@ -390,13 +323,7 @@
   (forall
   ((section_4_6__reception_of_information_shunting_granted_by_rbc Bool)
   (section_4_6__train_is_at_standstill Bool))
-  (! (=> (condition_6__function_guard
-     (condition_6 etcs_level__ertms_etcs_level
-     section_4_6__reception_of_information_shunting_granted_by_rbc
-     section_4_6__train_is_at_standstill) etcs_level__ertms_etcs_level
-     section_4_6__reception_of_information_shunting_granted_by_rbc
-     section_4_6__train_is_at_standstill)
-     (=
+  (! (=
      (= (condition_6 etcs_level__ertms_etcs_level
         section_4_6__reception_of_information_shunting_granted_by_rbc
         section_4_6__train_is_at_standstill) true)
@@ -404,7 +331,7 @@
      (and (= section_4_6__train_is_at_standstill true)
      (or (= etcs_level__ertms_etcs_level 2)
      (= etcs_level__ertms_etcs_level 3)))
-     (= section_4_6__reception_of_information_shunting_granted_by_rbc true)))) :pattern (
+     (= section_4_6__reception_of_information_shunting_granted_by_rbc true))) :pattern (
   (condition_6 etcs_level__ertms_etcs_level
   section_4_6__reception_of_information_shunting_granted_by_rbc
   section_4_6__train_is_at_standstill)) ))))
@@ -417,21 +344,14 @@
   (forall ((section_4_6__ma_ssp_gardient_on_board Bool)
   (section_4_6__no_specific_mode_is_required_by_a_mode_profile Bool)
   (section_4_6__valid_train_data_is_stored_on_board Bool))
-  (! (=> (condition_10__function_guard
-     (condition_10 section_4_6__ma_ssp_gardient_on_board
-     section_4_6__no_specific_mode_is_required_by_a_mode_profile
-     section_4_6__valid_train_data_is_stored_on_board)
-     section_4_6__ma_ssp_gardient_on_board
-     section_4_6__no_specific_mode_is_required_by_a_mode_profile
-     section_4_6__valid_train_data_is_stored_on_board)
-     (=
+  (! (=
      (= (condition_10 section_4_6__ma_ssp_gardient_on_board
         section_4_6__no_specific_mode_is_required_by_a_mode_profile
         section_4_6__valid_train_data_is_stored_on_board) true)
      (and
      (and (= section_4_6__valid_train_data_is_stored_on_board true)
      (= section_4_6__ma_ssp_gardient_on_board true))
-     (= section_4_6__no_specific_mode_is_required_by_a_mode_profile true)))) :pattern (
+     (= section_4_6__no_specific_mode_is_required_by_a_mode_profile true))) :pattern (
   (condition_10 section_4_6__ma_ssp_gardient_on_board
   section_4_6__no_specific_mode_is_required_by_a_mode_profile
   section_4_6__valid_train_data_is_stored_on_board)) )))
@@ -445,15 +365,7 @@
   ((section_4_6__an_acknowledge_request_for_shunting_is_displayed_to_the_driver Bool)
   (section_4_6__driver_acknowledges Bool)
   (section_4_6__note_5_conditions_for_shunting_mode Bool))
-  (! (=> (condition_50__function_guard
-     (condition_50
-     section_4_6__an_acknowledge_request_for_shunting_is_displayed_to_the_driver
-     section_4_6__driver_acknowledges
-     section_4_6__note_5_conditions_for_shunting_mode)
-     section_4_6__an_acknowledge_request_for_shunting_is_displayed_to_the_driver
-     section_4_6__driver_acknowledges
-     section_4_6__note_5_conditions_for_shunting_mode)
-     (=
+  (! (=
      (= (condition_50
         section_4_6__an_acknowledge_request_for_shunting_is_displayed_to_the_driver
         section_4_6__driver_acknowledges
@@ -462,7 +374,7 @@
      (and
      (= section_4_6__an_acknowledge_request_for_shunting_is_displayed_to_the_driver true)
      (= section_4_6__driver_acknowledges true))
-     (= section_4_6__note_5_conditions_for_shunting_mode true)))) :pattern (
+     (= section_4_6__note_5_conditions_for_shunting_mode true))) :pattern (
   (condition_50
   section_4_6__an_acknowledge_request_for_shunting_is_displayed_to_the_driver
   section_4_6__driver_acknowledges
@@ -500,34 +412,6 @@
 
 ;; H
   (assert (in_range2 ertms_etcs_level))
-
-;; H
-  (assert (condition_transition_sb_to_sh__function_guard
-  (condition_transition_sb_to_sh ertms_etcs_level
-  an_acknowledge_request_for_shunting_is_displayed_to_the_driver
-  driver_acknowledges driver_selects_shunting_mode
-  note_5_conditions_for_shunting_mode
-  reception_of_information_shunting_granted_by_rbc train_is_at_standstill
-  priority) ertms_etcs_level
-  an_acknowledge_request_for_shunting_is_displayed_to_the_driver
-  driver_acknowledges driver_selects_shunting_mode
-  note_5_conditions_for_shunting_mode
-  reception_of_information_shunting_granted_by_rbc train_is_at_standstill
-  priority))
-
-;; H
-  (assert (condition_transition_sb_to_fs__function_guard
-  (condition_transition_sb_to_fs ma_ssp_gardient_on_board
-  no_specific_mode_is_required_by_a_mode_profile
-  valid_train_data_is_stored_on_board priority) ma_ssp_gardient_on_board
-  no_specific_mode_is_required_by_a_mode_profile
-  valid_train_data_is_stored_on_board priority))
-
-;; H
-  (assert (condition_transition_sb_to_is__function_guard
-  (condition_transition_sb_to_is
-  driver_isolates_ertms_etcs_on_board_equipment priority)
-  driver_isolates_ertms_etcs_on_board_equipment priority))
 
 (assert
 ;; WP_parameter_def

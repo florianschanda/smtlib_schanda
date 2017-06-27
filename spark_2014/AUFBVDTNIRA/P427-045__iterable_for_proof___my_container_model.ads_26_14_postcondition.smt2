@@ -228,8 +228,7 @@
 ;; get_model__def_axiom
   (assert
   (forall ((c (Array Int natural)))
-  (! (=> (get_model__function_guard (get_model c) c) (= (get_model c) c)) :pattern (
-  (get_model c)) )))
+  (! (= (get_model c) c) :pattern ((get_model c)) )))
 
 (declare-fun valid (Int) Bool)
 
@@ -247,9 +246,7 @@
 
 ;; valid__def_axiom
   (assert
-  (forall ((e Int))
-  (! (=> (valid__function_guard (valid e) e) (= (= (valid e) true) (< 0 e))) :pattern (
-  (valid e)) )))
+  (forall ((e Int)) (! (= (= (valid e) true) (< 0 e)) :pattern ((valid e)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -265,8 +262,7 @@
   (assert
   (forall ((c (Array Int natural)))
   (forall ((p Int))
-  (! (=> (m_has_element__function_guard (m_has_element c p) c p)
-     (= (= (m_has_element c p) true) (and (<= 1 p) (<= p 100)))) :pattern (
+  (! (= (= (m_has_element c p) true) (and (<= 1 p) (<= p 100))) :pattern (
   (m_has_element c p)) ))))
 
 (declare-fun m_element ((Array Int natural) Int) Int)
@@ -277,21 +273,17 @@
   (assert
   (forall ((c (Array Int natural)))
   (forall ((p Int))
-  (! (and (m_has_element__function_guard (m_has_element c p) c p)
-     (=>
+  (! (=>
      (and (dynamic_invariant p true true true) (= (m_has_element c p) true))
-     (let ((result (m_element c p)))
-     (=> (m_element__function_guard result c p) (dynamic_invariant result
-     true false true))))) :pattern ((m_element c p)) ))))
+     (dynamic_invariant (m_element c p) true false true)) :pattern ((m_element
+                                                                    c p)) ))))
 
 ;; m_element__def_axiom
   (assert
   (forall ((c (Array Int natural)))
   (forall ((p Int))
-  (! (=>
-     (and (dynamic_invariant p true true true) (m_element__function_guard
-     (m_element c p) c p)) (= (m_element c p) (to_rep (select c p)))) :pattern (
-  (m_element c p)) ))))
+  (! (=> (dynamic_invariant p true true true)
+     (= (m_element c p) (to_rep (select c p)))) :pattern ((m_element c p)) ))))
 
 (declare-sort t3b 0)
 
@@ -325,9 +317,9 @@
 
 (declare-fun i () Int)
 
-(declare-fun temp___211 () (Array Int natural))
+(declare-fun temp___197 () (Array Int natural))
 
-(declare-fun temp___210 () Int)
+(declare-fun temp___196 () Int)
 
 (declare-fun o () natural)
 
@@ -378,26 +370,16 @@
 (define-fun c11 () map__ref (mk_map__ref c))
 
 ;; H
-  (assert
-  (forall ((j Int)) (valid__function_guard (valid (to_rep (select c3 j)))
-  (to_rep (select c3 j)))))
-
-;; H
-  (assert
-  (forall ((j Int)) (valid__function_guard (valid (to_rep (select c3 j)))
-  (to_rep (select c3 j)))))
-
-;; H
   (assert (= (mk_int__ref result) (mk_int__ref i)))
 
 ;; H
   (assert (= i1 1))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 100)) (= temp___211 c)))
+  (assert (=> (and (<= 1 i1) (<= i1 100)) (= temp___197 c)))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 100)) (= temp___210 i1)))
+  (assert (=> (and (<= 1 i1) (<= i1 100)) (= temp___196 i1)))
 
 ;; H
   (assert
@@ -440,10 +422,10 @@
   (=> (and (<= 1 i1) (<= i1 100))
   (and
   (and (=> (<= 1 100) (in_range3 i2))
-  (forall ((temp___212 Int))
-  (=> (and (<= 1 temp___212) (<= temp___212 100))
-  (=> (< i2 temp___212)
-  (= (select c3 temp___212) (select temp___211 temp___212))))))
+  (forall ((temp___198 Int))
+  (=> (and (<= 1 temp___198) (<= temp___198 100))
+  (=> (< i2 temp___198)
+  (= (select c3 temp___198) (select temp___197 temp___198))))))
   (and (<= 1 i2) (<= i2 100)))))
 
 ;; H
@@ -497,34 +479,18 @@
 ;; H
   (assert (= c9 c7))
 
-;; H
-  (assert (get_model__function_guard (get_model c8) c8))
+(define-fun temp___208 () (Array Int natural) (get_model c8))
 
-(define-fun temp___229 () (Array Int natural) (get_model c8))
-
-(declare-fun temp___228 () Int)
+(declare-fun temp___207 () Int)
 
 ;; H
-  (assert (m_has_element__function_guard
-  (m_has_element temp___229 temp___228) temp___229 temp___228))
+  (assert (in_range1 temp___207))
 
 ;; H
-  (assert (in_range1 temp___228))
-
-;; H
-  (assert (= (m_has_element temp___229 temp___228) true))
-
-;; H
-  (assert (m_element__function_guard (m_element temp___229 temp___228)
-  temp___229 temp___228))
-
-(define-fun e () Int (m_element temp___229 temp___228))
-
-;; H
-  (assert (valid__function_guard (valid e) e))
+  (assert (= (m_has_element temp___208 temp___207) true))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (= (valid e) true)))
+  (not (= (valid (m_element temp___208 temp___207)) true)))
 (check-sat)

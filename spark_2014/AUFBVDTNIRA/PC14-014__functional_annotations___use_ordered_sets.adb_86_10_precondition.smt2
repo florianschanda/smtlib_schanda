@@ -1347,7 +1347,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "use_ordered_sets.ads", line 50, characters 0-0
+ ;; File "use_ordered_sets.ads", line 43, characters 0-0
   (not
   (or
   (< (length (mk___rep s2__split_discrs s2__split_fields1)) (to_rep

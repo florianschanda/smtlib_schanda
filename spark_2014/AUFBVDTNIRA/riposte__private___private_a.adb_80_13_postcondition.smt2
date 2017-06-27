@@ -492,9 +492,9 @@
 
 (declare-fun o2 () (Array Int integer))
 
-(declare-fun temp___264 () length_t)
+(declare-fun temp___249 () length_t)
 
-(declare-fun temp___2641 () (Array Int integer))
+(declare-fun temp___2491 () (Array Int integer))
 
 (declare-fun result () Bool)
 
@@ -541,14 +541,14 @@
   (assert (= (temp___133 (- 2147483648)) o2))
 
 ;; H
-  (assert (= temp___264 o1))
+  (assert (= temp___249 o1))
 
 ;; H
-  (assert (= temp___2641 o2))
+  (assert (= temp___2491 o2))
 
 ;; H
   (assert
-  (= (mk___rep (mk___split_fields temp___264 temp___2641)) null_stack))
+  (= (mk___rep (mk___split_fields temp___249 temp___2491)) null_stack))
 
 ;; H
   (assert (= result dst__split_fields))

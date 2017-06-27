@@ -304,8 +304,8 @@
  ;; File "bitset.ads", line 10, characters 0-0
   (not
   (not
-  (= (bvand value (let ((temp___152 (bv2nat pos)))
-                  (ite (< temp___152 18446744073709551616)
-                  (bvshl ((_ int2bv 64) 1) ((_ int2bv 64) temp___152))
+  (= (bvand value (let ((temp___148 (bv2nat pos)))
+                  (ite (< temp___148 18446744073709551616)
+                  (bvshl ((_ int2bv 64) 1) ((_ int2bv 64) temp___148))
                   ((_ int2bv 64) 0)))) ((_ int2bv 64) 0)))))
 (check-sat)

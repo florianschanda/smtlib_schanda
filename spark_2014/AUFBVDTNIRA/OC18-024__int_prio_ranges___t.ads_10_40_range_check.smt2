@@ -180,29 +180,21 @@
 
 ;; bad_interrupt_priority__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (bad_interrupt_priority us_void_param)))
-     (=> (bad_interrupt_priority__function_guard result us_void_param)
-     (dynamic_invariant result true false true))) :pattern ((bad_interrupt_priority
-                                                            us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant
+  (bad_interrupt_priority us_void_param) true false
+  true) :pattern ((bad_interrupt_priority us_void_param)) )))
 
 ;; bad_interrupt_priority__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (bad_interrupt_priority__function_guard
-     (bad_interrupt_priority us_void_param) us_void_param)
-     (= (bad_interrupt_priority us_void_param) 99)) :pattern ((bad_interrupt_priority
-                                                              us_void_param)) )))
+  (! (= (bad_interrupt_priority us_void_param) 99) :pattern ((bad_interrupt_priority
+                                                             us_void_param)) )))
 
 (define-fun dynamic_invariant1 ((temp___expr_202 Int)
   (temp___is_init_199 Bool) (temp___skip_constant_200 Bool)
   (temp___do_toplevel_201 Bool)) Bool (=>
                                       (or (= temp___is_init_199 true)
                                       (<= 0 98)) (in_range temp___expr_202)))
-
-;; H
-  (assert (bad_interrupt_priority__function_guard
-  (bad_interrupt_priority Tuple0) Tuple0))
 
 (assert
 ;; WP_parameter_def

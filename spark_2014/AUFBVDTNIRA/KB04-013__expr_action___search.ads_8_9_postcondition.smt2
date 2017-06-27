@@ -243,11 +243,9 @@
   (assert
   (forall ((t (Array Int integer)))
   (forall ((v Int) (low Int) (up Int))
-  (! (=> (no_v_in_range__function_guard (no_v_in_range t v low up) t v low
-     up)
-     (= (= (no_v_in_range t v low up) true)
+  (! (= (= (no_v_in_range t v low up) true)
      (forall ((pos Int))
-     (=> (and (<= low pos) (<= pos up)) (not (= (to_rep (select t pos)) v)))))) :pattern (
+     (=> (and (<= low pos) (<= pos up)) (not (= (to_rep (select t pos)) v))))) :pattern (
   (no_v_in_range t v low up)) ))))
 
 (declare-fun t () (Array Int integer))
@@ -287,9 +285,9 @@
 
 (declare-fun search__search__result () Int)
 
-(declare-fun temp___158 () Int)
+(declare-fun temp___154 () Int)
 
-(declare-fun temp___157 () Int)
+(declare-fun temp___153 () Int)
 
 (declare-fun result () Int)
 
@@ -368,10 +366,10 @@
   (assert (= i1 1))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 10)) (= temp___158 i1)))
+  (assert (=> (and (<= 1 i1) (<= i1 10)) (= temp___154 i1)))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 10)) (= temp___157 pos1)))
+  (assert (=> (and (<= 1 i1) (<= i1 10)) (= temp___153 pos1)))
 
 ;; H
   (assert
@@ -484,13 +482,7 @@
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
   (not
-  (or
-  (and (= search__search__result4 0)
-  (=> (no_v_in_range__function_guard (no_v_in_range t v 1 10) t v 1 10)
-  (= (no_v_in_range t v 1 10) true)))
+  (or (and (= search__search__result4 0) (= (no_v_in_range t v 1 10) true))
   (and (= (to_rep (select t search__search__result4)) v)
-  (=> (no_v_in_range__function_guard
-  (no_v_in_range t v 1 (- search__search__result4 1)) t v 1
-  (- search__search__result4 1))
-  (= (no_v_in_range t v 1 (- search__search__result4 1)) true))))))
+  (= (no_v_in_range t v 1 (- search__search__result4 1)) true)))))
 (check-sat)

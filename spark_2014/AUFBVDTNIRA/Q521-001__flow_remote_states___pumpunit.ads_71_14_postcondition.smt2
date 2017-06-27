@@ -63,11 +63,11 @@
 (define-fun internal_state__ref___projection ((a internal_state__ref)) internal_state 
   (internal_state__content a))
 
-(define-fun dynamic_invariant ((temp___expr_589 Int)
-  (temp___is_init_586 Bool) (temp___skip_constant_587 Bool)
-  (temp___do_toplevel_588 Bool)) Bool (=>
-                                      (or (= temp___is_init_586 true)
-                                      (<= 0 3)) (in_range temp___expr_589)))
+(define-fun dynamic_invariant ((temp___expr_563 Int)
+  (temp___is_init_560 Bool) (temp___skip_constant_561 Bool)
+  (temp___do_toplevel_562 Bool)) Bool (=>
+                                      (or (= temp___is_init_560 true)
+                                      (<= 0 3)) (in_range temp___expr_563)))
 
 ;; is_ready__post_axiom
   (assert true)
@@ -75,9 +75,7 @@
 ;; is_ready__def_axiom
   (assert
   (forall ((pumpunit__cur_state Int))
-  (! (=> (is_ready__function_guard (is_ready pumpunit__cur_state)
-     pumpunit__cur_state)
-     (= (= (is_ready pumpunit__cur_state) true) (= pumpunit__cur_state 1))) :pattern (
+  (! (= (= (is_ready pumpunit__cur_state) true) (= pumpunit__cur_state 1)) :pattern (
   (is_ready pumpunit__cur_state)) )))
 
 (declare-fun is_pumping (Int) Bool)
@@ -90,9 +88,7 @@
 ;; is_pumping__def_axiom
   (assert
   (forall ((pumpunit__cur_state Int))
-  (! (=> (is_pumping__function_guard (is_pumping pumpunit__cur_state)
-     pumpunit__cur_state)
-     (= (= (is_pumping pumpunit__cur_state) true) (= pumpunit__cur_state 0))) :pattern (
+  (! (= (= (is_pumping pumpunit__cur_state) true) (= pumpunit__cur_state 0)) :pattern (
   (is_pumping pumpunit__cur_state)) )))
 
 (declare-fun cur_state () Int)
@@ -106,9 +102,6 @@
 (declare-fun cur_state3 () Int)
 
 (declare-fun cur_state4 () Int)
-
-;; H
-  (assert (is_pumping__function_guard (is_pumping cur_state) cur_state))
 
 ;; H
   (assert (in_range cur_state))
@@ -133,9 +126,6 @@
 
 ;; H
   (assert (= cur_state4 cur_state2))
-
-;; H
-  (assert (is_ready__function_guard (is_ready cur_state3) cur_state3))
 
 (assert
 ;; WP_parameter_def

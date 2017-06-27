@@ -422,8 +422,7 @@
 ;; is_concat__def_axiom
   (assert
   (forall ((q us_rep) (v us_rep) (p us_rep))
-  (! (=> (is_concat__function_guard (is_concat q v p) q v p)
-     (= (= (is_concat q v p) true)
+  (! (= (= (is_concat q v p) true)
      (and
      (and
      (and (= (- (length p) (length v)) (length q))
@@ -434,7 +433,7 @@
      (= (get p (+ i (length q))) (get v i)))))
      (forall ((i Int))
      (=> (and (<= (+ (length q) 1) i) (<= i (length p)))
-     (= (get v (- i (length q))) (get p i))))))) :pattern ((is_concat q v p)) )))
+     (= (get v (- i (length q))) (get p i)))))) :pattern ((is_concat q v p)) )))
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int us_rep1))))))
@@ -545,8 +544,7 @@
 ;; oeq__def_axiom
   (assert
   (forall ((m1 (Array Int us_rep1)) (m2 (Array Int us_rep1)))
-  (! (=> (oeq__function_guard1 (oeq1 m1 m2) m1 m2)
-     (= (= (oeq1 m1 m2) true)
+  (! (= (= (oeq1 m1 m2) true)
      (forall ((i Int))
      (=> (and (<= 1 i) (<= i 100))
      (and
@@ -554,7 +552,7 @@
         (rec__tree_model__path_type__a (us_split_fields1 (select m2 i)))) true)
      (=
      (= (rec__tree_model__path_type__k (us_split_fields1 (select m1 i))) true)
-     (= (rec__tree_model__path_type__k (us_split_fields1 (select m2 i))) true))))))) :pattern (
+     (= (rec__tree_model__path_type__k (us_split_fields1 (select m2 i))) true)))))) :pattern (
   (oeq1 m1 m2)) )))
 
 (declare-fun is_add (us_rep Int us_rep) Bool)
@@ -915,22 +913,17 @@
 
 (declare-fun tree_structure__function_guard (Bool us_rep3) Bool)
 
-;; temp___result_287_def
-  (assert
-  (forall ((temp___286 us_rep3)) (size__function_guard (size temp___286)
-  temp___286)))
-
-(define-fun default_initial_assumption2 ((temp___expr_281 us_rep3)
-  (temp___skip_top_level_282 Bool)) Bool (and
+(define-fun default_initial_assumption2 ((temp___expr_275 us_rep3)
+  (temp___skip_top_level_276 Bool)) Bool (and
                                          (and
                                          (= (to_rep
                                             (rec__binary_trees__forest__s
                                             (us_split_fields5
-                                            temp___expr_281))) 0)
-                                         (forall ((temp___284 Int))
+                                            temp___expr_275))) 0)
+                                         (forall ((temp___278 Int))
                                          (=>
-                                         (and (<= 1 temp___284)
-                                         (<= temp___284 100))
+                                         (and (<= 1 temp___278)
+                                         (<= temp___278 100))
                                          (and
                                          (and
                                          (and
@@ -939,37 +932,32 @@
                                             (us_split_fields3
                                             (select (rec__binary_trees__forest__c
                                                     (us_split_fields5
-                                                    temp___expr_281)) temp___284)))) 0)
+                                                    temp___expr_275)) temp___278)))) 0)
                                          (= (to_rep
                                             (rec__binary_trees__cell__right
                                             (us_split_fields3
                                             (select (rec__binary_trees__forest__c
                                                     (us_split_fields5
-                                                    temp___expr_281)) temp___284)))) 0))
+                                                    temp___expr_275)) temp___278)))) 0))
                                          (= (to_rep
                                             (rec__binary_trees__cell__parent
                                             (us_split_fields3
                                             (select (rec__binary_trees__forest__c
                                                     (us_split_fields5
-                                                    temp___expr_281)) temp___284)))) 0))
+                                                    temp___expr_275)) temp___278)))) 0))
                                          (= (to_rep1
                                             (rec__binary_trees__cell__position
                                             (us_split_fields3
                                             (select (rec__binary_trees__forest__c
                                                     (us_split_fields5
-                                                    temp___expr_281)) temp___284)))) 2)))))
+                                                    temp___expr_275)) temp___278)))) 2)))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_282 true))
-                                         (= (size temp___expr_281) 0))))
+                                         (= temp___skip_top_level_276 true))
+                                         (= (size temp___expr_275) 0))))
 
-;; temp___result_290_def
-  (assert
-  (forall ((temp___289 us_rep3)) (tree_structure__function_guard
-  (tree_structure temp___289) temp___289)))
-
-(define-fun type_invariant ((temp___288 us_rep3)) Bool (= (tree_structure
-                                                          temp___288) true))
+(define-fun type_invariant ((temp___281 us_rep3)) Bool (= (tree_structure
+                                                          temp___281) true))
 
 (declare-fun model__ (us_rep3 Int) (Array Int us_rep1))
 
@@ -991,27 +979,10 @@
   (assert
   (forall ((f us_rep3))
   (forall ((root Int))
-  (! (and (valid_root__function_guard (valid_root f root) f root)
-     (=>
+  (! (=>
      (and (and (dynamic_invariant root true true true) (type_invariant f))
      (= (valid_root f root) true))
      (let ((result (model__ f root)))
-     (and (forall ((i Int)) (parent__function_guard (parent f i) f i))
-     (and (forall ((i Int)) (parent__function_guard (parent f i) f i))
-     (and (forall ((i Int)) (parent__function_guard (parent f i) f i))
-     (and (forall ((i Int)) (position__function_guard (position f i) f i))
-     (and (forall ((i Int)) (parent__function_guard (parent f i) f i))
-     (and (forall ((i Int)) (position__function_guard (position f i) f i))
-     (and
-     (forall ((i Int)) (is_add__function_guard
-     (is_add
-     (rec__tree_model__path_type__a
-     (us_split_fields1 (select result (parent f i)))) (position f i)
-     (rec__tree_model__path_type__a (us_split_fields1 (select result i))))
-     (rec__tree_model__path_type__a
-     (us_split_fields1 (select result (parent f i)))) (position f i)
-     (rec__tree_model__path_type__a (us_split_fields1 (select result i)))))
-     (=> (model____function_guard result f root)
      (and
      (and
      (= (rec__tree_model__path_type__k
@@ -1055,7 +1026,7 @@
      (= (oeq
         (rec__tree_model__path_type__a (us_split_fields1 (select result i)))
         (rec__tree_model__path_type__a (us_split_fields1 (select result j)))) true))
-     (= j i))))))))))) (dynamic_invariant3 result true false true))))))))))))) :pattern (
+     (= j i))))))))))) (dynamic_invariant3 result true false true)))) :pattern (
   (model__ f root)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -1121,8 +1092,6 @@
   (! (=> (in_range6 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
                                                               (of_rep2 x))) )))
 
-(declare-fun last1 () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -1148,16 +1117,13 @@
 ;; size__post_axiom
   (assert
   (forall ((f us_rep3))
-  (! (=> (type_invariant f)
-     (let ((result (size f)))
-     (=> (size__function_guard result f) (dynamic_invariant1 result true
-     false true)))) :pattern ((size f)) )))
+  (! (=> (type_invariant f) (dynamic_invariant1 (size f) true false true)) :pattern (
+  (size f)) )))
 
 ;; size__def_axiom
   (assert
   (forall ((f us_rep3))
-  (! (=> (size__function_guard (size f) f)
-     (= (size f) (to_rep (rec__binary_trees__forest__s (us_split_fields5 f))))) :pattern (
+  (! (= (size f) (to_rep (rec__binary_trees__forest__s (us_split_fields5 f)))) :pattern (
   (size f)) )))
 
 ;; valid_root__post_axiom
@@ -1165,23 +1131,20 @@
   (forall ((f us_rep3))
   (forall ((i Int))
   (! (=> (and (dynamic_invariant i true true true) (type_invariant f))
-     (let ((result (valid_root f i)))
-     (and (size__function_guard (size f) f)
-     (=> (valid_root__function_guard result f i)
-     (=> (< (size f) i) (not (= result true))))))) :pattern ((valid_root f i)) ))))
+     (=> (< (size f) i) (not (= (valid_root f i) true)))) :pattern ((valid_root
+                                                                    f i)) ))))
 
 ;; valid_root__def_axiom
   (assert
   (forall ((f us_rep3))
   (forall ((i Int))
-  (! (=> (valid_root__function_guard (valid_root f i) f i)
-     (= (= (valid_root f i) true)
+  (! (= (= (valid_root f i) true)
      (and (<= i (to_rep (rec__binary_trees__forest__s (us_split_fields5 f))))
      (= (to_rep1
         (rec__binary_trees__cell__position
         (us_split_fields3
-        (let ((temp___298 (rec__binary_trees__forest__c (us_split_fields5 f))))
-        (select temp___298 i))))) 2)))) :pattern ((valid_root f i)) ))))
+        (let ((temp___288 (rec__binary_trees__forest__c (us_split_fields5 f))))
+        (select temp___288 i))))) 2))) :pattern ((valid_root f i)) ))))
 
 ;; parent__post_axiom
   (assert
@@ -1189,27 +1152,22 @@
   (forall ((i Int))
   (! (=> (and (dynamic_invariant i true true true) (type_invariant f))
      (let ((result (parent f i)))
-     (and (valid_root__function_guard (valid_root f i) f i)
-     (and (size__function_guard (size f) f)
-     (=> (parent__function_guard result f i)
      (and
      (and (=> (= (valid_root f i) true) (= result 0))
      (=> (= (size f) 0) (= result 0))) (dynamic_invariant1 result true false
-     true))))))) :pattern ((parent f i)) ))))
+     true)))) :pattern ((parent f i)) ))))
 
 ;; parent__def_axiom
   (assert
   (forall ((f us_rep3))
   (forall ((i Int))
-  (! (=>
-     (and (dynamic_invariant i true true true) (parent__function_guard
-     (parent f i) f i))
+  (! (=> (dynamic_invariant i true true true)
      (= (parent f i) (to_rep
                      (rec__binary_trees__cell__parent
                      (us_split_fields3
-                     (let ((temp___306 (rec__binary_trees__forest__c
+                     (let ((temp___292 (rec__binary_trees__forest__c
                                        (us_split_fields5 f))))
-                     (select temp___306 i))))))) :pattern ((parent f i)) ))))
+                     (select temp___292 i))))))) :pattern ((parent f i)) ))))
 
 (define-fun dynamic_invariant4 ((temp___expr_168 Int)
   (temp___is_init_165 Bool) (temp___skip_constant_166 Bool)
@@ -1221,73 +1179,68 @@
   (assert
   (forall ((f us_rep3))
   (forall ((i Int))
-  (! (and (parent__function_guard (parent f i) f i)
-     (=>
+  (! (=>
      (and (and (dynamic_invariant i true true true) (type_invariant f))
-     (not (= (parent f i) 0)))
-     (let ((result (position f i)))
-     (=> (position__function_guard result f i) (dynamic_invariant4 result
-     true false true))))) :pattern ((position f i)) ))))
+     (not (= (parent f i) 0))) (dynamic_invariant4 (position f i) true false
+     true)) :pattern ((position f i)) ))))
 
 ;; position__def_axiom
   (assert
   (forall ((f us_rep3))
   (forall ((i Int))
-  (! (=>
-     (and (dynamic_invariant i true true true) (position__function_guard
-     (position f i) f i))
+  (! (=> (dynamic_invariant i true true true)
      (= (position f i) (to_rep1
                        (rec__binary_trees__cell__position
                        (us_split_fields3
-                       (let ((temp___312 (rec__binary_trees__forest__c
+                       (let ((temp___296 (rec__binary_trees__forest__c
                                          (us_split_fields5 f))))
-                       (select temp___312 i))))))) :pattern ((position f i)) ))))
+                       (select temp___296 i))))))) :pattern ((position f i)) ))))
 
-(define-fun default_initial_assumption3 ((temp___expr_265 us_rep2)
-  (temp___skip_top_level_266 Bool)) Bool (and
+(define-fun default_initial_assumption3 ((temp___expr_259 us_rep2)
+  (temp___skip_top_level_260 Bool)) Bool (and
                                          (and
                                          (and
                                          (= (to_rep
                                             (rec__binary_trees__cell__left
                                             (us_split_fields3
-                                            temp___expr_265))) 0)
+                                            temp___expr_259))) 0)
                                          (= (to_rep
                                             (rec__binary_trees__cell__right
                                             (us_split_fields3
-                                            temp___expr_265))) 0))
+                                            temp___expr_259))) 0))
                                          (= (to_rep
                                             (rec__binary_trees__cell__parent
                                             (us_split_fields3
-                                            temp___expr_265))) 0))
+                                            temp___expr_259))) 0))
                                          (= (to_rep1
                                             (rec__binary_trees__cell__position
                                             (us_split_fields3
-                                            temp___expr_265))) 2)))
+                                            temp___expr_259))) 2)))
 
-(define-fun default_initial_assumption4 ((temp___expr_272 (Array Int us_rep2))
-  (temp___skip_top_level_273 Bool)) Bool (forall ((temp___274 Int))
+(define-fun default_initial_assumption4 ((temp___expr_266 (Array Int us_rep2))
+  (temp___skip_top_level_267 Bool)) Bool (forall ((temp___268 Int))
                                          (=>
-                                         (and (<= 1 temp___274)
-                                         (<= temp___274 100))
+                                         (and (<= 1 temp___268)
+                                         (<= temp___268 100))
                                          (and
                                          (and
                                          (and
                                          (= (to_rep
                                             (rec__binary_trees__cell__left
                                             (us_split_fields3
-                                            (select temp___expr_272 temp___274)))) 0)
+                                            (select temp___expr_266 temp___268)))) 0)
                                          (= (to_rep
                                             (rec__binary_trees__cell__right
                                             (us_split_fields3
-                                            (select temp___expr_272 temp___274)))) 0))
+                                            (select temp___expr_266 temp___268)))) 0))
                                          (= (to_rep
                                             (rec__binary_trees__cell__parent
                                             (us_split_fields3
-                                            (select temp___expr_272 temp___274)))) 0))
+                                            (select temp___expr_266 temp___268)))) 0))
                                          (= (to_rep1
                                             (rec__binary_trees__cell__position
                                             (us_split_fields3
-                                            (select temp___expr_272 temp___274)))) 2)))))
+                                            (select temp___expr_266 temp___268)))) 2)))))
 
 ;; tree_structure__post_axiom
   (assert true)
@@ -1295,8 +1248,7 @@
 ;; tree_structure__def_axiom
   (assert
   (forall ((f us_rep3))
-  (! (=> (tree_structure__function_guard (tree_structure f) f)
-     (= (= (tree_structure f) true)
+  (! (= (= (tree_structure f) true)
      (and
      (and
      (and
@@ -1311,8 +1263,8 @@
      (<= (+ (to_rep (rec__binary_trees__forest__s (us_split_fields5 f))) 1) i)
      (<= i 100))
      (= (bool_eq8
-        (let ((temp___580 (rec__binary_trees__forest__c (us_split_fields5 f))))
-        (select temp___580 i))
+        (let ((temp___397 (rec__binary_trees__forest__c (us_split_fields5 f))))
+        (select temp___397 i))
         (mk___rep1
         (mk___split_fields1 (of_rep 0) (of_rep 0) (of_rep 0) (of_rep1 2)))) true)))
      (forall ((i Int))
@@ -1321,15 +1273,15 @@
      (<= 0 (to_rep
            (rec__binary_trees__cell__parent
            (us_split_fields3
-           (let ((temp___581 (rec__binary_trees__forest__c
+           (let ((temp___398 (rec__binary_trees__forest__c
                              (us_split_fields5 f))))
-           (select temp___581 i))))))
+           (select temp___398 i))))))
      (<= (to_rep
          (rec__binary_trees__cell__parent
          (us_split_fields3
-         (let ((temp___581 (rec__binary_trees__forest__c
+         (let ((temp___398 (rec__binary_trees__forest__c
                            (us_split_fields5 f))))
-         (select temp___581 i))))) (to_rep
+         (select temp___398 i))))) (to_rep
                                    (rec__binary_trees__forest__s
                                    (us_split_fields5 f))))))))
      (forall ((i Int))
@@ -1338,15 +1290,15 @@
      (<= 0 (to_rep
            (rec__binary_trees__cell__left
            (us_split_fields3
-           (let ((temp___582 (rec__binary_trees__forest__c
+           (let ((temp___399 (rec__binary_trees__forest__c
                              (us_split_fields5 f))))
-           (select temp___582 i))))))
+           (select temp___399 i))))))
      (<= (to_rep
          (rec__binary_trees__cell__left
          (us_split_fields3
-         (let ((temp___582 (rec__binary_trees__forest__c
+         (let ((temp___399 (rec__binary_trees__forest__c
                            (us_split_fields5 f))))
-         (select temp___582 i))))) (to_rep
+         (select temp___399 i))))) (to_rep
                                    (rec__binary_trees__forest__s
                                    (us_split_fields5 f))))))))
      (forall ((i Int))
@@ -1355,15 +1307,15 @@
      (<= 0 (to_rep
            (rec__binary_trees__cell__right
            (us_split_fields3
-           (let ((temp___583 (rec__binary_trees__forest__c
+           (let ((temp___400 (rec__binary_trees__forest__c
                              (us_split_fields5 f))))
-           (select temp___583 i))))))
+           (select temp___400 i))))))
      (<= (to_rep
          (rec__binary_trees__cell__right
          (us_split_fields3
-         (let ((temp___583 (rec__binary_trees__forest__c
+         (let ((temp___400 (rec__binary_trees__forest__c
                            (us_split_fields5 f))))
-         (select temp___583 i))))) (to_rep
+         (select temp___400 i))))) (to_rep
                                    (rec__binary_trees__forest__s
                                    (us_split_fields5 f))))))))
      (forall ((i Int))
@@ -1372,13 +1324,13 @@
      (= (to_rep1
         (rec__binary_trees__cell__position
         (us_split_fields3
-        (let ((temp___585 (rec__binary_trees__forest__c (us_split_fields5 f))))
-        (select temp___585 i))))) 2)
+        (let ((temp___402 (rec__binary_trees__forest__c (us_split_fields5 f))))
+        (select temp___402 i))))) 2)
      (= (to_rep
         (rec__binary_trees__cell__parent
         (us_split_fields3
-        (let ((temp___584 (rec__binary_trees__forest__c (us_split_fields5 f))))
-        (select temp___584 i))))) 0)))))
+        (let ((temp___401 (rec__binary_trees__forest__c (us_split_fields5 f))))
+        (select temp___401 i))))) 0)))))
      (forall ((i Int))
      (=> (and (<= 1 i) (<= i 100))
      (=>
@@ -1386,29 +1338,29 @@
      (= (to_rep
         (rec__binary_trees__cell__left
         (us_split_fields3
-        (let ((temp___590 (rec__binary_trees__forest__c (us_split_fields5 f))))
-        (select temp___590 i))))) 0))
+        (let ((temp___407 (rec__binary_trees__forest__c (us_split_fields5 f))))
+        (select temp___407 i))))) 0))
      (and
      (= (to_rep1
         (rec__binary_trees__cell__position
         (us_split_fields3
-        (let ((temp___586 (rec__binary_trees__forest__c (us_split_fields5 f))))
-        (select temp___586 (to_rep
+        (let ((temp___403 (rec__binary_trees__forest__c (us_split_fields5 f))))
+        (select temp___403 (to_rep
                            (rec__binary_trees__cell__left
                            (us_split_fields3
-                           (let ((temp___587 (rec__binary_trees__forest__c
+                           (let ((temp___404 (rec__binary_trees__forest__c
                                              (us_split_fields5 f))))
-                           (select temp___587 i)))))))))) 0)
+                           (select temp___404 i)))))))))) 0)
      (= (to_rep
         (rec__binary_trees__cell__parent
         (us_split_fields3
-        (let ((temp___588 (rec__binary_trees__forest__c (us_split_fields5 f))))
-        (select temp___588 (to_rep
+        (let ((temp___405 (rec__binary_trees__forest__c (us_split_fields5 f))))
+        (select temp___405 (to_rep
                            (rec__binary_trees__cell__left
                            (us_split_fields3
-                           (let ((temp___589 (rec__binary_trees__forest__c
+                           (let ((temp___406 (rec__binary_trees__forest__c
                                              (us_split_fields5 f))))
-                           (select temp___589 i)))))))))) i))))))
+                           (select temp___406 i)))))))))) i))))))
      (forall ((i Int))
      (=> (and (<= 1 i) (<= i 100))
      (=>
@@ -1416,29 +1368,29 @@
      (= (to_rep
         (rec__binary_trees__cell__right
         (us_split_fields3
-        (let ((temp___595 (rec__binary_trees__forest__c (us_split_fields5 f))))
-        (select temp___595 i))))) 0))
+        (let ((temp___412 (rec__binary_trees__forest__c (us_split_fields5 f))))
+        (select temp___412 i))))) 0))
      (and
      (= (to_rep1
         (rec__binary_trees__cell__position
         (us_split_fields3
-        (let ((temp___591 (rec__binary_trees__forest__c (us_split_fields5 f))))
-        (select temp___591 (to_rep
+        (let ((temp___408 (rec__binary_trees__forest__c (us_split_fields5 f))))
+        (select temp___408 (to_rep
                            (rec__binary_trees__cell__right
                            (us_split_fields3
-                           (let ((temp___592 (rec__binary_trees__forest__c
+                           (let ((temp___409 (rec__binary_trees__forest__c
                                              (us_split_fields5 f))))
-                           (select temp___592 i)))))))))) 1)
+                           (select temp___409 i)))))))))) 1)
      (= (to_rep
         (rec__binary_trees__cell__parent
         (us_split_fields3
-        (let ((temp___593 (rec__binary_trees__forest__c (us_split_fields5 f))))
-        (select temp___593 (to_rep
+        (let ((temp___410 (rec__binary_trees__forest__c (us_split_fields5 f))))
+        (select temp___410 (to_rep
                            (rec__binary_trees__cell__right
                            (us_split_fields3
-                           (let ((temp___594 (rec__binary_trees__forest__c
+                           (let ((temp___411 (rec__binary_trees__forest__c
                                              (us_split_fields5 f))))
-                           (select temp___594 i)))))))))) i))))))
+                           (select temp___411 i)))))))))) i))))))
      (forall ((i Int))
      (=> (and (<= 1 i) (<= i 100))
      (=>
@@ -1447,23 +1399,23 @@
      (= (to_rep
         (rec__binary_trees__cell__parent
         (us_split_fields3
-        (let ((temp___598 (rec__binary_trees__forest__c (us_split_fields5 f))))
-        (select temp___598 i))))) 0))
+        (let ((temp___415 (rec__binary_trees__forest__c (us_split_fields5 f))))
+        (select temp___415 i))))) 0))
      (= (to_rep1
         (rec__binary_trees__cell__position
         (us_split_fields3
-        (let ((temp___599 (rec__binary_trees__forest__c (us_split_fields5 f))))
-        (select temp___599 i))))) 0))
+        (let ((temp___416 (rec__binary_trees__forest__c (us_split_fields5 f))))
+        (select temp___416 i))))) 0))
      (= (to_rep
         (rec__binary_trees__cell__left
         (us_split_fields3
-        (let ((temp___596 (rec__binary_trees__forest__c (us_split_fields5 f))))
-        (select temp___596 (to_rep
+        (let ((temp___413 (rec__binary_trees__forest__c (us_split_fields5 f))))
+        (select temp___413 (to_rep
                            (rec__binary_trees__cell__parent
                            (us_split_fields3
-                           (let ((temp___597 (rec__binary_trees__forest__c
+                           (let ((temp___414 (rec__binary_trees__forest__c
                                              (us_split_fields5 f))))
-                           (select temp___597 i)))))))))) i)))))
+                           (select temp___414 i)))))))))) i)))))
      (forall ((i Int))
      (=> (and (<= 1 i) (<= i 100))
      (=>
@@ -1472,23 +1424,23 @@
      (= (to_rep
         (rec__binary_trees__cell__parent
         (us_split_fields3
-        (let ((temp___602 (rec__binary_trees__forest__c (us_split_fields5 f))))
-        (select temp___602 i))))) 0))
+        (let ((temp___419 (rec__binary_trees__forest__c (us_split_fields5 f))))
+        (select temp___419 i))))) 0))
      (= (to_rep1
         (rec__binary_trees__cell__position
         (us_split_fields3
-        (let ((temp___603 (rec__binary_trees__forest__c (us_split_fields5 f))))
-        (select temp___603 i))))) 1))
+        (let ((temp___420 (rec__binary_trees__forest__c (us_split_fields5 f))))
+        (select temp___420 i))))) 1))
      (= (to_rep
         (rec__binary_trees__cell__right
         (us_split_fields3
-        (let ((temp___600 (rec__binary_trees__forest__c (us_split_fields5 f))))
-        (select temp___600 (to_rep
+        (let ((temp___417 (rec__binary_trees__forest__c (us_split_fields5 f))))
+        (select temp___417 (to_rep
                            (rec__binary_trees__cell__parent
                            (us_split_fields3
-                           (let ((temp___601 (rec__binary_trees__forest__c
+                           (let ((temp___418 (rec__binary_trees__forest__c
                                              (us_split_fields5 f))))
-                           (select temp___601 i)))))))))) i))))))) :pattern (
+                           (select temp___418 i)))))))))) i)))))) :pattern (
   (tree_structure f)) )))
 
 (define-fun dynamic_invariant5 ((temp___expr_162 Int)
@@ -1544,10 +1496,9 @@
   (assert
   (forall ((s1 us_rep) (s2 us_rep))
   (forall ((d Int))
-  (! (=> (is_add__function_guard (is_add s1 d s2) s1 d s2)
-     (= (= (is_add s1 d s2) true)
+  (! (= (= (is_add s1 d s2) true)
      (and (and (= (- (length s2) 1) (length s1)) (= (olt s1 s2) true))
-     (= (get s2 (length s2)) d)))) :pattern ((is_add s1 d s2)) ))))
+     (= (get s2 (length s2)) d))) :pattern ((is_add s1 d s2)) ))))
 
 (declare-sort extended_index 0)
 
@@ -1626,13 +1577,13 @@
 
 (declare-fun n () Int)
 
-(declare-fun temp___2256 () (Array Int us_rep1))
+(declare-fun temp___1464 () (Array Int us_rep1))
 
 (declare-fun o () us_rep1)
 
 (declare-fun o1 () us_split_fields)
 
-(declare-fun temp___2255 () (Array Int us_rep1))
+(declare-fun temp___1463 () (Array Int us_rep1))
 
 (declare-fun o2 () us_rep1)
 
@@ -1642,13 +1593,13 @@
 
 (declare-fun o5 () Int)
 
-(declare-fun temp___2254 () (Array Int us_rep1))
+(declare-fun temp___1462 () (Array Int us_rep1))
 
 (declare-fun o6 () us_rep1)
 
 (declare-fun o7 () us_split_fields)
 
-(declare-fun temp___2257 () (Array Int us_rep1))
+(declare-fun temp___1465 () (Array Int us_rep1))
 
 (declare-fun o8 () Int)
 
@@ -1658,7 +1609,7 @@
 
 (declare-fun o11 () us_rep)
 
-(declare-fun temp___2260 () (Array Int us_rep1))
+(declare-fun temp___1468 () (Array Int us_rep1))
 
 (declare-fun o12 () Int)
 
@@ -1668,7 +1619,7 @@
 
 (declare-fun o15 () us_rep)
 
-(declare-fun temp___2263 () (Array Int us_rep1))
+(declare-fun temp___1471 () (Array Int us_rep1))
 
 (declare-fun o16 () us_rep1)
 
@@ -1676,7 +1627,7 @@
 
 (declare-fun o18 () us_rep)
 
-(declare-fun temp___2264 () (Array Int us_rep1))
+(declare-fun temp___1472 () (Array Int us_rep1))
 
 (declare-fun o19 () us_rep1)
 
@@ -1690,13 +1641,13 @@
 
 (declare-fun o24 () Int)
 
-(declare-fun temp___2268 () (Array Int us_rep1))
+(declare-fun temp___1476 () (Array Int us_rep1))
 
 (declare-fun o25 () us_rep1)
 
 (declare-fun o26 () us_split_fields)
 
-(declare-fun temp___2267 () (Array Int us_rep1))
+(declare-fun temp___1475 () (Array Int us_rep1))
 
 (declare-fun o27 () us_rep1)
 
@@ -1706,7 +1657,7 @@
 
 (declare-fun o30 () Int)
 
-(declare-fun temp___2266 () (Array Int us_rep1))
+(declare-fun temp___1474 () (Array Int us_rep1))
 
 (declare-fun o31 () us_rep1)
 
@@ -1718,7 +1669,7 @@
 
 (declare-fun o35 () Int)
 
-(declare-fun temp___2269 () (Array Int us_rep1))
+(declare-fun temp___1477 () (Array Int us_rep1))
 
 (declare-fun o36 () Int)
 
@@ -1728,7 +1679,7 @@
 
 (declare-fun o39 () us_rep)
 
-(declare-fun temp___2272 () (Array Int us_rep1))
+(declare-fun temp___1480 () (Array Int us_rep1))
 
 (declare-fun o40 () Int)
 
@@ -1742,7 +1693,7 @@
 
 (declare-fun o45 () Int)
 
-(declare-fun temp___2275 () (Array Int us_rep1))
+(declare-fun temp___1483 () (Array Int us_rep1))
 
 (declare-fun o46 () us_rep1)
 
@@ -1750,7 +1701,7 @@
 
 (declare-fun o48 () us_rep)
 
-(declare-fun temp___2276 () (Array Int us_rep1))
+(declare-fun temp___1484 () (Array Int us_rep1))
 
 (declare-fun o49 () us_rep1)
 
@@ -1758,7 +1709,7 @@
 
 (declare-fun o51 () us_rep)
 
-(declare-fun temp___2277 () (Array Int us_rep1))
+(declare-fun temp___1485 () (Array Int us_rep1))
 
 (declare-fun o52 () Int)
 
@@ -1770,13 +1721,13 @@
 
 (declare-fun o56 () Int)
 
-(declare-fun temp___22561 () (Array Int us_rep1))
+(declare-fun temp___14641 () (Array Int us_rep1))
 
 (declare-fun o57 () us_rep1)
 
 (declare-fun o58 () us_split_fields)
 
-(declare-fun temp___22551 () (Array Int us_rep1))
+(declare-fun temp___14631 () (Array Int us_rep1))
 
 (declare-fun o59 () us_rep1)
 
@@ -1786,13 +1737,13 @@
 
 (declare-fun o62 () Int)
 
-(declare-fun temp___22541 () (Array Int us_rep1))
+(declare-fun temp___14621 () (Array Int us_rep1))
 
 (declare-fun o63 () us_rep1)
 
 (declare-fun o64 () us_split_fields)
 
-(declare-fun temp___22571 () (Array Int us_rep1))
+(declare-fun temp___14651 () (Array Int us_rep1))
 
 (declare-fun o65 () Int)
 
@@ -1802,7 +1753,7 @@
 
 (declare-fun o68 () us_rep)
 
-(declare-fun temp___22601 () (Array Int us_rep1))
+(declare-fun temp___14681 () (Array Int us_rep1))
 
 (declare-fun o69 () Int)
 
@@ -1812,7 +1763,7 @@
 
 (declare-fun o72 () us_rep)
 
-(declare-fun temp___22631 () (Array Int us_rep1))
+(declare-fun temp___14711 () (Array Int us_rep1))
 
 (declare-fun o73 () us_rep1)
 
@@ -1820,7 +1771,7 @@
 
 (declare-fun o75 () us_rep)
 
-(declare-fun temp___22641 () (Array Int us_rep1))
+(declare-fun temp___14721 () (Array Int us_rep1))
 
 (declare-fun o76 () us_rep1)
 
@@ -1834,13 +1785,13 @@
 
 (declare-fun o81 () Int)
 
-(declare-fun temp___22681 () (Array Int us_rep1))
+(declare-fun temp___14761 () (Array Int us_rep1))
 
 (declare-fun o82 () us_rep1)
 
 (declare-fun o83 () us_split_fields)
 
-(declare-fun temp___22671 () (Array Int us_rep1))
+(declare-fun temp___14751 () (Array Int us_rep1))
 
 (declare-fun o84 () us_rep1)
 
@@ -1850,7 +1801,7 @@
 
 (declare-fun o87 () Int)
 
-(declare-fun temp___22661 () (Array Int us_rep1))
+(declare-fun temp___14741 () (Array Int us_rep1))
 
 (declare-fun o88 () us_rep1)
 
@@ -1862,7 +1813,7 @@
 
 (declare-fun o92 () Int)
 
-(declare-fun temp___22691 () (Array Int us_rep1))
+(declare-fun temp___14771 () (Array Int us_rep1))
 
 (declare-fun o93 () Int)
 
@@ -1872,7 +1823,7 @@
 
 (declare-fun o96 () us_rep)
 
-(declare-fun temp___22721 () (Array Int us_rep1))
+(declare-fun temp___14801 () (Array Int us_rep1))
 
 (declare-fun o97 () Int)
 
@@ -1886,7 +1837,7 @@
 
 (declare-fun o102 () Int)
 
-(declare-fun temp___22751 () (Array Int us_rep1))
+(declare-fun temp___14831 () (Array Int us_rep1))
 
 (declare-fun o103 () us_rep1)
 
@@ -1894,7 +1845,7 @@
 
 (declare-fun o105 () us_rep)
 
-(declare-fun temp___22761 () (Array Int us_rep1))
+(declare-fun temp___14841 () (Array Int us_rep1))
 
 (declare-fun o106 () us_rep1)
 
@@ -1902,7 +1853,7 @@
 
 (declare-fun o108 () us_rep)
 
-(declare-fun temp___22771 () (Array Int us_rep1))
+(declare-fun temp___14851 () (Array Int us_rep1))
 
 (declare-fun o109 () Int)
 
@@ -1964,34 +1915,12 @@
 
 ;; H
   (assert
-  (and (type_invariant
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1)))
-  (type_invariant
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)))))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root))
+  (and
+  (= (tree_structure
+     (mk___rep2
+     (mk___split_fields2 f_old__split_fields f_old__split_fields1))) true)
+  (= (tree_structure
+     (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))) true)))
 
 ;; H
   (assert
@@ -2080,36 +2009,6 @@
                                                       (select f_old__split_fields1 j)))))))))))))))))))))
 
 ;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
   (assert
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -2165,233 +2064,6 @@
 
 ;; H
   (assert (<= n1 100))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_concat__function_guard
-  (is_concat
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select (model__
-          (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-          root) v)))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select (model__
-          (mk___rep2
-          (mk___split_fields2 f_old__split_fields f_old__split_fields1)) 
-          v) i)))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select (model__
-          (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-          root) i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select (model__
-          (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-          root) v)))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select (model__
-          (mk___rep2
-          (mk___split_fields2 f_old__split_fields f_old__split_fields1)) 
-          v) i)))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select (model__
-          (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-          root) i))))))
 
 ;; H
   (assert
@@ -2603,499 +2275,24 @@
 
 ;; H
   (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2254 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f__split_fields f__split_fields1))
-                      i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2254 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2254 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f__split_fields f__split_fields1))
-                      i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2254 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2255 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f__split_fields f__split_fields1))
-                      i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2255 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2255 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f__split_fields f__split_fields1))
-                      i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2255 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2256 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f_old__split_fields
-                      f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2256 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2256 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f_old__split_fields
-                      f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2256 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2264 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f_old__split_fields
-                      f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2264 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2264 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f_old__split_fields
-                      f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2264 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2263 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f__split_fields f__split_fields1))
-                      i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2263 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2263 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f__split_fields f__split_fields1))
-                      i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2263 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2260 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f_old__split_fields
-                      f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2260 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2260 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f_old__split_fields
-                      f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2260 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2257 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f__split_fields f__split_fields1))
-                      i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2257 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2257 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f__split_fields f__split_fields1))
-                      i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2257 i))))))
-
-;; H
-  (assert (type_invariant
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))))
+  (= (tree_structure
+     (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))) true))
 
 ;; H
   (assert
   (and
-  (and
-  (= temp___2254 (model__
+  (= temp___1462 (model__
                  (mk___rep2
                  (mk___split_fields2 f__split_fields f__split_fields1)) 
                  root))
-  (model____function_guard temp___2254
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) root))
-  (and (dynamic_invariant3 temp___2254 true false true)
+  (and (dynamic_invariant3 temp___1462 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2254 root))) true)
+     (us_split_fields1 (select temp___1462 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2254 root)))) 0)
+     (us_split_fields1 (select temp___1462 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -3107,56 +2304,56 @@
           i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___2254 (parent
+          (select temp___1462 (parent
                               (mk___rep2
                               (mk___split_fields2 f__split_fields
                               f__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2254 i))) true)
+     (us_split_fields1 (select temp___1462 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2254 i))) true))))))
+     (us_split_fields1 (select temp___1462 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___2254 i))) true)
+          (us_split_fields1 (select temp___1462 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___2254 (parent
+     (select temp___1462 (parent
                          (mk___rep2
                          (mk___split_fields2 f__split_fields
                          f__split_fields1)) i))))
      (position
      (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2254 i)))) true)
+     (us_split_fields1 (select temp___1462 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2254 i)))) 0))))
+     (us_split_fields1 (select temp___1462 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2254 i))) true)
+     (us_split_fields1 (select temp___1462 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2254 j))) true)
+     (us_split_fields1 (select temp___1462 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2254 i)))
+     (us_split_fields1 (select temp___1462 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2254 j)))) true))
+     (us_split_fields1 (select temp___1462 j)))) true))
   (= j i))))))))))))))
 
 ;; H
-  (assert (= o6 (select temp___2254 ki1)))
+  (assert (= o6 (select temp___1462 ki1)))
 
 ;; H
   (assert (= o7 (us_split_fields1 o6)))
@@ -3166,28 +2363,26 @@
 
 ;; H
   (assert
-  (=> (= result4 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)))))
+  (=> (= result4 true)
+  (= (tree_structure
+     (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))) true)))
 
 ;; H
   (assert
   (=> (= result4 true)
   (and
-  (and
-  (= temp___2255 (model__
+  (= temp___1463 (model__
                  (mk___rep2
                  (mk___split_fields2 f__split_fields f__split_fields1)) 
                  root))
-  (model____function_guard temp___2255
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) root))
-  (and (dynamic_invariant3 temp___2255 true false true)
+  (and (dynamic_invariant3 temp___1463 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2255 root))) true)
+     (us_split_fields1 (select temp___1463 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2255 root)))) 0)
+     (us_split_fields1 (select temp___1463 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -3199,56 +2394,56 @@
           i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___2255 (parent
+          (select temp___1463 (parent
                               (mk___rep2
                               (mk___split_fields2 f__split_fields
                               f__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2255 i))) true)
+     (us_split_fields1 (select temp___1463 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2255 i))) true))))))
+     (us_split_fields1 (select temp___1463 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___2255 i))) true)
+          (us_split_fields1 (select temp___1463 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___2255 (parent
+     (select temp___1463 (parent
                          (mk___rep2
                          (mk___split_fields2 f__split_fields
                          f__split_fields1)) i))))
      (position
      (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2255 i)))) true)
+     (us_split_fields1 (select temp___1463 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2255 i)))) 0))))
+     (us_split_fields1 (select temp___1463 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2255 i))) true)
+     (us_split_fields1 (select temp___1463 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2255 j))) true)
+     (us_split_fields1 (select temp___1463 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2255 i)))
+     (us_split_fields1 (select temp___1463 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2255 j)))) true))
+     (us_split_fields1 (select temp___1463 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
-  (assert (=> (= result4 true) (= o2 (select temp___2255 ki1))))
+  (assert (=> (= result4 true) (= o2 (select temp___1463 ki1))))
 
 ;; H
   (assert (=> (= result4 true) (= o3 (us_split_fields1 o2))))
@@ -3269,29 +2464,27 @@
 
 ;; H
   (assert
-  (=> (= result3 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1)))))
+  (=> (= result3 true)
+  (= (tree_structure
+     (mk___rep2
+     (mk___split_fields2 f_old__split_fields f_old__split_fields1))) true)))
 
 ;; H
   (assert
   (=> (= result3 true)
   (and
-  (and
-  (= temp___2256 (model__
+  (= temp___1464 (model__
                  (mk___rep2
                  (mk___split_fields2 f_old__split_fields
                  f_old__split_fields1)) root))
-  (model____function_guard temp___2256
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root))
-  (and (dynamic_invariant3 temp___2256 true false true)
+  (and (dynamic_invariant3 temp___1464 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2256 root))) true)
+     (us_split_fields1 (select temp___1464 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2256 root)))) 0)
+     (us_split_fields1 (select temp___1464 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -3303,26 +2496,26 @@
           (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___2256 (parent
+          (select temp___1464 (parent
                               (mk___rep2
                               (mk___split_fields2 f_old__split_fields
                               f_old__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2256 i))) true)
+     (us_split_fields1 (select temp___1464 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2256 i))) true))))))
+     (us_split_fields1 (select temp___1464 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___2256 i))) true)
+          (us_split_fields1 (select temp___1464 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___2256 (parent
+     (select temp___1464 (parent
                          (mk___rep2
                          (mk___split_fields2 f_old__split_fields
                          f_old__split_fields1)) i))))
@@ -3330,30 +2523,30 @@
      (mk___rep2
      (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2256 i)))) true)
+     (us_split_fields1 (select temp___1464 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2256 i)))) 0))))
+     (us_split_fields1 (select temp___1464 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2256 i))) true)
+     (us_split_fields1 (select temp___1464 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2256 j))) true)
+     (us_split_fields1 (select temp___1464 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2256 i)))
+     (us_split_fields1 (select temp___1464 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2256 j)))) true))
+     (us_split_fields1 (select temp___1464 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
-  (assert (=> (= result3 true) (= o (select temp___2256 ki1))))
+  (assert (=> (= result3 true) (= o (select temp___1464 ki1))))
 
 ;; H
   (assert (=> (= result3 true) (= o1 (us_split_fields1 o))))
@@ -3379,29 +2572,27 @@
 
 ;; H
   (assert
-  (=> (= result2 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1)))))
+  (=> (= result2 true)
+  (= (tree_structure
+     (mk___rep2
+     (mk___split_fields2 f_old__split_fields f_old__split_fields1))) true)))
 
 ;; H
   (assert
   (=> (= result2 true)
   (and
-  (and
-  (= temp___2264 (model__
+  (= temp___1472 (model__
                  (mk___rep2
                  (mk___split_fields2 f_old__split_fields
                  f_old__split_fields1)) root))
-  (model____function_guard temp___2264
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root))
-  (and (dynamic_invariant3 temp___2264 true false true)
+  (and (dynamic_invariant3 temp___1472 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2264 root))) true)
+     (us_split_fields1 (select temp___1472 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2264 root)))) 0)
+     (us_split_fields1 (select temp___1472 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -3413,26 +2604,26 @@
           (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___2264 (parent
+          (select temp___1472 (parent
                               (mk___rep2
                               (mk___split_fields2 f_old__split_fields
                               f_old__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2264 i))) true)
+     (us_split_fields1 (select temp___1472 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2264 i))) true))))))
+     (us_split_fields1 (select temp___1472 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___2264 i))) true)
+          (us_split_fields1 (select temp___1472 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___2264 (parent
+     (select temp___1472 (parent
                          (mk___rep2
                          (mk___split_fields2 f_old__split_fields
                          f_old__split_fields1)) i))))
@@ -3440,30 +2631,30 @@
      (mk___rep2
      (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2264 i)))) true)
+     (us_split_fields1 (select temp___1472 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2264 i)))) 0))))
+     (us_split_fields1 (select temp___1472 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2264 i))) true)
+     (us_split_fields1 (select temp___1472 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2264 j))) true)
+     (us_split_fields1 (select temp___1472 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2264 i)))
+     (us_split_fields1 (select temp___1472 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2264 j)))) true))
+     (us_split_fields1 (select temp___1472 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
-  (assert (=> (= result2 true) (= o19 (select temp___2264 ki1))))
+  (assert (=> (= result2 true) (= o19 (select temp___1472 ki1))))
 
 ;; H
   (assert (=> (= result2 true) (= o20 (us_split_fields1 o19))))
@@ -3473,28 +2664,26 @@
 
 ;; H
   (assert
-  (=> (= result2 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)))))
+  (=> (= result2 true)
+  (= (tree_structure
+     (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))) true)))
 
 ;; H
   (assert
   (=> (= result2 true)
   (and
-  (and
-  (= temp___2263 (model__
+  (= temp___1471 (model__
                  (mk___rep2
                  (mk___split_fields2 f__split_fields f__split_fields1)) 
                  root))
-  (model____function_guard temp___2263
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) root))
-  (and (dynamic_invariant3 temp___2263 true false true)
+  (and (dynamic_invariant3 temp___1471 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2263 root))) true)
+     (us_split_fields1 (select temp___1471 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2263 root)))) 0)
+     (us_split_fields1 (select temp___1471 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -3506,56 +2695,56 @@
           i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___2263 (parent
+          (select temp___1471 (parent
                               (mk___rep2
                               (mk___split_fields2 f__split_fields
                               f__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2263 i))) true)
+     (us_split_fields1 (select temp___1471 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2263 i))) true))))))
+     (us_split_fields1 (select temp___1471 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___2263 i))) true)
+          (us_split_fields1 (select temp___1471 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___2263 (parent
+     (select temp___1471 (parent
                          (mk___rep2
                          (mk___split_fields2 f__split_fields
                          f__split_fields1)) i))))
      (position
      (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2263 i)))) true)
+     (us_split_fields1 (select temp___1471 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2263 i)))) 0))))
+     (us_split_fields1 (select temp___1471 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2263 i))) true)
+     (us_split_fields1 (select temp___1471 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2263 j))) true)
+     (us_split_fields1 (select temp___1471 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2263 i)))
+     (us_split_fields1 (select temp___1471 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2263 j)))) true))
+     (us_split_fields1 (select temp___1471 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
-  (assert (=> (= result2 true) (= o16 (select temp___2263 ki1))))
+  (assert (=> (= result2 true) (= o16 (select temp___1471 ki1))))
 
 ;; H
   (assert (=> (= result2 true) (= o17 (us_split_fields1 o16))))
@@ -3565,29 +2754,27 @@
 
 ;; H
   (assert
-  (=> (= result2 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1)))))
+  (=> (= result2 true)
+  (= (tree_structure
+     (mk___rep2
+     (mk___split_fields2 f_old__split_fields f_old__split_fields1))) true)))
 
 ;; H
   (assert
   (=> (= result2 true)
   (and
-  (and
-  (= temp___2260 (model__
+  (= temp___1468 (model__
                  (mk___rep2
                  (mk___split_fields2 f_old__split_fields
                  f_old__split_fields1)) root))
-  (model____function_guard temp___2260
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root))
-  (and (dynamic_invariant3 temp___2260 true false true)
+  (and (dynamic_invariant3 temp___1468 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2260 root))) true)
+     (us_split_fields1 (select temp___1468 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2260 root)))) 0)
+     (us_split_fields1 (select temp___1468 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -3599,26 +2786,26 @@
           (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___2260 (parent
+          (select temp___1468 (parent
                               (mk___rep2
                               (mk___split_fields2 f_old__split_fields
                               f_old__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2260 i))) true)
+     (us_split_fields1 (select temp___1468 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2260 i))) true))))))
+     (us_split_fields1 (select temp___1468 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___2260 i))) true)
+          (us_split_fields1 (select temp___1468 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___2260 (parent
+     (select temp___1468 (parent
                          (mk___rep2
                          (mk___split_fields2 f_old__split_fields
                          f_old__split_fields1)) i))))
@@ -3626,26 +2813,26 @@
      (mk___rep2
      (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2260 i)))) true)
+     (us_split_fields1 (select temp___1468 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2260 i)))) 0))))
+     (us_split_fields1 (select temp___1468 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2260 i))) true)
+     (us_split_fields1 (select temp___1468 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2260 j))) true)
+     (us_split_fields1 (select temp___1468 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2260 i)))
+     (us_split_fields1 (select temp___1468 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2260 j)))) true))
+     (us_split_fields1 (select temp___1468 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
@@ -3667,7 +2854,7 @@
          (us_split_fields3 (select f__split_fields1 ki1)))))))
 
 ;; H
-  (assert (=> (= result2 true) (= o13 (select temp___2260 o12))))
+  (assert (=> (= result2 true) (= o13 (select temp___1468 o12))))
 
 ;; H
   (assert (=> (= result2 true) (= o14 (us_split_fields1 o13))))
@@ -3677,28 +2864,26 @@
 
 ;; H
   (assert
-  (=> (= result2 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)))))
+  (=> (= result2 true)
+  (= (tree_structure
+     (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))) true)))
 
 ;; H
   (assert
   (=> (= result2 true)
   (and
-  (and
-  (= temp___2257 (model__
+  (= temp___1465 (model__
                  (mk___rep2
                  (mk___split_fields2 f__split_fields f__split_fields1)) 
                  root))
-  (model____function_guard temp___2257
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) root))
-  (and (dynamic_invariant3 temp___2257 true false true)
+  (and (dynamic_invariant3 temp___1465 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2257 root))) true)
+     (us_split_fields1 (select temp___1465 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2257 root)))) 0)
+     (us_split_fields1 (select temp___1465 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -3710,52 +2895,52 @@
           i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___2257 (parent
+          (select temp___1465 (parent
                               (mk___rep2
                               (mk___split_fields2 f__split_fields
                               f__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2257 i))) true)
+     (us_split_fields1 (select temp___1465 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2257 i))) true))))))
+     (us_split_fields1 (select temp___1465 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___2257 i))) true)
+          (us_split_fields1 (select temp___1465 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___2257 (parent
+     (select temp___1465 (parent
                          (mk___rep2
                          (mk___split_fields2 f__split_fields
                          f__split_fields1)) i))))
      (position
      (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2257 i)))) true)
+     (us_split_fields1 (select temp___1465 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2257 i)))) 0))))
+     (us_split_fields1 (select temp___1465 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2257 i))) true)
+     (us_split_fields1 (select temp___1465 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2257 j))) true)
+     (us_split_fields1 (select temp___1465 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2257 i)))
+     (us_split_fields1 (select temp___1465 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2257 j)))) true))
+     (us_split_fields1 (select temp___1465 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
@@ -3777,7 +2962,7 @@
         (us_split_fields3 (select f__split_fields1 ki1)))))))
 
 ;; H
-  (assert (=> (= result2 true) (= o9 (select temp___2257 o8))))
+  (assert (=> (= result2 true) (= o9 (select temp___1465 o8))))
 
 ;; H
   (assert (=> (= result2 true) (= o10 (us_split_fields1 o9))))
@@ -3790,561 +2975,24 @@
 
 ;; H
   (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2266 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f__split_fields f__split_fields1))
-                      i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2266 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2266 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f__split_fields f__split_fields1))
-                      i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2266 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2267 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f__split_fields f__split_fields1))
-                      i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2267 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2267 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f__split_fields f__split_fields1))
-                      i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2267 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2268 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f_old__split_fields
-                      f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2268 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2268 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f_old__split_fields
-                      f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2268 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2277 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f__split_fields f__split_fields1))
-                      i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2277 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2277 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f__split_fields f__split_fields1))
-                      i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2277 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2276 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f__split_fields f__split_fields1))
-                      i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2276 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2276 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f__split_fields f__split_fields1))
-                      i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2276 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2275 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f_old__split_fields
-                      f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2275 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2275 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f_old__split_fields
-                      f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2275 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2272 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f__split_fields f__split_fields1))
-                      i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2272 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2272 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f__split_fields f__split_fields1))
-                      i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2272 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2269 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f_old__split_fields
-                      f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2269 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___2269 (parent
-                      (mk___rep2
-                      (mk___split_fields2 f_old__split_fields
-                      f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___2269 i))))))
-
-;; H
-  (assert (is_concat__function_guard (is_concat o55 o48 o51) o55 o48 o51))
-
-;; H
-  (assert (type_invariant
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))))
+  (= (tree_structure
+     (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))) true))
 
 ;; H
   (assert
   (and
-  (and
-  (= temp___2266 (model__
+  (= temp___1474 (model__
                  (mk___rep2
                  (mk___split_fields2 f__split_fields f__split_fields1)) 
                  root))
-  (model____function_guard temp___2266
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) root))
-  (and (dynamic_invariant3 temp___2266 true false true)
+  (and (dynamic_invariant3 temp___1474 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2266 root))) true)
+     (us_split_fields1 (select temp___1474 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2266 root)))) 0)
+     (us_split_fields1 (select temp___1474 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -4356,56 +3004,56 @@
           i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___2266 (parent
+          (select temp___1474 (parent
                               (mk___rep2
                               (mk___split_fields2 f__split_fields
                               f__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2266 i))) true)
+     (us_split_fields1 (select temp___1474 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2266 i))) true))))))
+     (us_split_fields1 (select temp___1474 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___2266 i))) true)
+          (us_split_fields1 (select temp___1474 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___2266 (parent
+     (select temp___1474 (parent
                          (mk___rep2
                          (mk___split_fields2 f__split_fields
                          f__split_fields1)) i))))
      (position
      (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2266 i)))) true)
+     (us_split_fields1 (select temp___1474 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2266 i)))) 0))))
+     (us_split_fields1 (select temp___1474 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2266 i))) true)
+     (us_split_fields1 (select temp___1474 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2266 j))) true)
+     (us_split_fields1 (select temp___1474 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2266 i)))
+     (us_split_fields1 (select temp___1474 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2266 j)))) true))
+     (us_split_fields1 (select temp___1474 j)))) true))
   (= j i))))))))))))))
 
 ;; H
-  (assert (= o31 (select temp___2266 ki1)))
+  (assert (= o31 (select temp___1474 ki1)))
 
 ;; H
   (assert (= o32 (us_split_fields1 o31)))
@@ -4415,28 +3063,26 @@
 
 ;; H
   (assert
-  (=> (= result7 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)))))
+  (=> (= result7 true)
+  (= (tree_structure
+     (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))) true)))
 
 ;; H
   (assert
   (=> (= result7 true)
   (and
-  (and
-  (= temp___2267 (model__
+  (= temp___1475 (model__
                  (mk___rep2
                  (mk___split_fields2 f__split_fields f__split_fields1)) 
                  root))
-  (model____function_guard temp___2267
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) root))
-  (and (dynamic_invariant3 temp___2267 true false true)
+  (and (dynamic_invariant3 temp___1475 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2267 root))) true)
+     (us_split_fields1 (select temp___1475 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2267 root)))) 0)
+     (us_split_fields1 (select temp___1475 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -4448,56 +3094,56 @@
           i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___2267 (parent
+          (select temp___1475 (parent
                               (mk___rep2
                               (mk___split_fields2 f__split_fields
                               f__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2267 i))) true)
+     (us_split_fields1 (select temp___1475 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2267 i))) true))))))
+     (us_split_fields1 (select temp___1475 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___2267 i))) true)
+          (us_split_fields1 (select temp___1475 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___2267 (parent
+     (select temp___1475 (parent
                          (mk___rep2
                          (mk___split_fields2 f__split_fields
                          f__split_fields1)) i))))
      (position
      (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2267 i)))) true)
+     (us_split_fields1 (select temp___1475 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2267 i)))) 0))))
+     (us_split_fields1 (select temp___1475 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2267 i))) true)
+     (us_split_fields1 (select temp___1475 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2267 j))) true)
+     (us_split_fields1 (select temp___1475 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2267 i)))
+     (us_split_fields1 (select temp___1475 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2267 j)))) true))
+     (us_split_fields1 (select temp___1475 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
-  (assert (=> (= result7 true) (= o27 (select temp___2267 ki1))))
+  (assert (=> (= result7 true) (= o27 (select temp___1475 ki1))))
 
 ;; H
   (assert (=> (= result7 true) (= o28 (us_split_fields1 o27))))
@@ -4521,8 +3167,10 @@
 
 ;; H
   (assert
-  (=> (= result6 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1)))))
+  (=> (= result6 true)
+  (= (tree_structure
+     (mk___rep2
+     (mk___split_fields2 f_old__split_fields f_old__split_fields1))) true)))
 
 ;; H
   (assert (=> (= result6 true) (and (= o24 v) (in_range1 v))))
@@ -4531,22 +3179,18 @@
   (assert
   (=> (= result6 true)
   (and
-  (and
-  (= temp___2268 (model__
+  (= temp___1476 (model__
                  (mk___rep2
                  (mk___split_fields2 f_old__split_fields
                  f_old__split_fields1)) o24))
-  (model____function_guard temp___2268
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  o24))
-  (and (dynamic_invariant3 temp___2268 true false true)
+  (and (dynamic_invariant3 temp___1476 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2268 o24))) true)
+     (us_split_fields1 (select temp___1476 o24))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2268 o24)))) 0)
+     (us_split_fields1 (select temp___1476 o24)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -4558,26 +3202,26 @@
           (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___2268 (parent
+          (select temp___1476 (parent
                               (mk___rep2
                               (mk___split_fields2 f_old__split_fields
                               f_old__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2268 i))) true)
+     (us_split_fields1 (select temp___1476 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2268 i))) true))))))
+     (us_split_fields1 (select temp___1476 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___2268 i))) true)
+          (us_split_fields1 (select temp___1476 i))) true)
        (not (= i o24)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___2268 (parent
+     (select temp___1476 (parent
                          (mk___rep2
                          (mk___split_fields2 f_old__split_fields
                          f_old__split_fields1)) i))))
@@ -4585,30 +3229,30 @@
      (mk___rep2
      (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2268 i)))) true)
+     (us_split_fields1 (select temp___1476 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2268 i)))) 0))))
+     (us_split_fields1 (select temp___1476 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2268 i))) true)
+     (us_split_fields1 (select temp___1476 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2268 j))) true)
+     (us_split_fields1 (select temp___1476 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2268 i)))
+     (us_split_fields1 (select temp___1476 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2268 j)))) true))
+     (us_split_fields1 (select temp___1476 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
-  (assert (=> (= result6 true) (= o25 (select temp___2268 ki1))))
+  (assert (=> (= result6 true) (= o25 (select temp___1476 ki1))))
 
 ;; H
   (assert (=> (= result6 true) (= o26 (us_split_fields1 o25))))
@@ -4636,28 +3280,26 @@
 
 ;; H
   (assert
-  (=> (= result5 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)))))
+  (=> (= result5 true)
+  (= (tree_structure
+     (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))) true)))
 
 ;; H
   (assert
   (=> (= result5 true)
   (and
-  (and
-  (= temp___2277 (model__
+  (= temp___1485 (model__
                  (mk___rep2
                  (mk___split_fields2 f__split_fields f__split_fields1)) 
                  root))
-  (model____function_guard temp___2277
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) root))
-  (and (dynamic_invariant3 temp___2277 true false true)
+  (and (dynamic_invariant3 temp___1485 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2277 root))) true)
+     (us_split_fields1 (select temp___1485 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2277 root)))) 0)
+     (us_split_fields1 (select temp___1485 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -4669,52 +3311,52 @@
           i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___2277 (parent
+          (select temp___1485 (parent
                               (mk___rep2
                               (mk___split_fields2 f__split_fields
                               f__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2277 i))) true)
+     (us_split_fields1 (select temp___1485 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2277 i))) true))))))
+     (us_split_fields1 (select temp___1485 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___2277 i))) true)
+          (us_split_fields1 (select temp___1485 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___2277 (parent
+     (select temp___1485 (parent
                          (mk___rep2
                          (mk___split_fields2 f__split_fields
                          f__split_fields1)) i))))
      (position
      (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2277 i)))) true)
+     (us_split_fields1 (select temp___1485 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2277 i)))) 0))))
+     (us_split_fields1 (select temp___1485 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2277 i))) true)
+     (us_split_fields1 (select temp___1485 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2277 j))) true)
+     (us_split_fields1 (select temp___1485 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2277 i)))
+     (us_split_fields1 (select temp___1485 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2277 j)))) true))
+     (us_split_fields1 (select temp___1485 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
@@ -4724,7 +3366,7 @@
   (assert (=> (= result5 true) (= o52 v)))
 
 ;; H
-  (assert (=> (= result5 true) (= o53 (select temp___2277 o52))))
+  (assert (=> (= result5 true) (= o53 (select temp___1485 o52))))
 
 ;; H
   (assert (=> (= result5 true) (= o54 (us_split_fields1 o53))))
@@ -4734,28 +3376,26 @@
 
 ;; H
   (assert
-  (=> (= result5 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)))))
+  (=> (= result5 true)
+  (= (tree_structure
+     (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))) true)))
 
 ;; H
   (assert
   (=> (= result5 true)
   (and
-  (and
-  (= temp___2276 (model__
+  (= temp___1484 (model__
                  (mk___rep2
                  (mk___split_fields2 f__split_fields f__split_fields1)) 
                  root))
-  (model____function_guard temp___2276
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) root))
-  (and (dynamic_invariant3 temp___2276 true false true)
+  (and (dynamic_invariant3 temp___1484 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2276 root))) true)
+     (us_split_fields1 (select temp___1484 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2276 root)))) 0)
+     (us_split_fields1 (select temp___1484 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -4767,56 +3407,56 @@
           i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___2276 (parent
+          (select temp___1484 (parent
                               (mk___rep2
                               (mk___split_fields2 f__split_fields
                               f__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2276 i))) true)
+     (us_split_fields1 (select temp___1484 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2276 i))) true))))))
+     (us_split_fields1 (select temp___1484 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___2276 i))) true)
+          (us_split_fields1 (select temp___1484 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___2276 (parent
+     (select temp___1484 (parent
                          (mk___rep2
                          (mk___split_fields2 f__split_fields
                          f__split_fields1)) i))))
      (position
      (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2276 i)))) true)
+     (us_split_fields1 (select temp___1484 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2276 i)))) 0))))
+     (us_split_fields1 (select temp___1484 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2276 i))) true)
+     (us_split_fields1 (select temp___1484 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2276 j))) true)
+     (us_split_fields1 (select temp___1484 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2276 i)))
+     (us_split_fields1 (select temp___1484 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2276 j)))) true))
+     (us_split_fields1 (select temp___1484 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
-  (assert (=> (= result5 true) (= o49 (select temp___2276 ki1))))
+  (assert (=> (= result5 true) (= o49 (select temp___1484 ki1))))
 
 ;; H
   (assert (=> (= result5 true) (= o50 (us_split_fields1 o49))))
@@ -4829,8 +3469,10 @@
 
 ;; H
   (assert
-  (=> (= result5 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1)))))
+  (=> (= result5 true)
+  (= (tree_structure
+     (mk___rep2
+     (mk___split_fields2 f_old__split_fields f_old__split_fields1))) true)))
 
 ;; H
   (assert (=> (= result5 true) (and (= o45 v) (in_range1 v))))
@@ -4839,22 +3481,18 @@
   (assert
   (=> (= result5 true)
   (and
-  (and
-  (= temp___2275 (model__
+  (= temp___1483 (model__
                  (mk___rep2
                  (mk___split_fields2 f_old__split_fields
                  f_old__split_fields1)) o45))
-  (model____function_guard temp___2275
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  o45))
-  (and (dynamic_invariant3 temp___2275 true false true)
+  (and (dynamic_invariant3 temp___1483 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2275 o45))) true)
+     (us_split_fields1 (select temp___1483 o45))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2275 o45)))) 0)
+     (us_split_fields1 (select temp___1483 o45)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -4866,26 +3504,26 @@
           (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___2275 (parent
+          (select temp___1483 (parent
                               (mk___rep2
                               (mk___split_fields2 f_old__split_fields
                               f_old__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2275 i))) true)
+     (us_split_fields1 (select temp___1483 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2275 i))) true))))))
+     (us_split_fields1 (select temp___1483 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___2275 i))) true)
+          (us_split_fields1 (select temp___1483 i))) true)
        (not (= i o45)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___2275 (parent
+     (select temp___1483 (parent
                          (mk___rep2
                          (mk___split_fields2 f_old__split_fields
                          f_old__split_fields1)) i))))
@@ -4893,30 +3531,30 @@
      (mk___rep2
      (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2275 i)))) true)
+     (us_split_fields1 (select temp___1483 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2275 i)))) 0))))
+     (us_split_fields1 (select temp___1483 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2275 i))) true)
+     (us_split_fields1 (select temp___1483 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2275 j))) true)
+     (us_split_fields1 (select temp___1483 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2275 i)))
+     (us_split_fields1 (select temp___1483 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2275 j)))) true))
+     (us_split_fields1 (select temp___1483 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
-  (assert (=> (= result5 true) (= o46 (select temp___2275 ki1))))
+  (assert (=> (= result5 true) (= o46 (select temp___1483 ki1))))
 
 ;; H
   (assert (=> (= result5 true) (= o47 (us_split_fields1 o46))))
@@ -4926,28 +3564,26 @@
 
 ;; H
   (assert
-  (=> (= result5 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)))))
+  (=> (= result5 true)
+  (= (tree_structure
+     (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))) true)))
 
 ;; H
   (assert
   (=> (= result5 true)
   (and
-  (and
-  (= temp___2272 (model__
+  (= temp___1480 (model__
                  (mk___rep2
                  (mk___split_fields2 f__split_fields f__split_fields1)) 
                  root))
-  (model____function_guard temp___2272
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) root))
-  (and (dynamic_invariant3 temp___2272 true false true)
+  (and (dynamic_invariant3 temp___1480 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2272 root))) true)
+     (us_split_fields1 (select temp___1480 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2272 root)))) 0)
+     (us_split_fields1 (select temp___1480 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -4959,52 +3595,52 @@
           i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___2272 (parent
+          (select temp___1480 (parent
                               (mk___rep2
                               (mk___split_fields2 f__split_fields
                               f__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2272 i))) true)
+     (us_split_fields1 (select temp___1480 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2272 i))) true))))))
+     (us_split_fields1 (select temp___1480 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___2272 i))) true)
+          (us_split_fields1 (select temp___1480 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___2272 (parent
+     (select temp___1480 (parent
                          (mk___rep2
                          (mk___split_fields2 f__split_fields
                          f__split_fields1)) i))))
      (position
      (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2272 i)))) true)
+     (us_split_fields1 (select temp___1480 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2272 i)))) 0))))
+     (us_split_fields1 (select temp___1480 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2272 i))) true)
+     (us_split_fields1 (select temp___1480 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2272 j))) true)
+     (us_split_fields1 (select temp___1480 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2272 i)))
+     (us_split_fields1 (select temp___1480 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2272 j)))) true))
+     (us_split_fields1 (select temp___1480 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
@@ -5026,7 +3662,7 @@
          (us_split_fields3 (select f__split_fields1 ki1)))))))
 
 ;; H
-  (assert (=> (= result5 true) (= o41 (select temp___2272 o40))))
+  (assert (=> (= result5 true) (= o41 (select temp___1480 o40))))
 
 ;; H
   (assert (=> (= result5 true) (= o42 (us_split_fields1 o41))))
@@ -5039,8 +3675,10 @@
 
 ;; H
   (assert
-  (=> (= result5 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1)))))
+  (=> (= result5 true)
+  (= (tree_structure
+     (mk___rep2
+     (mk___split_fields2 f_old__split_fields f_old__split_fields1))) true)))
 
 ;; H
   (assert (=> (= result5 true) (and (= o35 v) (in_range1 v))))
@@ -5049,22 +3687,18 @@
   (assert
   (=> (= result5 true)
   (and
-  (and
-  (= temp___2269 (model__
+  (= temp___1477 (model__
                  (mk___rep2
                  (mk___split_fields2 f_old__split_fields
                  f_old__split_fields1)) o35))
-  (model____function_guard temp___2269
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  o35))
-  (and (dynamic_invariant3 temp___2269 true false true)
+  (and (dynamic_invariant3 temp___1477 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2269 o35))) true)
+     (us_split_fields1 (select temp___1477 o35))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2269 o35)))) 0)
+     (us_split_fields1 (select temp___1477 o35)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -5076,26 +3710,26 @@
           (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___2269 (parent
+          (select temp___1477 (parent
                               (mk___rep2
                               (mk___split_fields2 f_old__split_fields
                               f_old__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2269 i))) true)
+     (us_split_fields1 (select temp___1477 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2269 i))) true))))))
+     (us_split_fields1 (select temp___1477 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___2269 i))) true)
+          (us_split_fields1 (select temp___1477 i))) true)
        (not (= i o35)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___2269 (parent
+     (select temp___1477 (parent
                          (mk___rep2
                          (mk___split_fields2 f_old__split_fields
                          f_old__split_fields1)) i))))
@@ -5103,26 +3737,26 @@
      (mk___rep2
      (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2269 i)))) true)
+     (us_split_fields1 (select temp___1477 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2269 i)))) 0))))
+     (us_split_fields1 (select temp___1477 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2269 i))) true)
+     (us_split_fields1 (select temp___1477 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___2269 j))) true)
+     (us_split_fields1 (select temp___1477 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2269 i)))
+     (us_split_fields1 (select temp___1477 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___2269 j)))) true))
+     (us_split_fields1 (select temp___1477 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
@@ -5144,7 +3778,7 @@
          (us_split_fields3 (select f__split_fields1 ki1)))))))
 
 ;; H
-  (assert (=> (= result5 true) (= o37 (select temp___2269 o36))))
+  (assert (=> (= result5 true) (= o37 (select temp___1477 o36))))
 
 ;; H
   (assert (=> (= result5 true) (= o38 (us_split_fields1 o37))))
@@ -5154,137 +3788,6 @@
 
 ;; H
   (assert (=> (= result5 true) (= (is_concat o55 o48 o51) true)))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_concat__function_guard
-  (is_concat
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select (model__
-          (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-          root) v)))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select (model__
-          (mk___rep2
-          (mk___split_fields2 f_old__split_fields f_old__split_fields1)) 
-          v) i)))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select (model__
-          (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-          root) i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select (model__
-          (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-          root) v)))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select (model__
-          (mk___rep2
-          (mk___split_fields2 f_old__split_fields f_old__split_fields1)) 
-          v) i)))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select (model__
-          (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-          root) i))))))
 
 ;; H
   (assert
@@ -5370,1015 +3873,6 @@
 
 ;; H
   (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22541 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f__split_fields f__split_fields1))
-                       i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22541 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22541 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f__split_fields f__split_fields1))
-                       i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22541 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22551 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f__split_fields f__split_fields1))
-                       i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22551 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22551 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f__split_fields f__split_fields1))
-                       i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22551 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22561 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f_old__split_fields
-                       f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22561 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22561 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f_old__split_fields
-                       f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22561 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22641 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f_old__split_fields
-                       f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22641 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22641 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f_old__split_fields
-                       f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22641 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22631 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f__split_fields f__split_fields1))
-                       i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22631 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22631 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f__split_fields f__split_fields1))
-                       i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22631 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22601 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f_old__split_fields
-                       f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22601 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22601 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f_old__split_fields
-                       f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22601 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22571 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f__split_fields f__split_fields1))
-                       i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22571 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22571 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f__split_fields f__split_fields1))
-                       i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22571 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22661 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f__split_fields f__split_fields1))
-                       i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22661 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22661 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f__split_fields f__split_fields1))
-                       i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22661 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22671 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f__split_fields f__split_fields1))
-                       i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22671 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22671 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f__split_fields f__split_fields1))
-                       i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22671 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22681 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f_old__split_fields
-                       f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22681 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22681 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f_old__split_fields
-                       f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22681 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22771 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f__split_fields f__split_fields1))
-                       i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22771 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22771 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f__split_fields f__split_fields1))
-                       i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22771 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22761 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f__split_fields f__split_fields1))
-                       i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22761 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22761 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f__split_fields f__split_fields1))
-                       i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22761 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22751 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f_old__split_fields
-                       f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22751 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22751 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f_old__split_fields
-                       f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22751 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22721 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f__split_fields f__split_fields1))
-                       i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22721 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22721 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f__split_fields f__split_fields1))
-                       i))))
-  (position (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22721 i))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (parent__function_guard
-  (parent
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (position__function_guard
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)))
-
-;; H
-  (assert
-  (forall ((i Int)) (is_add__function_guard
-  (is_add
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22691 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f_old__split_fields
-                       f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22691 i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select temp___22691 (parent
-                       (mk___rep2
-                       (mk___split_fields2 f_old__split_fields
-                       f_old__split_fields1)) i))))
-  (position
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  i)
-  (rec__tree_model__path_type__a (us_split_fields1 (select temp___22691 i))))))
-
-;; H
-  (assert (is_concat__function_guard (is_concat o112 o105 o108) o112 
-  o105 o108))
-
-;; H
-  (assert
   (and (=> (<= 1 100) (in_range1 ki2)) (and (<= 1 ki2) (<= ki2 100))))
 
 ;; H
@@ -6391,27 +3885,25 @@
   (assert (= ki3 (+ ki2 1)))
 
 ;; H
-  (assert (type_invariant
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))))
+  (assert
+  (= (tree_structure
+     (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))) true))
 
 ;; H
   (assert
   (and
-  (and
-  (= temp___22541 (model__
+  (= temp___14621 (model__
                   (mk___rep2
                   (mk___split_fields2 f__split_fields f__split_fields1))
                   root))
-  (model____function_guard temp___22541
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) root))
-  (and (dynamic_invariant3 temp___22541 true false true)
+  (and (dynamic_invariant3 temp___14621 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22541 root))) true)
+     (us_split_fields1 (select temp___14621 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22541 root)))) 0)
+     (us_split_fields1 (select temp___14621 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -6423,56 +3915,56 @@
           i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___22541 (parent
+          (select temp___14621 (parent
                                (mk___rep2
                                (mk___split_fields2 f__split_fields
                                f__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22541 i))) true)
+     (us_split_fields1 (select temp___14621 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22541 i))) true))))))
+     (us_split_fields1 (select temp___14621 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___22541 i))) true)
+          (us_split_fields1 (select temp___14621 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___22541 (parent
+     (select temp___14621 (parent
                           (mk___rep2
                           (mk___split_fields2 f__split_fields
                           f__split_fields1)) i))))
      (position
      (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22541 i)))) true)
+     (us_split_fields1 (select temp___14621 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22541 i)))) 0))))
+     (us_split_fields1 (select temp___14621 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22541 i))) true)
+     (us_split_fields1 (select temp___14621 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22541 j))) true)
+     (us_split_fields1 (select temp___14621 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22541 i)))
+     (us_split_fields1 (select temp___14621 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22541 j)))) true))
+     (us_split_fields1 (select temp___14621 j)))) true))
   (= j i))))))))))))))
 
 ;; H
-  (assert (= o63 (select temp___22541 ki3)))
+  (assert (= o63 (select temp___14621 ki3)))
 
 ;; H
   (assert (= o64 (us_split_fields1 o63)))
@@ -6482,28 +3974,26 @@
 
 ;; H
   (assert
-  (=> (= result11 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)))))
+  (=> (= result11 true)
+  (= (tree_structure
+     (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))) true)))
 
 ;; H
   (assert
   (=> (= result11 true)
   (and
-  (and
-  (= temp___22551 (model__
+  (= temp___14631 (model__
                   (mk___rep2
                   (mk___split_fields2 f__split_fields f__split_fields1))
                   root))
-  (model____function_guard temp___22551
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) root))
-  (and (dynamic_invariant3 temp___22551 true false true)
+  (and (dynamic_invariant3 temp___14631 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22551 root))) true)
+     (us_split_fields1 (select temp___14631 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22551 root)))) 0)
+     (us_split_fields1 (select temp___14631 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -6515,56 +4005,56 @@
           i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___22551 (parent
+          (select temp___14631 (parent
                                (mk___rep2
                                (mk___split_fields2 f__split_fields
                                f__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22551 i))) true)
+     (us_split_fields1 (select temp___14631 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22551 i))) true))))))
+     (us_split_fields1 (select temp___14631 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___22551 i))) true)
+          (us_split_fields1 (select temp___14631 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___22551 (parent
+     (select temp___14631 (parent
                           (mk___rep2
                           (mk___split_fields2 f__split_fields
                           f__split_fields1)) i))))
      (position
      (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22551 i)))) true)
+     (us_split_fields1 (select temp___14631 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22551 i)))) 0))))
+     (us_split_fields1 (select temp___14631 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22551 i))) true)
+     (us_split_fields1 (select temp___14631 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22551 j))) true)
+     (us_split_fields1 (select temp___14631 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22551 i)))
+     (us_split_fields1 (select temp___14631 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22551 j)))) true))
+     (us_split_fields1 (select temp___14631 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
-  (assert (=> (= result11 true) (= o59 (select temp___22551 ki3))))
+  (assert (=> (= result11 true) (= o59 (select temp___14631 ki3))))
 
 ;; H
   (assert (=> (= result11 true) (= o60 (us_split_fields1 o59))))
@@ -6585,29 +4075,27 @@
 
 ;; H
   (assert
-  (=> (= result10 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1)))))
+  (=> (= result10 true)
+  (= (tree_structure
+     (mk___rep2
+     (mk___split_fields2 f_old__split_fields f_old__split_fields1))) true)))
 
 ;; H
   (assert
   (=> (= result10 true)
   (and
-  (and
-  (= temp___22561 (model__
+  (= temp___14641 (model__
                   (mk___rep2
                   (mk___split_fields2 f_old__split_fields
                   f_old__split_fields1)) root))
-  (model____function_guard temp___22561
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root))
-  (and (dynamic_invariant3 temp___22561 true false true)
+  (and (dynamic_invariant3 temp___14641 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22561 root))) true)
+     (us_split_fields1 (select temp___14641 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22561 root)))) 0)
+     (us_split_fields1 (select temp___14641 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -6619,26 +4107,26 @@
           (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___22561 (parent
+          (select temp___14641 (parent
                                (mk___rep2
                                (mk___split_fields2 f_old__split_fields
                                f_old__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22561 i))) true)
+     (us_split_fields1 (select temp___14641 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22561 i))) true))))))
+     (us_split_fields1 (select temp___14641 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___22561 i))) true)
+          (us_split_fields1 (select temp___14641 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___22561 (parent
+     (select temp___14641 (parent
                           (mk___rep2
                           (mk___split_fields2 f_old__split_fields
                           f_old__split_fields1)) i))))
@@ -6646,30 +4134,30 @@
      (mk___rep2
      (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22561 i)))) true)
+     (us_split_fields1 (select temp___14641 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22561 i)))) 0))))
+     (us_split_fields1 (select temp___14641 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22561 i))) true)
+     (us_split_fields1 (select temp___14641 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22561 j))) true)
+     (us_split_fields1 (select temp___14641 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22561 i)))
+     (us_split_fields1 (select temp___14641 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22561 j)))) true))
+     (us_split_fields1 (select temp___14641 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
-  (assert (=> (= result10 true) (= o57 (select temp___22561 ki3))))
+  (assert (=> (= result10 true) (= o57 (select temp___14641 ki3))))
 
 ;; H
   (assert (=> (= result10 true) (= o58 (us_split_fields1 o57))))
@@ -6695,29 +4183,27 @@
 
 ;; H
   (assert
-  (=> (= result9 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1)))))
+  (=> (= result9 true)
+  (= (tree_structure
+     (mk___rep2
+     (mk___split_fields2 f_old__split_fields f_old__split_fields1))) true)))
 
 ;; H
   (assert
   (=> (= result9 true)
   (and
-  (and
-  (= temp___22641 (model__
+  (= temp___14721 (model__
                   (mk___rep2
                   (mk___split_fields2 f_old__split_fields
                   f_old__split_fields1)) root))
-  (model____function_guard temp___22641
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root))
-  (and (dynamic_invariant3 temp___22641 true false true)
+  (and (dynamic_invariant3 temp___14721 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22641 root))) true)
+     (us_split_fields1 (select temp___14721 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22641 root)))) 0)
+     (us_split_fields1 (select temp___14721 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -6729,26 +4215,26 @@
           (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___22641 (parent
+          (select temp___14721 (parent
                                (mk___rep2
                                (mk___split_fields2 f_old__split_fields
                                f_old__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22641 i))) true)
+     (us_split_fields1 (select temp___14721 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22641 i))) true))))))
+     (us_split_fields1 (select temp___14721 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___22641 i))) true)
+          (us_split_fields1 (select temp___14721 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___22641 (parent
+     (select temp___14721 (parent
                           (mk___rep2
                           (mk___split_fields2 f_old__split_fields
                           f_old__split_fields1)) i))))
@@ -6756,30 +4242,30 @@
      (mk___rep2
      (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22641 i)))) true)
+     (us_split_fields1 (select temp___14721 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22641 i)))) 0))))
+     (us_split_fields1 (select temp___14721 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22641 i))) true)
+     (us_split_fields1 (select temp___14721 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22641 j))) true)
+     (us_split_fields1 (select temp___14721 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22641 i)))
+     (us_split_fields1 (select temp___14721 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22641 j)))) true))
+     (us_split_fields1 (select temp___14721 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
-  (assert (=> (= result9 true) (= o76 (select temp___22641 ki3))))
+  (assert (=> (= result9 true) (= o76 (select temp___14721 ki3))))
 
 ;; H
   (assert (=> (= result9 true) (= o77 (us_split_fields1 o76))))
@@ -6789,28 +4275,26 @@
 
 ;; H
   (assert
-  (=> (= result9 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)))))
+  (=> (= result9 true)
+  (= (tree_structure
+     (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))) true)))
 
 ;; H
   (assert
   (=> (= result9 true)
   (and
-  (and
-  (= temp___22631 (model__
+  (= temp___14711 (model__
                   (mk___rep2
                   (mk___split_fields2 f__split_fields f__split_fields1))
                   root))
-  (model____function_guard temp___22631
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) root))
-  (and (dynamic_invariant3 temp___22631 true false true)
+  (and (dynamic_invariant3 temp___14711 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22631 root))) true)
+     (us_split_fields1 (select temp___14711 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22631 root)))) 0)
+     (us_split_fields1 (select temp___14711 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -6822,56 +4306,56 @@
           i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___22631 (parent
+          (select temp___14711 (parent
                                (mk___rep2
                                (mk___split_fields2 f__split_fields
                                f__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22631 i))) true)
+     (us_split_fields1 (select temp___14711 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22631 i))) true))))))
+     (us_split_fields1 (select temp___14711 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___22631 i))) true)
+          (us_split_fields1 (select temp___14711 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___22631 (parent
+     (select temp___14711 (parent
                           (mk___rep2
                           (mk___split_fields2 f__split_fields
                           f__split_fields1)) i))))
      (position
      (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22631 i)))) true)
+     (us_split_fields1 (select temp___14711 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22631 i)))) 0))))
+     (us_split_fields1 (select temp___14711 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22631 i))) true)
+     (us_split_fields1 (select temp___14711 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22631 j))) true)
+     (us_split_fields1 (select temp___14711 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22631 i)))
+     (us_split_fields1 (select temp___14711 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22631 j)))) true))
+     (us_split_fields1 (select temp___14711 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
-  (assert (=> (= result9 true) (= o73 (select temp___22631 ki3))))
+  (assert (=> (= result9 true) (= o73 (select temp___14711 ki3))))
 
 ;; H
   (assert (=> (= result9 true) (= o74 (us_split_fields1 o73))))
@@ -6881,29 +4365,27 @@
 
 ;; H
   (assert
-  (=> (= result9 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1)))))
+  (=> (= result9 true)
+  (= (tree_structure
+     (mk___rep2
+     (mk___split_fields2 f_old__split_fields f_old__split_fields1))) true)))
 
 ;; H
   (assert
   (=> (= result9 true)
   (and
-  (and
-  (= temp___22601 (model__
+  (= temp___14681 (model__
                   (mk___rep2
                   (mk___split_fields2 f_old__split_fields
                   f_old__split_fields1)) root))
-  (model____function_guard temp___22601
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  root))
-  (and (dynamic_invariant3 temp___22601 true false true)
+  (and (dynamic_invariant3 temp___14681 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22601 root))) true)
+     (us_split_fields1 (select temp___14681 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22601 root)))) 0)
+     (us_split_fields1 (select temp___14681 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -6915,26 +4397,26 @@
           (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___22601 (parent
+          (select temp___14681 (parent
                                (mk___rep2
                                (mk___split_fields2 f_old__split_fields
                                f_old__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22601 i))) true)
+     (us_split_fields1 (select temp___14681 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22601 i))) true))))))
+     (us_split_fields1 (select temp___14681 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___22601 i))) true)
+          (us_split_fields1 (select temp___14681 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___22601 (parent
+     (select temp___14681 (parent
                           (mk___rep2
                           (mk___split_fields2 f_old__split_fields
                           f_old__split_fields1)) i))))
@@ -6942,26 +4424,26 @@
      (mk___rep2
      (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22601 i)))) true)
+     (us_split_fields1 (select temp___14681 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22601 i)))) 0))))
+     (us_split_fields1 (select temp___14681 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22601 i))) true)
+     (us_split_fields1 (select temp___14681 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22601 j))) true)
+     (us_split_fields1 (select temp___14681 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22601 i)))
+     (us_split_fields1 (select temp___14681 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22601 j)))) true))
+     (us_split_fields1 (select temp___14681 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
@@ -6983,7 +4465,7 @@
          (us_split_fields3 (select f__split_fields1 ki3)))))))
 
 ;; H
-  (assert (=> (= result9 true) (= o70 (select temp___22601 o69))))
+  (assert (=> (= result9 true) (= o70 (select temp___14681 o69))))
 
 ;; H
   (assert (=> (= result9 true) (= o71 (us_split_fields1 o70))))
@@ -6993,28 +4475,26 @@
 
 ;; H
   (assert
-  (=> (= result9 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)))))
+  (=> (= result9 true)
+  (= (tree_structure
+     (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))) true)))
 
 ;; H
   (assert
   (=> (= result9 true)
   (and
-  (and
-  (= temp___22571 (model__
+  (= temp___14651 (model__
                   (mk___rep2
                   (mk___split_fields2 f__split_fields f__split_fields1))
                   root))
-  (model____function_guard temp___22571
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) root))
-  (and (dynamic_invariant3 temp___22571 true false true)
+  (and (dynamic_invariant3 temp___14651 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22571 root))) true)
+     (us_split_fields1 (select temp___14651 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22571 root)))) 0)
+     (us_split_fields1 (select temp___14651 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -7026,52 +4506,52 @@
           i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___22571 (parent
+          (select temp___14651 (parent
                                (mk___rep2
                                (mk___split_fields2 f__split_fields
                                f__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22571 i))) true)
+     (us_split_fields1 (select temp___14651 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22571 i))) true))))))
+     (us_split_fields1 (select temp___14651 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___22571 i))) true)
+          (us_split_fields1 (select temp___14651 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___22571 (parent
+     (select temp___14651 (parent
                           (mk___rep2
                           (mk___split_fields2 f__split_fields
                           f__split_fields1)) i))))
      (position
      (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22571 i)))) true)
+     (us_split_fields1 (select temp___14651 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22571 i)))) 0))))
+     (us_split_fields1 (select temp___14651 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22571 i))) true)
+     (us_split_fields1 (select temp___14651 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22571 j))) true)
+     (us_split_fields1 (select temp___14651 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22571 i)))
+     (us_split_fields1 (select temp___14651 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22571 j)))) true))
+     (us_split_fields1 (select temp___14651 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
@@ -7093,7 +4573,7 @@
          (us_split_fields3 (select f__split_fields1 ki3)))))))
 
 ;; H
-  (assert (=> (= result9 true) (= o66 (select temp___22571 o65))))
+  (assert (=> (= result9 true) (= o66 (select temp___14651 o65))))
 
 ;; H
   (assert (=> (= result9 true) (= o67 (us_split_fields1 o66))))
@@ -7105,27 +4585,25 @@
   (assert (=> (= result9 true) (= (oeq o75 o78) true)))
 
 ;; H
-  (assert (type_invariant
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))))
+  (assert
+  (= (tree_structure
+     (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))) true))
 
 ;; H
   (assert
   (and
-  (and
-  (= temp___22661 (model__
+  (= temp___14741 (model__
                   (mk___rep2
                   (mk___split_fields2 f__split_fields f__split_fields1))
                   root))
-  (model____function_guard temp___22661
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) root))
-  (and (dynamic_invariant3 temp___22661 true false true)
+  (and (dynamic_invariant3 temp___14741 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22661 root))) true)
+     (us_split_fields1 (select temp___14741 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22661 root)))) 0)
+     (us_split_fields1 (select temp___14741 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -7137,56 +4615,56 @@
           i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___22661 (parent
+          (select temp___14741 (parent
                                (mk___rep2
                                (mk___split_fields2 f__split_fields
                                f__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22661 i))) true)
+     (us_split_fields1 (select temp___14741 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22661 i))) true))))))
+     (us_split_fields1 (select temp___14741 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___22661 i))) true)
+          (us_split_fields1 (select temp___14741 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___22661 (parent
+     (select temp___14741 (parent
                           (mk___rep2
                           (mk___split_fields2 f__split_fields
                           f__split_fields1)) i))))
      (position
      (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22661 i)))) true)
+     (us_split_fields1 (select temp___14741 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22661 i)))) 0))))
+     (us_split_fields1 (select temp___14741 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22661 i))) true)
+     (us_split_fields1 (select temp___14741 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22661 j))) true)
+     (us_split_fields1 (select temp___14741 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22661 i)))
+     (us_split_fields1 (select temp___14741 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22661 j)))) true))
+     (us_split_fields1 (select temp___14741 j)))) true))
   (= j i))))))))))))))
 
 ;; H
-  (assert (= o88 (select temp___22661 ki3)))
+  (assert (= o88 (select temp___14741 ki3)))
 
 ;; H
   (assert (= o89 (us_split_fields1 o88)))
@@ -7196,28 +4674,26 @@
 
 ;; H
   (assert
-  (=> (= result14 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)))))
+  (=> (= result14 true)
+  (= (tree_structure
+     (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))) true)))
 
 ;; H
   (assert
   (=> (= result14 true)
   (and
-  (and
-  (= temp___22671 (model__
+  (= temp___14751 (model__
                   (mk___rep2
                   (mk___split_fields2 f__split_fields f__split_fields1))
                   root))
-  (model____function_guard temp___22671
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) root))
-  (and (dynamic_invariant3 temp___22671 true false true)
+  (and (dynamic_invariant3 temp___14751 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22671 root))) true)
+     (us_split_fields1 (select temp___14751 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22671 root)))) 0)
+     (us_split_fields1 (select temp___14751 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -7229,56 +4705,56 @@
           i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___22671 (parent
+          (select temp___14751 (parent
                                (mk___rep2
                                (mk___split_fields2 f__split_fields
                                f__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22671 i))) true)
+     (us_split_fields1 (select temp___14751 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22671 i))) true))))))
+     (us_split_fields1 (select temp___14751 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___22671 i))) true)
+          (us_split_fields1 (select temp___14751 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___22671 (parent
+     (select temp___14751 (parent
                           (mk___rep2
                           (mk___split_fields2 f__split_fields
                           f__split_fields1)) i))))
      (position
      (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22671 i)))) true)
+     (us_split_fields1 (select temp___14751 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22671 i)))) 0))))
+     (us_split_fields1 (select temp___14751 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22671 i))) true)
+     (us_split_fields1 (select temp___14751 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22671 j))) true)
+     (us_split_fields1 (select temp___14751 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22671 i)))
+     (us_split_fields1 (select temp___14751 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22671 j)))) true))
+     (us_split_fields1 (select temp___14751 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
-  (assert (=> (= result14 true) (= o84 (select temp___22671 ki3))))
+  (assert (=> (= result14 true) (= o84 (select temp___14751 ki3))))
 
 ;; H
   (assert (=> (= result14 true) (= o85 (us_split_fields1 o84))))
@@ -7302,8 +4778,10 @@
 
 ;; H
   (assert
-  (=> (= result13 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1)))))
+  (=> (= result13 true)
+  (= (tree_structure
+     (mk___rep2
+     (mk___split_fields2 f_old__split_fields f_old__split_fields1))) true)))
 
 ;; H
   (assert (=> (= result13 true) (and (= o81 v) (in_range1 v))))
@@ -7312,22 +4790,18 @@
   (assert
   (=> (= result13 true)
   (and
-  (and
-  (= temp___22681 (model__
+  (= temp___14761 (model__
                   (mk___rep2
                   (mk___split_fields2 f_old__split_fields
                   f_old__split_fields1)) o81))
-  (model____function_guard temp___22681
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  o81))
-  (and (dynamic_invariant3 temp___22681 true false true)
+  (and (dynamic_invariant3 temp___14761 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22681 o81))) true)
+     (us_split_fields1 (select temp___14761 o81))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22681 o81)))) 0)
+     (us_split_fields1 (select temp___14761 o81)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -7339,26 +4813,26 @@
           (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___22681 (parent
+          (select temp___14761 (parent
                                (mk___rep2
                                (mk___split_fields2 f_old__split_fields
                                f_old__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22681 i))) true)
+     (us_split_fields1 (select temp___14761 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22681 i))) true))))))
+     (us_split_fields1 (select temp___14761 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___22681 i))) true)
+          (us_split_fields1 (select temp___14761 i))) true)
        (not (= i o81)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___22681 (parent
+     (select temp___14761 (parent
                           (mk___rep2
                           (mk___split_fields2 f_old__split_fields
                           f_old__split_fields1)) i))))
@@ -7366,30 +4840,30 @@
      (mk___rep2
      (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22681 i)))) true)
+     (us_split_fields1 (select temp___14761 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22681 i)))) 0))))
+     (us_split_fields1 (select temp___14761 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22681 i))) true)
+     (us_split_fields1 (select temp___14761 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22681 j))) true)
+     (us_split_fields1 (select temp___14761 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22681 i)))
+     (us_split_fields1 (select temp___14761 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22681 j)))) true))
+     (us_split_fields1 (select temp___14761 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
-  (assert (=> (= result13 true) (= o82 (select temp___22681 ki3))))
+  (assert (=> (= result13 true) (= o82 (select temp___14761 ki3))))
 
 ;; H
   (assert (=> (= result13 true) (= o83 (us_split_fields1 o82))))
@@ -7417,28 +4891,26 @@
 
 ;; H
   (assert
-  (=> (= result12 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)))))
+  (=> (= result12 true)
+  (= (tree_structure
+     (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))) true)))
 
 ;; H
   (assert
   (=> (= result12 true)
   (and
-  (and
-  (= temp___22771 (model__
+  (= temp___14851 (model__
                   (mk___rep2
                   (mk___split_fields2 f__split_fields f__split_fields1))
                   root))
-  (model____function_guard temp___22771
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) root))
-  (and (dynamic_invariant3 temp___22771 true false true)
+  (and (dynamic_invariant3 temp___14851 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22771 root))) true)
+     (us_split_fields1 (select temp___14851 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22771 root)))) 0)
+     (us_split_fields1 (select temp___14851 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -7450,52 +4922,52 @@
           i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___22771 (parent
+          (select temp___14851 (parent
                                (mk___rep2
                                (mk___split_fields2 f__split_fields
                                f__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22771 i))) true)
+     (us_split_fields1 (select temp___14851 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22771 i))) true))))))
+     (us_split_fields1 (select temp___14851 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___22771 i))) true)
+          (us_split_fields1 (select temp___14851 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___22771 (parent
+     (select temp___14851 (parent
                           (mk___rep2
                           (mk___split_fields2 f__split_fields
                           f__split_fields1)) i))))
      (position
      (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22771 i)))) true)
+     (us_split_fields1 (select temp___14851 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22771 i)))) 0))))
+     (us_split_fields1 (select temp___14851 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22771 i))) true)
+     (us_split_fields1 (select temp___14851 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22771 j))) true)
+     (us_split_fields1 (select temp___14851 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22771 i)))
+     (us_split_fields1 (select temp___14851 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22771 j)))) true))
+     (us_split_fields1 (select temp___14851 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
@@ -7505,7 +4977,7 @@
   (assert (=> (= result12 true) (= o109 v)))
 
 ;; H
-  (assert (=> (= result12 true) (= o110 (select temp___22771 o109))))
+  (assert (=> (= result12 true) (= o110 (select temp___14851 o109))))
 
 ;; H
   (assert (=> (= result12 true) (= o111 (us_split_fields1 o110))))
@@ -7516,28 +4988,26 @@
 
 ;; H
   (assert
-  (=> (= result12 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)))))
+  (=> (= result12 true)
+  (= (tree_structure
+     (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))) true)))
 
 ;; H
   (assert
   (=> (= result12 true)
   (and
-  (and
-  (= temp___22761 (model__
+  (= temp___14841 (model__
                   (mk___rep2
                   (mk___split_fields2 f__split_fields f__split_fields1))
                   root))
-  (model____function_guard temp___22761
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) root))
-  (and (dynamic_invariant3 temp___22761 true false true)
+  (and (dynamic_invariant3 temp___14841 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22761 root))) true)
+     (us_split_fields1 (select temp___14841 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22761 root)))) 0)
+     (us_split_fields1 (select temp___14841 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -7549,56 +5019,56 @@
           i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___22761 (parent
+          (select temp___14841 (parent
                                (mk___rep2
                                (mk___split_fields2 f__split_fields
                                f__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22761 i))) true)
+     (us_split_fields1 (select temp___14841 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22761 i))) true))))))
+     (us_split_fields1 (select temp___14841 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___22761 i))) true)
+          (us_split_fields1 (select temp___14841 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___22761 (parent
+     (select temp___14841 (parent
                           (mk___rep2
                           (mk___split_fields2 f__split_fields
                           f__split_fields1)) i))))
      (position
      (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22761 i)))) true)
+     (us_split_fields1 (select temp___14841 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22761 i)))) 0))))
+     (us_split_fields1 (select temp___14841 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22761 i))) true)
+     (us_split_fields1 (select temp___14841 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22761 j))) true)
+     (us_split_fields1 (select temp___14841 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22761 i)))
+     (us_split_fields1 (select temp___14841 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22761 j)))) true))
+     (us_split_fields1 (select temp___14841 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
-  (assert (=> (= result12 true) (= o106 (select temp___22761 ki3))))
+  (assert (=> (= result12 true) (= o106 (select temp___14841 ki3))))
 
 ;; H
   (assert (=> (= result12 true) (= o107 (us_split_fields1 o106))))
@@ -7612,8 +5082,10 @@
 
 ;; H
   (assert
-  (=> (= result12 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1)))))
+  (=> (= result12 true)
+  (= (tree_structure
+     (mk___rep2
+     (mk___split_fields2 f_old__split_fields f_old__split_fields1))) true)))
 
 ;; H
   (assert (=> (= result12 true) (and (= o102 v) (in_range1 v))))
@@ -7622,22 +5094,18 @@
   (assert
   (=> (= result12 true)
   (and
-  (and
-  (= temp___22751 (model__
+  (= temp___14831 (model__
                   (mk___rep2
                   (mk___split_fields2 f_old__split_fields
                   f_old__split_fields1)) o102))
-  (model____function_guard temp___22751
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  o102))
-  (and (dynamic_invariant3 temp___22751 true false true)
+  (and (dynamic_invariant3 temp___14831 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22751 o102))) true)
+     (us_split_fields1 (select temp___14831 o102))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22751 o102)))) 0)
+     (us_split_fields1 (select temp___14831 o102)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -7649,26 +5117,26 @@
           (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___22751 (parent
+          (select temp___14831 (parent
                                (mk___rep2
                                (mk___split_fields2 f_old__split_fields
                                f_old__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22751 i))) true)
+     (us_split_fields1 (select temp___14831 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22751 i))) true))))))
+     (us_split_fields1 (select temp___14831 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___22751 i))) true)
+          (us_split_fields1 (select temp___14831 i))) true)
        (not (= i o102)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___22751 (parent
+     (select temp___14831 (parent
                           (mk___rep2
                           (mk___split_fields2 f_old__split_fields
                           f_old__split_fields1)) i))))
@@ -7676,30 +5144,30 @@
      (mk___rep2
      (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22751 i)))) true)
+     (us_split_fields1 (select temp___14831 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22751 i)))) 0))))
+     (us_split_fields1 (select temp___14831 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22751 i))) true)
+     (us_split_fields1 (select temp___14831 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22751 j))) true)
+     (us_split_fields1 (select temp___14831 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22751 i)))
+     (us_split_fields1 (select temp___14831 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22751 j)))) true))
+     (us_split_fields1 (select temp___14831 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
-  (assert (=> (= result12 true) (= o103 (select temp___22751 ki3))))
+  (assert (=> (= result12 true) (= o103 (select temp___14831 ki3))))
 
 ;; H
   (assert (=> (= result12 true) (= o104 (us_split_fields1 o103))))
@@ -7710,28 +5178,26 @@
 
 ;; H
   (assert
-  (=> (= result12 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)))))
+  (=> (= result12 true)
+  (= (tree_structure
+     (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))) true)))
 
 ;; H
   (assert
   (=> (= result12 true)
   (and
-  (and
-  (= temp___22721 (model__
+  (= temp___14801 (model__
                   (mk___rep2
                   (mk___split_fields2 f__split_fields f__split_fields1))
                   root))
-  (model____function_guard temp___22721
-  (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) root))
-  (and (dynamic_invariant3 temp___22721 true false true)
+  (and (dynamic_invariant3 temp___14801 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22721 root))) true)
+     (us_split_fields1 (select temp___14801 root))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22721 root)))) 0)
+     (us_split_fields1 (select temp___14801 root)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -7743,52 +5209,52 @@
           i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___22721 (parent
+          (select temp___14801 (parent
                                (mk___rep2
                                (mk___split_fields2 f__split_fields
                                f__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22721 i))) true)
+     (us_split_fields1 (select temp___14801 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22721 i))) true))))))
+     (us_split_fields1 (select temp___14801 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___22721 i))) true)
+          (us_split_fields1 (select temp___14801 i))) true)
        (not (= i root)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___22721 (parent
+     (select temp___14801 (parent
                           (mk___rep2
                           (mk___split_fields2 f__split_fields
                           f__split_fields1)) i))))
      (position
      (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22721 i)))) true)
+     (us_split_fields1 (select temp___14801 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22721 i)))) 0))))
+     (us_split_fields1 (select temp___14801 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22721 i))) true)
+     (us_split_fields1 (select temp___14801 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22721 j))) true)
+     (us_split_fields1 (select temp___14801 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22721 i)))
+     (us_split_fields1 (select temp___14801 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22721 j)))) true))
+     (us_split_fields1 (select temp___14801 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
@@ -7810,7 +5276,7 @@
          (us_split_fields3 (select f__split_fields1 ki3)))))))
 
 ;; H
-  (assert (=> (= result12 true) (= o98 (select temp___22721 o97))))
+  (assert (=> (= result12 true) (= o98 (select temp___14801 o97))))
 
 ;; H
   (assert (=> (= result12 true) (= o99 (us_split_fields1 o98))))
@@ -7824,8 +5290,10 @@
 
 ;; H
   (assert
-  (=> (= result12 true) (type_invariant
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1)))))
+  (=> (= result12 true)
+  (= (tree_structure
+     (mk___rep2
+     (mk___split_fields2 f_old__split_fields f_old__split_fields1))) true)))
 
 ;; H
   (assert (=> (= result12 true) (and (= o92 v) (in_range1 v))))
@@ -7834,22 +5302,18 @@
   (assert
   (=> (= result12 true)
   (and
-  (and
-  (= temp___22691 (model__
+  (= temp___14771 (model__
                   (mk___rep2
                   (mk___split_fields2 f_old__split_fields
                   f_old__split_fields1)) o92))
-  (model____function_guard temp___22691
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  o92))
-  (and (dynamic_invariant3 temp___22691 true false true)
+  (and (dynamic_invariant3 temp___14771 true false true)
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22691 o92))) true)
+     (us_split_fields1 (select temp___14771 o92))) true)
   (and
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22691 o92)))) 0)
+     (us_split_fields1 (select temp___14771 o92)))) 0)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
@@ -7861,26 +5325,26 @@
           (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i) 0))
        (= (rec__tree_model__path_type__k
           (us_split_fields1
-          (select temp___22691 (parent
+          (select temp___14771 (parent
                                (mk___rep2
                                (mk___split_fields2 f_old__split_fields
                                f_old__split_fields1)) i)))) true))
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22691 i))) true)
+     (us_split_fields1 (select temp___14771 i))) true)
   (not
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22691 i))) true))))))
+     (us_split_fields1 (select temp___14771 i))) true))))))
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (ite (and
        (= (rec__tree_model__path_type__k
-          (us_split_fields1 (select temp___22691 i))) true)
+          (us_split_fields1 (select temp___14771 i))) true)
        (not (= i o92)))
   (= (is_add
      (rec__tree_model__path_type__a
      (us_split_fields1
-     (select temp___22691 (parent
+     (select temp___14771 (parent
                           (mk___rep2
                           (mk___split_fields2 f_old__split_fields
                           f_old__split_fields1)) i))))
@@ -7888,26 +5352,26 @@
      (mk___rep2
      (mk___split_fields2 f_old__split_fields f_old__split_fields1)) i)
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22691 i)))) true)
+     (us_split_fields1 (select temp___14771 i)))) true)
   (= (length
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22691 i)))) 0))))
+     (us_split_fields1 (select temp___14771 i)))) 0))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i 100))
   (=>
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22691 i))) true)
+     (us_split_fields1 (select temp___14771 i))) true)
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 100))
   (=>
   (and
   (= (rec__tree_model__path_type__k
-     (us_split_fields1 (select temp___22691 j))) true)
+     (us_split_fields1 (select temp___14771 j))) true)
   (= (oeq
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22691 i)))
+     (us_split_fields1 (select temp___14771 i)))
      (rec__tree_model__path_type__a
-     (us_split_fields1 (select temp___22691 j)))) true))
+     (us_split_fields1 (select temp___14771 j)))) true))
   (= j i)))))))))))))))
 
 ;; H
@@ -7929,7 +5393,7 @@
          (us_split_fields3 (select f__split_fields1 ki3)))))))
 
 ;; H
-  (assert (=> (= result12 true) (= o94 (select temp___22691 o93))))
+  (assert (=> (= result12 true) (= o94 (select temp___14771 o93))))
 
 ;; H
   (assert (=> (= result12 true) (= o95 (us_split_fields1 o94))))
@@ -7947,18 +5411,6 @@
 
 ;; H
   (assert (<= i ki3))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
 
 ;; H
   (assert
@@ -7980,14 +5432,6 @@
               root) i)))) n2))
 
 ;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v))
-
-;; H
   (assert
   (= (rec__tree_model__path_type__k
      (us_split_fields1
@@ -7995,82 +5439,6 @@
              (mk___rep2
              (mk___split_fields2 f_old__split_fields f_old__split_fields1))
              v) i))) true))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (model____function_guard
-  (model__
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v)
-  (mk___rep2 (mk___split_fields2 f_old__split_fields f_old__split_fields1))
-  v))
-
-;; H
-  (assert (model____function_guard
-  (model__ (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root) (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-  root))
-
-;; H
-  (assert (is_concat__function_guard
-  (is_concat
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select (model__
-          (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-          root) v)))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select (model__
-          (mk___rep2
-          (mk___split_fields2 f_old__split_fields f_old__split_fields1)) 
-          v) i)))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select (model__
-          (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-          root) i))))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select (model__
-          (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-          root) v)))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select (model__
-          (mk___rep2
-          (mk___split_fields2 f_old__split_fields f_old__split_fields1)) 
-          v) i)))
-  (rec__tree_model__path_type__a
-  (us_split_fields1
-  (select (model__
-          (mk___rep2 (mk___split_fields2 f__split_fields f__split_fields1))
-          root) i)))))
 
 (assert
 ;; WP_parameter_def

@@ -472,8 +472,6 @@
      (= (to_rep (select (temp___String_Literal_155 us_void_param) 3)) 32)) :pattern (
   (temp___String_Literal_155 us_void_param)) )))
 
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -496,7 +494,7 @@
 
 (declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -506,7 +504,7 @@
   (! (=> (in_range f)
      (=> (in_range l)
      (and (= (to_rep1 (first2 (mk1 f l))) f)
-     (= (to_rep1 (last3 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (= (to_rep1 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range low)
@@ -524,10 +522,10 @@
 
 (define-fun first3 ((a us_t1)) Int (to_rep1 (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep1 (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last4 a))
-                                    (+ (- (last4 a) (first3 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size1 () Int)
 
@@ -562,8 +560,8 @@
 
 (define-fun bool_eq7 ((x us_t1)
   (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep1 (first2 (rt1 x)))
-                  (to_rep1 (last3 (rt1 x))) (elts1 y)
-                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last3 (rt1 y)))))
+                  (to_rep1 (last2 (rt1 x))) (elts1 y)
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
 (declare-fun user_eq6 (us_t1 us_t1) Bool)
 
@@ -571,25 +569,6 @@
 
 (declare-datatypes () ((t5b__ref (mk_t5b__ref (t5b__content us_t1)))))
 (define-fun t5b__ref___projection ((a t5b__ref)) us_t1 (t5b__content a))
-
-(declare-sort t7b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 150)))
-
-(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq7 (t7b t7b) Bool)
-
-(declare-fun dummy7 () t7b)
-
-(declare-datatypes () ((t7b__ref (mk_t7b__ref (t7b__content t7b)))))
-(define-fun t7b__ref___projection ((a t7b__ref)) t7b (t7b__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_63 Int) (temp___is_init_60 Bool)
   (temp___skip_constant_61 Bool)
@@ -630,9 +609,9 @@
 
 (declare-fun o5 () Int)
 
-(declare-fun temp___1074 () (Array Int character))
+(declare-fun temp___1055 () (Array Int character))
 
-(declare-fun temp___10741 () t)
+(declare-fun temp___10551 () t)
 
 (declare-fun o6 () Int)
 
@@ -704,13 +683,13 @@
      (elts (to_string (attr__ATTRIBUTE_IMAGE1 certno)))
      (to_rep1 (first (rt (to_string (attr__ATTRIBUTE_IMAGE1 certno)))))
      (to_rep1 (last (rt (to_string (attr__ATTRIBUTE_IMAGE1 certno)))))) 
-  temp___1074))
+  temp___1055))
 
 ;; H
-  (assert (= (mk 1 o5) temp___10741))
+  (assert (= (mk 1 o5) temp___10551))
 
 ;; H
-  (assert (not (= (length (mk___t temp___1074 temp___10741)) 0)))
+  (assert (not (= (length (mk___t temp___1055 temp___10551)) 0)))
 
 ;; H
   (assert (=> (<= 1 3) (= o6 (+ (- 3 1) 1))))
@@ -720,19 +699,19 @@
 
 ;; H
   (assert
-  (=> (<= (to_rep1 (first temp___10741)) (to_rep1 (last temp___10741)))
-  (= o7 (+ (- (to_rep1 (last temp___10741)) (to_rep1 (first temp___10741))) 1))))
+  (=> (<= (to_rep1 (first temp___10551)) (to_rep1 (last temp___10551)))
+  (= o7 (+ (- (to_rep1 (last temp___10551)) (to_rep1 (first temp___10551))) 1))))
 
 ;; H
   (assert
-  (=> (not (<= (to_rep1 (first temp___10741)) (to_rep1 (last temp___10741))))
+  (=> (not (<= (to_rep1 (first temp___10551)) (to_rep1 (last temp___10551))))
   (= o7 0)))
 
 ;; H
   (assert (= o8 (+ o7 o6)))
 
 ;; H
-  (assert (= o9 (+ (to_rep1 (first temp___10741)) o8)))
+  (assert (= o9 (+ (to_rep1 (first temp___10551)) o8)))
 
 ;; H
   (assert (= o10 (- o9 1)))

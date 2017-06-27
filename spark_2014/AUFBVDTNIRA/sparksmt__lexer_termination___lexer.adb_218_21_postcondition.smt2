@@ -336,14 +336,14 @@
 (define-fun read_result__ref___projection ((a read_result__ref)) us_rep1 
   (read_result__content a))
 
-(define-fun default_initial_assumption ((temp___expr_470 us_rep1)
-  (temp___skip_top_level_471 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_469 us_rep1)
+  (temp___skip_top_level_470 Bool)) Bool (and
                                          (= (attr__constrained
-                                            temp___expr_470) false)
+                                            temp___expr_469) false)
                                          (= (to_rep1
                                             (rec__file_io__read_result__status
                                             (us_split_discrs1
-                                            temp___expr_470))) 2)))
+                                            temp___expr_469))) 2)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -381,17 +381,7 @@
   (forall ((lexer__current_read__discrs us_split_discrs)
   (lexer__next_read__discrs us_split_discrs))
   (forall ((lexer__current_idx Int) (lexer__next_idx Int))
-  (! (=> (local_invariant__function_guard
-     (local_invariant lexer__the_file lexer__current_read__fields
-     lexer__current_read__discrs lexer__current_idx lexer__next_read__fields
-     lexer__next_read__discrs lexer__next_idx) lexer__the_file
-     lexer__current_read__fields lexer__current_read__discrs
-     lexer__current_idx lexer__next_read__fields lexer__next_read__discrs
-     lexer__next_idx)
-     (and (size__function_guard (size lexer__the_file) lexer__the_file)
-     (and (size__function_guard (size lexer__the_file) lexer__the_file)
-     (and (index__function_guard (index lexer__the_file) lexer__the_file)
-     (=
+  (! (=
      (= (local_invariant lexer__the_file lexer__current_read__fields
         lexer__current_read__discrs lexer__current_idx
         lexer__next_read__fields lexer__next_read__discrs lexer__next_idx) true)
@@ -425,14 +415,14 @@
         (mk___rep lexer__current_read__discrs lexer__current_read__fields
         current_read__attr__constrained)))) 0)
      (= lexer__current_idx (- lexer__next_idx 1)))
-     (= lexer__current_idx lexer__next_idx)))))))) :pattern ((local_invariant
-                                                             lexer__the_file
-                                                             lexer__current_read__fields
-                                                             lexer__current_read__discrs
-                                                             lexer__current_idx
-                                                             lexer__next_read__fields
-                                                             lexer__next_read__discrs
-                                                             lexer__next_idx)) ))))))
+     (= lexer__current_idx lexer__next_idx)))) :pattern ((local_invariant
+                                                         lexer__the_file
+                                                         lexer__current_read__fields
+                                                         lexer__current_read__discrs
+                                                         lexer__current_idx
+                                                         lexer__next_read__fields
+                                                         lexer__next_read__discrs
+                                                         lexer__next_idx)) ))))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
 
@@ -444,11 +434,11 @@
                                      (or (= temp___is_init_60 true)
                                      (<= 0 255)) (in_range3 temp___expr_63)))
 
-(define-fun dynamic_invariant3 ((temp___expr_462 Int)
-  (temp___is_init_459 Bool) (temp___skip_constant_460 Bool)
-  (temp___do_toplevel_461 Bool)) Bool (=>
-                                      (or (= temp___is_init_459 true)
-                                      (<= 0 2)) (in_range4 temp___expr_462)))
+(define-fun dynamic_invariant3 ((temp___expr_461 Int)
+  (temp___is_init_458 Bool) (temp___skip_constant_459 Bool)
+  (temp___do_toplevel_460 Bool)) Bool (=>
+                                      (or (= temp___is_init_458 true)
+                                      (<= 0 2)) (in_range4 temp___expr_461)))
 
 (declare-fun the_file () us_rep)
 
@@ -468,33 +458,33 @@
 
 (declare-fun next_idx () Int)
 
-(declare-fun temp___937 () Int)
+(declare-fun temp___864 () Int)
 
-(declare-fun temp___936 () us_rep)
+(declare-fun temp___863 () us_rep)
 
-(declare-fun temp___935 () read_status)
+(declare-fun temp___862 () read_status)
 
-(declare-fun temp___9351 () character)
+(declare-fun temp___8621 () character)
 
-(declare-fun temp___9352 () Bool)
+(declare-fun temp___8622 () Bool)
 
-(declare-fun temp___934 () Int)
+(declare-fun temp___861 () Int)
 
-(declare-fun temp___933 () Int)
+(declare-fun temp___860 () Int)
 
-(declare-fun temp___932 () Int)
+(declare-fun temp___859 () Int)
 
-(declare-fun temp___938 () Int)
+(declare-fun temp___865 () Int)
 
-(declare-fun temp___931 () read_status)
+(declare-fun temp___858 () read_status)
 
-(declare-fun temp___9311 () character)
+(declare-fun temp___8581 () character)
 
-(declare-fun temp___9312 () Bool)
+(declare-fun temp___8582 () Bool)
 
-(declare-fun temp___941 () Int)
+(declare-fun temp___867 () Int)
 
-(declare-fun temp___940 () Int)
+(declare-fun temp___866 () Int)
 
 (declare-fun o () Bool)
 
@@ -536,17 +526,17 @@
 
 (declare-fun next_idx2 () Int)
 
-(declare-fun temp___9411 () Int)
+(declare-fun temp___8671 () Int)
 
-(declare-fun temp___9401 () Int)
+(declare-fun temp___8661 () Int)
 
 (declare-fun result1 () int__ref)
 
-(declare-fun temp___9412 () Int)
+(declare-fun temp___8672 () Int)
 
 (declare-fun result2 () int__ref)
 
-(declare-fun temp___9402 () Int)
+(declare-fun temp___8662 () Int)
 
 (declare-fun the_file3 () us_rep)
 
@@ -677,41 +667,6 @@
 (declare-fun next_idx9 () Int)
 
 ;; H
-  (assert (local_invariant__function_guard
-  (local_invariant the_file (mk___split_fields current_read__split_fields)
-  (mk___split_discrs current_read__split_discrs) current_idx
-  (mk___split_fields next_read__split_fields)
-  (mk___split_discrs next_read__split_discrs) next_idx) the_file
-  (mk___split_fields current_read__split_fields)
-  (mk___split_discrs current_read__split_discrs) current_idx
-  (mk___split_fields next_read__split_fields)
-  (mk___split_discrs next_read__split_discrs) next_idx))
-
-;; H
-  (assert (local_invariant__function_guard
-  (local_invariant the_file2 current_read__split_fields2
-  current_read__split_discrs2 current_idx2 next_read__split_fields2
-  next_read__split_discrs2 next_idx2) the_file2 current_read__split_fields2
-  current_read__split_discrs2 current_idx2 next_read__split_fields2
-  next_read__split_discrs2 next_idx2))
-
-;; H
-  (assert (local_invariant__function_guard
-  (local_invariant the_file2 current_read__split_fields2
-  current_read__split_discrs2 current_idx2 next_read__split_fields2
-  next_read__split_discrs2 next_idx2) the_file2 current_read__split_fields2
-  current_read__split_discrs2 current_idx2 next_read__split_fields2
-  next_read__split_discrs2 next_idx2))
-
-;; H
-  (assert (local_invariant__function_guard
-  (local_invariant the_file3 current_read__split_fields3
-  current_read__split_discrs3 current_idx3 next_read__split_fields3
-  next_read__split_discrs3 next_idx3) the_file3 current_read__split_fields3
-  current_read__split_discrs3 current_idx3 next_read__split_fields3
-  next_read__split_discrs3 next_idx3))
-
-;; H
   (assert (= current_read__attr__constrained false))
 
 ;; H
@@ -750,42 +705,42 @@
   (=> (not (= (to_rep1 current_read__split_discrs) 0)) (= result false)))
 
 ;; H
-  (assert (=> (= result true) (= temp___937 next_idx)))
+  (assert (=> (= result true) (= temp___864 next_idx)))
 
 ;; H
-  (assert (=> (= result true) (= temp___936 the_file)))
-
-;; H
-  (assert
-  (=> (= result true)
-  (and (= temp___935 next_read__split_discrs)
-  (and (= temp___9351 next_read__split_fields)
-  (= temp___9352 next_read__attr__constrained)))))
-
-;; H
-  (assert (=> (= result true) (= temp___934 current_idx)))
-
-;; H
-  (assert (=> (= result true) (= temp___933 current_col)))
-
-;; H
-  (assert (=> (= result true) (= temp___932 current_line)))
-
-;; H
-  (assert (=> (= result true) (= temp___938 current_idx)))
+  (assert (=> (= result true) (= temp___863 the_file)))
 
 ;; H
   (assert
   (=> (= result true)
-  (and (= temp___931 current_read__split_discrs)
-  (and (= temp___9311 current_read__split_fields)
-  (= temp___9312 current_read__attr__constrained)))))
+  (and (= temp___862 next_read__split_discrs)
+  (and (= temp___8621 next_read__split_fields)
+  (= temp___8622 next_read__attr__constrained)))))
 
 ;; H
-  (assert (=> (= result true) (= 0 temp___941)))
+  (assert (=> (= result true) (= temp___861 current_idx)))
 
 ;; H
-  (assert (=> (= result true) (= 0 temp___940)))
+  (assert (=> (= result true) (= temp___860 current_col)))
+
+;; H
+  (assert (=> (= result true) (= temp___859 current_line)))
+
+;; H
+  (assert (=> (= result true) (= temp___865 current_idx)))
+
+;; H
+  (assert
+  (=> (= result true)
+  (and (= temp___858 current_read__split_discrs)
+  (and (= temp___8581 current_read__split_fields)
+  (= temp___8582 current_read__attr__constrained)))))
+
+;; H
+  (assert (=> (= result true) (= 0 temp___867)))
+
+;; H
+  (assert (=> (= result true) (= 0 temp___866)))
 
 ;; H
   (assert
@@ -794,7 +749,7 @@
   (= (local_invariant the_file2 current_read__split_fields2
      current_read__split_discrs2 current_idx2 next_read__split_fields2
      next_read__split_discrs2 next_idx2) true)
-  (<= temp___938 current_idx2))))
+  (<= temp___865 current_idx2))))
 
 ;; H
   (assert
@@ -806,25 +761,25 @@
   (and
   (= (to_rep1
      (rec__file_io__read_result__status current_read__split_discrs2)) 0)
-  (let ((temp___943 (to_rep
+  (let ((temp___869 (to_rep
                     (rec__file_io__read_result__c
                     current_read__split_fields2))))
-  (or (= temp___943 10)
-  (or (= temp___943 13) (or (= temp___943 32) (= temp___943 9)))))))))
+  (or (= temp___869 10)
+  (or (= temp___869 13) (or (= temp___869 32) (= temp___869 9)))))))))
 
 ;; H
-  (assert (=> (= result true) (= result1 (mk_int__ref temp___9411))))
+  (assert (=> (= result true) (= result1 (mk_int__ref temp___8671))))
 
 ;; H
-  (assert (=> (= result true) (= temp___9412 next_idx2)))
+  (assert (=> (= result true) (= temp___8672 next_idx2)))
 
 ;; H
-  (assert (=> (= result true) (= result2 (mk_int__ref temp___9401))))
+  (assert (=> (= result true) (= result2 (mk_int__ref temp___8661))))
 
 ;; H
   (assert
   (=> (= result true)
-  (= temp___9402 (to_int1
+  (= temp___8662 (to_int1
                  (ite (= (to_rep1
                          (rec__file_io__read_result__status
                          next_read__split_discrs2)) 0)
@@ -1154,22 +1109,6 @@
 
 ;; H
   (assert (= the_file9 the_file7))
-
-;; H
-  (assert (local_invariant__function_guard
-  (local_invariant (file__content the_file8)
-  (us_split_fields__content current_read__split_fields8)
-  (us_split_discrs__content current_read__split_discrs8)
-  (int__content current_idx8)
-  (us_split_fields__content next_read__split_fields8)
-  (us_split_discrs__content next_read__split_discrs8)
-  (int__content next_idx8)) (file__content the_file8)
-  (us_split_fields__content current_read__split_fields8)
-  (us_split_discrs__content current_read__split_discrs8)
-  (int__content current_idx8)
-  (us_split_fields__content next_read__split_fields8)
-  (us_split_discrs__content next_read__split_discrs8)
-  (int__content next_idx8)))
 
 (assert
 ;; WP_parameter_def

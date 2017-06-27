@@ -161,8 +161,7 @@
   (forall ((i Int))
   (! (=> (dynamic_invariant i true true true)
      (let ((result (prf_public i)))
-     (=> (prf_public__function_guard result i)
-     (and (= result (div1 i 2)) (dynamic_invariant result true false true))))) :pattern (
+     (and (= result (div1 i 2)) (dynamic_invariant result true false true)))) :pattern (
   (prf_public i)) )))
 
 ;; prf_public__post_refine_axiom
@@ -170,8 +169,7 @@
   (forall ((i Int))
   (! (=> (dynamic_invariant i true true true)
      (let ((result (prf_public1 i)))
-     (=> (prf_public__function_guard1 result i)
-     (and (= result (div1 i 2)) (dynamic_invariant result true false true))))) :pattern (
+     (and (= result (div1 i 2)) (dynamic_invariant result true false true)))) :pattern (
   (prf_public1 i)) )))
 
 (declare-fun prf_hidden (Int) Int)
@@ -185,18 +183,15 @@
 ;; prf_hidden__post_axiom
   (assert
   (forall ((i Int))
-  (! (=> (dynamic_invariant i true true true)
-     (let ((result (prf_hidden i)))
-     (=> (prf_hidden__function_guard result i) (dynamic_invariant result true
-     false true)))) :pattern ((prf_hidden i)) )))
+  (! (=> (dynamic_invariant i true true true) (dynamic_invariant
+     (prf_hidden i) true false true)) :pattern ((prf_hidden i)) )))
 
 ;; prf_hidden__post_refine_axiom
   (assert
   (forall ((i Int))
   (! (=> (dynamic_invariant i true true true)
      (let ((result (prf_hidden1 i)))
-     (=> (prf_hidden__function_guard1 result i)
-     (and (= result (div1 i 2)) (dynamic_invariant result true false true))))) :pattern (
+     (and (= result (div1 i 2)) (dynamic_invariant result true false true)))) :pattern (
   (prf_hidden1 i)) )))
 
 (declare-fun a () Int)
@@ -227,13 +222,7 @@
   (assert (= b1 (div1 a 2)))
 
 ;; H
-  (assert (prf_public__function_guard1 (prf_public1 a) a))
-
-;; H
   (assert (= b1 (prf_public1 a)))
-
-;; H
-  (assert (prf_hidden__function_guard1 (prf_hidden1 a) a))
 
 (assert
 ;; WP_parameter_def

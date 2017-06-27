@@ -358,9 +358,7 @@
   (assert
   (forall ((x us_rep))
   (forall ((c Int))
-  (! (=> (has_element__function_guard (has_element x c) x c)
-     (= (= (has_element x c) true) (in_range1 c))) :pattern ((has_element x
-                                                             c)) ))))
+  (! (= (= (has_element x c) true) (in_range1 c)) :pattern ((has_element x c)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -388,11 +386,6 @@
 
 ;; H
   (assert (in_range e))
-
-;; H
-  (assert (has_element__function_guard
-  (has_element (mk___rep (mk___split_fields x__split_fields)) c)
-  (mk___rep (mk___split_fields x__split_fields)) c))
 
 ;; H
   (assert

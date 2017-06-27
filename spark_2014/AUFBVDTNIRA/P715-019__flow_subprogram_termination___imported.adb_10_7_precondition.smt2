@@ -39,12 +39,8 @@
 
 (declare-fun nonreturning_precondition__function_guard (Bool Int Int) Bool)
 
-;; H
-  (assert (nonreturning_precondition__function_guard
-  (nonreturning_precondition 3 3) 3 3))
-
 (assert
 ;; WP_parameter_def
- ;; File "imported.ads", line 14, characters 0-0
+ ;; File "preconditions.ads", line 6, characters 0-0
   (not (= (nonreturning_precondition 3 3) true)))
 (check-sat)

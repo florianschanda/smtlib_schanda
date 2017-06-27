@@ -404,31 +404,31 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(define-fun dynamic_invariant ((temp___expr_203 (_ BitVec 8))
-  (temp___is_init_200 Bool) (temp___skip_constant_201 Bool)
-  (temp___do_toplevel_202 Bool)) Bool (=>
-                                      (or (= temp___is_init_200 true)
+(define-fun dynamic_invariant ((temp___expr_202 (_ BitVec 8))
+  (temp___is_init_199 Bool) (temp___skip_constant_200 Bool)
+  (temp___do_toplevel_201 Bool)) Bool (=>
+                                      (or (= temp___is_init_199 true)
                                       (bvule ((_ int2bv 8) 0) ((_ int2bv 8) 10)))
-                                      (in_range1 temp___expr_203)))
+                                      (in_range1 temp___expr_202)))
 
-(define-fun dynamic_invariant1 ((temp___expr_209 (_ BitVec 8))
-  (temp___is_init_206 Bool) (temp___skip_constant_207 Bool)
-  (temp___do_toplevel_208 Bool)) Bool (=>
-                                      (or (= temp___is_init_206 true)
+(define-fun dynamic_invariant1 ((temp___expr_208 (_ BitVec 8))
+  (temp___is_init_205 Bool) (temp___skip_constant_206 Bool)
+  (temp___do_toplevel_207 Bool)) Bool (=>
+                                      (or (= temp___is_init_205 true)
                                       (bvule ((_ int2bv 8) 1) ((_ int2bv 8) 10)))
-                                      (in_range2 temp___expr_209)))
+                                      (in_range2 temp___expr_208)))
 
 (declare-fun inputs () (Array (_ BitVec 8) Bool))
 
 (declare-fun i () (_ BitVec 8))
 
-(declare-fun temp___242 () (_ BitVec 8))
+(declare-fun temp___237 () (_ BitVec 8))
 
-(declare-fun temp___243 () (Array (_ BitVec 8) Bool))
-
-(declare-fun temp___245 () (Array (_ BitVec 8) Bool))
+(declare-fun temp___238 () (Array (_ BitVec 8) Bool))
 
 (declare-fun temp___240 () (Array (_ BitVec 8) Bool))
+
+(declare-fun temp___235 () (Array (_ BitVec 8) Bool))
 
 (declare-fun inputs1 () (Array (_ BitVec 8) Bool))
 
@@ -483,17 +483,12 @@
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 8) 1) i1) (bvule i1 ((_ int2bv 8) 9)))
-  (= temp___242 i1)))
+  (= temp___237 i1)))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 8) 1) i1) (bvule i1 ((_ int2bv 8) 9)))
-  (= temp___243 inputs)))
-
-;; H
-  (assert
-  (=> (and (bvule ((_ int2bv 8) 1) i1) (bvule i1 ((_ int2bv 8) 9)))
-  (= temp___245 inputs)))
+  (= temp___238 inputs)))
 
 ;; H
   (assert
@@ -503,26 +498,31 @@
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 8) 1) i1) (bvule i1 ((_ int2bv 8) 9)))
+  (= temp___235 inputs)))
+
+;; H
+  (assert
+  (=> (and (bvule ((_ int2bv 8) 1) i1) (bvule i1 ((_ int2bv 8) 9)))
   (and
   (forall ((k (_ BitVec 8)))
   (=> (and (bvule ((_ int2bv 8) 1) k) (bvule k (bvsub i2 ((_ int2bv 8) 1))))
   (= (= (select inputs2 k) true)
-  (= (select temp___243 (bvadd k ((_ int2bv 8) 1))) true))))
+  (= (select temp___238 (bvadd k ((_ int2bv 8) 1))) true))))
   (forall ((k (_ BitVec 8)))
   (=> (and (bvule i2 k) (bvule k ((_ int2bv 8) 10)))
-  (= (= (select inputs2 k) true) (= (select temp___245 k) true)))))))
+  (= (= (select inputs2 k) true) (= (select temp___240 k) true)))))))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 8) 1) i1) (bvule i1 ((_ int2bv 8) 9)))
   (and
   (and
-  (forall ((temp___241 (_ BitVec 8)))
+  (forall ((temp___236 (_ BitVec 8)))
   (=>
-  (and (bvule ((_ int2bv 8) 1) temp___241)
-  (bvule temp___241 ((_ int2bv 8) 10)))
-  (=> (bvule i2 temp___241)
-  (= (select inputs2 temp___241) (select temp___240 temp___241)))))
+  (and (bvule ((_ int2bv 8) 1) temp___236)
+  (bvule temp___236 ((_ int2bv 8) 10)))
+  (=> (bvule i2 temp___236)
+  (= (select inputs2 temp___236) (select temp___235 temp___236)))))
   (=> (bvule ((_ int2bv 8) 1) ((_ int2bv 8) 9)) (in_range3 i2)))
   (and (bvule ((_ int2bv 8) 1) i2) (bvule i2 ((_ int2bv 8) 9))))))
 

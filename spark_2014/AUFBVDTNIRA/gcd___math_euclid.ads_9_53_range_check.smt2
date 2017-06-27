@@ -185,8 +185,7 @@
 ;; divides__def_axiom
   (assert
   (forall ((a Int) (b Int))
-  (! (=> (divides__function_guard (divides a b) a b)
-     (= (= (divides a b) true) (= (mod2 b a) 0))) :pattern ((divides a b)) )))
+  (! (= (= (divides a b) true) (= (mod2 b a) 0)) :pattern ((divides a b)) )))
 
 (declare-fun a () Int)
 
@@ -212,11 +211,11 @@
 
 (declare-fun o () Int)
 
-(declare-fun temp___154 () Int)
+(declare-fun temp___134 () Int)
 
-(declare-fun temp___153 () Int)
+(declare-fun temp___133 () Int)
 
-(declare-fun temp___152 () Int)
+(declare-fun temp___132 () Int)
 
 (declare-fun o1 () Int)
 
@@ -319,172 +318,6 @@
   (assert (in_range2 b))
 
 ;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 c2) x1 c2)))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 an2) x1 an2)))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 an2) x1 an2)))
-
-;; H
-  (assert (divides__function_guard (divides an2 c2) an2 c2))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 (mod2 c2 an2)) x1
-  (mod2 c2 an2))))
-
-;; H
-  (assert (forall ((x1 Int)) (divides__function_guard (divides x1 a) x1 a)))
-
-;; H
-  (assert (forall ((x1 Int)) (divides__function_guard (divides x1 b) x1 b)))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 an3) x1 an3)))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 bn3) x1 bn3)))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 c2) x1 c2)))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 an2) x1 an2)))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 an2) x1 an2)))
-
-;; H
-  (assert (divides__function_guard (divides an2 c2) an2 c2))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 (mod2 c2 an2)) x1
-  (mod2 c2 an2))))
-
-;; H
-  (assert (forall ((x1 Int)) (divides__function_guard (divides x1 a) x1 a)))
-
-;; H
-  (assert (forall ((x1 Int)) (divides__function_guard (divides x1 b) x1 b)))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 an3) x1 an3)))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 bn3) x1 bn3)))
-
-;; H
-  (assert (divides__function_guard (divides an6 an6) an6 an6))
-
-;; H
-  (assert (divides__function_guard (divides an6 a) an6 a))
-
-;; H
-  (assert (divides__function_guard (divides an6 b) an6 b))
-
-;; H
-  (assert (forall ((x1 Int)) (divides__function_guard (divides x1 a) x1 a)))
-
-;; H
-  (assert (forall ((x1 Int)) (divides__function_guard (divides x1 b) x1 b)))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 c2) x1 c2)))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 an2) x1 an2)))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 an2) x1 an2)))
-
-;; H
-  (assert (divides__function_guard (divides an2 c2) an2 c2))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 (mod2 c2 an2)) x1
-  (mod2 c2 an2))))
-
-;; H
-  (assert (forall ((x1 Int)) (divides__function_guard (divides x1 a) x1 a)))
-
-;; H
-  (assert (forall ((x1 Int)) (divides__function_guard (divides x1 b) x1 b)))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 an3) x1 an3)))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 bn3) x1 bn3)))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 c2) x1 c2)))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 an2) x1 an2)))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 an2) x1 an2)))
-
-;; H
-  (assert (divides__function_guard (divides an2 c2) an2 c2))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 (mod2 c2 an2)) x1
-  (mod2 c2 an2))))
-
-;; H
-  (assert (forall ((x1 Int)) (divides__function_guard (divides x1 a) x1 a)))
-
-;; H
-  (assert (forall ((x1 Int)) (divides__function_guard (divides x1 b) x1 b)))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 an3) x1 an3)))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 bn3) x1 bn3)))
-
-;; H
-  (assert (divides__function_guard (divides an6 an6) an6 an6))
-
-;; H
-  (assert (divides__function_guard (divides an6 a) an6 a))
-
-;; H
-  (assert (divides__function_guard (divides an6 b) an6 b))
-
-;; H
-  (assert (forall ((x1 Int)) (divides__function_guard (divides x1 a) x1 a)))
-
-;; H
-  (assert (forall ((x1 Int)) (divides__function_guard (divides x1 b) x1 b)))
-
-;; H
   (assert (= (mk_int__ref result) (mk_int__ref an)))
 
 ;; H
@@ -509,13 +342,13 @@
   (assert (=> (<= 1 2147483647) (in_range2 c)))
 
 ;; H
-  (assert (=> (not (= bn1 0)) (= temp___154 c)))
+  (assert (=> (not (= bn1 0)) (= temp___134 c)))
 
 ;; H
-  (assert (=> (not (= bn1 0)) (= temp___153 bn1)))
+  (assert (=> (not (= bn1 0)) (= temp___133 bn1)))
 
 ;; H
-  (assert (=> (not (= bn1 0)) (= temp___152 an1)))
+  (assert (=> (not (= bn1 0)) (= temp___132 an1)))
 
 ;; H
   (assert (=> (not (= bn1 0)) (= (mk_int__ref result2) c11)))
@@ -678,10 +511,7 @@
 
 ;; H
   (assert
-  (and
   (and (= result6 (divides (int__content math_euclid__gcd__result4) a))
-  (divides__function_guard result6 (int__content math_euclid__gcd__result4)
-  a))
   (= (= result6 true)
   (= (mod2 a (int__content math_euclid__gcd__result4)) 0))))
 
@@ -690,10 +520,7 @@
 
 ;; H
   (assert
-  (and
   (and (= result7 (divides (int__content math_euclid__gcd__result4) b))
-  (divides__function_guard result7 (int__content math_euclid__gcd__result4)
-  b))
   (= (= result7 true)
   (= (mod2 b (int__content math_euclid__gcd__result4)) 0))))
 

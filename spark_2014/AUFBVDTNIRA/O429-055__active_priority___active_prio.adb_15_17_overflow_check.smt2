@@ -134,6 +134,12 @@
 (define-fun p_type__ref___projection ((a p_type__ref)) us_rep (p_type__content
                                                               a))
 
+(define-fun default_initial_assumption ((temp___expr_178 us_rep)
+  (temp___skip_top_level_179 Bool)) Bool (= (to_rep
+                                            (rec__active_prio__p_type__a
+                                            (us_split_fields1
+                                            temp___expr_178))) 0))
+
 (define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)
   (temp___do_toplevel_14 Bool)) Bool (=>

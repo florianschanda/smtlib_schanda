@@ -151,7 +151,7 @@
 
 (declare-fun x () Int)
 
-(declare-fun temp___145 () Int)
+(declare-fun temp___144 () Int)
 
 (declare-fun us () Int)
 
@@ -174,14 +174,14 @@
   (assert (dynamic_property 0 last x))
 
 ;; H
-  (assert (=> (< x c) (and (= temp___145 (+ x 1)) (in_range (+ x 1)))))
+  (assert (=> (< x c) (and (= temp___144 (+ x 1)) (in_range (+ x 1)))))
 
 ;; H
   (assert
-  (=> (< x c) (and (= us temp___145) (dynamic_property 0 last temp___145))))
+  (=> (< x c) (and (= us temp___144) (dynamic_property 0 last temp___144))))
 
 ;; H
-  (assert (=> (< x c) (= o temp___145)))
+  (assert (=> (< x c) (= o temp___144)))
 
 ;; H
   (assert (=> (< x c) (= result x)))

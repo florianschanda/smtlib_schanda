@@ -632,21 +632,17 @@
 ;; stacks_14__monitored_14__monitored_stack__compat_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (is_empty__function_guard1 (is_empty1 us_tag1 s) us_tag1 s)
-     (and (is_empty__function_guard (is_empty s) s)
-     (= (to_int1 (is_empty s)) (to_int1 (is_empty1 us_tag1 s))))) :pattern (
+  (! (= (to_int1 (is_empty s)) (to_int1 (is_empty1 us_tag1 s))) :pattern (
   (is_empty1 us_tag1 s)) )))
 
 ;; stacks_14__stack__compat_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (is_empty__function_guard1 (is_empty1 us_tag s) us_tag s)
-     (and (is_empty__function_guard (is_empty s) s)
-     (= (to_int1 (is_empty s)) (to_int1 (is_empty1 us_tag s))))) :pattern (
+  (! (= (to_int1 (is_empty s)) (to_int1 (is_empty1 us_tag s))) :pattern (
   (is_empty1 us_tag s)) )))
 
-(define-fun default_initial_assumption1 ((temp___expr_194 us_rep1)
-  (temp___skip_top_level_195 Bool)) Bool (= (attr__tag1 temp___expr_194) 
+(define-fun default_initial_assumption1 ((temp___expr_190 us_rep1)
+  (temp___skip_top_level_191 Bool)) Bool (= (attr__tag1 temp___expr_190) 
   us_tag1))
 
 (declare-fun s () us_rep1)
@@ -678,7 +674,6 @@
 
 ;; H
   (assert
-  (and
   (= result (is_empty
             (mk___rep
             (mk___split_fields
@@ -689,17 +684,7 @@
             (us_split_fields3 s))
             (rec__stacks_14__monitored_14__monitored_stack__next_identity_value
             (us_split_fields3 s)) (rec__ext__1 (us_split_fields3 s))))
-            (attr__tag1 s))))
-  (is_empty__function_guard result
-  (mk___rep
-  (mk___split_fields
-  (rec__stacks_14__stack__stack_vector1 (us_split_fields3 s))
-  (rec__stacks_14__stack__stack_pointer1 (us_split_fields3 s))
-  (hide_ext__
-  (rec__stacks_14__monitored_14__monitored_stack__monitor_vector
-  (us_split_fields3 s))
-  (rec__stacks_14__monitored_14__monitored_stack__next_identity_value
-  (us_split_fields3 s)) (rec__ext__1 (us_split_fields3 s)))) (attr__tag1 s)))))
+            (attr__tag1 s)))))
 
 ;; H
   (assert (not (= result true)))

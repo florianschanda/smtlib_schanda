@@ -237,10 +237,9 @@
   (assert
   (forall ((c Int))
   (! (=> (dynamic_invariant c true true true)
-     (let ((result (single_char_set_broken c)))
-     (=> (single_char_set_broken__function_guard result c)
      (forall ((i Int))
-     (=> (and (<= 0 i) (<= i 255)) (= (= (select result i) true) (< c i))))))) :pattern (
+     (=> (and (<= 0 i) (<= i 255))
+     (= (= (select (single_char_set_broken c) i) true) (< c i))))) :pattern (
   (single_char_set_broken c)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -255,9 +254,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o (single_char_set_broken 68))
-  (single_char_set_broken__function_guard o 68))
   (forall ((i Int))
   (=> (and (<= 0 i) (<= i 255)) (= (= (select o i) true) (< 68 i))))))
 

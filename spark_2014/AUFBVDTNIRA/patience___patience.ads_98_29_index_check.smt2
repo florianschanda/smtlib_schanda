@@ -920,23 +920,23 @@
 
 (declare-fun o12 () Int)
 
-(declare-fun temp___476 () (Array Int cardindex))
+(declare-fun temp___473 () (Array Int cardindex))
 
 (declare-fun o13 () Int)
 
 (declare-fun o14 () cardindex)
 
-(declare-fun temp___477 () Int)
+(declare-fun temp___474 () Int)
 
 (declare-fun o15 () Int)
 
-(declare-fun temp___480 () (Array Int cardindex))
+(declare-fun temp___477 () (Array Int cardindex))
 
 (declare-fun o16 () Int)
 
 (declare-fun o17 () cardindex)
 
-(declare-fun temp___481 () Int)
+(declare-fun temp___478 () Int)
 
 (declare-fun o18 () Int)
 
@@ -1172,7 +1172,7 @@
 
 ;; H
   (assert
-  (= temp___480 (select (rec__patience__state__stacks (us_split_fields1 s)) 
+  (= temp___477 (select (rec__patience__state__stacks (us_split_fields1 s)) 
   o15)))
 
 ;; H
@@ -1182,16 +1182,16 @@
   (assert (= o16 k))
 
 ;; H
-  (assert (= o17 (select temp___480 o16)))
+  (assert (= o17 (select temp___477 o16)))
 
 ;; H
-  (assert (= temp___481 (to_rep1 o17)))
+  (assert (= temp___478 (to_rep1 o17)))
 
 ;; H
-  (assert (and (<= 0 temp___481) (<= temp___481 99)))
+  (assert (and (<= 0 temp___478) (<= temp___478 99)))
 
 ;; H
-  (assert (= o18 temp___481))
+  (assert (= o18 temp___478))
 
 ;; H
   (assert
@@ -1209,7 +1209,7 @@
 
 ;; H
   (assert
-  (= temp___476 (select (rec__patience__state__stacks (us_split_fields1 s)) 
+  (= temp___473 (select (rec__patience__state__stacks (us_split_fields1 s)) 
   o12)))
 
 ;; H
@@ -1219,13 +1219,13 @@
   (assert (= o13 j))
 
 ;; H
-  (assert (= o14 (select temp___476 o13)))
+  (assert (= o14 (select temp___473 o13)))
 
 ;; H
-  (assert (= temp___477 (to_rep1 o14)))
+  (assert (= temp___474 (to_rep1 o14)))
 
 (assert
 ;; WP_parameter_def
  ;; File "patience.ads", line 53, characters 0-0
-  (not (<= 0 temp___477)))
+  (not (<= 0 temp___474)))
 (check-sat)

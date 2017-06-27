@@ -344,9 +344,9 @@
 
 (declare-fun o7 () Bool)
 
-(declare-fun temp___285 () natural)
+(declare-fun temp___284 () natural)
 
-(declare-fun temp___2851 () Bool)
+(declare-fun temp___2841 () Bool)
 
 (declare-fun o8 () natural)
 
@@ -399,10 +399,10 @@
   (assert (= o14 o15))
 
 ;; H
-  (assert (= (mk___rep (mk___split_discrs temp___285) temp___2851) o14))
+  (assert (= (mk___rep (mk___split_discrs temp___284) temp___2841) o14))
 
 ;; H
-  (assert (= d__split_discrs (mk___split_discrs temp___285)))
+  (assert (= d__split_discrs (mk___split_discrs temp___284)))
 
 ;; H
   (assert (= (to_rep o8) 0))

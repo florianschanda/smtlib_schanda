@@ -1240,9 +1240,9 @@
 
 (declare-fun m__split_fields () us_main_type)
 
-(declare-fun temp___868 () us_rep2)
+(declare-fun temp___805 () us_rep2)
 
-(declare-fun temp___867 () Int)
+(declare-fun temp___804 () Int)
 
 (declare-fun o () Bool)
 
@@ -1461,46 +1461,46 @@
 ;; H
   (assert
   (and
-  (= temp___868 (keys
+  (= temp___805 (keys
                 (mk___rep m__split_discrs
                 (mk___split_fields m__split_fields5))))
   (and
   (and
   (and
-  (= (length3 temp___868) (length
+  (= (length3 temp___805) (length
                           (mk___rep m__split_discrs
                           (mk___split_fields m__split_fields5))))
   (forall ((temp___396 Int))
   (=>
   (and (in_range5 temp___396)
-  (= (iter_has_element temp___868 temp___396) true))
+  (= (iter_has_element temp___805 temp___396) true))
   (= (has_key
      (model__
      (mk___rep m__split_discrs (mk___split_fields m__split_fields5)))
-     (get1 temp___868 temp___396)) true))))
+     (get1 temp___805 temp___396)) true))))
   (forall ((key Int))
   (=>
   (and (in_range3 key)
   (= (has_key
      (model__
      (mk___rep m__split_discrs (mk___split_fields m__split_fields5))) key) true))
-  (and (< 0 (find temp___868 key))
-  (= (equivalent_keys (get1 temp___868 (find temp___868 key)) key) true)))))
+  (and (< 0 (find temp___805 key))
+  (= (equivalent_keys (get1 temp___805 (find temp___805 key)) key) true)))))
   (forall ((i Int))
   (=>
   (and (<= 1 i)
   (<= i (length
         (mk___rep m__split_discrs (mk___split_fields m__split_fields5)))))
-  (and (= (find temp___868 (get1 temp___868 i)) i)
-  (= (k_is_find temp___868 (get1 temp___868 i) i) true)))))))
+  (and (= (find temp___805 (get1 temp___805 i)) i)
+  (= (k_is_find temp___805 (get1 temp___805 i) i) true)))))))
 
 ;; H
   (assert
-  (and (= o (iter_has_element temp___868 temp___867))
-  (= (= o true) (and (<= 1 temp___867) (<= temp___867 (last temp___868))))))
+  (and (= o (iter_has_element temp___805 temp___804))
+  (= (= o true) (and (<= 1 temp___804) (<= temp___804 (last temp___805))))))
 
 ;; H
-  (assert (= (= o1 true) (in_range5 temp___867)))
+  (assert (= (= o1 true) (in_range5 temp___804)))
 
 ;; H
   (assert (= result (ite (= o1 true) o false)))
@@ -1509,7 +1509,7 @@
   (assert (= result true))
 
 ;; H
-  (assert (and (= k (get1 temp___868 temp___867)) (in_range6 k)))
+  (assert (and (= k (get1 temp___805 temp___804)) (in_range6 k)))
 
 ;; H
   (assert (< 4 k))

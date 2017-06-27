@@ -194,10 +194,8 @@
 ;; element__post_axiom
   (assert
   (forall ((t us_rep1))
-  (forall ((c us_rep))
-  (! (let ((result (element t c)))
-     (=> (element__function_guard result t c) (dynamic_invariant result true
-     false true))) :pattern ((element t c)) ))))
+  (forall ((c us_rep)) (! (dynamic_invariant (element t c) true false
+  true) :pattern ((element t c)) ))))
 
 (declare-fun has_element (us_rep1 us_rep) Bool)
 
@@ -237,7 +235,7 @@
 
 (declare-fun o () us_rep1)
 
-(declare-fun temp___158 () us_rep1)
+(declare-fun temp___153 () us_rep1)
 
 (declare-fun o1 () us_rep1)
 
@@ -322,7 +320,7 @@
 (define-fun state8 () us_private__ref (mk___private__ref state4))
 
 ;; H
-  (assert (and (= o (empty Tuple0)) (empty__function_guard o Tuple0)))
+  (assert (= o (empty Tuple0)))
 
 ;; H
   (assert (= (mk_trace__ref result) (mk_trace__ref trace)))
@@ -337,15 +335,13 @@
   (assert (= i1 1))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 100)) (= temp___158 trace1)))
+  (assert (=> (and (<= 1 i1) (<= i1 100)) (= temp___153 trace1)))
 
 ;; H
   (assert (=> (and (<= 1 i1) (<= i1 100)) (and (<= 1 i2) (<= i2 100))))
 
 ;; H
-  (assert
-  (=> (and (<= 1 i1) (<= i1 100))
-  (and (= o1 (append trace2 i2)) (append__function_guard o1 trace2 i2))))
+  (assert (=> (and (<= 1 i1) (<= i1 100)) (= o1 (append trace2 i2))))
 
 ;; H
   (assert (=> (and (<= 1 i1) (<= i1 100)) (= trace2 result2)))
@@ -431,9 +427,7 @@
   (assert (= state7 state5))
 
 ;; H
-  (assert
-  (and (= o2 (has_element trace8 c)) (has_element__function_guard o2 
-  trace8 c)))
+  (assert (= o2 (has_element trace8 c)))
 
 ;; H
   (assert (= o3 true))
@@ -445,8 +439,7 @@
   (assert (= result3 true))
 
 ;; H
-  (assert
-  (and (= o4 (is_first trace8 c)) (is_first__function_guard o4 trace8 c)))
+  (assert (= o4 (is_first trace8 c)))
 
 ;; H
   (assert (= result4 (ite (not (= o4 true)) true false)))
@@ -455,14 +448,10 @@
   (assert (= result4 true))
 
 ;; H
-  (assert
-  (and (= o5 (previous trace8 c)) (previous__function_guard o5 trace8 c)))
+  (assert (= o5 (previous trace8 c)))
 
 ;; H
-  (assert
-  (and
-  (and (= o6 (element trace8 o5)) (element__function_guard o6 trace8 o5))
-  (in_range2 o6)))
+  (assert (and (= o6 (element trace8 o5)) (in_range2 o6)))
 
 ;; H
   (assert (= o7 (+ o6 1)))

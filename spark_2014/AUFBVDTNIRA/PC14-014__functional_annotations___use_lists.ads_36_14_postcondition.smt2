@@ -720,9 +720,8 @@
 ;; is_incr__def_axiom
   (assert
   (forall ((i1 Int) (i2 Int))
-  (! (=> (is_incr__function_guard (is_incr i1 i2) i1 i2)
-     (= (= (is_incr i1 i2) true)
-     (ite (= i1 2147483647) (= i2 2147483647) (= i2 (+ i1 1))))) :pattern (
+  (! (= (= (is_incr i1 i2) true)
+     (ite (= i1 2147483647) (= i2 2147483647) (= i2 (+ i1 1)))) :pattern (
   (is_incr i1 i2)) )))
 
 (declare-fun l__split_discrs () us_split_discrs)
@@ -807,17 +806,17 @@
 
 (declare-fun use_lists__incr_all_2__cu__assume () count_type)
 
-(declare-fun temp___502 () us_rep2)
+(declare-fun temp___491 () us_rep2)
 
-(declare-fun temp___500 () count_type)
+(declare-fun temp___489 () count_type)
 
-(declare-fun temp___505 () us_rep2)
+(declare-fun temp___492 () us_rep2)
 
-(declare-fun temp___501 () Int)
+(declare-fun temp___490 () Int)
 
-(declare-fun temp___499 () count_type)
+(declare-fun temp___488 () count_type)
 
-(declare-fun temp___4991 () us_main_type)
+(declare-fun temp___4881 () us_main_type)
 
 (declare-fun o () Int)
 
@@ -894,14 +893,6 @@
 
 ;; H
   (assert
-  (forall ((n Int)) (is_incr__function_guard
-  (is_incr (get temp___502 n)
-  (get (model__ (mk___rep l__split_discrs l__split_fields11)) n))
-  (get temp___502 n)
-  (get (model__ (mk___rep l__split_discrs l__split_fields11)) n))))
-
-;; H
-  (assert
   (and
   (= use_lists__incr_all_2__cu__assume1 (first
                                         (mk___rep l__split_discrs
@@ -944,37 +935,37 @@
 ;; H
   (assert
   (=> (= result1 true)
-  (= temp___502 (model__
+  (= temp___491 (model__
                 (mk___rep l__split_discrs
                 (mk___split_fields l__split_fields))))))
 
 ;; H
-  (assert (=> (= result1 true) (= temp___500 cu__split_fields1)))
+  (assert (=> (= result1 true) (= temp___489 cu__split_fields1)))
 
 ;; H
   (assert
   (=> (= result1 true)
-  (= temp___505 (model__
-                (mk___rep l__split_discrs
-                (mk___split_fields l__split_fields))))))
-
-;; H
-  (assert
-  (=> (= result1 true)
-  (= temp___501 (length
+  (= temp___492 (model__
                 (mk___rep l__split_discrs
                 (mk___split_fields l__split_fields))))))
 
 ;; H
   (assert
   (=> (= result1 true)
-  (and (= l__split_discrs (mk___split_discrs temp___499))
-  (= l__split_fields temp___4991))))
+  (= temp___490 (length
+                (mk___rep l__split_discrs
+                (mk___split_fields l__split_fields))))))
 
 ;; H
   (assert
   (=> (= result1 true)
-  (= (length (mk___rep l__split_discrs l__split_fields11)) temp___501)))
+  (and (= l__split_discrs (mk___split_discrs temp___488))
+  (= l__split_fields temp___4881))))
+
+;; H
+  (assert
+  (=> (= result1 true)
+  (= (length (mk___rep l__split_discrs l__split_fields11)) temp___490)))
 
 ;; H
   (assert
@@ -984,7 +975,7 @@
   (and (<= 1 n)
   (<= n (- (get1 (positions (mk___rep l__split_discrs l__split_fields11))
            (mk___rep1 cu__split_fields11)) 1)))
-  (= (is_incr (get temp___502 n)
+  (= (is_incr (get temp___491 n)
      (get (model__ (mk___rep l__split_discrs l__split_fields11)) n)) true)))))
 
 ;; H
@@ -996,7 +987,7 @@
   (<= (get1 (positions (mk___rep l__split_discrs l__split_fields11))
       (mk___rep1 cu__split_fields11)) n)
   (<= n (length (mk___rep l__split_discrs l__split_fields11))))
-  (= (get temp___505 n) (get
+  (= (get temp___492 n) (get
                         (model__
                         (mk___rep l__split_discrs l__split_fields11)) n))))))
 

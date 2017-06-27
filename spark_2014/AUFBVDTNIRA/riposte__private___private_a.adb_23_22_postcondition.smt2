@@ -184,9 +184,9 @@
 
 (declare-fun dst__split_fields1 () integer)
 
-(declare-fun temp___238 () integer)
+(declare-fun temp___226 () integer)
 
-(declare-fun temp___2381 () integer)
+(declare-fun temp___2261 () integer)
 
 (declare-fun result () integer)
 
@@ -204,15 +204,12 @@
 
 (declare-fun dst__split_fields7 () integer)
 
-(define-fun temp___2382 () us_rep (mk___rep
-                                  (mk___split_fields temp___238 temp___2381)))
-
 ;; H
   (assert (in_range n))
 
 ;; H
   (assert
-  (and (= temp___2382 (create n 1)) (create__function_guard temp___2382 n 1)))
+  (= (mk___rep (mk___split_fields temp___226 temp___2261)) (create n 1)))
 
 ;; H
   (assert (= result dst__split_fields))
@@ -221,10 +218,10 @@
   (assert (= result1 dst__split_fields1))
 
 ;; H
-  (assert (= temp___238 dst__split_fields2))
+  (assert (= temp___226 dst__split_fields2))
 
 ;; H
-  (assert (= temp___2381 dst__split_fields3))
+  (assert (= temp___2261 dst__split_fields3))
 
 ;; H
   (assert (= dst__split_fields4 dst__split_fields2))
@@ -237,9 +234,6 @@
 
 ;; H
   (assert (= dst__split_fields7 dst__split_fields3))
-
-;; H
-  (assert (create__function_guard (create n 0) n 0))
 
 (assert
 ;; WP_parameter_def

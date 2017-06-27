@@ -284,10 +284,6 @@
   (! (=> (in_range3 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
                                                               (of_rep1 x))) )))
 
-(declare-fun first () Int)
-
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -323,13 +319,13 @@
 
 (declare-fun t3q5__sort__find_smallest__result () Int)
 
-(declare-fun temp___192 () Int)
+(declare-fun temp___186 () Int)
 
-(declare-fun temp___191 () Int)
+(declare-fun temp___185 () Int)
 
-(declare-fun temp___194 () Int)
+(declare-fun temp___188 () Int)
 
-(declare-fun temp___193 () Int)
+(declare-fun temp___187 () Int)
 
 (declare-fun i1 () Int)
 
@@ -433,17 +429,17 @@
 
 ;; H
   (assert
-  (=> (< l u) (=> (and (<= (+ l 1) i2) (<= i2 u)) (= temp___192 k1))))
+  (=> (< l u) (=> (and (<= (+ l 1) i2) (<= i2 u)) (= temp___186 k1))))
 
 ;; H
   (assert
-  (=> (< l u) (=> (and (<= (+ l 1) i2) (<= i2 u)) (= temp___191 i2))))
+  (=> (< l u) (=> (and (<= (+ l 1) i2) (<= i2 u)) (= temp___185 i2))))
 
 ;; H
-  (assert (=> (< l u) (=> (and (<= (+ l 1) i2) (<= i2 u)) (= temp___194 u))))
+  (assert (=> (< l u) (=> (and (<= (+ l 1) i2) (<= i2 u)) (= temp___188 u))))
 
 ;; H
-  (assert (=> (< l u) (=> (and (<= (+ l 1) i2) (<= i2 u)) (= temp___193 l))))
+  (assert (=> (< l u) (=> (and (<= (+ l 1) i2) (<= i2 u)) (= temp___187 l))))
 
 ;; H
   (assert
@@ -470,8 +466,8 @@
   (and
   (and
   (and
-  (and (and (and (<= (+ l 1) i3) (<= i3 u)) (= l temp___193))
-  (= u temp___194)) (< l u))
+  (and (and (and (<= (+ l 1) i3) (<= i3 u)) (= l temp___187))
+  (= u temp___188)) (< l u))
   (forall ((x Int))
   (=> (and (<= l x) (<= x i3))
   (<= (to_rep (select arr k3)) (to_rep (select arr x))))))

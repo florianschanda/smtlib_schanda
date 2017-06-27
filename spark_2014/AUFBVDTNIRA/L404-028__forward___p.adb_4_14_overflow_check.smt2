@@ -73,17 +73,14 @@
 ;; add_one__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (add_one x)))
-     (=> (add_one__function_guard result x) (dynamic_invariant result true
-     false true)))) :pattern ((add_one x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (add_one x)
+     true false true)) :pattern ((add_one x)) )))
 
 ;; add_one__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true) (add_one__function_guard
-     (add_one x) x)) (= (add_one x) (+ x 1))) :pattern ((add_one x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (add_one x) (+ x 1))) :pattern (
+  (add_one x)) )))
 
 (declare-fun x () Int)
 

@@ -218,25 +218,6 @@
      (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
-(declare-sort t6b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 100)))
-
-(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq2 (t6b t6b) Bool)
-
-(declare-fun dummy2 () t6b)
-
-(declare-datatypes () ((t6b__ref (mk_t6b__ref (t6b__content t6b)))))
-(define-fun t6b__ref___projection ((a t6b__ref)) t6b (t6b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -245,10 +226,10 @@
 
 ;; def_axiom
   (assert
-  (forall ((temp___248 Int))
-  (forall ((temp___249 Int))
-  (= (select (for_loop_iterable__p2__a__aggregate_def temp___248) temp___249) 
-  (of_rep temp___248)))))
+  (forall ((temp___241 Int))
+  (forall ((temp___242 Int))
+  (= (select (for_loop_iterable__p2__a__aggregate_def temp___241) temp___242) 
+  (of_rep temp___241)))))
 
 (define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool)
   (temp___skip_constant_31 Bool)
@@ -268,11 +249,9 @@
 
 (declare-fun c8b () Int)
 
-(declare-fun o () (Array Int natural))
+(declare-fun o () natural)
 
-(declare-fun o1 () natural)
-
-(declare-fun o2 () (Array Int natural))
+(declare-fun o1 () (Array Int natural))
 
 (declare-fun result () (Array Int natural))
 
@@ -291,13 +270,10 @@
 (declare-fun a3 () (Array Int natural))
 
 ;; H
-  (assert (= o (for_loop_iterable__p2__a__aggregate_def 0)))
-
-;; H
   (assert (= result a))
 
 ;; H
-  (assert (= a1 o))
+  (assert (= a1 (for_loop_iterable__p2__a__aggregate_def 0)))
 
 ;; H
   (assert (= result1 c8b))
@@ -314,23 +290,23 @@
 ;; H
   (assert
   (and
-  (forall ((temp___251 Int))
-  (=> (and (<= 1 temp___251) (<= temp___251 100))
-  (=> (not (= 2 temp___251))
-  (= (select a2 temp___251) (select a1 temp___251)))))
+  (forall ((temp___244 Int))
+  (=> (and (<= 1 temp___244) (<= temp___244 100))
+  (=> (not (= 2 temp___244))
+  (= (select a2 temp___244) (select a1 temp___244)))))
   (and (<= 1 c8b2) (<= c8b2 100))))
 
 ;; H
-  (assert (= (to_rep o1) 1))
+  (assert (= (to_rep o) 1))
 
 ;; H
-  (assert (= o2 (store a2 2 o1)))
+  (assert (= o1 (store a2 2 o)))
 
 ;; H
   (assert (= result2 a2))
 
 ;; H
-  (assert (= a3 o2))
+  (assert (= a3 o1))
 
 (assert
 ;; WP_parameter_def

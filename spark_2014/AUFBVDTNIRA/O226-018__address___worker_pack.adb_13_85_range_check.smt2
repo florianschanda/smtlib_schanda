@@ -587,10 +587,9 @@
   (forall ((itemsize Int))
   (! (=>
      (and (dynamic_invariant2 queuelength true true true) (dynamic_invariant1
-     itemsize true true true))
-     (let ((result (xqueue_create queuelength itemsize)))
-     (=> (xqueue_create__function_guard result queuelength itemsize)
-     (in_range1 result)))) :pattern ((xqueue_create queuelength itemsize)) ))))
+     itemsize true true true)) (in_range1
+     (xqueue_create queuelength itemsize))) :pattern ((xqueue_create
+                                                      queuelength itemsize)) ))))
 
 (define-fun dynamic_invariant3 ((temp___expr_452 Int)
   (temp___is_init_449 Bool) (temp___skip_constant_450 Bool)

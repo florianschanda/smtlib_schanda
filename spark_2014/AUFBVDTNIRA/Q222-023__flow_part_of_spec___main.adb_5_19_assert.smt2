@@ -68,9 +68,6 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range temp___expr_15)))
 
-;; H
-  (assert (proxy__function_guard (proxy Tuple0) Tuple0))
-
 (assert
 ;; WP_parameter_def
  ;; File "main.adb", line 3, characters 0-0

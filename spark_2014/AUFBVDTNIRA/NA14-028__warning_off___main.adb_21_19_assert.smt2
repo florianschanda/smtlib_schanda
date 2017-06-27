@@ -69,10 +69,8 @@
 
 ;; get_data__post_axiom
   (assert
-  (forall ((foo__state us_private))
-  (! (let ((result (get_data foo__state)))
-     (=> (get_data__function_guard result foo__state) (dynamic_invariant
-     result true false true))) :pattern ((get_data foo__state)) )))
+  (forall ((foo__state us_private)) (! (dynamic_invariant
+  (get_data foo__state) true false true) :pattern ((get_data foo__state)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -97,9 +95,6 @@
 
 ;; H
   (assert (= value2 value1))
-
-;; H
-  (assert (get_data__function_guard (get_data state) state))
 
 (assert
 ;; WP_parameter_def

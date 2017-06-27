@@ -220,19 +220,16 @@
 
 ;; first__post_axiom
   (assert
-  (forall ((indicator us_rep))
-  (! (let ((result (first indicator)))
-     (=> (first__function_guard result indicator) (dynamic_invariant result
-     true false true))) :pattern ((first indicator)) )))
+  (forall ((indicator us_rep)) (! (dynamic_invariant (first indicator) true
+  false true) :pattern ((first indicator)) )))
 
 ;; first__def_axiom
   (assert
   (forall ((indicator us_rep))
-  (! (=> (first__function_guard (first indicator) indicator)
-     (= (first indicator) (to_rep
+  (! (= (first indicator) (to_rep
                           (rec__inc__increasing_indicator__first
-                          (us_split_fields1 indicator))))) :pattern (
-  (first indicator)) )))
+                          (us_split_fields1 indicator)))) :pattern ((first
+                                                                    indicator)) )))
 
 (declare-fun second (us_rep) Int)
 
@@ -240,18 +237,15 @@
 
 ;; second__post_axiom
   (assert
-  (forall ((indicator us_rep))
-  (! (let ((result (second indicator)))
-     (=> (second__function_guard result indicator) (dynamic_invariant result
-     true false true))) :pattern ((second indicator)) )))
+  (forall ((indicator us_rep)) (! (dynamic_invariant (second indicator) true
+  false true) :pattern ((second indicator)) )))
 
 ;; second__def_axiom
   (assert
   (forall ((indicator us_rep))
-  (! (=> (second__function_guard (second indicator) indicator)
-     (= (second indicator) (to_rep
+  (! (= (second indicator) (to_rep
                            (rec__inc__increasing_indicator__second
-                           (us_split_fields1 indicator))))) :pattern (
+                           (us_split_fields1 indicator)))) :pattern (
   (second indicator)) )))
 
 (declare-fun is_valid (us_rep) Bool)
@@ -264,9 +258,8 @@
 ;; is_valid__def_axiom
   (assert
   (forall ((indicator us_rep))
-  (! (=> (is_valid__function_guard (is_valid indicator) indicator)
-     (= (= (is_valid indicator) true)
-     (= (rec__inc__increasing_indicator__valid (us_split_fields1 indicator)) true))) :pattern (
+  (! (= (= (is_valid indicator) true)
+     (= (rec__inc__increasing_indicator__valid (us_split_fields1 indicator)) true)) :pattern (
   (is_valid indicator)) )))
 
 (declare-fun is_increasing (us_rep) Bool)
@@ -274,19 +267,16 @@
 (declare-fun is_increasing__function_guard (Bool us_rep) Bool)
 
 ;; is_increasing__post_axiom
-  (assert
-  (forall ((indicator us_rep)) (! (is_valid__function_guard
-  (is_valid indicator) indicator) :pattern ((is_increasing indicator)) )))
+  (assert true)
 
 ;; is_increasing__def_axiom
   (assert
   (forall ((indicator us_rep))
-  (! (=> (is_increasing__function_guard (is_increasing indicator) indicator)
-     (= (= (is_increasing indicator) true)
+  (! (= (= (is_increasing indicator) true)
      (< (to_rep
         (rec__inc__increasing_indicator__first (us_split_fields1 indicator))) 
      (to_rep
-     (rec__inc__increasing_indicator__second (us_split_fields1 indicator)))))) :pattern (
+     (rec__inc__increasing_indicator__second (us_split_fields1 indicator))))) :pattern (
   (is_increasing indicator)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -309,11 +299,11 @@
 
 (declare-fun o3 () integer)
 
-(declare-fun temp___216 () Bool)
+(declare-fun temp___209 () Bool)
 
-(declare-fun temp___2161 () integer)
+(declare-fun temp___2091 () integer)
 
-(declare-fun temp___2162 () integer)
+(declare-fun temp___2092 () integer)
 
 (declare-fun o4 () integer)
 
@@ -323,11 +313,11 @@
 
 (declare-fun o7 () integer)
 
-(declare-fun temp___222 () Bool)
+(declare-fun temp___215 () Bool)
 
-(declare-fun temp___2221 () integer)
+(declare-fun temp___2151 () integer)
 
-(declare-fun temp___2222 () integer)
+(declare-fun temp___2152 () integer)
 
 (declare-fun o8 () integer)
 
@@ -337,11 +327,11 @@
 
 (declare-fun o11 () integer)
 
-(declare-fun temp___220 () Bool)
+(declare-fun temp___213 () Bool)
 
-(declare-fun temp___2201 () integer)
+(declare-fun temp___2131 () integer)
 
-(declare-fun temp___2202 () integer)
+(declare-fun temp___2132 () integer)
 
 (declare-fun inc__read__valid () Bool)
 
@@ -418,13 +408,13 @@
   (assert (= result____split_fields2 o3))
 
 ;; H
-  (assert (= temp___216 o1))
+  (assert (= temp___209 o1))
 
 ;; H
-  (assert (= temp___2161 o2))
+  (assert (= temp___2091 o2))
 
 ;; H
-  (assert (= temp___2162 o3))
+  (assert (= temp___2092 o3))
 
 ;; H
   (assert
@@ -434,13 +424,13 @@
   result____split_fields2))))
 
 ;; H
-  (assert (= temp___216 result____split_fields3))
+  (assert (= temp___209 result____split_fields3))
 
 ;; H
-  (assert (= temp___2161 result____split_fields4))
+  (assert (= temp___2091 result____split_fields4))
 
 ;; H
-  (assert (= temp___2162 result____split_fields5))
+  (assert (= temp___2092 result____split_fields5))
 
 ;; H
   (assert (= result3 result____split_fields3))
@@ -479,13 +469,13 @@
   (assert (=> (= result____split_fields6 true) (= o4 o7)))
 
 ;; H
-  (assert (=> (= result____split_fields6 true) (= temp___222 o5)))
+  (assert (=> (= result____split_fields6 true) (= temp___215 o5)))
 
 ;; H
-  (assert (=> (= result____split_fields6 true) (= temp___2221 o6)))
+  (assert (=> (= result____split_fields6 true) (= temp___2151 o6)))
 
 ;; H
-  (assert (=> (= result____split_fields6 true) (= temp___2222 o7)))
+  (assert (=> (= result____split_fields6 true) (= temp___2152 o7)))
 
 ;; H
   (assert
@@ -502,17 +492,17 @@
 ;; H
   (assert
   (=> (= result____split_fields6 true)
-  (= temp___222 result____split_fields9)))
+  (= temp___215 result____split_fields9)))
 
 ;; H
   (assert
   (=> (= result____split_fields6 true)
-  (= temp___2221 result____split_fields10)))
+  (= temp___2151 result____split_fields10)))
 
 ;; H
   (assert
   (=> (= result____split_fields6 true)
-  (= temp___2222 result____split_fields11)))
+  (= temp___2152 result____split_fields11)))
 
 ;; H
   (assert
@@ -543,13 +533,13 @@
   (assert (=> (not (= result____split_fields6 true)) (= o8 o11)))
 
 ;; H
-  (assert (=> (not (= result____split_fields6 true)) (= temp___220 o9)))
+  (assert (=> (not (= result____split_fields6 true)) (= temp___213 o9)))
 
 ;; H
-  (assert (=> (not (= result____split_fields6 true)) (= temp___2201 o10)))
+  (assert (=> (not (= result____split_fields6 true)) (= temp___2131 o10)))
 
 ;; H
-  (assert (=> (not (= result____split_fields6 true)) (= temp___2202 o11)))
+  (assert (=> (not (= result____split_fields6 true)) (= temp___2132 o11)))
 
 ;; H
   (assert
@@ -561,8 +551,8 @@
 ;; H
   (assert
   (=> (not (= result____split_fields6 true))
-  (= result____split_fields13 (mk___split_fields temp___220 temp___2201
-                              temp___2202))))
+  (= result____split_fields13 (mk___split_fields temp___213 temp___2131
+                              temp___2132))))
 
 ;; H
   (assert
@@ -578,35 +568,14 @@
   (assert (= result____split_fields15 result____split_fields12))
 
 ;; H
-  (assert (is_valid__function_guard
-  (is_valid (mk___rep (us_split_fields__content result____split_fields14)))
-  (mk___rep (us_split_fields__content result____split_fields14))))
-
-;; H
   (assert
   (= (is_valid
      (mk___rep (us_split_fields__content result____split_fields14))) true))
 
 ;; H
-  (assert (is_increasing__function_guard
-  (is_increasing
-  (mk___rep (us_split_fields__content result____split_fields14)))
-  (mk___rep (us_split_fields__content result____split_fields14))))
-
-;; H
   (assert
   (= (is_increasing
      (mk___rep (us_split_fields__content result____split_fields14))) true))
-
-;; H
-  (assert (first__function_guard
-  (first (mk___rep (us_split_fields__content result____split_fields14)))
-  (mk___rep (us_split_fields__content result____split_fields14))))
-
-;; H
-  (assert (second__function_guard
-  (second (mk___rep (us_split_fields__content result____split_fields14)))
-  (mk___rep (us_split_fields__content result____split_fields14))))
 
 (assert
 ;; WP_parameter_def

@@ -126,8 +126,7 @@
      (and (dynamic_invariant i true true true) (dynamic_invariant1 j true
      true true)) (<= i 10))
      (let ((result (add1 i j)))
-     (=> (add1__function_guard result i j)
-     (and (<= result 20) (dynamic_invariant2 result true false true))))) :pattern (
+     (and (<= result 20) (dynamic_invariant2 result true false true)))) :pattern (
   (add1 i j)) )))
 
 (declare-fun i () Int)
@@ -173,9 +172,7 @@
   (assert (= inrange__add__result3 inrange__add__result1))
 
 ;; H
-  (assert
-  (and (and (= o (add1 j j)) (add1__function_guard o j j))
-  (and (in_range o) (<= o 20))))
+  (assert (and (= o (add1 j j)) (and (in_range o) (<= o 20))))
 
 ;; H
   (assert (= o1 (+ i o)))

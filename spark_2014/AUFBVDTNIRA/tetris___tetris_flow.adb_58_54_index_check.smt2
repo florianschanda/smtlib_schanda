@@ -1895,10 +1895,10 @@
 ;; H
   (assert
   (and
-  (forall ((temp___759 Int))
-  (=> (and (<= 1 temp___759) (<= temp___759 50))
-  (=> (not (= (+ (to_rep3 cur_piece__split_fields1) y2) temp___759))
-  (= (select cur_board1 temp___759) (select cur_board temp___759)))))
+  (forall ((temp___738 Int))
+  (=> (and (<= 1 temp___738) (<= temp___738 50))
+  (=> (not (= (+ (to_rep3 cur_piece__split_fields1) y2) temp___738))
+  (= (select cur_board1 temp___738) (select cur_board temp___738)))))
   (and (<= 0 x2) (<= x2 2))))
 
 (assert

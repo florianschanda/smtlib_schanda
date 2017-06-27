@@ -1124,8 +1124,7 @@
 ;; prop____def_axiom
   (assert
   (forall ((e Int))
-  (! (=> (prop____function_guard (prop__ e) e)
-     (= (= (prop__ e) true) (<= 0 e))) :pattern ((prop__ e)) )))
+  (! (= (= (prop__ e) true) (<= 0 e)) :pattern ((prop__ e)) )))
 
 (declare-fun s1__split_discrs () us_split_discrs)
 
@@ -1430,42 +1429,26 @@
 
 ;; H
   (assert
-  (forall ((k Int)) (prop____function_guard
-  (prop__
-  (get
-  (model__ (mk___rep s1__split_discrs (mk___split_fields s1__split_fields)))
-  k))
-  (get
-  (model__ (mk___rep s1__split_discrs (mk___split_fields s1__split_fields)))
-  k))))
-
-;; H
-  (assert
-  (forall ((k Int)) (prop____function_guard (prop__ (get (model__ s2) k))
-  (get (model__ s2) k))))
-
-;; H
-  (assert
   (and
   (and
-  (let ((temp___857 (keys
+  (let ((temp___797 (keys
                     (mk___rep s1__split_discrs
                     (mk___split_fields s1__split_fields)))))
-  (forall ((temp___856 Int))
+  (forall ((temp___796 Int))
   (=>
-  (and (in_range5 temp___856)
-  (= (iter_has_element temp___857 temp___856) true))
+  (and (in_range5 temp___796)
+  (= (iter_has_element temp___797 temp___796) true))
   (= (prop__
      (get
      (model__
      (mk___rep s1__split_discrs (mk___split_fields s1__split_fields)))
-     (get1 temp___857 temp___856))) true))))
-  (let ((temp___860 (keys s2)))
-  (forall ((temp___859 Int))
+     (get1 temp___797 temp___796))) true))))
+  (let ((temp___799 (keys s2)))
+  (forall ((temp___798 Int))
   (=>
-  (and (in_range5 temp___859)
-  (= (iter_has_element temp___860 temp___859) true))
-  (= (prop__ (get (model__ s2) (get1 temp___860 temp___859))) true)))))
+  (and (in_range5 temp___798)
+  (= (iter_has_element temp___799 temp___798) true))
+  (= (prop__ (get (model__ s2) (get1 temp___799 temp___798))) true)))))
   (< (length s2) (- (to_rep
                     (rec__use_ordered_maps__my_maps__map__capacity
                     s1__split_discrs)) (length
@@ -1499,29 +1482,17 @@
 ;; H
   (assert (= result1 true))
 
-(define-fun temp___836 () us_rep3 (keys
+(define-fun temp___780 () us_rep3 (keys
                                   (mk___rep s1__split_discrs
                                   (mk___split_fields s1__split_fields))))
 
-(declare-fun temp___835 () Int)
+(declare-fun temp___779 () Int)
 
 ;; H
-  (assert (in_range5 temp___835))
+  (assert (in_range5 temp___779))
 
 ;; H
-  (assert (= (iter_has_element temp___836 temp___835) true))
-
-(define-fun k () Int (get1 temp___836 temp___835))
-
-;; H
-  (assert (prop____function_guard
-  (prop__
-  (get
-  (model__ (mk___rep s1__split_discrs (mk___split_fields s1__split_fields)))
-  k))
-  (get
-  (model__ (mk___rep s1__split_discrs (mk___split_fields s1__split_fields)))
-  k)))
+  (assert (= (iter_has_element temp___780 temp___779) true))
 
 (assert
 ;; WP_parameter_def
@@ -1530,6 +1501,6 @@
   (= (prop__
      (get
      (model__
-     (mk___rep s1__split_discrs (mk___split_fields s1__split_fields))) 
-     k)) true)))
+     (mk___rep s1__split_discrs (mk___split_fields s1__split_fields)))
+     (get1 temp___780 temp___779))) true)))
 (check-sat)

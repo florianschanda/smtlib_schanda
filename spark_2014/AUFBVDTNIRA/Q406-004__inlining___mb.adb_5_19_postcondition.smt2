@@ -70,17 +70,14 @@
 
 ;; item_count__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (item_count us_void_param)))
-     (=> (item_count__function_guard result us_void_param) (dynamic_invariant
-     result true false true))) :pattern ((item_count us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant
+  (item_count us_void_param) true false
+  true) :pattern ((item_count us_void_param)) )))
 
 ;; item_count__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (item_count__function_guard (item_count us_void_param)
-     us_void_param) (= (item_count us_void_param) 10)) :pattern ((item_count
-                                                                 us_void_param)) )))
+  (! (= (item_count us_void_param) 10) :pattern ((item_count us_void_param)) )))
 
 (declare-fun n () Int)
 
@@ -88,9 +85,6 @@
 
 ;; H
   (assert (in_range n))
-
-;; H
-  (assert (item_count__function_guard (item_count Tuple0) Tuple0))
 
 (assert
 ;; WP_parameter_def

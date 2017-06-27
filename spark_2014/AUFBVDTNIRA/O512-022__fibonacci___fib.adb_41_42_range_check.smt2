@@ -105,9 +105,8 @@
   (assert
   (forall ((n Int))
   (! (=> (and (dynamic_invariant n true true true) (<= n 23))
-     (let ((result (fibonacci n)))
-     (=> (fibonacci__function_guard result n) (dynamic_invariant result true
-     false true)))) :pattern ((fibonacci n)) )))
+     (dynamic_invariant (fibonacci n) true false true)) :pattern ((fibonacci
+                                                                  n)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -168,7 +167,7 @@
 
 (declare-fun temp___162 () Int)
 
-(declare-fun temp___168 () Int)
+(declare-fun temp___166 () Int)
 
 (declare-fun o () Int)
 
@@ -220,11 +219,11 @@
 
 (declare-fun i2 () Int)
 
-(declare-fun temp___1681 () Int)
+(declare-fun temp___1661 () Int)
 
 (declare-fun result7 () Int)
 
-(declare-fun temp___1682 () Int)
+(declare-fun temp___1662 () Int)
 
 (declare-fun result8 () int__ref)
 
@@ -367,18 +366,6 @@
   (assert (= i1 2))
 
 ;; H
-  (assert (fibonacci__function_guard (fibonacci i2) i2))
-
-;; H
-  (assert (fibonacci__function_guard (fibonacci (- i2 1)) (- i2 1)))
-
-;; H
-  (assert (fibonacci__function_guard (fibonacci i2) i2))
-
-;; H
-  (assert (fibonacci__function_guard (fibonacci (- i2 1)) (- i2 1)))
-
-;; H
   (assert (=> (< 2 n1) (= temp___165 i1)))
 
 ;; H
@@ -391,7 +378,7 @@
   (assert (=> (< 2 n1) (= temp___162 a11)))
 
 ;; H
-  (assert (=> (< 2 n1) (= 0 temp___168)))
+  (assert (=> (< 2 n1) (= 0 temp___166)))
 
 ;; H
   (assert
@@ -410,10 +397,10 @@
   (=> (<= 0 2147483647) (in_range2 i2))) (< 2 n12))))
 
 ;; H
-  (assert (=> (< 2 n1) (= temp___1681 result7)))
+  (assert (=> (< 2 n1) (= temp___1661 result7)))
 
 ;; H
-  (assert (=> (< 2 n1) (= temp___1682 n12)))
+  (assert (=> (< 2 n1) (= temp___1662 n12)))
 
 ;; H
   (assert (=> (< 2 n1) (and (= o (+ a12 b12)) (in_range1 (+ a12 b12)))))
@@ -539,12 +526,6 @@
   (assert (< 2 n2))
 
 ;; H
-  (assert (fibonacci__function_guard (fibonacci i9) i9))
-
-;; H
-  (assert (fibonacci__function_guard (fibonacci (- i9 1)) (- i9 1)))
-
-;; H
   (assert
   (and
   (and (and (= a22 (fibonacci i9)) (= b22 (fibonacci (- i9 1)))) (<= i9 23))
@@ -559,9 +540,7 @@
   (=> (<= 0 2147483647) (in_range2 i9))) (< 2 n21)))
 
 ;; H
-  (assert
-  (and (and (= o5 (fibonacci i9)) (fibonacci__function_guard o5 i9))
-  (in_range2 o5)))
+  (assert (and (= o5 (fibonacci i9)) (in_range2 o5)))
 
 ;; H
   (assert (= result13 (ite (= a22 o5) true false)))

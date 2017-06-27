@@ -747,12 +747,12 @@
                                      (or (= temp___is_init_60 true)
                                      (<= 0 255)) (in_range3 temp___expr_63)))
 
-(define-fun dynamic_invariant5 ((temp___expr_222 Int)
-  (temp___is_init_219 Bool) (temp___skip_constant_220 Bool)
-  (temp___do_toplevel_221 Bool)) Bool (=>
-                                      (or (= temp___is_init_219 true)
+(define-fun dynamic_invariant5 ((temp___expr_186 Int)
+  (temp___is_init_183 Bool) (temp___skip_constant_184 Bool)
+  (temp___do_toplevel_185 Bool)) Bool (=>
+                                      (or (= temp___is_init_183 true)
                                       (<= first2 last2)) (dynamic_property1
-                                      first2 last2 temp___expr_222)))
+                                      first2 last2 temp___expr_186)))
 
 ;; first__def_axiom
   (assert (= first2 (first1 s1)))
@@ -760,12 +760,12 @@
 ;; last__def_axiom
   (assert (= last2 (last1 s1)))
 
-(define-fun dynamic_invariant6 ((temp___expr_228 Int)
-  (temp___is_init_225 Bool) (temp___skip_constant_226 Bool)
-  (temp___do_toplevel_227 Bool)) Bool (=>
-                                      (or (= temp___is_init_225 true)
+(define-fun dynamic_invariant6 ((temp___expr_192 Int)
+  (temp___is_init_189 Bool) (temp___skip_constant_190 Bool)
+  (temp___do_toplevel_191 Bool)) Bool (=>
+                                      (or (= temp___is_init_189 true)
                                       (<= first3 last3)) (dynamic_property2
-                                      first3 last3 temp___expr_228)))
+                                      first3 last3 temp___expr_192)))
 
 ;; first__def_axiom
   (assert (= first3 (first1 s2)))
@@ -773,12 +773,12 @@
 ;; last__def_axiom
   (assert (= last3 (last1 s2)))
 
-(define-fun dynamic_invariant7 ((temp___expr_234 Int)
-  (temp___is_init_231 Bool) (temp___skip_constant_232 Bool)
-  (temp___do_toplevel_233 Bool)) Bool (=>
-                                      (or (= temp___is_init_231 true)
+(define-fun dynamic_invariant7 ((temp___expr_198 Int)
+  (temp___is_init_195 Bool) (temp___skip_constant_196 Bool)
+  (temp___do_toplevel_197 Bool)) Bool (=>
+                                      (or (= temp___is_init_195 true)
                                       (<= 0 last4)) (dynamic_property3 0
-                                      last4 temp___expr_234)))
+                                      last4 temp___expr_198)))
 
 ;; last__def_axiom
   (assert
@@ -797,14 +797,14 @@
   (= (to_rep1 lengths__last) (to_rep1 (last (rt s1))))))
   (and (= (to_rep1 lengths__first_2) (to_rep1 (first (rt s2))))
   (= (to_rep1 lengths__last_2) (to_rep1 (last (rt s2))))))
-  (forall ((temp___329 Int) (temp___330 Int))
+  (forall ((temp___290 Int) (temp___291 Int))
   (=>
   (and
-  (and (<= (to_rep1 lengths__first) temp___329)
-  (<= temp___329 (to_rep1 lengths__last)))
-  (and (<= (to_rep1 lengths__first_2) temp___330)
-  (<= temp___330 (to_rep1 lengths__last_2)))) (dynamic_property3 0 last4
-  (to_rep2 (get lengths temp___329 temp___330)))))))
+  (and (<= (to_rep1 lengths__first) temp___290)
+  (<= temp___290 (to_rep1 lengths__last)))
+  (and (<= (to_rep1 lengths__first_2) temp___291)
+  (<= temp___291 (to_rep1 lengths__last_2)))) (dynamic_property3 0 last4
+  (to_rep2 (get lengths temp___290 temp___291)))))))
 
 ;; H
   (assert (in_range1 x1))

@@ -94,7 +94,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 81, characters 0-0
+ ;; File "t.ads", line 3, characters 0-0
   (not
   (not
   (and (=> (<= (- 2147483648) 2147483647) (in_range1 y))

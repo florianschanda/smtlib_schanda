@@ -429,12 +429,12 @@
 (define-fun buffer_index_type__ref___projection ((a buffer_index_type__ref)) buffer_index_type 
   (buffer_index_type__content a))
 
-(define-fun dynamic_invariant ((temp___expr_161 (_ BitVec 8))
-  (temp___is_init_158 Bool) (temp___skip_constant_159 Bool)
-  (temp___do_toplevel_160 Bool)) Bool (=>
-                                      (or (= temp___is_init_158 true)
+(define-fun dynamic_invariant ((temp___expr_160 (_ BitVec 8))
+  (temp___is_init_157 Bool) (temp___skip_constant_158 Bool)
+  (temp___do_toplevel_159 Bool)) Bool (=>
+                                      (or (= temp___is_init_157 true)
                                       (bvule ((_ int2bv 8) 0) ((_ int2bv 8) 7)))
-                                      (in_range2 temp___expr_161)))
+                                      (in_range2 temp___expr_160)))
 
 (declare-sort buffer_count_type 0)
 
@@ -458,11 +458,11 @@
 (define-fun buffer_count_type__ref___projection ((a buffer_count_type__ref)) buffer_count_type 
   (buffer_count_type__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_178 Int)
-  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
-  (temp___do_toplevel_177 Bool)) Bool (=>
-                                      (or (= temp___is_init_175 true)
-                                      (<= 0 8)) (in_range3 temp___expr_178)))
+(define-fun dynamic_invariant1 ((temp___expr_177 Int)
+  (temp___is_init_174 Bool) (temp___skip_constant_175 Bool)
+  (temp___do_toplevel_176 Bool)) Bool (=>
+                                      (or (= temp___is_init_174 true)
+                                      (<= 0 8)) (in_range3 temp___expr_177)))
 
 (define-fun dynamic_invariant2 ((temp___expr_142 Int)
   (temp___is_init_139 Bool) (temp___skip_constant_140 Bool)

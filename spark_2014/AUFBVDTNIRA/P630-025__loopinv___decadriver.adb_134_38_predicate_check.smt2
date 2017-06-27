@@ -1668,6 +1668,22 @@
 (define-fun receiver_type__ref___projection ((a receiver_type__ref)) us_rep2 
   (receiver_type__content a))
 
+(declare-fun temp___4475 (us_rep1) (Array (_ BitVec 8) us_rep1))
+
+;; def_axiom
+  (assert
+  (forall ((temp___4477 us_rep1))
+  (forall ((temp___4478 (_ BitVec 8)))
+  (= (select (temp___4475 temp___4477) temp___4478) temp___4477))))
+
+(declare-fun temp___4479 ((_ BitVec 8)) (Array Int bits_8))
+
+;; def_axiom
+  (assert
+  (forall ((temp___4481 (_ BitVec 8)))
+  (forall ((temp___4482 Int))
+  (= (select (temp___4479 temp___4481) temp___4482) (of_rep4 temp___4481)))))
+
 (define-fun dynamic_invariant3 ((temp___expr_4469 us_rep2)
   (temp___is_init_4466 Bool) (temp___skip_constant_4467 Bool)
   (temp___do_toplevel_4468 Bool)) Bool (forall ((temp___4470 (_ BitVec 8)))
@@ -1688,6 +1704,36 @@
                                           (rec__decadriver__rx_frame_type__size
                                           (us_split_fields3 temp___4471))) 0))))))
 
+(define-fun default_initial_assumption ((temp___expr_4473 us_rep2)
+  (temp___skip_top_level_4474 Bool)) Bool (and
+                                          (and
+                                          (and
+                                          (and
+                                          (= (rec__decadriver__receiver_type__frame_queue
+                                             (us_split_fields5
+                                             temp___expr_4473)) (temp___4475
+                                                                (mk___rep1
+                                                                (mk___split_fields1
+                                                                (of_rep8 0)
+                                                                (temp___4479
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep9 0)
+                                                                (of_int 0)))))
+                                          (= (to_rep10
+                                             (rec__decadriver__receiver_type__queue_head
+                                             (us_split_fields5
+                                             temp___expr_4473))) ((_ int2bv 8) 1)))
+                                          (= (to_rep
+                                             (rec__decadriver__receiver_type__rx_count
+                                             (us_split_fields5
+                                             temp___expr_4473))) 0))
+                                          (= (rec__decadriver__receiver_type__overrun_occurred
+                                             (us_split_fields5
+                                             temp___expr_4473)) (of_int 0)))
+                                          (= (rec__decadriver__receiver_type__frame_ready
+                                             (us_split_fields5
+                                             temp___expr_4473)) (of_int 0))))
+
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -1697,8 +1743,6 @@
 (declare-fun r15b () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -1722,7 +1766,7 @@
 
 (declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -1732,7 +1776,7 @@
   (! (=> (in_range1 f)
      (=> (in_range1 l)
      (and (= (to_rep1 (first2 (mk1 f l))) f)
-     (= (to_rep1 (last3 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (= (to_rep1 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -1749,10 +1793,10 @@
 
 (define-fun first3 ((a us_t1)) Int (to_rep1 (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep1 (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last4 a))
-                                    (+ (- (last4 a) (first3 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size5 () Int)
 
@@ -1787,8 +1831,8 @@
 
 (define-fun bool_eq17 ((x us_t1)
   (y us_t1)) Bool (bool_eq5 (elts1 x) (to_rep1 (first2 (rt1 x)))
-                  (to_rep1 (last3 (rt1 x))) (elts1 y)
-                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last3 (rt1 y)))))
+                  (to_rep1 (last2 (rt1 x))) (elts1 y)
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
 (declare-fun user_eq17 (us_t1 us_t1) Bool)
 
@@ -1957,13 +2001,13 @@
 
 (declare-fun o27 () Bool)
 
-(declare-fun temp___4567 () frame_length)
+(declare-fun temp___4573 () frame_length)
 
-(declare-fun temp___45671 () (Array Int bits_8))
+(declare-fun temp___45731 () (Array Int bits_8))
 
-(declare-fun temp___45672 () rx_errors)
+(declare-fun temp___45732 () rx_errors)
 
-(declare-fun temp___45673 () Bool)
+(declare-fun temp___45733 () Bool)
 
 (declare-fun o28 () frame_length)
 
@@ -2007,13 +2051,13 @@
 
 (declare-fun o48 () Bool)
 
-(declare-fun temp___4571 () frame_length)
+(declare-fun temp___4577 () frame_length)
 
-(declare-fun temp___45711 () (Array Int bits_8))
+(declare-fun temp___45771 () (Array Int bits_8))
 
-(declare-fun temp___45712 () rx_errors)
+(declare-fun temp___45772 () rx_errors)
 
-(declare-fun temp___45713 () Bool)
+(declare-fun temp___45773 () Bool)
 
 (declare-fun o49 () us_rep1)
 
@@ -2027,7 +2071,7 @@
 
 (declare-fun o54 () us_split_fields2)
 
-(declare-fun temp___4575 () us_rep1)
+(declare-fun temp___4581 () us_rep1)
 
 (declare-fun dw1000__registers__rx_finfo__read__reg__fields () us_split_fields)
 
@@ -2057,15 +2101,15 @@
 
 (declare-fun self__7 () us_rep2)
 
-(define-fun temp___45714 () us_rep1 (mk___rep1
-                                    (mk___split_fields1 temp___4571
-                                    temp___45711 temp___45712 temp___45713)))
+(define-fun temp___45774 () us_rep1 (mk___rep1
+                                    (mk___split_fields1 temp___4577
+                                    temp___45771 temp___45772 temp___45773)))
 
 (define-fun o55 () us_rep1 (mk___rep1 (mk___split_fields1 o28 o29 o30 o31)))
 
-(define-fun temp___45674 () us_rep1 (mk___rep1
-                                    (mk___split_fields1 temp___4567
-                                    temp___45671 temp___45672 temp___45673)))
+(define-fun temp___45734 () us_rep1 (mk___rep1
+                                    (mk___split_fields1 temp___4573
+                                    temp___45731 temp___45732 temp___45733)))
 
 ;; H
   (assert (dynamic_invariant3
@@ -2222,7 +2266,7 @@
 ;; H
   (assert
   (= (to_rep1 o22) (to_rep1
-                   (last3
+                   (last2
                    dw1000__register_driver__read_register__data__compl1))))
 
 ;; H
@@ -2233,9 +2277,9 @@
 
 ;; H
   (assert
-  (forall ((temp___4564 Int))
-  (ite (and (<= 1 temp___4564) (<= temp___4564 r15b))
-  (= (select o23 temp___4564) (select (slide
+  (forall ((temp___4570 Int))
+  (ite (and (<= 1 temp___4570) (<= temp___4570 r15b))
+  (= (select o23 temp___4570) (select (slide
                                       dw1000__register_driver__read_register__data
                                       (to_rep1
                                       (first
@@ -2244,14 +2288,14 @@
                                       (first2
                                       dw1000__register_driver__read_register__data__compl1))
                                       (to_rep1
-                                      (last3
+                                      (last2
                                       dw1000__register_driver__read_register__data__compl1)))))
-                                      1) temp___4564))
-  (= (select o23 temp___4564) (select (rec__decadriver__rx_frame_type__frame
+                                      1) temp___4570))
+  (= (select o23 temp___4570) (select (rec__decadriver__rx_frame_type__frame
                                       (us_split_fields3
                                       (select (rec__decadriver__receiver_type__frame_queue
                                               (us_split_fields5 self__5)) 
-                                      next_idx1))) temp___4564)))))
+                                      next_idx1))) temp___4570)))))
 
 ;; H
   (assert
@@ -2278,22 +2322,22 @@
              (us_split_fields5 self__5)) next_idx1))) o27))
 
 ;; H
-  (assert (= temp___4567 o24))
+  (assert (= temp___4573 o24))
 
 ;; H
-  (assert (= temp___45671 o25))
+  (assert (= temp___45731 o25))
 
 ;; H
-  (assert (= temp___45672 o26))
+  (assert (= temp___45732 o26))
 
 ;; H
-  (assert (= temp___45673 o27))
+  (assert (= temp___45733 o27))
 
 ;; H
-  (assert (dynamic_predicate temp___45674))
+  (assert (dynamic_predicate temp___45734))
 
 ;; H
-  (assert (= o55 temp___45674))
+  (assert (= o55 temp___45734))
 
 ;; H
   (assert
@@ -2375,22 +2419,22 @@
              (us_split_fields5 self__6)) next_idx1))) o48))
 
 ;; H
-  (assert (= temp___4571 o45))
+  (assert (= temp___4577 o45))
 
 ;; H
-  (assert (= temp___45711 o46))
+  (assert (= temp___45771 o46))
 
 ;; H
-  (assert (= temp___45712 o47))
+  (assert (= temp___45772 o47))
 
 ;; H
-  (assert (= temp___45713 o48))
+  (assert (= temp___45773 o48))
 
 ;; H
-  (assert (dynamic_predicate temp___45714))
+  (assert (dynamic_predicate temp___45774))
 
 ;; H
-  (assert (= o49 temp___45714))
+  (assert (= o49 temp___45774))
 
 ;; H
   (assert
@@ -2439,10 +2483,10 @@
                  (us_split_fields5 self__7)) next_idx1))))))
 
 ;; H
-  (assert (= temp___4575 (mk___rep1 o54)))
+  (assert (= temp___4581 (mk___rep1 o54)))
 
 (assert
 ;; WP_parameter_def
  ;; File "decadriver.ads", line 77, characters 0-0
-  (not (dynamic_predicate temp___4575)))
+  (not (dynamic_predicate temp___4581)))
 (check-sat)

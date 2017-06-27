@@ -1967,7 +1967,7 @@
   (assert (= o18 header1))
 
 ;; H
-  (assert (and (= o15 (to_bytes1 o18)) (to_bytes__function_guard1 o15 o18)))
+  (assert (= o15 (to_bytes1 o18)))
 
 ;; H
   (assert (= o15 o16))

@@ -1114,11 +1114,6 @@
 
 ;; H
   (assert
-  (forall ((cu us_rep1)) (q__function_guard (q (element s cu))
-  (element s cu))))
-
-;; H
-  (assert
   (forall ((cu us_rep1))
   (=> (= (has_key (positions s) cu) true) (= (q (element s cu)) true))))
 
@@ -1133,23 +1128,18 @@
   (and (= (has_key (positions s) i) true)
   (= (get (elements s) (get1 (positions s) i)) (get temp___438 temp___437))))))))
 
-(define-fun temp___1071 () us_rep2 (elements s))
+(define-fun temp___1015 () us_rep2 (elements s))
 
-(declare-fun temp___1070 () Int)
-
-;; H
-  (assert (in_range2 temp___1070))
+(declare-fun temp___1014 () Int)
 
 ;; H
-  (assert (= (iter_has_element temp___1071 temp___1070) true))
-
-(define-fun e () Int (get temp___1071 temp___1070))
+  (assert (in_range2 temp___1014))
 
 ;; H
-  (assert (q__function_guard (q e) e))
+  (assert (= (iter_has_element temp___1015 temp___1014) true))
 
 (assert
 ;; WP_parameter_def
  ;; File "use_sets.ads", line 120, characters 0-0
-  (not (= (q e) true)))
+  (not (= (q (get temp___1015 temp___1014)) true)))
 (check-sat)

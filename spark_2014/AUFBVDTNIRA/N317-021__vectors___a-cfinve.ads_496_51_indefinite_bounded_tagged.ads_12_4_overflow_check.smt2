@@ -206,12 +206,12 @@
 
 (declare-fun capacity__function_guard (Int us_rep) Bool)
 
-(define-fun dynamic_invariant ((temp___expr_249 Int)
-  (temp___is_init_246 Bool) (temp___skip_constant_247 Bool)
-  (temp___do_toplevel_248 Bool)) Bool (=>
-                                      (or (= temp___is_init_246 true)
+(define-fun dynamic_invariant ((temp___expr_248 Int)
+  (temp___is_init_245 Bool) (temp___skip_constant_246 Bool)
+  (temp___do_toplevel_247 Bool)) Bool (=>
+                                      (or (= temp___is_init_245 true)
                                       (<= 0 2147483647)) (in_range1
-                                      temp___expr_249)))
+                                      temp___expr_248)))
 
 (declare-fun length (us_rep) Int)
 

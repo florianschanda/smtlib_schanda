@@ -131,12 +131,9 @@
 ;; speed_is_valid__def_axiom
   (assert
   (forall ((segway__speed Int) (segway__state Int))
-  (! (=> (speed_is_valid__function_guard
-     (speed_is_valid segway__speed segway__state) segway__speed
-     segway__state)
-     (= (= (speed_is_valid segway__speed segway__state) true)
+  (! (= (= (speed_is_valid segway__speed segway__state) true)
      (ite (= segway__state 0) (= segway__speed 0)
-     (ite (= segway__state 1) (< 0 segway__speed) (< segway__speed 0))))) :pattern (
+     (ite (= segway__state 1) (< 0 segway__speed) (< segway__speed 0)))) :pattern (
   (speed_is_valid segway__speed segway__state)) )))
 
 (declare-fun i () Int)
@@ -186,10 +183,6 @@
 (declare-fun speed6 () Int)
 
 (declare-fun state6 () Int)
-
-;; H
-  (assert (speed_is_valid__function_guard (speed_is_valid speed state) 
-  speed state))
 
 ;; H
   (assert (=> (<= (- 100) 100) (in_range2 speed)))
@@ -313,10 +306,6 @@
 
 ;; H
   (assert (= speed6 speed2))
-
-;; H
-  (assert (speed_is_valid__function_guard (speed_is_valid speed5 state5)
-  speed5 state5))
 
 (assert
 ;; WP_parameter_def

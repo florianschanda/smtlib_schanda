@@ -343,7 +343,7 @@
 
 (declare-fun o1 () Int)
 
-(declare-fun temp___400 () Int)
+(declare-fun temp___399 () Int)
 
 (declare-fun o2 () Int)
 
@@ -391,10 +391,10 @@
 ;; H
   (assert
   (and
-  (forall ((temp___403 Int))
+  (forall ((temp___402 Int))
   (=>
-  (and (<= (to_rep c__first) temp___403) (<= temp___403 (to_rep c__last)))
-  (=> (<= i2 temp___403) (= (select c1 temp___403) (select c temp___403)))))
+  (and (<= (to_rep c__first) temp___402) (<= temp___402 (to_rep c__last)))
+  (=> (<= i2 temp___402) (= (select c1 temp___402) (select c temp___402)))))
   (and (<= (to_rep (first (rt a))) i2) (<= i2 (to_rep (last (rt a)))))))
 
 ;; H
@@ -406,15 +406,15 @@
   (assert (= o1 (- o (to_rep (first (rt a))))))
 
 ;; H
-  (assert (and (= temp___400 o1) (in_range1 o1)))
+  (assert (and (= temp___399 o1) (in_range1 o1)))
 
 ;; H
   (assert
-  (and (<= (to_rep (first (rt b))) temp___400)
-  (<= temp___400 (to_rep (last (rt b))))))
+  (and (<= (to_rep (first (rt b))) temp___399)
+  (<= temp___399 (to_rep (last (rt b))))))
 
 ;; H
-  (assert (= o2 temp___400))
+  (assert (= o2 temp___399))
 
 ;; H
   (assert (= o3 (select (elts b) o2)))

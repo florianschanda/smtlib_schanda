@@ -154,20 +154,14 @@
 
 (declare-fun glob1_ok__function_guard (Bool us_rep Int) Bool)
 
-;; temp___result_212_def
-  (assert
-  (forall ((default_init__n Int) (temp___211 us_rep))
-  (glob1_ok__function_guard (glob1_ok temp___211 default_init__n) temp___211
-  default_init__n)))
-
-(define-fun default_initial_assumption ((temp___expr_209 us_rep)
-  (temp___skip_top_level_210 Bool)
+(define-fun default_initial_assumption ((temp___expr_200 us_rep)
+  (temp___skip_top_level_201 Bool)
   (default_init__n Int)) Bool (and
                               (= (to_rep
                                  (rec__default_init__glob1__f
-                                 (us_split_fields1 temp___expr_209))) 0)
-                              (=> (not (= temp___skip_top_level_210 true))
-                              (= (glob1_ok temp___expr_209 default_init__n) true))))
+                                 (us_split_fields1 temp___expr_200))) 0)
+                              (=> (not (= temp___skip_top_level_201 true))
+                              (= (glob1_ok temp___expr_200 default_init__n) true))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -178,10 +172,8 @@
   (assert
   (forall ((x us_rep))
   (forall ((default_init__n Int))
-  (! (=> (glob1_ok__function_guard (glob1_ok x default_init__n) x
-     default_init__n)
-     (= (= (glob1_ok x default_init__n) true)
-     (= (to_rep (rec__default_init__glob1__f (us_split_fields1 x))) default_init__n))) :pattern (
+  (! (= (= (glob1_ok x default_init__n) true)
+     (= (to_rep (rec__default_init__glob1__f (us_split_fields1 x))) default_init__n)) :pattern (
   (glob1_ok x default_init__n)) ))))
 
 (declare-fun n () Int)

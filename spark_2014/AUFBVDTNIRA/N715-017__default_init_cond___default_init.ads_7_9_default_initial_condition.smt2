@@ -58,24 +58,19 @@
 
 (declare-fun nat_ok__function_guard (Bool Int) Bool)
 
-(define-fun dynamic_invariant ((temp___expr_179 Int)
-  (temp___is_init_176 Bool) (temp___skip_constant_177 Bool)
-  (temp___do_toplevel_178 Bool)) Bool (=>
-                                      (or (= temp___is_init_176 true)
+(define-fun dynamic_invariant ((temp___expr_174 Int)
+  (temp___is_init_171 Bool) (temp___skip_constant_172 Bool)
+  (temp___do_toplevel_173 Bool)) Bool (=>
+                                      (or (= temp___is_init_171 true)
                                       (<= 0 2147483647)) (in_range
-                                      temp___expr_179)))
+                                      temp___expr_174)))
 
-;; temp___result_183_def
-  (assert
-  (forall ((temp___182 Int)) (nat_ok__function_guard (nat_ok temp___182)
-  temp___182)))
-
-(define-fun default_initial_assumption ((temp___expr_180 Int)
-  (temp___skip_top_level_181 Bool)) Bool (and (= temp___expr_180 0)
+(define-fun default_initial_assumption ((temp___expr_175 Int)
+  (temp___skip_top_level_176 Bool)) Bool (and (= temp___expr_175 0)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_181 true))
-                                         (= (nat_ok temp___expr_180) true))))
+                                         (= temp___skip_top_level_176 true))
+                                         (= (nat_ok temp___expr_175) true))))
 
 ;; nat_ok__post_axiom
   (assert true)
@@ -83,24 +78,20 @@
 ;; nat_ok__def_axiom
   (assert
   (forall ((x Int))
-  (! (=> (nat_ok__function_guard (nat_ok x) x)
-     (= (= (nat_ok x) true) (= x 0))) :pattern ((nat_ok x)) )))
+  (! (= (= (nat_ok x) true) (= x 0)) :pattern ((nat_ok x)) )))
 
 (declare-fun us () Int)
 
-(declare-fun temp___303 () Int)
+(declare-fun temp___276 () Int)
 
 ;; H
   (assert (and (= us 0) (in_range 0)))
 
 ;; H
-  (assert (and (in_range temp___303) (= temp___303 0)))
-
-;; H
-  (assert (nat_ok__function_guard (nat_ok temp___303) temp___303))
+  (assert (and (in_range temp___276) (= temp___276 0)))
 
 (assert
 ;; WP_parameter_def
  ;; File "default_init.ads", line 58, characters 0-0
-  (not (= (nat_ok temp___303) true)))
+  (not (= (nat_ok temp___276) true)))
 (check-sat)

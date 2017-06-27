@@ -602,10 +602,9 @@
 ;; owned_state__def_axiom
   (assert
   (forall ((self us_rep2))
-  (! (=> (owned_state__function_guard (owned_state self) self)
-     (= (owned_state self) (rec__model__uml_state_machine__owned_state_data
-                           (us_split_fields5 self)))) :pattern ((owned_state
-                                                                self)) )))
+  (! (= (owned_state self) (rec__model__uml_state_machine__owned_state_data
+                           (us_split_fields5 self))) :pattern ((owned_state
+                                                               self)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -669,12 +668,6 @@
 
 ;; H
   (assert (= self__split_fields7 self__split_fields3))
-
-;; H
-  (assert (owned_state__function_guard
-  (owned_state
-  (mk___rep2 (mk___split_fields2 self__split_fields4 self__split_fields5)))
-  (mk___rep2 (mk___split_fields2 self__split_fields4 self__split_fields5))))
 
 (assert
 ;; WP_parameter_def

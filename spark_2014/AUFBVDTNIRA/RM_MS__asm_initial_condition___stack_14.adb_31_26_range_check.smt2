@@ -110,12 +110,12 @@
 (define-fun pointer_range__ref___projection ((a pointer_range__ref)) pointer_range 
   (pointer_range__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_146 Int)
-  (temp___is_init_143 Bool) (temp___skip_constant_144 Bool)
-  (temp___do_toplevel_145 Bool)) Bool (=>
-                                      (or (= temp___is_init_143 true)
+(define-fun dynamic_invariant1 ((temp___expr_141 Int)
+  (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
+  (temp___do_toplevel_140 Bool)) Bool (=>
+                                      (or (= temp___is_init_138 true)
                                       (<= 0 1024)) (in_range1
-                                      temp___expr_146)))
+                                      temp___expr_141)))
 
 ;; is_full__post_axiom
   (assert true)
@@ -123,9 +123,7 @@
 ;; is_full__def_axiom
   (assert
   (forall ((stack_14__pointer Int))
-  (! (=> (is_full__function_guard (is_full stack_14__pointer)
-     stack_14__pointer)
-     (= (= (is_full stack_14__pointer) true) (= stack_14__pointer 1024))) :pattern (
+  (! (= (= (is_full stack_14__pointer) true) (= stack_14__pointer 1024)) :pattern (
   (is_full stack_14__pointer)) )))
 
 (declare-datatypes ()
@@ -252,25 +250,17 @@
   (assert
   (forall ((stack_14__pointer Int))
   (forall ((stack_14__s (Array Int integer)))
-  (! (and (is_empty__function_guard (is_empty stack_14__pointer)
-     stack_14__pointer)
-     (=>
+  (! (=>
      (and (dynamic_invariant1 stack_14__pointer true true true)
-     (not (= (is_empty stack_14__pointer) true)))
-     (let ((result (top stack_14__pointer stack_14__s)))
-     (=> (top__function_guard result stack_14__pointer stack_14__s)
-     (dynamic_invariant result true false true))))) :pattern ((top
-                                                              stack_14__pointer
-                                                              stack_14__s)) ))))
+     (not (= (is_empty stack_14__pointer) true))) (dynamic_invariant
+     (top stack_14__pointer stack_14__s) true false true)) :pattern (
+  (top stack_14__pointer stack_14__s)) ))))
 
 ;; top__def_axiom
   (assert
   (forall ((stack_14__pointer Int))
   (forall ((stack_14__s (Array Int integer)))
-  (! (=>
-     (and (dynamic_invariant1 stack_14__pointer true true true)
-     (top__function_guard (top stack_14__pointer stack_14__s)
-     stack_14__pointer stack_14__s))
+  (! (=> (dynamic_invariant1 stack_14__pointer true true true)
      (= (top stack_14__pointer stack_14__s) (to_rep
                                             (select stack_14__s stack_14__pointer)))) :pattern (
   (top stack_14__pointer stack_14__s)) ))))
@@ -300,12 +290,12 @@
 (define-fun index_range__ref___projection ((a index_range__ref)) index_range 
   (index_range__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_152 Int)
-  (temp___is_init_149 Bool) (temp___skip_constant_150 Bool)
-  (temp___do_toplevel_151 Bool)) Bool (=>
-                                      (or (= temp___is_init_149 true)
+(define-fun dynamic_invariant2 ((temp___expr_147 Int)
+  (temp___is_init_144 Bool) (temp___skip_constant_145 Bool)
+  (temp___do_toplevel_146 Bool)) Bool (=>
+                                      (or (= temp___is_init_144 true)
                                       (<= 1 1024)) (in_range2
-                                      temp___expr_152)))
+                                      temp___expr_147)))
 
 ;; is_empty__post_axiom
   (assert true)
@@ -313,9 +303,7 @@
 ;; is_empty__def_axiom
   (assert
   (forall ((stack_14__pointer Int))
-  (! (=> (is_empty__function_guard (is_empty stack_14__pointer)
-     stack_14__pointer)
-     (= (= (is_empty stack_14__pointer) true) (= stack_14__pointer 0))) :pattern (
+  (! (= (= (is_empty stack_14__pointer) true) (= stack_14__pointer 0)) :pattern (
   (is_empty stack_14__pointer)) )))
 
 (declare-fun pointer () Int)
@@ -325,9 +313,6 @@
 
 ;; H
   (assert (in_range x))
-
-;; H
-  (assert (is_full__function_guard (is_full pointer) pointer))
 
 ;; H
   (assert (not (= (is_full pointer) true)))

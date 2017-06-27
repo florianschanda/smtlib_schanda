@@ -174,28 +174,6 @@
   (! (=> (in_range1 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
 
-(declare-sort teven_pairD1 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq2 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
-
-(declare-fun user_eq2 (teven_pairD1 teven_pairD1) Bool)
-
-(declare-fun dummy2 () teven_pairD1)
-
-(declare-datatypes ()
-((teven_pairD1__ref
- (mk_teven_pairD1__ref (teven_pairD1__content teven_pairD1)))))
-(define-fun teven_pairD1__ref___projection ((a teven_pairD1__ref)) teven_pairD1 
-  (teven_pairD1__content a))
-
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int even))))))
 (declare-fun slide ((Array Int even) Int Int) (Array Int even))
@@ -238,7 +216,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq3 ((a (Array Int even)) (a__first Int) (a__last Int)
+(define-fun bool_eq2 ((a (Array Int even)) (a__first Int) (a__last Int)
   (b (Array Int even)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -257,7 +235,7 @@
   (assert
   (forall ((a (Array Int even)) (b (Array Int even)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq3 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq2 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -274,7 +252,7 @@
   (forall ((a (Array Int even)) (b (Array Int even)))
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq3 a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq2 a a_first a_last b b_first b_last) true)) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -285,7 +263,7 @@
      (exists ((i Int) (j Int))
      (and (<= i a_last)
      (and (< j b_last)
-     (and (= (bool_eq3 a a_first i b b_first j) true)
+     (and (= (bool_eq2 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
      (< (to_rep (select a (+ i 1))) (to_rep (select b (+ j 1))))))))))) :pattern (
@@ -299,11 +277,33 @@
      (exists ((i Int) (j Int))
      (and (<= i b_last)
      (and (< j a_last)
-     (and (= (bool_eq3 a a_first j b b_first i) true)
+     (and (= (bool_eq2 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
      (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
+
+(declare-sort teven_pairD1 0)
+
+(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
+
+(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
+
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
+
+(declare-fun user_eq2 (teven_pairD1 teven_pairD1) Bool)
+
+(declare-fun dummy2 () teven_pairD1)
+
+(declare-datatypes ()
+((teven_pairD1__ref
+ (mk_teven_pairD1__ref (teven_pairD1__content teven_pairD1)))))
+(define-fun teven_pairD1__ref___projection ((a teven_pairD1__ref)) teven_pairD1 
+  (teven_pairD1__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_146 (Array Int even))
   (temp___is_init_143 Bool) (temp___skip_constant_144 Bool)
@@ -346,11 +346,10 @@
   (assert
   (forall ((us_void_param tuple0))
   (! (let ((result (get_constant_even_pair us_void_param)))
-     (=> (get_constant_even_pair__function_guard result us_void_param)
      (and
      (and (= (to_rep (select result 1)) 0) (= (to_rep (select result 2)) 0))
-     (dynamic_invariant1 result true false true)))) :pattern ((get_constant_even_pair
-                                                              us_void_param)) )))
+     (dynamic_invariant1 result true false true))) :pattern ((get_constant_even_pair
+                                                             us_void_param)) )))
 
 (declare-fun above () Int)
 
@@ -410,9 +409,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o (get_constant_even_pair Tuple0))
-  (get_constant_even_pair__function_guard o Tuple0))
   (and (dynamic_invariant1 o true false true)
   (and (= (to_rep (select o 1)) 0) (= (to_rep (select o 2)) 0)))))
 

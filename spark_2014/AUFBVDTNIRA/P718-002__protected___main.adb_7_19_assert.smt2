@@ -118,10 +118,8 @@
 
 ;; f__post_axiom
   (assert
-  (forall ((self__ obj))
-  (! (let ((result (f self__)))
-     (=> (f__function_guard result self__) (dynamic_invariant result true
-     false true))) :pattern ((f self__)) )))
+  (forall ((self__ obj)) (! (dynamic_invariant (f self__) true false
+  true) :pattern ((f self__)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -163,7 +161,7 @@
   (assert (= o p))
 
 ;; H
-  (assert (and (and (= o1 (f o)) (f__function_guard o1 o)) (in_range o1)))
+  (assert (and (= o1 (f o)) (in_range o1)))
 
 ;; H
   (assert (= result x))
@@ -178,7 +176,7 @@
   (assert (= o2 p1))
 
 ;; H
-  (assert (and (and (= o3 (f o2)) (f__function_guard o3 o2)) (in_range o3)))
+  (assert (and (= o3 (f o2)) (in_range o3)))
 
 ;; H
   (assert (= result1 y))

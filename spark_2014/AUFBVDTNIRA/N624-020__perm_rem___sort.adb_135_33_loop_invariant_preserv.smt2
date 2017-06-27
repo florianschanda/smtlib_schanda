@@ -405,15 +405,7 @@
 ;; is_perm__def_axiom
   (assert
   (forall ((a us_t) (b us_t))
-  (! (=> (is_perm__function_guard (is_perm a b) a b)
-     (and (forall ((ia Int)) (remove__function_guard (remove a ia) a ia))
-     (and (forall ((ib Int)) (remove__function_guard (remove b ib) b ib))
-     (and (forall ((ia Int)) (remove__function_guard (remove a ia) a ia))
-     (and (forall ((ib Int)) (remove__function_guard (remove b ib) b ib))
-     (and
-     (forall ((ia Int) (ib Int)) (is_perm__function_guard
-     (is_perm (remove a ia) (remove b ib)) (remove a ia) (remove b ib)))
-     (= (= (is_perm a b) true)
+  (! (= (= (is_perm a b) true)
      (or (and (= (length a) 0) (= (length b) 0))
      (exists ((ia Int))
      (and (and (<= (first1 a) ia) (<= ia (last1 a)))
@@ -421,7 +413,7 @@
      (and (and (<= (first1 b) ib) (<= ib (last1 b)))
      (and
      (= (to_rep1 (select (to_array a) ia)) (to_rep1 (select (to_array b) ib)))
-     (= (is_perm (remove a ia) (remove b ib)) true)))))))))))))) :pattern (
+     (= (is_perm (remove a ia) (remove b ib)) true)))))))) :pattern (
   (is_perm a b)) )))
 
 (define-fun dynamic_invariant2 ((temp___expr_148 us_t)
@@ -439,9 +431,7 @@
 ;; perm_reflexive__post_axiom
   (assert
   (forall ((a us_t) (b us_t))
-  (! (and (invariant____function_guard (invariant__ a) a)
-     (and (invariant____function_guard (invariant__ b) b)
-     (=>
+  (! (=>
      (and
      (and (dynamic_invariant2 a true true true) (dynamic_invariant2 b true
      true true))
@@ -450,11 +440,9 @@
      (= (bool_eq5 (to_array a) (first1 a) (last1 a) (to_array b) (first1 b)
         (last1 b)) true))))
      (let ((result (perm_reflexive a b)))
-     (and (is_perm__function_guard (is_perm a b) a b)
-     (=> (perm_reflexive__function_guard result a b)
      (and (=> (= (of_int result) true) (= (is_perm a b) true))
-     (dynamic_invariant1 result true false true)))))))) :pattern ((perm_reflexive
-                                                                  a b)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((perm_reflexive
+                                                              a b)) )))
 
 (declare-fun perm_transitive (us_t us_t us_t) Int)
 
@@ -463,12 +451,7 @@
 ;; perm_transitive__post_axiom
   (assert
   (forall ((a us_t) (b us_t) (c us_t))
-  (! (and (invariant____function_guard (invariant__ a) a)
-     (and (invariant____function_guard (invariant__ b) b)
-     (and (invariant____function_guard (invariant__ c) c)
-     (and (is_perm__function_guard (is_perm a b) a b)
-     (and (is_perm__function_guard (is_perm b c) b c)
-     (=>
+  (! (=>
      (and
      (and
      (and (dynamic_invariant2 a true true true) (dynamic_invariant2 b true
@@ -478,11 +461,9 @@
      (and (= (invariant__ c) true)
      (and (= (is_perm a b) true) (= (is_perm b c) true))))))
      (let ((result (perm_transitive a b c)))
-     (and (is_perm__function_guard (is_perm a c) a c)
-     (=> (perm_transitive__function_guard result a b c)
      (and (=> (= (of_int result) true) (= (is_perm a c) true))
-     (dynamic_invariant1 result true false true))))))))))) :pattern (
-  (perm_transitive a b c)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((perm_transitive
+                                                              a b c)) )))
 
 (declare-sort tarray_typeP1 0)
 
@@ -532,10 +513,9 @@
      (and (and (<= 1 first2) (<= first2 100))
      (and (<= 1 last2) (<= last2 100)))))
      (let ((result (index_of_minimum values first2 last2)))
-     (=> (index_of_minimum__function_guard result values first2 last2)
      (and (and (<= first2 result) (<= result last2)) (dynamic_invariant
-     result true false true))))) :pattern ((index_of_minimum values first2
-                                           last2)) ))))
+     result true false true)))) :pattern ((index_of_minimum values first2
+                                          last2)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -588,23 +568,19 @@
 ;; invariant____def_axiom
   (assert
   (forall ((a us_t))
-  (! (=> (invariant____function_guard (invariant__ a) a)
-     (= (= (invariant__ a) true) (and (= (first1 a) 1) (<= 0 (last1 a))))) :pattern (
+  (! (= (= (invariant__ a) true) (and (= (first1 a) 1) (<= 0 (last1 a)))) :pattern (
   (invariant__ a)) )))
 
 ;; remove__post_axiom
   (assert
   (forall ((a us_t))
   (forall ((i Int))
-  (! (and (invariant____function_guard (invariant__ a) a)
-     (=>
+  (! (=>
      (and
      (and (dynamic_invariant2 a true true true) (dynamic_invariant3 i true
      true true))
      (and (= (invariant__ a) true) (and (<= (first1 a) i) (<= i (last1 a)))))
      (let ((result (remove a i)))
-     (and (invariant____function_guard (invariant__ result) result)
-     (=> (remove__function_guard result a i)
      (and
      (and (= (invariant__ result) true)
      (and (= (last1 result) (- (last1 a) 1))
@@ -622,7 +598,7 @@
      (=> (and (<= i k) (<= k (- (last1 a) 1)))
      (= (to_rep1 (select (to_array a) (+ k 1))) (to_rep1
                                                 (select (to_array result) k)))))))))
-     (dynamic_invariant2 result true false true))))))) :pattern ((remove a i)) ))))
+     (dynamic_invariant2 result true false true)))) :pattern ((remove a i)) ))))
 
 (declare-fun values () (Array Int natural))
 
@@ -716,17 +692,9 @@
   (assert (=> (<= 1 1) (in_range2 hr)))
 
 ;; H
-  (assert (is_perm__function_guard
-  (is_perm (mk___t values (mk 1 100)) (mk___t values (mk 1 100)))
-  (mk___t values (mk 1 100)) (mk___t values (mk 1 100))))
-
-;; H
   (assert
   (and
-  (and
   (= o (perm_reflexive (mk___t values (mk 1 100)) (mk___t values (mk 1 100))))
-  (perm_reflexive__function_guard o (mk___t values (mk 1 100))
-  (mk___t values (mk 1 100))))
   (and (in_range2 o)
   (=> (= (of_int o) true)
   (= (is_perm (mk___t values (mk 1 100)) (mk___t values (mk 1 100))) true)))))
@@ -751,9 +719,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o1 (index_of_minimum values current1 100))
-  (index_of_minimum__function_guard o1 values current1 100))
   (and (in_range1 o1) (and (<= current1 o1) (<= o1 100)))))
 
 ;; H
@@ -761,16 +727,6 @@
 
 ;; H
   (assert (= smallest1 o1))
-
-;; H
-  (assert (is_perm__function_guard
-  (is_perm (mk___t values (mk 1 100)) (mk___t values2 (mk 1 100)))
-  (mk___t values (mk 1 100)) (mk___t values2 (mk 1 100))))
-
-;; H
-  (assert (is_perm__function_guard
-  (is_perm (mk___t init (mk 1 100)) (mk___t values2 (mk 1 100)))
-  (mk___t init (mk 1 100)) (mk___t values2 (mk 1 100))))
 
 ;; H
   (assert (=> (not (= smallest1 current1)) (= prec1 result4)))
@@ -787,11 +743,8 @@
   (assert
   (=> (not (= smallest1 current1))
   (and
-  (and
   (= o2 (perm_transitive (mk___t init (mk 1 100)) (mk___t prec2 (mk 1 100))
         (mk___t values2 (mk 1 100))))
-  (perm_transitive__function_guard o2 (mk___t init (mk 1 100))
-  (mk___t prec2 (mk 1 100)) (mk___t values2 (mk 1 100))))
   (and (in_range2 o2)
   (=> (= (of_int o2) true)
   (= (is_perm (mk___t init (mk 1 100)) (mk___t values2 (mk 1 100))) true))))))
@@ -821,23 +774,8 @@
   (assert (=> (not (not (= smallest1 current1))) (= values2 values1)))
 
 ;; H
-  (assert (is_perm__function_guard
-  (is_perm (mk___t values (mk 1 100)) (mk___t values3 (mk 1 100)))
-  (mk___t values (mk 1 100)) (mk___t values3 (mk 1 100))))
-
-;; H
   (assert
   (= (is_perm (mk___t values (mk 1 100)) (mk___t values3 (mk 1 100))) true))
-
-;; H
-  (assert (is_perm__function_guard
-  (is_perm (mk___t values3 (mk 1 100)) (mk___t values4 (mk 1 100)))
-  (mk___t values3 (mk 1 100)) (mk___t values4 (mk 1 100))))
-
-;; H
-  (assert (is_perm__function_guard
-  (is_perm (mk___t init (mk 1 100)) (mk___t values4 (mk 1 100)))
-  (mk___t init (mk 1 100)) (mk___t values4 (mk 1 100))))
 
 ;; H
   (assert
@@ -859,9 +797,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o3 (index_of_minimum values3 current3 100))
-  (index_of_minimum__function_guard o3 values3 current3 100))
   (and (in_range1 o3) (and (<= current3 o3) (<= o3 100)))))
 
 ;; H
@@ -885,11 +821,8 @@
   (assert
   (=> (not (= smallest3 current3))
   (and
-  (and
   (= o4 (perm_transitive (mk___t init (mk 1 100)) (mk___t prec4 (mk 1 100))
         (mk___t values4 (mk 1 100))))
-  (perm_transitive__function_guard o4 (mk___t init (mk 1 100))
-  (mk___t prec4 (mk 1 100)) (mk___t values4 (mk 1 100))))
   (and (in_range2 o4)
   (=> (= (of_int o4) true)
   (= (is_perm (mk___t init (mk 1 100)) (mk___t values4 (mk 1 100))) true))))))
@@ -908,11 +841,6 @@
 
 ;; H
   (assert (=> (not (not (= smallest3 current3))) (= values4 values3)))
-
-;; H
-  (assert (is_perm__function_guard
-  (is_perm (mk___t values (mk 1 100)) (mk___t values4 (mk 1 100)))
-  (mk___t values (mk 1 100)) (mk___t values4 (mk 1 100))))
 
 (assert
 ;; WP_parameter_def

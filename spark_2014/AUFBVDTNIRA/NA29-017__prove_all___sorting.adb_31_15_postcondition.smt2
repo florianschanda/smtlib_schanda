@@ -334,8 +334,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -367,13 +365,13 @@
 
 (declare-fun i () Int)
 
-(declare-fun temp___267 () (Array Int integer))
+(declare-fun temp___245 () (Array Int integer))
 
-(declare-fun temp___265 () Int)
+(declare-fun temp___243 () Int)
 
-(declare-fun temp___262 () (Array Int integer))
+(declare-fun temp___240 () (Array Int integer))
 
-(declare-fun temp___270 () (Array Int integer))
+(declare-fun temp___248 () (Array Int integer))
 
 (declare-fun b1 () (Array Int integer))
 
@@ -446,16 +444,16 @@
   (assert (= i1 0))
 
 ;; H
-  (assert (=> (and (<= 0 i1) (<= i1 (- length1 1))) (= temp___267 b)))
+  (assert (=> (and (<= 0 i1) (<= i1 (- length1 1))) (= temp___245 b)))
 
 ;; H
-  (assert (=> (and (<= 0 i1) (<= i1 (- length1 1))) (= temp___265 i1)))
+  (assert (=> (and (<= 0 i1) (<= i1 (- length1 1))) (= temp___243 i1)))
 
 ;; H
-  (assert (=> (and (<= 0 i1) (<= i1 (- length1 1))) (= temp___262 b)))
+  (assert (=> (and (<= 0 i1) (<= i1 (- length1 1))) (= temp___240 b)))
 
 ;; H
-  (assert (=> (and (<= 0 i1) (<= i1 (- length1 1))) (= temp___270 b)))
+  (assert (=> (and (<= 0 i1) (<= i1 (- length1 1))) (= temp___248 b)))
 
 ;; H
   (assert
@@ -467,7 +465,7 @@
   (= (to_rep (select b2 j)) (to_rep
                             (select (elts a) (- (+ a_first j) b_first)))))
   (=> (=> (<= b_first j) (not (<= j (- (+ b_first i2) 1))))
-  (= (to_rep (select b2 j)) (to_rep (select temp___270 j)))))))))
+  (= (to_rep (select b2 j)) (to_rep (select temp___248 j)))))))))
 
 ;; H
   (assert
@@ -485,7 +483,7 @@
   (= (to_rep (select b3 j)) (to_rep
                             (select (elts a) (- (+ a_first j) b_first)))))
   (=> (=> (<= b_first j) (not (<= j (- (+ b_first (+ i2 1)) 1))))
-  (= (to_rep (select b3 j)) (to_rep (select temp___262 j)))))))))
+  (= (to_rep (select b3 j)) (to_rep (select temp___240 j)))))))))
 
 ;; H
   (assert

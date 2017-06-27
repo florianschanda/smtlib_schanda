@@ -68,11 +68,11 @@
 (define-fun true_bool__ref___projection ((a true_bool__ref)) true_bool 
   (true_bool__content a))
 
-(define-fun dynamic_invariant ((temp___expr_166 Int)
-  (temp___is_init_163 Bool) (temp___skip_constant_164 Bool)
-  (temp___do_toplevel_165 Bool)) Bool (=>
-                                      (or (= temp___is_init_163 true)
-                                      (<= 1 1)) (in_range1 temp___expr_166)))
+(define-fun dynamic_invariant ((temp___expr_136 Int)
+  (temp___is_init_133 Bool) (temp___skip_constant_134 Bool)
+  (temp___do_toplevel_135 Bool)) Bool (=>
+                                      (or (= temp___is_init_133 true)
+                                      (<= 1 1)) (in_range1 temp___expr_136)))
 
 (declare-sort index 0)
 
@@ -381,13 +381,13 @@
 (define-fun nat_array__ref___projection ((a nat_array__ref)) us_t (nat_array__content
                                                                   a))
 
-(define-fun dynamic_invariant1 ((temp___expr_178 us_t)
-  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
-  (temp___do_toplevel_177 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_176 true))
+(define-fun dynamic_invariant1 ((temp___expr_148 us_t)
+  (temp___is_init_145 Bool) (temp___skip_constant_146 Bool)
+  (temp___do_toplevel_147 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_146 true))
                                       (dynamic_property 1 100
-                                      (first1 temp___expr_178)
-                                      (last1 temp___expr_178))))
+                                      (first1 temp___expr_148)
+                                      (last1 temp___expr_148))))
 
 (declare-fun invariant__ (us_t) Bool)
 
@@ -399,16 +399,15 @@
 ;; invariant____def_axiom
   (assert
   (forall ((a us_t))
-  (! (=> (invariant____function_guard (invariant__ a) a)
-     (= (= (invariant__ a) true) (and (= (first1 a) 1) (<= 0 (last1 a))))) :pattern (
+  (! (= (= (invariant__ a) true) (and (= (first1 a) 1) (<= 0 (last1 a)))) :pattern (
   (invariant__ a)) )))
 
-(define-fun dynamic_invariant2 ((temp___expr_172 Int)
-  (temp___is_init_169 Bool) (temp___skip_constant_170 Bool)
-  (temp___do_toplevel_171 Bool)) Bool (=>
-                                      (or (= temp___is_init_169 true)
+(define-fun dynamic_invariant2 ((temp___expr_142 Int)
+  (temp___is_init_139 Bool) (temp___skip_constant_140 Bool)
+  (temp___do_toplevel_141 Bool)) Bool (=>
+                                      (or (= temp___is_init_139 true)
                                       (<= 1 100)) (in_range2
-                                      temp___expr_172)))
+                                      temp___expr_142)))
 
 (declare-fun remove (us_t Int) us_t)
 
@@ -418,15 +417,12 @@
   (assert
   (forall ((a us_t))
   (forall ((i Int))
-  (! (and (invariant____function_guard (invariant__ a) a)
-     (=>
+  (! (=>
      (and
      (and (dynamic_invariant1 a true true true) (dynamic_invariant2 i true
      true true))
      (and (= (invariant__ a) true) (and (<= (first1 a) i) (<= i (last1 a)))))
      (let ((result (remove a i)))
-     (and (invariant____function_guard (invariant__ result) result)
-     (=> (remove__function_guard result a i)
      (and
      (and (= (invariant__ result) true)
      (and (= (last1 result) (- (last1 a) 1))
@@ -444,7 +440,7 @@
      (=> (and (<= i k) (<= k (- (last1 a) 1)))
      (= (to_rep1 (select (to_array a) (+ k 1))) (to_rep1
                                                 (select (to_array result) k)))))))))
-     (dynamic_invariant1 result true false true))))))) :pattern ((remove a i)) ))))
+     (dynamic_invariant1 result true false true)))) :pattern ((remove a i)) ))))
 
 (declare-fun is_perm (us_t us_t) Bool)
 
@@ -453,15 +449,7 @@
 ;; is_perm__def_axiom
   (assert
   (forall ((a us_t) (b us_t))
-  (! (=> (is_perm__function_guard (is_perm a b) a b)
-     (and (forall ((ia Int)) (remove__function_guard (remove a ia) a ia))
-     (and (forall ((ib Int)) (remove__function_guard (remove b ib) b ib))
-     (and (forall ((ia Int)) (remove__function_guard (remove a ia) a ia))
-     (and (forall ((ib Int)) (remove__function_guard (remove b ib) b ib))
-     (and
-     (forall ((ia Int) (ib Int)) (is_perm__function_guard
-     (is_perm (remove a ia) (remove b ib)) (remove a ia) (remove b ib)))
-     (= (= (is_perm a b) true)
+  (! (= (= (is_perm a b) true)
      (or (and (= (length a) 0) (= (length b) 0))
      (exists ((ia Int))
      (and (and (<= (first1 a) ia) (<= ia (last1 a)))
@@ -469,7 +457,7 @@
      (and (and (<= (first1 b) ib) (<= ib (last1 b)))
      (and
      (= (to_rep1 (select (to_array a) ia)) (to_rep1 (select (to_array b) ib)))
-     (= (is_perm (remove a ia) (remove b ib)) true)))))))))))))) :pattern (
+     (= (is_perm (remove a ia) (remove b ib)) true)))))))) :pattern (
   (is_perm a b)) )))
 
 (declare-datatypes ()
@@ -571,10 +559,7 @@
 ;; get_witnesses__post_axiom
   (assert
   (forall ((a us_t) (b us_t))
-  (! (and (invariant____function_guard (invariant__ a) a)
-     (and (invariant____function_guard (invariant__ b) b)
-     (and (is_perm__function_guard (is_perm a b) a b)
-     (=>
+  (! (=>
      (and
      (and (dynamic_invariant1 a true true true) (dynamic_invariant1 b true
      true true))
@@ -582,25 +567,6 @@
      (and (= (invariant__ b) true)
      (and (= (is_perm a b) true) (< 0 (length a))))))
      (let ((result (get_witnesses a b)))
-     (and (remove__function_guard
-     (remove a (to_rep (rec__perm__witnesses__ia (us_split_fields1 result))))
-     a (to_rep (rec__perm__witnesses__ia (us_split_fields1 result))))
-     (and (remove__function_guard
-     (remove b (to_rep (rec__perm__witnesses__ib (us_split_fields1 result))))
-     b (to_rep (rec__perm__witnesses__ib (us_split_fields1 result))))
-     (and (remove__function_guard
-     (remove a (to_rep (rec__perm__witnesses__ia (us_split_fields1 result))))
-     a (to_rep (rec__perm__witnesses__ia (us_split_fields1 result))))
-     (and (remove__function_guard
-     (remove b (to_rep (rec__perm__witnesses__ib (us_split_fields1 result))))
-     b (to_rep (rec__perm__witnesses__ib (us_split_fields1 result))))
-     (and (is_perm__function_guard
-     (is_perm
-     (remove a (to_rep (rec__perm__witnesses__ia (us_split_fields1 result))))
-     (remove b (to_rep (rec__perm__witnesses__ib (us_split_fields1 result)))))
-     (remove a (to_rep (rec__perm__witnesses__ia (us_split_fields1 result))))
-     (remove b (to_rep (rec__perm__witnesses__ib (us_split_fields1 result)))))
-     (=> (get_witnesses__function_guard result a b)
      (and
      (and
      (<= (first1 a) (to_rep
@@ -628,7 +594,7 @@
         (remove a
         (to_rep (rec__perm__witnesses__ia (us_split_fields1 result))))
         (remove b
-        (to_rep (rec__perm__witnesses__ib (us_split_fields1 result))))) true))))))))))))))) :pattern (
+        (to_rep (rec__perm__witnesses__ib (us_split_fields1 result))))) true)))))) :pattern (
   (get_witnesses a b)) )))
 
 (declare-fun a () us_t)
@@ -670,42 +636,14 @@
                                      (in_range4 temp___expr_15)))
 
 ;; w__def_axiom
-  (assert
-  (and (get_witnesses__function_guard (get_witnesses a b) a b)
-  (= w (get_witnesses a b))))
+  (assert (= w (get_witnesses a b)))
 
 ;; ih__def_axiom
   (assert
-  (and (remove__function_guard
-  (remove a (to_rep (rec__perm__witnesses__ia (us_split_fields1 w)))) 
-  a (to_rep (rec__perm__witnesses__ia (us_split_fields1 w))))
-  (and (remove__function_guard
-  (remove b (to_rep (rec__perm__witnesses__ib (us_split_fields1 w)))) 
-  b (to_rep (rec__perm__witnesses__ib (us_split_fields1 w))))
-  (and (remove__function_guard
-  (remove c (to_rep (rec__perm__witnesses__ia (us_split_fields1 w)))) 
-  c (to_rep (rec__perm__witnesses__ia (us_split_fields1 w))))
-  (and (remove__function_guard
-  (remove a (to_rep (rec__perm__witnesses__ia (us_split_fields1 w)))) 
-  a (to_rep (rec__perm__witnesses__ia (us_split_fields1 w))))
-  (and (remove__function_guard
-  (remove b (to_rep (rec__perm__witnesses__ib (us_split_fields1 w)))) 
-  b (to_rep (rec__perm__witnesses__ib (us_split_fields1 w))))
-  (and (remove__function_guard
-  (remove c (to_rep (rec__perm__witnesses__ia (us_split_fields1 w)))) 
-  c (to_rep (rec__perm__witnesses__ia (us_split_fields1 w))))
-  (and (induction_hypothesis__function_guard
-  (induction_hypothesis
-  (remove a (to_rep (rec__perm__witnesses__ia (us_split_fields1 w))))
-  (remove b (to_rep (rec__perm__witnesses__ib (us_split_fields1 w))))
-  (remove c (to_rep (rec__perm__witnesses__ia (us_split_fields1 w)))))
-  (remove a (to_rep (rec__perm__witnesses__ia (us_split_fields1 w))))
-  (remove b (to_rep (rec__perm__witnesses__ib (us_split_fields1 w))))
-  (remove c (to_rep (rec__perm__witnesses__ia (us_split_fields1 w)))))
   (= ih (induction_hypothesis
         (remove a (to_rep (rec__perm__witnesses__ia (us_split_fields1 w))))
         (remove b (to_rep (rec__perm__witnesses__ib (us_split_fields1 w))))
-        (remove c (to_rep (rec__perm__witnesses__ia (us_split_fields1 w))))))))))))))
+        (remove c (to_rep (rec__perm__witnesses__ia (us_split_fields1 w)))))))
 
 (declare-fun perm__shift_perm_l__induction_hypothesis__result () Int)
 
@@ -766,114 +704,6 @@
 (declare-fun result2 () Int)
 
 ;; H
-  (assert (invariant____function_guard (invariant__ a) a))
-
-;; H
-  (assert (invariant____function_guard (invariant__ b) b))
-
-;; H
-  (assert (invariant____function_guard (invariant__ c) c))
-
-;; H
-  (assert (is_perm__function_guard (is_perm a b) a b))
-
-;; H
-  (assert (remove__function_guard
-  (remove a
-  (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume)) 
-  a (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume)))
-
-;; H
-  (assert (remove__function_guard
-  (remove b
-  (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume1)) 
-  b (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume1)))
-
-;; H
-  (assert (remove__function_guard
-  (remove a
-  (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume)) 
-  a (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume)))
-
-;; H
-  (assert (remove__function_guard
-  (remove b
-  (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume1)) 
-  b (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume1)))
-
-;; H
-  (assert (is_perm__function_guard
-  (is_perm
-  (remove a
-  (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume))
-  (remove b
-  (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume1)))
-  (remove a
-  (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume))
-  (remove b
-  (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume1))))
-
-;; H
-  (assert (invariant____function_guard (invariant__ o6) o6))
-
-;; H
-  (assert (invariant____function_guard (invariant__ o7) o7))
-
-;; H
-  (assert (invariant____function_guard (invariant__ o8) o8))
-
-;; H
-  (assert (is_perm__function_guard (is_perm o6 o7) o6 o7))
-
-;; H
-  (assert (remove__function_guard
-  (remove a
-  (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume)) 
-  a (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume)))
-
-;; H
-  (assert (remove__function_guard
-  (remove b
-  (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume1)) 
-  b (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume1)))
-
-;; H
-  (assert (remove__function_guard
-  (remove a
-  (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume)) 
-  a (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume)))
-
-;; H
-  (assert (remove__function_guard
-  (remove b
-  (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume1)) 
-  b (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume1)))
-
-;; H
-  (assert (is_perm__function_guard
-  (is_perm
-  (remove a
-  (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume))
-  (remove b
-  (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume1)))
-  (remove a
-  (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume))
-  (remove b
-  (to_rep perm__shift_perm_l__induction_hypothesis__B_5__w__assume1))))
-
-;; H
-  (assert (invariant____function_guard (invariant__ o6) o6))
-
-;; H
-  (assert (invariant____function_guard (invariant__ o7) o7))
-
-;; H
-  (assert (invariant____function_guard (invariant__ o8) o8))
-
-;; H
-  (assert (is_perm__function_guard (is_perm o6 o7) o6 o7))
-
-;; H
   (assert (dynamic_invariant1 a true false true))
 
 ;; H
@@ -921,11 +751,8 @@
   (and
   (and
   (and
-  (and
   (= perm__shift_perm_l__induction_hypothesis__B_5__w__assume2 (get_witnesses
                                                                a b))
-  (get_witnesses__function_guard
-  perm__shift_perm_l__induction_hypothesis__B_5__w__assume2 a b))
   (and
   (and
   (<= (to_rep2 (first (rt a))) (to_rep
@@ -955,10 +782,7 @@
   (and
   (and
   (and
-  (and
   (= o6 (remove c (to_rep (rec__perm__witnesses__ia (us_split_fields1 w)))))
-  (remove__function_guard o6 c
-  (to_rep (rec__perm__witnesses__ia (us_split_fields1 w)))))
   (and (dynamic_invariant1 o6 true false true)
   (and (= (invariant__ o6) true)
   (and (= (to_rep2 (last o5)) (- (to_rep2 (last (rt c))) 1))
@@ -981,10 +805,7 @@
   (= (to_rep1 (select (elts c) (+ k 1))) (to_rep1 (select o4 k)))))))))))
   (and
   (and
-  (and
   (= o7 (remove b (to_rep (rec__perm__witnesses__ib (us_split_fields1 w)))))
-  (remove__function_guard o7 b
-  (to_rep (rec__perm__witnesses__ib (us_split_fields1 w)))))
   (and (dynamic_invariant1 o7 true false true)
   (and (= (invariant__ o7) true)
   (and (= (to_rep2 (last o3)) (- (to_rep2 (last (rt b))) 1))
@@ -1007,10 +828,7 @@
   (= (to_rep1 (select (elts b) (+ k 1))) (to_rep1 (select o2 k)))))))))))
   (and
   (and
-  (and
   (= o8 (remove a (to_rep (rec__perm__witnesses__ia (us_split_fields1 w)))))
-  (remove__function_guard o8 a
-  (to_rep (rec__perm__witnesses__ia (us_split_fields1 w)))))
   (and (dynamic_invariant1 o8 true false true)
   (and (= (invariant__ o8) true)
   (and (= (to_rep2 (last o1)) (- (to_rep2 (last (rt a))) 1))
@@ -1032,12 +850,9 @@
   (<= k (- (to_rep2 (last (rt a))) 1)))
   (= (to_rep1 (select (elts a) (+ k 1))) (to_rep1 (select o k)))))))))))
   (and
-  (and
   (= perm__shift_perm_l__induction_hypothesis__B_5__ih__assume (induction_hypothesis
                                                                o8 o7 
                                                                o6))
-  (induction_hypothesis__function_guard
-  perm__shift_perm_l__induction_hypothesis__B_5__ih__assume o8 o7 o6))
   (and (in_range1 perm__shift_perm_l__induction_hypothesis__B_5__ih__assume)
   (=>
   (= (of_int perm__shift_perm_l__induction_hypothesis__B_5__ih__assume) true)
@@ -1063,9 +878,6 @@
 ;; H
   (assert
   (= (of_int perm__shift_perm_l__induction_hypothesis__result8) true))
-
-;; H
-  (assert (is_perm__function_guard (is_perm c b) c b))
 
 (assert
 ;; WP_parameter_def

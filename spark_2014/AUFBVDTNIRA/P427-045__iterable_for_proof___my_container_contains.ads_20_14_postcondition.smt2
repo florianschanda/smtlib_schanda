@@ -235,10 +235,9 @@
   (assert
   (forall ((c (Array Int natural)))
   (forall ((e Int))
-  (! (=> (mem__function_guard (mem c e) c e)
-     (= (= (mem c e) true)
+  (! (= (= (mem c e) true)
      (exists ((i Int))
-     (and (and (<= 1 i) (<= i 100)) (= (to_rep (select c i)) e))))) :pattern (
+     (and (and (<= 1 i) (<= i 100)) (= (to_rep (select c i)) e)))) :pattern (
   (mem c e)) ))))
 
 (declare-fun valid (Int) Bool)
@@ -250,9 +249,7 @@
 
 ;; valid__def_axiom
   (assert
-  (forall ((e Int))
-  (! (=> (valid__function_guard (valid e) e) (= (= (valid e) true) (< 0 e))) :pattern (
-  (valid e)) )))
+  (forall ((e Int)) (! (= (= (valid e) true) (< 0 e)) :pattern ((valid e)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -288,9 +285,9 @@
 
 (declare-fun i () Int)
 
-(declare-fun temp___186 () (Array Int natural))
+(declare-fun temp___175 () (Array Int natural))
 
-(declare-fun temp___185 () Int)
+(declare-fun temp___174 () Int)
 
 (declare-fun o () natural)
 
@@ -341,26 +338,16 @@
 (define-fun c11 () map__ref (mk_map__ref c))
 
 ;; H
-  (assert
-  (forall ((j Int)) (valid__function_guard (valid (to_rep (select c3 j)))
-  (to_rep (select c3 j)))))
-
-;; H
-  (assert
-  (forall ((j Int)) (valid__function_guard (valid (to_rep (select c3 j)))
-  (to_rep (select c3 j)))))
-
-;; H
   (assert (= (mk_int__ref result) (mk_int__ref i)))
 
 ;; H
   (assert (= i1 1))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 100)) (= temp___186 c)))
+  (assert (=> (and (<= 1 i1) (<= i1 100)) (= temp___175 c)))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 100)) (= temp___185 i1)))
+  (assert (=> (and (<= 1 i1) (<= i1 100)) (= temp___174 i1)))
 
 ;; H
   (assert
@@ -403,10 +390,10 @@
   (=> (and (<= 1 i1) (<= i1 100))
   (and
   (and (=> (<= 1 100) (in_range3 i2))
-  (forall ((temp___187 Int))
-  (=> (and (<= 1 temp___187) (<= temp___187 100))
-  (=> (< i2 temp___187)
-  (= (select c3 temp___187) (select temp___186 temp___187))))))
+  (forall ((temp___176 Int))
+  (=> (and (<= 1 temp___176) (<= temp___176 100))
+  (=> (< i2 temp___176)
+  (= (select c3 temp___176) (select temp___175 temp___176))))))
   (and (<= 1 i2) (<= i2 100)))))
 
 ;; H
@@ -463,16 +450,10 @@
 (declare-fun e () Int)
 
 ;; H
-  (assert (mem__function_guard (mem c8 e) c8 e))
-
-;; H
   (assert (in_range1 e))
 
 ;; H
   (assert (= (mem c8 e) true))
-
-;; H
-  (assert (valid__function_guard (valid e) e))
 
 (assert
 ;; WP_parameter_def

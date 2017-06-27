@@ -960,11 +960,6 @@
 
 ;; H
   (assert
-  (forall ((k Int)) (q__function_guard (q (get1 (model__ s) k))
-  (get1 (model__ s) k))))
-
-;; H
-  (assert
   (forall ((k Int))
   (=> (and (in_range2 k) (= (has_key (model__ s) k) true))
   (= (q (get1 (model__ s) k)) true))))
@@ -976,10 +971,6 @@
 
 ;; H
   (assert (<= i (length s)))
-
-;; H
-  (assert (q__function_guard (q (get1 (model__ s) (get (keys s) i)))
-  (get1 (model__ s) (get (keys s) i))))
 
 (assert
 ;; WP_parameter_def

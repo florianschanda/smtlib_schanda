@@ -594,13 +594,13 @@
 (define-fun big_int__ref___projection ((a big_int__ref)) us_t (big_int__content
                                                               a))
 
-(define-fun dynamic_invariant2 ((temp___expr_293 us_t)
-  (temp___is_init_290 Bool) (temp___skip_constant_291 Bool)
-  (temp___do_toplevel_292 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_291 true))
+(define-fun dynamic_invariant2 ((temp___expr_289 us_t)
+  (temp___is_init_286 Bool) (temp___skip_constant_287 Bool)
+  (temp___do_toplevel_288 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_287 true))
                                       (dynamic_property 0 2147483646
-                                      (first1 temp___expr_293)
-                                      (last1 temp___expr_293))))
+                                      (first1 temp___expr_289)
+                                      (last1 temp___expr_289))))
 
 (declare-fun a () us_t)
 
@@ -621,12 +621,12 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(define-fun dynamic_invariant4 ((temp___expr_287 Int)
-  (temp___is_init_284 Bool) (temp___skip_constant_285 Bool)
-  (temp___do_toplevel_286 Bool)) Bool (=>
-                                      (or (= temp___is_init_284 true)
+(define-fun dynamic_invariant4 ((temp___expr_283 Int)
+  (temp___is_init_280 Bool) (temp___skip_constant_281 Bool)
+  (temp___do_toplevel_282 Bool)) Bool (=>
+                                      (or (= temp___is_init_280 true)
                                       (<= 0 2147483646)) (in_range3
-                                      temp___expr_287)))
+                                      temp___expr_283)))
 
 (define-fun dynamic_invariant5 ((temp___expr_217 (_ BitVec 32))
   (temp___is_init_214 Bool) (temp___skip_constant_215 Bool)

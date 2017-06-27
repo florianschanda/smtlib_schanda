@@ -409,9 +409,12 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(declare-sort t12b 0)
+(declare-fun r14b () Int)
 
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 1024)))
+(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+
+(define-fun dynamic_property1 ((first_int Int) (last_int Int)
+  (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
 (define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -421,33 +424,9 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
 
-(declare-fun user_eq6 (t12b t12b) Bool)
+(declare-fun user_eq6 (integer integer) Bool)
 
-(declare-fun dummy6 () t12b)
-
-(declare-datatypes () ((t12b__ref (mk_t12b__ref (t12b__content t12b)))))
-(define-fun t12b__ref___projection ((a t12b__ref)) t12b (t12b__content a))
-
-(declare-fun r14b () Int)
-
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
-
-(declare-fun last2 () Int)
-
-(define-fun dynamic_property1 ((first_int Int) (last_int Int)
-  (x Int)) Bool (and (<= first_int x) (<= x last_int)))
-
-(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
-
-(declare-fun user_eq7 (integer integer) Bool)
-
-(declare-fun dummy7 () integer)
+(declare-fun dummy6 () integer)
 
 (declare-datatypes () ((t15b__ref (mk_t15b__ref (t15b__content integer)))))
 (define-fun t15b__ref___projection ((a t15b__ref)) integer (t15b__content a))
@@ -493,8 +472,6 @@
 
 (declare-fun characters_to_copy () Int)
 
-(declare-fun o () (Array Int character))
-
 (declare-fun result () Int)
 
 (declare-fun characters_to_copy1 () Int)
@@ -516,13 +493,10 @@
   (assert (in_range4 characters_to_copy1))
 
 ;; H
-  (assert (= o (temp___253 32)))
-
-;; H
   (assert (= result1 buffer))
 
 ;; H
-  (assert (= buffer1 o))
+  (assert (= buffer1 (temp___253 32)))
 
 (assert
 ;; WP_parameter_def

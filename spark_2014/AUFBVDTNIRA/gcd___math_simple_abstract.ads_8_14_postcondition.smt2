@@ -157,9 +157,8 @@
 ;; divides__def_axiom
   (assert
   (forall ((a Int) (b Int))
-  (! (=> (divides__function_guard (divides a b) a b)
-     (= (= (divides a b) true)
-     (exists ((c Int)) (and (and (<= 1 c) (<= c 2147483647)) (= (* a c) b))))) :pattern (
+  (! (= (= (divides a b) true)
+     (exists ((c Int)) (and (and (<= 1 c) (<= c 2147483647)) (= (* a c) b)))) :pattern (
   (divides a b)) )))
 
 (declare-fun a () Int)
@@ -178,7 +177,7 @@
 
 (declare-fun o () Int)
 
-(declare-fun temp___138 () Int)
+(declare-fun temp___132 () Int)
 
 (declare-fun o1 () Int)
 
@@ -227,66 +226,6 @@
 (declare-fun result3 () Int)
 
 ;; H
-  (assert (divides__function_guard (divides c1 a) c1 a))
-
-;; H
-  (assert (divides__function_guard (divides c1 b) c1 b))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x a) x a)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x b) x b)))
-
-;; H
-  (assert (divides__function_guard (divides c1 a) c1 a))
-
-;; H
-  (assert (divides__function_guard (divides c1 b) c1 b))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x a) x a)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x b) x b)))
-
-;; H
-  (assert (divides__function_guard (divides c8 a) c8 a))
-
-;; H
-  (assert (divides__function_guard (divides c8 b) c8 b))
-
-;; H
-  (assert (divides__function_guard (divides c1 a) c1 a))
-
-;; H
-  (assert (divides__function_guard (divides c1 b) c1 b))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x a) x a)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x b) x b)))
-
-;; H
-  (assert (divides__function_guard (divides c1 a) c1 a))
-
-;; H
-  (assert (divides__function_guard (divides c1 b) c1 b))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x a) x a)))
-
-;; H
-  (assert (forall ((x Int)) (divides__function_guard (divides x b) x b)))
-
-;; H
-  (assert (divides__function_guard (divides c8 a) c8 a))
-
-;; H
-  (assert (divides__function_guard (divides c8 b) c8 b))
-
-;; H
   (assert (in_range1 a))
 
 ;; H
@@ -305,7 +244,7 @@
   (assert (in_range1 c1))
 
 ;; H
-  (assert (=> (< 1 c1) (= temp___138 c1)))
+  (assert (=> (< 1 c1) (= temp___132 c1)))
 
 ;; H
   (assert
@@ -384,11 +323,6 @@
 
 ;; H
   (assert (= result3 math_simple_abstract__gcd__result4))
-
-;; H
-  (assert (divides__function_guard
-  (divides math_simple_abstract__gcd__result4 a)
-  math_simple_abstract__gcd__result4 a))
 
 (assert
 ;; WP_parameter_def

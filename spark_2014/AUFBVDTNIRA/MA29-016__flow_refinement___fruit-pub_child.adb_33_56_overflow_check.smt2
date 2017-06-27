@@ -107,18 +107,13 @@
   (assert
   (forall ((fruit__price_of_apple Int))
   (! (=> (dynamic_invariant fruit__price_of_apple true true true)
-     (let ((result (get_price_of_apple fruit__price_of_apple)))
-     (=> (get_price_of_apple__function_guard result fruit__price_of_apple)
-     (dynamic_invariant result true false true)))) :pattern ((get_price_of_apple
-                                                             fruit__price_of_apple)) )))
+     (dynamic_invariant (get_price_of_apple fruit__price_of_apple) true false
+     true)) :pattern ((get_price_of_apple fruit__price_of_apple)) )))
 
 ;; get_price_of_apple__def_axiom
   (assert
   (forall ((fruit__price_of_apple Int))
-  (! (=>
-     (and (dynamic_invariant fruit__price_of_apple true true true)
-     (get_price_of_apple__function_guard
-     (get_price_of_apple fruit__price_of_apple) fruit__price_of_apple))
+  (! (=> (dynamic_invariant fruit__price_of_apple true true true)
      (= (get_price_of_apple fruit__price_of_apple) fruit__price_of_apple)) :pattern (
   (get_price_of_apple fruit__price_of_apple)) )))
 
@@ -130,18 +125,13 @@
   (assert
   (forall ((fruit__price_of_orange Int))
   (! (=> (dynamic_invariant fruit__price_of_orange true true true)
-     (let ((result (get_price_of_orange fruit__price_of_orange)))
-     (=> (get_price_of_orange__function_guard result fruit__price_of_orange)
-     (dynamic_invariant result true false true)))) :pattern ((get_price_of_orange
-                                                             fruit__price_of_orange)) )))
+     (dynamic_invariant (get_price_of_orange fruit__price_of_orange) true
+     false true)) :pattern ((get_price_of_orange fruit__price_of_orange)) )))
 
 ;; get_price_of_orange__def_axiom
   (assert
   (forall ((fruit__price_of_orange Int))
-  (! (=>
-     (and (dynamic_invariant fruit__price_of_orange true true true)
-     (get_price_of_orange__function_guard
-     (get_price_of_orange fruit__price_of_orange) fruit__price_of_orange))
+  (! (=> (dynamic_invariant fruit__price_of_orange true true true)
      (= (get_price_of_orange fruit__price_of_orange) fruit__price_of_orange)) :pattern (
   (get_price_of_orange fruit__price_of_orange)) )))
 
@@ -195,16 +185,12 @@
 
 ;; H
   (assert
-  (and
   (and (= o (get_price_of_orange price_of_orange))
-  (get_price_of_orange__function_guard o price_of_orange))
   (and (in_range1 o) (= o price_of_orange))))
 
 ;; H
   (assert
-  (and
   (and (= o1 (get_price_of_apple price_of_apple))
-  (get_price_of_apple__function_guard o1 price_of_apple))
   (and (in_range1 o1) (= o1 price_of_apple))))
 
 ;; H

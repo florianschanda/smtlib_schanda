@@ -262,11 +262,10 @@
   (assert
   (forall ((a (Array Int contents_type)))
   (forall ((l Int) (u Int))
-  (! (=> (ordered__function_guard (ordered a l u) a l u)
-     (= (= (ordered a l u) true)
+  (! (= (= (ordered a l u) true)
      (forall ((i Int))
      (=> (and (<= l i) (<= i (- u 1)))
-     (<= (to_rep (select a i)) (to_rep (select a (+ i 1)))))))) :pattern (
+     (<= (to_rep (select a i)) (to_rep (select a (+ i 1))))))) :pattern (
   (ordered a l u)) ))))
 
 (declare-fun perm ((Array Int contents_type) (Array Int contents_type)) Bool)
@@ -277,9 +276,7 @@
 ;; perm__post_axiom
   (assert
   (forall ((a (Array Int contents_type)) (b (Array Int contents_type)))
-  (! (let ((result (perm a b)))
-     (=> (perm__function_guard result a b)
-     (=> (= (bool_eq3 a 1 100 b 1 100) true) (= result true)))) :pattern (
+  (! (=> (= (bool_eq3 a 1 100 b 1 100) true) (= (perm a b) true)) :pattern (
   (perm a b)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -300,14 +297,13 @@
      (and (dynamic_invariant l true true true) (dynamic_invariant u true true
      true)) (and (and (<= 1 l) (< l u)) (<= u 100)))
      (let ((result (find_smallest arr l u)))
-     (=> (find_smallest__function_guard result arr l u)
      (and
      (and (and (<= l result) (<= result u))
      (forall ((x Int))
      (=> (and (<= l x) (<= x u))
      (<= (to_rep (select arr result)) (to_rep (select arr x))))))
-     (dynamic_invariant result true false true))))) :pattern ((find_smallest
-                                                              arr l u)) ))))
+     (dynamic_invariant result true false true)))) :pattern ((find_smallest
+                                                             arr l u)) ))))
 
 (declare-sort t18b 0)
 
@@ -392,9 +388,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o (find_smallest table low1 100)) (find_smallest__function_guard 
-  o table low1 100))
+  (and (= o (find_smallest table low1 100))
   (and (in_range2 o)
   (and (and (<= low1 o) (<= o 100))
   (forall ((x Int))
@@ -406,9 +400,6 @@
 
 ;; H
   (assert (= key1 o))
-
-;; H
-  (assert (perm__function_guard (perm table2 table) table2 table))
 
 ;; H
   (assert
@@ -429,9 +420,6 @@
   (assert (=> (not (not (= key1 low1))) (= table2 table1)))
 
 ;; H
-  (assert (perm__function_guard (perm table3 table) table3 table))
-
-;; H
   (assert
   (and
   (and
@@ -442,9 +430,6 @@
   (=> (and (<= low2 x) (<= x 100))
   (<= (to_rep (select table3 low2)) (to_rep (select table3 x))))))
   (= (perm table3 table) true)))
-
-;; H
-  (assert (perm__function_guard (perm table4 table3) table4 table3))
 
 ;; H
   (assert
@@ -462,9 +447,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o1 (find_smallest table3 low3 100)) (find_smallest__function_guard
-  o1 table3 low3 100))
+  (and (= o1 (find_smallest table3 low3 100))
   (and (in_range2 o1)
   (and (and (<= low3 o1) (<= o1 100))
   (forall ((x Int))

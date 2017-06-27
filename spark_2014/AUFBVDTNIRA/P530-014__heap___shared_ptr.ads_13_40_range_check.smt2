@@ -415,8 +415,7 @@
 
 ;; H
   (assert
-  (and (and (= o3 (to_string1 this)) (to_string__function_guard o3 this))
-  (dynamic_invariant1 o3 true false true)))
+  (and (= o3 (to_string1 this)) (dynamic_invariant1 o3 true false true)))
 
 ;; H
   (assert (= o2 (length o3)))

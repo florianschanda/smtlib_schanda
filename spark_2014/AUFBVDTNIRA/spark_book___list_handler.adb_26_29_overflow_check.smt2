@@ -505,12 +505,12 @@
                                       (or (= temp___is_init_144 true)
                                       (<= 0 3)) (in_range4 temp___expr_147)))
 
-(define-fun dynamic_invariant2 ((temp___expr_165 Int)
-  (temp___is_init_162 Bool) (temp___skip_constant_163 Bool)
-  (temp___do_toplevel_164 Bool)) Bool (=>
-                                      (or (= temp___is_init_162 true)
+(define-fun dynamic_invariant2 ((temp___expr_164 Int)
+  (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
+  (temp___do_toplevel_163 Bool)) Bool (=>
+                                      (or (= temp___is_init_161 true)
                                       (<= 0 128)) (in_range3
-                                      temp___expr_165)))
+                                      temp___expr_164)))
 
 (declare-sort iterator 0)
 
@@ -546,10 +546,8 @@
 
 ;; back__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (back us_void_param)))
-     (=> (back__function_guard result us_void_param) (dynamic_invariant3
-     result true false true))) :pattern ((back us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant3
+  (back us_void_param) true false true) :pattern ((back us_void_param)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
 
@@ -628,9 +626,7 @@
   upper)))
 
 ;; H
-  (assert
-  (and (and (= o (back Tuple0)) (back__function_guard o Tuple0)) (in_range5
-  o)))
+  (assert (and (= o (back Tuple0)) (in_range5 o)))
 
 ;; H
   (assert

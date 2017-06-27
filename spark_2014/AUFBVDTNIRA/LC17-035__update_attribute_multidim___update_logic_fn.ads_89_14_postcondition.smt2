@@ -377,49 +377,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
 
-(declare-sort t26s 0)
-
-(define-fun in_range4 ((x1 Int)) Bool (and (<= 1 x1) (<= x1 10)))
-
-(define-fun bool_eq4 ((x1 Int) (y1 Int)) Bool (ite (= x1 y1) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq3 (t26s t26s) Bool)
-
-(declare-fun dummy3 () t26s)
-
-(declare-datatypes () ((t26s__ref (mk_t26s__ref (t26s__content t26s)))))
-(define-fun t26s__ref___projection ((a t26s__ref)) t26s (t26s__content a))
-
-(declare-sort t27s 0)
-
-(define-fun in_range5 ((x1 (_ BitVec 8))) Bool (and
-                                               (bvule ((_ int2bv 8) 0) x1)
-                                               (bvule x1 ((_ int2bv 8) 7))))
-
-(define-fun in_range_int1 ((x1 Int)) Bool (and (<= 0 x1) (<= x1 7)))
-
-(define-fun bool_eq5 ((x1 (_ BitVec 8))
-  (y1 (_ BitVec 8))) Bool (ite (= x1 y1) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 ((_ BitVec 8)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) (_ BitVec 8))
-
-(declare-fun user_eq4 (t27s t27s) Bool)
-
-(declare-fun dummy4 () t27s)
-
-(declare-datatypes () ((t27s__ref (mk_t27s__ref (t27s__content t27s)))))
-(define-fun t27s__ref___projection ((a t27s__ref)) t27s (t27s__content a))
-
 (declare-fun temp___278 (Int Int Int) map1)
 
 ;; def_axiom
@@ -479,7 +436,7 @@
   (assert (in_range1 v2))
 
 ;; H
-  (assert (= (mk_map__ref result) (mk_map__ref a)))
+  (assert (= result a))
 
 ;; H
   (assert (= a1 a_2d_arr))
@@ -491,7 +448,7 @@
   (assert (= o1 (set a1 5 ((_ int2bv 8) 7) o)))
 
 ;; H
-  (assert (= a1 result1))
+  (assert (= result1 a1))
 
 ;; H
   (assert (= a2 o1))
@@ -503,7 +460,7 @@
   (assert (= o3 (set a2 x y o2)))
 
 ;; H
-  (assert (= a2 result2))
+  (assert (= result2 a2))
 
 ;; H
   (assert (= a3 o3))

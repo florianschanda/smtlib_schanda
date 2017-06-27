@@ -678,10 +678,9 @@
   (forall ((x86__rcx (_ BitVec 64)))
   (! (=> (dynamic_invariant x86__rcx true true true)
      (let ((result (ecx x86__rcx)))
-     (=> (ecx__function_guard result x86__rcx)
      (and
      (= result ((_ extract 31 0) (bvand x86__rcx ((_ int2bv 64) 4294967295))))
-     (dynamic_invariant2 result true false true))))) :pattern ((ecx x86__rcx)) )))
+     (dynamic_invariant2 result true false true)))) :pattern ((ecx x86__rcx)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
@@ -694,10 +693,9 @@
   (forall ((x86__rsi (_ BitVec 64)))
   (! (=> (dynamic_invariant x86__rsi true true true)
      (let ((result (esi x86__rsi)))
-     (=> (esi__function_guard result x86__rsi)
      (and
      (= result ((_ extract 31 0) (bvand x86__rsi ((_ int2bv 64) 4294967295))))
-     (dynamic_invariant2 result true false true))))) :pattern ((esi x86__rsi)) )))
+     (dynamic_invariant2 result true false true)))) :pattern ((esi x86__rsi)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
@@ -710,10 +708,9 @@
   (forall ((x86__rdi (_ BitVec 64)))
   (! (=> (dynamic_invariant x86__rdi true true true)
      (let ((result (edi x86__rdi)))
-     (=> (edi__function_guard result x86__rdi)
      (and
      (= result ((_ extract 31 0) (bvand x86__rdi ((_ int2bv 64) 4294967295))))
-     (dynamic_invariant2 result true false true))))) :pattern ((edi x86__rdi)) )))
+     (dynamic_invariant2 result true false true)))) :pattern ((edi x86__rdi)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
 
@@ -729,9 +726,8 @@
   (forall ((x86__memory (Array (_ BitVec 64) unsigned8)))
   (! (=> (dynamic_invariant addr true true true)
      (let ((result (readmem8 addr x86__memory)))
-     (=> (readmem8__function_guard result addr x86__memory)
      (and (= result (to_rep (select x86__memory addr))) (dynamic_invariant1
-     result true false true))))) :pattern ((readmem8 addr x86__memory)) ))))
+     result true false true)))) :pattern ((readmem8 addr x86__memory)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
 
@@ -791,11 +787,11 @@
 
 (declare-fun val2 () (_ BitVec 8))
 
-(declare-fun temp___398 () (_ BitVec 32))
+(declare-fun temp___331 () (_ BitVec 32))
 
 (declare-fun result1 () (_ BitVec 32))
 
-(declare-fun temp___3981 () (_ BitVec 32))
+(declare-fun temp___3311 () (_ BitVec 32))
 
 (declare-fun result2 () (_ BitVec 8))
 
@@ -825,7 +821,7 @@
 
 ;; H
   (assert
-  (and (and (= o (ecx rcx)) (ecx__function_guard o rcx))
+  (and (= o (ecx rcx))
   (= o ((_ extract 31 0) (bvand rcx ((_ int2bv 64) 4294967295))))))
 
 ;; H
@@ -835,20 +831,17 @@
   (assert (= result true))
 
 ;; H
-  (assert (ecx__function_guard (ecx rcx1) rcx1))
-
-;; H
   (assert (bvugt (ecx rcx1) ((_ int2bv 32) 0)))
 
 ;; H
-  (assert (= result1 temp___398))
+  (assert (= result1 temp___331))
 
 ;; H
-  (assert (= temp___3981 (ecx rcx1)))
+  (assert (= temp___3311 (ecx rcx1)))
 
 ;; H
   (assert
-  (and (and (= o1 (esi rsi)) (esi__function_guard o1 rsi))
+  (and (= o1 (esi rsi))
   (= o1 ((_ extract 31 0) (bvand rsi ((_ int2bv 64) 4294967295))))))
 
 ;; H
@@ -856,9 +849,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o3 (readmem8 o2 memory)) (readmem8__function_guard o3 o2 memory))
-  (= o3 (to_rep (select memory o2)))))
+  (and (= o3 (readmem8 o2 memory)) (= o3 (to_rep (select memory o2)))))
 
 ;; H
   (assert (= result2 val1))
@@ -868,7 +859,7 @@
 
 ;; H
   (assert
-  (and (and (= o4 (edi rdi)) (edi__function_guard o4 rdi))
+  (and (= o4 (edi rdi))
   (= o4 ((_ extract 31 0) (bvand rdi ((_ int2bv 64) 4294967295))))))
 
 ;; H
@@ -876,9 +867,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o6 (readmem8 o5 memory)) (readmem8__function_guard o6 o5 memory))
-  (= o6 (to_rep (select memory o5)))))
+  (and (= o6 (readmem8 o5 memory)) (= o6 (to_rep (select memory o5)))))
 
 ;; H
   (assert (= result3 val2))
@@ -902,11 +891,8 @@
                 val21)) ((_ zero_extend 8) (bvadd val11 val21))) true false)))
 
 ;; H
-  (assert (ecx__function_guard (ecx rcx2) rcx2))
-
-;; H
   (assert
-  (and (and (= o7 (ecx rcx1)) (ecx__function_guard o7 rcx1))
+  (and (= o7 (ecx rcx1))
   (= o7 ((_ extract 31 0) (bvand rcx1 ((_ int2bv 64) 4294967295))))))
 
 ;; H
@@ -920,7 +906,7 @@
 
 ;; H
   (assert
-  (and (and (= o9 (ecx rcx2)) (ecx__function_guard o9 rcx2))
+  (and (= o9 (ecx rcx2))
   (= o9 ((_ extract 31 0) (bvand rcx2 ((_ int2bv 64) 4294967295))))))
 
 ;; H
@@ -934,11 +920,8 @@
   (assert (not (= result6 true)))
 
 ;; H
-  (assert (esi__function_guard (esi rsi1) rsi1))
-
-;; H
   (assert
-  (and (and (= o11 (esi rsi)) (esi__function_guard o11 rsi))
+  (and (= o11 (esi rsi))
   (= o11 ((_ extract 31 0) (bvand rsi ((_ int2bv 64) 4294967295))))))
 
 ;; H
@@ -951,11 +934,8 @@
   o12)))))
 
 ;; H
-  (assert (edi__function_guard (edi rdi1) rdi1))
-
-;; H
   (assert
-  (and (and (= o13 (edi rdi)) (edi__function_guard o13 rdi))
+  (and (= o13 (edi rdi))
   (= o13 ((_ extract 31 0) (bvand rdi ((_ int2bv 64) 4294967295))))))
 
 ;; H
@@ -969,7 +949,7 @@
 
 ;; H
   (assert
-  (and (and (= o15 (ecx rcx2)) (ecx__function_guard o15 rcx2))
+  (and (= o15 (ecx rcx2))
   (= o15 ((_ extract 31 0) (bvand rcx2 ((_ int2bv 64) 4294967295))))))
 
 ;; H
@@ -981,11 +961,8 @@
 ;; H
   (assert (not (= result7 true)))
 
-;; H
-  (assert (ecx__function_guard (ecx rcx2) rcx2))
-
 (assert
 ;; WP_parameter_def
  ;; File "x86.adb", line 520, characters 0-0
-  (not (bvult (ecx rcx2) temp___3981)))
+  (not (bvult (ecx rcx2) temp___3311)))
 (check-sat)

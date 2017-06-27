@@ -148,8 +148,8 @@
 (declare-datatypes () ((t2__ref (mk_t2__ref (t2__content us_rep)))))
 (define-fun t2__ref___projection ((a t2__ref)) us_rep (t2__content a))
 
-(define-fun default_initial_assumption ((temp___expr_155 us_rep)
-  (temp___skip_top_level_156 Bool)) Bool (= (attr__tag temp___expr_155) 
+(define-fun default_initial_assumption ((temp___expr_149 us_rep)
+  (temp___skip_top_level_150 Bool)) Bool (= (attr__tag temp___expr_149) 
   us_tag))
 
 (declare-fun check__2 (us_rep) Bool)
@@ -185,28 +185,17 @@
 ;; types__t2__compat_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (check__2__function_guard1 (check__21 us_tag x) us_tag x)
-     (and (check__2__function_guard (check__2 x) x)
-     (= (to_int1 (check__2 x)) (to_int1 (check__21 us_tag x))))) :pattern (
+  (! (= (to_int1 (check__2 x)) (to_int1 (check__21 us_tag x))) :pattern (
   (check__21 us_tag x)) )))
 
 ;; check__2__def_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (check__2__function_guard (check__2 x) x)
-     (not (= (check__2 x) true))) :pattern ((check__2 x)) )))
+  (! (not (= (check__2 x) true)) :pattern ((check__2 x)) )))
 
 (declare-fun x__split_fields () integer)
 
 (declare-fun x__split_fields1 () us_private)
-
-;; H
-  (assert (check__2__function_guard
-  (check__2
-  (mk___rep (mk___split_fields x__split_fields x__split_fields1)
-  x__attr__tag))
-  (mk___rep (mk___split_fields x__split_fields x__split_fields1)
-  x__attr__tag)))
 
 (assert
 ;; WP_parameter_def

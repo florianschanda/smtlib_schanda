@@ -75,12 +75,9 @@
 ;; top__post_axiom
   (assert
   (forall ((stack_asm__state us_private))
-  (! (and (is_empty__function_guard (is_empty stack_asm__state)
-     stack_asm__state)
-     (=> (not (= (is_empty stack_asm__state) true))
-     (let ((result (top stack_asm__state)))
-     (=> (top__function_guard result stack_asm__state) (dynamic_invariant
-     result true false true))))) :pattern ((top stack_asm__state)) )))
+  (! (=> (not (= (is_empty stack_asm__state) true)) (dynamic_invariant
+     (top stack_asm__state) true false true)) :pattern ((top
+                                                        stack_asm__state)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -93,9 +90,6 @@
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range i)))
-
-;; H
-  (assert (is_empty__function_guard (is_empty state) state))
 
 (assert
 ;; WP_parameter_def

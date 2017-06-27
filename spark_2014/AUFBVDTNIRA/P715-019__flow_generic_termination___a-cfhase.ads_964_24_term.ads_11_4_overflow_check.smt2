@@ -643,11 +643,11 @@
   (forall ((a us_rep2) (b us_rep2))
   (! (= (user_eq5 a b) (oeq2 a b)) :pattern ((user_eq5 a b)) )))
 
-(define-fun default_initial_assumption1 ((temp___expr_395 us_rep2)
-  (temp___skip_top_level_396 Bool)) Bool (=>
+(define-fun default_initial_assumption1 ((temp___expr_392 us_rep2)
+  (temp___skip_top_level_393 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_396 true))
-                                         (= (length2 temp___expr_395) 0)))
+                                         (= temp___skip_top_level_393 true))
+                                         (= (length2 temp___expr_392) 0)))
 
 (define-fun iter_has_element ((container us_rep2)
   (position Int)) Bool (and (ite (<= 1 position) true false) (ite (<= position 
@@ -671,12 +671,12 @@
                                       (<= (- 2147483648) 2147483647))
                                       (in_range2 temp___expr_354)))
 
-(define-fun dynamic_invariant3 ((temp___expr_388 Int)
-  (temp___is_init_385 Bool) (temp___skip_constant_386 Bool)
-  (temp___do_toplevel_387 Bool)) Bool (=>
-                                      (or (= temp___is_init_385 true)
+(define-fun dynamic_invariant3 ((temp___expr_385 Int)
+  (temp___is_init_382 Bool) (temp___skip_constant_383 Bool)
+  (temp___do_toplevel_384 Bool)) Bool (=>
+                                      (or (= temp___is_init_382 true)
                                       (<= 0 2147483647)) (in_range3
-                                      temp___expr_388)))
+                                      temp___expr_385)))
 
 (declare-sort element_type1 0)
 
@@ -701,12 +701,12 @@
 (define-fun element_type__ref_3__projection ((a element_type__ref1)) element_type1 
   (element_type__content1 a))
 
-(define-fun dynamic_invariant4 ((temp___expr_382 Int)
-  (temp___is_init_379 Bool) (temp___skip_constant_380 Bool)
-  (temp___do_toplevel_381 Bool)) Bool (=>
-                                      (or (= temp___is_init_379 true)
+(define-fun dynamic_invariant4 ((temp___expr_379 Int)
+  (temp___is_init_376 Bool) (temp___skip_constant_377 Bool)
+  (temp___do_toplevel_378 Bool)) Bool (=>
+                                      (or (= temp___is_init_376 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range5 temp___expr_382)))
+                                      (in_range5 temp___expr_379)))
 
 (declare-fun target__split_fields () us_main_type)
 

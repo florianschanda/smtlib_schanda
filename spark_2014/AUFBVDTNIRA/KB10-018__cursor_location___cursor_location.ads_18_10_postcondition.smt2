@@ -235,17 +235,13 @@
 ;; change_side__post_axiom
   (assert
   (forall ((side Int))
-  (! (=> (dynamic_invariant side true true true)
-     (let ((result (change_side side)))
-     (=> (change_side__function_guard result side) (dynamic_invariant result
-     true false true)))) :pattern ((change_side side)) )))
+  (! (=> (dynamic_invariant side true true true) (dynamic_invariant
+     (change_side side) true false true)) :pattern ((change_side side)) )))
 
 ;; change_side__def_axiom
   (assert
   (forall ((side Int))
-  (! (=>
-     (and (dynamic_invariant side true true true)
-     (change_side__function_guard (change_side side) side))
+  (! (=> (dynamic_invariant side true true true)
      (= (change_side side) (ite (= side 1) 2 1))) :pattern ((change_side
                                                             side)) )))
 
@@ -299,7 +295,7 @@
 
 ;; H
   (assert
-  (and (and (= o (change_side side)) (change_side__function_guard o side))
+  (and (= o (change_side side))
   (and (in_range1 o) (= o (ite (= side 1) 2 1)))))
 
 ;; H

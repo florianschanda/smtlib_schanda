@@ -239,8 +239,7 @@
   (assert
   (forall ((s (Array Int Bool)))
   (forall ((e Int))
-  (! (=> (mem__function_guard (mem s e) s e)
-     (= (= (mem s e) true) (= (select s e) true))) :pattern ((mem s e)) ))))
+  (! (= (= (mem s e) true) (= (select s e) true)) :pattern ((mem s e)) ))))
 
 (declare-fun empty (tuple0) (Array Int Bool))
 
@@ -249,13 +248,10 @@
 ;; empty__post_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (let ((result (empty us_void_param)))
-     (and
-     (forall ((elt Int)) (mem__function_guard (mem result elt) result elt))
-     (=> (empty__function_guard result us_void_param)
-     (forall ((elt Int))
-     (=> (and (<= 1 elt) (<= elt 10)) (not (= (mem result elt) true))))))) :pattern (
-  (empty us_void_param)) )))
+  (! (forall ((elt Int))
+     (=> (and (<= 1 elt) (<= elt 10))
+     (not (= (mem (empty us_void_param) elt) true)))) :pattern ((empty
+                                                                us_void_param)) )))
 
 (declare-fun add ((Array Int Bool) Int) (Array Int Bool))
 
@@ -274,15 +270,10 @@
   (forall ((s (Array Int Bool)))
   (forall ((e Int))
   (! (=> (dynamic_invariant e true true true)
-     (let ((result (add s e)))
-     (and
-     (forall ((elt Int)) (mem__function_guard (mem result elt) result elt))
-     (and (forall ((elt Int)) (mem__function_guard (mem s elt) s elt))
-     (=> (add__function_guard result s e)
      (forall ((elt Int))
      (=> (and (<= 1 elt) (<= elt 10))
-     (= (= (mem result elt) true) (=> (not (= elt e)) (= (mem s elt) true)))))))))) :pattern (
-  (add s e)) ))))
+     (= (= (mem (add s e) elt) true)
+     (=> (not (= elt e)) (= (mem s elt) true)))))) :pattern ((add s e)) ))))
 
 ;; ext_equal__post_axiom
   (assert true)
@@ -290,14 +281,11 @@
 ;; ext_equal__def_axiom
   (assert
   (forall ((a (Array Int Bool)) (b (Array Int Bool)))
-  (! (=> (ext_equal__function_guard (ext_equal a b) a b)
-     (and (forall ((elt Int)) (mem__function_guard (mem a elt) a elt))
-     (and (forall ((elt Int)) (mem__function_guard (mem b elt) b elt))
-     (= (= (ext_equal a b) true)
+  (! (= (= (ext_equal a b) true)
      (forall ((elt Int))
      (=> (and (<= 1 elt) (<= elt 10))
-     (= (= (mem a elt) true) (= (mem b elt) true)))))))) :pattern ((ext_equal
-                                                                   a b)) )))
+     (= (= (mem a elt) true) (= (mem b elt) true))))) :pattern ((ext_equal a
+                                                                b)) )))
 
 (declare-fun s () (Array Int Bool))
 
@@ -312,11 +300,8 @@
 (declare-fun s3 () (Array Int Bool))
 
 ;; H
-  (assert (forall ((elt Int)) (mem__function_guard (mem o elt) o elt)))
-
-;; H
   (assert
-  (and (and (= o (empty Tuple0)) (empty__function_guard o Tuple0))
+  (and (= o (empty Tuple0))
   (forall ((elt Int))
   (=> (and (<= 1 elt) (<= elt 10)) (not (= (mem o elt) true))))))
 
@@ -327,75 +312,31 @@
   (assert (= s1 o))
 
 ;; H
-  (assert (add__function_guard (add s1 8) s1 8))
-
-;; H
-  (assert (add__function_guard (add s1 8) s1 8))
-
-;; H
-  (assert (ext_equal__function_guard (ext_equal s2 (add s1 8)) s2
-  (add s1 8)))
-
-;; H
   (assert (= (ext_equal s2 (add s1 8)) true))
-
-;; H
-  (assert (add__function_guard (add s2 3) s2 3))
-
-;; H
-  (assert (add__function_guard (add s2 3) s2 3))
-
-;; H
-  (assert (ext_equal__function_guard (ext_equal s3 (add s2 3)) s3
-  (add s2 3)))
 
 ;; H
   (assert (= (ext_equal s3 (add s2 3)) true))
 
 ;; H
-  (assert (mem__function_guard (mem s3 3) s3 3))
-
-;; H
   (assert (= (mem s3 3) true))
-
-;; H
-  (assert (mem__function_guard (mem s3 8) s3 8))
 
 ;; H
   (assert (= (mem s3 8) true))
 
 ;; H
-  (assert (mem__function_guard (mem s3 1) s3 1))
-
-;; H
   (assert (not (= (mem s3 1) true)))
-
-;; H
-  (assert (mem__function_guard (mem s3 2) s3 2))
 
 ;; H
   (assert (not (= (mem s3 2) true)))
 
 ;; H
-  (assert (mem__function_guard (mem s3 4) s3 4))
-
-;; H
   (assert (not (= (mem s3 4) true)))
-
-;; H
-  (assert (mem__function_guard (mem s3 5) s3 5))
 
 ;; H
   (assert (not (= (mem s3 5) true)))
 
 ;; H
-  (assert (mem__function_guard (mem s3 6) s3 6))
-
-;; H
   (assert (not (= (mem s3 6) true)))
-
-;; H
-  (assert (mem__function_guard (mem s3 7) s3 7))
 
 (assert
 ;; WP_parameter_def

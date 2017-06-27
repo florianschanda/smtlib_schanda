@@ -241,8 +241,6 @@
      (< (to_rep1 (select b (+ i 1))) (to_rep1 (select a (+ j 1))))))))))) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -265,7 +263,7 @@
 
 (declare-fun first (t) integer)
 
-(declare-fun last1 (t) integer)
+(declare-fun last (t) integer)
 
 (declare-fun mk (Int Int) t)
 
@@ -274,7 +272,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range2 f)
      (=> (in_range2 l)
-     (and (= (to_rep1 (first (mk f l))) f) (= (to_rep1 (last1 (mk f l))) l)))) :pattern (
+     (and (= (to_rep1 (first (mk f l))) f) (= (to_rep1 (last (mk f l))) l)))) :pattern (
   (mk f l)) )))
 
 (define-fun dynamic_property1 ((range_first Int) (range_last Int) (low Int)
@@ -292,10 +290,10 @@
 
 (define-fun first1 ((a us_t)) Int (to_rep1 (first (rt a))))
 
-(define-fun last2 ((a us_t)) Int (to_rep1 (last1 (rt a))))
+(define-fun last1 ((a us_t)) Int (to_rep1 (last (rt a))))
 
-(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last2 a))
-                                  (+ (- (last2 a) (first1 a)) 1) 0))
+(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last1 a))
+                                  (+ (- (last1 a) (first1 a)) 1) 0))
 
 (declare-fun value__size () Int)
 
@@ -330,8 +328,8 @@
 
 (define-fun bool_eq4 ((x us_t)
   (y us_t)) Bool (bool_eq2 (elts x) (to_rep1 (first (rt x)))
-                 (to_rep1 (last1 (rt x))) (elts y) (to_rep1 (first (rt y)))
-                 (to_rep1 (last1 (rt y)))))
+                 (to_rep1 (last (rt x))) (elts y) (to_rep1 (first (rt y)))
+                 (to_rep1 (last (rt y)))))
 
 (declare-fun user_eq3 (us_t us_t) Bool)
 
@@ -856,25 +854,6 @@
 (declare-datatypes () ((t14b__ref (mk_t14b__ref (t14b__content us_rep2)))))
 (define-fun t14b__ref___projection ((a t14b__ref)) us_rep2 (t14b__content a))
 
-(declare-sort t16b 0)
-
-(define-fun in_range7 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq10 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq11 (t16b t16b) Bool)
-
-(declare-fun dummy11 () t16b)
-
-(declare-datatypes () ((t16b__ref (mk_t16b__ref (t16b__content t16b)))))
-(define-fun t16b__ref___projection ((a t16b__ref)) t16b (t16b__content a))
-
 (declare-fun b1__split_discrs () us_split_discrs)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -905,14 +884,14 @@
                                       (first1
                                       (rec__discr_dyn__r2__b
                                       (us_split_fields1 temp___expr_185)))
-                                      (last2
+                                      (last1
                                       (rec__discr_dyn__r2__b
                                       (us_split_fields1 temp___expr_185))))
                                       (and
                                       (= (first1
                                          (rec__discr_dyn__r2__b
                                          (us_split_fields1 temp___expr_185))) 1)
-                                      (= (last2
+                                      (= (last1
                                          (rec__discr_dyn__r2__b
                                          (us_split_fields1 temp___expr_185))) 
                                       (to_rep temp___186))))))
@@ -923,27 +902,21 @@
 
 (declare-fun o () stb)
 
-(declare-fun o1 () (Array Int integer))
+(declare-fun o1 () stb)
 
-(declare-fun o2 () (Array Int integer))
+(declare-fun o2 () stb)
 
-(declare-fun o3 () Bool)
+(declare-fun o3 () (Array Int integer))
 
-(declare-fun o4 () stb)
+(declare-fun o4 () Bool)
 
 (declare-fun o5 () stb)
 
 (declare-fun o6 () (Array Int integer))
 
-(declare-fun o7 () Bool)
+(declare-fun o7 () t)
 
-(declare-fun o8 () stb)
-
-(declare-fun o9 () (Array Int integer))
-
-(declare-fun o10 () t)
-
-(declare-fun o11 () Bool)
+(declare-fun o8 () Bool)
 
 ;; H
   (assert (in_range1 temp___a_201))
@@ -952,43 +925,34 @@
   (assert (and (= us 3) (in_range1 3)))
 
 ;; H
-  (assert (= o1 (temp___202 (- 1) (- 2))))
-
-;; H
-  (assert (= o1 o2))
-
-;; H
-  (assert (= (of_int 0) o3))
-
-;; H
   (assert (= (to_rep o) 2))
 
 ;; H
-  (assert (= o o4))
+  (assert (= o o1))
 
 ;; H
-  (assert (= o5 o4))
+  (assert (= o2 o1))
 
 ;; H
-  (assert (= o6 o2))
+  (assert (= (temp___202 (- 1) (- 2)) o3))
 
 ;; H
-  (assert (= o7 o3))
+  (assert (= (of_int 0) o4))
 
 ;; H
-  (assert (= o5 o8))
+  (assert (= o2 o5))
 
 ;; H
-  (assert (= o6 o9))
+  (assert (= o3 o6))
 
 ;; H
-  (assert (= (mk 1 2) o10))
+  (assert (= (mk 1 2) o7))
 
 ;; H
-  (assert (= o7 o11))
+  (assert (= o4 o8))
 
 (assert
 ;; WP_parameter_def
  ;; File "discr_dyn.adb", line 1, characters 0-0
-  (not (= 3 (to_rep o8))))
+  (not (= 3 (to_rep o5))))
 (check-sat)

@@ -73,17 +73,13 @@
 ;; some_func__post_axiom
   (assert
   (forall ((test__foo Int))
-  (! (=> (dynamic_invariant test__foo true true true)
-     (let ((result (some_func test__foo)))
-     (=> (some_func__function_guard result test__foo) (dynamic_invariant
-     result true false true)))) :pattern ((some_func test__foo)) )))
+  (! (=> (dynamic_invariant test__foo true true true) (dynamic_invariant
+     (some_func test__foo) true false true)) :pattern ((some_func test__foo)) )))
 
 ;; some_func__def_axiom
   (assert
   (forall ((test__foo Int))
-  (! (=>
-     (and (dynamic_invariant test__foo true true true)
-     (some_func__function_guard (some_func test__foo) test__foo))
+  (! (=> (dynamic_invariant test__foo true true true)
      (= (some_func test__foo) test__foo)) :pattern ((some_func test__foo)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)

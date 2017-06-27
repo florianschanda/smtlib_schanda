@@ -369,46 +369,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(declare-sort tTgSP1 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq5 (tTgSP1 tTgSP1) Bool)
-
-(declare-fun dummy5 () tTgSP1)
-
-(declare-datatypes ()
-((tTgSP1__ref (mk_tTgSP1__ref (tTgSP1__content tTgSP1)))))
-(define-fun tTgSP1__ref___projection ((a tTgSP1__ref)) tTgSP1 (tTgSP1__content
-                                                              a))
-
-(declare-sort t3b 0)
-
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq6 (t3b t3b) Bool)
-
-(declare-fun dummy6 () t3b)
-
-(declare-datatypes () ((t3b__ref (mk_t3b__ref (t3b__content t3b)))))
-(define-fun t3b__ref___projection ((a t3b__ref)) t3b (t3b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-sort map1 0)
@@ -451,7 +411,7 @@
   (get a (- i (- new_first old_first)) (- j (- new_first_2 old_first_2)))) :pattern (
   (get (slide1 a old_first new_first old_first_2 new_first_2) i j)) )))))))
 
-(define-fun bool_eq8 ((a map1) (a__first Int) (a__last Int) (a__first_2 Int)
+(define-fun bool_eq6 ((a map1) (a__first Int) (a__last Int) (a__first_2 Int)
   (a__last_2 Int) (b map1) (b__first Int) (b__last Int) (b__first_2 Int)
   (b__last_2 Int)) Bool (ite (and
                              (and
@@ -484,7 +444,7 @@
   (forall ((a__first Int) (a__last Int) (a__first_2 Int) (a__last_2 Int)
   (b__first Int) (b__last Int) (b__first_2 Int) (b__last_2 Int))
   (=>
-  (= (bool_eq8 b b__first b__last b__first_2 b__last_2 a a__first a__last
+  (= (bool_eq6 b b__first b__last b__first_2 b__last_2 a a__first a__last
      a__first_2 a__last_2) true)
   (and
   (and
@@ -601,54 +561,54 @@
 ;; object__alignment_axiom
   (assert (forall ((a map1)) (<= 0 (object__alignment1 a))))
 
-(define-fun bool_eq9 ((x us_t1)
-  (y us_t1)) Bool (bool_eq8 (elts1 x) (to_rep1 (first2 (rt1 x)))
+(define-fun bool_eq7 ((x us_t1)
+  (y us_t1)) Bool (bool_eq6 (elts1 x) (to_rep1 (first2 (rt1 x)))
                   (to_rep1 (last2 (rt1 x))) (to_rep1 (first3 (rt_2 x)))
                   (to_rep1 (last3 (rt_2 x))) (elts1 y)
                   (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))
                   (to_rep1 (first3 (rt_2 y))) (to_rep1 (last3 (rt_2 y)))))
 
-(declare-fun user_eq7 (us_t1 us_t1) Bool)
+(declare-fun user_eq5 (us_t1 us_t1) Bool)
 
-(declare-fun dummy7 () us_t1)
+(declare-fun dummy5 () us_t1)
 
 (declare-datatypes () ((arr2__ref (mk_arr2__ref (arr2__content us_t1)))))
 (define-fun arr2__ref___projection ((a arr2__ref)) us_t1 (arr2__content a))
 
 (declare-sort t7b 0)
 
-(define-fun in_range7 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
+(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
 
-(define-fun bool_eq10 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
 
-(declare-fun user_eq8 (t7b t7b) Bool)
+(declare-fun user_eq6 (t7b t7b) Bool)
 
-(declare-fun dummy8 () t7b)
+(declare-fun dummy6 () t7b)
 
 (declare-datatypes () ((t7b__ref (mk_t7b__ref (t7b__content t7b)))))
 (define-fun t7b__ref___projection ((a t7b__ref)) t7b (t7b__content a))
 
 (declare-sort t8b 0)
 
-(define-fun in_range8 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
+(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
 
-(define-fun bool_eq11 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq9 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
 
-(declare-fun user_eq9 (t8b t8b) Bool)
+(declare-fun user_eq7 (t8b t8b) Bool)
 
-(declare-fun dummy9 () t8b)
+(declare-fun dummy7 () t8b)
 
 (declare-datatypes () ((t8b__ref (mk_t8b__ref (t8b__content t8b)))))
 (define-fun t8b__ref___projection ((a t8b__ref)) t8b (t8b__content a))

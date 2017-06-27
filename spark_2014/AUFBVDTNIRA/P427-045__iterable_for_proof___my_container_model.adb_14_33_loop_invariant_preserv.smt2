@@ -228,8 +228,7 @@
 ;; get_model__def_axiom
   (assert
   (forall ((c (Array Int natural)))
-  (! (=> (get_model__function_guard (get_model c) c) (= (get_model c) c)) :pattern (
-  (get_model c)) )))
+  (! (= (get_model c) c) :pattern ((get_model c)) )))
 
 (declare-fun valid (Int) Bool)
 
@@ -247,9 +246,7 @@
 
 ;; valid__def_axiom
   (assert
-  (forall ((e Int))
-  (! (=> (valid__function_guard (valid e) e) (= (= (valid e) true) (< 0 e))) :pattern (
-  (valid e)) )))
+  (forall ((e Int)) (! (= (= (valid e) true) (< 0 e)) :pattern ((valid e)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -265,8 +262,7 @@
   (assert
   (forall ((c (Array Int natural)))
   (forall ((p Int))
-  (! (=> (m_has_element__function_guard (m_has_element c p) c p)
-     (= (= (m_has_element c p) true) (and (<= 1 p) (<= p 100)))) :pattern (
+  (! (= (= (m_has_element c p) true) (and (<= 1 p) (<= p 100))) :pattern (
   (m_has_element c p)) ))))
 
 (declare-fun m_element ((Array Int natural) Int) Int)
@@ -277,21 +273,17 @@
   (assert
   (forall ((c (Array Int natural)))
   (forall ((p Int))
-  (! (and (m_has_element__function_guard (m_has_element c p) c p)
-     (=>
+  (! (=>
      (and (dynamic_invariant p true true true) (= (m_has_element c p) true))
-     (let ((result (m_element c p)))
-     (=> (m_element__function_guard result c p) (dynamic_invariant result
-     true false true))))) :pattern ((m_element c p)) ))))
+     (dynamic_invariant (m_element c p) true false true)) :pattern ((m_element
+                                                                    c p)) ))))
 
 ;; m_element__def_axiom
   (assert
   (forall ((c (Array Int natural)))
   (forall ((p Int))
-  (! (=>
-     (and (dynamic_invariant p true true true) (m_element__function_guard
-     (m_element c p) c p)) (= (m_element c p) (to_rep (select c p)))) :pattern (
-  (m_element c p)) ))))
+  (! (=> (dynamic_invariant p true true true)
+     (= (m_element c p) (to_rep (select c p)))) :pattern ((m_element c p)) ))))
 
 (declare-sort t3b 0)
 
@@ -388,11 +380,6 @@
 
 ;; H
   (assert
-  (forall ((j Int)) (valid__function_guard (valid (to_rep (select c3 j)))
-  (to_rep (select c3 j)))))
-
-;; H
-  (assert
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j i2)) (= (valid (to_rep (select c3 j))) true))))
 
@@ -400,9 +387,9 @@
   (assert
   (and
   (and (=> (<= 1 100) (in_range3 i2))
-  (forall ((temp___212 Int))
-  (=> (and (<= 1 temp___212) (<= temp___212 100))
-  (=> (< i2 temp___212) (= (select c3 temp___212) (select c temp___212))))))
+  (forall ((temp___198 Int))
+  (=> (and (<= 1 temp___198) (<= temp___198 100))
+  (=> (< i2 temp___198) (= (select c3 temp___198) (select c temp___198))))))
   (and (<= 1 i2) (<= i2 100))))
 
 ;; H
@@ -436,10 +423,6 @@
 
 ;; H
   (assert (<= j i3))
-
-;; H
-  (assert (valid__function_guard (valid (to_rep (select c4 j)))
-  (to_rep (select c4 j))))
 
 (assert
 ;; WP_parameter_def

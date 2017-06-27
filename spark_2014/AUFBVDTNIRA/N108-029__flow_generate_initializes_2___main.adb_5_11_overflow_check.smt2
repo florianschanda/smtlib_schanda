@@ -92,8 +92,7 @@
   (assert (in_range visible_var))
 
 ;; H
-  (assert
-  (and (and (= o (foo Tuple0)) (foo__function_guard o Tuple0)) (in_range o)))
+  (assert (and (= o (foo Tuple0)) (in_range o)))
 
 (assert
 ;; WP_parameter_def

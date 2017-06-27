@@ -133,10 +133,10 @@
 
 (declare-fun self__ () us_rep1)
 
-(declare-fun temp___1537 () Bool)
+(declare-fun temp___1538 () Bool)
 
 (assert
 ;; WP_parameter_def
  ;; File "interrupt_handler.ads", line 9, characters 0-0
-  (not (= temp___1537 false)))
+  (not (= temp___1538 false)))
 (check-sat)

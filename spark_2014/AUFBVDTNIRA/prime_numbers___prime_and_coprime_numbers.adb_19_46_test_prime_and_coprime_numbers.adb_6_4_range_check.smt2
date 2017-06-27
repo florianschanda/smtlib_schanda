@@ -157,11 +157,10 @@
 ;; is_prime__def_axiom
   (assert
   (forall ((value Int))
-  (! (=> (is_prime__function_guard (is_prime value) value)
-     (= (= (is_prime value) true)
+  (! (= (= (is_prime value) true)
      (and (<= 2 value)
      (forall ((v Int))
-     (=> (and (<= 2 v) (<= v (- value 1))) (not (= (mod2 value v) 0))))))) :pattern (
+     (=> (and (<= 2 v) (<= v (- value 1))) (not (= (mod2 value v) 0)))))) :pattern (
   (is_prime value)) )))
 
 (declare-fun low () Int)

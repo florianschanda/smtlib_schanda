@@ -1111,25 +1111,25 @@
 ;; people__person__compat_axiom
   (assert true)
 
-(define-fun default_initial_assumption1 ((temp___expr_990 us_rep2)
-  (temp___skip_top_level_991 Bool)) Bool (and
-                                         (= (attr__tag1 temp___expr_990) 
+(define-fun default_initial_assumption1 ((temp___expr_980 us_rep2)
+  (temp___skip_top_level_981 Bool)) Bool (and
+                                         (= (attr__tag1 temp___expr_980) 
                                          us_tag1)
                                          (and
                                          (and
                                          (= (rec__people__person__name1
                                             (us_split_fields3
-                                            temp___expr_990)) (to_unbounded_string
+                                            temp___expr_980)) (to_unbounded_string
                                                               (of_array
                                                               (temp___String_Literal_928
                                                               Tuple0) 1 8)))
                                          (= (to_rep1
                                             (rec__people__person__dob1
                                             (us_split_fields3
-                                            temp___expr_990))) (- 1)))
+                                            temp___expr_980))) (- 1)))
                                          (= (rec__people__person__alive1
                                             (us_split_fields3
-                                            temp___expr_990)) (of_int 0)))))
+                                            temp___expr_980)) (of_int 0)))))
 
 (declare-fun has_licence_to_kill (us_rep2) Bool)
 
@@ -1182,17 +1182,17 @@
                                      (first1 temp___expr_82)
                                      (last1 temp___expr_82))))
 
-(define-fun dynamic_invariant5 ((temp___expr_961 Int)
-  (temp___is_init_958 Bool) (temp___skip_constant_959 Bool)
-  (temp___do_toplevel_960 Bool)) Bool (=>
-                                      (or (= temp___is_init_958 true)
-                                      (<= 0 3)) (in_range5 temp___expr_961)))
+(define-fun dynamic_invariant5 ((temp___expr_951 Int)
+  (temp___is_init_948 Bool) (temp___skip_constant_949 Bool)
+  (temp___do_toplevel_950 Bool)) Bool (=>
+                                      (or (= temp___is_init_948 true)
+                                      (<= 0 3)) (in_range5 temp___expr_951)))
 
-(define-fun dynamic_invariant6 ((temp___expr_967 Int)
-  (temp___is_init_964 Bool) (temp___skip_constant_965 Bool)
-  (temp___do_toplevel_966 Bool)) Bool (=>
-                                      (or (= temp___is_init_964 true)
-                                      (<= 0 12)) (in_range6 temp___expr_967)))
+(define-fun dynamic_invariant6 ((temp___expr_957 Int)
+  (temp___is_init_954 Bool) (temp___skip_constant_955 Bool)
+  (temp___do_toplevel_956 Bool)) Bool (=>
+                                      (or (= temp___is_init_954 true)
+                                      (<= 0 12)) (in_range6 temp___expr_957)))
 
 ;; has_licence_to_kill__post_axiom
   (assert true)
@@ -1203,23 +1203,19 @@
 ;; professionals__professional__compat_axiom
   (assert
   (forall ((p us_rep2))
-  (! (=> (has_licence_to_kill__function_guard1
-     (has_licence_to_kill1 us_tag1 p) us_tag1 p)
-     (and (has_licence_to_kill__function_guard (has_licence_to_kill p) p)
-     (= (to_int1 (has_licence_to_kill p)) (to_int1
-                                          (has_licence_to_kill1 us_tag1 p))))) :pattern (
+  (! (= (to_int1 (has_licence_to_kill p)) (to_int1
+                                          (has_licence_to_kill1 us_tag1 p))) :pattern (
   (has_licence_to_kill1 us_tag1 p)) )))
 
 ;; has_licence_to_kill__def_axiom
   (assert
   (forall ((p us_rep2))
-  (! (=> (has_licence_to_kill__function_guard (has_licence_to_kill p) p)
-     (= (= (has_licence_to_kill p) true)
-     (let ((temp___1026 (to_rep3
+  (! (= (= (has_licence_to_kill p) true)
+     (let ((temp___1007 (to_rep3
                         (rec__professionals__professional__profession
                         (us_split_fields3 p)))))
-     (or (= temp___1026 2) (= temp___1026 3))))) :pattern ((has_licence_to_kill
-                                                           p)) )))
+     (or (= temp___1007 2) (= temp___1007 3)))) :pattern ((has_licence_to_kill
+                                                          p)) )))
 
 ;; to_unbounded_string__post_axiom
   (assert true)
@@ -1236,17 +1232,13 @@
 ;; professionals__professional__compat_axiom
   (assert
   (forall ((p us_rep1))
-  (! (=> (is_alive__function_guard1 (is_alive1 us_tag1 p) us_tag1 p)
-     (and (is_alive__function_guard (is_alive p) p)
-     (= (to_int1 (is_alive p)) (to_int1 (is_alive1 us_tag1 p))))) :pattern (
+  (! (= (to_int1 (is_alive p)) (to_int1 (is_alive1 us_tag1 p))) :pattern (
   (is_alive1 us_tag1 p)) )))
 
 ;; people__person__compat_axiom
   (assert
   (forall ((p us_rep1))
-  (! (=> (is_alive__function_guard1 (is_alive1 us_tag p) us_tag p)
-     (and (is_alive__function_guard (is_alive p) p)
-     (= (to_int1 (is_alive p)) (to_int1 (is_alive1 us_tag p))))) :pattern (
+  (! (= (to_int1 (is_alive p)) (to_int1 (is_alive1 us_tag p))) :pattern (
   (is_alive1 us_tag p)) )))
 
 (declare-fun killer__split_fields () professions)
@@ -1270,43 +1262,6 @@
 (declare-fun victim__split_fields2 () Bool)
 
 (declare-fun victim__split_fields3 () us_private)
-
-;; H
-  (assert (is_alive__function_guard
-  (is_alive
-  (mk___rep
-  (mk___split_fields killer__split_fields3 killer__split_fields4
-  killer__split_fields5
-  (hide_ext__ killer__split_fields killer__split_fields1
-  killer__split_fields2 killer__split_fields6)) killer__attr__tag))
-  (mk___rep
-  (mk___split_fields killer__split_fields3 killer__split_fields4
-  killer__split_fields5
-  (hide_ext__ killer__split_fields killer__split_fields1
-  killer__split_fields2 killer__split_fields6)) killer__attr__tag)))
-
-;; H
-  (assert (is_alive__function_guard1
-  (is_alive1 victim__attr__tag
-  (mk___rep
-  (mk___split_fields victim__split_fields victim__split_fields1
-  victim__split_fields2 victim__split_fields3) victim__attr__tag))
-  victim__attr__tag
-  (mk___rep
-  (mk___split_fields victim__split_fields victim__split_fields1
-  victim__split_fields2 victim__split_fields3) victim__attr__tag)))
-
-;; H
-  (assert (has_licence_to_kill__function_guard
-  (has_licence_to_kill
-  (mk___rep1
-  (mk___split_fields1 killer__split_fields killer__split_fields1
-  killer__split_fields2 killer__split_fields3 killer__split_fields4
-  killer__split_fields5 killer__split_fields6) killer__attr__tag))
-  (mk___rep1
-  (mk___split_fields1 killer__split_fields killer__split_fields1
-  killer__split_fields2 killer__split_fields3 killer__split_fields4
-  killer__split_fields5 killer__split_fields6) killer__attr__tag)))
 
 ;; H
   (assert

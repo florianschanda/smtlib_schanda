@@ -501,22 +501,22 @@
 
 (declare-fun is_empty__function_guard (Bool us_rep) Bool)
 
-(define-fun dynamic_invariant5 ((temp___expr_449 us_rep)
-  (temp___is_init_446 Bool) (temp___skip_constant_447 Bool)
-  (temp___do_toplevel_448 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_447 true))
-                                      (in_range8 r21b temp___expr_449)))
+(define-fun dynamic_invariant5 ((temp___expr_419 us_rep)
+  (temp___is_init_416 Bool) (temp___skip_constant_417 Bool)
+  (temp___do_toplevel_418 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_417 true))
+                                      (in_range8 r21b temp___expr_419)))
 
-(define-fun default_initial_assumption ((temp___expr_451 us_rep)
-  (temp___skip_top_level_452 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_421 us_rep)
+  (temp___skip_top_level_422 Bool)) Bool (and
                                          (= (to_rep
                                             (rec__amortized_queue__my_vectors__vector__capacity
                                             (us_split_discrs1
-                                            temp___expr_451))) r21b)
+                                            temp___expr_421))) r21b)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_452 true))
-                                         (= (is_empty temp___expr_451) true))))
+                                         (= temp___skip_top_level_422 true))
+                                         (= (is_empty temp___expr_421) true))))
 
 (declare-fun result____split_discrs () us_split_discrs)
 
@@ -548,10 +548,6 @@
   (forall ((x Int))
   (! (=> (in_range1 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
                                                               (of_rep1 x))) )))
-
-(declare-fun first () Int)
-
-(declare-fun last1 () Int)
 
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))

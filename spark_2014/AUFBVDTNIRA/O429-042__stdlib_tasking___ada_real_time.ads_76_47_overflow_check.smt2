@@ -371,32 +371,25 @@
 (declare-fun result1 () Bool)
 
 ;; H
-  (assert
-  (and (= result (olt__2 left time_span_zero)) (olt__2__function_guard 
-  result left time_span_zero)))
+  (assert (= result (olt__2 left time_span_zero)))
 
 ;; H
   (assert (not (= result true)))
 
 ;; H
-  (assert
-  (and (= result1 (ogt__2 left time_span_zero)) (ogt__2__function_guard
-  result1 left time_span_zero)))
+  (assert (= result1 (ogt__2 left time_span_zero)))
 
 ;; H
   (assert (= result1 true))
 
 ;; H
-  (assert
-  (and (= o1 (to_duration__2 left)) (to_duration__2__function_guard o1 left)))
+  (assert (= o1 (to_duration__2 left)))
 
 ;; H
   (assert (= o2 (to_fixed o1)))
 
 ;; H
-  (assert
-  (and (= o (to_duration__2 time_span_last)) (to_duration__2__function_guard
-  o time_span_last)))
+  (assert (= o (to_duration__2 time_span_last)))
 
 ;; H
   (assert (= o3 (to_fixed o)))

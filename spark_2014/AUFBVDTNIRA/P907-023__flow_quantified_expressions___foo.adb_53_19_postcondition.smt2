@@ -228,9 +228,9 @@
 
 (declare-fun i () Int)
 
-(declare-fun temp___171 () (Array Int us_rep))
+(declare-fun temp___167 () (Array Int us_rep))
 
-(declare-fun temp___170 () Int)
+(declare-fun temp___166 () Int)
 
 (declare-fun a1 () (Array Int us_rep))
 
@@ -281,10 +281,10 @@
   (assert (= i1 1))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 10)) (= temp___171 a)))
+  (assert (=> (and (<= 1 i1) (<= i1 10)) (= temp___167 a)))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 10)) (= temp___170 i1)))
+  (assert (=> (and (<= 1 i1) (<= i1 10)) (= temp___166 i1)))
 
 ;; H
   (assert (=> (and (<= 1 i1) (<= i1 10)) (= (mk_map__ref result1) a11)))
@@ -311,10 +311,10 @@
   (=> (and (<= 1 i1) (<= i1 10))
   (and
   (and (=> (<= 1 10) (in_range2 i2))
-  (forall ((temp___172 Int))
-  (=> (and (<= 1 temp___172) (<= temp___172 10))
-  (=> (< i2 temp___172)
-  (= (select a3 temp___172) (select temp___171 temp___172))))))
+  (forall ((temp___168 Int))
+  (=> (and (<= 1 temp___168) (<= temp___168 10))
+  (=> (< i2 temp___168)
+  (= (select a3 temp___168) (select temp___167 temp___168))))))
   (and (<= 1 i2) (<= i2 10)))))
 
 ;; H
@@ -379,6 +379,6 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "foo.adb", line 45, characters 0-0
+ ;; File "foo.adb", line 9, characters 0-0
   (not (= (rec__foo__r__x (us_split_fields1 (select a8 n))) true)))
 (check-sat)

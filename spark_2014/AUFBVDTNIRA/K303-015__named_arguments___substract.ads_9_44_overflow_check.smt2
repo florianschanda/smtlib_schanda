@@ -75,9 +75,8 @@
      (and (dynamic_invariant first true true true) (dynamic_invariant second
      true true true))
      (let ((result (sub first second)))
-     (=> (sub__function_guard result first second)
      (and (= result (- first second)) (dynamic_invariant result true false
-     true))))) :pattern ((sub first second)) )))
+     true)))) :pattern ((sub first second)) )))
 
 (declare-fun first () Int)
 
@@ -117,8 +116,7 @@
 
 ;; H
   (assert
-  (and (and (= o (sub second first)) (sub__function_guard o second first))
-  (and (in_range o) (= o (- second first)))))
+  (and (= o (sub second first)) (and (in_range o) (= o (- second first)))))
 
 ;; H
   (assert (= (mk_int__ref result) (mk_int__ref substract__oppsub__result)))

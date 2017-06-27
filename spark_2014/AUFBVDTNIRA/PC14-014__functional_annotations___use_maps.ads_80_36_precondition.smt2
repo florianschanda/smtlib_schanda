@@ -1248,8 +1248,7 @@
 ;; prop____def_axiom
   (assert
   (forall ((e Int))
-  (! (=> (prop____function_guard (prop__ e) e)
-     (= (= (prop__ e) true) (<= 0 e))) :pattern ((prop__ e)) )))
+  (! (= (= (prop__ e) true) (<= 0 e)) :pattern ((prop__ e)) )))
 
 (declare-fun s1__split_discrs () us_split_discrs)
 
@@ -1538,9 +1537,9 @@
 
 (declare-fun s1__split_fields () us_main_type)
 
-(declare-fun temp___988 () us_rep3)
+(declare-fun temp___929 () us_rep3)
 
-(declare-fun temp___987 () Int)
+(declare-fun temp___928 () Int)
 
 (declare-fun o () Bool)
 
@@ -1588,36 +1587,36 @@
 
 ;; H
   (assert
-  (and (= temp___988 (keys s2))
+  (and (= temp___929 (keys s2))
   (and
   (and
   (and
-  (and (= (length3 temp___988) (length s2))
+  (and (= (length3 temp___929) (length s2))
   (forall ((temp___431 Int))
   (=>
   (and (in_range5 temp___431)
-  (= (iter_has_element temp___988 temp___431) true))
-  (= (has_key (model__ s2) (get1 temp___988 temp___431)) true))))
+  (= (iter_has_element temp___929 temp___431) true))
+  (= (has_key (model__ s2) (get1 temp___929 temp___431)) true))))
   (forall ((key2 Int))
   (=> (and (in_range3 key2) (= (has_key (model__ s2) key2) true))
-  (and (< 0 (find temp___988 key2))
-  (= (get1 temp___988 (find temp___988 key2)) key2)))))
+  (and (< 0 (find temp___929 key2))
+  (= (get1 temp___929 (find temp___929 key2)) key2)))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i (length s2)))
-  (= (find temp___988 (get1 temp___988 i)) i))))
+  (= (find temp___929 (get1 temp___929 i)) i))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i (length s2)))
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j (length s2)))
-  (=> (= (get1 temp___988 i) (get1 temp___988 j)) (= i j)))))))))
+  (=> (= (get1 temp___929 i) (get1 temp___929 j)) (= i j)))))))))
 
 ;; H
   (assert
-  (and (= o (iter_has_element temp___988 temp___987))
-  (= (= o true) (and (<= 1 temp___987) (<= temp___987 (last temp___988))))))
+  (and (= o (iter_has_element temp___929 temp___928))
+  (= (= o true) (and (<= 1 temp___928) (<= temp___928 (last temp___929))))))
 
 ;; H
-  (assert (= (= o1 true) (in_range5 temp___987)))
+  (assert (= (= o1 true) (in_range5 temp___928)))
 
 ;; H
   (assert (= result (ite (= o1 true) o false)))
@@ -1626,7 +1625,7 @@
   (assert (= result true))
 
 ;; H
-  (assert (and (= k (get1 temp___988 temp___987)) (in_range6 k)))
+  (assert (and (= k (get1 temp___929 temp___928)) (in_range6 k)))
 
 (assert
 ;; WP_parameter_def

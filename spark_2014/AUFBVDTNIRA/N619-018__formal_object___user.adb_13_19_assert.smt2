@@ -75,10 +75,8 @@
 ;; get__post_axiom
   (assert
   (forall ((user__x Int))
-  (! (=> (dynamic_invariant user__x true true true)
-     (let ((result (get user__x)))
-     (=> (get__function_guard result user__x) (dynamic_invariant result true
-     false true)))) :pattern ((get user__x)) )))
+  (! (=> (dynamic_invariant user__x true true true) (dynamic_invariant
+     (get user__x) true false true)) :pattern ((get user__x)) )))
 
 (declare-fun get1 (Int) Int)
 
@@ -87,10 +85,8 @@
 ;; get__post_axiom
   (assert
   (forall ((user__y Int))
-  (! (=> (dynamic_invariant user__y true true true)
-     (let ((result (get1 user__y)))
-     (=> (get__function_guard1 result user__y) (dynamic_invariant result true
-     false true)))) :pattern ((get1 user__y)) )))
+  (! (=> (dynamic_invariant user__y true true true) (dynamic_invariant
+     (get1 user__y) true false true)) :pattern ((get1 user__y)) )))
 
 (declare-fun x () Int)
 
@@ -110,16 +106,10 @@
   (assert (and (= x1 0) (in_range x1)))
 
 ;; H
-  (assert (get__function_guard (get x1) x1))
-
-;; H
   (assert (= (get x1) 0))
 
 ;; H
   (assert (and (= y1 1) (in_range y1)))
-
-;; H
-  (assert (get__function_guard1 (get1 y1) y1))
 
 (assert
 ;; WP_parameter_def

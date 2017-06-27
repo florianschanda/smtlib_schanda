@@ -1106,17 +1106,17 @@
 
 (declare-fun o1 () count_type)
 
-(declare-fun temp___656 () count_type)
+(declare-fun temp___631 () count_type)
 
 (declare-fun use_ordered_maps__my_find__cu__assume () count_type)
 
-(declare-fun temp___653 () count_type)
+(declare-fun temp___628 () count_type)
 
-(declare-fun temp___654 () Int)
+(declare-fun temp___629 () Int)
 
 (declare-fun o2 () Int)
 
-(declare-fun temp___652 () count_type)
+(declare-fun temp___627 () count_type)
 
 (declare-fun o3 () Bool)
 
@@ -1132,11 +1132,11 @@
 
 (declare-fun use_ordered_maps__my_find__result2 () us_rep1)
 
-(declare-fun temp___6541 () Int)
+(declare-fun temp___6291 () Int)
 
 (declare-fun result2 () int__ref)
 
-(declare-fun temp___6542 () Int)
+(declare-fun temp___6292 () Int)
 
 (declare-fun result3 () Bool)
 
@@ -1196,8 +1196,8 @@
 (define-fun cu__split_fields13 () us_split_fields2 (mk___split_fields1
                                                    cu__split_fields1))
 
-(define-fun temp___6521 () us_rep1 (mk___rep1
-                                   (mk___split_fields1 temp___652)))
+(define-fun temp___6271 () us_rep1 (mk___rep1
+                                   (mk___split_fields1 temp___627)))
 
 (define-fun use_ordered_maps__my_find__cu__assume1 () us_rep1 (mk___rep1
                                                               (mk___split_fields1
@@ -1212,10 +1212,10 @@
   (assert (= o o1))
 
 ;; H
-  (assert (= temp___656 o1))
+  (assert (= temp___631 o1))
 
 ;; H
-  (assert (= (mk___rep1 (mk___split_fields1 temp___656)) no_element))
+  (assert (= (mk___rep1 (mk___split_fields1 temp___631)) no_element))
 
 ;; H
   (assert (in_range1 k))
@@ -1255,8 +1255,8 @@
   (= (= result1 true)
   (= (has_key1 (positions s) (mk___rep1 cu__split_fields13)) true)))
   (and (= result1 true)
-  (and (= temp___653 cu__split_fields1)
-  (and (= 0 temp___654)
+  (and (= temp___628 cu__split_fields1)
+  (and (= 0 temp___629)
   (and
   (forall ((i Int))
   (=>
@@ -1265,8 +1265,8 @@
   (not (= (get (keys s) i) k))))
   (and (= (has_key1 (positions s) (mk___rep1 cu__split_fields12)) true)
   (and
-  (and (= result2 (mk_int__ref temp___6541))
-  (= temp___6542 (get1 (positions s) (mk___rep1 cu__split_fields12))))
+  (and (= result2 (mk_int__ref temp___6291))
+  (= temp___6292 (get1 (positions s) (mk___rep1 cu__split_fields12))))
   (and
   (and
   (and (= o2 (key s (mk___rep1 cu__split_fields12)))
@@ -1284,8 +1284,8 @@
   (ite (= result1 true)
   (and
   (and
-  (and (= temp___653 cu__split_fields1)
-  (and (= 0 temp___654)
+  (and (= temp___628 cu__split_fields1)
+  (and (= 0 temp___629)
   (and
   (forall ((i Int))
   (=>
@@ -1294,8 +1294,8 @@
   (not (= (get (keys s) i) k))))
   (and (= (has_key1 (positions s) (mk___rep1 cu__split_fields12)) true)
   (and
-  (and (= result2 (mk_int__ref temp___6541))
-  (= temp___6542 (get1 (positions s) (mk___rep1 cu__split_fields12))))
+  (and (= result2 (mk_int__ref temp___6291))
+  (= temp___6292 (get1 (positions s) (mk___rep1 cu__split_fields12))))
   (and
   (and
   (and
@@ -1307,15 +1307,15 @@
   (= use_ordered_maps__my_find__result3 use_ordered_maps__my_find__result2)))
   (and
   (and
-  (and (= temp___6521 (next s (mk___rep1 cu__split_fields12)))
+  (and (= temp___6271 (next s (mk___rep1 cu__split_fields12)))
   (ite (= (ite (= (bool_eq3 (mk___rep1 cu__split_fields12) no_element) false) (= 
           (get1 (positions s) (mk___rep1 cu__split_fields12)) (length3 s)) true) true)
-  (= (bool_eq3 temp___6521 no_element) true)
-  (and (= (has_key1 (positions s) temp___6521) true)
-  (= (get1 (positions s) temp___6521) (+ (get1 (positions s)
+  (= (bool_eq3 temp___6271 no_element) true)
+  (and (= (has_key1 (positions s) temp___6271) true)
+  (= (get1 (positions s) temp___6271) (+ (get1 (positions s)
                                          (mk___rep1 cu__split_fields12)) 1)))))
   (and (= result5 (mk___split_fields__ref1 cu__split_fields12))
-  (= cu__split_fields3 (mk___split_fields1 temp___652))))
+  (= cu__split_fields3 (mk___split_fields1 temp___627))))
   (and
   (and
   (and (= o3 (has_key1 (positions s) (mk___rep1 cu__split_fields3)))

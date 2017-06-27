@@ -269,12 +269,12 @@
 (define-fun statust__ref_2__projection ((a statust__ref)) statust (statust__content
                                                                   a))
 
-(define-fun dynamic_invariant ((temp___expr_1903 Int)
-  (temp___is_init_1900 Bool) (temp___skip_constant_1901 Bool)
-  (temp___do_toplevel_1902 Bool)) Bool (=>
-                                       (or (= temp___is_init_1900 true)
+(define-fun dynamic_invariant ((temp___expr_1792 Int)
+  (temp___is_init_1789 Bool) (temp___skip_constant_1790 Bool)
+  (temp___do_toplevel_1791 Bool)) Bool (=>
+                                       (or (= temp___is_init_1789 true)
                                        (<= 0 8)) (in_range2
-                                       temp___expr_1903)))
+                                       temp___expr_1792)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -308,20 +308,13 @@
   (assert (= status 6))
 
 ;; H
-  (assert
-  (and (= result (ispresent state2)) (ispresent__function_guard result
-  state2)))
+  (assert (= result (ispresent state2)))
 
 ;; H
   (assert (= result true))
 
 ;; H
-  (assert
-  (and (= o (extractuser state1)) (extractuser__function_guard o state1)))
-
-;; H
-  (assert (valid_numberlogentries__function_guard
-  (valid_numberlogentries state) state))
+  (assert (= o (extractuser state1)))
 
 (assert
 ;; WP_parameter_def

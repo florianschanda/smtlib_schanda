@@ -281,16 +281,13 @@
 
 ;; f__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (f us_void_param)))
-     (=> (f__function_guard result us_void_param) (dynamic_invariant result
-     true false true))) :pattern ((f us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant (f us_void_param)
+  true false true) :pattern ((f us_void_param)) )))
 
 ;; f__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (f__function_guard (f us_void_param) us_void_param)
-     (= (f us_void_param) value__size)) :pattern ((f us_void_param)) )))
+  (! (= (f us_void_param) value__size) :pattern ((f us_void_param)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -320,9 +317,6 @@
 
 ;; H
   (assert (in_range x1))
-
-;; H
-  (assert (f__function_guard (f Tuple0) Tuple0))
 
 (assert
 ;; WP_parameter_def

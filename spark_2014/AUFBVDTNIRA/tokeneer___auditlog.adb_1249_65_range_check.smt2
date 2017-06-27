@@ -915,11 +915,11 @@
 (declare-fun valid_numberlogentries__function_guard (Bool
   (Array Int fileentrycountt) Int Int us_split_fields) Bool)
 
-(define-fun dynamic_invariant1 ((temp___expr_932 Int)
-  (temp___is_init_929 Bool) (temp___skip_constant_930 Bool)
-  (temp___do_toplevel_931 Bool)) Bool (=>
-                                      (or (= temp___is_init_929 true)
-                                      (<= 1 17)) (in_range7 temp___expr_932)))
+(define-fun dynamic_invariant1 ((temp___expr_925 Int)
+  (temp___is_init_922 Bool) (temp___skip_constant_923 Bool)
+  (temp___do_toplevel_924 Bool)) Bool (=>
+                                      (or (= temp___is_init_922 true)
+                                      (<= 1 17)) (in_range7 temp___expr_925)))
 
 (declare-sort logentrycountt 0)
 
@@ -943,12 +943,12 @@
 (define-fun logentrycountt__ref___projection ((a logentrycountt__ref)) logentrycountt 
   (logentrycountt__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_1056 Int)
-  (temp___is_init_1053 Bool) (temp___skip_constant_1054 Bool)
-  (temp___do_toplevel_1055 Bool)) Bool (=>
-                                       (or (= temp___is_init_1053 true)
+(define-fun dynamic_invariant2 ((temp___expr_1049 Int)
+  (temp___is_init_1046 Bool) (temp___skip_constant_1047 Bool)
+  (temp___do_toplevel_1048 Bool)) Bool (=>
+                                       (or (= temp___is_init_1046 true)
                                        (<= 0 17408)) (in_range8
-                                       temp___expr_1056)))
+                                       temp___expr_1049)))
 
 ;; valid_numberlogentries__post_axiom
   (assert true)
@@ -958,13 +958,7 @@
   (forall ((auditlog__logfileentries (Array Int fileentrycountt)))
   (forall ((auditlog__numberlogentries Int) (auditlog__currentlogfile Int))
   (forall ((auditlog__usedlogfiles__fields us_split_fields))
-  (! (=> (valid_numberlogentries__function_guard
-     (valid_numberlogentries auditlog__logfileentries
-     auditlog__numberlogentries auditlog__currentlogfile
-     auditlog__usedlogfiles__fields) auditlog__logfileentries
-     auditlog__numberlogentries auditlog__currentlogfile
-     auditlog__usedlogfiles__fields)
-     (=
+  (! (=
      (= (valid_numberlogentries auditlog__logfileentries
         auditlog__numberlogentries auditlog__currentlogfile
         auditlog__usedlogfiles__fields) true)
@@ -977,7 +971,7 @@
                                             (us_split_fields1
                                             (mk___rep
                                             auditlog__usedlogfiles__fields)))) 1) 1024) 
-     (to_rep2 (select auditlog__logfileentries auditlog__currentlogfile))))))) :pattern (
+     (to_rep2 (select auditlog__logfileentries auditlog__currentlogfile)))))) :pattern (
   (valid_numberlogentries auditlog__logfileentries auditlog__numberlogentries
   auditlog__currentlogfile auditlog__usedlogfiles__fields)) )))))
 
@@ -1373,10 +1367,8 @@
 ;; agelessthan__def_axiom
   (assert
   (forall ((left (Array Int character)) (right (Array Int character)))
-  (! (=> (agelessthan__function_guard (agelessthan left right) left right)
-     (= (= (agelessthan left right) true)
-     (< (compare left 1 21 right 1 21) 0))) :pattern ((agelessthan left
-                                                      right)) )))
+  (! (= (= (agelessthan left right) true)
+     (< (compare left 1 21 right 1 21) 0)) :pattern ((agelessthan left right)) )))
 
 (declare-fun dummy17 () (Array Int character))
 
@@ -1536,17 +1528,17 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(define-fun dynamic_invariant7 ((temp___expr_926 Int)
-  (temp___is_init_923 Bool) (temp___skip_constant_924 Bool)
-  (temp___do_toplevel_925 Bool)) Bool (=>
-                                      (or (= temp___is_init_923 true)
-                                      (<= 0 17)) (in_range6 temp___expr_926)))
+(define-fun dynamic_invariant7 ((temp___expr_919 Int)
+  (temp___is_init_916 Bool) (temp___skip_constant_917 Bool)
+  (temp___do_toplevel_918 Bool)) Bool (=>
+                                      (or (= temp___is_init_916 true)
+                                      (<= 0 17)) (in_range6 temp___expr_919)))
 
-(define-fun dynamic_invariant8 ((temp___expr_938 Int)
-  (temp___is_init_935 Bool) (temp___skip_constant_936 Bool)
-  (temp___do_toplevel_937 Bool)) Bool (=>
-                                      (or (= temp___is_init_935 true)
-                                      (<= 0 2)) (in_range9 temp___expr_938)))
+(define-fun dynamic_invariant8 ((temp___expr_931 Int)
+  (temp___is_init_928 Bool) (temp___skip_constant_929 Bool)
+  (temp___do_toplevel_930 Bool)) Bool (=>
+                                      (or (= temp___is_init_928 true)
+                                      (<= 0 2)) (in_range9 temp___expr_931)))
 
 ;; emptylist__def_axiom
   (assert
@@ -1554,22 +1546,22 @@
                (mk___split_fields (temp___153 1) (of_rep4 17) (of_rep4 1)
                (of_rep3 0)))))
 
-(define-fun dynamic_invariant9 ((temp___expr_1011 Int)
-  (temp___is_init_1008 Bool) (temp___skip_constant_1009 Bool)
-  (temp___do_toplevel_1010 Bool)) Bool (=>
-                                       (or (= temp___is_init_1008 true)
+(define-fun dynamic_invariant9 ((temp___expr_1004 Int)
+  (temp___is_init_1001 Bool) (temp___skip_constant_1002 Bool)
+  (temp___do_toplevel_1003 Bool)) Bool (=>
+                                       (or (= temp___is_init_1001 true)
                                        (<= 1 3)) (in_range11
-                                       temp___expr_1011)))
+                                       temp___expr_1004)))
 
 ;; logdirectory__def_axiom
   (assert (= logdirectory (temp___String_Literal_157 Tuple0)))
 
-(define-fun dynamic_invariant10 ((temp___expr_1062 Int)
-  (temp___is_init_1059 Bool) (temp___skip_constant_1060 Bool)
-  (temp___do_toplevel_1061 Bool)) Bool (=>
-                                       (or (= temp___is_init_1059 true)
+(define-fun dynamic_invariant10 ((temp___expr_1055 Int)
+  (temp___is_init_1052 Bool) (temp___skip_constant_1053 Bool)
+  (temp___do_toplevel_1054 Bool)) Bool (=>
+                                       (or (= temp___is_init_1052 true)
                                        (<= 0 1024)) (in_range5
-                                       temp___expr_1062)))
+                                       temp___expr_1055)))
 
 (define-fun dynamic_invariant11 ((temp___expr_279 Int)
   (temp___is_init_276 Bool) (temp___skip_constant_277 Bool)
@@ -1610,13 +1602,13 @@
 
 (declare-fun o6 () logfilecountt)
 
-(declare-fun temp___1252 () (Array Int logfileindext))
+(declare-fun temp___1241 () (Array Int logfileindext))
 
-(declare-fun temp___12521 () logfileindext)
+(declare-fun temp___12411 () logfileindext)
 
-(declare-fun temp___12522 () logfileindext)
+(declare-fun temp___12412 () logfileindext)
 
-(declare-fun temp___12523 () logfilecountt)
+(declare-fun temp___12413 () logfilecountt)
 
 (declare-fun o7 () Int)
 
@@ -1624,7 +1616,7 @@
 
 (declare-fun o9 () us_split_fields)
 
-(declare-fun temp___1214 () us_rep)
+(declare-fun temp___1203 () us_rep)
 
 (declare-fun ok () Bool)
 
@@ -1696,21 +1688,21 @@
   (assert (= o o6))
 
 ;; H
-  (assert (= temp___1252 o3))
+  (assert (= temp___1241 o3))
 
 ;; H
-  (assert (= temp___12521 o4))
+  (assert (= temp___12411 o4))
 
 ;; H
-  (assert (= temp___12522 o5))
+  (assert (= temp___12412 o5))
 
 ;; H
-  (assert (= temp___12523 o6))
+  (assert (= temp___12413 o6))
 
 ;; H
   (assert
   (= (mk___rep
-     (mk___split_fields temp___1252 temp___12521 temp___12522 temp___12523)) 
+     (mk___split_fields temp___1241 temp___12411 temp___12412 temp___12413)) 
   emptylist))
 
 ;; H
@@ -1796,15 +1788,10 @@
 ;; H
   (assert
   (and
-  (and
   (= result4 (agelessthan (select fileages i2)
              (select fileages (to_rep4
                               (select (rec__auditlog__logfilelistt__list
                                       usedlogfiles__split_fields6) j2)))))
-  (agelessthan__function_guard result4 (select fileages i2)
-  (select fileages (to_rep4
-                   (select (rec__auditlog__logfilelistt__list
-                           usedlogfiles__split_fields6) j2)))))
   (= (= result4 true)
   (< (compare (select fileages i2) 1 21
      (select fileages (to_rep4
@@ -1860,13 +1847,13 @@
         (us_split_fields__content usedlogfiles__split_fields7)))))
 
 ;; H
-  (assert (= temp___1214 (mk___rep o9)))
+  (assert (= temp___1203 (mk___rep o9)))
 
 ;; H
   (assert (= result5 usedlogfiles__split_fields7))
 
 ;; H
-  (assert (= usedlogfiles__split_fields9 (us_split_fields1 temp___1214)))
+  (assert (= usedlogfiles__split_fields9 (us_split_fields1 temp___1203)))
 
 (assert
 ;; WP_parameter_def

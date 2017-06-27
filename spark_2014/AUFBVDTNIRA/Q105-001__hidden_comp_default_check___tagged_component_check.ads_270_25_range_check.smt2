@@ -92,10 +92,8 @@
 ;; hide__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (hide x)))
-     (=> (hide__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((hide x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (hide x)
+     true false true)) :pattern ((hide x)) )))
 
 (declare-fun to_rep (natural) Int)
 
@@ -494,33 +492,24 @@
 (declare-datatypes () ((d1__ref (mk_d1__ref (d1__content us_rep2)))))
 (define-fun d1__ref___projection ((a d1__ref)) us_rep2 (d1__content a))
 
-;; temp___result_250_def
-  (assert (hide__function_guard (hide 10) 10))
-
-;; temp___result_251_def
-  (assert (hide__function_guard (hide 0) 0))
-
-;; temp___result_252_def
-  (assert (hide__function_guard (hide 1) 1))
-
-(define-fun default_initial_assumption ((temp___expr_248 us_rep2)
-  (temp___skip_top_level_249 Bool)) Bool (and
-                                         (= (attr__tag2 temp___expr_248) 
+(define-fun default_initial_assumption ((temp___expr_236 us_rep2)
+  (temp___skip_top_level_237 Bool)) Bool (and
+                                         (= (attr__tag2 temp___expr_236) 
                                          us_tag2)
                                          (and
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__q__d1__h
                                             (us_split_fields5
-                                            temp___expr_248))) (hide 10))
+                                            temp___expr_236))) (hide 10))
                                          (= (to_rep
                                             (rec__tagged_component_check__q__p1__root__f2
                                             (us_split_fields5
-                                            temp___expr_248))) (hide 0)))
+                                            temp___expr_236))) (hide 0)))
                                          (= (to_rep
                                             (rec__tagged_component_check__q__p1__c__g1
                                             (us_split_fields5
-                                            temp___expr_248))) (hide 1)))))
+                                            temp___expr_236))) (hide 1)))))
 
 (declare-datatypes ()
 ((us_split_fields6
@@ -904,33 +893,24 @@
 (declare-datatypes () ((d2__ref (mk_d2__ref (d2__content us_rep5)))))
 (define-fun d2__ref___projection ((a d2__ref)) us_rep5 (d2__content a))
 
-;; temp___result_263_def
-  (assert (hide__function_guard (hide 3) 3))
-
-;; temp___result_264_def
-  (assert (hide__function_guard (hide 11) 11))
-
-;; temp___result_265_def
-  (assert (hide__function_guard (hide 2) 2))
-
-(define-fun default_initial_assumption1 ((temp___expr_261 us_rep5)
-  (temp___skip_top_level_262 Bool)) Bool (and
-                                         (= (attr__tag5 temp___expr_261) 
+(define-fun default_initial_assumption1 ((temp___expr_246 us_rep5)
+  (temp___skip_top_level_247 Bool)) Bool (and
+                                         (= (attr__tag5 temp___expr_246) 
                                          us_tag5)
                                          (and
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__q__p2__c__g1
                                             (us_split_fields11
-                                            temp___expr_261))) (hide 3))
+                                            temp___expr_246))) (hide 3))
                                          (= (to_rep
                                             (rec__tagged_component_check__q__d2__h
                                             (us_split_fields11
-                                            temp___expr_261))) (hide 11)))
+                                            temp___expr_246))) (hide 11)))
                                          (= (to_rep
                                             (rec__tagged_component_check__q__p2__root__f2
                                             (us_split_fields11
-                                            temp___expr_261))) (hide 2)))))
+                                            temp___expr_246))) (hide 2)))))
 
 (declare-datatypes ()
 ((us_split_fields12
@@ -1320,33 +1300,24 @@
 (declare-datatypes () ((d3__ref (mk_d3__ref (d3__content us_rep8)))))
 (define-fun d3__ref___projection ((a d3__ref)) us_rep8 (d3__content a))
 
-;; temp___result_276_def
-  (assert (hide__function_guard (hide 5) 5))
-
-;; temp___result_277_def
-  (assert (hide__function_guard (hide 12) 12))
-
-;; temp___result_278_def
-  (assert (hide__function_guard (hide 4) 4))
-
-(define-fun default_initial_assumption2 ((temp___expr_274 us_rep8)
-  (temp___skip_top_level_275 Bool)) Bool (and
-                                         (= (attr__tag8 temp___expr_274) 
+(define-fun default_initial_assumption2 ((temp___expr_256 us_rep8)
+  (temp___skip_top_level_257 Bool)) Bool (and
+                                         (= (attr__tag8 temp___expr_256) 
                                          us_tag8)
                                          (and
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__q__p3__c__g1
                                             (us_split_fields17
-                                            temp___expr_274))) (hide 5))
+                                            temp___expr_256))) (hide 5))
                                          (= (to_rep
                                             (rec__tagged_component_check__q__d3__h
                                             (us_split_fields17
-                                            temp___expr_274))) (hide 12)))
+                                            temp___expr_256))) (hide 12)))
                                          (= (to_rep
                                             (rec__tagged_component_check__q__p3__root__f2
                                             (us_split_fields17
-                                            temp___expr_274))) (hide 4)))))
+                                            temp___expr_256))) (hide 4)))))
 
 (declare-datatypes ()
 ((us_split_fields18
@@ -1712,25 +1683,19 @@
 (declare-datatypes () ((d4__ref (mk_d4__ref (d4__content us_rep11)))))
 (define-fun d4__ref___projection ((a d4__ref)) us_rep11 (d4__content a))
 
-;; temp___result_289_def
-  (assert (hide__function_guard (hide 13) 13))
-
-;; temp___result_290_def
-  (assert (hide__function_guard (hide 6) 6))
-
-(define-fun default_initial_assumption3 ((temp___expr_287 us_rep11)
-  (temp___skip_top_level_288 Bool)) Bool (and
-                                         (= (attr__tag11 temp___expr_287) 
+(define-fun default_initial_assumption3 ((temp___expr_266 us_rep11)
+  (temp___skip_top_level_267 Bool)) Bool (and
+                                         (= (attr__tag11 temp___expr_266) 
                                          us_tag11)
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__q__d4__h
                                             (us_split_fields23
-                                            temp___expr_287))) (hide 13))
+                                            temp___expr_266))) (hide 13))
                                          (= (to_rep
                                             (rec__tagged_component_check__q__p4__root__f2
                                             (us_split_fields23
-                                            temp___expr_287))) (hide 6)))))
+                                            temp___expr_266))) (hide 6)))))
 
 (declare-sort us_main_type1 0)
 
@@ -1920,17 +1885,14 @@
 (declare-datatypes () ((d5__ref (mk_d5__ref (d5__content us_rep13)))))
 (define-fun d5__ref___projection ((a d5__ref)) us_rep13 (d5__content a))
 
-;; temp___result_301_def
-  (assert (hide__function_guard (hide 14) 14))
-
-(define-fun default_initial_assumption4 ((temp___expr_299 us_rep13)
-  (temp___skip_top_level_300 Bool)) Bool (and
-                                         (= (attr__tag13 temp___expr_299) 
+(define-fun default_initial_assumption4 ((temp___expr_276 us_rep13)
+  (temp___skip_top_level_277 Bool)) Bool (and
+                                         (= (attr__tag13 temp___expr_276) 
                                          us_tag13)
                                          (= (to_rep
                                             (rec__tagged_component_check__q__d5__h
                                             (us_split_fields27
-                                            temp___expr_299))) (hide 14))))
+                                            temp___expr_276))) (hide 14))))
 
 (declare-fun x1__attr__tag () Int)
 
@@ -2343,33 +2305,24 @@
 (declare-datatypes () ((d1__ref1 (mk_d1__ref1 (d1__content1 us_rep16)))))
 (define-fun d1__ref_2__projection ((a d1__ref1)) us_rep16 (d1__content1 a))
 
-;; temp___result_424_def
-  (assert (hide__function_guard (hide 25) 25))
-
-;; temp___result_425_def
-  (assert (hide__function_guard (hide 15) 15))
-
-;; temp___result_426_def
-  (assert (hide__function_guard (hide 16) 16))
-
-(define-fun default_initial_assumption5 ((temp___expr_422 us_rep16)
-  (temp___skip_top_level_423 Bool)) Bool (and
-                                         (= (attr__tag16 temp___expr_422) 
+(define-fun default_initial_assumption5 ((temp___expr_386 us_rep16)
+  (temp___skip_top_level_387 Bool)) Bool (and
+                                         (= (attr__tag16 temp___expr_386) 
                                          us_tag16)
                                          (and
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__r__d1__h
                                             (us_split_fields33
-                                            temp___expr_422))) (hide 25))
+                                            temp___expr_386))) (hide 25))
                                          (= (to_rep
                                             (rec__tagged_component_check__r__p1__root__f2
                                             (us_split_fields33
-                                            temp___expr_422))) (hide 15)))
+                                            temp___expr_386))) (hide 15)))
                                          (= (to_rep
                                             (rec__tagged_component_check__r__p1__c__g1
                                             (us_split_fields33
-                                            temp___expr_422))) (hide 16)))))
+                                            temp___expr_386))) (hide 16)))))
 
 (declare-datatypes ()
 ((us_split_fields34
@@ -2762,33 +2715,24 @@
 (declare-datatypes () ((d2__ref1 (mk_d2__ref1 (d2__content1 us_rep19)))))
 (define-fun d2__ref_2__projection ((a d2__ref1)) us_rep19 (d2__content1 a))
 
-;; temp___result_433_def
-  (assert (hide__function_guard (hide 18) 18))
-
-;; temp___result_434_def
-  (assert (hide__function_guard (hide 26) 26))
-
-;; temp___result_435_def
-  (assert (hide__function_guard (hide 17) 17))
-
-(define-fun default_initial_assumption6 ((temp___expr_431 us_rep19)
-  (temp___skip_top_level_432 Bool)) Bool (and
-                                         (= (attr__tag19 temp___expr_431) 
+(define-fun default_initial_assumption6 ((temp___expr_392 us_rep19)
+  (temp___skip_top_level_393 Bool)) Bool (and
+                                         (= (attr__tag19 temp___expr_392) 
                                          us_tag19)
                                          (and
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__r__p2__c__g1
                                             (us_split_fields39
-                                            temp___expr_431))) (hide 18))
+                                            temp___expr_392))) (hide 18))
                                          (= (to_rep
                                             (rec__tagged_component_check__r__d2__h
                                             (us_split_fields39
-                                            temp___expr_431))) (hide 26)))
+                                            temp___expr_392))) (hide 26)))
                                          (= (to_rep
                                             (rec__tagged_component_check__r__p2__root__f2
                                             (us_split_fields39
-                                            temp___expr_431))) (hide 17)))))
+                                            temp___expr_392))) (hide 17)))))
 
 (declare-datatypes ()
 ((us_split_fields40
@@ -3181,33 +3125,24 @@
 (declare-datatypes () ((d3__ref1 (mk_d3__ref1 (d3__content1 us_rep22)))))
 (define-fun d3__ref_2__projection ((a d3__ref1)) us_rep22 (d3__content1 a))
 
-;; temp___result_442_def
-  (assert (hide__function_guard (hide 20) 20))
-
-;; temp___result_443_def
-  (assert (hide__function_guard (hide 27) 27))
-
-;; temp___result_444_def
-  (assert (hide__function_guard (hide 19) 19))
-
-(define-fun default_initial_assumption7 ((temp___expr_440 us_rep22)
-  (temp___skip_top_level_441 Bool)) Bool (and
-                                         (= (attr__tag22 temp___expr_440) 
+(define-fun default_initial_assumption7 ((temp___expr_398 us_rep22)
+  (temp___skip_top_level_399 Bool)) Bool (and
+                                         (= (attr__tag22 temp___expr_398) 
                                          us_tag22)
                                          (and
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__r__p3__c__g1
                                             (us_split_fields45
-                                            temp___expr_440))) (hide 20))
+                                            temp___expr_398))) (hide 20))
                                          (= (to_rep
                                             (rec__tagged_component_check__r__d3__h
                                             (us_split_fields45
-                                            temp___expr_440))) (hide 27)))
+                                            temp___expr_398))) (hide 27)))
                                          (= (to_rep
                                             (rec__tagged_component_check__r__p3__root__f2
                                             (us_split_fields45
-                                            temp___expr_440))) (hide 19)))))
+                                            temp___expr_398))) (hide 19)))))
 
 (declare-datatypes ()
 ((us_split_fields46
@@ -3574,25 +3509,19 @@
 (declare-datatypes () ((d4__ref1 (mk_d4__ref1 (d4__content1 us_rep25)))))
 (define-fun d4__ref_2__projection ((a d4__ref1)) us_rep25 (d4__content1 a))
 
-;; temp___result_451_def
-  (assert (hide__function_guard (hide 28) 28))
-
-;; temp___result_452_def
-  (assert (hide__function_guard (hide 21) 21))
-
-(define-fun default_initial_assumption8 ((temp___expr_449 us_rep25)
-  (temp___skip_top_level_450 Bool)) Bool (and
-                                         (= (attr__tag25 temp___expr_449) 
+(define-fun default_initial_assumption8 ((temp___expr_404 us_rep25)
+  (temp___skip_top_level_405 Bool)) Bool (and
+                                         (= (attr__tag25 temp___expr_404) 
                                          us_tag25)
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__r__d4__h
                                             (us_split_fields51
-                                            temp___expr_449))) (hide 28))
+                                            temp___expr_404))) (hide 28))
                                          (= (to_rep
                                             (rec__tagged_component_check__r__p4__root__f2
                                             (us_split_fields51
-                                            temp___expr_449))) (hide 21)))))
+                                            temp___expr_404))) (hide 21)))))
 
 (declare-sort us_main_type3 0)
 
@@ -3782,17 +3711,14 @@
 (declare-datatypes () ((d5__ref1 (mk_d5__ref1 (d5__content1 us_rep27)))))
 (define-fun d5__ref_2__projection ((a d5__ref1)) us_rep27 (d5__content1 a))
 
-;; temp___result_459_def
-  (assert (hide__function_guard (hide 29) 29))
-
-(define-fun default_initial_assumption9 ((temp___expr_457 us_rep27)
-  (temp___skip_top_level_458 Bool)) Bool (and
-                                         (= (attr__tag27 temp___expr_457) 
+(define-fun default_initial_assumption9 ((temp___expr_410 us_rep27)
+  (temp___skip_top_level_411 Bool)) Bool (and
+                                         (= (attr__tag27 temp___expr_410) 
                                          us_tag27)
                                          (= (to_rep
                                             (rec__tagged_component_check__r__d5__h
                                             (us_split_fields55
-                                            temp___expr_457))) (hide 29))))
+                                            temp___expr_410))) (hide 29))))
 
 (declare-fun y1__attr__tag () Int)
 
@@ -4205,33 +4131,24 @@
 (declare-datatypes () ((d1__ref2 (mk_d1__ref2 (d1__content2 us_rep30)))))
 (define-fun d1__ref_3__projection ((a d1__ref2)) us_rep30 (d1__content2 a))
 
-;; temp___result_598_def
-  (assert (hide__function_guard (hide 40) 40))
-
-;; temp___result_599_def
-  (assert (hide__function_guard (hide 30) 30))
-
-;; temp___result_600_def
-  (assert (hide__function_guard (hide 31) 31))
-
-(define-fun default_initial_assumption10 ((temp___expr_596 us_rep30)
-  (temp___skip_top_level_597 Bool)) Bool (and
-                                         (= (attr__tag30 temp___expr_596) 
+(define-fun default_initial_assumption10 ((temp___expr_536 us_rep30)
+  (temp___skip_top_level_537 Bool)) Bool (and
+                                         (= (attr__tag30 temp___expr_536) 
                                          us_tag30)
                                          (and
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__s__d1__h
                                             (us_split_fields61
-                                            temp___expr_596))) (hide 40))
+                                            temp___expr_536))) (hide 40))
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p1__root__f2
                                             (us_split_fields61
-                                            temp___expr_596))) (hide 30)))
+                                            temp___expr_536))) (hide 30)))
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p1__c__g1
                                             (us_split_fields61
-                                            temp___expr_596))) (hide 31)))))
+                                            temp___expr_536))) (hide 31)))))
 
 (declare-datatypes ()
 ((us_split_fields62
@@ -4624,33 +4541,24 @@
 (declare-datatypes () ((d2__ref2 (mk_d2__ref2 (d2__content2 us_rep33)))))
 (define-fun d2__ref_3__projection ((a d2__ref2)) us_rep33 (d2__content2 a))
 
-;; temp___result_607_def
-  (assert (hide__function_guard (hide 33) 33))
-
-;; temp___result_608_def
-  (assert (hide__function_guard (hide 41) 41))
-
-;; temp___result_609_def
-  (assert (hide__function_guard (hide 32) 32))
-
-(define-fun default_initial_assumption11 ((temp___expr_605 us_rep33)
-  (temp___skip_top_level_606 Bool)) Bool (and
-                                         (= (attr__tag33 temp___expr_605) 
+(define-fun default_initial_assumption11 ((temp___expr_542 us_rep33)
+  (temp___skip_top_level_543 Bool)) Bool (and
+                                         (= (attr__tag33 temp___expr_542) 
                                          us_tag33)
                                          (and
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p2__c__g1
                                             (us_split_fields67
-                                            temp___expr_605))) (hide 33))
+                                            temp___expr_542))) (hide 33))
                                          (= (to_rep
                                             (rec__tagged_component_check__s__d2__h
                                             (us_split_fields67
-                                            temp___expr_605))) (hide 41)))
+                                            temp___expr_542))) (hide 41)))
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p2__root__f2
                                             (us_split_fields67
-                                            temp___expr_605))) (hide 32)))))
+                                            temp___expr_542))) (hide 32)))))
 
 (declare-datatypes ()
 ((us_split_fields68
@@ -5043,33 +4951,24 @@
 (declare-datatypes () ((d3__ref2 (mk_d3__ref2 (d3__content2 us_rep36)))))
 (define-fun d3__ref_3__projection ((a d3__ref2)) us_rep36 (d3__content2 a))
 
-;; temp___result_616_def
-  (assert (hide__function_guard (hide 35) 35))
-
-;; temp___result_617_def
-  (assert (hide__function_guard (hide 42) 42))
-
-;; temp___result_618_def
-  (assert (hide__function_guard (hide 34) 34))
-
-(define-fun default_initial_assumption12 ((temp___expr_614 us_rep36)
-  (temp___skip_top_level_615 Bool)) Bool (and
-                                         (= (attr__tag36 temp___expr_614) 
+(define-fun default_initial_assumption12 ((temp___expr_548 us_rep36)
+  (temp___skip_top_level_549 Bool)) Bool (and
+                                         (= (attr__tag36 temp___expr_548) 
                                          us_tag36)
                                          (and
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p3__c__g1
                                             (us_split_fields73
-                                            temp___expr_614))) (hide 35))
+                                            temp___expr_548))) (hide 35))
                                          (= (to_rep
                                             (rec__tagged_component_check__s__d3__h
                                             (us_split_fields73
-                                            temp___expr_614))) (hide 42)))
+                                            temp___expr_548))) (hide 42)))
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p3__root__f2
                                             (us_split_fields73
-                                            temp___expr_614))) (hide 34)))))
+                                            temp___expr_548))) (hide 34)))))
 
 (declare-datatypes ()
 ((us_split_fields74
@@ -5436,25 +5335,19 @@
 (declare-datatypes () ((d4__ref2 (mk_d4__ref2 (d4__content2 us_rep39)))))
 (define-fun d4__ref_3__projection ((a d4__ref2)) us_rep39 (d4__content2 a))
 
-;; temp___result_625_def
-  (assert (hide__function_guard (hide 43) 43))
-
-;; temp___result_626_def
-  (assert (hide__function_guard (hide 36) 36))
-
-(define-fun default_initial_assumption13 ((temp___expr_623 us_rep39)
-  (temp___skip_top_level_624 Bool)) Bool (and
-                                         (= (attr__tag39 temp___expr_623) 
+(define-fun default_initial_assumption13 ((temp___expr_554 us_rep39)
+  (temp___skip_top_level_555 Bool)) Bool (and
+                                         (= (attr__tag39 temp___expr_554) 
                                          us_tag39)
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__s__d4__h
                                             (us_split_fields79
-                                            temp___expr_623))) (hide 43))
+                                            temp___expr_554))) (hide 43))
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p4__root__f2
                                             (us_split_fields79
-                                            temp___expr_623))) (hide 36)))))
+                                            temp___expr_554))) (hide 36)))))
 
 (declare-sort us_main_type5 0)
 
@@ -5644,17 +5537,14 @@
 (declare-datatypes () ((d5__ref2 (mk_d5__ref2 (d5__content2 us_rep41)))))
 (define-fun d5__ref_3__projection ((a d5__ref2)) us_rep41 (d5__content2 a))
 
-;; temp___result_633_def
-  (assert (hide__function_guard (hide 44) 44))
-
-(define-fun default_initial_assumption14 ((temp___expr_631 us_rep41)
-  (temp___skip_top_level_632 Bool)) Bool (and
-                                         (= (attr__tag41 temp___expr_631) 
+(define-fun default_initial_assumption14 ((temp___expr_560 us_rep41)
+  (temp___skip_top_level_561 Bool)) Bool (and
+                                         (= (attr__tag41 temp___expr_560) 
                                          us_tag41)
                                          (= (to_rep
                                             (rec__tagged_component_check__s__d5__h
                                             (us_split_fields83
-                                            temp___expr_631))) (hide 44))))
+                                            temp___expr_560))) (hide 44))))
 
 (declare-fun z1__attr__tag () Int)
 
@@ -5683,9 +5573,6 @@
                                      (<= 0 2147483647)) (in_range
                                      temp___expr_33)))
 
-;; temp___result_138_def
-  (assert (hide__function_guard (hide 0) 0))
-
 (define-fun default_initial_assumption15 ((temp___expr_136 us_rep)
   (temp___skip_top_level_137 Bool)) Bool (and
                                          (= (attr__tag temp___expr_136) 
@@ -5695,364 +5582,268 @@
                                             (us_split_fields1
                                             temp___expr_136))) (hide 0))))
 
-;; temp___result_149_def
-  (assert (hide__function_guard (hide 1) 1))
-
-;; temp___result_150_def
-  (assert (hide__function_guard (hide 0) 0))
-
-(define-fun default_initial_assumption16 ((temp___expr_147 us_rep1)
-  (temp___skip_top_level_148 Bool)) Bool (and
-                                         (= (attr__tag1 temp___expr_147) 
+(define-fun default_initial_assumption16 ((temp___expr_146 us_rep1)
+  (temp___skip_top_level_147 Bool)) Bool (and
+                                         (= (attr__tag1 temp___expr_146) 
                                          us_tag1)
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__q__p1__c__g
                                             (us_split_fields3
-                                            temp___expr_147))) (hide 1))
+                                            temp___expr_146))) (hide 1))
                                          (= (to_rep
                                             (rec__tagged_component_check__q__p1__root__f1
                                             (us_split_fields3
-                                            temp___expr_147))) (hide 0)))))
+                                            temp___expr_146))) (hide 0)))))
 
-;; temp___result_161_def
-  (assert (hide__function_guard (hide 2) 2))
-
-(define-fun default_initial_assumption17 ((temp___expr_159 us_rep3)
-  (temp___skip_top_level_160 Bool)) Bool (and
-                                         (= (attr__tag3 temp___expr_159) 
+(define-fun default_initial_assumption17 ((temp___expr_156 us_rep3)
+  (temp___skip_top_level_157 Bool)) Bool (and
+                                         (= (attr__tag3 temp___expr_156) 
                                          us_tag3)
                                          (= (to_rep
                                             (rec__tagged_component_check__q__p2__root__f
                                             (us_split_fields7
-                                            temp___expr_159))) (hide 2))))
+                                            temp___expr_156))) (hide 2))))
 
-;; temp___result_172_def
-  (assert (hide__function_guard (hide 3) 3))
-
-;; temp___result_173_def
-  (assert (hide__function_guard (hide 2) 2))
-
-(define-fun default_initial_assumption18 ((temp___expr_170 us_rep4)
-  (temp___skip_top_level_171 Bool)) Bool (and
-                                         (= (attr__tag4 temp___expr_170) 
+(define-fun default_initial_assumption18 ((temp___expr_166 us_rep4)
+  (temp___skip_top_level_167 Bool)) Bool (and
+                                         (= (attr__tag4 temp___expr_166) 
                                          us_tag4)
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__q__p2__c__g
                                             (us_split_fields9
-                                            temp___expr_170))) (hide 3))
+                                            temp___expr_166))) (hide 3))
                                          (= (to_rep
                                             (rec__tagged_component_check__q__p2__root__f1
                                             (us_split_fields9
-                                            temp___expr_170))) (hide 2)))))
+                                            temp___expr_166))) (hide 2)))))
 
-;; temp___result_184_def
-  (assert (hide__function_guard (hide 4) 4))
-
-(define-fun default_initial_assumption19 ((temp___expr_182 us_rep6)
-  (temp___skip_top_level_183 Bool)) Bool (and
-                                         (= (attr__tag6 temp___expr_182) 
+(define-fun default_initial_assumption19 ((temp___expr_176 us_rep6)
+  (temp___skip_top_level_177 Bool)) Bool (and
+                                         (= (attr__tag6 temp___expr_176) 
                                          us_tag6)
                                          (= (to_rep
                                             (rec__tagged_component_check__q__p3__root__f
                                             (us_split_fields13
-                                            temp___expr_182))) (hide 4))))
+                                            temp___expr_176))) (hide 4))))
 
-;; temp___result_195_def
-  (assert (hide__function_guard (hide 5) 5))
-
-;; temp___result_196_def
-  (assert (hide__function_guard (hide 4) 4))
-
-(define-fun default_initial_assumption20 ((temp___expr_193 us_rep7)
-  (temp___skip_top_level_194 Bool)) Bool (and
-                                         (= (attr__tag7 temp___expr_193) 
+(define-fun default_initial_assumption20 ((temp___expr_186 us_rep7)
+  (temp___skip_top_level_187 Bool)) Bool (and
+                                         (= (attr__tag7 temp___expr_186) 
                                          us_tag7)
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__q__p3__c__g
                                             (us_split_fields15
-                                            temp___expr_193))) (hide 5))
+                                            temp___expr_186))) (hide 5))
                                          (= (to_rep
                                             (rec__tagged_component_check__q__p3__root__f1
                                             (us_split_fields15
-                                            temp___expr_193))) (hide 4)))))
+                                            temp___expr_186))) (hide 4)))))
 
-;; temp___result_207_def
-  (assert (hide__function_guard (hide 6) 6))
-
-(define-fun default_initial_assumption21 ((temp___expr_205 us_rep9)
-  (temp___skip_top_level_206 Bool)) Bool (and
-                                         (= (attr__tag9 temp___expr_205) 
+(define-fun default_initial_assumption21 ((temp___expr_196 us_rep9)
+  (temp___skip_top_level_197 Bool)) Bool (and
+                                         (= (attr__tag9 temp___expr_196) 
                                          us_tag9)
                                          (= (to_rep
                                             (rec__tagged_component_check__q__p4__root__f
                                             (us_split_fields19
-                                            temp___expr_205))) (hide 6))))
+                                            temp___expr_196))) (hide 6))))
 
-;; temp___result_218_def
-  (assert (hide__function_guard (hide 6) 6))
-
-(define-fun default_initial_assumption22 ((temp___expr_216 us_rep10)
-  (temp___skip_top_level_217 Bool)) Bool (and
-                                         (= (attr__tag10 temp___expr_216) 
+(define-fun default_initial_assumption22 ((temp___expr_206 us_rep10)
+  (temp___skip_top_level_207 Bool)) Bool (and
+                                         (= (attr__tag10 temp___expr_206) 
                                          us_tag10)
                                          (= (to_rep
                                             (rec__tagged_component_check__q__p4__root__f1
                                             (us_split_fields21
-                                            temp___expr_216))) (hide 6))))
+                                            temp___expr_206))) (hide 6))))
 
-(define-fun default_initial_assumption23 ((temp___expr_238 us_rep12)
-  (temp___skip_top_level_239 Bool)) Bool (= (attr__tag12 temp___expr_238) 
+(define-fun default_initial_assumption23 ((temp___expr_226 us_rep12)
+  (temp___skip_top_level_227 Bool)) Bool (= (attr__tag12 temp___expr_226) 
   us_tag12))
 
-;; temp___result_312_def
-  (assert (hide__function_guard (hide 15) 15))
-
-(define-fun default_initial_assumption24 ((temp___expr_310 us_rep14)
-  (temp___skip_top_level_311 Bool)) Bool (and
-                                         (= (attr__tag14 temp___expr_310) 
+(define-fun default_initial_assumption24 ((temp___expr_286 us_rep14)
+  (temp___skip_top_level_287 Bool)) Bool (and
+                                         (= (attr__tag14 temp___expr_286) 
                                          us_tag14)
                                          (= (to_rep
                                             (rec__tagged_component_check__r__p1__root__f
                                             (us_split_fields29
-                                            temp___expr_310))) (hide 15))))
+                                            temp___expr_286))) (hide 15))))
 
-;; temp___result_323_def
-  (assert (hide__function_guard (hide 16) 16))
-
-;; temp___result_324_def
-  (assert (hide__function_guard (hide 15) 15))
-
-(define-fun default_initial_assumption25 ((temp___expr_321 us_rep15)
-  (temp___skip_top_level_322 Bool)) Bool (and
-                                         (= (attr__tag15 temp___expr_321) 
+(define-fun default_initial_assumption25 ((temp___expr_296 us_rep15)
+  (temp___skip_top_level_297 Bool)) Bool (and
+                                         (= (attr__tag15 temp___expr_296) 
                                          us_tag15)
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__r__p1__c__g
                                             (us_split_fields31
-                                            temp___expr_321))) (hide 16))
+                                            temp___expr_296))) (hide 16))
                                          (= (to_rep
                                             (rec__tagged_component_check__r__p1__root__f1
                                             (us_split_fields31
-                                            temp___expr_321))) (hide 15)))))
+                                            temp___expr_296))) (hide 15)))))
 
-;; temp___result_335_def
-  (assert (hide__function_guard (hide 17) 17))
-
-(define-fun default_initial_assumption26 ((temp___expr_333 us_rep17)
-  (temp___skip_top_level_334 Bool)) Bool (and
-                                         (= (attr__tag17 temp___expr_333) 
+(define-fun default_initial_assumption26 ((temp___expr_306 us_rep17)
+  (temp___skip_top_level_307 Bool)) Bool (and
+                                         (= (attr__tag17 temp___expr_306) 
                                          us_tag17)
                                          (= (to_rep
                                             (rec__tagged_component_check__r__p2__root__f
                                             (us_split_fields35
-                                            temp___expr_333))) (hide 17))))
+                                            temp___expr_306))) (hide 17))))
 
-;; temp___result_346_def
-  (assert (hide__function_guard (hide 18) 18))
-
-;; temp___result_347_def
-  (assert (hide__function_guard (hide 17) 17))
-
-(define-fun default_initial_assumption27 ((temp___expr_344 us_rep18)
-  (temp___skip_top_level_345 Bool)) Bool (and
-                                         (= (attr__tag18 temp___expr_344) 
+(define-fun default_initial_assumption27 ((temp___expr_316 us_rep18)
+  (temp___skip_top_level_317 Bool)) Bool (and
+                                         (= (attr__tag18 temp___expr_316) 
                                          us_tag18)
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__r__p2__c__g
                                             (us_split_fields37
-                                            temp___expr_344))) (hide 18))
+                                            temp___expr_316))) (hide 18))
                                          (= (to_rep
                                             (rec__tagged_component_check__r__p2__root__f1
                                             (us_split_fields37
-                                            temp___expr_344))) (hide 17)))))
+                                            temp___expr_316))) (hide 17)))))
 
-;; temp___result_358_def
-  (assert (hide__function_guard (hide 19) 19))
-
-(define-fun default_initial_assumption28 ((temp___expr_356 us_rep20)
-  (temp___skip_top_level_357 Bool)) Bool (and
-                                         (= (attr__tag20 temp___expr_356) 
+(define-fun default_initial_assumption28 ((temp___expr_326 us_rep20)
+  (temp___skip_top_level_327 Bool)) Bool (and
+                                         (= (attr__tag20 temp___expr_326) 
                                          us_tag20)
                                          (= (to_rep
                                             (rec__tagged_component_check__r__p3__root__f
                                             (us_split_fields41
-                                            temp___expr_356))) (hide 19))))
+                                            temp___expr_326))) (hide 19))))
 
-;; temp___result_369_def
-  (assert (hide__function_guard (hide 20) 20))
-
-;; temp___result_370_def
-  (assert (hide__function_guard (hide 19) 19))
-
-(define-fun default_initial_assumption29 ((temp___expr_367 us_rep21)
-  (temp___skip_top_level_368 Bool)) Bool (and
-                                         (= (attr__tag21 temp___expr_367) 
+(define-fun default_initial_assumption29 ((temp___expr_336 us_rep21)
+  (temp___skip_top_level_337 Bool)) Bool (and
+                                         (= (attr__tag21 temp___expr_336) 
                                          us_tag21)
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__r__p3__c__g
                                             (us_split_fields43
-                                            temp___expr_367))) (hide 20))
+                                            temp___expr_336))) (hide 20))
                                          (= (to_rep
                                             (rec__tagged_component_check__r__p3__root__f1
                                             (us_split_fields43
-                                            temp___expr_367))) (hide 19)))))
+                                            temp___expr_336))) (hide 19)))))
 
-;; temp___result_381_def
-  (assert (hide__function_guard (hide 21) 21))
-
-(define-fun default_initial_assumption30 ((temp___expr_379 us_rep23)
-  (temp___skip_top_level_380 Bool)) Bool (and
-                                         (= (attr__tag23 temp___expr_379) 
+(define-fun default_initial_assumption30 ((temp___expr_346 us_rep23)
+  (temp___skip_top_level_347 Bool)) Bool (and
+                                         (= (attr__tag23 temp___expr_346) 
                                          us_tag23)
                                          (= (to_rep
                                             (rec__tagged_component_check__r__p4__root__f
                                             (us_split_fields47
-                                            temp___expr_379))) (hide 21))))
+                                            temp___expr_346))) (hide 21))))
 
-;; temp___result_392_def
-  (assert (hide__function_guard (hide 21) 21))
-
-(define-fun default_initial_assumption31 ((temp___expr_390 us_rep24)
-  (temp___skip_top_level_391 Bool)) Bool (and
-                                         (= (attr__tag24 temp___expr_390) 
+(define-fun default_initial_assumption31 ((temp___expr_356 us_rep24)
+  (temp___skip_top_level_357 Bool)) Bool (and
+                                         (= (attr__tag24 temp___expr_356) 
                                          us_tag24)
                                          (= (to_rep
                                             (rec__tagged_component_check__r__p4__root__f1
                                             (us_split_fields49
-                                            temp___expr_390))) (hide 21))))
+                                            temp___expr_356))) (hide 21))))
 
-(define-fun default_initial_assumption32 ((temp___expr_412 us_rep26)
-  (temp___skip_top_level_413 Bool)) Bool (= (attr__tag26 temp___expr_412) 
+(define-fun default_initial_assumption32 ((temp___expr_376 us_rep26)
+  (temp___skip_top_level_377 Bool)) Bool (= (attr__tag26 temp___expr_376) 
   us_tag26))
 
-;; temp___result_486_def
-  (assert (hide__function_guard (hide 30) 30))
-
-(define-fun default_initial_assumption33 ((temp___expr_484 us_rep28)
-  (temp___skip_top_level_485 Bool)) Bool (and
-                                         (= (attr__tag28 temp___expr_484) 
+(define-fun default_initial_assumption33 ((temp___expr_436 us_rep28)
+  (temp___skip_top_level_437 Bool)) Bool (and
+                                         (= (attr__tag28 temp___expr_436) 
                                          us_tag28)
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p1__root__f
                                             (us_split_fields57
-                                            temp___expr_484))) (hide 30))))
+                                            temp___expr_436))) (hide 30))))
 
-;; temp___result_497_def
-  (assert (hide__function_guard (hide 31) 31))
-
-;; temp___result_498_def
-  (assert (hide__function_guard (hide 30) 30))
-
-(define-fun default_initial_assumption34 ((temp___expr_495 us_rep29)
-  (temp___skip_top_level_496 Bool)) Bool (and
-                                         (= (attr__tag29 temp___expr_495) 
+(define-fun default_initial_assumption34 ((temp___expr_446 us_rep29)
+  (temp___skip_top_level_447 Bool)) Bool (and
+                                         (= (attr__tag29 temp___expr_446) 
                                          us_tag29)
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p1__c__g
                                             (us_split_fields59
-                                            temp___expr_495))) (hide 31))
+                                            temp___expr_446))) (hide 31))
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p1__root__f1
                                             (us_split_fields59
-                                            temp___expr_495))) (hide 30)))))
+                                            temp___expr_446))) (hide 30)))))
 
-;; temp___result_509_def
-  (assert (hide__function_guard (hide 32) 32))
-
-(define-fun default_initial_assumption35 ((temp___expr_507 us_rep31)
-  (temp___skip_top_level_508 Bool)) Bool (and
-                                         (= (attr__tag31 temp___expr_507) 
+(define-fun default_initial_assumption35 ((temp___expr_456 us_rep31)
+  (temp___skip_top_level_457 Bool)) Bool (and
+                                         (= (attr__tag31 temp___expr_456) 
                                          us_tag31)
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p2__root__f
                                             (us_split_fields63
-                                            temp___expr_507))) (hide 32))))
+                                            temp___expr_456))) (hide 32))))
 
-;; temp___result_520_def
-  (assert (hide__function_guard (hide 33) 33))
-
-;; temp___result_521_def
-  (assert (hide__function_guard (hide 32) 32))
-
-(define-fun default_initial_assumption36 ((temp___expr_518 us_rep32)
-  (temp___skip_top_level_519 Bool)) Bool (and
-                                         (= (attr__tag32 temp___expr_518) 
+(define-fun default_initial_assumption36 ((temp___expr_466 us_rep32)
+  (temp___skip_top_level_467 Bool)) Bool (and
+                                         (= (attr__tag32 temp___expr_466) 
                                          us_tag32)
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p2__c__g
                                             (us_split_fields65
-                                            temp___expr_518))) (hide 33))
+                                            temp___expr_466))) (hide 33))
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p2__root__f1
                                             (us_split_fields65
-                                            temp___expr_518))) (hide 32)))))
+                                            temp___expr_466))) (hide 32)))))
 
-;; temp___result_532_def
-  (assert (hide__function_guard (hide 34) 34))
-
-(define-fun default_initial_assumption37 ((temp___expr_530 us_rep34)
-  (temp___skip_top_level_531 Bool)) Bool (and
-                                         (= (attr__tag34 temp___expr_530) 
+(define-fun default_initial_assumption37 ((temp___expr_476 us_rep34)
+  (temp___skip_top_level_477 Bool)) Bool (and
+                                         (= (attr__tag34 temp___expr_476) 
                                          us_tag34)
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p3__root__f
                                             (us_split_fields69
-                                            temp___expr_530))) (hide 34))))
+                                            temp___expr_476))) (hide 34))))
 
-;; temp___result_543_def
-  (assert (hide__function_guard (hide 35) 35))
-
-;; temp___result_544_def
-  (assert (hide__function_guard (hide 34) 34))
-
-(define-fun default_initial_assumption38 ((temp___expr_541 us_rep35)
-  (temp___skip_top_level_542 Bool)) Bool (and
-                                         (= (attr__tag35 temp___expr_541) 
+(define-fun default_initial_assumption38 ((temp___expr_486 us_rep35)
+  (temp___skip_top_level_487 Bool)) Bool (and
+                                         (= (attr__tag35 temp___expr_486) 
                                          us_tag35)
                                          (and
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p3__c__g
                                             (us_split_fields71
-                                            temp___expr_541))) (hide 35))
+                                            temp___expr_486))) (hide 35))
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p3__root__f1
                                             (us_split_fields71
-                                            temp___expr_541))) (hide 34)))))
+                                            temp___expr_486))) (hide 34)))))
 
-;; temp___result_555_def
-  (assert (hide__function_guard (hide 36) 36))
-
-(define-fun default_initial_assumption39 ((temp___expr_553 us_rep37)
-  (temp___skip_top_level_554 Bool)) Bool (and
-                                         (= (attr__tag37 temp___expr_553) 
+(define-fun default_initial_assumption39 ((temp___expr_496 us_rep37)
+  (temp___skip_top_level_497 Bool)) Bool (and
+                                         (= (attr__tag37 temp___expr_496) 
                                          us_tag37)
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p4__root__f
                                             (us_split_fields75
-                                            temp___expr_553))) (hide 36))))
+                                            temp___expr_496))) (hide 36))))
 
-;; temp___result_566_def
-  (assert (hide__function_guard (hide 36) 36))
-
-(define-fun default_initial_assumption40 ((temp___expr_564 us_rep38)
-  (temp___skip_top_level_565 Bool)) Bool (and
-                                         (= (attr__tag38 temp___expr_564) 
+(define-fun default_initial_assumption40 ((temp___expr_506 us_rep38)
+  (temp___skip_top_level_507 Bool)) Bool (and
+                                         (= (attr__tag38 temp___expr_506) 
                                          us_tag38)
                                          (= (to_rep
                                             (rec__tagged_component_check__s__p4__root__f1
                                             (us_split_fields77
-                                            temp___expr_564))) (hide 36))))
+                                            temp___expr_506))) (hide 36))))
 
-(define-fun default_initial_assumption41 ((temp___expr_586 us_rep40)
-  (temp___skip_top_level_587 Bool)) Bool (= (attr__tag40 temp___expr_586) 
+(define-fun default_initial_assumption41 ((temp___expr_526 us_rep40)
+  (temp___skip_top_level_527 Bool)) Bool (= (attr__tag40 temp___expr_526) 
   us_tag40))
 
 (declare-fun x1__split_fields () natural)
@@ -6061,15 +5852,11 @@
 
 (declare-fun x1__split_fields2 () natural)
 
-(declare-fun x1__split_fields3 () us_private)
-
 (declare-fun x2__split_fields () natural)
 
 (declare-fun x2__split_fields1 () natural)
 
 (declare-fun x2__split_fields2 () natural)
-
-(declare-fun x2__split_fields3 () us_private)
 
 (declare-fun x3__split_fields () natural)
 
@@ -6077,21 +5864,11 @@
 
 (declare-fun x3__split_fields2 () natural)
 
-(declare-fun x3__split_fields3 () us_private)
-
-(declare-fun x4__split_fields () us_main_type)
+(declare-fun x4__split_fields () natural)
 
 (declare-fun x4__split_fields1 () natural)
 
-(declare-fun x4__split_fields2 () natural)
-
-(declare-fun x4__split_fields3 () us_private)
-
-(declare-fun x5__split_fields () us_main_type1)
-
-(declare-fun x5__split_fields1 () natural)
-
-(declare-fun x5__split_fields2 () us_private)
+(declare-fun x5__split_fields () natural)
 
 (declare-fun y1__split_fields () natural)
 
@@ -6099,15 +5876,11 @@
 
 (declare-fun y1__split_fields2 () natural)
 
-(declare-fun y1__split_fields3 () us_private)
-
 (declare-fun y2__split_fields () natural)
 
 (declare-fun y2__split_fields1 () natural)
 
 (declare-fun y2__split_fields2 () natural)
-
-(declare-fun y2__split_fields3 () us_private)
 
 (declare-fun y3__split_fields () natural)
 
@@ -6115,29 +5888,17 @@
 
 (declare-fun y3__split_fields2 () natural)
 
-(declare-fun y3__split_fields3 () us_private)
-
-(declare-fun y4__split_fields () us_main_type2)
+(declare-fun y4__split_fields () natural)
 
 (declare-fun y4__split_fields1 () natural)
 
-(declare-fun y4__split_fields2 () natural)
-
-(declare-fun y4__split_fields3 () us_private)
-
-(declare-fun y5__split_fields () us_main_type3)
-
-(declare-fun y5__split_fields1 () natural)
-
-(declare-fun y5__split_fields2 () us_private)
+(declare-fun y5__split_fields () natural)
 
 (declare-fun z1__split_fields () natural)
 
 (declare-fun z1__split_fields1 () natural)
 
 (declare-fun z1__split_fields2 () natural)
-
-(declare-fun z1__split_fields3 () us_private)
 
 (declare-fun z2__split_fields () us_split_fields__ref33)
 
@@ -6146,84 +5907,113 @@
 (declare-fun o () Int)
 
 ;; H
-  (assert (default_initial_assumption
-  (mk___rep2
-  (mk___split_fields2 x1__split_fields x1__split_fields1 x1__split_fields2
-  x1__split_fields3) x1__attr__tag) false))
-
-;; H
-  (assert (default_initial_assumption1
-  (mk___rep5
-  (mk___split_fields5 x2__split_fields x2__split_fields1 x2__split_fields2
-  x2__split_fields3) x2__attr__tag) false))
-
-;; H
-  (assert (default_initial_assumption2
-  (mk___rep8
-  (mk___split_fields8 x3__split_fields x3__split_fields1 x3__split_fields2
-  x3__split_fields3) x3__attr__tag) false))
-
-;; H
-  (assert (default_initial_assumption3
-  (mk___rep11
-  (mk___split_fields11 x4__split_fields x4__split_fields1 x4__split_fields2
-  x4__split_fields3) x4__attr__tag) false))
-
-;; H
-  (assert (default_initial_assumption4
-  (mk___rep13
-  (mk___split_fields13 x5__split_fields x5__split_fields1 x5__split_fields2)
-  x5__attr__tag) false))
-
-;; H
-  (assert (default_initial_assumption5
-  (mk___rep16
-  (mk___split_fields16 y1__split_fields y1__split_fields1 y1__split_fields2
-  y1__split_fields3) y1__attr__tag) false))
-
-;; H
-  (assert (default_initial_assumption6
-  (mk___rep19
-  (mk___split_fields19 y2__split_fields y2__split_fields1 y2__split_fields2
-  y2__split_fields3) y2__attr__tag) false))
-
-;; H
-  (assert (default_initial_assumption7
-  (mk___rep22
-  (mk___split_fields22 y3__split_fields y3__split_fields1 y3__split_fields2
-  y3__split_fields3) y3__attr__tag) false))
-
-;; H
-  (assert (default_initial_assumption8
-  (mk___rep25
-  (mk___split_fields25 y4__split_fields y4__split_fields1 y4__split_fields2
-  y4__split_fields3) y4__attr__tag) false))
-
-;; H
-  (assert (default_initial_assumption9
-  (mk___rep27
-  (mk___split_fields27 y5__split_fields y5__split_fields1 y5__split_fields2)
-  y5__attr__tag) false))
-
-;; H
-  (assert (default_initial_assumption10
-  (mk___rep30
-  (mk___split_fields30 z1__split_fields z1__split_fields1 z1__split_fields2
-  z1__split_fields3) z1__attr__tag) false))
-
-;; H
-  (assert (default_initial_assumption11
-  (mk___rep33 (us_split_fields__content33 z2__split_fields) z2__attr__tag)
-  false))
-
-;; H
-  (assert (default_initial_assumption12
-  (mk___rep36 (us_split_fields__content36 z3__split_fields) z3__attr__tag)
-  false))
+  (assert
+  (and (= x1__attr__tag us_tag2)
+  (and
+  (and (= (to_rep x1__split_fields) (hide 10))
+  (= (to_rep x1__split_fields1) (hide 0)))
+  (= (to_rep x1__split_fields2) (hide 1)))))
 
 ;; H
   (assert
-  (and (and (= o (hide 43)) (hide__function_guard o 43)) (in_range1 o)))
+  (and (= x2__attr__tag us_tag5)
+  (and
+  (and (= (to_rep x2__split_fields) (hide 3))
+  (= (to_rep x2__split_fields1) (hide 11)))
+  (= (to_rep x2__split_fields2) (hide 2)))))
+
+;; H
+  (assert
+  (and (= x3__attr__tag us_tag8)
+  (and
+  (and (= (to_rep x3__split_fields) (hide 5))
+  (= (to_rep x3__split_fields1) (hide 12)))
+  (= (to_rep x3__split_fields2) (hide 4)))))
+
+;; H
+  (assert
+  (and (= x4__attr__tag us_tag11)
+  (and (= (to_rep x4__split_fields) (hide 13))
+  (= (to_rep x4__split_fields1) (hide 6)))))
+
+;; H
+  (assert
+  (and (= x5__attr__tag us_tag13) (= (to_rep x5__split_fields) (hide 14))))
+
+;; H
+  (assert
+  (and (= y1__attr__tag us_tag16)
+  (and
+  (and (= (to_rep y1__split_fields) (hide 25))
+  (= (to_rep y1__split_fields1) (hide 15)))
+  (= (to_rep y1__split_fields2) (hide 16)))))
+
+;; H
+  (assert
+  (and (= y2__attr__tag us_tag19)
+  (and
+  (and (= (to_rep y2__split_fields) (hide 18))
+  (= (to_rep y2__split_fields1) (hide 26)))
+  (= (to_rep y2__split_fields2) (hide 17)))))
+
+;; H
+  (assert
+  (and (= y3__attr__tag us_tag22)
+  (and
+  (and (= (to_rep y3__split_fields) (hide 20))
+  (= (to_rep y3__split_fields1) (hide 27)))
+  (= (to_rep y3__split_fields2) (hide 19)))))
+
+;; H
+  (assert
+  (and (= y4__attr__tag us_tag25)
+  (and (= (to_rep y4__split_fields) (hide 28))
+  (= (to_rep y4__split_fields1) (hide 21)))))
+
+;; H
+  (assert
+  (and (= y5__attr__tag us_tag27) (= (to_rep y5__split_fields) (hide 29))))
+
+;; H
+  (assert
+  (and (= z1__attr__tag us_tag30)
+  (and
+  (and (= (to_rep z1__split_fields) (hide 40))
+  (= (to_rep z1__split_fields1) (hide 30)))
+  (= (to_rep z1__split_fields2) (hide 31)))))
+
+;; H
+  (assert
+  (and (= z2__attr__tag us_tag33)
+  (and
+  (and
+  (= (to_rep
+     (rec__tagged_component_check__s__p2__c__g1
+     (us_split_fields__content33 z2__split_fields))) (hide 33))
+  (= (to_rep
+     (rec__tagged_component_check__s__d2__h
+     (us_split_fields__content33 z2__split_fields))) (hide 41)))
+  (= (to_rep
+     (rec__tagged_component_check__s__p2__root__f2
+     (us_split_fields__content33 z2__split_fields))) (hide 32)))))
+
+;; H
+  (assert
+  (and (= z3__attr__tag us_tag36)
+  (and
+  (and
+  (= (to_rep
+     (rec__tagged_component_check__s__p3__c__g1
+     (us_split_fields__content36 z3__split_fields))) (hide 35))
+  (= (to_rep
+     (rec__tagged_component_check__s__d3__h
+     (us_split_fields__content36 z3__split_fields))) (hide 42)))
+  (= (to_rep
+     (rec__tagged_component_check__s__p3__root__f2
+     (us_split_fields__content36 z3__split_fields))) (hide 34)))))
+
+;; H
+  (assert (and (= o (hide 43)) (in_range1 o)))
 
 (assert
 ;; WP_parameter_def

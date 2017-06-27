@@ -831,8 +831,7 @@
 ;; prop____def_axiom
   (assert
   (forall ((e Int))
-  (! (=> (prop____function_guard (prop__ e) e)
-     (= (= (prop__ e) true) (<= 0 e))) :pattern ((prop__ e)) )))
+  (! (= (= (prop__ e) true) (<= 0 e)) :pattern ((prop__ e)) )))
 
 (declare-fun s1__split_discrs () us_split_discrs)
 
@@ -1316,29 +1315,23 @@
 (declare-fun s1__split_fields () us_main_type)
 
 ;; H
-  (assert (forall ((e Int)) (prop____function_guard (prop__ e) e)))
-
-;; H
-  (assert (forall ((e Int)) (prop____function_guard (prop__ e) e)))
-
-;; H
   (assert
   (and
   (and
-  (let ((temp___962 (elements
+  (let ((temp___932 (elements
                     (mk___rep s1__split_discrs
                     (mk___split_fields s1__split_fields)))))
-  (forall ((temp___961 Int))
+  (forall ((temp___931 Int))
   (=>
-  (and (in_range3 temp___961)
-  (= (iter_has_element temp___962 temp___961) true))
-  (= (prop__ (get temp___962 temp___961)) true))))
-  (let ((temp___965 (elements s2)))
-  (forall ((temp___964 Int))
+  (and (in_range3 temp___931)
+  (= (iter_has_element temp___932 temp___931) true))
+  (= (prop__ (get temp___932 temp___931)) true))))
+  (let ((temp___934 (elements s2)))
+  (forall ((temp___933 Int))
   (=>
-  (and (in_range3 temp___964)
-  (= (iter_has_element temp___965 temp___964) true))
-  (= (prop__ (get temp___965 temp___964)) true)))))
+  (and (in_range3 temp___933)
+  (= (iter_has_element temp___934 temp___933) true))
+  (= (prop__ (get temp___934 temp___933)) true)))))
   (< (length s2) (- (capacity
                     (mk___rep s1__split_discrs
                     (mk___split_fields s1__split_fields))) (length

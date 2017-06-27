@@ -586,13 +586,11 @@
 ;; is_permutation_1__post_axiom
   (assert
   (forall ((r1 (Array Int group1_id)))
-  (! (let ((result (is_permutation_1 r1)))
-     (=> (is_permutation_1__function_guard result r1)
-     (= (= result true)
+  (! (= (= (is_permutation_1 r1) true)
      (forall ((g1 Int))
      (=> (and (<= 1 g1) (<= g1 64))
      (exists ((rank Int))
-     (and (and (<= 1 rank) (<= rank 64)) (= (to_rep (select r1 rank)) g1)))))))) :pattern (
+     (and (and (<= 1 rank) (<= rank 64)) (= (to_rep (select r1 rank)) g1)))))) :pattern (
   (is_permutation_1 r1)) )))
 
 (declare-fun is_permutation_2 ((Array Int group2_id)) Bool)
@@ -603,13 +601,11 @@
 ;; is_permutation_2__post_axiom
   (assert
   (forall ((r2 (Array Int group2_id)))
-  (! (let ((result (is_permutation_2 r2)))
-     (=> (is_permutation_2__function_guard result r2)
-     (= (= result true)
+  (! (= (= (is_permutation_2 r2) true)
      (forall ((g2 Int))
      (=> (and (<= 1 g2) (<= g2 64))
      (exists ((rank Int))
-     (and (and (<= 1 rank) (<= rank 64)) (= (to_rep1 (select r2 rank)) g2)))))))) :pattern (
+     (and (and (<= 1 rank) (<= rank 64)) (= (to_rep1 (select r2 rank)) g2)))))) :pattern (
   (is_permutation_2 r2)) )))
 
 (declare-fun invert_map ((Array Int group1_id)) (Array Int group2_id))
@@ -626,14 +622,13 @@
      (exists ((g2 Int))
      (and (and (<= 1 g2) (<= g2 64)) (= (to_rep (select g2_to_g1 g2)) g1)))))
      (let ((result (invert_map g2_to_g1)))
-     (=> (invert_map__function_guard result g2_to_g1)
      (and
      (forall ((g1 Int))
      (=> (and (<= 1 g1) (<= g1 64))
      (= (to_rep (select g2_to_g1 (to_rep1 (select result g1)))) g1)))
      (forall ((g2 Int))
      (=> (and (<= 1 g2) (<= g2 64))
-     (= (to_rep1 (select result (to_rep (select g2_to_g1 g2)))) g2))))))) :pattern (
+     (= (to_rep1 (select result (to_rep (select g2_to_g1 g2)))) g2)))))) :pattern (
   (invert_map g2_to_g1)) )))
 
 (declare-fun is_preferred_1 (Int Int (Array Int group1_id)) Bool)
@@ -800,19 +795,14 @@
   (assert
   (forall ((g1_a Int) (g1_b Int))
   (forall ((r1 (Array Int group1_id)))
-  (! (and (is_permutation_1__function_guard (is_permutation_1 r1) r1)
-     (=>
+  (! (=>
      (and
      (and (dynamic_invariant g1_a true true true) (dynamic_invariant g1_b
      true true true)) (= (is_permutation_1 r1) true))
-     (let ((result (is_preferred_1 g1_a g1_b r1)))
-     (and (invert_1__function_guard (invert_1 r1) r1)
-     (and (invert_1__function_guard (invert_1 r1) r1)
-     (=> (is_preferred_1__function_guard result g1_a g1_b r1)
-     (= (= result true)
+     (= (= (is_preferred_1 g1_a g1_b r1) true)
      (<= (to_rep2
-         (let ((temp___269 (invert_1 r1))) (select temp___269 g1_a))) 
-     (to_rep2 (let ((temp___271 (invert_1 r1))) (select temp___271 g1_b))))))))))) :pattern (
+         (let ((temp___258 (invert_1 r1))) (select temp___258 g1_a))) 
+     (to_rep2 (let ((temp___259 (invert_1 r1))) (select temp___259 g1_b)))))) :pattern (
   (is_preferred_1 g1_a g1_b r1)) ))))
 
 (declare-fun is_preferred_2 (Int Int (Array Int group2_id)) Bool)
@@ -835,19 +825,14 @@
   (assert
   (forall ((g2_a Int) (g2_b Int))
   (forall ((r2 (Array Int group2_id)))
-  (! (and (is_permutation_2__function_guard (is_permutation_2 r2) r2)
-     (=>
+  (! (=>
      (and
      (and (dynamic_invariant1 g2_a true true true) (dynamic_invariant1 g2_b
      true true true)) (= (is_permutation_2 r2) true))
-     (let ((result (is_preferred_2 g2_a g2_b r2)))
-     (and (invert_2__function_guard (invert_2 r2) r2)
-     (and (invert_2__function_guard (invert_2 r2) r2)
-     (=> (is_preferred_2__function_guard result g2_a g2_b r2)
-     (= (= result true)
+     (= (= (is_preferred_2 g2_a g2_b r2) true)
      (<= (to_rep2
-         (let ((temp___281 (invert_2 r2))) (select temp___281 g2_a))) 
-     (to_rep2 (let ((temp___283 (invert_2 r2))) (select temp___283 g2_b))))))))))) :pattern (
+         (let ((temp___264 (invert_2 r2))) (select temp___264 g2_a))) 
+     (to_rep2 (let ((temp___265 (invert_2 r2))) (select temp___265 g2_b)))))) :pattern (
   (is_preferred_2 g2_a g2_b r2)) ))))
 
 (declare-fun ranking_1 () (Array Int (Array Int group2_id)))
@@ -1426,87 +1411,11 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(declare-sort t84b 0)
-
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 64)))
-
-(define-fun bool_eq14 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq10 (t84b t84b) Bool)
-
-(declare-fun dummy10 () t84b)
-
-(declare-datatypes () ((t84b__ref (mk_t84b__ref (t84b__content t84b)))))
-(define-fun t84b__ref___projection ((a t84b__ref)) t84b (t84b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
-
-(declare-sort t86b 0)
-
-(define-fun in_range7 ((x Int)) Bool (and (<= 1 x) (<= x 64)))
-
-(define-fun bool_eq15 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
-
-(declare-fun user_eq11 (t86b t86b) Bool)
-
-(declare-fun dummy11 () t86b)
-
-(declare-datatypes () ((t86b__ref (mk_t86b__ref (t86b__content t86b)))))
-(define-fun t86b__ref___projection ((a t86b__ref)) t86b (t86b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
-(declare-sort t88b 0)
-
-(define-fun in_range8 ((x Int)) Bool (and (<= 1 x) (<= x 64)))
-
-(define-fun bool_eq16 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
-
-(declare-fun user_eq12 (t88b t88b) Bool)
-
-(declare-fun dummy12 () t88b)
-
-(declare-datatypes () ((t88b__ref (mk_t88b__ref (t88b__content t88b)))))
-(define-fun t88b__ref___projection ((a t88b__ref)) t88b (t88b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
-
-(declare-sort t90b 0)
-
-(define-fun in_range9 ((x Int)) Bool (and (<= 1 x) (<= x 64)))
-
-(define-fun bool_eq17 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE9 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Int)
-
-(declare-fun user_eq13 (t90b t90b) Bool)
-
-(declare-fun dummy13 () t90b)
-
-(declare-datatypes () ((t90b__ref (mk_t90b__ref (t90b__content t90b)))))
-(define-fun t90b__ref___projection ((a t90b__ref)) t90b (t90b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
 
@@ -1518,23 +1427,15 @@
 ;; invert__post_axiom
   (assert
   (forall ((r2 (Array Int (Array Int group1_id))))
-  (! (and
-     (forall ((g2 Int)) (is_permutation_1__function_guard
-     (is_permutation_1 (select r2 g2)) (select r2 g2)))
-     (=>
+  (! (=>
      (forall ((g2 Int))
      (=> (and (<= 1 g2) (<= g2 64))
      (= (is_permutation_1 (select r2 g2)) true)))
-     (let ((result (invert r2)))
-     (and
-     (forall ((g2 Int)) (invert_1__function_guard (invert_1 (select r2 g2))
-     (select r2 g2)))
-     (=> (invert__function_guard result r2)
      (forall ((g2 Int))
      (=> (and (<= 1 g2) (<= g2 64))
-     (= (let ((temp___383 (invert_1 (select r2 g2))))
-        (let ((temp___382 (select result g2)))
-        (bool_eq7 temp___382 1 64 temp___383 1 64))) true)))))))) :pattern (
+     (= (let ((temp___356 (invert_1 (select r2 g2))))
+        (let ((temp___355 (select (invert r2) g2)))
+        (bool_eq7 temp___355 1 64 temp___356 1 64))) true)))) :pattern (
   (invert r2)) )))
 
 (declare-fun all_unmatched_g1_set_elements_distinct (us_split_fields) Bool)
@@ -1549,11 +1450,7 @@
   (assert
   (forall
   ((stable_marriage__matching__unmatched_g1_set__fields us_split_fields))
-  (! (=> (all_unmatched_g1_set_elements_distinct__function_guard
-     (all_unmatched_g1_set_elements_distinct
-     stable_marriage__matching__unmatched_g1_set__fields)
-     stable_marriage__matching__unmatched_g1_set__fields)
-     (=
+  (! (=
      (= (all_unmatched_g1_set_elements_distinct
         stable_marriage__matching__unmatched_g1_set__fields) true)
      (forall ((idx_1 Int))
@@ -1573,16 +1470,16 @@
      (=> (not (= idx_1 idx_2))
      (not
      (= (to_rep
-        (let ((temp___388 (rec__stable_marriage__matching__group1_set__elements
+        (let ((temp___361 (rec__stable_marriage__matching__group1_set__elements
                           (us_split_fields1
                           (mk___rep
                           stable_marriage__matching__unmatched_g1_set__fields)))))
-        (select temp___388 idx_1))) (to_rep
-                                    (let ((temp___389 (rec__stable_marriage__matching__group1_set__elements
+        (select temp___361 idx_1))) (to_rep
+                                    (let ((temp___362 (rec__stable_marriage__matching__group1_set__elements
                                                       (us_split_fields1
                                                       (mk___rep
                                                       stable_marriage__matching__unmatched_g1_set__fields)))))
-                                    (select temp___389 idx_2)))))))))))) :pattern (
+                                    (select temp___362 idx_2))))))))))) :pattern (
   (all_unmatched_g1_set_elements_distinct
   stable_marriage__matching__unmatched_g1_set__fields)) )))
 
@@ -1602,43 +1499,7 @@
   (forall ((stable_marriage__matching__proposals_made (Array Int count)))
   (forall ((stable_marriage__matching__result (Array Int group1_id)))
   (forall ((stable_marriage__matching__unmatched_g2_set (Array Int Bool)))
-  (! (=> (invariant_holds__function_guard
-     (invariant_holds stable_marriage__matching__unmatched_g1_set__fields
-     stable_marriage__matching__proposals_made
-     stable_marriage__matching__result
-     stable_marriage__matching__unmatched_g2_set)
-     stable_marriage__matching__unmatched_g1_set__fields
-     stable_marriage__matching__proposals_made
-     stable_marriage__matching__result
-     stable_marriage__matching__unmatched_g2_set)
-     (and
-     (forall ((g2 Int)) (is_permutation_1__function_guard
-     (is_permutation_1 (select ranking_2 g2)) (select ranking_2 g2)))
-     (and (all_unmatched_g1_set_elements_distinct__function_guard
-     (all_unmatched_g1_set_elements_distinct
-     stable_marriage__matching__unmatched_g1_set__fields)
-     stable_marriage__matching__unmatched_g1_set__fields)
-     (and
-     (forall ((g1_id Int) (rank Int)) (is_preferred_1__function_guard
-     (is_preferred_1 g1_id
-     (to_rep
-     (select stable_marriage__matching__result (to_rep1
-                                               (let ((temp___413 (select 
-                                               ranking_1 g1_id)))
-                                               (select temp___413 rank)))))
-     (select ranking_2 (to_rep1
-                       (let ((temp___414 (select ranking_1 g1_id)))
-                       (select temp___414 rank)))))
-     g1_id
-     (to_rep
-     (select stable_marriage__matching__result (to_rep1
-                                               (let ((temp___413 (select 
-                                               ranking_1 g1_id)))
-                                               (select temp___413 rank)))))
-     (select ranking_2 (to_rep1
-                       (let ((temp___414 (select ranking_1 g1_id)))
-                       (select temp___414 rank))))))
-     (=
+  (! (=
      (= (invariant_holds stable_marriage__matching__unmatched_g1_set__fields
         stable_marriage__matching__proposals_made
         stable_marriage__matching__result
@@ -1668,11 +1529,11 @@
              (mk___rep stable_marriage__matching__unmatched_g1_set__fields))))))
      (not
      (= (to_rep
-        (let ((temp___411 (rec__stable_marriage__matching__group1_set__elements
+        (let ((temp___379 (rec__stable_marriage__matching__group1_set__elements
                           (us_split_fields1
                           (mk___rep
                           stable_marriage__matching__unmatched_g1_set__fields)))))
-        (select temp___411 idx))) (to_rep
+        (select temp___379 idx))) (to_rep
                                   (select stable_marriage__matching__result g2_id))))))))))
      (forall ((g21_id Int))
      (=> (and (<= 1 g21_id) (<= g21_id 64))
@@ -1699,26 +1560,26 @@
      (and
      (not
      (= (select stable_marriage__matching__unmatched_g2_set (to_rep1
-                                                            (let ((temp___412 (select 
+                                                            (let ((temp___380 (select 
                                                             ranking_1 g1_id)))
-                                                            (select temp___412 rank)))) true))
+                                                            (select temp___380 rank)))) true))
      (=>
      (not
      (= (to_rep
         (select stable_marriage__matching__result (to_rep1
-                                                  (let ((temp___416 (select 
+                                                  (let ((temp___383 (select 
                                                   ranking_1 g1_id)))
-                                                  (select temp___416 rank))))) g1_id))
+                                                  (select temp___383 rank))))) g1_id))
      (not
      (= (is_preferred_1 g1_id
         (to_rep
         (select stable_marriage__matching__result (to_rep1
-                                                  (let ((temp___413 (select 
+                                                  (let ((temp___381 (select 
                                                   ranking_1 g1_id)))
-                                                  (select temp___413 rank)))))
+                                                  (select temp___381 rank)))))
         (select ranking_2 (to_rep1
-                          (let ((temp___414 (select ranking_1 g1_id)))
-                          (select temp___414 rank))))) true)))))))))
+                          (let ((temp___382 (select ranking_1 g1_id)))
+                          (select temp___382 rank))))) true)))))))))
      (forall ((g1_id Int))
      (=> (and (<= 1 g1_id) (<= g1_id 64))
      (=>
@@ -1731,11 +1592,11 @@
              (us_split_fields1
              (mk___rep stable_marriage__matching__unmatched_g1_set__fields))))))
      (= (to_rep
-        (let ((temp___417 (rec__stable_marriage__matching__group1_set__elements
+        (let ((temp___384 (rec__stable_marriage__matching__group1_set__elements
                           (us_split_fields1
                           (mk___rep
                           stable_marriage__matching__unmatched_g1_set__fields)))))
-        (select temp___417 idx))) g1_id)))))))
+        (select temp___384 idx))) g1_id)))))))
      (forall ((g1_id Int))
      (=> (and (<= 1 g1_id) (<= g1_id 64))
      (=>
@@ -1748,20 +1609,20 @@
              (mk___rep stable_marriage__matching__unmatched_g1_set__fields))))))
      (not
      (= (to_rep
-        (let ((temp___419 (rec__stable_marriage__matching__group1_set__elements
+        (let ((temp___386 (rec__stable_marriage__matching__group1_set__elements
                           (us_split_fields1
                           (mk___rep
                           stable_marriage__matching__unmatched_g1_set__fields)))))
-        (select temp___419 idx))) g1_id))))
+        (select temp___386 idx))) g1_id))))
      (and
      (< 0 (to_rep3 (select stable_marriage__matching__proposals_made g1_id)))
      (= (to_rep
         (select stable_marriage__matching__result (to_rep1
-                                                  (let ((temp___418 (select 
+                                                  (let ((temp___385 (select 
                                                   ranking_1 g1_id)))
-                                                  (select temp___418 
+                                                  (select temp___385 
                                                   (to_rep3
-                                                  (select stable_marriage__matching__proposals_made g1_id))))))) g1_id)))))))))))) :pattern (
+                                                  (select stable_marriage__matching__proposals_made g1_id))))))) g1_id)))))))) :pattern (
   (invariant_holds stable_marriage__matching__unmatched_g1_set__fields
   stable_marriage__matching__proposals_made stable_marriage__matching__result
   stable_marriage__matching__unmatched_g2_set)) ))))))
@@ -1776,48 +1637,48 @@
 
 ;; def_axiom
   (assert
-  (forall ((temp___529 Int))
-  (forall ((temp___530 Int))
+  (forall ((temp___482 Int))
+  (forall ((temp___483 Int))
   (= (select (stable_marriage__matching__proposals_made__aggregate_def
-             temp___529) temp___530) (of_rep3 temp___529)))))
+             temp___482) temp___483) (of_rep3 temp___482)))))
 
-(declare-fun temp___531 (Int) (Array Int group1_id))
+(declare-fun temp___484 (Int) (Array Int group1_id))
 
 ;; def_axiom
   (assert
-  (forall ((temp___533 Int))
-  (forall ((temp___534 Int))
-  (= (select (temp___531 temp___533) temp___534) (of_rep temp___533)))))
+  (forall ((temp___486 Int))
+  (forall ((temp___487 Int))
+  (= (select (temp___484 temp___486) temp___487) (of_rep temp___486)))))
 
 (declare-fun stable_marriage__matching__unmatched_g2_set__aggregate_def (Bool) (Array Int Bool))
 
 ;; def_axiom
   (assert
-  (forall ((temp___536 Bool))
-  (forall ((temp___537 Int))
+  (forall ((temp___489 Bool))
+  (forall ((temp___490 Int))
   (= (select (stable_marriage__matching__unmatched_g2_set__aggregate_def
-             temp___536) temp___537) temp___536))))
+             temp___489) temp___490) temp___489))))
 
 (declare-fun stable_marriage__matching__result__aggregate_def (Int) (Array Int group1_id))
 
 ;; def_axiom
   (assert
-  (forall ((temp___539 Int))
-  (forall ((temp___540 Int))
-  (= (select (stable_marriage__matching__result__aggregate_def temp___539) temp___540) 
-  (of_rep temp___539)))))
+  (forall ((temp___492 Int))
+  (forall ((temp___493 Int))
+  (= (select (stable_marriage__matching__result__aggregate_def temp___492) temp___493) 
+  (of_rep temp___492)))))
 
-(define-fun dynamic_invariant2 ((temp___expr_329 Int)
-  (temp___is_init_326 Bool) (temp___skip_constant_327 Bool)
-  (temp___do_toplevel_328 Bool)) Bool (=>
-                                      (or (= temp___is_init_326 true)
-                                      (<= 0 64)) (in_range4 temp___expr_329)))
+(define-fun dynamic_invariant2 ((temp___expr_306 Int)
+  (temp___is_init_303 Bool) (temp___skip_constant_304 Bool)
+  (temp___do_toplevel_305 Bool)) Bool (=>
+                                      (or (= temp___is_init_303 true)
+                                      (<= 0 64)) (in_range4 temp___expr_306)))
 
-(define-fun dynamic_invariant3 ((temp___expr_335 Int)
-  (temp___is_init_332 Bool) (temp___skip_constant_333 Bool)
-  (temp___do_toplevel_334 Bool)) Bool (=>
-                                      (or (= temp___is_init_332 true)
-                                      (<= 1 64)) (in_range5 temp___expr_335)))
+(define-fun dynamic_invariant3 ((temp___expr_312 Int)
+  (temp___is_init_309 Bool) (temp___skip_constant_310 Bool)
+  (temp___do_toplevel_311 Bool)) Bool (=>
+                                      (or (= temp___is_init_309 true)
+                                      (<= 1 64)) (in_range5 temp___expr_312)))
 
 (define-fun dynamic_invariant4 ((temp___expr_155 Int)
   (temp___is_init_152 Bool) (temp___skip_constant_153 Bool)
@@ -1828,33 +1689,29 @@
 ;; invert_1__post_axiom
   (assert
   (forall ((r1 (Array Int group1_id)))
-  (! (and (is_permutation_1__function_guard (is_permutation_1 r1) r1)
-     (=> (= (is_permutation_1 r1) true)
+  (! (=> (= (is_permutation_1 r1) true)
      (let ((result (invert_1 r1)))
-     (=> (invert_1__function_guard result r1)
      (and
      (forall ((rank Int))
      (=> (and (<= 1 rank) (<= rank 64))
      (= (to_rep2 (select result (to_rep (select r1 rank)))) rank)))
      (forall ((g1 Int))
      (=> (and (<= 1 g1) (<= g1 64))
-     (= (to_rep (select r1 (to_rep2 (select result g1)))) g1)))))))) :pattern (
+     (= (to_rep (select r1 (to_rep2 (select result g1)))) g1)))))) :pattern (
   (invert_1 r1)) )))
 
 ;; invert_2__post_axiom
   (assert
   (forall ((r2 (Array Int group2_id)))
-  (! (and (is_permutation_2__function_guard (is_permutation_2 r2) r2)
-     (=> (= (is_permutation_2 r2) true)
+  (! (=> (= (is_permutation_2 r2) true)
      (let ((result (invert_2 r2)))
-     (=> (invert_2__function_guard result r2)
      (and
      (forall ((rank Int))
      (=> (and (<= 1 rank) (<= rank 64))
      (= (to_rep2 (select result (to_rep1 (select r2 rank)))) rank)))
      (forall ((g2 Int))
      (=> (and (<= 1 g2) (<= g2 64))
-     (= (to_rep1 (select r2 (to_rep2 (select result g2)))) g2)))))))) :pattern (
+     (= (to_rep1 (select r2 (to_rep2 (select result g2)))) g2)))))) :pattern (
   (invert_2 r2)) )))
 
 (declare-fun ranking_2_inverted () (Array Int (Array Int ranking)))
@@ -1873,73 +1730,65 @@
 
 (declare-fun stable_marriage__matching__result () (Array Int group1_id))
 
-(declare-fun o () (Array Int count))
+(declare-fun o () count)
 
-(declare-fun o1 () count)
+(declare-fun o1 () (Array Int group1_id))
 
-(declare-fun o2 () (Array Int group1_id))
-
-(declare-fun o3 () (Array Int group1_id))
-
-(declare-fun o4 () count)
+(declare-fun o2 () count)
 
 (declare-fun stable_marriage__matching__unmatched_g1_set__assume () (Array Int group1_id))
 
 (declare-fun stable_marriage__matching__unmatched_g1_set__assume1 () count)
 
-(declare-fun o5 () (Array Int Bool))
+(declare-fun o3 () (Array Int (Array Int ranking)))
+
+(declare-fun temp___501 () (Array Int group1_id))
+
+(declare-fun temp___5011 () count)
+
+(declare-fun temp___500 () Int)
+
+(declare-fun o4 () Int)
+
+(declare-fun o5 () count)
 
 (declare-fun o6 () (Array Int group1_id))
 
-(declare-fun o7 () (Array Int (Array Int ranking)))
+(declare-fun o7 () count)
 
-(declare-fun temp___548 () (Array Int group1_id))
+(declare-fun temp___495 () (Array Int group1_id))
 
-(declare-fun temp___5481 () count)
+(declare-fun temp___4951 () count)
 
-(declare-fun temp___547 () Int)
+(declare-fun o8 () group1_id)
 
-(declare-fun o8 () Int)
-
-(declare-fun o9 () count)
+(declare-fun o9 () Int)
 
 (declare-fun o10 () (Array Int group1_id))
 
-(declare-fun o11 () count)
+(declare-fun o11 () (Array Int group1_id))
 
-(declare-fun temp___542 () (Array Int group1_id))
+(declare-fun o12 () count)
 
-(declare-fun temp___5421 () count)
+(declare-fun temp___499 () (Array Int group1_id))
 
-(declare-fun o12 () group1_id)
+(declare-fun temp___4991 () count)
 
-(declare-fun o13 () Int)
+(declare-fun temp___514 () (Array Int group1_id))
 
-(declare-fun o14 () (Array Int group1_id))
+(declare-fun temp___5141 () count)
 
-(declare-fun o15 () (Array Int group1_id))
+(declare-fun temp___512 () (Array Int count))
 
-(declare-fun o16 () count)
+(declare-fun temp___513 () (Array Int group1_id))
 
-(declare-fun temp___546 () (Array Int group1_id))
-
-(declare-fun temp___5461 () count)
-
-(declare-fun temp___563 () (Array Int group1_id))
-
-(declare-fun temp___5631 () count)
-
-(declare-fun temp___561 () (Array Int count))
-
-(declare-fun temp___562 () (Array Int group1_id))
-
-(declare-fun temp___560 () (Array Int Bool))
+(declare-fun temp___511 () (Array Int Bool))
 
 (declare-fun g11 () Int)
 
 (declare-fun g2 () Int)
 
-(declare-fun o17 () Bool)
+(declare-fun o13 () Bool)
 
 (declare-fun result () map__ref6)
 
@@ -2081,16 +1930,6 @@
 
 ;; H
   (assert
-  (forall ((g110 Int)) (is_permutation_2__function_guard
-  (is_permutation_2 (select ranking_1 g110)) (select ranking_1 g110))))
-
-;; H
-  (assert
-  (forall ((g21 Int)) (is_permutation_1__function_guard
-  (is_permutation_1 (select ranking_2 g21)) (select ranking_2 g21))))
-
-;; H
-  (assert
   (and
   (forall ((g110 Int))
   (=> (and (<= 1 g110) (<= g110 64))
@@ -2100,81 +1939,27 @@
   (= (is_permutation_1 (select ranking_2 g21)) true)))))
 
 ;; H
-  (assert
-  (forall ((g21 Int)) (invert_1__function_guard
-  (invert_1 (select ranking_2 g21)) (select ranking_2 g21))))
-
-;; H
-  (assert (all_unmatched_g1_set_elements_distinct__function_guard
-  (all_unmatched_g1_set_elements_distinct unmatched_g1_set__split_fields3)
-  unmatched_g1_set__split_fields3))
-
-;; H
-  (assert (all_unmatched_g1_set_elements_distinct__function_guard
-  (all_unmatched_g1_set_elements_distinct
-  (us_split_fields__content unmatched_g1_set__split_fields8))
-  (us_split_fields__content unmatched_g1_set__split_fields8)))
-
-;; H
-  (assert
-  (forall ((g21 Int)) (invert_1__function_guard
-  (invert_1 (select ranking_2 g21)) (select ranking_2 g21))))
-
-;; H
-  (assert (all_unmatched_g1_set_elements_distinct__function_guard
-  (all_unmatched_g1_set_elements_distinct unmatched_g1_set__split_fields3)
-  unmatched_g1_set__split_fields3))
-
-;; H
-  (assert (all_unmatched_g1_set_elements_distinct__function_guard
-  (all_unmatched_g1_set_elements_distinct
-  (us_split_fields__content unmatched_g1_set__split_fields8))
-  (us_split_fields__content unmatched_g1_set__split_fields8)))
-
-;; H
-  (assert (invariant_holds__function_guard
-  (invariant_holds unmatched_g1_set__split_fields10 proposals_made2 result__2
-  unmatched_g2_set2) unmatched_g1_set__split_fields10 proposals_made2
-  result__2 unmatched_g2_set2))
-
-;; H
-  (assert (invariant_holds__function_guard
-  (invariant_holds unmatched_g1_set__split_fields10 proposals_made2 result__2
-  unmatched_g2_set2) unmatched_g1_set__split_fields10 proposals_made2
-  result__2 unmatched_g2_set2))
-
-;; H
-  (assert (invariant_holds__function_guard
-  (invariant_holds unmatched_g1_set__split_fields11 proposals_made3 result__3
-  unmatched_g2_set3) unmatched_g1_set__split_fields11 proposals_made3
-  result__3 unmatched_g2_set3))
-
-;; H
-  (assert (= o (stable_marriage__matching__proposals_made__aggregate_def 0)))
-
-;; H
   (assert (= result (mk_map__ref6 proposals_made)))
 
 ;; H
-  (assert (= proposals_made1 o))
+  (assert
+  (= proposals_made1 (stable_marriage__matching__proposals_made__aggregate_def
+                     0)))
 
 ;; H
-  (assert (= (to_rep3 o1) 0))
+  (assert (= (to_rep3 o) 0))
 
 ;; H
-  (assert (= o2 (temp___531 64)))
+  (assert (= (temp___484 64) o1))
 
 ;; H
-  (assert (= o2 o3))
+  (assert (= o o2))
 
 ;; H
-  (assert (= o1 o4))
+  (assert (= stable_marriage__matching__unmatched_g1_set__assume o1))
 
 ;; H
-  (assert (= stable_marriage__matching__unmatched_g1_set__assume o3))
-
-;; H
-  (assert (= stable_marriage__matching__unmatched_g1_set__assume1 o4))
+  (assert (= stable_marriage__matching__unmatched_g1_set__assume1 o2))
 
 ;; H
   (assert
@@ -2189,37 +1974,32 @@
                                      stable_marriage__matching__unmatched_g1_set__assume1)))
 
 ;; H
-  (assert
-  (= o5 (stable_marriage__matching__unmatched_g2_set__aggregate_def
-        (of_int 1))))
-
-;; H
   (assert (= result2 (mk_map__ref7 unmatched_g2_set)))
 
 ;; H
-  (assert (= unmatched_g2_set1 o5))
-
-;; H
-  (assert (= o6 (stable_marriage__matching__result__aggregate_def 64)))
+  (assert
+  (= unmatched_g2_set1 (stable_marriage__matching__unmatched_g2_set__aggregate_def
+                       (of_int 1))))
 
 ;; H
   (assert (= result3 (mk_map__ref result__)))
 
 ;; H
-  (assert (= result__1 o6))
+  (assert
+  (= result__1 (stable_marriage__matching__result__aggregate_def 64)))
 
 ;; H
   (assert
-  (and (and (= o7 (invert ranking_2)) (invert__function_guard o7 ranking_2))
+  (and (= o3 (invert ranking_2))
   (forall ((g21 Int))
   (=> (and (<= 1 g21) (<= g21 64))
-  (= (bool_eq7 (select o7 g21) 1 64 (invert_1 (select ranking_2 g21)) 1 64) true)))))
+  (= (bool_eq7 (select o3 g21) 1 64 (invert_1 (select ranking_2 g21)) 1 64) true)))))
 
 ;; H
   (assert (= result4 (mk_map__ref5 ranking_2_inverted)))
 
 ;; H
-  (assert (= ranking_2_inverted1 o7))
+  (assert (= ranking_2_inverted1 o3))
 
 ;; H
   (assert (= result5 (mk_int__ref g1)))
@@ -2230,11 +2010,11 @@
 ;; H
   (assert
   (=> (and (<= 1 g12) (<= g12 64))
-  (= unmatched_g1_set__split_fields2 (mk___split_fields temp___548
-                                     temp___5481))))
+  (= unmatched_g1_set__split_fields2 (mk___split_fields temp___501
+                                     temp___5011))))
 
 ;; H
-  (assert (=> (and (<= 1 g12) (<= g12 64)) (= temp___547 g12)))
+  (assert (=> (and (<= 1 g12) (<= g12 64)) (= temp___500 g12)))
 
 ;; H
   (assert
@@ -2272,7 +2052,7 @@
   (assert
   (=> (and (<= 1 g12) (<= g12 64))
   (and
-  (= o8 (+ (to_rep3
+  (= o4 (+ (to_rep3
            (rec__stable_marriage__matching__group1_set__cardinality
            unmatched_g1_set__split_fields3)) 1))
   (in_range4
@@ -2281,22 +2061,22 @@
      unmatched_g1_set__split_fields3)) 1)))))
 
 ;; H
-  (assert (=> (and (<= 1 g12) (<= g12 64)) (= (to_rep3 o9) o8)))
+  (assert (=> (and (<= 1 g12) (<= g12 64)) (= (to_rep3 o5) o4)))
 
 ;; H
   (assert
   (=> (and (<= 1 g12) (<= g12 64))
   (= (rec__stable_marriage__matching__group1_set__elements
-     unmatched_g1_set__split_fields3) o10)))
+     unmatched_g1_set__split_fields3) o6)))
 
 ;; H
-  (assert (=> (and (<= 1 g12) (<= g12 64)) (= o9 o11)))
+  (assert (=> (and (<= 1 g12) (<= g12 64)) (= o5 o7)))
 
 ;; H
-  (assert (=> (and (<= 1 g12) (<= g12 64)) (= temp___542 o10)))
+  (assert (=> (and (<= 1 g12) (<= g12 64)) (= temp___495 o6)))
 
 ;; H
-  (assert (=> (and (<= 1 g12) (<= g12 64)) (= temp___5421 o11)))
+  (assert (=> (and (<= 1 g12) (<= g12 64)) (= temp___4951 o7)))
 
 ;; H
   (assert
@@ -2306,11 +2086,11 @@
 ;; H
   (assert
   (=> (and (<= 1 g12) (<= g12 64))
-  (= unmatched_g1_set__split_fields4 (mk___split_fields temp___542
-                                     temp___5421))))
+  (= unmatched_g1_set__split_fields4 (mk___split_fields temp___495
+                                     temp___4951))))
 
 ;; H
-  (assert (=> (and (<= 1 g12) (<= g12 64)) (= (to_rep o12) c175b)))
+  (assert (=> (and (<= 1 g12) (<= g12 64)) (= (to_rep o8) c175b)))
 
 ;; H
   (assert
@@ -2326,30 +2106,30 @@
 ;; H
   (assert
   (=> (and (<= 1 g12) (<= g12 64))
-  (= o13 (to_rep3
-         (rec__stable_marriage__matching__group1_set__cardinality
-         unmatched_g1_set__split_fields4)))))
+  (= o9 (to_rep3
+        (rec__stable_marriage__matching__group1_set__cardinality
+        unmatched_g1_set__split_fields4)))))
 
 ;; H
   (assert
   (=> (and (<= 1 g12) (<= g12 64))
-  (= o14 (store (rec__stable_marriage__matching__group1_set__elements
-                unmatched_g1_set__split_fields4) o13 o12))))
+  (= o10 (store (rec__stable_marriage__matching__group1_set__elements
+                unmatched_g1_set__split_fields4) o9 o8))))
 
 ;; H
-  (assert (=> (and (<= 1 g12) (<= g12 64)) (= o14 o15)))
+  (assert (=> (and (<= 1 g12) (<= g12 64)) (= o10 o11)))
 
 ;; H
   (assert
   (=> (and (<= 1 g12) (<= g12 64))
   (= (rec__stable_marriage__matching__group1_set__cardinality
-     unmatched_g1_set__split_fields4) o16)))
+     unmatched_g1_set__split_fields4) o12)))
 
 ;; H
-  (assert (=> (and (<= 1 g12) (<= g12 64)) (= temp___546 o15)))
+  (assert (=> (and (<= 1 g12) (<= g12 64)) (= temp___499 o11)))
 
 ;; H
-  (assert (=> (and (<= 1 g12) (<= g12 64)) (= temp___5461 o16)))
+  (assert (=> (and (<= 1 g12) (<= g12 64)) (= temp___4991 o12)))
 
 ;; H
   (assert
@@ -2359,8 +2139,8 @@
 ;; H
   (assert
   (=> (and (<= 1 g12) (<= g12 64))
-  (= unmatched_g1_set__split_fields5 (mk___split_fields temp___546
-                                     temp___5461))))
+  (= unmatched_g1_set__split_fields5 (mk___split_fields temp___499
+                                     temp___4991))))
 
 ;; H
   (assert (=> (and (<= 1 g12) (<= g12 64)) (= g13 64)))
@@ -2436,8 +2216,8 @@
        (rec__stable_marriage__matching__group1_set__cardinality
        (us_split_fields__content unmatched_g1_set__split_fields8))))
   (= (us_split_fields__content unmatched_g1_set__split_fields8) (mk___split_fields
-                                                                temp___563
-                                                                temp___5631))))
+                                                                temp___514
+                                                                temp___5141))))
 
 ;; H
   (assert
@@ -2445,7 +2225,7 @@
   (< 0 (to_rep3
        (rec__stable_marriage__matching__group1_set__cardinality
        (us_split_fields__content unmatched_g1_set__split_fields8))))
-  (= temp___561 proposals_made1)))
+  (= temp___512 proposals_made1)))
 
 ;; H
   (assert
@@ -2453,7 +2233,7 @@
   (< 0 (to_rep3
        (rec__stable_marriage__matching__group1_set__cardinality
        (us_split_fields__content unmatched_g1_set__split_fields8))))
-  (= temp___562 result__1)))
+  (= temp___513 result__1)))
 
 ;; H
   (assert
@@ -2461,7 +2241,7 @@
   (< 0 (to_rep3
        (rec__stable_marriage__matching__group1_set__cardinality
        (us_split_fields__content unmatched_g1_set__split_fields8))))
-  (= temp___560 unmatched_g2_set1)))
+  (= temp___511 unmatched_g2_set1)))
 
 ;; H
   (assert
@@ -2789,25 +2569,13 @@
   (assert (<= g2 64))
 
 ;; H
-  (assert (invert_1__function_guard (invert_1 (select ranking_2 g2))
-  (select ranking_2 g2)))
-
-;; H
-  (assert (invert_1__function_guard (invert_1 (select ranking_2 g2))
-  (select ranking_2 g2)))
-
-;; H
   (assert
   (and
-  (and
-  (= o17 (is_preferred_1
+  (= o13 (is_preferred_1
          (to_rep
          (select (map__content stable_marriage__matching__result4) g2)) 
          g11 (select ranking_2 g2)))
-  (is_preferred_1__function_guard o17
-  (to_rep (select (map__content stable_marriage__matching__result4) g2)) 
-  g11 (select ranking_2 g2)))
-  (= (= o17 true)
+  (= (= o13 true)
   (<= (to_rep2
       (select (invert_1 (select ranking_2 g2)) (to_rep
                                                (select (map__content

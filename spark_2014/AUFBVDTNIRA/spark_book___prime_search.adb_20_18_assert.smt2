@@ -258,25 +258,6 @@
      (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
-(declare-sort t3b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq3 (t3b t3b) Bool)
-
-(declare-fun dummy3 () t3b)
-
-(declare-datatypes () ((t3b__ref (mk_t3b__ref (t3b__content t3b)))))
-(define-fun t3b__ref___projection ((a t3b__ref)) t3b (t3b__content a))
-
 (declare-fun primes () (Array Int natural))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
@@ -317,19 +298,19 @@
 
 (declare-sort index_type1 0)
 
-(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
 
-(declare-fun user_eq4 (index_type1 index_type1) Bool)
+(declare-fun user_eq3 (index_type1 index_type1) Bool)
 
-(declare-fun dummy4 () index_type1)
+(declare-fun dummy3 () index_type1)
 
 (declare-datatypes ()
 ((index_type__ref1 (mk_index_type__ref1 (index_type__content1 index_type1)))))
@@ -340,7 +321,7 @@
   (temp___is_init_166 Bool) (temp___skip_constant_167 Bool)
   (temp___do_toplevel_168 Bool)) Bool (=>
                                       (or (= temp___is_init_166 true)
-                                      (<= 1 10)) (in_range5 temp___expr_169)))
+                                      (<= 1 10)) (in_range4 temp___expr_169)))
 
 (define-fun dynamic_invariant3 ((temp___expr_148 Int)
   (temp___is_init_145 Bool) (temp___skip_constant_146 Bool)
@@ -356,8 +337,6 @@
 
 (declare-fun position () Int)
 
-(declare-fun prime_search__primes__assume () (Array Int natural))
-
 ;; H
   (assert (in_range1 search_item))
 
@@ -366,11 +345,8 @@
 
 ;; H
   (assert
-  (= prime_search__primes__assume (prime_search__primes__aggregate_def 2 3 5
-                                  7 11 13 17 19 23 29)))
-
-;; H
-  (assert (= prime_search__primes__assume primes))
+  (= (prime_search__primes__aggregate_def 2 3 5 7 11 13 17 19 23 29) 
+  primes))
 
 ;; H
   (assert (=> (<= 1 2147483647) (in_range2 position)))

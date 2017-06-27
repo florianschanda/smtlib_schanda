@@ -390,47 +390,33 @@
 
 (declare-fun tail__function_guard (us_t us_t) Bool)
 
-(declare-fun temp___String_Literal_154 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_146 (tuple0) (Array Int character))
 
-;; temp___String_Literal_154__def_axiom
+;; temp___String_Literal_146__def_axiom
   (assert true)
 
-(declare-fun temp___String_Literal_156 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_148 (tuple0) (Array Int character))
 
-;; temp___String_Literal_156__def_axiom
+;; temp___String_Literal_148__def_axiom
   (assert true)
 
 ;; is_subsequence__def_axiom
   (assert
   (forall ((subseq us_t) (seq us_t))
-  (! (=> (is_subsequence__function_guard (is_subsequence subseq seq) subseq
-     seq)
-     (and (head__function_guard (head subseq) subseq)
-     (and (head__function_guard (head seq) seq)
-     (and (tail__function_guard (tail subseq) subseq)
-     (and (tail__function_guard (tail seq) seq)
-     (and (tail__function_guard (tail subseq) subseq)
-     (and (tail__function_guard (tail seq) seq)
-     (and (is_subsequence__function_guard
-     (is_subsequence (tail subseq) (tail seq)) (tail subseq) (tail seq))
-     (and (tail__function_guard (tail seq) seq)
-     (and (tail__function_guard (tail seq) seq)
-     (and (is_subsequence__function_guard (is_subsequence subseq (tail seq))
-     subseq (tail seq))
-     (= (= (is_subsequence subseq seq) true)
+  (! (= (= (is_subsequence subseq seq) true)
      (=>
      (not
-     (= (let ((temp___168 (temp___String_Literal_156 Tuple0)))
-        (bool_eq3 (to_array subseq) (first1 subseq) (last1 subseq) temp___168
+     (= (let ((temp___153 (temp___String_Literal_148 Tuple0)))
+        (bool_eq3 (to_array subseq) (first1 subseq) (last1 subseq) temp___153
         1 0)) true))
      (and
      (not
-     (= (let ((temp___167 (temp___String_Literal_154 Tuple0)))
-        (bool_eq3 (to_array seq) (first1 seq) (last1 seq) temp___167 1 0)) true))
+     (= (let ((temp___152 (temp___String_Literal_146 Tuple0)))
+        (bool_eq3 (to_array seq) (first1 seq) (last1 seq) temp___152 1 0)) true))
      (ite (= (head subseq) (head seq))
      (= (is_subsequence (tail subseq) (tail seq)) true)
-     (= (is_subsequence subseq (tail seq)) true)))))))))))))))) :pattern (
-  (is_subsequence subseq seq)) )))
+     (= (is_subsequence subseq (tail seq)) true))))) :pattern ((is_subsequence
+                                                               subseq seq)) )))
 
 (declare-fun slow_lcs_length (us_t us_t) Int)
 
@@ -443,56 +429,38 @@
                                      (<= 0 2147483647)) (in_range4
                                      temp___expr_33)))
 
-(declare-fun temp___String_Literal_178 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_154 (tuple0) (Array Int character))
 
-;; temp___String_Literal_178__def_axiom
+;; temp___String_Literal_154__def_axiom
   (assert true)
 
-(declare-fun temp___String_Literal_180 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_156 (tuple0) (Array Int character))
 
-;; temp___String_Literal_180__def_axiom
+;; temp___String_Literal_156__def_axiom
   (assert true)
 
 ;; slow_lcs_length__def_axiom
   (assert
   (forall ((s1 us_t) (s2 us_t))
   (! (=>
-     (and
      (and (dynamic_invariant1 s1 true true true) (dynamic_invariant1 s2 true
-     true true)) (slow_lcs_length__function_guard (slow_lcs_length s1 s2) s1
-     s2))
-     (and (head__function_guard (head s1) s1)
-     (and (head__function_guard (head s2) s2)
-     (and (tail__function_guard (tail s1) s1)
-     (and (tail__function_guard (tail s2) s2)
-     (and (tail__function_guard (tail s1) s1)
-     (and (tail__function_guard (tail s2) s2)
-     (and (slow_lcs_length__function_guard
-     (slow_lcs_length (tail s1) (tail s2)) (tail s1) (tail s2))
-     (and (tail__function_guard (tail s2) s2)
-     (and (tail__function_guard (tail s2) s2)
-     (and (slow_lcs_length__function_guard (slow_lcs_length s1 (tail s2)) s1
-     (tail s2))
-     (and (tail__function_guard (tail s1) s1)
-     (and (tail__function_guard (tail s1) s1)
-     (and (slow_lcs_length__function_guard (slow_lcs_length (tail s1) s2)
-     (tail s1) s2)
+     true true))
      (= (slow_lcs_length s1 s2) (ite (or
-                                     (= (let ((temp___193 (temp___String_Literal_178
+                                     (= (let ((temp___160 (temp___String_Literal_154
                                                           Tuple0)))
                                         (bool_eq3 (to_array s1) (first1 s1)
-                                        (last1 s1) temp___193 1 0)) true)
-                                     (= (let ((temp___194 (temp___String_Literal_180
+                                        (last1 s1) temp___160 1 0)) true)
+                                     (= (let ((temp___161 (temp___String_Literal_156
                                                           Tuple0)))
                                         (bool_eq3 (to_array s2) (first1 s2)
-                                        (last1 s2) temp___194 1 0)) true))
+                                        (last1 s2) temp___161 1 0)) true))
                                 0
                                 (ite (= (head s1) (head s2))
                                 (+ 1 (slow_lcs_length (tail s1) (tail s2)))
                                 (ite (< (slow_lcs_length s1 (tail s2)) 
                                 (slow_lcs_length (tail s1) s2)) (slow_lcs_length
                                                                 (tail s1) s2) 
-                                (slow_lcs_length s1 (tail s2)))))))))))))))))))) :pattern (
+                                (slow_lcs_length s1 (tail s2))))))) :pattern (
   (slow_lcs_length s1 s2)) )))
 
 (declare-fun s1 () us_t)
@@ -527,12 +495,12 @@
 (define-fun s1_index__ref___projection ((a s1_index__ref)) integer (s1_index__content
                                                                    a))
 
-(define-fun dynamic_invariant3 ((temp___expr_222 Int)
-  (temp___is_init_219 Bool) (temp___skip_constant_220 Bool)
-  (temp___do_toplevel_221 Bool)) Bool (=>
-                                      (or (= temp___is_init_219 true)
+(define-fun dynamic_invariant3 ((temp___expr_186 Int)
+  (temp___is_init_183 Bool) (temp___skip_constant_184 Bool)
+  (temp___do_toplevel_185 Bool)) Bool (=>
+                                      (or (= temp___is_init_183 true)
                                       (<= first2 last2)) (dynamic_property1
-                                      first2 last2 temp___expr_222)))
+                                      first2 last2 temp___expr_186)))
 
 ;; first__def_axiom
   (assert (= first2 (first1 s1)))
@@ -564,12 +532,12 @@
 (define-fun s2_index__ref___projection ((a s2_index__ref)) integer (s2_index__content
                                                                    a))
 
-(define-fun dynamic_invariant4 ((temp___expr_228 Int)
-  (temp___is_init_225 Bool) (temp___skip_constant_226 Bool)
-  (temp___do_toplevel_227 Bool)) Bool (=>
-                                      (or (= temp___is_init_225 true)
+(define-fun dynamic_invariant4 ((temp___expr_192 Int)
+  (temp___is_init_189 Bool) (temp___skip_constant_190 Bool)
+  (temp___do_toplevel_191 Bool)) Bool (=>
+                                      (or (= temp___is_init_189 true)
                                       (<= first3 last3)) (dynamic_property2
-                                      first3 last3 temp___expr_228)))
+                                      first3 last3 temp___expr_192)))
 
 ;; first__def_axiom
   (assert (= first3 (first1 s2)))
@@ -642,12 +610,12 @@
 (define-fun seq_length__ref___projection ((a seq_length__ref)) tseq_lengthB 
   (seq_length__content a))
 
-(define-fun dynamic_invariant5 ((temp___expr_234 Int)
-  (temp___is_init_231 Bool) (temp___skip_constant_232 Bool)
-  (temp___do_toplevel_233 Bool)) Bool (=>
-                                      (or (= temp___is_init_231 true)
+(define-fun dynamic_invariant5 ((temp___expr_198 Int)
+  (temp___is_init_195 Bool) (temp___skip_constant_196 Bool)
+  (temp___do_toplevel_197 Bool)) Bool (=>
+                                      (or (= temp___is_init_195 true)
                                       (<= 0 last4)) (dynamic_property3 0
-                                      last4 temp___expr_234)))
+                                      last4 temp___expr_198)))
 
 ;; last__def_axiom
   (assert
@@ -885,24 +853,20 @@
      (and
      (and (dynamic_invariant x1 true true true) (dynamic_invariant2 x2 true
      true true))
-     (forall ((temp___239 Int) (temp___240 Int))
+     (forall ((temp___203 Int) (temp___204 Int))
      (=>
      (and
-     (and (<= (to_rep1 lengths__first) temp___239)
-     (<= temp___239 (to_rep1 lengths__last)))
-     (and (<= (to_rep1 lengths__first_2) temp___240)
-     (<= temp___240 (to_rep1 lengths__last_2)))) (dynamic_property3 0 
+     (and (<= (to_rep1 lengths__first) temp___203)
+     (<= temp___203 (to_rep1 lengths__last)))
+     (and (<= (to_rep1 lengths__first_2) temp___204)
+     (<= temp___204 (to_rep1 lengths__last_2)))) (dynamic_property3 0 
      last4
      (to_rep2
-     (get string_utilities__longest_common_subsequence__lengths temp___239
-     temp___240))))))
-     (let ((result (get_length x1 x2
-                   string_utilities__longest_common_subsequence__lengths)))
-     (=> (get_length__function_guard result x1 x2
-     string_utilities__longest_common_subsequence__lengths)
-     (dynamic_invariant5 result true false true)))) :pattern ((get_length x1
-                                                              x2
-                                                              string_utilities__longest_common_subsequence__lengths)) ))))
+     (get string_utilities__longest_common_subsequence__lengths temp___203
+     temp___204)))))) (dynamic_invariant5
+     (get_length x1 x2 string_utilities__longest_common_subsequence__lengths)
+     true false true)) :pattern ((get_length x1 x2
+                                 string_utilities__longest_common_subsequence__lengths)) ))))
 
 ;; get_length__def_axiom
   (assert
@@ -910,22 +874,19 @@
   (forall ((string_utilities__longest_common_subsequence__lengths map1))
   (! (=>
      (and
-     (and
      (and (dynamic_invariant x1 true true true) (dynamic_invariant2 x2 true
      true true))
-     (forall ((temp___243 Int) (temp___244 Int))
+     (forall ((temp___207 Int) (temp___208 Int))
      (=>
      (and
-     (and (<= (to_rep1 lengths__first) temp___243)
-     (<= temp___243 (to_rep1 lengths__last)))
-     (and (<= (to_rep1 lengths__first_2) temp___244)
-     (<= temp___244 (to_rep1 lengths__last_2)))) (dynamic_property3 0 
+     (and (<= (to_rep1 lengths__first) temp___207)
+     (<= temp___207 (to_rep1 lengths__last)))
+     (and (<= (to_rep1 lengths__first_2) temp___208)
+     (<= temp___208 (to_rep1 lengths__last_2)))) (dynamic_property3 0 
      last4
      (to_rep2
-     (get string_utilities__longest_common_subsequence__lengths temp___243
-     temp___244)))))) (get_length__function_guard
-     (get_length x1 x2 string_utilities__longest_common_subsequence__lengths)
-     x1 x2 string_utilities__longest_common_subsequence__lengths))
+     (get string_utilities__longest_common_subsequence__lengths temp___207
+     temp___208))))))
      (= (get_length x1 x2
         string_utilities__longest_common_subsequence__lengths) (ite (and
                                                                     (dynamic_property1
@@ -948,8 +909,6 @@
 (declare-fun last8 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
-
-(declare-fun last9 () Int)
 
 (define-fun dynamic_property7 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -975,7 +934,7 @@
 
 (declare-fun first7 (t3) integer)
 
-(declare-fun last10 (t3) integer)
+(declare-fun last9 (t3) integer)
 
 (declare-fun mk3 (Int Int) t3)
 
@@ -985,7 +944,7 @@
   (! (=> (in_range1 f)
      (=> (in_range1 l)
      (and (= (to_rep1 (first7 (mk3 f l))) f)
-     (= (to_rep1 (last10 (mk3 f l))) l)))) :pattern ((mk3 f l)) )))
+     (= (to_rep1 (last9 (mk3 f l))) l)))) :pattern ((mk3 f l)) )))
 
 (define-fun dynamic_property8 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -1003,10 +962,10 @@
 
 (define-fun first8 ((a us_t2)) Int (to_rep1 (first7 (rt2 a))))
 
-(define-fun last11 ((a us_t2)) Int (to_rep1 (last10 (rt2 a))))
+(define-fun last10 ((a us_t2)) Int (to_rep1 (last9 (rt2 a))))
 
-(define-fun length2 ((a us_t2)) Int (ite (<= (first8 a) (last11 a))
-                                    (+ (- (last11 a) (first8 a)) 1) 0))
+(define-fun length2 ((a us_t2)) Int (ite (<= (first8 a) (last10 a))
+                                    (+ (- (last10 a) (first8 a)) 1) 0))
 
 (declare-fun value__size2 () Int)
 
@@ -1041,8 +1000,8 @@
 
 (define-fun bool_eq13 ((x us_t2)
   (y us_t2)) Bool (bool_eq3 (elts2 x) (to_rep1 (first7 (rt2 x)))
-                  (to_rep1 (last10 (rt2 x))) (elts2 y)
-                  (to_rep1 (first7 (rt2 y))) (to_rep1 (last10 (rt2 y)))))
+                  (to_rep1 (last9 (rt2 x))) (elts2 y)
+                  (to_rep1 (first7 (rt2 y))) (to_rep1 (last9 (rt2 y)))))
 
 (declare-fun user_eq11 (us_t2 us_t2) Bool)
 
@@ -1053,15 +1012,15 @@
 (define-fun tresultS__ref___projection ((a tresultS__ref)) us_t2 (tresultS__content
                                                                  a))
 
-(define-fun dynamic_invariant6 ((temp___expr_256 us_t2)
-  (temp___is_init_253 Bool) (temp___skip_constant_254 Bool)
-  (temp___do_toplevel_255 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_254 true))
+(define-fun dynamic_invariant6 ((temp___expr_220 us_t2)
+  (temp___is_init_217 Bool) (temp___skip_constant_218 Bool)
+  (temp___do_toplevel_219 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_218 true))
                                       (and (dynamic_property8 1 last8
-                                      (first8 temp___expr_256)
-                                      (last11 temp___expr_256))
-                                      (and (= (first8 temp___expr_256) 1)
-                                      (= (last11 temp___expr_256) last8)))))
+                                      (first8 temp___expr_220)
+                                      (last10 temp___expr_220))
+                                      (and (= (first8 temp___expr_220) 1)
+                                      (= (last10 temp___expr_220) last8)))))
 
 (declare-fun result____first () integer)
 
@@ -1069,7 +1028,7 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
 
-(declare-fun last12 () Int)
+(declare-fun last11 () Int)
 
 (define-fun dynamic_property9 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -1089,15 +1048,15 @@
 (declare-datatypes () ((trxS__ref (mk_trxS__ref (trxS__content integer)))))
 (define-fun trxS__ref___projection ((a trxS__ref)) integer (trxS__content a))
 
-(define-fun dynamic_invariant7 ((temp___expr_265 Int)
-  (temp___is_init_262 Bool) (temp___skip_constant_263 Bool)
-  (temp___do_toplevel_264 Bool)) Bool (=>
-                                      (or (= temp___is_init_262 true)
-                                      (<= 1 last12)) (dynamic_property9 1
-                                      last12 temp___expr_265)))
+(define-fun dynamic_invariant7 ((temp___expr_229 Int)
+  (temp___is_init_226 Bool) (temp___skip_constant_227 Bool)
+  (temp___do_toplevel_228 Bool)) Bool (=>
+                                      (or (= temp___is_init_226 true)
+                                      (<= 1 last11)) (dynamic_property9 1
+                                      last11 temp___expr_229)))
 
 ;; last__def_axiom
-  (assert (= last12 (to_rep1 result____last)))
+  (assert (= last11 (to_rep1 result____last)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
 
@@ -1105,9 +1064,9 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS9 () Int)
 
-(declare-fun temp___String_Literal_305 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_269 (tuple0) (Array Int character))
 
-;; temp___String_Literal_305__def_axiom
+;; temp___String_Literal_269__def_axiom
   (assert true)
 
 (define-fun dynamic_invariant8 ((temp___expr_39 Int) (temp___is_init_36 Bool)
@@ -1126,22 +1085,15 @@
 ;; head__post_axiom
   (assert
   (forall ((s us_t))
-  (! (=> (dynamic_invariant1 s true true true)
-     (let ((result (head s)))
-     (=> (head__function_guard result s) (dynamic_invariant9 result true
-     false true)))) :pattern ((head s)) )))
+  (! (=> (dynamic_invariant1 s true true true) (dynamic_invariant9 (head s)
+     true false true)) :pattern ((head s)) )))
 
 ;; head__def_axiom
   (assert
   (forall ((s us_t))
-  (! (=>
-     (and (dynamic_invariant1 s true true true) (head__function_guard
-     (head s) s)) (= (head s) (to_rep (select (to_array s) (first1 s))))) :pattern (
+  (! (=> (dynamic_invariant1 s true true true)
+     (= (head s) (to_rep (select (to_array s) (first1 s))))) :pattern (
   (head s)) )))
-
-(declare-fun first9 () Int)
-
-(declare-fun last13 () Int)
 
 (define-fun dynamic_property10 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -1163,9 +1115,9 @@
 
 (declare-sort t4 0)
 
-(declare-fun first10 (t4) integer)
+(declare-fun first9 (t4) integer)
 
-(declare-fun last14 (t4) integer)
+(declare-fun last12 (t4) integer)
 
 (declare-fun mk4 (Int Int) t4)
 
@@ -1174,8 +1126,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first10 (mk4 f l))) f)
-     (= (to_rep1 (last14 (mk4 f l))) l)))) :pattern ((mk4 f l)) )))
+     (and (= (to_rep1 (first9 (mk4 f l))) f)
+     (= (to_rep1 (last12 (mk4 f l))) l)))) :pattern ((mk4 f l)) )))
 
 (define-fun dynamic_property11 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -1191,12 +1143,12 @@
 (define-fun of_array3 ((a (Array Int character)) (f Int)
   (l Int)) us_t3 (mk___t3 a (mk4 f l)))
 
-(define-fun first11 ((a us_t3)) Int (to_rep1 (first10 (rt3 a))))
+(define-fun first10 ((a us_t3)) Int (to_rep1 (first9 (rt3 a))))
 
-(define-fun last15 ((a us_t3)) Int (to_rep1 (last14 (rt3 a))))
+(define-fun last13 ((a us_t3)) Int (to_rep1 (last12 (rt3 a))))
 
-(define-fun length3 ((a us_t3)) Int (ite (<= (first11 a) (last15 a))
-                                    (+ (- (last15 a) (first11 a)) 1) 0))
+(define-fun length3 ((a us_t3)) Int (ite (<= (first10 a) (last13 a))
+                                    (+ (- (last13 a) (first10 a)) 1) 0))
 
 (declare-fun value__size3 () Int)
 
@@ -1230,9 +1182,9 @@
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment3 a))))
 
 (define-fun bool_eq16 ((x us_t3)
-  (y us_t3)) Bool (bool_eq3 (elts3 x) (to_rep1 (first10 (rt3 x)))
-                  (to_rep1 (last14 (rt3 x))) (elts3 y)
-                  (to_rep1 (first10 (rt3 y))) (to_rep1 (last14 (rt3 y)))))
+  (y us_t3)) Bool (bool_eq3 (elts3 x) (to_rep1 (first9 (rt3 x)))
+                  (to_rep1 (last12 (rt3 x))) (elts3 y)
+                  (to_rep1 (first9 (rt3 y))) (to_rep1 (last12 (rt3 y)))))
 
 (declare-fun user_eq14 (us_t3 us_t3) Bool)
 
@@ -1244,23 +1196,19 @@
 ;; tail__post_axiom
   (assert
   (forall ((s us_t))
-  (! (=> (dynamic_invariant1 s true true true)
-     (let ((result (tail s)))
-     (=> (tail__function_guard result s) (dynamic_invariant1 result true
-     false true)))) :pattern ((tail s)) )))
+  (! (=> (dynamic_invariant1 s true true true) (dynamic_invariant1 (tail s)
+     true false true)) :pattern ((tail s)) )))
 
 ;; tail__def_axiom
   (assert
   (forall ((s us_t))
-  (! (=>
-     (and (dynamic_invariant1 s true true true) (tail__function_guard
-     (tail s) s))
-     (= (tail s) (let ((temp___146 (let ((temp___145 (last1 s)))
-                                   (let ((temp___144 (+ (first1 s) 1)))
-                                   (of_array3 (to_array s) temp___144
-                                   temp___145)))))
-                 (of_array (to_array3 temp___146) (first11 temp___146)
-                 (last15 temp___146))))) :pattern ((tail s)) )))
+  (! (=> (dynamic_invariant1 s true true true)
+     (= (tail s) (let ((temp___145 (let ((temp___144 (last1 s)))
+                                   (let ((temp___143 (+ (first1 s) 1)))
+                                   (of_array3 (to_array s) temp___143
+                                   temp___144)))))
+                 (of_array (to_array3 temp___145) (first10 temp___145)
+                 (last13 temp___145))))) :pattern ((tail s)) )))
 
 (declare-fun lengths () map1)
 
@@ -1278,9 +1226,9 @@
 
 (declare-fun string_utilities__longest_common_subsequence__result1 () t)
 
-(declare-fun temp___300 () map1)
+(declare-fun temp___264 () map1)
 
-(declare-fun temp___293 () map1)
+(declare-fun temp___257 () map1)
 
 (declare-fun o () Int)
 
@@ -1292,7 +1240,7 @@
 
 (declare-fun o4 () Int)
 
-(declare-fun temp___290 () Int)
+(declare-fun temp___254 () Int)
 
 (declare-fun us () Int)
 
@@ -1314,7 +1262,7 @@
 
 (declare-fun o13 () Int)
 
-(declare-fun temp___289 () Int)
+(declare-fun temp___253 () Int)
 
 (declare-fun us1 () Int)
 
@@ -1465,15 +1413,15 @@
   (= (to_rep1 lengths__last) (to_rep1 (last (rt s1))))))
   (and (= (to_rep1 lengths__first_2) (to_rep1 (first (rt s2))))
   (= (to_rep1 lengths__last_2) (to_rep1 (last (rt s2))))))
-  (forall ((temp___287 Int) (temp___288 Int))
+  (forall ((temp___251 Int) (temp___252 Int))
   (=>
   (and
-  (and (<= (to_rep1 lengths__first) temp___287)
-  (<= temp___287 (to_rep1 lengths__last)))
-  (and (<= (to_rep1 lengths__first_2) temp___288)
-  (<= temp___288 (to_rep1 lengths__last_2))))
+  (and (<= (to_rep1 lengths__first) temp___251)
+  (<= temp___251 (to_rep1 lengths__last)))
+  (and (<= (to_rep1 lengths__first_2) temp___252)
+  (<= temp___252 (to_rep1 lengths__last_2))))
   (=> (<= 0 last4) (dynamic_property3 0 last4
-  (to_rep2 (get lengths temp___287 temp___288))))))))
+  (to_rep2 (get lengths temp___251 temp___252))))))))
 
 ;; H
   (assert (= (mk_int__ref result) (mk_int__ref x1)))
@@ -1485,7 +1433,7 @@
   (assert
   (=>
   (and (<= (to_rep1 (first (rt s1))) x12) (<= x12 (to_rep1 (last (rt s1)))))
-  (= temp___300 lengths)))
+  (= temp___264 lengths)))
 
 ;; H
   (assert
@@ -1493,25 +1441,25 @@
   (and (<= (to_rep1 (first (rt s1))) x12) (<= x12 (to_rep1 (last (rt s1)))))
   (and
   (and
-  (forall ((temp___298 Int) (temp___299 Int))
+  (forall ((temp___262 Int) (temp___263 Int))
   (=>
   (and
-  (and (<= (to_rep1 lengths__first) temp___298)
-  (<= temp___298 (to_rep1 lengths__last)))
-  (and (<= (to_rep1 lengths__first_2) temp___299)
-  (<= temp___299 (to_rep1 lengths__last_2))))
+  (and (<= (to_rep1 lengths__first) temp___262)
+  (<= temp___262 (to_rep1 lengths__last)))
+  (and (<= (to_rep1 lengths__first_2) temp___263)
+  (<= temp___263 (to_rep1 lengths__last_2))))
   (=> (<= 0 last4) (dynamic_property3 0 last4
-  (to_rep2 (get lengths2 temp___298 temp___299))))))
-  (forall ((temp___301 Int) (temp___302 Int))
+  (to_rep2 (get lengths2 temp___262 temp___263))))))
+  (forall ((temp___265 Int) (temp___266 Int))
   (=>
   (and
-  (and (<= (to_rep1 lengths__first) temp___301)
-  (<= temp___301 (to_rep1 lengths__last)))
-  (and (<= (to_rep1 lengths__first_2) temp___302)
-  (<= temp___302 (to_rep1 lengths__last_2))))
-  (=> (<= x13 temp___301)
-  (= (get lengths2 temp___301 temp___302) (get temp___300 temp___301
-                                          temp___302))))))
+  (and (<= (to_rep1 lengths__first) temp___265)
+  (<= temp___265 (to_rep1 lengths__last)))
+  (and (<= (to_rep1 lengths__first_2) temp___266)
+  (<= temp___266 (to_rep1 lengths__last_2))))
+  (=> (<= x13 temp___265)
+  (= (get lengths2 temp___265 temp___266) (get temp___264 temp___265
+                                          temp___266))))))
   (and (<= (to_rep1 (first (rt s1))) x13) (<= x13 (to_rep1 (last (rt s1))))))))
 
 ;; H
@@ -1532,7 +1480,7 @@
   (and (<= (to_rep1 (first (rt s1))) x12) (<= x12 (to_rep1 (last (rt s1)))))
   (=>
   (and (<= (to_rep1 (first (rt s2))) x24) (<= x24 (to_rep1 (last (rt s2)))))
-  (= temp___293 lengths2))))
+  (= temp___257 lengths2))))
 
 ;; H
   (assert
@@ -1542,25 +1490,25 @@
   (and (<= (to_rep1 (first (rt s2))) x24) (<= x24 (to_rep1 (last (rt s2)))))
   (and
   (and
-  (forall ((temp___291 Int) (temp___292 Int))
+  (forall ((temp___255 Int) (temp___256 Int))
   (=>
   (and
-  (and (<= (to_rep1 lengths__first) temp___291)
-  (<= temp___291 (to_rep1 lengths__last)))
-  (and (<= (to_rep1 lengths__first_2) temp___292)
-  (<= temp___292 (to_rep1 lengths__last_2))))
+  (and (<= (to_rep1 lengths__first) temp___255)
+  (<= temp___255 (to_rep1 lengths__last)))
+  (and (<= (to_rep1 lengths__first_2) temp___256)
+  (<= temp___256 (to_rep1 lengths__last_2))))
   (=> (<= 0 last4) (dynamic_property3 0 last4
-  (to_rep2 (get lengths3 temp___291 temp___292))))))
-  (forall ((temp___294 Int) (temp___295 Int))
+  (to_rep2 (get lengths3 temp___255 temp___256))))))
+  (forall ((temp___258 Int) (temp___259 Int))
   (=>
   (and
-  (and (<= (to_rep1 lengths__first) temp___294)
-  (<= temp___294 (to_rep1 lengths__last)))
-  (and (<= (to_rep1 lengths__first_2) temp___295)
-  (<= temp___295 (to_rep1 lengths__last_2))))
-  (=> (or (<= x25 temp___295) (not (= x13 temp___294)))
-  (= (get lengths3 temp___294 temp___295) (get temp___293 temp___294
-                                          temp___295))))))
+  (and (<= (to_rep1 lengths__first) temp___258)
+  (<= temp___258 (to_rep1 lengths__last)))
+  (and (<= (to_rep1 lengths__first_2) temp___259)
+  (<= temp___259 (to_rep1 lengths__last_2))))
+  (=> (or (<= x25 temp___259) (not (= x13 temp___258)))
+  (= (get lengths3 temp___258 temp___259) (get temp___257 temp___258
+                                          temp___259))))))
   (and (<= (to_rep1 (first (rt s2))) x25) (<= x25 (to_rep1 (last (rt s2)))))))))
 
 ;; H
@@ -1597,9 +1545,7 @@
   (=>
   (and (<= (to_rep1 (first (rt s2))) x24) (<= x24 (to_rep1 (last (rt s2)))))
   (=> (= (to_rep (select (elts s1) x13)) (to_rep (select (elts s2) x25)))
-  (and
-  (and (= o3 (get_length o o2 lengths3)) (get_length__function_guard 
-  o3 o o2 lengths3))
+  (and (= o3 (get_length o o2 lengths3))
   (and (dynamic_property3 0 last4 o3)
   (= o3 (ite (and (dynamic_property1 first2 last2 o) (dynamic_property2
              first3 last3 o2))
@@ -1621,7 +1567,7 @@
   (=>
   (and (<= (to_rep1 (first (rt s2))) x24) (<= x24 (to_rep1 (last (rt s2)))))
   (=> (= (to_rep (select (elts s1) x13)) (to_rep (select (elts s2) x25)))
-  (and (= temp___290 o4) (in_range5 o4))))))
+  (and (= temp___254 o4) (in_range5 o4))))))
 
 ;; H
   (assert
@@ -1630,7 +1576,7 @@
   (=>
   (and (<= (to_rep1 (first (rt s2))) x24) (<= x24 (to_rep1 (last (rt s2)))))
   (=> (= (to_rep (select (elts s1) x13)) (to_rep (select (elts s2) x25)))
-  (and (= us temp___290) (dynamic_property3 0 last4 temp___290))))))
+  (and (= us temp___254) (dynamic_property3 0 last4 temp___254))))))
 
 ;; H
   (assert
@@ -1639,7 +1585,7 @@
   (=>
   (and (<= (to_rep1 (first (rt s2))) x24) (<= x24 (to_rep1 (last (rt s2)))))
   (=> (= (to_rep (select (elts s1) x13)) (to_rep (select (elts s2) x25)))
-  (= o5 temp___290)))))
+  (= o5 temp___254)))))
 
 ;; H
   (assert
@@ -1705,9 +1651,7 @@
   (and (<= (to_rep1 (first (rt s2))) x24) (<= x24 (to_rep1 (last (rt s2)))))
   (=>
   (not (= (to_rep (select (elts s1) x13)) (to_rep (select (elts s2) x25))))
-  (and
-  (and (= o12 (get_length x13 o11 lengths3)) (get_length__function_guard 
-  o12 x13 o11 lengths3))
+  (and (= o12 (get_length x13 o11 lengths3))
   (and (dynamic_property3 0 last4 o12)
   (= o12 (ite (and (dynamic_property1 first2 last2 x13) (dynamic_property2
               first3 last3 o11))
@@ -1741,9 +1685,7 @@
   (and (<= (to_rep1 (first (rt s2))) x24) (<= x24 (to_rep1 (last (rt s2)))))
   (=>
   (not (= (to_rep (select (elts s1) x13)) (to_rep (select (elts s2) x25))))
-  (and
-  (and (= o13 (get_length o8 o9 lengths3)) (get_length__function_guard 
-  o13 o8 o9 lengths3))
+  (and (= o13 (get_length o8 o9 lengths3))
   (and (dynamic_property3 0 last4 o13)
   (= o13 (ite (and (dynamic_property1 first2 last2 o8) (dynamic_property2
               first3 last3 o9))
@@ -1757,7 +1699,7 @@
   (and (<= (to_rep1 (first (rt s2))) x24) (<= x24 (to_rep1 (last (rt s2)))))
   (=>
   (not (= (to_rep (select (elts s1) x13)) (to_rep (select (elts s2) x25))))
-  (= temp___289 (ite (< o13 o12) o12 o13))))))
+  (= temp___253 (ite (< o13 o12) o12 o13))))))
 
 ;; H
   (assert
@@ -1767,7 +1709,7 @@
   (and (<= (to_rep1 (first (rt s2))) x24) (<= x24 (to_rep1 (last (rt s2)))))
   (=>
   (not (= (to_rep (select (elts s1) x13)) (to_rep (select (elts s2) x25))))
-  (and (= us1 temp___289) (dynamic_property3 0 last4 temp___289))))))
+  (and (= us1 temp___253) (dynamic_property3 0 last4 temp___253))))))
 
 ;; H
   (assert
@@ -1777,7 +1719,7 @@
   (and (<= (to_rep1 (first (rt s2))) x24) (<= x24 (to_rep1 (last (rt s2)))))
   (=>
   (not (= (to_rep (select (elts s1) x13)) (to_rep (select (elts s2) x25))))
-  (= o14 temp___289)))))
+  (= o14 temp___253)))))
 
 ;; H
   (assert
@@ -2064,10 +2006,7 @@
 ;; H
   (assert
   (and
-  (and
   (= o18 (get_length (to_rep1 (last (rt s1))) o17 (map__content1 lengths12)))
-  (get_length__function_guard o18 (to_rep1 (last (rt s1))) o17
-  (map__content1 lengths12)))
   (and (dynamic_property3 0 last4 o18)
   (= o18 (ite (and (dynamic_property1 first2 last2 (to_rep1 (last (rt s1))))
               (dynamic_property2 first3 last3 o17))
@@ -2100,12 +2039,8 @@
 ;; H
   (assert
   (and
-  (and
   (= string_utilities__longest_common_subsequence__B_4__last__assume 
   (get_length (to_rep1 (last (rt s1))) o19 (map__content1 lengths12)))
-  (get_length__function_guard
-  string_utilities__longest_common_subsequence__B_4__last__assume
-  (to_rep1 (last (rt s1))) o19 (map__content1 lengths12)))
   (and (dynamic_property3 0 last4
   string_utilities__longest_common_subsequence__B_4__last__assume)
   (= string_utilities__longest_common_subsequence__B_4__last__assume 
@@ -2129,7 +2064,7 @@
 
 ;; H
   (assert
-  (and (= us2 (to_rep1 result____last)) (dynamic_property9 1 last12
+  (and (= us2 (to_rep1 result____last)) (dynamic_property9 1 last11
   (to_rep1 result____last))))
 
 ;; H
@@ -2142,7 +2077,7 @@
   (assert (= rx1 o20))
 
 ;; H
-  (assert (dynamic_property9 1 last12 rx1))
+  (assert (dynamic_property9 1 last11 rx1))
 
 ;; H
   (assert (and (= us3 last2) (dynamic_property1 first2 last2 last2)))
@@ -2179,7 +2114,7 @@
   (and
   (and (=> (<= first2 last2) (dynamic_property1 first2 last2 x19))
   (=> (<= first3 last3) (dynamic_property2 first3 last3 x215)))
-  (=> (<= 1 last12) (dynamic_property9 1 last12 rx2))))
+  (=> (<= 1 last11) (dynamic_property9 1 last11 rx2))))
 
 ;; H
   (assert

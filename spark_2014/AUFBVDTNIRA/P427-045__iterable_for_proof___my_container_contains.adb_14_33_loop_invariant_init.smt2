@@ -235,10 +235,9 @@
   (assert
   (forall ((c (Array Int natural)))
   (forall ((e Int))
-  (! (=> (mem__function_guard (mem c e) c e)
-     (= (= (mem c e) true)
+  (! (= (= (mem c e) true)
      (exists ((i Int))
-     (and (and (<= 1 i) (<= i 100)) (= (to_rep (select c i)) e))))) :pattern (
+     (and (and (<= 1 i) (<= i 100)) (= (to_rep (select c i)) e)))) :pattern (
   (mem c e)) ))))
 
 (declare-fun valid (Int) Bool)
@@ -250,9 +249,7 @@
 
 ;; valid__def_axiom
   (assert
-  (forall ((e Int))
-  (! (=> (valid__function_guard (valid e) e) (= (= (valid e) true) (< 0 e))) :pattern (
-  (valid e)) )))
+  (forall ((e Int)) (! (= (= (valid e) true) (< 0 e)) :pattern ((valid e)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -340,10 +337,6 @@
 
 ;; H
   (assert (<= j i1))
-
-;; H
-  (assert (valid__function_guard (valid (to_rep (select c2 j)))
-  (to_rep (select c2 j))))
 
 (assert
 ;; WP_parameter_def

@@ -280,12 +280,12 @@
 (define-fun top_range__ref___projection ((a top_range__ref)) integer 
   (top_range__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_197 Int)
-  (temp___is_init_194 Bool) (temp___skip_constant_195 Bool)
-  (temp___do_toplevel_196 Bool)) Bool (=>
-                                      (or (= temp___is_init_194 true)
+(define-fun dynamic_invariant1 ((temp___expr_186 Int)
+  (temp___is_init_183 Bool) (temp___skip_constant_184 Bool)
+  (temp___do_toplevel_185 Bool)) Bool (=>
+                                      (or (= temp___is_init_183 true)
                                       (<= 0 last)) (dynamic_property 0 
-                                      last temp___expr_197)))
+                                      last temp___expr_186)))
 
 ;; last__def_axiom
   (assert (= last max))
@@ -293,8 +293,6 @@
 (declare-fun all_eq (Int (Array Int positive)) Bool)
 
 (declare-fun all_eq__function_guard (Bool Int (Array Int positive)) Bool)
-
-(declare-fun last1 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -320,7 +318,7 @@
 
 (declare-fun first (t) integer)
 
-(declare-fun last2 (t) integer)
+(declare-fun last1 (t) integer)
 
 (declare-fun mk (Int Int) t)
 
@@ -329,7 +327,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep (first (mk f l))) f) (= (to_rep (last2 (mk f l))) l)))) :pattern (
+     (and (= (to_rep (first (mk f l))) f) (= (to_rep (last1 (mk f l))) l)))) :pattern (
   (mk f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
@@ -347,10 +345,10 @@
 
 (define-fun first1 ((a us_t)) Int (to_rep (first (rt a))))
 
-(define-fun last3 ((a us_t)) Int (to_rep (last2 (rt a))))
+(define-fun last2 ((a us_t)) Int (to_rep (last1 (rt a))))
 
-(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last3 a))
-                                  (+ (- (last3 a) (first1 a)) 1) 0))
+(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last2 a))
+                                  (+ (- (last2 a) (first1 a)) 1) 0))
 
 (declare-fun value__size () Int)
 
@@ -385,8 +383,8 @@
 
 (define-fun bool_eq5 ((x us_t)
   (y us_t)) Bool (bool_eq2 (elts x) (to_rep (first (rt x)))
-                 (to_rep (last2 (rt x))) (elts y) (to_rep (first (rt y)))
-                 (to_rep (last2 (rt y)))))
+                 (to_rep (last1 (rt x))) (elts y) (to_rep (first (rt y)))
+                 (to_rep (last1 (rt y)))))
 
 (declare-fun user_eq4 (us_t us_t) Bool)
 
@@ -412,11 +410,9 @@
 ;; is_full__def_axiom
   (assert
   (forall ((use_stack__stacks__top Int))
-  (! (=> (is_full__function_guard (is_full use_stack__stacks__top)
-     use_stack__stacks__top)
-     (= (= (is_full use_stack__stacks__top) true)
-     (= use_stack__stacks__top max))) :pattern ((is_full
-                                                use_stack__stacks__top)) )))
+  (! (= (= (is_full use_stack__stacks__top) true)
+     (= use_stack__stacks__top max)) :pattern ((is_full
+                                               use_stack__stacks__top)) )))
 
 ;; is_empty__post_axiom
   (assert true)
@@ -424,35 +420,26 @@
 ;; is_empty__def_axiom
   (assert
   (forall ((use_stack__stacks__top Int))
-  (! (=> (is_empty__function_guard (is_empty use_stack__stacks__top)
-     use_stack__stacks__top)
-     (= (= (is_empty use_stack__stacks__top) true)
-     (= use_stack__stacks__top 0))) :pattern ((is_empty
-                                              use_stack__stacks__top)) )))
+  (! (= (= (is_empty use_stack__stacks__top) true)
+     (= use_stack__stacks__top 0)) :pattern ((is_empty
+                                             use_stack__stacks__top)) )))
 
 ;; peek__post_axiom
   (assert
   (forall ((use_stack__stacks__top Int))
   (forall ((use_stack__stacks__content (Array Int positive)))
-  (! (and (is_empty__function_guard (is_empty use_stack__stacks__top)
-     use_stack__stacks__top)
-     (=>
+  (! (=>
      (and (dynamic_invariant1 use_stack__stacks__top true true true)
-     (not (= (is_empty use_stack__stacks__top) true)))
-     (let ((result (peek use_stack__stacks__top use_stack__stacks__content)))
-     (=> (peek__function_guard result use_stack__stacks__top
-     use_stack__stacks__content) (dynamic_invariant result true false true))))) :pattern (
-  (peek use_stack__stacks__top use_stack__stacks__content)) ))))
+     (not (= (is_empty use_stack__stacks__top) true))) (dynamic_invariant
+     (peek use_stack__stacks__top use_stack__stacks__content) true false
+     true)) :pattern ((peek use_stack__stacks__top
+                      use_stack__stacks__content)) ))))
 
 ;; peek__def_axiom
   (assert
   (forall ((use_stack__stacks__top Int))
   (forall ((use_stack__stacks__content (Array Int positive)))
-  (! (=>
-     (and (dynamic_invariant1 use_stack__stacks__top true true true)
-     (peek__function_guard
-     (peek use_stack__stacks__top use_stack__stacks__content)
-     use_stack__stacks__top use_stack__stacks__content))
+  (! (=> (dynamic_invariant1 use_stack__stacks__top true true true)
      (= (peek use_stack__stacks__top use_stack__stacks__content) (to_rep1
                                                                  (select use_stack__stacks__content use_stack__stacks__top)))) :pattern (
   (peek use_stack__stacks__top use_stack__stacks__content)) ))))
@@ -464,23 +451,21 @@
   (assert
   (forall ((e Int))
   (forall ((use_stack__stacks__content (Array Int positive)))
-  (! (=> (all_eq__function_guard (all_eq e use_stack__stacks__content) e
-     use_stack__stacks__content)
-     (= (= (all_eq e use_stack__stacks__content) true)
+  (! (= (= (all_eq e use_stack__stacks__content) true)
      (forall ((i Int))
      (=> (and (<= 1 i) (<= i (to_rep content__last)))
-     (= (to_rep1 (select use_stack__stacks__content i)) e))))) :pattern (
+     (= (to_rep1 (select use_stack__stacks__content i)) e)))) :pattern (
   (all_eq e use_stack__stacks__content)) ))))
 
-(define-fun dynamic_invariant3 ((temp___expr_203 us_t)
-  (temp___is_init_200 Bool) (temp___skip_constant_201 Bool)
-  (temp___do_toplevel_202 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_201 true))
+(define-fun dynamic_invariant3 ((temp___expr_192 us_t)
+  (temp___is_init_189 Bool) (temp___skip_constant_190 Bool)
+  (temp___do_toplevel_191 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_190 true))
                                       (and (dynamic_property2 1 max
-                                      (first1 temp___expr_203)
-                                      (last3 temp___expr_203))
-                                      (and (= (first1 temp___expr_203) 1)
-                                      (= (last3 temp___expr_203) max)))))
+                                      (first1 temp___expr_192)
+                                      (last2 temp___expr_192))
+                                      (and (= (first1 temp___expr_192) 1)
+                                      (= (last2 temp___expr_192) max)))))
 
 (declare-fun c () Int)
 
@@ -512,9 +497,6 @@
   (and (= (to_rep content__first) 1) (= (to_rep content__last) max))))
 
 ;; H
-  (assert (is_empty__function_guard (is_empty top) top))
-
-;; H
   (assert (= (is_empty top) true))
 
 ;; H
@@ -527,18 +509,9 @@
   (assert (in_range e1))
 
 ;; H
-  (assert (is_full__function_guard (is_full top1) top1))
-
-;; H
-  (assert (all_eq__function_guard (all_eq e1 content) e1 content))
-
-;; H
   (assert
   (and (and (= (is_full top1) true) (= (all_eq e1 content) true))
   (dynamic_property 0 last top1)))
-
-;; H
-  (assert (is_empty__function_guard (is_empty top1) top1))
 
 (assert
 ;; WP_parameter_def

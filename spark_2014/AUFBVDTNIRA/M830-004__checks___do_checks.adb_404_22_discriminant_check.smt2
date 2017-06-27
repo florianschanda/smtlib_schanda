@@ -278,8 +278,6 @@
      (= (select (notb a a_first a_last) i) (not (select a i)))) :pattern ((select 
   (notb a a_first a_last) i)) )))))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -302,7 +300,7 @@
 
 (declare-fun first (t) integer)
 
-(declare-fun last1 (t) integer)
+(declare-fun last (t) integer)
 
 (declare-fun mk (Int Int) t)
 
@@ -311,7 +309,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep (first (mk f l))) f) (= (to_rep (last1 (mk f l))) l)))) :pattern (
+     (and (= (to_rep (first (mk f l))) f) (= (to_rep (last (mk f l))) l)))) :pattern (
   (mk f l)) )))
 
 (define-fun dynamic_property1 ((range_first Int) (range_last Int) (low Int)
@@ -329,10 +327,10 @@
 
 (define-fun first1 ((a us_t)) Int (to_rep (first (rt a))))
 
-(define-fun last2 ((a us_t)) Int (to_rep (last1 (rt a))))
+(define-fun last1 ((a us_t)) Int (to_rep (last (rt a))))
 
-(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last2 a))
-                                  (+ (- (last2 a) (first1 a)) 1) 0))
+(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last1 a))
+                                  (+ (- (last1 a) (first1 a)) 1) 0))
 
 (declare-fun value__size () Int)
 
@@ -366,8 +364,8 @@
 
 (define-fun bool_eq4 ((x us_t)
   (y us_t)) Bool (bool_eq2 (elts x) (to_rep (first (rt x)))
-                 (to_rep (last1 (rt x))) (elts y) (to_rep (first (rt y)))
-                 (to_rep (last1 (rt y)))))
+                 (to_rep (last (rt x))) (elts y) (to_rep (first (rt y)))
+                 (to_rep (last (rt y)))))
 
 (declare-fun user_eq3 (us_t us_t) Bool)
 
@@ -505,14 +503,14 @@
                                       (first1
                                       (rec__do_checks__do_discriminant_check__r1__arr
                                       (us_split_fields1 temp___expr_509)))
-                                      (last2
+                                      (last1
                                       (rec__do_checks__do_discriminant_check__r1__arr
                                       (us_split_fields1 temp___expr_509))))
                                       (and
                                       (= (first1
                                          (rec__do_checks__do_discriminant_check__r1__arr
                                          (us_split_fields1 temp___expr_509))) 1)
-                                      (= (last2
+                                      (= (last1
                                          (rec__do_checks__do_discriminant_check__r1__arr
                                          (us_split_fields1 temp___expr_509))) 
                                       (to_rep temp___510)))))))
@@ -983,14 +981,14 @@
                                       (first1
                                       (rec__do_checks__do_discriminant_check__r1__arr
                                       (us_split_fields1 temp___expr_547)))
-                                      (last2
+                                      (last1
                                       (rec__do_checks__do_discriminant_check__r1__arr
                                       (us_split_fields1 temp___expr_547))))
                                       (and
                                       (= (first1
                                          (rec__do_checks__do_discriminant_check__r1__arr
                                          (us_split_fields1 temp___expr_547))) 1)
-                                      (= (last2
+                                      (= (last1
                                          (rec__do_checks__do_discriminant_check__r1__arr
                                          (us_split_fields1 temp___expr_547))) 
                                       (to_rep temp___548))))))))
@@ -1148,14 +1146,14 @@
                                       (first1
                                       (rec__do_checks__do_discriminant_check__r1__arr
                                       (us_split_fields1 temp___expr_559)))
-                                      (last2
+                                      (last1
                                       (rec__do_checks__do_discriminant_check__r1__arr
                                       (us_split_fields1 temp___expr_559))))
                                       (and
                                       (= (first1
                                          (rec__do_checks__do_discriminant_check__r1__arr
                                          (us_split_fields1 temp___expr_559))) 1)
-                                      (= (last2
+                                      (= (last1
                                          (rec__do_checks__do_discriminant_check__r1__arr
                                          (us_split_fields1 temp___expr_559))) 
                                       (to_rep temp___560))))))))
@@ -1413,7 +1411,11 @@
 (declare-datatypes () ((t65b__ref (mk_t65b__ref (t65b__content us_rep3)))))
 (define-fun t65b__ref___projection ((a t65b__ref)) us_rep3 (t65b__content a))
 
-(declare-sort t67b 0)
+(declare-fun x__split_discrs1 () us_split_discrs)
+
+(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+
+(declare-sort tT70bP1 0)
 
 (define-fun in_range13 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
@@ -1425,39 +1427,16 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
 
-(declare-fun user_eq14 (t67b t67b) Bool)
+(declare-fun user_eq14 (tT70bP1 tT70bP1) Bool)
 
-(declare-fun dummy18 () t67b)
-
-(declare-datatypes () ((t67b__ref (mk_t67b__ref (t67b__content t67b)))))
-(define-fun t67b__ref___projection ((a t67b__ref)) t67b (t67b__content a))
-
-(declare-fun x__split_discrs1 () us_split_discrs)
-
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
-
-(declare-sort tT70bP1 0)
-
-(define-fun in_range14 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq13 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
-
-(declare-fun user_eq15 (tT70bP1 tT70bP1) Bool)
-
-(declare-fun dummy19 () tT70bP1)
+(declare-fun dummy18 () tT70bP1)
 
 (declare-datatypes ()
 ((tT70bP1__ref (mk_tT70bP1__ref (tT70bP1__content tT70bP1)))))
 (define-fun tT70bP1__ref___projection ((a tT70bP1__ref)) tT70bP1 (tT70bP1__content
                                                                  a))
 
-(declare-fun dummy20 () (Array Int Bool))
+(declare-fun dummy19 () (Array Int Bool))
 
 (declare-fun value__size12 () Int)
 
@@ -1490,7 +1469,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int Bool))) (<= 0 (object__alignment12 a))))
 
-(declare-fun user_eq16 ((Array Int Bool) (Array Int Bool)) Bool)
+(declare-fun user_eq15 ((Array Int Bool) (Array Int Bool)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields8
@@ -1535,7 +1514,7 @@
   (<= (to_rep
       (rec__do_checks__do_discriminant_check__r1__j (us_split_discrs5 a))) 2147483647)))
 
-(define-fun bool_eq14 ((a us_rep4)
+(define-fun bool_eq13 ((a us_rep4)
   (b us_rep4)) Bool (ite (and
                          (= (to_rep
                             (rec__do_checks__do_discriminant_check__r1__j
@@ -1551,9 +1530,9 @@
                             (us_split_fields9 b)) 1 10) true)))
                     true false))
 
-(declare-fun user_eq17 (us_rep4 us_rep4) Bool)
+(declare-fun user_eq16 (us_rep4 us_rep4) Bool)
 
-(define-fun in_range15 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range14 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -1611,35 +1590,16 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position8))
 
-(declare-fun dummy21 () us_rep4)
+(declare-fun dummy20 () us_rep4)
 
 (declare-datatypes () ((t69b__ref (mk_t69b__ref (t69b__content us_rep4)))))
 (define-fun t69b__ref___projection ((a t69b__ref)) us_rep4 (t69b__content a))
-
-(declare-sort t71b 0)
-
-(define-fun in_range16 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq15 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE9 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Int)
-
-(declare-fun user_eq18 (t71b t71b) Bool)
-
-(declare-fun dummy22 () t71b)
-
-(declare-datatypes () ((t71b__ref (mk_t71b__ref (t71b__content t71b)))))
-(define-fun t71b__ref___projection ((a t71b__ref)) t71b (t71b__content a))
 
 (declare-fun y__split_discrs1 () us_split_discrs)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
-(define-fun in_range17 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range15 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -1697,7 +1657,7 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position9))
 
-(declare-fun dummy23 () us_rep)
+(declare-fun dummy21 () us_rep)
 
 (declare-datatypes () ((txS__ref1 (mk_txS__ref1 (txS__content1 us_rep)))))
 (define-fun txS__ref_2__projection ((a txS__ref1)) us_rep (txS__content1 a))
@@ -1707,7 +1667,7 @@
   (temp___do_toplevel_594 Bool)) Bool (and
                                       (=>
                                       (not (= temp___skip_constant_593 true))
-                                      (in_range17 0 temp___expr_595))
+                                      (in_range15 0 temp___expr_595))
                                       (let ((temp___596 (rec__do_checks__do_discriminant_check__r1__j
                                                         (us_split_discrs1
                                                         temp___expr_595))))
@@ -1719,14 +1679,14 @@
                                       (first1
                                       (rec__do_checks__do_discriminant_check__r1__arr
                                       (us_split_fields1 temp___expr_595)))
-                                      (last2
+                                      (last1
                                       (rec__do_checks__do_discriminant_check__r1__arr
                                       (us_split_fields1 temp___expr_595))))
                                       (and
                                       (= (first1
                                          (rec__do_checks__do_discriminant_check__r1__arr
                                          (us_split_fields1 temp___expr_595))) 1)
-                                      (= (last2
+                                      (= (last1
                                          (rec__do_checks__do_discriminant_check__r1__arr
                                          (us_split_fields1 temp___expr_595))) 
                                       (to_rep temp___596))))))))
@@ -1737,7 +1697,7 @@
                                             (us_split_discrs1
                                             temp___expr_598))) 0))
 
-(define-fun in_range18 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range16 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -1795,7 +1755,7 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position10))
 
-(declare-fun dummy24 () us_rep)
+(declare-fun dummy22 () us_rep)
 
 (declare-datatypes () ((t76b__ref (mk_t76b__ref (t76b__content us_rep)))))
 (define-fun t76b__ref___projection ((a t76b__ref)) us_rep (t76b__content a))
@@ -1806,26 +1766,26 @@
 
 (declare-sort tT78bP1 0)
 
-(define-fun in_range19 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range17 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(define-fun bool_eq16 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq14 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE10 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
 
-(declare-fun user_eq19 (tT78bP1 tT78bP1) Bool)
+(declare-fun user_eq17 (tT78bP1 tT78bP1) Bool)
 
-(declare-fun dummy25 () tT78bP1)
+(declare-fun dummy23 () tT78bP1)
 
 (declare-datatypes ()
 ((tT78bP1__ref (mk_tT78bP1__ref (tT78bP1__content tT78bP1)))))
 (define-fun tT78bP1__ref___projection ((a tT78bP1__ref)) tT78bP1 (tT78bP1__content
                                                                  a))
 
-(declare-fun dummy26 () (Array Int Bool))
+(declare-fun dummy24 () (Array Int Bool))
 
 (declare-fun value__size16 () Int)
 
@@ -1858,7 +1818,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int Bool))) (<= 0 (object__alignment16 a))))
 
-(declare-fun user_eq20 ((Array Int Bool) (Array Int Bool)) Bool)
+(declare-fun user_eq18 ((Array Int Bool) (Array Int Bool)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields10
@@ -1903,7 +1863,7 @@
   (<= (to_rep
       (rec__do_checks__do_discriminant_check__r1__j (us_split_discrs6 a))) 2147483647)))
 
-(define-fun bool_eq17 ((a us_rep5)
+(define-fun bool_eq15 ((a us_rep5)
   (b us_rep5)) Bool (ite (and
                          (= (to_rep
                             (rec__do_checks__do_discriminant_check__r1__j
@@ -1919,9 +1879,9 @@
                             (us_split_fields11 b)) 1 10) true)))
                     true false))
 
-(declare-fun user_eq21 (us_rep5 us_rep5) Bool)
+(declare-fun user_eq19 (us_rep5 us_rep5) Bool)
 
-(define-fun in_range20 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range18 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -1979,29 +1939,10 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position11))
 
-(declare-fun dummy27 () us_rep5)
+(declare-fun dummy25 () us_rep5)
 
 (declare-datatypes () ((t77b__ref (mk_t77b__ref (t77b__content us_rep5)))))
 (define-fun t77b__ref___projection ((a t77b__ref)) us_rep5 (t77b__content a))
-
-(declare-sort t79b 0)
-
-(define-fun in_range21 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq18 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE11 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check11 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE11 (us_image) Int)
-
-(declare-fun user_eq22 (t79b t79b) Bool)
-
-(declare-fun dummy28 () t79b)
-
-(declare-datatypes () ((t79b__ref (mk_t79b__ref (t79b__content t79b)))))
-(define-fun t79b__ref___projection ((a t79b__ref)) t79b (t79b__content a))
 
 (declare-fun y__split_discrs2 () us_split_discrs)
 
@@ -2009,26 +1950,26 @@
 
 (declare-sort tT84bP1 0)
 
-(define-fun in_range22 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range19 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(define-fun bool_eq19 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq16 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE12 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE9 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check12 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE12 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Int)
 
-(declare-fun user_eq23 (tT84bP1 tT84bP1) Bool)
+(declare-fun user_eq20 (tT84bP1 tT84bP1) Bool)
 
-(declare-fun dummy29 () tT84bP1)
+(declare-fun dummy26 () tT84bP1)
 
 (declare-datatypes ()
 ((tT84bP1__ref (mk_tT84bP1__ref (tT84bP1__content tT84bP1)))))
 (define-fun tT84bP1__ref___projection ((a tT84bP1__ref)) tT84bP1 (tT84bP1__content
                                                                  a))
 
-(declare-fun dummy30 () (Array Int Bool))
+(declare-fun dummy27 () (Array Int Bool))
 
 (declare-fun value__size18 () Int)
 
@@ -2061,7 +2002,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int Bool))) (<= 0 (object__alignment18 a))))
 
-(declare-fun user_eq24 ((Array Int Bool) (Array Int Bool)) Bool)
+(declare-fun user_eq21 ((Array Int Bool) (Array Int Bool)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields12
@@ -2106,7 +2047,7 @@
   (<= (to_rep
       (rec__do_checks__do_discriminant_check__r1__j (us_split_discrs7 a))) 2147483647)))
 
-(define-fun bool_eq20 ((a us_rep6)
+(define-fun bool_eq17 ((a us_rep6)
   (b us_rep6)) Bool (ite (and
                          (= (to_rep
                             (rec__do_checks__do_discriminant_check__r1__j
@@ -2122,9 +2063,9 @@
                             (us_split_fields13 b)) 1 10) true)))
                     true false))
 
-(declare-fun user_eq25 (us_rep6 us_rep6) Bool)
+(declare-fun user_eq22 (us_rep6 us_rep6) Bool)
 
-(define-fun in_range23 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range20 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -2182,7 +2123,7 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position12))
 
-(declare-fun dummy31 () us_rep6)
+(declare-fun dummy28 () us_rep6)
 
 (declare-datatypes () ((txS__ref2 (mk_txS__ref2 (txS__content2 us_rep6)))))
 (define-fun txS__ref_3__projection ((a txS__ref2)) us_rep6 (txS__content2 a))
@@ -2191,7 +2132,7 @@
   (temp___is_init_620 Bool) (temp___skip_constant_621 Bool)
   (temp___do_toplevel_622 Bool)) Bool (=>
                                       (not (= temp___skip_constant_621 true))
-                                      (in_range23 10
+                                      (in_range20 10
                                       (to_base5 temp___expr_623))))
 
 (define-fun default_initial_assumption5 ((temp___expr_626 us_rep6)
@@ -2202,26 +2143,26 @@
 
 (declare-sort tT86bP1 0)
 
-(define-fun in_range24 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range21 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(define-fun bool_eq21 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq18 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE13 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE10 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check13 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE13 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) Int)
 
-(declare-fun user_eq26 (tT86bP1 tT86bP1) Bool)
+(declare-fun user_eq23 (tT86bP1 tT86bP1) Bool)
 
-(declare-fun dummy32 () tT86bP1)
+(declare-fun dummy29 () tT86bP1)
 
 (declare-datatypes ()
 ((tT86bP1__ref (mk_tT86bP1__ref (tT86bP1__content tT86bP1)))))
 (define-fun tT86bP1__ref___projection ((a tT86bP1__ref)) tT86bP1 (tT86bP1__content
                                                                  a))
 
-(declare-fun dummy33 () (Array Int Bool))
+(declare-fun dummy30 () (Array Int Bool))
 
 (declare-fun value__size20 () Int)
 
@@ -2254,7 +2195,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int Bool))) (<= 0 (object__alignment20 a))))
 
-(declare-fun user_eq27 ((Array Int Bool) (Array Int Bool)) Bool)
+(declare-fun user_eq24 ((Array Int Bool) (Array Int Bool)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields14
@@ -2299,7 +2240,7 @@
   (<= (to_rep
       (rec__do_checks__do_discriminant_check__r1__j (us_split_discrs8 a))) 2147483647)))
 
-(define-fun bool_eq22 ((a us_rep7)
+(define-fun bool_eq19 ((a us_rep7)
   (b us_rep7)) Bool (ite (and
                          (= (to_rep
                             (rec__do_checks__do_discriminant_check__r1__j
@@ -2315,9 +2256,9 @@
                             (us_split_fields15 b)) 1 10) true)))
                     true false))
 
-(declare-fun user_eq28 (us_rep7 us_rep7) Bool)
+(declare-fun user_eq25 (us_rep7 us_rep7) Bool)
 
-(define-fun in_range25 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range22 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -2375,29 +2316,10 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position13))
 
-(declare-fun dummy34 () us_rep7)
+(declare-fun dummy31 () us_rep7)
 
 (declare-datatypes () ((t85b__ref (mk_t85b__ref (t85b__content us_rep7)))))
 (define-fun t85b__ref___projection ((a t85b__ref)) us_rep7 (t85b__content a))
-
-(declare-sort t87b 0)
-
-(define-fun in_range26 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq23 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE14 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check14 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE14 (us_image) Int)
-
-(declare-fun user_eq29 (t87b t87b) Bool)
-
-(declare-fun dummy35 () t87b)
-
-(declare-datatypes () ((t87b__ref (mk_t87b__ref (t87b__content t87b)))))
-(define-fun t87b__ref___projection ((a t87b__ref)) t87b (t87b__content a))
 
 (declare-fun x__split_discrs3 () us_split_discrs)
 
@@ -2405,26 +2327,26 @@
 
 (declare-sort tT90bP1 0)
 
-(define-fun in_range27 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range23 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(define-fun bool_eq24 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq20 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE15 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE11 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check15 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check11 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE15 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE11 (us_image) Int)
 
-(declare-fun user_eq30 (tT90bP1 tT90bP1) Bool)
+(declare-fun user_eq26 (tT90bP1 tT90bP1) Bool)
 
-(declare-fun dummy36 () tT90bP1)
+(declare-fun dummy32 () tT90bP1)
 
 (declare-datatypes ()
 ((tT90bP1__ref (mk_tT90bP1__ref (tT90bP1__content tT90bP1)))))
 (define-fun tT90bP1__ref___projection ((a tT90bP1__ref)) tT90bP1 (tT90bP1__content
                                                                  a))
 
-(declare-fun dummy37 () (Array Int Bool))
+(declare-fun dummy33 () (Array Int Bool))
 
 (declare-fun value__size22 () Int)
 
@@ -2457,7 +2379,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int Bool))) (<= 0 (object__alignment22 a))))
 
-(declare-fun user_eq31 ((Array Int Bool) (Array Int Bool)) Bool)
+(declare-fun user_eq27 ((Array Int Bool) (Array Int Bool)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields16
@@ -2502,7 +2424,7 @@
   (<= (to_rep
       (rec__do_checks__do_discriminant_check__r1__j (us_split_discrs9 a))) 2147483647)))
 
-(define-fun bool_eq25 ((a us_rep8)
+(define-fun bool_eq21 ((a us_rep8)
   (b us_rep8)) Bool (ite (and
                          (= (to_rep
                             (rec__do_checks__do_discriminant_check__r1__j
@@ -2518,9 +2440,9 @@
                             (us_split_fields17 b)) 1 10) true)))
                     true false))
 
-(declare-fun user_eq32 (us_rep8 us_rep8) Bool)
+(declare-fun user_eq28 (us_rep8 us_rep8) Bool)
 
-(define-fun in_range28 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range24 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -2578,35 +2500,16 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position14))
 
-(declare-fun dummy38 () us_rep8)
+(declare-fun dummy34 () us_rep8)
 
 (declare-datatypes () ((t89b__ref (mk_t89b__ref (t89b__content us_rep8)))))
 (define-fun t89b__ref___projection ((a t89b__ref)) us_rep8 (t89b__content a))
-
-(declare-sort t91b 0)
-
-(define-fun in_range29 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq26 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE16 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check16 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE16 (us_image) Int)
-
-(declare-fun user_eq33 (t91b t91b) Bool)
-
-(declare-fun dummy39 () t91b)
-
-(declare-datatypes () ((t91b__ref (mk_t91b__ref (t91b__content t91b)))))
-(define-fun t91b__ref___projection ((a t91b__ref)) t91b (t91b__content a))
 
 (declare-fun y__split_discrs3 () us_split_discrs)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
 
-(define-fun in_range30 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range25 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -2664,7 +2567,7 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position15))
 
-(declare-fun dummy40 () us_rep)
+(declare-fun dummy35 () us_rep)
 
 (declare-datatypes () ((txS__ref3 (mk_txS__ref3 (txS__content3 us_rep)))))
 (define-fun txS__ref_4__projection ((a txS__ref3)) us_rep (txS__content3 a))
@@ -2674,7 +2577,7 @@
   (temp___do_toplevel_650 Bool)) Bool (and
                                       (=>
                                       (not (= temp___skip_constant_649 true))
-                                      (in_range30 0 temp___expr_651))
+                                      (in_range25 0 temp___expr_651))
                                       (let ((temp___652 (rec__do_checks__do_discriminant_check__r1__j
                                                         (us_split_discrs1
                                                         temp___expr_651))))
@@ -2686,14 +2589,14 @@
                                       (first1
                                       (rec__do_checks__do_discriminant_check__r1__arr
                                       (us_split_fields1 temp___expr_651)))
-                                      (last2
+                                      (last1
                                       (rec__do_checks__do_discriminant_check__r1__arr
                                       (us_split_fields1 temp___expr_651))))
                                       (and
                                       (= (first1
                                          (rec__do_checks__do_discriminant_check__r1__arr
                                          (us_split_fields1 temp___expr_651))) 1)
-                                      (= (last2
+                                      (= (last1
                                          (rec__do_checks__do_discriminant_check__r1__arr
                                          (us_split_fields1 temp___expr_651))) 
                                       (to_rep temp___652))))))))
@@ -2704,7 +2607,7 @@
                                             (us_split_discrs1
                                             temp___expr_654))) 0))
 
-(define-fun in_range31 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range26 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -2762,7 +2665,7 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position16))
 
-(declare-fun dummy41 () us_rep)
+(declare-fun dummy36 () us_rep)
 
 (declare-datatypes () ((t96b__ref (mk_t96b__ref (t96b__content us_rep)))))
 (define-fun t96b__ref___projection ((a t96b__ref)) us_rep (t96b__content a))
@@ -2773,26 +2676,26 @@
 
 (declare-sort tT98bP1 0)
 
-(define-fun in_range32 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range27 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(define-fun bool_eq27 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq22 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE17 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE12 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check17 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check12 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE17 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE12 (us_image) Int)
 
-(declare-fun user_eq34 (tT98bP1 tT98bP1) Bool)
+(declare-fun user_eq29 (tT98bP1 tT98bP1) Bool)
 
-(declare-fun dummy42 () tT98bP1)
+(declare-fun dummy37 () tT98bP1)
 
 (declare-datatypes ()
 ((tT98bP1__ref (mk_tT98bP1__ref (tT98bP1__content tT98bP1)))))
 (define-fun tT98bP1__ref___projection ((a tT98bP1__ref)) tT98bP1 (tT98bP1__content
                                                                  a))
 
-(declare-fun dummy43 () (Array Int Bool))
+(declare-fun dummy38 () (Array Int Bool))
 
 (declare-fun value__size26 () Int)
 
@@ -2825,7 +2728,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int Bool))) (<= 0 (object__alignment26 a))))
 
-(declare-fun user_eq35 ((Array Int Bool) (Array Int Bool)) Bool)
+(declare-fun user_eq30 ((Array Int Bool) (Array Int Bool)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields18
@@ -2870,7 +2773,7 @@
   (<= (to_rep
       (rec__do_checks__do_discriminant_check__r1__j (us_split_discrs10 a))) 2147483647)))
 
-(define-fun bool_eq28 ((a us_rep9)
+(define-fun bool_eq23 ((a us_rep9)
   (b us_rep9)) Bool (ite (and
                          (= (to_rep
                             (rec__do_checks__do_discriminant_check__r1__j
@@ -2886,9 +2789,9 @@
                             (us_split_fields19 b)) 1 10) true)))
                     true false))
 
-(declare-fun user_eq36 (us_rep9 us_rep9) Bool)
+(declare-fun user_eq31 (us_rep9 us_rep9) Bool)
 
-(define-fun in_range33 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range28 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -2946,29 +2849,10 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position17))
 
-(declare-fun dummy44 () us_rep9)
+(declare-fun dummy39 () us_rep9)
 
 (declare-datatypes () ((t97b__ref (mk_t97b__ref (t97b__content us_rep9)))))
 (define-fun t97b__ref___projection ((a t97b__ref)) us_rep9 (t97b__content a))
-
-(declare-sort t99b 0)
-
-(define-fun in_range34 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq29 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE18 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check18 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE18 (us_image) Int)
-
-(declare-fun user_eq37 (t99b t99b) Bool)
-
-(declare-fun dummy45 () t99b)
-
-(declare-datatypes () ((t99b__ref (mk_t99b__ref (t99b__content t99b)))))
-(define-fun t99b__ref___projection ((a t99b__ref)) t99b (t99b__content a))
 
 (declare-fun y__split_discrs4 () us_split_discrs)
 
@@ -2976,26 +2860,26 @@
 
 (declare-sort tT105bP1 0)
 
-(define-fun in_range35 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range29 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(define-fun bool_eq30 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq24 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE19 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE13 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check19 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check13 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE19 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE13 (us_image) Int)
 
-(declare-fun user_eq38 (tT105bP1 tT105bP1) Bool)
+(declare-fun user_eq32 (tT105bP1 tT105bP1) Bool)
 
-(declare-fun dummy46 () tT105bP1)
+(declare-fun dummy40 () tT105bP1)
 
 (declare-datatypes ()
 ((tT105bP1__ref (mk_tT105bP1__ref (tT105bP1__content tT105bP1)))))
 (define-fun tT105bP1__ref___projection ((a tT105bP1__ref)) tT105bP1 (tT105bP1__content
                                                                     a))
 
-(declare-fun dummy47 () (Array Int Bool))
+(declare-fun dummy41 () (Array Int Bool))
 
 (declare-fun value__size28 () Int)
 
@@ -3028,7 +2912,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int Bool))) (<= 0 (object__alignment28 a))))
 
-(declare-fun user_eq39 ((Array Int Bool) (Array Int Bool)) Bool)
+(declare-fun user_eq33 ((Array Int Bool) (Array Int Bool)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields20
@@ -3073,7 +2957,7 @@
   (<= (to_rep
       (rec__do_checks__do_discriminant_check__r1__j (us_split_discrs11 a))) 2147483647)))
 
-(define-fun bool_eq31 ((a us_rep10)
+(define-fun bool_eq25 ((a us_rep10)
   (b us_rep10)) Bool (ite (and
                           (= (to_rep
                              (rec__do_checks__do_discriminant_check__r1__j
@@ -3090,9 +2974,9 @@
                              (us_split_fields21 b)) 1 10) true)))
                      true false))
 
-(declare-fun user_eq40 (us_rep10 us_rep10) Bool)
+(declare-fun user_eq34 (us_rep10 us_rep10) Bool)
 
-(define-fun in_range36 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range30 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -3150,7 +3034,7 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position18))
 
-(declare-fun dummy48 () us_rep10)
+(declare-fun dummy42 () us_rep10)
 
 (declare-datatypes () ((txS__ref4 (mk_txS__ref4 (txS__content4 us_rep10)))))
 (define-fun txS__ref_5__projection ((a txS__ref4)) us_rep10 (txS__content4 a))
@@ -3159,7 +3043,7 @@
   (temp___is_init_666 Bool) (temp___skip_constant_667 Bool)
   (temp___do_toplevel_668 Bool)) Bool (=>
                                       (not (= temp___skip_constant_667 true))
-                                      (in_range36 10
+                                      (in_range30 10
                                       (to_base9 temp___expr_669))))
 
 (define-fun default_initial_assumption7 ((temp___expr_672 us_rep10)
@@ -3170,26 +3054,26 @@
 
 (declare-sort tT107bP1 0)
 
-(define-fun in_range37 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range31 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(define-fun bool_eq32 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq26 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE20 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE14 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check20 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check14 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE20 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE14 (us_image) Int)
 
-(declare-fun user_eq41 (tT107bP1 tT107bP1) Bool)
+(declare-fun user_eq35 (tT107bP1 tT107bP1) Bool)
 
-(declare-fun dummy49 () tT107bP1)
+(declare-fun dummy43 () tT107bP1)
 
 (declare-datatypes ()
 ((tT107bP1__ref (mk_tT107bP1__ref (tT107bP1__content tT107bP1)))))
 (define-fun tT107bP1__ref___projection ((a tT107bP1__ref)) tT107bP1 (tT107bP1__content
                                                                     a))
 
-(declare-fun dummy50 () (Array Int Bool))
+(declare-fun dummy44 () (Array Int Bool))
 
 (declare-fun value__size30 () Int)
 
@@ -3222,7 +3106,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int Bool))) (<= 0 (object__alignment30 a))))
 
-(declare-fun user_eq42 ((Array Int Bool) (Array Int Bool)) Bool)
+(declare-fun user_eq36 ((Array Int Bool) (Array Int Bool)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields22
@@ -3267,7 +3151,7 @@
   (<= (to_rep
       (rec__do_checks__do_discriminant_check__r1__j (us_split_discrs12 a))) 2147483647)))
 
-(define-fun bool_eq33 ((a us_rep11)
+(define-fun bool_eq27 ((a us_rep11)
   (b us_rep11)) Bool (ite (and
                           (= (to_rep
                              (rec__do_checks__do_discriminant_check__r1__j
@@ -3284,9 +3168,9 @@
                              (us_split_fields23 b)) 1 10) true)))
                      true false))
 
-(declare-fun user_eq43 (us_rep11 us_rep11) Bool)
+(declare-fun user_eq37 (us_rep11 us_rep11) Bool)
 
-(define-fun in_range38 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range32 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -3344,31 +3228,12 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position19))
 
-(declare-fun dummy51 () us_rep11)
+(declare-fun dummy45 () us_rep11)
 
 (declare-datatypes ()
 ((t106b__ref (mk_t106b__ref (t106b__content us_rep11)))))
 (define-fun t106b__ref___projection ((a t106b__ref)) us_rep11 (t106b__content
                                                               a))
-
-(declare-sort t108b 0)
-
-(define-fun in_range39 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq34 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE21 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check21 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE21 (us_image) Int)
-
-(declare-fun user_eq44 (t108b t108b) Bool)
-
-(declare-fun dummy52 () t108b)
-
-(declare-datatypes () ((t108b__ref (mk_t108b__ref (t108b__content t108b)))))
-(define-fun t108b__ref___projection ((a t108b__ref)) t108b (t108b__content a))
 
 (declare-fun x__split_discrs5 () us_split_discrs)
 
@@ -3376,26 +3241,26 @@
 
 (declare-sort tT111bP1 0)
 
-(define-fun in_range40 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range33 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(define-fun bool_eq35 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq28 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE22 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE15 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check22 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check15 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE22 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE15 (us_image) Int)
 
-(declare-fun user_eq45 (tT111bP1 tT111bP1) Bool)
+(declare-fun user_eq38 (tT111bP1 tT111bP1) Bool)
 
-(declare-fun dummy53 () tT111bP1)
+(declare-fun dummy46 () tT111bP1)
 
 (declare-datatypes ()
 ((tT111bP1__ref (mk_tT111bP1__ref (tT111bP1__content tT111bP1)))))
 (define-fun tT111bP1__ref___projection ((a tT111bP1__ref)) tT111bP1 (tT111bP1__content
                                                                     a))
 
-(declare-fun dummy54 () (Array Int Bool))
+(declare-fun dummy47 () (Array Int Bool))
 
 (declare-fun value__size32 () Int)
 
@@ -3428,7 +3293,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int Bool))) (<= 0 (object__alignment32 a))))
 
-(declare-fun user_eq46 ((Array Int Bool) (Array Int Bool)) Bool)
+(declare-fun user_eq39 ((Array Int Bool) (Array Int Bool)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields24
@@ -3473,7 +3338,7 @@
   (<= (to_rep
       (rec__do_checks__do_discriminant_check__r1__j (us_split_discrs13 a))) 2147483647)))
 
-(define-fun bool_eq36 ((a us_rep12)
+(define-fun bool_eq29 ((a us_rep12)
   (b us_rep12)) Bool (ite (and
                           (= (to_rep
                              (rec__do_checks__do_discriminant_check__r1__j
@@ -3490,9 +3355,9 @@
                              (us_split_fields25 b)) 1 10) true)))
                      true false))
 
-(declare-fun user_eq47 (us_rep12 us_rep12) Bool)
+(declare-fun user_eq40 (us_rep12 us_rep12) Bool)
 
-(define-fun in_range41 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range34 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -3550,37 +3415,18 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position20))
 
-(declare-fun dummy55 () us_rep12)
+(declare-fun dummy48 () us_rep12)
 
 (declare-datatypes ()
 ((t110b__ref (mk_t110b__ref (t110b__content us_rep12)))))
 (define-fun t110b__ref___projection ((a t110b__ref)) us_rep12 (t110b__content
                                                               a))
 
-(declare-sort t112b 0)
-
-(define-fun in_range42 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq37 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE23 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check23 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE23 (us_image) Int)
-
-(declare-fun user_eq48 (t112b t112b) Bool)
-
-(declare-fun dummy56 () t112b)
-
-(declare-datatypes () ((t112b__ref (mk_t112b__ref (t112b__content t112b)))))
-(define-fun t112b__ref___projection ((a t112b__ref)) t112b (t112b__content a))
-
 (declare-fun y__split_discrs5 () us_split_discrs)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS12 () Int)
 
-(define-fun in_range43 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range35 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -3638,7 +3484,7 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position21))
 
-(declare-fun dummy57 () us_rep)
+(declare-fun dummy49 () us_rep)
 
 (declare-datatypes () ((t115b__ref (mk_t115b__ref (t115b__content us_rep)))))
 (define-fun t115b__ref___projection ((a t115b__ref)) us_rep (t115b__content
@@ -3650,26 +3496,26 @@
 
 (declare-sort tT117bP1 0)
 
-(define-fun in_range44 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range36 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(define-fun bool_eq38 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq30 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE24 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE16 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check24 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check16 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE24 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE16 (us_image) Int)
 
-(declare-fun user_eq49 (tT117bP1 tT117bP1) Bool)
+(declare-fun user_eq41 (tT117bP1 tT117bP1) Bool)
 
-(declare-fun dummy58 () tT117bP1)
+(declare-fun dummy50 () tT117bP1)
 
 (declare-datatypes ()
 ((tT117bP1__ref (mk_tT117bP1__ref (tT117bP1__content tT117bP1)))))
 (define-fun tT117bP1__ref___projection ((a tT117bP1__ref)) tT117bP1 (tT117bP1__content
                                                                     a))
 
-(declare-fun dummy59 () (Array Int Bool))
+(declare-fun dummy51 () (Array Int Bool))
 
 (declare-fun value__size35 () Int)
 
@@ -3702,7 +3548,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int Bool))) (<= 0 (object__alignment35 a))))
 
-(declare-fun user_eq50 ((Array Int Bool) (Array Int Bool)) Bool)
+(declare-fun user_eq42 ((Array Int Bool) (Array Int Bool)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields26
@@ -3747,7 +3593,7 @@
   (<= (to_rep
       (rec__do_checks__do_discriminant_check__r1__j (us_split_discrs14 a))) 2147483647)))
 
-(define-fun bool_eq39 ((a us_rep13)
+(define-fun bool_eq31 ((a us_rep13)
   (b us_rep13)) Bool (ite (and
                           (= (to_rep
                              (rec__do_checks__do_discriminant_check__r1__j
@@ -3764,9 +3610,9 @@
                              (us_split_fields27 b)) 1 10) true)))
                      true false))
 
-(declare-fun user_eq51 (us_rep13 us_rep13) Bool)
+(declare-fun user_eq43 (us_rep13 us_rep13) Bool)
 
-(define-fun in_range45 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range37 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -3824,31 +3670,12 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position22))
 
-(declare-fun dummy60 () us_rep13)
+(declare-fun dummy52 () us_rep13)
 
 (declare-datatypes ()
 ((t116b__ref (mk_t116b__ref (t116b__content us_rep13)))))
 (define-fun t116b__ref___projection ((a t116b__ref)) us_rep13 (t116b__content
                                                               a))
-
-(declare-sort t118b 0)
-
-(define-fun in_range46 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq40 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE25 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check25 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE25 (us_image) Int)
-
-(declare-fun user_eq52 (t118b t118b) Bool)
-
-(declare-fun dummy61 () t118b)
-
-(declare-datatypes () ((t118b__ref (mk_t118b__ref (t118b__content t118b)))))
-(define-fun t118b__ref___projection ((a t118b__ref)) t118b (t118b__content a))
 
 (declare-fun y__split_discrs6 () us_split_discrs)
 
@@ -3856,26 +3683,26 @@
 
 (declare-sort tT121bP1 0)
 
-(define-fun in_range47 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range38 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(define-fun bool_eq41 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq32 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE26 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE17 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check26 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check17 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE26 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE17 (us_image) Int)
 
-(declare-fun user_eq53 (tT121bP1 tT121bP1) Bool)
+(declare-fun user_eq44 (tT121bP1 tT121bP1) Bool)
 
-(declare-fun dummy62 () tT121bP1)
+(declare-fun dummy53 () tT121bP1)
 
 (declare-datatypes ()
 ((tT121bP1__ref (mk_tT121bP1__ref (tT121bP1__content tT121bP1)))))
 (define-fun tT121bP1__ref___projection ((a tT121bP1__ref)) tT121bP1 (tT121bP1__content
                                                                     a))
 
-(declare-fun dummy63 () (Array Int Bool))
+(declare-fun dummy54 () (Array Int Bool))
 
 (declare-fun value__size37 () Int)
 
@@ -3908,7 +3735,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int Bool))) (<= 0 (object__alignment37 a))))
 
-(declare-fun user_eq54 ((Array Int Bool) (Array Int Bool)) Bool)
+(declare-fun user_eq45 ((Array Int Bool) (Array Int Bool)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields28
@@ -3953,7 +3780,7 @@
   (<= (to_rep
       (rec__do_checks__do_discriminant_check__r1__j (us_split_discrs15 a))) 2147483647)))
 
-(define-fun bool_eq42 ((a us_rep14)
+(define-fun bool_eq33 ((a us_rep14)
   (b us_rep14)) Bool (ite (and
                           (= (to_rep
                              (rec__do_checks__do_discriminant_check__r1__j
@@ -3970,9 +3797,9 @@
                              (us_split_fields29 b)) 1 10) true)))
                      true false))
 
-(declare-fun user_eq55 (us_rep14 us_rep14) Bool)
+(declare-fun user_eq46 (us_rep14 us_rep14) Bool)
 
-(define-fun in_range48 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range39 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -4030,7 +3857,7 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position23))
 
-(declare-fun dummy64 () us_rep14)
+(declare-fun dummy55 () us_rep14)
 
 (declare-datatypes () ((txS__ref5 (mk_txS__ref5 (txS__content5 us_rep14)))))
 (define-fun txS__ref_6__projection ((a txS__ref5)) us_rep14 (txS__content5 a))
@@ -4039,7 +3866,7 @@
   (temp___is_init_690 Bool) (temp___skip_constant_691 Bool)
   (temp___do_toplevel_692 Bool)) Bool (=>
                                       (not (= temp___skip_constant_691 true))
-                                      (in_range48 10
+                                      (in_range39 10
                                       (to_base13 temp___expr_693))))
 
 (define-fun default_initial_assumption8 ((temp___expr_696 us_rep14)
@@ -4050,26 +3877,26 @@
 
 (declare-sort tT123bP1 0)
 
-(define-fun in_range49 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range40 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(define-fun bool_eq43 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq34 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE27 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE18 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check27 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check18 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE27 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE18 (us_image) Int)
 
-(declare-fun user_eq56 (tT123bP1 tT123bP1) Bool)
+(declare-fun user_eq47 (tT123bP1 tT123bP1) Bool)
 
-(declare-fun dummy65 () tT123bP1)
+(declare-fun dummy56 () tT123bP1)
 
 (declare-datatypes ()
 ((tT123bP1__ref (mk_tT123bP1__ref (tT123bP1__content tT123bP1)))))
 (define-fun tT123bP1__ref___projection ((a tT123bP1__ref)) tT123bP1 (tT123bP1__content
                                                                     a))
 
-(declare-fun dummy66 () (Array Int Bool))
+(declare-fun dummy57 () (Array Int Bool))
 
 (declare-fun value__size39 () Int)
 
@@ -4102,7 +3929,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int Bool))) (<= 0 (object__alignment39 a))))
 
-(declare-fun user_eq57 ((Array Int Bool) (Array Int Bool)) Bool)
+(declare-fun user_eq48 ((Array Int Bool) (Array Int Bool)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields30
@@ -4147,7 +3974,7 @@
   (<= (to_rep
       (rec__do_checks__do_discriminant_check__r1__j (us_split_discrs16 a))) 2147483647)))
 
-(define-fun bool_eq44 ((a us_rep15)
+(define-fun bool_eq35 ((a us_rep15)
   (b us_rep15)) Bool (ite (and
                           (= (to_rep
                              (rec__do_checks__do_discriminant_check__r1__j
@@ -4164,9 +3991,9 @@
                              (us_split_fields31 b)) 1 10) true)))
                      true false))
 
-(declare-fun user_eq58 (us_rep15 us_rep15) Bool)
+(declare-fun user_eq49 (us_rep15 us_rep15) Bool)
 
-(define-fun in_range50 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range41 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -4224,31 +4051,12 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position24))
 
-(declare-fun dummy67 () us_rep15)
+(declare-fun dummy58 () us_rep15)
 
 (declare-datatypes ()
 ((t122b__ref (mk_t122b__ref (t122b__content us_rep15)))))
 (define-fun t122b__ref___projection ((a t122b__ref)) us_rep15 (t122b__content
                                                               a))
-
-(declare-sort t124b 0)
-
-(define-fun in_range51 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq45 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE28 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check28 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE28 (us_image) Int)
-
-(declare-fun user_eq59 (t124b t124b) Bool)
-
-(declare-fun dummy68 () t124b)
-
-(declare-datatypes () ((t124b__ref (mk_t124b__ref (t124b__content t124b)))))
-(define-fun t124b__ref___projection ((a t124b__ref)) t124b (t124b__content a))
 
 (declare-fun x__split_discrs7 () us_split_discrs)
 
@@ -4256,26 +4064,26 @@
 
 (declare-sort tT127bP1 0)
 
-(define-fun in_range52 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range42 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(define-fun bool_eq46 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq36 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE29 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE19 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check29 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check19 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE29 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE19 (us_image) Int)
 
-(declare-fun user_eq60 (tT127bP1 tT127bP1) Bool)
+(declare-fun user_eq50 (tT127bP1 tT127bP1) Bool)
 
-(declare-fun dummy69 () tT127bP1)
+(declare-fun dummy59 () tT127bP1)
 
 (declare-datatypes ()
 ((tT127bP1__ref (mk_tT127bP1__ref (tT127bP1__content tT127bP1)))))
 (define-fun tT127bP1__ref___projection ((a tT127bP1__ref)) tT127bP1 (tT127bP1__content
                                                                     a))
 
-(declare-fun dummy70 () (Array Int Bool))
+(declare-fun dummy60 () (Array Int Bool))
 
 (declare-fun value__size41 () Int)
 
@@ -4308,7 +4116,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int Bool))) (<= 0 (object__alignment41 a))))
 
-(declare-fun user_eq61 ((Array Int Bool) (Array Int Bool)) Bool)
+(declare-fun user_eq51 ((Array Int Bool) (Array Int Bool)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields32
@@ -4353,7 +4161,7 @@
   (<= (to_rep
       (rec__do_checks__do_discriminant_check__r1__j (us_split_discrs17 a))) 2147483647)))
 
-(define-fun bool_eq47 ((a us_rep16)
+(define-fun bool_eq37 ((a us_rep16)
   (b us_rep16)) Bool (ite (and
                           (= (to_rep
                              (rec__do_checks__do_discriminant_check__r1__j
@@ -4370,9 +4178,9 @@
                              (us_split_fields33 b)) 1 10) true)))
                      true false))
 
-(declare-fun user_eq62 (us_rep16 us_rep16) Bool)
+(declare-fun user_eq52 (us_rep16 us_rep16) Bool)
 
-(define-fun in_range53 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range43 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -4430,37 +4238,18 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position25))
 
-(declare-fun dummy71 () us_rep16)
+(declare-fun dummy61 () us_rep16)
 
 (declare-datatypes ()
 ((t126b__ref (mk_t126b__ref (t126b__content us_rep16)))))
 (define-fun t126b__ref___projection ((a t126b__ref)) us_rep16 (t126b__content
                                                               a))
 
-(declare-sort t128b 0)
-
-(define-fun in_range54 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq48 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE30 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check30 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE30 (us_image) Int)
-
-(declare-fun user_eq63 (t128b t128b) Bool)
-
-(declare-fun dummy72 () t128b)
-
-(declare-datatypes () ((t128b__ref (mk_t128b__ref (t128b__content t128b)))))
-(define-fun t128b__ref___projection ((a t128b__ref)) t128b (t128b__content a))
-
 (declare-fun y__split_discrs7 () us_split_discrs)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS16 () Int)
 
-(define-fun in_range55 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range44 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -4518,7 +4307,7 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position26))
 
-(declare-fun dummy73 () us_rep)
+(declare-fun dummy62 () us_rep)
 
 (declare-datatypes () ((txS__ref6 (mk_txS__ref6 (txS__content6 us_rep)))))
 (define-fun txS__ref_7__projection ((a txS__ref6)) us_rep (txS__content6 a))
@@ -4528,7 +4317,7 @@
   (temp___do_toplevel_716 Bool)) Bool (and
                                       (=>
                                       (not (= temp___skip_constant_715 true))
-                                      (in_range55 0 temp___expr_717))
+                                      (in_range44 0 temp___expr_717))
                                       (let ((temp___718 (rec__do_checks__do_discriminant_check__r1__j
                                                         (us_split_discrs1
                                                         temp___expr_717))))
@@ -4540,14 +4329,14 @@
                                       (first1
                                       (rec__do_checks__do_discriminant_check__r1__arr
                                       (us_split_fields1 temp___expr_717)))
-                                      (last2
+                                      (last1
                                       (rec__do_checks__do_discriminant_check__r1__arr
                                       (us_split_fields1 temp___expr_717))))
                                       (and
                                       (= (first1
                                          (rec__do_checks__do_discriminant_check__r1__arr
                                          (us_split_fields1 temp___expr_717))) 1)
-                                      (= (last2
+                                      (= (last1
                                          (rec__do_checks__do_discriminant_check__r1__arr
                                          (us_split_fields1 temp___expr_717))) 
                                       (to_rep temp___718))))))))
@@ -4558,7 +4347,7 @@
                                             (us_split_discrs1
                                             temp___expr_720))) 0))
 
-(define-fun in_range56 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range45 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -4616,7 +4405,7 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position27))
 
-(declare-fun dummy74 () us_rep)
+(declare-fun dummy63 () us_rep)
 
 (declare-datatypes () ((t132b__ref (mk_t132b__ref (t132b__content us_rep)))))
 (define-fun t132b__ref___projection ((a t132b__ref)) us_rep (t132b__content
@@ -4628,26 +4417,26 @@
 
 (declare-sort tT134bP1 0)
 
-(define-fun in_range57 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range46 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(define-fun bool_eq49 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq38 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE31 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE20 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check31 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check20 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE31 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE20 (us_image) Int)
 
-(declare-fun user_eq64 (tT134bP1 tT134bP1) Bool)
+(declare-fun user_eq53 (tT134bP1 tT134bP1) Bool)
 
-(declare-fun dummy75 () tT134bP1)
+(declare-fun dummy64 () tT134bP1)
 
 (declare-datatypes ()
 ((tT134bP1__ref (mk_tT134bP1__ref (tT134bP1__content tT134bP1)))))
 (define-fun tT134bP1__ref___projection ((a tT134bP1__ref)) tT134bP1 (tT134bP1__content
                                                                     a))
 
-(declare-fun dummy76 () (Array Int Bool))
+(declare-fun dummy65 () (Array Int Bool))
 
 (declare-fun value__size45 () Int)
 
@@ -4680,7 +4469,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int Bool))) (<= 0 (object__alignment45 a))))
 
-(declare-fun user_eq65 ((Array Int Bool) (Array Int Bool)) Bool)
+(declare-fun user_eq54 ((Array Int Bool) (Array Int Bool)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields34
@@ -4725,7 +4514,7 @@
   (<= (to_rep
       (rec__do_checks__do_discriminant_check__r1__j (us_split_discrs18 a))) 2147483647)))
 
-(define-fun bool_eq50 ((a us_rep17)
+(define-fun bool_eq39 ((a us_rep17)
   (b us_rep17)) Bool (ite (and
                           (= (to_rep
                              (rec__do_checks__do_discriminant_check__r1__j
@@ -4742,9 +4531,9 @@
                              (us_split_fields35 b)) 1 10) true)))
                      true false))
 
-(declare-fun user_eq66 (us_rep17 us_rep17) Bool)
+(declare-fun user_eq55 (us_rep17 us_rep17) Bool)
 
-(define-fun in_range58 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range47 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -4802,31 +4591,12 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position28))
 
-(declare-fun dummy77 () us_rep17)
+(declare-fun dummy66 () us_rep17)
 
 (declare-datatypes ()
 ((t133b__ref (mk_t133b__ref (t133b__content us_rep17)))))
 (define-fun t133b__ref___projection ((a t133b__ref)) us_rep17 (t133b__content
                                                               a))
-
-(declare-sort t135b 0)
-
-(define-fun in_range59 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq51 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE32 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check32 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE32 (us_image) Int)
-
-(declare-fun user_eq67 (t135b t135b) Bool)
-
-(declare-fun dummy78 () t135b)
-
-(declare-datatypes () ((t135b__ref (mk_t135b__ref (t135b__content t135b)))))
-(define-fun t135b__ref___projection ((a t135b__ref)) t135b (t135b__content a))
 
 (declare-fun y__split_discrs8 () us_split_discrs)
 
@@ -4834,26 +4604,26 @@
 
 (declare-sort tT138bP1 0)
 
-(define-fun in_range60 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range48 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(define-fun bool_eq52 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq40 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE33 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE21 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check33 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check21 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE33 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE21 (us_image) Int)
 
-(declare-fun user_eq68 (tT138bP1 tT138bP1) Bool)
+(declare-fun user_eq56 (tT138bP1 tT138bP1) Bool)
 
-(declare-fun dummy79 () tT138bP1)
+(declare-fun dummy67 () tT138bP1)
 
 (declare-datatypes ()
 ((tT138bP1__ref (mk_tT138bP1__ref (tT138bP1__content tT138bP1)))))
 (define-fun tT138bP1__ref___projection ((a tT138bP1__ref)) tT138bP1 (tT138bP1__content
                                                                     a))
 
-(declare-fun dummy80 () (Array Int Bool))
+(declare-fun dummy68 () (Array Int Bool))
 
 (declare-fun value__size47 () Int)
 
@@ -4886,7 +4656,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int Bool))) (<= 0 (object__alignment47 a))))
 
-(declare-fun user_eq69 ((Array Int Bool) (Array Int Bool)) Bool)
+(declare-fun user_eq57 ((Array Int Bool) (Array Int Bool)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields36
@@ -4931,7 +4701,7 @@
   (<= (to_rep
       (rec__do_checks__do_discriminant_check__r1__j (us_split_discrs19 a))) 2147483647)))
 
-(define-fun bool_eq53 ((a us_rep18)
+(define-fun bool_eq41 ((a us_rep18)
   (b us_rep18)) Bool (ite (and
                           (= (to_rep
                              (rec__do_checks__do_discriminant_check__r1__j
@@ -4948,9 +4718,9 @@
                              (us_split_fields37 b)) 1 10) true)))
                      true false))
 
-(declare-fun user_eq70 (us_rep18 us_rep18) Bool)
+(declare-fun user_eq58 (us_rep18 us_rep18) Bool)
 
-(define-fun in_range61 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range49 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -5008,7 +4778,7 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position29))
 
-(declare-fun dummy81 () us_rep18)
+(declare-fun dummy69 () us_rep18)
 
 (declare-datatypes () ((txS__ref7 (mk_txS__ref7 (txS__content7 us_rep18)))))
 (define-fun txS__ref_8__projection ((a txS__ref7)) us_rep18 (txS__content7 a))
@@ -5017,7 +4787,7 @@
   (temp___is_init_732 Bool) (temp___skip_constant_733 Bool)
   (temp___do_toplevel_734 Bool)) Bool (=>
                                       (not (= temp___skip_constant_733 true))
-                                      (in_range61 10
+                                      (in_range49 10
                                       (to_base17 temp___expr_735))))
 
 (define-fun default_initial_assumption10 ((temp___expr_738 us_rep18)
@@ -5028,26 +4798,26 @@
 
 (declare-sort tT140bP1 0)
 
-(define-fun in_range62 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range50 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(define-fun bool_eq54 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq42 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE34 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE22 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check34 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check22 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE34 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE22 (us_image) Int)
 
-(declare-fun user_eq71 (tT140bP1 tT140bP1) Bool)
+(declare-fun user_eq59 (tT140bP1 tT140bP1) Bool)
 
-(declare-fun dummy82 () tT140bP1)
+(declare-fun dummy70 () tT140bP1)
 
 (declare-datatypes ()
 ((tT140bP1__ref (mk_tT140bP1__ref (tT140bP1__content tT140bP1)))))
 (define-fun tT140bP1__ref___projection ((a tT140bP1__ref)) tT140bP1 (tT140bP1__content
                                                                     a))
 
-(declare-fun dummy83 () (Array Int Bool))
+(declare-fun dummy71 () (Array Int Bool))
 
 (declare-fun value__size49 () Int)
 
@@ -5080,7 +4850,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int Bool))) (<= 0 (object__alignment49 a))))
 
-(declare-fun user_eq72 ((Array Int Bool) (Array Int Bool)) Bool)
+(declare-fun user_eq60 ((Array Int Bool) (Array Int Bool)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields38
@@ -5125,7 +4895,7 @@
   (<= (to_rep
       (rec__do_checks__do_discriminant_check__r1__j (us_split_discrs20 a))) 2147483647)))
 
-(define-fun bool_eq55 ((a us_rep19)
+(define-fun bool_eq43 ((a us_rep19)
   (b us_rep19)) Bool (ite (and
                           (= (to_rep
                              (rec__do_checks__do_discriminant_check__r1__j
@@ -5142,9 +4912,9 @@
                              (us_split_fields39 b)) 1 10) true)))
                      true false))
 
-(declare-fun user_eq73 (us_rep19 us_rep19) Bool)
+(declare-fun user_eq61 (us_rep19 us_rep19) Bool)
 
-(define-fun in_range63 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range51 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -5202,31 +4972,12 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position30))
 
-(declare-fun dummy84 () us_rep19)
+(declare-fun dummy72 () us_rep19)
 
 (declare-datatypes ()
 ((t139b__ref (mk_t139b__ref (t139b__content us_rep19)))))
 (define-fun t139b__ref___projection ((a t139b__ref)) us_rep19 (t139b__content
                                                               a))
-
-(declare-sort t141b 0)
-
-(define-fun in_range64 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq56 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE35 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check35 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE35 (us_image) Int)
-
-(declare-fun user_eq74 (t141b t141b) Bool)
-
-(declare-fun dummy85 () t141b)
-
-(declare-datatypes () ((t141b__ref (mk_t141b__ref (t141b__content t141b)))))
-(define-fun t141b__ref___projection ((a t141b__ref)) t141b (t141b__content a))
 
 (declare-fun x__split_discrs9 () us_split_discrs)
 
@@ -5234,26 +4985,26 @@
 
 (declare-sort tT144bP1 0)
 
-(define-fun in_range65 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range52 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(define-fun bool_eq57 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq44 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE36 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE23 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check36 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check23 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE36 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE23 (us_image) Int)
 
-(declare-fun user_eq75 (tT144bP1 tT144bP1) Bool)
+(declare-fun user_eq62 (tT144bP1 tT144bP1) Bool)
 
-(declare-fun dummy86 () tT144bP1)
+(declare-fun dummy73 () tT144bP1)
 
 (declare-datatypes ()
 ((tT144bP1__ref (mk_tT144bP1__ref (tT144bP1__content tT144bP1)))))
 (define-fun tT144bP1__ref___projection ((a tT144bP1__ref)) tT144bP1 (tT144bP1__content
                                                                     a))
 
-(declare-fun dummy87 () (Array Int Bool))
+(declare-fun dummy74 () (Array Int Bool))
 
 (declare-fun value__size51 () Int)
 
@@ -5286,7 +5037,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int Bool))) (<= 0 (object__alignment51 a))))
 
-(declare-fun user_eq76 ((Array Int Bool) (Array Int Bool)) Bool)
+(declare-fun user_eq63 ((Array Int Bool) (Array Int Bool)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields40
@@ -5331,7 +5082,7 @@
   (<= (to_rep
       (rec__do_checks__do_discriminant_check__r1__j (us_split_discrs21 a))) 2147483647)))
 
-(define-fun bool_eq58 ((a us_rep20)
+(define-fun bool_eq45 ((a us_rep20)
   (b us_rep20)) Bool (ite (and
                           (= (to_rep
                              (rec__do_checks__do_discriminant_check__r1__j
@@ -5348,9 +5099,9 @@
                              (us_split_fields41 b)) 1 10) true)))
                      true false))
 
-(declare-fun user_eq77 (us_rep20 us_rep20) Bool)
+(declare-fun user_eq64 (us_rep20 us_rep20) Bool)
 
-(define-fun in_range66 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range53 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -5408,37 +5159,18 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position31))
 
-(declare-fun dummy88 () us_rep20)
+(declare-fun dummy75 () us_rep20)
 
 (declare-datatypes ()
 ((t143b__ref (mk_t143b__ref (t143b__content us_rep20)))))
 (define-fun t143b__ref___projection ((a t143b__ref)) us_rep20 (t143b__content
                                                               a))
 
-(declare-sort t145b 0)
-
-(define-fun in_range67 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq59 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE37 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check37 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE37 (us_image) Int)
-
-(declare-fun user_eq78 (t145b t145b) Bool)
-
-(declare-fun dummy89 () t145b)
-
-(declare-datatypes () ((t145b__ref (mk_t145b__ref (t145b__content t145b)))))
-(define-fun t145b__ref___projection ((a t145b__ref)) t145b (t145b__content a))
-
 (declare-fun y__split_discrs9 () us_split_discrs)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS20 () Int)
 
-(define-fun in_range68 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range54 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -5496,7 +5228,7 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position32))
 
-(declare-fun dummy90 () us_rep)
+(declare-fun dummy76 () us_rep)
 
 (declare-datatypes () ((txS__ref8 (mk_txS__ref8 (txS__content8 us_rep)))))
 (define-fun txS__ref_9__projection ((a txS__ref8)) us_rep (txS__content8 a))
@@ -5506,7 +5238,7 @@
   (temp___do_toplevel_754 Bool)) Bool (and
                                       (=>
                                       (not (= temp___skip_constant_753 true))
-                                      (in_range68 0 temp___expr_755))
+                                      (in_range54 0 temp___expr_755))
                                       (let ((temp___756 (rec__do_checks__do_discriminant_check__r1__j
                                                         (us_split_discrs1
                                                         temp___expr_755))))
@@ -5518,14 +5250,14 @@
                                       (first1
                                       (rec__do_checks__do_discriminant_check__r1__arr
                                       (us_split_fields1 temp___expr_755)))
-                                      (last2
+                                      (last1
                                       (rec__do_checks__do_discriminant_check__r1__arr
                                       (us_split_fields1 temp___expr_755))))
                                       (and
                                       (= (first1
                                          (rec__do_checks__do_discriminant_check__r1__arr
                                          (us_split_fields1 temp___expr_755))) 1)
-                                      (= (last2
+                                      (= (last1
                                          (rec__do_checks__do_discriminant_check__r1__arr
                                          (us_split_fields1 temp___expr_755))) 
                                       (to_rep temp___756))))))))
@@ -5536,7 +5268,7 @@
                                             (us_split_discrs1
                                             temp___expr_758))) 0))
 
-(define-fun in_range69 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range55 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -5594,7 +5326,7 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position33))
 
-(declare-fun dummy91 () us_rep)
+(declare-fun dummy77 () us_rep)
 
 (declare-datatypes () ((t148b__ref (mk_t148b__ref (t148b__content us_rep)))))
 (define-fun t148b__ref___projection ((a t148b__ref)) us_rep (t148b__content
@@ -5606,26 +5338,26 @@
 
 (declare-sort tT150bP1 0)
 
-(define-fun in_range70 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range56 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(define-fun bool_eq60 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq46 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE38 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE24 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check38 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check24 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE38 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE24 (us_image) Int)
 
-(declare-fun user_eq79 (tT150bP1 tT150bP1) Bool)
+(declare-fun user_eq65 (tT150bP1 tT150bP1) Bool)
 
-(declare-fun dummy92 () tT150bP1)
+(declare-fun dummy78 () tT150bP1)
 
 (declare-datatypes ()
 ((tT150bP1__ref (mk_tT150bP1__ref (tT150bP1__content tT150bP1)))))
 (define-fun tT150bP1__ref___projection ((a tT150bP1__ref)) tT150bP1 (tT150bP1__content
                                                                     a))
 
-(declare-fun dummy93 () (Array Int Bool))
+(declare-fun dummy79 () (Array Int Bool))
 
 (declare-fun value__size55 () Int)
 
@@ -5658,7 +5390,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int Bool))) (<= 0 (object__alignment55 a))))
 
-(declare-fun user_eq80 ((Array Int Bool) (Array Int Bool)) Bool)
+(declare-fun user_eq66 ((Array Int Bool) (Array Int Bool)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields42
@@ -5703,7 +5435,7 @@
   (<= (to_rep
       (rec__do_checks__do_discriminant_check__r1__j (us_split_discrs22 a))) 2147483647)))
 
-(define-fun bool_eq61 ((a us_rep21)
+(define-fun bool_eq47 ((a us_rep21)
   (b us_rep21)) Bool (ite (and
                           (= (to_rep
                              (rec__do_checks__do_discriminant_check__r1__j
@@ -5720,9 +5452,9 @@
                              (us_split_fields43 b)) 1 10) true)))
                      true false))
 
-(declare-fun user_eq81 (us_rep21 us_rep21) Bool)
+(declare-fun user_eq67 (us_rep21 us_rep21) Bool)
 
-(define-fun in_range71 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range57 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -5780,31 +5512,12 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position34))
 
-(declare-fun dummy94 () us_rep21)
+(declare-fun dummy80 () us_rep21)
 
 (declare-datatypes ()
 ((t149b__ref (mk_t149b__ref (t149b__content us_rep21)))))
 (define-fun t149b__ref___projection ((a t149b__ref)) us_rep21 (t149b__content
                                                               a))
-
-(declare-sort t151b 0)
-
-(define-fun in_range72 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq62 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE39 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check39 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE39 (us_image) Int)
-
-(declare-fun user_eq82 (t151b t151b) Bool)
-
-(declare-fun dummy95 () t151b)
-
-(declare-datatypes () ((t151b__ref (mk_t151b__ref (t151b__content t151b)))))
-(define-fun t151b__ref___projection ((a t151b__ref)) t151b (t151b__content a))
 
 (declare-fun y__split_discrs10 () us_split_discrs)
 
@@ -5812,26 +5525,26 @@
 
 (declare-sort tT154bP1 0)
 
-(define-fun in_range73 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range58 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(define-fun bool_eq63 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq48 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE40 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE25 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check40 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check25 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE40 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE25 (us_image) Int)
 
-(declare-fun user_eq83 (tT154bP1 tT154bP1) Bool)
+(declare-fun user_eq68 (tT154bP1 tT154bP1) Bool)
 
-(declare-fun dummy96 () tT154bP1)
+(declare-fun dummy81 () tT154bP1)
 
 (declare-datatypes ()
 ((tT154bP1__ref (mk_tT154bP1__ref (tT154bP1__content tT154bP1)))))
 (define-fun tT154bP1__ref___projection ((a tT154bP1__ref)) tT154bP1 (tT154bP1__content
                                                                     a))
 
-(declare-fun dummy97 () (Array Int Bool))
+(declare-fun dummy82 () (Array Int Bool))
 
 (declare-fun value__size57 () Int)
 
@@ -5864,7 +5577,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int Bool))) (<= 0 (object__alignment57 a))))
 
-(declare-fun user_eq84 ((Array Int Bool) (Array Int Bool)) Bool)
+(declare-fun user_eq69 ((Array Int Bool) (Array Int Bool)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields44
@@ -5909,7 +5622,7 @@
   (<= (to_rep
       (rec__do_checks__do_discriminant_check__r1__j (us_split_discrs23 a))) 2147483647)))
 
-(define-fun bool_eq64 ((a us_rep22)
+(define-fun bool_eq49 ((a us_rep22)
   (b us_rep22)) Bool (ite (and
                           (= (to_rep
                              (rec__do_checks__do_discriminant_check__r1__j
@@ -5926,9 +5639,9 @@
                              (us_split_fields45 b)) 1 10) true)))
                      true false))
 
-(declare-fun user_eq85 (us_rep22 us_rep22) Bool)
+(declare-fun user_eq70 (us_rep22 us_rep22) Bool)
 
-(define-fun in_range74 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range59 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -5986,7 +5699,7 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position35))
 
-(declare-fun dummy98 () us_rep22)
+(declare-fun dummy83 () us_rep22)
 
 (declare-datatypes () ((txS__ref9 (mk_txS__ref9 (txS__content9 us_rep22)))))
 (define-fun txS__ref_10__projection ((a txS__ref9)) us_rep22 (txS__content9
@@ -5996,7 +5709,7 @@
   (temp___is_init_772 Bool) (temp___skip_constant_773 Bool)
   (temp___do_toplevel_774 Bool)) Bool (=>
                                       (not (= temp___skip_constant_773 true))
-                                      (in_range74 10
+                                      (in_range59 10
                                       (to_base21 temp___expr_775))))
 
 (define-fun default_initial_assumption12 ((temp___expr_778 us_rep22)
@@ -6007,26 +5720,26 @@
 
 (declare-sort tT156bP1 0)
 
-(define-fun in_range75 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range60 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(define-fun bool_eq65 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq50 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE41 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE26 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check41 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check26 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE41 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE26 (us_image) Int)
 
-(declare-fun user_eq86 (tT156bP1 tT156bP1) Bool)
+(declare-fun user_eq71 (tT156bP1 tT156bP1) Bool)
 
-(declare-fun dummy99 () tT156bP1)
+(declare-fun dummy84 () tT156bP1)
 
 (declare-datatypes ()
 ((tT156bP1__ref (mk_tT156bP1__ref (tT156bP1__content tT156bP1)))))
 (define-fun tT156bP1__ref___projection ((a tT156bP1__ref)) tT156bP1 (tT156bP1__content
                                                                     a))
 
-(declare-fun dummy100 () (Array Int Bool))
+(declare-fun dummy85 () (Array Int Bool))
 
 (declare-fun value__size59 () Int)
 
@@ -6059,7 +5772,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int Bool))) (<= 0 (object__alignment59 a))))
 
-(declare-fun user_eq87 ((Array Int Bool) (Array Int Bool)) Bool)
+(declare-fun user_eq72 ((Array Int Bool) (Array Int Bool)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields46
@@ -6104,7 +5817,7 @@
   (<= (to_rep
       (rec__do_checks__do_discriminant_check__r1__j (us_split_discrs24 a))) 2147483647)))
 
-(define-fun bool_eq66 ((a us_rep23)
+(define-fun bool_eq51 ((a us_rep23)
   (b us_rep23)) Bool (ite (and
                           (= (to_rep
                              (rec__do_checks__do_discriminant_check__r1__j
@@ -6121,9 +5834,9 @@
                              (us_split_fields47 b)) 1 10) true)))
                      true false))
 
-(declare-fun user_eq88 (us_rep23 us_rep23) Bool)
+(declare-fun user_eq73 (us_rep23 us_rep23) Bool)
 
-(define-fun in_range76 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range61 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -6181,31 +5894,12 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position36))
 
-(declare-fun dummy101 () us_rep23)
+(declare-fun dummy86 () us_rep23)
 
 (declare-datatypes ()
 ((t155b__ref (mk_t155b__ref (t155b__content us_rep23)))))
 (define-fun t155b__ref___projection ((a t155b__ref)) us_rep23 (t155b__content
                                                               a))
-
-(declare-sort t157b 0)
-
-(define-fun in_range77 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq67 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE42 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check42 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE42 (us_image) Int)
-
-(declare-fun user_eq89 (t157b t157b) Bool)
-
-(declare-fun dummy102 () t157b)
-
-(declare-datatypes () ((t157b__ref (mk_t157b__ref (t157b__content t157b)))))
-(define-fun t157b__ref___projection ((a t157b__ref)) t157b (t157b__content a))
 
 (declare-fun x__split_discrs11 () us_split_discrs)
 
@@ -6213,26 +5907,26 @@
 
 (declare-sort tT160bP1 0)
 
-(define-fun in_range78 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range62 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(define-fun bool_eq68 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq52 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE43 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE27 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check43 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check27 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE43 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE27 (us_image) Int)
 
-(declare-fun user_eq90 (tT160bP1 tT160bP1) Bool)
+(declare-fun user_eq74 (tT160bP1 tT160bP1) Bool)
 
-(declare-fun dummy103 () tT160bP1)
+(declare-fun dummy87 () tT160bP1)
 
 (declare-datatypes ()
 ((tT160bP1__ref (mk_tT160bP1__ref (tT160bP1__content tT160bP1)))))
 (define-fun tT160bP1__ref___projection ((a tT160bP1__ref)) tT160bP1 (tT160bP1__content
                                                                     a))
 
-(declare-fun dummy104 () (Array Int Bool))
+(declare-fun dummy88 () (Array Int Bool))
 
 (declare-fun value__size61 () Int)
 
@@ -6265,7 +5959,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int Bool))) (<= 0 (object__alignment61 a))))
 
-(declare-fun user_eq91 ((Array Int Bool) (Array Int Bool)) Bool)
+(declare-fun user_eq75 ((Array Int Bool) (Array Int Bool)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields48
@@ -6310,7 +6004,7 @@
   (<= (to_rep
       (rec__do_checks__do_discriminant_check__r1__j (us_split_discrs25 a))) 2147483647)))
 
-(define-fun bool_eq69 ((a us_rep24)
+(define-fun bool_eq53 ((a us_rep24)
   (b us_rep24)) Bool (ite (and
                           (= (to_rep
                              (rec__do_checks__do_discriminant_check__r1__j
@@ -6327,9 +6021,9 @@
                              (us_split_fields49 b)) 1 10) true)))
                      true false))
 
-(declare-fun user_eq92 (us_rep24 us_rep24) Bool)
+(declare-fun user_eq76 (us_rep24 us_rep24) Bool)
 
-(define-fun in_range79 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
+(define-fun in_range63 ((rec__do_checks__do_discriminant_check__r1__j1 Int)
   (a us_rep)) Bool (= rec__do_checks__do_discriminant_check__r1__j1 (to_rep
                                                                     (rec__do_checks__do_discriminant_check__r1__j
                                                                     (us_split_discrs1
@@ -6387,31 +6081,12 @@
 ;; do_checks__do_discriminant_check__r1__arr__position_axiom
   (assert (<= 0 do_checks__do_discriminant_check__r1__arr__position37))
 
-(declare-fun dummy105 () us_rep24)
+(declare-fun dummy89 () us_rep24)
 
 (declare-datatypes ()
 ((t159b__ref (mk_t159b__ref (t159b__content us_rep24)))))
 (define-fun t159b__ref___projection ((a t159b__ref)) us_rep24 (t159b__content
                                                               a))
-
-(declare-sort t161b 0)
-
-(define-fun in_range80 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq70 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE44 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check44 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE44 (us_image) Int)
-
-(declare-fun user_eq93 (t161b t161b) Bool)
-
-(declare-fun dummy106 () t161b)
-
-(declare-datatypes () ((t161b__ref (mk_t161b__ref (t161b__content t161b)))))
-(define-fun t161b__ref___projection ((a t161b__ref)) t161b (t161b__content a))
 
 (declare-fun y__split_discrs11 () us_split_discrs)
 
@@ -6573,17 +6248,13 @@
 
 (declare-fun o2 () integer)
 
-(declare-fun o3 () (Array Int Bool))
+(declare-fun o3 () us_split_discrs)
 
-(declare-fun o4 () us_split_fields26)
+(declare-fun o4 () us_rep13)
 
-(declare-fun o5 () us_split_discrs)
+(declare-fun o5 () us_rep)
 
-(declare-fun o6 () us_rep13)
-
-(declare-fun o7 () us_rep)
-
-(declare-fun o8 () us_rep)
+(declare-fun o6 () us_rep)
 
 (declare-fun do_checks__do_discriminant_check__B_31__y__assume () us_rep2)
 
@@ -6665,39 +6336,34 @@
   (let ((subject x__split_fields)) x__split_fields1)) true false true))
 
 ;; H
-  (assert (= o3 (temp___874 (of_int 1))))
-
-;; H
-  (assert (= o4 (mk___split_fields13 o3)))
-
-;; H
   (assert (= (to_rep o2) 10))
 
 ;; H
-  (assert (= o5 (mk___split_discrs o2)))
-
-;; H
-  (assert (= o6 (mk___rep13 o5 o4)))
+  (assert (= o3 (mk___split_discrs o2)))
 
 ;; H
   (assert
-  (= o7 (mk___rep (us_split_discrs14 o6)
+  (= o4 (mk___rep13 o3 (mk___split_fields13 (temp___874 (of_int 1))))))
+
+;; H
+  (assert
+  (= o5 (mk___rep (us_split_discrs14 o4)
         (mk___split_fields
         (mk___t
         (rec__do_checks__do_discriminant_check__r1__arr13
-        (us_split_fields27 o6)) (mk 1 10))))))
+        (us_split_fields27 o4)) (mk 1 10))))))
 
 ;; H
-  (assert (= o8 o7))
+  (assert (= o6 o5))
 
 ;; H
   (assert
   (= do_checks__do_discriminant_check__B_31__y__assume (mk___rep2
-                                                       (us_split_discrs1 o8)
+                                                       (us_split_discrs1 o6)
                                                        (mk___split_fields2
                                                        (elts
                                                        (rec__do_checks__do_discriminant_check__r1__arr
-                                                       (us_split_fields1 o8)))))))
+                                                       (us_split_fields1 o6)))))))
 
 ;; H
   (assert (= result1 y__split_fields))

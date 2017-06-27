@@ -363,11 +363,10 @@
   (assert
   (forall ((a (Array Int integer)))
   (forall ((max Int))
-  (! (=> (all_elements_in__function_guard (all_elements_in a max) a max)
-     (= (= (all_elements_in a max) true)
+  (! (= (= (all_elements_in a max) true)
      (forall ((k Int))
      (=> (and (<= 0 k) (<= k 7))
-     (and (<= (- max) (to_rep (select a k))) (<= (to_rep (select a k)) max)))))) :pattern (
+     (and (<= (- max) (to_rep (select a k))) (<= (to_rep (select a k)) max))))) :pattern (
   (all_elements_in a max)) ))))
 
 (declare-fun intermediate_form ((Array Int integer)
@@ -377,17 +376,12 @@
   (Array Int integer)) Bool)
 
 ;; intermediate_form__post_axiom
-  (assert
-  (forall ((a (Array Int integer)) (b (Array Int integer)))
-  (! (and (all_elements_in__function_guard (all_elements_in a 8000000) a
-     8000000) (all_elements_in__function_guard (all_elements_in b 1000000) b
-     1000000)) :pattern ((intermediate_form a b)) )))
+  (assert true)
 
 ;; intermediate_form__def_axiom
   (assert
   (forall ((a (Array Int integer)) (b (Array Int integer)))
-  (! (=> (intermediate_form__function_guard (intermediate_form a b) a b)
-     (= (= (intermediate_form a b) true)
+  (! (= (= (intermediate_form a b) true)
      (forall ((k Int))
      (=> (and (<= 0 k) (<= k 7))
      (ite (= (mod2 (+ k 1) 8) 0)
@@ -402,7 +396,7 @@
      (ite (= (mod2 (+ k 1) 2) 0)
      (= (to_rep (select a k)) (+ (to_rep (select b k)) (to_rep
                                                        (select b (- k 1)))))
-     (= (to_rep (select a k)) (to_rep (select b k)))))))))) :pattern (
+     (= (to_rep (select a k)) (to_rep (select b k))))))))) :pattern (
   (intermediate_form a b)) )))
 
 (declare-fun ghost__ () (Array Int integer))
@@ -475,11 +469,11 @@
 
 (declare-fun temp1 () Int)
 
-(declare-fun temp___263 () Int)
+(declare-fun temp___244 () Int)
 
 (declare-fun result3 () Int)
 
-(declare-fun temp___2631 () Int)
+(declare-fun temp___2441 () Int)
 
 (declare-fun result4 () Int)
 
@@ -493,26 +487,14 @@
 
 (declare-fun temp2 () Int)
 
-(declare-fun temp___239 () Int)
+(declare-fun temp___221 () Int)
 
 (declare-fun result5 () Int)
 
-(declare-fun temp___2391 () Int)
+(declare-fun temp___2211 () Int)
 
 ;; H
   (assert (in_range3 input_space))
-
-;; H
-  (assert (all_elements_in__function_guard (all_elements_in ghost__ 1000000)
-  ghost__ 1000000))
-
-;; H
-  (assert (all_elements_in__function_guard (all_elements_in a 8000000) 
-  a 8000000))
-
-;; H
-  (assert (intermediate_form__function_guard (intermediate_form a ghost__) 
-  a ghost__))
 
 ;; H
   (assert
@@ -563,11 +545,6 @@
   (assert (< 0 space2))
 
 ;; H
-  (assert (all_elements_in__function_guard
-  (all_elements_in a2 (* (* (div1 4 space3) 8) 1000000)) a2
-  (* (* (div1 4 space3) 8) 1000000)))
-
-;; H
   (assert
   (and
   (and (or (or (= space3 4) (= space3 2)) (= space3 1))
@@ -604,10 +581,10 @@
   (=> (<= (- 2147483648) 2147483647) (in_range1 temp1))) (< 0 space3)))
 
 ;; H
-  (assert (= temp___263 result3))
+  (assert (= temp___244 result3))
 
 ;; H
-  (assert (= temp___2631 space3))
+  (assert (= temp___2441 space3))
 
 ;; H
   (assert (and (= o3 (* space3 2)) (in_range1 (* space3 2))))
@@ -656,10 +633,10 @@
   (=> (<= (- 2147483648) 2147483647) (in_range1 temp2))) (< right3 8)))
 
 ;; H
-  (assert (= temp___239 result5))
+  (assert (= temp___221 result5))
 
 ;; H
-  (assert (= temp___2391 right3))
+  (assert (= temp___2211 right3))
 
 (assert
 ;; WP_parameter_def

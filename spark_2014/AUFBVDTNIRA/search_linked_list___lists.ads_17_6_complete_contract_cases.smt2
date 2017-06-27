@@ -699,7 +699,7 @@
 
 (declare-fun o1 () count_type)
 
-(declare-fun temp___460 () count_type)
+(declare-fun temp___458 () count_type)
 
 ;; H
   (assert (= (to_rep o) 0))
@@ -708,10 +708,10 @@
   (assert (= o o1))
 
 ;; H
-  (assert (= temp___460 o1))
+  (assert (= temp___458 o1))
 
 ;; H
-  (assert (= (mk___rep1 (mk___split_fields1 temp___460)) no_element))
+  (assert (= (mk___rep1 (mk___split_fields1 temp___458)) no_element))
 
 (assert
 ;; WP_parameter_def

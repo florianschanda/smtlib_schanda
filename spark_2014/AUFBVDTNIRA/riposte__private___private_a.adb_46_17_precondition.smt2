@@ -367,10 +367,8 @@
 ;; create_stack__post_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (let ((result (create_stack us_void_param)))
-     (and (get_length__function_guard (get_length result) result)
-     (=> (create_stack__function_guard result us_void_param)
-     (= (get_length result) 0)))) :pattern ((create_stack us_void_param)) )))
+  (! (= (get_length (create_stack us_void_param)) 0) :pattern ((create_stack
+                                                               us_void_param)) )))
 
 (declare-fun top (us_rep) Int)
 
@@ -379,11 +377,8 @@
 ;; top__post_axiom
   (assert
   (forall ((the_stack us_rep))
-  (! (and (get_length__function_guard (get_length the_stack) the_stack)
-     (=> (< 0 (get_length the_stack))
-     (let ((result (top the_stack)))
-     (=> (top__function_guard result the_stack) (dynamic_invariant result
-     true false true))))) :pattern ((top the_stack)) )))
+  (! (=> (< 0 (get_length the_stack)) (dynamic_invariant (top the_stack) true
+     false true)) :pattern ((top the_stack)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -398,10 +393,8 @@
 
 ;; get_length__post_axiom
   (assert
-  (forall ((the_stack us_rep))
-  (! (let ((result (get_length the_stack)))
-     (=> (get_length__function_guard result the_stack) (dynamic_invariant1
-     result true false true))) :pattern ((get_length the_stack)) )))
+  (forall ((the_stack us_rep)) (! (dynamic_invariant1 (get_length the_stack)
+  true false true) :pattern ((get_length the_stack)) )))
 
 (declare-fun n () Int)
 
@@ -409,9 +402,9 @@
 
 (declare-fun s__split_fields1 () (Array Int integer))
 
-(declare-fun temp___243 () length_t)
+(declare-fun temp___229 () length_t)
 
-(declare-fun temp___2431 () (Array Int integer))
+(declare-fun temp___2291 () (Array Int integer))
 
 (declare-fun result () length_t)
 
@@ -429,24 +422,15 @@
                                                 s__split_fields4
                                                 s__split_fields5))
 
-(define-fun s__split_fields7 () us_split_fields (mk___split_fields
-                                                s__split_fields2
-                                                s__split_fields3))
-
-(define-fun temp___2432 () us_rep (mk___rep
-                                  (mk___split_fields temp___243 temp___2431)))
+(define-fun temp___2292 () us_rep (mk___rep
+                                  (mk___split_fields temp___229 temp___2291)))
 
 ;; H
   (assert (in_range n))
 
 ;; H
-  (assert (get_length__function_guard (get_length temp___2432) temp___2432))
-
-;; H
   (assert
-  (and
-  (and (= temp___2432 (create_stack Tuple0)) (create_stack__function_guard
-  temp___2432 Tuple0)) (= (get_length temp___2432) 0)))
+  (and (= temp___2292 (create_stack Tuple0)) (= (get_length temp___2292) 0)))
 
 ;; H
   (assert
@@ -456,33 +440,20 @@
                                                                  s__split_fields1))))
 
 ;; H
-  (assert (= temp___243 s__split_fields2))
+  (assert (= temp___229 s__split_fields2))
 
 ;; H
-  (assert (= temp___2431 s__split_fields3))
-
-;; H
-  (assert (get_length__function_guard
-  (get_length (mk___rep s__split_fields6)) (mk___rep s__split_fields6)))
-
-;; H
-  (assert (get_length__function_guard
-  (get_length (mk___rep s__split_fields7)) (mk___rep s__split_fields7)))
-
-;; H
-  (assert (top__function_guard (top (mk___rep s__split_fields6))
-  (mk___rep s__split_fields6)))
+  (assert (= temp___2291 s__split_fields3))
 
 ;; H
   (assert
   (and
   (= (get_length (mk___rep s__split_fields6)) (+ (get_length
-                                                 (mk___rep s__split_fields7)) 1))
+                                                 (mk___rep
+                                                 (mk___split_fields
+                                                 s__split_fields2
+                                                 s__split_fields3))) 1))
   (= (top (mk___rep s__split_fields6)) n)))
-
-;; H
-  (assert (get_length__function_guard
-  (get_length (mk___rep s__split_fields6)) (mk___rep s__split_fields6)))
 
 (assert
 ;; WP_parameter_def

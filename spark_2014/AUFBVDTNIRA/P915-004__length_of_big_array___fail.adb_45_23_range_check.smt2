@@ -467,14 +467,14 @@
 (declare-datatypes () ((a__ref (mk_a__ref (a__content us_t)))))
 (define-fun a__ref___projection ((a a__ref)) us_t (a__content a))
 
-(define-fun dynamic_invariant ((temp___expr_293 us_t)
-  (temp___is_init_290 Bool) (temp___skip_constant_291 Bool)
-  (temp___do_toplevel_292 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_291 true))
+(define-fun dynamic_invariant ((temp___expr_292 us_t)
+  (temp___is_init_289 Bool) (temp___skip_constant_290 Bool)
+  (temp___do_toplevel_291 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_290 true))
                                       (dynamic_property ((_ int2bv 64) 0)
                                       ((_ int2bv 64) 18446744073709551615)
-                                      (first1 temp___expr_293)
-                                      (last1 temp___expr_293))))
+                                      (first1 temp___expr_292)
+                                      (last1 temp___expr_292))))
 
 (declare-fun create ((_ BitVec 64)) us_t)
 
@@ -491,25 +491,21 @@
                                      (<= (- 9223372036854775808) 9223372036854775807))
                                      (in_range1 temp___expr_27)))
 
-(define-fun dynamic_invariant2 ((temp___expr_287 (_ BitVec 64))
-  (temp___is_init_284 Bool) (temp___skip_constant_285 Bool)
-  (temp___do_toplevel_286 Bool)) Bool true)
+(define-fun dynamic_invariant2 ((temp___expr_286 (_ BitVec 64))
+  (temp___is_init_283 Bool) (temp___skip_constant_284 Bool)
+  (temp___do_toplevel_285 Bool)) Bool true)
 
 ;; create__post_axiom
   (assert
   (forall ((last2 (_ BitVec 64)))
   (! (=> (dynamic_invariant2 last2 true true true)
      (let ((result (create last2)))
-     (=> (create__function_guard result last2)
      (and
      (and (= (last1 result) last2) (= (first1 result) ((_ int2bv 64) 0)))
-     (dynamic_invariant result true false true))))) :pattern ((create last2)) )))
+     (dynamic_invariant result true false true)))) :pattern ((create last2)) )))
 
 ;; c__def_axiom
-  (assert
-  (and (create__function_guard (create ((_ int2bv 64) 18446744073709551615))
-  ((_ int2bv 64) 18446744073709551615))
-  (= c (create ((_ int2bv 64) 18446744073709551615)))))
+  (assert (= c (create ((_ int2bv 64) 18446744073709551615))))
 
 ;; H
   (assert (dynamic_invariant c true false true))

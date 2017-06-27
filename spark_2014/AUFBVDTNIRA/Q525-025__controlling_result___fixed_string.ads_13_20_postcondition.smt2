@@ -404,26 +404,7 @@
 (declare-datatypes () ((t4s__ref (mk_t4s__ref (t4s__content t4s)))))
 (define-fun t4s__ref___projection ((a t4s__ref)) t4s (t4s__content a))
 
-(declare-sort t6s 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 20)))
-
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq6 (t6s t6s) Bool)
-
-(declare-fun dummy6 () t6s)
-
-(declare-datatypes () ((t6s__ref (mk_t6s__ref (t6s__content t6s)))))
-(define-fun t6s__ref___projection ((a t6s__ref)) t6s (t6s__content a))
-
-(declare-fun dummy7 () (Array Int character))
+(declare-fun dummy6 () (Array Int character))
 
 (declare-fun value__size1 () Int)
 
@@ -456,7 +437,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment1 a))))
 
-(declare-fun user_eq7 ((Array Int character) (Array Int character)) Bool)
+(declare-fun user_eq6 ((Array Int character) (Array Int character)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields
@@ -484,7 +465,7 @@
 
 (define-fun us_rep_2__projection ((a us_rep)) Int (attr__tag a))
 
-(define-fun bool_eq8 ((a us_rep)
+(define-fun bool_eq7 ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (= (to_rep2
                            (rec__fixed_string__object__width
@@ -498,7 +479,7 @@
                            (us_split_fields1 b)) 1 20) true))
                    true false))
 
-(declare-fun user_eq8 (us_rep us_rep) Bool)
+(declare-fun user_eq7 (us_rep us_rep) Bool)
 
 (declare-fun us_dispatch_eq (us_rep us_rep) Bool)
 
@@ -556,7 +537,7 @@
 ;; fixed_string__object__name__position_axiom
   (assert (<= 0 fixed_string__object__name__position))
 
-(declare-fun dummy8 () us_rep)
+(declare-fun dummy7 () us_rep)
 
 (declare-datatypes ()
 ((object__ref (mk_object__ref (object__content us_rep)))))
@@ -602,35 +583,27 @@
 
 ;; elements__post_axiom
   (assert
-  (forall ((this us_rep))
-  (! (let ((result (elements this)))
-     (=> (elements__function_guard result this) (dynamic_invariant result
-     true false true))) :pattern ((elements this)) )))
+  (forall ((this us_rep)) (! (dynamic_invariant (elements this) true false
+  true) :pattern ((elements this)) )))
 
 ;; elements__post__dispatch_axiom
   (assert
   (forall ((attr__tag1 Int))
-  (forall ((this us_rep))
-  (! (let ((result (elements1 attr__tag1 this)))
-     (=> (elements__function_guard1 result attr__tag1 this)
-     (dynamic_invariant result true false true))) :pattern ((elements1
-                                                            attr__tag1 this)) ))))
+  (forall ((this us_rep)) (! (dynamic_invariant (elements1 attr__tag1 this)
+  true false true) :pattern ((elements1 attr__tag1 this)) ))))
 
 ;; fixed_string__object__compat_axiom
   (assert
   (forall ((this us_rep))
-  (! (=> (elements__function_guard1 (elements1 us_tag this) us_tag this)
-     (and (elements__function_guard (elements this) this)
-     (= (elements this) (elements1 us_tag this)))) :pattern ((elements1
-                                                             us_tag this)) )))
+  (! (= (elements this) (elements1 us_tag this)) :pattern ((elements1 
+                                                           us_tag this)) )))
 
 ;; elements__def_axiom
   (assert
   (forall ((this us_rep))
-  (! (=> (elements__function_guard (elements this) this)
-     (= (elements this) (to_rep2
+  (! (= (elements this) (to_rep2
                         (rec__fixed_string__object__width
-                        (us_split_fields1 this))))) :pattern ((elements this)) )))
+                        (us_split_fields1 this)))) :pattern ((elements this)) )))
 
 (declare-fun this__attr__tag () Int)
 
@@ -678,13 +651,13 @@
 
 (declare-fun o3 () us_private)
 
-(declare-fun temp___225 () natural)
+(declare-fun temp___215 () natural)
 
-(declare-fun temp___2251 () (Array Int character))
+(declare-fun temp___2151 () (Array Int character))
 
-(declare-fun temp___2252 () us_private)
+(declare-fun temp___2152 () us_private)
 
-(declare-fun temp___2253 () Int)
+(declare-fun temp___2153 () Int)
 
 (declare-fun o4 () integer)
 
@@ -732,24 +705,23 @@
 
 (declare-fun fixed_string__create__result7 () Int)
 
-(declare-fun fixed_string__create__result8 () object__ref)
+(declare-fun fixed_string__create__result8 () natural)
 
-(declare-fun fixed_string__create__result9 () us_rep)
+(declare-fun fixed_string__create__result9 () (Array Int character))
+
+(declare-fun fixed_string__create__result10 () us_private)
+
+(declare-fun fixed_string__create__result11 () Int)
+
+(declare-fun fixed_string__create__result12 () us_rep)
 
 (declare-fun this__split_fields9 () us_split_fields__ref)
 
-(declare-fun fixed_string__create__result10 () object__ref)
+(declare-fun fixed_string__create__result13 () object__ref)
 
 (declare-fun this__split_fields10 () us_split_fields)
 
-(declare-fun fixed_string__create__result11 () us_rep)
-
-(define-fun fixed_string__create__result12 () us_rep (mk___rep
-                                                     (mk___split_fields
-                                                     fixed_string__create__result4
-                                                     fixed_string__create__result5
-                                                     fixed_string__create__result6)
-                                                     fixed_string__create__result7))
+(declare-fun fixed_string__create__result14 () us_rep)
 
 (define-fun this__split_fields11 () us_split_fields (mk___split_fields
                                                     this__split_fields6
@@ -789,16 +761,16 @@
   (assert (= this__split_fields2 o3))
 
 ;; H
-  (assert (= temp___225 o1))
+  (assert (= temp___215 o1))
 
 ;; H
-  (assert (= temp___2251 o2))
+  (assert (= temp___2151 o2))
 
 ;; H
-  (assert (= temp___2252 o3))
+  (assert (= temp___2152 o3))
 
 ;; H
-  (assert (= this__attr__tag temp___2253))
+  (assert (= this__attr__tag temp___2153))
 
 ;; H
   (assert (= result this__split_fields))
@@ -810,13 +782,13 @@
   (assert (= result2 this__split_fields2))
 
 ;; H
-  (assert (= temp___225 this__split_fields3))
+  (assert (= temp___215 this__split_fields3))
 
 ;; H
-  (assert (= temp___2251 this__split_fields4))
+  (assert (= temp___2151 this__split_fields4))
 
 ;; H
-  (assert (= temp___2252 this__split_fields5))
+  (assert (= temp___2152 this__split_fields5))
 
 ;; H
   (assert (= (to_rep1 o5) 20))
@@ -864,12 +836,25 @@
   (assert (= this__split_fields5 this__split_fields8))
 
 ;; H
-  (assert
-  (= fixed_string__create__result8 (mk_object__ref
-                                   fixed_string__create__result12)))
+  (assert (= fixed_string__create__result8 fixed_string__create__result4))
 
 ;; H
-  (assert (= fixed_string__create__result9 fixed_string__create__result12))
+  (assert (= fixed_string__create__result9 fixed_string__create__result5))
+
+;; H
+  (assert (= fixed_string__create__result10 fixed_string__create__result6))
+
+;; H
+  (assert (= fixed_string__create__result11 fixed_string__create__result7))
+
+;; H
+  (assert
+  (= fixed_string__create__result12 (mk___rep
+                                    (mk___split_fields
+                                    fixed_string__create__result4
+                                    fixed_string__create__result5
+                                    fixed_string__create__result6)
+                                    fixed_string__create__result7)))
 
 ;; H
   (assert (= result6 fixed_string__create__result))
@@ -896,14 +881,21 @@
   (assert (= this__attr__tag fixed_string__create__result7))
 
 ;; H
-  (assert (= fixed_string__create__result10 fixed_string__create__result8))
+  (assert
+  (= fixed_string__create__result13 (mk_object__ref
+                                    (mk___rep
+                                    (mk___split_fields
+                                    fixed_string__create__result8
+                                    fixed_string__create__result9
+                                    fixed_string__create__result10)
+                                    fixed_string__create__result11))))
 
 ;; H
   (assert
   (= this__split_fields9 (mk___split_fields__ref this__split_fields11)))
 
 ;; H
-  (assert (= fixed_string__create__result11 fixed_string__create__result9))
+  (assert (= fixed_string__create__result14 fixed_string__create__result12))
 
 ;; H
   (assert (= this__split_fields10 this__split_fields11))
@@ -911,16 +903,11 @@
 ;; H
   (assert
   (= (mk___rep (mk___split_fields result10 result11 result12) result13) 
-  (object__content fixed_string__create__result10)))
-
-;; H
-  (assert (elements__function_guard
-  (elements (object__content fixed_string__create__result10))
-  (object__content fixed_string__create__result10)))
+  (object__content fixed_string__create__result13)))
 
 (assert
 ;; WP_parameter_def
  ;; File "fixed_string.ads", line 36, characters 0-0
   (not
-  (= (elements (object__content fixed_string__create__result10)) elem_width)))
+  (= (elements (object__content fixed_string__create__result13)) elem_width)))
 (check-sat)

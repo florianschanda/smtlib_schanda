@@ -439,8 +439,7 @@
 ;; empty__def_axiom
   (assert
   (forall ((a us_t))
-  (! (=> (empty__function_guard (empty a) a)
-     (= (= (empty a) true) (< (last1 a) (first1 a)))) :pattern ((empty a)) )))
+  (! (= (= (empty a) true) (< (last1 a) (first1 a))) :pattern ((empty a)) )))
 
 (declare-fun sorted (us_t) Bool)
 
@@ -452,13 +451,12 @@
 ;; sorted__def_axiom
   (assert
   (forall ((a us_t))
-  (! (=> (sorted__function_guard (sorted a) a)
-     (= (= (sorted a) true)
+  (! (= (= (sorted a) true)
      (forall ((i1 Int))
      (=> (and (<= (first1 a) i1) (<= i1 (last1 a)))
      (forall ((i2 Int))
      (=> (and (<= i1 i2) (<= i2 (last1 a)))
-     (<= (to_rep (select (to_array a) i1)) (to_rep (select (to_array a) i2))))))))) :pattern (
+     (<= (to_rep (select (to_array a) i1)) (to_rep (select (to_array a) i2)))))))) :pattern (
   (sorted a)) )))
 
 (declare-fun a () us_t)
@@ -511,13 +509,13 @@
 
 (declare-fun o13 () Bool)
 
-(declare-fun temp___171 () Int)
-
-(declare-fun temp___170 () Int)
-
 (declare-fun temp___169 () Int)
 
-(declare-fun temp___172 () Int)
+(declare-fun temp___168 () Int)
+
+(declare-fun temp___167 () Int)
+
+(declare-fun temp___170 () Int)
 
 (declare-fun o14 () Int)
 
@@ -587,11 +585,11 @@
 
 (declare-fun binary_search__search__result7 () Int)
 
-(declare-fun temp___1721 () Int)
+(declare-fun temp___1701 () Int)
 
 (declare-fun result8 () Int)
 
-(declare-fun temp___1722 () Int)
+(declare-fun temp___1702 () Int)
 
 (declare-fun result9 () Int)
 
@@ -726,9 +724,6 @@
 (declare-fun result16 () Int)
 
 ;; H
-  (assert (sorted__function_guard (sorted a) a))
-
-;; H
   (assert (dynamic_invariant2 a true false true))
 
 ;; H
@@ -758,14 +753,14 @@
   (and (= binary_search__search__result21 binary_search__search__result2)
   (and (= med13 med1) (and (= right14 right1) (= left14 left1)))))
   (and
-  (and (and (= result (empty a)) (empty__function_guard result a))
+  (and (= result (empty a))
   (= (= result true) (< (to_rep1 (last (rt a))) (to_rep1 (first (rt a))))))
   (and (= result true)
   (and (= (mk_int__ref result1) (mk_int__ref binary_search__search__result))
   (= binary_search__search__result2 0)))))
   (and
   (and
-  (and (and (= result (empty a)) (empty__function_guard result a))
+  (and (= result (empty a))
   (= (= result true) (< (to_rep1 (last (rt a))) (to_rep1 (first (rt a))))))
   (and (not (= result true))
   (and (= binary_search__search__result2 binary_search__search__result)
@@ -891,10 +886,10 @@
   (and (= binary_search__search__result17 binary_search__search__result8)
   (and (= med9 med3) (and (= right10 right3) (= left10 left3)))))
   (and (<= left2 right2)
-  (and (= temp___171 med)
-  (and (= temp___170 right2)
-  (and (= temp___169 left2)
-  (and (= 0 temp___172)
+  (and (= temp___169 med)
+  (and (= temp___168 right2)
+  (and (= temp___167 left2)
+  (and (= 0 temp___170)
   (and
   (and
   (and
@@ -917,7 +912,7 @@
   (and (=> (<= 1 2147483646) (in_range3 left3))
   (=> (<= 1 2147483646) (in_range3 right3)))
   (=> (<= 1 2147483646) (in_range3 med2))) (<= left3 right3))
-  (and (and (= temp___1721 result8) (= temp___1722 (- right3 left3)))
+  (and (and (= temp___1701 result8) (= temp___1702 (- right3 left3)))
   (and
   (and
   (and
@@ -954,10 +949,10 @@
   (ite (<= left2 right2)
   (and
   (and
-  (and (= temp___171 med)
-  (and (= temp___170 right2)
-  (and (= temp___169 left2)
-  (and (= 0 temp___172)
+  (and (= temp___169 med)
+  (and (= temp___168 right2)
+  (and (= temp___167 left2)
+  (and (= 0 temp___170)
   (and
   (and
   (and
@@ -980,7 +975,7 @@
   (and (=> (<= 1 2147483646) (in_range3 left3))
   (=> (<= 1 2147483646) (in_range3 right3)))
   (=> (<= 1 2147483646) (in_range3 med2))) (<= left3 right3))
-  (and (and (= temp___1721 result8) (= temp___1722 (- right3 left3)))
+  (and (and (= temp___1701 result8) (= temp___1702 (- right3 left3)))
   (and
   (and
   (and

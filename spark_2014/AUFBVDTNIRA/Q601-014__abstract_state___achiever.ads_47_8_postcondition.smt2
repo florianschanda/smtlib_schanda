@@ -412,19 +412,14 @@
   (assert
   (forall ((achiever__my_internal_state Int))
   (! (=> (dynamic_invariant2 achiever__my_internal_state true true true)
-     (let ((result (get_internal_state achiever__my_internal_state)))
-     (=> (get_internal_state__function_guard result
-     achiever__my_internal_state) (dynamic_invariant2 result true false
-     true)))) :pattern ((get_internal_state achiever__my_internal_state)) )))
+     (dynamic_invariant2 (get_internal_state achiever__my_internal_state)
+     true false true)) :pattern ((get_internal_state
+                                 achiever__my_internal_state)) )))
 
 ;; get_internal_state__def_axiom
   (assert
   (forall ((achiever__my_internal_state Int))
-  (! (=>
-     (and (dynamic_invariant2 achiever__my_internal_state true true true)
-     (get_internal_state__function_guard
-     (get_internal_state achiever__my_internal_state)
-     achiever__my_internal_state))
+  (! (=> (dynamic_invariant2 achiever__my_internal_state true true true)
      (= (get_internal_state achiever__my_internal_state) achiever__my_internal_state)) :pattern (
   (get_internal_state achiever__my_internal_state)) )))
 
@@ -440,11 +435,8 @@
 ;; get_state_item__def_axiom
   (assert
   (forall ((achiever__state_item__fields us_split_fields2))
-  (! (=> (get_state_item__function_guard
-     (get_state_item achiever__state_item__fields)
-     achiever__state_item__fields)
-     (= (get_state_item achiever__state_item__fields) (mk___rep1
-                                                      achiever__state_item__fields))) :pattern (
+  (! (= (get_state_item achiever__state_item__fields) (mk___rep1
+                                                      achiever__state_item__fields)) :pattern (
   (get_state_item achiever__state_item__fields)) )))
 
 (declare-fun prf_do_something ((_ BitVec 8) Int Int Int) Bool)
@@ -459,11 +451,9 @@
   (assert
   (forall ((st (_ BitVec 8)))
   (forall ((op Int) (before Int) (after Int))
-  (! (=> (prf_do_something__function_guard
-     (prf_do_something st op before after) st op before after)
-     (= (prf_do_something st op before after) true)) :pattern ((prf_do_something
-                                                               st op before
-                                                               after)) ))))
+  (! (= (prf_do_something st op before after) true) :pattern ((prf_do_something
+                                                              st op before
+                                                              after)) ))))
 
 (declare-fun prf_do_stuff ((_ BitVec 8) Int Int) Bool)
 
@@ -476,9 +466,8 @@
   (assert
   (forall ((st (_ BitVec 8)))
   (forall ((before Int) (after Int))
-  (! (=> (prf_do_stuff__function_guard (prf_do_stuff st before after) st
-     before after) (= (prf_do_stuff st before after) true)) :pattern (
-  (prf_do_stuff st before after)) ))))
+  (! (= (prf_do_stuff st before after) true) :pattern ((prf_do_stuff st
+                                                       before after)) ))))
 
 (declare-fun st () (_ BitVec 8))
 
@@ -525,145 +514,6 @@
                                                            state_item__split_fields5))))
 
 ;; H
-  (assert (get_state_item__function_guard
-  (get_state_item
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields state_item__split_fields1))))
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields state_item__split_fields1)))))
-
-;; H
-  (assert (get_state_item__function_guard
-  (get_state_item
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields state_item__split_fields1))))
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields state_item__split_fields1)))))
-
-;; H
-  (assert (read__function_guard
-  (read
-  (get_state_item
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields state_item__split_fields1)))))
-  (get_state_item
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields state_item__split_fields1))))))
-
-;; H
-  (assert (get_internal_state__function_guard
-  (get_internal_state my_internal_state) my_internal_state))
-
-;; H
-  (assert (get_internal_state__function_guard
-  (get_internal_state my_internal_state) my_internal_state))
-
-;; H
-  (assert (get_internal_state__function_guard
-  (get_internal_state my_internal_state) my_internal_state))
-
-;; H
-  (assert (get_internal_state__function_guard
-  (get_internal_state my_internal_state) my_internal_state))
-
-;; H
-  (assert (prf_do_something__function_guard
-  (prf_do_something st 0 (get_internal_state my_internal_state)
-  (get_internal_state my_internal_state)) st 0
-  (get_internal_state my_internal_state)
-  (get_internal_state my_internal_state)))
-
-;; H
-  (assert (get_state_item__function_guard
-  (get_state_item
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields6 state_item__split_fields7))))
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields6 state_item__split_fields7)))))
-
-;; H
-  (assert (get_state_item__function_guard
-  (get_state_item
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields6 state_item__split_fields7))))
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields6 state_item__split_fields7)))))
-
-;; H
-  (assert (read__function_guard
-  (read
-  (get_state_item
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields6 state_item__split_fields7)))))
-  (get_state_item
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields6 state_item__split_fields7))))))
-
-;; H
-  (assert (get_state_item__function_guard
-  (get_state_item
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields state_item__split_fields1))))
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields state_item__split_fields1)))))
-
-;; H
-  (assert (get_state_item__function_guard
-  (get_state_item
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields state_item__split_fields1))))
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields state_item__split_fields1)))))
-
-;; H
-  (assert (read__function_guard
-  (read
-  (get_state_item
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields state_item__split_fields1)))))
-  (get_state_item
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields state_item__split_fields1))))))
-
-;; H
-  (assert (get_state_item__function_guard
-  (get_state_item
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields6 state_item__split_fields7))))
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields6 state_item__split_fields7)))))
-
-;; H
-  (assert (get_state_item__function_guard
-  (get_state_item
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields state_item__split_fields1))))
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields state_item__split_fields1)))))
-
-;; H
   (assert (in_range1 st))
 
 ;; H
@@ -671,17 +521,11 @@
 
 ;; H
   (assert
-  (and
   (= o (read
        (mk___rep1
        (mk___split_fields1
        (mk___rep
-       (mk___split_fields state_item__split_fields state_item__split_fields1))))))
-  (read__function_guard o
-  (mk___rep1
-  (mk___split_fields1
-  (mk___rep
-  (mk___split_fields state_item__split_fields state_item__split_fields1)))))))
+       (mk___split_fields state_item__split_fields state_item__split_fields1)))))))
 
 ;; H
   (assert (= result (ite (not (= o true)) true false)))
@@ -761,29 +605,6 @@
      (mk___split_fields1
      (mk___rep
      (mk___split_fields state_item__split_fields state_item__split_fields1))))) true)))
-
-;; H
-  (assert (get_internal_state__function_guard
-  (get_internal_state my_internal_state) my_internal_state))
-
-;; H
-  (assert (get_internal_state__function_guard
-  (get_internal_state my_internal_state) my_internal_state))
-
-;; H
-  (assert (get_internal_state__function_guard
-  (get_internal_state my_internal_state) my_internal_state))
-
-;; H
-  (assert (get_internal_state__function_guard
-  (get_internal_state my_internal_state) my_internal_state))
-
-;; H
-  (assert (prf_do_stuff__function_guard
-  (prf_do_stuff st (get_internal_state my_internal_state)
-  (get_internal_state my_internal_state)) st
-  (get_internal_state my_internal_state)
-  (get_internal_state my_internal_state)))
 
 (assert
 ;; WP_parameter_def

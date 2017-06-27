@@ -792,9 +792,7 @@
 ;; found_none__def_axiom
   (assert
   (forall ((fruit Int))
-  (! (=> (found_none__function_guard (found_none fruit) fruit)
-     (= (= (found_none fruit) true) (= fruit 0))) :pattern ((found_none
-                                                            fruit)) )))
+  (! (= (= (found_none fruit) true) (= fruit 0)) :pattern ((found_none fruit)) )))
 
 (define-fun dynamic_invariant4 ((temp___expr_301 us_t)
   (temp___is_init_298 Bool) (temp___skip_constant_299 Bool)
@@ -820,13 +818,13 @@
                                       (first5 temp___expr_317)
                                       (last5 temp___expr_317))))
 
-(define-fun dynamic_invariant7 ((temp___expr_359 us_t3)
-  (temp___is_init_356 Bool) (temp___skip_constant_357 Bool)
-  (temp___do_toplevel_358 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_357 true))
+(define-fun dynamic_invariant7 ((temp___expr_358 us_t3)
+  (temp___is_init_355 Bool) (temp___skip_constant_356 Bool)
+  (temp___do_toplevel_357 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_356 true))
                                       (dynamic_property3 1 2147483647
-                                      (first7 temp___expr_359)
-                                      (last7 temp___expr_359))))
+                                      (first7 temp___expr_358)
+                                      (last7 temp___expr_358))))
 
 ;; H
   (assert (dynamic_property 1 2147483647 (to_rep initial_crate__first)

@@ -94,19 +94,15 @@
 ;; number_of_oranges__post_axiom
   (assert
   (forall ((fruit__oranges Int))
-  (! (=> (dynamic_invariant fruit__oranges true true true)
-     (let ((result (number_of_oranges fruit__oranges)))
-     (=> (number_of_oranges__function_guard result fruit__oranges)
-     (dynamic_invariant result true false true)))) :pattern ((number_of_oranges
-                                                             fruit__oranges)) )))
+  (! (=> (dynamic_invariant fruit__oranges true true true) (dynamic_invariant
+     (number_of_oranges fruit__oranges) true false true)) :pattern ((number_of_oranges
+                                                                    fruit__oranges)) )))
 
 ;; number_of_oranges__def_axiom
   (assert
   (forall ((fruit__oranges Int))
-  (! (=>
-     (and (dynamic_invariant fruit__oranges true true true)
-     (number_of_oranges__function_guard (number_of_oranges fruit__oranges)
-     fruit__oranges)) (= (number_of_oranges fruit__oranges) fruit__oranges)) :pattern (
+  (! (=> (dynamic_invariant fruit__oranges true true true)
+     (= (number_of_oranges fruit__oranges) fruit__oranges)) :pattern (
   (number_of_oranges fruit__oranges)) )))
 
 (declare-fun oranges_to_consume () Int)
@@ -129,10 +125,6 @@
 
 ;; H
   (assert (in_range1 oranges))
-
-;; H
-  (assert (number_of_oranges__function_guard (number_of_oranges oranges)
-  oranges))
 
 ;; H
   (assert (<= oranges_to_consume (number_of_oranges oranges)))

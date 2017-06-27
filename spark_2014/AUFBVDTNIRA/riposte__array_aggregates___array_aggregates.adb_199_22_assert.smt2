@@ -320,48 +320,29 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(declare-sort t57b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 1000)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq3 (t57b t57b) Bool)
-
-(declare-fun dummy3 () t57b)
-
-(declare-datatypes () ((t57b__ref (mk_t57b__ref (t57b__content t57b)))))
-(define-fun t57b__ref___projection ((a t57b__ref)) t57b (t57b__content a))
-
-(declare-fun temp___474 (us_rep us_rep) (Array Int us_rep))
+(declare-fun temp___466 (us_rep us_rep) (Array Int us_rep))
 
 ;; def_axiom
   (assert
-  (forall ((temp___476 us_rep) (temp___477 us_rep))
-  (let ((temp___475 (temp___474 temp___476 temp___477)))
-  (forall ((temp___478 Int))
-  (ite (or (= temp___478 2) (and (<= 4 temp___478) (<= temp___478 6)))
-  (= (select temp___475 temp___478) temp___476)
-  (= (select temp___475 temp___478) temp___477))))))
+  (forall ((temp___468 us_rep) (temp___469 us_rep))
+  (let ((temp___467 (temp___466 temp___468 temp___469)))
+  (forall ((temp___470 Int))
+  (ite (or (= temp___470 2) (and (<= 4 temp___470) (<= temp___470 6)))
+  (= (select temp___467 temp___470) temp___468)
+  (= (select temp___467 temp___470) temp___469))))))
 
-(define-fun dynamic_invariant ((temp___expr_212 Int)
-  (temp___is_init_209 Bool) (temp___skip_constant_210 Bool)
-  (temp___do_toplevel_211 Bool)) Bool (=>
-                                      (or (= temp___is_init_209 true)
-                                      (<= 0 2)) (in_range1 temp___expr_212)))
+(define-fun dynamic_invariant ((temp___expr_204 Int)
+  (temp___is_init_201 Bool) (temp___skip_constant_202 Bool)
+  (temp___do_toplevel_203 Bool)) Bool (=>
+                                      (or (= temp___is_init_201 true)
+                                      (<= 0 2)) (in_range1 temp___expr_204)))
 
-(define-fun dynamic_invariant1 ((temp___expr_275 Int)
-  (temp___is_init_272 Bool) (temp___skip_constant_273 Bool)
-  (temp___do_toplevel_274 Bool)) Bool (=>
-                                      (or (= temp___is_init_272 true)
+(define-fun dynamic_invariant1 ((temp___expr_267 Int)
+  (temp___is_init_264 Bool) (temp___skip_constant_265 Bool)
+  (temp___do_toplevel_266 Bool)) Bool (=>
+                                      (or (= temp___is_init_264 true)
                                       (<= 1 1000)) (in_range2
-                                      temp___expr_275)))
+                                      temp___expr_267)))
 
 (declare-fun x () (Array Int us_rep))
 
@@ -453,7 +434,7 @@
 
 ;; H
   (assert
-  (= o16 (temp___474 (mk___rep (mk___split_fields o13 o14 o15))
+  (= o16 (temp___466 (mk___rep (mk___split_fields o13 o14 o15))
          (mk___rep (mk___split_fields o10 o11 o12)))))
 
 ;; H

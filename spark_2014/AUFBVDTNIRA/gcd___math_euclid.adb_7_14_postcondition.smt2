@@ -145,8 +145,7 @@
 ;; divides__def_axiom
   (assert
   (forall ((a Int) (b Int))
-  (! (=> (divides__function_guard (divides a b) a b)
-     (= (= (divides a b) true) (= (mod2 b a) 0))) :pattern ((divides a b)) )))
+  (! (= (= (divides a b) true) (= (mod2 b a) 0)) :pattern ((divides a b)) )))
 
 (declare-fun a () Int)
 
@@ -161,15 +160,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
 ;; H
-  (assert (divides__function_guard (divides x a) x a))
-
-;; H
-  (assert (divides__function_guard (divides x b) x b))
-
-;; H
-  (assert (divides__function_guard (divides b a) b a))
-
-;; H
   (assert (in_range a))
 
 ;; H
@@ -182,9 +172,6 @@
   (assert
   (and (= (divides x a) true)
   (and (= (divides x b) true) (not (= (divides b a) true)))))
-
-;; H
-  (assert (divides__function_guard (divides x (mod2 a b)) x (mod2 a b)))
 
 (assert
 ;; WP_parameter_def

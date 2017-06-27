@@ -243,11 +243,9 @@
   (assert
   (forall ((t (Array Int integer)))
   (forall ((v Int) (low Int) (up Int))
-  (! (=> (no_v_in_range__function_guard (no_v_in_range t v low up) t v low
-     up)
-     (= (= (no_v_in_range t v low up) true)
+  (! (= (= (no_v_in_range t v low up) true)
      (forall ((pos Int))
-     (=> (and (<= low pos) (<= pos up)) (not (= (to_rep (select t pos)) v)))))) :pattern (
+     (=> (and (<= low pos) (<= pos up)) (not (= (to_rep (select t pos)) v))))) :pattern (
   (no_v_in_range t v low up)) ))))
 
 (declare-fun t () (Array Int integer))

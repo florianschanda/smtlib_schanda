@@ -96,12 +96,12 @@
 (define-fun size_t__ref___projection ((a size_t__ref)) size_t (size_t__content
                                                               a))
 
-(define-fun dynamic_invariant1 ((temp___expr_137 Int)
-  (temp___is_init_134 Bool) (temp___skip_constant_135 Bool)
-  (temp___do_toplevel_136 Bool)) Bool (=>
-                                      (or (= temp___is_init_134 true)
+(define-fun dynamic_invariant1 ((temp___expr_136 Int)
+  (temp___is_init_133 Bool) (temp___skip_constant_134 Bool)
+  (temp___do_toplevel_135 Bool)) Bool (=>
+                                      (or (= temp___is_init_133 true)
                                       (<= 0 100)) (in_range2
-                                      temp___expr_137)))
+                                      temp___expr_136)))
 
 (declare-sort element_t 0)
 
@@ -279,29 +279,25 @@
 (declare-fun last_element__function_guard (Int (Array Int element_t)
   Int) Bool)
 
-(define-fun dynamic_invariant2 ((temp___expr_143 Int)
-  (temp___is_init_140 Bool) (temp___skip_constant_141 Bool)
-  (temp___do_toplevel_142 Bool)) Bool (=>
-                                      (or (= temp___is_init_140 true)
+(define-fun dynamic_invariant2 ((temp___expr_142 Int)
+  (temp___is_init_139 Bool) (temp___skip_constant_140 Bool)
+  (temp___do_toplevel_141 Bool)) Bool (=>
+                                      (or (= temp___is_init_139 true)
                                       (<= (- 1) 2147483647)) (in_range3
-                                      temp___expr_143)))
+                                      temp___expr_142)))
 
 ;; last_element__post_axiom
   (assert
   (forall ((t (Array Int element_t)))
   (forall ((s Int))
-  (! (=> (dynamic_invariant1 s true true true)
-     (let ((result (last_element t s)))
-     (=> (last_element__function_guard result t s) (dynamic_invariant2 result
-     true false true)))) :pattern ((last_element t s)) ))))
+  (! (=> (dynamic_invariant1 s true true true) (dynamic_invariant2
+     (last_element t s) true false true)) :pattern ((last_element t s)) ))))
 
 ;; last_element__def_axiom
   (assert
   (forall ((t (Array Int element_t)))
   (forall ((s Int))
-  (! (=>
-     (and (dynamic_invariant1 s true true true) (last_element__function_guard
-     (last_element t s) t s))
+  (! (=> (dynamic_invariant1 s true true true)
      (= (last_element t s) (ite (< 0 s) (to_rep (select t s)) (- 1)))) :pattern (
   (last_element t s)) ))))
 
@@ -316,14 +312,13 @@
   (assert
   (forall ((t (Array Int element_t)))
   (forall ((s Int))
-  (! (=> (valid__function_guard (valid t s) t s)
-     (= (= (valid t s) true)
+  (! (= (= (valid t s) true)
      (and
      (forall ((i Int))
      (=> (and (<= 1 i) (<= i s))
      (and (<= 0 (to_rep (select t i))) (<= (to_rep (select t i)) 2147483647))))
      (forall ((i Int))
-     (=> (and (<= (+ s 1) i) (<= i 100)) (= (to_rep (select t i)) (- 1))))))) :pattern (
+     (=> (and (<= (+ s 1) i) (<= i 100)) (= (to_rep (select t i)) (- 1)))))) :pattern (
   (valid t s)) ))))
 
 (declare-fun size ((Array Int element_t)) Int)
@@ -333,14 +328,11 @@
 ;; size__post_axiom
   (assert
   (forall ((t (Array Int element_t)))
-  (! (and (forall ((s Int)) (valid__function_guard (valid t s) t s))
-     (=>
+  (! (=>
      (exists ((s Int)) (and (and (<= 0 s) (<= s 100)) (= (valid t s) true)))
      (let ((result (size t)))
-     (and (valid__function_guard (valid t result) t result)
-     (=> (size__function_guard result t)
      (and (= (valid t result) true) (dynamic_invariant1 result true false
-     true))))))) :pattern ((size t)) )))
+     true)))) :pattern ((size t)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -354,12 +346,12 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
-(define-fun dynamic_invariant3 ((temp___expr_149 Int)
-  (temp___is_init_146 Bool) (temp___skip_constant_147 Bool)
-  (temp___do_toplevel_148 Bool)) Bool (=>
-                                      (or (= temp___is_init_146 true)
+(define-fun dynamic_invariant3 ((temp___expr_148 Int)
+  (temp___is_init_145 Bool) (temp___skip_constant_146 Bool)
+  (temp___do_toplevel_147 Bool)) Bool (=>
+                                      (or (= temp___is_init_145 true)
                                       (<= 1 100)) (in_range4
-                                      temp___expr_149)))
+                                      temp___expr_148)))
 
 (declare-fun t () (Array Int element_t))
 
@@ -384,23 +376,11 @@
   (assert (in_range1 value))
 
 ;; H
-  (assert (valid__function_guard (valid t s) t s))
-
-;; H
-  (assert (size__function_guard (size t) t))
-
-;; H
   (assert (and (= (valid t s) true) (< (size t) 100)))
 
 ;; H
-  (assert (valid__function_guard (valid t stack__push__n__assume) t
-  stack__push__n__assume))
-
-;; H
   (assert
-  (and
-  (and (= stack__push__n__assume (size t)) (size__function_guard
-  stack__push__n__assume t))
+  (and (= stack__push__n__assume (size t))
   (and (in_range2 stack__push__n__assume)
   (= (valid t stack__push__n__assume) true))))
 
@@ -427,9 +407,6 @@
 
 ;; H
   (assert (= t1 o2))
-
-;; H
-  (assert (forall ((s1 Int)) (valid__function_guard (valid t1 s1) t1 s1)))
 
 (assert
 ;; WP_parameter_def

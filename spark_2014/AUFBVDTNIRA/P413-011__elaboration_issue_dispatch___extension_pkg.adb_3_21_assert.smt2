@@ -202,8 +202,8 @@
 (declare-datatypes () ((ext__ref (mk_ext__ref (ext__content us_rep1)))))
 (define-fun ext__ref___projection ((a ext__ref)) us_rep1 (ext__content a))
 
-(define-fun default_initial_assumption ((temp___expr_157 us_rep1)
-  (temp___skip_top_level_158 Bool)) Bool (= (attr__tag1 temp___expr_157) 
+(define-fun default_initial_assumption ((temp___expr_146 us_rep1)
+  (temp___skip_top_level_147 Bool)) Bool (= (attr__tag1 temp___expr_146) 
   us_tag1))
 
 (declare-fun get (us_rep1 Bool) Bool)
@@ -228,34 +228,24 @@
   (assert
   (forall ((x1 us_rep1))
   (forall ((extension_pkg__body_elaborated Bool))
-  (! (=> (get__function_guard1
-     (get1 us_tag1 x1 extension_pkg__body_elaborated) us_tag1 x1
-     extension_pkg__body_elaborated)
-     (and (get__function_guard (get x1 extension_pkg__body_elaborated) x1
-     extension_pkg__body_elaborated)
-     (= (to_int1 (get x1 extension_pkg__body_elaborated)) (to_int1
+  (! (= (to_int1 (get x1 extension_pkg__body_elaborated)) (to_int1
                                                           (get1 us_tag1 x1
-                                                          extension_pkg__body_elaborated))))) :pattern (
+                                                          extension_pkg__body_elaborated))) :pattern (
   (get1 us_tag1 x1 extension_pkg__body_elaborated)) ))))
 
 ;; get__def_axiom
   (assert
   (forall ((x1 us_rep1))
   (forall ((extension_pkg__body_elaborated Bool))
-  (! (=> (get__function_guard (get x1 extension_pkg__body_elaborated) x1
-     extension_pkg__body_elaborated)
-     (= (= (get x1 extension_pkg__body_elaborated) true)
-     (= extension_pkg__body_elaborated true))) :pattern ((get x1
-                                                         extension_pkg__body_elaborated)) ))))
+  (! (= (= (get x1 extension_pkg__body_elaborated) true)
+     (= extension_pkg__body_elaborated true)) :pattern ((get x1
+                                                        extension_pkg__body_elaborated)) ))))
 
-(define-fun default_initial_assumption1 ((temp___expr_137 us_rep)
-  (temp___skip_top_level_138 Bool)) Bool (= (attr__tag temp___expr_137) 
+(define-fun default_initial_assumption1 ((temp___expr_136 us_rep)
+  (temp___skip_top_level_137 Bool)) Bool (= (attr__tag temp___expr_136) 
   us_tag))
 
 (declare-fun body_elaborated () Bool)
-
-;; H
-  (assert (get__function_guard (get x body_elaborated) x body_elaborated))
 
 ;; H
   (assert (= (get x body_elaborated) true))

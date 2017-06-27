@@ -3379,6 +3379,132 @@
 (define-fun driver_type__ref___projection ((a driver_type__ref)) us_rep5 
   (driver_type__content a))
 
+(declare-fun temp___4500 ((_ BitVec 32)) (Array Int bits_32))
+
+;; def_axiom
+  (assert
+  (forall ((temp___4502 (_ BitVec 32)))
+  (forall ((temp___4503 Int))
+  (= (select (temp___4500 temp___4502) temp___4503) (of_rep18 temp___4502)))))
+
+(define-fun default_initial_assumption ((temp___expr_4498 us_rep5)
+  (temp___skip_top_level_4499 Bool)) Bool (and
+                                          (and
+                                          (and
+                                          (and
+                                          (and
+                                          (and
+                                          (and
+                                          (and
+                                          (and
+                                          (and
+                                          (and
+                                          (and
+                                          (and
+                                          (and
+                                          (= (to_rep18
+                                             (rec__decadriver__driver_type__part_id
+                                             (us_split_fields11
+                                             temp___expr_4498))) ((_ int2bv 32) 0))
+                                          (= (to_rep18
+                                             (rec__decadriver__driver_type__lot_id
+                                             (us_split_fields11
+                                             temp___expr_4498))) ((_ int2bv 32) 0)))
+                                          (= (to_rep9
+                                             (rec__decadriver__driver_type__antenna_delay_prf_64
+                                             (us_split_fields11
+                                             temp___expr_4498))) ((_ int2bv 16) 0)))
+                                          (= (to_rep9
+                                             (rec__decadriver__driver_type__antenna_delay_prf_16
+                                             (us_split_fields11
+                                             temp___expr_4498))) ((_ int2bv 16) 0)))
+                                          (= (to_rep4
+                                             (rec__decadriver__driver_type__xtal_trim
+                                             (us_split_fields11
+                                             temp___expr_4498))) ((_ int2bv 8) 16)))
+                                          (= (rec__decadriver__driver_type__otp_tx_power_levels
+                                             (us_split_fields11
+                                             temp___expr_4498)) (temp___4500
+                                                                ((_ int2bv 32) 0))))
+                                          (= (rec__decadriver__driver_type__long_frames
+                                             (us_split_fields11
+                                             temp___expr_4498)) (of_int 0)))
+                                          (= (rec__decadriver__driver_type__sys_cfg_reg
+                                             (us_split_fields11
+                                             temp___expr_4498)) (mk___rep
+                                                                (mk___split_fields
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep1
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep2
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep4
+                                                                ((_ int2bv 8) 0))))))
+                                          (= (rec__decadriver__driver_type__use_otp_xtal_trim
+                                             (us_split_fields11
+                                             temp___expr_4498)) (of_int 0)))
+                                          (= (rec__decadriver__driver_type__use_otp_antenna_delay
+                                             (us_split_fields11
+                                             temp___expr_4498)) (of_int 0)))
+                                          (= (rec__decadriver__driver_type__detect_frame_timeout
+                                             (us_split_fields11
+                                             temp___expr_4498)) (of_int 0)))
+                                          (= (rec__decadriver__driver_type__detect_sfd_timeout
+                                             (us_split_fields11
+                                             temp___expr_4498)) (of_int 0)))
+                                          (= (rec__decadriver__driver_type__detect_phr_error
+                                             (us_split_fields11
+                                             temp___expr_4498)) (of_int 0)))
+                                          (= (rec__decadriver__driver_type__detect_rs_error
+                                             (us_split_fields11
+                                             temp___expr_4498)) (of_int 0)))
+                                          (= (rec__decadriver__driver_type__detect_fcs_error
+                                             (us_split_fields11
+                                             temp___expr_4498)) (of_int 0))))
+
 (declare-fun config () us_rep4)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -3396,10 +3522,8 @@
 
 ;; phr_mode__post_axiom
   (assert
-  (forall ((self__ us_rep5))
-  (! (let ((result (phr_mode self__)))
-     (=> (phr_mode__function_guard result self__) (dynamic_invariant3 result
-     true false true))) :pattern ((phr_mode self__)) )))
+  (forall ((self__ us_rep5)) (! (dynamic_invariant3 (phr_mode self__) true
+  false true) :pattern ((phr_mode self__)) )))
 
 (declare-datatypes ()
 ((map__ref1 (mk_map__ref1 (map__content1 (Array Int bits_16))))))
@@ -3722,7 +3846,7 @@
 
 (declare-fun o1 () bits_16)
 
-(declare-fun temp___4651 () bits_16)
+(declare-fun temp___4653 () bits_16)
 
 (declare-fun o2 () bits_1)
 
@@ -3738,7 +3862,7 @@
 
 (declare-fun o8 () bits_16)
 
-(declare-fun temp___4655 () bits_16)
+(declare-fun temp___4657 () bits_16)
 
 (declare-fun o9 () bits_1)
 
@@ -3805,7 +3929,7 @@
   (assert (= o o1))
 
 ;; H
-  (assert (= temp___4651 o1))
+  (assert (= temp___4653 o1))
 
 ;; H
   (assert
@@ -3814,7 +3938,7 @@
                                                            lde_repc_reg__split_fields))))
 
 ;; H
-  (assert (= temp___4651 lde_repc_reg__split_fields1))
+  (assert (= temp___4653 lde_repc_reg__split_fields1))
 
 ;; H
   (assert
@@ -4018,7 +4142,7 @@
   (= (to_rep10
      (rec__decadriver__configuration_type__data_rate
      (us_split_fields9 config))) 0)
-  (= temp___4655 o8)))
+  (= temp___4657 o8)))
 
 ;; H
   (assert
@@ -4034,7 +4158,7 @@
   (= (to_rep10
      (rec__decadriver__configuration_type__data_rate
      (us_split_fields9 config))) 0)
-  (= lde_repc_reg__split_fields2 (mk___split_fields3 temp___4655))))
+  (= lde_repc_reg__split_fields2 (mk___split_fields3 temp___4657))))
 
 ;; H
   (assert

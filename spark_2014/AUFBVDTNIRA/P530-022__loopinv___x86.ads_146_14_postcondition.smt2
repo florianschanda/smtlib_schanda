@@ -305,24 +305,18 @@
   (! (=>
      (and (dynamic_invariant regnew true true true) (dynamic_invariant1
      val__1 true true true))
-     (let ((result (writereg32post regnew val__1)))
-     (and (readreg32__function_guard (readreg32 regnew) regnew)
-     (=> (writereg32post__function_guard result regnew val__1)
-     (= (= result true)
+     (= (= (writereg32post regnew val__1) true)
      (and (= (readreg32 regnew) val__1)
-     (= (bvand regnew ((_ int2bv 64) 18446744069414584320)) ((_ int2bv 64) 0)))))))) :pattern (
+     (= (bvand regnew ((_ int2bv 64) 18446744069414584320)) ((_ int2bv 64) 0))))) :pattern (
   (writereg32post regnew val__1)) ))))
 
 ;; writereg32post__def_axiom
   (assert
   (forall ((regnew (_ BitVec 64)))
   (forall ((val__1 (_ BitVec 32)))
-  (! (=> (writereg32post__function_guard (writereg32post regnew val__1)
-     regnew val__1)
-     (and (readreg32__function_guard (readreg32 regnew) regnew)
-     (= (= (writereg32post regnew val__1) true)
+  (! (= (= (writereg32post regnew val__1) true)
      (and (= (readreg32 regnew) val__1)
-     (= (bvand regnew ((_ int2bv 64) 18446744069414584320)) ((_ int2bv 64) 0)))))) :pattern (
+     (= (bvand regnew ((_ int2bv 64) 18446744069414584320)) ((_ int2bv 64) 0)))) :pattern (
   (writereg32post regnew val__1)) ))))
 
 ;; readreg32__post_axiom
@@ -330,11 +324,9 @@
   (forall ((reg (_ BitVec 64)))
   (! (=> (dynamic_invariant reg true true true)
      (let ((result (readreg32 reg)))
-     (=> (readreg32__function_guard result reg)
      (and
      (= result ((_ extract 31 0) (bvand reg ((_ int2bv 64) 4294967295))))
-     (dynamic_invariant1 result true false true))))) :pattern ((readreg32
-                                                               reg)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((readreg32 reg)) )))
 
 (declare-fun reg () (_ BitVec 64))
 
@@ -357,10 +349,6 @@
 
 ;; H
   (assert (= reg3 reg1))
-
-;; H
-  (assert (writereg32post__function_guard (writereg32post reg2 val__) 
-  reg2 val__))
 
 (assert
 ;; WP_parameter_def

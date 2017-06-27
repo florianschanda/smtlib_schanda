@@ -197,9 +197,7 @@
      (in_range1
      (+ (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 a))) 
      (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 b))))))
-     (let ((result (add_pair_a a b)))
-     (=> (add_pair_a__function_guard result a b)
-     (= (bool_eq1 result
+     (= (bool_eq1 (add_pair_a a b)
         (mk___rep
         (mk___split_fields
         (of_rep
@@ -207,7 +205,7 @@
         (to_rep (rec__records_prooffuncs__pair__a (us_split_fields1 b)))))
         (of_rep
         (+ (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 a))) 
-        (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 b)))))))) true)))) :pattern (
+        (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 b)))))))) true)) :pattern (
   (add_pair_a a b)) )))
 
 (declare-fun a () us_rep)
@@ -220,12 +218,12 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(define-fun dynamic_invariant ((temp___expr_188 Int)
-  (temp___is_init_185 Bool) (temp___skip_constant_186 Bool)
-  (temp___do_toplevel_187 Bool)) Bool (=>
-                                      (or (= temp___is_init_185 true)
+(define-fun dynamic_invariant ((temp___expr_180 Int)
+  (temp___is_init_177 Bool) (temp___skip_constant_178 Bool)
+  (temp___do_toplevel_179 Bool)) Bool (=>
+                                      (or (= temp___is_init_177 true)
                                       (<= 0 255)) (in_range1
-                                      temp___expr_188)))
+                                      temp___expr_180)))
 
 (declare-fun r__split_fields () unsigned_byte)
 
@@ -235,9 +233,9 @@
 
 (declare-fun records__safe_add_pair_b__result1 () unsigned_byte)
 
-(declare-fun temp___289 () unsigned_byte)
+(declare-fun temp___276 () unsigned_byte)
 
-(declare-fun temp___2891 () unsigned_byte)
+(declare-fun temp___2761 () unsigned_byte)
 
 (declare-fun o () unsigned_byte)
 
@@ -247,9 +245,9 @@
 
 (declare-fun o3 () unsigned_byte)
 
-(declare-fun temp___288 () unsigned_byte)
+(declare-fun temp___275 () unsigned_byte)
 
-(declare-fun temp___2881 () unsigned_byte)
+(declare-fun temp___2751 () unsigned_byte)
 
 (declare-fun result () unsigned_byte)
 
@@ -296,8 +294,8 @@
                                                 r__split_fields2
                                                 r__split_fields3))
 
-(define-fun temp___2892 () us_rep (mk___rep
-                                  (mk___split_fields temp___289 temp___2891)))
+(define-fun temp___2762 () us_rep (mk___rep
+                                  (mk___split_fields temp___276 temp___2761)))
 
 (declare-fun result6 () unsigned_byte)
 
@@ -311,10 +309,8 @@
   (to_rep (rec__records_prooffuncs__pair__a (us_split_fields1 b)))))
   (<= (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 a))) (- 255 
   (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 b))))))
-  (and
-  (and (= temp___2892 (add_pair_a a b)) (add_pair_a__function_guard
-  temp___2892 a b))
-  (= (bool_eq1 temp___2892
+  (and (= temp___2762 (add_pair_a a b))
+  (= (bool_eq1 temp___2762
      (mk___rep
      (mk___split_fields
      (of_rep
@@ -352,7 +348,7 @@
   (to_rep (rec__records_prooffuncs__pair__a (us_split_fields1 b)))))
   (<= (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 a))) (- 255 
   (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 b))))))
-  (= temp___289 r__split_fields2)))
+  (= temp___276 r__split_fields2)))
 
 ;; H
   (assert
@@ -362,7 +358,7 @@
   (to_rep (rec__records_prooffuncs__pair__a (us_split_fields1 b)))))
   (<= (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 a))) (- 255 
   (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 b))))))
-  (= temp___2891 r__split_fields3)))
+  (= temp___2761 r__split_fields3)))
 
 ;; H
   (assert
@@ -417,7 +413,7 @@
   (to_rep (rec__records_prooffuncs__pair__a (us_split_fields1 b)))))
   (<= (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 a))) (- 255 
   (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 b)))))))
-  (= temp___288 o2)))
+  (= temp___275 o2)))
 
 ;; H
   (assert
@@ -428,7 +424,7 @@
   (to_rep (rec__records_prooffuncs__pair__a (us_split_fields1 b)))))
   (<= (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 a))) (- 255 
   (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 b)))))))
-  (= temp___2881 o3)))
+  (= temp___2751 o3)))
 
 ;; H
   (assert
@@ -461,7 +457,7 @@
   (to_rep (rec__records_prooffuncs__pair__a (us_split_fields1 b)))))
   (<= (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 a))) (- 255 
   (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 b)))))))
-  (= temp___288 r__split_fields4)))
+  (= temp___275 r__split_fields4)))
 
 ;; H
   (assert
@@ -472,7 +468,7 @@
   (to_rep (rec__records_prooffuncs__pair__a (us_split_fields1 b)))))
   (<= (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 a))) (- 255 
   (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 b)))))))
-  (= temp___2881 r__split_fields5)))
+  (= temp___2751 r__split_fields5)))
 
 ;; H
   (assert

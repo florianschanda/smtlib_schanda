@@ -436,26 +436,7 @@
 (define-fun messageindext__ref___projection ((a messageindext__ref)) messageindext 
   (messageindext__content a))
 
-(declare-sort t3s 0)
-
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 4096)))
-
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq6 (t3s t3s) Bool)
-
-(declare-fun dummy6 () t3s)
-
-(declare-datatypes () ((t3s__ref (mk_t3s__ref (t3s__content t3s)))))
-(define-fun t3s__ref___projection ((a t3s__ref)) t3s (t3s__content a))
-
-(declare-fun dummy7 () (Array Int character))
+(declare-fun dummy6 () (Array Int character))
 
 (declare-fun value__size1 () Int)
 
@@ -488,7 +469,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment1 a))))
 
-(declare-fun user_eq7 ((Array Int character) (Array Int character)) Bool)
+(declare-fun user_eq6 ((Array Int character) (Array Int character)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields
@@ -511,7 +492,7 @@
 (define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
                                                               a))
 
-(define-fun bool_eq8 ((a us_rep)
+(define-fun bool_eq7 ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (= (bool_eq3
                            (rec__tcpip__messaget__data (us_split_fields1 a))
@@ -525,7 +506,7 @@
                                                   (us_split_fields1 b)))))
                    true false))
 
-(declare-fun user_eq8 (us_rep us_rep) Bool)
+(declare-fun user_eq7 (us_rep us_rep) Bool)
 
 (declare-fun value__size2 () Int)
 
@@ -579,7 +560,7 @@
 ;; tcpip__messaget__length__position_axiom
   (assert (<= 0 tcpip__messaget__length__position))
 
-(declare-fun dummy8 () us_rep)
+(declare-fun dummy7 () us_rep)
 
 (declare-datatypes ()
 ((messaget__ref (mk_messaget__ref (messaget__content us_rep)))))
@@ -682,14 +663,14 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment3 a))))
 
-(define-fun bool_eq9 ((x us_t1)
+(define-fun bool_eq8 ((x us_t1)
   (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep1 (first2 (rt1 x)))
                   (to_rep1 (last2 (rt1 x))) (elts1 y)
                   (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
-(declare-fun user_eq9 (us_t1 us_t1) Bool)
+(declare-fun user_eq8 (us_t1 us_t1) Bool)
 
-(declare-fun dummy9 () us_t1)
+(declare-fun dummy8 () us_t1)
 
 (declare-datatypes ()
 ((dictionaryt__ref (mk_dictionaryt__ref (dictionaryt__content us_t1)))))
@@ -718,19 +699,19 @@
 
 (declare-sort doorstatet 0)
 
-(define-fun in_range7 ((x Int)) Bool (and (<= 0 x) (<= x 2)))
+(define-fun in_range6 ((x Int)) Bool (and (<= 0 x) (<= x 2)))
 
-(define-fun bool_eq10 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq9 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
 
-(declare-fun user_eq10 (doorstatet doorstatet) Bool)
+(declare-fun user_eq9 (doorstatet doorstatet) Bool)
 
-(declare-fun dummy10 () doorstatet)
+(declare-fun dummy9 () doorstatet)
 
 (declare-datatypes ()
 ((doorstatet__ref (mk_doorstatet__ref (doorstatet__content doorstatet)))))
@@ -741,7 +722,7 @@
   (temp___is_init_620 Bool) (temp___skip_constant_621 Bool)
   (temp___do_toplevel_622 Bool)) Bool (=>
                                       (or (= temp___is_init_620 true)
-                                      (<= 0 2)) (in_range7 temp___expr_623)))
+                                      (<= 0 2)) (in_range6 temp___expr_623)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 

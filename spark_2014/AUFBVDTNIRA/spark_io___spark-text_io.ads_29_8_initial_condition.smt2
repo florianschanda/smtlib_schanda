@@ -136,12 +136,9 @@
 ;; is_readable__def_axiom
   (assert
   (forall ((file us_rep))
-  (! (=> (is_readable__function_guard (is_readable file) file)
-     (and (is_open__function_guard (is_open file) file)
-     (and (mode__2__function_guard (mode__2 file) file)
-     (= (= (is_readable file) true)
-     (and (= (is_open file) true) (= (mode__2 file) 0)))))) :pattern (
-  (is_readable file)) )))
+  (! (= (= (is_readable file) true)
+     (and (= (is_open file) true) (= (mode__2 file) 0))) :pattern ((is_readable
+                                                                   file)) )))
 
 (declare-fun is_writable (us_rep) Bool)
 
@@ -150,14 +147,10 @@
 ;; is_writable__def_axiom
   (assert
   (forall ((file us_rep))
-  (! (=> (is_writable__function_guard (is_writable file) file)
-     (and (is_open__function_guard (is_open file) file)
-     (and (mode__2__function_guard (mode__2 file) file)
-     (and (mode__2__function_guard (mode__2 file) file)
-     (= (= (is_writable file) true)
+  (! (= (= (is_writable file) true)
      (and (= (is_open file) true)
-     (or (= (mode__2 file) 1) (= (mode__2 file) 2)))))))) :pattern ((is_writable
-                                                                    file)) )))
+     (or (= (mode__2 file) 1) (= (mode__2 file) 2)))) :pattern ((is_writable
+                                                                file)) )))
 
 (declare-sort file_mode 0)
 
@@ -221,82 +214,40 @@
 (declare-fun result () Bool)
 
 ;; H
-  (assert (is_open__function_guard (is_open standard_error) standard_error))
-
-;; H
-  (assert (mode__2__function_guard (mode__2 standard_error) standard_error))
-
-;; H
-  (assert (mode__2__function_guard (mode__2 standard_error) standard_error))
-
-;; H
-  (assert (is_open__function_guard (is_open standard_output)
-  standard_output))
-
-;; H
-  (assert (mode__2__function_guard (mode__2 standard_output)
-  standard_output))
-
-;; H
-  (assert (mode__2__function_guard (mode__2 standard_output)
-  standard_output))
-
-;; H
-  (assert (is_open__function_guard (is_open standard_input) standard_input))
-
-;; H
-  (assert (mode__2__function_guard (mode__2 standard_input) standard_input))
-
-;; H
-  (assert
-  (and
-  (and (= o10 (status standard_error)) (status__function_guard o10
-  standard_error)) (in_range1 o10)))
+  (assert (and (= o10 (status standard_error)) (in_range1 o10)))
 
 ;; H
   (assert (= o11 (ite (= o10 1) true false)))
 
 ;; H
-  (assert
-  (and
-  (and (= o7 (status standard_output)) (status__function_guard o7
-  standard_output)) (in_range1 o7)))
+  (assert (and (= o7 (status standard_output)) (in_range1 o7)))
 
 ;; H
   (assert (= o8 (ite (= o7 1) true false)))
 
 ;; H
-  (assert
-  (and
-  (and (= o4 (status standard_input)) (status__function_guard o4
-  standard_input)) (in_range1 o4)))
+  (assert (and (= o4 (status standard_input)) (in_range1 o4)))
 
 ;; H
   (assert (= o5 (ite (= o4 1) true false)))
 
 ;; H
   (assert
-  (and
-  (and (= o2 (is_writable standard_error)) (is_writable__function_guard 
-  o2 standard_error))
+  (and (= o2 (is_writable standard_error))
   (= (= o2 true)
   (and (= (is_open standard_error) true)
   (or (= (mode__2 standard_error) 1) (= (mode__2 standard_error) 2))))))
 
 ;; H
   (assert
-  (and
-  (and (= o (is_writable standard_output)) (is_writable__function_guard 
-  o standard_output))
+  (and (= o (is_writable standard_output))
   (= (= o true)
   (and (= (is_open standard_output) true)
   (or (= (mode__2 standard_output) 1) (= (mode__2 standard_output) 2))))))
 
 ;; H
   (assert
-  (and
-  (and (= o1 (is_readable standard_input)) (is_readable__function_guard 
-  o1 standard_input))
+  (and (= o1 (is_readable standard_input))
   (= (= o1 true)
   (and (= (is_open standard_input) true) (= (mode__2 standard_input) 0)))))
 
@@ -314,10 +265,6 @@
 
 ;; H
   (assert (= result (ite (= o12 true) o11 false)))
-
-;; H
-  (assert (is_readable__function_guard (is_readable standard_input)
-  standard_input))
 
 (assert
 ;; WP_parameter_def

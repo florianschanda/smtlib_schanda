@@ -439,19 +439,18 @@
 ;; user_eq__def_axiom
   (assert
   (forall ((a us_rep1) (b us_rep1))
-  (! (and (oeq__function_guard (oeq a b) a b) (= (user_eq5 a b) (oeq a b))) :pattern (
-  (user_eq5 a b)) )))
+  (! (= (user_eq5 a b) (oeq a b)) :pattern ((user_eq5 a b)) )))
 
-(define-fun default_initial_assumption1 ((temp___expr_187 us_rep1)
-  (temp___skip_top_level_188 Bool)) Bool (and
+(define-fun default_initial_assumption1 ((temp___expr_186 us_rep1)
+  (temp___skip_top_level_187 Bool)) Bool (and
                                          (= (is_empty
                                             (rec__simple_allocator__m__t__available
                                             (us_split_fields1
-                                            temp___expr_187))) true)
+                                            temp___expr_186))) true)
                                          (= (is_empty
                                             (rec__simple_allocator__m__t__allocated
                                             (us_split_fields1
-                                            temp___expr_187))) true)))
+                                            temp___expr_186))) true)))
 
 ;; oeq__post_axiom
   (assert true)
@@ -459,13 +458,12 @@
 ;; oeq__def_axiom
   (assert
   (forall ((x us_rep1) (y us_rep1))
-  (! (=> (oeq__function_guard (oeq x y) x y)
-     (= (= (oeq x y) true)
+  (! (= (= (oeq x y) true)
      (and
      (= (oeq1 (rec__simple_allocator__m__t__available (us_split_fields1 x))
         (rec__simple_allocator__m__t__available (us_split_fields1 y))) true)
      (= (oeq1 (rec__simple_allocator__m__t__allocated (us_split_fields1 x))
-        (rec__simple_allocator__m__t__allocated (us_split_fields1 y))) true)))) :pattern (
+        (rec__simple_allocator__m__t__allocated (us_split_fields1 y))) true))) :pattern (
   (oeq x y)) )))
 
 (declare-fun is_add (us_rep Int us_rep) Bool)
@@ -487,11 +485,10 @@
   (assert
   (forall ((s us_rep) (result__ us_rep))
   (forall ((e Int))
-  (! (=> (is_add__function_guard (is_add s e result__) s e result__)
-     (= (= (is_add s e result__) true)
+  (! (= (= (is_add s e result__) true)
      (and
      (and (and (not (= (contains s e) true)) (= (contains result__ e) true))
-     (= (included_except result__ s e) true)) (= (ole s result__) true)))) :pattern (
+     (= (included_except result__ s e) true)) (= (ole s result__) true))) :pattern (
   (is_add s e result__)) ))))
 
 (declare-fun model__ ((Array Int status)) us_rep1)
@@ -505,22 +502,18 @@
 ;; model____post_axiom
   (assert
   (forall ((simple_allocator__data (Array Int status)))
-  (! (let ((result (model__ simple_allocator__data)))
-     (and (is_valid__function_guard (is_valid result simple_allocator__data)
-     result simple_allocator__data)
-     (=> (model____function_guard result simple_allocator__data)
-     (= (is_valid result simple_allocator__data) true)))) :pattern ((model__
-                                                                    simple_allocator__data)) )))
+  (! (= (is_valid (model__ simple_allocator__data) simple_allocator__data) true) :pattern (
+  (model__ simple_allocator__data)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_230 Int)
-  (temp___is_init_227 Bool) (temp___skip_constant_228 Bool)
-  (temp___do_toplevel_229 Bool)) Bool (=>
-                                      (or (= temp___is_init_227 true)
-                                      (<= 0 1)) (in_range3 temp___expr_230)))
+(define-fun dynamic_invariant1 ((temp___expr_207 Int)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)) Bool (=>
+                                      (or (= temp___is_init_204 true)
+                                      (<= 0 1)) (in_range3 temp___expr_207)))
 
 (define-fun dynamic_invariant2 ((temp___expr_154 Int)
   (temp___is_init_151 Bool) (temp___skip_constant_152 Bool)
@@ -536,9 +529,7 @@
   (assert
   (forall ((m us_rep1))
   (forall ((simple_allocator__data (Array Int status)))
-  (! (=> (is_valid__function_guard (is_valid m simple_allocator__data) m
-     simple_allocator__data)
-     (= (= (is_valid m simple_allocator__data) true)
+  (! (= (= (is_valid m simple_allocator__data) true)
      (and
      (and
      (forall ((e Int))
@@ -567,7 +558,7 @@
      (= (contains
         (rec__simple_allocator__m__t__available (us_split_fields1 m)) r) true))
      (= (contains
-        (rec__simple_allocator__m__t__allocated (us_split_fields1 m)) r) true)))))))) :pattern (
+        (rec__simple_allocator__m__t__allocated (us_split_fields1 m)) r) true))))))) :pattern (
   (is_valid m simple_allocator__data)) ))))
 
 (declare-sort count_type 0)
@@ -655,17 +646,17 @@
 
 (declare-fun r () Int)
 
-(declare-fun temp___273 () Int)
+(declare-fun temp___248 () Int)
 
-(declare-fun temp___274 () Int)
+(declare-fun temp___249 () Int)
 
-(declare-fun temp___270 () (Array Int status))
+(declare-fun temp___245 () (Array Int status))
 
-(declare-fun temp___272 () (Array Int status))
+(declare-fun temp___247 () (Array Int status))
 
-(declare-fun temp___269 () Int)
+(declare-fun temp___244 () Int)
 
-(declare-fun temp___268 () Int)
+(declare-fun temp___243 () Int)
 
 (declare-fun o () status)
 
@@ -794,14 +785,14 @@
   (and (= r10 (mk_int__ref r4))
   (and (= data11 (mk_map__ref data5)) (= res12 (mk_int__ref res5))))
   (and (= r11 r5) (and (= data12 data6) (= res13 res6))))
-  (and (= temp___273 1)
-  (and (= temp___274 10000)
-  (and (and (= result7 r15) (= r1 temp___273))
-  (and (and (<= temp___273 r1) (<= r1 temp___274))
-  (and (= temp___270 data)
-  (and (= temp___272 data)
-  (and (= temp___269 res)
-  (and (= temp___268 r1)
+  (and (= temp___248 1)
+  (and (= temp___249 10000)
+  (and (and (= result7 r15) (= r1 temp___248))
+  (and (and (<= temp___248 r1) (<= r1 temp___249))
+  (and (= temp___245 data)
+  (and (= temp___247 data)
+  (and (= temp___244 res)
+  (and (= temp___243 r1)
   (or
   (and
   (and (and (= r1 r4) (and (= data2 data5) (= res2 res5)))
@@ -817,19 +808,19 @@
   (and (and (= r3 r4) (and (= data4 data5) (= res4 res5)))
   (and (= r5 r3) (and (= data6 data4) (= res6 res4))))
   (and
-  (and (= (bool_eq3 data3 1 10000 temp___272 1 10000) true)
+  (and (= (bool_eq3 data3 1 10000 temp___247 1 10000) true)
   (forall ((rr Int))
   (=> (and (<= 1 rr) (<= rr r2)) (= (to_rep (select data3 rr)) 1))))
   (and
   (and
   (and
   (and (=> (<= 1 10000) (in_range2 r2)) (=> (<= 0 10000) (in_range1 res3)))
-  (forall ((temp___271 Int))
-  (=> (and (<= 1 temp___271) (<= temp___271 10000))
-  (=> (< r2 temp___271)
-  (= (select data3 temp___271) (select temp___270 temp___271))))))
+  (forall ((temp___246 Int))
+  (=> (and (<= 1 temp___246) (<= temp___246 10000))
+  (=> (< r2 temp___246)
+  (= (select data3 temp___246) (select temp___245 temp___246))))))
   (and (<= 1 r2) (<= r2 10000)))
-  (and (not (= r2 temp___274))
+  (and (not (= r2 temp___249))
   (and (and (= r2 result3) (= r3 (+ r2 1)))
   (and (= (to_rep (select data3 r3)) 0)
   (and
@@ -840,25 +831,25 @@
   (ite (and (<= 1 r1) (<= r1 10000))
   (and
   (and
-  (and (= temp___270 data)
-  (and (= temp___272 data)
-  (and (= temp___269 res)
-  (and (= temp___268 r1)
+  (and (= temp___245 data)
+  (and (= temp___247 data)
+  (and (= temp___244 res)
+  (and (= temp___243 r1)
   (and
   (and (not (= (to_rep (select data r1)) 0))
   (and (and (= data2 data) (= res2 res)) (and (= data2 data1) (= res2 res1))))
   (and
-  (and (= (bool_eq3 data3 1 10000 temp___272 1 10000) true)
+  (and (= (bool_eq3 data3 1 10000 temp___247 1 10000) true)
   (forall ((rr Int))
   (=> (and (<= 1 rr) (<= rr r2)) (= (to_rep (select data3 rr)) 1))))
   (and
   (and
   (and
   (and (=> (<= 1 10000) (in_range2 r2)) (=> (<= 0 10000) (in_range1 res3)))
-  (forall ((temp___271 Int))
-  (=> (and (<= 1 temp___271) (<= temp___271 10000))
-  (=> (< r2 temp___271)
-  (= (select data3 temp___271) (select temp___270 temp___271))))))
+  (forall ((temp___246 Int))
+  (=> (and (<= 1 temp___246) (<= temp___246 10000))
+  (=> (< r2 temp___246)
+  (= (select data3 temp___246) (select temp___245 temp___246))))))
   (and (<= 1 r2) (<= r2 10000))) (= r2 10000))))))))
   (and (and (= r2 r6) (and (= data3 data7) (= res3 res7)))
   (and (= r7 r2) (and (= data8 data3) (= res8 res3)))))
@@ -895,28 +886,6 @@
   (assert (= res15 res13))
 
 ;; H
-  (assert (model____function_guard (model__ data) data))
-
-;; H
-  (assert (model____function_guard (model__ (map__content data13))
-  (map__content data13)))
-
-;; H
-  (assert (model____function_guard (model__ data) data))
-
-;; H
-  (assert (model____function_guard (model__ (map__content data13))
-  (map__content data13)))
-
-;; H
-  (assert (model____function_guard (model__ data) data))
-
-;; H
-  (assert (oeq__function_guard
-  (oeq (model__ (map__content data13)) (model__ data))
-  (model__ (map__content data13)) (model__ data)))
-
-;; H
   (assert
   (=>
   (= (is_empty
@@ -926,38 +895,11 @@
   (= (oeq (model__ (map__content data13)) (model__ data)) true))))
 
 ;; H
-  (assert (model____function_guard (model__ data) data))
-
-;; H
   (assert
   (not
   (= (is_empty
      (rec__simple_allocator__m__t__available
      (us_split_fields1 (model__ data)))) true)))
-
-;; H
-  (assert (model____function_guard (model__ (map__content data13))
-  (map__content data13)))
-
-;; H
-  (assert (model____function_guard (model__ data) data))
-
-;; H
-  (assert (model____function_guard (model__ (map__content data13))
-  (map__content data13)))
-
-;; H
-  (assert (model____function_guard (model__ data) data))
-
-;; H
-  (assert (is_add__function_guard
-  (is_add
-  (rec__simple_allocator__m__t__available
-  (us_split_fields1 (model__ (map__content data13)))) (int__content res14)
-  (rec__simple_allocator__m__t__available (us_split_fields1 (model__ data))))
-  (rec__simple_allocator__m__t__available
-  (us_split_fields1 (model__ (map__content data13)))) (int__content res14)
-  (rec__simple_allocator__m__t__available (us_split_fields1 (model__ data)))))
 
 (assert
 ;; WP_parameter_def

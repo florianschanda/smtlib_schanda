@@ -821,31 +821,21 @@
 
 ;; H
   (assert
-  (forall ((i Int)) (q__function_guard (q (get (elements s) i))
-  (get (elements s) i))))
-
-;; H
-  (assert
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i (length s))) (= (q (get (elements s) i)) true))))
 
-(define-fun temp___1029 () us_rep1 (elements s))
+(define-fun temp___993 () us_rep1 (elements s))
 
-(declare-fun temp___1028 () Int)
-
-;; H
-  (assert (in_range2 temp___1028))
+(declare-fun temp___992 () Int)
 
 ;; H
-  (assert (= (iter_has_element temp___1029 temp___1028) true))
-
-(define-fun e () Int (get temp___1029 temp___1028))
+  (assert (in_range2 temp___992))
 
 ;; H
-  (assert (q__function_guard (q e) e))
+  (assert (= (iter_has_element temp___993 temp___992) true))
 
 (assert
 ;; WP_parameter_def
  ;; File "use_sets.adb", line 123, characters 0-0
-  (not (= (q e) true)))
+  (not (= (q (get temp___993 temp___992)) true)))
 (check-sat)

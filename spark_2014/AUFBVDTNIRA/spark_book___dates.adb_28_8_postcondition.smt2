@@ -338,25 +338,6 @@
      (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
-(declare-sort t6b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 12)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq3 (t6b t6b) Bool)
-
-(declare-fun dummy3 () t6b)
-
-(declare-datatypes () ((t6b__ref (mk_t6b__ref (t6b__content t6b)))))
-(define-fun t6b__ref___projection ((a t6b__ref)) t6b (t6b__content a))
-
 (declare-fun month_length () (Array Int day_type))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
@@ -420,8 +401,6 @@
 
 (declare-fun dates__get_month_length__result () Int)
 
-(declare-fun dates__get_month_length__month_length__assume () (Array Int day_type))
-
 (declare-fun result () Bool)
 
 (declare-fun result__1 () Bool)
@@ -476,12 +455,8 @@
 
 ;; H
   (assert
-  (= dates__get_month_length__month_length__assume (dates__get_month_length__month_length__aggregate_def
-                                                   31 28 31 30 31 30 31 31 30
-                                                   31 30 31)))
-
-;; H
-  (assert (= dates__get_month_length__month_length__assume month_length))
+  (= (dates__get_month_length__month_length__aggregate_def 31 28 31 30 31 30
+     31 31 30 31 30 31) month_length))
 
 ;; H
   (assert (=> (<= 1 31) (in_range3 length)))

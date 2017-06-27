@@ -484,12 +484,12 @@
 (define-fun int____ref_2__projection ((a int____ref)) int__ (int____content
                                                             a))
 
-(define-fun dynamic_invariant4 ((temp___expr_340 Int)
-  (temp___is_init_337 Bool) (temp___skip_constant_338 Bool)
-  (temp___do_toplevel_339 Bool)) Bool (=>
-                                      (or (= temp___is_init_337 true)
+(define-fun dynamic_invariant4 ((temp___expr_338 Int)
+  (temp___is_init_335 Bool) (temp___skip_constant_336 Bool)
+  (temp___do_toplevel_337 Bool)) Bool (=>
+                                      (or (= temp___is_init_335 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range5 temp___expr_340)))
+                                      (in_range5 temp___expr_338)))
 
 (declare-fun eof () Int)
 
@@ -813,14 +813,8 @@
   (forall ((helpers__cur_position Int))
   (forall ((helpers__the_file (Array Int character)))
   (! (=> (dynamic_invariant1 helpers__cur_position true true true)
-     (let ((result (end_of_file file helpers__cur_position helpers__the_file)))
-     (and (fpeek__function_guard
-     (fpeek file helpers__cur_position helpers__the_file) file
-     helpers__cur_position helpers__the_file)
-     (=> (end_of_file__function_guard result file helpers__cur_position
-     helpers__the_file)
-     (= (= result true)
-     (= (fpeek file helpers__cur_position helpers__the_file) eof)))))) :pattern (
+     (= (= (end_of_file file helpers__cur_position helpers__the_file) true)
+     (= (fpeek file helpers__cur_position helpers__the_file) eof))) :pattern (
   (end_of_file file helpers__cur_position helpers__the_file)) )))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
@@ -840,8 +834,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -867,7 +859,7 @@
 
 (declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -877,7 +869,7 @@
   (! (=> (in_range1 f)
      (=> (in_range1 l)
      (and (= (to_rep1 (first2 (mk1 f l))) f)
-     (= (to_rep1 (last3 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (= (to_rep1 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -895,10 +887,10 @@
 
 (define-fun first3 ((a us_t1)) Int (to_rep1 (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep1 (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last4 a))
-                                    (+ (- (last4 a) (first3 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size2 () Int)
 
@@ -933,8 +925,8 @@
 
 (define-fun bool_eq11 ((x us_t1)
   (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep1 (first2 (rt1 x)))
-                  (to_rep1 (last3 (rt1 x))) (elts1 y)
-                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last3 (rt1 y)))))
+                  (to_rep1 (last2 (rt1 x))) (elts1 y)
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
 (declare-fun user_eq10 (us_t1 us_t1) Bool)
 
@@ -945,16 +937,16 @@
 (define-fun tbufferS__ref___projection ((a tbufferS__ref)) us_t1 (tbufferS__content
                                                                  a))
 
-(define-fun dynamic_invariant5 ((temp___expr_577 us_t1)
-  (temp___is_init_574 Bool) (temp___skip_constant_575 Bool)
-  (temp___do_toplevel_576 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_575 true))
+(define-fun dynamic_invariant5 ((temp___expr_524 us_t1)
+  (temp___is_init_521 Bool) (temp___skip_constant_522 Bool)
+  (temp___do_toplevel_523 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_522 true))
                                       (and (dynamic_property2 1
                                       (ite (< 500 (length s)) (length s) 500)
-                                      (first3 temp___expr_577)
-                                      (last4 temp___expr_577))
-                                      (and (= (first3 temp___expr_577) 1)
-                                      (= (last4 temp___expr_577) (ite (< 500 
+                                      (first3 temp___expr_524)
+                                      (last3 temp___expr_524))
+                                      (and (= (first3 temp___expr_524) 1)
+                                      (= (last3 temp___expr_524) (ite (< 500 
                                       (length s)) (length s) 500))))))
 
 (declare-fun buffer__first () integer)
@@ -968,8 +960,6 @@
 (declare-fun r74b () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS11 () Int)
-
-(declare-fun last5 () Int)
 
 (define-fun dynamic_property3 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -993,7 +983,7 @@
 
 (declare-fun first4 (t2) integer)
 
-(declare-fun last6 (t2) integer)
+(declare-fun last4 (t2) integer)
 
 (declare-fun mk2 (Int Int) t2)
 
@@ -1003,7 +993,7 @@
   (! (=> (in_range1 f)
      (=> (in_range1 l)
      (and (= (to_rep1 (first4 (mk2 f l))) f)
-     (= (to_rep1 (last6 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
+     (= (to_rep1 (last4 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
 
 (define-fun dynamic_property4 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -1021,10 +1011,10 @@
 
 (define-fun first5 ((a us_t2)) Int (to_rep1 (first4 (rt2 a))))
 
-(define-fun last7 ((a us_t2)) Int (to_rep1 (last6 (rt2 a))))
+(define-fun last5 ((a us_t2)) Int (to_rep1 (last4 (rt2 a))))
 
-(define-fun length2 ((a us_t2)) Int (ite (<= (first5 a) (last7 a))
-                                    (+ (- (last7 a) (first5 a)) 1) 0))
+(define-fun length2 ((a us_t2)) Int (ite (<= (first5 a) (last5 a))
+                                    (+ (- (last5 a) (first5 a)) 1) 0))
 
 (declare-fun value__size3 () Int)
 
@@ -1059,8 +1049,8 @@
 
 (define-fun bool_eq13 ((x us_t2)
   (y us_t2)) Bool (bool_eq3 (elts2 x) (to_rep1 (first4 (rt2 x)))
-                  (to_rep1 (last6 (rt2 x))) (elts2 y)
-                  (to_rep1 (first4 (rt2 y))) (to_rep1 (last6 (rt2 y)))))
+                  (to_rep1 (last4 (rt2 x))) (elts2 y)
+                  (to_rep1 (first4 (rt2 y))) (to_rep1 (last4 (rt2 y)))))
 
 (declare-fun user_eq12 (us_t2 us_t2) Bool)
 
@@ -1076,8 +1066,6 @@
 (declare-fun r77b () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS13 () Int)
-
-(declare-fun last8 () Int)
 
 (define-fun dynamic_property5 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -1101,7 +1089,7 @@
 
 (declare-fun first6 (t3) integer)
 
-(declare-fun last9 (t3) integer)
+(declare-fun last6 (t3) integer)
 
 (declare-fun mk3 (Int Int) t3)
 
@@ -1111,7 +1099,7 @@
   (! (=> (in_range1 f)
      (=> (in_range1 l)
      (and (= (to_rep1 (first6 (mk3 f l))) f)
-     (= (to_rep1 (last9 (mk3 f l))) l)))) :pattern ((mk3 f l)) )))
+     (= (to_rep1 (last6 (mk3 f l))) l)))) :pattern ((mk3 f l)) )))
 
 (define-fun dynamic_property6 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -1129,10 +1117,10 @@
 
 (define-fun first7 ((a us_t3)) Int (to_rep1 (first6 (rt3 a))))
 
-(define-fun last10 ((a us_t3)) Int (to_rep1 (last9 (rt3 a))))
+(define-fun last7 ((a us_t3)) Int (to_rep1 (last6 (rt3 a))))
 
-(define-fun length3 ((a us_t3)) Int (ite (<= (first7 a) (last10 a))
-                                    (+ (- (last10 a) (first7 a)) 1) 0))
+(define-fun length3 ((a us_t3)) Int (ite (<= (first7 a) (last7 a))
+                                    (+ (- (last7 a) (first7 a)) 1) 0))
 
 (declare-fun value__size4 () Int)
 
@@ -1167,8 +1155,8 @@
 
 (define-fun bool_eq15 ((x us_t3)
   (y us_t3)) Bool (bool_eq3 (elts3 x) (to_rep1 (first6 (rt3 x)))
-                  (to_rep1 (last9 (rt3 x))) (elts3 y)
-                  (to_rep1 (first6 (rt3 y))) (to_rep1 (last9 (rt3 y)))))
+                  (to_rep1 (last6 (rt3 x))) (elts3 y)
+                  (to_rep1 (first6 (rt3 y))) (to_rep1 (last6 (rt3 y)))))
 
 (declare-fun user_eq14 (us_t3 us_t3) Bool)
 
@@ -1180,8 +1168,6 @@
 (declare-fun r80b () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS14 () Int)
-
-(declare-fun last11 () Int)
 
 (define-fun dynamic_property7 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -1205,7 +1191,7 @@
 
 (declare-fun first8 (t4) integer)
 
-(declare-fun last12 (t4) integer)
+(declare-fun last8 (t4) integer)
 
 (declare-fun mk4 (Int Int) t4)
 
@@ -1215,7 +1201,7 @@
   (! (=> (in_range1 f)
      (=> (in_range1 l)
      (and (= (to_rep1 (first8 (mk4 f l))) f)
-     (= (to_rep1 (last12 (mk4 f l))) l)))) :pattern ((mk4 f l)) )))
+     (= (to_rep1 (last8 (mk4 f l))) l)))) :pattern ((mk4 f l)) )))
 
 (define-fun dynamic_property8 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -1233,10 +1219,10 @@
 
 (define-fun first9 ((a us_t4)) Int (to_rep1 (first8 (rt4 a))))
 
-(define-fun last13 ((a us_t4)) Int (to_rep1 (last12 (rt4 a))))
+(define-fun last9 ((a us_t4)) Int (to_rep1 (last8 (rt4 a))))
 
-(define-fun length4 ((a us_t4)) Int (ite (<= (first9 a) (last13 a))
-                                    (+ (- (last13 a) (first9 a)) 1) 0))
+(define-fun length4 ((a us_t4)) Int (ite (<= (first9 a) (last9 a))
+                                    (+ (- (last9 a) (first9 a)) 1) 0))
 
 (declare-fun value__size5 () Int)
 
@@ -1271,8 +1257,8 @@
 
 (define-fun bool_eq17 ((x us_t4)
   (y us_t4)) Bool (bool_eq3 (elts4 x) (to_rep1 (first8 (rt4 x)))
-                  (to_rep1 (last12 (rt4 x))) (elts4 y)
-                  (to_rep1 (first8 (rt4 y))) (to_rep1 (last12 (rt4 y)))))
+                  (to_rep1 (last8 (rt4 x))) (elts4 y)
+                  (to_rep1 (first8 (rt4 y))) (to_rep1 (last8 (rt4 y)))))
 
 (declare-fun user_eq16 (us_t4 us_t4) Bool)
 
@@ -1288,12 +1274,12 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(define-fun dynamic_invariant7 ((temp___expr_454 Int)
-  (temp___is_init_451 Bool) (temp___skip_constant_452 Bool)
-  (temp___do_toplevel_453 Bool)) Bool (=>
-                                      (or (= temp___is_init_451 true)
+(define-fun dynamic_invariant7 ((temp___expr_423 Int)
+  (temp___is_init_420 Bool) (temp___skip_constant_421 Bool)
+  (temp___do_toplevel_422 Bool)) Bool (=>
+                                      (or (= temp___is_init_420 true)
                                       (<= 0 2147483647)) (in_range7
-                                      temp___expr_454)))
+                                      temp___expr_423)))
 
 (declare-fun fpeek1 (Int Int (Array Int character)) Int)
 
@@ -1305,45 +1291,34 @@
   (forall ((helpers__cur_position Int))
   (forall ((helpers__the_file (Array Int character)))
   (! (=> (dynamic_invariant1 helpers__cur_position true true true)
-     (let ((result (fpeek file helpers__cur_position helpers__the_file)))
-     (=> (fpeek__function_guard result file helpers__cur_position
-     helpers__the_file) (dynamic_invariant4 result true false true)))) :pattern (
-  (fpeek file helpers__cur_position helpers__the_file)) )))))
+     (dynamic_invariant4 (fpeek file helpers__cur_position helpers__the_file)
+     true false true)) :pattern ((fpeek file helpers__cur_position
+                                 helpers__the_file)) )))))
 
 ;; fpeek__def_axiom
   (assert
   (forall ((file us_rep))
   (forall ((helpers__cur_position Int))
   (forall ((helpers__the_file (Array Int character)))
-  (! (=>
-     (and (dynamic_invariant1 helpers__cur_position true true true)
-     (fpeek__function_guard
-     (fpeek file helpers__cur_position helpers__the_file) file
-     helpers__cur_position helpers__the_file))
-     (and (fpeek__function_guard1
-     (fpeek1
-     (to_rep2 (rec__textio__file_type__descr (us_split_fields1 file)))
-     helpers__cur_position helpers__the_file)
-     (to_rep2 (rec__textio__file_type__descr (us_split_fields1 file)))
-     helpers__cur_position helpers__the_file)
+  (! (=> (dynamic_invariant1 helpers__cur_position true true true)
      (= (fpeek file helpers__cur_position helpers__the_file) (fpeek1
                                                              (to_rep2
                                                              (rec__textio__file_type__descr
                                                              (us_split_fields1
                                                              file)))
                                                              helpers__cur_position
-                                                             helpers__the_file)))) :pattern (
+                                                             helpers__the_file))) :pattern (
   (fpeek file helpers__cur_position helpers__the_file)) )))))
 
 ;; eof_ch__def_axiom
   (assert (= eof_ch (mod2 eof 256)))
 
-(define-fun dynamic_invariant8 ((temp___expr_388 Int)
-  (temp___is_init_385 Bool) (temp___skip_constant_386 Bool)
-  (temp___do_toplevel_387 Bool)) Bool (=>
-                                      (or (= temp___is_init_385 true)
+(define-fun dynamic_invariant8 ((temp___expr_386 Int)
+  (temp___is_init_383 Bool) (temp___skip_constant_384 Bool)
+  (temp___do_toplevel_385 Bool)) Bool (=>
+                                      (or (= temp___is_init_383 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range6 temp___expr_388)))
+                                      (in_range6 temp___expr_386)))
 
 ;; fpeek__post_axiom
   (assert
@@ -1351,22 +1326,17 @@
   (forall ((helpers__the_file (Array Int character)))
   (! (=>
      (and (dynamic_invariant8 stream true true true) (dynamic_invariant1
-     helpers__cur_position true true true))
-     (let ((result (fpeek1 stream helpers__cur_position helpers__the_file)))
-     (=> (fpeek__function_guard1 result stream helpers__cur_position
-     helpers__the_file) (dynamic_invariant4 result true false true)))) :pattern (
-  (fpeek1 stream helpers__cur_position helpers__the_file)) ))))
+     helpers__cur_position true true true)) (dynamic_invariant4
+     (fpeek1 stream helpers__cur_position helpers__the_file) true false
+     true)) :pattern ((fpeek1 stream helpers__cur_position helpers__the_file)) ))))
 
 ;; fpeek__def_axiom
   (assert
   (forall ((stream Int) (helpers__cur_position Int))
   (forall ((helpers__the_file (Array Int character)))
   (! (=>
-     (and
      (and (dynamic_invariant8 stream true true true) (dynamic_invariant1
-     helpers__cur_position true true true)) (fpeek__function_guard1
-     (fpeek1 stream helpers__cur_position helpers__the_file) stream
-     helpers__cur_position helpers__the_file))
+     helpers__cur_position true true true))
      (= (fpeek1 stream helpers__cur_position helpers__the_file) (ite (= 
                                                                 (to_rep
                                                                 (select helpers__the_file helpers__cur_position)) 
@@ -1398,13 +1368,13 @@
 
 (declare-fun num () Int)
 
-(declare-fun last14 () Int)
+(declare-fun last10 () Int)
 
 (declare-fun o () (Array Int character))
 
-(declare-fun temp___733 () (Array Int character))
+(declare-fun temp___661 () (Array Int character))
 
-(declare-fun temp___7331 () t2)
+(declare-fun temp___6611 () t2)
 
 (declare-fun o1 () Int)
 
@@ -1434,23 +1404,23 @@
 
 (declare-fun o12 () Int)
 
-(declare-fun temp___727 () (Array Int character))
+(declare-fun temp___655 () (Array Int character))
 
-(declare-fun temp___7271 () t3)
+(declare-fun temp___6551 () t3)
 
-(declare-fun temp___730 () (Array Int character))
+(declare-fun temp___658 () (Array Int character))
 
-(declare-fun temp___7301 () t3)
+(declare-fun temp___6581 () t3)
 
 (declare-fun o13 () (Array Int character))
 
-(declare-fun temp___722 () (Array Int character))
+(declare-fun temp___650 () (Array Int character))
 
-(declare-fun temp___7221 () t4)
+(declare-fun temp___6501 () t4)
 
-(declare-fun temp___725 () (Array Int character))
+(declare-fun temp___653 () (Array Int character))
 
-(declare-fun temp___7251 () t4)
+(declare-fun temp___6531 () t4)
 
 (declare-fun o14 () (Array Int character))
 
@@ -1474,7 +1444,7 @@
 
 (declare-fun buffer () (Array Int character))
 
-(declare-fun last15 () Int)
+(declare-fun last11 () Int)
 
 (declare-fun result () Int)
 
@@ -1524,7 +1494,7 @@
 
 (declare-fun buffer1 () map__ref)
 
-(declare-fun last16 () int__ref)
+(declare-fun last12 () int__ref)
 
 (declare-fun the_file4 () (Array Int character))
 
@@ -1538,7 +1508,7 @@
 
 (declare-fun buffer2 () (Array Int character))
 
-(declare-fun last17 () Int)
+(declare-fun last13 () Int)
 
 (define-fun file__split_fields23 () us_split_fields (mk___split_fields
                                                     file__split_fields14
@@ -1559,23 +1529,6 @@
                                                     file__split_fields13))
 
 (define-fun result__6 () map__ref (mk_map__ref result__))
-
-;; H
-  (assert (end_of_file__function_guard
-  (end_of_file
-  (mk___rep
-  (mk___split_fields file__split_fields file__split_fields1
-  file__split_fields2 file__split_fields3 file__split_fields4
-  file__split_fields5 file__split_fields6)) cur_position the_file)
-  (mk___rep
-  (mk___split_fields file__split_fields file__split_fields1
-  file__split_fields2 file__split_fields3 file__split_fields4
-  file__split_fields5 file__split_fields6)) cur_position the_file))
-
-;; H
-  (assert (fpeek__function_guard
-  (fpeek (mk___rep file__split_fields24) cur_position1 the_file)
-  (mk___rep file__split_fields24) cur_position1 the_file))
 
 ;; H
   (assert (in_range2 cur_position_at_start))
@@ -1632,34 +1585,34 @@
   (= (to_rep1 buffer__last) (ite (< 500 (length s)) (length s) 500)))))
 
 ;; H
-  (assert (=> (<= 0 2147483647) (in_range4 last14)))
+  (assert (=> (<= 0 2147483647) (in_range4 last10)))
 
 ;; H
   (assert
   (and
   (ite (< (to_rep1 buffer__last) (to_rep1 buffer__first))
-  (= last15 (- (to_rep1 buffer__first) 1))
+  (= last11 (- (to_rep1 buffer__first) 1))
   (and
   (and
   (and
-  (or (= last15 (- (to_rep1 buffer__first) 1))
-  (and (<= (to_rep1 buffer__first) last15)
-  (<= last15 (to_rep1 buffer__last))))
+  (or (= last11 (- (to_rep1 buffer__first) 1))
+  (and (<= (to_rep1 buffer__first) last11)
+  (<= last11 (to_rep1 buffer__last))))
   (forall ((idx Int))
-  (=> (and (<= (to_rep1 buffer__first) idx) (<= idx last15))
+  (=> (and (<= (to_rep1 buffer__first) idx) (<= idx last11))
   (= (to_rep (select buffer idx)) (to_rep
                                   (select the_file (+ (- idx (to_rep1
                                                              buffer__first)) 
                                   cur_position)))))))
-  (= cur_position1 (+ (- (+ cur_position last15) (to_rep1 buffer__first)) 1)))
+  (= cur_position1 (+ (- (+ cur_position last11) (to_rep1 buffer__first)) 1)))
   (or
-  (or (= last15 (to_rep1 buffer__last))
+  (or (= last11 (to_rep1 buffer__last))
   (= (to_rep (select the_file cur_position1)) eof_ch))
   (= (to_rep (select the_file cur_position1)) 10))))
-  (and (in_range4 last15) (in_range2 cur_position1))))
+  (and (in_range4 last11) (in_range2 cur_position1))))
 
 ;; H
-  (assert (= last15 r74b))
+  (assert (= last11 r74b))
 
 ;; H
   (assert (in_range4 r74b))
@@ -1674,32 +1627,32 @@
   (assert (= o buffer))
 
 ;; H
-  (assert (= o temp___733))
+  (assert (= o temp___661))
 
 ;; H
-  (assert (= (mk2 1 r74b) temp___7331))
-
-;; H
-  (assert
-  (=> (= (length s) 0)
-  (= temp___733 textio__get_line_function__get_rest__B_1__r__assume)))
+  (assert (= (mk2 1 r74b) temp___6611))
 
 ;; H
   (assert
   (=> (= (length s) 0)
-  (= (mk (to_rep1 (first4 temp___7331)) (to_rep1 (last6 temp___7331))) 
+  (= temp___661 textio__get_line_function__get_rest__B_1__r__assume)))
+
+;; H
+  (assert
+  (=> (= (length s) 0)
+  (= (mk (to_rep1 (first4 temp___6611)) (to_rep1 (last4 temp___6611))) 
   textio__get_line_function__get_rest__B_1__r__assume1)))
 
 ;; H
   (assert
   (=> (not (= (length s) 0))
-  (=> (<= (to_rep1 (first4 temp___7331)) (to_rep1 (last6 temp___7331)))
-  (= o1 (+ (- (to_rep1 (last6 temp___7331)) (to_rep1 (first4 temp___7331))) 1)))))
+  (=> (<= (to_rep1 (first4 temp___6611)) (to_rep1 (last4 temp___6611)))
+  (= o1 (+ (- (to_rep1 (last4 temp___6611)) (to_rep1 (first4 temp___6611))) 1)))))
 
 ;; H
   (assert
   (=> (not (= (length s) 0))
-  (=> (not (<= (to_rep1 (first4 temp___7331)) (to_rep1 (last6 temp___7331))))
+  (=> (not (<= (to_rep1 (first4 temp___6611)) (to_rep1 (last4 temp___6611))))
   (= o1 0))))
 
 ;; H
@@ -1729,7 +1682,7 @@
   (assert
   (=> (not (= (length s) 0))
   (= (concat1 (elts s) (to_rep1 (first (rt s))) (to_rep1 (last (rt s)))
-     temp___733 (to_rep1 (first4 temp___7331)) (to_rep1 (last6 temp___7331))) 
+     temp___661 (to_rep1 (first4 temp___6611)) (to_rep1 (last4 temp___6611))) 
   textio__get_line_function__get_rest__B_1__r__assume)))
 
 ;; H
@@ -1749,7 +1702,7 @@
   (assert (= (to_rep1 (first (rt r))) (to_rep1 (first (rt s)))))
 
 ;; H
-  (assert (= (to_rep1 (last (rt r))) (+ (to_rep1 (last (rt s))) last15)))
+  (assert (= (to_rep1 (last (rt r))) (+ (to_rep1 (last (rt s))) last11)))
 
 ;; H
   (assert
@@ -1763,7 +1716,7 @@
   (assert (and (= o9 o8) (in_range1 o8)))
 
 ;; H
-  (assert (= o10 (+ o9 last15)))
+  (assert (= o10 (+ o9 last11)))
 
 ;; H
   (assert (and (= o11 o10) (in_range1 o10)))
@@ -1778,14 +1731,14 @@
   (assert (= num1 o12))
 
 ;; H
-  (assert (=> (< last15 (to_rep1 buffer__last)) (= num1 r77b)))
+  (assert (=> (< last11 (to_rep1 buffer__last)) (= num1 r77b)))
 
 ;; H
-  (assert (=> (< last15 (to_rep1 buffer__last)) (in_range4 r77b)))
+  (assert (=> (< last11 (to_rep1 buffer__last)) (in_range4 r77b)))
 
 ;; H
   (assert
-  (=> (< last15 (to_rep1 buffer__last))
+  (=> (< last11 (to_rep1 buffer__last))
   (= (ite (<= (to_rep1 (first (rt r))) (to_rep1 (last (rt r))))
      (+ (- (to_rep1 (last (rt r))) (to_rep1 (first (rt r)))) 1) 0) (ite (<= 1 
                                                                    r77b)
@@ -1795,103 +1748,100 @@
 
 ;; H
   (assert
-  (=> (< last15 (to_rep1 buffer__last))
-  (= (slide (elts r) (to_rep1 (first (rt r))) 1) temp___727)))
+  (=> (< last11 (to_rep1 buffer__last))
+  (= (slide (elts r) (to_rep1 (first (rt r))) 1) temp___655)))
 
 ;; H
   (assert
-  (=> (< last15 (to_rep1 buffer__last)) (= (mk3 1 r77b) temp___7271)))
+  (=> (< last11 (to_rep1 buffer__last)) (= (mk3 1 r77b) temp___6551)))
 
 ;; H
   (assert
-  (=> (< last15 (to_rep1 buffer__last))
-  (= (ite (<= (to_rep1 (first6 temp___7271)) (to_rep1 (last9 temp___7271)))
-     (+ (- (to_rep1 (last9 temp___7271)) (to_rep1 (first6 temp___7271))) 1)
+  (=> (< last11 (to_rep1 buffer__last))
+  (= (ite (<= (to_rep1 (first6 temp___6551)) (to_rep1 (last6 temp___6551)))
+     (+ (- (to_rep1 (last6 temp___6551)) (to_rep1 (first6 temp___6551))) 1)
      0) (ite (<= (to_rep1 (first6 (mk3 1 r77b))) (to_rep1
-                                                 (last9 (mk3 1 r77b))))
-        (+ (- (to_rep1 (last9 (mk3 1 r77b))) (to_rep1 (first6 (mk3 1 r77b)))) 1)
+                                                 (last6 (mk3 1 r77b))))
+        (+ (- (to_rep1 (last6 (mk3 1 r77b))) (to_rep1 (first6 (mk3 1 r77b)))) 1)
         0))))
 
 ;; H
   (assert
-  (=> (< last15 (to_rep1 buffer__last))
-  (= (mk___t3 temp___730 temp___7301) (mk___t3 temp___727 temp___7271))))
+  (=> (< last11 (to_rep1 buffer__last))
+  (= (mk___t3 temp___658 temp___6581) (mk___t3 temp___655 temp___6551))))
 
 ;; H
   (assert
-  (=> (< last15 (to_rep1 buffer__last))
-  (forall ((temp___731 Int))
-  (ite (and (<= 1 temp___731) (<= temp___731 r77b))
-  (= (select o13 temp___731) (select temp___730 temp___731))
-  (= (select o13 temp___731) (select result__ temp___731))))))
+  (=> (< last11 (to_rep1 buffer__last))
+  (forall ((temp___659 Int))
+  (ite (and (<= 1 temp___659) (<= temp___659 r77b))
+  (= (select o13 temp___659) (select temp___658 temp___659))
+  (= (select o13 temp___659) (select result__ temp___659))))))
 
 ;; H
   (assert
-  (=> (< last15 (to_rep1 buffer__last)) (= (mk_map__ref result1) result__6)))
+  (=> (< last11 (to_rep1 buffer__last)) (= (mk_map__ref result1) result__6)))
 
 ;; H
-  (assert (=> (< last15 (to_rep1 buffer__last)) (= result__1 o13)))
+  (assert (=> (< last11 (to_rep1 buffer__last)) (= result__1 o13)))
 
 ;; H
-  (assert (=> (< last15 (to_rep1 buffer__last)) (= num2 num1)))
+  (assert (=> (< last11 (to_rep1 buffer__last)) (= num2 num1)))
 
 ;; H
   (assert
-  (=> (< last15 (to_rep1 buffer__last))
+  (=> (< last11 (to_rep1 buffer__last))
   (= file__split_fields23 file__split_fields24)))
 
 ;; H
   (assert
-  (=> (< last15 (to_rep1 buffer__last)) (= cur_position2 cur_position1)))
+  (=> (< last11 (to_rep1 buffer__last)) (= cur_position2 cur_position1)))
 
 ;; H
-  (assert (=> (< last15 (to_rep1 buffer__last)) (= the_file2 the_file)))
+  (assert (=> (< last11 (to_rep1 buffer__last)) (= the_file2 the_file)))
 
 ;; H
-  (assert (=> (< last15 (to_rep1 buffer__last)) (= num2 num1)))
+  (assert (=> (< last11 (to_rep1 buffer__last)) (= num2 num1)))
 
 ;; H
   (assert
-  (=> (< last15 (to_rep1 buffer__last))
+  (=> (< last11 (to_rep1 buffer__last))
   (= file__split_fields23 file__split_fields24)))
 
 ;; H
   (assert
-  (=> (< last15 (to_rep1 buffer__last)) (= cur_position2 cur_position1)))
+  (=> (< last11 (to_rep1 buffer__last)) (= cur_position2 cur_position1)))
 
 ;; H
-  (assert (=> (< last15 (to_rep1 buffer__last)) (= the_file2 the_file1)))
-
-;; H
-  (assert
-  (=> (not (< last15 (to_rep1 buffer__last)))
-  (= last15 (to_rep1 buffer__last))))
+  (assert (=> (< last11 (to_rep1 buffer__last)) (= the_file2 the_file1)))
 
 ;; H
   (assert
-  (=> (not (< last15 (to_rep1 buffer__last)))
-  (and
+  (=> (not (< last11 (to_rep1 buffer__last)))
+  (= last11 (to_rep1 buffer__last))))
+
+;; H
+  (assert
+  (=> (not (< last11 (to_rep1 buffer__last)))
   (and
   (= result2 (end_of_file (mk___rep file__split_fields24) cur_position1
              the_file))
-  (end_of_file__function_guard result2 (mk___rep file__split_fields24)
-  cur_position1 the_file))
   (= (= result2 true)
   (= (fpeek (mk___rep file__split_fields24) cur_position1 the_file) eof)))))
 
 ;; H
   (assert
-  (=> (not (< last15 (to_rep1 buffer__last)))
+  (=> (not (< last11 (to_rep1 buffer__last)))
   (=> (= result2 true) (= num1 r80b))))
 
 ;; H
   (assert
-  (=> (not (< last15 (to_rep1 buffer__last)))
+  (=> (not (< last11 (to_rep1 buffer__last)))
   (=> (= result2 true) (in_range4 r80b))))
 
 ;; H
   (assert
-  (=> (not (< last15 (to_rep1 buffer__last)))
+  (=> (not (< last11 (to_rep1 buffer__last)))
   (=> (= result2 true)
   (= (ite (<= (to_rep1 (first (rt r))) (to_rep1 (last (rt r))))
      (+ (- (to_rep1 (last (rt r))) (to_rep1 (first (rt r)))) 1) 0) (ite (<= 1 
@@ -1902,94 +1852,94 @@
 
 ;; H
   (assert
-  (=> (not (< last15 (to_rep1 buffer__last)))
+  (=> (not (< last11 (to_rep1 buffer__last)))
   (=> (= result2 true)
-  (= (slide (elts r) (to_rep1 (first (rt r))) 1) temp___722))))
+  (= (slide (elts r) (to_rep1 (first (rt r))) 1) temp___650))))
 
 ;; H
   (assert
-  (=> (not (< last15 (to_rep1 buffer__last)))
-  (=> (= result2 true) (= (mk4 1 r80b) temp___7221))))
+  (=> (not (< last11 (to_rep1 buffer__last)))
+  (=> (= result2 true) (= (mk4 1 r80b) temp___6501))))
 
 ;; H
   (assert
-  (=> (not (< last15 (to_rep1 buffer__last)))
+  (=> (not (< last11 (to_rep1 buffer__last)))
   (=> (= result2 true)
-  (= (ite (<= (to_rep1 (first8 temp___7221)) (to_rep1 (last12 temp___7221)))
-     (+ (- (to_rep1 (last12 temp___7221)) (to_rep1 (first8 temp___7221))) 1)
+  (= (ite (<= (to_rep1 (first8 temp___6501)) (to_rep1 (last8 temp___6501)))
+     (+ (- (to_rep1 (last8 temp___6501)) (to_rep1 (first8 temp___6501))) 1)
      0) (ite (<= (to_rep1 (first8 (mk4 1 r80b))) (to_rep1
-                                                 (last12 (mk4 1 r80b))))
-        (+ (- (to_rep1 (last12 (mk4 1 r80b))) (to_rep1 (first8 (mk4 1 r80b)))) 1)
+                                                 (last8 (mk4 1 r80b))))
+        (+ (- (to_rep1 (last8 (mk4 1 r80b))) (to_rep1 (first8 (mk4 1 r80b)))) 1)
         0)))))
 
 ;; H
   (assert
-  (=> (not (< last15 (to_rep1 buffer__last)))
+  (=> (not (< last11 (to_rep1 buffer__last)))
   (=> (= result2 true)
-  (= (mk___t4 temp___725 temp___7251) (mk___t4 temp___722 temp___7221)))))
+  (= (mk___t4 temp___653 temp___6531) (mk___t4 temp___650 temp___6501)))))
 
 ;; H
   (assert
-  (=> (not (< last15 (to_rep1 buffer__last)))
+  (=> (not (< last11 (to_rep1 buffer__last)))
   (=> (= result2 true)
-  (forall ((temp___726 Int))
-  (ite (and (<= 1 temp___726) (<= temp___726 r80b))
-  (= (select o14 temp___726) (select temp___725 temp___726))
-  (= (select o14 temp___726) (select result__ temp___726)))))))
+  (forall ((temp___654 Int))
+  (ite (and (<= 1 temp___654) (<= temp___654 r80b))
+  (= (select o14 temp___654) (select temp___653 temp___654))
+  (= (select o14 temp___654) (select result__ temp___654)))))))
 
 ;; H
   (assert
-  (=> (not (< last15 (to_rep1 buffer__last)))
+  (=> (not (< last11 (to_rep1 buffer__last)))
   (=> (= result2 true) (= (mk_map__ref result3) result__6))))
 
 ;; H
   (assert
-  (=> (not (< last15 (to_rep1 buffer__last)))
+  (=> (not (< last11 (to_rep1 buffer__last)))
   (=> (= result2 true) (= result__2 o14))))
 
 ;; H
   (assert
-  (=> (not (< last15 (to_rep1 buffer__last)))
+  (=> (not (< last11 (to_rep1 buffer__last)))
   (=> (= result2 true) (= num2 num1))))
 
 ;; H
   (assert
-  (=> (not (< last15 (to_rep1 buffer__last)))
+  (=> (not (< last11 (to_rep1 buffer__last)))
   (=> (= result2 true) (= file__split_fields23 file__split_fields24))))
 
 ;; H
   (assert
-  (=> (not (< last15 (to_rep1 buffer__last)))
+  (=> (not (< last11 (to_rep1 buffer__last)))
   (=> (= result2 true) (= cur_position2 cur_position1))))
 
 ;; H
   (assert
-  (=> (not (< last15 (to_rep1 buffer__last)))
+  (=> (not (< last11 (to_rep1 buffer__last)))
   (=> (= result2 true) (= the_file2 the_file))))
 
 ;; H
   (assert
-  (=> (not (< last15 (to_rep1 buffer__last)))
+  (=> (not (< last11 (to_rep1 buffer__last)))
   (=> (= result2 true) (= num2 num1))))
 
 ;; H
   (assert
-  (=> (not (< last15 (to_rep1 buffer__last)))
+  (=> (not (< last11 (to_rep1 buffer__last)))
   (=> (= result2 true) (= file__split_fields23 file__split_fields24))))
 
 ;; H
   (assert
-  (=> (not (< last15 (to_rep1 buffer__last)))
+  (=> (not (< last11 (to_rep1 buffer__last)))
   (=> (= result2 true) (= cur_position2 cur_position1))))
 
 ;; H
   (assert
-  (=> (not (< last15 (to_rep1 buffer__last)))
+  (=> (not (< last11 (to_rep1 buffer__last)))
   (=> (= result2 true) (= the_file2 the_file1))))
 
 ;; H
   (assert
-  (=> (not (< last15 (to_rep1 buffer__last)))
+  (=> (not (< last11 (to_rep1 buffer__last)))
   (=> (not (= result2 true))
   (and
   (and
@@ -2004,15 +1954,15 @@
 
 ;; H
   (assert
-  (=> (not (< last15 (to_rep1 buffer__last)))
+  (=> (not (< last11 (to_rep1 buffer__last)))
   (=> (not (= result2 true)) (= result__2 result__3))))
 
 ;; H
   (assert
-  (=> (not (< last15 (to_rep1 buffer__last))) (= result__1 result__2)))
+  (=> (not (< last11 (to_rep1 buffer__last))) (= result__1 result__2)))
 
 ;; H
-  (assert (= last16 (mk_int__ref last15)))
+  (assert (= last12 (mk_int__ref last11)))
 
 ;; H
   (assert (= buffer1 (mk_map__ref buffer)))
@@ -2034,7 +1984,7 @@
   (assert (= the_file2 the_file3))
 
 ;; H
-  (assert (= last17 last15))
+  (assert (= last13 last11))
 
 ;; H
   (assert (= buffer2 buffer))

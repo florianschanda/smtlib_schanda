@@ -92,11 +92,8 @@
 ;; down__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true) (down__function_guard 
-     (down x) x))
-     (and (down__function_guard (down (- x 1)) (- x 1))
-     (= (down x) (ite (= x 1) x (+ (down (- x 1)) 1))))) :pattern ((down x)) )))
+  (! (=> (dynamic_invariant x true true true)
+     (= (down x) (ite (= x 1) x (+ (down (- x 1)) 1)))) :pattern ((down x)) )))
 
 (declare-fun x () Int)
 
@@ -122,14 +119,11 @@
   (assert (< 1 x))
 
 ;; H
-  (assert (down__function_guard (down (- o 1)) (- o 1)))
-
-;; H
   (assert (and (= o (- x 1)) (in_range1 (- x 1))))
 
 ;; H
   (assert
-  (and (and (= o1 (down o)) (down__function_guard o1 o))
+  (and (= o1 (down o))
   (and (in_range1 o1) (= o1 (ite (= o 1) o (+ (down (- o 1)) 1))))))
 
 ;; H

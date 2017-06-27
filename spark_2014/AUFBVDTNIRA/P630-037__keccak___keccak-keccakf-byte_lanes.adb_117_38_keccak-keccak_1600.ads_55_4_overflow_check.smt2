@@ -654,9 +654,9 @@
 (define-fun lane_type__ref___projection ((a lane_type__ref)) lane_type 
   (lane_type__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_282 (_ BitVec 64))
-  (temp___is_init_279 Bool) (temp___skip_constant_280 Bool)
-  (temp___do_toplevel_281 Bool)) Bool true)
+(define-fun dynamic_invariant1 ((temp___expr_274 (_ BitVec 64))
+  (temp___is_init_271 Bool) (temp___skip_constant_272 Bool)
+  (temp___do_toplevel_273 Bool)) Bool true)
 
 (declare-fun to_rep2 (lane_type) (_ BitVec 64))
 
@@ -707,12 +707,12 @@
 (define-fun x_coord__ref___projection ((a x_coord__ref)) x_coord (x_coord__content
                                                                  a))
 
-(define-fun dynamic_invariant2 ((temp___expr_288 (_ BitVec 8))
-  (temp___is_init_285 Bool) (temp___skip_constant_286 Bool)
-  (temp___do_toplevel_287 Bool)) Bool (=>
-                                      (or (= temp___is_init_285 true)
+(define-fun dynamic_invariant2 ((temp___expr_280 (_ BitVec 8))
+  (temp___is_init_277 Bool) (temp___skip_constant_278 Bool)
+  (temp___do_toplevel_279 Bool)) Bool (=>
+                                      (or (= temp___is_init_277 true)
                                       (bvule ((_ int2bv 8) 0) ((_ int2bv 8) 4)))
-                                      (in_range4 temp___expr_288)))
+                                      (in_range4 temp___expr_280)))
 
 (declare-sort y_coord 0)
 
@@ -739,12 +739,12 @@
 (define-fun y_coord__ref___projection ((a y_coord__ref)) y_coord (y_coord__content
                                                                  a))
 
-(define-fun dynamic_invariant3 ((temp___expr_294 (_ BitVec 8))
-  (temp___is_init_291 Bool) (temp___skip_constant_292 Bool)
-  (temp___do_toplevel_293 Bool)) Bool (=>
-                                      (or (= temp___is_init_291 true)
+(define-fun dynamic_invariant3 ((temp___expr_286 (_ BitVec 8))
+  (temp___is_init_283 Bool) (temp___skip_constant_284 Bool)
+  (temp___do_toplevel_285 Bool)) Bool (=>
+                                      (or (= temp___is_init_283 true)
                                       (bvule ((_ int2bv 8) 0) ((_ int2bv 8) 4)))
-                                      (in_range5 temp___expr_294)))
+                                      (in_range5 temp___expr_286)))
 
 (declare-sort map1 0)
 
@@ -867,10 +867,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
 
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -892,9 +888,9 @@
 
 (declare-sort t1 0)
 
-(declare-fun first3 (t1) integer)
+(declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -903,7 +899,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep (first3 (mk1 f l))) f) (= (to_rep (last3 (mk1 f l))) l)))) :pattern (
+     (and (= (to_rep (first2 (mk1 f l))) f) (= (to_rep (last2 (mk1 f l))) l)))) :pattern (
   (mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
@@ -919,12 +915,12 @@
 (define-fun of_array1 ((a1 (Array Int byte)) (f Int)
   (l Int)) us_t1 (mk___t1 a1 (mk1 f l)))
 
-(define-fun first4 ((a1 us_t1)) Int (to_rep (first3 (rt1 a1))))
+(define-fun first3 ((a1 us_t1)) Int (to_rep (first2 (rt1 a1))))
 
-(define-fun last4 ((a1 us_t1)) Int (to_rep (last3 (rt1 a1))))
+(define-fun last3 ((a1 us_t1)) Int (to_rep (last2 (rt1 a1))))
 
-(define-fun length1 ((a1 us_t1)) Int (ite (<= (first4 a1) (last4 a1))
-                                     (+ (- (last4 a1) (first4 a1)) 1) 0))
+(define-fun length1 ((a1 us_t1)) Int (ite (<= (first3 a1) (last3 a1))
+                                     (+ (- (last3 a1) (first3 a1)) 1) 0))
 
 (declare-fun value__size1 () Int)
 
@@ -958,9 +954,9 @@
   (assert (forall ((a1 (Array Int byte))) (<= 0 (object__alignment1 a1))))
 
 (define-fun bool_eq11 ((x us_t1)
-  (y us_t1)) Bool (bool_eq4 (elts1 x) (to_rep (first3 (rt1 x)))
-                  (to_rep (last3 (rt1 x))) (elts1 y)
-                  (to_rep (first3 (rt1 y))) (to_rep (last3 (rt1 y)))))
+  (y us_t1)) Bool (bool_eq4 (elts1 x) (to_rep (first2 (rt1 x)))
+                  (to_rep (last2 (rt1 x))) (elts1 y)
+                  (to_rep (first2 (rt1 y))) (to_rep (last2 (rt1 y)))))
 
 (declare-fun user_eq9 (us_t1 us_t1) Bool)
 
@@ -975,18 +971,18 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS9 () Int)
 
-(declare-fun temp___789 ((_ BitVec 8) Int Int) us_t1)
+(declare-fun temp___738 ((_ BitVec 8) Int Int) us_t1)
 
 ;; def_axiom
   (assert
-  (forall ((temp___791 (_ BitVec 8)))
-  (forall ((temp___792 Int) (temp___793 Int))
-  (let ((temp___790 (temp___789 temp___791 temp___792 temp___793)))
+  (forall ((temp___740 (_ BitVec 8)))
+  (forall ((temp___741 Int) (temp___742 Int))
+  (let ((temp___739 (temp___738 temp___740 temp___741 temp___742)))
   (and
-  (=> (dynamic_property 0 2147483647 temp___792 temp___793)
-  (and (= (first4 temp___790) temp___792) (= (last4 temp___790) temp___793)))
-  (forall ((temp___794 Int))
-  (= (select (to_array1 temp___790) temp___794) (of_rep1 temp___791))))))))
+  (=> (dynamic_property 0 2147483647 temp___741 temp___742)
+  (and (= (first3 temp___739) temp___741) (= (last3 temp___739) temp___742)))
+  (forall ((temp___743 Int))
+  (= (select (to_array1 temp___739) temp___743) (of_rep1 temp___740))))))))
 
 (define-fun dynamic_invariant4 ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)
@@ -1028,17 +1024,17 @@
 
 (declare-fun o1 () Int)
 
-(declare-fun temp___796 () (Array Int byte))
+(declare-fun temp___745 () (Array Int byte))
 
-(declare-fun temp___7961 () t1)
+(declare-fun temp___7451 () t1)
 
-(declare-fun temp___797 () (Array Int byte))
+(declare-fun temp___746 () (Array Int byte))
 
-(declare-fun temp___7971 () t)
+(declare-fun temp___7461 () t)
 
-(declare-fun temp___798 () (Array Int byte))
+(declare-fun temp___747 () (Array Int byte))
 
-(declare-fun temp___7981 () t)
+(declare-fun temp___7471 () t)
 
 (declare-fun o2 () (Array Int byte))
 
@@ -1094,17 +1090,17 @@
 
 (declare-fun i () Int)
 
-(declare-fun temp___816 () Int)
+(declare-fun temp___765 () Int)
 
-(declare-fun temp___815 () Int)
+(declare-fun temp___764 () Int)
 
 (declare-fun result5 () Int)
 
-(declare-fun temp___8161 () Int)
+(declare-fun temp___7651 () Int)
 
 (declare-fun result6 () Int)
 
-(declare-fun temp___8151 () Int)
+(declare-fun temp___7641 () Int)
 
 (declare-fun result7 () t__ref1)
 
@@ -1175,47 +1171,47 @@
 ;; H
   (assert
   (= (to_rep
-     (first3
+     (first2
      (rt1
-     (temp___789 ((_ int2bv 8) 0) (to_rep data__first) (to_rep data__last))))) 
+     (temp___738 ((_ int2bv 8) 0) (to_rep data__first) (to_rep data__last))))) 
   (to_rep data__first)))
 
 ;; H
   (assert
   (= (to_rep
-     (last3
+     (last2
      (rt1
-     (temp___789 ((_ int2bv 8) 0) (to_rep data__first) (to_rep data__last))))) 
+     (temp___738 ((_ int2bv 8) 0) (to_rep data__first) (to_rep data__last))))) 
   (to_rep data__last)))
 
 ;; H
   (assert
-  (= (mk___t1 temp___796 temp___7961) (temp___789 ((_ int2bv 8) 0)
+  (= (mk___t1 temp___745 temp___7451) (temp___738 ((_ int2bv 8) 0)
                                       (to_rep data__first)
                                       (to_rep data__last))))
 
 ;; H
-  (assert (= temp___796 temp___797))
+  (assert (= temp___745 temp___746))
 
 ;; H
   (assert
-  (= (mk (to_rep (first3 temp___7961)) (to_rep (last3 temp___7961))) 
-  temp___7971))
+  (= (mk (to_rep (first2 temp___7451)) (to_rep (last2 temp___7451))) 
+  temp___7461))
 
 ;; H
   (assert
-  (= (ite (<= (to_rep (first temp___7971)) (to_rep (last temp___7971)))
-     (+ (- (to_rep (last temp___7971)) (to_rep (first temp___7971))) 1) 0) 
+  (= (ite (<= (to_rep (first temp___7461)) (to_rep (last temp___7461)))
+     (+ (- (to_rep (last temp___7461)) (to_rep (first temp___7461))) 1) 0) 
   (ite (<= (to_rep data__first) (to_rep data__last))
   (+ (- (to_rep data__last) (to_rep data__first)) 1) 0)))
 
 ;; H
   (assert
-  (= (mk___t temp___798 temp___7981) (mk___t temp___797 temp___7971)))
+  (= (mk___t temp___747 temp___7471) (mk___t temp___746 temp___7461)))
 
 ;; H
   (assert
-  (= o2 (slide temp___798 (to_rep (first temp___7981)) (to_rep data__first))))
+  (= o2 (slide temp___747 (to_rep (first temp___7471)) (to_rep data__first))))
 
 ;; H
   (assert (= result4 data))
@@ -1246,16 +1242,16 @@
   (=> (<= 0 2147483647) (in_range2 offset2))) (<= 8 remaining_bytes2)))
 
 ;; H
-  (assert (= temp___816 result5))
+  (assert (= temp___765 result5))
 
 ;; H
-  (assert (= temp___8161 offset2))
+  (assert (= temp___7651 offset2))
 
 ;; H
-  (assert (= temp___815 result6))
+  (assert (= temp___764 result6))
 
 ;; H
-  (assert (= temp___8151 remaining_bytes2))
+  (assert (= temp___7641 remaining_bytes2))
 
 ;; H
   (assert (= result7 (mk_t__ref1 lane)))

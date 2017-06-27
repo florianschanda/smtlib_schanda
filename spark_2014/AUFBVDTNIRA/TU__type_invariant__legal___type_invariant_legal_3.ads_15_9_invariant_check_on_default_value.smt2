@@ -59,10 +59,6 @@
 
 (declare-fun f__function_guard (Bool Int) Bool)
 
-;; temp___result_134_def
-  (assert
-  (forall ((temp___133 Int)) (f__function_guard (f temp___133) temp___133)))
-
 (define-fun type_invariant ((temp___132 Int)) Bool (= (f temp___132) true))
 
 (declare-sort tt2B 0)
@@ -89,11 +85,7 @@
 
 (declare-fun g__function_guard (Bool Int) Bool)
 
-;; temp___result_143_def
-  (assert
-  (forall ((temp___142 Int)) (g__function_guard (g temp___142) temp___142)))
-
-(define-fun type_invariant1 ((temp___141 Int)) Bool (= (g temp___141) true))
+(define-fun type_invariant1 ((temp___140 Int)) Bool (= (g temp___140) true))
 
 (declare-sort t1 0)
 
@@ -114,20 +106,18 @@
 (declare-datatypes () ((t1__ref (mk_t1__ref (t1__content t1)))))
 (define-fun t1__ref___projection ((a t1__ref)) t1 (t1__content a))
 
-(define-fun dynamic_invariant ((temp___expr_138 Int)
-  (temp___is_init_135 Bool) (temp___skip_constant_136 Bool)
-  (temp___do_toplevel_137 Bool)) Bool (=>
-                                      (or (= temp___is_init_135 true)
+(define-fun dynamic_invariant ((temp___expr_137 Int)
+  (temp___is_init_134 Bool) (temp___skip_constant_135 Bool)
+  (temp___do_toplevel_136 Bool)) Bool (=>
+                                      (or (= temp___is_init_134 true)
                                       (<= 0 2147483647)) (in_range2
-                                      temp___expr_138)))
+                                      temp___expr_137)))
 
 ;; f__post_axiom
   (assert true)
 
 ;; f__def_axiom
-  (assert
-  (forall ((x Int))
-  (! (=> (f__function_guard (f x) x) (= (f x) true)) :pattern ((f x)) )))
+  (assert (forall ((x Int)) (! (= (f x) true) :pattern ((f x)) )))
 
 (declare-sort t2 0)
 
@@ -148,12 +138,12 @@
 (declare-datatypes () ((t2__ref (mk_t2__ref (t2__content t2)))))
 (define-fun t2__ref___projection ((a t2__ref)) t2 (t2__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_147 Int)
-  (temp___is_init_144 Bool) (temp___skip_constant_145 Bool)
-  (temp___do_toplevel_146 Bool)) Bool (=>
-                                      (or (= temp___is_init_144 true)
+(define-fun dynamic_invariant1 ((temp___expr_145 Int)
+  (temp___is_init_142 Bool) (temp___skip_constant_143 Bool)
+  (temp___do_toplevel_144 Bool)) Bool (=>
+                                      (or (= temp___is_init_142 true)
                                       (<= 0 2147483647)) (in_range3
-                                      temp___expr_147)))
+                                      temp___expr_145)))
 
 (declare-fun f__2 (Int) Bool)
 
@@ -165,26 +155,21 @@
 ;; g__def_axiom
   (assert
   (forall ((x Int))
-  (! (=> (g__function_guard (g x) x)
-     (and (f__2__function_guard (f__2 x) x)
-     (= (= (g x) true) (= (f__2 x) true)))) :pattern ((g x)) )))
+  (! (= (= (g x) true) (= (f__2 x) true)) :pattern ((g x)) )))
 
 ;; f__2__post_axiom
   (assert true)
 
 ;; f__2__def_axiom
-  (assert
-  (forall ((x Int))
-  (! (=> (f__2__function_guard (f__2 x) x) (= (f__2 x) true)) :pattern (
-  (f__2 x)) )))
+  (assert (forall ((x Int)) (! (= (f__2 x) true) :pattern ((f__2 x)) )))
 
-(declare-fun temp___153 () Int)
+(declare-fun temp___149 () Int)
 
 ;; H
-  (assert (in_range temp___153))
+  (assert (in_range temp___149))
 
 (assert
 ;; WP_parameter_def
  ;; File "type_invariant_legal_3.ads", line 13, characters 0-0
-  (not (type_invariant temp___153)))
+  (not (type_invariant temp___149)))
 (check-sat)

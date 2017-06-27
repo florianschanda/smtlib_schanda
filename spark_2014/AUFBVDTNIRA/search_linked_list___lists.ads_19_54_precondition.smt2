@@ -703,11 +703,11 @@
 
 (declare-fun o1 () count_type)
 
-(declare-fun temp___460 () count_type)
+(declare-fun temp___458 () count_type)
 
 (declare-fun lists__search__c__assume () count_type)
 
-(declare-fun temp___458 () count_type)
+(declare-fun temp___456 () count_type)
 
 (declare-fun o2 () Int)
 
@@ -789,10 +789,10 @@
   (assert (= o o1))
 
 ;; H
-  (assert (= temp___460 o1))
+  (assert (= temp___458 o1))
 
 ;; H
-  (assert (= (mk___rep1 (mk___split_fields1 temp___460)) no_element))
+  (assert (= (mk___rep1 (mk___split_fields1 temp___458)) no_element))
 
 ;; H
   (assert
@@ -825,7 +825,7 @@
   (= (= result1 true)
   (= (has_key (positions l) (mk___rep1 c__split_fields12)) true)))
   (and (= result1 true)
-  (and (= temp___458 c__split_fields1)
+  (and (= temp___456 c__split_fields1)
   (and
   (forall ((i Int))
   (=>
@@ -850,7 +850,7 @@
   (ite (= result1 true)
   (and
   (and
-  (and (= temp___458 c__split_fields1)
+  (and (= temp___456 c__split_fields1)
   (and
   (forall ((i Int))
   (=>

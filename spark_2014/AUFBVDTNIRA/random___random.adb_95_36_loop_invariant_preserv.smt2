@@ -666,7 +666,7 @@
   (temp___is_init_180 Bool) (temp___skip_constant_181 Bool)
   (temp___do_toplevel_182 Bool)) Bool true)
 
-(declare-fun reset ((_ BitVec 32)) us_rep)
+(declare-fun reset1 ((_ BitVec 32)) us_rep)
 
 (declare-fun reset__function_guard (us_rep (_ BitVec 32)) Bool)
 
@@ -684,18 +684,14 @@
 ;; to_state__post_axiom
   (assert
   (forall ((s Int))
-  (! (=> (dynamic_invariant1 s true true true)
-     (let ((result (to_state s)))
-     (=> (to_state__function_guard result s) (dynamic_invariant3 result true
-     false true)))) :pattern ((to_state s)) )))
+  (! (=> (dynamic_invariant1 s true true true) (dynamic_invariant3
+     (to_state s) true false true)) :pattern ((to_state s)) )))
 
 ;; to_state__def_axiom
   (assert
   (forall ((s Int))
-  (! (=>
-     (and (dynamic_invariant1 s true true true) (to_state__function_guard
-     (to_state s) s)) (= (to_state s) ((_ int2bv 32) s))) :pattern ((to_state
-                                                                    s)) )))
+  (! (=> (dynamic_invariant1 s true true true)
+     (= (to_state s) ((_ int2bv 32) s))) :pattern ((to_state s)) )))
 
 (declare-fun to_state__2 (Int) (_ BitVec 32))
 
@@ -704,18 +700,14 @@
 ;; to_state__2__post_axiom
   (assert
   (forall ((s Int))
-  (! (=> (dynamic_invariant s true true true)
-     (let ((result (to_state__2 s)))
-     (=> (to_state__2__function_guard result s) (dynamic_invariant3 result
-     true false true)))) :pattern ((to_state__2 s)) )))
+  (! (=> (dynamic_invariant s true true true) (dynamic_invariant3
+     (to_state__2 s) true false true)) :pattern ((to_state__2 s)) )))
 
 ;; to_state__2__def_axiom
   (assert
   (forall ((s Int))
-  (! (=>
-     (and (dynamic_invariant s true true true) (to_state__2__function_guard
-     (to_state__2 s) s)) (= (to_state__2 s) ((_ int2bv 32) s))) :pattern (
-  (to_state__2 s)) )))
+  (! (=> (dynamic_invariant s true true true)
+     (= (to_state__2 s) ((_ int2bv 32) s))) :pattern ((to_state__2 s)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -742,8 +734,6 @@
   (forall ((x Int))
   (! (=> (in_range2 x) (= (to_rep3 (of_rep3 x)) x)) :pattern ((to_rep3
                                                               (of_rep3 x))) )))
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -1122,11 +1112,6 @@
 
 (declare-fun k12 () Int)
 
-(define-fun random__reset__2__R3b__g__assume2 () us_rep (mk___rep
-                                                        (mk___split_fields
-                                                        random__reset__2__R3b__g__assume
-                                                        random__reset__2__R3b__g__assume1)))
-
 ;; H
   (assert (dynamic_invariant2 initiator true false true))
 
@@ -1154,9 +1139,9 @@
 
 ;; H
   (assert
-  (and (= random__reset__2__R3b__g__assume2 (reset ((_ int2bv 32) 19650218)))
-  (reset__function_guard random__reset__2__R3b__g__assume2
-  ((_ int2bv 32) 19650218))))
+  (= (mk___rep
+     (mk___split_fields random__reset__2__R3b__g__assume
+     random__reset__2__R3b__g__assume1)) (reset1 ((_ int2bv 32) 19650218))))
 
 ;; H
   (assert
@@ -1207,8 +1192,7 @@
   (=>
   (and (<= 1 k2)
   (<= k2 (ite (< 624 (length initiator)) (length initiator) 624)))
-  (and (and (= o13 (to_state__2 j1)) (to_state__2__function_guard o13 j1))
-  (= o13 ((_ int2bv 32) j1)))))
+  (and (= o13 (to_state__2 j1)) (= o13 ((_ int2bv 32) j1)))))
 
 ;; H
   (assert
@@ -1755,9 +1739,8 @@
 
 ;; H
   (assert
-  (and
-  (and (= o35 (to_state (int__content i7))) (to_state__function_guard 
-  o35 (int__content i7))) (= o35 ((_ int2bv 32) (int__content i7)))))
+  (and (= o35 (to_state (int__content i7)))
+  (= o35 ((_ int2bv 32) (int__content i7)))))
 
 ;; H
   (assert
@@ -1934,9 +1917,7 @@
   (assert (= k10 (+ k9 1)))
 
 ;; H
-  (assert
-  (and (and (= o54 (to_state i13)) (to_state__function_guard o54 i13))
-  (= o54 ((_ int2bv 32) i13))))
+  (assert (and (= o54 (to_state i13)) (= o54 ((_ int2bv 32) i13))))
 
 ;; H
   (assert (and (<= 0 (- i13 1)) (<= (- i13 1) 623)))

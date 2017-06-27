@@ -364,13 +364,13 @@
      (and (dynamic_invariant left true true true)
      (<= (+ 1 (length right)) 1000))
      (let ((result (oconcat__2 left right)))
-     (=> (oconcat__2__function_guard result left right)
      (and (= (length result) (+ 1 (length right)))
      (and (= (element result 1) left)
      (forall ((i Int))
      (=> (and (<= 1 i) (<= i (last_index right)))
-     (= (element result (+ 1 i)) (element right i))))))))) :pattern (
-  (oconcat__2 left right)) ))))
+     (= (element result (+ 1 i)) (element right i)))))))) :pattern ((oconcat__2
+                                                                    left
+                                                                    right)) ))))
 
 (define-fun in_range3 ((rec__amortized_queue__my_vectors__vector__capacity1 Int)
   (a us_rep)) Bool (= rec__amortized_queue__my_vectors__vector__capacity1 
@@ -551,8 +551,7 @@
 ;; inv__def_axiom
   (assert
   (forall ((q us_rep2))
-  (! (=> (inv__function_guard (inv q) q)
-     (= (= (inv q) true)
+  (! (= (= (inv q) true)
      (and
      (and
      (<= (length (rec__amortized_queue__queue__rear (us_split_fields3 q))) 
@@ -572,7 +571,7 @@
      (to_rep
      (rec__amortized_queue__my_vectors__vector__capacity
      (us_split_discrs1
-     (rec__amortized_queue__queue__rear (us_split_fields3 q))))))))) :pattern (
+     (rec__amortized_queue__queue__rear (us_split_fields3 q)))))))) :pattern (
   (inv q)) )))
 
 (declare-fun model__1 (us_rep2) us_rep)
@@ -586,12 +585,8 @@
 ;; model____post_axiom
   (assert
   (forall ((q us_rep2))
-  (! (and (inv__function_guard (inv q) q)
-     (=> (and (dynamic_invariant2 q true true true) (= (inv q) true))
-     (let ((result (model__1 q)))
-     (and (is_model__function_guard (is_model q result) q result)
-     (=> (model____function_guard1 result q) (= (is_model q result) true)))))) :pattern (
-  (model__1 q)) )))
+  (! (=> (and (dynamic_invariant2 q true true true) (= (inv q) true))
+     (= (is_model q (model__1 q)) true)) :pattern ((model__1 q)) )))
 
 (declare-fun q () us_rep2)
 
@@ -627,8 +622,7 @@
   (assert
   (forall ((q1 us_rep2))
   (forall ((m us_rep))
-  (! (=> (is_model__function_guard (is_model q1 m) q1 m)
-     (= (= (is_model q1 m) true)
+  (! (= (= (is_model q1 m) true)
      (and
      (and
      (and
@@ -654,7 +648,7 @@
      (= (element m
         (+ i (length
              (rec__amortized_queue__queue__rear (us_split_fields3 q1))))) 
-     (element (rec__amortized_queue__queue__front (us_split_fields3 q1)) i))))))) :pattern (
+     (element (rec__amortized_queue__queue__front (us_split_fields3 q1)) i)))))) :pattern (
   (is_model q1 m)) ))))
 
 (declare-sort count_type 0)
@@ -893,9 +887,6 @@
 
 ;; H
   (assert (in_range v))
-
-;; H
-  (assert (inv__function_guard (inv q) q))
 
 ;; H
   (assert

@@ -249,17 +249,13 @@
 ;; pow2__post_axiom
   (assert
   (forall ((i Int))
-  (! (=> (dynamic_invariant i true true true)
-     (let ((result (pow21 i)))
-     (=> (pow2__function_guard result i) (dynamic_invariant1 result true
-     false true)))) :pattern ((pow21 i)) )))
+  (! (=> (dynamic_invariant i true true true) (dynamic_invariant1 (pow21 i)
+     true false true)) :pattern ((pow21 i)) )))
 
 ;; pow2__def_axiom
   (assert
   (forall ((i Int))
-  (! (=>
-     (and (dynamic_invariant i true true true) (pow2__function_guard
-     (pow21 i) i))
+  (! (=> (dynamic_invariant i true true true)
      (= (pow21 i) (ite (< i 4294967296)
                   (bvshl ((_ int2bv 32) 1) ((_ int2bv 32) i))
                   ((_ int2bv 32) 0)))) :pattern ((pow21 i)) )))
@@ -276,7 +272,7 @@
 
 (declare-fun temp___207 () (_ BitVec 32))
 
-(declare-fun temp___210 () (_ BitVec 32))
+(declare-fun temp___208 () (_ BitVec 32))
 
 (declare-fun temp___206 () (_ BitVec 32))
 
@@ -415,15 +411,6 @@
 (declare-fun result10 () (_ BitVec 32))
 
 ;; H
-  (assert (pow2__function_guard (pow21 iter2) iter2))
-
-;; H
-  (assert (pow2__function_guard (pow21 iter2) iter2))
-
-;; H
-  (assert (pow2__function_guard (pow21 iter2) iter2))
-
-;; H
   (assert (in_range1 exp))
 
 ;; H
@@ -488,7 +475,7 @@
   (and
   (and
   (and (= temp___207 result__1)
-  (and (= temp___210 cur_exp1)
+  (and (= temp___208 cur_exp1)
   (and (= temp___206 cur_val1)
   (and (= temp___205 cur_exp1)
   (and (= temp___204 iter1)
@@ -497,7 +484,7 @@
   (= result__2 (power val__
                (bv2nat (bvurem ((_ int2bv 32) exp) (pow21 iter2)))))
   (and (= cur_val2 (power val__ (bv2nat (pow21 iter2))))
-  (= cur_exp2 (bvudiv temp___210 (pow21 iter2)))))
+  (= cur_exp2 (bvudiv temp___208 (pow21 iter2)))))
   (and
   (and (=> (<= 0 31) (in_range2 iter2)) (not (= cur_exp2 ((_ int2bv 32) 0))))
   (and

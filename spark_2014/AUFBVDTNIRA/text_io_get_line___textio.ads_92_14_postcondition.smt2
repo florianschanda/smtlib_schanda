@@ -476,12 +476,12 @@
 (define-fun int____ref_2__projection ((a int____ref)) int__ (int____content
                                                             a))
 
-(define-fun dynamic_invariant3 ((temp___expr_340 Int)
-  (temp___is_init_337 Bool) (temp___skip_constant_338 Bool)
-  (temp___do_toplevel_339 Bool)) Bool (=>
-                                      (or (= temp___is_init_337 true)
+(define-fun dynamic_invariant3 ((temp___expr_338 Int)
+  (temp___is_init_335 Bool) (temp___skip_constant_336 Bool)
+  (temp___do_toplevel_337 Bool)) Bool (=>
+                                      (or (= temp___is_init_335 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range5 temp___expr_340)))
+                                      (in_range5 temp___expr_338)))
 
 (declare-fun eof () Int)
 
@@ -805,14 +805,8 @@
   (forall ((helpers__cur_position Int))
   (forall ((helpers__the_file (Array Int character)))
   (! (=> (dynamic_invariant1 helpers__cur_position true true true)
-     (let ((result (end_of_file file helpers__cur_position helpers__the_file)))
-     (and (fpeek__function_guard
-     (fpeek file helpers__cur_position helpers__the_file) file
-     helpers__cur_position helpers__the_file)
-     (=> (end_of_file__function_guard result file helpers__cur_position
-     helpers__the_file)
-     (= (= result true)
-     (= (fpeek file helpers__cur_position helpers__the_file) eof)))))) :pattern (
+     (= (= (end_of_file file helpers__cur_position helpers__the_file) true)
+     (= (fpeek file helpers__cur_position helpers__the_file) eof))) :pattern (
   (end_of_file file helpers__cur_position helpers__the_file)) )))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
@@ -829,9 +823,9 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
 
-(declare-fun temp___String_Literal_631 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_574 (tuple0) (Array Int character))
 
-;; temp___String_Literal_631__def_axiom
+;; temp___String_Literal_574__def_axiom
   (assert true)
 
 (define-fun dynamic_invariant4 ((temp___expr_82 us_t)
@@ -849,12 +843,12 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(define-fun dynamic_invariant6 ((temp___expr_454 Int)
-  (temp___is_init_451 Bool) (temp___skip_constant_452 Bool)
-  (temp___do_toplevel_453 Bool)) Bool (=>
-                                      (or (= temp___is_init_451 true)
+(define-fun dynamic_invariant6 ((temp___expr_423 Int)
+  (temp___is_init_420 Bool) (temp___skip_constant_421 Bool)
+  (temp___do_toplevel_422 Bool)) Bool (=>
+                                      (or (= temp___is_init_420 true)
                                       (<= 0 2147483647)) (in_range7
-                                      temp___expr_454)))
+                                      temp___expr_423)))
 
 (declare-fun fpeek1 (Int Int (Array Int character)) Int)
 
@@ -866,45 +860,34 @@
   (forall ((helpers__cur_position Int))
   (forall ((helpers__the_file (Array Int character)))
   (! (=> (dynamic_invariant1 helpers__cur_position true true true)
-     (let ((result (fpeek file helpers__cur_position helpers__the_file)))
-     (=> (fpeek__function_guard result file helpers__cur_position
-     helpers__the_file) (dynamic_invariant3 result true false true)))) :pattern (
-  (fpeek file helpers__cur_position helpers__the_file)) )))))
+     (dynamic_invariant3 (fpeek file helpers__cur_position helpers__the_file)
+     true false true)) :pattern ((fpeek file helpers__cur_position
+                                 helpers__the_file)) )))))
 
 ;; fpeek__def_axiom
   (assert
   (forall ((file us_rep))
   (forall ((helpers__cur_position Int))
   (forall ((helpers__the_file (Array Int character)))
-  (! (=>
-     (and (dynamic_invariant1 helpers__cur_position true true true)
-     (fpeek__function_guard
-     (fpeek file helpers__cur_position helpers__the_file) file
-     helpers__cur_position helpers__the_file))
-     (and (fpeek__function_guard1
-     (fpeek1
-     (to_rep2 (rec__textio__file_type__descr (us_split_fields1 file)))
-     helpers__cur_position helpers__the_file)
-     (to_rep2 (rec__textio__file_type__descr (us_split_fields1 file)))
-     helpers__cur_position helpers__the_file)
+  (! (=> (dynamic_invariant1 helpers__cur_position true true true)
      (= (fpeek file helpers__cur_position helpers__the_file) (fpeek1
                                                              (to_rep2
                                                              (rec__textio__file_type__descr
                                                              (us_split_fields1
                                                              file)))
                                                              helpers__cur_position
-                                                             helpers__the_file)))) :pattern (
+                                                             helpers__the_file))) :pattern (
   (fpeek file helpers__cur_position helpers__the_file)) )))))
 
 ;; eof_ch__def_axiom
   (assert (= eof_ch (mod2 eof 256)))
 
-(define-fun dynamic_invariant7 ((temp___expr_388 Int)
-  (temp___is_init_385 Bool) (temp___skip_constant_386 Bool)
-  (temp___do_toplevel_387 Bool)) Bool (=>
-                                      (or (= temp___is_init_385 true)
+(define-fun dynamic_invariant7 ((temp___expr_386 Int)
+  (temp___is_init_383 Bool) (temp___skip_constant_384 Bool)
+  (temp___do_toplevel_385 Bool)) Bool (=>
+                                      (or (= temp___is_init_383 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range6 temp___expr_388)))
+                                      (in_range6 temp___expr_386)))
 
 ;; fpeek__post_axiom
   (assert
@@ -912,22 +895,17 @@
   (forall ((helpers__the_file (Array Int character)))
   (! (=>
      (and (dynamic_invariant7 stream true true true) (dynamic_invariant1
-     helpers__cur_position true true true))
-     (let ((result (fpeek1 stream helpers__cur_position helpers__the_file)))
-     (=> (fpeek__function_guard1 result stream helpers__cur_position
-     helpers__the_file) (dynamic_invariant3 result true false true)))) :pattern (
-  (fpeek1 stream helpers__cur_position helpers__the_file)) ))))
+     helpers__cur_position true true true)) (dynamic_invariant3
+     (fpeek1 stream helpers__cur_position helpers__the_file) true false
+     true)) :pattern ((fpeek1 stream helpers__cur_position helpers__the_file)) ))))
 
 ;; fpeek__def_axiom
   (assert
   (forall ((stream Int) (helpers__cur_position Int))
   (forall ((helpers__the_file (Array Int character)))
   (! (=>
-     (and
      (and (dynamic_invariant7 stream true true true) (dynamic_invariant1
-     helpers__cur_position true true true)) (fpeek__function_guard1
-     (fpeek1 stream helpers__cur_position helpers__the_file) stream
-     helpers__cur_position helpers__the_file))
+     helpers__cur_position true true true))
      (= (fpeek1 stream helpers__cur_position helpers__the_file) (ite (= 
                                                                 (to_rep
                                                                 (select helpers__the_file helpers__cur_position)) 
@@ -1022,18 +1000,6 @@
 (declare-fun result__2 () (Array Int character))
 
 (declare-fun num3 () Int)
-
-;; H
-  (assert (end_of_file__function_guard
-  (end_of_file
-  (mk___rep
-  (mk___split_fields file__split_fields file__split_fields1
-  file__split_fields2 file__split_fields3 file__split_fields4
-  file__split_fields5 file__split_fields6)) cur_position the_file)
-  (mk___rep
-  (mk___split_fields file__split_fields file__split_fields1
-  file__split_fields2 file__split_fields3 file__split_fields4
-  file__split_fields5 file__split_fields6)) cur_position the_file))
 
 ;; H
   (assert (dynamic_property 1 2147483647 (to_rep1 result____first)

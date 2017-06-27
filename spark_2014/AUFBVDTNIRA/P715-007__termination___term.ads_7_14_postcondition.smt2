@@ -104,9 +104,7 @@
   (and
   (ite (= x 0)
   (and
-  (and
-  (and (= o (loop_except_on_zero x)) (loop_except_on_zero__function_guard 
-  o x)) (and (in_range1 o) (and (= x 0) (= o 0))))
-  (and (= result x) (= x2 o))) (and (= x2 x) (= x2 x1)))
-  (and (= x3 x2) (= x4 x2)))))))
+  (and (= o (loop_except_on_zero x))
+  (and (in_range1 o) (and (= x 0) (= o 0)))) (and (= result x) (= x2 o)))
+  (and (= x2 x) (= x2 x1))) (and (= x3 x2) (= x4 x2)))))))
 (check-sat)

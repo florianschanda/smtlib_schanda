@@ -381,7 +381,7 @@
 
 (declare-fun j () Int)
 
-(declare-fun temp___279 () Int)
+(declare-fun temp___257 () Int)
 
 (declare-fun o () Int)
 
@@ -391,7 +391,7 @@
 
 (declare-fun o3 () Int)
 
-(declare-fun temp___280 () Int)
+(declare-fun temp___258 () Int)
 
 (declare-fun o4 () Int)
 
@@ -405,9 +405,9 @@
 
 (declare-fun o9 () Int)
 
-(declare-fun temp___282 () Int)
+(declare-fun temp___260 () Int)
 
-(declare-fun temp___281 () Int)
+(declare-fun temp___259 () Int)
 
 (declare-fun o10 () Int)
 
@@ -449,18 +449,6 @@
   (assert (in_range2 length2))
 
 ;; H
-  (assert (sorted__function_guard
-  (sorted (mk___t a (mk (to_rep a__first) (to_rep a__last))) a_first length1)
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) a_first length1))
-
-;; H
-  (assert (sorted__function_guard
-  (sorted (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (+ a_first length1) length2)
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (+ a_first length1)
-  length2))
-
-;; H
   (assert
   (and
   (and
@@ -495,40 +483,6 @@
 
 ;; H
   (assert (= j1 0))
-
-;; H
-  (assert (sorted__function_guard
-  (sorted (mk___t b (mk (to_rep b__first) (to_rep b__last)))
-  (to_rep b__first) (+ i2 j2))
-  (mk___t b (mk (to_rep b__first) (to_rep b__last))) (to_rep b__first)
-  (+ i2 j2)))
-
-;; H
-  (assert (perm2__function_guard
-  (perm2 (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t b (mk (to_rep b__first) (to_rep b__last))) a_first
-  (+ a_first length1) (to_rep b__first) i2 j2)
-  (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t b (mk (to_rep b__first) (to_rep b__last))) a_first
-  (+ a_first length1) (to_rep b__first) i2 j2))
-
-;; H
-  (assert (le_array__function_guard
-  (le_array (mk___t b (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ a_first i2) (+ i2 j2) (- length1 i2))
-  (mk___t b (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ a_first i2) (+ i2 j2) (- length1 i2)))
-
-;; H
-  (assert (le_array__function_guard
-  (le_array (mk___t b (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ (+ a_first length1) j2) (+ i2 j2) (- length2 j2))
-  (mk___t b (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ (+ a_first length1) j2) (+ i2 j2) (- length2 j2)))
 
 ;; H
   (assert
@@ -574,16 +528,16 @@
 ;; H
   (assert
   (=> (not (= j2 length2))
-  (=> (< i2 length1) (and (= temp___280 o3) (in_range1 o3)))))
+  (=> (< i2 length1) (and (= temp___258 o3) (in_range1 o3)))))
 
 ;; H
   (assert
   (=> (not (= j2 length2))
   (=> (< i2 length1)
-  (and (<= (to_rep a__first) temp___280) (<= temp___280 (to_rep a__last))))))
+  (and (<= (to_rep a__first) temp___258) (<= temp___258 (to_rep a__last))))))
 
 ;; H
-  (assert (=> (not (= j2 length2)) (=> (< i2 length1) (= o4 temp___280))))
+  (assert (=> (not (= j2 length2)) (=> (< i2 length1) (= o4 temp___258))))
 
 ;; H
   (assert (=> (not (= j2 length2)) (=> (< i2 length1) (= o5 (select a o4)))))
@@ -595,16 +549,16 @@
   (assert
   (=> (not (= j2 length2))
   (=> (< i2 length1)
-  (and (= temp___279 (+ a_first i2)) (in_range1 (+ a_first i2))))))
+  (and (= temp___257 (+ a_first i2)) (in_range1 (+ a_first i2))))))
 
 ;; H
   (assert
   (=> (not (= j2 length2))
   (=> (< i2 length1)
-  (and (<= (to_rep a__first) temp___279) (<= temp___279 (to_rep a__last))))))
+  (and (<= (to_rep a__first) temp___257) (<= temp___257 (to_rep a__last))))))
 
 ;; H
-  (assert (=> (not (= j2 length2)) (=> (< i2 length1) (= o temp___279))))
+  (assert (=> (not (= j2 length2)) (=> (< i2 length1) (= o temp___257))))
 
 ;; H
   (assert (=> (not (= j2 length2)) (=> (< i2 length1) (= o1 (select a o)))))
@@ -625,14 +579,14 @@
   (assert (= result2 true))
 
 ;; H
-  (assert (and (= temp___281 (+ a_first i2)) (in_range1 (+ a_first i2))))
+  (assert (and (= temp___259 (+ a_first i2)) (in_range1 (+ a_first i2))))
 
 ;; H
   (assert
-  (and (<= (to_rep a__first) temp___281) (<= temp___281 (to_rep a__last))))
+  (and (<= (to_rep a__first) temp___259) (<= temp___259 (to_rep a__last))))
 
 ;; H
-  (assert (= o10 temp___281))
+  (assert (= o10 temp___259))
 
 ;; H
   (assert (= o11 (select a o10)))
@@ -650,10 +604,10 @@
   (assert (= o9 (+ (to_rep b__first) o8)))
 
 ;; H
-  (assert (and (= temp___282 o9) (in_range1 o9)))
+  (assert (and (= temp___260 o9) (in_range1 o9)))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (<= (to_rep b__first) temp___282)))
+  (not (<= (to_rep b__first) temp___260)))
 (check-sat)

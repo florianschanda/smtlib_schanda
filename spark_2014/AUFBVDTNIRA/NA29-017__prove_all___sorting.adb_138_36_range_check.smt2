@@ -538,22 +538,6 @@
 
 ;; H
   (assert
-  (forall ((j1 Int)) (sorted__function_guard
-  (sorted (mk___t a1 (mk (to_rep a__first) (to_rep a__last)))
-  (+ a_first (* j1 l2))
-  (ite (< l2 (- length1 (* j1 l2))) l2 (- length1 (* j1 l2))))
-  (mk___t a1 (mk (to_rep a__first) (to_rep a__last))) (+ a_first (* j1 
-  l2)) (ite (< l2 (- length1 (* j1 l2))) l2 (- length1 (* j1 l2))))))
-
-;; H
-  (assert (perm__function_guard
-  (perm (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t a1 (mk (to_rep a__first) (to_rep a__last))) a_first length1)
-  (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t a1 (mk (to_rep a__first) (to_rep a__last))) a_first length1))
-
-;; H
-  (assert
   (and
   (and
   (forall ((j1 Int))
@@ -578,35 +562,6 @@
 
 ;; H
   (assert (= i2 0))
-
-;; H
-  (assert
-  (forall ((j1 Int)) (sorted__function_guard
-  (sorted (mk___t a2 (mk (to_rep a__first) (to_rep a__last)))
-  (+ a_first (* (* j1 l2) 2))
-  (ite (< (* l2 2) (- length1 (* (* j1 l2) 2))) (* l2 2) (- length1 (* (* j1 
-  l2) 2)))) (mk___t a2 (mk (to_rep a__first) (to_rep a__last)))
-  (+ a_first (* (* j1 l2) 2))
-  (ite (< (* l2 2) (- length1 (* (* j1 l2) 2))) (* l2 2) (- length1 (* (* j1 
-  l2) 2))))))
-
-;; H
-  (assert
-  (forall ((j1 Int)) (sorted__function_guard
-  (sorted (mk___t a2 (mk (to_rep a__first) (to_rep a__last)))
-  (+ (+ a_first i3) (* j1 l2))
-  (ite (< l2 (- (- length1 i3) (* j1 l2))) l2 (- (- length1 i3) (* j1 
-  l2)))) (mk___t a2 (mk (to_rep a__first) (to_rep a__last)))
-  (+ (+ a_first i3) (* j1 l2))
-  (ite (< l2 (- (- length1 i3) (* j1 l2))) l2 (- (- length1 i3) (* j1 
-  l2))))))
-
-;; H
-  (assert (perm__function_guard
-  (perm (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t a2 (mk (to_rep a__first) (to_rep a__last))) a_first length1)
-  (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t a2 (mk (to_rep a__first) (to_rep a__last))) a_first length1))
 
 ;; H
   (assert
@@ -639,24 +594,9 @@
 
 ;; H
   (assert
-  (and
   (= o17 (perm (mk___t a (mk (to_rep a__first) (to_rep a__last)))
          (mk___t a2 (mk (to_rep a__first) (to_rep a__last))) a_first 
-         length1))
-  (perm__function_guard o17
-  (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t a2 (mk (to_rep a__first) (to_rep a__last))) a_first length1)))
-
-;; H
-  (assert
-  (forall ((j1 Int)) (sorted__function_guard
-  (sorted (mk___t a2 (mk (to_rep a__first) (to_rep a__last)))
-  (+ (+ a_first i3) (* j1 l2))
-  (ite (< l2 (- (- length1 i3) (* j1 l2))) l2 (- (- length1 i3) (* j1 
-  l2)))) (mk___t a2 (mk (to_rep a__first) (to_rep a__last)))
-  (+ (+ a_first i3) (* j1 l2))
-  (ite (< l2 (- (- length1 i3) (* j1 l2))) l2 (- (- length1 i3) (* j1 
-  l2))))))
+         length1)))
 
 ;; H
   (assert

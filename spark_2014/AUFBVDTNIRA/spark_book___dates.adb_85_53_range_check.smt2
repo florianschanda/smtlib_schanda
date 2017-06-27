@@ -279,11 +279,9 @@
 ;; maximum_date__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (maximum_date__function_guard (maximum_date us_void_param)
-     us_void_param)
-     (= (maximum_date us_void_param) (mk___rep
+  (! (= (maximum_date us_void_param) (mk___rep
                                      (mk___split_fields (of_rep2 31)
-                                     (of_rep1 12) (of_rep 2099))))) :pattern (
+                                     (of_rep1 12) (of_rep 2099)))) :pattern (
   (maximum_date us_void_param)) )))
 
 (define-fun dynamic_invariant ((temp___expr_150 Int)
@@ -316,7 +314,6 @@
      (and (dynamic_invariant year true true true) (dynamic_invariant1 month
      true true true))
      (let ((result (get_month_length year month)))
-     (=> (get_month_length__function_guard result year month)
      (and
      (and
      (and
@@ -335,8 +332,8 @@
      (=> (= month 7) (= result 31))) (=> (= month 8) (= result 31)))
      (=> (= month 9) (= result 30))) (=> (= month 10) (= result 31)))
      (=> (= month 11) (= result 30))) (=> (= month 12) (= result 31)))
-     (dynamic_invariant2 result true false true))))) :pattern ((get_month_length
-                                                               year month)) )))
+     (dynamic_invariant2 result true false true)))) :pattern ((get_month_length
+                                                              year month)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -356,11 +353,11 @@
 
 (declare-fun o4 () year_type)
 
-(declare-fun temp___269 () day_type)
+(declare-fun temp___259 () day_type)
 
-(declare-fun temp___2691 () month_type)
+(declare-fun temp___2591 () month_type)
 
-(declare-fun temp___2692 () year_type)
+(declare-fun temp___2592 () year_type)
 
 (declare-fun o5 () month_type)
 
@@ -370,11 +367,11 @@
 
 (declare-fun o8 () year_type)
 
-(declare-fun temp___271 () day_type)
+(declare-fun temp___261 () day_type)
 
-(declare-fun temp___2711 () month_type)
+(declare-fun temp___2611 () month_type)
 
-(declare-fun temp___2712 () year_type)
+(declare-fun temp___2612 () year_type)
 
 (declare-fun result () Bool)
 
@@ -403,9 +400,6 @@
 (declare-fun current_date__split_fields8 () year_type)
 
 ;; H
-  (assert (maximum_date__function_guard (maximum_date Tuple0) Tuple0))
-
-;; H
   (assert
   (not
   (= (bool_eq3
@@ -417,11 +411,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o (get_month_length (to_rep current_date__split_fields2)
        (to_rep1 current_date__split_fields1)))
-  (get_month_length__function_guard o (to_rep current_date__split_fields2)
-  (to_rep1 current_date__split_fields1)))
   (and (in_range2 o)
   (and
   (and
@@ -469,13 +460,13 @@
   (assert (= current_date__split_fields2 o4))
 
 ;; H
-  (assert (= temp___269 o2))
+  (assert (= temp___259 o2))
 
 ;; H
-  (assert (= temp___2691 o3))
+  (assert (= temp___2591 o3))
 
 ;; H
-  (assert (= temp___2692 o4))
+  (assert (= temp___2592 o4))
 
 ;; H
   (assert (= result1 current_date__split_fields))
@@ -487,13 +478,13 @@
   (assert (= result3 current_date__split_fields2))
 
 ;; H
-  (assert (= temp___269 current_date__split_fields3))
+  (assert (= temp___259 current_date__split_fields3))
 
 ;; H
-  (assert (= temp___2691 current_date__split_fields4))
+  (assert (= temp___2591 current_date__split_fields4))
 
 ;; H
-  (assert (= temp___2692 current_date__split_fields5))
+  (assert (= temp___2592 current_date__split_fields5))
 
 ;; H
   (assert (= (to_rep1 o5) 1))
@@ -508,13 +499,13 @@
   (assert (= current_date__split_fields5 o8))
 
 ;; H
-  (assert (= temp___271 o6))
+  (assert (= temp___261 o6))
 
 ;; H
-  (assert (= temp___2711 o7))
+  (assert (= temp___2611 o7))
 
 ;; H
-  (assert (= temp___2712 o8))
+  (assert (= temp___2612 o8))
 
 ;; H
   (assert (= result4 current_date__split_fields3))
@@ -526,13 +517,13 @@
   (assert (= result6 current_date__split_fields5))
 
 ;; H
-  (assert (= temp___271 current_date__split_fields6))
+  (assert (= temp___261 current_date__split_fields6))
 
 ;; H
-  (assert (= temp___2711 current_date__split_fields7))
+  (assert (= temp___2611 current_date__split_fields7))
 
 ;; H
-  (assert (= temp___2712 current_date__split_fields8))
+  (assert (= temp___2612 current_date__split_fields8))
 
 (assert
 ;; WP_parameter_def

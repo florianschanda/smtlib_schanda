@@ -58,24 +58,19 @@
 
 (declare-fun wrong_ok__function_guard (Bool Int) Bool)
 
-(define-fun dynamic_invariant ((temp___expr_187 Int)
-  (temp___is_init_184 Bool) (temp___skip_constant_185 Bool)
-  (temp___do_toplevel_186 Bool)) Bool (=>
-                                      (or (= temp___is_init_184 true)
+(define-fun dynamic_invariant ((temp___expr_181 Int)
+  (temp___is_init_178 Bool) (temp___skip_constant_179 Bool)
+  (temp___do_toplevel_180 Bool)) Bool (=>
+                                      (or (= temp___is_init_178 true)
                                       (<= 0 2147483647)) (in_range
-                                      temp___expr_187)))
+                                      temp___expr_181)))
 
-;; temp___result_191_def
-  (assert
-  (forall ((temp___190 Int)) (wrong_ok__function_guard (wrong_ok temp___190)
-  temp___190)))
-
-(define-fun default_initial_assumption ((temp___expr_188 Int)
-  (temp___skip_top_level_189 Bool)) Bool (and (= temp___expr_188 0)
+(define-fun default_initial_assumption ((temp___expr_182 Int)
+  (temp___skip_top_level_183 Bool)) Bool (and (= temp___expr_182 0)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_189 true))
-                                         (= (wrong_ok temp___expr_188) true))))
+                                         (= temp___skip_top_level_183 true))
+                                         (= (wrong_ok temp___expr_182) true))))
 
 (declare-fun init (Int) Int)
 
@@ -112,10 +107,8 @@
 ;; init__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant1 x true true true)
-     (let ((result (init x)))
-     (=> (init__function_guard result x) (dynamic_invariant1 result true
-     false true)))) :pattern ((init x)) )))
+  (! (=> (dynamic_invariant1 x true true true) (dynamic_invariant1 (init x)
+     true false true)) :pattern ((init x)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -125,9 +118,7 @@
 ;; wrong_ok__def_axiom
   (assert
   (forall ((x Int))
-  (! (=> (wrong_ok__function_guard (wrong_ok x) x)
-     (and (init__function_guard (init 0) 0)
-     (= (= (wrong_ok x) true) (= x (init 0))))) :pattern ((wrong_ok x)) )))
+  (! (= (= (wrong_ok x) true) (= x (init 0))) :pattern ((wrong_ok x)) )))
 
 (declare-fun w () Int)
 
@@ -136,9 +127,6 @@
 
 ;; H
   (assert (=> (<= 0 2147483647) (in_range w)))
-
-;; H
-  (assert (init__function_guard (init 0) 0))
 
 (assert
 ;; WP_parameter_def

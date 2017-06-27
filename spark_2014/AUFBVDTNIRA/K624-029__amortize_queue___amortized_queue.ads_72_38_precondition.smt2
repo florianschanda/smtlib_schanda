@@ -403,13 +403,12 @@
      (and (dynamic_invariant2 right true true true)
      (<= (+ (length left) 1) 1000))
      (let ((result (oconcat__3 left right)))
-     (=> (oconcat__3__function_guard result left right)
      (and (= (length result) (+ (length left) 1))
      (and
      (forall ((i Int))
      (=> (and (<= 1 i) (<= i (last_index left)))
      (= (element result i) (element left i))))
-     (= (element result (+ (last_index left) 1)) right)))))) :pattern (
+     (= (element result (+ (last_index left) 1)) right))))) :pattern (
   (oconcat__3 left right)) ))))
 
 (define-fun in_range4 ((rec__amortized_queue__my_vectors__vector__capacity1 Int)
@@ -587,8 +586,7 @@
 ;; inv__def_axiom
   (assert
   (forall ((q us_rep2))
-  (! (=> (inv__function_guard (inv q) q)
-     (= (= (inv q) true)
+  (! (= (= (inv q) true)
      (and
      (and
      (<= (length (rec__amortized_queue__queue__rear (us_split_fields3 q))) 
@@ -608,7 +606,7 @@
      (to_rep
      (rec__amortized_queue__my_vectors__vector__capacity
      (us_split_discrs1
-     (rec__amortized_queue__queue__rear (us_split_fields3 q))))))))) :pattern (
+     (rec__amortized_queue__queue__rear (us_split_fields3 q)))))))) :pattern (
   (inv q)) )))
 
 (declare-fun model__1 (us_rep2) us_rep)
@@ -622,12 +620,8 @@
 ;; model____post_axiom
   (assert
   (forall ((q us_rep2))
-  (! (and (inv__function_guard (inv q) q)
-     (=> (and (dynamic_invariant3 q true true true) (= (inv q) true))
-     (let ((result (model__1 q)))
-     (and (is_model__function_guard (is_model q result) q result)
-     (=> (model____function_guard1 result q) (= (is_model q result) true)))))) :pattern (
-  (model__1 q)) )))
+  (! (=> (and (dynamic_invariant3 q true true true) (= (inv q) true))
+     (= (is_model q (model__1 q)) true)) :pattern ((model__1 q)) )))
 
 (declare-fun q () us_rep2)
 
@@ -659,8 +653,7 @@
   (assert
   (forall ((q1 us_rep2))
   (forall ((m us_rep))
-  (! (=> (is_model__function_guard (is_model q1 m) q1 m)
-     (= (= (is_model q1 m) true)
+  (! (= (= (is_model q1 m) true)
      (and
      (and
      (and
@@ -686,7 +679,7 @@
      (= (element m
         (+ i (length
              (rec__amortized_queue__queue__rear (us_split_fields3 q1))))) 
-     (element (rec__amortized_queue__queue__front (us_split_fields3 q1)) i))))))) :pattern (
+     (element (rec__amortized_queue__queue__front (us_split_fields3 q1)) i)))))) :pattern (
   (is_model q1 m)) ))))
 
 (declare-sort count_type 0)
@@ -996,9 +989,6 @@
           (rec__amortized_queue__my_vectors__vector__capacity
           (us_split_discrs1
           (rec__amortized_queue__queue__rear (us_split_fields3 q))))))))
-
-;; H
-  (assert (inv__function_guard (inv q) q))
 
 ;; H
   (assert
@@ -1316,10 +1306,7 @@
 
 ;; H
   (assert
-  (and
   (and (= result6 (inv (queue__content amortized_queue__tail__result7)))
-  (inv__function_guard result6
-  (queue__content amortized_queue__tail__result7)))
   (= (= result6 true)
   (and
   (and
@@ -1355,12 +1342,7 @@
   (assert (= result6 true))
 
 ;; H
-  (assert (is_model__function_guard (is_model q o18) q o18))
-
-;; H
-  (assert
-  (and (and (= o18 (model__1 q)) (model____function_guard1 o18 q))
-  (= (is_model q o18) true)))
+  (assert (and (= o18 (model__1 q)) (= (is_model q o18) true)))
 
 ;; H
   (assert
@@ -1368,16 +1350,8 @@
   (and (in_range2 o19) (= o19 (get (model__ o18) (last (model__ o18)))))))
 
 ;; H
-  (assert (is_model__function_guard
-  (is_model (queue__content amortized_queue__tail__result7) o17)
-  (queue__content amortized_queue__tail__result7) o17))
-
-;; H
   (assert
-  (and
   (and (= o17 (model__1 (queue__content amortized_queue__tail__result7)))
-  (model____function_guard1 o17
-  (queue__content amortized_queue__tail__result7)))
   (= (is_model (queue__content amortized_queue__tail__result7) o17) true)))
 
 (assert

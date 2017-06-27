@@ -337,8 +337,6 @@
 (declare-datatypes () ((a__ref (mk_a__ref (a__content us_t)))))
 (define-fun a__ref___projection ((a a__ref)) us_t (a__content a))
 
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -361,7 +359,7 @@
 
 (declare-fun first2 (t2) ttB)
 
-(declare-fun last3 (t2) ttB)
+(declare-fun last2 (t2) ttB)
 
 (declare-fun mk1 (Int Int) t2)
 
@@ -370,7 +368,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range f)
      (=> (in_range l)
-     (and (= (to_rep (first2 (mk1 f l))) f) (= (to_rep (last3 (mk1 f l))) l)))) :pattern (
+     (and (= (to_rep (first2 (mk1 f l))) f) (= (to_rep (last2 (mk1 f l))) l)))) :pattern (
   (mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
@@ -389,10 +387,10 @@
 
 (define-fun first3 ((a us_t1)) Int (to_rep (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last4 a))
-                                    (+ (- (last4 a) (first3 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size1 () Int)
 
@@ -427,8 +425,8 @@
 
 (define-fun bool_eq6 ((x us_t1)
   (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep (first2 (rt1 x)))
-                  (to_rep (last3 (rt1 x))) (elts1 y)
-                  (to_rep (first2 (rt1 y))) (to_rep (last3 (rt1 y)))))
+                  (to_rep (last2 (rt1 x))) (elts1 y)
+                  (to_rep (first2 (rt1 y))) (to_rep (last2 (rt1 y)))))
 
 (declare-fun user_eq5 (us_t1 us_t1) Bool)
 
@@ -546,14 +544,14 @@
                                       (first3
                                       (rec__proc__r__contents
                                       (us_split_fields1 temp___expr_185)))
-                                      (last4
+                                      (last3
                                       (rec__proc__r__contents
                                       (us_split_fields1 temp___expr_185))))
                                       (and
                                       (= (first3
                                          (rec__proc__r__contents
                                          (us_split_fields1 temp___expr_185))) 1)
-                                      (= (last4
+                                      (= (last3
                                          (rec__proc__r__contents
                                          (us_split_fields1 temp___expr_185))) 
                                       (to_rep1 temp___186))))))
@@ -580,18 +578,14 @@
 ;; f__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant1 x true true true)
-     (let ((result (f x)))
-     (=> (f__function_guard result x) (dynamic_invariant2 result true false
-     true)))) :pattern ((f x)) )))
+  (! (=> (dynamic_invariant1 x true true true) (dynamic_invariant2 (f x) true
+     false true)) :pattern ((f x)) )))
 
 (declare-fun item__first () ttB)
 
 (declare-fun item__last () ttB)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
-
-(declare-fun last5 () Int)
 
 (define-fun dynamic_property3 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -617,7 +611,7 @@
 
 (declare-fun first4 (t3) ttB)
 
-(declare-fun last6 (t3) ttB)
+(declare-fun last4 (t3) ttB)
 
 (declare-fun mk2 (Int Int) t3)
 
@@ -627,7 +621,7 @@
   (! (=> (in_range f1)
      (=> (in_range l)
      (and (= (to_rep (first4 (mk2 f1 l))) f1)
-     (= (to_rep (last6 (mk2 f1 l))) l)))) :pattern ((mk2 f1 l)) )))
+     (= (to_rep (last4 (mk2 f1 l))) l)))) :pattern ((mk2 f1 l)) )))
 
 (define-fun dynamic_property4 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range low)
@@ -645,10 +639,10 @@
 
 (define-fun first5 ((a us_t2)) Int (to_rep (first4 (rt2 a))))
 
-(define-fun last7 ((a us_t2)) Int (to_rep (last6 (rt2 a))))
+(define-fun last5 ((a us_t2)) Int (to_rep (last4 (rt2 a))))
 
-(define-fun length2 ((a us_t2)) Int (ite (<= (first5 a) (last7 a))
-                                    (+ (- (last7 a) (first5 a)) 1) 0))
+(define-fun length2 ((a us_t2)) Int (ite (<= (first5 a) (last5 a))
+                                    (+ (- (last5 a) (first5 a)) 1) 0))
 
 (declare-fun value__size3 () Int)
 
@@ -683,8 +677,8 @@
 
 (define-fun bool_eq9 ((x us_t2)
   (y us_t2)) Bool (bool_eq3 (elts2 x) (to_rep (first4 (rt2 x)))
-                  (to_rep (last6 (rt2 x))) (elts2 y)
-                  (to_rep (first4 (rt2 y))) (to_rep (last6 (rt2 y)))))
+                  (to_rep (last4 (rt2 x))) (elts2 y)
+                  (to_rep (first4 (rt2 y))) (to_rep (last4 (rt2 y)))))
 
 (declare-fun user_eq8 (us_t2 us_t2) Bool)
 
@@ -721,7 +715,7 @@
                                                            a))))
                                          (of_array1 (to_array2 temp___134)
                                          (first5 temp___134)
-                                         (last7 temp___134))))))
+                                         (last5 temp___134))))))
 
 (define-fun of_base ((r us_rep)) us_rep1 (mk___rep1 (us_split_discrs1 r)
                                          (mk___split_fields1
@@ -730,7 +724,7 @@
                                                            r))))
                                          (of_array2 (to_array1 temp___133)
                                          (first3 temp___133)
-                                         (last4 temp___133))))))
+                                         (last3 temp___133))))))
 
 (define-fun bool_eq10 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -830,10 +824,8 @@
 
 ;; H
   (assert
-  (and
-  (and (= proc__p__item__assume2 (f 3)) (f__function_guard
-  proc__p__item__assume2 3)) (dynamic_invariant2 proc__p__item__assume2 true
-  false true)))
+  (and (= proc__p__item__assume2 (f 3)) (dynamic_invariant2
+  proc__p__item__assume2 true false true)))
 
 ;; H
   (assert (= result item))

@@ -507,7 +507,9 @@
      (< (to_rep2 (select b (+ i 1))) (to_rep2 (select a (+ j 1))))))))))) :pattern (
   (compare1 a a_first a_last b b_first b_last)) ))))
 
-(declare-sort t3b 0)
+(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+
+(declare-sort index_type1 0)
 
 (define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
@@ -519,30 +521,9 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
 
-(declare-fun user_eq6 (t3b t3b) Bool)
+(declare-fun user_eq6 (index_type1 index_type1) Bool)
 
-(declare-fun dummy6 () t3b)
-
-(declare-datatypes () ((t3b__ref (mk_t3b__ref (t3b__content t3b)))))
-(define-fun t3b__ref___projection ((a t3b__ref)) t3b (t3b__content a))
-
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
-
-(declare-sort index_type1 0)
-
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq9 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq7 (index_type1 index_type1) Bool)
-
-(declare-fun dummy7 () index_type1)
+(declare-fun dummy6 () index_type1)
 
 (declare-datatypes ()
 ((index_type__ref1 (mk_index_type__ref1 (index_type__content1 index_type1)))))
@@ -553,7 +534,7 @@
   (temp___is_init_532 Bool) (temp___skip_constant_533 Bool)
   (temp___do_toplevel_534 Bool)) Bool (=>
                                       (or (= temp___is_init_532 true)
-                                      (<= 1 10)) (in_range6 temp___expr_535)))
+                                      (<= 1 10)) (in_range5 temp___expr_535)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -756,19 +737,15 @@
 
 (declare-fun result_index () Int)
 
-(declare-fun o () (Array Int natural))
+(declare-fun o () Int)
 
-(declare-fun o1 () (Array Int natural))
+(declare-fun o1 () Int)
 
 (declare-fun o2 () Int)
 
 (declare-fun o3 () Int)
 
 (declare-fun o4 () Int)
-
-(declare-fun o5 () Int)
-
-(declare-fun o6 () Int)
 
 (declare-fun result () (Array Int natural))
 
@@ -783,29 +760,25 @@
 (declare-fun result_index1 () Int)
 
 ;; H
-  (assert
-  (= o (search_demo__search_array__aggregate_def 2 4 6 8 10 12 14 16 18 20)))
-
-;; H
   (assert (= result search_array))
 
 ;; H
-  (assert (= search_array1 o))
+  (assert
+  (= search_array1 (search_demo__search_array__aggregate_def 2 4 6 8 10 12 14
+                   16 18 20)))
 
 ;; H
   (assert (=> (<= 1 10) (in_range3 result_index)))
 
 ;; H
-  (assert (= o1 search_array1))
-
-;; H
   (assert
   (and
   (ite (= found true)
-  (= 10 (to_rep2 (select o1 search_demo__searcher__result)))
+  (= 10 (to_rep2 (select search_array1 search_demo__searcher__result)))
   (forall ((j Int))
-  (=> (and (<= 1 j) (<= j 10)) (not (= (to_rep2 (select o1 j)) 10)))))
-  (in_range6 search_demo__searcher__result)))
+  (=> (and (<= 1 j) (<= j 10))
+  (not (= (to_rep2 (select search_array1 j)) 10))))) (in_range5
+  search_demo__searcher__result)))
 
 ;; H
   (assert (= result1 result_index))
@@ -822,8 +795,8 @@
   (<= (to_rep1
       (first (rt (to_string (attr__ATTRIBUTE_IMAGE result_index1))))) 
   (to_rep1 (last (rt (to_string (attr__ATTRIBUTE_IMAGE result_index1))))))
-  (= o2 (+ (- (to_rep1
-              (last (rt (to_string (attr__ATTRIBUTE_IMAGE result_index1))))) 
+  (= o (+ (- (to_rep1
+             (last (rt (to_string (attr__ATTRIBUTE_IMAGE result_index1))))) 
   (to_rep1 (first (rt (to_string (attr__ATTRIBUTE_IMAGE result_index1)))))) 1))))
 
 ;; H
@@ -833,25 +806,25 @@
   (<= (to_rep1
       (first (rt (to_string (attr__ATTRIBUTE_IMAGE result_index1))))) 
   (to_rep1 (last (rt (to_string (attr__ATTRIBUTE_IMAGE result_index1)))))))
-  (= o2 0)))
+  (= o 0)))
 
 ;; H
-  (assert (=> (<= 1 32) (= o3 (+ (- 32 1) 1))))
+  (assert (=> (<= 1 32) (= o1 (+ (- 32 1) 1))))
 
 ;; H
-  (assert (=> (not (<= 1 32)) (= o3 0)))
+  (assert (=> (not (<= 1 32)) (= o1 0)))
 
 ;; H
-  (assert (= o4 (+ o3 o2)))
+  (assert (= o2 (+ o1 o)))
 
 ;; H
-  (assert (= o5 (+ 1 o4)))
+  (assert (= o3 (+ 1 o2)))
 
 ;; H
-  (assert (= o6 (- o5 1)))
+  (assert (= o4 (- o3 1)))
 
 (assert
 ;; WP_parameter_def
  ;; File "generic_searchers.ads", line 12, characters 0-0
-  (not (in_range1 o6)))
+  (not (in_range1 o4)))
 (check-sat)

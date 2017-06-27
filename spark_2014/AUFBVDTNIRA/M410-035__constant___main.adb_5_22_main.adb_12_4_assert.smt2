@@ -48,8 +48,7 @@
 ;; f__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (f__function_guard (f us_void_param) us_void_param)
-     (= (f us_void_param) true)) :pattern ((f us_void_param)) )))
+  (! (= (f us_void_param) true) :pattern ((f us_void_param)) )))
 
 (declare-fun h (tuple0) Bool)
 
@@ -64,7 +63,7 @@
 (declare-fun g__function_guard (Bool tuple0) Bool)
 
 ;; e__def_axiom
-  (assert (and (g__function_guard (g Tuple0) Tuple0) (= e (g Tuple0))))
+  (assert (= e (g Tuple0)))
 
 (declare-fun k (tuple0) Bool)
 
@@ -76,8 +75,7 @@
 ;; k__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (k__function_guard (k us_void_param) us_void_param)
-     (= (k us_void_param) true)) :pattern ((k us_void_param)) )))
+  (! (= (k us_void_param) true) :pattern ((k us_void_param)) )))
 
 ;; h__post_axiom
   (assert true)
@@ -85,13 +83,11 @@
 ;; h__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (h__function_guard (h us_void_param) us_void_param)
-     (and (k__function_guard (k Tuple0) Tuple0)
-     (= (= (h us_void_param) true) (= (k Tuple0) true)))) :pattern ((h
-                                                                    us_void_param)) )))
+  (! (= (= (h us_void_param) true) (= (k Tuple0) true)) :pattern ((h
+                                                                  us_void_param)) )))
 
 ;; m__def_axiom
-  (assert (and (h__function_guard (h Tuple0) Tuple0) (= m (h Tuple0))))
+  (assert (= m (h Tuple0)))
 
 ;; g__post_axiom
   (assert true)
@@ -99,19 +95,14 @@
 ;; g__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (g__function_guard (g us_void_param) us_void_param)
-     (and (f__function_guard (f Tuple0) Tuple0)
-     (= (= (g us_void_param) true) (= (f Tuple0) true)))) :pattern ((g
-                                                                    us_void_param)) )))
+  (! (= (= (g us_void_param) true) (= (f Tuple0) true)) :pattern ((g
+                                                                  us_void_param)) )))
 
 ;; H
   (assert (= (g Tuple0) e))
 
 ;; H
   (assert (= (h Tuple0) m))
-
-;; H
-  (assert (f__function_guard (f Tuple0) Tuple0))
 
 ;; H
   (assert (= (f Tuple0) true))

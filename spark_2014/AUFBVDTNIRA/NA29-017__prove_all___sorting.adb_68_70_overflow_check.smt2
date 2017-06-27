@@ -415,19 +415,13 @@
 
 ;; H
   (assert
-  (and
   (= o8 (sorted (mk___t a (mk (to_rep a__first) (to_rep a__last))) o7
-        length2))
-  (sorted__function_guard o8
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) o7 length2)))
+        length2)))
 
 ;; H
   (assert
-  (and
   (= o6 (sorted (mk___t a (mk (to_rep a__first) (to_rep a__last))) a_first
-        length1))
-  (sorted__function_guard o6
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) a_first length1)))
+        length1)))
 
 ;; H
   (assert (and (= o4 (+ length1 length2)) (in_range1 (+ length1 length2))))

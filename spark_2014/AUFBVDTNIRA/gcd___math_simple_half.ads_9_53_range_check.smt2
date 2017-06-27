@@ -186,8 +186,7 @@
 ;; divides__def_axiom
   (assert
   (forall ((a Int) (b Int))
-  (! (=> (divides__function_guard (divides a b) a b)
-     (= (= (divides a b) true) (= (mod2 b a) 0))) :pattern ((divides a b)) )))
+  (! (= (= (divides a b) true) (= (mod2 b a) 0)) :pattern ((divides a b)) )))
 
 (declare-fun a () Int)
 
@@ -221,10 +220,6 @@
   (! (=> (in_range2 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
 
-(declare-fun first () Int)
-
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -255,13 +250,13 @@
 
 (declare-fun o1 () Int)
 
-(declare-fun temp___137 () Int)
+(declare-fun temp___132 () Int)
 
 (declare-fun o2 () Int)
 
 (declare-fun o3 () Int)
 
-(declare-fun temp___142 () Int)
+(declare-fun temp___135 () Int)
 
 (declare-fun o4 () Int)
 
@@ -373,28 +368,6 @@
 
 ;; H
   (assert (in_range1 b))
-
-;; H
-  (assert (divides__function_guard (divides o2 o3) o2 o3))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 (ite (< a b) a b))
-  x1 (ite (< a b) a b))))
-
-;; H
-  (assert (divides__function_guard (divides o2 o3) o2 o3))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 (ite (< a b) a b))
-  x1 (ite (< a b) a b))))
-
-;; H
-  (assert (forall ((x1 Int)) (divides__function_guard (divides x1 a) x1 a)))
-
-;; H
-  (assert (forall ((x1 Int)) (divides__function_guard (divides x1 b) x1 b)))
 
 ;; H
   (assert (and (= o (ite (< a b) a b)) (in_range1 (ite (< a b) a b))))
@@ -514,7 +487,7 @@
 ;; H
   (assert
   (=> (not (and (= (mod2 a c1) 0) (= (mod2 b c1) 0)))
-  (=> (and (<= r4b j2) (<= j2 (- (ite (< a b) a b) 1))) (= temp___137 j2))))
+  (=> (and (<= r4b j2) (<= j2 (- (ite (< a b) a b) 1))) (= temp___132 j2))))
 
 ;; H
   (assert
@@ -591,7 +564,7 @@
 ;; H
   (assert
   (=> (not (and (= (mod2 a c1) 0) (= (mod2 b c1) 0)))
-  (=> (< 1 c2) (= temp___142 c2))))
+  (=> (< 1 c2) (= temp___135 c2))))
 
 ;; H
   (assert
@@ -673,10 +646,7 @@
 
 ;; H
   (assert
-  (and
   (and (= result6 (divides (int__content math_simple_half__gcd__result7) a))
-  (divides__function_guard result6
-  (int__content math_simple_half__gcd__result7) a))
   (= (= result6 true)
   (= (mod2 a (int__content math_simple_half__gcd__result7)) 0))))
 
@@ -685,10 +655,7 @@
 
 ;; H
   (assert
-  (and
   (and (= result7 (divides (int__content math_simple_half__gcd__result7) b))
-  (divides__function_guard result7
-  (int__content math_simple_half__gcd__result7) b))
   (= (= result7 true)
   (= (mod2 b (int__content math_simple_half__gcd__result7)) 0))))
 

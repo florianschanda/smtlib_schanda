@@ -41,9 +41,6 @@
 ;; f__post_axiom
   (assert true)
 
-;; H
-  (assert (f__function_guard (f Tuple0) Tuple0))
-
 (assert
 ;; WP_parameter_def
  ;; File "p.adb", line 3, characters 0-0

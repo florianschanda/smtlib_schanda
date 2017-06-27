@@ -76,9 +76,8 @@
 ;; prim_func__def_axiom
   (assert
   (forall ((exprfun__t1_var t1))
-  (! (=> (prim_func__function_guard (prim_func exprfun__t1_var)
-     exprfun__t1_var) (= (prim_func exprfun__t1_var) exprfun__t1_var)) :pattern (
-  (prim_func exprfun__t1_var)) )))
+  (! (= (prim_func exprfun__t1_var) exprfun__t1_var) :pattern ((prim_func
+                                                               exprfun__t1_var)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -97,7 +96,6 @@
  ;; File "exprfun.adb", line 5, characters 0-0
   (not
   (not
-  (and
-  (and (and (= o (prim_func t1_var)) (prim_func__function_guard o t1_var))
-  (= o t1_var)) (and (= result x) (= x1 o))))))
+  (and (and (= o (prim_func t1_var)) (= o t1_var))
+  (and (= result x) (= x1 o))))))
 (check-sat)

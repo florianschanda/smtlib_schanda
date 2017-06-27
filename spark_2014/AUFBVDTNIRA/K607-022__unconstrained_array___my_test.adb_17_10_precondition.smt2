@@ -531,8 +531,6 @@
      (< (to_rep3 (select b (+ i 1))) (to_rep3 (select a (+ j 1))))))))))) :pattern (
   (compare1 a a_first a_last b b_first b_last)) ))))
 
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -555,7 +553,7 @@
 
 (declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -565,7 +563,7 @@
   (! (=> (in_range1 f)
      (=> (in_range1 l)
      (and (= (to_rep1 (first2 (mk1 f l))) f)
-     (= (to_rep1 (last3 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (= (to_rep1 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -582,10 +580,10 @@
 
 (define-fun first3 ((a us_t1)) Int (to_rep1 (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep1 (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last4 a))
-                                    (+ (- (last4 a) (first3 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size1 () Int)
 
@@ -620,8 +618,8 @@
 
 (define-fun bool_eq9 ((x us_t1)
   (y us_t1)) Bool (bool_eq7 (elts1 x) (to_rep1 (first2 (rt1 x)))
-                  (to_rep1 (last3 (rt1 x))) (elts1 y)
-                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last3 (rt1 y)))))
+                  (to_rep1 (last2 (rt1 x))) (elts1 y)
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
 (declare-fun user_eq7 (us_t1 us_t1) Bool)
 
@@ -748,14 +746,14 @@
                                       (first3
                                       (rec__simple_unc_arrays__table__v
                                       (us_split_fields1 temp___expr_150)))
-                                      (last4
+                                      (last3
                                       (rec__simple_unc_arrays__table__v
                                       (us_split_fields1 temp___expr_150))))
                                       (and
                                       (= (first3
                                          (rec__simple_unc_arrays__table__v
                                          (us_split_fields1 temp___expr_150))) 1)
-                                      (= (last4
+                                      (= (last3
                                          (rec__simple_unc_arrays__table__v
                                          (us_split_fields1 temp___expr_150))) 
                                       (to_rep2 temp___151))))))
@@ -771,14 +769,11 @@
 ;; add__post_axiom
   (assert
   (forall ((a us_rep) (b us_rep))
-  (! (and (same_range__function_guard (same_range a b) a b)
-     (=>
+  (! (=>
      (and
      (and (dynamic_invariant a true true true) (dynamic_invariant b true true
      true)) (= (same_range a b) true))
      (let ((result (add a b)))
-     (and (same_range__function_guard (same_range result a) result a)
-     (=> (add__function_guard result a b)
      (and
      (and (= (same_range result a) true)
      (forall ((j Int))
@@ -787,18 +782,18 @@
      (<= j (to_rep2
            (rec__simple_unc_arrays__table__last (us_split_discrs1 a)))))
      (= (to_rep3
-        (let ((temp___173 (rec__simple_unc_arrays__table__v
+        (let ((temp___170 (rec__simple_unc_arrays__table__v
                           (us_split_fields1 result))))
-        (select (to_array1 temp___173) j))) (+ (to_rep3
-                                               (let ((temp___174 (rec__simple_unc_arrays__table__v
+        (select (to_array1 temp___170) j))) (+ (to_rep3
+                                               (let ((temp___171 (rec__simple_unc_arrays__table__v
                                                                  (us_split_fields1
                                                                  a))))
-                                               (select (to_array1 temp___174) j))) 
+                                               (select (to_array1 temp___171) j))) 
      (to_rep3
-     (let ((temp___175 (rec__simple_unc_arrays__table__v
+     (let ((temp___172 (rec__simple_unc_arrays__table__v
                        (us_split_fields1 b))))
-     (select (to_array1 temp___175) j)))))))) (dynamic_invariant result true
-     false true))))))) :pattern ((add a b)) )))
+     (select (to_array1 temp___172) j)))))))) (dynamic_invariant result true
+     false true)))) :pattern ((add a b)) )))
 
 (define-fun dynamic_invariant1 ((temp___expr_139 Int)
   (temp___is_init_136 Bool) (temp___skip_constant_137 Bool)
@@ -818,10 +813,8 @@
 ;; min__post_axiom
   (assert
   (forall ((a us_rep))
-  (! (and (empty__function_guard (empty a) a)
-     (=> (and (dynamic_invariant a true true true) (not (= (empty a) true)))
+  (! (=> (and (dynamic_invariant a true true true) (not (= (empty a) true)))
      (let ((result (min a)))
-     (=> (min__function_guard result a)
      (and
      (and
      (forall ((j Int))
@@ -830,19 +823,19 @@
      (<= j (to_rep2
            (rec__simple_unc_arrays__table__last (us_split_discrs1 a)))))
      (<= result (to_rep3
-                (let ((temp___200 (rec__simple_unc_arrays__table__v
+                (let ((temp___194 (rec__simple_unc_arrays__table__v
                                   (us_split_fields1 a))))
-                (select (to_array1 temp___200) j))))))
+                (select (to_array1 temp___194) j))))))
      (exists ((j Int))
      (and
      (and (<= 1 j)
      (<= j (to_rep2
            (rec__simple_unc_arrays__table__last (us_split_discrs1 a)))))
      (= result (to_rep3
-               (let ((temp___199 (rec__simple_unc_arrays__table__v
+               (let ((temp___193 (rec__simple_unc_arrays__table__v
                                  (us_split_fields1 a))))
-               (select (to_array1 temp___199) j)))))))
-     (dynamic_invariant1 result true false true)))))) :pattern ((min a)) )))
+               (select (to_array1 temp___193) j)))))))
+     (dynamic_invariant1 result true false true)))) :pattern ((min a)) )))
 
 (declare-fun max (us_rep) Int)
 
@@ -851,10 +844,8 @@
 ;; max__post_axiom
   (assert
   (forall ((a us_rep))
-  (! (and (empty__function_guard (empty a) a)
-     (=> (and (dynamic_invariant a true true true) (not (= (empty a) true)))
+  (! (=> (and (dynamic_invariant a true true true) (not (= (empty a) true)))
      (let ((result (max a)))
-     (=> (max__function_guard result a)
      (and
      (and
      (forall ((j Int))
@@ -863,19 +854,19 @@
      (<= j (to_rep2
            (rec__simple_unc_arrays__table__last (us_split_discrs1 a)))))
      (<= (to_rep3
-         (let ((temp___210 (rec__simple_unc_arrays__table__v
+         (let ((temp___202 (rec__simple_unc_arrays__table__v
                            (us_split_fields1 a))))
-         (select (to_array1 temp___210) j))) result)))
+         (select (to_array1 temp___202) j))) result)))
      (exists ((j Int))
      (and
      (and (<= 1 j)
      (<= j (to_rep2
            (rec__simple_unc_arrays__table__last (us_split_discrs1 a)))))
      (= result (to_rep3
-               (let ((temp___209 (rec__simple_unc_arrays__table__v
+               (let ((temp___201 (rec__simple_unc_arrays__table__v
                                  (us_split_fields1 a))))
-               (select (to_array1 temp___209) j)))))))
-     (dynamic_invariant1 result true false true)))))) :pattern ((max a)) )))
+               (select (to_array1 temp___201) j)))))))
+     (dynamic_invariant1 result true false true)))) :pattern ((max a)) )))
 
 (declare-fun average (us_rep) Int)
 
@@ -884,14 +875,10 @@
 ;; average__post_axiom
   (assert
   (forall ((a us_rep))
-  (! (and (empty__function_guard (empty a) a)
-     (=> (and (dynamic_invariant a true true true) (not (= (empty a) true)))
+  (! (=> (and (dynamic_invariant a true true true) (not (= (empty a) true)))
      (let ((result (average a)))
-     (and (min__function_guard (min a) a)
-     (and (max__function_guard (max a) a)
-     (=> (average__function_guard result a)
      (and (and (<= (min a) result) (<= result (max a))) (dynamic_invariant1
-     result true false true)))))))) :pattern ((average a)) )))
+     result true false true)))) :pattern ((average a)) )))
 
 (define-fun dynamic_invariant2 ((temp___expr_33 Int) (temp___is_init_30 Bool)
   (temp___skip_constant_31 Bool)
@@ -916,14 +903,6 @@
      (and (dynamic_invariant a true true true) (dynamic_invariant1 v true
      true true))
      (let ((result (search a v)))
-     (and (not_in__function_guard
-     (not_in a v 1
-     (to_rep2 (rec__simple_unc_arrays__table__last (us_split_discrs1 a)))) a
-     v 1
-     (to_rep2 (rec__simple_unc_arrays__table__last (us_split_discrs1 a))))
-     (and (not_in__function_guard (not_in a v 1 (- result 1)) a v 1
-     (- result 1))
-     (=> (search__function_guard result a v)
      (and
      (or
      (and (= result 0)
@@ -931,11 +910,11 @@
         (to_rep2 (rec__simple_unc_arrays__table__last (us_split_discrs1 a)))) true))
      (and
      (= (to_rep3
-        (let ((temp___235 (rec__simple_unc_arrays__table__v
+        (let ((temp___218 (rec__simple_unc_arrays__table__v
                           (us_split_fields1 a))))
-        (select (to_array1 temp___235) result))) v)
+        (select (to_array1 temp___218) result))) v)
      (= (not_in a v 1 (- result 1)) true))) (dynamic_invariant2 result true
-     false true))))))) :pattern ((search a v)) ))))
+     false true)))) :pattern ((search a v)) ))))
 
 (declare-fun bubble_sort (us_rep) us_rep)
 
@@ -1111,7 +1090,11 @@
 (declare-datatypes () ((t1b__ref (mk_t1b__ref (t1b__content us_rep1)))))
 (define-fun t1b__ref___projection ((a t1b__ref)) us_rep1 (t1b__content a))
 
-(declare-sort t3b 0)
+(declare-fun t1__split_discrs () us_split_discrs)
+
+(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+
+(declare-sort tT6bP1 0)
 
 (define-fun in_range8 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
@@ -1123,39 +1106,16 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
 
-(declare-fun user_eq12 (t3b t3b) Bool)
+(declare-fun user_eq12 (tT6bP1 tT6bP1) Bool)
 
-(declare-fun dummy12 () t3b)
-
-(declare-datatypes () ((t3b__ref (mk_t3b__ref (t3b__content t3b)))))
-(define-fun t3b__ref___projection ((a t3b__ref)) t3b (t3b__content a))
-
-(declare-fun t1__split_discrs () us_split_discrs)
-
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
-
-(declare-sort tT6bP1 0)
-
-(define-fun in_range9 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq14 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE9 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Int)
-
-(declare-fun user_eq13 (tT6bP1 tT6bP1) Bool)
-
-(declare-fun dummy13 () tT6bP1)
+(declare-fun dummy12 () tT6bP1)
 
 (declare-datatypes ()
 ((tT6bP1__ref (mk_tT6bP1__ref (tT6bP1__content tT6bP1)))))
 (define-fun tT6bP1__ref___projection ((a tT6bP1__ref)) tT6bP1 (tT6bP1__content
                                                               a))
 
-(declare-fun dummy14 () (Array Int value))
+(declare-fun dummy13 () (Array Int value))
 
 (declare-fun value__size5 () Int)
 
@@ -1188,7 +1148,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int value))) (<= 0 (object__alignment5 a))))
 
-(declare-fun user_eq14 ((Array Int value) (Array Int value)) Bool)
+(declare-fun user_eq13 ((Array Int value) (Array Int value)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields4
@@ -1225,7 +1185,7 @@
                                                             r))))
                                           (to_array1 temp___134)))))
 
-(define-fun bool_eq15 ((a us_rep2)
+(define-fun bool_eq14 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
                          (= (to_rep2
                             (rec__simple_unc_arrays__table__last
@@ -1239,9 +1199,9 @@
                             (us_split_fields5 b)) 1 10) true))
                     true false))
 
-(declare-fun user_eq15 (us_rep2 us_rep2) Bool)
+(declare-fun user_eq14 (us_rep2 us_rep2) Bool)
 
-(define-fun in_range10 ((rec__simple_unc_arrays__table__last1 Int)
+(define-fun in_range9 ((rec__simple_unc_arrays__table__last1 Int)
   (a us_rep)) Bool (= rec__simple_unc_arrays__table__last1 (to_rep2
                                                            (rec__simple_unc_arrays__table__last
                                                            (us_split_discrs1
@@ -1299,29 +1259,10 @@
 ;; simple_unc_arrays__table__v__position_axiom
   (assert (<= 0 simple_unc_arrays__table__v__position2))
 
-(declare-fun dummy15 () us_rep2)
+(declare-fun dummy14 () us_rep2)
 
 (declare-datatypes () ((t5b__ref (mk_t5b__ref (t5b__content us_rep2)))))
 (define-fun t5b__ref___projection ((a t5b__ref)) us_rep2 (t5b__content a))
-
-(declare-sort t7b 0)
-
-(define-fun in_range11 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq16 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE10 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) Int)
-
-(declare-fun user_eq16 (t7b t7b) Bool)
-
-(declare-fun dummy16 () t7b)
-
-(declare-datatypes () ((t7b__ref (mk_t7b__ref (t7b__content t7b)))))
-(define-fun t7b__ref___projection ((a t7b__ref)) t7b (t7b__content a))
 
 (declare-fun t2__split_discrs () us_split_discrs)
 
@@ -1329,26 +1270,26 @@
 
 (declare-sort tT9bP1 0)
 
-(define-fun in_range12 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range10 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(define-fun bool_eq17 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq15 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE11 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE9 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check11 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE11 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Int)
 
-(declare-fun user_eq17 (tT9bP1 tT9bP1) Bool)
+(declare-fun user_eq15 (tT9bP1 tT9bP1) Bool)
 
-(declare-fun dummy17 () tT9bP1)
+(declare-fun dummy15 () tT9bP1)
 
 (declare-datatypes ()
 ((tT9bP1__ref (mk_tT9bP1__ref (tT9bP1__content tT9bP1)))))
 (define-fun tT9bP1__ref___projection ((a tT9bP1__ref)) tT9bP1 (tT9bP1__content
                                                               a))
 
-(declare-fun dummy18 () (Array Int value))
+(declare-fun dummy16 () (Array Int value))
 
 (declare-fun value__size7 () Int)
 
@@ -1381,7 +1322,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int value))) (<= 0 (object__alignment7 a))))
 
-(declare-fun user_eq18 ((Array Int value) (Array Int value)) Bool)
+(declare-fun user_eq16 ((Array Int value) (Array Int value)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields6
@@ -1418,7 +1359,7 @@
                                                             r))))
                                           (to_array1 temp___135)))))
 
-(define-fun bool_eq18 ((a us_rep3)
+(define-fun bool_eq16 ((a us_rep3)
   (b us_rep3)) Bool (ite (and
                          (= (to_rep2
                             (rec__simple_unc_arrays__table__last
@@ -1432,9 +1373,9 @@
                             (us_split_fields7 b)) 1 10) true))
                     true false))
 
-(declare-fun user_eq19 (us_rep3 us_rep3) Bool)
+(declare-fun user_eq17 (us_rep3 us_rep3) Bool)
 
-(define-fun in_range13 ((rec__simple_unc_arrays__table__last1 Int)
+(define-fun in_range11 ((rec__simple_unc_arrays__table__last1 Int)
   (a us_rep)) Bool (= rec__simple_unc_arrays__table__last1 (to_rep2
                                                            (rec__simple_unc_arrays__table__last
                                                            (us_split_discrs1
@@ -1492,39 +1433,39 @@
 ;; simple_unc_arrays__table__v__position_axiom
   (assert (<= 0 simple_unc_arrays__table__v__position3))
 
-(declare-fun dummy19 () us_rep3)
+(declare-fun dummy17 () us_rep3)
 
 (declare-datatypes () ((tt3S__ref (mk_tt3S__ref (tt3S__content us_rep3)))))
 (define-fun tt3S__ref___projection ((a tt3S__ref)) us_rep3 (tt3S__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_301 us_rep3)
-  (temp___is_init_298 Bool) (temp___skip_constant_299 Bool)
-  (temp___do_toplevel_300 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_299 true))
-                                      (in_range13 10
-                                      (to_base2 temp___expr_301))))
+(define-fun dynamic_invariant3 ((temp___expr_283 us_rep3)
+  (temp___is_init_280 Bool) (temp___skip_constant_281 Bool)
+  (temp___do_toplevel_282 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_281 true))
+                                      (in_range11 10
+                                      (to_base2 temp___expr_283))))
 
-(define-fun default_initial_assumption ((temp___expr_304 us_rep3)
-  (temp___skip_top_level_305 Bool)) Bool (= (to_rep2
+(define-fun default_initial_assumption ((temp___expr_286 us_rep3)
+  (temp___skip_top_level_287 Bool)) Bool (= (to_rep2
                                             (rec__simple_unc_arrays__table__last
                                             (us_split_discrs4
-                                            temp___expr_304))) 10))
+                                            temp___expr_286))) 10))
 
 (declare-fun t3__split_discrs () us_split_discrs)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(declare-fun temp___310 (Int Int Int Int Int Int Int Int Int
+(declare-fun temp___292 (Int Int Int Int Int Int Int Int Int
   Int) (Array Int value))
 
 ;; def_axiom
   (assert
-  (forall ((temp___312 Int) (temp___313 Int) (temp___314 Int)
-  (temp___315 Int) (temp___316 Int) (temp___317 Int) (temp___318 Int)
-  (temp___319 Int) (temp___320 Int) (temp___321 Int))
-  (let ((temp___311 (temp___310 temp___312 temp___313 temp___314 temp___315
-                    temp___316 temp___317 temp___318 temp___319 temp___320
-                    temp___321)))
+  (forall ((temp___294 Int) (temp___295 Int) (temp___296 Int)
+  (temp___297 Int) (temp___298 Int) (temp___299 Int) (temp___300 Int)
+  (temp___301 Int) (temp___302 Int) (temp___303 Int))
+  (let ((temp___293 (temp___292 temp___294 temp___295 temp___296 temp___297
+                    temp___298 temp___299 temp___300 temp___301 temp___302
+                    temp___303)))
   (and
   (and
   (and
@@ -1533,28 +1474,28 @@
   (and
   (and
   (and
-  (and (= (select temp___311 1) (of_rep3 temp___312))
-  (= (select temp___311 2) (of_rep3 temp___313)))
-  (= (select temp___311 3) (of_rep3 temp___314)))
-  (= (select temp___311 4) (of_rep3 temp___315)))
-  (= (select temp___311 5) (of_rep3 temp___316)))
-  (= (select temp___311 6) (of_rep3 temp___317)))
-  (= (select temp___311 7) (of_rep3 temp___318)))
-  (= (select temp___311 8) (of_rep3 temp___319)))
-  (= (select temp___311 9) (of_rep3 temp___320)))
-  (= (select temp___311 10) (of_rep3 temp___321))))))
+  (and (= (select temp___293 1) (of_rep3 temp___294))
+  (= (select temp___293 2) (of_rep3 temp___295)))
+  (= (select temp___293 3) (of_rep3 temp___296)))
+  (= (select temp___293 4) (of_rep3 temp___297)))
+  (= (select temp___293 5) (of_rep3 temp___298)))
+  (= (select temp___293 6) (of_rep3 temp___299)))
+  (= (select temp___293 7) (of_rep3 temp___300)))
+  (= (select temp___293 8) (of_rep3 temp___301)))
+  (= (select temp___293 9) (of_rep3 temp___302)))
+  (= (select temp___293 10) (of_rep3 temp___303))))))
 
-(declare-fun temp___323 (Int Int Int Int Int Int Int Int Int
+(declare-fun temp___305 (Int Int Int Int Int Int Int Int Int
   Int) (Array Int value))
 
 ;; def_axiom
   (assert
-  (forall ((temp___325 Int) (temp___326 Int) (temp___327 Int)
-  (temp___328 Int) (temp___329 Int) (temp___330 Int) (temp___331 Int)
-  (temp___332 Int) (temp___333 Int) (temp___334 Int))
-  (let ((temp___324 (temp___323 temp___325 temp___326 temp___327 temp___328
-                    temp___329 temp___330 temp___331 temp___332 temp___333
-                    temp___334)))
+  (forall ((temp___307 Int) (temp___308 Int) (temp___309 Int)
+  (temp___310 Int) (temp___311 Int) (temp___312 Int) (temp___313 Int)
+  (temp___314 Int) (temp___315 Int) (temp___316 Int))
+  (let ((temp___306 (temp___305 temp___307 temp___308 temp___309 temp___310
+                    temp___311 temp___312 temp___313 temp___314 temp___315
+                    temp___316)))
   (and
   (and
   (and
@@ -1563,20 +1504,20 @@
   (and
   (and
   (and
-  (and (= (select temp___324 1) (of_rep3 temp___325))
-  (= (select temp___324 2) (of_rep3 temp___326)))
-  (= (select temp___324 3) (of_rep3 temp___327)))
-  (= (select temp___324 4) (of_rep3 temp___328)))
-  (= (select temp___324 5) (of_rep3 temp___329)))
-  (= (select temp___324 6) (of_rep3 temp___330)))
-  (= (select temp___324 7) (of_rep3 temp___331)))
-  (= (select temp___324 8) (of_rep3 temp___332)))
-  (= (select temp___324 9) (of_rep3 temp___333)))
-  (= (select temp___324 10) (of_rep3 temp___334))))))
+  (and (= (select temp___306 1) (of_rep3 temp___307))
+  (= (select temp___306 2) (of_rep3 temp___308)))
+  (= (select temp___306 3) (of_rep3 temp___309)))
+  (= (select temp___306 4) (of_rep3 temp___310)))
+  (= (select temp___306 5) (of_rep3 temp___311)))
+  (= (select temp___306 6) (of_rep3 temp___312)))
+  (= (select temp___306 7) (of_rep3 temp___313)))
+  (= (select temp___306 8) (of_rep3 temp___314)))
+  (= (select temp___306 9) (of_rep3 temp___315)))
+  (= (select temp___306 10) (of_rep3 temp___316))))))
 
-(declare-fun temp___String_Literal_339 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_321 (tuple0) (Array Int character))
 
-;; temp___String_Literal_339__def_axiom
+;; temp___String_Literal_321__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -1584,17 +1525,17 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_339 us_void_param) 1)) 77)
-     (= (to_rep (select (temp___String_Literal_339 us_void_param) 2)) 97))
-     (= (to_rep (select (temp___String_Literal_339 us_void_param) 3)) 120))
-     (= (to_rep (select (temp___String_Literal_339 us_void_param) 4)) 32))
-     (= (to_rep (select (temp___String_Literal_339 us_void_param) 5)) 61))
-     (= (to_rep (select (temp___String_Literal_339 us_void_param) 6)) 32)) :pattern (
-  (temp___String_Literal_339 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_321 us_void_param) 1)) 77)
+     (= (to_rep (select (temp___String_Literal_321 us_void_param) 2)) 97))
+     (= (to_rep (select (temp___String_Literal_321 us_void_param) 3)) 120))
+     (= (to_rep (select (temp___String_Literal_321 us_void_param) 4)) 32))
+     (= (to_rep (select (temp___String_Literal_321 us_void_param) 5)) 61))
+     (= (to_rep (select (temp___String_Literal_321 us_void_param) 6)) 32)) :pattern (
+  (temp___String_Literal_321 us_void_param)) )))
 
-(declare-fun temp___String_Literal_340 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_322 (tuple0) (Array Int character))
 
-;; temp___String_Literal_340__def_axiom
+;; temp___String_Literal_322__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -1602,43 +1543,17 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_340 us_void_param) 1)) 77)
-     (= (to_rep (select (temp___String_Literal_340 us_void_param) 2)) 105))
-     (= (to_rep (select (temp___String_Literal_340 us_void_param) 3)) 110))
-     (= (to_rep (select (temp___String_Literal_340 us_void_param) 4)) 32))
-     (= (to_rep (select (temp___String_Literal_340 us_void_param) 5)) 61))
-     (= (to_rep (select (temp___String_Literal_340 us_void_param) 6)) 32)) :pattern (
-  (temp___String_Literal_340 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_322 us_void_param) 1)) 77)
+     (= (to_rep (select (temp___String_Literal_322 us_void_param) 2)) 105))
+     (= (to_rep (select (temp___String_Literal_322 us_void_param) 3)) 110))
+     (= (to_rep (select (temp___String_Literal_322 us_void_param) 4)) 32))
+     (= (to_rep (select (temp___String_Literal_322 us_void_param) 5)) 61))
+     (= (to_rep (select (temp___String_Literal_322 us_void_param) 6)) 32)) :pattern (
+  (temp___String_Literal_322 us_void_param)) )))
 
-(declare-fun temp___String_Literal_341 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_323 (tuple0) (Array Int character))
 
-;; temp___String_Literal_341__def_axiom
-  (assert
-  (forall ((us_void_param tuple0))
-  (! (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (= (to_rep (select (temp___String_Literal_341 us_void_param) 1)) 65)
-     (= (to_rep (select (temp___String_Literal_341 us_void_param) 2)) 118))
-     (= (to_rep (select (temp___String_Literal_341 us_void_param) 3)) 101))
-     (= (to_rep (select (temp___String_Literal_341 us_void_param) 4)) 114))
-     (= (to_rep (select (temp___String_Literal_341 us_void_param) 5)) 97))
-     (= (to_rep (select (temp___String_Literal_341 us_void_param) 6)) 103))
-     (= (to_rep (select (temp___String_Literal_341 us_void_param) 7)) 101))
-     (= (to_rep (select (temp___String_Literal_341 us_void_param) 8)) 32))
-     (= (to_rep (select (temp___String_Literal_341 us_void_param) 9)) 61))
-     (= (to_rep (select (temp___String_Literal_341 us_void_param) 10)) 32)) :pattern (
-  (temp___String_Literal_341 us_void_param)) )))
-
-(declare-fun temp___String_Literal_342 (tuple0) (Array Int character))
-
-;; temp___String_Literal_342__def_axiom
+;; temp___String_Literal_323__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -1650,27 +1565,21 @@
      (and
      (and
      (and
-     (and
-     (and
-     (and
-     (= (to_rep (select (temp___String_Literal_342 us_void_param) 1)) 70)
-     (= (to_rep (select (temp___String_Literal_342 us_void_param) 2)) 105))
-     (= (to_rep (select (temp___String_Literal_342 us_void_param) 3)) 110))
-     (= (to_rep (select (temp___String_Literal_342 us_void_param) 4)) 100))
-     (= (to_rep (select (temp___String_Literal_342 us_void_param) 5)) 32))
-     (= (to_rep (select (temp___String_Literal_342 us_void_param) 6)) 48))
-     (= (to_rep (select (temp___String_Literal_342 us_void_param) 7)) 32))
-     (= (to_rep (select (temp___String_Literal_342 us_void_param) 8)) 105))
-     (= (to_rep (select (temp___String_Literal_342 us_void_param) 9)) 110))
-     (= (to_rep (select (temp___String_Literal_342 us_void_param) 10)) 32))
-     (= (to_rep (select (temp___String_Literal_342 us_void_param) 11)) 84))
-     (= (to_rep (select (temp___String_Literal_342 us_void_param) 12)) 49))
-     (= (to_rep (select (temp___String_Literal_342 us_void_param) 13)) 32)) :pattern (
-  (temp___String_Literal_342 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_323 us_void_param) 1)) 65)
+     (= (to_rep (select (temp___String_Literal_323 us_void_param) 2)) 118))
+     (= (to_rep (select (temp___String_Literal_323 us_void_param) 3)) 101))
+     (= (to_rep (select (temp___String_Literal_323 us_void_param) 4)) 114))
+     (= (to_rep (select (temp___String_Literal_323 us_void_param) 5)) 97))
+     (= (to_rep (select (temp___String_Literal_323 us_void_param) 6)) 103))
+     (= (to_rep (select (temp___String_Literal_323 us_void_param) 7)) 101))
+     (= (to_rep (select (temp___String_Literal_323 us_void_param) 8)) 32))
+     (= (to_rep (select (temp___String_Literal_323 us_void_param) 9)) 61))
+     (= (to_rep (select (temp___String_Literal_323 us_void_param) 10)) 32)) :pattern (
+  (temp___String_Literal_323 us_void_param)) )))
 
-(declare-fun temp___String_Literal_343 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_324 (tuple0) (Array Int character))
 
-;; temp___String_Literal_343__def_axiom
+;; temp___String_Literal_324__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -1685,20 +1594,52 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_343 us_void_param) 1)) 70)
-     (= (to_rep (select (temp___String_Literal_343 us_void_param) 2)) 105))
-     (= (to_rep (select (temp___String_Literal_343 us_void_param) 3)) 110))
-     (= (to_rep (select (temp___String_Literal_343 us_void_param) 4)) 100))
-     (= (to_rep (select (temp___String_Literal_343 us_void_param) 5)) 32))
-     (= (to_rep (select (temp___String_Literal_343 us_void_param) 6)) 57))
-     (= (to_rep (select (temp___String_Literal_343 us_void_param) 7)) 32))
-     (= (to_rep (select (temp___String_Literal_343 us_void_param) 8)) 105))
-     (= (to_rep (select (temp___String_Literal_343 us_void_param) 9)) 110))
-     (= (to_rep (select (temp___String_Literal_343 us_void_param) 10)) 32))
-     (= (to_rep (select (temp___String_Literal_343 us_void_param) 11)) 84))
-     (= (to_rep (select (temp___String_Literal_343 us_void_param) 12)) 50))
-     (= (to_rep (select (temp___String_Literal_343 us_void_param) 13)) 32)) :pattern (
-  (temp___String_Literal_343 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_324 us_void_param) 1)) 70)
+     (= (to_rep (select (temp___String_Literal_324 us_void_param) 2)) 105))
+     (= (to_rep (select (temp___String_Literal_324 us_void_param) 3)) 110))
+     (= (to_rep (select (temp___String_Literal_324 us_void_param) 4)) 100))
+     (= (to_rep (select (temp___String_Literal_324 us_void_param) 5)) 32))
+     (= (to_rep (select (temp___String_Literal_324 us_void_param) 6)) 48))
+     (= (to_rep (select (temp___String_Literal_324 us_void_param) 7)) 32))
+     (= (to_rep (select (temp___String_Literal_324 us_void_param) 8)) 105))
+     (= (to_rep (select (temp___String_Literal_324 us_void_param) 9)) 110))
+     (= (to_rep (select (temp___String_Literal_324 us_void_param) 10)) 32))
+     (= (to_rep (select (temp___String_Literal_324 us_void_param) 11)) 84))
+     (= (to_rep (select (temp___String_Literal_324 us_void_param) 12)) 49))
+     (= (to_rep (select (temp___String_Literal_324 us_void_param) 13)) 32)) :pattern (
+  (temp___String_Literal_324 us_void_param)) )))
+
+(declare-fun temp___String_Literal_325 (tuple0) (Array Int character))
+
+;; temp___String_Literal_325__def_axiom
+  (assert
+  (forall ((us_void_param tuple0))
+  (! (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (= (to_rep (select (temp___String_Literal_325 us_void_param) 1)) 70)
+     (= (to_rep (select (temp___String_Literal_325 us_void_param) 2)) 105))
+     (= (to_rep (select (temp___String_Literal_325 us_void_param) 3)) 110))
+     (= (to_rep (select (temp___String_Literal_325 us_void_param) 4)) 100))
+     (= (to_rep (select (temp___String_Literal_325 us_void_param) 5)) 32))
+     (= (to_rep (select (temp___String_Literal_325 us_void_param) 6)) 57))
+     (= (to_rep (select (temp___String_Literal_325 us_void_param) 7)) 32))
+     (= (to_rep (select (temp___String_Literal_325 us_void_param) 8)) 105))
+     (= (to_rep (select (temp___String_Literal_325 us_void_param) 9)) 110))
+     (= (to_rep (select (temp___String_Literal_325 us_void_param) 10)) 32))
+     (= (to_rep (select (temp___String_Literal_325 us_void_param) 11)) 84))
+     (= (to_rep (select (temp___String_Literal_325 us_void_param) 12)) 50))
+     (= (to_rep (select (temp___String_Literal_325 us_void_param) 13)) 32)) :pattern (
+  (temp___String_Literal_325 us_void_param)) )))
 
 (define-fun dynamic_invariant4 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -1734,9 +1675,8 @@
 ;; empty__def_axiom
   (assert
   (forall ((a us_rep))
-  (! (=> (empty__function_guard (empty a) a)
-     (= (= (empty a) true)
-     (< (to_rep2 (rec__simple_unc_arrays__table__last (us_split_discrs1 a))) 1))) :pattern (
+  (! (= (= (empty a) true)
+     (< (to_rep2 (rec__simple_unc_arrays__table__last (us_split_discrs1 a))) 1)) :pattern (
   (empty a)) )))
 
 ;; same_range__post_axiom
@@ -1745,10 +1685,9 @@
 ;; same_range__def_axiom
   (assert
   (forall ((a us_rep) (b us_rep))
-  (! (=> (same_range__function_guard (same_range a b) a b)
-     (= (= (same_range a b) true)
+  (! (= (= (same_range a b) true)
      (= (to_rep2 (rec__simple_unc_arrays__table__last (us_split_discrs1 a))) 
-     (to_rep2 (rec__simple_unc_arrays__table__last (us_split_discrs1 b)))))) :pattern (
+     (to_rep2 (rec__simple_unc_arrays__table__last (us_split_discrs1 b))))) :pattern (
   (same_range a b)) )))
 
 ;; not_in__post_axiom
@@ -1758,18 +1697,17 @@
   (assert
   (forall ((a us_rep))
   (forall ((v Int) (low Int) (up Int))
-  (! (=> (not_in__function_guard (not_in a v low up) a v low up)
-     (= (= (not_in a v low up) true)
+  (! (= (= (not_in a v low up) true)
      (or
      (< (to_rep2 (rec__simple_unc_arrays__table__last (us_split_discrs1 a))) up)
      (forall ((j Int))
      (=> (and (<= low j) (<= j up))
      (not
      (= (to_rep3
-        (let ((temp___228 (rec__simple_unc_arrays__table__v
+        (let ((temp___214 (rec__simple_unc_arrays__table__v
                           (us_split_fields1 a))))
-        (select (to_array1 temp___228) j))) v))))))) :pattern ((not_in a v
-                                                               low up)) ))))
+        (select (to_array1 temp___214) j))) v)))))) :pattern ((not_in a v low
+                                                              up)) ))))
 
 (declare-fun t1__split_fields () (Array Int value))
 
@@ -1781,15 +1719,11 @@
 
 (declare-fun o () natural)
 
-(declare-fun o1 () (Array Int value))
+(declare-fun o1 () natural)
 
-(declare-fun o2 () (Array Int value))
+(declare-fun o2 () natural)
 
-(declare-fun o3 () natural)
-
-(declare-fun o4 () natural)
-
-(declare-fun o5 () (Array Int value))
+(declare-fun o3 () (Array Int value))
 
 (declare-fun my_test__t1__assume () natural)
 
@@ -1797,31 +1731,31 @@
 
 (declare-fun my_test__t1__assume2 () t1)
 
+(declare-fun o4 () natural)
+
+(declare-fun o5 () natural)
+
 (declare-fun o6 () natural)
 
 (declare-fun o7 () (Array Int value))
 
-(declare-fun o8 () (Array Int value))
+(declare-fun my_test__t2__assume () natural)
 
-(declare-fun o9 () natural)
+(declare-fun my_test__t2__assume1 () (Array Int value))
 
-(declare-fun o10 () natural)
-
-(declare-fun o11 () (Array Int value))
-
-(declare-fun my_test__t2__assume () us_rep)
+(declare-fun my_test__t2__assume2 () t1)
 
 (declare-fun us () Int)
 
+(declare-fun o8 () Int)
+
+(declare-fun o9 () Int)
+
+(declare-fun o10 () Int)
+
+(declare-fun o11 () Int)
+
 (declare-fun o12 () Int)
-
-(declare-fun o13 () Int)
-
-(declare-fun o14 () Int)
-
-(declare-fun o15 () Int)
-
-(declare-fun o16 () Int)
 
 (declare-fun result () us_split_fields__ref)
 
@@ -1832,28 +1766,22 @@
 (declare-fun t2__split_fields2 () us_split_fields)
 
 ;; H
-  (assert (= o1 (temp___310 5 1 3 0 9 8 2 7 4 6)))
-
-;; H
-  (assert (= o1 o2))
-
-;; H
   (assert (= (to_rep2 o) 10))
 
 ;; H
-  (assert (= o o3))
+  (assert (= o o1))
 
 ;; H
-  (assert (= o4 o3))
+  (assert (= o2 o1))
 
 ;; H
-  (assert (= o5 o2))
+  (assert (= (temp___292 5 1 3 0 9 8 2 7 4 6) o3))
 
 ;; H
-  (assert (= o4 my_test__t1__assume))
+  (assert (= o2 my_test__t1__assume))
 
 ;; H
-  (assert (= o5 my_test__t1__assume1))
+  (assert (= o3 my_test__t1__assume1))
 
 ;; H
   (assert (= (mk1 1 10) my_test__t1__assume2))
@@ -1876,27 +1804,25 @@
   true false true))
 
 ;; H
-  (assert (= o7 (temp___323 4 8 6 9 0 1 7 2 5 3)))
+  (assert (= (to_rep2 o4) 10))
 
 ;; H
-  (assert (= o7 o8))
+  (assert (= o4 o5))
 
 ;; H
-  (assert (= (to_rep2 o6) 10))
+  (assert (= o6 o5))
 
 ;; H
-  (assert (= o6 o9))
+  (assert (= (temp___305 4 8 6 9 0 1 7 2 5 3) o7))
 
 ;; H
-  (assert (= o10 o9))
+  (assert (= o6 my_test__t2__assume))
 
 ;; H
-  (assert (= o11 o8))
+  (assert (= o7 my_test__t2__assume1))
 
 ;; H
-  (assert
-  (= my_test__t2__assume (mk___rep (mk___split_discrs o10)
-                         (mk___split_fields (mk___t1 o11 (mk1 1 10))))))
+  (assert (= (mk1 1 10) my_test__t2__assume2))
 
 ;; H
   (assert
@@ -1904,10 +1830,12 @@
              (mk___split_fields (mk___t1 t2__split_fields t2__split_fields1)))))
 
 ;; H
-  (assert (= t2__split_fields2 (us_split_fields1 my_test__t2__assume)))
+  (assert
+  (= t2__split_fields2 (mk___split_fields
+                       (mk___t1 my_test__t2__assume1 my_test__t2__assume2))))
 
 ;; H
-  (assert (= t2__split_discrs (us_split_discrs1 my_test__t2__assume)))
+  (assert (= t2__split_discrs (mk___split_discrs my_test__t2__assume)))
 
 ;; H
   (assert (dynamic_invariant (mk___rep t2__split_discrs t2__split_fields2)
@@ -1926,10 +1854,8 @@
 
 ;; H
   (assert
-  (and
-  (and (= o12 (max (mk___rep t1__split_discrs t1__split_fields2)))
-  (max__function_guard o12 (mk___rep t1__split_discrs t1__split_fields2)))
-  (and (in_range5 o12)
+  (and (= o8 (max (mk___rep t1__split_discrs t1__split_fields2)))
+  (and (in_range5 o8)
   (and
   (forall ((j Int))
   (=>
@@ -1937,119 +1863,66 @@
   (<= j (to_rep2 (rec__simple_unc_arrays__table__last t1__split_discrs))))
   (<= (to_rep3
       (select (elts1 (rec__simple_unc_arrays__table__v t1__split_fields2)) j)) 
-  o12)))
+  o8)))
   (exists ((j Int))
   (and
   (and (<= 1 j)
   (<= j (to_rep2 (rec__simple_unc_arrays__table__last t1__split_discrs))))
-  (= o12 (to_rep3
-         (select (elts1 (rec__simple_unc_arrays__table__v t1__split_fields2)) j)))))))))
+  (= o8 (to_rep3
+        (select (elts1 (rec__simple_unc_arrays__table__v t1__split_fields2)) j)))))))))
 
 ;; H
   (assert
-  (and
-  (and (= o13 (min (mk___rep t1__split_discrs t1__split_fields2)))
-  (min__function_guard o13 (mk___rep t1__split_discrs t1__split_fields2)))
-  (and (in_range5 o13)
+  (and (= o9 (min (mk___rep t1__split_discrs t1__split_fields2)))
+  (and (in_range5 o9)
   (and
   (forall ((j Int))
   (=>
   (and (<= 1 j)
   (<= j (to_rep2 (rec__simple_unc_arrays__table__last t1__split_discrs))))
-  (<= o13 (to_rep3
-          (select (elts1
-                  (rec__simple_unc_arrays__table__v t1__split_fields2)) j)))))
+  (<= o9 (to_rep3
+         (select (elts1 (rec__simple_unc_arrays__table__v t1__split_fields2)) j)))))
   (exists ((j Int))
   (and
   (and (<= 1 j)
   (<= j (to_rep2 (rec__simple_unc_arrays__table__last t1__split_discrs))))
-  (= o13 (to_rep3
-         (select (elts1 (rec__simple_unc_arrays__table__v t1__split_fields2)) j)))))))))
-
-;; H
-  (assert (min__function_guard
-  (min (mk___rep t1__split_discrs t1__split_fields2))
-  (mk___rep t1__split_discrs t1__split_fields2)))
-
-;; H
-  (assert (max__function_guard
-  (max (mk___rep t1__split_discrs t1__split_fields2))
-  (mk___rep t1__split_discrs t1__split_fields2)))
+  (= o9 (to_rep3
+        (select (elts1 (rec__simple_unc_arrays__table__v t1__split_fields2)) j)))))))))
 
 ;; H
   (assert
-  (and
-  (and (= o14 (average (mk___rep t1__split_discrs t1__split_fields2)))
-  (average__function_guard o14
-  (mk___rep t1__split_discrs t1__split_fields2)))
-  (and (in_range5 o14)
-  (and (<= (min (mk___rep t1__split_discrs t1__split_fields2)) o14)
-  (<= o14 (max (mk___rep t1__split_discrs t1__split_fields2)))))))
-
-;; H
-  (assert (not_in__function_guard
-  (not_in (mk___rep t1__split_discrs t1__split_fields2) 0 1
-  (to_rep2 (rec__simple_unc_arrays__table__last t1__split_discrs)))
-  (mk___rep t1__split_discrs t1__split_fields2) 0 1
-  (to_rep2 (rec__simple_unc_arrays__table__last t1__split_discrs))))
-
-;; H
-  (assert (not_in__function_guard
-  (not_in (mk___rep t1__split_discrs t1__split_fields2) 0 1 (- o15 1))
-  (mk___rep t1__split_discrs t1__split_fields2) 0 1 (- o15 1)))
+  (and (= o10 (average (mk___rep t1__split_discrs t1__split_fields2)))
+  (and (in_range5 o10)
+  (and (<= (min (mk___rep t1__split_discrs t1__split_fields2)) o10)
+  (<= o10 (max (mk___rep t1__split_discrs t1__split_fields2)))))))
 
 ;; H
   (assert
-  (and
-  (and (= o15 (search (mk___rep t1__split_discrs t1__split_fields2) 0))
-  (search__function_guard o15 (mk___rep t1__split_discrs t1__split_fields2)
-  0))
-  (and (in_range4 o15)
+  (and (= o11 (search (mk___rep t1__split_discrs t1__split_fields2) 0))
+  (and (in_range4 o11)
   (or
-  (and (= o15 0)
+  (and (= o11 0)
   (= (not_in (mk___rep t1__split_discrs t1__split_fields2) 0 1
      (to_rep2 (rec__simple_unc_arrays__table__last t1__split_discrs))) true))
   (and
   (= (to_rep3
      (select (elts1 (rec__simple_unc_arrays__table__v t1__split_fields2)) 
-     o15)) 0)
-  (= (not_in (mk___rep t1__split_discrs t1__split_fields2) 0 1 (- o15 1)) true))))))
-
-;; H
-  (assert (not_in__function_guard
-  (not_in (mk___rep t2__split_discrs t2__split_fields2) 9 1
-  (to_rep2 (rec__simple_unc_arrays__table__last t2__split_discrs)))
-  (mk___rep t2__split_discrs t2__split_fields2) 9 1
-  (to_rep2 (rec__simple_unc_arrays__table__last t2__split_discrs))))
-
-;; H
-  (assert (not_in__function_guard
-  (not_in (mk___rep t2__split_discrs t2__split_fields2) 9 1 (- o16 1))
-  (mk___rep t2__split_discrs t2__split_fields2) 9 1 (- o16 1)))
+     o11)) 0)
+  (= (not_in (mk___rep t1__split_discrs t1__split_fields2) 0 1 (- o11 1)) true))))))
 
 ;; H
   (assert
-  (and
-  (and (= o16 (search (mk___rep t2__split_discrs t2__split_fields2) 9))
-  (search__function_guard o16 (mk___rep t2__split_discrs t2__split_fields2)
-  9))
-  (and (in_range4 o16)
+  (and (= o12 (search (mk___rep t2__split_discrs t2__split_fields2) 9))
+  (and (in_range4 o12)
   (or
-  (and (= o16 0)
+  (and (= o12 0)
   (= (not_in (mk___rep t2__split_discrs t2__split_fields2) 9 1
      (to_rep2 (rec__simple_unc_arrays__table__last t2__split_discrs))) true))
   (and
   (= (to_rep3
      (select (elts1 (rec__simple_unc_arrays__table__v t2__split_fields2)) 
-     o16)) 9)
-  (= (not_in (mk___rep t2__split_discrs t2__split_fields2) 9 1 (- o16 1)) true))))))
-
-;; H
-  (assert (same_range__function_guard
-  (same_range (mk___rep t1__split_discrs t1__split_fields2)
-  (mk___rep t2__split_discrs t2__split_fields2))
-  (mk___rep t1__split_discrs t1__split_fields2)
-  (mk___rep t2__split_discrs t2__split_fields2)))
+     o12)) 9)
+  (= (not_in (mk___rep t2__split_discrs t2__split_fields2) 9 1 (- o12 1)) true))))))
 
 (assert
 ;; WP_parameter_def

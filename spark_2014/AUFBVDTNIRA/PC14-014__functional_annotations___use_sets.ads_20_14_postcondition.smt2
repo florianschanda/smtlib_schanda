@@ -1188,15 +1188,15 @@
 
 (declare-fun o1 () count_type)
 
-(declare-fun temp___879 () count_type)
+(declare-fun temp___862 () count_type)
 
 (declare-fun use_sets__my_find__cu__assume () count_type)
 
-(declare-fun temp___876 () count_type)
+(declare-fun temp___859 () count_type)
 
 (declare-fun o2 () Int)
 
-(declare-fun temp___875 () count_type)
+(declare-fun temp___858 () count_type)
 
 (declare-fun o3 () Bool)
 
@@ -1274,8 +1274,8 @@
 (define-fun cu__split_fields13 () us_split_fields2 (mk___split_fields1
                                                    cu__split_fields1))
 
-(define-fun temp___8751 () us_rep1 (mk___rep1
-                                   (mk___split_fields1 temp___875)))
+(define-fun temp___8581 () us_rep1 (mk___rep1
+                                   (mk___split_fields1 temp___858)))
 
 (define-fun use_sets__my_find__cu__assume1 () us_rep1 (mk___rep1
                                                       (mk___split_fields1
@@ -1290,10 +1290,10 @@
   (assert (= o o1))
 
 ;; H
-  (assert (= temp___879 o1))
+  (assert (= temp___862 o1))
 
 ;; H
-  (assert (= (mk___rep1 (mk___split_fields1 temp___879)) no_element))
+  (assert (= (mk___rep1 (mk___split_fields1 temp___862)) no_element))
 
 ;; H
   (assert (in_range2 e))
@@ -1330,7 +1330,7 @@
   (= (= result1 true)
   (= (has_key (positions s) (mk___rep1 cu__split_fields13)) true)))
   (and (= result1 true)
-  (and (= temp___876 cu__split_fields1)
+  (and (= temp___859 cu__split_fields1)
   (and
   (forall ((i Int))
   (=>
@@ -1356,7 +1356,7 @@
   (ite (= result1 true)
   (and
   (and
-  (and (= temp___876 cu__split_fields1)
+  (and (= temp___859 cu__split_fields1)
   (and
   (forall ((i Int))
   (=>
@@ -1376,15 +1376,15 @@
   (= use_sets__my_find__result3 use_sets__my_find__result15)))
   (and
   (and
-  (and (= temp___8751 (next s (mk___rep1 cu__split_fields12)))
+  (and (= temp___8581 (next s (mk___rep1 cu__split_fields12)))
   (ite (= (ite (= (bool_eq4 (mk___rep1 cu__split_fields12) no_element) false) (= 
           (get1 (positions s) (mk___rep1 cu__split_fields12)) (length2 s)) true) true)
-  (= (bool_eq4 temp___8751 no_element) true)
-  (and (= (has_key (positions s) temp___8751) true)
-  (= (get1 (positions s) temp___8751) (+ (get1 (positions s)
+  (= (bool_eq4 temp___8581 no_element) true)
+  (and (= (has_key (positions s) temp___8581) true)
+  (= (get1 (positions s) temp___8581) (+ (get1 (positions s)
                                          (mk___rep1 cu__split_fields12)) 1)))))
   (and (= result4 (mk___split_fields__ref1 cu__split_fields12))
-  (= cu__split_fields3 (mk___split_fields1 temp___875))))
+  (= cu__split_fields3 (mk___split_fields1 temp___858))))
   (and
   (and
   (and (= o3 (has_key (positions s) (mk___rep1 cu__split_fields3)))

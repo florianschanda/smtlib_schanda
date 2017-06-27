@@ -4719,12 +4719,8 @@
   (assert
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (= (bool__content c2_fd_on_active) true)
-  (and
   (= result79 (fd_turn_fd_off (let ((subject c2_overspeed)) c2_overspeed1)
-              (let ((subject c2_fd_switch_pressed)) c2_fd_switch_pressed1)))
-  (fd_turn_fd_off__function_guard result79
-  (let ((subject c2_overspeed)) c2_overspeed1)
-  (let ((subject c2_fd_switch_pressed)) c2_fd_switch_pressed1))))))
+              (let ((subject c2_fd_switch_pressed)) c2_fd_switch_pressed1))))))
 
 ;; H
   (assert
@@ -4810,7 +4806,6 @@
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (not (= (bool__content c2_fd_on_active) true))
   (=> (= (bool__content c2_fd_off_active) true)
-  (and
   (= result83 (fd_turn_fd_on
               (let ((subject c2_vs_pitch_wheel_rotated))
               c2_vs_pitch_wheel_rotated1)
@@ -4832,25 +4827,7 @@
               (let ((subject c2_ga_switch_pressed)) c2_ga_switch_pressed1)
               (let ((subject c2_vs_switch_pressed)) c2_vs_switch_pressed1)
               (let ((subject c2_flc_switch_pressed)) c2_flc_switch_pressed1)
-              (let ((subject c2_alt_switch_pressed)) c2_alt_switch_pressed1)))
-  (fd_turn_fd_on__function_guard result83
-  (let ((subject c2_vs_pitch_wheel_rotated)) c2_vs_pitch_wheel_rotated1)
-  (let ((subject c2_altsel_target_changed)) c2_altsel_target_changed1)
-  (bool__content c2_modes_on) (bool__content c2_active_side)
-  (bool__content c2_vs_active) (bool__content c2_altsel_active)
-  (bool__content c2_vappr_active)
-  (let ((subject c2_pilot_flying_side)) c2_pilot_flying_side1)
-  (let ((subject c2_overspeed)) c2_overspeed1)
-  (let ((subject c2_pilot_flying_transfer)) c2_pilot_flying_transfer1)
-  (let ((subject c2_when_ap_engaged)) c2_when_ap_engaged1)
-  (let ((subject c2_fd_switch_pressed)) c2_fd_switch_pressed1)
-  (let ((subject c2_hdg_switch_pressed)) c2_hdg_switch_pressed1)
-  (let ((subject c2_nav_switch_pressed)) c2_nav_switch_pressed1)
-  (let ((subject c2_appr_switch_pressed)) c2_appr_switch_pressed1)
-  (let ((subject c2_ga_switch_pressed)) c2_ga_switch_pressed1)
-  (let ((subject c2_vs_switch_pressed)) c2_vs_switch_pressed1)
-  (let ((subject c2_flc_switch_pressed)) c2_flc_switch_pressed1)
-  (let ((subject c2_alt_switch_pressed)) c2_alt_switch_pressed1)))))))
+              (let ((subject c2_alt_switch_pressed)) c2_alt_switch_pressed1)))))))
 
 ;; H
   (assert
@@ -5031,15 +5008,10 @@
   (assert
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (= (bool__content c2_annunciations_on_active) true)
-  (and
   (= result87 (annunciations_turn_annunciations_off
               (let ((subject c2_fd_on)) c2_fd_on2)
               (let ((subject c2_is_ap_engaged)) c2_is_ap_engaged1)
-              (let ((subject c2_is_offside_fd_on)) c2_is_offside_fd_on1)))
-  (annunciations_turn_annunciations_off__function_guard result87
-  (let ((subject c2_fd_on)) c2_fd_on2)
-  (let ((subject c2_is_ap_engaged)) c2_is_ap_engaged1)
-  (let ((subject c2_is_offside_fd_on)) c2_is_offside_fd_on1))))))
+              (let ((subject c2_is_offside_fd_on)) c2_is_offside_fd_on1))))))
 
 ;; H
   (assert
@@ -5130,15 +5102,10 @@
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (not (= (bool__content c2_annunciations_on_active) true))
   (=> (= (bool__content c2_annunciations_off_active) true)
-  (and
   (= result91 (annunciations_turn_annunciations_on
               (let ((subject c2_fd_on)) c2_fd_on2)
               (let ((subject c2_is_ap_engaged)) c2_is_ap_engaged1)
-              (let ((subject c2_is_offside_fd_on)) c2_is_offside_fd_on1)))
-  (annunciations_turn_annunciations_on__function_guard result91
-  (let ((subject c2_fd_on)) c2_fd_on2)
-  (let ((subject c2_is_ap_engaged)) c2_is_ap_engaged1)
-  (let ((subject c2_is_offside_fd_on)) c2_is_offside_fd_on1)))))))
+              (let ((subject c2_is_offside_fd_on)) c2_is_offside_fd_on1)))))))
 
 ;; H
   (assert
@@ -5329,16 +5296,11 @@
   (assert
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (= (bool__content c2_independent_independent_active) true)
-  (and
   (= o (independent_in_independent_mode (bool__content c2_vappr_active)
        (bool__content c2_vga_active)
        (let ((subject c2_is_offside_vappr_active))
        c2_is_offside_vappr_active1)
-       (let ((subject c2_is_offside_vga_active)) c2_is_offside_vga_active1)))
-  (independent_in_independent_mode__function_guard o
-  (bool__content c2_vappr_active) (bool__content c2_vga_active)
-  (let ((subject c2_is_offside_vappr_active)) c2_is_offside_vappr_active1)
-  (let ((subject c2_is_offside_vga_active)) c2_is_offside_vga_active1))))))
+       (let ((subject c2_is_offside_vga_active)) c2_is_offside_vga_active1))))))
 
 ;; H
   (assert
@@ -5436,17 +5398,12 @@
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (not (= (bool__content c2_independent_independent_active) true))
   (=> (= (bool__content c2_independent_dependent_active) true)
-  (and
   (= result99 (independent_in_independent_mode
               (bool__content c2_vappr_active) (bool__content c2_vga_active)
               (let ((subject c2_is_offside_vappr_active))
               c2_is_offside_vappr_active1)
               (let ((subject c2_is_offside_vga_active))
-              c2_is_offside_vga_active1)))
-  (independent_in_independent_mode__function_guard result99
-  (bool__content c2_vappr_active) (bool__content c2_vga_active)
-  (let ((subject c2_is_offside_vappr_active)) c2_is_offside_vappr_active1)
-  (let ((subject c2_is_offside_vga_active)) c2_is_offside_vga_active1)))))))
+              c2_is_offside_vga_active1)))))))
 
 ;; H
   (assert
@@ -5640,13 +5597,9 @@
   (assert
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (= (bool__content c2_active_active_active) true)
-  (and
   (= o1 (active_in_active_mode
         (let ((subject c2_independent_mode)) c2_independent_mode2)
-        (let ((subject c2_pilot_flying_side)) c2_pilot_flying_side1)))
-  (active_in_active_mode__function_guard o1
-  (let ((subject c2_independent_mode)) c2_independent_mode2)
-  (let ((subject c2_pilot_flying_side)) c2_pilot_flying_side1))))))
+        (let ((subject c2_pilot_flying_side)) c2_pilot_flying_side1))))))
 
 ;; H
   (assert
@@ -5744,13 +5697,9 @@
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (not (= (bool__content c2_active_active_active) true))
   (=> (= (bool__content c2_active_inactive_active) true)
-  (and
   (= result107 (active_in_active_mode
                (let ((subject c2_independent_mode)) c2_independent_mode2)
-               (let ((subject c2_pilot_flying_side)) c2_pilot_flying_side1)))
-  (active_in_active_mode__function_guard result107
-  (let ((subject c2_independent_mode)) c2_independent_mode2)
-  (let ((subject c2_pilot_flying_side)) c2_pilot_flying_side1)))))))
+               (let ((subject c2_pilot_flying_side)) c2_pilot_flying_side1)))))))
 
 ;; H
   (assert
@@ -5941,15 +5890,10 @@
   (assert
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (= (bool__content c2_lateral_hdg_selected_active) true)
-  (and
   (= result111 (lateral_hdg_clear (let ((subject c2_modes_on)) c2_modes_on2)
                (let ((subject c2_pilot_flying_transfer))
                c2_pilot_flying_transfer1)
-               (let ((subject c2_hdg_switch_pressed)) c2_hdg_switch_pressed1)))
-  (lateral_hdg_clear__function_guard result111
-  (let ((subject c2_modes_on)) c2_modes_on2)
-  (let ((subject c2_pilot_flying_transfer)) c2_pilot_flying_transfer1)
-  (let ((subject c2_hdg_switch_pressed)) c2_hdg_switch_pressed1))))))
+               (let ((subject c2_hdg_switch_pressed)) c2_hdg_switch_pressed1))))))
 
 ;; H
   (assert
@@ -6064,7 +6008,6 @@
   (=> (= (bool__content c2_lateral_hdg_selected_active) true)
   (=> (not (= result111 true))
   (=> (= (bool__content c2_lateral_hdg_selected_active_active) true)
-  (and
   (= result117 (lateral_new_lateral_mode_activated
                (let ((subject c2_lateral_hdg_will_be_activated))
                c2_lateral_hdg_will_be_activated3)
@@ -6073,16 +6016,7 @@
                (let ((subject c2_lateral_lappr_will_be_activated))
                c2_lateral_lappr_will_be_activated3)
                (let ((subject c2_lateral_lga_will_be_activated))
-               c2_lateral_lga_will_be_activated3)))
-  (lateral_new_lateral_mode_activated__function_guard result117
-  (let ((subject c2_lateral_hdg_will_be_activated))
-  c2_lateral_hdg_will_be_activated3)
-  (let ((subject c2_lateral_nav_will_be_activated))
-  c2_lateral_nav_will_be_activated3)
-  (let ((subject c2_lateral_lappr_will_be_activated))
-  c2_lateral_lappr_will_be_activated3)
-  (let ((subject c2_lateral_lga_will_be_activated))
-  c2_lateral_lga_will_be_activated3))))))))
+               c2_lateral_lga_will_be_activated3))))))))
 
 ;; H
   (assert
@@ -6435,11 +6369,8 @@
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (not (= (bool__content c2_lateral_hdg_selected_active) true))
   (=> (= (bool__content c2_lateral_hdg_cleared_active) true)
-  (and
   (= result123 (lateral_hdg_select
-               (let ((subject c2_hdg_switch_pressed)) c2_hdg_switch_pressed1)))
-  (lateral_hdg_select__function_guard result123
-  (let ((subject c2_hdg_switch_pressed)) c2_hdg_switch_pressed1)))))))
+               (let ((subject c2_hdg_switch_pressed)) c2_hdg_switch_pressed1)))))))
 
 ;; H
   (assert
@@ -6753,7 +6684,6 @@
   (assert
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (= (bool__content c2_lateral_nav_selected_active) true)
-  (and
   (= result129 (lateral_nav_clear
                (let ((subject c2_selected_nav_source_changed))
                c2_selected_nav_source_changed1)
@@ -6762,15 +6692,7 @@
                (let ((subject c2_modes_on)) c2_modes_on2)
                (let ((subject c2_pilot_flying_transfer))
                c2_pilot_flying_transfer1)
-               (let ((subject c2_nav_switch_pressed)) c2_nav_switch_pressed1)))
-  (lateral_nav_clear__function_guard result129
-  (let ((subject c2_selected_nav_source_changed))
-  c2_selected_nav_source_changed1)
-  (let ((subject c2_selected_nav_frequency_changed))
-  c2_selected_nav_frequency_changed1)
-  (let ((subject c2_modes_on)) c2_modes_on2)
-  (let ((subject c2_pilot_flying_transfer)) c2_pilot_flying_transfer1)
-  (let ((subject c2_nav_switch_pressed)) c2_nav_switch_pressed1))))))
+               (let ((subject c2_nav_switch_pressed)) c2_nav_switch_pressed1))))))
 
 ;; H
   (assert
@@ -6940,7 +6862,6 @@
   (=> (= (bool__content c2_lateral_nav_selected_active) true)
   (=> (not (= result129 true))
   (=> (= (bool__content c2_lateral_nav_selected_active_active) true)
-  (and
   (= result136 (lateral_new_lateral_mode_activated
                (let ((subject c2_lateral_hdg_will_be_activated))
                c2_lateral_hdg_will_be_activated3)
@@ -6949,16 +6870,7 @@
                (let ((subject c2_lateral_lappr_will_be_activated))
                c2_lateral_lappr_will_be_activated3)
                (let ((subject c2_lateral_lga_will_be_activated))
-               c2_lateral_lga_will_be_activated3)))
-  (lateral_new_lateral_mode_activated__function_guard result136
-  (let ((subject c2_lateral_hdg_will_be_activated))
-  c2_lateral_hdg_will_be_activated3)
-  (let ((subject c2_lateral_nav_will_be_activated))
-  c2_lateral_nav_will_be_activated3)
-  (let ((subject c2_lateral_lappr_will_be_activated))
-  c2_lateral_lappr_will_be_activated3)
-  (let ((subject c2_lateral_lga_will_be_activated))
-  c2_lateral_lga_will_be_activated3))))))))
+               c2_lateral_lga_will_be_activated3))))))))
 
 ;; H
   (assert
@@ -7164,13 +7076,9 @@
   (=> (not (= result129 true))
   (=> (not (= (bool__content c2_lateral_nav_selected_active_active) true))
   (=> (= (bool__content c2_lateral_nav_selected_armed_active) true)
-  (and
   (= result142 (lateral_nav_capture
                (let ((subject c2_nav_capture_condition_met))
-               c2_nav_capture_condition_met1)))
-  (lateral_nav_capture__function_guard result142
-  (let ((subject c2_nav_capture_condition_met))
-  c2_nav_capture_condition_met1)))))))))
+               c2_nav_capture_condition_met1)))))))))
 
 ;; H
   (assert
@@ -7543,11 +7451,8 @@
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (not (= (bool__content c2_lateral_nav_selected_active) true))
   (=> (= (bool__content c2_lateral_nav_cleared_active) true)
-  (and
   (= result146 (lateral_nav_select
-               (let ((subject c2_nav_switch_pressed)) c2_nav_switch_pressed1)))
-  (lateral_nav_select__function_guard result146
-  (let ((subject c2_nav_switch_pressed)) c2_nav_switch_pressed1)))))))
+               (let ((subject c2_nav_switch_pressed)) c2_nav_switch_pressed1)))))))
 
 ;; H
   (assert
@@ -7827,7 +7732,6 @@
   (assert
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (= (bool__content c2_lateral_lappr_selected_active) true)
-  (and
   (= result151 (lateral_lappr_clear
                (let ((subject c2_selected_nav_source_changed))
                c2_selected_nav_source_changed1)
@@ -7837,15 +7741,7 @@
                (let ((subject c2_pilot_flying_transfer))
                c2_pilot_flying_transfer1)
                (let ((subject c2_appr_switch_pressed))
-               c2_appr_switch_pressed1)))
-  (lateral_lappr_clear__function_guard result151
-  (let ((subject c2_selected_nav_source_changed))
-  c2_selected_nav_source_changed1)
-  (let ((subject c2_selected_nav_frequency_changed))
-  c2_selected_nav_frequency_changed1)
-  (let ((subject c2_modes_on)) c2_modes_on2)
-  (let ((subject c2_pilot_flying_transfer)) c2_pilot_flying_transfer1)
-  (let ((subject c2_appr_switch_pressed)) c2_appr_switch_pressed1))))))
+               c2_appr_switch_pressed1))))))
 
 ;; H
   (assert
@@ -8016,7 +7912,6 @@
   (=> (= (bool__content c2_lateral_lappr_selected_active) true)
   (=> (not (= result151 true))
   (=> (= (bool__content c2_lateral_lappr_selected_active_active) true)
-  (and
   (= result158 (lateral_new_lateral_mode_activated
                (let ((subject c2_lateral_hdg_will_be_activated))
                c2_lateral_hdg_will_be_activated3)
@@ -8025,16 +7920,7 @@
                (let ((subject c2_lateral_lappr_will_be_activated))
                c2_lateral_lappr_will_be_activated3)
                (let ((subject c2_lateral_lga_will_be_activated))
-               c2_lateral_lga_will_be_activated3)))
-  (lateral_new_lateral_mode_activated__function_guard result158
-  (let ((subject c2_lateral_hdg_will_be_activated))
-  c2_lateral_hdg_will_be_activated3)
-  (let ((subject c2_lateral_nav_will_be_activated))
-  c2_lateral_nav_will_be_activated3)
-  (let ((subject c2_lateral_lappr_will_be_activated))
-  c2_lateral_lappr_will_be_activated3)
-  (let ((subject c2_lateral_lga_will_be_activated))
-  c2_lateral_lga_will_be_activated3))))))))
+               c2_lateral_lga_will_be_activated3))))))))
 
 ;; H
   (assert
@@ -8242,13 +8128,9 @@
   (=> (not (= result151 true))
   (=> (not (= (bool__content c2_lateral_lappr_selected_active_active) true))
   (=> (= (bool__content c2_lateral_lappr_selected_armed_active) true)
-  (and
   (= result164 (lateral_lappr_capture
                (let ((subject c2_lappr_capture_condition_met))
-               c2_lappr_capture_condition_met1)))
-  (lateral_lappr_capture__function_guard result164
-  (let ((subject c2_lappr_capture_condition_met))
-  c2_lappr_capture_condition_met1)))))))))
+               c2_lappr_capture_condition_met1)))))))))
 
 ;; H
   (assert
@@ -8623,12 +8505,9 @@
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (not (= (bool__content c2_lateral_lappr_selected_active) true))
   (=> (= (bool__content c2_lateral_lappr_cleared_active) true)
-  (and
   (= result168 (lateral_lappr_select
                (let ((subject c2_appr_switch_pressed))
-               c2_appr_switch_pressed1)))
-  (lateral_lappr_select__function_guard result168
-  (let ((subject c2_appr_switch_pressed)) c2_appr_switch_pressed1)))))))
+               c2_appr_switch_pressed1)))))))
 
 ;; H
   (assert
@@ -8912,19 +8791,13 @@
   (assert
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (= (bool__content c2_lateral_lga_selected_active) true)
-  (and
   (= result173 (lateral_lga_clear (let ((subject c2_modes_on)) c2_modes_on2)
                (bool__content c2_vga_active)
                (let ((subject c2_pilot_flying_transfer))
                c2_pilot_flying_transfer1)
                (let ((subject c2_when_ap_engaged)) c2_when_ap_engaged1)
                (let ((subject c2_sync_switch_pressed))
-               c2_sync_switch_pressed1)))
-  (lateral_lga_clear__function_guard result173
-  (let ((subject c2_modes_on)) c2_modes_on2) (bool__content c2_vga_active)
-  (let ((subject c2_pilot_flying_transfer)) c2_pilot_flying_transfer1)
-  (let ((subject c2_when_ap_engaged)) c2_when_ap_engaged1)
-  (let ((subject c2_sync_switch_pressed)) c2_sync_switch_pressed1))))))
+               c2_sync_switch_pressed1))))))
 
 ;; H
   (assert
@@ -9039,7 +8912,6 @@
   (=> (= (bool__content c2_lateral_lga_selected_active) true)
   (=> (not (= result173 true))
   (=> (= (bool__content c2_lateral_lga_selected_active_active) true)
-  (and
   (= result179 (lateral_new_lateral_mode_activated
                (let ((subject c2_lateral_hdg_will_be_activated))
                c2_lateral_hdg_will_be_activated3)
@@ -9048,16 +8920,7 @@
                (let ((subject c2_lateral_lappr_will_be_activated))
                c2_lateral_lappr_will_be_activated3)
                (let ((subject c2_lateral_lga_will_be_activated))
-               c2_lateral_lga_will_be_activated3)))
-  (lateral_new_lateral_mode_activated__function_guard result179
-  (let ((subject c2_lateral_hdg_will_be_activated))
-  c2_lateral_hdg_will_be_activated3)
-  (let ((subject c2_lateral_nav_will_be_activated))
-  c2_lateral_nav_will_be_activated3)
-  (let ((subject c2_lateral_lappr_will_be_activated))
-  c2_lateral_lappr_will_be_activated3)
-  (let ((subject c2_lateral_lga_will_be_activated))
-  c2_lateral_lga_will_be_activated3))))))))
+               c2_lateral_lga_will_be_activated3))))))))
 
 ;; H
   (assert
@@ -9410,13 +9273,9 @@
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (not (= (bool__content c2_lateral_lga_selected_active) true))
   (=> (= (bool__content c2_lateral_lga_cleared_active) true)
-  (and
   (= result185 (lateral_lga_select
                (let ((subject c2_overspeed)) c2_overspeed1)
-               (let ((subject c2_ga_switch_pressed)) c2_ga_switch_pressed1)))
-  (lateral_lga_select__function_guard result185
-  (let ((subject c2_overspeed)) c2_overspeed1)
-  (let ((subject c2_ga_switch_pressed)) c2_ga_switch_pressed1)))))))
+               (let ((subject c2_ga_switch_pressed)) c2_ga_switch_pressed1)))))))
 
 ;; H
   (assert
@@ -9731,17 +9590,11 @@
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (= (bool__content c2_lateral_roll_selected_active) true)
   (=> (= (bool__content c2_lateral_roll_selected_active_active) true)
-  (and
   (= result191 (lateral_lateral_mode_active
                (let ((subject c2_hdg_active)) c2_hdg_active2)
                (let ((subject c2_nav_active)) c2_nav_active2)
                (let ((subject c2_lappr_active)) c2_lappr_active2)
-               (let ((subject c2_lga_active)) c2_lga_active2)))
-  (lateral_lateral_mode_active__function_guard result191
-  (let ((subject c2_hdg_active)) c2_hdg_active2)
-  (let ((subject c2_nav_active)) c2_nav_active2)
-  (let ((subject c2_lappr_active)) c2_lappr_active2)
-  (let ((subject c2_lga_active)) c2_lga_active2)))))))
+               (let ((subject c2_lga_active)) c2_lga_active2)))))))
 
 ;; H
   (assert
@@ -9985,17 +9838,11 @@
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (not (= (bool__content c2_lateral_roll_selected_active) true))
   (=> (= (bool__content c2_lateral_roll_cleared_active) true)
-  (and
   (= o2 (lateral_lateral_mode_active
         (let ((subject c2_hdg_active)) c2_hdg_active2)
         (let ((subject c2_nav_active)) c2_nav_active2)
         (let ((subject c2_lappr_active)) c2_lappr_active2)
-        (let ((subject c2_lga_active)) c2_lga_active2)))
-  (lateral_lateral_mode_active__function_guard o2
-  (let ((subject c2_hdg_active)) c2_hdg_active2)
-  (let ((subject c2_nav_active)) c2_nav_active2)
-  (let ((subject c2_lappr_active)) c2_lappr_active2)
-  (let ((subject c2_lga_active)) c2_lga_active2)))))))
+        (let ((subject c2_lga_active)) c2_lga_active2)))))))
 
 ;; H
   (assert
@@ -10318,15 +10165,10 @@
   (assert
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (= (bool__content c2_vertical_vs_selected_active) true)
-  (and
   (= result203 (vertical_vs_clear (let ((subject c2_modes_on)) c2_modes_on2)
                (let ((subject c2_pilot_flying_transfer))
                c2_pilot_flying_transfer1)
-               (let ((subject c2_vs_switch_pressed)) c2_vs_switch_pressed1)))
-  (vertical_vs_clear__function_guard result203
-  (let ((subject c2_modes_on)) c2_modes_on2)
-  (let ((subject c2_pilot_flying_transfer)) c2_pilot_flying_transfer1)
-  (let ((subject c2_vs_switch_pressed)) c2_vs_switch_pressed1))))))
+               (let ((subject c2_vs_switch_pressed)) c2_vs_switch_pressed1))))))
 
 ;; H
   (assert
@@ -10441,7 +10283,6 @@
   (=> (= (bool__content c2_vertical_vs_selected_active) true)
   (=> (not (= result203 true))
   (=> (= (bool__content c2_vertical_vs_selected_active_active) true)
-  (and
   (= result209 (vertical_new_vertical_mode_activated
                (let ((subject c2_vertical_vs_will_be_activated))
                c2_vertical_vs_will_be_activated3)
@@ -10454,20 +10295,7 @@
                (let ((subject c2_vertical_vappr_will_be_activated))
                c2_vertical_vappr_will_be_activated3)
                (let ((subject c2_vertical_vga_will_be_activated))
-               c2_vertical_vga_will_be_activated3)))
-  (vertical_new_vertical_mode_activated__function_guard result209
-  (let ((subject c2_vertical_vs_will_be_activated))
-  c2_vertical_vs_will_be_activated3)
-  (let ((subject c2_vertical_flc_will_be_activated))
-  c2_vertical_flc_will_be_activated3)
-  (let ((subject c2_vertical_alt_will_be_activated))
-  c2_vertical_alt_will_be_activated3)
-  (let ((subject c2_vertical_altsel_will_be_activated))
-  c2_vertical_altsel_will_be_activated3)
-  (let ((subject c2_vertical_vappr_will_be_activated))
-  c2_vertical_vappr_will_be_activated3)
-  (let ((subject c2_vertical_vga_will_be_activated))
-  c2_vertical_vga_will_be_activated3))))))))
+               c2_vertical_vga_will_be_activated3))))))))
 
 ;; H
   (assert
@@ -10820,14 +10648,9 @@
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (not (= (bool__content c2_vertical_vs_selected_active) true))
   (=> (= (bool__content c2_vertical_vs_cleared_active) true)
-  (and
   (= result215 (vertical_vs_select (bool__content c2_vappr_active)
                (let ((subject c2_overspeed)) c2_overspeed1)
-               (let ((subject c2_vs_switch_pressed)) c2_vs_switch_pressed1)))
-  (vertical_vs_select__function_guard result215
-  (bool__content c2_vappr_active)
-  (let ((subject c2_overspeed)) c2_overspeed1)
-  (let ((subject c2_vs_switch_pressed)) c2_vs_switch_pressed1)))))))
+               (let ((subject c2_vs_switch_pressed)) c2_vs_switch_pressed1)))))))
 
 ;; H
   (assert
@@ -11141,7 +10964,6 @@
   (assert
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (= (bool__content c2_vertical_flc_selected_active) true)
-  (and
   (= result221 (vertical_flc_clear
                (let ((subject c2_vs_pitch_wheel_rotated))
                c2_vs_pitch_wheel_rotated1)
@@ -11149,13 +10971,7 @@
                (let ((subject c2_overspeed)) c2_overspeed1)
                (let ((subject c2_pilot_flying_transfer))
                c2_pilot_flying_transfer1)
-               (let ((subject c2_flc_switch_pressed)) c2_flc_switch_pressed1)))
-  (vertical_flc_clear__function_guard result221
-  (let ((subject c2_vs_pitch_wheel_rotated)) c2_vs_pitch_wheel_rotated1)
-  (let ((subject c2_modes_on)) c2_modes_on2)
-  (let ((subject c2_overspeed)) c2_overspeed1)
-  (let ((subject c2_pilot_flying_transfer)) c2_pilot_flying_transfer1)
-  (let ((subject c2_flc_switch_pressed)) c2_flc_switch_pressed1))))))
+               (let ((subject c2_flc_switch_pressed)) c2_flc_switch_pressed1))))))
 
 ;; H
   (assert
@@ -11270,7 +11086,6 @@
   (=> (= (bool__content c2_vertical_flc_selected_active) true)
   (=> (not (= result221 true))
   (=> (= (bool__content c2_vertical_flc_selected_active_active) true)
-  (and
   (= result227 (vertical_new_vertical_mode_activated
                (let ((subject c2_vertical_vs_will_be_activated))
                c2_vertical_vs_will_be_activated3)
@@ -11283,20 +11098,7 @@
                (let ((subject c2_vertical_vappr_will_be_activated))
                c2_vertical_vappr_will_be_activated3)
                (let ((subject c2_vertical_vga_will_be_activated))
-               c2_vertical_vga_will_be_activated3)))
-  (vertical_new_vertical_mode_activated__function_guard result227
-  (let ((subject c2_vertical_vs_will_be_activated))
-  c2_vertical_vs_will_be_activated3)
-  (let ((subject c2_vertical_flc_will_be_activated))
-  c2_vertical_flc_will_be_activated3)
-  (let ((subject c2_vertical_alt_will_be_activated))
-  c2_vertical_alt_will_be_activated3)
-  (let ((subject c2_vertical_altsel_will_be_activated))
-  c2_vertical_altsel_will_be_activated3)
-  (let ((subject c2_vertical_vappr_will_be_activated))
-  c2_vertical_vappr_will_be_activated3)
-  (let ((subject c2_vertical_vga_will_be_activated))
-  c2_vertical_vga_will_be_activated3))))))))
+               c2_vertical_vga_will_be_activated3))))))))
 
 ;; H
   (assert
@@ -11651,7 +11453,6 @@
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (not (= (bool__content c2_vertical_flc_selected_active) true))
   (=> (= (bool__content c2_vertical_flc_cleared_active) true)
-  (and
   (= result233 (vertical_flc_select (bool__content c2_alt_active)
                (bool__content c2_altsel_active)
                (let ((subject c2_vertical_alt_will_be_activated))
@@ -11660,15 +11461,7 @@
                c2_vertical_altsel_will_be_activated3)
                (bool__content c2_vappr_active)
                (let ((subject c2_overspeed)) c2_overspeed1)
-               (let ((subject c2_flc_switch_pressed)) c2_flc_switch_pressed1)))
-  (vertical_flc_select__function_guard result233
-  (bool__content c2_alt_active) (bool__content c2_altsel_active)
-  (let ((subject c2_vertical_alt_will_be_activated))
-  c2_vertical_alt_will_be_activated3)
-  (let ((subject c2_vertical_altsel_will_be_activated))
-  c2_vertical_altsel_will_be_activated3) (bool__content c2_vappr_active)
-  (let ((subject c2_overspeed)) c2_overspeed1)
-  (let ((subject c2_flc_switch_pressed)) c2_flc_switch_pressed1)))))))
+               (let ((subject c2_flc_switch_pressed)) c2_flc_switch_pressed1)))))))
 
 ;; H
   (assert
@@ -11984,19 +11777,13 @@
   (assert
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (= (bool__content c2_vertical_alt_selected_active) true)
-  (and
   (= result239 (vertical_alt_clear
                (let ((subject c2_vs_pitch_wheel_rotated))
                c2_vs_pitch_wheel_rotated1)
                (let ((subject c2_modes_on)) c2_modes_on2)
                (let ((subject c2_pilot_flying_transfer))
                c2_pilot_flying_transfer1)
-               (let ((subject c2_alt_switch_pressed)) c2_alt_switch_pressed1)))
-  (vertical_alt_clear__function_guard result239
-  (let ((subject c2_vs_pitch_wheel_rotated)) c2_vs_pitch_wheel_rotated1)
-  (let ((subject c2_modes_on)) c2_modes_on2)
-  (let ((subject c2_pilot_flying_transfer)) c2_pilot_flying_transfer1)
-  (let ((subject c2_alt_switch_pressed)) c2_alt_switch_pressed1))))))
+               (let ((subject c2_alt_switch_pressed)) c2_alt_switch_pressed1))))))
 
 ;; H
   (assert
@@ -12111,7 +11898,6 @@
   (=> (= (bool__content c2_vertical_alt_selected_active) true)
   (=> (not (= result239 true))
   (=> (= (bool__content c2_vertical_alt_selected_active_active) true)
-  (and
   (= result245 (vertical_new_vertical_mode_activated
                (let ((subject c2_vertical_vs_will_be_activated))
                c2_vertical_vs_will_be_activated3)
@@ -12124,20 +11910,7 @@
                (let ((subject c2_vertical_vappr_will_be_activated))
                c2_vertical_vappr_will_be_activated3)
                (let ((subject c2_vertical_vga_will_be_activated))
-               c2_vertical_vga_will_be_activated3)))
-  (vertical_new_vertical_mode_activated__function_guard result245
-  (let ((subject c2_vertical_vs_will_be_activated))
-  c2_vertical_vs_will_be_activated3)
-  (let ((subject c2_vertical_flc_will_be_activated))
-  c2_vertical_flc_will_be_activated3)
-  (let ((subject c2_vertical_alt_will_be_activated))
-  c2_vertical_alt_will_be_activated3)
-  (let ((subject c2_vertical_altsel_will_be_activated))
-  c2_vertical_altsel_will_be_activated3)
-  (let ((subject c2_vertical_vappr_will_be_activated))
-  c2_vertical_vappr_will_be_activated3)
-  (let ((subject c2_vertical_vga_will_be_activated))
-  c2_vertical_vga_will_be_activated3))))))))
+               c2_vertical_vga_will_be_activated3))))))))
 
 ;; H
   (assert
@@ -12492,16 +12265,11 @@
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (not (= (bool__content c2_vertical_alt_selected_active) true))
   (=> (= (bool__content c2_vertical_alt_cleared_active) true)
-  (and
   (= result251 (vertical_alt_select
                (let ((subject c2_altsel_target_changed))
                c2_altsel_target_changed1) (bool__content c2_altsel_track)
                (bool__content c2_vappr_active)
-               (let ((subject c2_alt_switch_pressed)) c2_alt_switch_pressed1)))
-  (vertical_alt_select__function_guard result251
-  (let ((subject c2_altsel_target_changed)) c2_altsel_target_changed1)
-  (bool__content c2_altsel_track) (bool__content c2_vappr_active)
-  (let ((subject c2_alt_switch_pressed)) c2_alt_switch_pressed1)))))))
+               (let ((subject c2_alt_switch_pressed)) c2_alt_switch_pressed1)))))))
 
 ;; H
   (assert
@@ -12817,7 +12585,6 @@
   (assert
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (= (bool__content c2_vertical_vappr_selected_active) true)
-  (and
   (= result257 (vertical_vappr_clear
                (let ((subject c2_selected_nav_source_changed))
                c2_selected_nav_source_changed1)
@@ -12828,16 +12595,7 @@
                (let ((subject c2_pilot_flying_transfer))
                c2_pilot_flying_transfer1)
                (let ((subject c2_appr_switch_pressed))
-               c2_appr_switch_pressed1)))
-  (vertical_vappr_clear__function_guard result257
-  (let ((subject c2_selected_nav_source_changed))
-  c2_selected_nav_source_changed1)
-  (let ((subject c2_selected_nav_frequency_changed))
-  c2_selected_nav_frequency_changed1)
-  (let ((subject c2_modes_on)) c2_modes_on2)
-  (let ((subject c2_lappr_selected)) c2_lappr_selected2)
-  (let ((subject c2_pilot_flying_transfer)) c2_pilot_flying_transfer1)
-  (let ((subject c2_appr_switch_pressed)) c2_appr_switch_pressed1))))))
+               c2_appr_switch_pressed1))))))
 
 ;; H
   (assert
@@ -13008,7 +12766,6 @@
   (=> (= (bool__content c2_vertical_vappr_selected_active) true)
   (=> (not (= result257 true))
   (=> (= (bool__content c2_vertical_vappr_selected_active_active) true)
-  (and
   (= result264 (vertical_new_vertical_mode_activated
                (let ((subject c2_vertical_vs_will_be_activated))
                c2_vertical_vs_will_be_activated3)
@@ -13021,20 +12778,7 @@
                (let ((subject c2_vertical_vappr_will_be_activated))
                c2_vertical_vappr_will_be_activated3)
                (let ((subject c2_vertical_vga_will_be_activated))
-               c2_vertical_vga_will_be_activated3)))
-  (vertical_new_vertical_mode_activated__function_guard result264
-  (let ((subject c2_vertical_vs_will_be_activated))
-  c2_vertical_vs_will_be_activated3)
-  (let ((subject c2_vertical_flc_will_be_activated))
-  c2_vertical_flc_will_be_activated3)
-  (let ((subject c2_vertical_alt_will_be_activated))
-  c2_vertical_alt_will_be_activated3)
-  (let ((subject c2_vertical_altsel_will_be_activated))
-  c2_vertical_altsel_will_be_activated3)
-  (let ((subject c2_vertical_vappr_will_be_activated))
-  c2_vertical_vappr_will_be_activated3)
-  (let ((subject c2_vertical_vga_will_be_activated))
-  c2_vertical_vga_will_be_activated3))))))))
+               c2_vertical_vga_will_be_activated3))))))))
 
 ;; H
   (assert
@@ -13242,17 +12986,11 @@
   (=> (not (= result257 true))
   (=> (not (= (bool__content c2_vertical_vappr_selected_active_active) true))
   (=> (= (bool__content c2_vertical_vappr_selected_armed_active) true)
-  (and
   (= result270 (vertical_vappr_capture
                (let ((subject c2_vappr_capture_condition_met))
                c2_vappr_capture_condition_met1)
                (let ((subject c2_lappr_active)) c2_lappr_active2)
-               (let ((subject c2_overspeed)) c2_overspeed1)))
-  (vertical_vappr_capture__function_guard result270
-  (let ((subject c2_vappr_capture_condition_met))
-  c2_vappr_capture_condition_met1)
-  (let ((subject c2_lappr_active)) c2_lappr_active2)
-  (let ((subject c2_overspeed)) c2_overspeed1)))))))))
+               (let ((subject c2_overspeed)) c2_overspeed1)))))))))
 
 ;; H
   (assert
@@ -13627,12 +13365,9 @@
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (not (= (bool__content c2_vertical_vappr_selected_active) true))
   (=> (= (bool__content c2_vertical_vappr_cleared_active) true)
-  (and
   (= result274 (vertical_vappr_select
                (let ((subject c2_appr_switch_pressed))
-               c2_appr_switch_pressed1)))
-  (vertical_vappr_select__function_guard result274
-  (let ((subject c2_appr_switch_pressed)) c2_appr_switch_pressed1)))))))
+               c2_appr_switch_pressed1)))))))
 
 ;; H
   (assert
@@ -13916,7 +13651,6 @@
   (assert
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (= (bool__content c2_vertical_vga_selected_active) true)
-  (and
   (= result279 (vertical_vga_clear
                (let ((subject c2_vs_pitch_wheel_rotated))
                c2_vs_pitch_wheel_rotated1)
@@ -13926,14 +13660,7 @@
                c2_pilot_flying_transfer1)
                (let ((subject c2_when_ap_engaged)) c2_when_ap_engaged1)
                (let ((subject c2_sync_switch_pressed))
-               c2_sync_switch_pressed1)))
-  (vertical_vga_clear__function_guard result279
-  (let ((subject c2_vs_pitch_wheel_rotated)) c2_vs_pitch_wheel_rotated1)
-  (let ((subject c2_modes_on)) c2_modes_on2)
-  (let ((subject c2_lga_active)) c2_lga_active2)
-  (let ((subject c2_pilot_flying_transfer)) c2_pilot_flying_transfer1)
-  (let ((subject c2_when_ap_engaged)) c2_when_ap_engaged1)
-  (let ((subject c2_sync_switch_pressed)) c2_sync_switch_pressed1))))))
+               c2_sync_switch_pressed1))))))
 
 ;; H
   (assert
@@ -14048,7 +13775,6 @@
   (=> (= (bool__content c2_vertical_vga_selected_active) true)
   (=> (not (= result279 true))
   (=> (= (bool__content c2_vertical_vga_selected_active_active) true)
-  (and
   (= result285 (vertical_new_vertical_mode_activated
                (let ((subject c2_vertical_vs_will_be_activated))
                c2_vertical_vs_will_be_activated3)
@@ -14061,20 +13787,7 @@
                (let ((subject c2_vertical_vappr_will_be_activated))
                c2_vertical_vappr_will_be_activated3)
                (let ((subject c2_vertical_vga_will_be_activated))
-               c2_vertical_vga_will_be_activated3)))
-  (vertical_new_vertical_mode_activated__function_guard result285
-  (let ((subject c2_vertical_vs_will_be_activated))
-  c2_vertical_vs_will_be_activated3)
-  (let ((subject c2_vertical_flc_will_be_activated))
-  c2_vertical_flc_will_be_activated3)
-  (let ((subject c2_vertical_alt_will_be_activated))
-  c2_vertical_alt_will_be_activated3)
-  (let ((subject c2_vertical_altsel_will_be_activated))
-  c2_vertical_altsel_will_be_activated3)
-  (let ((subject c2_vertical_vappr_will_be_activated))
-  c2_vertical_vappr_will_be_activated3)
-  (let ((subject c2_vertical_vga_will_be_activated))
-  c2_vertical_vga_will_be_activated3))))))))
+               c2_vertical_vga_will_be_activated3))))))))
 
 ;; H
   (assert
@@ -14429,13 +14142,9 @@
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (not (= (bool__content c2_vertical_vga_selected_active) true))
   (=> (= (bool__content c2_vertical_vga_cleared_active) true)
-  (and
   (= result291 (vertical_vga_select
                (let ((subject c2_overspeed)) c2_overspeed1)
-               (let ((subject c2_ga_switch_pressed)) c2_ga_switch_pressed1)))
-  (vertical_vga_select__function_guard result291
-  (let ((subject c2_overspeed)) c2_overspeed1)
-  (let ((subject c2_ga_switch_pressed)) c2_ga_switch_pressed1)))))))
+               (let ((subject c2_ga_switch_pressed)) c2_ga_switch_pressed1)))))))
 
 ;; H
   (assert
@@ -14751,17 +14460,11 @@
   (assert
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (= (bool__content c2_vertical_altsel_selected_active) true)
-  (and
   (= result297 (vertical_altsel_clear
                (let ((subject c2_modes_on)) c2_modes_on2)
                (let ((subject c2_alt_active)) c2_alt_active2)
                (let ((subject c2_vappr_active)) c2_vappr_active2)
-               (let ((subject c2_vga_active)) c2_vga_active2)))
-  (vertical_altsel_clear__function_guard result297
-  (let ((subject c2_modes_on)) c2_modes_on2)
-  (let ((subject c2_alt_active)) c2_alt_active2)
-  (let ((subject c2_vappr_active)) c2_vappr_active2)
-  (let ((subject c2_vga_active)) c2_vga_active2))))))
+               (let ((subject c2_vga_active)) c2_vga_active2))))))
 
 ;; H
   (assert
@@ -15199,7 +14902,6 @@
   (=> (= (bool__content c2_vertical_altsel_selected_active) true)
   (=> (not (= result297 true))
   (=> (= (bool__content c2_vertical_altsel_selected_active_active) true)
-  (and
   (= result307 (vertical_altsel_deactivate
                (let ((subject c2_vs_pitch_wheel_rotated))
                c2_vs_pitch_wheel_rotated1)
@@ -15218,23 +14920,7 @@
                (let ((subject c2_vertical_vga_will_be_activated))
                c2_vertical_vga_will_be_activated3)
                (let ((subject c2_pilot_flying_transfer))
-               c2_pilot_flying_transfer1)))
-  (vertical_altsel_deactivate__function_guard result307
-  (let ((subject c2_vs_pitch_wheel_rotated)) c2_vs_pitch_wheel_rotated1)
-  (let ((subject c2_altsel_target_changed)) c2_altsel_target_changed1)
-  (let ((subject c2_vertical_vs_will_be_activated))
-  c2_vertical_vs_will_be_activated3)
-  (let ((subject c2_vertical_flc_will_be_activated))
-  c2_vertical_flc_will_be_activated3)
-  (let ((subject c2_vertical_alt_will_be_activated))
-  c2_vertical_alt_will_be_activated3)
-  (let ((subject c2_vertical_altsel_will_be_activated))
-  c2_vertical_altsel_will_be_activated3)
-  (let ((subject c2_vertical_vappr_will_be_activated))
-  c2_vertical_vappr_will_be_activated3)
-  (let ((subject c2_vertical_vga_will_be_activated))
-  c2_vertical_vga_will_be_activated3)
-  (let ((subject c2_pilot_flying_transfer)) c2_pilot_flying_transfer1))))))))
+               c2_pilot_flying_transfer1))))))))
 
 ;; H
   (assert
@@ -15516,13 +15202,9 @@
   (=> (not (= result307 true))
   (=>
   (= (bool__content c2_vertical_altsel_selected_active_capture_active) true)
-  (and
   (= result314 (vertical_altsel_track
                (let ((subject c2_altsel_track_condition_met))
-               c2_altsel_track_condition_met1)))
-  (vertical_altsel_track__function_guard result314
-  (let ((subject c2_altsel_track_condition_met))
-  c2_altsel_track_condition_met1))))))))))
+               c2_altsel_track_condition_met1))))))))))
 
 ;; H
   (assert
@@ -15874,13 +15556,9 @@
   (=>
   (not (= (bool__content c2_vertical_altsel_selected_active_active) true))
   (=> (= (bool__content c2_vertical_altsel_selected_armed_active) true)
-  (and
   (= result318 (vertical_altsel_capture
                (let ((subject c2_altsel_capture_condition_met))
-               c2_altsel_capture_condition_met1)))
-  (vertical_altsel_capture__function_guard result318
-  (let ((subject c2_altsel_capture_condition_met))
-  c2_altsel_capture_condition_met1)))))))))
+               c2_altsel_capture_condition_met1)))))))))
 
 ;; H
   (assert
@@ -16419,15 +16097,10 @@
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (not (= (bool__content c2_vertical_altsel_selected_active) true))
   (=> (= (bool__content c2_vertical_altsel_cleared_active) true)
-  (and
   (= result323 (vertical_altsel_select
                (let ((subject c2_alt_active)) c2_alt_active2)
                (let ((subject c2_vappr_active)) c2_vappr_active2)
-               (let ((subject c2_vga_active)) c2_vga_active2)))
-  (vertical_altsel_select__function_guard result323
-  (let ((subject c2_alt_active)) c2_alt_active2)
-  (let ((subject c2_vappr_active)) c2_vappr_active2)
-  (let ((subject c2_vga_active)) c2_vga_active2)))))))
+               (let ((subject c2_vga_active)) c2_vga_active2)))))))
 
 ;; H
   (assert
@@ -16753,21 +16426,13 @@
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (= (bool__content c2_vertical_pitch_selected_active) true)
   (=> (= (bool__content c2_vertical_pitch_selected_active_active) true)
-  (and
   (= result328 (vertical_vertical_mode_active
                (let ((subject c2_vs_active)) c2_vs_active2)
                (let ((subject c2_flc_active)) c2_flc_active2)
                (let ((subject c2_alt_active)) c2_alt_active2)
                (let ((subject c2_altsel_active)) c2_altsel_active2)
                (let ((subject c2_vappr_active)) c2_vappr_active2)
-               (let ((subject c2_vga_active)) c2_vga_active2)))
-  (vertical_vertical_mode_active__function_guard result328
-  (let ((subject c2_vs_active)) c2_vs_active2)
-  (let ((subject c2_flc_active)) c2_flc_active2)
-  (let ((subject c2_alt_active)) c2_alt_active2)
-  (let ((subject c2_altsel_active)) c2_altsel_active2)
-  (let ((subject c2_vappr_active)) c2_vappr_active2)
-  (let ((subject c2_vga_active)) c2_vga_active2)))))))
+               (let ((subject c2_vga_active)) c2_vga_active2)))))))
 
 ;; H
   (assert
@@ -17011,21 +16676,13 @@
   (=> (not (not (= (bool__content c2_active) true)))
   (=> (not (= (bool__content c2_vertical_pitch_selected_active) true))
   (=> (= (bool__content c2_vertical_pitch_cleared_active) true)
-  (and
   (= o3 (vertical_vertical_mode_active
         (let ((subject c2_vs_active)) c2_vs_active2)
         (let ((subject c2_flc_active)) c2_flc_active2)
         (let ((subject c2_alt_active)) c2_alt_active2)
         (let ((subject c2_altsel_active)) c2_altsel_active2)
         (let ((subject c2_vappr_active)) c2_vappr_active2)
-        (let ((subject c2_vga_active)) c2_vga_active2)))
-  (vertical_vertical_mode_active__function_guard o3
-  (let ((subject c2_vs_active)) c2_vs_active2)
-  (let ((subject c2_flc_active)) c2_flc_active2)
-  (let ((subject c2_alt_active)) c2_alt_active2)
-  (let ((subject c2_altsel_active)) c2_altsel_active2)
-  (let ((subject c2_vappr_active)) c2_vappr_active2)
-  (let ((subject c2_vga_active)) c2_vga_active2)))))))
+        (let ((subject c2_vga_active)) c2_vga_active2)))))))
 
 ;; H
   (assert

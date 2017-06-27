@@ -147,20 +147,14 @@
 
 (declare-fun glob2_ok__function_guard (Bool us_rep Int) Bool)
 
-;; temp___result_220_def
-  (assert
-  (forall ((default_init__n Int) (temp___219 us_rep))
-  (glob2_ok__function_guard (glob2_ok temp___219 default_init__n) temp___219
-  default_init__n)))
-
-(define-fun default_initial_assumption ((temp___expr_217 us_rep)
-  (temp___skip_top_level_218 Bool)
+(define-fun default_initial_assumption ((temp___expr_207 us_rep)
+  (temp___skip_top_level_208 Bool)
   (default_init__n Int)) Bool (and
                               (= (to_rep
                                  (rec__default_init__glob2__f
-                                 (us_split_fields1 temp___expr_217))) 0)
-                              (=> (not (= temp___skip_top_level_218 true))
-                              (= (glob2_ok temp___expr_217 default_init__n) true))))
+                                 (us_split_fields1 temp___expr_207))) 0)
+                              (=> (not (= temp___skip_top_level_208 true))
+                              (= (glob2_ok temp___expr_207 default_init__n) true))))
 
 (define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool)
   (temp___skip_constant_31 Bool)
@@ -176,27 +170,19 @@
   (assert
   (forall ((x us_rep))
   (forall ((default_init__n Int))
-  (! (=> (glob2_ok__function_guard (glob2_ok x default_init__n) x
-     default_init__n)
-     (= (= (glob2_ok x default_init__n) true)
-     (= (to_rep (rec__default_init__glob2__f (us_split_fields1 x))) default_init__n))) :pattern (
+  (! (= (= (glob2_ok x default_init__n) true)
+     (= (to_rep (rec__default_init__glob2__f (us_split_fields1 x))) default_init__n)) :pattern (
   (glob2_ok x default_init__n)) ))))
 
 (declare-fun n () Int)
 
-(declare-fun temp___324 () natural)
-
-(define-fun temp___3241 () us_rep (mk___rep (mk___split_fields temp___324)))
+(declare-fun temp___288 () natural)
 
 ;; H
-  (assert (= (to_rep temp___324) 0))
-
-;; H
-  (assert (glob2_ok__function_guard (glob2_ok temp___3241 n) temp___3241 
-  n))
+  (assert (= (to_rep temp___288) 0))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (= (glob2_ok temp___3241 n) true)))
+  (not (= (glob2_ok (mk___rep (mk___split_fields temp___288)) n) true)))
 (check-sat)

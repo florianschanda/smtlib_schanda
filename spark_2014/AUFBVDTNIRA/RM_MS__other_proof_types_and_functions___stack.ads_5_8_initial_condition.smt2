@@ -375,53 +375,9 @@
 ;; is_empty__def_axiom
   (assert
   (forall ((stack__my_stack__fields us_split_fields))
-  (! (=> (is_empty__function_guard (is_empty stack__my_stack__fields)
-     stack__my_stack__fields)
-     (and (count__function_guard (count stack__my_stack__fields)
-     stack__my_stack__fields)
-     (= (= (is_empty stack__my_stack__fields) true)
-     (= (count stack__my_stack__fields) 0)))) :pattern ((is_empty
-                                                        stack__my_stack__fields)) )))
-
-(declare-sort index_range 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 100)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
-
-(declare-fun user_eq4 (index_range index_range) Bool)
-
-(declare-fun dummy4 () index_range)
-
-(declare-datatypes ()
-((index_range__ref (mk_index_range__ref (index_range__content index_range)))))
-(define-fun index_range__ref___projection ((a index_range__ref)) index_range 
-  (index_range__content a))
-
-(declare-sort t3b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 100)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq5 (t3b t3b) Bool)
-
-(declare-fun dummy5 () t3b)
-
-(declare-datatypes () ((t3b__ref (mk_t3b__ref (t3b__content t3b)))))
-(define-fun t3b__ref___projection ((a t3b__ref)) t3b (t3b__content a))
+  (! (= (= (is_empty stack__my_stack__fields) true)
+     (= (count stack__my_stack__fields) 0)) :pattern ((is_empty
+                                                      stack__my_stack__fields)) )))
 
 (declare-fun initial_stack () us_rep)
 
@@ -444,19 +400,19 @@
 
 (declare-sort natural 0)
 
-(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
+(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
 
-(declare-fun user_eq6 (natural natural) Bool)
+(declare-fun user_eq4 (natural natural) Bool)
 
-(declare-fun dummy6 () natural)
+(declare-fun dummy4 () natural)
 
 (declare-datatypes ()
 ((natural__ref (mk_natural__ref (natural__content natural)))))
@@ -467,21 +423,14 @@
   (temp___skip_constant_31 Bool)
   (temp___do_toplevel_32 Bool)) Bool (=>
                                      (or (= temp___is_init_30 true)
-                                     (<= 0 2147483647)) (in_range4
+                                     (<= 0 2147483647)) (in_range2
                                      temp___expr_33)))
 
-(define-fun dynamic_invariant2 ((temp___expr_185 Int)
-  (temp___is_init_182 Bool) (temp___skip_constant_183 Bool)
-  (temp___do_toplevel_184 Bool)) Bool (=>
-                                      (or (= temp___is_init_182 true)
-                                      (<= 0 100)) (in_range temp___expr_185)))
-
-(define-fun dynamic_invariant3 ((temp___expr_191 Int)
-  (temp___is_init_188 Bool) (temp___skip_constant_189 Bool)
-  (temp___do_toplevel_190 Bool)) Bool (=>
-                                      (or (= temp___is_init_188 true)
-                                      (<= 1 100)) (in_range2
-                                      temp___expr_191)))
+(define-fun dynamic_invariant2 ((temp___expr_156 Int)
+  (temp___is_init_153 Bool) (temp___skip_constant_154 Bool)
+  (temp___do_toplevel_155 Bool)) Bool (=>
+                                      (or (= temp___is_init_153 true)
+                                      (<= 0 100)) (in_range temp___expr_156)))
 
 ;; initial_stack__def_axiom
   (assert
@@ -489,21 +438,17 @@
 
 ;; count__post_axiom
   (assert
-  (forall ((stack__my_stack__fields us_split_fields))
-  (! (let ((result (count stack__my_stack__fields)))
-     (=> (count__function_guard result stack__my_stack__fields)
-     (dynamic_invariant1 result true false true))) :pattern ((count
-                                                             stack__my_stack__fields)) )))
+  (forall ((stack__my_stack__fields us_split_fields)) (! (dynamic_invariant1
+  (count stack__my_stack__fields) true false
+  true) :pattern ((count stack__my_stack__fields)) )))
 
 ;; count__def_axiom
   (assert
   (forall ((stack__my_stack__fields us_split_fields))
-  (! (=> (count__function_guard (count stack__my_stack__fields)
-     stack__my_stack__fields)
-     (= (count stack__my_stack__fields) (to_rep
+  (! (= (count stack__my_stack__fields) (to_rep
                                         (rec__stack__stack_type__pointer
                                         (us_split_fields1
-                                        (mk___rep stack__my_stack__fields)))))) :pattern (
+                                        (mk___rep stack__my_stack__fields))))) :pattern (
   (count stack__my_stack__fields)) )))
 
 (declare-fun my_stack__split_fields () (Array Int integer))
@@ -514,9 +459,7 @@
 
 (declare-fun o1 () (Array Int integer))
 
-(declare-fun o2 () (Array Int integer))
-
-(declare-fun o3 () pointer_range)
+(declare-fun o2 () pointer_range)
 
 (declare-fun stack__initial_stack__assume () (Array Int integer))
 
@@ -537,26 +480,19 @@
 (declare-fun result2 () Bool)
 
 ;; H
-  (assert (count__function_guard (count my_stack__split_fields4)
-  my_stack__split_fields4))
-
-;; H
   (assert (= (to_rep o) 0))
 
 ;; H
-  (assert (= o1 (temp___133 0)))
+  (assert (= (temp___133 0) o1))
 
 ;; H
-  (assert (= o1 o2))
+  (assert (= o o2))
 
 ;; H
-  (assert (= o o3))
+  (assert (= stack__initial_stack__assume o1))
 
 ;; H
-  (assert (= stack__initial_stack__assume o2))
-
-;; H
-  (assert (= stack__initial_stack__assume1 o3))
+  (assert (= stack__initial_stack__assume1 o2))
 
 ;; H
   (assert
@@ -575,14 +511,8 @@
 
 ;; H
   (assert
-  (and
   (and (= result2 (is_empty my_stack__split_fields4))
-  (is_empty__function_guard result2 my_stack__split_fields4))
   (= (= result2 true) (= (count my_stack__split_fields4) 0))))
-
-;; H
-  (assert (is_empty__function_guard (is_empty my_stack__split_fields4)
-  my_stack__split_fields4))
 
 (assert
 ;; WP_parameter_def

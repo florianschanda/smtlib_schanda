@@ -425,13 +425,13 @@
 (define-fun octet_array__ref___projection ((a octet_array__ref)) us_t 
   (octet_array__content a))
 
-(define-fun dynamic_invariant ((temp___expr_188 us_t)
-  (temp___is_init_185 Bool) (temp___skip_constant_186 Bool)
-  (temp___do_toplevel_187 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_186 true))
+(define-fun dynamic_invariant ((temp___expr_184 us_t)
+  (temp___is_init_181 Bool) (temp___skip_constant_182 Bool)
+  (temp___do_toplevel_183 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_182 true))
                                       (dynamic_property 0 2147483647
-                                      (first1 temp___expr_188)
-                                      (last1 temp___expr_188))))
+                                      (first1 temp___expr_184)
+                                      (last1 temp___expr_184))))
 
 (define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)
@@ -447,10 +447,9 @@
 ;; put_integer_value__post_axiom
   (assert
   (forall ((value Int))
-  (! (=> (dynamic_invariant1 value true true true)
-     (let ((result (put_integer_value value)))
-     (=> (put_integer_value__function_guard result value) (dynamic_invariant
-     result true false true)))) :pattern ((put_integer_value value)) )))
+  (! (=> (dynamic_invariant1 value true true true) (dynamic_invariant
+     (put_integer_value value) true false true)) :pattern ((put_integer_value
+                                                           value)) )))
 
 (declare-fun tst_info () us_t)
 
@@ -463,106 +462,102 @@
                                      (<= 0 2147483647)) (in_range
                                      temp___expr_33)))
 
-(define-fun dynamic_invariant3 ((temp___expr_182 (_ BitVec 8))
-  (temp___is_init_179 Bool) (temp___skip_constant_180 Bool)
-  (temp___do_toplevel_181 Bool)) Bool true)
+(define-fun dynamic_invariant3 ((temp___expr_178 (_ BitVec 8))
+  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
+  (temp___do_toplevel_177 Bool)) Bool true)
 
 ;; tst_info__def_axiom
   (assert
-  (and (put_integer_value__function_guard (put_integer_value 0) 0)
-  (and (put_integer_value__function_guard (put_integer_value 0) 0)
-  (and (put_integer_value__function_guard (put_integer_value 0) 0)
-  (and (put_integer_value__function_guard (put_integer_value 0) 0)
-  (= tst_info (let ((temp___142 (put_integer_value 0)))
-              (let ((temp___141 (let ((temp___139 (put_integer_value 0)))
-                                (let ((temp___138 (let ((temp___136 (put_integer_value
+  (= tst_info (let ((temp___138 (put_integer_value 0)))
+              (let ((temp___137 (let ((temp___136 (put_integer_value 0)))
+                                (let ((temp___135 (let ((temp___134 (put_integer_value
                                                                     0)))
-                                                  (let ((temp___135 (put_integer_value
+                                                  (let ((temp___133 (put_integer_value
                                                                     0)))
-                                                  (ite (= (length temp___135) 0)
+                                                  (ite (= (length temp___133) 0)
                                                   (of_array
-                                                  (to_array temp___136)
-                                                  (first1 temp___136)
-                                                  (last1 temp___136))
+                                                  (to_array temp___134)
+                                                  (first1 temp___134)
+                                                  (last1 temp___134))
                                                   (of_array
                                                   (concat1
-                                                  (to_array temp___135)
-                                                  (first1 temp___135)
-                                                  (last1 temp___135)
-                                                  (to_array temp___136)
-                                                  (first1 temp___136)
-                                                  (last1 temp___136))
-                                                  (first1 temp___135)
-                                                  (- (+ (first1 temp___135) (+ 
+                                                  (to_array temp___133)
+                                                  (first1 temp___133)
+                                                  (last1 temp___133)
+                                                  (to_array temp___134)
+                                                  (first1 temp___134)
+                                                  (last1 temp___134))
+                                                  (first1 temp___133)
+                                                  (- (+ (first1 temp___133) (+ 
                                                   (ite (<= (first1
-                                                           temp___135) 
-                                                  (last1 temp___135))
-                                                  (+ (- (last1 temp___135) 
-                                                  (first1 temp___135)) 1) 0) 
+                                                           temp___133) 
+                                                  (last1 temp___133))
+                                                  (+ (- (last1 temp___133) 
+                                                  (first1 temp___133)) 1) 0) 
                                                   (ite (<= (first1
-                                                           temp___136) 
-                                                  (last1 temp___136))
-                                                  (+ (- (last1 temp___136) 
-                                                  (first1 temp___136)) 1) 0))) 1)))))))
-                                (ite (= (length temp___138) 0)
-                                (of_array (to_array temp___139)
-                                (first1 temp___139) (last1 temp___139))
+                                                           temp___134) 
+                                                  (last1 temp___134))
+                                                  (+ (- (last1 temp___134) 
+                                                  (first1 temp___134)) 1) 0))) 1)))))))
+                                (ite (= (length temp___135) 0)
+                                (of_array (to_array temp___136)
+                                (first1 temp___136) (last1 temp___136))
                                 (of_array
-                                (concat1 (to_array temp___138)
-                                (first1 temp___138) (last1 temp___138)
-                                (to_array temp___139) (first1 temp___139)
-                                (last1 temp___139)) (first1 temp___138)
-                                (- (+ (first1 temp___138) (+ (ite (<= 
+                                (concat1 (to_array temp___135)
+                                (first1 temp___135) (last1 temp___135)
+                                (to_array temp___136) (first1 temp___136)
+                                (last1 temp___136)) (first1 temp___135)
+                                (- (+ (first1 temp___135) (+ (ite (<= 
                                                              (first1
-                                                             temp___138) 
+                                                             temp___135) 
                                                              (last1
-                                                             temp___138))
+                                                             temp___135))
                                                              (+ (- (last1
-                                                                   temp___138) 
+                                                                   temp___135) 
                                                              (first1
-                                                             temp___138)) 1)
+                                                             temp___135)) 1)
                                                              0) (ite (<= 
                                                                 (first1
-                                                                temp___139) 
+                                                                temp___136) 
                                                                 (last1
-                                                                temp___139))
+                                                                temp___136))
                                                                 (+ (- 
                                                                 (last1
-                                                                temp___139) 
+                                                                temp___136) 
                                                                 (first1
-                                                                temp___139)) 1)
+                                                                temp___136)) 1)
                                                                 0))) 1)))))))
-              (ite (= (length temp___141) 0)
-              (of_array (to_array temp___142) (first1 temp___142)
-              (last1 temp___142))
+              (ite (= (length temp___137) 0)
+              (of_array (to_array temp___138) (first1 temp___138)
+              (last1 temp___138))
               (of_array
-              (concat1 (to_array temp___141) (first1 temp___141)
-              (last1 temp___141) (to_array temp___142) (first1 temp___142)
-              (last1 temp___142)) (first1 temp___141)
-              (- (+ (first1 temp___141) (+ (ite (<= (first1 temp___141) 
-                                           (last1 temp___141))
-                                           (+ (- (last1 temp___141) (first1
-                                                                    temp___141)) 1)
-                                           0) (ite (<= (first1 temp___142) 
-                                              (last1 temp___142))
-                                              (+ (- (last1 temp___142) 
-                                              (first1 temp___142)) 1) 0))) 1)))))))))))
-
-(declare-fun temp___197 () (Array Int octet))
-
-(declare-fun temp___1971 () t)
-
-(declare-fun temp___195 () (Array Int octet))
-
-(declare-fun temp___1951 () t)
+              (concat1 (to_array temp___137) (first1 temp___137)
+              (last1 temp___137) (to_array temp___138) (first1 temp___138)
+              (last1 temp___138)) (first1 temp___137)
+              (- (+ (first1 temp___137) (+ (ite (<= (first1 temp___137) 
+                                           (last1 temp___137))
+                                           (+ (- (last1 temp___137) (first1
+                                                                    temp___137)) 1)
+                                           0) (ite (<= (first1 temp___138) 
+                                              (last1 temp___138))
+                                              (+ (- (last1 temp___138) 
+                                              (first1 temp___138)) 1) 0))) 1)))))))
 
 (declare-fun temp___193 () (Array Int octet))
 
 (declare-fun temp___1931 () t)
 
-(declare-fun temp___192 () (Array Int octet))
+(declare-fun temp___191 () (Array Int octet))
 
-(declare-fun temp___1921 () t)
+(declare-fun temp___1911 () t)
+
+(declare-fun temp___189 () (Array Int octet))
+
+(declare-fun temp___1891 () t)
+
+(declare-fun temp___188 () (Array Int octet))
+
+(declare-fun temp___1881 () t)
 
 (declare-fun o () Int)
 
@@ -576,9 +571,9 @@
 
 (declare-fun o5 () Int)
 
-(declare-fun temp___194 () (Array Int octet))
+(declare-fun temp___190 () (Array Int octet))
 
-(declare-fun temp___1941 () t)
+(declare-fun temp___1901 () t)
 
 (declare-fun o6 () Int)
 
@@ -592,9 +587,9 @@
 
 (declare-fun o11 () Int)
 
-(declare-fun temp___196 () (Array Int octet))
+(declare-fun temp___192 () (Array Int octet))
 
-(declare-fun temp___1961 () t)
+(declare-fun temp___1921 () t)
 
 (declare-fun o12 () Int)
 
@@ -606,195 +601,187 @@
 
 (declare-fun o16 () Int)
 
-(define-fun temp___1922 () us_t (mk___t temp___192 temp___1921))
+(define-fun temp___1882 () us_t (mk___t temp___188 temp___1881))
+
+(define-fun temp___1892 () us_t (mk___t temp___189 temp___1891))
+
+(define-fun temp___1912 () us_t (mk___t temp___191 temp___1911))
 
 (define-fun temp___1932 () us_t (mk___t temp___193 temp___1931))
 
-(define-fun temp___1952 () us_t (mk___t temp___195 temp___1951))
-
-(define-fun temp___1972 () us_t (mk___t temp___197 temp___1971))
+;; H
+  (assert
+  (and (= temp___1932 (put_integer_value 0)) (dynamic_invariant temp___1932
+  true false true)))
 
 ;; H
   (assert
-  (and
-  (and (= temp___1972 (put_integer_value 0))
-  (put_integer_value__function_guard temp___1972 0)) (dynamic_invariant
-  temp___1972 true false true)))
+  (and (= temp___1912 (put_integer_value 0)) (dynamic_invariant temp___1912
+  true false true)))
 
 ;; H
   (assert
-  (and
-  (and (= temp___1952 (put_integer_value 0))
-  (put_integer_value__function_guard temp___1952 0)) (dynamic_invariant
-  temp___1952 true false true)))
+  (and (= temp___1892 (put_integer_value 0)) (dynamic_invariant temp___1892
+  true false true)))
 
 ;; H
   (assert
-  (and
-  (and (= temp___1932 (put_integer_value 0))
-  (put_integer_value__function_guard temp___1932 0)) (dynamic_invariant
-  temp___1932 true false true)))
+  (and (= temp___1882 (put_integer_value 0)) (dynamic_invariant temp___1882
+  true false true)))
+
+;; H
+  (assert (=> (= (length temp___1882) 0) (= temp___189 temp___190)))
 
 ;; H
   (assert
-  (and
-  (and (= temp___1922 (put_integer_value 0))
-  (put_integer_value__function_guard temp___1922 0)) (dynamic_invariant
-  temp___1922 true false true)))
-
-;; H
-  (assert (=> (= (length temp___1922) 0) (= temp___193 temp___194)))
+  (=> (= (length temp___1882) 0)
+  (= (mk (to_rep1 (first temp___1891)) (to_rep1 (last temp___1891))) 
+  temp___1901)))
 
 ;; H
   (assert
-  (=> (= (length temp___1922) 0)
-  (= (mk (to_rep1 (first temp___1931)) (to_rep1 (last temp___1931))) 
-  temp___1941)))
+  (=> (not (= (length temp___1882) 0))
+  (=> (<= (to_rep1 (first temp___1891)) (to_rep1 (last temp___1891)))
+  (= o (+ (- (to_rep1 (last temp___1891)) (to_rep1 (first temp___1891))) 1)))))
 
 ;; H
   (assert
-  (=> (not (= (length temp___1922) 0))
-  (=> (<= (to_rep1 (first temp___1931)) (to_rep1 (last temp___1931)))
-  (= o (+ (- (to_rep1 (last temp___1931)) (to_rep1 (first temp___1931))) 1)))))
-
-;; H
-  (assert
-  (=> (not (= (length temp___1922) 0))
-  (=> (not (<= (to_rep1 (first temp___1931)) (to_rep1 (last temp___1931))))
+  (=> (not (= (length temp___1882) 0))
+  (=> (not (<= (to_rep1 (first temp___1891)) (to_rep1 (last temp___1891))))
   (= o 0))))
 
 ;; H
   (assert
-  (=> (not (= (length temp___1922) 0))
-  (=> (<= (to_rep1 (first temp___1921)) (to_rep1 (last temp___1921)))
-  (= o1 (+ (- (to_rep1 (last temp___1921)) (to_rep1 (first temp___1921))) 1)))))
+  (=> (not (= (length temp___1882) 0))
+  (=> (<= (to_rep1 (first temp___1881)) (to_rep1 (last temp___1881)))
+  (= o1 (+ (- (to_rep1 (last temp___1881)) (to_rep1 (first temp___1881))) 1)))))
 
 ;; H
   (assert
-  (=> (not (= (length temp___1922) 0))
-  (=> (not (<= (to_rep1 (first temp___1921)) (to_rep1 (last temp___1921))))
+  (=> (not (= (length temp___1882) 0))
+  (=> (not (<= (to_rep1 (first temp___1881)) (to_rep1 (last temp___1881))))
   (= o1 0))))
 
 ;; H
-  (assert (=> (not (= (length temp___1922) 0)) (= o2 (+ o1 o))))
+  (assert (=> (not (= (length temp___1882) 0)) (= o2 (+ o1 o))))
 
 ;; H
   (assert
-  (=> (not (= (length temp___1922) 0))
-  (= o3 (+ (to_rep1 (first temp___1921)) o2))))
+  (=> (not (= (length temp___1882) 0))
+  (= o3 (+ (to_rep1 (first temp___1881)) o2))))
 
 ;; H
-  (assert (=> (not (= (length temp___1922) 0)) (= o4 (- o3 1))))
-
-;; H
-  (assert
-  (=> (not (= (length temp___1922) 0)) (and (= o5 o4) (in_range o4))))
+  (assert (=> (not (= (length temp___1882) 0)) (= o4 (- o3 1))))
 
 ;; H
   (assert
-  (=> (not (= (length temp___1922) 0))
-  (= (concat1 temp___192 (to_rep1 (first temp___1921))
-     (to_rep1 (last temp___1921)) temp___193 (to_rep1 (first temp___1931))
-     (to_rep1 (last temp___1931))) temp___194)))
+  (=> (not (= (length temp___1882) 0)) (and (= o5 o4) (in_range o4))))
 
 ;; H
   (assert
-  (=> (not (= (length temp___1922) 0))
-  (= (mk (to_rep1 (first temp___1921)) o5) temp___1941)))
+  (=> (not (= (length temp___1882) 0))
+  (= (concat1 temp___188 (to_rep1 (first temp___1881))
+     (to_rep1 (last temp___1881)) temp___189 (to_rep1 (first temp___1891))
+     (to_rep1 (last temp___1891))) temp___190)))
 
 ;; H
   (assert
-  (=> (= (length (mk___t temp___194 temp___1941)) 0)
-  (= temp___195 temp___196)))
+  (=> (not (= (length temp___1882) 0))
+  (= (mk (to_rep1 (first temp___1881)) o5) temp___1901)))
 
 ;; H
   (assert
-  (=> (= (length (mk___t temp___194 temp___1941)) 0)
-  (= (mk (to_rep1 (first temp___1951)) (to_rep1 (last temp___1951))) 
-  temp___1961)))
+  (=> (= (length (mk___t temp___190 temp___1901)) 0)
+  (= temp___191 temp___192)))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___194 temp___1941)) 0))
-  (=> (<= (to_rep1 (first temp___1951)) (to_rep1 (last temp___1951)))
-  (= o6 (+ (- (to_rep1 (last temp___1951)) (to_rep1 (first temp___1951))) 1)))))
+  (=> (= (length (mk___t temp___190 temp___1901)) 0)
+  (= (mk (to_rep1 (first temp___1911)) (to_rep1 (last temp___1911))) 
+  temp___1921)))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___194 temp___1941)) 0))
-  (=> (not (<= (to_rep1 (first temp___1951)) (to_rep1 (last temp___1951))))
+  (=> (not (= (length (mk___t temp___190 temp___1901)) 0))
+  (=> (<= (to_rep1 (first temp___1911)) (to_rep1 (last temp___1911)))
+  (= o6 (+ (- (to_rep1 (last temp___1911)) (to_rep1 (first temp___1911))) 1)))))
+
+;; H
+  (assert
+  (=> (not (= (length (mk___t temp___190 temp___1901)) 0))
+  (=> (not (<= (to_rep1 (first temp___1911)) (to_rep1 (last temp___1911))))
   (= o6 0))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___194 temp___1941)) 0))
-  (=> (<= (to_rep1 (first temp___1941)) (to_rep1 (last temp___1941)))
-  (= o7 (+ (- (to_rep1 (last temp___1941)) (to_rep1 (first temp___1941))) 1)))))
+  (=> (not (= (length (mk___t temp___190 temp___1901)) 0))
+  (=> (<= (to_rep1 (first temp___1901)) (to_rep1 (last temp___1901)))
+  (= o7 (+ (- (to_rep1 (last temp___1901)) (to_rep1 (first temp___1901))) 1)))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___194 temp___1941)) 0))
-  (=> (not (<= (to_rep1 (first temp___1941)) (to_rep1 (last temp___1941))))
+  (=> (not (= (length (mk___t temp___190 temp___1901)) 0))
+  (=> (not (<= (to_rep1 (first temp___1901)) (to_rep1 (last temp___1901))))
   (= o7 0))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___194 temp___1941)) 0)) (= o8 (+ o7 o6))))
+  (=> (not (= (length (mk___t temp___190 temp___1901)) 0)) (= o8 (+ o7 o6))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___194 temp___1941)) 0))
-  (= o9 (+ (to_rep1 (first temp___1941)) o8))))
+  (=> (not (= (length (mk___t temp___190 temp___1901)) 0))
+  (= o9 (+ (to_rep1 (first temp___1901)) o8))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___194 temp___1941)) 0)) (= o10 (- o9 1))))
+  (=> (not (= (length (mk___t temp___190 temp___1901)) 0)) (= o10 (- o9 1))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___194 temp___1941)) 0))
+  (=> (not (= (length (mk___t temp___190 temp___1901)) 0))
   (and (= o11 o10) (in_range o10))))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___194 temp___1941)) 0))
-  (= (concat1 temp___194 (to_rep1 (first temp___1941))
-     (to_rep1 (last temp___1941)) temp___195 (to_rep1 (first temp___1951))
-     (to_rep1 (last temp___1951))) temp___196)))
+  (=> (not (= (length (mk___t temp___190 temp___1901)) 0))
+  (= (concat1 temp___190 (to_rep1 (first temp___1901))
+     (to_rep1 (last temp___1901)) temp___191 (to_rep1 (first temp___1911))
+     (to_rep1 (last temp___1911))) temp___192)))
 
 ;; H
   (assert
-  (=> (not (= (length (mk___t temp___194 temp___1941)) 0))
-  (= (mk (to_rep1 (first temp___1941)) o11) temp___1961)))
+  (=> (not (= (length (mk___t temp___190 temp___1901)) 0))
+  (= (mk (to_rep1 (first temp___1901)) o11) temp___1921)))
 
 ;; H
-  (assert (not (= (length (mk___t temp___196 temp___1961)) 0)))
-
-;; H
-  (assert
-  (=> (<= (to_rep1 (first temp___1971)) (to_rep1 (last temp___1971)))
-  (= o12 (+ (- (to_rep1 (last temp___1971)) (to_rep1 (first temp___1971))) 1))))
+  (assert (not (= (length (mk___t temp___192 temp___1921)) 0)))
 
 ;; H
   (assert
-  (=> (not (<= (to_rep1 (first temp___1971)) (to_rep1 (last temp___1971))))
+  (=> (<= (to_rep1 (first temp___1931)) (to_rep1 (last temp___1931)))
+  (= o12 (+ (- (to_rep1 (last temp___1931)) (to_rep1 (first temp___1931))) 1))))
+
+;; H
+  (assert
+  (=> (not (<= (to_rep1 (first temp___1931)) (to_rep1 (last temp___1931))))
   (= o12 0)))
 
 ;; H
   (assert
-  (=> (<= (to_rep1 (first temp___1961)) (to_rep1 (last temp___1961)))
-  (= o13 (+ (- (to_rep1 (last temp___1961)) (to_rep1 (first temp___1961))) 1))))
+  (=> (<= (to_rep1 (first temp___1921)) (to_rep1 (last temp___1921)))
+  (= o13 (+ (- (to_rep1 (last temp___1921)) (to_rep1 (first temp___1921))) 1))))
 
 ;; H
   (assert
-  (=> (not (<= (to_rep1 (first temp___1961)) (to_rep1 (last temp___1961))))
+  (=> (not (<= (to_rep1 (first temp___1921)) (to_rep1 (last temp___1921))))
   (= o13 0)))
 
 ;; H
   (assert (= o14 (+ o13 o12)))
 
 ;; H
-  (assert (= o15 (+ (to_rep1 (first temp___1961)) o14)))
+  (assert (= o15 (+ (to_rep1 (first temp___1921)) o14)))
 
 ;; H
   (assert (= o16 (- o15 1)))

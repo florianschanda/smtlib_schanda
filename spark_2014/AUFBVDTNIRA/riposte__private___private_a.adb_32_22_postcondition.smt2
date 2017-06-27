@@ -223,9 +223,6 @@
 ;; H
   (assert (= dst__split_fields7 dst__split_fields3))
 
-;; H
-  (assert (create__function_guard (create 0 0) 0 0))
-
 (assert
 ;; WP_parameter_def
  ;; File "private_a.adb", line 20, characters 0-0

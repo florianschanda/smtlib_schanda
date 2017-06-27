@@ -364,10 +364,8 @@
   (forall ((resolve_links Bool))
   (! (=>
      (and (dynamic_invariant name1 true true true) (dynamic_invariant
-     directory true true true))
-     (let ((result (normalize_pathname name1 directory resolve_links)))
-     (=> (normalize_pathname__function_guard result name1 directory
-     resolve_links) (dynamic_invariant result true false true)))) :pattern (
+     directory true true true)) (dynamic_invariant
+     (normalize_pathname name1 directory resolve_links) true false true)) :pattern (
   (normalize_pathname name1 directory resolve_links)) ))))
 
 (declare-fun test (us_t us_t) us_t)
@@ -379,10 +377,8 @@
   (forall ((name1 us_t) (directory us_t))
   (! (=>
      (and (dynamic_invariant name1 true true true) (dynamic_invariant
-     directory true true true))
-     (let ((result (test name1 directory)))
-     (=> (test__function_guard result name1 directory) (dynamic_invariant
-     result true false true)))) :pattern ((test name1 directory)) )))
+     directory true true true)) (dynamic_invariant (test name1 directory)
+     true false true)) :pattern ((test name1 directory)) )))
 
 (declare-fun is_valid (us_t) Bool)
 
@@ -394,8 +390,7 @@
 ;; is_valid__def_axiom
   (assert
   (forall ((name1 us_t))
-  (! (=> (is_valid__function_guard (is_valid name1) name1)
-     (= (is_valid name1) true)) :pattern ((is_valid name1)) )))
+  (! (= (is_valid name1) true) :pattern ((is_valid name1)) )))
 
 (declare-fun value () us_t)
 
@@ -410,12 +405,10 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(declare-fun temp___String_Literal_134 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_133 (tuple0) (Array Int character))
 
-;; temp___String_Literal_134__def_axiom
+;; temp___String_Literal_133__def_axiom
   (assert true)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -441,7 +434,7 @@
 
 (declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -451,7 +444,7 @@
   (! (=> (in_range1 f)
      (=> (in_range1 l)
      (and (= (to_rep1 (first2 (mk1 f l))) f)
-     (= (to_rep1 (last3 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (= (to_rep1 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -469,10 +462,10 @@
 
 (define-fun first3 ((a us_t1)) Int (to_rep1 (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep1 (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last4 a))
-                                    (+ (- (last4 a) (first3 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size1 () Int)
 
@@ -507,8 +500,8 @@
 
 (define-fun bool_eq6 ((x us_t1)
   (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep1 (first2 (rt1 x)))
-                  (to_rep1 (last3 (rt1 x))) (elts1 y)
-                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last3 (rt1 y)))))
+                  (to_rep1 (last2 (rt1 x))) (elts1 y)
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
 (declare-fun user_eq5 (us_t1 us_t1) Bool)
 
@@ -541,29 +534,22 @@
 
 ;; value__def_axiom
   (assert
-  (and (normalize_pathname__function_guard
-  (normalize_pathname name (of_array (temp___String_Literal_132 Tuple0) 1 0)
-  (of_int 1)) name (of_array (temp___String_Literal_132 Tuple0) 1 0)
-  (of_int 1))
   (= value (normalize_pathname name
-           (of_array (temp___String_Literal_132 Tuple0) 1 0) (of_int 1)))))
+           (of_array (temp___String_Literal_132 Tuple0) 1 0) (of_int 1))))
 
 ;; test_value__def_axiom
   (assert
-  (and (test__function_guard
-  (test name (of_array (temp___String_Literal_134 Tuple0) 1 0)) name
-  (of_array (temp___String_Literal_134 Tuple0) 1 0))
-  (= test_value (test name (of_array (temp___String_Literal_134 Tuple0) 1 0)))))
+  (= test_value (test name (of_array (temp___String_Literal_133 Tuple0) 1 0))))
 
-(define-fun dynamic_invariant4 ((temp___expr_188 us_t1)
-  (temp___is_init_185 Bool) (temp___skip_constant_186 Bool)
-  (temp___do_toplevel_187 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_186 true))
+(define-fun dynamic_invariant4 ((temp___expr_186 us_t1)
+  (temp___is_init_183 Bool) (temp___skip_constant_184 Bool)
+  (temp___do_toplevel_185 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_184 true))
                                       (and (dynamic_property2 1
-                                      (length value) (first3 temp___expr_188)
-                                      (last4 temp___expr_188))
-                                      (and (= (first3 temp___expr_188) 1)
-                                      (= (last4 temp___expr_188) (length
+                                      (length value) (first3 temp___expr_186)
+                                      (last3 temp___expr_186))
+                                      (and (= (first3 temp___expr_186) 1)
+                                      (= (last3 temp___expr_186) (length
                                                                  value))))))
 
 (declare-fun o () Bool)
@@ -590,9 +576,7 @@
   (assert (dynamic_invariant name true false true))
 
 ;; H
-  (assert
-  (and (and (= o (is_valid name)) (is_valid__function_guard o name))
-  (= o true)))
+  (assert (and (= o (is_valid name)) (= o true)))
 
 ;; H
   (assert (= result (ite (not (= o true)) true false)))
@@ -603,13 +587,10 @@
 ;; H
   (assert
   (and
-  (and
   (= dir__full_name__B_1__value__assume2 (normalize_pathname name
                                          (mk___t
                                          (temp___String_Literal_132 Tuple0)
                                          (mk 1 0)) (of_int 1)))
-  (normalize_pathname__function_guard dir__full_name__B_1__value__assume2
-  name (mk___t (temp___String_Literal_132 Tuple0) (mk 1 0)) (of_int 1)))
   (dynamic_invariant dir__full_name__B_1__value__assume2 true false true)))
 
 ;; H
@@ -621,14 +602,12 @@
 ;; H
   (assert
   (and
-  (and
   (= dir__full_name__B_1__test_value__assume2 (test name
                                               (mk___t
-                                              (temp___String_Literal_134
+                                              (temp___String_Literal_133
                                               Tuple0) (mk 1 0))))
-  (test__function_guard dir__full_name__B_1__test_value__assume2 name
-  (mk___t (temp___String_Literal_134 Tuple0) (mk 1 0)))) (dynamic_invariant
-  dir__full_name__B_1__test_value__assume2 true false true)))
+  (dynamic_invariant dir__full_name__B_1__test_value__assume2 true false
+  true)))
 
 ;; H
   (assert (= dir__full_name__B_1__test_value__assume2 test_value))

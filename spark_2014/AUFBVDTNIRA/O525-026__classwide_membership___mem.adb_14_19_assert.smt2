@@ -137,9 +137,8 @@
 ;; test_mem__def_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (test_mem__function_guard (test_mem v) v)
-     (= (= (test_mem v) true) (= (attr__tag v) us_tag))) :pattern ((test_mem
-                                                                   v)) )))
+  (! (= (= (test_mem v) true) (= (attr__tag v) us_tag)) :pattern ((test_mem
+                                                                  v)) )))
 
 (declare-fun test_mem_class (us_rep) Bool)
 
@@ -156,9 +155,8 @@
 ;; test_mem_class__def_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (test_mem_class__function_guard (test_mem_class v) v)
-     (= (= (test_mem_class v) true) (us_compatible_tags (attr__tag v)
-     us_tag))) :pattern ((test_mem_class v)) )))
+  (! (= (= (test_mem_class v) true) (us_compatible_tags (attr__tag v)
+     us_tag)) :pattern ((test_mem_class v)) )))
 
 (declare-fun test_mem_class1 (us_rep) Bool)
 
@@ -170,9 +168,8 @@
 ;; test_mem_class1__def_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (test_mem_class1__function_guard (test_mem_class1 v) v)
-     (= (= (test_mem_class1 v) true)
-     (or (us_compatible_tags (attr__tag v) us_tag) (= (attr__tag v) us_tag)))) :pattern (
+  (! (= (= (test_mem_class1 v) true)
+     (or (us_compatible_tags (attr__tag v) us_tag) (= (attr__tag v) us_tag))) :pattern (
   (test_mem_class1 v)) )))
 
 (declare-fun test_mem_class2 (us_rep) Bool)
@@ -185,20 +182,14 @@
 ;; test_mem_class2__def_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (test_mem_class2__function_guard (test_mem_class2 v) v)
-     (= (= (test_mem_class2 v) true)
-     (or (= (attr__tag v) us_tag) (us_compatible_tags (attr__tag v) us_tag)))) :pattern (
+  (! (= (= (test_mem_class2 v) true)
+     (or (= (attr__tag v) us_tag) (us_compatible_tags (attr__tag v) us_tag))) :pattern (
   (test_mem_class2 v)) )))
 
 (declare-fun x__split_fields () us_private)
 
 ;; H
   (assert (= x__attr__tag us_tag))
-
-;; H
-  (assert (test_mem__function_guard
-  (test_mem (mk___rep (mk___split_fields x__split_fields) x__attr__tag))
-  (mk___rep (mk___split_fields x__split_fields) x__attr__tag)))
 
 (assert
 ;; WP_parameter_def

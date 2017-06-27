@@ -95,18 +95,13 @@
   (assert
   (forall ((pumpunit__outstanding Int))
   (! (=> (dynamic_invariant pumpunit__outstanding true true true)
-     (let ((result (get_outstanding pumpunit__outstanding)))
-     (=> (get_outstanding__function_guard result pumpunit__outstanding)
-     (dynamic_invariant result true false true)))) :pattern ((get_outstanding
-                                                             pumpunit__outstanding)) )))
+     (dynamic_invariant (get_outstanding pumpunit__outstanding) true false
+     true)) :pattern ((get_outstanding pumpunit__outstanding)) )))
 
 ;; get_outstanding__def_axiom
   (assert
   (forall ((pumpunit__outstanding Int))
-  (! (=>
-     (and (dynamic_invariant pumpunit__outstanding true true true)
-     (get_outstanding__function_guard (get_outstanding pumpunit__outstanding)
-     pumpunit__outstanding))
+  (! (=> (dynamic_invariant pumpunit__outstanding true true true)
      (= (get_outstanding pumpunit__outstanding) pumpunit__outstanding)) :pattern (
   (get_outstanding pumpunit__outstanding)) )))
 
@@ -120,18 +115,13 @@
   (assert
   (forall ((pumpunit__total_pay Int))
   (! (=> (dynamic_invariant pumpunit__total_pay true true true)
-     (let ((result (get_total pumpunit__total_pay)))
-     (=> (get_total__function_guard result pumpunit__total_pay)
-     (dynamic_invariant result true false true)))) :pattern ((get_total
-                                                             pumpunit__total_pay)) )))
+     (dynamic_invariant (get_total pumpunit__total_pay) true false true)) :pattern (
+  (get_total pumpunit__total_pay)) )))
 
 ;; get_total__def_axiom
   (assert
   (forall ((pumpunit__total_pay Int))
-  (! (=>
-     (and (dynamic_invariant pumpunit__total_pay true true true)
-     (get_total__function_guard (get_total pumpunit__total_pay)
-     pumpunit__total_pay))
+  (! (=> (dynamic_invariant pumpunit__total_pay true true true)
      (= (get_total pumpunit__total_pay) pumpunit__total_pay)) :pattern (
   (get_total pumpunit__total_pay)) )))
 
@@ -163,11 +153,11 @@
 (define-fun internal_state__ref___projection ((a internal_state__ref)) internal_state 
   (internal_state__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_589 Int)
-  (temp___is_init_586 Bool) (temp___skip_constant_587 Bool)
-  (temp___do_toplevel_588 Bool)) Bool (=>
-                                      (or (= temp___is_init_586 true)
-                                      (<= 0 3)) (in_range2 temp___expr_589)))
+(define-fun dynamic_invariant1 ((temp___expr_563 Int)
+  (temp___is_init_560 Bool) (temp___skip_constant_561 Bool)
+  (temp___do_toplevel_562 Bool)) Bool (=>
+                                      (or (= temp___is_init_560 true)
+                                      (<= 0 3)) (in_range2 temp___expr_563)))
 
 ;; is_waiting__post_axiom
   (assert true)
@@ -175,9 +165,7 @@
 ;; is_waiting__def_axiom
   (assert
   (forall ((pumpunit__cur_state Int))
-  (! (=> (is_waiting__function_guard (is_waiting pumpunit__cur_state)
-     pumpunit__cur_state)
-     (= (= (is_waiting pumpunit__cur_state) true) (= pumpunit__cur_state 2))) :pattern (
+  (! (= (= (is_waiting pumpunit__cur_state) true) (= pumpunit__cur_state 2)) :pattern (
   (is_waiting pumpunit__cur_state)) )))
 
 (declare-fun is_base (Int) Bool)
@@ -190,9 +178,7 @@
 ;; is_base__def_axiom
   (assert
   (forall ((pumpunit__cur_state Int))
-  (! (=> (is_base__function_guard (is_base pumpunit__cur_state)
-     pumpunit__cur_state)
-     (= (= (is_base pumpunit__cur_state) true) (= pumpunit__cur_state 3))) :pattern (
+  (! (= (= (is_base pumpunit__cur_state) true) (= pumpunit__cur_state 3)) :pattern (
   (is_base pumpunit__cur_state)) )))
 
 (define-fun dynamic_invariant2 ((temp___expr_15 Int) (temp___is_init_12 Bool)
@@ -258,25 +244,13 @@
   (assert (in_range1 outstanding))
 
 ;; H
-  (assert (is_waiting__function_guard (is_waiting cur_state) cur_state))
-
-;; H
-  (assert (get_total__function_guard (get_total total_pay) total_pay))
-
-;; H
-  (assert (get_outstanding__function_guard (get_outstanding outstanding)
-  outstanding))
-
-;; H
   (assert
   (and (= (is_waiting cur_state) true)
   (< (get_total total_pay) (- 2147483647 (get_outstanding outstanding)))))
 
 ;; H
   (assert
-  (and
-  (and (= result (is_waiting cur_state)) (is_waiting__function_guard 
-  result cur_state)) (= (= result true) (= cur_state 2))))
+  (and (= result (is_waiting cur_state)) (= (= result true) (= cur_state 2))))
 
 ;; H
   (assert
@@ -342,21 +316,16 @@
 
 ;; H
   (assert
-  (and
-  (and (= result4 (is_base cur_state3)) (is_base__function_guard result4
-  cur_state3)) (= (= result4 true) (= cur_state3 3))))
+  (and (= result4 (is_base cur_state3))
+  (= (= result4 true) (= cur_state3 3))))
 
 ;; H
   (assert (= result4 true))
 
 ;; H
-  (assert (get_total__function_guard (get_total total_pay) total_pay))
-
-;; H
   (assert
-  (and
-  (and (= o1 (get_outstanding outstanding3)) (get_outstanding__function_guard
-  o1 outstanding3)) (and (in_range1 o1) (= o1 outstanding3))))
+  (and (= o1 (get_outstanding outstanding3))
+  (and (in_range1 o1) (= o1 outstanding3))))
 
 ;; H
   (assert (= o2 (+ (get_total total_pay) o1)))

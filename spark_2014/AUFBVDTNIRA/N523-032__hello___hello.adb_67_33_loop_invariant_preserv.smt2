@@ -394,9 +394,7 @@
   (assert
   (forall ((str us_t) (res us_t))
   (forall ((last2 Int))
-  (! (=> (to_caml_char2__function_guard (to_caml_char2 str res last2) str res
-     last2)
-     (= (= (to_caml_char2 str res last2) true)
+  (! (= (= (to_caml_char2 str res last2) true)
      (forall ((j Int))
      (=> (and (<= (first1 str) j) (<= j last2))
      (ite (= j (first1 str))
@@ -414,16 +412,12 @@
      (= (to_rep (select (to_array res) j)) (to_upper
                                            (to_rep (select (to_array str) j))))
      (= (to_rep (select (to_array res) j)) (to_lower
-                                           (to_rep (select (to_array str) j)))))))))) :pattern (
+                                           (to_rep (select (to_array str) j))))))))) :pattern (
   (to_caml_char2 str res last2)) ))))
 
 (declare-fun str () us_t)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
-
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -447,9 +441,9 @@
 
 (declare-sort t1 0)
 
-(declare-fun first3 (t1) integer)
+(declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -458,8 +452,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first3 (mk1 f l))) f)
-     (= (to_rep1 (last3 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (and (= (to_rep1 (first2 (mk1 f l))) f)
+     (= (to_rep1 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -475,12 +469,12 @@
 (define-fun of_array1 ((a (Array Int character)) (f Int)
   (l Int)) us_t1 (mk___t1 a (mk1 f l)))
 
-(define-fun first4 ((a us_t1)) Int (to_rep1 (first3 (rt1 a))))
+(define-fun first3 ((a us_t1)) Int (to_rep1 (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep1 (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first4 a) (last4 a))
-                                    (+ (- (last4 a) (first4 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size1 () Int)
 
@@ -514,9 +508,9 @@
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment1 a))))
 
 (define-fun bool_eq6 ((x us_t1)
-  (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep1 (first3 (rt1 x)))
-                  (to_rep1 (last3 (rt1 x))) (elts1 y)
-                  (to_rep1 (first3 (rt1 y))) (to_rep1 (last3 (rt1 y)))))
+  (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep1 (first2 (rt1 x)))
+                  (to_rep1 (last2 (rt1 x))) (elts1 y)
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
 (declare-fun user_eq5 (us_t1 us_t1) Bool)
 
@@ -532,10 +526,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
-
-(declare-fun first5 () Int)
-
-(declare-fun last5 () Int)
 
 (define-fun dynamic_property3 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -564,17 +554,17 @@
                                      (<= 1 2147483647)) (in_range2
                                      temp___expr_39)))
 
-(define-fun dynamic_invariant4 ((temp___expr_570 us_t1)
-  (temp___is_init_567 Bool) (temp___skip_constant_568 Bool)
-  (temp___do_toplevel_569 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_568 true))
+(define-fun dynamic_invariant4 ((temp___expr_568 us_t1)
+  (temp___is_init_565 Bool) (temp___skip_constant_566 Bool)
+  (temp___do_toplevel_567 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_566 true))
                                       (and (dynamic_property2 (first1 str)
-                                      (last1 str) (first4 temp___expr_570)
-                                      (last4 temp___expr_570))
+                                      (last1 str) (first3 temp___expr_568)
+                                      (last3 temp___expr_568))
                                       (and
-                                      (= (first4 temp___expr_570) (first1
+                                      (= (first3 temp___expr_568) (first1
                                                                   str))
-                                      (= (last4 temp___expr_570) (last1 str))))))
+                                      (= (last3 temp___expr_568) (last1 str))))))
 
 (declare-fun ret () (Array Int character))
 
@@ -677,11 +667,11 @@
 ;; H
   (assert
   (= (to_rep1 ret__first) (to_rep1
-                          (first3 hello__to_camel_case__ret__assume1))))
+                          (first2 hello__to_camel_case__ret__assume1))))
 
 ;; H
   (assert
-  (= (to_rep1 ret__last) (to_rep1 (last3 hello__to_camel_case__ret__assume1))))
+  (= (to_rep1 ret__last) (to_rep1 (last2 hello__to_camel_case__ret__assume1))))
 
 ;; H
   (assert
@@ -754,12 +744,6 @@
   (assert (and (<= (to_rep1 ret__first) idx1) (<= idx1 (to_rep1 ret__last))))
 
 ;; H
-  (assert (to_caml_char2__function_guard
-  (to_caml_char2 str
-  (mk___t ret4 (mk (to_rep1 ret__first) (to_rep1 ret__last))) idx2) str
-  (mk___t ret4 (mk (to_rep1 ret__first) (to_rep1 ret__last))) idx2))
-
-;; H
   (assert
   (= (to_caml_char2 str
      (mk___t ret4 (mk (to_rep1 ret__first) (to_rep1 ret__last))) idx2) true))
@@ -774,12 +758,12 @@
   (assert
   (and
   (and
-  (forall ((temp___598 Int))
+  (forall ((temp___596 Int))
   (=>
-  (and (<= (to_rep1 ret__first) temp___598)
-  (<= temp___598 (to_rep1 ret__last)))
-  (=> (< idx2 temp___598)
-  (= (select ret4 temp___598) (select ret1 temp___598)))))
+  (and (<= (to_rep1 ret__first) temp___596)
+  (<= temp___596 (to_rep1 ret__last)))
+  (=> (< idx2 temp___596)
+  (= (select ret4 temp___596) (select ret1 temp___596)))))
   (=> (<= (to_rep1 (first (rt str))) (to_rep1 (last (rt str))))
   (dynamic_property3 (to_rep1 (first (rt str))) (to_rep1 (last (rt str)))
   idx2)))
@@ -897,12 +881,6 @@
 
 ;; H
   (assert (and (<= (to_rep1 ret__first) idx3) (<= idx3 (to_rep1 ret__last))))
-
-;; H
-  (assert (to_caml_char2__function_guard
-  (to_caml_char2 str
-  (mk___t ret5 (mk (to_rep1 ret__first) (to_rep1 ret__last))) idx3) str
-  (mk___t ret5 (mk (to_rep1 ret__first) (to_rep1 ret__last))) idx3))
 
 (assert
 ;; WP_parameter_def

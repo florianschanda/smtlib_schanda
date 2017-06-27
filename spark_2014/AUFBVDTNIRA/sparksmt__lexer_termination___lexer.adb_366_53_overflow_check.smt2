@@ -418,12 +418,12 @@
 (define-fun name_id__ref___projection ((a name_id__ref)) name_id (name_id__content
                                                                  a))
 
-(define-fun dynamic_invariant2 ((temp___expr_579 Int)
-  (temp___is_init_576 Bool) (temp___skip_constant_577 Bool)
-  (temp___do_toplevel_578 Bool)) Bool (=>
-                                      (or (= temp___is_init_576 true)
+(define-fun dynamic_invariant2 ((temp___expr_563 Int)
+  (temp___is_init_560 Bool) (temp___skip_constant_561 Bool)
+  (temp___do_toplevel_562 Bool)) Bool (=>
+                                      (or (= temp___is_init_560 true)
                                       (<= 0 2147483647)) (in_range5
-                                      temp___expr_579)))
+                                      temp___expr_563)))
 
 (declare-fun to_rep3 (name_id) Int)
 
@@ -472,11 +472,11 @@
 (define-fun token_kind__ref___projection ((a token_kind__ref)) token_kind 
   (token_kind__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_592 Int)
-  (temp___is_init_589 Bool) (temp___skip_constant_590 Bool)
-  (temp___do_toplevel_591 Bool)) Bool (=>
-                                      (or (= temp___is_init_589 true)
-                                      (<= 0 8)) (in_range6 temp___expr_592)))
+(define-fun dynamic_invariant3 ((temp___expr_572 Int)
+  (temp___is_init_569 Bool) (temp___skip_constant_570 Bool)
+  (temp___do_toplevel_571 Bool)) Bool (=>
+                                      (or (= temp___is_init_569 true)
+                                      (<= 0 8)) (in_range6 temp___expr_572)))
 
 (declare-fun to_rep4 (token_kind) Int)
 
@@ -520,11 +520,11 @@
 (define-fun valued_tokens__ref___projection ((a valued_tokens__ref)) valued_tokens 
   (valued_tokens__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_598 Int)
-  (temp___is_init_595 Bool) (temp___skip_constant_596 Bool)
-  (temp___do_toplevel_597 Bool)) Bool (=>
-                                      (or (= temp___is_init_595 true)
-                                      (<= 3 8)) (in_range7 temp___expr_598)))
+(define-fun dynamic_invariant4 ((temp___expr_578 Int)
+  (temp___is_init_575 Bool) (temp___skip_constant_576 Bool)
+  (temp___do_toplevel_577 Bool)) Bool (=>
+                                      (or (= temp___is_init_575 true)
+                                      (<= 3 8)) (in_range7 temp___expr_578)))
 
 (declare-datatypes ()
 ((us_split_discrs (mk___split_discrs (rec__lexer__token__kind token_kind)))))
@@ -713,14 +713,14 @@
 (define-fun token__ref___projection ((a token__ref)) us_rep (token__content
                                                             a))
 
-(define-fun default_initial_assumption ((temp___expr_606 us_rep)
-  (temp___skip_top_level_607 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_586 us_rep)
+  (temp___skip_top_level_587 Bool)) Bool (and
                                          (= (attr__constrained
-                                            temp___expr_606) false)
+                                            temp___expr_586) false)
                                          (= (to_rep4
                                             (rec__lexer__token__kind
                                             (us_split_discrs1
-                                            temp___expr_606))) 0)))
+                                            temp___expr_586))) 0)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -1461,9 +1461,6 @@
 
 ;; H
   (assert (dynamic_invariant1 value true false true))
-
-;; H
-  (assert (invariant____function_guard (invariant__ name_table) name_table))
 
 ;; H
   (assert

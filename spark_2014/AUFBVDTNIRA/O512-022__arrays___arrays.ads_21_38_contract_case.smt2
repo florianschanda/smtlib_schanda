@@ -451,7 +451,7 @@
 
 (declare-fun arrays__count_even__result () Int)
 
-(declare-fun temp___171 () Int)
+(declare-fun temp___169 () Int)
 
 (declare-fun o () Int)
 
@@ -532,7 +532,7 @@
 ;; H
   (assert
   (=> (and (<= (to_rep1 (first (rt x))) j1) (<= j1 (to_rep1 (last (rt x)))))
-  (= temp___171 c1)))
+  (= temp___169 c1)))
 
 ;; H
   (assert

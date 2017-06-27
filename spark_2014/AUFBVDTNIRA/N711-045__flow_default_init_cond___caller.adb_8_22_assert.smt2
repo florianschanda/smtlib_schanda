@@ -254,10 +254,8 @@
 
 ;; evaluate__post_axiom
   (assert
-  (forall ((r us_rep))
-  (! (let ((result (evaluate r)))
-     (=> (evaluate__function_guard result r) (dynamic_invariant result true
-     false true))) :pattern ((evaluate r)) )))
+  (forall ((r us_rep)) (! (dynamic_invariant (evaluate r) true false
+  true) :pattern ((evaluate r)) )))
 
 (declare-fun add2 (us_rep1) Int)
 
@@ -269,17 +267,12 @@
 
 ;; add2__post_axiom
   (assert
-  (forall ((r us_rep1))
-  (! (let ((result (add2 r)))
-     (=> (add2__function_guard result r) (dynamic_invariant result true false
-     true))) :pattern ((add2 r)) )))
+  (forall ((r us_rep1)) (! (dynamic_invariant (add2 r) true false
+  true) :pattern ((add2 r)) )))
 
 ;; add2__def_axiom
   (assert
-  (forall ((r us_rep1))
-  (! (=> (add2__function_guard (add2 r) r)
-     (and (add__function_guard (add r) r) (= (add2 r) (add r)))) :pattern (
-  (add2 r)) )))
+  (forall ((r us_rep1)) (! (= (add2 r) (add r)) :pattern ((add2 r)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -287,10 +280,8 @@
 
 ;; add__post_axiom
   (assert
-  (forall ((r us_rep1))
-  (! (let ((result (add r)))
-     (=> (add__function_guard result r) (dynamic_invariant result true false
-     true))) :pattern ((add r)) )))
+  (forall ((r us_rep1)) (! (dynamic_invariant (add r) true false
+  true) :pattern ((add r)) )))
 
 (declare-fun i__split_fields () integer)
 
@@ -301,11 +292,6 @@
 ;; H
   (assert
   (and (= (to_rep r__split_fields) 0) (= (to_rep r__split_fields1) 0)))
-
-;; H
-  (assert (evaluate__function_guard
-  (evaluate (mk___rep (mk___split_fields i__split_fields)))
-  (mk___rep (mk___split_fields i__split_fields))))
 
 (assert
 ;; WP_parameter_def

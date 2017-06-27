@@ -166,28 +166,6 @@
   (! (=> (in_range1 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
 
-(declare-sort templatepadi 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 452)))
-
-(define-fun bool_eq1 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
-
-(declare-fun user_eq1 (templatepadi templatepadi) Bool)
-
-(declare-fun dummy1 () templatepadi)
-
-(declare-datatypes ()
-((templatepadi__ref
- (mk_templatepadi__ref (templatepadi__content templatepadi)))))
-(define-fun templatepadi__ref___projection ((a templatepadi__ref)) templatepadi 
-  (templatepadi__content a))
-
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int integer))))))
 (declare-fun slide ((Array Int integer) Int Int) (Array Int integer))
@@ -230,7 +208,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq2 ((a (Array Int integer)) (a__first Int) (a__last Int)
+(define-fun bool_eq1 ((a (Array Int integer)) (a__first Int) (a__last Int)
   (b (Array Int integer)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -249,7 +227,7 @@
   (assert
   (forall ((a (Array Int integer)) (b (Array Int integer)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq2 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq1 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -267,7 +245,7 @@
   (forall ((a (Array Int integer)) (b (Array Int integer)))
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq2 a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq1 a a_first a_last b b_first b_last) true)) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -278,7 +256,7 @@
      (exists ((i Int) (j Int))
      (and (<= i a_last)
      (and (< j b_last)
-     (and (= (bool_eq2 a a_first i b b_first j) true)
+     (and (= (bool_eq1 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
      (< (to_rep (select a (+ i 1))) (to_rep (select b (+ j 1))))))))))) :pattern (
@@ -292,7 +270,7 @@
      (exists ((i Int) (j Int))
      (and (<= i b_last)
      (and (< j a_last)
-     (and (= (bool_eq2 a a_first j b b_first i) true)
+     (and (= (bool_eq1 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
      (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
@@ -306,25 +284,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(declare-sort t1b 0)
-
-(define-fun in_range3 ((x1 Int)) Bool (and (<= 1 x1) (<= x1 452)))
-
-(define-fun bool_eq3 ((x1 Int) (y Int)) Bool (ite (= x1 y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq2 (t1b t1b) Bool)
-
-(declare-fun dummy2 () t1b)
-
-(declare-datatypes () ((t1b__ref (mk_t1b__ref (t1b__content t1b)))))
-(define-fun t1b__ref___projection ((a t1b__ref)) t1b (t1b__content a))
-
 (declare-fun temp___152 (Int Int) (Array Int integer))
 
 ;; def_axiom
@@ -335,13 +294,6 @@
   (ite (and (<= 1 temp___156) (<= temp___156 10))
   (= (select temp___153 temp___156) (of_rep temp___154))
   (= (select temp___153 temp___156) (of_rep temp___155)))))))
-
-(define-fun dynamic_invariant1 ((temp___expr_139 Int)
-  (temp___is_init_136 Bool) (temp___skip_constant_137 Bool)
-  (temp___do_toplevel_138 Bool)) Bool (=>
-                                      (or (= temp___is_init_136 true)
-                                      (<= 1 452)) (in_range2
-                                      temp___expr_139)))
 
 (declare-fun k () (Array Int integer))
 

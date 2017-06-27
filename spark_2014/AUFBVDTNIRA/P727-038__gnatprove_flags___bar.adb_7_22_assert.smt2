@@ -56,12 +56,7 @@
 
 ;; id__def_axiom
   (assert
-  (forall ((b Bool))
-  (! (=> (id__function_guard (id b) b) (= (= (id b) true) (= b true))) :pattern (
-  (id b)) )))
-
-;; H
-  (assert (id__function_guard (id (of_int 1)) (of_int 1)))
+  (forall ((b Bool)) (! (= (= (id b) true) (= b true)) :pattern ((id b)) )))
 
 (assert
 ;; WP_parameter_def

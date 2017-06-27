@@ -71,17 +71,14 @@
 ;; incr_pub__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (incr_pub x)))
-     (=> (incr_pub__function_guard result x) (dynamic_invariant result true
-     false true)))) :pattern ((incr_pub x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (incr_pub x)
+     true false true)) :pattern ((incr_pub x)) )))
 
 ;; incr_pub__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true) (incr_pub__function_guard
-     (incr_pub x) x)) (= (incr_pub x) (+ x 1))) :pattern ((incr_pub x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (incr_pub x) (+ x 1))) :pattern (
+  (incr_pub x)) )))
 
 (declare-fun incr_pub_pub (Int) Int)
 
@@ -90,18 +87,14 @@
 ;; incr_pub_pub__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (incr_pub_pub x)))
-     (=> (incr_pub_pub__function_guard result x) (dynamic_invariant result
-     true false true)))) :pattern ((incr_pub_pub x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant
+     (incr_pub_pub x) true false true)) :pattern ((incr_pub_pub x)) )))
 
 ;; incr_pub_pub__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true) (incr_pub_pub__function_guard
-     (incr_pub_pub x) x)) (= (incr_pub_pub x) (+ x 1))) :pattern ((incr_pub_pub
-                                                                  x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (incr_pub_pub x) (+ x 1))) :pattern (
+  (incr_pub_pub x)) )))
 
 (declare-fun incr_pub_priv (Int) Int)
 
@@ -110,18 +103,14 @@
 ;; incr_pub_priv__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (incr_pub_priv x)))
-     (=> (incr_pub_priv__function_guard result x) (dynamic_invariant result
-     true false true)))) :pattern ((incr_pub_priv x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant
+     (incr_pub_priv x) true false true)) :pattern ((incr_pub_priv x)) )))
 
 ;; incr_pub_priv__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true) (incr_pub_priv__function_guard
-     (incr_pub_priv x) x)) (= (incr_pub_priv x) (+ x 1))) :pattern ((incr_pub_priv
-                                                                    x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (incr_pub_priv x) (+ x 1))) :pattern (
+  (incr_pub_priv x)) )))
 
 (declare-fun incr_pub_body (Int) Int)
 
@@ -130,18 +119,14 @@
 ;; incr_pub_body__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (incr_pub_body x)))
-     (=> (incr_pub_body__function_guard result x) (dynamic_invariant result
-     true false true)))) :pattern ((incr_pub_body x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant
+     (incr_pub_body x) true false true)) :pattern ((incr_pub_body x)) )))
 
 ;; incr_pub_body__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true) (incr_pub_body__function_guard
-     (incr_pub_body x) x)) (= (incr_pub_body x) (+ x 1))) :pattern ((incr_pub_body
-                                                                    x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (incr_pub_body x) (+ x 1))) :pattern (
+  (incr_pub_body x)) )))
 
 (declare-fun incr_priv (Int) Int)
 
@@ -150,17 +135,14 @@
 ;; incr_priv__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (incr_priv x)))
-     (=> (incr_priv__function_guard result x) (dynamic_invariant result true
-     false true)))) :pattern ((incr_priv x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant
+     (incr_priv x) true false true)) :pattern ((incr_priv x)) )))
 
 ;; incr_priv__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true) (incr_priv__function_guard
-     (incr_priv x) x)) (= (incr_priv x) (+ x 1))) :pattern ((incr_priv x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (incr_priv x) (+ x 1))) :pattern (
+  (incr_priv x)) )))
 
 (declare-fun incr_priv_priv (Int) Int)
 
@@ -169,18 +151,14 @@
 ;; incr_priv_priv__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (incr_priv_priv x)))
-     (=> (incr_priv_priv__function_guard result x) (dynamic_invariant result
-     true false true)))) :pattern ((incr_priv_priv x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant
+     (incr_priv_priv x) true false true)) :pattern ((incr_priv_priv x)) )))
 
 ;; incr_priv_priv__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true)
-     (incr_priv_priv__function_guard (incr_priv_priv x) x))
-     (= (incr_priv_priv x) (+ x 1))) :pattern ((incr_priv_priv x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (incr_priv_priv x) (+ x 1))) :pattern (
+  (incr_priv_priv x)) )))
 
 (declare-fun incr_priv_body (Int) Int)
 
@@ -189,18 +167,14 @@
 ;; incr_priv_body__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (incr_priv_body x)))
-     (=> (incr_priv_body__function_guard result x) (dynamic_invariant result
-     true false true)))) :pattern ((incr_priv_body x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant
+     (incr_priv_body x) true false true)) :pattern ((incr_priv_body x)) )))
 
 ;; incr_priv_body__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true)
-     (incr_priv_body__function_guard (incr_priv_body x) x))
-     (= (incr_priv_body x) (+ x 1))) :pattern ((incr_priv_body x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (incr_priv_body x) (+ x 1))) :pattern (
+  (incr_priv_body x)) )))
 
 (declare-fun incr_body (Int) Int)
 
@@ -209,17 +183,14 @@
 ;; incr_body__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (incr_body x)))
-     (=> (incr_body__function_guard result x) (dynamic_invariant result true
-     false true)))) :pattern ((incr_body x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant
+     (incr_body x) true false true)) :pattern ((incr_body x)) )))
 
 ;; incr_body__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true) (incr_body__function_guard
-     (incr_body x) x)) (= (incr_body x) (+ x 1))) :pattern ((incr_body x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (incr_body x) (+ x 1))) :pattern (
+  (incr_body x)) )))
 
 (declare-fun incr_body_body (Int) Int)
 
@@ -228,18 +199,14 @@
 ;; incr_body_body__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (incr_body_body x)))
-     (=> (incr_body_body__function_guard result x) (dynamic_invariant result
-     true false true)))) :pattern ((incr_body_body x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant
+     (incr_body_body x) true false true)) :pattern ((incr_body_body x)) )))
 
 ;; incr_body_body__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true)
-     (incr_body_body__function_guard (incr_body_body x) x))
-     (= (incr_body_body x) (+ x 1))) :pattern ((incr_body_body x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (incr_body_body x) (+ x 1))) :pattern (
+  (incr_body_body x)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -259,25 +226,13 @@
   (assert (in_range x1))
 
 ;; H
-  (assert (incr_pub__function_guard (incr_pub x1) x1))
-
-;; H
   (assert (= (incr_pub x1) (+ x1 1)))
-
-;; H
-  (assert (incr_pub_pub__function_guard (incr_pub_pub x1) x1))
 
 ;; H
   (assert (= (incr_pub_pub x1) (+ x1 1)))
 
 ;; H
-  (assert (incr_pub_priv__function_guard (incr_pub_priv x1) x1))
-
-;; H
   (assert (= (incr_pub_priv x1) (+ x1 1)))
-
-;; H
-  (assert (incr_pub_body__function_guard (incr_pub_body x1) x1))
 
 (assert
 ;; WP_parameter_def

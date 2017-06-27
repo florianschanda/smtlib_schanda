@@ -92,17 +92,14 @@
 ;; id__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (id x)))
-     (=> (id__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (id x) true
+     false true)) :pattern ((id x)) )))
 
 ;; id__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true) (id__function_guard (id x) x))
-     (= (id x) x)) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (id x) x)) :pattern (
+  (id x)) )))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -254,9 +251,6 @@
                                      (<= 1 2147483647)) (in_range
                                      temp___expr_39)))
 
-;; temp___result_140_def
-  (assert (id__function_guard (id 0) 0))
-
 (define-fun default_initial_assumption ((temp___expr_137 us_rep)
   (temp___skip_top_level_138 Bool)) Bool (and
                                          (= (attr__constrained
@@ -272,22 +266,20 @@
                                             (us_split_fields1
                                             temp___expr_137))) (id 0))))))
 
-(declare-fun temp___211 () Bool)
+(declare-fun temp___205 () Bool)
 
-(declare-fun temp___210 () Bool)
+(declare-fun temp___204 () Bool)
 
 (declare-fun o () Int)
 
 ;; H
-  (assert (= temp___211 temp___210))
+  (assert (= temp___205 temp___204))
 
 ;; H
-  (assert (= (to_int1 temp___210) 1))
+  (assert (= (to_int1 temp___204) 1))
 
 ;; H
-  (assert
-  (and (and (= o (id 0)) (id__function_guard o 0))
-  (and (in_range1 o) (= o 0))))
+  (assert (and (= o (id 0)) (and (in_range1 o) (= o 0))))
 
 (assert
 ;; WP_parameter_def

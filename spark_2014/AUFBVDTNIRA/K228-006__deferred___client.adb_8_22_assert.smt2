@@ -157,10 +157,9 @@
   (assert
   (forall ((us_void_param tuple0))
   (! (let ((result (get us_void_param)))
-     (=> (get__function_guard result us_void_param)
      (and (= result (to_rep (rec__const__r__d (us_split_fields1 c))))
-     (dynamic_invariant result true false true)))) :pattern ((get
-                                                             us_void_param)) )))
+     (dynamic_invariant result true false true))) :pattern ((get
+                                                            us_void_param)) )))
 
 (declare-fun get2 (tuple0) Int)
 
@@ -170,8 +169,7 @@
   (assert
   (forall ((us_void_param tuple0))
   (! (let ((result (get2 us_void_param)))
-     (=> (get2__function_guard result us_void_param)
-     (and (= result 10000) (dynamic_invariant result true false true)))) :pattern (
+     (and (= result 10000) (dynamic_invariant result true false true))) :pattern (
   (get2 us_void_param)) )))
 
 (declare-fun b1 () Bool)
@@ -187,9 +185,6 @@
 
 ;; H
   (assert (= b2 true))
-
-;; H
-  (assert (get__function_guard (get Tuple0) Tuple0))
 
 (assert
 ;; WP_parameter_def

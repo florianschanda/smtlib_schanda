@@ -215,44 +215,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(declare-sort t2s 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
-
-(declare-fun user_eq2 (t2s t2s) Bool)
-
-(declare-fun dummy2 () t2s)
-
-(declare-datatypes () ((t2s__ref (mk_t2s__ref (t2s__content t2s)))))
-(define-fun t2s__ref___projection ((a t2s__ref)) t2s (t2s__content a))
-
-(declare-sort t1b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq3 (t1b t1b) Bool)
-
-(declare-fun dummy3 () t1b)
-
-(declare-datatypes () ((t1b__ref (mk_t1b__ref (t1b__content t1b)))))
-(define-fun t1b__ref___projection ((a t1b__ref)) t1b (t1b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-fun temp___148 (Int Int) (Array Int integer))

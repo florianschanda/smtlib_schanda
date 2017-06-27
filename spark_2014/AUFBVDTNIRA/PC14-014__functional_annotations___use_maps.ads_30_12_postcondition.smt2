@@ -662,10 +662,9 @@
   (forall ((k Int))
   (! (=> (dynamic_invariant k true true true)
      (let ((result (my_find s k)))
-     (=> (my_find__function_guard result s k)
      (ite (not (= (bool_eq4 result no_element) true))
      (and (= (has_element s result) true) (= (key s result) k))
-     (not (= (has_key (model__ s) k) true)))))) :pattern ((my_find s k)) ))))
+     (not (= (has_key (model__ s) k) true))))) :pattern ((my_find s k)) ))))
 
 (declare-fun s () us_rep)
 
@@ -1219,7 +1218,7 @@
 
 (declare-fun o1 () count_type)
 
-(declare-fun temp___777 () count_type)
+(declare-fun temp___752 () count_type)
 
 (declare-fun o2 () Bool)
 
@@ -1244,10 +1243,10 @@
   (assert (= o o1))
 
 ;; H
-  (assert (= temp___777 o1))
+  (assert (= temp___752 o1))
 
 ;; H
-  (assert (= (mk___rep1 (mk___split_fields1 temp___777)) no_element))
+  (assert (= (mk___rep1 (mk___split_fields1 temp___752)) no_element))
 
 ;; H
   (assert (in_range k))
@@ -1282,9 +1281,6 @@
 
 ;; H
   (assert (= use_maps__my_contains__result4 true))
-
-;; H
-  (assert (my_find__function_guard (my_find s k) s k))
 
 (assert
 ;; WP_parameter_def

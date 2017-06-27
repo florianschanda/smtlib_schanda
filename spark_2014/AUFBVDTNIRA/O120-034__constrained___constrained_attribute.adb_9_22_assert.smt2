@@ -207,15 +207,12 @@
 ;; is_constrained__post_axiom
   (assert
   (forall ((r us_rep))
-  (! (let ((result (is_constrained r)))
-     (=> (is_constrained__function_guard result r) (= result true))) :pattern (
-  (is_constrained r)) )))
+  (! (= (is_constrained r) true) :pattern ((is_constrained r)) )))
 
 ;; is_constrained__def_axiom
   (assert
   (forall ((r us_rep))
-  (! (=> (is_constrained__function_guard (is_constrained r) r)
-     (= (is_constrained r) true)) :pattern ((is_constrained r)) )))
+  (! (= (is_constrained r) true) :pattern ((is_constrained r)) )))
 
 (define-fun in_range1 ((rec__constrained_attribute__mut_rec__d1 Int)
   (a us_rep)) Bool (= rec__constrained_attribute__mut_rec__d1 (to_rep
@@ -486,24 +483,12 @@
   (assert (= b__attr__constrained true))
 
 ;; H
-  (assert (is_constrained__function_guard
-  (is_constrained
-  (mk___rep b__split_discrs b__split_fields2 b__attr__constrained))
-  (mk___rep b__split_discrs b__split_fields2 b__attr__constrained)))
-
-;; H
   (assert
   (= (is_constrained
      (mk___rep b__split_discrs b__split_fields2 b__attr__constrained)) true))
 
 ;; H
   (assert (not (= a__attr__constrained true)))
-
-;; H
-  (assert (is_constrained__function_guard
-  (is_constrained
-  (mk___rep a__split_discrs2 a__split_fields2 a__attr__constrained))
-  (mk___rep a__split_discrs2 a__split_fields2 a__attr__constrained)))
 
 (assert
 ;; WP_parameter_def

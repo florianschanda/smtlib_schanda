@@ -427,169 +427,17 @@
   (= (bool_eq2 (select a temp___idx_133) 1 2
      (select b (+ (- b__first a__first) temp___idx_133)) 1 2) true))))))))
 
-(declare-sort t5b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq5 (t5b t5b) Bool)
-
-(declare-fun dummy5 () t5b)
-
-(declare-datatypes () ((t5b__ref (mk_t5b__ref (t5b__content t5b)))))
-(define-fun t5b__ref___projection ((a t5b__ref)) t5b (t5b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
 (declare-fun o_a () (Array Int integer))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(declare-sort t11b 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq6 (t11b t11b) Bool)
-
-(declare-fun dummy6 () t11b)
-
-(declare-datatypes () ((t11b__ref (mk_t11b__ref (t11b__content t11b)))))
-(define-fun t11b__ref___projection ((a t11b__ref)) t11b (t11b__content a))
-
-(declare-sort t7b 0)
-
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq7 (t7b t7b) Bool)
-
-(declare-fun dummy7 () t7b)
-
-(declare-datatypes () ((t7b__ref (mk_t7b__ref (t7b__content t7b)))))
-(define-fun t7b__ref___projection ((a t7b__ref)) t7b (t7b__content a))
-
-(declare-sort t9b 0)
-
-(define-fun in_range7 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq9 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
-
-(declare-fun user_eq8 (t9b t9b) Bool)
-
-(declare-fun dummy8 () t9b)
-
-(declare-datatypes () ((t9b__ref (mk_t9b__ref (t9b__content t9b)))))
-(define-fun t9b__ref___projection ((a t9b__ref)) t9b (t9b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
 (declare-fun o_b () (Array Int (Array Int integer)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
-
-(declare-sort t13b 0)
-
-(define-fun in_range8 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq10 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
-
-(declare-fun user_eq9 (t13b t13b) Bool)
-
-(declare-fun dummy9 () t13b)
-
-(declare-datatypes () ((t13b__ref (mk_t13b__ref (t13b__content t13b)))))
-(define-fun t13b__ref___projection ((a t13b__ref)) t13b (t13b__content a))
-
-(declare-sort t15b 0)
-
-(define-fun in_range9 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq11 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE9 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Int)
-
-(declare-fun user_eq10 (t15b t15b) Bool)
-
-(declare-fun dummy10 () t15b)
-
-(declare-datatypes () ((t15b__ref (mk_t15b__ref (t15b__content t15b)))))
-(define-fun t15b__ref___projection ((a t15b__ref)) t15b (t15b__content a))
-
-(declare-sort t17b 0)
-
-(define-fun in_range10 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq12 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE10 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) Int)
-
-(declare-fun user_eq11 (t17b t17b) Bool)
-
-(declare-fun dummy11 () t17b)
-
-(declare-datatypes () ((t17b__ref (mk_t17b__ref (t17b__content t17b)))))
-(define-fun t17b__ref___projection ((a t17b__ref)) t17b (t17b__content a))
-
-(declare-sort t21b 0)
-
-(define-fun in_range11 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq13 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE11 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check11 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE11 (us_image) Int)
-
-(declare-fun user_eq12 (t21b t21b) Bool)
-
-(declare-fun dummy12 () t21b)
-
-(declare-datatypes () ((t21b__ref (mk_t21b__ref (t21b__content t21b)))))
-(define-fun t21b__ref___projection ((a t21b__ref)) t21b (t21b__content a))
 
 (declare-fun temp___191 ((Array Int integer) Int Int) (Array Int integer))
 
@@ -700,21 +548,9 @@
 
 (declare-fun b () (Array Int (Array Int integer)))
 
-(declare-fun o () (Array Int integer))
+(declare-fun o () integer)
 
-(declare-fun o1 () integer)
-
-(declare-fun o2 () (Array Int integer))
-
-(declare-fun o3 () (Array Int integer))
-
-(declare-fun o4 () (Array Int integer))
-
-(declare-fun o5 () (Array Int (Array Int integer)))
-
-(declare-fun o6 () (Array Int integer))
-
-(declare-fun o7 () (Array Int (Array Int integer)))
+(declare-fun o1 () (Array Int integer))
 
 (declare-fun result () (Array Int integer))
 
@@ -733,28 +569,25 @@
 (declare-fun b2 () (Array Int (Array Int integer)))
 
 ;; H
-  (assert (= o (update_proof__B_1__a__aggregate_def 1 2)))
-
-;; H
   (assert (= (mk_map__ref result) (mk_map__ref a)))
 
 ;; H
-  (assert (= a1 o))
+  (assert (= a1 (update_proof__B_1__a__aggregate_def 1 2)))
 
 ;; H
   (assert (= a1 o_a))
 
 ;; H
-  (assert (= (to_rep o1) 0))
+  (assert (= (to_rep o) 0))
 
 ;; H
-  (assert (= o2 (store a1 2 o1)))
+  (assert (= o1 (store a1 2 o)))
 
 ;; H
   (assert (= a1 result1))
 
 ;; H
-  (assert (= a2 o2))
+  (assert (= a2 o1))
 
 ;; H
   (assert (= (to_rep (select a2 1)) (to_rep (select o_a 1))))
@@ -766,34 +599,21 @@
   (assert (= (bool_eq2 a2 1 2 (temp___191 o_a 2 0) 1 2) true))
 
 ;; H
-  (assert (= o3 (temp___250 21 22)))
-
-;; H
-  (assert (= o4 (temp___245 11 12)))
-
-;; H
-  (assert (= o5 (update_proof__B_2__b__aggregate_def o4 o3)))
-
-;; H
   (assert (= result2 b))
 
 ;; H
-  (assert (= b1 o5))
+  (assert
+  (= b1 (update_proof__B_2__b__aggregate_def (temp___245 11 12)
+        (temp___250 21 22))))
 
 ;; H
   (assert (= b1 o_b))
 
 ;; H
-  (assert (= o6 (temp___203 0)))
-
-;; H
-  (assert (= o7 (store b1 2 o6)))
-
-;; H
   (assert (= result3 b1))
 
 ;; H
-  (assert (= b2 o7))
+  (assert (= b2 (store b1 2 (temp___203 0))))
 
 ;; H
   (assert (= (bool_eq2 (select b2 1) 1 2 (select o_b 1) 1 2) true))

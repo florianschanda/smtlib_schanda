@@ -496,19 +496,18 @@
 ;; user_eq__def_axiom
   (assert
   (forall ((a us_rep2) (b us_rep2))
-  (! (and (oeq__function_guard1 (oeq1 a b) a b)
-     (= (user_eq8 a b) (oeq1 a b))) :pattern ((user_eq8 a b)) )))
+  (! (= (user_eq8 a b) (oeq1 a b)) :pattern ((user_eq8 a b)) )))
 
-(define-fun default_initial_assumption2 ((temp___expr_212 us_rep2)
-  (temp___skip_top_level_213 Bool)) Bool (and
+(define-fun default_initial_assumption2 ((temp___expr_211 us_rep2)
+  (temp___skip_top_level_212 Bool)) Bool (and
                                          (= (length
                                             (rec__list_allocator__m__t__available
                                             (us_split_fields1
-                                            temp___expr_212))) 0)
+                                            temp___expr_211))) 0)
                                          (= (is_empty
                                             (rec__list_allocator__m__t__allocated
                                             (us_split_fields1
-                                            temp___expr_212))) true)))
+                                            temp___expr_211))) true)))
 
 (declare-fun contains1 (us_rep Int) Bool)
 
@@ -528,10 +527,9 @@
   (assert
   (forall ((s us_rep))
   (forall ((e Int))
-  (! (=> (contains__function_guard1 (contains1 s e) s e)
-     (= (= (contains1 s e) true)
+  (! (= (= (contains1 s e) true)
      (exists ((i Int))
-     (and (and (<= 1 i) (<= i (length s))) (= (get s i) e))))) :pattern (
+     (and (and (<= 1 i) (<= i (length s))) (= (get s i) e)))) :pattern (
   (contains1 s e)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -555,13 +553,12 @@
 ;; oeq__def_axiom
   (assert
   (forall ((x us_rep2) (y us_rep2))
-  (! (=> (oeq__function_guard1 (oeq1 x y) x y)
-     (= (= (oeq1 x y) true)
+  (! (= (= (oeq1 x y) true)
      (and
      (= (oeq (rec__list_allocator__m__t__available (us_split_fields1 x))
         (rec__list_allocator__m__t__available (us_split_fields1 y))) true)
      (= (oeq2 (rec__list_allocator__m__t__allocated (us_split_fields1 x))
-        (rec__list_allocator__m__t__allocated (us_split_fields1 y))) true)))) :pattern (
+        (rec__list_allocator__m__t__allocated (us_split_fields1 y))) true))) :pattern (
   (oeq1 x y)) )))
 
 (define-fun dynamic_invariant5 ((temp___expr_191 Int)
@@ -614,9 +611,9 @@
 
 (declare-fun o2 () us_rep1)
 
-(declare-fun temp___284 () us_rep)
+(declare-fun temp___264 () us_rep)
 
-(declare-fun temp___2841 () us_rep1)
+(declare-fun temp___2641 () us_rep1)
 
 (declare-fun o3 () us_rep)
 
@@ -624,9 +621,9 @@
 
 (declare-fun o5 () us_rep1)
 
-(declare-fun temp___2842 () us_rep)
+(declare-fun temp___2642 () us_rep)
 
-(declare-fun temp___2843 () us_rep1)
+(declare-fun temp___2643 () us_rep1)
 
 (declare-fun result () Int)
 
@@ -691,10 +688,10 @@
   (assert (= model____split_fields1 o2))
 
 ;; H
-  (assert (= temp___284 o1))
+  (assert (= temp___264 o1))
 
 ;; H
-  (assert (= temp___2841 o2))
+  (assert (= temp___2641 o2))
 
 ;; H
   (assert
@@ -704,15 +701,10 @@
                                                                   model____split_fields1))))
 
 ;; H
-  (assert (= temp___284 model____split_fields2))
+  (assert (= temp___264 model____split_fields2))
 
 ;; H
-  (assert (= temp___2841 model____split_fields3))
-
-;; H
-  (assert
-  (forall ((rr Int)) (contains__function_guard1
-  (contains1 model____split_fields4 rr) model____split_fields4 rr)))
+  (assert (= temp___2641 model____split_fields3))
 
 ;; H
   (assert (= (is_empty model____split_fields5) true))
@@ -766,10 +758,10 @@
   (assert (= model____split_fields5 o5))
 
 ;; H
-  (assert (= temp___2842 o4))
+  (assert (= temp___2642 o4))
 
 ;; H
-  (assert (= temp___2843 o5))
+  (assert (= temp___2643 o5))
 
 ;; H
   (assert (= result4 model____split_fields4))
@@ -778,10 +770,10 @@
   (assert (= result5 model____split_fields5))
 
 ;; H
-  (assert (= temp___2842 model____split_fields6))
+  (assert (= temp___2642 model____split_fields6))
 
 ;; H
-  (assert (= temp___2843 model____split_fields7))
+  (assert (= temp___2643 model____split_fields7))
 
 (assert
 ;; WP_parameter_def

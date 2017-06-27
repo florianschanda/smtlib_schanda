@@ -184,11 +184,11 @@
 (define-fun rec____ref___projection ((a rec____ref)) us_rep (rec____content
                                                             a))
 
-(define-fun default_initial_assumption ((temp___expr_141 us_rep)
-  (temp___skip_top_level_142 Bool)) Bool (= (to_rep
+(define-fun default_initial_assumption ((temp___expr_140 us_rep)
+  (temp___skip_top_level_141 Bool)) Bool (= (to_rep
                                             (rec__main__rec__comp
                                             (us_split_fields1
-                                            temp___expr_141))) 1234))
+                                            temp___expr_140))) 1234))
 
 (declare-sort index 0)
 
@@ -209,11 +209,11 @@
 (declare-datatypes () ((index__ref (mk_index__ref (index__content index)))))
 (define-fun index__ref___projection ((a index__ref)) index (index__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_146 Int)
-  (temp___is_init_143 Bool) (temp___skip_constant_144 Bool)
-  (temp___do_toplevel_145 Bool)) Bool (=>
-                                      (or (= temp___is_init_143 true)
-                                      (<= 1 10)) (in_range3 temp___expr_146)))
+(define-fun dynamic_invariant1 ((temp___expr_145 Int)
+  (temp___is_init_142 Bool) (temp___skip_constant_143 Bool)
+  (temp___do_toplevel_144 Bool)) Bool (=>
+                                      (or (= temp___is_init_142 true)
+                                      (<= 1 10)) (in_range3 temp___expr_145)))
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int us_rep))))))
@@ -286,15 +286,15 @@
   (= (bool_eq2 (select a temp___idx_132)
      (select b (+ (- b__first a__first) temp___idx_132))) true))))))))
 
-(define-fun default_initial_assumption1 ((temp___expr_154 (Array Int us_rep))
-  (temp___skip_top_level_155 Bool)) Bool (forall ((temp___156 Int))
+(define-fun default_initial_assumption1 ((temp___expr_153 (Array Int us_rep))
+  (temp___skip_top_level_154 Bool)) Bool (forall ((temp___155 Int))
                                          (=>
-                                         (and (<= 1 temp___156)
-                                         (<= temp___156 10))
+                                         (and (<= 1 temp___155)
+                                         (<= temp___155 10))
                                          (= (to_rep
                                             (rec__main__rec__comp
                                             (us_split_fields1
-                                            (select temp___expr_154 temp___156)))) 1234))))
+                                            (select temp___expr_153 temp___155)))) 1234))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -305,32 +305,29 @@
 ;; get_rec__post_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (let ((result (get_rec us_void_param)))
-     (=> (get_rec__function_guard result us_void_param)
-     (= (bool_eq2 result (mk___rep (mk___split_fields (of_rep 5678)))) true))) :pattern (
+  (! (= (bool_eq2 (get_rec us_void_param)
+        (mk___rep (mk___split_fields (of_rep 5678)))) true) :pattern (
   (get_rec us_void_param)) )))
 
 (declare-fun get_arr (tuple0) (Array Int us_rep))
 
 (declare-fun get_arr__function_guard ((Array Int us_rep) tuple0) Bool)
 
-(declare-fun temp___158 (us_rep) (Array Int us_rep))
+(declare-fun temp___157 (us_rep) (Array Int us_rep))
 
 ;; def_axiom
   (assert
-  (forall ((temp___160 us_rep))
-  (forall ((temp___161 Int))
-  (= (select (temp___158 temp___160) temp___161) temp___160))))
+  (forall ((temp___159 us_rep))
+  (forall ((temp___160 Int))
+  (= (select (temp___157 temp___159) temp___160) temp___159))))
 
 ;; get_arr__post_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (let ((result (get_arr us_void_param)))
-     (=> (get_arr__function_guard result us_void_param)
-     (= (let ((temp___164 (temp___158
+  (! (= (let ((temp___163 (temp___157
                           (mk___rep (mk___split_fields (of_rep 9012))))))
-        (bool_eq4 result 1 10 temp___164 1 10)) true))) :pattern ((get_arr
-                                                                  us_void_param)) )))
+        (bool_eq4 (get_arr us_void_param) 1 10 temp___163 1 10)) true) :pattern (
+  (get_arr us_void_param)) )))
 
 (declare-fun get_index (Bool) Int)
 
@@ -340,10 +337,9 @@
   (assert
   (forall ((main__cheat Bool))
   (! (let ((result (get_index main__cheat)))
-     (=> (get_index__function_guard result main__cheat)
      (and (ite (= main__cheat true) (= result 3) (= result 5))
-     (dynamic_invariant1 result true false true)))) :pattern ((get_index
-                                                              main__cheat)) )))
+     (dynamic_invariant1 result true false true))) :pattern ((get_index
+                                                             main__cheat)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
@@ -425,9 +421,9 @@
 
 ;; H
   (assert
-  (and (and (= o (get_arr Tuple0)) (get_arr__function_guard o Tuple0))
+  (and (= o (get_arr Tuple0))
   (= (bool_eq4 o 1 10
-     (temp___158 (mk___rep (mk___split_fields (of_rep 9012)))) 1 10) true)))
+     (temp___157 (mk___rep (mk___split_fields (of_rep 9012)))) 1 10) true)))
 
 ;; H
   (assert (= result1 arr_obj))
@@ -437,9 +433,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= main__rec_obj__assume1 (get_rec Tuple0)) (get_rec__function_guard
-  main__rec_obj__assume1 Tuple0))
+  (and (= main__rec_obj__assume1 (get_rec Tuple0))
   (= (bool_eq2 main__rec_obj__assume1
      (mk___rep (mk___split_fields (of_rep 5678)))) true)))
 
@@ -452,9 +446,7 @@
 
 ;; H
   (assert
-  (and
   (and (= main__the_index__assume (get_index cheat1))
-  (get_index__function_guard main__the_index__assume cheat1))
   (and (in_range3 main__the_index__assume)
   (ite (= cheat1 true) (= main__the_index__assume 3)
   (= main__the_index__assume 5)))))
@@ -467,20 +459,16 @@
 
 ;; H
   (assert
-  (and
-  (and (= main__R14b__assume (get_arr Tuple0)) (get_arr__function_guard
-  main__R14b__assume Tuple0))
+  (and (= main__R14b__assume (get_arr Tuple0))
   (= (bool_eq4 main__R14b__assume 1 10
-     (temp___158 (mk___rep (mk___split_fields (of_rep 9012)))) 1 10) true)))
+     (temp___157 (mk___rep (mk___split_fields (of_rep 9012)))) 1 10) true)))
 
 ;; H
   (assert (= main__R14b__assume r14b))
 
 ;; H
   (assert
-  (and
-  (and (= main__R15b__assume1 (get_rec Tuple0)) (get_rec__function_guard
-  main__R15b__assume1 Tuple0))
+  (and (= main__R15b__assume1 (get_rec Tuple0))
   (= (bool_eq2 main__R15b__assume1
      (mk___rep (mk___split_fields (of_rep 5678)))) true)))
 
@@ -489,11 +477,9 @@
 
 ;; H
   (assert
-  (and
-  (and (= main__R16b__assume (get_arr Tuple0)) (get_arr__function_guard
-  main__R16b__assume Tuple0))
+  (and (= main__R16b__assume (get_arr Tuple0))
   (= (bool_eq4 main__R16b__assume 1 10
-     (temp___158 (mk___rep (mk___split_fields (of_rep 9012)))) 1 10) true)))
+     (temp___157 (mk___rep (mk___split_fields (of_rep 9012)))) 1 10) true)))
 
 ;; H
   (assert (= main__R16b__assume r16b))

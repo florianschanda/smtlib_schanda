@@ -169,9 +169,9 @@
 (define-fun unsigned64__ref___projection ((a unsigned64__ref)) unsigned64 
   (unsigned64__content a))
 
-(define-fun dynamic_invariant ((temp___expr_202 (_ BitVec 64))
-  (temp___is_init_199 Bool) (temp___skip_constant_200 Bool)
-  (temp___do_toplevel_201 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_201 (_ BitVec 64))
+  (temp___is_init_198 Bool) (temp___skip_constant_199 Bool)
+  (temp___do_toplevel_200 Bool)) Bool true)
 
 (declare-fun var () (_ BitVec 64))
 

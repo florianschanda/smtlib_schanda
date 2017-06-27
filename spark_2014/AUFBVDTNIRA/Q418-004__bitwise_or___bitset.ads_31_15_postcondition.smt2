@@ -219,14 +219,12 @@
   (! (=>
      (and (dynamic_invariant value true true true) (dynamic_invariant1 pos
      true true true))
-     (let ((result (bit_test value pos)))
-     (=> (bit_test__function_guard result value pos)
-     (= (= result true)
+     (= (= (bit_test value pos) true)
      (not
      (= (bvand value (let ((temp___145 (bv2nat pos)))
                      (ite (< temp___145 18446744073709551616)
                      (bvshl ((_ int2bv 64) 1) ((_ int2bv 64) temp___145))
-                     ((_ int2bv 64) 0)))) ((_ int2bv 64) 0))))))) :pattern (
+                     ((_ int2bv 64) 0)))) ((_ int2bv 64) 0))))) :pattern (
   (bit_test value pos)) )))
 
 (declare-fun value () (_ BitVec 64))
@@ -318,10 +316,6 @@
 
 ;; H
   (assert (= result2 bitset__bit_clear__result4))
-
-;; H
-  (assert (bit_test__function_guard (bit_test bitset__bit_clear__result4 pos)
-  bitset__bit_clear__result4 pos))
 
 (assert
 ;; WP_parameter_def

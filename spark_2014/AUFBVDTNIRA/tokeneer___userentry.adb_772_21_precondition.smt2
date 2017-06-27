@@ -712,11 +712,9 @@
 
 ;; thetokenremovalduration__post_axiom
   (assert
-  (forall ((configdata__state us_private))
-  (! (let ((result (thetokenremovalduration configdata__state)))
-     (=> (thetokenremovalduration__function_guard result configdata__state)
-     (dynamic_invariant result true false true))) :pattern ((thetokenremovalduration
-                                                            configdata__state)) )))
+  (forall ((configdata__state us_private)) (! (dynamic_invariant
+  (thetokenremovalduration configdata__state) true false
+  true) :pattern ((thetokenremovalduration configdata__state)) )))
 
 (declare-fun valid_numberlogentries (us_private) Bool)
 
@@ -950,11 +948,9 @@
 
 ;; getclass__post_axiom
   (assert
-  (forall ((usertoken__state us_private))
-  (! (let ((result (getclass usertoken__state)))
-     (=> (getclass__function_guard result usertoken__state)
-     (dynamic_invariant1 result true false true))) :pattern ((getclass
-                                                             usertoken__state)) )))
+  (forall ((usertoken__state us_private)) (! (dynamic_invariant1
+  (getclass usertoken__state) true false
+  true) :pattern ((getclass usertoken__state)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -981,12 +977,12 @@
 (define-fun statust__ref_2__projection ((a statust__ref)) statust (statust__content
                                                                   a))
 
-(define-fun dynamic_invariant2 ((temp___expr_1767 Int)
-  (temp___is_init_1764 Bool) (temp___skip_constant_1765 Bool)
-  (temp___do_toplevel_1766 Bool)) Bool (=>
-                                       (or (= temp___is_init_1764 true)
+(define-fun dynamic_invariant2 ((temp___expr_1683 Int)
+  (temp___is_init_1680 Bool) (temp___skip_constant_1681 Bool)
+  (temp___do_toplevel_1682 Bool)) Bool (=>
+                                       (or (= temp___is_init_1680 true)
                                        (<= 0 7)) (in_range11
-                                       temp___expr_1767)))
+                                       temp___expr_1683)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
@@ -1057,12 +1053,12 @@
                                       (<= 0 86399999)) (in_range7
                                       temp___expr_412)))
 
-(define-fun dynamic_invariant12 ((temp___expr_1085 Int)
-  (temp___is_init_1082 Bool) (temp___skip_constant_1083 Bool)
-  (temp___do_toplevel_1084 Bool)) Bool (=>
-                                       (or (= temp___is_init_1082 true)
+(define-fun dynamic_invariant12 ((temp___expr_1028 Int)
+  (temp___is_init_1025 Bool) (temp___skip_constant_1026 Bool)
+  (temp___do_toplevel_1027 Bool)) Bool (=>
+                                       (or (= temp___is_init_1025 true)
                                        (<= 0 2147483647)) (in_range9
-                                       temp___expr_1085)))
+                                       temp___expr_1028)))
 
 (declare-fun currenttime () us_private)
 
@@ -1101,8 +1097,7 @@
   (assert (=> (<= 0 7) (in_range11 status)))
 
 ;; H
-  (assert
-  (and (= o (ispresent state2)) (ispresent__function_guard o state2)))
+  (assert (= o (ispresent state2)))
 
 ;; H
   (assert (= result (ite (not (= o true)) true false)))
@@ -1111,30 +1106,19 @@
   (assert (not (= result true)))
 
 ;; H
-  (assert
-  (and (= o7 (thecurrenttime currenttime)) (thecurrenttime__function_guard 
-  o7 currenttime)))
+  (assert (= o7 (thecurrenttime currenttime)))
 
 ;; H
-  (assert
-  (and (and (= o1 (getclass state2)) (getclass__function_guard o1 state2))
-  (in_range10 o1)))
+  (assert (and (= o1 (getclass state2)) (in_range10 o1)))
 
 ;; H
-  (assert
-  (and (= result1 (isinentryperiod o1 o7 state))
-  (isinentryperiod__function_guard result1 o1 o7 state)))
+  (assert (= result1 (isinentryperiod o1 o7 state)))
 
 ;; H
   (assert (not (= result1 true)))
 
 ;; H
-  (assert
-  (and (= o6 (extractuser state2)) (extractuser__function_guard o6 state2)))
-
-;; H
-  (assert (valid_numberlogentries__function_guard
-  (valid_numberlogentries state1) state1))
+  (assert (= o6 (extractuser state2)))
 
 (assert
 ;; WP_parameter_def

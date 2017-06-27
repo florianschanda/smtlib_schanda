@@ -601,13 +601,11 @@
 ;; is_permutation_1__post_axiom
   (assert
   (forall ((r1 (Array Int group1_id)))
-  (! (let ((result (is_permutation_1 r1)))
-     (=> (is_permutation_1__function_guard result r1)
-     (= (= result true)
+  (! (= (= (is_permutation_1 r1) true)
      (forall ((g1 Int))
      (=> (and (<= 1 g1) (<= g1 64))
      (exists ((rank Int))
-     (and (and (<= 1 rank) (<= rank 64)) (= (to_rep (select r1 rank)) g1)))))))) :pattern (
+     (and (and (<= 1 rank) (<= rank 64)) (= (to_rep (select r1 rank)) g1)))))) :pattern (
   (is_permutation_1 r1)) )))
 
 (declare-fun is_preferred_1 (Int Int (Array Int group1_id)) Bool)
@@ -759,19 +757,14 @@
   (assert
   (forall ((g1_a Int) (g1_b Int))
   (forall ((r1 (Array Int group1_id)))
-  (! (and (is_permutation_1__function_guard (is_permutation_1 r1) r1)
-     (=>
+  (! (=>
      (and
      (and (dynamic_invariant g1_a true true true) (dynamic_invariant g1_b
      true true true)) (= (is_permutation_1 r1) true))
-     (let ((result (is_preferred_1 g1_a g1_b r1)))
-     (and (invert_1__function_guard (invert_1 r1) r1)
-     (and (invert_1__function_guard (invert_1 r1) r1)
-     (=> (is_preferred_1__function_guard result g1_a g1_b r1)
-     (= (= result true)
+     (= (= (is_preferred_1 g1_a g1_b r1) true)
      (<= (to_rep2
-         (let ((temp___269 (invert_1 r1))) (select temp___269 g1_a))) 
-     (to_rep2 (let ((temp___271 (invert_1 r1))) (select temp___271 g1_b))))))))))) :pattern (
+         (let ((temp___258 (invert_1 r1))) (select temp___258 g1_a))) 
+     (to_rep2 (let ((temp___259 (invert_1 r1))) (select temp___259 g1_b)))))) :pattern (
   (is_preferred_1 g1_a g1_b r1)) ))))
 
 (declare-fun ranking_1 () (Array Int (Array Int group2_id)))
@@ -1257,11 +1250,7 @@
   (assert
   (forall
   ((stable_marriage__matching__unmatched_g1_set__fields us_split_fields))
-  (! (=> (all_unmatched_g1_set_elements_distinct__function_guard
-     (all_unmatched_g1_set_elements_distinct
-     stable_marriage__matching__unmatched_g1_set__fields)
-     stable_marriage__matching__unmatched_g1_set__fields)
-     (=
+  (! (=
      (= (all_unmatched_g1_set_elements_distinct
         stable_marriage__matching__unmatched_g1_set__fields) true)
      (forall ((idx_1 Int))
@@ -1281,30 +1270,30 @@
      (=> (not (= idx_1 idx_2))
      (not
      (= (to_rep
-        (let ((temp___388 (rec__stable_marriage__matching__group1_set__elements
+        (let ((temp___361 (rec__stable_marriage__matching__group1_set__elements
                           (us_split_fields1
                           (mk___rep
                           stable_marriage__matching__unmatched_g1_set__fields)))))
-        (select temp___388 idx_1))) (to_rep
-                                    (let ((temp___389 (rec__stable_marriage__matching__group1_set__elements
+        (select temp___361 idx_1))) (to_rep
+                                    (let ((temp___362 (rec__stable_marriage__matching__group1_set__elements
                                                       (us_split_fields1
                                                       (mk___rep
                                                       stable_marriage__matching__unmatched_g1_set__fields)))))
-                                    (select temp___389 idx_2)))))))))))) :pattern (
+                                    (select temp___362 idx_2))))))))))) :pattern (
   (all_unmatched_g1_set_elements_distinct
   stable_marriage__matching__unmatched_g1_set__fields)) )))
 
-(define-fun dynamic_invariant1 ((temp___expr_329 Int)
-  (temp___is_init_326 Bool) (temp___skip_constant_327 Bool)
-  (temp___do_toplevel_328 Bool)) Bool (=>
-                                      (or (= temp___is_init_326 true)
-                                      (<= 0 64)) (in_range4 temp___expr_329)))
+(define-fun dynamic_invariant1 ((temp___expr_306 Int)
+  (temp___is_init_303 Bool) (temp___skip_constant_304 Bool)
+  (temp___do_toplevel_305 Bool)) Bool (=>
+                                      (or (= temp___is_init_303 true)
+                                      (<= 0 64)) (in_range4 temp___expr_306)))
 
-(define-fun dynamic_invariant2 ((temp___expr_335 Int)
-  (temp___is_init_332 Bool) (temp___skip_constant_333 Bool)
-  (temp___do_toplevel_334 Bool)) Bool (=>
-                                      (or (= temp___is_init_332 true)
-                                      (<= 1 64)) (in_range5 temp___expr_335)))
+(define-fun dynamic_invariant2 ((temp___expr_312 Int)
+  (temp___is_init_309 Bool) (temp___skip_constant_310 Bool)
+  (temp___do_toplevel_311 Bool)) Bool (=>
+                                      (or (= temp___is_init_309 true)
+                                      (<= 1 64)) (in_range5 temp___expr_312)))
 
 (define-fun dynamic_invariant3 ((temp___expr_149 Int)
   (temp___is_init_146 Bool) (temp___skip_constant_147 Bool)
@@ -1321,17 +1310,15 @@
 ;; invert_1__post_axiom
   (assert
   (forall ((r1 (Array Int group1_id)))
-  (! (and (is_permutation_1__function_guard (is_permutation_1 r1) r1)
-     (=> (= (is_permutation_1 r1) true)
+  (! (=> (= (is_permutation_1 r1) true)
      (let ((result (invert_1 r1)))
-     (=> (invert_1__function_guard result r1)
      (and
      (forall ((rank Int))
      (=> (and (<= 1 rank) (<= rank 64))
      (= (to_rep2 (select result (to_rep (select r1 rank)))) rank)))
      (forall ((g1 Int))
      (=> (and (<= 1 g1) (<= g1 64))
-     (= (to_rep (select r1 (to_rep2 (select result g1)))) g1)))))))) :pattern (
+     (= (to_rep (select r1 (to_rep2 (select result g1)))) g1)))))) :pattern (
   (invert_1 r1)) )))
 
 (declare-fun proposals_made () (Array Int count))
@@ -1345,11 +1332,6 @@
 (declare-fun result () Bool)
 
 (declare-fun result1 () Bool)
-
-;; H
-  (assert
-  (forall ((g2 Int)) (is_permutation_1__function_guard
-  (is_permutation_1 (select ranking_2 g2)) (select ranking_2 g2))))
 
 ;; H
   (assert

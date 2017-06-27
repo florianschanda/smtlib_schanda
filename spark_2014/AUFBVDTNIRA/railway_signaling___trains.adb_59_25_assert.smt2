@@ -666,9 +666,7 @@
 ;; no_track_precedes_itself__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (no_track_precedes_itself__function_guard
-     (no_track_precedes_itself us_void_param) us_void_param)
-     (= (= (no_track_precedes_itself us_void_param) true)
+  (! (= (= (no_track_precedes_itself us_void_param) true)
      (forall ((track Int))
      (=> (and (<= 1 track) (<= track 8))
      (forall ((id Int))
@@ -679,8 +677,8 @@
                                                   (rec__trains__track__from
                                                   (us_split_fields1
                                                   (select tracks track)))))))
-        (select temp___227 id))) track)))))))) :pattern ((no_track_precedes_itself
-                                                         us_void_param)) )))
+        (select temp___227 id))) track))))))) :pattern ((no_track_precedes_itself
+                                                        us_void_param)) )))
 
 (declare-sort train_id 0)
 
@@ -958,10 +956,7 @@
   (assert
   (forall ((trains__cur_num_trains Int))
   (forall ((trains__trains (Array Int us_rep1)))
-  (! (=> (one_train_at_most_per_track__function_guard
-     (one_train_at_most_per_track trains__cur_num_trains trains__trains)
-     trains__cur_num_trains trains__trains)
-     (=
+  (! (=
      (= (one_train_at_most_per_track trains__cur_num_trains trains__trains) true)
      (forall ((train Int))
      (=> (and (<= 1 train) (<= train trains__cur_num_trains))
@@ -998,7 +993,7 @@
         (us_split_fields3 (select trains__trains train)))) (to_rep
                                                            (rec__trains__train_position__track_end
                                                            (us_split_fields3
-                                                           (select trains__trains other_train)))))))))))))) :pattern (
+                                                           (select trains__trains other_train))))))))))))) :pattern (
   (one_train_at_most_per_track trains__cur_num_trains trains__trains)) ))))
 
 (declare-sort signal 0)
@@ -1167,11 +1162,7 @@
   (forall ((trains__cur_num_trains Int))
   (forall ((trains__trains (Array Int us_rep1)))
   (forall ((trains__track_signals (Array Int signal)))
-  (! (=> (occupied_tracks_on_red__function_guard
-     (occupied_tracks_on_red trains__cur_num_trains trains__trains
-     trains__track_signals) trains__cur_num_trains trains__trains
-     trains__track_signals)
-     (=
+  (! (=
      (= (occupied_tracks_on_red trains__cur_num_trains trains__trains
         trains__track_signals) true)
      (forall ((train Int))
@@ -1186,7 +1177,7 @@
         (select trains__track_signals (to_rep
                                       (rec__trains__train_position__track_end
                                       (us_split_fields3
-                                      (select trains__trains train)))))) 2)))))) :pattern (
+                                      (select trains__trains train)))))) 2))))) :pattern (
   (occupied_tracks_on_red trains__cur_num_trains trains__trains
   trains__track_signals)) )))))
 
@@ -1204,20 +1195,16 @@
   (assert
   (forall ((position us_rep1))
   (forall ((id Int))
-  (! (=> (dynamic_invariant2 id true true true)
-     (let ((result (get_previous_track position id)))
-     (=> (get_previous_track__function_guard result position id)
-     (dynamic_invariant result true false true)))) :pattern ((get_previous_track
-                                                             position id)) ))))
+  (! (=> (dynamic_invariant2 id true true true) (dynamic_invariant
+     (get_previous_track position id) true false true)) :pattern ((get_previous_track
+                                                                  position
+                                                                  id)) ))))
 
 ;; get_previous_track__def_axiom
   (assert
   (forall ((position us_rep1))
   (forall ((id Int))
-  (! (=>
-     (and (dynamic_invariant2 id true true true)
-     (get_previous_track__function_guard (get_previous_track position id)
-     position id))
+  (! (=> (dynamic_invariant2 id true true true)
      (= (get_previous_track position id) (to_rep3
                                          (let ((temp___261 (select previous_tracks 
                                          (to_rep1
@@ -1238,20 +1225,15 @@
   (assert
   (forall ((position us_rep1))
   (forall ((id Int))
-  (! (=> (dynamic_invariant2 id true true true)
-     (let ((result (get_other_previous_track position id)))
-     (=> (get_other_previous_track__function_guard result position id)
-     (dynamic_invariant result true false true)))) :pattern ((get_other_previous_track
-                                                             position id)) ))))
+  (! (=> (dynamic_invariant2 id true true true) (dynamic_invariant
+     (get_other_previous_track position id) true false true)) :pattern (
+  (get_other_previous_track position id)) ))))
 
 ;; get_other_previous_track__def_axiom
   (assert
   (forall ((position us_rep1))
   (forall ((id Int))
-  (! (=>
-     (and (dynamic_invariant2 id true true true)
-     (get_other_previous_track__function_guard
-     (get_other_previous_track position id) position id))
+  (! (=> (dynamic_invariant2 id true true true)
      (= (get_other_previous_track position id) (ite (= (to_rep3
                                                        (let ((temp___265 (select 
                                                        previous_tracks 
@@ -1299,20 +1281,13 @@
   (assert
   (forall ((position us_rep1))
   (forall ((track Int))
-  (! (=> (is_previous_track__function_guard
-     (is_previous_track position track) position track)
-     (and
-     (forall ((id Int)) (get_previous_track__function_guard
-     (get_previous_track position id) position id))
-     (and
-     (forall ((id Int)) (get_other_previous_track__function_guard
-     (get_other_previous_track position id) position id))
-     (= (= (is_previous_track position track) true)
+  (! (= (= (is_previous_track position track) true)
      (exists ((id Int))
      (and (and (<= 1 id) (<= id 3))
      (or (= track (get_previous_track position id))
-     (= track (get_other_previous_track position id))))))))) :pattern (
-  (is_previous_track position track)) ))))
+     (= track (get_other_previous_track position id)))))) :pattern ((is_previous_track
+                                                                    position
+                                                                    track)) ))))
 
 (declare-fun previous_tracks_on_orange_or_red (Int (Array Int us_rep1)
   (Array Int signal)) Bool)
@@ -1328,27 +1303,7 @@
   (forall ((trains__cur_num_trains Int))
   (forall ((trains__trains (Array Int us_rep1)))
   (forall ((trains__track_signals (Array Int signal)))
-  (! (=> (previous_tracks_on_orange_or_red__function_guard
-     (previous_tracks_on_orange_or_red trains__cur_num_trains trains__trains
-     trains__track_signals) trains__cur_num_trains trains__trains
-     trains__track_signals)
-     (and
-     (forall ((train Int) (id Int)) (get_previous_track__function_guard
-     (get_previous_track (select trains__trains train) id)
-     (select trains__trains train) id))
-     (and
-     (forall ((train Int) (id Int)) (get_previous_track__function_guard
-     (get_previous_track (select trains__trains train) id)
-     (select trains__trains train) id))
-     (and
-     (forall ((train Int) (id Int)) (get_other_previous_track__function_guard
-     (get_other_previous_track (select trains__trains train) id)
-     (select trains__trains train) id))
-     (and
-     (forall ((train Int) (id Int)) (get_other_previous_track__function_guard
-     (get_other_previous_track (select trains__trains train) id)
-     (select trains__trains train) id))
-     (=
+  (! (=
      (= (previous_tracks_on_orange_or_red trains__cur_num_trains
         trains__trains trains__track_signals) true)
      (forall ((train Int))
@@ -1357,21 +1312,21 @@
      (=> (and (<= 1 id) (<= id 3))
      (and
      (=> (not (= (get_previous_track (select trains__trains train) id) 0))
-     (let ((temp___283 (to_rep5
+     (let ((temp___274 (to_rep5
                        (select trains__track_signals (get_previous_track
                                                      (select trains__trains train)
                                                      id)))))
-     (or (= temp___283 1) (= temp___283 2))))
+     (or (= temp___274 1) (= temp___274 2))))
      (=>
      (not (= (get_other_previous_track (select trains__trains train) id) 0))
-     (let ((temp___286 (to_rep5
+     (let ((temp___275 (to_rep5
                        (select trains__track_signals (get_other_previous_track
                                                      (select trains__trains train)
                                                      id)))))
-     (or (= temp___286 1) (= temp___286 2))))))))))))))) :pattern ((previous_tracks_on_orange_or_red
-                                                                   trains__cur_num_trains
-                                                                   trains__trains
-                                                                   trains__track_signals)) )))))
+     (or (= temp___275 1) (= temp___275 2)))))))))) :pattern ((previous_tracks_on_orange_or_red
+                                                              trains__cur_num_trains
+                                                              trains__trains
+                                                              trains__track_signals)) )))))
 
 (declare-fun safe_signaling (Int (Array Int us_rep1)
   (Array Int signal)) Bool)
@@ -1387,29 +1342,17 @@
   (forall ((trains__cur_num_trains Int))
   (forall ((trains__trains (Array Int us_rep1)))
   (forall ((trains__track_signals (Array Int signal)))
-  (! (=> (safe_signaling__function_guard
-     (safe_signaling trains__cur_num_trains trains__trains
-     trains__track_signals) trains__cur_num_trains trains__trains
-     trains__track_signals)
-     (and (occupied_tracks_on_red__function_guard
-     (occupied_tracks_on_red trains__cur_num_trains trains__trains
-     trains__track_signals) trains__cur_num_trains trains__trains
-     trains__track_signals)
-     (and (previous_tracks_on_orange_or_red__function_guard
-     (previous_tracks_on_orange_or_red trains__cur_num_trains trains__trains
-     trains__track_signals) trains__cur_num_trains trains__trains
-     trains__track_signals)
-     (=
+  (! (=
      (= (safe_signaling trains__cur_num_trains trains__trains
         trains__track_signals) true)
      (and
      (= (occupied_tracks_on_red trains__cur_num_trains trains__trains
         trains__track_signals) true)
      (= (previous_tracks_on_orange_or_red trains__cur_num_trains
-        trains__trains trains__track_signals) true)))))) :pattern ((safe_signaling
-                                                                   trains__cur_num_trains
-                                                                   trains__trains
-                                                                   trains__track_signals)) )))))
+        trains__trains trains__track_signals) true))) :pattern ((safe_signaling
+                                                                trains__cur_num_trains
+                                                                trains__trains
+                                                                trains__track_signals)) )))))
 
 (declare-fun moving_inside_current_tracks (us_rep1 us_rep1) Bool)
 
@@ -1422,10 +1365,7 @@
 ;; moving_inside_current_tracks__def_axiom
   (assert
   (forall ((cur_position us_rep1) (new_position us_rep1))
-  (! (=> (moving_inside_current_tracks__function_guard
-     (moving_inside_current_tracks cur_position new_position) cur_position
-     new_position)
-     (= (= (moving_inside_current_tracks cur_position new_position) true)
+  (! (= (= (moving_inside_current_tracks cur_position new_position) true)
      (and
      (= (to_rep
         (rec__trains__train_position__track_begin
@@ -1436,7 +1376,7 @@
         (rec__trains__train_position__track_end
         (us_split_fields3 cur_position))) (to_rep
                                           (rec__trains__train_position__track_end
-                                          (us_split_fields3 new_position))))))) :pattern (
+                                          (us_split_fields3 new_position)))))) :pattern (
   (moving_inside_current_tracks cur_position new_position)) )))
 
 (declare-fun entering_a_track (us_rep1) Bool)
@@ -1458,14 +1398,7 @@
 ;; moving_away_from_current_track__def_axiom
   (assert
   (forall ((cur_position us_rep1) (new_position us_rep1))
-  (! (=> (moving_away_from_current_track__function_guard
-     (moving_away_from_current_track cur_position new_position) cur_position
-     new_position)
-     (and (entering_a_track__function_guard (entering_a_track cur_position)
-     cur_position)
-     (and (inside_a_track__function_guard (inside_a_track new_position)
-     new_position)
-     (= (= (moving_away_from_current_track cur_position new_position) true)
+  (! (= (= (moving_away_from_current_track cur_position new_position) true)
      (and
      (and (= (entering_a_track cur_position) true)
      (= (inside_a_track new_position) true))
@@ -1473,7 +1406,7 @@
         (rec__trains__train_position__track_begin
         (us_split_fields3 cur_position))) (to_rep
                                           (rec__trains__train_position__track_end
-                                          (us_split_fields3 new_position))))))))) :pattern (
+                                          (us_split_fields3 new_position)))))) :pattern (
   (moving_away_from_current_track cur_position new_position)) )))
 
 (declare-fun valid_move (us_rep1 us_rep1) Bool)
@@ -1491,22 +1424,11 @@
 ;; valid_move__def_axiom
   (assert
   (forall ((cur_position us_rep1) (new_position us_rep1))
-  (! (=> (valid_move__function_guard (valid_move cur_position new_position)
-     cur_position new_position)
-     (and (moving_inside_current_tracks__function_guard
-     (moving_inside_current_tracks cur_position new_position) cur_position
-     new_position)
-     (and (moving_to_a_new_track__function_guard
-     (moving_to_a_new_track cur_position new_position) cur_position
-     new_position)
-     (and (moving_away_from_current_track__function_guard
-     (moving_away_from_current_track cur_position new_position) cur_position
-     new_position)
-     (= (= (valid_move cur_position new_position) true)
+  (! (= (= (valid_move cur_position new_position) true)
      (or
      (or (= (moving_inside_current_tracks cur_position new_position) true)
      (= (moving_to_a_new_track cur_position new_position) true))
-     (= (moving_away_from_current_track cur_position new_position) true))))))) :pattern (
+     (= (moving_away_from_current_track cur_position new_position) true))) :pattern (
   (valid_move cur_position new_position)) )))
 
 (declare-sort move_result 0)
@@ -1530,11 +1452,11 @@
 (define-fun move_result__ref___projection ((a move_result__ref)) move_result 
   (move_result__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_315 Int)
-  (temp___is_init_312 Bool) (temp___skip_constant_313 Bool)
-  (temp___do_toplevel_314 Bool)) Bool (=>
-                                      (or (= temp___is_init_312 true)
-                                      (<= 0 3)) (in_range9 temp___expr_315)))
+(define-fun dynamic_invariant4 ((temp___expr_285 Int)
+  (temp___is_init_282 Bool) (temp___skip_constant_283 Bool)
+  (temp___do_toplevel_284 Bool)) Bool (=>
+                                      (or (= temp___is_init_282 true)
+                                      (<= 0 3)) (in_range9 temp___expr_285)))
 
 (declare-fun train () Int)
 
@@ -1705,9 +1627,7 @@
 ;; entering_a_track__def_axiom
   (assert
   (forall ((position us_rep1))
-  (! (=> (entering_a_track__function_guard (entering_a_track position)
-     position)
-     (= (= (entering_a_track position) true)
+  (! (= (= (entering_a_track position) true)
      (and
      (not
      (= (to_rep
@@ -1727,7 +1647,7 @@
                                                               (rec__trains__train_position__track_begin
                                                               (us_split_fields3
                                                               position))))))))))
-     (select temp___244 id))))))))) :pattern ((entering_a_track position)) )))
+     (select temp___244 id)))))))) :pattern ((entering_a_track position)) )))
 
 ;; inside_a_track__post_axiom
   (assert true)
@@ -1735,13 +1655,12 @@
 ;; inside_a_track__def_axiom
   (assert
   (forall ((position us_rep1))
-  (! (=> (inside_a_track__function_guard (inside_a_track position) position)
-     (= (= (inside_a_track position) true)
+  (! (= (= (inside_a_track position) true)
      (= (to_rep
         (rec__trains__train_position__track_begin
         (us_split_fields3 position))) (to_rep
                                       (rec__trains__train_position__track_end
-                                      (us_split_fields3 position)))))) :pattern (
+                                      (us_split_fields3 position))))) :pattern (
   (inside_a_track position)) )))
 
 (define-fun dynamic_invariant8 ((temp___expr_251 Int)
@@ -1756,14 +1675,7 @@
 ;; moving_to_a_new_track__def_axiom
   (assert
   (forall ((cur_position1 us_rep1) (new_position1 us_rep1))
-  (! (=> (moving_to_a_new_track__function_guard
-     (moving_to_a_new_track cur_position1 new_position1) cur_position1
-     new_position1)
-     (and (inside_a_track__function_guard (inside_a_track cur_position1)
-     cur_position1)
-     (and (entering_a_track__function_guard (entering_a_track new_position1)
-     new_position1)
-     (= (= (moving_to_a_new_track cur_position1 new_position1) true)
+  (! (= (= (moving_to_a_new_track cur_position1 new_position1) true)
      (and
      (and (= (inside_a_track cur_position1) true)
      (= (entering_a_track new_position1) true))
@@ -1771,7 +1683,7 @@
         (rec__trains__train_position__track_begin
         (us_split_fields3 cur_position1))) (to_rep
                                            (rec__trains__train_position__track_end
-                                           (us_split_fields3 new_position1))))))))) :pattern (
+                                           (us_split_fields3 new_position1)))))) :pattern (
   (moving_to_a_new_track cur_position1 new_position1)) )))
 
 (declare-fun cur_num_trains () Int)
@@ -1804,21 +1716,6 @@
   (assert (=> (<= 0 3) (in_range9 result__)))
 
 ;; H
-  (assert (valid_move__function_guard
-  (valid_move (select trains train) new_position) (select trains train)
-  new_position))
-
-;; H
-  (assert (one_train_at_most_per_track__function_guard
-  (one_train_at_most_per_track cur_num_trains trains) cur_num_trains 
-  trains))
-
-;; H
-  (assert (safe_signaling__function_guard
-  (safe_signaling cur_num_trains trains track_signals) cur_num_trains 
-  trains track_signals))
-
-;; H
   (assert
   (and (and (<= 1 train) (<= train cur_num_trains))
   (and (= (valid_move (select trains train) new_position) true)
@@ -1833,10 +1730,7 @@
 
 ;; H
   (assert
-  (and
   (and (= result (moving_inside_current_tracks cur_position new_position))
-  (moving_inside_current_tracks__function_guard result cur_position
-  new_position))
   (= (= result true)
   (and
   (= (to_rep
@@ -1865,27 +1759,12 @@
   (assert (= trains1 (store trains train new_position)))
 
 ;; H
-  (assert (occupied_tracks_on_red__function_guard
-  (occupied_tracks_on_red cur_num_trains trains1 track_signals)
-  cur_num_trains trains1 track_signals))
-
-;; H
   (assert
   (= (occupied_tracks_on_red cur_num_trains trains1 track_signals) true))
 
 ;; H
-  (assert (previous_tracks_on_orange_or_red__function_guard
-  (previous_tracks_on_orange_or_red cur_num_trains trains1 track_signals)
-  cur_num_trains trains1 track_signals))
-
-;; H
   (assert
   (= (previous_tracks_on_orange_or_red cur_num_trains trains1 track_signals) true))
-
-;; H
-  (assert (safe_signaling__function_guard
-  (safe_signaling cur_num_trains trains1 track_signals) cur_num_trains
-  trains1 track_signals))
 
 (assert
 ;; WP_parameter_def

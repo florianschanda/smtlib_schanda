@@ -166,9 +166,8 @@
 ;; glob_ok__def_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (glob_ok__function_guard (glob_ok x) x)
-     (= (= (glob_ok x) true)
-     (= (to_rep (rec__foo__nested__glob__f (us_split_fields1 x))) 5))) :pattern (
+  (! (= (= (glob_ok x) true)
+     (= (to_rep (rec__foo__nested__glob__f (us_split_fields1 x))) 5)) :pattern (
   (glob_ok x)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -180,11 +179,6 @@
 
 ;; H
   (assert (= (to_rep g1__split_fields) n))
-
-;; H
-  (assert (glob_ok__function_guard
-  (glob_ok (mk___rep (mk___split_fields g1__split_fields)))
-  (mk___rep (mk___split_fields g1__split_fields))))
 
 (assert
 ;; WP_parameter_def

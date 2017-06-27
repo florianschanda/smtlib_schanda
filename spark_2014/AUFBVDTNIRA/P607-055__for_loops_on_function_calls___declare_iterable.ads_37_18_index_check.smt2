@@ -351,9 +351,7 @@
   (assert
   (forall ((x us_rep))
   (forall ((c Int))
-  (! (=> (has_element__function_guard (has_element x c) x c)
-     (= (= (has_element x c) true) (in_range1 c))) :pattern ((has_element x
-                                                             c)) ))))
+  (! (= (= (has_element x c) true) (in_range1 c)) :pattern ((has_element x c)) ))))
 
 (declare-fun x () us_rep)
 
@@ -379,9 +377,6 @@
 
 ;; H
   (assert (in_range2 c))
-
-;; H
-  (assert (has_element__function_guard (has_element x c) x c))
 
 ;; H
   (assert (= (has_element x c) true))

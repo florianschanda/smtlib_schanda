@@ -68,11 +68,6 @@
 
 (declare-fun is_valid__function_guard (Bool Int) Bool)
 
-;; temp___result_134_def
-  (assert
-  (forall ((temp___133 Int)) (is_valid__function_guard (is_valid temp___133)
-  temp___133)))
-
 (define-fun type_invariant ((temp___132 Int)) Bool (= (is_valid temp___132) true))
 
 (declare-sort t 0)
@@ -98,12 +93,12 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_138 Int)
-  (temp___is_init_135 Bool) (temp___skip_constant_136 Bool)
-  (temp___do_toplevel_137 Bool)) Bool (=>
-                                      (or (= temp___is_init_135 true)
+(define-fun dynamic_invariant1 ((temp___expr_137 Int)
+  (temp___is_init_134 Bool) (temp___skip_constant_135 Bool)
+  (temp___do_toplevel_136 Bool)) Bool (=>
+                                      (or (= temp___is_init_134 true)
                                       (<= 0 10000)) (in_range1
-                                      temp___expr_138)))
+                                      temp___expr_137)))
 
 (declare-fun div1 (Int Int) Int)
 
@@ -187,12 +182,11 @@
 ;; is_valid__def_axiom
   (assert
   (forall ((x1 Int))
-  (! (=> (is_valid__function_guard (is_valid x1) x1)
-     (= (= (is_valid x1) true) (= (mod2 x1 2) 0))) :pattern ((is_valid x1)) )))
+  (! (= (= (is_valid x1) true) (= (mod2 x1 2) 0)) :pattern ((is_valid x1)) )))
 
 (declare-fun typeinv__new_t__result () Int)
 
-(declare-fun temp___142 () Int)
+(declare-fun temp___141 () Int)
 
 (declare-fun o () Int)
 
@@ -218,13 +212,13 @@
   (assert (= typeinv__new_t__result3 typeinv__new_t__result1))
 
 ;; H
-  (assert (and (= temp___142 x) (in_range1 x)))
+  (assert (and (= temp___141 x) (in_range1 x)))
 
 ;; H
-  (assert (type_invariant temp___142))
+  (assert (type_invariant temp___141))
 
 ;; H
-  (assert (= o temp___142))
+  (assert (= o temp___141))
 
 ;; H
   (assert (= result typeinv__new_t__result))

@@ -564,9 +564,8 @@
 ;; is_empty__def_axiom
   (assert
   (forall ((a us_rep))
-  (! (=> (is_empty__function_guard (is_empty a) a)
-     (= (= (is_empty a) true)
-     (= (to_rep2 (rec__money__amount__raw (us_split_fields1 a))) 0))) :pattern (
+  (! (= (= (is_empty a) true)
+     (= (to_rep2 (rec__money__amount__raw (us_split_fields1 a))) 0)) :pattern (
   (is_empty a)) )))
 
 (declare-sort ext_account_num 0)
@@ -854,14 +853,8 @@
   (assert
   (forall ((account Int))
   (forall ((database__availability__links (Array Int us_rep1)))
-  (! (=> (existing__function_guard
-     (existing account database__availability__links) account
-     database__availability__links)
-     (and (is_available__function_guard
-     (is_available account database__availability__links) account
-     database__availability__links)
-     (= (= (existing account database__availability__links) true)
-     (not (= (is_available account database__availability__links) true))))) :pattern (
+  (! (= (= (existing account database__availability__links) true)
+     (not (= (is_available account database__availability__links) true))) :pattern (
   (existing account database__availability__links)) ))))
 
 (declare-fun dummy10 () (Array Int character))
@@ -1142,12 +1135,9 @@
   (forall ((customer (Array Int character)))
   (forall ((id (Array Int num)))
   (forall ((database__accounts (Array Int us_rep2)))
-  (! (=> (belongs_to__function_guard
-     (belongs_to account customer id database__accounts) account customer id
-     database__accounts)
-     (= (= (belongs_to account customer id database__accounts) true)
+  (! (= (= (belongs_to account customer id database__accounts) true)
      (= (bool_eq13 (select database__accounts account)
-        (mk___rep2 (mk___split_fields2 customer id (of_rep4 account)))) true))) :pattern (
+        (mk___rep2 (mk___split_fields2 customer id (of_rep4 account)))) true)) :pattern (
   (belongs_to account customer id database__accounts)) ))))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
@@ -1328,23 +1318,14 @@
   (Array Int us_rep3)) Bool)
 
 ;; balance__post_axiom
-  (assert
-  (forall ((account Int))
-  (forall ((database__availability__links (Array Int us_rep1)))
-  (existing__function_guard (existing account database__availability__links)
-  account database__availability__links))))
+  (assert true)
 
 ;; balance__def_axiom
   (assert
   (forall ((account Int))
   (forall ((database__availability__links (Array Int us_rep1)))
   (forall ((database__accounts_balance (Array Int us_rep3)))
-  (! (=>
-     (and (dynamic_invariant1 account true true true)
-     (balance__function_guard
-     (balance account database__availability__links
-     database__accounts_balance) account database__availability__links
-     database__accounts_balance))
+  (! (=> (dynamic_invariant1 account true true true)
      (= (balance account database__availability__links
         database__accounts_balance) (rec__database__account_balance__value
                                     (us_split_fields7
@@ -1380,12 +1361,9 @@
   (assert
   (forall ((account1 Int))
   (forall ((database__availability__links (Array Int us_rep1)))
-  (! (=> (is_available__function_guard
-     (is_available account1 database__availability__links) account1
-     database__availability__links)
-     (= (= (is_available account1 database__availability__links) true)
+  (! (= (= (is_available account1 database__availability__links) true)
      (= (rec__database__availability__account_link__available
-        (us_split_fields3 (select database__availability__links account1))) true))) :pattern (
+        (us_split_fields3 (select database__availability__links account1))) true)) :pattern (
   (is_available account1 database__availability__links)) ))))
 
 ;; no_account_rec__def_axiom
@@ -1469,11 +1447,11 @@
 
 (declare-fun o3 () ext_account_num)
 
-(declare-fun temp___443 () (Array Int character))
+(declare-fun temp___402 () (Array Int character))
 
-(declare-fun temp___4431 () (Array Int num))
+(declare-fun temp___4021 () (Array Int num))
 
-(declare-fun temp___4432 () ext_account_num)
+(declare-fun temp___4022 () ext_account_num)
 
 (declare-fun o4 () cur)
 
@@ -1510,17 +1488,17 @@
   (assert (= o o3))
 
 ;; H
-  (assert (= temp___443 o1))
+  (assert (= temp___402 o1))
 
 ;; H
-  (assert (= temp___4431 o2))
+  (assert (= temp___4021 o2))
 
 ;; H
-  (assert (= temp___4432 o3))
+  (assert (= temp___4022 o3))
 
 ;; H
   (assert
-  (= (mk___rep2 (mk___split_fields2 temp___443 temp___4431 temp___4432)) 
+  (= (mk___rep2 (mk___split_fields2 temp___402 temp___4021 temp___4022)) 
   no_account_rec))
 
 ;; H
@@ -1530,27 +1508,6 @@
   (assert (in_range7 account))
 
 ;; H
-  (assert (existing__function_guard (existing account links) account 
-  links))
-
-;; H
-  (assert (belongs_to__function_guard
-  (belongs_to account customer id accounts) account customer id accounts))
-
-;; H
-  (assert (balance__function_guard (balance account links accounts_balance)
-  account links accounts_balance))
-
-;; H
-  (assert (balance__function_guard (balance account links accounts_balance)
-  account links accounts_balance))
-
-;; H
-  (assert (is_empty__function_guard
-  (is_empty (balance account links accounts_balance))
-  (balance account links accounts_balance)))
-
-;; H
   (assert
   (and (= (existing account links) true)
   (and (= (belongs_to account customer id accounts) true)
@@ -1558,9 +1515,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o11 (balance account links accounts_balance))
-  (balance__function_guard o11 account links accounts_balance))
   (= o11 (rec__database__account_balance__value
          (us_split_fields7 (select accounts_balance account))))))
 
@@ -1602,10 +1557,6 @@
 
 ;; H
   (assert (= accounts1 (store accounts account no_account_rec)))
-
-;; H
-  (assert (is_available__function_guard (is_available account links) 
-  account links))
 
 (assert
 ;; WP_parameter_def

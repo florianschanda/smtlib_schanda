@@ -689,10 +689,9 @@
   (assert
   (forall ((stream us_t))
   (forall ((pos Int))
-  (! (=> (nth8_stream__function_guard (nth8_stream stream pos) stream pos)
-     (= (= (nth8_stream stream pos) true)
+  (! (= (= (nth8_stream stream pos) true)
      (= (nth1 (to_rep1 (select (to_array stream) (div1 pos 8)))
-        (- 7 (mod1 pos 8))) true))) :pattern ((nth8_stream stream pos)) ))))
+        (- 7 (mod1 pos 8))) true)) :pattern ((nth8_stream stream pos)) ))))
 
 (declare-fun maxvalue (Int) (_ BitVec 64))
 
@@ -701,17 +700,13 @@
 ;; maxvalue__post_axiom
   (assert
   (forall ((len Int))
-  (! (=> (dynamic_invariant1 len true true true)
-     (let ((result (maxvalue len)))
-     (=> (maxvalue__function_guard result len) (dynamic_invariant2 result
-     true false true)))) :pattern ((maxvalue len)) )))
+  (! (=> (dynamic_invariant1 len true true true) (dynamic_invariant2
+     (maxvalue len) true false true)) :pattern ((maxvalue len)) )))
 
 ;; maxvalue__def_axiom
   (assert
   (forall ((len Int))
-  (! (=>
-     (and (dynamic_invariant1 len true true true) (maxvalue__function_guard
-     (maxvalue len) len))
+  (! (=> (dynamic_invariant1 len true true true)
      (= (maxvalue len) (bvshl ((_ int2bv 64) 1) ((_ int2bv 64) len)))) :pattern (
   (maxvalue len)) )))
 
@@ -727,19 +722,16 @@
      (and
      (and (dynamic_invariant2 value true true true) (dynamic_invariant1 left
      true true true)) (< left 64))
-     (let ((result (peekbit64 value left)))
-     (=> (peekbit64__function_guard result value left)
-     (= (= result true) (= (nth value (- 63 left)) true))))) :pattern (
+     (= (= (peekbit64 value left) true) (= (nth value (- 63 left)) true))) :pattern (
   (peekbit64 value left)) ))))
 
 ;; peekbit64__def_axiom
   (assert
   (forall ((value (_ BitVec 64)))
   (forall ((left Int))
-  (! (=> (peekbit64__function_guard (peekbit64 value left) value left)
-     (= (= (peekbit64 value left) true)
+  (! (= (= (peekbit64 value left) true)
      (not
-     (= (bvand value (bvshl ((_ int2bv 64) 1) ((_ int2bv 64) (- 63 left)))) ((_ int2bv 64) 0))))) :pattern (
+     (= (bvand value (bvshl ((_ int2bv 64) 1) ((_ int2bv 64) (- 63 left)))) ((_ int2bv 64) 0)))) :pattern (
   (peekbit64 value left)) ))))
 
 (declare-fun start () Int)
@@ -763,8 +755,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -882,7 +872,7 @@
 
 ;; H
   (assert
-  (and (and (= o5 (maxvalue len)) (maxvalue__function_guard o5 len))
+  (and (= o5 (maxvalue len))
   (= o5 (bvshl ((_ int2bv 64) 1) ((_ int2bv 64) len)))))
 
 ;; H
@@ -911,36 +901,6 @@
 
 ;; H
   (assert (<= i1 (- len 1)))
-
-;; H
-  (assert
-  (forall ((j Int)) (nth8_stream__function_guard
-  (nth8_stream (mk___t addr (mk (to_rep addr__first) (to_rep addr__last))) j)
-  (mk___t addr (mk (to_rep addr__first) (to_rep addr__last))) j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (nth8_stream__function_guard
-  (nth8_stream (mk___t addr1 (mk (to_rep addr__first) (to_rep addr__last)))
-  j) (mk___t addr1 (mk (to_rep addr__first) (to_rep addr__last))) j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (nth8_stream__function_guard
-  (nth8_stream (mk___t addr1 (mk (to_rep addr__first) (to_rep addr__last)))
-  j) (mk___t addr1 (mk (to_rep addr__first) (to_rep addr__last))) j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (nth8_stream__function_guard
-  (nth8_stream (mk___t addr1 (mk (to_rep addr__first) (to_rep addr__last)))
-  j) (mk___t addr1 (mk (to_rep addr__first) (to_rep addr__last))) j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (nth8_stream__function_guard
-  (nth8_stream (mk___t addr (mk (to_rep addr__first) (to_rep addr__last))) j)
-  (mk___t addr (mk (to_rep addr__first) (to_rep addr__last))) j)))
 
 ;; H
   (assert (and (<= 0 i2) (<= i2 len)))

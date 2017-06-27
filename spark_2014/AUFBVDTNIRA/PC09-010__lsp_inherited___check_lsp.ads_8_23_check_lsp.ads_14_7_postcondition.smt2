@@ -288,8 +288,8 @@
 (define-fun child__ref___projection ((a child__ref)) us_rep1 (child__content
                                                              a))
 
-(define-fun default_initial_assumption ((temp___expr_150 us_rep1)
-  (temp___skip_top_level_151 Bool)) Bool (= (attr__tag1 temp___expr_150) 
+(define-fun default_initial_assumption ((temp___expr_147 us_rep1)
+  (temp___skip_top_level_148 Bool)) Bool (= (attr__tag1 temp___expr_147) 
   us_tag1))
 
 (declare-fun x () us_rep1)

@@ -416,11 +416,11 @@
 (define-fun state_type__ref___projection ((a state_type__ref)) state_type 
   (state_type__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_192 Int)
-  (temp___is_init_189 Bool) (temp___skip_constant_190 Bool)
-  (temp___do_toplevel_191 Bool)) Bool (=>
-                                      (or (= temp___is_init_189 true)
-                                      (<= 0 2)) (in_range5 temp___expr_192)))
+(define-fun dynamic_invariant2 ((temp___expr_190 Int)
+  (temp___is_init_187 Bool) (temp___skip_constant_188 Bool)
+  (temp___do_toplevel_189 Bool)) Bool (=>
+                                      (or (= temp___is_init_187 true)
+                                      (<= 0 2)) (in_range5 temp___expr_190)))
 
 (declare-sort length_type 0)
 
@@ -443,22 +443,18 @@
 (define-fun length_type__ref___projection ((a length_type__ref)) length_type 
   (length_type__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_198 Int)
-  (temp___is_init_195 Bool) (temp___skip_constant_196 Bool)
-  (temp___do_toplevel_197 Bool)) Bool (=>
-                                      (or (= temp___is_init_195 true)
+(define-fun dynamic_invariant3 ((temp___expr_196 Int)
+  (temp___is_init_193 Bool) (temp___skip_constant_194 Bool)
+  (temp___do_toplevel_195 Bool)) Bool (=>
+                                      (or (= temp___is_init_193 true)
                                       (<= 0 255)) (in_range6
-                                      temp___expr_198)))
+                                      temp___expr_196)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
-
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -511,17 +507,17 @@
 
 (declare-fun names__is_domain_name__result () Bool)
 
-(declare-fun temp___206 () Int)
-
-(declare-fun temp___207 () Int)
+(declare-fun temp___204 () Int)
 
 (declare-fun temp___205 () Int)
-
-(declare-fun temp___204 () Int)
 
 (declare-fun temp___203 () Int)
 
 (declare-fun temp___202 () Int)
+
+(declare-fun temp___201 () Int)
+
+(declare-fun temp___200 () Int)
 
 (declare-fun o () Bool)
 
@@ -999,14 +995,14 @@
   (and (= names__is_domain_name__result33 names__is_domain_name__result16)
   (and (= i9 i3)
   (and (= ch9 ch3) (and (= label_length14 label_length2) (= state12 state2))))))
-  (and (= temp___206 (to_rep1 (first (rt name))))
-  (and (= temp___207 (to_rep1 (last (rt name))))
-  (and (and (= result26 i16) (= i2 temp___206))
-  (and (and (<= temp___206 i2) (<= i2 temp___207))
-  (and (= temp___205 ch)
-  (and (= temp___204 label_length1)
-  (and (= temp___203 state1)
-  (and (= temp___202 i2)
+  (and (= temp___204 (to_rep1 (first (rt name))))
+  (and (= temp___205 (to_rep1 (last (rt name))))
+  (and (and (= result26 i16) (= i2 temp___204))
+  (and (and (<= temp___204 i2) (<= i2 temp___205))
+  (and (= temp___203 ch)
+  (and (= temp___202 label_length1)
+  (and (= temp___201 state1)
+  (and (= temp___200 i2)
   (and (< label_length2 (+ (- i3 (to_rep1 (first (rt name)))) 1))
   (and
   (and
@@ -1096,10 +1092,10 @@
        (<= i2 (to_rep1 (last (rt name)))))
   (and
   (and
-  (and (= temp___205 ch)
-  (and (= temp___204 label_length1)
-  (and (= temp___203 state1)
-  (and (= temp___202 i2)
+  (and (= temp___203 ch)
+  (and (= temp___202 label_length1)
+  (and (= temp___201 state1)
+  (and (= temp___200 i2)
   (and (< label_length2 (+ (- i3 (to_rep1 (first (rt name)))) 1))
   (and
   (and

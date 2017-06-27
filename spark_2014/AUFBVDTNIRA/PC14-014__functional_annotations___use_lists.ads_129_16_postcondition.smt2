@@ -731,11 +731,6 @@
 
 ;; H
   (assert
-  (forall ((cu us_rep1)) (prop____function_guard (prop__ (element l cu))
-  (element l cu))))
-
-;; H
-  (assert
   (forall ((cu us_rep1))
   (=> (= (has_key (positions l) cu) true) (= (prop__ (element l cu)) true))))
 
@@ -750,23 +745,18 @@
   (and (= (has_key (positions l) i) true)
   (= (get (model__ l) (get1 (positions l) i)) (get temp___266 temp___265))))))))
 
-(define-fun temp___598 () us_rep2 (model__ l))
+(define-fun temp___572 () us_rep2 (model__ l))
 
-(declare-fun temp___597 () Int)
-
-;; H
-  (assert (in_range2 temp___597))
+(declare-fun temp___571 () Int)
 
 ;; H
-  (assert (= (iter_has_element temp___598 temp___597) true))
-
-(define-fun e () Int (get temp___598 temp___597))
+  (assert (in_range2 temp___571))
 
 ;; H
-  (assert (prop____function_guard (prop__ e) e))
+  (assert (= (iter_has_element temp___572 temp___571) true))
 
 (assert
 ;; WP_parameter_def
  ;; File "use_lists.ads", line 117, characters 0-0
-  (not (= (prop__ e) true)))
+  (not (= (prop__ (get temp___572 temp___571)) true)))
 (check-sat)

@@ -402,9 +402,9 @@
 
 (declare-fun i () Int)
 
-(declare-fun temp___174 () Int)
+(declare-fun temp___168 () Int)
 
-(declare-fun temp___175 () Int)
+(declare-fun temp___169 () Int)
 
 (declare-fun o () Int)
 
@@ -432,16 +432,16 @@
 
 ;; H
   (assert
-  (and (= temp___175 (+ (to_rep1 (first (rt b))) i)) (in_range1
+  (and (= temp___169 (+ (to_rep1 (first (rt b))) i)) (in_range1
   (+ (to_rep1 (first (rt b))) i))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt b))) temp___175)
-  (<= temp___175 (to_rep1 (last (rt b))))))
+  (and (<= (to_rep1 (first (rt b))) temp___169)
+  (<= temp___169 (to_rep1 (last (rt b))))))
 
 ;; H
-  (assert (= o temp___175))
+  (assert (= o temp___169))
 
 ;; H
   (assert (= o1 (select (elts b) o)))
@@ -451,11 +451,11 @@
 
 ;; H
   (assert
-  (and (= temp___174 (+ (to_rep1 (first (rt a))) i)) (in_range1
+  (and (= temp___168 (+ (to_rep1 (first (rt a))) i)) (in_range1
   (+ (to_rep1 (first (rt a))) i))))
 
 (assert
 ;; WP_parameter_def
  ;; File "bug.ads", line 8, characters 0-0
-  (not (<= (to_rep1 (first (rt a))) temp___174)))
+  (not (<= (to_rep1 (first (rt a))) temp___168)))
 (check-sat)

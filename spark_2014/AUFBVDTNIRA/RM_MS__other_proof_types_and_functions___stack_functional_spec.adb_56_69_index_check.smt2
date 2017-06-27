@@ -431,11 +431,8 @@
 ;; state__2__def_axiom
   (assert
   (forall ((stack_functional_spec__my_stack__fields us_split_fields))
-  (! (=> (state__2__function_guard
-     (state__2 stack_functional_spec__my_stack__fields)
-     stack_functional_spec__my_stack__fields)
-     (= (state__2 stack_functional_spec__my_stack__fields) (mk___rep
-                                                           stack_functional_spec__my_stack__fields))) :pattern (
+  (! (= (state__2 stack_functional_spec__my_stack__fields) (mk___rep
+                                                           stack_functional_spec__my_stack__fields)) :pattern (
   (state__2 stack_functional_spec__my_stack__fields)) )))
 
 (declare-fun count (us_rep) Int)
@@ -451,18 +448,15 @@
 
 ;; count__post_axiom
   (assert
-  (forall ((s us_rep))
-  (! (let ((result (count s)))
-     (=> (count__function_guard result s) (dynamic_invariant1 result true
-     false true))) :pattern ((count s)) )))
+  (forall ((s us_rep)) (! (dynamic_invariant1 (count s) true false
+  true) :pattern ((count s)) )))
 
 ;; count__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (count__function_guard (count s) s)
-     (= (count s) (to_rep1
+  (! (= (count s) (to_rep1
                   (rec__stack_functional_spec__stack_type__pointer
-                  (us_split_fields1 s))))) :pattern ((count s)) )))
+                  (us_split_fields1 s)))) :pattern ((count s)) )))
 
 (declare-fun stack_entry (us_rep Int) Int)
 
@@ -472,25 +466,20 @@
   (assert
   (forall ((s us_rep))
   (forall ((n Int))
-  (! (and (count__function_guard (count s) s)
-     (=>
+  (! (=>
      (and (dynamic_invariant1 n true true true)
-     (and (<= 1 n) (<= n (count s))))
-     (let ((result (stack_entry s n)))
-     (=> (stack_entry__function_guard result s n) (dynamic_invariant result
-     true false true))))) :pattern ((stack_entry s n)) ))))
+     (and (<= 1 n) (<= n (count s)))) (dynamic_invariant (stack_entry s n)
+     true false true)) :pattern ((stack_entry s n)) ))))
 
 ;; stack_entry__def_axiom
   (assert
   (forall ((s us_rep))
   (forall ((n Int))
-  (! (=>
-     (and (dynamic_invariant1 n true true true) (stack_entry__function_guard
-     (stack_entry s n) s n))
+  (! (=> (dynamic_invariant1 n true true true)
      (= (stack_entry s n) (to_rep
-                          (let ((temp___180 (rec__stack_functional_spec__stack_type__s
+                          (let ((temp___178 (rec__stack_functional_spec__stack_type__s
                                             (us_split_fields1 s))))
-                          (select temp___180 n))))) :pattern ((stack_entry s
+                          (select temp___178 n))))) :pattern ((stack_entry s
                                                               n)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -526,26 +515,6 @@
 (declare-fun temp1 () Int)
 
 ;; H
-  (assert (state__2__function_guard
-  (state__2
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1))
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1)))
-
-;; H
-  (assert (state__2__function_guard
-  (state__2
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1))
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1)))
-
-;; H
-  (assert (count__function_guard
-  (count
-  (state__2
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1)))
-  (state__2
-  (mk___split_fields my_stack__split_fields my_stack__split_fields1))))
-
-;; H
   (assert
   (<= 2 (count
         (state__2
@@ -576,6 +545,6 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "stack_functional_spec.ads", line 75, characters 0-0
+ ;; File "stack_functional_spec.ads", line 33, characters 0-0
   (not (<= 1 (- (to_rep1 my_stack__split_fields1) 1))))
 (check-sat)

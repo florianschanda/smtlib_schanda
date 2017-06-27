@@ -318,11 +318,9 @@
 ;; get_even_close_pair__2__post_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (dynamic_invariant2 x true true true)
-     (let ((result (get_even_close_pair__2 x)))
-     (=> (get_even_close_pair__2__function_guard result x)
-     (dynamic_invariant2 result true false true)))) :pattern ((get_even_close_pair__2
-                                                              x)) )))
+  (! (=> (dynamic_invariant2 x true true true) (dynamic_invariant2
+     (get_even_close_pair__2 x) true false true)) :pattern ((get_even_close_pair__2
+                                                            x)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 

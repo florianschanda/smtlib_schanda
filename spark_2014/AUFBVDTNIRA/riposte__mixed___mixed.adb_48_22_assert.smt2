@@ -237,10 +237,7 @@
 
 ;; id__post_axiom
   (assert
-  (forall ((r us_rep))
-  (! (let ((result (id r)))
-     (=> (id__function_guard result r) (= (bool_eq2 r result) true))) :pattern (
-  (id r)) )))
+  (forall ((r us_rep)) (! (= (bool_eq2 r (id r)) true) :pattern ((id r)) )))
 
 (declare-fun r () us_rep)
 
@@ -302,9 +299,7 @@
   (assert (=> (<= (- 2147483648) 2147483647) (in_range n)))
 
 ;; H
-  (assert
-  (and (and (= temp___1553 (id r)) (id__function_guard temp___1553 r))
-  (= (bool_eq2 r temp___1553) true)))
+  (assert (and (= temp___1553 (id r)) (= (bool_eq2 r temp___1553) true)))
 
 ;; H
   (assert (= result s__split_fields))

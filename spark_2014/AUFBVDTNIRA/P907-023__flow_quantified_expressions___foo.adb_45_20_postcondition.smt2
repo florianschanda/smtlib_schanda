@@ -85,9 +85,7 @@
 
 ;; f__def_axiom
   (assert
-  (forall ((n Int))
-  (! (=> (f__function_guard (f n) n) (= (= (f n) true) (= n 42))) :pattern (
-  (f n)) )))
+  (forall ((n Int)) (! (= (= (f n) true) (= n 42)) :pattern ((f n)) )))
 
 (declare-fun a () Int)
 
@@ -106,9 +104,6 @@
 (declare-fun b2 () Bool)
 
 (declare-fun b3 () Bool)
-
-;; H
-  (assert (forall ((i Int)) (f__function_guard (f i) i)))
 
 ;; H
   (assert (in_range1 a))
@@ -140,9 +135,6 @@
 
 ;; H
   (assert (<= j a))
-
-;; H
-  (assert (f__function_guard (f j) j))
 
 (assert
 ;; WP_parameter_def

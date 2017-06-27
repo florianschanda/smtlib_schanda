@@ -216,15 +216,11 @@
 
 (declare-fun d__split_discrs () natural)
 
-(declare-fun temp___355 () natural)
+(declare-fun temp___354 () natural)
 
-(declare-fun temp___3551 () us_main_type)
+(declare-fun temp___3541 () us_main_type)
 
-(declare-fun temp___3552 () Bool)
-
-(define-fun temp___3553 () us_rep (mk___rep (mk___split_discrs temp___355)
-                                  (mk___split_fields temp___3551)
-                                  temp___3552))
+(declare-fun temp___3542 () Bool)
 
 ;; H
   (assert (= (to_rep d__split_discrs) r26b))
@@ -235,8 +231,9 @@
 ;; H
   (assert
   (and
-  (and (= temp___3553 (new_with_default 0)) (new_with_default__function_guard
-  temp___3553 0)) (= (to_rep temp___355) 0)))
+  (= (mk___rep (mk___split_discrs temp___354) (mk___split_fields temp___3541)
+     temp___3542) (new_with_default 0))
+  (= (to_rep temp___354) 0)))
 
 ;; H
   (assert (= d__attr__constrained true))
@@ -244,5 +241,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (= temp___355 d__split_discrs)))
+  (not (= temp___354 d__split_discrs)))
 (check-sat)

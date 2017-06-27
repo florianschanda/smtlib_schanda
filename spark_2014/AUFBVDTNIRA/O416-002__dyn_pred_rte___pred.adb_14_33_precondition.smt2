@@ -158,8 +158,7 @@
 ;; prop____def_axiom
   (assert
   (forall ((x Int))
-  (! (=> (prop____function_guard (prop__ x) x)
-     (= (= (prop__ x) true) (not (= (mod2 10 x) 0)))) :pattern ((prop__ x)) )))
+  (! (= (= (prop__ x) true) (not (= (mod2 10 x) 0))) :pattern ((prop__ x)) )))
 
 (declare-sort positive 0)
 
@@ -387,35 +386,29 @@
 (declare-datatypes () ((a__ref (mk_a__ref (a__content us_t)))))
 (define-fun a__ref___projection ((a a__ref)) us_t (a__content a))
 
-;; temp___result_149_def
-  (assert (forall ((x Int)) (prop____function_guard (prop__ x) x)))
-
-(define-fun dynamic_invariant1 ((temp___expr_147 us_t)
-  (temp___is_init_144 Bool) (temp___skip_constant_145 Bool)
-  (temp___do_toplevel_146 Bool)) Bool (and
+(define-fun dynamic_invariant1 ((temp___expr_145 us_t)
+  (temp___is_init_142 Bool) (temp___skip_constant_143 Bool)
+  (temp___do_toplevel_144 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_145 true))
+                                      (not (= temp___skip_constant_143 true))
                                       (dynamic_property 1 2147483647
-                                      (first1 temp___expr_147)
-                                      (last1 temp___expr_147)))
-                                      (=> (= temp___do_toplevel_146 true)
-                                      (=> (= temp___is_init_144 true)
+                                      (first1 temp___expr_145)
+                                      (last1 temp___expr_145)))
+                                      (=> (= temp___do_toplevel_144 true)
+                                      (=> (= temp___is_init_142 true)
                                       (forall ((x Int))
                                       (=>
-                                      (and (<= (first1 temp___expr_147) x)
-                                      (<= x (last1 temp___expr_147)))
+                                      (and (<= (first1 temp___expr_145) x)
+                                      (<= x (last1 temp___expr_145)))
                                       (= (prop__ x) true)))))))
 
-;; temp___result_153_def
-  (assert (forall ((x Int)) (prop____function_guard (prop__ x) x)))
-
-(define-fun dynamic_predicate ((temp___151 us_t)) Bool (forall ((x Int))
+(define-fun dynamic_predicate ((temp___148 us_t)) Bool (forall ((x Int))
                                                        (=>
                                                        (and
                                                        (<= (first1
-                                                           temp___151) x)
+                                                           temp___148) x)
                                                        (<= x (last1
-                                                             temp___151)))
+                                                             temp___148)))
                                                        (= (prop__ x) true))))
 
 (declare-fun i7b () us_t)

@@ -170,21 +170,205 @@
 
 ;; zero__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (zero us_void_param)))
-     (=> (zero__function_guard result us_void_param) (dynamic_invariant1
-     result true false true))) :pattern ((zero us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant1
+  (zero us_void_param) true false true) :pattern ((zero us_void_param)) )))
 
 (declare-fun r1s () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
+(declare-sort us_main_type 0)
+
+(declare-fun us_main_eq (us_main_type us_main_type) Bool)
+
+(declare-datatypes ()
+((us_split_discrs (mk___split_discrs (rec__p__timer__countdown natural)))))
+(define-fun us_split_discrs___projection ((a us_split_discrs)) natural 
+  (rec__p__timer__countdown a))
+
+(declare-datatypes ()
+((us_split_discrs__ref
+ (mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
+(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref)) us_split_discrs 
+  (us_split_discrs__content a))
+
+(declare-datatypes ()
+((us_split_fields (mk___split_fields (rec__p__timer us_main_type)))))
+(define-fun us_split_fields_Timer__projection ((a us_split_fields)) us_main_type 
+  (rec__p__timer a))
+
+(declare-datatypes ()
+((us_split_fields__ref
+ (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+  (us_split_fields__content a))
+
+(declare-datatypes ()
+((us_rep
+ (mk___rep
+ (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)))))
+(define-fun us_rep___projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                             a))
+
+(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                              a))
+
+(declare-fun user_eq2 (us_rep us_rep) Bool)
+
+(declare-fun value__size () Int)
+
+(declare-fun object__size (us_rep) Int)
+
+(declare-fun value__alignment () Int)
+
+(declare-fun object__alignment (us_rep) Int)
+
+;; value__size_axiom
+  (assert (<= 0 value__size))
+
+;; object__size_axiom
+  (assert (forall ((a us_rep)) (<= 0 (object__size a))))
+
+;; value__alignment_axiom
+  (assert (<= 0 value__alignment))
+
+;; object__alignment_axiom
+  (assert (forall ((a us_rep)) (<= 0 (object__alignment a))))
+
+(declare-fun p__timer__countdown__first__bit () Int)
+
+(declare-fun p__timer__countdown__last__bit () Int)
+
+(declare-fun p__timer__countdown__position () Int)
+
+;; p__timer__countdown__first__bit_axiom
+  (assert (<= 0 p__timer__countdown__first__bit))
+
+;; p__timer__countdown__last__bit_axiom
+  (assert (< p__timer__countdown__first__bit p__timer__countdown__last__bit))
+
+;; p__timer__countdown__position_axiom
+  (assert (<= 0 p__timer__countdown__position))
+
+(declare-datatypes () ((timer__ref (mk_timer__ref (timer__content us_rep)))))
+(define-fun timer__ref___projection ((a timer__ref)) us_rep (timer__content
+                                                            a))
+
+(declare-datatypes ()
+((us_split_fields2 (mk___split_fields1 (rec__p__timer1 us_main_type)))))
+(define-fun us_split_fields_Timer2__projection ((a us_split_fields2)) us_main_type 
+  (rec__p__timer1 a))
+
+(declare-datatypes ()
+((us_split_fields__ref1
+ (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
+(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2 
+  (us_split_fields__content1 a))
+
+(declare-datatypes ()
+((us_rep1
+ (mk___rep1
+ (us_split_discrs2 us_split_discrs)(us_split_fields3 us_split_fields2)))))
+(define-fun us_rep_3__projection ((a us_rep1)) us_split_discrs (us_split_discrs2
+                                                               a))
+
+(define-fun us_rep_4__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                a))
+
+(define-fun to_base ((a us_rep1)) us_rep (mk___rep (us_split_discrs2 a)
+                                         (mk___split_fields
+                                         (rec__p__timer1
+                                         (us_split_fields3 a)))))
+
+(define-fun of_base ((r us_rep)) us_rep1 (mk___rep1 (us_split_discrs1 r)
+                                         (mk___split_fields1
+                                         (rec__p__timer (us_split_fields1 r)))))
+
+(declare-fun user_eq3 (us_rep1 us_rep1) Bool)
+
+(declare-fun to_rep (natural) Int)
+
+(declare-fun of_rep (Int) natural)
+
+;; inversion_axiom
+  (assert
+  (forall ((x natural)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x natural)) (! (in_range (to_rep x)) :pattern ((to_rep x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                           (of_rep x))) )))
+
+(define-fun in_range2 ((rec__p__timer__countdown1 Int)
+  (a us_rep)) Bool (= rec__p__timer__countdown1 (to_rep
+                                                (rec__p__timer__countdown
+                                                (us_split_discrs1 a)))))
+
+(declare-fun value__size1 () Int)
+
+(declare-fun object__size1 (us_rep1) Int)
+
+(declare-fun value__alignment1 () Int)
+
+(declare-fun object__alignment1 (us_rep1) Int)
+
+;; value__size_axiom
+  (assert (<= 0 value__size1))
+
+;; object__size_axiom
+  (assert (forall ((a us_rep1)) (<= 0 (object__size1 a))))
+
+;; value__alignment_axiom
+  (assert (<= 0 value__alignment1))
+
+;; object__alignment_axiom
+  (assert (forall ((a us_rep1)) (<= 0 (object__alignment1 a))))
+
+(declare-fun p__timer__countdown__first__bit1 () Int)
+
+(declare-fun p__timer__countdown__last__bit1 () Int)
+
+(declare-fun p__timer__countdown__position1 () Int)
+
+;; p__timer__countdown__first__bit_axiom
+  (assert (<= 0 p__timer__countdown__first__bit1))
+
+;; p__timer__countdown__last__bit_axiom
+  (assert
+  (< p__timer__countdown__first__bit1 p__timer__countdown__last__bit1))
+
+;; p__timer__countdown__position_axiom
+  (assert (<= 0 p__timer__countdown__position1))
+
+(declare-datatypes () ((ttS__ref (mk_ttS__ref (ttS__content us_rep1)))))
+(define-fun ttS__ref___projection ((a ttS__ref)) us_rep1 (ttS__content a))
+
+(define-fun dynamic_invariant2 ((temp___expr_176 us_rep1)
+  (temp___is_init_173 Bool) (temp___skip_constant_174 Bool)
+  (temp___do_toplevel_175 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_174 true))
+                                      (in_range2 r1s
+                                      (to_base temp___expr_176))))
+
+(define-fun default_initial_assumption ((temp___expr_178 us_rep1)
+  (temp___skip_top_level_179 Bool)) Bool (= (to_rep
+                                            (rec__p__timer__countdown
+                                            (us_split_discrs2
+                                            temp___expr_178))) r1s))
+
+(declare-fun t__split_discrs () us_split_discrs)
+
+(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+
 (declare-fun o () Int)
 
 ;; H
-  (assert
-  (and (and (= o (zero Tuple0)) (zero__function_guard o Tuple0)) (in_range
-  o)))
+  (assert (and (= o (zero Tuple0)) (in_range o)))
 
 (assert
 ;; WP_parameter_def

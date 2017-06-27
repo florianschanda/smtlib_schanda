@@ -532,10 +532,6 @@
 
 (declare-fun attr__ATTRIBUTE_MODULUS2 () (_ BitVec 64))
 
-(declare-fun first2 () (_ BitVec 64))
-
-(declare-fun last2 () (_ BitVec 64))
-
 (define-fun dynamic_property1 ((first_int (_ BitVec 64))
   (last_int (_ BitVec 64))
   (x (_ BitVec 64))) Bool (and (bvule first_int x) (bvule x last_int)))
@@ -561,16 +557,16 @@
 
 (declare-sort t1 0)
 
-(declare-fun first3 (t1) index_t)
+(declare-fun first2 (t1) index_t)
 
-(declare-fun last3 (t1) index_t)
+(declare-fun last2 (t1) index_t)
 
 (declare-fun mk1 ((_ BitVec 64) (_ BitVec 64)) t1)
 
 ;; mk_def
   (assert
   (forall ((f (_ BitVec 64)) (l (_ BitVec 64)))
-  (! (and (= (to_rep (first3 (mk1 f l))) f) (= (to_rep (last3 (mk1 f l))) l)) :pattern (
+  (! (and (= (to_rep (first2 (mk1 f l))) f) (= (to_rep (last2 (mk1 f l))) l)) :pattern (
   (mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first (_ BitVec 64))
@@ -587,13 +583,13 @@
 (define-fun of_array1 ((a (Array (_ BitVec 64) byte_t)) (f (_ BitVec 64))
   (l (_ BitVec 64))) us_t1 (mk___t1 a (mk1 f l)))
 
-(define-fun first4 ((a us_t1)) (_ BitVec 64) (to_rep (first3 (rt1 a))))
+(define-fun first3 ((a us_t1)) (_ BitVec 64) (to_rep (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) (_ BitVec 64) (to_rep (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) (_ BitVec 64) (to_rep (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (bvule (first4 a) (last4 a))
-                                    (+ (- (bv2nat (last4 a)) (bv2nat 
-                                    (first4 a))) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (bvule (first3 a) (last3 a))
+                                    (+ (- (bv2nat (last3 a)) (bv2nat 
+                                    (first3 a))) 1) 0))
 
 (declare-fun value__size1 () Int)
 
@@ -630,9 +626,9 @@
   (forall ((a (Array (_ BitVec 64) byte_t))) (<= 0 (object__alignment1 a))))
 
 (define-fun bool_eq5 ((x us_t1)
-  (y us_t1)) Bool (bool_eq2 (elts1 x) (to_rep (first3 (rt1 x)))
-                  (to_rep (last3 (rt1 x))) (elts1 y)
-                  (to_rep (first3 (rt1 y))) (to_rep (last3 (rt1 y)))))
+  (y us_t1)) Bool (bool_eq2 (elts1 x) (to_rep (first2 (rt1 x)))
+                  (to_rep (last2 (rt1 x))) (elts1 y)
+                  (to_rep (first2 (rt1 y))) (to_rep (last2 (rt1 y)))))
 
 (declare-fun user_eq4 (us_t1 us_t1) Bool)
 
@@ -651,7 +647,7 @@
   (and
   (=> (dynamic_property ((_ int2bv 64) 0)
   ((_ int2bv 64) 18446744073709551615) temp___163 temp___164)
-  (and (= (first4 temp___161) temp___163) (= (last4 temp___161) temp___164)))
+  (and (= (first3 temp___161) temp___163) (= (last3 temp___161) temp___164)))
   (forall ((temp___165 (_ BitVec 64)))
   (= (select (to_array1 temp___161) temp___165) (of_rep1 temp___162))))))))
 
@@ -687,14 +683,14 @@
 ;; H
   (assert
   (= (to_rep
-     (first3
+     (first2
      (rt1 (temp___160 ((_ int2bv 8) 0) (to_rep x__first) (to_rep x__last))))) 
   (to_rep x__first)))
 
 ;; H
   (assert
   (= (to_rep
-     (last3
+     (last2
      (rt1 (temp___160 ((_ int2bv 8) 0) (to_rep x__first) (to_rep x__last))))) 
   (to_rep x__last)))
 
@@ -708,7 +704,7 @@
 
 ;; H
   (assert
-  (= (mk (to_rep (first3 temp___1671)) (to_rep (last3 temp___1671))) 
+  (= (mk (to_rep (first2 temp___1671)) (to_rep (last2 temp___1671))) 
   temp___1681))
 
 (assert

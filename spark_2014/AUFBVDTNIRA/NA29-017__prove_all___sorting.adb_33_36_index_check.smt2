@@ -334,8 +334,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -367,13 +365,13 @@
 
 (declare-fun i () Int)
 
-(declare-fun temp___267 () (Array Int integer))
+(declare-fun temp___245 () (Array Int integer))
 
-(declare-fun temp___265 () Int)
+(declare-fun temp___243 () Int)
 
-(declare-fun temp___262 () (Array Int integer))
+(declare-fun temp___240 () (Array Int integer))
 
-(declare-fun temp___270 () (Array Int integer))
+(declare-fun temp___248 () (Array Int integer))
 
 (declare-fun j () Int)
 
@@ -387,7 +385,7 @@
 
 (declare-fun o4 () Int)
 
-(declare-fun temp___273 () Int)
+(declare-fun temp___251 () Int)
 
 (declare-fun o5 () Int)
 
@@ -486,16 +484,16 @@
   (assert (= i1 0))
 
 ;; H
-  (assert (=> (and (<= 0 i1) (<= i1 (- length1 1))) (= temp___267 b)))
+  (assert (=> (and (<= 0 i1) (<= i1 (- length1 1))) (= temp___245 b)))
 
 ;; H
-  (assert (=> (and (<= 0 i1) (<= i1 (- length1 1))) (= temp___265 i1)))
+  (assert (=> (and (<= 0 i1) (<= i1 (- length1 1))) (= temp___243 i1)))
 
 ;; H
-  (assert (=> (and (<= 0 i1) (<= i1 (- length1 1))) (= temp___262 b)))
+  (assert (=> (and (<= 0 i1) (<= i1 (- length1 1))) (= temp___240 b)))
 
 ;; H
-  (assert (=> (and (<= 0 i1) (<= i1 (- length1 1))) (= temp___270 b)))
+  (assert (=> (and (<= 0 i1) (<= i1 (- length1 1))) (= temp___248 b)))
 
 ;; H
   (assert
@@ -507,7 +505,7 @@
   (= (to_rep (select b2 j1)) (to_rep
                              (select (elts a) (- (+ a_first j1) b_first)))))
   (=> (=> (<= b_first j1) (not (<= j1 (- (+ b_first i2) 1))))
-  (= (to_rep (select b2 j1)) (to_rep (select temp___270 j1)))))))))
+  (= (to_rep (select b2 j1)) (to_rep (select temp___248 j1)))))))))
 
 ;; H
   (assert
@@ -525,7 +523,7 @@
   (= (to_rep (select b3 j1)) (to_rep
                              (select (elts a) (- (+ a_first j1) b_first)))))
   (=> (=> (<= b_first j1) (not (<= j1 (- (+ b_first (+ i2 1)) 1))))
-  (= (to_rep (select b3 j1)) (to_rep (select temp___262 j1)))))))))
+  (= (to_rep (select b3 j1)) (to_rep (select temp___240 j1)))))))))
 
 ;; H
   (assert
@@ -662,10 +660,10 @@
   (assert (= o4 (- o3 b_first)))
 
 ;; H
-  (assert (and (= temp___273 o4) (in_range1 o4)))
+  (assert (and (= temp___251 o4) (in_range1 o4)))
 
 (assert
 ;; WP_parameter_def
  ;; File "sorting.adb", line 12, characters 0-0
-  (not (<= (to_rep (first (rt a))) temp___273)))
+  (not (<= (to_rep (first (rt a))) temp___251)))
 (check-sat)

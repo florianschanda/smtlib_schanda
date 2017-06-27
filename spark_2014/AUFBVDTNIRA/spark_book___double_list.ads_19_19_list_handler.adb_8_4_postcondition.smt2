@@ -473,88 +473,45 @@
                                      (<= 0 2147483647)) (in_range3
                                      temp___expr_33)))
 
-(define-fun dynamic_invariant1 ((temp___expr_165 Int)
-  (temp___is_init_162 Bool) (temp___skip_constant_163 Bool)
-  (temp___do_toplevel_164 Bool)) Bool (=>
-                                      (or (= temp___is_init_162 true)
+(define-fun dynamic_invariant1 ((temp___expr_164 Int)
+  (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
+  (temp___do_toplevel_163 Bool)) Bool (=>
+                                      (or (= temp___is_init_161 true)
                                       (<= 0 128)) (in_range2
-                                      temp___expr_165)))
+                                      temp___expr_164)))
 
 ;; size__post_axiom
   (assert
   (forall ((list_handler__integer_list__count Int))
   (! (=> (dynamic_invariant1 list_handler__integer_list__count true true
-     true)
-     (let ((result (size list_handler__integer_list__count)))
-     (=> (size__function_guard result list_handler__integer_list__count)
-     (dynamic_invariant result true false true)))) :pattern ((size
-                                                             list_handler__integer_list__count)) )))
+     true) (dynamic_invariant (size list_handler__integer_list__count) true
+     false true)) :pattern ((size list_handler__integer_list__count)) )))
 
 ;; size__def_axiom
   (assert
   (forall ((list_handler__integer_list__count Int))
-  (! (=>
-     (and (dynamic_invariant1 list_handler__integer_list__count true true
-     true) (size__function_guard (size list_handler__integer_list__count)
-     list_handler__integer_list__count))
+  (! (=> (dynamic_invariant1 list_handler__integer_list__count true true
+     true)
      (= (size list_handler__integer_list__count) list_handler__integer_list__count)) :pattern (
   (size list_handler__integer_list__count)) )))
 
-(declare-sort t6b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 128)))
-
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq4 (t6b t6b) Bool)
-
-(declare-fun dummy4 () t6b)
-
-(declare-datatypes () ((t6b__ref (mk_t6b__ref (t6b__content t6b)))))
-(define-fun t6b__ref___projection ((a t6b__ref)) t6b (t6b__content a))
-
-(declare-sort t8b 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 128)))
-
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq5 (t8b t8b) Bool)
-
-(declare-fun dummy5 () t8b)
-
-(declare-datatypes () ((t8b__ref (mk_t8b__ref (t8b__content t8b)))))
-(define-fun t8b__ref___projection ((a t8b__ref)) t8b (t8b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
-(declare-fun temp___214 (us_rep) (Array Int us_rep))
+(declare-fun temp___211 (us_rep) (Array Int us_rep))
 
 ;; def_axiom
   (assert
-  (forall ((temp___216 us_rep))
+  (forall ((temp___213 us_rep))
+  (forall ((temp___214 Int))
+  (= (select (temp___211 temp___213) temp___214) temp___213))))
+
+(declare-fun temp___215 (Int) (Array Int index_type))
+
+;; def_axiom
+  (assert
   (forall ((temp___217 Int))
-  (= (select (temp___214 temp___216) temp___217) temp___216))))
-
-(declare-fun temp___218 (Int) (Array Int index_type))
-
-;; def_axiom
-  (assert
-  (forall ((temp___220 Int))
-  (forall ((temp___221 Int))
-  (= (select (temp___218 temp___220) temp___221) (of_rep1 temp___220)))))
+  (forall ((temp___218 Int))
+  (= (select (temp___215 temp___217) temp___218) (of_rep1 temp___217)))))
 
 (define-fun dynamic_invariant2 ((temp___expr_141 Int)
   (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
@@ -593,13 +550,11 @@
 
 (declare-fun o9 () (Array Int us_rep))
 
-(declare-fun o10 () (Array Int index_type))
+(declare-fun temp___219 () (Array Int index_type))
 
-(declare-fun temp___222 () (Array Int index_type))
+(declare-fun o10 () index_type)
 
-(declare-fun o11 () index_type)
-
-(declare-fun o12 () (Array Int index_type))
+(declare-fun o11 () (Array Int index_type))
 
 (declare-fun result () (Array Int us_rep))
 
@@ -703,28 +658,25 @@
   (assert (= o8 o5))
 
 ;; H
-  (assert (= o9 (temp___214 (mk___rep (mk___split_fields o6 o7 o8)))))
+  (assert (= o9 (temp___211 (mk___rep (mk___split_fields o6 o7 o8)))))
 
 ;; H
-  (assert (= (mk_map__ref result) (mk_map__ref memory)))
+  (assert (= result memory))
 
 ;; H
   (assert (= memory1 o9))
 
 ;; H
-  (assert (= (mk_int__ref result1) (mk_int__ref count)))
+  (assert (= result1 count))
 
 ;; H
   (assert (= count1 0))
 
 ;; H
-  (assert (= o10 (temp___218 0)))
-
-;; H
   (assert (= result2 free_list))
 
 ;; H
-  (assert (= free_list1 o10))
+  (assert (= free_list1 (temp___215 0)))
 
 ;; H
   (assert (= result3 free))
@@ -739,32 +691,32 @@
   (assert (= index1 1))
 
 ;; H
-  (assert (=> (and (<= 1 index1) (<= index1 127)) (= temp___222 free_list1)))
+  (assert (=> (and (<= 1 index1) (<= index1 127)) (= temp___219 free_list1)))
 
 ;; H
   (assert
   (=> (and (<= 1 index1) (<= index1 127))
   (and
-  (forall ((temp___223 Int))
-  (=> (and (<= 0 temp___223) (<= temp___223 128))
-  (=> (<= index2 temp___223)
-  (= (select free_list2 temp___223) (select temp___222 temp___223)))))
+  (forall ((temp___220 Int))
+  (=> (and (<= 0 temp___220) (<= temp___220 128))
+  (=> (<= index2 temp___220)
+  (= (select free_list2 temp___220) (select temp___219 temp___220)))))
   (and (<= 1 index2) (<= index2 127)))))
 
 ;; H
   (assert
-  (=> (and (<= 1 index1) (<= index1 127)) (= (to_rep1 o11) (+ index2 1))))
+  (=> (and (<= 1 index1) (<= index1 127)) (= (to_rep1 o10) (+ index2 1))))
 
 ;; H
   (assert
   (=> (and (<= 1 index1) (<= index1 127))
-  (= o12 (store free_list2 index2 o11))))
+  (= o11 (store free_list2 index2 o10))))
 
 ;; H
   (assert (=> (and (<= 1 index1) (<= index1 127)) (= result5 free_list2)))
 
 ;; H
-  (assert (=> (and (<= 1 index1) (<= index1 127)) (= free_list3 o12)))
+  (assert (=> (and (<= 1 index1) (<= index1 127)) (= free_list3 o11)))
 
 ;; H
   (assert (=> (and (<= 1 index1) (<= index1 127)) (= index2 127)))
@@ -839,10 +791,6 @@
 
 ;; H
   (assert (= memory3 memory1))
-
-;; H
-  (assert (size__function_guard (size (int__content count2))
-  (int__content count2)))
 
 (assert
 ;; WP_parameter_def

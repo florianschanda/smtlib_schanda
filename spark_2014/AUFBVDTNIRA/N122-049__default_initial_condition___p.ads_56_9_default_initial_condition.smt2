@@ -171,11 +171,6 @@
 
 (declare-fun p10__function_guard (Bool us_rep) Bool)
 
-;; temp___result_204_def
-  (assert
-  (forall ((temp___203 us_rep)) (p10__function_guard (p10 temp___203)
-  temp___203)))
-
 (define-fun default_initial_assumption ((temp___expr_199 us_rep)
   (temp___skip_top_level_200 Bool)) Bool (=>
                                          (not
@@ -185,18 +180,12 @@
 ;; p10__post_axiom
   (assert true)
 
-(declare-fun temp___232 () integer)
+(declare-fun temp___229 () integer)
 
-(declare-fun temp___2321 () integer)
-
-(define-fun temp___2322 () us_rep (mk___rep
-                                  (mk___split_fields temp___232 temp___2321)))
-
-;; H
-  (assert (p10__function_guard (p10 temp___2322) temp___2322))
+(declare-fun temp___2291 () integer)
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (= (p10 temp___2322) true)))
+  (not (= (p10 (mk___rep (mk___split_fields temp___229 temp___2291))) true)))
 (check-sat)

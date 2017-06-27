@@ -282,9 +282,9 @@
   (assert
   (and
   (and (=> (<= 1 10) (in_range2 i2))
-  (forall ((temp___172 Int))
-  (=> (and (<= 1 temp___172) (<= temp___172 10))
-  (=> (< i2 temp___172) (= (select a2 temp___172) (select a temp___172))))))
+  (forall ((temp___168 Int))
+  (=> (and (<= 1 temp___168) (<= temp___168 10))
+  (=> (< i2 temp___168) (= (select a2 temp___168) (select a temp___168))))))
   (and (<= 1 i2) (<= i2 10))))
 
 ;; H
@@ -320,6 +320,6 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "foo.adb", line 45, characters 0-0
+ ;; File "foo.adb", line 9, characters 0-0
   (not (= (rec__foo__r__x (us_split_fields1 (select a3 j))) true)))
 (check-sat)

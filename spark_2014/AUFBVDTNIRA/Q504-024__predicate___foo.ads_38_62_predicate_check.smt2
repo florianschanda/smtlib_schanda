@@ -425,8 +425,6 @@
      (< (to_rep2 (select b (+ i 1))) (to_rep2 (select a (+ j 1))))))))))) :pattern (
   (compare1 a a_first a_last b b_first b_last)) ))))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -451,7 +449,7 @@
 
 (declare-fun first (t) tmax_lsid_typeB)
 
-(declare-fun last1 (t) tmax_lsid_typeB)
+(declare-fun last (t) tmax_lsid_typeB)
 
 (declare-fun mk (Int Int) t)
 
@@ -460,7 +458,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range3 f)
      (=> (in_range3 l)
-     (and (= (to_rep1 (first (mk f l))) f) (= (to_rep1 (last1 (mk f l))) l)))) :pattern (
+     (and (= (to_rep1 (first (mk f l))) f) (= (to_rep1 (last (mk f l))) l)))) :pattern (
   (mk f l)) )))
 
 (define-fun dynamic_property1 ((range_first Int) (range_last Int) (low Int)
@@ -478,10 +476,10 @@
 
 (define-fun first1 ((a us_t)) Int (to_rep1 (first (rt a))))
 
-(define-fun last2 ((a us_t)) Int (to_rep1 (last1 (rt a))))
+(define-fun last1 ((a us_t)) Int (to_rep1 (last (rt a))))
 
-(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last2 a))
-                                  (+ (- (last2 a) (first1 a)) 1) 0))
+(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last1 a))
+                                  (+ (- (last1 a) (first1 a)) 1) 0))
 
 (declare-fun value__size () Int)
 
@@ -516,8 +514,8 @@
 
 (define-fun bool_eq7 ((x us_t)
   (y us_t)) Bool (bool_eq5 (elts x) (to_rep1 (first (rt x)))
-                 (to_rep1 (last1 (rt x))) (elts y) (to_rep1 (first (rt y)))
-                 (to_rep1 (last1 (rt y)))))
+                 (to_rep1 (last (rt x))) (elts y) (to_rep1 (first (rt y)))
+                 (to_rep1 (last (rt y)))))
 
 (declare-fun user_eq5 (us_t us_t) Bool)
 
@@ -634,8 +632,6 @@
 (define-fun subject_state__ref___projection ((a subject_state__ref)) us_rep 
   (subject_state__content a))
 
-(declare-fun last3 () Int)
-
 (define-fun dynamic_property2 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -660,7 +656,7 @@
 
 (declare-fun first2 (t1) tmax_lsid_typeB)
 
-(declare-fun last4 (t1) tmax_lsid_typeB)
+(declare-fun last2 (t1) tmax_lsid_typeB)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -670,7 +666,7 @@
   (! (=> (in_range3 f)
      (=> (in_range3 l)
      (and (= (to_rep1 (first2 (mk1 f l))) f)
-     (= (to_rep1 (last4 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (= (to_rep1 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property3 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range3 low)
@@ -688,10 +684,10 @@
 
 (define-fun first3 ((a us_t1)) Int (to_rep1 (first2 (rt1 a))))
 
-(define-fun last5 ((a us_t1)) Int (to_rep1 (last4 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last5 a))
-                                    (+ (- (last5 a) (first3 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size2 () Int)
 
@@ -726,8 +722,8 @@
 
 (define-fun bool_eq10 ((x us_t1)
   (y us_t1)) Bool (bool_eq5 (elts1 x) (to_rep1 (first2 (rt1 x)))
-                  (to_rep1 (last4 (rt1 x))) (elts1 y)
-                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last4 (rt1 y)))))
+                  (to_rep1 (last2 (rt1 x))) (elts1 y)
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
 (declare-fun user_eq8 (us_t1 us_t1) Bool)
 
@@ -765,7 +761,7 @@
                                                            a))))
                                          (of_array (to_array1 temp___139)
                                          (first3 temp___139)
-                                         (last5 temp___139))))))
+                                         (last3 temp___139))))))
 
 (define-fun of_base ((r us_rep)) us_rep1 (mk___rep1 (us_split_discrs1 r)
                                          (mk___split_fields1
@@ -774,7 +770,7 @@
                                                            r))))
                                          (of_array1 (to_array temp___138)
                                          (first1 temp___138)
-                                         (last2 temp___138))))))
+                                         (last1 temp___138))))))
 
 (define-fun bool_eq11 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -869,14 +865,14 @@
                                       (first3
                                       (rec__foo__subject_state__states1
                                       (us_split_fields3 temp___expr_184)))
-                                      (last5
+                                      (last3
                                       (rec__foo__subject_state__states1
                                       (us_split_fields3 temp___expr_184))))
                                       (and
                                       (= (first3
                                          (rec__foo__subject_state__states1
                                          (us_split_fields3 temp___expr_184))) 0)
-                                      (= (last5
+                                      (= (last3
                                          (rec__foo__subject_state__states1
                                          (us_split_fields3 temp___expr_184))) 
                                       (to_rep (select cpu_lsid_last cpu_id)))))))
@@ -950,21 +946,16 @@
   (! (=>
      (and (dynamic_invariant3 id true true true) (dynamic_invariant1
      (mk___rep1 states__split_discrs foo__states__fields) true true true))
-     (let ((result (get_element id foo__states__fields)))
-     (=> (get_element__function_guard result id foo__states__fields)
-     (dynamic_invariant2 result true false true)))) :pattern ((get_element id
-                                                              foo__states__fields)) ))))
+     (dynamic_invariant2 (get_element id foo__states__fields) true false
+     true)) :pattern ((get_element id foo__states__fields)) ))))
 
 ;; get_element__def_axiom
   (assert
   (forall ((id Int))
   (forall ((foo__states__fields us_split_fields2))
   (! (=>
-     (and
      (and (dynamic_invariant3 id true true true) (dynamic_invariant1
      (mk___rep1 states__split_discrs foo__states__fields) true true true))
-     (get_element__function_guard (get_element id foo__states__fields) id
-     foo__states__fields))
      (= (get_element id foo__states__fields) (to_rep2
                                              (let ((temp___198 (rec__foo__subject_state__states1
                                                                (us_split_fields3
@@ -993,14 +984,14 @@
                                       (first1
                                       (rec__foo__subject_state__states
                                       (us_split_fields1 temp___expr_178)))
-                                      (last2
+                                      (last1
                                       (rec__foo__subject_state__states
                                       (us_split_fields1 temp___expr_178))))
                                       (and
                                       (= (first1
                                          (rec__foo__subject_state__states
                                          (us_split_fields1 temp___expr_178))) 0)
-                                      (= (last2
+                                      (= (last1
                                          (rec__foo__subject_state__states
                                          (us_split_fields1 temp___expr_178))) 
                                       (to_rep temp___179))))))

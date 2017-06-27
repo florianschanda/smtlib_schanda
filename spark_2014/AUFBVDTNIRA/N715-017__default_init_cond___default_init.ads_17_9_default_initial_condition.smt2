@@ -204,10 +204,9 @@
 ;; discr_ok__def_axiom
   (assert
   (forall ((x us_rep))
-  (! (=> (discr_ok__function_guard (discr_ok x) x)
-     (= (= (discr_ok x) true)
+  (! (= (= (discr_ok x) true)
      (=> (= (rec__default_init__discr__b (us_split_discrs1 x)) true)
-     (= (to_rep (rec__default_init__discr__f (us_split_fields1 x))) 0)))) :pattern (
+     (= (to_rep (rec__default_init__discr__f (us_split_fields1 x))) 0))) :pattern (
   (discr_ok x)) )))
 
 (define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool)
@@ -217,28 +216,25 @@
                                      (<= 0 2147483647)) (in_range
                                      temp___expr_33)))
 
-(declare-fun temp___329 () Bool)
+(declare-fun temp___291 () Bool)
 
-(declare-fun temp___328 () Bool)
+(declare-fun temp___290 () Bool)
 
-(declare-fun temp___330 () Bool)
+(declare-fun temp___292 () Bool)
 
-(declare-fun temp___3301 () natural)
-
-(define-fun temp___3302 () us_rep (mk___rep (mk___split_discrs temp___330)
-                                  (mk___split_fields temp___3301)))
+(declare-fun temp___2921 () natural)
 
 ;; H
-  (assert (= temp___329 temp___328))
+  (assert (= temp___291 temp___290))
 
 ;; H
-  (assert (=> (= (to_int1 temp___330) 1) (= (to_rep temp___3301) 0)))
-
-;; H
-  (assert (discr_ok__function_guard (discr_ok temp___3302) temp___3302))
+  (assert (=> (= (to_int1 temp___292) 1) (= (to_rep temp___2921) 0)))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (= (discr_ok temp___3302) true)))
+  (not
+  (= (discr_ok
+     (mk___rep (mk___split_discrs temp___292)
+     (mk___split_fields temp___2921))) true)))
 (check-sat)

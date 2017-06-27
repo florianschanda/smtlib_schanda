@@ -263,45 +263,7 @@
   (= (user_eq1 (select a temp___idx_132)
      (select b (+ (- b__first a__first) temp___idx_132))) true))))))))
 
-(declare-sort t3b 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
-
-(declare-fun user_eq3 (t3b t3b) Bool)
-
-(declare-fun dummy3 () t3b)
-
-(declare-datatypes () ((t3b__ref (mk_t3b__ref (t3b__content t3b)))))
-(define-fun t3b__ref___projection ((a t3b__ref)) t3b (t3b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
-
-(declare-sort t5b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq4 (t5b t5b) Bool)
-
-(declare-fun dummy4 () t5b)
-
-(declare-datatypes () ((t5b__ref (mk_t5b__ref (t5b__content t5b)))))
-(define-fun t5b__ref___projection ((a t5b__ref)) t5b (t5b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -310,22 +272,22 @@
 
 ;; def_axiom
   (assert
-  (forall ((temp___190 us_rep) (temp___191 us_rep))
-  (let ((temp___189 (test_array_eq_bad__a__aggregate_def temp___190
-                    temp___191)))
-  (and (= (select temp___189 1) temp___190)
-  (= (select temp___189 2) temp___191)))))
+  (forall ((temp___189 us_rep) (temp___190 us_rep))
+  (let ((temp___188 (test_array_eq_bad__a__aggregate_def temp___189
+                    temp___190)))
+  (and (= (select temp___188 1) temp___189)
+  (= (select temp___188 2) temp___190)))))
 
 (declare-fun test_array_eq_bad__b__aggregate_def (us_rep
   us_rep) (Array Int us_rep))
 
 ;; def_axiom
   (assert
-  (forall ((temp___194 us_rep) (temp___195 us_rep))
-  (let ((temp___193 (test_array_eq_bad__b__aggregate_def temp___194
-                    temp___195)))
-  (and (= (select temp___193 1) temp___194)
-  (= (select temp___193 2) temp___195)))))
+  (forall ((temp___193 us_rep) (temp___194 us_rep))
+  (let ((temp___192 (test_array_eq_bad__b__aggregate_def temp___193
+                    temp___194)))
+  (and (= (select temp___192 1) temp___193)
+  (= (select temp___192 2) temp___194)))))
 
 (define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)
@@ -341,8 +303,7 @@
 ;; user_eq__def_axiom
   (assert
   (forall ((a us_rep) (b us_rep))
-  (! (and (oeq__function_guard (oeq a b) a b) (= (user_eq1 a b) (oeq a b))) :pattern (
-  (user_eq1 a b)) )))
+  (! (= (user_eq1 a b) (oeq a b)) :pattern ((user_eq1 a b)) )))
 
 ;; oeq__post_axiom
   (assert true)
@@ -350,10 +311,9 @@
 ;; oeq__def_axiom
   (assert
   (forall ((x us_rep) (y us_rep))
-  (! (=> (oeq__function_guard (oeq x y) x y)
-     (= (= (oeq x y) true)
+  (! (= (= (oeq x y) true)
      (= (to_rep (rec__test_array_eq_bad__my_rec__f1 (us_split_fields1 x))) 
-     (to_rep (rec__test_array_eq_bad__my_rec__f1 (us_split_fields1 y)))))) :pattern (
+     (to_rep (rec__test_array_eq_bad__my_rec__f1 (us_split_fields1 y))))) :pattern (
   (oeq x y)) )))
 
 (declare-fun a () (Array Int us_rep))

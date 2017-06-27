@@ -463,8 +463,6 @@
                                       (first4 temp___expr_245)
                                       (last4 temp___expr_245))))
 
-(declare-fun last5 () Int)
-
 (define-fun dynamic_property3 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -488,7 +486,7 @@
 
 (declare-fun first5 (t2) integer)
 
-(declare-fun last6 (t2) integer)
+(declare-fun last5 (t2) integer)
 
 (declare-fun mk2 (Int Int) t2)
 
@@ -497,7 +495,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range2 f)
      (=> (in_range2 l)
-     (and (= (to_rep (first5 (mk2 f l))) f) (= (to_rep (last6 (mk2 f l))) l)))) :pattern (
+     (and (= (to_rep (first5 (mk2 f l))) f) (= (to_rep (last5 (mk2 f l))) l)))) :pattern (
   (mk2 f l)) )))
 
 (define-fun dynamic_property4 ((range_first Int) (range_last Int) (low Int)
@@ -516,10 +514,10 @@
 
 (define-fun first6 ((a1 us_t2)) Int (to_rep (first5 (rt2 a1))))
 
-(define-fun last7 ((a1 us_t2)) Int (to_rep (last6 (rt2 a1))))
+(define-fun last6 ((a1 us_t2)) Int (to_rep (last5 (rt2 a1))))
 
-(define-fun length2 ((a1 us_t2)) Int (ite (<= (first6 a1) (last7 a1))
-                                     (+ (- (last7 a1) (first6 a1)) 1) 0))
+(define-fun length2 ((a1 us_t2)) Int (ite (<= (first6 a1) (last6 a1))
+                                     (+ (- (last6 a1) (first6 a1)) 1) 0))
 
 (declare-fun value__size2 () Int)
 
@@ -554,8 +552,8 @@
 
 (define-fun bool_eq8 ((x us_t2)
   (y us_t2)) Bool (bool_eq3 (elts2 x) (to_rep (first5 (rt2 x)))
-                  (to_rep (last6 (rt2 x))) (elts2 y)
-                  (to_rep (first5 (rt2 y))) (to_rep (last6 (rt2 y)))))
+                  (to_rep (last5 (rt2 x))) (elts2 y)
+                  (to_rep (first5 (rt2 y))) (to_rep (last5 (rt2 y)))))
 
 (declare-fun user_eq7 (us_t2 us_t2) Bool)
 
@@ -578,7 +576,7 @@
                     temp___143 temp___144 temp___145)))
   (and
   (=> (dynamic_property2 first2 last2 temp___144 temp___145)
-  (and (= (first6 temp___142) temp___144) (= (last7 temp___142) temp___145)))
+  (and (= (first6 temp___142) temp___144) (= (last6 temp___142) temp___145)))
   (forall ((temp___146 Int))
   (= (select (to_array2 temp___142) temp___146) (of_rep1 temp___143)))))))
 
@@ -621,7 +619,7 @@
   (= should_fail3 (let ((temp___147 (aggregate_checks__do_wrong_aggregate_4__should_fail3__aggregate_def
                                     0 0 (last1 a))))
                   (of_array1 (to_array2 temp___147) (first6 temp___147)
-                  (last7 temp___147)))))
+                  (last6 temp___147)))))
 
 ;; H
   (assert (dynamic_invariant a true false true))

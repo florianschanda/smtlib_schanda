@@ -276,25 +276,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(declare-sort t12b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 1000)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq3 (t12b t12b) Bool)
-
-(declare-fun dummy3 () t12b)
-
-(declare-datatypes () ((t12b__ref (mk_t12b__ref (t12b__content t12b)))))
-(define-fun t12b__ref___projection ((a t12b__ref)) t12b (t12b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
 (declare-fun temp___218 (Bool Bool) (Array Int Bool))
@@ -320,15 +301,13 @@
 
 (declare-fun i () Int)
 
-(declare-fun o () (Array Int Bool))
+(declare-fun o () Int)
 
 (declare-fun o1 () Int)
 
 (declare-fun o2 () Int)
 
-(declare-fun o3 () Int)
-
-(declare-fun o4 () (Array Int Bool))
+(declare-fun o3 () (Array Int Bool))
 
 (declare-fun result () (Array Int Bool))
 
@@ -360,13 +339,10 @@
   (assert (=> (<= 1 2147483647) (in_range2 n)))
 
 ;; H
-  (assert (= o (temp___218 (of_int 0) (of_int 1))))
-
-;; H
   (assert (= result p))
 
 ;; H
-  (assert (= p1 o))
+  (assert (= p1 (temp___218 (of_int 0) (of_int 1))))
 
 ;; H
   (assert (= result1 i))
@@ -388,16 +364,16 @@
   (assert (= (select p2 i2) true))
 
 ;; H
-  (assert (and (= o1 (* 2 i2)) (in_range1 (* 2 i2))))
+  (assert (and (= o (* 2 i2)) (in_range1 (* 2 i2))))
 
 ;; H
-  (assert (and (= o2 o1) (in_range2 o1)))
+  (assert (and (= o1 o) (in_range2 o)))
 
 ;; H
   (assert (= result2 n1))
 
 ;; H
-  (assert (= n2 o2))
+  (assert (= n2 o1))
 
 ;; H
   (assert (<= n2 1000))
@@ -409,16 +385,16 @@
   (assert (and (<= 1 n3) (<= n3 1000)))
 
 ;; H
-  (assert (= o3 n3))
+  (assert (= o2 n3))
 
 ;; H
-  (assert (= o4 (store p3 o3 (of_int 0))))
+  (assert (= o3 (store p3 o2 (of_int 0))))
 
 ;; H
   (assert (= result3 p3))
 
 ;; H
-  (assert (= p4 o4))
+  (assert (= p4 o3))
 
 (assert
 ;; WP_parameter_def

@@ -99,35 +99,28 @@
 ;; ident__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant1 x true true true)
-     (let ((result (ident x)))
-     (=> (ident__function_guard result x) (dynamic_invariant1 result true
-     false true)))) :pattern ((ident x)) )))
+  (! (=> (dynamic_invariant1 x true true true) (dynamic_invariant1 (ident x)
+     true false true)) :pattern ((ident x)) )))
 
 ;; ident__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant1 x true true true) (ident__function_guard
-     (ident x) x)) (= (ident x) x)) :pattern ((ident x)) )))
+  (! (=> (dynamic_invariant1 x true true true) (= (ident x) x)) :pattern (
+  (ident x)) )))
 
 (declare-fun x () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
 ;; x__def_axiom
-  (assert
-  (and (ident__function_guard (ident 2147483647) 2147483647)
-  (= x (+ (ident 2147483647) 1))))
+  (assert (= x (+ (ident 2147483647) 1)))
 
 (declare-fun o () Int)
 
 (declare-fun o1 () Int)
 
 ;; H
-  (assert
-  (and (and (= o (ident 2147483647)) (ident__function_guard o 2147483647))
-  (and (in_range o) (= o 2147483647))))
+  (assert (and (= o (ident 2147483647)) (and (in_range o) (= o 2147483647))))
 
 ;; H
   (assert (= o1 (+ o 1)))

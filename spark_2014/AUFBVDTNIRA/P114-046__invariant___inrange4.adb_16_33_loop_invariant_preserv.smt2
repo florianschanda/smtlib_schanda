@@ -237,8 +237,6 @@
 
 (declare-fun attr__ATTRIBUTE_MODULUS2 () (_ BitVec 64))
 
-(declare-fun last () (_ BitVec 64))
-
 (define-fun dynamic_property ((first_int (_ BitVec 64))
   (last_int (_ BitVec 64))
   (x (_ BitVec 64))) Bool (and (bvule first_int x) (bvule x last_int)))

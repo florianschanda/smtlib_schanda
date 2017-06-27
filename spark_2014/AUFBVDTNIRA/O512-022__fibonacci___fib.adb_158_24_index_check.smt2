@@ -297,7 +297,7 @@
 
 (declare-fun i3 () Int)
 
-(declare-fun temp___227 () (Array Int integer))
+(declare-fun temp___221 () (Array Int integer))
 
 (declare-fun o () Int)
 
@@ -311,11 +311,11 @@
 
 (declare-fun o5 () (Array Int integer))
 
-(declare-fun temp___234 () Int)
+(declare-fun temp___228 () Int)
 
-(declare-fun temp___232 () (Array Int integer))
+(declare-fun temp___226 () (Array Int integer))
 
-(declare-fun temp___231 () Int)
+(declare-fun temp___225 () Int)
 
 (declare-fun o6 () Int)
 
@@ -329,7 +329,7 @@
 
 (declare-fun o11 () (Array Int integer))
 
-(declare-fun temp___236 () (Array Int integer))
+(declare-fun temp___230 () (Array Int integer))
 
 (declare-fun o12 () Int)
 
@@ -343,9 +343,9 @@
 
 (declare-fun o17 () (Array Int integer))
 
-(declare-fun temp___243 () Int)
+(declare-fun temp___237 () Int)
 
-(declare-fun temp___240 () Int)
+(declare-fun temp___234 () Int)
 
 (declare-fun a11 () (Array Int integer))
 
@@ -469,16 +469,16 @@
   (assert (= i4 0))
 
 ;; H
-  (assert (=> (and (<= 0 i4) (<= i4 k)) (= temp___227 a1)))
+  (assert (=> (and (<= 0 i4) (<= i4 k)) (= temp___221 a1)))
 
 ;; H
   (assert
   (=> (and (<= 0 i4) (<= i4 k))
   (and
-  (forall ((temp___228 Int))
-  (=> (and (<= 0 temp___228) (<= temp___228 100))
-  (=> (<= i5 temp___228)
-  (= (select a12 temp___228) (select temp___227 temp___228)))))
+  (forall ((temp___222 Int))
+  (=> (and (<= 0 temp___222) (<= temp___222 100))
+  (=> (<= i5 temp___222)
+  (= (select a12 temp___222) (select temp___221 temp___222)))))
   (and (<= 0 i5) (<= i5 k)))))
 
 ;; H
@@ -552,107 +552,107 @@
   (assert (=> (not (and (<= 0 i4) (<= i4 k))) (= a17 a11)))
 
 ;; H
-  (assert (and (= temp___234 (+ k 1)) (in_range1 (+ k 1))))
+  (assert (and (= temp___228 (+ k 1)) (in_range1 (+ k 1))))
 
 ;; H
   (assert (= (mk_int__ref result2) (mk_int__ref i1)))
 
 ;; H
-  (assert (= i10 temp___234))
+  (assert (= i10 temp___228))
 
 ;; H
-  (assert (=> (and (<= temp___234 i10) (<= i10 100)) (= temp___232 a16)))
+  (assert (=> (and (<= temp___228 i10) (<= i10 100)) (= temp___226 a16)))
 
 ;; H
   (assert
-  (=> (and (<= temp___234 i10) (<= i10 100))
+  (=> (and (<= temp___228 i10) (<= i10 100))
   (and
-  (forall ((temp___233 Int))
-  (=> (and (<= 0 temp___233) (<= temp___233 100))
-  (=> (<= i11 temp___233)
-  (= (select a18 temp___233) (select temp___232 temp___233)))))
+  (forall ((temp___227 Int))
+  (=> (and (<= 0 temp___227) (<= temp___227 100))
+  (=> (<= i11 temp___227)
+  (= (select a18 temp___227) (select temp___226 temp___227)))))
   (and (<= (+ k 1) i11) (<= i11 100)))))
 
 ;; H
   (assert
-  (=> (and (<= temp___234 i10) (<= i10 100))
-  (and (= temp___231 (- i11 k)) (in_range1 (- i11 k)))))
+  (=> (and (<= temp___228 i10) (<= i10 100))
+  (and (= temp___225 (- i11 k)) (in_range1 (- i11 k)))))
 
 ;; H
   (assert
-  (=> (and (<= temp___234 i10) (<= i10 100))
-  (and (<= 0 temp___231) (<= temp___231 100))))
+  (=> (and (<= temp___228 i10) (<= i10 100))
+  (and (<= 0 temp___225) (<= temp___225 100))))
 
 ;; H
-  (assert (=> (and (<= temp___234 i10) (<= i10 100)) (= o6 temp___231)))
+  (assert (=> (and (<= temp___228 i10) (<= i10 100)) (= o6 temp___225)))
 
 ;; H
-  (assert (=> (and (<= temp___234 i10) (<= i10 100)) (= o7 (select c1 o6))))
+  (assert (=> (and (<= temp___228 i10) (<= i10 100)) (= o7 (select c1 o6))))
 
 ;; H
-  (assert (=> (and (<= temp___234 i10) (<= i10 100)) (= o8 (to_rep o7))))
+  (assert (=> (and (<= temp___228 i10) (<= i10 100)) (= o8 (to_rep o7))))
 
 ;; H
-  (assert (=> (and (<= temp___234 i10) (<= i10 100)) (= (to_rep o9) o8)))
-
-;; H
-  (assert
-  (=> (and (<= temp___234 i10) (<= i10 100)) (and (<= 0 i11) (<= i11 100))))
-
-;; H
-  (assert (=> (and (<= temp___234 i10) (<= i10 100)) (= o10 i11)))
+  (assert (=> (and (<= temp___228 i10) (<= i10 100)) (= (to_rep o9) o8)))
 
 ;; H
   (assert
-  (=> (and (<= temp___234 i10) (<= i10 100)) (= o11 (store a18 o10 o9))))
+  (=> (and (<= temp___228 i10) (<= i10 100)) (and (<= 0 i11) (<= i11 100))))
 
 ;; H
-  (assert (=> (and (<= temp___234 i10) (<= i10 100)) (= a18 result3)))
-
-;; H
-  (assert (=> (and (<= temp___234 i10) (<= i10 100)) (= a19 o11)))
-
-;; H
-  (assert (=> (and (<= temp___234 i10) (<= i10 100)) (= i11 100)))
-
-;; H
-  (assert (=> (and (<= temp___234 i10) (<= i10 100)) (= i11 i12)))
-
-;; H
-  (assert (=> (and (<= temp___234 i10) (<= i10 100)) (= a19 a110)))
-
-;; H
-  (assert (=> (and (<= temp___234 i10) (<= i10 100)) (= i13 i11)))
-
-;; H
-  (assert (=> (and (<= temp___234 i10) (<= i10 100)) (= a111 a19)))
+  (assert (=> (and (<= temp___228 i10) (<= i10 100)) (= o10 i11)))
 
 ;; H
   (assert
-  (=> (and (<= temp___234 i10) (<= i10 100)) (= i14 (mk_int__ref i12))))
+  (=> (and (<= temp___228 i10) (<= i10 100)) (= o11 (store a18 o10 o9))))
+
+;; H
+  (assert (=> (and (<= temp___228 i10) (<= i10 100)) (= a18 result3)))
+
+;; H
+  (assert (=> (and (<= temp___228 i10) (<= i10 100)) (= a19 o11)))
+
+;; H
+  (assert (=> (and (<= temp___228 i10) (<= i10 100)) (= i11 100)))
+
+;; H
+  (assert (=> (and (<= temp___228 i10) (<= i10 100)) (= i11 i12)))
+
+;; H
+  (assert (=> (and (<= temp___228 i10) (<= i10 100)) (= a19 a110)))
+
+;; H
+  (assert (=> (and (<= temp___228 i10) (<= i10 100)) (= i13 i11)))
+
+;; H
+  (assert (=> (and (<= temp___228 i10) (<= i10 100)) (= a111 a19)))
 
 ;; H
   (assert
-  (=> (and (<= temp___234 i10) (<= i10 100)) (= a114 (mk_map__ref a110))))
-
-;; H
-  (assert (=> (and (<= temp___234 i10) (<= i10 100)) (= i15 i13)))
-
-;; H
-  (assert (=> (and (<= temp___234 i10) (<= i10 100)) (= a113 a111)))
+  (=> (and (<= temp___228 i10) (<= i10 100)) (= i14 (mk_int__ref i12))))
 
 ;; H
   (assert
-  (=> (not (and (<= temp___234 i10) (<= i10 100))) (= i14 (mk_int__ref i10))))
+  (=> (and (<= temp___228 i10) (<= i10 100)) (= a114 (mk_map__ref a110))))
 
 ;; H
-  (assert (=> (not (and (<= temp___234 i10) (<= i10 100))) (= a114 a115)))
+  (assert (=> (and (<= temp___228 i10) (<= i10 100)) (= i15 i13)))
 
 ;; H
-  (assert (=> (not (and (<= temp___234 i10) (<= i10 100))) (= i15 i10)))
+  (assert (=> (and (<= temp___228 i10) (<= i10 100)) (= a113 a111)))
 
 ;; H
-  (assert (=> (not (and (<= temp___234 i10) (<= i10 100))) (= a113 a17)))
+  (assert
+  (=> (not (and (<= temp___228 i10) (<= i10 100))) (= i14 (mk_int__ref i10))))
+
+;; H
+  (assert (=> (not (and (<= temp___228 i10) (<= i10 100))) (= a114 a115)))
+
+;; H
+  (assert (=> (not (and (<= temp___228 i10) (<= i10 100))) (= i15 i10)))
+
+;; H
+  (assert (=> (not (and (<= temp___228 i10) (<= i10 100))) (= a113 a17)))
 
 ;; H
   (assert (= result4 (mk_int__ref i2)))
@@ -661,16 +661,16 @@
   (assert (= i16 0))
 
 ;; H
-  (assert (=> (and (<= 0 i16) (<= i16 k)) (= temp___236 a2)))
+  (assert (=> (and (<= 0 i16) (<= i16 k)) (= temp___230 a2)))
 
 ;; H
   (assert
   (=> (and (<= 0 i16) (<= i16 k))
   (and
-  (forall ((temp___237 Int))
-  (=> (and (<= 0 temp___237) (<= temp___237 100))
-  (=> (<= i17 temp___237)
-  (= (select a22 temp___237) (select temp___236 temp___237)))))
+  (forall ((temp___231 Int))
+  (=> (and (<= 0 temp___231) (<= temp___231 100))
+  (=> (<= i17 temp___231)
+  (= (select a22 temp___231) (select temp___230 temp___231)))))
   (and (<= 0 i17) (<= i17 k)))))
 
 ;; H
@@ -743,16 +743,16 @@
   (assert (=> (not (and (<= 0 i16) (<= i16 k))) (= a27 a21)))
 
 ;; H
-  (assert (and (= temp___243 (+ k 1)) (in_range1 (+ k 1))))
+  (assert (and (= temp___237 (+ k 1)) (in_range1 (+ k 1))))
 
 ;; H
   (assert (= result6 (mk_int__ref i3)))
 
 ;; H
-  (assert (= i22 temp___243))
+  (assert (= i22 temp___237))
 
 ;; H
-  (assert (<= temp___243 i22))
+  (assert (<= temp___237 i22))
 
 ;; H
   (assert (<= i22 100))
@@ -760,17 +760,17 @@
 ;; H
   (assert
   (and
-  (forall ((temp___242 Int))
-  (=> (and (<= 0 temp___242) (<= temp___242 100))
-  (=> (<= i23 temp___242)
-  (= (select a28 temp___242) (select (map__content a26) temp___242)))))
+  (forall ((temp___236 Int))
+  (=> (and (<= 0 temp___236) (<= temp___236 100))
+  (=> (<= i23 temp___236)
+  (= (select a28 temp___236) (select (map__content a26) temp___236)))))
   (and (<= (+ k 1) i23) (<= i23 100))))
 
 ;; H
-  (assert (and (= temp___240 (- i23 k)) (in_range1 (- i23 k))))
+  (assert (and (= temp___234 (- i23 k)) (in_range1 (- i23 k))))
 
 (assert
 ;; WP_parameter_def
  ;; File "fib.ads", line 2, characters 0-0
-  (not (<= 0 temp___240)))
+  (not (<= 0 temp___234)))
 (check-sat)

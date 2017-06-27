@@ -162,14 +162,12 @@
 ;; is_odd__def_axiom
   (assert
   (forall ((i1 Int))
-  (! (=> (is_odd__function_guard (is_odd i1) i1)
-     (= (= (is_odd i1) true) (= (mod2 i1 2) 1))) :pattern ((is_odd i1)) )))
+  (! (= (= (is_odd i1) true) (= (mod2 i1 2) 1)) :pattern ((is_odd i1)) )))
 
 ;; is_even__def_axiom
   (assert
   (forall ((i1 Int))
-  (! (=> (is_even__function_guard (is_even i1) i1)
-     (= (= (is_even i1) true) (= (mod2 i1 2) 0))) :pattern ((is_even i1)) )))
+  (! (= (= (is_even i1) true) (= (mod2 i1 2) 0)) :pattern ((is_even i1)) )))
 
 (declare-fun rec_post__is_even__result () Bool)
 
@@ -219,8 +217,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "rec_post.ads", line 2, characters 0-0
-  (not
-  (or (= i 0)
-  (=> (is_odd__function_guard (is_odd (- i 1)) (- i 1))
-  (= (is_odd (- i 1)) true)))))
+  (not (or (= i 0) (= (is_odd (- i 1)) true))))
 (check-sat)

@@ -927,12 +927,12 @@
 (define-fun statust__ref_2__projection ((a statust__ref)) statust (statust__content
                                                                   a))
 
-(define-fun dynamic_invariant1 ((temp___expr_1767 Int)
-  (temp___is_init_1764 Bool) (temp___skip_constant_1765 Bool)
-  (temp___do_toplevel_1766 Bool)) Bool (=>
-                                       (or (= temp___is_init_1764 true)
+(define-fun dynamic_invariant1 ((temp___expr_1683 Int)
+  (temp___is_init_1680 Bool) (temp___skip_constant_1681 Bool)
+  (temp___do_toplevel_1682 Bool)) Bool (=>
+                                       (or (= temp___is_init_1680 true)
                                        (<= 0 7)) (in_range10
-                                       temp___expr_1767)))
+                                       temp___expr_1683)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
@@ -1005,12 +1005,12 @@
                                       (<= 0 86399999)) (in_range8
                                       temp___expr_412)))
 
-(define-fun dynamic_invariant11 ((temp___expr_1085 Int)
-  (temp___is_init_1082 Bool) (temp___skip_constant_1083 Bool)
-  (temp___do_toplevel_1084 Bool)) Bool (=>
-                                       (or (= temp___is_init_1082 true)
+(define-fun dynamic_invariant11 ((temp___expr_1028 Int)
+  (temp___is_init_1025 Bool) (temp___skip_constant_1026 Bool)
+  (temp___do_toplevel_1027 Bool)) Bool (=>
+                                       (or (= temp___is_init_1025 true)
                                        (<= 0 2147483647)) (in_range9
-                                       temp___expr_1085)))
+                                       temp___expr_1028)))
 
 (declare-fun currenttime () us_private)
 
@@ -1063,8 +1063,7 @@
   (assert (=> (<= 0 1) (in_range3 fingerpresence)))
 
 ;; H
-  (assert
-  (and (= o (ispresent state1)) (ispresent__function_guard o state1)))
+  (assert (= o (ispresent state1)))
 
 ;; H
   (assert (= result (ite (not (= o true)) true false)))
@@ -1073,22 +1072,15 @@
   (assert (not (= result true)))
 
 ;; H
-  (assert
-  (and (= o6 (thecurrenttime currenttime)) (thecurrenttime__function_guard 
-  o6 currenttime)))
+  (assert (= o6 (thecurrenttime currenttime)))
 
 ;; H
   (assert
-  (and
   (= result1 (greaterthan o6
              (mk___rep
              (mk___split_fields fingertimeout__split_fields
              fingertimeout__split_fields1 fingertimeout__split_fields2
-             fingertimeout__split_fields3))))
-  (greaterthan__function_guard result1 o6
-  (mk___rep
-  (mk___split_fields fingertimeout__split_fields fingertimeout__split_fields1
-  fingertimeout__split_fields2 fingertimeout__split_fields3)))))
+             fingertimeout__split_fields3)))))
 
 ;; H
   (assert (not (= result1 true)))
@@ -1100,12 +1092,7 @@
   (assert (= fingerpresence1 0))
 
 ;; H
-  (assert
-  (and (= o5 (extractuser state1)) (extractuser__function_guard o5 state1)))
-
-;; H
-  (assert (valid_numberlogentries__function_guard
-  (valid_numberlogentries state) state))
+  (assert (= o5 (extractuser state1)))
 
 (assert
 ;; WP_parameter_def

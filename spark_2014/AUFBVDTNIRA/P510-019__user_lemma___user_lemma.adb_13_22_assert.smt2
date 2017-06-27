@@ -145,26 +145,16 @@
 ;; is_prime__def_axiom
   (assert
   (forall ((n Int))
-  (! (=> (is_prime__function_guard (is_prime n) n)
-     (= (= (is_prime n) true)
+  (! (= (= (is_prime n) true)
      (forall ((j Int))
-     (=> (and (<= 2 j) (<= j (- n 1))) (not (= (mod2 n j) 0)))))) :pattern (
+     (=> (and (<= 2 j) (<= j (- n 1))) (not (= (mod2 n j) 0))))) :pattern (
   (is_prime n)) )))
 
 ;; H
-  (assert (is_prime__function_guard (is_prime 15486209) 15486209))
-
-;; H
   (assert (= (is_prime 15486209) true))
 
 ;; H
-  (assert (is_prime__function_guard (is_prime 15486209) 15486209))
-
-;; H
   (assert (= (is_prime 15486209) true))
-
-;; H
-  (assert (is_prime__function_guard (is_prime 15487001) 15487001))
 
 (assert
 ;; WP_parameter_def

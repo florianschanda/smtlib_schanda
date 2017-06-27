@@ -498,7 +498,6 @@
   (forall ((x86__memory (Array (_ BitVec 64) unsigned8)))
   (! (=> (dynamic_invariant addr true true true)
      (let ((result (readmem64 addr x86__memory)))
-     (=> (readmem64__function_guard result addr x86__memory)
      (and
      (and
      (and
@@ -523,8 +522,8 @@
      (to_rep (select x86__memory (bvadd addr ((_ int2bv 64) 6))))) ((_ int2bv 64) 281474976710656))))
      (= (bvand result ((_ int2bv 64) 18374686479671623680)) (bvmul ((_ zero_extend 56) 
      (to_rep (select x86__memory (bvadd addr ((_ int2bv 64) 7))))) ((_ int2bv 64) 72057594037927936))))
-     (dynamic_invariant result true false true))))) :pattern ((readmem64 addr
-                                                              x86__memory)) ))))
+     (dynamic_invariant result true false true)))) :pattern ((readmem64 addr
+                                                             x86__memory)) ))))
 
 (define-fun dynamic_invariant1 ((temp___expr_220 (_ BitVec 8))
   (temp___is_init_217 Bool) (temp___skip_constant_218 Bool)
@@ -649,10 +648,7 @@
 ;; H
   (assert
   (and
-  (and
   (= o (readmem64 ((_ int2bv 64) 4198752) (let ((subject memory)) memory1)))
-  (readmem64__function_guard o ((_ int2bv 64) 4198752)
-  (let ((subject memory)) memory1)))
   (and
   (and
   (and
@@ -818,13 +814,9 @@
 ;; H
   (assert
   (and
-  (and
   (= o1 (readmem64
         (bvsub (bvadd rsp2 ((_ int2bv 64) 152)) ((_ int2bv 64) 136))
         (let ((subject memory)) memory3)))
-  (readmem64__function_guard o1
-  (bvsub (bvadd rsp2 ((_ int2bv 64) 152)) ((_ int2bv 64) 136))
-  (let ((subject memory)) memory3)))
   (and
   (and
   (and
@@ -886,10 +878,7 @@
 ;; H
   (assert
   (and
-  (and
   (= o2 (readmem64 ((_ int2bv 64) 4198768) (let ((subject memory)) memory3)))
-  (readmem64__function_guard o2 ((_ int2bv 64) 4198768)
-  (let ((subject memory)) memory3)))
   (and
   (and
   (and

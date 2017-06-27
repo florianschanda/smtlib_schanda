@@ -980,35 +980,27 @@
 
 ;; elements__post_axiom
   (assert
-  (forall ((this us_rep))
-  (! (let ((result (elements this)))
-     (=> (elements__function_guard result this) (dynamic_invariant1 result
-     true false true))) :pattern ((elements this)) )))
+  (forall ((this us_rep)) (! (dynamic_invariant1 (elements this) true false
+  true) :pattern ((elements this)) )))
 
 ;; elements__post__dispatch_axiom
   (assert
   (forall ((attr__tag1 Int))
-  (forall ((this us_rep))
-  (! (let ((result (elements1 attr__tag1 this)))
-     (=> (elements__function_guard1 result attr__tag1 this)
-     (dynamic_invariant1 result true false true))) :pattern ((elements1
-                                                             attr__tag1 this)) ))))
+  (forall ((this us_rep)) (! (dynamic_invariant1 (elements1 attr__tag1 this)
+  true false true) :pattern ((elements1 attr__tag1 this)) ))))
 
 ;; fixed_stream__object__compat_axiom
   (assert
   (forall ((this us_rep))
-  (! (=> (elements__function_guard1 (elements1 us_tag this) us_tag this)
-     (and (elements__function_guard (elements this) this)
-     (= (elements this) (elements1 us_tag this)))) :pattern ((elements1
-                                                             us_tag this)) )))
+  (! (= (elements this) (elements1 us_tag this)) :pattern ((elements1 
+                                                           us_tag this)) )))
 
 ;; elements__def_axiom
   (assert
   (forall ((this us_rep))
-  (! (=> (elements__function_guard (elements this) this)
-     (= (elements this) (to_rep2
+  (! (= (elements this) (to_rep2
                         (rec__fixed_stream__object__width
-                        (us_split_fields1 this))))) :pattern ((elements this)) )))
+                        (us_split_fields1 this)))) :pattern ((elements this)) )))
 
 (define-fun dynamic_invariant3 ((temp___expr_160 us_t1)
   (temp___is_init_157 Bool) (temp___skip_constant_158 Bool)
@@ -1032,29 +1024,21 @@
   (assert
   (forall ((this us_rep))
   (! (let ((result (null_string this)))
-     (and (elements__function_guard (elements this) this)
-     (=> (null_string__function_guard result this)
      (and (= (length1 result) (elements this)) (dynamic_invariant3 result
-     true false true))))) :pattern ((null_string this)) )))
+     true false true))) :pattern ((null_string this)) )))
 
 ;; null_string__post__dispatch_axiom
   (assert
   (forall ((attr__tag1 Int))
-  (forall ((this us_rep))
-  (! (let ((result (null_string1 attr__tag1 this)))
-     (=> (null_string__function_guard1 result attr__tag1 this)
-     (dynamic_invariant3 result true false true))) :pattern ((null_string1
-                                                             attr__tag1 this)) ))))
+  (forall ((this us_rep)) (! (dynamic_invariant3
+  (null_string1 attr__tag1 this) true false
+  true) :pattern ((null_string1 attr__tag1 this)) ))))
 
 ;; fixed_stream__object__compat_axiom
   (assert
   (forall ((this us_rep))
-  (! (=> (null_string__function_guard1 (null_string1 us_tag this) us_tag
-     this)
-     (and (null_string__function_guard (null_string this) this)
-     (= (null_string this) (null_string1 us_tag this)))) :pattern ((null_string1
-                                                                   us_tag
-                                                                   this)) )))
+  (! (= (null_string this) (null_string1 us_tag this)) :pattern ((null_string1
+                                                                 us_tag this)) )))
 
 (declare-fun this () us_rep)
 
@@ -1118,7 +1102,7 @@
 
 (declare-fun fixed_stream__convert__out_stream__assume1 () t1)
 
-(declare-fun temp___289 () Int)
+(declare-fun temp___274 () Int)
 
 (declare-fun o3 () Int)
 
@@ -1169,14 +1153,8 @@
   (assert (in_range4 len1))
 
 ;; H
-  (assert (elements__function_guard (elements this) this))
-
-;; H
   (assert
-  (and
   (and (= fixed_stream__convert__out_stream__assume2 (null_string this))
-  (null_string__function_guard fixed_stream__convert__out_stream__assume2
-  this))
   (and (dynamic_invariant3 fixed_stream__convert__out_stream__assume2 true
   false true)
   (= (length1 fixed_stream__convert__out_stream__assume2) (elements this)))))
@@ -1226,16 +1204,16 @@
 
 ;; H
   (assert
-  (and (= temp___289 (+ (to_rep1 (first (rt in_string))) i2)) (in_range1
+  (and (= temp___274 (+ (to_rep1 (first (rt in_string))) i2)) (in_range1
   (+ (to_rep1 (first (rt in_string))) i2))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt in_string))) temp___289)
-  (<= temp___289 (to_rep1 (last (rt in_string))))))
+  (and (<= (to_rep1 (first (rt in_string))) temp___274)
+  (<= temp___274 (to_rep1 (last (rt in_string))))))
 
 ;; H
-  (assert (= o3 temp___289))
+  (assert (= o3 temp___274))
 
 ;; H
   (assert (= o4 (select (elts in_string) o3)))

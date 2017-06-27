@@ -427,18 +427,6 @@
   (assert (in_range2 length2))
 
 ;; H
-  (assert (sorted__function_guard
-  (sorted (mk___t a (mk (to_rep a__first) (to_rep a__last))) a_first length1)
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) a_first length1))
-
-;; H
-  (assert (sorted__function_guard
-  (sorted (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (+ a_first length1) length2)
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (+ a_first length1)
-  length2))
-
-;; H
   (assert
   (and
   (and
@@ -473,40 +461,6 @@
 
 ;; H
   (assert (= j1 0))
-
-;; H
-  (assert (sorted__function_guard
-  (sorted (mk___t b (mk (to_rep b__first) (to_rep b__last)))
-  (to_rep b__first) (+ i2 j2))
-  (mk___t b (mk (to_rep b__first) (to_rep b__last))) (to_rep b__first)
-  (+ i2 j2)))
-
-;; H
-  (assert (perm2__function_guard
-  (perm2 (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t b (mk (to_rep b__first) (to_rep b__last))) a_first
-  (+ a_first length1) (to_rep b__first) i2 j2)
-  (mk___t a (mk (to_rep a__first) (to_rep a__last)))
-  (mk___t b (mk (to_rep b__first) (to_rep b__last))) a_first
-  (+ a_first length1) (to_rep b__first) i2 j2))
-
-;; H
-  (assert (le_array__function_guard
-  (le_array (mk___t b (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ a_first i2) (+ i2 j2) (- length1 i2))
-  (mk___t b (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ a_first i2) (+ i2 j2) (- length1 i2)))
-
-;; H
-  (assert (le_array__function_guard
-  (le_array (mk___t b (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ (+ a_first length1) j2) (+ i2 j2) (- length2 j2))
-  (mk___t b (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) (to_rep b__first)
-  (+ (+ a_first length1) j2) (+ i2 j2) (- length2 j2)))
 
 ;; H
   (assert
@@ -557,12 +511,8 @@
 
 ;; H
   (assert
-  (and
   (= o7 (le_array (mk___t b (mk (to_rep b__first) (to_rep b__last)))
-        (mk___t a (mk (to_rep a__first) (to_rep a__last))) o o3 o4 o6))
-  (le_array__function_guard o7
-  (mk___t b (mk (to_rep b__first) (to_rep b__last)))
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) o o3 o4 o6)))
+        (mk___t a (mk (to_rep a__first) (to_rep a__last))) o o3 o4 o6)))
 
 (assert
 ;; WP_parameter_def

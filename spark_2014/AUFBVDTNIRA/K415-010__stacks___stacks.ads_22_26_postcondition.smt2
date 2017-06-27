@@ -248,19 +248,15 @@
   (assert
   (forall ((top Int))
   (forall ((data (Array Int integer)))
-  (! (=> (dynamic_invariant top true true true)
-     (let ((result (size top data)))
-     (=> (size__function_guard result top data) (dynamic_invariant1 result
-     true false true)))) :pattern ((size top data)) ))))
+  (! (=> (dynamic_invariant top true true true) (dynamic_invariant1
+     (size top data) true false true)) :pattern ((size top data)) ))))
 
 ;; size__def_axiom
   (assert
   (forall ((top Int))
   (forall ((data (Array Int integer)))
-  (! (=>
-     (and (dynamic_invariant top true true true) (size__function_guard
-     (size top data) top data)) (= (size top data) top)) :pattern ((size top
-                                                                   data)) ))))
+  (! (=> (dynamic_invariant top true true true) (= (size top data) top)) :pattern (
+  (size top data)) ))))
 
 (declare-fun is_empty (Int (Array Int integer)) Bool)
 
@@ -273,9 +269,7 @@
   (assert
   (forall ((top Int))
   (forall ((data (Array Int integer)))
-  (! (=> (is_empty__function_guard (is_empty top data) top data)
-     (and (size__function_guard (size top data) top data)
-     (= (= (is_empty top data) true) (= (size top data) 0)))) :pattern (
+  (! (= (= (is_empty top data) true) (= (size top data) 0)) :pattern (
   (is_empty top data)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -304,9 +298,6 @@
 (declare-fun top3 () Int)
 
 ;; H
-  (assert (is_empty__function_guard (is_empty top data) top data))
-
-;; H
   (assert (in_range top))
 
 ;; H
@@ -326,12 +317,6 @@
 
 ;; H
   (assert (= top3 top1))
-
-;; H
-  (assert (size__function_guard (size top2 data) top2 data))
-
-;; H
-  (assert (size__function_guard (size top data) top data))
 
 (assert
 ;; WP_parameter_def

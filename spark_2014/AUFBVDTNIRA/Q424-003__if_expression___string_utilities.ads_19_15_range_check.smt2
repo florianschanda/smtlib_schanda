@@ -384,26 +384,19 @@
 ;; head__post_axiom
   (assert
   (forall ((s us_t))
-  (! (=> (dynamic_invariant s true true true)
-     (let ((result (head s)))
-     (=> (head__function_guard result s) (dynamic_invariant1 result true
-     false true)))) :pattern ((head s)) )))
+  (! (=> (dynamic_invariant s true true true) (dynamic_invariant1 (head s)
+     true false true)) :pattern ((head s)) )))
 
 ;; head__def_axiom
   (assert
   (forall ((s us_t))
-  (! (=>
-     (and (dynamic_invariant s true true true) (head__function_guard 
-     (head s) s)) (= (head s) (to_rep (select (to_array s) (first1 s))))) :pattern (
+  (! (=> (dynamic_invariant s true true true)
+     (= (head s) (to_rep (select (to_array s) (first1 s))))) :pattern (
   (head s)) )))
 
 (declare-fun tail (us_t) us_t)
 
 (declare-fun tail__function_guard (us_t us_t) Bool)
-
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -425,9 +418,9 @@
 
 (declare-sort t1 0)
 
-(declare-fun first3 (t1) integer)
+(declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -436,8 +429,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first3 (mk1 f l))) f)
-     (= (to_rep1 (last3 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (and (= (to_rep1 (first2 (mk1 f l))) f)
+     (= (to_rep1 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -453,12 +446,12 @@
 (define-fun of_array1 ((a (Array Int character)) (f Int)
   (l Int)) us_t1 (mk___t1 a (mk1 f l)))
 
-(define-fun first4 ((a us_t1)) Int (to_rep1 (first3 (rt1 a))))
+(define-fun first3 ((a us_t1)) Int (to_rep1 (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep1 (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep1 (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first4 a) (last4 a))
-                                    (+ (- (last4 a) (first4 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size1 () Int)
 
@@ -492,9 +485,9 @@
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment1 a))))
 
 (define-fun bool_eq7 ((x us_t1)
-  (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep1 (first3 (rt1 x)))
-                  (to_rep1 (last3 (rt1 x))) (elts1 y)
-                  (to_rep1 (first3 (rt1 y))) (to_rep1 (last3 (rt1 y)))))
+  (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep1 (first2 (rt1 x)))
+                  (to_rep1 (last2 (rt1 x))) (elts1 y)
+                  (to_rep1 (first2 (rt1 y))) (to_rep1 (last2 (rt1 y)))))
 
 (declare-fun user_eq6 (us_t1 us_t1) Bool)
 
@@ -506,23 +499,19 @@
 ;; tail__post_axiom
   (assert
   (forall ((s us_t))
-  (! (=> (dynamic_invariant s true true true)
-     (let ((result (tail s)))
-     (=> (tail__function_guard result s) (dynamic_invariant result true false
-     true)))) :pattern ((tail s)) )))
+  (! (=> (dynamic_invariant s true true true) (dynamic_invariant (tail s)
+     true false true)) :pattern ((tail s)) )))
 
 ;; tail__def_axiom
   (assert
   (forall ((s us_t))
-  (! (=>
-     (and (dynamic_invariant s true true true) (tail__function_guard 
-     (tail s) s))
-     (= (tail s) (let ((temp___146 (let ((temp___145 (last1 s)))
-                                   (let ((temp___144 (+ (first1 s) 1)))
-                                   (of_array1 (to_array s) temp___144
-                                   temp___145)))))
-                 (of_array (to_array1 temp___146) (first4 temp___146)
-                 (last4 temp___146))))) :pattern ((tail s)) )))
+  (! (=> (dynamic_invariant s true true true)
+     (= (tail s) (let ((temp___145 (let ((temp___144 (last1 s)))
+                                   (let ((temp___143 (+ (first1 s) 1)))
+                                   (of_array1 (to_array s) temp___143
+                                   temp___144)))))
+                 (of_array (to_array1 temp___145) (first3 temp___145)
+                 (last3 temp___145))))) :pattern ((tail s)) )))
 
 (declare-fun s1 () us_t)
 
@@ -543,50 +532,32 @@
 
 (declare-fun slow_lcs_length__function_guard (Int us_t us_t) Bool)
 
-(declare-fun temp___String_Literal_178 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_154 (tuple0) (Array Int character))
 
-;; temp___String_Literal_178__def_axiom
+;; temp___String_Literal_154__def_axiom
   (assert true)
 
-(declare-fun temp___String_Literal_180 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_156 (tuple0) (Array Int character))
 
-;; temp___String_Literal_180__def_axiom
+;; temp___String_Literal_156__def_axiom
   (assert true)
 
 ;; slow_lcs_length__def_axiom
   (assert
   (forall ((s11 us_t) (s21 us_t))
   (! (=>
-     (and
      (and (dynamic_invariant s11 true true true) (dynamic_invariant s21 true
-     true true)) (slow_lcs_length__function_guard (slow_lcs_length s11 s21)
-     s11 s21))
-     (and (head__function_guard (head s11) s11)
-     (and (head__function_guard (head s21) s21)
-     (and (tail__function_guard (tail s11) s11)
-     (and (tail__function_guard (tail s21) s21)
-     (and (tail__function_guard (tail s11) s11)
-     (and (tail__function_guard (tail s21) s21)
-     (and (slow_lcs_length__function_guard
-     (slow_lcs_length (tail s11) (tail s21)) (tail s11) (tail s21))
-     (and (tail__function_guard (tail s21) s21)
-     (and (tail__function_guard (tail s21) s21)
-     (and (slow_lcs_length__function_guard (slow_lcs_length s11 (tail s21))
-     s11 (tail s21))
-     (and (tail__function_guard (tail s11) s11)
-     (and (tail__function_guard (tail s11) s11)
-     (and (slow_lcs_length__function_guard (slow_lcs_length (tail s11) s21)
-     (tail s11) s21)
+     true true))
      (= (slow_lcs_length s11 s21) (ite (or
-                                       (= (let ((temp___193 (temp___String_Literal_178
+                                       (= (let ((temp___160 (temp___String_Literal_154
                                                             Tuple0)))
                                           (bool_eq3 (to_array s11)
-                                          (first1 s11) (last1 s11) temp___193
+                                          (first1 s11) (last1 s11) temp___160
                                           1 0)) true)
-                                       (= (let ((temp___194 (temp___String_Literal_180
+                                       (= (let ((temp___161 (temp___String_Literal_156
                                                             Tuple0)))
                                           (bool_eq3 (to_array s21)
-                                          (first1 s21) (last1 s21) temp___194
+                                          (first1 s21) (last1 s21) temp___161
                                           1 0)) true))
                                   0
                                   (ite (= (head s11) (head s21))
@@ -596,7 +567,7 @@
                                   (slow_lcs_length (tail s11) s21)) (slow_lcs_length
                                                                     (tail
                                                                     s11) s21) 
-                                  (slow_lcs_length s11 (tail s21)))))))))))))))))))) :pattern (
+                                  (slow_lcs_length s11 (tail s21))))))) :pattern (
   (slow_lcs_length s11 s21)) )))
 
 (define-fun dynamic_invariant3 ((temp___expr_39 Int) (temp___is_init_36 Bool)
@@ -647,19 +618,19 @@
   (assert
   (not
   (= (ite (= (bool_eq3 (elts s1) (to_rep1 (first (rt s1)))
-             (to_rep1 (last (rt s1))) (temp___String_Literal_178 Tuple0) 1 0) false) 
+             (to_rep1 (last (rt s1))) (temp___String_Literal_154 Tuple0) 1 0) false) 
      (bool_eq3 (elts s2) (to_rep1 (first (rt s2))) (to_rep1 (last (rt s2)))
-     (temp___String_Literal_180 Tuple0) 1 0) true) true)))
+     (temp___String_Literal_156 Tuple0) 1 0) true) true)))
 
 ;; H
   (assert
-  (and (and (= o (head s2)) (head__function_guard o s2))
+  (and (= o (head s2))
   (and (in_range3 o)
   (= o (to_rep (select (elts s2) (to_rep1 (first (rt s2)))))))))
 
 ;; H
   (assert
-  (and (and (= o1 (head s1)) (head__function_guard o1 s1))
+  (and (= o1 (head s1))
   (and (in_range3 o1)
   (= o1 (to_rep (select (elts s1) (to_rep1 (first (rt s1)))))))))
 
@@ -670,112 +641,26 @@
   (assert (not (= result true)))
 
 ;; H
-  (assert (head__function_guard (head o9) o9))
-
-;; H
-  (assert (head__function_guard (head s2) s2))
-
-;; H
-  (assert (tail__function_guard (tail o9) o9))
-
-;; H
-  (assert (tail__function_guard (tail s2) s2))
-
-;; H
-  (assert (tail__function_guard (tail o9) o9))
-
-;; H
-  (assert (tail__function_guard (tail s2) s2))
-
-;; H
-  (assert (slow_lcs_length__function_guard
-  (slow_lcs_length (tail o9) (tail s2)) (tail o9) (tail s2)))
-
-;; H
-  (assert (tail__function_guard (tail s2) s2))
-
-;; H
-  (assert (tail__function_guard (tail s2) s2))
-
-;; H
-  (assert (slow_lcs_length__function_guard (slow_lcs_length o9 (tail s2)) 
-  o9 (tail s2)))
-
-;; H
-  (assert (tail__function_guard (tail o9) o9))
-
-;; H
-  (assert (tail__function_guard (tail o9) o9))
-
-;; H
-  (assert (slow_lcs_length__function_guard (slow_lcs_length (tail o9) s2)
-  (tail o9) s2))
-
-;; H
-  (assert (head__function_guard (head s1) s1))
-
-;; H
-  (assert (head__function_guard (head o10) o10))
-
-;; H
-  (assert (tail__function_guard (tail s1) s1))
-
-;; H
-  (assert (tail__function_guard (tail o10) o10))
-
-;; H
-  (assert (tail__function_guard (tail s1) s1))
-
-;; H
-  (assert (tail__function_guard (tail o10) o10))
-
-;; H
-  (assert (slow_lcs_length__function_guard
-  (slow_lcs_length (tail s1) (tail o10)) (tail s1) (tail o10)))
-
-;; H
-  (assert (tail__function_guard (tail o10) o10))
-
-;; H
-  (assert (tail__function_guard (tail o10) o10))
-
-;; H
-  (assert (slow_lcs_length__function_guard (slow_lcs_length s1 (tail o10)) 
-  s1 (tail o10)))
-
-;; H
-  (assert (tail__function_guard (tail s1) s1))
-
-;; H
-  (assert (tail__function_guard (tail s1) s1))
-
-;; H
-  (assert (slow_lcs_length__function_guard (slow_lcs_length (tail s1) o10)
-  (tail s1) o10))
-
-;; H
   (assert
-  (and (and (= o9 (tail s1)) (tail__function_guard o9 s1))
+  (and (= o9 (tail s1))
   (and (dynamic_invariant o9 true false true)
   (and (= (elts s1) o4)
   (= (mk
      (to_rep1
-     (first3 (mk1 (+ (to_rep1 (first (rt s1))) 1) (to_rep1 (last (rt s1))))))
+     (first2 (mk1 (+ (to_rep1 (first (rt s1))) 1) (to_rep1 (last (rt s1))))))
      (to_rep1
-     (last3 (mk1 (+ (to_rep1 (first (rt s1))) 1) (to_rep1 (last (rt s1))))))) 
+     (last2 (mk1 (+ (to_rep1 (first (rt s1))) 1) (to_rep1 (last (rt s1))))))) 
   o5)))))
 
 ;; H
   (assert
-  (and
-  (and (= o6 (slow_lcs_length o9 s2)) (slow_lcs_length__function_guard 
-  o6 o9 s2))
+  (and (= o6 (slow_lcs_length o9 s2))
   (and (in_range4 o6)
   (= o6 (ite (or
              (= (bool_eq3 o4 (to_rep1 (first o5)) (to_rep1 (last o5))
-                (temp___String_Literal_178 Tuple0) 1 0) true)
+                (temp___String_Literal_154 Tuple0) 1 0) true)
              (= (bool_eq3 (elts s2) (to_rep1 (first (rt s2)))
-                (to_rep1 (last (rt s2))) (temp___String_Literal_180 Tuple0) 1
+                (to_rep1 (last (rt s2))) (temp___String_Literal_156 Tuple0) 1
                 0) true))
         0
         (ite (= (head o9) (head s2))
@@ -785,28 +670,26 @@
 
 ;; H
   (assert
-  (and (and (= o10 (tail s2)) (tail__function_guard o10 s2))
+  (and (= o10 (tail s2))
   (and (dynamic_invariant o10 true false true)
   (and (= (elts s2) o2)
   (= (mk
      (to_rep1
-     (first3 (mk1 (+ (to_rep1 (first (rt s2))) 1) (to_rep1 (last (rt s2))))))
+     (first2 (mk1 (+ (to_rep1 (first (rt s2))) 1) (to_rep1 (last (rt s2))))))
      (to_rep1
-     (last3 (mk1 (+ (to_rep1 (first (rt s2))) 1) (to_rep1 (last (rt s2))))))) 
+     (last2 (mk1 (+ (to_rep1 (first (rt s2))) 1) (to_rep1 (last (rt s2))))))) 
   o3)))))
 
 ;; H
   (assert
-  (and
-  (and (= o7 (slow_lcs_length s1 o10)) (slow_lcs_length__function_guard 
-  o7 s1 o10))
+  (and (= o7 (slow_lcs_length s1 o10))
   (and (in_range4 o7)
   (= o7 (ite (or
              (= (bool_eq3 (elts s1) (to_rep1 (first (rt s1)))
-                (to_rep1 (last (rt s1))) (temp___String_Literal_178 Tuple0) 1
+                (to_rep1 (last (rt s1))) (temp___String_Literal_154 Tuple0) 1
                 0) true)
              (= (bool_eq3 o2 (to_rep1 (first o3)) (to_rep1 (last o3))
-                (temp___String_Literal_180 Tuple0) 1 0) true))
+                (temp___String_Literal_156 Tuple0) 1 0) true))
         0
         (ite (= (head s1) (head o10))
         (+ 1 (slow_lcs_length (tail s1) (tail o10)))

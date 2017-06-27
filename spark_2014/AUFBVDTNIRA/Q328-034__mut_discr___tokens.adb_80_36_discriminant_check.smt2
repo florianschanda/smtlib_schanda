@@ -111,12 +111,12 @@
 (define-fun tlastS__ref___projection ((a tlastS__ref)) tlastS (tlastS__content
                                                               a))
 
-(define-fun dynamic_invariant ((temp___expr_176 Int)
-  (temp___is_init_173 Bool) (temp___skip_constant_174 Bool)
-  (temp___do_toplevel_175 Bool)) Bool (=>
-                                      (or (= temp___is_init_173 true)
+(define-fun dynamic_invariant ((temp___expr_168 Int)
+  (temp___is_init_165 Bool) (temp___skip_constant_166 Bool)
+  (temp___do_toplevel_167 Bool)) Bool (=>
+                                      (or (= temp___is_init_165 true)
                                       (<= 0 200)) (in_range2
-                                      temp___expr_176)))
+                                      temp___expr_168)))
 
 (declare-sort integer 0)
 
@@ -238,17 +238,13 @@
 ;; size__post_axiom
   (assert
   (forall ((stack__last Int))
-  (! (=> (dynamic_invariant stack__last true true true)
-     (let ((result (size stack__last)))
-     (=> (size__function_guard result stack__last) (dynamic_invariant1 result
-     true false true)))) :pattern ((size stack__last)) )))
+  (! (=> (dynamic_invariant stack__last true true true) (dynamic_invariant1
+     (size stack__last) true false true)) :pattern ((size stack__last)) )))
 
 ;; size__def_axiom
   (assert
   (forall ((stack__last Int))
-  (! (=>
-     (and (dynamic_invariant stack__last true true true)
-     (size__function_guard (size stack__last) stack__last))
+  (! (=> (dynamic_invariant stack__last true true true)
      (= (size stack__last) stack__last)) :pattern ((size stack__last)) )))
 
 (declare-fun full (Int) Bool)
@@ -261,9 +257,8 @@
 ;; full__def_axiom
   (assert
   (forall ((stack__last Int))
-  (! (=> (full__function_guard (full stack__last) stack__last)
-     (= (= (full stack__last) true) (<= 200 stack__last))) :pattern (
-  (full stack__last)) )))
+  (! (= (= (full stack__last) true) (<= 200 stack__last)) :pattern ((full
+                                                                    stack__last)) )))
 
 (declare-sort operation 0)
 
@@ -518,24 +513,24 @@
 (define-fun token__ref___projection ((a token__ref)) us_rep1 (token__content
                                                              a))
 
-(define-fun default_initial_assumption ((temp___expr_203 us_rep1)
-  (temp___skip_top_level_204 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_193 us_rep1)
+  (temp___skip_top_level_194 Bool)) Bool (and
                                          (= (attr__constrained
-                                            temp___expr_203) false)
+                                            temp___expr_193) false)
                                          (= (to_rep3
                                             (rec__tokens__token__kind
                                             (us_split_discrs1
-                                            temp___expr_203))) 0)))
+                                            temp___expr_193))) 0)))
 
 (declare-fun t () us_rep1)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(define-fun dynamic_invariant2 ((temp___expr_195 Int)
-  (temp___is_init_192 Bool) (temp___skip_constant_193 Bool)
-  (temp___do_toplevel_194 Bool)) Bool (=>
-                                      (or (= temp___is_init_192 true)
-                                      (<= 0 2)) (in_range5 temp___expr_195)))
+(define-fun dynamic_invariant2 ((temp___expr_185 Int)
+  (temp___is_init_182 Bool) (temp___skip_constant_183 Bool)
+  (temp___do_toplevel_184 Bool)) Bool (=>
+                                      (or (= temp___is_init_182 true)
+                                      (<= 0 2)) (in_range5 temp___expr_185)))
 
 (define-fun dynamic_invariant3 ((temp___expr_153 Int)
   (temp___is_init_150 Bool) (temp___skip_constant_151 Bool)
@@ -543,11 +538,11 @@
                                       (or (= temp___is_init_150 true)
                                       (<= 0 2)) (in_range1 temp___expr_153)))
 
-(define-fun dynamic_invariant4 ((temp___expr_186 Int)
-  (temp___is_init_183 Bool) (temp___skip_constant_184 Bool)
-  (temp___do_toplevel_185 Bool)) Bool (=>
-                                      (or (= temp___is_init_183 true)
-                                      (<= 0 3)) (in_range4 temp___expr_186)))
+(define-fun dynamic_invariant4 ((temp___expr_177 Int)
+  (temp___is_init_174 Bool) (temp___skip_constant_175 Bool)
+  (temp___do_toplevel_176 Bool)) Bool (=>
+                                      (or (= temp___is_init_174 true)
+                                      (<= 0 3)) (in_range4 temp___expr_177)))
 
 (declare-fun last () Int)
 
@@ -555,12 +550,6 @@
 
 ;; H
   (assert (in_range2 last))
-
-;; H
-  (assert (full__function_guard (full last) last))
-
-;; H
-  (assert (size__function_guard (size last) last))
 
 ;; H
   (assert

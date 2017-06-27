@@ -91,11 +91,8 @@
   (assert
   (forall ((state_machine__flag Bool))
   (forall ((state_machine__num Int))
-  (! (=> (state_a__function_guard
-     (state_a state_machine__flag state_machine__num) state_machine__flag
-     state_machine__num)
-     (= (= (state_a state_machine__flag state_machine__num) true)
-     (and (= state_machine__flag true) (< 0 state_machine__num)))) :pattern (
+  (! (= (= (state_a state_machine__flag state_machine__num) true)
+     (and (= state_machine__flag true) (< 0 state_machine__num))) :pattern (
   (state_a state_machine__flag state_machine__num)) ))))
 
 (declare-fun state_b (Bool Int) Bool)
@@ -109,11 +106,8 @@
   (assert
   (forall ((state_machine__flag Bool))
   (forall ((state_machine__num Int))
-  (! (=> (state_b__function_guard
-     (state_b state_machine__flag state_machine__num) state_machine__flag
-     state_machine__num)
-     (= (= (state_b state_machine__flag state_machine__num) true)
-     (and (= state_machine__flag true) (<= state_machine__num 0)))) :pattern (
+  (! (= (= (state_b state_machine__flag state_machine__num) true)
+     (and (= state_machine__flag true) (<= state_machine__num 0))) :pattern (
   (state_b state_machine__flag state_machine__num)) ))))
 
 (declare-fun state_c (Bool Int) Bool)
@@ -127,11 +121,8 @@
   (assert
   (forall ((state_machine__flag Bool))
   (forall ((state_machine__num Int))
-  (! (=> (state_c__function_guard
-     (state_c state_machine__flag state_machine__num) state_machine__flag
-     state_machine__num)
-     (= (= (state_c state_machine__flag state_machine__num) true)
-     (and (not (= state_machine__flag true)) (< 0 state_machine__num)))) :pattern (
+  (! (= (= (state_c state_machine__flag state_machine__num) true)
+     (and (not (= state_machine__flag true)) (< 0 state_machine__num))) :pattern (
   (state_c state_machine__flag state_machine__num)) ))))
 
 (declare-fun state_d (Bool Int) Bool)
@@ -145,11 +136,8 @@
   (assert
   (forall ((state_machine__flag Bool))
   (forall ((state_machine__num Int))
-  (! (=> (state_d__function_guard
-     (state_d state_machine__flag state_machine__num) state_machine__flag
-     state_machine__num)
-     (= (= (state_d state_machine__flag state_machine__num) true)
-     (and (not (= state_machine__flag true)) (< state_machine__num 0)))) :pattern (
+  (! (= (= (state_d state_machine__flag state_machine__num) true)
+     (and (not (= state_machine__flag true)) (< state_machine__num 0))) :pattern (
   (state_d state_machine__flag state_machine__num)) ))))
 
 (declare-fun flag () Bool)
@@ -203,9 +191,8 @@
 
 ;; H
   (assert
-  (and
-  (and (= result (state_a flag num)) (state_a__function_guard result 
-  flag num)) (= (= result true) (and (= flag true) (< 0 num)))))
+  (and (= result (state_a flag num))
+  (= (= result true) (and (= flag true) (< 0 num)))))
 
 ;; H
   (assert (=> (= result true) (= num2 num)))
@@ -222,9 +209,8 @@
 ;; H
   (assert
   (=> (not (= result true))
-  (and
-  (and (= result1 (state_b flag num)) (state_b__function_guard result1 
-  flag num)) (= (= result1 true) (and (= flag true) (<= num 0))))))
+  (and (= result1 (state_b flag num))
+  (= (= result1 true) (and (= flag true) (<= num 0))))))
 
 ;; H
   (assert
@@ -247,9 +233,8 @@
   (assert
   (=> (not (= result true))
   (=> (not (= result1 true))
-  (and
-  (and (= result3 (state_c flag num)) (state_c__function_guard result3 
-  flag num)) (= (= result3 true) (and (not (= flag true)) (< 0 num)))))))
+  (and (= result3 (state_c flag num))
+  (= (= result3 true) (and (not (= flag true)) (< 0 num)))))))
 
 ;; H
   (assert
@@ -283,9 +268,8 @@
   (=> (not (= result true))
   (=> (not (= result1 true))
   (=> (not (= result3 true))
-  (and
-  (and (= result6 (state_d flag num)) (state_d__function_guard result6 
-  flag num)) (= (= result6 true) (and (not (= flag true)) (< num 0))))))))
+  (and (= result6 (state_d flag num))
+  (= (= result6 true) (and (not (= flag true)) (< num 0))))))))
 
 ;; H
   (assert
@@ -345,22 +329,7 @@
   (assert (= flag4 flag2))
 
 ;; H
-  (assert (state_a__function_guard (state_a flag num) flag num))
-
-;; H
-  (assert (state_a__function_guard (state_a flag3 num5) flag3 num5))
-
-;; H
   (assert (=> (= (state_a flag num) true) (= (state_a flag3 num5) true)))
-
-;; H
-  (assert (state_b__function_guard (state_b flag num) flag num))
-
-;; H
-  (assert (state_a__function_guard (state_a flag3 num5) flag3 num5))
-
-;; H
-  (assert (state_b__function_guard (state_b flag3 num5) flag3 num5))
 
 ;; H
   (assert
@@ -368,16 +337,7 @@
   (or (= (state_a flag3 num5) true) (= (state_b flag3 num5) true))))
 
 ;; H
-  (assert (state_c__function_guard (state_c flag num) flag num))
-
-;; H
-  (assert (state_b__function_guard (state_b flag3 num5) flag3 num5))
-
-;; H
   (assert (=> (= (state_c flag num) true) (= (state_b flag3 num5) true)))
-
-;; H
-  (assert (state_d__function_guard (state_d flag num) flag num))
 
 ;; H
   (assert (= (state_d flag num) true))
@@ -385,10 +345,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "state_machine.adb", line 22, characters 0-0
-  (not
-  (or
-  (=> (state_c__function_guard (state_c flag3 num5) flag3 num5)
-  (= (state_c flag3 num5) true))
-  (=> (state_d__function_guard (state_d flag3 num5) flag3 num5)
-  (= (state_d flag3 num5) true)))))
+  (not (or (= (state_c flag3 num5) true) (= (state_d flag3 num5) true))))
 (check-sat)

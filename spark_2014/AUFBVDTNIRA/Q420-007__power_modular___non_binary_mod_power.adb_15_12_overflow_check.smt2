@@ -336,17 +336,14 @@
 ;; id__post_axiom
   (assert
   (forall ((x (_ BitVec 8)))
-  (! (=> (dynamic_invariant1 x true true true)
-     (let ((result (id x)))
-     (=> (id__function_guard result x) (dynamic_invariant1 result true false
-     true)))) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant1 x true true true) (dynamic_invariant1 (id x)
+     true false true)) :pattern ((id x)) )))
 
 ;; id__def_axiom
   (assert
   (forall ((x (_ BitVec 8)))
-  (! (=>
-     (and (dynamic_invariant1 x true true true) (id__function_guard (id x)
-     x)) (= (id x) x)) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant1 x true true true) (= (id x) x)) :pattern (
+  (id x)) )))
 
 (declare-fun id__2 ((_ BitVec 8)) (_ BitVec 8))
 
@@ -355,17 +352,14 @@
 ;; id__2__post_axiom
   (assert
   (forall ((y (_ BitVec 8)))
-  (! (=> (dynamic_invariant2 y true true true)
-     (let ((result (id__2 y)))
-     (=> (id__2__function_guard result y) (dynamic_invariant2 result true
-     false true)))) :pattern ((id__2 y)) )))
+  (! (=> (dynamic_invariant2 y true true true) (dynamic_invariant2 (id__2 y)
+     true false true)) :pattern ((id__2 y)) )))
 
 ;; id__2__def_axiom
   (assert
   (forall ((y (_ BitVec 8)))
-  (! (=>
-     (and (dynamic_invariant2 y true true true) (id__2__function_guard
-     (id__2 y) y)) (= (id__2 y) y)) :pattern ((id__2 y)) )))
+  (! (=> (dynamic_invariant2 y true true true) (= (id__2 y) y)) :pattern (
+  (id__2 y)) )))
 
 (declare-fun id__3 (Int) Int)
 
@@ -374,17 +368,14 @@
 ;; id__3__post_axiom
   (assert
   (forall ((z Int))
-  (! (=> (dynamic_invariant z true true true)
-     (let ((result (id__3 z)))
-     (=> (id__3__function_guard result z) (dynamic_invariant result true
-     false true)))) :pattern ((id__3 z)) )))
+  (! (=> (dynamic_invariant z true true true) (dynamic_invariant (id__3 z)
+     true false true)) :pattern ((id__3 z)) )))
 
 ;; id__3__def_axiom
   (assert
   (forall ((z Int))
-  (! (=>
-     (and (dynamic_invariant z true true true) (id__3__function_guard
-     (id__3 z) z)) (= (id__3 z) z)) :pattern ((id__3 z)) )))
+  (! (=> (dynamic_invariant z true true true) (= (id__3 z) z)) :pattern (
+  (id__3 z)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -425,10 +416,7 @@
 (declare-fun y2 () (_ BitVec 8))
 
 ;; H
-  (assert
-  (and
-  (and (= o (id ((_ int2bv 8) 2))) (id__function_guard o ((_ int2bv 8) 2)))
-  (= o ((_ int2bv 8) 2))))
+  (assert (and (= o (id ((_ int2bv 8) 2))) (= o ((_ int2bv 8) 2))))
 
 ;; H
   (assert (= result x))
@@ -438,9 +426,8 @@
 
 ;; H
   (assert
-  (and
-  (and (= o1 (id__2 ((_ int2bv 8) 2))) (id__2__function_guard o1
-  ((_ int2bv 8) 2))) (and (in_range1 o1) (= o1 ((_ int2bv 8) 2)))))
+  (and (= o1 (id__2 ((_ int2bv 8) 2)))
+  (and (in_range1 o1) (= o1 ((_ int2bv 8) 2)))))
 
 ;; H
   (assert (= result1 y))
@@ -452,9 +439,7 @@
   (assert (in_range1 y1))
 
 ;; H
-  (assert
-  (and (and (= o2 (id__3 2)) (id__3__function_guard o2 2))
-  (and (in_range o2) (= o2 2))))
+  (assert (and (= o2 (id__3 2)) (and (in_range o2) (= o2 2))))
 
 ;; H
   (assert (= result2 z))

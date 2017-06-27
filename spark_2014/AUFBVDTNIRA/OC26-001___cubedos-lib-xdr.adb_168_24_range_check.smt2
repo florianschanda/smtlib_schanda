@@ -695,11 +695,11 @@
 
 (declare-fun o3 () (_ BitVec 32))
 
-(declare-fun temp___534 () (_ BitVec 32))
+(declare-fun temp___522 () (_ BitVec 32))
 
-(declare-fun temp___533 () (_ BitVec 32))
+(declare-fun temp___521 () (_ BitVec 32))
 
-(declare-fun temp___532 () (_ BitVec 32))
+(declare-fun temp___520 () (_ BitVec 32))
 
 (declare-fun o4 () Int)
 
@@ -828,13 +828,13 @@
   (assert (= i1 1))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 3)) (= temp___534 temporary_2)))
+  (assert (=> (and (<= 1 i1) (<= i1 3)) (= temp___522 temporary_2)))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 3)) (= temp___533 temporary_11)))
+  (assert (=> (and (<= 1 i1) (<= i1 3)) (= temp___521 temporary_11)))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 3)) (= temp___532 value)))
+  (assert (=> (and (<= 1 i1) (<= i1 3)) (= temp___520 value)))
 
 ;; H
   (assert (=> (and (<= 1 i1) (<= i1 3)) (and (<= 1 i2) (<= i2 3))))

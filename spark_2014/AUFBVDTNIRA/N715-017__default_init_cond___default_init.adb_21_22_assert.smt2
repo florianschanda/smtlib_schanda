@@ -76,11 +76,6 @@
 
 (declare-fun simple_priv_ok__function_guard (Bool us_rep) Bool)
 
-;; temp___result_141_def
-  (assert
-  (forall ((temp___140 us_rep)) (simple_priv_ok__function_guard
-  (simple_priv_ok temp___140) temp___140)))
-
 (define-fun default_initial_assumption ((temp___expr_138 us_rep)
   (temp___skip_top_level_139 Bool)) Bool (=>
                                          (not
@@ -128,16 +123,11 @@
 
 (declare-fun wrong_priv_ok__function_guard (Bool us_rep1) Bool)
 
-;; temp___result_149_def
-  (assert
-  (forall ((temp___148 us_rep1)) (wrong_priv_ok__function_guard
-  (wrong_priv_ok temp___148) temp___148)))
-
-(define-fun default_initial_assumption1 ((temp___expr_146 us_rep1)
-  (temp___skip_top_level_147 Bool)) Bool (=>
+(define-fun default_initial_assumption1 ((temp___expr_145 us_rep1)
+  (temp___skip_top_level_146 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_147 true))
-                                         (= (wrong_priv_ok temp___expr_146) true)))
+                                         (= temp___skip_top_level_146 true))
+                                         (= (wrong_priv_ok temp___expr_145) true)))
 
 (declare-sort us_main_type2 0)
 
@@ -182,20 +172,13 @@
 (declare-fun priv_with_glob_ok__function_guard (Bool us_rep2
   us_private) Bool)
 
-;; temp___result_157_def
-  (assert
-  (forall ((private_default__glob us_private) (temp___156 us_rep2))
-  (priv_with_glob_ok__function_guard
-  (priv_with_glob_ok temp___156 private_default__glob) temp___156
-  private_default__glob)))
-
-(define-fun default_initial_assumption2 ((temp___expr_154 us_rep2)
-  (temp___skip_top_level_155 Bool)
+(define-fun default_initial_assumption2 ((temp___expr_152 us_rep2)
+  (temp___skip_top_level_153 Bool)
   (private_default__glob us_private)) Bool (=>
                                            (not
-                                           (= temp___skip_top_level_155 true))
+                                           (= temp___skip_top_level_153 true))
                                            (= (priv_with_glob_ok
-                                              temp___expr_154
+                                              temp___expr_152
                                               private_default__glob) true)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -215,48 +198,28 @@
 (declare-fun glob1 () us_private)
 
 ;; H
-  (assert (default_initial_assumption p1 false))
-
-;; H
-  (assert (default_initial_assumption1 p2 false))
-
-;; H
-  (assert (default_initial_assumption2 p3 false glob))
-
-;; H
-  (assert (simple_priv_ok__function_guard (simple_priv_ok p1) p1))
-
-;; H
   (assert (= (simple_priv_ok p1) true))
 
 ;; H
-  (assert (wrong_priv_ok__function_guard (wrong_priv_ok p2) p2))
-
-;; H
   (assert (= (wrong_priv_ok p2) true))
-
-;; H
-  (assert (priv_with_glob_ok__function_guard (priv_with_glob_ok p3 glob) 
-  p3 glob))
 
 ;; H
   (assert (= (priv_with_glob_ok p3 glob) true))
 
 ;; H
-  (assert (simple_priv_ok__function_guard (simple_priv_ok p1) p1))
-
-;; H
   (assert (= (simple_priv_ok p1) true))
-
-;; H
-  (assert (wrong_priv_ok__function_guard (wrong_priv_ok p2) p2))
 
 ;; H
   (assert (= (wrong_priv_ok p2) true))
 
 ;; H
-  (assert (priv_with_glob_ok__function_guard (priv_with_glob_ok p3 glob1) 
-  p3 glob1))
+  (assert (= (priv_with_glob_ok p3 glob) true))
+
+;; H
+  (assert (= (simple_priv_ok p1) true))
+
+;; H
+  (assert (= (wrong_priv_ok p2) true))
 
 (assert
 ;; WP_parameter_def

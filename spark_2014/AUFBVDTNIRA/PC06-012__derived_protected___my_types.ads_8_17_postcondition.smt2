@@ -138,23 +138,26 @@
 (declare-datatypes () ((prot__ref (mk_prot__ref (prot__content us_rep)))))
 (define-fun prot__ref___projection ((a prot__ref)) us_rep (prot__content a))
 
+(define-fun default_initial_assumption ((temp___expr_172 us_rep)
+  (temp___skip_top_level_173 Bool)) Bool (= (to_rep
+                                            (rec__my_types__prot__f
+                                            (us_split_fields1
+                                            temp___expr_172))) 0))
+
 (declare-fun get_f (us_rep) Int)
 
 (declare-fun get_f__function_guard (Int us_rep) Bool)
 
 ;; get_f__post_axiom
   (assert
-  (forall ((self__ us_rep))
-  (! (let ((result (get_f self__)))
-     (=> (get_f__function_guard result self__) (dynamic_invariant result true
-     false true))) :pattern ((get_f self__)) )))
+  (forall ((self__ us_rep)) (! (dynamic_invariant (get_f self__) true false
+  true) :pattern ((get_f self__)) )))
 
 ;; get_f__def_axiom
   (assert
   (forall ((self__ us_rep))
-  (! (=> (get_f__function_guard (get_f self__) self__)
-     (= (get_f self__) (to_rep
-                       (rec__my_types__prot__f (us_split_fields1 self__))))) :pattern (
+  (! (= (get_f self__) (to_rep
+                       (rec__my_types__prot__f (us_split_fields1 self__)))) :pattern (
   (get_f self__)) )))
 
 (declare-fun v () Int)
@@ -201,11 +204,6 @@
 
 ;; H
   (assert (= self__3 self__1))
-
-;; H
-  (assert (get_f__function_guard
-  (get_f (mk___rep (mk___split_fields self__2)))
-  (mk___rep (mk___split_fields self__2))))
 
 (assert
 ;; WP_parameter_def

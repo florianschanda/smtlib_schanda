@@ -257,13 +257,11 @@
 ;; is_nat32__def_axiom
   (assert
   (forall ((strong_data_type us_rep))
-  (! (=> (is_nat32__function_guard (is_nat32 strong_data_type)
-     strong_data_type)
-     (= (= (is_nat32 strong_data_type) true)
+  (! (= (= (is_nat32 strong_data_type) true)
      (= (to_rep1
         (rec__data__t_strong_data_type__data_type
-        (us_split_discrs1 strong_data_type))) 1))) :pattern ((is_nat32
-                                                             strong_data_type)) )))
+        (us_split_discrs1 strong_data_type))) 1)) :pattern ((is_nat32
+                                                            strong_data_type)) )))
 
 (declare-fun get_min_nat32 (us_rep) Int)
 
@@ -272,22 +270,16 @@
 ;; get_min_nat32__post_axiom
   (assert
   (forall ((strong_data_type us_rep))
-  (! (and (is_nat32__function_guard (is_nat32 strong_data_type)
-     strong_data_type)
-     (=> (= (is_nat32 strong_data_type) true)
-     (let ((result (get_min_nat32 strong_data_type)))
-     (=> (get_min_nat32__function_guard result strong_data_type)
-     (dynamic_invariant result true false true))))) :pattern ((get_min_nat32
-                                                              strong_data_type)) )))
+  (! (=> (= (is_nat32 strong_data_type) true) (dynamic_invariant
+     (get_min_nat32 strong_data_type) true false true)) :pattern ((get_min_nat32
+                                                                  strong_data_type)) )))
 
 ;; get_min_nat32__def_axiom
   (assert
   (forall ((strong_data_type us_rep))
-  (! (=> (get_min_nat32__function_guard (get_min_nat32 strong_data_type)
-     strong_data_type)
-     (= (get_min_nat32 strong_data_type) (to_rep
+  (! (= (get_min_nat32 strong_data_type) (to_rep
                                          (rec__data__t_strong_data_type__min_nat32
-                                         (us_split_fields1 strong_data_type))))) :pattern (
+                                         (us_split_fields1 strong_data_type)))) :pattern (
   (get_min_nat32 strong_data_type)) )))
 
 (declare-fun min () Int)
@@ -498,11 +490,6 @@
   (assert
   (= (mk___rep (mk___split_discrs result3) (mk___split_fields result4)
      result5) (t_strong_data_type__content data__create_type__result12)))
-
-;; H
-  (assert (is_nat32__function_guard
-  (is_nat32 (t_strong_data_type__content data__create_type__result12))
-  (t_strong_data_type__content data__create_type__result12)))
 
 (assert
 ;; WP_parameter_def

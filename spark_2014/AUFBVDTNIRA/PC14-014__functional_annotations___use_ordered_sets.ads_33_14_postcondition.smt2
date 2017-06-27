@@ -1044,11 +1044,11 @@
 
 (declare-fun use_ordered_sets__are_disjoint__cu__assume () count_type)
 
-(declare-fun temp___739 () count_type)
+(declare-fun temp___712 () count_type)
 
 (declare-fun o () Int)
 
-(declare-fun temp___738 () count_type)
+(declare-fun temp___711 () count_type)
 
 (declare-fun o1 () Bool)
 
@@ -1125,8 +1125,8 @@
 (define-fun cu__split_fields14 () us_split_fields2 (mk___split_fields1
                                                    cu__split_fields1))
 
-(define-fun temp___7381 () us_rep1 (mk___rep1
-                                   (mk___split_fields1 temp___738)))
+(define-fun temp___7111 () us_rep1 (mk___rep1
+                                   (mk___split_fields1 temp___711)))
 
 (define-fun use_ordered_sets__are_disjoint__cu__assume1 () us_rep1 (mk___rep1
                                                                    (mk___split_fields1
@@ -1169,7 +1169,7 @@
   (= (= result1 true)
   (= (has_key (positions s1) (mk___rep1 cu__split_fields14)) true)))
   (and (= result1 true)
-  (and (= temp___739 cu__split_fields1)
+  (and (= temp___712 cu__split_fields1)
   (and
   (forall ((i Int))
   (=>
@@ -1196,7 +1196,7 @@
   (ite (= result1 true)
   (and
   (and
-  (and (= temp___739 cu__split_fields1)
+  (and (= temp___712 cu__split_fields1)
   (and
   (forall ((i Int))
   (=>
@@ -1217,14 +1217,14 @@
   (= use_ordered_sets__are_disjoint__result3 use_ordered_sets__are_disjoint__result2)))
   (and
   (and
-  (and (= temp___7381 (next s1 (mk___rep1 cu__split_fields13)))
+  (and (= temp___7111 (next s1 (mk___rep1 cu__split_fields13)))
   (ite (= (ite (= (bool_eq2 (mk___rep1 cu__split_fields13) no_element) false) (= 
           (get1 (positions s1) (mk___rep1 cu__split_fields13)) (length3 s1)) true) true)
-  (= (bool_eq2 temp___7381 no_element) true)
-  (and (= (has_key (positions s1) temp___7381) true)
-  (= (get1 (positions s1) temp___7381) (+ (get1 (positions s1)
+  (= (bool_eq2 temp___7111 no_element) true)
+  (and (= (has_key (positions s1) temp___7111) true)
+  (= (get1 (positions s1) temp___7111) (+ (get1 (positions s1)
                                           (mk___rep1 cu__split_fields13)) 1)))))
-  (and (= result4 cu__split_fields2) (= temp___738 cu__split_fields3)))
+  (and (= result4 cu__split_fields2) (= temp___711 cu__split_fields3)))
   (and
   (and
   (and (= o1 (has_key (positions s1) (mk___rep1 cu__split_fields12)))

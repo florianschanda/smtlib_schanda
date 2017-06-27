@@ -894,8 +894,7 @@
 ;; inv__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (inv__function_guard (inv s) s)
-     (= (= (inv s) true)
+  (! (= (= (inv s) true)
      (and
      (and
      (and
@@ -1145,7 +1144,7 @@
                                                          (let ((temp___351 
                                                          (rec__patience__state__posstack
                                                          (us_split_fields1 s))))
-                                                         (select temp___351 i))) 1)))))))))) :pattern (
+                                                         (select temp___351 i))) 1))))))))) :pattern (
   (inv s)) )))
 
 (declare-fun c () Int)
@@ -1198,7 +1197,7 @@
 
 (declare-fun o3 () Int)
 
-(declare-fun temp___538 () (Array Int cardindex))
+(declare-fun temp___535 () (Array Int cardindex))
 
 (declare-fun o4 () Int)
 
@@ -1240,18 +1239,6 @@
 
 ;; H
   (assert (in_range2 c))
-
-;; H
-  (assert (inv__function_guard
-  (inv
-  (mk___rep
-  (mk___split_fields s__split_fields s__split_fields1 s__split_fields2
-  s__split_fields3 s__split_fields4 s__split_fields5 s__split_fields6
-  s__split_fields7)))
-  (mk___rep
-  (mk___split_fields s__split_fields s__split_fields1 s__split_fields2
-  s__split_fields3 s__split_fields4 s__split_fields5 s__split_fields6
-  s__split_fields7))))
 
 ;; H
   (assert
@@ -1345,7 +1332,7 @@
   (assert (= o3 i2))
 
 ;; H
-  (assert (= temp___538 (select s__split_fields4 o3)))
+  (assert (= temp___535 (select s__split_fields4 o3)))
 
 ;; H
   (assert (and (<= 0 (- stackisize2 1)) (<= (- stackisize2 1) 99)))
@@ -1354,7 +1341,7 @@
   (assert (= o4 (- stackisize2 1)))
 
 ;; H
-  (assert (= o5 (select temp___538 o4)))
+  (assert (= o5 (select temp___535 o4)))
 
 ;; H
   (assert (= o6 (to_rep1 o5)))

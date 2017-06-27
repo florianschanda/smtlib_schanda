@@ -287,10 +287,8 @@
 ;; my_abs__post_axiom
   (assert
   (forall ((i Int))
-  (! (=> (dynamic_invariant i true true true)
-     (let ((result (my_abs i)))
-     (=> (my_abs__function_guard result i) (dynamic_invariant result true
-     false true)))) :pattern ((my_abs i)) )))
+  (! (=> (dynamic_invariant i true true true) (dynamic_invariant (my_abs i)
+     true false true)) :pattern ((my_abs i)) )))
 
 (declare-fun c4b () Int)
 

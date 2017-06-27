@@ -847,19 +847,14 @@
 ;; length_with_padding__post_axiom
   (assert
   (forall ((length2 Int))
-  (! (=> (dynamic_invariant3 length2 true true true)
-     (let ((result (length_with_padding length2)))
-     (=> (length_with_padding__function_guard result length2)
-     (dynamic_invariant3 result true false true)))) :pattern ((length_with_padding
-                                                              length2)) )))
+  (! (=> (dynamic_invariant3 length2 true true true) (dynamic_invariant3
+     (length_with_padding length2) true false true)) :pattern ((length_with_padding
+                                                               length2)) )))
 
 ;; length_with_padding__def_axiom
   (assert
   (forall ((length2 Int))
-  (! (=>
-     (and (dynamic_invariant3 length2 true true true)
-     (length_with_padding__function_guard (length_with_padding length2)
-     length2))
+  (! (=> (dynamic_invariant3 length2 true true true)
      (= (length_with_padding length2) (+ length2 (ite (= (mod1 length2 4) 0)
                                                  0 (- 4 (mod1 length2 4)))))) :pattern (
   (length_with_padding length2)) )))
@@ -879,10 +874,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
-
-(declare-fun first4 () Int)
-
-(declare-fun last4 () Int)
 
 (define-fun dynamic_property2 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -904,9 +895,9 @@
 
 (declare-sort t2 0)
 
-(declare-fun first5 (t2) integer)
+(declare-fun first4 (t2) integer)
 
-(declare-fun last5 (t2) integer)
+(declare-fun last4 (t2) integer)
 
 (declare-fun mk2 (Int Int) t2)
 
@@ -915,8 +906,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep1 (first5 (mk2 f l))) f)
-     (= (to_rep1 (last5 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
+     (and (= (to_rep1 (first4 (mk2 f l))) f)
+     (= (to_rep1 (last4 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
 
 (define-fun dynamic_property3 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -932,12 +923,12 @@
 (define-fun of_array2 ((a (Array Int character)) (f Int)
   (l Int)) us_t2 (mk___t2 a (mk2 f l)))
 
-(define-fun first6 ((a us_t2)) Int (to_rep1 (first5 (rt2 a))))
+(define-fun first5 ((a us_t2)) Int (to_rep1 (first4 (rt2 a))))
 
-(define-fun last6 ((a us_t2)) Int (to_rep1 (last5 (rt2 a))))
+(define-fun last5 ((a us_t2)) Int (to_rep1 (last4 (rt2 a))))
 
-(define-fun length2 ((a us_t2)) Int (ite (<= (first6 a) (last6 a))
-                                    (+ (- (last6 a) (first6 a)) 1) 0))
+(define-fun length2 ((a us_t2)) Int (ite (<= (first5 a) (last5 a))
+                                    (+ (- (last5 a) (first5 a)) 1) 0))
 
 (declare-fun value__size2 () Int)
 
@@ -971,9 +962,9 @@
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment2 a))))
 
 (define-fun bool_eq12 ((x us_t2)
-  (y us_t2)) Bool (bool_eq3 (elts2 x) (to_rep1 (first5 (rt2 x)))
-                  (to_rep1 (last5 (rt2 x))) (elts2 y)
-                  (to_rep1 (first5 (rt2 y))) (to_rep1 (last5 (rt2 y)))))
+  (y us_t2)) Bool (bool_eq3 (elts2 x) (to_rep1 (first4 (rt2 x)))
+                  (to_rep1 (last4 (rt2 x))) (elts2 y)
+                  (to_rep1 (first4 (rt2 y))) (to_rep1 (last4 (rt2 y)))))
 
 (declare-fun user_eq10 (us_t2 us_t2) Bool)
 
@@ -984,17 +975,17 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
-(declare-fun temp___556 (Int Int Int) us_t2)
+(declare-fun temp___542 (Int Int Int) us_t2)
 
 ;; def_axiom
   (assert
-  (forall ((temp___558 Int) (temp___559 Int) (temp___560 Int))
-  (let ((temp___557 (temp___556 temp___558 temp___559 temp___560)))
+  (forall ((temp___544 Int) (temp___545 Int) (temp___546 Int))
+  (let ((temp___543 (temp___542 temp___544 temp___545 temp___546)))
   (and
-  (=> (dynamic_property 1 2147483647 temp___559 temp___560)
-  (and (= (first6 temp___557) temp___559) (= (last6 temp___557) temp___560)))
-  (forall ((temp___561 Int))
-  (= (select (to_array2 temp___557) temp___561) (of_rep temp___558)))))))
+  (=> (dynamic_property 1 2147483647 temp___545 temp___546)
+  (and (= (first5 temp___543) temp___545) (= (last5 temp___543) temp___546)))
+  (forall ((temp___547 Int))
+  (= (select (to_array2 temp___543) temp___547) (of_rep temp___544)))))))
 
 (define-fun dynamic_invariant4 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -1028,7 +1019,7 @@
   (temp___is_init_163 Bool) (temp___skip_constant_164 Bool)
   (temp___do_toplevel_165 Bool)) Bool true)
 
-(declare-fun last7 () Int)
+(declare-fun last6 () Int)
 
 (declare-fun o () Int)
 
@@ -1057,7 +1048,7 @@
   (to_rep1 value__last)))
 
 ;; H
-  (assert (=> (<= (- 1) 65535) (in_range5 last7)))
+  (assert (=> (<= (- 1) 65535) (in_range5 last6)))
 
 ;; H
   (assert (= (mod1 position 4) 0))
@@ -1106,9 +1097,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o2 (length_with_padding o1)) (length_with_padding__function_guard
-  o2 o1))
+  (and (= o2 (length_with_padding o1))
   (and (in_range6 o2)
   (= o2 (+ o1 (ite (= (mod1 o1 4) 0) 0 (- 4 (mod1 o1 4))))))))
 

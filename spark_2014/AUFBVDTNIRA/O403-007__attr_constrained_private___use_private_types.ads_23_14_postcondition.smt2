@@ -324,12 +324,11 @@
 ;; d_zero__2__def_axiom
   (assert
   (forall ((s us_rep1))
-  (! (=> (d_zero__2__function_guard (d_zero__2 s) s)
-     (= (= (d_zero__2 s) true)
+  (! (= (= (d_zero__2 s) true)
      (= (to_rep
         (rec__private_types__simple__d
         (us_split_discrs1
-        (rec__use_private_types__p_holder__content (us_split_fields3 s))))) 0))) :pattern (
+        (rec__use_private_types__p_holder__content (us_split_fields3 s))))) 0)) :pattern (
   (d_zero__2 s)) )))
 
 (define-fun dynamic_invariant1 ((temp___expr_33 Int) (temp___is_init_30 Bool)
@@ -421,18 +420,6 @@
   (= s__split_fields9 (mk___split_fields1
                       (mk___rep (mk___split_discrs s__split_fields3)
                       (mk___split_fields s__split_fields4) s__split_fields5))))
-
-;; H
-  (assert (d_zero__2__function_guard
-  (d_zero__2
-  (mk___rep1
-  (mk___split_fields1
-  (mk___rep (mk___split_discrs s__split_fields6)
-  (mk___split_fields s__split_fields7) s__split_fields8))))
-  (mk___rep1
-  (mk___split_fields1
-  (mk___rep (mk___split_discrs s__split_fields6)
-  (mk___split_fields s__split_fields7) s__split_fields8)))))
 
 (assert
 ;; WP_parameter_def

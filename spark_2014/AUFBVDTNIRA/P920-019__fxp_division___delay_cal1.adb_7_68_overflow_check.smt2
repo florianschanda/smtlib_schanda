@@ -311,16 +311,13 @@
 
 ;; zero__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (zero us_void_param)))
-     (=> (zero__function_guard result us_void_param) (dynamic_invariant
-     result true false true))) :pattern ((zero us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant (zero us_void_param)
+  true false true) :pattern ((zero us_void_param)) )))
 
 ;; zero__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (zero__function_guard (zero us_void_param) us_void_param)
-     (= (zero us_void_param) 0)) :pattern ((zero us_void_param)) )))
+  (! (= (zero us_void_param) 0) :pattern ((zero us_void_param)) )))
 
 (declare-fun up () us_rep)
 
@@ -328,8 +325,7 @@
 
 ;; up__def_axiom
   (assert
-  (and (zero__function_guard (zero Tuple0) Tuple0)
-  (= up (osubtract now (of_fixed (fxp_div_int 1000000000 (zero Tuple0)))))))
+  (= up (osubtract now (of_fixed (fxp_div_int 1000000000 (zero Tuple0))))))
 
 (declare-fun delay_cal1__now__assume () us_rep)
 
@@ -341,9 +337,7 @@
   (assert (= delay_cal1__now__assume now))
 
 ;; H
-  (assert
-  (and (and (= o (zero Tuple0)) (zero__function_guard o Tuple0))
-  (and (in_range1 o) (= o 0))))
+  (assert (and (= o (zero Tuple0)) (and (in_range1 o) (= o 0))))
 
 ;; H
   (assert (= o1 (fxp_div_int 1000000000 o)))

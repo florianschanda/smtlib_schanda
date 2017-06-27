@@ -1201,15 +1201,15 @@
 
 (declare-fun use_ordered_sets__move_3__cu__assume () count_type)
 
-(declare-fun temp___804 () count_type)
+(declare-fun temp___771 () count_type)
 
-(declare-fun temp___8041 () us_main_type)
+(declare-fun temp___7711 () us_main_type)
 
-(declare-fun temp___803 () count_type)
+(declare-fun temp___770 () count_type)
 
 (declare-fun o () Int)
 
-(declare-fun temp___802 () count_type)
+(declare-fun temp___769 () count_type)
 
 (declare-fun o1 () Bool)
 
@@ -1275,8 +1275,8 @@
 (define-fun cu__split_fields11 () us_split_fields2 (mk___split_fields1
                                                    cu__split_fields1))
 
-(define-fun temp___8021 () us_rep1 (mk___rep1
-                                   (mk___split_fields1 temp___802)))
+(define-fun temp___7691 () us_rep1 (mk___rep1
+                                   (mk___split_fields1 temp___769)))
 
 (define-fun use_ordered_sets__move_3__cu__assume1 () us_rep1 (mk___rep1
                                                              (mk___split_fields1
@@ -1338,11 +1338,11 @@
 ;; H
   (assert
   (=> (= result1 true)
-  (and (= (mk___split_discrs temp___804) s2__split_discrs)
-  (= temp___8041 s2__split_fields))))
+  (and (= (mk___split_discrs temp___771) s2__split_discrs)
+  (= temp___7711 s2__split_fields))))
 
 ;; H
-  (assert (=> (= result1 true) (= temp___803 cu__split_fields1)))
+  (assert (=> (= result1 true) (= temp___770 cu__split_fields1)))
 
 ;; H
   (assert
@@ -1458,7 +1458,7 @@
   (assert
   (=> (= result1 true)
   (and
-  (= temp___8021 (next
+  (= temp___7691 (next
                  (mk___rep s1__split_discrs
                  (mk___split_fields s1__split_fields))
                  (mk___rep1 cu__split_fields10)))
@@ -1470,16 +1470,16 @@
                                           (mk___rep s1__split_discrs
                                           (mk___split_fields
                                           s1__split_fields)))) true) true)
-  (= (bool_eq3 temp___8021 no_element) true)
+  (= (bool_eq3 temp___7691 no_element) true)
   (and
   (= (has_key
      (positions
      (mk___rep s1__split_discrs (mk___split_fields s1__split_fields)))
-     temp___8021) true)
+     temp___7691) true)
   (= (get1
      (positions
      (mk___rep s1__split_discrs (mk___split_fields s1__split_fields)))
-     temp___8021) (+ (get1
+     temp___7691) (+ (get1
                      (positions
                      (mk___rep s1__split_discrs
                      (mk___split_fields s1__split_fields)))
@@ -1492,7 +1492,7 @@
 
 ;; H
   (assert
-  (=> (= result1 true) (= cu__split_fields3 (mk___split_fields1 temp___802))))
+  (=> (= result1 true) (= cu__split_fields3 (mk___split_fields1 temp___769))))
 
 ;; H
   (assert

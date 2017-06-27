@@ -1133,8 +1133,7 @@
   (= z2__attr__constrained true)))
 
 ;; H
-  (assert
-  (and (= temp___220 (init Tuple0)) (init__function_guard temp___220 Tuple0)))
+  (assert (= temp___220 (init Tuple0)))
 
 ;; H
   (assert
@@ -1165,7 +1164,7 @@
   (assert (= y2__split_discrs1 (us_split_discrs1 temp___222)))
 
 ;; H
-  (assert (and (= o13 (init Tuple0)) (init__function_guard o13 Tuple0)))
+  (assert (= o13 (init Tuple0)))
 
 ;; H
   (assert (= o14 o13))
@@ -1185,8 +1184,7 @@
   (assert (= z2__split_discrs (us_split_discrs1 temp___224)))
 
 ;; H
-  (assert
-  (and (= temp___226 (init Tuple0)) (init__function_guard temp___226 Tuple0)))
+  (assert (= temp___226 (init Tuple0)))
 
 ;; H
   (assert
@@ -1243,7 +1241,7 @@
   (assert (= y1__split_discrs2 (us_split_discrs1 temp___231)))
 
 ;; H
-  (assert (and (= o15 (init Tuple0)) (init__function_guard o15 Tuple0)))
+  (assert (= o15 (init Tuple0)))
 
 (assert
 ;; WP_parameter_def

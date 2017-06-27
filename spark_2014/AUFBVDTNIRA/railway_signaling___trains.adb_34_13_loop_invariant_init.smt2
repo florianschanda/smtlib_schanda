@@ -527,20 +527,13 @@
   (assert
   (forall ((position us_rep))
   (forall ((track Int))
-  (! (=> (is_previous_track__function_guard
-     (is_previous_track position track) position track)
-     (and
-     (forall ((id Int)) (get_previous_track__function_guard
-     (get_previous_track position id) position id))
-     (and
-     (forall ((id Int)) (get_other_previous_track__function_guard
-     (get_other_previous_track position id) position id))
-     (= (= (is_previous_track position track) true)
+  (! (= (= (is_previous_track position track) true)
      (exists ((id Int))
      (and (and (<= 1 id) (<= id 3))
      (or (= track (get_previous_track position id))
-     (= track (get_other_previous_track position id))))))))) :pattern (
-  (is_previous_track position track)) ))))
+     (= track (get_other_previous_track position id)))))) :pattern ((is_previous_track
+                                                                    position
+                                                                    track)) ))))
 
 (declare-fun track () Int)
 
@@ -591,8 +584,6 @@
   (forall ((x Int))
   (! (=> (in_range5 x) (= (to_rep3 (of_rep3 x)) x)) :pattern ((to_rep3
                                                               (of_rep3 x))) )))
-
-(declare-fun last () Int)
 
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -1344,20 +1335,16 @@
   (assert
   (forall ((position us_rep))
   (forall ((id Int))
-  (! (=> (dynamic_invariant6 id true true true)
-     (let ((result (get_previous_track position id)))
-     (=> (get_previous_track__function_guard result position id)
-     (dynamic_invariant5 result true false true)))) :pattern ((get_previous_track
-                                                              position id)) ))))
+  (! (=> (dynamic_invariant6 id true true true) (dynamic_invariant5
+     (get_previous_track position id) true false true)) :pattern ((get_previous_track
+                                                                  position
+                                                                  id)) ))))
 
 ;; get_previous_track__def_axiom
   (assert
   (forall ((position us_rep))
   (forall ((id Int))
-  (! (=>
-     (and (dynamic_invariant6 id true true true)
-     (get_previous_track__function_guard (get_previous_track position id)
-     position id))
+  (! (=> (dynamic_invariant6 id true true true)
      (= (get_previous_track position id) (to_rep6
                                          (let ((temp___261 (select previous_tracks 
                                          (to_rep5
@@ -1374,20 +1361,15 @@
   (assert
   (forall ((position us_rep))
   (forall ((id Int))
-  (! (=> (dynamic_invariant6 id true true true)
-     (let ((result (get_other_previous_track position id)))
-     (=> (get_other_previous_track__function_guard result position id)
-     (dynamic_invariant5 result true false true)))) :pattern ((get_other_previous_track
-                                                              position id)) ))))
+  (! (=> (dynamic_invariant6 id true true true) (dynamic_invariant5
+     (get_other_previous_track position id) true false true)) :pattern (
+  (get_other_previous_track position id)) ))))
 
 ;; get_other_previous_track__def_axiom
   (assert
   (forall ((position us_rep))
   (forall ((id Int))
-  (! (=>
-     (and (dynamic_invariant6 id true true true)
-     (get_other_previous_track__function_guard
-     (get_other_previous_track position id) position id))
+  (! (=> (dynamic_invariant6 id true true true)
      (= (get_other_previous_track position id) (ite (= (to_rep6
                                                        (let ((temp___265 (select 
                                                        previous_tracks 
@@ -1461,20 +1443,7 @@
 
 ;; H
   (assert
-  (forall ((id Int)) (get_previous_track__function_guard
-  (get_previous_track (select trains train1) id) (select trains train1) id)))
-
-;; H
-  (assert
-  (forall ((id Int)) (get_other_previous_track__function_guard
-  (get_other_previous_track (select trains train1) id) (select trains 
-  train1) id)))
-
-;; H
-  (assert
-  (and
   (and (= result1 (is_previous_track (select trains train1) track))
-  (is_previous_track__function_guard result1 (select trains train1) track))
   (= (= result1 true)
   (exists ((id Int))
   (and (and (<= 1 id) (<= id 3))
@@ -1491,10 +1460,6 @@
 
 ;; H
   (assert (<= t train1))
-
-;; H
-  (assert (is_previous_track__function_guard
-  (is_previous_track (select trains t) track) (select trains t) track))
 
 (assert
 ;; WP_parameter_def

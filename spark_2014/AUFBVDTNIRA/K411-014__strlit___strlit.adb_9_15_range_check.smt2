@@ -330,48 +330,6 @@
 (define-fun string__ref___projection ((a string__ref)) us_t (string__content
                                                             a))
 
-(declare-sort tfiveP1 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq4 (tfiveP1 tfiveP1) Bool)
-
-(declare-fun dummy4 () tfiveP1)
-
-(declare-datatypes ()
-((tfiveP1__ref (mk_tfiveP1__ref (tfiveP1__content tfiveP1)))))
-(define-fun tfiveP1__ref___projection ((a tfiveP1__ref)) tfiveP1 (tfiveP1__content
-                                                                 a))
-
-(declare-sort tTxSP1 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq5 (tTxSP1 tTxSP1) Bool)
-
-(declare-fun dummy5 () tTxSP1)
-
-(declare-datatypes ()
-((tTxSP1__ref (mk_tTxSP1__ref (tTxSP1__content tTxSP1)))))
-(define-fun tTxSP1__ref___projection ((a tTxSP1__ref)) tTxSP1 (tTxSP1__content
-                                                              a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
 (declare-fun y__first () integer)
@@ -518,11 +476,7 @@
 
 (declare-fun f () (Array Int character))
 
-(declare-fun o () (Array Int character))
-
-(declare-fun o1 () (Array Int character))
-
-(declare-fun o2 () Int)
+(declare-fun o () Int)
 
 (declare-fun result () (Array Int character))
 
@@ -541,13 +495,10 @@
 (declare-fun f1 () (Array Int character))
 
 ;; H
-  (assert (= o (temp___String_Literal_150 Tuple0)))
-
-;; H
   (assert (= (mk_map__ref result) (mk_map__ref x)))
 
 ;; H
-  (assert (= x1 o))
+  (assert (= x1 (temp___String_Literal_150 Tuple0)))
 
 ;; H
   (assert (= (mk_map__ref result1) (mk_map__ref y)))
@@ -582,24 +533,21 @@
   (to_rep1 z__last)))
 
 ;; H
-  (assert (= o1 (temp___String_Literal_155 Tuple0)))
-
-;; H
   (assert (= (mk_map__ref result3) (mk_map__ref f)))
 
 ;; H
-  (assert (= f1 o1))
+  (assert (= f1 (temp___String_Literal_155 Tuple0)))
 
 ;; H
   (assert
   (=> (<= (to_rep1 z__first) (to_rep1 z__last))
-  (= o2 (+ (- (to_rep1 z__last) (to_rep1 z__first)) 1))))
+  (= o (+ (- (to_rep1 z__last) (to_rep1 z__first)) 1))))
 
 ;; H
-  (assert (=> (not (<= (to_rep1 z__first) (to_rep1 z__last))) (= o2 0)))
+  (assert (=> (not (<= (to_rep1 z__first) (to_rep1 z__last))) (= o 0)))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (in_range o2)))
+  (not (in_range o)))
 (check-sat)

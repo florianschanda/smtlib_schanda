@@ -63,9 +63,13 @@
                                       (<= 0 10000)) (in_range
                                       temp___expr_148)))
 
-(declare-sort valid_resource 0)
+(declare-fun no_resource () Int)
 
-(define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 10000)))
+(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+
+(declare-sort status 0)
+
+(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
 
 (define-fun bool_eq1 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -75,35 +79,9 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
 
-(declare-fun user_eq1 (valid_resource valid_resource) Bool)
+(declare-fun user_eq1 (status status) Bool)
 
-(declare-fun dummy1 () valid_resource)
-
-(declare-datatypes ()
-((valid_resource__ref
- (mk_valid_resource__ref (valid_resource__content valid_resource)))))
-(define-fun valid_resource__ref___projection ((a valid_resource__ref)) valid_resource 
-  (valid_resource__content a))
-
-(declare-fun no_resource () Int)
-
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
-
-(declare-sort status 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
-
-(define-fun bool_eq2 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
-
-(declare-fun user_eq2 (status status) Bool)
-
-(declare-fun dummy2 () status)
+(declare-fun dummy1 () status)
 
 (declare-datatypes ()
 ((status__ref (mk_status__ref (status__content status)))))
@@ -120,12 +98,12 @@
 
 ;; range_axiom
   (assert
-  (forall ((x status)) (! (in_range2 (to_rep x)) :pattern ((to_rep x)) )))
+  (forall ((x status)) (! (in_range1 (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range2 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+  (! (=> (in_range1 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
 
 (declare-datatypes ()
@@ -170,7 +148,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq3 ((a (Array Int status)) (a__first Int) (a__last Int)
+(define-fun bool_eq2 ((a (Array Int status)) (a__first Int) (a__last Int)
   (b (Array Int status)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -189,7 +167,7 @@
   (assert
   (forall ((a (Array Int status)) (b (Array Int status)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq3 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq2 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -207,7 +185,7 @@
   (forall ((a (Array Int status)) (b (Array Int status)))
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq3 a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq2 a a_first a_last b b_first b_last) true)) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -218,7 +196,7 @@
      (exists ((i Int) (j Int))
      (and (<= i a_last)
      (and (< j b_last)
-     (and (= (bool_eq3 a a_first i b b_first j) true)
+     (and (= (bool_eq2 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
      (< (to_rep (select a (+ i 1))) (to_rep (select b (+ j 1))))))))))) :pattern (
@@ -232,7 +210,7 @@
      (exists ((i Int) (j Int))
      (and (<= i b_last)
      (and (< j a_last)
-     (and (= (bool_eq3 a a_first j b b_first i) true)
+     (and (= (bool_eq2 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
      (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
@@ -250,61 +228,31 @@
 ;; all_available__def_axiom
   (assert
   (forall ((simple_allocator__data (Array Int status)))
-  (! (=> (all_available__function_guard
-     (all_available simple_allocator__data) simple_allocator__data)
-     (= (= (all_available simple_allocator__data) true)
+  (! (= (= (all_available simple_allocator__data) true)
      (forall ((r Int))
      (=> (and (<= 1 r) (<= r 10000))
-     (= (to_rep (select simple_allocator__data r)) 0))))) :pattern ((all_available
-                                                                    simple_allocator__data)) )))
-
-(declare-sort t3b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 10000)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq3 (t3b t3b) Bool)
-
-(declare-fun dummy3 () t3b)
-
-(declare-datatypes () ((t3b__ref (mk_t3b__ref (t3b__content t3b)))))
-(define-fun t3b__ref___projection ((a t3b__ref)) t3b (t3b__content a))
+     (= (to_rep (select simple_allocator__data r)) 0)))) :pattern ((all_available
+                                                                   simple_allocator__data)) )))
 
 (declare-fun simple_allocator__data__aggregate_def (Int) (Array Int status))
 
 ;; def_axiom
   (assert
-  (forall ((temp___244 Int))
-  (forall ((temp___245 Int))
-  (= (select (simple_allocator__data__aggregate_def temp___244) temp___245) 
-  (of_rep temp___244)))))
+  (forall ((temp___220 Int))
+  (forall ((temp___221 Int))
+  (= (select (simple_allocator__data__aggregate_def temp___220) temp___221) 
+  (of_rep temp___220)))))
 
-(define-fun dynamic_invariant1 ((temp___expr_230 Int)
-  (temp___is_init_227 Bool) (temp___skip_constant_228 Bool)
-  (temp___do_toplevel_229 Bool)) Bool (=>
-                                      (or (= temp___is_init_227 true)
-                                      (<= 0 1)) (in_range2 temp___expr_230)))
-
-(define-fun dynamic_invariant2 ((temp___expr_154 Int)
-  (temp___is_init_151 Bool) (temp___skip_constant_152 Bool)
-  (temp___do_toplevel_153 Bool)) Bool (=>
-                                      (or (= temp___is_init_151 true)
-                                      (<= 1 10000)) (in_range1
-                                      temp___expr_154)))
+(define-fun dynamic_invariant1 ((temp___expr_207 Int)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)) Bool (=>
+                                      (or (= temp___is_init_204 true)
+                                      (<= 0 1)) (in_range1 temp___expr_207)))
 
 ;; no_resource__def_axiom
   (assert (= no_resource 0))
 
 (declare-fun data () (Array Int status))
-
-(declare-fun o () (Array Int status))
 
 (declare-fun result () (Array Int status))
 
@@ -316,25 +264,17 @@
   (assert (in_range no_resource))
 
 ;; H
-  (assert (= o (simple_allocator__data__aggregate_def 0)))
-
-;; H
   (assert (= result data))
 
 ;; H
-  (assert (= data1 o))
+  (assert (= data1 (simple_allocator__data__aggregate_def 0)))
 
 ;; H
   (assert
-  (and
-  (and (= result1 (all_available data1)) (all_available__function_guard
-  result1 data1))
+  (and (= result1 (all_available data1))
   (= (= result1 true)
   (forall ((r Int))
   (=> (and (<= 1 r) (<= r 10000)) (= (to_rep (select data1 r)) 0))))))
-
-;; H
-  (assert (all_available__function_guard (all_available data1) data1))
 
 (assert
 ;; WP_parameter_def

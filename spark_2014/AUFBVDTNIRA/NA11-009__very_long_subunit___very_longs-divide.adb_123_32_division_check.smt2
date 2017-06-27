@@ -485,8 +485,6 @@
   (! (=> (in_range1 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
                                                               (of_rep2 x))) )))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -511,7 +509,7 @@
 
 (declare-fun first (t) tdigit_count_typeB)
 
-(declare-fun last1 (t) tdigit_count_typeB)
+(declare-fun last (t) tdigit_count_typeB)
 
 (declare-fun mk (Int Int) t)
 
@@ -520,7 +518,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep2 (first (mk f l))) f) (= (to_rep2 (last1 (mk f l))) l)))) :pattern (
+     (and (= (to_rep2 (first (mk f l))) f) (= (to_rep2 (last (mk f l))) l)))) :pattern (
   (mk f l)) )))
 
 (define-fun dynamic_property1 ((range_first Int) (range_last Int) (low Int)
@@ -538,10 +536,10 @@
 
 (define-fun first1 ((a us_t)) Int (to_rep2 (first (rt a))))
 
-(define-fun last2 ((a us_t)) Int (to_rep2 (last1 (rt a))))
+(define-fun last1 ((a us_t)) Int (to_rep2 (last (rt a))))
 
-(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last2 a))
-                                  (+ (- (last2 a) (first1 a)) 1) 0))
+(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last1 a))
+                                  (+ (- (last1 a) (first1 a)) 1) 0))
 
 (declare-fun value__size () Int)
 
@@ -576,8 +574,8 @@
 
 (define-fun bool_eq5 ((x us_t)
   (y us_t)) Bool (bool_eq3 (elts x) (to_rep2 (first (rt x)))
-                 (to_rep2 (last1 (rt x))) (elts y) (to_rep2 (first (rt y)))
-                 (to_rep2 (last1 (rt y)))))
+                 (to_rep2 (last (rt x))) (elts y) (to_rep2 (first (rt y)))
+                 (to_rep2 (last (rt y)))))
 
 (declare-fun user_eq4 (us_t us_t) Bool)
 
@@ -705,14 +703,14 @@
                                       (first1
                                       (rec__very_longs__very_long__long_digits
                                       (us_split_fields1 temp___expr_221)))
-                                      (last2
+                                      (last1
                                       (rec__very_longs__very_long__long_digits
                                       (us_split_fields1 temp___expr_221))))
                                       (and
                                       (= (first1
                                          (rec__very_longs__very_long__long_digits
                                          (us_split_fields1 temp___expr_221))) 1)
-                                      (= (last2
+                                      (= (last1
                                          (rec__very_longs__very_long__long_digits
                                          (us_split_fields1 temp___expr_221))) 
                                       (to_rep temp___222))))))
@@ -748,11 +746,11 @@
 (define-fun double_octet__ref___projection ((a double_octet__ref)) double_octet 
   (double_octet__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_313 (_ BitVec 16))
-  (temp___is_init_310 Bool) (temp___skip_constant_311 Bool)
-  (temp___do_toplevel_312 Bool)) Bool true)
+(define-fun dynamic_invariant2 ((temp___expr_312 (_ BitVec 16))
+  (temp___is_init_309 Bool) (temp___skip_constant_310 Bool)
+  (temp___do_toplevel_311 Bool)) Bool true)
 
-(declare-fun last3 () Int)
+(declare-fun last2 () Int)
 
 (define-fun dynamic_property2 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -776,21 +774,19 @@
 (define-fun divisor_digits_count_type__ref___projection ((a divisor_digits_count_type__ref)) tdigit_count_typeB 
   (divisor_digits_count_type__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_691 Int)
-  (temp___is_init_688 Bool) (temp___skip_constant_689 Bool)
-  (temp___do_toplevel_690 Bool)) Bool (=>
-                                      (or (= temp___is_init_688 true)
-                                      (<= 1 last3)) (dynamic_property2 1
-                                      last3 temp___expr_691)))
+(define-fun dynamic_invariant3 ((temp___expr_690 Int)
+  (temp___is_init_687 Bool) (temp___skip_constant_688 Bool)
+  (temp___do_toplevel_689 Bool)) Bool (=>
+                                      (or (= temp___is_init_687 true)
+                                      (<= 1 last2)) (dynamic_property2 1
+                                      last2 temp___expr_690)))
 
 ;; last__def_axiom
   (assert
-  (= last3 (to_rep
+  (= last2 (to_rep
            (rec__very_longs__very_long__length (us_split_discrs1 divisor)))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
-
-(declare-fun last4 () Int)
 
 (define-fun dynamic_property3 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -816,7 +812,7 @@
 
 (declare-fun first2 (t1) tdigit_count_typeB)
 
-(declare-fun last5 (t1) tdigit_count_typeB)
+(declare-fun last3 (t1) tdigit_count_typeB)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -826,7 +822,7 @@
   (! (=> (in_range1 f)
      (=> (in_range1 l)
      (and (= (to_rep2 (first2 (mk1 f l))) f)
-     (= (to_rep2 (last5 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (= (to_rep2 (last3 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property4 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -843,10 +839,10 @@
 
 (define-fun first3 ((a us_t1)) Int (to_rep2 (first2 (rt1 a))))
 
-(define-fun last6 ((a us_t1)) Int (to_rep2 (last5 (rt1 a))))
+(define-fun last4 ((a us_t1)) Int (to_rep2 (last3 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last6 a))
-                                    (+ (- (last6 a) (first3 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last4 a))
+                                    (+ (- (last4 a) (first3 a)) 1) 0))
 
 (declare-fun value__size2 () Int)
 
@@ -881,8 +877,8 @@
 
 (define-fun bool_eq10 ((x us_t1)
   (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep2 (first2 (rt1 x)))
-                  (to_rep2 (last5 (rt1 x))) (elts1 y)
-                  (to_rep2 (first2 (rt1 y))) (to_rep2 (last5 (rt1 y)))))
+                  (to_rep2 (last3 (rt1 x))) (elts1 y)
+                  (to_rep2 (first2 (rt1 y))) (to_rep2 (last3 (rt1 y)))))
 
 (declare-fun user_eq9 (us_t1 us_t1) Bool)
 
@@ -920,7 +916,7 @@
                                                            a))))
                                          (of_array (to_array1 temp___190)
                                          (first3 temp___190)
-                                         (last6 temp___190))))))
+                                         (last4 temp___190))))))
 
 (define-fun of_base ((r us_rep)) us_rep1 (mk___rep1 (us_split_discrs1 r)
                                          (mk___split_fields1
@@ -929,7 +925,7 @@
                                                            r))))
                                          (of_array1 (to_array temp___189)
                                          (first1 temp___189)
-                                         (last2 temp___189))))))
+                                         (last1 temp___189))))))
 
 (define-fun bool_eq11 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -1010,42 +1006,42 @@
 (declare-datatypes () ((tuS__ref (mk_tuS__ref (tuS__content us_rep1)))))
 (define-fun tuS__ref___projection ((a tuS__ref)) us_rep1 (tuS__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_709 us_rep1)
-  (temp___is_init_706 Bool) (temp___skip_constant_707 Bool)
-  (temp___do_toplevel_708 Bool)) Bool (and
+(define-fun dynamic_invariant4 ((temp___expr_708 us_rep1)
+  (temp___is_init_705 Bool) (temp___skip_constant_706 Bool)
+  (temp___do_toplevel_707 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_707 true))
+                                      (not (= temp___skip_constant_706 true))
                                       (in_range3
                                       (+ (to_rep
                                          (rec__very_longs__very_long__length
                                          (us_split_discrs1 dividend))) 1)
-                                      (to_base temp___expr_709)))
+                                      (to_base temp___expr_708)))
                                       (and (dynamic_property4 1
                                       (+ (to_rep
                                          (rec__very_longs__very_long__length
                                          (us_split_discrs1 dividend))) 1)
                                       (first3
                                       (rec__very_longs__very_long__long_digits1
-                                      (us_split_fields3 temp___expr_709)))
-                                      (last6
+                                      (us_split_fields3 temp___expr_708)))
+                                      (last4
                                       (rec__very_longs__very_long__long_digits1
-                                      (us_split_fields3 temp___expr_709))))
+                                      (us_split_fields3 temp___expr_708))))
                                       (and
                                       (= (first3
                                          (rec__very_longs__very_long__long_digits1
-                                         (us_split_fields3 temp___expr_709))) 1)
-                                      (= (last6
+                                         (us_split_fields3 temp___expr_708))) 1)
+                                      (= (last4
                                          (rec__very_longs__very_long__long_digits1
-                                         (us_split_fields3 temp___expr_709))) (+ 
+                                         (us_split_fields3 temp___expr_708))) (+ 
                                       (to_rep
                                       (rec__very_longs__very_long__length
                                       (us_split_discrs1 dividend))) 1))))))
 
-(define-fun default_initial_assumption ((temp___expr_712 us_rep1)
-  (temp___skip_top_level_713 Bool)) Bool (= (to_rep
+(define-fun default_initial_assumption ((temp___expr_711 us_rep1)
+  (temp___skip_top_level_712 Bool)) Bool (= (to_rep
                                             (rec__very_longs__very_long__length
                                             (us_split_discrs2
-                                            temp___expr_712))) (+ (to_rep
+                                            temp___expr_711))) (+ (to_rep
                                                                   (rec__very_longs__very_long__length
                                                                   (us_split_discrs1
                                                                   dividend))) 1)))
@@ -1053,8 +1049,6 @@
 (declare-fun u__split_discrs () us_split_discrs)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
-
-(declare-fun last7 () Int)
 
 (define-fun dynamic_property5 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -1080,7 +1074,7 @@
 
 (declare-fun first4 (t2) tdigit_count_typeB)
 
-(declare-fun last8 (t2) tdigit_count_typeB)
+(declare-fun last5 (t2) tdigit_count_typeB)
 
 (declare-fun mk2 (Int Int) t2)
 
@@ -1090,7 +1084,7 @@
   (! (=> (in_range1 f)
      (=> (in_range1 l)
      (and (= (to_rep2 (first4 (mk2 f l))) f)
-     (= (to_rep2 (last8 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
+     (= (to_rep2 (last5 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
 
 (define-fun dynamic_property6 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -1107,10 +1101,10 @@
 
 (define-fun first5 ((a us_t2)) Int (to_rep2 (first4 (rt2 a))))
 
-(define-fun last9 ((a us_t2)) Int (to_rep2 (last8 (rt2 a))))
+(define-fun last6 ((a us_t2)) Int (to_rep2 (last5 (rt2 a))))
 
-(define-fun length2 ((a us_t2)) Int (ite (<= (first5 a) (last9 a))
-                                    (+ (- (last9 a) (first5 a)) 1) 0))
+(define-fun length2 ((a us_t2)) Int (ite (<= (first5 a) (last6 a))
+                                    (+ (- (last6 a) (first5 a)) 1) 0))
 
 (declare-fun value__size4 () Int)
 
@@ -1145,8 +1139,8 @@
 
 (define-fun bool_eq13 ((x us_t2)
   (y us_t2)) Bool (bool_eq3 (elts2 x) (to_rep2 (first4 (rt2 x)))
-                  (to_rep2 (last8 (rt2 x))) (elts2 y)
-                  (to_rep2 (first4 (rt2 y))) (to_rep2 (last8 (rt2 y)))))
+                  (to_rep2 (last5 (rt2 x))) (elts2 y)
+                  (to_rep2 (first4 (rt2 y))) (to_rep2 (last5 (rt2 y)))))
 
 (declare-fun user_eq12 (us_t2 us_t2) Bool)
 
@@ -1184,7 +1178,7 @@
                                                             a))))
                                           (of_array (to_array2 temp___192)
                                           (first5 temp___192)
-                                          (last9 temp___192))))))
+                                          (last6 temp___192))))))
 
 (define-fun of_base1 ((r us_rep)) us_rep2 (mk___rep2 (us_split_discrs1 r)
                                           (mk___split_fields2
@@ -1193,7 +1187,7 @@
                                                             r))))
                                           (of_array2 (to_array temp___191)
                                           (first1 temp___191)
-                                          (last2 temp___191))))))
+                                          (last1 temp___191))))))
 
 (define-fun bool_eq14 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
@@ -1274,42 +1268,42 @@
 (declare-datatypes () ((tvS__ref (mk_tvS__ref (tvS__content us_rep2)))))
 (define-fun tvS__ref___projection ((a tvS__ref)) us_rep2 (tvS__content a))
 
-(define-fun dynamic_invariant5 ((temp___expr_721 us_rep2)
-  (temp___is_init_718 Bool) (temp___skip_constant_719 Bool)
-  (temp___do_toplevel_720 Bool)) Bool (and
+(define-fun dynamic_invariant5 ((temp___expr_720 us_rep2)
+  (temp___is_init_717 Bool) (temp___skip_constant_718 Bool)
+  (temp___do_toplevel_719 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_719 true))
+                                      (not (= temp___skip_constant_718 true))
                                       (in_range4
                                       (to_rep
                                       (rec__very_longs__very_long__length
                                       (us_split_discrs1 divisor)))
-                                      (to_base1 temp___expr_721)))
+                                      (to_base1 temp___expr_720)))
                                       (and (dynamic_property6 1
                                       (to_rep
                                       (rec__very_longs__very_long__length
                                       (us_split_discrs1 divisor)))
                                       (first5
                                       (rec__very_longs__very_long__long_digits2
-                                      (us_split_fields5 temp___expr_721)))
-                                      (last9
+                                      (us_split_fields5 temp___expr_720)))
+                                      (last6
                                       (rec__very_longs__very_long__long_digits2
-                                      (us_split_fields5 temp___expr_721))))
+                                      (us_split_fields5 temp___expr_720))))
                                       (and
                                       (= (first5
                                          (rec__very_longs__very_long__long_digits2
-                                         (us_split_fields5 temp___expr_721))) 1)
-                                      (= (last9
+                                         (us_split_fields5 temp___expr_720))) 1)
+                                      (= (last6
                                          (rec__very_longs__very_long__long_digits2
-                                         (us_split_fields5 temp___expr_721))) 
+                                         (us_split_fields5 temp___expr_720))) 
                                       (to_rep
                                       (rec__very_longs__very_long__length
                                       (us_split_discrs1 divisor))))))))
 
-(define-fun default_initial_assumption1 ((temp___expr_724 us_rep2)
-  (temp___skip_top_level_725 Bool)) Bool (= (to_rep
+(define-fun default_initial_assumption1 ((temp___expr_723 us_rep2)
+  (temp___skip_top_level_724 Bool)) Bool (= (to_rep
                                             (rec__very_longs__very_long__length
                                             (us_split_discrs3
-                                            temp___expr_724))) (to_rep
+                                            temp___expr_723))) (to_rep
                                                                (rec__very_longs__very_long__length
                                                                (us_split_discrs1
                                                                divisor)))))
@@ -1346,7 +1340,7 @@
 
 (declare-fun temporary_digit () (_ BitVec 16))
 
-(declare-fun temp___1247 () Int)
+(declare-fun temp___1245 () Int)
 
 (declare-fun o () Int)
 
@@ -1358,7 +1352,7 @@
 
 (declare-fun o4 () Int)
 
-(declare-fun temp___1249 () Int)
+(declare-fun temp___1247 () Int)
 
 (declare-fun o5 () Int)
 
@@ -1405,7 +1399,7 @@
   (assert (dynamic_invariant1 divisor true false true))
 
 ;; H
-  (assert (dynamic_property2 1 last3 n))
+  (assert (dynamic_property2 1 last2 n))
 
 ;; H
   (assert (dynamic_invariant4
@@ -1431,15 +1425,15 @@
   (assert (and (= o4 (+ j n)) (in_range1 (+ j n))))
 
 ;; H
-  (assert (= temp___1249 (- o4 1)))
+  (assert (= temp___1247 (- o4 1)))
 
 ;; H
   (assert
-  (and (<= (to_rep2 (first2 u__split_fields1)) temp___1249)
-  (<= temp___1249 (to_rep2 (last5 u__split_fields1)))))
+  (and (<= (to_rep2 (first2 u__split_fields1)) temp___1247)
+  (<= temp___1247 (to_rep2 (last3 u__split_fields1)))))
 
 ;; H
-  (assert (= o5 temp___1249))
+  (assert (= o5 temp___1247))
 
 ;; H
   (assert (= o6 (select u__split_fields o5)))
@@ -1451,15 +1445,15 @@
   (assert (= o8 ((_ zero_extend 8) o7)))
 
 ;; H
-  (assert (and (= temp___1247 (+ j n)) (in_range1 (+ j n))))
+  (assert (and (= temp___1245 (+ j n)) (in_range1 (+ j n))))
 
 ;; H
   (assert
-  (and (<= (to_rep2 (first2 u__split_fields1)) temp___1247)
-  (<= temp___1247 (to_rep2 (last5 u__split_fields1)))))
+  (and (<= (to_rep2 (first2 u__split_fields1)) temp___1245)
+  (<= temp___1245 (to_rep2 (last3 u__split_fields1)))))
 
 ;; H
-  (assert (= o temp___1247))
+  (assert (= o temp___1245))
 
 ;; H
   (assert (= o1 (select u__split_fields o)))
@@ -1485,7 +1479,7 @@
 ;; H
   (assert
   (and (<= (to_rep2 (first4 v__split_fields1)) n)
-  (<= n (to_rep2 (last8 v__split_fields1)))))
+  (<= n (to_rep2 (last5 v__split_fields1)))))
 
 ;; H
   (assert (= o11 n))
@@ -1511,7 +1505,7 @@
 ;; H
   (assert
   (and (<= (to_rep2 (first4 v__split_fields1)) n)
-  (<= n (to_rep2 (last8 v__split_fields1)))))
+  (<= n (to_rep2 (last5 v__split_fields1)))))
 
 ;; H
   (assert (= o16 n))

@@ -243,12 +243,12 @@
 (define-fun size_t__ref___projection ((a size_t__ref)) size_t (size_t__content
                                                               a))
 
-(define-fun dynamic_invariant ((temp___expr_137 Int)
-  (temp___is_init_134 Bool) (temp___skip_constant_135 Bool)
-  (temp___do_toplevel_136 Bool)) Bool (=>
-                                      (or (= temp___is_init_134 true)
+(define-fun dynamic_invariant ((temp___expr_136 Int)
+  (temp___is_init_133 Bool) (temp___skip_constant_134 Bool)
+  (temp___do_toplevel_135 Bool)) Bool (=>
+                                      (or (= temp___is_init_133 true)
                                       (<= 0 100)) (in_range3
-                                      temp___expr_137)))
+                                      temp___expr_136)))
 
 ;; valid__post_axiom
   (assert true)
@@ -257,14 +257,13 @@
   (assert
   (forall ((t (Array Int element_t)))
   (forall ((s Int))
-  (! (=> (valid__function_guard (valid t s) t s)
-     (= (= (valid t s) true)
+  (! (= (= (valid t s) true)
      (and
      (forall ((i Int))
      (=> (and (<= 1 i) (<= i s))
      (and (<= 0 (to_rep (select t i))) (<= (to_rep (select t i)) 2147483647))))
      (forall ((i Int))
-     (=> (and (<= (+ s 1) i) (<= i 100)) (= (to_rep (select t i)) (- 1))))))) :pattern (
+     (=> (and (<= (+ s 1) i) (<= i 100)) (= (to_rep (select t i)) (- 1)))))) :pattern (
   (valid t s)) ))))
 
 (declare-fun t () (Array Int element_t))
@@ -292,29 +291,29 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_143 Int)
-  (temp___is_init_140 Bool) (temp___skip_constant_141 Bool)
-  (temp___do_toplevel_142 Bool)) Bool (=>
-                                      (or (= temp___is_init_140 true)
+(define-fun dynamic_invariant1 ((temp___expr_142 Int)
+  (temp___is_init_139 Bool) (temp___skip_constant_140 Bool)
+  (temp___do_toplevel_141 Bool)) Bool (=>
+                                      (or (= temp___is_init_139 true)
                                       (<= (- 1) 2147483647)) (in_range1
-                                      temp___expr_143)))
+                                      temp___expr_142)))
 
-(define-fun dynamic_invariant2 ((temp___expr_149 Int)
-  (temp___is_init_146 Bool) (temp___skip_constant_147 Bool)
-  (temp___do_toplevel_148 Bool)) Bool (=>
-                                      (or (= temp___is_init_146 true)
+(define-fun dynamic_invariant2 ((temp___expr_148 Int)
+  (temp___is_init_145 Bool) (temp___skip_constant_146 Bool)
+  (temp___do_toplevel_147 Bool)) Bool (=>
+                                      (or (= temp___is_init_145 true)
                                       (<= 1 100)) (in_range2
-                                      temp___expr_149)))
+                                      temp___expr_148)))
 
 (declare-fun index () Int)
 
 (declare-fun stack__size__result () Int)
 
-(declare-fun temp___180 () Int)
+(declare-fun temp___171 () Int)
 
-(declare-fun temp___181 () Int)
+(declare-fun temp___172 () Int)
 
-(declare-fun temp___179 () Int)
+(declare-fun temp___170 () Int)
 
 (declare-fun stack__size__result1 () Int)
 
@@ -385,9 +384,6 @@
 (declare-fun result4 () Int)
 
 ;; H
-  (assert (forall ((s Int)) (valid__function_guard (valid t s) t s)))
-
-;; H
   (assert
   (exists ((s Int)) (and (and (<= 0 s) (<= s 100)) (= (valid t s) true))))
 
@@ -397,11 +393,11 @@
   (and
   (and (and (= stack__size__result3 stack__size__result11) (= index2 index7))
   (and (= stack__size__result12 stack__size__result3) (= index8 index2)))
-  (and (= temp___180 1)
-  (and (= temp___181 100)
-  (and (and (= result3 index12) (= index1 temp___180))
-  (and (and (<= temp___180 index1) (<= index1 temp___181))
-  (and (= temp___179 index1)
+  (and (= temp___171 1)
+  (and (= temp___172 100)
+  (and (and (= result3 index12) (= index1 temp___171))
+  (and (and (<= temp___171 index1) (<= index1 temp___172))
+  (and (= temp___170 index1)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i (- index2 1)))
@@ -417,7 +413,7 @@
   (ite (and (<= 1 index1) (<= index1 100))
   (and
   (and
-  (and (= temp___179 index1)
+  (and (= temp___170 index1)
   (and
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i (- index2 1)))
@@ -462,10 +458,6 @@
 
 ;; H
   (assert (= result4 stack__size__result13))
-
-;; H
-  (assert (valid__function_guard (valid t stack__size__result13) t
-  stack__size__result13))
 
 (assert
 ;; WP_parameter_def

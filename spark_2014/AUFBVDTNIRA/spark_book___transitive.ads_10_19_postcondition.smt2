@@ -95,15 +95,10 @@
      (and
      (and (dynamic_invariant a true true true) (dynamic_invariant b true true
      true)) (dynamic_invariant c true true true))
-     (let ((result (prop_transitive a b c)))
-     (and (property__function_guard (property a b) a b)
-     (and (property__function_guard (property b c) b c)
-     (and (property__function_guard (property a c) a c)
-     (=> (prop_transitive__function_guard result a b c)
      (=>
-     (and (and (= result true) (= (property a b) true))
-     (= (property b c) true)) (= (property a c) true)))))))) :pattern (
-  (prop_transitive a b c)) )))
+     (and (and (= (prop_transitive a b c) true) (= (property a b) true))
+     (= (property b c) true)) (= (property a c) true))) :pattern ((prop_transitive
+                                                                  a b c)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -134,15 +129,15 @@
 
 (declare-fun i () Int)
 
-(declare-fun temp___146 () Int)
+(declare-fun temp___136 () Int)
 
-(declare-fun temp___145 () Int)
+(declare-fun temp___135 () Int)
 
-(declare-fun temp___144 () Int)
+(declare-fun temp___134 () Int)
 
-(declare-fun temp___141 () Int)
+(declare-fun temp___132 () Int)
 
-(declare-fun temp___143 () Int)
+(declare-fun temp___133 () Int)
 
 (declare-fun x1 () Int)
 
@@ -205,23 +200,6 @@
 (define-fun x10 () int__ref (mk_int__ref x6))
 
 ;; H
-  (assert (property__function_guard (property x x) x x))
-
-;; H
-  (assert (property__function_guard (property x x2) x x2))
-
-;; H
-  (assert (property__function_guard (property temp___146 x2) temp___146 
-  x2))
-
-;; H
-  (assert (property__function_guard (property x2 x3) x2 x3))
-
-;; H
-  (assert (prop_transitive__function_guard
-  (prop_transitive temp___141 x_last3 x3) temp___141 x_last3 x3))
-
-;; H
   (assert (in_range1 x))
 
 ;; H
@@ -237,22 +215,22 @@
   (assert (= i1 1))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 10)) (= temp___146 x)))
+  (assert (=> (and (<= 1 i1) (<= i1 10)) (= temp___136 x)))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 10)) (= temp___145 x)))
+  (assert (=> (and (<= 1 i1) (<= i1 10)) (= temp___135 x)))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 10)) (= temp___144 i1)))
+  (assert (=> (and (<= 1 i1) (<= i1 10)) (= temp___134 i1)))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 10)) (= temp___141 x)))
+  (assert (=> (and (<= 1 i1) (<= i1 10)) (= temp___132 x)))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 10)) (= temp___143 x_last)))
+  (assert (=> (and (<= 1 i1) (<= i1 10)) (= temp___133 x_last)))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 10)) (= (property temp___146 x2) true)))
+  (assert (=> (and (<= 1 i1) (<= i1 10)) (= (property temp___136 x2) true)))
 
 ;; H
   (assert
@@ -276,7 +254,7 @@
 ;; H
   (assert
   (=> (and (<= 1 i1) (<= i1 10))
-  (= (prop_transitive temp___141 x_last3 x3) true)))
+  (= (prop_transitive temp___132 x_last3 x3) true)))
 
 ;; H
   (assert (=> (and (<= 1 i1) (<= i1 10)) (= i2 10)))
@@ -354,9 +332,6 @@
 
 ;; H
   (assert (= x9 x7))
-
-;; H
-  (assert (property__function_guard (property x x8) x x8))
 
 (assert
 ;; WP_parameter_def

@@ -190,15 +190,15 @@
 (define-fun modular__ref_4__projection ((a modular__ref)) modular (modular__content
                                                                   a))
 
-(define-fun dynamic_invariant ((temp___expr_417 (_ BitVec 16))
-  (temp___is_init_414 Bool) (temp___skip_constant_415 Bool)
-  (temp___do_toplevel_416 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_265 (_ BitVec 16))
+  (temp___is_init_262 Bool) (temp___skip_constant_263 Bool)
+  (temp___do_toplevel_264 Bool)) Bool true)
 
-(define-fun dynamic_invariant1 ((temp___expr_429 Int)
-  (temp___is_init_426 Bool) (temp___skip_constant_427 Bool)
-  (temp___do_toplevel_428 Bool)) Bool (=>
-                                      (or (= temp___is_init_426 true)
-                                      (<= 1 16)) (in_range1 temp___expr_429)))
+(define-fun dynamic_invariant1 ((temp___expr_277 Int)
+  (temp___is_init_274 Bool) (temp___skip_constant_275 Bool)
+  (temp___do_toplevel_276 Bool)) Bool (=>
+                                      (or (= temp___is_init_274 true)
+                                      (<= 1 16)) (in_range1 temp___expr_277)))
 
 (declare-fun shift_right ((_ BitVec 16) Int) (_ BitVec 16))
 
@@ -208,23 +208,16 @@
 ;; make_mask__post_axiom
   (assert
   (forall ((num_bits Int))
-  (! (=> (dynamic_invariant1 num_bits true true true)
-     (let ((result (make_mask num_bits)))
-     (=> (make_mask__function_guard result num_bits) (dynamic_invariant
-     result true false true)))) :pattern ((make_mask num_bits)) )))
+  (! (=> (dynamic_invariant1 num_bits true true true) (dynamic_invariant
+     (make_mask num_bits) true false true)) :pattern ((make_mask num_bits)) )))
 
 ;; make_mask__def_axiom
   (assert
   (forall ((num_bits Int))
-  (! (=>
-     (and (dynamic_invariant1 num_bits true true true)
-     (make_mask__function_guard (make_mask num_bits) num_bits))
-     (and (shift_right__function_guard
-     (shift_right ((_ int2bv 16) 65535) (- 16 num_bits))
-     ((_ int2bv 16) 65535) (- 16 num_bits))
+  (! (=> (dynamic_invariant1 num_bits true true true)
      (= (make_mask num_bits) (shift_right ((_ int2bv 16) 65535)
-                             (- 16 num_bits))))) :pattern ((make_mask
-                                                           num_bits)) )))
+                             (- 16 num_bits)))) :pattern ((make_mask
+                                                          num_bits)) )))
 
 (declare-fun lemma8 (tuple0) Bool)
 
@@ -237,11 +230,8 @@
 ;; lemma8__post_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (let ((result (lemma8 us_void_param)))
-     (and (lemma8__function_guard1 (lemma81 Tuple0) Tuple0)
-     (=> (lemma8__function_guard result us_void_param)
-     (=> (= result true) (= (lemma81 Tuple0) true))))) :pattern ((lemma8
-                                                                 us_void_param)) )))
+  (! (=> (= (lemma8 us_void_param) true) (= (lemma81 Tuple0) true)) :pattern (
+  (lemma8 us_void_param)) )))
 
 (declare-fun lemma2 (tuple0) Bool)
 
@@ -253,15 +243,12 @@
 ;; lemma2__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (lemma2__function_guard (lemma2 us_void_param) us_void_param)
-     (and
-     (forall ((size Int)) (make_mask__function_guard (make_mask size) size))
-     (= (= (lemma2 us_void_param) true)
+  (! (= (= (lemma2 us_void_param) true)
      (forall ((size Int))
      (=> (and (<= 1 size) (<= size 15))
      (= (make_mask size) (bvsub (ite (< size 65536)
                                 (bvshl ((_ int2bv 16) 1) ((_ int2bv 16) size))
-                                ((_ int2bv 16) 0)) ((_ int2bv 16) 1)))))))) :pattern (
+                                ((_ int2bv 16) 0)) ((_ int2bv 16) 1)))))) :pattern (
   (lemma2 us_void_param)) )))
 
 (declare-fun lemma2_goal (tuple0) Bool)
@@ -269,7 +256,7 @@
 (declare-fun lemma2_goal__function_guard (Bool tuple0) Bool)
 
 ;; lemma2_goal__post_axiom
-  (assert (lemma2__function_guard (lemma2 Tuple0) Tuple0))
+  (assert true)
 
 (declare-sort t560s 0)
 
@@ -614,20 +601,16 @@
   (forall ((amount Int))
   (! (=>
      (and (dynamic_invariant v true true true) (dynamic_invariant2 amount
-     true true true))
-     (let ((result (shift_right v amount)))
-     (=> (shift_right__function_guard result v amount) (dynamic_invariant
-     result true false true)))) :pattern ((shift_right v amount)) ))))
+     true true true)) (dynamic_invariant (shift_right v amount) true false
+     true)) :pattern ((shift_right v amount)) ))))
 
 ;; shift_right__def_axiom
   (assert
   (forall ((v (_ BitVec 16)))
   (forall ((amount Int))
   (! (=>
-     (and
      (and (dynamic_invariant v true true true) (dynamic_invariant2 amount
-     true true true)) (shift_right__function_guard (shift_right v amount) v
-     amount))
+     true true true))
      (= (shift_right v amount) (ite (and (<= 1 16) (<= 16 8))
                                ((_ zero_extend 8) (ite (< amount 8)
                                                   (bvlshr ((_ extract 7 0) v) ((_ int2bv 8) amount))
@@ -647,11 +630,7 @@
 ;; lemma8__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (lemma8__function_guard1 (lemma81 us_void_param) us_void_param)
-     (and
-     (forall ((val__ (_ BitVec 16)) (n Int)) (shift_right__function_guard
-     (shift_right val__ (- 16 n)) val__ (- 16 n)))
-     (= (= (lemma81 us_void_param) true)
+  (! (= (= (lemma81 us_void_param) true)
      (forall ((val__ (_ BitVec 16)))
      (=>
      (and (bvule ((_ int2bv 16) 0) val__)
@@ -660,12 +639,12 @@
      (=> (and (<= 1 n) (<= n 15))
      (bvult (shift_right val__ (- 16 n)) (ite (< n 65536)
                                          (bvshl ((_ int2bv 16) 1) ((_ int2bv 16) n))
-                                         ((_ int2bv 16) 0)))))))))) :pattern (
+                                         ((_ int2bv 16) 0)))))))) :pattern (
   (lemma81 us_void_param)) )))
 
 (declare-fun i () Int)
 
-(declare-fun temp___1153 () Int)
+(declare-fun temp___402 () Int)
 
 (declare-fun result () Int)
 
@@ -682,28 +661,10 @@
 (declare-fun i6 () Int)
 
 ;; H
-  (assert (lemma8__function_guard (lemma8 Tuple0) Tuple0))
-
-;; H
   (assert (= (lemma8 Tuple0) true))
 
 ;; H
-  (assert (make_mask__function_guard (make_mask 1) 1))
-
-;; H
   (assert (= (make_mask 1) ((_ int2bv 16) 1)))
-
-;; H
-  (assert (make_mask__function_guard (make_mask i1) i1))
-
-;; H
-  (assert (forall ((j Int)) (make_mask__function_guard (make_mask j) j)))
-
-;; H
-  (assert (make_mask__function_guard (make_mask i1) i1))
-
-;; H
-  (assert (forall ((j Int)) (make_mask__function_guard (make_mask j) j)))
 
 ;; H
   (assert (= (mk_int__ref result) (mk_int__ref i)))
@@ -712,7 +673,7 @@
   (assert (= i1 2))
 
 ;; H
-  (assert (=> (and (<= 2 i1) (<= i1 15)) (= temp___1153 i1)))
+  (assert (=> (and (<= 2 i1) (<= i1 15)) (= temp___402 i1)))
 
 ;; H
   (assert
@@ -764,9 +725,6 @@
 
 ;; H
   (assert (<= size 15))
-
-;; H
-  (assert (make_mask__function_guard (make_mask size) size))
 
 (assert
 ;; WP_parameter_def

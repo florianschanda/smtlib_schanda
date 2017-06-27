@@ -836,11 +836,9 @@
 
 ;; thesystemmaxfar__post_axiom
   (assert
-  (forall ((configdata__state us_private))
-  (! (let ((result (thesystemmaxfar configdata__state)))
-     (=> (thesystemmaxfar__function_guard result configdata__state)
-     (dynamic_invariant result true false true))) :pattern ((thesystemmaxfar
-                                                            configdata__state)) )))
+  (forall ((configdata__state us_private)) (! (dynamic_invariant
+  (thesystemmaxfar configdata__state) true false
+  true) :pattern ((thesystemmaxfar configdata__state)) )))
 
 (declare-fun valid_numberlogentries (us_private) Bool)
 
@@ -1071,12 +1069,12 @@
 (define-fun statust__ref_2__projection ((a statust__ref)) statust (statust__content
                                                                   a))
 
-(define-fun dynamic_invariant2 ((temp___expr_1767 Int)
-  (temp___is_init_1764 Bool) (temp___skip_constant_1765 Bool)
-  (temp___do_toplevel_1766 Bool)) Bool (=>
-                                       (or (= temp___is_init_1764 true)
+(define-fun dynamic_invariant2 ((temp___expr_1683 Int)
+  (temp___is_init_1680 Bool) (temp___skip_constant_1681 Bool)
+  (temp___do_toplevel_1682 Bool)) Bool (=>
+                                       (or (= temp___is_init_1680 true)
                                        (<= 0 7)) (in_range9
-                                       temp___expr_1767)))
+                                       temp___expr_1683)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -1148,12 +1146,12 @@
                                       (<= 0 4294967295)) (in_range6
                                       temp___expr_279)))
 
-(define-fun dynamic_invariant10 ((temp___expr_1085 Int)
-  (temp___is_init_1082 Bool) (temp___skip_constant_1083 Bool)
-  (temp___do_toplevel_1084 Bool)) Bool (=>
-                                       (or (= temp___is_init_1082 true)
+(define-fun dynamic_invariant10 ((temp___expr_1028 Int)
+  (temp___is_init_1025 Bool) (temp___skip_constant_1026 Bool)
+  (temp___do_toplevel_1027 Bool)) Bool (=>
+                                       (or (= temp___is_init_1025 true)
                                        (<= 0 2147483647)) (in_range8
-                                       temp___expr_1085)))
+                                       temp___expr_1028)))
 
 (declare-fun state () us_private)
 
@@ -1177,13 +1175,13 @@
 
 (declare-fun o () Bool)
 
-(declare-fun temp___1820 () templatelengtht)
+(declare-fun temp___1701 () templatelengtht)
 
-(declare-fun temp___18201 () fart)
+(declare-fun temp___17011 () fart)
 
-(declare-fun temp___18202 () (Array Int character))
+(declare-fun temp___17012 () (Array Int character))
 
-(declare-fun temp___18203 () (Array Int bytet))
+(declare-fun temp___17013 () (Array Int bytet))
 
 (declare-fun o1 () Int)
 
@@ -1227,10 +1225,6 @@
 
 (declare-fun achievedfar1 () Int)
 
-(define-fun temp___18204 () us_rep (mk___rep
-                                   (mk___split_fields temp___1820
-                                   temp___18201 temp___18202 temp___18203)))
-
 ;; H
   (assert (=> (<= 0 7) (in_range9 status)))
 
@@ -1244,8 +1238,7 @@
   (assert (=> (<= 0 2147483647) (in_range3 maxfar)))
 
 ;; H
-  (assert
-  (and (= o (ispresent state1)) (ispresent__function_guard o state1)))
+  (assert (= o (ispresent state1)))
 
 ;; H
   (assert (= result (ite (not (= o true)) true false)))
@@ -1255,8 +1248,9 @@
 
 ;; H
   (assert
-  (and (= temp___18204 (getiandatemplate state1))
-  (getiandatemplate__function_guard temp___18204 state1)))
+  (= (mk___rep
+     (mk___split_fields temp___1701 temp___17011 temp___17012 temp___17013)) 
+  (getiandatemplate state1)))
 
 ;; H
   (assert (= result1 thetemplate__split_fields))
@@ -1271,22 +1265,19 @@
   (assert (= result4 thetemplate__split_fields3))
 
 ;; H
-  (assert (= temp___1820 thetemplate__split_fields4))
+  (assert (= temp___1701 thetemplate__split_fields4))
 
 ;; H
-  (assert (= temp___18201 thetemplate__split_fields5))
+  (assert (= temp___17011 thetemplate__split_fields5))
 
 ;; H
-  (assert (= temp___18202 thetemplate__split_fields6))
+  (assert (= temp___17012 thetemplate__split_fields6))
 
 ;; H
-  (assert (= temp___18203 thetemplate__split_fields7))
+  (assert (= temp___17013 thetemplate__split_fields7))
 
 ;; H
-  (assert
-  (and
-  (and (= o1 (thesystemmaxfar state)) (thesystemmaxfar__function_guard 
-  o1 state)) (in_range3 o1)))
+  (assert (and (= o1 (thesystemmaxfar state)) (in_range3 o1)))
 
 ;; H
   (assert (= result5 maxfar))
@@ -1315,9 +1306,7 @@
   (assert (not (= matchresult1 0)))
 
 ;; H
-  (assert
-  (and (= o3 (achievedfardescription achievedfar1))
-  (achievedfardescription__function_guard o3 achievedfar1)))
+  (assert (= o3 (achievedfardescription achievedfar1)))
 
 ;; H
   (assert (= o3 o4))
@@ -1326,12 +1315,7 @@
   (assert (= (mk 1 150) o5))
 
 ;; H
-  (assert
-  (and (= o2 (extractuser state1)) (extractuser__function_guard o2 state1)))
-
-;; H
-  (assert (valid_numberlogentries__function_guard
-  (valid_numberlogentries state2) state2))
+  (assert (= o2 (extractuser state1)))
 
 (assert
 ;; WP_parameter_def

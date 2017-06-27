@@ -486,8 +486,6 @@
                                       (first1 temp___expr_164)
                                       (last1 temp___expr_164))))
 
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -510,7 +508,7 @@
 
 (declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -519,7 +517,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range f)
      (=> (in_range l)
-     (and (= (to_rep (first2 (mk1 f l))) f) (= (to_rep (last3 (mk1 f l))) l)))) :pattern (
+     (and (= (to_rep (first2 (mk1 f l))) f) (= (to_rep (last2 (mk1 f l))) l)))) :pattern (
   (mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
@@ -538,10 +536,10 @@
 
 (define-fun first3 ((a us_t1)) Int (to_rep (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last4 a))
-                                    (+ (- (last4 a) (first3 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size3 () Int)
 
@@ -576,8 +574,8 @@
 
 (define-fun bool_eq8 ((x us_t1)
   (y us_t1)) Bool (bool_eq3 (elts1 x) (to_rep (first2 (rt1 x)))
-                  (to_rep (last3 (rt1 x))) (elts1 y)
-                  (to_rep (first2 (rt1 y))) (to_rep (last3 (rt1 y)))))
+                  (to_rep (last2 (rt1 x))) (elts1 y)
+                  (to_rep (first2 (rt1 y))) (to_rep (last2 (rt1 y)))))
 
 (declare-fun user_eq8 (us_t1 us_t1) Bool)
 
@@ -590,15 +588,13 @@
   (assert
   (forall ((s us_rep))
   (! (let ((result (to__ s)))
-     (=> (to____function_guard result s)
      (and (and (= (first1 result) 1) (<= 0 (last1 result)))
-     (dynamic_invariant1 result true false true)))) :pattern ((to__ s)) )))
+     (dynamic_invariant1 result true false true))) :pattern ((to__ s)) )))
 
 ;; to____def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (to____function_guard (to__ s) s)
-     (= (to__ s) (let ((temp___177 (let ((temp___175 (to_rep1
+  (! (= (to__ s) (let ((temp___177 (let ((temp___175 (to_rep1
                                                      (rec__stack__stack__top
                                                      (us_split_fields1 s)))))
                                    (let ((temp___174 1))
@@ -607,7 +603,7 @@
                                    (of_array1 temp___176 temp___174
                                    temp___175))))))
                  (of_array (to_array1 temp___177) (first3 temp___177)
-                 (last4 temp___177))))) :pattern ((to__ s)) )))
+                 (last3 temp___177)))) :pattern ((to__ s)) )))
 
 (declare-fun is_full (us_rep) Bool)
 
@@ -619,10 +615,7 @@
 ;; is_full__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (is_full__function_guard (is_full s) s)
-     (and (to____function_guard (to__ s) s)
-     (= (= (is_full s) true) (<= 100 (last1 (to__ s)))))) :pattern ((is_full
-                                                                    s)) )))
+  (! (= (= (is_full s) true) (<= 100 (last1 (to__ s)))) :pattern ((is_full s)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -649,12 +642,12 @@
 (declare-datatypes () ((t12s__ref (mk_t12s__ref (t12s__content t12s)))))
 (define-fun t12s__ref___projection ((a t12s__ref)) t12s (t12s__content a))
 
-(declare-fun temp___205 (Int) (Array Int integer))
+(declare-fun temp___190 (Int) (Array Int integer))
 
 ;; def_axiom
   (assert
-  (forall ((temp___207 Int))
-  (= (select (temp___205 temp___207) 1) (of_rep temp___207))))
+  (forall ((temp___192 Int))
+  (= (select (temp___190 temp___192) 1) (of_rep temp___192))))
 
 (define-fun dynamic_invariant2 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -689,9 +682,9 @@
 
 (declare-fun o3 () (Array Int integer))
 
-(declare-fun temp___257 () r1)
+(declare-fun temp___234 () r1)
 
-(declare-fun temp___2571 () (Array Int integer))
+(declare-fun temp___2341 () (Array Int integer))
 
 (declare-fun o4 () integer)
 
@@ -703,9 +696,9 @@
 
 (declare-fun o8 () (Array Int integer))
 
-(declare-fun temp___261 () r1)
+(declare-fun temp___238 () r1)
 
-(declare-fun temp___2611 () (Array Int integer))
+(declare-fun temp___2381 () (Array Int integer))
 
 (declare-fun result () r1)
 
@@ -732,11 +725,6 @@
 (declare-fun s__split_fields9 () (Array Int integer))
 
 ;; H
-  (assert (is_full__function_guard
-  (is_full (mk___rep (mk___split_fields s__split_fields s__split_fields1)))
-  (mk___rep (mk___split_fields s__split_fields s__split_fields1))))
-
-;; H
   (assert (in_range x))
 
 ;; H
@@ -760,10 +748,10 @@
   (assert (= s__split_fields1 o3))
 
 ;; H
-  (assert (= temp___257 o2))
+  (assert (= temp___234 o2))
 
 ;; H
-  (assert (= temp___2571 o3))
+  (assert (= temp___2341 o3))
 
 ;; H
   (assert
@@ -773,10 +761,10 @@
                                                                  s__split_fields1))))
 
 ;; H
-  (assert (= temp___257 s__split_fields2))
+  (assert (= temp___234 s__split_fields2))
 
 ;; H
-  (assert (= temp___2571 s__split_fields3))
+  (assert (= temp___2341 s__split_fields3))
 
 ;; H
   (assert (= (to_rep o4) x))
@@ -798,10 +786,10 @@
   (assert (= o6 o8))
 
 ;; H
-  (assert (= temp___261 o7))
+  (assert (= temp___238 o7))
 
 ;; H
-  (assert (= temp___2611 o8))
+  (assert (= temp___2381 o8))
 
 ;; H
   (assert (= result2 s__split_fields2))
@@ -810,10 +798,10 @@
   (assert (= result3 s__split_fields3))
 
 ;; H
-  (assert (= temp___261 s__split_fields4))
+  (assert (= temp___238 s__split_fields4))
 
 ;; H
-  (assert (= temp___2611 s__split_fields5))
+  (assert (= temp___2381 s__split_fields5))
 
 ;; H
   (assert (= s__split_fields6 s__split_fields4))
@@ -827,76 +815,56 @@
                                                            s__split_fields4
                                                            s__split_fields5)))
 
-;; H
-  (assert (to____function_guard
-  (to__ (mk___rep (mk___split_fields s__split_fields6 s__split_fields7)))
-  (mk___rep (mk___split_fields s__split_fields6 s__split_fields7))))
-
-;; H
-  (assert (to____function_guard
-  (to__ (mk___rep (mk___split_fields s__split_fields s__split_fields1)))
-  (mk___rep (mk___split_fields s__split_fields s__split_fields1))))
-
-;; H
-  (assert (to____function_guard
-  (to__ (mk___rep (mk___split_fields s__split_fields s__split_fields1)))
-  (mk___rep (mk___split_fields s__split_fields s__split_fields1))))
-
-;; H
-  (assert (to____function_guard
-  (to__ (mk___rep (mk___split_fields s__split_fields s__split_fields1)))
-  (mk___rep (mk___split_fields s__split_fields s__split_fields1))))
-
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
   (not
-  (= (let ((temp___274 (to__
+  (= (let ((temp___247 (to__
                        (mk___rep
                        (mk___split_fields s__split_fields6 s__split_fields7)))))
-     (bool_eq3 (elts temp___274) (to_rep (first (rt temp___274)))
-     (to_rep (last (rt temp___274)))
-     (let ((temp___273 (temp___205 x)))
-     (let ((temp___272 (to__
+     (bool_eq3 (elts temp___247) (to_rep (first (rt temp___247)))
+     (to_rep (last (rt temp___247)))
+     (let ((temp___246 (temp___190 x)))
+     (let ((temp___245 (to__
                        (mk___rep
                        (mk___split_fields s__split_fields s__split_fields1)))))
-     (ite (= (length temp___272) 0) temp___273
-     (concat1 (elts temp___272) (to_rep (first (rt temp___272)))
-     (to_rep (last (rt temp___272))) temp___273 1 1))))
+     (ite (= (length temp___245) 0) temp___246
+     (concat1 (elts temp___245) (to_rep (first (rt temp___245)))
+     (to_rep (last (rt temp___245))) temp___246 1 1))))
      (to_rep
      (first
-     (let ((temp___272 (to__
+     (let ((temp___245 (to__
                        (mk___rep
                        (mk___split_fields s__split_fields s__split_fields1)))))
-     (ite (= (length temp___272) 0) (mk 1 1)
-     (mk (to_rep (first (rt temp___272)))
-     (- (+ (to_rep (first (rt temp___272))) (+ (ite (<= (to_rep
+     (ite (= (length temp___245) 0) (mk 1 1)
+     (mk (to_rep (first (rt temp___245)))
+     (- (+ (to_rep (first (rt temp___245))) (+ (ite (<= (to_rep
                                                         (first
-                                                        (rt temp___272))) 
+                                                        (rt temp___245))) 
                                                (to_rep
-                                               (last (rt temp___272))))
+                                               (last (rt temp___245))))
                                                (+ (- (to_rep
-                                                     (last (rt temp___272))) 
+                                                     (last (rt temp___245))) 
                                                (to_rep
-                                               (first (rt temp___272)))) 1)
+                                               (first (rt temp___245)))) 1)
                                                0) (ite (<= 1 1) (+ (- 1 1) 1)
                                                   0))) 1))))))
      (to_rep
      (last
-     (let ((temp___272 (to__
+     (let ((temp___245 (to__
                        (mk___rep
                        (mk___split_fields s__split_fields s__split_fields1)))))
-     (ite (= (length temp___272) 0) (mk 1 1)
-     (mk (to_rep (first (rt temp___272)))
-     (- (+ (to_rep (first (rt temp___272))) (+ (ite (<= (to_rep
+     (ite (= (length temp___245) 0) (mk 1 1)
+     (mk (to_rep (first (rt temp___245)))
+     (- (+ (to_rep (first (rt temp___245))) (+ (ite (<= (to_rep
                                                         (first
-                                                        (rt temp___272))) 
+                                                        (rt temp___245))) 
                                                (to_rep
-                                               (last (rt temp___272))))
+                                               (last (rt temp___245))))
                                                (+ (- (to_rep
-                                                     (last (rt temp___272))) 
+                                                     (last (rt temp___245))) 
                                                (to_rep
-                                               (first (rt temp___272)))) 1)
+                                               (first (rt temp___245)))) 1)
                                                0) (ite (<= 1 1) (+ (- 1 1) 1)
                                                   0))) 1)))))))) true)))
 (check-sat)

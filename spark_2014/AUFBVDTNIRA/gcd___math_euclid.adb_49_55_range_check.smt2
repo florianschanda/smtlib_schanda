@@ -157,8 +157,7 @@
 ;; divides__def_axiom
   (assert
   (forall ((a Int) (b Int))
-  (! (=> (divides__function_guard (divides a b) a b)
-     (= (= (divides a b) true) (= (mod2 b a) 0))) :pattern ((divides a b)) )))
+  (! (= (= (divides a b) true) (= (mod2 b a) 0)) :pattern ((divides a b)) )))
 
 (declare-fun a () Int)
 
@@ -211,20 +210,13 @@
   (assert (<= x1 2147483647))
 
 ;; H
-  (assert (divides__function_guard (divides x1 (mod2 a b)) x1 (mod2 a b)))
-
-;; H
   (assert
-  (and
-  (and (= result3 (divides x1 a)) (divides__function_guard result3 x1 a))
-  (= (= result3 true) (= (mod2 a x1) 0))))
+  (and (= result3 (divides x1 a)) (= (= result3 true) (= (mod2 a x1) 0))))
 
 ;; H
   (assert
   (=> (= result3 true)
-  (and
-  (and (= result2 (divides x1 b)) (divides__function_guard result2 x1 b))
-  (= (= result2 true) (= (mod2 b x1) 0)))))
+  (and (= result2 (divides x1 b)) (= (= result2 true) (= (mod2 b x1) 0)))))
 
 ;; H
   (assert (=> (not (= result3 true)) (= result2 false)))
@@ -232,8 +224,7 @@
 ;; H
   (assert
   (=> (= result2 true)
-  (and (and (= o (divides b a)) (divides__function_guard o b a))
-  (= (= o true) (= (mod2 a b) 0)))))
+  (and (= o (divides b a)) (= (= o true) (= (mod2 a b) 0)))))
 
 ;; H
   (assert
@@ -246,19 +237,13 @@
   (assert (=> (= result1 true) (= (divides x1 (mod2 a b)) true)))
 
 ;; H
-  (assert (divides__function_guard (divides x1 a) x1 a))
-
-;; H
   (assert
-  (and (and (= result5 (divides b a)) (divides__function_guard result5 b a))
-  (= (= result5 true) (= (mod2 a b) 0))))
+  (and (= result5 (divides b a)) (= (= result5 true) (= (mod2 a b) 0))))
 
 ;; H
   (assert
   (=> (= result5 true)
-  (and
-  (and (= result4 (divides x1 b)) (divides__function_guard result4 x1 b))
-  (= (= result4 true) (= (mod2 b x1) 0)))))
+  (and (= result4 (divides x1 b)) (= (= result4 true) (= (mod2 b x1) 0)))))
 
 ;; H
   (assert (=> (not (= result5 true)) (= result4 false)))
@@ -267,9 +252,7 @@
   (assert (=> (= result4 true) (= (divides x1 a) true)))
 
 ;; H
-  (assert
-  (and (and (= o1 (divides b a)) (divides__function_guard o1 b a))
-  (= (= o1 true) (= (mod2 a b) 0))))
+  (assert (and (= o1 (divides b a)) (= (= o1 true) (= (mod2 a b) 0))))
 
 ;; H
   (assert (= result6 (ite (not (= o1 true)) true false)))

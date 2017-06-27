@@ -388,10 +388,7 @@
   (forall ((log__attr__tag Int))
   (! (=> (init_log__specific_post us_tag logging__init_log__log__fields
      log__attr__tag logging__init_log__log__old__fields)
-     (and (log_size__function_guard
-     (log_size (mk___rep logging__init_log__log__fields log__attr__tag))
-     (mk___rep logging__init_log__log__fields log__attr__tag))
-     (= (log_size (mk___rep logging__init_log__log__fields log__attr__tag)) 0))) :pattern ((init_log__specific_post
+     (= (log_size (mk___rep logging__init_log__log__fields log__attr__tag)) 0)) :pattern ((init_log__specific_post
   us_tag logging__init_log__log__fields log__attr__tag
   logging__init_log__log__old__fields)) ))))
 
@@ -406,17 +403,10 @@
   (! (=> (append_to_log__specific_post us_tag
      logging__append_to_log__log__fields log__attr__tag incr
      logging__append_to_log__log__old__fields)
-     (and (log_size__function_guard
-     (log_size
-     (mk___rep logging__append_to_log__log__old__fields log__attr__tag))
-     (mk___rep logging__append_to_log__log__old__fields log__attr__tag))
-     (and (log_size__function_guard
-     (log_size (mk___rep logging__append_to_log__log__fields log__attr__tag))
-     (mk___rep logging__append_to_log__log__fields log__attr__tag))
      (= (log_size
         (mk___rep logging__append_to_log__log__fields log__attr__tag)) (+ 
      (log_size
-     (mk___rep logging__append_to_log__log__old__fields log__attr__tag)) 1))))) :pattern ((append_to_log__specific_post
+     (mk___rep logging__append_to_log__log__old__fields log__attr__tag)) 1))) :pattern ((append_to_log__specific_post
   us_tag logging__append_to_log__log__fields log__attr__tag incr
   logging__append_to_log__log__old__fields)) ))))
 
@@ -440,27 +430,20 @@
 
 ;; log_size__post_axiom
   (assert
-  (forall ((log us_rep))
-  (! (let ((result (log_size log)))
-     (=> (log_size__function_guard result log) (dynamic_invariant1 result
-     true false true))) :pattern ((log_size log)) )))
+  (forall ((log us_rep)) (! (dynamic_invariant1 (log_size log) true false
+  true) :pattern ((log_size log)) )))
 
 ;; log_size__post__dispatch_axiom
   (assert
   (forall ((attr__tag1 Int))
-  (forall ((log us_rep))
-  (! (let ((result (log_size1 attr__tag1 log)))
-     (=> (log_size__function_guard1 result attr__tag1 log)
-     (dynamic_invariant1 result true false true))) :pattern ((log_size1
-                                                             attr__tag1 log)) ))))
+  (forall ((log us_rep)) (! (dynamic_invariant1 (log_size1 attr__tag1 log)
+  true false true) :pattern ((log_size1 attr__tag1 log)) ))))
 
 ;; logging__log_type__compat_axiom
   (assert
   (forall ((log us_rep))
-  (! (=> (log_size__function_guard1 (log_size1 us_tag log) us_tag log)
-     (and (log_size__function_guard (log_size log) log)
-     (= (log_size log) (log_size1 us_tag log)))) :pattern ((log_size1 
-                                                           us_tag log)) )))
+  (! (= (log_size log) (log_size1 us_tag log)) :pattern ((log_size1 us_tag
+                                                         log)) )))
 
 (declare-fun log__split_fields () (Array Int integer))
 
@@ -497,11 +480,6 @@
                                                                logging__init_log__log__fields2))
 
 ;; H
-  (assert (log_size__function_guard
-  (log_size (mk___rep logging__init_log__log__fields3 log__attr__tag))
-  (mk___rep logging__init_log__log__fields3 log__attr__tag)))
-
-;; H
   (assert
   (= (log_size (mk___rep logging__init_log__log__fields3 log__attr__tag)) 0))
 
@@ -516,11 +494,6 @@
 
 ;; H
   (assert (= log__split_fields6 logging__init_log__log__fields3))
-
-;; H
-  (assert (log_size__function_guard1
-  (log_size1 log__attr__tag (mk___rep log__split_fields6 log__attr__tag))
-  log__attr__tag (mk___rep log__split_fields6 log__attr__tag)))
 
 (assert
 ;; WP_parameter_def

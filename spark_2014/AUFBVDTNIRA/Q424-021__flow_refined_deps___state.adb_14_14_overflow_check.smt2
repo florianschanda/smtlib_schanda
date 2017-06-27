@@ -73,10 +73,8 @@
 ;; get__post_axiom
   (assert
   (forall ((foo__f Int))
-  (! (=> (dynamic_invariant foo__f true true true)
-     (let ((result (get foo__f)))
-     (=> (get__function_guard result foo__f) (dynamic_invariant result true
-     false true)))) :pattern ((get foo__f)) )))
+  (! (=> (dynamic_invariant foo__f true true true) (dynamic_invariant
+     (get foo__f) true false true)) :pattern ((get foo__f)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -95,7 +93,7 @@
   (assert (in_range f))
 
 ;; H
-  (assert (and (and (= o (get f)) (get__function_guard o f)) (in_range o)))
+  (assert (and (= o (get f)) (in_range o)))
 
 ;; H
   (assert (= o1 (+ s o)))

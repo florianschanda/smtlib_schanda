@@ -558,12 +558,12 @@
 (define-fun statust__ref_2__projection ((a statust__ref)) statust (statust__content
                                                                   a))
 
-(define-fun dynamic_invariant ((temp___expr_1903 Int)
-  (temp___is_init_1900 Bool) (temp___skip_constant_1901 Bool)
-  (temp___do_toplevel_1902 Bool)) Bool (=>
-                                       (or (= temp___is_init_1900 true)
+(define-fun dynamic_invariant ((temp___expr_1792 Int)
+  (temp___is_init_1789 Bool) (temp___skip_constant_1790 Bool)
+  (temp___do_toplevel_1791 Bool)) Bool (=>
+                                       (or (= temp___is_init_1789 true)
                                        (<= 0 8)) (in_range5
-                                       temp___expr_1903)))
+                                       temp___expr_1792)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
@@ -604,12 +604,12 @@
 ;; valid_numberlogentries__post_axiom
   (assert true)
 
-(define-fun dynamic_invariant5 ((temp___expr_354 Int)
-  (temp___is_init_351 Bool) (temp___skip_constant_352 Bool)
-  (temp___do_toplevel_353 Bool)) Bool (=>
-                                      (or (= temp___is_init_351 true)
+(define-fun dynamic_invariant5 ((temp___expr_324 Int)
+  (temp___is_init_321 Bool) (temp___skip_constant_322 Bool)
+  (temp___do_toplevel_323 Bool)) Bool (=>
+                                      (or (= temp___is_init_321 true)
                                       (<= 1 150)) (in_range4
-                                      temp___expr_354)))
+                                      temp___expr_324)))
 
 ;; nodescription__def_axiom
   (assert (= nodescription (audittypes__nodescription__aggregate_def 32)))
@@ -651,25 +651,16 @@
   (assert (=> (<= 0 8) (in_range5 status)))
 
 ;; H
-  (assert (privatekeypresent__function_guard (privatekeypresent state)
-  state))
-
-;; H
   (assert (not (= (privatekeypresent state) true)))
 
 ;; H
-  (assert
-  (and (= o (currentfloppy state1)) (currentfloppy__function_guard o state1)))
+  (assert (= o (currentfloppy state1)))
 
 ;; H
   (assert (= (mk_t__ref result) (mk_t__ref thecurrentfloppy)))
 
 ;; H
   (assert (= thecurrentfloppy1 o))
-
-;; H
-  (assert (privatekeypresent__function_guard (privatekeypresent state2)
-  state2))
 
 ;; H
   (assert (= (= dataok true) (= (privatekeypresent state2) true)))
@@ -682,10 +673,6 @@
 
 ;; H
   (assert (= status1 2))
-
-;; H
-  (assert (valid_numberlogentries__function_guard
-  (valid_numberlogentries state3) state3))
 
 (assert
 ;; WP_parameter_def

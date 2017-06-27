@@ -105,9 +105,8 @@
   (assert
   (forall ((n Int))
   (! (=> (and (dynamic_invariant n true true true) (<= n 23))
-     (let ((result (fibonacci n)))
-     (=> (fibonacci__function_guard result n) (dynamic_invariant result true
-     false true)))) :pattern ((fibonacci n)) )))
+     (dynamic_invariant (fibonacci n) true false true)) :pattern ((fibonacci
+                                                                  n)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -282,12 +281,6 @@
   (assert (< 2 n1))
 
 ;; H
-  (assert (fibonacci__function_guard (fibonacci i2) i2))
-
-;; H
-  (assert (fibonacci__function_guard (fibonacci (- i2 1)) (- i2 1)))
-
-;; H
   (assert
   (and
   (and (and (= a12 (fibonacci i2)) (= b12 (fibonacci (- i2 1)))) (<= i2 23))
@@ -302,9 +295,7 @@
   (=> (<= 0 2147483647) (in_range2 i2))) (< 2 n11)))
 
 ;; H
-  (assert
-  (and (and (= o (fibonacci i2)) (fibonacci__function_guard o i2)) (in_range2
-  o)))
+  (assert (and (= o (fibonacci i2)) (in_range2 o)))
 
 ;; H
   (assert (= result7 (ite (= a12 o) true false)))

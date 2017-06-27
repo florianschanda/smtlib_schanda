@@ -362,13 +362,12 @@
   (assert
   (forall ((c us_rep))
   (forall ((p (Array Int natural)))
-  (! (=> (has_element__function_guard (has_element c p) c p)
-     (= (= (has_element c p) true)
+  (! (= (= (has_element c p) true)
      (and (<= 1 (to_rep (select p 1)))
      (<= (to_rep (select p 1)) (to_rep
                                (rec__composite_cursors__cont1__length
-                               (us_split_fields1 c))))))) :pattern ((has_element
-                                                                    c p)) ))))
+                               (us_split_fields1 c)))))) :pattern ((has_element
+                                                                   c p)) ))))
 
 (declare-fun c () us_rep)
 
@@ -393,9 +392,6 @@
 ;; H
   (assert
   (<= (to_rep (rec__composite_cursors__cont1__length (us_split_fields1 c))) 100))
-
-;; H
-  (assert (has_element__function_guard (has_element c p) c p))
 
 ;; H
   (assert (= (has_element c p) true))

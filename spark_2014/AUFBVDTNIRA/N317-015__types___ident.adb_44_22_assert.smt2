@@ -117,10 +117,8 @@
 ;; id_public__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (id_public x)))
-     (=> (id_public__function_guard result x) (dynamic_invariant result true
-     false true)))) :pattern ((id_public x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant
+     (id_public x) true false true)) :pattern ((id_public x)) )))
 
 (declare-sort natural 0)
 
@@ -204,9 +202,7 @@
   (assert (=> (<= (- 2147483648) 2147483647) (in_range res)))
 
 ;; H
-  (assert
-  (and (and (= o (id_public x1)) (id_public__function_guard o x1)) (in_range
-  o)))
+  (assert (and (= o (id_public x1)) (in_range o)))
 
 ;; H
   (assert (= result1 res))

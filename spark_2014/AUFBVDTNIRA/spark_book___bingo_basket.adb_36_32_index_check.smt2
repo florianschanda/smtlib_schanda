@@ -163,11 +163,8 @@
 ;; empty__def_axiom
   (assert
   (forall ((bingo_basket__the_count Int))
-  (! (=> (empty__function_guard (empty bingo_basket__the_count)
-     bingo_basket__the_count)
-     (= (= (empty bingo_basket__the_count) true)
-     (= bingo_basket__the_count 0))) :pattern ((empty
-                                               bingo_basket__the_count)) )))
+  (! (= (= (empty bingo_basket__the_count) true)
+     (= bingo_basket__the_count 0)) :pattern ((empty bingo_basket__the_count)) )))
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int callable_number))))))
@@ -300,9 +297,6 @@
 
 ;; H
   (assert (=> (<= 1 75) (in_range2 number)))
-
-;; H
-  (assert (empty__function_guard (empty the_count) the_count))
 
 ;; H
   (assert (not (= (empty the_count) true)))

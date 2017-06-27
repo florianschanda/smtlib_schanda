@@ -455,9 +455,7 @@
      (and
      (and (dynamic_invariant var true true true) (dynamic_invariant bottom
      true true true)) (dynamic_invariant range_size true true true))
-     (let ((result (inrange64 var bottom range_size)))
-     (=> (inrange64__function_guard result var bottom range_size)
-     (= (= result true)
+     (= (= (inrange64 var bottom range_size) true)
      (and (not (= range_size ((_ int2bv 64) 0)))
      (ite (bvule bottom (bvsub ((_ int2bv 64) 18446744073709551615) (bvsub range_size ((_ int2bv 64) 1))))
      (and (bvule bottom var)
@@ -465,22 +463,20 @@
      (or
      (and (bvule bottom var)
      (bvule var ((_ int2bv 64) 18446744073709551615)))
-     (bvule var (bvsub (bvsub range_size (bvsub ((_ int2bv 64) 18446744073709551615) bottom)) ((_ int2bv 64) 2)))))))))) :pattern (
+     (bvule var (bvsub (bvsub range_size (bvsub ((_ int2bv 64) 18446744073709551615) bottom)) ((_ int2bv 64) 2)))))))) :pattern (
   (inrange64 var bottom range_size)) )))
 
 ;; inrange64__def_axiom
   (assert
   (forall ((var (_ BitVec 64)) (bottom (_ BitVec 64))
   (range_size (_ BitVec 64)))
-  (! (=> (inrange64__function_guard (inrange64 var bottom range_size) var
-     bottom range_size)
-     (= (= (inrange64 var bottom range_size) true)
+  (! (= (= (inrange64 var bottom range_size) true)
      (and (not (= range_size ((_ int2bv 64) 0)))
      (ite (bvule bottom (bvsub ((_ int2bv 64) 18446744073709551615) (bvsub range_size ((_ int2bv 64) 1))))
      (and (bvule bottom var)
      (bvule var (bvadd bottom (bvsub range_size ((_ int2bv 64) 1)))))
      (or (bvule bottom var)
-     (bvule var (bvsub (bvsub range_size (bvsub ((_ int2bv 64) 18446744073709551615) bottom)) ((_ int2bv 64) 2)))))))) :pattern (
+     (bvule var (bvsub (bvsub range_size (bvsub ((_ int2bv 64) 18446744073709551615) bottom)) ((_ int2bv 64) 2))))))) :pattern (
   (inrange64 var bottom range_size)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -504,8 +500,7 @@
   (assert
   (forall ((mem (Array (_ BitVec 64) unsigned8)))
   (forall ((addr (_ BitVec 64)) (val__ (_ BitVec 64)))
-  (! (=> (hasmem64__function_guard (hasmem64 mem addr val__) mem addr val__)
-     (= (= (hasmem64 mem addr val__) true)
+  (! (= (= (hasmem64 mem addr val__) true)
      (and
      (and
      (and
@@ -528,7 +523,7 @@
      (= (bvand val__ ((_ int2bv 64) 71776119061217280)) (bvmul ((_ zero_extend 56) 
      (to_rep (select mem (bvadd addr ((_ int2bv 64) 6))))) ((_ int2bv 64) 281474976710656))))
      (= (bvand val__ ((_ int2bv 64) 18374686479671623680)) (bvmul ((_ zero_extend 56) 
-     (to_rep (select mem (bvadd addr ((_ int2bv 64) 7))))) ((_ int2bv 64) 72057594037927936)))))) :pattern (
+     (to_rep (select mem (bvadd addr ((_ int2bv 64) 7))))) ((_ int2bv 64) 72057594037927936))))) :pattern (
   (hasmem64 mem addr val__)) ))))
 
 (declare-fun readmem64 ((_ BitVec 64)
@@ -543,11 +538,8 @@
   (forall ((x86__memory (Array (_ BitVec 64) unsigned8)))
   (! (=> (dynamic_invariant addr true true true)
      (let ((result (readmem64 addr x86__memory)))
-     (and (hasmem64__function_guard (hasmem64 x86__memory addr result)
-     x86__memory addr result)
-     (=> (readmem64__function_guard result addr x86__memory)
      (and (= (hasmem64 x86__memory addr result) true) (dynamic_invariant
-     result true false true)))))) :pattern ((readmem64 addr x86__memory)) ))))
+     result true false true)))) :pattern ((readmem64 addr x86__memory)) ))))
 
 (declare-fun nooverlap8equal ((Array (_ BitVec 64) unsigned8)
   (Array (_ BitVec 64) unsigned8) (_ BitVec 64)) Bool)
@@ -570,17 +562,10 @@
   (forall ((start (_ BitVec 64)) (last (_ BitVec 64))
   (x86__rax (_ BitVec 64)))
   (forall ((x86__memory (Array (_ BitVec 64) unsigned8)))
-  (! (=> (all_equal_rax__function_guard
-     (all_equal_rax start last x86__memory x86__rax) start last x86__memory
-     x86__rax)
-     (and
-     (forall ((i (_ BitVec 64))) (readmem64__function_guard
-     (readmem64 (bvadd start (bvmul i ((_ int2bv 64) 8))) x86__memory)
-     (bvadd start (bvmul i ((_ int2bv 64) 8))) x86__memory))
-     (= (= (all_equal_rax start last x86__memory x86__rax) true)
+  (! (= (= (all_equal_rax start last x86__memory x86__rax) true)
      (forall ((i (_ BitVec 64)))
      (=> (and (bvule ((_ int2bv 64) 0) i) (bvule i last))
-     (= (readmem64 (bvadd start (bvmul i ((_ int2bv 64) 8))) x86__memory) x86__rax)))))) :pattern (
+     (= (readmem64 (bvadd start (bvmul i ((_ int2bv 64) 8))) x86__memory) x86__rax)))) :pattern (
   (all_equal_rax start last x86__memory x86__rax)) ))))
 
 (declare-fun rcx_start () (_ BitVec 64))
@@ -608,8 +593,7 @@
 ;; nooverlap8__def_axiom
   (assert
   (forall ((addr1 (_ BitVec 64)) (addr2 (_ BitVec 64)))
-  (! (=> (nooverlap8__function_guard (nooverlap8 addr1 addr2) addr1 addr2)
-     (= (= (nooverlap8 addr1 addr2) true)
+  (! (= (= (nooverlap8 addr1 addr2) true)
      (and
      (and
      (and
@@ -623,9 +607,8 @@
      (not (= addr1 (bvadd addr2 ((_ int2bv 64) 4)))))
      (not (= addr1 (bvadd addr2 ((_ int2bv 64) 5)))))
      (not (= addr1 (bvadd addr2 ((_ int2bv 64) 6)))))
-     (not (= addr1 (bvadd addr2 ((_ int2bv 64) 7))))))) :pattern ((nooverlap8
-                                                                  addr1
-                                                                  addr2)) )))
+     (not (= addr1 (bvadd addr2 ((_ int2bv 64) 7)))))) :pattern ((nooverlap8
+                                                                 addr1 addr2)) )))
 
 ;; nooverlap8equal__post_axiom
   (assert true)
@@ -635,18 +618,13 @@
   (forall ((mem1 (Array (_ BitVec 64) unsigned8))
   (mem2 (Array (_ BitVec 64) unsigned8)))
   (forall ((addr (_ BitVec 64)))
-  (! (=> (nooverlap8equal__function_guard (nooverlap8equal mem1 mem2 addr)
-     mem1 mem2 addr)
-     (and
-     (forall ((i (_ BitVec 64))) (nooverlap8__function_guard
-     (nooverlap8 i addr) i addr))
-     (= (= (nooverlap8equal mem1 mem2 addr) true)
+  (! (= (= (nooverlap8equal mem1 mem2 addr) true)
      (forall ((i (_ BitVec 64)))
      (=>
      (and (bvule ((_ int2bv 64) 0) i)
      (bvule i ((_ int2bv 64) 18446744073709551615)))
      (=> (= (nooverlap8 i addr) true)
-     (= (to_rep (select mem1 i)) (to_rep (select mem2 i))))))))) :pattern (
+     (= (to_rep (select mem1 i)) (to_rep (select mem2 i))))))) :pattern (
   (nooverlap8equal mem1 mem2 addr)) ))))
 
 (declare-fun rax () (_ BitVec 64))
@@ -659,43 +637,43 @@
 
 (declare-fun mem () (Array (_ BitVec 64) unsigned8))
 
-(declare-fun temp___559 () (_ BitVec 64))
+(declare-fun temp___339 () (_ BitVec 64))
 
-(declare-fun temp___574 () (_ BitVec 64))
+(declare-fun temp___348 () (_ BitVec 64))
 
-(declare-fun temp___567 () (Array (_ BitVec 64) unsigned8))
+(declare-fun temp___343 () (Array (_ BitVec 64) unsigned8))
 
-(declare-fun temp___557 () (_ BitVec 64))
+(declare-fun temp___337 () (_ BitVec 64))
 
-(declare-fun temp___573 () (_ BitVec 64))
+(declare-fun temp___347 () (_ BitVec 64))
 
-(declare-fun temp___566 () (Array (_ BitVec 64) unsigned8))
+(declare-fun temp___342 () (Array (_ BitVec 64) unsigned8))
 
-(declare-fun temp___581 () (_ BitVec 64))
+(declare-fun temp___353 () (_ BitVec 64))
 
-(declare-fun temp___580 () (_ BitVec 64))
+(declare-fun temp___352 () (_ BitVec 64))
 
-(declare-fun temp___568 () (Array (_ BitVec 64) unsigned8))
+(declare-fun temp___344 () (Array (_ BitVec 64) unsigned8))
 
-(declare-fun temp___570 () (_ BitVec 64))
+(declare-fun temp___346 () (_ BitVec 64))
 
-(declare-fun temp___569 () (_ BitVec 64))
+(declare-fun temp___345 () (_ BitVec 64))
 
-(declare-fun temp___578 () (_ BitVec 64))
+(declare-fun temp___351 () (_ BitVec 64))
 
-(declare-fun temp___584 () (_ BitVec 64))
+(declare-fun temp___355 () (_ BitVec 64))
 
-(declare-fun temp___565 () (_ BitVec 64))
+(declare-fun temp___341 () (_ BitVec 64))
 
-(declare-fun temp___564 () (_ BitVec 64))
+(declare-fun temp___340 () (_ BitVec 64))
 
-(declare-fun temp___583 () (_ BitVec 64))
+(declare-fun temp___354 () (_ BitVec 64))
 
-(declare-fun temp___576 () (_ BitVec 64))
+(declare-fun temp___350 () (_ BitVec 64))
 
-(declare-fun temp___575 () (_ BitVec 64))
+(declare-fun temp___349 () (_ BitVec 64))
 
-(declare-fun temp___558 () (_ BitVec 64))
+(declare-fun temp___338 () (_ BitVec 64))
 
 (declare-fun rcx1 () (_ BitVec 64))
 
@@ -779,161 +757,69 @@
   (assert (= rdi rdi_start))
 
 ;; H
-  (assert
-  (forall ((i (_ BitVec 64))) (readmem64__function_guard
-  (readmem64 (bvadd rdi (bvmul i ((_ int2bv 64) 8))) memory)
-  (bvadd rdi (bvmul i ((_ int2bv 64) 8))) memory)))
+  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___339 rcx)))
 
 ;; H
-  (assert (hasmem64__function_guard (hasmem64 memory2 rdi rax) memory2 
-  rdi rax))
+  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___348 rcx)))
 
 ;; H
-  (assert (nooverlap8equal__function_guard
-  (nooverlap8equal memory2 memory rdi) memory2 memory rdi))
+  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___343 mem)))
 
 ;; H
-  (assert
-  (forall ((i (_ BitVec 64))) (hasmem64__function_guard
-  (hasmem64 mem2 (bvadd rdi_start (bvmul i ((_ int2bv 64) 8))) rax) mem2
-  (bvadd rdi_start (bvmul i ((_ int2bv 64) 8))) rax)))
+  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___337 rcx)))
 
 ;; H
-  (assert
-  (forall ((i (_ BitVec 64))) (readmem64__function_guard
-  (readmem64 (bvadd rdi_start (bvmul i ((_ int2bv 64) 8))) memory2)
-  (bvadd rdi_start (bvmul i ((_ int2bv 64) 8))) memory2)))
+  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___347 rdi)))
 
 ;; H
-  (assert (readmem64__function_guard
-  (readmem64
-  (bvadd rdi_start (bvmul (bvsub rcx_start rcx) ((_ int2bv 64) 8))) memory2)
-  (bvadd rdi_start (bvmul (bvsub rcx_start rcx) ((_ int2bv 64) 8))) memory2))
+  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___342 memory)))
 
 ;; H
-  (assert
-  (forall ((i (_ BitVec 64))) (readmem64__function_guard
-  (readmem64 (bvadd temp___558 (bvmul i ((_ int2bv 64) 8))) memory)
-  (bvadd temp___558 (bvmul i ((_ int2bv 64) 8))) memory)))
+  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___353 rcx)))
 
 ;; H
-  (assert (hasmem64__function_guard (hasmem64 memory2 rdi rax) memory2 
-  rdi rax))
+  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___352 rdi)))
 
 ;; H
-  (assert (nooverlap8equal__function_guard
-  (nooverlap8equal memory2 memory rdi) memory2 memory rdi))
+  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___344 memory)))
 
 ;; H
-  (assert
-  (forall ((i (_ BitVec 64))) (hasmem64__function_guard
-  (hasmem64 mem2 (bvadd rdi_start (bvmul i ((_ int2bv 64) 8))) rax) mem2
-  (bvadd rdi_start (bvmul i ((_ int2bv 64) 8))) rax)))
+  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___346 rcx)))
 
 ;; H
-  (assert
-  (forall ((i (_ BitVec 64))) (readmem64__function_guard
-  (readmem64 (bvadd rdi_start (bvmul i ((_ int2bv 64) 8))) memory2)
-  (bvadd rdi_start (bvmul i ((_ int2bv 64) 8))) memory2)))
+  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___345 rdi)))
 
 ;; H
-  (assert (readmem64__function_guard
-  (readmem64
-  (bvadd rdi_start (bvmul (bvsub rcx_start rcx) ((_ int2bv 64) 8))) memory2)
-  (bvadd rdi_start (bvmul (bvsub rcx_start rcx) ((_ int2bv 64) 8))) memory2))
+  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___351 rcx)))
 
 ;; H
-  (assert
-  (forall ((i (_ BitVec 64))) (inrange64__function_guard
-  (inrange64 i temp___569 (bvmul temp___570 ((_ int2bv 64) 8))) i temp___569
-  (bvmul temp___570 ((_ int2bv 64) 8)))))
+  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___355 rdi)))
 
 ;; H
-  (assert (inrange64__function_guard
-  (inrange64 rdi2 temp___575 (bvmul temp___576 ((_ int2bv 64) 8))) rdi2
-  temp___575 (bvmul temp___576 ((_ int2bv 64) 8))))
+  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___341 rcx)))
 
 ;; H
-  (assert (readmem64__function_guard (readmem64 rdi2 memory3) rdi2 memory3))
+  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___340 rdi)))
 
 ;; H
-  (assert (readmem64__function_guard
-  (readmem64
-  (bvadd temp___580 (bvmul (bvsub temp___581 rcx2) ((_ int2bv 64) 8)))
-  memory3)
-  (bvadd temp___580 (bvmul (bvsub temp___581 rcx2) ((_ int2bv 64) 8)))
-  memory3))
+  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___354 rcx)))
 
 ;; H
-  (assert
-  (forall ((i (_ BitVec 64))) (readmem64__function_guard
-  (readmem64 (bvadd temp___584 (bvmul i ((_ int2bv 64) 8))) memory3)
-  (bvadd temp___584 (bvmul i ((_ int2bv 64) 8))) memory3)))
+  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___350 rcx)))
 
 ;; H
-  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___559 rcx)))
+  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___349 rdi)))
 
 ;; H
-  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___574 rcx)))
-
-;; H
-  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___567 mem)))
-
-;; H
-  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___557 rcx)))
-
-;; H
-  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___573 rdi)))
-
-;; H
-  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___566 memory)))
-
-;; H
-  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___581 rcx)))
-
-;; H
-  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___580 rdi)))
-
-;; H
-  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___568 memory)))
-
-;; H
-  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___570 rcx)))
-
-;; H
-  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___569 rdi)))
-
-;; H
-  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___578 rcx)))
-
-;; H
-  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___584 rdi)))
-
-;; H
-  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___565 rcx)))
-
-;; H
-  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___564 rdi)))
-
-;; H
-  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___583 rcx)))
-
-;; H
-  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___576 rcx)))
-
-;; H
-  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___575 rdi)))
-
-;; H
-  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___558 rdi)))
+  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (= temp___338 rdi)))
 
 ;; H
   (assert
   (=> (not (= rcx ((_ int2bv 64) 0)))
   (forall ((i (_ BitVec 64)))
-  (=> (and (bvule ((_ int2bv 64) 0) i) (bvule i (bvsub temp___557 rcx)))
-  (=> (not (= i (bvsub temp___559 rcx)))
-  (= (readmem64 (bvadd temp___558 (bvmul i ((_ int2bv 64) 8))) memory) 
+  (=> (and (bvule ((_ int2bv 64) 0) i) (bvule i (bvsub temp___337 rcx)))
+  (=> (not (= i (bvsub temp___339 rcx)))
+  (= (readmem64 (bvadd temp___338 (bvmul i ((_ int2bv 64) 8))) memory) 
   rax))))))
 
 ;; H
@@ -981,21 +867,21 @@
   (bvule i ((_ int2bv 64) 18446744073709551615)))
   (=>
   (not
-  (= (inrange64 i temp___569 (bvmul temp___570 ((_ int2bv 64) 8))) true))
-  (= (to_rep (select temp___568 i)) (to_rep (select memory3 i))))))))
+  (= (inrange64 i temp___345 (bvmul temp___346 ((_ int2bv 64) 8))) true))
+  (= (to_rep (select temp___344 i)) (to_rep (select memory3 i))))))))
 
 ;; H
   (assert
   (=> (not (= rcx ((_ int2bv 64) 0)))
-  (= rdi2 (bvadd temp___573 (bvmul (bvsub temp___574 rcx2) ((_ int2bv 64) 8))))))
+  (= rdi2 (bvadd temp___347 (bvmul (bvsub temp___348 rcx2) ((_ int2bv 64) 8))))))
 
 ;; H
   (assert
   (=> (not (= rcx ((_ int2bv 64) 0)))
-  (= (inrange64 rdi2 temp___575 (bvmul temp___576 ((_ int2bv 64) 8))) true)))
+  (= (inrange64 rdi2 temp___349 (bvmul temp___350 ((_ int2bv 64) 8))) true)))
 
 ;; H
-  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (bvule rcx2 temp___578)))
+  (assert (=> (not (= rcx ((_ int2bv 64) 0))) (bvule rcx2 temp___351)))
 
 ;; H
   (assert
@@ -1005,15 +891,15 @@
   (assert
   (=> (not (= rcx ((_ int2bv 64) 0)))
   (= (readmem64
-     (bvadd temp___580 (bvmul (bvsub temp___581 rcx2) ((_ int2bv 64) 8)))
+     (bvadd temp___352 (bvmul (bvsub temp___353 rcx2) ((_ int2bv 64) 8)))
      memory3) rax)))
 
 ;; H
   (assert
   (=> (not (= rcx ((_ int2bv 64) 0)))
   (forall ((i (_ BitVec 64)))
-  (=> (and (bvule ((_ int2bv 64) 0) i) (bvule i (bvsub temp___583 rcx2)))
-  (= (readmem64 (bvadd temp___584 (bvmul i ((_ int2bv 64) 8))) memory3) 
+  (=> (and (bvule ((_ int2bv 64) 0) i) (bvule i (bvsub temp___354 rcx2)))
+  (= (readmem64 (bvadd temp___355 (bvmul i ((_ int2bv 64) 8))) memory3) 
   rax)))))
 
 ;; H
@@ -1113,11 +999,6 @@
 
 ;; H
   (assert (not (= rcx_start ((_ int2bv 64) 0))))
-
-;; H
-  (assert (all_equal_rax__function_guard
-  (all_equal_rax rdi_start (bvsub rcx_start ((_ int2bv 64) 1)) memory6 rax)
-  rdi_start (bvsub rcx_start ((_ int2bv 64) 1)) memory6 rax))
 
 (assert
 ;; WP_parameter_def

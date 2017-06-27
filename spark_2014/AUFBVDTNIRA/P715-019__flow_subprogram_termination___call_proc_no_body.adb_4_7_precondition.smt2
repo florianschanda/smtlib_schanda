@@ -39,10 +39,6 @@
 
 (declare-fun nonreturning_precondition__function_guard (Bool Int Int) Bool)
 
-;; H
-  (assert (nonreturning_precondition__function_guard
-  (nonreturning_precondition 4 4) 4 4))
-
 (assert
 ;; WP_parameter_def
  ;; File "call_proc_no_body.adb", line 7, characters 0-0

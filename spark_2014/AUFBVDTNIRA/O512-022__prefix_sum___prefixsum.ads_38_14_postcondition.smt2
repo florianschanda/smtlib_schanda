@@ -356,11 +356,10 @@
   (assert
   (forall ((a (Array Int integer)))
   (forall ((max Int))
-  (! (=> (all_elements_in__function_guard (all_elements_in a max) a max)
-     (= (= (all_elements_in a max) true)
+  (! (= (= (all_elements_in a max) true)
      (forall ((k Int))
      (=> (and (<= 0 k) (<= k 7))
-     (and (<= (- max) (to_rep (select a k))) (<= (to_rep (select a k)) max)))))) :pattern (
+     (and (<= (- max) (to_rep (select a k))) (<= (to_rep (select a k)) max))))) :pattern (
   (all_elements_in a max)) ))))
 
 (declare-fun all_left_elements_in ((Array Int integer) Int Int) Bool)
@@ -382,13 +381,11 @@
   (assert
   (forall ((a (Array Int integer)))
   (forall ((right Int) (max Int))
-  (! (=> (all_left_elements_in__function_guard
-     (all_left_elements_in a right max) a right max)
-     (= (= (all_left_elements_in a right max) true)
+  (! (= (= (all_left_elements_in a right max) true)
      (forall ((k Int))
      (=> (and (<= 0 k) (<= k 7))
      (=> (< k right)
-     (and (<= (- max) (to_rep (select a k))) (<= (to_rep (select a k)) max))))))) :pattern (
+     (and (<= (- max) (to_rep (select a k))) (<= (to_rep (select a k)) max)))))) :pattern (
   (all_left_elements_in a right max)) ))))
 
 (declare-fun all_right_elements_in ((Array Int integer) Int Int) Bool)
@@ -403,13 +400,11 @@
   (assert
   (forall ((a (Array Int integer)))
   (forall ((left Int) (max Int))
-  (! (=> (all_right_elements_in__function_guard
-     (all_right_elements_in a left max) a left max)
-     (= (= (all_right_elements_in a left max) true)
+  (! (= (= (all_right_elements_in a left max) true)
      (forall ((k Int))
      (=> (and (<= 0 k) (<= k 7))
      (=> (< left k)
-     (and (<= (- max) (to_rep (select a k))) (<= (to_rep (select a k)) max))))))) :pattern (
+     (and (<= (- max) (to_rep (select a k))) (<= (to_rep (select a k)) max)))))) :pattern (
   (all_right_elements_in a left max)) ))))
 
 (declare-fun intermediate_form ((Array Int integer)
@@ -419,17 +414,12 @@
   (Array Int integer)) Bool)
 
 ;; intermediate_form__post_axiom
-  (assert
-  (forall ((a (Array Int integer)) (b (Array Int integer)))
-  (! (and (all_elements_in__function_guard (all_elements_in a 8000000) a
-     8000000) (all_elements_in__function_guard (all_elements_in b 1000000) b
-     1000000)) :pattern ((intermediate_form a b)) )))
+  (assert true)
 
 ;; intermediate_form__def_axiom
   (assert
   (forall ((a (Array Int integer)) (b (Array Int integer)))
-  (! (=> (intermediate_form__function_guard (intermediate_form a b) a b)
-     (= (= (intermediate_form a b) true)
+  (! (= (= (intermediate_form a b) true)
      (forall ((k Int))
      (=> (and (<= 0 k) (<= k 7))
      (ite (= (mod2 (+ k 1) 8) 0)
@@ -444,7 +434,7 @@
      (ite (= (mod2 (+ k 1) 2) 0)
      (= (to_rep (select a k)) (+ (to_rep (select b k)) (to_rep
                                                        (select b (- k 1)))))
-     (= (to_rep (select a k)) (to_rep (select b k)))))))))) :pattern (
+     (= (to_rep (select a k)) (to_rep (select b k))))))))) :pattern (
   (intermediate_form a b)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -473,59 +463,59 @@
 
 (declare-fun right () Int)
 
+(declare-fun temp___188 () (Array Int integer))
+
+(declare-fun temp___194 () (Array Int integer))
+
+(declare-fun temp___187 () (Array Int integer))
+
 (declare-fun temp___202 () (Array Int integer))
 
-(declare-fun temp___208 () (Array Int integer))
+(declare-fun temp___186 () (Array Int integer))
 
 (declare-fun temp___201 () (Array Int integer))
 
-(declare-fun temp___216 () (Array Int integer))
+(declare-fun temp___193 () (Array Int integer))
 
-(declare-fun temp___200 () (Array Int integer))
+(declare-fun temp___185 () Int)
 
-(declare-fun temp___215 () (Array Int integer))
+(declare-fun temp___183 () (Array Int integer))
 
-(declare-fun temp___207 () (Array Int integer))
+(declare-fun temp___192 () (Array Int integer))
 
-(declare-fun temp___199 () Int)
+(declare-fun temp___182 () Int)
 
-(declare-fun temp___197 () (Array Int integer))
-
-(declare-fun temp___206 () (Array Int integer))
-
-(declare-fun temp___196 () Int)
-
-(declare-fun temp___213 () (Array Int integer))
-
-(declare-fun temp___205 () (Array Int integer))
-
-(declare-fun temp___204 () (Array Int integer))
-
-(declare-fun temp___211 () (Array Int integer))
-
-(declare-fun temp___195 () Int)
-
-(declare-fun temp___203 () (Array Int integer))
-
-(declare-fun temp___218 () (Array Int integer))
-
-(declare-fun temp___209 () (Array Int integer))
-
-(declare-fun temp___220 () Int)
+(declare-fun temp___199 () (Array Int integer))
 
 (declare-fun temp___191 () (Array Int integer))
 
-(declare-fun temp___187 () Int)
+(declare-fun temp___190 () (Array Int integer))
 
-(declare-fun temp___185 () (Array Int integer))
+(declare-fun temp___197 () (Array Int integer))
+
+(declare-fun temp___181 () Int)
 
 (declare-fun temp___189 () (Array Int integer))
 
-(declare-fun temp___184 () Int)
+(declare-fun temp___204 () (Array Int integer))
 
-(declare-fun temp___188 () (Array Int integer))
+(declare-fun temp___195 () (Array Int integer))
 
-(declare-fun temp___194 () Int)
+(declare-fun temp___205 () Int)
+
+(declare-fun temp___179 () (Array Int integer))
+
+(declare-fun temp___175 () Int)
+
+(declare-fun temp___173 () (Array Int integer))
+
+(declare-fun temp___177 () (Array Int integer))
+
+(declare-fun temp___172 () Int)
+
+(declare-fun temp___176 () (Array Int integer))
+
+(declare-fun temp___180 () Int)
 
 (declare-fun o () Int)
 
@@ -581,13 +571,13 @@
 
 (declare-fun right2 () Int)
 
-(declare-fun temp___2201 () Int)
+(declare-fun temp___2051 () Int)
 
 (declare-fun rho () Int)
 
 (declare-fun result1 () Int)
 
-(declare-fun temp___2202 () Int)
+(declare-fun temp___2052 () Int)
 
 (declare-fun result2 () Int)
 
@@ -599,11 +589,11 @@
 
 (declare-fun right3 () Int)
 
-(declare-fun temp___1941 () Int)
+(declare-fun temp___1801 () Int)
 
 (declare-fun result3 () Int)
 
-(declare-fun temp___1942 () Int)
+(declare-fun temp___1802 () Int)
 
 (declare-fun result4 () Int)
 
@@ -706,38 +696,6 @@
 (declare-fun right14 () Int)
 
 ;; H
-  (assert (all_elements_in__function_guard (all_elements_in a 1000000) 
-  a 1000000))
-
-;; H
-  (assert (all_elements_in__function_guard
-  (all_elements_in a2 (* space2 1000000)) a2 (* space2 1000000)))
-
-;; H
-  (assert (all_elements_in__function_guard
-  (all_elements_in a2 (* space2 1000000)) a2 (* space2 1000000)))
-
-;; H
-  (assert (all_left_elements_in__function_guard
-  (all_left_elements_in a3 left4 (* (* space2 2) 1000000)) a3 left4
-  (* (* space2 2) 1000000)))
-
-;; H
-  (assert (all_right_elements_in__function_guard
-  (all_right_elements_in a3 (- left4 1) (* space2 1000000)) a3 (- left4 1)
-  (* space2 1000000)))
-
-;; H
-  (assert (all_left_elements_in__function_guard
-  (all_left_elements_in a3 left4 (* (* space2 2) 1000000)) a3 left4
-  (* (* space2 2) 1000000)))
-
-;; H
-  (assert (all_right_elements_in__function_guard
-  (all_right_elements_in a3 (- left4 1) (* space2 1000000)) a3 (- left4 1)
-  (* space2 1000000)))
-
-;; H
   (assert (=> (<= 1 2147483647) (in_range3 output_space)))
 
 ;; H
@@ -759,64 +717,64 @@
   (assert (=> (<= 0 2147483647) (in_range2 right)))
 
 ;; H
+  (assert (=> (< space1 8) (= temp___188 a)))
+
+;; H
+  (assert (=> (< space1 8) (= temp___194 a)))
+
+;; H
+  (assert (=> (< space1 8) (= temp___187 a)))
+
+;; H
   (assert (=> (< space1 8) (= temp___202 a)))
 
 ;; H
-  (assert (=> (< space1 8) (= temp___208 a)))
+  (assert (=> (< space1 8) (= temp___186 a)))
 
 ;; H
   (assert (=> (< space1 8) (= temp___201 a)))
 
 ;; H
-  (assert (=> (< space1 8) (= temp___216 a)))
+  (assert (=> (< space1 8) (= temp___193 a)))
 
 ;; H
-  (assert (=> (< space1 8) (= temp___200 a)))
+  (assert (=> (< space1 8) (= temp___185 right)))
 
 ;; H
-  (assert (=> (< space1 8) (= temp___215 a)))
+  (assert (=> (< space1 8) (= temp___183 a)))
 
 ;; H
-  (assert (=> (< space1 8) (= temp___207 a)))
+  (assert (=> (< space1 8) (= temp___192 a)))
 
 ;; H
-  (assert (=> (< space1 8) (= temp___199 right)))
+  (assert (=> (< space1 8) (= temp___182 left)))
+
+;; H
+  (assert (=> (< space1 8) (= temp___199 a)))
+
+;; H
+  (assert (=> (< space1 8) (= temp___191 a)))
+
+;; H
+  (assert (=> (< space1 8) (= temp___190 a)))
 
 ;; H
   (assert (=> (< space1 8) (= temp___197 a)))
 
 ;; H
-  (assert (=> (< space1 8) (= temp___206 a)))
+  (assert (=> (< space1 8) (= temp___181 space1)))
 
 ;; H
-  (assert (=> (< space1 8) (= temp___196 left)))
-
-;; H
-  (assert (=> (< space1 8) (= temp___213 a)))
-
-;; H
-  (assert (=> (< space1 8) (= temp___205 a)))
+  (assert (=> (< space1 8) (= temp___189 a)))
 
 ;; H
   (assert (=> (< space1 8) (= temp___204 a)))
 
 ;; H
-  (assert (=> (< space1 8) (= temp___211 a)))
+  (assert (=> (< space1 8) (= temp___195 a)))
 
 ;; H
-  (assert (=> (< space1 8) (= temp___195 space1)))
-
-;; H
-  (assert (=> (< space1 8) (= temp___203 a)))
-
-;; H
-  (assert (=> (< space1 8) (= temp___218 a)))
-
-;; H
-  (assert (=> (< space1 8) (= temp___209 a)))
-
-;; H
-  (assert (=> (< space1 8) (= 0 temp___220)))
+  (assert (=> (< space1 8) (= 0 temp___205)))
 
 ;; H
   (assert
@@ -828,24 +786,24 @@
   (=> (and (<= 0 k) (<= k 7))
   (ite (and (= (mod2 (+ k 1) 8) 0) (= space2 8))
   (= (to_rep (select a2 k)) (+ (+ (+ (+ (+ (+ (+ (to_rep
-                                                 (select temp___200 0)) 
-  (to_rep (select temp___201 1))) (to_rep (select temp___202 2))) (to_rep
+                                                 (select temp___186 0)) 
+  (to_rep (select temp___187 1))) (to_rep (select temp___188 2))) (to_rep
                                                                   (select 
-                                                                  temp___203 3))) 
-  (to_rep (select temp___204 4))) (to_rep (select temp___205 5))) (to_rep
+                                                                  temp___189 3))) 
+  (to_rep (select temp___190 4))) (to_rep (select temp___191 5))) (to_rep
                                                                   (select 
-                                                                  temp___206 6))) 
-  (to_rep (select temp___207 7))))
+                                                                  temp___192 6))) 
+  (to_rep (select temp___193 7))))
   (ite (and (= (mod2 (+ k 1) 4) 0) (<= 4 space2))
-  (= (to_rep (select a2 k)) (+ (+ (+ (to_rep (select temp___208 k)) (to_rep
+  (= (to_rep (select a2 k)) (+ (+ (+ (to_rep (select temp___194 k)) (to_rep
                                                                     (select 
-                                                                    temp___209 (- k 1)))) 
-  (to_rep (select temp___211 (- k 2)))) (to_rep (select temp___213 (- k 3)))))
+                                                                    temp___195 (- k 1)))) 
+  (to_rep (select temp___197 (- k 2)))) (to_rep (select temp___199 (- k 3)))))
   (ite (and (= (mod2 (+ k 1) 2) 0) (<= 2 space2))
-  (= (to_rep (select a2 k)) (+ (to_rep (select temp___215 k)) (to_rep
+  (= (to_rep (select a2 k)) (+ (to_rep (select temp___201 k)) (to_rep
                                                               (select 
-                                                              temp___216 (- k 1)))))
-  (= (to_rep (select a2 k)) (to_rep (select temp___218 k)))))))))))
+                                                              temp___202 (- k 1)))))
+  (= (to_rep (select a2 k)) (to_rep (select temp___204 k)))))))))))
 
 ;; H
   (assert
@@ -857,10 +815,10 @@
   (=> (<= 0 2147483647) (in_range2 right2))) (< space2 8))))
 
 ;; H
-  (assert (=> (< space1 8) (= temp___2201 result1)))
+  (assert (=> (< space1 8) (= temp___2051 result1)))
 
 ;; H
-  (assert (=> (< space1 8) (= temp___2202 space2)))
+  (assert (=> (< space1 8) (= temp___2052 space2)))
 
 ;; H
   (assert (=> (< space1 8) (= left2 result2)))
@@ -869,25 +827,25 @@
   (assert (=> (< space1 8) (= left3 (- space2 1))))
 
 ;; H
-  (assert (=> (< space1 8) (=> (< left3 8) (= temp___191 a2))))
+  (assert (=> (< space1 8) (=> (< left3 8) (= temp___179 a2))))
 
 ;; H
-  (assert (=> (< space1 8) (=> (< left3 8) (= temp___187 right2))))
+  (assert (=> (< space1 8) (=> (< left3 8) (= temp___175 right2))))
 
 ;; H
-  (assert (=> (< space1 8) (=> (< left3 8) (= temp___185 a2))))
+  (assert (=> (< space1 8) (=> (< left3 8) (= temp___173 a2))))
 
 ;; H
-  (assert (=> (< space1 8) (=> (< left3 8) (= temp___189 a2))))
+  (assert (=> (< space1 8) (=> (< left3 8) (= temp___177 a2))))
 
 ;; H
-  (assert (=> (< space1 8) (=> (< left3 8) (= temp___184 left3))))
+  (assert (=> (< space1 8) (=> (< left3 8) (= temp___172 left3))))
 
 ;; H
-  (assert (=> (< space1 8) (=> (< left3 8) (= temp___188 a2))))
+  (assert (=> (< space1 8) (=> (< left3 8) (= temp___176 a2))))
 
 ;; H
-  (assert (=> (< space1 8) (=> (< left3 8) (= 0 temp___194))))
+  (assert (=> (< space1 8) (=> (< left3 8) (= 0 temp___180))))
 
 ;; H
   (assert
@@ -905,11 +863,11 @@
   (=> (and (<= 0 k) (<= k 7))
   (ite (and (and (<= 0 k) (<= k (- left4 space2)))
        (= (mod2 (+ k 1) (* 2 space2)) 0))
-  (= (to_rep (select a3 k)) (+ (to_rep (select temp___188 k)) (to_rep
+  (= (to_rep (select a3 k)) (+ (to_rep (select temp___176 k)) (to_rep
                                                               (select 
-                                                              temp___189 (- k 
+                                                              temp___177 (- k 
                                                               space2)))))
-  (= (to_rep (select a3 k)) (to_rep (select temp___191 k))))))))))
+  (= (to_rep (select a3 k)) (to_rep (select temp___179 k))))))))))
 
 ;; H
   (assert
@@ -920,10 +878,10 @@
   (=> (<= 0 2147483647) (in_range2 right3))) (< left4 8)))))
 
 ;; H
-  (assert (=> (< space1 8) (=> (< left3 8) (= temp___1941 result3))))
+  (assert (=> (< space1 8) (=> (< left3 8) (= temp___1801 result3))))
 
 ;; H
-  (assert (=> (< space1 8) (=> (< left3 8) (= temp___1942 left4))))
+  (assert (=> (< space1 8) (=> (< left3 8) (= temp___1802 left4))))
 
 ;; H
   (assert
@@ -1021,7 +979,7 @@
   (assert (=> (< space1 8) (=> (< left3 8) (= a4 a5))))
 
 ;; H
-  (assert (=> (< space1 8) (=> (< left3 8) (= rho1 temp___1942))))
+  (assert (=> (< space1 8) (=> (< left3 8) (= rho1 temp___1802))))
 
 ;; H
   (assert (=> (< space1 8) (=> (< left3 8) (= right6 right4))))
@@ -1199,10 +1157,6 @@
 
 ;; H
   (assert (= a14 a12))
-
-;; H
-  (assert (all_elements_in__function_guard
-  (all_elements_in (map__content a13) 8000000) (map__content a13) 8000000))
 
 (assert
 ;; WP_parameter_def

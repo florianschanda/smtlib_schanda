@@ -581,29 +581,24 @@
 
 (declare-fun size__function_guard (Int us_rep) Bool)
 
-;; temp___result_439_def
-  (assert
-  (forall ((temp___438 us_rep1)) (size__function_guard
-  (size (to_base temp___438)) (to_base temp___438))))
-
-(define-fun default_initial_assumption ((temp___expr_433 us_rep1)
-  (temp___skip_top_level_434 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_361 us_rep1)
+  (temp___skip_top_level_362 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag1 temp___expr_433) 
+                                         (= (attr__tag1 temp___expr_361) 
                                          us_tag1)
                                          (and
                                          (= (to_rep2
                                             (rec__stackp__buffer__first
                                             (us_split_fields3
-                                            temp___expr_433))) 1)
+                                            temp___expr_361))) 1)
                                          (= (to_rep
                                             (rec__stackp__stack_root__length1
                                             (us_split_fields3
-                                            temp___expr_433))) 0)))
+                                            temp___expr_361))) 0)))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_434 true))
-                                         (= (size (to_base temp___expr_433)) 0))))
+                                         (= temp___skip_top_level_362 true))
+                                         (= (size (to_base temp___expr_361)) 0))))
 
 (declare-fun s__attr__tag () Int)
 
@@ -622,11 +617,6 @@
                                       (<= 0 2147483647)) (in_range1
                                       temp___expr_142)))
 
-;; temp___result_165_def
-  (assert
-  (forall ((temp___164 us_rep)) (size__function_guard (size temp___164)
-  temp___164)))
-
 (define-fun default_initial_assumption1 ((temp___expr_159 us_rep)
   (temp___skip_top_level_160 Bool)) Bool (and
                                          (and
@@ -643,17 +633,14 @@
 
 ;; size__post_axiom
   (assert
-  (forall ((s us_rep))
-  (! (let ((result (size s)))
-     (=> (size__function_guard result s) (dynamic_invariant result true false
-     true))) :pattern ((size s)) )))
+  (forall ((s us_rep)) (! (dynamic_invariant (size s) true false
+  true) :pattern ((size s)) )))
 
 ;; size__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (size__function_guard (size s) s)
-     (= (size s) (to_rep
-                 (rec__stackp__stack_root__length (us_split_fields1 s))))) :pattern (
+  (! (= (size s) (to_rep
+                 (rec__stackp__stack_root__length (us_split_fields1 s)))) :pattern (
   (size s)) )))
 
 ;; is_empty__post_axiom
@@ -662,16 +649,14 @@
 ;; is_empty__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (is_empty__function_guard (is_empty s) s)
-     (and (size__function_guard (size s) s)
-     (= (= (is_empty s) true) (= (size s) 0)))) :pattern ((is_empty s)) )))
+  (! (= (= (is_empty s) true) (= (size s) 0)) :pattern ((is_empty s)) )))
 
-(define-fun dynamic_invariant2 ((temp___expr_425 Int)
-  (temp___is_init_422 Bool) (temp___skip_constant_423 Bool)
-  (temp___do_toplevel_424 Bool)) Bool (=>
-                                      (or (= temp___is_init_422 true)
+(define-fun dynamic_invariant2 ((temp___expr_353 Int)
+  (temp___is_init_350 Bool) (temp___skip_constant_351 Bool)
+  (temp___do_toplevel_352 Bool)) Bool (=>
+                                      (or (= temp___is_init_350 true)
                                       (<= 1 100)) (in_range2
-                                      temp___expr_425)))
+                                      temp___expr_353)))
 
 (declare-fun s__split_fields () positive_less_than_max)
 
@@ -691,15 +676,15 @@
 
 (declare-fun o4 () us_private)
 
-(declare-fun temp___698 () positive_less_than_max)
+(declare-fun temp___553 () positive_less_than_max)
 
-(declare-fun temp___6981 () (Array Int element))
+(declare-fun temp___5531 () (Array Int element))
 
-(declare-fun temp___6982 () less_than_max)
+(declare-fun temp___5532 () less_than_max)
 
-(declare-fun temp___6983 () us_private)
+(declare-fun temp___5533 () us_private)
 
-(declare-fun temp___6984 () Int)
+(declare-fun temp___5534 () Int)
 
 (declare-fun o5 () less_than_max)
 
@@ -711,15 +696,15 @@
 
 (declare-fun o9 () us_private)
 
-(declare-fun temp___700 () positive_less_than_max)
+(declare-fun temp___555 () positive_less_than_max)
 
-(declare-fun temp___7001 () (Array Int element))
+(declare-fun temp___5551 () (Array Int element))
 
-(declare-fun temp___7002 () less_than_max)
+(declare-fun temp___5552 () less_than_max)
 
-(declare-fun temp___7003 () us_private)
+(declare-fun temp___5553 () us_private)
 
-(declare-fun temp___7004 () Int)
+(declare-fun temp___5554 () Int)
 
 (declare-fun result () positive_less_than_max)
 
@@ -785,19 +770,19 @@
   (assert (= s__split_fields3 o4))
 
 ;; H
-  (assert (= temp___698 o1))
+  (assert (= temp___553 o1))
 
 ;; H
-  (assert (= temp___6981 o2))
+  (assert (= temp___5531 o2))
 
 ;; H
-  (assert (= temp___6982 o3))
+  (assert (= temp___5532 o3))
 
 ;; H
-  (assert (= temp___6983 o4))
+  (assert (= temp___5533 o4))
 
 ;; H
-  (assert (= s__attr__tag temp___6984))
+  (assert (= s__attr__tag temp___5534))
 
 ;; H
   (assert (= result s__split_fields))
@@ -812,16 +797,16 @@
   (assert (= result3 s__split_fields3))
 
 ;; H
-  (assert (= temp___698 s__split_fields4))
+  (assert (= temp___553 s__split_fields4))
 
 ;; H
-  (assert (= temp___6981 s__split_fields5))
+  (assert (= temp___5531 s__split_fields5))
 
 ;; H
-  (assert (= temp___6982 s__split_fields6))
+  (assert (= temp___5532 s__split_fields6))
 
 ;; H
-  (assert (= temp___6983 s__split_fields7))
+  (assert (= temp___5533 s__split_fields7))
 
 ;; H
   (assert (= (to_rep o5) 0))
@@ -839,19 +824,19 @@
   (assert (= s__split_fields7 o9))
 
 ;; H
-  (assert (= temp___700 o6))
+  (assert (= temp___555 o6))
 
 ;; H
-  (assert (= temp___7001 o7))
+  (assert (= temp___5551 o7))
 
 ;; H
-  (assert (= temp___7002 o8))
+  (assert (= temp___5552 o8))
 
 ;; H
-  (assert (= temp___7003 o9))
+  (assert (= temp___5553 o9))
 
 ;; H
-  (assert (= s__attr__tag temp___7004))
+  (assert (= s__attr__tag temp___5554))
 
 ;; H
   (assert (= result4 s__split_fields4))
@@ -866,16 +851,16 @@
   (assert (= result7 s__split_fields7))
 
 ;; H
-  (assert (= temp___700 s__split_fields8))
+  (assert (= temp___555 s__split_fields8))
 
 ;; H
-  (assert (= temp___7001 s__split_fields9))
+  (assert (= temp___5551 s__split_fields9))
 
 ;; H
-  (assert (= temp___7002 s__split_fields10))
+  (assert (= temp___5552 s__split_fields10))
 
 ;; H
-  (assert (= temp___7003 s__split_fields11))
+  (assert (= temp___5553 s__split_fields11))
 
 ;; H
   (assert (= s__split_fields12 s__split_fields8))
@@ -900,16 +885,6 @@
 
 ;; H
   (assert (= s__split_fields19 s__split_fields11))
-
-;; H
-  (assert (is_empty__function_guard
-  (is_empty
-  (mk___rep
-  (mk___split_fields s__split_fields13 s__split_fields14
-  (hide_ext__ s__split_fields12 s__split_fields15)) s__attr__tag))
-  (mk___rep
-  (mk___split_fields s__split_fields13 s__split_fields14
-  (hide_ext__ s__split_fields12 s__split_fields15)) s__attr__tag)))
 
 (assert
 ;; WP_parameter_def

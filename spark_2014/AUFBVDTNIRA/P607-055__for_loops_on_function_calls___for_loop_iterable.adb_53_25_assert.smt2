@@ -218,45 +218,7 @@
      (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
-(declare-sort t19b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 100)))
-
-(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq2 (t19b t19b) Bool)
-
-(declare-fun dummy2 () t19b)
-
-(declare-datatypes () ((t19b__ref (mk_t19b__ref (t19b__content t19b)))))
-(define-fun t19b__ref___projection ((a t19b__ref)) t19b (t19b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
-
-(declare-sort t50b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 100)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq3 (t50b t50b) Bool)
-
-(declare-fun dummy3 () t50b)
-
-(declare-datatypes () ((t50b__ref (mk_t50b__ref (t50b__content t50b)))))
-(define-fun t50b__ref___projection ((a t50b__ref)) t50b (t50b__content a))
 
 (declare-fun r54b () (Array Int natural))
 
@@ -272,19 +234,19 @@
 
 ;; def_axiom
   (assert
-  (forall ((temp___275 Int))
-  (forall ((temp___276 Int))
-  (= (select (for_loop_iterable__p5__a__aggregate_def temp___275) temp___276) 
-  (of_rep temp___275)))))
+  (forall ((temp___264 Int))
+  (forall ((temp___265 Int))
+  (= (select (for_loop_iterable__p5__a__aggregate_def temp___264) temp___265) 
+  (of_rep temp___264)))))
 
 (declare-fun for_loop_iterable__p5__L_5__R54b__aggregate_def (Int) (Array Int natural))
 
 ;; def_axiom
   (assert
-  (forall ((temp___278 Int))
-  (forall ((temp___279 Int))
-  (= (select (for_loop_iterable__p5__L_5__R54b__aggregate_def temp___278) temp___279) 
-  (of_rep temp___278)))))
+  (forall ((temp___267 Int))
+  (forall ((temp___268 Int))
+  (= (select (for_loop_iterable__p5__L_5__R54b__aggregate_def temp___267) temp___268) 
+  (of_rep temp___267)))))
 
 (define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool)
   (temp___skip_constant_31 Bool)
@@ -304,13 +266,9 @@
 
 (declare-fun c25b () Int)
 
-(declare-fun o () (Array Int natural))
+(declare-fun o () natural)
 
-(declare-fun for_loop_iterable__p5__L_5__R52b__assume () (Array Int natural))
-
-(declare-fun o1 () natural)
-
-(declare-fun o2 () (Array Int natural))
+(declare-fun o1 () (Array Int natural))
 
 (declare-fun result () (Array Int natural))
 
@@ -329,19 +287,13 @@
 (declare-fun a3 () (Array Int natural))
 
 ;; H
-  (assert (= o (for_loop_iterable__p5__a__aggregate_def 0)))
-
-;; H
   (assert (= result a))
 
 ;; H
-  (assert (= a1 o))
+  (assert (= a1 (for_loop_iterable__p5__a__aggregate_def 0)))
 
 ;; H
-  (assert (= for_loop_iterable__p5__L_5__R52b__assume r54b))
-
-;; H
-  (assert (= for_loop_iterable__p5__L_5__R52b__assume r52b))
+  (assert (= r54b r52b))
 
 ;; H
   (assert (= result1 c25b))
@@ -358,10 +310,10 @@
 ;; H
   (assert
   (and
-  (forall ((temp___284 Int))
-  (=> (and (<= 1 temp___284) (<= temp___284 100))
-  (=> (not (= 1 temp___284))
-  (= (select a2 temp___284) (select a1 temp___284)))))
+  (forall ((temp___273 Int))
+  (=> (and (<= 1 temp___273) (<= temp___273 100))
+  (=> (not (= 1 temp___273))
+  (= (select a2 temp___273) (select a1 temp___273)))))
   (and (<= 1 c25b2) (<= c25b2 100))))
 
 ;; H
@@ -370,16 +322,16 @@
   r54b))
 
 ;; H
-  (assert (= (to_rep o1) 1))
+  (assert (= (to_rep o) 1))
 
 ;; H
-  (assert (= o2 (store a2 1 o1)))
+  (assert (= o1 (store a2 1 o)))
 
 ;; H
   (assert (= result2 a2))
 
 ;; H
-  (assert (= a3 o2))
+  (assert (= a3 o1))
 
 (assert
 ;; WP_parameter_def

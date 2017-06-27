@@ -147,14 +147,10 @@
   (and (<= (- (* 16777215.0 20282409603651670423947251286016.0)) (tqtreal x))
   (<= (tqtreal x) (* 16777215.0 20282409603651670423947251286016.0))))))
 
-(declare-datatypes () ((mode (RNE2) (RNA2) (RTP2) (RTN2) (RTZ2))))
-(define-fun to_nearest ((m mode)) Bool (or (= m RNE2) (= m RNA2)))
+(declare-datatypes () ((mode (RNE1) (RNA1) (RTP1) (RTN1) (RTZ1))))
+(define-fun to_nearest ((m mode)) Bool (or (= m RNE1) (= m RNA1)))
 
 (declare-fun zeroF () t)
-
-(declare-fun abs1 (t) t)
-
-(declare-fun neg (t) t)
 
 (declare-fun add (mode t t) t)
 
@@ -163,6 +159,10 @@
 (declare-fun mul (mode t t) t)
 
 (declare-fun div1 (mode t t) t)
+
+(declare-fun abs1 (t) t)
+
+(declare-fun neg (t) t)
 
 (declare-fun fma (mode t t t) t)
 
@@ -271,16 +271,16 @@
   (=> (tqtisFinite x) (= (round m (tqtreal x)) (tqtreal x)))))
 
 ;; Round_down_le
-  (assert (forall ((x Real)) (<= (round RTN2 x) x)))
+  (assert (forall ((x Real)) (<= (round RTN1 x) x)))
 
 ;; Round_up_ge
-  (assert (forall ((x Real)) (<= x (round RTP2 x))))
+  (assert (forall ((x Real)) (<= x (round RTP1 x))))
 
 ;; Round_down_neg
-  (assert (forall ((x Real)) (= (round RTN2 (- x)) (- (round RTP2 x)))))
+  (assert (forall ((x Real)) (= (round RTN1 (- x)) (- (round RTP1 x)))))
 
 ;; Round_up_neg
-  (assert (forall ((x Real)) (= (round RTP2 (- x)) (- (round RTN2 x)))))
+  (assert (forall ((x Real)) (= (round RTP1 (- x)) (- (round RTN1 x)))))
 
 (define-fun in_safe_int_range ((i Int)) Bool (and (<= (- 16777216) i)
                                              (<= i 16777216)))
@@ -418,10 +418,10 @@
               (=> (diff_sign x y) (is_negative z))))
 
 (define-fun overflow_value ((m mode)
-  (x t)) Bool (ite (is-RTN2 m) (ite (is_positive x)
+  (x t)) Bool (ite (is-RTN1 m) (ite (is_positive x)
                                (and (tqtisFinite x)
                                (= (tqtreal x) (* 33554430.0 10141204801825835211973625643008.0)))
-                               (is_infinite x)) (ite (is-RTP2 m) (ite (is_positive
+                               (is_infinite x)) (ite (is-RTP1 m) (ite (is_positive
                                                                  x)
                                                                  (is_infinite
                                                                  x)
@@ -430,7 +430,7 @@
                                                                  x)
                                                                  (= (tqtreal
                                                                     x) (- (* 33554430.0 10141204801825835211973625643008.0))))) 
-                                                (ite (is-RTZ2 m) (ite (is_positive
+                                                (ite (is-RTZ1 m) (ite (is_positive
                                                                  x)
                                                                  (and
                                                                  (tqtisFinite
@@ -442,12 +442,12 @@
                                                                  x)
                                                                  (= (tqtreal
                                                                     x) (- (* 33554430.0 10141204801825835211973625643008.0))))) 
-                                                (ite (is-RNA2 m) (is_infinite
+                                                (ite (is-RNA1 m) (is_infinite
                                                 x) (is_infinite x))))))
 
 (define-fun sign_zero_result ((m mode)
   (x t)) Bool (=> (is_zero x)
-              (ite (is-RTN2 m) (is_negative x) (is_positive x))))
+              (ite (is-RTN1 m) (is_negative x) (is_positive x))))
 
 ;; add_finite
   (assert
@@ -741,84 +741,84 @@
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (=> (is_negative x) (= (roundToIntegral RTZ2 x) (roundToIntegral RTP2 x))))))
+  (=> (is_negative x) (= (roundToIntegral RTZ1 x) (roundToIntegral RTP1 x))))))
 
 ;; truncate_pos
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (=> (is_positive x) (= (roundToIntegral RTZ2 x) (roundToIntegral RTN2 x))))))
+  (=> (is_positive x) (= (roundToIntegral RTZ1 x) (roundToIntegral RTN1 x))))))
 
 ;; ceil_le
   (assert
-  (forall ((x t)) (=> (tqtisFinite x) (le x (roundToIntegral RTP2 x)))))
+  (forall ((x t)) (=> (tqtisFinite x) (le x (roundToIntegral RTP1 x)))))
 
 ;; ceil_lest
   (assert
   (forall ((x t) (y t))
-  (=> (and (le x y) (is_int1 y)) (le (roundToIntegral RTP2 x) y))))
+  (=> (and (le x y) (is_int1 y)) (le (roundToIntegral RTP1 x) y))))
 
 ;; ceil_to_real
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (= (tqtreal (roundToIntegral RTP2 x)) (to_real (- 1 (to_int (- 1.0 
+  (= (tqtreal (roundToIntegral RTP1 x)) (to_real (- 1 (to_int (- 1.0 
   (tqtreal x)))))))))
 
 ;; ceil_to_int
   (assert
   (forall ((m mode) (x t))
   (=> (tqtisFinite x)
-  (= (to_int2 m (roundToIntegral RTP2 x)) (- 1 (to_int (- 1.0 (tqtreal x))))))))
+  (= (to_int2 m (roundToIntegral RTP1 x)) (- 1 (to_int (- 1.0 (tqtreal x))))))))
 
 ;; floor_le
   (assert
-  (forall ((x t)) (=> (tqtisFinite x) (le (roundToIntegral RTN2 x) x))))
+  (forall ((x t)) (=> (tqtisFinite x) (le (roundToIntegral RTN1 x) x))))
 
 ;; floor_lest
   (assert
   (forall ((x t) (y t))
-  (=> (and (le y x) (is_int1 y)) (le y (roundToIntegral RTN2 x)))))
+  (=> (and (le y x) (is_int1 y)) (le y (roundToIntegral RTN1 x)))))
 
 ;; floor_to_real
   (assert
   (forall ((x t))
   (=> (tqtisFinite x)
-  (= (tqtreal (roundToIntegral RTN2 x)) (to_real (to_int (tqtreal x)))))))
+  (= (tqtreal (roundToIntegral RTN1 x)) (to_real (to_int (tqtreal x)))))))
 
 ;; floor_to_int
   (assert
   (forall ((m mode) (x t))
   (=> (tqtisFinite x)
-  (= (to_int2 m (roundToIntegral RTN2 x)) (to_int (tqtreal x))))))
+  (= (to_int2 m (roundToIntegral RTN1 x)) (to_int (tqtreal x))))))
 
 ;; RNA_down
   (assert
   (forall ((x t))
-  (=> (lt (sub RNE2 x (roundToIntegral RTN2 x))
-  (sub RNE2 (roundToIntegral RTP2 x) x))
-  (= (roundToIntegral RNA2 x) (roundToIntegral RTN2 x)))))
+  (=> (lt (sub RNE1 x (roundToIntegral RTN1 x))
+  (sub RNE1 (roundToIntegral RTP1 x) x))
+  (= (roundToIntegral RNA1 x) (roundToIntegral RTN1 x)))))
 
 ;; RNA_up
   (assert
   (forall ((x t))
-  (=> (lt (sub RNE2 (roundToIntegral RTP2 x) x)
-  (sub RNE2 x (roundToIntegral RTN2 x)))
-  (= (roundToIntegral RNA2 x) (roundToIntegral RTP2 x)))))
+  (=> (lt (sub RNE1 (roundToIntegral RTP1 x) x)
+  (sub RNE1 x (roundToIntegral RTN1 x)))
+  (= (roundToIntegral RNA1 x) (roundToIntegral RTP1 x)))))
 
 ;; RNA_down_tie
   (assert
   (forall ((x t))
-  (=> (eq (sub RNE2 x (roundToIntegral RTN2 x))
-  (sub RNE2 (roundToIntegral RTP2 x) x))
-  (=> (is_negative x) (= (roundToIntegral RNA2 x) (roundToIntegral RTN2 x))))))
+  (=> (eq (sub RNE1 x (roundToIntegral RTN1 x))
+  (sub RNE1 (roundToIntegral RTP1 x) x))
+  (=> (is_negative x) (= (roundToIntegral RNA1 x) (roundToIntegral RTN1 x))))))
 
 ;; RNA_up_tie
   (assert
   (forall ((x t))
-  (=> (eq (sub RNE2 (roundToIntegral RTP2 x) x)
-  (sub RNE2 x (roundToIntegral RTN2 x)))
-  (=> (is_positive x) (= (roundToIntegral RNA2 x) (roundToIntegral RTP2 x))))))
+  (=> (eq (sub RNE1 (roundToIntegral RTP1 x) x)
+  (sub RNE1 x (roundToIntegral RTN1 x)))
+  (=> (is_positive x) (= (roundToIntegral RNA1 x) (roundToIntegral RTP1 x))))))
 
 ;; to_int_roundToIntegral
   (assert
@@ -854,12 +854,12 @@
 ;; round_bound_ne
   (assert
   (forall ((x Real))
-  (! (=> (no_overflow RNE2 x)
+  (! (=> (no_overflow RNE1 x)
      (and
      (<= (- (- x (* (/ 1.0 16777216.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 1427247692705959881058285969449495136382746624.0)) 
-     (round RNE2 x))
-     (<= (round RNE2 x) (+ (+ x (* (/ 1.0 16777216.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 1427247692705959881058285969449495136382746624.0))))) :pattern (
-  (round RNE2 x)) )))
+     (round RNE1 x))
+     (<= (round RNE1 x) (+ (+ x (* (/ 1.0 16777216.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 1427247692705959881058285969449495136382746624.0))))) :pattern (
+  (round RNE1 x)) )))
 
 (define-fun neq ((x t) (y t)) Bool (not (eq x y)))
 
@@ -886,7 +886,7 @@
   (assert (is_int1 fliteral))
 
 ;; one_of_int
-  (assert (= fliteral (of_int RNA2 1)))
+  (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 t)))))
 (declare-sort integer 0)
@@ -971,9 +971,9 @@
 (define-fun source__ref_2__projection ((a source__ref)) source (source__content
                                                                a))
 
-(define-fun dynamic_invariant2 ((temp___expr_193 (_ BitVec 32))
-  (temp___is_init_190 Bool) (temp___skip_constant_191 Bool)
-  (temp___do_toplevel_192 Bool)) Bool true)
+(define-fun dynamic_invariant2 ((temp___expr_189 (_ BitVec 32))
+  (temp___is_init_186 Bool) (temp___skip_constant_187 Bool)
+  (temp___do_toplevel_188 Bool)) Bool true)
 
 (declare-sort target 0)
 
@@ -994,12 +994,12 @@
 (define-fun target__ref_2__projection ((a target__ref)) target (target__content
                                                                a))
 
-(define-fun dynamic_invariant3 ((temp___expr_199 t) (temp___is_init_196 Bool)
-  (temp___skip_constant_197 Bool)
-  (temp___do_toplevel_198 Bool)) Bool (=>
-                                      (or (= temp___is_init_196 true) (le
+(define-fun dynamic_invariant3 ((temp___expr_195 t) (temp___is_init_192 Bool)
+  (temp___skip_constant_193 Bool)
+  (temp___do_toplevel_194 Bool)) Bool (=>
+                                      (or (= temp___is_init_192 true) (le
                                       (neg fliteral1) fliteral1))
-                                      (tqtisFinite temp___expr_199)))
+                                      (tqtisFinite temp___expr_195)))
 
 (declare-fun convert ((_ BitVec 32)) t)
 
@@ -1008,10 +1008,8 @@
 ;; convert__post_axiom
   (assert
   (forall ((s (_ BitVec 32)))
-  (! (=> (dynamic_invariant2 s true true true)
-     (let ((result (convert s)))
-     (=> (convert__function_guard result s) (dynamic_invariant3 result true
-     false true)))) :pattern ((convert s)) )))
+  (! (=> (dynamic_invariant2 s true true true) (dynamic_invariant3
+     (convert s) true false true)) :pattern ((convert s)) )))
 
 (declare-fun zero_plus () t)
 
@@ -1048,12 +1046,12 @@
 (define-fun source__ref_3__projection ((a source__ref1)) source1 (source__content1
                                                                  a))
 
-(define-fun dynamic_invariant4 ((temp___expr_205 t) (temp___is_init_202 Bool)
-  (temp___skip_constant_203 Bool)
-  (temp___do_toplevel_204 Bool)) Bool (=>
-                                      (or (= temp___is_init_202 true) (le
+(define-fun dynamic_invariant4 ((temp___expr_201 t) (temp___is_init_198 Bool)
+  (temp___skip_constant_199 Bool)
+  (temp___do_toplevel_200 Bool)) Bool (=>
+                                      (or (= temp___is_init_198 true) (le
                                       (neg fliteral1) fliteral1))
-                                      (tqtisFinite temp___expr_205)))
+                                      (tqtisFinite temp___expr_201)))
 
 (declare-sort target1 0)
 
@@ -1077,12 +1075,12 @@
 (define-fun target__ref_3__projection ((a target__ref1)) target1 (target__content1
                                                                  a))
 
-(define-fun dynamic_invariant5 ((temp___expr_211 Int)
-  (temp___is_init_208 Bool) (temp___skip_constant_209 Bool)
-  (temp___do_toplevel_210 Bool)) Bool (=>
-                                      (or (= temp___is_init_208 true)
+(define-fun dynamic_invariant5 ((temp___expr_207 Int)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)) Bool (=>
+                                      (or (= temp___is_init_204 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range2 temp___expr_211)))
+                                      (in_range2 temp___expr_207)))
 
 (declare-fun magic (t) Int)
 
@@ -1091,10 +1089,8 @@
 ;; magic__post_axiom
   (assert
   (forall ((s t))
-  (! (=> (dynamic_invariant4 s true true true)
-     (let ((result (magic s)))
-     (=> (magic__function_guard result s) (dynamic_invariant5 result true
-     false true)))) :pattern ((magic s)) )))
+  (! (=> (dynamic_invariant4 s true true true) (dynamic_invariant5 (magic s)
+     true false true)) :pattern ((magic s)) )))
 
 (declare-fun x () Int)
 
@@ -1105,15 +1101,10 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
 
 ;; zero_plus__def_axiom
-  (assert
-  (and (convert__function_guard (convert ((_ int2bv 32) 0))
-  ((_ int2bv 32) 0)) (= zero_plus (convert ((_ int2bv 32) 0)))))
+  (assert (= zero_plus (convert ((_ int2bv 32) 0))))
 
 ;; zero_neg__def_axiom
-  (assert
-  (and (convert__function_guard (convert ((_ int2bv 32) 2147483648))
-  ((_ int2bv 32) 2147483648))
-  (= zero_neg (convert ((_ int2bv 32) 2147483648)))))
+  (assert (= zero_neg (convert ((_ int2bv 32) 2147483648))))
 
 (declare-fun zero_and_min__zero_plus__assume () t)
 
@@ -1125,10 +1116,8 @@
 
 ;; H
   (assert
-  (and
   (and (= zero_and_min__zero_plus__assume (convert ((_ int2bv 32) 0)))
-  (convert__function_guard zero_and_min__zero_plus__assume
-  ((_ int2bv 32) 0))) (tqtisFinite zero_and_min__zero_plus__assume)))
+  (tqtisFinite zero_and_min__zero_plus__assume)))
 
 ;; H
   (assert (= zero_and_min__zero_plus__assume zero_plus))
@@ -1139,10 +1128,8 @@
 ;; H
   (assert
   (and
-  (and
   (= zero_and_min__zero_neg__assume (convert ((_ int2bv 32) 2147483648)))
-  (convert__function_guard zero_and_min__zero_neg__assume
-  ((_ int2bv 32) 2147483648))) (tqtisFinite zero_and_min__zero_neg__assume)))
+  (tqtisFinite zero_and_min__zero_neg__assume)))
 
 ;; H
   (assert (= zero_and_min__zero_neg__assume zero_neg))
@@ -1164,10 +1151,8 @@
 
 ;; H
   (assert
-  (and
-  (and (= zero_and_min__B3b__x__assume (magic (min c1b c2b)))
-  (magic__function_guard zero_and_min__B3b__x__assume (min c1b c2b)))
-  (in_range2 zero_and_min__B3b__x__assume)))
+  (and (= zero_and_min__B3b__x__assume (magic (min c1b c2b))) (in_range2
+  zero_and_min__B3b__x__assume)))
 
 ;; H
   (assert (= zero_and_min__B3b__x__assume x))
@@ -1177,10 +1162,8 @@
 
 ;; H
   (assert
-  (and
-  (and (= zero_and_min__B3b__y__assume (magic (min c2b c1b)))
-  (magic__function_guard zero_and_min__B3b__y__assume (min c2b c1b)))
-  (in_range2 zero_and_min__B3b__y__assume)))
+  (and (= zero_and_min__B3b__y__assume (magic (min c2b c1b))) (in_range2
+  zero_and_min__B3b__y__assume)))
 
 ;; H
   (assert (= zero_and_min__B3b__y__assume y))

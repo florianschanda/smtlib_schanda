@@ -78,10 +78,12 @@
 
 (declare-fun o () pt)
 
+(declare-fun us_self__compl () pt)
+
 (declare-fun po () pt)
 
 (assert
 ;; WP_parameter_def
  ;; File "p.adb", line 21, characters 0-0
-  (not (not (= o po))))
+  (not (not (and (= o po) (= us_self__compl o)))))
 (check-sat)

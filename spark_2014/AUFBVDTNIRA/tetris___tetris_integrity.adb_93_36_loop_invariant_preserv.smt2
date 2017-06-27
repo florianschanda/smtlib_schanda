@@ -104,9 +104,9 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(declare-sort x_coord 0)
+(declare-sort y_coord 0)
 
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 50)))
 
 (define-fun bool_eq2 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -116,30 +116,9 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
 
-(declare-fun user_eq2 (x_coord x_coord) Bool)
+(declare-fun user_eq2 (y_coord y_coord) Bool)
 
-(declare-fun dummy2 () x_coord)
-
-(declare-datatypes ()
-((x_coord__ref (mk_x_coord__ref (x_coord__content x_coord)))))
-(define-fun x_coord__ref___projection ((a x_coord__ref)) x_coord (x_coord__content
-                                                                 a))
-
-(declare-sort y_coord 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 50)))
-
-(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq3 (y_coord y_coord) Bool)
-
-(declare-fun dummy3 () y_coord)
+(declare-fun dummy2 () y_coord)
 
 (declare-datatypes ()
 ((y_coord__ref (mk_y_coord__ref (y_coord__content y_coord)))))
@@ -150,23 +129,23 @@
   (temp___is_init_535 Bool) (temp___skip_constant_536 Bool)
   (temp___do_toplevel_537 Bool)) Bool (=>
                                       (or (= temp___is_init_535 true)
-                                      (<= 1 50)) (in_range4 temp___expr_538)))
+                                      (<= 1 50)) (in_range3 temp___expr_538)))
 
 (declare-sort cell 0)
 
-(define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 7)))
+(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 7)))
 
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
 
-(declare-fun user_eq4 (cell cell) Bool)
+(declare-fun user_eq3 (cell cell) Bool)
 
-(declare-fun dummy4 () cell)
+(declare-fun dummy3 () cell)
 
 (declare-datatypes () ((cell__ref (mk_cell__ref (cell__content cell)))))
 (define-fun cell__ref___projection ((a cell__ref)) cell (cell__content a))
@@ -181,12 +160,12 @@
 
 ;; range_axiom
   (assert
-  (forall ((x cell)) (! (in_range5 (to_rep x)) :pattern ((to_rep x)) )))
+  (forall ((x cell)) (! (in_range4 (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range5 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+  (! (=> (in_range4 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
 
 (declare-datatypes ()
@@ -231,7 +210,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq5 ((a (Array Int cell)) (a__first Int) (a__last Int)
+(define-fun bool_eq4 ((a (Array Int cell)) (a__first Int) (a__last Int)
   (b (Array Int cell)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -250,7 +229,7 @@
   (assert
   (forall ((a (Array Int cell)) (b (Array Int cell)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq5 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq4 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -267,7 +246,7 @@
   (forall ((a (Array Int cell)) (b (Array Int cell)))
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq5 a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq4 a a_first a_last b b_first b_last) true)) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -278,7 +257,7 @@
      (exists ((i Int) (j Int))
      (and (<= i a_last)
      (and (< j b_last)
-     (and (= (bool_eq5 a a_first i b b_first j) true)
+     (and (= (bool_eq4 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
      (< (to_rep (select a (+ i 1))) (to_rep (select b (+ j 1))))))))))) :pattern (
@@ -292,13 +271,13 @@
      (exists ((i Int) (j Int))
      (and (<= i b_last)
      (and (< j a_last)
-     (and (= (bool_eq5 a a_first j b b_first i) true)
+     (and (= (bool_eq4 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
      (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
-(declare-fun dummy5 () (Array Int cell))
+(declare-fun dummy4 () (Array Int cell))
 
 (declare-fun value__size () Int)
 
@@ -330,7 +309,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int cell))) (<= 0 (object__alignment a))))
 
-(declare-fun user_eq5 ((Array Int cell) (Array Int cell)) Bool)
+(declare-fun user_eq4 ((Array Int cell) (Array Int cell)) Bool)
 
 (declare-datatypes ()
 ((map__ref1 (mk_map__ref1 (map__content1 (Array Int (Array Int cell)))))))
@@ -375,7 +354,7 @@
   (forall ((i Int))
   (! (= (select (singleton2 v i) i) v) :pattern ((select (singleton2 v i) i)) ))))
 
-(define-fun bool_eq6 ((a (Array Int (Array Int cell))) (a__first Int)
+(define-fun bool_eq5 ((a (Array Int (Array Int cell))) (a__first Int)
   (a__last Int) (b (Array Int (Array Int cell))) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -386,7 +365,7 @@
                            (=>
                            (and (<= a__first temp___idx_133)
                            (<= temp___idx_133 a__last))
-                           (= (bool_eq5 (select a temp___idx_133) 1 10
+                           (= (bool_eq4 (select a temp___idx_133) 1 10
                               (select b (+ (- b__first a__first) temp___idx_133))
                               1 10) true))))
                       true false))
@@ -395,14 +374,14 @@
   (assert
   (forall ((a (Array Int (Array Int cell))) (b (Array Int (Array Int cell))))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq6 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq5 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
   (forall ((temp___idx_133 Int))
   (=> (and (<= a__first temp___idx_133) (<= temp___idx_133 a__last))
-  (= (bool_eq5 (select a temp___idx_133) 1 10
+  (= (bool_eq4 (select a temp___idx_133) 1 10
      (select b (+ (- b__first a__first) temp___idx_133)) 1 10) true))))))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -417,10 +396,9 @@
 ;; is_complete_line__def_axiom
   (assert
   (forall ((l (Array Int cell)))
-  (! (=> (is_complete_line__function_guard (is_complete_line l) l)
-     (= (= (is_complete_line l) true)
+  (! (= (= (is_complete_line l) true)
      (forall ((x Int))
-     (=> (and (<= 1 x) (<= x 10)) (not (= (to_rep (select l x)) 0)))))) :pattern (
+     (=> (and (<= 1 x) (<= x 10)) (not (= (to_rep (select l x)) 0))))) :pattern (
   (is_complete_line l)) )))
 
 (declare-fun is_empty_line ((Array Int cell)) Bool)
@@ -433,32 +411,12 @@
 ;; is_empty_line__def_axiom
   (assert
   (forall ((l (Array Int cell)))
-  (! (=> (is_empty_line__function_guard (is_empty_line l) l)
-     (= (= (is_empty_line l) true)
+  (! (= (= (is_empty_line l) true)
      (forall ((x Int))
-     (=> (and (<= 1 x) (<= x 10)) (= (to_rep (select l x)) 0))))) :pattern (
+     (=> (and (<= 1 x) (<= x 10)) (= (to_rep (select l x)) 0)))) :pattern (
   (is_empty_line l)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
-
-(declare-sort t1b 0)
-
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq6 (t1b t1b) Bool)
-
-(declare-fun dummy6 () t1b)
-
-(declare-datatypes () ((t1b__ref (mk_t1b__ref (t1b__content t1b)))))
-(define-fun t1b__ref___projection ((a t1b__ref)) t1b (t1b__content a))
 
 (declare-fun empty_line () (Array Int cell))
 
@@ -502,22 +460,20 @@
   (! (=> (in_range1 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
                                                               (of_rep1 x))) )))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
-(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
 
-(declare-fun user_eq7 (integer integer) Bool)
+(declare-fun user_eq5 (integer integer) Bool)
 
-(declare-fun dummy7 () integer)
+(declare-fun dummy5 () integer)
 
 (declare-datatypes () ((t4b__ref (mk_t4b__ref (t4b__content integer)))))
 (define-fun t4b__ref___projection ((a t4b__ref)) integer (t4b__content a))
@@ -533,13 +489,7 @@
   (temp___is_init_511 Bool) (temp___skip_constant_512 Bool)
   (temp___do_toplevel_513 Bool)) Bool (=>
                                       (or (= temp___is_init_511 true)
-                                      (<= 0 7)) (in_range5 temp___expr_514)))
-
-(define-fun dynamic_invariant4 ((temp___expr_532 Int)
-  (temp___is_init_529 Bool) (temp___skip_constant_530 Bool)
-  (temp___do_toplevel_531 Bool)) Bool (=>
-                                      (or (= temp___is_init_529 true)
-                                      (<= 1 10)) (in_range3 temp___expr_532)))
+                                      (<= 0 7)) (in_range4 temp___expr_514)))
 
 (declare-fun cur_board () (Array Int (Array Int cell)))
 
@@ -553,13 +503,11 @@
 
 (declare-fun from_line () Int)
 
-(declare-fun tetris_integrity__delete_complete_lines__empty_line__assume () (Array Int cell))
+(declare-fun temp___768 () (Array Int (Array Int cell)))
 
-(declare-fun temp___803 () (Array Int (Array Int cell)))
+(declare-fun temp___767 () Int)
 
-(declare-fun temp___802 () Int)
-
-(declare-fun temp___801 () Bool)
+(declare-fun temp___766 () Bool)
 
 (declare-fun o () Bool)
 
@@ -708,12 +656,8 @@
 
 ;; H
   (assert
-  (= tetris_integrity__delete_complete_lines__empty_line__assume (tetris_integrity__delete_complete_lines__empty_line__aggregate_def
-                                                                 0)))
-
-;; H
-  (assert
-  (= tetris_integrity__delete_complete_lines__empty_line__assume empty_line))
+  (= (tetris_integrity__delete_complete_lines__empty_line__aggregate_def 0) 
+  empty_line))
 
 ;; H
   (assert (= result to_line))
@@ -722,7 +666,7 @@
   (assert (= to_line1 50))
 
 ;; H
-  (assert (in_range4 to_line1))
+  (assert (in_range3 to_line1))
 
 ;; H
   (assert (= result1 has_complete_lines))
@@ -738,34 +682,32 @@
 
 ;; H
   (assert
-  (=> (and (<= 1 del_line1) (<= del_line1 50)) (= temp___803 cur_board)))
+  (=> (and (<= 1 del_line1) (<= del_line1 50)) (= temp___768 cur_board)))
 
 ;; H
   (assert
-  (=> (and (<= 1 del_line1) (<= del_line1 50)) (= temp___802 to_line1)))
+  (=> (and (<= 1 del_line1) (<= del_line1 50)) (= temp___767 to_line1)))
 
 ;; H
   (assert
   (=> (and (<= 1 del_line1) (<= del_line1 50))
-  (= temp___801 has_complete_lines1)))
+  (= temp___766 has_complete_lines1)))
 
 ;; H
   (assert
   (=> (and (<= 1 del_line1) (<= del_line1 50))
   (and
-  (and (=> (<= 1 50) (in_range4 to_line2))
-  (forall ((temp___804 Int))
-  (=> (and (<= 1 temp___804) (<= temp___804 50))
-  (=> (<= del_line2 temp___804)
-  (= (select cur_board2 temp___804) (select temp___803 temp___804))))))
+  (and (=> (<= 1 50) (in_range3 to_line2))
+  (forall ((temp___769 Int))
+  (=> (and (<= 1 temp___769) (<= temp___769 50))
+  (=> (<= del_line2 temp___769)
+  (= (select cur_board2 temp___769) (select temp___768 temp___769))))))
   (and (<= 1 del_line2) (<= del_line2 50)))))
 
 ;; H
   (assert
   (=> (and (<= 1 del_line1) (<= del_line1 50))
-  (and
   (and (= result3 (is_complete_line (select cur_board2 del_line2)))
-  (is_complete_line__function_guard result3 (select cur_board2 del_line2)))
   (= (= result3 true)
   (forall ((x Int))
   (=> (and (<= 1 x) (<= x 10))
@@ -968,15 +910,13 @@
   (and
   (and
   (and (=> (<= 1 r3b) (dynamic_property 1 r3b from_line2))
-  (=> (<= 1 50) (in_range4 to_line8)))
+  (=> (<= 1 50) (in_range3 to_line8)))
   (=> (<= 0 2147483647) (in_range2 num_deleted2)))
   (and (<= 1 from_line2) (<= from_line2 r3b))))
 
 ;; H
   (assert
-  (and
   (and (= o (is_empty_line (select cur_board8 from_line2)))
-  (is_empty_line__function_guard o (select cur_board8 from_line2)))
   (= (= o true)
   (forall ((x Int))
   (=> (and (<= 1 x) (<= x 10))
@@ -1004,7 +944,7 @@
 ;; H
   (assert
   (=> (= result9 true)
-  (and (= o1 (- to_line8 1)) (in_range4 (- to_line8 1)))))
+  (and (= o1 (- to_line8 1)) (in_range3 (- to_line8 1)))))
 
 ;; H
   (assert (=> (= result9 true) (= result12 (mk_int__ref to_line8))))

@@ -100,9 +100,7 @@
   (assert
   (forall ((x Int))
   (! (=> (and (dynamic_invariant1 x true true true) (type_invariant x))
-     (let ((result (pub x)))
-     (=> (pub__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((pub x)) )))
+     (dynamic_invariant (pub x) true false true)) :pattern ((pub x)) )))
 
 (declare-fun e_pub (Int) Int)
 
@@ -112,16 +110,13 @@
   (assert
   (forall ((x Int))
   (! (=> (and (dynamic_invariant1 x true true true) (type_invariant x))
-     (let ((result (e_pub x)))
-     (=> (e_pub__function_guard result x) (dynamic_invariant result true
-     false true)))) :pattern ((e_pub x)) )))
+     (dynamic_invariant (e_pub x) true false true)) :pattern ((e_pub x)) )))
 
 ;; e_pub__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant1 x true true true) (e_pub__function_guard
-     (e_pub x) x)) (= (e_pub x) 1)) :pattern ((e_pub x)) )))
+  (! (=> (dynamic_invariant1 x true true true) (= (e_pub x) 1)) :pattern (
+  (e_pub x)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -132,10 +127,8 @@
 ;; priv__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant1 x true true true)
-     (let ((result (priv x)))
-     (=> (priv__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((priv x)) )))
+  (! (=> (dynamic_invariant1 x true true true) (dynamic_invariant (priv x)
+     true false true)) :pattern ((priv x)) )))
 
 (declare-fun e_priv (Int) Int)
 
@@ -144,17 +137,14 @@
 ;; e_priv__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant1 x true true true)
-     (let ((result (e_priv x)))
-     (=> (e_priv__function_guard result x) (dynamic_invariant result true
-     false true)))) :pattern ((e_priv x)) )))
+  (! (=> (dynamic_invariant1 x true true true) (dynamic_invariant (e_priv x)
+     true false true)) :pattern ((e_priv x)) )))
 
 ;; e_priv__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant1 x true true true) (e_priv__function_guard
-     (e_priv x) x)) (= (e_priv x) 1)) :pattern ((e_priv x)) )))
+  (! (=> (dynamic_invariant1 x true true true) (= (e_priv x) 1)) :pattern (
+  (e_priv x)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 

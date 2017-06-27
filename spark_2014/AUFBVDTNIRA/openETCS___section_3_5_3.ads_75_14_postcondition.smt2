@@ -586,9 +586,8 @@
   (assert
   (forall ((map1 us_rep))
   (forall ((id Int))
-  (! (=> (contains__function_guard (contains map1 id) map1 id)
-     (= (= (contains map1 id) true)
-     (and (= (contains1 map1 id) true) (= (element__2 map1 id) true)))) :pattern (
+  (! (= (= (contains map1 id) true)
+     (and (= (contains1 map1 id) true) (= (element__2 map1 id) true))) :pattern (
   (contains map1 id)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -748,23 +747,7 @@
   (section_3_5_3__start_of_mission Bool)
   (section_3_5_3__track_side_new_communication_order Bool))
   (forall ((etcs_level__ertms_etcs_level Int))
-  (! (=> (authorize_new_communication_session__function_guard
-     (authorize_new_communication_session
-     section_3_5_3__mode_change_report_to_rbc_not_considered_as_end_of_mission
-     section_3_5_3__manual_level_change
-     section_3_5_3__train_front_reaches_end_of_radio_hole
-     section_3_5_3__previous_communication_loss
-     section_3_5_3__start_of_mission_procedure_completed_without_com
-     etcs_level__ertms_etcs_level section_3_5_3__start_of_mission
-     section_3_5_3__track_side_new_communication_order)
-     section_3_5_3__mode_change_report_to_rbc_not_considered_as_end_of_mission
-     section_3_5_3__manual_level_change
-     section_3_5_3__train_front_reaches_end_of_radio_hole
-     section_3_5_3__previous_communication_loss
-     section_3_5_3__start_of_mission_procedure_completed_without_com
-     etcs_level__ertms_etcs_level section_3_5_3__start_of_mission
-     section_3_5_3__track_side_new_communication_order)
-     (=
+  (! (=
      (= (authorize_new_communication_session
         section_3_5_3__mode_change_report_to_rbc_not_considered_as_end_of_mission
         section_3_5_3__manual_level_change
@@ -795,15 +778,15 @@
      (and
      (= section_3_5_3__start_of_mission_procedure_completed_without_com true)
      (or (= etcs_level__ertms_etcs_level 2)
-     (= etcs_level__ertms_etcs_level 3)))))) :pattern ((authorize_new_communication_session
-                                                       section_3_5_3__mode_change_report_to_rbc_not_considered_as_end_of_mission
-                                                       section_3_5_3__manual_level_change
-                                                       section_3_5_3__train_front_reaches_end_of_radio_hole
-                                                       section_3_5_3__previous_communication_loss
-                                                       section_3_5_3__start_of_mission_procedure_completed_without_com
-                                                       etcs_level__ertms_etcs_level
-                                                       section_3_5_3__start_of_mission
-                                                       section_3_5_3__track_side_new_communication_order)) ))))
+     (= etcs_level__ertms_etcs_level 3))))) :pattern ((authorize_new_communication_session
+                                                      section_3_5_3__mode_change_report_to_rbc_not_considered_as_end_of_mission
+                                                      section_3_5_3__manual_level_change
+                                                      section_3_5_3__train_front_reaches_end_of_radio_hole
+                                                      section_3_5_3__previous_communication_loss
+                                                      section_3_5_3__start_of_mission_procedure_completed_without_com
+                                                      etcs_level__ertms_etcs_level
+                                                      section_3_5_3__start_of_mission
+                                                      section_3_5_3__track_side_new_communication_order)) ))))
 
 (declare-fun destination () Int)
 
@@ -1079,7 +1062,7 @@
 
 (declare-fun connection_attemps () Int)
 
-(declare-fun temp___527 () Int)
+(declare-fun temp___524 () Int)
 
 (declare-fun o () Int)
 
@@ -1136,28 +1119,6 @@
 (declare-fun connection_attemps15 () Int)
 
 ;; H
-  (assert (authorize_new_communication_session__function_guard
-  (authorize_new_communication_session
-  mode_change_report_to_rbc_not_considered_as_end_of_mission
-  manual_level_change train_front_reaches_end_of_radio_hole
-  previous_communication_loss
-  start_of_mission_procedure_completed_without_com ertms_etcs_level
-  start_of_mission track_side_new_communication_order)
-  mode_change_report_to_rbc_not_considered_as_end_of_mission
-  manual_level_change train_front_reaches_end_of_radio_hole
-  previous_communication_loss
-  start_of_mission_procedure_completed_without_com ertms_etcs_level
-  start_of_mission track_side_new_communication_order))
-
-;; H
-  (assert (contains__function_guard
-  (contains
-  (mk___rep connections__split_discrs
-  (mk___split_fields connections__split_fields)) destination)
-  (mk___rep connections__split_discrs
-  (mk___split_fields connections__split_fields)) destination))
-
-;; H
   (assert
   (and
   (= 10 (to_rep1
@@ -1210,13 +1171,11 @@
   (and (= connection_attemps10 (mk_int__ref connection_attemps2))
   (= connection_attemps11 connection_attemps2))
   (and (<= connection_attemps1 3)
-  (and (= temp___527 connection_attemps1)
+  (and (= temp___524 connection_attemps1)
   (and
   (and (=> (<= 0 2147483647) (in_range2 connection_attemps2))
   (<= connection_attemps2 3))
-  (and
-  (and (= result1 (setup_connection phone)) (setup_connection__function_guard
-  result1 phone)) (= result1 true))))))
+  (and (= result1 (setup_connection phone)) (= result1 true))))))
   (and
   (and (= connection_attemps10 (mk_int__ref connection_attemps1))
   (= connection_attemps11 connection_attemps1))
@@ -1227,9 +1186,8 @@
   (and
   (and
   (and
-  (and
-  (and (= o1 (setup_connection phone)) (setup_connection__function_guard 
-  o1 phone)) (= o2 (ite (= o1 false) end_of_mission true)))
+  (and (= o1 (setup_connection phone))
+  (= o2 (ite (= o1 false) end_of_mission true)))
   (= o3 (ite (= o2 false) track_side_terminate_communication_order true)))
   (= o4 (ite (= o3 false) train_passes_level_transition_border true)))
   (= o5 (ite (= o4 false) (ite (= order_to_contact_different_rbc true) 
@@ -1244,14 +1202,11 @@
   (ite (<= connection_attemps1 3)
   (and
   (and
-  (and (= temp___527 connection_attemps1)
+  (and (= temp___524 connection_attemps1)
   (and
   (and (=> (<= 0 2147483647) (in_range2 connection_attemps2))
   (<= connection_attemps2 3))
-  (and
-  (and
-  (and (= result1 (setup_connection phone)) (setup_connection__function_guard
-  result1 phone)) (not (= result1 true)))
+  (and (and (= result1 (setup_connection phone)) (not (= result1 true)))
   (and
   (and
   (and (= o (+ connection_attemps2 1)) (in_range1 (+ connection_attemps2 1)))
@@ -1273,14 +1228,6 @@
 
 ;; H
   (assert (= connection_attemps15 connection_attemps13))
-
-;; H
-  (assert (contains__function_guard
-  (contains
-  (mk___rep connections__split_discrs
-  (mk___split_fields connections__split_fields)) destination)
-  (mk___rep connections__split_discrs
-  (mk___split_fields connections__split_fields)) destination))
 
 (assert
 ;; WP_parameter_def

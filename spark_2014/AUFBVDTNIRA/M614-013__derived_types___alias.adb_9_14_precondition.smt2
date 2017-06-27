@@ -233,9 +233,8 @@
   (assert
   (forall ((r us_rep))
   (! (=> (< 0 (to_rep (rec__alias__my_rec__modulus (us_split_fields1 r))))
-     (let ((result (get_content r)))
-     (=> (get_content__function_guard result r) (dynamic_invariant result
-     true false true)))) :pattern ((get_content r)) )))
+     (dynamic_invariant (get_content r) true false true)) :pattern ((get_content
+                                                                    r)) )))
 
 (declare-fun value__size1 () Int)
 

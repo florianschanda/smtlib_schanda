@@ -92,10 +92,8 @@
 ;; hide__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (hide x)))
-     (=> (hide__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((hide x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (hide x)
+     true false true)) :pattern ((hide x)) )))
 
 (declare-fun to_rep (natural) Int)
 
@@ -305,27 +303,23 @@
                                      (<= 0 2147483647)) (in_range
                                      temp___expr_33)))
 
-(define-fun default_initial_assumption ((temp___expr_412 us_rep)
-  (temp___skip_top_level_413 Bool)) Bool (= (attr__tag temp___expr_412) 
+(define-fun default_initial_assumption ((temp___expr_376 us_rep)
+  (temp___skip_top_level_377 Bool)) Bool (= (attr__tag temp___expr_376) 
   us_tag))
 
-;; temp___result_459_def
-  (assert (hide__function_guard (hide 29) 29))
-
-(define-fun default_initial_assumption1 ((temp___expr_457 us_rep1)
-  (temp___skip_top_level_458 Bool)) Bool (and
-                                         (= (attr__tag1 temp___expr_457) 
+(define-fun default_initial_assumption1 ((temp___expr_410 us_rep1)
+  (temp___skip_top_level_411 Bool)) Bool (and
+                                         (= (attr__tag1 temp___expr_410) 
                                          us_tag1)
                                          (= (to_rep
                                             (rec__tagged_component_check__r__d5__h
                                             (us_split_fields3
-                                            temp___expr_457))) (hide 29))))
+                                            temp___expr_410))) (hide 29))))
 
 (declare-fun o () Int)
 
 ;; H
-  (assert
-  (and (and (= o (hide 29)) (hide__function_guard o 29)) (in_range1 o)))
+  (assert (and (= o (hide 29)) (in_range1 o)))
 
 (assert
 ;; WP_parameter_def

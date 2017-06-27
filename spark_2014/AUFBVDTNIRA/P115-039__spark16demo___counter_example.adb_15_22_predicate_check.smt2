@@ -114,11 +114,11 @@
 (define-fun category__ref___projection ((a category__ref)) category (category__content
                                                                     a))
 
-(define-fun dynamic_invariant1 ((temp___expr_148 Int)
-  (temp___is_init_145 Bool) (temp___skip_constant_146 Bool)
-  (temp___do_toplevel_147 Bool)) Bool (=>
-                                      (or (= temp___is_init_145 true)
-                                      (<= 1 8)) (in_range2 temp___expr_148)))
+(define-fun dynamic_invariant1 ((temp___expr_146 Int)
+  (temp___is_init_143 Bool) (temp___skip_constant_144 Bool)
+  (temp___do_toplevel_145 Bool)) Bool (=>
+                                      (or (= temp___is_init_143 true)
+                                      (<= 1 8)) (in_range2 temp___expr_146)))
 
 (declare-fun to_rep1 (category) Int)
 
@@ -467,28 +467,28 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(define-fun dynamic_invariant2 ((temp___expr_159 us_rep)
-  (temp___is_init_156 Bool) (temp___skip_constant_157 Bool)
-  (temp___do_toplevel_158 Bool)) Bool (=> (= temp___do_toplevel_158 true)
-                                      (=> (= temp___is_init_156 true)
+(define-fun dynamic_invariant2 ((temp___expr_157 us_rep)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)) Bool (=> (= temp___do_toplevel_156 true)
+                                      (=> (= temp___is_init_154 true)
                                       (<= (to_rep
                                           (rec__counter_example__item__idx
-                                          (us_split_fields1 temp___expr_159))) 
+                                          (us_split_fields1 temp___expr_157))) 
                                       (to_rep
                                       (select (to_array
                                               num_item_per_category) 
                                       (to_rep1
                                       (rec__counter_example__item__cat
-                                      (us_split_fields1 temp___expr_159)))))))))
+                                      (us_split_fields1 temp___expr_157)))))))))
 
-(define-fun dynamic_predicate ((temp___165 us_rep)) Bool (<= (to_rep
+(define-fun dynamic_predicate ((temp___163 us_rep)) Bool (<= (to_rep
                                                              (rec__counter_example__item__idx
                                                              (us_split_fields1
-                                                             temp___165))) 
+                                                             temp___163))) 
   (to_rep
   (select (to_array num_item_per_category) (to_rep1
                                            (rec__counter_example__item__cat
-                                           (us_split_fields1 temp___165)))))))
+                                           (us_split_fields1 temp___163)))))))
 
 (declare-fun cat1 () Int)
 
@@ -505,17 +505,13 @@
 ;; pick_last__post_axiom
   (assert
   (forall ((cat Int))
-  (! (=> (dynamic_invariant1 cat true true true)
-     (let ((result (pick_last cat)))
-     (=> (pick_last__function_guard result cat) (dynamic_invariant result
-     true false true)))) :pattern ((pick_last cat)) )))
+  (! (=> (dynamic_invariant1 cat true true true) (dynamic_invariant
+     (pick_last cat) true false true)) :pattern ((pick_last cat)) )))
 
 ;; pick_last__def_axiom
   (assert
   (forall ((cat Int))
-  (! (=>
-     (and (dynamic_invariant1 cat true true true) (pick_last__function_guard
-     (pick_last cat) cat))
+  (! (=> (dynamic_invariant1 cat true true true)
      (= (pick_last cat) (to_rep
                         (select (to_array num_item_per_category) cat)))) :pattern (
   (pick_last cat)) )))
@@ -538,22 +534,18 @@
                                      (in_range3 temp___expr_15)))
 
 ;; idx1__def_axiom
-  (assert
-  (and (pick_last__function_guard (pick_last cat1) cat1)
-  (= idx1 (pick_last cat1))))
+  (assert (= idx1 (pick_last cat1)))
 
 ;; idx2__def_axiom
-  (assert
-  (and (pick_last__function_guard (pick_last cat2) cat2)
-  (= idx2 (pick_last cat2))))
+  (assert (= idx2 (pick_last cat2)))
 
-(define-fun dynamic_invariant4 ((temp___expr_154 us_t)
-  (temp___is_init_151 Bool) (temp___skip_constant_152 Bool)
-  (temp___do_toplevel_153 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_152 true))
+(define-fun dynamic_invariant4 ((temp___expr_152 us_t)
+  (temp___is_init_149 Bool) (temp___skip_constant_150 Bool)
+  (temp___do_toplevel_151 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_150 true))
                                       (dynamic_property 1 8
-                                      (first1 temp___expr_154)
-                                      (last1 temp___expr_154))))
+                                      (first1 temp___expr_152)
+                                      (last1 temp___expr_152))))
 
 (declare-sort t3s 0)
 
@@ -620,9 +612,9 @@
 
 (declare-fun o3 () natural)
 
-(declare-fun temp___169 () category)
+(declare-fun temp___167 () category)
 
-(declare-fun temp___1691 () natural)
+(declare-fun temp___1671 () natural)
 
 (declare-fun result () Bool)
 
@@ -636,10 +628,7 @@
 
 ;; H
   (assert
-  (and
   (and (= counter_example__get_best_item__idx1__assume (pick_last cat1))
-  (pick_last__function_guard counter_example__get_best_item__idx1__assume
-  cat1))
   (and (in_range1 counter_example__get_best_item__idx1__assume)
   (= counter_example__get_best_item__idx1__assume (to_rep
                                                   (select (elts
@@ -654,10 +643,7 @@
 
 ;; H
   (assert
-  (and
   (and (= counter_example__get_best_item__idx2__assume (pick_last cat2))
-  (pick_last__function_guard counter_example__get_best_item__idx2__assume
-  cat2))
   (and (in_range1 counter_example__get_best_item__idx2__assume)
   (= counter_example__get_best_item__idx2__assume (to_rep
                                                   (select (elts
@@ -692,16 +678,16 @@
   (assert (= o o3))
 
 ;; H
-  (assert (= temp___169 o2))
+  (assert (= temp___167 o2))
 
 ;; H
-  (assert (= temp___1691 o3))
+  (assert (= temp___1671 o3))
 
 (assert
 ;; WP_parameter_def
  ;; File "counter_example.ads", line 9, characters 0-0
   (not
-  (<= (to_rep temp___1691) (to_rep
+  (<= (to_rep temp___1671) (to_rep
                            (select (elts num_item_per_category) (to_rep1
-                                                                temp___169))))))
+                                                                temp___167))))))
 (check-sat)

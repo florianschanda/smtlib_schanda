@@ -395,9 +395,8 @@
 ;; is_empty__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (is_empty__function_guard (is_empty s) s)
-     (= (= (is_empty s) true)
-     (= (to_rep1 (rec__stacks_14__stack__stack_pointer (us_split_fields1 s))) 0))) :pattern (
+  (! (= (= (is_empty s) true)
+     (= (to_rep1 (rec__stacks_14__stack__stack_pointer (us_split_fields1 s))) 0)) :pattern (
   (is_empty s)) )))
 
 (declare-fun is_full (us_rep) Bool)
@@ -410,9 +409,8 @@
 ;; is_full__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (is_full__function_guard (is_full s) s)
-     (= (= (is_full s) true)
-     (= (to_rep1 (rec__stacks_14__stack__stack_pointer (us_split_fields1 s))) 100))) :pattern (
+  (! (= (= (is_full s) true)
+     (= (to_rep1 (rec__stacks_14__stack__stack_pointer (us_split_fields1 s))) 100)) :pattern (
   (is_full s)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -441,11 +439,6 @@
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range x)))
-
-;; H
-  (assert (is_empty__function_guard
-  (is_empty (mk___rep (mk___split_fields s__split_fields s__split_fields1)))
-  (mk___rep (mk___split_fields s__split_fields s__split_fields1))))
 
 ;; H
   (assert

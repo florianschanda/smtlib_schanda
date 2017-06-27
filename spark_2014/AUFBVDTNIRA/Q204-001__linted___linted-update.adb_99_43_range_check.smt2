@@ -1060,158 +1060,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS27 () Int)
 
-(declare-sort t190b 0)
-
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq11 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
-
-(declare-fun user_eq10 (t190b t190b) Bool)
-
-(declare-fun dummy10 () t190b)
-
-(declare-datatypes () ((t190b__ref (mk_t190b__ref (t190b__content t190b)))))
-(define-fun t190b__ref___projection ((a t190b__ref)) t190b (t190b__content a))
-
-(declare-sort t200b 0)
-
-(define-fun in_range7 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq12 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE9 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Int)
-
-(declare-fun user_eq11 (t200b t200b) Bool)
-
-(declare-fun dummy11 () t200b)
-
-(declare-datatypes () ((t200b__ref (mk_t200b__ref (t200b__content t200b)))))
-(define-fun t200b__ref___projection ((a t200b__ref)) t200b (t200b__content a))
-
-(declare-sort t210b 0)
-
-(define-fun in_range8 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq13 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE10 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) Int)
-
-(declare-fun user_eq12 (t210b t210b) Bool)
-
-(declare-fun dummy12 () t210b)
-
-(declare-datatypes () ((t210b__ref (mk_t210b__ref (t210b__content t210b)))))
-(define-fun t210b__ref___projection ((a t210b__ref)) t210b (t210b__content a))
-
-(declare-sort t220b 0)
-
-(define-fun in_range9 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq14 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE11 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check11 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE11 (us_image) Int)
-
-(declare-fun user_eq13 (t220b t220b) Bool)
-
-(declare-fun dummy13 () t220b)
-
-(declare-datatypes () ((t220b__ref (mk_t220b__ref (t220b__content t220b)))))
-(define-fun t220b__ref___projection ((a t220b__ref)) t220b (t220b__content a))
-
-(declare-sort t230b 0)
-
-(define-fun in_range10 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq15 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE12 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check12 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE12 (us_image) Int)
-
-(declare-fun user_eq14 (t230b t230b) Bool)
-
-(declare-fun dummy14 () t230b)
-
-(declare-datatypes () ((t230b__ref (mk_t230b__ref (t230b__content t230b)))))
-(define-fun t230b__ref___projection ((a t230b__ref)) t230b (t230b__content a))
-
-(declare-sort t240b 0)
-
-(define-fun in_range11 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq16 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE13 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check13 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE13 (us_image) Int)
-
-(declare-fun user_eq15 (t240b t240b) Bool)
-
-(declare-fun dummy15 () t240b)
-
-(declare-datatypes () ((t240b__ref (mk_t240b__ref (t240b__content t240b)))))
-(define-fun t240b__ref___projection ((a t240b__ref)) t240b (t240b__content a))
-
-(declare-sort t246b 0)
-
-(define-fun in_range12 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq17 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE14 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check14 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE14 (us_image) Int)
-
-(declare-fun user_eq16 (t246b t246b) Bool)
-
-(declare-fun dummy16 () t246b)
-
-(declare-datatypes () ((t246b__ref (mk_t246b__ref (t246b__content t246b)))))
-(define-fun t246b__ref___projection ((a t246b__ref)) t246b (t246b__content a))
-
-(declare-sort t252b 0)
-
-(define-fun in_range13 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq18 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE15 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check15 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE15 (us_image) Int)
-
-(declare-fun user_eq17 (t252b t252b) Bool)
-
-(declare-fun dummy17 () t252b)
-
-(declare-datatypes () ((t252b__ref (mk_t252b__ref (t252b__content t252b)))))
-(define-fun t252b__ref___projection ((a t252b__ref)) t252b (t252b__content a))
-
 (declare-fun temp___302 ((_ BitVec 8) (_ BitVec 8) (_ BitVec 8)
   (_ BitVec 8)) (Array Int storage_element))
 
@@ -1448,22 +1296,6 @@
 (declare-fun o34 () Int)
 
 (declare-fun o35 () (_ BitVec 32))
-
-(declare-fun temp___371 () (Array Int storage_element))
-
-(declare-fun temp___362 () (Array Int storage_element))
-
-(declare-fun temp___353 () (Array Int storage_element))
-
-(declare-fun temp___344 () (Array Int storage_element))
-
-(declare-fun temp___335 () (Array Int storage_element))
-
-(declare-fun temp___326 () (Array Int storage_element))
-
-(declare-fun temp___317 () (Array Int storage_element))
-
-(declare-fun temp___316 () (Array Int storage_element))
 
 (declare-fun o36 () Int)
 
@@ -1963,70 +1795,6 @@
   c248b))
 
 ;; H
-  (assert
-  (= temp___371 (temp___363
-                ((_ extract 7 0) (bvand (bvlshr c248b ((_ int2bv 32) 24)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand (bvlshr c248b ((_ int2bv 32) 16)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand (bvlshr c248b ((_ int2bv 32) 8)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand c248b ((_ int2bv 32) 255))))))
-
-;; H
-  (assert
-  (= temp___362 (temp___354
-                ((_ extract 7 0) (bvand (bvlshr c242b ((_ int2bv 32) 24)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand (bvlshr c242b ((_ int2bv 32) 16)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand (bvlshr c242b ((_ int2bv 32) 8)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand c242b ((_ int2bv 32) 255))))))
-
-;; H
-  (assert
-  (= temp___353 (temp___345
-                ((_ extract 7 0) (bvand (bvlshr c236b ((_ int2bv 32) 24)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand (bvlshr c236b ((_ int2bv 32) 16)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand (bvlshr c236b ((_ int2bv 32) 8)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand c236b ((_ int2bv 32) 255))))))
-
-;; H
-  (assert
-  (= temp___344 (temp___336
-                ((_ extract 7 0) (bvand (bvlshr c226b ((_ int2bv 32) 24)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand (bvlshr c226b ((_ int2bv 32) 16)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand (bvlshr c226b ((_ int2bv 32) 8)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand c226b ((_ int2bv 32) 255))))))
-
-;; H
-  (assert
-  (= temp___335 (temp___327
-                ((_ extract 7 0) (bvand (bvlshr c216b ((_ int2bv 32) 24)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand (bvlshr c216b ((_ int2bv 32) 16)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand (bvlshr c216b ((_ int2bv 32) 8)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand c216b ((_ int2bv 32) 255))))))
-
-;; H
-  (assert
-  (= temp___326 (temp___318
-                ((_ extract 7 0) (bvand (bvlshr c206b ((_ int2bv 32) 24)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand (bvlshr c206b ((_ int2bv 32) 16)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand (bvlshr c206b ((_ int2bv 32) 8)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand c206b ((_ int2bv 32) 255))))))
-
-;; H
-  (assert
-  (= temp___317 (temp___309
-                ((_ extract 7 0) (bvand (bvlshr c196b ((_ int2bv 32) 24)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand (bvlshr c196b ((_ int2bv 32) 16)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand (bvlshr c196b ((_ int2bv 32) 8)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand c196b ((_ int2bv 32) 255))))))
-
-;; H
-  (assert
-  (= temp___316 (temp___302
-                ((_ extract 7 0) (bvand (bvlshr c186b ((_ int2bv 32) 24)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand (bvlshr c186b ((_ int2bv 32) 16)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand (bvlshr c186b ((_ int2bv 32) 8)) ((_ int2bv 32) 255)))
-                ((_ extract 7 0) (bvand c186b ((_ int2bv 32) 255))))))
-
-;; H
   (assert (=> (<= 1 4) (= o36 (+ (- 4 1) 1))))
 
 ;; H
@@ -2051,7 +1819,18 @@
   (assert (and (= o41 o40) (in_range o40)))
 
 ;; H
-  (assert (= (concat1 temp___316 1 4 temp___317 1 4) temp___325))
+  (assert
+  (= (concat1
+     (temp___302
+     ((_ extract 7 0) (bvand (bvlshr c186b ((_ int2bv 32) 24)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand (bvlshr c186b ((_ int2bv 32) 16)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand (bvlshr c186b ((_ int2bv 32) 8)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand c186b ((_ int2bv 32) 255)))) 1 4
+     (temp___309
+     ((_ extract 7 0) (bvand (bvlshr c196b ((_ int2bv 32) 24)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand (bvlshr c196b ((_ int2bv 32) 16)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand (bvlshr c196b ((_ int2bv 32) 8)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand c196b ((_ int2bv 32) 255)))) 1 4) temp___325))
 
 ;; H
   (assert (= (mk 1 o41) temp___3251))
@@ -2059,7 +1838,11 @@
 ;; H
   (assert
   (=> (= (length (mk___t temp___325 temp___3251)) 0)
-  (= temp___326 temp___334)))
+  (= (temp___318
+     ((_ extract 7 0) (bvand (bvlshr c206b ((_ int2bv 32) 24)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand (bvlshr c206b ((_ int2bv 32) 16)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand (bvlshr c206b ((_ int2bv 32) 8)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand c206b ((_ int2bv 32) 255)))) temp___334)))
 
 ;; H
   (assert
@@ -2111,7 +1894,12 @@
   (assert
   (=> (not (= (length (mk___t temp___325 temp___3251)) 0))
   (= (concat1 temp___325 (to_rep1 (first temp___3251))
-     (to_rep1 (last temp___3251)) temp___326 1 4) temp___334)))
+     (to_rep1 (last temp___3251))
+     (temp___318
+     ((_ extract 7 0) (bvand (bvlshr c206b ((_ int2bv 32) 24)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand (bvlshr c206b ((_ int2bv 32) 16)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand (bvlshr c206b ((_ int2bv 32) 8)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand c206b ((_ int2bv 32) 255)))) 1 4) temp___334)))
 
 ;; H
   (assert
@@ -2121,7 +1909,11 @@
 ;; H
   (assert
   (=> (= (length (mk___t temp___334 temp___3341)) 0)
-  (= temp___335 temp___343)))
+  (= (temp___327
+     ((_ extract 7 0) (bvand (bvlshr c216b ((_ int2bv 32) 24)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand (bvlshr c216b ((_ int2bv 32) 16)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand (bvlshr c216b ((_ int2bv 32) 8)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand c216b ((_ int2bv 32) 255)))) temp___343)))
 
 ;; H
   (assert
@@ -2173,7 +1965,12 @@
   (assert
   (=> (not (= (length (mk___t temp___334 temp___3341)) 0))
   (= (concat1 temp___334 (to_rep1 (first temp___3341))
-     (to_rep1 (last temp___3341)) temp___335 1 4) temp___343)))
+     (to_rep1 (last temp___3341))
+     (temp___327
+     ((_ extract 7 0) (bvand (bvlshr c216b ((_ int2bv 32) 24)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand (bvlshr c216b ((_ int2bv 32) 16)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand (bvlshr c216b ((_ int2bv 32) 8)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand c216b ((_ int2bv 32) 255)))) 1 4) temp___343)))
 
 ;; H
   (assert
@@ -2183,7 +1980,11 @@
 ;; H
   (assert
   (=> (= (length (mk___t temp___343 temp___3431)) 0)
-  (= temp___344 temp___352)))
+  (= (temp___336
+     ((_ extract 7 0) (bvand (bvlshr c226b ((_ int2bv 32) 24)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand (bvlshr c226b ((_ int2bv 32) 16)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand (bvlshr c226b ((_ int2bv 32) 8)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand c226b ((_ int2bv 32) 255)))) temp___352)))
 
 ;; H
   (assert
@@ -2235,7 +2036,12 @@
   (assert
   (=> (not (= (length (mk___t temp___343 temp___3431)) 0))
   (= (concat1 temp___343 (to_rep1 (first temp___3431))
-     (to_rep1 (last temp___3431)) temp___344 1 4) temp___352)))
+     (to_rep1 (last temp___3431))
+     (temp___336
+     ((_ extract 7 0) (bvand (bvlshr c226b ((_ int2bv 32) 24)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand (bvlshr c226b ((_ int2bv 32) 16)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand (bvlshr c226b ((_ int2bv 32) 8)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand c226b ((_ int2bv 32) 255)))) 1 4) temp___352)))
 
 ;; H
   (assert
@@ -2245,7 +2051,11 @@
 ;; H
   (assert
   (=> (= (length (mk___t temp___352 temp___3521)) 0)
-  (= temp___353 temp___361)))
+  (= (temp___345
+     ((_ extract 7 0) (bvand (bvlshr c236b ((_ int2bv 32) 24)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand (bvlshr c236b ((_ int2bv 32) 16)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand (bvlshr c236b ((_ int2bv 32) 8)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand c236b ((_ int2bv 32) 255)))) temp___361)))
 
 ;; H
   (assert
@@ -2297,7 +2107,12 @@
   (assert
   (=> (not (= (length (mk___t temp___352 temp___3521)) 0))
   (= (concat1 temp___352 (to_rep1 (first temp___3521))
-     (to_rep1 (last temp___3521)) temp___353 1 4) temp___361)))
+     (to_rep1 (last temp___3521))
+     (temp___345
+     ((_ extract 7 0) (bvand (bvlshr c236b ((_ int2bv 32) 24)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand (bvlshr c236b ((_ int2bv 32) 16)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand (bvlshr c236b ((_ int2bv 32) 8)) ((_ int2bv 32) 255)))
+     ((_ extract 7 0) (bvand c236b ((_ int2bv 32) 255)))) 1 4) temp___361)))
 
 ;; H
   (assert

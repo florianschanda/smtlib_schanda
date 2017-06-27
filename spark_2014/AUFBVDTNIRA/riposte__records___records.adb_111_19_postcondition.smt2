@@ -286,12 +286,12 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(define-fun dynamic_invariant ((temp___expr_188 Int)
-  (temp___is_init_185 Bool) (temp___skip_constant_186 Bool)
-  (temp___do_toplevel_187 Bool)) Bool (=>
-                                      (or (= temp___is_init_185 true)
+(define-fun dynamic_invariant ((temp___expr_180 Int)
+  (temp___is_init_177 Bool) (temp___skip_constant_178 Bool)
+  (temp___do_toplevel_179 Bool)) Bool (=>
+                                      (or (= temp___is_init_177 true)
                                       (<= 0 255)) (in_range1
-                                      temp___expr_188)))
+                                      temp___expr_180)))
 
 ;; null_pair__def_axiom
   (assert (= null_pair (mk___rep (mk___split_fields (of_rep 0) (of_rep 0)))))
@@ -306,9 +306,9 @@
 
 (declare-fun o3 () unsigned_byte)
 
-(declare-fun temp___291 () unsigned_byte)
+(declare-fun temp___278 () unsigned_byte)
 
-(declare-fun temp___2911 () unsigned_byte)
+(declare-fun temp___2781 () unsigned_byte)
 
 (declare-fun o4 () unsigned_byte)
 
@@ -351,14 +351,14 @@
   (assert (= o o3))
 
 ;; H
-  (assert (= temp___291 o2))
+  (assert (= temp___278 o2))
 
 ;; H
-  (assert (= temp___2911 o3))
+  (assert (= temp___2781 o3))
 
 ;; H
   (assert
-  (= (mk___rep (mk___split_fields temp___291 temp___2911)) null_pair))
+  (= (mk___rep (mk___split_fields temp___278 temp___2781)) null_pair))
 
 ;; H
   (assert (= records__is_valid_b__result1 records__is_valid_b__result2))

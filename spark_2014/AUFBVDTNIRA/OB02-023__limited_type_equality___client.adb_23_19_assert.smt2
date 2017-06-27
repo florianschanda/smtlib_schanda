@@ -275,8 +275,7 @@
 ;; user_eq__def_axiom
   (assert
   (forall ((a us_rep2) (b us_rep2))
-  (! (and (oeq__function_guard (oeq a b) a b) (= (user_eq3 a b) (oeq a b))) :pattern (
-  (user_eq3 a b)) )))
+  (! (= (user_eq3 a b) (oeq a b)) :pattern ((user_eq3 a b)) )))
 
 ;; oeq__post_axiom
   (assert true)
@@ -284,12 +283,11 @@
 ;; oeq__def_axiom
   (assert
   (forall ((left us_rep2) (right us_rep2))
-  (! (=> (oeq__function_guard (oeq left right) left right)
-     (= (= (oeq left right) true)
+  (! (= (= (oeq left right) true)
      (= (to_rep
         (rec__p3__limited_record_with_user_eq__x (us_split_fields5 left))) 
      (to_rep
-     (rec__p3__limited_record_with_user_eq__x (us_split_fields5 right)))))) :pattern (
+     (rec__p3__limited_record_with_user_eq__x (us_split_fields5 right))))) :pattern (
   (oeq left right)) )))
 
 (declare-sort index 0)
@@ -483,17 +481,11 @@
 ;; oeq__def_axiom
   (assert
   (forall ((left (Array Int us_rep2)) (right (Array Int us_rep2)))
-  (! (=> (oeq__function_guard1 (oeq1 left right) left right)
-     (and
-     (forall ((x Int)) (oeq__function_guard
-     (oeq (select left x) (select right x)) (select left x)
-     (select right x)))
-     (= (= (oeq1 left right) true)
+  (! (= (= (oeq1 left right) true)
      (forall ((x Int))
      (=> (and (<= 1 x) (<= x 3))
-     (= (oeq (select left x) (select right x)) true)))))) :pattern ((oeq1
-                                                                    left
-                                                                    right)) )))
+     (= (oeq (select left x) (select right x)) true)))) :pattern ((oeq1 left
+                                                                  right)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -514,11 +506,11 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range temp___expr_15)))
 
-(define-fun dynamic_invariant1 ((temp___expr_160 Int)
-  (temp___is_init_157 Bool) (temp___skip_constant_158 Bool)
-  (temp___do_toplevel_159 Bool)) Bool (=>
-                                      (or (= temp___is_init_157 true)
-                                      (<= 1 3)) (in_range1 temp___expr_160)))
+(define-fun dynamic_invariant1 ((temp___expr_159 Int)
+  (temp___is_init_156 Bool) (temp___skip_constant_157 Bool)
+  (temp___do_toplevel_158 Bool)) Bool (=>
+                                      (or (= temp___is_init_156 true)
+                                      (<= 1 3)) (in_range1 temp___expr_159)))
 
 (declare-fun x__split_fields () integer)
 
@@ -528,13 +520,6 @@
   (assert
   (= (bool_eq1 (mk___rep (mk___split_fields x__split_fields))
      (mk___rep (mk___split_fields x__split_fields))) true))
-
-;; H
-  (assert (oeq__function_guard
-  (oeq (mk___rep2 (mk___split_fields2 z__split_fields))
-  (mk___rep2 (mk___split_fields2 z__split_fields)))
-  (mk___rep2 (mk___split_fields2 z__split_fields))
-  (mk___rep2 (mk___split_fields2 z__split_fields))))
 
 (assert
 ;; WP_parameter_def

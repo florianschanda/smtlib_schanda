@@ -199,13 +199,12 @@
      (and (dynamic_invariant value true true true) (dynamic_invariant1 amount
      true true true)) (<= amount 16))
      (let ((result (shift_right value amount)))
-     (=> (shift_right__function_guard result value amount)
      (and
      (= result (bvudiv value (ite (< amount 4294967296)
                              (bvshl ((_ int2bv 32) 1) ((_ int2bv 32) amount))
                              ((_ int2bv 32) 0))))
-     (dynamic_invariant result true false true))))) :pattern ((shift_right
-                                                              value amount)) ))))
+     (dynamic_invariant result true false true)))) :pattern ((shift_right
+                                                             value amount)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 

@@ -206,25 +206,6 @@
 (define-fun tTxSP1__ref___projection ((a tTxSP1__ref)) tTxSP1 (tTxSP1__content
                                                               a))
 
-(declare-sort t1b 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 5 x) (<= x 7)))
-
-(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
-
-(declare-fun user_eq2 (t1b t1b) Bool)
-
-(declare-fun dummy2 () t1b)
-
-(declare-datatypes () ((t1b__ref (mk_t1b__ref (t1b__content t1b)))))
-(define-fun t1b__ref___projection ((a t1b__ref)) t1b (t1b__content a))
-
 (declare-fun x () (Array Int character))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -242,19 +223,19 @@
 
 (declare-sort tstr3P1 0)
 
-(define-fun in_range3 ((x1 Int)) Bool (and (<= 1 x1) (<= x1 3)))
+(define-fun in_range2 ((x1 Int)) Bool (and (<= 1 x1) (<= x1 3)))
 
-(define-fun bool_eq4 ((x1 Int) (y Int)) Bool (ite (= x1 y) true false))
+(define-fun bool_eq3 ((x1 Int) (y Int)) Bool (ite (= x1 y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
 
-(declare-fun user_eq3 (tstr3P1 tstr3P1) Bool)
+(declare-fun user_eq2 (tstr3P1 tstr3P1) Bool)
 
-(declare-fun dummy3 () tstr3P1)
+(declare-fun dummy2 () tstr3P1)
 
 (declare-datatypes ()
 ((tstr3P1__ref (mk_tstr3P1__ref (tstr3P1__content tstr3P1)))))
@@ -271,8 +252,7 @@
 ;; blah__def_axiom
   (assert
   (forall ((s (Array Int character)))
-  (! (=> (blah__function_guard (blah s) s)
-     (= (= (blah s) true) (= (to_rep (select s 1)) 97))) :pattern ((blah s)) )))
+  (! (= (= (blah s) true) (= (to_rep (select s 1)) 97)) :pattern ((blah s)) )))
 
 (define-fun dynamic_invariant ((temp___expr_63 Int) (temp___is_init_60 Bool)
   (temp___skip_constant_61 Bool)
@@ -283,16 +263,8 @@
 ;; x__def_axiom
   (assert (= x (p__x__aggregate_def 97 98 99)))
 
-(declare-fun p__x__assume () (Array Int character))
-
 ;; H
-  (assert (= p__x__assume (p__x__aggregate_def 97 98 99)))
-
-;; H
-  (assert (= p__x__assume x))
-
-;; H
-  (assert (blah__function_guard (blah (slide x 5 1)) (slide x 5 1)))
+  (assert (= (p__x__aggregate_def 97 98 99) x))
 
 (assert
 ;; WP_parameter_def

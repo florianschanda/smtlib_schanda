@@ -73,10 +73,8 @@
 ;; read_partial_0__post_axiom
   (assert
   (forall ((levels__x0 Int))
-  (! (=> (dynamic_invariant levels__x0 true true true)
-     (let ((result (read_partial_0 levels__x0)))
-     (=> (read_partial_0__function_guard result levels__x0)
-     (dynamic_invariant result true false true)))) :pattern ((read_partial_0
+  (! (=> (dynamic_invariant levels__x0 true true true) (dynamic_invariant
+     (read_partial_0 levels__x0) true false true)) :pattern ((read_partial_0
                                                              levels__x0)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -93,10 +91,8 @@
   (assert
   (forall ((levels__nested_1__x1 Int))
   (! (=> (dynamic_invariant levels__nested_1__x1 true true true)
-     (let ((result (read_partial_1 levels__nested_1__x1)))
-     (=> (read_partial_1__function_guard result levels__nested_1__x1)
-     (dynamic_invariant result true false true)))) :pattern ((read_partial_1
-                                                             levels__nested_1__x1)) )))
+     (dynamic_invariant (read_partial_1 levels__nested_1__x1) true false
+     true)) :pattern ((read_partial_1 levels__nested_1__x1)) )))
 
 (declare-fun read_partial_1_inner (Int Int) Int)
 
@@ -109,13 +105,11 @@
   (! (=>
      (and (dynamic_invariant levels__nested_1__nested_2__x2 true true true)
      (dynamic_invariant levels__nested_1__nested_2__y2 true true true))
-     (let ((result (read_partial_1_inner levels__nested_1__nested_2__x2
-                   levels__nested_1__nested_2__y2)))
-     (=> (read_partial_1_inner__function_guard result
-     levels__nested_1__nested_2__x2 levels__nested_1__nested_2__y2)
-     (dynamic_invariant result true false true)))) :pattern ((read_partial_1_inner
-                                                             levels__nested_1__nested_2__x2
-                                                             levels__nested_1__nested_2__y2)) )))
+     (dynamic_invariant
+     (read_partial_1_inner levels__nested_1__nested_2__x2
+     levels__nested_1__nested_2__y2) true false true)) :pattern ((read_partial_1_inner
+                                                                 levels__nested_1__nested_2__x2
+                                                                 levels__nested_1__nested_2__y2)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
@@ -127,10 +121,8 @@
   (assert
   (forall ((levels__nested_1__nested_2__x2 Int))
   (! (=> (dynamic_invariant levels__nested_1__nested_2__x2 true true true)
-     (let ((result (read_partial_2 levels__nested_1__nested_2__x2)))
-     (=> (read_partial_2__function_guard result
-     levels__nested_1__nested_2__x2) (dynamic_invariant result true false
-     true)))) :pattern ((read_partial_2 levels__nested_1__nested_2__x2)) )))
+     (dynamic_invariant (read_partial_2 levels__nested_1__nested_2__x2) true
+     false true)) :pattern ((read_partial_2 levels__nested_1__nested_2__x2)) )))
 
 (declare-fun x0 () Int)
 
@@ -186,9 +178,7 @@
   (assert (in_range y2))
 
 ;; H
-  (assert
-  (and (and (= o (read_partial_2 x2)) (read_partial_2__function_guard o x2))
-  (in_range o)))
+  (assert (and (= o (read_partial_2 x2)) (in_range o)))
 
 ;; H
   (assert (and (= o1 (+ x0 x1)) (in_range (+ x0 x1))))
@@ -212,22 +202,13 @@
   (assert (= a3 a1))
 
 ;; H
-  (assert
-  (and
-  (and (= o7 (read_partial_2 x2)) (read_partial_2__function_guard o7 x2))
-  (in_range o7)))
+  (assert (and (= o7 (read_partial_2 x2)) (in_range o7)))
 
 ;; H
-  (assert
-  (and
-  (and (= o4 (read_partial_1 x1)) (read_partial_1__function_guard o4 x1))
-  (in_range o4)))
+  (assert (and (= o4 (read_partial_1 x1)) (in_range o4)))
 
 ;; H
-  (assert
-  (and
-  (and (= o5 (read_partial_0 x0)) (read_partial_0__function_guard o5 x0))
-  (in_range o5)))
+  (assert (and (= o5 (read_partial_0 x0)) (in_range o5)))
 
 ;; H
   (assert (= o6 (+ o5 o4)))

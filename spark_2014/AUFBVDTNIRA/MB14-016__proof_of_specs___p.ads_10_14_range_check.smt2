@@ -73,10 +73,8 @@
 ;; dyn__post_axiom
   (assert
   (forall ((f__a Int))
-  (! (=> (dynamic_invariant f__a true true true)
-     (let ((result (dyn f__a)))
-     (=> (dyn__function_guard result f__a) (dynamic_invariant result true
-     false true)))) :pattern ((dyn f__a)) )))
+  (! (=> (dynamic_invariant f__a true true true) (dynamic_invariant
+     (dyn f__a) true false true)) :pattern ((dyn f__a)) )))
 
 (declare-sort r 0)
 
@@ -113,7 +111,7 @@
   (assert (in_range a))
 
 ;; H
-  (assert (and (and (= o (dyn a)) (dyn__function_guard o a)) (in_range o)))
+  (assert (and (= o (dyn a)) (in_range o)))
 
 (assert
 ;; WP_parameter_def

@@ -57,11 +57,11 @@
 (define-fun element_type__ref___projection ((a element_type__ref)) element_type 
   (element_type__content a))
 
-(define-fun dynamic_invariant ((temp___expr_320 Int)
-  (temp___is_init_317 Bool) (temp___skip_constant_318 Bool)
-  (temp___do_toplevel_319 Bool)) Bool (=>
-                                      (or (= temp___is_init_317 true)
-                                      (<= 1 100)) (in_range temp___expr_320)))
+(define-fun dynamic_invariant ((temp___expr_319 Int)
+  (temp___is_init_316 Bool) (temp___skip_constant_317 Bool)
+  (temp___do_toplevel_318 Bool)) Bool (=>
+                                      (or (= temp___is_init_316 true)
+                                      (<= 1 100)) (in_range temp___expr_319)))
 
 (declare-fun nth ((_ BitVec 32) Int) Bool)
 
@@ -487,12 +487,12 @@
 (define-fun key_type__ref_2__projection ((a key_type__ref)) key_type 
   (key_type__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_665 Int)
-  (temp___is_init_662 Bool) (temp___skip_constant_663 Bool)
-  (temp___do_toplevel_664 Bool)) Bool (=>
-                                      (or (= temp___is_init_662 true)
+(define-fun dynamic_invariant1 ((temp___expr_649 Int)
+  (temp___is_init_646 Bool) (temp___skip_constant_647 Bool)
+  (temp___do_toplevel_648 Bool)) Bool (=>
+                                      (or (= temp___is_init_646 true)
                                       (<= 1 100)) (in_range2
-                                      temp___expr_665)))
+                                      temp___expr_649)))
 
 (declare-fun contains (us_rep Int) Bool)
 
@@ -592,27 +592,22 @@
 (define-fun key_type__ref_3__projection ((a key_type__ref1)) key_type1 
   (key_type__content1 a))
 
-(define-fun dynamic_invariant2 ((temp___expr_671 Int)
-  (temp___is_init_668 Bool) (temp___skip_constant_669 Bool)
-  (temp___do_toplevel_670 Bool)) Bool (=>
-                                      (or (= temp___is_init_668 true)
+(define-fun dynamic_invariant2 ((temp___expr_655 Int)
+  (temp___is_init_652 Bool) (temp___skip_constant_653 Bool)
+  (temp___do_toplevel_654 Bool)) Bool (=>
+                                      (or (= temp___is_init_652 true)
                                       (<= 1 100)) (in_range4
-                                      temp___expr_671)))
+                                      temp___expr_655)))
 
 ;; contains__post_axiom
   (assert
   (forall ((container us_rep))
   (forall ((key1 Int))
   (! (=> (dynamic_invariant2 key1 true true true)
-     (and (forall ((e Int)) (key__function_guard (key e) e))
-     (and (forall ((e Int)) (key__function_guard (key e) e))
-     (and
-     (forall ((e Int)) (my_eq__function_guard (my_eq key1 (key e)) key1
-     (key e)))
      (= (= (contains container key1) true)
      (exists ((e Int))
      (and (and (in_range3 e) (= (contains1 (model__ container) e) true))
-     (= (my_eq key1 (key e)) true)))))))) :pattern ((contains container key1)) ))))
+     (= (my_eq key1 (key e)) true))))) :pattern ((contains container key1)) ))))
 
 (declare-sort element_type2 0)
 
@@ -636,12 +631,12 @@
 (define-fun element_type__ref_2__projection ((a element_type__ref2)) element_type2 
   (element_type__content2 a))
 
-(define-fun dynamic_invariant3 ((temp___expr_326 Int)
-  (temp___is_init_323 Bool) (temp___skip_constant_324 Bool)
-  (temp___do_toplevel_325 Bool)) Bool (=>
-                                      (or (= temp___is_init_323 true)
+(define-fun dynamic_invariant3 ((temp___expr_325 Int)
+  (temp___is_init_322 Bool) (temp___skip_constant_323 Bool)
+  (temp___do_toplevel_324 Bool)) Bool (=>
+                                      (or (= temp___is_init_322 true)
                                       (<= 1 100)) (in_range5
-                                      temp___expr_326)))
+                                      temp___expr_325)))
 
 (declare-datatypes ()
 ((us_split_fields2
@@ -815,34 +810,30 @@
 ;; my_eq__def_axiom
   (assert
   (forall ((i1 Int) (i2 Int))
-  (! (=> (my_eq__function_guard (my_eq i1 i2) i1 i2)
-     (= (= (my_eq i1 i2) true) (= i1 i2))) :pattern ((my_eq i1 i2)) )))
+  (! (= (= (my_eq i1 i2) true) (= i1 i2)) :pattern ((my_eq i1 i2)) )))
 
 ;; key__post_axiom
   (assert
   (forall ((i Int))
-  (! (=> (dynamic_invariant i true true true)
-     (let ((result (key i)))
-     (=> (key__function_guard result i) (dynamic_invariant1 result true false
-     true)))) :pattern ((key i)) )))
+  (! (=> (dynamic_invariant i true true true) (dynamic_invariant1 (key i)
+     true false true)) :pattern ((key i)) )))
 
 ;; key__def_axiom
   (assert
   (forall ((i Int))
-  (! (=>
-     (and (dynamic_invariant i true true true) (key__function_guard (key i)
-     i)) (= (key i) i)) :pattern ((key i)) )))
+  (! (=> (dynamic_invariant i true true true) (= (key i) i)) :pattern (
+  (key i)) )))
 
-(define-fun dynamic_invariant4 ((temp___expr_168 (_ BitVec 32))
-  (temp___is_init_165 Bool) (temp___skip_constant_166 Bool)
-  (temp___do_toplevel_167 Bool)) Bool true)
+(define-fun dynamic_invariant4 ((temp___expr_167 (_ BitVec 32))
+  (temp___is_init_164 Bool) (temp___skip_constant_165 Bool)
+  (temp___do_toplevel_166 Bool)) Bool true)
 
-(define-fun dynamic_invariant5 ((temp___expr_174 Int)
-  (temp___is_init_171 Bool) (temp___skip_constant_172 Bool)
-  (temp___do_toplevel_173 Bool)) Bool (=>
-                                      (or (= temp___is_init_171 true)
+(define-fun dynamic_invariant5 ((temp___expr_173 Int)
+  (temp___is_init_170 Bool) (temp___skip_constant_171 Bool)
+  (temp___do_toplevel_172 Bool)) Bool (=>
+                                      (or (= temp___is_init_170 true)
                                       (<= 0 2147483647)) (in_range1
-                                      temp___expr_174)))
+                                      temp___expr_173)))
 
 (declare-fun no_element () us_rep3)
 
@@ -904,11 +895,11 @@
   (forall ((a us_rep1) (b us_rep1))
   (! (= (user_eq4 a b) (oeq3 a b)) :pattern ((user_eq4 a b)) )))
 
-(define-fun default_initial_assumption ((temp___expr_399 us_rep1)
-  (temp___skip_top_level_400 Bool)) Bool (=>
+(define-fun default_initial_assumption ((temp___expr_392 us_rep1)
+  (temp___skip_top_level_393 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_400 true))
-                                         (= (length2 temp___expr_399) 0)))
+                                         (= temp___skip_top_level_393 true))
+                                         (= (length2 temp___expr_392) 0)))
 
 ;; find__post_axiom
   (assert
@@ -917,11 +908,9 @@
   (! (=> (dynamic_invariant3 item true true true)
      (let ((result (find container item)))
      (and
-     (and (my_eq__function_guard (my_eq item (get container result)) item
-     (get container result))
      (=> (< 0 result)
      (and (<= result (length2 container))
-     (= (my_eq item (get container result)) true)))) (dynamic_invariant5
+     (= (my_eq item (get container result)) true))) (dynamic_invariant5
      result true false true)))) :pattern ((find container item)) ))))
 
 (declare-fun length3 (us_rep4) Int)
@@ -932,13 +921,13 @@
 
 (declare-fun is_empty__function_guard (Bool us_rep4) Bool)
 
-(define-fun default_initial_assumption1 ((temp___expr_421 us_rep4)
-  (temp___skip_top_level_422 Bool)) Bool (=>
+(define-fun default_initial_assumption1 ((temp___expr_412 us_rep4)
+  (temp___skip_top_level_413 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_422 true))
+                                         (= temp___skip_top_level_413 true))
                                          (and
-                                         (= (is_empty temp___expr_421) true)
-                                         (= (length3 temp___expr_421) 0))))
+                                         (= (is_empty temp___expr_412) true)
+                                         (= (length3 temp___expr_412) 0))))
 
 (declare-fun has_key (us_rep4 us_rep3) Bool)
 
@@ -966,11 +955,11 @@
 
 (declare-fun is_empty__function_guard1 (Bool us_rep2) Bool)
 
-(define-fun default_initial_assumption2 ((temp___expr_362 us_rep2)
-  (temp___skip_top_level_363 Bool)) Bool (=>
+(define-fun default_initial_assumption2 ((temp___expr_361 us_rep2)
+  (temp___skip_top_level_362 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_363 true))
-                                         (= (is_empty1 temp___expr_362) true)))
+                                         (= temp___skip_top_level_362 true))
+                                         (= (is_empty1 temp___expr_361) true)))
 
 (declare-fun length4 (us_rep2) Int)
 
@@ -1019,17 +1008,15 @@
      (and
      (and
      (and (= (length2 result) (length container))
-     (forall ((temp___440 Int))
+     (forall ((temp___429 Int))
      (=>
-     (and (in_range7 temp___440)
-     (= (iter_has_element result temp___440) true))
-     (= (contains1 (model__ container) (get result temp___440)) true))))
+     (and (in_range7 temp___429)
+     (= (iter_has_element result temp___429) true))
+     (= (contains1 (model__ container) (get result temp___429)) true))))
      (forall ((item Int))
      (=> (and (in_range3 item) (= (contains1 (model__ container) item) true))
      (and (< 0 (find result item))
-     (and (my_eq__function_guard (my_eq (get result (find result item)) item)
-     (get result (find result item)) item)
-     (= (my_eq (get result (find result item)) item) true))))))
+     (= (my_eq (get result (find result item)) item) true)))))
      (forall ((i Int))
      (=> (and (<= 1 i) (<= i (length container)))
      (= (find result (get result i)) i))))
@@ -1037,9 +1024,7 @@
      (=> (and (<= 1 i) (<= i (length container)))
      (forall ((j Int))
      (=> (and (<= 1 j) (<= j (length container)))
-     (and (my_eq__function_guard (my_eq (get result i) (get result j))
-     (get result i) (get result j))
-     (=> (= (my_eq (get result i) (get result j)) true) (= i j))))))))) :pattern (
+     (=> (= (my_eq (get result i) (get result j)) true) (= i j)))))))) :pattern (
   (elements container)) )))
 
 ;; positions__post_axiom
@@ -1076,24 +1061,23 @@
 ;; has_element__post__dispatch_axiom
   (assert true)
 
-(define-fun dynamic_invariant6 ((temp___expr_355 Int)
-  (temp___is_init_352 Bool) (temp___skip_constant_353 Bool)
-  (temp___do_toplevel_354 Bool)) Bool (=>
-                                      (or (= temp___is_init_352 true)
+(define-fun dynamic_invariant6 ((temp___expr_354 Int)
+  (temp___is_init_351 Bool) (temp___skip_constant_352 Bool)
+  (temp___do_toplevel_353 Bool)) Bool (=>
+                                      (or (= temp___is_init_351 true)
                                       (<= 1 100)) (in_range3
-                                      temp___expr_355)))
+                                      temp___expr_354)))
 
 ;; contains__post_axiom
   (assert
   (forall ((container us_rep2))
   (forall ((item Int))
   (! (=> (dynamic_invariant6 item true true true)
-     (and (forall ((e Int)) (my_eq__function_guard (my_eq e item) e item))
      (=> (= (of_int 1) true)
      (=>
      (exists ((e Int))
      (and (and (in_range3 e) (= (contains1 container e) true))
-     (= (my_eq e item) true))) (= (contains1 container item) true))))) :pattern (
+     (= (my_eq e item) true))) (= (contains1 container item) true)))) :pattern (
   (contains1 container item)) ))))
 
 ;; length__post_axiom
@@ -1117,19 +1101,18 @@
   (forall ((left us_rep2) (right us_rep2))
   (forall ((item Int))
   (! (=> (dynamic_invariant6 item true true true)
-     (and (forall ((e Int)) (my_eq__function_guard (my_eq e item) e item))
      (= (= (included_except left right item) true)
      (forall ((e Int))
      (=> (and (in_range3 e) (= (contains1 left e) true))
-     (or (= (contains1 right e) true) (= (my_eq e item) true))))))) :pattern (
+     (or (= (contains1 right e) true) (= (my_eq e item) true)))))) :pattern (
   (included_except left right item)) ))))
 
-(define-fun dynamic_invariant7 ((temp___expr_392 Int)
-  (temp___is_init_389 Bool) (temp___skip_constant_390 Bool)
-  (temp___do_toplevel_391 Bool)) Bool (=>
-                                      (or (= temp___is_init_389 true)
+(define-fun dynamic_invariant7 ((temp___expr_385 Int)
+  (temp___is_init_382 Bool) (temp___skip_constant_383 Bool)
+  (temp___do_toplevel_384 Bool)) Bool (=>
+                                      (or (= temp___is_init_382 true)
                                       (<= 0 2147483647)) (in_range7
-                                      temp___expr_392)))
+                                      temp___expr_385)))
 
 ;; length__post_axiom
   (assert
@@ -1160,12 +1143,12 @@
 (define-fun element_type__ref_4__projection ((a element_type__ref3)) element_type3 
   (element_type__content3 a))
 
-(define-fun dynamic_invariant8 ((temp___expr_386 Int)
-  (temp___is_init_383 Bool) (temp___skip_constant_384 Bool)
-  (temp___do_toplevel_385 Bool)) Bool (=>
-                                      (or (= temp___is_init_383 true)
+(define-fun dynamic_invariant8 ((temp___expr_379 Int)
+  (temp___is_init_376 Bool) (temp___skip_constant_377 Bool)
+  (temp___do_toplevel_378 Bool)) Bool (=>
+                                      (or (= temp___is_init_376 true)
                                       (<= 1 100)) (in_range8
-                                      temp___expr_386)))
+                                      temp___expr_379)))
 
 ;; get__post_axiom
   (assert
@@ -1209,12 +1192,12 @@
 (define-fun element_type__ref_5__projection ((a element_type__ref4)) element_type4 
   (element_type__content4 a))
 
-(define-fun dynamic_invariant9 ((temp___expr_414 Int)
-  (temp___is_init_411 Bool) (temp___skip_constant_412 Bool)
-  (temp___do_toplevel_413 Bool)) Bool (=>
-                                      (or (= temp___is_init_411 true)
+(define-fun dynamic_invariant9 ((temp___expr_405 Int)
+  (temp___is_init_402 Bool) (temp___skip_constant_403 Bool)
+  (temp___do_toplevel_404 Bool)) Bool (=>
+                                      (or (= temp___is_init_402 true)
                                       (<= 1 2147483647)) (in_range9
-                                      temp___expr_414)))
+                                      temp___expr_405)))
 
 (declare-fun witness (us_rep4 us_rep3) Int)
 
@@ -1304,21 +1287,11 @@
   (forall ((left us_rep2) (right us_rep2))
   (forall ((key1 Int))
   (! (=> (dynamic_invariant2 key1 true true true)
-     (and (forall ((e Int)) (key__function_guard (key e) e))
-     (and (forall ((e Int)) (key__function_guard (key e) e))
-     (and
-     (forall ((e Int)) (my_eq__function_guard (my_eq (key e) key1) (key e)
-     key1))
      (= (= (m_included_except left right key1) true)
      (forall ((e Int))
      (=> (and (in_range3 e) (= (contains1 left e) true))
-     (or (= (contains1 right e) true) (= (my_eq (key e) key1) true))))))))) :pattern (
+     (or (= (contains1 right e) true) (= (my_eq (key e) key1) true)))))) :pattern (
   (m_included_except left right key1)) ))))
-
-;; temp___result_164_def
-  (assert
-  (forall ((container us_rep) (position us_rep3)) (key__function_guard
-  (key (element container position)) (element container position))))
 
 (define-fun key__2 ((container us_rep)
   (position us_rep3)) Int (key (element container position)))
@@ -1331,20 +1304,14 @@
   (forall ((key1 Int))
   (! (=> (dynamic_invariant2 key1 true true true)
      (let ((result (find1 container key1)))
-     (and (forall ((e Int)) (key__function_guard (key e) e))
-     (and (forall ((e Int)) (key__function_guard (key e) e))
-     (and
-     (forall ((e Int)) (my_eq__function_guard (my_eq key1 (key e)) key1
-     (key e)))
-     (and (my_eq__function_guard (my_eq (key__2 container result) key1)
-     (key__2 container result) key1)
      (ite (forall ((e Int))
           (=> (and (in_range3 e) (= (contains1 (model__ container) e) true))
           (not (= (my_eq key1 (key e)) true))))
      (= (bool_eq10 result no_element) true)
      (and (= (has_key (positions container) result) true)
-     (= (my_eq (key__2 container result) key1) true))))))))) :pattern (
-  (find1 container key1)) ))))
+     (= (my_eq (key__2 container result) key1) true))))) :pattern ((find1
+                                                                   container
+                                                                   key1)) ))))
 
 (declare-fun l__split_fields () us_main_type)
 

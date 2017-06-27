@@ -419,68 +419,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
 
-(declare-sort t18s 0)
-
-(define-fun in_range4 ((x1 Int)) Bool (and (<= 1 x1) (<= x1 10)))
-
-(define-fun bool_eq5 ((x1 Int) (y1 Int)) Bool (ite (= x1 y1) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq4 (t18s t18s) Bool)
-
-(declare-fun dummy4 () t18s)
-
-(declare-datatypes () ((t18s__ref (mk_t18s__ref (t18s__content t18s)))))
-(define-fun t18s__ref___projection ((a t18s__ref)) t18s (t18s__content a))
-
-(declare-sort t19s 0)
-
-(define-fun in_range5 ((x1 (_ BitVec 8))) Bool (and
-                                               (bvule ((_ int2bv 8) 0) x1)
-                                               (bvule x1 ((_ int2bv 8) 7))))
-
-(define-fun in_range_int1 ((x1 Int)) Bool (and (<= 0 x1) (<= x1 7)))
-
-(define-fun bool_eq6 ((x1 (_ BitVec 8))
-  (y1 (_ BitVec 8))) Bool (ite (= x1 y1) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 ((_ BitVec 8)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) (_ BitVec 8))
-
-(declare-fun user_eq5 (t19s t19s) Bool)
-
-(declare-fun dummy5 () t19s)
-
-(declare-datatypes () ((t19s__ref (mk_t19s__ref (t19s__content t19s)))))
-(define-fun t19s__ref___projection ((a t19s__ref)) t19s (t19s__content a))
-
-(declare-sort t20s 0)
-
-(define-fun in_range6 ((x1 Int)) Bool (and (<= 0 x1) (<= x1 2)))
-
-(define-fun bool_eq7 ((x1 Int) (y1 Int)) Bool (ite (= x1 y1) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq6 (t20s t20s) Bool)
-
-(declare-fun dummy6 () t20s)
-
-(declare-datatypes () ((t20s__ref (mk_t20s__ref (t20s__content t20s)))))
-(define-fun t20s__ref___projection ((a t20s__ref)) t20s (t20s__content a))
-
 (declare-fun temp___230 (map1 Int (_ BitVec 8) Int Int Int (_ BitVec 8) Int
   Int) map1)
 
@@ -562,7 +500,7 @@
   (assert (in_range v2))
 
 ;; H
-  (assert (= (mk_map__ref result) (mk_map__ref a)))
+  (assert (= result a))
 
 ;; H
   (assert (= a1 a_3d_arr))
@@ -574,7 +512,7 @@
   (assert (= o1 (set a1 5 ((_ int2bv 8) 7) 1 o)))
 
 ;; H
-  (assert (= a1 result1))
+  (assert (= result1 a1))
 
 ;; H
   (assert (= a2 o1))
@@ -586,7 +524,7 @@
   (assert (= o3 (set a2 x y z o2)))
 
 ;; H
-  (assert (= a2 result2))
+  (assert (= result2 a2))
 
 ;; H
   (assert (= a3 o3))

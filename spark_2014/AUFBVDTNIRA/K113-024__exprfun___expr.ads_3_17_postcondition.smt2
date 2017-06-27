@@ -75,17 +75,14 @@
 ;; echo2__post_axiom
   (assert
   (forall ((a1 Int))
-  (! (=> (dynamic_invariant a1 true true true)
-     (let ((result (echo2 a1)))
-     (=> (echo2__function_guard result a1) (dynamic_invariant result true
-     false true)))) :pattern ((echo2 a1)) )))
+  (! (=> (dynamic_invariant a1 true true true) (dynamic_invariant (echo2 a1)
+     true false true)) :pattern ((echo2 a1)) )))
 
 ;; echo2__def_axiom
   (assert
   (forall ((a1 Int))
-  (! (=>
-     (and (dynamic_invariant a1 true true true) (echo2__function_guard
-     (echo2 a1) a1)) (= (echo2 a1) a1)) :pattern ((echo2 a1)) )))
+  (! (=> (dynamic_invariant a1 true true true) (= (echo2 a1) a1)) :pattern (
+  (echo2 a1)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -124,9 +121,7 @@
   (assert (=> (<= (- 2147483648) 2147483647) (in_range r)))
 
 ;; H
-  (assert
-  (and (and (= o (echo2 a)) (echo2__function_guard o a))
-  (and (in_range o) (= o a))))
+  (assert (and (= o (echo2 a)) (and (in_range o) (= o a))))
 
 ;; H
   (assert (= result r))

@@ -266,10 +266,8 @@
 
 ;; boolean_to_integer_8__post_axiom
   (assert
-  (forall ((b Bool))
-  (! (let ((result (boolean_to_integer_8 b)))
-     (=> (boolean_to_integer_8__function_guard result b) (dynamic_invariant
-     result true false true))) :pattern ((boolean_to_integer_8 b)) )))
+  (forall ((b Bool)) (! (dynamic_invariant (boolean_to_integer_8 b) true
+  false true) :pattern ((boolean_to_integer_8 b)) )))
 
 (declare-fun wheel_speed () (_ BitVec 32))
 
@@ -397,17 +395,13 @@
 ;; H
   (assert
   (=> (bvugt vehicle_speed ((_ int2bv 32) 0))
-  (and
   (and (= o4 (boolean_to_integer_8 (ite (< sum_out12 0) true false)))
-  (boolean_to_integer_8__function_guard o4 (ite (< sum_out12 0) true false)))
   (in_range1 o4))))
 
 ;; H
   (assert
   (=> (bvugt vehicle_speed ((_ int2bv 32) 0))
-  (and
   (and (= o5 (boolean_to_integer_8 (ite (< 0 sum_out12) true false)))
-  (boolean_to_integer_8__function_guard o5 (ite (< 0 sum_out12) true false)))
   (in_range1 o5))))
 
 ;; H

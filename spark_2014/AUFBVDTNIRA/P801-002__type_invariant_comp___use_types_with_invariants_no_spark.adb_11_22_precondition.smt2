@@ -151,9 +151,7 @@
   (assert (in_range i))
 
 ;; H
-  (assert
-  (and (and (= o (to_integer e)) (to_integer__function_guard o e)) (in_range1
-  o)))
+  (assert (and (= o (to_integer e)) (in_range1 o)))
 
 (assert
 ;; WP_parameter_def

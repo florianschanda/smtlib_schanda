@@ -83,10 +83,8 @@
 ;; foo__post_axiom
   (assert
   (forall ((p__nest__gn Int))
-  (! (=> (dynamic_invariant p__nest__gn true true true)
-     (let ((result (foo p__nest__gn)))
-     (=> (foo__function_guard result p__nest__gn) (dynamic_invariant result
-     true false true)))) :pattern ((foo p__nest__gn)) )))
+  (! (=> (dynamic_invariant p__nest__gn true true true) (dynamic_invariant
+     (foo p__nest__gn) true false true)) :pattern ((foo p__nest__gn)) )))
 
 (declare-fun g () Int)
 
@@ -103,9 +101,6 @@
 
 ;; H
   (assert (in_range y))
-
-;; H
-  (assert (foo__function_guard (foo gn) gn))
 
 (assert
 ;; WP_parameter_def

@@ -197,9 +197,7 @@
      (in_range1
      (+ (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 a))) 
      (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 b))))))
-     (let ((result (add_pair_a a b)))
-     (=> (add_pair_a__function_guard result a b)
-     (= (bool_eq1 result
+     (= (bool_eq1 (add_pair_a a b)
         (mk___rep
         (mk___split_fields
         (of_rep
@@ -207,7 +205,7 @@
         (to_rep (rec__records_prooffuncs__pair__a (us_split_fields1 b)))))
         (of_rep
         (+ (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 a))) 
-        (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 b)))))))) true)))) :pattern (
+        (to_rep (rec__records_prooffuncs__pair__b (us_split_fields1 b)))))))) true)) :pattern (
   (add_pair_a a b)) )))
 
 (declare-fun a () us_rep)
@@ -220,12 +218,12 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(define-fun dynamic_invariant ((temp___expr_188 Int)
-  (temp___is_init_185 Bool) (temp___skip_constant_186 Bool)
-  (temp___do_toplevel_187 Bool)) Bool (=>
-                                      (or (= temp___is_init_185 true)
+(define-fun dynamic_invariant ((temp___expr_180 Int)
+  (temp___is_init_177 Bool) (temp___skip_constant_178 Bool)
+  (temp___do_toplevel_179 Bool)) Bool (=>
+                                      (or (= temp___is_init_177 true)
                                       (<= 0 255)) (in_range1
-                                      temp___expr_188)))
+                                      temp___expr_180)))
 
 ;; H
   (assert

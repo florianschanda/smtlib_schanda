@@ -297,57 +297,43 @@
 ;; object__t__compat_axiom
   (assert
   (forall ((obj us_rep))
-  (! (=> (has_stored_area__function_guard1 (has_stored_area1 us_tag obj)
-     us_tag obj)
-     (and (has_stored_area__function_guard (has_stored_area obj) obj)
-     (= (to_int1 (has_stored_area obj)) (to_int1
-                                        (has_stored_area1 us_tag obj))))) :pattern (
+  (! (= (to_int1 (has_stored_area obj)) (to_int1
+                                        (has_stored_area1 us_tag obj))) :pattern (
   (has_stored_area1 us_tag obj)) )))
 
 ;; has_stored_area__def_axiom
   (assert
   (forall ((obj us_rep))
-  (! (=> (has_stored_area__function_guard (has_stored_area obj) obj)
-     (= (= (has_stored_area obj) true) (in_range1
-     (to_rep (rec__object__t__area (us_split_fields1 obj)))))) :pattern (
+  (! (= (= (has_stored_area obj) true) (in_range1
+     (to_rep (rec__object__t__area (us_split_fields1 obj))))) :pattern (
   (has_stored_area obj)) )))
 
 ;; get_stored_area__post_axiom
   (assert
   (forall ((obj us_rep))
-  (! (and (has_stored_area__function_guard (has_stored_area obj) obj)
-     (=> (= (has_stored_area obj) true)
-     (let ((result (get_stored_area obj)))
-     (=> (get_stored_area__function_guard result obj) (dynamic_invariant
-     result true false true))))) :pattern ((get_stored_area obj)) )))
+  (! (=> (= (has_stored_area obj) true) (dynamic_invariant
+     (get_stored_area obj) true false true)) :pattern ((get_stored_area obj)) )))
 
 ;; get_stored_area__post__dispatch_axiom
   (assert
   (forall ((attr__tag1 Int))
   (forall ((obj us_rep))
-  (! (and (has_stored_area__function_guard1
-     (has_stored_area1 (attr__tag obj) obj) (attr__tag obj) obj)
-     (=> (= (has_stored_area1 (attr__tag obj) obj) true)
-     (let ((result (get_stored_area1 attr__tag1 obj)))
-     (=> (get_stored_area__function_guard1 result attr__tag1 obj)
-     (dynamic_invariant result true false true))))) :pattern ((get_stored_area1
-                                                              attr__tag1 obj)) ))))
+  (! (=> (= (has_stored_area1 (attr__tag obj) obj) true) (dynamic_invariant
+     (get_stored_area1 attr__tag1 obj) true false true)) :pattern ((get_stored_area1
+                                                                   attr__tag1
+                                                                   obj)) ))))
 
 ;; object__t__compat_axiom
   (assert
   (forall ((obj us_rep))
-  (! (=> (get_stored_area__function_guard1 (get_stored_area1 us_tag obj)
-     us_tag obj)
-     (and (get_stored_area__function_guard (get_stored_area obj) obj)
-     (= (get_stored_area obj) (get_stored_area1 us_tag obj)))) :pattern (
+  (! (= (get_stored_area obj) (get_stored_area1 us_tag obj)) :pattern (
   (get_stored_area1 us_tag obj)) )))
 
 ;; get_stored_area__def_axiom
   (assert
   (forall ((obj us_rep))
-  (! (=> (get_stored_area__function_guard (get_stored_area obj) obj)
-     (= (get_stored_area obj) (to_rep
-                              (rec__object__t__area (us_split_fields1 obj))))) :pattern (
+  (! (= (get_stored_area obj) (to_rep
+                              (rec__object__t__area (us_split_fields1 obj)))) :pattern (
   (get_stored_area obj)) )))
 
 (declare-fun obj__split_fields () integer)
@@ -368,15 +354,15 @@
 
 (declare-fun o4 () us_private)
 
-(declare-fun temp___166 () integer)
+(declare-fun temp___146 () integer)
 
-(declare-fun temp___1661 () integer)
+(declare-fun temp___1461 () integer)
 
-(declare-fun temp___1662 () integer)
+(declare-fun temp___1462 () integer)
 
-(declare-fun temp___1663 () us_private)
+(declare-fun temp___1463 () us_private)
 
-(declare-fun temp___1664 () Int)
+(declare-fun temp___1464 () Int)
 
 (declare-fun result () integer)
 
@@ -429,19 +415,19 @@
   (assert (= obj__split_fields3 o4))
 
 ;; H
-  (assert (= temp___166 o1))
+  (assert (= temp___146 o1))
 
 ;; H
-  (assert (= temp___1661 o2))
+  (assert (= temp___1461 o2))
 
 ;; H
-  (assert (= temp___1662 o3))
+  (assert (= temp___1462 o3))
 
 ;; H
-  (assert (= temp___1663 o4))
+  (assert (= temp___1463 o4))
 
 ;; H
-  (assert (= obj__attr__tag temp___1664))
+  (assert (= obj__attr__tag temp___1464))
 
 ;; H
   (assert (= result obj__split_fields))
@@ -456,16 +442,16 @@
   (assert (= result3 obj__split_fields3))
 
 ;; H
-  (assert (= temp___166 obj__split_fields4))
+  (assert (= temp___146 obj__split_fields4))
 
 ;; H
-  (assert (= temp___1661 obj__split_fields5))
+  (assert (= temp___1461 obj__split_fields5))
 
 ;; H
-  (assert (= temp___1662 obj__split_fields6))
+  (assert (= temp___1462 obj__split_fields6))
 
 ;; H
-  (assert (= temp___1663 obj__split_fields7))
+  (assert (= temp___1463 obj__split_fields7))
 
 ;; H
   (assert (= obj__split_fields8 obj__split_fields4))
@@ -490,16 +476,6 @@
 
 ;; H
   (assert (= obj__split_fields15 obj__split_fields7))
-
-;; H
-  (assert (has_stored_area__function_guard
-  (has_stored_area
-  (mk___rep
-  (mk___split_fields obj__split_fields8 obj__split_fields9
-  obj__split_fields10 obj__split_fields11) obj__attr__tag))
-  (mk___rep
-  (mk___split_fields obj__split_fields8 obj__split_fields9
-  obj__split_fields10 obj__split_fields11) obj__attr__tag)))
 
 (assert
 ;; WP_parameter_def

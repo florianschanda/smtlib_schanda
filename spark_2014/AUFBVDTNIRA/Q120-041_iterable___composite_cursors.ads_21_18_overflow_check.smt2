@@ -206,29 +206,7 @@
      (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
-(declare-sort tarray_cursorD1 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 1)))
-
-(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
-
-(declare-fun user_eq2 (tarray_cursorD1 tarray_cursorD1) Bool)
-
-(declare-fun dummy2 () tarray_cursorD1)
-
-(declare-datatypes ()
-((tarray_cursorD1__ref
- (mk_tarray_cursorD1__ref (tarray_cursorD1__content tarray_cursorD1)))))
-(define-fun tarray_cursorD1__ref___projection ((a tarray_cursorD1__ref)) tarray_cursorD1 
-  (tarray_cursorD1__content a))
-
-(declare-fun dummy3 () (Array Int natural))
+(declare-fun dummy2 () (Array Int natural))
 
 (declare-fun value__size () Int)
 
@@ -261,7 +239,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int natural))) (<= 0 (object__alignment a))))
 
-(declare-fun user_eq3 ((Array Int natural) (Array Int natural)) Bool)
+(declare-fun user_eq2 ((Array Int natural) (Array Int natural)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields
@@ -284,7 +262,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_fields (us_split_fields1
                                                              a))
 
-(define-fun bool_eq4 ((a us_rep)
+(define-fun bool_eq3 ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (= (bool_eq2
                            (rec__composite_cursors__cont1__content
@@ -298,7 +276,7 @@
                                                   (us_split_fields1 b)))))
                    true false))
 
-(declare-fun user_eq4 (us_rep us_rep) Bool)
+(declare-fun user_eq3 (us_rep us_rep) Bool)
 
 (declare-fun value__size1 () Int)
 
@@ -352,7 +330,7 @@
 ;; composite_cursors__cont1__length__position_axiom
   (assert (<= 0 composite_cursors__cont1__length__position))
 
-(declare-fun dummy4 () us_rep)
+(declare-fun dummy3 () us_rep)
 
 (declare-datatypes () ((cont1__ref (mk_cont1__ref (cont1__content us_rep)))))
 (define-fun cont1__ref___projection ((a cont1__ref)) us_rep (cont1__content
@@ -395,39 +373,19 @@
   (assert
   (forall ((c1 us_rep))
   (forall ((p1 (Array Int natural)))
-  (! (=> (has_element__function_guard (has_element c1 p1) c1 p1)
-     (= (= (has_element c1 p1) true)
+  (! (= (= (has_element c1 p1) true)
      (and (<= 1 (to_rep (select p1 1)))
      (<= (to_rep (select p1 1)) (to_rep
                                 (rec__composite_cursors__cont1__length
-                                (us_split_fields1 c1))))))) :pattern (
+                                (us_split_fields1 c1)))))) :pattern (
   (has_element c1 p1)) ))))
 
-(declare-sort t25s 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 1)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq5 (t25s t25s) Bool)
-
-(declare-fun dummy5 () t25s)
-
-(declare-datatypes () ((t25s__ref (mk_t25s__ref (t25s__content t25s)))))
-(define-fun t25s__ref___projection ((a t25s__ref)) t25s (t25s__content a))
-
-(declare-fun temp___177 (Int) (Array Int natural))
+(declare-fun temp___176 (Int) (Array Int natural))
 
 ;; def_axiom
   (assert
-  (forall ((temp___179 Int))
-  (= (select (temp___177 temp___179) 1) (of_rep temp___179))))
+  (forall ((temp___178 Int))
+  (= (select (temp___176 temp___178) 1) (of_rep temp___178))))
 
 (define-fun dynamic_invariant1 ((temp___expr_33 Int) (temp___is_init_30 Bool)
   (temp___skip_constant_31 Bool)
@@ -451,9 +409,6 @@
 ;; H
   (assert
   (<= (to_rep (rec__composite_cursors__cont1__length (us_split_fields1 c))) 100))
-
-;; H
-  (assert (has_element__function_guard (has_element c p) c p))
 
 ;; H
   (assert (= (has_element c p) true))

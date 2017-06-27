@@ -278,11 +278,6 @@
 
 (declare-fun foo__function_guard (Bool us_rep1 Int) Bool)
 
-;; temp___result_152_def
-  (assert
-  (forall ((dic__g Int) (temp___151 us_rep1)) (foo__function_guard
-  (foo temp___151 dic__g) temp___151 dic__g)))
-
 (define-fun default_initial_assumption1 ((temp___expr_149 us_rep1)
   (temp___skip_top_level_150 Bool)
   (dic__g Int)) Bool (and
@@ -388,16 +383,16 @@
 (define-fun pr_uninit_t__ref___projection ((a pr_uninit_t__ref)) us_rep2 
   (pr_uninit_t__content a))
 
-(define-fun default_initial_assumption2 ((temp___expr_157 us_rep2)
-  (temp___skip_top_level_158 Bool)) Bool (and
+(define-fun default_initial_assumption2 ((temp___expr_156 us_rep2)
+  (temp___skip_top_level_157 Bool)) Bool (and
                                          (= (to_rep
                                             (rec__dic__pr_uninit_t__x
                                             (us_split_fields5
-                                            temp___expr_157))) 0)
+                                            temp___expr_156))) 0)
                                          (= (to_rep
                                             (rec__dic__pr_uninit_t__y
                                             (us_split_fields5
-                                            temp___expr_157))) 0)))
+                                            temp___expr_156))) 0)))
 
 (declare-datatypes ()
 ((us_split_fields6
@@ -513,10 +508,9 @@
   (assert
   (forall ((par1 us_rep1))
   (forall ((dic__g Int))
-  (! (=> (foo__function_guard (foo par1 dic__g) par1 dic__g)
-     (= (= (foo par1 dic__g) true)
+  (! (= (= (foo par1 dic__g) true)
      (= (+ (to_rep (rec__dic__pr_record_t2__x (us_split_fields3 par1))) 
-     (to_rep (rec__dic__pr_record_t2__y (us_split_fields3 par1)))) dic__g))) :pattern (
+     (to_rep (rec__dic__pr_record_t2__y (us_split_fields3 par1)))) dic__g)) :pattern (
   (foo par1 dic__g)) ))))
 
 (declare-fun a__split_fields () integer)

@@ -171,40 +171,29 @@
 
 (declare-fun p11__function_guard (Bool us_rep) Bool)
 
-;; temp___result_213_def
-  (assert
-  (forall ((temp___212 us_rep)) (p11__function_guard (p11 temp___212)
-  temp___212)))
-
-(define-fun default_initial_assumption ((temp___expr_209 us_rep)
-  (temp___skip_top_level_210 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_208 us_rep)
+  (temp___skip_top_level_209 Bool)) Bool (and
                                          (= (to_rep
                                             (rec__p__t11__f1
                                             (us_split_fields1
-                                            temp___expr_209))) 0)
+                                            temp___expr_208))) 0)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_210 true))
-                                         (= (p11 temp___expr_209) true))))
+                                         (= temp___skip_top_level_209 true))
+                                         (= (p11 temp___expr_208) true))))
 
 ;; p11__post_axiom
   (assert true)
 
-(declare-fun temp___239 () integer)
+(declare-fun temp___234 () integer)
 
-(declare-fun temp___2391 () integer)
-
-(define-fun temp___2392 () us_rep (mk___rep
-                                  (mk___split_fields temp___239 temp___2391)))
+(declare-fun temp___2341 () integer)
 
 ;; H
-  (assert (= (to_rep temp___239) 0))
-
-;; H
-  (assert (p11__function_guard (p11 temp___2392) temp___2392))
+  (assert (= (to_rep temp___234) 0))
 
 (assert
 ;; WP_parameter_def
  ;; File "p.ads", line 58, characters 0-0
-  (not (= (p11 temp___2392) true)))
+  (not (= (p11 (mk___rep (mk___split_fields temp___234 temp___2341))) true)))
 (check-sat)

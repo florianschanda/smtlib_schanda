@@ -429,27 +429,23 @@
 (define-fun tlastS__ref___projection ((a tlastS__ref)) tlastS (tlastS__content
                                                               a))
 
-(define-fun dynamic_invariant1 ((temp___expr_166 Int)
-  (temp___is_init_163 Bool) (temp___skip_constant_164 Bool)
-  (temp___do_toplevel_165 Bool)) Bool (=>
-                                      (or (= temp___is_init_163 true)
+(define-fun dynamic_invariant1 ((temp___expr_158 Int)
+  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
+  (temp___do_toplevel_157 Bool)) Bool (=>
+                                      (or (= temp___is_init_155 true)
                                       (<= 0 200)) (in_range3
-                                      temp___expr_166)))
+                                      temp___expr_158)))
 
 ;; size__post_axiom
   (assert
   (forall ((stack__last Int))
-  (! (=> (dynamic_invariant1 stack__last true true true)
-     (let ((result (size stack__last)))
-     (=> (size__function_guard result stack__last) (dynamic_invariant result
-     true false true)))) :pattern ((size stack__last)) )))
+  (! (=> (dynamic_invariant1 stack__last true true true) (dynamic_invariant
+     (size stack__last) true false true)) :pattern ((size stack__last)) )))
 
 ;; size__def_axiom
   (assert
   (forall ((stack__last Int))
-  (! (=>
-     (and (dynamic_invariant1 stack__last true true true)
-     (size__function_guard (size stack__last) stack__last))
+  (! (=> (dynamic_invariant1 stack__last true true true)
      (= (size stack__last) stack__last)) :pattern ((size stack__last)) )))
 
 (declare-datatypes ()
@@ -537,9 +533,8 @@
 ;; empty__def_axiom
   (assert
   (forall ((stack__last Int))
-  (! (=> (empty__function_guard (empty stack__last) stack__last)
-     (= (= (empty stack__last) true) (< stack__last 1))) :pattern ((empty
-                                                                   stack__last)) )))
+  (! (= (= (empty stack__last) true) (< stack__last 1)) :pattern ((empty
+                                                                  stack__last)) )))
 
 (define-fun dynamic_invariant2 ((temp___expr_82 us_t)
   (temp___is_init_79 Bool) (temp___skip_constant_80 Bool)
@@ -555,10 +550,8 @@
 
 ;; to_string__post_axiom
   (assert
-  (forall ((v us_rep))
-  (! (let ((result (to_string1 v)))
-     (=> (to_string__function_guard result v) (dynamic_invariant2 result true
-     false true))) :pattern ((to_string1 v)) )))
+  (forall ((v us_rep)) (! (dynamic_invariant2 (to_string1 v) true false
+  true) :pattern ((to_string1 v)) )))
 
 (declare-sort ttabD1 0)
 
@@ -581,9 +574,9 @@
 (define-fun ttabD1__ref___projection ((a ttabD1__ref)) ttabD1 (ttabD1__content
                                                               a))
 
-(declare-fun temp___String_Literal_192 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_179 (tuple0) (Array Int character))
 
-;; temp___String_Literal_192__def_axiom
+;; temp___String_Literal_179__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -596,18 +589,18 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_192 us_void_param) 1)) 80)
-     (= (to_rep (select (temp___String_Literal_192 us_void_param) 2)) 111))
-     (= (to_rep (select (temp___String_Literal_192 us_void_param) 3)) 112))
-     (= (to_rep (select (temp___String_Literal_192 us_void_param) 4)) 112))
-     (= (to_rep (select (temp___String_Literal_192 us_void_param) 5)) 105))
-     (= (to_rep (select (temp___String_Literal_192 us_void_param) 6)) 110))
-     (= (to_rep (select (temp___String_Literal_192 us_void_param) 7)) 103))
-     (= (to_rep (select (temp___String_Literal_192 us_void_param) 8)) 32))
-     (= (to_rep (select (temp___String_Literal_192 us_void_param) 9)) 60))
-     (= (to_rep (select (temp___String_Literal_192 us_void_param) 10)) 45))
-     (= (to_rep (select (temp___String_Literal_192 us_void_param) 11)) 32)) :pattern (
-  (temp___String_Literal_192 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 1)) 80)
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 2)) 111))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 3)) 112))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 4)) 112))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 5)) 105))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 6)) 110))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 7)) 103))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 8)) 32))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 9)) 60))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 10)) 45))
+     (= (to_rep (select (temp___String_Literal_179 us_void_param) 11)) 32)) :pattern (
+  (temp___String_Literal_179 us_void_param)) )))
 
 (define-fun dynamic_invariant3 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -630,13 +623,13 @@
 
 (declare-fun o () Int)
 
-(declare-fun temp___191 () integer)
+(declare-fun temp___178 () integer)
 
 (declare-fun o1 () Int)
 
-(declare-fun temp___194 () (Array Int character))
+(declare-fun temp___181 () (Array Int character))
 
-(declare-fun temp___1941 () t)
+(declare-fun temp___1811 () t)
 
 (declare-fun o2 () Int)
 
@@ -675,21 +668,16 @@
 (define-fun v__split_fields4 () us_split_fields (mk___split_fields
                                                 v__split_fields1))
 
-(define-fun temp___1942 () us_t (mk___t temp___194 temp___1941))
+(define-fun temp___1812 () us_t (mk___t temp___181 temp___1811))
 
 ;; H
   (assert (in_range3 last2))
 
 ;; H
-  (assert (empty__function_guard (empty last2) last2))
-
-;; H
   (assert (not (= (empty last2) true)))
 
 ;; H
-  (assert
-  (and (and (= result (empty last2)) (empty__function_guard result last2))
-  (= (= result true) (< last2 1))))
+  (assert (and (= result (empty last2)) (= (= result true) (< last2 1))))
 
 ;; H
   (assert (not (= result true)))
@@ -701,7 +689,7 @@
   (assert (= o last2))
 
 ;; H
-  (assert (= (mk___rep (mk___split_fields temp___191)) (select tab o)))
+  (assert (= (mk___rep (mk___split_fields temp___178)) (select tab o)))
 
 ;; H
   (assert
@@ -710,7 +698,7 @@
                                                           v__split_fields))))
 
 ;; H
-  (assert (= temp___191 v__split_fields1))
+  (assert (= temp___178 v__split_fields1))
 
 ;; H
   (assert (and (= o1 (- last2 1)) (in_range3 (- last2 1))))
@@ -723,19 +711,17 @@
 
 ;; H
   (assert
-  (and
-  (and (= temp___1942 (to_string1 (mk___rep v__split_fields4)))
-  (to_string__function_guard temp___1942 (mk___rep v__split_fields4)))
-  (dynamic_invariant2 temp___1942 true false true)))
+  (and (= temp___1812 (to_string1 (mk___rep v__split_fields4)))
+  (dynamic_invariant2 temp___1812 true false true)))
 
 ;; H
   (assert
-  (=> (<= (to_rep1 (first temp___1941)) (to_rep1 (last temp___1941)))
-  (= o2 (+ (- (to_rep1 (last temp___1941)) (to_rep1 (first temp___1941))) 1))))
+  (=> (<= (to_rep1 (first temp___1811)) (to_rep1 (last temp___1811)))
+  (= o2 (+ (- (to_rep1 (last temp___1811)) (to_rep1 (first temp___1811))) 1))))
 
 ;; H
   (assert
-  (=> (not (<= (to_rep1 (first temp___1941)) (to_rep1 (last temp___1941))))
+  (=> (not (<= (to_rep1 (first temp___1811)) (to_rep1 (last temp___1811))))
   (= o2 0)))
 
 ;; H
@@ -758,8 +744,8 @@
 
 ;; H
   (assert
-  (= (concat1 (temp___String_Literal_192 Tuple0) 1 11 temp___194
-     (to_rep1 (first temp___1941)) (to_rep1 (last temp___1941))) o8))
+  (= (concat1 (temp___String_Literal_179 Tuple0) 1 11 temp___181
+     (to_rep1 (first temp___1811)) (to_rep1 (last temp___1811))) o8))
 
 ;; H
   (assert (= (mk 1 o7) o9))
@@ -775,9 +761,6 @@
 
 ;; H
   (assert (= (mk___split_fields v__split_fields3) v__split_fields4))
-
-;; H
-  (assert (size__function_guard (size last2) last2))
 
 (assert
 ;; WP_parameter_def

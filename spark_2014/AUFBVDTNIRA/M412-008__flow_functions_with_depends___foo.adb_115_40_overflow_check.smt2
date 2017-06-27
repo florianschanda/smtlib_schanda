@@ -85,8 +85,7 @@
 ;; wobble__def_axiom
   (assert
   (forall ((x Int) (y Int))
-  (! (=> (wobble__function_guard (wobble x y) x y)
-     (= (= (wobble x y) true) (= x 0))) :pattern ((wobble x y)) )))
+  (! (= (= (wobble x y) true) (= x 0)) :pattern ((wobble x y)) )))
 
 (declare-fun a () Int)
 
@@ -121,9 +120,7 @@
   (assert (in_range b))
 
 ;; H
-  (assert
-  (and (= result (wibble a b g1 g2)) (wibble__function_guard result a 
-  b g1 g2)))
+  (assert (= result (wibble a b g1 g2)))
 
 ;; H
   (assert (=> (= result true) (= o a)))
@@ -132,9 +129,7 @@
   (assert (=> (not (= result true)) (= o b)))
 
 ;; H
-  (assert
-  (and (and (= result1 (wobble a b)) (wobble__function_guard result1 a b))
-  (= (= result1 true) (= a 0))))
+  (assert (and (= result1 (wobble a b)) (= (= result1 true) (= a 0))))
 
 ;; H
   (assert (not (= result1 true)))

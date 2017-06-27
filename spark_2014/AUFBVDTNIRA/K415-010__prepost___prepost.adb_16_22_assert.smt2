@@ -91,9 +91,6 @@
   (assert (in_range1 z))
 
 ;; H
-  (assert (fun_is_zero__function_guard (fun_is_zero z) z))
-
-;; H
   (assert (and (not (= z 1)) (= (fun_is_zero z) true)))
 
 (assert

@@ -1673,10 +1673,9 @@
   (assert
   (forall ((b (Array Int (Array Int cell))))
   (forall ((y Int) (x Int))
-  (! (=> (is_empty__function_guard (is_empty b y x) b y x)
-     (= (= (is_empty b y x) true)
+  (! (= (= (is_empty b y x) true)
      (and (and (in_range8 x) (in_range9 y))
-     (= (to_rep1 (let ((temp___635 (select b y))) (select temp___635 x))) 0)))) :pattern (
+     (= (to_rep1 (let ((temp___635 (select b y))) (select temp___635 x))) 0))) :pattern (
   (is_empty b y x)) ))))
 
 (declare-fun b () (Array Int (Array Int cell)))

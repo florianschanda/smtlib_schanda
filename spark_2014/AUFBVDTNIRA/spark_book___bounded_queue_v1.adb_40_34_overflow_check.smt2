@@ -388,8 +388,6 @@
   (! (=> (in_range x) (= (to_rep3 (of_rep3 x)) x)) :pattern ((to_rep3
                                                              (of_rep3 x))) )))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -412,7 +410,7 @@
 
 (declare-fun first (t) integer)
 
-(declare-fun last1 (t) integer)
+(declare-fun last (t) integer)
 
 (declare-fun mk (Int Int) t)
 
@@ -421,7 +419,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range f)
      (=> (in_range l)
-     (and (= (to_rep3 (first (mk f l))) f) (= (to_rep3 (last1 (mk f l))) l)))) :pattern (
+     (and (= (to_rep3 (first (mk f l))) f) (= (to_rep3 (last (mk f l))) l)))) :pattern (
   (mk f l)) )))
 
 (define-fun dynamic_property1 ((range_first Int) (range_last Int) (low Int)
@@ -440,10 +438,10 @@
 
 (define-fun first1 ((a us_t)) Int (to_rep3 (first (rt a))))
 
-(define-fun last2 ((a us_t)) Int (to_rep3 (last1 (rt a))))
+(define-fun last1 ((a us_t)) Int (to_rep3 (last (rt a))))
 
-(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last2 a))
-                                  (+ (- (last2 a) (first1 a)) 1) 0))
+(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last1 a))
+                                  (+ (- (last1 a) (first1 a)) 1) 0))
 
 (declare-fun value__size () Int)
 
@@ -479,8 +477,8 @@
 
 (define-fun bool_eq6 ((x us_t)
   (y us_t)) Bool (bool_eq4 (elts x) (to_rep3 (first (rt x)))
-                 (to_rep3 (last1 (rt x))) (elts y) (to_rep3 (first (rt y)))
-                 (to_rep3 (last1 (rt y)))))
+                 (to_rep3 (last (rt x))) (elts y) (to_rep3 (first (rt y)))
+                 (to_rep3 (last (rt y)))))
 
 (declare-fun user_eq5 (us_t us_t) Bool)
 
@@ -684,14 +682,14 @@
                                       (first1
                                       (rec__bounded_queue_v1__queue_type__items
                                       (us_split_fields1 temp___expr_157)))
-                                      (last2
+                                      (last1
                                       (rec__bounded_queue_v1__queue_type__items
                                       (us_split_fields1 temp___expr_157))))
                                       (and
                                       (= (first1
                                          (rec__bounded_queue_v1__queue_type__items
                                          (us_split_fields1 temp___expr_157))) 1)
-                                      (= (last2
+                                      (= (last1
                                          (rec__bounded_queue_v1__queue_type__items
                                          (us_split_fields1 temp___expr_157))) 
                                       (to_rep1 temp___158))))))
@@ -724,10 +722,8 @@
 ;; size__post_axiom
   (assert
   (forall ((queue us_rep))
-  (! (=> (dynamic_invariant1 queue true true true)
-     (let ((result (size queue)))
-     (=> (size__function_guard result queue) (dynamic_invariant2 result true
-     false true)))) :pattern ((size queue)) )))
+  (! (=> (dynamic_invariant1 queue true true true) (dynamic_invariant2
+     (size queue) true false true)) :pattern ((size queue)) )))
 
 (declare-fun last_element (us_rep) Int)
 
@@ -736,13 +732,10 @@
 ;; last_element__post_axiom
   (assert
   (forall ((queue us_rep))
-  (! (and (empty__function_guard (empty queue) queue)
-     (=>
+  (! (=>
      (and (dynamic_invariant1 queue true true true)
-     (not (= (empty queue) true)))
-     (let ((result (last_element queue)))
-     (=> (last_element__function_guard result queue) (dynamic_invariant
-     result true false true))))) :pattern ((last_element queue)) )))
+     (not (= (empty queue) true))) (dynamic_invariant (last_element queue)
+     true false true)) :pattern ((last_element queue)) )))
 
 (declare-fun queue__split_discrs () us_split_discrs)
 
@@ -792,17 +785,17 @@
 
 (declare-fun o7 () t)
 
-(declare-fun temp___312 () positive)
+(declare-fun temp___293 () positive)
 
-(declare-fun temp___3121 () natural)
+(declare-fun temp___2931 () natural)
 
-(declare-fun temp___3122 () positive)
+(declare-fun temp___2932 () positive)
 
-(declare-fun temp___3123 () positive)
+(declare-fun temp___2933 () positive)
 
-(declare-fun temp___3124 () (Array Int element_type))
+(declare-fun temp___2934 () (Array Int element_type))
 
-(declare-fun temp___3125 () t)
+(declare-fun temp___2935 () t)
 
 (declare-fun o8 () element_type)
 
@@ -824,17 +817,17 @@
 
 (declare-fun o17 () t)
 
-(declare-fun temp___316 () positive)
+(declare-fun temp___297 () positive)
 
-(declare-fun temp___3161 () natural)
+(declare-fun temp___2971 () natural)
 
-(declare-fun temp___3162 () positive)
+(declare-fun temp___2972 () positive)
 
-(declare-fun temp___3163 () positive)
+(declare-fun temp___2973 () positive)
 
-(declare-fun temp___3164 () (Array Int element_type))
+(declare-fun temp___2974 () (Array Int element_type))
 
-(declare-fun temp___3165 () t)
+(declare-fun temp___2975 () t)
 
 (declare-fun result () us_split_fields__ref)
 
@@ -853,16 +846,6 @@
 
 ;; H
   (assert (in_range3 item))
-
-;; H
-  (assert (full__function_guard
-  (full
-  (mk___rep queue__split_discrs
-  (mk___split_fields queue__split_fields queue__split_fields1
-  queue__split_fields2 (mk___t queue__split_fields3 queue__split_fields4))))
-  (mk___rep queue__split_discrs
-  (mk___split_fields queue__split_fields queue__split_fields1
-  queue__split_fields2 (mk___t queue__split_fields3 queue__split_fields4)))))
 
 ;; H
   (assert
@@ -905,22 +888,22 @@
   (assert (= queue__split_fields4 o7))
 
 ;; H
-  (assert (= queue__split_discrs (mk___split_discrs temp___312)))
+  (assert (= queue__split_discrs (mk___split_discrs temp___293)))
 
 ;; H
-  (assert (= temp___3121 o3))
+  (assert (= temp___2931 o3))
 
 ;; H
-  (assert (= temp___3122 o4))
+  (assert (= temp___2932 o4))
 
 ;; H
-  (assert (= temp___3123 o5))
+  (assert (= temp___2933 o5))
 
 ;; H
-  (assert (= temp___3124 o6))
+  (assert (= temp___2934 o6))
 
 ;; H
-  (assert (= temp___3125 o7))
+  (assert (= temp___2935 o7))
 
 ;; H
   (assert
@@ -931,11 +914,11 @@
 
 ;; H
   (assert
-  (= queue__split_fields5 (mk___split_fields temp___3121 temp___3122
-                          temp___3123 (mk___t temp___3124 temp___3125))))
+  (= queue__split_fields5 (mk___split_fields temp___2931 temp___2932
+                          temp___2933 (mk___t temp___2934 temp___2935))))
 
 ;; H
-  (assert (= queue__split_discrs (mk___split_discrs temp___312)))
+  (assert (= queue__split_discrs (mk___split_discrs temp___293)))
 
 ;; H
   (assert (= (to_rep2 o8) item))
@@ -950,8 +933,7 @@
   (<= (to_rep1
       (rec__bounded_queue_v1__queue_type__rear queue__split_fields5)) 
   (to_rep3
-  (last1
-  (rt (rec__bounded_queue_v1__queue_type__items queue__split_fields5)))))))
+  (last (rt (rec__bounded_queue_v1__queue_type__items queue__split_fields5)))))))
 
 ;; H
   (assert
@@ -993,33 +975,33 @@
   (assert (= o17 o12))
 
 ;; H
-  (assert (= queue__split_discrs (mk___split_discrs temp___316)))
+  (assert (= queue__split_discrs (mk___split_discrs temp___297)))
 
 ;; H
-  (assert (= temp___3161 o13))
+  (assert (= temp___2971 o13))
 
 ;; H
-  (assert (= temp___3162 o14))
+  (assert (= temp___2972 o14))
 
 ;; H
-  (assert (= temp___3163 o15))
+  (assert (= temp___2973 o15))
 
 ;; H
-  (assert (= temp___3164 o16))
+  (assert (= temp___2974 o16))
 
 ;; H
-  (assert (= temp___3165 o17))
+  (assert (= temp___2975 o17))
 
 ;; H
   (assert (= result1 (mk___split_fields__ref queue__split_fields5)))
 
 ;; H
   (assert
-  (= queue__split_fields6 (mk___split_fields temp___3161 temp___3162
-                          temp___3163 (mk___t temp___3164 temp___3165))))
+  (= queue__split_fields6 (mk___split_fields temp___2971 temp___2972
+                          temp___2973 (mk___t temp___2974 temp___2975))))
 
 ;; H
-  (assert (= queue__split_discrs (mk___split_discrs temp___316)))
+  (assert (= queue__split_discrs (mk___split_discrs temp___297)))
 
 (assert
 ;; WP_parameter_def

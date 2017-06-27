@@ -304,25 +304,6 @@
 (define-fun tTtSP1__ref___projection ((a tTtSP1__ref)) tTtSP1 (tTtSP1__content
                                                               a))
 
-(declare-sort t6b 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= (- 10) x) (<= x 1000)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq4 (t6b t6b) Bool)
-
-(declare-fun dummy4 () t6b)
-
-(declare-datatypes () ((t6b__ref (mk_t6b__ref (t6b__content t6b)))))
-(define-fun t6b__ref___projection ((a t6b__ref)) t6b (t6b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
 (declare-fun c9b () (Array Int integer))
@@ -367,20 +348,15 @@
 
 (declare-fun t1 () (Array Int integer))
 
-(declare-fun o () (Array Int integer))
-
 (declare-fun result () (Array Int integer))
 
 (declare-fun t2 () (Array Int integer))
 
 ;; H
-  (assert (= o (p__t__aggregate_def 0)))
-
-;; H
   (assert (= result t1))
 
 ;; H
-  (assert (= t2 o))
+  (assert (= t2 (p__t__aggregate_def 0)))
 
 ;; H
   (assert (= t2 c9b))

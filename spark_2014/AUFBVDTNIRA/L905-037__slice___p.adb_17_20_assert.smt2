@@ -351,9 +351,11 @@
 (define-fun tTxSP1__ref___projection ((a tTxSP1__ref)) tTxSP1 (tTxSP1__content
                                                               a))
 
-(declare-sort t6b 0)
+(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(declare-sort t8b 0)
+
+(define-fun in_range4 ((x Int)) Bool (and (<= 2 x) (<= x 5)))
 
 (define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -363,30 +365,9 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
 
-(declare-fun user_eq5 (t6b t6b) Bool)
+(declare-fun user_eq5 (t8b t8b) Bool)
 
-(declare-fun dummy5 () t6b)
-
-(declare-datatypes () ((t6b__ref (mk_t6b__ref (t6b__content t6b)))))
-(define-fun t6b__ref___projection ((a t6b__ref)) t6b (t6b__content a))
-
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
-
-(declare-sort t8b 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 2 x) (<= x 5)))
-
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq6 (t8b t8b) Bool)
-
-(declare-fun dummy6 () t8b)
+(declare-fun dummy5 () t8b)
 
 (declare-datatypes () ((t8b__ref (mk_t8b__ref (t8b__content t8b)))))
 (define-fun t8b__ref___projection ((a t8b__ref)) t8b (t8b__content a))
@@ -399,19 +380,19 @@
 
 (declare-sort t10b 0)
 
-(define-fun in_range6 ((x Int)) Bool (and (<= 2 x) (<= x 5)))
+(define-fun in_range5 ((x Int)) Bool (and (<= 2 x) (<= x 5)))
 
-(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
 
-(declare-fun user_eq7 (t10b t10b) Bool)
+(declare-fun user_eq6 (t10b t10b) Bool)
 
-(declare-fun dummy7 () t10b)
+(declare-fun dummy6 () t10b)
 
 (declare-datatypes () ((t10b__ref (mk_t10b__ref (t10b__content t10b)))))
 (define-fun t10b__ref___projection ((a t10b__ref)) t10b (t10b__content a))
@@ -458,8 +439,6 @@
 
 (declare-fun o () (Array Int character))
 
-(declare-fun o1 () (Array Int character))
-
 (declare-fun p__y__assume () (Array Int character))
 
 (declare-fun p__y__assume1 () t)
@@ -473,23 +452,20 @@
 (declare-fun y1 () (Array Int character))
 
 ;; H
-  (assert (= o (p__x__aggregate_def 32)))
-
-;; H
   (assert (= result x))
 
 ;; H
-  (assert (= x1 o))
+  (assert (= x1 (p__x__aggregate_def 32)))
 
 ;; H
   (assert
   (=> (<= 2 5) (and (and (<= 1 2) (<= 2 10)) (and (<= 1 5) (<= 5 10)))))
 
 ;; H
-  (assert (= o1 x1))
+  (assert (= o x1))
 
 ;; H
-  (assert (= o1 p__y__assume))
+  (assert (= o p__y__assume))
 
 ;; H
   (assert (= (mk 2 5) p__y__assume1))

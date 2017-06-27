@@ -266,10 +266,8 @@
 
 ;; boolean_to_integer_8__post_axiom
   (assert
-  (forall ((b Bool))
-  (! (let ((result (boolean_to_integer_8 b)))
-     (=> (boolean_to_integer_8__function_guard result b) (dynamic_invariant
-     result true false true))) :pattern ((boolean_to_integer_8 b)) )))
+  (forall ((b Bool)) (! (dynamic_invariant (boolean_to_integer_8 b) true
+  false true) :pattern ((boolean_to_integer_8 b)) )))
 
 (declare-fun wheel_speed () (_ BitVec 32))
 

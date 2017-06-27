@@ -243,9 +243,7 @@
 ;; perm__post_axiom
   (assert
   (forall ((a (Array Int contents_type)) (b (Array Int contents_type)))
-  (! (let ((result (perm a b)))
-     (=> (perm__function_guard result a b)
-     (=> (= (bool_eq2 a 1 100 b 1 100) true) (= result true)))) :pattern (
+  (! (=> (= (bool_eq2 a 1 100 b 1 100) true) (= (perm a b) true)) :pattern (
   (perm a b)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -303,9 +301,6 @@
 (declare-fun t_old3 () (Array Int contents_type))
 
 (declare-fun temp3 () Int)
-
-;; H
-  (assert (perm__function_guard (perm t2 t_old1) t2 t_old1))
 
 ;; H
   (assert (in_range1 i))

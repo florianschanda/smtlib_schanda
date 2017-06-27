@@ -466,7 +466,7 @@
 
 (declare-fun o12 () us_split_fields)
 
-(declare-fun temp___296 () us_rep1)
+(declare-fun temp___295 () us_rep1)
 
 (declare-fun result () us_split_discrs__ref)
 
@@ -575,7 +575,7 @@
   (assert (= o12 (mk___split_fields (mk___rep (mk___split_discrs o10) o11))))
 
 ;; H
-  (assert (= temp___296 (mk___rep1 o12)))
+  (assert (= temp___295 (mk___rep1 o12)))
 
 ;; H
   (assert
@@ -584,7 +584,7 @@
              (mk___rep (mk___split_discrs h__split_fields) h__split_fields1)))))
 
 ;; H
-  (assert (= h__split_fields2 (us_split_fields1 temp___296)))
+  (assert (= h__split_fields2 (us_split_fields1 temp___295)))
 
 ;; H
   (assert

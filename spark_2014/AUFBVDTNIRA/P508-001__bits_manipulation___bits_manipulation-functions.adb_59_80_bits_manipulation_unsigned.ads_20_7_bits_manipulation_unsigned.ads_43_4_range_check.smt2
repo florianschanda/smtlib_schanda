@@ -153,9 +153,9 @@
 (define-fun modular__ref_4__projection ((a modular__ref)) modular (modular__content
                                                                   a))
 
-(define-fun dynamic_invariant ((temp___expr_417 (_ BitVec 16))
-  (temp___is_init_414 Bool) (temp___skip_constant_415 Bool)
-  (temp___do_toplevel_416 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_265 (_ BitVec 16))
+  (temp___is_init_262 Bool) (temp___skip_constant_263 Bool)
+  (temp___do_toplevel_264 Bool)) Bool true)
 
 (declare-sort bit_position 0)
 
@@ -179,11 +179,11 @@
 (define-fun bit_position__ref_3__projection ((a bit_position__ref)) bit_position 
   (bit_position__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_423 Int)
-  (temp___is_init_420 Bool) (temp___skip_constant_421 Bool)
-  (temp___do_toplevel_422 Bool)) Bool (=>
-                                      (or (= temp___is_init_420 true)
-                                      (<= 0 15)) (in_range temp___expr_423)))
+(define-fun dynamic_invariant1 ((temp___expr_271 Int)
+  (temp___is_init_268 Bool) (temp___skip_constant_269 Bool)
+  (temp___do_toplevel_270 Bool)) Bool (=>
+                                      (or (= temp___is_init_268 true)
+                                      (<= 0 15)) (in_range temp___expr_271)))
 
 (declare-sort mask_size 0)
 
@@ -533,20 +533,16 @@
   (forall ((amount Int))
   (! (=>
      (and (dynamic_invariant v true true true) (dynamic_invariant2 amount
-     true true true))
-     (let ((result (shift_right v amount)))
-     (=> (shift_right__function_guard result v amount) (dynamic_invariant
-     result true false true)))) :pattern ((shift_right v amount)) ))))
+     true true true)) (dynamic_invariant (shift_right v amount) true false
+     true)) :pattern ((shift_right v amount)) ))))
 
 ;; shift_right__def_axiom
   (assert
   (forall ((v (_ BitVec 16)))
   (forall ((amount Int))
   (! (=>
-     (and
      (and (dynamic_invariant v true true true) (dynamic_invariant2 amount
-     true true true)) (shift_right__function_guard (shift_right v amount) v
-     amount))
+     true true true))
      (= (shift_right v amount) (ite (and (<= 1 16) (<= 16 8))
                                ((_ zero_extend 8) (ite (< amount 8)
                                                   (bvlshr ((_ extract 7 0) v) ((_ int2bv 8) amount))
@@ -571,20 +567,16 @@
   (forall ((amount Int))
   (! (=>
      (and (dynamic_invariant v true true true) (dynamic_invariant2 amount
-     true true true))
-     (let ((result (shift_left v amount)))
-     (=> (shift_left__function_guard result v amount) (dynamic_invariant
-     result true false true)))) :pattern ((shift_left v amount)) ))))
+     true true true)) (dynamic_invariant (shift_left v amount) true false
+     true)) :pattern ((shift_left v amount)) ))))
 
 ;; shift_left__def_axiom
   (assert
   (forall ((v (_ BitVec 16)))
   (forall ((amount Int))
   (! (=>
-     (and
      (and (dynamic_invariant v true true true) (dynamic_invariant2 amount
-     true true true)) (shift_left__function_guard (shift_left v amount) v
-     amount))
+     true true true))
      (= (shift_left v amount) (ite (and (<= 1 16) (<= 16 8))
                               ((_ zero_extend 8) (ite (< amount 8)
                                                  (bvshl ((_ extract 7 0) v) ((_ int2bv 8) amount))
@@ -602,32 +594,25 @@
 
 (declare-fun make_mask__function_guard ((_ BitVec 16) Int) Bool)
 
-(define-fun dynamic_invariant3 ((temp___expr_429 Int)
-  (temp___is_init_426 Bool) (temp___skip_constant_427 Bool)
-  (temp___do_toplevel_428 Bool)) Bool (=>
-                                      (or (= temp___is_init_426 true)
-                                      (<= 1 16)) (in_range1 temp___expr_429)))
+(define-fun dynamic_invariant3 ((temp___expr_277 Int)
+  (temp___is_init_274 Bool) (temp___skip_constant_275 Bool)
+  (temp___do_toplevel_276 Bool)) Bool (=>
+                                      (or (= temp___is_init_274 true)
+                                      (<= 1 16)) (in_range1 temp___expr_277)))
 
 ;; make_mask__post_axiom
   (assert
   (forall ((num_bits Int))
-  (! (=> (dynamic_invariant3 num_bits true true true)
-     (let ((result (make_mask num_bits)))
-     (=> (make_mask__function_guard result num_bits) (dynamic_invariant
-     result true false true)))) :pattern ((make_mask num_bits)) )))
+  (! (=> (dynamic_invariant3 num_bits true true true) (dynamic_invariant
+     (make_mask num_bits) true false true)) :pattern ((make_mask num_bits)) )))
 
 ;; make_mask__def_axiom
   (assert
   (forall ((num_bits Int))
-  (! (=>
-     (and (dynamic_invariant3 num_bits true true true)
-     (make_mask__function_guard (make_mask num_bits) num_bits))
-     (and (shift_right__function_guard
-     (shift_right ((_ int2bv 16) 65535) (- 16 num_bits))
-     ((_ int2bv 16) 65535) (- 16 num_bits))
+  (! (=> (dynamic_invariant3 num_bits true true true)
      (= (make_mask num_bits) (shift_right ((_ int2bv 16) 65535)
-                             (- 16 num_bits))))) :pattern ((make_mask
-                                                           num_bits)) )))
+                             (- 16 num_bits)))) :pattern ((make_mask
+                                                          num_bits)) )))
 
 (declare-fun extract_bits_inline_always ((_ BitVec 16) Int
   Int) (_ BitVec 16))
@@ -646,20 +631,6 @@
      true true true)) (dynamic_invariant1 to__ true true true))
      (<= from to__))
      (let ((result (extract_bits_inline_always value from to__)))
-     (and (shift_right__function_guard (shift_right value from) value from)
-     (and (make_mask__function_guard (make_mask (+ (- to__ from) 1))
-     (+ (- to__ from) 1))
-     (and (make_mask__function_guard (make_mask (+ (- to__ from) 1))
-     (+ (- to__ from) 1))
-     (and (shift_left__function_guard (shift_left result from) result from)
-     (and (make_mask__function_guard (make_mask (+ (- to__ from) 1))
-     (+ (- to__ from) 1))
-     (and (make_mask__function_guard (make_mask (+ (- to__ from) 1))
-     (+ (- to__ from) 1))
-     (and (shift_left__function_guard
-     (shift_left (make_mask (+ (- to__ from) 1)) from)
-     (make_mask (+ (- to__ from) 1)) from)
-     (=> (extract_bits_inline_always__function_guard result value from to__)
      (and
      (and
      (= result (bvand (shift_right value from) (make_mask
@@ -668,8 +639,8 @@
      (= (shift_left result from) (bvand value (shift_left
                                               (make_mask (+ (- to__ from) 1))
                                               from)))))
-     (dynamic_invariant result true false true)))))))))))) :pattern (
-  (extract_bits_inline_always value from to__)) ))))
+     (dynamic_invariant result true false true)))) :pattern ((extract_bits_inline_always
+                                                             value from to__)) ))))
 
 (declare-fun value () (_ BitVec 16))
 
@@ -709,34 +680,6 @@
   (assert (<= from to__))
 
 ;; H
-  (assert (shift_right__function_guard (shift_right value from) value 
-  from))
-
-;; H
-  (assert (make_mask__function_guard (make_mask (+ (- to__ from) 1))
-  (+ (- to__ from) 1)))
-
-;; H
-  (assert (make_mask__function_guard (make_mask (+ (- to__ from) 1))
-  (+ (- to__ from) 1)))
-
-;; H
-  (assert (shift_left__function_guard (shift_left o from) o from))
-
-;; H
-  (assert (make_mask__function_guard (make_mask (+ (- to__ from) 1))
-  (+ (- to__ from) 1)))
-
-;; H
-  (assert (make_mask__function_guard (make_mask (+ (- to__ from) 1))
-  (+ (- to__ from) 1)))
-
-;; H
-  (assert (shift_left__function_guard
-  (shift_left (make_mask (+ (- to__ from) 1)) from)
-  (make_mask (+ (- to__ from) 1)) from))
-
-;; H
   (assert
   (= bits_manipulation_unsigned__unsigned_16__functions__extract_bits_not_inline__result1 
   bits_manipulation_unsigned__unsigned_16__functions__extract_bits_not_inline__result2))
@@ -748,9 +691,7 @@
 
 ;; H
   (assert
-  (and
   (and (= o (extract_bits_inline_always value from to__))
-  (extract_bits_inline_always__function_guard o value from to__))
   (and (= o (bvand (shift_right value from) (make_mask (+ (- to__ from) 1))))
   (and (bvule o (make_mask (+ (- to__ from) 1)))
   (= (shift_left o from) (bvand value (shift_left

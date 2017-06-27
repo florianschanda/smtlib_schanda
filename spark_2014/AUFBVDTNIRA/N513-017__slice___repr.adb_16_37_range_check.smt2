@@ -307,18 +307,14 @@
 ;; index_of_minimum__post_axiom
   (assert
   (forall ((unsorted us_t))
-  (! (=> (dynamic_invariant1 unsorted true true true)
-     (let ((result (index_of_minimum unsorted)))
-     (=> (index_of_minimum__function_guard result unsorted)
-     (dynamic_invariant result true false true)))) :pattern ((index_of_minimum
+  (! (=> (dynamic_invariant1 unsorted true true true) (dynamic_invariant
+     (index_of_minimum unsorted) true false true)) :pattern ((index_of_minimum
                                                              unsorted)) )))
 
 ;; index_of_minimum__def_axiom
   (assert
   (forall ((unsorted us_t))
-  (! (=>
-     (and (dynamic_invariant1 unsorted true true true)
-     (index_of_minimum__function_guard (index_of_minimum unsorted) unsorted))
+  (! (=> (dynamic_invariant1 unsorted true true true)
      (= (index_of_minimum unsorted) 3)) :pattern ((index_of_minimum unsorted)) )))
 
 (declare-fun values__first () integer)
@@ -328,8 +324,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -353,7 +347,7 @@
 
 (declare-fun first2 (t1) integer)
 
-(declare-fun last3 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -362,7 +356,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep (first2 (mk1 f l))) f) (= (to_rep (last3 (mk1 f l))) l)))) :pattern (
+     (and (= (to_rep (first2 (mk1 f l))) f) (= (to_rep (last2 (mk1 f l))) l)))) :pattern (
   (mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first Int) (range_last Int) (low Int)
@@ -381,10 +375,10 @@
 
 (define-fun first3 ((a us_t1)) Int (to_rep (first2 (rt1 a))))
 
-(define-fun last4 ((a us_t1)) Int (to_rep (last3 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last4 a))
-                                    (+ (- (last4 a) (first3 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size1 () Int)
 
@@ -419,8 +413,8 @@
 
 (define-fun bool_eq5 ((x us_t1)
   (y us_t1)) Bool (bool_eq2 (elts1 x) (to_rep (first2 (rt1 x)))
-                  (to_rep (last3 (rt1 x))) (elts1 y)
-                  (to_rep (first2 (rt1 y))) (to_rep (last3 (rt1 y)))))
+                  (to_rep (last2 (rt1 x))) (elts1 y)
+                  (to_rep (first2 (rt1 y))) (to_rep (last2 (rt1 y)))))
 
 (declare-fun user_eq4 (us_t1 us_t1) Bool)
 

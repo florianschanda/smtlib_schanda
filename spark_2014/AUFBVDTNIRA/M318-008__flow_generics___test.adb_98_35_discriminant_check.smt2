@@ -95,29 +95,6 @@
 (define-fun item_t__ref_4__projection ((a item_t__ref)) item_t (item_t__content
                                                                a))
 
-(declare-sort tarray_of_items_tD1 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq2 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
-
-(declare-fun user_eq2 (tarray_of_items_tD1 tarray_of_items_tD1) Bool)
-
-(declare-fun dummy2 () tarray_of_items_tD1)
-
-(declare-datatypes ()
-((tarray_of_items_tD1__ref
- (mk_tarray_of_items_tD1__ref
- (tarray_of_items_tD1__content tarray_of_items_tD1)))))
-(define-fun tarray_of_items_tD1__ref___projection ((a tarray_of_items_tD1__ref)) tarray_of_items_tD1 
-  (tarray_of_items_tD1__content a))
-
 (declare-fun to_rep1 (item_t) Int)
 
 (declare-fun of_rep1 (Int) item_t)
@@ -179,7 +156,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq3 ((a (Array Int item_t)) (a__first Int) (a__last Int)
+(define-fun bool_eq2 ((a (Array Int item_t)) (a__first Int) (a__last Int)
   (b (Array Int item_t)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -198,7 +175,7 @@
   (assert
   (forall ((a (Array Int item_t)) (b (Array Int item_t)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq3 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq2 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -216,7 +193,7 @@
   (forall ((a (Array Int item_t)) (b (Array Int item_t)))
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq3 a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq2 a a_first a_last b b_first b_last) true)) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -227,7 +204,7 @@
      (exists ((i Int) (j Int))
      (and (<= i a_last)
      (and (< j b_last)
-     (and (= (bool_eq3 a a_first i b b_first j) true)
+     (and (= (bool_eq2 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
      (< (to_rep1 (select a (+ i 1))) (to_rep1 (select b (+ j 1))))))))))) :pattern (
@@ -241,13 +218,13 @@
      (exists ((i Int) (j Int))
      (and (<= i b_last)
      (and (< j a_last)
-     (and (= (bool_eq3 a a_first j b b_first i) true)
+     (and (= (bool_eq2 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
      (< (to_rep1 (select b (+ i 1))) (to_rep1 (select a (+ j 1))))))))))) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
-(declare-fun dummy3 () (Array Int item_t))
+(declare-fun dummy2 () (Array Int item_t))
 
 (declare-fun value__size () Int)
 
@@ -280,7 +257,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int item_t))) (<= 0 (object__alignment a))))
 
-(declare-fun user_eq3 ((Array Int item_t) (Array Int item_t)) Bool)
+(declare-fun user_eq2 ((Array Int item_t) (Array Int item_t)) Bool)
 
 (declare-datatypes ()
 ((us_split_discrs
@@ -355,7 +332,7 @@
                                                                    (us_split_discrs1
                                                                    a))) 2))))
 
-(define-fun bool_eq4 ((a us_rep)
+(define-fun bool_eq3 ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (and
                         (and
@@ -384,14 +361,14 @@
                                                   (rec__test__fruit_rec__record_t__b
                                                   (us_split_fields1 b))))))
                         (=> (test__fruit_rec__record_t__arr__pred a)
-                        (= (bool_eq3
+                        (= (bool_eq2
                            (rec__test__fruit_rec__record_t__arr
                            (us_split_fields1 a)) 1 5
                            (rec__test__fruit_rec__record_t__arr
                            (us_split_fields1 b)) 1 5) true)))
                    true false))
 
-(declare-fun user_eq4 (us_rep us_rep) Bool)
+(declare-fun user_eq3 (us_rep us_rep) Bool)
 
 (declare-fun value__size1 () Int)
 
@@ -493,7 +470,7 @@
 ;; test__fruit_rec__record_t__arr__position_axiom
   (assert (<= 0 test__fruit_rec__record_t__arr__position))
 
-(declare-fun dummy4 () us_rep)
+(declare-fun dummy3 () us_rep)
 
 (declare-datatypes ()
 ((record_t__ref (mk_record_t__ref (record_t__content us_rep)))))
@@ -509,7 +486,7 @@
                                             (us_split_discrs1
                                             temp___expr_253))) 0)))
 
-(define-fun in_range3 ((rec__test__fruit_rec__record_t__d1 Int)
+(define-fun in_range2 ((rec__test__fruit_rec__record_t__d1 Int)
   (a us_rep)) Bool (= rec__test__fruit_rec__record_t__d1 (to_rep
                                                          (rec__test__fruit_rec__record_t__d
                                                          (us_split_discrs1 a)))))
@@ -614,7 +591,7 @@
 ;; test__fruit_rec__record_t__arr__position_axiom
   (assert (<= 0 test__fruit_rec__record_t__arr__position1))
 
-(declare-fun dummy5 () us_rep)
+(declare-fun dummy4 () us_rep)
 
 (declare-datatypes ()
 ((tapple_basketS__ref
@@ -627,7 +604,7 @@
   (temp___do_toplevel_279 Bool)) Bool (and
                                       (=>
                                       (not (= temp___skip_constant_278 true))
-                                      (in_range3 0 temp___expr_280))
+                                      (in_range2 0 temp___expr_280))
                                       (= (attr__constrained temp___expr_280) true)))
 
 (define-fun default_initial_assumption1 ((temp___expr_283 us_rep)
@@ -639,7 +616,7 @@
                                             (us_split_discrs1
                                             temp___expr_283))) 0)))
 
-(define-fun in_range4 ((rec__test__fruit_rec__record_t__d1 Int)
+(define-fun in_range3 ((rec__test__fruit_rec__record_t__d1 Int)
   (a us_rep)) Bool (= rec__test__fruit_rec__record_t__d1 (to_rep
                                                          (rec__test__fruit_rec__record_t__d
                                                          (us_split_discrs1 a)))))
@@ -744,29 +721,10 @@
 ;; test__fruit_rec__record_t__arr__position_axiom
   (assert (<= 0 test__fruit_rec__record_t__arr__position2))
 
-(declare-fun dummy6 () us_rep)
+(declare-fun dummy5 () us_rep)
 
 (declare-datatypes () ((t17b__ref (mk_t17b__ref (t17b__content us_rep)))))
 (define-fun t17b__ref___projection ((a t17b__ref)) us_rep (t17b__content a))
-
-(declare-sort t18b 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq5 (t18b t18b) Bool)
-
-(declare-fun dummy7 () t18b)
-
-(declare-datatypes () ((t18b__ref (mk_t18b__ref (t18b__content t18b)))))
-(define-fun t18b__ref___projection ((a t18b__ref)) t18b (t18b__content a))
 
 (declare-fun apple_basket__split_discrs () us_split_discrs)
 
@@ -774,7 +732,7 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(define-fun in_range6 ((rec__test__fruit_rec__record_t__d1 Int)
+(define-fun in_range4 ((rec__test__fruit_rec__record_t__d1 Int)
   (a us_rep)) Bool (= rec__test__fruit_rec__record_t__d1 (to_rep
                                                          (rec__test__fruit_rec__record_t__d
                                                          (us_split_discrs1 a)))))
@@ -879,67 +837,48 @@
 ;; test__fruit_rec__record_t__arr__position_axiom
   (assert (<= 0 test__fruit_rec__record_t__arr__position3))
 
-(declare-fun dummy8 () us_rep)
+(declare-fun dummy6 () us_rep)
 
 (declare-datatypes () ((t20b__ref (mk_t20b__ref (t20b__content us_rep)))))
 (define-fun t20b__ref___projection ((a t20b__ref)) us_rep (t20b__content a))
-
-(declare-sort t21b 0)
-
-(define-fun in_range7 ((x Int)) Bool (and (<= 1 x) (<= x 5)))
-
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq6 (t21b t21b) Bool)
-
-(declare-fun dummy9 () t21b)
-
-(declare-datatypes () ((t21b__ref (mk_t21b__ref (t21b__content t21b)))))
-(define-fun t21b__ref___projection ((a t21b__ref)) t21b (t21b__content a))
 
 (declare-fun mixed_basket__attr__constrained () Bool)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(declare-fun temp___380 (Int Int Int Int Int) (Array Int item_t))
+(declare-fun temp___379 (Int Int Int Int Int) (Array Int item_t))
 
 ;; def_axiom
   (assert
-  (forall ((temp___382 Int) (temp___383 Int) (temp___384 Int)
-  (temp___385 Int) (temp___386 Int))
-  (let ((temp___381 (temp___380 temp___382 temp___383 temp___384 temp___385
-                    temp___386)))
+  (forall ((temp___381 Int) (temp___382 Int) (temp___383 Int)
+  (temp___384 Int) (temp___385 Int))
+  (let ((temp___380 (temp___379 temp___381 temp___382 temp___383 temp___384
+                    temp___385)))
   (and
   (and
   (and
-  (and (= (select temp___381 1) (of_rep1 temp___382))
-  (= (select temp___381 2) (of_rep1 temp___383)))
-  (= (select temp___381 3) (of_rep1 temp___384)))
-  (= (select temp___381 4) (of_rep1 temp___385)))
-  (= (select temp___381 5) (of_rep1 temp___386))))))
+  (and (= (select temp___380 1) (of_rep1 temp___381))
+  (= (select temp___380 2) (of_rep1 temp___382)))
+  (= (select temp___380 3) (of_rep1 temp___383)))
+  (= (select temp___380 4) (of_rep1 temp___384)))
+  (= (select temp___380 5) (of_rep1 temp___385))))))
 
-(declare-fun temp___388 (Int Int Int Int Int) (Array Int item_t))
+(declare-fun temp___387 (Int Int Int Int Int) (Array Int item_t))
 
 ;; def_axiom
   (assert
-  (forall ((temp___390 Int) (temp___391 Int) (temp___392 Int)
-  (temp___393 Int) (temp___394 Int))
-  (let ((temp___389 (temp___388 temp___390 temp___391 temp___392 temp___393
-                    temp___394)))
+  (forall ((temp___389 Int) (temp___390 Int) (temp___391 Int)
+  (temp___392 Int) (temp___393 Int))
+  (let ((temp___388 (temp___387 temp___389 temp___390 temp___391 temp___392
+                    temp___393)))
   (and
   (and
   (and
-  (and (= (select temp___389 1) (of_rep1 temp___390))
-  (= (select temp___389 2) (of_rep1 temp___391)))
-  (= (select temp___389 3) (of_rep1 temp___392)))
-  (= (select temp___389 4) (of_rep1 temp___393)))
-  (= (select temp___389 5) (of_rep1 temp___394))))))
+  (and (= (select temp___388 1) (of_rep1 temp___389))
+  (= (select temp___388 2) (of_rep1 temp___390)))
+  (= (select temp___388 3) (of_rep1 temp___391)))
+  (= (select temp___388 4) (of_rep1 temp___392)))
+  (= (select temp___388 5) (of_rep1 temp___393))))))
 
 (define-fun dynamic_invariant1 ((temp___expr_33 Int) (temp___is_init_30 Bool)
   (temp___skip_constant_31 Bool)
@@ -958,50 +897,43 @@
 
 (declare-fun o () natural)
 
-(declare-fun o1 () (Array Int item_t))
+(declare-fun o1 () natural)
 
-(declare-fun o2 () item_t)
+(declare-fun o2 () natural)
 
 (declare-fun o3 () item_t)
 
 (declare-fun o4 () item_t)
 
-(declare-fun o5 () (Array Int item_t))
+(declare-fun o5 () item_t)
 
-(declare-fun o6 () natural)
+(declare-fun o6 () (Array Int item_t))
 
-(declare-fun o7 () natural)
+(declare-fun o7 () Bool)
 
-(declare-fun o8 () item_t)
+(declare-fun o8 () natural)
 
 (declare-fun o9 () item_t)
 
 (declare-fun o10 () item_t)
 
-(declare-fun o11 () (Array Int item_t))
+(declare-fun o11 () item_t)
 
-(declare-fun o12 () Bool)
+(declare-fun o12 () (Array Int item_t))
 
-(declare-fun o13 () natural)
-
-(declare-fun o14 () item_t)
-
-(declare-fun o15 () item_t)
-
-(declare-fun o16 () item_t)
-
-(declare-fun o17 () (Array Int item_t))
-
-(declare-fun o18 () Bool)
+(declare-fun o13 () Bool)
 
 ;; H
   (assert (and (= us 0) (in_range 0)))
 
 ;; H
-  (assert (= o1 (temp___388 1 1 1 1 1)))
+  (assert (= (to_rep o) 0))
 
 ;; H
-  (assert (= dummy1 o2))
+  (assert (= o o1))
+
+;; H
+  (assert (= o2 o1))
 
 ;; H
   (assert (= dummy1 o3))
@@ -1010,40 +942,21 @@
   (assert (= dummy1 o4))
 
 ;; H
-  (assert (= o1 o5))
+  (assert (= dummy1 o5))
 
 ;; H
-  (assert (= (to_rep o) 0))
+  (assert (= (temp___387 1 1 1 1 1) o6))
 
 ;; H
-  (assert (= o o6))
-
-;; H
-  (assert (= o7 o6))
-
-;; H
-  (assert (= o8 o2))
-
-;; H
-  (assert (= o9 o3))
-
-;; H
-  (assert (= o10 o4))
-
-;; H
-  (assert (= o11 o5))
-
-;; H
-  (assert (= true o12))
+  (assert (= true o7))
 
 ;; H
   (assert
-  (= (mk___rep (mk___split_discrs o13) (mk___split_fields o14 o15 o16 o17)
-     o18) (mk___rep (mk___split_discrs o7) (mk___split_fields o8 o9 o10 o11)
-          o12)))
+  (= (mk___rep (mk___split_discrs o8) (mk___split_fields o9 o10 o11 o12) o13) 
+  (mk___rep (mk___split_discrs o2) (mk___split_fields o3 o4 o5 o6) o7)))
 
 (assert
 ;; WP_parameter_def
  ;; File "test.ads", line 73, characters 0-0
-  (not (= 0 (to_rep o13))))
+  (not (= 0 (to_rep o8))))
 (check-sat)

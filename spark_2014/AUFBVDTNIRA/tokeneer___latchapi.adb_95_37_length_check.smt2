@@ -406,26 +406,7 @@
 (define-fun messageindext__ref___projection ((a messageindext__ref)) messageindext 
   (messageindext__content a))
 
-(declare-sort t3s 0)
-
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 4096)))
-
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq6 (t3s t3s) Bool)
-
-(declare-fun dummy6 () t3s)
-
-(declare-datatypes () ((t3s__ref (mk_t3s__ref (t3s__content t3s)))))
-(define-fun t3s__ref___projection ((a t3s__ref)) t3s (t3s__content a))
-
-(declare-fun dummy7 () (Array Int character))
+(declare-fun dummy6 () (Array Int character))
 
 (declare-fun value__size1 () Int)
 
@@ -458,7 +439,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment1 a))))
 
-(declare-fun user_eq7 ((Array Int character) (Array Int character)) Bool)
+(declare-fun user_eq6 ((Array Int character) (Array Int character)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields
@@ -481,7 +462,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_fields (us_split_fields1
                                                              a))
 
-(define-fun bool_eq8 ((a us_rep)
+(define-fun bool_eq7 ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (= (bool_eq3
                            (rec__tcpip__messaget__data (us_split_fields1 a))
@@ -495,7 +476,7 @@
                                                   (us_split_fields1 b)))))
                    true false))
 
-(declare-fun user_eq8 (us_rep us_rep) Bool)
+(declare-fun user_eq7 (us_rep us_rep) Bool)
 
 (declare-fun value__size2 () Int)
 
@@ -549,7 +530,7 @@
 ;; tcpip__messaget__length__position_axiom
   (assert (<= 0 tcpip__messaget__length__position))
 
-(declare-fun dummy8 () us_rep)
+(declare-fun dummy7 () us_rep)
 
 (declare-datatypes ()
 ((messaget__ref (mk_messaget__ref (messaget__content us_rep)))))

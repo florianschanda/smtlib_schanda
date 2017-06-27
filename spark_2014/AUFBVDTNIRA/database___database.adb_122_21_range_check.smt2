@@ -328,12 +328,9 @@
 ;; some_available__def_axiom
   (assert
   (forall ((database__availability__first_available Int))
-  (! (=> (some_available__function_guard
-     (some_available database__availability__first_available)
-     database__availability__first_available)
-     (= (= (some_available database__availability__first_available) true)
-     (not (= database__availability__first_available 0)))) :pattern (
-  (some_available database__availability__first_available)) )))
+  (! (= (= (some_available database__availability__first_available) true)
+     (not (= database__availability__first_available 0))) :pattern ((some_available
+                                                                    database__availability__first_available)) )))
 
 (declare-fun is_available (Int (Array Int us_rep)) Bool)
 
@@ -346,12 +343,9 @@
   (assert
   (forall ((account Int))
   (forall ((database__availability__links (Array Int us_rep)))
-  (! (=> (is_available__function_guard
-     (is_available account database__availability__links) account
-     database__availability__links)
-     (= (= (is_available account database__availability__links) true)
+  (! (= (= (is_available account database__availability__links) true)
      (= (rec__database__availability__account_link__available
-        (us_split_fields1 (select database__availability__links account))) true))) :pattern (
+        (us_split_fields1 (select database__availability__links account))) true)) :pattern (
   (is_available account database__availability__links)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
@@ -365,10 +359,6 @@
 
 ;; H
   (assert (=> (<= 1 200000) (in_range2 account)))
-
-;; H
-  (assert (some_available__function_guard (some_available first_available)
-  first_available))
 
 ;; H
   (assert (= (some_available first_available) true))

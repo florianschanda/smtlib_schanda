@@ -89,10 +89,8 @@
 ;; id__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (id x)))
-     (=> (id__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (id x) true
+     false true)) :pattern ((id x)) )))
 
 (declare-datatypes ()
 ((us_split_fields (mk___split_fields (rec__inline_init__rec__c integer)))))
@@ -159,9 +157,6 @@
 (define-fun rec____ref___projection ((a rec____ref)) us_rep (rec____content
                                                             a))
 
-;; temp___result_174_def
-  (assert (id__function_guard (id 3) 3))
-
 (define-fun default_initial_assumption ((temp___expr_172 us_rep)
   (temp___skip_top_level_173 Bool)) Bool (= (to_rep
                                             (rec__inline_init__rec__c
@@ -183,11 +178,10 @@
 (declare-fun y1 () Int)
 
 ;; H
-  (assert (default_initial_assumption
-  (mk___rep (mk___split_fields r__split_fields)) false))
+  (assert (= (to_rep r__split_fields) (id 3)))
 
 ;; H
-  (assert (and (and (= o (id 3)) (id__function_guard o 3)) (in_range o)))
+  (assert (and (= o (id 3)) (in_range o)))
 
 ;; H
   (assert (= result y))

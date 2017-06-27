@@ -186,8 +186,7 @@
 ;; divides__def_axiom
   (assert
   (forall ((a Int) (b Int))
-  (! (=> (divides__function_guard (divides a b) a b)
-     (= (= (divides a b) true) (= (mod2 b a) 0))) :pattern ((divides a b)) )))
+  (! (= (= (divides a b) true) (= (mod2 b a) 0)) :pattern ((divides a b)) )))
 
 (declare-fun a () Int)
 
@@ -220,10 +219,6 @@
   (forall ((x Int))
   (! (=> (in_range2 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
-
-(declare-fun first () Int)
-
-(declare-fun last () Int)
 
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -324,9 +319,6 @@
   (assert (<= j1 (- (ite (< a b) a b) 1)))
 
 ;; H
-  (assert (divides__function_guard (divides o2 o3) o2 o3))
-
-;; H
   (assert (and (= o3 (ite (< a b) a b)) (in_range1 (ite (< a b) a b))))
 
 ;; H
@@ -334,11 +326,6 @@
 
 ;; H
   (assert (not (= (divides o2 o3) true)))
-
-;; H
-  (assert
-  (forall ((x1 Int)) (divides__function_guard (divides x1 (ite (< a b) a b))
-  x1 (ite (< a b) a b))))
 
 ;; H
   (assert

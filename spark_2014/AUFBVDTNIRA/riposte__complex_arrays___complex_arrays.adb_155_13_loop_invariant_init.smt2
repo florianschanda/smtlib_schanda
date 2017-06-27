@@ -226,9 +226,9 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(declare-sort t22b 0)
+(declare-sort tcounterB 0)
 
-(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 1001)))
+(define-fun in_range3 ((x Int)) Bool (and (<= (- 32768) x) (<= x 32767)))
 
 (define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -238,28 +238,9 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
 
-(declare-fun user_eq2 (t22b t22b) Bool)
+(declare-fun user_eq2 (tcounterB tcounterB) Bool)
 
-(declare-fun dummy2 () t22b)
-
-(declare-datatypes () ((t22b__ref (mk_t22b__ref (t22b__content t22b)))))
-(define-fun t22b__ref___projection ((a t22b__ref)) t22b (t22b__content a))
-
-(declare-sort tcounterB 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= (- 32768) x) (<= x 32767)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq3 (tcounterB tcounterB) Bool)
-
-(declare-fun dummy3 () tcounterB)
+(declare-fun dummy2 () tcounterB)
 
 (declare-datatypes ()
 ((tcounterB__ref (mk_tcounterB__ref (tcounterB__content tcounterB)))))
@@ -277,18 +258,37 @@
 
 ;; range_axiom
   (assert
-  (forall ((x tcounterB)) (! (in_range4
+  (forall ((x tcounterB)) (! (in_range3
   (to_rep1 x)) :pattern ((to_rep1 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range4 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
+  (! (=> (in_range3 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
                                                               (of_rep1 x))) )))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
+  (x Int)) Bool (and (<= first_int x) (<= x last_int)))
+
+(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
+
+(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
+
+(declare-fun user_eq3 (tcounterB tcounterB) Bool)
+
+(declare-fun dummy3 () tcounterB)
+
+(declare-datatypes () ((t24b__ref (mk_t24b__ref (t24b__content tcounterB)))))
+(define-fun t24b__ref___projection ((a t24b__ref)) tcounterB (t24b__content
+                                                             a))
+
+(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+
+(define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
 (define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
@@ -302,29 +302,6 @@
 (declare-fun user_eq4 (tcounterB tcounterB) Bool)
 
 (declare-fun dummy4 () tcounterB)
-
-(declare-datatypes () ((t24b__ref (mk_t24b__ref (t24b__content tcounterB)))))
-(define-fun t24b__ref___projection ((a t24b__ref)) tcounterB (t24b__content
-                                                             a))
-
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
-
-(declare-fun first () Int)
-
-(define-fun dynamic_property1 ((first_int Int) (last_int Int)
-  (x Int)) Bool (and (<= first_int x) (<= x last_int)))
-
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq5 (tcounterB tcounterB) Bool)
-
-(declare-fun dummy5 () tcounterB)
 
 (declare-datatypes () ((t29b__ref (mk_t29b__ref (t29b__content tcounterB)))))
 (define-fun t29b__ref___projection ((a t29b__ref)) tcounterB (t29b__content
@@ -351,11 +328,9 @@
 
 (declare-fun j () Int)
 
-(declare-fun o () (Array Int value))
+(declare-fun o () value)
 
-(declare-fun o1 () value)
-
-(declare-fun o2 () (Array Int value))
+(declare-fun o1 () (Array Int value))
 
 (declare-fun result () (Array Int value))
 
@@ -373,13 +348,10 @@
   (assert (in_range1 i))
 
 ;; H
-  (assert (= o (temp___238 0)))
-
-;; H
   (assert (= (mk_map__ref result) (mk_map__ref tmp)))
 
 ;; H
-  (assert (= tmp1 o))
+  (assert (= tmp1 (temp___238 0)))
 
 ;; H
   (assert (= (mk_int__ref result1) (mk_int__ref j)))
@@ -394,16 +366,16 @@
   (assert (<= j1 i))
 
 ;; H
-  (assert (= (to_rep o1) (- 23)))
+  (assert (= (to_rep o) (- 23)))
 
 ;; H
-  (assert (= o2 (store tmp1 j1 o1)))
+  (assert (= o1 (store tmp1 j1 o)))
 
 ;; H
   (assert (= tmp1 result2))
 
 ;; H
-  (assert (= tmp2 o2))
+  (assert (= tmp2 o1))
 
 (declare-fun k () Int)
 

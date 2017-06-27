@@ -465,12 +465,11 @@
 (define-fun msgtextt__ref___projection ((a msgtextt__ref)) msgtextt (msgtextt__content
                                                                     a))
 
-(define-fun dynamic_invariant ((temp___expr_1076 Int)
-  (temp___is_init_1073 Bool) (temp___skip_constant_1074 Bool)
-  (temp___do_toplevel_1075 Bool)) Bool (=>
-                                       (or (= temp___is_init_1073 true)
-                                       (<= 0 14)) (in_range3
-                                       temp___expr_1076)))
+(define-fun dynamic_invariant ((temp___expr_995 Int)
+  (temp___is_init_992 Bool) (temp___skip_constant_993 Bool)
+  (temp___do_toplevel_994 Bool)) Bool (=>
+                                      (or (= temp___is_init_992 true)
+                                      (<= 0 14)) (in_range3 temp___expr_995)))
 
 (declare-fun msg () Int)
 
@@ -2070,12 +2069,12 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range temp___expr_15)))
 
-(define-fun dynamic_invariant5 ((temp___expr_1120 Int)
-  (temp___is_init_1117 Bool) (temp___skip_constant_1118 Bool)
-  (temp___do_toplevel_1119 Bool)) Bool (=>
-                                       (or (= temp___is_init_1117 true)
+(define-fun dynamic_invariant5 ((temp___expr_1039 Int)
+  (temp___is_init_1036 Bool) (temp___skip_constant_1037 Bool)
+  (temp___do_toplevel_1038 Bool)) Bool (=>
+                                       (or (= temp___is_init_1036 true)
                                        (<= 1 43)) (in_range4
-                                       temp___expr_1120)))
+                                       temp___expr_1039)))
 
 ;; msgstring__def_axiom
   (assert
@@ -2129,10 +2128,6 @@
 
 ;; H
   (assert (not (= msg themsg)))
-
-;; H
-  (assert (valid_numberlogentries__function_guard
-  (valid_numberlogentries state) state))
 
 (assert
 ;; WP_parameter_def

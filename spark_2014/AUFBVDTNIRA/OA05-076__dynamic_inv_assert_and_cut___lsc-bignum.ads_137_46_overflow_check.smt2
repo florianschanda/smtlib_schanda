@@ -521,13 +521,13 @@
 (define-fun big_int__ref___projection ((a big_int__ref)) us_t (big_int__content
                                                               a))
 
-(define-fun dynamic_invariant1 ((temp___expr_293 us_t)
-  (temp___is_init_290 Bool) (temp___skip_constant_291 Bool)
-  (temp___do_toplevel_292 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_291 true))
+(define-fun dynamic_invariant1 ((temp___expr_289 us_t)
+  (temp___is_init_286 Bool) (temp___skip_constant_287 Bool)
+  (temp___do_toplevel_288 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_287 true))
                                       (dynamic_property 0 2147483646
-                                      (first1 temp___expr_293)
-                                      (last1 temp___expr_293))))
+                                      (first1 temp___expr_289)
+                                      (last1 temp___expr_289))))
 
 (declare-fun num_of_big_int (us_t Int Int) us_rep)
 
@@ -560,10 +560,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
 
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
-
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -592,12 +588,12 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(define-fun dynamic_invariant3 ((temp___expr_287 Int)
-  (temp___is_init_284 Bool) (temp___skip_constant_285 Bool)
-  (temp___do_toplevel_286 Bool)) Bool (=>
-                                      (or (= temp___is_init_284 true)
+(define-fun dynamic_invariant3 ((temp___expr_283 Int)
+  (temp___is_init_280 Bool) (temp___skip_constant_281 Bool)
+  (temp___do_toplevel_282 Bool)) Bool (=>
+                                      (or (= temp___is_init_280 true)
                                       (<= 0 2147483646)) (in_range3
-                                      temp___expr_287)))
+                                      temp___expr_283)))
 
 (define-fun dynamic_invariant4 ((temp___expr_217 (_ BitVec 32))
   (temp___is_init_214 Bool) (temp___skip_constant_215 Bool)
@@ -611,11 +607,11 @@
 
 (declare-fun lsc__bignum__less__result () Bool)
 
-(declare-fun temp___752 () Int)
+(declare-fun temp___598 () Int)
 
-(declare-fun temp___751 () Bool)
+(declare-fun temp___597 () Bool)
 
-(declare-fun temp___750 () Int)
+(declare-fun temp___596 () Int)
 
 (declare-fun o () Int)
 
@@ -769,56 +765,6 @@
   (<= a_first a_last)))
 
 ;; H
-  (assert (num_of_big_int__function_guard
-  (num_of_big_int a (+ i2 1) (- a_last i2)) a (+ i2 1) (- a_last i2)))
-
-;; H
-  (assert (num_of_big_int__function_guard
-  (num_of_big_int b (+ (+ b_first (- i2 a_first)) 1) (- a_last i2)) b
-  (+ (+ b_first (- i2 a_first)) 1) (- a_last i2)))
-
-;; H
-  (assert (num_of_big_int__function_guard
-  (num_of_big_int a (+ i2 1) (- a_last i2)) a (+ i2 1) (- a_last i2)))
-
-;; H
-  (assert (num_of_big_int__function_guard
-  (num_of_big_int b (+ (+ b_first (- i2 a_first)) 1) (- a_last i2)) b
-  (+ (+ b_first (- i2 a_first)) 1) (- a_last i2)))
-
-;; H
-  (assert (oeq__function_guard
-  (oeq (num_of_big_int a (+ i2 1) (- a_last i2))
-  (num_of_big_int b (+ (+ b_first (- i2 a_first)) 1) (- a_last i2)))
-  (num_of_big_int a (+ i2 1) (- a_last i2))
-  (num_of_big_int b (+ (+ b_first (- i2 a_first)) 1) (- a_last i2))))
-
-;; H
-  (assert (num_of_big_int__function_guard
-  (num_of_big_int a (+ i2 1) (- a_last i2)) a (+ i2 1) (- a_last i2)))
-
-;; H
-  (assert (num_of_big_int__function_guard
-  (num_of_big_int b (+ (+ b_first (- i2 a_first)) 1) (- a_last i2)) b
-  (+ (+ b_first (- i2 a_first)) 1) (- a_last i2)))
-
-;; H
-  (assert (num_of_big_int__function_guard
-  (num_of_big_int a (+ i2 1) (- a_last i2)) a (+ i2 1) (- a_last i2)))
-
-;; H
-  (assert (num_of_big_int__function_guard
-  (num_of_big_int b (+ (+ b_first (- i2 a_first)) 1) (- a_last i2)) b
-  (+ (+ b_first (- i2 a_first)) 1) (- a_last i2)))
-
-;; H
-  (assert (oeq__function_guard
-  (oeq (num_of_big_int a (+ i2 1) (- a_last i2))
-  (num_of_big_int b (+ (+ b_first (- i2 a_first)) 1) (- a_last i2)))
-  (num_of_big_int a (+ i2 1) (- a_last i2))
-  (num_of_big_int b (+ (+ b_first (- i2 a_first)) 1) (- a_last i2))))
-
-;; H
   (assert (=> (<= 0 2147483647) (in_range2 j)))
 
 ;; H
@@ -834,13 +780,13 @@
   (assert (= i1 a_last))
 
 ;; H
-  (assert (=> (and (<= a_first i1) (<= i1 a_last)) (= temp___752 i1)))
+  (assert (=> (and (<= a_first i1) (<= i1 a_last)) (= temp___598 i1)))
 
 ;; H
-  (assert (=> (and (<= a_first i1) (<= i1 a_last)) (= temp___751 result__1)))
+  (assert (=> (and (<= a_first i1) (<= i1 a_last)) (= temp___597 result__1)))
 
 ;; H
-  (assert (=> (and (<= a_first i1) (<= i1 a_last)) (= temp___750 j)))
+  (assert (=> (and (<= a_first i1) (<= i1 a_last)) (= temp___596 j)))
 
 ;; H
   (assert

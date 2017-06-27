@@ -671,8 +671,7 @@
 ;; prop____def_axiom
   (assert
   (forall ((e Int))
-  (! (=> (prop____function_guard (prop__ e) e)
-     (= (= (prop__ e) true) (<= 0 e))) :pattern ((prop__ e)) )))
+  (! (= (= (prop__ e) true) (<= 0 e)) :pattern ((prop__ e)) )))
 
 (declare-fun s1__split_discrs () us_split_discrs)
 
@@ -1162,29 +1161,23 @@
                                                  s1__split_fields1))
 
 ;; H
-  (assert (forall ((e Int)) (prop____function_guard (prop__ e) e)))
-
-;; H
-  (assert (forall ((e Int)) (prop____function_guard (prop__ e) e)))
-
-;; H
   (assert
   (and
   (and
-  (let ((temp___768 (elements
+  (let ((temp___738 (elements
                     (mk___rep s1__split_discrs
                     (mk___split_fields s1__split_fields)))))
-  (forall ((temp___767 Int))
+  (forall ((temp___737 Int))
   (=>
-  (and (in_range3 temp___767)
-  (= (iter_has_element temp___768 temp___767) true))
-  (= (prop__ (get temp___768 temp___767)) true))))
-  (let ((temp___771 (elements s2)))
-  (forall ((temp___770 Int))
+  (and (in_range3 temp___737)
+  (= (iter_has_element temp___738 temp___737) true))
+  (= (prop__ (get temp___738 temp___737)) true))))
+  (let ((temp___740 (elements s2)))
+  (forall ((temp___739 Int))
   (=>
-  (and (in_range3 temp___770)
-  (= (iter_has_element temp___771 temp___770) true))
-  (= (prop__ (get temp___771 temp___770)) true)))))
+  (and (in_range3 temp___739)
+  (= (iter_has_element temp___740 temp___739) true))
+  (= (prop__ (get temp___740 temp___739)) true)))))
   (< (length s2) (- (to_rep
                     (rec__use_ordered_sets__my_sets__set__capacity
                     s1__split_discrs)) (length
@@ -1249,25 +1242,20 @@
 ;; H
   (assert (= (mk___split_fields s1__split_fields3) s1__split_fields4))
 
-(define-fun temp___774 () us_rep1 (elements
+(define-fun temp___742 () us_rep1 (elements
                                   (mk___rep s1__split_discrs
                                   (mk___split_fields s1__split_fields2))))
 
-(declare-fun temp___773 () Int)
+(declare-fun temp___741 () Int)
 
 ;; H
-  (assert (in_range3 temp___773))
+  (assert (in_range3 temp___741))
 
 ;; H
-  (assert (= (iter_has_element temp___774 temp___773) true))
-
-(define-fun e () Int (get temp___774 temp___773))
-
-;; H
-  (assert (prop____function_guard (prop__ e) e))
+  (assert (= (iter_has_element temp___742 temp___741) true))
 
 (assert
 ;; WP_parameter_def
  ;; File "use_ordered_sets.ads", line 43, characters 0-0
-  (not (= (prop__ e) true)))
+  (not (= (prop__ (get temp___742 temp___741)) true)))
 (check-sat)

@@ -600,10 +600,8 @@
   (forall ((x86__rbx (_ BitVec 64)))
   (! (=> (dynamic_invariant x86__rbx true true true)
      (let ((result (ebx x86__rbx)))
-     (and (readreg32__function_guard (readreg32 x86__rbx) x86__rbx)
-     (=> (ebx__function_guard result x86__rbx)
      (and (= result (readreg32 x86__rbx)) (dynamic_invariant1 result true
-     false true)))))) :pattern ((ebx x86__rbx)) )))
+     false true)))) :pattern ((ebx x86__rbx)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS9 () Int)
 
@@ -629,7 +627,6 @@
   (forall ((x86__memory (Array (_ BitVec 64) unsigned8)))
   (! (=> (dynamic_invariant addr true true true)
      (let ((result (readmem32 addr x86__memory)))
-     (=> (readmem32__function_guard result addr x86__memory)
      (and
      (and
      (and
@@ -642,9 +639,8 @@
      (to_rep (select x86__memory (bvadd addr ((_ int2bv 64) 2))))) ((_ int2bv 32) 65536))))
      (= (bvand result ((_ int2bv 32) 4278190080)) (bvmul ((_ zero_extend 24) 
      (to_rep (select x86__memory (bvadd addr ((_ int2bv 64) 3))))) ((_ int2bv 32) 16777216))))
-     (dynamic_invariant1 result true false true))))) :pattern ((readmem32
-                                                               addr
-                                                               x86__memory)) ))))
+     (dynamic_invariant1 result true false true)))) :pattern ((readmem32 addr
+                                                              x86__memory)) ))))
 
 (declare-fun inrange64 ((_ BitVec 64) (_ BitVec 64) (_ BitVec 64)) Bool)
 
@@ -663,16 +659,14 @@
      (and
      (and (dynamic_invariant var true true true) (dynamic_invariant bottom
      true true true)) (dynamic_invariant range_size true true true))
-     (let ((result (inrange64 var bottom range_size)))
-     (=> (inrange64__function_guard result var bottom range_size)
-     (= (= result true)
+     (= (= (inrange64 var bottom range_size) true)
      (ite (bvule bottom (bvadd (bvsub ((_ int2bv 64) 18446744073709551615) range_size) ((_ int2bv 64) 1)))
      (and (bvule bottom var)
      (bvule var (bvadd bottom (bvsub range_size ((_ int2bv 64) 1)))))
      (or
      (and (bvule bottom var)
      (bvule var ((_ int2bv 64) 18446744073709551615)))
-     (bvule var (bvsub (bvsub range_size (bvsub ((_ int2bv 64) 18446744073709551615) bottom)) ((_ int2bv 64) 2))))))))) :pattern (
+     (bvule var (bvsub (bvsub range_size (bvsub ((_ int2bv 64) 18446744073709551615) bottom)) ((_ int2bv 64) 2))))))) :pattern (
   (inrange64 var bottom range_size)) )))
 
 ;; readreg32__post_axiom
@@ -680,11 +674,9 @@
   (forall ((reg (_ BitVec 64)))
   (! (=> (dynamic_invariant reg true true true)
      (let ((result (readreg32 reg)))
-     (=> (readreg32__function_guard result reg)
      (and
      (= result ((_ extract 31 0) (bvand reg ((_ int2bv 64) 4294967295))))
-     (dynamic_invariant1 result true false true))))) :pattern ((readreg32
-                                                               reg)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((readreg32 reg)) )))
 
 ;; writereg32post__post_axiom
   (assert
@@ -693,12 +685,9 @@
   (! (=>
      (and (dynamic_invariant regnew true true true) (dynamic_invariant1 val__
      true true true))
-     (let ((result (writereg32post regnew val__)))
-     (and (readreg32__function_guard (readreg32 regnew) regnew)
-     (=> (writereg32post__function_guard result regnew val__)
-     (= (= result true)
+     (= (= (writereg32post regnew val__) true)
      (and (= (readreg32 regnew) val__)
-     (= (bvand regnew ((_ int2bv 64) 18446744069414584320)) ((_ int2bv 64) 0)))))))) :pattern (
+     (= (bvand regnew ((_ int2bv 64) 18446744069414584320)) ((_ int2bv 64) 0))))) :pattern (
   (writereg32post regnew val__)) ))))
 
 (declare-fun rsp () (_ BitVec 64))
@@ -779,11 +768,6 @@
 
 ;; H
   (assert (= rsp2 (bvsub rsp1 ((_ int2bv 64) 8))))
-
-;; H
-  (assert (inrange64__function_guard
-  (inrange64 rsi1 (bvsub rsp2 ((_ int2bv 64) 7)) ((_ int2bv 64) 15)) 
-  rsi1 (bvsub rsp2 ((_ int2bv 64) 7)) ((_ int2bv 64) 15)))
 
 (assert
 ;; WP_parameter_def

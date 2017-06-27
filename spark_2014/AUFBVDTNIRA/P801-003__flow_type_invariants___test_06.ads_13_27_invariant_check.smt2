@@ -145,23 +145,17 @@
                                             (us_split_fields1
                                             temp___expr_136)) (of_int 1))))
 
-;; temp___result_140_def
-  (assert
-  (forall ((temp___139 us_rep)) (f__function_guard (f temp___139)
-  temp___139)))
-
 (define-fun type_invariant ((temp___138 us_rep)) Bool (= (f temp___138) true))
 
 ;; f__post_axiom
   (assert true)
 
-(declare-fun temp___141 () Bool)
+(declare-fun temp___140 () Bool)
 
-(declare-fun temp___1411 () Bool)
+(declare-fun temp___1401 () Bool)
 
 (assert
 ;; WP_parameter_def
  ;; File "test_06.ads", line 5, characters 0-0
-  (not (type_invariant
-  (mk___rep (mk___split_fields temp___141 temp___1411)))))
+  (not (= (f (mk___rep (mk___split_fields temp___140 temp___1401))) true)))
 (check-sat)

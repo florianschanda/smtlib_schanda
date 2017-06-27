@@ -515,8 +515,6 @@
   (! (=> (in_range1 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
                                                               (of_rep1 x))) )))
 
-(declare-fun last1 () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -686,11 +684,11 @@
 
 (declare-fun amortized_queue__reverse_insert__L_5__R51b__assume () Int)
 
-(declare-fun temp___605 () Int)
+(declare-fun temp___560 () Int)
 
-(declare-fun temp___604 () capacity_range)
+(declare-fun temp___559 () capacity_range)
 
-(declare-fun temp___6041 () us_main_type)
+(declare-fun temp___5591 () us_main_type)
 
 (declare-fun o () Int)
 
@@ -826,13 +824,13 @@
   (assert (= idx1 r51b))
 
 ;; H
-  (assert (=> (and (<= 1 idx1) (<= idx1 r51b)) (= temp___605 idx1)))
+  (assert (=> (and (<= 1 idx1) (<= idx1 r51b)) (= temp___560 idx1)))
 
 ;; H
   (assert
   (=> (and (<= 1 idx1) (<= idx1 r51b))
-  (and (= front__split_discrs (mk___split_discrs temp___604))
-  (= front__split_fields temp___6041))))
+  (and (= front__split_discrs (mk___split_discrs temp___559))
+  (= front__split_fields temp___5591))))
 
 ;; H
   (assert

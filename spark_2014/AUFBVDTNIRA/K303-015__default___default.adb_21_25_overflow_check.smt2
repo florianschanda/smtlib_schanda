@@ -73,10 +73,8 @@
   (forall ((x Int) (y Int))
   (! (=>
      (and (dynamic_invariant x true true true) (dynamic_invariant y true true
-     true))
-     (let ((result (add x y)))
-     (=> (add__function_guard result x y) (dynamic_invariant result true
-     false true)))) :pattern ((add x y)) )))
+     true)) (dynamic_invariant (add x y) true false true)) :pattern (
+  (add x y)) )))
 
 (declare-fun o () Int)
 
@@ -85,12 +83,10 @@
 (declare-fun o2 () Int)
 
 ;; H
-  (assert
-  (and (and (= o (add 2 0)) (add__function_guard o 2 0)) (in_range o)))
+  (assert (and (= o (add 2 0)) (in_range o)))
 
 ;; H
-  (assert
-  (and (and (= o1 (add 1 2)) (add__function_guard o1 1 2)) (in_range o1)))
+  (assert (and (= o1 (add 1 2)) (in_range o1)))
 
 ;; H
   (assert (= o2 (+ o1 o)))

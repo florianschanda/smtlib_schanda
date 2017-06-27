@@ -84,7 +84,7 @@
 
 (declare-fun hidden () Int)
 
-(declare-fun temp___186 () Int)
+(declare-fun temp___188 () Int)
 
 (declare-fun o () Int)
 
@@ -116,7 +116,7 @@
   (ite (and (<= hidden 0) (<= visible 0))
   (and
   (and
-  (and (= temp___186 visible)
+  (and (= temp___188 visible)
   (and (and (in_range1 visible2) (and (<= hidden 0) (<= visible2 0)))
   (and
   (and (and (= o (+ visible2 hidden)) (in_range1 (+ visible2 hidden)))

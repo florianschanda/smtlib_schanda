@@ -1418,8 +1418,7 @@
 ;; within_bounds__def_axiom
   (assert
   (forall ((y Int) (x Int))
-  (! (=> (within_bounds__function_guard (within_bounds y x) y x)
-     (= (= (within_bounds y x) true) (and (in_range8 y) (in_range7 x)))) :pattern (
+  (! (= (= (within_bounds y x) true) (and (in_range8 y) (in_range7 x))) :pattern (
   (within_bounds y x)) )))
 
 (declare-fun p () us_rep)

@@ -150,18 +150,13 @@
   (assert
   (forall ((sm_using_case_expression__state Int))
   (! (=> (dynamic_invariant sm_using_case_expression__state true true true)
-     (let ((result (get_state sm_using_case_expression__state)))
-     (=> (get_state__function_guard result sm_using_case_expression__state)
-     (dynamic_invariant result true false true)))) :pattern ((get_state
-                                                             sm_using_case_expression__state)) )))
+     (dynamic_invariant (get_state sm_using_case_expression__state) true
+     false true)) :pattern ((get_state sm_using_case_expression__state)) )))
 
 ;; get_state__def_axiom
   (assert
   (forall ((sm_using_case_expression__state Int))
-  (! (=>
-     (and (dynamic_invariant sm_using_case_expression__state true true true)
-     (get_state__function_guard (get_state sm_using_case_expression__state)
-     sm_using_case_expression__state))
+  (! (=> (dynamic_invariant sm_using_case_expression__state true true true)
      (= (get_state sm_using_case_expression__state) sm_using_case_expression__state)) :pattern (
   (get_state sm_using_case_expression__state)) )))
 
@@ -377,19 +372,15 @@
   (forall ((state Int) (trigger Int))
   (! (=>
      (and (dynamic_invariant state true true true) (dynamic_invariant1
-     trigger true true true))
-     (let ((result (my_sm state trigger)))
-     (=> (my_sm__function_guard result state trigger) (dynamic_invariant
-     result true false true)))) :pattern ((my_sm state trigger)) )))
+     trigger true true true)) (dynamic_invariant (my_sm state trigger) true
+     false true)) :pattern ((my_sm state trigger)) )))
 
 ;; my_sm__def_axiom
   (assert
   (forall ((state Int) (trigger Int))
   (! (=>
-     (and
      (and (dynamic_invariant state true true true) (dynamic_invariant1
-     trigger true true true)) (my_sm__function_guard (my_sm state trigger)
-     state trigger))
+     trigger true true true))
      (= (my_sm state trigger) (ite (= state 0)
                               (ite (= trigger 2) 0
                               (ite (= trigger 3) 2
@@ -539,7 +530,7 @@
 
 (declare-fun o50 () us_rep)
 
-(declare-fun temp___199 () (Array Int us_rep))
+(declare-fun temp___182 () (Array Int us_rep))
 
 ;; H
   (assert (= (to_rep1 o32) 4))
@@ -696,7 +687,7 @@
 
 ;; H
   (assert
-  (= temp___199 (sm_using_case_expression__invalid_transition_array__aggregate_def
+  (= temp___182 (sm_using_case_expression__invalid_transition_array__aggregate_def
                 o50 o49 o48 (mk___rep (mk___split_fields o46 o47))
                 (mk___rep (mk___split_fields o44 o45))
                 (mk___rep (mk___split_fields o42 o43))
@@ -705,7 +696,7 @@
                 (mk___rep (mk___split_fields o36 o37)))))
 
 ;; H
-  (assert (= temp___199 invalid_transition_array))
+  (assert (= temp___182 invalid_transition_array))
 
 ;; H
   (assert (in_range1 state))
@@ -718,11 +709,6 @@
 
 ;; H
   (assert (in_range1 old_state))
-
-;; H
-  (assert
-  (forall ((initial_state Int) (trigger2 Int)) (my_sm__function_guard
-  (my_sm initial_state trigger2) initial_state trigger2)))
 
 ;; H
   (assert
@@ -754,9 +740,7 @@
 ;; WP_parameter_def
  ;; File "sm_types.ads", line 8, characters 0-0
   (not
-  (or
-  (=> (my_sm__function_guard (my_sm state2 trigger1) state2 trigger1)
-  (not (= (my_sm state2 trigger1) 3)))
+  (or (not (= (my_sm state2 trigger1) 3))
   (exists ((idx Int))
   (and (and (<= 1 idx) (<= idx 20))
   (and

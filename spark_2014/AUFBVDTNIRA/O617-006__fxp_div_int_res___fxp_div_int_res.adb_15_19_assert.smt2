@@ -266,16 +266,13 @@
 ;; div__post_axiom
   (assert
   (forall ((d1 duration) (d2 duration))
-  (! (=> (not (= (to_fixed d2) 0))
-     (let ((result (div2 d1 d2)))
-     (=> (div__function_guard result d1 d2) (dynamic_invariant result true
-     false true)))) :pattern ((div2 d1 d2)) )))
+  (! (=> (not (= (to_fixed d2) 0)) (dynamic_invariant (div2 d1 d2) true false
+     true)) :pattern ((div2 d1 d2)) )))
 
 ;; div__def_axiom
   (assert
   (forall ((d1 duration) (d2 duration))
-  (! (=> (div__function_guard (div2 d1 d2) d1 d2)
-     (= (div2 d1 d2) (fxp_div_result_int (to_fixed d1) (to_fixed d2)))) :pattern (
+  (! (= (div2 d1 d2) (fxp_div_result_int (to_fixed d1) (to_fixed d2))) :pattern (
   (div2 d1 d2)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)

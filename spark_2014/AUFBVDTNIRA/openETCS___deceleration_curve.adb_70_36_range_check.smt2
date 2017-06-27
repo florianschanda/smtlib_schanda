@@ -128,12 +128,12 @@
 (define-fun distance_t__ref___projection ((a distance_t__ref)) distance_t 
   (distance_t__content a))
 
-(define-fun dynamic_invariant ((temp___expr_179 Int)
-  (temp___is_init_176 Bool) (temp___skip_constant_177 Bool)
-  (temp___do_toplevel_178 Bool)) Bool (=>
-                                      (or (= temp___is_init_176 true)
+(define-fun dynamic_invariant ((temp___expr_176 Int)
+  (temp___is_init_173 Bool) (temp___skip_constant_174 Bool)
+  (temp___do_toplevel_175 Bool)) Bool (=>
+                                      (or (= temp___is_init_173 true)
                                       (<= 0 2147483647)) (in_range
-                                      temp___expr_179)))
+                                      temp___expr_176)))
 
 (declare-sort braking_curve_range 0)
 
@@ -162,12 +162,12 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_382 Int)
-  (temp___is_init_379 Bool) (temp___skip_constant_380 Bool)
-  (temp___do_toplevel_381 Bool)) Bool (=>
-                                      (or (= temp___is_init_379 true)
+(define-fun dynamic_invariant1 ((temp___expr_323 Int)
+  (temp___is_init_320 Bool) (temp___skip_constant_321 Bool)
+  (temp___do_toplevel_322 Bool)) Bool (=>
+                                      (or (= temp___is_init_320 true)
                                       (<= 0 1000)) (in_range1
-                                      temp___expr_382)))
+                                      temp___expr_323)))
 
 ;; H
   (assert (in_range d))

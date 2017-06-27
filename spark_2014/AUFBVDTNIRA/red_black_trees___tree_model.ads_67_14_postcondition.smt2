@@ -179,10 +179,9 @@
   (assert
   (forall ((s1 us_rep) (s2 us_rep))
   (forall ((d Int))
-  (! (=> (is_add__function_guard (is_add s1 d s2) s1 d s2)
-     (= (= (is_add s1 d s2) true)
+  (! (= (= (is_add s1 d s2) true)
      (and (and (= (- (length s2) 1) (length s1)) (= (olt s1 s2) true))
-     (= (get s2 (length s2)) d)))) :pattern ((is_add s1 d s2)) ))))
+     (= (get s2 (length s2)) d))) :pattern ((is_add s1 d s2)) ))))
 
 (declare-fun s1 () us_rep)
 
@@ -305,12 +304,6 @@
      (and (<= 1 position) (<= position (last container))))
      (dynamic_invariant3 (get container position) true false true)) :pattern (
   (get container position)) ))))
-
-;; H
-  (assert (is_add__function_guard (is_add s1 d s3) s1 d s3))
-
-;; H
-  (assert (is_add__function_guard (is_add s2 d s4) s2 d s4))
 
 ;; H
   (assert (in_range d))

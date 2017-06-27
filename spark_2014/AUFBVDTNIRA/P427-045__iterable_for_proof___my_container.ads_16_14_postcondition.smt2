@@ -303,9 +303,7 @@
 
 ;; valid__def_axiom
   (assert
-  (forall ((e Int))
-  (! (=> (valid__function_guard (valid e) e) (= (= (valid e) true) (< 0 e))) :pattern (
-  (valid e)) )))
+  (forall ((e Int)) (! (= (= (valid e) true) (< 0 e)) :pattern ((valid e)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -321,11 +319,10 @@
   (assert
   (forall ((c (Array Int natural)))
   (forall ((p us_rep))
-  (! (=> (has_element__function_guard (has_element c p) c p)
-     (= (= (has_element c p) true)
+  (! (= (= (has_element c p) true)
      (and
      (<= 1 (to_rep (rec__my_container__cursor__index (us_split_fields1 p))))
-     (<= (to_rep (rec__my_container__cursor__index (us_split_fields1 p))) 100)))) :pattern (
+     (<= (to_rep (rec__my_container__cursor__index (us_split_fields1 p))) 100))) :pattern (
   (has_element c p)) ))))
 
 (declare-fun element ((Array Int natural) us_rep) Int)
@@ -336,22 +333,18 @@
   (assert
   (forall ((c (Array Int natural)))
   (forall ((p us_rep))
-  (! (and (has_element__function_guard (has_element c p) c p)
-     (=> (= (has_element c p) true)
-     (let ((result (element c p)))
-     (=> (element__function_guard result c p) (dynamic_invariant result true
-     false true))))) :pattern ((element c p)) ))))
+  (! (=> (= (has_element c p) true) (dynamic_invariant (element c p) true
+     false true)) :pattern ((element c p)) ))))
 
 ;; element__def_axiom
   (assert
   (forall ((c (Array Int natural)))
   (forall ((p us_rep))
-  (! (=> (element__function_guard (element c p) c p)
-     (= (element c p) (to_rep
+  (! (= (element c p) (to_rep
                       (select c (to_rep
                                 (rec__my_container__cursor__index
-                                (us_split_fields1 p))))))) :pattern (
-  (element c p)) ))))
+                                (us_split_fields1 p)))))) :pattern ((element
+                                                                    c p)) ))))
 
 (declare-sort t2b 0)
 
@@ -385,9 +378,9 @@
 
 (declare-fun i () Int)
 
-(declare-fun temp___183 () Int)
+(declare-fun temp___174 () Int)
 
-(declare-fun temp___181 () (Array Int natural))
+(declare-fun temp___172 () (Array Int natural))
 
 (declare-fun o () natural)
 
@@ -438,26 +431,16 @@
 (define-fun c11 () map__ref (mk_map__ref c))
 
 ;; H
-  (assert
-  (forall ((j Int)) (valid__function_guard (valid (to_rep (select c3 j)))
-  (to_rep (select c3 j)))))
-
-;; H
-  (assert
-  (forall ((j Int)) (valid__function_guard (valid (to_rep (select c3 j)))
-  (to_rep (select c3 j)))))
-
-;; H
   (assert (= (mk_int__ref result) (mk_int__ref i)))
 
 ;; H
   (assert (= i1 1))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 100)) (= temp___183 i1)))
+  (assert (=> (and (<= 1 i1) (<= i1 100)) (= temp___174 i1)))
 
 ;; H
-  (assert (=> (and (<= 1 i1) (<= i1 100)) (= temp___181 c)))
+  (assert (=> (and (<= 1 i1) (<= i1 100)) (= temp___172 c)))
 
 ;; H
   (assert
@@ -500,10 +483,10 @@
   (=> (and (<= 1 i1) (<= i1 100))
   (and
   (and
-  (forall ((temp___182 Int))
-  (=> (and (<= 1 temp___182) (<= temp___182 100))
-  (=> (< i2 temp___182)
-  (= (select c3 temp___182) (select temp___181 temp___182)))))
+  (forall ((temp___173 Int))
+  (=> (and (<= 1 temp___173) (<= temp___173 100))
+  (=> (< i2 temp___173)
+  (= (select c3 temp___173) (select temp___172 temp___173)))))
   (=> (<= 1 100) (in_range3 i2))) (and (<= 1 i2) (<= i2 100)))))
 
 ;; H
@@ -557,25 +540,13 @@
 ;; H
   (assert (= c9 c7))
 
-(declare-fun temp___195 () us_rep)
+(declare-fun temp___181 () us_rep)
 
 ;; H
-  (assert (has_element__function_guard (has_element c8 temp___195) c8
-  temp___195))
-
-;; H
-  (assert (= (has_element c8 temp___195) true))
-
-;; H
-  (assert (element__function_guard (element c8 temp___195) c8 temp___195))
-
-(define-fun e () Int (element c8 temp___195))
-
-;; H
-  (assert (valid__function_guard (valid e) e))
+  (assert (= (has_element c8 temp___181) true))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (= (valid e) true)))
+  (not (= (valid (element c8 temp___181)) true)))
 (check-sat)

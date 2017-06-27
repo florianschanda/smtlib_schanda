@@ -490,9 +490,8 @@
   (forall ((c (_ BitVec 16)))
   (! (=> (dynamic_invariant1 c true true true)
      (let ((result (create c)))
-     (=> (create__function_guard result c)
      (and (and (= (first1 result) ((_ int2bv 16) 0)) (= (last1 result) c))
-     (dynamic_invariant2 result true false true))))) :pattern ((create c)) )))
+     (dynamic_invariant2 result true false true)))) :pattern ((create c)) )))
 
 (declare-fun a__first () mod_16)
 
@@ -527,9 +526,7 @@
 
 ;; H
   (assert
-  (and
   (and (= test_length__p1__a__assume2 (create ((_ int2bv 16) 65535)))
-  (create__function_guard test_length__p1__a__assume2 ((_ int2bv 16) 65535)))
   (and (dynamic_invariant2 test_length__p1__a__assume2 true false true)
   (and (= (to_rep (first test_length__p1__a__assume1)) ((_ int2bv 16) 0))
   (= (to_rep (last test_length__p1__a__assume1)) ((_ int2bv 16) 65535))))))

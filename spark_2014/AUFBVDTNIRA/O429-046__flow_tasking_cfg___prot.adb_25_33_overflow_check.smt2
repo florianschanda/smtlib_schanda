@@ -194,21 +194,19 @@
 (define-fun p_int__ref___projection ((a p_int__ref)) us_rep (p_int__content
                                                             a))
 
-(declare-fun d () Int)
-
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
-
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
 (declare-fun x () Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
 (declare-fun visible () Int)
 
 (declare-fun hidden () Int)
 
-(declare-fun self__ () Bool)
+(declare-fun self__ () integer)
+
+(declare-fun self__1 () Bool)
 
 (declare-fun result () Int)
 
@@ -224,7 +222,7 @@
   (assert (in_range x))
 
 ;; H
-  (assert (= self__ true))
+  (assert (= self__1 true))
 
 ;; H
   (assert (= result hidden))
@@ -235,5 +233,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "prot.ads", line 7, characters 0-0
-  (not (in_range (+ x d))))
+  (not (in_range (+ x (to_rep self__)))))
 (check-sat)

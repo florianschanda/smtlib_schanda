@@ -272,11 +272,6 @@
                                             (us_split_fields1
                                             temp___expr_148))) 0)))
 
-;; temp___result_152_def
-  (assert
-  (forall ((temp___151 us_rep)) (in_bounds__function_guard
-  (in_bounds temp___151) temp___151)))
-
 (define-fun type_invariant ((temp___150 us_rep)) Bool (= (in_bounds
                                                          temp___150) true))
 
@@ -300,8 +295,7 @@
 ;; in_bounds__def_axiom
   (assert
   (forall ((c us_rep))
-  (! (=> (in_bounds__function_guard (in_bounds c) c)
-     (= (= (in_bounds c) true)
+  (! (= (= (in_bounds c) true)
      (and
      (and
      (and (in_range
@@ -315,7 +309,7 @@
      (to_rep1 (rec__shapes4__circle__radius (us_split_fields1 c))))))
      (in_range
      (- (to_rep (rec__shapes4__circle__center_y (us_split_fields1 c))) 
-     (to_rep1 (rec__shapes4__circle__radius (us_split_fields1 c)))))))) :pattern (
+     (to_rep1 (rec__shapes4__circle__radius (us_split_fields1 c))))))) :pattern (
   (in_bounds c)) )))
 
 (declare-fun r () Int)

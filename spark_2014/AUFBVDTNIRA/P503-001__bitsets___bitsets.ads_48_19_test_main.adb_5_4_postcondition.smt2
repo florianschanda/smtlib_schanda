@@ -234,17 +234,10 @@
 ;; union__post_axiom
   (assert
   (forall ((a (Array Int Bool)) (b (Array Int Bool)))
-  (! (let ((result (union2 a b)))
-     (and
-     (forall ((elt Int)) (mem__function_guard (mem result elt) result elt))
-     (and (forall ((elt Int)) (mem__function_guard (mem a elt) a elt))
-     (and (forall ((elt Int)) (mem__function_guard (mem b elt) b elt))
-     (=> (union__function_guard result a b)
-     (forall ((elt Int))
+  (! (forall ((elt Int))
      (=> (and (<= 1 elt) (<= elt 10))
-     (= (= (mem result elt) true)
-     (or (= (mem a elt) true) (= (mem b elt) true)))))))))) :pattern (
-  (union2 a b)) )))
+     (= (= (mem (union2 a b) elt) true)
+     (or (= (mem a elt) true) (= (mem b elt) true))))) :pattern ((union2 a b)) )))
 
 (declare-fun ext_equal ((Array Int Bool) (Array Int Bool)) Bool)
 
@@ -257,14 +250,11 @@
 ;; ext_equal__def_axiom
   (assert
   (forall ((a (Array Int Bool)) (b (Array Int Bool)))
-  (! (=> (ext_equal__function_guard (ext_equal a b) a b)
-     (and (forall ((elt Int)) (mem__function_guard (mem a elt) a elt))
-     (and (forall ((elt Int)) (mem__function_guard (mem b elt) b elt))
-     (= (= (ext_equal a b) true)
+  (! (= (= (ext_equal a b) true)
      (forall ((elt Int))
      (=> (and (<= 1 elt) (<= elt 10))
-     (= (= (mem a elt) true) (= (mem b elt) true)))))))) :pattern ((ext_equal
-                                                                   a b)) )))
+     (= (= (mem a elt) true) (= (mem b elt) true))))) :pattern ((ext_equal a
+                                                                b)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -285,8 +275,7 @@
   (assert
   (forall ((s (Array Int Bool)))
   (forall ((e Int))
-  (! (=> (mem__function_guard (mem s e) s e)
-     (= (= (mem s e) true) (= (select s e) true))) :pattern ((mem s e)) ))))
+  (! (= (= (mem s e) true) (= (select s e) true)) :pattern ((mem s e)) ))))
 
 (declare-fun a () (Array Int Bool))
 
@@ -309,16 +298,6 @@
 
 ;; H
   (assert (= a3 a1))
-
-;; H
-  (assert (union__function_guard (union2 a b) a b))
-
-;; H
-  (assert (union__function_guard (union2 a b) a b))
-
-;; H
-  (assert (ext_equal__function_guard (ext_equal a2 (union2 a b)) a2
-  (union2 a b)))
 
 (assert
 ;; WP_parameter_def

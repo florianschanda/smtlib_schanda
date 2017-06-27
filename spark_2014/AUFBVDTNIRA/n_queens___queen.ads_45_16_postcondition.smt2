@@ -212,9 +212,12 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(declare-sort t4b 0)
+(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
-(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 8)))
+(declare-sort integer 0)
+
+(define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
+                                     (<= x 2147483647)))
 
 (define-fun bool_eq2 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -224,31 +227,9 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
 
-(declare-fun user_eq1 (t4b t4b) Bool)
+(declare-fun user_eq1 (integer integer) Bool)
 
-(declare-fun dummy1 () t4b)
-
-(declare-datatypes () ((t4b__ref (mk_t4b__ref (t4b__content t4b)))))
-(define-fun t4b__ref___projection ((a t4b__ref)) t4b (t4b__content a))
-
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
-
-(declare-sort integer 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= (- 2147483648) x)
-                                     (<= x 2147483647)))
-
-(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq2 (integer integer) Bool)
-
-(declare-fun dummy2 () integer)
+(declare-fun dummy1 () integer)
 
 (declare-datatypes ()
 ((integer__ref (mk_integer__ref (integer__content integer)))))
@@ -266,17 +247,35 @@
 
 ;; range_axiom
   (assert
-  (forall ((x integer)) (! (in_range3 (to_rep1 x)) :pattern ((to_rep1 x)) )))
+  (forall ((x integer)) (! (in_range2 (to_rep1 x)) :pattern ((to_rep1 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range3 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
+  (! (=> (in_range2 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
                                                               (of_rep1 x))) )))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
+  (x Int)) Bool (and (<= first_int x) (<= x last_int)))
+
+(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
+
+(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
+
+(declare-fun user_eq2 (integer integer) Bool)
+
+(declare-fun dummy2 () integer)
+
+(declare-datatypes () ((t6b__ref (mk_t6b__ref (t6b__content integer)))))
+(define-fun t6b__ref___projection ((a t6b__ref)) integer (t6b__content a))
+
+(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+
+(define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
 (define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
@@ -291,28 +290,6 @@
 
 (declare-fun dummy3 () integer)
 
-(declare-datatypes () ((t6b__ref (mk_t6b__ref (t6b__content integer)))))
-(define-fun t6b__ref___projection ((a t6b__ref)) integer (t6b__content a))
-
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
-
-(declare-fun first () Int)
-
-(define-fun dynamic_property1 ((first_int Int) (last_int Int)
-  (x Int)) Bool (and (<= first_int x) (<= x last_int)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq4 (integer integer) Bool)
-
-(declare-fun dummy4 () integer)
-
 (declare-datatypes () ((t11b__ref (mk_t11b__ref (t11b__content integer)))))
 (define-fun t11b__ref___projection ((a t11b__ref)) integer (t11b__content a))
 
@@ -322,17 +299,17 @@
 
 ;; def_axiom
   (assert
-  (forall ((temp___186 Int))
-  (forall ((temp___187 Int))
-  (= (select (queen__copy_until__r__aggregate_def temp___186) temp___187) 
-  (of_rep temp___186)))))
+  (forall ((temp___174 Int))
+  (forall ((temp___175 Int))
+  (= (select (queen__copy_until__r__aggregate_def temp___174) temp___175) 
+  (of_rep temp___174)))))
 
 (define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)
   (temp___do_toplevel_14 Bool)) Bool (=>
                                      (or (= temp___is_init_12 true)
                                      (<= (- 2147483648) 2147483647))
-                                     (in_range3 temp___expr_15)))
+                                     (in_range2 temp___expr_15)))
 
 (declare-fun r () (Array Int index))
 
@@ -342,23 +319,21 @@
 
 (declare-fun queen__copy_until__result () (Array Int index))
 
-(declare-fun o () (Array Int index))
+(declare-fun temp___178 () Int)
 
-(declare-fun temp___190 () Int)
+(declare-fun temp___176 () (Array Int index))
 
-(declare-fun temp___188 () (Array Int index))
+(declare-fun o () index)
 
-(declare-fun o1 () index)
+(declare-fun o1 () (Array Int index))
 
-(declare-fun o2 () (Array Int index))
+(declare-fun temp___183 () Int)
 
-(declare-fun temp___195 () Int)
+(declare-fun temp___181 () (Array Int index))
 
-(declare-fun temp___193 () (Array Int index))
+(declare-fun o2 () index)
 
-(declare-fun o3 () index)
-
-(declare-fun o4 () (Array Int index))
+(declare-fun o3 () (Array Int index))
 
 (declare-fun result () (Array Int index))
 
@@ -454,13 +429,10 @@
   (assert (in_range1 i))
 
 ;; H
-  (assert (= o (queen__copy_until__r__aggregate_def 1)))
-
-;; H
   (assert (= (mk_map__ref result) (mk_map__ref r)))
 
 ;; H
-  (assert (= r1 o))
+  (assert (= r1 (queen__copy_until__r__aggregate_def 1)))
 
 ;; H
   (assert (= (mk_int__ref result1) (mk_int__ref j)))
@@ -469,10 +441,10 @@
   (assert (= j2 1))
 
 ;; H
-  (assert (=> (and (<= 1 j2) (<= j2 i)) (= temp___190 j2)))
+  (assert (=> (and (<= 1 j2) (<= j2 i)) (= temp___178 j2)))
 
 ;; H
-  (assert (=> (and (<= 1 j2) (<= j2 i)) (= temp___188 r1)))
+  (assert (=> (and (<= 1 j2) (<= j2 i)) (= temp___176 r1)))
 
 ;; H
   (assert
@@ -486,24 +458,24 @@
   (=> (and (<= 1 j2) (<= j2 i))
   (and
   (and
-  (forall ((temp___189 Int))
-  (=> (and (<= 1 temp___189) (<= temp___189 8))
-  (=> (<= j3 temp___189)
-  (= (select r2 temp___189) (select temp___188 temp___189)))))
+  (forall ((temp___177 Int))
+  (=> (and (<= 1 temp___177) (<= temp___177 8))
+  (=> (<= j3 temp___177)
+  (= (select r2 temp___177) (select temp___176 temp___177)))))
   (=> (<= 1 i) (dynamic_property 1 i j3))) (and (<= 1 j3) (<= j3 i)))))
 
 ;; H
   (assert
-  (=> (and (<= 1 j2) (<= j2 i)) (= (to_rep o1) (to_rep (select b j3)))))
+  (=> (and (<= 1 j2) (<= j2 i)) (= (to_rep o) (to_rep (select b j3)))))
 
 ;; H
-  (assert (=> (and (<= 1 j2) (<= j2 i)) (= o2 (store r2 j3 o1))))
+  (assert (=> (and (<= 1 j2) (<= j2 i)) (= o1 (store r2 j3 o))))
 
 ;; H
   (assert (=> (and (<= 1 j2) (<= j2 i)) (= r2 result2)))
 
 ;; H
-  (assert (=> (and (<= 1 j2) (<= j2 i)) (= r3 o2)))
+  (assert (=> (and (<= 1 j2) (<= j2 i)) (= r3 o1)))
 
 ;; H
   (assert (=> (and (<= 1 j2) (<= j2 i)) (= j3 i)))
@@ -551,10 +523,10 @@
   (assert (= j8 (+ i 1)))
 
 ;; H
-  (assert (=> (and (<= (+ i 1) j8) (<= j8 8)) (= temp___195 j8)))
+  (assert (=> (and (<= (+ i 1) j8) (<= j8 8)) (= temp___183 j8)))
 
 ;; H
-  (assert (=> (and (<= (+ i 1) j8) (<= j8 8)) (= temp___193 r6)))
+  (assert (=> (and (<= (+ i 1) j8) (<= j8 8)) (= temp___181 r6)))
 
 ;; H
   (assert
@@ -568,25 +540,25 @@
   (=> (and (<= (+ i 1) j8) (<= j8 8))
   (and
   (and
-  (forall ((temp___194 Int))
-  (=> (and (<= 1 temp___194) (<= temp___194 8))
-  (=> (<= j9 temp___194)
-  (= (select r8 temp___194) (select temp___193 temp___194)))))
+  (forall ((temp___182 Int))
+  (=> (and (<= 1 temp___182) (<= temp___182 8))
+  (=> (<= j9 temp___182)
+  (= (select r8 temp___182) (select temp___181 temp___182)))))
   (=> (<= (+ i 1) 8) (dynamic_property1 (+ i 1) 8 j9)))
   (and (<= (+ i 1) j9) (<= j9 8)))))
 
 ;; H
   (assert
-  (=> (and (<= (+ i 1) j8) (<= j8 8)) (= (to_rep o3) (to_rep (select c j9)))))
+  (=> (and (<= (+ i 1) j8) (<= j8 8)) (= (to_rep o2) (to_rep (select c j9)))))
 
 ;; H
-  (assert (=> (and (<= (+ i 1) j8) (<= j8 8)) (= o4 (store r8 j9 o3))))
+  (assert (=> (and (<= (+ i 1) j8) (<= j8 8)) (= o3 (store r8 j9 o2))))
 
 ;; H
   (assert (=> (and (<= (+ i 1) j8) (<= j8 8)) (= r8 result4)))
 
 ;; H
-  (assert (=> (and (<= (+ i 1) j8) (<= j8 8)) (= r9 o4)))
+  (assert (=> (and (<= (+ i 1) j8) (<= j8 8)) (= r9 o3)))
 
 ;; H
   (assert (=> (and (<= (+ i 1) j8) (<= j8 8)) (= j9 8)))

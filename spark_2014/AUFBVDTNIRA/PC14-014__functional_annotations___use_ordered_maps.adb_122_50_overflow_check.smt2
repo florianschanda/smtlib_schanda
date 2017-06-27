@@ -1124,8 +1124,7 @@
 ;; prop____def_axiom
   (assert
   (forall ((e Int))
-  (! (=> (prop____function_guard (prop__ e) e)
-     (= (= (prop__ e) true) (<= 0 e))) :pattern ((prop__ e)) )))
+  (! (= (= (prop__ e) true) (<= 0 e)) :pattern ((prop__ e)) )))
 
 (declare-fun s1__split_discrs () us_split_discrs)
 
@@ -1446,42 +1445,26 @@
 
 ;; H
   (assert
-  (forall ((k Int)) (prop____function_guard
-  (prop__
-  (get
-  (model__ (mk___rep s1__split_discrs (mk___split_fields s1__split_fields)))
-  k))
-  (get
-  (model__ (mk___rep s1__split_discrs (mk___split_fields s1__split_fields)))
-  k))))
-
-;; H
-  (assert
-  (forall ((k Int)) (prop____function_guard (prop__ (get (model__ s2) k))
-  (get (model__ s2) k))))
-
-;; H
-  (assert
   (and
   (and
-  (let ((temp___857 (keys
+  (let ((temp___797 (keys
                     (mk___rep s1__split_discrs
                     (mk___split_fields s1__split_fields)))))
-  (forall ((temp___856 Int))
+  (forall ((temp___796 Int))
   (=>
-  (and (in_range5 temp___856)
-  (= (iter_has_element temp___857 temp___856) true))
+  (and (in_range5 temp___796)
+  (= (iter_has_element temp___797 temp___796) true))
   (= (prop__
      (get
      (model__
      (mk___rep s1__split_discrs (mk___split_fields s1__split_fields)))
-     (get1 temp___857 temp___856))) true))))
-  (let ((temp___860 (keys s2)))
-  (forall ((temp___859 Int))
+     (get1 temp___797 temp___796))) true))))
+  (let ((temp___799 (keys s2)))
+  (forall ((temp___798 Int))
   (=>
-  (and (in_range5 temp___859)
-  (= (iter_has_element temp___860 temp___859) true))
-  (= (prop__ (get (model__ s2) (get1 temp___860 temp___859))) true)))))
+  (and (in_range5 temp___798)
+  (= (iter_has_element temp___799 temp___798) true))
+  (= (prop__ (get (model__ s2) (get1 temp___799 temp___798))) true)))))
   (< (length s2) (- (to_rep
                     (rec__use_ordered_maps__my_maps__map__capacity
                     s1__split_discrs)) (length
@@ -1517,12 +1500,6 @@
 
 ;; H
   (assert
-  (forall ((k Int)) (prop____function_guard
-  (prop__ (get (model__ (mk___rep s1__split_discrs s1__split_fields2)) k))
-  (get (model__ (mk___rep s1__split_discrs s1__split_fields2)) k))))
-
-;; H
-  (assert
   (< (length (mk___rep s1__split_discrs s1__split_fields2)) (+ (length
                                                                (mk___rep
                                                                s1__split_discrs
@@ -1532,14 +1509,14 @@
 
 ;; H
   (assert
-  (let ((temp___836 (keys (mk___rep s1__split_discrs s1__split_fields2))))
-  (forall ((temp___835 Int))
+  (let ((temp___780 (keys (mk___rep s1__split_discrs s1__split_fields2))))
+  (forall ((temp___779 Int))
   (=>
-  (and (in_range5 temp___835)
-  (= (iter_has_element temp___836 temp___835) true))
+  (and (in_range5 temp___779)
+  (= (iter_has_element temp___780 temp___779) true))
   (= (prop__
      (get (model__ (mk___rep s1__split_discrs s1__split_fields2))
-     (get1 temp___836 temp___835))) true)))))
+     (get1 temp___780 temp___779))) true)))))
 
 ;; H
   (assert (= (has_key1 (positions s2) (mk___rep1 cu__split_fields3)) true))

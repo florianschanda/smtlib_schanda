@@ -1917,7 +1917,7 @@
   (assert (= o12 header))
 
 ;; H
-  (assert (and (= o9 (to_bytes o12)) (to_bytes__function_guard o9 o12)))
+  (assert (= o9 (to_bytes o12)))
 
 ;; H
   (assert (= o9 o10))

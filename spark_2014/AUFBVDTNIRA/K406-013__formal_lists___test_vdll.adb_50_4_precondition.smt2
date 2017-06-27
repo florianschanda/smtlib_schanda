@@ -987,12 +987,10 @@
   (forall ((container us_rep))
   (forall ((position us_rep1))
   (forall ((result__ Int))
-  (! (=> (test_element__function_guard
-     (test_element container position result__) container position result__)
-     (= (= (test_element container position result__) true)
-     (= (element container position) result__))) :pattern ((test_element
-                                                           container position
-                                                           result__)) )))))
+  (! (= (= (test_element container position result__) true)
+     (= (element container position) result__)) :pattern ((test_element
+                                                          container position
+                                                          result__)) )))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
 
@@ -1392,7 +1390,7 @@
 
 (declare-fun o1 () us_split_fields2)
 
-(declare-fun temp___451 () us_rep1)
+(declare-fun temp___443 () us_rep1)
 
 (declare-fun us () Int)
 
@@ -1412,11 +1410,11 @@
 
 (declare-fun o5 () us_rep)
 
-(declare-fun temp___409 () us_rep)
+(declare-fun temp___408 () us_rep)
 
 (declare-fun o6 () us_rep1)
 
-(declare-fun temp___410 () us_rep1)
+(declare-fun temp___409 () us_rep1)
 
 (declare-fun formal_container__vdll__insert__container__fields () us_split_fields)
 
@@ -1455,10 +1453,10 @@
   (assert (= o1 (mk___split_fields1 o)))
 
 ;; H
-  (assert (= temp___451 (mk___rep1 o1)))
+  (assert (= temp___443 (mk___rep1 o1)))
 
 ;; H
-  (assert (= temp___451 no_element))
+  (assert (= temp___443 no_element))
 
 ;; H
   (assert (and (= us 3) (in_range2 3)))
@@ -1727,15 +1725,6 @@
      (first (mk___rep l1__split_discrs l1__split_fields1)))) true))
 
 ;; H
-  (assert (test_element__function_guard
-  (test_element (mk___rep l2__split_discrs l2__split_fields2)
-  (next (mk___rep l2__split_discrs l2__split_fields2)
-  (first (mk___rep l1__split_discrs l1__split_fields1))) 2)
-  (mk___rep l2__split_discrs l2__split_fields2)
-  (next (mk___rep l2__split_discrs l2__split_fields2)
-  (first (mk___rep l1__split_discrs l1__split_fields1))) 2))
-
-;; H
   (assert
   (= (test_element (mk___rep l2__split_discrs l2__split_fields2)
      (next (mk___rep l2__split_discrs l2__split_fields2)
@@ -1822,16 +1811,16 @@
   (assert (= o5 o4))
 
 ;; H
-  (assert (= temp___409 o5))
+  (assert (= temp___408 o5))
 
 ;; H
   (assert (= result4 (mk___split_fields__ref l1__split_fields1)))
 
 ;; H
-  (assert (= l1__split_fields2 (us_split_fields1 temp___409)))
+  (assert (= l1__split_fields2 (us_split_fields1 temp___408)))
 
 ;; H
-  (assert (= l1__split_discrs (us_split_discrs1 temp___409)))
+  (assert (= l1__split_discrs (us_split_discrs1 temp___408)))
 
 ;; H
   (assert
@@ -1844,7 +1833,7 @@
 
 ;; H
   (assert
-  (and (= temp___410 (next (mk___rep l2__split_discrs l2__split_fields3) o6))
+  (and (= temp___409 (next (mk___rep l2__split_discrs l2__split_fields3) o6))
   (ite (= (ite (= (bool_eq3 o6 no_element) false) (= (get1
                                                      (positions
                                                      (mk___rep
@@ -1854,12 +1843,12 @@
                                                          (mk___rep
                                                          l2__split_discrs
                                                          l2__split_fields3))) true) true)
-  (= (bool_eq3 temp___410 no_element) true)
+  (= (bool_eq3 temp___409 no_element) true)
   (and
   (= (has_key (positions (mk___rep l2__split_discrs l2__split_fields3))
-     temp___410) true)
+     temp___409) true)
   (= (get1 (positions (mk___rep l2__split_discrs l2__split_fields3))
-     temp___410) (+ (get1
+     temp___409) (+ (get1
                     (positions (mk___rep l2__split_discrs l2__split_fields3))
                     o6) 1))))))
 
@@ -1868,7 +1857,7 @@
   (= result5 (mk___split_fields__ref1 (mk___split_fields1 c__split_fields))))
 
 ;; H
-  (assert (= c__split_fields1 (us_split_fields3 temp___410)))
+  (assert (= c__split_fields1 (us_split_fields3 temp___409)))
 
 (assert
 ;; WP_parameter_def

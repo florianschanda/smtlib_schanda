@@ -138,23 +138,26 @@
   (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                            (of_rep x))) )))
 
+(define-fun default_initial_assumption ((temp___expr_172 us_rep)
+  (temp___skip_top_level_173 Bool)) Bool (= (to_rep
+                                            (rec__my_types__prot__f
+                                            (us_split_fields1
+                                            temp___expr_172))) 0))
+
 (declare-fun get_f (us_rep) Int)
 
 (declare-fun get_f__function_guard (Int us_rep) Bool)
 
 ;; get_f__post_axiom
   (assert
-  (forall ((self__ us_rep))
-  (! (let ((result (get_f self__)))
-     (=> (get_f__function_guard result self__) (dynamic_invariant result true
-     false true))) :pattern ((get_f self__)) )))
+  (forall ((self__ us_rep)) (! (dynamic_invariant (get_f self__) true false
+  true) :pattern ((get_f self__)) )))
 
 ;; get_f__def_axiom
   (assert
   (forall ((self__ us_rep))
-  (! (=> (get_f__function_guard (get_f self__) self__)
-     (= (get_f self__) (to_rep
-                       (rec__my_types__prot__f (us_split_fields1 self__))))) :pattern (
+  (! (= (get_f self__) (to_rep
+                       (rec__my_types__prot__f (us_split_fields1 self__)))) :pattern (
   (get_f self__)) )))
 
 (declare-datatypes ()
@@ -225,6 +228,12 @@
 (define-fun prot_2__ref___projection ((a prot_2__ref)) us_rep1 (prot_2__content
                                                                a))
 
+(define-fun default_initial_assumption1 ((temp___expr_178 us_rep1)
+  (temp___skip_top_level_179 Bool)) Bool (= (to_rep
+                                            (rec__my_types__prot__f1
+                                            (us_split_fields3
+                                            temp___expr_178))) 0))
+
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
@@ -237,27 +246,32 @@
 
 (declare-fun o2 () Int)
 
-(declare-fun p_2 () integer)
+(declare-fun o3 () integer)
+
+(declare-fun o4 () integer)
+
+(declare-fun us_self__compl () integer)
+
+(declare-fun p_2__split_fields () integer)
 
 (declare-fun result () Int)
 
 (declare-fun x1 () Int)
 
-(define-fun o3 () us_rep (mk___rep (mk___split_fields o1)))
+(declare-fun p_2__split_fields1 () integer)
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range x)))
 
 ;; H
-  (assert
-  (= (mk___rep1 (mk___split_fields1 o)) (mk___rep1 (mk___split_fields1 p_2))))
+  (assert (= o p_2__split_fields))
 
 ;; H
   (assert (= o o1))
 
 ;; H
   (assert
-  (and (and (= o2 (get_f o3)) (get_f__function_guard o2 o3))
+  (and (= o2 (get_f (mk___rep (mk___split_fields o1))))
   (and (in_range o2) (= o2 (to_rep o1)))))
 
 ;; H
@@ -265,6 +279,15 @@
 
 ;; H
   (assert (= x1 o2))
+
+;; H
+  (assert (= o3 p_2__split_fields1))
+
+;; H
+  (assert (= o3 o4))
+
+;; H
+  (assert (= us_self__compl o4))
 
 (assert
 ;; WP_parameter_def

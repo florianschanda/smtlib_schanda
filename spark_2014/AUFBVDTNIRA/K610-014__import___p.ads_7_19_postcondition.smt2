@@ -120,7 +120,7 @@
   (assert (= p__compare__result3 p__compare__result1))
 
 ;; H
-  (assert (and (= o (olt left right)) (olt__function_guard o left right)))
+  (assert (= o (olt left right)))
 
 ;; H
   (assert (= result p__compare__result))

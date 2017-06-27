@@ -137,6 +137,30 @@
 (define-fun p_type__ref___projection ((a p_type__ref)) us_rep (p_type__content
                                                               a))
 
+(declare-fun to_rep (integer) Int)
+
+(declare-fun of_rep (Int) integer)
+
+;; inversion_axiom
+  (assert
+  (forall ((x integer)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x integer)) (! (in_range1 (to_rep x)) :pattern ((to_rep x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (in_range1 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                            (of_rep x))) )))
+
+(define-fun default_initial_assumption ((temp___expr_178 us_rep)
+  (temp___skip_top_level_179 Bool)) Bool (= (to_rep
+                                            (rec__active_prio__p_type__a
+                                            (us_split_fields1
+                                            temp___expr_178))) 0))
+
 (declare-datatypes ()
 ((us_split_fields2
  (mk___split_fields1 (rec__active_prio__q_type__a integer)))))
@@ -199,6 +223,12 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
+(define-fun default_initial_assumption1 ((temp___expr_184 us_rep1)
+  (temp___skip_top_level_185 Bool)) Bool (= (to_rep
+                                            (rec__active_prio__q_type__a
+                                            (us_split_fields3
+                                            temp___expr_184))) 0))
+
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
@@ -216,18 +246,57 @@
 
 (declare-fun o () integer)
 
+(declare-fun us_self__compl () integer)
+
 (declare-fun o1 () integer)
+
+(declare-fun us_self__compl1 () integer)
 
 (declare-fun o2 () integer)
 
-(declare-fun p () integer)
+(declare-fun us_self__compl2 () integer)
 
-(declare-fun q () integer)
+(declare-fun p__split_fields () integer)
 
-(declare-fun p1 () integer)
+(declare-fun us_self__compl3 () integer)
+
+(declare-fun result () us_split_fields__ref)
+
+(declare-fun p__split_fields1 () us_split_fields)
+
+(declare-fun q__split_fields () us_split_fields2)
+
+(declare-fun us_self__compl4 () us_rep1)
+
+(declare-fun result1 () us_split_fields__ref1)
+
+(declare-fun q__split_fields1 () us_split_fields2)
+
+(declare-fun p__split_fields2 () us_split_fields)
+
+(declare-fun us_self__compl5 () us_rep)
+
+(declare-fun result2 () us_split_fields__ref)
+
+(declare-fun p__split_fields3 () us_split_fields)
 
 (assert
 ;; WP_parameter_def
  ;; File "active_prio.ads", line 16, characters 0-0
-  (not (not (and (= o p) (and (= o1 q) (= o2 p1))))))
+  (not
+  (not
+  (and
+  (and (and (= o p__split_fields) (= us_self__compl o))
+  (and
+  (= result (mk___split_fields__ref (mk___split_fields p__split_fields)))
+  (= p__split_fields1 (mk___split_fields us_self__compl3))))
+  (and
+  (and
+  (and (= q__split_fields (mk___split_fields1 o1)) (= us_self__compl1 o1))
+  (and (= result1 (mk___split_fields__ref1 q__split_fields))
+  (= q__split_fields1 (us_split_fields3 us_self__compl4))))
+  (and
+  (and (= p__split_fields2 (mk___split_fields o2)) (= us_self__compl2 o2))
+  (and (= result2 (mk___split_fields__ref p__split_fields2))
+  (= p__split_fields3 (us_split_fields1 us_self__compl5)))))))))
 (check-sat)

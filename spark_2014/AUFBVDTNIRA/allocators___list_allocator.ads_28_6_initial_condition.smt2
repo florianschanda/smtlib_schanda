@@ -496,19 +496,18 @@
 ;; user_eq__def_axiom
   (assert
   (forall ((a us_rep2) (b us_rep2))
-  (! (and (oeq__function_guard1 (oeq1 a b) a b)
-     (= (user_eq8 a b) (oeq1 a b))) :pattern ((user_eq8 a b)) )))
+  (! (= (user_eq8 a b) (oeq1 a b)) :pattern ((user_eq8 a b)) )))
 
-(define-fun default_initial_assumption2 ((temp___expr_212 us_rep2)
-  (temp___skip_top_level_213 Bool)) Bool (and
+(define-fun default_initial_assumption2 ((temp___expr_211 us_rep2)
+  (temp___skip_top_level_212 Bool)) Bool (and
                                          (= (length
                                             (rec__list_allocator__m__t__available
                                             (us_split_fields1
-                                            temp___expr_212))) 0)
+                                            temp___expr_211))) 0)
                                          (= (is_empty
                                             (rec__list_allocator__m__t__allocated
                                             (us_split_fields1
-                                            temp___expr_212))) true)))
+                                            temp___expr_211))) true)))
 
 (declare-fun contains1 (us_rep Int) Bool)
 
@@ -528,10 +527,9 @@
   (assert
   (forall ((s us_rep))
   (forall ((e Int))
-  (! (=> (contains__function_guard1 (contains1 s e) s e)
-     (= (= (contains1 s e) true)
+  (! (= (= (contains1 s e) true)
      (exists ((i Int))
-     (and (and (<= 1 i) (<= i (length s))) (= (get s i) e))))) :pattern (
+     (and (and (<= 1 i) (<= i (length s))) (= (get s i) e)))) :pattern (
   (contains1 s e)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -555,13 +553,12 @@
 ;; oeq__def_axiom
   (assert
   (forall ((x us_rep2) (y us_rep2))
-  (! (=> (oeq__function_guard1 (oeq1 x y) x y)
-     (= (= (oeq1 x y) true)
+  (! (= (= (oeq1 x y) true)
      (and
      (= (oeq (rec__list_allocator__m__t__available (us_split_fields1 x))
         (rec__list_allocator__m__t__available (us_split_fields1 y))) true)
      (= (oeq2 (rec__list_allocator__m__t__allocated (us_split_fields1 x))
-        (rec__list_allocator__m__t__allocated (us_split_fields1 y))) true)))) :pattern (
+        (rec__list_allocator__m__t__allocated (us_split_fields1 y))) true))) :pattern (
   (oeq1 x y)) )))
 
 (define-fun dynamic_invariant5 ((temp___expr_191 Int)
@@ -608,11 +605,11 @@
 
 (declare-fun r () Int)
 
-(declare-fun temp___286 () us_rep)
+(declare-fun temp___266 () us_rep)
 
-(declare-fun temp___2861 () us_rep1)
+(declare-fun temp___2661 () us_rep1)
 
-(declare-fun temp___285 () Int)
+(declare-fun temp___265 () Int)
 
 (declare-fun o () us_rep)
 
@@ -620,9 +617,9 @@
 
 (declare-fun o2 () us_rep1)
 
-(declare-fun temp___284 () us_rep)
+(declare-fun temp___264 () us_rep)
 
-(declare-fun temp___2841 () us_rep1)
+(declare-fun temp___2641 () us_rep1)
 
 (declare-fun o3 () Int)
 
@@ -691,20 +688,6 @@
 
 ;; H
   (assert
-  (forall ((rr Int)) (contains__function_guard1
-  (contains1 model____split_fields6 rr) model____split_fields6 rr)))
-
-;; H
-  (assert
-  (forall ((rr Int)) (contains__function_guard1
-  (contains1
-  (rec__list_allocator__m__t__available
-  (us_split_fields__content model____split_fields10)) rr)
-  (rec__list_allocator__m__t__available
-  (us_split_fields__content model____split_fields10)) rr)))
-
-;; H
-  (assert
   (and (= (length model____split_fields) 0)
   (= (is_empty model____split_fields1) true)))
 
@@ -720,11 +703,11 @@
 ;; H
   (assert
   (=> (and (<= 1 r1) (<= r1 10000))
-  (and (= model____split_fields temp___286)
-  (= model____split_fields1 temp___2861))))
+  (and (= model____split_fields temp___266)
+  (= model____split_fields1 temp___2661))))
 
 ;; H
-  (assert (=> (and (<= 1 r1) (<= r1 10000)) (= temp___285 r1)))
+  (assert (=> (and (<= 1 r1) (<= r1 10000)) (= temp___265 r1)))
 
 ;; H
   (assert
@@ -740,10 +723,10 @@
   (assert (=> (and (<= 1 r1) (<= r1 10000)) (= model____split_fields1 o2)))
 
 ;; H
-  (assert (=> (and (<= 1 r1) (<= r1 10000)) (= temp___284 o1)))
+  (assert (=> (and (<= 1 r1) (<= r1 10000)) (= temp___264 o1)))
 
 ;; H
-  (assert (=> (and (<= 1 r1) (<= r1 10000)) (= temp___2841 o2)))
+  (assert (=> (and (<= 1 r1) (<= r1 10000)) (= temp___2641 o2)))
 
 ;; H
   (assert
@@ -752,11 +735,11 @@
 
 ;; H
   (assert
-  (=> (and (<= 1 r1) (<= r1 10000)) (= temp___284 model____split_fields4)))
+  (=> (and (<= 1 r1) (<= r1 10000)) (= temp___264 model____split_fields4)))
 
 ;; H
   (assert
-  (=> (and (<= 1 r1) (<= r1 10000)) (= temp___2841 model____split_fields5)))
+  (=> (and (<= 1 r1) (<= r1 10000)) (= temp___2641 model____split_fields5)))
 
 ;; H
   (assert
@@ -793,7 +776,7 @@
   (=> (and (<= 1 r1) (<= r1 10000))
   (and
   (and (=> (<= 1 10000) (in_range2 r2))
-  (= model____split_fields7 temp___2861)) (and (<= 1 r2) (<= r2 10000)))))
+  (= model____split_fields7 temp___2661)) (and (<= 1 r2) (<= r2 10000)))))
 
 ;; H
   (assert (=> (and (<= 1 r1) (<= r1 10000)) (= r2 10000)))

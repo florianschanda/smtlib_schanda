@@ -682,18 +682,11 @@
   (forall ((cur_board (Array Int (Array Int cell))))
   (forall ((cur_state Int))
   (forall ((cur_piece us_rep))
-  (! (=> (valid_configuration__function_guard
-     (valid_configuration cur_board cur_state cur_piece) cur_board cur_state
-     cur_piece)
-     (and (no_overlap__function_guard (no_overlap cur_board cur_piece)
-     cur_board cur_piece)
-     (and (no_complete_lines__function_guard (no_complete_lines cur_board)
-     cur_board)
-     (= (= (valid_configuration cur_board cur_state cur_piece) true)
+  (! (= (= (valid_configuration cur_board cur_state cur_piece) true)
      (ite (or (= cur_state 0) (= cur_state 1))
      (= (no_overlap cur_board cur_piece) true)
      (=> (not (= cur_state 2))
-     (=> (not (= cur_state 4)) (= (no_complete_lines cur_board) true)))))))) :pattern (
+     (=> (not (= cur_state 4)) (= (no_complete_lines cur_board) true))))) :pattern (
   (valid_configuration cur_board cur_state cur_piece)) )))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
@@ -729,35 +722,12 @@
   (patris__next_piece__fields us_split_fields))
   (forall ((patris__cur_board (Array Int (Array Int cell))))
   (forall ((patris__speed_up Bool))
-  (! (=> (valid_configuration__2__function_guard
-     (valid_configuration__2 patris__cur_state patris__cur_piece__fields
-     patris__cur_board patris__next_piece__fields patris__speed_up
-     patris__action_request_nbr) patris__cur_state patris__cur_piece__fields
-     patris__cur_board patris__next_piece__fields patris__speed_up
-     patris__action_request_nbr)
-     (and (get_board__function_guard (get_board patris__cur_board)
-     patris__cur_board)
-     (and (get_state__function_guard (get_state patris__cur_state)
-     patris__cur_state)
-     (and (get_piece__function_guard (get_piece patris__cur_piece__fields)
-     patris__cur_piece__fields)
-     (and (get_board__function_guard (get_board patris__cur_board)
-     patris__cur_board)
-     (and (get_state__function_guard (get_state patris__cur_state)
-     patris__cur_state)
-     (and (get_piece__function_guard (get_piece patris__cur_piece__fields)
-     patris__cur_piece__fields)
-     (and (valid_configuration__function_guard
-     (valid_configuration (get_board patris__cur_board)
-     (get_state patris__cur_state) (get_piece patris__cur_piece__fields))
-     (get_board patris__cur_board) (get_state patris__cur_state)
-     (get_piece patris__cur_piece__fields))
-     (=
+  (! (=
      (= (valid_configuration__2 patris__cur_state patris__cur_piece__fields
         patris__cur_board patris__next_piece__fields patris__speed_up
         patris__action_request_nbr) true)
      (= (valid_configuration (get_board patris__cur_board)
-        (get_state patris__cur_state) (get_piece patris__cur_piece__fields)) true)))))))))) :pattern (
+        (get_state patris__cur_state) (get_piece patris__cur_piece__fields)) true)) :pattern (
   (valid_configuration__2 patris__cur_state patris__cur_piece__fields
   patris__cur_board patris__next_piece__fields patris__speed_up
   patris__action_request_nbr)) ))))))
@@ -883,9 +853,8 @@
 ;; get_board__def_axiom
   (assert
   (forall ((patris__cur_board (Array Int (Array Int cell))))
-  (! (=> (get_board__function_guard (get_board patris__cur_board)
-     patris__cur_board) (= (get_board patris__cur_board) patris__cur_board)) :pattern (
-  (get_board patris__cur_board)) )))
+  (! (= (get_board patris__cur_board) patris__cur_board) :pattern ((get_board
+                                                                   patris__cur_board)) )))
 
 (define-fun dynamic_invariant7 ((temp___expr_1914 Int)
   (temp___is_init_1911 Bool) (temp___skip_constant_1912 Bool)
@@ -914,29 +883,23 @@
 ;; get_piece__def_axiom
   (assert
   (forall ((patris__cur_piece__fields us_split_fields))
-  (! (=> (get_piece__function_guard (get_piece patris__cur_piece__fields)
-     patris__cur_piece__fields)
-     (= (get_piece patris__cur_piece__fields) (mk___rep
-                                              patris__cur_piece__fields))) :pattern (
+  (! (= (get_piece patris__cur_piece__fields) (mk___rep
+                                              patris__cur_piece__fields)) :pattern (
   (get_piece patris__cur_piece__fields)) )))
 
 ;; get_state__post_axiom
   (assert
   (forall ((patris__cur_state Int))
   (! (=> (dynamic_invariant1 patris__cur_state true true true)
-     (let ((result (get_state patris__cur_state)))
-     (=> (get_state__function_guard result patris__cur_state)
-     (dynamic_invariant1 result true false true)))) :pattern ((get_state
-                                                              patris__cur_state)) )))
+     (dynamic_invariant1 (get_state patris__cur_state) true false true)) :pattern (
+  (get_state patris__cur_state)) )))
 
 ;; get_state__def_axiom
   (assert
   (forall ((patris__cur_state Int))
-  (! (=>
-     (and (dynamic_invariant1 patris__cur_state true true true)
-     (get_state__function_guard (get_state patris__cur_state)
-     patris__cur_state)) (= (get_state patris__cur_state) patris__cur_state)) :pattern (
-  (get_state patris__cur_state)) )))
+  (! (=> (dynamic_invariant1 patris__cur_state true true true)
+     (= (get_state patris__cur_state) patris__cur_state)) :pattern ((get_state
+                                                                    patris__cur_state)) )))
 
 (declare-sort map1 0)
 
@@ -2000,10 +1963,9 @@
   (assert
   (forall ((b (Array Int (Array Int cell))))
   (forall ((y Int) (x Int))
-  (! (=> (is_empty__function_guard (is_empty b y x) b y x)
-     (= (= (is_empty b y x) true)
+  (! (= (= (is_empty b y x) true)
      (and (and (in_range9 x) (in_range10 y))
-     (= (to_rep (let ((temp___1984 (select b y))) (select temp___1984 x))) 0)))) :pattern (
+     (= (to_rep (let ((temp___1984 (select b y))) (select temp___1984 x))) 0))) :pattern (
   (is_empty b y x)) ))))
 
 (declare-fun is_complete_line ((Array Int cell)) Bool)
@@ -2016,10 +1978,9 @@
 ;; is_complete_line__def_axiom
   (assert
   (forall ((l (Array Int cell)))
-  (! (=> (is_complete_line__function_guard (is_complete_line l) l)
-     (= (= (is_complete_line l) true)
+  (! (= (= (is_complete_line l) true)
      (forall ((x Int))
-     (=> (and (<= 1 x) (<= x 10)) (not (= (to_rep (select l x)) 0)))))) :pattern (
+     (=> (and (<= 1 x) (<= x 10)) (not (= (to_rep (select l x)) 0))))) :pattern (
   (is_complete_line l)) )))
 
 ;; no_complete_lines__post_axiom
@@ -2028,15 +1989,11 @@
 ;; no_complete_lines__def_axiom
   (assert
   (forall ((b (Array Int (Array Int cell))))
-  (! (=> (no_complete_lines__function_guard (no_complete_lines b) b)
-     (and
-     (forall ((y Int)) (is_complete_line__function_guard
-     (is_complete_line (select b y)) (select b y)))
-     (= (= (no_complete_lines b) true)
+  (! (= (= (no_complete_lines b) true)
      (forall ((y Int))
      (=> (and (<= 1 y) (<= y 20))
-     (not (= (is_complete_line (select b y)) true))))))) :pattern ((no_complete_lines
-                                                                   b)) )))
+     (not (= (is_complete_line (select b y)) true))))) :pattern ((no_complete_lines
+                                                                 b)) )))
 
 ;; no_overlap__post_axiom
   (assert true)
@@ -2045,40 +2002,7 @@
   (assert
   (forall ((b (Array Int (Array Int cell))))
   (forall ((p us_rep))
-  (! (=> (no_overlap__function_guard (no_overlap b p) b p)
-     (and (is_empty__function_guard
-     (is_empty b (to_rep3 (rec__patris__piece__y (us_split_fields1 p)))
-     (to_rep2 (rec__patris__piece__x (us_split_fields1 p)))) b
-     (to_rep3 (rec__patris__piece__y (us_split_fields1 p)))
-     (to_rep2 (rec__patris__piece__x (us_split_fields1 p))))
-     (and (is_empty__function_guard
-     (is_empty b (to_rep3 (rec__patris__piece__y (us_split_fields1 p)))
-     (+ (to_rep2 (rec__patris__piece__x (us_split_fields1 p))) 1)) b
-     (to_rep3 (rec__patris__piece__y (us_split_fields1 p)))
-     (+ (to_rep2 (rec__patris__piece__x (us_split_fields1 p))) 1))
-     (and (is_empty__function_guard
-     (is_empty b (+ (to_rep3 (rec__patris__piece__y (us_split_fields1 p))) 1)
-     (to_rep2 (rec__patris__piece__x (us_split_fields1 p)))) b
-     (+ (to_rep3 (rec__patris__piece__y (us_split_fields1 p))) 1)
-     (to_rep2 (rec__patris__piece__x (us_split_fields1 p))))
-     (and (is_empty__function_guard
-     (is_empty b (+ (to_rep3 (rec__patris__piece__y (us_split_fields1 p))) 1)
-     (+ (to_rep2 (rec__patris__piece__x (us_split_fields1 p))) 1)) b
-     (+ (to_rep3 (rec__patris__piece__y (us_split_fields1 p))) 1)
-     (+ (to_rep2 (rec__patris__piece__x (us_split_fields1 p))) 1))
-     (and
-     (forall ((y Int) (x Int)) (is_empty__function_guard
-     (is_empty b (+ (to_rep3 (rec__patris__piece__y (us_split_fields1 p))) y)
-     (+ (to_rep2 (rec__patris__piece__x (us_split_fields1 p))) x)) b
-     (+ (to_rep3 (rec__patris__piece__y (us_split_fields1 p))) y)
-     (+ (to_rep2 (rec__patris__piece__x (us_split_fields1 p))) x)))
-     (and
-     (forall ((y Int) (x Int)) (is_empty__function_guard
-     (is_empty b (+ (to_rep3 (rec__patris__piece__y (us_split_fields1 p))) y)
-     (+ (to_rep2 (rec__patris__piece__x (us_split_fields1 p))) x)) b
-     (+ (to_rep3 (rec__patris__piece__y (us_split_fields1 p))) y)
-     (+ (to_rep2 (rec__patris__piece__x (us_split_fields1 p))) x)))
-     (= (= (no_overlap b p) true)
+  (! (= (= (no_overlap b p) true)
      (ite (= (to_rep1 (rec__patris__piece__s (us_split_fields1 p))) 2)
      (and
      (and
@@ -2099,10 +2023,10 @@
      (forall ((x Int))
      (=> (and (<= 0 x) (<= x 3))
      (=>
-     (= (let ((temp___2018 (select possible_i_shapes (to_rep4
+     (= (let ((temp___2003 (select possible_i_shapes (to_rep4
                                                      (rec__patris__piece__d
                                                      (us_split_fields1 p))))))
-        (get temp___2018 y x)) true)
+        (get temp___2003 y x)) true)
      (= (is_empty b
         (+ (to_rep3 (rec__patris__piece__y (us_split_fields1 p))) y)
         (+ (to_rep2 (rec__patris__piece__x (us_split_fields1 p))) x)) true))))))
@@ -2111,15 +2035,15 @@
      (forall ((x Int))
      (=> (and (<= 0 x) (<= x 2))
      (=>
-     (= (let ((temp___2020 (get1 possible_three_shapes
+     (= (let ((temp___2004 (get1 possible_three_shapes
                            (to_rep1
                            (rec__patris__piece__s (us_split_fields1 p)))
                            (to_rep4
                            (rec__patris__piece__d (us_split_fields1 p))))))
-        (get temp___2020 y x)) true)
+        (get temp___2004 y x)) true)
      (= (is_empty b
         (+ (to_rep3 (rec__patris__piece__y (us_split_fields1 p))) y)
-        (+ (to_rep2 (rec__patris__piece__x (us_split_fields1 p))) x)) true)))))))))))))))) :pattern (
+        (+ (to_rep2 (rec__patris__piece__x (us_split_fields1 p))) x)) true))))))))) :pattern (
   (no_overlap b p)) ))))
 
 (declare-fun cur_board () (Array Int (Array Int cell)))
@@ -2237,11 +2161,6 @@
                                                          cur_piece__split_fields7))
 
 ;; H
-  (assert (valid_configuration__function_guard
-  (valid_configuration new_board new_cur_state new_cur_piece) new_board
-  new_cur_state new_cur_piece))
-
-;; H
   (assert (=> (<= 0 4) (in_range7 cur_state)))
 
 ;; H
@@ -2354,19 +2273,6 @@
 
 ;; H
   (assert (= cur_board3 cur_board1))
-
-;; H
-  (assert (valid_configuration__2__function_guard
-  (valid_configuration__2 (int__content cur_state2)
-  (mk___split_fields cur_piece__split_fields8 cur_piece__split_fields9
-  cur_piece__split_fields10 cur_piece__split_fields11) cur_board2
-  (us_split_fields__content next_piece__split_fields8)
-  (bool__content speed_up2) (int__content action_request_nbr2))
-  (int__content cur_state2)
-  (mk___split_fields cur_piece__split_fields8 cur_piece__split_fields9
-  cur_piece__split_fields10 cur_piece__split_fields11) cur_board2
-  (us_split_fields__content next_piece__split_fields8)
-  (bool__content speed_up2) (int__content action_request_nbr2)))
 
 (assert
 ;; WP_parameter_def

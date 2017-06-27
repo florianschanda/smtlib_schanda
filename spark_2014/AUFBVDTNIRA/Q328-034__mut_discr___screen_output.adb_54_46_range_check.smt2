@@ -372,11 +372,9 @@
 
 ;; line_number__post_axiom
   (assert
-  (forall ((input__line_num us_private))
-  (! (let ((result (line_number input__line_num)))
-     (=> (line_number__function_guard result input__line_num)
-     (dynamic_invariant1 result true false true))) :pattern ((line_number
-                                                             input__line_num)) )))
+  (forall ((input__line_num us_private)) (! (dynamic_invariant1
+  (line_number input__line_num) true false
+  true) :pattern ((line_number input__line_num)) )))
 
 (declare-fun s1 () us_t)
 
@@ -492,10 +490,7 @@
   (assert (dynamic_invariant s3 true false true))
 
 ;; H
-  (assert
-  (and
-  (and (= o (line_number line_num)) (line_number__function_guard o line_num))
-  (in_range3 o)))
+  (assert (and (= o (line_number line_num)) (in_range3 o)))
 
 ;; H
   (assert (= o1 (attr__ATTRIBUTE_IMAGE3 o)))

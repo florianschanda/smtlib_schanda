@@ -935,6 +935,22 @@
 (define-fun receiver_type__ref___projection ((a receiver_type__ref)) us_rep1 
   (receiver_type__content a))
 
+(declare-fun temp___4475 (us_rep) (Array (_ BitVec 8) us_rep))
+
+;; def_axiom
+  (assert
+  (forall ((temp___4477 us_rep))
+  (forall ((temp___4478 (_ BitVec 8)))
+  (= (select (temp___4475 temp___4477) temp___4478) temp___4477))))
+
+(declare-fun temp___4479 ((_ BitVec 8)) (Array Int bits_8))
+
+;; def_axiom
+  (assert
+  (forall ((temp___4481 (_ BitVec 8)))
+  (forall ((temp___4482 Int))
+  (= (select (temp___4479 temp___4481) temp___4482) (of_rep3 temp___4481)))))
+
 (define-fun dynamic_invariant3 ((temp___expr_4469 us_rep1)
   (temp___is_init_4466 Bool) (temp___skip_constant_4467 Bool)
   (temp___do_toplevel_4468 Bool)) Bool (forall ((temp___4470 (_ BitVec 8)))
@@ -954,6 +970,36 @@
                                        (= (to_rep1
                                           (rec__decadriver__rx_frame_type__size
                                           (us_split_fields1 temp___4471))) 0))))))
+
+(define-fun default_initial_assumption ((temp___expr_4473 us_rep1)
+  (temp___skip_top_level_4474 Bool)) Bool (and
+                                          (and
+                                          (and
+                                          (and
+                                          (= (rec__decadriver__receiver_type__frame_queue
+                                             (us_split_fields3
+                                             temp___expr_4473)) (temp___4475
+                                                                (mk___rep
+                                                                (mk___split_fields
+                                                                (of_rep1 0)
+                                                                (temp___4479
+                                                                ((_ int2bv 8) 0))
+                                                                (of_rep2 0)
+                                                                (of_int 0)))))
+                                          (= (to_rep4
+                                             (rec__decadriver__receiver_type__queue_head
+                                             (us_split_fields3
+                                             temp___expr_4473))) ((_ int2bv 8) 1)))
+                                          (= (to_rep
+                                             (rec__decadriver__receiver_type__rx_count
+                                             (us_split_fields3
+                                             temp___expr_4473))) 0))
+                                          (= (rec__decadriver__receiver_type__overrun_occurred
+                                             (us_split_fields3
+                                             temp___expr_4473)) (of_int 0)))
+                                          (= (rec__decadriver__receiver_type__frame_ready
+                                             (us_split_fields3
+                                             temp___expr_4473)) (of_int 0))))
 
 (declare-fun error () Int)
 
@@ -1040,13 +1086,13 @@
 
 (declare-fun o20 () Bool)
 
-(declare-fun temp___4583 () frame_length)
+(declare-fun temp___4589 () frame_length)
 
-(declare-fun temp___45831 () (Array Int bits_8))
+(declare-fun temp___45891 () (Array Int bits_8))
 
-(declare-fun temp___45832 () rx_errors)
+(declare-fun temp___45892 () rx_errors)
 
-(declare-fun temp___45833 () Bool)
+(declare-fun temp___45893 () Bool)
 
 (declare-fun result () t__ref)
 
@@ -1166,21 +1212,21 @@
              (us_split_fields3 self__5)) next_idx1))) o20))
 
 ;; H
-  (assert (= temp___4583 o17))
+  (assert (= temp___4589 o17))
 
 ;; H
-  (assert (= temp___45831 o18))
+  (assert (= temp___45891 o18))
 
 ;; H
-  (assert (= temp___45832 o19))
+  (assert (= temp___45892 o19))
 
 ;; H
-  (assert (= temp___45833 o20))
+  (assert (= temp___45893 o20))
 
 (assert
 ;; WP_parameter_def
  ;; File "decadriver.ads", line 77, characters 0-0
   (not (dynamic_predicate
   (mk___rep
-  (mk___split_fields temp___4583 temp___45831 temp___45832 temp___45833)))))
+  (mk___split_fields temp___4589 temp___45891 temp___45892 temp___45893)))))
 (check-sat)

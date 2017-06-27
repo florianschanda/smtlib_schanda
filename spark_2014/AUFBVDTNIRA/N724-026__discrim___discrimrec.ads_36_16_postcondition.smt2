@@ -1922,19 +1922,14 @@
 ;; convert_bit_64_to_bit_32__post_axiom
   (assert
   (forall ((reg us_rep))
-  (! (=> (dynamic_invariant1 reg true true true)
-     (let ((result (convert_bit_64_to_bit_32 reg)))
-     (=> (convert_bit_64_to_bit_32__function_guard result reg)
-     (dynamic_invariant2 result true false true)))) :pattern ((convert_bit_64_to_bit_32
-                                                              reg)) )))
+  (! (=> (dynamic_invariant1 reg true true true) (dynamic_invariant2
+     (convert_bit_64_to_bit_32 reg) true false true)) :pattern ((convert_bit_64_to_bit_32
+                                                                reg)) )))
 
 ;; convert_bit_64_to_bit_32__def_axiom
   (assert
   (forall ((reg us_rep))
-  (! (=>
-     (and (dynamic_invariant1 reg true true true)
-     (convert_bit_64_to_bit_32__function_guard (convert_bit_64_to_bit_32 reg)
-     reg))
+  (! (=> (dynamic_invariant1 reg true true true)
      (= (convert_bit_64_to_bit_32 reg) (mk___rep
                                        (mk___split_discrs (of_rep2 1))
                                        (mk___split_fields dummy
@@ -2997,12 +2992,9 @@
 ;; H
   (assert
   (and
-  (and
   (= o70 (convert_bit_64_to_bit_32
          (mk___rep rax__split_discrs rax__split_fields10
          rax__attr__constrained)))
-  (convert_bit_64_to_bit_32__function_guard o70
-  (mk___rep rax__split_discrs rax__split_fields10 rax__attr__constrained)))
   (and (and (= 1 (to_rep2 o49)) (= o60 true))
   (and (= (of_rep2 1) o49)
   (and

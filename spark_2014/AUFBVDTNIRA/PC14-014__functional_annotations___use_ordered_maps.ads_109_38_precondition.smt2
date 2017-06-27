@@ -820,9 +820,9 @@
      (and (<= (+ 0 result) 2147483647) (dynamic_invariant result true false
      true))) :pattern ((length2 container)) )))
 
-(declare-fun temp___877 () us_rep1)
+(declare-fun temp___814 () us_rep1)
 
-(declare-fun temp___876 () Int)
+(declare-fun temp___813 () Int)
 
 (declare-fun o () Bool)
 
@@ -834,43 +834,37 @@
 
 ;; H
   (assert
-  (forall ((i Int)) (q__function_guard
-  (q (get1 (model__ s) (get (keys s) i)))
-  (get1 (model__ s) (get (keys s) i)))))
-
-;; H
-  (assert
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i (length s)))
   (= (q (get1 (model__ s) (get (keys s) i))) true))))
 
 ;; H
   (assert
-  (and (= temp___877 (keys s))
+  (and (= temp___814 (keys s))
   (and
   (and
-  (and (= (length2 temp___877) (length s))
+  (and (= (length2 temp___814) (length s))
   (forall ((temp___396 Int))
   (=>
   (and (in_range2 temp___396)
-  (= (iter_has_element temp___877 temp___396) true))
-  (= (has_key (model__ s) (get temp___877 temp___396)) true))))
+  (= (iter_has_element temp___814 temp___396) true))
+  (= (has_key (model__ s) (get temp___814 temp___396)) true))))
   (forall ((key Int))
   (=> (and (in_range4 key) (= (has_key (model__ s) key) true))
-  (and (< 0 (find temp___877 key))
-  (= (equivalent_keys (get temp___877 (find temp___877 key)) key) true)))))
+  (and (< 0 (find temp___814 key))
+  (= (equivalent_keys (get temp___814 (find temp___814 key)) key) true)))))
   (forall ((i Int))
   (=> (and (<= 1 i) (<= i (length s)))
-  (and (= (find temp___877 (get temp___877 i)) i)
-  (= (k_is_find temp___877 (get temp___877 i) i) true)))))))
+  (and (= (find temp___814 (get temp___814 i)) i)
+  (= (k_is_find temp___814 (get temp___814 i) i) true)))))))
 
 ;; H
   (assert
-  (and (= o (iter_has_element temp___877 temp___876))
-  (= (= o true) (and (<= 1 temp___876) (<= temp___876 (last temp___877))))))
+  (and (= o (iter_has_element temp___814 temp___813))
+  (= (= o true) (and (<= 1 temp___813) (<= temp___813 (last temp___814))))))
 
 ;; H
-  (assert (= (= o1 true) (in_range2 temp___876)))
+  (assert (= (= o1 true) (in_range2 temp___813)))
 
 ;; H
   (assert (= result (ite (= o1 true) o false)))
@@ -879,7 +873,7 @@
   (assert (= result true))
 
 ;; H
-  (assert (and (= k (get temp___877 temp___876)) (in_range3 k)))
+  (assert (and (= k (get temp___814 temp___813)) (in_range3 k)))
 
 (assert
 ;; WP_parameter_def

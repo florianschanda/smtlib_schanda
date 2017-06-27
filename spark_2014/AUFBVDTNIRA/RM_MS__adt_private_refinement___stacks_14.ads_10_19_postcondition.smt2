@@ -368,9 +368,8 @@
 ;; is_empty__def_axiom
   (assert
   (forall ((s us_rep))
-  (! (=> (is_empty__function_guard (is_empty s) s)
-     (= (= (is_empty s) true)
-     (= (to_rep (rec__stacks_14__stack__stack_pointer (us_split_fields1 s))) 0))) :pattern (
+  (! (= (= (is_empty s) true)
+     (= (to_rep (rec__stacks_14__stack__stack_pointer (us_split_fields1 s))) 0)) :pattern (
   (is_empty s)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -398,9 +397,9 @@
 
 (declare-fun o2 () pointer_range)
 
-(declare-fun temp___184 () (Array Int integer))
+(declare-fun temp___179 () (Array Int integer))
 
-(declare-fun temp___1841 () pointer_range)
+(declare-fun temp___1791 () pointer_range)
 
 (declare-fun result () (Array Int integer))
 
@@ -428,10 +427,10 @@
   (assert (= o o2))
 
 ;; H
-  (assert (= temp___184 o1))
+  (assert (= temp___179 o1))
 
 ;; H
-  (assert (= temp___1841 o2))
+  (assert (= temp___1791 o2))
 
 ;; H
   (assert (= result s__split_fields))
@@ -440,10 +439,10 @@
   (assert (= result1 s__split_fields1))
 
 ;; H
-  (assert (= temp___184 s__split_fields2))
+  (assert (= temp___179 s__split_fields2))
 
 ;; H
-  (assert (= temp___1841 s__split_fields3))
+  (assert (= temp___1791 s__split_fields3))
 
 ;; H
   (assert (= s__split_fields4 s__split_fields2))
@@ -456,11 +455,6 @@
 
 ;; H
   (assert (= s__split_fields7 s__split_fields3))
-
-;; H
-  (assert (is_empty__function_guard
-  (is_empty (mk___rep (mk___split_fields s__split_fields4 s__split_fields5)))
-  (mk___rep (mk___split_fields s__split_fields4 s__split_fields5))))
 
 (assert
 ;; WP_parameter_def

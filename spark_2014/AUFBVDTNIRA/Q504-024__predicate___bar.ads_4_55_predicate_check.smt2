@@ -87,17 +87,14 @@
 ;; ident__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (ident x)))
-     (=> (ident__function_guard result x) (dynamic_invariant result true
-     false true)))) :pattern ((ident x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (ident x)
+     true false true)) :pattern ((ident x)) )))
 
 ;; ident__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true) (ident__function_guard
-     (ident x) x)) (= (ident x) x)) :pattern ((ident x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (ident x) x)) :pattern (
+  (ident x)) )))
 
 (declare-fun x () Bool)
 

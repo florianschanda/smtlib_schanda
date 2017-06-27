@@ -363,11 +363,10 @@
   (assert
   (forall ((a (Array Int integer)))
   (forall ((max Int))
-  (! (=> (all_elements_in__function_guard (all_elements_in a max) a max)
-     (= (= (all_elements_in a max) true)
+  (! (= (= (all_elements_in a max) true)
      (forall ((k Int))
      (=> (and (<= 0 k) (<= k 7))
-     (and (<= (- max) (to_rep (select a k))) (<= (to_rep (select a k)) max)))))) :pattern (
+     (and (<= (- max) (to_rep (select a k))) (<= (to_rep (select a k)) max))))) :pattern (
   (all_elements_in a max)) ))))
 
 (declare-fun intermediate_form ((Array Int integer)
@@ -377,17 +376,12 @@
   (Array Int integer)) Bool)
 
 ;; intermediate_form__post_axiom
-  (assert
-  (forall ((a (Array Int integer)) (b (Array Int integer)))
-  (! (and (all_elements_in__function_guard (all_elements_in a 8000000) a
-     8000000) (all_elements_in__function_guard (all_elements_in b 1000000) b
-     1000000)) :pattern ((intermediate_form a b)) )))
+  (assert true)
 
 ;; intermediate_form__def_axiom
   (assert
   (forall ((a (Array Int integer)) (b (Array Int integer)))
-  (! (=> (intermediate_form__function_guard (intermediate_form a b) a b)
-     (= (= (intermediate_form a b) true)
+  (! (= (= (intermediate_form a b) true)
      (forall ((k Int))
      (=> (and (<= 0 k) (<= k 7))
      (ite (= (mod2 (+ k 1) 8) 0)
@@ -402,7 +396,7 @@
      (ite (= (mod2 (+ k 1) 2) 0)
      (= (to_rep (select a k)) (+ (to_rep (select b k)) (to_rep
                                                        (select b (- k 1)))))
-     (= (to_rep (select a k)) (to_rep (select b k)))))))))) :pattern (
+     (= (to_rep (select a k)) (to_rep (select b k))))))))) :pattern (
   (intermediate_form a b)) )))
 
 (declare-fun ghost__ () (Array Int integer))
@@ -471,18 +465,6 @@
   (assert (in_range3 input_space))
 
 ;; H
-  (assert (all_elements_in__function_guard (all_elements_in ghost__ 1000000)
-  ghost__ 1000000))
-
-;; H
-  (assert (all_elements_in__function_guard (all_elements_in a 8000000) 
-  a 8000000))
-
-;; H
-  (assert (intermediate_form__function_guard (intermediate_form a ghost__) 
-  a ghost__))
-
-;; H
   (assert
   (and (= (all_elements_in ghost__ 1000000) true)
   (and (= (all_elements_in a 8000000) true)
@@ -529,11 +511,6 @@
 
 ;; H
   (assert (< 0 space2))
-
-;; H
-  (assert (all_elements_in__function_guard
-  (all_elements_in a2 (* (* (div1 4 space3) 8) 1000000)) a2
-  (* (* (div1 4 space3) 8) 1000000)))
 
 ;; H
   (assert

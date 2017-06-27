@@ -222,9 +222,7 @@
                                                                   (rec__money__amount__raw
                                                                   (us_split_fields1
                                                                   a)))))
-     (let ((result (osubtract a b)))
-     (=> (osubtract__function_guard result a b)
-     (= (bool_eq2 result
+     (= (bool_eq2 (osubtract a b)
         (mk___rep
         (mk___split_fields
         (rec__money__amount__currency (us_split_fields1 a))
@@ -232,7 +230,7 @@
         (- (to_rep1 (rec__money__amount__raw (us_split_fields1 a))) (to_rep1
                                                                     (rec__money__amount__raw
                                                                     (us_split_fields1
-                                                                    b)))))))) true)))) :pattern (
+                                                                    b)))))))) true)) :pattern (
   (osubtract a b)) )))
 
 (declare-sort account_num 0)
@@ -513,14 +511,8 @@
   (assert
   (forall ((account Int))
   (forall ((database__availability__links (Array Int us_rep1)))
-  (! (=> (existing__function_guard
-     (existing account database__availability__links) account
-     database__availability__links)
-     (and (is_available__function_guard
-     (is_available account database__availability__links) account
-     database__availability__links)
-     (= (= (existing account database__availability__links) true)
-     (not (= (is_available account database__availability__links) true))))) :pattern (
+  (! (= (= (existing account database__availability__links) true)
+     (not (= (is_available account database__availability__links) true))) :pattern (
   (existing account database__availability__links)) ))))
 
 (declare-datatypes ()
@@ -707,21 +699,15 @@
   (assert
   (forall ((account Int))
   (forall ((database__accounts_balance (Array Int us_rep2)))
-  (! (=> (dynamic_invariant account true true true)
-     (let ((result (currency account database__accounts_balance)))
-     (=> (currency__function_guard result account database__accounts_balance)
-     (dynamic_invariant1 result true false true)))) :pattern ((currency
-                                                              account
-                                                              database__accounts_balance)) ))))
+  (! (=> (dynamic_invariant account true true true) (dynamic_invariant1
+     (currency account database__accounts_balance) true false true)) :pattern (
+  (currency account database__accounts_balance)) ))))
 
 ;; currency__def_axiom
   (assert
   (forall ((account Int))
   (forall ((database__accounts_balance (Array Int us_rep2)))
-  (! (=>
-     (and (dynamic_invariant account true true true)
-     (currency__function_guard (currency account database__accounts_balance)
-     account database__accounts_balance))
+  (! (=> (dynamic_invariant account true true true)
      (= (currency account database__accounts_balance) (to_rep
                                                       (rec__money__amount__currency
                                                       (us_split_fields1
@@ -736,22 +722,14 @@
   (Array Int us_rep2)) Bool)
 
 ;; balance__post_axiom
-  (assert
-  (forall ((account Int))
-  (forall ((database__availability__links (Array Int us_rep1)))
-  (existing__function_guard (existing account database__availability__links)
-  account database__availability__links))))
+  (assert true)
 
 ;; balance__def_axiom
   (assert
   (forall ((account Int))
   (forall ((database__availability__links (Array Int us_rep1)))
   (forall ((database__accounts_balance (Array Int us_rep2)))
-  (! (=>
-     (and (dynamic_invariant account true true true) (balance__function_guard
-     (balance account database__availability__links
-     database__accounts_balance) account database__availability__links
-     database__accounts_balance))
+  (! (=> (dynamic_invariant account true true true)
      (= (balance account database__availability__links
         database__accounts_balance) (rec__database__account_balance__value
                                     (us_split_fields5
@@ -773,12 +751,9 @@
   (assert
   (forall ((account1 Int))
   (forall ((database__availability__links (Array Int us_rep1)))
-  (! (=> (is_available__function_guard
-     (is_available account1 database__availability__links) account1
-     database__availability__links)
-     (= (= (is_available account1 database__availability__links) true)
+  (! (= (= (is_available account1 database__availability__links) true)
      (= (rec__database__availability__account_link__available
-        (us_split_fields3 (select database__availability__links account1))) true))) :pattern (
+        (us_split_fields3 (select database__availability__links account1))) true)) :pattern (
   (is_available account1 database__availability__links)) ))))
 
 (define-fun dynamic_invariant2 ((temp___expr_209 Int)
@@ -858,18 +833,6 @@
 (define-fun accounts_balance7 () map__ref1 (mk_map__ref1 accounts_balance))
 
 ;; H
-  (assert (existing__function_guard (existing account links) account 
-  links))
-
-;; H
-  (assert (currency__function_guard (currency account accounts_balance)
-  account accounts_balance))
-
-;; H
-  (assert (balance__function_guard (balance account links accounts_balance)
-  account links accounts_balance))
-
-;; H
   (assert (in_range2 account))
 
 ;; H
@@ -897,9 +860,7 @@
   (and
   (and
   (and
-  (and
-  (and (= o6 (currency account accounts_balance)) (currency__function_guard
-  o6 account accounts_balance))
+  (and (= o6 (currency account accounts_balance))
   (and (in_range o6)
   (= o6 (to_rep
         (rec__money__amount__currency
@@ -915,9 +876,7 @@
   (and
   (and
   (and
-  (and
   (and (= o18 (balance account links accounts_balance))
-  (balance__function_guard o18 account links accounts_balance))
   (= o18 (rec__database__account_balance__value
          (us_split_fields5 (select accounts_balance account)))))
   (and (= o o2) (= o1 o3))) (= o4 o3)) (= o5 (to_rep1 o4)))
@@ -930,9 +889,7 @@
   (and
   (and
   (and
-  (and
-  (and (= o6 (currency account accounts_balance)) (currency__function_guard
-  o6 account accounts_balance))
+  (and (= o6 (currency account accounts_balance))
   (and (in_range o6)
   (= o6 (to_rep
         (rec__money__amount__currency
@@ -948,9 +905,7 @@
   (and
   (and
   (and
-  (and
   (and (= o18 (balance account links accounts_balance))
-  (balance__function_guard o18 account links accounts_balance))
   (= o18 (rec__database__account_balance__value
          (us_split_fields5 (select accounts_balance account)))))
   (and (= o o2) (= o1 o3))) (= o4 o3)) (= o5 (to_rep1 o4)))
@@ -966,13 +921,9 @@
   (and
   (and
   (and
-  (and
   (= o17 (osubtract
          (rec__database__account_balance__value
          (us_split_fields5 (select accounts_balance account))) sum))
-  (osubtract__function_guard o17
-  (rec__database__account_balance__value
-  (us_split_fields5 (select accounts_balance account))) sum))
   (= (bool_eq2 o17
      (mk___rep
      (mk___split_fields
@@ -1005,24 +956,6 @@
 
 ;; H
   (assert (= accounts_balance6 accounts_balance4))
-
-;; H
-  (assert (balance__function_guard
-  (balance account links (map__content1 accounts_balance5)) account links
-  (map__content1 accounts_balance5)))
-
-;; H
-  (assert (balance__function_guard (balance account links accounts_balance)
-  account links accounts_balance))
-
-;; H
-  (assert (balance__function_guard (balance account links accounts_balance)
-  account links accounts_balance))
-
-;; H
-  (assert (osubtract__function_guard
-  (osubtract (balance account links accounts_balance) sum)
-  (balance account links accounts_balance) sum))
 
 (assert
 ;; WP_parameter_def

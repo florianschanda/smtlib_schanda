@@ -167,9 +167,9 @@
 (define-fun modular__ref_6__projection ((a modular__ref)) modular (modular__content
                                                                   a))
 
-(define-fun dynamic_invariant ((temp___expr_605 (_ BitVec 32))
-  (temp___is_init_602 Bool) (temp___skip_constant_603 Bool)
-  (temp___do_toplevel_604 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_305 (_ BitVec 32))
+  (temp___is_init_302 Bool) (temp___skip_constant_303 Bool)
+  (temp___do_toplevel_304 Bool)) Bool true)
 
 (declare-sort bit_position 0)
 
@@ -193,11 +193,11 @@
 (define-fun bit_position__ref_5__projection ((a bit_position__ref)) bit_position 
   (bit_position__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_611 Int)
-  (temp___is_init_608 Bool) (temp___skip_constant_609 Bool)
-  (temp___do_toplevel_610 Bool)) Bool (=>
-                                      (or (= temp___is_init_608 true)
-                                      (<= 0 31)) (in_range1 temp___expr_611)))
+(define-fun dynamic_invariant1 ((temp___expr_311 Int)
+  (temp___is_init_308 Bool) (temp___skip_constant_309 Bool)
+  (temp___do_toplevel_310 Bool)) Bool (=>
+                                      (or (= temp___is_init_308 true)
+                                      (<= 0 31)) (in_range1 temp___expr_311)))
 
 (declare-fun shift_right ((_ BitVec 32) Int) (_ BitVec 32))
 
@@ -525,20 +525,16 @@
   (forall ((amount Int))
   (! (=>
      (and (dynamic_invariant v true true true) (dynamic_invariant2 amount
-     true true true))
-     (let ((result (shift_right v amount)))
-     (=> (shift_right__function_guard result v amount) (dynamic_invariant
-     result true false true)))) :pattern ((shift_right v amount)) ))))
+     true true true)) (dynamic_invariant (shift_right v amount) true false
+     true)) :pattern ((shift_right v amount)) ))))
 
 ;; shift_right__def_axiom
   (assert
   (forall ((v (_ BitVec 32)))
   (forall ((amount Int))
   (! (=>
-     (and
      (and (dynamic_invariant v true true true) (dynamic_invariant2 amount
-     true true true)) (shift_right__function_guard (shift_right v amount) v
-     amount))
+     true true true))
      (= (shift_right v amount) (ite (and (<= 1 32) (<= 32 8))
                                ((_ zero_extend 24) (ite (< amount 8)
                                                    (bvlshr ((_ extract 7 0) v) ((_ int2bv 8) amount))
@@ -563,11 +559,8 @@
 ;; lemma6__post_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (let ((result (lemma6 us_void_param)))
-     (and (lemma6__function_guard1 (lemma61 Tuple0) Tuple0)
-     (=> (lemma6__function_guard result us_void_param)
-     (=> (= result true) (= (lemma61 Tuple0) true))))) :pattern ((lemma6
-                                                                 us_void_param)) )))
+  (! (=> (= (lemma6 us_void_param) true) (= (lemma61 Tuple0) true)) :pattern (
+  (lemma6 us_void_param)) )))
 
 (declare-fun value () (_ BitVec 32))
 
@@ -583,20 +576,7 @@
 ;; lemma6__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (=> (lemma6__function_guard1 (lemma61 us_void_param) us_void_param)
-     (and
-     (forall ((val__ (_ BitVec 32))) (shift_right__function_guard
-     (shift_right val__ 0) val__ 0))
-     (and
-     (forall ((val__ (_ BitVec 32)) (n Int)) (shift_right__function_guard
-     (shift_right val__ n) val__ n))
-     (and
-     (forall ((val__ (_ BitVec 32)) (j Int)) (shift_right__function_guard
-     (shift_right val__ j) val__ j))
-     (and
-     (forall ((val__ (_ BitVec 32)) (j Int)) (shift_right__function_guard
-     (shift_right val__ j) val__ j))
-     (= (= (lemma61 us_void_param) true)
+  (! (= (= (lemma61 us_void_param) true)
      (forall ((val__ (_ BitVec 32)))
      (=>
      (and (bvule ((_ int2bv 32) 0) val__)
@@ -612,7 +592,7 @@
      (bvuge (shift_right val__ j) ((_ int2bv 32) 1)))))
      (forall ((j Int))
      (=> (and (<= n j) (<= j 31))
-     (bvule (shift_right val__ j) ((_ int2bv 32) 1))))))))))))))))) :pattern (
+     (bvule (shift_right val__ j) ((_ int2bv 32) 1)))))))))))) :pattern (
   (lemma61 us_void_param)) )))
 
 (declare-fun result__ () Int)
@@ -621,9 +601,9 @@
 
 (declare-fun bits_manipulation_unsigned__unsigned_32__functions__msb_index_slow_inline_always__result () Int)
 
-(declare-fun temp___1309 () Int)
+(declare-fun temp___436 () Int)
 
-(declare-fun temp___1308 () Int)
+(declare-fun temp___435 () Int)
 
 (declare-fun o () (_ BitVec 32))
 
@@ -722,19 +702,6 @@
 (declare-fun result7 () Int)
 
 ;; H
-  (assert (lemma6__function_guard (lemma6 Tuple0) Tuple0))
-
-;; H
-  (assert
-  (forall ((j Int)) (shift_right__function_guard (shift_right value j) 
-  value j)))
-
-;; H
-  (assert
-  (forall ((j Int)) (shift_right__function_guard (shift_right value j) 
-  value j)))
-
-;; H
   (assert (not (= value ((_ int2bv 32) 0))))
 
 ;; H
@@ -750,10 +717,10 @@
   (assert (= i1 0))
 
 ;; H
-  (assert (=> (and (<= 0 i1) (<= i1 31)) (= temp___1309 result__)))
+  (assert (=> (and (<= 0 i1) (<= i1 31)) (= temp___436 result__)))
 
 ;; H
-  (assert (=> (and (<= 0 i1) (<= i1 31)) (= temp___1308 i1)))
+  (assert (=> (and (<= 0 i1) (<= i1 31)) (= temp___435 i1)))
 
 ;; H
   (assert
@@ -771,8 +738,7 @@
   (and (= i7 i1) (= result__8 result__2)))
   (and
   (and
-  (and
-  (and (= o (shift_right value i1)) (shift_right__function_guard o value i1))
+  (and (= o (shift_right value i1))
   (= o (ite (and (<= 1 32) (<= 32 8))
        ((_ zero_extend 24) (ite (< i1 8)
                            (bvlshr ((_ extract 7 0) value) ((_ int2bv 8) 
@@ -789,8 +755,7 @@
   (and
   (and
   (and
-  (and
-  (and (= o (shift_right value i1)) (shift_right__function_guard o value i1))
+  (and (= o (shift_right value i1))
   (= o (ite (and (<= 1 32) (<= 32 8))
        ((_ zero_extend 24) (ite (< i1 8)
                            (bvlshr ((_ extract 7 0) value) ((_ int2bv 8) 
@@ -828,9 +793,7 @@
   (and (and (= result__3 result4) (= result__4 i3))
   (and
   (and
-  (and
-  (and (= o1 (shift_right value i3)) (shift_right__function_guard o1 
-  value i3))
+  (and (= o1 (shift_right value i3))
   (= o1 (ite (and (<= 1 32) (<= 32 8))
         ((_ zero_extend 24) (ite (< i3 8)
                             (bvlshr ((_ extract 7 0) value) ((_ int2bv 8) 
@@ -927,15 +890,6 @@
   (assert
   (= result7 (int__content
              bits_manipulation_unsigned__unsigned_32__functions__msb_index_slow_inline_always__result4)))
-
-;; H
-  (assert (shift_right__function_guard
-  (shift_right value
-  (int__content
-  bits_manipulation_unsigned__unsigned_32__functions__msb_index_slow_inline_always__result4))
-  value
-  (int__content
-  bits_manipulation_unsigned__unsigned_32__functions__msb_index_slow_inline_always__result4)))
 
 (assert
 ;; WP_parameter_def

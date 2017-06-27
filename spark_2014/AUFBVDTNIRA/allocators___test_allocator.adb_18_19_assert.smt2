@@ -262,19 +262,18 @@
 ;; user_eq__def_axiom
   (assert
   (forall ((a us_rep2) (b us_rep2))
-  (! (and (oeq__function_guard (oeq a b) a b) (= (user_eq3 a b) (oeq a b))) :pattern (
-  (user_eq3 a b)) )))
+  (! (= (user_eq3 a b) (oeq a b)) :pattern ((user_eq3 a b)) )))
 
-(define-fun default_initial_assumption ((temp___expr_205 us_rep2)
-  (temp___skip_top_level_206 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_204 us_rep2)
+  (temp___skip_top_level_205 Bool)) Bool (and
                                          (= (length
                                             (rec__list_allocator__m__t__available
                                             (us_split_fields1
-                                            temp___expr_205))) 0)
+                                            temp___expr_204))) 0)
                                          (= (is_empty
                                             (rec__list_allocator__m__t__allocated
                                             (us_split_fields1
-                                            temp___expr_205))) true)))
+                                            temp___expr_204))) true)))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -375,15 +374,14 @@
   (assert
   (forall ((s us_rep) (result__ us_rep))
   (forall ((e Int))
-  (! (=> (is_prepend__function_guard (is_prepend s e result__) s e result__)
-     (= (= (is_prepend s e result__) true)
+  (! (= (= (is_prepend s e result__) true)
      (and
      (and
      (and (< (length s) 2147483647) (= (length result__) (+ (length s) 1)))
      (= (get result__ 1) e))
-     (= (range_shifted s result__ 1 (last s) 1) true)))) :pattern ((is_prepend
-                                                                   s e
-                                                                   result__)) ))))
+     (= (range_shifted s result__ 1 (last s) 1) true))) :pattern ((is_prepend
+                                                                  s e
+                                                                  result__)) ))))
 
 (define-fun default_initial_assumption2 ((temp___expr_191 us_rep1)
   (temp___skip_top_level_192 Bool)) Bool (=>
@@ -406,11 +404,10 @@
   (assert
   (forall ((s us_rep1) (result__ us_rep1))
   (forall ((e Int))
-  (! (=> (is_add__function_guard (is_add s e result__) s e result__)
-     (= (= (is_add s e result__) true)
+  (! (= (= (is_add s e result__) true)
      (and
      (and (and (not (= (contains s e) true)) (= (contains result__ e) true))
-     (= (included_except result__ s e) true)) (= (ole s result__) true)))) :pattern (
+     (= (included_except result__ s e) true)) (= (ole s result__) true))) :pattern (
   (is_add s e result__)) ))))
 
 (declare-fun oeq2 (us_rep1 us_rep1) Bool)
@@ -423,13 +420,12 @@
 ;; oeq__def_axiom
   (assert
   (forall ((x us_rep2) (y us_rep2))
-  (! (=> (oeq__function_guard (oeq x y) x y)
-     (= (= (oeq x y) true)
+  (! (= (= (oeq x y) true)
      (and
      (= (oeq1 (rec__list_allocator__m__t__available (us_split_fields1 x))
         (rec__list_allocator__m__t__available (us_split_fields1 y))) true)
      (= (oeq2 (rec__list_allocator__m__t__allocated (us_split_fields1 x))
-        (rec__list_allocator__m__t__allocated (us_split_fields1 y))) true)))) :pattern (
+        (rec__list_allocator__m__t__allocated (us_split_fields1 y))) true))) :pattern (
   (oeq x y)) )))
 
 ;; is_valid__post_axiom
@@ -699,15 +695,6 @@
                                                        model____split_fields3))
 
 ;; H
-  (assert (all_available__function_guard (all_available state) state))
-
-;; H
-  (assert (is_valid__function_guard
-  (is_valid state
-  (mk___split_fields model____split_fields model____split_fields1)) state
-  (mk___split_fields model____split_fields model____split_fields1)))
-
-;; H
   (assert
   (and (= (all_available state) true)
   (= (is_valid state
@@ -724,27 +711,6 @@
 
 ;; H
   (assert (=> (<= 0 10000) (in_range res4)))
-
-;; H
-  (assert (is_valid__function_guard (is_valid state1 model____split_fields16)
-  state1 model____split_fields16))
-
-;; H
-  (assert (oeq__function_guard
-  (oeq (mk___rep model____split_fields16)
-  (mk___rep (mk___split_fields model____split_fields model____split_fields1)))
-  (mk___rep model____split_fields16)
-  (mk___rep (mk___split_fields model____split_fields model____split_fields1))))
-
-;; H
-  (assert (is_prepend__function_guard
-  (is_prepend model____split_fields2 res11 model____split_fields)
-  model____split_fields2 res11 model____split_fields))
-
-;; H
-  (assert (is_add__function_guard
-  (is_add model____split_fields1 res11 model____split_fields3)
-  model____split_fields1 res11 model____split_fields3))
 
 ;; H
   (assert
@@ -764,30 +730,7 @@
   (assert (not (= res11 0)))
 
 ;; H
-  (assert (is_allocated__function_guard (is_allocated res11 state1) res11
-  state1))
-
-;; H
   (assert (= (is_allocated res11 state1) true))
-
-;; H
-  (assert (is_valid__function_guard (is_valid state2 model____split_fields15)
-  state2 model____split_fields15))
-
-;; H
-  (assert (oeq__function_guard
-  (oeq (mk___rep model____split_fields15) (mk___rep model____split_fields16))
-  (mk___rep model____split_fields15) (mk___rep model____split_fields16)))
-
-;; H
-  (assert (is_prepend__function_guard
-  (is_prepend model____split_fields4 res21 model____split_fields2)
-  model____split_fields4 res21 model____split_fields2))
-
-;; H
-  (assert (is_add__function_guard
-  (is_add model____split_fields3 res21 model____split_fields5)
-  model____split_fields3 res21 model____split_fields5))
 
 ;; H
   (assert
@@ -806,30 +749,7 @@
   (assert (not (= res21 0)))
 
 ;; H
-  (assert (is_allocated__function_guard (is_allocated res21 state2) res21
-  state2))
-
-;; H
   (assert (= (is_allocated res21 state2) true))
-
-;; H
-  (assert (is_valid__function_guard (is_valid state3 model____split_fields14)
-  state3 model____split_fields14))
-
-;; H
-  (assert (oeq__function_guard
-  (oeq (mk___rep model____split_fields14) (mk___rep model____split_fields15))
-  (mk___rep model____split_fields14) (mk___rep model____split_fields15)))
-
-;; H
-  (assert (is_prepend__function_guard
-  (is_prepend model____split_fields6 res31 model____split_fields4)
-  model____split_fields6 res31 model____split_fields4))
-
-;; H
-  (assert (is_add__function_guard
-  (is_add model____split_fields5 res31 model____split_fields7)
-  model____split_fields5 res31 model____split_fields7))
 
 ;; H
   (assert
@@ -848,30 +768,7 @@
   (assert (not (= res31 0)))
 
 ;; H
-  (assert (is_allocated__function_guard (is_allocated res31 state3) res31
-  state3))
-
-;; H
   (assert (= (is_allocated res31 state3) true))
-
-;; H
-  (assert (is_valid__function_guard (is_valid state4 model____split_fields13)
-  state4 model____split_fields13))
-
-;; H
-  (assert (oeq__function_guard
-  (oeq (mk___rep model____split_fields13) (mk___rep model____split_fields14))
-  (mk___rep model____split_fields13) (mk___rep model____split_fields14)))
-
-;; H
-  (assert (is_prepend__function_guard
-  (is_prepend model____split_fields8 res41 model____split_fields6)
-  model____split_fields8 res41 model____split_fields6))
-
-;; H
-  (assert (is_add__function_guard
-  (is_add model____split_fields7 res41 model____split_fields9)
-  model____split_fields7 res41 model____split_fields9))
 
 ;; H
   (assert
@@ -890,25 +787,6 @@
   (assert (not (= res41 0)))
 
 ;; H
-  (assert (is_valid__function_guard (is_valid state5 model____split_fields12)
-  state5 model____split_fields12))
-
-;; H
-  (assert (is_prepend__function_guard
-  (is_prepend model____split_fields8 res11 model____split_fields10)
-  model____split_fields8 res11 model____split_fields10))
-
-;; H
-  (assert (is_add__function_guard
-  (is_add model____split_fields11 res11 model____split_fields9)
-  model____split_fields11 res11 model____split_fields9))
-
-;; H
-  (assert (oeq__function_guard
-  (oeq (mk___rep model____split_fields12) (mk___rep model____split_fields13))
-  (mk___rep model____split_fields12) (mk___rep model____split_fields13)))
-
-;; H
   (assert
   (and (= (is_valid state5 model____split_fields12) true)
   (ite (= (contains model____split_fields9 res11) true)
@@ -917,10 +795,6 @@
   (= (is_add model____split_fields11 res11 model____split_fields9) true))
   (= (oeq (mk___rep model____split_fields12)
      (mk___rep model____split_fields13)) true))))
-
-;; H
-  (assert (is_available__function_guard (is_available res11 state5) res11
-  state5))
 
 (assert
 ;; WP_parameter_def

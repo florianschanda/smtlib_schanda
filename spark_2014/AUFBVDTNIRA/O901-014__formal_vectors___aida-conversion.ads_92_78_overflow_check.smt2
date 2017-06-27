@@ -372,7 +372,6 @@
   (forall ((c Int))
   (! (=> (dynamic_invariant2 c true true true)
      (let ((result (is_digit c)))
-     (=> (is_digit__function_guard result c)
      (ite (= c 48) (= result true)
      (ite (= c 49) (= result true)
      (ite (= c 50) (= result true)
@@ -383,7 +382,7 @@
      (ite (= c 55) (= result true)
      (ite (= c 56) (= result true)
      (ite (= c 57) (= result true)
-     (ite (< 57 c) (not (= result true)) (=> (< c 48) (not (= result true))))))))))))))))) :pattern (
+     (ite (< 57 c) (not (= result true)) (=> (< c 48) (not (= result true)))))))))))))))) :pattern (
   (is_digit c)) )))
 
 (declare-fun convert_character_digit_to_integer (Int) Int)
@@ -394,12 +393,10 @@
 ;; convert_character_digit_to_integer__post_axiom
   (assert
   (forall ((source Int))
-  (! (and (is_digit__function_guard (is_digit source) source)
-     (=>
+  (! (=>
      (and (dynamic_invariant2 source true true true)
      (= (is_digit source) true))
      (let ((result (convert_character_digit_to_integer source)))
-     (=> (convert_character_digit_to_integer__function_guard result source)
      (and
      (and (and (<= 0 result) (<= result 9))
      (ite (= source 48) (= result 0)
@@ -411,8 +408,8 @@
      (ite (= source 54) (= result 6)
      (ite (= source 55) (= result 7)
      (ite (= source 56) (= result 8) (=> (= source 57) (= result 9))))))))))))
-     (dynamic_invariant result true false true)))))) :pattern ((convert_character_digit_to_integer
-                                                               source)) )))
+     (dynamic_invariant result true false true)))) :pattern ((convert_character_digit_to_integer
+                                                             source)) )))
 
 (declare-fun source () us_t)
 
@@ -421,10 +418,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
-
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -445,10 +438,6 @@
 (define-fun t12b__ref___projection ((a t12b__ref)) integer (t12b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
-
-(declare-fun first3 () Int)
-
-(declare-fun last3 () Int)
 
 (define-fun dynamic_property2 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -491,15 +480,15 @@
 
 (declare-fun o2 () Int)
 
-(declare-fun temp___1034 () Int)
+(declare-fun temp___883 () Int)
 
-(declare-fun temp___1035 () Int)
+(declare-fun temp___884 () Int)
 
-(declare-fun temp___1031 () Int)
+(declare-fun temp___882 () Int)
 
-(declare-fun temp___1030 () Int)
+(declare-fun temp___881 () Int)
 
-(declare-fun temp___1029 () Bool)
+(declare-fun temp___880 () Bool)
 
 (declare-fun o3 () Int)
 
@@ -517,21 +506,21 @@
 
 (declare-fun o10 () Bool)
 
-(declare-fun temp___1026 () Int)
+(declare-fun temp___877 () Int)
 
-(declare-fun temp___1027 () Int)
+(declare-fun temp___878 () Int)
 
-(declare-fun temp___1023 () Int)
+(declare-fun temp___876 () Int)
 
-(declare-fun temp___1022 () Int)
+(declare-fun temp___875 () Int)
 
-(declare-fun temp___1021 () Bool)
+(declare-fun temp___874 () Bool)
 
 (declare-fun o11 () Bool)
 
 (declare-fun o12 () Bool)
 
-(declare-fun temp___1083 () Int)
+(declare-fun temp___924 () Int)
 
 (declare-fun o13 () Int)
 
@@ -539,7 +528,7 @@
 
 (declare-fun o15 () Int)
 
-(declare-fun temp___1084 () Int)
+(declare-fun temp___925 () Int)
 
 (declare-fun o16 () Int)
 
@@ -551,7 +540,7 @@
 
 (declare-fun o20 () Bool)
 
-(declare-fun temp___1085 () Int)
+(declare-fun temp___926 () Int)
 
 (declare-fun o21 () Int)
 
@@ -563,7 +552,7 @@
 
 (declare-fun o25 () Bool)
 
-(declare-fun temp___1086 () Int)
+(declare-fun temp___927 () Int)
 
 (declare-fun o26 () Int)
 
@@ -575,7 +564,7 @@
 
 (declare-fun o30 () Bool)
 
-(declare-fun temp___1087 () Int)
+(declare-fun temp___928 () Int)
 
 (declare-fun o31 () Int)
 
@@ -587,7 +576,7 @@
 
 (declare-fun o35 () Bool)
 
-(declare-fun temp___1088 () Int)
+(declare-fun temp___929 () Int)
 
 (declare-fun o36 () Int)
 
@@ -601,7 +590,7 @@
 
 (declare-fun o41 () Bool)
 
-(declare-fun temp___1089 () Int)
+(declare-fun temp___930 () Int)
 
 (declare-fun o42 () Int)
 
@@ -609,7 +598,7 @@
 
 (declare-fun o44 () Int)
 
-(declare-fun temp___1090 () Int)
+(declare-fun temp___931 () Int)
 
 (declare-fun o45 () Int)
 
@@ -621,7 +610,7 @@
 
 (declare-fun o49 () Bool)
 
-(declare-fun temp___1091 () Int)
+(declare-fun temp___932 () Int)
 
 (declare-fun o50 () Int)
 
@@ -633,7 +622,7 @@
 
 (declare-fun o54 () Bool)
 
-(declare-fun temp___1092 () Int)
+(declare-fun temp___933 () Int)
 
 (declare-fun o55 () Int)
 
@@ -645,7 +634,7 @@
 
 (declare-fun o59 () Bool)
 
-(declare-fun temp___1093 () Int)
+(declare-fun temp___934 () Int)
 
 (declare-fun o60 () Int)
 
@@ -659,7 +648,7 @@
 
 (declare-fun o65 () Bool)
 
-(declare-fun temp___1094 () Int)
+(declare-fun temp___935 () Int)
 
 (declare-fun o66 () Int)
 
@@ -667,7 +656,7 @@
 
 (declare-fun o68 () Int)
 
-(declare-fun temp___1095 () Int)
+(declare-fun temp___936 () Int)
 
 (declare-fun o69 () Int)
 
@@ -679,7 +668,7 @@
 
 (declare-fun o73 () Bool)
 
-(declare-fun temp___1096 () Int)
+(declare-fun temp___937 () Int)
 
 (declare-fun o74 () Int)
 
@@ -691,7 +680,7 @@
 
 (declare-fun o78 () Bool)
 
-(declare-fun temp___1097 () Int)
+(declare-fun temp___938 () Int)
 
 (declare-fun o79 () Int)
 
@@ -705,7 +694,7 @@
 
 (declare-fun o84 () Bool)
 
-(declare-fun temp___1098 () Int)
+(declare-fun temp___939 () Int)
 
 (declare-fun o85 () Int)
 
@@ -713,7 +702,7 @@
 
 (declare-fun o87 () Int)
 
-(declare-fun temp___1099 () Int)
+(declare-fun temp___940 () Int)
 
 (declare-fun o88 () Int)
 
@@ -725,7 +714,7 @@
 
 (declare-fun o92 () Bool)
 
-(declare-fun temp___1100 () Int)
+(declare-fun temp___941 () Int)
 
 (declare-fun o93 () Int)
 
@@ -739,7 +728,7 @@
 
 (declare-fun o98 () Bool)
 
-(declare-fun temp___1101 () Int)
+(declare-fun temp___942 () Int)
 
 (declare-fun o99 () Int)
 
@@ -747,7 +736,7 @@
 
 (declare-fun o101 () Int)
 
-(declare-fun temp___1102 () Int)
+(declare-fun temp___943 () Int)
 
 (declare-fun o102 () Int)
 
@@ -761,7 +750,7 @@
 
 (declare-fun o107 () Bool)
 
-(declare-fun temp___1103 () Int)
+(declare-fun temp___944 () Int)
 
 (declare-fun o108 () Int)
 
@@ -1093,48 +1082,6 @@
 
 ;; H
   (assert
-  (forall ((j Int)) (is_digit__function_guard
-  (is_digit (to_rep (select (elts source) j)))
-  (to_rep (select (elts source) j)))))
-
-;; H
-  (assert
-  (forall ((j Int)) (is_digit__function_guard
-  (is_digit (to_rep (select (elts source) j)))
-  (to_rep (select (elts source) j)))))
-
-;; H
-  (assert
-  (forall ((j Int)) (is_digit__function_guard
-  (is_digit (to_rep (select (elts source) j)))
-  (to_rep (select (elts source) j)))))
-
-;; H
-  (assert
-  (forall ((j Int)) (is_digit__function_guard
-  (is_digit (to_rep (select (elts source) j)))
-  (to_rep (select (elts source) j)))))
-
-;; H
-  (assert
-  (forall ((j Int)) (is_digit__function_guard
-  (is_digit (to_rep (select (elts source) j)))
-  (to_rep (select (elts source) j)))))
-
-;; H
-  (assert
-  (forall ((j Int)) (is_digit__function_guard
-  (is_digit (to_rep (select (elts source) j)))
-  (to_rep (select (elts source) j)))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (to_rep1 (first (rt source))))))
-  (to_rep (select (elts source) (to_rep1 (first (rt source)))))))
-
-;; H
-  (assert
   (or
   (and
   (and
@@ -1217,14 +1164,14 @@
   (= target15 (mk_int__ref target8))))
   (and (= i14 i8) (and (= has_failed16 has_failed9) (= target16 target9))))
   (and
-  (and (= temp___1034 (+ (to_rep1 (first (rt source))) 1)) (in_range1
+  (and (= temp___883 (+ (to_rep1 (first (rt source))) 1)) (in_range1
   (+ (to_rep1 (first (rt source))) 1)))
-  (and (= temp___1035 (to_rep1 (last (rt source))))
-  (and (and (= result26 i49) (= i4 temp___1034))
-  (and (and (<= temp___1034 i4) (<= i4 temp___1035))
-  (and (= temp___1031 target4)
-  (and (= temp___1030 i4)
-  (and (= temp___1029 has_failed4)
+  (and (= temp___884 (to_rep1 (last (rt source))))
+  (and (and (= result26 i49) (= i4 temp___883))
+  (and (and (<= temp___883 i4) (<= i4 temp___884))
+  (and (= temp___882 target4)
+  (and (= temp___881 i4)
+  (and (= temp___880 has_failed4)
   (or
   (and
   (and
@@ -1240,7 +1187,7 @@
   (and (<= (to_rep1 (first (rt source))) i4)
   (<= i4 (to_rep1 (last (rt source))))) (= o3 i4))
   (= o4 (select (elts source) o3))) (= o5 (to_rep o4)))
-  (and (and (= o6 (is_digit o5)) (is_digit__function_guard o6 o5))
+  (and (= o6 (is_digit o5))
   (ite (= (= o5 48) true) (= o6 true)
   (ite (= (= o5 49) true) (= o6 true)
   (ite (= (= o5 50) true) (= o6 true)
@@ -1267,7 +1214,7 @@
   (and (<= (to_rep1 (first (rt source))) i4)
   (<= i4 (to_rep1 (last (rt source))))) (= o3 i4))
   (= o4 (select (elts source) o3))) (= o5 (to_rep o4)))
-  (and (and (= o6 (is_digit o5)) (is_digit__function_guard o6 o5))
+  (and (= o6 (is_digit o5))
   (ite (= (= o5 48) true) (= o6 true)
   (ite (= (= o5 49) true) (= o6 true)
   (ite (= (= o5 50) true) (= o6 true)
@@ -1301,7 +1248,7 @@
   (=> (<= (- 2147483648) 2147483647) (in_range1 target6)))
   (and (<= (+ (to_rep1 (first (rt source))) 1) i5)
   (<= i5 (to_rep1 (last (rt source))))))
-  (and (not (= i5 temp___1035))
+  (and (not (= i5 temp___884))
   (and (and (= i5 result11) (= i6 (+ i5 1)))
   (and
   (and
@@ -1312,7 +1259,7 @@
   (and (<= (to_rep1 (first (rt source))) i6)
   (<= i6 (to_rep1 (last (rt source))))) (= o7 i6))
   (= o8 (select (elts source) o7))) (= o9 (to_rep o8)))
-  (and (and (= o10 (is_digit o9)) (is_digit__function_guard o10 o9))
+  (and (= o10 (is_digit o9))
   (ite (= (= o9 48) true) (= o10 true)
   (ite (= (= o9 49) true) (= o10 true)
   (ite (= (= o9 50) true) (= o10 true)
@@ -1352,13 +1299,13 @@
   (and
   (and (= i26 i20) (and (= has_failed30 has_failed23) (= target30 target23)))
   (and (= i27 i21) (and (= has_failed31 has_failed24) (= target31 target24))))
-  (and (= temp___1026 (to_rep1 (first (rt source))))
-  (and (= temp___1027 (to_rep1 (last (rt source))))
-  (and (and (= result17 i48) (= i17 temp___1026))
-  (and (and (<= temp___1026 i17) (<= i17 temp___1027))
-  (and (= temp___1023 target19)
-  (and (= temp___1022 i17)
-  (and (= temp___1021 has_failed19)
+  (and (= temp___877 (to_rep1 (first (rt source))))
+  (and (= temp___878 (to_rep1 (last (rt source))))
+  (and (and (= result17 i48) (= i17 temp___877))
+  (and (and (<= temp___877 i17) (<= i17 temp___878))
+  (and (= temp___876 target19)
+  (and (= temp___875 i17)
+  (and (= temp___874 has_failed19)
   (or
   (and
   (and
@@ -1368,9 +1315,7 @@
   (and (= i21 i17) (and (= has_failed24 has_failed20) (= target24 target20))))
   (and
   (and
-  (and
   (and (= o11 (is_digit (to_rep (select (elts source) i17))))
-  (is_digit__function_guard o11 (to_rep (select (elts source) i17))))
   (ite (= (= (to_rep (select (elts source) i17)) 48) true) (= o11 true)
   (ite (= (= (to_rep (select (elts source) i17)) 49) true) (= o11 true)
   (ite (= (= (to_rep (select (elts source) i17)) 50) true) (= o11 true)
@@ -1390,9 +1335,7 @@
   (and
   (and
   (and
-  (and
   (and (= o11 (is_digit (to_rep (select (elts source) i17))))
-  (is_digit__function_guard o11 (to_rep (select (elts source) i17))))
   (ite (= (= (to_rep (select (elts source) i17)) 48) true) (= o11 true)
   (ite (= (= (to_rep (select (elts source) i17)) 49) true) (= o11 true)
   (ite (= (= (to_rep (select (elts source) i17)) 50) true) (= o11 true)
@@ -1427,13 +1370,11 @@
   (=> (<= (- 2147483648) 2147483647) (in_range1 target21)))
   (and (<= (to_rep1 (first (rt source))) i18)
   (<= i18 (to_rep1 (last (rt source))))))
-  (and (not (= i18 temp___1027))
+  (and (not (= i18 temp___878))
   (and (and (= result21 (mk_int__ref i18)) (= i19 (+ i18 1)))
   (and
   (and
-  (and
   (and (= o12 (is_digit (to_rep (select (elts source) i19))))
-  (is_digit__function_guard o12 (to_rep (select (elts source) i19))))
   (ite (= (= (to_rep (select (elts source) i19)) 48) true) (= o12 true)
   (ite (= (= (to_rep (select (elts source) i19)) 49) true) (= o12 true)
   (ite (= (= (to_rep (select (elts source) i19)) 50) true) (= o12 true)
@@ -1470,15 +1411,15 @@
   (and (= has_failed4 has_failed3) (= target4 target3)))
   (and
   (and
-  (and (= temp___1034 (+ (to_rep1 (first (rt source))) 1)) (in_range1
+  (and (= temp___883 (+ (to_rep1 (first (rt source))) 1)) (in_range1
   (+ (to_rep1 (first (rt source))) 1)))
-  (and (and (= result26 i49) (= i4 temp___1034))
-  (ite (and (<= temp___1034 i4) (<= i4 (to_rep1 (last (rt source)))))
+  (and (and (= result26 i49) (= i4 temp___883))
+  (ite (and (<= temp___883 i4) (<= i4 (to_rep1 (last (rt source)))))
   (and
   (and
-  (and (= temp___1031 target4)
-  (and (= temp___1030 i4)
-  (and (= temp___1029 has_failed4)
+  (and (= temp___882 target4)
+  (and (= temp___881 i4)
+  (and (= temp___880 has_failed4)
   (and
   (and
   (and
@@ -1489,7 +1430,7 @@
   (and (<= (to_rep1 (first (rt source))) i4)
   (<= i4 (to_rep1 (last (rt source))))) (= o3 i4))
   (= o4 (select (elts source) o3))) (= o5 (to_rep o4)))
-  (and (and (= o6 (is_digit o5)) (is_digit__function_guard o6 o5))
+  (and (= o6 (is_digit o5))
   (ite (= (= o5 48) true) (= o6 true)
   (ite (= (= o5 49) true) (= o6 true)
   (ite (= (= o5 50) true) (= o6 true)
@@ -1663,15 +1604,13 @@
        (<= i17 (to_rep1 (last (rt source)))))
   (and
   (and
-  (and (= temp___1023 target19)
-  (and (= temp___1022 i17)
-  (and (= temp___1021 has_failed19)
-  (and
+  (and (= temp___876 target19)
+  (and (= temp___875 i17)
+  (and (= temp___874 has_failed19)
   (and
   (and
   (and
   (and (= o11 (is_digit (to_rep (select (elts source) i17))))
-  (is_digit__function_guard o11 (to_rep (select (elts source) i17))))
   (ite (= (= (to_rep (select (elts source) i17)) 48) true) (= o11 true)
   (ite (= (= (to_rep (select (elts source) i17)) 49) true) (= o11 true)
   (ite (= (= (to_rep (select (elts source) i17)) 50) true) (= o11 true)
@@ -1875,17 +1814,6 @@
   (=> (= (= (length source) 0) true) (= (bool__content has_failed40) true)))
 
 ;; H
-  (assert (is_digit__function_guard
-  (is_digit (to_rep (select (elts source) (to_rep1 (first (rt source))))))
-  (to_rep (select (elts source) (to_rep1 (first (rt source)))))))
-
-;; H
-  (assert (convert_character_digit_to_integer__function_guard
-  (convert_character_digit_to_integer
-  (to_rep (select (elts source) (to_rep1 (first (rt source))))))
-  (to_rep (select (elts source) (to_rep1 (first (rt source)))))))
-
-;; H
   (assert
   (=> (= (= (length source) 1) true)
   (ite (= (to_rep (select (elts source) (to_rep1 (first (rt source))))) 45)
@@ -1898,18 +1826,6 @@
                              (select (elts source) (to_rep1
                                                    (first (rt source))))))))
   (= (bool__content has_failed40) true)))))
-
-;; H
-  (assert
-  (forall ((index Int)) (is_digit__function_guard
-  (is_digit (to_rep (select (elts source) index)))
-  (to_rep (select (elts source) index)))))
-
-;; H
-  (assert
-  (forall ((index Int)) (is_digit__function_guard
-  (is_digit (to_rep (select (elts source) index)))
-  (to_rep (select (elts source) index)))))
 
 ;; H
   (assert
@@ -1936,12 +1852,6 @@
 
 ;; H
   (assert
-  (forall ((index Int)) (is_digit__function_guard
-  (is_digit (to_rep (select (elts source) index)))
-  (to_rep (select (elts source) index)))))
-
-;; H
-  (assert
   (= (= result25 true)
   (forall ((index Int))
   (=>
@@ -1954,16 +1864,16 @@
 
 ;; H
   (assert
-  (and (= temp___1103 (+ (to_rep1 (first (rt source))) 0)) (in_range1
+  (and (= temp___944 (+ (to_rep1 (first (rt source))) 0)) (in_range1
   (+ (to_rep1 (first (rt source))) 0))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___1103)
-  (<= temp___1103 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___944)
+  (<= temp___944 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o108 temp___1103))
+  (assert (= o108 temp___944))
 
 ;; H
   (assert (= o109 (select (elts source) o108)))
@@ -1976,16 +1886,16 @@
 
 ;; H
   (assert
-  (and (= temp___1102 (+ (to_rep1 (first (rt source))) 1)) (in_range1
+  (and (= temp___943 (+ (to_rep1 (first (rt source))) 1)) (in_range1
   (+ (to_rep1 (first (rt source))) 1))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___1102)
-  (<= temp___1102 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___943)
+  (<= temp___943 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o102 temp___1102))
+  (assert (= o102 temp___943))
 
 ;; H
   (assert (= o103 (select (elts source) o102)))
@@ -1998,16 +1908,16 @@
 
 ;; H
   (assert
-  (and (= temp___1101 (+ (to_rep1 (first (rt source))) 0)) (in_range1
+  (and (= temp___942 (+ (to_rep1 (first (rt source))) 0)) (in_range1
   (+ (to_rep1 (first (rt source))) 0))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___1101)
-  (<= temp___1101 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___942)
+  (<= temp___942 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o99 temp___1101))
+  (assert (= o99 temp___942))
 
 ;; H
   (assert (= o100 (select (elts source) o99)))
@@ -2023,16 +1933,16 @@
 
 ;; H
   (assert
-  (and (= temp___1100 (+ (to_rep1 (first (rt source))) 2)) (in_range1
+  (and (= temp___941 (+ (to_rep1 (first (rt source))) 2)) (in_range1
   (+ (to_rep1 (first (rt source))) 2))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___1100)
-  (<= temp___1100 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___941)
+  (<= temp___941 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o93 temp___1100))
+  (assert (= o93 temp___941))
 
 ;; H
   (assert (= o94 (select (elts source) o93)))
@@ -2045,16 +1955,16 @@
 
 ;; H
   (assert
-  (and (= temp___1099 (+ (to_rep1 (first (rt source))) 1)) (in_range1
+  (and (= temp___940 (+ (to_rep1 (first (rt source))) 1)) (in_range1
   (+ (to_rep1 (first (rt source))) 1))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___1099)
-  (<= temp___1099 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___940)
+  (<= temp___940 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o88 temp___1099))
+  (assert (= o88 temp___940))
 
 ;; H
   (assert (= o89 (select (elts source) o88)))
@@ -2067,16 +1977,16 @@
 
 ;; H
   (assert
-  (and (= temp___1098 (+ (to_rep1 (first (rt source))) 0)) (in_range1
+  (and (= temp___939 (+ (to_rep1 (first (rt source))) 0)) (in_range1
   (+ (to_rep1 (first (rt source))) 0))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___1098)
-  (<= temp___1098 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___939)
+  (<= temp___939 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o85 temp___1098))
+  (assert (= o85 temp___939))
 
 ;; H
   (assert (= o86 (select (elts source) o85)))
@@ -2095,16 +2005,16 @@
 
 ;; H
   (assert
-  (and (= temp___1097 (+ (to_rep1 (first (rt source))) 3)) (in_range1
+  (and (= temp___938 (+ (to_rep1 (first (rt source))) 3)) (in_range1
   (+ (to_rep1 (first (rt source))) 3))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___1097)
-  (<= temp___1097 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___938)
+  (<= temp___938 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o79 temp___1097))
+  (assert (= o79 temp___938))
 
 ;; H
   (assert (= o80 (select (elts source) o79)))
@@ -2117,16 +2027,16 @@
 
 ;; H
   (assert
-  (and (= temp___1096 (+ (to_rep1 (first (rt source))) 2)) (in_range1
+  (and (= temp___937 (+ (to_rep1 (first (rt source))) 2)) (in_range1
   (+ (to_rep1 (first (rt source))) 2))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___1096)
-  (<= temp___1096 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___937)
+  (<= temp___937 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o74 temp___1096))
+  (assert (= o74 temp___937))
 
 ;; H
   (assert (= o75 (select (elts source) o74)))
@@ -2139,16 +2049,16 @@
 
 ;; H
   (assert
-  (and (= temp___1095 (+ (to_rep1 (first (rt source))) 1)) (in_range1
+  (and (= temp___936 (+ (to_rep1 (first (rt source))) 1)) (in_range1
   (+ (to_rep1 (first (rt source))) 1))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___1095)
-  (<= temp___1095 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___936)
+  (<= temp___936 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o69 temp___1095))
+  (assert (= o69 temp___936))
 
 ;; H
   (assert (= o70 (select (elts source) o69)))
@@ -2161,16 +2071,16 @@
 
 ;; H
   (assert
-  (and (= temp___1094 (+ (to_rep1 (first (rt source))) 0)) (in_range1
+  (and (= temp___935 (+ (to_rep1 (first (rt source))) 0)) (in_range1
   (+ (to_rep1 (first (rt source))) 0))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___1094)
-  (<= temp___1094 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___935)
+  (<= temp___935 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o66 temp___1094))
+  (assert (= o66 temp___935))
 
 ;; H
   (assert (= o67 (select (elts source) o66)))
@@ -2192,16 +2102,16 @@
 
 ;; H
   (assert
-  (and (= temp___1093 (+ (to_rep1 (first (rt source))) 4)) (in_range1
+  (and (= temp___934 (+ (to_rep1 (first (rt source))) 4)) (in_range1
   (+ (to_rep1 (first (rt source))) 4))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___1093)
-  (<= temp___1093 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___934)
+  (<= temp___934 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o60 temp___1093))
+  (assert (= o60 temp___934))
 
 ;; H
   (assert (= o61 (select (elts source) o60)))
@@ -2214,16 +2124,16 @@
 
 ;; H
   (assert
-  (and (= temp___1092 (+ (to_rep1 (first (rt source))) 3)) (in_range1
+  (and (= temp___933 (+ (to_rep1 (first (rt source))) 3)) (in_range1
   (+ (to_rep1 (first (rt source))) 3))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___1092)
-  (<= temp___1092 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___933)
+  (<= temp___933 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o55 temp___1092))
+  (assert (= o55 temp___933))
 
 ;; H
   (assert (= o56 (select (elts source) o55)))
@@ -2236,16 +2146,16 @@
 
 ;; H
   (assert
-  (and (= temp___1091 (+ (to_rep1 (first (rt source))) 2)) (in_range1
+  (and (= temp___932 (+ (to_rep1 (first (rt source))) 2)) (in_range1
   (+ (to_rep1 (first (rt source))) 2))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___1091)
-  (<= temp___1091 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___932)
+  (<= temp___932 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o50 temp___1091))
+  (assert (= o50 temp___932))
 
 ;; H
   (assert (= o51 (select (elts source) o50)))
@@ -2258,16 +2168,16 @@
 
 ;; H
   (assert
-  (and (= temp___1090 (+ (to_rep1 (first (rt source))) 1)) (in_range1
+  (and (= temp___931 (+ (to_rep1 (first (rt source))) 1)) (in_range1
   (+ (to_rep1 (first (rt source))) 1))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___1090)
-  (<= temp___1090 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___931)
+  (<= temp___931 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o45 temp___1090))
+  (assert (= o45 temp___931))
 
 ;; H
   (assert (= o46 (select (elts source) o45)))
@@ -2280,16 +2190,16 @@
 
 ;; H
   (assert
-  (and (= temp___1089 (+ (to_rep1 (first (rt source))) 0)) (in_range1
+  (and (= temp___930 (+ (to_rep1 (first (rt source))) 0)) (in_range1
   (+ (to_rep1 (first (rt source))) 0))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___1089)
-  (<= temp___1089 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___930)
+  (<= temp___930 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o42 temp___1089))
+  (assert (= o42 temp___930))
 
 ;; H
   (assert (= o43 (select (elts source) o42)))
@@ -2314,16 +2224,16 @@
 
 ;; H
   (assert
-  (and (= temp___1088 (+ (to_rep1 (first (rt source))) 5)) (in_range1
+  (and (= temp___929 (+ (to_rep1 (first (rt source))) 5)) (in_range1
   (+ (to_rep1 (first (rt source))) 5))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___1088)
-  (<= temp___1088 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___929)
+  (<= temp___929 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o36 temp___1088))
+  (assert (= o36 temp___929))
 
 ;; H
   (assert (= o37 (select (elts source) o36)))
@@ -2336,16 +2246,16 @@
 
 ;; H
   (assert
-  (and (= temp___1087 (+ (to_rep1 (first (rt source))) 4)) (in_range1
+  (and (= temp___928 (+ (to_rep1 (first (rt source))) 4)) (in_range1
   (+ (to_rep1 (first (rt source))) 4))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___1087)
-  (<= temp___1087 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___928)
+  (<= temp___928 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o31 temp___1087))
+  (assert (= o31 temp___928))
 
 ;; H
   (assert (= o32 (select (elts source) o31)))
@@ -2358,16 +2268,16 @@
 
 ;; H
   (assert
-  (and (= temp___1086 (+ (to_rep1 (first (rt source))) 3)) (in_range1
+  (and (= temp___927 (+ (to_rep1 (first (rt source))) 3)) (in_range1
   (+ (to_rep1 (first (rt source))) 3))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___1086)
-  (<= temp___1086 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___927)
+  (<= temp___927 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o26 temp___1086))
+  (assert (= o26 temp___927))
 
 ;; H
   (assert (= o27 (select (elts source) o26)))
@@ -2380,16 +2290,16 @@
 
 ;; H
   (assert
-  (and (= temp___1085 (+ (to_rep1 (first (rt source))) 2)) (in_range1
+  (and (= temp___926 (+ (to_rep1 (first (rt source))) 2)) (in_range1
   (+ (to_rep1 (first (rt source))) 2))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___1085)
-  (<= temp___1085 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___926)
+  (<= temp___926 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o21 temp___1085))
+  (assert (= o21 temp___926))
 
 ;; H
   (assert (= o22 (select (elts source) o21)))
@@ -2402,16 +2312,16 @@
 
 ;; H
   (assert
-  (and (= temp___1084 (+ (to_rep1 (first (rt source))) 1)) (in_range1
+  (and (= temp___925 (+ (to_rep1 (first (rt source))) 1)) (in_range1
   (+ (to_rep1 (first (rt source))) 1))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___1084)
-  (<= temp___1084 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___925)
+  (<= temp___925 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o16 temp___1084))
+  (assert (= o16 temp___925))
 
 ;; H
   (assert (= o17 (select (elts source) o16)))
@@ -2424,16 +2334,16 @@
 
 ;; H
   (assert
-  (and (= temp___1083 (+ (to_rep1 (first (rt source))) 0)) (in_range1
+  (and (= temp___924 (+ (to_rep1 (first (rt source))) 0)) (in_range1
   (+ (to_rep1 (first (rt source))) 0))))
 
 ;; H
   (assert
-  (and (<= (to_rep1 (first (rt source))) temp___1083)
-  (<= temp___1083 (to_rep1 (last (rt source))))))
+  (and (<= (to_rep1 (first (rt source))) temp___924)
+  (<= temp___924 (to_rep1 (last (rt source))))))
 
 ;; H
-  (assert (= o13 temp___1083))
+  (assert (= o13 temp___924))
 
 ;; H
   (assert (= o14 (select (elts source) o13)))

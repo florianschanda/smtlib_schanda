@@ -328,11 +328,10 @@
   (assert
   (forall ((a (Array Int integer)))
   (forall ((max Int))
-  (! (=> (all_elements_in__function_guard (all_elements_in a max) a max)
-     (= (= (all_elements_in a max) true)
+  (! (= (= (all_elements_in a max) true)
      (forall ((k Int))
      (=> (and (<= 0 k) (<= k 7))
-     (and (<= (- max) (to_rep (select a k))) (<= (to_rep (select a k)) max)))))) :pattern (
+     (and (<= (- max) (to_rep (select a k))) (<= (to_rep (select a k)) max))))) :pattern (
   (all_elements_in a max)) ))))
 
 (declare-fun a () (Array Int integer))
@@ -381,14 +380,6 @@
 (declare-fun o10 () integer)
 
 (declare-fun o11 () Int)
-
-;; H
-  (assert (all_elements_in__function_guard (all_elements_in a 8000000) 
-  a 8000000))
-
-;; H
-  (assert (all_elements_in__function_guard (all_elements_in b 1000000) 
-  b 1000000))
 
 ;; H
   (assert

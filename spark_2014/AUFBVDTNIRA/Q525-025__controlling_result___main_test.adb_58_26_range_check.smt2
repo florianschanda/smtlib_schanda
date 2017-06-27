@@ -990,27 +990,20 @@
 
 ;; elements__post_axiom
   (assert
-  (forall ((this us_rep))
-  (! (let ((result (elements this)))
-     (=> (elements__function_guard result this) (dynamic_invariant2 result
-     true false true))) :pattern ((elements this)) )))
+  (forall ((this us_rep)) (! (dynamic_invariant2 (elements this) true false
+  true) :pattern ((elements this)) )))
 
 ;; elements__post__dispatch_axiom
   (assert
   (forall ((attr__tag1 Int))
-  (forall ((this us_rep))
-  (! (let ((result (elements1 attr__tag1 this)))
-     (=> (elements__function_guard1 result attr__tag1 this)
-     (dynamic_invariant2 result true false true))) :pattern ((elements1
-                                                             attr__tag1 this)) ))))
+  (forall ((this us_rep)) (! (dynamic_invariant2 (elements1 attr__tag1 this)
+  true false true) :pattern ((elements1 attr__tag1 this)) ))))
 
 ;; fixed_string__object__compat_axiom
   (assert
   (forall ((this us_rep))
-  (! (=> (elements__function_guard1 (elements1 us_tag this) us_tag this)
-     (and (elements__function_guard (elements this) this)
-     (= (elements this) (elements1 us_tag this)))) :pattern ((elements1
-                                                             us_tag this)) )))
+  (! (= (elements this) (elements1 us_tag this)) :pattern ((elements1 
+                                                           us_tag this)) )))
 
 (define-fun dynamic_invariant3 ((temp___expr_82 us_t)
   (temp___is_init_79 Bool) (temp___skip_constant_80 Bool)
@@ -1036,9 +1029,7 @@
      (and (dynamic_invariant2 elem_width true true true) (dynamic_invariant3
      name true true true))
      (let ((result (create elem_width name)))
-     (and (elements__function_guard (elements result) result)
-     (=> (create__function_guard result elem_width name)
-     (and (= (elements result) elem_width) (= (attr__tag result) us_tag)))))) :pattern (
+     (and (= (elements result) elem_width) (= (attr__tag result) us_tag)))) :pattern (
   (create elem_width name)) ))))
 
 ;; create__post__dispatch_axiom
@@ -1048,19 +1039,14 @@
   (! (=>
      (and (dynamic_invariant2 elem_width true true true) (dynamic_invariant3
      name true true true))
-     (let ((result (create1 attr__tag1 elem_width name)))
-     (=> (create__function_guard1 result attr__tag1 elem_width name)
-     (= (attr__tag result) attr__tag1)))) :pattern ((create1 attr__tag1
-                                                    elem_width name)) ))))
+     (= (attr__tag (create1 attr__tag1 elem_width name)) attr__tag1)) :pattern (
+  (create1 attr__tag1 elem_width name)) ))))
 
 ;; fixed_string__object__compat_axiom
   (assert
   (forall ((elem_width Int))
   (forall ((name us_t))
-  (! (=> (create__function_guard1 (create1 us_tag elem_width name) us_tag
-     elem_width name)
-     (and (create__function_guard (create elem_width name) elem_width name)
-     (= (create elem_width name) (create1 us_tag elem_width name)))) :pattern (
+  (! (= (create elem_width name) (create1 us_tag elem_width name)) :pattern (
   (create1 us_tag elem_width name)) ))))
 
 (declare-fun null_string (us_rep) us_t)
@@ -1075,29 +1061,21 @@
   (assert
   (forall ((this us_rep))
   (! (let ((result (null_string this)))
-     (and (elements__function_guard (elements this) this)
-     (=> (null_string__function_guard result this)
      (and (= (length result) (elements this)) (dynamic_invariant3 result true
-     false true))))) :pattern ((null_string this)) )))
+     false true))) :pattern ((null_string this)) )))
 
 ;; null_string__post__dispatch_axiom
   (assert
   (forall ((attr__tag1 Int))
-  (forall ((this us_rep))
-  (! (let ((result (null_string1 attr__tag1 this)))
-     (=> (null_string__function_guard1 result attr__tag1 this)
-     (dynamic_invariant3 result true false true))) :pattern ((null_string1
-                                                             attr__tag1 this)) ))))
+  (forall ((this us_rep)) (! (dynamic_invariant3
+  (null_string1 attr__tag1 this) true false
+  true) :pattern ((null_string1 attr__tag1 this)) ))))
 
 ;; fixed_string__object__compat_axiom
   (assert
   (forall ((this us_rep))
-  (! (=> (null_string__function_guard1 (null_string1 us_tag this) us_tag
-     this)
-     (and (null_string__function_guard (null_string this) this)
-     (= (null_string this) (null_string1 us_tag this)))) :pattern ((null_string1
-                                                                   us_tag
-                                                                   this)) )))
+  (! (= (null_string this) (null_string1 us_tag this)) :pattern ((null_string1
+                                                                 us_tag this)) )))
 
 (declare-fun convert (us_rep us_t) us_t)
 
@@ -1113,31 +1091,23 @@
   (forall ((in_string us_t))
   (! (=> (dynamic_invariant3 in_string true true true)
      (let ((result (convert this in_string)))
-     (and (elements__function_guard (elements this) this)
-     (=> (convert__function_guard result this in_string)
      (and (= (length result) (elements this)) (dynamic_invariant3 result true
-     false true)))))) :pattern ((convert this in_string)) ))))
+     false true)))) :pattern ((convert this in_string)) ))))
 
 ;; convert__post__dispatch_axiom
   (assert
   (forall ((attr__tag1 Int))
   (forall ((this us_rep))
   (forall ((in_string us_t))
-  (! (=> (dynamic_invariant3 in_string true true true)
-     (let ((result (convert1 attr__tag1 this in_string)))
-     (=> (convert__function_guard1 result attr__tag1 this in_string)
-     (dynamic_invariant3 result true false true)))) :pattern ((convert1
-                                                              attr__tag1 this
-                                                              in_string)) )))))
+  (! (=> (dynamic_invariant3 in_string true true true) (dynamic_invariant3
+     (convert1 attr__tag1 this in_string) true false true)) :pattern (
+  (convert1 attr__tag1 this in_string)) )))))
 
 ;; fixed_string__object__compat_axiom
   (assert
   (forall ((this us_rep))
   (forall ((in_string us_t))
-  (! (=> (convert__function_guard1 (convert1 us_tag this in_string) us_tag
-     this in_string)
-     (and (convert__function_guard (convert this in_string) this in_string)
-     (= (convert this in_string) (convert1 us_tag this in_string)))) :pattern (
+  (! (= (convert this in_string) (convert1 us_tag this in_string)) :pattern (
   (convert1 us_tag this in_string)) ))))
 
 (declare-fun dummy12 () (Array Int character))
@@ -1280,26 +1250,26 @@
 (define-fun object__ref_2__projection ((a object__ref1)) us_rep1 (object__content1
                                                                  a))
 
-(declare-fun temp___221 (Int) (Array Int character))
+(declare-fun temp___211 (Int) (Array Int character))
 
 ;; def_axiom
   (assert
-  (forall ((temp___223 Int))
-  (forall ((temp___224 Int))
-  (= (select (temp___221 temp___223) temp___224) (of_rep temp___223)))))
+  (forall ((temp___213 Int))
+  (forall ((temp___214 Int))
+  (= (select (temp___211 temp___213) temp___214) (of_rep temp___213)))))
 
-(define-fun default_initial_assumption1 ((temp___expr_219 us_rep1)
-  (temp___skip_top_level_220 Bool)) Bool (and
-                                         (= (attr__tag1 temp___expr_219) 
+(define-fun default_initial_assumption1 ((temp___expr_209 us_rep1)
+  (temp___skip_top_level_210 Bool)) Bool (and
+                                         (= (attr__tag1 temp___expr_209) 
                                          us_tag1)
                                          (and
                                          (= (to_rep4
                                             (rec__fixed_stream__object__width
                                             (us_split_fields3
-                                            temp___expr_219))) 0)
+                                            temp___expr_209))) 0)
                                          (= (rec__fixed_stream__object__name
                                             (us_split_fields3
-                                            temp___expr_219)) (temp___221 0)))))
+                                            temp___expr_209)) (temp___211 0)))))
 
 (declare-fun elements2 (us_rep1) Int)
 
@@ -1311,27 +1281,20 @@
 
 ;; elements__post_axiom
   (assert
-  (forall ((this us_rep1))
-  (! (let ((result (elements2 this)))
-     (=> (elements__function_guard2 result this) (dynamic_invariant2 result
-     true false true))) :pattern ((elements2 this)) )))
+  (forall ((this us_rep1)) (! (dynamic_invariant2 (elements2 this) true false
+  true) :pattern ((elements2 this)) )))
 
 ;; elements__post__dispatch_axiom
   (assert
   (forall ((attr__tag2 Int))
-  (forall ((this us_rep1))
-  (! (let ((result (elements3 attr__tag2 this)))
-     (=> (elements__function_guard3 result attr__tag2 this)
-     (dynamic_invariant2 result true false true))) :pattern ((elements3
-                                                             attr__tag2 this)) ))))
+  (forall ((this us_rep1)) (! (dynamic_invariant2 (elements3 attr__tag2 this)
+  true false true) :pattern ((elements3 attr__tag2 this)) ))))
 
 ;; fixed_stream__object__compat_axiom
   (assert
   (forall ((this us_rep1))
-  (! (=> (elements__function_guard3 (elements3 us_tag1 this) us_tag1 this)
-     (and (elements__function_guard2 (elements2 this) this)
-     (= (elements2 this) (elements3 us_tag1 this)))) :pattern ((elements3
-                                                               us_tag1 this)) )))
+  (! (= (elements2 this) (elements3 us_tag1 this)) :pattern ((elements3
+                                                             us_tag1 this)) )))
 
 (declare-fun create2 (Int us_t) us_rep1)
 
@@ -1349,9 +1312,7 @@
      (and (dynamic_invariant2 elem_width true true true) (dynamic_invariant3
      name true true true))
      (let ((result (create2 elem_width name)))
-     (and (elements__function_guard2 (elements2 result) result)
-     (=> (create__function_guard2 result elem_width name)
-     (and (= (elements2 result) elem_width) (= (attr__tag1 result) us_tag1)))))) :pattern (
+     (and (= (elements2 result) elem_width) (= (attr__tag1 result) us_tag1)))) :pattern (
   (create2 elem_width name)) ))))
 
 ;; create__post__dispatch_axiom
@@ -1361,19 +1322,14 @@
   (! (=>
      (and (dynamic_invariant2 elem_width true true true) (dynamic_invariant3
      name true true true))
-     (let ((result (create3 attr__tag2 elem_width name)))
-     (=> (create__function_guard3 result attr__tag2 elem_width name)
-     (= (attr__tag1 result) attr__tag2)))) :pattern ((create3 attr__tag2
-                                                     elem_width name)) ))))
+     (= (attr__tag1 (create3 attr__tag2 elem_width name)) attr__tag2)) :pattern (
+  (create3 attr__tag2 elem_width name)) ))))
 
 ;; fixed_stream__object__compat_axiom
   (assert
   (forall ((elem_width Int))
   (forall ((name us_t))
-  (! (=> (create__function_guard3 (create3 us_tag1 elem_width name) us_tag1
-     elem_width name)
-     (and (create__function_guard2 (create2 elem_width name) elem_width name)
-     (= (create2 elem_width name) (create3 us_tag1 elem_width name)))) :pattern (
+  (! (= (create2 elem_width name) (create3 us_tag1 elem_width name)) :pattern (
   (create3 us_tag1 elem_width name)) ))))
 
 (define-fun dynamic_invariant4 ((temp___expr_160 us_t1)
@@ -1398,28 +1354,22 @@
   (assert
   (forall ((this us_rep1))
   (! (let ((result (null_string2 this)))
-     (and (elements__function_guard2 (elements2 this) this)
-     (=> (null_string__function_guard2 result this)
      (and (= (length1 result) (elements2 this)) (dynamic_invariant4 result
-     true false true))))) :pattern ((null_string2 this)) )))
+     true false true))) :pattern ((null_string2 this)) )))
 
 ;; null_string__post__dispatch_axiom
   (assert
   (forall ((attr__tag2 Int))
-  (forall ((this us_rep1))
-  (! (let ((result (null_string3 attr__tag2 this)))
-     (=> (null_string__function_guard3 result attr__tag2 this)
-     (dynamic_invariant4 result true false true))) :pattern ((null_string3
-                                                             attr__tag2 this)) ))))
+  (forall ((this us_rep1)) (! (dynamic_invariant4
+  (null_string3 attr__tag2 this) true false
+  true) :pattern ((null_string3 attr__tag2 this)) ))))
 
 ;; fixed_stream__object__compat_axiom
   (assert
   (forall ((this us_rep1))
-  (! (=> (null_string__function_guard3 (null_string3 us_tag1 this) us_tag1
-     this)
-     (and (null_string__function_guard2 (null_string2 this) this)
-     (= (null_string2 this) (null_string3 us_tag1 this)))) :pattern (
-  (null_string3 us_tag1 this)) )))
+  (! (= (null_string2 this) (null_string3 us_tag1 this)) :pattern ((null_string3
+                                                                   us_tag1
+                                                                   this)) )))
 
 (declare-fun convert2 (us_rep1 us_t) us_t1)
 
@@ -1435,31 +1385,23 @@
   (forall ((in_string us_t))
   (! (=> (dynamic_invariant3 in_string true true true)
      (let ((result (convert2 this in_string)))
-     (and (elements__function_guard2 (elements2 this) this)
-     (=> (convert__function_guard2 result this in_string)
      (and (= (length1 result) (elements2 this)) (dynamic_invariant4 result
-     true false true)))))) :pattern ((convert2 this in_string)) ))))
+     true false true)))) :pattern ((convert2 this in_string)) ))))
 
 ;; convert__post__dispatch_axiom
   (assert
   (forall ((attr__tag2 Int))
   (forall ((this us_rep1))
   (forall ((in_string us_t))
-  (! (=> (dynamic_invariant3 in_string true true true)
-     (let ((result (convert3 attr__tag2 this in_string)))
-     (=> (convert__function_guard3 result attr__tag2 this in_string)
-     (dynamic_invariant4 result true false true)))) :pattern ((convert3
-                                                              attr__tag2 this
-                                                              in_string)) )))))
+  (! (=> (dynamic_invariant3 in_string true true true) (dynamic_invariant4
+     (convert3 attr__tag2 this in_string) true false true)) :pattern (
+  (convert3 attr__tag2 this in_string)) )))))
 
 ;; fixed_stream__object__compat_axiom
   (assert
   (forall ((this us_rep1))
   (forall ((in_string us_t))
-  (! (=> (convert__function_guard3 (convert3 us_tag1 this in_string) 
-     us_tag1 this in_string)
-     (and (convert__function_guard2 (convert2 this in_string) this in_string)
-     (= (convert2 this in_string) (convert3 us_tag1 this in_string)))) :pattern (
+  (! (= (convert2 this in_string) (convert3 us_tag1 this in_string)) :pattern (
   (convert3 us_tag1 this in_string)) ))))
 
 (declare-fun field_10__attr__tag () Int)
@@ -1510,69 +1452,69 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS11 () Int)
 
-(declare-fun temp___String_Literal_296 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_275 (tuple0) (Array Int character))
 
-;; temp___String_Literal_296__def_axiom
+;; temp___String_Literal_275__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_296 us_void_param) 1)) 76)
-     (= (to_rep (select (temp___String_Literal_296 us_void_param) 2)) 111))
-     (= (to_rep (select (temp___String_Literal_296 us_void_param) 3)) 110))
-     (= (to_rep (select (temp___String_Literal_296 us_void_param) 4)) 103)) :pattern (
-  (temp___String_Literal_296 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_275 us_void_param) 1)) 76)
+     (= (to_rep (select (temp___String_Literal_275 us_void_param) 2)) 111))
+     (= (to_rep (select (temp___String_Literal_275 us_void_param) 3)) 110))
+     (= (to_rep (select (temp___String_Literal_275 us_void_param) 4)) 103)) :pattern (
+  (temp___String_Literal_275 us_void_param)) )))
 
-(declare-fun temp___String_Literal_297 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_276 (tuple0) (Array Int character))
 
-;; temp___String_Literal_297__def_axiom
-  (assert
-  (forall ((us_void_param tuple0))
-  (! (and
-     (and
-     (and
-     (and
-     (= (to_rep (select (temp___String_Literal_297 us_void_param) 1)) 83)
-     (= (to_rep (select (temp___String_Literal_297 us_void_param) 2)) 104))
-     (= (to_rep (select (temp___String_Literal_297 us_void_param) 3)) 111))
-     (= (to_rep (select (temp___String_Literal_297 us_void_param) 4)) 114))
-     (= (to_rep (select (temp___String_Literal_297 us_void_param) 5)) 116)) :pattern (
-  (temp___String_Literal_297 us_void_param)) )))
-
-(declare-fun temp___String_Literal_298 (tuple0) (Array Int character))
-
-;; temp___String_Literal_298__def_axiom
-  (assert
-  (forall ((us_void_param tuple0))
-  (! (and
-     (and
-     (and
-     (= (to_rep (select (temp___String_Literal_298 us_void_param) 1)) 76)
-     (= (to_rep (select (temp___String_Literal_298 us_void_param) 2)) 111))
-     (= (to_rep (select (temp___String_Literal_298 us_void_param) 3)) 110))
-     (= (to_rep (select (temp___String_Literal_298 us_void_param) 4)) 103)) :pattern (
-  (temp___String_Literal_298 us_void_param)) )))
-
-(declare-fun temp___String_Literal_299 (tuple0) (Array Int character))
-
-;; temp___String_Literal_299__def_axiom
+;; temp___String_Literal_276__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_299 us_void_param) 1)) 83)
-     (= (to_rep (select (temp___String_Literal_299 us_void_param) 2)) 104))
-     (= (to_rep (select (temp___String_Literal_299 us_void_param) 3)) 111))
-     (= (to_rep (select (temp___String_Literal_299 us_void_param) 4)) 114))
-     (= (to_rep (select (temp___String_Literal_299 us_void_param) 5)) 116)) :pattern (
-  (temp___String_Literal_299 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_276 us_void_param) 1)) 83)
+     (= (to_rep (select (temp___String_Literal_276 us_void_param) 2)) 104))
+     (= (to_rep (select (temp___String_Literal_276 us_void_param) 3)) 111))
+     (= (to_rep (select (temp___String_Literal_276 us_void_param) 4)) 114))
+     (= (to_rep (select (temp___String_Literal_276 us_void_param) 5)) 116)) :pattern (
+  (temp___String_Literal_276 us_void_param)) )))
 
-(declare-fun temp___String_Literal_300 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_277 (tuple0) (Array Int character))
 
-;; temp___String_Literal_300__def_axiom
+;; temp___String_Literal_277__def_axiom
+  (assert
+  (forall ((us_void_param tuple0))
+  (! (and
+     (and
+     (and
+     (= (to_rep (select (temp___String_Literal_277 us_void_param) 1)) 76)
+     (= (to_rep (select (temp___String_Literal_277 us_void_param) 2)) 111))
+     (= (to_rep (select (temp___String_Literal_277 us_void_param) 3)) 110))
+     (= (to_rep (select (temp___String_Literal_277 us_void_param) 4)) 103)) :pattern (
+  (temp___String_Literal_277 us_void_param)) )))
+
+(declare-fun temp___String_Literal_278 (tuple0) (Array Int character))
+
+;; temp___String_Literal_278__def_axiom
+  (assert
+  (forall ((us_void_param tuple0))
+  (! (and
+     (and
+     (and
+     (and
+     (= (to_rep (select (temp___String_Literal_278 us_void_param) 1)) 83)
+     (= (to_rep (select (temp___String_Literal_278 us_void_param) 2)) 104))
+     (= (to_rep (select (temp___String_Literal_278 us_void_param) 3)) 111))
+     (= (to_rep (select (temp___String_Literal_278 us_void_param) 4)) 114))
+     (= (to_rep (select (temp___String_Literal_278 us_void_param) 5)) 116)) :pattern (
+  (temp___String_Literal_278 us_void_param)) )))
+
+(declare-fun temp___String_Literal_279 (tuple0) (Array Int character))
+
+;; temp___String_Literal_279__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -1586,31 +1528,31 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_300 us_void_param) 1)) 97)
-     (= (to_rep (select (temp___String_Literal_300 us_void_param) 2)) 98))
-     (= (to_rep (select (temp___String_Literal_300 us_void_param) 3)) 99))
-     (= (to_rep (select (temp___String_Literal_300 us_void_param) 4)) 100))
-     (= (to_rep (select (temp___String_Literal_300 us_void_param) 5)) 101))
-     (= (to_rep (select (temp___String_Literal_300 us_void_param) 6)) 102))
-     (= (to_rep (select (temp___String_Literal_300 us_void_param) 7)) 103))
-     (= (to_rep (select (temp___String_Literal_300 us_void_param) 8)) 104))
-     (= (to_rep (select (temp___String_Literal_300 us_void_param) 9)) 105))
-     (= (to_rep (select (temp___String_Literal_300 us_void_param) 10)) 106))
-     (= (to_rep (select (temp___String_Literal_300 us_void_param) 11)) 107))
-     (= (to_rep (select (temp___String_Literal_300 us_void_param) 12)) 108)) :pattern (
-  (temp___String_Literal_300 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_279 us_void_param) 1)) 97)
+     (= (to_rep (select (temp___String_Literal_279 us_void_param) 2)) 98))
+     (= (to_rep (select (temp___String_Literal_279 us_void_param) 3)) 99))
+     (= (to_rep (select (temp___String_Literal_279 us_void_param) 4)) 100))
+     (= (to_rep (select (temp___String_Literal_279 us_void_param) 5)) 101))
+     (= (to_rep (select (temp___String_Literal_279 us_void_param) 6)) 102))
+     (= (to_rep (select (temp___String_Literal_279 us_void_param) 7)) 103))
+     (= (to_rep (select (temp___String_Literal_279 us_void_param) 8)) 104))
+     (= (to_rep (select (temp___String_Literal_279 us_void_param) 9)) 105))
+     (= (to_rep (select (temp___String_Literal_279 us_void_param) 10)) 106))
+     (= (to_rep (select (temp___String_Literal_279 us_void_param) 11)) 107))
+     (= (to_rep (select (temp___String_Literal_279 us_void_param) 12)) 108)) :pattern (
+  (temp___String_Literal_279 us_void_param)) )))
 
-(declare-fun temp___String_Literal_302 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_281 (tuple0) (Array Int character))
 
-;; temp___String_Literal_302__def_axiom
+;; temp___String_Literal_281__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
      (and
-     (= (to_rep (select (temp___String_Literal_302 us_void_param) 1)) 102)
-     (= (to_rep (select (temp___String_Literal_302 us_void_param) 2)) 111))
-     (= (to_rep (select (temp___String_Literal_302 us_void_param) 3)) 111)) :pattern (
-  (temp___String_Literal_302 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_281 us_void_param) 1)) 102)
+     (= (to_rep (select (temp___String_Literal_281 us_void_param) 2)) 111))
+     (= (to_rep (select (temp___String_Literal_281 us_void_param) 3)) 111)) :pattern (
+  (temp___String_Literal_281 us_void_param)) )))
 
 (define-fun dynamic_invariant5 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -1702,9 +1644,9 @@
 
 (declare-fun main_test__stream_06__assume () us_rep1)
 
-(declare-fun temp___305 () us_t)
+(declare-fun temp___284 () us_t)
 
-(declare-fun temp___304 () us_t)
+(declare-fun temp___283 () us_t)
 
 (declare-fun o () Int)
 
@@ -1720,9 +1662,9 @@
 
 (declare-fun main_test__total_string__assume () us_t)
 
-(declare-fun temp___308 () us_t1)
+(declare-fun temp___287 () us_t1)
 
-(declare-fun temp___307 () us_t1)
+(declare-fun temp___286 () us_t1)
 
 (declare-fun o6 () Int)
 
@@ -1768,9 +1710,9 @@
 
 (declare-fun o26 () Int)
 
-(declare-fun temp___313 () us_t)
+(declare-fun temp___290 () us_t)
 
-(declare-fun temp___312 () us_t)
+(declare-fun temp___289 () us_t)
 
 (declare-fun o27 () Int)
 
@@ -1784,7 +1726,7 @@
 
 (declare-fun o32 () Int)
 
-(declare-fun temp___314 () us_t)
+(declare-fun temp___291 () us_t)
 
 (declare-fun o33 () us_t)
 
@@ -1798,9 +1740,9 @@
 
 (declare-fun o38 () Int)
 
-(declare-fun temp___316 () us_t1)
+(declare-fun temp___293 () us_t1)
 
-(declare-fun temp___315 () us_t1)
+(declare-fun temp___292 () us_t1)
 
 (declare-fun o39 () Int)
 
@@ -1814,7 +1756,7 @@
 
 (declare-fun o44 () Int)
 
-(declare-fun temp___317 () us_t1)
+(declare-fun temp___294 () us_t1)
 
 (declare-fun o45 () us_t1)
 
@@ -1916,18 +1858,11 @@
                                                    main_test__field_10__assume3))
 
 ;; H
-  (assert (elements__function_guard (elements main_test__field_10__assume4)
-  main_test__field_10__assume4))
-
-;; H
   (assert
   (and
-  (and
   (= main_test__field_10__assume4 (create 10
-                                  (mk___t (temp___String_Literal_296 Tuple0)
+                                  (mk___t (temp___String_Literal_275 Tuple0)
                                   (mk 1 4))))
-  (create__function_guard main_test__field_10__assume4 10
-  (mk___t (temp___String_Literal_296 Tuple0) (mk 1 4))))
   (= (elements main_test__field_10__assume4) 10)))
 
 ;; H
@@ -1946,18 +1881,11 @@
   (assert (= field_10__attr__tag us_tag))
 
 ;; H
-  (assert (elements__function_guard (elements main_test__field_06__assume4)
-  main_test__field_06__assume4))
-
-;; H
   (assert
   (and
-  (and
   (= main_test__field_06__assume4 (create 6
-                                  (mk___t (temp___String_Literal_297 Tuple0)
+                                  (mk___t (temp___String_Literal_276 Tuple0)
                                   (mk 1 5))))
-  (create__function_guard main_test__field_06__assume4 6
-  (mk___t (temp___String_Literal_297 Tuple0) (mk 1 5))))
   (= (elements main_test__field_06__assume4) 6)))
 
 ;; H
@@ -1976,18 +1904,11 @@
   (assert (= field_06__attr__tag us_tag))
 
 ;; H
-  (assert (elements__function_guard2
-  (elements2 main_test__stream_10__assume4) main_test__stream_10__assume4))
-
-;; H
   (assert
   (and
-  (and
   (= main_test__stream_10__assume4 (create2 10
-                                   (mk___t (temp___String_Literal_298 Tuple0)
+                                   (mk___t (temp___String_Literal_277 Tuple0)
                                    (mk 1 4))))
-  (create__function_guard2 main_test__stream_10__assume4 10
-  (mk___t (temp___String_Literal_298 Tuple0) (mk 1 4))))
   (= (elements2 main_test__stream_10__assume4) 10)))
 
 ;; H
@@ -2007,18 +1928,11 @@
   (assert (= stream_10__attr__tag us_tag1))
 
 ;; H
-  (assert (elements__function_guard2 (elements2 main_test__stream_06__assume)
-  main_test__stream_06__assume))
-
-;; H
   (assert
   (and
-  (and
   (= main_test__stream_06__assume (create2 6
-                                  (mk___t (temp___String_Literal_299 Tuple0)
+                                  (mk___t (temp___String_Literal_278 Tuple0)
                                   (mk 1 5))))
-  (create__function_guard2 main_test__stream_06__assume 6
-  (mk___t (temp___String_Literal_299 Tuple0) (mk 1 5))))
   (= (elements2 main_test__stream_06__assume) 6)))
 
 ;; H
@@ -2038,7 +1952,7 @@
   (assert (= result4 (mk_map__ref ref_string)))
 
 ;; H
-  (assert (= ref_string1 (temp___String_Literal_300 Tuple0)))
+  (assert (= ref_string1 (temp___String_Literal_279 Tuple0)))
 
 ;; H
   (assert (= (to_rep1 ref_string__first) (to_rep1 (first (mk 1 12)))))
@@ -2054,7 +1968,7 @@
   (assert (= result5 (mk_map__ref short_string)))
 
 ;; H
-  (assert (= short_string1 (temp___String_Literal_302 Tuple0)))
+  (assert (= short_string1 (temp___String_Literal_281 Tuple0)))
 
 ;; H
   (assert (= (to_rep1 short_string__first) (to_rep1 (first (mk 1 3)))))
@@ -2080,104 +1994,88 @@
   (assert (=> (<= 0 2147483647) (in_range4 total_len)))
 
 ;; H
-  (assert (elements__function_guard
-  (elements (mk___rep field_06__split_fields3 field_06__attr__tag))
-  (mk___rep field_06__split_fields3 field_06__attr__tag)))
-
-;; H
-  (assert (elements__function_guard
-  (elements (mk___rep field_10__split_fields3 field_10__attr__tag))
-  (mk___rep field_10__split_fields3 field_10__attr__tag)))
-
-;; H
   (assert
   (and
-  (and
-  (= temp___305 (null_string
+  (= temp___284 (null_string
                 (mk___rep field_06__split_fields3 field_06__attr__tag)))
-  (null_string__function_guard temp___305
-  (mk___rep field_06__split_fields3 field_06__attr__tag)))
-  (and (dynamic_invariant3 temp___305 true false true)
-  (= (length temp___305) (elements
+  (and (dynamic_invariant3 temp___284 true false true)
+  (= (length temp___284) (elements
                          (mk___rep field_06__split_fields3
                          field_06__attr__tag))))))
 
 ;; H
   (assert
   (and
-  (and
-  (= temp___304 (null_string
+  (= temp___283 (null_string
                 (mk___rep field_10__split_fields3 field_10__attr__tag)))
-  (null_string__function_guard temp___304
-  (mk___rep field_10__split_fields3 field_10__attr__tag)))
-  (and (dynamic_invariant3 temp___304 true false true)
-  (= (length temp___304) (elements
+  (and (dynamic_invariant3 temp___283 true false true)
+  (= (length temp___283) (elements
                          (mk___rep field_10__split_fields3
                          field_10__attr__tag))))))
 
 ;; H
   (assert
-  (=> (= (length temp___304) 0)
-  (= main_test__total_string__assume (mk___t (elts temp___305)
-                                     (mk (to_rep1 (first (rt temp___305)))
-                                     (to_rep1 (last (rt temp___305))))))))
+  (=> (= (length temp___283) 0)
+  (= main_test__total_string__assume (mk___t (elts temp___284)
+                                     (mk (to_rep1 (first (rt temp___284)))
+                                     (to_rep1 (last (rt temp___284))))))))
 
 ;; H
   (assert
-  (=> (not (= (length temp___304) 0))
-  (=> (<= (to_rep1 (first (rt temp___305))) (to_rep1 (last (rt temp___305))))
-  (= o (+ (- (to_rep1 (last (rt temp___305))) (to_rep1
-                                              (first (rt temp___305)))) 1)))))
+  (=> (not (= (length temp___283) 0))
+  (=> (<= (to_rep1 (first (rt temp___284))) (to_rep1 (last (rt temp___284))))
+  (= o (+ (- (to_rep1 (last (rt temp___284))) (to_rep1
+                                              (first (rt temp___284)))) 1)))))
 
 ;; H
   (assert
-  (=> (not (= (length temp___304) 0))
+  (=> (not (= (length temp___283) 0))
   (=>
   (not
-  (<= (to_rep1 (first (rt temp___305))) (to_rep1 (last (rt temp___305)))))
+  (<= (to_rep1 (first (rt temp___284))) (to_rep1 (last (rt temp___284)))))
   (= o 0))))
 
 ;; H
   (assert
-  (=> (not (= (length temp___304) 0))
-  (=> (<= (to_rep1 (first (rt temp___304))) (to_rep1 (last (rt temp___304))))
-  (= o1 (+ (- (to_rep1 (last (rt temp___304))) (to_rep1
-                                               (first (rt temp___304)))) 1)))))
+  (=> (not (= (length temp___283) 0))
+  (=> (<= (to_rep1 (first (rt temp___283))) (to_rep1 (last (rt temp___283))))
+  (= o1 (+ (- (to_rep1 (last (rt temp___283))) (to_rep1
+                                               (first (rt temp___283)))) 1)))))
 
 ;; H
   (assert
-  (=> (not (= (length temp___304) 0))
+  (=> (not (= (length temp___283) 0))
   (=>
   (not
-  (<= (to_rep1 (first (rt temp___304))) (to_rep1 (last (rt temp___304)))))
+  (<= (to_rep1 (first (rt temp___283))) (to_rep1 (last (rt temp___283)))))
   (= o1 0))))
 
 ;; H
-  (assert (=> (not (= (length temp___304) 0)) (= o2 (+ o1 o))))
+  (assert (=> (not (= (length temp___283) 0)) (= o2 (+ o1 o))))
 
 ;; H
   (assert
-  (=> (not (= (length temp___304) 0))
-  (= o3 (+ (to_rep1 (first (rt temp___304))) o2))))
+  (=> (not (= (length temp___283) 0))
+  (= o3 (+ (to_rep1 (first (rt temp___283))) o2))))
 
 ;; H
-  (assert (=> (not (= (length temp___304) 0)) (= o4 (- o3 1))))
-
-;; H
-  (assert
-  (=> (not (= (length temp___304) 0)) (and (= o5 o4) (in_range1 o4))))
+  (assert (=> (not (= (length temp___283) 0)) (= o4 (- o3 1))))
 
 ;; H
   (assert
-  (=> (not (= (length temp___304) 0))
+  (=> (not (= (length temp___283) 0)) (and (= o5 o4) (in_range1 o4))))
+
+;; H
+  (assert
+  (=> (not (= (length temp___283) 0))
   (= main_test__total_string__assume (mk___t
-                                     (concat1 (elts temp___304)
-                                     (to_rep1 (first (rt temp___304)))
-                                     (to_rep1 (last (rt temp___304)))
-                                     (elts temp___305)
-                                     (to_rep1 (first (rt temp___305)))
-                                     (to_rep1 (last (rt temp___305))))
-                                     (mk (to_rep1 (first (rt temp___304)))
+                                     (concat1 (elts temp___283)
+                                     (to_rep1 (first (rt temp___283)))
+                                     (to_rep1 (last (rt temp___283)))
+                                     (elts temp___284)
+                                     (to_rep1 (first (rt temp___284)))
+                                     (to_rep1 (last (rt temp___284))))
+                                     (mk (to_rep1 (first (rt temp___283)))
                                      o5)))))
 
 ;; H
@@ -2202,106 +2100,90 @@
   (to_rep1 total_string__last)))
 
 ;; H
-  (assert (elements__function_guard2
-  (elements2 (mk___rep1 stream_06__split_fields3 stream_06__attr__tag))
-  (mk___rep1 stream_06__split_fields3 stream_06__attr__tag)))
-
-;; H
-  (assert (elements__function_guard2
-  (elements2 (mk___rep1 stream_10__split_fields3 stream_10__attr__tag))
-  (mk___rep1 stream_10__split_fields3 stream_10__attr__tag)))
-
-;; H
   (assert
   (and
-  (and
-  (= temp___308 (null_string2
+  (= temp___287 (null_string2
                 (mk___rep1 stream_06__split_fields3 stream_06__attr__tag)))
-  (null_string__function_guard2 temp___308
-  (mk___rep1 stream_06__split_fields3 stream_06__attr__tag)))
-  (and (dynamic_invariant4 temp___308 true false true)
-  (= (length1 temp___308) (elements2
+  (and (dynamic_invariant4 temp___287 true false true)
+  (= (length1 temp___287) (elements2
                           (mk___rep1 stream_06__split_fields3
                           stream_06__attr__tag))))))
 
 ;; H
   (assert
   (and
-  (and
-  (= temp___307 (null_string2
+  (= temp___286 (null_string2
                 (mk___rep1 stream_10__split_fields3 stream_10__attr__tag)))
-  (null_string__function_guard2 temp___307
-  (mk___rep1 stream_10__split_fields3 stream_10__attr__tag)))
-  (and (dynamic_invariant4 temp___307 true false true)
-  (= (length1 temp___307) (elements2
+  (and (dynamic_invariant4 temp___286 true false true)
+  (= (length1 temp___286) (elements2
                           (mk___rep1 stream_10__split_fields3
                           stream_10__attr__tag))))))
 
 ;; H
   (assert
-  (=> (= (length1 temp___307) 0)
-  (= main_test__total_stream__assume (mk___t1 (elts1 temp___308)
-                                     (mk1 (to_rep2 (first2 (rt1 temp___308)))
-                                     (to_rep2 (last2 (rt1 temp___308))))))))
+  (=> (= (length1 temp___286) 0)
+  (= main_test__total_stream__assume (mk___t1 (elts1 temp___287)
+                                     (mk1 (to_rep2 (first2 (rt1 temp___287)))
+                                     (to_rep2 (last2 (rt1 temp___287))))))))
 
 ;; H
   (assert
-  (=> (not (= (length1 temp___307) 0))
+  (=> (not (= (length1 temp___286) 0))
   (=>
-  (<= (to_rep2 (first2 (rt1 temp___308))) (to_rep2 (last2 (rt1 temp___308))))
-  (= o6 (+ (- (to_rep2 (last2 (rt1 temp___308))) (to_rep2
-                                                 (first2 (rt1 temp___308)))) 1)))))
+  (<= (to_rep2 (first2 (rt1 temp___287))) (to_rep2 (last2 (rt1 temp___287))))
+  (= o6 (+ (- (to_rep2 (last2 (rt1 temp___287))) (to_rep2
+                                                 (first2 (rt1 temp___287)))) 1)))))
 
 ;; H
   (assert
-  (=> (not (= (length1 temp___307) 0))
+  (=> (not (= (length1 temp___286) 0))
   (=>
   (not
-  (<= (to_rep2 (first2 (rt1 temp___308))) (to_rep2 (last2 (rt1 temp___308)))))
+  (<= (to_rep2 (first2 (rt1 temp___287))) (to_rep2 (last2 (rt1 temp___287)))))
   (= o6 0))))
 
 ;; H
   (assert
-  (=> (not (= (length1 temp___307) 0))
+  (=> (not (= (length1 temp___286) 0))
   (=>
-  (<= (to_rep2 (first2 (rt1 temp___307))) (to_rep2 (last2 (rt1 temp___307))))
-  (= o7 (+ (- (to_rep2 (last2 (rt1 temp___307))) (to_rep2
-                                                 (first2 (rt1 temp___307)))) 1)))))
+  (<= (to_rep2 (first2 (rt1 temp___286))) (to_rep2 (last2 (rt1 temp___286))))
+  (= o7 (+ (- (to_rep2 (last2 (rt1 temp___286))) (to_rep2
+                                                 (first2 (rt1 temp___286)))) 1)))))
 
 ;; H
   (assert
-  (=> (not (= (length1 temp___307) 0))
+  (=> (not (= (length1 temp___286) 0))
   (=>
   (not
-  (<= (to_rep2 (first2 (rt1 temp___307))) (to_rep2 (last2 (rt1 temp___307)))))
+  (<= (to_rep2 (first2 (rt1 temp___286))) (to_rep2 (last2 (rt1 temp___286)))))
   (= o7 0))))
 
 ;; H
-  (assert (=> (not (= (length1 temp___307) 0)) (= o8 (+ o7 o6))))
+  (assert (=> (not (= (length1 temp___286) 0)) (= o8 (+ o7 o6))))
 
 ;; H
   (assert
-  (=> (not (= (length1 temp___307) 0))
-  (= o9 (+ (to_rep2 (first2 (rt1 temp___307))) o8))))
+  (=> (not (= (length1 temp___286) 0))
+  (= o9 (+ (to_rep2 (first2 (rt1 temp___286))) o8))))
 
 ;; H
-  (assert (=> (not (= (length1 temp___307) 0)) (= o10 (- o9 1))))
-
-;; H
-  (assert
-  (=> (not (= (length1 temp___307) 0)) (and (= o11 o10) (in_range6 o10))))
+  (assert (=> (not (= (length1 temp___286) 0)) (= o10 (- o9 1))))
 
 ;; H
   (assert
-  (=> (not (= (length1 temp___307) 0))
+  (=> (not (= (length1 temp___286) 0)) (and (= o11 o10) (in_range6 o10))))
+
+;; H
+  (assert
+  (=> (not (= (length1 temp___286) 0))
   (= main_test__total_stream__assume (mk___t1
-                                     (concat2 (elts1 temp___307)
-                                     (to_rep2 (first2 (rt1 temp___307)))
-                                     (to_rep2 (last2 (rt1 temp___307)))
-                                     (elts1 temp___308)
-                                     (to_rep2 (first2 (rt1 temp___308)))
-                                     (to_rep2 (last2 (rt1 temp___308))))
-                                     (mk1 (to_rep2 (first2 (rt1 temp___307)))
+                                     (concat2 (elts1 temp___286)
+                                     (to_rep2 (first2 (rt1 temp___286)))
+                                     (to_rep2 (last2 (rt1 temp___286)))
+                                     (elts1 temp___287)
+                                     (to_rep2 (first2 (rt1 temp___287)))
+                                     (to_rep2 (last2 (rt1 temp___287))))
+                                     (mk1 (to_rep2 (first2 (rt1 temp___286)))
                                      o11)))))
 
 ;; H
@@ -2327,18 +2209,8 @@
   (to_rep2 total_stream__first) (to_rep2 total_stream__last)))
 
 ;; H
-  (assert (elements__function_guard
-  (elements (mk___rep field_10__split_fields3 field_10__attr__tag))
-  (mk___rep field_10__split_fields3 field_10__attr__tag)))
-
-;; H
   (assert
   (= (elements (mk___rep field_10__split_fields3 field_10__attr__tag)) 10))
-
-;; H
-  (assert (elements__function_guard
-  (elements (mk___rep field_06__split_fields3 field_06__attr__tag))
-  (mk___rep field_06__split_fields3 field_06__attr__tag)))
 
 ;; H
   (assert
@@ -2458,20 +2330,14 @@
 ;; H
   (assert
   (and
-  (and
   (= o23 (elements (mk___rep field_06__split_fields3 field_06__attr__tag)))
-  (elements__function_guard o23
-  (mk___rep field_06__split_fields3 field_06__attr__tag))) (in_range4 
-  o23)))
+  (in_range4 o23)))
 
 ;; H
   (assert
   (and
-  (and
   (= o24 (elements (mk___rep field_10__split_fields3 field_10__attr__tag)))
-  (elements__function_guard o24
-  (mk___rep field_10__split_fields3 field_10__attr__tag))) (in_range4 
-  o24)))
+  (in_range4 o24)))
 
 ;; H
   (assert (= o25 (+ o24 o23)))
@@ -2486,123 +2352,103 @@
   (assert (= total_len1 o26))
 
 ;; H
-  (assert (elements__function_guard
-  (elements (mk___rep field_06__split_fields3 field_06__attr__tag))
-  (mk___rep field_06__split_fields3 field_06__attr__tag)))
-
-;; H
-  (assert (elements__function_guard
-  (elements (mk___rep field_10__split_fields3 field_10__attr__tag))
-  (mk___rep field_10__split_fields3 field_10__attr__tag)))
-
-;; H
   (assert
   (and
-  (and
-  (= temp___313 (convert
+  (= temp___290 (convert
                 (mk___rep field_06__split_fields3 field_06__attr__tag)
                 (mk___t short_string1
                 (mk (to_rep1 short_string__first)
                 (to_rep1 short_string__last)))))
-  (convert__function_guard temp___313
-  (mk___rep field_06__split_fields3 field_06__attr__tag)
-  (mk___t short_string1
-  (mk (to_rep1 short_string__first) (to_rep1 short_string__last)))))
-  (and (dynamic_invariant3 temp___313 true false true)
-  (= (length temp___313) (elements
+  (and (dynamic_invariant3 temp___290 true false true)
+  (= (length temp___290) (elements
                          (mk___rep field_06__split_fields3
                          field_06__attr__tag))))))
 
 ;; H
   (assert
   (and
-  (and
-  (= temp___312 (convert
+  (= temp___289 (convert
                 (mk___rep field_10__split_fields3 field_10__attr__tag)
                 (mk___t ref_string1
                 (mk (to_rep1 ref_string__first) (to_rep1 ref_string__last)))))
-  (convert__function_guard temp___312
-  (mk___rep field_10__split_fields3 field_10__attr__tag)
-  (mk___t ref_string1
-  (mk (to_rep1 ref_string__first) (to_rep1 ref_string__last)))))
-  (and (dynamic_invariant3 temp___312 true false true)
-  (= (length temp___312) (elements
+  (and (dynamic_invariant3 temp___289 true false true)
+  (= (length temp___289) (elements
                          (mk___rep field_10__split_fields3
                          field_10__attr__tag))))))
 
 ;; H
   (assert
-  (=> (= (length temp___312) 0)
-  (= temp___314 (mk___t (elts temp___313)
-                (mk (to_rep1 (first (rt temp___313)))
-                (to_rep1 (last (rt temp___313))))))))
+  (=> (= (length temp___289) 0)
+  (= temp___291 (mk___t (elts temp___290)
+                (mk (to_rep1 (first (rt temp___290)))
+                (to_rep1 (last (rt temp___290))))))))
 
 ;; H
   (assert
-  (=> (not (= (length temp___312) 0))
-  (=> (<= (to_rep1 (first (rt temp___313))) (to_rep1 (last (rt temp___313))))
-  (= o27 (+ (- (to_rep1 (last (rt temp___313))) (to_rep1
-                                                (first (rt temp___313)))) 1)))))
+  (=> (not (= (length temp___289) 0))
+  (=> (<= (to_rep1 (first (rt temp___290))) (to_rep1 (last (rt temp___290))))
+  (= o27 (+ (- (to_rep1 (last (rt temp___290))) (to_rep1
+                                                (first (rt temp___290)))) 1)))))
 
 ;; H
   (assert
-  (=> (not (= (length temp___312) 0))
+  (=> (not (= (length temp___289) 0))
   (=>
   (not
-  (<= (to_rep1 (first (rt temp___313))) (to_rep1 (last (rt temp___313)))))
+  (<= (to_rep1 (first (rt temp___290))) (to_rep1 (last (rt temp___290)))))
   (= o27 0))))
 
 ;; H
   (assert
-  (=> (not (= (length temp___312) 0))
-  (=> (<= (to_rep1 (first (rt temp___312))) (to_rep1 (last (rt temp___312))))
-  (= o28 (+ (- (to_rep1 (last (rt temp___312))) (to_rep1
-                                                (first (rt temp___312)))) 1)))))
+  (=> (not (= (length temp___289) 0))
+  (=> (<= (to_rep1 (first (rt temp___289))) (to_rep1 (last (rt temp___289))))
+  (= o28 (+ (- (to_rep1 (last (rt temp___289))) (to_rep1
+                                                (first (rt temp___289)))) 1)))))
 
 ;; H
   (assert
-  (=> (not (= (length temp___312) 0))
+  (=> (not (= (length temp___289) 0))
   (=>
   (not
-  (<= (to_rep1 (first (rt temp___312))) (to_rep1 (last (rt temp___312)))))
+  (<= (to_rep1 (first (rt temp___289))) (to_rep1 (last (rt temp___289)))))
   (= o28 0))))
 
 ;; H
-  (assert (=> (not (= (length temp___312) 0)) (= o29 (+ o28 o27))))
+  (assert (=> (not (= (length temp___289) 0)) (= o29 (+ o28 o27))))
 
 ;; H
   (assert
-  (=> (not (= (length temp___312) 0))
-  (= o30 (+ (to_rep1 (first (rt temp___312))) o29))))
+  (=> (not (= (length temp___289) 0))
+  (= o30 (+ (to_rep1 (first (rt temp___289))) o29))))
 
 ;; H
-  (assert (=> (not (= (length temp___312) 0)) (= o31 (- o30 1))))
-
-;; H
-  (assert
-  (=> (not (= (length temp___312) 0)) (and (= o32 o31) (in_range1 o31))))
+  (assert (=> (not (= (length temp___289) 0)) (= o31 (- o30 1))))
 
 ;; H
   (assert
-  (=> (not (= (length temp___312) 0))
-  (= temp___314 (mk___t
-                (concat1 (elts temp___312) (to_rep1 (first (rt temp___312)))
-                (to_rep1 (last (rt temp___312))) (elts temp___313)
-                (to_rep1 (first (rt temp___313)))
-                (to_rep1 (last (rt temp___313))))
-                (mk (to_rep1 (first (rt temp___312))) o32)))))
+  (=> (not (= (length temp___289) 0)) (and (= o32 o31) (in_range1 o31))))
 
 ;; H
   (assert
-  (= (ite (<= (to_rep1 (first (rt temp___314))) (to_rep1
-                                                (last (rt temp___314))))
-     (+ (- (to_rep1 (last (rt temp___314))) (to_rep1 (first (rt temp___314)))) 1)
+  (=> (not (= (length temp___289) 0))
+  (= temp___291 (mk___t
+                (concat1 (elts temp___289) (to_rep1 (first (rt temp___289)))
+                (to_rep1 (last (rt temp___289))) (elts temp___290)
+                (to_rep1 (first (rt temp___290)))
+                (to_rep1 (last (rt temp___290))))
+                (mk (to_rep1 (first (rt temp___289))) o32)))))
+
+;; H
+  (assert
+  (= (ite (<= (to_rep1 (first (rt temp___291))) (to_rep1
+                                                (last (rt temp___291))))
+     (+ (- (to_rep1 (last (rt temp___291))) (to_rep1 (first (rt temp___291)))) 1)
      0) (ite (<= (to_rep1 total_string__first) (to_rep1 total_string__last))
         (+ (- (to_rep1 total_string__last) (to_rep1 total_string__first)) 1)
         0)))
 
 ;; H
-  (assert (= o33 temp___314))
+  (assert (= o33 temp___291))
 
 ;; H
   (assert (= o34 (elts o33)))
@@ -2622,22 +2468,16 @@
 ;; H
   (assert
   (and
-  (and
   (= o35 (elements2
          (mk___rep1 stream_06__split_fields3 stream_06__attr__tag)))
-  (elements__function_guard2 o35
-  (mk___rep1 stream_06__split_fields3 stream_06__attr__tag))) (in_range4
-  o35)))
+  (in_range4 o35)))
 
 ;; H
   (assert
   (and
-  (and
   (= o36 (elements2
          (mk___rep1 stream_10__split_fields3 stream_10__attr__tag)))
-  (elements__function_guard2 o36
-  (mk___rep1 stream_10__split_fields3 stream_10__attr__tag))) (in_range4
-  o36)))
+  (in_range4 o36)))
 
 ;; H
   (assert (= o37 (+ o36 o35)))
@@ -2652,127 +2492,107 @@
   (assert (= total_len2 o38))
 
 ;; H
-  (assert (elements__function_guard2
-  (elements2 (mk___rep1 stream_06__split_fields3 stream_06__attr__tag))
-  (mk___rep1 stream_06__split_fields3 stream_06__attr__tag)))
-
-;; H
-  (assert (elements__function_guard2
-  (elements2 (mk___rep1 stream_10__split_fields3 stream_10__attr__tag))
-  (mk___rep1 stream_10__split_fields3 stream_10__attr__tag)))
-
-;; H
   (assert
   (and
-  (and
-  (= temp___316 (convert2
+  (= temp___293 (convert2
                 (mk___rep1 stream_06__split_fields3 stream_06__attr__tag)
                 (mk___t short_string1
                 (mk (to_rep1 short_string__first)
                 (to_rep1 short_string__last)))))
-  (convert__function_guard2 temp___316
-  (mk___rep1 stream_06__split_fields3 stream_06__attr__tag)
-  (mk___t short_string1
-  (mk (to_rep1 short_string__first) (to_rep1 short_string__last)))))
-  (and (dynamic_invariant4 temp___316 true false true)
-  (= (length1 temp___316) (elements2
+  (and (dynamic_invariant4 temp___293 true false true)
+  (= (length1 temp___293) (elements2
                           (mk___rep1 stream_06__split_fields3
                           stream_06__attr__tag))))))
 
 ;; H
   (assert
   (and
-  (and
-  (= temp___315 (convert2
+  (= temp___292 (convert2
                 (mk___rep1 stream_10__split_fields3 stream_10__attr__tag)
                 (mk___t ref_string1
                 (mk (to_rep1 ref_string__first) (to_rep1 ref_string__last)))))
-  (convert__function_guard2 temp___315
-  (mk___rep1 stream_10__split_fields3 stream_10__attr__tag)
-  (mk___t ref_string1
-  (mk (to_rep1 ref_string__first) (to_rep1 ref_string__last)))))
-  (and (dynamic_invariant4 temp___315 true false true)
-  (= (length1 temp___315) (elements2
+  (and (dynamic_invariant4 temp___292 true false true)
+  (= (length1 temp___292) (elements2
                           (mk___rep1 stream_10__split_fields3
                           stream_10__attr__tag))))))
 
 ;; H
   (assert
-  (=> (= (length1 temp___315) 0)
-  (= temp___317 (mk___t1 (elts1 temp___316)
-                (mk1 (to_rep2 (first2 (rt1 temp___316)))
-                (to_rep2 (last2 (rt1 temp___316))))))))
+  (=> (= (length1 temp___292) 0)
+  (= temp___294 (mk___t1 (elts1 temp___293)
+                (mk1 (to_rep2 (first2 (rt1 temp___293)))
+                (to_rep2 (last2 (rt1 temp___293))))))))
 
 ;; H
   (assert
-  (=> (not (= (length1 temp___315) 0))
+  (=> (not (= (length1 temp___292) 0))
   (=>
-  (<= (to_rep2 (first2 (rt1 temp___316))) (to_rep2 (last2 (rt1 temp___316))))
-  (= o39 (+ (- (to_rep2 (last2 (rt1 temp___316))) (to_rep2
-                                                  (first2 (rt1 temp___316)))) 1)))))
+  (<= (to_rep2 (first2 (rt1 temp___293))) (to_rep2 (last2 (rt1 temp___293))))
+  (= o39 (+ (- (to_rep2 (last2 (rt1 temp___293))) (to_rep2
+                                                  (first2 (rt1 temp___293)))) 1)))))
 
 ;; H
   (assert
-  (=> (not (= (length1 temp___315) 0))
+  (=> (not (= (length1 temp___292) 0))
   (=>
   (not
-  (<= (to_rep2 (first2 (rt1 temp___316))) (to_rep2 (last2 (rt1 temp___316)))))
+  (<= (to_rep2 (first2 (rt1 temp___293))) (to_rep2 (last2 (rt1 temp___293)))))
   (= o39 0))))
 
 ;; H
   (assert
-  (=> (not (= (length1 temp___315) 0))
+  (=> (not (= (length1 temp___292) 0))
   (=>
-  (<= (to_rep2 (first2 (rt1 temp___315))) (to_rep2 (last2 (rt1 temp___315))))
-  (= o40 (+ (- (to_rep2 (last2 (rt1 temp___315))) (to_rep2
-                                                  (first2 (rt1 temp___315)))) 1)))))
+  (<= (to_rep2 (first2 (rt1 temp___292))) (to_rep2 (last2 (rt1 temp___292))))
+  (= o40 (+ (- (to_rep2 (last2 (rt1 temp___292))) (to_rep2
+                                                  (first2 (rt1 temp___292)))) 1)))))
 
 ;; H
   (assert
-  (=> (not (= (length1 temp___315) 0))
+  (=> (not (= (length1 temp___292) 0))
   (=>
   (not
-  (<= (to_rep2 (first2 (rt1 temp___315))) (to_rep2 (last2 (rt1 temp___315)))))
+  (<= (to_rep2 (first2 (rt1 temp___292))) (to_rep2 (last2 (rt1 temp___292)))))
   (= o40 0))))
 
 ;; H
-  (assert (=> (not (= (length1 temp___315) 0)) (= o41 (+ o40 o39))))
+  (assert (=> (not (= (length1 temp___292) 0)) (= o41 (+ o40 o39))))
 
 ;; H
   (assert
-  (=> (not (= (length1 temp___315) 0))
-  (= o42 (+ (to_rep2 (first2 (rt1 temp___315))) o41))))
+  (=> (not (= (length1 temp___292) 0))
+  (= o42 (+ (to_rep2 (first2 (rt1 temp___292))) o41))))
 
 ;; H
-  (assert (=> (not (= (length1 temp___315) 0)) (= o43 (- o42 1))))
-
-;; H
-  (assert
-  (=> (not (= (length1 temp___315) 0)) (and (= o44 o43) (in_range6 o43))))
+  (assert (=> (not (= (length1 temp___292) 0)) (= o43 (- o42 1))))
 
 ;; H
   (assert
-  (=> (not (= (length1 temp___315) 0))
-  (= temp___317 (mk___t1
-                (concat2 (elts1 temp___315)
-                (to_rep2 (first2 (rt1 temp___315)))
-                (to_rep2 (last2 (rt1 temp___315))) (elts1 temp___316)
-                (to_rep2 (first2 (rt1 temp___316)))
-                (to_rep2 (last2 (rt1 temp___316))))
-                (mk1 (to_rep2 (first2 (rt1 temp___315))) o44)))))
+  (=> (not (= (length1 temp___292) 0)) (and (= o44 o43) (in_range6 o43))))
 
 ;; H
   (assert
-  (= (ite (<= (to_rep2 (first2 (rt1 temp___317))) (to_rep2
-                                                  (last2 (rt1 temp___317))))
-     (+ (- (to_rep2 (last2 (rt1 temp___317))) (to_rep2
-                                              (first2 (rt1 temp___317)))) 1)
+  (=> (not (= (length1 temp___292) 0))
+  (= temp___294 (mk___t1
+                (concat2 (elts1 temp___292)
+                (to_rep2 (first2 (rt1 temp___292)))
+                (to_rep2 (last2 (rt1 temp___292))) (elts1 temp___293)
+                (to_rep2 (first2 (rt1 temp___293)))
+                (to_rep2 (last2 (rt1 temp___293))))
+                (mk1 (to_rep2 (first2 (rt1 temp___292))) o44)))))
+
+;; H
+  (assert
+  (= (ite (<= (to_rep2 (first2 (rt1 temp___294))) (to_rep2
+                                                  (last2 (rt1 temp___294))))
+     (+ (- (to_rep2 (last2 (rt1 temp___294))) (to_rep2
+                                              (first2 (rt1 temp___294)))) 1)
      0) (ite (<= (to_rep2 total_stream__first) (to_rep2 total_stream__last))
         (+ (- (to_rep2 total_stream__last) (to_rep2 total_stream__first)) 1)
         0)))
 
 ;; H
-  (assert (= o45 temp___317))
+  (assert (= o45 temp___294))
 
 ;; H
   (assert (= o46 (elts1 o45)))

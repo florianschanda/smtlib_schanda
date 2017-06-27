@@ -403,19 +403,13 @@
 
 ;; H
   (assert
-  (and
   (= o2 (sorted (mk___t a (mk (to_rep a__first) (to_rep a__last))) o1
-        length2))
-  (sorted__function_guard o2
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) o1 length2)))
+        length2)))
 
 ;; H
   (assert
-  (and
   (= o (sorted (mk___t a (mk (to_rep a__first) (to_rep a__last))) a_first
-       length1))
-  (sorted__function_guard o
-  (mk___t a (mk (to_rep a__first) (to_rep a__last))) a_first length1)))
+       length1)))
 
 (assert
 ;; WP_parameter_def

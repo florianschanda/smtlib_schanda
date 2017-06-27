@@ -1186,7 +1186,7 @@
 
 (declare-fun o1 () count_type)
 
-(declare-fun temp___879 () count_type)
+(declare-fun temp___862 () count_type)
 
 (declare-fun use_sets__my_find__cu__assume () count_type)
 
@@ -1210,10 +1210,10 @@
   (assert (= o o1))
 
 ;; H
-  (assert (= temp___879 o1))
+  (assert (= temp___862 o1))
 
 ;; H
-  (assert (= (mk___rep1 (mk___split_fields1 temp___879)) no_element))
+  (assert (= (mk___rep1 (mk___split_fields1 temp___862)) no_element))
 
 ;; H
   (assert (in_range2 e))

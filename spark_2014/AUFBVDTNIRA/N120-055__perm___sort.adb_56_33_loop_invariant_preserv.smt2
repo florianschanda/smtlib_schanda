@@ -397,15 +397,10 @@
   (! (=>
      (and (dynamic_invariant1 values true true true) (< 0 (length values)))
      (let ((result (index_of_minimum values)))
-     (=> (index_of_minimum__function_guard result values)
      (and (and (<= (first1 values) result) (<= result (last1 values)))
-     (in_range4 result))))) :pattern ((index_of_minimum values)) )))
+     (in_range4 result)))) :pattern ((index_of_minimum values)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
-
-(declare-fun first2 () Int)
-
-(declare-fun last2 () Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -427,10 +422,6 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(declare-fun first3 (Int) Int)
-
-(declare-fun last3 () Int)
-
 (define-fun dynamic_property2 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -451,9 +442,9 @@
 
 (declare-sort t1 0)
 
-(declare-fun first4 (t1) integer)
+(declare-fun first2 (t1) integer)
 
-(declare-fun last4 (t1) integer)
+(declare-fun last2 (t1) integer)
 
 (declare-fun mk1 (Int Int) t1)
 
@@ -462,7 +453,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep (first4 (mk1 f l))) f) (= (to_rep (last4 (mk1 f l))) l)))) :pattern (
+     (and (= (to_rep (first2 (mk1 f l))) f) (= (to_rep (last2 (mk1 f l))) l)))) :pattern (
   (mk1 f l)) )))
 
 (define-fun dynamic_property3 ((range_first Int) (range_last Int) (low Int)
@@ -479,12 +470,12 @@
 (define-fun of_array1 ((a (Array Int natural)) (f Int)
   (l Int)) us_t1 (mk___t1 a (mk1 f l)))
 
-(define-fun first5 ((a us_t1)) Int (to_rep (first4 (rt1 a))))
+(define-fun first3 ((a us_t1)) Int (to_rep (first2 (rt1 a))))
 
-(define-fun last5 ((a us_t1)) Int (to_rep (last4 (rt1 a))))
+(define-fun last3 ((a us_t1)) Int (to_rep (last2 (rt1 a))))
 
-(define-fun length1 ((a us_t1)) Int (ite (<= (first5 a) (last5 a))
-                                    (+ (- (last5 a) (first5 a)) 1) 0))
+(define-fun length1 ((a us_t1)) Int (ite (<= (first3 a) (last3 a))
+                                    (+ (- (last3 a) (first3 a)) 1) 0))
 
 (declare-fun value__size1 () Int)
 
@@ -518,9 +509,9 @@
   (assert (forall ((a (Array Int natural))) (<= 0 (object__alignment1 a))))
 
 (define-fun bool_eq8 ((x us_t1)
-  (y us_t1)) Bool (bool_eq4 (elts1 x) (to_rep (first4 (rt1 x)))
-                  (to_rep (last4 (rt1 x))) (elts1 y)
-                  (to_rep (first4 (rt1 y))) (to_rep (last4 (rt1 y)))))
+  (y us_t1)) Bool (bool_eq4 (elts1 x) (to_rep (first2 (rt1 x)))
+                  (to_rep (last2 (rt1 x))) (elts1 y)
+                  (to_rep (first2 (rt1 y))) (to_rep (last2 (rt1 y)))))
 
 (declare-fun user_eq7 (us_t1 us_t1) Bool)
 
@@ -615,10 +606,6 @@
 
 (declare-fun values4 () (Array Int natural))
 
-(define-fun o13 () us_t (mk___t o8 o9))
-
-(define-fun o14 () us_t (mk___t o2 o3))
-
 ;; H
   (assert (dynamic_property 1 100 (to_rep values__first)
   (to_rep values__last)))
@@ -681,14 +668,12 @@
 
 ;; H
   (assert
-  (= (mk (to_rep (first4 temp___1651)) (to_rep (last4 temp___1651))) 
+  (= (mk (to_rep (first2 temp___1651)) (to_rep (last2 temp___1651))) 
   o3))
 
 ;; H
   (assert
-  (and
-  (and (= o4 (index_of_minimum o14)) (index_of_minimum__function_guard 
-  o4 o14))
+  (and (= o4 (index_of_minimum (mk___t o2 o3)))
   (and (in_range4 o4)
   (and (<= (to_rep (first o3)) o4) (<= o4 (to_rep (last o3)))))))
 
@@ -769,14 +754,12 @@
 
 ;; H
   (assert
-  (= (mk (to_rep (first4 temp___1653)) (to_rep (last4 temp___1653))) 
+  (= (mk (to_rep (first2 temp___1653)) (to_rep (last2 temp___1653))) 
   o9))
 
 ;; H
   (assert
-  (and
-  (and (= o10 (index_of_minimum o13)) (index_of_minimum__function_guard 
-  o10 o13))
+  (and (= o10 (index_of_minimum (mk___t o8 o9)))
   (and (in_range4 o10)
   (and (<= (to_rep (first o9)) o10) (<= o10 (to_rep (last o9)))))))
 

@@ -306,10 +306,9 @@
   (forall ((x86__rbp (_ BitVec 64)))
   (! (=> (dynamic_invariant x86__rbp true true true)
      (let ((result (ebp x86__rbp)))
-     (=> (ebp__function_guard result x86__rbp)
      (and
      (= result ((_ extract 31 0) (bvand x86__rbp ((_ int2bv 64) 4294967295))))
-     (dynamic_invariant1 result true false true))))) :pattern ((ebp x86__rbp)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((ebp x86__rbp)) )))
 
 (declare-fun val__ () (_ BitVec 32))
 
@@ -338,9 +337,6 @@
 
 ;; H
   (assert (= rbp3 rbp1))
-
-;; H
-  (assert (ebp__function_guard (ebp rbp2) rbp2))
 
 (assert
 ;; WP_parameter_def

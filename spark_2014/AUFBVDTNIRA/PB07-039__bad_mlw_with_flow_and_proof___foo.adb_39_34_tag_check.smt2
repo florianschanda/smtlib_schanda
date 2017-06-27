@@ -164,93 +164,69 @@
 ;; prim_func__post_axiom
   (assert
   (forall ((foo__t1_pkg__t1_var__fields us_split_fields))
-  (! (let ((result (prim_func foo__t1_pkg__t1_var__fields)))
-     (=> (prim_func__function_guard result foo__t1_pkg__t1_var__fields)
-     (= (attr__tag result) us_tag))) :pattern ((prim_func
-                                               foo__t1_pkg__t1_var__fields)) )))
+  (! (= (attr__tag (prim_func foo__t1_pkg__t1_var__fields)) us_tag) :pattern (
+  (prim_func foo__t1_pkg__t1_var__fields)) )))
 
 ;; prim_func__post__dispatch_axiom
   (assert
   (forall ((attr__tag1 Int))
   (forall ((foo__t1_pkg__t1_var__fields us_split_fields))
-  (! (let ((result (prim_func1 attr__tag1 foo__t1_pkg__t1_var__fields)))
-     (=> (prim_func__function_guard1 result attr__tag1
-     foo__t1_pkg__t1_var__fields) (= (attr__tag result) attr__tag1))) :pattern (
+  (! (= (attr__tag (prim_func1 attr__tag1 foo__t1_pkg__t1_var__fields)) attr__tag1) :pattern (
   (prim_func1 attr__tag1 foo__t1_pkg__t1_var__fields)) ))))
 
 ;; foo__t1_pkg__t1__compat_axiom
   (assert
   (forall ((foo__t1_pkg__t1_var__fields us_split_fields))
-  (! (=> (prim_func__function_guard1
-     (prim_func1 us_tag foo__t1_pkg__t1_var__fields) us_tag
-     foo__t1_pkg__t1_var__fields)
-     (and (prim_func__function_guard (prim_func foo__t1_pkg__t1_var__fields)
-     foo__t1_pkg__t1_var__fields)
-     (= (prim_func foo__t1_pkg__t1_var__fields) (prim_func1 us_tag
-                                                foo__t1_pkg__t1_var__fields)))) :pattern (
+  (! (= (prim_func foo__t1_pkg__t1_var__fields) (prim_func1 us_tag
+                                                foo__t1_pkg__t1_var__fields)) :pattern (
   (prim_func1 us_tag foo__t1_pkg__t1_var__fields)) )))
 
 ;; foo__t2_pkg__t2__compat_axiom
   (assert
   (forall ((foo__t1_pkg__t1_var__fields us_split_fields))
-  (! (=> (prim_func__function_guard1
-     (prim_func1 us_tag1 foo__t1_pkg__t1_var__fields) us_tag1
-     foo__t1_pkg__t1_var__fields)
-     (and (prim_func__function_guard (prim_func foo__t1_pkg__t1_var__fields)
-     foo__t1_pkg__t1_var__fields)
-     (= (prim_func foo__t1_pkg__t1_var__fields) (prim_func1 us_tag1
-                                                foo__t1_pkg__t1_var__fields)))) :pattern (
+  (! (= (prim_func foo__t1_pkg__t1_var__fields) (prim_func1 us_tag1
+                                                foo__t1_pkg__t1_var__fields)) :pattern (
   (prim_func1 us_tag1 foo__t1_pkg__t1_var__fields)) )))
 
 ;; foo__t3_pkg__t3__compat_axiom
   (assert
   (forall ((foo__t1_pkg__t1_var__fields us_split_fields))
-  (! (=> (prim_func__function_guard1
-     (prim_func1 us_tag2 foo__t1_pkg__t1_var__fields) us_tag2
-     foo__t1_pkg__t1_var__fields)
-     (and (prim_func__function_guard (prim_func foo__t1_pkg__t1_var__fields)
-     foo__t1_pkg__t1_var__fields)
-     (= (prim_func foo__t1_pkg__t1_var__fields) (prim_func1 us_tag2
-                                                foo__t1_pkg__t1_var__fields)))) :pattern (
+  (! (= (prim_func foo__t1_pkg__t1_var__fields) (prim_func1 us_tag2
+                                                foo__t1_pkg__t1_var__fields)) :pattern (
   (prim_func1 us_tag2 foo__t1_pkg__t1_var__fields)) )))
 
 ;; prim_func__def_axiom
   (assert
   (forall ((foo__t1_pkg__t1_var__fields us_split_fields))
-  (! (=> (prim_func__function_guard (prim_func foo__t1_pkg__t1_var__fields)
-     foo__t1_pkg__t1_var__fields)
-     (= (prim_func foo__t1_pkg__t1_var__fields) (mk___rep
+  (! (= (prim_func foo__t1_pkg__t1_var__fields) (mk___rep
                                                 foo__t1_pkg__t1_var__fields
-                                                t1_var__attr__tag))) :pattern (
+                                                t1_var__attr__tag)) :pattern (
   (prim_func foo__t1_pkg__t1_var__fields)) )))
 
-(define-fun default_initial_assumption1 ((temp___expr_186 us_rep)
-  (temp___skip_top_level_187 Bool)) Bool (= (attr__tag temp___expr_186) 
+(define-fun default_initial_assumption1 ((temp___expr_183 us_rep)
+  (temp___skip_top_level_184 Bool)) Bool (= (attr__tag temp___expr_183) 
   us_tag1))
 
-(define-fun default_initial_assumption2 ((temp___expr_196 us_rep)
-  (temp___skip_top_level_197 Bool)) Bool (= (attr__tag temp___expr_196) 
+(define-fun default_initial_assumption2 ((temp___expr_193 us_rep)
+  (temp___skip_top_level_194 Bool)) Bool (= (attr__tag temp___expr_193) 
   us_tag2))
 
 (declare-fun t1_var__split_fields () us_private)
 
-(declare-fun temp___211 () us_private)
+(declare-fun temp___206 () us_private)
 
-(declare-fun temp___2111 () Int)
-
-(define-fun temp___2112 () us_rep (mk___rep (mk___split_fields temp___211)
-                                  temp___2111))
+(declare-fun temp___2061 () Int)
 
 ;; H
   (assert
   (and
-  (and (= temp___2112 (prim_func (mk___split_fields t1_var__split_fields)))
-  (prim_func__function_guard temp___2112
-  (mk___split_fields t1_var__split_fields)))
-  (and (= t1_var__split_fields temp___211) (= t1_var__attr__tag temp___2111))))
+  (= (mk___rep (mk___split_fields temp___206) temp___2061) (prim_func
+                                                           (mk___split_fields
+                                                           t1_var__split_fields)))
+  (and (= t1_var__split_fields temp___206) (= t1_var__attr__tag temp___2061))))
 
 (assert
 ;; WP_parameter_def
  ;; File "foo.adb", line 34, characters 0-0
-  (not (us_compatible_tags temp___2111 us_tag1)))
+  (not (us_compatible_tags temp___2061 us_tag1)))
 (check-sat)

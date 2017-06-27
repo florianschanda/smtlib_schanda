@@ -70,10 +70,9 @@
 
 ;; return_state__post_axiom
   (assert
-  (forall ((a__state us_private))
-  (! (let ((result (return_state a__state)))
-     (=> (return_state__function_guard result a__state) (dynamic_invariant
-     result true false true))) :pattern ((return_state a__state)) )))
+  (forall ((a__state us_private)) (! (dynamic_invariant
+  (return_state a__state) true false
+  true) :pattern ((return_state a__state)) )))
 
 (declare-fun return_state1 (us_private) Int)
 
@@ -81,10 +80,9 @@
 
 ;; return_state__post_axiom
   (assert
-  (forall ((b__state us_private))
-  (! (let ((result (return_state1 b__state)))
-     (=> (return_state__function_guard1 result b__state) (dynamic_invariant
-     result true false true))) :pattern ((return_state1 b__state)) )))
+  (forall ((b__state us_private)) (! (dynamic_invariant
+  (return_state1 b__state) true false
+  true) :pattern ((return_state1 b__state)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -104,16 +102,10 @@
   (assert (=> (<= (- 2147483648) 2147483647) (in_range x)))
 
 ;; H
-  (assert
-  (and
-  (and (= o (return_state1 state1)) (return_state__function_guard1 o state1))
-  (in_range o)))
+  (assert (and (= o (return_state1 state1)) (in_range o)))
 
 ;; H
-  (assert
-  (and
-  (and (= o1 (return_state state)) (return_state__function_guard o1 state))
-  (in_range o1)))
+  (assert (and (= o1 (return_state state)) (in_range o1)))
 
 ;; H
   (assert (= o2 (+ o1 o)))

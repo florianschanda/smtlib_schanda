@@ -303,9 +303,7 @@
 
 ;; valid__def_axiom
   (assert
-  (forall ((e Int))
-  (! (=> (valid__function_guard (valid e) e) (= (= (valid e) true) (< 0 e))) :pattern (
-  (valid e)) )))
+  (forall ((e Int)) (! (= (= (valid e) true) (< 0 e)) :pattern ((valid e)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -321,11 +319,10 @@
   (assert
   (forall ((c (Array Int natural)))
   (forall ((p us_rep))
-  (! (=> (has_element__function_guard (has_element c p) c p)
-     (= (= (has_element c p) true)
+  (! (= (= (has_element c p) true)
      (and
      (<= 1 (to_rep (rec__my_container__cursor__index (us_split_fields1 p))))
-     (<= (to_rep (rec__my_container__cursor__index (us_split_fields1 p))) 100)))) :pattern (
+     (<= (to_rep (rec__my_container__cursor__index (us_split_fields1 p))) 100))) :pattern (
   (has_element c p)) ))))
 
 (declare-fun element ((Array Int natural) us_rep) Int)
@@ -336,22 +333,18 @@
   (assert
   (forall ((c (Array Int natural)))
   (forall ((p us_rep))
-  (! (and (has_element__function_guard (has_element c p) c p)
-     (=> (= (has_element c p) true)
-     (let ((result (element c p)))
-     (=> (element__function_guard result c p) (dynamic_invariant result true
-     false true))))) :pattern ((element c p)) ))))
+  (! (=> (= (has_element c p) true) (dynamic_invariant (element c p) true
+     false true)) :pattern ((element c p)) ))))
 
 ;; element__def_axiom
   (assert
   (forall ((c (Array Int natural)))
   (forall ((p us_rep))
-  (! (=> (element__function_guard (element c p) c p)
-     (= (element c p) (to_rep
+  (! (= (element c p) (to_rep
                       (select c (to_rep
                                 (rec__my_container__cursor__index
-                                (us_split_fields1 p))))))) :pattern (
-  (element c p)) ))))
+                                (us_split_fields1 p)))))) :pattern ((element
+                                                                    c p)) ))))
 
 (declare-sort t2b 0)
 
@@ -437,10 +430,6 @@
 
 ;; H
   (assert (<= j i1))
-
-;; H
-  (assert (valid__function_guard (valid (to_rep (select c2 j)))
-  (to_rep (select c2 j))))
 
 (assert
 ;; WP_parameter_def

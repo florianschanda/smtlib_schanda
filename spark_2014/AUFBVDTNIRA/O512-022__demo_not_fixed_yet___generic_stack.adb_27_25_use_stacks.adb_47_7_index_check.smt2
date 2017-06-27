@@ -83,12 +83,12 @@
 (declare-datatypes () ((item__ref (mk_item__ref (item__content item)))))
 (define-fun item__ref___projection ((a item__ref)) item (item__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_227 Int)
-  (temp___is_init_224 Bool) (temp___skip_constant_225 Bool)
-  (temp___do_toplevel_226 Bool)) Bool (=>
-                                      (or (= temp___is_init_224 true)
+(define-fun dynamic_invariant1 ((temp___expr_220 Int)
+  (temp___is_init_217 Bool) (temp___skip_constant_218 Bool)
+  (temp___do_toplevel_219 Bool)) Bool (=>
+                                      (or (= temp___is_init_217 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range1 temp___expr_227)))
+                                      (in_range1 temp___expr_220)))
 
 (declare-fun to_rep (item) Int)
 

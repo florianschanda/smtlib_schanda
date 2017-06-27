@@ -252,7 +252,13 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(declare-sort t58b 0)
+(declare-fun c62b () map1)
+
+(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+
+(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+
+(declare-sort t64b 0)
 
 (define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
@@ -264,16 +270,24 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
 
-(declare-fun user_eq4 (t58b t58b) Bool)
+(declare-fun user_eq4 (t64b t64b) Bool)
 
-(declare-fun dummy4 () t58b)
+(declare-fun dummy4 () t64b)
 
-(declare-datatypes () ((t58b__ref (mk_t58b__ref (t58b__content t58b)))))
-(define-fun t58b__ref___projection ((a t58b__ref)) t58b (t58b__content a))
+(declare-datatypes () ((t64b__ref (mk_t64b__ref (t64b__content t64b)))))
+(define-fun t64b__ref___projection ((a t64b__ref)) t64b (t64b__content a))
 
-(declare-sort t59b 0)
+(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+(declare-fun c77b () map1)
+
+(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+
+(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+
+(declare-sort t79b 0)
+
+(define-fun in_range6 ((x Int)) Bool (and (<= 0 x) (<= x 9)))
 
 (define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
@@ -283,20 +297,20 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
 
-(declare-fun user_eq5 (t59b t59b) Bool)
+(declare-fun user_eq5 (t79b t79b) Bool)
 
-(declare-fun dummy5 () t59b)
+(declare-fun dummy5 () t79b)
 
-(declare-datatypes () ((t59b__ref (mk_t59b__ref (t59b__content t59b)))))
-(define-fun t59b__ref___projection ((a t59b__ref)) t59b (t59b__content a))
+(declare-datatypes () ((t79b__ref (mk_t79b__ref (t79b__content t79b)))))
+(define-fun t79b__ref___projection ((a t79b__ref)) t79b (t79b__content a))
 
-(declare-fun c62b () map1)
+(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-fun c96b () map1)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
 
-(declare-sort t64b 0)
+(declare-sort t98b 0)
 
 (define-fun in_range7 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
@@ -308,137 +322,9 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
 
-(declare-fun user_eq6 (t64b t64b) Bool)
+(declare-fun user_eq6 (t98b t98b) Bool)
 
-(declare-fun dummy6 () t64b)
-
-(declare-datatypes () ((t64b__ref (mk_t64b__ref (t64b__content t64b)))))
-(define-fun t64b__ref___projection ((a t64b__ref)) t64b (t64b__content a))
-
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
-
-(declare-sort t73b 0)
-
-(define-fun in_range8 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
-
-(declare-fun user_eq7 (t73b t73b) Bool)
-
-(declare-fun dummy7 () t73b)
-
-(declare-datatypes () ((t73b__ref (mk_t73b__ref (t73b__content t73b)))))
-(define-fun t73b__ref___projection ((a t73b__ref)) t73b (t73b__content a))
-
-(declare-sort t74b 0)
-
-(define-fun in_range9 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq9 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE9 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Int)
-
-(declare-fun user_eq8 (t74b t74b) Bool)
-
-(declare-fun dummy8 () t74b)
-
-(declare-datatypes () ((t74b__ref (mk_t74b__ref (t74b__content t74b)))))
-(define-fun t74b__ref___projection ((a t74b__ref)) t74b (t74b__content a))
-
-(declare-fun c77b () map1)
-
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
-
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
-
-(declare-sort t79b 0)
-
-(define-fun in_range10 ((x Int)) Bool (and (<= 0 x) (<= x 9)))
-
-(define-fun bool_eq10 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE10 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) Int)
-
-(declare-fun user_eq9 (t79b t79b) Bool)
-
-(declare-fun dummy9 () t79b)
-
-(declare-datatypes () ((t79b__ref (mk_t79b__ref (t79b__content t79b)))))
-(define-fun t79b__ref___projection ((a t79b__ref)) t79b (t79b__content a))
-
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
-
-(declare-sort t92b 0)
-
-(define-fun in_range11 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq11 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE11 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check11 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE11 (us_image) Int)
-
-(declare-fun user_eq10 (t92b t92b) Bool)
-
-(declare-fun dummy10 () t92b)
-
-(declare-datatypes () ((t92b__ref (mk_t92b__ref (t92b__content t92b)))))
-(define-fun t92b__ref___projection ((a t92b__ref)) t92b (t92b__content a))
-
-(declare-sort t93b 0)
-
-(define-fun in_range12 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq12 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE12 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check12 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE12 (us_image) Int)
-
-(declare-fun user_eq11 (t93b t93b) Bool)
-
-(declare-fun dummy11 () t93b)
-
-(declare-datatypes () ((t93b__ref (mk_t93b__ref (t93b__content t93b)))))
-(define-fun t93b__ref___projection ((a t93b__ref)) t93b (t93b__content a))
-
-(declare-fun c96b () map1)
-
-(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
-
-(declare-sort t98b 0)
-
-(define-fun in_range13 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq13 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE13 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check13 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE13 (us_image) Int)
-
-(declare-fun user_eq12 (t98b t98b) Bool)
-
-(declare-fun dummy12 () t98b)
+(declare-fun dummy6 () t98b)
 
 (declare-datatypes () ((t98b__ref (mk_t98b__ref (t98b__content t98b)))))
 (define-fun t98b__ref___projection ((a t98b__ref)) t98b (t98b__content a))
@@ -498,8 +384,6 @@
 
 (declare-fun i () Int)
 
-(declare-fun o () map1)
-
 (declare-fun temp___231 () Int)
 
 (declare-fun temp___230 () Int)
@@ -510,15 +394,13 @@
 
 (declare-fun temp___232 () map1)
 
-(declare-fun o1 () natural)
+(declare-fun o () natural)
 
-(declare-fun o2 () map1)
+(declare-fun o1 () map1)
 
-(declare-fun o3 () natural)
+(declare-fun o2 () natural)
 
-(declare-fun o4 () map1)
-
-(declare-fun o5 () map1)
+(declare-fun o3 () map1)
 
 (declare-fun temp___251 () map1)
 
@@ -534,21 +416,19 @@
 
 (declare-fun temp___248 () map1)
 
+(declare-fun o4 () natural)
+
+(declare-fun o5 () map1)
+
 (declare-fun o6 () natural)
 
 (declare-fun o7 () map1)
 
-(declare-fun o8 () natural)
+(declare-fun o8 () Int)
 
-(declare-fun o9 () map1)
+(declare-fun o9 () natural)
 
 (declare-fun o10 () map1)
-
-(declare-fun o11 () Int)
-
-(declare-fun o12 () natural)
-
-(declare-fun o13 () map1)
 
 (declare-fun tmp2 () Int)
 
@@ -687,13 +567,10 @@
 (define-fun m22 () map__ref (mk_map__ref m7))
 
 ;; H
-  (assert (= o (temp___220 1 2 0)))
-
-;; H
   (assert (= result m))
 
 ;; H
-  (assert (= m1 o))
+  (assert (= m1 (temp___220 1 2 0)))
 
 ;; H
   (assert (= m1 c62b))
@@ -744,7 +621,7 @@
   (and (or (<= c3 temp___229) (not (= 5 temp___228)))
   (or (<= c3 temp___229) (not (= 7 temp___228))))
   (= (get m2 temp___228 temp___229) (get temp___227 temp___228 temp___229)))))
-  (=> (<= 1 10) (in_range7 c3))) (=> (<= 0 2147483647) (in_range2 tmp4)))
+  (=> (<= 1 10) (in_range5 c3))) (=> (<= 0 2147483647) (in_range2 tmp4)))
   (and (<= 1 c3) (<= c3 10)))))
 
 ;; H
@@ -755,28 +632,28 @@
 
 ;; H
   (assert
-  (=> (and (<= 1 c2) (<= c2 10)) (= (to_rep o1) (to_rep (get m2 7 c3)))))
+  (=> (and (<= 1 c2) (<= c2 10)) (= (to_rep o) (to_rep (get m2 7 c3)))))
 
 ;; H
-  (assert (=> (and (<= 1 c2) (<= c2 10)) (= o2 (set m2 5 c3 o1))))
+  (assert (=> (and (<= 1 c2) (<= c2 10)) (= o1 (set m2 5 c3 o))))
 
 ;; H
   (assert (=> (and (<= 1 c2) (<= c2 10)) (= m2 result3)))
 
 ;; H
-  (assert (=> (and (<= 1 c2) (<= c2 10)) (= m3 o2)))
+  (assert (=> (and (<= 1 c2) (<= c2 10)) (= m3 o1)))
 
 ;; H
-  (assert (=> (and (<= 1 c2) (<= c2 10)) (= (to_rep o3) tmp5)))
+  (assert (=> (and (<= 1 c2) (<= c2 10)) (= (to_rep o2) tmp5)))
 
 ;; H
-  (assert (=> (and (<= 1 c2) (<= c2 10)) (= o4 (set m3 7 c3 o3))))
+  (assert (=> (and (<= 1 c2) (<= c2 10)) (= o3 (set m3 7 c3 o2))))
 
 ;; H
   (assert (=> (and (<= 1 c2) (<= c2 10)) (= m3 result4)))
 
 ;; H
-  (assert (=> (and (<= 1 c2) (<= c2 10)) (= m4 o4)))
+  (assert (=> (and (<= 1 c2) (<= c2 10)) (= m4 o3)))
 
 ;; H
   (assert (=> (and (<= 1 c2) (<= c2 10)) (= c3 10)))
@@ -846,13 +723,10 @@
   (ite (= i6 7) (= (to_rep (get m7 i6 j)) 1) (= (to_rep (get m7 i6 j)) 0))))))))
 
 ;; H
-  (assert (= o5 (temp___236 1 2 0)))
-
-;; H
   (assert (= result5 m22))
 
 ;; H
-  (assert (= m9 o5))
+  (assert (= m9 (temp___236 1 2 0)))
 
 ;; H
   (assert (= m9 c77b))
@@ -908,8 +782,7 @@
   (=> (and (<= 0 c8) (<= c8 9))
   (and
   (and
-  (and (=> (<= 0 9) (in_range10 c9))
-  (=> (<= 0 2147483647) (in_range2 tmp10)))
+  (and (=> (<= 0 9) (in_range6 c9)) (=> (<= 0 2147483647) (in_range2 tmp10)))
   (forall ((temp___246 Int) (temp___247 Int))
   (=>
   (and (and (<= 1 temp___246) (<= temp___246 10))
@@ -928,28 +801,28 @@
 ;; H
   (assert
   (=> (and (<= 0 c8) (<= c8 9))
-  (= (to_rep o6) (to_rep (get m10 7 (+ c9 1))))))
+  (= (to_rep o4) (to_rep (get m10 7 (+ c9 1))))))
 
 ;; H
-  (assert (=> (and (<= 0 c8) (<= c8 9)) (= o7 (set m10 5 (+ c9 1) o6))))
+  (assert (=> (and (<= 0 c8) (<= c8 9)) (= o5 (set m10 5 (+ c9 1) o4))))
 
 ;; H
   (assert (=> (and (<= 0 c8) (<= c8 9)) (= result8 (mk_map__ref m10))))
 
 ;; H
-  (assert (=> (and (<= 0 c8) (<= c8 9)) (= m11 o7)))
+  (assert (=> (and (<= 0 c8) (<= c8 9)) (= m11 o5)))
 
 ;; H
-  (assert (=> (and (<= 0 c8) (<= c8 9)) (= (to_rep o8) tmp11)))
+  (assert (=> (and (<= 0 c8) (<= c8 9)) (= (to_rep o6) tmp11)))
 
 ;; H
-  (assert (=> (and (<= 0 c8) (<= c8 9)) (= o9 (set m11 7 (+ c9 1) o8))))
+  (assert (=> (and (<= 0 c8) (<= c8 9)) (= o7 (set m11 7 (+ c9 1) o6))))
 
 ;; H
   (assert (=> (and (<= 0 c8) (<= c8 9)) (= result9 (mk_map__ref m11))))
 
 ;; H
-  (assert (=> (and (<= 0 c8) (<= c8 9)) (= m12 o9)))
+  (assert (=> (and (<= 0 c8) (<= c8 9)) (= m12 o7)))
 
 ;; H
   (assert (=> (and (<= 0 c8) (<= c8 9)) (= c9 9)))
@@ -1019,13 +892,10 @@
   (= (to_rep (get (map__content m15) i6 j)) 0))))))))
 
 ;; H
-  (assert (= o10 (temp___254 0)))
-
-;; H
   (assert (= result10 m15))
 
 ;; H
-  (assert (= m17 o10))
+  (assert (= m17 (temp___254 0)))
 
 ;; H
   (assert (= m17 c96b))
@@ -1059,7 +929,7 @@
 ;; H
   (assert
   (and
-  (and (=> (<= 1 10) (in_range13 i2))
+  (and (=> (<= 1 10) (in_range7 i2))
   (forall ((temp___261 Int) (temp___262 Int))
   (=>
   (and (and (<= 1 temp___261) (<= temp___261 10))
@@ -1070,20 +940,20 @@
 
 ;; H
   (assert
-  (and (= o11 (+ (to_rep (get m18 i2 i2)) 1)) (in_range1
+  (and (= o8 (+ (to_rep (get m18 i2 i2)) 1)) (in_range1
   (+ (to_rep (get m18 i2 i2)) 1))))
 
 ;; H
-  (assert (= (to_rep o12) o11))
+  (assert (= (to_rep o9) o8))
 
 ;; H
-  (assert (= o13 (set m18 i2 i2 o12)))
+  (assert (= o10 (set m18 i2 i2 o9)))
 
 ;; H
   (assert (= result12 (mk_map__ref m18)))
 
 ;; H
-  (assert (= m19 o13))
+  (assert (= m19 o10))
 
 ;; H
   (assert (not (= i2 10)))
