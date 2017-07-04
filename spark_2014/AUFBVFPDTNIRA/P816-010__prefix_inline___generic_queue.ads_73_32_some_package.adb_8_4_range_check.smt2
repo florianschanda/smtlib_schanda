@@ -1006,10 +1006,7 @@
 ;; some_package__float_buffer__buffer_tag__compat_axiom
   (assert
   (forall ((self us_rep))
-  (! (=> (length__function_guard1 (length2 us_tag self) us_tag self)
-     (and (length__function_guard (length1 self) self)
-     (= (length1 self) (length2 us_tag self)))) :pattern ((length2 us_tag
-                                                          self)) )))
+  (! (= (length1 self) (length2 us_tag self)) :pattern ((length2 us_tag self)) )))
 
 (declare-fun self () us_rep)
 
@@ -1078,9 +1075,7 @@
   (to_rep elements__last)))
 
 ;; H
-  (assert
-  (and (and (= o1 (length1 self)) (length__function_guard o1 self))
-  (in_range6 o1)))
+  (assert (and (= o1 (length1 self)) (in_range6 o1)))
 
 ;; H
   (assert

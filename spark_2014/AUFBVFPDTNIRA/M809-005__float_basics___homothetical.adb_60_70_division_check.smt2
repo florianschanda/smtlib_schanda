@@ -303,13 +303,18 @@
      (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) kv1))
      (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) ka1)))
      (let ((result (adjust2triangle d1 kv1 ka1)))
-     (=> (adjust2triangle__function_guard result d1 kv1 ka1)
      (and
      (and (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) result)
-     (fp.leq result kv1)) (dynamic_invariant result true false true))))) :pattern (
+     (fp.leq result kv1)) (dynamic_invariant result true false true)))) :pattern (
   (adjust2triangle d1 kv1 ka1)) )))
 
-(declare-sort t5b 0)
+(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+
+(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+
+(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
+
+(declare-sort t11b 0)
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
 
@@ -321,115 +326,14 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
 
-(declare-fun user_eq2 (t5b t5b) Bool)
+(declare-fun user_eq2 (t11b t11b) Bool)
 
-(declare-fun dummy2 () t5b)
-
-(declare-datatypes () ((t5b__ref (mk_t5b__ref (t5b__content t5b)))))
-(define-fun t5b__ref___projection ((a t5b__ref)) t5b (t5b__content a))
-
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
-
-(declare-sort t7b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq3 (t7b t7b) Bool)
-
-(declare-fun dummy3 () t7b)
-
-(declare-datatypes () ((t7b__ref (mk_t7b__ref (t7b__content t7b)))))
-(define-fun t7b__ref___projection ((a t7b__ref)) t7b (t7b__content a))
-
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
-
-(declare-sort t9b 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq4 (t9b t9b) Bool)
-
-(declare-fun dummy4 () t9b)
-
-(declare-datatypes () ((t9b__ref (mk_t9b__ref (t9b__content t9b)))))
-(define-fun t9b__ref___projection ((a t9b__ref)) t9b (t9b__content a))
-
-(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
-
-(declare-sort t11b 0)
-
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq5 (t11b t11b) Bool)
-
-(declare-fun dummy5 () t11b)
+(declare-fun dummy2 () t11b)
 
 (declare-datatypes () ((t11b__ref (mk_t11b__ref (t11b__content t11b)))))
 (define-fun t11b__ref___projection ((a t11b__ref)) t11b (t11b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
-
-(declare-sort t16b 0)
-
-(define-fun in_range7 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
-
-(declare-fun user_eq6 (t16b t16b) Bool)
-
-(declare-fun dummy6 () t16b)
-
-(declare-datatypes () ((t16b__ref (mk_t16b__ref (t16b__content t16b)))))
-(define-fun t16b__ref___projection ((a t16b__ref)) t16b (t16b__content a))
-
-(declare-sort t18b 0)
-
-(define-fun in_range8 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun bool_eq9 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
-
-(declare-fun user_eq7 (t18b t18b) Bool)
-
-(declare-fun dummy7 () t18b)
-
-(declare-datatypes () ((t18b__ref (mk_t18b__ref (t18b__content t18b)))))
-(define-fun t18b__ref___projection ((a t18b__ref)) t18b (t18b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS9 () Int)
 
@@ -492,29 +396,23 @@
 
 (declare-fun i () Int)
 
-(declare-fun o () (Array Int float))
+(declare-fun o () Float32)
 
-(declare-fun o1 () (Array Int float))
+(declare-fun o1 () Float32)
 
-(declare-fun o2 () (Array Int float))
+(declare-fun o2 () Float32)
 
 (declare-fun o3 () Float32)
 
 (declare-fun o4 () Float32)
 
-(declare-fun o5 () Float32)
+(declare-fun o5 () float)
 
-(declare-fun o6 () Float32)
+(declare-fun o6 () (Array Int float))
 
 (declare-fun o7 () Float32)
 
-(declare-fun o8 () float)
-
-(declare-fun o9 () (Array Int float))
-
-(declare-fun o10 () Float32)
-
-(declare-fun o11 () Float32)
+(declare-fun o8 () Float32)
 
 (declare-fun result () (Array Int float))
 
@@ -577,37 +475,28 @@
                                                        (select ka j3)))))))
 
 ;; H
-  (assert
-  (= o (homothetical__homothetical__lambda__aggregate_def
-       (fp #b0 #b01111111 #b00000000000000000000000))))
-
-;; H
   (assert (= (mk_map__ref result) (mk_map__ref lambda)))
 
 ;; H
-  (assert (= lambda1 o))
-
-;; H
   (assert
-  (= o1 (homothetical__homothetical__upsilon__aggregate_def
-        (fp #b0 #b01111111 #b00000000000000000000000))))
+  (= lambda1 (homothetical__homothetical__lambda__aggregate_def
+             (fp #b0 #b01111111 #b00000000000000000000000))))
 
 ;; H
   (assert (= (mk_map__ref result1) (mk_map__ref upsilon)))
 
 ;; H
-  (assert (= upsilon1 o1))
-
-;; H
   (assert
-  (= o2 (homothetical__homothetical__kvp__aggregate_def
-        (fp #b0 #b00000000 #b00000000000000000000000))))
+  (= upsilon1 (homothetical__homothetical__upsilon__aggregate_def
+              (fp #b0 #b01111111 #b00000000000000000000000))))
 
 ;; H
   (assert (= (mk_map__ref result2) (mk_map__ref kvp)))
 
 ;; H
-  (assert (= kvp1 o2))
+  (assert
+  (= kvp1 (homothetical__homothetical__kvp__aggregate_def
+          (fp #b0 #b00000000 #b00000000000000000000000))))
 
 ;; H
   (assert
@@ -689,7 +578,7 @@
 ;; H
   (assert
   (and
-  (= o4 (fp.mul RNE (to_rep (select kvp2 i2)) (fp.abs (to_rep (select d j2)))))
+  (= o1 (fp.mul RNE (to_rep (select kvp2 i2)) (fp.abs (to_rep (select d j2)))))
   (not (or (fp.isInfinite (fp.mul RNE (to_rep (select kvp2 i2)) (fp.abs 
   (to_rep (select d j2))))) (fp.isNaN (fp.mul RNE (to_rep (select kvp2 i2)) (fp.abs 
   (to_rep (select d j2)))))))))
@@ -697,36 +586,36 @@
 ;; H
   (assert
   (and
-  (= o3 (fp.mul RNE (to_rep (select kvp2 j2)) (fp.abs (to_rep (select d i2)))))
+  (= o (fp.mul RNE (to_rep (select kvp2 j2)) (fp.abs (to_rep (select d i2)))))
   (not (or (fp.isInfinite (fp.mul RNE (to_rep (select kvp2 j2)) (fp.abs 
   (to_rep (select d i2))))) (fp.isNaN (fp.mul RNE (to_rep (select kvp2 j2)) (fp.abs 
   (to_rep (select d i2)))))))))
 
 ;; H
-  (assert (= o5 (fp.div RNE o3 o4)))
+  (assert (= o2 (fp.div RNE o o1)))
 
 ;; H
-  (assert (and (= o6 o5) (not (or (fp.isInfinite o5) (fp.isNaN o5)))))
+  (assert (and (= o3 o2) (not (or (fp.isInfinite o2) (fp.isNaN o2)))))
 
 ;; H
-  (assert (= o7 (fp.min (to_rep (select lambda3 i2)) o6)))
+  (assert (= o4 (fp.min (to_rep (select lambda3 i2)) o3)))
 
 ;; H
-  (assert (= (to_rep o8) o7))
+  (assert (= (to_rep o5) o4))
 
 ;; H
-  (assert (= o9 (store lambda3 i2 o8)))
+  (assert (= o6 (store lambda3 i2 o5)))
 
 ;; H
   (assert (= result5 (mk_map__ref lambda3)))
 
 ;; H
-  (assert (= lambda4 o9))
+  (assert (= lambda4 o6))
 
 ;; H
   (assert
   (and
-  (= o11 (fp.mul RNE (to_rep (select ka i2)) (fp.abs (to_rep (select d j2)))))
+  (= o8 (fp.mul RNE (to_rep (select ka i2)) (fp.abs (to_rep (select d j2)))))
   (not (or (fp.isInfinite (fp.mul RNE (to_rep (select ka i2)) (fp.abs 
   (to_rep (select d j2))))) (fp.isNaN (fp.mul RNE (to_rep (select ka i2)) (fp.abs 
   (to_rep (select d j2)))))))))
@@ -734,7 +623,7 @@
 ;; H
   (assert
   (and
-  (= o10 (fp.mul RNE (to_rep (select ka j2)) (fp.abs (to_rep (select d i2)))))
+  (= o7 (fp.mul RNE (to_rep (select ka j2)) (fp.abs (to_rep (select d i2)))))
   (not (or (fp.isInfinite (fp.mul RNE (to_rep (select ka j2)) (fp.abs 
   (to_rep (select d i2))))) (fp.isNaN (fp.mul RNE (to_rep (select ka j2)) (fp.abs 
   (to_rep (select d i2)))))))))
@@ -742,5 +631,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "homothetical.ads", line 5, characters 0-0
-  (not (not (fp.eq o11 ((_ to_fp 8 24) #x00000000)))))
+  (not (not (fp.eq o8 ((_ to_fp 8 24) #x00000000)))))
 (check-sat)

@@ -364,9 +364,9 @@
 (define-fun source__ref_2__projection ((a source__ref)) source (source__content
                                                                a))
 
-(define-fun dynamic_invariant2 ((temp___expr_191 (_ BitVec 32))
-  (temp___is_init_188 Bool) (temp___skip_constant_189 Bool)
-  (temp___do_toplevel_190 Bool)) Bool true)
+(define-fun dynamic_invariant2 ((temp___expr_189 (_ BitVec 32))
+  (temp___is_init_186 Bool) (temp___skip_constant_187 Bool)
+  (temp___do_toplevel_188 Bool)) Bool true)
 
 (declare-sort target 0)
 
@@ -388,12 +388,12 @@
 (define-fun target__ref_2__projection ((a target__ref)) target (target__content
                                                                a))
 
-(define-fun dynamic_invariant3 ((temp___expr_197 Float32)
-  (temp___is_init_194 Bool) (temp___skip_constant_195 Bool)
-  (temp___do_toplevel_196 Bool)) Bool (=>
-                                      (or (= temp___is_init_194 true)
+(define-fun dynamic_invariant3 ((temp___expr_195 Float32)
+  (temp___is_init_192 Bool) (temp___skip_constant_193 Bool)
+  (temp___do_toplevel_194 Bool)) Bool (=>
+                                      (or (= temp___is_init_192 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_197) (fp.isNaN temp___expr_197)))))
+                                      (not (or (fp.isInfinite temp___expr_195) (fp.isNaN temp___expr_195)))))
 
 (declare-fun convert ((_ BitVec 32)) Float32)
 
@@ -402,10 +402,8 @@
 ;; convert__post_axiom
   (assert
   (forall ((s (_ BitVec 32)))
-  (! (=> (dynamic_invariant2 s true true true)
-     (let ((result (convert s)))
-     (=> (convert__function_guard result s) (dynamic_invariant3 result true
-     false true)))) :pattern ((convert s)) )))
+  (! (=> (dynamic_invariant2 s true true true) (dynamic_invariant3
+     (convert s) true false true)) :pattern ((convert s)) )))
 
 (declare-fun zero_plus () Float32)
 
@@ -443,12 +441,12 @@
 (define-fun source__ref_3__projection ((a source__ref1)) source1 (source__content1
                                                                  a))
 
-(define-fun dynamic_invariant4 ((temp___expr_203 Float32)
-  (temp___is_init_200 Bool) (temp___skip_constant_201 Bool)
-  (temp___do_toplevel_202 Bool)) Bool (=>
-                                      (or (= temp___is_init_200 true)
+(define-fun dynamic_invariant4 ((temp___expr_201 Float32)
+  (temp___is_init_198 Bool) (temp___skip_constant_199 Bool)
+  (temp___do_toplevel_200 Bool)) Bool (=>
+                                      (or (= temp___is_init_198 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_203) (fp.isNaN temp___expr_203)))))
+                                      (not (or (fp.isInfinite temp___expr_201) (fp.isNaN temp___expr_201)))))
 
 (declare-sort target1 0)
 
@@ -472,12 +470,12 @@
 (define-fun target__ref_3__projection ((a target__ref1)) target1 (target__content1
                                                                  a))
 
-(define-fun dynamic_invariant5 ((temp___expr_209 Int)
-  (temp___is_init_206 Bool) (temp___skip_constant_207 Bool)
-  (temp___do_toplevel_208 Bool)) Bool (=>
-                                      (or (= temp___is_init_206 true)
+(define-fun dynamic_invariant5 ((temp___expr_207 Int)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)) Bool (=>
+                                      (or (= temp___is_init_204 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range2 temp___expr_209)))
+                                      (in_range2 temp___expr_207)))
 
 (declare-fun magic (Float32) Int)
 
@@ -486,23 +484,16 @@
 ;; magic__post_axiom
   (assert
   (forall ((s Float32))
-  (! (=> (dynamic_invariant4 s true true true)
-     (let ((result (magic s)))
-     (=> (magic__function_guard result s) (dynamic_invariant5 result true
-     false true)))) :pattern ((magic s)) )))
+  (! (=> (dynamic_invariant4 s true true true) (dynamic_invariant5 (magic s)
+     true false true)) :pattern ((magic s)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
 ;; zero_plus__def_axiom
-  (assert
-  (and (convert__function_guard (convert ((_ int2bv 32) 0))
-  ((_ int2bv 32) 0)) (= zero_plus (convert ((_ int2bv 32) 0)))))
+  (assert (= zero_plus (convert ((_ int2bv 32) 0))))
 
 ;; zero_neg__def_axiom
-  (assert
-  (and (convert__function_guard (convert ((_ int2bv 32) 2147483648))
-  ((_ int2bv 32) 2147483648))
-  (= zero_neg (convert ((_ int2bv 32) 2147483648)))))
+  (assert (= zero_neg (convert ((_ int2bv 32) 2147483648))))
 
 (declare-fun x () Int)
 
@@ -520,10 +511,7 @@
 
 ;; H
   (assert
-  (and
   (and (= zero_and_unchecked__zero_plus__assume (convert ((_ int2bv 32) 0)))
-  (convert__function_guard zero_and_unchecked__zero_plus__assume
-  ((_ int2bv 32) 0)))
   (not (or (fp.isInfinite zero_and_unchecked__zero_plus__assume) (fp.isNaN 
   zero_and_unchecked__zero_plus__assume)))))
 
@@ -536,11 +524,8 @@
 ;; H
   (assert
   (and
-  (and
   (= zero_and_unchecked__zero_neg__assume (convert
                                           ((_ int2bv 32) 2147483648)))
-  (convert__function_guard zero_and_unchecked__zero_neg__assume
-  ((_ int2bv 32) 2147483648)))
   (not (or (fp.isInfinite zero_and_unchecked__zero_neg__assume) (fp.isNaN 
   zero_and_unchecked__zero_neg__assume)))))
 
@@ -569,8 +554,7 @@
   (assert (fp.eq c1b c2b))
 
 ;; H
-  (assert
-  (and (and (= o (magic c2b)) (magic__function_guard o c2b)) (in_range2 o)))
+  (assert (and (= o (magic c2b)) (in_range2 o)))
 
 ;; H
   (assert (= o1 (ite (= o 0) true false)))
@@ -582,9 +566,7 @@
   (assert (= result true))
 
 ;; H
-  (assert
-  (and (and (= o2 (magic c1b)) (magic__function_guard o2 c1b)) (in_range2
-  o2)))
+  (assert (and (= o2 (magic c1b)) (in_range2 o2)))
 
 (assert
 ;; WP_parameter_def

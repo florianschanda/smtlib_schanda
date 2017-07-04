@@ -198,26 +198,18 @@
 ;; approx_cos__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (approx_cos x)))
-     (=> (approx_cos__function_guard result x) (dynamic_invariant result true
-     false true)))) :pattern ((approx_cos x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant
+     (approx_cos x) true false true)) :pattern ((approx_cos x)) )))
 
 ;; approx_cos__def_axiom
   (assert
   (forall ((x Float32))
-  (! (=>
-     (and (dynamic_invariant x true true true) (approx_cos__function_guard
-     (approx_cos x) x))
-     (and (pow2__function_guard (pow21 x) x)
-     (and (pow4__function_guard (pow4 x) x)
-     (and (pow6__function_guard (pow6 x) x)
-     (and (pow8__function_guard (pow8 x) x)
+  (! (=> (dynamic_invariant x true true true)
      (= (approx_cos x) (fp.add RNE (fp.sub RNE (fp.add RNE (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000) (fp.div RNE 
      (pow21 x) (fp #b0 #b10000000 #b00000000000000000000000))) (fp.div RNE 
      (pow4 x) (fp #b0 #b10000011 #b10000000000000000000000))) (fp.div RNE 
      (pow6 x) (fp #b0 #b10001000 #b01101000000000000000000))) (fp.div RNE 
-     (pow8 x) (fp #b0 #b10001110 #b00111011000000000000000))))))))) :pattern (
+     (pow8 x) (fp #b0 #b10001110 #b00111011000000000000000))))) :pattern (
   (approx_cos x)) )))
 
 (declare-fun x () Float32)
@@ -227,66 +219,51 @@
 ;; pow2__post_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=> (dynamic_invariant x1 true true true)
-     (let ((result (pow21 x1)))
-     (=> (pow2__function_guard result x1) (dynamic_invariant result true
-     false true)))) :pattern ((pow21 x1)) )))
+  (! (=> (dynamic_invariant x1 true true true) (dynamic_invariant (pow21 x1)
+     true false true)) :pattern ((pow21 x1)) )))
 
 ;; pow2__def_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=>
-     (and (dynamic_invariant x1 true true true) (pow2__function_guard
-     (pow21 x1) x1)) (= (pow21 x1) (fp.mul RNE x1 x1))) :pattern ((pow21 x1)) )))
+  (! (=> (dynamic_invariant x1 true true true)
+     (= (pow21 x1) (fp.mul RNE x1 x1))) :pattern ((pow21 x1)) )))
 
 ;; pow4__post_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=> (dynamic_invariant x1 true true true)
-     (let ((result (pow4 x1)))
-     (=> (pow4__function_guard result x1) (dynamic_invariant result true
-     false true)))) :pattern ((pow4 x1)) )))
+  (! (=> (dynamic_invariant x1 true true true) (dynamic_invariant (pow4 x1)
+     true false true)) :pattern ((pow4 x1)) )))
 
 ;; pow4__def_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=>
-     (and (dynamic_invariant x1 true true true) (pow4__function_guard
-     (pow4 x1) x1))
+  (! (=> (dynamic_invariant x1 true true true)
      (= (pow4 x1) (fp.mul RNE (fp.mul RNE (fp.mul RNE x1 x1) x1) x1))) :pattern (
   (pow4 x1)) )))
 
 ;; pow6__post_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=> (dynamic_invariant x1 true true true)
-     (let ((result (pow6 x1)))
-     (=> (pow6__function_guard result x1) (dynamic_invariant result true
-     false true)))) :pattern ((pow6 x1)) )))
+  (! (=> (dynamic_invariant x1 true true true) (dynamic_invariant (pow6 x1)
+     true false true)) :pattern ((pow6 x1)) )))
 
 ;; pow6__def_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=>
-     (and (dynamic_invariant x1 true true true) (pow6__function_guard
-     (pow6 x1) x1))
+  (! (=> (dynamic_invariant x1 true true true)
      (= (pow6 x1) (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE x1 x1) x1) x1) x1) x1))) :pattern (
   (pow6 x1)) )))
 
 ;; pow8__post_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=> (dynamic_invariant x1 true true true)
-     (let ((result (pow8 x1)))
-     (=> (pow8__function_guard result x1) (dynamic_invariant result true
-     false true)))) :pattern ((pow8 x1)) )))
+  (! (=> (dynamic_invariant x1 true true true) (dynamic_invariant (pow8 x1)
+     true false true)) :pattern ((pow8 x1)) )))
 
 ;; pow8__def_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=>
-     (and (dynamic_invariant x1 true true true) (pow8__function_guard
-     (pow8 x1) x1))
+  (! (=> (dynamic_invariant x1 true true true)
      (= (pow8 x1) (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE x1 x1) x1) x1) x1) x1) x1) x1))) :pattern (
   (pow8 x1)) )))
 
@@ -347,9 +324,6 @@
 
 ;; H
   (assert (= result1 trigo__cos__result4))
-
-;; H
-  (assert (approx_cos__function_guard (approx_cos x) x))
 
 (assert
 ;; WP_parameter_def

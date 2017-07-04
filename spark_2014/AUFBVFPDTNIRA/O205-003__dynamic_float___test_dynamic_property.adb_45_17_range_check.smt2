@@ -269,7 +269,7 @@
 
 (declare-fun o () Float32)
 
-(declare-fun temp___157 () Float32)
+(declare-fun temp___156 () Float32)
 
 (declare-fun result () Bool)
 
@@ -301,7 +301,7 @@
 ;; H
   (assert
   (and
-  (= temp___157 (fp.add RNE x (fp #b0 #b01111111 #b00000000000000000000000)))
+  (= temp___156 (fp.add RNE x (fp #b0 #b01111111 #b00000000000000000000000)))
   (not (or (fp.isInfinite (fp.add RNE x (fp #b0 #b01111111 #b00000000000000000000000))) (fp.isNaN (fp.add RNE 
   x (fp #b0 #b01111111 #b00000000000000000000000)))))))
 
@@ -309,5 +309,5 @@
 ;; WP_parameter_def
  ;; File "test_dynamic_property.adb", line 5, characters 0-0
   (not (dynamic_property (fp #b0 #b01111111 #b00000000000000000000000) 
-  last temp___157)))
+  last temp___156)))
 (check-sat)

@@ -237,9 +237,7 @@
   (assert
   (forall ((n Int))
   (forall ((speed Float64) (distance Float64))
-  (! (=> (invariant____function_guard (invariant__ n speed distance) n speed
-     distance)
-     (= (= (invariant__ n speed distance) true)
+  (! (= (= (invariant__ n speed distance) true)
      (and
      (and
      (fp.leq (fp.mul RNE (of_int RNE n) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))) speed)
@@ -248,7 +246,7 @@
      (fp.leq (fp.mul RNE (fp.mul RNE (fp.mul RNE (of_int RNE n) (of_int RNE
                                                                 (+ n 1))) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))) (fp #b0 #b01111111110 #b0000000000000000000000000000000000000000000000000000)) distance)
      (fp.leq distance (fp.mul RNE (fp.mul RNE (fp.mul RNE (of_int RNE n) 
-     (of_int RNE (+ n 1))) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp #b0 #b01111111110 #b0000000000000000000000000000000000000000000000000000))))))) :pattern (
+     (of_int RNE (+ n 1))) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp #b0 #b01111111110 #b0000000000000000000000000000000000000000000000000000)))))) :pattern (
   (invariant__ n speed distance)) ))))
 
 (declare-fun n () Int)
@@ -306,10 +304,6 @@
 (declare-fun distance3 () Float64)
 
 (declare-fun average3 () Float64)
-
-;; H
-  (assert (invariant____function_guard (invariant__ n speed distance) 
-  n speed distance))
 
 ;; H
   (assert (in_range1 n))
@@ -397,10 +391,6 @@
 
 ;; H
   (assert (= speed3 speed1))
-
-;; H
-  (assert (invariant____function_guard (invariant__ (+ n 1) speed2 distance2)
-  (+ n 1) speed2 distance2))
 
 (assert
 ;; WP_parameter_def

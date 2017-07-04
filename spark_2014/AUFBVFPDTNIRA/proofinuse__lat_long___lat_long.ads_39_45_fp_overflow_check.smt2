@@ -180,9 +180,8 @@
 ;; olt__def_axiom
   (assert
   (forall ((left Float32) (right Float32))
-  (! (=> (olt__function_guard (olt left right) left right)
-     (= (= (olt left right) true)
-     (fp.lt left (fp.add RNE right (fp #b0 #b01101110 #b01001111100010110101100))))) :pattern (
+  (! (= (= (olt left right) true)
+     (fp.lt left (fp.add RNE right (fp #b0 #b01101110 #b01001111100010110101100)))) :pattern (
   (olt left right)) )))
 
 (declare-fun sin1 (Float32) Float32)
@@ -198,20 +197,18 @@
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true)
      (let ((result (cos1 x)))
-     (=> (cos__function_guard result x)
      (and
      (=>
      (and (fp.leq (fp.neg (fp #b0 #b10000101 #b00101100000000000000000)) x)
      (fp.leq x (fp #b0 #b10000101 #b00101100000000000000000)))
      (fp.leq (fp #b0 #b01111011 #b10011001100110011001101) result))
-     (dynamic_invariant result true false true))))) :pattern ((cos1 x)) )))
+     (dynamic_invariant result true false true)))) :pattern ((cos1 x)) )))
 
 ;; cos__def_axiom
   (assert
   (forall ((x Float32))
-  (! (=>
-     (and (dynamic_invariant x true true true) (cos__function_guard (cos1 x)
-     x)) (= (cos1 x) (sin1 x))) :pattern ((cos1 x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (cos1 x) (sin1 x))) :pattern (
+  (cos1 x)) )))
 
 (declare-sort latitude 0)
 
@@ -462,11 +459,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o (cos1
        (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source)))))
-  (cos__function_guard o
-  (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source)))))
   (and (not (or (fp.isInfinite o) (fp.isNaN o)))
   (and
   (= o (sin1

@@ -359,29 +359,6 @@
   (= (to_rep (select a temp___idx_132)) (to_rep
                                         (select b (+ (- b__first a__first) temp___idx_132)))))))))))
 
-(declare-sort tt_tab_4_l_floatD1 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq2 (tt_tab_4_l_floatD1 tt_tab_4_l_floatD1) Bool)
-
-(declare-fun dummy2 () tt_tab_4_l_floatD1)
-
-(declare-datatypes ()
-((tt_tab_4_l_floatD1__ref
- (mk_tt_tab_4_l_floatD1__ref
- (tt_tab_4_l_floatD1__content tt_tab_4_l_floatD1)))))
-(define-fun tt_tab_4_l_floatD1__ref___projection ((a tt_tab_4_l_floatD1__ref)) tt_tab_4_l_floatD1 
-  (tt_tab_4_l_floatD1__content a))
-
 (declare-datatypes ()
 ((map__ref1 (mk_map__ref1 (map__content1 (Array Int long_float))))))
 (declare-fun slide1 ((Array Int long_float) Int Int) (Array Int long_float))
@@ -424,7 +401,7 @@
   (forall ((i Int))
   (! (= (select (singleton2 v i) i) v) :pattern ((select (singleton2 v i) i)) ))))
 
-(define-fun bool_eq6 ((a (Array Int long_float)) (a__first Int) (a__last Int)
+(define-fun bool_eq5 ((a (Array Int long_float)) (a__first Int) (a__last Int)
   (b (Array Int long_float)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -443,7 +420,7 @@
   (assert
   (forall ((a (Array Int long_float)) (b (Array Int long_float)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq6 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq5 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -459,66 +436,9 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(declare-sort t1b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq3 (t1b t1b) Bool)
-
-(declare-fun dummy3 () t1b)
-
-(declare-datatypes () ((t1b__ref (mk_t1b__ref (t1b__content t1b)))))
-(define-fun t1b__ref___projection ((a1 t1b__ref)) t1b (t1b__content a1))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(declare-sort t3b 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq4 (t3b t3b) Bool)
-
-(declare-fun dummy4 () t3b)
-
-(declare-datatypes () ((t3b__ref (mk_t3b__ref (t3b__content t3b)))))
-(define-fun t3b__ref___projection ((a1 t3b__ref)) t3b (t3b__content a1))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
-
-(declare-sort t5b 0)
-
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq9 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq5 (t5b t5b) Bool)
-
-(declare-fun dummy5 () t5b)
-
-(declare-datatypes () ((t5b__ref (mk_t5b__ref (t5b__content t5b)))))
-(define-fun t5b__ref___projection ((a1 t5b__ref)) t5b (t5b__content a1))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
@@ -590,12 +510,6 @@
 
 (declare-fun d () (Array Int long_float))
 
-(declare-fun o () (Array Int long_float))
-
-(declare-fun o1 () (Array Int long_float))
-
-(declare-fun o2 () (Array Int long_float))
-
 (declare-fun result () (Array Int long_float))
 
 (declare-fun b1 () (Array Int long_float))
@@ -619,22 +533,11 @@
   (fp.leq (to_rep (select a i)) (fp #b0 #b01111111 #b00000000000000000000000))))))
 
 ;; H
-  (assert
-  (= o (floats__test__b__aggregate_def
-       (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-       (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-       (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-       (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))))
-
-;; H
   (assert (= result b))
 
 ;; H
-  (assert (= b1 o))
-
-;; H
   (assert
-  (= o1 (floats__test__c__aggregate_def
+  (= b1 (floats__test__b__aggregate_def
         (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
         (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
         (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
@@ -644,11 +547,8 @@
   (assert (= result1 c))
 
 ;; H
-  (assert (= c1 o1))
-
-;; H
   (assert
-  (= o2 (floats__test__d__aggregate_def
+  (= c1 (floats__test__c__aggregate_def
         (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
         (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
         (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
@@ -658,7 +558,12 @@
   (assert (= result2 d))
 
 ;; H
-  (assert (= d1 o2))
+  (assert
+  (= d1 (floats__test__d__aggregate_def
+        (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
+        (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
+        (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
+        (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))))
 
 (assert
 ;; WP_parameter_def

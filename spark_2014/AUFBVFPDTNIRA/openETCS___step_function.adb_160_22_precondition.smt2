@@ -579,9 +579,8 @@
      (and (dynamic_invariant1 x1 true true true) (dynamic_invariant1 x2 true
      true true))
      (let ((result (min x1 x2)))
-     (=> (min__function_guard result x1 x2)
      (and (ite (fp.leq x1 x2) (fp.eq result x1) (fp.eq result x2))
-     (dynamic_invariant1 result true false true))))) :pattern ((min x1 x2)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((min x1 x2)) )))
 
 (declare-fun is_valid (us_rep1) Bool)
 
@@ -593,8 +592,7 @@
 ;; is_valid__def_axiom
   (assert
   (forall ((sfun us_rep1))
-  (! (=> (is_valid__function_guard (is_valid sfun) sfun)
-     (= (= (is_valid sfun) true)
+  (! (= (= (is_valid sfun) true)
      (and
      (= (to_rep2
         (rec__step_function__delimiter_entry__delimiter
@@ -618,7 +616,7 @@
                                   (us_split_fields1
                                   (let ((temp___183 (rec__step_function__step_function_t__step
                                                     (us_split_fields3 sfun))))
-                                  (select temp___183 (+ i 1)))))))))))) :pattern (
+                                  (select temp___183 (+ i 1))))))))))) :pattern (
   (is_valid sfun)) )))
 
 (declare-fun get_value (us_rep1 Int) Float32)
@@ -636,10 +634,8 @@
   (assert
   (forall ((sfun us_rep1))
   (forall ((x Int))
-  (! (and (is_valid__function_guard (is_valid sfun) sfun)
-     (=> (and (dynamic_invariant2 x true true true) (= (is_valid sfun) true))
+  (! (=> (and (dynamic_invariant2 x true true true) (= (is_valid sfun) true))
      (let ((result (get_value sfun x)))
-     (=> (get_value__function_guard result sfun x)
      (and
      (or
      (exists ((i Int))
@@ -653,40 +649,40 @@
      (<= (to_rep2
          (rec__step_function__delimiter_entry__delimiter
          (us_split_fields1
-         (let ((temp___201 (rec__step_function__step_function_t__step
+         (let ((temp___199 (rec__step_function__step_function_t__step
                            (us_split_fields3 sfun))))
-         (select temp___201 i))))) x)
+         (select temp___199 i))))) x)
      (< x (to_rep2
           (rec__step_function__delimiter_entry__delimiter
           (us_split_fields1
-          (let ((temp___202 (rec__step_function__step_function_t__step
+          (let ((temp___200 (rec__step_function__step_function_t__step
                             (us_split_fields3 sfun))))
-          (select temp___202 (+ i 1))))))))
+          (select temp___200 (+ i 1))))))))
      (fp.eq result (to_rep
                    (rec__step_function__delimiter_entry__value
                    (us_split_fields1
-                   (let ((temp___203 (rec__step_function__step_function_t__step
+                   (let ((temp___201 (rec__step_function__step_function_t__step
                                      (us_split_fields3 sfun))))
-                   (select temp___203 i)))))))))
+                   (select temp___201 i)))))))))
      (and
      (<= (to_rep2
          (rec__step_function__delimiter_entry__delimiter
          (us_split_fields1
-         (let ((temp___204 (rec__step_function__step_function_t__step
+         (let ((temp___202 (rec__step_function__step_function_t__step
                            (us_split_fields3 sfun))))
-         (select temp___204 (to_rep1
+         (select temp___202 (to_rep1
                             (rec__step_function__step_function_t__number_of_delimiters
                             (us_split_fields3 sfun)))))))) x)
      (fp.eq result (to_rep
                    (rec__step_function__delimiter_entry__value
                    (us_split_fields1
-                   (let ((temp___205 (rec__step_function__step_function_t__step
+                   (let ((temp___203 (rec__step_function__step_function_t__step
                                      (us_split_fields3 sfun))))
-                   (select temp___205 (to_rep1
+                   (select temp___203 (to_rep1
                                       (rec__step_function__step_function_t__number_of_delimiters
                                       (us_split_fields3 sfun)))))))))))
-     (dynamic_invariant1 result true false true)))))) :pattern ((get_value
-                                                                sfun x)) ))))
+     (dynamic_invariant1 result true false true)))) :pattern ((get_value sfun
+                                                              x)) ))))
 
 (declare-fun sfun1 () us_rep1)
 
@@ -740,9 +736,9 @@
 
 (declare-fun o8 () (Array Int us_rep))
 
-(declare-fun temp___325 () num_delimiters_range)
+(declare-fun temp___313 () num_delimiters_range)
 
-(declare-fun temp___3251 () (Array Int us_rep))
+(declare-fun temp___3131 () (Array Int us_rep))
 
 (declare-fun o9 () function_range)
 
@@ -754,7 +750,7 @@
 
 (declare-fun o13 () us_split_fields2)
 
-(declare-fun temp___372 () us_rep1)
+(declare-fun temp___360 () us_rep1)
 
 (declare-fun result () int__ref)
 
@@ -795,12 +791,6 @@
 (declare-fun result6 () us_split_fields__ref1)
 
 (declare-fun merge__split_fields4 () us_split_fields2)
-
-;; H
-  (assert (is_valid__function_guard (is_valid sfun1) sfun1))
-
-;; H
-  (assert (is_valid__function_guard (is_valid sfun2) sfun2))
 
 ;; H
   (assert
@@ -879,10 +869,10 @@
   (assert (= o6 o8))
 
 ;; H
-  (assert (= temp___325 o7))
+  (assert (= temp___313 o7))
 
 ;; H
-  (assert (= temp___3251 o8))
+  (assert (= temp___3131 o8))
 
 ;; H
   (assert
@@ -891,88 +881,7 @@
 
 ;; H
   (assert
-  (= merge__split_fields2 (mk___split_fields1 temp___325 temp___3251)))
-
-;; H
-  (assert
-  (forall ((i Int)) (get_value__function_guard
-  (get_value sfun1
-  (to_rep2
-  (rec__step_function__delimiter_entry__delimiter
-  (us_split_fields1
-  (select (rec__step_function__step_function_t__step merge__split_fields3) i)))))
-  sfun1
-  (to_rep2
-  (rec__step_function__delimiter_entry__delimiter
-  (us_split_fields1
-  (select (rec__step_function__step_function_t__step merge__split_fields3) i)))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (get_value__function_guard
-  (get_value sfun2
-  (to_rep2
-  (rec__step_function__delimiter_entry__delimiter
-  (us_split_fields1
-  (select (rec__step_function__step_function_t__step merge__split_fields3) i)))))
-  sfun2
-  (to_rep2
-  (rec__step_function__delimiter_entry__delimiter
-  (us_split_fields1
-  (select (rec__step_function__step_function_t__step merge__split_fields3) i)))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (get_value__function_guard
-  (get_value sfun1
-  (to_rep2
-  (rec__step_function__delimiter_entry__delimiter
-  (us_split_fields1
-  (select (rec__step_function__step_function_t__step merge__split_fields3) i)))))
-  sfun1
-  (to_rep2
-  (rec__step_function__delimiter_entry__delimiter
-  (us_split_fields1
-  (select (rec__step_function__step_function_t__step merge__split_fields3) i)))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (get_value__function_guard
-  (get_value sfun2
-  (to_rep2
-  (rec__step_function__delimiter_entry__delimiter
-  (us_split_fields1
-  (select (rec__step_function__step_function_t__step merge__split_fields3) i)))))
-  sfun2
-  (to_rep2
-  (rec__step_function__delimiter_entry__delimiter
-  (us_split_fields1
-  (select (rec__step_function__step_function_t__step merge__split_fields3) i)))))))
-
-;; H
-  (assert
-  (forall ((i Int)) (min__function_guard
-  (min
-  (get_value sfun1
-  (to_rep2
-  (rec__step_function__delimiter_entry__delimiter
-  (us_split_fields1
-  (select (rec__step_function__step_function_t__step merge__split_fields3) i)))))
-  (get_value sfun2
-  (to_rep2
-  (rec__step_function__delimiter_entry__delimiter
-  (us_split_fields1
-  (select (rec__step_function__step_function_t__step merge__split_fields3) i))))))
-  (get_value sfun1
-  (to_rep2
-  (rec__step_function__delimiter_entry__delimiter
-  (us_split_fields1
-  (select (rec__step_function__step_function_t__step merge__split_fields3) i)))))
-  (get_value sfun2
-  (to_rep2
-  (rec__step_function__delimiter_entry__delimiter
-  (us_split_fields1
-  (select (rec__step_function__step_function_t__step merge__split_fields3) i))))))))
+  (= merge__split_fields2 (mk___split_fields1 temp___313 temp___3131)))
 
 ;; H
   (assert (<= 0 i12))
@@ -1228,16 +1137,13 @@
          merge__split_fields3) o12)))
 
 ;; H
-  (assert (= temp___372 (mk___rep1 o13)))
+  (assert (= temp___360 (mk___rep1 o13)))
 
 ;; H
   (assert (= result6 (mk___split_fields__ref1 merge__split_fields3)))
 
 ;; H
-  (assert (= merge__split_fields4 (us_split_fields3 temp___372)))
-
-;; H
-  (assert (is_valid__function_guard (is_valid sfun2) sfun2))
+  (assert (= merge__split_fields4 (us_split_fields3 temp___360)))
 
 (assert
 ;; WP_parameter_def

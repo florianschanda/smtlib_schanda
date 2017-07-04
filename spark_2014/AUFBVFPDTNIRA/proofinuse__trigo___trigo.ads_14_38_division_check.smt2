@@ -152,18 +152,14 @@
 ;; pow3__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (pow3 x)))
-     (=> (pow3__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((pow3 x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (pow3 x)
+     true false true)) :pattern ((pow3 x)) )))
 
 ;; pow3__def_axiom
   (assert
   (forall ((x Float32))
-  (! (=>
-     (and (dynamic_invariant x true true true) (pow3__function_guard 
-     (pow3 x) x)) (= (pow3 x) (fp.mul RNE (fp.mul RNE x x) x))) :pattern (
-  (pow3 x)) )))
+  (! (=> (dynamic_invariant x true true true)
+     (= (pow3 x) (fp.mul RNE (fp.mul RNE x x) x))) :pattern ((pow3 x)) )))
 
 (declare-fun pow5 (Float32) Float32)
 
@@ -172,17 +168,13 @@
 ;; pow5__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (pow5 x)))
-     (=> (pow5__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((pow5 x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (pow5 x)
+     true false true)) :pattern ((pow5 x)) )))
 
 ;; pow5__def_axiom
   (assert
   (forall ((x Float32))
-  (! (=>
-     (and (dynamic_invariant x true true true) (pow5__function_guard 
-     (pow5 x) x))
+  (! (=> (dynamic_invariant x true true true)
      (= (pow5 x) (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE x x) x) x) x))) :pattern (
   (pow5 x)) )))
 
@@ -193,17 +185,13 @@
 ;; pow7__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (pow7 x)))
-     (=> (pow7__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((pow7 x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (pow7 x)
+     true false true)) :pattern ((pow7 x)) )))
 
 ;; pow7__def_axiom
   (assert
   (forall ((x Float32))
-  (! (=>
-     (and (dynamic_invariant x true true true) (pow7__function_guard 
-     (pow7 x) x))
+  (! (=> (dynamic_invariant x true true true)
      (= (pow7 x) (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE x x) x) x) x) x) x))) :pattern (
   (pow7 x)) )))
 
@@ -222,7 +210,7 @@
 
 ;; H
   (assert
-  (and (and (= o1 (pow7 x)) (pow7__function_guard o1 x))
+  (and (= o1 (pow7 x))
   (and (not (or (fp.isInfinite o1) (fp.isNaN o1)))
   (= o1 (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE 
   x x) x) x) x) x) x)))))
@@ -233,7 +221,7 @@
 
 ;; H
   (assert
-  (and (and (= o (pow5 x)) (pow5__function_guard o x))
+  (and (= o (pow5 x))
   (and (not (or (fp.isInfinite o) (fp.isNaN o)))
   (= o (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE x x) x) x) x)))))
 

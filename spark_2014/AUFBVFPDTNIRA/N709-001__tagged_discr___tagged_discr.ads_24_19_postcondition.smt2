@@ -1521,78 +1521,61 @@
 ;; tagged_discr__t__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (is_zero__function_guard1 (is_zero1 us_tag v) us_tag v)
-     (and (is_zero__function_guard (is_zero v) v)
-     (= (to_int1 (is_zero v)) (to_int1 (is_zero1 us_tag v))))) :pattern (
+  (! (= (to_int1 (is_zero v)) (to_int1 (is_zero1 us_tag v))) :pattern (
   (is_zero1 us_tag v)) )))
 
 ;; tagged_discr__u1__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (is_zero__function_guard1 (is_zero1 us_tag1 v) us_tag1 v)
-     (and (is_zero__2__function_guard (is_zero__2 (of_base v)) (of_base v))
-     (= (to_int1 (is_zero__2 (of_base v))) (to_int1 (is_zero1 us_tag1 v))))) :pattern (
+  (! (= (to_int1 (is_zero__2 (of_base v))) (to_int1 (is_zero1 us_tag1 v))) :pattern (
   (is_zero1 us_tag1 v)) )))
 
 ;; tagged_discr__u2__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (is_zero__function_guard1 (is_zero1 us_tag2 v) us_tag2 v)
-     (and (is_zero__3__function_guard (is_zero__3 (of_base1 v)) (of_base1 v))
-     (= (to_int1 (is_zero__3 (of_base1 v))) (to_int1 (is_zero1 us_tag2 v))))) :pattern (
+  (! (= (to_int1 (is_zero__3 (of_base1 v))) (to_int1 (is_zero1 us_tag2 v))) :pattern (
   (is_zero1 us_tag2 v)) )))
 
 ;; tagged_discr__init__T3b__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (is_zero__function_guard1 (is_zero1 us_tag3 v) us_tag3 v)
-     (and (is_zero__function_guard (is_zero v) v)
-     (= (to_int1 (is_zero v)) (to_int1 (is_zero1 us_tag3 v))))) :pattern (
+  (! (= (to_int1 (is_zero v)) (to_int1 (is_zero1 us_tag3 v))) :pattern (
   (is_zero1 us_tag3 v)) )))
 
 ;; tagged_discr__init__2__T6b__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (is_zero__function_guard1 (is_zero1 us_tag4 v) us_tag4 v)
-     (and (is_zero__function_guard (is_zero v) v)
-     (= (to_int1 (is_zero v)) (to_int1 (is_zero1 us_tag4 v))))) :pattern (
+  (! (= (to_int1 (is_zero v)) (to_int1 (is_zero1 us_tag4 v))) :pattern (
   (is_zero1 us_tag4 v)) )))
 
 ;; tagged_discr__init__2__T8b__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (is_zero__function_guard1 (is_zero1 us_tag5 v) us_tag5 v)
-     (and (is_zero__2__function_guard (is_zero__2 (of_base v)) (of_base v))
-     (= (to_int1 (is_zero__2 (of_base v))) (to_int1 (is_zero1 us_tag5 v))))) :pattern (
+  (! (= (to_int1 (is_zero__2 (of_base v))) (to_int1 (is_zero1 us_tag5 v))) :pattern (
   (is_zero1 us_tag5 v)) )))
 
 ;; tagged_discr__init__3__T11b__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (is_zero__function_guard1 (is_zero1 us_tag6 v) us_tag6 v)
-     (and (is_zero__function_guard (is_zero v) v)
-     (= (to_int1 (is_zero v)) (to_int1 (is_zero1 us_tag6 v))))) :pattern (
+  (! (= (to_int1 (is_zero v)) (to_int1 (is_zero1 us_tag6 v))) :pattern (
   (is_zero1 us_tag6 v)) )))
 
 ;; tagged_discr__init__3__T13b__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (is_zero__function_guard1 (is_zero1 us_tag7 v) us_tag7 v)
-     (and (is_zero__3__function_guard (is_zero__3 (of_base1 v)) (of_base1 v))
-     (= (to_int1 (is_zero__3 (of_base1 v))) (to_int1 (is_zero1 us_tag7 v))))) :pattern (
+  (! (= (to_int1 (is_zero__3 (of_base1 v))) (to_int1 (is_zero1 us_tag7 v))) :pattern (
   (is_zero1 us_tag7 v)) )))
 
 ;; is_zero__def_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (is_zero__function_guard (is_zero v) v)
-     (= (= (is_zero v) true)
+  (! (= (= (is_zero v) true)
      (and (not (= (rec__tagged_discr__t__z (us_split_fields1 v)) true))
      (ite (or
           (= (to_rep1 (rec__tagged_discr__t__discr (us_split_discrs1 v))) 0)
           (= (to_rep1 (rec__tagged_discr__t__discr (us_split_discrs1 v))) 2))
      (= (to_rep (rec__tagged_discr__t__x (us_split_fields1 v))) 0)
-     (fp.eq (to_rep2 (rec__tagged_discr__t__y (us_split_fields1 v))) (fp #b0 #b00000000 #b00000000000000000000000)))))) :pattern (
+     (fp.eq (to_rep2 (rec__tagged_discr__t__y (us_split_fields1 v))) (fp #b0 #b00000000 #b00000000000000000000000))))) :pattern (
   (is_zero v)) )))
 
 (declare-fun v__split_discrs () us_split_discrs)
@@ -1628,24 +1611,19 @@
 ;; tagged_discr__u1__compat_axiom
   (assert
   (forall ((v us_rep1))
-  (! (=> (is_zero__2__function_guard1 (is_zero__21 us_tag1 v) us_tag1 v)
-     (and (is_zero__2__function_guard (is_zero__2 v) v)
-     (= (to_int1 (is_zero__2 v)) (to_int1 (is_zero__21 us_tag1 v))))) :pattern (
+  (! (= (to_int1 (is_zero__2 v)) (to_int1 (is_zero__21 us_tag1 v))) :pattern (
   (is_zero__21 us_tag1 v)) )))
 
 ;; tagged_discr__init__2__T8b__compat_axiom
   (assert
   (forall ((v us_rep1))
-  (! (=> (is_zero__2__function_guard1 (is_zero__21 us_tag5 v) us_tag5 v)
-     (and (is_zero__2__function_guard (is_zero__2 v) v)
-     (= (to_int1 (is_zero__2 v)) (to_int1 (is_zero__21 us_tag5 v))))) :pattern (
+  (! (= (to_int1 (is_zero__2 v)) (to_int1 (is_zero__21 us_tag5 v))) :pattern (
   (is_zero__21 us_tag5 v)) )))
 
 ;; is_zero__2__def_axiom
   (assert
   (forall ((v us_rep1))
-  (! (=> (is_zero__2__function_guard (is_zero__2 v) v)
-     (= (= (is_zero__2 v) true)
+  (! (= (= (is_zero__2 v) true)
      (and
      (and (not (= (rec__tagged_discr__t__z1 (us_split_fields3 v)) true))
      (ite (or
@@ -1653,7 +1631,7 @@
           (= (to_rep1 (rec__tagged_discr__t__discr (us_split_discrs2 v))) 2))
      (= (to_rep (rec__tagged_discr__t__x1 (us_split_fields3 v))) 0)
      (fp.eq (to_rep2 (rec__tagged_discr__t__y1 (us_split_fields3 v))) (fp #b0 #b00000000 #b00000000000000000000000))))
-     (= (to_rep (rec__tagged_discr__u1__w (us_split_fields3 v))) 0)))) :pattern (
+     (= (to_rep (rec__tagged_discr__u1__w (us_split_fields3 v))) 0))) :pattern (
   (is_zero__2 v)) )))
 
 ;; is_zero__3__post_axiom
@@ -1665,31 +1643,25 @@
 ;; tagged_discr__u2__compat_axiom
   (assert
   (forall ((v us_rep2))
-  (! (=> (is_zero__3__function_guard1 (is_zero__31 us_tag2 v) us_tag2 v)
-     (and (is_zero__3__function_guard (is_zero__3 v) v)
-     (= (to_int1 (is_zero__3 v)) (to_int1 (is_zero__31 us_tag2 v))))) :pattern (
+  (! (= (to_int1 (is_zero__3 v)) (to_int1 (is_zero__31 us_tag2 v))) :pattern (
   (is_zero__31 us_tag2 v)) )))
 
 ;; tagged_discr__init__3__T13b__compat_axiom
   (assert
   (forall ((v us_rep2))
-  (! (=> (is_zero__3__function_guard1 (is_zero__31 us_tag7 v) us_tag7 v)
-     (and (is_zero__3__function_guard (is_zero__3 v) v)
-     (= (to_int1 (is_zero__3 v)) (to_int1 (is_zero__31 us_tag7 v))))) :pattern (
+  (! (= (to_int1 (is_zero__3 v)) (to_int1 (is_zero__31 us_tag7 v))) :pattern (
   (is_zero__31 us_tag7 v)) )))
 
 ;; is_zero__3__def_axiom
   (assert
   (forall ((v us_rep2))
-  (! (=> (is_zero__3__function_guard (is_zero__3 v) v)
-     (and (is_zero__function_guard (is_zero (to_base1 v)) (to_base1 v))
-     (= (= (is_zero__3 v) true)
+  (! (= (= (is_zero__3 v) true)
      (and
      (and
      (and (= (is_zero (to_base1 v)) true)
      (= (to_rep (rec__tagged_discr__u2__w (us_split_fields5 v))) 0))
      (= (to_rep (rec__tagged_discr__u2__xx (us_split_fields5 v))) 0))
-     (fp.eq (to_rep2 (rec__tagged_discr__u2__yy (us_split_fields5 v))) (fp #b0 #b00000000 #b00000000000000000000000)))))) :pattern (
+     (fp.eq (to_rep2 (rec__tagged_discr__u2__yy (us_split_fields5 v))) (fp #b0 #b00000000 #b00000000000000000000000)))) :pattern (
   (is_zero__3 v)) )))
 
 (declare-fun v__split_fields () Bool)
@@ -1714,17 +1686,17 @@
 
 (declare-fun o6 () e)
 
-(declare-fun temp___241 () e)
+(declare-fun temp___197 () e)
 
-(declare-fun temp___2411 () Bool)
+(declare-fun temp___1971 () Bool)
 
-(declare-fun temp___2412 () integer)
+(declare-fun temp___1972 () integer)
 
-(declare-fun temp___2413 () float)
+(declare-fun temp___1973 () float)
 
-(declare-fun temp___2414 () us_private)
+(declare-fun temp___1974 () us_private)
 
-(declare-fun temp___2415 () Int)
+(declare-fun temp___1975 () Int)
 
 (declare-fun usq_ () e)
 
@@ -1738,17 +1710,17 @@
 
 (declare-fun usq_5 () Int)
 
-(declare-fun temp___243 () e)
+(declare-fun temp___199 () e)
 
-(declare-fun temp___2431 () Bool)
+(declare-fun temp___1991 () Bool)
 
-(declare-fun temp___2432 () integer)
+(declare-fun temp___1992 () integer)
 
-(declare-fun temp___2433 () float)
+(declare-fun temp___1993 () float)
 
-(declare-fun temp___2434 () us_private)
+(declare-fun temp___1994 () us_private)
 
-(declare-fun temp___2435 () Int)
+(declare-fun temp___1995 () Int)
 
 (declare-fun result () Bool)
 
@@ -1813,56 +1785,56 @@
   (assert (= o o6))
 
 ;; H
-  (assert (= temp___241 o6))
+  (assert (= temp___197 o6))
 
 ;; H
-  (assert (= temp___2411 o2))
+  (assert (= temp___1971 o2))
 
 ;; H
-  (assert (= temp___2412 o3))
+  (assert (= temp___1972 o3))
 
 ;; H
-  (assert (= temp___2413 o4))
+  (assert (= temp___1973 o4))
 
 ;; H
-  (assert (= temp___2414 o5))
+  (assert (= temp___1974 o5))
 
 ;; H
-  (assert (= us_tag3 temp___2415))
+  (assert (= us_tag3 temp___1975))
 
 ;; H
-  (assert (= temp___241 (rec__tagged_discr__t__discr v__split_discrs)))
+  (assert (= temp___197 (rec__tagged_discr__t__discr v__split_discrs)))
 
 ;; H
   (assert
   (= (mk___rep (mk___split_discrs usq_)
      (mk___split_fields usq_1 usq_2 usq_3 usq_4) usq_5) (mk___rep
                                                         (mk___split_discrs
-                                                        temp___241)
+                                                        temp___197)
                                                         (mk___split_fields
-                                                        temp___2411
-                                                        temp___2412
-                                                        temp___2413
-                                                        temp___2414)
-                                                        temp___2415)))
+                                                        temp___1971
+                                                        temp___1972
+                                                        temp___1973
+                                                        temp___1974)
+                                                        temp___1975)))
 
 ;; H
-  (assert (= usq_ temp___243))
+  (assert (= usq_ temp___199))
 
 ;; H
-  (assert (= usq_1 temp___2431))
+  (assert (= usq_1 temp___1991))
 
 ;; H
-  (assert (= usq_2 temp___2432))
+  (assert (= usq_2 temp___1992))
 
 ;; H
-  (assert (= usq_3 temp___2433))
+  (assert (= usq_3 temp___1993))
 
 ;; H
-  (assert (= usq_4 temp___2434))
+  (assert (= usq_4 temp___1994))
 
 ;; H
-  (assert (= v__attr__tag temp___2435))
+  (assert (= v__attr__tag temp___1995))
 
 ;; H
   (assert (= result v__split_fields))
@@ -1877,19 +1849,19 @@
   (assert (= result3 v__split_fields3))
 
 ;; H
-  (assert (= temp___2431 v__split_fields4))
+  (assert (= temp___1991 v__split_fields4))
 
 ;; H
-  (assert (= temp___2432 v__split_fields5))
+  (assert (= temp___1992 v__split_fields5))
 
 ;; H
-  (assert (= temp___2433 v__split_fields6))
+  (assert (= temp___1993 v__split_fields6))
 
 ;; H
-  (assert (= temp___2434 v__split_fields7))
+  (assert (= temp___1994 v__split_fields7))
 
 ;; H
-  (assert (= v__split_discrs (mk___split_discrs temp___243)))
+  (assert (= v__split_discrs (mk___split_discrs temp___199)))
 
 ;; H
   (assert (= v__split_fields8 v__split_fields4))
@@ -1914,16 +1886,6 @@
 
 ;; H
   (assert (= v__split_fields15 v__split_fields7))
-
-;; H
-  (assert (is_zero__function_guard
-  (is_zero
-  (mk___rep v__split_discrs
-  (mk___split_fields v__split_fields8 v__split_fields9 v__split_fields10
-  v__split_fields11) v__attr__tag))
-  (mk___rep v__split_discrs
-  (mk___split_fields v__split_fields8 v__split_fields9 v__split_fields10
-  v__split_fields11) v__attr__tag)))
 
 (assert
 ;; WP_parameter_def

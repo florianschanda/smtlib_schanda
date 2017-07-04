@@ -163,17 +163,14 @@
 
 ;; v__post_axiom
   (assert
-  (forall ((b Bool))
-  (! (let ((result (v b)))
-     (=> (v__function_guard result b) (dynamic_invariant result true false
-     true))) :pattern ((v b)) )))
+  (forall ((b Bool)) (! (dynamic_invariant (v b) true false
+  true) :pattern ((v b)) )))
 
 ;; v__def_axiom
   (assert
   (forall ((b Bool))
-  (! (=> (v__function_guard (v b) b)
-     (= (v b) (ite (= b true) (fp #b0 #b01111011 #b10011001100110011001101)
-              (fp.neg (fp #b0 #b01111011 #b10011001100110011001101))))) :pattern (
+  (! (= (v b) (ite (= b true) (fp #b0 #b01111011 #b10011001100110011001101)
+              (fp.neg (fp #b0 #b01111011 #b10011001100110011001101)))) :pattern (
   (v b)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -198,7 +195,7 @@
 
 ;; H
   (assert
-  (and (and (= o (v (of_int1 1))) (v__function_guard o (of_int1 1)))
+  (and (= o (v (of_int1 1)))
   (and (not (or (fp.isInfinite o) (fp.isNaN o)))
   (= o (ite (= (of_int1 1) true)
        (fp #b0 #b01111011 #b10011001100110011001101)
@@ -215,7 +212,7 @@
 
 ;; H
   (assert
-  (and (and (= o1 (v (of_int1 0))) (v__function_guard o1 (of_int1 0)))
+  (and (= o1 (v (of_int1 0)))
   (and (not (or (fp.isInfinite o1) (fp.isNaN o1)))
   (= o1 (ite (= (of_int1 0) true)
         (fp #b0 #b01111011 #b10011001100110011001101)

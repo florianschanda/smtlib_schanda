@@ -551,9 +551,9 @@
   (forall ((s4 (_ BitVec 8)))
   (=>
   (and
-  (bvule (let ((temp___271 (bvsub current_time (bvsub res3 ((_ int2bv 8) 1)))))
+  (bvule (let ((temp___261 (bvsub current_time (bvsub res3 ((_ int2bv 8) 1)))))
          (ite (bvult current_time (bvsub res3 ((_ int2bv 8) 1)))
-         (bvadd temp___271 ((_ int2bv 8) 50)) temp___271)) s4)
+         (bvadd temp___261 ((_ int2bv 8) 50)) temp___261)) s4)
   (bvule s4 current_time))
   (fp.lt (to_rep (select battery_level_at s4)) (fp #b0 #b01111100 #b10011001100110011001101))))
   (and
@@ -563,9 +563,9 @@
   (forall ((s4 (_ BitVec 8)))
   (=>
   (and
-  (bvule (let ((temp___272 (bvsub current_time (bvsub res3 ((_ int2bv 8) 1)))))
+  (bvule (let ((temp___262 (bvsub current_time (bvsub res3 ((_ int2bv 8) 1)))))
          (ite (bvult current_time (bvsub res3 ((_ int2bv 8) 1)))
-         (bvadd temp___272 ((_ int2bv 8) 50)) temp___272)) s4)
+         (bvadd temp___262 ((_ int2bv 8) 50)) temp___262)) s4)
   (bvule s4 ((_ int2bv 8) 49)))
   (fp.lt (to_rep (select battery_level_at s4)) (fp #b0 #b01111100 #b10011001100110011001101)))))))
 
@@ -631,9 +631,9 @@
 
 ;; H
   (assert
-  (bvule (let ((temp___271 (bvsub current_time (bvsub res4 ((_ int2bv 8) 1)))))
+  (bvule (let ((temp___261 (bvsub current_time (bvsub res4 ((_ int2bv 8) 1)))))
          (ite (bvult current_time (bvsub res4 ((_ int2bv 8) 1)))
-         (bvadd temp___271 ((_ int2bv 8) 50)) temp___271)) s4))
+         (bvadd temp___261 ((_ int2bv 8) 50)) temp___261)) s4))
 
 ;; H
   (assert (bvule s4 current_time))

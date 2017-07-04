@@ -436,8 +436,6 @@
   (! (=> (dynamic_invariant failsafe__model__current_time true true true)
      (let ((result (time_below_threshold failsafe__model__battery_level_at
                    failsafe__model__current_time)))
-     (=> (time_below_threshold__function_guard result
-     failsafe__model__battery_level_at failsafe__model__current_time)
      (and
      (ite (fp.leq (fp #b0 #b01111100 #b10011001100110011001101) (to_rep
                                                                 (select failsafe__model__battery_level_at failsafe__model__current_time)))
@@ -476,9 +474,9 @@
             (bvadd temp___232 ((_ int2bv 8) 50)) temp___232)) s)
      (bvule s ((_ int2bv 8) 49)))
      (fp.lt (to_rep (select failsafe__model__battery_level_at s)) (fp #b0 #b01111100 #b10011001100110011001101)))))))))
-     (dynamic_invariant1 result true false true))))) :pattern ((time_below_threshold
-                                                               failsafe__model__battery_level_at
-                                                               failsafe__model__current_time)) ))))
+     (dynamic_invariant1 result true false true)))) :pattern ((time_below_threshold
+                                                              failsafe__model__battery_level_at
+                                                              failsafe__model__current_time)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
@@ -515,12 +513,12 @@
 (define-fun tcounterS__ref___projection ((a tcounterS__ref)) tcounterS 
   (tcounterS__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_254 (_ BitVec 8))
-  (temp___is_init_251 Bool) (temp___skip_constant_252 Bool)
-  (temp___do_toplevel_253 Bool)) Bool (=>
-                                      (or (= temp___is_init_251 true)
+(define-fun dynamic_invariant2 ((temp___expr_244 (_ BitVec 8))
+  (temp___is_init_241 Bool) (temp___skip_constant_242 Bool)
+  (temp___do_toplevel_243 Bool)) Bool (=>
+                                      (or (= temp___is_init_241 true)
                                       (bvule ((_ int2bv 8) 0) ((_ int2bv 8) 50)))
-                                      (in_range4 temp___expr_254)))
+                                      (in_range4 temp___expr_244)))
 
 ;; is_valid__post_axiom
   (assert true)
@@ -531,21 +529,12 @@
   ((failsafe__model__battery_level_at (Array (_ BitVec 8) battery_level_type)))
   (forall ((failsafe__model__current_time (_ BitVec 8))
   (failsafe__counter (_ BitVec 8)))
-  (! (=> (is_valid__function_guard
-     (is_valid failsafe__model__battery_level_at
-     failsafe__model__current_time failsafe__counter)
-     failsafe__model__battery_level_at failsafe__model__current_time
-     failsafe__counter)
-     (and (time_below_threshold__function_guard
-     (time_below_threshold failsafe__model__battery_level_at
-     failsafe__model__current_time) failsafe__model__battery_level_at
-     failsafe__model__current_time)
-     (=
+  (! (=
      (= (is_valid failsafe__model__battery_level_at
         failsafe__model__current_time failsafe__counter) true)
      (= failsafe__counter (time_below_threshold
                           failsafe__model__battery_level_at
-                          failsafe__model__current_time))))) :pattern (
+                          failsafe__model__current_time))) :pattern (
   (is_valid failsafe__model__battery_level_at failsafe__model__current_time
   failsafe__counter)) ))))
 
@@ -577,11 +566,6 @@
 (declare-fun failsafe__is_raised__result5 () Bool)
 
 (declare-fun result1 () Bool)
-
-;; H
-  (assert (is_valid__function_guard
-  (is_valid battery_level_at current_time counter) battery_level_at
-  current_time counter))
 
 ;; H
   (assert (in_range4 counter))
@@ -616,11 +600,6 @@
 
 ;; H
   (assert (= result1 failsafe__is_raised__result4))
-
-;; H
-  (assert (is_valid__function_guard
-  (is_valid battery_level_at current_time counter) battery_level_at
-  current_time counter))
 
 (assert
 ;; WP_parameter_def

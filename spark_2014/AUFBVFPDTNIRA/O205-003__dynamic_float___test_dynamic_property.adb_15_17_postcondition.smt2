@@ -268,7 +268,7 @@
 
 (declare-fun o () Float32)
 
-(declare-fun temp___153 () Float32)
+(declare-fun temp___152 () Float32)
 
 (declare-fun us () Float32)
 
@@ -318,18 +318,18 @@
   (assert
   (=> (= result true)
   (and
-  (= temp___153 (fp.add RNE x (fp #b0 #b01111111 #b00000000000000000000000)))
+  (= temp___152 (fp.add RNE x (fp #b0 #b01111111 #b00000000000000000000000)))
   (not (or (fp.isInfinite (fp.add RNE x (fp #b0 #b01111111 #b00000000000000000000000))) (fp.isNaN (fp.add RNE 
   x (fp #b0 #b01111111 #b00000000000000000000000))))))))
 
 ;; H
   (assert
   (=> (= result true)
-  (and (= us temp___153) (dynamic_property
-  (fp #b0 #b00000000 #b00000000000000000000000) last temp___153))))
+  (and (= us temp___152) (dynamic_property
+  (fp #b0 #b00000000 #b00000000000000000000000) last temp___152))))
 
 ;; H
-  (assert (=> (= result true) (= o1 temp___153)))
+  (assert (=> (= result true) (= o1 temp___152)))
 
 ;; H
   (assert (=> (= result true) (= result1 x)))

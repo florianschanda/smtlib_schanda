@@ -631,9 +631,8 @@
 ;; leibniz_fixed__post_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (let ((result (leibniz_fixed us_void_param)))
-     (=> (leibniz_fixed__function_guard result us_void_param)
-     (= (to_fixed result) 3189596))) :pattern ((leibniz_fixed us_void_param)) )))
+  (! (= (to_fixed (leibniz_fixed us_void_param)) 3189596) :pattern ((leibniz_fixed
+                                                                    us_void_param)) )))
 
 (define-fun dynamic_invariant ((temp___expr_51 Float32)
   (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
@@ -650,10 +649,9 @@
   (assert
   (forall ((us_void_param tuple0))
   (! (let ((result (leibniz_float us_void_param)))
-     (=> (leibniz_float__function_guard result us_void_param)
      (and (fp.eq result (fp #b0 #b10000000 #b10000101010110110000000))
-     (dynamic_invariant result true false true)))) :pattern ((leibniz_float
-                                                             us_void_param)) )))
+     (dynamic_invariant result true false true))) :pattern ((leibniz_float
+                                                            us_void_param)) )))
 
 (declare-fun shanks_fixed (tuple0) fixed)
 
@@ -662,9 +660,8 @@
 ;; shanks_fixed__post_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (let ((result (shanks_fixed us_void_param)))
-     (=> (shanks_fixed__function_guard result us_void_param)
-     (= (to_fixed result) 3293842))) :pattern ((shanks_fixed us_void_param)) )))
+  (! (= (to_fixed (shanks_fixed us_void_param)) 3293842) :pattern ((shanks_fixed
+                                                                   us_void_param)) )))
 
 (declare-fun shanks_float (tuple0) Float32)
 
@@ -674,10 +671,9 @@
   (assert
   (forall ((us_void_param tuple0))
   (! (let ((result (shanks_float us_void_param)))
-     (=> (shanks_float__function_guard result us_void_param)
      (and (fp.eq result (fp #b0 #b10000000 #b10010010000101001010011))
-     (dynamic_invariant result true false true)))) :pattern ((shanks_float
-                                                             us_void_param)) )))
+     (dynamic_invariant result true false true))) :pattern ((shanks_float
+                                                            us_void_param)) )))
 
 (declare-fun temp___String_Literal_517 (tuple0) (Array Int character))
 
@@ -1032,10 +1028,7 @@
 (declare-fun o28 () Int)
 
 ;; H
-  (assert
-  (and
-  (and (= o (leibniz_fixed Tuple0)) (leibniz_fixed__function_guard o Tuple0))
-  (= (to_fixed o) 3189596)))
+  (assert (and (= o (leibniz_fixed Tuple0)) (= (to_fixed o) 3189596)))
 
 ;; H
   (assert (= o1 (to_fixed o)))
@@ -1084,9 +1077,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o11 (leibniz_float Tuple0)) (leibniz_float__function_guard 
-  o11 Tuple0))
+  (and (= o11 (leibniz_float Tuple0))
   (and (not (or (fp.isInfinite o11) (fp.isNaN o11)))
   (fp.eq o11 (fp #b0 #b10000000 #b10000101010110110000000)))))
 
@@ -1133,10 +1124,7 @@
   (assert (= o20 (mk 1 o18)))
 
 ;; H
-  (assert
-  (and
-  (and (= o21 (shanks_fixed Tuple0)) (shanks_fixed__function_guard o21
-  Tuple0)) (= (to_fixed o21) 3293842)))
+  (assert (and (= o21 (shanks_fixed Tuple0)) (= (to_fixed o21) 3293842)))
 
 ;; H
   (assert (= o22 (to_fixed o21)))

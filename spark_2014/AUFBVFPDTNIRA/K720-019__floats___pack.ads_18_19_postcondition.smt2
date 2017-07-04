@@ -173,9 +173,8 @@
      (and (fp.lt (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) r1)
      (fp.lt (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) r2)))))
      (let ((result (add r1 r2)))
-     (=> (add__function_guard result r1 r2)
      (and (fp.eq result (fp.add RNE r1 r2)) (dynamic_invariant result true
-     false true))))) :pattern ((add r1 r2)) )))
+     false true)))) :pattern ((add r1 r2)) )))
 
 (assert
 ;; WP_parameter_def

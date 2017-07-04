@@ -231,18 +231,16 @@
   (forall ((x Int))
   (! (=> (dynamic_invariant1 x true true true)
      (let ((result (a x)))
-     (=> (a__function_guard result x)
      (and
      (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) result)
      (fp.leq result (fp #b0 #b10000010 #b11000000000000000000000)))
-     (dynamic_invariant result true false true))))) :pattern ((a x)) )))
+     (dynamic_invariant result true false true)))) :pattern ((a x)) )))
 
 ;; a__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant1 x true true true) (a__function_guard (a x) x))
-     (and (c__function_guard (c x) x) (= (a x) (c x)))) :pattern ((a x)) )))
+  (! (=> (dynamic_invariant1 x true true true) (= (a x) (c x))) :pattern (
+  (a x)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
@@ -280,17 +278,14 @@
 ;; c__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant3 x true true true)
-     (let ((result (c x)))
-     (=> (c__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((c x)) )))
+  (! (=> (dynamic_invariant3 x true true true) (dynamic_invariant (c x) true
+     false true)) :pattern ((c x)) )))
 
 ;; c__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant3 x true true true) (c__function_guard (c x) x))
-     (= (c x) (of_int RNE x))) :pattern ((c x)) )))
+  (! (=> (dynamic_invariant3 x true true true) (= (c x) (of_int RNE x))) :pattern (
+  (c x)) )))
 
 (declare-fun r1 () Float32)
 
@@ -321,25 +316,13 @@
   (in_range2 r2)))
 
 ;; H
-  (assert (a__function_guard (a x1) x1))
-
-;; H
   (assert (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (a x1)))
-
-;; H
-  (assert (a__function_guard (a x1) x1))
 
 ;; H
   (assert (fp.leq (a x1) (fp #b0 #b10000010 #b11000000000000000000000)))
 
 ;; H
-  (assert (a__function_guard (a x2) x2))
-
-;; H
   (assert (fp.leq (a x2) (fp #b0 #b10000010 #b11000000000000000000000)))
-
-;; H
-  (assert (a__function_guard (a x2) x2))
 
 (assert
 ;; WP_parameter_def

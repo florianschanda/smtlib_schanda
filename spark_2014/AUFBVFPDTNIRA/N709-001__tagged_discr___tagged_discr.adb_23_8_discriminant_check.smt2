@@ -785,24 +785,19 @@
 ;; tagged_discr__u1__compat_axiom
   (assert
   (forall ((v us_rep1))
-  (! (=> (is_zero__2__function_guard1 (is_zero__21 us_tag1 v) us_tag1 v)
-     (and (is_zero__2__function_guard (is_zero__2 v) v)
-     (= (to_int1 (is_zero__2 v)) (to_int1 (is_zero__21 us_tag1 v))))) :pattern (
+  (! (= (to_int1 (is_zero__2 v)) (to_int1 (is_zero__21 us_tag1 v))) :pattern (
   (is_zero__21 us_tag1 v)) )))
 
 ;; tagged_discr__init__2__T8b__compat_axiom
   (assert
   (forall ((v us_rep1))
-  (! (=> (is_zero__2__function_guard1 (is_zero__21 us_tag2 v) us_tag2 v)
-     (and (is_zero__2__function_guard (is_zero__2 v) v)
-     (= (to_int1 (is_zero__2 v)) (to_int1 (is_zero__21 us_tag2 v))))) :pattern (
+  (! (= (to_int1 (is_zero__2 v)) (to_int1 (is_zero__21 us_tag2 v))) :pattern (
   (is_zero__21 us_tag2 v)) )))
 
 ;; is_zero__2__def_axiom
   (assert
   (forall ((v us_rep1))
-  (! (=> (is_zero__2__function_guard (is_zero__2 v) v)
-     (= (= (is_zero__2 v) true)
+  (! (= (= (is_zero__2 v) true)
      (and
      (and (not (= (rec__tagged_discr__t__z1 (us_split_fields3 v)) true))
      (ite (or
@@ -810,7 +805,7 @@
           (= (to_rep1 (rec__tagged_discr__t__discr (us_split_discrs2 v))) 2))
      (= (to_rep (rec__tagged_discr__t__x1 (us_split_fields3 v))) 0)
      (fp.eq (to_rep2 (rec__tagged_discr__t__y1 (us_split_fields3 v))) (fp #b0 #b00000000 #b00000000000000000000000))))
-     (= (to_rep (rec__tagged_discr__u1__w (us_split_fields3 v))) 0)))) :pattern (
+     (= (to_rep (rec__tagged_discr__u1__w (us_split_fields3 v))) 0))) :pattern (
   (is_zero__2 v)) )))
 
 (declare-fun v__split_discrs () us_split_discrs)
@@ -972,19 +967,19 @@
 
 (declare-fun o12 () us_private)
 
-(declare-fun temp___259 () e)
+(declare-fun temp___211 () e)
 
-(declare-fun temp___2591 () integer)
+(declare-fun temp___2111 () integer)
 
-(declare-fun temp___2592 () Bool)
+(declare-fun temp___2112 () Bool)
 
-(declare-fun temp___2593 () integer)
+(declare-fun temp___2113 () integer)
 
-(declare-fun temp___2594 () float)
+(declare-fun temp___2114 () float)
 
-(declare-fun temp___2595 () us_private)
+(declare-fun temp___2115 () us_private)
 
-(declare-fun temp___2596 () Int)
+(declare-fun temp___2116 () Int)
 
 ;; H
   (assert (= (to_rep1 (rec__tagged_discr__t__discr v__split_discrs)) 0))
@@ -1064,28 +1059,28 @@
   (assert (= us_null_ext__ o12))
 
 ;; H
-  (assert (= (us_split_discrs1 r7b) (mk___split_discrs temp___259)))
+  (assert (= (us_split_discrs1 r7b) (mk___split_discrs temp___211)))
 
 ;; H
-  (assert (= temp___2591 o8))
+  (assert (= temp___2111 o8))
 
 ;; H
-  (assert (= temp___2592 o9))
+  (assert (= temp___2112 o9))
 
 ;; H
-  (assert (= temp___2593 o10))
+  (assert (= temp___2113 o10))
 
 ;; H
-  (assert (= temp___2594 o11))
+  (assert (= temp___2114 o11))
 
 ;; H
-  (assert (= temp___2595 o12))
+  (assert (= temp___2115 o12))
 
 ;; H
-  (assert (= us_tag2 temp___2596))
+  (assert (= us_tag2 temp___2116))
 
 (assert
 ;; WP_parameter_def
  ;; File "tagged_discr.ads", line 33, characters 0-0
-  (not (= temp___259 (rec__tagged_discr__t__discr v__split_discrs))))
+  (not (= temp___211 (rec__tagged_discr__t__discr v__split_discrs))))
 (check-sat)

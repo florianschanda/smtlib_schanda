@@ -254,10 +254,8 @@
   (forall ((x Float32) (y Float32))
   (! (=>
      (and (dynamic_invariant x true true true) (dynamic_invariant y true true
-     true))
-     (let ((result (atan_2 x y)))
-     (=> (atan_2__function_guard result x y) (dynamic_invariant3 result true
-     false true)))) :pattern ((atan_2 x y)) )))
+     true)) (dynamic_invariant3 (atan_2 x y) true false true)) :pattern (
+  (atan_2 x y)) )))
 
 (declare-fun asin (Float32) Float32)
 
@@ -266,10 +264,8 @@
 ;; asin__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (asin x)))
-     (=> (asin__function_guard result x) (dynamic_invariant3 result true
-     false true)))) :pattern ((asin x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant3 (asin x)
+     true false true)) :pattern ((asin x)) )))
 
 (declare-fun saturate (Float32 Float32 Float32) Float32)
 
@@ -283,11 +279,10 @@
      (and (dynamic_invariant value true true true) (dynamic_invariant
      min_value true true true)) (dynamic_invariant max_value true true true))
      (let ((result (saturate value min_value max_value)))
-     (=> (saturate__function_guard result value min_value max_value)
      (and
      (ite (fp.lt value min_value) (fp.eq result min_value)
      (ite (fp.lt max_value value) (fp.eq result max_value)
-     (fp.eq result value))) (dynamic_invariant result true false true))))) :pattern (
+     (fp.eq result value))) (dynamic_invariant result true false true)))) :pattern (
   (saturate value min_value max_value)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -437,13 +432,9 @@
 ;; H
   (assert
   (and
-  (and
   (= o (saturate grav_x1
        (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))
        (fp #b0 #b01111111 #b00000000000000000000000)))
-  (saturate__function_guard o grav_x1
-  (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))
-  (fp #b0 #b01111111 #b00000000000000000000000)))
   (and (not (or (fp.isInfinite o) (fp.isNaN o)))
   (ite (fp.lt grav_x1 (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)))
   (fp.eq o (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)))
@@ -459,17 +450,12 @@
 ;; H
   (assert
   (and
-  (and
   (= o1 (atan_2
         (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) (fp.add RNE (fp.mul RNE 
         q0 q3) (fp.mul RNE q1 q2)))
         (fp.sub RNE (fp.sub RNE (fp.add RNE (fp.mul RNE q0 q0) (fp.mul RNE 
         q1 q1)) (fp.mul RNE q2 q2)) (fp.mul RNE q3 q3))))
-  (atan_2__function_guard o1
-  (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) (fp.add RNE (fp.mul RNE 
-  q0 q3) (fp.mul RNE q1 q2)))
-  (fp.sub RNE (fp.sub RNE (fp.add RNE (fp.mul RNE q0 q0) (fp.mul RNE 
-  q1 q1)) (fp.mul RNE q2 q2)) (fp.mul RNE q3 q3)))) (in_range3 o1)))
+  (in_range3 o1)))
 
 ;; H
   (assert
@@ -486,9 +472,7 @@
   (assert (= euler_yaw_actual1 o3))
 
 ;; H
-  (assert
-  (and (and (= o4 (asin grav_x2)) (asin__function_guard o4 grav_x2))
-  (in_range3 o4)))
+  (assert (and (= o4 (asin grav_x2)) (in_range3 o4)))
 
 ;; H
   (assert

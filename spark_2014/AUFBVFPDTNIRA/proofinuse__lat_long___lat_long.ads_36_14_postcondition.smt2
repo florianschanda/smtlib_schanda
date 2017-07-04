@@ -158,9 +158,8 @@
 ;; olt__def_axiom
   (assert
   (forall ((left Float32) (right Float32))
-  (! (=> (olt__function_guard (olt left right) left right)
-     (= (= (olt left right) true)
-     (fp.lt left (fp.add RNE right (fp #b0 #b01101110 #b01001111100010110101100))))) :pattern (
+  (! (= (= (olt left right) true)
+     (fp.lt left (fp.add RNE right (fp #b0 #b01101110 #b01001111100010110101100)))) :pattern (
   (olt left right)) )))
 
 (declare-sort latitude 0)
@@ -410,13 +409,6 @@
 
 ;; H
   (assert (= result1 lat_long__delta_lat_in_meters__result4))
-
-;; H
-  (assert (olt__function_guard
-  (olt (fp.abs lat_long__delta_lat_in_meters__result4)
-  (fp #b0 #b10010111 #b00110001001111000100110))
-  (fp.abs lat_long__delta_lat_in_meters__result4)
-  (fp #b0 #b10010111 #b00110001001111000100110)))
 
 (assert
 ;; WP_parameter_def

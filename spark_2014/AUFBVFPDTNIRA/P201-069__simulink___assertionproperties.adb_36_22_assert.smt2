@@ -156,10 +156,8 @@
   (forall ((left Float64) (right Float64))
   (! (=>
      (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true))
-     (let ((result (pow__2 left right)))
-     (=> (pow__2__function_guard result left right) (dynamic_invariant result
-     true false true)))) :pattern ((pow__2 left right)) )))
+     true true true)) (dynamic_invariant (pow__2 left right) true false
+     true)) :pattern ((pow__2 left right)) )))
 
 (declare-sort long_float_m0_0_minf 0)
 
@@ -240,11 +238,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o (pow__2 x
        (fp #b0 #b01111111110 #b0000000000000000000000000000000000000000000000000000)))
-  (pow__2__function_guard o x
-  (fp #b0 #b01111111110 #b0000000000000000000000000000000000000000000000000000)))
   (not (or (fp.isInfinite o) (fp.isNaN o)))))
 
 ;; H

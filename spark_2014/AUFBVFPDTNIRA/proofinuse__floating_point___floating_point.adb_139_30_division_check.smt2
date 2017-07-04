@@ -325,10 +325,8 @@
 ;; to_float__post_axiom
   (assert
   (forall ((s Int))
-  (! (=> (dynamic_invariant2 s true true true)
-     (let ((result (to_float s)))
-     (=> (to_float__function_guard result s) (dynamic_invariant3 result true
-     false true)))) :pattern ((to_float s)) )))
+  (! (=> (dynamic_invariant2 s true true true) (dynamic_invariant3
+     (to_float s) true false true)) :pattern ((to_float s)) )))
 
 (declare-sort source1 0)
 
@@ -393,10 +391,8 @@
 ;; to_int__post_axiom
   (assert
   (forall ((s Float32))
-  (! (=> (dynamic_invariant4 s true true true)
-     (let ((result (to_int3 s)))
-     (=> (to_int__function_guard result s) (dynamic_invariant5 result true
-     false true)))) :pattern ((to_int3 s)) )))
+  (! (=> (dynamic_invariant4 s true true true) (dynamic_invariant5
+     (to_int3 s) true false true)) :pattern ((to_int3 s)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -453,8 +449,7 @@
   (assert (fp.leq (fp #b0 #b01101110 #b01001111100010110101100) x))
 
 ;; H
-  (assert
-  (and (and (= o (to_int3 x)) (to_int__function_guard o x)) (in_range4 o)))
+  (assert (and (= o (to_int3 x)) (in_range4 o)))
 
 ;; H
   (assert (= result i))

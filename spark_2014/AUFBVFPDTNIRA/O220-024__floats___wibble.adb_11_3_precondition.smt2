@@ -415,10 +415,8 @@
 ;; to_fp__post_axiom
   (assert
   (forall ((s (_ BitVec 32)))
-  (! (=> (dynamic_invariant s true true true)
-     (let ((result (to_fp1 s)))
-     (=> (to_fp__function_guard result s) (dynamic_invariant1 result true
-     false true)))) :pattern ((to_fp1 s)) )))
+  (! (=> (dynamic_invariant s true true true) (dynamic_invariant1 (to_fp1 s)
+     true false true)) :pattern ((to_fp1 s)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -462,10 +460,8 @@
 
 ;; H
   (assert
-  (and
-  (and (= o (to_fp1 ((_ int2bv 32) 2139094902))) (to_fp__function_guard 
-  o ((_ int2bv 32) 2139094902))) (not (or (fp.isInfinite o) (fp.isNaN 
-  o)))))
+  (and (= o (to_fp1 ((_ int2bv 32) 2139094902)))
+  (not (or (fp.isInfinite o) (fp.isNaN o)))))
 
 ;; H
   (assert (= (to_rep o2) o))
@@ -496,9 +492,7 @@
 
 ;; H
   (assert
-  (and
-  (and (= o5 (to_fp1 ((_ int2bv 32) 4144594944))) (to_fp__function_guard 
-  o5 ((_ int2bv 32) 4144594944)))
+  (and (= o5 (to_fp1 ((_ int2bv 32) 4144594944)))
   (not (or (fp.isInfinite o5) (fp.isNaN o5)))))
 
 ;; H

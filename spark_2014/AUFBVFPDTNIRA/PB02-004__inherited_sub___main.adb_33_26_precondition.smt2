@@ -939,10 +939,6 @@
      (< (to_rep4 (select b (+ i 1))) (to_rep4 (select a (+ j 1))))))))))) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
-(declare-fun first () Int)
-
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
@@ -963,9 +959,9 @@
 
 (declare-sort t 0)
 
-(declare-fun first1 (t) integer)
+(declare-fun first (t) integer)
 
-(declare-fun last1 (t) integer)
+(declare-fun last (t) integer)
 
 (declare-fun mk (Int Int) t)
 
@@ -974,7 +970,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range2 f)
      (=> (in_range2 l)
-     (and (= (to_rep1 (first1 (mk f l))) f) (= (to_rep1 (last1 (mk f l))) l)))) :pattern (
+     (and (= (to_rep1 (first (mk f l))) f) (= (to_rep1 (last (mk f l))) l)))) :pattern (
   (mk f l)) )))
 
 (define-fun dynamic_property1 ((range_first Int) (range_last Int) (low Int)
@@ -990,12 +986,12 @@
 (define-fun of_array ((a (Array Int natural)) (f Int)
   (l Int)) us_t (mk___t a (mk f l)))
 
-(define-fun first2 ((a us_t)) Int (to_rep1 (first1 (rt a))))
+(define-fun first1 ((a us_t)) Int (to_rep1 (first (rt a))))
 
-(define-fun last2 ((a us_t)) Int (to_rep1 (last1 (rt a))))
+(define-fun last1 ((a us_t)) Int (to_rep1 (last (rt a))))
 
-(define-fun length ((a us_t)) Int (ite (<= (first2 a) (last2 a))
-                                  (+ (- (last2 a) (first2 a)) 1) 0))
+(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last1 a))
+                                  (+ (- (last1 a) (first1 a)) 1) 0))
 
 (declare-fun value__size5 () Int)
 
@@ -1029,9 +1025,9 @@
   (assert (forall ((a (Array Int natural))) (<= 0 (object__alignment5 a))))
 
 (define-fun bool_eq11 ((x us_t)
-  (y us_t)) Bool (bool_eq9 (elts x) (to_rep1 (first1 (rt x)))
-                 (to_rep1 (last1 (rt x))) (elts y) (to_rep1 (first1 (rt y)))
-                 (to_rep1 (last1 (rt y)))))
+  (y us_t)) Bool (bool_eq9 (elts x) (to_rep1 (first (rt x)))
+                 (to_rep1 (last (rt x))) (elts y) (to_rep1 (first (rt y)))
+                 (to_rep1 (last (rt y)))))
 
 (declare-fun user_eq9 (us_t us_t) Bool)
 
@@ -1179,18 +1175,18 @@
                                       (and (dynamic_property1
                                       (to_rep4 temp___173)
                                       (to_rep4 temp___174)
-                                      (first2
+                                      (first1
                                       (rec__rec__sub_arr__content
                                       (us_split_fields7 temp___expr_172)))
-                                      (last2
+                                      (last1
                                       (rec__rec__sub_arr__content
                                       (us_split_fields7 temp___expr_172))))
                                       (and
-                                      (= (first2
+                                      (= (first1
                                          (rec__rec__sub_arr__content
                                          (us_split_fields7 temp___expr_172))) 
                                       (to_rep4 temp___173))
-                                      (= (last2
+                                      (= (last1
                                          (rec__rec__sub_arr__content
                                          (us_split_fields7 temp___expr_172))) 
                                       (to_rep4 temp___174)))))))
@@ -1208,10 +1204,8 @@
 ;; build_rec__post_axiom
   (assert
   (forall ((a Int))
-  (! (=> (dynamic_invariant3 a true true true)
-     (let ((result (build_rec a)))
-     (=> (build_rec__function_guard result a) (dynamic_invariant result true
-     false true)))) :pattern ((build_rec a)) )))
+  (! (=> (dynamic_invariant3 a true true true) (dynamic_invariant
+     (build_rec a) true false true)) :pattern ((build_rec a)) )))
 
 (declare-fun build_rec_ok (Int) us_rep2)
 
@@ -1220,10 +1214,8 @@
 ;; build_rec_ok__post_axiom
   (assert
   (forall ((a Int))
-  (! (=> (dynamic_invariant3 a true true true)
-     (let ((result (build_rec_ok a)))
-     (=> (build_rec_ok__function_guard result a) (dynamic_invariant1 result
-     true false true)))) :pattern ((build_rec_ok a)) )))
+  (! (=> (dynamic_invariant3 a true true true) (dynamic_invariant1
+     (build_rec_ok a) true false true)) :pattern ((build_rec_ok a)) )))
 
 (define-fun dynamic_invariant4 ((temp___expr_33 Int) (temp___is_init_30 Bool)
   (temp___skip_constant_31 Bool)
@@ -1241,10 +1233,8 @@
   (forall ((f Int) (l Int))
   (! (=>
      (and (dynamic_invariant4 f true true true) (dynamic_invariant4 l true
-     true true))
-     (let ((result (build_arr f l)))
-     (=> (build_arr__function_guard result f l) (dynamic_invariant2 result
-     true false true)))) :pattern ((build_arr f l)) )))
+     true true)) (dynamic_invariant2 (build_arr f l) true false true)) :pattern (
+  (build_arr f l)) )))
 
 (declare-fun x__split_discrs () us_split_discrs2)
 

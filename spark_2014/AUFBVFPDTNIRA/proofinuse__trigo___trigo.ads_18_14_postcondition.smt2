@@ -194,24 +194,17 @@
 ;; approx_sin__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (approx_sin x)))
-     (=> (approx_sin__function_guard result x) (dynamic_invariant result true
-     false true)))) :pattern ((approx_sin x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant
+     (approx_sin x) true false true)) :pattern ((approx_sin x)) )))
 
 ;; approx_sin__def_axiom
   (assert
   (forall ((x Float32))
-  (! (=>
-     (and (dynamic_invariant x true true true) (approx_sin__function_guard
-     (approx_sin x) x))
-     (and (pow3__function_guard (pow3 x) x)
-     (and (pow5__function_guard (pow5 x) x)
-     (and (pow7__function_guard (pow7 x) x)
+  (! (=> (dynamic_invariant x true true true)
      (= (approx_sin x) (fp.sub RNE (fp.add RNE (fp.sub RNE x (fp.div RNE 
      (pow3 x) (fp #b0 #b10000001 #b10000000000000000000000))) (fp.div RNE 
      (pow5 x) (fp #b0 #b10000101 #b11100000000000000000000))) (fp.div RNE 
-     (pow7 x) (fp #b0 #b10001011 #b00111011000000000000000)))))))) :pattern (
+     (pow7 x) (fp #b0 #b10001011 #b00111011000000000000000))))) :pattern (
   (approx_sin x)) )))
 
 (declare-fun x () Float32)
@@ -221,50 +214,38 @@
 ;; pow3__post_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=> (dynamic_invariant x1 true true true)
-     (let ((result (pow3 x1)))
-     (=> (pow3__function_guard result x1) (dynamic_invariant result true
-     false true)))) :pattern ((pow3 x1)) )))
+  (! (=> (dynamic_invariant x1 true true true) (dynamic_invariant (pow3 x1)
+     true false true)) :pattern ((pow3 x1)) )))
 
 ;; pow3__def_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=>
-     (and (dynamic_invariant x1 true true true) (pow3__function_guard
-     (pow3 x1) x1)) (= (pow3 x1) (fp.mul RNE (fp.mul RNE x1 x1) x1))) :pattern (
-  (pow3 x1)) )))
+  (! (=> (dynamic_invariant x1 true true true)
+     (= (pow3 x1) (fp.mul RNE (fp.mul RNE x1 x1) x1))) :pattern ((pow3 x1)) )))
 
 ;; pow5__post_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=> (dynamic_invariant x1 true true true)
-     (let ((result (pow5 x1)))
-     (=> (pow5__function_guard result x1) (dynamic_invariant result true
-     false true)))) :pattern ((pow5 x1)) )))
+  (! (=> (dynamic_invariant x1 true true true) (dynamic_invariant (pow5 x1)
+     true false true)) :pattern ((pow5 x1)) )))
 
 ;; pow5__def_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=>
-     (and (dynamic_invariant x1 true true true) (pow5__function_guard
-     (pow5 x1) x1))
+  (! (=> (dynamic_invariant x1 true true true)
      (= (pow5 x1) (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE x1 x1) x1) x1) x1))) :pattern (
   (pow5 x1)) )))
 
 ;; pow7__post_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=> (dynamic_invariant x1 true true true)
-     (let ((result (pow7 x1)))
-     (=> (pow7__function_guard result x1) (dynamic_invariant result true
-     false true)))) :pattern ((pow7 x1)) )))
+  (! (=> (dynamic_invariant x1 true true true) (dynamic_invariant (pow7 x1)
+     true false true)) :pattern ((pow7 x1)) )))
 
 ;; pow7__def_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=>
-     (and (dynamic_invariant x1 true true true) (pow7__function_guard
-     (pow7 x1) x1))
+  (! (=> (dynamic_invariant x1 true true true)
      (= (pow7 x1) (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE x1 x1) x1) x1) x1) x1) x1))) :pattern (
   (pow7 x1)) )))
 
@@ -325,9 +306,6 @@
 
 ;; H
   (assert (= result1 trigo__sin__result4))
-
-;; H
-  (assert (approx_sin__function_guard (approx_sin x) x))
 
 (assert
 ;; WP_parameter_def

@@ -292,9 +292,9 @@
 (define-fun source__ref_2__projection ((a source__ref)) source (source__content
                                                                a))
 
-(define-fun dynamic_invariant2 ((temp___expr_193 (_ BitVec 32))
-  (temp___is_init_190 Bool) (temp___skip_constant_191 Bool)
-  (temp___do_toplevel_192 Bool)) Bool true)
+(define-fun dynamic_invariant2 ((temp___expr_189 (_ BitVec 32))
+  (temp___is_init_186 Bool) (temp___skip_constant_187 Bool)
+  (temp___do_toplevel_188 Bool)) Bool true)
 
 (declare-sort target 0)
 
@@ -316,12 +316,12 @@
 (define-fun target__ref_2__projection ((a target__ref)) target (target__content
                                                                a))
 
-(define-fun dynamic_invariant3 ((temp___expr_199 Float32)
-  (temp___is_init_196 Bool) (temp___skip_constant_197 Bool)
-  (temp___do_toplevel_198 Bool)) Bool (=>
-                                      (or (= temp___is_init_196 true)
+(define-fun dynamic_invariant3 ((temp___expr_195 Float32)
+  (temp___is_init_192 Bool) (temp___skip_constant_193 Bool)
+  (temp___do_toplevel_194 Bool)) Bool (=>
+                                      (or (= temp___is_init_192 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_199) (fp.isNaN temp___expr_199)))))
+                                      (not (or (fp.isInfinite temp___expr_195) (fp.isNaN temp___expr_195)))))
 
 (declare-fun convert ((_ BitVec 32)) Float32)
 
@@ -330,10 +330,8 @@
 ;; convert__post_axiom
   (assert
   (forall ((s (_ BitVec 32)))
-  (! (=> (dynamic_invariant2 s true true true)
-     (let ((result (convert s)))
-     (=> (convert__function_guard result s) (dynamic_invariant3 result true
-     false true)))) :pattern ((convert s)) )))
+  (! (=> (dynamic_invariant2 s true true true) (dynamic_invariant3
+     (convert s) true false true)) :pattern ((convert s)) )))
 
 (declare-fun zero_plus () Float32)
 
@@ -371,12 +369,12 @@
 (define-fun source__ref_3__projection ((a source__ref1)) source1 (source__content1
                                                                  a))
 
-(define-fun dynamic_invariant4 ((temp___expr_205 Float32)
-  (temp___is_init_202 Bool) (temp___skip_constant_203 Bool)
-  (temp___do_toplevel_204 Bool)) Bool (=>
-                                      (or (= temp___is_init_202 true)
+(define-fun dynamic_invariant4 ((temp___expr_201 Float32)
+  (temp___is_init_198 Bool) (temp___skip_constant_199 Bool)
+  (temp___do_toplevel_200 Bool)) Bool (=>
+                                      (or (= temp___is_init_198 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_205) (fp.isNaN temp___expr_205)))))
+                                      (not (or (fp.isInfinite temp___expr_201) (fp.isNaN temp___expr_201)))))
 
 (declare-sort target1 0)
 
@@ -400,12 +398,12 @@
 (define-fun target__ref_3__projection ((a target__ref1)) target1 (target__content1
                                                                  a))
 
-(define-fun dynamic_invariant5 ((temp___expr_211 Int)
-  (temp___is_init_208 Bool) (temp___skip_constant_209 Bool)
-  (temp___do_toplevel_210 Bool)) Bool (=>
-                                      (or (= temp___is_init_208 true)
+(define-fun dynamic_invariant5 ((temp___expr_207 Int)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)) Bool (=>
+                                      (or (= temp___is_init_204 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range2 temp___expr_211)))
+                                      (in_range2 temp___expr_207)))
 
 (declare-fun magic (Float32) Int)
 
@@ -414,10 +412,8 @@
 ;; magic__post_axiom
   (assert
   (forall ((s Float32))
-  (! (=> (dynamic_invariant4 s true true true)
-     (let ((result (magic s)))
-     (=> (magic__function_guard result s) (dynamic_invariant5 result true
-     false true)))) :pattern ((magic s)) )))
+  (! (=> (dynamic_invariant4 s true true true) (dynamic_invariant5 (magic s)
+     true false true)) :pattern ((magic s)) )))
 
 (declare-fun x () Int)
 
@@ -428,15 +424,10 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
 
 ;; zero_plus__def_axiom
-  (assert
-  (and (convert__function_guard (convert ((_ int2bv 32) 0))
-  ((_ int2bv 32) 0)) (= zero_plus (convert ((_ int2bv 32) 0)))))
+  (assert (= zero_plus (convert ((_ int2bv 32) 0))))
 
 ;; zero_neg__def_axiom
-  (assert
-  (and (convert__function_guard (convert ((_ int2bv 32) 2147483648))
-  ((_ int2bv 32) 2147483648))
-  (= zero_neg (convert ((_ int2bv 32) 2147483648)))))
+  (assert (= zero_neg (convert ((_ int2bv 32) 2147483648))))
 
 (declare-fun zero_and_min__zero_plus__assume () Float32)
 
@@ -448,10 +439,7 @@
 
 ;; H
   (assert
-  (and
   (and (= zero_and_min__zero_plus__assume (convert ((_ int2bv 32) 0)))
-  (convert__function_guard zero_and_min__zero_plus__assume
-  ((_ int2bv 32) 0)))
   (not (or (fp.isInfinite zero_and_min__zero_plus__assume) (fp.isNaN 
   zero_and_min__zero_plus__assume)))))
 
@@ -464,10 +452,7 @@
 ;; H
   (assert
   (and
-  (and
   (= zero_and_min__zero_neg__assume (convert ((_ int2bv 32) 2147483648)))
-  (convert__function_guard zero_and_min__zero_neg__assume
-  ((_ int2bv 32) 2147483648)))
   (not (or (fp.isInfinite zero_and_min__zero_neg__assume) (fp.isNaN zero_and_min__zero_neg__assume)))))
 
 ;; H
@@ -490,10 +475,8 @@
 
 ;; H
   (assert
-  (and
-  (and (= zero_and_min__B3b__x__assume (magic (fp.min c1b c2b)))
-  (magic__function_guard zero_and_min__B3b__x__assume (fp.min c1b c2b)))
-  (in_range2 zero_and_min__B3b__x__assume)))
+  (and (= zero_and_min__B3b__x__assume (magic (fp.min c1b c2b))) (in_range2
+  zero_and_min__B3b__x__assume)))
 
 ;; H
   (assert (= zero_and_min__B3b__x__assume x))
@@ -503,10 +486,8 @@
 
 ;; H
   (assert
-  (and
-  (and (= zero_and_min__B3b__y__assume (magic (fp.min c2b c1b)))
-  (magic__function_guard zero_and_min__B3b__y__assume (fp.min c2b c1b)))
-  (in_range2 zero_and_min__B3b__y__assume)))
+  (and (= zero_and_min__B3b__y__assume (magic (fp.min c2b c1b))) (in_range2
+  zero_and_min__B3b__y__assume)))
 
 ;; H
   (assert (= zero_and_min__B3b__y__assume y))

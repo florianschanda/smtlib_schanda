@@ -245,11 +245,8 @@
   (assert
   (forall ((n Int))
   (forall ((speed Float64))
-  (! (=> (invariant____function_guard (invariant__ n speed) n speed)
-     (and (low_bound__function_guard (low_bound n) n)
-     (and (high_bound__function_guard (high_bound n) n)
-     (= (= (invariant__ n speed) true)
-     (and (fp.leq (low_bound n) speed) (fp.leq speed (high_bound n))))))) :pattern (
+  (! (= (= (invariant__ n speed) true)
+     (and (fp.leq (low_bound n) speed) (fp.leq speed (high_bound n)))) :pattern (
   (invariant__ n speed)) ))))
 
 (declare-fun n () Int)
@@ -271,34 +268,26 @@
 ;; low_bound__post_axiom
   (assert
   (forall ((n1 Int))
-  (! (=> (dynamic_invariant1 n1 true true true)
-     (let ((result (low_bound n1)))
-     (=> (low_bound__function_guard result n1) (dynamic_invariant result true
-     false true)))) :pattern ((low_bound n1)) )))
+  (! (=> (dynamic_invariant1 n1 true true true) (dynamic_invariant
+     (low_bound n1) true false true)) :pattern ((low_bound n1)) )))
 
 ;; low_bound__def_axiom
   (assert
   (forall ((n1 Int))
-  (! (=>
-     (and (dynamic_invariant1 n1 true true true) (low_bound__function_guard
-     (low_bound n1) n1))
+  (! (=> (dynamic_invariant1 n1 true true true)
      (= (low_bound n1) (fp.mul RNE (fp.mul RNE (of_int RNE n1) (fp.neg (fp #b0 #b10000000000 #b1101101100000010000011000100100110111010010111100011))) (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001)))) :pattern (
   (low_bound n1)) )))
 
 ;; high_bound__post_axiom
   (assert
   (forall ((n1 Int))
-  (! (=> (dynamic_invariant1 n1 true true true)
-     (let ((result (high_bound n1)))
-     (=> (high_bound__function_guard result n1) (dynamic_invariant result
-     true false true)))) :pattern ((high_bound n1)) )))
+  (! (=> (dynamic_invariant1 n1 true true true) (dynamic_invariant
+     (high_bound n1) true false true)) :pattern ((high_bound n1)) )))
 
 ;; high_bound__def_axiom
   (assert
   (forall ((n1 Int))
-  (! (=>
-     (and (dynamic_invariant1 n1 true true true) (high_bound__function_guard
-     (high_bound n1) n1))
+  (! (=> (dynamic_invariant1 n1 true true true)
      (= (high_bound n1) (fp.mul RNE (fp.mul RNE (of_int RNE n1) (fp #b0 #b10000000000 #b1101101100000010000011000100100110111010010111100011)) (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001)))) :pattern (
   (high_bound n1)) )))
 
@@ -327,10 +316,6 @@
 (declare-fun new_speed3 () Float64)
 
 (declare-fun average3 () Float64)
-
-;; H
-  (assert (invariant____function_guard (invariant__ n old_speed) n
-  old_speed))
 
 ;; H
   (assert (in_range1 n))
@@ -397,10 +382,6 @@
 
 ;; H
   (assert (= new_speed3 new_speed1))
-
-;; H
-  (assert (invariant____function_guard (invariant__ (+ n 1) new_speed2)
-  (+ n 1) new_speed2))
 
 (assert
 ;; WP_parameter_def

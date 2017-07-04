@@ -124,47 +124,6 @@
 
 (declare-fun prev_representable (Float32) Float32)
 
-;; next_representable_def
-  (assert
-  (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (fp.lt x (next_representable x))) :pattern ((next_representable x)) )))
-
-;; prev_representable_def
-  (assert
-  (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (fp.lt (prev_representable x) x)) :pattern ((prev_representable x)) )))
-
-;; next_representable_def2
-  (assert
-  (forall ((x Float32) (y Float32))
-  (=> (fp.lt x y) (fp.leq (next_representable x) y))))
-
-;; prev_representable_def2
-  (assert
-  (forall ((x Float32) (y Float32))
-  (=> (fp.lt y x) (fp.leq y (prev_representable x)))))
-
-;; next_representable_finite
-  (assert
-  (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (=> (not (fp.eq x (fp #b0 #b11111110 #b11111111111111111111111)))
-     (not (or (fp.isInfinite (next_representable x)) (fp.isNaN (next_representable
-                                                               x)))))) :pattern ((not (or (fp.isInfinite 
-  (next_representable x)) (fp.isNaN (next_representable x))))) )))
-
-;; prev_representable_finite
-  (assert
-  (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (=>
-     (not (fp.eq x (fp.neg (fp #b0 #b11111110 #b11111111111111111111111))))
-     (not (or (fp.isInfinite (prev_representable x)) (fp.isNaN (prev_representable
-                                                               x)))))) :pattern ((not (or (fp.isInfinite 
-  (prev_representable x)) (fp.isNaN (prev_representable x))))) )))
-
 (declare-sort float 0)
 
 (define-fun bool_eq1 ((x Float32)

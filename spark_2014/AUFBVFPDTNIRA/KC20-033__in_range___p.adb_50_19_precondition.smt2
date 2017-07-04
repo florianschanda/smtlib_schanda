@@ -515,9 +515,7 @@
   (assert
   (forall ((n Int))
   (! (=> (and (dynamic_invariant n true true true) (and (<= 1 n) (<= n 10)))
-     (let ((result (ident n)))
-     (=> (ident__function_guard result n) (dynamic_invariant result true
-     false true)))) :pattern ((ident n)) )))
+     (dynamic_invariant (ident n) true false true)) :pattern ((ident n)) )))
 
 (declare-fun ident__2 (Int) Int)
 
@@ -527,9 +525,8 @@
   (assert
   (forall ((c Int))
   (! (=> (and (dynamic_invariant2 c true true true) (and (<= 0 c) (<= c 1)))
-     (let ((result (ident__2 c)))
-     (=> (ident__2__function_guard result c) (dynamic_invariant2 result true
-     false true)))) :pattern ((ident__2 c)) )))
+     (dynamic_invariant2 (ident__2 c) true false true)) :pattern ((ident__2
+                                                                  c)) )))
 
 (declare-fun ident__3 (volt) volt)
 
@@ -556,9 +553,8 @@
      (and (dynamic_invariant1 f true true true)
      (and (fp.leq (fp.neg (fp #b0 #b01111110 #b11111111011111001110111)) f)
      (fp.leq f (fp #b0 #b01111110 #b11111111011111001110111))))
-     (let ((result (ident__5 f)))
-     (=> (ident__5__function_guard result f) (dynamic_invariant1 result true
-     false true)))) :pattern ((ident__5 f)) )))
+     (dynamic_invariant1 (ident__5 f) true false true)) :pattern ((ident__5
+                                                                  f)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -589,8 +585,7 @@
 (declare-fun c1 () Int)
 
 ;; H
-  (assert
-  (and (and (= o (ident 5)) (ident__function_guard o 5)) (in_range1 o)))
+  (assert (and (= o (ident 5)) (in_range1 o)))
 
 ;; H
   (assert (= result n))
@@ -602,9 +597,7 @@
   (assert (in_range1 n1))
 
 ;; H
-  (assert
-  (and (and (= o1 (ident__2 0)) (ident__2__function_guard o1 0)) (in_range2
-  o1)))
+  (assert (and (= o1 (ident__2 0)) (in_range2 o1)))
 
 ;; H
   (assert (= result1 c))

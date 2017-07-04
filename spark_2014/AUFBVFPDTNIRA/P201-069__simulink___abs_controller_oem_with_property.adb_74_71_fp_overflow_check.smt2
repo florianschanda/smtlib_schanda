@@ -153,10 +153,8 @@
 
 ;; boolean_to_long_float__post_axiom
   (assert
-  (forall ((b Bool))
-  (! (let ((result (boolean_to_long_float b)))
-     (=> (boolean_to_long_float__function_guard result b) (dynamic_invariant
-     result true false true))) :pattern ((boolean_to_long_float b)) )))
+  (forall ((b Bool)) (! (dynamic_invariant (boolean_to_long_float b) true
+  false true) :pattern ((boolean_to_long_float b)) )))
 
 (declare-fun wheel_speed () Float64)
 
@@ -333,24 +331,17 @@
 ;; H
   (assert
   (and
-  (and
   (= o4 (boolean_to_long_float
         (ite (fp.lt difference_out11 (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))
         true false)))
-  (boolean_to_long_float__function_guard o4
-  (ite (fp.lt difference_out11 (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))
-  true false))) (not (or (fp.isInfinite o4) (fp.isNaN o4)))))
+  (not (or (fp.isInfinite o4) (fp.isNaN o4)))))
 
 ;; H
   (assert
   (and
-  (and
   (= o5 (boolean_to_long_float
         (ite (fp.lt (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) 
         difference_out11) true false)))
-  (boolean_to_long_float__function_guard o5
-  (ite (fp.lt (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) 
-  difference_out11) true false)))
   (not (or (fp.isInfinite o5) (fp.isNaN o5)))))
 
 ;; H

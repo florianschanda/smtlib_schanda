@@ -530,9 +530,9 @@
 
 ;; H
   (assert
-  (bvule (let ((temp___271 (bvsub current_time (bvsub res2 ((_ int2bv 8) 1)))))
+  (bvule (let ((temp___261 (bvsub current_time (bvsub res2 ((_ int2bv 8) 1)))))
          (ite (bvult current_time (bvsub res2 ((_ int2bv 8) 1)))
-         (bvadd temp___271 ((_ int2bv 8) 50)) temp___271)) s2))
+         (bvadd temp___261 ((_ int2bv 8) 50)) temp___261)) s2))
 
 ;; H
   (assert (bvule s2 current_time))

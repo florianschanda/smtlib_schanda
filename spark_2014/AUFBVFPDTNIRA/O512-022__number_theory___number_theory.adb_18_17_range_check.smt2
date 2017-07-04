@@ -292,12 +292,8 @@
 ;; fib__def_axiom
   (assert
   (forall ((n Int))
-  (! (=>
-     (and (dynamic_invariant2 n true true true) (fib__function_guard 
-     (fib n) n))
-     (and (fib__function_guard (fib (- n 1)) (- n 1))
-     (and (fib__function_guard (fib (- n 2)) (- n 2))
-     (= (fib n) (ite (or (= n 0) (= n 1)) n (+ (fib (- n 1)) (fib (- n 2)))))))) :pattern (
+  (! (=> (dynamic_invariant2 n true true true)
+     (= (fib n) (ite (or (= n 0) (= n 1)) n (+ (fib (- n 1)) (fib (- n 2)))))) :pattern (
   (fib n)) )))
 
 (declare-fun n () Int)
@@ -329,8 +325,6 @@
   (forall ((x Int))
   (! (=> (in_range1 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
-
-(declare-fun last () Int)
 
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))

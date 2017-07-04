@@ -352,10 +352,9 @@
 ;; float_to_unsigned_32__post_axiom
   (assert
   (forall ((s Float32))
-  (! (=> (dynamic_invariant2 s true true true)
-     (let ((result (float_to_unsigned_32 s)))
-     (=> (float_to_unsigned_32__function_guard result s) (dynamic_invariant3
-     result true false true)))) :pattern ((float_to_unsigned_32 s)) )))
+  (! (=> (dynamic_invariant2 s true true true) (dynamic_invariant3
+     (float_to_unsigned_32 s) true false true)) :pattern ((float_to_unsigned_32
+                                                          s)) )))
 
 (declare-sort source1 0)
 
@@ -418,10 +417,9 @@
 ;; unsigned_32_to_float__post_axiom
   (assert
   (forall ((s (_ BitVec 32)))
-  (! (=> (dynamic_invariant4 s true true true)
-     (let ((result (unsigned_32_to_float s)))
-     (=> (unsigned_32_to_float__function_guard result s) (dynamic_invariant5
-     result true false true)))) :pattern ((unsigned_32_to_float s)) )))
+  (! (=> (dynamic_invariant4 s true true true) (dynamic_invariant5
+     (unsigned_32_to_float s) true false true)) :pattern ((unsigned_32_to_float
+                                                          s)) )))
 
 (declare-fun half_x () Float32)
 
@@ -496,9 +494,7 @@
   (assert (= magic_num1 ((_ int2bv 32) 1597463007)))
 
 ;; H
-  (assert
-  (and (= o (float_to_unsigned_32 y1)) (float_to_unsigned_32__function_guard
-  o y1)))
+  (assert (= o (float_to_unsigned_32 y1)))
 
 ;; H
   (assert (= (mk_t__ref result3) (mk_t__ref i)))
@@ -514,9 +510,8 @@
 
 ;; H
   (assert
-  (and
-  (and (= o1 (unsigned_32_to_float i2)) (unsigned_32_to_float__function_guard
-  o1 i2)) (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (and (= o1 (unsigned_32_to_float i2))
+  (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
 
 ;; H
   (assert (= y1 result5))

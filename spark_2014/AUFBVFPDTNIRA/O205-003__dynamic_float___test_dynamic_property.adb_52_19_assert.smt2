@@ -311,10 +311,8 @@
 ;; dyn_return__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (dyn_return x)))
-     (=> (dyn_return__function_guard result x) (dynamic_invariant2 result
-     true false true)))) :pattern ((dyn_return x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant2
+     (dyn_return x) true false true)) :pattern ((dyn_return x)) )))
 
 ;; c__def_axiom
   (assert (= c d))
@@ -382,11 +380,9 @@
 
 ;; H
   (assert
-  (and
   (and (= o1 (dyn_return (fp #b0 #b10000011 #b11100000000000000000000)))
-  (dyn_return__function_guard o1
-  (fp #b0 #b10000011 #b11100000000000000000000))) (dynamic_property
-  (fp #b0 #b01111111 #b00000000000000000000000) last o1)))
+  (dynamic_property (fp #b0 #b01111111 #b00000000000000000000000) last 
+  o1)))
 
 ;; H
   (assert (= result1 x1))

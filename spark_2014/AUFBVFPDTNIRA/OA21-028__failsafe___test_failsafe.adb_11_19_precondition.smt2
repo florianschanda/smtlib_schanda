@@ -411,33 +411,18 @@
   (forall
   ((failsafe__model__battery_level_at (Array (_ BitVec 8) battery_level_type)))
   (forall ((failsafe__model__current_time (_ BitVec 8)))
-  (! (and (is_valid__function_guard
-     (is_valid failsafe__failsafe_state failsafe__model__battery_level_at
-     failsafe__model__current_time) failsafe__failsafe_state
-     failsafe__model__battery_level_at failsafe__model__current_time)
-     (=>
+  (! (=>
      (and (dynamic_invariant failsafe__model__current_time true true true)
      (= (is_valid failsafe__failsafe_state failsafe__model__battery_level_at
         failsafe__model__current_time) true))
-     (let ((result (is_raised failsafe__failsafe_state
-                   failsafe__model__battery_level_at
-                   failsafe__model__current_time)))
-     (and (is_valid__function_guard
-     (is_valid failsafe__failsafe_state failsafe__model__battery_level_at
-     failsafe__model__current_time) failsafe__failsafe_state
-     failsafe__model__battery_level_at failsafe__model__current_time)
-     (and (time_below_threshold__function_guard
-     (time_below_threshold failsafe__model__battery_level_at
-     failsafe__model__current_time) failsafe__model__battery_level_at
-     failsafe__model__current_time)
-     (=> (is_raised__function_guard result failsafe__failsafe_state
-     failsafe__model__battery_level_at failsafe__model__current_time)
      (and
      (= (is_valid failsafe__failsafe_state failsafe__model__battery_level_at
         failsafe__model__current_time) true)
-     (= (= result true)
+     (=
+     (= (is_raised failsafe__failsafe_state failsafe__model__battery_level_at
+        failsafe__model__current_time) true)
      (bvuge (time_below_threshold failsafe__model__battery_level_at
-            failsafe__model__current_time) ((_ int2bv 8) 50)))))))))) :pattern (
+            failsafe__model__current_time) ((_ int2bv 8) 50))))) :pattern (
   (is_raised failsafe__failsafe_state failsafe__model__battery_level_at
   failsafe__model__current_time)) )))))
 
@@ -493,8 +478,6 @@
   (! (=> (dynamic_invariant failsafe__model__current_time true true true)
      (let ((result (time_below_threshold failsafe__model__battery_level_at
                    failsafe__model__current_time)))
-     (=> (time_below_threshold__function_guard result
-     failsafe__model__battery_level_at failsafe__model__current_time)
      (and
      (ite (fp.leq (fp #b0 #b01111100 #b10011001100110011001101) (to_rep
                                                                 (select failsafe__model__battery_level_at failsafe__model__current_time)))
@@ -533,9 +516,9 @@
             (bvadd temp___232 ((_ int2bv 8) 50)) temp___232)) s)
      (bvule s ((_ int2bv 8) 49)))
      (fp.lt (to_rep (select failsafe__model__battery_level_at s)) (fp #b0 #b01111100 #b10011001100110011001101)))))))))
-     (dynamic_invariant2 result true false true))))) :pattern ((time_below_threshold
-                                                               failsafe__model__battery_level_at
-                                                               failsafe__model__current_time)) ))))
+     (dynamic_invariant2 result true false true)))) :pattern ((time_below_threshold
+                                                              failsafe__model__battery_level_at
+                                                              failsafe__model__current_time)) ))))
 
 ;; is_valid__post_axiom
   (assert true)
@@ -548,9 +531,9 @@
 
 (declare-fun j () Int)
 
-(declare-fun temp___288 () (_ BitVec 8))
+(declare-fun temp___280 () (_ BitVec 8))
 
-(declare-fun temp___287 () (Array (_ BitVec 8) battery_level_type))
+(declare-fun temp___279 () (Array (_ BitVec 8) battery_level_type))
 
 (declare-fun failsafe_state1 () us_private)
 
@@ -621,21 +604,16 @@
   (assert (in_range2 current_time))
 
 ;; H
-  (assert (is_valid__function_guard
-  (is_valid failsafe_state2 battery_level_at2 current_time3) failsafe_state2
-  battery_level_at2 current_time3))
-
-;; H
   (assert (= (mk_int__ref result) (mk_int__ref j)))
 
 ;; H
   (assert (= j1 1))
 
 ;; H
-  (assert (=> (and (<= 1 j1) (<= j1 49)) (= temp___288 current_time)))
+  (assert (=> (and (<= 1 j1) (<= j1 49)) (= temp___280 current_time)))
 
 ;; H
-  (assert (=> (and (<= 1 j1) (<= j1 49)) (= temp___287 battery_level_at)))
+  (assert (=> (and (<= 1 j1) (<= j1 49)) (= temp___279 battery_level_at)))
 
 ;; H
   (assert
@@ -648,9 +626,9 @@
   (and
   (and (= (is_valid failsafe_state2 battery_level_at2 current_time3) true)
   (and
-  (= current_time3 (let ((temp___237 (bvadd current_time2 ((_ int2bv 8) 1))))
+  (= current_time3 (let ((temp___236 (bvadd current_time2 ((_ int2bv 8) 1))))
                    (ite (bvule (bvsub ((_ int2bv 8) 50) current_time2) ((_ int2bv 8) 1))
-                   (bvsub temp___237 ((_ int2bv 8) 50)) temp___237)))
+                   (bvsub temp___236 ((_ int2bv 8) 50)) temp___236)))
   (fp.eq (to_rep (select battery_level_at2 current_time3)) (fp #b0 #b01111011 #b10011001100110011001101))))
   (in_range2 current_time3))))
 
@@ -752,34 +730,19 @@
   (=> (not (and (<= 1 j1) (<= j1 49))) (= failsafe_state6 failsafe_state1)))
 
 ;; H
-  (assert (is_raised__function_guard
-  (is_raised failsafe_state5 battery_level_at5 current_time6) failsafe_state5
-  battery_level_at5 current_time6))
-
-;; H
   (assert
   (not (= (is_raised failsafe_state5 battery_level_at5 current_time6) true)))
-
-;; H
-  (assert (is_valid__function_guard
-  (is_valid failsafe_state7 battery_level_at7 current_time8) failsafe_state7
-  battery_level_at7 current_time8))
 
 ;; H
   (assert
   (and
   (and (= (is_valid failsafe_state7 battery_level_at7 current_time8) true)
   (and
-  (= current_time8 (let ((temp___237 (bvadd current_time6 ((_ int2bv 8) 1))))
+  (= current_time8 (let ((temp___236 (bvadd current_time6 ((_ int2bv 8) 1))))
                    (ite (bvule (bvsub ((_ int2bv 8) 50) current_time6) ((_ int2bv 8) 1))
-                   (bvsub temp___237 ((_ int2bv 8) 50)) temp___237)))
+                   (bvsub temp___236 ((_ int2bv 8) 50)) temp___236)))
   (fp.eq (to_rep (select battery_level_at7 current_time8)) (fp #b0 #b01111011 #b10011001100110011001101))))
   (in_range2 current_time8)))
-
-;; H
-  (assert (is_valid__function_guard
-  (is_valid failsafe_state7 battery_level_at7 current_time8) failsafe_state7
-  battery_level_at7 current_time8))
 
 (assert
 ;; WP_parameter_def

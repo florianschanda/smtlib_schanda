@@ -1016,10 +1016,7 @@
 ;; some_package__float_buffer__buffer_tag__compat_axiom
   (assert
   (forall ((self us_rep))
-  (! (=> (length__function_guard1 (length2 us_tag self) us_tag self)
-     (and (length__function_guard (length1 self) self)
-     (= (length1 self) (length2 us_tag self)))) :pattern ((length2 us_tag
-                                                          self)) )))
+  (! (= (length1 self) (length2 us_tag self)) :pattern ((length2 us_tag self)) )))
 
 (define-fun dynamic_invariant1 ((temp___expr_33 Int) (temp___is_init_30 Bool)
   (temp___skip_constant_31 Bool)
@@ -1094,18 +1091,12 @@
 ;; H
   (assert
   (and
-  (and
   (= o1 (length1
         (mk___rep
         (mk___split_fields self__split_fields self__split_fields1
         self__split_fields2 self__split_fields3 self__split_fields4
         self__split_fields5 self__split_fields6) self__attr__tag)))
-  (length__function_guard o1
-  (mk___rep
-  (mk___split_fields self__split_fields self__split_fields1
-  self__split_fields2 self__split_fields3 self__split_fields4
-  self__split_fields5 self__split_fields6) self__attr__tag))) (in_range6 
-  o1)))
+  (in_range6 o1)))
 
 ;; H
   (assert

@@ -415,11 +415,10 @@
      (and (dynamic_invariant x true true true)
      (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) x))
      (let ((result (inv_sqrt x)))
-     (=> (inv_sqrt__function_guard result x)
      (and
      (and (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) result)
      (fp.lt result (fp #b0 #b11000010 #b01011010111100011101100)))
-     (dynamic_invariant result true false true))))) :pattern ((inv_sqrt x)) )))
+     (dynamic_invariant result true false true)))) :pattern ((inv_sqrt x)) )))
 
 (declare-fun saturate (Float32 Float32 Float32) Float32)
 
@@ -433,11 +432,10 @@
      (and (dynamic_invariant value true true true) (dynamic_invariant
      min_value true true true)) (dynamic_invariant max_value true true true))
      (let ((result (saturate value min_value max_value)))
-     (=> (saturate__function_guard result value min_value max_value)
      (and
      (ite (fp.lt value min_value) (fp.eq result min_value)
      (ite (fp.lt max_value value) (fp.eq result max_value)
-     (fp.eq result value))) (dynamic_invariant result true false true))))) :pattern (
+     (fp.eq result value))) (dynamic_invariant result true false true)))) :pattern (
   (saturate value min_value max_value)) )))
 
 (declare-fun lift_away_from_zero (Float32) Float32)
@@ -449,13 +447,12 @@
   (forall ((x Float32))
   (! (=> (dynamic_invariant2 x true true true)
      (let ((result (lift_away_from_zero x)))
-     (=> (lift_away_from_zero__function_guard result x)
      (and
      (ite (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
      (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000))
      (=> (neq x (fp #b0 #b00000000 #b00000000000000000000000)) (neq result
      (fp #b0 #b00000000 #b00000000000000000000000)))) (dynamic_invariant3
-     result true false true))))) :pattern ((lift_away_from_zero x)) )))
+     result true false true)))) :pattern ((lift_away_from_zero x)) )))
 
 (declare-fun gx () Float32)
 

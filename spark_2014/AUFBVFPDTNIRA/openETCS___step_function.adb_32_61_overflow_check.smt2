@@ -595,8 +595,7 @@
 ;; is_valid__def_axiom
   (assert
   (forall ((sfun us_rep1))
-  (! (=> (is_valid__function_guard (is_valid sfun) sfun)
-     (= (= (is_valid sfun) true)
+  (! (= (= (is_valid sfun) true)
      (and
      (= (to_rep2
         (rec__step_function__delimiter_entry__delimiter
@@ -620,7 +619,7 @@
                                   (us_split_fields1
                                   (let ((temp___183 (rec__step_function__step_function_t__step
                                                     (us_split_fields3 sfun))))
-                                  (select temp___183 (+ i 1)))))))))))) :pattern (
+                                  (select temp___183 (+ i 1))))))))))) :pattern (
   (is_valid sfun)) )))
 
 (declare-fun sfun () us_rep1)
@@ -650,8 +649,6 @@
   (forall ((x1 Int))
   (! (=> (in_range2 x1) (= (to_rep3 (of_rep3 x1)) x1)) :pattern ((to_rep3
                                                                  (of_rep3 x1))) )))
-
-(declare-fun last () Int)
 
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x1 Int)) Bool (and (<= first_int x1) (<= x1 last_int)))
@@ -698,9 +695,6 @@
 
 ;; H
   (assert (in_range4 x))
-
-;; H
-  (assert (is_valid__function_guard (is_valid sfun) sfun))
 
 ;; H
   (assert (= (is_valid sfun) true))

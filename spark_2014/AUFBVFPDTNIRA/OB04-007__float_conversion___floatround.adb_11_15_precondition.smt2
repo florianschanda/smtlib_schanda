@@ -204,16 +204,13 @@
      (and (in_range2 x)
      (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) x)
      (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000)))))
-     (let ((result (convert x)))
-     (=> (convert__function_guard result x) (dynamic_invariant1 result true
-     false true)))) :pattern ((convert x)) )))
+     (dynamic_invariant1 (convert x) true false true)) :pattern ((convert x)) )))
 
 ;; convert__def_axiom
   (assert
   (forall ((x Float32))
-  (! (=>
-     (and (dynamic_invariant x true true true) (convert__function_guard
-     (convert x) x)) (= (convert x) x)) :pattern ((convert x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (convert x) x)) :pattern (
+  (convert x)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 

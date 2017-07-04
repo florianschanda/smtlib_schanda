@@ -219,17 +219,14 @@
 ;; r1__post_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=> (dynamic_invariant x1 true true true)
-     (let ((result (r1 x1)))
-     (=> (r1__function_guard result x1) (dynamic_invariant result true false
-     true)))) :pattern ((r1 x1)) )))
+  (! (=> (dynamic_invariant x1 true true true) (dynamic_invariant (r1 x1)
+     true false true)) :pattern ((r1 x1)) )))
 
 ;; r1__def_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=>
-     (and (dynamic_invariant x1 true true true) (r1__function_guard (r1 x1)
-     x1)) (= (r1 x1) (fp.roundToIntegral RTN x1))) :pattern ((r1 x1)) )))
+  (! (=> (dynamic_invariant x1 true true true)
+     (= (r1 x1) (fp.roundToIntegral RTN x1))) :pattern ((r1 x1)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 

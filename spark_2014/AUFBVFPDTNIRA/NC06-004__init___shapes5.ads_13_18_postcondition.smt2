@@ -471,11 +471,6 @@
   (= (mk___rep (mk___split_fields result result1 result2)) (circle__content
                                                            shapes5__make_circle__result)))
 
-;; H
-  (assert (in_bounds__function_guard
-  (in_bounds (circle__content shapes5__make_circle__result) wild_man)
-  (circle__content shapes5__make_circle__result) wild_man))
-
 (assert
 ;; WP_parameter_def
  ;; File "shapes5.ads", line 27, characters 0-0

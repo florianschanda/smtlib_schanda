@@ -180,11 +180,9 @@
 ;; is_valid_speed_km_per_h__def_axiom
   (assert
   (forall ((speed Float32))
-  (! (=> (is_valid_speed_km_per_h__function_guard
-     (is_valid_speed_km_per_h speed) speed)
-     (= (= (is_valid_speed_km_per_h speed) true)
+  (! (= (= (is_valid_speed_km_per_h speed) true)
      (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) speed)
-     (fp.leq speed (fp #b0 #b10000111 #b11110100000000000000000))))) :pattern (
+     (fp.leq speed (fp #b0 #b10000111 #b11110100000000000000000)))) :pattern (
   (is_valid_speed_km_per_h speed)) )))
 
 (declare-fun speed () Float32)
@@ -193,10 +191,6 @@
 
 ;; H
   (assert (not (or (fp.isInfinite speed) (fp.isNaN speed))))
-
-;; H
-  (assert (is_valid_speed_km_per_h__function_guard
-  (is_valid_speed_km_per_h speed) speed))
 
 ;; H
   (assert (= (is_valid_speed_km_per_h speed) true))

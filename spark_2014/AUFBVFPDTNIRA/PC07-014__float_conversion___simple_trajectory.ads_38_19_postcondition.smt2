@@ -245,17 +245,13 @@
 ;; low_bound__post_axiom
   (assert
   (forall ((n Int))
-  (! (=> (dynamic_invariant1 n true true true)
-     (let ((result (low_bound n)))
-     (=> (low_bound__function_guard result n) (dynamic_invariant result true
-     false true)))) :pattern ((low_bound n)) )))
+  (! (=> (dynamic_invariant1 n true true true) (dynamic_invariant
+     (low_bound n) true false true)) :pattern ((low_bound n)) )))
 
 ;; low_bound__def_axiom
   (assert
   (forall ((n Int))
-  (! (=>
-     (and (dynamic_invariant1 n true true true) (low_bound__function_guard
-     (low_bound n) n))
+  (! (=> (dynamic_invariant1 n true true true)
      (= (low_bound n) (fp.mul RNE (of_int RNE n) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))) :pattern (
   (low_bound n)) )))
 
@@ -266,17 +262,13 @@
 ;; high_bound__post_axiom
   (assert
   (forall ((n Int))
-  (! (=> (dynamic_invariant1 n true true true)
-     (let ((result (high_bound n)))
-     (=> (high_bound__function_guard result n) (dynamic_invariant result true
-     false true)))) :pattern ((high_bound n)) )))
+  (! (=> (dynamic_invariant1 n true true true) (dynamic_invariant
+     (high_bound n) true false true)) :pattern ((high_bound n)) )))
 
 ;; high_bound__def_axiom
   (assert
   (forall ((n Int))
-  (! (=>
-     (and (dynamic_invariant1 n true true true) (high_bound__function_guard
-     (high_bound n) n))
+  (! (=> (dynamic_invariant1 n true true true)
      (= (high_bound n) (fp.mul RNE (of_int RNE n) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)))) :pattern (
   (high_bound n)) )))
 
@@ -291,11 +283,8 @@
   (assert
   (forall ((n Int))
   (forall ((speed Float64))
-  (! (=> (invariant____function_guard (invariant__ n speed) n speed)
-     (and (low_bound__function_guard (low_bound n) n)
-     (and (high_bound__function_guard (high_bound n) n)
-     (= (= (invariant__ n speed) true)
-     (and (fp.leq (low_bound n) speed) (fp.leq speed (high_bound n))))))) :pattern (
+  (! (= (= (invariant__ n speed) true)
+     (and (fp.leq (low_bound n) speed) (fp.leq speed (high_bound n)))) :pattern (
   (invariant__ n speed)) ))))
 
 (declare-fun in_bounds (Float64) Bool)
@@ -308,11 +297,10 @@
 ;; in_bounds__def_axiom
   (assert
   (forall ((v Float64))
-  (! (=> (in_bounds__function_guard (in_bounds v) v)
-     (= (= (in_bounds v) true)
+  (! (= (= (in_bounds v) true)
      (and
      (fp.leq (fp.neg (fp #b0 #b10000010011 #b1000110010111010100000000000000000000000000000000000)) v)
-     (fp.leq v (fp #b0 #b10000010011 #b1000110010111010100000000000000000000000000000000000))))) :pattern (
+     (fp.leq v (fp #b0 #b10000010011 #b1000110010111010100000000000000000000000000000000000)))) :pattern (
   (in_bounds v)) )))
 
 (declare-fun n () Int)
@@ -348,128 +336,6 @@
 (declare-fun new_speed2 () Float64)
 
 (declare-fun new_speed3 () Float64)
-
-;; H
-  (assert (invariant____function_guard (invariant__ n old_speed) n
-  old_speed))
-
-;; H
-  (assert (in_bounds__function_guard (in_bounds old_speed) old_speed))
-
-;; H
-  (assert (high_bound__function_guard (high_bound n) n))
-
-;; H
-  (assert (high_bound__function_guard (high_bound n) n))
-
-;; H
-  (assert (in_bounds__function_guard (in_bounds (high_bound n))
-  (high_bound n)))
-
-;; H
-  (assert (low_bound__function_guard (low_bound n) n))
-
-;; H
-  (assert (low_bound__function_guard (low_bound n) n))
-
-;; H
-  (assert (in_bounds__function_guard (in_bounds (low_bound n))
-  (low_bound n)))
-
-;; H
-  (assert (high_bound__function_guard (high_bound n) n))
-
-;; H
-  (assert (high_bound__function_guard (high_bound n) n))
-
-;; H
-  (assert (high_bound__function_guard (high_bound n) n))
-
-;; H
-  (assert (high_bound__function_guard (high_bound n) n))
-
-;; H
-  (assert (high_bound__function_guard (high_bound (+ n 1)) (+ n 1)))
-
-;; H
-  (assert (high_bound__function_guard (high_bound (+ n 1)) (+ n 1)))
-
-;; H
-  (assert (low_bound__function_guard (low_bound n) n))
-
-;; H
-  (assert (low_bound__function_guard (low_bound n) n))
-
-;; H
-  (assert (low_bound__function_guard (low_bound n) n))
-
-;; H
-  (assert (low_bound__function_guard (low_bound (+ n 1)) (+ n 1)))
-
-;; H
-  (assert (low_bound__function_guard (low_bound n) n))
-
-;; H
-  (assert (low_bound__function_guard (low_bound (+ n 1)) (+ n 1)))
-
-;; H
-  (assert (in_bounds__function_guard (in_bounds old_speed) old_speed))
-
-;; H
-  (assert (high_bound__function_guard (high_bound n) n))
-
-;; H
-  (assert (high_bound__function_guard (high_bound n) n))
-
-;; H
-  (assert (in_bounds__function_guard (in_bounds (high_bound n))
-  (high_bound n)))
-
-;; H
-  (assert (low_bound__function_guard (low_bound n) n))
-
-;; H
-  (assert (low_bound__function_guard (low_bound n) n))
-
-;; H
-  (assert (in_bounds__function_guard (in_bounds (low_bound n))
-  (low_bound n)))
-
-;; H
-  (assert (high_bound__function_guard (high_bound n) n))
-
-;; H
-  (assert (high_bound__function_guard (high_bound n) n))
-
-;; H
-  (assert (high_bound__function_guard (high_bound n) n))
-
-;; H
-  (assert (high_bound__function_guard (high_bound n) n))
-
-;; H
-  (assert (high_bound__function_guard (high_bound (+ n 1)) (+ n 1)))
-
-;; H
-  (assert (high_bound__function_guard (high_bound (+ n 1)) (+ n 1)))
-
-;; H
-  (assert (low_bound__function_guard (low_bound n) n))
-
-;; H
-  (assert (low_bound__function_guard (low_bound n) n))
-
-;; H
-  (assert (low_bound__function_guard (low_bound n) n))
-
-;; H
-  (assert (low_bound__function_guard (low_bound (+ n 1)) (+ n 1)))
-
-;; H
-  (assert (low_bound__function_guard (low_bound n) n))
-
-;; H
-  (assert (low_bound__function_guard (low_bound (+ n 1)) (+ n 1)))
 
 ;; H
   (assert (in_range2 n))
@@ -589,10 +455,6 @@
 
 ;; H
   (assert (= new_speed3 new_speed1))
-
-;; H
-  (assert (invariant____function_guard (invariant__ (+ n 1) new_speed2)
-  (+ n 1) new_speed2))
 
 (assert
 ;; WP_parameter_def

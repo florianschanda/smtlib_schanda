@@ -595,8 +595,7 @@
 ;; is_valid__def_axiom
   (assert
   (forall ((sfun us_rep1))
-  (! (=> (is_valid__function_guard (is_valid sfun) sfun)
-     (= (= (is_valid sfun) true)
+  (! (= (= (is_valid sfun) true)
      (and
      (= (to_rep2
         (rec__step_function__delimiter_entry__delimiter
@@ -620,7 +619,7 @@
                                   (us_split_fields1
                                   (let ((temp___183 (rec__step_function__step_function_t__step
                                                     (us_split_fields3 sfun))))
-                                  (select temp___183 (+ i 1)))))))))))) :pattern (
+                                  (select temp___183 (+ i 1))))))))))) :pattern (
   (is_valid sfun)) )))
 
 (declare-fun sfun () us_rep1)
@@ -650,8 +649,6 @@
   (forall ((x1 Int))
   (! (=> (in_range2 x1) (= (to_rep3 (of_rep3 x1)) x1)) :pattern ((to_rep3
                                                                  (of_rep3 x1))) )))
-
-(declare-fun last () Int)
 
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x1 Int)) Bool (and (<= first_int x1) (<= x1 last_int)))
@@ -692,13 +689,13 @@
 
 (declare-fun step_function__get_value__result () Float32)
 
-(declare-fun temp___257 () Int)
+(declare-fun temp___247 () Int)
 
-(declare-fun temp___258 () Int)
+(declare-fun temp___248 () Int)
 
-(declare-fun temp___253 () Int)
+(declare-fun temp___243 () Int)
 
-(declare-fun temp___251 () Int)
+(declare-fun temp___241 () Int)
 
 (declare-fun o () Int)
 
@@ -786,9 +783,6 @@
 (declare-fun result5 () Float32)
 
 ;; H
-  (assert (is_valid__function_guard (is_valid sfun) sfun))
-
-;; H
   (assert (in_range4 x))
 
 ;; H
@@ -806,14 +800,14 @@
   (and
   (= step_function__get_value__result12 step_function__get_value__result3)
   (= i8 i2)))
-  (and (= temp___257 0)
+  (and (= temp___247 0)
   (and
-  (= temp___258 (- (to_rep1
+  (= temp___248 (- (to_rep1
                    (rec__step_function__step_function_t__number_of_delimiters
                    (us_split_fields3 sfun))) 1))
-  (and (and (= result4 i12) (= i1 temp___257))
-  (and (and (<= temp___257 i1) (<= i1 temp___258))
-  (and (= temp___253 i1)
+  (and (and (= result4 i12) (= i1 temp___247))
+  (and (and (<= temp___247 i1) (<= i1 temp___248))
+  (and (= temp___243 i1)
   (and
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j i2))
@@ -844,8 +838,8 @@
   (and
   (and
   (and
-  (and (and (= temp___251 (+ i2 1)) (in_range2 (+ i2 1)))
-  (and (and (<= 0 temp___251) (<= temp___251 10)) (= o temp___251)))
+  (and (and (= temp___241 (+ i2 1)) (in_range2 (+ i2 1)))
+  (and (and (<= 0 temp___241) (<= temp___241 10)) (= o temp___241)))
   (= o8 (select (rec__step_function__step_function_t__step
                 (us_split_fields3 sfun)) o)))
   (and (= o1 o3) (= o2 o4))) (= o5 o3)) (= o6 (to_rep2 o5)))
@@ -872,7 +866,7 @@
                  (us_split_fields3 sfun))) 1)))
   (and
   (and
-  (and (= temp___253 i1)
+  (and (= temp___243 i1)
   (and
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j i2))
@@ -904,8 +898,8 @@
   (and
   (and
   (and
-  (and (and (= temp___251 (+ i2 1)) (in_range2 (+ i2 1)))
-  (and (and (<= 0 temp___251) (<= temp___251 10)) (= o temp___251)))
+  (and (and (= temp___241 (+ i2 1)) (in_range2 (+ i2 1)))
+  (and (and (<= 0 temp___241) (<= temp___241 10)) (= o temp___241)))
   (= o8 (select (rec__step_function__step_function_t__step
                 (us_split_fields3 sfun)) o)))
   (and (= o1 o3) (= o2 o4))) (= o5 o3)) (= o6 (to_rep2 o5)))

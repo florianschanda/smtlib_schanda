@@ -573,9 +573,8 @@
      (and (dynamic_invariant x1 true true true) (dynamic_invariant x2 true
      true true))
      (let ((result (min x1 x2)))
-     (=> (min__function_guard result x1 x2)
      (and (ite (fp.leq x1 x2) (fp.eq result x1) (fp.eq result x2))
-     (dynamic_invariant result true false true))))) :pattern ((min x1 x2)) )))
+     (dynamic_invariant result true false true)))) :pattern ((min x1 x2)) )))
 
 (declare-fun is_valid (us_rep1) Bool)
 
@@ -587,8 +586,7 @@
 ;; is_valid__def_axiom
   (assert
   (forall ((sfun us_rep1))
-  (! (=> (is_valid__function_guard (is_valid sfun) sfun)
-     (= (= (is_valid sfun) true)
+  (! (= (= (is_valid sfun) true)
      (and
      (= (to_rep2
         (rec__step_function__delimiter_entry__delimiter
@@ -612,7 +610,7 @@
                                   (us_split_fields1
                                   (let ((temp___183 (rec__step_function__step_function_t__step
                                                     (us_split_fields3 sfun))))
-                                  (select temp___183 (+ i 1)))))))))))) :pattern (
+                                  (select temp___183 (+ i 1))))))))))) :pattern (
   (is_valid sfun)) )))
 
 (declare-fun has_same_delimiters (us_rep1 us_rep1) Bool)
@@ -625,9 +623,7 @@
 ;; has_same_delimiters__def_axiom
   (assert
   (forall ((sfun1 us_rep1) (sfun2 us_rep1))
-  (! (=> (has_same_delimiters__function_guard
-     (has_same_delimiters sfun1 sfun2) sfun1 sfun2)
-     (= (= (has_same_delimiters sfun1 sfun2) true)
+  (! (= (= (has_same_delimiters sfun1 sfun2) true)
      (and
      (= (to_rep1
         (rec__step_function__step_function_t__number_of_delimiters
@@ -650,7 +646,7 @@
                                   (us_split_fields1
                                   (let ((temp___192 (rec__step_function__step_function_t__step
                                                     (us_split_fields3 sfun2))))
-                                  (select temp___192 i))))))))))) :pattern (
+                                  (select temp___192 i)))))))))) :pattern (
   (has_same_delimiters sfun1 sfun2)) )))
 
 (declare-fun get_value (us_rep1 Int) Float32)
@@ -668,10 +664,8 @@
   (assert
   (forall ((sfun us_rep1))
   (forall ((x Int))
-  (! (and (is_valid__function_guard (is_valid sfun) sfun)
-     (=> (and (dynamic_invariant1 x true true true) (= (is_valid sfun) true))
+  (! (=> (and (dynamic_invariant1 x true true true) (= (is_valid sfun) true))
      (let ((result (get_value sfun x)))
-     (=> (get_value__function_guard result sfun x)
      (and
      (or
      (exists ((i Int))
@@ -685,40 +679,40 @@
      (<= (to_rep2
          (rec__step_function__delimiter_entry__delimiter
          (us_split_fields1
-         (let ((temp___201 (rec__step_function__step_function_t__step
+         (let ((temp___199 (rec__step_function__step_function_t__step
                            (us_split_fields3 sfun))))
-         (select temp___201 i))))) x)
+         (select temp___199 i))))) x)
      (< x (to_rep2
           (rec__step_function__delimiter_entry__delimiter
           (us_split_fields1
-          (let ((temp___202 (rec__step_function__step_function_t__step
+          (let ((temp___200 (rec__step_function__step_function_t__step
                             (us_split_fields3 sfun))))
-          (select temp___202 (+ i 1))))))))
+          (select temp___200 (+ i 1))))))))
      (fp.eq result (to_rep
                    (rec__step_function__delimiter_entry__value
                    (us_split_fields1
-                   (let ((temp___203 (rec__step_function__step_function_t__step
+                   (let ((temp___201 (rec__step_function__step_function_t__step
                                      (us_split_fields3 sfun))))
-                   (select temp___203 i)))))))))
+                   (select temp___201 i)))))))))
      (and
      (<= (to_rep2
          (rec__step_function__delimiter_entry__delimiter
          (us_split_fields1
-         (let ((temp___204 (rec__step_function__step_function_t__step
+         (let ((temp___202 (rec__step_function__step_function_t__step
                            (us_split_fields3 sfun))))
-         (select temp___204 (to_rep1
+         (select temp___202 (to_rep1
                             (rec__step_function__step_function_t__number_of_delimiters
                             (us_split_fields3 sfun)))))))) x)
      (fp.eq result (to_rep
                    (rec__step_function__delimiter_entry__value
                    (us_split_fields1
-                   (let ((temp___205 (rec__step_function__step_function_t__step
+                   (let ((temp___203 (rec__step_function__step_function_t__step
                                      (us_split_fields3 sfun))))
-                   (select temp___205 (to_rep1
+                   (select temp___203 (to_rep1
                                       (rec__step_function__step_function_t__number_of_delimiters
                                       (us_split_fields3 sfun)))))))))))
-     (dynamic_invariant result true false true)))))) :pattern ((get_value
-                                                               sfun x)) ))))
+     (dynamic_invariant result true false true)))) :pattern ((get_value sfun
+                                                             x)) ))))
 
 (declare-fun minimum_until_point (us_rep1 Int) Float32)
 
@@ -728,10 +722,8 @@
   (assert
   (forall ((sfun us_rep1))
   (forall ((x Int))
-  (! (and (is_valid__function_guard (is_valid sfun) sfun)
-     (=> (and (dynamic_invariant1 x true true true) (= (is_valid sfun) true))
+  (! (=> (and (dynamic_invariant1 x true true true) (= (is_valid sfun) true))
      (let ((result (minimum_until_point sfun x)))
-     (=> (minimum_until_point__function_guard result sfun x)
      (and
      (and
      (forall ((i Int))
@@ -744,15 +736,15 @@
      (<= (to_rep2
          (rec__step_function__delimiter_entry__delimiter
          (us_split_fields1
-         (let ((temp___215 (rec__step_function__step_function_t__step
+         (let ((temp___211 (rec__step_function__step_function_t__step
                            (us_split_fields3 sfun))))
-         (select temp___215 i))))) x)
+         (select temp___211 i))))) x)
      (fp.leq result (to_rep
                     (rec__step_function__delimiter_entry__value
                     (us_split_fields1
-                    (let ((temp___214 (rec__step_function__step_function_t__step
+                    (let ((temp___210 (rec__step_function__step_function_t__step
                                       (us_split_fields3 sfun))))
-                    (select temp___214 i)))))))))
+                    (select temp___210 i)))))))))
      (exists ((i Int))
      (and
      (and (<= 0 i)
@@ -763,99 +755,23 @@
      (<= (to_rep2
          (rec__step_function__delimiter_entry__delimiter
          (us_split_fields1
-         (let ((temp___216 (rec__step_function__step_function_t__step
+         (let ((temp___212 (rec__step_function__step_function_t__step
                            (us_split_fields3 sfun))))
-         (select temp___216 i))))) x)
+         (select temp___212 i))))) x)
      (fp.eq result (to_rep
                    (rec__step_function__delimiter_entry__value
                    (us_split_fields1
-                   (let ((temp___217 (rec__step_function__step_function_t__step
+                   (let ((temp___213 (rec__step_function__step_function_t__step
                                      (us_split_fields3 sfun))))
-                   (select temp___217 i))))))))))
-     (dynamic_invariant result true false true)))))) :pattern ((minimum_until_point
-                                                               sfun x)) ))))
-
-(declare-sort t1b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
-
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq6 (t1b t1b) Bool)
-
-(declare-fun dummy6 () t1b)
-
-(declare-datatypes () ((t1b__ref (mk_t1b__ref (t1b__content t1b)))))
-(define-fun t1b__ref___projection ((a t1b__ref)) t1b (t1b__content a))
+                   (select temp___213 i))))))))))
+     (dynamic_invariant result true false true)))) :pattern ((minimum_until_point
+                                                             sfun x)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(declare-sort t3b 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
-
-(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq7 (t3b t3b) Bool)
-
-(declare-fun dummy7 () t3b)
-
-(declare-datatypes () ((t3b__ref (mk_t3b__ref (t3b__content t3b)))))
-(define-fun t3b__ref___projection ((a t3b__ref)) t3b (t3b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(declare-sort t5b 0)
-
-(define-fun in_range6 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
-
-(define-fun bool_eq9 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq8 (t5b t5b) Bool)
-
-(declare-fun dummy8 () t5b)
-
-(declare-datatypes () ((t5b__ref (mk_t5b__ref (t5b__content t5b)))))
-(define-fun t5b__ref___projection ((a t5b__ref)) t5b (t5b__content a))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
-
-(declare-sort t7b 0)
-
-(define-fun in_range7 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
-
-(define-fun bool_eq10 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
-
-(declare-fun user_eq9 (t7b t7b) Bool)
-
-(declare-fun dummy9 () t7b)
-
-(declare-datatypes () ((t7b__ref (mk_t7b__ref (t7b__content t7b)))))
-(define-fun t7b__ref___projection ((a t7b__ref)) t7b (t7b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
@@ -863,31 +779,50 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
 
-(declare-fun temp___284 (us_rep us_rep us_rep us_rep) (Array Int us_rep))
+(declare-fun temp___274 (us_rep us_rep us_rep us_rep) (Array Int us_rep))
 
 ;; def_axiom
   (assert
-  (forall ((temp___286 us_rep) (temp___287 us_rep) (temp___288 us_rep)
-  (temp___289 us_rep))
-  (let ((temp___285 (temp___284 temp___286 temp___287 temp___288 temp___289)))
-  (forall ((temp___290 Int))
-  (ite (= temp___290 0) (= (select temp___285 temp___290) temp___286)
-  (ite (= temp___290 1) (= (select temp___285 temp___290) temp___287)
-  (ite (= temp___290 2) (= (select temp___285 temp___290) temp___288)
-  (= (select temp___285 temp___290) temp___289))))))))
+  (forall ((temp___276 us_rep) (temp___277 us_rep) (temp___278 us_rep)
+  (temp___279 us_rep))
+  (let ((temp___275 (temp___274 temp___276 temp___277 temp___278 temp___279)))
+  (forall ((temp___280 Int))
+  (ite (= temp___280 0) (= (select temp___275 temp___280) temp___276)
+  (ite (= temp___280 1) (= (select temp___275 temp___280) temp___277)
+  (ite (= temp___280 2) (= (select temp___275 temp___280) temp___278)
+  (= (select temp___275 temp___280) temp___279))))))))
 
-(declare-fun temp___291 (us_rep us_rep us_rep us_rep) (Array Int us_rep))
+(declare-fun temp___281 (us_rep us_rep us_rep us_rep) (Array Int us_rep))
 
 ;; def_axiom
   (assert
-  (forall ((temp___293 us_rep) (temp___294 us_rep) (temp___295 us_rep)
+  (forall ((temp___283 us_rep) (temp___284 us_rep) (temp___285 us_rep)
+  (temp___286 us_rep))
+  (let ((temp___282 (temp___281 temp___283 temp___284 temp___285 temp___286)))
+  (forall ((temp___287 Int))
+  (ite (= temp___287 0) (= (select temp___282 temp___287) temp___283)
+  (ite (= temp___287 1) (= (select temp___282 temp___287) temp___284)
+  (ite (= temp___287 2) (= (select temp___282 temp___287) temp___285)
+  (= (select temp___282 temp___287) temp___286))))))))
+
+(declare-fun temp___288 (us_rep us_rep us_rep us_rep us_rep us_rep
+  us_rep) (Array Int us_rep))
+
+;; def_axiom
+  (assert
+  (forall ((temp___290 us_rep) (temp___291 us_rep) (temp___292 us_rep)
+  (temp___293 us_rep) (temp___294 us_rep) (temp___295 us_rep)
   (temp___296 us_rep))
-  (let ((temp___292 (temp___291 temp___293 temp___294 temp___295 temp___296)))
+  (let ((temp___289 (temp___288 temp___290 temp___291 temp___292 temp___293
+                    temp___294 temp___295 temp___296)))
   (forall ((temp___297 Int))
-  (ite (= temp___297 0) (= (select temp___292 temp___297) temp___293)
-  (ite (= temp___297 1) (= (select temp___292 temp___297) temp___294)
-  (ite (= temp___297 2) (= (select temp___292 temp___297) temp___295)
-  (= (select temp___292 temp___297) temp___296))))))))
+  (ite (= temp___297 0) (= (select temp___289 temp___297) temp___290)
+  (ite (= temp___297 1) (= (select temp___289 temp___297) temp___291)
+  (ite (= temp___297 2) (= (select temp___289 temp___297) temp___292)
+  (ite (= temp___297 3) (= (select temp___289 temp___297) temp___293)
+  (ite (= temp___297 4) (= (select temp___289 temp___297) temp___294)
+  (ite (= temp___297 5) (= (select temp___289 temp___297) temp___295)
+  (= (select temp___289 temp___297) temp___296)))))))))))
 
 (declare-fun temp___298 (us_rep us_rep us_rep us_rep us_rep us_rep
   us_rep) (Array Int us_rep))
@@ -907,25 +842,6 @@
   (ite (= temp___307 4) (= (select temp___299 temp___307) temp___304)
   (ite (= temp___307 5) (= (select temp___299 temp___307) temp___305)
   (= (select temp___299 temp___307) temp___306)))))))))))
-
-(declare-fun temp___308 (us_rep us_rep us_rep us_rep us_rep us_rep
-  us_rep) (Array Int us_rep))
-
-;; def_axiom
-  (assert
-  (forall ((temp___310 us_rep) (temp___311 us_rep) (temp___312 us_rep)
-  (temp___313 us_rep) (temp___314 us_rep) (temp___315 us_rep)
-  (temp___316 us_rep))
-  (let ((temp___309 (temp___308 temp___310 temp___311 temp___312 temp___313
-                    temp___314 temp___315 temp___316)))
-  (forall ((temp___317 Int))
-  (ite (= temp___317 0) (= (select temp___309 temp___317) temp___310)
-  (ite (= temp___317 1) (= (select temp___309 temp___317) temp___311)
-  (ite (= temp___317 2) (= (select temp___309 temp___317) temp___312)
-  (ite (= temp___317 3) (= (select temp___309 temp___317) temp___313)
-  (ite (= temp___317 4) (= (select temp___309 temp___317) temp___314)
-  (ite (= temp___317 5) (= (select temp___309 temp___317) temp___315)
-  (= (select temp___309 temp___317) temp___316)))))))))))
 
 (define-fun dynamic_invariant2 ((temp___expr_136 Int)
   (temp___is_init_133 Bool) (temp___skip_constant_134 Bool)
@@ -1258,7 +1174,7 @@
 
 ;; H
   (assert
-  (= o23 (temp___284 o22 (mk___rep (mk___split_fields o20 o21))
+  (= o23 (temp___274 o22 (mk___rep (mk___split_fields o20 o21))
          (mk___rep (mk___split_fields o18 o19))
          (mk___rep (mk___split_fields o16 o17)))))
 
@@ -1330,7 +1246,7 @@
   (assert (= o41 (mk___rep o28)))
 
 ;; H
-  (assert (= o42 (temp___291 o41 o40 o39 o38)))
+  (assert (= o42 (temp___281 o41 o40 o39 o38)))
 
 ;; H
   (assert (= (to_rep1 o43) 2))
@@ -1436,7 +1352,7 @@
   (assert (= o72 (mk___rep o47)))
 
 ;; H
-  (assert (= o73 (temp___298 o72 o71 o70 o69 o68 o67 o66)))
+  (assert (= o73 (temp___288 o72 o71 o70 o69 o68 o67 o66)))
 
 ;; H
   (assert (= (to_rep1 o74) 5))
@@ -1542,7 +1458,7 @@
   (assert (= o103 (mk___rep o78)))
 
 ;; H
-  (assert (= o104 (temp___308 o103 o102 o101 o100 o99 o98 o97)))
+  (assert (= o104 (temp___298 o103 o102 o101 o100 o99 o98 o97)))
 
 ;; H
   (assert (= (to_rep1 o105) 5))
@@ -1564,106 +1480,45 @@
                           step_function_test__sfun4__assume)))
 
 ;; H
-  (assert (is_valid__function_guard
-  (is_valid (mk___rep1 sfun1__split_fields2))
-  (mk___rep1 sfun1__split_fields2)))
-
-;; H
   (assert (= (is_valid (mk___rep1 sfun1__split_fields2)) true))
-
-;; H
-  (assert (is_valid__function_guard
-  (is_valid (mk___rep1 sfun2__split_fields2))
-  (mk___rep1 sfun2__split_fields2)))
 
 ;; H
   (assert (= (is_valid (mk___rep1 sfun2__split_fields2)) true))
 
 ;; H
-  (assert (is_valid__function_guard
-  (is_valid (mk___rep1 sfun3__split_fields2))
-  (mk___rep1 sfun3__split_fields2)))
-
-;; H
   (assert (= (is_valid (mk___rep1 sfun3__split_fields2)) true))
 
 ;; H
-  (assert (is_valid__function_guard
-  (is_valid (mk___rep1 sfun4__split_fields2))
-  (mk___rep1 sfun4__split_fields2)))
-
-;; H
   (assert (= (is_valid (mk___rep1 sfun4__split_fields2)) true))
-
-;; H
-  (assert (get_value__function_guard
-  (get_value (mk___rep1 sfun1__split_fields2) 0)
-  (mk___rep1 sfun1__split_fields2) 0))
 
 ;; H
   (assert
   (fp.eq (get_value (mk___rep1 sfun1__split_fields2) 0) (fp #b0 #b10000000 #b10000000000000000000000)))
 
 ;; H
-  (assert (get_value__function_guard
-  (get_value (mk___rep1 sfun1__split_fields2) 1)
-  (mk___rep1 sfun1__split_fields2) 1))
-
-;; H
   (assert
   (fp.eq (get_value (mk___rep1 sfun1__split_fields2) 1) (fp #b0 #b10000000 #b10000000000000000000000)))
-
-;; H
-  (assert (get_value__function_guard
-  (get_value (mk___rep1 sfun1__split_fields2) 3)
-  (mk___rep1 sfun1__split_fields2) 3))
 
 ;; H
   (assert
   (fp.eq (get_value (mk___rep1 sfun1__split_fields2) 3) (fp #b0 #b10000000 #b00000000000000000000000)))
 
 ;; H
-  (assert (get_value__function_guard
-  (get_value (mk___rep1 sfun1__split_fields2) 4)
-  (mk___rep1 sfun1__split_fields2) 4))
-
-;; H
   (assert
   (fp.eq (get_value (mk___rep1 sfun1__split_fields2) 4) (fp #b0 #b10000000 #b00000000000000000000000)))
-
-;; H
-  (assert (get_value__function_guard
-  (get_value (mk___rep1 sfun1__split_fields2) 5)
-  (mk___rep1 sfun1__split_fields2) 5))
 
 ;; H
   (assert
   (fp.eq (get_value (mk___rep1 sfun1__split_fields2) 5) (fp #b0 #b10000001 #b01000000000000000000000)))
 
 ;; H
-  (assert (get_value__function_guard
-  (get_value (mk___rep1 sfun1__split_fields2) 2147483647)
-  (mk___rep1 sfun1__split_fields2) 2147483647))
-
-;; H
   (assert
   (fp.eq (get_value (mk___rep1 sfun1__split_fields2) 2147483647) (fp #b0 #b10000001 #b01000000000000000000000)))
-
-;; H
-  (assert (has_same_delimiters__function_guard
-  (has_same_delimiters (mk___rep1 sfun1__split_fields2)
-  (mk___rep1 sfun2__split_fields2)) (mk___rep1 sfun1__split_fields2)
-  (mk___rep1 sfun2__split_fields2)))
 
 ;; H
   (assert
   (= (has_same_delimiters (mk___rep1 sfun1__split_fields2)
      (mk___rep1 sfun2__split_fields2)) true))
-
-;; H
-  (assert (is_valid__function_guard
-  (is_valid (mk___rep1 sfun3__split_fields2))
-  (mk___rep1 sfun3__split_fields2)))
 
 (assert
 ;; WP_parameter_def

@@ -336,9 +336,7 @@
 ;; c_is_zero__def_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (c_is_zero__function_guard (c_is_zero v) v)
-     (and (is_zero__function_guard1 (is_zero1 (attr__tag v) v) (attr__tag v)
-     v) (= (= (c_is_zero v) true) (= (is_zero1 (attr__tag v) v) true)))) :pattern (
+  (! (= (= (c_is_zero v) true) (= (is_zero1 (attr__tag v) v) true)) :pattern (
   (c_is_zero v)) )))
 
 (declare-fun us_tag1 () Int)
@@ -687,10 +685,7 @@
   (forall ((v__attr__tag Int))
   (! (=> (update__specific_post us_tag classwide__update__v__fields
      v__attr__tag classwide__update__v__old__fields)
-     (and (is_zero__function_guard
-     (is_zero (mk___rep classwide__update__v__fields v__attr__tag))
-     (mk___rep classwide__update__v__fields v__attr__tag))
-     (= (is_zero (mk___rep classwide__update__v__fields v__attr__tag)) true))) :pattern ((update__specific_post
+     (= (is_zero (mk___rep classwide__update__v__fields v__attr__tag)) true)) :pattern ((update__specific_post
   us_tag classwide__update__v__fields v__attr__tag
   classwide__update__v__old__fields)) ))))
 
@@ -701,9 +696,7 @@
   (forall ((v__attr__tag Int))
   (! (=> (update__specific_post us_tag1 classwide__update__v__fields
      v__attr__tag classwide__update__v__old__fields)
-     (let ((temp___v_179 (mk___rep classwide__update__v__fields v__attr__tag)))
-     (and (is_zero__2__function_guard (is_zero__2 temp___v_179) temp___v_179)
-     (= (is_zero__2 temp___v_179) true)))) :pattern ((update__specific_post
+     (= (is_zero__2 (mk___rep classwide__update__v__fields v__attr__tag)) true)) :pattern ((update__specific_post
   us_tag1 classwide__update__v__fields v__attr__tag
   classwide__update__v__old__fields)) ))))
 
@@ -714,10 +707,8 @@
   (forall ((v__attr__tag Int))
   (! (=> (update__specific_post us_tag2 classwide__update__v__fields
      v__attr__tag classwide__update__v__old__fields)
-     (let ((temp___v_181 (of_base
-                         (mk___rep classwide__update__v__fields v__attr__tag))))
-     (and (is_zero__3__function_guard (is_zero__3 temp___v_181) temp___v_181)
-     (= (is_zero__3 temp___v_181) true)))) :pattern ((update__specific_post
+     (= (is_zero__3
+        (of_base (mk___rep classwide__update__v__fields v__attr__tag))) true)) :pattern ((update__specific_post
   us_tag2 classwide__update__v__fields v__attr__tag
   classwide__update__v__old__fields)) ))))
 
@@ -760,40 +751,33 @@
 ;; classwide__t__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (is_zero__function_guard1 (is_zero1 us_tag v) us_tag v)
-     (and (is_zero__function_guard (is_zero v) v)
-     (= (to_int2 (is_zero v)) (to_int2 (is_zero1 us_tag v))))) :pattern (
+  (! (= (to_int2 (is_zero v)) (to_int2 (is_zero1 us_tag v))) :pattern (
   (is_zero1 us_tag v)) )))
 
 ;; classwide__u1__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (is_zero__function_guard1 (is_zero1 us_tag1 v) us_tag1 v)
-     (and (is_zero__2__function_guard (is_zero__2 v) v)
-     (= (to_int2 (is_zero__2 v)) (to_int2 (is_zero1 us_tag1 v))))) :pattern (
+  (! (= (to_int2 (is_zero__2 v)) (to_int2 (is_zero1 us_tag1 v))) :pattern (
   (is_zero1 us_tag1 v)) )))
 
 ;; classwide__u2__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (is_zero__function_guard1 (is_zero1 us_tag2 v) us_tag2 v)
-     (and (is_zero__3__function_guard (is_zero__3 (of_base v)) (of_base v))
-     (= (to_int2 (is_zero__3 (of_base v))) (to_int2 (is_zero1 us_tag2 v))))) :pattern (
+  (! (= (to_int2 (is_zero__3 (of_base v))) (to_int2 (is_zero1 us_tag2 v))) :pattern (
   (is_zero1 us_tag2 v)) )))
 
 ;; is_zero__def_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (is_zero__function_guard (is_zero v) v)
-     (= (= (is_zero v) true)
+  (! (= (= (is_zero v) true)
      (and
      (and (not (= (rec__classwide__t__z (us_split_fields1 v)) true))
      (= (to_rep (rec__classwide__t__x (us_split_fields1 v))) 0))
-     (fp.eq (to_rep1 (rec__classwide__t__y (us_split_fields1 v))) (fp #b0 #b00000000 #b00000000000000000000000))))) :pattern (
+     (fp.eq (to_rep1 (rec__classwide__t__y (us_split_fields1 v))) (fp #b0 #b00000000 #b00000000000000000000000)))) :pattern (
   (is_zero v)) )))
 
-(define-fun default_initial_assumption1 ((temp___expr_193 us_rep)
-  (temp___skip_top_level_194 Bool)) Bool (= (attr__tag temp___expr_193) 
+(define-fun default_initial_assumption1 ((temp___expr_165 us_rep)
+  (temp___skip_top_level_166 Bool)) Bool (= (attr__tag temp___expr_165) 
   us_tag1))
 
 ;; is_zero__2__post_axiom
@@ -805,24 +789,21 @@
 ;; classwide__u1__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (is_zero__2__function_guard1 (is_zero__21 us_tag1 v) us_tag1 v)
-     (and (is_zero__2__function_guard (is_zero__2 v) v)
-     (= (to_int2 (is_zero__2 v)) (to_int2 (is_zero__21 us_tag1 v))))) :pattern (
+  (! (= (to_int2 (is_zero__2 v)) (to_int2 (is_zero__21 us_tag1 v))) :pattern (
   (is_zero__21 us_tag1 v)) )))
 
 ;; is_zero__2__def_axiom
   (assert
   (forall ((v us_rep))
-  (! (=> (is_zero__2__function_guard (is_zero__2 v) v)
-     (= (= (is_zero__2 v) true)
+  (! (= (= (is_zero__2 v) true)
      (and
      (and (not (= (rec__classwide__t__z (us_split_fields1 v)) true))
      (= (to_rep (rec__classwide__t__x (us_split_fields1 v))) 0))
-     (fp.eq (to_rep1 (rec__classwide__t__y (us_split_fields1 v))) (fp #b0 #b00000000 #b00000000000000000000000))))) :pattern (
+     (fp.eq (to_rep1 (rec__classwide__t__y (us_split_fields1 v))) (fp #b0 #b00000000 #b00000000000000000000000)))) :pattern (
   (is_zero__2 v)) )))
 
-(define-fun default_initial_assumption2 ((temp___expr_222 us_rep1)
-  (temp___skip_top_level_223 Bool)) Bool (= (attr__tag1 temp___expr_222) 
+(define-fun default_initial_assumption2 ((temp___expr_184 us_rep1)
+  (temp___skip_top_level_185 Bool)) Bool (= (attr__tag1 temp___expr_184) 
   us_tag2))
 
 ;; is_zero__3__post_axiom
@@ -834,23 +815,19 @@
 ;; classwide__u2__compat_axiom
   (assert
   (forall ((v us_rep1))
-  (! (=> (is_zero__3__function_guard1 (is_zero__31 us_tag2 v) us_tag2 v)
-     (and (is_zero__3__function_guard (is_zero__3 v) v)
-     (= (to_int2 (is_zero__3 v)) (to_int2 (is_zero__31 us_tag2 v))))) :pattern (
+  (! (= (to_int2 (is_zero__3 v)) (to_int2 (is_zero__31 us_tag2 v))) :pattern (
   (is_zero__31 us_tag2 v)) )))
 
 ;; is_zero__3__def_axiom
   (assert
   (forall ((v us_rep1))
-  (! (=> (is_zero__3__function_guard (is_zero__3 v) v)
-     (and (is_zero__function_guard (is_zero (to_base v)) (to_base v))
-     (= (= (is_zero__3 v) true)
+  (! (= (= (is_zero__3 v) true)
      (and
      (and
      (and (= (is_zero (to_base v)) true)
      (= (to_rep (rec__classwide__u2__w (us_split_fields3 v))) 0))
      (= (to_rep (rec__classwide__u2__xx (us_split_fields3 v))) 0))
-     (fp.eq (to_rep1 (rec__classwide__u2__yy (us_split_fields3 v))) (fp #b0 #b00000000 #b00000000000000000000000)))))) :pattern (
+     (fp.eq (to_rep1 (rec__classwide__u2__yy (us_split_fields3 v))) (fp #b0 #b00000000 #b00000000000000000000000)))) :pattern (
   (is_zero__3 v)) )))
 
 (declare-fun v__split_fields () Bool)
@@ -915,16 +892,6 @@
 
 ;; H
   (assert (= v__split_fields15 v__split_fields7))
-
-;; H
-  (assert (c_is_zero__function_guard
-  (c_is_zero
-  (mk___rep
-  (mk___split_fields v__split_fields8 v__split_fields9 v__split_fields10
-  v__split_fields11) v__attr__tag))
-  (mk___rep
-  (mk___split_fields v__split_fields8 v__split_fields9 v__split_fields10
-  v__split_fields11) v__attr__tag)))
 
 (assert
 ;; WP_parameter_def

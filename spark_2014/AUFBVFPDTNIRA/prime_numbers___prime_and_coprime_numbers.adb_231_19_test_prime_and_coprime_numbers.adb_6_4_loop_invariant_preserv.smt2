@@ -496,11 +496,10 @@
 ;; is_prime__def_axiom
   (assert
   (forall ((value Int))
-  (! (=> (is_prime__function_guard (is_prime value) value)
-     (= (= (is_prime value) true)
+  (! (= (= (is_prime value) true)
      (and (<= 2 value)
      (forall ((v Int))
-     (=> (and (<= 2 v) (<= v (- value 1))) (not (= (mod2 value v) 0))))))) :pattern (
+     (=> (and (<= 2 v) (<= v (- value 1))) (not (= (mod2 value v) 0)))))) :pattern (
   (is_prime value)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -516,40 +515,17 @@
   (assert
   (forall
   ((test_prime_and_coprime_numbers__p__set__is_prime (Array Int Bool)))
-  (! (=> (valid_prime_data__function_guard
-     (valid_prime_data test_prime_and_coprime_numbers__p__set__is_prime)
-     test_prime_and_coprime_numbers__p__set__is_prime)
-     (and (forall ((v Int)) (is_prime__function_guard (is_prime v) v))
-     (=
+  (! (=
      (= (valid_prime_data test_prime_and_coprime_numbers__p__set__is_prime) true)
      (forall ((v Int))
      (=> (and (<= 0 v) (<= v 100000))
      (= (= (select test_prime_and_coprime_numbers__p__set__is_prime v) true)
-     (= (is_prime v) true))))))) :pattern ((valid_prime_data
-                                           test_prime_and_coprime_numbers__p__set__is_prime)) )))
+     (= (is_prime v) true))))) :pattern ((valid_prime_data
+                                         test_prime_and_coprime_numbers__p__set__is_prime)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
-
-(declare-sort t75b 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 100000)))
-
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq4 (t75b t75b) Bool)
-
-(declare-fun dummy4 () t75b)
-
-(declare-datatypes () ((t75b__ref (mk_t75b__ref (t75b__content t75b)))))
-(define-fun t75b__ref___projection ((a t75b__ref)) t75b (t75b__content a))
 
 (declare-fun r77b () Int)
 
@@ -573,35 +549,33 @@
   (! (=> (in_range2 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
+(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
 
-(declare-fun user_eq5 (integer integer) Bool)
+(declare-fun user_eq4 (integer integer) Bool)
 
-(declare-fun dummy5 () integer)
+(declare-fun dummy4 () integer)
 
 (declare-datatypes () ((t78b__ref (mk_t78b__ref (t78b__content integer)))))
 (define-fun t78b__ref___projection ((a t78b__ref)) integer (t78b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
-(declare-fun temp___306 (Bool) (Array Int Bool))
+(declare-fun temp___250 (Bool) (Array Int Bool))
 
 ;; def_axiom
   (assert
-  (forall ((temp___308 Bool))
-  (forall ((temp___309 Int))
-  (= (select (temp___306 temp___308) temp___309) temp___308))))
+  (forall ((temp___252 Bool))
+  (forall ((temp___253 Int))
+  (= (select (temp___250 temp___252) temp___253) temp___252))))
 
 (declare-fun is_prime1 () (Array Int Bool))
 
@@ -611,27 +585,25 @@
 
 (declare-fun index_2 () Int)
 
-(declare-fun o () (Array Int Bool))
+(declare-fun o () Float32)
 
-(declare-fun o1 () Float32)
-
-(declare-fun o2 () Int)
+(declare-fun o1 () Int)
 
 (declare-fun test_prime_and_coprime_numbers__p__eratosthenes__L_5__R77b__assume () Int)
+
+(declare-fun o2 () Int)
 
 (declare-fun o3 () Int)
 
 (declare-fun o4 () Int)
 
-(declare-fun o5 () Int)
+(declare-fun o5 () (Array Int Bool))
 
-(declare-fun o6 () (Array Int Bool))
+(declare-fun o6 () Int)
 
 (declare-fun o7 () Int)
 
-(declare-fun o8 () Int)
-
-(declare-fun o9 () (Array Int Bool))
+(declare-fun o8 () (Array Int Bool))
 
 (declare-fun result () (Array Int Bool))
 
@@ -690,13 +662,10 @@
   (assert (=> (<= (- 2147483648) 2147483647) (in_range2 index_3)))
 
 ;; H
-  (assert (= o (temp___306 (of_int1 1))))
-
-;; H
   (assert (= (mk_map__ref result) (mk_map__ref is_prime1)))
 
 ;; H
-  (assert (= is_prime2 o))
+  (assert (= is_prime2 (temp___250 (of_int1 1))))
 
 ;; H
   (assert (= is_prime2 result1))
@@ -712,29 +681,29 @@
 
 ;; H
   (assert
-  (and (= o1 (sqrt1 (fp #b0 #b10001111 #b10000110101000000000000)))
-  (and (not (or (fp.isInfinite o1) (fp.isNaN o1)))
-  (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o1)
+  (and (= o (sqrt1 (fp #b0 #b10001111 #b10000110101000000000000)))
+  (and (not (or (fp.isInfinite o) (fp.isNaN o)))
+  (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o)
   (and
   (=>
   (fp.eq (fp #b0 #b10001111 #b10000110101000000000000) (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq o1 (fp #b0 #b00000000 #b00000000000000000000000)))
+  (fp.eq o (fp #b0 #b00000000 #b00000000000000000000000)))
   (and
   (=>
   (fp.eq (fp #b0 #b10001111 #b10000110101000000000000) (fp #b0 #b01111111 #b00000000000000000000000))
-  (fp.eq o1 (fp #b0 #b01111111 #b00000000000000000000000)))
+  (fp.eq o (fp #b0 #b01111111 #b00000000000000000000000)))
   (=>
   (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) (fp #b0 #b10001111 #b10000110101000000000000))
-  (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) o1))))))))
+  (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) o))))))))
 
 ;; H
-  (assert (= o2 (to_int1 RNA o1)))
+  (assert (= o1 (to_int1 RNA o)))
 
 ;; H
   (assert
   (and
   (= test_prime_and_coprime_numbers__p__eratosthenes__L_5__R77b__assume 
-  o2) (in_range3 o2)))
+  o1) (in_range3 o1)))
 
 ;; H
   (assert
@@ -755,9 +724,6 @@
 
 ;; H
   (assert (<= index_21 r77b))
-
-;; H
-  (assert (forall ((v Int)) (is_prime__function_guard (is_prime v) v)))
 
 ;; H
   (assert (and (<= 2 index_22) (<= index_22 100000)))
@@ -789,10 +755,10 @@
   (assert (and (<= 0 index_22) (<= index_22 100000)))
 
 ;; H
-  (assert (= o3 index_22))
+  (assert (= o2 index_22))
 
 ;; H
-  (assert (= result4 (select is_prime5 o3)))
+  (assert (= result4 (select is_prime5 o2)))
 
 ;; H
   (assert (= result4 true))
@@ -804,13 +770,13 @@
   (assert (= index_12 index_22))
 
 ;; H
-  (assert (and (= o4 (* 2 index_12)) (in_range2 (* 2 index_12))))
+  (assert (and (= o3 (* 2 index_12)) (in_range2 (* 2 index_12))))
 
 ;; H
   (assert (= index_31 result6))
 
 ;; H
-  (assert (= index_32 o4))
+  (assert (= index_32 o3))
 
 ;; H
   (assert (<= index_32 100000))
@@ -819,19 +785,16 @@
   (assert (and (<= 0 index_32) (<= index_32 100000)))
 
 ;; H
-  (assert (= o5 index_32))
+  (assert (= o4 index_32))
 
 ;; H
-  (assert (= o6 (store is_prime5 o5 (of_int1 0))))
+  (assert (= o5 (store is_prime5 o4 (of_int1 0))))
 
 ;; H
   (assert (= is_prime5 result7))
 
 ;; H
-  (assert (= is_prime6 o6))
-
-;; H
-  (assert (forall ((v Int)) (is_prime__function_guard (is_prime v) v)))
+  (assert (= is_prime6 o5))
 
 ;; H
   (assert
@@ -861,13 +824,13 @@
 
 ;; H
   (assert
-  (and (= o7 (+ index_33 index_12)) (in_range2 (+ index_33 index_12))))
+  (and (= o6 (+ index_33 index_12)) (in_range2 (+ index_33 index_12))))
 
 ;; H
   (assert (= index_33 result8))
 
 ;; H
-  (assert (= index_34 o7))
+  (assert (= index_34 o6))
 
 ;; H
   (assert (<= index_34 100000))
@@ -876,16 +839,16 @@
   (assert (and (<= 0 index_34) (<= index_34 100000)))
 
 ;; H
-  (assert (= o8 index_34))
+  (assert (= o7 index_34))
 
 ;; H
-  (assert (= o9 (store is_prime7 o8 (of_int1 0))))
+  (assert (= o8 (store is_prime7 o7 (of_int1 0))))
 
 ;; H
   (assert (= result9 is_prime7))
 
 ;; H
-  (assert (= is_prime8 o9))
+  (assert (= is_prime8 o8))
 
 (declare-fun v () Int)
 

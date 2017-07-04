@@ -152,17 +152,14 @@
 ;; id__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (id x)))
-     (=> (id__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (id x) true
+     false true)) :pattern ((id x)) )))
 
 ;; id__def_axiom
   (assert
   (forall ((x Float32))
-  (! (=>
-     (and (dynamic_invariant x true true true) (id__function_guard (id x) x))
-     (= (id x) x)) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (id x) x)) :pattern (
+  (id x)) )))
 
 (declare-fun t_FIRST () Float32)
 
@@ -260,10 +257,7 @@
 ;; H
   (assert
   (and
-  (and
   (= p__t_FIRST__assume (id (fp #b0 #b00000000 #b00000000000000000000000)))
-  (id__function_guard p__t_FIRST__assume
-  (fp #b0 #b00000000 #b00000000000000000000000)))
   (and
   (not (or (fp.isInfinite p__t_FIRST__assume) (fp.isNaN p__t_FIRST__assume)))
   (= p__t_FIRST__assume (fp #b0 #b00000000 #b00000000000000000000000)))))
@@ -277,10 +271,7 @@
 ;; H
   (assert
   (and
-  (and
   (= p__t_LAST__assume (id (fp #b0 #b01111111 #b00000000000000000000000)))
-  (id__function_guard p__t_LAST__assume
-  (fp #b0 #b01111111 #b00000000000000000000000)))
   (and
   (not (or (fp.isInfinite p__t_LAST__assume) (fp.isNaN p__t_LAST__assume)))
   (= p__t_LAST__assume (fp #b0 #b01111111 #b00000000000000000000000)))))

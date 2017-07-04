@@ -530,19 +530,19 @@
   (! (=> (in_range5 x) (= (to_rep3 (of_rep3 x)) x)) :pattern ((to_rep3
                                                               (of_rep3 x))) )))
 
-(define-fun dynamic_invariant ((temp___expr_155 Float32)
-  (temp___is_init_152 Bool) (temp___skip_constant_153 Bool)
-  (temp___do_toplevel_154 Bool)) Bool (=>
-                                      (or (= temp___is_init_152 true)
+(define-fun dynamic_invariant ((temp___expr_152 Float32)
+  (temp___is_init_149 Bool) (temp___skip_constant_150 Bool)
+  (temp___do_toplevel_151 Bool)) Bool (=>
+                                      (or (= temp___is_init_149 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_155) (fp.isNaN temp___expr_155)))))
+                                      (not (or (fp.isInfinite temp___expr_152) (fp.isNaN temp___expr_152)))))
 
-(define-fun dynamic_invariant1 ((temp___expr_161 Float32)
-  (temp___is_init_158 Bool) (temp___skip_constant_159 Bool)
-  (temp___do_toplevel_160 Bool)) Bool (=>
-                                      (or (= temp___is_init_158 true)
+(define-fun dynamic_invariant1 ((temp___expr_158 Float32)
+  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
+  (temp___do_toplevel_157 Bool)) Bool (=>
+                                      (or (= temp___is_init_155 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_161) (fp.isNaN temp___expr_161)))))
+                                      (not (or (fp.isInfinite temp___expr_158) (fp.isNaN temp___expr_158)))))
 
 (declare-fun is_valid_speed (Float32) Bool)
 
@@ -555,13 +555,10 @@
 ;; km_per_h_from_m_per_s__post_axiom
   (assert
   (forall ((speed Float32))
-  (! (and (is_valid_speed__function_guard (is_valid_speed speed) speed)
-     (=>
+  (! (=>
      (and (dynamic_invariant speed true true true)
-     (= (is_valid_speed speed) true))
-     (let ((result (km_per_h_from_m_per_s speed)))
-     (=> (km_per_h_from_m_per_s__function_guard result speed)
-     (dynamic_invariant1 result true false true))))) :pattern ((km_per_h_from_m_per_s
+     (= (is_valid_speed speed) true)) (dynamic_invariant1
+     (km_per_h_from_m_per_s speed) true false true)) :pattern ((km_per_h_from_m_per_s
                                                                speed)) )))
 
 (declare-sort braking_curve_range 0)
@@ -587,12 +584,12 @@
 (define-fun braking_curve_range__ref___projection ((a braking_curve_range__ref)) braking_curve_range 
   (braking_curve_range__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_382 Int)
-  (temp___is_init_379 Bool) (temp___skip_constant_380 Bool)
-  (temp___do_toplevel_381 Bool)) Bool (=>
-                                      (or (= temp___is_init_379 true)
+(define-fun dynamic_invariant2 ((temp___expr_323 Int)
+  (temp___is_init_320 Bool) (temp___skip_constant_321 Bool)
+  (temp___do_toplevel_322 Bool)) Bool (=>
+                                      (or (= temp___is_init_320 true)
                                       (<= 0 1000)) (in_range6
-                                      temp___expr_382)))
+                                      temp___expr_323)))
 
 (declare-datatypes ()
 ((us_split_fields
@@ -738,12 +735,12 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_150 Int))
+                           (forall ((temp___idx_148 Int))
                            (=>
-                           (and (<= a__first temp___idx_150)
-                           (<= temp___idx_150 a__last))
-                           (= (bool_eq10 (select a temp___idx_150)
-                              (select b (+ (- b__first a__first) temp___idx_150))) true))))
+                           (and (<= a__first temp___idx_148)
+                           (<= temp___idx_148 a__last))
+                           (= (bool_eq10 (select a temp___idx_148)
+                              (select b (+ (- b__first a__first) temp___idx_148))) true))))
                       true false))
 
 ;; bool_eq_rev
@@ -755,10 +752,10 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_150 Int))
-  (=> (and (<= a__first temp___idx_150) (<= temp___idx_150 a__last))
-  (= (bool_eq10 (select a temp___idx_150)
-     (select b (+ (- b__first a__first) temp___idx_150))) true))))))))
+  (forall ((temp___idx_148 Int))
+  (=> (and (<= a__first temp___idx_148) (<= temp___idx_148 a__last))
+  (= (bool_eq10 (select a temp___idx_148)
+     (select b (+ (- b__first a__first) temp___idx_148))) true))))))))
 
 (declare-fun dummy9 () (Array Int us_rep))
 
@@ -892,12 +889,12 @@
 (define-fun braking_curve_t__ref___projection ((a braking_curve_t__ref)) us_rep1 
   (braking_curve_t__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_179 Int)
-  (temp___is_init_176 Bool) (temp___skip_constant_177 Bool)
-  (temp___do_toplevel_178 Bool)) Bool (=>
-                                      (or (= temp___is_init_176 true)
+(define-fun dynamic_invariant3 ((temp___expr_176 Int)
+  (temp___is_init_173 Bool) (temp___skip_constant_174 Bool)
+  (temp___do_toplevel_175 Bool)) Bool (=>
+                                      (or (= temp___is_init_173 true)
                                       (<= 0 2147483647)) (in_range5
-                                      temp___expr_179)))
+                                      temp___expr_176)))
 
 (declare-fun curve_index_from_location (Int) Int)
 
@@ -907,10 +904,8 @@
   (assert
   (forall ((d Int))
   (! (=> (and (dynamic_invariant3 d true true true) (<= d 5000))
-     (let ((result (curve_index_from_location d)))
-     (=> (curve_index_from_location__function_guard result d)
-     (dynamic_invariant2 result true false true)))) :pattern ((curve_index_from_location
-                                                              d)) )))
+     (dynamic_invariant2 (curve_index_from_location d) true false true)) :pattern (
+  (curve_index_from_location d)) )))
 
 (declare-fun braking_curve () us_rep1)
 
@@ -922,19 +917,19 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(declare-fun temp___String_Literal_463 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_404 (tuple0) (Array Int character))
 
-;; temp___String_Literal_463__def_axiom
+;; temp___String_Literal_404__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_463 us_void_param) 1)) 44)
-     (= (to_rep (select (temp___String_Literal_463 us_void_param) 2)) 32))
-     (= (to_rep (select (temp___String_Literal_463 us_void_param) 3)) 32))
-     (= (to_rep (select (temp___String_Literal_463 us_void_param) 4)) 32)) :pattern (
-  (temp___String_Literal_463 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_404 us_void_param) 1)) 44)
+     (= (to_rep (select (temp___String_Literal_404 us_void_param) 2)) 32))
+     (= (to_rep (select (temp___String_Literal_404 us_void_param) 3)) 32))
+     (= (to_rep (select (temp___String_Literal_404 us_void_param) 4)) 32)) :pattern (
+  (temp___String_Literal_404 us_void_param)) )))
 
 (define-fun dynamic_invariant4 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -974,11 +969,9 @@
 ;; is_valid_speed_km_per_h__def_axiom
   (assert
   (forall ((speed Float32))
-  (! (=> (is_valid_speed_km_per_h__function_guard
-     (is_valid_speed_km_per_h speed) speed)
-     (= (= (is_valid_speed_km_per_h speed) true)
+  (! (= (= (is_valid_speed_km_per_h speed) true)
      (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) speed)
-     (fp.leq speed (fp #b0 #b10000111 #b11110100000000000000000))))) :pattern (
+     (fp.leq speed (fp #b0 #b10000111 #b11110100000000000000000)))) :pattern (
   (is_valid_speed_km_per_h speed)) )))
 
 (declare-fun m_per_s_from_km_per_h (Float32) Float32)
@@ -988,23 +981,16 @@
 ;; m_per_s_from_km_per_h__post_axiom
   (assert
   (forall ((speed Float32))
-  (! (and (is_valid_speed_km_per_h__function_guard
-     (is_valid_speed_km_per_h speed) speed)
-     (=>
+  (! (=>
      (and (dynamic_invariant1 speed true true true)
-     (= (is_valid_speed_km_per_h speed) true))
-     (let ((result (m_per_s_from_km_per_h speed)))
-     (=> (m_per_s_from_km_per_h__function_guard result speed)
-     (dynamic_invariant result true false true))))) :pattern ((m_per_s_from_km_per_h
-                                                              speed)) )))
+     (= (is_valid_speed_km_per_h speed) true)) (dynamic_invariant
+     (m_per_s_from_km_per_h speed) true false true)) :pattern ((m_per_s_from_km_per_h
+                                                               speed)) )))
 
 ;; m_per_s_from_km_per_h__def_axiom
   (assert
   (forall ((speed Float32))
-  (! (=>
-     (and (dynamic_invariant1 speed true true true)
-     (m_per_s_from_km_per_h__function_guard (m_per_s_from_km_per_h speed)
-     speed))
+  (! (=> (dynamic_invariant1 speed true true true)
      (= (m_per_s_from_km_per_h speed) (fp.div RNE (fp.mul RNE speed (fp #b0 #b10001000 #b11110100000000000000000)) (fp #b0 #b10001010 #b11000010000000000000000)))) :pattern (
   (m_per_s_from_km_per_h speed)) )))
 
@@ -1014,14 +1000,10 @@
 ;; is_valid_speed__def_axiom
   (assert
   (forall ((speed Float32))
-  (! (=> (is_valid_speed__function_guard (is_valid_speed speed) speed)
-     (and (m_per_s_from_km_per_h__function_guard
-     (m_per_s_from_km_per_h (fp #b0 #b10000111 #b11110100000000000000000))
-     (fp #b0 #b10000111 #b11110100000000000000000))
-     (= (= (is_valid_speed speed) true)
+  (! (= (= (is_valid_speed speed) true)
      (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) speed)
      (fp.leq speed (m_per_s_from_km_per_h
-                   (fp #b0 #b10000111 #b11110100000000000000000))))))) :pattern (
+                   (fp #b0 #b10000111 #b11110100000000000000000))))) :pattern (
   (is_valid_speed speed)) )))
 
 (declare-fun i () Int)
@@ -1037,18 +1019,12 @@
 ;; H
   (assert
   (and
-  (and
   (= deceleration_curve__print_curve__L_3__R4b__assume (curve_index_from_location
                                                        (to_rep3
                                                        (rec__deceleration_curve__braking_curve_t__end_point
                                                        (us_split_fields3
                                                        braking_curve)))))
-  (curve_index_from_location__function_guard
-  deceleration_curve__print_curve__L_3__R4b__assume
-  (to_rep3
-  (rec__deceleration_curve__braking_curve_t__end_point
-  (us_split_fields3 braking_curve))))) (in_range6
-  deceleration_curve__print_curve__L_3__R4b__assume)))
+  (in_range6 deceleration_curve__print_curve__L_3__R4b__assume)))
 
 ;; H
   (assert (= deceleration_curve__print_curve__L_3__R4b__assume r4b))
@@ -1070,20 +1046,6 @@
 
 ;; H
   (assert (and (<= 0 i2) (<= i2 r4b)))
-
-;; H
-  (assert (is_valid_speed__function_guard
-  (is_valid_speed
-  (to_rep2
-  (rec__deceleration_curve__braking_curve_entry__speed
-  (us_split_fields1
-  (select (rec__deceleration_curve__braking_curve_t__curve
-          (us_split_fields3 braking_curve)) i2)))))
-  (to_rep2
-  (rec__deceleration_curve__braking_curve_entry__speed
-  (us_split_fields1
-  (select (rec__deceleration_curve__braking_curve_t__curve
-          (us_split_fields3 braking_curve)) i2))))))
 
 (assert
 ;; WP_parameter_def

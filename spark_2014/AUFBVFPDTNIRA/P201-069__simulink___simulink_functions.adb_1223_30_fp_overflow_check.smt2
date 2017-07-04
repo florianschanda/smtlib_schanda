@@ -154,10 +154,8 @@
 ;; atan__2__post_axiom
   (assert
   (forall ((lf Float64))
-  (! (=> (dynamic_invariant lf true true true)
-     (let ((result (atan__2 lf)))
-     (=> (atan__2__function_guard result lf) (dynamic_invariant result true
-     false true)))) :pattern ((atan__2 lf)) )))
+  (! (=> (dynamic_invariant lf true true true) (dynamic_invariant
+     (atan__2 lf) true false true)) :pattern ((atan__2 lf)) )))
 
 (declare-fun left () Float64)
 
@@ -236,8 +234,7 @@
 
 ;; H
   (assert
-  (and (and (= o2 (atan__2 o1)) (atan__2__function_guard o2 o1))
-  (not (or (fp.isInfinite o2) (fp.isNaN o2)))))
+  (and (= o2 (atan__2 o1)) (not (or (fp.isInfinite o2) (fp.isNaN o2)))))
 
 ;; H
   (assert (= result result__))

@@ -219,18 +219,14 @@
 ;; r1__post_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=> (dynamic_invariant1 x1 true true true)
-     (let ((result (r1 x1)))
-     (=> (r1__function_guard result x1) (dynamic_invariant1 result true false
-     true)))) :pattern ((r1 x1)) )))
+  (! (=> (dynamic_invariant1 x1 true true true) (dynamic_invariant1 (r1 x1)
+     true false true)) :pattern ((r1 x1)) )))
 
 ;; r1__def_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=>
-     (and (dynamic_invariant1 x1 true true true) (r1__function_guard 
-     (r1 x1) x1)) (= (r1 x1) (fp.roundToIntegral RTN x1))) :pattern (
-  (r1 x1)) )))
+  (! (=> (dynamic_invariant1 x1 true true true)
+     (= (r1 x1) (fp.roundToIntegral RTN x1))) :pattern ((r1 x1)) )))
 
 (define-fun dynamic_invariant2 ((temp___expr_147 Float32)
   (temp___is_init_144 Bool) (temp___skip_constant_145 Bool)

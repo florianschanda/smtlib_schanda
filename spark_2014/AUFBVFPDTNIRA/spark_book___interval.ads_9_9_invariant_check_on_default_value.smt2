@@ -263,11 +263,6 @@
                                             (us_split_fields1
                                             temp___expr_136))) (fp #b0 #b00000000 #b00000000000000000000000))))
 
-;; temp___result_140_def
-  (assert
-  (forall ((temp___139 us_rep)) (has_valid_order__function_guard
-  (has_valid_order temp___139) temp___139)))
-
 (define-fun type_invariant ((temp___138 us_rep)) Bool (= (has_valid_order
                                                          temp___138) true))
 
@@ -277,10 +272,9 @@
 ;; has_valid_order__def_axiom
   (assert
   (forall ((int__ us_rep))
-  (! (=> (has_valid_order__function_guard (has_valid_order int__) int__)
-     (= (= (has_valid_order int__) true)
+  (! (= (= (has_valid_order int__) true)
      (fp.leq (to_rep (rec__interval__interval__low (us_split_fields1 int__))) 
-     (to_rep (rec__interval__interval__high (us_split_fields1 int__)))))) :pattern (
+     (to_rep (rec__interval__interval__high (us_split_fields1 int__))))) :pattern (
   (has_valid_order int__)) )))
 
 (define-fun dynamic_invariant ((temp___expr_51 Float32)
@@ -290,18 +284,18 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun temp___141 () float)
+(declare-fun temp___140 () float)
 
-(declare-fun temp___1411 () float)
+(declare-fun temp___1401 () float)
 
 ;; H
   (assert
-  (and (= (to_rep temp___141) (fp #b0 #b00000000 #b00000000000000000000000))
-  (= (to_rep temp___1411) (fp #b0 #b00000000 #b00000000000000000000000))))
+  (and (= (to_rep temp___140) (fp #b0 #b00000000 #b00000000000000000000000))
+  (= (to_rep temp___1401) (fp #b0 #b00000000 #b00000000000000000000000))))
 
 (assert
 ;; WP_parameter_def
  ;; File "interval.ads", line 17, characters 0-0
-  (not (type_invariant
-  (mk___rep (mk___split_fields temp___141 temp___1411)))))
+  (not
+  (= (has_valid_order (mk___rep (mk___split_fields temp___140 temp___1401))) true)))
 (check-sat)

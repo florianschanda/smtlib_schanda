@@ -469,8 +469,6 @@
   (! (=> (dynamic_invariant2 failsafe__model__current_time true true true)
      (let ((result (time_below_threshold failsafe__model__battery_level_at
                    failsafe__model__current_time)))
-     (=> (time_below_threshold__function_guard result
-     failsafe__model__battery_level_at failsafe__model__current_time)
      (and
      (ite (fp.leq (fp #b0 #b01111100 #b10011001100110011001101) (to_rep
                                                                 (select failsafe__model__battery_level_at failsafe__model__current_time)))
@@ -509,9 +507,9 @@
             (bvadd temp___232 ((_ int2bv 8) 50)) temp___232)) s)
      (bvule s ((_ int2bv 8) 49)))
      (fp.lt (to_rep (select failsafe__model__battery_level_at s)) (fp #b0 #b01111100 #b10011001100110011001101)))))))))
-     (dynamic_invariant3 result true false true))))) :pattern ((time_below_threshold
-                                                               failsafe__model__battery_level_at
-                                                               failsafe__model__current_time)) ))))
+     (dynamic_invariant3 result true false true)))) :pattern ((time_below_threshold
+                                                              failsafe__model__battery_level_at
+                                                              failsafe__model__current_time)) ))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
@@ -548,12 +546,12 @@
 (define-fun tcounterS__ref___projection ((a tcounterS__ref)) tcounterS 
   (tcounterS__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_254 (_ BitVec 8))
-  (temp___is_init_251 Bool) (temp___skip_constant_252 Bool)
-  (temp___do_toplevel_253 Bool)) Bool (=>
-                                      (or (= temp___is_init_251 true)
+(define-fun dynamic_invariant4 ((temp___expr_244 (_ BitVec 8))
+  (temp___is_init_241 Bool) (temp___skip_constant_242 Bool)
+  (temp___do_toplevel_243 Bool)) Bool (=>
+                                      (or (= temp___is_init_241 true)
                                       (bvule ((_ int2bv 8) 0) ((_ int2bv 8) 50)))
-                                      (in_range4 temp___expr_254)))
+                                      (in_range4 temp___expr_244)))
 
 ;; is_valid__post_axiom
   (assert true)
@@ -564,21 +562,12 @@
   ((failsafe__model__battery_level_at (Array (_ BitVec 8) battery_level_type)))
   (forall ((failsafe__model__current_time (_ BitVec 8))
   (failsafe__counter (_ BitVec 8)))
-  (! (=> (is_valid__function_guard
-     (is_valid failsafe__model__battery_level_at
-     failsafe__model__current_time failsafe__counter)
-     failsafe__model__battery_level_at failsafe__model__current_time
-     failsafe__counter)
-     (and (time_below_threshold__function_guard
-     (time_below_threshold failsafe__model__battery_level_at
-     failsafe__model__current_time) failsafe__model__battery_level_at
-     failsafe__model__current_time)
-     (=
+  (! (=
      (= (is_valid failsafe__model__battery_level_at
         failsafe__model__current_time failsafe__counter) true)
      (= failsafe__counter (time_below_threshold
                           failsafe__model__battery_level_at
-                          failsafe__model__current_time))))) :pattern (
+                          failsafe__model__current_time))) :pattern (
   (is_valid failsafe__model__battery_level_at failsafe__model__current_time
   failsafe__counter)) ))))
 
@@ -612,7 +601,7 @@
 
 (declare-fun o7 () (_ BitVec 8))
 
-(declare-fun temp___290 () (_ BitVec 8))
+(declare-fun temp___279 () (_ BitVec 8))
 
 (declare-fun o8 () (_ BitVec 8))
 
@@ -654,20 +643,10 @@
   (assert (not (or (fp.isInfinite battery_level) (fp.isNaN battery_level))))
 
 ;; H
-  (assert (is_valid__function_guard
-  (is_valid battery_level_at current_time counter) battery_level_at
-  current_time counter))
-
-;; H
   (assert (= (is_valid battery_level_at current_time counter) true))
 
 ;; H
   (assert (= counter c))
-
-;; H
-  (assert (time_below_threshold__function_guard
-  (time_below_threshold battery_level_at current_time) battery_level_at
-  current_time))
 
 ;; H
   (assert (= counter (time_below_threshold battery_level_at current_time)))
@@ -687,9 +666,9 @@
   (=> (and (bvule ((_ int2bv 8) 0) s) (bvule s ((_ int2bv 8) 49)))
   (=>
   (not
-  (= s (let ((temp___288 (bvadd current_time ((_ int2bv 8) 1))))
+  (= s (let ((temp___277 (bvadd current_time ((_ int2bv 8) 1))))
        (ite (bvule (bvsub ((_ int2bv 8) 50) current_time) ((_ int2bv 8) 1))
-       (bvsub temp___288 ((_ int2bv 8) 50)) temp___288))))
+       (bvsub temp___277 ((_ int2bv 8) 50)) temp___277))))
   (fp.lt (to_rep (select battery_level_at s)) (fp #b0 #b01111100 #b10011001100110011001101)))))
   (bvuge counter ((_ int2bv 8) 49))))
 
@@ -787,7 +766,7 @@
   (assert (and (= o7 counter1) (in_range2 counter1)))
 
 ;; H
-  (assert (= temp___290 (bvsub current_time1 o7)))
+  (assert (= temp___279 (bvsub current_time1 o7)))
 
 ;; H
   (assert (and (= o8 counter1) (in_range2 counter1)))
@@ -796,10 +775,10 @@
   (assert (= result5 (ite (bvult current_time1 o8) true false)))
 
 ;; H
-  (assert (=> (= result5 true) (= o9 (bvadd temp___290 ((_ int2bv 8) 50)))))
+  (assert (=> (= result5 true) (= o9 (bvadd temp___279 ((_ int2bv 8) 50)))))
 
 ;; H
-  (assert (=> (not (= result5 true)) (= o9 temp___290)))
+  (assert (=> (not (= result5 true)) (= o9 temp___279)))
 
 ;; H
   (assert (= o10 (select battery_level_at1 o9)))

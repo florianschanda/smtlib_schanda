@@ -340,8 +340,7 @@
 ;; prop____def_axiom
   (assert
   (forall ((x Int))
-  (! (=> (prop____function_guard (prop__ x) x)
-     (= (= (prop__ x) true) (not (= (mod2 10 x) 0)))) :pattern ((prop__ x)) )))
+  (! (= (= (prop__ x) true) (not (= (mod2 10 x) 0))) :pattern ((prop__ x)) )))
 
 (declare-datatypes ()
 ((us_split_discrs (mk___split_discrs (rec__pred__r__d positive)))))
@@ -503,78 +502,66 @@
 (declare-datatypes () ((r__ref (mk_r__ref (r__content us_rep)))))
 (define-fun r__ref___projection ((a r__ref)) us_rep (r__content a))
 
-;; temp___result_161_def
-  (assert
-  (forall ((temp___160 us_rep)) (prop____function_guard
-  (prop__ (to_rep1 (rec__pred__r__d (us_split_discrs1 temp___160))))
-  (to_rep1 (rec__pred__r__d (us_split_discrs1 temp___160))))))
-
-(define-fun dynamic_invariant1 ((temp___expr_159 us_rep)
-  (temp___is_init_156 Bool) (temp___skip_constant_157 Bool)
-  (temp___do_toplevel_158 Bool)) Bool (=> (= temp___do_toplevel_158 true)
-                                      (=> (= temp___is_init_156 true)
+(define-fun dynamic_invariant1 ((temp___expr_155 us_rep)
+  (temp___is_init_152 Bool) (temp___skip_constant_153 Bool)
+  (temp___do_toplevel_154 Bool)) Bool (=> (= temp___do_toplevel_154 true)
+                                      (=> (= temp___is_init_152 true)
                                       (and
                                       (= (prop__
                                          (to_rep1
                                          (rec__pred__r__d
-                                         (us_split_discrs1 temp___expr_159)))) true)
+                                         (us_split_discrs1 temp___expr_155)))) true)
                                       (ite (= (to_rep1
                                               (rec__pred__r__d
                                               (us_split_discrs1
-                                              temp___expr_159))) 1)
+                                              temp___expr_155))) 1)
                                       (not
                                       (= (to_rep
                                          (rec__pred__r__c1
-                                         (us_split_fields1 temp___expr_159))) 0))
+                                         (us_split_fields1 temp___expr_155))) 0))
                                       (ite (= (to_rep1
                                               (rec__pred__r__d
                                               (us_split_discrs1
-                                              temp___expr_159))) 2)
+                                              temp___expr_155))) 2)
                                       (neq
                                       (to_rep2
                                       (rec__pred__r__c2
-                                      (us_split_fields1 temp___expr_159)))
+                                      (us_split_fields1 temp___expr_155)))
                                       (fp #b0 #b00000000 #b00000000000000000000000))
                                       (not
                                       (= (rec__pred__r__c3
-                                         (us_split_fields1 temp___expr_159)) 
+                                         (us_split_fields1 temp___expr_155)) 
                                       (of_int1 0)))))))))
 
-;; temp___result_165_def
-  (assert
-  (forall ((temp___164 us_rep)) (prop____function_guard
-  (prop__ (to_rep1 (rec__pred__r__d (us_split_discrs1 temp___164))))
-  (to_rep1 (rec__pred__r__d (us_split_discrs1 temp___164))))))
-
-(define-fun dynamic_predicate ((temp___163 us_rep)) Bool (and
+(define-fun dynamic_predicate ((temp___158 us_rep)) Bool (and
                                                          (= (prop__
                                                             (to_rep1
                                                             (rec__pred__r__d
                                                             (us_split_discrs1
-                                                            temp___163)))) true)
+                                                            temp___158)))) true)
                                                          (ite (= (to_rep1
                                                                  (rec__pred__r__d
                                                                  (us_split_discrs1
-                                                                 temp___163))) 1)
+                                                                 temp___158))) 1)
                                                          (not
                                                          (= (to_rep
                                                             (rec__pred__r__c1
                                                             (us_split_fields1
-                                                            temp___163))) 0))
+                                                            temp___158))) 0))
                                                          (ite (= (to_rep1
                                                                  (rec__pred__r__d
                                                                  (us_split_discrs1
-                                                                 temp___163))) 2)
+                                                                 temp___158))) 2)
                                                          (neq
                                                          (to_rep2
                                                          (rec__pred__r__c2
                                                          (us_split_fields1
-                                                         temp___163)))
+                                                         temp___158)))
                                                          (fp #b0 #b00000000 #b00000000000000000000000))
                                                          (not
                                                          (= (rec__pred__r__c3
                                                             (us_split_fields1
-                                                            temp___163)) 
+                                                            temp___158)) 
                                                          (of_int1 0)))))))
 
 (declare-fun i13b () us_rep)
@@ -603,10 +590,7 @@
 ;; H
   (assert
   (and
-  (and
   (= result (prop__ (to_rep1 (rec__pred__r__d (us_split_discrs1 i13b)))))
-  (prop____function_guard result
-  (to_rep1 (rec__pred__r__d (us_split_discrs1 i13b)))))
   (= (= result true)
   (not (= (mod2 10 (to_rep1 (rec__pred__r__d (us_split_discrs1 i13b)))) 0)))))
 

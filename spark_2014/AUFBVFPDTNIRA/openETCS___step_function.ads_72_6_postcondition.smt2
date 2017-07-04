@@ -585,8 +585,7 @@
 ;; is_valid__def_axiom
   (assert
   (forall ((sfun us_rep1))
-  (! (=> (is_valid__function_guard (is_valid sfun) sfun)
-     (= (= (is_valid sfun) true)
+  (! (= (= (is_valid sfun) true)
      (and
      (= (to_rep2
         (rec__step_function__delimiter_entry__delimiter
@@ -610,7 +609,7 @@
                                   (us_split_fields1
                                   (let ((temp___183 (rec__step_function__step_function_t__step
                                                     (us_split_fields3 sfun))))
-                                  (select temp___183 (+ i 1)))))))))))) :pattern (
+                                  (select temp___183 (+ i 1))))))))))) :pattern (
   (is_valid sfun)) )))
 
 (declare-fun sfun () us_rep1)
@@ -670,8 +669,6 @@
   (! (=> (in_range4 x1) (= (to_rep3 (of_rep3 x1)) x1)) :pattern ((to_rep3
                                                                  (of_rep3 x1))) )))
 
-(declare-fun last () Int)
-
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x1 Int)) Bool (and (<= first_int x1) (<= x1 last_int)))
 
@@ -700,9 +697,9 @@
 
 (declare-fun step_function__minimum_until_point__result () Float32)
 
-(declare-fun temp___288 () Float32)
+(declare-fun temp___277 () Float32)
 
-(declare-fun temp___287 () Int)
+(declare-fun temp___276 () Int)
 
 (declare-fun result () Float32)
 
@@ -759,9 +756,6 @@
 (declare-fun result4 () Float32)
 
 ;; H
-  (assert (is_valid__function_guard (is_valid sfun) sfun))
-
-;; H
   (assert (in_range3 x))
 
 ;; H
@@ -797,10 +791,10 @@
   (assert (= i1 0))
 
 ;; H
-  (assert (=> (and (<= 0 i1) (<= i1 r10b)) (= temp___288 min1)))
+  (assert (=> (and (<= 0 i1) (<= i1 r10b)) (= temp___277 min1)))
 
 ;; H
-  (assert (=> (and (<= 0 i1) (<= i1 r10b)) (= temp___287 i1)))
+  (assert (=> (and (<= 0 i1) (<= i1 r10b)) (= temp___276 i1)))
 
 ;; H
   (assert

@@ -173,20 +173,16 @@
      (and (fp.lt (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) r1)
      (fp.lt (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) r2)))))
      (let ((result (add r1 r2)))
-     (=> (add__function_guard result r1 r2)
      (and (fp.eq result (fp.add RNE r1 r2)) (dynamic_invariant result true
-     false true))))) :pattern ((add r1 r2)) )))
+     false true)))) :pattern ((add r1 r2)) )))
 
 (declare-fun o () Float32)
 
 ;; H
   (assert
   (and
-  (and
   (= o (add (fp #b0 #b01111100 #b10011001100110011001101)
        (fp #b0 #b01111101 #b00110011001100110011010)))
-  (add__function_guard o (fp #b0 #b01111100 #b10011001100110011001101)
-  (fp #b0 #b01111101 #b00110011001100110011010)))
   (and (not (or (fp.isInfinite o) (fp.isNaN o)))
   (fp.eq o (fp.add RNE (fp #b0 #b01111100 #b10011001100110011001101) (fp #b0 #b01111101 #b00110011001100110011010))))))
 

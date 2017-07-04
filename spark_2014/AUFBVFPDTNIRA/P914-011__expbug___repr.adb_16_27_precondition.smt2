@@ -384,10 +384,8 @@
 
 ;; f__post_axiom
   (assert
-  (forall ((us_void_param tuple0))
-  (! (let ((result (f us_void_param)))
-     (=> (f__function_guard result us_void_param) (dynamic_invariant result
-     true false true))) :pattern ((f us_void_param)) )))
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant (f us_void_param)
+  true false true) :pattern ((f us_void_param)) )))
 
 (define-fun dynamic_invariant1 ((temp___expr_51 Float32)
   (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)

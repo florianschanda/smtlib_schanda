@@ -183,20 +183,18 @@
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true)
      (let ((result (cos1 x)))
-     (=> (cos__function_guard result x)
      (and
      (=>
      (and (fp.leq (fp.neg (fp #b0 #b10000101 #b00101100000000000000000)) x)
      (fp.leq x (fp #b0 #b10000101 #b00101100000000000000000)))
      (fp.leq (fp #b0 #b01111011 #b10011001100110011001101) result))
-     (dynamic_invariant result true false true))))) :pattern ((cos1 x)) )))
+     (dynamic_invariant result true false true)))) :pattern ((cos1 x)) )))
 
 ;; cos__def_axiom
   (assert
   (forall ((x Float32))
-  (! (=>
-     (and (dynamic_invariant x true true true) (cos__function_guard (cos1 x)
-     x)) (= (cos1 x) (sin1 x))) :pattern ((cos1 x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (cos1 x) (sin1 x))) :pattern (
+  (cos1 x)) )))
 
 (declare-fun sqrt1 (Float32) Float32)
 
@@ -209,17 +207,14 @@
 ;; sqrt__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (sqrt1 x)))
-     (=> (sqrt__function_guard result x) (dynamic_invariant result true false
-     true)))) :pattern ((sqrt1 x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (sqrt1 x)
+     true false true)) :pattern ((sqrt1 x)) )))
 
 ;; sqrt__def_axiom
   (assert
   (forall ((x Float32))
-  (! (=>
-     (and (dynamic_invariant x true true true) (sqrt__function_guard
-     (sqrt1 x) x)) (= (sqrt1 x) (sqrt2 x))) :pattern ((sqrt1 x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (sqrt1 x) (sqrt2 x))) :pattern (
+  (sqrt1 x)) )))
 
 (declare-sort latitude 0)
 
@@ -423,25 +418,18 @@
   (assert
   (forall ((source1 us_rep) (destination1 us_rep))
   (! (let ((result (delta_lat_in_meters source1 destination1)))
-     (and (olt__function_guard
-     (olt (fp.abs result) (fp #b0 #b10010111 #b00110001001111000100110))
-     (fp.abs result) (fp #b0 #b10010111 #b00110001001111000100110))
-     (=> (delta_lat_in_meters__function_guard result source1 destination1)
      (and
      (= (olt (fp.abs result) (fp #b0 #b10010111 #b00110001001111000100110)) true)
-     (dynamic_invariant result true false true))))) :pattern ((delta_lat_in_meters
-                                                              source1
-                                                              destination1)) )))
+     (dynamic_invariant result true false true))) :pattern ((delta_lat_in_meters
+                                                            source1
+                                                            destination1)) )))
 
 ;; delta_lat_in_meters__def_axiom
   (assert
   (forall ((source1 us_rep) (destination1 us_rep))
-  (! (=> (delta_lat_in_meters__function_guard
-     (delta_lat_in_meters source1 destination1) source1 destination1)
-     (= (delta_lat_in_meters source1 destination1) (fp.mul RNE (fp.mul RNE (fp.sub RNE 
-     (to_rep
-     (rec__lat_long__coordinates__lat (us_split_fields1 destination1))) 
-     (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source1)))) (fp #b0 #b10010101 #b10000100101000110101001)) (fp #b0 #b01111001 #b00011101111101000110101)))) :pattern (
+  (! (= (delta_lat_in_meters source1 destination1) (fp.mul RNE (fp.mul RNE (fp.sub RNE 
+  (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 destination1))) 
+  (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source1)))) (fp #b0 #b10010101 #b10000100101000110101001)) (fp #b0 #b01111001 #b00011101111101000110101))) :pattern (
   (delta_lat_in_meters source1 destination1)) )))
 
 (declare-fun delta_long_in_meters (us_rep us_rep) Float32)
@@ -453,31 +441,21 @@
   (assert
   (forall ((source1 us_rep) (destination1 us_rep))
   (! (let ((result (delta_long_in_meters source1 destination1)))
-     (and (olt__function_guard
-     (olt (fp.abs result) (fp #b0 #b10011000 #b00110001001111000100110))
-     (fp.abs result) (fp #b0 #b10011000 #b00110001001111000100110))
-     (=> (delta_long_in_meters__function_guard result source1 destination1)
      (and
      (= (olt (fp.abs result) (fp #b0 #b10011000 #b00110001001111000100110)) true)
-     (dynamic_invariant result true false true))))) :pattern ((delta_long_in_meters
-                                                              source1
-                                                              destination1)) )))
+     (dynamic_invariant result true false true))) :pattern ((delta_long_in_meters
+                                                            source1
+                                                            destination1)) )))
 
 ;; delta_long_in_meters__def_axiom
   (assert
   (forall ((source1 us_rep) (destination1 us_rep))
-  (! (=> (delta_long_in_meters__function_guard
-     (delta_long_in_meters source1 destination1) source1 destination1)
-     (and (cos__function_guard
-     (cos1
-     (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source1))))
-     (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source1))))
-     (= (delta_long_in_meters source1 destination1) (fp.div RNE (fp.mul RNE (fp.sub RNE 
-     (to_rep1
-     (rec__lat_long__coordinates__long (us_split_fields1 destination1))) 
-     (to_rep1 (rec__lat_long__coordinates__long (us_split_fields1 source1)))) (fp #b0 #b10010101 #b10000100101000110101001)) 
-     (cos1
-     (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source1)))))))) :pattern (
+  (! (= (delta_long_in_meters source1 destination1) (fp.div RNE (fp.mul RNE (fp.sub RNE 
+  (to_rep1
+  (rec__lat_long__coordinates__long (us_split_fields1 destination1))) 
+  (to_rep1 (rec__lat_long__coordinates__long (us_split_fields1 source1)))) (fp #b0 #b10010101 #b10000100101000110101001)) 
+  (cos1
+  (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source1)))))) :pattern (
   (delta_long_in_meters source1 destination1)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
@@ -515,9 +493,8 @@
 ;; olt__def_axiom
   (assert
   (forall ((left Float32) (right Float32))
-  (! (=> (olt__function_guard (olt left right) left right)
-     (= (= (olt left right) true)
-     (fp.lt left (fp.add RNE right (fp #b0 #b01101110 #b01001111100010110101100))))) :pattern (
+  (! (= (= (olt left right) true)
+     (fp.lt left (fp.add RNE right (fp #b0 #b01101110 #b01001111100010110101100)))) :pattern (
   (olt left right)) )))
 
 (define-fun dynamic_invariant2 ((temp___expr_147 Float32)
@@ -647,11 +624,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o (cos1
        (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source)))))
-  (cos__function_guard o
-  (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source)))))
   (and (not (or (fp.isInfinite o) (fp.isNaN o)))
   (and
   (= o (sin1
@@ -709,7 +683,7 @@
 
 ;; H
   (assert
-  (and (and (= o7 (sqrt1 o6)) (sqrt__function_guard o7 o6))
+  (and (= o7 (sqrt1 o6))
   (and (not (or (fp.isInfinite o7) (fp.isNaN o7))) (= o7 (sqrt2 o6)))))
 
 ;; H
@@ -740,52 +714,6 @@
 
 ;; H
   (assert (= result3 lat_long__distance__result4))
-
-;; H
-  (assert (delta_lat_in_meters__function_guard
-  (delta_lat_in_meters source destination) source destination))
-
-;; H
-  (assert (delta_lat_in_meters__function_guard
-  (delta_lat_in_meters source destination) source destination))
-
-;; H
-  (assert (delta_long_in_meters__function_guard
-  (delta_long_in_meters source destination) source destination))
-
-;; H
-  (assert (delta_long_in_meters__function_guard
-  (delta_long_in_meters source destination) source destination))
-
-;; H
-  (assert (delta_lat_in_meters__function_guard
-  (delta_lat_in_meters source destination) source destination))
-
-;; H
-  (assert (delta_lat_in_meters__function_guard
-  (delta_lat_in_meters source destination) source destination))
-
-;; H
-  (assert (delta_long_in_meters__function_guard
-  (delta_long_in_meters source destination) source destination))
-
-;; H
-  (assert (delta_long_in_meters__function_guard
-  (delta_long_in_meters source destination) source destination))
-
-;; H
-  (assert (sqrt__function_guard
-  (sqrt1
-  (fp.add RNE (fp.mul RNE (delta_lat_in_meters source destination) (delta_lat_in_meters
-                                                                   source
-                                                                   destination)) (fp.mul RNE 
-  (delta_long_in_meters source destination) (delta_long_in_meters source
-                                            destination))))
-  (fp.add RNE (fp.mul RNE (delta_lat_in_meters source destination) (delta_lat_in_meters
-                                                                   source
-                                                                   destination)) (fp.mul RNE 
-  (delta_long_in_meters source destination) (delta_long_in_meters source
-                                            destination)))))
 
 (assert
 ;; WP_parameter_def

@@ -223,16 +223,14 @@
      (and (dynamic_invariant x1 true true true)
      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111101110)) x1))
      (let ((result (r4 x1)))
-     (=> (r4__function_guard result x1)
      (and (fp.eq result (fp.roundToIntegral RTN x1)) (dynamic_invariant
-     result true false true))))) :pattern ((r4 x1)) )))
+     result true false true)))) :pattern ((r4 x1)) )))
 
 ;; r4__def_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=>
-     (and (dynamic_invariant x1 true true true) (r4__function_guard (r4 x1)
-     x1)) (= (r4 x1) (fp.roundToIntegral RTN x1))) :pattern ((r4 x1)) )))
+  (! (=> (dynamic_invariant x1 true true true)
+     (= (r4 x1) (fp.roundToIntegral RTN x1))) :pattern ((r4 x1)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -283,7 +281,7 @@
 
 ;; H
   (assert
-  (and (and (= o (r4 v11)) (r4__function_guard o v11))
+  (and (= o (r4 v11))
   (and (in_range1 o)
   (and (= o (fp.roundToIntegral RTN v11))
   (fp.eq o (fp.roundToIntegral RTN v11))))))

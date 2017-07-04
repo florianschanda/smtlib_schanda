@@ -292,12 +292,8 @@
 ;; fib__def_axiom
   (assert
   (forall ((n Int))
-  (! (=>
-     (and (dynamic_invariant2 n true true true) (fib__function_guard 
-     (fib n) n))
-     (and (fib__function_guard (fib (- n 1)) (- n 1))
-     (and (fib__function_guard (fib (- n 2)) (- n 2))
-     (= (fib n) (ite (or (= n 0) (= n 1)) n (+ (fib (- n 1)) (fib (- n 2)))))))) :pattern (
+  (! (=> (dynamic_invariant2 n true true true)
+     (= (fib n) (ite (or (= n 0) (= n 1)) n (+ (fib (- n 1)) (fib (- n 2)))))) :pattern (
   (fib n)) )))
 
 (declare-fun n () Int)
@@ -329,8 +325,6 @@
   (forall ((x Int))
   (! (=> (in_range1 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
-
-(declare-fun last () Int)
 
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
@@ -441,12 +435,6 @@
   (assert (<= i1 n))
 
 ;; H
-  (assert (fib__function_guard (fib (- i2 1)) (- i2 1)))
-
-;; H
-  (assert (fib__function_guard (fib (- i2 2)) (- i2 2)))
-
-;; H
   (assert (and (= old__2 (fib (- i2 1))) (= oldest2 (fib (- i2 2)))))
 
 ;; H
@@ -460,17 +448,11 @@
   (=> (<= 0 2147483647) (in_range2 temp1))) (and (<= 2 i2) (<= i2 n))))
 
 ;; H
-  (assert (fib__function_guard (fib (- o 1)) (- o 1)))
-
-;; H
-  (assert (fib__function_guard (fib (- o 2)) (- o 2)))
-
-;; H
   (assert (and (= o (- i2 2)) (in_range4 (- i2 2))))
 
 ;; H
   (assert
-  (and (and (= o1 (fib o)) (fib__function_guard o1 o))
+  (and (= o1 (fib o))
   (and (in_range2 o1)
   (and (= o1 (ite (or (= o 0) (= o 1)) o (+ (fib (- o 1)) (fib (- o 2)))))
   (fp.lt (of_int1 RNE o1) (fp.add RNE (fp.div RNE (power

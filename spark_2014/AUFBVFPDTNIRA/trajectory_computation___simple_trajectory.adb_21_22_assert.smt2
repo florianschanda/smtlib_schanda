@@ -659,17 +659,13 @@
 ;; low_bound__post_axiom
   (assert
   (forall ((n Int))
-  (! (=> (dynamic_invariant2 n true true true)
-     (let ((result (low_bound n)))
-     (=> (low_bound__function_guard result n) (dynamic_invariant1 result true
-     false true)))) :pattern ((low_bound n)) )))
+  (! (=> (dynamic_invariant2 n true true true) (dynamic_invariant1
+     (low_bound n) true false true)) :pattern ((low_bound n)) )))
 
 ;; low_bound__def_axiom
   (assert
   (forall ((n Int))
-  (! (=>
-     (and (dynamic_invariant2 n true true true) (low_bound__function_guard
-     (low_bound n) n))
+  (! (=> (dynamic_invariant2 n true true true)
      (= (low_bound n) (fp.mul RNE (of_int RNE n) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))) :pattern (
   (low_bound n)) )))
 
@@ -680,17 +676,13 @@
 ;; high_bound__post_axiom
   (assert
   (forall ((n Int))
-  (! (=> (dynamic_invariant2 n true true true)
-     (let ((result (high_bound n)))
-     (=> (high_bound__function_guard result n) (dynamic_invariant1 result
-     true false true)))) :pattern ((high_bound n)) )))
+  (! (=> (dynamic_invariant2 n true true true) (dynamic_invariant1
+     (high_bound n) true false true)) :pattern ((high_bound n)) )))
 
 ;; high_bound__def_axiom
   (assert
   (forall ((n Int))
-  (! (=>
-     (and (dynamic_invariant2 n true true true) (high_bound__function_guard
-     (high_bound n) n))
+  (! (=> (dynamic_invariant2 n true true true)
      (= (high_bound n) (fp.mul RNE (of_int RNE n) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)))) :pattern (
   (high_bound n)) )))
 
@@ -704,11 +696,10 @@
 ;; in_bounds__def_axiom
   (assert
   (forall ((v Float64))
-  (! (=> (in_bounds__function_guard (in_bounds v) v)
-     (= (= (in_bounds v) true)
+  (! (= (= (in_bounds v) true)
      (and
      (fp.leq (fp.neg (fp #b0 #b10000010011 #b1000110010111010100000000000000000000000000000000000)) v)
-     (fp.leq v (fp #b0 #b10000010011 #b1000110010111010100000000000000000000000000000000000))))) :pattern (
+     (fp.leq v (fp #b0 #b10000010011 #b1000110010111010100000000000000000000000000000000000)))) :pattern (
   (in_bounds v)) )))
 
 (declare-fun invariant__ (Int Float64) Bool)
@@ -722,11 +713,8 @@
   (assert
   (forall ((n Int))
   (forall ((speed Float64))
-  (! (=> (invariant____function_guard (invariant__ n speed) n speed)
-     (and (low_bound__function_guard (low_bound n) n)
-     (and (high_bound__function_guard (high_bound n) n)
-     (= (= (invariant__ n speed) true)
-     (and (fp.leq (low_bound n) speed) (fp.leq speed (high_bound n))))))) :pattern (
+  (! (= (= (invariant__ n speed) true)
+     (and (fp.leq (low_bound n) speed) (fp.leq speed (high_bound n)))) :pattern (
   (invariant__ n speed)) ))))
 
 (declare-fun n () Int)
@@ -787,17 +775,14 @@
 ;; t__post_axiom
   (assert
   (forall ((n1 Int))
-  (! (=> (dynamic_invariant5 n1 true true true)
-     (let ((result (t n1)))
-     (=> (t__function_guard result n1) (dynamic_invariant1 result true false
-     true)))) :pattern ((t n1)) )))
+  (! (=> (dynamic_invariant5 n1 true true true) (dynamic_invariant1 (t n1)
+     true false true)) :pattern ((t n1)) )))
 
 ;; t__def_axiom
   (assert
   (forall ((n1 Int))
-  (! (=>
-     (and (dynamic_invariant5 n1 true true true) (t__function_guard (t n1)
-     n1)) (= (t n1) (of_int RNE n1))) :pattern ((t n1)) )))
+  (! (=> (dynamic_invariant5 n1 true true true) (= (t n1) (of_int RNE n1))) :pattern (
+  (t n1)) )))
 
 (declare-fun n_bv () (_ BitVec 16))
 
@@ -835,10 +820,6 @@
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
   (not (or (fp.isInfinite new_speed) (fp.isNaN new_speed)))))
-
-;; H
-  (assert (invariant____function_guard (invariant__ n old_speed) n
-  old_speed))
 
 ;; H
   (assert (and (< n 25000) (= (invariant__ n old_speed) true)))

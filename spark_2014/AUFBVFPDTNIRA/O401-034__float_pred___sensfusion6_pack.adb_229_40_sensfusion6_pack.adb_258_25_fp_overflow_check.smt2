@@ -415,11 +415,10 @@
      (and (dynamic_invariant x true true true)
      (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) x))
      (let ((result (inv_sqrt x)))
-     (=> (inv_sqrt__function_guard result x)
      (and
      (and (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) result)
      (fp.lt result (fp #b0 #b11000010 #b01011010111100011101100)))
-     (dynamic_invariant result true false true))))) :pattern ((inv_sqrt x)) )))
+     (dynamic_invariant result true false true)))) :pattern ((inv_sqrt x)) )))
 
 (declare-fun saturate (Float32 Float32 Float32) Float32)
 
@@ -433,11 +432,10 @@
      (and (dynamic_invariant value true true true) (dynamic_invariant
      min_value true true true)) (dynamic_invariant max_value true true true))
      (let ((result (saturate value min_value max_value)))
-     (=> (saturate__function_guard result value min_value max_value)
      (and
      (ite (fp.lt value min_value) (fp.eq result min_value)
      (ite (fp.lt max_value value) (fp.eq result max_value)
-     (fp.eq result value))) (dynamic_invariant result true false true))))) :pattern (
+     (fp.eq result value))) (dynamic_invariant result true false true)))) :pattern (
   (saturate value min_value max_value)) )))
 
 (declare-fun lift_away_from_zero (Float32) Float32)
@@ -449,13 +447,12 @@
   (forall ((x Float32))
   (! (=> (dynamic_invariant2 x true true true)
      (let ((result (lift_away_from_zero x)))
-     (=> (lift_away_from_zero__function_guard result x)
      (and
      (ite (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
      (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000))
      (=> (neq x (fp #b0 #b00000000 #b00000000000000000000000)) (neq result
      (fp #b0 #b00000000 #b00000000000000000000000)))) (dynamic_invariant3
-     result true false true))))) :pattern ((lift_away_from_zero x)) )))
+     result true false true)))) :pattern ((lift_away_from_zero x)) )))
 
 (declare-fun gx () Float32)
 
@@ -1300,13 +1297,9 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (and
-  (and
   (= o (inv_sqrt
        (fp.add RNE (fp.add RNE (fp.mul RNE c6b c6b) (fp.mul RNE c7b c7b)) (fp.mul RNE 
        c8b c8b))))
-  (inv_sqrt__function_guard o
-  (fp.add RNE (fp.add RNE (fp.mul RNE c6b c6b) (fp.mul RNE c7b c7b)) (fp.mul RNE 
-  c8b c8b))))
   (and (not (or (fp.isInfinite o) (fp.isNaN o)))
   (and (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) o)
   (fp.lt o (fp #b0 #b11000010 #b01011010111100011101100)))))))
@@ -1348,12 +1341,8 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (and
-  (and
   (= o2 (saturate o1 (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))
         (fp #b0 #b01111111 #b00000000000000000000000)))
-  (saturate__function_guard o2 o1
-  (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))
-  (fp #b0 #b01111111 #b00000000000000000000000)))
   (and (not (or (fp.isInfinite o2) (fp.isNaN o2)))
   (ite (fp.lt o1 (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)))
   (fp.eq o2 (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)))
@@ -1407,12 +1396,8 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (and
-  (and
   (= o5 (saturate o4 (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))
         (fp #b0 #b01111111 #b00000000000000000000000)))
-  (saturate__function_guard o5 o4
-  (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))
-  (fp #b0 #b01111111 #b00000000000000000000000)))
   (and (not (or (fp.isInfinite o5) (fp.isNaN o5)))
   (ite (fp.lt o4 (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)))
   (fp.eq o5 (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)))
@@ -1466,12 +1451,8 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (and
-  (and
   (= o8 (saturate o7 (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))
         (fp #b0 #b01111111 #b00000000000000000000000)))
-  (saturate__function_guard o8 o7
-  (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))
-  (fp #b0 #b01111111 #b00000000000000000000000)))
   (and (not (or (fp.isInfinite o8) (fp.isNaN o8)))
   (ite (fp.lt o7 (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)))
   (fp.eq o8 (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)))

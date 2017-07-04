@@ -182,17 +182,14 @@
 ;; c__post_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (c x)))
-     (=> (c__function_guard result x) (dynamic_invariant1 result true false
-     true)))) :pattern ((c x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant1 (c x) true
+     false true)) :pattern ((c x)) )))
 
 ;; c__def_axiom
   (assert
   (forall ((x Int))
-  (! (=>
-     (and (dynamic_invariant x true true true) (c__function_guard (c x) x))
-     (= (c x) (of_int RNE x))) :pattern ((c x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (c x) (of_int RNE x))) :pattern (
+  (c x)) )))
 
 (declare-sort t 0)
 
@@ -252,7 +249,7 @@
 
 ;; H
   (assert
-  (and (and (= o (c x)) (c__function_guard o x))
+  (and (= o (c x))
   (and (not (or (fp.isInfinite o) (fp.isNaN o))) (= o (of_int RNE x)))))
 
 ;; H

@@ -270,11 +270,6 @@
                                             (us_split_fields1
                                             temp___expr_136))) (fp #b0 #b00000000 #b00000000000000000000000))))
 
-;; temp___result_140_def
-  (assert
-  (forall ((temp___139 us_rep)) (has_valid_order__function_guard
-  (has_valid_order temp___139) temp___139)))
-
 (define-fun type_invariant ((temp___138 us_rep)) Bool (= (has_valid_order
                                                          temp___138) true))
 
@@ -292,10 +287,9 @@
 ;; has_valid_order__def_axiom
   (assert
   (forall ((int__ us_rep))
-  (! (=> (has_valid_order__function_guard (has_valid_order int__) int__)
-     (= (= (has_valid_order int__) true)
+  (! (= (= (has_valid_order int__) true)
      (fp.leq (to_rep (rec__interval__interval__low (us_split_fields1 int__))) 
-     (to_rep (rec__interval__interval__high (us_split_fields1 int__)))))) :pattern (
+     (to_rep (rec__interval__interval__high (us_split_fields1 int__))))) :pattern (
   (has_valid_order int__)) )))
 
 (declare-fun interval__make__result () float)
@@ -476,5 +470,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "interval.ads", line 9, characters 0-0
-  (not (type_invariant (interval__content interval__make__result11))))
+  (not
+  (= (has_valid_order (interval__content interval__make__result11)) true)))
 (check-sat)

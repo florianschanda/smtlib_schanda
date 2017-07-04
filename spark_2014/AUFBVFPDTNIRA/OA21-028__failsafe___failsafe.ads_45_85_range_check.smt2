@@ -443,9 +443,9 @@
 
 (declare-fun failsafe__model__time_below_threshold__result () (_ BitVec 8))
 
-(declare-fun temp___266 () (_ BitVec 8))
+(declare-fun temp___256 () (_ BitVec 8))
 
-(declare-fun temp___265 () (_ BitVec 8))
+(declare-fun temp___255 () (_ BitVec 8))
 
 (declare-fun o () (_ BitVec 8))
 
@@ -465,7 +465,7 @@
 
 (declare-fun o8 () (_ BitVec 8))
 
-(declare-fun temp___275 () (_ BitVec 8))
+(declare-fun temp___265 () (_ BitVec 8))
 
 (declare-fun o9 () (_ BitVec 8))
 
@@ -586,12 +586,12 @@
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 8) 0) s1) (bvule s1 ((_ int2bv 8) 49)))
-  (= temp___266 res1)))
+  (= temp___256 res1)))
 
 ;; H
   (assert
   (=> (and (bvule ((_ int2bv 8) 0) s1) (bvule s1 ((_ int2bv 8) 49)))
-  (= temp___265 s1)))
+  (= temp___255 s1)))
 
 ;; H
   (assert
@@ -634,9 +634,9 @@
   (forall ((s17 (_ BitVec 8)))
   (=>
   (and
-  (bvule (let ((temp___271 (bvsub current_time (bvsub res3 ((_ int2bv 8) 1)))))
+  (bvule (let ((temp___261 (bvsub current_time (bvsub res3 ((_ int2bv 8) 1)))))
          (ite (bvult current_time (bvsub res3 ((_ int2bv 8) 1)))
-         (bvadd temp___271 ((_ int2bv 8) 50)) temp___271)) s17)
+         (bvadd temp___261 ((_ int2bv 8) 50)) temp___261)) s17)
   (bvule s17 current_time))
   (fp.lt (to_rep (select battery_level_at s17)) (fp #b0 #b01111100 #b10011001100110011001101))))
   (and
@@ -646,9 +646,9 @@
   (forall ((s17 (_ BitVec 8)))
   (=>
   (and
-  (bvule (let ((temp___272 (bvsub current_time (bvsub res3 ((_ int2bv 8) 1)))))
+  (bvule (let ((temp___262 (bvsub current_time (bvsub res3 ((_ int2bv 8) 1)))))
          (ite (bvult current_time (bvsub res3 ((_ int2bv 8) 1)))
-         (bvadd temp___272 ((_ int2bv 8) 50)) temp___272)) s17)
+         (bvadd temp___262 ((_ int2bv 8) 50)) temp___262)) s17)
   (bvule s17 ((_ int2bv 8) 49)))
   (fp.lt (to_rep (select battery_level_at s17)) (fp #b0 #b01111100 #b10011001100110011001101))))))
   (= res3 (bvadd s2 ((_ int2bv 8) 1))))
@@ -815,7 +815,7 @@
   (assert
   (=>
   (bvult (t__content failsafe__model__time_below_threshold__result4) ((_ int2bv 8) 50))
-  (= temp___275 (bvsub current_time o8))))
+  (= temp___265 (bvsub current_time o8))))
 
 ;; H
   (assert
@@ -834,13 +834,13 @@
   (assert
   (=>
   (bvult (t__content failsafe__model__time_below_threshold__result4) ((_ int2bv 8) 50))
-  (=> (= result8 true) (= o10 (bvadd temp___275 ((_ int2bv 8) 50))))))
+  (=> (= result8 true) (= o10 (bvadd temp___265 ((_ int2bv 8) 50))))))
 
 ;; H
   (assert
   (=>
   (bvult (t__content failsafe__model__time_below_threshold__result4) ((_ int2bv 8) 50))
-  (=> (not (= result8 true)) (= o10 temp___275))))
+  (=> (not (= result8 true)) (= o10 temp___265))))
 
 ;; H
   (assert

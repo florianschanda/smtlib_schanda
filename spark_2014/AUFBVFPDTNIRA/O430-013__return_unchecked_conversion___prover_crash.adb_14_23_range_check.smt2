@@ -216,10 +216,8 @@
 ;; conv__post_axiom
   (assert
   (forall ((s Int))
-  (! (=> (dynamic_invariant1 s true true true)
-     (let ((result (conv s)))
-     (=> (conv__function_guard result s) (dynamic_invariant2 result true
-     false true)))) :pattern ((conv s)) )))
+  (! (=> (dynamic_invariant1 s true true true) (dynamic_invariant2 (conv s)
+     true false true)) :pattern ((conv s)) )))
 
 ;; H
   (assert (in_range1 x))

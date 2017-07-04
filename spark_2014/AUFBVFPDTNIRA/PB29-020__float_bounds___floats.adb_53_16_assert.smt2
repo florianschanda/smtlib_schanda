@@ -359,29 +359,6 @@
   (= (to_rep (select a temp___idx_132)) (to_rep
                                         (select b (+ (- b__first a__first) temp___idx_132)))))))))))
 
-(declare-sort tt_tab_4_l_floatD1 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq2 (tt_tab_4_l_floatD1 tt_tab_4_l_floatD1) Bool)
-
-(declare-fun dummy2 () tt_tab_4_l_floatD1)
-
-(declare-datatypes ()
-((tt_tab_4_l_floatD1__ref
- (mk_tt_tab_4_l_floatD1__ref
- (tt_tab_4_l_floatD1__content tt_tab_4_l_floatD1)))))
-(define-fun tt_tab_4_l_floatD1__ref___projection ((a tt_tab_4_l_floatD1__ref)) tt_tab_4_l_floatD1 
-  (tt_tab_4_l_floatD1__content a))
-
 (declare-datatypes ()
 ((map__ref1 (mk_map__ref1 (map__content1 (Array Int long_float))))))
 (declare-fun slide1 ((Array Int long_float) Int Int) (Array Int long_float))
@@ -424,7 +401,7 @@
   (forall ((i Int))
   (! (= (select (singleton2 v i) i) v) :pattern ((select (singleton2 v i) i)) ))))
 
-(define-fun bool_eq6 ((a (Array Int long_float)) (a__first Int) (a__last Int)
+(define-fun bool_eq5 ((a (Array Int long_float)) (a__first Int) (a__last Int)
   (b (Array Int long_float)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -443,7 +420,7 @@
   (assert
   (forall ((a (Array Int long_float)) (b (Array Int long_float)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq6 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq5 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -459,66 +436,9 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(declare-sort t1b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq3 (t1b t1b) Bool)
-
-(declare-fun dummy3 () t1b)
-
-(declare-datatypes () ((t1b__ref (mk_t1b__ref (t1b__content t1b)))))
-(define-fun t1b__ref___projection ((a1 t1b__ref)) t1b (t1b__content a1))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(declare-sort t3b 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq4 (t3b t3b) Bool)
-
-(declare-fun dummy4 () t3b)
-
-(declare-datatypes () ((t3b__ref (mk_t3b__ref (t3b__content t3b)))))
-(define-fun t3b__ref___projection ((a1 t3b__ref)) t3b (t3b__content a1))
-
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
-
-(declare-sort t5b 0)
-
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 4)))
-
-(define-fun bool_eq9 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq5 (t5b t5b) Bool)
-
-(declare-fun dummy5 () t5b)
-
-(declare-datatypes () ((t5b__ref (mk_t5b__ref (t5b__content t5b)))))
-(define-fun t5b__ref___projection ((a1 t5b__ref)) t5b (t5b__content a1))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
@@ -592,55 +512,55 @@
 
 (declare-fun d () (Array Int long_float))
 
-(declare-fun o () (Array Int long_float))
+(declare-fun o () long_float)
 
 (declare-fun o1 () (Array Int long_float))
 
-(declare-fun o2 () (Array Int long_float))
+(declare-fun o2 () long_float)
 
-(declare-fun o3 () long_float)
+(declare-fun o3 () (Array Int long_float))
 
-(declare-fun o4 () (Array Int long_float))
+(declare-fun o4 () long_float)
 
-(declare-fun o5 () long_float)
+(declare-fun o5 () (Array Int long_float))
 
-(declare-fun o6 () (Array Int long_float))
+(declare-fun o6 () long_float)
 
-(declare-fun o7 () long_float)
+(declare-fun o7 () (Array Int long_float))
 
-(declare-fun o8 () (Array Int long_float))
+(declare-fun o8 () long_float)
 
-(declare-fun o9 () long_float)
+(declare-fun o9 () (Array Int long_float))
 
-(declare-fun o10 () (Array Int long_float))
+(declare-fun o10 () long_float)
 
-(declare-fun o11 () long_float)
+(declare-fun o11 () (Array Int long_float))
 
-(declare-fun o12 () (Array Int long_float))
+(declare-fun o12 () long_float)
 
-(declare-fun o13 () long_float)
+(declare-fun o13 () (Array Int long_float))
 
-(declare-fun o14 () (Array Int long_float))
+(declare-fun o14 () long_float)
 
-(declare-fun o15 () long_float)
+(declare-fun o15 () (Array Int long_float))
 
-(declare-fun o16 () (Array Int long_float))
+(declare-fun o16 () long_float)
 
-(declare-fun o17 () long_float)
+(declare-fun o17 () (Array Int long_float))
 
-(declare-fun o18 () (Array Int long_float))
+(declare-fun o18 () long_float)
 
-(declare-fun o19 () long_float)
+(declare-fun o19 () (Array Int long_float))
 
-(declare-fun o20 () (Array Int long_float))
+(declare-fun o20 () long_float)
 
-(declare-fun o21 () long_float)
+(declare-fun o21 () (Array Int long_float))
 
-(declare-fun o22 () (Array Int long_float))
+(declare-fun o22 () long_float)
 
-(declare-fun o23 () long_float)
+(declare-fun o23 () (Array Int long_float))
 
-(declare-fun o24 () (Array Int long_float))
+(declare-fun o24 () Float64)
 
 (declare-fun o25 () long_float)
 
@@ -663,12 +583,6 @@
 (declare-fun o34 () long_float)
 
 (declare-fun o35 () (Array Int long_float))
-
-(declare-fun o36 () Float64)
-
-(declare-fun o37 () long_float)
-
-(declare-fun o38 () (Array Int long_float))
 
 (declare-fun result () (Array Int long_float))
 
@@ -757,22 +671,11 @@
   (fp.leq (to_rep (select a i)) (fp #b0 #b01111111 #b00000000000000000000000))))))
 
 ;; H
-  (assert
-  (= o (floats__test__b__aggregate_def
-       (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-       (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-       (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-       (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))))
-
-;; H
   (assert (= result b))
 
 ;; H
-  (assert (= b1 o))
-
-;; H
   (assert
-  (= o1 (floats__test__c__aggregate_def
+  (= b1 (floats__test__b__aggregate_def
         (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
         (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
         (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
@@ -782,11 +685,8 @@
   (assert (= result1 c))
 
 ;; H
-  (assert (= c1 o1))
-
-;; H
   (assert
-  (= o2 (floats__test__d__aggregate_def
+  (= c1 (floats__test__c__aggregate_def
         (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
         (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
         (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
@@ -796,7 +696,12 @@
   (assert (= result2 d))
 
 ;; H
-  (assert (= d1 o2))
+  (assert
+  (= d1 (floats__test__d__aggregate_def
+        (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
+        (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
+        (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
+        (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))))
 
 ;; H
   (assert
@@ -824,55 +729,55 @@
 
 ;; H
   (assert
-  (= (to_rep1 o3) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
+  (= (to_rep1 o) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
 
 ;; H
-  (assert (= o4 (store e 1 o3)))
+  (assert (= o1 (store e 1 o)))
 
 ;; H
   (assert (= result3 e))
 
 ;; H
-  (assert (= e1 o4))
+  (assert (= e1 o1))
 
 ;; H
   (assert
-  (= (to_rep1 o5) ((_ to_fp 11 53) RNE (fp.mul RNE (to_rep (select a 1)) (fp #b0 #b01111110 #b00000000000000000000000)))))
+  (= (to_rep1 o2) ((_ to_fp 11 53) RNE (fp.mul RNE (to_rep (select a 1)) (fp #b0 #b01111110 #b00000000000000000000000)))))
 
 ;; H
-  (assert (= o6 (store e1 2 o5)))
+  (assert (= o3 (store e1 2 o2)))
 
 ;; H
   (assert (= result4 e1))
 
 ;; H
-  (assert (= e2 o6))
+  (assert (= e2 o3))
 
 ;; H
   (assert
-  (= (to_rep1 o7) ((_ to_fp 11 53) RNE (fp.mul RNE (to_rep (select a 2)) (fp #b0 #b01111110 #b00000000000000000000000)))))
+  (= (to_rep1 o4) ((_ to_fp 11 53) RNE (fp.mul RNE (to_rep (select a 2)) (fp #b0 #b01111110 #b00000000000000000000000)))))
 
 ;; H
-  (assert (= o8 (store e2 3 o7)))
+  (assert (= o5 (store e2 3 o4)))
 
 ;; H
   (assert (= result5 e2))
 
 ;; H
-  (assert (= e3 o8))
+  (assert (= e3 o5))
 
 ;; H
   (assert
-  (= (to_rep1 o9) ((_ to_fp 11 53) RNE (fp.mul RNE (to_rep (select a 3)) (fp #b0 #b01111110 #b00000000000000000000000)))))
+  (= (to_rep1 o6) ((_ to_fp 11 53) RNE (fp.mul RNE (to_rep (select a 3)) (fp #b0 #b01111110 #b00000000000000000000000)))))
 
 ;; H
-  (assert (= o10 (store e3 4 o9)))
+  (assert (= o7 (store e3 4 o6)))
 
 ;; H
   (assert (= result6 e3))
 
 ;; H
-  (assert (= e4 o10))
+  (assert (= e4 o7))
 
 ;; H
   (assert
@@ -913,55 +818,55 @@
 
 ;; H
   (assert
-  (= (to_rep1 o11) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
+  (= (to_rep1 o8) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
 
 ;; H
-  (assert (= o12 (store c1 1 o11)))
+  (assert (= o9 (store c1 1 o8)))
 
 ;; H
   (assert (= result7 c1))
 
 ;; H
-  (assert (= c2 o12))
+  (assert (= c2 o9))
 
 ;; H
   (assert
-  (= (to_rep1 o13) ((_ to_fp 11 53) RNE (fp.mul RNE (to_rep (select a 1)) (fp #b0 #b01111110 #b00000000000000000000000)))))
+  (= (to_rep1 o10) ((_ to_fp 11 53) RNE (fp.mul RNE (to_rep (select a 1)) (fp #b0 #b01111110 #b00000000000000000000000)))))
 
 ;; H
-  (assert (= o14 (store c2 2 o13)))
+  (assert (= o11 (store c2 2 o10)))
 
 ;; H
   (assert (= result8 c2))
 
 ;; H
-  (assert (= c3 o14))
+  (assert (= c3 o11))
 
 ;; H
   (assert
-  (= (to_rep1 o15) ((_ to_fp 11 53) RNE (fp.mul RNE (to_rep (select a 2)) (fp #b0 #b01111110 #b00000000000000000000000)))))
+  (= (to_rep1 o12) ((_ to_fp 11 53) RNE (fp.mul RNE (to_rep (select a 2)) (fp #b0 #b01111110 #b00000000000000000000000)))))
 
 ;; H
-  (assert (= o16 (store c3 3 o15)))
+  (assert (= o13 (store c3 3 o12)))
 
 ;; H
   (assert (= result9 c3))
 
 ;; H
-  (assert (= c4 o16))
+  (assert (= c4 o13))
 
 ;; H
   (assert
-  (= (to_rep1 o17) ((_ to_fp 11 53) RNE (fp.mul RNE (to_rep (select a 3)) (fp #b0 #b01111110 #b00000000000000000000000)))))
+  (= (to_rep1 o14) ((_ to_fp 11 53) RNE (fp.mul RNE (to_rep (select a 3)) (fp #b0 #b01111110 #b00000000000000000000000)))))
 
 ;; H
-  (assert (= o18 (store c4 4 o17)))
+  (assert (= o15 (store c4 4 o14)))
 
 ;; H
   (assert (= result10 c4))
 
 ;; H
-  (assert (= c5 o18))
+  (assert (= c5 o15))
 
 ;; H
   (assert
@@ -1002,55 +907,55 @@
 
 ;; H
   (assert
-  (= (to_rep1 o19) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
+  (= (to_rep1 o16) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
 
 ;; H
-  (assert (= o20 (store b1 1 o19)))
+  (assert (= o17 (store b1 1 o16)))
 
 ;; H
   (assert (= result11 b1))
 
 ;; H
-  (assert (= b2 o20))
+  (assert (= b2 o17))
 
 ;; H
   (assert
-  (= (to_rep1 o21) ((_ to_fp 11 53) RNE (fp.mul RNE (to_rep (select a 1)) (fp #b0 #b01111110 #b00000000000000000000000)))))
+  (= (to_rep1 o18) ((_ to_fp 11 53) RNE (fp.mul RNE (to_rep (select a 1)) (fp #b0 #b01111110 #b00000000000000000000000)))))
 
 ;; H
-  (assert (= o22 (store b2 2 o21)))
+  (assert (= o19 (store b2 2 o18)))
 
 ;; H
   (assert (= result12 b2))
 
 ;; H
-  (assert (= b3 o22))
+  (assert (= b3 o19))
 
 ;; H
   (assert
-  (= (to_rep1 o23) ((_ to_fp 11 53) RNE (fp.mul RNE (to_rep (select a 2)) (fp #b0 #b01111110 #b00000000000000000000000)))))
+  (= (to_rep1 o20) ((_ to_fp 11 53) RNE (fp.mul RNE (to_rep (select a 2)) (fp #b0 #b01111110 #b00000000000000000000000)))))
 
 ;; H
-  (assert (= o24 (store b3 3 o23)))
+  (assert (= o21 (store b3 3 o20)))
 
 ;; H
   (assert (= result13 b3))
 
 ;; H
-  (assert (= b4 o24))
+  (assert (= b4 o21))
 
 ;; H
   (assert
-  (= (to_rep1 o25) ((_ to_fp 11 53) RNE (fp.mul RNE (to_rep (select a 3)) (fp #b0 #b01111110 #b00000000000000000000000)))))
+  (= (to_rep1 o22) ((_ to_fp 11 53) RNE (fp.mul RNE (to_rep (select a 3)) (fp #b0 #b01111110 #b00000000000000000000000)))))
 
 ;; H
-  (assert (= o26 (store b4 4 o25)))
+  (assert (= o23 (store b4 4 o22)))
 
 ;; H
   (assert (= result14 b4))
 
 ;; H
-  (assert (= b5 o26))
+  (assert (= b5 o23))
 
 ;; H
   (assert
@@ -1091,83 +996,83 @@
 
 ;; H
   (assert
-  (and (= o27 (fp.add RNE (to_rep1 (select c5 1)) (to_rep1 (select b5 1))))
+  (and (= o24 (fp.add RNE (to_rep1 (select c5 1)) (to_rep1 (select b5 1))))
   (not (or (fp.isInfinite (fp.add RNE (to_rep1 (select c5 1)) (to_rep1
                                                               (select 
                                                               b5 1)))) (fp.isNaN (fp.add RNE 
   (to_rep1 (select c5 1)) (to_rep1 (select b5 1))))))))
 
 ;; H
-  (assert (= (to_rep1 o28) o27))
+  (assert (= (to_rep1 o25) o24))
 
 ;; H
-  (assert (= o29 (store d1 1 o28)))
+  (assert (= o26 (store d1 1 o25)))
 
 ;; H
   (assert (= result15 d1))
 
 ;; H
-  (assert (= d2 o29))
+  (assert (= d2 o26))
 
 ;; H
   (assert
-  (and (= o30 (fp.add RNE (to_rep1 (select c5 2)) (to_rep1 (select b5 2))))
+  (and (= o27 (fp.add RNE (to_rep1 (select c5 2)) (to_rep1 (select b5 2))))
   (not (or (fp.isInfinite (fp.add RNE (to_rep1 (select c5 2)) (to_rep1
                                                               (select 
                                                               b5 2)))) (fp.isNaN (fp.add RNE 
   (to_rep1 (select c5 2)) (to_rep1 (select b5 2))))))))
 
 ;; H
-  (assert (= (to_rep1 o31) o30))
+  (assert (= (to_rep1 o28) o27))
 
 ;; H
-  (assert (= o32 (store d2 2 o31)))
+  (assert (= o29 (store d2 2 o28)))
 
 ;; H
   (assert (= result16 d2))
 
 ;; H
-  (assert (= d3 o32))
+  (assert (= d3 o29))
 
 ;; H
   (assert
-  (and (= o33 (fp.add RNE (to_rep1 (select c5 3)) (to_rep1 (select b5 3))))
+  (and (= o30 (fp.add RNE (to_rep1 (select c5 3)) (to_rep1 (select b5 3))))
   (not (or (fp.isInfinite (fp.add RNE (to_rep1 (select c5 3)) (to_rep1
                                                               (select 
                                                               b5 3)))) (fp.isNaN (fp.add RNE 
   (to_rep1 (select c5 3)) (to_rep1 (select b5 3))))))))
 
 ;; H
-  (assert (= (to_rep1 o34) o33))
+  (assert (= (to_rep1 o31) o30))
 
 ;; H
-  (assert (= o35 (store d3 3 o34)))
+  (assert (= o32 (store d3 3 o31)))
 
 ;; H
   (assert (= result17 (mk_map__ref1 d3)))
 
 ;; H
-  (assert (= d4 o35))
+  (assert (= d4 o32))
 
 ;; H
   (assert
-  (and (= o36 (fp.add RNE (to_rep1 (select c5 4)) (to_rep1 (select b5 4))))
+  (and (= o33 (fp.add RNE (to_rep1 (select c5 4)) (to_rep1 (select b5 4))))
   (not (or (fp.isInfinite (fp.add RNE (to_rep1 (select c5 4)) (to_rep1
                                                               (select 
                                                               b5 4)))) (fp.isNaN (fp.add RNE 
   (to_rep1 (select c5 4)) (to_rep1 (select b5 4))))))))
 
 ;; H
-  (assert (= (to_rep1 o37) o36))
+  (assert (= (to_rep1 o34) o33))
 
 ;; H
-  (assert (= o38 (store d4 4 o37)))
+  (assert (= o35 (store d4 4 o34)))
 
 ;; H
   (assert (= result18 (mk_map__ref1 d4)))
 
 ;; H
-  (assert (= d5 o38))
+  (assert (= d5 o35))
 
 (assert
 ;; WP_parameter_def

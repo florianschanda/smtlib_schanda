@@ -153,10 +153,8 @@
 
 ;; boolean_to_long_float__post_axiom
   (assert
-  (forall ((b Bool))
-  (! (let ((result (boolean_to_long_float b)))
-     (=> (boolean_to_long_float__function_guard result b) (dynamic_invariant
-     result true false true))) :pattern ((boolean_to_long_float b)) )))
+  (forall ((b Bool)) (! (dynamic_invariant (boolean_to_long_float b) true
+  false true) :pattern ((boolean_to_long_float b)) )))
 
 (declare-fun wheel_speed () Float64)
 

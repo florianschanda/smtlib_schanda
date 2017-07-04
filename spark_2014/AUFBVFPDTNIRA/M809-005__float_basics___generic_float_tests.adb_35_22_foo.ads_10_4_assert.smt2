@@ -181,10 +181,8 @@
 ;; magic__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true)
-     (let ((result (magic x)))
-     (=> (magic__function_guard result x) (dynamic_invariant1 result true
-     false true)))) :pattern ((magic x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant1 (magic x)
+     true false true)) :pattern ((magic x)) )))
 
 (declare-fun a () Float32)
 
@@ -199,12 +197,6 @@
 
 ;; H
   (assert (not (or (fp.isInfinite b) (fp.isNaN b))))
-
-;; H
-  (assert (magic__function_guard (magic (fp.min a b)) (fp.min a b)))
-
-;; H
-  (assert (magic__function_guard (magic (fp.min b a)) (fp.min b a)))
 
 (assert
 ;; WP_parameter_def

@@ -179,14 +179,10 @@
 ;; is_valid_speed__def_axiom
   (assert
   (forall ((speed Float32))
-  (! (=> (is_valid_speed__function_guard (is_valid_speed speed) speed)
-     (and (m_per_s_from_km_per_h__function_guard
-     (m_per_s_from_km_per_h (fp #b0 #b10000111 #b11110100000000000000000))
-     (fp #b0 #b10000111 #b11110100000000000000000))
-     (= (= (is_valid_speed speed) true)
+  (! (= (= (is_valid_speed speed) true)
      (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) speed)
      (fp.leq speed (m_per_s_from_km_per_h
-                   (fp #b0 #b10000111 #b11110100000000000000000))))))) :pattern (
+                   (fp #b0 #b10000111 #b11110100000000000000000))))) :pattern (
   (is_valid_speed speed)) )))
 
 (declare-fun speed () Float32)
@@ -238,41 +234,29 @@
 ;; is_valid_speed_km_per_h__def_axiom
   (assert
   (forall ((speed1 Float32))
-  (! (=> (is_valid_speed_km_per_h__function_guard
-     (is_valid_speed_km_per_h speed1) speed1)
-     (= (= (is_valid_speed_km_per_h speed1) true)
+  (! (= (= (is_valid_speed_km_per_h speed1) true)
      (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) speed1)
-     (fp.leq speed1 (fp #b0 #b10000111 #b11110100000000000000000))))) :pattern (
+     (fp.leq speed1 (fp #b0 #b10000111 #b11110100000000000000000)))) :pattern (
   (is_valid_speed_km_per_h speed1)) )))
 
 ;; m_per_s_from_km_per_h__post_axiom
   (assert
   (forall ((speed1 Float32))
-  (! (and (is_valid_speed_km_per_h__function_guard
-     (is_valid_speed_km_per_h speed1) speed1)
-     (=>
+  (! (=>
      (and (dynamic_invariant2 speed1 true true true)
-     (= (is_valid_speed_km_per_h speed1) true))
-     (let ((result (m_per_s_from_km_per_h speed1)))
-     (=> (m_per_s_from_km_per_h__function_guard result speed1)
-     (dynamic_invariant result true false true))))) :pattern ((m_per_s_from_km_per_h
-                                                              speed1)) )))
+     (= (is_valid_speed_km_per_h speed1) true)) (dynamic_invariant
+     (m_per_s_from_km_per_h speed1) true false true)) :pattern ((m_per_s_from_km_per_h
+                                                                speed1)) )))
 
 ;; m_per_s_from_km_per_h__def_axiom
   (assert
   (forall ((speed1 Float32))
-  (! (=>
-     (and (dynamic_invariant2 speed1 true true true)
-     (m_per_s_from_km_per_h__function_guard (m_per_s_from_km_per_h speed1)
-     speed1))
+  (! (=> (dynamic_invariant2 speed1 true true true)
      (= (m_per_s_from_km_per_h speed1) (fp.div RNE (fp.mul RNE speed1 (fp #b0 #b10001000 #b11110100000000000000000)) (fp #b0 #b10001010 #b11000010000000000000000)))) :pattern (
   (m_per_s_from_km_per_h speed1)) )))
 
 ;; H
   (assert (not (or (fp.isInfinite speed) (fp.isNaN speed))))
-
-;; H
-  (assert (is_valid_speed__function_guard (is_valid_speed speed) speed))
 
 ;; H
   (assert (= (is_valid_speed speed) true))

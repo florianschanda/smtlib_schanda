@@ -357,12 +357,12 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_150 Int))
+                           (forall ((temp___idx_148 Int))
                            (=>
-                           (and (<= a__first temp___idx_150)
-                           (<= temp___idx_150 a__last))
-                           (= (bool_eq3 (select a temp___idx_150)
-                              (select b (+ (- b__first a__first) temp___idx_150))) true))))
+                           (and (<= a__first temp___idx_148)
+                           (<= temp___idx_148 a__last))
+                           (= (bool_eq3 (select a temp___idx_148)
+                              (select b (+ (- b__first a__first) temp___idx_148))) true))))
                       true false))
 
 ;; bool_eq_rev
@@ -374,10 +374,10 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_150 Int))
-  (=> (and (<= a__first temp___idx_150) (<= temp___idx_150 a__last))
-  (= (bool_eq3 (select a temp___idx_150)
-     (select b (+ (- b__first a__first) temp___idx_150))) true))))))))
+  (forall ((temp___idx_148 Int))
+  (=> (and (<= a__first temp___idx_148) (<= temp___idx_148 a__last))
+  (= (bool_eq3 (select a temp___idx_148)
+     (select b (+ (- b__first a__first) temp___idx_148))) true))))))))
 
 (declare-fun dummy3 () (Array Int us_rep))
 
@@ -697,12 +697,12 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_151 Int))
+                           (forall ((temp___idx_149 Int))
                            (=>
-                           (and (<= a__first temp___idx_151)
-                           (<= temp___idx_151 a__last))
-                           (= (bool_eq6 (select a temp___idx_151)
-                              (select b (+ (- b__first a__first) temp___idx_151))) true))))
+                           (and (<= a__first temp___idx_149)
+                           (<= temp___idx_149 a__last))
+                           (= (bool_eq6 (select a temp___idx_149)
+                              (select b (+ (- b__first a__first) temp___idx_149))) true))))
                       true false))
 
 ;; bool_eq_rev
@@ -714,10 +714,10 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_151 Int))
-  (=> (and (<= a__first temp___idx_151) (<= temp___idx_151 a__last))
-  (= (bool_eq6 (select a temp___idx_151)
-     (select b (+ (- b__first a__first) temp___idx_151))) true))))))))
+  (forall ((temp___idx_149 Int))
+  (=> (and (<= a__first temp___idx_149) (<= temp___idx_149 a__last))
+  (= (bool_eq6 (select a temp___idx_149)
+     (select b (+ (- b__first a__first) temp___idx_149))) true))))))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -731,10 +731,7 @@
 ;; is_valid_target__def_axiom
   (assert
   (forall ((sec_3_13_8_targets_decel_curves__target (Array Int us_rep2)))
-  (! (=> (is_valid_target__function_guard
-     (is_valid_target sec_3_13_8_targets_decel_curves__target)
-     sec_3_13_8_targets_decel_curves__target)
-     (= (= (is_valid_target sec_3_13_8_targets_decel_curves__target) true)
+  (! (= (= (is_valid_target sec_3_13_8_targets_decel_curves__target) true)
      (and
      (and
      (=>
@@ -757,35 +754,32 @@
      (fp.eq (to_rep
             (rec__deceleration_curve__target_t__speed
             (us_split_fields5
-            (select sec_3_13_8_targets_decel_curves__target 4)))) (fp #b0 #b00000000 #b00000000000000000000000))))) :pattern (
+            (select sec_3_13_8_targets_decel_curves__target 4)))) (fp #b0 #b00000000 #b00000000000000000000000)))) :pattern (
   (is_valid_target sec_3_13_8_targets_decel_curves__target)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
-(define-fun dynamic_invariant ((temp___expr_413 Int)
-  (temp___is_init_410 Bool) (temp___skip_constant_411 Bool)
-  (temp___do_toplevel_412 Bool)) Bool (=>
-                                      (or (= temp___is_init_410 true)
-                                      (<= 0 4)) (in_range3 temp___expr_413)))
+(define-fun dynamic_invariant ((temp___expr_355 Int)
+  (temp___is_init_352 Bool) (temp___skip_constant_353 Bool)
+  (temp___do_toplevel_354 Bool)) Bool (=>
+                                      (or (= temp___is_init_352 true)
+                                      (<= 0 4)) (in_range3 temp___expr_355)))
 
-(define-fun dynamic_invariant1 ((temp___expr_155 Float32)
-  (temp___is_init_152 Bool) (temp___skip_constant_153 Bool)
-  (temp___do_toplevel_154 Bool)) Bool (=>
-                                      (or (= temp___is_init_152 true)
+(define-fun dynamic_invariant1 ((temp___expr_153 Float32)
+  (temp___is_init_150 Bool) (temp___skip_constant_151 Bool)
+  (temp___do_toplevel_152 Bool)) Bool (=>
+                                      (or (= temp___is_init_150 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_155) (fp.isNaN temp___expr_155)))))
+                                      (not (or (fp.isInfinite temp___expr_153) (fp.isNaN temp___expr_153)))))
 
-(define-fun dynamic_invariant2 ((temp___expr_179 Int)
-  (temp___is_init_176 Bool) (temp___skip_constant_177 Bool)
-  (temp___do_toplevel_178 Bool)) Bool (=>
-                                      (or (= temp___is_init_176 true)
+(define-fun dynamic_invariant2 ((temp___expr_177 Int)
+  (temp___is_init_174 Bool) (temp___skip_constant_175 Bool)
+  (temp___do_toplevel_176 Bool)) Bool (=>
+                                      (or (= temp___is_init_174 true)
                                       (<= 0 2147483647)) (in_range2
-                                      temp___expr_179)))
+                                      temp___expr_177)))
 
 (declare-fun target () (Array Int us_rep2))
-
-;; H
-  (assert (is_valid_target__function_guard (is_valid_target target) target))
 
 ;; H
   (assert

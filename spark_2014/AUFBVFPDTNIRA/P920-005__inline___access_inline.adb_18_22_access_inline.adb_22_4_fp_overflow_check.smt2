@@ -223,27 +223,6 @@
   (! (=> (in_range2 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
 
-(declare-sort t_m_id 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 3)))
-
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq3 (t_m_id t_m_id) Bool)
-
-(declare-fun dummy3 () t_m_id)
-
-(declare-datatypes ()
-((t_m_id__ref (mk_t_m_id__ref (t_m_id__content t_m_id)))))
-(define-fun t_m_id__ref___projection ((a t_m_id__ref)) t_m_id (t_m_id__content
-                                                              a))
-
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int t_angle_360))))))
 (declare-fun slide ((Array Int t_angle_360) Int Int) (Array Int t_angle_360))
@@ -286,7 +265,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq5 ((a (Array Int t_angle_360)) (a__first Int)
+(define-fun bool_eq4 ((a (Array Int t_angle_360)) (a__first Int)
   (a__last Int) (b (Array Int t_angle_360)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -305,7 +284,7 @@
   (assert
   (forall ((a (Array Int t_angle_360)) (b (Array Int t_angle_360)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq5 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq4 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -314,25 +293,6 @@
   (=> (and (<= a__first temp___idx_132) (<= temp___idx_132 a__last))
   (= (to_rep (select a temp___idx_132)) (to_rep
                                         (select b (+ (- b__first a__first) temp___idx_132)))))))))))
-
-(declare-sort t3b 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 3)))
-
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq4 (t3b t3b) Bool)
-
-(declare-fun dummy4 () t3b)
-
-(declare-datatypes () ((t3b__ref (mk_t3b__ref (t3b__content t3b)))))
-(define-fun t3b__ref___projection ((a t3b__ref)) t3b (t3b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
@@ -359,15 +319,7 @@
                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000111 #b01101000000000000000000)))
                                       (in_range2 temp___expr_178)))
 
-(define-fun dynamic_invariant2 ((temp___expr_184 Int)
-  (temp___is_init_181 Bool) (temp___skip_constant_182 Bool)
-  (temp___do_toplevel_183 Bool)) Bool (=>
-                                      (or (= temp___is_init_181 true)
-                                      (<= 0 3)) (in_range3 temp___expr_184)))
-
 (declare-fun angle () (Array Int t_angle_360))
-
-(declare-fun o () (Array Int t_angle_360))
 
 (declare-fun result () (Array Int t_angle_360))
 
@@ -377,15 +329,12 @@
   (assert (in_range1 c_2pi_in_degrees))
 
 ;; H
-  (assert
-  (= o (access_inline__angle__aggregate_def
-       (fp #b0 #b00000000 #b00000000000000000000000))))
-
-;; H
   (assert (= result angle))
 
 ;; H
-  (assert (= angle1 o))
+  (assert
+  (= angle1 (access_inline__angle__aggregate_def
+            (fp #b0 #b00000000 #b00000000000000000000000))))
 
 ;; H
   (assert (= (to_rep (select angle1 3)) c6b))

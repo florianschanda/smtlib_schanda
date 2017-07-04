@@ -605,7 +605,7 @@
 
 (declare-fun i () Int)
 
-(declare-fun temp___238 () Int)
+(declare-fun temp___228 () Int)
 
 (declare-fun o () Int)
 
@@ -655,10 +655,10 @@
   (assert (= o6 (to_rep1 o5)))
 
 ;; H
-  (assert (and (= temp___238 (+ i 1)) (in_range1 (+ i 1))))
+  (assert (and (= temp___228 (+ i 1)) (in_range1 (+ i 1))))
 
 (assert
 ;; WP_parameter_def
  ;; File "step_function.ads", line 42, characters 0-0
-  (not (<= 0 temp___238)))
+  (not (<= 0 temp___228)))
 (check-sat)

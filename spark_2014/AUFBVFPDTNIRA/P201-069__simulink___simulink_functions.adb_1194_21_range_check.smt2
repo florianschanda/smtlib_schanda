@@ -266,10 +266,8 @@
   (forall ((left1 Float64) (right1 Float64))
   (! (=>
      (and (dynamic_invariant1 left1 true true true) (dynamic_invariant1
-     right1 true true true))
-     (let ((result (atan2__2 left1 right1)))
-     (=> (atan2__2__function_guard result left1 right1) (dynamic_invariant1
-     result true false true)))) :pattern ((atan2__2 left1 right1)) )))
+     right1 true true true)) (dynamic_invariant1 (atan2__2 left1 right1) true
+     false true)) :pattern ((atan2__2 left1 right1)) )))
 
 (declare-fun o () Float64)
 
@@ -284,11 +282,8 @@
 ;; H
   (assert
   (and
-  (and
   (= o (atan2__2 ((_ to_fp 11 53) RNE left) ((_ to_fp 11 53) RNE right)))
-  (atan2__2__function_guard o ((_ to_fp 11 53) RNE left)
-  ((_ to_fp 11 53) RNE right))) (not (or (fp.isInfinite o) (fp.isNaN 
-  o)))))
+  (not (or (fp.isInfinite o) (fp.isNaN o)))))
 
 ;; H
   (assert (= o1 ((_ to_fp 8 24) RNE o)))

@@ -286,13 +286,9 @@
 ;; fib__def_axiom
   (assert
   (forall ((n1 Int))
-  (! (=>
-     (and (dynamic_invariant n1 true true true) (fib__function_guard 
-     (fib n1) n1))
-     (and (fib__function_guard (fib (- n1 1)) (- n1 1))
-     (and (fib__function_guard (fib (- n1 2)) (- n1 2))
+  (! (=> (dynamic_invariant n1 true true true)
      (= (fib n1) (ite (or (= n1 0) (= n1 1)) n1
-                 (+ (fib (- n1 1)) (fib (- n1 2)))))))) :pattern ((fib n1)) )))
+                 (+ (fib (- n1 1)) (fib (- n1 2)))))) :pattern ((fib n1)) )))
 
 (define-fun dynamic_invariant2 ((temp___expr_51 Float32)
   (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
