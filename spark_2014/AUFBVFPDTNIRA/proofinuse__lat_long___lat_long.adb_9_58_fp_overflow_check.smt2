@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(define-fun is_not_nan ((x Float32)) Bool (or
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
-                                          (fp.isInfinite  x)))
-
 (declare-fun of_int (RoundingMode Int) Float32)
 
 (declare-fun to_int1 (RoundingMode Float32) Int)
@@ -101,29 +97,8 @@
 
 (define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
 
-(define-fun bool_lt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt x y) true false))
-
-(define-fun bool_le ((x Float32)
-  (y Float32)) Bool (ite (fp.leq x y) true false))
-
-(define-fun bool_gt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt y x) true false))
-
-(define-fun bool_ge ((x Float32)
-  (y Float32)) Bool (ite (fp.leq y x) true false))
-
-(define-fun bool_eq ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
-
-(define-fun bool_neq ((x Float32)
-  (y Float32)) Bool (ite (not (fp.eq x y)) true false))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort tfloat_with_approxB 0)
-
-(define-fun bool_eq1 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq (tfloat_with_approxB tfloat_with_approxB) Bool)
 
@@ -143,9 +118,6 @@
   (tfloat_with_approxB__content a))
 
 (declare-sort float_with_approx 0)
-
-(define-fun bool_eq2 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq1 (float_with_approx float_with_approx) Bool)
 
@@ -224,9 +196,6 @@
                                          (fp.leq (fp.neg (fp #b0 #b10000101 #b00101100000000000000000)) x)
                                          (fp.leq x (fp #b0 #b10000101 #b00101100000000000000000)))))
 
-(define-fun bool_eq3 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
-
 (declare-fun user_eq2 (latitude latitude) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE2 (Float32) us_image)
@@ -268,9 +237,6 @@
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b10000110 #b01100111111111111111111)) x)
                                          (fp.leq x (fp #b0 #b10000110 #b01101000000000000000000)))))
-
-(define-fun bool_eq4 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq3 (longitude longitude) Bool)
 
@@ -322,7 +288,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_fields (us_split_fields1
                                                              a))
 
-(define-fun bool_eq5 ((a us_rep)
+(define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (= (to_rep
                            (rec__lat_long__coordinates__lat
@@ -463,9 +429,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
 (declare-sort float 0)
-
-(define-fun bool_eq6 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq5 (float float) Bool)
 

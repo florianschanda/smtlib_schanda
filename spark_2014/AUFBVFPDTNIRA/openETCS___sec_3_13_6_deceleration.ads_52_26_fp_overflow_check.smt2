@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(define-fun is_not_nan ((x Float32)) Bool (or
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
-                                          (fp.isInfinite  x)))
-
 (declare-fun of_int (RoundingMode Int) Float32)
 
 (declare-fun to_int1 (RoundingMode Float32) Int)
@@ -101,29 +97,8 @@
 
 (define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
 
-(define-fun bool_lt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt x y) true false))
-
-(define-fun bool_le ((x Float32)
-  (y Float32)) Bool (ite (fp.leq x y) true false))
-
-(define-fun bool_gt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt y x) true false))
-
-(define-fun bool_ge ((x Float32)
-  (y Float32)) Bool (ite (fp.leq y x) true false))
-
-(define-fun bool_eq ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
-
-(define-fun bool_neq ((x Float32)
-  (y Float32)) Bool (ite (not (fp.eq x y)) true false))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort speed_t 0)
-
-(define-fun bool_eq1 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq (speed_t speed_t) Bool)
 
@@ -149,9 +124,6 @@
 
 (declare-sort tdeceleration_tB 0)
 
-(define-fun bool_eq2 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
-
 (declare-fun user_eq1 (tdeceleration_tB tdeceleration_tB) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Float32) us_image)
@@ -171,8 +143,6 @@
 (declare-sort distance_t 0)
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
-(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
 
@@ -203,9 +173,6 @@
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
-
-(define-fun bool_eq4 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq3 (deceleration_t deceleration_t) Bool)
 
@@ -293,9 +260,6 @@
 
 (declare-sort float 0)
 
-(define-fun bool_eq5 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
-
 (declare-fun user_eq4 (float float) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE4 (Float32) us_image)
@@ -323,8 +287,6 @@
 (declare-sort num_delimiters_range 0)
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
-
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
 
@@ -388,8 +350,6 @@
 
 (define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(define-fun bool_eq7 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
@@ -444,7 +404,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_fields (us_split_fields1
                                                              a))
 
-(define-fun bool_eq8 ((a us_rep)
+(define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (= (to_rep2
                            (rec__step_function__delimiter_entry__delimiter
@@ -562,7 +522,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v1 i) i) v1) :pattern ((select (singleton1 v1 i) i)) ))))
 
-(define-fun bool_eq9 ((a (Array Int us_rep)) (a__first Int) (a__last Int)
+(define-fun bool_eq1 ((a (Array Int us_rep)) (a__first Int) (a__last Int)
   (b (Array Int us_rep)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -573,7 +533,7 @@
                            (=>
                            (and (<= a__first temp___idx_132)
                            (<= temp___idx_132 a__last))
-                           (= (bool_eq8 (select a temp___idx_132)
+                           (= (bool_eq (select a temp___idx_132)
                               (select b (+ (- b__first a__first) temp___idx_132))) true))))
                       true false))
 
@@ -581,14 +541,14 @@
   (assert
   (forall ((a (Array Int us_rep)) (b (Array Int us_rep)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq9 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq1 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
   (forall ((temp___idx_132 Int))
   (=> (and (<= a__first temp___idx_132) (<= temp___idx_132 a__last))
-  (= (bool_eq8 (select a temp___idx_132)
+  (= (bool_eq (select a temp___idx_132)
      (select b (+ (- b__first a__first) temp___idx_132))) true))))))))
 
 (declare-fun dummy8 () (Array Int us_rep))
@@ -647,14 +607,14 @@
 (define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
                                                                 a))
 
-(define-fun bool_eq10 ((a us_rep1)
+(define-fun bool_eq2 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
                          (= (to_rep
                             (rec__step_function__step_function_t__number_of_delimiters
                             (us_split_fields3 a))) (to_rep
                                                    (rec__step_function__step_function_t__number_of_delimiters
                                                    (us_split_fields3 b))))
-                         (= (bool_eq9
+                         (= (bool_eq1
                             (rec__step_function__step_function_t__step
                             (us_split_fields3 a)) 0 10
                             (rec__step_function__step_function_t__step
@@ -754,9 +714,6 @@
                                                               v1 d1)) ))))
 
 (declare-sort speed_km_per_h_t 0)
-
-(define-fun bool_eq11 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq10 (speed_km_per_h_t speed_km_per_h_t) Bool)
 

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(define-fun is_not_nan ((x Float32)) Bool (or
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
-                                          (fp.isInfinite  x)))
-
 (declare-fun of_int (RoundingMode Int) Float32)
 
 (declare-fun to_int1 (RoundingMode Float32) Int)
@@ -101,31 +97,11 @@
 
 (define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
 
-(define-fun bool_lt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt x y) true false))
-
-(define-fun bool_le ((x Float32)
-  (y Float32)) Bool (ite (fp.leq x y) true false))
-
-(define-fun bool_gt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt y x) true false))
-
-(define-fun bool_ge ((x Float32)
-  (y Float32)) Bool (ite (fp.leq y x) true false))
-
-(define-fun bool_eq ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
-
-(define-fun bool_neq ((x Float32)
-  (y Float32)) Bool (ite (not (fp.eq x y)) true false))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort integer 0)
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
-
-(define-fun bool_eq1 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
 
@@ -161,9 +137,6 @@
                                                             (of_rep x))) )))
 
 (declare-sort float 0)
-
-(define-fun bool_eq2 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq1 (float float) Bool)
 
@@ -225,7 +198,7 @@
 
 (define-fun us_rep_2__projection ((a us_rep)) Int (attr__tag a))
 
-(define-fun bool_eq3 ((a us_rep)
+(define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (and
                         (= (rec__classwide__t__z (us_split_fields1 a)) 
@@ -518,7 +491,7 @@
                                          (rec__ext__ (us_split_fields1 r))))
                                          (attr__tag r)))
 
-(define-fun bool_eq4 ((a us_rep1)
+(define-fun bool_eq1 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
                          (and
                          (and

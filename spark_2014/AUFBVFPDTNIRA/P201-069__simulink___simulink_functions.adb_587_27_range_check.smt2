@@ -146,10 +146,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(define-fun is_not_nan ((x Float32)) Bool (or
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
-                                          (fp.isInfinite  x)))
-
 (declare-fun of_int (RoundingMode Int) Float32)
 
 (declare-fun to_int2 (RoundingMode Float32) Int)
@@ -456,29 +452,8 @@
 
 (define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
 
-(define-fun bool_lt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt x y) true false))
-
-(define-fun bool_le ((x Float32)
-  (y Float32)) Bool (ite (fp.leq x y) true false))
-
-(define-fun bool_gt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt y x) true false))
-
-(define-fun bool_ge ((x Float32)
-  (y Float32)) Bool (ite (fp.leq y x) true false))
-
-(define-fun bool_eq ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
-
-(define-fun bool_neq ((x Float32)
-  (y Float32)) Bool (ite (not (fp.eq x y)) true false))
-
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float32)))))
 (declare-sort float 0)
-
-(define-fun bool_eq1 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq (float float) Bool)
 
@@ -526,9 +501,6 @@
 (declare-sort unsigned_16 0)
 
 (declare-fun attr__ATTRIBUTE_MODULUS () (_ BitVec 16))
-
-(define-fun bool_eq2 ((x (_ BitVec 16))
-  (y (_ BitVec 16))) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE1 ((_ BitVec 16)) us_image)
 

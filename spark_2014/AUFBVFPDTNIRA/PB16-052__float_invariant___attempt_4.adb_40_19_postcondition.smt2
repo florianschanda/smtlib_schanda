@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(define-fun is_not_nan ((x Float64)) Bool (or
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
-                                          (fp.isInfinite  x)))
-
 (declare-fun of_int (RoundingMode Int) Float64)
 
 (declare-fun to_int1 (RoundingMode Float64) Int)
@@ -101,29 +97,8 @@
 
 (define-fun neq ((x Float64) (y Float64)) Bool (not (fp.eq x y)))
 
-(define-fun bool_lt ((x Float64)
-  (y Float64)) Bool (ite (fp.lt x y) true false))
-
-(define-fun bool_le ((x Float64)
-  (y Float64)) Bool (ite (fp.leq x y) true false))
-
-(define-fun bool_gt ((x Float64)
-  (y Float64)) Bool (ite (fp.lt y x) true false))
-
-(define-fun bool_ge ((x Float64)
-  (y Float64)) Bool (ite (fp.leq y x) true false))
-
-(define-fun bool_eq ((x Float64)
-  (y Float64)) Bool (ite (fp.eq x y) true false))
-
-(define-fun bool_neq ((x Float64)
-  (y Float64)) Bool (ite (not (fp.eq x y)) true false))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
 (declare-sort tfloat64B 0)
-
-(define-fun bool_eq1 ((x Float64)
-  (y Float64)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq (tfloat64B tfloat64B) Bool)
 
@@ -141,9 +116,6 @@
   (tfloat64B__content a))
 
 (declare-sort float64 0)
-
-(define-fun bool_eq2 ((x Float64)
-  (y Float64)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq1 (float64 float64) Bool)
 
@@ -170,8 +142,6 @@
 (declare-sort frame 0)
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 25000)))
-
-(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
 
@@ -200,9 +170,6 @@
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) x)
                                          (fp.leq x (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))))
-
-(define-fun bool_eq4 ((x Float64)
-  (y Float64)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq3 (ratio_t ratio_t) Bool)
 

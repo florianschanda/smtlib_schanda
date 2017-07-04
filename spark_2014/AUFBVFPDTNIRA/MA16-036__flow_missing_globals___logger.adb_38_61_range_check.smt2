@@ -146,10 +146,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(define-fun is_not_nan ((x Float64)) Bool (or
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
-                                          (fp.isInfinite  x)))
-
 (declare-fun of_int (RoundingMode Int) Float64)
 
 (declare-fun to_int2 (RoundingMode Float64) Int)
@@ -195,24 +191,6 @@
 
 (define-fun neq ((x Float64) (y Float64)) Bool (not (fp.eq x y)))
 
-(define-fun bool_lt ((x Float64)
-  (y Float64)) Bool (ite (fp.lt x y) true false))
-
-(define-fun bool_le ((x Float64)
-  (y Float64)) Bool (ite (fp.leq x y) true false))
-
-(define-fun bool_gt ((x Float64)
-  (y Float64)) Bool (ite (fp.lt y x) true false))
-
-(define-fun bool_ge ((x Float64)
-  (y Float64)) Bool (ite (fp.leq y x) true false))
-
-(define-fun bool_eq ((x Float64)
-  (y Float64)) Bool (ite (fp.eq x y) true false))
-
-(define-fun bool_neq ((x Float64)
-  (y Float64)) Bool (ite (not (fp.eq x y)) true false))
-
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float64)))))
 (define-fun to_int3 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -227,9 +205,6 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort long_float 0)
-
-(define-fun bool_eq1 ((x Float64)
-  (y Float64)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq (long_float long_float) Bool)
 
@@ -270,9 +245,6 @@
 (declare-sort unsigned_16 0)
 
 (declare-fun attr__ATTRIBUTE_MODULUS () (_ BitVec 16))
-
-(define-fun bool_eq2 ((x (_ BitVec 16))
-  (y (_ BitVec 16))) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE2 ((_ BitVec 16)) us_image)
 
@@ -340,7 +312,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_fields (us_split_fields1
                                                              a))
 
-(define-fun bool_eq3 ((a us_rep)
+(define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (and
                         (and
@@ -490,9 +462,6 @@
 
 (define-fun in_range_int ((x Int)) Bool (and (<= 0 x) (<= x 599)))
 
-(define-fun bool_eq4 ((x (_ BitVec 16))
-  (y (_ BitVec 16))) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE3 ((_ BitVec 16)) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
@@ -588,7 +557,7 @@
   (forall ((i (_ BitVec 16)))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq5 ((a (Array (_ BitVec 16) us_rep))
+(define-fun bool_eq1 ((a (Array (_ BitVec 16) us_rep))
   (a__first (_ BitVec 16)) (a__last (_ BitVec 16))
   (b (Array (_ BitVec 16) us_rep)) (b__first (_ BitVec 16))
   (b__last (_ BitVec 16))) Bool (ite (and
@@ -600,7 +569,7 @@
                                      (=>
                                      (and (bvule a__first temp___idx_132)
                                      (bvule temp___idx_132 a__last))
-                                     (= (bool_eq3 (select a temp___idx_132)
+                                     (= (bool_eq (select a temp___idx_132)
                                         (select b (bvadd (bvsub b__first a__first) temp___idx_132))) true))))
                                 true false))
 
@@ -609,7 +578,7 @@
   (forall ((a (Array (_ BitVec 16) us_rep)) (b (Array (_ BitVec 16) us_rep)))
   (forall ((a__first (_ BitVec 16)) (a__last (_ BitVec 16))
   (b__first (_ BitVec 16)) (b__last (_ BitVec 16)))
-  (=> (= (bool_eq5 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq1 b b__first b__last a a__first a__last) true)
   (and
   (ite (bvule a__first a__last)
   (and (bvule b__first b__last)
@@ -617,7 +586,7 @@
   (bvugt b__first b__last))
   (forall ((temp___idx_132 (_ BitVec 16)))
   (=> (and (bvule a__first temp___idx_132) (bvule temp___idx_132 a__last))
-  (= (bool_eq3 (select a temp___idx_132)
+  (= (bool_eq (select a temp___idx_132)
      (select b (bvadd (bvsub b__first a__first) temp___idx_132))) true))))))))
 
 (declare-sort t 0)
@@ -692,8 +661,8 @@
   (assert
   (forall ((a (Array (_ BitVec 16) us_rep))) (<= 0 (object__alignment1 a))))
 
-(define-fun bool_eq6 ((x us_t)
-  (y us_t)) Bool (bool_eq5 (elts x) (to_rep2 (first (rt x)))
+(define-fun bool_eq2 ((x us_t)
+  (y us_t)) Bool (bool_eq1 (elts x) (to_rep2 (first (rt x)))
                  (to_rep2 (last (rt x))) (elts y) (to_rep2 (first (rt y)))
                  (to_rep2 (last (rt y)))))
 
@@ -713,9 +682,6 @@
                                                (bvule x ((_ int2bv 16) 599))))
 
 (define-fun in_range_int1 ((x Int)) Bool (and (<= 0 x) (<= x 599)))
-
-(define-fun bool_eq7 ((x (_ BitVec 16))
-  (y (_ BitVec 16))) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE4 ((_ BitVec 16)) us_image)
 
@@ -796,11 +762,11 @@
 (define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
                                                                 a))
 
-(define-fun bool_eq8 ((a us_rep1)
+(define-fun bool_eq3 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
                          (and
                          (and
-                         (= (bool_eq5
+                         (= (bool_eq1
                             (rec__logger__log_database__data
                             (us_split_fields3 a)) ((_ int2bv 16) 0)
                             ((_ int2bv 16) 599)
@@ -925,8 +891,6 @@
 
 (define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(define-fun bool_eq9 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
@@ -1042,9 +1006,6 @@
 (define-fun dynamic_property_int ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
-(define-fun bool_eq10 ((x (_ BitVec 16))
-  (y (_ BitVec 16))) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE6 ((_ BitVec 16)) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
@@ -1134,8 +1095,8 @@
   (assert
   (forall ((a (Array (_ BitVec 16) us_rep))) (<= 0 (object__alignment4 a))))
 
-(define-fun bool_eq11 ((x us_t1)
-  (y us_t1)) Bool (bool_eq5 (elts1 x) (to_rep2 (first2 (rt1 x)))
+(define-fun bool_eq4 ((x us_t1)
+  (y us_t1)) Bool (bool_eq1 (elts1 x) (to_rep2 (first2 (rt1 x)))
                   (to_rep2 (last2 (rt1 x))) (elts1 y)
                   (to_rep2 (first2 (rt1 y))) (to_rep2 (last2 (rt1 y)))))
 
@@ -1180,9 +1141,6 @@
 
 (define-fun dynamic_property_int1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
-
-(define-fun bool_eq12 ((x (_ BitVec 16))
-  (y (_ BitVec 16))) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE7 ((_ BitVec 16)) us_image)
 
@@ -1271,8 +1229,8 @@
   (assert
   (forall ((a (Array (_ BitVec 16) us_rep))) (<= 0 (object__alignment5 a))))
 
-(define-fun bool_eq13 ((x us_t2)
-  (y us_t2)) Bool (bool_eq5 (elts2 x) (to_rep2 (first4 (rt2 x)))
+(define-fun bool_eq5 ((x us_t2)
+  (y us_t2)) Bool (bool_eq1 (elts2 x) (to_rep2 (first4 (rt2 x)))
                   (to_rep2 (last4 (rt2 x))) (elts2 y)
                   (to_rep2 (first4 (rt2 y))) (to_rep2 (last4 (rt2 y)))))
 
@@ -1297,9 +1255,6 @@
 
 (define-fun dynamic_property_int2 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
-
-(define-fun bool_eq14 ((x (_ BitVec 16))
-  (y (_ BitVec 16))) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE8 ((_ BitVec 16)) us_image)
 
@@ -1388,8 +1343,8 @@
   (assert
   (forall ((a (Array (_ BitVec 16) us_rep))) (<= 0 (object__alignment6 a))))
 
-(define-fun bool_eq15 ((x us_t3)
-  (y us_t3)) Bool (bool_eq5 (elts3 x) (to_rep2 (first6 (rt3 x)))
+(define-fun bool_eq6 ((x us_t3)
+  (y us_t3)) Bool (bool_eq1 (elts3 x) (to_rep2 (first6 (rt3 x)))
                   (to_rep2 (last6 (rt3 x))) (elts3 y)
                   (to_rep2 (first6 (rt3 y))) (to_rep2 (last6 (rt3 y)))))
 
@@ -1406,9 +1361,6 @@
 
 (define-fun dynamic_property_int3 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
-
-(define-fun bool_eq16 ((x (_ BitVec 16))
-  (y (_ BitVec 16))) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE9 ((_ BitVec 16)) us_image)
 
@@ -1498,8 +1450,8 @@
   (assert
   (forall ((a (Array (_ BitVec 16) us_rep))) (<= 0 (object__alignment7 a))))
 
-(define-fun bool_eq17 ((x us_t4)
-  (y us_t4)) Bool (bool_eq5 (elts4 x) (to_rep2 (first8 (rt4 x)))
+(define-fun bool_eq7 ((x us_t4)
+  (y us_t4)) Bool (bool_eq1 (elts4 x) (to_rep2 (first8 (rt4 x)))
                   (to_rep2 (last8 (rt4 x))) (elts4 y)
                   (to_rep2 (first8 (rt4 y))) (to_rep2 (last8 (rt4 y)))))
 

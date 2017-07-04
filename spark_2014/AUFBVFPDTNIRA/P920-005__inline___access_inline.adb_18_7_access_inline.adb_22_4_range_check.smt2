@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(define-fun is_not_nan ((x Float32)) Bool (or
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
-                                          (fp.isInfinite  x)))
-
 (declare-fun of_int (RoundingMode Int) Float32)
 
 (declare-fun to_int1 (RoundingMode Float32) Int)
@@ -101,29 +97,8 @@
 
 (define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
 
-(define-fun bool_lt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt x y) true false))
-
-(define-fun bool_le ((x Float32)
-  (y Float32)) Bool (ite (fp.leq x y) true false))
-
-(define-fun bool_gt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt y x) true false))
-
-(define-fun bool_ge ((x Float32)
-  (y Float32)) Bool (ite (fp.leq y x) true false))
-
-(define-fun bool_eq ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
-
-(define-fun bool_neq ((x Float32)
-  (y Float32)) Bool (ite (not (fp.eq x y)) true false))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort tt_float32B 0)
-
-(define-fun bool_eq1 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq (tt_float32B tt_float32B) Bool)
 
@@ -147,9 +122,6 @@
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111101110)) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111101110)))))
-
-(define-fun bool_eq2 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq1 (t_float32 t_float32) Bool)
 
@@ -184,9 +156,6 @@
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000111 #b01101000000000000000000)))))
-
-(define-fun bool_eq3 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq2 (t_angle_360 t_angle_360) Bool)
 
@@ -265,8 +234,8 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq4 ((a (Array Int t_angle_360)) (a__first Int)
-  (a__last Int) (b (Array Int t_angle_360)) (b__first Int)
+(define-fun bool_eq ((a (Array Int t_angle_360)) (a__first Int) (a__last Int)
+  (b (Array Int t_angle_360)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
                            (and (<= b__first b__last)
@@ -284,7 +253,7 @@
   (assert
   (forall ((a (Array Int t_angle_360)) (b (Array Int t_angle_360)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq4 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))

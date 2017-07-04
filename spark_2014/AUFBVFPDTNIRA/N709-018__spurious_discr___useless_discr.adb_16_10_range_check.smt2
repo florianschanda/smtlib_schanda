@@ -53,8 +53,6 @@
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
-(define-fun bool_eq ((x Int) (y Int)) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
@@ -92,8 +90,6 @@
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 3)))
 
-(define-fun bool_eq1 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
@@ -122,10 +118,6 @@
 
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
-
-(define-fun is_not_nan ((x Float32)) Bool (or
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
-                                          (fp.isInfinite  x)))
 
 (declare-fun of_int1 (RoundingMode Int) Float32)
 
@@ -172,29 +164,8 @@
 
 (define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
 
-(define-fun bool_lt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt x y) true false))
-
-(define-fun bool_le ((x Float32)
-  (y Float32)) Bool (ite (fp.leq x y) true false))
-
-(define-fun bool_gt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt y x) true false))
-
-(define-fun bool_ge ((x Float32)
-  (y Float32)) Bool (ite (fp.leq y x) true false))
-
-(define-fun bool_eq2 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
-
-(define-fun bool_neq ((x Float32)
-  (y Float32)) Bool (ite (not (fp.eq x y)) true false))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort float 0)
-
-(define-fun bool_eq3 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq2 (float float) Bool)
 
@@ -311,7 +282,7 @@
                                                            (us_split_discrs1
                                                            a))) 2))))
 
-(define-fun bool_eq4 ((a us_rep)
+(define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (and
                         (and

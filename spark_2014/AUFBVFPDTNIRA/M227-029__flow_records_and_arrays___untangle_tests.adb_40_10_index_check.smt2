@@ -40,8 +40,6 @@
 
 (define-fun in_range ((x Int)) Bool (and (<= 1 x) (<= x 2147483647)))
 
-(define-fun bool_eq ((x Int) (y Int)) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
@@ -79,10 +77,6 @@
 
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
-
-(define-fun is_not_nan ((x Float32)) Bool (or
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
-                                          (fp.isInfinite  x)))
 
 (declare-fun of_int (RoundingMode Int) Float32)
 
@@ -129,29 +123,8 @@
 
 (define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
 
-(define-fun bool_lt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt x y) true false))
-
-(define-fun bool_le ((x Float32)
-  (y Float32)) Bool (ite (fp.leq x y) true false))
-
-(define-fun bool_gt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt y x) true false))
-
-(define-fun bool_ge ((x Float32)
-  (y Float32)) Bool (ite (fp.leq y x) true false))
-
-(define-fun bool_eq1 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
-
-(define-fun bool_neq ((x Float32)
-  (y Float32)) Bool (ite (not (fp.eq x y)) true false))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort float 0)
-
-(define-fun bool_eq2 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq1 (float float) Bool)
 
@@ -201,7 +174,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_fields (us_split_fields1
                                                              a))
 
-(define-fun bool_eq3 ((a us_rep)
+(define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (and
                         (and
@@ -362,7 +335,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq4 ((a (Array Int us_rep)) (a__first Int) (a__last Int)
+(define-fun bool_eq1 ((a (Array Int us_rep)) (a__first Int) (a__last Int)
   (b (Array Int us_rep)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -373,7 +346,7 @@
                            (=>
                            (and (<= a__first temp___idx_132)
                            (<= temp___idx_132 a__last))
-                           (= (bool_eq3 (select a temp___idx_132)
+                           (= (bool_eq (select a temp___idx_132)
                               (select b (+ (- b__first a__first) temp___idx_132))) true))))
                       true false))
 
@@ -381,14 +354,14 @@
   (assert
   (forall ((a (Array Int us_rep)) (b (Array Int us_rep)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq4 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq1 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
   (forall ((temp___idx_132 Int))
   (=> (and (<= a__first temp___idx_132) (<= temp___idx_132 a__last))
-  (= (bool_eq3 (select a temp___idx_132)
+  (= (bool_eq (select a temp___idx_132)
      (select b (+ (- b__first a__first) temp___idx_132))) true))))))))
 
 (declare-fun dummy3 () (Array Int us_rep))
@@ -447,14 +420,14 @@
 (define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
                                                                 a))
 
-(define-fun bool_eq5 ((a us_rep1)
+(define-fun bool_eq2 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
-                         (= (bool_eq4
+                         (= (bool_eq1
                             (rec__untangle_tests__triangle__vertices
                             (us_split_fields3 a)) 1 3
                             (rec__untangle_tests__triangle__vertices
                             (us_split_fields3 b)) 1 3) true)
-                         (= (bool_eq3
+                         (= (bool_eq
                             (rec__untangle_tests__triangle__normal
                             (us_split_fields3 a))
                             (rec__untangle_tests__triangle__normal
@@ -526,8 +499,6 @@
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 100)))
 
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
@@ -586,7 +557,7 @@
   (forall ((i Int))
   (! (= (select (singleton2 v i) i) v) :pattern ((select (singleton2 v i) i)) ))))
 
-(define-fun bool_eq7 ((a (Array Int us_rep1)) (a__first Int) (a__last Int)
+(define-fun bool_eq3 ((a (Array Int us_rep1)) (a__first Int) (a__last Int)
   (b (Array Int us_rep1)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -597,7 +568,7 @@
                            (=>
                            (and (<= a__first temp___idx_133)
                            (<= temp___idx_133 a__last))
-                           (= (bool_eq5 (select a temp___idx_133)
+                           (= (bool_eq2 (select a temp___idx_133)
                               (select b (+ (- b__first a__first) temp___idx_133))) true))))
                       true false))
 
@@ -605,14 +576,14 @@
   (assert
   (forall ((a (Array Int us_rep1)) (b (Array Int us_rep1)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq7 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq3 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
   (forall ((temp___idx_133 Int))
   (=> (and (<= a__first temp___idx_133) (<= temp___idx_133 a__last))
-  (= (bool_eq5 (select a temp___idx_133)
+  (= (bool_eq2 (select a temp___idx_133)
      (select b (+ (- b__first a__first) temp___idx_133))) true))))))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)

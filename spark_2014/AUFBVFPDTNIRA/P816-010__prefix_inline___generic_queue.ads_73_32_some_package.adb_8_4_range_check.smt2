@@ -41,8 +41,6 @@
 (define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
                                     (<= x 2147483647)))
 
-(define-fun bool_eq ((x Int) (y Int)) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
@@ -186,10 +184,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(define-fun is_not_nan ((x Float32)) Bool (or
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
-                                          (fp.isInfinite  x)))
-
 (declare-fun of_int (RoundingMode Int) Float32)
 
 (declare-fun to_int2 (RoundingMode Float32) Int)
@@ -235,24 +229,6 @@
 
 (define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
 
-(define-fun bool_lt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt x y) true false))
-
-(define-fun bool_le ((x Float32)
-  (y Float32)) Bool (ite (fp.leq x y) true false))
-
-(define-fun bool_gt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt y x) true false))
-
-(define-fun bool_ge ((x Float32)
-  (y Float32)) Bool (ite (fp.leq y x) true false))
-
-(define-fun bool_eq1 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
-
-(define-fun bool_neq ((x Float32)
-  (y Float32)) Bool (ite (not (fp.eq x y)) true false))
-
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float32)))))
 (define-fun to_int3 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -269,8 +245,6 @@
 (declare-sort natural 0)
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
-(define-fun bool_eq2 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
 
@@ -309,9 +283,6 @@
 (declare-sort index_type 0)
 
 (declare-fun attr__ATTRIBUTE_MODULUS () (_ BitVec 8))
-
-(define-fun bool_eq3 ((x (_ BitVec 8))
-  (y (_ BitVec 8))) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 ((_ BitVec 8)) us_image)
 
@@ -356,8 +327,6 @@
 
 (define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
 
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
@@ -400,9 +369,6 @@
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000010 #b01000000000000000000000)))))
-
-(define-fun bool_eq5 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq4 (element_type element_type) Bool)
 
@@ -487,7 +453,7 @@
   (forall ((i (_ BitVec 8)))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq6 ((a (Array (_ BitVec 8) element_type))
+(define-fun bool_eq ((a (Array (_ BitVec 8) element_type))
   (a__first (_ BitVec 8)) (a__last (_ BitVec 8))
   (b (Array (_ BitVec 8) element_type)) (b__first (_ BitVec 8))
   (b__last (_ BitVec 8))) Bool (ite (and
@@ -510,7 +476,7 @@
   (b (Array (_ BitVec 8) element_type)))
   (forall ((a__first (_ BitVec 8)) (a__last (_ BitVec 8))
   (b__first (_ BitVec 8)) (b__last (_ BitVec 8)))
-  (=> (= (bool_eq6 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq b b__first b__last a a__first a__last) true)
   (and
   (ite (bvule a__first a__last)
   (and (bvule b__first b__last)
@@ -599,7 +565,7 @@
 
 (define-fun us_rep_2__projection ((a us_rep)) Int (attr__tag a))
 
-(define-fun bool_eq7 ((a us_rep)
+(define-fun bool_eq1 ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (and
                         (and
@@ -610,7 +576,7 @@
                            (us_split_fields1 a))) (to_rep3
                                                   (rec__some_package__float_buffer__buffer_tag__mode
                                                   (us_split_fields1 b))))
-                        (= (bool_eq6
+                        (= (bool_eq
                            (rec__some_package__float_buffer__buffer_tag__buffer
                            (us_split_fields1 a)) ((_ int2bv 8) 0)
                            ((_ int2bv 8) 255)
@@ -818,8 +784,6 @@
 
 (define-fun in_range6 ((x Int)) Bool (and (<= 0 x) (<= x 256)))
 
-(define-fun bool_eq8 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
@@ -878,7 +842,7 @@
   (forall ((i Int))
   (! (= (select (singleton2 v i) i) v) :pattern ((select (singleton2 v i) i)) ))))
 
-(define-fun bool_eq9 ((a (Array Int element_type)) (a__first Int)
+(define-fun bool_eq2 ((a (Array Int element_type)) (a__first Int)
   (a__last Int) (b (Array Int element_type)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -897,7 +861,7 @@
   (assert
   (forall ((a (Array Int element_type)) (b (Array Int element_type)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq9 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq2 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -974,8 +938,8 @@
   (assert
   (forall ((a (Array Int element_type))) (<= 0 (object__alignment2 a))))
 
-(define-fun bool_eq10 ((x us_t)
-  (y us_t)) Bool (bool_eq9 (elts x) (to_rep (first (rt x)))
+(define-fun bool_eq3 ((x us_t)
+  (y us_t)) Bool (bool_eq2 (elts x) (to_rep (first (rt x)))
                  (to_rep (last (rt x))) (elts y) (to_rep (first (rt y)))
                  (to_rep (last (rt y)))))
 

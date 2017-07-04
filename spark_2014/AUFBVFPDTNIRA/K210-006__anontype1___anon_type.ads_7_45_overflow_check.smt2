@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(define-fun is_not_nan ((x Float32)) Bool (or
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
-                                          (fp.isInfinite  x)))
-
 (declare-fun of_int (RoundingMode Int) Float32)
 
 (declare-fun to_int1 (RoundingMode Float32) Int)
@@ -101,31 +97,11 @@
 
 (define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
 
-(define-fun bool_lt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt x y) true false))
-
-(define-fun bool_le ((x Float32)
-  (y Float32)) Bool (ite (fp.leq x y) true false))
-
-(define-fun bool_gt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt y x) true false))
-
-(define-fun bool_ge ((x Float32)
-  (y Float32)) Bool (ite (fp.leq y x) true false))
-
-(define-fun bool_eq ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
-
-(define-fun bool_neq ((x Float32)
-  (y Float32)) Bool (ite (not (fp.eq x y)) true false))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort integer 0)
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
-
-(define-fun bool_eq1 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
 
@@ -179,8 +155,6 @@
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
-(define-fun bool_eq2 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
@@ -208,8 +182,6 @@
 
 (define-fun in_range3 ((x Int)) Bool (and (<= (- 10000) x) (<= x 10000)))
 
-(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
@@ -236,8 +208,6 @@
 
 (define-fun in_range4 ((x Int)) Bool (and (<= (- 10000) x) (<= x 10000)))
 
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
@@ -263,8 +233,6 @@
 (declare-sort character 0)
 
 (define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 255)))
-
-(define-fun bool_eq5 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
 
@@ -343,7 +311,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq6 ((a (Array Int character)) (a__first Int) (a__last Int)
+(define-fun bool_eq ((a (Array Int character)) (a__first Int) (a__last Int)
   (b (Array Int character)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -362,7 +330,7 @@
   (assert
   (forall ((a (Array Int character)) (b (Array Int character)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq6 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -380,7 +348,7 @@
   (forall ((a (Array Int character)) (b (Array Int character)))
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq6 a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq a a_first a_last b b_first b_last) true)) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -391,7 +359,7 @@
      (exists ((i Int) (j Int))
      (and (<= i a_last)
      (and (< j b_last)
-     (and (= (bool_eq6 a a_first i b b_first j) true)
+     (and (= (bool_eq a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
      (< (to_rep1 (select a (+ i 1))) (to_rep1 (select b (+ j 1))))))))))) :pattern (
@@ -405,7 +373,7 @@
      (exists ((i Int) (j Int))
      (and (<= i b_last)
      (and (< j a_last)
-     (and (= (bool_eq6 a a_first j b b_first i) true)
+     (and (= (bool_eq a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
      (< (to_rep1 (select b (+ i 1))) (to_rep1 (select a (+ j 1))))))))))) :pattern (
@@ -414,9 +382,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
 
 (declare-sort float 0)
-
-(define-fun bool_eq7 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq5 (float float) Bool)
 
@@ -494,7 +459,7 @@
   (forall ((i Int))
   (! (= (select (singleton2 v i) i) v) :pattern ((select (singleton2 v i) i)) ))))
 
-(define-fun bool_eq8 ((a (Array Int float)) (a__first Int) (a__last Int)
+(define-fun bool_eq1 ((a (Array Int float)) (a__first Int) (a__last Int)
   (b (Array Int float)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -513,7 +478,7 @@
   (assert
   (forall ((a (Array Int float)) (b (Array Int float)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq8 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq1 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -528,8 +493,6 @@
 (declare-sort tmy_array1D1 0)
 
 (define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(define-fun bool_eq9 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
 
@@ -589,7 +552,7 @@
   (forall ((i Int))
   (! (= (select (singleton3 v i) i) v) :pattern ((select (singleton3 v i) i)) ))))
 
-(define-fun bool_eq10 ((a (Array Int integer)) (a__first Int) (a__last Int)
+(define-fun bool_eq2 ((a (Array Int integer)) (a__first Int) (a__last Int)
   (b (Array Int integer)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -608,7 +571,7 @@
   (assert
   (forall ((a (Array Int integer)) (b (Array Int integer)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq10 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq2 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -626,7 +589,7 @@
   (forall ((a (Array Int integer)) (b (Array Int integer)))
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (! (= (= (compare1 a a_first a_last b b_first b_last) 0)
-     (= (bool_eq10 a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq2 a a_first a_last b b_first b_last) true)) :pattern (
   (compare1 a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -637,7 +600,7 @@
      (exists ((i Int) (j Int))
      (and (<= i a_last)
      (and (< j b_last)
-     (and (= (bool_eq10 a a_first i b b_first j) true)
+     (and (= (bool_eq2 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
      (< (to_rep (select a (+ i 1))) (to_rep (select b (+ j 1))))))))))) :pattern (
@@ -651,7 +614,7 @@
      (exists ((i Int) (j Int))
      (and (<= i b_last)
      (and (< j a_last)
-     (and (= (bool_eq10 a a_first j b b_first i) true)
+     (and (= (bool_eq2 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
      (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
@@ -662,8 +625,6 @@
 (declare-sort tmy_array2D1 0)
 
 (define-fun in_range7 ((x Int)) Bool (and (<= 1 x) (<= x 20)))
-
-(define-fun bool_eq11 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
 

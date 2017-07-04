@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(define-fun is_not_nan ((x Float32)) Bool (or
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
-                                          (fp.isInfinite  x)))
-
 (declare-fun of_int (RoundingMode Int) Float32)
 
 (declare-fun to_int1 (RoundingMode Float32) Int)
@@ -101,24 +97,6 @@
 
 (define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
 
-(define-fun bool_lt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt x y) true false))
-
-(define-fun bool_le ((x Float32)
-  (y Float32)) Bool (ite (fp.leq x y) true false))
-
-(define-fun bool_gt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt y x) true false))
-
-(define-fun bool_ge ((x Float32)
-  (y Float32)) Bool (ite (fp.leq y x) true false))
-
-(define-fun bool_eq ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
-
-(define-fun bool_neq ((x Float32)
-  (y Float32)) Bool (ite (not (fp.eq x y)) true false))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -133,9 +111,6 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort speed_t 0)
-
-(define-fun bool_eq1 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq (speed_t speed_t) Bool)
 
@@ -183,8 +158,6 @@
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(define-fun bool_eq2 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
@@ -221,9 +194,6 @@
                                                               (of_rep1 x))) )))
 
 (declare-sort speed_km_per_h_t 0)
-
-(define-fun bool_eq3 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq2 (speed_km_per_h_t speed_km_per_h_t) Bool)
 
@@ -290,7 +260,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_fields (us_split_fields1
                                                              a))
 
-(define-fun bool_eq4 ((a us_rep)
+(define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (= (to_rep1
                            (rec__deceleration_curve__braking_curve_entry__location
@@ -409,7 +379,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq5 ((a (Array Int us_rep)) (a__first Int) (a__last Int)
+(define-fun bool_eq1 ((a (Array Int us_rep)) (a__first Int) (a__last Int)
   (b (Array Int us_rep)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -420,7 +390,7 @@
                            (=>
                            (and (<= a__first temp___idx_132)
                            (<= temp___idx_132 a__last))
-                           (= (bool_eq4 (select a temp___idx_132)
+                           (= (bool_eq (select a temp___idx_132)
                               (select b (+ (- b__first a__first) temp___idx_132))) true))))
                       true false))
 
@@ -428,14 +398,14 @@
   (assert
   (forall ((a (Array Int us_rep)) (b (Array Int us_rep)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq5 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq1 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
   (forall ((temp___idx_132 Int))
   (=> (and (<= a__first temp___idx_132) (<= temp___idx_132 a__last))
-  (= (bool_eq4 (select a temp___idx_132)
+  (= (bool_eq (select a temp___idx_132)
      (select b (+ (- b__first a__first) temp___idx_132))) true))))))))
 
 (declare-fun dummy4 () (Array Int us_rep))
@@ -494,9 +464,9 @@
 (define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
                                                                 a))
 
-(define-fun bool_eq6 ((a us_rep1)
+(define-fun bool_eq2 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
-                         (= (bool_eq5
+                         (= (bool_eq1
                             (rec__deceleration_curve__braking_curve_t__curve
                             (us_split_fields3 a)) 0 1000
                             (rec__deceleration_curve__braking_curve_t__curve
@@ -591,7 +561,7 @@
 (define-fun us_rep_3__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
                                                                 a))
 
-(define-fun bool_eq7 ((a us_rep2)
+(define-fun bool_eq3 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
                          (and
                          (= (rec__deceleration_curve__target_t__supervise

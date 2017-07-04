@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(define-fun is_not_nan ((x Float32)) Bool (or
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
-                                          (fp.isInfinite  x)))
-
 (declare-fun of_int (RoundingMode Int) Float32)
 
 (declare-fun to_int1 (RoundingMode Float32) Int)
@@ -101,24 +97,6 @@
 
 (define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
 
-(define-fun bool_lt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt x y) true false))
-
-(define-fun bool_le ((x Float32)
-  (y Float32)) Bool (ite (fp.leq x y) true false))
-
-(define-fun bool_gt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt y x) true false))
-
-(define-fun bool_ge ((x Float32)
-  (y Float32)) Bool (ite (fp.leq y x) true false))
-
-(define-fun bool_eq ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
-
-(define-fun bool_neq ((x Float32)
-  (y Float32)) Bool (ite (not (fp.eq x y)) true false))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -137,8 +115,6 @@
 (define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
-(define-fun bool_eq1 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
@@ -156,9 +132,6 @@
 
 (declare-sort t 0)
 
-(define-fun bool_eq2 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
-
 (declare-fun user_eq1 (t t) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE2 (Float32) us_image)
@@ -175,9 +148,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
 (declare-sort ttB 0)
-
-(define-fun bool_eq3 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq2 (ttB ttB) Bool)
 
@@ -221,9 +191,6 @@
 (declare-fun eq (Float32 Float32) Bool)
 
 (declare-fun is_finite (Float32) Bool)
-
-(define-fun bool_eq4 ((x Float32)
-  (y Float32)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq3 (ttB ttB) Bool)
 

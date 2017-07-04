@@ -124,10 +124,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(define-fun is_not_nan ((x Float32)) Bool (or
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
-                                          (fp.isInfinite  x)))
-
 (declare-fun of_int (RoundingMode Int) Float32)
 
 (declare-fun to_int1 (RoundingMode Float32) Int)
@@ -173,24 +169,6 @@
 
 (define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
 
-(define-fun bool_lt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt x y) true false))
-
-(define-fun bool_le ((x Float32)
-  (y Float32)) Bool (ite (fp.leq x y) true false))
-
-(define-fun bool_gt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt y x) true false))
-
-(define-fun bool_ge ((x Float32)
-  (y Float32)) Bool (ite (fp.leq y x) true false))
-
-(define-fun bool_eq ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
-
-(define-fun bool_neq ((x Float32)
-  (y Float32)) Bool (ite (not (fp.eq x y)) true false))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -208,8 +186,6 @@
 
 (define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
-
-(define-fun bool_eq1 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
 
@@ -230,8 +206,6 @@
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 2147483647)))
 
-(define-fun bool_eq2 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
@@ -250,8 +224,6 @@
 (declare-sort character 0)
 
 (define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 255)))
-
-(define-fun bool_eq3 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
 
@@ -329,7 +301,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq4 ((a (Array Int character)) (a__first Int) (a__last Int)
+(define-fun bool_eq ((a (Array Int character)) (a__first Int) (a__last Int)
   (b (Array Int character)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -348,7 +320,7 @@
   (assert
   (forall ((a (Array Int character)) (b (Array Int character)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq4 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -366,7 +338,7 @@
   (forall ((a (Array Int character)) (b (Array Int character)))
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq4 a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq a a_first a_last b b_first b_last) true)) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -377,7 +349,7 @@
      (exists ((i Int) (j Int))
      (and (<= i a_last)
      (and (< j b_last)
-     (and (= (bool_eq4 a a_first i b b_first j) true)
+     (and (= (bool_eq a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
      (< (to_rep (select a (+ i 1))) (to_rep (select b (+ j 1))))))))))) :pattern (
@@ -391,7 +363,7 @@
      (exists ((i Int) (j Int))
      (and (<= i b_last)
      (and (< j a_last)
-     (and (= (bool_eq4 a a_first j b b_first i) true)
+     (and (= (bool_eq a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
      (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
@@ -481,8 +453,8 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment a))))
 
-(define-fun bool_eq5 ((x us_t)
-  (y us_t)) Bool (bool_eq4 (elts x) (to_rep1 (first (rt x)))
+(define-fun bool_eq1 ((x us_t)
+  (y us_t)) Bool (bool_eq (elts x) (to_rep1 (first (rt x)))
                  (to_rep1 (last (rt x))) (elts y) (to_rep1 (first (rt y)))
                  (to_rep1 (last (rt y)))))
 
@@ -502,8 +474,6 @@
 (declare-sort natural 0)
 
 (define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
-(define-fun bool_eq6 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
 
@@ -528,9 +498,6 @@
                                      temp___expr_33)))
 
 (declare-sort float 0)
-
-(define-fun bool_eq7 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq5 (float float) Bool)
 
@@ -580,9 +547,6 @@
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
-
-(define-fun bool_eq8 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq6 (positive_float positive_float) Bool)
 
@@ -634,9 +598,6 @@
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
-
-(define-fun bool_eq9 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq7 (nonnegative_float nonnegative_float) Bool)
 
@@ -730,9 +691,6 @@
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
 
-(define-fun bool_eq10 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
-
 (declare-fun user_eq8 (normalized2pi normalized2pi) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE8 (Float32) us_image)
@@ -783,7 +741,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_fields (us_split_fields1
                                                              a))
 
-(define-fun bool_eq11 ((a us_rep)
+(define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (= (to_rep5
                            (rec__spaces__angles__angle__theta
                            (us_split_fields1 a))) (to_rep5
@@ -910,7 +868,7 @@
 (define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
                                                                 a))
 
-(define-fun bool_eq12 ((a us_rep1)
+(define-fun bool_eq3 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
                          (= (to_rep2
                             (rec__spaces__positions__position__x
@@ -1030,14 +988,14 @@
 (define-fun us_rep_3__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
                                                                 a))
 
-(define-fun bool_eq13 ((a us_rep2)
+(define-fun bool_eq4 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
-                         (= (bool_eq12
+                         (= (bool_eq3
                             (rec__spaces__poses__pose__pos
                             (us_split_fields5 a))
                             (rec__spaces__poses__pose__pos
                             (us_split_fields5 b))) true)
-                         (= (bool_eq11
+                         (= (bool_eq2
                             (rec__spaces__poses__pose__ori
                             (us_split_fields5 a))
                             (rec__spaces__poses__pose__ori
@@ -1127,8 +1085,6 @@
 
 (define-fun in_range9 ((x Int)) Bool (and (<= 1 x) (<= x 1000)))
 
-(define-fun bool_eq14 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE9 (Int) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
@@ -1165,9 +1121,6 @@
                                                               (of_rep6 x))) )))
 
 (declare-sort unbounded_float 0)
-
-(define-fun bool_eq15 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq13 (unbounded_float unbounded_float) Bool)
 
@@ -1251,7 +1204,7 @@
   (forall ((i Int))
   (! (= (select (singleton2 v i) i) v) :pattern ((select (singleton2 v i) i)) ))))
 
-(define-fun bool_eq16 ((a (Array Int nonnegative_float)) (a__first Int)
+(define-fun bool_eq5 ((a (Array Int nonnegative_float)) (a__first Int)
   (a__last Int) (b (Array Int nonnegative_float)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -1271,7 +1224,7 @@
   (forall ((a (Array Int nonnegative_float))
   (b (Array Int nonnegative_float)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq16 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq5 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -1323,8 +1276,6 @@
 (declare-sort option 0)
 
 (define-fun in_range10 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
-
-(define-fun bool_eq17 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE11 (Int) us_image)
 
@@ -1400,7 +1351,7 @@
 (define-fun robot_iface__speed_option__angle__pred ((a us_rep3)) Bool (= 
   (to_rep8 (rec__robot_iface__speed_option__opt (us_split_discrs1 a))) 1))
 
-(define-fun bool_eq18 ((a us_rep3)
+(define-fun bool_eq6 ((a us_rep3)
   (b us_rep3)) Bool (ite (and
                          (and
                          (= (to_rep8
@@ -1526,7 +1477,7 @@
 (define-fun us_rep_7__projection ((a us_rep4)) us_split_fields8 (us_split_fields9
                                                                 a))
 
-(define-fun bool_eq19 ((a us_rep4)
+(define-fun bool_eq7 ((a us_rep4)
   (b us_rep4)) Bool (ite (and
                          (and
                          (and
@@ -1610,7 +1561,7 @@
                             (us_split_fields9 a))) (to_rep3
                                                    (rec__robot_iface__proxy__max_range
                                                    (us_split_fields9 b)))))
-                         (= (bool_eq16
+                         (= (bool_eq5
                             (rec__robot_iface__proxy__scans
                             (us_split_fields9 a)) 1 1000
                             (rec__robot_iface__proxy__scans
@@ -1628,7 +1579,7 @@
                             (us_split_fields9 a))) (to_rep7
                                                    (rec__robot_iface__proxy__yaw
                                                    (us_split_fields9 b)))))
-                         (= (bool_eq18
+                         (= (bool_eq6
                             (rec__robot_iface__proxy__speed
                             (us_split_fields9 a))
                             (rec__robot_iface__proxy__speed
@@ -2014,8 +1965,6 @@
 
 (define-fun in_range11 ((x Int)) Bool (and (<= (- 1) x) (<= x 1)))
 
-(define-fun bool_eq20 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE12 (Int) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check12 (us_image) Bool)
@@ -2071,10 +2020,10 @@
 (define-fun us_rep_8__projection ((a us_rep5)) us_split_fields10 (us_split_fields11
                                                                  a))
 
-(define-fun bool_eq21 ((a us_rep5)
+(define-fun bool_eq8 ((a us_rep5)
   (b us_rep5)) Bool (ite (and
                          (and
-                         (= (bool_eq11
+                         (= (bool_eq2
                             (rec__gaps__gap__bearing (us_split_fields11 a))
                             (rec__gaps__gap__bearing (us_split_fields11 b))) true)
                          (= (to_rep2
@@ -2180,14 +2129,14 @@
 (define-fun us_rep_9__projection ((a us_rep6)) us_split_fields12 (us_split_fields13
                                                                  a))
 
-(define-fun bool_eq22 ((a us_rep6)
+(define-fun bool_eq9 ((a us_rep6)
   (b us_rep6)) Bool (ite (and
-                         (= (bool_eq21
+                         (= (bool_eq8
                             (rec__valleys__valley__risinggap
                             (us_split_fields13 a))
                             (rec__valleys__valley__risinggap
                             (us_split_fields13 b))) true)
-                         (= (bool_eq21
+                         (= (bool_eq8
                             (rec__valleys__valley__othergap
                             (us_split_fields13 a))
                             (rec__valleys__valley__othergap
@@ -2258,8 +2207,6 @@
 (declare-sort option1 0)
 
 (define-fun in_range12 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
-
-(define-fun bool_eq23 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE13 (Int) us_image)
 
@@ -2335,7 +2282,7 @@
 (define-fun algorithm__valley_option__value__pred ((a us_rep7)) Bool (= 
   (to_rep10 (rec__algorithm__valley_option__opt (us_split_discrs3 a))) 1))
 
-(define-fun bool_eq24 ((a us_rep7)
+(define-fun bool_eq10 ((a us_rep7)
   (b us_rep7)) Bool (ite (and
                          (= (to_rep10
                             (rec__algorithm__valley_option__opt
@@ -2343,7 +2290,7 @@
                                                    (rec__algorithm__valley_option__opt
                                                    (us_split_discrs3 b))))
                          (=> (algorithm__valley_option__value__pred a)
-                         (= (bool_eq22
+                         (= (bool_eq9
                             (rec__algorithm__valley_option__value
                             (us_split_fields15 a))
                             (rec__algorithm__valley_option__value
@@ -2425,8 +2372,6 @@
 
 (define-fun in_range13 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(define-fun bool_eq25 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE14 (Int) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check14 (us_image) Bool)
@@ -2501,7 +2446,7 @@
 (define-fun us_rep_14__projection ((a us_rep8)) us_split_fields16 (us_split_fields17
                                                                   a))
 
-(define-fun bool_eq26 ((a us_rep8)
+(define-fun bool_eq11 ((a us_rep8)
   (b us_rep8)) Bool (ite (and
                          (= (to_rep11
                             (rec__algorithm__gap_vectors__list__capacity
@@ -2625,14 +2570,14 @@
 (define-fun us_rep_16__projection ((a us_rep9)) us_split_fields18 (us_split_fields19
                                                                   a))
 
-(define-fun bool_eq27 ((a us_rep9)
+(define-fun bool_eq12 ((a us_rep9)
   (b us_rep9)) Bool (ite (and
                          (= (to_rep4
                             (rec__algorithm__laser_scan_data__first
                             (us_split_fields19 a))) (to_rep4
                                                     (rec__algorithm__laser_scan_data__first
                                                     (us_split_fields19 b))))
-                         (= (bool_eq11
+                         (= (bool_eq2
                             (rec__algorithm__laser_scan_data__second
                             (us_split_fields19 a))
                             (rec__algorithm__laser_scan_data__second
@@ -2743,7 +2688,7 @@
   (forall ((i Int))
   (! (= (select (singleton3 v i) i) v) :pattern ((select (singleton3 v i) i)) ))))
 
-(define-fun bool_eq28 ((a (Array Int us_rep9)) (a__first Int) (a__last Int)
+(define-fun bool_eq13 ((a (Array Int us_rep9)) (a__first Int) (a__last Int)
   (b (Array Int us_rep9)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -2754,7 +2699,7 @@
                            (=>
                            (and (<= a__first temp___idx_133)
                            (<= temp___idx_133 a__last))
-                           (= (bool_eq27 (select a temp___idx_133)
+                           (= (bool_eq12 (select a temp___idx_133)
                               (select b (+ (- b__first a__first) temp___idx_133))) true))))
                       true false))
 
@@ -2762,14 +2707,14 @@
   (assert
   (forall ((a (Array Int us_rep9)) (b (Array Int us_rep9)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq28 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq13 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
   (forall ((temp___idx_133 Int))
   (=> (and (<= a__first temp___idx_133) (<= temp___idx_133 a__last))
-  (= (bool_eq27 (select a temp___idx_133)
+  (= (bool_eq12 (select a temp___idx_133)
      (select b (+ (- b__first a__first) temp___idx_133))) true))))))))
 
 (declare-fun dummy27 () (Array Int us_rep9))
@@ -2834,22 +2779,22 @@
 (define-fun us_rep_17__projection ((a us_rep10)) us_split_fields20 (us_split_fields21
                                                                    a))
 
-(define-fun bool_eq29 ((a us_rep10)
+(define-fun bool_eq14 ((a us_rep10)
   (b us_rep10)) Bool (ite (and
                           (and
                           (and
                           (and
-                          (= (bool_eq19
+                          (= (bool_eq7
                              (rec__algorithm__controller__robot
                              (us_split_fields21 a))
                              (rec__algorithm__controller__robot
                              (us_split_fields21 b))) true)
-                          (= (bool_eq28
+                          (= (bool_eq13
                              (rec__algorithm__controller__laserscan
                              (us_split_fields21 a)) 1 1000
                              (rec__algorithm__controller__laserscan
                              (us_split_fields21 b)) 1 1000) true))
-                          (= (bool_eq26
+                          (= (bool_eq11
                              (rec__algorithm__controller__gapvec
                              (us_split_fields21 a))
                              (rec__algorithm__controller__gapvec
@@ -2859,7 +2804,7 @@
                              (us_split_fields21 a))) (to_rep2
                                                      (rec__algorithm__controller__obsavoiddelta
                                                      (us_split_fields21 b)))))
-                          (= (bool_eq11
+                          (= (bool_eq2
                              (rec__algorithm__controller__driveangle
                              (us_split_fields21 a))
                              (rec__algorithm__controller__driveangle
@@ -3243,8 +3188,6 @@
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
-
-(define-fun bool_eq30 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE15 (Int) us_image)
 

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(define-fun is_not_nan ((x Float64)) Bool (or
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
-                                          (fp.isInfinite  x)))
-
 (declare-fun of_int (RoundingMode Int) Float64)
 
 (declare-fun to_int1 (RoundingMode Float64) Int)
@@ -101,30 +97,10 @@
 
 (define-fun neq ((x Float64) (y Float64)) Bool (not (fp.eq x y)))
 
-(define-fun bool_lt ((x Float64)
-  (y Float64)) Bool (ite (fp.lt x y) true false))
-
-(define-fun bool_le ((x Float64)
-  (y Float64)) Bool (ite (fp.leq x y) true false))
-
-(define-fun bool_gt ((x Float64)
-  (y Float64)) Bool (ite (fp.lt y x) true false))
-
-(define-fun bool_ge ((x Float64)
-  (y Float64)) Bool (ite (fp.leq y x) true false))
-
-(define-fun bool_eq ((x Float64)
-  (y Float64)) Bool (ite (fp.eq x y) true false))
-
-(define-fun bool_neq ((x Float64)
-  (y Float64)) Bool (ite (not (fp.eq x y)) true false))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
 (declare-sort tframeB 0)
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 32768) x) (<= x 32767)))
-
-(define-fun bool_eq1 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
 
@@ -144,8 +120,6 @@
 (declare-sort frame 0)
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 25000)))
-
-(define-fun bool_eq2 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
 

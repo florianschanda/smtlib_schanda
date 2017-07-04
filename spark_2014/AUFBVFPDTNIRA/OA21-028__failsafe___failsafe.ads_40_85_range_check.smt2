@@ -146,10 +146,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(define-fun is_not_nan ((x Float32)) Bool (or
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
-                                          (fp.isInfinite  x)))
-
 (declare-fun of_int (RoundingMode Int) Float32)
 
 (declare-fun to_int2 (RoundingMode Float32) Int)
@@ -195,24 +191,6 @@
 
 (define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
 
-(define-fun bool_lt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt x y) true false))
-
-(define-fun bool_le ((x Float32)
-  (y Float32)) Bool (ite (fp.leq x y) true false))
-
-(define-fun bool_gt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt y x) true false))
-
-(define-fun bool_ge ((x Float32)
-  (y Float32)) Bool (ite (fp.leq y x) true false))
-
-(define-fun bool_eq ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
-
-(define-fun bool_neq ((x Float32)
-  (y Float32)) Bool (ite (not (fp.eq x y)) true false))
-
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float32)))))
 (define-fun to_int3 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -227,9 +205,6 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort battery_level_type 0)
-
-(define-fun bool_eq1 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq (battery_level_type battery_level_type) Bool)
 
@@ -276,9 +251,6 @@
 
 (define-fun in_range_int ((x Int)) Bool (and (<= 0 x) (<= x 49)))
 
-(define-fun bool_eq2 ((x (_ BitVec 8))
-  (y (_ BitVec 8))) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE2 ((_ BitVec 8)) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
@@ -309,9 +281,6 @@
                                               (bvule x ((_ int2bv 8) 50))))
 
 (define-fun in_range_int1 ((x Int)) Bool (and (<= 0 x) (<= x 50)))
-
-(define-fun bool_eq3 ((x (_ BitVec 8))
-  (y (_ BitVec 8))) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 ((_ BitVec 8)) us_image)
 
@@ -384,7 +353,7 @@
   (forall ((i (_ BitVec 8)))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq4 ((a (Array (_ BitVec 8) battery_level_type))
+(define-fun bool_eq ((a (Array (_ BitVec 8) battery_level_type))
   (a__first (_ BitVec 8)) (a__last (_ BitVec 8))
   (b (Array (_ BitVec 8) battery_level_type)) (b__first (_ BitVec 8))
   (b__last (_ BitVec 8))) Bool (ite (and
@@ -407,7 +376,7 @@
   (b (Array (_ BitVec 8) battery_level_type)))
   (forall ((a__first (_ BitVec 8)) (a__last (_ BitVec 8))
   (b__first (_ BitVec 8)) (b__last (_ BitVec 8)))
-  (=> (= (bool_eq4 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq b b__first b__last a a__first a__last) true)
   (and
   (ite (bvule a__first a__last)
   (and (bvule b__first b__last)
@@ -769,8 +738,7 @@
 ;; H
   (assert
   (=>
-  (= (bool_ge (to_rep (select battery_level_at current_time))
-     (fp #b0 #b01111100 #b10011001100110011001101)) true)
+  (= (fp.geq (to_rep (select battery_level_at current_time)) (fp #b0 #b01111100 #b10011001100110011001101)) true)
   (= (t__content failsafe__model__time_below_threshold__result4) ((_ int2bv 8) 0))))
 
 ;; H
@@ -784,23 +752,15 @@
 ;; H
   (assert
   (not
-  (ite (= (bool_ge (to_rep (select battery_level_at current_time))
-          (fp #b0 #b01111100 #b10011001100110011001101)) false) (forall
-                                                                ((s17 (_ BitVec 8)))
-                                                                (=>
-                                                                (and
-                                                                (bvule ((_ int2bv 8) 0) s17)
-                                                                (bvule s17 ((_ int2bv 8) 49)))
-                                                                (fp.lt 
-                                                                (to_rep
-                                                                (select 
-                                                                battery_level_at s17)) (fp #b0 #b01111100 #b10011001100110011001101)))) false)))
+  (ite (= (fp.geq (to_rep (select battery_level_at current_time)) (fp #b0 #b01111100 #b10011001100110011001101)) false) 
+  (forall ((s17 (_ BitVec 8)))
+  (=> (and (bvule ((_ int2bv 8) 0) s17) (bvule s17 ((_ int2bv 8) 49)))
+  (fp.lt (to_rep (select battery_level_at s17)) (fp #b0 #b01111100 #b10011001100110011001101)))) false)))
 
 ;; H
   (assert
   (not
-  (ite (= (bool_ge (to_rep (select battery_level_at current_time))
-          (fp #b0 #b01111100 #b10011001100110011001101)) false) false true)))
+  (ite (= (fp.geq (to_rep (select battery_level_at current_time)) (fp #b0 #b01111100 #b10011001100110011001101)) false) false true)))
 
 ;; H
   (assert

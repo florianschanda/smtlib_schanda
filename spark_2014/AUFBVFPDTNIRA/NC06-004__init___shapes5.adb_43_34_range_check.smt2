@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(define-fun is_not_nan ((x Float64)) Bool (or
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
-                                          (fp.isInfinite  x)))
-
 (declare-fun of_int (RoundingMode Int) Float64)
 
 (declare-fun to_int1 (RoundingMode Float64) Int)
@@ -101,31 +97,11 @@
 
 (define-fun neq ((x Float64) (y Float64)) Bool (not (fp.eq x y)))
 
-(define-fun bool_lt ((x Float64)
-  (y Float64)) Bool (ite (fp.lt x y) true false))
-
-(define-fun bool_le ((x Float64)
-  (y Float64)) Bool (ite (fp.leq x y) true false))
-
-(define-fun bool_gt ((x Float64)
-  (y Float64)) Bool (ite (fp.lt y x) true false))
-
-(define-fun bool_ge ((x Float64)
-  (y Float64)) Bool (ite (fp.leq y x) true false))
-
-(define-fun bool_eq ((x Float64)
-  (y Float64)) Bool (ite (fp.eq x y) true false))
-
-(define-fun bool_neq ((x Float64)
-  (y Float64)) Bool (ite (not (fp.eq x y)) true false))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
 (declare-sort integer 0)
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
-
-(define-fun bool_eq1 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
 
@@ -156,9 +132,6 @@
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)) x)
                                          (fp.leq x (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)))))
-
-(define-fun bool_eq2 ((x Float64)
-  (y Float64)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq1 (coordinate_type coordinate_type) Bool)
 
@@ -211,9 +184,6 @@
                                          (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))))
 
-(define-fun bool_eq3 ((x Float64)
-  (y Float64)) Bool (ite (fp.eq x y) true false))
-
 (declare-fun user_eq2 (radius_type radius_type) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE2 (Float64) us_image)
@@ -264,7 +234,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_fields (us_split_fields1
                                                              a))
 
-(define-fun bool_eq4 ((a us_rep)
+(define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (and
                         (= (to_rep
@@ -389,9 +359,6 @@
                                           (and
                                           (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) x1)
                                           (fp.leq x1 (fp #b0 #b10000000110 #b1001000000000000000000000000000000000000000000000000)))))
-
-(define-fun bool_eq5 ((x1 Float64)
-  (y1 Float64)) Bool (ite (fp.eq x1 y1) true false))
 
 (declare-fun user_eq4 (full_width_type full_width_type) Bool)
 

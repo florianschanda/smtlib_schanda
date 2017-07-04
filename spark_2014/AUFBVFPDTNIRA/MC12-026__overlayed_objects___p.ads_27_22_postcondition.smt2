@@ -146,10 +146,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(define-fun is_not_nan ((x Float32)) Bool (or
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
-                                          (fp.isInfinite  x)))
-
 (declare-fun of_int (RoundingMode Int) Float32)
 
 (declare-fun to_int2 (RoundingMode Float32) Int)
@@ -195,24 +191,6 @@
 
 (define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
 
-(define-fun bool_lt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt x y) true false))
-
-(define-fun bool_le ((x Float32)
-  (y Float32)) Bool (ite (fp.leq x y) true false))
-
-(define-fun bool_gt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt y x) true false))
-
-(define-fun bool_ge ((x Float32)
-  (y Float32)) Bool (ite (fp.leq y x) true false))
-
-(define-fun bool_eq ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
-
-(define-fun bool_neq ((x Float32)
-  (y Float32)) Bool (ite (not (fp.eq x y)) true false))
-
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float32)))))
 (define-fun to_int3 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -230,8 +208,6 @@
 
 (define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
-
-(define-fun bool_eq1 ((x Int) (y Int)) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
 
@@ -267,9 +243,6 @@
                                                             (of_rep x))) )))
 
 (declare-sort float 0)
-
-(define-fun bool_eq2 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq1 (float float) Bool)
 
@@ -322,7 +295,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_fields (us_split_fields1
                                                              a))
 
-(define-fun bool_eq3 ((a us_rep)
+(define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (= (to_rep (rec__p__r__a (us_split_fields1 a))) 
                         (to_rep (rec__p__r__a (us_split_fields1 b))))
@@ -391,8 +364,6 @@
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 8)))
 
-(define-fun bool_eq4 ((x Int) (y Int)) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
@@ -411,9 +382,6 @@
 (declare-sort unsigned_8 0)
 
 (declare-fun attr__ATTRIBUTE_MODULUS () (_ BitVec 8))
-
-(define-fun bool_eq5 ((x (_ BitVec 8))
-  (y (_ BitVec 8))) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE4 ((_ BitVec 8)) us_image)
 
@@ -496,7 +464,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq6 ((a (Array Int unsigned_8)) (a__first Int) (a__last Int)
+(define-fun bool_eq1 ((a (Array Int unsigned_8)) (a__first Int) (a__last Int)
   (b (Array Int unsigned_8)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -515,7 +483,7 @@
   (assert
   (forall ((a (Array Int unsigned_8)) (b (Array Int unsigned_8)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq6 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq1 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -533,7 +501,7 @@
   (forall ((a (Array Int unsigned_8)) (b (Array Int unsigned_8)))
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq6 a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq1 a a_first a_last b b_first b_last) true)) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -544,7 +512,7 @@
      (exists ((i Int) (j Int))
      (and (<= i a_last)
      (and (< j b_last)
-     (and (= (bool_eq6 a a_first i b b_first j) true)
+     (and (= (bool_eq1 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
      (bvult (to_rep2 (select a (+ i 1))) (to_rep2 (select b (+ j 1))))))))))) :pattern (
@@ -558,7 +526,7 @@
      (exists ((i Int) (j Int))
      (and (<= i b_last)
      (and (< j a_last)
-     (and (= (bool_eq6 a a_first j b b_first i) true)
+     (and (= (bool_eq1 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
      (bvugt (to_rep2 (select a (+ j 1))) (to_rep2 (select b (+ i 1))))))))))) :pattern (
@@ -713,7 +681,7 @@
 ;; WP_parameter_def
  ;; File "p.ads", line 14, characters 0-0
   (not
-  (= (bool_eq3
+  (= (bool_eq
      (mk___rep
      (mk___split_fields full_s__split_fields4 full_s__split_fields5)) 
      null_r) true)))

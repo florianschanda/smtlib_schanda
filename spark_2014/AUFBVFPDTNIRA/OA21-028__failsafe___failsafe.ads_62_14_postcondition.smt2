@@ -151,9 +151,6 @@
 
 (define-fun in_range_int ((x Int)) Bool (and (<= 0 x) (<= x 49)))
 
-(define-fun bool_eq ((x (_ BitVec 8))
-  (y (_ BitVec 8))) Bool (ite (= x y) true false))
-
 (declare-fun attr__ATTRIBUTE_IMAGE1 ((_ BitVec 8)) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
@@ -189,10 +186,6 @@
 
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
-
-(define-fun is_not_nan ((x Float32)) Bool (or
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
-                                          (fp.isInfinite  x)))
 
 (declare-fun of_int1 (RoundingMode Int) Float32)
 
@@ -239,29 +232,8 @@
 
 (define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
 
-(define-fun bool_lt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt x y) true false))
-
-(define-fun bool_le ((x Float32)
-  (y Float32)) Bool (ite (fp.leq x y) true false))
-
-(define-fun bool_gt ((x Float32)
-  (y Float32)) Bool (ite (fp.lt y x) true false))
-
-(define-fun bool_ge ((x Float32)
-  (y Float32)) Bool (ite (fp.leq y x) true false))
-
-(define-fun bool_eq1 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
-
-(define-fun bool_neq ((x Float32)
-  (y Float32)) Bool (ite (not (fp.eq x y)) true false))
-
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float32)))))
 (declare-sort battery_level_type 0)
-
-(define-fun bool_eq2 ((x Float32)
-  (y Float32)) Bool (ite (fp.eq x y) true false))
 
 (declare-fun user_eq1 (battery_level_type battery_level_type) Bool)
 
@@ -349,7 +321,7 @@
   (forall ((i (_ BitVec 8)))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq3 ((a (Array (_ BitVec 8) battery_level_type))
+(define-fun bool_eq ((a (Array (_ BitVec 8) battery_level_type))
   (a__first (_ BitVec 8)) (a__last (_ BitVec 8))
   (b (Array (_ BitVec 8) battery_level_type)) (b__first (_ BitVec 8))
   (b__last (_ BitVec 8))) Bool (ite (and
@@ -372,7 +344,7 @@
   (b (Array (_ BitVec 8) battery_level_type)))
   (forall ((a__first (_ BitVec 8)) (a__last (_ BitVec 8))
   (b__first (_ BitVec 8)) (b__last (_ BitVec 8)))
-  (=> (= (bool_eq3 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq b b__first b__last a a__first a__last) true)
   (and
   (ite (bvule a__first a__last)
   (and (bvule b__first b__last)
@@ -401,9 +373,6 @@
                                               (bvule x ((_ int2bv 8) 50))))
 
 (define-fun in_range_int1 ((x Int)) Bool (and (<= 0 x) (<= x 50)))
-
-(define-fun bool_eq4 ((x (_ BitVec 8))
-  (y (_ BitVec 8))) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 ((_ BitVec 8)) us_image)
 
@@ -494,9 +463,6 @@
                                               (bvule x ((_ int2bv 8) 50))))
 
 (define-fun in_range_int2 ((x Int)) Bool (and (<= 0 x) (<= x 50)))
-
-(define-fun bool_eq5 ((x (_ BitVec 8))
-  (y (_ BitVec 8))) Bool (ite (= x y) true false))
 
 (declare-fun attr__ATTRIBUTE_IMAGE4 ((_ BitVec 8)) us_image)
 
