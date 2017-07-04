@@ -263,8 +263,6 @@
 
 (declare-fun is_int1 (Float32) Bool)
 
-(define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float32)))))
 (declare-sort integer 0)
 

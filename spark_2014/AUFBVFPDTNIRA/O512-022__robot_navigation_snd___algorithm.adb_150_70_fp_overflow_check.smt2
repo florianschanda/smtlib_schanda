@@ -95,8 +95,6 @@
 
 (declare-fun is_int1 (Float32) Bool)
 
-(define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -2815,8 +2813,9 @@
                                                             (rec__gaps__gap__bearing
                                                             (us_split_fields9
                                                             risinggap))))
-  (=> (neq (to_rep2 (rec__gaps__gap__distance (us_split_fields9 risinggap)))
-  (fp #b0 #b00000000 #b00000000000000000000000))
+  (=>
+  (not (fp.eq (to_rep2
+              (rec__gaps__gap__distance (us_split_fields9 risinggap))) (fp #b0 #b00000000 #b00000000000000000000000)))
   (not
   (= (oeq algorithm__isrisinggapsafe__B_4__posgapcorner__assume2
      zero_position) true)))))

@@ -95,8 +95,6 @@
 
 (declare-fun is_int1 (Float32) Bool)
 
-(define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -494,11 +492,10 @@
                                               (rec__pred__r__d
                                               (us_split_discrs1
                                               temp___expr_155))) 2)
-                                      (neq
-                                      (to_rep2
-                                      (rec__pred__r__c2
-                                      (us_split_fields1 temp___expr_155)))
-                                      (fp #b0 #b00000000 #b00000000000000000000000))
+                                      (not (fp.eq (to_rep2
+                                                  (rec__pred__r__c2
+                                                  (us_split_fields1
+                                                  temp___expr_155))) (fp #b0 #b00000000 #b00000000000000000000000)))
                                       (not
                                       (= (rec__pred__r__c3
                                          (us_split_fields1 temp___expr_155)) 
@@ -523,12 +520,11 @@
                                                                  (rec__pred__r__d
                                                                  (us_split_discrs1
                                                                  temp___158))) 2)
-                                                         (neq
+                                                         (not (fp.eq 
                                                          (to_rep2
                                                          (rec__pred__r__c2
                                                          (us_split_fields1
-                                                         temp___158)))
-                                                         (fp #b0 #b00000000 #b00000000000000000000000))
+                                                         temp___158))) (fp #b0 #b00000000 #b00000000000000000000000)))
                                                          (not
                                                          (= (rec__pred__r__c3
                                                             (us_split_fields1

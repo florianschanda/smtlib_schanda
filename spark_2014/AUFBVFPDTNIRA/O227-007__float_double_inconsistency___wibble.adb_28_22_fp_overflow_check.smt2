@@ -451,8 +451,6 @@
   (n (_ BitVec 64)))
   (= (eq_sub3 a b (bv2nat i) (bv2nat n)) (eq_sub_bv3 a b i n))))
 
-(define-fun neq ((x Float64) (y Float64)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float64)))))
 (define-fun to_int6 ((b Bool)) Int (ite (= b true) 1 0))
 

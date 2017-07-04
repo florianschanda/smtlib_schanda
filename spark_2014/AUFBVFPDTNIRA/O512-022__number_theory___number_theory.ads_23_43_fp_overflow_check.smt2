@@ -95,8 +95,6 @@
 
 (declare-fun is_int1 (Float32) Bool)
 
-(define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-fun power (Float32 Int) Float32)
 
@@ -367,8 +365,8 @@
 
 ;; H
   (assert
-  (=> (< n 0) (neq (fp #b0 #b01111111 #b10011110001110111100111)
-  ((_ to_fp 8 24) #x00000000))))
+  (=> (< n 0)
+  (not (fp.eq (fp #b0 #b01111111 #b10011110001110111100111) ((_ to_fp 8 24) #x00000000)))))
 
 ;; H
   (assert (= o6 (power (fp #b0 #b01111111 #b10011110001110111100111) n)))

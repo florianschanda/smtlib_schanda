@@ -95,8 +95,6 @@
 
 (declare-fun is_int1 (Float64) Bool)
 
-(define-fun neq ((x Float64) (y Float64)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
 (declare-sort long_float 0)
 
@@ -151,8 +149,8 @@
   (not (or (fp.isInfinite r) (fp.isNaN r)))))
 
 ;; H
-  (assert (neq z
-  (fp #b0 #b10000000001 #b0000000000000000000000000000000000000000000000000000)))
+  (assert
+  (not (fp.eq z (fp #b0 #b10000000001 #b0000000000000000000000000000000000000000000000000000))))
 
 ;; H
   (assert

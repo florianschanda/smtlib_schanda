@@ -95,8 +95,6 @@
 
 (declare-fun is_int1 (Float32) Bool)
 
-(define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-fun next_representable (Float32) Float32)
 
@@ -148,7 +146,7 @@
   (assert (not (or (fp.isInfinite f) (fp.isNaN f))))
 
 ;; H
-  (assert (neq f (fp #b0 #b11111110 #b11111111111111111111111)))
+  (assert (not (fp.eq f (fp #b0 #b11111110 #b11111111111111111111111))))
 
 ;; H
   (assert (= p__ident__5__result1 p__ident__5__result2))

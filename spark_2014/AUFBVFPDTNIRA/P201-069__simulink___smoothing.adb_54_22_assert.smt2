@@ -95,8 +95,6 @@
 
 (declare-fun is_int1 (Float64) Bool)
 
-(define-fun neq ((x Float64) (y Float64)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
 (declare-sort long_float 0)
 
@@ -242,6 +240,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "smoothing.ads", line 20, characters 0-0
-  (not (neq smoothing_factor
-  (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))))
+  (not
+  (not (fp.eq smoothing_factor (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))))
 (check-sat)

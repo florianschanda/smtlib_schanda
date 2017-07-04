@@ -95,8 +95,6 @@
 
 (declare-fun is_int1 (Float32) Bool)
 
-(define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -2344,7 +2342,8 @@
   (assert (not (or (fp.isInfinite safetydist) (fp.isNaN safetydist))))
 
 ;; H
-  (assert (neq safetydist (fp #b0 #b00000000 #b00000000000000000000000)))
+  (assert
+  (not (fp.eq safetydist (fp #b0 #b00000000 #b00000000000000000000000))))
 
 ;; H
   (assert

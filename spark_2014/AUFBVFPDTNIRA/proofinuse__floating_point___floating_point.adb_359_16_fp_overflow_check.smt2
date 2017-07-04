@@ -95,8 +95,6 @@
 
 (declare-fun is_int1 (Float32) Bool)
 
-(define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort tfloat_32B 0)
 
@@ -164,7 +162,7 @@
   (not (or (fp.isInfinite res) (fp.isNaN res)))))
 
 ;; H
-  (assert (neq x y))
+  (assert (not (fp.eq x y)))
 
 (assert
 ;; WP_parameter_def

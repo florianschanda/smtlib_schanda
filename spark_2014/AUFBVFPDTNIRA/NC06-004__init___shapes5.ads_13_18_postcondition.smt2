@@ -95,8 +95,6 @@
 
 (declare-fun is_int1 (Float64) Bool)
 
-(define-fun neq ((x Float64) (y Float64)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 

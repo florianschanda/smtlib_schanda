@@ -95,8 +95,6 @@
 
 (declare-fun is_int1 (Float32) Bool)
 
-(define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -147,5 +145,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "expo.adb", line 2, characters 0-0
-  (not (neq (fp.mul RNE x (fp.mul RNE x x)) ((_ to_fp 8 24) #x00000000))))
+  (not
+  (not (fp.eq (fp.mul RNE x (fp.mul RNE x x)) ((_ to_fp 8 24) #x00000000)))))
 (check-sat)

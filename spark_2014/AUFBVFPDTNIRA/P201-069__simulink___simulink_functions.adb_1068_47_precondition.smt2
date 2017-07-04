@@ -95,8 +95,6 @@
 
 (declare-fun is_int1 (Float32) Bool)
 
-(define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort float 0)
 
@@ -131,8 +129,8 @@
      (and
      (and (dynamic_invariant y true true true) (dynamic_invariant x true true
      true))
-     (or (neq x (fp #b0 #b00000000 #b00000000000000000000000)) (neq y
-     (fp #b0 #b00000000 #b00000000000000000000000))))
+     (or (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
+     (not (fp.eq y (fp #b0 #b00000000 #b00000000000000000000000)))))
      (let ((result (arctan y x)))
      (and
      (=>
@@ -152,7 +150,7 @@
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
   (not
-  (or (neq (fp #b0 #b01111111 #b00000000000000000000000)
-  (fp #b0 #b00000000 #b00000000000000000000000)) (neq f
-  (fp #b0 #b00000000 #b00000000000000000000000)))))
+  (or
+  (not (fp.eq (fp #b0 #b01111111 #b00000000000000000000000) (fp #b0 #b00000000 #b00000000000000000000000)))
+  (not (fp.eq f (fp #b0 #b00000000 #b00000000000000000000000))))))
 (check-sat)

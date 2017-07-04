@@ -95,8 +95,6 @@
 
 (declare-fun is_int1 (Float32) Bool)
 
-(define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort t_float 0)
 
@@ -205,5 +203,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "run.ads", line 14, characters 0-0
-  (not (neq y2 (fp #b0 #b00000000 #b00000000000000000000000))))
+  (not (not (fp.eq y2 (fp #b0 #b00000000 #b00000000000000000000000)))))
 (check-sat)

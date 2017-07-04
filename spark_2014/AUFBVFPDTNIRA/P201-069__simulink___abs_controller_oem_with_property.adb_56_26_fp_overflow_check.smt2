@@ -95,8 +95,6 @@
 
 (declare-fun is_int1 (Float64) Bool)
 
-(define-fun neq ((x Float64) (y Float64)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
 (declare-sort long_float 0)
 
@@ -219,35 +217,35 @@
 
 ;; H
   (assert
-  (=> (neq vehicle_speed
-  (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))
+  (=>
+  (not (fp.eq vehicle_speed (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))
   (= result epsifzero_out1)))
 
 ;; H
   (assert
-  (=> (neq vehicle_speed
-  (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))
+  (=>
+  (not (fp.eq vehicle_speed (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))
   (= epsifzero_out11 vehicle_speed)))
 
 ;; H
   (assert
   (=>
-  (not (neq vehicle_speed
-  (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))
+  (not
+  (not (fp.eq vehicle_speed (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))))
   (= result1 epsifzero_out1)))
 
 ;; H
   (assert
   (=>
-  (not (neq vehicle_speed
-  (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))
+  (not
+  (not (fp.eq vehicle_speed (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))))
   (= epsifzero_out12 (fp #b0 #b01111001010 #b1111111111111101010010000001111110010111011010000010))))
 
 ;; H
   (assert
   (=>
-  (not (neq vehicle_speed
-  (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))
+  (not
+  (not (fp.eq vehicle_speed (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))))
   (= epsifzero_out11 epsifzero_out12)))
 
 ;; H

@@ -95,8 +95,6 @@
 
 (declare-fun is_int1 (Float32) Bool)
 
-(define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -390,9 +388,10 @@
      (and
      (ite (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
      (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000))
-     (=> (neq x (fp #b0 #b00000000 #b00000000000000000000000)) (neq result
-     (fp #b0 #b00000000 #b00000000000000000000000)))) (dynamic_invariant3
-     result true false true)))) :pattern ((lift_away_from_zero x)) )))
+     (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
+     (not (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000)))))
+     (dynamic_invariant3 result true false true)))) :pattern ((lift_away_from_zero
+                                                              x)) )))
 
 (declare-fun gx () Float32)
 

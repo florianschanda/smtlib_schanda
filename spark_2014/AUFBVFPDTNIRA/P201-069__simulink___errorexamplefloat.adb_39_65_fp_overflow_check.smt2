@@ -95,8 +95,6 @@
 
 (declare-fun is_int1 (Float64) Bool)
 
-(define-fun neq ((x Float64) (y Float64)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
 (declare-sort long_float 0)
 
@@ -220,8 +218,8 @@
   (not (or (fp.isInfinite relative_error) (fp.isNaN relative_error)))))
 
 ;; H
-  (assert (neq requested_force
-  (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))
+  (assert
+  (not (fp.eq requested_force (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))))
 
 ;; H
   (assert
@@ -230,8 +228,8 @@
   (not (or (fp.isInfinite abs_out1) (fp.isNaN abs_out1)))))
 
 ;; H
-  (assert (neq requested_force
-  (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))
+  (assert
+  (not (fp.eq requested_force (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))))
 
 ;; H
   (assert

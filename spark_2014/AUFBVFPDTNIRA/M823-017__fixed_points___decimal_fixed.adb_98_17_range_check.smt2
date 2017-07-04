@@ -95,8 +95,6 @@
 
 (declare-fun is_int1 (Float32) Bool)
 
-(define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -161,8 +159,6 @@
                  (and (fp.isNegative  x) (< r 0.0))))
 
 (declare-fun is_int2 (Float64) Bool)
-
-(define-fun neq1 ((x Float64) (y Float64)) Bool (not (fp.eq x y)))
 
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float64)))))
 (declare-fun to_float32 (Int) Float32)

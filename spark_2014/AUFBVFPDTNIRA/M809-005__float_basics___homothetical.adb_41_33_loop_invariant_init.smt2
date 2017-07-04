@@ -95,8 +95,6 @@
 
 (declare-fun is_int1 (Float32) Bool)
 
-(define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -272,7 +270,7 @@
      (and (dynamic_invariant d1 true true true) (dynamic_invariant kv1 true
      true true)) (dynamic_invariant ka1 true true true))
      (and
-     (and (neq d1 (fp #b0 #b00000000 #b00000000000000000000000))
+     (and (not (fp.eq d1 (fp #b0 #b00000000 #b00000000000000000000000)))
      (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) kv1))
      (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) ka1)))
      (let ((result (adjust2triangle d1 kv1 ka1)))
@@ -388,8 +386,8 @@
   (forall ((j Int))
   (=> (and (<= 1 j) (<= j 2))
   (and
-  (and (neq (to_rep (select d j))
-  (fp #b0 #b00000000 #b00000000000000000000000))
+  (and
+  (not (fp.eq (to_rep (select d j)) (fp #b0 #b00000000 #b00000000000000000000000)))
   (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) (to_rep (select kv j))))
   (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) (to_rep (select ka j)))))))
 

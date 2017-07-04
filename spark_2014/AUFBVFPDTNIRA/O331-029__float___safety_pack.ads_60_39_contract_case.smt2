@@ -95,8 +95,6 @@
 
 (declare-fun is_int1 (Float32) Bool)
 
-(define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -363,6 +361,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "imu_pack.ads", line 16, characters 0-0
-  (not (neq safety_pack__lift_away_from_zero__result4
-  (fp #b0 #b00000000 #b00000000000000000000000))))
+  (not
+  (not (fp.eq safety_pack__lift_away_from_zero__result4 (fp #b0 #b00000000 #b00000000000000000000000)))))
 (check-sat)

@@ -95,8 +95,6 @@
 
 (declare-fun is_int1 (Float32) Bool)
 
-(define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -512,8 +510,8 @@
      (and
      (and (dynamic_invariant y true true true) (dynamic_invariant x true true
      true))
-     (or (neq x (fp #b0 #b00000000 #b00000000000000000000000)) (neq y
-     (fp #b0 #b00000000 #b00000000000000000000000))))
+     (or (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
+     (not (fp.eq y (fp #b0 #b00000000 #b00000000000000000000000)))))
      (let ((result (arctan y x)))
      (and
      (=>
@@ -1136,8 +1134,8 @@
 
 ;; H
   (assert
-  (or (neq width (fp #b0 #b00000000 #b00000000000000000000000)) (neq
-  forwardlength (fp #b0 #b00000000 #b00000000000000000000000))))
+  (or (not (fp.eq width (fp #b0 #b00000000 #b00000000000000000000000)))
+  (not (fp.eq forwardlength (fp #b0 #b00000000 #b00000000000000000000000)))))
 
 ;; H
   (assert

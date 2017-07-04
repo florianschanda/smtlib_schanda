@@ -167,8 +167,6 @@
 
 (declare-fun is_int1 (Float32) Bool)
 
-(define-fun neq ((x Float32) (y Float32)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -673,8 +671,8 @@
      (and
      (and (dynamic_invariant1 y true true true) (dynamic_invariant1 x true
      true true))
-     (or (neq x (fp #b0 #b00000000 #b00000000000000000000000)) (neq y
-     (fp #b0 #b00000000 #b00000000000000000000000))))
+     (or (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
+     (not (fp.eq y (fp #b0 #b00000000 #b00000000000000000000000)))))
      (let ((result (arctan y x)))
      (and
      (=>
@@ -4489,19 +4487,19 @@
 ;; WP_parameter_def
  ;; File "algorithm.ads", line 107, characters 0-0
   (not
-  (or (neq
-  (fp.max (to_rep3
-          (rec__robot_iface__proxy__robot_radius
-          (us_split_fields9
-          (rec__algorithm__controller__robot
-          (let ((subject this__split_fields)) this__split_fields1))))) 
-  (to_rep2
-  (rec__gaps__gap__distance
-  (us_split_fields11
-  (rec__valleys__valley__risinggap
-  (us_split_fields13
-  (rec__algorithm__valley_option__value
-  (let ((subject pbestvalley__split_fields)) pbestvalley__split_fields1))))))))
-  (fp #b0 #b00000000 #b00000000000000000000000)) (neq o7
-  (fp #b0 #b00000000 #b00000000000000000000000)))))
+  (or
+  (not (fp.eq (fp.max (to_rep3
+                      (rec__robot_iface__proxy__robot_radius
+                      (us_split_fields9
+                      (rec__algorithm__controller__robot
+                      (let ((subject this__split_fields))
+                      this__split_fields1))))) (to_rep2
+                                               (rec__gaps__gap__distance
+                                               (us_split_fields11
+                                               (rec__valleys__valley__risinggap
+                                               (us_split_fields13
+                                               (rec__algorithm__valley_option__value
+                                               (let ((subject pbestvalley__split_fields))
+                                               pbestvalley__split_fields1)))))))) (fp #b0 #b00000000 #b00000000000000000000000)))
+  (not (fp.eq o7 (fp #b0 #b00000000 #b00000000000000000000000))))))
 (check-sat)

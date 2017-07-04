@@ -95,8 +95,6 @@
 
 (declare-fun is_int1 (Float64) Bool)
 
-(define-fun neq ((x Float64) (y Float64)) Bool (not (fp.eq x y)))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
 (declare-sort long_float 0)
 
@@ -137,8 +135,7 @@
      (and
      (fp.lt (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) x)
      (fp.lt (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) base))
-     (neq base
-     (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))))
+     (not (fp.eq base (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))))
      (let ((result (log__2 x base)))
      (and
      (=>
