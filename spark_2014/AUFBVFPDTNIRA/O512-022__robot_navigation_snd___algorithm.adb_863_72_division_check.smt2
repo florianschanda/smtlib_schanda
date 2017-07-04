@@ -4539,9 +4539,9 @@
  ;; File "algorithm.ads", line 107, characters 0-0
   (not
   (not
-  (fp.eq (to_rep3
-         (rec__robot_iface__proxy__obstacle_avoid_dist
-         (us_split_fields9
-         (rec__algorithm__controller__robot
-         (us_split_fields__content10 this__split_fields1))))) ((_ to_fp 8 24) #x00000000)))))
+  (fp.isZero      (to_rep3
+                  (rec__robot_iface__proxy__obstacle_avoid_dist
+                  (us_split_fields9
+                  (rec__algorithm__controller__robot
+                  (us_split_fields__content10 this__split_fields1)))))))))
 (check-sat)

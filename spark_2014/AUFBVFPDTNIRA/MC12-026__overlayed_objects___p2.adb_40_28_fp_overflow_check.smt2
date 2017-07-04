@@ -282,11 +282,6 @@
 
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 255)))
 
-;; to_uint_of_int
-  (assert
-  (forall ((i Int))
-  (=> (and (<= 0 i) (< i 256)) (= (bv2nat ((_ int2bv 8) i)) i))))
-
 ;; lsr_bv_is_lsr
   (assert
   (forall ((x (_ BitVec 8)) (n (_ BitVec 8)))

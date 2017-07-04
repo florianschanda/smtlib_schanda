@@ -1591,5 +1591,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "control_structures.adb", line 29, characters 0-0
-  (not (not (fp.eq approx2 ((_ to_fp 8 24) #x00000000)))))
+  (not (not (fp.isZero      approx2))))
 (check-sat)

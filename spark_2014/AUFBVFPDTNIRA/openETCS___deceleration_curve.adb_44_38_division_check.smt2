@@ -427,5 +427,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "units.ads", line 27, characters 0-0
-  (not (not (fp.eq speed2 ((_ to_fp 8 24) #x00000000)))))
+  (not (not (fp.isZero      speed2))))
 (check-sat)

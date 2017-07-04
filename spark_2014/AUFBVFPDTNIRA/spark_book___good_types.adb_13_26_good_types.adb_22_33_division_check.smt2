@@ -349,7 +349,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "a-tiflio.ads", line 80, characters 0-0
-  (not
-  (not
-  (fp.eq (fp #b0 #b10000010 #b10000000000000000000000) ((_ to_fp 8 24) #x00000000)))))
+  (not (not (fp.isZero      (fp #b0 #b10000010 #b10000000000000000000000)))))
 (check-sat)

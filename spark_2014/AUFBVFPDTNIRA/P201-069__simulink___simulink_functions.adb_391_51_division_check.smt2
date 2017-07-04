@@ -186,5 +186,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "interfac.ads", line 52, characters 0-0
-  (not (not (fp.eq (of_int RNE right) ((_ to_fp 8 24) #x00000000)))))
+  (not (not (fp.isZero      (of_int RNE right)))))
 (check-sat)

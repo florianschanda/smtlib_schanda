@@ -280,6 +280,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not
-  (not (fp.eq (of_int RNE index2) ((_ to_fp 11 53) #x0000000000000000)))))
+  (not (not (fp.isZero      (of_int RNE index2)))))
 (check-sat)

@@ -219,5 +219,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "foo.adb", line 10, characters 0-0
-  (not (not (fp.eq x ((_ to_fp 11 53) #x0000000000000000)))))
+  (not (not (fp.isZero      x))))
 (check-sat)

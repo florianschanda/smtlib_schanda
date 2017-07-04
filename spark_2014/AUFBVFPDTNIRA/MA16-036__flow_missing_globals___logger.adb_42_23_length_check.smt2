@@ -54,11 +54,6 @@
 
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 65535)))
 
-;; to_uint_of_int
-  (assert
-  (forall ((i Int))
-  (=> (and (<= 0 i) (< i 65536)) (= (bv2nat ((_ int2bv 16) i)) i))))
-
 ;; lsr_bv_is_lsr
   (assert
   (forall ((x (_ BitVec 16)) (n (_ BitVec 16)))

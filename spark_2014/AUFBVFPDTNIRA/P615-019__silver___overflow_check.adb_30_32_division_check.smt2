@@ -272,5 +272,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "overflow_check.adb", line 9, characters 0-0
-  (not (not (fp.eq y ((_ to_fp 8 24) #x00000000)))))
+  (not (not (fp.isZero      y))))
 (check-sat)

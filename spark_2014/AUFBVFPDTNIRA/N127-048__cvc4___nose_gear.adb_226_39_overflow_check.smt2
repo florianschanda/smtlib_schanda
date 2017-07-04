@@ -54,11 +54,6 @@
 
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 65535)))
 
-;; to_uint_of_int
-  (assert
-  (forall ((i Int))
-  (=> (and (<= 0 i) (< i 65536)) (= (bv2nat ((_ int2bv 16) i)) i))))
-
 ;; lsr_bv_is_lsr
   (assert
   (forall ((x (_ BitVec 16)) (n (_ BitVec 16)))
@@ -205,11 +200,6 @@
 
 (define-fun uint_in_range1 ((i Int)) Bool (and (<= 0 i) (<= i 255)))
 
-;; to_uint_of_int
-  (assert
-  (forall ((i Int))
-  (=> (and (<= 0 i) (< i 256)) (= (bv2nat ((_ int2bv 8) i)) i))))
-
 ;; lsr_bv_is_lsr
   (assert
   (forall ((x (_ BitVec 8)) (n (_ BitVec 8)))
@@ -289,11 +279,6 @@
 (declare-fun to_int4 ((_ BitVec 32)) Int)
 
 (define-fun uint_in_range2 ((i Int)) Bool (and (<= 0 i) (<= i 4294967295)))
-
-;; to_uint_of_int
-  (assert
-  (forall ((i Int))
-  (=> (and (<= 0 i) (< i 4294967296)) (= (bv2nat ((_ int2bv 32) i)) i))))
 
 ;; lsr_bv_is_lsr
   (assert
@@ -377,12 +362,6 @@
 
 (define-fun uint_in_range3 ((i Int)) Bool (and (<= 0 i)
                                           (<= i 18446744073709551615)))
-
-;; to_uint_of_int
-  (assert
-  (forall ((i Int))
-  (=> (and (<= 0 i) (< i 18446744073709551616))
-  (= (bv2nat ((_ int2bv 64) i)) i))))
 
 ;; lsr_bv_is_lsr
   (assert
