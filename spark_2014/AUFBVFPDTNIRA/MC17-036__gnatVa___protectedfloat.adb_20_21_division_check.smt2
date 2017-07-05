@@ -174,5 +174,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "protectedfloat.ads", line 6, characters 0-0
-  (not (not (fp.isZero      right))))
+  (not (not (fp.eq right ((_ to_fp 8 24) #x00000000)))))
 (check-sat)

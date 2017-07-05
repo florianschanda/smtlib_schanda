@@ -164,5 +164,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "generic_interval_tests.adb", line 56, characters 0-0
-  (not (not (fp.isZero      y))))
+  (not (not (fp.eq y ((_ to_fp 11 53) #x0000000000000000)))))
 (check-sat)

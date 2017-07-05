@@ -4387,5 +4387,7 @@
 (assert
 ;; WP_parameter_def
  ;; File "algorithm.ads", line 107, characters 0-0
-  (not (not (fp.isZero      (fp #b0 #b10000000 #b10010010000111111011011)))))
+  (not
+  (not
+  (fp.eq (fp #b0 #b10000000 #b10010010000111111011011) ((_ to_fp 8 24) #x00000000)))))
 (check-sat)

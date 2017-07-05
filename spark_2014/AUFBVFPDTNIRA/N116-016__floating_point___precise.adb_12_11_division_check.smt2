@@ -246,5 +246,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "precise.adb", line 1, characters 0-0
-  (not (not (fp.isZero      y1))))
+  (not (not (fp.eq y1 ((_ to_fp 8 24) #x00000000)))))
 (check-sat)

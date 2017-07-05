@@ -152,5 +152,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "original_sample.ads", line 15, characters 0-0
-  (not (not (fp.isZero      float_ref))))
+  (not (not (fp.eq float_ref ((_ to_fp 8 24) #x00000000)))))
 (check-sat)

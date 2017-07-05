@@ -252,5 +252,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "smoothing.ads", line 20, characters 0-0
-  (not (not (fp.isZero      smoothing_factor))))
+  (not (not (fp.eq smoothing_factor ((_ to_fp 11 53) #x0000000000000000)))))
 (check-sat)

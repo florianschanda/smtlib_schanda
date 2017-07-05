@@ -437,5 +437,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "lat_long.ads", line 6, characters 0-0
-  (not (not (fp.isZero      o))))
+  (not (not (fp.eq o ((_ to_fp 8 24) #x00000000)))))
 (check-sat)

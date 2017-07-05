@@ -160,5 +160,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "biaseddivide.ads", line 16, characters 0-0
-  (not (not (fp.isZero      o))))
+  (not (not (fp.eq o ((_ to_fp 11 53) #x0000000000000000)))))
 (check-sat)

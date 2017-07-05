@@ -574,5 +574,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "floating_point.adb", line 66, characters 0-0
-  (not (not (fp.isZero      y))))
+  (not (not (fp.eq y ((_ to_fp 8 24) #x00000000)))))
 (check-sat)

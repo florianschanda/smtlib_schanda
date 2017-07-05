@@ -163,5 +163,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "generic_float_tests.ads", line 2, characters 0-0
-  (not (not (fp.isZero      b))))
+  (not (not (fp.eq b ((_ to_fp 11 53) #x0000000000000000)))))
 (check-sat)

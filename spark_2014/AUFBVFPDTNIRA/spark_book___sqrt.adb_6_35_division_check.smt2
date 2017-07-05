@@ -209,5 +209,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (not (fp.isZero      approx2))))
+  (not (not (fp.eq approx2 ((_ to_fp 8 24) #x00000000)))))
 (check-sat)

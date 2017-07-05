@@ -197,5 +197,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (not (fp.isZero      (of_int RNE denominator)))))
+  (not (not (fp.eq (of_int RNE denominator) ((_ to_fp 8 24) #x00000000)))))
 (check-sat)

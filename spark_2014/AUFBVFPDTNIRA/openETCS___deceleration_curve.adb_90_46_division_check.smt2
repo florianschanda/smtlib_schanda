@@ -2020,5 +2020,7 @@
 (assert
 ;; WP_parameter_def
  ;; File "deceleration_curve.ads", line 32, characters 0-0
-  (not (not (fp.isZero      (fp #b0 #b10000000 #b00000000000000000000000)))))
+  (not
+  (not
+  (fp.eq (fp #b0 #b10000000 #b00000000000000000000000) ((_ to_fp 8 24) #x00000000)))))
 (check-sat)

@@ -625,5 +625,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "q.ads", line 11, characters 0-0
-  (not (not (fp.isZero      scale))))
+  (not (not (fp.eq scale ((_ to_fp 8 24) #x00000000)))))
 (check-sat)

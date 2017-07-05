@@ -192,5 +192,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (not (fp.isZero      ka))))
+  (not (not (fp.eq ka ((_ to_fp 8 24) #x00000000)))))
 (check-sat)
