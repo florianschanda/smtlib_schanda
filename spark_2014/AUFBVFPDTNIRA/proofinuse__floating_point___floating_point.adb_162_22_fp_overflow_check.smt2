@@ -130,29 +130,6 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun sqrt1 (Float32) Float32)
-
-(declare-fun sqrt__function_guard (Float32 Float32) Bool)
-
-;; sqrt__post_axiom
-  (assert
-  (forall ((x Float32))
-  (! (=>
-     (and (dynamic_invariant x true true true)
-     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x))
-     (let ((result (sqrt1 x)))
-     (and
-     (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) result)
-     (and
-     (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000)))
-     (and
-     (=> (fp.eq x (fp #b0 #b01111111 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b01111111 #b00000000000000000000000)))
-     (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) x)
-     (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) result)))))
-     (dynamic_invariant result true false true)))) :pattern ((sqrt1 x)) )))
-
 (declare-sort coord 0)
 
 (define-fun in_range2 ((x Float32)) Bool (and
@@ -254,17 +231,13 @@
 
 ;; length_ba__def_axiom
   (assert
-  (= length_ba (sqrt1
-               (fp.add RNE (fp.mul RNE (fp.sub RNE b_x a_x) (fp.sub RNE 
-               b_x a_x)) (fp.mul RNE (fp.sub RNE b_y a_y) (fp.sub RNE 
-               b_y a_y))))))
+  (= length_ba (fp.sqrt RNE (fp.add RNE (fp.mul RNE (fp.sub RNE b_x a_x) (fp.sub RNE 
+  b_x a_x)) (fp.mul RNE (fp.sub RNE b_y a_y) (fp.sub RNE b_y a_y))))))
 
 ;; length_bc__def_axiom
   (assert
-  (= length_bc (sqrt1
-               (fp.add RNE (fp.mul RNE (fp.sub RNE b_x c_x) (fp.sub RNE 
-               b_x c_x)) (fp.mul RNE (fp.sub RNE b_y c_y) (fp.sub RNE 
-               b_y c_y))))))
+  (= length_bc (fp.sqrt RNE (fp.add RNE (fp.mul RNE (fp.sub RNE b_x c_x) (fp.sub RNE 
+  b_x c_x)) (fp.mul RNE (fp.sub RNE b_y c_y) (fp.sub RNE b_y c_y))))))
 
 (declare-fun res () Float32)
 

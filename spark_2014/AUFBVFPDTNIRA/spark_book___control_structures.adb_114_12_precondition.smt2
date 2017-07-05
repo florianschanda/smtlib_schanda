@@ -332,29 +332,6 @@
                                       (<= (- 2147483648) 2147483647))
                                       (in_range6 temp___expr_514)))
 
-(declare-fun sqrt1 (Float32) Float32)
-
-(declare-fun sqrt__function_guard (Float32 Float32) Bool)
-
-;; sqrt__post_axiom
-  (assert
-  (forall ((x Float32))
-  (! (=>
-     (and (dynamic_invariant1 x true true true)
-     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x))
-     (let ((result (sqrt1 x)))
-     (and
-     (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) result)
-     (and
-     (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000)))
-     (and
-     (=> (fp.eq x (fp #b0 #b01111111 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b01111111 #b00000000000000000000000)))
-     (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) x)
-     (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) result)))))
-     (dynamic_invariant1 result true false true)))) :pattern ((sqrt1 x)) )))
-
 (declare-sort uppercase 0)
 
 (define-fun in_range7 ((x Int)) Bool (and (<= 65 x) (<= x 90)))
@@ -1110,5 +1087,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "control_structures.adb", line 29, characters 0-0
-  (not (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x1)))
+  (not (or (fp.isZero      x1) (fp.isPositive  x1))))
 (check-sat)

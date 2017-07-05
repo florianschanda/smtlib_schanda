@@ -208,29 +208,6 @@
   (! (=> (in_range3 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
 
-(declare-fun sqrt1 (Float32) Float32)
-
-(declare-fun sqrt__function_guard (Float32 Float32) Bool)
-
-;; sqrt__post_axiom
-  (assert
-  (forall ((x Float32))
-  (! (=>
-     (and (dynamic_invariant2 x true true true)
-     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x))
-     (let ((result (sqrt1 x)))
-     (and
-     (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) result)
-     (and
-     (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000)))
-     (and
-     (=> (fp.eq x (fp #b0 #b01111111 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b01111111 #b00000000000000000000000)))
-     (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) x)
-     (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) result)))))
-     (dynamic_invariant2 result true false true)))) :pattern ((sqrt1 x)) )))
-
 (declare-fun size () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -721,10 +698,6 @@
 
 (declare-fun elaboration_demo__line__assume1 () t)
 
-(declare-fun o () Float32)
-
-(declare-fun o1 () Float32)
-
 (declare-fun result () (Array Int character))
 
 (declare-fun line1 () (Array Int character))
@@ -783,29 +756,9 @@
   (and (dynamic_property1 1 size (to_rep line__first) (to_rep line__last))
   (and (= (to_rep line__first) 1) (= (to_rep line__last) size))))
 
-;; H
-  (assert
-  (and (= o (sqrt1 (fp #b0 #b10000001 #b01000000000000000000000)))
-  (and (not (or (fp.isInfinite o) (fp.isNaN o)))
-  (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o)
-  (and
-  (=>
-  (fp.eq (fp #b0 #b10000001 #b01000000000000000000000) (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq o (fp #b0 #b00000000 #b00000000000000000000000)))
-  (and
-  (=>
-  (fp.eq (fp #b0 #b10000001 #b01000000000000000000000) (fp #b0 #b01111111 #b00000000000000000000000))
-  (fp.eq o (fp #b0 #b01111111 #b00000000000000000000000)))
-  (=>
-  (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) (fp #b0 #b10000001 #b01000000000000000000000))
-  (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) o))))))))
-
-;; H
-  (assert
-  (= o1 (fp.add RNE (fp #b0 #b01111111 #b00000000000000000000000) o)))
-
 (assert
 ;; WP_parameter_def
  ;; File "elaboration_demo.adb", line 3, characters 0-0
-  (not (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (not
+  (not (or (fp.isInfinite (fp.add RNE (fp #b0 #b01111111 #b00000000000000000000000) (fp.sqrt RNE (fp #b0 #b10000001 #b01000000000000000000000)))) (fp.isNaN (fp.add RNE (fp #b0 #b01111111 #b00000000000000000000000) (fp.sqrt RNE (fp #b0 #b10000001 #b01000000000000000000000))))))))
 (check-sat)

@@ -170,10 +170,6 @@
 
 (declare-fun sqrt__function_guard (Float32 Float32) Bool)
 
-(declare-fun sqrt2 (Float32) Float32)
-
-(declare-fun sqrt__function_guard1 (Float32 Float32) Bool)
-
 ;; sqrt__post_axiom
   (assert
   (forall ((x Float32))
@@ -183,7 +179,7 @@
 ;; sqrt__def_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true) (= (sqrt1 x) (sqrt2 x))) :pattern (
+  (! (=> (dynamic_invariant x true true true) (= (sqrt1 x) (fp.sqrt RNE x))) :pattern (
   (sqrt1 x)) )))
 
 (declare-sort latitude 0)
@@ -472,25 +468,6 @@
                                       (fp.leq (fp.neg (fp #b0 #b10000110 #b01100111111111111111111)) (fp #b0 #b10000110 #b01101000000000000000000)))
                                       (in_range2 temp___expr_153)))
 
-;; sqrt__post_axiom
-  (assert
-  (forall ((x Float32))
-  (! (=>
-     (and (dynamic_invariant1 x true true true)
-     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x))
-     (let ((result (sqrt2 x)))
-     (and
-     (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) result)
-     (and
-     (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000)))
-     (and
-     (=> (fp.eq x (fp #b0 #b01111111 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b01111111 #b00000000000000000000000)))
-     (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) x)
-     (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) result)))))
-     (dynamic_invariant1 result true false true)))) :pattern ((sqrt2 x)) )))
-
 ;; sin__post_axiom
   (assert
   (forall ((x Float32))
@@ -661,7 +638,7 @@
 ;; H
   (assert
   (and (= o7 (sqrt1 o6))
-  (and (not (or (fp.isInfinite o7) (fp.isNaN o7))) (= o7 (sqrt2 o6)))))
+  (and (not (or (fp.isInfinite o7) (fp.isNaN o7))) (= o7 (fp.sqrt RNE o6)))))
 
 ;; H
   (assert (= (mk_t__ref result2) (mk_t__ref lat_long__distance__result)))

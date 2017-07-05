@@ -1610,5 +1610,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "nose_gear.adb", line 24, characters 0-0
-  (not (not (fp.eq ms_in_hour_out11 ((_ to_fp 11 53) #x0000000000000000)))))
+  (not (not (fp.isZero      ms_in_hour_out11))))
 (check-sat)

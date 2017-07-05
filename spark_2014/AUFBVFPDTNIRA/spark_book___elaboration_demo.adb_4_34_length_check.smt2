@@ -208,29 +208,6 @@
   (! (=> (in_range3 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
 
-(declare-fun sqrt1 (Float32) Float32)
-
-(declare-fun sqrt__function_guard (Float32 Float32) Bool)
-
-;; sqrt__post_axiom
-  (assert
-  (forall ((x Float32))
-  (! (=>
-     (and (dynamic_invariant2 x true true true)
-     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x))
-     (let ((result (sqrt1 x)))
-     (and
-     (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) result)
-     (and
-     (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000)))
-     (and
-     (=> (fp.eq x (fp #b0 #b01111111 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b01111111 #b00000000000000000000000)))
-     (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) x)
-     (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) result)))))
-     (dynamic_invariant2 result true false true)))) :pattern ((sqrt1 x)) )))
-
 (declare-fun size () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)

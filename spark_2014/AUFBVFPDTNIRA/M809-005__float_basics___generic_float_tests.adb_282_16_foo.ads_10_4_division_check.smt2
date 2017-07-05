@@ -200,5 +200,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "generic_float_tests.adb", line 267, characters 0-0
-  (not (not (fp.eq a1 ((_ to_fp 8 24) #x00000000)))))
+  (not (not (fp.isZero      a1))))
 (check-sat)

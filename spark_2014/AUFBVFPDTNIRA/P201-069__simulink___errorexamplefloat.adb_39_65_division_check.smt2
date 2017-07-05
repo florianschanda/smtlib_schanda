@@ -238,5 +238,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "errorexamplefloat.ads", line 21, characters 0-0
-  (not (not (fp.eq requested_force ((_ to_fp 11 53) #x0000000000000000)))))
+  (not (not (fp.isZero      requested_force))))
 (check-sat)

@@ -247,5 +247,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "abs_controller_oem_with_property.ads", line 20, characters 0-0
-  (not (not (fp.eq epsifzero_out11 ((_ to_fp 11 53) #x0000000000000000)))))
+  (not (not (fp.isZero      epsifzero_out11))))
 (check-sat)

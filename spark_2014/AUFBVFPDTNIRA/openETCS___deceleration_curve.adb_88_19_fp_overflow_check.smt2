@@ -238,36 +238,6 @@
 
 (declare-fun m_per_s_from_km_per_h__function_guard (Float32 Float32) Bool)
 
-(define-fun dynamic_invariant2 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
-
-(declare-fun sqrt1 (Float32) Float32)
-
-(declare-fun sqrt__function_guard (Float32 Float32) Bool)
-
-;; sqrt__post_axiom
-  (assert
-  (forall ((x Float32))
-  (! (=>
-     (and (dynamic_invariant2 x true true true)
-     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x))
-     (let ((result (sqrt1 x)))
-     (and
-     (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) result)
-     (and
-     (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000)))
-     (and
-     (=> (fp.eq x (fp #b0 #b01111111 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b01111111 #b00000000000000000000000)))
-     (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) x)
-     (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) result)))))
-     (dynamic_invariant2 result true false true)))) :pattern ((sqrt1 x)) )))
-
 (declare-sort deceleration_t 0)
 
 (define-fun in_range4 ((x Float32)) Bool (and
@@ -292,7 +262,7 @@
 (define-fun deceleration_t__ref___projection ((a deceleration_t__ref)) deceleration_t 
   (deceleration_t__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_170 Float32)
+(define-fun dynamic_invariant2 ((temp___expr_170 Float32)
   (temp___is_init_167 Bool) (temp___skip_constant_168 Bool)
   (temp___do_toplevel_169 Bool)) Bool (=>
                                       (or (= temp___is_init_167 true)
@@ -317,7 +287,7 @@
   (forall ((d Int))
   (! (=>
      (and (dynamic_invariant v true true true) (dynamic_invariant1 d true
-     true true)) (dynamic_invariant3 (a_safe v d) true false true)) :pattern (
+     true true)) (dynamic_invariant2 (a_safe v d) true false true)) :pattern (
   (a_safe v d)) ))))
 
 ;; a_safe__def_axiom
@@ -355,7 +325,7 @@
 (define-fun braking_curve_range__ref___projection ((a braking_curve_range__ref)) braking_curve_range 
   (braking_curve_range__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_323 Int)
+(define-fun dynamic_invariant3 ((temp___expr_323 Int)
   (temp___is_init_320 Bool) (temp___skip_constant_321 Bool)
   (temp___do_toplevel_322 Bool)) Bool (=>
                                       (or (= temp___is_init_320 true)
@@ -784,7 +754,7 @@
   (assert
   (forall ((d Int))
   (! (=> (and (dynamic_invariant1 d true true true) (<= d 5000))
-     (dynamic_invariant4 (curve_index_from_location d) true false true)) :pattern (
+     (dynamic_invariant3 (curve_index_from_location d) true false true)) :pattern (
   (curve_index_from_location d)) )))
 
 (declare-fun target () us_rep2)
@@ -802,6 +772,13 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+
+(define-fun dynamic_invariant4 ((temp___expr_51 Float32)
+  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
+  (temp___do_toplevel_50 Bool)) Bool (=>
+                                     (or (= temp___is_init_48 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
 ;; end_point__def_axiom
   (assert
@@ -1317,7 +1294,7 @@
      (= (is_valid_speed v) true)))
      (let ((result (a_brake_emergency v d)))
      (and (fp.eq result (get_value a_brake_emergency_model (to_int1 RNA v)))
-     (dynamic_invariant3 result true false true)))) :pattern ((a_brake_emergency
+     (dynamic_invariant2 result true false true)))) :pattern ((a_brake_emergency
                                                               v d)) ))))
 
 (declare-fun kdry_rst (Float32) Float32)
@@ -1334,7 +1311,7 @@
   (forall ((d Int))
   (! (=>
      (and (dynamic_invariant v true true true) (dynamic_invariant1 d true
-     true true)) (dynamic_invariant3 (a_brake_safe v d) true false true)) :pattern (
+     true true)) (dynamic_invariant2 (a_brake_safe v d) true false true)) :pattern (
   (a_brake_safe v d)) ))))
 
 ;; a_brake_safe__def_axiom
@@ -1485,7 +1462,7 @@
                    (select temp___273 (to_rep2
                                       (rec__step_function__step_function_t__number_of_delimiters
                                       (us_split_fields9 sfun)))))))))))
-     (dynamic_invariant2 result true false true)))) :pattern ((get_value sfun
+     (dynamic_invariant4 result true false true)))) :pattern ((get_value sfun
                                                               x)) ))))
 
 ;; is_valid_deceleration_model__post_axiom
@@ -1600,7 +1577,7 @@
      (= (is_valid_kdry_rst Tuple0) true))
      (let ((result (kdry_rst v)))
      (and (fp.eq result (get_value kdry_rst_model (to_int1 RNA v)))
-     (dynamic_invariant2 result true false true)))) :pattern ((kdry_rst v)) )))
+     (dynamic_invariant4 result true false true)))) :pattern ((kdry_rst v)) )))
 
 (declare-fun is_valid_kwet_rst (tuple0) Bool)
 
@@ -1625,12 +1602,12 @@
      (= (is_valid_kwet_rst Tuple0) true))
      (let ((result (kwet_rst v)))
      (and (fp.eq result (get_value kwet_rst_model (to_int1 RNA v)))
-     (dynamic_invariant2 result true false true)))) :pattern ((kwet_rst v)) )))
+     (dynamic_invariant4 result true false true)))) :pattern ((kwet_rst v)) )))
 
 ;; a_gradient__post_axiom
   (assert
   (forall ((d Int))
-  (! (=> (dynamic_invariant1 d true true true) (dynamic_invariant3
+  (! (=> (dynamic_invariant1 d true true true) (dynamic_invariant2
      (a_gradient d) true false true)) :pattern ((a_gradient d)) )))
 
 ;; a_gradient__def_axiom
@@ -1996,18 +1973,7 @@
   (assert (and (= o26 o25) (not (or (fp.isInfinite o25) (fp.isNaN o25)))))
 
 ;; H
-  (assert
-  (and (= o27 (sqrt1 o26))
-  (and (not (or (fp.isInfinite o27) (fp.isNaN o27)))
-  (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o27)
-  (and
-  (=> (fp.eq o26 (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq o27 (fp #b0 #b00000000 #b00000000000000000000000)))
-  (and
-  (=> (fp.eq o26 (fp #b0 #b01111111 #b00000000000000000000000))
-  (fp.eq o27 (fp #b0 #b01111111 #b00000000000000000000000)))
-  (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) o26)
-  (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) o27))))))))
+  (assert (= o27 (fp.sqrt RNE o26)))
 
 ;; H
   (assert (= o28 (fp.add RNE speed2 o27)))

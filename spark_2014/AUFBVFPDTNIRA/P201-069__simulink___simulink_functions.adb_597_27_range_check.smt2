@@ -431,71 +431,26 @@
   (= (eq_sub3 a b (bv2nat i) (bv2nat n)) (eq_sub_bv3 a b i n))))
 
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float32)))))
-(declare-sort float 0)
-
-(declare-fun user_eq (float float) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE (Float32) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE (us_image) Float32)
-
-(declare-fun dummy () float)
-
-(declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
-(define-fun float__ref___projection ((a float__ref)) float (float__content a))
-
-(define-fun dynamic_invariant ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
-
-(declare-fun sqrt1 (Float32) Float32)
-
-(declare-fun sqrt__function_guard (Float32 Float32) Bool)
-
-;; sqrt__post_axiom
-  (assert
-  (forall ((x Float32))
-  (! (=>
-     (and (dynamic_invariant x true true true)
-     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x))
-     (let ((result (sqrt1 x)))
-     (and
-     (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) result)
-     (and
-     (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000)))
-     (and
-     (=> (fp.eq x (fp #b0 #b01111111 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b01111111 #b00000000000000000000000)))
-     (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) x)
-     (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) result)))))
-     (dynamic_invariant result true false true)))) :pattern ((sqrt1 x)) )))
-
 (declare-sort unsigned_32 0)
 
 (declare-fun attr__ATTRIBUTE_MODULUS () (_ BitVec 32))
 
-(declare-fun attr__ATTRIBUTE_IMAGE1 ((_ BitVec 32)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE ((_ BitVec 32)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) (_ BitVec 32))
+(declare-fun attr__ATTRIBUTE_VALUE (us_image) (_ BitVec 32))
 
-(declare-fun user_eq1 (unsigned_32 unsigned_32) Bool)
+(declare-fun user_eq (unsigned_32 unsigned_32) Bool)
 
-(declare-fun dummy1 () unsigned_32)
+(declare-fun dummy () unsigned_32)
 
 (declare-datatypes ()
 ((unsigned_32__ref (mk_unsigned_32__ref (unsigned_32__content unsigned_32)))))
 (define-fun unsigned_32__ref___projection ((a unsigned_32__ref)) unsigned_32 
   (unsigned_32__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_189 (_ BitVec 32))
+(define-fun dynamic_invariant ((temp___expr_189 (_ BitVec 32))
   (temp___is_init_186 Bool) (temp___skip_constant_187 Bool)
   (temp___do_toplevel_188 Bool)) Bool true)
 
@@ -503,32 +458,10 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(declare-fun o () Float32)
-
-(declare-fun o1 () Float32)
-
-;; H
-  (assert
-  (and (= o (sqrt1 ((_ to_fp_unsigned 8 24) RNA i)))
-  (and (not (or (fp.isInfinite o) (fp.isNaN o)))
-  (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o)
-  (and
-  (=>
-  (fp.eq ((_ to_fp_unsigned 8 24) RNA i) (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq o (fp #b0 #b00000000 #b00000000000000000000000)))
-  (and
-  (=>
-  (fp.eq ((_ to_fp_unsigned 8 24) RNA i) (fp #b0 #b01111111 #b00000000000000000000000))
-  (fp.eq o (fp #b0 #b01111111 #b00000000000000000000000)))
-  (=>
-  (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) ((_ to_fp_unsigned 8 24) RNA 
-  i)) (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) o))))))))
-
-;; H
-  (assert (= o1 (fp.roundToIntegral RNA o)))
-
 (assert
 ;; WP_parameter_def
  ;; File "interfac.ads", line 74, characters 0-0
-  (not (fp.leq ((_ to_fp_unsigned 8 24) RTP ((_ int2bv 32) 0)) o1)))
+  (not
+  (fp.leq ((_ to_fp_unsigned 8 24) RTP ((_ int2bv 32) 0)) (fp.roundToIntegral RNA (fp.sqrt RNE ((_ to_fp_unsigned 8 24) RNA 
+  i))))))
 (check-sat)

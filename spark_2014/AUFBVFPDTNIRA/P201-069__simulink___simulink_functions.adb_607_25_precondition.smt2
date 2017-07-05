@@ -96,71 +96,26 @@
 (declare-fun is_int1 (Float32) Bool)
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(declare-sort float 0)
-
-(declare-fun user_eq (float float) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE (Float32) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE (us_image) Float32)
-
-(declare-fun dummy () float)
-
-(declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
-(define-fun float__ref___projection ((a float__ref)) float (float__content a))
-
-(define-fun dynamic_invariant ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
-
-(declare-fun sqrt1 (Float32) Float32)
-
-(declare-fun sqrt__function_guard (Float32 Float32) Bool)
-
-;; sqrt__post_axiom
-  (assert
-  (forall ((x Float32))
-  (! (=>
-     (and (dynamic_invariant x true true true)
-     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x))
-     (let ((result (sqrt1 x)))
-     (and
-     (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) result)
-     (and
-     (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000)))
-     (and
-     (=> (fp.eq x (fp #b0 #b01111111 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b01111111 #b00000000000000000000000)))
-     (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) x)
-     (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) result)))))
-     (dynamic_invariant result true false true)))) :pattern ((sqrt1 x)) )))
-
 (declare-sort integer_8 0)
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 128) x) (<= x 127)))
 
-(declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE (us_image) Int)
 
-(declare-fun user_eq1 (integer_8 integer_8) Bool)
+(declare-fun user_eq (integer_8 integer_8) Bool)
 
-(declare-fun dummy1 () integer_8)
+(declare-fun dummy () integer_8)
 
 (declare-datatypes ()
 ((integer_8__ref (mk_integer_8__ref (integer_8__content integer_8)))))
 (define-fun integer_8__ref_2__projection ((a integer_8__ref)) integer_8 
   (integer_8__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_147 Int)
+(define-fun dynamic_invariant ((temp___expr_147 Int)
   (temp___is_init_144 Bool) (temp___skip_constant_145 Bool)
   (temp___do_toplevel_146 Bool)) Bool (=>
                                       (or (= temp___is_init_144 true)
@@ -177,6 +132,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "interfac.ads", line 46, characters 0-0
-  (not
-  (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (of_int RNE i))))
+  (not (or (fp.isZero      (of_int RNE i)) (fp.isPositive  (of_int RNE i)))))
 (check-sat)

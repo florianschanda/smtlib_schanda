@@ -120,33 +120,6 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
 
-(declare-fun sqrt1 (Float64) Float64)
-
-(declare-fun sqrt__function_guard (Float64 Float64) Bool)
-
-;; sqrt__post_axiom
-  (assert
-  (forall ((x Float64))
-  (! (=>
-     (and (dynamic_invariant x true true true)
-     (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) x))
-     (let ((result (sqrt1 x)))
-     (and
-     (and
-     (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) result)
-     (and
-     (=>
-     (fp.eq x (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))
-     (fp.eq result (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))
-     (and
-     (=>
-     (fp.eq x (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
-     (fp.eq result (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
-     (=>
-     (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000001) x)
-     (fp.lt (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) result)))))
-     (dynamic_invariant result true false true)))) :pattern ((sqrt1 x)) )))
-
 (declare-fun f () Float64)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -157,7 +130,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not
-  (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) 
-  f)))
+  (not (or (fp.isZero      f) (fp.isPositive  f))))
 (check-sat)

@@ -141,5 +141,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "a-ngelfu.ads", line 121, characters 0-0
-  (not (not (fp.eq cycle ((_ to_fp 8 24) #x00000000)))))
+  (not (not (fp.isZero      cycle))))
 (check-sat)

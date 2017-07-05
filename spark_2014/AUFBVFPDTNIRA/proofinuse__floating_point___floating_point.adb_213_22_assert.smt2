@@ -130,29 +130,6 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun sqrt1 (Float32) Float32)
-
-(declare-fun sqrt__function_guard (Float32 Float32) Bool)
-
-;; sqrt__post_axiom
-  (assert
-  (forall ((x Float32))
-  (! (=>
-     (and (dynamic_invariant x true true true)
-     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x))
-     (let ((result (sqrt1 x)))
-     (and
-     (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) result)
-     (and
-     (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000)))
-     (and
-     (=> (fp.eq x (fp #b0 #b01111111 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b01111111 #b00000000000000000000000)))
-     (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) x)
-     (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) result)))))
-     (dynamic_invariant result true false true)))) :pattern ((sqrt1 x)) )))
-
 (declare-fun x () Float32)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -160,10 +137,6 @@
 (declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
 
 (declare-fun res () Bool)
-
-(declare-fun o () Float32)
-
-(declare-fun o1 () Bool)
 
 (declare-fun result () Bool)
 
@@ -178,29 +151,12 @@
   (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000))))
 
 ;; H
-  (assert
-  (and (= o (sqrt1 x))
-  (and (not (or (fp.isInfinite o) (fp.isNaN o)))
-  (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o)
-  (and
-  (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq o (fp #b0 #b00000000 #b00000000000000000000000)))
-  (and
-  (=> (fp.eq x (fp #b0 #b01111111 #b00000000000000000000000))
-  (fp.eq o (fp #b0 #b01111111 #b00000000000000000000000)))
-  (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) x)
-  (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) o))))))))
-
-;; H
-  (assert
-  (= o1 (ite (fp.leq o (fp #b0 #b01111111 #b00000000000000000000000)) true
-        false)))
-
-;; H
   (assert (= result res))
 
 ;; H
-  (assert (= res1 o1))
+  (assert
+  (= res1 (ite (fp.leq (fp.sqrt RNE x) (fp #b0 #b01111111 #b00000000000000000000000))
+          true false)))
 
 (assert
 ;; WP_parameter_def

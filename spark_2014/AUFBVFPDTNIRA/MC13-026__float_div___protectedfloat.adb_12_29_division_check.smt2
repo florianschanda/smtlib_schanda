@@ -177,7 +177,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "protectedfloat.ads", line 3, characters 0-0
-  (not
-  (not
-  (fp.eq (fp #b0 #b11111110 #b11111111111111111111111) ((_ to_fp 8 24) #x00000000)))))
+  (not (not (fp.isZero      (fp #b0 #b11111110 #b11111111111111111111111)))))
 (check-sat)

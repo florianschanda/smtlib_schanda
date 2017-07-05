@@ -207,71 +207,26 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range2 temp___expr_15)))
 
-(declare-sort float 0)
-
-(declare-fun user_eq1 (float float) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Float32) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Float32)
-
-(declare-fun dummy1 () float)
-
-(declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
-(define-fun float__ref___projection ((a float__ref)) float (float__content a))
-
-(define-fun dynamic_invariant1 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
-
-(declare-fun sqrt1 (Float32) Float32)
-
-(declare-fun sqrt__function_guard (Float32 Float32) Bool)
-
-;; sqrt__post_axiom
-  (assert
-  (forall ((x Float32))
-  (! (=>
-     (and (dynamic_invariant1 x true true true)
-     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x))
-     (let ((result (sqrt1 x)))
-     (and
-     (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) result)
-     (and
-     (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000)))
-     (and
-     (=> (fp.eq x (fp #b0 #b01111111 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b01111111 #b00000000000000000000000)))
-     (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) x)
-     (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) result)))))
-     (dynamic_invariant1 result true false true)))) :pattern ((sqrt1 x)) )))
-
 (declare-sort value_type 0)
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
 
-(declare-fun user_eq2 (value_type value_type) Bool)
+(declare-fun user_eq1 (value_type value_type) Bool)
 
-(declare-fun dummy2 () value_type)
+(declare-fun dummy1 () value_type)
 
 (declare-datatypes ()
 ((value_type__ref (mk_value_type__ref (value_type__content value_type)))))
 (define-fun value_type__ref___projection ((a value_type__ref)) value_type 
   (value_type__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_178 Int)
+(define-fun dynamic_invariant1 ((temp___expr_178 Int)
   (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
   (temp___do_toplevel_177 Bool)) Bool (=>
                                       (or (= temp___is_init_175 true)
@@ -282,15 +237,15 @@
 
 (define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 100000)))
 
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
 
-(declare-fun user_eq3 (tnumber_list_typeD1 tnumber_list_typeD1) Bool)
+(declare-fun user_eq2 (tnumber_list_typeD1 tnumber_list_typeD1) Bool)
 
-(declare-fun dummy3 () tnumber_list_typeD1)
+(declare-fun dummy2 () tnumber_list_typeD1)
 
 (declare-datatypes ()
 ((tnumber_list_typeD1__ref
@@ -519,15 +474,15 @@
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
 
-(declare-fun user_eq4 (integer integer) Bool)
+(declare-fun user_eq3 (integer integer) Bool)
 
-(declare-fun dummy4 () integer)
+(declare-fun dummy3 () integer)
 
 (declare-datatypes () ((t78b__ref (mk_t78b__ref (t78b__content integer)))))
 (define-fun t78b__ref___projection ((a t78b__ref)) integer (t78b__content a))
@@ -588,5 +543,6 @@
 ;; WP_parameter_def
  ;; File "prime_and_coprime_numbers.ads", line 3, characters 0-0
   (not
-  (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10001111 #b10000110101000000000000))))
+  (or (fp.isZero      (fp #b0 #b10001111 #b10000110101000000000000))
+  (fp.isPositive  (fp #b0 #b10001111 #b10000110101000000000000)))))
 (check-sat)

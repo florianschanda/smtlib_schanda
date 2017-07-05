@@ -296,7 +296,5 @@
 (assert
 ;; WP_parameter_def
  ;; File "hard_stuff.adb", line 1, characters 0-0
-  (not
-  (not
-  (fp.eq (fp #b0 #b10001111 #b10000110101000000000000) ((_ to_fp 8 24) #x00000000)))))
+  (not (not (fp.isZero      (fp #b0 #b10001111 #b10000110101000000000000)))))
 (check-sat)

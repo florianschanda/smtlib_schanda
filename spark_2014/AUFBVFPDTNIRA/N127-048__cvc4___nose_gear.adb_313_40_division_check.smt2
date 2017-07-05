@@ -1741,5 +1741,6 @@
  ;; File "nose_gear.adb", line 24, characters 0-0
   (not
   (not
-  (fp.eq (let ((subject avoid_div_by_zero_out1)) avoid_div_by_zero_out11) ((_ to_fp 11 53) #x0000000000000000)))))
+  (fp.isZero      (let ((subject avoid_div_by_zero_out1))
+                  avoid_div_by_zero_out11)))))
 (check-sat)

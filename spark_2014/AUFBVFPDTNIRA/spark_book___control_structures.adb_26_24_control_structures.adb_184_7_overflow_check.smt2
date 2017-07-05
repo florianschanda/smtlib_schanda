@@ -332,29 +332,6 @@
                                       (<= (- 2147483648) 2147483647))
                                       (in_range6 temp___expr_514)))
 
-(declare-fun sqrt1 (Float32) Float32)
-
-(declare-fun sqrt__function_guard (Float32 Float32) Bool)
-
-;; sqrt__post_axiom
-  (assert
-  (forall ((x Float32))
-  (! (=>
-     (and (dynamic_invariant1 x true true true)
-     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x))
-     (let ((result (sqrt1 x)))
-     (and
-     (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) result)
-     (and
-     (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000)))
-     (and
-     (=> (fp.eq x (fp #b0 #b01111111 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b01111111 #b00000000000000000000000)))
-     (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) x)
-     (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) result)))))
-     (dynamic_invariant1 result true false true)))) :pattern ((sqrt1 x)) )))
-
 (declare-sort uppercase 0)
 
 (define-fun in_range7 ((x Int)) Bool (and (<= 65 x) (<= x 90)))
@@ -524,17 +501,17 @@
 
 (declare-fun o11 () Float32)
 
-(declare-fun o12 () Float32)
+(declare-fun o12 () Int)
 
 (declare-fun o13 () Int)
 
 (declare-fun o14 () Int)
 
-(declare-fun o15 () Int)
-
 (declare-fun temp___533 () Int)
 
 (declare-fun temp___532 () Int)
+
+(declare-fun o15 () Float32)
 
 (declare-fun o16 () Float32)
 
@@ -542,9 +519,9 @@
 
 (declare-fun o18 () Float32)
 
-(declare-fun o19 () Float32)
-
 (declare-fun temp___534 () Float32)
+
+(declare-fun o19 () Float32)
 
 (declare-fun o20 () Float32)
 
@@ -560,9 +537,7 @@
 
 (declare-fun o26 () Float32)
 
-(declare-fun o27 () Float32)
-
-(declare-fun o28 () Bool)
+(declare-fun o27 () Bool)
 
 (declare-fun g1 () Int)
 
@@ -1321,31 +1296,17 @@
 ;; H
   (assert
   (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x1)
-  (and (= o6 (sqrt1 x1))
-  (and (not (or (fp.isInfinite o6) (fp.isNaN o6)))
-  (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o6)
-  (and
-  (=> (fp.eq x1 (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq o6 (fp #b0 #b00000000 #b00000000000000000000000)))
-  (and
-  (=> (fp.eq x1 (fp #b0 #b01111111 #b00000000000000000000000))
-  (fp.eq o6 (fp #b0 #b01111111 #b00000000000000000000000)))
-  (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) x1)
-  (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) o6)))))))))
-
-;; H
-  (assert
-  (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x1)
   (= result35 y4)))
 
 ;; H
   (assert
-  (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x1) (= y1 o6)))
+  (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x1)
+  (= y1 (fp.sqrt RNE x1))))
 
 ;; H
   (assert
   (=> (not (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x1))
-  (and (= o7 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
+  (and (= o6 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
   x1))
   (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
   x1)) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
@@ -1354,22 +1315,12 @@
 ;; H
   (assert
   (=> (not (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x1))
-  (= o8 (fp.neg o7))))
+  (= o7 (fp.neg o6))))
 
 ;; H
   (assert
   (=> (not (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x1))
-  (and (= o9 (sqrt1 o8))
-  (and (not (or (fp.isInfinite o9) (fp.isNaN o9)))
-  (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o9)
-  (and
-  (=> (fp.eq o8 (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq o9 (fp #b0 #b00000000 #b00000000000000000000000)))
-  (and
-  (=> (fp.eq o8 (fp #b0 #b01111111 #b00000000000000000000000))
-  (fp.eq o9 (fp #b0 #b01111111 #b00000000000000000000000)))
-  (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) o8)
-  (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) o9)))))))))
+  (= o8 (fp.sqrt RNE o7))))
 
 ;; H
   (assert
@@ -1379,7 +1330,7 @@
 ;; H
   (assert
   (=> (not (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x1))
-  (= y2 o9)))
+  (= y2 o8)))
 
 ;; H
   (assert
@@ -1388,12 +1339,12 @@
 
 ;; H
   (assert
-  (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x1) (= o11 x1)))
+  (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x1) (= o10 x1)))
 
 ;; H
   (assert
   (=> (not (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x1))
-  (and (= o10 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
+  (and (= o9 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
   x1))
   (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
   x1)) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
@@ -1402,33 +1353,22 @@
 ;; H
   (assert
   (=> (not (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x1))
-  (= o11 (fp.neg o10))))
+  (= o10 (fp.neg o9))))
 
 ;; H
-  (assert
-  (and (= o12 (sqrt1 o11))
-  (and (not (or (fp.isInfinite o12) (fp.isNaN o12)))
-  (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o12)
-  (and
-  (=> (fp.eq o11 (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq o12 (fp #b0 #b00000000 #b00000000000000000000000)))
-  (and
-  (=> (fp.eq o11 (fp #b0 #b01111111 #b00000000000000000000000))
-  (fp.eq o12 (fp #b0 #b01111111 #b00000000000000000000000)))
-  (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) o11)
-  (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) o12))))))))
+  (assert (= o11 (fp.sqrt RNE o10)))
 
 ;; H
   (assert (= result37 (mk_t__ref y1)))
 
 ;; H
-  (assert (= y3 o12))
+  (assert (= y3 o11))
 
 ;; H
-  (assert (and (= o13 (- c8 d2)) (in_range2 (- c8 d2))))
+  (assert (and (= o12 (- c8 d2)) (in_range2 (- c8 d2))))
 
 ;; H
-  (assert (= result39 (ite (= o13 0) true false)))
+  (assert (= result39 (ite (= o12 0) true false)))
 
 ;; H
   (assert (=> (= result39 true) (= result38 (ite (< 2 e2) true false))))
@@ -1437,10 +1377,10 @@
   (assert (=> (not (= result39 true)) (= result38 (of_int1 1))))
 
 ;; H
-  (assert (and (= o14 (- c8 d2)) (in_range2 (- c8 d2))))
+  (assert (and (= o13 (- c8 d2)) (in_range2 (- c8 d2))))
 
 ;; H
-  (assert (= result41 (ite (= o14 0) true false)))
+  (assert (= result41 (ite (= o13 0) true false)))
 
 ;; H
   (assert (=> (= result41 true) (= result40 (ite (< 2 e2) true false))))
@@ -1465,7 +1405,7 @@
   (=> (not (= letter1 78))
   (=> (not (= letter1 79))
   (=> (not (= letter1 82)) (=> (not (= letter1 83)) (= letter1 84))))))))))
-  (= o15 1)))
+  (= o14 1)))
 
 ;; H
   (assert
@@ -1479,7 +1419,7 @@
   (=> (not (= letter1 78))
   (=> (not (= letter1 79))
   (=> (not (= letter1 82)) (=> (not (= letter1 83)) (= letter1 84)))))))))))
-  (=> (=> (not (= letter1 68)) (= letter1 71)) (= o15 2))))
+  (=> (=> (not (= letter1 68)) (= letter1 71)) (= o14 2))))
 
 ;; H
   (assert
@@ -1497,7 +1437,7 @@
   (=>
   (=> (not (= letter1 66))
   (=> (not (= letter1 67)) (=> (not (= letter1 77)) (= letter1 80))))
-  (= o15 3)))))
+  (= o14 3)))))
 
 ;; H
   (assert
@@ -1520,7 +1460,7 @@
   (=> (not (= letter1 70))
   (=> (not (= letter1 72))
   (=> (not (= letter1 86)) (=> (not (= letter1 87)) (= letter1 89)))))
-  (= o15 4))))))
+  (= o14 4))))))
 
 ;; H
   (assert
@@ -1544,32 +1484,7 @@
   (=> (not (= letter1 70))
   (=> (not (= letter1 72))
   (=> (not (= letter1 86)) (=> (not (= letter1 87)) (= letter1 89))))))
-  (=> (= letter1 75) (= o15 5)))))))
-
-;; H
-  (assert
-  (=>
-  (not
-  (=> (not (= letter1 65))
-  (=> (not (= letter1 69))
-  (=> (not (= letter1 73))
-  (=> (not (= letter1 76))
-  (=> (not (= letter1 85))
-  (=> (not (= letter1 78))
-  (=> (not (= letter1 79))
-  (=> (not (= letter1 82)) (=> (not (= letter1 83)) (= letter1 84)))))))))))
-  (=> (not (=> (not (= letter1 68)) (= letter1 71)))
-  (=>
-  (not
-  (=> (not (= letter1 66))
-  (=> (not (= letter1 67)) (=> (not (= letter1 77)) (= letter1 80)))))
-  (=>
-  (not
-  (=> (not (= letter1 70))
-  (=> (not (= letter1 72))
-  (=> (not (= letter1 86)) (=> (not (= letter1 87)) (= letter1 89))))))
-  (=> (not (= letter1 75))
-  (=> (=> (not (= letter1 74)) (= letter1 88)) (= o15 8))))))))
+  (=> (= letter1 75) (= o14 5)))))))
 
 ;; H
   (assert
@@ -1594,13 +1509,38 @@
   (=> (not (= letter1 72))
   (=> (not (= letter1 86)) (=> (not (= letter1 87)) (= letter1 89))))))
   (=> (not (= letter1 75))
-  (=> (not (=> (not (= letter1 74)) (= letter1 88))) (= o15 10))))))))
+  (=> (=> (not (= letter1 74)) (= letter1 88)) (= o14 8))))))))
+
+;; H
+  (assert
+  (=>
+  (not
+  (=> (not (= letter1 65))
+  (=> (not (= letter1 69))
+  (=> (not (= letter1 73))
+  (=> (not (= letter1 76))
+  (=> (not (= letter1 85))
+  (=> (not (= letter1 78))
+  (=> (not (= letter1 79))
+  (=> (not (= letter1 82)) (=> (not (= letter1 83)) (= letter1 84)))))))))))
+  (=> (not (=> (not (= letter1 68)) (= letter1 71)))
+  (=>
+  (not
+  (=> (not (= letter1 66))
+  (=> (not (= letter1 67)) (=> (not (= letter1 77)) (= letter1 80)))))
+  (=>
+  (not
+  (=> (not (= letter1 70))
+  (=> (not (= letter1 72))
+  (=> (not (= letter1 86)) (=> (not (= letter1 87)) (= letter1 89))))))
+  (=> (not (= letter1 75))
+  (=> (not (=> (not (= letter1 74)) (= letter1 88))) (= o14 10))))))))
 
 ;; H
   (assert (= result43 (mk_int__ref value)))
 
 ;; H
-  (assert (= value1 o15))
+  (assert (= value1 o14))
 
 ;; H
   (assert (= result44 (mk_int__ref sum)))
@@ -1670,23 +1610,23 @@
 
 ;; H
   (assert
-  (and (= o16 (fp.mul RNE approx1 approx1))
+  (and (= o15 (fp.mul RNE approx1 approx1))
   (not (or (fp.isInfinite (fp.mul RNE approx1 approx1)) (fp.isNaN (fp.mul RNE 
   approx1 approx1))))))
 
 ;; H
-  (assert (= o17 (fp.sub RNE x1 o16)))
+  (assert (= o16 (fp.sub RNE x1 o15)))
 
 ;; H
-  (assert (and (= o18 o17) (not (or (fp.isInfinite o17) (fp.isNaN o17)))))
+  (assert (and (= o17 o16) (not (or (fp.isInfinite o16) (fp.isNaN o16)))))
 
 ;; H
-  (assert (= o19 (fp.abs o18)))
+  (assert (= o18 (fp.abs o17)))
 
 ;; H
   (assert
   (= result47 (ite (fp.lt (fp #b0 #b01110001 #b10100011011011100010111) 
-              o19) true false)))
+              o18) true false)))
 
 ;; H
   (assert (=> (= result47 true) (= temp___534 approx1)))
@@ -1704,56 +1644,56 @@
 ;; H
   (assert
   (=> (= result47 true)
-  (and (= o20 (fp.div RNE x1 approx2))
+  (and (= o19 (fp.div RNE x1 approx2))
   (not (or (fp.isInfinite (fp.div RNE x1 approx2)) (fp.isNaN (fp.div RNE 
   x1 approx2)))))))
 
 ;; H
-  (assert (=> (= result47 true) (= o21 (fp.add RNE approx2 o20))))
+  (assert (=> (= result47 true) (= o20 (fp.add RNE approx2 o19))))
 
 ;; H
   (assert
   (=> (= result47 true)
-  (and (= o22 o21) (not (or (fp.isInfinite o21) (fp.isNaN o21))))))
+  (and (= o21 o20) (not (or (fp.isInfinite o20) (fp.isNaN o20))))))
 
 ;; H
   (assert
   (=> (= result47 true)
-  (= o23 (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000) o22))))
+  (= o22 (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000) o21))))
 
 ;; H
   (assert (=> (= result47 true) (= result48 (mk_t__ref approx2))))
 
 ;; H
-  (assert (=> (= result47 true) (= approx3 o23)))
+  (assert (=> (= result47 true) (= approx3 o22)))
 
 ;; H
   (assert
   (=> (= result47 true)
-  (and (= o24 (fp.mul RNE approx3 approx3))
+  (and (= o23 (fp.mul RNE approx3 approx3))
   (not (or (fp.isInfinite (fp.mul RNE approx3 approx3)) (fp.isNaN (fp.mul RNE 
   approx3 approx3)))))))
 
 ;; H
-  (assert (=> (= result47 true) (= o25 (fp.sub RNE x1 o24))))
+  (assert (=> (= result47 true) (= o24 (fp.sub RNE x1 o23))))
 
 ;; H
   (assert
   (=> (= result47 true)
-  (and (= o26 o25) (not (or (fp.isInfinite o25) (fp.isNaN o25))))))
+  (and (= o25 o24) (not (or (fp.isInfinite o24) (fp.isNaN o24))))))
 
 ;; H
-  (assert (=> (= result47 true) (= o27 (fp.abs o26))))
+  (assert (=> (= result47 true) (= o26 (fp.abs o25))))
 
 ;; H
   (assert
   (=> (= result47 true)
-  (= o28 (ite (fp.lt (fp #b0 #b01110001 #b10100011011011100010111) o27) true
+  (= o27 (ite (fp.lt (fp #b0 #b01110001 #b10100011011011100010111) o26) true
          false))))
 
 ;; H
   (assert
-  (=> (= result47 true) (= result49 (ite (not (= o28 true)) true false))))
+  (=> (= result47 true) (= result49 (ite (not (= o27 true)) true false))))
 
 ;; H
   (assert (=> (= result47 true) (= result49 true)))

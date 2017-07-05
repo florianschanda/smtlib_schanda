@@ -171,94 +171,18 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-sort long_float 0)
-
-(declare-fun user_eq1 (long_float long_float) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 (Float64) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Float64)
-
-(declare-fun dummy1 () long_float)
-
-(declare-datatypes ()
-((long_float__ref (mk_long_float__ref (long_float__content long_float)))))
-(define-fun long_float__ref___projection ((a long_float__ref)) long_float 
-  (long_float__content a))
-
-(define-fun dynamic_invariant1 ((temp___expr_57 Float64)
-  (temp___is_init_54 Bool) (temp___skip_constant_55 Bool)
-  (temp___do_toplevel_56 Bool)) Bool (=>
-                                     (or (= temp___is_init_54 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
-
-(declare-fun sqrt1 (Float64) Float64)
-
-(declare-fun sqrt__function_guard (Float64 Float64) Bool)
-
-;; sqrt__post_axiom
-  (assert
-  (forall ((x Float64))
-  (! (=>
-     (and (dynamic_invariant1 x true true true)
-     (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) x))
-     (let ((result (sqrt1 x)))
-     (and
-     (and
-     (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) result)
-     (and
-     (=>
-     (fp.eq x (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))
-     (fp.eq result (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))
-     (and
-     (=>
-     (fp.eq x (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
-     (fp.eq result (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
-     (=>
-     (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000001) x)
-     (fp.lt (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) result)))))
-     (dynamic_invariant1 result true false true)))) :pattern ((sqrt1 x)) )))
-
 (declare-fun f () Float32)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
-(declare-fun o () Float64)
-
-(declare-fun o1 () Float32)
-
 ;; H
   (assert (not (or (fp.isInfinite f) (fp.isNaN f))))
-
-;; H
-  (assert
-  (and (= o (sqrt1 ((_ to_fp 11 53) RNE f)))
-  (and (not (or (fp.isInfinite o) (fp.isNaN o)))
-  (and
-  (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) 
-  o)
-  (and
-  (=>
-  (fp.eq ((_ to_fp 11 53) RNE f) (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))
-  (fp.eq o (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))
-  (and
-  (=>
-  (fp.eq ((_ to_fp 11 53) RNE f) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
-  (fp.eq o (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
-  (=>
-  (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000001) ((_ to_fp 11 53) RNE 
-  f))
-  (fp.lt (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) 
-  o))))))))
-
-;; H
-  (assert (= o1 ((_ to_fp 8 24) RNE o)))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (not
+  (not (or (fp.isInfinite ((_ to_fp 8 24) RNE (fp.sqrt RNE ((_ to_fp 11 53) RNE 
+  f)))) (fp.isNaN ((_ to_fp 8 24) RNE (fp.sqrt RNE ((_ to_fp 11 53) RNE 
+  f))))))))
 (check-sat)
