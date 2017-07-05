@@ -11,7 +11,8 @@ class Benchmark(object):
     def __init__(self, fn):
         self.benchmark = fn
         self.name      = os.path.basename(fn)
-        self.cat       = os.path.basename(os.path.dirname(fn))
+        cats = os.path.dirname(fn).split("/")
+        self.cat = cats[0]
         self.expected  = "unknown"
 
         with open(fn, "rU") as fd:
