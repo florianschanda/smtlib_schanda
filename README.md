@@ -1,6 +1,8 @@
 # SMTLIB benchmarks
 This repository contains a bag of SMTLIB benchmarks assembled by
-Florian Schanda. They come from three main areas.
+Florian Schanda, and a bag of benchmarks filed here for
+convenience. My benchmarks (spark_2014, crafted, random) come from
+three main areas.
 
 ## SPARK 2014 VCs
 VCs from the public SPARK 2014 testsuite (compiling SPARK and
@@ -48,3 +50,16 @@ similar to Wintersteiger's SMTLIB benchmarks, but they seem to cover
 more areas (i.e. we found bugs in Z3, MathSAT, CVC4 with them).
 
 All of these are automatically annotated with SAT or UNSAT.
+
+## wintersteiger
+These are Cristoph's FP benchmarks, downloaded on 2017-07-05 from
+SMTLIB and filed here for convenience.
+
+## griggio
+These are Alberto's FP benchmarks, downloaded on 2017-07-05 from
+SMTLIB and filed here for convenience.
+
+## nyxbrain
+These are Martin's work-in-progress benchmarks. They are filed here
+for convenience, but they should not be re-distributed or included in
+SMTLIB as they are *not yet finished or necessarily correct*.
