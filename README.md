@@ -62,4 +62,5 @@ SMTLIB and filed here for convenience.
 ## nyxbrain
 These are Martin's work-in-progress benchmarks. They are filed here
 for convenience, but they should not be re-distributed or included in
-SMTLIB as they are *not yet finished or necessarily correct*.
+SMTLIB as they are *not yet finished or necessarily correct*. Please
+contact Martin for additional detail.
