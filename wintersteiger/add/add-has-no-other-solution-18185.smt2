@@ -1,0 +1,26 @@
+(set-info :smt-lib-version 2.6)
+(set-info :category "crafted")
+(set-info :source |Christoph M. Wintersteiger (cwinter@microsoft.com). Randomly generated floating-point testcases.|)
+; Rounding mode: nearest, ties to even
+; Precision: double (11/53)
+; X = -1.53629588766298486035566384089179337024688720703125p-744 {- 2415261959839348 -744 (-1.66019e-224)}
+; Y = 1.26247432973235618192120455205440521240234375p-94 {+ 1182079293576960 -94 (6.37387e-029)}
+; -1.53629588766298486035566384089179337024688720703125p-744 + 1.26247432973235618192120455205440521240234375p-94 == 1.26247432973235618192120455205440521240234375p-94
+; [HW: 1.26247432973235618192120455205440521240234375p-94] 
+
+; mpf : + 1182079293576960 -94
+; mpfd: + 1182079293576960 -94 (6.37387e-029) class: Pos. norm. non-zero
+; hwf : + 1182079293576960 -94 (6.37387e-029) class: Pos. norm. non-zero
+
+(set-logic QF_FP)
+(set-info :status unsat)
+(define-sort FPN () (_ FloatingPoint 11 53))
+(declare-fun x () FPN)
+(declare-fun y () FPN)
+(declare-fun r () FPN)
+(assert (= x (fp #b1 #b00100010111 #b1000100101001010101011111111001001111101111001110100)))
+(assert (= y (fp #b0 #b01110100001 #b0100001100110001100001001000011000111101011100000000)))
+(assert (= r (fp #b0 #b01110100001 #b0100001100110001100001001000011000111101011100000000)))
+(assert  (not (= (fp.add roundNearestTiesToEven x y) r)))
+(check-sat)
+(exit)

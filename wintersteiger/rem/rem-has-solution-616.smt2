@@ -1,0 +1,26 @@
+(set-info :smt-lib-version 2.6)
+(set-info :category "crafted")
+(set-info :source |Christoph M. Wintersteiger (cwinter@microsoft.com). Randomly generated floating-point testcases.|)
+; Rounding mode: to negative
+; Precision: double (11/53)
+; X = -1.185974817334236153243409717106260359287261962890625p72 {- 837556118046762 72 (-5.60061e+021)}
+; Y = -1.0635733968864775622620300055132247507572174072265625p-201 {- 286309126528617 -201 (-3.30932e-061)}
+; -1.185974817334236153243409717106260359287261962890625p72 % -1.0635733968864775622620300055132247507572174072265625p-201 == -1.2398355599867532106372891576029360294342041015625p-204
+; [HW: -1.2398355599867532106372891576029360294342041015625p-204] 
+
+; mpf : - 1080123338586536 -204
+; mpfd: - 1080123338586536 -204 (-4.8222e-062) class: Neg. norm. non-zero
+; hwf : - 1080123338586536 -204 (-4.8222e-062) class: Neg. norm. non-zero
+
+(set-logic QF_FP)
+(set-info :status sat)
+(define-sort FPN () (_ FloatingPoint 11 53))
+(declare-fun x () FPN)
+(declare-fun y () FPN)
+(declare-fun r () FPN)
+(assert (= x (fp #b1 #b10001000111 #b0010111110011100000010111010111001010100100000101010)))
+(assert (= y (fp #b1 #b01100110110 #b0001000001000110010110001001110010000101111001101001)))
+(assert (= r (fp #b1 #b01100110011 #x3d65dcfe8f9a8)))
+(assert (= (fp.rem x y) r))
+(check-sat)
+(exit)

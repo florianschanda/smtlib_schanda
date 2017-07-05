@@ -1,0 +1,23 @@
+(set-info :smt-lib-version 2.6)
+; Rounding mode: to zero
+; Precision: double (11/53)
+; X = 1.7118633879177347356659311117255128920078277587890625 279 {+ 3205947688565009 279 (1.66279e+084)}
+; 1.7118633879177347356659311117255128920078277587890625 279 I == 1.7118633879177347356659311117255128920078277587890625 279
+; [HW: 1.7118633879177347356659311117255128920078277587890625 279] 
+
+; mpf : + 3205947688565009 279
+; mpfd: + 3205947688565009 279 (1.66279e+084) class: Pos. norm. non-zero
+; hwf : + 3205947688565009 279 (1.66279e+084) class: Pos. norm. non-zero
+
+(set-logic QF_FP)
+(set-info :source |Christoph M. Wintersteiger (cwinter@microsoft.com). Randomly generated floating-point testcases.|)
+(set-info :category "crafted")
+(set-info :status unsat)
+(define-sort FPN () (_ FloatingPoint 11 53))
+(declare-fun x () FPN)
+(declare-fun r () FPN)
+(assert (= x (fp #b0 #b10100010110 #b1011011000111100101011011101001001010011100100010001)))
+(assert (= r (fp #b0 #b10100010110 #b1011011000111100101011011101001001010011100100010001)))
+(assert  (not (= (fp.roundToIntegral roundTowardZero x) r)))
+(check-sat)
+(exit)
