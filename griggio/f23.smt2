@@ -6,7 +6,6 @@
 ;; MathSAT API call trace
 ;; generated on 05/20/15 17:24:51
 
-(declare-sort U0 0)
 (declare-fun x () (_ FloatingPoint 8 24))
 (declare-fun y () (_ FloatingPoint 8 24))
 (define-fun _t_3 () RoundingMode RNE)
