@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 
+from copy import copy
+
 import argparse
 import multiprocessing
 import os
 import subprocess
 import resource
 import datetime
+import tempfile
 
 class Benchmark(object):
     def __init__(self, fn):
@@ -57,31 +60,46 @@ class Benchmark(object):
         self.data = None
 
 class Prover_Kind(object):
-    def __init__(self, name, base_cmd, use_logic=True):
+    def __init__(self, name, base_cmd, use_logic=True, use_temp=False):
         self.name  = name
         self.cmd   = base_cmd
         self.logic = use_logic
+        self.temp  = use_temp
 
 class Prover(object):
     def __init__(self, kind, binary, timeout):
         self.cmd     = [binary] + kind.cmd
         self.timeout = timeout
         self.logic   = kind.logic
+        self.temp    = kind.temp
 
     def get_status(self, benchmark):
         def set_limit():
             resource.setrlimit(resource.RLIMIT_CPU, (self.timeout,
                                                      self.timeout))
 
-        cmd = self.cmd
+        benchmark.load(keep_logic = self.logic)
+
+        cmd = copy(self.cmd)
+        if self.temp:
+            fid, fn = tempfile.mkstemp(suffix='.smt2',
+                                       prefix='bench_')
+            os.write(fid, benchmark.data)
+            os.close(fid)
+            cmd.append(fn)
+
         p = subprocess.Popen(cmd,
                              stdin=subprocess.PIPE,
                              stdout=subprocess.PIPE,
                              stderr=subprocess.PIPE,
                              preexec_fn=set_limit)
-        benchmark.load(keep_logic = self.logic)
-        stdout, stderr = p.communicate(benchmark.data)
+        if self.temp:
+            stdout, stderr = p.communicate()
+            os.unlink(fn)
+        else:
+            stdout, stderr = p.communicate(benchmark.data)
         stdout = stdout.strip()
+        stderr = stderr.strip()
         benchmark.unload()
 
         if len(stdout) == 0 and len(stderr) == 0:
@@ -165,7 +183,7 @@ def main():
     provers.append(Prover_Kind("mathsat", ["-input=smt2"]))
     provers.append(Prover_Kind("mathsat_acdl", ["-input=smt2",
                                                 "-theory.fp.mode=2"]))
-    # provers.append(Prover_Kind("colibri", []))
+    provers.append(Prover_Kind("colibri", [], use_temp=True))
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--suite",
@@ -265,7 +283,7 @@ def main():
 
     start_time = datetime.datetime.now()
     n = 0
-    if options.suite == "debug" and False:
+    if options.suite == "debug":
         for task in tasks:
             n += 1
             analyze(process(task),
