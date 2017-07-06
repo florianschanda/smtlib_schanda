@@ -1,5 +1,4 @@
 (set-logic QF_FP)
-(set-option :produce-models true)
 (set-info :source |SPARK float axiomatisation review by Florian Schanda|)
 (set-info :smt-lib-version 2.5)
 (set-info :category crafted)
@@ -12,6 +11,4 @@
 (assert (not (fp.eq (fp.min x y) y)))
 
 (check-sat)
-(get-value (x y))
-(get-value ((fp.min x y)))
 (exit)

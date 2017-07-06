@@ -1,5 +1,4 @@
-;;(set-logic QF_FPBV)
-(set-option :produce-models true)
+;;(set-logic QF_FPBVNIA)
 (set-info :source |SPARK float axiomatisation review by Florian Schanda|)
 (set-info :smt-lib-version 2.5)
 (set-info :category crafted)
@@ -20,7 +19,4 @@
 ;;(assert (= f2 (_ +oo 8 24)))
 
 (check-sat)
-(get-value (x))
-(get-value (b))
-(get-value (f))
 (exit)

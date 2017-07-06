@@ -1,5 +1,4 @@
 (set-logic QF_FP)
-(set-option :produce-models true)
 (set-info :source |SPARK float axiomatisation review by Florian Schanda|)
 (set-info :smt-lib-version 2.5)
 (set-info :category crafted)
@@ -15,5 +14,4 @@
                 (fp.isPositive c))))
 
 (check-sat)
-(get-value (x c))
 (exit)
