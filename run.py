@@ -4,6 +4,7 @@ import argparse
 import multiprocessing
 import os
 import datetime
+from cPickle import dump
 
 from common import *
 
@@ -30,7 +31,7 @@ def main():
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--suite",
-                    default="qf_fp",
+                    default="fp",
                     choices=["qf_fp", "fp", "debug"])
     ap.add_argument("--single",
                     default=False,
@@ -143,10 +144,28 @@ def main():
                     float(n * 100) / float(len(tasks)),
                     start_time)
 
-    print "%20s %s\n" % ("benchmarks", stat_hdg)
+    elapsed_total_time = datetime.datetime.now() - start_time
+
+    print "%20s %s" % ("benchmarks", stat_hdg)
     for cat in sorted(detail):
         print "%20s %s" % (cat, stat_str(detail[cat]))
     print "%20s %s" % ("TOTAL", stat_str(summary))
+
+    with open("data_%s_%s_%s.p" %
+              (options.suite,
+               options.prover_kind,
+               os.path.basename(options.prover_bin).lstrip("./")), "w") as fd:
+        report = {
+            "prover" : {
+                "kind" : options.prover_kind,
+                "bin"  : os.path.basename(options.prover_bin).lstrip("./")},
+            "time" : {
+                "start"   : start_time,
+                "elapsed" : elapsed_total_time},
+            "summary" : summary,
+            "details" : detail,
+        }
+        dump(report, fd)
 
     with open("report_%s_%s.txt" % (options.prover_kind,
                                     options.suite), "w") as fd:
@@ -156,8 +175,7 @@ def main():
                  os.path.basename(options.prover_bin).lstrip("./"))
         fd.write("Benchmark suite : %s\n" % options.suite)
         fd.write("Benchmark start : %s\n" % start_time)
-        fd.write("Benchmark time  : %s\n" %
-                 (datetime.datetime.now() - start_time))
+        fd.write("Benchmark time  : %s\n" % elapsed_total_time)
 
         fd.write("\n# Results\n")
         fd.write("%15s : %s\n" % ("benchmarks", stat_hdg))
