@@ -14,5 +14,4 @@
 
 (assert (distinct x y))
 (check-sat)
-(get-value (f g x y))
 (exit)

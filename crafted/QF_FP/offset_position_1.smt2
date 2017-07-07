@@ -1,5 +1,4 @@
 (set-logic QF_FP)
-(set-option :produce-models true)
 (set-info :source |SPARK inspired floating point problems by Florian Schanda|)
 (set-info :smt-lib-version 2.5)
 (set-info :category crafted)
@@ -28,6 +27,4 @@
 (assert (in_range_position_t offset_y))
 
 (check-sat)
-(get-value (origin_x origin_y))
-(get-value (offset_x offset_y))
 (exit)

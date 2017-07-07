@@ -1,5 +1,4 @@
 (set-logic QF_FPBV)
-(set-option :produce-models true)
 (set-info :source |SPARK inspired floating point problems by Florian Schanda|)
 (set-info :smt-lib-version 2.5)
 (set-info :category crafted)
@@ -44,7 +43,4 @@
 
 
 (check-sat)
-(get-value (x y z))
-(get-value (fx fy fz))
-(get-value ((fp.add RNE fx fy)))
 (exit)

@@ -1,5 +1,4 @@
 (set-logic QF_FPBV)
-;;(set-option :produce-models true)
 (set-info :source |SPARK inspired floating point problems by Florian Schanda|)
 (set-info :smt-lib-version 2.5)
 (set-info :category crafted)
@@ -83,8 +82,4 @@
                          new_speed)))
 
 (check-sat)
-;;(get-value (n factor current_delta old_speed new_speed))
-;;(get-value ((low_bound n) (high_bound n)))
-;;(get-value ((low_bound (bvadd n (_ bv1 32)))
-;;            (high_bound (bvadd n (_ bv1 32)))))
 (exit)

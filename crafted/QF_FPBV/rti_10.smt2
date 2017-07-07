@@ -20,7 +20,4 @@
 
 (assert (not (bvsle to_int_x i_______)))
 (check-sat)
-(get-value (x i))
-(get-value (to_int_x))
-(get-value (i_______))
 (exit)

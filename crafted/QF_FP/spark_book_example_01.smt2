@@ -1,5 +1,4 @@
 (set-logic QF_FP)
-(set-option :produce-models true)
 (set-info :source |SPARK inspired floating point problems by Florian Schanda|)
 (set-info :smt-lib-version 2.5)
 (set-info :category crafted)
@@ -30,6 +29,4 @@
          (and (fp.leq f0 total)
               (fp.leq total f100))))
 (check-sat)
-(get-value (room_length wall_thickness))
-(get-value (total))
 (exit)

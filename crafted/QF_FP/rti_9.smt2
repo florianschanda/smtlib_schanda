@@ -19,5 +19,4 @@
 (assert (not (= (fp.roundToIntegral RNA (fp.add RNE i x))
                 i)))
 (check-sat)
-(get-value (x i))
 (exit)

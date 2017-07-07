@@ -1,5 +1,4 @@
 (set-logic QF_FP)
-(set-option :produce-models true)
 (set-info :source |SPARK inspired floating point problems by Florian Schanda|)
 (set-info :smt-lib-version 2.5)
 (set-info :category crafted)
@@ -22,5 +21,4 @@
 (assert (not (fp.lt lo r hi)))
 
 (check-sat)
-(get-value (a b))
 (exit)

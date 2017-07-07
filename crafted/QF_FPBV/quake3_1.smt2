@@ -71,5 +71,4 @@
 (assert (not (and (fp.geq r result_lo)
                   (fp.leq r result_hi))))
 (check-sat)
-;; (get-value (x2 i_1 i_2 y_1 y_2 r))
 (exit)

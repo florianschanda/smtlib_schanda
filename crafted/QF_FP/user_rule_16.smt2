@@ -24,5 +24,4 @@
 
 (assert (not (fp.leq (fp.sqrt RNE res) x)))
 (check-sat)
-;(get-value (x y res (fp.sqrt RNE res)))
 (exit)

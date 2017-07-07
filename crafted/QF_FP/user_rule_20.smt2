@@ -1,9 +1,8 @@
 (set-logic QF_FP)
-(set-option :produce-models true)
 (set-info :source |SPARK inspired floating point problems by Florian Schanda|)
 (set-info :smt-lib-version 2.5)
 (set-info :category crafted)
-;;(set-info :status unsat)
+(set-info :status unsat)
 
 (declare-const a Float32)
 (declare-const b Float32)
@@ -23,13 +22,6 @@
                  (fp.gt a (fp.mul RNE c b))
                  (fp.lt a (fp.mul RNE (fp.neg c) b)))))
 
-;(assert (fp.isPositive b))
-;(assert (not (fp.isZero (fp.mul RNE c b))))
-
 (assert (not (fp.leq (fp.div RNE a b) c)))
-
 (check-sat)
-(get-value ((fp.div RNE a b)))
-(get-value ((fp.mul RNE c b)))
-(get-model)
 (exit)
