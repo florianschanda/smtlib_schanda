@@ -151,10 +151,11 @@ def main():
         print "%20s %s" % (cat, stat_str(detail[cat]))
     print "%20s %s" % ("TOTAL", stat_str(summary))
 
-    with open("data_%s_%s_%s.p" %
-              (options.suite,
-               options.prover_kind,
-               os.path.basename(options.prover_bin).lstrip("./")), "w") as fd:
+    basename = "%s_%s_%s" % (options.suite,
+                             options.prover_kind,
+                             os.path.basename(options.prover_bin).lstrip("./"))
+
+    with open("data_%s.p" % basename, "w") as fd:
         report = {
             "prover" : {
                 "kind" : options.prover_kind,
@@ -167,8 +168,7 @@ def main():
         }
         dump(report, fd)
 
-    with open("report_%s_%s.txt" % (options.prover_kind,
-                                    options.suite), "w") as fd:
+    with open("report_%s.txt" % basename, "w") as fd:
         fd.write("# Configuration \n")
         fd.write("Prover kind     : %s\n" % options.prover_kind)
         fd.write("Prover binary   : %s\n" %
