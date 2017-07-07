@@ -1,5 +1,5 @@
 (set-logic ALL_SUPPORTED)
-; Should be SAT
+(set-info :status sat)
 (define-fun f () Float32 (fp (_ bv0 1) (_ bv11 8) (_ bv4194304 23)))
 (define-fun ref () Bool false)
 (define-fun result () Bool (fp.isZero f) )
