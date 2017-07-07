@@ -204,7 +204,7 @@ def mk_competition_slides(fd):
                             for r in competitors))
         fd.write(r"\\" + "\n")
         for cat in sorted(competitors[0]["details"]):
-            if criteria != "solved" and cat in ("spark_2014", "griggio"):
+            if criteria == "unsound" and cat in ("spark_2014", "griggio"):
                 continue
             fd.write(mk_bench_name(cat) + " & ")
             if criteria == "solved":
@@ -247,6 +247,13 @@ def mk_competition_slides(fd):
     fd.write("\\begin{frame}{The competition}{Unsound}\n")
     fd.write("\\begin{center}\n")
     mk_table("unsound")
+    fd.write("\\end{center}\n")
+    fd.write("\\end{frame}\n\n")
+
+    # Table comparing errors for all solvers
+    fd.write("\\begin{frame}{The competition}{Errors}\n")
+    fd.write("\\begin{center}\n")
+    mk_table("error")
     fd.write("\\end{center}\n")
     fd.write("\\end{frame}\n\n")
 
