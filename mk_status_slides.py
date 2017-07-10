@@ -5,6 +5,8 @@ import argparse
 from cPickle import load
 from pprint import pprint
 
+NON_ANNOTATED_TESTS = set(["griggio"])
+
 def mk_bench_name(cat):
     return {"crafted"    : "schanda",
             "random"     : "PyMPF",
@@ -116,7 +118,7 @@ def mk_progress_slides(fd):
                data[-1]["details"][cat]["error"],
                data[-1]["details"][cat]["unsound"]]
         s_row = ["%u" % item for item in row]
-        if cat in ("spark_2014", "griggio"):
+        if cat in NON_ANNOTATED_TESTS:
             s_row[1] = ""
             s_row[3] = ""
         for i in (2, 3):
@@ -175,25 +177,13 @@ def mk_progress_slides(fd):
         fd.write("\\end{tikzpicture}\n")
         fd.write("\\end{center}\n")
 
-    # Plot of solved over time
-    fd.write("\\begin{frame}[fragile]{FP progress in CVC4}{Solved over time (average over averages)}\n")
-    mk_plot("solved", "AnSecondaryGreen")
-    fd.write("\\end{frame}\n\n")
-
-    # Plot of errors over time
-    fd.write("\\begin{frame}[fragile]{FP progress in CVC4}{Errors over time (average over averages)}\n")
-    mk_plot("error", "AnSecondaryRed")
-    fd.write("\\end{frame}\n\n")
-
-    # Plot of unsound over time
-    fd.write("\\begin{frame}[fragile]{FP progress in CVC4}{Unsoundness over time (average over averages)}\n")
-    mk_plot("unsound", "AnSecondaryRed")
-    fd.write("\\end{frame}\n\n")
-
-    # Plot of unsound over time
-    fd.write("\\begin{frame}[fragile]{FP progress in CVC4}{Timeout over time (average over averages)}\n")
-    mk_plot("timeout", "AnSecondaryRed")
-    fd.write("\\end{frame}\n\n")
+    # Plot of over various CVC4 versions
+    for cat in ("solved", "timeout", "unsound", "error"):
+        fd.write("\\begin{frame}[fragile]{FP progress in CVC4}{%s over time (average over averages)}\n" % cat.capitalize())
+        mk_plot(cat, ("AnSecondaryGreen"
+                      if cat == "solved"
+                      else "AnSecondaryRed"))
+        fd.write("\\end{frame}\n\n")
 
 def mk_competition_slides(fd):
     competitors = sorted([data[-1]] + other_data,
@@ -210,7 +200,7 @@ def mk_competition_slides(fd):
                             for r in competitors))
         fd.write(r"\\" + "\n")
         for cat in sorted(competitors[0]["details"]):
-            if criteria == "unsound" and cat in ("spark_2014", "griggio"):
+            if criteria == "unsound" and cat in NON_ANNOTATED_TESTS:
                 continue
             fd.write(mk_bench_name(cat) + " & ")
             if criteria == "solved":
@@ -242,34 +232,13 @@ def mk_competition_slides(fd):
         fd.write("AVAV & " + " & ".join(s_row) + r"\\" + "\n")
         fd.write("\\end{tabular}\n")
 
-    # Table comparing solved for all solvers
-    fd.write("\\begin{frame}{The competition}{Solved}\n")
-    fd.write("\\begin{center}\n")
-    mk_table("solved")
-    fd.write("\\end{center}\n")
-    fd.write("\\end{frame}\n\n")
-
-    # Table comparing timeouts for all solvers
-    fd.write("\\begin{frame}{The competition}{Timeouts}\n")
-    fd.write("\\begin{center}\n")
-    mk_table("timeout")
-    fd.write("\\end{center}\n")
-    fd.write("\\end{frame}\n\n")
-
-    # Table comparing unsound for all solvers
-    fd.write("\\begin{frame}{The competition}{Unsound}\n")
-    fd.write("\\begin{center}\n")
-    mk_table("unsound")
-    fd.write("\\end{center}\n")
-    fd.write("\\end{frame}\n\n")
-
-    # Table comparing errors for all solvers
-    fd.write("\\begin{frame}{The competition}{Errors}\n")
-    fd.write("\\begin{center}\n")
-    mk_table("error")
-    fd.write("\\end{center}\n")
-    fd.write("\\end{frame}\n\n")
-
+    # Table comparing all solvers
+    for cat in ("solved", "timeout", "unsound", "error"):
+        fd.write("\\begin{frame}{The competition}{%s}\n" % cat.capitalize())
+        fd.write("\\begin{center}\n")
+        mk_table(cat)
+        fd.write("\\end{center}\n")
+        fd.write("\\end{frame}\n\n")
 
 def main():
     ap = argparse.ArgumentParser()
