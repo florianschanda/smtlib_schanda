@@ -249,6 +249,13 @@ def mk_competition_slides(fd):
     fd.write("\\end{center}\n")
     fd.write("\\end{frame}\n\n")
 
+    # Table comparing timeouts for all solvers
+    fd.write("\\begin{frame}{The competition}{Timeouts}\n")
+    fd.write("\\begin{center}\n")
+    mk_table("timeout")
+    fd.write("\\end{center}\n")
+    fd.write("\\end{frame}\n\n")
+
     # Table comparing unsound for all solvers
     fd.write("\\begin{frame}{The competition}{Unsound}\n")
     fd.write("\\begin{center}\n")
