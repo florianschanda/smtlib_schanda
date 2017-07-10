@@ -2,7 +2,7 @@
 (set-info :source |SPARK float axiomatisation review by Florian Schanda|)
 (set-info :smt-lib-version 2.5)
 (set-info :category crafted)
-;;(set-info :status unsat)
+(set-info :status unsat)
 
 ;; verification of of_int_is_finite
 (define-const maxfloat Float32 (fp #b0 #b11111110 #b11111111111111111111111))
