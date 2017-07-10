@@ -67,7 +67,7 @@ def main():
     if options.suite == "fp":
         bench_dirs.append("spark_2014/AUFBVFPDTNIRA")
     if options.suite == "debug":
-        bench_dirs.append("nyxbrain/crafted-edge-cases")
+        bench_dirs.append("crafted/QF_FPBV")
 
     print "Assembling benchmarks..."
     tasks = []
@@ -86,9 +86,11 @@ def main():
                "unsound" : 0}
     unsound = []
     errors = []
+    verdicts = {}
 
     def analyze(result, progress, start_time):
         result.print_summary(progress, start_time)
+        verdicts[result.task.benchmark.benchmark] = result.prover_status
 
         if result.task.benchmark.cat not in detail:
             detail[result.task.benchmark.cat] = {"solved"  : 0,
@@ -166,8 +168,9 @@ def main():
                 "elapsed" : elapsed_total_time},
             "summary" : summary,
             "details" : detail,
+            "verdicts" : verdicts,
         }
-        dump(report, fd)
+        dump(report, fd, -1)
 
     with open("report_%s.txt" % basename, "w") as fd:
         fd.write("# Configuration \n")

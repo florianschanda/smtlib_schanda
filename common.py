@@ -126,16 +126,18 @@ class Task(object):
 class Result(object):
     def __init__(self, task, status, comment):
         assert status in ("sat", "unsat", "unknown", "timeout", "error")
-        self.task    = task
-        self.status  = status
-        self.comment = comment
+        self.task          = task
+        self.prover_status = status
+        self.comment       = comment
 
-        if (self.status in ("sat", "unsat") and
+        if (self.prover_status in ("sat", "unsat") and
             self.task.benchmark.expected in ("sat", "unsat") and
-            self.status != self.task.benchmark.expected):
+            self.prover_status != self.task.benchmark.expected):
             self.status = "unsound"
-            self.comment = "result %s is not %s" % (self.status,
+            self.comment = "result %s is not %s" % (self.prover_status,
                                                     self.task.benchmark.expected)
+        else:
+            self.status = self.prover_status
 
     def __str__(self):
         return "[%c] %s" % ({"sat"     : 's',
