@@ -79,7 +79,7 @@ def mk_progress_slides(fd):
     # Table with Benchmark, (Old) Solved%, (New) Solved%
     fd.write("\\begin{frame}{FP progress in CVC4}{Solved}\n")
     fd.write("\\begin{center}\n")
-    fd.write("\\begin{tabular}{rll}\n")
+    fd.write("\\begin{tabular}{>{\columncolor{Altran2}}rll}\n")
     fd.write("\\rowcolor{Altran2}\n")
     fd.write(r"Benchmark & %s & %s \\" %
              (mk_shortname(data[0]["prover"]["bin"]),
@@ -101,12 +101,13 @@ def mk_progress_slides(fd):
     # Unsound results
     fd.write("\\begin{frame}{FP progress in CVC4}{Errors and unsoundness}\n")
     fd.write("\\begin{center}\n")
-    fd.write("\\begin{tabular}{rllll}\n")
+    fd.write("\\begin{tabular}{>{\columncolor{Altran2}}rllll}\n")
     fd.write("\\rowcolor{Altran2}\n")
     fd.write(r"Benchmark & %s & & %s & \\" %
              (mk_shortname(data[0]["prover"]["bin"]),
               mk_shortname(data[-1]["prover"]["bin"]))
              + "\n")
+    fd.write("\\rowcolor{Altran2}\n")
     fd.write(r"& error & unsound & error & unsound \\" + "\n")
     for cat in sorted(data[0]["details"]):
         fd.write(mk_bench_name(cat) + " & ")
@@ -147,12 +148,16 @@ def mk_progress_slides(fd):
                   ", ".join("%.3f" % b[1]
                             for b in bench
                             if min(points) <= b[1] <= max(points)))
+        fd.write( "    length=5cm,\n")
         fd.write( "    },\n")
-        fd.write( "  x axis={ticks={major at={%s}}},\n" %
+        fd.write( "  x axis={\n")
+        fd.write( "    ticks={major at={%s},node style={rotate=45,anchor=east}},\n" %
                   (",".join("%u as %s" %
                             (i,
                              mk_shortname(data[i]["prover"]["bin"]))
                             for i in xrange(len(data)))))
+        fd.write( "    length=9cm,\n")
+        fd.write( "  },\n")
         fd.write("  visualize as line/.list={main},\n")
         fd.write("  main={style=%s},\n" % color)
         fd.write("] data [set=main] {\n")
@@ -162,8 +167,8 @@ def mk_progress_slides(fd):
         fd.write("} info {\n")
         for b in bench:
             if min(points) <= b[1] <= max(points):
-                fd.write("\\node at (visualization cs: x=%u,y=%.3f) {\scriptsize %s};\n" %
-                         (len(data),
+                fd.write("\\node[anchor=west] at (visualization cs: x=%.3f,y=%.3f) {\scriptsize %s};\n" %
+                         (float(len(data) - 1),
                           b[1],
                           mk_solver_name(b[0])))
         fd.write("};\n")
@@ -197,7 +202,8 @@ def mk_competition_slides(fd):
 
     def mk_table(criteria):
         fd.write("\\small\n")
-        fd.write("\\begin{tabular}{r%s}\n" % ("l" * len(competitors)))
+        fd.write("\\begin{tabular}{>{\columncolor{Altran2}}r%s}\n" %
+                 ("l" * len(competitors)))
         fd.write("\\rowcolor{Altran2}\n")
         fd.write("Benchmark & ")
         fd.write(" & ".join(mk_solver_name(r["prover"]["kind"])
