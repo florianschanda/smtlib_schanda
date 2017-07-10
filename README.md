@@ -64,3 +64,17 @@ These are Martin's work-in-progress benchmarks. They are filed here
 for convenience, but they should not be re-distributed or included in
 SMTLIB as they are *not yet finished or necessarily correct*. Please
 contact Martin for additional detail.
+
+# Scripts
+
+There are also a bunch of scripts here, which Martin and I have used to
+benchmark and measure progress.
+
+* run.py (run benchmarks and collect results)
+* run_all.py (run all solver versions/configurations, takes a long time)
+
+The following scripts use the results from run.py:
+
+* mk_status_slides.py (produce nice slides showing status)
+* inconsistency_report.py (report dubious cases such as prover disagreement)
+* need_status.py (show which benchmarks are not annotated with sat/unsat)
