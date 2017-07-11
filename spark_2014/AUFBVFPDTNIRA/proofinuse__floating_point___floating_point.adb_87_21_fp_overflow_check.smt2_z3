@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -233,7 +233,7 @@
 
 (declare-datatypes ()
 ((unsigned_16__ref (mk_unsigned_16__ref (unsigned_16__content unsigned_16)))))
-(define-fun unsigned_16__ref___projection ((a unsigned_16__ref)) unsigned_16 
+(define-fun unsigned_16__ref___projection ((a unsigned_16__ref)) unsigned_16
   (unsigned_16__content a))
 
 (define-fun dynamic_invariant ((temp___expr_154 (_ BitVec 16))
@@ -254,7 +254,7 @@
 
 (declare-datatypes ()
 ((tfloat_32B__ref (mk_tfloat_32B__ref (tfloat_32B__content tfloat_32B)))))
-(define-fun tfloat_32B__ref___projection ((a tfloat_32B__ref)) tfloat_32B 
+(define-fun tfloat_32B__ref___projection ((a tfloat_32B__ref)) tfloat_32B
   (tfloat_32B__content a))
 
 (declare-sort float_32 0)
@@ -336,6 +336,7 @@
 ;; WP_parameter_def
  ;; File "floating_point.adb", line 66, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.sub RNE res1 (fp #b0 #b10000011 #b01000000000000000000000))) (fp.isNaN (fp.sub RNE 
+  (not (or (fp.isInfinite (fp.sub RNE res1 (fp #b0 #b10000011 #b01000000000000000000000))) (fp.isNaN (fp.sub RNE
   res1 (fp #b0 #b10000011 #b01000000000000000000000)))))))
 (check-sat)
+(exit)

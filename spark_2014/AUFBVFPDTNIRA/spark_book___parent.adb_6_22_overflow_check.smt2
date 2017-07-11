@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort tparent_intB 0)
@@ -53,7 +53,7 @@
 (declare-datatypes ()
 ((tparent_intB__ref
  (mk_tparent_intB__ref (tparent_intB__content tparent_intB)))))
-(define-fun tparent_intB__ref___projection ((a tparent_intB__ref)) tparent_intB 
+(define-fun tparent_intB__ref___projection ((a tparent_intB__ref)) tparent_intB
   (tparent_intB__content a))
 
 (declare-sort parent_int 0)
@@ -73,7 +73,7 @@
 
 (declare-datatypes ()
 ((parent_int__ref (mk_parent_int__ref (parent_int__content parent_int)))))
-(define-fun parent_int__ref___projection ((a parent_int__ref)) parent_int 
+(define-fun parent_int__ref___projection ((a parent_int__ref)) parent_int
   (parent_int__content a))
 
 (define-fun dynamic_invariant ((temp___expr_136 Int)
@@ -95,3 +95,4 @@
  ;; File "parent.ads", line 6, characters 0-0
   (not (in_range (* value value))))
 (check-sat)
+(exit)

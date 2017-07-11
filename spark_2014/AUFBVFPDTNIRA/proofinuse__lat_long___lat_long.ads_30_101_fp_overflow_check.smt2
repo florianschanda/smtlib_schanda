@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -112,7 +112,7 @@
 ((tfloat_with_approxB__ref
  (mk_tfloat_with_approxB__ref
  (tfloat_with_approxB__content tfloat_with_approxB)))))
-(define-fun tfloat_with_approxB__ref___projection ((a tfloat_with_approxB__ref)) tfloat_with_approxB 
+(define-fun tfloat_with_approxB__ref___projection ((a tfloat_with_approxB__ref)) tfloat_with_approxB
   (tfloat_with_approxB__content a))
 
 (declare-sort float_with_approx 0)
@@ -130,7 +130,7 @@
 (declare-datatypes ()
 ((float_with_approx__ref
  (mk_float_with_approx__ref (float_with_approx__content float_with_approx)))))
-(define-fun float_with_approx__ref___projection ((a float_with_approx__ref)) float_with_approx 
+(define-fun float_with_approx__ref___projection ((a float_with_approx__ref)) float_with_approx
   (float_with_approx__content a))
 
 (define-fun dynamic_invariant ((temp___expr_141 Float32)
@@ -244,7 +244,7 @@
 
 (declare-datatypes ()
 ((longitude__ref (mk_longitude__ref (longitude__content longitude)))))
-(define-fun longitude__ref___projection ((a longitude__ref)) longitude 
+(define-fun longitude__ref___projection ((a longitude__ref)) longitude
   (longitude__content a))
 
 (declare-fun to_rep1 (longitude) Float32)
@@ -274,7 +274,7 @@
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -354,7 +354,7 @@
 
 (declare-datatypes ()
 ((coordinates__ref (mk_coordinates__ref (coordinates__content us_rep)))))
-(define-fun coordinates__ref___projection ((a coordinates__ref)) us_rep 
+(define-fun coordinates__ref___projection ((a coordinates__ref)) us_rep
   (coordinates__content a))
 
 (declare-fun source () us_rep)
@@ -387,8 +387,8 @@
 ;; delta_lat_in_meters__def_axiom
   (assert
   (forall ((source1 us_rep) (destination1 us_rep))
-  (! (= (delta_lat_in_meters source1 destination1) (fp.mul RNE (fp.mul RNE (fp.sub RNE 
-  (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 destination1))) 
+  (! (= (delta_lat_in_meters source1 destination1) (fp.mul RNE (fp.mul RNE (fp.sub RNE
+  (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 destination1)))
   (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source1)))) (fp #b0 #b10010101 #b10000100101000110101001)) (fp #b0 #b01111001 #b00011101111101000110101))) :pattern (
   (delta_lat_in_meters source1 destination1)) )))
 
@@ -410,10 +410,10 @@
 ;; delta_long_in_meters__def_axiom
   (assert
   (forall ((source1 us_rep) (destination1 us_rep))
-  (! (= (delta_long_in_meters source1 destination1) (fp.div RNE (fp.mul RNE (fp.sub RNE 
+  (! (= (delta_long_in_meters source1 destination1) (fp.div RNE (fp.mul RNE (fp.sub RNE
   (to_rep1
-  (rec__lat_long__coordinates__long (us_split_fields1 destination1))) 
-  (to_rep1 (rec__lat_long__coordinates__long (us_split_fields1 source1)))) (fp #b0 #b10010101 #b10000100101000110101001)) 
+  (rec__lat_long__coordinates__long (us_split_fields1 destination1)))
+  (to_rep1 (rec__lat_long__coordinates__long (us_split_fields1 source1)))) (fp #b0 #b10010101 #b10000100101000110101001))
   (cos2
   (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source1)))))) :pattern (
   (delta_long_in_meters source1 destination1)) )))
@@ -598,8 +598,8 @@
   (assert
   (= o1 (fp.div RNE (fp.mul RNE (fp.sub RNE (to_rep1
                                             (rec__lat_long__coordinates__long
-                                            (us_split_fields1 destination))) 
-  (to_rep1 (rec__lat_long__coordinates__long (us_split_fields1 source)))) (fp #b0 #b10010101 #b10000100101000110101001)) 
+                                            (us_split_fields1 destination)))
+  (to_rep1 (rec__lat_long__coordinates__long (us_split_fields1 source)))) (fp #b0 #b10010101 #b10000100101000110101001))
   o)))
 
 ;; H
@@ -620,13 +620,13 @@
 ;; H
   (assert
   (and (= o3 (fp.mul RNE delta_long1 delta_long1))
-  (not (or (fp.isInfinite (fp.mul RNE delta_long1 delta_long1)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE delta_long1 delta_long1)) (fp.isNaN (fp.mul RNE
   delta_long1 delta_long1))))))
 
 ;; H
   (assert
   (and (= o4 (fp.mul RNE delta_lat1 delta_lat1))
-  (not (or (fp.isInfinite (fp.mul RNE delta_lat1 delta_lat1)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE delta_lat1 delta_lat1)) (fp.isNaN (fp.mul RNE
   delta_lat1 delta_lat1))))))
 
 ;; H
@@ -673,8 +673,8 @@
   (and
   (= o11 (fp.div RNE (fp.mul RNE (fp.sub RNE (to_rep1
                                              (rec__lat_long__coordinates__long
-                                             (us_split_fields1 destination))) 
-  (to_rep1 (rec__lat_long__coordinates__long (us_split_fields1 source)))) (fp #b0 #b10010101 #b10000100101000110101001)) 
+                                             (us_split_fields1 destination)))
+  (to_rep1 (rec__lat_long__coordinates__long (us_split_fields1 source)))) (fp #b0 #b10010101 #b10000100101000110101001))
   (cos2 (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source))))))
   (= (olt (fp.abs o11) (fp #b0 #b10011000 #b00110001001111000100110)) true)))))
 
@@ -685,8 +685,8 @@
   (and
   (= o12 (fp.div RNE (fp.mul RNE (fp.sub RNE (to_rep1
                                              (rec__lat_long__coordinates__long
-                                             (us_split_fields1 destination))) 
-  (to_rep1 (rec__lat_long__coordinates__long (us_split_fields1 source)))) (fp #b0 #b10010101 #b10000100101000110101001)) 
+                                             (us_split_fields1 destination)))
+  (to_rep1 (rec__lat_long__coordinates__long (us_split_fields1 source)))) (fp #b0 #b10010101 #b10000100101000110101001))
   (cos2 (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source))))))
   (= (olt (fp.abs o12) (fp #b0 #b10011000 #b00110001001111000100110)) true)))))
 
@@ -703,7 +703,7 @@
   (and
   (= o8 (fp.mul RNE (fp.mul RNE (fp.sub RNE (to_rep
                                             (rec__lat_long__coordinates__lat
-                                            (us_split_fields1 destination))) 
+                                            (us_split_fields1 destination)))
   (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source)))) (fp #b0 #b10010101 #b10000100101000110101001)) (fp #b0 #b01111001 #b00011101111101000110101)))
   (= (olt (fp.abs o8) (fp #b0 #b10010111 #b00110001001111000100110)) true)))))
 
@@ -714,7 +714,7 @@
   (and
   (= o9 (fp.mul RNE (fp.mul RNE (fp.sub RNE (to_rep
                                             (rec__lat_long__coordinates__lat
-                                            (us_split_fields1 destination))) 
+                                            (us_split_fields1 destination)))
   (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source)))) (fp #b0 #b10010101 #b10000100101000110101001)) (fp #b0 #b01111001 #b00011101111101000110101)))
   (= (olt (fp.abs o9) (fp #b0 #b10010111 #b00110001001111000100110)) true)))))
 
@@ -732,3 +732,4 @@
  ;; File "lat_long.ads", line 6, characters 0-0
   (not (not (or (fp.isInfinite o16) (fp.isNaN o16)))))
 (check-sat)
+(exit)

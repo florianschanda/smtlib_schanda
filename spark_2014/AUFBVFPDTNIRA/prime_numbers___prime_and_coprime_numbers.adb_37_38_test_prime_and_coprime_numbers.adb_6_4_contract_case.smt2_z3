@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun div1 (Int Int) Int)
@@ -136,7 +136,7 @@
 
 (declare-datatypes ()
 ((value_type__ref (mk_value_type__ref (value_type__content value_type)))))
-(define-fun value_type__ref___projection ((a value_type__ref)) value_type 
+(define-fun value_type__ref___projection ((a value_type__ref)) value_type
   (value_type__content a))
 
 (define-fun dynamic_invariant ((temp___expr_178 Int)
@@ -428,55 +428,55 @@
   (and
   (and
   (and
-  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result9 
+  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result9
   (mk_int__ref
   test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result4))
   (and (= r8 (mk_int__ref r)) (and (= b11 b17) (= a11 a18))))
   (and
-  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result10 
+  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result10
   test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result5)
   (and (= r9 r1) (and (= b12 b1) (= a12 a1)))))
   (ite (= left 0)
   (and
   (and
-  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result2 
+  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result2
   test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result4)
-  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result5 
+  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result5
   test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result2))
   (and
   (= result test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result)
-  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result2 
+  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result2
   right)))
   (and
   (and
-  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3 
+  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3
   test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result4)
-  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result5 
+  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result5
   test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3))
   (and (= right 0)
   (and
   (= result1 test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result)
-  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3 
+  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3
   left))))))
   (and
   (and (not (= left 0))
   (and
   (and (not (= right 0))
   (and
-  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3 
+  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3
   test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result)
-  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3 
+  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3
   test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result1)))
-  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result2 
+  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result2
   test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3)))
   (and
   (and
   (and
-  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result9 
+  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result9
   test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result7)
   (and (= r8 r6) (and (= b11 b9) (= a11 a15))))
   (and
-  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result10 
+  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result10
   test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result8)
   (and (= r9 r7) (and (= b12 b10) (= a12 a10)))))
   (and (and (and (= o left) (in_range2 left)) (and (= result9 a18) (= a2 o)))
@@ -508,23 +508,23 @@
   (and (not (and (= a9 1) (< 0 (int__content b9))))
   (and
   (and
-  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result7 
+  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result7
   (mk_int__ref
   test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result6))
-  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result8 
+  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result8
   test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result6))
   (and
   (= result7 (mk_int__ref
              test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result2))
-  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result6 
+  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result6
   (int__content b9))))))))))))))
   (and
   (and
-  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result11 
+  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result11
   test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result9)
   (and (= r10 r8) (and (= b13 b11) (= a13 a11))))
   (and
-  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result12 
+  (= test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result12
   test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result10)
   (and (= r11 r9) (and (= b14 b12) (= a14 a12)))))))
 
@@ -544,3 +544,4 @@
   (< 1 (int__content
        test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result11))))
 (check-sat)
+(exit)

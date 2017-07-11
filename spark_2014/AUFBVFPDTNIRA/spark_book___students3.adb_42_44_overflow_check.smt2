@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
@@ -64,7 +64,7 @@
 
 (declare-datatypes ()
 ((gender_type__ref (mk_gender_type__ref (gender_type__content gender_type)))))
-(define-fun gender_type__ref___projection ((a gender_type__ref)) gender_type 
+(define-fun gender_type__ref___projection ((a gender_type__ref)) gender_type
   (gender_type__content a))
 
 (declare-fun to_rep (gender_type) Int)
@@ -104,7 +104,7 @@
 (declare-datatypes ()
 ((meal_plan_type__ref
  (mk_meal_plan_type__ref (meal_plan_type__content meal_plan_type)))))
-(define-fun meal_plan_type__ref___projection ((a meal_plan_type__ref)) meal_plan_type 
+(define-fun meal_plan_type__ref___projection ((a meal_plan_type__ref)) meal_plan_type
   (meal_plan_type__content a))
 
 (declare-fun to_rep1 (meal_plan_type) Int)
@@ -438,7 +438,7 @@
 (declare-datatypes ()
 ((tmoney_typeB__ref
  (mk_tmoney_typeB__ref (tmoney_typeB__content tmoney_typeB)))))
-(define-fun tmoney_typeB__ref___projection ((a tmoney_typeB__ref)) tmoney_typeB 
+(define-fun tmoney_typeB__ref___projection ((a tmoney_typeB__ref)) tmoney_typeB
   (tmoney_typeB__content a))
 
 (declare-sort money_type 0)
@@ -559,7 +559,7 @@
 
 (declare-datatypes ()
 ((money_type__ref (mk_money_type__ref (money_type__content money_type)))))
-(define-fun money_type__ref___projection ((a money_type__ref)) money_type 
+(define-fun money_type__ref___projection ((a money_type__ref)) money_type
   (money_type__content a))
 
 (declare-sort year_type 0)
@@ -578,7 +578,7 @@
 
 (declare-datatypes ()
 ((year_type__ref (mk_year_type__ref (year_type__content year_type)))))
-(define-fun year_type__ref___projection ((a year_type__ref)) year_type 
+(define-fun year_type__ref___projection ((a year_type__ref)) year_type
   (year_type__content a))
 
 (declare-fun to_rep2 (year_type) Int)
@@ -617,7 +617,7 @@
 
 (declare-datatypes ()
 ((month_type__ref (mk_month_type__ref (month_type__content month_type)))))
-(define-fun month_type__ref___projection ((a month_type__ref)) month_type 
+(define-fun month_type__ref___projection ((a month_type__ref)) month_type
   (month_type__content a))
 
 (declare-fun to_rep3 (month_type) Int)
@@ -682,19 +682,19 @@
 ((us_split_fields
  (mk___split_fields
  (rec__dates__date__day day_type)(rec__dates__date__month month_type)(rec__dates__date__year year_type)))))
-(define-fun us_split_fields_Day__projection ((a us_split_fields)) day_type 
+(define-fun us_split_fields_Day__projection ((a us_split_fields)) day_type
   (rec__dates__date__day a))
 
-(define-fun us_split_fields_Month__projection ((a us_split_fields)) month_type 
+(define-fun us_split_fields_Month__projection ((a us_split_fields)) month_type
   (rec__dates__date__month a))
 
-(define-fun us_split_fields_Year__projection ((a us_split_fields)) year_type 
+(define-fun us_split_fields_Year__projection ((a us_split_fields)) year_type
   (rec__dates__date__year a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -706,15 +706,15 @@
   (b us_rep)) Bool (ite (and
                         (and
                         (= (to_rep4
-                           (rec__dates__date__day (us_split_fields1 a))) 
+                           (rec__dates__date__day (us_split_fields1 a)))
                         (to_rep4
                         (rec__dates__date__day (us_split_fields1 b))))
                         (= (to_rep3
-                           (rec__dates__date__month (us_split_fields1 a))) 
+                           (rec__dates__date__month (us_split_fields1 a)))
                         (to_rep3
                         (rec__dates__date__month (us_split_fields1 b)))))
                         (= (to_rep2
-                           (rec__dates__date__year (us_split_fields1 a))) 
+                           (rec__dates__date__year (us_split_fields1 a)))
                         (to_rep2
                         (rec__dates__date__year (us_split_fields1 b)))))
                    true false))
@@ -807,7 +807,7 @@
 
 (declare-datatypes ()
 ((student_id__ref (mk_student_id__ref (student_id__content student_id)))))
-(define-fun student_id__ref___projection ((a student_id__ref)) student_id 
+(define-fun student_id__ref___projection ((a student_id__ref)) student_id
   (student_id__content a))
 
 (declare-fun to_rep5 (student_id) Int)
@@ -834,37 +834,37 @@
 ((us_split_fields2
  (mk___split_fields1
  (rec__students3__student_record__birth_date us_rep)(rec__students3__student_record__id student_id)(rec__students3__student_record__gender gender_type)(rec__students3__student_record__gpa gpa_type)(rec__students3__student_record__part_time Bool)(rec__students3__student_record__in_state Bool)(rec__students3__student_record__resident Bool)(rec__students3__student_record__meal_plan meal_plan_type)(rec__students3__student_record__self_insured Bool)))))
-(define-fun us_split_fields_Birth_Date__projection ((a us_split_fields2)) us_rep 
+(define-fun us_split_fields_Birth_Date__projection ((a us_split_fields2)) us_rep
   (rec__students3__student_record__birth_date a))
 
-(define-fun us_split_fields_ID__projection ((a us_split_fields2)) student_id 
+(define-fun us_split_fields_ID__projection ((a us_split_fields2)) student_id
   (rec__students3__student_record__id a))
 
-(define-fun us_split_fields_Gender__projection ((a us_split_fields2)) gender_type 
+(define-fun us_split_fields_Gender__projection ((a us_split_fields2)) gender_type
   (rec__students3__student_record__gender a))
 
-(define-fun us_split_fields_GPA__projection ((a us_split_fields2)) gpa_type 
+(define-fun us_split_fields_GPA__projection ((a us_split_fields2)) gpa_type
   (rec__students3__student_record__gpa a))
 
-(define-fun us_split_fields_Part_Time__projection ((a us_split_fields2)) Bool 
+(define-fun us_split_fields_Part_Time__projection ((a us_split_fields2)) Bool
   (rec__students3__student_record__part_time a))
 
-(define-fun us_split_fields_In_State__projection ((a us_split_fields2)) Bool 
+(define-fun us_split_fields_In_State__projection ((a us_split_fields2)) Bool
   (rec__students3__student_record__in_state a))
 
-(define-fun us_split_fields_Resident__projection ((a us_split_fields2)) Bool 
+(define-fun us_split_fields_Resident__projection ((a us_split_fields2)) Bool
   (rec__students3__student_record__resident a))
 
-(define-fun us_split_fields_Meal_Plan__projection ((a us_split_fields2)) meal_plan_type 
+(define-fun us_split_fields_Meal_Plan__projection ((a us_split_fields2)) meal_plan_type
   (rec__students3__student_record__meal_plan a))
 
-(define-fun us_split_fields_Self_Insured__projection ((a us_split_fields2)) Bool 
+(define-fun us_split_fields_Self_Insured__projection ((a us_split_fields2)) Bool
   (rec__students3__student_record__self_insured a))
 
 (declare-datatypes ()
 ((us_split_fields__ref1
  (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref1)) us_split_fields2 
+(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ()
@@ -1091,7 +1091,7 @@
 (declare-datatypes ()
 ((student_record__ref
  (mk_student_record__ref (student_record__content us_rep1)))))
-(define-fun student_record__ref___projection ((a student_record__ref)) us_rep1 
+(define-fun student_record__ref___projection ((a student_record__ref)) us_rep1
   (student_record__content a))
 
 (declare-fun student () us_rep1)
@@ -1299,3 +1299,4 @@
  ;; File "students3.ads", line 11, characters 0-0
   (not (in_range4 (+ (to_fixed2 fees3) 300000))))
 (check-sat)
+(exit)

@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort fixed 0)
@@ -345,7 +345,7 @@
 (declare-datatypes ()
 ((natural_fixed__ref
  (mk_natural_fixed__ref (natural_fixed__content natural_fixed)))))
-(define-fun natural_fixed__ref___projection ((a natural_fixed__ref)) natural_fixed 
+(define-fun natural_fixed__ref___projection ((a natural_fixed__ref)) natural_fixed
   (natural_fixed__content a))
 
 (declare-fun x () fixed)
@@ -359,3 +359,4 @@
  ;; File "range_check.adb", line 31, characters 0-0
   (not (in_range1 (to_fixed x))))
 (check-sat)
+(exit)

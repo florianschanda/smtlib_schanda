@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
@@ -111,7 +111,7 @@
 ((telephone_number_t__ref
  (mk_telephone_number_t__ref
  (telephone_number_t__content telephone_number_t)))))
-(define-fun telephone_number_t__ref___projection ((a telephone_number_t__ref)) telephone_number_t 
+(define-fun telephone_number_t__ref___projection ((a telephone_number_t__ref)) telephone_number_t
   (telephone_number_t__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_135 Int)
@@ -138,7 +138,7 @@
 (declare-datatypes ()
 ((rbc_riu_id_t__ref
  (mk_rbc_riu_id_t__ref (rbc_riu_id_t__content rbc_riu_id_t)))))
-(define-fun rbc_riu_id_t__ref___projection ((a rbc_riu_id_t__ref)) rbc_riu_id_t 
+(define-fun rbc_riu_id_t__ref___projection ((a rbc_riu_id_t__ref)) rbc_riu_id_t
   (rbc_riu_id_t__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_147 Int)
@@ -170,7 +170,7 @@
 ((ertms_etcs_level_t__ref
  (mk_ertms_etcs_level_t__ref
  (ertms_etcs_level_t__content ertms_etcs_level_t)))))
-(define-fun ertms_etcs_level_t__ref___projection ((a ertms_etcs_level_t__ref)) ertms_etcs_level_t 
+(define-fun ertms_etcs_level_t__ref___projection ((a ertms_etcs_level_t__ref)) ertms_etcs_level_t
   (ertms_etcs_level_t__content a))
 
 (define-fun dynamic_invariant3 ((temp___expr_159 Int)
@@ -217,13 +217,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvor (bvshl v (bvurem n (_ bv32 32))) (bvlshr v (bvsub (_ bv32 32) (bvurem n (_ bv32 32))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv32 32))) (bvlshr v (bvsub (_ bv32 32) (bvurem n (_ bv32 32)))))
   (rotate_left1 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvor (bvlshr v (bvurem n (_ bv32 32))) (bvshl v (bvsub (_ bv32 32) (bvurem n (_ bv32 32))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv32 32))) (bvshl v (bvsub (_ bv32 32) (bvurem n (_ bv32 32)))))
   (rotate_right1 v (bv2nat n)))))
 
 (declare-fun nth_bv ((_ BitVec 32) (_ BitVec 32)) Bool)
@@ -290,7 +290,7 @@
 
 (declare-datatypes ()
 ((hash_type__ref (mk_hash_type__ref (hash_type__content hash_type)))))
-(define-fun hash_type__ref___projection ((a hash_type__ref)) hash_type 
+(define-fun hash_type__ref___projection ((a hash_type__ref)) hash_type
   (hash_type__content a))
 
 (declare-fun to_rep (hash_type) (_ BitVec 32))
@@ -333,7 +333,7 @@
 
 (declare-datatypes ()
 ((count_type__ref (mk_count_type__ref (count_type__content count_type)))))
-(define-fun count_type__ref___projection ((a count_type__ref)) count_type 
+(define-fun count_type__ref___projection ((a count_type__ref)) count_type
   (count_type__content a))
 
 (declare-fun to_rep1 (count_type) Int)
@@ -364,28 +364,28 @@
 ((us_split_discrs
  (mk___split_discrs
  (rec__com_map__com_to_rbc_map__map__capacity count_type)(rec__com_map__com_to_rbc_map__map__modulus hash_type)))))
-(define-fun us_split_discrs___projection ((a us_split_discrs)) count_type 
+(define-fun us_split_discrs___projection ((a us_split_discrs)) count_type
   (rec__com_map__com_to_rbc_map__map__capacity a))
 
-(define-fun us_split_discrs_2__projection ((a us_split_discrs)) hash_type 
+(define-fun us_split_discrs_2__projection ((a us_split_discrs)) hash_type
   (rec__com_map__com_to_rbc_map__map__modulus a))
 
 (declare-datatypes ()
 ((us_split_discrs__ref
  (mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref)) us_split_discrs 
+(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ()
 ((us_split_fields
  (mk___split_fields (rec__com_map__com_to_rbc_map__map us_main_type)))))
-(define-fun us_split_fields_Map__projection ((a us_split_fields)) us_main_type 
+(define-fun us_split_fields_Map__projection ((a us_split_fields)) us_main_type
   (rec__com_map__com_to_rbc_map__map a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -666,7 +666,7 @@
 
 (declare-datatypes ()
 ((tconnectionsS__ref (mk_tconnectionsS__ref (tconnectionsS__content us_rep)))))
-(define-fun tconnectionsS__ref___projection ((a tconnectionsS__ref)) us_rep 
+(define-fun tconnectionsS__ref___projection ((a tconnectionsS__ref)) us_rep
   (tconnectionsS__content a))
 
 (declare-fun is_empty (us_rep) Bool)
@@ -912,7 +912,7 @@
 
 (declare-datatypes ()
 ((key_type__ref1 (mk_key_type__ref1 (key_type__content1 key_type1)))))
-(define-fun key_type__ref_2__projection ((a key_type__ref1)) key_type1 
+(define-fun key_type__ref_2__projection ((a key_type__ref1)) key_type1
   (key_type__content1 a))
 
 (define-fun dynamic_invariant9 ((temp___expr_303 Int)
@@ -1096,3 +1096,4 @@
  ;; File "section_3_5_3.ads", line 53, characters 0-0
   (not (in_range1 (+ connection_attemps2 1))))
 (check-sat)
+(exit)

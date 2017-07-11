@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -112,7 +112,7 @@
 ((tfloat_with_approxB__ref
  (mk_tfloat_with_approxB__ref
  (tfloat_with_approxB__content tfloat_with_approxB)))))
-(define-fun tfloat_with_approxB__ref___projection ((a tfloat_with_approxB__ref)) tfloat_with_approxB 
+(define-fun tfloat_with_approxB__ref___projection ((a tfloat_with_approxB__ref)) tfloat_with_approxB
   (tfloat_with_approxB__content a))
 
 (declare-fun olt (Float32 Float32) Bool)
@@ -134,7 +134,7 @@
 (declare-datatypes ()
 ((float_with_approx__ref
  (mk_float_with_approx__ref (float_with_approx__content float_with_approx)))))
-(define-fun float_with_approx__ref___projection ((a float_with_approx__ref)) float_with_approx 
+(define-fun float_with_approx__ref___projection ((a float_with_approx__ref)) float_with_approx
   (float_with_approx__content a))
 
 (define-fun dynamic_invariant ((temp___expr_141 Float32)
@@ -242,7 +242,7 @@
 
 (declare-datatypes ()
 ((longitude__ref (mk_longitude__ref (longitude__content longitude)))))
-(define-fun longitude__ref___projection ((a longitude__ref)) longitude 
+(define-fun longitude__ref___projection ((a longitude__ref)) longitude
   (longitude__content a))
 
 (declare-fun to_rep1 (longitude) Float32)
@@ -272,7 +272,7 @@
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -352,7 +352,7 @@
 
 (declare-datatypes ()
 ((coordinates__ref (mk_coordinates__ref (coordinates__content us_rep)))))
-(define-fun coordinates__ref___projection ((a coordinates__ref)) us_rep 
+(define-fun coordinates__ref___projection ((a coordinates__ref)) us_rep
   (coordinates__content a))
 
 (declare-fun source () us_rep)
@@ -440,8 +440,8 @@
   (assert
   (= o1 (fp.div RNE (fp.mul RNE (fp.sub RNE (to_rep1
                                             (rec__lat_long__coordinates__long
-                                            (us_split_fields1 destination))) 
-  (to_rep1 (rec__lat_long__coordinates__long (us_split_fields1 source)))) (fp #b0 #b10010101 #b10000100101000110101001)) 
+                                            (us_split_fields1 destination)))
+  (to_rep1 (rec__lat_long__coordinates__long (us_split_fields1 source)))) (fp #b0 #b10010101 #b10000100101000110101001))
   o)))
 
 (assert
@@ -449,3 +449,4 @@
  ;; File "lat_long.ads", line 6, characters 0-0
   (not (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
 (check-sat)
+(exit)

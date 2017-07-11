@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun nth ((_ BitVec 8) Int) Bool)
@@ -71,13 +71,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
   (rotate_left1 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
   (rotate_right1 v (bv2nat n)))))
 
 (declare-fun nth_bv ((_ BitVec 8) (_ BitVec 8)) Bool)
@@ -160,13 +160,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvor (bvshl v (bvurem n (_ bv16 16))) (bvlshr v (bvsub (_ bv16 16) (bvurem n (_ bv16 16))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv16 16))) (bvlshr v (bvsub (_ bv16 16) (bvurem n (_ bv16 16)))))
   (rotate_left2 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvor (bvlshr v (bvurem n (_ bv16 16))) (bvshl v (bvsub (_ bv16 16) (bvurem n (_ bv16 16))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv16 16))) (bvshl v (bvsub (_ bv16 16) (bvurem n (_ bv16 16)))))
   (rotate_right2 v (bv2nat n)))))
 
 (declare-fun nth_bv1 ((_ BitVec 16) (_ BitVec 16)) Bool)
@@ -254,7 +254,7 @@
 (declare-datatypes ()
 ((double_octet__ref
  (mk_double_octet__ref (double_octet__content double_octet)))))
-(define-fun double_octet__ref___projection ((a double_octet__ref)) double_octet 
+(define-fun double_octet__ref___projection ((a double_octet__ref)) double_octet
   (double_octet__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_141 (_ BitVec 16))
@@ -294,3 +294,4 @@
  ;; File "network-helpers0.ads", line 6, characters 0-0
   (not (bvule ((_ zero_extend 8) ((_ int2bv 8) 0)) o)))
 (check-sat)
+(exit)

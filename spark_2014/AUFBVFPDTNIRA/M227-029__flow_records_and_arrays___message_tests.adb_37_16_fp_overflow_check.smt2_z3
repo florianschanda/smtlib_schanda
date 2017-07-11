@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -141,16 +141,16 @@
 ((us_split_fields
  (mk___split_fields
  (rec__message_tests__flags_t__a Bool)(rec__message_tests__flags_t__b Bool)))))
-(define-fun us_split_fields_A__projection ((a us_split_fields)) Bool 
+(define-fun us_split_fields_A__projection ((a us_split_fields)) Bool
   (rec__message_tests__flags_t__a a))
 
-(define-fun us_split_fields_B__projection ((a us_split_fields)) Bool 
+(define-fun us_split_fields_B__projection ((a us_split_fields)) Bool
   (rec__message_tests__flags_t__b a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -233,13 +233,13 @@
 ((us_split_fields2
  (mk___split_fields1
  (rec__message_tests__coordinate__x float)(rec__message_tests__coordinate__y float)(rec__message_tests__coordinate__w float)(rec__message_tests__coordinate__flags us_rep)))))
-(define-fun us_split_fields_Flags__projection ((a us_split_fields2)) us_rep 
+(define-fun us_split_fields_Flags__projection ((a us_split_fields2)) us_rep
   (rec__message_tests__coordinate__flags a))
 
 (declare-datatypes ()
 ((us_split_fields__ref1
  (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2 
+(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ()
@@ -363,7 +363,7 @@
 
 (declare-datatypes ()
 ((coordinate__ref (mk_coordinate__ref (coordinate__content us_rep1)))))
-(define-fun coordinate__ref___projection ((a coordinate__ref)) us_rep1 
+(define-fun coordinate__ref___projection ((a coordinate__ref)) us_rep1
   (coordinate__content a))
 
 (declare-fun c () us_rep1)
@@ -391,9 +391,10 @@
                                       (us_split_fields3 c))) (to_rep
                                                              (rec__message_tests__coordinate__y
                                                              (us_split_fields3
-                                                             c))))) (fp.isNaN (fp.add RNE 
+                                                             c))))) (fp.isNaN (fp.add RNE
   (to_rep (rec__message_tests__coordinate__x (us_split_fields3 c))) (to_rep
                                                                     (rec__message_tests__coordinate__y
                                                                     (us_split_fields3
                                                                     c)))))))))
 (check-sat)
+(exit)

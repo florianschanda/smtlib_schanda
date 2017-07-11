@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun div1 (Int Int) Int)
@@ -455,6 +455,7 @@
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.mul RNE y1 y1)) (fp.isNaN (fp.mul RNE y1 
+  (not (or (fp.isInfinite (fp.mul RNE y1 y1)) (fp.isNaN (fp.mul RNE y1
   y1))))))
 (check-sat)
+(exit)

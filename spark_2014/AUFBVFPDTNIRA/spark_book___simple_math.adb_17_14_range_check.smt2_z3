@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun div1 (Int Int) Int)
@@ -126,7 +126,7 @@
 ((square_root_domain__ref
  (mk_square_root_domain__ref
  (square_root_domain__content square_root_domain)))))
-(define-fun square_root_domain__ref___projection ((a square_root_domain__ref)) square_root_domain 
+(define-fun square_root_domain__ref___projection ((a square_root_domain__ref)) square_root_domain
   (square_root_domain__content a))
 
 (define-fun dynamic_invariant ((temp___expr_135 Int)
@@ -153,7 +153,7 @@
 (declare-datatypes ()
 ((square_root_range__ref
  (mk_square_root_range__ref (square_root_range__content square_root_range)))))
-(define-fun square_root_range__ref___projection ((a square_root_range__ref)) square_root_range 
+(define-fun square_root_range__ref___projection ((a square_root_range__ref)) square_root_range
   (square_root_range__content a))
 
 (declare-fun n () Int)
@@ -330,3 +330,4 @@
  ;; File "simple_math.ads", line 6, characters 0-0
   (not (in_range1 q9)))
 (check-sat)
+(exit)

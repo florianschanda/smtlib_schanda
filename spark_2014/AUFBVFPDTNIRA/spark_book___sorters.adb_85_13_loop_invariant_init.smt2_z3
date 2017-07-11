@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
@@ -128,7 +128,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int integer) Int Int (Array Int integer) Int
@@ -143,7 +143,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (integer Int) (Array Int integer))
@@ -375,7 +375,7 @@
 (declare-datatypes ()
 ((tTvalues_lastSP1__ref
  (mk_tTvalues_lastSP1__ref (tTvalues_lastSP1__content integer)))))
-(define-fun tTvalues_lastSP1__ref___projection ((a tTvalues_lastSP1__ref)) integer 
+(define-fun tTvalues_lastSP1__ref___projection ((a tTvalues_lastSP1__ref)) integer
   (tTvalues_lastSP1__content a))
 
 (declare-sort t1 0)
@@ -457,7 +457,7 @@
 
 (declare-datatypes ()
 ((tvalues_lastS__ref (mk_tvalues_lastS__ref (tvalues_lastS__content us_t1)))))
-(define-fun tvalues_lastS__ref___projection ((a tvalues_lastS__ref)) us_t1 
+(define-fun tvalues_lastS__ref___projection ((a tvalues_lastS__ref)) us_t1
   (tvalues_lastS__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_179 us_t1)
@@ -880,7 +880,7 @@
 ;; H
   (assert
   (= (ite (<= (to_rep (first2 temp___1891)) (to_rep (last2 temp___1891)))
-     (+ (- (to_rep (last2 temp___1891)) (to_rep (first2 temp___1891))) 1) 0) 
+     (+ (- (to_rep (last2 temp___1891)) (to_rep (first2 temp___1891))) 1) 0)
   (ite (<= (to_rep values_last__first) (to_rep values_last__last))
   (+ (- (to_rep values_last__last) (to_rep values_last__first)) 1) 0)))
 
@@ -919,7 +919,7 @@
 
 ;; H
   (assert
-  (= (mk (to_rep (first4 temp___1911)) (to_rep (last4 temp___1911))) 
+  (= (mk (to_rep (first4 temp___1911)) (to_rep (last4 temp___1911)))
   o5))
 
 ;; H
@@ -982,3 +982,4 @@
  ;; File "sorters.ads", line 7, characters 0-0
   (not (<= (to_rep (select values2 j3)) (to_rep (select values2 (+ j3 1))))))
 (check-sat)
+(exit)

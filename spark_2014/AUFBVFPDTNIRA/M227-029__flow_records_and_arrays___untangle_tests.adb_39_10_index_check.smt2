@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort positive 0)
@@ -164,7 +164,7 @@
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -288,7 +288,7 @@
 
 (declare-datatypes ()
 ((coordinate__ref (mk_coordinate__ref (coordinate__content us_rep)))))
-(define-fun coordinate__ref___projection ((a coordinate__ref)) us_rep 
+(define-fun coordinate__ref___projection ((a coordinate__ref)) us_rep
   (coordinate__content a))
 
 (declare-datatypes ()
@@ -307,7 +307,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int us_rep) Int Int (Array Int us_rep) Int
@@ -322,7 +322,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (us_rep Int) (Array Int us_rep))
@@ -401,16 +401,16 @@
 ((us_split_fields2
  (mk___split_fields1
  (rec__untangle_tests__triangle__vertices (Array Int us_rep))(rec__untangle_tests__triangle__normal us_rep)))))
-(define-fun us_split_fields_Vertices__projection ((a us_split_fields2)) (Array Int us_rep) 
+(define-fun us_split_fields_Vertices__projection ((a us_split_fields2)) (Array Int us_rep)
   (rec__untangle_tests__triangle__vertices a))
 
-(define-fun us_split_fields_Normal__projection ((a us_split_fields2)) us_rep 
+(define-fun us_split_fields_Normal__projection ((a us_split_fields2)) us_rep
   (rec__untangle_tests__triangle__normal a))
 
 (declare-datatypes ()
 ((us_split_fields__ref1
  (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2 
+(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ()
@@ -510,7 +510,7 @@
 (declare-datatypes ()
 ((ttriangle_listD1__ref
  (mk_ttriangle_listD1__ref (ttriangle_listD1__content ttriangle_listD1)))))
-(define-fun ttriangle_listD1__ref___projection ((a ttriangle_listD1__ref)) ttriangle_listD1 
+(define-fun ttriangle_listD1__ref___projection ((a ttriangle_listD1__ref)) ttriangle_listD1
   (ttriangle_listD1__content a))
 
 (declare-datatypes ()
@@ -529,7 +529,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide1 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide1 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide1 a old_first new_first) i)) ))))))
 
 (declare-fun concat2 ((Array Int us_rep1) Int Int (Array Int us_rep1) Int
@@ -544,7 +544,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat2 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat2 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat2 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat2 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton2 (us_rep1 Int) (Array Int us_rep1))
@@ -720,7 +720,7 @@
 ;; H
   (assert
   (= (mk___rep1
-     (mk___split_fields1 o2 (mk___rep (mk___split_fields o3 o4 o5 o6)))) (select 
+     (mk___split_fields1 o2 (mk___rep (mk___split_fields o3 o4 o5 o6)))) (select
   l o1)))
 
 (assert
@@ -728,3 +728,4 @@
  ;; File "untangle_tests.adb", line 3, characters 0-0
   (not (<= 1 a)))
 (check-sat)
+(exit)

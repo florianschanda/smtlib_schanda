@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -116,7 +116,7 @@
 
 (declare-datatypes ()
 ((t_float32__ref (mk_t_float32__ref (t_float32__content t_float32)))))
-(define-fun t_float32__ref___projection ((a t_float32__ref)) t_float32 
+(define-fun t_float32__ref___projection ((a t_float32__ref)) t_float32
   (t_float32__content a))
 
 (define-fun dynamic_invariant ((temp___expr_135 Float32)
@@ -134,7 +134,7 @@
   (assert (in_range1 x))
 
 ;; H
-  (assert (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111101110)) 
+  (assert (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111101110))
   x))
 
 (assert
@@ -142,3 +142,4 @@
  ;; File "normalize.ads", line 5, characters 0-0
   (not (in_range1 (fp.roundToIntegral RTN x))))
 (check-sat)
+(exit)

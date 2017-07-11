@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -110,7 +110,7 @@
 
 (declare-datatypes ()
 ((long_float__ref (mk_long_float__ref (long_float__content long_float)))))
-(define-fun long_float__ref___projection ((a long_float__ref)) long_float 
+(define-fun long_float__ref___projection ((a long_float__ref)) long_float
   (long_float__content a))
 
 (define-fun dynamic_invariant ((temp___expr_57 Float64)
@@ -156,7 +156,7 @@
   (assert
   (and
   (= o (fp.add RNE z (fp.neg (fp #b0 #b10000000001 #b0000000000000000000000000000000000000000000000000000))))
-  (not (or (fp.isInfinite (fp.add RNE z (fp.neg (fp #b0 #b10000000001 #b0000000000000000000000000000000000000000000000000000)))) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE z (fp.neg (fp #b0 #b10000000001 #b0000000000000000000000000000000000000000000000000000)))) (fp.isNaN (fp.add RNE
   z (fp.neg (fp #b0 #b10000000001 #b0000000000000000000000000000000000000000000000000000))))))))
 
 ;; H
@@ -167,3 +167,4 @@
  ;; File "biaseddivide.ads", line 16, characters 0-0
   (not (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
 (check-sat)
+(exit)

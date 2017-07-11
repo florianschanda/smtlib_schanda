@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -111,7 +111,7 @@
 (declare-datatypes ()
 ((tt_base_floatB__ref
  (mk_tt_base_floatB__ref (tt_base_floatB__content tt_base_floatB)))))
-(define-fun tt_base_floatB__ref___projection ((a tt_base_floatB__ref)) tt_base_floatB 
+(define-fun tt_base_floatB__ref___projection ((a tt_base_floatB__ref)) tt_base_floatB
   (tt_base_floatB__content a))
 
 (declare-sort t_float 0)
@@ -160,3 +160,4 @@
  ;; File "numerics.ads", line 7, characters 0-0
   (not (not (fp.isZero      right))))
 (check-sat)
+(exit)

@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort integer 0)
@@ -91,7 +91,7 @@
 
 (declare-datatypes ()
 ((character__ref (mk_character__ref (character__content character)))))
-(define-fun character__ref___projection ((a character__ref)) character 
+(define-fun character__ref___projection ((a character__ref)) character
   (character__content a))
 
 (declare-fun to_rep (character) Int)
@@ -129,7 +129,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int character) Int Int (Array Int character) Int
@@ -144,7 +144,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (character Int) (Array Int character))
@@ -359,7 +359,7 @@
 (declare-datatypes ()
 ((tname_stringP1__ref
  (mk_tname_stringP1__ref (tname_stringP1__content tname_stringP1)))))
-(define-fun tname_stringP1__ref___projection ((a tname_stringP1__ref)) tname_stringP1 
+(define-fun tname_stringP1__ref___projection ((a tname_stringP1__ref)) tname_stringP1
   (tname_stringP1__content a))
 
 (declare-fun currency () us_t)
@@ -405,7 +405,7 @@
 (declare-datatypes ()
 ((tTaddressSP1__ref
  (mk_tTaddressSP1__ref (tTaddressSP1__content tTaddressSP1)))))
-(define-fun tTaddressSP1__ref___projection ((a tTaddressSP1__ref)) tTaddressSP1 
+(define-fun tTaddressSP1__ref___projection ((a tTaddressSP1__ref)) tTaddressSP1
   (tTaddressSP1__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
@@ -426,7 +426,7 @@
 
 (declare-datatypes ()
 ((tTcitySP1__ref (mk_tTcitySP1__ref (tTcitySP1__content tTcitySP1)))))
-(define-fun tTcitySP1__ref___projection ((a tTcitySP1__ref)) tTcitySP1 
+(define-fun tTcitySP1__ref___projection ((a tTcitySP1__ref)) tTcitySP1
   (tTcitySP1__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
@@ -893,7 +893,7 @@
 ;; H
   (assert
   (= (ite (<= (to_rep1 (first temp___5461)) (to_rep1 (last temp___5461)))
-     (+ (- (to_rep1 (last temp___5461)) (to_rep1 (first temp___5461))) 1) 0) 
+     (+ (- (to_rep1 (last temp___5461)) (to_rep1 (first temp___5461))) 1) 0)
   (ite (<= 1 40) (+ (- 40 1) 1) 0)))
 
 ;; H
@@ -950,3 +950,4 @@
         (+ (- (to_rep1 (last2 (mk1 1 r9b))) (to_rep1 (first2 (mk1 1 r9b)))) 1)
         0))))
 (check-sat)
+(exit)

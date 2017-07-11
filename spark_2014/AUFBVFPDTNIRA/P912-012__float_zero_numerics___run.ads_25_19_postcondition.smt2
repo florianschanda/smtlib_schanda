@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -143,7 +143,7 @@
 (declare-datatypes ()
 ((t_float_value__ref
  (mk_t_float_value__ref (t_float_value__content t_float_value)))))
-(define-fun t_float_value__ref___projection ((a t_float_value__ref)) t_float_value 
+(define-fun t_float_value__ref___projection ((a t_float_value__ref)) t_float_value
   (t_float_value__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_147 Float32)
@@ -213,3 +213,4 @@
  ;; File "run.ads", line 20, characters 0-0
   (not (not (fp.eq y2 (fp #b0 #b00000000 #b00000000000000000000000)))))
 (check-sat)
+(exit)

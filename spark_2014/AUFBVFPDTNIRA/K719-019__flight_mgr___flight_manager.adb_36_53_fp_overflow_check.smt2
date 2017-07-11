@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -157,7 +157,7 @@
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -237,7 +237,7 @@
 
 (declare-datatypes ()
 ((engine_values__ref (mk_engine_values__ref (engine_values__content us_rep)))))
-(define-fun engine_values__ref___projection ((a engine_values__ref)) us_rep 
+(define-fun engine_values__ref___projection ((a engine_values__ref)) us_rep
   (engine_values__content a))
 
 (declare-fun position_x () Float32)
@@ -426,7 +426,7 @@
 ;; H
   (assert
   (=> (fp.lt target_y position_y)
-  (= (rec__flight_manager__engine_values__x_speed result____split_fields3) 
+  (= (rec__flight_manager__engine_values__x_speed result____split_fields3)
   o7)))
 
 ;; H
@@ -458,7 +458,7 @@
   (assert
   (=> (not (fp.lt target_y position_y))
   (=> (fp.lt position_y target_y)
-  (= (rec__flight_manager__engine_values__x_speed result____split_fields3) 
+  (= (rec__flight_manager__engine_values__x_speed result____split_fields3)
   o10))))
 
 ;; H
@@ -503,6 +503,7 @@
 ;; WP_parameter_def
  ;; File "flight_manager.ads", line 3, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.sub RNE position_x target_x)) (fp.isNaN (fp.sub RNE 
+  (not (or (fp.isInfinite (fp.sub RNE position_x target_x)) (fp.isNaN (fp.sub RNE
   position_x target_x))))))
 (check-sat)
+(exit)

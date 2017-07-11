@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -180,7 +180,7 @@
 (declare-datatypes ()
 ((speed_km_per_h_t__ref
  (mk_speed_km_per_h_t__ref (speed_km_per_h_t__content speed_km_per_h_t)))))
-(define-fun speed_km_per_h_t__ref___projection ((a speed_km_per_h_t__ref)) speed_km_per_h_t 
+(define-fun speed_km_per_h_t__ref___projection ((a speed_km_per_h_t__ref)) speed_km_per_h_t
   (speed_km_per_h_t__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_141 Float32)
@@ -234,7 +234,7 @@
 ;; H
   (assert
   (and (= o (fp.mul RNE speed (fp #b0 #b10001010 #b11000010000000000000000)))
-  (not (or (fp.isInfinite (fp.mul RNE speed (fp #b0 #b10001010 #b11000010000000000000000))) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE speed (fp #b0 #b10001010 #b11000010000000000000000))) (fp.isNaN (fp.mul RNE
   speed (fp #b0 #b10001010 #b11000010000000000000000)))))))
 
 (assert
@@ -242,3 +242,4 @@
  ;; File "units.ads", line 24, characters 0-0
   (not (not (fp.isZero      (fp #b0 #b10001000 #b11110100000000000000000)))))
 (check-sat)
+(exit)

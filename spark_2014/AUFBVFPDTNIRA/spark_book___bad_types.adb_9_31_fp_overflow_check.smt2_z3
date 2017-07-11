@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -189,7 +189,7 @@
 
 ;; H
   (assert
-  (not (or (fp.isInfinite ada__float_text_io__get__2__item) (fp.isNaN 
+  (not (or (fp.isInfinite ada__float_text_io__get__2__item) (fp.isNaN
   ada__float_text_io__get__2__item))))
 
 ;; H
@@ -200,7 +200,7 @@
 
 ;; H
   (assert
-  (not (or (fp.isInfinite ada__float_text_io__get__2__item1) (fp.isNaN 
+  (not (or (fp.isInfinite ada__float_text_io__get__2__item1) (fp.isNaN
   ada__float_text_io__get__2__item1))))
 
 ;; H
@@ -213,7 +213,8 @@
 ;; WP_parameter_def
  ;; File "bad_types.adb", line 2, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
-  wall_thickness1)) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
+  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
+  wall_thickness1)) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
   wall_thickness1))))))
 (check-sat)
+(exit)

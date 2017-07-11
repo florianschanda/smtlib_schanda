@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -194,7 +194,7 @@
 
 (declare-datatypes ()
 ((tfloat_32B__ref (mk_tfloat_32B__ref (tfloat_32B__content tfloat_32B)))))
-(define-fun tfloat_32B__ref___projection ((a tfloat_32B__ref)) tfloat_32B 
+(define-fun tfloat_32B__ref___projection ((a tfloat_32B__ref)) tfloat_32B
   (tfloat_32B__content a))
 
 (declare-sort float_32 0)
@@ -292,3 +292,4 @@
                                       (fp #b0 #b01111111 #b10011110001110111100111)
                                       n) (fp #b0 #b10000000 #b00011110001101010100000)) (fp #b0 #b01111111 #b00000000000000000000000)))))
 (check-sat)
+(exit)

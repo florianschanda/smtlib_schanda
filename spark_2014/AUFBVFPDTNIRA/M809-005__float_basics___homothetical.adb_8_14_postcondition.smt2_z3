@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -208,7 +208,7 @@
   (and
   (and
   (and (= o (fp.mul RNE kv kv))
-  (not (or (fp.isInfinite (fp.mul RNE kv kv)) (fp.isNaN (fp.mul RNE kv 
+  (not (or (fp.isInfinite (fp.mul RNE kv kv)) (fp.isNaN (fp.mul RNE kv
   kv))))) (= o1 (fp.div RNE o ka)))
   (and (= o2 o1) (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
   (= result (ite (fp.lt (fp.abs d) o2) true false)))
@@ -220,7 +220,7 @@
   (and
   (and
   (and (= o3 (fp.mul RNE (fp.abs d) ka))
-  (not (or (fp.isInfinite (fp.mul RNE (fp.abs d) ka)) (fp.isNaN (fp.mul RNE (fp.abs 
+  (not (or (fp.isInfinite (fp.mul RNE (fp.abs d) ka)) (fp.isNaN (fp.mul RNE (fp.abs
   d) ka))))) (= o4 (fp.sqrt RNE o3)))
   (and (= result1 homothetical__adjust2triangle__result)
   (= homothetical__adjust2triangle__result1 o4))))
@@ -248,3 +248,4 @@
   (not
   (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) homothetical__adjust2triangle__result7)))
 (check-sat)
+(exit)

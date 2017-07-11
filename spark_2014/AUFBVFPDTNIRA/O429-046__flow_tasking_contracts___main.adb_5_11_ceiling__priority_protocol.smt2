@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort priority 0)
@@ -65,3 +65,4 @@
  ;; File "main.adb", line 5, characters 0-0
   (not (<= 48 97)))
 (check-sat)
+(exit)

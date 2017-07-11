@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -209,7 +209,7 @@
 (declare-datatypes ()
 ((t_acc_lifted__ref
  (mk_t_acc_lifted__ref (t_acc_lifted__content t_acc_lifted)))))
-(define-fun t_acc_lifted__ref___projection ((a t_acc_lifted__ref)) t_acc_lifted 
+(define-fun t_acc_lifted__ref___projection ((a t_acc_lifted__ref)) t_acc_lifted
   (t_acc_lifted__content a))
 
 (define-fun dynamic_invariant3 ((temp___expr_158 Float32)
@@ -240,7 +240,7 @@
 (declare-datatypes ()
 ((positive_float__ref
  (mk_positive_float__ref (positive_float__content positive_float)))))
-(define-fun positive_float__ref___projection ((a positive_float__ref)) positive_float 
+(define-fun positive_float__ref___projection ((a positive_float__ref)) positive_float
   (positive_float__content a))
 
 (define-fun dynamic_invariant4 ((temp___expr_1294 Float32)
@@ -271,7 +271,7 @@
 (declare-datatypes ()
 ((t_delta_time__ref
  (mk_t_delta_time__ref (t_delta_time__content t_delta_time)))))
-(define-fun t_delta_time__ref___projection ((a t_delta_time__ref)) t_delta_time 
+(define-fun t_delta_time__ref___projection ((a t_delta_time__ref)) t_delta_time
   (t_delta_time__content a))
 
 (define-fun dynamic_invariant5 ((temp___expr_1300 Float32)
@@ -332,7 +332,7 @@
 (declare-datatypes ()
 ((t_quaternion__ref
  (mk_t_quaternion__ref (t_quaternion__content t_quaternion)))))
-(define-fun t_quaternion__ref___projection ((a t_quaternion__ref)) t_quaternion 
+(define-fun t_quaternion__ref___projection ((a t_quaternion__ref)) t_quaternion
   (t_quaternion__content a))
 
 (define-fun dynamic_invariant7 ((temp___expr_1336 Float32)
@@ -753,3 +753,4 @@
  ;; File "i-cexten.ads", line 59, characters 0-0
   (not (not (fp.isZero      (fp #b0 #b10000110 #b01101000000000000000000)))))
 (check-sat)
+(exit)

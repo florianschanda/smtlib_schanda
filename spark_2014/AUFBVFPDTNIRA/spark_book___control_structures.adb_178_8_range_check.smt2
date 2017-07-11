@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun div1 (Int Int) Int)
@@ -245,7 +245,7 @@
 
 (declare-datatypes ()
 ((character__ref (mk_character__ref (character__content character)))))
-(define-fun character__ref___projection ((a character__ref)) character 
+(define-fun character__ref___projection ((a character__ref)) character
   (character__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_63 Int) (temp___is_init_60 Bool)
@@ -294,7 +294,7 @@
 
 (declare-datatypes ()
 ((number_base__ref (mk_number_base__ref (number_base__content number_base)))))
-(define-fun number_base__ref___projection ((a number_base__ref)) number_base 
+(define-fun number_base__ref___projection ((a number_base__ref)) number_base
   (number_base__content a))
 
 (define-fun dynamic_invariant4 ((temp___expr_478 Int)
@@ -348,7 +348,7 @@
 
 (declare-datatypes ()
 ((uppercase__ref (mk_uppercase__ref (uppercase__content uppercase)))))
-(define-fun uppercase__ref___projection ((a uppercase__ref)) uppercase 
+(define-fun uppercase__ref___projection ((a uppercase__ref)) uppercase
   (uppercase__content a))
 
 (define-fun dynamic_invariant6 ((temp___expr_529 Int)
@@ -1284,10 +1284,10 @@
 ;; H
   (assert
   (=> (not (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x1))
-  (and (= o6 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
+  (and (= o6 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
   x1))
-  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
-  x1)) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
+  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
+  x1)) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
   x1)))))))
 
 ;; H
@@ -1322,10 +1322,10 @@
 ;; H
   (assert
   (=> (not (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x1))
-  (and (= o9 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
+  (and (= o9 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
   x1))
-  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
-  x1)) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
+  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
+  x1)) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
   x1)))))))
 
 ;; H
@@ -1589,7 +1589,7 @@
 ;; H
   (assert
   (and (= o15 (fp.mul RNE approx1 approx1))
-  (not (or (fp.isInfinite (fp.mul RNE approx1 approx1)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE approx1 approx1)) (fp.isNaN (fp.mul RNE
   approx1 approx1))))))
 
 ;; H
@@ -1603,7 +1603,7 @@
 
 ;; H
   (assert
-  (= result47 (ite (fp.lt (fp #b0 #b01110001 #b10100011011011100010111) 
+  (= result47 (ite (fp.lt (fp #b0 #b01110001 #b10100011011011100010111)
               o18) true false)))
 
 ;; H
@@ -1616,14 +1616,14 @@
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
   (not (or (fp.isInfinite approx2) (fp.isNaN approx2))))
-  (fp.lt (fp #b0 #b01110001 #b10100011011011100010111) (fp.abs (fp.sub RNE 
+  (fp.lt (fp #b0 #b01110001 #b10100011011011100010111) (fp.abs (fp.sub RNE
   x1 (fp.mul RNE approx2 approx2)))))))
 
 ;; H
   (assert
   (=> (= result47 true)
   (and (= o19 (fp.div RNE x1 approx2))
-  (not (or (fp.isInfinite (fp.div RNE x1 approx2)) (fp.isNaN (fp.div RNE 
+  (not (or (fp.isInfinite (fp.div RNE x1 approx2)) (fp.isNaN (fp.div RNE
   x1 approx2)))))))
 
 ;; H
@@ -1649,7 +1649,7 @@
   (assert
   (=> (= result47 true)
   (and (= o23 (fp.mul RNE approx3 approx3))
-  (not (or (fp.isInfinite (fp.mul RNE approx3 approx3)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE approx3 approx3)) (fp.isNaN (fp.mul RNE
   approx3 approx3)))))))
 
 ;; H
@@ -1894,3 +1894,4 @@
  ;; File "control_structures.adb", line 29, characters 0-0
   (not (<= (- 2147483648) r7b)))
 (check-sat)
+(exit)

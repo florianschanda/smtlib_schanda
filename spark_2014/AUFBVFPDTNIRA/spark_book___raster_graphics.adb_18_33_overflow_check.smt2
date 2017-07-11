@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort tcoordinate_typeB 0)
@@ -53,7 +53,7 @@
 (declare-datatypes ()
 ((tcoordinate_typeB__ref
  (mk_tcoordinate_typeB__ref (tcoordinate_typeB__content tcoordinate_typeB)))))
-(define-fun tcoordinate_typeB__ref___projection ((a tcoordinate_typeB__ref)) tcoordinate_typeB 
+(define-fun tcoordinate_typeB__ref___projection ((a tcoordinate_typeB__ref)) tcoordinate_typeB
   (tcoordinate_typeB__content a))
 
 (declare-sort coordinate_type 0)
@@ -73,7 +73,7 @@
 (declare-datatypes ()
 ((coordinate_type__ref
  (mk_coordinate_type__ref (coordinate_type__content coordinate_type)))))
-(define-fun coordinate_type__ref___projection ((a coordinate_type__ref)) coordinate_type 
+(define-fun coordinate_type__ref___projection ((a coordinate_type__ref)) coordinate_type
   (coordinate_type__content a))
 
 (define-fun dynamic_invariant ((temp___expr_135 Int)
@@ -107,16 +107,16 @@
 ((us_split_fields
  (mk___split_fields
  (rec__raster_graphics__point__x coordinate_type)(rec__raster_graphics__point__y coordinate_type)))))
-(define-fun us_split_fields_X__projection ((a us_split_fields)) coordinate_type 
+(define-fun us_split_fields_X__projection ((a us_split_fields)) coordinate_type
   (rec__raster_graphics__point__x a))
 
-(define-fun us_split_fields_Y__projection ((a us_split_fields)) coordinate_type 
+(define-fun us_split_fields_Y__projection ((a us_split_fields)) coordinate_type
   (rec__raster_graphics__point__y a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -214,7 +214,7 @@
 
 (declare-datatypes ()
 ((status_type__ref (mk_status_type__ref (status_type__content status_type)))))
-(define-fun status_type__ref___projection ((a status_type__ref)) status_type 
+(define-fun status_type__ref___projection ((a status_type__ref)) status_type
   (status_type__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_155 Int)
@@ -265,9 +265,9 @@
 ;; H
   (assert
   (and
-  (= o (abs (- (to_rep (rec__raster_graphics__point__x (us_split_fields1 a))) 
+  (= o (abs (- (to_rep (rec__raster_graphics__point__x (us_split_fields1 a)))
   (to_rep (rec__raster_graphics__point__x (us_split_fields1 b)))))) (in_range
-  (abs (- (to_rep (rec__raster_graphics__point__x (us_split_fields1 a))) 
+  (abs (- (to_rep (rec__raster_graphics__point__x (us_split_fields1 a)))
   (to_rep (rec__raster_graphics__point__x (us_split_fields1 b))))))))
 
 ;; H
@@ -286,9 +286,9 @@
   (assert
   (and
   (= o2 (abs (- (to_rep
-                (rec__raster_graphics__point__y (us_split_fields1 a))) 
+                (rec__raster_graphics__point__y (us_split_fields1 a)))
   (to_rep (rec__raster_graphics__point__y (us_split_fields1 b)))))) (in_range
-  (abs (- (to_rep (rec__raster_graphics__point__y (us_split_fields1 a))) 
+  (abs (- (to_rep (rec__raster_graphics__point__y (us_split_fields1 a)))
   (to_rep (rec__raster_graphics__point__y (us_split_fields1 b))))))))
 
 ;; H
@@ -308,3 +308,4 @@
  ;; File "raster_graphics.adb", line 4, characters 0-0
   (not (in_range (* delta_y1 delta_y1))))
 (check-sat)
+(exit)

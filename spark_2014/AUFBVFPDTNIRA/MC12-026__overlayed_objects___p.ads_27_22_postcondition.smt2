@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun nth ((_ BitVec 8) Int) Bool)
@@ -72,13 +72,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
   (rotate_left1 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
   (rotate_right1 v (bv2nat n)))))
 
 (declare-fun nth_bv ((_ BitVec 8) (_ BitVec 8)) Bool)
@@ -274,13 +274,13 @@
 (declare-datatypes ()
 ((us_split_fields
  (mk___split_fields (rec__p__r__a integer)(rec__p__r__b float)))))
-(define-fun us_split_fields_A__projection ((a us_split_fields)) integer 
+(define-fun us_split_fields_A__projection ((a us_split_fields)) integer
   (rec__p__r__a a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -290,9 +290,9 @@
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
-                        (= (to_rep (rec__p__r__a (us_split_fields1 a))) 
+                        (= (to_rep (rec__p__r__a (us_split_fields1 a)))
                         (to_rep (rec__p__r__a (us_split_fields1 b))))
-                        (= (to_rep1 (rec__p__r__b (us_split_fields1 a))) 
+                        (= (to_rep1 (rec__p__r__b (us_split_fields1 a)))
                         (to_rep1 (rec__p__r__b (us_split_fields1 b)))))
                    true false))
 
@@ -369,7 +369,7 @@
 
 (declare-datatypes ()
 ((r_raw_index__ref (mk_r_raw_index__ref (r_raw_index__content r_raw_index)))))
-(define-fun r_raw_index__ref___projection ((a r_raw_index__ref)) r_raw_index 
+(define-fun r_raw_index__ref___projection ((a r_raw_index__ref)) r_raw_index
   (r_raw_index__content a))
 
 (declare-sort unsigned_8 0)
@@ -388,7 +388,7 @@
 
 (declare-datatypes ()
 ((unsigned_8__ref (mk_unsigned_8__ref (unsigned_8__content unsigned_8)))))
-(define-fun unsigned_8__ref___projection ((a unsigned_8__ref)) unsigned_8 
+(define-fun unsigned_8__ref___projection ((a unsigned_8__ref)) unsigned_8
   (unsigned_8__content a))
 
 (declare-fun to_rep2 (unsigned_8) (_ BitVec 8))
@@ -431,7 +431,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int unsigned_8) Int Int (Array Int unsigned_8)
@@ -446,7 +446,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (unsigned_8 Int) (Array Int unsigned_8))
@@ -649,7 +649,7 @@
 
 ;; H
   (assert
-  (= (mk___split_fields full_s__split_fields2 full_s__split_fields3) 
+  (= (mk___split_fields full_s__split_fields2 full_s__split_fields3)
   (us_split_fields1 null_r)))
 
 ;; H
@@ -676,6 +676,7 @@
   (not
   (= (bool_eq
      (mk___rep
-     (mk___split_fields full_s__split_fields4 full_s__split_fields5)) 
+     (mk___split_fields full_s__split_fields4 full_s__split_fields5))
      null_r) true)))
 (check-sat)
+(exit)

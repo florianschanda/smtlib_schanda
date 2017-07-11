@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
@@ -64,7 +64,7 @@
 
 (declare-datatypes ()
 ((year_type__ref (mk_year_type__ref (year_type__content year_type)))))
-(define-fun year_type__ref___projection ((a year_type__ref)) year_type 
+(define-fun year_type__ref___projection ((a year_type__ref)) year_type
   (year_type__content a))
 
 (declare-fun to_rep (year_type) Int)
@@ -102,7 +102,7 @@
 
 (declare-datatypes ()
 ((month_type__ref (mk_month_type__ref (month_type__content month_type)))))
-(define-fun month_type__ref___projection ((a month_type__ref)) month_type 
+(define-fun month_type__ref___projection ((a month_type__ref)) month_type
   (month_type__content a))
 
 (declare-fun to_rep1 (month_type) Int)
@@ -179,7 +179,7 @@
 
 (declare-datatypes ()
 ((hour_type__ref (mk_hour_type__ref (hour_type__content hour_type)))))
-(define-fun hour_type__ref___projection ((a hour_type__ref)) hour_type 
+(define-fun hour_type__ref___projection ((a hour_type__ref)) hour_type
   (hour_type__content a))
 
 (declare-fun to_rep3 (hour_type) Int)
@@ -218,7 +218,7 @@
 
 (declare-datatypes ()
 ((minute_type__ref (mk_minute_type__ref (minute_type__content minute_type)))))
-(define-fun minute_type__ref___projection ((a minute_type__ref)) minute_type 
+(define-fun minute_type__ref___projection ((a minute_type__ref)) minute_type
   (minute_type__content a))
 
 (declare-fun to_rep4 (minute_type) Int)
@@ -257,7 +257,7 @@
 
 (declare-datatypes ()
 ((second_type__ref (mk_second_type__ref (second_type__content second_type)))))
-(define-fun second_type__ref___projection ((a second_type__ref)) second_type 
+(define-fun second_type__ref___projection ((a second_type__ref)) second_type
   (second_type__content a))
 
 (declare-fun to_rep5 (second_type) Int)
@@ -284,19 +284,19 @@
 ((us_split_fields
  (mk___split_fields
  (rec__dates__date__day day_type)(rec__dates__date__month month_type)(rec__dates__date__year year_type)))))
-(define-fun us_split_fields_Day__projection ((a us_split_fields)) day_type 
+(define-fun us_split_fields_Day__projection ((a us_split_fields)) day_type
   (rec__dates__date__day a))
 
-(define-fun us_split_fields_Month__projection ((a us_split_fields)) month_type 
+(define-fun us_split_fields_Month__projection ((a us_split_fields)) month_type
   (rec__dates__date__month a))
 
-(define-fun us_split_fields_Year__projection ((a us_split_fields)) year_type 
+(define-fun us_split_fields_Year__projection ((a us_split_fields)) year_type
   (rec__dates__date__year a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -308,15 +308,15 @@
   (b us_rep)) Bool (ite (and
                         (and
                         (= (to_rep2
-                           (rec__dates__date__day (us_split_fields1 a))) 
+                           (rec__dates__date__day (us_split_fields1 a)))
                         (to_rep2
                         (rec__dates__date__day (us_split_fields1 b))))
                         (= (to_rep1
-                           (rec__dates__date__month (us_split_fields1 a))) 
+                           (rec__dates__date__month (us_split_fields1 a)))
                         (to_rep1
                         (rec__dates__date__month (us_split_fields1 b)))))
                         (= (to_rep
-                           (rec__dates__date__year (us_split_fields1 a))) 
+                           (rec__dates__date__year (us_split_fields1 a)))
                         (to_rep
                         (rec__dates__date__year (us_split_fields1 b)))))
                    true false))
@@ -397,19 +397,19 @@
 ((us_split_fields2
  (mk___split_fields1
  (rec__dates__time__hour hour_type)(rec__dates__time__minute minute_type)(rec__dates__time__second second_type)))))
-(define-fun us_split_fields_Hour__projection ((a us_split_fields2)) hour_type 
+(define-fun us_split_fields_Hour__projection ((a us_split_fields2)) hour_type
   (rec__dates__time__hour a))
 
-(define-fun us_split_fields_Minute__projection ((a us_split_fields2)) minute_type 
+(define-fun us_split_fields_Minute__projection ((a us_split_fields2)) minute_type
   (rec__dates__time__minute a))
 
-(define-fun us_split_fields_Second__projection ((a us_split_fields2)) second_type 
+(define-fun us_split_fields_Second__projection ((a us_split_fields2)) second_type
   (rec__dates__time__second a))
 
 (declare-datatypes ()
 ((us_split_fields__ref1
  (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2 
+(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ()
@@ -421,15 +421,15 @@
   (b us_rep1)) Bool (ite (and
                          (and
                          (= (to_rep3
-                            (rec__dates__time__hour (us_split_fields3 a))) 
+                            (rec__dates__time__hour (us_split_fields3 a)))
                          (to_rep3
                          (rec__dates__time__hour (us_split_fields3 b))))
                          (= (to_rep4
-                            (rec__dates__time__minute (us_split_fields3 a))) 
+                            (rec__dates__time__minute (us_split_fields3 a)))
                          (to_rep4
                          (rec__dates__time__minute (us_split_fields3 b)))))
                          (= (to_rep5
-                            (rec__dates__time__second (us_split_fields3 a))) 
+                            (rec__dates__time__second (us_split_fields3 a)))
                          (to_rep5
                          (rec__dates__time__second (us_split_fields3 b)))))
                     true false))
@@ -510,16 +510,16 @@
 ((us_split_fields4
  (mk___split_fields2
  (rec__dates__datetime__date_part us_rep)(rec__dates__datetime__time_part us_rep1)))))
-(define-fun us_split_fields_Date_Part__projection ((a us_split_fields4)) us_rep 
+(define-fun us_split_fields_Date_Part__projection ((a us_split_fields4)) us_rep
   (rec__dates__datetime__date_part a))
 
-(define-fun us_split_fields_Time_Part__projection ((a us_split_fields4)) us_rep1 
+(define-fun us_split_fields_Time_Part__projection ((a us_split_fields4)) us_rep1
   (rec__dates__datetime__time_part a))
 
 (declare-datatypes ()
 ((us_split_fields__ref2
  (mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref2)) us_split_fields4 
+(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ()
@@ -2325,3 +2325,4 @@
  ;; File "dates.ads", line 76, characters 0-0
   (not (not (= (bool_eq2 past (maximum_datetime Tuple0)) true))))
 (check-sat)
+(exit)

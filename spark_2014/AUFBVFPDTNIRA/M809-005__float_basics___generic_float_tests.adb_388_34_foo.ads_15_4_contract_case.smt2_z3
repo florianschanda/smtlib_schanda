@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -183,17 +183,17 @@
 ;; H
   (assert
   (and
-  (fp.leq (fp.neg (fp #b0 #b10000001011 #b0000000000000000000000000000000000000000000000000000)) 
+  (fp.leq (fp.neg (fp #b0 #b10000001011 #b0000000000000000000000000000000000000000000000000000))
   x)
   (fp.leq x (fp #b0 #b10000001011 #b0000000000000000000000000000000000000000000000000000))))
 
 ;; H
   (assert
   (and
-  (= o (ite (= ((_ extract 1024 1024) ((_ fp.to_sbv 1025) RNA x)) #b0) (bv2int ((_ fp.to_sbv 1025) RNA 
+  (= o (ite (= ((_ extract 1024 1024) ((_ fp.to_sbv 1025) RNA x)) #b0) (bv2int ((_ fp.to_sbv 1025) RNA
   x)) (- (bv2int ((_ fp.to_sbv 1025) RNA x)) (bv2int (bvshl (_ bv1 1026) (_ bv1025 1026))))))
   (in_range2
-  (ite (= ((_ extract 1024 1024) ((_ fp.to_sbv 1025) RNA x)) #b0) (bv2int ((_ fp.to_sbv 1025) RNA 
+  (ite (= ((_ extract 1024 1024) ((_ fp.to_sbv 1025) RNA x)) #b0) (bv2int ((_ fp.to_sbv 1025) RNA
   x)) (- (bv2int ((_ fp.to_sbv 1025) RNA x)) (bv2int (bvshl (_ bv1 1026) (_ bv1025 1026))))))))
 
 ;; H
@@ -259,3 +259,4 @@
  ;; File "generic_float_tests.adb", line 351, characters 0-0
   (not (= i2 2)))
 (check-sat)
+(exit)

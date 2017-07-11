@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort integer 0)
@@ -166,7 +166,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int integer) Int Int (Array Int integer) Int
@@ -181,7 +181,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (integer Int) (Array Int integer))
@@ -358,29 +358,29 @@
 (declare-datatypes ()
 ((us_split_discrs
  (mk___split_discrs (rec__stacks__stack_type__max_size positive)))))
-(define-fun us_split_discrs___projection ((a us_split_discrs)) positive 
+(define-fun us_split_discrs___projection ((a us_split_discrs)) positive
   (rec__stacks__stack_type__max_size a))
 
 (declare-datatypes ()
 ((us_split_discrs__ref
  (mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref)) us_split_discrs 
+(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ()
 ((us_split_fields
  (mk___split_fields
  (rec__stacks__stack_type__top natural)(rec__stacks__stack_type__items us_t)))))
-(define-fun us_split_fields_Top__projection ((a us_split_fields)) natural 
+(define-fun us_split_fields_Top__projection ((a us_split_fields)) natural
   (rec__stacks__stack_type__top a))
 
-(define-fun us_split_fields_Items__projection ((a us_split_fields)) us_t 
+(define-fun us_split_fields_Items__projection ((a us_split_fields)) us_t
   (rec__stacks__stack_type__items a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -487,7 +487,7 @@
 
 (declare-datatypes ()
 ((stack_type__ref (mk_stack_type__ref (stack_type__content us_rep)))))
-(define-fun stack_type__ref___projection ((a stack_type__ref)) us_rep 
+(define-fun stack_type__ref___projection ((a stack_type__ref)) us_rep
   (stack_type__content a))
 
 (define-fun dynamic_invariant ((temp___expr_143 us_rep)
@@ -509,7 +509,7 @@
                                          (us_split_fields1 temp___expr_143))) 1)
                                       (= (last1
                                          (rec__stacks__stack_type__items
-                                         (us_split_fields1 temp___expr_143))) 
+                                         (us_split_fields1 temp___expr_143)))
                                       (to_rep2 temp___144))))))
 
 (declare-fun stack () us_rep)
@@ -548,3 +548,4 @@
   (not (in_range2
   (to_rep2 (rec__stacks__stack_type__max_size (us_split_discrs1 stack))))))
 (check-sat)
+(exit)

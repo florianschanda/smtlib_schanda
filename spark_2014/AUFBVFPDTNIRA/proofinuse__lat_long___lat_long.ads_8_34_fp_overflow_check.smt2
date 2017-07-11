@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -126,7 +126,7 @@
 (declare-datatypes ()
 ((float_with_approx__ref
  (mk_float_with_approx__ref (float_with_approx__content float_with_approx)))))
-(define-fun float_with_approx__ref___projection ((a float_with_approx__ref)) float_with_approx 
+(define-fun float_with_approx__ref___projection ((a float_with_approx__ref)) float_with_approx
   (float_with_approx__content a))
 
 (define-fun dynamic_invariant ((temp___expr_141 Float32)
@@ -161,6 +161,7 @@
 ;; WP_parameter_def
  ;; File "lat_long.ads", line 7, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.add RNE right (fp #b0 #b01101110 #b01001111100010110101100))) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE right (fp #b0 #b01101110 #b01001111100010110101100))) (fp.isNaN (fp.add RNE
   right (fp #b0 #b01101110 #b01001111100010110101100)))))))
 (check-sat)
+(exit)

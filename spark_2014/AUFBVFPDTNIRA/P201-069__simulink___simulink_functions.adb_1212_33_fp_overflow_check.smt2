@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -110,7 +110,7 @@
 
 (declare-datatypes ()
 ((long_float__ref (mk_long_float__ref (long_float__content long_float)))))
-(define-fun long_float__ref___projection ((a long_float__ref)) long_float 
+(define-fun long_float__ref___projection ((a long_float__ref)) long_float
   (long_float__content a))
 
 (define-fun dynamic_invariant ((temp___expr_57 Float64)
@@ -197,7 +197,7 @@
 ;; H
   (assert
   (and (= o (fp.div RNE left right))
-  (not (or (fp.isInfinite (fp.div RNE left right)) (fp.isNaN (fp.div RNE 
+  (not (or (fp.isInfinite (fp.div RNE left right)) (fp.isNaN (fp.div RNE
   left right))))))
 
 ;; H
@@ -222,6 +222,7 @@
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.sub RNE result__1 (fp #b0 #b10000000000 #b1001001000011111101101010100010001000010110100011000))) (fp.isNaN (fp.sub RNE 
+  (not (or (fp.isInfinite (fp.sub RNE result__1 (fp #b0 #b10000000000 #b1001001000011111101101010100010001000010110100011000))) (fp.isNaN (fp.sub RNE
   result__1 (fp #b0 #b10000000000 #b1001001000011111101101010100010001000010110100011000)))))))
 (check-sat)
+(exit)

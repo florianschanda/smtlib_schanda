@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun nth ((_ BitVec 32) Int) Bool)
@@ -118,7 +118,7 @@
 (declare-datatypes ()
 ((small_unsigned__ref
  (mk_small_unsigned__ref (small_unsigned__content small_unsigned)))))
-(define-fun small_unsigned__ref___projection ((a small_unsigned__ref)) small_unsigned 
+(define-fun small_unsigned__ref___projection ((a small_unsigned__ref)) small_unsigned
   (small_unsigned__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_189 (_ BitVec 32))
@@ -149,3 +149,4 @@
  ;; File "range_check.adb", line 21, characters 0-0
   (not (in_range x)))
 (check-sat)
+(exit)

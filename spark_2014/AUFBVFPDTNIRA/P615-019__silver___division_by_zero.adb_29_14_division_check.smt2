@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -147,3 +147,4 @@
  ;; File "division_by_zero.adb", line 18, characters 0-0
   (not (not (fp.isZero      y))))
 (check-sat)
+(exit)

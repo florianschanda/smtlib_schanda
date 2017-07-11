@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun div1 (Int Int) Int)
@@ -143,13 +143,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvor (bvshl v (bvurem n (_ bv16 16))) (bvlshr v (bvsub (_ bv16 16) (bvurem n (_ bv16 16))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv16 16))) (bvlshr v (bvsub (_ bv16 16) (bvurem n (_ bv16 16)))))
   (rotate_left1 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvor (bvlshr v (bvurem n (_ bv16 16))) (bvshl v (bvsub (_ bv16 16) (bvurem n (_ bv16 16))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv16 16))) (bvshl v (bvsub (_ bv16 16) (bvurem n (_ bv16 16)))))
   (rotate_right1 v (bv2nat n)))))
 
 (declare-fun nth_bv ((_ BitVec 16) (_ BitVec 16)) Bool)
@@ -214,7 +214,7 @@
 
 (declare-datatypes ()
 ((unsigned_16__ref (mk_unsigned_16__ref (unsigned_16__content unsigned_16)))))
-(define-fun unsigned_16__ref___projection ((a unsigned_16__ref)) unsigned_16 
+(define-fun unsigned_16__ref___projection ((a unsigned_16__ref)) unsigned_16
   (unsigned_16__content a))
 
 (define-fun dynamic_invariant ((temp___expr_177 (_ BitVec 16))
@@ -234,3 +234,4 @@
  ;; File "interfac.ads", line 66, characters 0-0
   (not (not (= 32 0))))
 (check-sat)
+(exit)

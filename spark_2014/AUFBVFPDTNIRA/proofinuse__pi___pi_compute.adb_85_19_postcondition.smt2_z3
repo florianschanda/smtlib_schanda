@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -532,55 +532,55 @@
   (and
   (and
   (and (= o (fp.sub RNE a11 t21))
-  (not (or (fp.isInfinite (fp.sub RNE a11 t21)) (fp.isNaN (fp.sub RNE 
+  (not (or (fp.isInfinite (fp.sub RNE a11 t21)) (fp.isNaN (fp.sub RNE
   a11 t21))))) (and (= result11 a24) (= a21 o)))
   (and (not (or (fp.isInfinite a21) (fp.isNaN a21)))
   (and
   (and
   (and (= o1 (fp.add RNE a21 t31))
-  (not (or (fp.isInfinite (fp.add RNE a21 t31)) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE a21 t31)) (fp.isNaN (fp.add RNE
   a21 t31))))) (and (= result12 a34) (= a31 o1)))
   (and (not (or (fp.isInfinite a31) (fp.isNaN a31)))
   (and
   (and
   (and (= o2 (fp.sub RNE a31 t41))
-  (not (or (fp.isInfinite (fp.sub RNE a31 t41)) (fp.isNaN (fp.sub RNE 
+  (not (or (fp.isInfinite (fp.sub RNE a31 t41)) (fp.isNaN (fp.sub RNE
   a31 t41))))) (and (= result13 a44) (= a41 o2)))
   (and (not (or (fp.isInfinite a41) (fp.isNaN a41)))
   (and
   (and
   (and (= o3 (fp.add RNE a41 t51))
-  (not (or (fp.isInfinite (fp.add RNE a41 t51)) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE a41 t51)) (fp.isNaN (fp.add RNE
   a41 t51))))) (and (= result14 a54) (= a51 o3)))
   (and (not (or (fp.isInfinite a51) (fp.isNaN a51)))
   (and
   (and
   (and (= o4 (fp.sub RNE a51 t61))
-  (not (or (fp.isInfinite (fp.sub RNE a51 t61)) (fp.isNaN (fp.sub RNE 
+  (not (or (fp.isInfinite (fp.sub RNE a51 t61)) (fp.isNaN (fp.sub RNE
   a51 t61))))) (and (= result15 a64) (= a61 o4)))
   (and (not (or (fp.isInfinite a61) (fp.isNaN a61)))
   (and
   (and
   (and (= o5 (fp.add RNE a61 t71))
-  (not (or (fp.isInfinite (fp.add RNE a61 t71)) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE a61 t71)) (fp.isNaN (fp.add RNE
   a61 t71))))) (and (= result16 a74) (= a71 o5)))
   (and (not (or (fp.isInfinite a71) (fp.isNaN a71)))
   (and
   (and
   (and (= o6 (fp.sub RNE a71 t81))
-  (not (or (fp.isInfinite (fp.sub RNE a71 t81)) (fp.isNaN (fp.sub RNE 
+  (not (or (fp.isInfinite (fp.sub RNE a71 t81)) (fp.isNaN (fp.sub RNE
   a71 t81))))) (and (= result17 a84) (= a81 o6)))
   (and (not (or (fp.isInfinite a81) (fp.isNaN a81)))
   (and
   (and
   (and (= o7 (fp.add RNE a81 t91))
-  (not (or (fp.isInfinite (fp.add RNE a81 t91)) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE a81 t91)) (fp.isNaN (fp.add RNE
   a81 t91))))) (and (= result18 a94) (= a91 o7)))
   (and (not (or (fp.isInfinite a91) (fp.isNaN a91)))
   (and
   (and
   (and (= o8 (fp.sub RNE a91 t101))
-  (not (or (fp.isInfinite (fp.sub RNE a91 t101)) (fp.isNaN (fp.sub RNE 
+  (not (or (fp.isInfinite (fp.sub RNE a91 t101)) (fp.isNaN (fp.sub RNE
   a91 t101))))) (and (= result19 a104) (= a101 o8)))
   (and (not (or (fp.isInfinite a101) (fp.isNaN a101)))
   (and
@@ -590,11 +590,11 @@
   (and
   (and
   (and (= o9 (fp.mul RNE a91 a91))
-  (not (or (fp.isInfinite (fp.mul RNE a91 a91)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE a91 a91)) (fp.isNaN (fp.mul RNE
   a91 a91)))))
   (and
   (and (= o10 (fp.mul RNE a101 a81))
-  (not (or (fp.isInfinite (fp.mul RNE a101 a81)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE a101 a81)) (fp.isNaN (fp.mul RNE
   a101 a81))))) (= o11 (fp.sub RNE o10 o9))))
   (and (= o12 o11) (not (or (fp.isInfinite o11) (fp.isNaN o11)))))
   (= o13 (fp.mul RNE (fp #b0 #b10000001 #b00000000000000000000000) o12)))
@@ -607,18 +607,18 @@
   (and
   (and
   (and
-  (and (= o15 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
+  (and (= o15 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
   a91))
-  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
-  a91)) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
+  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
+  a91)) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
   a91))))) (= o16 (fp.sub RNE a101 o15)))
   (and (= o17 o16) (not (or (fp.isInfinite o16) (fp.isNaN o16)))))
   (= o18 (fp.add RNE o17 a81)))
   (and (= o19 o18) (not (or (fp.isInfinite o18) (fp.isNaN o18)))))
   (and (= result21 den) (= (let ((subject den)) den1) o19)))
   (and
-  (not (or (fp.isInfinite (let ((subject den)) den1)) (fp.isNaN (let ((subject 
-                                                                den)) 
+  (not (or (fp.isInfinite (let ((subject den)) den1)) (fp.isNaN (let ((subject
+                                                                den))
                                                                 den1))))
   (and
   (=>
@@ -627,7 +627,7 @@
   (and
   (and
   (and (= o20 (fp.div RNE num1 (let ((subject den)) den1)))
-  (not (or (fp.isInfinite (fp.div RNE num1 (let ((subject den)) den1))) (fp.isNaN (fp.div RNE 
+  (not (or (fp.isInfinite (fp.div RNE num1 (let ((subject den)) den1))) (fp.isNaN (fp.div RNE
   num1 (let ((subject den)) den1))))))
   (and (= result22 res) (= (let ((subject res)) res1) o20)))
   (and
@@ -698,3 +698,4 @@
   (not
   (fp.eq (t__content pi_compute__shanks_float__result4) (fp #b0 #b10000000 #b10010010000101001010011))))
 (check-sat)
+(exit)

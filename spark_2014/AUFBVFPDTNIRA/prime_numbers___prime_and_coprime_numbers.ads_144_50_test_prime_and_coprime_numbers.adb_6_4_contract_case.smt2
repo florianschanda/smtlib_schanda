@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
@@ -83,7 +83,7 @@
 
 (declare-datatypes ()
 ((value_type__ref (mk_value_type__ref (value_type__content value_type)))))
-(define-fun value_type__ref___projection ((a value_type__ref)) value_type 
+(define-fun value_type__ref___projection ((a value_type__ref)) value_type
   (value_type__content a))
 
 (define-fun dynamic_invariant ((temp___expr_178 Int)
@@ -109,7 +109,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int Bool) Int Int (Array Int Bool) Int
@@ -124,7 +124,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (Bool Int) (Array Int Bool))
@@ -217,7 +217,7 @@
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (forall ((i Int))
   (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (orb a a_first a_last b b_first b_last) i) (or (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select 
+     (= (select (orb a a_first a_last b b_first b_last) i) (or (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select
   (orb a a_first a_last b b_first b_last) i)) )))))
 
 ;; op_def
@@ -226,7 +226,7 @@
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (forall ((i Int))
   (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (andb a a_first a_last b b_first b_last) i) (and (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select 
+     (= (select (andb a a_first a_last b b_first b_last) i) (and (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select
   (andb a a_first a_last b b_first b_last) i)) )))))
 
 ;; op_def
@@ -235,7 +235,7 @@
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (forall ((i Int))
   (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (xorb a a_first a_last b b_first b_last) i) (xor (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select 
+     (= (select (xorb a a_first a_last b b_first b_last) i) (xor (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select
   (xorb a a_first a_last b b_first b_last) i)) )))))
 
 ;; notb_def
@@ -244,7 +244,7 @@
   (forall ((a_first Int) (a_last Int))
   (forall ((i Int))
   (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (notb a a_first a_last) i) (not (select a i)))) :pattern ((select 
+     (= (select (notb a a_first a_last) i) (not (select a i)))) :pattern ((select
   (notb a a_first a_last) i)) )))))
 
 (declare-sort nearest_mode 0)
@@ -264,7 +264,7 @@
 (declare-datatypes ()
 ((nearest_mode__ref
  (mk_nearest_mode__ref (nearest_mode__content nearest_mode)))))
-(define-fun nearest_mode__ref___projection ((a nearest_mode__ref)) nearest_mode 
+(define-fun nearest_mode__ref___projection ((a nearest_mode__ref)) nearest_mode
   (nearest_mode__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_193 Int)
@@ -466,12 +466,12 @@
 
 ;; H
   (assert
-  (= test_prime_and_coprime_numbers__p__nearest_prime_number__result1 
+  (= test_prime_and_coprime_numbers__p__nearest_prime_number__result1
   test_prime_and_coprime_numbers__p__nearest_prime_number__result2))
 
 ;; H
   (assert
-  (= test_prime_and_coprime_numbers__p__nearest_prime_number__result3 
+  (= test_prime_and_coprime_numbers__p__nearest_prime_number__result3
   test_prime_and_coprime_numbers__p__nearest_prime_number__result1))
 
 ;; H
@@ -481,29 +481,29 @@
   (and (and (and (<= 0 o) (<= o 100000)) (= (select is_prime1 o) true))
   (ite (= (= (to_int1 (select is_prime1 value)) (to_int1 (of_int 1))) true)
   (= o value)
-  (ite (= (ite (= (= (to_int1 (select is_prime1 value)) (to_int1 (of_int 0))) true) (= 
+  (ite (= (ite (= (= (to_int1 (select is_prime1 value)) (to_int1 (of_int 0))) true) (=
           mode 0) false) true)
   (and (< value o)
   (forall ((v Int))
   (=> (and (<= value v) (<= v (- o 1))) (not (= (select is_prime1 v) true)))))
-  (ite (= (ite (= (= (to_int1 (select is_prime1 value)) (to_int1 (of_int 0))) true) (= 
+  (ite (= (ite (= (= (to_int1 (select is_prime1 value)) (to_int1 (of_int 0))) true) (=
           mode 1) false) true)
   (and (< o value)
   (forall ((v Int))
   (=> (and (<= (+ o 1) v) (<= v value)) (not (= (select is_prime1 v) true)))))
   (=>
-  (= (ite (= (= (to_int1 (select is_prime1 value)) (to_int1 (of_int 0))) true) (= 
+  (= (ite (= (= (to_int1 (select is_prime1 value)) (to_int1 (of_int 0))) true) (=
      mode 2) false) true)
   (and
   (forall ((v Int))
   (=>
   (and
-  (<= (ite (< 0 (+ (- value (abs (- value o))) 1)) (+ (- value (abs (- 
+  (<= (ite (< 0 (+ (- value (abs (- value o))) 1)) (+ (- value (abs (-
   value o))) 1) 0) v) (<= v value)) (not (= (select is_prime1 v) true))))
   (forall ((v Int))
   (=>
   (and (<= value v)
-  (<= v (ite (< 100000 (- (+ value (abs (- value o))) 1)) 100000 (- (+ 
+  (<= v (ite (< 100000 (- (+ value (abs (- value o))) 1)) 100000 (- (+
   value (abs (- value o))) 1)))) (not (= (select is_prime1 v) true)))))))))))))
 
 ;; H
@@ -513,25 +513,25 @@
 
 ;; H
   (assert
-  (= test_prime_and_coprime_numbers__p__nearest_prime_number__result1 
+  (= test_prime_and_coprime_numbers__p__nearest_prime_number__result1
   o))
 
 ;; H
   (assert
   (= (mk_int__ref
-     test_prime_and_coprime_numbers__p__nearest_prime_number__result4) 
+     test_prime_and_coprime_numbers__p__nearest_prime_number__result4)
   (mk_int__ref
   test_prime_and_coprime_numbers__p__nearest_prime_number__result2)))
 
 ;; H
   (assert
-  (= test_prime_and_coprime_numbers__p__nearest_prime_number__result5 
+  (= test_prime_and_coprime_numbers__p__nearest_prime_number__result5
   test_prime_and_coprime_numbers__p__nearest_prime_number__result3))
 
 ;; H
   (assert
   (=> (= (is_prime value) true)
-  (= test_prime_and_coprime_numbers__p__nearest_prime_number__result4 
+  (= test_prime_and_coprime_numbers__p__nearest_prime_number__result4
   value)))
 
 ;; H
@@ -549,7 +549,7 @@
   (assert
   (=> (= (ite (= (is_prime value) false) (= mode 1) false) true)
   (and
-  (< test_prime_and_coprime_numbers__p__nearest_prime_number__result4 
+  (< test_prime_and_coprime_numbers__p__nearest_prime_number__result4
   value)
   (forall ((v Int))
   (=>
@@ -564,8 +564,8 @@
 
 ;; H
   (assert
-  (<= (ite (< 0 (+ (- value (abs (- value test_prime_and_coprime_numbers__p__nearest_prime_number__result4))) 1)) (+ (- 
-  value (abs (- value test_prime_and_coprime_numbers__p__nearest_prime_number__result4))) 1) 0) 
+  (<= (ite (< 0 (+ (- value (abs (- value test_prime_and_coprime_numbers__p__nearest_prime_number__result4))) 1)) (+ (-
+  value (abs (- value test_prime_and_coprime_numbers__p__nearest_prime_number__result4))) 1) 0)
   v))
 
 ;; H
@@ -576,3 +576,4 @@
  ;; File "prime_and_coprime_numbers.ads", line 3, characters 0-0
   (not (not (= (is_prime v) true))))
 (check-sat)
+(exit)

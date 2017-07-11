@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -230,7 +230,7 @@
 
 (declare-datatypes ()
 ((character__ref (mk_character__ref (character__content character)))))
-(define-fun character__ref___projection ((a character__ref)) character 
+(define-fun character__ref___projection ((a character__ref)) character
   (character__content a))
 
 (declare-fun to_rep1 (character) Int)
@@ -269,7 +269,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int character) Int Int (Array Int character) Int
@@ -284,7 +284,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (character Int) (Array Int character))
@@ -378,7 +378,7 @@
 
 (declare-datatypes ()
 ((tTlineSP1__ref (mk_tTlineSP1__ref (tTlineSP1__content integer)))))
-(define-fun tTlineSP1__ref___projection ((a tTlineSP1__ref)) integer 
+(define-fun tTlineSP1__ref___projection ((a tTlineSP1__ref)) integer
   (tTlineSP1__content a))
 
 (declare-sort t 0)
@@ -715,7 +715,7 @@
 
 ;; H
   (assert
-  (= (to_rep (last2 (rt1 (elaboration_demo__line__aggregate_def 32 1 size)))) 
+  (= (to_rep (last2 (rt1 (elaboration_demo__line__aggregate_def 32 1 size))))
   size))
 
 ;; H
@@ -726,7 +726,7 @@
 ;; H
   (assert
   (= (ite (<= (to_rep (first2 temp___1531)) (to_rep (last2 temp___1531)))
-     (+ (- (to_rep (last2 temp___1531)) (to_rep (first2 temp___1531))) 1) 0) 
+     (+ (- (to_rep (last2 temp___1531)) (to_rep (first2 temp___1531))) 1) 0)
   (ite (<= 1 size) (+ (- size 1) 1) 0)))
 
 ;; H
@@ -734,7 +734,7 @@
 
 ;; H
   (assert
-  (= (mk (to_rep (first2 temp___1531)) (to_rep (last2 temp___1531))) 
+  (= (mk (to_rep (first2 temp___1531)) (to_rep (last2 temp___1531)))
   elaboration_demo__line__assume1))
 
 ;; H
@@ -763,3 +763,4 @@
   (or (fp.isZero      (fp #b0 #b10000001 #b01000000000000000000000))
   (fp.isPositive  (fp #b0 #b10000001 #b01000000000000000000000)))))
 (check-sat)
+(exit)

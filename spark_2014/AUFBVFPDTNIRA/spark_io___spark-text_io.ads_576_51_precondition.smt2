@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort us_main_type 0)
@@ -69,7 +69,7 @@
 
 (declare-datatypes ()
 ((file_type__ref (mk_file_type__ref (file_type__content us_rep)))))
-(define-fun file_type__ref_2__projection ((a file_type__ref)) us_rep 
+(define-fun file_type__ref_2__projection ((a file_type__ref)) us_rep
   (file_type__content a))
 
 (declare-sort character 0)
@@ -88,7 +88,7 @@
 
 (declare-datatypes ()
 ((character__ref (mk_character__ref (character__content character)))))
-(define-fun character__ref___projection ((a character__ref)) character 
+(define-fun character__ref___projection ((a character__ref)) character
   (character__content a))
 
 (declare-fun to_rep (character) Int)
@@ -126,7 +126,7 @@
 
 (declare-datatypes ()
 ((file_status__ref (mk_file_status__ref (file_status__content file_status)))))
-(define-fun file_status__ref_2__projection ((a file_status__ref)) file_status 
+(define-fun file_status__ref_2__projection ((a file_status__ref)) file_status
   (file_status__content a))
 
 (declare-fun to_rep1 (file_status) Int)
@@ -153,25 +153,25 @@
 ((us_split_discrs
  (mk___split_discrs
  (rec__spark__text_io__character_result__status file_status)))))
-(define-fun us_split_discrs_2__projection ((a us_split_discrs)) file_status 
+(define-fun us_split_discrs_2__projection ((a us_split_discrs)) file_status
   (rec__spark__text_io__character_result__status a))
 
 (declare-datatypes ()
 ((us_split_discrs__ref
  (mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref_2__projection ((a us_split_discrs__ref)) us_split_discrs 
+(define-fun us_split_discrs__ref_2__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ()
 ((us_split_fields
  (mk___split_fields (rec__spark__text_io__character_result__item character)))))
-(define-fun us_split_fields_Item__projection ((a us_split_fields)) character 
+(define-fun us_split_fields_Item__projection ((a us_split_fields)) character
   (rec__spark__text_io__character_result__item a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -186,7 +186,7 @@
 
 (define-fun us_rep_9__projection ((a us_rep1)) Bool (attr__constrained a))
 
-(define-fun spark__text_io__character_result__item__pred ((a us_rep1)) Bool (= 
+(define-fun spark__text_io__character_result__item__pred ((a us_rep1)) Bool (=
   (to_rep1
   (rec__spark__text_io__character_result__status (us_split_discrs1 a))) 1))
 
@@ -264,7 +264,7 @@
 (declare-datatypes ()
 ((character_result__ref
  (mk_character_result__ref (character_result__content us_rep1)))))
-(define-fun character_result__ref___projection ((a character_result__ref)) us_rep1 
+(define-fun character_result__ref___projection ((a character_result__ref)) us_rep1
   (character_result__content a))
 
 (define-fun default_initial_assumption ((temp___expr_708 us_rep1)
@@ -333,7 +333,7 @@
 
 (declare-datatypes ()
 ((file_mode__ref (mk_file_mode__ref (file_mode__content file_mode)))))
-(define-fun file_mode__ref_3__projection ((a file_mode__ref)) file_mode 
+(define-fun file_mode__ref_3__projection ((a file_mode__ref)) file_mode
   (file_mode__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_655 Int)
@@ -359,3 +359,4 @@
  ;; File "spark-text_io.ads", line 565, characters 0-0
   (not (= (is_readable file) true)))
 (check-sat)
+(exit)

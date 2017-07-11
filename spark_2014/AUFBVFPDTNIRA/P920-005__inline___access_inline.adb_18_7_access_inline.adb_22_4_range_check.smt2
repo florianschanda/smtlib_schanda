@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -110,7 +110,7 @@
 
 (declare-datatypes ()
 ((tt_float32B__ref (mk_tt_float32B__ref (tt_float32B__content tt_float32B)))))
-(define-fun tt_float32B__ref___projection ((a tt_float32B__ref)) tt_float32B 
+(define-fun tt_float32B__ref___projection ((a tt_float32B__ref)) tt_float32B
   (tt_float32B__content a))
 
 (declare-sort t_float32 0)
@@ -133,7 +133,7 @@
 
 (declare-datatypes ()
 ((t_float32__ref (mk_t_float32__ref (t_float32__content t_float32)))))
-(define-fun t_float32__ref___projection ((a t_float32__ref)) t_float32 
+(define-fun t_float32__ref___projection ((a t_float32__ref)) t_float32
   (t_float32__content a))
 
 (define-fun dynamic_invariant ((temp___expr_172 Float32)
@@ -167,7 +167,7 @@
 
 (declare-datatypes ()
 ((t_angle_360__ref (mk_t_angle_360__ref (t_angle_360__content t_angle_360)))))
-(define-fun t_angle_360__ref___projection ((a t_angle_360__ref)) t_angle_360 
+(define-fun t_angle_360__ref___projection ((a t_angle_360__ref)) t_angle_360
   (t_angle_360__content a))
 
 (declare-fun to_rep (t_angle_360) Float32)
@@ -206,7 +206,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int t_angle_360) Int Int (Array Int t_angle_360)
@@ -221,7 +221,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (t_angle_360 Int) (Array Int t_angle_360))
@@ -273,7 +273,7 @@
   (assert
   (forall ((temp___197 Float32))
   (forall ((temp___198 Int))
-  (= (select (access_inline__angle__aggregate_def temp___197) temp___198) 
+  (= (select (access_inline__angle__aggregate_def temp___197) temp___198)
   (of_rep temp___197)))))
 
 ;; c_2pi_in_degrees__def_axiom
@@ -318,8 +318,8 @@
   (and
   (= o (fp.sub RNE (to_rep (select angle1 3)) (to_rep (select angle1 3))))
   (not (or (fp.isInfinite (fp.sub RNE (to_rep (select angle1 3)) (to_rep
-                                                                 (select 
-                                                                 angle1 3)))) (fp.isNaN (fp.sub RNE 
+                                                                 (select
+                                                                 angle1 3)))) (fp.isNaN (fp.sub RNE
   (to_rep (select angle1 3)) (to_rep (select angle1 3))))))))
 
 ;; H
@@ -330,3 +330,4 @@
  ;; File "access_inline.adb", line 1, characters 0-0
   (not (in_range2 o1)))
 (check-sat)
+(exit)

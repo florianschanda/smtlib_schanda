@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun nth ((_ BitVec 16) Int) Bool)
@@ -155,7 +155,7 @@
 
 (declare-datatypes ()
 ((long_float__ref (mk_long_float__ref (long_float__content long_float)))))
-(define-fun long_float__ref___projection ((a long_float__ref)) long_float 
+(define-fun long_float__ref___projection ((a long_float__ref)) long_float
   (long_float__content a))
 
 (declare-fun to_rep (long_float) Float64)
@@ -195,7 +195,7 @@
 
 (declare-datatypes ()
 ((unsigned_16__ref (mk_unsigned_16__ref (unsigned_16__content unsigned_16)))))
-(define-fun unsigned_16__ref___projection ((a unsigned_16__ref)) unsigned_16 
+(define-fun unsigned_16__ref___projection ((a unsigned_16__ref)) unsigned_16
   (unsigned_16__content a))
 
 (declare-fun to_rep1 (unsigned_16) (_ BitVec 16))
@@ -226,22 +226,22 @@
 ((us_split_fields
  (mk___split_fields
  (rec__logger__log_entry__ngrotations unsigned_16)(rec__logger__log_entry__ngclicktime unsigned_16)(rec__logger__log_entry__millisecs unsigned_16)(rec__logger__log_entry__estimatedgroundvelocity long_float)(rec__logger__log_entry__estimatedgroundvelocityisavailable Bool)))))
-(define-fun us_split_fields_NGRotations__projection ((a us_split_fields)) unsigned_16 
+(define-fun us_split_fields_NGRotations__projection ((a us_split_fields)) unsigned_16
   (rec__logger__log_entry__ngrotations a))
 
-(define-fun us_split_fields_NGClickTime__projection ((a us_split_fields)) unsigned_16 
+(define-fun us_split_fields_NGClickTime__projection ((a us_split_fields)) unsigned_16
   (rec__logger__log_entry__ngclicktime a))
 
-(define-fun us_split_fields_Millisecs__projection ((a us_split_fields)) unsigned_16 
+(define-fun us_split_fields_Millisecs__projection ((a us_split_fields)) unsigned_16
   (rec__logger__log_entry__millisecs a))
 
-(define-fun us_split_fields_EstimatedGroundVelocityIsAvailable__projection ((a us_split_fields)) Bool 
+(define-fun us_split_fields_EstimatedGroundVelocityIsAvailable__projection ((a us_split_fields)) Bool
   (rec__logger__log_entry__estimatedgroundvelocityisavailable a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -377,7 +377,7 @@
 
 ;; logger__log_entry__estimatedgroundvelocityisavailable__last__bit_axiom
   (assert
-  (< logger__log_entry__estimatedgroundvelocityisavailable__first__bit 
+  (< logger__log_entry__estimatedgroundvelocityisavailable__first__bit
   logger__log_entry__estimatedgroundvelocityisavailable__last__bit))
 
 ;; logger__log_entry__estimatedgroundvelocityisavailable__position_axiom
@@ -411,7 +411,7 @@
 
 (declare-datatypes ()
 ((log_index__ref (mk_log_index__ref (log_index__content log_index)))))
-(define-fun log_index__ref___projection ((a log_index__ref)) log_index 
+(define-fun log_index__ref___projection ((a log_index__ref)) log_index
   (log_index__content a))
 
 (define-fun dynamic_invariant ((temp___expr_213 (_ BitVec 16))
@@ -466,7 +466,7 @@
   (forall ((old_first (_ BitVec 16)))
   (forall ((new_first (_ BitVec 16)))
   (forall ((i (_ BitVec 16)))
-  (! (= (select (slide a old_first new_first) i) (select a (bvsub i (bvsub new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (bvsub i (bvsub new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array (_ BitVec 16) us_rep) (_ BitVec 16)
@@ -483,7 +483,7 @@
      (=> (and (bvule a_first i) (bvule i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (bvugt i a_last)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (bvadd (bvsub i a_last) (bvsub b_first #x0001)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (bvadd (bvsub i a_last) (bvsub b_first #x0001)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (us_rep (_ BitVec 16)) (Array (_ BitVec 16) us_rep))
@@ -676,22 +676,22 @@
 ((us_split_fields2
  (mk___split_fields1
  (rec__logger__log_database__data (Array (_ BitVec 16) us_rep))(rec__logger__log_database__first log_index)(rec__logger__log_database__last log_index)(rec__logger__log_database__empty Bool)))))
-(define-fun us_split_fields_Data__projection ((a us_split_fields2)) (Array (_ BitVec 16) us_rep) 
+(define-fun us_split_fields_Data__projection ((a us_split_fields2)) (Array (_ BitVec 16) us_rep)
   (rec__logger__log_database__data a))
 
-(define-fun us_split_fields_First__projection ((a us_split_fields2)) log_index 
+(define-fun us_split_fields_First__projection ((a us_split_fields2)) log_index
   (rec__logger__log_database__first a))
 
-(define-fun us_split_fields_Last__projection ((a us_split_fields2)) log_index 
+(define-fun us_split_fields_Last__projection ((a us_split_fields2)) log_index
   (rec__logger__log_database__last a))
 
-(define-fun us_split_fields_Empty__projection ((a us_split_fields2)) Bool 
+(define-fun us_split_fields_Empty__projection ((a us_split_fields2)) Bool
   (rec__logger__log_database__empty a))
 
 (declare-datatypes ()
 ((us_split_fields__ref1
  (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2 
+(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ()
@@ -815,7 +815,7 @@
 
 (declare-datatypes ()
 ((log_database__ref (mk_log_database__ref (log_database__content us_rep1)))))
-(define-fun log_database__ref___projection ((a log_database__ref)) us_rep1 
+(define-fun log_database__ref___projection ((a log_database__ref)) us_rep1
   (log_database__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -864,12 +864,12 @@
                                                      (mk___rep1
                                                      logger__event_log__fields))) true)
                                              0
-                                             (+ (bv2int (let ((temp___242 (bvsub 
+                                             (+ (bv2int (let ((temp___242 (bvsub
                                                         (to_rep2
                                                         (rec__logger__log_database__last
                                                         (us_split_fields3
                                                         (mk___rep1
-                                                        logger__event_log__fields)))) 
+                                                        logger__event_log__fields))))
                                                         (to_rep2
                                                         (rec__logger__log_database__first
                                                         (us_split_fields3
@@ -879,7 +879,7 @@
                                                                     (rec__logger__log_database__last
                                                                     (us_split_fields3
                                                                     (mk___rep1
-                                                                    logger__event_log__fields)))) 
+                                                                    logger__event_log__fields))))
                                                         (to_rep2
                                                         (rec__logger__log_database__first
                                                         (us_split_fields3
@@ -955,7 +955,7 @@
 
 (declare-datatypes ()
 ((tTresultSP1__ref (mk_tTresultSP1__ref (tTresultSP1__content log_index)))))
-(define-fun tTresultSP1__ref___projection ((a tTresultSP1__ref)) log_index 
+(define-fun tTresultSP1__ref___projection ((a tTresultSP1__ref)) log_index
   (tTresultSP1__content a))
 
 (declare-sort t1 0)
@@ -995,7 +995,7 @@
 (define-fun last3 ((a us_t1)) (_ BitVec 16) (to_rep2 (last2 (rt1 a))))
 
 (define-fun length1 ((a us_t1)) Int (ite (bvule (first3 a) (last3 a))
-                                    (+ (- (bv2int (last3 a)) (bv2int 
+                                    (+ (- (bv2int (last3 a)) (bv2int
                                     (first3 a))) 1) 0))
 
 (declare-fun value__size4 () Int)
@@ -1129,7 +1129,7 @@
 (define-fun last5 ((a us_t2)) (_ BitVec 16) (to_rep2 (last4 (rt2 a))))
 
 (define-fun length2 ((a us_t2)) Int (ite (bvule (first5 a) (last5 a))
-                                    (+ (- (bv2int (last5 a)) (bv2int 
+                                    (+ (- (bv2int (last5 a)) (bv2int
                                     (first5 a))) 1) 0))
 
 (declare-fun value__size5 () Int)
@@ -1243,7 +1243,7 @@
 (define-fun last7 ((a us_t3)) (_ BitVec 16) (to_rep2 (last6 (rt3 a))))
 
 (define-fun length3 ((a us_t3)) Int (ite (bvule (first7 a) (last7 a))
-                                    (+ (- (bv2int (last7 a)) (bv2int 
+                                    (+ (- (bv2int (last7 a)) (bv2int
                                     (first7 a))) 1) 0))
 
 (declare-fun value__size6 () Int)
@@ -1350,7 +1350,7 @@
 (define-fun last9 ((a us_t4)) (_ BitVec 16) (to_rep2 (last8 (rt4 a))))
 
 (define-fun length4 ((a us_t4)) Int (ite (bvule (first9 a) (last9 a))
-                                    (+ (- (bv2int (last9 a)) (bv2int 
+                                    (+ (- (bv2int (last9 a)) (bv2int
                                     (first9 a))) 1) 0))
 
 (declare-fun value__size7 () Int)
@@ -1606,7 +1606,7 @@
   (and (in_range4 o8)
   (= o8 (ite (= event_log__split_fields3 true) 0
         (+ (bv2int (let ((temp___239 (bvsub (to_rep2
-                                            event_log__split_fields2) 
+                                            event_log__split_fields2)
                    (to_rep2 event_log__split_fields1))))
                    (ite (bvult (to_rep2 event_log__split_fields2) (to_rep2
                                                                   event_log__split_fields1))
@@ -1679,7 +1679,7 @@
 
 ;; H
   (assert
-  (= (slide temp___279 (to_rep2 (first4 temp___2791)) ((_ int2bv 16) 0)) 
+  (= (slide temp___279 (to_rep2 (first4 temp___2791)) ((_ int2bv 16) 0))
   temp___280))
 
 ;; H
@@ -1701,3 +1701,4 @@
                                                         result____first))) 1)
         0))))
 (check-sat)
+(exit)

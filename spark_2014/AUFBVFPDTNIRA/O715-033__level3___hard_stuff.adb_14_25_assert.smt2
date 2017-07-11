@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -158,7 +158,7 @@
   (= (= result true)
   (exists ((y Int))
   (and (and (<= 0 y) (<= y 100000))
-  (fp.eq x (fp.mul RNE (fp.div RNE (of_int RNE y) (fp #b0 #b10001111 #b10000110101000000000000)) (fp.div RNE 
+  (fp.eq x (fp.mul RNE (fp.div RNE (of_int RNE y) (fp #b0 #b10001111 #b10000110101000000000000)) (fp.div RNE
   (of_int RNE y) (fp #b0 #b10001111 #b10000110101000000000000))))))))
 
 ;; H
@@ -201,3 +201,4 @@
  ;; File "hard_stuff.adb", line 1, characters 0-0
   (not (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x1)))
 (check-sat)
+(exit)

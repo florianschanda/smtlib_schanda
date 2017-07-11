@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
@@ -63,7 +63,7 @@
 
 (declare-datatypes ()
 ((count_type__ref (mk_count_type__ref (count_type__content count_type)))))
-(define-fun count_type__ref___projection ((a count_type__ref)) count_type 
+(define-fun count_type__ref___projection ((a count_type__ref)) count_type
   (count_type__content a))
 
 (declare-fun to_rep (count_type) Int)
@@ -92,25 +92,25 @@
 (declare-datatypes ()
 ((us_split_discrs
  (mk___split_discrs (rec__algorithm__gap_vectors__list__capacity count_type)))))
-(define-fun us_split_discrs_3__projection ((a us_split_discrs)) count_type 
+(define-fun us_split_discrs_3__projection ((a us_split_discrs)) count_type
   (rec__algorithm__gap_vectors__list__capacity a))
 
 (declare-datatypes ()
 ((us_split_discrs__ref
  (mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref_3__projection ((a us_split_discrs__ref)) us_split_discrs 
+(define-fun us_split_discrs__ref_3__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ()
 ((us_split_fields
  (mk___split_fields (rec__algorithm__gap_vectors__list us_main_type)))))
-(define-fun us_split_fields_List__projection ((a us_split_fields)) us_main_type 
+(define-fun us_split_fields_List__projection ((a us_split_fields)) us_main_type
   (rec__algorithm__gap_vectors__list a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_9__projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref_9__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -183,13 +183,13 @@
 (declare-datatypes ()
 ((us_split_fields2
  (mk___split_fields1 (rec__algorithm__gap_vectors__cursor__node count_type)))))
-(define-fun us_split_fields_Node__projection ((a us_split_fields2)) count_type 
+(define-fun us_split_fields_Node__projection ((a us_split_fields2)) count_type
   (rec__algorithm__gap_vectors__cursor__node a))
 
 (declare-datatypes ()
 ((us_split_fields__ref1
  (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_10__projection ((a us_split_fields__ref1)) us_split_fields2 
+(define-fun us_split_fields__ref_10__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ()
@@ -321,7 +321,7 @@
 (declare-datatypes ()
 ((element_type__ref
  (mk_element_type__ref (element_type__content element_type)))))
-(define-fun element_type__ref_3__projection ((a element_type__ref)) element_type 
+(define-fun element_type__ref_3__projection ((a element_type__ref)) element_type
   (element_type__content a))
 
 (define-fun dynamic_invariant ((temp___expr_461 Int)
@@ -536,3 +536,4 @@
   (not
   (= (has_key o2 (mk___rep1 (mk___split_fields1 position__split_fields))) true)))
 (check-sat)
+(exit)

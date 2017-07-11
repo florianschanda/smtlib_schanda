@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -158,7 +158,7 @@
 
 (declare-datatypes ()
 ((joint_index__ref (mk_joint_index__ref (joint_index__content joint_index)))))
-(define-fun joint_index__ref___projection ((a joint_index__ref)) joint_index 
+(define-fun joint_index__ref___projection ((a joint_index__ref)) joint_index
   (joint_index__content a))
 
 (declare-datatypes ()
@@ -177,7 +177,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int float) Int Int (Array Int float) Int
@@ -192,7 +192,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (float Int) (Array Int float))
@@ -313,7 +313,7 @@
   (assert
   (forall ((temp___160 Float32))
   (forall ((temp___161 Int))
-  (= (select (homothetical__homothetical__lambda__aggregate_def temp___160) temp___161) 
+  (= (select (homothetical__homothetical__lambda__aggregate_def temp___160) temp___161)
   (of_rep temp___160)))))
 
 (declare-fun homothetical__homothetical__upsilon__aggregate_def (Float32) (Array Int float))
@@ -322,7 +322,7 @@
   (assert
   (forall ((temp___163 Float32))
   (forall ((temp___164 Int))
-  (= (select (homothetical__homothetical__upsilon__aggregate_def temp___163) temp___164) 
+  (= (select (homothetical__homothetical__upsilon__aggregate_def temp___163) temp___164)
   (of_rep temp___163)))))
 
 (declare-fun homothetical__homothetical__kvp__aggregate_def (Float32) (Array Int float))
@@ -331,7 +331,7 @@
   (assert
   (forall ((temp___166 Float32))
   (forall ((temp___167 Int))
-  (= (select (homothetical__homothetical__kvp__aggregate_def temp___166) temp___167) 
+  (= (select (homothetical__homothetical__kvp__aggregate_def temp___166) temp___167)
   (of_rep temp___166)))))
 
 (declare-fun temp___173 (Float32) (Array Int float))
@@ -775,14 +775,14 @@
   (and
   (and
   (= o4 (fp.mul RNE (to_rep (select kvp8 i12)) (fp.abs (to_rep (select d j5)))))
-  (not (or (fp.isInfinite (fp.mul RNE (to_rep (select kvp8 i12)) (fp.abs 
-  (to_rep (select d j5))))) (fp.isNaN (fp.mul RNE (to_rep (select kvp8 i12)) (fp.abs 
+  (not (or (fp.isInfinite (fp.mul RNE (to_rep (select kvp8 i12)) (fp.abs
+  (to_rep (select d j5))))) (fp.isNaN (fp.mul RNE (to_rep (select kvp8 i12)) (fp.abs
   (to_rep (select d j5))))))))
   (and
   (and
   (= o3 (fp.mul RNE (to_rep (select kvp8 j5)) (fp.abs (to_rep (select d i12)))))
-  (not (or (fp.isInfinite (fp.mul RNE (to_rep (select kvp8 j5)) (fp.abs 
-  (to_rep (select d i12))))) (fp.isNaN (fp.mul RNE (to_rep (select kvp8 j5)) (fp.abs 
+  (not (or (fp.isInfinite (fp.mul RNE (to_rep (select kvp8 j5)) (fp.abs
+  (to_rep (select d i12))))) (fp.isNaN (fp.mul RNE (to_rep (select kvp8 j5)) (fp.abs
   (to_rep (select d i12)))))))) (= o5 (fp.div RNE o3 o4))))
   (and (= o6 o5) (not (or (fp.isInfinite o5) (fp.isNaN o5)))))
   (= o7 (fp.min (to_rep (select lambda3 i12)) o6))) (= (to_rep o8) o7))
@@ -796,17 +796,17 @@
   (and
   (and
   (= o11 (fp.mul RNE (to_rep (select ka i12)) (fp.abs (to_rep (select d j5)))))
-  (not (or (fp.isInfinite (fp.mul RNE (to_rep (select ka i12)) (fp.abs 
-  (to_rep (select d j5))))) (fp.isNaN (fp.mul RNE (to_rep (select ka i12)) (fp.abs 
+  (not (or (fp.isInfinite (fp.mul RNE (to_rep (select ka i12)) (fp.abs
+  (to_rep (select d j5))))) (fp.isNaN (fp.mul RNE (to_rep (select ka i12)) (fp.abs
   (to_rep (select d j5))))))))
   (and
   (and
   (= o10 (fp.mul RNE (to_rep (select ka j5)) (fp.abs (to_rep (select d i12)))))
-  (not (or (fp.isInfinite (fp.mul RNE (to_rep (select ka j5)) (fp.abs 
-  (to_rep (select d i12))))) (fp.isNaN (fp.mul RNE (to_rep (select ka j5)) (fp.abs 
+  (not (or (fp.isInfinite (fp.mul RNE (to_rep (select ka j5)) (fp.abs
+  (to_rep (select d i12))))) (fp.isNaN (fp.mul RNE (to_rep (select ka j5)) (fp.abs
   (to_rep (select d i12)))))))) (= o12 (fp.div RNE o10 o11))))
   (and (= o13 o12) (not (or (fp.isInfinite o12) (fp.isNaN o12)))))
-  (= o14 (fp.min (to_rep (select upsilon3 i12)) o13))) (= (to_rep o15) 
+  (= o14 (fp.min (to_rep (select upsilon3 i12)) o13))) (= (to_rep o15)
   o14)) (= o16 (store upsilon3 i12 o15)))
   (and (= result11 (mk_map__ref upsilon3)) (= upsilon4 o16))))
   (and
@@ -831,12 +831,12 @@
   (and
   (and
   (= o17 (fp.mul RNE (to_rep (select (map__content lambda9) i12)) (to_rep
-                                                                  (select 
-                                                                  kvp8 
+                                                                  (select
+                                                                  kvp8
                                                                   i12))))
   (not (or (fp.isInfinite (fp.mul RNE (to_rep
-                                      (select (map__content lambda9) 
-                                      i12)) (to_rep (select kvp8 i12)))) (fp.isNaN (fp.mul RNE 
+                                      (select (map__content lambda9)
+                                      i12)) (to_rep (select kvp8 i12)))) (fp.isNaN (fp.mul RNE
   (to_rep (select (map__content lambda9) i12)) (to_rep (select kvp8 i12)))))))
   (= (to_rep o18) o17)) (= o19 (store kvmax2 i12 o18)))
   (and (= result12 (mk_map__ref kvmax2)) (= kvmax3 o19)))
@@ -846,12 +846,12 @@
   (and
   (and
   (= o20 (fp.mul RNE (to_rep (select (map__content upsilon9) i12)) (to_rep
-                                                                   (select 
-                                                                   ka 
+                                                                   (select
+                                                                   ka
                                                                    i12))))
   (not (or (fp.isInfinite (fp.mul RNE (to_rep
-                                      (select (map__content upsilon9) 
-                                      i12)) (to_rep (select ka i12)))) (fp.isNaN (fp.mul RNE 
+                                      (select (map__content upsilon9)
+                                      i12)) (to_rep (select ka i12)))) (fp.isNaN (fp.mul RNE
   (to_rep (select (map__content upsilon9) i12)) (to_rep (select ka i12)))))))
   (= (to_rep o21) o20)) (= o22 (store kamax2 i12 o21)))
   (and (= result13 (mk_map__ref kamax2)) (= kamax3 o22))) (= i12 2)))))))))
@@ -912,6 +912,7 @@
   (not
   (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) (to_rep
                                                        (select (map__content
-                                                               kvmax8) 
+                                                               kvmax8)
                                                        j16)))))
 (check-sat)
+(exit)

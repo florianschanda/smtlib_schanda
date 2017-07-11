@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun nth ((_ BitVec 16) Int) Bool)
@@ -71,13 +71,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvor (bvshl v (bvurem n (_ bv16 16))) (bvlshr v (bvsub (_ bv16 16) (bvurem n (_ bv16 16))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv16 16))) (bvlshr v (bvsub (_ bv16 16) (bvurem n (_ bv16 16)))))
   (rotate_left1 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvor (bvlshr v (bvurem n (_ bv16 16))) (bvshl v (bvsub (_ bv16 16) (bvurem n (_ bv16 16))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv16 16))) (bvshl v (bvsub (_ bv16 16) (bvurem n (_ bv16 16)))))
   (rotate_right1 v (bv2nat n)))))
 
 (declare-fun nth_bv ((_ BitVec 16) (_ BitVec 16)) Bool)
@@ -267,3 +267,4 @@
  ;; File "types.ads", line 13, characters 0-0
   (not (= safety_pack__saturate__2__result4 min_value)))
 (check-sat)
+(exit)

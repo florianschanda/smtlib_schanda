@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun div1 (Int Int) Int)
@@ -258,16 +258,16 @@
 ((us_split_fields
  (mk___split_fields
  (rec__t__stupid_record__a integer)(rec__t__stupid_record__b Bool)(rec__t__stupid_record__c float)))))
-(define-fun us_split_fields_A__projection ((a us_split_fields)) integer 
+(define-fun us_split_fields_A__projection ((a us_split_fields)) integer
   (rec__t__stupid_record__a a))
 
-(define-fun us_split_fields_B__projection ((a us_split_fields)) Bool 
+(define-fun us_split_fields_B__projection ((a us_split_fields)) Bool
   (rec__t__stupid_record__b a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -279,13 +279,13 @@
   (b us_rep)) Bool (ite (and
                         (and
                         (= (to_rep
-                           (rec__t__stupid_record__a (us_split_fields1 a))) 
+                           (rec__t__stupid_record__a (us_split_fields1 a)))
                         (to_rep
                         (rec__t__stupid_record__a (us_split_fields1 b))))
-                        (= (rec__t__stupid_record__b (us_split_fields1 a)) 
+                        (= (rec__t__stupid_record__b (us_split_fields1 a))
                         (rec__t__stupid_record__b (us_split_fields1 b))))
                         (= (to_rep1
-                           (rec__t__stupid_record__c (us_split_fields1 a))) 
+                           (rec__t__stupid_record__c (us_split_fields1 a)))
                         (to_rep1
                         (rec__t__stupid_record__c (us_split_fields1 b)))))
                    true false))
@@ -361,7 +361,7 @@
 
 (declare-datatypes ()
 ((stupid_record__ref (mk_stupid_record__ref (stupid_record__content us_rep)))))
-(define-fun stupid_record__ref___projection ((a stupid_record__ref)) us_rep 
+(define-fun stupid_record__ref___projection ((a stupid_record__ref)) us_rep
   (stupid_record__content a))
 
 (declare-datatypes ()
@@ -380,7 +380,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int us_rep) Int Int (Array Int us_rep) Int
@@ -395,7 +395,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (us_rep Int) (Array Int us_rep))
@@ -770,3 +770,4 @@
  ;; File "t.ads", line 15, characters 0-0
   (not (not (= 8 0))))
 (check-sat)
+(exit)

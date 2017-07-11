@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -110,7 +110,7 @@
 
 (declare-datatypes ()
 ((tfloat_7B__ref (mk_tfloat_7B__ref (tfloat_7B__content tfloat_7B)))))
-(define-fun tfloat_7B__ref___projection ((a tfloat_7B__ref)) tfloat_7B 
+(define-fun tfloat_7B__ref___projection ((a tfloat_7B__ref)) tfloat_7B
   (tfloat_7B__content a))
 
 (declare-sort float_7 0)
@@ -212,3 +212,4 @@
   (not
   (fp.lt float_example__bounded_add__result4 (fp #b0 #b10000000001 #b1100000000000000000000000000000000000000000000000000))))
 (check-sat)
+(exit)

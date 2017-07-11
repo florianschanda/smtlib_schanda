@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -147,7 +147,7 @@
 (declare-datatypes ()
 ((speed_km_per_h_t__ref
  (mk_speed_km_per_h_t__ref (speed_km_per_h_t__content speed_km_per_h_t)))))
-(define-fun speed_km_per_h_t__ref___projection ((a speed_km_per_h_t__ref)) speed_km_per_h_t 
+(define-fun speed_km_per_h_t__ref___projection ((a speed_km_per_h_t__ref)) speed_km_per_h_t
   (speed_km_per_h_t__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_141 Float32)
@@ -205,3 +205,4 @@
   (not
   (= (is_valid_speed_km_per_h (fp #b0 #b10000111 #b11110100000000000000000)) true)))
 (check-sat)
+(exit)

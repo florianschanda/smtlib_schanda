@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -157,7 +157,7 @@
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -237,7 +237,7 @@
 
 (declare-datatypes ()
 ((engine_values__ref (mk_engine_values__ref (engine_values__content us_rep)))))
-(define-fun engine_values__ref___projection ((a engine_values__ref)) us_rep 
+(define-fun engine_values__ref___projection ((a engine_values__ref)) us_rep
   (engine_values__content a))
 
 (declare-fun position_x () Float32)
@@ -488,7 +488,7 @@
 ;; H
   (assert
   (=> (fp.lt target_y position_y)
-  (= (rec__flight_manager__engine_values__x_speed result____split_fields3) 
+  (= (rec__flight_manager__engine_values__x_speed result____split_fields3)
   o7)))
 
 ;; H
@@ -520,7 +520,7 @@
   (assert
   (=> (not (fp.lt target_y position_y))
   (=> (fp.lt position_y target_y)
-  (= (rec__flight_manager__engine_values__x_speed result____split_fields3) 
+  (= (rec__flight_manager__engine_values__x_speed result____split_fields3)
   o10))))
 
 ;; H
@@ -564,7 +564,7 @@
 ;; H
   (assert
   (and (= o12 (fp.sub RNE position_x target_x))
-  (not (or (fp.isInfinite (fp.sub RNE position_x target_x)) (fp.isNaN (fp.sub RNE 
+  (not (or (fp.isInfinite (fp.sub RNE position_x target_x)) (fp.isNaN (fp.sub RNE
   position_x target_x))))))
 
 ;; H
@@ -574,11 +574,11 @@
   (assert
   (and
   (=> (fp.lt o13 (fp #b0 #b10000010 #b01000000000000000000000))
-  (fp.eq flight_manager__set_engine_speed__adjust_speed__f (fp.div RNE (fp.mul RNE 
+  (fp.eq flight_manager__set_engine_speed__adjust_speed__f (fp.div RNE (fp.mul RNE
   (to_rep
-  (rec__flight_manager__engine_values__x_speed result____split_fields5)) 
+  (rec__flight_manager__engine_values__x_speed result____split_fields5))
   o13) (fp #b0 #b10000010 #b01000000000000000000000))))
-  (not (or (fp.isInfinite flight_manager__set_engine_speed__adjust_speed__f) (fp.isNaN 
+  (not (or (fp.isInfinite flight_manager__set_engine_speed__adjust_speed__f) (fp.isNaN
   flight_manager__set_engine_speed__adjust_speed__f)))))
 
 ;; H
@@ -589,7 +589,7 @@
 
 ;; H
   (assert
-  (= (rec__flight_manager__engine_values__y_speed result____split_fields5) 
+  (= (rec__flight_manager__engine_values__y_speed result____split_fields5)
   o16))
 
 ;; H
@@ -608,7 +608,7 @@
 ;; H
   (assert
   (and (= o17 (fp.sub RNE position_y target_y))
-  (not (or (fp.isInfinite (fp.sub RNE position_y target_y)) (fp.isNaN (fp.sub RNE 
+  (not (or (fp.isInfinite (fp.sub RNE position_y target_y)) (fp.isNaN (fp.sub RNE
   position_y target_y))))))
 
 ;; H
@@ -618,11 +618,11 @@
   (assert
   (and
   (=> (fp.lt o18 (fp #b0 #b10000010 #b01000000000000000000000))
-  (fp.eq flight_manager__set_engine_speed__adjust_speed__f1 (fp.div RNE (fp.mul RNE 
+  (fp.eq flight_manager__set_engine_speed__adjust_speed__f1 (fp.div RNE (fp.mul RNE
   (to_rep
-  (rec__flight_manager__engine_values__y_speed result____split_fields7)) 
+  (rec__flight_manager__engine_values__y_speed result____split_fields7))
   o18) (fp #b0 #b10000010 #b01000000000000000000000))))
-  (not (or (fp.isInfinite flight_manager__set_engine_speed__adjust_speed__f1) (fp.isNaN 
+  (not (or (fp.isInfinite flight_manager__set_engine_speed__adjust_speed__f1) (fp.isNaN
   flight_manager__set_engine_speed__adjust_speed__f1)))))
 
 ;; H
@@ -631,7 +631,7 @@
 
 ;; H
   (assert
-  (= (rec__flight_manager__engine_values__x_speed result____split_fields7) 
+  (= (rec__flight_manager__engine_values__x_speed result____split_fields7)
   o20))
 
 ;; H
@@ -695,10 +695,11 @@
                                             (rec__flight_manager__engine_values__x_speed
                                             (us_split_fields1
                                             (engine_values__content
-                                            flight_manager__set_engine_speed__result5))))) 
+                                            flight_manager__set_engine_speed__result5)))))
   target_x) (fp.add RNE position_x (to_rep
                                    (rec__flight_manager__engine_values__x_speed
                                    (us_split_fields1
                                    (engine_values__content
                                    flight_manager__set_engine_speed__result5))))))))
 (check-sat)
+(exit)

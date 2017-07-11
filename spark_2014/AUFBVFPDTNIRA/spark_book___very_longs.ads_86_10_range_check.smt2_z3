@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort digit_index_type 0)
@@ -53,7 +53,7 @@
 (declare-datatypes ()
 ((digit_index_type__ref
  (mk_digit_index_type__ref (digit_index_type__content digit_index_type)))))
-(define-fun digit_index_type__ref___projection ((a digit_index_type__ref)) digit_index_type 
+(define-fun digit_index_type__ref___projection ((a digit_index_type__ref)) digit_index_type
   (digit_index_type__content a))
 
 (define-fun dynamic_invariant ((temp___expr_204 Int)
@@ -76,3 +76,4 @@
  ;; File "very_longs-divide.adb", line 29, characters 0-0
   (not (<= 1 1)))
 (check-sat)
+(exit)

@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort tfixedB 0)
@@ -757,7 +757,7 @@
 
 ;; H
   (assert
-  (= (to_fixed1 o19) (* (- (fxp_mult (to_fixed1 a101) (to_fixed1 a81)) 
+  (= (to_fixed1 o19) (* (- (fxp_mult (to_fixed1 a101) (to_fixed1 a81))
   (fxp_mult (to_fixed1 a91) (to_fixed1 a91))) 4)))
 
 ;; H
@@ -793,3 +793,4 @@
  ;; File "pi_compute.adb", line 7, characters 0-0
   (not (= (to_fixed1 (let ((subject res)) res1)) 3293842)))
 (check-sat)
+(exit)

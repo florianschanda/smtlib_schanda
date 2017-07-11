@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -231,26 +231,26 @@
 (declare-datatypes ()
 ((us_split_discrs__ref
  (mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref)) us_split_discrs 
+(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ()
 ((us_split_fields
  (mk___split_fields
  (rec__tagged_discr__t__z Bool)(rec__tagged_discr__t__x integer)(rec__tagged_discr__t__y float)(rec__ext__ us_private)))))
-(define-fun us_split_fields_Z__projection ((a us_split_fields)) Bool 
+(define-fun us_split_fields_Z__projection ((a us_split_fields)) Bool
   (rec__tagged_discr__t__z a))
 
-(define-fun us_split_fields_X__projection ((a us_split_fields)) integer 
+(define-fun us_split_fields_X__projection ((a us_split_fields)) integer
   (rec__tagged_discr__t__x a))
 
-(define-fun us_split_fields___projection ((a us_split_fields)) us_private 
+(define-fun us_split_fields___projection ((a us_split_fields)) us_private
   (rec__ext__ a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -291,19 +291,19 @@
                         (and
                         (and
                         (= (to_rep2
-                           (rec__tagged_discr__t__discr (us_split_discrs1 a))) 
+                           (rec__tagged_discr__t__discr (us_split_discrs1 a)))
                         (to_rep2
                         (rec__tagged_discr__t__discr (us_split_discrs1 b))))
-                        (= (rec__tagged_discr__t__z (us_split_fields1 a)) 
+                        (= (rec__tagged_discr__t__z (us_split_fields1 a))
                         (rec__tagged_discr__t__z (us_split_fields1 b))))
                         (=> (tagged_discr__t__x__pred a)
                         (= (to_rep
-                           (rec__tagged_discr__t__x (us_split_fields1 a))) 
+                           (rec__tagged_discr__t__x (us_split_fields1 a)))
                         (to_rep
                         (rec__tagged_discr__t__x (us_split_fields1 b))))))
                         (=> (tagged_discr__t__y__pred a)
                         (= (to_rep1
-                           (rec__tagged_discr__t__y (us_split_fields1 a))) 
+                           (rec__tagged_discr__t__y (us_split_fields1 a)))
                         (to_rep1
                         (rec__tagged_discr__t__y (us_split_fields1 b))))))
                    true false))
@@ -404,25 +404,25 @@
 ((us_split_fields2
  (mk___split_fields1
  (rec__tagged_discr__u2__w integer)(rec__tagged_discr__u2__xx integer)(rec__tagged_discr__u2__yy float)(rec__tagged_discr__t__z1 Bool)(rec__tagged_discr__t__x1 integer)(rec__tagged_discr__t__y1 float)(rec__ext__1 us_private)))))
-(define-fun us_split_fields_W2__projection ((a us_split_fields2)) integer 
+(define-fun us_split_fields_W2__projection ((a us_split_fields2)) integer
   (rec__tagged_discr__u2__w a))
 
-(define-fun us_split_fields_XX__projection ((a us_split_fields2)) integer 
+(define-fun us_split_fields_XX__projection ((a us_split_fields2)) integer
   (rec__tagged_discr__u2__xx a))
 
-(define-fun us_split_fields_Z3__projection ((a us_split_fields2)) Bool 
+(define-fun us_split_fields_Z3__projection ((a us_split_fields2)) Bool
   (rec__tagged_discr__t__z1 a))
 
-(define-fun us_split_fields_X3__projection ((a us_split_fields2)) integer 
+(define-fun us_split_fields_X3__projection ((a us_split_fields2)) integer
   (rec__tagged_discr__t__x1 a))
 
-(define-fun us_split_fields_3__projection ((a us_split_fields2)) us_private 
+(define-fun us_split_fields_3__projection ((a us_split_fields2)) us_private
   (rec__ext__1 a))
 
 (declare-datatypes ()
 ((us_split_fields__ref1
  (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref1)) us_split_fields2 
+(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ()
@@ -538,27 +538,27 @@
                                                    (rec__tagged_discr__t__discr
                                                    (us_split_discrs2 b))))
                          (= (to_rep
-                            (rec__tagged_discr__u2__w (us_split_fields3 a))) 
+                            (rec__tagged_discr__u2__w (us_split_fields3 a)))
                          (to_rep
                          (rec__tagged_discr__u2__w (us_split_fields3 b)))))
                          (= (to_rep
-                            (rec__tagged_discr__u2__xx (us_split_fields3 a))) 
+                            (rec__tagged_discr__u2__xx (us_split_fields3 a)))
                          (to_rep
                          (rec__tagged_discr__u2__xx (us_split_fields3 b)))))
                          (= (to_rep1
-                            (rec__tagged_discr__u2__yy (us_split_fields3 a))) 
+                            (rec__tagged_discr__u2__yy (us_split_fields3 a)))
                          (to_rep1
                          (rec__tagged_discr__u2__yy (us_split_fields3 b)))))
-                         (= (rec__tagged_discr__t__z1 (us_split_fields3 a)) 
+                         (= (rec__tagged_discr__t__z1 (us_split_fields3 a))
                          (rec__tagged_discr__t__z1 (us_split_fields3 b))))
                          (=> (tagged_discr__t__x__pred1 a)
                          (= (to_rep
-                            (rec__tagged_discr__t__x1 (us_split_fields3 a))) 
+                            (rec__tagged_discr__t__x1 (us_split_fields3 a)))
                          (to_rep
                          (rec__tagged_discr__t__x1 (us_split_fields3 b))))))
                          (=> (tagged_discr__t__y__pred1 a)
                          (= (to_rep1
-                            (rec__tagged_discr__t__y1 (us_split_fields3 a))) 
+                            (rec__tagged_discr__t__y1 (us_split_fields3 a)))
                          (to_rep1
                          (rec__tagged_discr__t__y1 (us_split_fields3 b))))))
                     true false))
@@ -1012,22 +1012,22 @@
 ((us_split_fields4
  (mk___split_fields2
  (rec__tagged_discr__u1__w integer)(rec__tagged_discr__t__z2 Bool)(rec__tagged_discr__t__x2 integer)(rec__tagged_discr__t__y2 float)(rec__ext__2 us_private)))))
-(define-fun us_split_fields_W__projection ((a us_split_fields4)) integer 
+(define-fun us_split_fields_W__projection ((a us_split_fields4)) integer
   (rec__tagged_discr__u1__w a))
 
-(define-fun us_split_fields_Z2__projection ((a us_split_fields4)) Bool 
+(define-fun us_split_fields_Z2__projection ((a us_split_fields4)) Bool
   (rec__tagged_discr__t__z2 a))
 
-(define-fun us_split_fields_X2__projection ((a us_split_fields4)) integer 
+(define-fun us_split_fields_X2__projection ((a us_split_fields4)) integer
   (rec__tagged_discr__t__x2 a))
 
-(define-fun us_split_fields_2__projection ((a us_split_fields4)) us_private 
+(define-fun us_split_fields_2__projection ((a us_split_fields4)) us_private
   (rec__ext__2 a))
 
 (declare-datatypes ()
 ((us_split_fields__ref2
  (mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref2)) us_split_fields4 
+(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ()
@@ -1114,19 +1114,19 @@
                                                    (rec__tagged_discr__t__discr
                                                    (us_split_discrs3 b))))
                          (= (to_rep
-                            (rec__tagged_discr__u1__w (us_split_fields5 a))) 
+                            (rec__tagged_discr__u1__w (us_split_fields5 a)))
                          (to_rep
                          (rec__tagged_discr__u1__w (us_split_fields5 b)))))
-                         (= (rec__tagged_discr__t__z2 (us_split_fields5 a)) 
+                         (= (rec__tagged_discr__t__z2 (us_split_fields5 a))
                          (rec__tagged_discr__t__z2 (us_split_fields5 b))))
                          (=> (tagged_discr__t__x__pred2 a)
                          (= (to_rep
-                            (rec__tagged_discr__t__x2 (us_split_fields5 a))) 
+                            (rec__tagged_discr__t__x2 (us_split_fields5 a)))
                          (to_rep
                          (rec__tagged_discr__t__x2 (us_split_fields5 b))))))
                          (=> (tagged_discr__t__y__pred2 a)
                          (= (to_rep1
-                            (rec__tagged_discr__t__y2 (us_split_fields5 a))) 
+                            (rec__tagged_discr__t__y2 (us_split_fields5 a)))
                          (to_rep1
                          (rec__tagged_discr__t__y2 (us_split_fields5 b))))))
                     true false))
@@ -1918,7 +1918,7 @@
 ;; H
   (assert
   (= (mk___rep1 (mk___split_discrs usq_)
-     (mk___split_fields1 usq_1 usq_2 usq_3 usq_4 usq_5 usq_6 usq_7) usq_8) 
+     (mk___split_fields1 usq_1 usq_2 usq_3 usq_4 usq_5 usq_6 usq_7) usq_8)
   (mk___rep1 (mk___split_discrs temp___227)
   (mk___split_fields1 temp___2271 temp___2272 temp___2273 temp___2274
   temp___2275 temp___2276 temp___2277) temp___2278)))
@@ -2032,3 +2032,4 @@
      v__split_fields16 v__split_fields17 v__split_fields18 v__split_fields19
      v__split_fields20) v__attr__tag)) true)))
 (check-sat)
+(exit)

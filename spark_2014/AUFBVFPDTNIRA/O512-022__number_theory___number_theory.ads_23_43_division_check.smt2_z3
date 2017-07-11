@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -206,7 +206,7 @@
 ((fibonacci_argument_type__ref
  (mk_fibonacci_argument_type__ref
  (fibonacci_argument_type__content fibonacci_argument_type)))))
-(define-fun fibonacci_argument_type__ref___projection ((a fibonacci_argument_type__ref)) fibonacci_argument_type 
+(define-fun fibonacci_argument_type__ref___projection ((a fibonacci_argument_type__ref)) fibonacci_argument_type
   (fibonacci_argument_type__content a))
 
 (define-fun dynamic_invariant ((temp___expr_185 Int)
@@ -384,3 +384,4 @@
   (not
   (not (fp.eq (fp #b0 #b01111111 #b10011110001110111100111) ((_ to_fp 8 24) #x00000000)))))
 (check-sat)
+(exit)

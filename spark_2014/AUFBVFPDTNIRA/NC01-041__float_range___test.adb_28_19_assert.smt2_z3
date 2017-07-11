@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun nth ((_ BitVec 16) Int) Bool)
@@ -192,7 +192,7 @@
 
 ;; H
   (assert
-  (and (fp.leq (fp.neg (fp #b0 #b01110001 #b10100011011011100010111)) 
+  (and (fp.leq (fp.neg (fp #b0 #b01110001 #b10100011011011100010111))
   value1) (fp.leq value1 (fp #b0 #b01110001 #b10100011011011100010111))))
 
 ;; H
@@ -200,7 +200,7 @@
 
 ;; H
   (assert
-  (and (fp.leq (fp.neg (fp #b0 #b01110101 #b10001001001101110100110)) 
+  (and (fp.leq (fp.neg (fp #b0 #b01110101 #b10001001001101110100110))
   value2)
   (fp.leq value2 (fp.neg (fp #b0 #b01110101 #b00000110001001001101111)))))
 
@@ -212,3 +212,4 @@
  ;; File "test.adb", line 7, characters 0-0
   (not (fp.leq (fp #b0 #b10000011 #b11111111111110111110100) value3)))
 (check-sat)
+(exit)

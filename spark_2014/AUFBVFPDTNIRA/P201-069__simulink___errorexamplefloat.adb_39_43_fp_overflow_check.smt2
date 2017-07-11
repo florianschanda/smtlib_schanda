@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -110,7 +110,7 @@
 
 (declare-datatypes ()
 ((long_float__ref (mk_long_float__ref (long_float__content long_float)))))
-(define-fun long_float__ref___projection ((a long_float__ref)) long_float 
+(define-fun long_float__ref___projection ((a long_float__ref)) long_float
   (long_float__content a))
 
 (define-fun dynamic_invariant ((temp___expr_57 Float64)
@@ -142,7 +142,7 @@
 ((long_float_m1_0_m100_0__ref
  (mk_long_float_m1_0_m100_0__ref
  (long_float_m1_0_m100_0__content long_float_m1_0_m100_0)))))
-(define-fun long_float_m1_0_m100_0__ref___projection ((a long_float_m1_0_m100_0__ref)) long_float_m1_0_m100_0 
+(define-fun long_float_m1_0_m100_0__ref___projection ((a long_float_m1_0_m100_0__ref)) long_float_m1_0_m100_0
   (long_float_m1_0_m100_0__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_135 Float64)
@@ -175,7 +175,7 @@
 ((long_float_m2_220446049250313e_16_minf__ref
  (mk_long_float_m2_220446049250313e_16_minf__ref
  (long_float_m2_220446049250313e_16_minf__content long_float_m2_220446049250313e_16_minf)))))
-(define-fun long_float_m2_220446049250313e_16_minf__ref___projection ((a long_float_m2_220446049250313e_16_minf__ref)) long_float_m2_220446049250313e_16_minf 
+(define-fun long_float_m2_220446049250313e_16_minf__ref___projection ((a long_float_m2_220446049250313e_16_minf__ref)) long_float_m2_220446049250313e_16_minf
   (long_float_m2_220446049250313e_16_minf__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_141 Float64)
@@ -231,6 +231,7 @@
 ;; WP_parameter_def
  ;; File "errorexamplefloat.ads", line 21, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.sub RNE requested_force calculated_force)) (fp.isNaN (fp.sub RNE 
+  (not (or (fp.isInfinite (fp.sub RNE requested_force calculated_force)) (fp.isNaN (fp.sub RNE
   requested_force calculated_force))))))
 (check-sat)
+(exit)

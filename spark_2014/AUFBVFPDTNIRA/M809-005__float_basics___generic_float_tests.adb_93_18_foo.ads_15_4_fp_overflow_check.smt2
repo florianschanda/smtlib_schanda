@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -110,7 +110,7 @@
 
 (declare-datatypes ()
 ((long_float__ref (mk_long_float__ref (long_float__content long_float)))))
-(define-fun long_float__ref___projection ((a long_float__ref)) long_float 
+(define-fun long_float__ref___projection ((a long_float__ref)) long_float
   (long_float__content a))
 
 (declare-sort ft 0)
@@ -155,21 +155,21 @@
 
 ;; H
   (assert
-  (fp.lt (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000) 
+  (fp.lt (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
   a))
 
 ;; H
   (assert
   (and
-  (= o (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000) 
+  (= o (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
   a))
-  (not (or (fp.isInfinite (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000) 
-  a)) (fp.isNaN (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000) 
+  (not (or (fp.isInfinite (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
+  a)) (fp.isNaN (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
   a))))))
 
 ;; H
   (assert
-  (= o1 (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000) 
+  (= o1 (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
   o)))
 
 (assert
@@ -177,3 +177,4 @@
  ;; File "generic_float_tests.ads", line 2, characters 0-0
   (not (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
 (check-sat)
+(exit)

@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun div1 (Int Int) Int)
@@ -166,13 +166,13 @@
 
 (declare-datatypes ()
 ((us_split_fields (mk___split_fields (rec__types__value__e integer)))))
-(define-fun us_split_fields_E__projection ((a us_split_fields)) integer 
+(define-fun us_split_fields_E__projection ((a us_split_fields)) integer
   (rec__types__value__e a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -182,7 +182,7 @@
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (= (to_rep
-                           (rec__types__value__e (us_split_fields1 a))) 
+                           (rec__types__value__e (us_split_fields1 a)))
                    (to_rep (rec__types__value__e (us_split_fields1 b)))) true
                    false))
 
@@ -297,7 +297,7 @@
 
 (declare-datatypes ()
 ((operation__ref (mk_operation__ref (operation__content operation)))))
-(define-fun operation__ref___projection ((a operation__ref)) operation 
+(define-fun operation__ref___projection ((a operation__ref)) operation
   (operation__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_158 Int)
@@ -360,3 +360,4 @@
  ;; File "values-operations.ads", line 22, characters 0-0
   (not (not (= (empty last1) true))))
 (check-sat)
+(exit)

@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun nth ((_ BitVec 16) Int) Bool)
@@ -72,13 +72,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvor (bvshl v (bvurem n (_ bv16 16))) (bvlshr v (bvsub (_ bv16 16) (bvurem n (_ bv16 16))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv16 16))) (bvlshr v (bvsub (_ bv16 16) (bvurem n (_ bv16 16)))))
   (rotate_left1 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvor (bvlshr v (bvurem n (_ bv16 16))) (bvshl v (bvsub (_ bv16 16) (bvurem n (_ bv16 16))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv16 16))) (bvshl v (bvsub (_ bv16 16) (bvurem n (_ bv16 16)))))
   (rotate_right1 v (bv2nat n)))))
 
 (declare-fun nth_bv ((_ BitVec 16) (_ BitVec 16)) Bool)
@@ -246,7 +246,7 @@
 
 ;; H
   (assert
-  (and (fp.leq (fp.neg (fp #b0 #b01110001 #b10100011011011100010111)) 
+  (and (fp.leq (fp.neg (fp #b0 #b01110001 #b10100011011011100010111))
   value1) (fp.leq value1 (fp #b0 #b01110001 #b10100011011011100010111))))
 
 ;; H
@@ -258,3 +258,4 @@
   (not
   (fp.leq (fp.neg (fp #b0 #b01110101 #b10001001001101110100110)) value2)))
 (check-sat)
+(exit)

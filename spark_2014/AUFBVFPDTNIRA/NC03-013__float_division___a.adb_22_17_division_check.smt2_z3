@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun nth ((_ BitVec 16) Int) Bool)
@@ -327,7 +327,7 @@
 
 ;; H
   (assert
-  (fp.leq (fp #b0 #b01111110 #b11001100110011001100110) ((_ to_fp_unsigned 8 24) RNA 
+  (fp.leq (fp #b0 #b01111110 #b11001100110011001100110) ((_ to_fp_unsigned 8 24) RNA
   x)))
 
 (assert
@@ -335,3 +335,4 @@
  ;; File "a.ads", line 10, characters 0-0
   (not (not (fp.isZero      ((_ to_fp_unsigned 8 24) RNA x)))))
 (check-sat)
+(exit)

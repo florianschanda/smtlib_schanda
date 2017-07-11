@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort tcount_typeB 0)
@@ -54,7 +54,7 @@
 (declare-datatypes ()
 ((tcount_typeB__ref
  (mk_tcount_typeB__ref (tcount_typeB__content tcount_typeB)))))
-(define-fun tcount_typeB__ref___projection ((a tcount_typeB__ref)) tcount_typeB 
+(define-fun tcount_typeB__ref___projection ((a tcount_typeB__ref)) tcount_typeB
   (tcount_typeB__content a))
 
 (declare-sort index_type 0)
@@ -73,7 +73,7 @@
 
 (declare-datatypes ()
 ((index_type__ref (mk_index_type__ref (index_type__content index_type)))))
-(define-fun index_type__ref___projection ((a index_type__ref)) index_type 
+(define-fun index_type__ref___projection ((a index_type__ref)) index_type
   (index_type__content a))
 
 (define-fun dynamic_invariant ((temp___expr_385 Int)
@@ -100,7 +100,7 @@
 (declare-datatypes ()
 ((element_type__ref
  (mk_element_type__ref (element_type__content element_type)))))
-(define-fun element_type__ref___projection ((a element_type__ref)) element_type 
+(define-fun element_type__ref___projection ((a element_type__ref)) element_type
   (element_type__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_391 Int)
@@ -177,11 +177,11 @@
                                                                   (=>
                                                                   (and
                                                                   (<= 1 n)
-                                                                  (<= n 
+                                                                  (<= n
                                                                   (last left)))
-                                                                  (= 
+                                                                  (=
                                                                   (get left
-                                                                  n) 
+                                                                  n)
                                                                   (get right
                                                                   n))))
                                                              true false)))
@@ -215,7 +215,7 @@
 
 (declare-datatypes ()
 ((count_type__ref (mk_count_type__ref (count_type__content count_type)))))
-(define-fun count_type__ref___projection ((a count_type__ref)) count_type 
+(define-fun count_type__ref___projection ((a count_type__ref)) count_type
   (count_type__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_173 Int)
@@ -249,7 +249,7 @@
 (declare-datatypes ()
 ((extended_index__ref
  (mk_extended_index__ref (extended_index__content extended_index)))))
-(define-fun extended_index__ref___projection ((a extended_index__ref)) extended_index 
+(define-fun extended_index__ref___projection ((a extended_index__ref)) extended_index
   (extended_index__content a))
 
 (define-fun dynamic_invariant3 ((temp___expr_397 Int)
@@ -331,3 +331,4 @@
  ;; File "a-cofuve.ads", line 272, characters 0-0
   (not (not (= o 2147483647))))
 (check-sat)
+(exit)

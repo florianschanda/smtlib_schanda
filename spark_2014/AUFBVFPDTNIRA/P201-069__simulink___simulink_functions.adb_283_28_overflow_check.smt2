@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun div1 (Int Int) Int)
@@ -137,7 +137,7 @@
 (declare-datatypes ()
 ((tinteger_32B__ref
  (mk_tinteger_32B__ref (tinteger_32B__content tinteger_32B)))))
-(define-fun tinteger_32B__ref___projection ((a tinteger_32B__ref)) tinteger_32B 
+(define-fun tinteger_32B__ref___projection ((a tinteger_32B__ref)) tinteger_32B
   (tinteger_32B__content a))
 
 (declare-sort integer_32 0)
@@ -157,7 +157,7 @@
 
 (declare-datatypes ()
 ((integer_32__ref (mk_integer_32__ref (integer_32__content integer_32)))))
-(define-fun integer_32__ref_2__projection ((a integer_32__ref)) integer_32 
+(define-fun integer_32__ref_2__projection ((a integer_32__ref)) integer_32
   (integer_32__content a))
 
 (define-fun dynamic_invariant ((temp___expr_159 Int)
@@ -202,3 +202,4 @@
  ;; File "interfac.ads", line 52, characters 0-0
   (not (in_range1 (div1 left right))))
 (check-sat)
+(exit)

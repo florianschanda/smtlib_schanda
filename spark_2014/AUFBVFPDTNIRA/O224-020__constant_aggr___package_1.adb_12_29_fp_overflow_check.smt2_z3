@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -144,7 +144,7 @@
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -155,11 +155,11 @@
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (= (to_rep
-                           (rec__package_1__record_t__a (us_split_fields1 a))) 
+                           (rec__package_1__record_t__a (us_split_fields1 a)))
                         (to_rep
                         (rec__package_1__record_t__a (us_split_fields1 b))))
                         (= (to_rep
-                           (rec__package_1__record_t__b (us_split_fields1 a))) 
+                           (rec__package_1__record_t__b (us_split_fields1 a)))
                         (to_rep
                         (rec__package_1__record_t__b (us_split_fields1 b)))))
                    true false))
@@ -323,7 +323,7 @@
 
 ;; H
   (assert
-  (= (to_rep (rec__package_1__record_t__a (us_split_fields1 record_const))) 
+  (= (to_rep (rec__package_1__record_t__a (us_split_fields1 record_const)))
   temp))
 
 ;; H
@@ -342,8 +342,8 @@
                                                                   (rec__package_1__record_t__a
                                                                   (us_split_fields1
                                                                   record_const)))))
-  (not (or (fp.isInfinite (fp.add RNE (fp #b0 #b01111000 #b01000111101011100001010) 
-  (to_rep (rec__package_1__record_t__a (us_split_fields1 record_const))))) (fp.isNaN (fp.add RNE (fp #b0 #b01111000 #b01000111101011100001010) 
+  (not (or (fp.isInfinite (fp.add RNE (fp #b0 #b01111000 #b01000111101011100001010)
+  (to_rep (rec__package_1__record_t__a (us_split_fields1 record_const))))) (fp.isNaN (fp.add RNE (fp #b0 #b01111000 #b01000111101011100001010)
   (to_rep (rec__package_1__record_t__a (us_split_fields1 record_const)))))))))
 
 ;; H
@@ -356,7 +356,8 @@
 ;; WP_parameter_def
  ;; File "package_1.ads", line 11, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.add RNE (fp #b0 #b01111000 #b01000111101011100001010) 
-  temp)) (fp.isNaN (fp.add RNE (fp #b0 #b01111000 #b01000111101011100001010) 
+  (not (or (fp.isInfinite (fp.add RNE (fp #b0 #b01111000 #b01000111101011100001010)
+  temp)) (fp.isNaN (fp.add RNE (fp #b0 #b01111000 #b01000111101011100001010)
   temp))))))
 (check-sat)
+(exit)

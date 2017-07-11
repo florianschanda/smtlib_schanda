@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun nth ((_ BitVec 32) Int) Bool)
@@ -71,13 +71,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvor (bvshl v (bvurem n (_ bv32 32))) (bvlshr v (bvsub (_ bv32 32) (bvurem n (_ bv32 32))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv32 32))) (bvlshr v (bvsub (_ bv32 32) (bvurem n (_ bv32 32)))))
   (rotate_left1 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvor (bvlshr v (bvurem n (_ bv32 32))) (bvshl v (bvsub (_ bv32 32) (bvurem n (_ bv32 32))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv32 32))) (bvshl v (bvsub (_ bv32 32) (bvurem n (_ bv32 32)))))
   (rotate_right1 v (bv2nat n)))))
 
 (declare-fun nth_bv ((_ BitVec 32) (_ BitVec 32)) Bool)
@@ -144,7 +144,7 @@
 
 (declare-datatypes ()
 ((tinteger_8B__ref (mk_tinteger_8B__ref (tinteger_8B__content tinteger_8B)))))
-(define-fun tinteger_8B__ref___projection ((a tinteger_8B__ref)) tinteger_8B 
+(define-fun tinteger_8B__ref___projection ((a tinteger_8B__ref)) tinteger_8B
   (tinteger_8B__content a))
 
 (declare-sort integer_8 0)
@@ -163,7 +163,7 @@
 
 (declare-datatypes ()
 ((integer_8__ref (mk_integer_8__ref (integer_8__content integer_8)))))
-(define-fun integer_8__ref_2__projection ((a integer_8__ref)) integer_8 
+(define-fun integer_8__ref_2__projection ((a integer_8__ref)) integer_8
   (integer_8__content a))
 
 (define-fun dynamic_invariant ((temp___expr_147 Int)
@@ -191,7 +191,7 @@
 (declare-datatypes ()
 ((tinteger_32B__ref
  (mk_tinteger_32B__ref (tinteger_32B__content tinteger_32B)))))
-(define-fun tinteger_32B__ref___projection ((a tinteger_32B__ref)) tinteger_32B 
+(define-fun tinteger_32B__ref___projection ((a tinteger_32B__ref)) tinteger_32B
   (tinteger_32B__content a))
 
 (declare-sort integer_32 0)
@@ -211,7 +211,7 @@
 
 (declare-datatypes ()
 ((integer_32__ref (mk_integer_32__ref (integer_32__content integer_32)))))
-(define-fun integer_32__ref_2__projection ((a integer_32__ref)) integer_32 
+(define-fun integer_32__ref_2__projection ((a integer_32__ref)) integer_32
   (integer_32__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_159 Int)
@@ -237,7 +237,7 @@
 
 (declare-datatypes ()
 ((unsigned_32__ref (mk_unsigned_32__ref (unsigned_32__content unsigned_32)))))
-(define-fun unsigned_32__ref___projection ((a unsigned_32__ref)) unsigned_32 
+(define-fun unsigned_32__ref___projection ((a unsigned_32__ref)) unsigned_32
   (unsigned_32__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_189 (_ BitVec 32))
@@ -358,3 +358,4 @@
  ;; File "abs_controller_supplier_with_property.ads", line 22, characters 0-0
   (not (in_range o6)))
 (check-sat)
+(exit)

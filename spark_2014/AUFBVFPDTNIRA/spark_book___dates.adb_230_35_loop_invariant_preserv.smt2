@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
@@ -64,7 +64,7 @@
 (declare-datatypes ()
 ((day_advance_type__ref
  (mk_day_advance_type__ref (day_advance_type__content day_advance_type)))))
-(define-fun day_advance_type__ref___projection ((a day_advance_type__ref)) day_advance_type 
+(define-fun day_advance_type__ref___projection ((a day_advance_type__ref)) day_advance_type
   (day_advance_type__content a))
 
 (define-fun dynamic_invariant ((temp___expr_192 Int)
@@ -90,7 +90,7 @@
 
 (declare-datatypes ()
 ((year_type__ref (mk_year_type__ref (year_type__content year_type)))))
-(define-fun year_type__ref___projection ((a year_type__ref)) year_type 
+(define-fun year_type__ref___projection ((a year_type__ref)) year_type
   (year_type__content a))
 
 (declare-fun to_rep (year_type) Int)
@@ -128,7 +128,7 @@
 
 (declare-datatypes ()
 ((month_type__ref (mk_month_type__ref (month_type__content month_type)))))
-(define-fun month_type__ref___projection ((a month_type__ref)) month_type 
+(define-fun month_type__ref___projection ((a month_type__ref)) month_type
   (month_type__content a))
 
 (declare-fun to_rep1 (month_type) Int)
@@ -193,19 +193,19 @@
 ((us_split_fields
  (mk___split_fields
  (rec__dates__date__day day_type)(rec__dates__date__month month_type)(rec__dates__date__year year_type)))))
-(define-fun us_split_fields_Day__projection ((a us_split_fields)) day_type 
+(define-fun us_split_fields_Day__projection ((a us_split_fields)) day_type
   (rec__dates__date__day a))
 
-(define-fun us_split_fields_Month__projection ((a us_split_fields)) month_type 
+(define-fun us_split_fields_Month__projection ((a us_split_fields)) month_type
   (rec__dates__date__month a))
 
-(define-fun us_split_fields_Year__projection ((a us_split_fields)) year_type 
+(define-fun us_split_fields_Year__projection ((a us_split_fields)) year_type
   (rec__dates__date__year a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -217,15 +217,15 @@
   (b us_rep)) Bool (ite (and
                         (and
                         (= (to_rep2
-                           (rec__dates__date__day (us_split_fields1 a))) 
+                           (rec__dates__date__day (us_split_fields1 a)))
                         (to_rep2
                         (rec__dates__date__day (us_split_fields1 b))))
                         (= (to_rep1
-                           (rec__dates__date__month (us_split_fields1 a))) 
+                           (rec__dates__date__month (us_split_fields1 a)))
                         (to_rep1
                         (rec__dates__date__month (us_split_fields1 b)))))
                         (= (to_rep
-                           (rec__dates__date__year (us_split_fields1 a))) 
+                           (rec__dates__date__year (us_split_fields1 a)))
                         (to_rep
                         (rec__dates__date__year (us_split_fields1 b)))))
                    true false))
@@ -573,7 +573,7 @@
   (= result3 (bool_eq
              (mk___rep
              (mk___split_fields current_date__split_fields
-             current_date__split_fields1 current_date__split_fields2)) 
+             current_date__split_fields1 current_date__split_fields2))
              o7)))
 
 ;; H
@@ -626,3 +626,4 @@
   (not
   (= (bool_eq (mk___rep current_date__split_fields9) (maximum_date Tuple0)) true))))
 (check-sat)
+(exit)

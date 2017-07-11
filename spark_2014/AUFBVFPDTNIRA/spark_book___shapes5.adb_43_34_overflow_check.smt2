@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort integer 0)
@@ -79,7 +79,7 @@
 (declare-datatypes ()
 ((coordinate_type__ref
  (mk_coordinate_type__ref (coordinate_type__content coordinate_type)))))
-(define-fun coordinate_type__ref___projection ((a coordinate_type__ref)) coordinate_type 
+(define-fun coordinate_type__ref___projection ((a coordinate_type__ref)) coordinate_type
   (coordinate_type__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_135 Int)
@@ -125,7 +125,7 @@
 
 (declare-datatypes ()
 ((radius_type__ref (mk_radius_type__ref (radius_type__content radius_type)))))
-(define-fun radius_type__ref___projection ((a radius_type__ref)) radius_type 
+(define-fun radius_type__ref___projection ((a radius_type__ref)) radius_type
   (radius_type__content a))
 
 (declare-fun to_rep1 (radius_type) Int)
@@ -152,19 +152,19 @@
 ((us_split_fields
  (mk___split_fields
  (rec__shapes5__circle__center_x coordinate_type)(rec__shapes5__circle__center_y coordinate_type)(rec__shapes5__circle__radius radius_type)))))
-(define-fun us_split_fields_Center_X__projection ((a us_split_fields)) coordinate_type 
+(define-fun us_split_fields_Center_X__projection ((a us_split_fields)) coordinate_type
   (rec__shapes5__circle__center_x a))
 
-(define-fun us_split_fields_Center_Y__projection ((a us_split_fields)) coordinate_type 
+(define-fun us_split_fields_Center_Y__projection ((a us_split_fields)) coordinate_type
   (rec__shapes5__circle__center_y a))
 
-(define-fun us_split_fields_Radius__projection ((a us_split_fields)) radius_type 
+(define-fun us_split_fields_Radius__projection ((a us_split_fields)) radius_type
   (rec__shapes5__circle__radius a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -307,7 +307,7 @@
 (declare-datatypes ()
 ((full_width_type__ref
  (mk_full_width_type__ref (full_width_type__content full_width_type)))))
-(define-fun full_width_type__ref___projection ((a full_width_type__ref)) full_width_type 
+(define-fun full_width_type__ref___projection ((a full_width_type__ref)) full_width_type
   (full_width_type__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_156 Int)
@@ -382,3 +382,4 @@
   (not (in_range
   (abs (- y (to_rep (rec__shapes5__circle__center_y (us_split_fields1 c))))))))
 (check-sat)
+(exit)

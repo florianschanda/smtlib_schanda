@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun div1 (Int Int) Int)
@@ -124,7 +124,7 @@
 
 (declare-datatypes ()
 ((distance_t__ref (mk_distance_t__ref (distance_t__content distance_t)))))
-(define-fun distance_t__ref___projection ((a distance_t__ref)) distance_t 
+(define-fun distance_t__ref___projection ((a distance_t__ref)) distance_t
   (distance_t__content a))
 
 (define-fun dynamic_invariant ((temp___expr_176 Int)
@@ -152,7 +152,7 @@
 ((braking_curve_range__ref
  (mk_braking_curve_range__ref
  (braking_curve_range__content braking_curve_range)))))
-(define-fun braking_curve_range__ref___projection ((a braking_curve_range__ref)) braking_curve_range 
+(define-fun braking_curve_range__ref___projection ((a braking_curve_range__ref)) braking_curve_range
   (braking_curve_range__content a))
 
 (declare-fun d () Int)
@@ -179,3 +179,4 @@
  ;; File "deceleration_curve.ads", line 32, characters 0-0
   (not (not (= 5 0))))
 (check-sat)
+(exit)

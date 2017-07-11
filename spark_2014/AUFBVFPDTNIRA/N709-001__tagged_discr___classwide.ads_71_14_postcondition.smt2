@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -186,19 +186,19 @@
 ((us_split_fields
  (mk___split_fields
  (rec__classwide__t__z Bool)(rec__classwide__t__x integer)(rec__classwide__t__y float)(rec__ext__ us_private)))))
-(define-fun us_split_fields_Z__projection ((a us_split_fields)) Bool 
+(define-fun us_split_fields_Z__projection ((a us_split_fields)) Bool
   (rec__classwide__t__z a))
 
-(define-fun us_split_fields_X__projection ((a us_split_fields)) integer 
+(define-fun us_split_fields_X__projection ((a us_split_fields)) integer
   (rec__classwide__t__x a))
 
-(define-fun us_split_fields___projection ((a us_split_fields)) us_private 
+(define-fun us_split_fields___projection ((a us_split_fields)) us_private
   (rec__ext__ a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -211,13 +211,13 @@
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (and
-                        (= (rec__classwide__t__z (us_split_fields1 a)) 
+                        (= (rec__classwide__t__z (us_split_fields1 a))
                         (rec__classwide__t__z (us_split_fields1 b)))
                         (= (to_rep
-                           (rec__classwide__t__x (us_split_fields1 a))) 
+                           (rec__classwide__t__x (us_split_fields1 a)))
                         (to_rep (rec__classwide__t__x (us_split_fields1 b)))))
                         (= (to_rep1
-                           (rec__classwide__t__y (us_split_fields1 a))) 
+                           (rec__classwide__t__y (us_split_fields1 a)))
                         (to_rep1 (rec__classwide__t__y (us_split_fields1 b)))))
                    true false))
 
@@ -298,7 +298,7 @@
 (define-fun u1__ref___projection ((a u1__ref)) us_rep (u1__content a))
 
 (define-fun default_initial_assumption ((temp___expr_165 us_rep)
-  (temp___skip_top_level_166 Bool)) Bool (= (attr__tag temp___expr_165) 
+  (temp___skip_top_level_166 Bool)) Bool (= (attr__tag temp___expr_165)
   us_tag))
 
 (declare-fun is_zero__2 (us_rep) Bool)
@@ -626,3 +626,4 @@
      (mk___split_fields v__split_fields16 v__split_fields17 v__split_fields18
      v__split_fields19) v__attr__tag)) true)))
 (check-sat)
+(exit)

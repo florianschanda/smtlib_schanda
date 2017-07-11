@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort priority 0)
@@ -59,16 +59,16 @@
 ((us_split_fields
  (mk___split_fields
  (rec__alarm__the_light Bool)(rec__alarm__blinken_poT__blinken_state Bool)))))
-(define-fun us_split_fields_The_Light__projection ((a us_split_fields)) Bool 
+(define-fun us_split_fields_The_Light__projection ((a us_split_fields)) Bool
   (rec__alarm__the_light a))
 
-(define-fun us_split_fields_Blinken_State__projection ((a us_split_fields)) Bool 
+(define-fun us_split_fields_Blinken_State__projection ((a us_split_fields)) Bool
   (rec__alarm__blinken_poT__blinken_state a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -116,7 +116,7 @@
 
 (declare-datatypes ()
 ((blinken_poT__ref (mk_blinken_poT__ref (blinken_poT__content us_rep)))))
-(define-fun blinken_poT__ref___projection ((a blinken_poT__ref)) us_rep 
+(define-fun blinken_poT__ref___projection ((a blinken_poT__ref)) us_rep
   (blinken_poT__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -153,3 +153,4 @@
  ;; File "alarm.adb", line 55, characters 0-0
   (not (<= 97 97)))
 (check-sat)
+(exit)

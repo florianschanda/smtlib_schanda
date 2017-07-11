@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -138,7 +138,7 @@
 
 (declare-datatypes ()
 ((t_degrees__ref (mk_t_degrees__ref (t_degrees__content t_degrees)))))
-(define-fun t_degrees__ref___projection ((a t_degrees__ref)) t_degrees 
+(define-fun t_degrees__ref___projection ((a t_degrees__ref)) t_degrees
   (t_degrees__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_1312 Float32)
@@ -169,7 +169,7 @@
 (declare-datatypes ()
 ((t_quaternion__ref
  (mk_t_quaternion__ref (t_quaternion__content t_quaternion)))))
-(define-fun t_quaternion__ref___projection ((a t_quaternion__ref)) t_quaternion 
+(define-fun t_quaternion__ref___projection ((a t_quaternion__ref)) t_quaternion
   (t_quaternion__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_1336 Float32)
@@ -199,7 +199,7 @@
 
 (declare-datatypes ()
 ((t_radians__ref (mk_t_radians__ref (t_radians__content t_radians)))))
-(define-fun t_radians__ref___projection ((a t_radians__ref)) t_radians 
+(define-fun t_radians__ref___projection ((a t_radians__ref)) t_radians
   (t_radians__content a))
 
 (define-fun dynamic_invariant3 ((temp___expr_1342 Float32)
@@ -374,7 +374,7 @@
 
 ;; H
   (assert
-  (= grav_x1 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) (fp.sub RNE (fp.mul RNE 
+  (= grav_x1 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) (fp.sub RNE (fp.mul RNE
   q1 q3) (fp.mul RNE q0 q2)))))
 
 ;; H
@@ -382,7 +382,7 @@
 
 ;; H
   (assert
-  (= grav_y1 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) (fp.add RNE (fp.mul RNE 
+  (= grav_y1 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) (fp.add RNE (fp.mul RNE
   q0 q1) (fp.mul RNE q2 q3)))))
 
 ;; H
@@ -390,7 +390,7 @@
 
 ;; H
   (assert
-  (= grav_z1 (fp.add RNE (fp.sub RNE (fp.sub RNE (fp.mul RNE q0 q0) (fp.mul RNE 
+  (= grav_z1 (fp.add RNE (fp.sub RNE (fp.sub RNE (fp.mul RNE q0 q0) (fp.mul RNE
   q1 q1)) (fp.mul RNE q2 q2)) (fp.mul RNE q3 q3))))
 
 ;; H
@@ -415,9 +415,9 @@
   (assert
   (and
   (= o1 (atan_2
-        (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) (fp.add RNE (fp.mul RNE 
+        (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) (fp.add RNE (fp.mul RNE
         q0 q3) (fp.mul RNE q1 q2)))
-        (fp.sub RNE (fp.sub RNE (fp.add RNE (fp.mul RNE q0 q0) (fp.mul RNE 
+        (fp.sub RNE (fp.sub RNE (fp.add RNE (fp.mul RNE q0 q0) (fp.mul RNE
         q1 q1)) (fp.mul RNE q2 q2)) (fp.mul RNE q3 q3))))
   (in_range3 o1)))
 
@@ -447,3 +447,4 @@
  ;; File "sensfusion6_pack.adb", line 248, characters 0-0
   (not (not (fp.isZero      (fp #b0 #b10000000 #b10010010000111111011011)))))
 (check-sat)
+(exit)

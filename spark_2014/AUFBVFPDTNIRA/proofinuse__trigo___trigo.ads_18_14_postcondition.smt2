@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -174,9 +174,9 @@
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true)
-     (= (approx_sin x) (fp.sub RNE (fp.add RNE (fp.sub RNE x (fp.div RNE 
-     (pow3 x) (fp #b0 #b10000001 #b10000000000000000000000))) (fp.div RNE 
-     (pow5 x) (fp #b0 #b10000101 #b11100000000000000000000))) (fp.div RNE 
+     (= (approx_sin x) (fp.sub RNE (fp.add RNE (fp.sub RNE x (fp.div RNE
+     (pow3 x) (fp #b0 #b10000001 #b10000000000000000000000))) (fp.div RNE
+     (pow5 x) (fp #b0 #b10000101 #b11100000000000000000000))) (fp.div RNE
      (pow7 x) (fp #b0 #b10001011 #b00111011000000000000000))))) :pattern (
   (approx_sin x)) )))
 
@@ -245,7 +245,7 @@
 
 ;; H
   (assert
-  (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) 
+  (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))
   x) (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000))))
 
 ;; H
@@ -259,7 +259,7 @@
   (and (= o (sin2 x))
   (and (not (or (fp.isInfinite o) (fp.isNaN o)))
   (and
-  (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) 
+  (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))
   o) (fp.leq o (fp #b0 #b01111111 #b00000000000000000000000)))
   (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq o (fp #b0 #b00000000 #b00000000000000000000000)))))))
@@ -286,3 +286,4 @@
   (not
   (fp.lt (fp.abs (fp.sub RNE trigo__sin__result4 (approx_sin x))) (fp #b0 #b01101100 #b10010010101001110011100))))
 (check-sat)
+(exit)

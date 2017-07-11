@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -188,7 +188,7 @@
 (declare-datatypes ()
 ((deceleration_t__ref
  (mk_deceleration_t__ref (deceleration_t__content deceleration_t)))))
-(define-fun deceleration_t__ref___projection ((a deceleration_t__ref)) deceleration_t 
+(define-fun deceleration_t__ref___projection ((a deceleration_t__ref)) deceleration_t
   (deceleration_t__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_169 Float32)
@@ -214,7 +214,7 @@
 
 (declare-datatypes ()
 ((distance_t__ref (mk_distance_t__ref (distance_t__content distance_t)))))
-(define-fun distance_t__ref___projection ((a distance_t__ref)) distance_t 
+(define-fun distance_t__ref___projection ((a distance_t__ref)) distance_t
   (distance_t__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_175 Int)
@@ -263,7 +263,7 @@
 (declare-datatypes ()
 ((speed_km_per_h_t__ref
  (mk_speed_km_per_h_t__ref (speed_km_per_h_t__content speed_km_per_h_t)))))
-(define-fun speed_km_per_h_t__ref___projection ((a speed_km_per_h_t__ref)) speed_km_per_h_t 
+(define-fun speed_km_per_h_t__ref___projection ((a speed_km_per_h_t__ref)) speed_km_per_h_t
   (speed_km_per_h_t__content a))
 
 (define-fun dynamic_invariant4 ((temp___expr_157 Float32)
@@ -315,7 +315,7 @@
 ((num_delimiters_range__ref
  (mk_num_delimiters_range__ref
  (num_delimiters_range__content num_delimiters_range)))))
-(define-fun num_delimiters_range__ref___projection ((a num_delimiters_range__ref)) num_delimiters_range 
+(define-fun num_delimiters_range__ref___projection ((a num_delimiters_range__ref)) num_delimiters_range
   (num_delimiters_range__content a))
 
 (declare-fun to_rep1 (num_delimiters_range) Int)
@@ -355,7 +355,7 @@
 (declare-datatypes ()
 ((function_range__ref
  (mk_function_range__ref (function_range__content function_range)))))
-(define-fun function_range__ref___projection ((a function_range__ref)) function_range 
+(define-fun function_range__ref___projection ((a function_range__ref)) function_range
   (function_range__content a))
 
 (declare-fun to_rep2 (function_range) Int)
@@ -382,13 +382,13 @@
 ((us_split_fields
  (mk___split_fields
  (rec__step_function__delimiter_entry__delimiter function_range)(rec__step_function__delimiter_entry__value float)))))
-(define-fun us_split_fields_Delimiter__projection ((a us_split_fields)) function_range 
+(define-fun us_split_fields_Delimiter__projection ((a us_split_fields)) function_range
   (rec__step_function__delimiter_entry__delimiter a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -469,7 +469,7 @@
 (declare-datatypes ()
 ((delimiter_entry__ref
  (mk_delimiter_entry__ref (delimiter_entry__content us_rep)))))
-(define-fun delimiter_entry__ref___projection ((a delimiter_entry__ref)) us_rep 
+(define-fun delimiter_entry__ref___projection ((a delimiter_entry__ref)) us_rep
   (delimiter_entry__content a))
 
 (declare-datatypes ()
@@ -488,7 +488,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int us_rep) Int Int (Array Int us_rep) Int
@@ -503,7 +503,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (us_rep Int) (Array Int us_rep))
@@ -582,16 +582,16 @@
 ((us_split_fields2
  (mk___split_fields1
  (rec__step_function__step_function_t__number_of_delimiters num_delimiters_range)(rec__step_function__step_function_t__step (Array Int us_rep))))))
-(define-fun us_split_fields_Number_Of_Delimiters__projection ((a us_split_fields2)) num_delimiters_range 
+(define-fun us_split_fields_Number_Of_Delimiters__projection ((a us_split_fields2)) num_delimiters_range
   (rec__step_function__step_function_t__number_of_delimiters a))
 
-(define-fun us_split_fields_Step__projection ((a us_split_fields2)) (Array Int us_rep) 
+(define-fun us_split_fields_Step__projection ((a us_split_fields2)) (Array Int us_rep)
   (rec__step_function__step_function_t__step a))
 
 (declare-datatypes ()
 ((us_split_fields__ref1
  (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2 
+(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ()
@@ -647,7 +647,7 @@
 
 ;; step_function__step_function_t__number_of_delimiters__last__bit_axiom
   (assert
-  (< step_function__step_function_t__number_of_delimiters__first__bit 
+  (< step_function__step_function_t__number_of_delimiters__first__bit
   step_function__step_function_t__number_of_delimiters__last__bit))
 
 ;; step_function__step_function_t__number_of_delimiters__position_axiom
@@ -675,7 +675,7 @@
 (declare-datatypes ()
 ((step_function_t__ref
  (mk_step_function_t__ref (step_function_t__content us_rep1)))))
-(define-fun step_function_t__ref___projection ((a step_function_t__ref)) us_rep1 
+(define-fun step_function_t__ref___projection ((a step_function_t__ref)) us_rep1
   (step_function_t__content a))
 
 (declare-sort breaking_model_t 0)
@@ -695,7 +695,7 @@
 (declare-datatypes ()
 ((breaking_model_t__ref
  (mk_breaking_model_t__ref (breaking_model_t__content breaking_model_t)))))
-(define-fun breaking_model_t__ref___projection ((a breaking_model_t__ref)) breaking_model_t 
+(define-fun breaking_model_t__ref___projection ((a breaking_model_t__ref)) breaking_model_t
   (breaking_model_t__content a))
 
 (define-fun dynamic_invariant5 ((temp___expr_280 Int)
@@ -1096,7 +1096,7 @@
   (= (mk___rep1
      (mk___split_fields1
      sec_3_13_2_monitoring_inputs__a_brake_emergency_model__assume
-     sec_3_13_2_monitoring_inputs__a_brake_emergency_model__assume1)) 
+     sec_3_13_2_monitoring_inputs__a_brake_emergency_model__assume1))
   a_brake_emergency_model))
 
 ;; H
@@ -1240,3 +1240,4 @@
   (not
   (= (is_valid_speed_km_per_h (fp #b0 #b10000110 #b11110100000000000000000)) true)))
 (check-sat)
+(exit)

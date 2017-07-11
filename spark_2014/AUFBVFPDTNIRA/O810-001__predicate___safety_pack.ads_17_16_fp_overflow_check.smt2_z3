@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -150,7 +150,7 @@
 (declare-datatypes ()
 ((natural_float__ref
  (mk_natural_float__ref (natural_float__content natural_float)))))
-(define-fun natural_float__ref___projection ((a natural_float__ref)) natural_float 
+(define-fun natural_float__ref___projection ((a natural_float__ref)) natural_float
   (natural_float__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_1270 Float32)
@@ -188,6 +188,7 @@
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.add RNE value threshold)) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE value threshold)) (fp.isNaN (fp.add RNE
   value threshold))))))
 (check-sat)
+(exit)

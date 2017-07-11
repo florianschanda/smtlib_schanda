@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort integer 0)
@@ -79,7 +79,7 @@
 
 (declare-datatypes ()
 ((count_type__ref (mk_count_type__ref (count_type__content count_type)))))
-(define-fun count_type__ref___projection ((a count_type__ref)) count_type 
+(define-fun count_type__ref___projection ((a count_type__ref)) count_type
   (count_type__content a))
 
 (declare-fun gdebug () Int)
@@ -103,3 +103,4 @@
  ;; File "algorithm.adb", line 248, characters 0-0
   (not (in_range1 1000)))
 (check-sat)
+(exit)

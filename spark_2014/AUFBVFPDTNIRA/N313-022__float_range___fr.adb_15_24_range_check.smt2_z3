@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -202,13 +202,14 @@
 
 ;; H
   (assert
-  (= z1 (fp.add RNE (fp.add RNE (fp.add RNE x (fp #b0 #b01111011 #b10011001100110011001101)) 
+  (= z1 (fp.add RNE (fp.add RNE (fp.add RNE x (fp #b0 #b01111011 #b10011001100110011001101))
   y) (fp #b0 #b01111100 #b10011001100110011001101))))
 
 (assert
 ;; WP_parameter_def
  ;; File "fr.adb", line 1, characters 0-0
   (not (in_range3
-  (fp.add RNE (fp.add RNE (fp.add RNE x (fp #b0 #b01111011 #b10011001100110011001101)) 
+  (fp.add RNE (fp.add RNE (fp.add RNE x (fp #b0 #b01111011 #b10011001100110011001101))
   y) (fp #b0 #b01111100 #b10101110000101000111101)))))
 (check-sat)
+(exit)

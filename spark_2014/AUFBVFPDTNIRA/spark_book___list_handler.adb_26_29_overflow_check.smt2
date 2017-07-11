@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
@@ -100,7 +100,7 @@
 (declare-datatypes ()
 ((element_type__ref
  (mk_element_type__ref (element_type__content element_type)))))
-(define-fun element_type__ref___projection ((a element_type__ref)) element_type 
+(define-fun element_type__ref___projection ((a element_type__ref)) element_type
   (element_type__content a))
 
 (declare-fun to_rep (element_type) Int)
@@ -139,7 +139,7 @@
 
 (declare-datatypes ()
 ((index_type__ref (mk_index_type__ref (index_type__content index_type)))))
-(define-fun index_type__ref___projection ((a index_type__ref)) index_type 
+(define-fun index_type__ref___projection ((a index_type__ref)) index_type
   (index_type__content a))
 
 (declare-fun to_rep1 (index_type) Int)
@@ -166,19 +166,19 @@
 ((us_split_fields
  (mk___split_fields
  (rec__list_handler__integer_list__list_node__value element_type)(rec__list_handler__integer_list__list_node__next index_type)(rec__list_handler__integer_list__list_node__previous index_type)))))
-(define-fun us_split_fields_Value__projection ((a us_split_fields)) element_type 
+(define-fun us_split_fields_Value__projection ((a us_split_fields)) element_type
   (rec__list_handler__integer_list__list_node__value a))
 
-(define-fun us_split_fields_Next__projection ((a us_split_fields)) index_type 
+(define-fun us_split_fields_Next__projection ((a us_split_fields)) index_type
   (rec__list_handler__integer_list__list_node__next a))
 
-(define-fun us_split_fields_Previous__projection ((a us_split_fields)) index_type 
+(define-fun us_split_fields_Previous__projection ((a us_split_fields)) index_type
   (rec__list_handler__integer_list__list_node__previous a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -299,7 +299,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int us_rep) Int Int (Array Int us_rep) Int
@@ -314,7 +314,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (us_rep Int) (Array Int us_rep))
@@ -374,7 +374,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide1 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide1 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide1 a old_first new_first) i)) ))))))
 
 (declare-fun concat2 ((Array Int index_type) Int Int (Array Int index_type)
@@ -389,7 +389,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat2 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat2 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat2 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat2 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton2 (index_type Int) (Array Int index_type))
@@ -488,7 +488,7 @@
 
 (declare-datatypes ()
 ((status_type__ref (mk_status_type__ref (status_type__content status_type)))))
-(define-fun status_type__ref___projection ((a status_type__ref)) status_type 
+(define-fun status_type__ref___projection ((a status_type__ref)) status_type
   (status_type__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_147 Int)
@@ -612,7 +612,7 @@
   (and
   (and (in_range3 free1)
   (=> (<= (- 2147483648) 2147483647) (in_range1 current2)))
-  (=> (<= 0 3) (in_range4 status1))) (in_range3 count1)) (<= current2 
+  (=> (<= 0 3) (in_range4 status1))) (in_range3 count1)) (<= current2
   upper)))
 
 ;; H
@@ -633,3 +633,4 @@
  ;; File "double_list.adb", line 5, characters 0-0
   (not (in_range1 (+ current2 1))))
 (check-sat)
+(exit)

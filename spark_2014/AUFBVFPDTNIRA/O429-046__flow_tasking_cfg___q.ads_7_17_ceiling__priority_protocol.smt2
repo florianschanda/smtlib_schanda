@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort integer 0)
@@ -101,13 +101,13 @@
 
 (declare-datatypes ()
 ((us_split_fields (mk___split_fields (rec__p__po1T__content integer)))))
-(define-fun us_split_fields_Content__projection ((a us_split_fields)) integer 
+(define-fun us_split_fields_Content__projection ((a us_split_fields)) integer
   (rec__p__po1T__content a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -174,13 +174,13 @@
 
 (declare-datatypes ()
 ((us_split_fields2 (mk___split_fields1 (rec__q__po2T__content integer)))))
-(define-fun us_split_fields_Content2__projection ((a us_split_fields2)) integer 
+(define-fun us_split_fields_Content2__projection ((a us_split_fields2)) integer
   (rec__q__po2T__content a))
 
 (declare-datatypes ()
 ((us_split_fields__ref1
  (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2 
+(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ()
@@ -249,3 +249,4 @@
  ;; File "q.ads", line 2, characters 0-0
   (not (<= 97 97)))
 (check-sat)
+(exit)

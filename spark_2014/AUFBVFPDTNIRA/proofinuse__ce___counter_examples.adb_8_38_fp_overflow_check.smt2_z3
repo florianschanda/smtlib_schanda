@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -152,7 +152,8 @@
 ;; WP_parameter_def
  ;; File "counter_examples.ads", line 14, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.add RNE (fp #b0 #b11111110 #b11111111111111111111111) 
-  y)) (fp.isNaN (fp.add RNE (fp #b0 #b11111110 #b11111111111111111111111) 
+  (not (or (fp.isInfinite (fp.add RNE (fp #b0 #b11111110 #b11111111111111111111111)
+  y)) (fp.isNaN (fp.add RNE (fp #b0 #b11111110 #b11111111111111111111111)
   y))))))
 (check-sat)
+(exit)

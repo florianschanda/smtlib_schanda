@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun nth ((_ BitVec 32) Int) Bool)
@@ -72,13 +72,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvor (bvshl v (bvurem n (_ bv32 32))) (bvlshr v (bvsub (_ bv32 32) (bvurem n (_ bv32 32))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv32 32))) (bvlshr v (bvsub (_ bv32 32) (bvurem n (_ bv32 32)))))
   (rotate_left1 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvor (bvlshr v (bvurem n (_ bv32 32))) (bvshl v (bvsub (_ bv32 32) (bvurem n (_ bv32 32))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv32 32))) (bvshl v (bvsub (_ bv32 32) (bvurem n (_ bv32 32)))))
   (rotate_right1 v (bv2nat n)))))
 
 (declare-fun nth_bv ((_ BitVec 32) (_ BitVec 32)) Bool)
@@ -395,7 +395,7 @@
 ;; H
   (assert
   (and (= zero_and_min__zero_plus__assume (convert ((_ int2bv 32) 0)))
-  (not (or (fp.isInfinite zero_and_min__zero_plus__assume) (fp.isNaN 
+  (not (or (fp.isInfinite zero_and_min__zero_plus__assume) (fp.isNaN
   zero_and_min__zero_plus__assume)))))
 
 ;; H
@@ -458,3 +458,4 @@
  ;; File "a-unccon.ads", line 20, characters 0-0
   (not (not (fp.eq (fp.min c1b c2b) (fp.min c2b c1b)))))
 (check-sat)
+(exit)

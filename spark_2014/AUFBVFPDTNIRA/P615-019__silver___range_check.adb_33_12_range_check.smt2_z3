@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -138,7 +138,7 @@
 (declare-datatypes ()
 ((natural_float__ref
  (mk_natural_float__ref (natural_float__content natural_float)))))
-(define-fun natural_float__ref___projection ((a natural_float__ref)) natural_float 
+(define-fun natural_float__ref___projection ((a natural_float__ref)) natural_float
   (natural_float__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_207 Float32)
@@ -172,3 +172,4 @@
  ;; File "range_check.adb", line 26, characters 0-0
   (not (in_range1 x)))
 (check-sat)
+(exit)

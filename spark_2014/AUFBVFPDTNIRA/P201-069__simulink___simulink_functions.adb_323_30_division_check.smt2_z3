@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun nth ((_ BitVec 32) Int) Bool)
@@ -88,7 +88,7 @@
 
 (declare-datatypes ()
 ((unsigned_32__ref (mk_unsigned_32__ref (unsigned_32__content unsigned_32)))))
-(define-fun unsigned_32__ref___projection ((a unsigned_32__ref)) unsigned_32 
+(define-fun unsigned_32__ref___projection ((a unsigned_32__ref)) unsigned_32
   (unsigned_32__content a))
 
 (define-fun dynamic_invariant ((temp___expr_189 (_ BitVec 32))
@@ -117,3 +117,4 @@
  ;; File "interfac.ads", line 74, characters 0-0
   (not (not (= right #x00000000))))
 (check-sat)
+(exit)

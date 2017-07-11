@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -143,7 +143,7 @@
 ;; H
   (assert
   (and (= o (fp.sub RNE float_tested float_ref))
-  (not (or (fp.isInfinite (fp.sub RNE float_tested float_ref)) (fp.isNaN (fp.sub RNE 
+  (not (or (fp.isInfinite (fp.sub RNE float_tested float_ref)) (fp.isNaN (fp.sub RNE
   float_tested float_ref))))))
 
 ;; H
@@ -154,3 +154,4 @@
  ;; File "original_sample.ads", line 15, characters 0-0
   (not (not (fp.isZero      float_ref))))
 (check-sat)
+(exit)

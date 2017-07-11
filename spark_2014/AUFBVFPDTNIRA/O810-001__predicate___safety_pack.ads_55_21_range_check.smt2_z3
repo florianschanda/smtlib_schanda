@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -161,6 +161,7 @@
 ;; WP_parameter_def
  ;; File "types.ads", line 13, characters 0-0
   (not (in_range1
-  (ite (= ((_ extract 128 128) ((_ fp.to_sbv 129) RNA value)) #b0) (bv2int ((_ fp.to_sbv 129) RNA 
+  (ite (= ((_ extract 128 128) ((_ fp.to_sbv 129) RNA value)) #b0) (bv2int ((_ fp.to_sbv 129) RNA
   value)) (- (bv2int ((_ fp.to_sbv 129) RNA value)) (bv2int (bvshl (_ bv1 130) (_ bv129 130))))))))
 (check-sat)
+(exit)

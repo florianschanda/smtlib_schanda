@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -109,7 +109,7 @@
 
 (declare-datatypes ()
 ((tfloat64B__ref (mk_tfloat64B__ref (tfloat64B__content tfloat64B)))))
-(define-fun tfloat64B__ref___projection ((a tfloat64B__ref)) tfloat64B 
+(define-fun tfloat64B__ref___projection ((a tfloat64B__ref)) tfloat64B
   (tfloat64B__content a))
 
 (declare-sort float64 0)
@@ -209,7 +209,7 @@
      (and
      (fp.leq (fp.mul RNE (fp.mul RNE (fp.mul RNE (of_int RNE n) (of_int RNE
                                                                 (+ n 1))) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))) (fp #b0 #b01111111110 #b0000000000000000000000000000000000000000000000000000)) distance)
-     (fp.leq distance (fp.mul RNE (fp.mul RNE (fp.mul RNE (of_int RNE n) 
+     (fp.leq distance (fp.mul RNE (fp.mul RNE (fp.mul RNE (of_int RNE n)
      (of_int RNE (+ n 1))) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp #b0 #b01111111110 #b0000000000000000000000000000000000000000000000000000)))))) :pattern (
   (invariant__ n speed distance)) ))))
 
@@ -314,7 +314,7 @@
   (assert
   (and
   (= o (fp.add RNE speed (fp.mul RNE (fp.mul RNE factor (fp #b0 #b10000000010 #b0011100111010000000100111010100100101010001100000101)) (fp #b0 #b01111111000 #b0100011110101110000101000111101011100001010001111011))))
-  (not (or (fp.isInfinite (fp.add RNE speed (fp.mul RNE (fp.mul RNE factor (fp #b0 #b10000000010 #b0011100111010000000100111010100100101010001100000101)) (fp #b0 #b01111111000 #b0100011110101110000101000111101011100001010001111011)))) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE speed (fp.mul RNE (fp.mul RNE factor (fp #b0 #b10000000010 #b0011100111010000000100111010100100101010001100000101)) (fp #b0 #b01111111000 #b0100011110101110000101000111101011100001010001111011)))) (fp.isNaN (fp.add RNE
   speed (fp.mul RNE (fp.mul RNE factor (fp #b0 #b10000000010 #b0011100111010000000100111010100100101010001100000101)) (fp #b0 #b01111111000 #b0100011110101110000101000111101011100001010001111011))))))))
 
 ;; H
@@ -326,7 +326,7 @@
 ;; H
   (assert
   (and (= o1 (fp.add RNE old_speed speed1))
-  (not (or (fp.isInfinite (fp.add RNE old_speed speed1)) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE old_speed speed1)) (fp.isNaN (fp.add RNE
   old_speed speed1))))))
 
 ;; H
@@ -343,6 +343,7 @@
 ;; WP_parameter_def
  ;; File "attempt_4.adb", line 22, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.add RNE distance (fp.mul RNE average1 (fp #b0 #b01111111000 #b0100011110101110000101000111101011100001010001111011)))) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE distance (fp.mul RNE average1 (fp #b0 #b01111111000 #b0100011110101110000101000111101011100001010001111011)))) (fp.isNaN (fp.add RNE
   distance (fp.mul RNE average1 (fp #b0 #b01111111000 #b0100011110101110000101000111101011100001010001111011))))))))
 (check-sat)
+(exit)

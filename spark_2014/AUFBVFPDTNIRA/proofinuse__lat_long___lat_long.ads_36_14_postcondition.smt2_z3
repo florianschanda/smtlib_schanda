@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -114,7 +114,7 @@
 (declare-datatypes ()
 ((float_with_approx__ref
  (mk_float_with_approx__ref (float_with_approx__content float_with_approx)))))
-(define-fun float_with_approx__ref___projection ((a float_with_approx__ref)) float_with_approx 
+(define-fun float_with_approx__ref___projection ((a float_with_approx__ref)) float_with_approx
   (float_with_approx__content a))
 
 (define-fun dynamic_invariant ((temp___expr_141 Float32)
@@ -196,7 +196,7 @@
 
 (declare-datatypes ()
 ((longitude__ref (mk_longitude__ref (longitude__content longitude)))))
-(define-fun longitude__ref___projection ((a longitude__ref)) longitude 
+(define-fun longitude__ref___projection ((a longitude__ref)) longitude
   (longitude__content a))
 
 (declare-fun to_rep1 (longitude) Float32)
@@ -226,7 +226,7 @@
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -306,7 +306,7 @@
 
 (declare-datatypes ()
 ((coordinates__ref (mk_coordinates__ref (coordinates__content us_rep)))))
-(define-fun coordinates__ref___projection ((a coordinates__ref)) us_rep 
+(define-fun coordinates__ref___projection ((a coordinates__ref)) us_rep
   (coordinates__content a))
 
 (declare-fun source () us_rep)
@@ -360,8 +360,8 @@
 
 ;; H
   (assert
-  (= lat_long__delta_lat_in_meters__result1 (fp.mul RNE (fp.mul RNE (fp.sub RNE 
-  (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 destination))) 
+  (= lat_long__delta_lat_in_meters__result1 (fp.mul RNE (fp.mul RNE (fp.sub RNE
+  (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 destination)))
   (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source)))) (fp #b0 #b10010101 #b10000100101000110101001)) (fp #b0 #b01111001 #b00011101111101000110101))))
 
 ;; H
@@ -383,3 +383,4 @@
   (= (olt (fp.abs lat_long__delta_lat_in_meters__result4)
      (fp #b0 #b10010111 #b00110001001111000100110)) true)))
 (check-sat)
+(exit)

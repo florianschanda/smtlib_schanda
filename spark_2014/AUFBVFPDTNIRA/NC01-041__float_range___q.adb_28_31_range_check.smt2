@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -129,13 +129,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
   (rotate_left1 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
   (rotate_right1 v (bv2nat n)))))
 
 (declare-fun nth_bv ((_ BitVec 8) (_ BitVec 8)) Bool)
@@ -209,13 +209,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvor (bvshl v (bvurem n (_ bv16 16))) (bvlshr v (bvsub (_ bv16 16) (bvurem n (_ bv16 16))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv16 16))) (bvlshr v (bvsub (_ bv16 16) (bvurem n (_ bv16 16)))))
   (rotate_left2 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvor (bvlshr v (bvurem n (_ bv16 16))) (bvshl v (bvsub (_ bv16 16) (bvurem n (_ bv16 16))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv16 16))) (bvshl v (bvsub (_ bv16 16) (bvurem n (_ bv16 16)))))
   (rotate_right2 v (bv2nat n)))))
 
 (declare-fun nth_bv1 ((_ BitVec 16) (_ BitVec 16)) Bool)
@@ -290,13 +290,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvor (bvshl v (bvurem n (_ bv32 32))) (bvlshr v (bvsub (_ bv32 32) (bvurem n (_ bv32 32))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv32 32))) (bvlshr v (bvsub (_ bv32 32) (bvurem n (_ bv32 32)))))
   (rotate_left3 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvor (bvlshr v (bvurem n (_ bv32 32))) (bvshl v (bvsub (_ bv32 32) (bvurem n (_ bv32 32))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv32 32))) (bvshl v (bvsub (_ bv32 32) (bvurem n (_ bv32 32)))))
   (rotate_right3 v (bv2nat n)))))
 
 (declare-fun nth_bv2 ((_ BitVec 32) (_ BitVec 32)) Bool)
@@ -373,13 +373,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 64)) (n (_ BitVec 64)))
-  (= (bvor (bvshl v (bvurem n (_ bv64 64))) (bvlshr v (bvsub (_ bv64 64) (bvurem n (_ bv64 64))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv64 64))) (bvlshr v (bvsub (_ bv64 64) (bvurem n (_ bv64 64)))))
   (rotate_left4 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 64)) (n (_ BitVec 64)))
-  (= (bvor (bvlshr v (bvurem n (_ bv64 64))) (bvshl v (bvsub (_ bv64 64) (bvurem n (_ bv64 64))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv64 64))) (bvshl v (bvsub (_ bv64 64) (bvurem n (_ bv64 64)))))
   (rotate_right4 v (bv2nat n)))))
 
 (declare-fun nth_bv3 ((_ BitVec 64) (_ BitVec 64)) Bool)
@@ -606,7 +606,7 @@
   (assert
   (=> (fp.leq (fp #b0 #b10000010 #b01000000000000000000000) x1)
   (and (= o (fp.sub RNE x1 (fp #b0 #b10000011 #b01000000000000000000000)))
-  (not (or (fp.isInfinite (fp.sub RNE x1 (fp #b0 #b10000011 #b01000000000000000000000))) (fp.isNaN (fp.sub RNE 
+  (not (or (fp.isInfinite (fp.sub RNE x1 (fp #b0 #b10000011 #b01000000000000000000000))) (fp.isNaN (fp.sub RNE
   x1 (fp #b0 #b10000011 #b01000000000000000000000))))))))
 
 ;; H
@@ -625,13 +625,13 @@
 
 ;; H
   (assert
-  (and (fp.leq (fp.neg (fp #b0 #b10000011 #b01000000000000000000000)) 
+  (and (fp.leq (fp.neg (fp #b0 #b10000011 #b01000000000000000000000))
   x2) (fp.leq x2 (fp #b0 #b10000011 #b01000000000000000000000))))
 
 ;; H
   (assert
   (and (= o1 (fp.div RNE x2 scale))
-  (not (or (fp.isInfinite (fp.div RNE x2 scale)) (fp.isNaN (fp.div RNE 
+  (not (or (fp.isInfinite (fp.div RNE x2 scale)) (fp.isNaN (fp.div RNE
   x2 scale))))))
 
 ;; H
@@ -652,3 +652,4 @@
  ;; File "q.ads", line 11, characters 0-0
   (not (in_range3 x3)))
 (check-sat)
+(exit)

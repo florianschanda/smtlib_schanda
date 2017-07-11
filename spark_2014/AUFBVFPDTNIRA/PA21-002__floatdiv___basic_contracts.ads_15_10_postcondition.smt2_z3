@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -177,7 +177,7 @@
 
 (declare-datatypes ()
 ((pos_float__ref (mk_pos_float__ref (pos_float__content pos_float)))))
-(define-fun pos_float__ref___projection ((a pos_float__ref)) pos_float 
+(define-fun pos_float__ref___projection ((a pos_float__ref)) pos_float
   (pos_float__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_135 Float32)
@@ -208,7 +208,7 @@
 (declare-datatypes ()
 ((non_neg_float__ref
  (mk_non_neg_float__ref (non_neg_float__content non_neg_float)))))
-(define-fun non_neg_float__ref___projection ((a non_neg_float__ref)) non_neg_float 
+(define-fun non_neg_float__ref___projection ((a non_neg_float__ref)) non_neg_float
   (non_neg_float__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_141 Float32)
@@ -305,7 +305,7 @@
 ;; H
   (assert
   (and (= o (fp.div RNE num den))
-  (not (or (fp.isInfinite (fp.div RNE num den)) (fp.isNaN (fp.div RNE 
+  (not (or (fp.isInfinite (fp.div RNE num den)) (fp.isNaN (fp.div RNE
   num den))))))
 
 ;; H
@@ -332,3 +332,4 @@
   (not
   (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) basic_contracts__average__result4)))
 (check-sat)
+(exit)

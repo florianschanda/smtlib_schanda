@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun nth ((_ BitVec 16) Int) Bool)
@@ -231,7 +231,7 @@
 
 (declare-datatypes ()
 ((long_float__ref (mk_long_float__ref (long_float__content long_float)))))
-(define-fun long_float__ref___projection ((a long_float__ref)) long_float 
+(define-fun long_float__ref___projection ((a long_float__ref)) long_float
   (long_float__content a))
 
 (define-fun dynamic_invariant ((temp___expr_57 Float64)
@@ -259,7 +259,7 @@
 (declare-datatypes ()
 ((tinteger_32B__ref
  (mk_tinteger_32B__ref (tinteger_32B__content tinteger_32B)))))
-(define-fun tinteger_32B__ref___projection ((a tinteger_32B__ref)) tinteger_32B 
+(define-fun tinteger_32B__ref___projection ((a tinteger_32B__ref)) tinteger_32B
   (tinteger_32B__content a))
 
 (declare-sort integer_32 0)
@@ -279,7 +279,7 @@
 
 (declare-datatypes ()
 ((integer_32__ref (mk_integer_32__ref (integer_32__content integer_32)))))
-(define-fun integer_32__ref_2__projection ((a integer_32__ref)) integer_32 
+(define-fun integer_32__ref_2__projection ((a integer_32__ref)) integer_32
   (integer_32__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_147 Int)
@@ -305,7 +305,7 @@
 
 (declare-datatypes ()
 ((unsigned_16__ref (mk_unsigned_16__ref (unsigned_16__content unsigned_16)))))
-(define-fun unsigned_16__ref___projection ((a unsigned_16__ref)) unsigned_16 
+(define-fun unsigned_16__ref___projection ((a unsigned_16__ref)) unsigned_16
   (unsigned_16__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_165 (_ BitVec 16))
@@ -778,7 +778,7 @@
 
 ;; H
   (assert
-  (not (or (fp.isInfinite old_estimatedgroundvelocity_memory) (fp.isNaN 
+  (not (or (fp.isInfinite old_estimatedgroundvelocity_memory) (fp.isNaN
   old_estimatedgroundvelocity_memory))))
 
 ;; H
@@ -806,7 +806,7 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite old_estimatedgroundvelocity_out1) (fp.isNaN 
+  (not (or (fp.isInfinite old_estimatedgroundvelocity_out1) (fp.isNaN
   old_estimatedgroundvelocity_out1)))))
 
 ;; H
@@ -964,14 +964,14 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite (t__content1 elapsed_time_h_out1)) (fp.isNaN 
+  (not (or (fp.isInfinite (t__content1 elapsed_time_h_out1)) (fp.isNaN
   (t__content1 elapsed_time_h_out1))))))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite (t__content1 avoid_div_by_zero_out1)) (fp.isNaN 
+  (not (or (fp.isInfinite (t__content1 avoid_div_by_zero_out1)) (fp.isNaN
   (t__content1 avoid_div_by_zero_out1))))))
 
 ;; H
@@ -985,7 +985,7 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite (t__content1 old_output_if_new_invalid_out1)) (fp.isNaN 
+  (not (or (fp.isInfinite (t__content1 old_output_if_new_invalid_out1)) (fp.isNaN
   (t__content1 old_output_if_new_invalid_out1))))))
 
 ;; H
@@ -1093,7 +1093,7 @@
 
 ;; H
   (assert
-  (= (let ((subject to_int32_left_2_out1)) to_int32_left_2_out11) (bv2int 
+  (= (let ((subject to_int32_left_2_out1)) to_int32_left_2_out11) (bv2int
   millisecs_out11)))
 
 ;; H
@@ -1101,7 +1101,7 @@
 
 ;; H
   (assert
-  (= (let ((subject to_int32_right_out1)) to_int32_right_out11) (bv2int 
+  (= (let ((subject to_int32_right_out1)) to_int32_right_out11) (bv2int
   old_ngrotations_out11)))
 
 ;; H
@@ -1109,7 +1109,7 @@
 
 ;; H
   (assert
-  (= (let ((subject to_int32_right_1_out1)) to_int32_right_1_out11) (bv2int 
+  (= (let ((subject to_int32_right_1_out1)) to_int32_right_1_out11) (bv2int
   old_ngclicktime_out11)))
 
 ;; H
@@ -1117,7 +1117,7 @@
 
 ;; H
   (assert
-  (= (let ((subject to_int32_right_2_out1)) to_int32_right_2_out11) (bv2int 
+  (= (let ((subject to_int32_right_2_out1)) to_int32_right_2_out11) (bv2int
   old_ngclicktime_out11)))
 
 ;; H
@@ -1125,7 +1125,7 @@
 
 ;; H
   (assert
-  (= (let ((subject data_type_conversion1_out1)) data_type_conversion1_out11) (bv2int 
+  (= (let ((subject data_type_conversion1_out1)) data_type_conversion1_out11) (bv2int
   millisecs_out11)))
 
 ;; H
@@ -1133,7 +1133,7 @@
 
 ;; H
   (assert
-  (= (let ((subject data_type_conversion_out1)) data_type_conversion_out11) (bv2int 
+  (= (let ((subject data_type_conversion_out1)) data_type_conversion_out11) (bv2int
   old_ngclicktime_out11)))
 
 ;; H
@@ -1141,7 +1141,7 @@
 
 ;; H
   (assert
-  (= (let ((subject sum1_2_out1)) sum1_2_out11) (bvsub validity_period_out11 
+  (= (let ((subject sum1_2_out1)) sum1_2_out11) (bvsub validity_period_out11
   update_period_os_interrupt_out11)))
 
 (assert
@@ -1150,3 +1150,4 @@
   (not (in_range2
   (- (let ((subject to_int32_right_out1)) to_int32_right_out11) to_int32_left_out11))))
 (check-sat)
+(exit)

@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -372,7 +372,7 @@
 ;; H
   (assert
   (and (= o (fp.sub RNE a11 t21))
-  (not (or (fp.isInfinite (fp.sub RNE a11 t21)) (fp.isNaN (fp.sub RNE 
+  (not (or (fp.isInfinite (fp.sub RNE a11 t21)) (fp.isNaN (fp.sub RNE
   a11 t21))))))
 
 ;; H
@@ -387,7 +387,7 @@
 ;; H
   (assert
   (and (= o1 (fp.add RNE a21 t31))
-  (not (or (fp.isInfinite (fp.add RNE a21 t31)) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE a21 t31)) (fp.isNaN (fp.add RNE
   a21 t31))))))
 
 ;; H
@@ -402,7 +402,7 @@
 ;; H
   (assert
   (and (= o2 (fp.sub RNE a31 t41))
-  (not (or (fp.isInfinite (fp.sub RNE a31 t41)) (fp.isNaN (fp.sub RNE 
+  (not (or (fp.isInfinite (fp.sub RNE a31 t41)) (fp.isNaN (fp.sub RNE
   a31 t41))))))
 
 ;; H
@@ -417,7 +417,7 @@
 ;; H
   (assert
   (and (= o3 (fp.add RNE a41 t51))
-  (not (or (fp.isInfinite (fp.add RNE a41 t51)) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE a41 t51)) (fp.isNaN (fp.add RNE
   a41 t51))))))
 
 ;; H
@@ -432,7 +432,7 @@
 ;; H
   (assert
   (and (= o4 (fp.sub RNE a51 t61))
-  (not (or (fp.isInfinite (fp.sub RNE a51 t61)) (fp.isNaN (fp.sub RNE 
+  (not (or (fp.isInfinite (fp.sub RNE a51 t61)) (fp.isNaN (fp.sub RNE
   a51 t61))))))
 
 ;; H
@@ -448,6 +448,7 @@
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.add RNE a61 t71)) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE a61 t71)) (fp.isNaN (fp.add RNE
   a61 t71))))))
 (check-sat)
+(exit)

@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -122,7 +122,7 @@
 
 (declare-datatypes ()
 ((tfloat64B__ref (mk_tfloat64B__ref (tfloat64B__content tfloat64B)))))
-(define-fun tfloat64B__ref___projection ((a tfloat64B__ref)) tfloat64B 
+(define-fun tfloat64B__ref___projection ((a tfloat64B__ref)) tfloat64B
   (tfloat64B__content a))
 
 (declare-sort inv_t 0)
@@ -173,7 +173,7 @@
 
 (declare-datatypes ()
 ((safe_unit_t__ref (mk_safe_unit_t__ref (safe_unit_t__content safe_unit_t)))))
-(define-fun safe_unit_t__ref___projection ((a safe_unit_t__ref)) safe_unit_t 
+(define-fun safe_unit_t__ref___projection ((a safe_unit_t__ref)) safe_unit_t
   (safe_unit_t__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_153 Float64)
@@ -189,7 +189,7 @@
                                                    true false) (ite (fp.leq temp___expr_153 (fp #b0 #b01111110110 #b0100011110101110000101000111101011100001010001111011))
                                                                true false))) true)))))
 
-(define-fun dynamic_predicate ((temp___157 Float64)) Bool (= (not (and 
+(define-fun dynamic_predicate ((temp___157 Float64)) Bool (= (not (and
   (ite (fp.leq (fp.neg (fp #b0 #b01111110110 #b0100011110101110000101000111101011100001010001111011)) temp___157)
   true false) (ite (fp.leq temp___157 (fp #b0 #b01111110110 #b0100011110101110000101000111101011100001010001111011))
               true false))) true))
@@ -221,7 +221,7 @@
 ;; H
   (assert
   (=>
-  (fp.leq (fp.neg (fp #b0 #b01111110110 #b0100011110101110000101000111101011100001010001111011)) 
+  (fp.leq (fp.neg (fp #b0 #b01111110110 #b0100011110101110000101000111101011100001010001111011))
   x)
   (not
   (fp.leq x (fp #b0 #b01111110110 #b0100011110101110000101000111101011100001010001111011)))))
@@ -230,7 +230,8 @@
 ;; WP_parameter_def
  ;; File "foo.adb", line 13, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000) 
-  x)) (fp.isNaN (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000) 
+  (not (or (fp.isInfinite (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
+  x)) (fp.isNaN (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
   x))))))
 (check-sat)
+(exit)

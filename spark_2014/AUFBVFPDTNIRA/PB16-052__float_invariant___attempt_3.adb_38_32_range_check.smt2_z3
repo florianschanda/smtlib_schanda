@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -121,7 +121,7 @@
 
 (declare-datatypes ()
 ((tfloat64B__ref (mk_tfloat64B__ref (tfloat64B__content tfloat64B)))))
-(define-fun tfloat64B__ref___projection ((a tfloat64B__ref)) tfloat64B 
+(define-fun tfloat64B__ref___projection ((a tfloat64B__ref)) tfloat64B
   (tfloat64B__content a))
 
 (declare-sort float64 0)
@@ -499,17 +499,17 @@
   (assert
   (and
   (and
-  (= (fp.mul RNE (fp.mul RNE factor (fp #b0 #b10000000000 #b1101101100000010000011000100100110111010010111100011)) (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001)) 
+  (= (fp.mul RNE (fp.mul RNE factor (fp #b0 #b10000000000 #b1101101100000010000011000100100110111010010111100011)) (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001))
   delta_speed)
   (and (not (or (fp.isInfinite delta_speed) (fp.isNaN delta_speed)))
   (and
   (and
   (and (= o (fp.add RNE old_speed delta_speed))
-  (not (or (fp.isInfinite (fp.add RNE old_speed delta_speed)) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE old_speed delta_speed)) (fp.isNaN (fp.add RNE
   old_speed delta_speed))))) (and (= result5 new_speed4) (= new_speed1 o)))
   (and
   (and
-  (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) 
+  (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
   delta_speed)
   (fp.leq delta_speed (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
   (and (= (in_bounds old_speed) true)
@@ -519,43 +519,43 @@
   (fp.leq new_speed1 (fp.add RNE old_speed (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
   (and (fp.leq old_speed (high_bound n))
   (and
-  (fp.leq (fp.add RNE old_speed (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp.add RNE 
+  (fp.leq (fp.add RNE old_speed (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp.add RNE
   (high_bound n) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
   (and
   (fp.leq new_speed1 (fp.add RNE (high_bound n) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
   (and
   (and
-  (= (fp.mul RNE (of_int RNE n) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) 
+  (= (fp.mul RNE (of_int RNE n) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))
   fnt65)
   (and (not (or (fp.isInfinite fnt65) (fp.isNaN fnt65)))
   (and
-  (= (fp.mul RNE (of_int RNE (+ n 1)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) 
+  (= (fp.mul RNE (of_int RNE (+ n 1)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))
   fnp1t65)
   (and (not (or (fp.isInfinite fnp1t65) (fp.isNaN fnp1t65)))
   (and (<= (+ (* n 65) 1) (* (+ n 1) 65))
   (and (fp.leq (of_int RNE (+ (* n 65) 1)) (of_int RNE (* (+ n 1) 65)))
   (and
-  (fp.eq (fp.add RNE fnt65 (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) 
+  (fp.eq (fp.add RNE fnt65 (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
   (of_int RNE (+ (* n 65) 1)))
   (and (fp.eq fnp1t65 (of_int RNE (* (+ n 1) 65)))
-  (fp.leq (fp.add RNE fnt65 (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) 
+  (fp.leq (fp.add RNE fnt65 (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
   fnp1t65)))))))))
   (and
-  (fp.leq (fp.add RNE (high_bound n) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) 
+  (fp.leq (fp.add RNE (high_bound n) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
   (high_bound (+ n 1)))
   (and (fp.leq new_speed1 (high_bound (+ n 1)))
   (and
-  (fp.leq (fp.sub RNE old_speed (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) 
+  (fp.leq (fp.sub RNE old_speed (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
   new_speed1)
   (and (fp.leq (low_bound n) old_speed)
   (and
-  (fp.leq (fp.sub RNE (low_bound n) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp.sub RNE 
+  (fp.leq (fp.sub RNE (low_bound n) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp.sub RNE
   old_speed (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
   (and
-  (fp.leq (fp.sub RNE (low_bound n) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) 
+  (fp.leq (fp.sub RNE (low_bound n) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
   new_speed1)
   (and
-  (fp.leq (fp.mul RNE (of_int RNE (+ n 1)) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))) (fp.sub RNE (fp.mul RNE 
+  (fp.leq (fp.mul RNE (of_int RNE (+ n 1)) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))) (fp.sub RNE (fp.mul RNE
   (of_int RNE n) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
   (and
   (fp.leq (low_bound (+ n 1)) (fp.sub RNE (low_bound n) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
@@ -564,14 +564,14 @@
   (and
   (and
   (and (= o45 (fp.add RNE old_speed new_speed1))
-  (not (or (fp.isInfinite (fp.add RNE old_speed new_speed1)) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE old_speed new_speed1)) (fp.isNaN (fp.add RNE
   old_speed new_speed1)))))
   (= o46 (fp.div RNE o45 (fp #b0 #b10000000000 #b0000000000000000000000000000000000000000000000000000))))
   (and (= result4 average4) (= average1 o46)))
   (and
   (and
   (= o47 (fp.add RNE distance (fp.mul RNE average1 (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001))))
-  (not (or (fp.isInfinite (fp.add RNE distance (fp.mul RNE average1 (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001)))) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE distance (fp.mul RNE average1 (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001)))) (fp.isNaN (fp.add RNE
   distance (fp.mul RNE average1 (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001)))))))
   (and (= result3 distance4) (= distance1 o47)))))))))))))))))))))))))
   (and
@@ -585,3 +585,4 @@
  ;; File "attempt_3.adb", line 25, characters 0-0
   (not (in_range3 (+ n 1))))
 (check-sat)
+(exit)

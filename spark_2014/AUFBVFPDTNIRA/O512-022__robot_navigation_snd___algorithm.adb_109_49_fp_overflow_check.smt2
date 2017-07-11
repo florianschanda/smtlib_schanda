@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -163,7 +163,7 @@
 
 (declare-datatypes ()
 ((character__ref (mk_character__ref (character__content character)))))
-(define-fun character__ref___projection ((a character__ref)) character 
+(define-fun character__ref___projection ((a character__ref)) character
   (character__content a))
 
 (declare-fun to_rep (character) Int)
@@ -201,7 +201,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int character) Int Int (Array Int character) Int
@@ -216,7 +216,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (character Int) (Array Int character))
@@ -440,7 +440,7 @@
 (declare-datatypes ()
 ((nonnegative_float__ref
  (mk_nonnegative_float__ref (nonnegative_float__content nonnegative_float)))))
-(define-fun nonnegative_float__ref___projection ((a nonnegative_float__ref)) nonnegative_float 
+(define-fun nonnegative_float__ref___projection ((a nonnegative_float__ref)) nonnegative_float
   (nonnegative_float__content a))
 
 (declare-fun to_rep2 (nonnegative_float) Float32)
@@ -541,7 +541,7 @@
 (declare-datatypes ()
 ((normalized2pi__ref
  (mk_normalized2pi__ref (normalized2pi__content normalized2pi)))))
-(define-fun normalized2pi__ref___projection ((a normalized2pi__ref)) normalized2pi 
+(define-fun normalized2pi__ref___projection ((a normalized2pi__ref)) normalized2pi
   (normalized2pi__content a))
 
 (declare-fun to_rep3 (normalized2pi) Float32)
@@ -570,7 +570,7 @@
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -650,13 +650,13 @@
 ((us_split_fields2
  (mk___split_fields1
  (rec__algorithm__laser_scan_data__first nonnegative_float)(rec__algorithm__laser_scan_data__second us_rep)))))
-(define-fun us_split_fields_second__projection ((a us_split_fields2)) us_rep 
+(define-fun us_split_fields_second__projection ((a us_split_fields2)) us_rep
   (rec__algorithm__laser_scan_data__second a))
 
 (declare-datatypes ()
 ((us_split_fields__ref1
  (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_11__projection ((a us_split_fields__ref1)) us_split_fields2 
+(define-fun us_split_fields__ref_11__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ()
@@ -737,7 +737,7 @@
 (declare-datatypes ()
 ((laser_scan_data__ref
  (mk_laser_scan_data__ref (laser_scan_data__content us_rep1)))))
-(define-fun laser_scan_data__ref___projection ((a laser_scan_data__ref)) us_rep1 
+(define-fun laser_scan_data__ref___projection ((a laser_scan_data__ref)) us_rep1
   (laser_scan_data__content a))
 
 (declare-datatypes ()
@@ -756,7 +756,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide1 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide1 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide1 a old_first new_first) i)) ))))))
 
 (declare-fun concat2 ((Array Int us_rep1) Int Int (Array Int us_rep1) Int
@@ -771,7 +771,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat2 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat2 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat2 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat2 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton2 (us_rep1 Int) (Array Int us_rep1))
@@ -1112,10 +1112,10 @@
   (= algorithm__isfilterclear__B_2__deltaangle__assume (aldiff
                                                        (rec__algorithm__laser_scan_data__second
                                                        (us_split_fields3
-                                                       (select scans 
+                                                       (select scans
                                                        i2))) testbearing))
   (and
-  (not (or (fp.isInfinite algorithm__isfilterclear__B_2__deltaangle__assume) (fp.isNaN 
+  (not (or (fp.isInfinite algorithm__isfilterclear__B_2__deltaangle__assume) (fp.isNaN
   algorithm__isfilterclear__B_2__deltaangle__assume)))
   (and
   (fp.lt (fp.neg (fp #b0 #b10000000 #b10010010000111111011011)) algorithm__isfilterclear__B_2__deltaangle__assume)
@@ -1167,7 +1167,7 @@
   (and (= o1 (cos2 deltaangle))
   (and (not (or (fp.isInfinite o1) (fp.isNaN o1)))
   (and
-  (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) 
+  (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))
   o1) (fp.leq o1 (fp #b0 #b01111111 #b00000000000000000000000)))
   (=> (fp.eq deltaangle (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq o1 (fp #b0 #b01111111 #b00000000000000000000000)))))))
@@ -1180,3 +1180,4 @@
  ;; File "algorithm.ads", line 68, characters 0-0
   (not (not (or (fp.isInfinite o2) (fp.isNaN o2)))))
 (check-sat)
+(exit)

@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort priority 0)
@@ -75,13 +75,13 @@
 
 (declare-datatypes ()
 ((us_split_fields (mk___split_fields (rec__support__protT__summary natural)))))
-(define-fun us_split_fields_Summary__projection ((a us_split_fields)) natural 
+(define-fun us_split_fields_Summary__projection ((a us_split_fields)) natural
   (rec__support__protT__summary a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -190,3 +190,4 @@
   (and (and (= o prot__split_fields) (= us_self__compl o))
   (and (= result prot__split_fields) (= prot__split_fields1 us_self__compl1))))))
 (check-sat)
+(exit)

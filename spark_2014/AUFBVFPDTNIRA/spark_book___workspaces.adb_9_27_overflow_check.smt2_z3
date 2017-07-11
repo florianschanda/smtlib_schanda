@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun div1 (Int Int) Int)
@@ -238,7 +238,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int natural) Int Int (Array Int natural) Int
@@ -253,7 +253,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (natural Int) (Array Int natural))
@@ -409,7 +409,7 @@
 (declare-datatypes ()
 ((workspace_type__ref
  (mk_workspace_type__ref (workspace_type__content us_t)))))
-(define-fun workspace_type__ref___projection ((a workspace_type__ref)) us_t 
+(define-fun workspace_type__ref___projection ((a workspace_type__ref)) us_t
   (workspace_type__content a))
 
 (declare-fun size () Int)
@@ -432,7 +432,7 @@
 (declare-datatypes ()
 ((tTworkspaceSP1__ref
  (mk_tTworkspaceSP1__ref (tTworkspaceSP1__content integer)))))
-(define-fun tTworkspaceSP1__ref___projection ((a tTworkspaceSP1__ref)) integer 
+(define-fun tTworkspaceSP1__ref___projection ((a tTworkspaceSP1__ref)) integer
   (tTworkspaceSP1__content a))
 
 (declare-sort t1 0)
@@ -514,7 +514,7 @@
 
 (declare-datatypes ()
 ((tworkspaceS__ref (mk_tworkspaceS__ref (tworkspaceS__content us_t1)))))
-(define-fun tworkspaceS__ref___projection ((a tworkspaceS__ref)) us_t1 
+(define-fun tworkspaceS__ref___projection ((a tworkspaceS__ref)) us_t1
   (tworkspaceS__content a))
 
 (define-fun dynamic_property3 ((first_int Int) (last_int Int)
@@ -724,7 +724,7 @@
   (= (to_rep1
      (last4
      (rt2
-     (workspaces__generate_workspace__workspace__aggregate_def 0 1 size)))) 
+     (workspaces__generate_workspace__workspace__aggregate_def 0 1 size))))
   size))
 
 ;; H
@@ -743,7 +743,7 @@
 
 ;; H
   (assert
-  (= (mk1 (to_rep1 (first4 temp___1551)) (to_rep1 (last4 temp___1551))) 
+  (= (mk1 (to_rep1 (first4 temp___1551)) (to_rep1 (last4 temp___1551)))
   workspaces__generate_workspace__workspace__assume1))
 
 ;; H
@@ -812,3 +812,4 @@
  ;; File "workspaces.ads", line 3, characters 0-0
   (not (in_range1 (+ size 1))))
 (check-sat)
+(exit)

@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -208,7 +208,7 @@
 (declare-datatypes ()
 ((t_acc_lifted__ref
  (mk_t_acc_lifted__ref (t_acc_lifted__content t_acc_lifted)))))
-(define-fun t_acc_lifted__ref___projection ((a t_acc_lifted__ref)) t_acc_lifted 
+(define-fun t_acc_lifted__ref___projection ((a t_acc_lifted__ref)) t_acc_lifted
   (t_acc_lifted__content a))
 
 (define-fun dynamic_invariant3 ((temp___expr_158 Float32)
@@ -239,7 +239,7 @@
 (declare-datatypes ()
 ((positive_float__ref
  (mk_positive_float__ref (positive_float__content positive_float)))))
-(define-fun positive_float__ref___projection ((a positive_float__ref)) positive_float 
+(define-fun positive_float__ref___projection ((a positive_float__ref)) positive_float
   (positive_float__content a))
 
 (define-fun dynamic_invariant4 ((temp___expr_1294 Float32)
@@ -270,7 +270,7 @@
 (declare-datatypes ()
 ((t_delta_time__ref
  (mk_t_delta_time__ref (t_delta_time__content t_delta_time)))))
-(define-fun t_delta_time__ref___projection ((a t_delta_time__ref)) t_delta_time 
+(define-fun t_delta_time__ref___projection ((a t_delta_time__ref)) t_delta_time
   (t_delta_time__content a))
 
 (define-fun dynamic_invariant5 ((temp___expr_1300 Float32)
@@ -331,7 +331,7 @@
 (declare-datatypes ()
 ((t_quaternion__ref
  (mk_t_quaternion__ref (t_quaternion__content t_quaternion)))))
-(define-fun t_quaternion__ref___projection ((a t_quaternion__ref)) t_quaternion 
+(define-fun t_quaternion__ref___projection ((a t_quaternion__ref)) t_quaternion
   (t_quaternion__content a))
 
 (define-fun dynamic_invariant7 ((temp___expr_1336 Float32)
@@ -1242,7 +1242,7 @@
 
 ;; H
   (assert
-  (= half_vz1 (fp.add RNE (fp.sub RNE (fp.mul RNE q0 q0) (fp #b0 #b01111110 #b00000000000000000000000)) (fp.mul RNE 
+  (= half_vz1 (fp.add RNE (fp.sub RNE (fp.mul RNE q0 q0) (fp #b0 #b01111110 #b00000000000000000000000)) (fp.mul RNE
   q3 q3))))
 
 ;; H
@@ -1330,7 +1330,7 @@
   (assert
   (and
   (= o (inv_sqrt
-       (fp.add RNE (fp.add RNE (fp.mul RNE c6b c6b) (fp.mul RNE c7b c7b)) (fp.mul RNE 
+       (fp.add RNE (fp.add RNE (fp.mul RNE c6b c6b) (fp.mul RNE c7b c7b)) (fp.mul RNE
        c8b c8b))))
   (and (not (or (fp.isInfinite o) (fp.isNaN o)))
   (and (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) o)
@@ -1346,6 +1346,7 @@
 ;; WP_parameter_def
  ;; File "i-cexten.ads", line 59, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.mul RNE c6b recip_norm2)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE c6b recip_norm2)) (fp.isNaN (fp.mul RNE
   c6b recip_norm2))))))
 (check-sat)
+(exit)

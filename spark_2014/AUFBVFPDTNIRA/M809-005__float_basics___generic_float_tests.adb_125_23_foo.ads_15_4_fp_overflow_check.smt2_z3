@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -109,7 +109,7 @@
 
 (declare-datatypes ()
 ((long_float__ref (mk_long_float__ref (long_float__content long_float)))))
-(define-fun long_float__ref___projection ((a long_float__ref)) long_float 
+(define-fun long_float__ref___projection ((a long_float__ref)) long_float
   (long_float__content a))
 
 (declare-sort ft 0)
@@ -171,15 +171,15 @@
 
 (declare-fun foo__double_tests__bad_optimisation_1__result5 () Float64)
 
-(define-fun foo__double_tests__bad_optimisation_1__result6 () t__ref 
+(define-fun foo__double_tests__bad_optimisation_1__result6 () t__ref
   (mk_t__ref foo__double_tests__bad_optimisation_1__result4))
 
-(define-fun foo__double_tests__bad_optimisation_1__result7 () t__ref 
+(define-fun foo__double_tests__bad_optimisation_1__result7 () t__ref
   (mk_t__ref foo__double_tests__bad_optimisation_1__result2))
 
 (define-fun result1 () t__ref (mk_t__ref result))
 
-(define-fun foo__double_tests__bad_optimisation_1__result8 () t__ref 
+(define-fun foo__double_tests__bad_optimisation_1__result8 () t__ref
   (mk_t__ref foo__double_tests__bad_optimisation_1__result))
 
 ;; H
@@ -196,7 +196,8 @@
 ;; WP_parameter_def
  ;; File "generic_float_tests.ads", line 2, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000) 
-  b)) (fp.isNaN (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000) 
+  (not (or (fp.isInfinite (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
+  b)) (fp.isNaN (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
   b))))))
 (check-sat)
+(exit)

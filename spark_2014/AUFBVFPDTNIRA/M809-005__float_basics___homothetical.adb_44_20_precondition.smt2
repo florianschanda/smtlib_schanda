@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -159,7 +159,7 @@
 
 (declare-datatypes ()
 ((joint_index__ref (mk_joint_index__ref (joint_index__content joint_index)))))
-(define-fun joint_index__ref___projection ((a joint_index__ref)) joint_index 
+(define-fun joint_index__ref___projection ((a joint_index__ref)) joint_index
   (joint_index__content a))
 
 (declare-datatypes ()
@@ -178,7 +178,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int float) Int Int (Array Int float) Int
@@ -193,7 +193,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (float Int) (Array Int float))
@@ -314,7 +314,7 @@
   (assert
   (forall ((temp___160 Float32))
   (forall ((temp___161 Int))
-  (= (select (homothetical__homothetical__lambda__aggregate_def temp___160) temp___161) 
+  (= (select (homothetical__homothetical__lambda__aggregate_def temp___160) temp___161)
   (of_rep temp___160)))))
 
 (declare-fun homothetical__homothetical__upsilon__aggregate_def (Float32) (Array Int float))
@@ -323,7 +323,7 @@
   (assert
   (forall ((temp___163 Float32))
   (forall ((temp___164 Int))
-  (= (select (homothetical__homothetical__upsilon__aggregate_def temp___163) temp___164) 
+  (= (select (homothetical__homothetical__upsilon__aggregate_def temp___163) temp___164)
   (of_rep temp___163)))))
 
 (declare-fun homothetical__homothetical__kvp__aggregate_def (Float32) (Array Int float))
@@ -332,7 +332,7 @@
   (assert
   (forall ((temp___166 Float32))
   (forall ((temp___167 Int))
-  (= (select (homothetical__homothetical__kvp__aggregate_def temp___166) temp___167) 
+  (= (select (homothetical__homothetical__kvp__aggregate_def temp___166) temp___167)
   (of_rep temp___166)))))
 
 (declare-fun temp___173 (Float32) (Array Int float))
@@ -454,3 +454,4 @@
   (not
   (not (fp.eq (to_rep (select d i2)) (fp #b0 #b00000000 #b00000000000000000000000)))))
 (check-sat)
+(exit)

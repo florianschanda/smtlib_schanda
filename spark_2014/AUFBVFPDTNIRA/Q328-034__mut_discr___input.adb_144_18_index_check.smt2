@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
@@ -89,7 +89,7 @@
 
 (declare-datatypes ()
 ((character__ref (mk_character__ref (character__content character)))))
-(define-fun character__ref___projection ((a character__ref)) character 
+(define-fun character__ref___projection ((a character__ref)) character
   (character__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_63 Int) (temp___is_init_60 Bool)
@@ -133,7 +133,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int character) Int Int (Array Int character) Int
@@ -148,7 +148,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (character Int) (Array Int character))
@@ -251,7 +251,7 @@
 
 (declare-datatypes ()
 ((tTlineSP1__ref (mk_tTlineSP1__ref (tTlineSP1__content tTlineSP1)))))
-(define-fun tTlineSP1__ref___projection ((a tTlineSP1__ref)) tTlineSP1 
+(define-fun tTlineSP1__ref___projection ((a tTlineSP1__ref)) tTlineSP1
   (tTlineSP1__content a))
 
 (declare-sort tfirst_charS 0)
@@ -271,7 +271,7 @@
 (declare-datatypes ()
 ((tfirst_charS__ref
  (mk_tfirst_charS__ref (tfirst_charS__content tfirst_charS)))))
-(define-fun tfirst_charS__ref___projection ((a tfirst_charS__ref)) tfirst_charS 
+(define-fun tfirst_charS__ref___projection ((a tfirst_charS__ref)) tfirst_charS
   (tfirst_charS__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_583 Int)
@@ -297,7 +297,7 @@
 
 (declare-datatypes ()
 ((tlast_charS__ref (mk_tlast_charS__ref (tlast_charS__content tlast_charS)))))
-(define-fun tlast_charS__ref___projection ((a tlast_charS__ref)) tlast_charS 
+(define-fun tlast_charS__ref___projection ((a tlast_charS__ref)) tlast_charS
   (tlast_charS__content a))
 
 (define-fun dynamic_invariant3 ((temp___expr_589 Int)
@@ -523,3 +523,4 @@
  ;; File "system.ads", line 1, characters 0-0
   (not (<= 1 first_char6)))
 (check-sat)
+(exit)

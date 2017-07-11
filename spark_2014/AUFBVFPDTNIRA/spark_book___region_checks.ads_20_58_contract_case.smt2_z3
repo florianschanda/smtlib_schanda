@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
@@ -212,23 +212,23 @@
 ;; H
   (assert
   (=>
-  (ite (= (ite (= (>= x 0) true) (>= y 0) false) true) (ite (= (ite (= (<= 
-                                                               x 1) true) (<= 
+  (ite (= (ite (= (>= x 0) true) (>= y 0) false) true) (ite (= (ite (= (<=
+                                                               x 1) true) (<=
                                                                y 1) false) false) true false) false)
   (= region_checks__in_unit_square__result16 0)))
 
 ;; H
   (assert
   (=>
-  (ite (= (ite (= (< x 0) true) (>= y 0) false) true) (ite (= (ite (= (>= 
-                                                              x (- 1)) true) (<= 
+  (ite (= (ite (= (< x 0) true) (>= y 0) false) true) (ite (= (ite (= (>=
+                                                              x (- 1)) true) (<=
                                                               y 1) false) false) true false) false)
   (= region_checks__in_unit_square__result16 (- 1))))
 
 ;; H
   (assert
-  (ite (= (ite (= (< x 0) true) (< y 0) false) true) (ite (= (ite (= (>= 
-                                                             x (- 1)) true) (>= 
+  (ite (= (ite (= (< x 0) true) (< y 0) false) true) (ite (= (ite (= (>=
+                                                             x (- 1)) true) (>=
                                                              y (- 1)) false) false) true false) true))
 
 ;; H
@@ -239,3 +239,4 @@
  ;; File "region_checks.ads", line 4, characters 0-0
   (not (= region_checks__in_unit_square__result16 0)))
 (check-sat)
+(exit)

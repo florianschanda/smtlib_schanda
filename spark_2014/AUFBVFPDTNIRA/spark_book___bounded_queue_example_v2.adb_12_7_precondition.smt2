@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
@@ -102,7 +102,7 @@
 
 (declare-datatypes ()
 ((character__ref (mk_character__ref (character__content character)))))
-(define-fun character__ref___projection ((a character__ref)) character 
+(define-fun character__ref___projection ((a character__ref)) character
   (character__content a))
 
 (declare-fun to_rep (character) Int)
@@ -140,7 +140,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int character) Int Int (Array Int character) Int
@@ -155,7 +155,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (character Int) (Array Int character))
@@ -418,7 +418,7 @@
 (declare-datatypes ()
 ((element_type__ref
  (mk_element_type__ref (element_type__content element_type)))))
-(define-fun element_type__ref___projection ((a element_type__ref)) element_type 
+(define-fun element_type__ref___projection ((a element_type__ref)) element_type
   (element_type__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_156 Int)
@@ -469,7 +469,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide1 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide1 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide1 a old_first new_first) i)) ))))))
 
 (declare-fun concat2 ((Array Int element_type) Int Int
@@ -484,7 +484,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat2 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat2 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat2 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat2 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton2 (element_type Int) (Array Int element_type))
@@ -663,35 +663,35 @@
 (declare-datatypes ()
 ((us_split_discrs
  (mk___split_discrs (rec__bounded_queue_v2__queue_type__max_size positive)))))
-(define-fun us_split_discrs___projection ((a us_split_discrs)) positive 
+(define-fun us_split_discrs___projection ((a us_split_discrs)) positive
   (rec__bounded_queue_v2__queue_type__max_size a))
 
 (declare-datatypes ()
 ((us_split_discrs__ref
  (mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref)) us_split_discrs 
+(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ()
 ((us_split_fields
  (mk___split_fields
  (rec__bounded_queue_v2__queue_type__count natural)(rec__bounded_queue_v2__queue_type__front positive)(rec__bounded_queue_v2__queue_type__rear positive)(rec__bounded_queue_v2__queue_type__items us_t1)))))
-(define-fun us_split_fields_Count__projection ((a us_split_fields)) natural 
+(define-fun us_split_fields_Count__projection ((a us_split_fields)) natural
   (rec__bounded_queue_v2__queue_type__count a))
 
-(define-fun us_split_fields_Front__projection ((a us_split_fields)) positive 
+(define-fun us_split_fields_Front__projection ((a us_split_fields)) positive
   (rec__bounded_queue_v2__queue_type__front a))
 
-(define-fun us_split_fields_Rear__projection ((a us_split_fields)) positive 
+(define-fun us_split_fields_Rear__projection ((a us_split_fields)) positive
   (rec__bounded_queue_v2__queue_type__rear a))
 
-(define-fun us_split_fields_Items__projection ((a us_split_fields)) us_t1 
+(define-fun us_split_fields_Items__projection ((a us_split_fields)) us_t1
   (rec__bounded_queue_v2__queue_type__items a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -842,7 +842,7 @@
 
 (declare-datatypes ()
 ((queue_type__ref (mk_queue_type__ref (queue_type__content us_rep)))))
-(define-fun queue_type__ref___projection ((a queue_type__ref)) us_rep 
+(define-fun queue_type__ref___projection ((a queue_type__ref)) us_rep
   (queue_type__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_33 Int) (temp___is_init_30 Bool)
@@ -871,7 +871,7 @@
                                          (us_split_fields1 temp___expr_167))) 1)
                                       (= (last3
                                          (rec__bounded_queue_v2__queue_type__items
-                                         (us_split_fields1 temp___expr_167))) 
+                                         (us_split_fields1 temp___expr_167)))
                                       (to_rep3 temp___168))))))
 
 (declare-fun size (us_rep) Int)
@@ -960,22 +960,22 @@
 ((us_split_fields2
  (mk___split_fields1
  (rec__bounded_queue_v2__queue_type__count1 natural)(rec__bounded_queue_v2__queue_type__front1 positive)(rec__bounded_queue_v2__queue_type__rear1 positive)(rec__bounded_queue_v2__queue_type__items1 (Array Int element_type))))))
-(define-fun us_split_fields_Count2__projection ((a us_split_fields2)) natural 
+(define-fun us_split_fields_Count2__projection ((a us_split_fields2)) natural
   (rec__bounded_queue_v2__queue_type__count1 a))
 
-(define-fun us_split_fields_Front2__projection ((a us_split_fields2)) positive 
+(define-fun us_split_fields_Front2__projection ((a us_split_fields2)) positive
   (rec__bounded_queue_v2__queue_type__front1 a))
 
-(define-fun us_split_fields_Rear2__projection ((a us_split_fields2)) positive 
+(define-fun us_split_fields_Rear2__projection ((a us_split_fields2)) positive
   (rec__bounded_queue_v2__queue_type__rear1 a))
 
-(define-fun us_split_fields_Items2__projection ((a us_split_fields2)) (Array Int element_type) 
+(define-fun us_split_fields_Items2__projection ((a us_split_fields2)) (Array Int element_type)
   (rec__bounded_queue_v2__queue_type__items1 a))
 
 (declare-datatypes ()
 ((us_split_fields__ref1
  (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref1)) us_split_fields2 
+(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ()
@@ -1157,7 +1157,7 @@
 
 (declare-datatypes ()
 ((tmy_queueS__ref (mk_tmy_queueS__ref (tmy_queueS__content us_rep1)))))
-(define-fun tmy_queueS__ref___projection ((a tmy_queueS__ref)) us_rep1 
+(define-fun tmy_queueS__ref___projection ((a tmy_queueS__ref)) us_rep1
   (tmy_queueS__content a))
 
 (declare-fun my_queue__split_discrs () us_split_discrs)
@@ -1323,7 +1323,7 @@
 
 (declare-fun count2 () Int)
 
-(define-fun bounded_queue_v2__clear__queue__fields5 () us_split_fields 
+(define-fun bounded_queue_v2__clear__queue__fields5 () us_split_fields
   (mk___split_fields bounded_queue_v2__clear__queue__fields
   bounded_queue_v2__clear__queue__fields1
   bounded_queue_v2__clear__queue__fields2
@@ -1418,3 +1418,4 @@
      (mk___split_fields my_queue__split_fields8 my_queue__split_fields9
      my_queue__split_fields10 (mk___t1 my_queue__split_fields11 (mk1 1 100))))) true))))
 (check-sat)
+(exit)

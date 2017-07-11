@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun nth ((_ BitVec 32) Int) Bool)
@@ -231,7 +231,7 @@
 
 (declare-datatypes ()
 ((tfloat32B__ref (mk_tfloat32B__ref (tfloat32B__content tfloat32B)))))
-(define-fun tfloat32B__ref___projection ((a tfloat32B__ref)) tfloat32B 
+(define-fun tfloat32B__ref___projection ((a tfloat32B__ref)) tfloat32B
   (tfloat32B__content a))
 
 (declare-sort float32 0)
@@ -320,7 +320,7 @@
 ;; H
   (assert
   (and (= o (fp.add RNE state (fp #b0 #b10000010 #b01000000000000000000000)))
-  (not (or (fp.isInfinite (fp.add RNE state (fp #b0 #b10000010 #b01000000000000000000000))) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE state (fp #b0 #b10000010 #b01000000000000000000000))) (fp.isNaN (fp.add RNE
   state (fp #b0 #b10000010 #b01000000000000000000000)))))))
 
 ;; H
@@ -341,3 +341,4 @@
   (not
   (fp.leq state2 (fp.mul RNE ((_ to_fp_unsigned 8 24) RNA (bvadd x ((_ int2bv 32) 1))) (fp #b0 #b10000010 #b01000000000000000000000)))))
 (check-sat)
+(exit)

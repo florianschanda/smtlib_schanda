@@ -34,7 +34,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -166,7 +166,7 @@
 
 (declare-datatypes ()
 ((character__ref (mk_character__ref (character__content character)))))
-(define-fun character__ref___projection ((a character__ref)) character 
+(define-fun character__ref___projection ((a character__ref)) character
   (character__content a))
 
 (declare-fun to_rep (character) Int)
@@ -204,7 +204,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int character) Int Int (Array Int character) Int
@@ -219,7 +219,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (character Int) (Array Int character))
@@ -906,9 +906,9 @@
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true)
-     (= (approx_sin x) (fp.sub RNE (fp.add RNE (fp.sub RNE x (fp.div RNE 
-     (pow3 x) (fp #b0 #b10000001 #b10000000000000000000000))) (fp.div RNE 
-     (pow5 x) (fp #b0 #b10000101 #b11100000000000000000000))) (fp.div RNE 
+     (= (approx_sin x) (fp.sub RNE (fp.add RNE (fp.sub RNE x (fp.div RNE
+     (pow3 x) (fp #b0 #b10000001 #b10000000000000000000000))) (fp.div RNE
+     (pow5 x) (fp #b0 #b10000101 #b11100000000000000000000))) (fp.div RNE
      (pow7 x) (fp #b0 #b10001011 #b00111011000000000000000))))) :pattern (
   (approx_sin x)) )))
 
@@ -922,10 +922,10 @@
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true)
-     (= (approx_cos x) (fp.add RNE (fp.sub RNE (fp.add RNE (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000) (fp.div RNE 
-     (pow21 x) (fp #b0 #b10000000 #b00000000000000000000000))) (fp.div RNE 
-     (pow4 x) (fp #b0 #b10000011 #b10000000000000000000000))) (fp.div RNE 
-     (pow6 x) (fp #b0 #b10001000 #b01101000000000000000000))) (fp.div RNE 
+     (= (approx_cos x) (fp.add RNE (fp.sub RNE (fp.add RNE (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000) (fp.div RNE
+     (pow21 x) (fp #b0 #b10000000 #b00000000000000000000000))) (fp.div RNE
+     (pow4 x) (fp #b0 #b10000011 #b10000000000000000000000))) (fp.div RNE
+     (pow6 x) (fp #b0 #b10001000 #b01101000000000000000000))) (fp.div RNE
      (pow8 x) (fp #b0 #b10001110 #b00111011000000000000000))))) :pattern (
   (approx_cos x)) )))
 
@@ -939,10 +939,10 @@
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true)
-     (= (approx_tan x) (fp.add RNE (fp.add RNE (fp.add RNE (fp.add RNE x (fp.div RNE 
-     (pow3 x) (fp #b0 #b10000000 #b10000000000000000000000))) (fp.div RNE (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
-     (pow5 x)) (fp #b0 #b10000010 #b11100000000000000000000))) (fp.div RNE (fp.mul RNE (fp #b0 #b10000011 #b00010000000000000000000) 
-     (pow7 x)) (fp #b0 #b10000111 #b00111011000000000000000))) (fp.div RNE (fp.mul RNE (fp #b0 #b10000100 #b11110000000000000000000) 
+     (= (approx_tan x) (fp.add RNE (fp.add RNE (fp.add RNE (fp.add RNE x (fp.div RNE
+     (pow3 x) (fp #b0 #b10000000 #b10000000000000000000000))) (fp.div RNE (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
+     (pow5 x)) (fp #b0 #b10000010 #b11100000000000000000000))) (fp.div RNE (fp.mul RNE (fp #b0 #b10000011 #b00010000000000000000000)
+     (pow7 x)) (fp #b0 #b10000111 #b00111011000000000000000))) (fp.div RNE (fp.mul RNE (fp #b0 #b10000100 #b11110000000000000000000)
      (pow9 x)) (fp #b0 #b10001010 #b01100010011000000000000))))) :pattern (
   (approx_tan x)) )))
 
@@ -1375,3 +1375,4 @@
  ;; File "test_trigo.adb", line 5, characters 0-0
   (not (not (= f16 (fp #b0 #b11111110 #b11111111111111111111111)))))
 (check-sat)
+(exit)

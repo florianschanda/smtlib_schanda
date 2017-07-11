@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
@@ -63,7 +63,7 @@
 
 (declare-datatypes ()
 ((etcs_mode_t__ref (mk_etcs_mode_t__ref (etcs_mode_t__content etcs_mode_t)))))
-(define-fun etcs_mode_t__ref___projection ((a etcs_mode_t__ref)) etcs_mode_t 
+(define-fun etcs_mode_t__ref___projection ((a etcs_mode_t__ref)) etcs_mode_t
   (etcs_mode_t__content a))
 
 (define-fun dynamic_invariant ((temp___expr_135 Int)
@@ -90,7 +90,7 @@
 ((ertms_etcs_level_t__ref
  (mk_ertms_etcs_level_t__ref
  (ertms_etcs_level_t__content ertms_etcs_level_t)))))
-(define-fun ertms_etcs_level_t__ref___projection ((a ertms_etcs_level_t__ref)) ertms_etcs_level_t 
+(define-fun ertms_etcs_level_t__ref___projection ((a ertms_etcs_level_t__ref)) ertms_etcs_level_t
   (ertms_etcs_level_t__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_147 Int)
@@ -137,7 +137,7 @@
 
 (declare-datatypes ()
 ((priority_t__ref (mk_priority_t__ref (priority_t__content priority_t)))))
-(define-fun priority_t__ref___projection ((a priority_t__ref)) priority_t 
+(define-fun priority_t__ref___projection ((a priority_t__ref)) priority_t
   (priority_t__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_153 Int)
@@ -379,3 +379,4 @@
  ;; File "section_4_3_2.ads", line 25, characters 0-0
   (not true))
 (check-sat)
+(exit)

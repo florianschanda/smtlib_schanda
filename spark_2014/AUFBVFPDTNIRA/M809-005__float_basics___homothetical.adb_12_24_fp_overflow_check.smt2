@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -165,7 +165,7 @@
 ;; H
   (assert
   (and (= o (fp.mul RNE kv kv))
-  (not (or (fp.isInfinite (fp.mul RNE kv kv)) (fp.isNaN (fp.mul RNE kv 
+  (not (or (fp.isInfinite (fp.mul RNE kv kv)) (fp.isNaN (fp.mul RNE kv
   kv))))))
 
 ;; H
@@ -176,3 +176,4 @@
  ;; File "system.ads", line 1, characters 0-0
   (not (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
 (check-sat)
+(exit)

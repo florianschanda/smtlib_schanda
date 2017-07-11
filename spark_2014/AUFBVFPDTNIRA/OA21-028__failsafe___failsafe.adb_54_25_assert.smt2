@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun nth ((_ BitVec 8) Int) Bool)
@@ -72,13 +72,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
   (rotate_left1 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
   (rotate_right1 v (bv2nat n)))))
 
 (declare-fun nth_bv ((_ BitVec 8) (_ BitVec 8)) Bool)
@@ -213,7 +213,7 @@
 
 (declare-datatypes ()
 ((unsigned_8__ref (mk_unsigned_8__ref (unsigned_8__content unsigned_8)))))
-(define-fun unsigned_8__ref___projection ((a unsigned_8__ref)) unsigned_8 
+(define-fun unsigned_8__ref___projection ((a unsigned_8__ref)) unsigned_8
   (unsigned_8__content a))
 
 (define-fun dynamic_invariant ((temp___expr_160 (_ BitVec 8))
@@ -236,7 +236,7 @@
 ((battery_level_type__ref
  (mk_battery_level_type__ref
  (battery_level_type__content battery_level_type)))))
-(define-fun battery_level_type__ref___projection ((a battery_level_type__ref)) battery_level_type 
+(define-fun battery_level_type__ref___projection ((a battery_level_type__ref)) battery_level_type
   (battery_level_type__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_202 Float32)
@@ -286,7 +286,7 @@
 
 (declare-datatypes ()
 ((time_slot__ref (mk_time_slot__ref (time_slot__content time_slot)))))
-(define-fun time_slot__ref___projection ((a time_slot__ref)) time_slot 
+(define-fun time_slot__ref___projection ((a time_slot__ref)) time_slot
   (time_slot__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_208 (_ BitVec 8))
@@ -314,7 +314,7 @@
   (forall ((old_first (_ BitVec 8)))
   (forall ((new_first (_ BitVec 8)))
   (forall ((i (_ BitVec 8)))
-  (! (= (select (slide a old_first new_first) i) (select a (bvsub i (bvsub new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (bvsub i (bvsub new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array (_ BitVec 8) battery_level_type) (_ BitVec 8)
@@ -332,7 +332,7 @@
      (=> (and (bvule a_first i) (bvule i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (bvugt i a_last)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (bvadd (bvsub i a_last) (bvsub b_first #x01)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (bvadd (bvsub i a_last) (bvsub b_first #x01)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (battery_level_type
@@ -356,7 +356,7 @@
                                     (=>
                                     (and (bvule a__first temp___idx_132)
                                     (bvule temp___idx_132 a__last))
-                                    (= (to_rep (select a temp___idx_132)) 
+                                    (= (to_rep (select a temp___idx_132))
                                     (to_rep
                                     (select b (bvadd (bvsub b__first a__first) temp___idx_132)))))))
                                true false))
@@ -410,7 +410,7 @@
 (declare-datatypes ()
 ((time_slot_length__ref
  (mk_time_slot_length__ref (time_slot_length__content time_slot_length)))))
-(define-fun time_slot_length__ref___projection ((a time_slot_length__ref)) time_slot_length 
+(define-fun time_slot_length__ref___projection ((a time_slot_length__ref)) time_slot_length
   (time_slot_length__content a))
 
 (define-fun dynamic_invariant3 ((temp___expr_214 (_ BitVec 8))
@@ -439,7 +439,7 @@
      (and
      (and (bvult result ((_ int2bv 8) 50))
      (fp.leq (fp #b0 #b01111100 #b10011001100110011001101) (to_rep
-                                                           (select failsafe__model__battery_level_at 
+                                                           (select failsafe__model__battery_level_at
                                                            (let ((temp___230 (bvsub failsafe__model__current_time result)))
                                                            (ite (bvult failsafe__model__current_time result)
                                                            (bvadd temp___230 ((_ int2bv 8) 50))
@@ -499,7 +499,7 @@
 
 (declare-datatypes ()
 ((tcounterS__ref (mk_tcounterS__ref (tcounterS__content tcounterS)))))
-(define-fun tcounterS__ref___projection ((a tcounterS__ref)) tcounterS 
+(define-fun tcounterS__ref___projection ((a tcounterS__ref)) tcounterS
   (tcounterS__content a))
 
 (define-fun dynamic_invariant4 ((temp___expr_244 (_ BitVec 8))
@@ -647,7 +647,7 @@
   (assert
   (=>
   (fp.leq (fp #b0 #b01111100 #b10011001100110011001101) (to_rep
-                                                        (select battery_level_at1 
+                                                        (select battery_level_at1
                                                         current_time1)))
   (= counter1 ((_ int2bv 8) 0))))
 
@@ -668,3 +668,4 @@
  ;; File "failsafe.adb", line 31, characters 0-0
   (not (= c ((_ int2bv 8) 49))))
 (check-sat)
+(exit)

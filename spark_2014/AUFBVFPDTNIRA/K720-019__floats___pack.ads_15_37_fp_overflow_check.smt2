@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -152,7 +152,7 @@
   (assert
   (and (fp.lt r1 (fp #b0 #b01111111 #b00000000000000000000000))
   (and (fp.lt r2 (fp #b0 #b01111111 #b00000000000000000000000))
-  (and (fp.lt (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) 
+  (and (fp.lt (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))
   r1) (fp.lt (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) r2)))))
 
 ;; H
@@ -164,7 +164,7 @@
 ;; H
   (assert
   (and (= o (fp.add RNE r1 r2))
-  (not (or (fp.isInfinite (fp.add RNE r1 r2)) (fp.isNaN (fp.add RNE r1 
+  (not (or (fp.isInfinite (fp.add RNE r1 r2)) (fp.isNaN (fp.add RNE r1
   r2))))))
 
 ;; H
@@ -183,6 +183,7 @@
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.add RNE r1 r2)) (fp.isNaN (fp.add RNE r1 
+  (not (or (fp.isInfinite (fp.add RNE r1 r2)) (fp.isNaN (fp.add RNE r1
   r2))))))
 (check-sat)
+(exit)

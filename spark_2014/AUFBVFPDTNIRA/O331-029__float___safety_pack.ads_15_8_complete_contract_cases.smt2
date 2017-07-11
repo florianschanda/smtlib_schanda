@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -151,7 +151,7 @@
 (declare-datatypes ()
 ((positive_float__ref
  (mk_positive_float__ref (positive_float__content positive_float)))))
-(define-fun positive_float__ref___projection ((a positive_float__ref)) positive_float 
+(define-fun positive_float__ref___projection ((a positive_float__ref)) positive_float
   (positive_float__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_1294 Float32)
@@ -183,6 +183,7 @@
   (not
   (<= 1 (+ (+ (+ 0 (ite (and (fp.leq (fp.neg threshold) value)
                         (fp.leq value threshold))
-                   1 0)) (ite (= (fp.gt value threshold) true) 1 0)) 
+                   1 0)) (ite (= (fp.gt value threshold) true) 1 0))
   (ite (= (fp.lt value (fp.neg threshold)) true) 1 0)))))
 (check-sat)
+(exit)

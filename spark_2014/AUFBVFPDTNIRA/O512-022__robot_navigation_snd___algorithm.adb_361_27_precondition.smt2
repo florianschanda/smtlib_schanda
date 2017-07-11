@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -163,7 +163,7 @@
 
 (declare-datatypes ()
 ((character__ref (mk_character__ref (character__content character)))))
-(define-fun character__ref___projection ((a character__ref)) character 
+(define-fun character__ref___projection ((a character__ref)) character
   (character__content a))
 
 (declare-fun to_rep (character) Int)
@@ -201,7 +201,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int character) Int Int (Array Int character) Int
@@ -216,7 +216,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (character Int) (Array Int character))
@@ -433,7 +433,7 @@
 (declare-datatypes ()
 ((positive_float__ref
  (mk_positive_float__ref (positive_float__content positive_float)))))
-(define-fun positive_float__ref___projection ((a positive_float__ref)) positive_float 
+(define-fun positive_float__ref___projection ((a positive_float__ref)) positive_float
   (positive_float__content a))
 
 (declare-fun to_rep2 (positive_float) Float32)
@@ -477,7 +477,7 @@
 (declare-datatypes ()
 ((normalized2pi__ref
  (mk_normalized2pi__ref (normalized2pi__content normalized2pi)))))
-(define-fun normalized2pi__ref___projection ((a normalized2pi__ref)) normalized2pi 
+(define-fun normalized2pi__ref___projection ((a normalized2pi__ref)) normalized2pi
   (normalized2pi__content a))
 
 (declare-fun to_rep3 (normalized2pi) Float32)
@@ -506,7 +506,7 @@
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -669,7 +669,7 @@
 (declare-datatypes ()
 ((nonnegative_float__ref
  (mk_nonnegative_float__ref (nonnegative_float__content nonnegative_float)))))
-(define-fun nonnegative_float__ref___projection ((a nonnegative_float__ref)) nonnegative_float 
+(define-fun nonnegative_float__ref___projection ((a nonnegative_float__ref)) nonnegative_float
   (nonnegative_float__content a))
 
 (declare-fun to_rep6 (nonnegative_float) Float32)
@@ -707,7 +707,7 @@
 (declare-datatypes ()
 ((unbounded_float__ref
  (mk_unbounded_float__ref (unbounded_float__content unbounded_float)))))
-(define-fun unbounded_float__ref___projection ((a unbounded_float__ref)) unbounded_float 
+(define-fun unbounded_float__ref___projection ((a unbounded_float__ref)) unbounded_float
   (unbounded_float__content a))
 
 (declare-fun to_rep7 (unbounded_float) Float32)
@@ -748,7 +748,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide1 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide1 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide1 a old_first new_first) i)) ))))))
 
 (declare-fun concat2 ((Array Int nonnegative_float) Int Int
@@ -764,7 +764,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat2 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat2 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat2 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat2 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton2 (nonnegative_float
@@ -886,13 +886,13 @@
 (declare-datatypes ()
 ((us_split_discrs
  (mk___split_discrs (rec__robot_iface__speed_option__opt option)))))
-(define-fun us_split_discrs___projection ((a us_split_discrs)) option 
+(define-fun us_split_discrs___projection ((a us_split_discrs)) option
   (rec__robot_iface__speed_option__opt a))
 
 (declare-datatypes ()
 ((us_split_discrs__ref
  (mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref)) us_split_discrs 
+(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ()
@@ -902,7 +902,7 @@
 (declare-datatypes ()
 ((us_split_fields__ref1
  (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref1)) us_split_fields2 
+(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ()
@@ -917,10 +917,10 @@
 
 (define-fun us_rep_6__projection ((a us_rep1)) Bool (attr__constrained a))
 
-(define-fun robot_iface__speed_option__modulus__pred ((a us_rep1)) Bool (= 
+(define-fun robot_iface__speed_option__modulus__pred ((a us_rep1)) Bool (=
   (to_rep8 (rec__robot_iface__speed_option__opt (us_split_discrs1 a))) 1))
 
-(define-fun robot_iface__speed_option__angle__pred ((a us_rep1)) Bool (= 
+(define-fun robot_iface__speed_option__angle__pred ((a us_rep1)) Bool (=
   (to_rep8 (rec__robot_iface__speed_option__opt (us_split_discrs1 a))) 1))
 
 (define-fun bool_eq4 ((a us_rep1)
@@ -1019,29 +1019,29 @@
 
 (declare-datatypes ()
 ((speed_option__ref (mk_speed_option__ref (speed_option__content us_rep1)))))
-(define-fun speed_option__ref___projection ((a speed_option__ref)) us_rep1 
+(define-fun speed_option__ref___projection ((a speed_option__ref)) us_rep1
   (speed_option__content a))
 
 (declare-datatypes ()
 ((us_split_fields4
  (mk___split_fields2
  (rec__robot_iface__proxy__robot_radius positive_float)(rec__robot_iface__proxy__min_gap_width positive_float)(rec__robot_iface__proxy__obstacle_avoid_dist positive_float)(rec__robot_iface__proxy__max_speed positive_float)(rec__robot_iface__proxy__max_turn_rate positive_float)(rec__robot_iface__proxy__goal_position_tol nonnegative_float)(rec__robot_iface__proxy__goal_angle_tol nonnegative_float)(rec__robot_iface__proxy__goalx float)(rec__robot_iface__proxy__goaly float)(rec__robot_iface__proxy__goala float)(rec__robot_iface__proxy__scan_count natural)(rec__robot_iface__proxy__scan_res positive_float)(rec__robot_iface__proxy__max_range positive_float)(rec__robot_iface__proxy__scans (Array Int nonnegative_float))(rec__robot_iface__proxy__x unbounded_float)(rec__robot_iface__proxy__y unbounded_float)(rec__robot_iface__proxy__yaw unbounded_float)(rec__robot_iface__proxy__speed us_rep1)(rec__robot_iface__proxy__goal_reached Bool)))))
-(define-fun us_split_fields_scan_Count__projection ((a us_split_fields4)) natural 
+(define-fun us_split_fields_scan_Count__projection ((a us_split_fields4)) natural
   (rec__robot_iface__proxy__scan_count a))
 
-(define-fun us_split_fields_scans__projection ((a us_split_fields4)) (Array Int nonnegative_float) 
+(define-fun us_split_fields_scans__projection ((a us_split_fields4)) (Array Int nonnegative_float)
   (rec__robot_iface__proxy__scans a))
 
-(define-fun us_split_fields_speed__projection ((a us_split_fields4)) us_rep1 
+(define-fun us_split_fields_speed__projection ((a us_split_fields4)) us_rep1
   (rec__robot_iface__proxy__speed a))
 
-(define-fun us_split_fields_goal_reached__projection ((a us_split_fields4)) Bool 
+(define-fun us_split_fields_goal_reached__projection ((a us_split_fields4)) Bool
   (rec__robot_iface__proxy__goal_reached a))
 
 (declare-datatypes ()
 ((us_split_fields__ref2
  (mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_5__projection ((a us_split_fields__ref2)) us_split_fields4 
+(define-fun us_split_fields__ref_5__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ()
@@ -1139,11 +1139,11 @@
                             (rec__robot_iface__proxy__scans
                             (us_split_fields5 b)) 1 1000) true))
                          (= (to_rep7
-                            (rec__robot_iface__proxy__x (us_split_fields5 a))) 
+                            (rec__robot_iface__proxy__x (us_split_fields5 a)))
                          (to_rep7
                          (rec__robot_iface__proxy__x (us_split_fields5 b)))))
                          (= (to_rep7
-                            (rec__robot_iface__proxy__y (us_split_fields5 a))) 
+                            (rec__robot_iface__proxy__y (us_split_fields5 a)))
                          (to_rep7
                          (rec__robot_iface__proxy__y (us_split_fields5 b)))))
                          (= (to_rep7
@@ -1548,7 +1548,7 @@
 
 (declare-datatypes ()
 ((count_type__ref (mk_count_type__ref (count_type__content count_type)))))
-(define-fun count_type__ref___projection ((a count_type__ref)) count_type 
+(define-fun count_type__ref___projection ((a count_type__ref)) count_type
   (count_type__content a))
 
 (declare-fun to_rep10 (count_type) Int)
@@ -1575,16 +1575,16 @@
 ((us_split_fields6
  (mk___split_fields3
  (rec__gaps__gap__bearing us_rep)(rec__gaps__gap__distance float)(rec__gaps__gap__idir idir_t)))))
-(define-fun us_split_fields_bearing__projection ((a us_split_fields6)) us_rep 
+(define-fun us_split_fields_bearing__projection ((a us_split_fields6)) us_rep
   (rec__gaps__gap__bearing a))
 
-(define-fun us_split_fields_iDir__projection ((a us_split_fields6)) idir_t 
+(define-fun us_split_fields_iDir__projection ((a us_split_fields6)) idir_t
   (rec__gaps__gap__idir a))
 
 (declare-datatypes ()
 ((us_split_fields__ref3
  (mk___split_fields__ref3 (us_split_fields__content3 us_split_fields6)))))
-(define-fun us_split_fields__ref_6__projection ((a us_split_fields__ref3)) us_split_fields6 
+(define-fun us_split_fields__ref_6__projection ((a us_split_fields__ref3)) us_split_fields6
   (us_split_fields__content3 a))
 
 (declare-datatypes ()
@@ -1599,11 +1599,11 @@
                             (rec__gaps__gap__bearing (us_split_fields7 a))
                             (rec__gaps__gap__bearing (us_split_fields7 b))) true)
                          (= (to_rep5
-                            (rec__gaps__gap__distance (us_split_fields7 a))) 
+                            (rec__gaps__gap__distance (us_split_fields7 a)))
                          (to_rep5
                          (rec__gaps__gap__distance (us_split_fields7 b)))))
                          (= (to_rep9
-                            (rec__gaps__gap__idir (us_split_fields7 a))) 
+                            (rec__gaps__gap__idir (us_split_fields7 a)))
                          (to_rep9
                          (rec__gaps__gap__idir (us_split_fields7 b)))))
                     true false))
@@ -1682,7 +1682,7 @@
 
 (declare-datatypes ()
 ((element_type__ref (mk_element_type__ref (element_type__content us_rep3)))))
-(define-fun element_type__ref___projection ((a element_type__ref)) us_rep3 
+(define-fun element_type__ref___projection ((a element_type__ref)) us_rep3
   (element_type__content a))
 
 (declare-sort us_main_type 0)
@@ -1693,25 +1693,25 @@
 ((us_split_discrs2
  (mk___split_discrs1
  (rec__algorithm__gap_vectors__list__capacity count_type)))))
-(define-fun us_split_discrs_3__projection ((a us_split_discrs2)) count_type 
+(define-fun us_split_discrs_3__projection ((a us_split_discrs2)) count_type
   (rec__algorithm__gap_vectors__list__capacity a))
 
 (declare-datatypes ()
 ((us_split_discrs__ref1
  (mk___split_discrs__ref1 (us_split_discrs__content1 us_split_discrs2)))))
-(define-fun us_split_discrs__ref_3__projection ((a us_split_discrs__ref1)) us_split_discrs2 
+(define-fun us_split_discrs__ref_3__projection ((a us_split_discrs__ref1)) us_split_discrs2
   (us_split_discrs__content1 a))
 
 (declare-datatypes ()
 ((us_split_fields8
  (mk___split_fields4 (rec__algorithm__gap_vectors__list us_main_type)))))
-(define-fun us_split_fields_List__projection ((a us_split_fields8)) us_main_type 
+(define-fun us_split_fields_List__projection ((a us_split_fields8)) us_main_type
   (rec__algorithm__gap_vectors__list a))
 
 (declare-datatypes ()
 ((us_split_fields__ref4
  (mk___split_fields__ref4 (us_split_fields__content4 us_split_fields8)))))
-(define-fun us_split_fields__ref_9__projection ((a us_split_fields__ref4)) us_split_fields8 
+(define-fun us_split_fields__ref_9__projection ((a us_split_fields__ref4)) us_split_fields8
   (us_split_fields__content4 a))
 
 (declare-datatypes ()
@@ -1784,13 +1784,13 @@
 (declare-datatypes ()
 ((us_split_fields10
  (mk___split_fields5 (rec__algorithm__gap_vectors__cursor__node count_type)))))
-(define-fun us_split_fields_Node__projection ((a us_split_fields10)) count_type 
+(define-fun us_split_fields_Node__projection ((a us_split_fields10)) count_type
   (rec__algorithm__gap_vectors__cursor__node a))
 
 (declare-datatypes ()
 ((us_split_fields__ref5
  (mk___split_fields__ref5 (us_split_fields__content5 us_split_fields10)))))
-(define-fun us_split_fields__ref_10__projection ((a us_split_fields__ref5)) us_split_fields10 
+(define-fun us_split_fields__ref_10__projection ((a us_split_fields__ref5)) us_split_fields10
   (us_split_fields__content5 a))
 
 (declare-datatypes ()
@@ -1939,7 +1939,7 @@
 (declare-datatypes ()
 ((element_type__ref1
  (mk_element_type__ref1 (element_type__content1 us_rep3)))))
-(define-fun element_type__ref_2__projection ((a element_type__ref1)) us_rep3 
+(define-fun element_type__ref_2__projection ((a element_type__ref1)) us_rep3
   (element_type__content1 a))
 
 (declare-sort us_main_type2 0)
@@ -2146,13 +2146,13 @@
 ((us_split_fields12
  (mk___split_fields6
  (rec__algorithm__laser_scan_data__first nonnegative_float)(rec__algorithm__laser_scan_data__second us_rep)))))
-(define-fun us_split_fields_second__projection ((a us_split_fields12)) us_rep 
+(define-fun us_split_fields_second__projection ((a us_split_fields12)) us_rep
   (rec__algorithm__laser_scan_data__second a))
 
 (declare-datatypes ()
 ((us_split_fields__ref6
  (mk___split_fields__ref6 (us_split_fields__content6 us_split_fields12)))))
-(define-fun us_split_fields__ref_11__projection ((a us_split_fields__ref6)) us_split_fields12 
+(define-fun us_split_fields__ref_11__projection ((a us_split_fields__ref6)) us_split_fields12
   (us_split_fields__content6 a))
 
 (declare-datatypes ()
@@ -2233,7 +2233,7 @@
 (declare-datatypes ()
 ((laser_scan_data__ref
  (mk_laser_scan_data__ref (laser_scan_data__content us_rep8)))))
-(define-fun laser_scan_data__ref___projection ((a laser_scan_data__ref)) us_rep8 
+(define-fun laser_scan_data__ref___projection ((a laser_scan_data__ref)) us_rep8
   (laser_scan_data__content a))
 
 (declare-datatypes ()
@@ -2252,7 +2252,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide2 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide2 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide2 a old_first new_first) i)) ))))))
 
 (declare-fun concat3 ((Array Int us_rep8) Int Int (Array Int us_rep8) Int
@@ -2267,7 +2267,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat3 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat3 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat3 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat3 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton3 (us_rep8 Int) (Array Int us_rep8))
@@ -2346,22 +2346,22 @@
 ((us_split_fields14
  (mk___split_fields7
  (rec__algorithm__controller__robot us_rep2)(rec__algorithm__controller__laserscan (Array Int us_rep8))(rec__algorithm__controller__gapvec us_rep4)(rec__algorithm__controller__obsavoiddelta float)(rec__algorithm__controller__driveangle us_rep)))))
-(define-fun us_split_fields_robot__projection ((a us_split_fields14)) us_rep2 
+(define-fun us_split_fields_robot__projection ((a us_split_fields14)) us_rep2
   (rec__algorithm__controller__robot a))
 
-(define-fun us_split_fields_laserScan__projection ((a us_split_fields14)) (Array Int us_rep8) 
+(define-fun us_split_fields_laserScan__projection ((a us_split_fields14)) (Array Int us_rep8)
   (rec__algorithm__controller__laserscan a))
 
-(define-fun us_split_fields_gapVec__projection ((a us_split_fields14)) us_rep4 
+(define-fun us_split_fields_gapVec__projection ((a us_split_fields14)) us_rep4
   (rec__algorithm__controller__gapvec a))
 
-(define-fun us_split_fields_driveAngle__projection ((a us_split_fields14)) us_rep 
+(define-fun us_split_fields_driveAngle__projection ((a us_split_fields14)) us_rep
   (rec__algorithm__controller__driveangle a))
 
 (declare-datatypes ()
 ((us_split_fields__ref7
  (mk___split_fields__ref7 (us_split_fields__content7 us_split_fields14)))))
-(define-fun us_split_fields__ref_12__projection ((a us_split_fields__ref7)) us_split_fields14 
+(define-fun us_split_fields__ref_12__projection ((a us_split_fields__ref7)) us_split_fields14
   (us_split_fields__content7 a))
 
 (declare-datatypes ()
@@ -2507,7 +2507,7 @@
 
 (declare-datatypes ()
 ((controller__ref (mk_controller__ref (controller__content us_rep9)))))
-(define-fun controller__ref___projection ((a controller__ref)) us_rep9 
+(define-fun controller__ref___projection ((a controller__ref)) us_rep9
   (controller__content a))
 
 (declare-fun null_angle () us_rep)
@@ -2669,12 +2669,12 @@
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
                                                               (of_rep7
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
-                                                              (let ((usq_ 
+                                                              (let ((usq_
                                                               (mk___rep1
                                                               (mk___split_discrs
                                                               (of_rep8 0))
                                                               (mk___split_fields1
-                                                              dummy4 
+                                                              dummy4
                                                               dummy4) true)))
                                                               (mk___rep1
                                                               (us_split_discrs1
@@ -2983,7 +2983,7 @@
 ((positive_count_type__ref
  (mk_positive_count_type__ref
  (positive_count_type__content positive_count_type)))))
-(define-fun positive_count_type__ref___projection ((a positive_count_type__ref)) positive_count_type 
+(define-fun positive_count_type__ref___projection ((a positive_count_type__ref)) positive_count_type
   (positive_count_type__content a))
 
 (define-fun dynamic_invariant16 ((temp___expr_420 Int)
@@ -3050,12 +3050,12 @@
 (declare-fun last__function_guard1 (Int us_rep7) Bool)
 
 (define-fun oeq ((left us_rep7)
-  (right us_rep7)) Bool (and (= (length3 left) (length3 right)) (ite 
+  (right us_rep7)) Bool (and (= (length3 left) (length3 right)) (ite
                                                                 (forall
                                                                 ((n Int))
                                                                 (=>
                                                                 (and (<= 1 n)
-                                                                (<= n 
+                                                                (<= n
                                                                 (last3 left)))
                                                                 (= (bool_eq6
                                                                    (get left
@@ -3120,7 +3120,7 @@
 (declare-datatypes ()
 ((extended_index__ref
  (mk_extended_index__ref (extended_index__content extended_index)))))
-(define-fun extended_index__ref___projection ((a extended_index__ref)) extended_index 
+(define-fun extended_index__ref___projection ((a extended_index__ref)) extended_index
   (extended_index__content a))
 
 (define-fun dynamic_invariant17 ((temp___expr_442 Int)
@@ -3167,7 +3167,7 @@
 (declare-datatypes ()
 ((element_type__ref2
  (mk_element_type__ref2 (element_type__content2 element_type)))))
-(define-fun element_type__ref_3__projection ((a element_type__ref2)) element_type 
+(define-fun element_type__ref_3__projection ((a element_type__ref2)) element_type
   (element_type__content2 a))
 
 (define-fun dynamic_invariant18 ((temp___expr_461 Int)
@@ -3537,7 +3537,7 @@
 
 ;; H
   (assert
-  (ite (= (ite (= (bool_eq8 (mk___rep5 riterr__split_fields1) no_element) false) (= 
+  (ite (= (ite (= (bool_eq8 (mk___rep5 riterr__split_fields1) no_element) false) (=
           (get1
           (positions
           (rec__algorithm__controller__gapvec
@@ -3641,7 +3641,7 @@
          (rec__robot_iface__proxy__robot_radius
          (us_split_fields5
          (rec__algorithm__controller__robot
-         (let ((subject this__split_fields)) this__split_fields2))))) 
+         (let ((subject this__split_fields)) this__split_fields2)))))
   temp___1052))))
 
 ;; H
@@ -3694,15 +3694,15 @@
                                                                    (rec__robot_iface__proxy__scan_res
                                                                    (us_split_fields5
                                                                    (rec__algorithm__controller__robot
-                                                                   (let ((subject 
+                                                                   (let ((subject
                                                                    this__split_fields))
                                                                    this__split_fields2)))))))
-  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
+  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
   (to_rep2
   (rec__robot_iface__proxy__scan_res
   (us_split_fields5
   (rec__algorithm__controller__robot
-  (let ((subject this__split_fields)) this__split_fields2))))))) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
+  (let ((subject this__split_fields)) this__split_fields2))))))) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
   (to_rep2
   (rec__robot_iface__proxy__scan_res
   (us_split_fields5
@@ -3863,7 +3863,7 @@
          (rec__algorithm__controller__gapvec
          (let ((subject this__split_fields)) this__split_fields2))
          (mk___rep5 riterl__split_fields2)))
-  (ite (= (ite (= (bool_eq8 (mk___rep5 riterl__split_fields2) no_element) false) (= 
+  (ite (= (ite (= (bool_eq8 (mk___rep5 riterl__split_fields2) no_element) false) (=
           (get1
           (positions
           (rec__algorithm__controller__gapvec
@@ -3878,7 +3878,7 @@
   (= (get1
      (positions
      (rec__algorithm__controller__gapvec
-     (let ((subject this__split_fields)) this__split_fields2))) o23) (- 
+     (let ((subject this__split_fields)) this__split_fields2))) o23) (-
   (get1
   (positions
   (rec__algorithm__controller__gapvec
@@ -3940,12 +3940,12 @@
                                                             (mk___rep4
                                                             (us_split_discrs3
                                                             (rec__algorithm__controller__gapvec
-                                                            (let ((subject 
+                                                            (let ((subject
                                                             this__split_fields))
                                                             this__split_fields2)))
                                                             (us_split_fields9
                                                             (rec__algorithm__controller__gapvec
-                                                            (let ((subject 
+                                                            (let ((subject
                                                             this__split_fields))
                                                             this__split_fields2))))) 1))
   (= (bool_eq8 (mk___rep5 riterl__split_fields3) no_element) true))
@@ -4044,26 +4044,26 @@
   (=> (= result3 true)
   (= (let ((subject this__split_fields)) this__split_fields3) (mk___split_fields7
                                                               (rec__algorithm__controller__robot
-                                                              (let ((subject 
+                                                              (let ((subject
                                                               this__split_fields))
                                                               this__split_fields2))
                                                               (rec__algorithm__controller__laserscan
-                                                              (let ((subject 
+                                                              (let ((subject
                                                               this__split_fields))
                                                               this__split_fields2))
                                                               (mk___rep4
                                                               (us_split_discrs3
                                                               (rec__algorithm__controller__gapvec
-                                                              (let ((subject 
+                                                              (let ((subject
                                                               this__split_fields))
                                                               this__split_fields2)))
                                                               algorithm__gap_vectors__delete__container__fields)
                                                               (rec__algorithm__controller__obsavoiddelta
-                                                              (let ((subject 
+                                                              (let ((subject
                                                               this__split_fields))
                                                               this__split_fields2))
                                                               (rec__algorithm__controller__driveangle
-                                                              (let ((subject 
+                                                              (let ((subject
                                                               this__split_fields))
                                                               this__split_fields2)))))))
 
@@ -4109,7 +4109,7 @@
 ;; H
   (assert
   (=> (= result2 true)
-  (ite (= (ite (= (bool_eq8 (mk___rep5 riterr__split_fields3) no_element) false) (= 
+  (ite (= (ite (= (bool_eq8 (mk___rep5 riterr__split_fields3) no_element) false) (=
           (get1
           (positions
           (rec__algorithm__controller__gapvec
@@ -4272,7 +4272,7 @@
 ;; H
   (assert
   (= o32 (bool_eq8
-         (mk___rep5 (us_split_fields__content5 riterl__split_fields7)) 
+         (mk___rep5 (us_split_fields__content5 riterl__split_fields7))
          o31)))
 
 ;; H
@@ -4339,12 +4339,12 @@
                                                                    (rec__algorithm__controller__robot
                                                                    (us_split_fields__content7
                                                                    this__split_fields6)))))))
-  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
+  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
   (to_rep2
   (rec__robot_iface__proxy__scan_res
   (us_split_fields5
   (rec__algorithm__controller__robot
-  (us_split_fields__content7 this__split_fields6))))))) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
+  (us_split_fields__content7 this__split_fields6))))))) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
   (to_rep2
   (rec__robot_iface__proxy__scan_res
   (us_split_fields5
@@ -4558,3 +4558,4 @@
      (us_split_fields__content7 this__split_fields6)))))
      (mk___rep5 (us_split_fields__content5 riterl__split_fields7))) true)))
 (check-sat)
+(exit)

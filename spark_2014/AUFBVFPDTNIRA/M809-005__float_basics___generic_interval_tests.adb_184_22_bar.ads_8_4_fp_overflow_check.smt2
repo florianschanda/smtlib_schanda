@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -211,7 +211,7 @@
   (and (fp.leq (fp #b0 #b10000001 #b01000000000000000000000) b)
   (fp.leq b (fp #b0 #b10000010 #b01000000000000000000000))))
   (and (fp.leq (fp #b0 #b10000001 #b00000000000000000000000) c)
-  (fp.leq c (fp #b0 #b10000001 #b10000000000000000000000)))) (fp.lt a 
+  (fp.leq c (fp #b0 #b10000001 #b10000000000000000000000)))) (fp.lt a
   d)) (fp.lt d b)) (fp.leq c a)) (fp.leq b c)))
 
 ;; H
@@ -244,3 +244,4 @@
  ;; File "generic_interval_tests.adb", line 162, characters 0-0
   (not (not (or (fp.isInfinite o3) (fp.isNaN o3)))))
 (check-sat)
+(exit)
