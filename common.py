@@ -22,11 +22,13 @@ class Benchmark(object):
 
     def load(self, keep_logic):
         self.data = ""
-        if self.dialect is not None:
+        if self.dialect is not None and self.dialect != "altergo":
             fn = self.benchmark + "_" + self.dialect
         else:
             fn = self.benchmark
 
+        # We still do this for altergo, since status is not encoded in
+        # the why files.
         with open(fn, "rU") as fd:
             for raw_line in fd:
                 line = ""
@@ -63,6 +65,11 @@ class Benchmark(object):
         if not self.data.endswith("(exit)\n"):
             self.data += "(exit)\n"
 
+        if self.dialect == "altergo":
+            with open(self.benchmark + "_" + self.dialect, "rU") as fd:
+                self.data = fd.read()
+
+
     def unload(self):
         self.data = None
 
@@ -91,7 +98,12 @@ class Prover(object):
 
         cmd = copy(self.cmd)
         if self.temp:
-            fid, fn = tempfile.mkstemp(suffix='.smt2',
+            if self.dialect == "altergo":
+                suffix = ".why"
+            else:
+                suffix = ".smt2"
+
+            fid, fn = tempfile.mkstemp(suffix=suffix,
                                        prefix='bench_')
             os.write(fid, benchmark.data)
             os.close(fid)
@@ -117,12 +129,34 @@ class Prover(object):
         elif len(stdout) == 0:
             status = "error"
             comment = stderr.strip()
-        elif stdout.split()[0] in ("unsat", "sat", "unknown"):
-            status  = stdout.split()[0]
-            comment = ""
+        elif self.dialect == "altergo":
+            tmp = stdout.strip().splitlines()
+            if (len(tmp) == 1 and tmp[0].startswith("File ")):
+                if ":Valid " in tmp[0]:
+                    status = "unsat"
+                    comment = ""
+                elif ":Invalid " in tmp[0]:
+                    status = "sat"
+                    comment = ""
+                elif ":I don't know" in tmp[0]:
+                    status = "unknown"
+                    comment = ""
+                elif ":Timeout" in tmp[0]:
+                    status = "timeout"
+                    comment = ""
+                else:
+                    status = "error"
+                    comment = stdout
+            else:
+                status  = "error"
+                comment = stdout + "\n" + stderr
         else:
-            status  = "error"
-            comment = stdout + "\n" + stderr
+            if stdout.split()[0] in ("unsat", "sat", "unknown"):
+                status  = stdout.split()[0]
+                comment = ""
+            else:
+                status  = "error"
+                comment = stdout + "\n" + stderr
 
         return status, comment
 

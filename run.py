@@ -29,13 +29,19 @@ def main():
                                use_logic=False,
                                use_dialect="z3"))
     provers.append(Prover_Kind("mathsat",
-                               ["-input=smt2"]))
+                               ["-input=smt2"],
+                               use_dialect="mathsat"))
     provers.append(Prover_Kind("mathsat_acdl",
                                ["-input=smt2",
-                                "-theory.fp.mode=2"]))
+                                "-theory.fp.mode=2"],
+                               use_dialect="mathsat"))
     provers.append(Prover_Kind("colibri",
                                [],
                                use_temp=True))
+    provers.append(Prover_Kind("altergo",
+                               [],
+                               use_temp=True,
+                               use_dialect="altergo"))
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--suite",
@@ -91,7 +97,10 @@ def main():
     if options.suite == "fp":
         bench_dirs.append("spark_2014/AUFBVFPDTNIRA")
     if options.suite == "debug":
-        bench_dirs.append("spark_2014/AUFBVFPDTNIRA")
+        #bench_dirs.append("spark_2014/AUFBVFPDTNIRA")
+        bench_dirs.append("crafted/QF_FP")
+        #bench_dirs.append("crafted/QF_FPBV")
+        #bench_dirs.append("crafted/QF_FPLRA")
 
     print "Assembling benchmarks..."
     tasks = []
@@ -102,6 +111,9 @@ def main():
                     tasks.append(Task(Benchmark(os.path.join(path, f),
                                                 dialect = the_prover.dialect),
                                       the_prover))
+                elif ".smt2_" in f:
+                    assert os.path.exists(os.path.join(path,
+                                                       f.rsplit("_", 1)[0]))
 
     detail = {}
     summary = {"solved"  : 0,
