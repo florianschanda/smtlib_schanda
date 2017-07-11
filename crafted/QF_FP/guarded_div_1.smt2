@@ -21,7 +21,8 @@
 (assert (and (isFinite x) (fp.geq x f0)))
 
 ;; y > 0.1 and y < 1.0
-(assert (fp.lt f0_1 y f1))
+(assert (and (fp.lt f0_1 y)
+             (fp.lt y f1)))
 
 ;; x / 1000 <= y
 (assert (fp.leq (fp.div RNE x f1000) y))

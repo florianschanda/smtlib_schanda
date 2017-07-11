@@ -25,6 +25,7 @@
   (fp.div RNE (fp.add RNE a b) f2))
 
 ;; goal: mid in a .. b
-(assert (not (fp.leq a mid b)))
+(assert (not (and (fp.leq a mid)
+                  (fp.leq mid b))))
 (check-sat)
 (exit)
