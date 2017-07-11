@@ -17,7 +17,9 @@ def mk_solver_name(nam):
             "z3"           : "Z3",
             "colibri"      : "Colibri",
             "mathsat"      : "MathSAT",
-            "mathsat_acdl" : "MS (ACDL)"}.get(nam, nam)
+            "mathsat_acdl" : "MS (ACDL)",
+            "altergo"      : "Alt-Ergo",
+    }.get(nam, nam)
 
 def is_cvc4_data(name):
     return (os.path.isfile(name) and
@@ -225,8 +227,8 @@ def mk_competition_slides(fd):
                                         s_row[i])
                          for i in xrange(len(row))]
             for i, r in enumerate(competitors):
-                if r["prover"]["kind"] == "z3" and cat == "spark_2014":
-                    s_row[i] = "%s\\footnote{Uses different VCs}" % s_row[i]
+                if r["prover"]["kind"] in ("z3", "altergo") and cat == "spark_2014":
+                    s_row[i] = "%s$^*$" % s_row[i]
             fd.write(" & ".join(s_row) + r"\\" + "\n")
         row = [r["avav"][criteria] for r in competitors]
         s_row = ["%.1f\\%%" % x for x in row]
@@ -252,6 +254,7 @@ def mk_competition_slides(fd):
         fd.write("\\begin{center}\n")
         mk_table(cat)
         fd.write("\\end{center}\n")
+        fd.write("$^*$) uses different VCs\n")
         fd.write("\\end{frame}\n\n")
 
 def main():
