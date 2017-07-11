@@ -212,23 +212,30 @@ def mk_competition_slides(fd):
                 s_row = ["\\t%s{%s}" % (mk_best_color(max(row), row[i]),
                                         s_row[i])
                          for i in xrange(len(row))]
-                for i, r in enumerate(competitors):
-                    if r["prover"]["kind"] == "z3" and cat == "spark_2014":
-                        s_row[i] = "%s\\footnote{Uses different VCs}" % s_row[i]
+            elif criteria == "timeout":
+                row = [r["details"][cat][criteria] for r in competitors]
+                s_row = ["%u" % x for x in row]
+                s_row = ["\\t%s{%s}" % (mk_best_color(-min(row), -row[i]),
+                                        s_row[i])
+                         for i in xrange(len(row))]
             else:
                 row = [r["details"][cat][criteria] for r in competitors]
                 s_row = ["%u" % x for x in row]
                 s_row = ["\\t%s{%s}" % (mk_err_color(0, row[i]),
                                         s_row[i])
                          for i in xrange(len(row))]
-                for i, r in enumerate(competitors):
-                    if r["prover"]["kind"] == "z3" and cat == "spark_2014":
-                        s_row[i] = "%s\\footnote{Uses different VCs}" % s_row[i]
+            for i, r in enumerate(competitors):
+                if r["prover"]["kind"] == "z3" and cat == "spark_2014":
+                    s_row[i] = "%s\\footnote{Uses different VCs}" % s_row[i]
             fd.write(" & ".join(s_row) + r"\\" + "\n")
         row = [r["avav"][criteria] for r in competitors]
         s_row = ["%.1f\\%%" % x for x in row]
         if criteria == "solved":
             s_row = ["\\t%s{%s}" % (mk_best_color(max(row), row[i]),
+                                    s_row[i])
+                     for i in xrange(len(row))]
+        elif criteria == "timeout":
+            s_row = ["\\t%s{%s}" % (mk_best_color(-min(row), -row[i]),
                                     s_row[i])
                      for i in xrange(len(row))]
         else:
@@ -241,7 +248,7 @@ def mk_competition_slides(fd):
 
     # Table comparing all solvers
     for cat in COMPARISON_CATS:
-        fd.write("\\begin{frame}{Benchmarks}{With status `%s'}\n" % cat.capitalize())
+        fd.write("\\begin{frame}{Benchmarks}{With status `%s'}\n" % cat)
         fd.write("\\begin{center}\n")
         mk_table(cat)
         fd.write("\\end{center}\n")
@@ -260,13 +267,20 @@ def main():
         fd.write(r"\newcommand{\tg}[1]{{\color{AnSecondaryGreen}#1}}" + "\n")
         fd.write(r"\newcommand{\tn}[1]{#1}" + "\n")
         fd.write(r"\newcommand{\tb}[1]{{\color{AnSecondaryRed}#1}}" + "\n")
+        fd.write("\\author{Florian Schanda}\n")
+        fd.write("\\title{CVC4 IEEE-754 implementation}\n")
+        fd.write("\\subtitle{Current status and benchmarks}\n")
         fd.write("\\begin{document}\n\n")
 
-        fd.write("\\section{CVC4 Progress}\n\n")
-        mk_progress_slides(fd)
+        fd.write("\\maketitle\n\n")
 
-        fd.write("\\section{Comparisons}\n\n")
-        mk_competition_slides(fd)
+        if len(data) > 1:
+            fd.write("\\section{CVC4 Progress}\n\n")
+            mk_progress_slides(fd)
+
+        if len(other_data) >= 1:
+            fd.write("\\section{Comparisons}\n\n")
+            mk_competition_slides(fd)
 
         fd.write("\\end{document}\n")
 
