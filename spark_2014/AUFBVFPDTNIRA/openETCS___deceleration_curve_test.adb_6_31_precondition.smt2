@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -168,7 +168,7 @@
 
 (declare-datatypes ()
 ((distance_t__ref (mk_distance_t__ref (distance_t__content distance_t)))))
-(define-fun distance_t__ref___projection ((a distance_t__ref)) distance_t 
+(define-fun distance_t__ref___projection ((a distance_t__ref)) distance_t
   (distance_t__content a))
 
 (declare-fun to_rep1 (distance_t) Int)
@@ -206,7 +206,7 @@
 (declare-datatypes ()
 ((speed_km_per_h_t__ref
  (mk_speed_km_per_h_t__ref (speed_km_per_h_t__content speed_km_per_h_t)))))
-(define-fun speed_km_per_h_t__ref___projection ((a speed_km_per_h_t__ref)) speed_km_per_h_t 
+(define-fun speed_km_per_h_t__ref___projection ((a speed_km_per_h_t__ref)) speed_km_per_h_t
   (speed_km_per_h_t__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_154 Float32)
@@ -244,13 +244,13 @@
 ((us_split_fields
  (mk___split_fields
  (rec__deceleration_curve__braking_curve_entry__location distance_t)(rec__deceleration_curve__braking_curve_entry__speed speed_t)))))
-(define-fun us_split_fields_location__projection ((a us_split_fields)) distance_t 
+(define-fun us_split_fields_location__projection ((a us_split_fields)) distance_t
   (rec__deceleration_curve__braking_curve_entry__location a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -332,7 +332,7 @@
 (declare-datatypes ()
 ((braking_curve_entry__ref
  (mk_braking_curve_entry__ref (braking_curve_entry__content us_rep)))))
-(define-fun braking_curve_entry__ref___projection ((a braking_curve_entry__ref)) us_rep 
+(define-fun braking_curve_entry__ref___projection ((a braking_curve_entry__ref)) us_rep
   (braking_curve_entry__content a))
 
 (declare-datatypes ()
@@ -351,7 +351,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int us_rep) Int Int (Array Int us_rep) Int
@@ -366,7 +366,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (us_rep Int) (Array Int us_rep))
@@ -445,16 +445,16 @@
 ((us_split_fields2
  (mk___split_fields1
  (rec__deceleration_curve__braking_curve_t__curve (Array Int us_rep))(rec__deceleration_curve__braking_curve_t__end_point distance_t)))))
-(define-fun us_split_fields_curve__projection ((a us_split_fields2)) (Array Int us_rep) 
+(define-fun us_split_fields_curve__projection ((a us_split_fields2)) (Array Int us_rep)
   (rec__deceleration_curve__braking_curve_t__curve a))
 
-(define-fun us_split_fields_end_point__projection ((a us_split_fields2)) distance_t 
+(define-fun us_split_fields_end_point__projection ((a us_split_fields2)) distance_t
   (rec__deceleration_curve__braking_curve_t__end_point a))
 
 (declare-datatypes ()
 ((us_split_fields__ref1
  (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2 
+(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ()
@@ -535,23 +535,23 @@
 (declare-datatypes ()
 ((braking_curve_t__ref
  (mk_braking_curve_t__ref (braking_curve_t__content us_rep1)))))
-(define-fun braking_curve_t__ref___projection ((a braking_curve_t__ref)) us_rep1 
+(define-fun braking_curve_t__ref___projection ((a braking_curve_t__ref)) us_rep1
   (braking_curve_t__content a))
 
 (declare-datatypes ()
 ((us_split_fields4
  (mk___split_fields2
  (rec__deceleration_curve__target_t__supervise Bool)(rec__deceleration_curve__target_t__location distance_t)(rec__deceleration_curve__target_t__speed speed_t)))))
-(define-fun us_split_fields_supervise__projection ((a us_split_fields4)) Bool 
+(define-fun us_split_fields_supervise__projection ((a us_split_fields4)) Bool
   (rec__deceleration_curve__target_t__supervise a))
 
-(define-fun us_split_fields_location2__projection ((a us_split_fields4)) distance_t 
+(define-fun us_split_fields_location2__projection ((a us_split_fields4)) distance_t
   (rec__deceleration_curve__target_t__location a))
 
 (declare-datatypes ()
 ((us_split_fields__ref2
  (mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref2)) us_split_fields4 
+(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ()
@@ -698,3 +698,4 @@
   (not
   (= (is_valid_speed_km_per_h (fp #b0 #b10000110 #b01000000000000000000000)) true)))
 (check-sat)
+(exit)

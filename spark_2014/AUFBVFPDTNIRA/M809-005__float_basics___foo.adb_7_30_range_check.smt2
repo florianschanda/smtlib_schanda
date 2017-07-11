@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -197,7 +197,7 @@
 
 (declare-datatypes ()
 ((long_float__ref (mk_long_float__ref (long_float__content long_float)))))
-(define-fun long_float__ref___projection ((a long_float__ref)) long_float 
+(define-fun long_float__ref___projection ((a long_float__ref)) long_float
   (long_float__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_57 Float64)
@@ -225,6 +225,7 @@
 ;; WP_parameter_def
  ;; File "generic_float_tests.adb", line 444, characters 0-0
   (not
-  (not (or (fp.isInfinite ((_ to_fp 8 24) RNE y)) (fp.isNaN ((_ to_fp 8 24) RNE 
+  (not (or (fp.isInfinite ((_ to_fp 8 24) RNE y)) (fp.isNaN ((_ to_fp 8 24) RNE
   y))))))
 (check-sat)
+(exit)

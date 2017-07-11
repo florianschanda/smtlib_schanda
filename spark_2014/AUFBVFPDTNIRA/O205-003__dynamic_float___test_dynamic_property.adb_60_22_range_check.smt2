@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -155,7 +155,7 @@
 (declare-datatypes ()
 ((pos_static_float__ref
  (mk_pos_static_float__ref (pos_static_float__content pos_static_float)))))
-(define-fun pos_static_float__ref___projection ((a pos_static_float__ref)) pos_static_float 
+(define-fun pos_static_float__ref___projection ((a pos_static_float__ref)) pos_static_float
   (pos_static_float__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_135 Float32)
@@ -212,14 +212,14 @@
 (declare-datatypes ()
 ((pos_dynamic_float__ref
  (mk_pos_dynamic_float__ref (pos_dynamic_float__content float)))))
-(define-fun pos_dynamic_float__ref___projection ((a pos_dynamic_float__ref)) float 
+(define-fun pos_dynamic_float__ref___projection ((a pos_dynamic_float__ref)) float
   (pos_dynamic_float__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_141 Float32)
   (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
   (temp___do_toplevel_140 Bool)) Bool (=>
                                       (or (= temp___is_init_138 true)
-                                      (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) 
+                                      (fp.leq (fp #b0 #b01111111 #b00000000000000000000000)
                                       last)) (dynamic_property
                                       (fp #b0 #b01111111 #b00000000000000000000000)
                                       last temp___expr_141)))
@@ -251,14 +251,14 @@
 
 (declare-datatypes ()
 ((dynamic_float__ref (mk_dynamic_float__ref (dynamic_float__content float)))))
-(define-fun dynamic_float__ref___projection ((a dynamic_float__ref)) float 
+(define-fun dynamic_float__ref___projection ((a dynamic_float__ref)) float
   (dynamic_float__content a))
 
 (define-fun dynamic_invariant3 ((temp___expr_147 Float32)
   (temp___is_init_144 Bool) (temp___skip_constant_145 Bool)
   (temp___do_toplevel_146 Bool)) Bool (=>
                                       (or (= temp___is_init_144 true)
-                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) 
+                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000)
                                       last1)) (dynamic_property1
                                       (fp #b0 #b00000000 #b00000000000000000000000)
                                       last1 temp___expr_147)))
@@ -365,7 +365,7 @@
 ;; H
   (assert
   (and (= o1 (dyn_return (fp #b0 #b10000011 #b11100000000000000000000)))
-  (dynamic_property (fp #b0 #b01111111 #b00000000000000000000000) last 
+  (dynamic_property (fp #b0 #b01111111 #b00000000000000000000000) last
   o1)))
 
 ;; H
@@ -379,7 +379,7 @@
 
 ;; H
   (assert
-  (fp.leq (dyn_return (fp #b0 #b10000100 #b01000000000000000000000)) 
+  (fp.leq (dyn_return (fp #b0 #b10000100 #b01000000000000000000000))
   c))
 
 ;; H
@@ -448,6 +448,7 @@
 (assert
 ;; WP_parameter_def
  ;; File "test_dynamic_property.adb", line 40, characters 0-0
-  (not (dynamic_property1 (fp #b0 #b00000000 #b00000000000000000000000) 
+  (not (dynamic_property1 (fp #b0 #b00000000 #b00000000000000000000000)
   last1 x3)))
 (check-sat)
+(exit)

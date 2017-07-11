@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun div1 (Int Int) Int)
@@ -143,13 +143,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
   (rotate_left1 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
   (rotate_right1 v (bv2nat n)))))
 
 (declare-fun nth_bv ((_ BitVec 8) (_ BitVec 8)) Bool)
@@ -265,7 +265,7 @@
 
 (declare-datatypes ()
 ((character__ref (mk_character__ref (character__content character)))))
-(define-fun character__ref___projection ((a character__ref)) character 
+(define-fun character__ref___projection ((a character__ref)) character
   (character__content a))
 
 (declare-fun to_rep (character) Int)
@@ -303,7 +303,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int character) Int Int (Array Int character) Int
@@ -318,7 +318,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (character Int) (Array Int character))
@@ -533,7 +533,7 @@
 ((tdigit_count_typeB__ref
  (mk_tdigit_count_typeB__ref
  (tdigit_count_typeB__content tdigit_count_typeB)))))
-(define-fun tdigit_count_typeB__ref___projection ((a tdigit_count_typeB__ref)) tdigit_count_typeB 
+(define-fun tdigit_count_typeB__ref___projection ((a tdigit_count_typeB__ref)) tdigit_count_typeB
   (tdigit_count_typeB__content a))
 
 (declare-sort digit_index_type 0)
@@ -553,7 +553,7 @@
 (declare-datatypes ()
 ((digit_index_type__ref
  (mk_digit_index_type__ref (digit_index_type__content digit_index_type)))))
-(define-fun digit_index_type__ref___projection ((a digit_index_type__ref)) digit_index_type 
+(define-fun digit_index_type__ref___projection ((a digit_index_type__ref)) digit_index_type
   (digit_index_type__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_204 Int)
@@ -644,7 +644,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide1 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide1 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide1 a old_first new_first) i)) ))))))
 
 (declare-fun concat2 ((Array Int octet) Int Int (Array Int octet) Int
@@ -659,7 +659,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat2 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat2 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat2 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat2 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton2 (octet Int) (Array Int octet))
@@ -773,7 +773,7 @@
 
 (declare-datatypes ()
 ((t17s__ref (mk_t17s__ref (t17s__content tdigit_count_typeB)))))
-(define-fun t17s__ref___projection ((a t17s__ref)) tdigit_count_typeB 
+(define-fun t17s__ref___projection ((a t17s__ref)) tdigit_count_typeB
   (t17s__content a))
 
 (declare-sort t1 0)
@@ -858,25 +858,25 @@
 (declare-datatypes ()
 ((us_split_discrs
  (mk___split_discrs (rec__very_longs__very_long__length digit_index_type)))))
-(define-fun us_split_discrs___projection ((a us_split_discrs)) digit_index_type 
+(define-fun us_split_discrs___projection ((a us_split_discrs)) digit_index_type
   (rec__very_longs__very_long__length a))
 
 (declare-datatypes ()
 ((us_split_discrs__ref
  (mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref)) us_split_discrs 
+(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ()
 ((us_split_fields
  (mk___split_fields (rec__very_longs__very_long__long_digits us_t1)))))
-(define-fun us_split_fields_Long_Digits__projection ((a us_split_fields)) us_t1 
+(define-fun us_split_fields_Long_Digits__projection ((a us_split_fields)) us_t1
   (rec__very_longs__very_long__long_digits a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -983,7 +983,7 @@
                                          (us_split_fields1 temp___expr_221))) 1)
                                       (= (last3
                                          (rec__very_longs__very_long__long_digits
-                                         (us_split_fields1 temp___expr_221))) 
+                                         (us_split_fields1 temp___expr_221)))
                                       (to_rep2 temp___222))))))
 
 (declare-fun number () us_t)
@@ -1027,7 +1027,7 @@
 
 (declare-datatypes ()
 ((tS30bP1__ref (mk_tS30bP1__ref (tS30bP1__content tdigit_count_typeB)))))
-(define-fun tS30bP1__ref___projection ((a tS30bP1__ref)) tdigit_count_typeB 
+(define-fun tS30bP1__ref___projection ((a tS30bP1__ref)) tdigit_count_typeB
   (tS30bP1__content a))
 
 (declare-sort t2 0)
@@ -1124,7 +1124,7 @@
 
 (declare-datatypes ()
 ((t32b__ref (mk_t32b__ref (t32b__content tdigit_count_typeB)))))
-(define-fun t32b__ref___projection ((a t32b__ref)) tdigit_count_typeB 
+(define-fun t32b__ref___projection ((a t32b__ref)) tdigit_count_typeB
   (t32b__content a))
 
 (declare-sort t3 0)
@@ -1287,7 +1287,7 @@
 (declare-datatypes ()
 ((digits_array_type__ref
  (mk_digits_array_type__ref (digits_array_type__content us_t4)))))
-(define-fun digits_array_type__ref___projection ((a digits_array_type__ref)) us_t4 
+(define-fun digits_array_type__ref___projection ((a digits_array_type__ref)) us_t4
   (digits_array_type__content a))
 
 (declare-fun temp___817 ((_ BitVec 8) Int Int) us_t3)
@@ -1468,7 +1468,7 @@
 
 ;; H
   (assert
-  (= (to_rep2 (rec__very_longs__very_long__length result____split_discrs)) 
+  (= (to_rep2 (rec__very_longs__very_long__length result____split_discrs))
   r31b))
 
 ;; H
@@ -1497,7 +1497,7 @@
 
 ;; H
   (assert
-  (= (mk2 (to_rep4 (first6 temp___8241)) (to_rep4 (last6 temp___8241))) 
+  (= (mk2 (to_rep4 (first6 temp___8241)) (to_rep4 (last6 temp___8241)))
   temp___8251))
 
 ;; H
@@ -1521,7 +1521,7 @@
 
 ;; H
   (assert
-  (= (mk1 (to_rep4 (first4 temp___8271)) (to_rep4 (last4 temp___8271))) 
+  (= (mk1 (to_rep4 (first4 temp___8271)) (to_rep4 (last4 temp___8271)))
   o1))
 
 ;; H
@@ -1590,7 +1590,7 @@
 
 ;; H
   (assert
-  (= (div1 (+ (- (to_rep1 (last (rt number))) string_index2) 1) 2) (+ (- 
+  (= (div1 (+ (- (to_rep1 (last (rt number))) string_index2) 1) 2) (+ (-
   index2 1) 1)))
 
 ;; H
@@ -1656,7 +1656,7 @@
   (assert
   (= (to_rep4
      (last2
-     (rt1 (rec__very_longs__very_long__long_digits result____split_fields3)))) 
+     (rt1 (rec__very_longs__very_long__long_digits result____split_fields3))))
   r34b))
 
 ;; H
@@ -1674,7 +1674,7 @@
   (and
   (<= (to_rep4
       (first2
-      (rt1 (rec__very_longs__very_long__long_digits result____split_fields3)))) 
+      (rt1 (rec__very_longs__very_long__long_digits result____split_fields3))))
   index2)
   (<= index2 (to_rep4
              (last2
@@ -1696,7 +1696,7 @@
 
 ;; H
   (assert
-  (= (rt1 (rec__very_longs__very_long__long_digits result____split_fields3)) 
+  (= (rt1 (rec__very_longs__very_long__long_digits result____split_fields3))
   o16))
 
 ;; H
@@ -1739,6 +1739,7 @@
 ;; WP_parameter_def
  ;; File "very_longs.ads", line 84, characters 0-0
   (not
-  (= (div1 (+ (- (to_rep1 (last (rt number))) string_index3) 1) 2) (+ (- 
+  (= (div1 (+ (- (to_rep1 (last (rt number))) string_index3) 1) 2) (+ (-
   index3 1) 1))))
 (check-sat)
+(exit)

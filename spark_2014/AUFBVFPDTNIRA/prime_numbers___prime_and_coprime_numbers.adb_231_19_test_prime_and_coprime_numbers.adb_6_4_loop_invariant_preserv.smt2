@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun div1 (Int Int) Int)
@@ -223,7 +223,7 @@
 
 (declare-datatypes ()
 ((value_type__ref (mk_value_type__ref (value_type__content value_type)))))
-(define-fun value_type__ref___projection ((a value_type__ref)) value_type 
+(define-fun value_type__ref___projection ((a value_type__ref)) value_type
   (value_type__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_178 Int)
@@ -251,7 +251,7 @@
 ((tnumber_list_typeD1__ref
  (mk_tnumber_list_typeD1__ref
  (tnumber_list_typeD1__content tnumber_list_typeD1)))))
-(define-fun tnumber_list_typeD1__ref___projection ((a tnumber_list_typeD1__ref)) tnumber_list_typeD1 
+(define-fun tnumber_list_typeD1__ref___projection ((a tnumber_list_typeD1__ref)) tnumber_list_typeD1
   (tnumber_list_typeD1__content a))
 
 (declare-datatypes ()
@@ -270,7 +270,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int Bool) Int Int (Array Int Bool) Int
@@ -285,7 +285,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (Bool Int) (Array Int Bool))
@@ -378,7 +378,7 @@
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (forall ((i Int))
   (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (orb a a_first a_last b b_first b_last) i) (or (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select 
+     (= (select (orb a a_first a_last b b_first b_last) i) (or (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select
   (orb a a_first a_last b b_first b_last) i)) )))))
 
 ;; op_def
@@ -387,7 +387,7 @@
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (forall ((i Int))
   (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (andb a a_first a_last b b_first b_last) i) (and (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select 
+     (= (select (andb a a_first a_last b b_first b_last) i) (and (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select
   (andb a a_first a_last b b_first b_last) i)) )))))
 
 ;; op_def
@@ -396,7 +396,7 @@
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (forall ((i Int))
   (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (xorb a a_first a_last b b_first b_last) i) (xor (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select 
+     (= (select (xorb a a_first a_last b b_first b_last) i) (xor (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select
   (xorb a a_first a_last b b_first b_last) i)) )))))
 
 ;; notb_def
@@ -405,7 +405,7 @@
   (forall ((a_first Int) (a_last Int))
   (forall ((i Int))
   (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (notb a a_first a_last) i) (not (select a i)))) :pattern ((select 
+     (= (select (notb a a_first a_last) i) (not (select a i)))) :pattern ((select
   (notb a a_first a_last) i)) )))))
 
 (declare-fun is_prime (Int) Bool)
@@ -449,7 +449,7 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(declare-fun r77b () Int)
+(declare-fun r81b () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
@@ -484,8 +484,8 @@
 
 (declare-fun dummy3 () integer)
 
-(declare-datatypes () ((t78b__ref (mk_t78b__ref (t78b__content integer)))))
-(define-fun t78b__ref___projection ((a t78b__ref)) integer (t78b__content a))
+(declare-datatypes () ((t82b__ref (mk_t82b__ref (t82b__content integer)))))
+(define-fun t82b__ref___projection ((a t82b__ref)) integer (t82b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
@@ -505,7 +505,7 @@
 
 (declare-fun index_2 () Int)
 
-(declare-fun test_prime_and_coprime_numbers__p__eratosthenes__L_5__R77b__assume () Int)
+(declare-fun test_prime_and_coprime_numbers__p__eratosthenes__L_5__R81b__assume () Int)
 
 (declare-fun o () Int)
 
@@ -598,18 +598,18 @@
 ;; H
   (assert
   (and
-  (= test_prime_and_coprime_numbers__p__eratosthenes__L_5__R77b__assume 
+  (= test_prime_and_coprime_numbers__p__eratosthenes__L_5__R81b__assume
   (to_int1 RNA (fp.sqrt RNE (fp #b0 #b10001111 #b10000110101000000000000))))
   (in_range3
   (to_int1 RNA (fp.sqrt RNE (fp #b0 #b10001111 #b10000110101000000000000))))))
 
 ;; H
   (assert
-  (= test_prime_and_coprime_numbers__p__eratosthenes__L_5__R77b__assume 
-  r77b))
+  (= test_prime_and_coprime_numbers__p__eratosthenes__L_5__R81b__assume
+  r81b))
 
 ;; H
-  (assert (in_range3 r77b))
+  (assert (in_range3 r81b))
 
 ;; H
   (assert (= (mk_int__ref result3) (mk_int__ref index_2)))
@@ -621,7 +621,7 @@
   (assert (<= 2 index_21))
 
 ;; H
-  (assert (<= index_21 r77b))
+  (assert (<= index_21 r81b))
 
 ;; H
   (assert (and (<= 2 index_22) (<= index_22 100000)))
@@ -644,10 +644,10 @@
   (assert
   (and
   (and
-  (and (=> (<= (- 2147483648) 2147483647) (in_range2 index_31))
-  (=> (<= 2 r77b) (dynamic_property 2 r77b index_22)))
+  (and (=> (<= 2 r81b) (dynamic_property 2 r81b index_22))
   (=> (<= 0 2147483647) (in_range3 index_11)))
-  (and (<= 2 index_22) (<= index_22 r77b))))
+  (=> (<= (- 2147483648) 2147483647) (in_range2 index_31)))
+  (and (<= 2 index_22) (<= index_22 r81b))))
 
 ;; H
   (assert (and (<= 0 index_22) (<= index_22 100000)))
@@ -772,3 +772,4 @@
  ;; File "prime_and_coprime_numbers.ads", line 3, characters 0-0
   (not (not (= (mod2 v div2) 0))))
 (check-sat)
+(exit)

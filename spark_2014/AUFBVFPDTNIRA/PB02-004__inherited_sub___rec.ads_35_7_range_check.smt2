@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort natural 0)
@@ -183,3 +183,4 @@
  ;; File "rec.ads", line 34, characters 0-0
   (not (<= 1 temp___f_181)))
 (check-sat)
+(exit)

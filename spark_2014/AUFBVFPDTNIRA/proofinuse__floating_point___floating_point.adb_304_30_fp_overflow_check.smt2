@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -171,7 +171,7 @@
 ;; H
   (assert
   (and (= o (fp.sub RNE d1 d0))
-  (not (or (fp.isInfinite (fp.sub RNE d1 d0)) (fp.isNaN (fp.sub RNE d1 
+  (not (or (fp.isInfinite (fp.sub RNE d1 d0)) (fp.isNaN (fp.sub RNE d1
   d0))))))
 
 ;; H
@@ -182,3 +182,4 @@
  ;; File "floating_point.adb", line 284, characters 0-0
   (not (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
 (check-sat)
+(exit)

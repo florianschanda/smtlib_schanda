@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort tserial_numberB 0)
@@ -53,7 +53,7 @@
 (declare-datatypes ()
 ((tserial_numberB__ref
  (mk_tserial_numberB__ref (tserial_numberB__content tserial_numberB)))))
-(define-fun tserial_numberB__ref___projection ((a tserial_numberB__ref)) tserial_numberB 
+(define-fun tserial_numberB__ref___projection ((a tserial_numberB__ref)) tserial_numberB
   (tserial_numberB__content a))
 
 (declare-sort serial_number 0)
@@ -73,7 +73,7 @@
 (declare-datatypes ()
 ((serial_number__ref
  (mk_serial_number__ref (serial_number__content serial_number)))))
-(define-fun serial_number__ref___projection ((a serial_number__ref)) serial_number 
+(define-fun serial_number__ref___projection ((a serial_number__ref)) serial_number
   (serial_number__content a))
 
 (define-fun dynamic_invariant ((temp___expr_135 Int)
@@ -112,3 +112,4 @@
  ;; File "serial_numbers.ads", line 2, characters 0-0
   (not (in_range (+ next_number 1))))
 (check-sat)
+(exit)

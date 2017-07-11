@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
@@ -138,7 +138,7 @@
 ((fibonacci_argument_type__ref
  (mk_fibonacci_argument_type__ref
  (fibonacci_argument_type__content fibonacci_argument_type)))))
-(define-fun fibonacci_argument_type__ref___projection ((a fibonacci_argument_type__ref)) fibonacci_argument_type 
+(define-fun fibonacci_argument_type__ref___projection ((a fibonacci_argument_type__ref)) fibonacci_argument_type
   (fibonacci_argument_type__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_185 Int)
@@ -433,3 +433,4 @@
  ;; File "system.ads", line 1, characters 0-0
   (not (in_range4 (- i2 1))))
 (check-sat)
+(exit)

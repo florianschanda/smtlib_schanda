@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -151,7 +151,7 @@
 (declare-datatypes ()
 ((positive_float__ref
  (mk_positive_float__ref (positive_float__content positive_float)))))
-(define-fun positive_float__ref___projection ((a positive_float__ref)) positive_float 
+(define-fun positive_float__ref___projection ((a positive_float__ref)) positive_float
   (positive_float__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_1294 Float32)
@@ -241,7 +241,7 @@
   (=> (not (and (fp.leq (fp.neg threshold) value) (fp.leq value threshold)))
   (=> (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) value)
   (and (= o (fp.sub RNE res1 threshold))
-  (not (or (fp.isInfinite (fp.sub RNE res1 threshold)) (fp.isNaN (fp.sub RNE 
+  (not (or (fp.isInfinite (fp.sub RNE res1 threshold)) (fp.isNaN (fp.sub RNE
   res1 threshold))))))))
 
 ;; H
@@ -261,7 +261,7 @@
   (=> (not (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) value))
   (=> (fp.lt value (fp #b0 #b00000000 #b00000000000000000000000))
   (and (= o1 (fp.add RNE res1 threshold))
-  (not (or (fp.isInfinite (fp.add RNE res1 threshold)) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE res1 threshold)) (fp.isNaN (fp.add RNE
   res1 threshold)))))))))
 
 ;; H
@@ -342,6 +342,7 @@
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.add RNE value threshold)) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE value threshold)) (fp.isNaN (fp.add RNE
   value threshold))))))
 (check-sat)
+(exit)

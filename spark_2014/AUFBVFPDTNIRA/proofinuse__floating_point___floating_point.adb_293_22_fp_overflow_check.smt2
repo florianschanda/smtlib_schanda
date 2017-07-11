@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -139,7 +139,7 @@
 (declare-datatypes ()
 ((squarable_float__ref
  (mk_squarable_float__ref (squarable_float__content squarable_float)))))
-(define-fun squarable_float__ref___projection ((a squarable_float__ref)) squarable_float 
+(define-fun squarable_float__ref___projection ((a squarable_float__ref)) squarable_float
   (squarable_float__content a))
 
 (declare-fun a () Float32)
@@ -225,3 +225,4 @@
  ;; File "floating_point.adb", line 274, characters 0-0
   (not (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
 (check-sat)
+(exit)

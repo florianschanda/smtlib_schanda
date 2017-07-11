@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun div1 (Int Int) Int)
@@ -220,7 +220,7 @@
 (declare-datatypes ()
 ((element_type__ref
  (mk_element_type__ref (element_type__content element_type)))))
-(define-fun element_type__ref___projection ((a element_type__ref)) element_type 
+(define-fun element_type__ref___projection ((a element_type__ref)) element_type
   (element_type__content a))
 
 (define-fun dynamic_invariant ((temp___expr_146 Int)
@@ -267,7 +267,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int element_type) Int Int
@@ -282,7 +282,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (element_type Int) (Array Int element_type))
@@ -480,35 +480,35 @@
 (declare-datatypes ()
 ((us_split_discrs
  (mk___split_discrs (rec__bounded_queue_v1__queue_type__max_size positive)))))
-(define-fun us_split_discrs___projection ((a us_split_discrs)) positive 
+(define-fun us_split_discrs___projection ((a us_split_discrs)) positive
   (rec__bounded_queue_v1__queue_type__max_size a))
 
 (declare-datatypes ()
 ((us_split_discrs__ref
  (mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref)) us_split_discrs 
+(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ()
 ((us_split_fields
  (mk___split_fields
  (rec__bounded_queue_v1__queue_type__count natural)(rec__bounded_queue_v1__queue_type__front positive)(rec__bounded_queue_v1__queue_type__rear positive)(rec__bounded_queue_v1__queue_type__items us_t)))))
-(define-fun us_split_fields_Count__projection ((a us_split_fields)) natural 
+(define-fun us_split_fields_Count__projection ((a us_split_fields)) natural
   (rec__bounded_queue_v1__queue_type__count a))
 
-(define-fun us_split_fields_Front__projection ((a us_split_fields)) positive 
+(define-fun us_split_fields_Front__projection ((a us_split_fields)) positive
   (rec__bounded_queue_v1__queue_type__front a))
 
-(define-fun us_split_fields_Rear__projection ((a us_split_fields)) positive 
+(define-fun us_split_fields_Rear__projection ((a us_split_fields)) positive
   (rec__bounded_queue_v1__queue_type__rear a))
 
-(define-fun us_split_fields_Items__projection ((a us_split_fields)) us_t 
+(define-fun us_split_fields_Items__projection ((a us_split_fields)) us_t
   (rec__bounded_queue_v1__queue_type__items a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -659,7 +659,7 @@
 
 (declare-datatypes ()
 ((queue_type__ref (mk_queue_type__ref (queue_type__content us_rep)))))
-(define-fun queue_type__ref___projection ((a queue_type__ref)) us_rep 
+(define-fun queue_type__ref___projection ((a queue_type__ref)) us_rep
   (queue_type__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_157 us_rep)
@@ -681,7 +681,7 @@
                                          (us_split_fields1 temp___expr_157))) 1)
                                       (= (last1
                                          (rec__bounded_queue_v1__queue_type__items
-                                         (us_split_fields1 temp___expr_157))) 
+                                         (us_split_fields1 temp___expr_157)))
                                       (to_rep1 temp___158))))))
 
 (declare-fun full (us_rep) Bool)
@@ -960,10 +960,10 @@
   (and
   (<= (to_rep3
       (first
-      (rt (rec__bounded_queue_v1__queue_type__items queue__split_fields5)))) 
+      (rt (rec__bounded_queue_v1__queue_type__items queue__split_fields5))))
   (to_rep1 (rec__bounded_queue_v1__queue_type__rear queue__split_fields5)))
   (<= (to_rep1
-      (rec__bounded_queue_v1__queue_type__rear queue__split_fields5)) 
+      (rec__bounded_queue_v1__queue_type__rear queue__split_fields5))
   (to_rep3
   (last (rt (rec__bounded_queue_v1__queue_type__items queue__split_fields5)))))))
 
@@ -983,17 +983,17 @@
 
 ;; H
   (assert
-  (= (rt (rec__bounded_queue_v1__queue_type__items queue__split_fields5)) 
+  (= (rt (rec__bounded_queue_v1__queue_type__items queue__split_fields5))
   o12))
 
 ;; H
   (assert
-  (= (rec__bounded_queue_v1__queue_type__count queue__split_fields5) 
+  (= (rec__bounded_queue_v1__queue_type__count queue__split_fields5)
   o13))
 
 ;; H
   (assert
-  (= (rec__bounded_queue_v1__queue_type__front queue__split_fields5) 
+  (= (rec__bounded_queue_v1__queue_type__front queue__split_fields5)
   o14))
 
 ;; H
@@ -1051,7 +1051,7 @@
 
 ;; H
   (assert
-  (= (rec__bounded_queue_v1__queue_type__front queue__split_fields6) 
+  (= (rec__bounded_queue_v1__queue_type__front queue__split_fields6)
   o21))
 
 ;; H
@@ -1060,7 +1060,7 @@
 
 ;; H
   (assert
-  (= (rec__bounded_queue_v1__queue_type__items queue__split_fields6) 
+  (= (rec__bounded_queue_v1__queue_type__items queue__split_fields6)
   (mk___t o23 o24)))
 
 ;; H
@@ -1129,3 +1129,4 @@
  ;; File "bounded_queue_v1.ads", line 29, characters 0-0
   (not (in_range o26)))
 (check-sat)
+(exit)

@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort integer 0)
@@ -184,3 +184,4 @@
  ;; File "get_out_subtype_int.adb", line 7, characters 0-0
   (not (in_range pitch_rate_desired1)))
 (check-sat)
+(exit)

@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -209,7 +209,7 @@
 (declare-datatypes ()
 ((t_acc_lifted__ref
  (mk_t_acc_lifted__ref (t_acc_lifted__content t_acc_lifted)))))
-(define-fun t_acc_lifted__ref___projection ((a t_acc_lifted__ref)) t_acc_lifted 
+(define-fun t_acc_lifted__ref___projection ((a t_acc_lifted__ref)) t_acc_lifted
   (t_acc_lifted__content a))
 
 (define-fun dynamic_invariant3 ((temp___expr_158 Float32)
@@ -240,7 +240,7 @@
 (declare-datatypes ()
 ((positive_float__ref
  (mk_positive_float__ref (positive_float__content positive_float)))))
-(define-fun positive_float__ref___projection ((a positive_float__ref)) positive_float 
+(define-fun positive_float__ref___projection ((a positive_float__ref)) positive_float
   (positive_float__content a))
 
 (define-fun dynamic_invariant4 ((temp___expr_1294 Float32)
@@ -271,7 +271,7 @@
 (declare-datatypes ()
 ((t_delta_time__ref
  (mk_t_delta_time__ref (t_delta_time__content t_delta_time)))))
-(define-fun t_delta_time__ref___projection ((a t_delta_time__ref)) t_delta_time 
+(define-fun t_delta_time__ref___projection ((a t_delta_time__ref)) t_delta_time
   (t_delta_time__content a))
 
 (define-fun dynamic_invariant5 ((temp___expr_1300 Float32)
@@ -332,7 +332,7 @@
 (declare-datatypes ()
 ((t_quaternion__ref
  (mk_t_quaternion__ref (t_quaternion__content t_quaternion)))))
-(define-fun t_quaternion__ref___projection ((a t_quaternion__ref)) t_quaternion 
+(define-fun t_quaternion__ref___projection ((a t_quaternion__ref)) t_quaternion
   (t_quaternion__content a))
 
 (define-fun dynamic_invariant7 ((temp___expr_1336 Float32)
@@ -1171,7 +1171,7 @@
 
 ;; H
   (assert
-  (= half_vz1 (fp.add RNE (fp.sub RNE (fp.mul RNE q0 q0) (fp #b0 #b01111110 #b00000000000000000000000)) (fp.mul RNE 
+  (= half_vz1 (fp.add RNE (fp.sub RNE (fp.mul RNE q0 q0) (fp #b0 #b01111110 #b00000000000000000000000)) (fp.mul RNE
   q3 q3))))
 
 ;; H
@@ -1257,7 +1257,7 @@
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (and
   (= o (inv_sqrt
-       (fp.add RNE (fp.add RNE (fp.mul RNE c6b c6b) (fp.mul RNE c7b c7b)) (fp.mul RNE 
+       (fp.add RNE (fp.add RNE (fp.mul RNE c6b c6b) (fp.mul RNE c7b c7b)) (fp.mul RNE
        c8b c8b))))
   (and (not (or (fp.isInfinite o) (fp.isNaN o)))
   (and (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) o)
@@ -1289,7 +1289,7 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (and (= o1 (fp.mul RNE c6b recip_norm2))
-  (not (or (fp.isInfinite (fp.mul RNE c6b recip_norm2)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE c6b recip_norm2)) (fp.isNaN (fp.mul RNE
   c6b recip_norm2)))))))
 
 ;; H
@@ -1306,7 +1306,7 @@
   (ite (fp.lt o1 (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)))
   (fp.eq o2 (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)))
   (ite (fp.lt (fp #b0 #b01111111 #b00000000000000000000000) o1)
-  (fp.eq o2 (fp #b0 #b01111111 #b00000000000000000000000)) (fp.eq o2 
+  (fp.eq o2 (fp #b0 #b01111111 #b00000000000000000000000)) (fp.eq o2
   o1)))))))
 
 ;; H
@@ -1344,7 +1344,7 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (and (= o4 (fp.mul RNE c7b recip_norm2))
-  (not (or (fp.isInfinite (fp.mul RNE c7b recip_norm2)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE c7b recip_norm2)) (fp.isNaN (fp.mul RNE
   c7b recip_norm2)))))))
 
 ;; H
@@ -1361,7 +1361,7 @@
   (ite (fp.lt o4 (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)))
   (fp.eq o5 (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)))
   (ite (fp.lt (fp #b0 #b01111111 #b00000000000000000000000) o4)
-  (fp.eq o5 (fp #b0 #b01111111 #b00000000000000000000000)) (fp.eq o5 
+  (fp.eq o5 (fp #b0 #b01111111 #b00000000000000000000000)) (fp.eq o5
   o4)))))))
 
 ;; H
@@ -1399,7 +1399,7 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (and (= o7 (fp.mul RNE c8b recip_norm2))
-  (not (or (fp.isInfinite (fp.mul RNE c8b recip_norm2)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE c8b recip_norm2)) (fp.isNaN (fp.mul RNE
   c8b recip_norm2)))))))
 
 ;; H
@@ -1416,7 +1416,7 @@
   (ite (fp.lt o7 (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)))
   (fp.eq o8 (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)))
   (ite (fp.lt (fp #b0 #b01111111 #b00000000000000000000000) o7)
-  (fp.eq o8 (fp #b0 #b01111111 #b00000000000000000000000)) (fp.eq o8 
+  (fp.eq o8 (fp #b0 #b01111111 #b00000000000000000000000)) (fp.eq o8
   o7)))))))
 
 ;; H
@@ -1454,7 +1454,7 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (and (= o10 (fp.mul RNE norm_az2 half_vy1))
-  (not (or (fp.isInfinite (fp.mul RNE norm_az2 half_vy1)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE norm_az2 half_vy1)) (fp.isNaN (fp.mul RNE
   norm_az2 half_vy1)))))))
 
 ;; H
@@ -1465,7 +1465,7 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (and (= o11 (fp.mul RNE norm_ay2 half_vz1))
-  (not (or (fp.isInfinite (fp.mul RNE norm_ay2 half_vz1)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE norm_ay2 half_vz1)) (fp.isNaN (fp.mul RNE
   norm_ay2 half_vz1)))))))
 
 ;; H
@@ -1512,7 +1512,7 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (and (= o14 (fp.mul RNE norm_ax2 half_vz1))
-  (not (or (fp.isInfinite (fp.mul RNE norm_ax2 half_vz1)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE norm_ax2 half_vz1)) (fp.isNaN (fp.mul RNE
   norm_ax2 half_vz1)))))))
 
 ;; H
@@ -1523,7 +1523,7 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (and (= o15 (fp.mul RNE norm_az2 half_vx1))
-  (not (or (fp.isInfinite (fp.mul RNE norm_az2 half_vx1)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE norm_az2 half_vx1)) (fp.isNaN (fp.mul RNE
   norm_az2 half_vx1)))))))
 
 ;; H
@@ -1570,7 +1570,7 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (and (= o18 (fp.mul RNE norm_ay2 half_vx1))
-  (not (or (fp.isInfinite (fp.mul RNE norm_ay2 half_vx1)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE norm_ay2 half_vx1)) (fp.isNaN (fp.mul RNE
   norm_ay2 half_vx1)))))))
 
 ;; H
@@ -1581,7 +1581,7 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (and (= o19 (fp.mul RNE norm_ax2 half_vy1))
-  (not (or (fp.isInfinite (fp.mul RNE norm_ax2 half_vy1)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE norm_ax2 half_vy1)) (fp.isNaN (fp.mul RNE
   norm_ax2 half_vy1)))))))
 
 ;; H
@@ -1629,7 +1629,7 @@
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (=> (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) two_ki)
   (and (= o22 (fp.mul RNE two_ki half_ex2))
-  (not (or (fp.isInfinite (fp.mul RNE two_ki half_ex2)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE two_ki half_ex2)) (fp.isNaN (fp.mul RNE
   two_ki half_ex2))))))))
 
 ;; H
@@ -1702,7 +1702,7 @@
   (=> (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) two_ki)
   (and (= o27 (fp.mul RNE two_ki (let ((subject half_ey)) half_ey2)))
   (not (or (fp.isInfinite (fp.mul RNE two_ki (let ((subject half_ey))
-                                             half_ey2))) (fp.isNaN (fp.mul RNE 
+                                             half_ey2))) (fp.isNaN (fp.mul RNE
   two_ki (let ((subject half_ey)) half_ey2)))))))))
 
 ;; H
@@ -1775,7 +1775,7 @@
   (=> (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) two_ki)
   (and (= o32 (fp.mul RNE two_ki (let ((subject half_ez)) half_ez2)))
   (not (or (fp.isInfinite (fp.mul RNE two_ki (let ((subject half_ez))
-                                             half_ez2))) (fp.isNaN (fp.mul RNE 
+                                             half_ez2))) (fp.isNaN (fp.mul RNE
   two_ki (let ((subject half_ez)) half_ez2)))))))))
 
 ;; H
@@ -1847,7 +1847,7 @@
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (=> (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) two_ki)
   (and (= o37 (fp.add RNE rad_gx1 integral_fbx2))
-  (not (or (fp.isInfinite (fp.add RNE rad_gx1 integral_fbx2)) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE rad_gx1 integral_fbx2)) (fp.isNaN (fp.add RNE
   rad_gx1 integral_fbx2))))))))
 
 ;; H
@@ -1879,7 +1879,7 @@
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (=> (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) two_ki)
   (and (= o38 (fp.add RNE rad_gy1 integral_fby2))
-  (not (or (fp.isInfinite (fp.add RNE rad_gy1 integral_fby2)) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE rad_gy1 integral_fby2)) (fp.isNaN (fp.add RNE
   rad_gy1 integral_fby2))))))))
 
 ;; H
@@ -1911,7 +1911,7 @@
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (=> (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) two_ki)
   (and (= o39 (fp.add RNE rad_gz1 integral_fbz2))
-  (not (or (fp.isInfinite (fp.add RNE rad_gz1 integral_fbz2)) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE rad_gz1 integral_fbz2)) (fp.isNaN (fp.add RNE
   rad_gz1 integral_fbz2))))))))
 
 ;; H
@@ -2062,7 +2062,7 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (and (= o40 (fp.mul RNE two_kp half_ex2))
-  (not (or (fp.isInfinite (fp.mul RNE two_kp half_ex2)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE two_kp half_ex2)) (fp.isNaN (fp.mul RNE
   two_kp half_ex2)))))))
 
 ;; H
@@ -2110,7 +2110,7 @@
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (and (= o43 (fp.mul RNE two_kp (let ((subject half_ey)) half_ey2)))
   (not (or (fp.isInfinite (fp.mul RNE two_kp (let ((subject half_ey))
-                                             half_ey2))) (fp.isNaN (fp.mul RNE 
+                                             half_ey2))) (fp.isNaN (fp.mul RNE
   two_kp (let ((subject half_ey)) half_ey2))))))))
 
 ;; H
@@ -2158,7 +2158,7 @@
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (and (= o46 (fp.mul RNE two_kp (let ((subject half_ez)) half_ez2)))
   (not (or (fp.isInfinite (fp.mul RNE two_kp (let ((subject half_ez))
-                                             half_ez2))) (fp.isNaN (fp.mul RNE 
+                                             half_ez2))) (fp.isNaN (fp.mul RNE
   two_kp (let ((subject half_ez)) half_ez2))))))))
 
 ;; H
@@ -2462,7 +2462,7 @@
 
 ;; H
   (assert
-  (= rad_gx4 (fp.mul RNE rad_gx3 (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000) 
+  (= rad_gx4 (fp.mul RNE rad_gx3 (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000)
   c9b))))
 
 ;; H
@@ -2470,7 +2470,7 @@
 
 ;; H
   (assert
-  (= rad_gy4 (fp.mul RNE rad_gy3 (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000) 
+  (= rad_gy4 (fp.mul RNE rad_gy3 (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000)
   c9b))))
 
 ;; H
@@ -2478,25 +2478,25 @@
 
 ;; H
   (assert
-  (= rad_gz4 (fp.mul RNE rad_gz3 (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000) 
+  (= rad_gz4 (fp.mul RNE rad_gz3 (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000)
   c9b))))
 
 ;; H
   (assert
   (and (= o53 (fp.mul RNE q3 rad_gz4))
-  (not (or (fp.isInfinite (fp.mul RNE q3 rad_gz4)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE q3 rad_gz4)) (fp.isNaN (fp.mul RNE
   q3 rad_gz4))))))
 
 ;; H
   (assert
   (and (= o50 (fp.mul RNE (let ((subject qc)) qc1) rad_gy4))
-  (not (or (fp.isInfinite (fp.mul RNE (let ((subject qc)) qc1) rad_gy4)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE (let ((subject qc)) qc1) rad_gy4)) (fp.isNaN (fp.mul RNE
   (let ((subject qc)) qc1) rad_gy4))))))
 
 ;; H
   (assert
   (and (= o49 (fp.mul RNE (let ((subject qb)) qb1) rad_gx4))
-  (not (or (fp.isInfinite (fp.mul RNE (let ((subject qb)) qb1) rad_gx4)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE (let ((subject qb)) qb1) rad_gx4)) (fp.isNaN (fp.mul RNE
   (let ((subject qb)) qb1) rad_gx4))))))
 
 ;; H
@@ -2529,19 +2529,19 @@
 ;; H
   (assert
   (and (= o62 (fp.mul RNE q3 rad_gy4))
-  (not (or (fp.isInfinite (fp.mul RNE q3 rad_gy4)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE q3 rad_gy4)) (fp.isNaN (fp.mul RNE
   q3 rad_gy4))))))
 
 ;; H
   (assert
   (and (= o59 (fp.mul RNE (let ((subject qc)) qc1) rad_gz4))
-  (not (or (fp.isInfinite (fp.mul RNE (let ((subject qc)) qc1) rad_gz4)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE (let ((subject qc)) qc1) rad_gz4)) (fp.isNaN (fp.mul RNE
   (let ((subject qc)) qc1) rad_gz4))))))
 
 ;; H
   (assert
   (and (= o60 (fp.mul RNE (let ((subject qa)) qa1) rad_gx4))
-  (not (or (fp.isInfinite (fp.mul RNE (let ((subject qa)) qa1) rad_gx4)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE (let ((subject qa)) qa1) rad_gx4)) (fp.isNaN (fp.mul RNE
   (let ((subject qa)) qa1) rad_gx4))))))
 
 ;; H
@@ -2571,19 +2571,19 @@
 ;; H
   (assert
   (and (= o71 (fp.mul RNE q3 rad_gx4))
-  (not (or (fp.isInfinite (fp.mul RNE q3 rad_gx4)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE q3 rad_gx4)) (fp.isNaN (fp.mul RNE
   q3 rad_gx4))))))
 
 ;; H
   (assert
   (and (= o68 (fp.mul RNE (let ((subject qb)) qb1) rad_gz4))
-  (not (or (fp.isInfinite (fp.mul RNE (let ((subject qb)) qb1) rad_gz4)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE (let ((subject qb)) qb1) rad_gz4)) (fp.isNaN (fp.mul RNE
   (let ((subject qb)) qb1) rad_gz4))))))
 
 ;; H
   (assert
   (and (= o69 (fp.mul RNE (let ((subject qa)) qa1) rad_gy4))
-  (not (or (fp.isInfinite (fp.mul RNE (let ((subject qa)) qa1) rad_gy4)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE (let ((subject qa)) qa1) rad_gy4)) (fp.isNaN (fp.mul RNE
   (let ((subject qa)) qa1) rad_gy4))))))
 
 ;; H
@@ -2613,19 +2613,19 @@
 ;; H
   (assert
   (and (= o80 (fp.mul RNE (let ((subject qc)) qc1) rad_gx4))
-  (not (or (fp.isInfinite (fp.mul RNE (let ((subject qc)) qc1) rad_gx4)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE (let ((subject qc)) qc1) rad_gx4)) (fp.isNaN (fp.mul RNE
   (let ((subject qc)) qc1) rad_gx4))))))
 
 ;; H
   (assert
   (and (= o77 (fp.mul RNE (let ((subject qb)) qb1) rad_gy4))
-  (not (or (fp.isInfinite (fp.mul RNE (let ((subject qb)) qb1) rad_gy4)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE (let ((subject qb)) qb1) rad_gy4)) (fp.isNaN (fp.mul RNE
   (let ((subject qb)) qb1) rad_gy4))))))
 
 ;; H
   (assert
   (and (= o78 (fp.mul RNE (let ((subject qa)) qa1) rad_gz4))
-  (not (or (fp.isInfinite (fp.mul RNE (let ((subject qa)) qa1) rad_gz4)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE (let ((subject qa)) qa1) rad_gz4)) (fp.isNaN (fp.mul RNE
   (let ((subject qa)) qa1) rad_gz4))))))
 
 ;; H
@@ -2656,8 +2656,9 @@
 ;; WP_parameter_def
  ;; File "i-cexten.ads", line 59, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.mul RNE (let ((subject q3_tmp)) q3_tmp1) 
-  (let ((subject q3_tmp)) q3_tmp1))) (fp.isNaN (fp.mul RNE (let ((subject 
-                                                           q3_tmp)) q3_tmp1) 
+  (not (or (fp.isInfinite (fp.mul RNE (let ((subject q3_tmp)) q3_tmp1)
+  (let ((subject q3_tmp)) q3_tmp1))) (fp.isNaN (fp.mul RNE (let ((subject
+                                                           q3_tmp)) q3_tmp1)
   (let ((subject q3_tmp)) q3_tmp1)))))))
 (check-sat)
+(exit)

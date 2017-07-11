@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -144,7 +144,7 @@
 (declare-datatypes ()
 ((coordinate_type__ref
  (mk_coordinate_type__ref (coordinate_type__content coordinate_type)))))
-(define-fun coordinate_type__ref___projection ((a coordinate_type__ref)) coordinate_type 
+(define-fun coordinate_type__ref___projection ((a coordinate_type__ref)) coordinate_type
   (coordinate_type__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_135 Float64)
@@ -194,7 +194,7 @@
 
 (declare-datatypes ()
 ((radius_type__ref (mk_radius_type__ref (radius_type__content radius_type)))))
-(define-fun radius_type__ref___projection ((a radius_type__ref)) radius_type 
+(define-fun radius_type__ref___projection ((a radius_type__ref)) radius_type
   (radius_type__content a))
 
 (declare-fun to_rep1 (radius_type) Float64)
@@ -224,7 +224,7 @@
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -371,7 +371,7 @@
 (declare-datatypes ()
 ((full_width_type__ref
  (mk_full_width_type__ref (full_width_type__content full_width_type)))))
-(define-fun full_width_type__ref___projection ((a full_width_type__ref)) full_width_type 
+(define-fun full_width_type__ref___projection ((a full_width_type__ref)) full_width_type
   (full_width_type__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_156 Float64)
@@ -436,7 +436,7 @@
                              (us_split_fields1 c))))))
   (not (or (fp.isInfinite (fp.abs (fp.sub RNE x (to_rep
                                                 (rec__shapes5__circle__center_x
-                                                (us_split_fields1 c)))))) (fp.isNaN (fp.abs (fp.sub RNE 
+                                                (us_split_fields1 c)))))) (fp.isNaN (fp.abs (fp.sub RNE
   x (to_rep (rec__shapes5__circle__center_x (us_split_fields1 c))))))))))
 
 ;; H
@@ -452,3 +452,4 @@
   (fp.abs (fp.sub RNE y (to_rep
                         (rec__shapes5__circle__center_y (us_split_fields1 c))))))))
 (check-sat)
+(exit)

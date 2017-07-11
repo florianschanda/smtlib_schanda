@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
@@ -63,7 +63,7 @@
 
 (declare-datatypes ()
 ((value_type__ref (mk_value_type__ref (value_type__content value_type)))))
-(define-fun value_type__ref___projection ((a value_type__ref)) value_type 
+(define-fun value_type__ref___projection ((a value_type__ref)) value_type
   (value_type__content a))
 
 (define-fun dynamic_invariant ((temp___expr_178 Int)
@@ -91,7 +91,7 @@
 ((tnumber_list_typeD1__ref
  (mk_tnumber_list_typeD1__ref
  (tnumber_list_typeD1__content tnumber_list_typeD1)))))
-(define-fun tnumber_list_typeD1__ref___projection ((a tnumber_list_typeD1__ref)) tnumber_list_typeD1 
+(define-fun tnumber_list_typeD1__ref___projection ((a tnumber_list_typeD1__ref)) tnumber_list_typeD1
   (tnumber_list_typeD1__content a))
 
 (declare-datatypes ()
@@ -110,7 +110,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int Bool) Int Int (Array Int Bool) Int
@@ -125,7 +125,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (Bool Int) (Array Int Bool))
@@ -218,7 +218,7 @@
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (forall ((i Int))
   (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (orb a a_first a_last b b_first b_last) i) (or (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select 
+     (= (select (orb a a_first a_last b b_first b_last) i) (or (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select
   (orb a a_first a_last b b_first b_last) i)) )))))
 
 ;; op_def
@@ -227,7 +227,7 @@
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (forall ((i Int))
   (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (andb a a_first a_last b b_first b_last) i) (and (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select 
+     (= (select (andb a a_first a_last b b_first b_last) i) (and (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select
   (andb a a_first a_last b b_first b_last) i)) )))))
 
 ;; op_def
@@ -236,7 +236,7 @@
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (forall ((i Int))
   (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (xorb a a_first a_last b b_first b_last) i) (xor (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select 
+     (= (select (xorb a a_first a_last b b_first b_last) i) (xor (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select
   (xorb a a_first a_last b b_first b_last) i)) )))))
 
 ;; notb_def
@@ -245,7 +245,7 @@
   (forall ((a_first Int) (a_last Int))
   (forall ((i Int))
   (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (notb a a_first a_last) i) (not (select a i)))) :pattern ((select 
+     (= (select (notb a a_first a_last) i) (not (select a i)))) :pattern ((select
   (notb a a_first a_last) i)) )))))
 
 (declare-fun are_coprime (Int Int) Bool)
@@ -347,7 +347,7 @@
 
 (declare-fun euclid__function_guard (Int Int Int) Bool)
 
-(declare-sort t52b 0)
+(declare-sort t56b 0)
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 100000)))
 
@@ -357,12 +357,12 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
 
-(declare-fun user_eq2 (t52b t52b) Bool)
+(declare-fun user_eq2 (t56b t56b) Bool)
 
-(declare-fun dummy2 () t52b)
+(declare-fun dummy2 () t56b)
 
-(declare-datatypes () ((t52b__ref (mk_t52b__ref (t52b__content t52b)))))
-(define-fun t52b__ref___projection ((a t52b__ref)) t52b (t52b__content a))
+(declare-datatypes () ((t56b__ref (mk_t56b__ref (t56b__content t56b)))))
+(define-fun t56b__ref___projection ((a t56b__ref)) t56b (t56b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
@@ -439,12 +439,11 @@
 ;; H
   (assert
   (and
-  (and
-  (forall ((temp___226 Int))
-  (=> (and (<= 0 temp___226) (<= temp___226 100000))
-  (=> (< index2 temp___226)
-  (= (select result__2 temp___226) (select result__ temp___226)))))
-  (=> (<= 0 100000) (in_range3 index2)))
+  (and (=> (<= 0 100000) (in_range3 index2))
+  (forall ((temp___227 Int))
+  (=> (and (<= 0 temp___227) (<= temp___227 100000))
+  (=> (< index2 temp___227)
+  (= (select result__2 temp___227) (select result__ temp___227))))))
   (and (<= 0 index2) (<= index2 100000))))
 
 ;; H
@@ -470,3 +469,4 @@
  ;; File "prime_and_coprime_numbers.ads", line 12, characters 0-0
   (not (<= 0 v)))
 (check-sat)
+(exit)

@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -112,7 +112,7 @@
 ((tfloat_with_approxB__ref
  (mk_tfloat_with_approxB__ref
  (tfloat_with_approxB__content tfloat_with_approxB)))))
-(define-fun tfloat_with_approxB__ref___projection ((a tfloat_with_approxB__ref)) tfloat_with_approxB 
+(define-fun tfloat_with_approxB__ref___projection ((a tfloat_with_approxB__ref)) tfloat_with_approxB
   (tfloat_with_approxB__content a))
 
 (declare-fun olt (Float32 Float32) Bool)
@@ -134,7 +134,7 @@
 (declare-datatypes ()
 ((float_with_approx__ref
  (mk_float_with_approx__ref (float_with_approx__content float_with_approx)))))
-(define-fun float_with_approx__ref___projection ((a float_with_approx__ref)) float_with_approx 
+(define-fun float_with_approx__ref___projection ((a float_with_approx__ref)) float_with_approx
   (float_with_approx__content a))
 
 (define-fun dynamic_invariant ((temp___expr_141 Float32)
@@ -154,11 +154,11 @@
      (fp.lt left (fp.add RNE right (fp #b0 #b01101110 #b01001111100010110101100)))) :pattern (
   (olt left right)) )))
 
-(declare-fun sin1 (Float32) Float32)
+(declare-fun sin2 (Float32) Float32)
 
 (declare-fun sin__function_guard (Float32 Float32) Bool)
 
-(declare-fun cos1 (Float32) Float32)
+(declare-fun cos2 (Float32) Float32)
 
 (declare-fun cos__function_guard (Float32 Float32) Bool)
 
@@ -166,19 +166,19 @@
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true)
-     (let ((result (cos1 x)))
+     (let ((result (cos2 x)))
      (and
      (=>
      (and (fp.leq (fp.neg (fp #b0 #b10000101 #b00101100000000000000000)) x)
      (fp.leq x (fp #b0 #b10000101 #b00101100000000000000000)))
      (fp.leq (fp #b0 #b01111011 #b10011001100110011001101) result))
-     (dynamic_invariant result true false true)))) :pattern ((cos1 x)) )))
+     (dynamic_invariant result true false true)))) :pattern ((cos2 x)) )))
 
 ;; cos__def_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true) (= (cos1 x) (sin1 x))) :pattern (
-  (cos1 x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (cos2 x) (sin2 x))) :pattern (
+  (cos2 x)) )))
 
 (declare-sort latitude 0)
 
@@ -242,7 +242,7 @@
 
 (declare-datatypes ()
 ((longitude__ref (mk_longitude__ref (longitude__content longitude)))))
-(define-fun longitude__ref___projection ((a longitude__ref)) longitude 
+(define-fun longitude__ref___projection ((a longitude__ref)) longitude
   (longitude__content a))
 
 (declare-fun to_rep1 (longitude) Float32)
@@ -272,7 +272,7 @@
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -352,7 +352,7 @@
 
 (declare-datatypes ()
 ((coordinates__ref (mk_coordinates__ref (coordinates__content us_rep)))))
-(define-fun coordinates__ref___projection ((a coordinates__ref)) us_rep 
+(define-fun coordinates__ref___projection ((a coordinates__ref)) us_rep
   (coordinates__content a))
 
 (declare-fun source () us_rep)
@@ -403,7 +403,7 @@
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant1 x true true true)
-     (let ((result (sin1 x)))
+     (let ((result (sin2 x)))
      (and
      (and
      (and
@@ -411,18 +411,18 @@
      (fp.leq result (fp #b0 #b01111111 #b00000000000000000000000)))
      (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
      (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000))))
-     (dynamic_invariant1 result true false true)))) :pattern ((sin1 x)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((sin2 x)) )))
 
 (declare-fun o () Float32)
 
 ;; H
   (assert
   (and
-  (= o (cos1
+  (= o (cos2
        (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source)))))
   (and (not (or (fp.isInfinite o) (fp.isNaN o)))
   (and
-  (= o (sin1
+  (= o (sin2
        (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source)))))
   (=>
   (and
@@ -439,3 +439,4 @@
  ;; File "lat_long.ads", line 6, characters 0-0
   (not (not (fp.isZero      o))))
 (check-sat)
+(exit)

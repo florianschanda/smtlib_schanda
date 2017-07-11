@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -110,7 +110,7 @@
 
 (declare-datatypes ()
 ((tfloat_32B__ref (mk_tfloat_32B__ref (tfloat_32B__content tfloat_32B)))))
-(define-fun tfloat_32B__ref___projection ((a tfloat_32B__ref)) tfloat_32B 
+(define-fun tfloat_32B__ref___projection ((a tfloat_32B__ref)) tfloat_32B
   (tfloat_32B__content a))
 
 (declare-sort float_32 0)
@@ -188,7 +188,7 @@
 
 ;; H
   (assert
-  (fp.leq (fp.div RNE x (fp #b0 #b10001000 #b11110100000000000000000)) 
+  (fp.leq (fp.div RNE x (fp #b0 #b10001000 #b11110100000000000000000))
   y))
 
 ;; H
@@ -207,3 +207,4 @@
  ;; File "floating_point.adb", line 23, characters 0-0
   (not (fp.leq res1 (fp #b0 #b10001000 #b11110100000000000000000))))
 (check-sat)
+(exit)

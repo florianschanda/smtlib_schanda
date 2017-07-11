@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -162,7 +162,7 @@
 (declare-datatypes ()
 ((acceleration_t__ref
  (mk_acceleration_t__ref (acceleration_t__content acceleration_t)))))
-(define-fun acceleration_t__ref___projection ((a acceleration_t__ref)) acceleration_t 
+(define-fun acceleration_t__ref___projection ((a acceleration_t__ref)) acceleration_t
   (acceleration_t__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_164 Float32)
@@ -190,7 +190,7 @@
 (declare-datatypes ()
 ((tdistance_tB__ref
  (mk_tdistance_tB__ref (tdistance_tB__content tdistance_tB)))))
-(define-fun tdistance_tB__ref___projection ((a tdistance_tB__ref)) tdistance_tB 
+(define-fun tdistance_tB__ref___projection ((a tdistance_tB__ref)) tdistance_tB
   (tdistance_tB__content a))
 
 (declare-sort distance_t 0)
@@ -209,7 +209,7 @@
 
 (declare-datatypes ()
 ((distance_t__ref (mk_distance_t__ref (distance_t__content distance_t)))))
-(define-fun distance_t__ref___projection ((a distance_t__ref)) distance_t 
+(define-fun distance_t__ref___projection ((a distance_t__ref)) distance_t
   (distance_t__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_176 Int)
@@ -272,7 +272,7 @@
 (declare-datatypes ()
 ((speed_km_per_h_t__ref
  (mk_speed_km_per_h_t__ref (speed_km_per_h_t__content speed_km_per_h_t)))))
-(define-fun speed_km_per_h_t__ref___projection ((a speed_km_per_h_t__ref)) speed_km_per_h_t 
+(define-fun speed_km_per_h_t__ref___projection ((a speed_km_per_h_t__ref)) speed_km_per_h_t
   (speed_km_per_h_t__content a))
 
 (define-fun dynamic_invariant4 ((temp___expr_158 Float32)
@@ -343,7 +343,7 @@
 
 ;; H
   (assert
-  (= (m_per_s_from_km_per_h (fp #b0 #b10000111 #b11110100000000000000000)) 
+  (= (m_per_s_from_km_per_h (fp #b0 #b10000111 #b11110100000000000000000))
   maximum_valid_speed))
 
 ;; H
@@ -425,8 +425,8 @@
   (assert
   (and
   (= o (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000) speed2))
-  (not (or (fp.isInfinite (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000) 
-  speed2)) (fp.isNaN (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000) 
+  (not (or (fp.isInfinite (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000)
+  speed2)) (fp.isNaN (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000)
   speed2))))))
 
 ;; H
@@ -438,7 +438,8 @@
 ;; WP_parameter_def
  ;; File "units.ads", line 27, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000) 
-  speed2)) (fp.isNaN (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000) 
+  (not (or (fp.isInfinite (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000)
+  speed2)) (fp.isNaN (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000)
   speed2))))))
 (check-sat)
+(exit)

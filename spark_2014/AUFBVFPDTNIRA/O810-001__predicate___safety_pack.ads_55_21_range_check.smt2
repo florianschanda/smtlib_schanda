@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -163,3 +163,4 @@
  ;; File "types.ads", line 13, characters 0-0
   (not (in_range1 (to_int1 RNA value))))
 (check-sat)
+(exit)

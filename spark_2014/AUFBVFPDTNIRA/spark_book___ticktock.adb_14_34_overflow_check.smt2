@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -55,7 +55,7 @@
 (declare-datatypes ()
 ((tclock_typeB__ref
  (mk_tclock_typeB__ref (tclock_typeB__content tclock_typeB)))))
-(define-fun tclock_typeB__ref___projection ((a tclock_typeB__ref)) tclock_typeB 
+(define-fun tclock_typeB__ref___projection ((a tclock_typeB__ref)) tclock_typeB
   (tclock_typeB__content a))
 
 (declare-sort clock_type 0)
@@ -75,7 +75,7 @@
 
 (declare-datatypes ()
 ((clock_type__ref (mk_clock_type__ref (clock_type__content clock_type)))))
-(define-fun clock_type__ref___projection ((a clock_type__ref)) clock_type 
+(define-fun clock_type__ref___projection ((a clock_type__ref)) clock_type
   (clock_type__content a))
 
 (define-fun dynamic_invariant ((temp___expr_135 Int)
@@ -95,3 +95,4 @@
  ;; File "ticktock.adb", line 5, characters 0-0
   (not (in_range (+ clock_value 1))))
 (check-sat)
+(exit)

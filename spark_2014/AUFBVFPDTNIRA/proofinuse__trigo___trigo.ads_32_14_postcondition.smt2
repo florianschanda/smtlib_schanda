@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -130,7 +130,7 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun tan1 (Float32) Float32)
+(declare-fun tan2 (Float32) Float32)
 
 (declare-fun tan__function_guard (Float32 Float32) Bool)
 
@@ -138,11 +138,11 @@
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true)
-     (let ((result (tan1 x)))
+     (let ((result (tan2 x)))
      (and
      (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
      (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000)))
-     (dynamic_invariant result true false true)))) :pattern ((tan1 x)) )))
+     (dynamic_invariant result true false true)))) :pattern ((tan2 x)) )))
 
 (declare-fun approx_tan (Float32) Float32)
 
@@ -174,10 +174,10 @@
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true)
-     (= (approx_tan x) (fp.add RNE (fp.add RNE (fp.add RNE (fp.add RNE x (fp.div RNE 
-     (pow3 x) (fp #b0 #b10000000 #b10000000000000000000000))) (fp.div RNE (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
-     (pow5 x)) (fp #b0 #b10000010 #b11100000000000000000000))) (fp.div RNE (fp.mul RNE (fp #b0 #b10000011 #b00010000000000000000000) 
-     (pow7 x)) (fp #b0 #b10000111 #b00111011000000000000000))) (fp.div RNE (fp.mul RNE (fp #b0 #b10000100 #b11110000000000000000000) 
+     (= (approx_tan x) (fp.add RNE (fp.add RNE (fp.add RNE (fp.add RNE x (fp.div RNE
+     (pow3 x) (fp #b0 #b10000000 #b10000000000000000000000))) (fp.div RNE (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
+     (pow5 x)) (fp #b0 #b10000010 #b11100000000000000000000))) (fp.div RNE (fp.mul RNE (fp #b0 #b10000011 #b00010000000000000000000)
+     (pow7 x)) (fp #b0 #b10000111 #b00111011000000000000000))) (fp.div RNE (fp.mul RNE (fp #b0 #b10000100 #b11110000000000000000000)
      (pow9 x)) (fp #b0 #b10001010 #b01100010011000000000000))))) :pattern (
   (approx_tan x)) )))
 
@@ -259,7 +259,7 @@
 
 ;; H
   (assert
-  (and (fp.leq (fp.neg (fp #b0 #b01111110 #b00000000000000000000000)) 
+  (and (fp.leq (fp.neg (fp #b0 #b01111110 #b00000000000000000000000))
   x) (fp.leq x (fp #b0 #b01111110 #b00000000000000000000000))))
 
 ;; H
@@ -270,7 +270,7 @@
 
 ;; H
   (assert
-  (and (= o (tan1 x))
+  (and (= o (tan2 x))
   (and (not (or (fp.isInfinite o) (fp.isNaN o)))
   (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq o (fp #b0 #b00000000 #b00000000000000000000000))))))
@@ -297,3 +297,4 @@
   (not
   (fp.lt (fp.abs (fp.sub RNE trigo__tan__result4 (approx_tan x))) (fp #b0 #b01110001 #b10100011011011100010111))))
 (check-sat)
+(exit)

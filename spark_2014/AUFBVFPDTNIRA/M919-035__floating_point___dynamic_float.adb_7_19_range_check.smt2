@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -208,7 +208,7 @@
   (temp___do_toplevel_176 Bool)
   (dynamic_float__L_1__i Int)) Bool (=>
                                     (or (= temp___is_init_174 true)
-                                    (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) 
+                                    (fp.leq (fp #b0 #b00000000 #b00000000000000000000000)
                                     (last dynamic_float__L_1__i)))
                                     (dynamic_property
                                     (fp #b0 #b00000000 #b00000000000000000000000)
@@ -266,3 +266,4 @@
   (not (dynamic_property (fp #b0 #b00000000 #b00000000000000000000000)
   (last i2) (fp #b0 #b01111111 #b00000000000000000000000))))
 (check-sat)
+(exit)

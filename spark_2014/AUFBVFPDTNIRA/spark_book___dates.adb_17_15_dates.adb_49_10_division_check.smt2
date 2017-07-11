@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun div1 (Int Int) Int)
@@ -135,7 +135,7 @@
 
 (declare-datatypes ()
 ((year_type__ref (mk_year_type__ref (year_type__content year_type)))))
-(define-fun year_type__ref___projection ((a year_type__ref)) year_type 
+(define-fun year_type__ref___projection ((a year_type__ref)) year_type
   (year_type__content a))
 
 (define-fun dynamic_invariant ((temp___expr_150 Int)
@@ -161,7 +161,7 @@
 
 (declare-datatypes ()
 ((month_type__ref (mk_month_type__ref (month_type__content month_type)))))
-(define-fun month_type__ref___projection ((a month_type__ref)) month_type 
+(define-fun month_type__ref___projection ((a month_type__ref)) month_type
   (month_type__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_156 Int)
@@ -238,7 +238,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int day_type) Int Int (Array Int day_type) Int
@@ -253,7 +253,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (day_type Int) (Array Int day_type))
@@ -426,3 +426,4 @@
  ;; File "dates.ads", line 6, characters 0-0
   (not (not (= 4 0))))
 (check-sat)
+(exit)

@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -157,7 +157,7 @@
 (declare-datatypes ()
 ((t_acc_lifted__ref
  (mk_t_acc_lifted__ref (t_acc_lifted__content t_acc_lifted)))))
-(define-fun t_acc_lifted__ref___projection ((a t_acc_lifted__ref)) t_acc_lifted 
+(define-fun t_acc_lifted__ref___projection ((a t_acc_lifted__ref)) t_acc_lifted
   (t_acc_lifted__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_158 Float32)
@@ -263,7 +263,7 @@
   (assert
   (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
   (=>
-  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000)) 
+  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
   x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000)))
   (let ((temp___1352 (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))))
   (or
@@ -275,7 +275,7 @@
   (assert
   (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
   (=>
-  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000)) 
+  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
   x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000)))
   (= o1 (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))))))
 
@@ -283,7 +283,7 @@
   (assert
   (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
   (=>
-  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000)) 
+  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
   x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000)))
   (= result1 res))))
 
@@ -291,8 +291,8 @@
   (assert
   (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
   (=>
-  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000)) 
-  x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000))) (= res2 
+  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
+  x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000))) (= res2
   o1))))
 
 ;; H
@@ -300,7 +300,7 @@
   (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
   (=>
   (not
-  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000)) 
+  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
   x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000))))
   (=>
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
@@ -316,7 +316,7 @@
   (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
   (=>
   (not
-  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000)) 
+  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
   x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000))))
   (=>
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
@@ -328,11 +328,11 @@
   (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
   (=>
   (not
-  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000)) 
+  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
   x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000))))
   (=>
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-  (fp.leq x (fp #b0 #b00110101 #b00000000000000000000000))) (= result2 
+  (fp.leq x (fp #b0 #b00110101 #b00000000000000000000000))) (= result2
   res)))))
 
 ;; H
@@ -340,7 +340,7 @@
   (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
   (=>
   (not
-  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000)) 
+  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
   x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000))))
   (=>
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
@@ -351,7 +351,7 @@
   (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
   (=>
   (not
-  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000)) 
+  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
   x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000))))
   (=>
   (not
@@ -368,7 +368,7 @@
   (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
   (=>
   (not
-  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000)) 
+  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
   x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000))))
   (=>
   (not
@@ -380,12 +380,12 @@
   (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
   (=>
   (not
-  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000)) 
+  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
   x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000))))
   (=>
   (not
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-  (fp.leq x (fp #b0 #b00110101 #b00000000000000000000000)))) (= result3 
+  (fp.leq x (fp #b0 #b00110101 #b00000000000000000000000)))) (= result3
   res)))))
 
 ;; H
@@ -393,12 +393,12 @@
   (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
   (=>
   (not
-  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000)) 
+  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
   x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000))))
   (=>
   (not
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-  (fp.leq x (fp #b0 #b00110101 #b00000000000000000000000)))) (= res4 
+  (fp.leq x (fp #b0 #b00110101 #b00000000000000000000000)))) (= res4
   o3)))))
 
 ;; H
@@ -406,12 +406,12 @@
   (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
   (=>
   (not
-  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000)) 
+  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
   x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000))))
   (=>
   (not
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-  (fp.leq x (fp #b0 #b00110101 #b00000000000000000000000)))) (= res3 
+  (fp.leq x (fp #b0 #b00110101 #b00000000000000000000000)))) (= res3
   res4)))))
 
 ;; H
@@ -419,7 +419,7 @@
   (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
   (=>
   (not
-  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000)) 
+  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
   x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000))))
   (= res2 res3))))
 
@@ -466,3 +466,4 @@
   (not
   (fp.eq safety_pack__lift_away_from_zero__result4 (fp #b0 #b00000000 #b00000000000000000000000))))
 (check-sat)
+(exit)

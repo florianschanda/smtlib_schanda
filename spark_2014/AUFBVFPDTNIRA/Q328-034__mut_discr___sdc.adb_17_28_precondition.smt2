@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
@@ -102,7 +102,7 @@
 
 (declare-datatypes ()
 ((character__ref (mk_character__ref (character__content character)))))
-(define-fun character__ref___projection ((a character__ref)) character 
+(define-fun character__ref___projection ((a character__ref)) character
   (character__content a))
 
 (declare-fun to_rep (character) Int)
@@ -140,7 +140,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int character) Int Int (Array Int character) Int
@@ -155,7 +155,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (character Int) (Array Int character))
@@ -366,13 +366,13 @@
 
 (declare-datatypes ()
 ((us_split_fields (mk___split_fields (rec__types__value__e integer)))))
-(define-fun us_split_fields_E__projection ((a us_split_fields)) integer 
+(define-fun us_split_fields_E__projection ((a us_split_fields)) integer
   (rec__types__value__e a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -382,7 +382,7 @@
 
 (define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (= (to_rep1
-                           (rec__types__value__e (us_split_fields1 a))) 
+                           (rec__types__value__e (us_split_fields1 a)))
                    (to_rep1 (rec__types__value__e (us_split_fields1 b))))
                    true false))
 
@@ -445,7 +445,7 @@
 
 (declare-datatypes ()
 ((instruction__ref (mk_instruction__ref (instruction__content instruction)))))
-(define-fun instruction__ref___projection ((a instruction__ref)) instruction 
+(define-fun instruction__ref___projection ((a instruction__ref)) instruction
   (instruction__content a))
 
 (declare-fun to_rep2 (instruction) Int)
@@ -484,7 +484,7 @@
 
 (declare-datatypes ()
 ((operation__ref (mk_operation__ref (operation__content operation)))))
-(define-fun operation__ref___projection ((a operation__ref)) operation 
+(define-fun operation__ref___projection ((a operation__ref)) operation
   (operation__content a))
 
 (declare-fun to_rep3 (operation) Int)
@@ -523,7 +523,7 @@
 
 (declare-datatypes ()
 ((token_kind__ref (mk_token_kind__ref (token_kind__content token_kind)))))
-(define-fun token_kind__ref___projection ((a token_kind__ref)) token_kind 
+(define-fun token_kind__ref___projection ((a token_kind__ref)) token_kind
   (token_kind__content a))
 
 (declare-fun to_rep4 (token_kind) Int)
@@ -548,32 +548,32 @@
 
 (declare-datatypes ()
 ((us_split_discrs (mk___split_discrs (rec__tokens__token__kind token_kind)))))
-(define-fun us_split_discrs___projection ((a us_split_discrs)) token_kind 
+(define-fun us_split_discrs___projection ((a us_split_discrs)) token_kind
   (rec__tokens__token__kind a))
 
 (declare-datatypes ()
 ((us_split_discrs__ref
  (mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref)) us_split_discrs 
+(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ()
 ((us_split_fields2
  (mk___split_fields1
  (rec__tokens__token__val us_rep)(rec__tokens__token__op operation)(rec__tokens__token__instr instruction)))))
-(define-fun us_split_fields_Val__projection ((a us_split_fields2)) us_rep 
+(define-fun us_split_fields_Val__projection ((a us_split_fields2)) us_rep
   (rec__tokens__token__val a))
 
-(define-fun us_split_fields_Op__projection ((a us_split_fields2)) operation 
+(define-fun us_split_fields_Op__projection ((a us_split_fields2)) operation
   (rec__tokens__token__op a))
 
-(define-fun us_split_fields_Instr__projection ((a us_split_fields2)) instruction 
+(define-fun us_split_fields_Instr__projection ((a us_split_fields2)) instruction
   (rec__tokens__token__instr a))
 
 (declare-datatypes ()
 ((us_split_fields__ref1
  (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2 
+(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ()
@@ -608,7 +608,7 @@
                          (and
                          (and
                          (= (to_rep4
-                            (rec__tokens__token__kind (us_split_discrs1 a))) 
+                            (rec__tokens__token__kind (us_split_discrs1 a)))
                          (to_rep4
                          (rec__tokens__token__kind (us_split_discrs1 b))))
                          (=> (tokens__token__val__pred a)
@@ -617,12 +617,12 @@
                             (rec__tokens__token__val (us_split_fields3 b))) true)))
                          (=> (tokens__token__op__pred a)
                          (= (to_rep3
-                            (rec__tokens__token__op (us_split_fields3 a))) 
+                            (rec__tokens__token__op (us_split_fields3 a)))
                          (to_rep3
                          (rec__tokens__token__op (us_split_fields3 b))))))
                          (=> (tokens__token__instr__pred a)
                          (= (to_rep2
-                            (rec__tokens__token__instr (us_split_fields3 a))) 
+                            (rec__tokens__token__instr (us_split_fields3 a)))
                          (to_rep2
                          (rec__tokens__token__instr (us_split_fields3 b))))))
                     true false))
@@ -768,7 +768,7 @@
 
 (declare-datatypes ()
 ((file_type__ref (mk_file_type__ref (file_type__content us_rep2)))))
-(define-fun file_type__ref___projection ((a file_type__ref)) us_rep2 
+(define-fun file_type__ref___projection ((a file_type__ref)) us_rep2
   (file_type__content a))
 
 (declare-sort natural 0)
@@ -1031,3 +1031,4 @@
  ;; File "stack.ads", line 57, characters 0-0
   (not (<= 1 (argument_count Tuple0))))
 (check-sat)
+(exit)

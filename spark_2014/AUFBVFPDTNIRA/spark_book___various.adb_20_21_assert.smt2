@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun div1 (Int Int) Int)
@@ -179,3 +179,4 @@
  ;; File "various.ads", line 5, characters 0-0
   (not (in_range1 (div1 (+ x y) 2))))
 (check-sat)
+(exit)

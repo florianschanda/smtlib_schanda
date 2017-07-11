@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -112,7 +112,7 @@
 
 (declare-datatypes ()
 ((integer_8__ref (mk_integer_8__ref (integer_8__content integer_8)))))
-(define-fun integer_8__ref_2__projection ((a integer_8__ref)) integer_8 
+(define-fun integer_8__ref_2__projection ((a integer_8__ref)) integer_8
   (integer_8__content a))
 
 (define-fun dynamic_invariant ((temp___expr_147 Int)
@@ -134,3 +134,4 @@
  ;; File "interfac.ads", line 46, characters 0-0
   (not (in_range1 (to_int1 RNA (fp.sqrt RNE (of_int RNE i))))))
 (check-sat)
+(exit)

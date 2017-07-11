@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -226,17 +226,17 @@
 
 ;; ba_dot_bc__def_axiom
   (assert
-  (= ba_dot_bc (fp.add RNE (fp.mul RNE vec_ba_x vec_bc_x) (fp.mul RNE 
+  (= ba_dot_bc (fp.add RNE (fp.mul RNE vec_ba_x vec_bc_x) (fp.mul RNE
   vec_ba_y vec_bc_y))))
 
 ;; length_ba__def_axiom
   (assert
-  (= length_ba (fp.sqrt RNE (fp.add RNE (fp.mul RNE (fp.sub RNE b_x a_x) (fp.sub RNE 
+  (= length_ba (fp.sqrt RNE (fp.add RNE (fp.mul RNE (fp.sub RNE b_x a_x) (fp.sub RNE
   b_x a_x)) (fp.mul RNE (fp.sub RNE b_y a_y) (fp.sub RNE b_y a_y))))))
 
 ;; length_bc__def_axiom
   (assert
-  (= length_bc (fp.sqrt RNE (fp.add RNE (fp.mul RNE (fp.sub RNE b_x c_x) (fp.sub RNE 
+  (= length_bc (fp.sqrt RNE (fp.add RNE (fp.mul RNE (fp.sub RNE b_x c_x) (fp.sub RNE
   b_x c_x)) (fp.mul RNE (fp.sub RNE b_y c_y) (fp.sub RNE b_y c_y))))))
 
 (declare-fun res () Float32)
@@ -298,13 +298,13 @@
 ;; H
   (assert
   (and (= o (fp.mul RNE vec_ba_y vec_bc_y))
-  (not (or (fp.isInfinite (fp.mul RNE vec_ba_y vec_bc_y)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE vec_ba_y vec_bc_y)) (fp.isNaN (fp.mul RNE
   vec_ba_y vec_bc_y))))))
 
 ;; H
   (assert
   (and (= o1 (fp.mul RNE vec_ba_x vec_bc_x))
-  (not (or (fp.isInfinite (fp.mul RNE vec_ba_x vec_bc_x)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE vec_ba_x vec_bc_x)) (fp.isNaN (fp.mul RNE
   vec_ba_x vec_bc_x))))))
 
 ;; H
@@ -315,3 +315,4 @@
  ;; File "system.ads", line 1, characters 0-0
   (not (not (or (fp.isInfinite o2) (fp.isNaN o2)))))
 (check-sat)
+(exit)

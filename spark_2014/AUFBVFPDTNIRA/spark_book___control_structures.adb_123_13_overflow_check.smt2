@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun div1 (Int Int) Int)
@@ -245,7 +245,7 @@
 
 (declare-datatypes ()
 ((character__ref (mk_character__ref (character__content character)))))
-(define-fun character__ref___projection ((a character__ref)) character 
+(define-fun character__ref___projection ((a character__ref)) character
   (character__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_63 Int) (temp___is_init_60 Bool)
@@ -294,7 +294,7 @@
 
 (declare-datatypes ()
 ((number_base__ref (mk_number_base__ref (number_base__content number_base)))))
-(define-fun number_base__ref___projection ((a number_base__ref)) number_base 
+(define-fun number_base__ref___projection ((a number_base__ref)) number_base
   (number_base__content a))
 
 (define-fun dynamic_invariant4 ((temp___expr_478 Int)
@@ -348,7 +348,7 @@
 
 (declare-datatypes ()
 ((uppercase__ref (mk_uppercase__ref (uppercase__content uppercase)))))
-(define-fun uppercase__ref___projection ((a uppercase__ref)) uppercase 
+(define-fun uppercase__ref___projection ((a uppercase__ref)) uppercase
   (uppercase__content a))
 
 (define-fun dynamic_invariant6 ((temp___expr_529 Int)
@@ -1120,10 +1120,10 @@
 ;; H
   (assert
   (=> (not (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x1))
-  (and (= o6 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
+  (and (= o6 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
   x1))
-  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
-  x1)) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
+  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
+  x1)) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
   x1)))))))
 
 ;; H
@@ -1158,10 +1158,10 @@
 ;; H
   (assert
   (=> (not (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x1))
-  (and (= o9 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
+  (and (= o9 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
   x1))
-  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
-  x1)) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
+  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
+  x1)) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
   x1)))))))
 
 ;; H
@@ -1183,3 +1183,4 @@
  ;; File "control_structures.adb", line 29, characters 0-0
   (not (in_range2 (- c8 d2))))
 (check-sat)
+(exit)

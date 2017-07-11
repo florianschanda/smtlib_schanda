@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -165,7 +165,7 @@
 (declare-datatypes ()
 ((delta_time_type__ref
  (mk_delta_time_type__ref (delta_time_type__content delta_time_type)))))
-(define-fun delta_time_type__ref___projection ((a delta_time_type__ref)) delta_time_type 
+(define-fun delta_time_type__ref___projection ((a delta_time_type__ref)) delta_time_type
   (delta_time_type__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_147 Float32)
@@ -222,7 +222,7 @@
 (declare-datatypes ()
 ((delta_time_type__ref1
  (mk_delta_time_type__ref1 (delta_time_type__content1 delta_time_type1)))))
-(define-fun delta_time_type__ref_2__projection ((a delta_time_type__ref1)) delta_time_type1 
+(define-fun delta_time_type__ref_2__projection ((a delta_time_type__ref1)) delta_time_type1
   (delta_time_type__content1 a))
 
 (define-fun dynamic_invariant4 ((temp___expr_171 Float32)
@@ -313,3 +313,4 @@
  ;; File "call_sample2.adb", line 4, characters 0-0
   (not (< 0 nb_of_pp1)))
 (check-sat)
+(exit)

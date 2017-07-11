@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun nth ((_ BitVec 16) Int) Bool)
@@ -72,13 +72,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvor (bvshl v (bvurem n (_ bv16 16))) (bvlshr v (bvsub (_ bv16 16) (bvurem n (_ bv16 16))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv16 16))) (bvlshr v (bvsub (_ bv16 16) (bvurem n (_ bv16 16)))))
   (rotate_left1 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvor (bvlshr v (bvurem n (_ bv16 16))) (bvshl v (bvsub (_ bv16 16) (bvurem n (_ bv16 16))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv16 16))) (bvshl v (bvsub (_ bv16 16) (bvurem n (_ bv16 16)))))
   (rotate_right1 v (bv2nat n)))))
 
 (declare-fun nth_bv ((_ BitVec 16) (_ BitVec 16)) Bool)
@@ -218,13 +218,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
   (rotate_left2 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
   (rotate_right2 v (bv2nat n)))))
 
 (declare-fun nth_bv1 ((_ BitVec 8) (_ BitVec 8)) Bool)
@@ -298,13 +298,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvor (bvshl v (bvurem n (_ bv32 32))) (bvlshr v (bvsub (_ bv32 32) (bvurem n (_ bv32 32))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv32 32))) (bvlshr v (bvsub (_ bv32 32) (bvurem n (_ bv32 32)))))
   (rotate_left3 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvor (bvlshr v (bvurem n (_ bv32 32))) (bvshl v (bvsub (_ bv32 32) (bvurem n (_ bv32 32))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv32 32))) (bvshl v (bvsub (_ bv32 32) (bvurem n (_ bv32 32)))))
   (rotate_right3 v (bv2nat n)))))
 
 (declare-fun nth_bv2 ((_ BitVec 32) (_ BitVec 32)) Bool)
@@ -381,13 +381,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 64)) (n (_ BitVec 64)))
-  (= (bvor (bvshl v (bvurem n (_ bv64 64))) (bvlshr v (bvsub (_ bv64 64) (bvurem n (_ bv64 64))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv64 64))) (bvlshr v (bvsub (_ bv64 64) (bvurem n (_ bv64 64)))))
   (rotate_left4 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 64)) (n (_ BitVec 64)))
-  (= (bvor (bvlshr v (bvurem n (_ bv64 64))) (bvshl v (bvsub (_ bv64 64) (bvurem n (_ bv64 64))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv64 64))) (bvshl v (bvsub (_ bv64 64) (bvurem n (_ bv64 64)))))
   (rotate_right4 v (bv2nat n)))))
 
 (declare-fun nth_bv3 ((_ BitVec 64) (_ BitVec 64)) Bool)
@@ -458,7 +458,7 @@
 
 (declare-datatypes ()
 ((unsigned_16__ref (mk_unsigned_16__ref (unsigned_16__content unsigned_16)))))
-(define-fun unsigned_16__ref___projection ((a unsigned_16__ref)) unsigned_16 
+(define-fun unsigned_16__ref___projection ((a unsigned_16__ref)) unsigned_16
   (unsigned_16__content a))
 
 (define-fun dynamic_invariant ((temp___expr_165 (_ BitVec 16))
@@ -479,7 +479,7 @@
 
 (declare-datatypes ()
 ((tfloat64B__ref (mk_tfloat64B__ref (tfloat64B__content tfloat64B)))))
-(define-fun tfloat64B__ref___projection ((a tfloat64B__ref)) tfloat64B 
+(define-fun tfloat64B__ref___projection ((a tfloat64B__ref)) tfloat64B
   (tfloat64B__content a))
 
 (declare-sort float64 0)
@@ -762,7 +762,7 @@
 
 ;; H
   (assert
-  (= (fp.add RNE drag (fp.mul RNE (fp.mul RNE factor (fp #b0 #b10000000010 #b0011100111010010111100011010100111111011111001110111)) (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001))) 
+  (= (fp.add RNE drag (fp.mul RNE (fp.mul RNE factor (fp #b0 #b10000000010 #b0011100111010010111100011010100111111011111001110111)) (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001)))
   delta_speed))
 
 ;; H
@@ -774,7 +774,7 @@
 ;; H
   (assert
   (and (= o (fp.add RNE old_speed delta_speed))
-  (not (or (fp.isInfinite (fp.add RNE old_speed delta_speed)) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE old_speed delta_speed)) (fp.isNaN (fp.add RNE
   old_speed delta_speed))))))
 
 ;; H
@@ -786,7 +786,7 @@
 ;; H
   (assert
   (and
-  (fp.leq (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) 
+  (fp.leq (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))
   delta_speed)
   (fp.leq delta_speed (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))
 
@@ -798,17 +798,17 @@
 
 ;; H
   (assert
-  (fp.eq (fp.add RNE (fp.mul RNE ((_ to_fp_unsigned 11 53) RNA n_bv) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp.mul RNE (fp.add RNE ((_ to_fp_unsigned 11 53) RNA 
+  (fp.eq (fp.add RNE (fp.mul RNE ((_ to_fp_unsigned 11 53) RNA n_bv) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp.mul RNE (fp.add RNE ((_ to_fp_unsigned 11 53) RNA
   n_bv) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))
 
 ;; H
   (assert
-  (fp.eq (fp.add RNE (fp.mul RNE (of_int RNE n) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp.mul RNE (fp.add RNE 
+  (fp.eq (fp.add RNE (fp.mul RNE (of_int RNE n) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp.mul RNE (fp.add RNE
   (of_int RNE n) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))
 
 ;; H
   (assert
-  (fp.eq (fp.sub RNE (fp.mul RNE (of_int RNE n) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp.mul RNE (fp.add RNE 
+  (fp.eq (fp.sub RNE (fp.mul RNE (of_int RNE n) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp.mul RNE (fp.add RNE
   (of_int RNE n) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)))))
 
 ;; H
@@ -817,17 +817,17 @@
 
 ;; H
   (assert
-  (fp.eq (fp.add RNE (of_int RNE n) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) 
+  (fp.eq (fp.add RNE (of_int RNE n) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
   (of_int RNE (+ n 1))))
 
 ;; H
   (assert
-  (fp.leq (fp.sub RNE (fp.mul RNE (of_int RNE n) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) 
+  (fp.leq (fp.sub RNE (fp.mul RNE (of_int RNE n) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))
   new_speed1))
 
 ;; H
   (assert
-  (fp.leq (fp.mul RNE (of_int RNE (+ n 1)) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))) 
+  (fp.leq (fp.mul RNE (of_int RNE (+ n 1)) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)))
   new_speed1))
 
 (assert
@@ -836,3 +836,4 @@
   (not
   (fp.leq new_speed1 (fp.add RNE (fp.mul RNE (of_int RNE n) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)))))
 (check-sat)
+(exit)

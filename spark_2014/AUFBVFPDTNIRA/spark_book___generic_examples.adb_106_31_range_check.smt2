@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort integer 0)
@@ -90,7 +90,7 @@
 
 (declare-datatypes ()
 ((character__ref (mk_character__ref (character__content character)))))
-(define-fun character__ref___projection ((a character__ref)) character 
+(define-fun character__ref___projection ((a character__ref)) character
   (character__content a))
 
 (declare-fun to_rep (character) Int)
@@ -128,7 +128,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int character) Int Int (Array Int character) Int
@@ -143,7 +143,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (character Int) (Array Int character))
@@ -390,7 +390,7 @@
 
 (declare-datatypes ()
 ((number_base__ref (mk_number_base__ref (number_base__content number_base)))))
-(define-fun number_base__ref___projection ((a number_base__ref)) number_base 
+(define-fun number_base__ref___projection ((a number_base__ref)) number_base
   (number_base__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_479 Int)
@@ -507,7 +507,7 @@
 
 (declare-datatypes ()
 ((array_type__ref (mk_array_type__ref (array_type__content us_t1)))))
-(define-fun array_type__ref___projection ((a array_type__ref)) us_t1 
+(define-fun array_type__ref___projection ((a array_type__ref)) us_t1
   (array_type__content a))
 
 (declare-sort component_type 0)
@@ -527,7 +527,7 @@
 (declare-datatypes ()
 ((component_type__ref
  (mk_component_type__ref (component_type__content component_type)))))
-(define-fun component_type__ref___projection ((a component_type__ref)) component_type 
+(define-fun component_type__ref___projection ((a component_type__ref)) component_type
   (component_type__content a))
 
 (define-fun dynamic_invariant5 ((temp___expr_535 Int)
@@ -612,7 +612,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide1 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide1 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide1 a old_first new_first) i)) ))))))
 
 (declare-fun concat2 ((Array Int percent) Int Int (Array Int percent) Int
@@ -627,7 +627,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat2 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat2 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat2 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat2 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton2 (percent Int) (Array Int percent))
@@ -783,7 +783,7 @@
 
 (declare-datatypes ()
 ((percent_array__ref (mk_percent_array__ref (percent_array__content us_t2)))))
-(define-fun percent_array__ref___projection ((a percent_array__ref)) us_t2 
+(define-fun percent_array__ref___projection ((a percent_array__ref)) us_t2
   (percent_array__content a))
 
 (declare-sort t3 0)
@@ -863,7 +863,7 @@
 
 (declare-datatypes ()
 ((array_type__ref1 (mk_array_type__ref1 (array_type__content1 us_t3)))))
-(define-fun array_type__ref_2__projection ((a array_type__ref1)) us_t3 
+(define-fun array_type__ref_2__projection ((a array_type__ref1)) us_t3
   (array_type__content1 a))
 
 (declare-sort component_type1 0)
@@ -883,7 +883,7 @@
 (declare-datatypes ()
 ((component_type__ref1
  (mk_component_type__ref1 (component_type__content1 component_type1)))))
-(define-fun component_type__ref_2__projection ((a component_type__ref1)) component_type1 
+(define-fun component_type__ref_2__projection ((a component_type__ref1)) component_type1
   (component_type__content1 a))
 
 (define-fun dynamic_invariant7 ((temp___expr_574 Int)
@@ -993,7 +993,7 @@
 
 (declare-datatypes ()
 ((array_type__ref2 (mk_array_type__ref2 (array_type__content2 us_t4)))))
-(define-fun array_type__ref_3__projection ((a array_type__ref2)) us_t4 
+(define-fun array_type__ref_3__projection ((a array_type__ref2)) us_t4
   (array_type__content2 a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
@@ -1297,3 +1297,4 @@
   (not (dynamic_property4 0 255 (to_rep my_percents__first)
   (to_rep my_percents__last))))
 (check-sat)
+(exit)

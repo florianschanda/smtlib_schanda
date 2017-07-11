@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -147,7 +147,7 @@
   (assert (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))))
 
 ;; H
-  (assert (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000)) 
+  (assert (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
   x))
 
 ;; H
@@ -164,3 +164,4 @@
   (fp.leq temp___1351 (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))))
   (fp.leq (fp #b0 #b00110101 #b00000000000000000000000) temp___1351))))
 (check-sat)
+(exit)

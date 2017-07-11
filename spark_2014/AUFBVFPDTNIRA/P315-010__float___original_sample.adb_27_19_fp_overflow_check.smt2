@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -151,7 +151,7 @@
 (declare-datatypes ()
 ((nb_float_type__ref
  (mk_nb_float_type__ref (nb_float_type__content nb_float_type)))))
-(define-fun nb_float_type__ref___projection ((a nb_float_type__ref)) nb_float_type 
+(define-fun nb_float_type__ref___projection ((a nb_float_type__ref)) nb_float_type
   (nb_float_type__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_153 Float32)
@@ -184,7 +184,8 @@
 ;; WP_parameter_def
  ;; File "original_sample.ads", line 39, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.add RNE time (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000) 
-  nb))) (fp.isNaN (fp.add RNE time (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000) 
+  (not (or (fp.isInfinite (fp.add RNE time (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000)
+  nb))) (fp.isNaN (fp.add RNE time (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000)
   nb)))))))
 (check-sat)
+(exit)

@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -240,7 +240,7 @@
 ;; H
   (assert
   (and (= o (fp.div RNE num (fp #b0 #b00000000 #b00000000000000000000001)))
-  (not (or (fp.isInfinite (fp.div RNE num (fp #b0 #b00000000 #b00000000000000000000001))) (fp.isNaN (fp.div RNE 
+  (not (or (fp.isInfinite (fp.div RNE num (fp #b0 #b00000000 #b00000000000000000000001))) (fp.isNaN (fp.div RNE
   num (fp #b0 #b00000000 #b00000000000000000000001)))))))
 
 ;; H
@@ -267,3 +267,4 @@
   (not
   (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) basic_contracts__average__result4)))
 (check-sat)
+(exit)

@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort positive 0)
@@ -74,3 +74,4 @@
  ;; File "bounded_queue_v2.ads", line 36, characters 0-0
   (not (<= 1 1)))
 (check-sat)
+(exit)

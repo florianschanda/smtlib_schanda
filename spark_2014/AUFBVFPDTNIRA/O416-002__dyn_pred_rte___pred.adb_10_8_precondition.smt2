@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort positive 0)
@@ -281,3 +281,4 @@
  ;; File "pred.adb", line 8, characters 0-0
   (not (not (= i5b 0))))
 (check-sat)
+(exit)

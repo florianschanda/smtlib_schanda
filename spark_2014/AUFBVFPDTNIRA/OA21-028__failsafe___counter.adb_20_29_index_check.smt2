@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun nth ((_ BitVec 8) Int) Bool)
@@ -71,13 +71,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
   (rotate_left1 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
   (rotate_right1 v (bv2nat n)))))
 
 (declare-fun nth_bv ((_ BitVec 8) (_ BitVec 8)) Bool)
@@ -160,7 +160,7 @@
 (declare-datatypes ()
 ((time_slot_length__ref
  (mk_time_slot_length__ref (time_slot_length__content time_slot_length)))))
-(define-fun time_slot_length__ref___projection ((a time_slot_length__ref)) time_slot_length 
+(define-fun time_slot_length__ref___projection ((a time_slot_length__ref)) time_slot_length
   (time_slot_length__content a))
 
 (declare-sort time_slot 0)
@@ -184,7 +184,7 @@
 
 (declare-datatypes ()
 ((time_slot__ref (mk_time_slot__ref (time_slot__content time_slot)))))
-(define-fun time_slot__ref___projection ((a time_slot__ref)) time_slot 
+(define-fun time_slot__ref___projection ((a time_slot__ref)) time_slot
   (time_slot__content a))
 
 (declare-datatypes ()
@@ -204,7 +204,7 @@
   (forall ((old_first (_ BitVec 8)))
   (forall ((new_first (_ BitVec 8)))
   (forall ((i (_ BitVec 8)))
-  (! (= (select (slide a old_first new_first) i) (select a (bvsub i (bvsub new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (bvsub i (bvsub new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array (_ BitVec 8) Bool) (_ BitVec 8) (_ BitVec 8)
@@ -221,7 +221,7 @@
      (=> (and (bvule a_first i) (bvule i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (bvugt i a_last)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (bvadd (bvsub i a_last) (bvsub b_first #x01)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (bvadd (bvsub i a_last) (bvsub b_first #x01)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (Bool (_ BitVec 8)) (Array (_ BitVec 8) Bool))
@@ -328,7 +328,7 @@
   (b_first (_ BitVec 8)) (b_last (_ BitVec 8)))
   (forall ((i (_ BitVec 8)))
   (! (=> (and (bvule a_first i) (bvule i a_last))
-     (= (select (orb a a_first a_last b b_first b_last) i) (or (select a i) (select b (bvadd (bvsub i a_first) b_first))))) :pattern ((select 
+     (= (select (orb a a_first a_last b b_first b_last) i) (or (select a i) (select b (bvadd (bvsub i a_first) b_first))))) :pattern ((select
   (orb a a_first a_last b b_first b_last) i)) )))))
 
 ;; op_def
@@ -338,7 +338,7 @@
   (b_first (_ BitVec 8)) (b_last (_ BitVec 8)))
   (forall ((i (_ BitVec 8)))
   (! (=> (and (bvule a_first i) (bvule i a_last))
-     (= (select (andb a a_first a_last b b_first b_last) i) (and (select a i) (select b (bvadd (bvsub i a_first) b_first))))) :pattern ((select 
+     (= (select (andb a a_first a_last b b_first b_last) i) (and (select a i) (select b (bvadd (bvsub i a_first) b_first))))) :pattern ((select
   (andb a a_first a_last b b_first b_last) i)) )))))
 
 ;; op_def
@@ -348,7 +348,7 @@
   (b_first (_ BitVec 8)) (b_last (_ BitVec 8)))
   (forall ((i (_ BitVec 8)))
   (! (=> (and (bvule a_first i) (bvule i a_last))
-     (= (select (xorb a a_first a_last b b_first b_last) i) (xor (select a i) (select b (bvadd (bvsub i a_first) b_first))))) :pattern ((select 
+     (= (select (xorb a a_first a_last b b_first b_last) i) (xor (select a i) (select b (bvadd (bvsub i a_first) b_first))))) :pattern ((select
   (xorb a a_first a_last b b_first b_last) i)) )))))
 
 ;; notb_def
@@ -357,7 +357,7 @@
   (forall ((a_first (_ BitVec 8)) (a_last (_ BitVec 8)))
   (forall ((i (_ BitVec 8)))
   (! (=> (and (bvule a_first i) (bvule i a_last))
-     (= (select (notb a a_first a_last) i) (not (select a i)))) :pattern ((select 
+     (= (select (notb a a_first a_last) i) (not (select a i)))) :pattern ((select
   (notb a a_first a_last) i)) )))))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
@@ -486,3 +486,4 @@
  ;; File "counter.ads", line 9, characters 0-0
   (not (bvule ((_ int2bv 8) 1) k)))
 (check-sat)
+(exit)

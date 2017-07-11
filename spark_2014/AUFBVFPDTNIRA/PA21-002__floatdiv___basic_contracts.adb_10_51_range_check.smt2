@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -178,7 +178,7 @@
 
 (declare-datatypes ()
 ((pos_float__ref (mk_pos_float__ref (pos_float__content pos_float)))))
-(define-fun pos_float__ref___projection ((a pos_float__ref)) pos_float 
+(define-fun pos_float__ref___projection ((a pos_float__ref)) pos_float
   (pos_float__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_135 Float32)
@@ -209,7 +209,7 @@
 (declare-datatypes ()
 ((non_neg_float__ref
  (mk_non_neg_float__ref (non_neg_float__content non_neg_float)))))
-(define-fun non_neg_float__ref___projection ((a non_neg_float__ref)) non_neg_float 
+(define-fun non_neg_float__ref___projection ((a non_neg_float__ref)) non_neg_float
   (non_neg_float__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_141 Float32)
@@ -254,3 +254,4 @@
  ;; File "system.ads", line 1, characters 0-0
   (not (in_range4 (of_int RNE numerator))))
 (check-sat)
+(exit)

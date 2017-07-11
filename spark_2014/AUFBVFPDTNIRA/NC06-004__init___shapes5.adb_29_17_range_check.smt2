@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -156,7 +156,7 @@
 (declare-datatypes ()
 ((coordinate_type__ref
  (mk_coordinate_type__ref (coordinate_type__content coordinate_type)))))
-(define-fun coordinate_type__ref___projection ((a coordinate_type__ref)) coordinate_type 
+(define-fun coordinate_type__ref___projection ((a coordinate_type__ref)) coordinate_type
   (coordinate_type__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_135 Float64)
@@ -206,7 +206,7 @@
 
 (declare-datatypes ()
 ((radius_type__ref (mk_radius_type__ref (radius_type__content radius_type)))))
-(define-fun radius_type__ref___projection ((a radius_type__ref)) radius_type 
+(define-fun radius_type__ref___projection ((a radius_type__ref)) radius_type
   (radius_type__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_141 Float64)
@@ -243,7 +243,7 @@
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -421,97 +421,97 @@
 ;; H
   (assert
   (=>
-  (fp.leq (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000) 
+  (fp.leq (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)
   x) r1)
   (and
-  (= o (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000) 
+  (= o (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)
   x))
-  (not (or (fp.isInfinite (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000) 
-  x)) (fp.isNaN (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000) 
+  (not (or (fp.isInfinite (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)
+  x)) (fp.isNaN (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)
   x)))))))
 
 ;; H
   (assert
   (=>
-  (fp.leq (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000) 
+  (fp.leq (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)
   x) r1) (= r1 result1)))
 
 ;; H
   (assert
   (=>
-  (fp.leq (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000) 
+  (fp.leq (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)
   x) r1) (= r2 o)))
 
 ;; H
   (assert
   (=>
   (not
-  (fp.leq (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000) 
+  (fp.leq (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)
   x) r1)) (= r2 r1)))
 
 ;; H
   (assert
   (=>
-  (fp.leq (fp.sub RNE x (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000))) 
+  (fp.leq (fp.sub RNE x (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)))
   r2)
   (and
   (= o1 (fp.sub RNE x (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000))))
-  (not (or (fp.isInfinite (fp.sub RNE x (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)))) (fp.isNaN (fp.sub RNE 
+  (not (or (fp.isInfinite (fp.sub RNE x (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)))) (fp.isNaN (fp.sub RNE
   x (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)))))))))
 
 ;; H
   (assert
   (=>
-  (fp.leq (fp.sub RNE x (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000))) 
+  (fp.leq (fp.sub RNE x (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)))
   r2) (= r2 result2)))
 
 ;; H
   (assert
   (=>
-  (fp.leq (fp.sub RNE x (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000))) 
+  (fp.leq (fp.sub RNE x (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)))
   r2) (= r3 o1)))
 
 ;; H
   (assert
   (=>
   (not
-  (fp.leq (fp.sub RNE x (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000))) 
+  (fp.leq (fp.sub RNE x (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)))
   r2)) (= r3 r2)))
 
 ;; H
   (assert
   (=>
-  (fp.leq (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000) 
+  (fp.leq (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)
   y) r3)
   (and
-  (= o2 (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000) 
+  (= o2 (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)
   y))
-  (not (or (fp.isInfinite (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000) 
-  y)) (fp.isNaN (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000) 
+  (not (or (fp.isInfinite (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)
+  y)) (fp.isNaN (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)
   y)))))))
 
 ;; H
   (assert
   (=>
-  (fp.leq (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000) 
+  (fp.leq (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)
   y) r3) (= r3 result3)))
 
 ;; H
   (assert
   (=>
-  (fp.leq (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000) 
+  (fp.leq (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)
   y) r3) (= r4 o2)))
 
 ;; H
   (assert
   (=>
   (not
-  (fp.leq (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000) 
+  (fp.leq (fp.sub RNE (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)
   y) r3)) (= r4 r3)))
 
 ;; H
   (assert
-  (fp.leq (fp.sub RNE y (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000))) 
+  (fp.leq (fp.sub RNE y (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)))
   r4))
 
 (assert
@@ -520,3 +520,4 @@
   (not (in_range4
   (fp.sub RNE y (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000))))))
 (check-sat)
+(exit)

@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun nth ((_ BitVec 64) Int) Bool)
@@ -72,13 +72,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 64)) (n (_ BitVec 64)))
-  (= (bvor (bvshl v (bvurem n (_ bv64 64))) (bvlshr v (bvsub (_ bv64 64) (bvurem n (_ bv64 64))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv64 64))) (bvlshr v (bvsub (_ bv64 64) (bvurem n (_ bv64 64)))))
   (rotate_left1 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 64)) (n (_ BitVec 64)))
-  (= (bvor (bvlshr v (bvurem n (_ bv64 64))) (bvshl v (bvsub (_ bv64 64) (bvurem n (_ bv64 64))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv64 64))) (bvshl v (bvsub (_ bv64 64) (bvurem n (_ bv64 64)))))
   (rotate_right1 v (bv2nat n)))))
 
 (declare-fun nth_bv ((_ BitVec 64) (_ BitVec 64)) Bool)
@@ -227,7 +227,7 @@
   (forall ((old_first (_ BitVec 64)))
   (forall ((new_first (_ BitVec 64)))
   (forall ((i (_ BitVec 64)))
-  (! (= (select (slide a old_first new_first) i) (select a (bvsub i (bvsub new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (bvsub i (bvsub new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array (_ BitVec 64) char) (_ BitVec 64) (_ BitVec 64)
@@ -244,7 +244,7 @@
      (=> (and (bvule a_first i) (bvule i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (bvugt i a_last)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (bvadd (bvsub i a_last) (bvsub b_first #x0000000000000001)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (bvadd (bvsub i a_last) (bvsub b_first #x0000000000000001)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (char (_ BitVec 64)) (Array (_ BitVec 64) char))
@@ -267,7 +267,7 @@
                                      (=>
                                      (and (bvule a__first temp___idx_133)
                                      (bvule temp___idx_133 a__last))
-                                     (= (to_rep1 (select a temp___idx_133)) 
+                                     (= (to_rep1 (select a temp___idx_133))
                                      (to_rep1
                                      (select b (bvadd (bvsub b__first a__first) temp___idx_133)))))))
                                 true false))
@@ -443,3 +443,4 @@
  ;; File "messages.ads", line 49, characters 0-0
   (not (uint_in_range (length buffer))))
 (check-sat)
+(exit)

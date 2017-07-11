@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -238,8 +238,8 @@
   (assert
   (and
   (= o (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000) asl_alpha))
-  (not (or (fp.isInfinite (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000) 
-  asl_alpha)) (fp.isNaN (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000) 
+  (not (or (fp.isInfinite (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000)
+  asl_alpha)) (fp.isNaN (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000)
   asl_alpha))))))
 
 ;; H
@@ -251,7 +251,7 @@
 ;; H
   (assert
   (and (= o3 (fp.mul RNE asl asl_alpha))
-  (not (or (fp.isInfinite (fp.mul RNE asl asl_alpha)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE asl asl_alpha)) (fp.isNaN (fp.mul RNE
   asl asl_alpha))))))
 
 ;; H
@@ -270,8 +270,8 @@
   (assert
   (and
   (= o6 (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000) asl_alpha_long))
-  (not (or (fp.isInfinite (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000) 
-  asl_alpha_long)) (fp.isNaN (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000) 
+  (not (or (fp.isInfinite (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000)
+  asl_alpha_long)) (fp.isNaN (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000)
   asl_alpha_long))))))
 
 ;; H
@@ -283,7 +283,7 @@
 ;; H
   (assert
   (and (= o9 (fp.mul RNE asl_long asl_alpha_long))
-  (not (or (fp.isInfinite (fp.mul RNE asl_long asl_alpha_long)) (fp.isNaN (fp.mul RNE 
+  (not (or (fp.isInfinite (fp.mul RNE asl_long asl_alpha_long)) (fp.isNaN (fp.mul RNE
   asl_long asl_alpha_long))))))
 
 ;; H
@@ -294,3 +294,4 @@
  ;; File "system.ads", line 1, characters 0-0
   (not (not (or (fp.isInfinite o10) (fp.isNaN o10)))))
 (check-sat)
+(exit)

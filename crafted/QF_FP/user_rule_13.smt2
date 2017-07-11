@@ -18,7 +18,8 @@
 (assert (finite r))
 
 (assert (fp.gt d1 d0))
-(assert (fp.leq (_ +zero 8 24) r one))
+(assert (and (fp.leq (_ +zero 8 24) r)
+             (fp.leq r one)))
 (assert (fp.geq d0 (_ +zero 8 24)))
 
 (assert (not (fp.geq (fp.sub RNE d1 (fp.mul RNE r (fp.sub RNE d1 d0)))

@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun nth ((_ BitVec 8) Int) Bool)
@@ -71,13 +71,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
   (rotate_left1 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
   (rotate_right1 v (bv2nat n)))))
 
 (declare-fun nth_bv ((_ BitVec 8) (_ BitVec 8)) Bool)
@@ -160,13 +160,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvor (bvshl v (bvurem n (_ bv16 16))) (bvlshr v (bvsub (_ bv16 16) (bvurem n (_ bv16 16))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv16 16))) (bvlshr v (bvsub (_ bv16 16) (bvurem n (_ bv16 16)))))
   (rotate_left2 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvor (bvlshr v (bvurem n (_ bv16 16))) (bvshl v (bvsub (_ bv16 16) (bvurem n (_ bv16 16))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv16 16))) (bvshl v (bvsub (_ bv16 16) (bvurem n (_ bv16 16)))))
   (rotate_right2 v (bv2nat n)))))
 
 (declare-fun nth_bv1 ((_ BitVec 16) (_ BitVec 16)) Bool)
@@ -245,7 +245,7 @@
 (declare-datatypes ()
 ((digit_index_type__ref
  (mk_digit_index_type__ref (digit_index_type__content digit_index_type)))))
-(define-fun digit_index_type__ref___projection ((a digit_index_type__ref)) digit_index_type 
+(define-fun digit_index_type__ref___projection ((a digit_index_type__ref)) digit_index_type
   (digit_index_type__content a))
 
 (declare-fun to_rep (digit_index_type) Int)
@@ -325,7 +325,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int octet) Int Int (Array Int octet) Int
@@ -340,7 +340,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (octet Int) (Array Int octet))
@@ -438,7 +438,7 @@
 ((tdigit_count_typeB__ref
  (mk_tdigit_count_typeB__ref
  (tdigit_count_typeB__content tdigit_count_typeB)))))
-(define-fun tdigit_count_typeB__ref___projection ((a tdigit_count_typeB__ref)) tdigit_count_typeB 
+(define-fun tdigit_count_typeB__ref___projection ((a tdigit_count_typeB__ref)) tdigit_count_typeB
   (tdigit_count_typeB__content a))
 
 (declare-fun to_rep2 (tdigit_count_typeB) Int)
@@ -476,7 +476,7 @@
 
 (declare-datatypes ()
 ((t17s__ref (mk_t17s__ref (t17s__content tdigit_count_typeB)))))
-(define-fun t17s__ref___projection ((a t17s__ref)) tdigit_count_typeB 
+(define-fun t17s__ref___projection ((a t17s__ref)) tdigit_count_typeB
   (t17s__content a))
 
 (declare-sort t 0)
@@ -561,25 +561,25 @@
 (declare-datatypes ()
 ((us_split_discrs
  (mk___split_discrs (rec__very_longs__very_long__length digit_index_type)))))
-(define-fun us_split_discrs___projection ((a us_split_discrs)) digit_index_type 
+(define-fun us_split_discrs___projection ((a us_split_discrs)) digit_index_type
   (rec__very_longs__very_long__length a))
 
 (declare-datatypes ()
 ((us_split_discrs__ref
  (mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref)) us_split_discrs 
+(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ()
 ((us_split_fields
  (mk___split_fields (rec__very_longs__very_long__long_digits us_t)))))
-(define-fun us_split_fields_Long_Digits__projection ((a us_split_fields)) us_t 
+(define-fun us_split_fields_Long_Digits__projection ((a us_split_fields)) us_t
   (rec__very_longs__very_long__long_digits a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -686,7 +686,7 @@
                                          (us_split_fields1 temp___expr_221))) 1)
                                       (= (last1
                                          (rec__very_longs__very_long__long_digits
-                                         (us_split_fields1 temp___expr_221))) 
+                                         (us_split_fields1 temp___expr_221)))
                                       (to_rep temp___222))))))
 
 (declare-fun l () us_rep)
@@ -714,7 +714,7 @@
 (declare-datatypes ()
 ((double_octet__ref
  (mk_double_octet__ref (double_octet__content double_octet)))))
-(define-fun double_octet__ref___projection ((a double_octet__ref)) double_octet 
+(define-fun double_octet__ref___projection ((a double_octet__ref)) double_octet
   (double_octet__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_312 (_ BitVec 16))
@@ -745,7 +745,7 @@
 
 (declare-datatypes ()
 ((tT79bP1__ref (mk_tT79bP1__ref (tT79bP1__content tdigit_count_typeB)))))
-(define-fun tT79bP1__ref___projection ((a tT79bP1__ref)) tdigit_count_typeB 
+(define-fun tT79bP1__ref___projection ((a tT79bP1__ref)) tdigit_count_typeB
   (tT79bP1__content a))
 
 (declare-sort t1 0)
@@ -830,13 +830,13 @@
 (declare-datatypes ()
 ((us_split_fields2
  (mk___split_fields1 (rec__very_longs__very_long__long_digits1 us_t1)))))
-(define-fun us_split_fields_Long_Digits21__projection ((a us_split_fields2)) us_t1 
+(define-fun us_split_fields_Long_Digits21__projection ((a us_split_fields2)) us_t1
   (rec__very_longs__very_long__long_digits1 a))
 
 (declare-datatypes ()
 ((us_split_fields__ref1
  (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_21__projection ((a us_split_fields__ref1)) us_split_fields2 
+(define-fun us_split_fields__ref_21__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ()
@@ -974,7 +974,7 @@
                                          (us_split_fields3 temp___expr_582))) 1)
                                       (= (last3
                                          (rec__very_longs__very_long__long_digits1
-                                         (us_split_fields3 temp___expr_582))) 
+                                         (us_split_fields3 temp___expr_582)))
                                       (to_rep
                                       (rec__very_longs__very_long__length
                                       (us_split_discrs1 l))))))))
@@ -1015,7 +1015,7 @@
 
 (declare-datatypes ()
 ((t80b__ref (mk_t80b__ref (t80b__content tdigit_count_typeB)))))
-(define-fun t80b__ref___projection ((a t80b__ref)) tdigit_count_typeB 
+(define-fun t80b__ref___projection ((a t80b__ref)) tdigit_count_typeB
   (t80b__content a))
 
 (declare-sort t2 0)
@@ -1176,7 +1176,7 @@
 (declare-datatypes ()
 ((digits_array_type__ref
  (mk_digits_array_type__ref (digits_array_type__content us_t3)))))
-(define-fun digits_array_type__ref___projection ((a digits_array_type__ref)) us_t3 
+(define-fun digits_array_type__ref___projection ((a digits_array_type__ref)) us_t3
   (digits_array_type__content a))
 
 (declare-fun temp___929 ((_ BitVec 8) Int Int) us_t2)
@@ -1207,7 +1207,7 @@
 
 (declare-fun r_digit () (_ BitVec 16))
 
-(declare-fun difference () (_ BitVec 16))
+(declare-fun difference1 () (_ BitVec 16))
 
 (declare-fun borrow () (_ BitVec 16))
 
@@ -1291,7 +1291,7 @@
 
 (declare-fun r_digit1 () (_ BitVec 16))
 
-(declare-fun difference1 () (_ BitVec 16))
+(declare-fun difference2 () (_ BitVec 16))
 
 (declare-fun result () us_split_fields__ref1)
 
@@ -1311,7 +1311,7 @@
 
 (declare-fun r_digit2 () (_ BitVec 16))
 
-(declare-fun difference2 () (_ BitVec 16))
+(declare-fun difference3 () (_ BitVec 16))
 
 (declare-fun borrow2 () (_ BitVec 16))
 
@@ -1327,7 +1327,7 @@
 
 (declare-fun result5 () t__ref1)
 
-(declare-fun difference3 () (_ BitVec 16))
+(declare-fun difference4 () (_ BitVec 16))
 
 (declare-fun result6 () t__ref1)
 
@@ -1347,7 +1347,7 @@
 
 (declare-fun r_digit4 () t__ref1)
 
-(declare-fun difference4 () t__ref1)
+(declare-fun difference5 () t__ref1)
 
 (declare-fun borrow5 () t__ref1)
 
@@ -1359,7 +1359,7 @@
 
 (declare-fun r_digit5 () (_ BitVec 16))
 
-(declare-fun difference5 () (_ BitVec 16))
+(declare-fun difference6 () (_ BitVec 16))
 
 (declare-fun borrow6 () (_ BitVec 16))
 
@@ -1371,7 +1371,7 @@
 
 (declare-fun r_digit6 () t__ref1)
 
-(declare-fun difference6 () t__ref1)
+(declare-fun difference7 () t__ref1)
 
 (declare-fun borrow7 () t__ref1)
 
@@ -1383,7 +1383,7 @@
 
 (declare-fun r_digit7 () (_ BitVec 16))
 
-(declare-fun difference7 () (_ BitVec 16))
+(declare-fun difference8 () (_ BitVec 16))
 
 (declare-fun borrow8 () (_ BitVec 16))
 
@@ -1403,7 +1403,7 @@
 
 (declare-fun r_digit8 () t__ref1)
 
-(declare-fun difference8 () t__ref1)
+(declare-fun difference9 () t__ref1)
 
 (declare-fun borrow9 () t__ref1)
 
@@ -1417,7 +1417,7 @@
 
 (declare-fun r_digit9 () (_ BitVec 16))
 
-(declare-fun difference9 () (_ BitVec 16))
+(declare-fun difference10 () (_ BitVec 16))
 
 (declare-fun borrow10 () (_ BitVec 16))
 
@@ -1439,7 +1439,7 @@
 
 ;; H
   (assert
-  (= (to_rep (rec__very_longs__very_long__length (us_split_discrs1 l))) 
+  (= (to_rep (rec__very_longs__very_long__length (us_split_discrs1 l)))
   (to_rep (rec__very_longs__very_long__length (us_split_discrs1 r)))))
 
 ;; H
@@ -1465,7 +1465,7 @@
 
 ;; H
   (assert
-  (= (to_rep (rec__very_longs__very_long__length result____split_discrs)) 
+  (= (to_rep (rec__very_longs__very_long__length result____split_discrs))
   (to_rep (rec__very_longs__very_long__length (us_split_discrs1 l)))))
 
 ;; H
@@ -1489,7 +1489,7 @@
      (last4
      (rt2
      (temp___929 ((_ int2bv 8) 0) 1
-     (to_rep (rec__very_longs__very_long__length (us_split_discrs1 l))))))) 
+     (to_rep (rec__very_longs__very_long__length (us_split_discrs1 l)))))))
   (to_rep (rec__very_longs__very_long__length (us_split_discrs1 l)))))
 
 ;; H
@@ -1514,7 +1514,7 @@
 
 ;; H
   (assert
-  (= (mk1 (to_rep2 (first4 temp___9361)) (to_rep2 (last4 temp___9361))) 
+  (= (mk1 (to_rep2 (first4 temp___9361)) (to_rep2 (last4 temp___9361)))
   temp___9371))
 
 ;; H
@@ -1598,7 +1598,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
-  (= temp___948 difference)))
+  (= temp___948 difference1)))
 
 ;; H
   (assert
@@ -1662,7 +1662,7 @@
   (and
   (<= (to_rep2
       (first
-      (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l))))) 
+      (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))
   i2)
   (<= i2 (to_rep2
          (last
@@ -1734,7 +1734,7 @@
   (and
   (<= (to_rep2
       (first
-      (rt (rec__very_longs__very_long__long_digits (us_split_fields1 r))))) 
+      (rt (rec__very_longs__very_long__long_digits (us_split_fields1 r)))))
   i2)
   (<= i2 (to_rep2
          (last
@@ -1803,7 +1803,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
-  (= result5 (mk_t__ref1 difference2))))
+  (= result5 (mk_t__ref1 difference3))))
 
 ;; H
   (assert
@@ -1812,7 +1812,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
-  (= difference3 (bvsub (bvsub l_digit3 r_digit3) borrow2))))
+  (= difference4 (bvsub (bvsub l_digit3 r_digit3) borrow2))))
 
 ;; H
   (assert
@@ -1821,7 +1821,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
-  (=> (not (= (bvand difference3 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0)))
+  (=> (not (= (bvand difference4 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0)))
   (= result6 (mk_t__ref1 borrow2)))))
 
 ;; H
@@ -1831,7 +1831,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
-  (=> (not (= (bvand difference3 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0)))
+  (=> (not (= (bvand difference4 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0)))
   (= borrow3 ((_ int2bv 16) 1)))))
 
 ;; H
@@ -1842,7 +1842,7 @@
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
   (=>
-  (not (not (= (bvand difference3 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0))))
+  (not (not (= (bvand difference4 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0))))
   (= result7 (mk_t__ref1 borrow2)))))
 
 ;; H
@@ -1853,7 +1853,7 @@
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
   (=>
-  (not (not (= (bvand difference3 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0))))
+  (not (not (= (bvand difference4 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0))))
   (= borrow4 ((_ int2bv 16) 0)))))
 
 ;; H
@@ -1864,7 +1864,7 @@
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
   (=>
-  (not (not (= (bvand difference3 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0))))
+  (not (not (= (bvand difference4 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0))))
   (= borrow3 borrow4))))
 
 ;; H
@@ -1874,7 +1874,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
-  (= o12 (takelsb_from16 difference3))))
+  (= o12 (takelsb_from16 difference4))))
 
 ;; H
   (assert
@@ -1896,7 +1896,7 @@
   (<= (to_rep2
       (first2
       (rt1
-      (rec__very_longs__very_long__long_digits1 result____split_fields3)))) 
+      (rec__very_longs__very_long__long_digits1 result____split_fields3))))
   i2)
   (<= i2 (to_rep2
          (last2
@@ -2015,7 +2015,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
-  (= difference4 (mk_t__ref1 difference3))))
+  (= difference5 (mk_t__ref1 difference4))))
 
 ;; H
   (assert
@@ -2070,7 +2070,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
-  (= difference5 difference3)))
+  (= difference6 difference4)))
 
 ;; H
   (assert
@@ -2124,7 +2124,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
-  (= difference6 difference4)))
+  (= difference7 difference5)))
 
 ;; H
   (assert
@@ -2178,7 +2178,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
-  (= difference7 difference5)))
+  (= difference8 difference6)))
 
 ;; H
   (assert
@@ -2235,7 +2235,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l))))))))
-  (= difference6 (mk_t__ref1 difference))))
+  (= difference7 (mk_t__ref1 difference1))))
 
 ;; H
   (assert
@@ -2296,7 +2296,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l))))))))
-  (= difference7 difference1)))
+  (= difference8 difference2)))
 
 ;; H
   (assert
@@ -2363,7 +2363,7 @@
   (assert (= borrow9 borrow7))
 
 ;; H
-  (assert (= difference8 difference6))
+  (assert (= difference9 difference7))
 
 ;; H
   (assert (= r_digit8 r_digit6))
@@ -2385,7 +2385,7 @@
   (assert (= borrow10 borrow8))
 
 ;; H
-  (assert (= difference9 difference7))
+  (assert (= difference10 difference8))
 
 ;; H
   (assert (= r_digit9 r_digit7))
@@ -2408,6 +2408,7 @@
   (not
   (= (to_rep
      (rec__very_longs__very_long__length
-     (us_split_discrs1 (very_long__content very_longs__modsubtract__result6)))) 
+     (us_split_discrs1 (very_long__content very_longs__modsubtract__result6))))
   (to_rep (rec__very_longs__very_long__length (us_split_discrs1 l))))))
 (check-sat)
+(exit)

@@ -16,7 +16,8 @@
 (declare-const x Float32)
 
 ;; x in 5.0 .. 10.0
-(assert (fp.leq f5 x f10))
+(assert (and (fp.leq f5 x)
+             (fp.leq x f10)))
 
 ;; y = x * 2.0 - 5.0
 (define-fun y () Float32

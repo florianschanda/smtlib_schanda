@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
@@ -81,7 +81,7 @@
 
 (declare-datatypes ()
 ((file_type__ref (mk_file_type__ref (file_type__content us_rep)))))
-(define-fun file_type__ref_2__projection ((a file_type__ref)) us_rep 
+(define-fun file_type__ref_2__projection ((a file_type__ref)) us_rep
   (file_type__content a))
 
 (declare-sort positive_count 0)
@@ -101,7 +101,7 @@
 (declare-datatypes ()
 ((positive_count__ref
  (mk_positive_count__ref (positive_count__content positive_count)))))
-(define-fun positive_count__ref_2__projection ((a positive_count__ref)) positive_count 
+(define-fun positive_count__ref_2__projection ((a positive_count__ref)) positive_count
   (positive_count__content a))
 
 (define-fun dynamic_invariant ((temp___expr_667 Int)
@@ -186,7 +186,7 @@
 
 (declare-datatypes ()
 ((file_mode__ref (mk_file_mode__ref (file_mode__content file_mode)))))
-(define-fun file_mode__ref_3__projection ((a file_mode__ref)) file_mode 
+(define-fun file_mode__ref_3__projection ((a file_mode__ref)) file_mode
   (file_mode__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_655 Int)
@@ -230,3 +230,4 @@
  ;; File "spark-text_io.ads", line 491, characters 0-0
   (not (= (is_writable standard_output) true)))
 (check-sat)
+(exit)

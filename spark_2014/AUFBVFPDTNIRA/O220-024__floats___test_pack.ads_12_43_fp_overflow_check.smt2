@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -145,7 +145,7 @@
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -255,7 +255,8 @@
 ;; WP_parameter_def
  ;; File "test_pack.ads", line 9, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.add RNE (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) 
-  measured)) (fp.isNaN (fp.add RNE (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) 
+  (not (or (fp.isInfinite (fp.add RNE (fp.neg (fp #b0 #b11111110 #b11111111111111111111111))
+  measured)) (fp.isNaN (fp.add RNE (fp.neg (fp #b0 #b11111110 #b11111111111111111111111))
   measured))))))
 (check-sat)
+(exit)

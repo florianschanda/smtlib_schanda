@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -110,7 +110,7 @@
 
 (declare-datatypes ()
 ((tfloat_7B__ref (mk_tfloat_7B__ref (tfloat_7B__content tfloat_7B)))))
-(define-fun tfloat_7B__ref___projection ((a tfloat_7B__ref)) tfloat_7B 
+(define-fun tfloat_7B__ref___projection ((a tfloat_7B__ref)) tfloat_7B
   (tfloat_7B__content a))
 
 (declare-sort float_7 0)
@@ -205,3 +205,4 @@
  ;; File "float_example.adb", line 5, characters 0-0
   (not (fp.eq float_example__minus_i__result4 (fp.add RNE a b))))
 (check-sat)
+(exit)

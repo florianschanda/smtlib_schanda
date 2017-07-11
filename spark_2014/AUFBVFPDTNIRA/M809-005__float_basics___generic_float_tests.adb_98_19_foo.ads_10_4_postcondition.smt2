@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -221,3 +221,4 @@
  ;; File "generic_float_tests.adb", line 96, characters 0-0
   (not (= foo__float_tests__underflow_2__result4 true)))
 (check-sat)
+(exit)

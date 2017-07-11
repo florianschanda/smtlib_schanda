@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort integer 0)
@@ -66,16 +66,16 @@
 ((us_split_fields
  (mk___split_fields
  (rec__p2__protected_type__something integer)(rec__p2__protected_type__something_else integer)))))
-(define-fun us_split_fields_Something__projection ((a us_split_fields)) integer 
+(define-fun us_split_fields_Something__projection ((a us_split_fields)) integer
   (rec__p2__protected_type__something a))
 
-(define-fun us_split_fields_Something_Else__projection ((a us_split_fields)) integer 
+(define-fun us_split_fields_Something_Else__projection ((a us_split_fields)) integer
   (rec__p2__protected_type__something_else a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -140,7 +140,7 @@
 (declare-datatypes ()
 ((protected_type__ref
  (mk_protected_type__ref (protected_type__content us_rep)))))
-(define-fun protected_type__ref___projection ((a protected_type__ref)) us_rep 
+(define-fun protected_type__ref___projection ((a protected_type__ref)) us_rep
   (protected_type__content a))
 
 (declare-fun to_rep (integer) Int)
@@ -194,3 +194,4 @@
  ;; File "p2.adb", line 32, characters 0-0
   (not true))
 (check-sat)
+(exit)

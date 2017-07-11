@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun nth ((_ BitVec 16) Int) Bool)
@@ -72,13 +72,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvor (bvshl v (bvurem n (_ bv16 16))) (bvlshr v (bvsub (_ bv16 16) (bvurem n (_ bv16 16))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv16 16))) (bvlshr v (bvsub (_ bv16 16) (bvurem n (_ bv16 16)))))
   (rotate_left1 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvor (bvlshr v (bvurem n (_ bv16 16))) (bvshl v (bvsub (_ bv16 16) (bvurem n (_ bv16 16))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv16 16))) (bvshl v (bvsub (_ bv16 16) (bvurem n (_ bv16 16)))))
   (rotate_right1 v (bv2nat n)))))
 
 (declare-fun nth_bv ((_ BitVec 16) (_ BitVec 16)) Bool)
@@ -218,13 +218,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
   (rotate_left2 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
   (rotate_right2 v (bv2nat n)))))
 
 (declare-fun nth_bv1 ((_ BitVec 8) (_ BitVec 8)) Bool)
@@ -298,13 +298,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvor (bvshl v (bvurem n (_ bv32 32))) (bvlshr v (bvsub (_ bv32 32) (bvurem n (_ bv32 32))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv32 32))) (bvlshr v (bvsub (_ bv32 32) (bvurem n (_ bv32 32)))))
   (rotate_left3 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvor (bvlshr v (bvurem n (_ bv32 32))) (bvshl v (bvsub (_ bv32 32) (bvurem n (_ bv32 32))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv32 32))) (bvshl v (bvsub (_ bv32 32) (bvurem n (_ bv32 32)))))
   (rotate_right3 v (bv2nat n)))))
 
 (declare-fun nth_bv2 ((_ BitVec 32) (_ BitVec 32)) Bool)
@@ -381,13 +381,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 64)) (n (_ BitVec 64)))
-  (= (bvor (bvshl v (bvurem n (_ bv64 64))) (bvlshr v (bvsub (_ bv64 64) (bvurem n (_ bv64 64))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv64 64))) (bvlshr v (bvsub (_ bv64 64) (bvurem n (_ bv64 64)))))
   (rotate_left4 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 64)) (n (_ BitVec 64)))
-  (= (bvor (bvlshr v (bvurem n (_ bv64 64))) (bvshl v (bvsub (_ bv64 64) (bvurem n (_ bv64 64))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv64 64))) (bvshl v (bvsub (_ bv64 64) (bvurem n (_ bv64 64)))))
   (rotate_right4 v (bv2nat n)))))
 
 (declare-fun nth_bv3 ((_ BitVec 64) (_ BitVec 64)) Bool)
@@ -456,7 +456,7 @@
 
 (declare-datatypes ()
 ((long_float__ref (mk_long_float__ref (long_float__content long_float)))))
-(define-fun long_float__ref___projection ((a long_float__ref)) long_float 
+(define-fun long_float__ref___projection ((a long_float__ref)) long_float
   (long_float__content a))
 
 (define-fun dynamic_invariant ((temp___expr_57 Float64)
@@ -484,7 +484,7 @@
 (declare-datatypes ()
 ((tinteger_32B__ref
  (mk_tinteger_32B__ref (tinteger_32B__content tinteger_32B)))))
-(define-fun tinteger_32B__ref___projection ((a tinteger_32B__ref)) tinteger_32B 
+(define-fun tinteger_32B__ref___projection ((a tinteger_32B__ref)) tinteger_32B
   (tinteger_32B__content a))
 
 (declare-sort integer_32 0)
@@ -504,7 +504,7 @@
 
 (declare-datatypes ()
 ((integer_32__ref (mk_integer_32__ref (integer_32__content integer_32)))))
-(define-fun integer_32__ref_2__projection ((a integer_32__ref)) integer_32 
+(define-fun integer_32__ref_2__projection ((a integer_32__ref)) integer_32
   (integer_32__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_147 Int)
@@ -530,7 +530,7 @@
 
 (declare-datatypes ()
 ((unsigned_16__ref (mk_unsigned_16__ref (unsigned_16__content unsigned_16)))))
-(define-fun unsigned_16__ref___projection ((a unsigned_16__ref)) unsigned_16 
+(define-fun unsigned_16__ref___projection ((a unsigned_16__ref)) unsigned_16
   (unsigned_16__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_165 (_ BitVec 16))
@@ -873,7 +873,7 @@
 
 ;; H
   (assert
-  (not (or (fp.isInfinite old_estimatedgroundvelocity_memory) (fp.isNaN 
+  (not (or (fp.isInfinite old_estimatedgroundvelocity_memory) (fp.isNaN
   old_estimatedgroundvelocity_memory))))
 
 ;; H
@@ -886,7 +886,7 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite old_estimatedgroundvelocity_out1) (fp.isNaN 
+  (not (or (fp.isInfinite old_estimatedgroundvelocity_out1) (fp.isNaN
   old_estimatedgroundvelocity_out1)))))
 
 ;; H
@@ -1017,14 +1017,14 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite (t__content1 elapsed_time_h_out1)) (fp.isNaN 
+  (not (or (fp.isInfinite (t__content1 elapsed_time_h_out1)) (fp.isNaN
   (t__content1 elapsed_time_h_out1))))))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite (t__content1 avoid_div_by_zero_out1)) (fp.isNaN 
+  (not (or (fp.isInfinite (t__content1 avoid_div_by_zero_out1)) (fp.isNaN
   (t__content1 avoid_div_by_zero_out1))))))
 
 ;; H
@@ -1038,7 +1038,7 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite (t__content1 old_output_if_new_invalid_out1)) (fp.isNaN 
+  (not (or (fp.isInfinite (t__content1 old_output_if_new_invalid_out1)) (fp.isNaN
   (t__content1 old_output_if_new_invalid_out1))))))
 
 ;; H
@@ -1146,7 +1146,7 @@
 
 ;; H
   (assert
-  (= (let ((subject to_int32_left_2_out1)) to_int32_left_2_out11) (bv2nat 
+  (= (let ((subject to_int32_left_2_out1)) to_int32_left_2_out11) (bv2nat
   millisecs_out11)))
 
 ;; H
@@ -1154,7 +1154,7 @@
 
 ;; H
   (assert
-  (= (let ((subject to_int32_right_out1)) to_int32_right_out11) (bv2nat 
+  (= (let ((subject to_int32_right_out1)) to_int32_right_out11) (bv2nat
   old_ngrotations_out11)))
 
 ;; H
@@ -1162,7 +1162,7 @@
 
 ;; H
   (assert
-  (= (let ((subject to_int32_right_1_out1)) to_int32_right_1_out11) (bv2nat 
+  (= (let ((subject to_int32_right_1_out1)) to_int32_right_1_out11) (bv2nat
   old_ngclicktime_out11)))
 
 ;; H
@@ -1170,7 +1170,7 @@
 
 ;; H
   (assert
-  (= (let ((subject to_int32_right_2_out1)) to_int32_right_2_out11) (bv2nat 
+  (= (let ((subject to_int32_right_2_out1)) to_int32_right_2_out11) (bv2nat
   old_ngclicktime_out11)))
 
 ;; H
@@ -1178,7 +1178,7 @@
 
 ;; H
   (assert
-  (= (let ((subject data_type_conversion1_out1)) data_type_conversion1_out11) (bv2nat 
+  (= (let ((subject data_type_conversion1_out1)) data_type_conversion1_out11) (bv2nat
   millisecs_out11)))
 
 ;; H
@@ -1186,7 +1186,7 @@
 
 ;; H
   (assert
-  (= (let ((subject data_type_conversion_out1)) data_type_conversion_out11) (bv2nat 
+  (= (let ((subject data_type_conversion_out1)) data_type_conversion_out11) (bv2nat
   old_ngclicktime_out11)))
 
 ;; H
@@ -1194,13 +1194,13 @@
 
 ;; H
   (assert
-  (= (let ((subject sum1_2_out1)) sum1_2_out11) (bvsub validity_period_out11 
+  (= (let ((subject sum1_2_out1)) sum1_2_out11) (bvsub validity_period_out11
   update_period_os_interrupt_out11)))
 
 ;; H
   (assert
   (and
-  (= o (- (let ((subject to_int32_right_out1)) to_int32_right_out11) 
+  (= o (- (let ((subject to_int32_right_out1)) to_int32_right_out11)
   to_int32_left_out11)) (in_range2
   (- (let ((subject to_int32_right_out1)) to_int32_right_out11) to_int32_left_out11))))
 
@@ -1213,7 +1213,7 @@
 ;; H
   (assert
   (and
-  (= o1 (- (let ((subject to_int32_right_1_out1)) to_int32_right_1_out11) 
+  (= o1 (- (let ((subject to_int32_right_1_out1)) to_int32_right_1_out11)
   to_int32_left_1_out11)) (in_range2
   (- (let ((subject to_int32_right_1_out1)) to_int32_right_1_out11) to_int32_left_1_out11))))
 
@@ -1256,9 +1256,9 @@
 ;; H
   (assert
   (and
-  (= o4 (- (let ((subject to_int32_right_2_out1)) to_int32_right_2_out11) 
+  (= o4 (- (let ((subject to_int32_right_2_out1)) to_int32_right_2_out11)
   (let ((subject to_int32_left_2_out1)) to_int32_left_2_out11))) (in_range2
-  (- (let ((subject to_int32_right_2_out1)) to_int32_right_2_out11) (let ((subject 
+  (- (let ((subject to_int32_right_2_out1)) to_int32_right_2_out11) (let ((subject
                                                                     to_int32_left_2_out1))
                                                                     to_int32_left_2_out11)))))
 
@@ -1275,7 +1275,7 @@
            data_type_conversion1_out11) (let ((subject data_type_conversion_out1))
                                         data_type_conversion_out11)))
   (in_range2
-  (- (let ((subject data_type_conversion1_out1)) data_type_conversion1_out11) 
+  (- (let ((subject data_type_conversion1_out1)) data_type_conversion1_out11)
   (let ((subject data_type_conversion_out1)) data_type_conversion_out11)))))
 
 ;; H
@@ -1288,7 +1288,8 @@
 ;; WP_parameter_def
  ;; File "nose_gear.adb", line 24, characters 0-0
   (not (in_range2
-  (- (let ((subject to_int32_left_2_out1)) to_int32_left_2_out11) (let ((subject 
+  (- (let ((subject to_int32_left_2_out1)) to_int32_left_2_out11) (let ((subject
                                                                   to_int32_right_2_out1))
                                                                   to_int32_right_2_out11)))))
 (check-sat)
+(exit)

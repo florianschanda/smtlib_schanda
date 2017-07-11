@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
@@ -90,7 +90,7 @@
 
 (declare-datatypes ()
 ((value_type__ref (mk_value_type__ref (value_type__content value_type)))))
-(define-fun value_type__ref___projection ((a value_type__ref)) value_type 
+(define-fun value_type__ref___projection ((a value_type__ref)) value_type
   (value_type__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_178 Int)
@@ -118,7 +118,7 @@
 ((tnumber_list_typeD1__ref
  (mk_tnumber_list_typeD1__ref
  (tnumber_list_typeD1__content tnumber_list_typeD1)))))
-(define-fun tnumber_list_typeD1__ref___projection ((a tnumber_list_typeD1__ref)) tnumber_list_typeD1 
+(define-fun tnumber_list_typeD1__ref___projection ((a tnumber_list_typeD1__ref)) tnumber_list_typeD1
   (tnumber_list_typeD1__content a))
 
 (declare-datatypes ()
@@ -137,7 +137,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int Bool) Int Int (Array Int Bool) Int
@@ -152,7 +152,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (Bool Int) (Array Int Bool))
@@ -245,7 +245,7 @@
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (forall ((i Int))
   (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (orb a a_first a_last b b_first b_last) i) (or (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select 
+     (= (select (orb a a_first a_last b b_first b_last) i) (or (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select
   (orb a a_first a_last b b_first b_last) i)) )))))
 
 ;; op_def
@@ -254,7 +254,7 @@
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (forall ((i Int))
   (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (andb a a_first a_last b b_first b_last) i) (and (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select 
+     (= (select (andb a a_first a_last b b_first b_last) i) (and (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select
   (andb a a_first a_last b b_first b_last) i)) )))))
 
 ;; op_def
@@ -263,7 +263,7 @@
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (forall ((i Int))
   (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (xorb a a_first a_last b b_first b_last) i) (xor (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select 
+     (= (select (xorb a a_first a_last b b_first b_last) i) (xor (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select
   (xorb a a_first a_last b b_first b_last) i)) )))))
 
 ;; notb_def
@@ -272,7 +272,7 @@
   (forall ((a_first Int) (a_last Int))
   (forall ((i Int))
   (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (notb a a_first a_last) i) (not (select a i)))) :pattern ((select 
+     (= (select (notb a a_first a_last) i) (not (select a i)))) :pattern ((select
   (notb a a_first a_last) i)) )))))
 
 (declare-sort nearest_mode 0)
@@ -292,7 +292,7 @@
 (declare-datatypes ()
 ((nearest_mode__ref
  (mk_nearest_mode__ref (nearest_mode__content nearest_mode)))))
-(define-fun nearest_mode__ref___projection ((a nearest_mode__ref)) nearest_mode 
+(define-fun nearest_mode__ref___projection ((a nearest_mode__ref)) nearest_mode
   (nearest_mode__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_193 Int)
@@ -353,9 +353,9 @@
 
 (declare-fun o2 () Int)
 
-(declare-fun temp___236 () Int)
+(declare-fun temp___236 () Bool)
 
-(declare-fun temp___235 () Bool)
+(declare-fun temp___235 () Int)
 
 (declare-fun o3 () Int)
 
@@ -539,10 +539,10 @@
   (assert (=> (or (= mode 0) (= mode 2)) (= right2 o2)))
 
 ;; H
-  (assert (=> (or (= mode 0) (= mode 2)) (= temp___236 right2)))
+  (assert (=> (or (= mode 0) (= mode 2)) (= temp___236 right_is_out)))
 
 ;; H
-  (assert (=> (or (= mode 0) (= mode 2)) (= temp___235 right_is_out)))
+  (assert (=> (or (= mode 0) (= mode 2)) (= temp___235 right2)))
 
 ;; H
   (assert
@@ -703,3 +703,4 @@
  ;; File "prime_and_coprime_numbers.ads", line 3, characters 0-0
   (not (not (= left3 (- 2147483648)))))
 (check-sat)
+(exit)

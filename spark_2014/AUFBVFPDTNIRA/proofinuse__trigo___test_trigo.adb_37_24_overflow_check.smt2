@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -167,7 +167,7 @@
 
 (declare-datatypes ()
 ((character__ref (mk_character__ref (character__content character)))))
-(define-fun character__ref___projection ((a character__ref)) character 
+(define-fun character__ref___projection ((a character__ref)) character
   (character__content a))
 
 (declare-fun to_rep (character) Int)
@@ -205,7 +205,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int character) Int Int (Array Int character) Int
@@ -220,7 +220,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (character Int) (Array Int character))
@@ -423,7 +423,7 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun sin1 (Float32) Float32)
+(declare-fun sin2 (Float32) Float32)
 
 (declare-fun sin__function_guard (Float32 Float32) Bool)
 
@@ -438,12 +438,12 @@
      (and (dynamic_invariant x true true true)
      (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) x)
      (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000))))
-     (let ((result (sin1 x)))
+     (let ((result (sin2 x)))
      (and
      (fp.lt (fp.abs (fp.sub RNE result (approx_sin x))) (fp #b0 #b01101100 #b10010010101001110011100))
-     (dynamic_invariant result true false true)))) :pattern ((sin1 x)) )))
+     (dynamic_invariant result true false true)))) :pattern ((sin2 x)) )))
 
-(declare-fun cos1 (Float32) Float32)
+(declare-fun cos2 (Float32) Float32)
 
 (declare-fun cos__function_guard (Float32 Float32) Bool)
 
@@ -458,12 +458,12 @@
      (and (dynamic_invariant x true true true)
      (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) x)
      (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000))))
-     (let ((result (cos1 x)))
+     (let ((result (cos2 x)))
      (and
      (fp.lt (fp.abs (fp.sub RNE result (approx_cos x))) (fp #b0 #b01101100 #b10010010101001110011100))
-     (dynamic_invariant result true false true)))) :pattern ((cos1 x)) )))
+     (dynamic_invariant result true false true)))) :pattern ((cos2 x)) )))
 
-(declare-fun tan1 (Float32) Float32)
+(declare-fun tan2 (Float32) Float32)
 
 (declare-fun tan__function_guard (Float32 Float32) Bool)
 
@@ -478,10 +478,10 @@
      (and (dynamic_invariant x true true true)
      (and (fp.leq (fp.neg (fp #b0 #b01111110 #b00000000000000000000000)) x)
      (fp.leq x (fp #b0 #b01111110 #b00000000000000000000000))))
-     (let ((result (tan1 x)))
+     (let ((result (tan2 x)))
      (and
      (fp.lt (fp.abs (fp.sub RNE result (approx_tan x))) (fp #b0 #b01110001 #b10100011011011100010111))
-     (dynamic_invariant result true false true)))) :pattern ((tan1 x)) )))
+     (dynamic_invariant result true false true)))) :pattern ((tan2 x)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -907,9 +907,9 @@
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true)
-     (= (approx_sin x) (fp.sub RNE (fp.add RNE (fp.sub RNE x (fp.div RNE 
-     (pow3 x) (fp #b0 #b10000001 #b10000000000000000000000))) (fp.div RNE 
-     (pow5 x) (fp #b0 #b10000101 #b11100000000000000000000))) (fp.div RNE 
+     (= (approx_sin x) (fp.sub RNE (fp.add RNE (fp.sub RNE x (fp.div RNE
+     (pow3 x) (fp #b0 #b10000001 #b10000000000000000000000))) (fp.div RNE
+     (pow5 x) (fp #b0 #b10000101 #b11100000000000000000000))) (fp.div RNE
      (pow7 x) (fp #b0 #b10001011 #b00111011000000000000000))))) :pattern (
   (approx_sin x)) )))
 
@@ -923,10 +923,10 @@
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true)
-     (= (approx_cos x) (fp.add RNE (fp.sub RNE (fp.add RNE (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000) (fp.div RNE 
-     (pow21 x) (fp #b0 #b10000000 #b00000000000000000000000))) (fp.div RNE 
-     (pow4 x) (fp #b0 #b10000011 #b10000000000000000000000))) (fp.div RNE 
-     (pow6 x) (fp #b0 #b10001000 #b01101000000000000000000))) (fp.div RNE 
+     (= (approx_cos x) (fp.add RNE (fp.sub RNE (fp.add RNE (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000) (fp.div RNE
+     (pow21 x) (fp #b0 #b10000000 #b00000000000000000000000))) (fp.div RNE
+     (pow4 x) (fp #b0 #b10000011 #b10000000000000000000000))) (fp.div RNE
+     (pow6 x) (fp #b0 #b10001000 #b01101000000000000000000))) (fp.div RNE
      (pow8 x) (fp #b0 #b10001110 #b00111011000000000000000))))) :pattern (
   (approx_cos x)) )))
 
@@ -940,10 +940,10 @@
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true)
-     (= (approx_tan x) (fp.add RNE (fp.add RNE (fp.add RNE (fp.add RNE x (fp.div RNE 
-     (pow3 x) (fp #b0 #b10000000 #b10000000000000000000000))) (fp.div RNE (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) 
-     (pow5 x)) (fp #b0 #b10000010 #b11100000000000000000000))) (fp.div RNE (fp.mul RNE (fp #b0 #b10000011 #b00010000000000000000000) 
-     (pow7 x)) (fp #b0 #b10000111 #b00111011000000000000000))) (fp.div RNE (fp.mul RNE (fp #b0 #b10000100 #b11110000000000000000000) 
+     (= (approx_tan x) (fp.add RNE (fp.add RNE (fp.add RNE (fp.add RNE x (fp.div RNE
+     (pow3 x) (fp #b0 #b10000000 #b10000000000000000000000))) (fp.div RNE (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
+     (pow5 x)) (fp #b0 #b10000010 #b11100000000000000000000))) (fp.div RNE (fp.mul RNE (fp #b0 #b10000011 #b00010000000000000000000)
+     (pow7 x)) (fp #b0 #b10000111 #b00111011000000000000000))) (fp.div RNE (fp.mul RNE (fp #b0 #b10000100 #b11110000000000000000000)
      (pow9 x)) (fp #b0 #b10001010 #b01100010011000000000000))))) :pattern (
   (approx_tan x)) )))
 
@@ -1121,7 +1121,7 @@
 ;; H
   (assert
   (=> (fp.leq f1 (fp #b0 #b01111111 #b00000000000000000000000))
-  (and (= o (sin1 f2))
+  (and (= o (sin2 f2))
   (and (not (or (fp.isInfinite o) (fp.isNaN o)))
   (fp.lt (fp.abs (fp.sub RNE o (approx_sin f2))) (fp #b0 #b01101100 #b10010010101001110011100))))))
 
@@ -1238,7 +1238,7 @@
 ;; H
   (assert
   (=> (fp.leq f8 (fp #b0 #b01111111 #b00000000000000000000000))
-  (and (= o1 (cos1 f9))
+  (and (= o1 (cos2 f9))
   (and (not (or (fp.isInfinite o1) (fp.isNaN o1)))
   (fp.lt (fp.abs (fp.sub RNE o1 (approx_cos f9))) (fp #b0 #b01101100 #b10010010101001110011100))))))
 
@@ -1356,7 +1356,7 @@
 ;; H
   (assert
   (=> (fp.leq f15 (fp #b0 #b01111110 #b00000000000000000000000))
-  (and (= o2 (tan1 f16))
+  (and (= o2 (tan2 f16))
   (and (not (or (fp.isInfinite o2) (fp.isNaN o2)))
   (fp.lt (fp.abs (fp.sub RNE o2 (approx_tan f16))) (fp #b0 #b01110001 #b10100011011011100010111))))))
 
@@ -1461,10 +1461,11 @@
 
 ;; H
   (assert
-  (fp.lt (fp.abs (fp.sub RNE (tan1 f23) (fp.div RNE (sin1 f23) (cos1 f23)))) (fp #b0 #b01110101 #b00000110001001001101111)))
+  (fp.lt (fp.abs (fp.sub RNE (tan2 f23) (fp.div RNE (sin2 f23) (cos2 f23)))) (fp #b0 #b01110101 #b00000110001001001101111)))
 
 (assert
 ;; WP_parameter_def
  ;; File "test_trigo.adb", line 5, characters 0-0
   (not (not (= f23 (fp #b0 #b11111110 #b11111111111111111111111)))))
 (check-sat)
+(exit)

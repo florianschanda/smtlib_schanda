@@ -5,6 +5,8 @@ import argparse
 from cPickle import load
 from pprint import pprint
 
+NON_ANNOTATED_TESTS = set(["griggio"])
+
 def mk_bench_name(cat):
     return {"crafted"    : "schanda",
             "random"     : "PyMPF",
@@ -72,6 +74,8 @@ for item in (e for e in sorted(os.listdir(".")) if is_other_data(e)):
         add_avav(item)
         other_data.append(item)
 
+COMPARISON_CATS = ("solved", "timeout", "error", "unsound")
+
 def mk_progress_slides(fd):
     def mk_shortname(prover_bin):
         return "-".join(prover_bin.split("_")[-2:])
@@ -99,7 +103,7 @@ def mk_progress_slides(fd):
     fd.write("\\end{frame}\n\n")
 
     # Unsound results
-    fd.write("\\begin{frame}{FP progress in CVC4}{Errors and unsoundness}\n")
+    fd.write("\\begin{frame}{FP progress in CVC4}{Issues}\n")
     fd.write("\\begin{center}\n")
     fd.write("\\begin{tabular}{>{\columncolor{Altran2}}rllll}\n")
     fd.write("\\rowcolor{Altran2}\n")
@@ -116,7 +120,7 @@ def mk_progress_slides(fd):
                data[-1]["details"][cat]["error"],
                data[-1]["details"][cat]["unsound"]]
         s_row = ["%u" % item for item in row]
-        if cat in ("spark_2014", "griggio"):
+        if cat in NON_ANNOTATED_TESTS:
             s_row[1] = ""
             s_row[3] = ""
         for i in (2, 3):
@@ -138,11 +142,6 @@ def mk_progress_slides(fd):
         fd.write( "  y axis={\n")
         fd.write( "      ticks={\n")
         fd.write( "         tick unit=\\%,\n")
-        # fd.write( "         major={also at={%s}},\n" %
-        #           ", ".join(("%.3f as %s" % (b[1], mk_solver_name(b[0]))
-        #                     for b in bench
-        #                     if min(points) <= b[1] <= max(points)))
-        # )
         fd.write( "      },\n")
         fd.write( "      grid={minor={at={%s}}},\n" %
                   ", ".join("%.3f" % b[1]
@@ -175,25 +174,13 @@ def mk_progress_slides(fd):
         fd.write("\\end{tikzpicture}\n")
         fd.write("\\end{center}\n")
 
-    # Plot of solved over time
-    fd.write("\\begin{frame}[fragile]{FP progress in CVC4}{Solved over time (average over averages)}\n")
-    mk_plot("solved", "AnSecondaryGreen")
-    fd.write("\\end{frame}\n\n")
-
-    # Plot of errors over time
-    fd.write("\\begin{frame}[fragile]{FP progress in CVC4}{Errors over time (average over averages)}\n")
-    mk_plot("error", "AnSecondaryRed")
-    fd.write("\\end{frame}\n\n")
-
-    # Plot of unsound over time
-    fd.write("\\begin{frame}[fragile]{FP progress in CVC4}{Unsoundness over time (average over averages)}\n")
-    mk_plot("unsound", "AnSecondaryRed")
-    fd.write("\\end{frame}\n\n")
-
-    # Plot of unsound over time
-    fd.write("\\begin{frame}[fragile]{FP progress in CVC4}{Timeout over time (average over averages)}\n")
-    mk_plot("timeout", "AnSecondaryRed")
-    fd.write("\\end{frame}\n\n")
+    # Plot of over various CVC4 versions
+    for cat in COMPARISON_CATS:
+        fd.write("\\begin{frame}[fragile]{FP progress in CVC4}{%s over time (average of averages)}\n" % cat.capitalize())
+        mk_plot(cat, ("AnSecondaryGreen"
+                      if cat == "solved"
+                      else "AnSecondaryRed"))
+        fd.write("\\end{frame}\n\n")
 
 def mk_competition_slides(fd):
     competitors = sorted([data[-1]] + other_data,
@@ -202,15 +189,19 @@ def mk_competition_slides(fd):
 
     def mk_table(criteria):
         fd.write("\\small\n")
-        fd.write("\\begin{tabular}{>{\columncolor{Altran2}}r%s}\n" %
-                 ("l" * len(competitors)))
+        fd.write("\\begin{tabular}{>{\columncolor{Altran2}}r")
+        for c in competitors:
+            if c["prover"]["kind"] == "cvc4":
+                fd.write(">{\columncolor{Altran2!10}}")
+            fd.write("l")
+        fd.write("}\n")
         fd.write("\\rowcolor{Altran2}\n")
         fd.write("Benchmark & ")
         fd.write(" & ".join(mk_solver_name(r["prover"]["kind"])
                             for r in competitors))
         fd.write(r"\\" + "\n")
         for cat in sorted(competitors[0]["details"]):
-            if criteria == "unsound" and cat in ("spark_2014", "griggio"):
+            if criteria == "unsound" and cat in NON_ANNOTATED_TESTS:
                 continue
             fd.write(mk_bench_name(cat) + " & ")
             if criteria == "solved":
@@ -221,17 +212,30 @@ def mk_competition_slides(fd):
                 s_row = ["\\t%s{%s}" % (mk_best_color(max(row), row[i]),
                                         s_row[i])
                          for i in xrange(len(row))]
+            elif criteria == "timeout":
+                row = [r["details"][cat][criteria] for r in competitors]
+                s_row = ["%u" % x for x in row]
+                s_row = ["\\t%s{%s}" % (mk_best_color(-min(row), -row[i]),
+                                        s_row[i])
+                         for i in xrange(len(row))]
             else:
                 row = [r["details"][cat][criteria] for r in competitors]
                 s_row = ["%u" % x for x in row]
                 s_row = ["\\t%s{%s}" % (mk_err_color(0, row[i]),
                                         s_row[i])
                          for i in xrange(len(row))]
+            for i, r in enumerate(competitors):
+                if r["prover"]["kind"] == "z3" and cat == "spark_2014":
+                    s_row[i] = "%s\\footnote{Uses different VCs}" % s_row[i]
             fd.write(" & ".join(s_row) + r"\\" + "\n")
         row = [r["avav"][criteria] for r in competitors]
         s_row = ["%.1f\\%%" % x for x in row]
         if criteria == "solved":
             s_row = ["\\t%s{%s}" % (mk_best_color(max(row), row[i]),
+                                    s_row[i])
+                     for i in xrange(len(row))]
+        elif criteria == "timeout":
+            s_row = ["\\t%s{%s}" % (mk_best_color(-min(row), -row[i]),
                                     s_row[i])
                      for i in xrange(len(row))]
         else:
@@ -242,27 +246,13 @@ def mk_competition_slides(fd):
         fd.write("AVAV & " + " & ".join(s_row) + r"\\" + "\n")
         fd.write("\\end{tabular}\n")
 
-    # Table comparing solved for all solvers
-    fd.write("\\begin{frame}{The competition}{Solved}\n")
-    fd.write("\\begin{center}\n")
-    mk_table("solved")
-    fd.write("\\end{center}\n")
-    fd.write("\\end{frame}\n\n")
-
-    # Table comparing unsound for all solvers
-    fd.write("\\begin{frame}{The competition}{Unsound}\n")
-    fd.write("\\begin{center}\n")
-    mk_table("unsound")
-    fd.write("\\end{center}\n")
-    fd.write("\\end{frame}\n\n")
-
-    # Table comparing errors for all solvers
-    fd.write("\\begin{frame}{The competition}{Errors}\n")
-    fd.write("\\begin{center}\n")
-    mk_table("error")
-    fd.write("\\end{center}\n")
-    fd.write("\\end{frame}\n\n")
-
+    # Table comparing all solvers
+    for cat in COMPARISON_CATS:
+        fd.write("\\begin{frame}{Benchmarks}{With status `%s'}\n" % cat)
+        fd.write("\\begin{center}\n")
+        mk_table(cat)
+        fd.write("\\end{center}\n")
+        fd.write("\\end{frame}\n\n")
 
 def main():
     ap = argparse.ArgumentParser()
@@ -277,10 +267,20 @@ def main():
         fd.write(r"\newcommand{\tg}[1]{{\color{AnSecondaryGreen}#1}}" + "\n")
         fd.write(r"\newcommand{\tn}[1]{#1}" + "\n")
         fd.write(r"\newcommand{\tb}[1]{{\color{AnSecondaryRed}#1}}" + "\n")
+        fd.write("\\author{Florian Schanda}\n")
+        fd.write("\\title{CVC4 IEEE-754 implementation}\n")
+        fd.write("\\subtitle{Current status and benchmarks}\n")
         fd.write("\\begin{document}\n\n")
 
-        mk_progress_slides(fd)
-        mk_competition_slides(fd)
+        fd.write("\\maketitle\n\n")
+
+        if len(data) > 1:
+            fd.write("\\section{CVC4 Progress}\n\n")
+            mk_progress_slides(fd)
+
+        if len(other_data) >= 1:
+            fd.write("\\section{Comparisons}\n\n")
+            mk_competition_slides(fd)
 
         fd.write("\\end{document}\n")
 

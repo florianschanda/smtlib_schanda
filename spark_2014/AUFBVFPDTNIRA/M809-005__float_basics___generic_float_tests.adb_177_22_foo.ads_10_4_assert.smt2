@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -165,6 +165,7 @@
 ;; WP_parameter_def
  ;; File "generic_float_tests.adb", line 168, characters 0-0
   (not
-  (fp.eq (fp.mul RNE a (fp.add RNE b c)) (fp.add RNE (fp.mul RNE a b) (fp.mul RNE 
+  (fp.eq (fp.mul RNE a (fp.add RNE b c)) (fp.add RNE (fp.mul RNE a b) (fp.mul RNE
   a c)))))
 (check-sat)
+(exit)

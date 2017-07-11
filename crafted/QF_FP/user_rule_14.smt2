@@ -20,7 +20,8 @@
 (assert (finite x))
 
 (assert (fp.gt d1 d0))
-(assert (fp.leq (_ +zero 8 24) r one))
+(assert (and (fp.leq (_ +zero 8 24) r)
+             (fp.leq r one)))
 (assert (fp.geq d0 (_ +zero 8 24)))
 (assert (fp.leq d1 x))
 

@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
@@ -64,7 +64,7 @@
 (declare-datatypes ()
 ((bingo_number__ref
  (mk_bingo_number__ref (bingo_number__content bingo_number)))))
-(define-fun bingo_number__ref___projection ((a bingo_number__ref)) bingo_number 
+(define-fun bingo_number__ref___projection ((a bingo_number__ref)) bingo_number
   (bingo_number__content a))
 
 (define-fun dynamic_invariant ((temp___expr_136 Int)
@@ -90,7 +90,7 @@
 (declare-datatypes ()
 ((callable_number__ref
  (mk_callable_number__ref (callable_number__content callable_number)))))
-(define-fun callable_number__ref___projection ((a callable_number__ref)) callable_number 
+(define-fun callable_number__ref___projection ((a callable_number__ref)) callable_number
   (callable_number__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_142 Int)
@@ -136,7 +136,7 @@
 (declare-datatypes ()
 ((bingo_letter__ref
  (mk_bingo_letter__ref (bingo_letter__content bingo_letter)))))
-(define-fun bingo_letter__ref___projection ((a bingo_letter__ref)) bingo_letter 
+(define-fun bingo_letter__ref___projection ((a bingo_letter__ref)) bingo_letter
   (bingo_letter__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_178 Int)
@@ -177,7 +177,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array Int callable_number) Int Int
@@ -192,7 +192,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (callable_number Int) (Array Int callable_number))
@@ -330,3 +330,4 @@
  ;; File "bingo_basket.ads", line 4, characters 0-0
   (not (in_range1 (- the_count 1))))
 (check-sat)
+(exit)

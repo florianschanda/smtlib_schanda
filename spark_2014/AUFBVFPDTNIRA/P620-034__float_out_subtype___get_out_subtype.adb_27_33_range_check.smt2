@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -265,11 +265,11 @@
   (assert
   (and
   (and
-  (not (or (fp.isInfinite get_out_subtype__controller_get_desired_rate__roll_rate_desired) (fp.isNaN 
+  (not (or (fp.isInfinite get_out_subtype__controller_get_desired_rate__roll_rate_desired) (fp.isNaN
   get_out_subtype__controller_get_desired_rate__roll_rate_desired)))
-  (not (or (fp.isInfinite get_out_subtype__controller_get_desired_rate__pitch_rate_desired1) (fp.isNaN 
+  (not (or (fp.isInfinite get_out_subtype__controller_get_desired_rate__pitch_rate_desired1) (fp.isNaN
   get_out_subtype__controller_get_desired_rate__pitch_rate_desired1))))
-  (not (or (fp.isInfinite get_out_subtype__controller_get_desired_rate__yaw_rate_desired) (fp.isNaN 
+  (not (or (fp.isInfinite get_out_subtype__controller_get_desired_rate__yaw_rate_desired) (fp.isNaN
   get_out_subtype__controller_get_desired_rate__yaw_rate_desired)))))
 
 (assert
@@ -278,3 +278,4 @@
   (not (in_range1
   get_out_subtype__controller_get_desired_rate__roll_rate_desired)))
 (check-sat)
+(exit)

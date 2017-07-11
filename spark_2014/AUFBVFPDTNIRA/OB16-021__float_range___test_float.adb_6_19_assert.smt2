@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -173,7 +173,7 @@
 
 ;; H
   (assert
-  (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) 
+  (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))
   x) (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000))))
 
 (assert
@@ -181,3 +181,4 @@
  ;; File "system.ads", line 1, characters 0-0
   (not (<= (- 1) y)))
 (check-sat)
+(exit)

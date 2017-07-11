@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -176,7 +176,7 @@
 
 (declare-datatypes ()
 ((d_time_type__ref (mk_d_time_type__ref (d_time_type__content d_time_type)))))
-(define-fun d_time_type__ref___projection ((a d_time_type__ref)) d_time_type 
+(define-fun d_time_type__ref___projection ((a d_time_type__ref)) d_time_type
   (d_time_type__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_141 Float32)
@@ -207,7 +207,7 @@
 (declare-datatypes ()
 ((delta_time_type__ref
  (mk_delta_time_type__ref (delta_time_type__content delta_time_type)))))
-(define-fun delta_time_type__ref___projection ((a delta_time_type__ref)) delta_time_type 
+(define-fun delta_time_type__ref___projection ((a delta_time_type__ref)) delta_time_type
   (delta_time_type__content a))
 
 (define-fun dynamic_invariant3 ((temp___expr_147 Float32)
@@ -365,7 +365,7 @@
   (and
   (and (< 0 nb_of_pp)
   (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) delta_time))
-  (fp.leq (fp.mul RNE (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000) 
+  (fp.leq (fp.mul RNE (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000)
   (of_int RNE (+ nb_of_fp nb_of_pp))) delta_time) time))
   (fp.leq time (fp #b0 #b11111110 #b11111111111111111111110))))
 
@@ -409,6 +409,7 @@
 ;; WP_parameter_def
  ;; File "sample.ads", line 13, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.sub RNE time (fp.div RNE d1 (fp #b0 #b10000000 #b00000000000000000000000)))) (fp.isNaN (fp.sub RNE 
+  (not (or (fp.isInfinite (fp.sub RNE time (fp.div RNE d1 (fp #b0 #b10000000 #b00000000000000000000000)))) (fp.isNaN (fp.sub RNE
   time (fp.div RNE d1 (fp #b0 #b10000000 #b00000000000000000000000))))))))
 (check-sat)
+(exit)

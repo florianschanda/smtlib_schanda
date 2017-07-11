@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -122,7 +122,7 @@
 
 (declare-datatypes ()
 ((tfloat64B__ref (mk_tfloat64B__ref (tfloat64B__content tfloat64B)))))
-(define-fun tfloat64B__ref___projection ((a tfloat64B__ref)) tfloat64B 
+(define-fun tfloat64B__ref___projection ((a tfloat64B__ref)) tfloat64B
   (tfloat64B__content a))
 
 (declare-sort unit_t 0)
@@ -206,17 +206,17 @@
   (assert
   (not
   (and
-  (fp.leq (fp.neg (fp #b0 #b01111110110 #b0100011110101110000101000111101011100001010001111011)) 
+  (fp.leq (fp.neg (fp #b0 #b01111110110 #b0100011110101110000101000111101011100001010001111011))
   x)
   (fp.leq x (fp #b0 #b01111110110 #b0100011110101110000101000111101011100001010001111011)))))
 
 ;; H
   (assert
   (and
-  (= o (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000) 
+  (= o (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
   x))
-  (not (or (fp.isInfinite (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000) 
-  x)) (fp.isNaN (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000) 
+  (not (or (fp.isInfinite (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
+  x)) (fp.isNaN (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
   x))))))
 
 (assert
@@ -224,3 +224,4 @@
  ;; File "foo.adb", line 26, characters 0-0
   (not (in_range3 o)))
 (check-sat)
+(exit)

@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -208,7 +208,7 @@
 
 ;; H
   (assert
-  (and (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) 
+  (and (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111))
   x) (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111))))
 
 ;; H
@@ -224,7 +224,7 @@
 
 ;; H
   (assert
-  (= type_conversion__float_to_long_float__result1 ((_ to_fp 11 53) RNE 
+  (= type_conversion__float_to_long_float__result1 ((_ to_fp 11 53) RNE
   x)))
 
 ;; H
@@ -243,6 +243,7 @@
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
   (not
-  (fp.leq (fp.neg (fp #b0 #b10001111110 #b1111111111111111111111100000000000000000000000000000)) 
+  (fp.leq (fp.neg (fp #b0 #b10001111110 #b1111111111111111111111100000000000000000000000000000))
   type_conversion__float_to_long_float__result4)))
 (check-sat)
+(exit)

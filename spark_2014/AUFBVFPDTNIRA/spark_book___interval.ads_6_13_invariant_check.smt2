@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -145,7 +145,7 @@
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -261,7 +261,7 @@
   (assert
   (forall ((int__ us_rep))
   (! (= (= (has_valid_order int__) true)
-     (fp.leq (to_rep (rec__interval__interval__low (us_split_fields1 int__))) 
+     (fp.leq (to_rep (rec__interval__interval__low (us_split_fields1 int__)))
      (to_rep (rec__interval__interval__high (us_split_fields1 int__))))) :pattern (
   (has_valid_order int__)) )))
 
@@ -446,3 +446,4 @@
   (not
   (= (has_valid_order (interval__content interval__make__result11)) true)))
 (check-sat)
+(exit)

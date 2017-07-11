@@ -22,12 +22,26 @@ def err_cmp(a, b):
 
 def main():
     provers = []
-    provers.append(Prover_Kind("cvc4", ["--lang=smt2"]))
-    provers.append(Prover_Kind("z3", ["-in", "-smt2"], use_logic=False))
-    provers.append(Prover_Kind("mathsat", ["-input=smt2"]))
-    provers.append(Prover_Kind("mathsat_acdl", ["-input=smt2",
-                                                "-theory.fp.mode=2"]))
-    provers.append(Prover_Kind("colibri", [], use_temp=True))
+    provers.append(Prover_Kind("cvc4",
+                               ["--lang=smt2"]))
+    provers.append(Prover_Kind("z3",
+                               ["-in", "-smt2"],
+                               use_logic=False,
+                               use_dialect="z3"))
+    provers.append(Prover_Kind("mathsat",
+                               ["-input=smt2"],
+                               use_dialect="mathsat"))
+    provers.append(Prover_Kind("mathsat_acdl",
+                               ["-input=smt2",
+                                "-theory.fp.mode=2"],
+                               use_dialect="mathsat"))
+    provers.append(Prover_Kind("colibri",
+                               [],
+                               use_temp=True))
+    provers.append(Prover_Kind("altergo",
+                               [],
+                               use_temp=True,
+                               use_dialect="altergo"))
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--suite",
@@ -39,6 +53,9 @@ def main():
     ap.add_argument("--timeout",
                     default=5,
                     type=int)
+    ap.add_argument("--force",
+                    default=False,
+                    action="store_true")
     ap.add_argument("prover_kind",
                     choices=[p.name for p in provers],
                     metavar="KIND",
@@ -48,6 +65,19 @@ def main():
                     metavar="BINARY")
 
     options = ap.parse_args()
+
+    result_basename = "%s_%s_%s" % \
+                      (options.suite,
+                       options.prover_kind,
+                       os.path.basename(options.prover_bin).lstrip("./"))
+    result_pickle = "data_%s.p" % result_basename
+    result_report = "report_%s.txt" % result_basename
+
+    if not options.force and os.path.exists(result_pickle):
+        print "Results for %s (%s) already exist. Use --force to recreate." %\
+            (options.prover_kind,
+             os.path.basename(options.prover_bin).lstrip("./"))
+        return
 
     the_prover = None
     for p in provers:
@@ -67,7 +97,10 @@ def main():
     if options.suite == "fp":
         bench_dirs.append("spark_2014/AUFBVFPDTNIRA")
     if options.suite == "debug":
-        bench_dirs.append("crafted/QF_FPBV")
+        #bench_dirs.append("spark_2014/AUFBVFPDTNIRA")
+        bench_dirs.append("crafted/QF_FP")
+        #bench_dirs.append("crafted/QF_FPBV")
+        #bench_dirs.append("crafted/QF_FPLRA")
 
     print "Assembling benchmarks..."
     tasks = []
@@ -75,8 +108,12 @@ def main():
         for path, dirs, files in os.walk(d):
             for f in sorted(files):
                 if f.endswith(".smt2"):
-                    tasks.append(Task(Benchmark(os.path.join(path, f)),
+                    tasks.append(Task(Benchmark(os.path.join(path, f),
+                                                dialect = the_prover.dialect),
                                       the_prover))
+                elif ".smt2_" in f:
+                    assert os.path.exists(os.path.join(path,
+                                                       f.rsplit("_", 1)[0]))
 
     detail = {}
     summary = {"solved"  : 0,
@@ -123,7 +160,9 @@ def main():
     def stat_str(stats):
         total = sum(stats.itervalues())
         return stat_fmt % (float(stats["solved"] * 100) / float(total),
-                           float((stats["solved"] + stats["timeout"]) * 100) /
+                           float((stats["solved"] +
+                                  stats["timeout"] +
+                                  stats["unknown"]) * 100) /
                              float(total),
                            total,
                            stats["solved"],
@@ -154,11 +193,7 @@ def main():
         print "%20s %s" % (cat, stat_str(detail[cat]))
     print "%20s %s" % ("TOTAL", stat_str(summary))
 
-    basename = "%s_%s_%s" % (options.suite,
-                             options.prover_kind,
-                             os.path.basename(options.prover_bin).lstrip("./"))
-
-    with open("data_%s.p" % basename, "w") as fd:
+    with open(result_pickle, "w") as fd:
         report = {
             "prover" : {
                 "kind" : options.prover_kind,
@@ -172,7 +207,7 @@ def main():
         }
         dump(report, fd, -1)
 
-    with open("report_%s.txt" % basename, "w") as fd:
+    with open(result_report, "w") as fd:
         fd.write("# Configuration \n")
         fd.write("Prover kind     : %s\n" % options.prover_kind)
         fd.write("Prover binary   : %s\n" %

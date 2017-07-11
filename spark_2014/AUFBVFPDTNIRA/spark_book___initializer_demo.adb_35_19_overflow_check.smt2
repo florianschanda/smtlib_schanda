@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort integer 0)
@@ -77,16 +77,16 @@
 ((us_split_fields
  (mk___split_fields
  (rec__initializer_demo__pair_with_default__x integer)(rec__initializer_demo__pair_with_default__y integer)))))
-(define-fun us_split_fields_X__projection ((a us_split_fields)) integer 
+(define-fun us_split_fields_X__projection ((a us_split_fields)) integer
   (rec__initializer_demo__pair_with_default__x a))
 
-(define-fun us_split_fields_Y__projection ((a us_split_fields)) integer 
+(define-fun us_split_fields_Y__projection ((a us_split_fields)) integer
   (rec__initializer_demo__pair_with_default__y a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -167,7 +167,7 @@
 (declare-datatypes ()
 ((pair_with_default__ref
  (mk_pair_with_default__ref (pair_with_default__content us_rep)))))
-(define-fun pair_with_default__ref___projection ((a pair_with_default__ref)) us_rep 
+(define-fun pair_with_default__ref___projection ((a pair_with_default__ref)) us_rep
   (pair_with_default__content a))
 
 (define-fun default_initial_assumption ((temp___expr_162 us_rep)
@@ -256,10 +256,10 @@
   (assert
   (and
   (= o3 (+ (to_rep
-           (rec__initializer_demo__pair_with_default__y (us_split_fields1 p))) 
+           (rec__initializer_demo__pair_with_default__y (us_split_fields1 p)))
   (to_rep offset__split_fields3))) (in_range
   (+ (to_rep
-     (rec__initializer_demo__pair_with_default__y (us_split_fields1 p))) 
+     (rec__initializer_demo__pair_with_default__y (us_split_fields1 p)))
   (to_rep offset__split_fields3)))))
 
 ;; H
@@ -270,6 +270,7 @@
  ;; File "initializer_demo.ads", line 16, characters 0-0
   (not (in_range
   (+ (to_rep
-     (rec__initializer_demo__pair_with_default__x (us_split_fields1 p))) 
+     (rec__initializer_demo__pair_with_default__x (us_split_fields1 p)))
   (to_rep offset__split_fields2)))))
 (check-sat)
+(exit)

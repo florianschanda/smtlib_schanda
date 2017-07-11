@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort integer 0)
@@ -110,13 +110,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
   (rotate_left1 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
   (rotate_right1 v (bv2nat n)))))
 
 (declare-fun nth_bv ((_ BitVec 8) (_ BitVec 8)) Bool)
@@ -219,7 +219,7 @@
 
 (declare-datatypes ()
 ((index_type__ref (mk_index_type__ref (index_type__content index_type)))))
-(define-fun index_type__ref___projection ((a index_type__ref)) index_type 
+(define-fun index_type__ref___projection ((a index_type__ref)) index_type
   (index_type__content a))
 
 (declare-fun to_rep2 (index_type) (_ BitVec 8))
@@ -262,7 +262,7 @@
 
 (declare-datatypes ()
 ((mode_type__ref (mk_mode_type__ref (mode_type__content mode_type)))))
-(define-fun mode_type__ref___projection ((a mode_type__ref)) mode_type 
+(define-fun mode_type__ref___projection ((a mode_type__ref)) mode_type
   (mode_type__content a))
 
 (declare-fun to_rep3 (mode_type) Int)
@@ -364,7 +364,7 @@
 (declare-datatypes ()
 ((element_type__ref
  (mk_element_type__ref (element_type__content element_type)))))
-(define-fun element_type__ref___projection ((a element_type__ref)) element_type 
+(define-fun element_type__ref___projection ((a element_type__ref)) element_type
   (element_type__content a))
 
 (declare-fun to_rep4 (element_type) Float32)
@@ -404,7 +404,7 @@
   (forall ((old_first (_ BitVec 8)))
   (forall ((new_first (_ BitVec 8)))
   (forall ((i (_ BitVec 8)))
-  (! (= (select (slide a old_first new_first) i) (select a (bvsub i (bvsub new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (bvsub i (bvsub new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array (_ BitVec 8) element_type) (_ BitVec 8)
@@ -422,7 +422,7 @@
      (=> (and (bvule a_first i) (bvule i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (bvugt i a_last)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (bvadd (bvsub i a_last) (bvsub b_first #x01)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (bvadd (bvsub i a_last) (bvsub b_first #x01)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (element_type
@@ -446,7 +446,7 @@
                                     (=>
                                     (and (bvule a__first temp___idx_133)
                                     (bvule temp___idx_133 a__last))
-                                    (= (to_rep4 (select a temp___idx_133)) 
+                                    (= (to_rep4 (select a temp___idx_133))
                                     (to_rep4
                                     (select b (bvadd (bvsub b__first a__first) temp___idx_133)))))))
                                true false))
@@ -512,31 +512,31 @@
 ((us_split_fields
  (mk___split_fields
  (rec__some_package__float_buffer__buffer_tag__mode mode_type)(rec__some_package__float_buffer__buffer_tag__buffer (Array (_ BitVec 8) element_type))(rec__some_package__float_buffer__buffer_tag__index_head index_type)(rec__some_package__float_buffer__buffer_tag__index_tail index_type)(rec__some_package__float_buffer__buffer_tag__haselements Bool)(rec__some_package__float_buffer__buffer_tag__num_overflows natural)(rec__ext__ us_private)))))
-(define-fun us_split_fields_mode__projection ((a us_split_fields)) mode_type 
+(define-fun us_split_fields_mode__projection ((a us_split_fields)) mode_type
   (rec__some_package__float_buffer__buffer_tag__mode a))
 
-(define-fun us_split_fields_buffer__projection ((a us_split_fields)) (Array (_ BitVec 8) element_type) 
+(define-fun us_split_fields_buffer__projection ((a us_split_fields)) (Array (_ BitVec 8) element_type)
   (rec__some_package__float_buffer__buffer_tag__buffer a))
 
-(define-fun us_split_fields_index_head__projection ((a us_split_fields)) index_type 
+(define-fun us_split_fields_index_head__projection ((a us_split_fields)) index_type
   (rec__some_package__float_buffer__buffer_tag__index_head a))
 
-(define-fun us_split_fields_index_tail__projection ((a us_split_fields)) index_type 
+(define-fun us_split_fields_index_tail__projection ((a us_split_fields)) index_type
   (rec__some_package__float_buffer__buffer_tag__index_tail a))
 
-(define-fun us_split_fields_hasElements__projection ((a us_split_fields)) Bool 
+(define-fun us_split_fields_hasElements__projection ((a us_split_fields)) Bool
   (rec__some_package__float_buffer__buffer_tag__haselements a))
 
-(define-fun us_split_fields_Num_Overflows__projection ((a us_split_fields)) natural 
+(define-fun us_split_fields_Num_Overflows__projection ((a us_split_fields)) natural
   (rec__some_package__float_buffer__buffer_tag__num_overflows a))
 
-(define-fun us_split_fields___projection ((a us_split_fields)) us_private 
+(define-fun us_split_fields___projection ((a us_split_fields)) us_private
   (rec__ext__ a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -690,7 +690,7 @@
 
 ;; some_package__float_buffer__buffer_tag__haselements__last__bit_axiom
   (assert
-  (< some_package__float_buffer__buffer_tag__haselements__first__bit 
+  (< some_package__float_buffer__buffer_tag__haselements__first__bit
   some_package__float_buffer__buffer_tag__haselements__last__bit))
 
 ;; some_package__float_buffer__buffer_tag__haselements__position_axiom
@@ -709,7 +709,7 @@
 
 ;; some_package__float_buffer__buffer_tag__num_overflows__last__bit_axiom
   (assert
-  (< some_package__float_buffer__buffer_tag__num_overflows__first__bit 
+  (< some_package__float_buffer__buffer_tag__num_overflows__first__bit
   some_package__float_buffer__buffer_tag__num_overflows__last__bit))
 
 ;; some_package__float_buffer__buffer_tag__num_overflows__position_axiom
@@ -720,7 +720,7 @@
 
 (declare-datatypes ()
 ((buffer_tag__ref (mk_buffer_tag__ref (buffer_tag__content us_rep)))))
-(define-fun buffer_tag__ref___projection ((a buffer_tag__ref)) us_rep 
+(define-fun buffer_tag__ref___projection ((a buffer_tag__ref)) us_rep
   (buffer_tag__content a))
 
 (define-fun to_int4 ((b Bool)) Int (ite (= b true) 1 0))
@@ -737,7 +737,7 @@
 
 (define-fun default_initial_assumption ((temp___expr_251 us_rep)
   (temp___skip_top_level_252 Bool)) Bool (and
-                                         (= (attr__tag temp___expr_251) 
+                                         (= (attr__tag temp___expr_251)
                                          us_tag)
                                          (and
                                          (and
@@ -789,7 +789,7 @@
 
 (declare-datatypes ()
 ((length_type__ref (mk_length_type__ref (length_type__content length_type)))))
-(define-fun length_type__ref___projection ((a length_type__ref)) length_type 
+(define-fun length_type__ref___projection ((a length_type__ref)) length_type
   (length_type__content a))
 
 (declare-datatypes ()
@@ -809,7 +809,7 @@
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
-  (! (= (select (slide1 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select 
+  (! (= (select (slide1 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide1 a old_first new_first) i)) ))))))
 
 (declare-fun concat2 ((Array Int element_type) Int Int
@@ -824,7 +824,7 @@
      (=> (and (<= a_first i) (<= i a_last))
      (= (select (concat2 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (< a_last i)
-     (= (select (concat2 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select 
+     (= (select (concat2 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
   (concat2 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton2 (element_type Int) (Array Int element_type))
@@ -942,7 +942,7 @@
 
 (declare-datatypes ()
 ((element_array__ref (mk_element_array__ref (element_array__content us_t)))))
-(define-fun element_array__ref___projection ((a element_array__ref)) us_t 
+(define-fun element_array__ref___projection ((a element_array__ref)) us_t
   (element_array__content a))
 
 (declare-fun self__attr__tag () Int)
@@ -1069,3 +1069,4 @@
  ;; File "generic_queue.ads", line 45, characters 0-0
   (not (in_range o)))
 (check-sat)
+(exit)

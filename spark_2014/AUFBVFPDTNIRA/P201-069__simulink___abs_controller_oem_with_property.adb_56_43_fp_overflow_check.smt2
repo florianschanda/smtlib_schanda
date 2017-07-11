@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -110,7 +110,7 @@
 
 (declare-datatypes ()
 ((long_float__ref (mk_long_float__ref (long_float__content long_float)))))
-(define-fun long_float__ref___projection ((a long_float__ref)) long_float 
+(define-fun long_float__ref___projection ((a long_float__ref)) long_float
   (long_float__content a))
 
 (define-fun dynamic_invariant ((temp___expr_57 Float64)
@@ -179,7 +179,7 @@
 
 ;; H
   (assert
-  (fp.leq (fp #b0 #b01111001010 #b1111111111111101010010000001111110010111011010000010) 
+  (fp.leq (fp #b0 #b01111001010 #b1111111111111101010010000001111110010111011010000010)
   wheel_speed))
 
 ;; H
@@ -208,7 +208,7 @@
 
 ;; H
   (assert
-  (fp.leq (fp #b0 #b01111001010 #b1111111111111101010010000001111110010111011010000010) 
+  (fp.leq (fp #b0 #b01111001010 #b1111111111111101010010000001111110010111011010000010)
   wheel_speed))
 
 ;; H
@@ -248,6 +248,7 @@
 ;; WP_parameter_def
  ;; File "abs_controller_oem_with_property.ads", line 20, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.div RNE wheel_speed epsifzero_out11)) (fp.isNaN (fp.div RNE 
+  (not (or (fp.isInfinite (fp.div RNE wheel_speed epsifzero_out11)) (fp.isNaN (fp.div RNE
   wheel_speed epsifzero_out11))))))
 (check-sat)
+(exit)

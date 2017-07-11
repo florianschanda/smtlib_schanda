@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-sort rbc_riu_id_t 0)
@@ -52,7 +52,7 @@
 (declare-datatypes ()
 ((rbc_riu_id_t__ref
  (mk_rbc_riu_id_t__ref (rbc_riu_id_t__content rbc_riu_id_t)))))
-(define-fun rbc_riu_id_t__ref___projection ((a rbc_riu_id_t__ref)) rbc_riu_id_t 
+(define-fun rbc_riu_id_t__ref___projection ((a rbc_riu_id_t__ref)) rbc_riu_id_t
   (rbc_riu_id_t__content a))
 
 (define-fun dynamic_invariant ((temp___expr_288 Int)
@@ -98,13 +98,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvor (bvshl v (bvurem n (_ bv32 32))) (bvlshr v (bvsub (_ bv32 32) (bvurem n (_ bv32 32))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv32 32))) (bvlshr v (bvsub (_ bv32 32) (bvurem n (_ bv32 32)))))
   (rotate_left1 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvor (bvlshr v (bvurem n (_ bv32 32))) (bvshl v (bvsub (_ bv32 32) (bvurem n (_ bv32 32))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv32 32))) (bvshl v (bvsub (_ bv32 32) (bvurem n (_ bv32 32)))))
   (rotate_right1 v (bv2nat n)))))
 
 (declare-fun nth_bv ((_ BitVec 32) (_ BitVec 32)) Bool)
@@ -171,7 +171,7 @@
 
 (declare-datatypes ()
 ((hash_type__ref (mk_hash_type__ref (hash_type__content hash_type)))))
-(define-fun hash_type__ref___projection ((a hash_type__ref)) hash_type 
+(define-fun hash_type__ref___projection ((a hash_type__ref)) hash_type
   (hash_type__content a))
 
 (declare-fun to_rep (hash_type) (_ BitVec 32))
@@ -214,7 +214,7 @@
 
 (declare-datatypes ()
 ((count_type__ref (mk_count_type__ref (count_type__content count_type)))))
-(define-fun count_type__ref___projection ((a count_type__ref)) count_type 
+(define-fun count_type__ref___projection ((a count_type__ref)) count_type
   (count_type__content a))
 
 (declare-fun to_rep1 (count_type) Int)
@@ -245,28 +245,28 @@
 ((us_split_discrs
  (mk___split_discrs
  (rec__com_map__com_to_rbc_map__map__capacity count_type)(rec__com_map__com_to_rbc_map__map__modulus hash_type)))))
-(define-fun us_split_discrs___projection ((a us_split_discrs)) count_type 
+(define-fun us_split_discrs___projection ((a us_split_discrs)) count_type
   (rec__com_map__com_to_rbc_map__map__capacity a))
 
-(define-fun us_split_discrs_2__projection ((a us_split_discrs)) hash_type 
+(define-fun us_split_discrs_2__projection ((a us_split_discrs)) hash_type
   (rec__com_map__com_to_rbc_map__map__modulus a))
 
 (declare-datatypes ()
 ((us_split_discrs__ref
  (mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref)) us_split_discrs 
+(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ()
 ((us_split_fields
  (mk___split_fields (rec__com_map__com_to_rbc_map__map us_main_type)))))
-(define-fun us_split_fields_Map__projection ((a us_split_fields)) us_main_type 
+(define-fun us_split_fields_Map__projection ((a us_split_fields)) us_main_type
   (rec__com_map__com_to_rbc_map__map a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_5__projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref_5__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -548,7 +548,7 @@
 
 (declare-datatypes ()
 ((key_type__ref1 (mk_key_type__ref1 (key_type__content1 key_type1)))))
-(define-fun key_type__ref_2__projection ((a key_type__ref1)) key_type1 
+(define-fun key_type__ref_2__projection ((a key_type__ref1)) key_type1
   (key_type__content1 a))
 
 (define-fun dynamic_invariant4 ((temp___expr_366 Int)
@@ -658,3 +658,4 @@
  ;; File "com_map.ads", line 37, characters 0-0
   (not (= (has_key (model__ map1) id) true)))
 (check-sat)
+(exit)

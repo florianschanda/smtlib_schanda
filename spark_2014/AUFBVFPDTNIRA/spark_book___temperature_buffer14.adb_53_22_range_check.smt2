@@ -32,7 +32,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun nth ((_ BitVec 8) Int) Bool)
@@ -71,13 +71,13 @@
 ;; rotate_left_bv_is_rotate_left
   (assert
   (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8))))) 
+  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
   (rotate_left1 v (bv2nat n)))))
 
 ;; rotate_right_bv_is_rotate_right
   (assert
   (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8))))) 
+  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
   (rotate_right1 v (bv2nat n)))))
 
 (declare-fun nth_bv ((_ BitVec 8) (_ BitVec 8)) Bool)
@@ -143,7 +143,7 @@
 
 (declare-datatypes ()
 ((time_type__ref (mk_time_type__ref (time_type__content time_type)))))
-(define-fun time_type__ref___projection ((a time_type__ref)) time_type 
+(define-fun time_type__ref___projection ((a time_type__ref)) time_type
   (time_type__content a))
 
 (declare-fun to_rep (time_type) Int)
@@ -182,7 +182,7 @@
 (declare-datatypes ()
 ((temperature_type__ref
  (mk_temperature_type__ref (temperature_type__content temperature_type)))))
-(define-fun temperature_type__ref___projection ((a temperature_type__ref)) temperature_type 
+(define-fun temperature_type__ref___projection ((a temperature_type__ref)) temperature_type
   (temperature_type__content a))
 
 (declare-fun to_rep1 (temperature_type) Int)
@@ -209,16 +209,16 @@
 ((us_split_fields
  (mk___split_fields
  (rec__temperature_buffer14__temperature_record__time_stamp time_type)(rec__temperature_buffer14__temperature_record__value temperature_type)))))
-(define-fun us_split_fields_Time_Stamp__projection ((a us_split_fields)) time_type 
+(define-fun us_split_fields_Time_Stamp__projection ((a us_split_fields)) time_type
   (rec__temperature_buffer14__temperature_record__time_stamp a))
 
-(define-fun us_split_fields_Value__projection ((a us_split_fields)) temperature_type 
+(define-fun us_split_fields_Value__projection ((a us_split_fields)) temperature_type
   (rec__temperature_buffer14__temperature_record__value a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields 
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ()
@@ -274,7 +274,7 @@
 
 ;; temperature_buffer14__temperature_record__time_stamp__last__bit_axiom
   (assert
-  (< temperature_buffer14__temperature_record__time_stamp__first__bit 
+  (< temperature_buffer14__temperature_record__time_stamp__first__bit
   temperature_buffer14__temperature_record__time_stamp__last__bit))
 
 ;; temperature_buffer14__temperature_record__time_stamp__position_axiom
@@ -302,7 +302,7 @@
 (declare-datatypes ()
 ((temperature_record__ref
  (mk_temperature_record__ref (temperature_record__content us_rep)))))
-(define-fun temperature_record__ref___projection ((a temperature_record__ref)) us_rep 
+(define-fun temperature_record__ref___projection ((a temperature_record__ref)) us_rep
   (temperature_record__content a))
 
 (declare-datatypes ()
@@ -322,7 +322,7 @@
   (forall ((old_first (_ BitVec 8)))
   (forall ((new_first (_ BitVec 8)))
   (forall ((i (_ BitVec 8)))
-  (! (= (select (slide a old_first new_first) i) (select a (bvsub i (bvsub new_first old_first)))) :pattern ((select 
+  (! (= (select (slide a old_first new_first) i) (select a (bvsub i (bvsub new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
 (declare-fun concat1 ((Array (_ BitVec 8) us_rep) (_ BitVec 8) (_ BitVec 8)
@@ -339,7 +339,7 @@
      (=> (and (bvule a_first i) (bvule i a_last))
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
      (=> (bvugt i a_last)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (bvadd (bvsub i a_last) (bvsub b_first #x01)))))) :pattern ((select 
+     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (bvadd (bvsub i a_last) (bvsub b_first #x01)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
 (declare-fun singleton1 (us_rep (_ BitVec 8)) (Array (_ BitVec 8) us_rep))
@@ -409,7 +409,7 @@
 (declare-datatypes ()
 ((buffer_count_type__ref
  (mk_buffer_count_type__ref (buffer_count_type__content buffer_count_type)))))
-(define-fun buffer_count_type__ref___projection ((a buffer_count_type__ref)) buffer_count_type 
+(define-fun buffer_count_type__ref___projection ((a buffer_count_type__ref)) buffer_count_type
   (buffer_count_type__content a))
 
 (define-fun dynamic_invariant ((temp___expr_177 Int)
@@ -450,7 +450,7 @@
 (declare-datatypes ()
 ((buffer_index_type__ref
  (mk_buffer_index_type__ref (buffer_index_type__content buffer_index_type)))))
-(define-fun buffer_index_type__ref___projection ((a buffer_index_type__ref)) buffer_index_type 
+(define-fun buffer_index_type__ref___projection ((a buffer_index_type__ref)) buffer_index_type
   (buffer_index_type__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_160 (_ BitVec 8))
@@ -514,8 +514,8 @@
 ;; H
   (assert
   (= (mk___split_fields item__split_fields2 item__split_fields3) (us_split_fields1
-                                                                 (select 
-                                                                 buffer 
+                                                                 (select
+                                                                 buffer
                                                                  next_out))))
 
 ;; H
@@ -530,3 +530,4 @@
  ;; File "temperature_buffer14.adb", line 39, characters 0-0
   (not (in_range2 (- count 1))))
 (check-sat)
+(exit)

@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -147,7 +147,7 @@
 ;; H
   (assert
   (and (= o (fp.add RNE x (fp #b0 #b01111101 #b10011001100110011001101)))
-  (not (or (fp.isInfinite (fp.add RNE x (fp #b0 #b01111101 #b10011001100110011001101))) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE x (fp #b0 #b01111101 #b10011001100110011001101))) (fp.isNaN (fp.add RNE
   x (fp #b0 #b01111101 #b10011001100110011001101)))))))
 
 ;; H
@@ -168,3 +168,4 @@
   (not
   (fp.eq x2 (fp.add RNE x (fp #b0 #b01111101 #b10011001100110011001101)))))
 (check-sat)
+(exit)

@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -110,7 +110,7 @@
 
 (declare-datatypes ()
 ((tfloat64B__ref (mk_tfloat64B__ref (tfloat64B__content tfloat64B)))))
-(define-fun tfloat64B__ref___projection ((a tfloat64B__ref)) tfloat64B 
+(define-fun tfloat64B__ref___projection ((a tfloat64B__ref)) tfloat64B
   (tfloat64B__content a))
 
 (declare-sort float64 0)
@@ -310,8 +310,8 @@
   (assert
   (and
   (= o (fp.add RNE old_speed (fp.mul RNE (fp.mul RNE factor (fp #b0 #b10000000000 #b1101101100000010000011000100100110111010010111100011)) (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001))))
-  (not (or (fp.isInfinite (fp.add RNE old_speed (fp.mul RNE (fp.mul RNE 
-  factor (fp #b0 #b10000000000 #b1101101100000010000011000100100110111010010111100011)) (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001)))) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE old_speed (fp.mul RNE (fp.mul RNE
+  factor (fp #b0 #b10000000000 #b1101101100000010000011000100100110111010010111100011)) (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001)))) (fp.isNaN (fp.add RNE
   old_speed (fp.mul RNE (fp.mul RNE factor (fp #b0 #b10000000000 #b1101101100000010000011000100100110111010010111100011)) (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001))))))))
 
 ;; H
@@ -323,7 +323,7 @@
 ;; H
   (assert
   (and (= o1 (fp.add RNE old_speed new_speed1))
-  (not (or (fp.isInfinite (fp.add RNE old_speed new_speed1)) (fp.isNaN (fp.add RNE 
+  (not (or (fp.isInfinite (fp.add RNE old_speed new_speed1)) (fp.isNaN (fp.add RNE
   old_speed new_speed1))))))
 
 ;; H
@@ -353,3 +353,4 @@
  ;; File "attempt_2.adb", line 21, characters 0-0
   (not (= (invariant__ (+ n 1) new_speed2) true)))
 (check-sat)
+(exit)

@@ -11,7 +11,7 @@
       (fp.isSubnormal f)
       (fp.isZero f)))
 
-(define-const f2 Float32 ((_ to_fp 8 24) RNE     2.0))
+(define-const f2 Float32 ((_ to_fp 8 24) RNE 2.0))
 
 ;; a and b are finite
 (declare-const a Float32)

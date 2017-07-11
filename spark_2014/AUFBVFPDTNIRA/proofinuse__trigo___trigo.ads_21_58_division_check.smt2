@@ -33,7 +33,7 @@
 
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 
-(define-fun us_private__ref___projection ((a us_private__ref)) us_private 
+(define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
 (declare-fun pow2 (Int) Int)
@@ -202,7 +202,7 @@
   (assert
   (and (= o1 (pow8 x))
   (and (not (or (fp.isInfinite o1) (fp.isNaN o1)))
-  (= o1 (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE 
+  (= o1 (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE
   x x) x) x) x) x) x) x)))))
 
 ;; H
@@ -213,7 +213,7 @@
   (assert
   (and (= o (pow6 x))
   (and (not (or (fp.isInfinite o) (fp.isNaN o)))
-  (= o (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE x 
+  (= o (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE x
   x) x) x) x) x)))))
 
 (assert
@@ -221,3 +221,4 @@
  ;; File "system.ads", line 1, characters 0-0
   (not (not (fp.isZero      (fp #b0 #b10001000 #b01101000000000000000000)))))
 (check-sat)
+(exit)
