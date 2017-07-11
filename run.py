@@ -22,12 +22,20 @@ def err_cmp(a, b):
 
 def main():
     provers = []
-    provers.append(Prover_Kind("cvc4", ["--lang=smt2"]))
-    provers.append(Prover_Kind("z3", ["-in", "-smt2"], use_logic=False))
-    provers.append(Prover_Kind("mathsat", ["-input=smt2"]))
-    provers.append(Prover_Kind("mathsat_acdl", ["-input=smt2",
-                                                "-theory.fp.mode=2"]))
-    provers.append(Prover_Kind("colibri", [], use_temp=True))
+    provers.append(Prover_Kind("cvc4",
+                               ["--lang=smt2"]))
+    provers.append(Prover_Kind("z3",
+                               ["-in", "-smt2"],
+                               use_logic=False,
+                               use_dialect="z3"))
+    provers.append(Prover_Kind("mathsat",
+                               ["-input=smt2"]))
+    provers.append(Prover_Kind("mathsat_acdl",
+                               ["-input=smt2",
+                                "-theory.fp.mode=2"]))
+    provers.append(Prover_Kind("colibri",
+                               [],
+                               use_temp=True))
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--suite",
@@ -67,7 +75,7 @@ def main():
     if options.suite == "fp":
         bench_dirs.append("spark_2014/AUFBVFPDTNIRA")
     if options.suite == "debug":
-        bench_dirs.append("crafted/QF_FPBV")
+        bench_dirs.append("spark_2014/AUFBVFPDTNIRA")
 
     print "Assembling benchmarks..."
     tasks = []
@@ -75,7 +83,8 @@ def main():
         for path, dirs, files in os.walk(d):
             for f in sorted(files):
                 if f.endswith(".smt2"):
-                    tasks.append(Task(Benchmark(os.path.join(path, f)),
+                    tasks.append(Task(Benchmark(os.path.join(path, f),
+                                                dialect = the_prover.dialect),
                                       the_prover))
 
     detail = {}
@@ -123,7 +132,9 @@ def main():
     def stat_str(stats):
         total = sum(stats.itervalues())
         return stat_fmt % (float(stats["solved"] * 100) / float(total),
-                           float((stats["solved"] + stats["timeout"]) * 100) /
+                           float((stats["solved"] +
+                                  stats["timeout"] +
+                                  stats["unknown"]) * 100) /
                              float(total),
                            total,
                            stats["solved"],
