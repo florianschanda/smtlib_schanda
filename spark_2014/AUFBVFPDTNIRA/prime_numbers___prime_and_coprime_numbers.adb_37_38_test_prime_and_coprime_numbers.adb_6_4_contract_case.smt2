@@ -472,18 +472,18 @@
   (and
   (and
   (and
-  (and (= temp___249 b2)
-  (and (= temp___248 a2)
-  (and (= temp___247 r)
+  (and (= temp___249 r)
+  (and (= temp___248 b2)
+  (and (= temp___247 a2)
   (and
   (and (and (< 0 a3) (< 0 b3))
   (and (not (and (= a3 1) (= b3 1)))
   (= (= (are_coprime a3 b3) true) (= (are_coprime left right) true))))
   (and
   (and
-  (and (=> (<= 0 2147483647) (in_range4 r2))
-  (=> (<= 1 2147483647) (in_range2 a3)))
+  (and (=> (<= 1 2147483647) (in_range2 a3))
   (=> (<= 1 2147483647) (in_range3 b3)))
+  (=> (<= 0 2147483647) (in_range4 r2)))
   (and
   (and (and (= o2 (mod2 a3 b3)) (in_range4 (mod2 a3 b3)))
   (and (= r2 result4) (= r3 o2)))

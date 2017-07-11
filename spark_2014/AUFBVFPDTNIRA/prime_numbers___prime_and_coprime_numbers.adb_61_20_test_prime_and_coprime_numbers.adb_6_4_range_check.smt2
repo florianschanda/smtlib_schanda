@@ -349,9 +349,9 @@
 ;; H
   (assert
   (and
-  (and (=> (<= 0 2147483647) (in_range4 r1))
-  (=> (<= 1 2147483647) (in_range2 a2)))
-  (=> (<= 1 2147483647) (in_range3 b2))))
+  (and (=> (<= 1 2147483647) (in_range2 a2))
+  (=> (<= 1 2147483647) (in_range3 b2)))
+  (=> (<= 0 2147483647) (in_range4 r1))))
 
 (assert
 ;; WP_parameter_def

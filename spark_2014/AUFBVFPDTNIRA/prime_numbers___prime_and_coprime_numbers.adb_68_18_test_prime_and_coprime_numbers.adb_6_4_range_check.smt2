@@ -359,9 +359,9 @@
 ;; H
   (assert
   (and
-  (and (=> (<= 0 2147483647) (in_range4 r1))
-  (=> (<= 1 2147483647) (in_range2 a2)))
-  (=> (<= 1 2147483647) (in_range3 b2))))
+  (and (=> (<= 1 2147483647) (in_range2 a2))
+  (=> (<= 1 2147483647) (in_range3 b2)))
+  (=> (<= 0 2147483647) (in_range4 r1))))
 
 ;; H
   (assert (and (= o2 (mod2 a2 b2)) (in_range4 (mod2 a2 b2))))

@@ -449,7 +449,7 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(declare-fun r77b () Int)
+(declare-fun r81b () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
@@ -484,8 +484,8 @@
 
 (declare-fun dummy3 () integer)
 
-(declare-datatypes () ((t78b__ref (mk_t78b__ref (t78b__content integer)))))
-(define-fun t78b__ref___projection ((a t78b__ref)) integer (t78b__content a))
+(declare-datatypes () ((t82b__ref (mk_t82b__ref (t82b__content integer)))))
+(define-fun t82b__ref___projection ((a t82b__ref)) integer (t82b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 

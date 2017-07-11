@@ -386,13 +386,13 @@
   (assert (= b1 o1))
 
 ;; H
-  (assert (= temp___249 b1))
+  (assert (= temp___249 r))
 
 ;; H
-  (assert (= temp___248 a1))
+  (assert (= temp___248 b1))
 
 ;; H
-  (assert (= temp___247 r))
+  (assert (= temp___247 a1))
 
 ;; H
   (assert (and (< 0 a2) (< 0 b2)))
@@ -406,9 +406,9 @@
 ;; H
   (assert
   (and
-  (and (=> (<= 0 2147483647) (in_range4 r1))
-  (=> (<= 1 2147483647) (in_range2 a2)))
-  (=> (<= 1 2147483647) (in_range3 b2))))
+  (and (=> (<= 1 2147483647) (in_range2 a2))
+  (=> (<= 1 2147483647) (in_range3 b2)))
+  (=> (<= 0 2147483647) (in_range4 r1))))
 
 ;; H
   (assert (and (= o2 (mod2 a2 b2)) (in_range4 (mod2 a2 b2))))

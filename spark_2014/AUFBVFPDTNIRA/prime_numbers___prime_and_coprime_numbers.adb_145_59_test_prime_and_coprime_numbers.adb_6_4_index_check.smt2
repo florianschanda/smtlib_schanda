@@ -353,9 +353,9 @@
 
 (declare-fun o2 () Int)
 
-(declare-fun temp___236 () Int)
+(declare-fun temp___236 () Bool)
 
-(declare-fun temp___235 () Bool)
+(declare-fun temp___235 () Int)
 
 (declare-fun o3 () Int)
 
@@ -541,10 +541,10 @@
   (assert (=> (or (= mode 0) (= mode 2)) (= right2 o2)))
 
 ;; H
-  (assert (=> (or (= mode 0) (= mode 2)) (= temp___236 right2)))
+  (assert (=> (or (= mode 0) (= mode 2)) (= temp___236 right_is_out)))
 
 ;; H
-  (assert (=> (or (= mode 0) (= mode 2)) (= temp___235 right_is_out)))
+  (assert (=> (or (= mode 0) (= mode 2)) (= temp___235 right2)))
 
 ;; H
   (assert

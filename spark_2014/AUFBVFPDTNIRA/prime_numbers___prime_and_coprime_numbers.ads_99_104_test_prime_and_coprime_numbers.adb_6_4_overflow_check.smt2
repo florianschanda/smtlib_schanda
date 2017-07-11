@@ -353,9 +353,9 @@
 
 (declare-fun o2 () Int)
 
-(declare-fun temp___236 () Int)
+(declare-fun temp___236 () Bool)
 
-(declare-fun temp___235 () Bool)
+(declare-fun temp___235 () Int)
 
 (declare-fun o3 () Int)
 
@@ -369,9 +369,9 @@
 
 (declare-fun o8 () Int)
 
-(declare-fun temp___238 () Int)
+(declare-fun temp___238 () Bool)
 
-(declare-fun temp___237 () Bool)
+(declare-fun temp___237 () Int)
 
 (declare-fun o9 () Int)
 
@@ -736,8 +736,8 @@
   (and (= right1 result4) (= right2 o2)))
   (and
   (and
-  (and (= temp___236 right2)
-  (and (= temp___235 right_is_out)
+  (and (= temp___236 right_is_out)
+  (and (= temp___235 right2)
   (and
   (and (= (mk_bool__ref result5) right_is_out23)
   (= right_is_out2 (ite (< 100000 right2) true false)))
@@ -795,8 +795,8 @@
   (and (= result11 (mk_int__ref left1)) (= left2 o8)))
   (and
   (and
-  (and (= temp___238 left2)
-  (and (= temp___237 left_is_out)
+  (and (= temp___238 left_is_out)
+  (and (= temp___237 left2)
   (and
   (and (= result12 left_is_out20)
   (= left_is_out2 (ite (< left2 0) true false)))

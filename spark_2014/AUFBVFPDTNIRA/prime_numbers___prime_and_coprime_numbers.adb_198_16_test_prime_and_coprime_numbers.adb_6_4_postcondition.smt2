@@ -449,7 +449,7 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(declare-fun r77b () Int)
+(declare-fun r81b () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
@@ -484,8 +484,8 @@
 
 (declare-fun dummy3 () integer)
 
-(declare-datatypes () ((t78b__ref (mk_t78b__ref (t78b__content integer)))))
-(define-fun t78b__ref___projection ((a t78b__ref)) integer (t78b__content a))
+(declare-datatypes () ((t82b__ref (mk_t82b__ref (t82b__content integer)))))
+(define-fun t82b__ref___projection ((a t82b__ref)) integer (t82b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
@@ -505,13 +505,13 @@
 
 (declare-fun index_2 () Int)
 
-(declare-fun test_prime_and_coprime_numbers__p__eratosthenes__L_5__R77b__assume () Int)
+(declare-fun test_prime_and_coprime_numbers__p__eratosthenes__L_5__R81b__assume () Int)
 
-(declare-fun temp___261 () Int)
+(declare-fun temp___260 () (Array Int Bool))
 
-(declare-fun temp___260 () Int)
+(declare-fun temp___259 () Int)
 
-(declare-fun temp___258 () (Array Int Bool))
+(declare-fun temp___258 () Int)
 
 (declare-fun temp___257 () Int)
 
@@ -688,18 +688,18 @@
 ;; H
   (assert
   (and
-  (= test_prime_and_coprime_numbers__p__eratosthenes__L_5__R77b__assume 
+  (= test_prime_and_coprime_numbers__p__eratosthenes__L_5__R81b__assume 
   (to_int1 RNA (fp.sqrt RNE (fp #b0 #b10001111 #b10000110101000000000000))))
   (in_range3
   (to_int1 RNA (fp.sqrt RNE (fp #b0 #b10001111 #b10000110101000000000000))))))
 
 ;; H
   (assert
-  (= test_prime_and_coprime_numbers__p__eratosthenes__L_5__R77b__assume 
-  r77b))
+  (= test_prime_and_coprime_numbers__p__eratosthenes__L_5__R81b__assume 
+  r81b))
 
 ;; H
-  (assert (in_range3 r77b))
+  (assert (in_range3 r81b))
 
 ;; H
   (assert (= (mk_int__ref result3) (mk_int__ref index_2)))
@@ -709,35 +709,35 @@
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b)) (= temp___261 index_1)))
+  (=> (and (<= 2 index_21) (<= index_21 r81b)) (= temp___260 is_prime4)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b)) (= temp___260 index_21)))
+  (=> (and (<= 2 index_21) (<= index_21 r81b)) (= temp___259 index_3)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b)) (= temp___258 is_prime4)))
+  (=> (and (<= 2 index_21) (<= index_21 r81b)) (= temp___258 index_1)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b)) (= temp___257 index_3)))
+  (=> (and (<= 2 index_21) (<= index_21 r81b)) (= temp___257 index_21)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (and (<= 2 index_22) (<= index_22 100000))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (forall ((v Int))
   (=> (and (<= 0 v) (<= v index_22))
   (= (= (select is_prime5 v) true) (= (is_prime v) true))))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (forall ((v Int))
   (=> (and (<= index_22 v) (<= v 100000))
   (= (= (select is_prime5 v) true)
@@ -746,93 +746,93 @@
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (and
   (and
-  (and (=> (<= (- 2147483648) 2147483647) (in_range2 index_32))
-  (=> (<= 2 r77b) (dynamic_property 2 r77b index_22)))
+  (and (=> (<= 2 r81b) (dynamic_property 2 r81b index_22))
   (=> (<= 0 2147483647) (in_range3 index_12)))
-  (and (<= 2 index_22) (<= index_22 r77b)))))
+  (=> (<= (- 2147483648) 2147483647) (in_range2 index_32)))
+  (and (<= 2 index_22) (<= index_22 r81b)))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (and (<= 0 index_22) (<= index_22 100000))))
 
 ;; H
-  (assert (=> (and (<= 2 index_21) (<= index_21 r77b)) (= o index_22)))
+  (assert (=> (and (<= 2 index_21) (<= index_21 r81b)) (= o index_22)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (= result4 (select is_prime5 o))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (= index_12 result5))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (= index_13 index_22))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true)
   (and (= o1 (* 2 index_13)) (in_range2 (* 2 index_13))))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (= index_32 result6))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (= index_33 o1))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (=> (<= index_33 100000) (= temp___255 is_prime5)))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (=> (<= index_33 100000) (= temp___254 index_33)))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true)
   (=> (<= index_33 100000) (and (<= 0 index_33) (<= index_33 100000))))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (=> (<= index_33 100000) (= o2 index_33)))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true)
   (=> (<= index_33 100000) (= o3 (store is_prime5 o2 (of_int1 0)))))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (=> (<= index_33 100000) (= is_prime5 result7)))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (=> (<= index_33 100000) (= is_prime6 o3)))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true)
   (=> (<= index_33 100000)
   (forall ((v Int))
@@ -841,7 +841,7 @@
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true)
   (=> (<= index_33 100000)
   (forall ((v Int))
@@ -855,273 +855,273 @@
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true)
   (=> (<= index_33 100000) (and (<= index_22 index_34) (<= index_34 100000))))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true)
   (=> (<= index_33 100000) (= (mod2 index_34 index_22) 0)))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true)
   (=> (<= index_33 100000)
   (=> (<= (- 2147483648) 2147483647) (in_range2 index_34))))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true)
   (=> (<= index_33 100000)
   (and (= o4 (+ index_34 index_13)) (in_range2 (+ index_34 index_13)))))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (=> (<= index_33 100000) (= index_34 result8)))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (=> (<= index_33 100000) (= index_35 o4)))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (=> (<= index_33 100000) (not (<= index_35 100000))))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (=> (<= index_33 100000) (= index_35 index_36)))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (=> (<= index_33 100000) (= is_prime7 is_prime8)))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (=> (<= index_33 100000) (= index_37 index_35)))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (=> (<= index_33 100000) (= is_prime9 is_prime7)))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true)
   (=> (<= index_33 100000) (= index_318 (mk_int__ref index_36))))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true)
   (=> (<= index_33 100000) (= is_prime21 (mk_map__ref is_prime8))))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (=> (<= index_33 100000) (= index_39 index_37)))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (=> (<= index_33 100000) (= is_prime11 is_prime9)))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (=> (not (<= index_33 100000)) (= index_33 index_38)))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true)
   (=> (not (<= index_33 100000)) (= is_prime5 is_prime10)))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (=> (not (<= index_33 100000)) (= index_39 index_33)))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true)
   (=> (not (<= index_33 100000)) (= is_prime11 is_prime5)))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (= index_310 index_318))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (= index_13 index_14))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (= is_prime20 is_prime21))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (= index_311 index_39))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (= index_15 index_13))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (= result4 true) (= is_prime13 is_prime11))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (not (= result4 true)) (= index_310 (mk_int__ref index_32)))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (not (= result4 true)) (= index_12 index_14))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (not (= result4 true)) (= is_prime5 is_prime12))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (not (= result4 true)) (= index_311 index_32))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (not (= result4 true)) (= index_15 index_12))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (=> (not (= result4 true)) (= is_prime13 is_prime5))))
 
 ;; H
-  (assert (=> (and (<= 2 index_21) (<= index_21 r77b)) (= index_22 r77b)))
+  (assert (=> (and (<= 2 index_21) (<= index_21 r81b)) (= index_22 r81b)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (= index_23 (mk_int__ref index_22))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b)) (= index_312 index_310)))
+  (=> (and (<= 2 index_21) (<= index_21 r81b)) (= index_312 index_310)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b))
+  (=> (and (<= 2 index_21) (<= index_21 r81b))
   (= index_16 (mk_int__ref index_14))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b)) (= is_prime14 is_prime20)))
+  (=> (and (<= 2 index_21) (<= index_21 r81b)) (= is_prime14 is_prime20)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b)) (= index_24 index_22)))
+  (=> (and (<= 2 index_21) (<= index_21 r81b)) (= index_24 index_22)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b)) (= index_313 index_311)))
+  (=> (and (<= 2 index_21) (<= index_21 r81b)) (= index_313 index_311)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b)) (= index_17 index_15)))
+  (=> (and (<= 2 index_21) (<= index_21 r81b)) (= index_17 index_15)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b)) (= is_prime15 is_prime13)))
+  (=> (and (<= 2 index_21) (<= index_21 r81b)) (= is_prime15 is_prime13)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b)) (= index_25 index_23)))
+  (=> (and (<= 2 index_21) (<= index_21 r81b)) (= index_25 index_23)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b)) (= index_314 index_312)))
+  (=> (and (<= 2 index_21) (<= index_21 r81b)) (= index_314 index_312)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b)) (= index_18 index_16)))
+  (=> (and (<= 2 index_21) (<= index_21 r81b)) (= index_18 index_16)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b)) (= is_prime16 is_prime14)))
+  (=> (and (<= 2 index_21) (<= index_21 r81b)) (= is_prime16 is_prime14)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b)) (= index_26 index_24)))
+  (=> (and (<= 2 index_21) (<= index_21 r81b)) (= index_26 index_24)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b)) (= index_315 index_313)))
+  (=> (and (<= 2 index_21) (<= index_21 r81b)) (= index_315 index_313)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b)) (= index_19 index_17)))
+  (=> (and (<= 2 index_21) (<= index_21 r81b)) (= index_19 index_17)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r77b)) (= is_prime17 is_prime15)))
+  (=> (and (<= 2 index_21) (<= index_21 r81b)) (= is_prime17 is_prime15)))
 
 ;; H
   (assert
-  (=> (not (and (<= 2 index_21) (<= index_21 r77b)))
+  (=> (not (and (<= 2 index_21) (<= index_21 r81b)))
   (= index_25 (mk_int__ref index_21))))
 
 ;; H
   (assert
-  (=> (not (and (<= 2 index_21) (<= index_21 r77b)))
+  (=> (not (and (<= 2 index_21) (<= index_21 r81b)))
   (= index_314 (mk_int__ref index_3))))
 
 ;; H
   (assert
-  (=> (not (and (<= 2 index_21) (<= index_21 r77b)))
+  (=> (not (and (<= 2 index_21) (<= index_21 r81b)))
   (= index_18 (mk_int__ref index_1))))
 
 ;; H
   (assert
-  (=> (not (and (<= 2 index_21) (<= index_21 r77b)))
+  (=> (not (and (<= 2 index_21) (<= index_21 r81b)))
   (= is_prime16 (mk_map__ref is_prime4))))
 
 ;; H
   (assert
-  (=> (not (and (<= 2 index_21) (<= index_21 r77b))) (= index_26 index_21)))
+  (=> (not (and (<= 2 index_21) (<= index_21 r81b))) (= index_26 index_21)))
 
 ;; H
   (assert
-  (=> (not (and (<= 2 index_21) (<= index_21 r77b))) (= index_315 index_31)))
+  (=> (not (and (<= 2 index_21) (<= index_21 r81b))) (= index_315 index_31)))
 
 ;; H
   (assert
-  (=> (not (and (<= 2 index_21) (<= index_21 r77b))) (= index_19 index_11)))
+  (=> (not (and (<= 2 index_21) (<= index_21 r81b))) (= index_19 index_11)))
 
 ;; H
   (assert
-  (=> (not (and (<= 2 index_21) (<= index_21 r77b)))
+  (=> (not (and (<= 2 index_21) (<= index_21 r81b)))
   (= is_prime17 is_prime4)))
 
 ;; H

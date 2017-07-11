@@ -449,7 +449,7 @@
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
-(declare-fun r77b () Int)
+(declare-fun r81b () Int)
 
 (declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
 
@@ -484,8 +484,8 @@
 
 (declare-fun dummy3 () integer)
 
-(declare-datatypes () ((t78b__ref (mk_t78b__ref (t78b__content integer)))))
-(define-fun t78b__ref___projection ((a t78b__ref)) integer (t78b__content a))
+(declare-datatypes () ((t82b__ref (mk_t82b__ref (t82b__content integer)))))
+(define-fun t82b__ref___projection ((a t82b__ref)) integer (t82b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
 
@@ -505,7 +505,7 @@
 
 (declare-fun index_2 () Int)
 
-(declare-fun test_prime_and_coprime_numbers__p__eratosthenes__L_5__R77b__assume () Int)
+(declare-fun test_prime_and_coprime_numbers__p__eratosthenes__L_5__R81b__assume () Int)
 
 (declare-fun result () (Array Int Bool))
 
@@ -550,18 +550,18 @@
 ;; H
   (assert
   (and
-  (= test_prime_and_coprime_numbers__p__eratosthenes__L_5__R77b__assume 
+  (= test_prime_and_coprime_numbers__p__eratosthenes__L_5__R81b__assume 
   (to_int1 RNA (fp.sqrt RNE (fp #b0 #b10001111 #b10000110101000000000000))))
   (in_range3
   (to_int1 RNA (fp.sqrt RNE (fp #b0 #b10001111 #b10000110101000000000000))))))
 
 ;; H
   (assert
-  (= test_prime_and_coprime_numbers__p__eratosthenes__L_5__R77b__assume 
-  r77b))
+  (= test_prime_and_coprime_numbers__p__eratosthenes__L_5__R81b__assume 
+  r81b))
 
 ;; H
-  (assert (in_range3 r77b))
+  (assert (in_range3 r81b))
 
 ;; H
   (assert (= (mk_int__ref result3) (mk_int__ref index_2)))
@@ -573,7 +573,7 @@
   (assert (<= 2 index_21))
 
 ;; H
-  (assert (<= index_21 r77b))
+  (assert (<= index_21 r81b))
 
 (assert
 ;; WP_parameter_def

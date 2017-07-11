@@ -347,7 +347,7 @@
 
 (declare-fun euclid__function_guard (Int Int Int) Bool)
 
-(declare-sort t52b 0)
+(declare-sort t56b 0)
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 100000)))
 
@@ -357,12 +357,12 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
 
-(declare-fun user_eq2 (t52b t52b) Bool)
+(declare-fun user_eq2 (t56b t56b) Bool)
 
-(declare-fun dummy2 () t52b)
+(declare-fun dummy2 () t56b)
 
-(declare-datatypes () ((t52b__ref (mk_t52b__ref (t52b__content t52b)))))
-(define-fun t52b__ref___projection ((a t52b__ref)) t52b (t52b__content a))
+(declare-datatypes () ((t56b__ref (mk_t56b__ref (t56b__content t56b)))))
+(define-fun t56b__ref___projection ((a t56b__ref)) t56b (t56b__content a))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
 
@@ -447,12 +447,11 @@
 ;; H
   (assert
   (and
-  (and
-  (forall ((temp___226 Int))
-  (=> (and (<= 0 temp___226) (<= temp___226 100000))
-  (=> (< index2 temp___226)
-  (= (select result__2 temp___226) (select result__ temp___226)))))
-  (=> (<= 0 100000) (in_range3 index2)))
+  (and (=> (<= 0 100000) (in_range3 index2))
+  (forall ((temp___227 Int))
+  (=> (and (<= 0 temp___227) (<= temp___227 100000))
+  (=> (< index2 temp___227)
+  (= (select result__2 temp___227) (select result__ temp___227))))))
   (and (<= 0 index2) (<= index2 100000))))
 
 ;; H
