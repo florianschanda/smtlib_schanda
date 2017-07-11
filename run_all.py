@@ -30,26 +30,25 @@ def main():
     OTHER_PROVERS = ["mathsat", "z3"]
     # Only all includes colibri and alt-ergo
     if options.suite == "all":
-        OTHER_PROVERS.append("colibri")
         OTHER_PROVERS.append("altergo")
+        OTHER_PROVERS.append("colibri")
 
     for prover in OTHER_PROVERS:
-        prover_bin = prover if prover != "altergo" else "alt-ergo"
         exists = False
-        for prover_bin in PATH:
-            if os.path.exists(os.path.join(p, prover_bin)):
+        for p in PATH:
+            if os.path.exists(os.path.join(p, prover)):
                 exists = True
                 break
         if exists:
             os.system("./run.py %s --suite=fp %s %s" %
                       ("--force" if options.force else "",
                        prover,
-                       prover_bin))
+                       prover))
             if prover == "mathsat":
                 os.system("./run.py %s --suite=fp %s_acdl %s" %
                           ("--force" if options.force else "",
                            prover,
-                           prover_bin))
+                           prover))
 
 if __name__ == "__main__":
     main()
