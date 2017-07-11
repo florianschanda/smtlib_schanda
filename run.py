@@ -47,6 +47,9 @@ def main():
     ap.add_argument("--timeout",
                     default=5,
                     type=int)
+    ap.add_argument("--force",
+                    default=False,
+                    action="store_true")
     ap.add_argument("prover_kind",
                     choices=[p.name for p in provers],
                     metavar="KIND",
@@ -56,6 +59,19 @@ def main():
                     metavar="BINARY")
 
     options = ap.parse_args()
+
+    result_basename = "%s_%s_%s" % \
+                      (options.suite,
+                       options.prover_kind,
+                       os.path.basename(options.prover_bin).lstrip("./"))
+    result_pickle = "data_%s.p" % result_basename
+    result_report = "report_%s.txt" % result_basename
+
+    if not options.force and os.path.exists(result_pickle):
+        print "Results for %s (%s) already exist. Use --force to recreate." %\
+            (options.prover_kind,
+             os.path.basename(options.prover_bin).lstrip("./"))
+        return
 
     the_prover = None
     for p in provers:
@@ -165,11 +181,7 @@ def main():
         print "%20s %s" % (cat, stat_str(detail[cat]))
     print "%20s %s" % ("TOTAL", stat_str(summary))
 
-    basename = "%s_%s_%s" % (options.suite,
-                             options.prover_kind,
-                             os.path.basename(options.prover_bin).lstrip("./"))
-
-    with open("data_%s.p" % basename, "w") as fd:
+    with open(result_pickle, "w") as fd:
         report = {
             "prover" : {
                 "kind" : options.prover_kind,
@@ -183,7 +195,7 @@ def main():
         }
         dump(report, fd, -1)
 
-    with open("report_%s.txt" % basename, "w") as fd:
+    with open(result_report, "w") as fd:
         fd.write("# Configuration \n")
         fd.write("Prover kind     : %s\n" % options.prover_kind)
         fd.write("Prover binary   : %s\n" %
