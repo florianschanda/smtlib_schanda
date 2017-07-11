@@ -321,6 +321,7 @@ def mk_competition_slides(fd):
 
         if cat == "solved":
             fd.write("\\begin{frame}{Benchmarks}{Unique solutions}\n")
+            fd.write("Solutions where only a single solver reports sat or unsat.\n")
             fd.write("\\begin{center}\n")
             mk_unique_solutions_table()
             fd.write("\\end{center}\n")
