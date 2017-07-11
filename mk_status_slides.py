@@ -248,6 +248,68 @@ def mk_competition_slides(fd):
         fd.write("AVAV & " + " & ".join(s_row) + r"\\" + "\n")
         fd.write("\\end{tabular}\n")
 
+    def mk_unique_solutions_table():
+        benchmarks = {}
+        for c in competitors:
+            for bench, verd in c["verdicts_processed"].iteritems():
+                if bench not in benchmarks:
+                    benchmarks[bench] = set()
+                if verd in ("sat", "unsat"):
+                    benchmarks[bench].add(c["prover"]["kind"])
+
+        unique_total = {}
+        unique_cat   = {}
+        for c in competitors:
+            unique_total[c["prover"]["kind"]] = 0
+            for cat in c["details"]:
+                if cat not in unique_cat:
+                    unique_cat[cat] = {}
+                unique_cat[cat][c["prover"]["kind"]] = 0
+
+        for bench, answers in benchmarks.iteritems():
+            if len(answers) == 1:
+                cat    = bench.split("/")[0]
+                solver = list(answers)[0]
+
+                unique_total[solver] += 1
+                unique_cat[cat][solver] += 1
+
+        fd.write("\\small\n")
+        fd.write("\\begin{tabular}{>{\columncolor{Altran2}}r")
+        for c in competitors:
+            if c["prover"]["kind"] == "cvc4":
+                fd.write(">{\columncolor{Altran2!10}}")
+            fd.write("l")
+        fd.write("}\n")
+        fd.write("\\rowcolor{Altran2}\n")
+        fd.write("Benchmark & ")
+        fd.write(" & ".join(mk_solver_name(r["prover"]["kind"])
+                            for r in competitors))
+        fd.write(r"\\" + "\n")
+
+        for cat in sorted(unique_cat):
+            fd.write(mk_bench_name(cat) + " & ")
+            row = [unique_cat[cat][c["prover"]["kind"]]
+                   for c in competitors]
+            s_row = ["%u" % x for x in row]
+            s_row = ["\\t%s{%s}" % (mk_best_color(max(row), row[i]),
+                                    s_row[i])
+                     for i in xrange(len(row))]
+            for i, r in enumerate(competitors):
+                if r["prover"]["kind"] in ("z3", "altergo") and cat == "spark_2014":
+                    s_row[i] = "%s$^*$" % s_row[i]
+            fd.write(" & ".join(s_row) + r"\\" + "\n")
+
+        row = [unique_total[c["prover"]["kind"]]
+               for c in competitors]
+        s_row = ["%u" % x for x in row]
+        s_row = ["\\t%s{%s}" % (mk_best_color(max(row), row[i]),
+                                s_row[i])
+                 for i in xrange(len(row))]
+        fd.write("\\rowcolor{Altran2}\n")
+        fd.write("Total & " + " & ".join(s_row) + r"\\" + "\n")
+        fd.write("\\end{tabular}\n")
+
     # Table comparing all solvers
     for cat in COMPARISON_CATS:
         fd.write("\\begin{frame}{Benchmarks}{With status `%s'}\n" % cat)
@@ -256,6 +318,14 @@ def mk_competition_slides(fd):
         fd.write("\\end{center}\n")
         fd.write("$^*$) uses different VCs\n")
         fd.write("\\end{frame}\n\n")
+
+        if cat == "solved":
+            fd.write("\\begin{frame}{Benchmarks}{Unique solutions}\n")
+            fd.write("\\begin{center}\n")
+            mk_unique_solutions_table()
+            fd.write("\\end{center}\n")
+            fd.write("$^*$) uses different VCs\n")
+            fd.write("\\end{frame}\n\n")
 
 def main():
     ap = argparse.ArgumentParser()
