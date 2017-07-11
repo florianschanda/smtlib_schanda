@@ -14,12 +14,15 @@ class Benchmark(object):
         self.cat = cats[0]
         self.expected  = "unknown"
         self.data      = None
-        self.dialect   = dialect
+        if dialect is not None and os.path.exists(self.benchmark + "_" +
+                                                  dialect):
+            self.dialect = dialect
+        else:
+            self.dialect = None
 
     def load(self, keep_logic):
         self.data = ""
-        if self.dialect is not None \
-           and os.path.exists(self.benchmark + "_" + self.dialect):
+        if self.dialect is not None:
             fn = self.benchmark + "_" + self.dialect
         else:
             fn = self.benchmark
