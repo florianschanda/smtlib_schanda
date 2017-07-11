@@ -221,15 +221,15 @@
      true)) (dynamic_invariant3 (atan_2 x y) true false true)) :pattern (
   (atan_2 x y)) )))
 
-(declare-fun asin (Float32) Float32)
+(declare-fun asin1 (Float32) Float32)
 
 (declare-fun asin__function_guard (Float32 Float32) Bool)
 
 ;; asin__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true) (dynamic_invariant3 (asin x)
-     true false true)) :pattern ((asin x)) )))
+  (! (=> (dynamic_invariant x true true true) (dynamic_invariant3 (asin1 x)
+     true false true)) :pattern ((asin1 x)) )))
 
 (declare-fun saturate (Float32 Float32 Float32) Float32)
 
@@ -446,7 +446,7 @@
   (assert (= euler_yaw_actual1 o3))
 
 ;; H
-  (assert (and (= o4 (asin grav_x2)) (in_range3 o4)))
+  (assert (and (= o4 (asin1 grav_x2)) (in_range3 o4)))
 
 ;; H
   (assert

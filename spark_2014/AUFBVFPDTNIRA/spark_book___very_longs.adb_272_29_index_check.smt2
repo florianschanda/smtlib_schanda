@@ -1273,7 +1273,7 @@
 
 (declare-fun r_digit () (_ BitVec 16))
 
-(declare-fun difference () (_ BitVec 16))
+(declare-fun difference1 () (_ BitVec 16))
 
 (declare-fun borrow2 () (_ BitVec 16))
 
@@ -1289,7 +1289,7 @@
 
 (declare-fun result5 () t__ref1)
 
-(declare-fun difference1 () (_ BitVec 16))
+(declare-fun difference2 () (_ BitVec 16))
 
 (declare-fun result6 () t__ref1)
 
@@ -1543,41 +1543,41 @@
   (assert (= r_digit1 o11))
 
 ;; H
-  (assert (= result5 (mk_t__ref1 difference)))
+  (assert (= result5 (mk_t__ref1 difference1)))
 
 ;; H
-  (assert (= difference1 (bvsub (bvsub l_digit1 r_digit1) borrow2)))
+  (assert (= difference2 (bvsub (bvsub l_digit1 r_digit1) borrow2)))
 
 ;; H
   (assert
-  (=> (not (= (bvand difference1 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0)))
+  (=> (not (= (bvand difference2 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0)))
   (= result6 (mk_t__ref1 borrow2))))
 
 ;; H
   (assert
-  (=> (not (= (bvand difference1 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0)))
+  (=> (not (= (bvand difference2 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0)))
   (= borrow3 ((_ int2bv 16) 1))))
 
 ;; H
   (assert
   (=>
-  (not (not (= (bvand difference1 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0))))
+  (not (not (= (bvand difference2 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0))))
   (= result7 (mk_t__ref1 borrow2))))
 
 ;; H
   (assert
   (=>
-  (not (not (= (bvand difference1 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0))))
+  (not (not (= (bvand difference2 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0))))
   (= borrow4 ((_ int2bv 16) 0))))
 
 ;; H
   (assert
   (=>
-  (not (not (= (bvand difference1 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0))))
+  (not (not (= (bvand difference2 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0))))
   (= borrow3 borrow4)))
 
 ;; H
-  (assert (= o12 (takelsb_from16 difference1)))
+  (assert (= o12 (takelsb_from16 difference2)))
 
 ;; H
   (assert (= (to_rep1 o13) o12))

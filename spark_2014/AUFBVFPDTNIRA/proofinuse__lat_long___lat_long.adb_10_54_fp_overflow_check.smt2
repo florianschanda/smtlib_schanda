@@ -140,11 +140,11 @@
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                       (not (or (fp.isInfinite temp___expr_141) (fp.isNaN temp___expr_141)))))
 
-(declare-fun sin1 (Float32) Float32)
+(declare-fun sin2 (Float32) Float32)
 
 (declare-fun sin__function_guard (Float32 Float32) Bool)
 
-(declare-fun cos1 (Float32) Float32)
+(declare-fun cos2 (Float32) Float32)
 
 (declare-fun cos__function_guard (Float32 Float32) Bool)
 
@@ -152,19 +152,19 @@
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true)
-     (let ((result (cos1 x)))
+     (let ((result (cos2 x)))
      (and
      (=>
      (and (fp.leq (fp.neg (fp #b0 #b10000101 #b00101100000000000000000)) x)
      (fp.leq x (fp #b0 #b10000101 #b00101100000000000000000)))
      (fp.leq (fp #b0 #b01111011 #b10011001100110011001101) result))
-     (dynamic_invariant result true false true)))) :pattern ((cos1 x)) )))
+     (dynamic_invariant result true false true)))) :pattern ((cos2 x)) )))
 
 ;; cos__def_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true) (= (cos1 x) (sin1 x))) :pattern (
-  (cos1 x)) )))
+  (! (=> (dynamic_invariant x true true true) (= (cos2 x) (sin2 x))) :pattern (
+  (cos2 x)) )))
 
 (declare-fun sqrt1 (Float32) Float32)
 
@@ -414,7 +414,7 @@
   (to_rep1
   (rec__lat_long__coordinates__long (us_split_fields1 destination1))) 
   (to_rep1 (rec__lat_long__coordinates__long (us_split_fields1 source1)))) (fp #b0 #b10010101 #b10000100101000110101001)) 
-  (cos1
+  (cos2
   (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source1)))))) :pattern (
   (delta_long_in_meters source1 destination1)) )))
 
@@ -472,7 +472,7 @@
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant1 x true true true)
-     (let ((result (sin1 x)))
+     (let ((result (sin2 x)))
      (and
      (and
      (and
@@ -480,7 +480,7 @@
      (fp.leq result (fp #b0 #b01111111 #b00000000000000000000000)))
      (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
      (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000))))
-     (dynamic_invariant1 result true false true)))) :pattern ((sin1 x)) )))
+     (dynamic_invariant1 result true false true)))) :pattern ((sin2 x)) )))
 
 (declare-fun delta_lat () Float32)
 
@@ -528,11 +528,11 @@
 ;; H
   (assert
   (and
-  (= o (cos1
+  (= o (cos2
        (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source)))))
   (and (not (or (fp.isInfinite o) (fp.isNaN o)))
   (and
-  (= o (sin1
+  (= o (sin2
        (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source)))))
   (=>
   (and

@@ -130,7 +130,7 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun sin1 (Float32) Float32)
+(declare-fun sin2 (Float32) Float32)
 
 (declare-fun sin__function_guard (Float32 Float32) Bool)
 
@@ -138,7 +138,7 @@
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true)
-     (let ((result (sin1 x)))
+     (let ((result (sin2 x)))
      (and
      (and
      (and
@@ -146,7 +146,7 @@
      (fp.leq result (fp #b0 #b01111111 #b00000000000000000000000)))
      (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
      (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000))))
-     (dynamic_invariant result true false true)))) :pattern ((sin1 x)) )))
+     (dynamic_invariant result true false true)))) :pattern ((sin2 x)) )))
 
 (declare-sort float_with_approx 0)
 
@@ -206,7 +206,7 @@
 
 ;; H
   (assert
-  (and (= o (sin1 x))
+  (and (= o (sin2 x))
   (and (not (or (fp.isInfinite o) (fp.isNaN o)))
   (and
   (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) 

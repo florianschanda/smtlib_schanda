@@ -130,7 +130,7 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun tan1 (Float32) Float32)
+(declare-fun tan2 (Float32) Float32)
 
 (declare-fun tan__function_guard (Float32 Float32) Bool)
 
@@ -138,11 +138,11 @@
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true)
-     (let ((result (tan1 x)))
+     (let ((result (tan2 x)))
      (and
      (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
      (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000)))
-     (dynamic_invariant result true false true)))) :pattern ((tan1 x)) )))
+     (dynamic_invariant result true false true)))) :pattern ((tan2 x)) )))
 
 (declare-fun approx_tan (Float32) Float32)
 
@@ -270,7 +270,7 @@
 
 ;; H
   (assert
-  (and (= o (tan1 x))
+  (and (= o (tan2 x))
   (and (not (or (fp.isInfinite o) (fp.isNaN o)))
   (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq o (fp #b0 #b00000000 #b00000000000000000000000))))))

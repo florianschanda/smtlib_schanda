@@ -205,7 +205,7 @@
   (! (=> (in_range3 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
 
-(declare-fun cos1 (Float32) Float32)
+(declare-fun cos2 (Float32) Float32)
 
 (declare-fun cos__function_guard (Float32 Float32) Bool)
 
@@ -213,7 +213,7 @@
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true)
-     (let ((result (cos1 x)))
+     (let ((result (cos2 x)))
      (and
      (and
      (and
@@ -221,7 +221,7 @@
      (fp.leq result (fp #b0 #b01111111 #b00000000000000000000000)))
      (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
      (fp.eq result (fp #b0 #b01111111 #b00000000000000000000000))))
-     (dynamic_invariant result true false true)))) :pattern ((cos1 x)) )))
+     (dynamic_invariant result true false true)))) :pattern ((cos2 x)) )))
 
 (declare-sort normalized2pi 0)
 
@@ -2183,7 +2183,7 @@
 
 ;; H
   (assert
-  (and (= o6 (cos1 o5))
+  (and (= o6 (cos2 o5))
   (and (not (or (fp.isInfinite o6) (fp.isNaN o6)))
   (and
   (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) 

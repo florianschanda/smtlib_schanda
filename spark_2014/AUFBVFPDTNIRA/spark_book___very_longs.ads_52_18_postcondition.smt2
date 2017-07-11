@@ -1207,7 +1207,7 @@
 
 (declare-fun r_digit () (_ BitVec 16))
 
-(declare-fun difference () (_ BitVec 16))
+(declare-fun difference1 () (_ BitVec 16))
 
 (declare-fun borrow () (_ BitVec 16))
 
@@ -1291,7 +1291,7 @@
 
 (declare-fun r_digit1 () (_ BitVec 16))
 
-(declare-fun difference1 () (_ BitVec 16))
+(declare-fun difference2 () (_ BitVec 16))
 
 (declare-fun result () us_split_fields__ref1)
 
@@ -1311,7 +1311,7 @@
 
 (declare-fun r_digit2 () (_ BitVec 16))
 
-(declare-fun difference2 () (_ BitVec 16))
+(declare-fun difference3 () (_ BitVec 16))
 
 (declare-fun borrow2 () (_ BitVec 16))
 
@@ -1327,7 +1327,7 @@
 
 (declare-fun result5 () t__ref1)
 
-(declare-fun difference3 () (_ BitVec 16))
+(declare-fun difference4 () (_ BitVec 16))
 
 (declare-fun result6 () t__ref1)
 
@@ -1347,7 +1347,7 @@
 
 (declare-fun r_digit4 () t__ref1)
 
-(declare-fun difference4 () t__ref1)
+(declare-fun difference5 () t__ref1)
 
 (declare-fun borrow5 () t__ref1)
 
@@ -1359,7 +1359,7 @@
 
 (declare-fun r_digit5 () (_ BitVec 16))
 
-(declare-fun difference5 () (_ BitVec 16))
+(declare-fun difference6 () (_ BitVec 16))
 
 (declare-fun borrow6 () (_ BitVec 16))
 
@@ -1371,7 +1371,7 @@
 
 (declare-fun r_digit6 () t__ref1)
 
-(declare-fun difference6 () t__ref1)
+(declare-fun difference7 () t__ref1)
 
 (declare-fun borrow7 () t__ref1)
 
@@ -1383,7 +1383,7 @@
 
 (declare-fun r_digit7 () (_ BitVec 16))
 
-(declare-fun difference7 () (_ BitVec 16))
+(declare-fun difference8 () (_ BitVec 16))
 
 (declare-fun borrow8 () (_ BitVec 16))
 
@@ -1403,7 +1403,7 @@
 
 (declare-fun r_digit8 () t__ref1)
 
-(declare-fun difference8 () t__ref1)
+(declare-fun difference9 () t__ref1)
 
 (declare-fun borrow9 () t__ref1)
 
@@ -1417,7 +1417,7 @@
 
 (declare-fun r_digit9 () (_ BitVec 16))
 
-(declare-fun difference9 () (_ BitVec 16))
+(declare-fun difference10 () (_ BitVec 16))
 
 (declare-fun borrow10 () (_ BitVec 16))
 
@@ -1598,7 +1598,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
-  (= temp___948 difference)))
+  (= temp___948 difference1)))
 
 ;; H
   (assert
@@ -1803,7 +1803,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
-  (= result5 (mk_t__ref1 difference2))))
+  (= result5 (mk_t__ref1 difference3))))
 
 ;; H
   (assert
@@ -1812,7 +1812,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
-  (= difference3 (bvsub (bvsub l_digit3 r_digit3) borrow2))))
+  (= difference4 (bvsub (bvsub l_digit3 r_digit3) borrow2))))
 
 ;; H
   (assert
@@ -1821,7 +1821,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
-  (=> (not (= (bvand difference3 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0)))
+  (=> (not (= (bvand difference4 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0)))
   (= result6 (mk_t__ref1 borrow2)))))
 
 ;; H
@@ -1831,7 +1831,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
-  (=> (not (= (bvand difference3 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0)))
+  (=> (not (= (bvand difference4 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0)))
   (= borrow3 ((_ int2bv 16) 1)))))
 
 ;; H
@@ -1842,7 +1842,7 @@
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
   (=>
-  (not (not (= (bvand difference3 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0))))
+  (not (not (= (bvand difference4 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0))))
   (= result7 (mk_t__ref1 borrow2)))))
 
 ;; H
@@ -1853,7 +1853,7 @@
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
   (=>
-  (not (not (= (bvand difference3 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0))))
+  (not (not (= (bvand difference4 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0))))
   (= borrow4 ((_ int2bv 16) 0)))))
 
 ;; H
@@ -1864,7 +1864,7 @@
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
   (=>
-  (not (not (= (bvand difference3 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0))))
+  (not (not (= (bvand difference4 ((_ int2bv 16) 65280)) ((_ int2bv 16) 0))))
   (= borrow3 borrow4))))
 
 ;; H
@@ -1874,7 +1874,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
-  (= o12 (takelsb_from16 difference3))))
+  (= o12 (takelsb_from16 difference4))))
 
 ;; H
   (assert
@@ -2015,7 +2015,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
-  (= difference4 (mk_t__ref1 difference3))))
+  (= difference5 (mk_t__ref1 difference4))))
 
 ;; H
   (assert
@@ -2070,7 +2070,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
-  (= difference5 difference3)))
+  (= difference6 difference4)))
 
 ;; H
   (assert
@@ -2124,7 +2124,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
-  (= difference6 difference4)))
+  (= difference7 difference5)))
 
 ;; H
   (assert
@@ -2178,7 +2178,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l)))))))
-  (= difference7 difference5)))
+  (= difference8 difference6)))
 
 ;; H
   (assert
@@ -2235,7 +2235,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l))))))))
-  (= difference6 (mk_t__ref1 difference))))
+  (= difference7 (mk_t__ref1 difference1))))
 
 ;; H
   (assert
@@ -2296,7 +2296,7 @@
   (<= i1 (to_rep2
          (last
          (rt (rec__very_longs__very_long__long_digits (us_split_fields1 l))))))))
-  (= difference7 difference1)))
+  (= difference8 difference2)))
 
 ;; H
   (assert
@@ -2363,7 +2363,7 @@
   (assert (= borrow9 borrow7))
 
 ;; H
-  (assert (= difference8 difference6))
+  (assert (= difference9 difference7))
 
 ;; H
   (assert (= r_digit8 r_digit6))
@@ -2385,7 +2385,7 @@
   (assert (= borrow10 borrow8))
 
 ;; H
-  (assert (= difference9 difference7))
+  (assert (= difference10 difference8))
 
 ;; H
   (assert (= r_digit9 r_digit7))

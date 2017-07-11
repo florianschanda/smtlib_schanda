@@ -463,7 +463,7 @@
   (! (=> (in_range5 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
                                                               (of_rep2 x))) )))
 
-(declare-fun sin1 (Float32) Float32)
+(declare-fun sin2 (Float32) Float32)
 
 (declare-fun sin__function_guard (Float32 Float32) Bool)
 
@@ -471,7 +471,7 @@
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true)
-     (let ((result (sin1 x)))
+     (let ((result (sin2 x)))
      (and
      (and
      (and
@@ -479,9 +479,9 @@
      (fp.leq result (fp #b0 #b01111111 #b00000000000000000000000)))
      (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
      (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000))))
-     (dynamic_invariant result true false true)))) :pattern ((sin1 x)) )))
+     (dynamic_invariant result true false true)))) :pattern ((sin2 x)) )))
 
-(declare-fun cos1 (Float32) Float32)
+(declare-fun cos2 (Float32) Float32)
 
 (declare-fun cos__function_guard (Float32 Float32) Bool)
 
@@ -489,7 +489,7 @@
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true)
-     (let ((result (cos1 x)))
+     (let ((result (cos2 x)))
      (and
      (and
      (and
@@ -497,7 +497,7 @@
      (fp.leq result (fp #b0 #b01111111 #b00000000000000000000000)))
      (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
      (fp.eq result (fp #b0 #b01111111 #b00000000000000000000000))))
-     (dynamic_invariant result true false true)))) :pattern ((cos1 x)) )))
+     (dynamic_invariant result true false true)))) :pattern ((cos2 x)) )))
 
 (declare-fun arctan (Float32 Float32) Float32)
 
@@ -1162,7 +1162,7 @@
 
 ;; H
   (assert
-  (and (= o1 (sin1 deltaangle))
+  (and (= o1 (sin2 deltaangle))
   (and (not (or (fp.isInfinite o1) (fp.isNaN o1)))
   (and
   (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) 

@@ -423,7 +423,7 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun sin1 (Float32) Float32)
+(declare-fun sin2 (Float32) Float32)
 
 (declare-fun sin__function_guard (Float32 Float32) Bool)
 
@@ -438,12 +438,12 @@
      (and (dynamic_invariant x true true true)
      (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) x)
      (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000))))
-     (let ((result (sin1 x)))
+     (let ((result (sin2 x)))
      (and
      (fp.lt (fp.abs (fp.sub RNE result (approx_sin x))) (fp #b0 #b01101100 #b10010010101001110011100))
-     (dynamic_invariant result true false true)))) :pattern ((sin1 x)) )))
+     (dynamic_invariant result true false true)))) :pattern ((sin2 x)) )))
 
-(declare-fun cos1 (Float32) Float32)
+(declare-fun cos2 (Float32) Float32)
 
 (declare-fun cos__function_guard (Float32 Float32) Bool)
 
@@ -458,12 +458,12 @@
      (and (dynamic_invariant x true true true)
      (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) x)
      (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000))))
-     (let ((result (cos1 x)))
+     (let ((result (cos2 x)))
      (and
      (fp.lt (fp.abs (fp.sub RNE result (approx_cos x))) (fp #b0 #b01101100 #b10010010101001110011100))
-     (dynamic_invariant result true false true)))) :pattern ((cos1 x)) )))
+     (dynamic_invariant result true false true)))) :pattern ((cos2 x)) )))
 
-(declare-fun tan1 (Float32) Float32)
+(declare-fun tan2 (Float32) Float32)
 
 (declare-fun tan__function_guard (Float32 Float32) Bool)
 
@@ -478,10 +478,10 @@
      (and (dynamic_invariant x true true true)
      (and (fp.leq (fp.neg (fp #b0 #b01111110 #b00000000000000000000000)) x)
      (fp.leq x (fp #b0 #b01111110 #b00000000000000000000000))))
-     (let ((result (tan1 x)))
+     (let ((result (tan2 x)))
      (and
      (fp.lt (fp.abs (fp.sub RNE result (approx_tan x))) (fp #b0 #b01110001 #b10100011011011100010111))
-     (dynamic_invariant result true false true)))) :pattern ((tan1 x)) )))
+     (dynamic_invariant result true false true)))) :pattern ((tan2 x)) )))
 
 (declare-fun attr__ATTRIBUTE_ADDRESS () Int)
 
@@ -1125,7 +1125,7 @@
 ;; H
   (assert
   (=> (fp.leq f1 (fp #b0 #b01111111 #b00000000000000000000000))
-  (and (= o (sin1 f2))
+  (and (= o (sin2 f2))
   (and (not (or (fp.isInfinite o) (fp.isNaN o)))
   (fp.lt (fp.abs (fp.sub RNE o (approx_sin f2))) (fp #b0 #b01101100 #b10010010101001110011100))))))
 
@@ -1242,7 +1242,7 @@
 ;; H
   (assert
   (=> (fp.leq f8 (fp #b0 #b01111111 #b00000000000000000000000))
-  (and (= o1 (cos1 f9))
+  (and (= o1 (cos2 f9))
   (and (not (or (fp.isInfinite o1) (fp.isNaN o1)))
   (fp.lt (fp.abs (fp.sub RNE o1 (approx_cos f9))) (fp #b0 #b01101100 #b10010010101001110011100))))))
 
@@ -1360,7 +1360,7 @@
 ;; H
   (assert
   (=> (fp.leq f15 (fp #b0 #b01111110 #b00000000000000000000000))
-  (and (= o2 (tan1 f16))
+  (and (= o2 (tan2 f16))
   (and (not (or (fp.isInfinite o2) (fp.isNaN o2)))
   (fp.lt (fp.abs (fp.sub RNE o2 (approx_tan f16))) (fp #b0 #b01110001 #b10100011011011100010111))))))
 
@@ -1465,13 +1465,13 @@
 
 ;; H
   (assert
-  (and (= o4 (cos1 f23))
+  (and (= o4 (cos2 f23))
   (and (not (or (fp.isInfinite o4) (fp.isNaN o4)))
   (fp.lt (fp.abs (fp.sub RNE o4 (approx_cos f23))) (fp #b0 #b01101100 #b10010010101001110011100)))))
 
 ;; H
   (assert
-  (and (= o3 (sin1 f23))
+  (and (= o3 (sin2 f23))
   (and (not (or (fp.isInfinite o3) (fp.isNaN o3)))
   (fp.lt (fp.abs (fp.sub RNE o3 (approx_sin f23))) (fp #b0 #b01101100 #b10010010101001110011100)))))
 
