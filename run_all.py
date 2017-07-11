@@ -24,7 +24,7 @@ def main():
 
         os.system("./run.py %s --suite=fp cvc4 ./%s" %
                   ("--force" if options.force else "",
-                   binary)
+                   binary))
 
     OTHER_PROVERS = ["mathsat", "z3"]
     if options.suite != "fastcomp":
