@@ -11,14 +11,15 @@ CVC4_VERSIONS = sorted(glob("cvc4_*"))
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("suite",
-                    choices=["all", "fastcomp"])
+                    choices=["all", "medium", "fast"])
     ap.add_argument("--force",
                     action="store_true",
                     default=False)
     options = ap.parse_args()
 
     for binary in CVC4_VERSIONS:
-        if options.suite == "fastcomp":
+        # Fast suite skips most versions
+        if options.suite == "fast":
             if binary not in (CVC4_VERSIONS[0], CVC4_VERSIONS[-1]):
                 continue
 
@@ -27,7 +28,8 @@ def main():
                    binary))
 
     OTHER_PROVERS = ["mathsat", "z3"]
-    if options.suite != "fastcomp":
+    # Only all includes colibri
+    if options.suite == "all":
         OTHER_PROVERS.append("colibri")
 
     for prover in OTHER_PROVERS:
