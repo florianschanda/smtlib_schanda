@@ -1,0 +1,37 @@
+(set-logic QF_FP)
+(set-info :source |SPARK inspired floating point problems by Florian Schanda|)
+(set-info :smt-lib-version 2.5)
+(set-info :category crafted)
+(set-info :status unsat)
+
+(declare-const x1 Float32)
+(declare-const x2 Float32)
+(declare-const x3 Float32)
+(declare-const x4 Float32)
+(declare-const x5 Float32)
+(declare-const x6 Float32)
+(declare-const x7 Float32)
+(declare-const x8 Float32)
+
+(define-fun in_range ((x Float32)) Bool
+  (and (fp.geq x ((_ to_fp 8 24) RNE 1.0))
+       (fp.leq x ((_ to_fp 8 24) RNE 10.0))))
+
+(assert (in_range x1))
+(assert (in_range x2))
+(assert (in_range x3))
+(assert (in_range x4))
+(assert (in_range x5))
+(assert (in_range x6))
+(assert (in_range x7))
+(assert (in_range x8))
+
+(define-const result Float32
+  (fp.add RNE (fp.mul RNE (fp.mul RNE x1 x2)
+                          (fp.mul RNE x3 x4))
+              (fp.mul RNE (fp.mul RNE x5 x6)
+                          (fp.mul RNE x7 x8))))
+(assert (not (and (fp.geq result ((_ to_fp 8 24) RNE 2.0))
+                  (fp.leq result ((_ to_fp 8 24) RNE 20000.0)))))
+(check-sat)
+(exit)
