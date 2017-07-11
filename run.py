@@ -123,11 +123,13 @@ def main():
                "unsound" : 0}
     unsound = []
     errors = []
-    verdicts = {}
+    verdicts = {} # unjudged
+    verdicts_processed = {} # with "unsound" thrown in
 
     def analyze(result, progress, start_time):
         result.print_summary(progress, start_time)
         verdicts[result.task.benchmark.benchmark] = result.prover_status
+        verdicts_processed[result.task.benchmark.benchmark] = result.status
 
         if result.task.benchmark.cat not in detail:
             detail[result.task.benchmark.cat] = {"solved"  : 0,
@@ -204,6 +206,7 @@ def main():
             "summary" : summary,
             "details" : detail,
             "verdicts" : verdicts,
+            "verdicts_processed" : verdicts_processed,
         }
         dump(report, fd, -1)
 
