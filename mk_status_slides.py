@@ -215,12 +215,18 @@ def mk_competition_slides(fd):
                 s_row = ["\\t%s{%s}" % (mk_best_color(max(row), row[i]),
                                         s_row[i])
                          for i in xrange(len(row))]
+                for i, r in enumerate(competitors):
+                    if r["prover"]["kind"] == "z3" and cat == "spark_2014":
+                        s_row[i] = "%s\\footnote{Uses different VCs}" % s_row[i]
             else:
                 row = [r["details"][cat][criteria] for r in competitors]
                 s_row = ["%u" % x for x in row]
                 s_row = ["\\t%s{%s}" % (mk_err_color(0, row[i]),
                                         s_row[i])
                          for i in xrange(len(row))]
+                for i, r in enumerate(competitors):
+                    if r["prover"]["kind"] == "z3" and cat == "spark_2014":
+                        s_row[i] = "%s\\footnote{Uses different VCs}" % s_row[i]
             fd.write(" & ".join(s_row) + r"\\" + "\n")
         row = [r["avav"][criteria] for r in competitors]
         s_row = ["%.1f\\%%" % x for x in row]
