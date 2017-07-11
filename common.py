@@ -96,6 +96,9 @@ class Prover(object):
 
         benchmark.load(keep_logic = self.logic)
 
+        if self.dialect == "altergo" and benchmark.dialect != "altergo":
+            return ("error", "unsupported")
+
         cmd = copy(self.cmd)
         if self.temp:
             if self.dialect == "altergo":
