@@ -1,0 +1,4652 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic comp_div: int, int -> int
+axiom comp_div_def: forall x, y:int. x >= 0 and y > 0 -> comp_div(x,y) = x / y
+logic comp_mod: int, int -> int
+axiom comp_mod_def: forall x, y:int. x >= 0 and y > 0 -> comp_mod(x,y) = x % y
+(* this is a prelude for Alt-Ergo real arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+logic abs : int -> int
+
+axiom abs_def :
+  (forall x:int [abs(x)]. (((0 <= x) -> (abs(x) = x)) and ((not (0 <= x)) ->
+  (abs(x) = (-x)))))
+
+axiom Abs_le :
+  (forall x:int. forall y:int. ((abs(x) <= y) <-> (((-y) <= x) and
+  (x <= y))))
+
+axiom Abs_pos : (forall x:int. (0 <= abs(x)))
+
+axiom Div_mod :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * comp_div(x,y)) + comp_mod(x,y)))))
+
+axiom Div_bound :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= comp_div(x,y)) and (comp_div(x,y) <= x))))
+
+axiom Mod_bound :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (((-abs(y)) <  comp_mod(x,y)) and (comp_mod(x,y) <  abs(y)))))
+
+axiom Div_sign_pos :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  (0 <= comp_div(x,y))))
+
+axiom Div_sign_neg :
+  (forall x:int. forall y:int. (((x <= 0) and (0 <  y)) ->
+  (comp_div(x,y) <= 0)))
+
+axiom Mod_sign_pos :
+  (forall x:int. forall y:int. (((0 <= x) and (not (y = 0))) ->
+  (0 <= comp_mod(x,y))))
+
+axiom Mod_sign_neg :
+  (forall x:int. forall y:int. (((x <= 0) and (not (y = 0))) ->
+  (comp_mod(x,y) <= 0)))
+
+axiom Rounds_toward_zero :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (abs((comp_div(x,y) * y)) <= abs(x))))
+
+axiom Div_1 : (forall x:int. (comp_div(x,1) = x))
+
+axiom Mod_1 : (forall x:int. (comp_mod(x,1) = 0))
+
+axiom Div_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) ->
+  (comp_div(x,y) = 0)))
+
+axiom Mod_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) ->
+  (comp_mod(x,y) = x)))
+
+axiom Div_mult :
+  (forall x:int. forall y:int. forall z:int [comp_div(((x * y) + z),x)].
+  (((0 <  x) and ((0 <= y) and (0 <= z))) ->
+  (comp_div(((x * y) + z),x) = (y + comp_div(z,x)))))
+
+axiom Mod_mult :
+  (forall x:int. forall y:int. forall z:int [comp_mod(((x * y) + z),x)].
+  (((0 <  x) and ((0 <= y) and (0 <= z))) ->
+  (comp_mod(((x * y) + z),x) = comp_mod(z,x))))
+
+axiom Div_mod1 :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * (x / y)) + (x % y)))))
+
+axiom Mod_bound1 :
+  (forall x:int. forall y:int. ((not (y = 0)) -> ((0 <= (x % y)) and
+  ((x % y) <  abs(y)))))
+
+axiom Div_unique :
+  (forall x:int. forall y:int. forall q:int. ((0 <  y) ->
+  ((((q * y) <= x) and (x <  ((q * y) + y))) -> ((x / y) = q))))
+
+axiom Div_bound1 :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= (x / y)) and ((x / y) <= x))))
+
+axiom Mod_11 : (forall x:int. ((x % 1) = 0))
+
+axiom Div_11 : (forall x:int. ((x / 1) = x))
+
+axiom Div_inf1 :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> ((x / y) = 0)))
+
+axiom Div_inf_neg :
+  (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
+  (((-x) / y) = (-1))))
+
+axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
+
+axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
+
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+
+axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
+
+axiom Mod_minus1_left :
+  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+
+axiom Div_mult1 :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
+  ((0 <  x) -> ((((x * y) + z) / x) = (y + (z / x)))))
+
+axiom Mod_mult1 :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) % x)].
+  ((0 <  x) -> ((((x * y) + z) % x) = (z % x))))
+
+logic mod : int, int -> int
+
+axiom mod_def :
+  (forall x:int. forall y:int [mod(x, y)]. (((0 <  y) -> (mod(x,
+  y) = (x % y))) and ((not (0 <  y)) -> (mod(x, y) = ((x % y) + y)))))
+
+axiom add_div :
+  (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
+  (((x + y) / z) = ((x / z) + (y / z)))))
+
+axiom sub_div :
+  (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
+  (((x - y) / z) = ((x / z) - (y / z)))))
+
+axiom neg_div :
+  (forall x:real. forall y:real. ((not (y = 0.0)) ->
+  (((-x) / y) = (-(x / y)))))
+
+axiom assoc_mul_div :
+  (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
+  (((x * y) / z) = (x * (y / z)))))
+
+axiom assoc_div_mul :
+  (forall x:real. forall y:real. forall z:real. (((not (y = 0.0)) and
+  (not (z = 0.0))) -> (((x / y) / z) = (x / (y * z)))))
+
+axiom assoc_div_div :
+  (forall x:real. forall y:real. forall z:real. (((not (y = 0.0)) and
+  (not (z = 0.0))) -> ((x / (y / z)) = ((x * z) / y))))
+
+type t
+
+logic tqtreal : t -> real
+
+logic tqtisFinite : t -> prop
+
+axiom tqtaxiom :
+  (forall x:t. (tqtisFinite(x) -> (((-0xFFFFFF.0p104) <= tqtreal(x)) and
+  (tqtreal(x) <= 0xFFFFFF.0p104))))
+
+logic pow2 : int -> int
+
+axiom Power_0 : (pow2(0) = 1)
+
+axiom Power_s : (forall n:int. ((0 <= n) -> (pow2((n + 1)) = (2 * pow2(n)))))
+
+axiom Power_1 : (pow2(1) = 2)
+
+axiom Power_sum :
+  (forall n:int. forall m:int. (((0 <= n) and (0 <= m)) ->
+  (pow2((n + m)) = (pow2(n) * pow2(m)))))
+
+axiom pow2pos : (forall i:int. ((0 <= i) -> (0 <  pow2(i))))
+
+axiom pow2_0 : (pow2(0) = 1)
+
+axiom pow2_1 : (pow2(1) = 2)
+
+axiom pow2_2 : (pow2(2) = 4)
+
+axiom pow2_3 : (pow2(3) = 8)
+
+axiom pow2_4 : (pow2(4) = 16)
+
+axiom pow2_5 : (pow2(5) = 32)
+
+axiom pow2_6 : (pow2(6) = 64)
+
+axiom pow2_7 : (pow2(7) = 128)
+
+axiom pow2_8 : (pow2(8) = 256)
+
+axiom pow2_9 : (pow2(9) = 512)
+
+axiom pow2_10 : (pow2(10) = 1024)
+
+axiom pow2_11 : (pow2(11) = 2048)
+
+axiom pow2_12 : (pow2(12) = 4096)
+
+axiom pow2_13 : (pow2(13) = 8192)
+
+axiom pow2_14 : (pow2(14) = 16384)
+
+axiom pow2_15 : (pow2(15) = 32768)
+
+axiom pow2_16 : (pow2(16) = 65536)
+
+axiom pow2_17 : (pow2(17) = 131072)
+
+axiom pow2_18 : (pow2(18) = 262144)
+
+axiom pow2_19 : (pow2(19) = 524288)
+
+axiom pow2_20 : (pow2(20) = 1048576)
+
+axiom pow2_21 : (pow2(21) = 2097152)
+
+axiom pow2_22 : (pow2(22) = 4194304)
+
+axiom pow2_23 : (pow2(23) = 8388608)
+
+axiom pow2_24 : (pow2(24) = 16777216)
+
+axiom pow2_25 : (pow2(25) = 33554432)
+
+axiom pow2_26 : (pow2(26) = 67108864)
+
+axiom pow2_27 : (pow2(27) = 134217728)
+
+axiom pow2_28 : (pow2(28) = 268435456)
+
+axiom pow2_29 : (pow2(29) = 536870912)
+
+axiom pow2_30 : (pow2(30) = 1073741824)
+
+axiom pow2_31 : (pow2(31) = 2147483648)
+
+axiom pow2_32 : (pow2(32) = 4294967296)
+
+axiom pow2_33 : (pow2(33) = 8589934592)
+
+axiom pow2_34 : (pow2(34) = 17179869184)
+
+axiom pow2_35 : (pow2(35) = 34359738368)
+
+axiom pow2_36 : (pow2(36) = 68719476736)
+
+axiom pow2_37 : (pow2(37) = 137438953472)
+
+axiom pow2_38 : (pow2(38) = 274877906944)
+
+axiom pow2_39 : (pow2(39) = 549755813888)
+
+axiom pow2_40 : (pow2(40) = 1099511627776)
+
+axiom pow2_41 : (pow2(41) = 2199023255552)
+
+axiom pow2_42 : (pow2(42) = 4398046511104)
+
+axiom pow2_43 : (pow2(43) = 8796093022208)
+
+axiom pow2_44 : (pow2(44) = 17592186044416)
+
+axiom pow2_45 : (pow2(45) = 35184372088832)
+
+axiom pow2_46 : (pow2(46) = 70368744177664)
+
+axiom pow2_47 : (pow2(47) = 140737488355328)
+
+axiom pow2_48 : (pow2(48) = 281474976710656)
+
+axiom pow2_49 : (pow2(49) = 562949953421312)
+
+axiom pow2_50 : (pow2(50) = 1125899906842624)
+
+axiom pow2_51 : (pow2(51) = 2251799813685248)
+
+axiom pow2_52 : (pow2(52) = 4503599627370496)
+
+axiom pow2_53 : (pow2(53) = 9007199254740992)
+
+axiom pow2_54 : (pow2(54) = 18014398509481984)
+
+axiom pow2_55 : (pow2(55) = 36028797018963968)
+
+axiom pow2_56 : (pow2(56) = 72057594037927936)
+
+axiom pow2_57 : (pow2(57) = 144115188075855872)
+
+axiom pow2_58 : (pow2(58) = 288230376151711744)
+
+axiom pow2_59 : (pow2(59) = 576460752303423488)
+
+axiom pow2_60 : (pow2(60) = 1152921504606846976)
+
+axiom pow2_61 : (pow2(61) = 2305843009213693952)
+
+axiom pow2_62 : (pow2(62) = 4611686018427387904)
+
+axiom pow2_63 : (pow2(63) = 9223372036854775808)
+
+axiom pow2_64 : (pow2(64) = 18446744073709551616)
+
+logic abs1 : real -> real
+
+axiom abs_def1 :
+  (forall x:real [abs1(x)]. (((0.0 <= x) -> (abs1(x) = x)) and
+  ((not (0.0 <= x)) -> (abs1(x) = (-x)))))
+
+axiom Abs_le1 :
+  (forall x:real. forall y:real. ((abs1(x) <= y) <-> (((-y) <= x) and
+  (x <= y))))
+
+axiom Abs_pos1 : (forall x:real. (0.0 <= abs1(x)))
+
+axiom Abs_sum :
+  (forall x:real. forall y:real. (abs1((x + y)) <= (abs1(x) + abs1(y))))
+
+axiom Abs_prod :
+  (forall x:real. forall y:real. (abs1((x * y)) = (abs1(x) * abs1(y))))
+
+axiom triangular_inequality :
+  (forall x:real. forall y:real. forall z:real.
+  (abs1((x - z)) <= (abs1((x - y)) + abs1((y - z)))))
+
+logic from_int : int -> real
+
+axiom Zero : (from_int(0) = 0.0)
+
+axiom One : (from_int(1) = 1.0)
+
+axiom Add :
+  (forall x:int. forall y:int.
+  (from_int((x + y)) = (from_int(x) + from_int(y))))
+
+axiom Sub :
+  (forall x:int. forall y:int.
+  (from_int((x - y)) = (from_int(x) - from_int(y))))
+
+axiom Mul :
+  (forall x:int. forall y:int.
+  (from_int((x * y)) = (from_int(x) * from_int(y))))
+
+axiom Neg : (forall x:int. (from_int((-x)) = (-from_int(x))))
+
+axiom Monotonic :
+  (forall x:int. forall y:int. ((x <= y) -> (from_int(x) <= from_int(y))))
+
+logic truncate : real -> int
+
+axiom Truncate_int : (forall i:int. (truncate(from_int(i)) = i))
+
+axiom Truncate_down_pos :
+  (forall x:real. ((0.0 <= x) -> ((from_int(truncate(x)) <= x) and
+  (x <  from_int((truncate(x) + 1))))))
+
+axiom Truncate_up_neg :
+  (forall x:real. ((x <= 0.0) -> ((from_int((truncate(x) - 1)) <  x) and
+  (x <= from_int(truncate(x))))))
+
+axiom Real_of_truncate :
+  (forall x:real. (((x - 1.0) <= from_int(truncate(x))) and
+  (from_int(truncate(x)) <= (x + 1.0))))
+
+axiom Truncate_monotonic :
+  (forall x:real. forall y:real. ((x <= y) -> (truncate(x) <= truncate(y))))
+
+axiom Truncate_monotonic_int1 :
+  (forall x:real. forall i:int. ((x <= from_int(i)) -> (truncate(x) <= i)))
+
+axiom Truncate_monotonic_int2 :
+  (forall x:real. forall i:int. ((from_int(i) <= x) -> (i <= truncate(x))))
+
+logic floor : real -> int
+
+logic ceil : real -> int
+
+axiom Floor_int : (forall i:int. (floor(from_int(i)) = i))
+
+axiom Ceil_int : (forall i:int. (ceil(from_int(i)) = i))
+
+axiom Floor_down :
+  (forall x:real. ((from_int(floor(x)) <= x) and
+  (x <  from_int((floor(x) + 1)))))
+
+axiom Ceil_up :
+  (forall x:real. ((from_int((ceil(x) - 1)) <  x) and
+  (x <= from_int(ceil(x)))))
+
+axiom Floor_monotonic :
+  (forall x:real. forall y:real. ((x <= y) -> (floor(x) <= floor(y))))
+
+axiom Ceil_monotonic :
+  (forall x:real. forall y:real. ((x <= y) -> (ceil(x) <= ceil(y))))
+
+type mode = RNE | RNA | RTP | RTN | RTZ
+
+logic match_mode : mode, 'a, 'a, 'a, 'a, 'a -> 'a
+
+axiom match_mode_RNE :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(RNE, z, z1, z2, z3, z4) = z))
+
+axiom match_mode_RNA :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(RNA, z, z1, z2, z3, z4) = z1))
+
+axiom match_mode_RTP :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(RTP, z, z1, z2, z3, z4) = z2))
+
+axiom match_mode_RTN :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(RTN, z, z1, z2, z3, z4) = z3))
+
+axiom match_mode_RTZ :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(RTZ, z, z1, z2, z3, z4) = z4))
+
+predicate to_nearest(m: mode) = ((m = RNE) or (m = RNA))
+
+logic zeroF : t
+
+logic add : mode, t, t -> t
+
+logic sub : mode, t, t -> t
+
+logic mul : mode, t, t -> t
+
+logic div : mode, t, t -> t
+
+logic abs2 : t -> t
+
+logic neg : t -> t
+
+logic fma : mode, t, t, t -> t
+
+logic sqrt : mode, t -> t
+
+logic roundToIntegral : mode, t -> t
+
+logic min : t, t -> t
+
+logic max : t, t -> t
+
+logic le : t, t -> prop
+
+logic lt : t, t -> prop
+
+logic eq : t, t -> prop
+
+logic is_normal : t -> prop
+
+logic is_subnormal : t -> prop
+
+logic is_zero : t -> prop
+
+logic is_infinite : t -> prop
+
+logic is_nan : t -> prop
+
+logic is_positive : t -> prop
+
+logic is_negative : t -> prop
+
+predicate is_plus_infinity(x: t) = (is_infinite(x) and is_positive(x))
+
+predicate is_minus_infinity(x: t) = (is_infinite(x) and is_negative(x))
+
+predicate is_plus_zero(x: t) = (is_zero(x) and is_positive(x))
+
+predicate is_minus_zero(x: t) = (is_zero(x) and is_negative(x))
+
+predicate is_not_nan(x: t) = (tqtisFinite(x) or is_infinite(x))
+
+axiom is_not_nan1 : (forall x:t. (is_not_nan(x) <-> (not is_nan(x))))
+
+axiom is_not_finite :
+  (forall x:t. ((not tqtisFinite(x)) <-> (is_infinite(x) or is_nan(x))))
+
+axiom zeroF_is_positive : is_positive(zeroF)
+
+axiom zeroF_is_zero : is_zero(zeroF)
+
+axiom zero_to_real :
+  (forall x:t [is_zero(x)]. (is_zero(x) <-> (tqtisFinite(x) and
+  (tqtreal(x) = 0.0))))
+
+logic of_int : mode, int -> t
+
+logic to_int : mode, t -> int
+
+axiom zero_of_int : (forall m:mode. (zeroF = of_int(m, 0)))
+
+logic round : mode, real -> real
+
+logic max_int1 : int
+
+axiom max_real_int : (0x1.FFFFFEp127 = from_int(max_int1))
+
+predicate in_range(x: real) = (((-0x1.FFFFFEp127) <= x) and
+  (x <= 0x1.FFFFFEp127))
+
+predicate in_int_range(i: int) = (((-max_int1) <= i) and (i <= max_int1))
+
+axiom is_finite : (forall x:t. (tqtisFinite(x) -> in_range(tqtreal(x))))
+
+predicate no_overflow(m: mode, x: real) = in_range(round(m, x))
+
+axiom Bounded_real_no_overflow :
+  (forall m:mode. forall x:real. (in_range(x) -> in_range(round(m, x))))
+
+axiom Round_monotonic :
+  (forall m:mode. forall x:real. forall y:real. ((x <= y) -> (round(m,
+  x) <= round(m, y))))
+
+axiom Round_idempotent :
+  (forall m1:mode. forall m2:mode. forall x:real. (round(m1, round(m2,
+  x)) = round(m2, x)))
+
+axiom Round_to_real :
+  (forall m:mode. forall x:t. (tqtisFinite(x) -> (round(m,
+  tqtreal(x)) = tqtreal(x))))
+
+axiom Round_down_le : (forall x:real. (round(RTN, x) <= x))
+
+axiom Round_up_ge : (forall x:real. (x <= round(RTP, x)))
+
+axiom Round_down_neg : (forall x:real. (round(RTN, (-x)) = (-round(RTP, x))))
+
+axiom Round_up_neg : (forall x:real. (round(RTP, (-x)) = (-round(RTN, x))))
+
+predicate in_safe_int_range(i: int) = (((-16777216) <= i) and
+  (i <= 16777216))
+
+axiom Exact_rounding_for_integers :
+  (forall m:mode. forall i:int. (in_safe_int_range(i) -> (round(m,
+  from_int(i)) = from_int(i))))
+
+predicate same_sign(x: t, y: t) = ((is_positive(x) and is_positive(y)) or
+  (is_negative(x) and is_negative(y)))
+
+predicate diff_sign(x: t, y: t) = ((is_positive(x) and is_negative(y)) or
+  (is_negative(x) and is_positive(y)))
+
+axiom feq_eq :
+  (forall x:t. forall y:t. (tqtisFinite(x) -> (tqtisFinite(y) ->
+  ((not is_zero(x)) -> (eq(x, y) -> (x = y))))))
+
+axiom eq_feq :
+  (forall x:t. forall y:t. (tqtisFinite(x) -> (tqtisFinite(y) -> ((x = y) ->
+  eq(x, y)))))
+
+axiom eq_refl : (forall x:t. (tqtisFinite(x) -> eq(x, x)))
+
+axiom eq_sym : (forall x:t. forall y:t. (eq(x, y) -> eq(y, x)))
+
+axiom eq_trans :
+  (forall x:t. forall y:t. forall z:t. (eq(x, y) -> (eq(y, z) -> eq(x, z))))
+
+axiom eq_zero : eq(zeroF, neg(zeroF))
+
+axiom eq_to_real_finite :
+  (forall x:t. forall y:t. ((tqtisFinite(x) and tqtisFinite(y)) -> (eq(x,
+  y) <-> (tqtreal(x) = tqtreal(y)))))
+
+axiom lt_finite :
+  (forall x:t. forall y:t [lt(x, y)]. ((tqtisFinite(x) and tqtisFinite(y)) ->
+  (lt(x, y) <-> (tqtreal(x) <  tqtreal(y)))))
+
+axiom le_finite :
+  (forall x:t. forall y:t [le(x, y)]. ((tqtisFinite(x) and tqtisFinite(y)) ->
+  (le(x, y) <-> (tqtreal(x) <= tqtreal(y)))))
+
+axiom le_lt_trans :
+  (forall x:t. forall y:t. forall z:t. ((le(x, y) and lt(y, z)) -> lt(x, z)))
+
+axiom lt_le_trans :
+  (forall x:t. forall y:t. forall z:t. ((lt(x, y) and le(y, z)) -> lt(x, z)))
+
+axiom le_ge_asym :
+  (forall x:t. forall y:t. ((le(x, y) and le(y, x)) -> eq(x, y)))
+
+axiom not_lt_ge :
+  (forall x:t. forall y:t. (((not lt(x, y)) and (is_not_nan(x) and
+  is_not_nan(y))) -> le(y, x)))
+
+axiom not_gt_le :
+  (forall x:t. forall y:t. (((not lt(y, x)) and (is_not_nan(x) and
+  is_not_nan(y))) -> le(x, y)))
+
+axiom lt_lt_finite :
+  (forall x:t. forall y:t. forall z:t. (lt(x, y) -> (lt(y, z) ->
+  tqtisFinite(y))))
+
+axiom positive_to_real :
+  (forall x:t [is_positive(x)]. (tqtisFinite(x) -> (is_positive(x) ->
+  (0.0 <= tqtreal(x)))))
+
+axiom to_real_positive :
+  (forall x:t [is_positive(x)]. (tqtisFinite(x) -> ((0.0 <  tqtreal(x)) ->
+  is_positive(x))))
+
+axiom negative_to_real :
+  (forall x:t [is_negative(x)]. (tqtisFinite(x) -> (is_negative(x) ->
+  (tqtreal(x) <= 0.0))))
+
+axiom to_real_negative :
+  (forall x:t [is_negative(x)]. (tqtisFinite(x) -> ((tqtreal(x) <  0.0) ->
+  is_negative(x))))
+
+axiom negative_xor_positive :
+  (forall x:t. (not (is_positive(x) and is_negative(x))))
+
+axiom negative_or_positive :
+  (forall x:t. (is_not_nan(x) -> (is_positive(x) or is_negative(x))))
+
+axiom diff_sign_trans :
+  (forall x:t. forall y:t. forall z:t. ((diff_sign(x, y) and diff_sign(y,
+  z)) -> same_sign(x, z)))
+
+axiom diff_sign_product :
+  (forall x:t. forall y:t. ((tqtisFinite(x) and (tqtisFinite(y) and
+  ((tqtreal(x) * tqtreal(y)) <  0.0))) -> diff_sign(x, y)))
+
+axiom same_sign_product :
+  (forall x:t. forall y:t. ((tqtisFinite(x) and (tqtisFinite(y) and
+  same_sign(x, y))) -> (0.0 <= (tqtreal(x) * tqtreal(y)))))
+
+predicate product_sign(z: t, x: t, y: t) = ((same_sign(x, y) ->
+  is_positive(z)) and (diff_sign(x, y) -> is_negative(z)))
+
+predicate overflow_value(m: mode, x: t) = ((((((m = RNE) ->
+  is_infinite(x)) and ((m = RNA) -> is_infinite(x))) and ((m = RTP) ->
+  ((is_positive(x) -> is_infinite(x)) and ((not is_positive(x)) ->
+  (tqtisFinite(x) and (tqtreal(x) = (-0x1.FFFFFEp127))))))) and ((m = RTN) ->
+  ((is_positive(x) -> (tqtisFinite(x) and (tqtreal(x) = 0x1.FFFFFEp127))) and
+  ((not is_positive(x)) -> is_infinite(x))))) and ((m = RTZ) ->
+  ((is_positive(x) -> (tqtisFinite(x) and (tqtreal(x) = 0x1.FFFFFEp127))) and
+  ((not is_positive(x)) -> (tqtisFinite(x) and
+  (tqtreal(x) = (-0x1.FFFFFEp127)))))))
+
+predicate sign_zero_result(m: mode, x: t) = (is_zero(x) -> ((((((m = RNE) ->
+  is_positive(x)) and ((m = RNA) -> is_positive(x))) and ((m = RTP) ->
+  is_positive(x))) and ((m = RTN) -> is_negative(x))) and ((m = RTZ) ->
+  is_positive(x))))
+
+axiom add_finite :
+  (forall m:mode. forall x:t. forall y:t [add(m, x, y)]. (tqtisFinite(x) ->
+  (tqtisFinite(y) -> (in_range(round(m, (tqtreal(x) + tqtreal(y)))) ->
+  (tqtisFinite(add(m, x, y)) and (tqtreal(add(m, x, y)) = round(m,
+  (tqtreal(x) + tqtreal(y)))))))))
+
+axiom add_finite_rev :
+  (forall m:mode. forall x:t. forall y:t [add(m, x, y)]. (tqtisFinite(add(m,
+  x, y)) -> (tqtisFinite(x) and tqtisFinite(y))))
+
+axiom add_finite_rev_n :
+  (forall m:mode. forall x:t. forall y:t [add(m, x, y)]. (to_nearest(m) ->
+  (tqtisFinite(add(m, x, y)) -> (in_range(round(m,
+  (tqtreal(x) + tqtreal(y)))) and (tqtreal(add(m, x, y)) = round(m,
+  (tqtreal(x) + tqtreal(y))))))))
+
+axiom sub_finite :
+  (forall m:mode. forall x:t. forall y:t [sub(m, x, y)]. (tqtisFinite(x) ->
+  (tqtisFinite(y) -> (in_range(round(m, (tqtreal(x) - tqtreal(y)))) ->
+  (tqtisFinite(sub(m, x, y)) and (tqtreal(sub(m, x, y)) = round(m,
+  (tqtreal(x) - tqtreal(y)))))))))
+
+axiom sub_finite_rev :
+  (forall m:mode. forall x:t. forall y:t [sub(m, x, y)]. (tqtisFinite(sub(m,
+  x, y)) -> (tqtisFinite(x) and tqtisFinite(y))))
+
+axiom sub_finite_rev_n :
+  (forall m:mode. forall x:t. forall y:t [sub(m, x, y)]. (to_nearest(m) ->
+  (tqtisFinite(sub(m, x, y)) -> (in_range(round(m,
+  (tqtreal(x) - tqtreal(y)))) and (tqtreal(sub(m, x, y)) = round(m,
+  (tqtreal(x) - tqtreal(y))))))))
+
+axiom mul_finite :
+  (forall m:mode. forall x:t. forall y:t [mul(m, x, y)]. (tqtisFinite(x) ->
+  (tqtisFinite(y) -> (in_range(round(m, (tqtreal(x) * tqtreal(y)))) ->
+  (tqtisFinite(mul(m, x, y)) and (tqtreal(mul(m, x, y)) = round(m,
+  (tqtreal(x) * tqtreal(y)))))))))
+
+axiom mul_finite_rev :
+  (forall m:mode. forall x:t. forall y:t [mul(m, x, y)]. (tqtisFinite(mul(m,
+  x, y)) -> (tqtisFinite(x) and tqtisFinite(y))))
+
+axiom mul_finite_rev_n :
+  (forall m:mode. forall x:t. forall y:t [mul(m, x, y)]. (to_nearest(m) ->
+  (tqtisFinite(mul(m, x, y)) -> (in_range(round(m,
+  (tqtreal(x) * tqtreal(y)))) and (tqtreal(mul(m, x, y)) = round(m,
+  (tqtreal(x) * tqtreal(y))))))))
+
+axiom div_finite :
+  (forall m:mode. forall x:t. forall y:t [div(m, x, y)]. (tqtisFinite(x) ->
+  (tqtisFinite(y) -> ((not is_zero(y)) -> (in_range(round(m,
+  (tqtreal(x) / tqtreal(y)))) -> (tqtisFinite(div(m, x, y)) and
+  (tqtreal(div(m, x, y)) = round(m, (tqtreal(x) / tqtreal(y))))))))))
+
+axiom div_finite_rev :
+  (forall m:mode. forall x:t. forall y:t [div(m, x, y)]. (tqtisFinite(div(m,
+  x, y)) -> ((tqtisFinite(x) and (tqtisFinite(y) and (not is_zero(y)))) or
+  (tqtisFinite(x) and (is_infinite(y) and (tqtreal(div(m, x, y)) = 0.0))))))
+
+axiom div_finite_rev_n :
+  (forall m:mode. forall x:t. forall y:t [div(m, x, y)]. (to_nearest(m) ->
+  (tqtisFinite(div(m, x, y)) -> (tqtisFinite(y) -> (in_range(round(m,
+  (tqtreal(x) / tqtreal(y)))) and (tqtreal(div(m, x, y)) = round(m,
+  (tqtreal(x) / tqtreal(y)))))))))
+
+axiom neg_finite :
+  (forall x:t [neg(x)]. (tqtisFinite(x) -> (tqtisFinite(neg(x)) and
+  (tqtreal(neg(x)) = (-tqtreal(x))))))
+
+axiom neg_finite_rev :
+  (forall x:t [neg(x)]. (tqtisFinite(neg(x)) -> (tqtisFinite(x) and
+  (tqtreal(neg(x)) = (-tqtreal(x))))))
+
+axiom abs_finite :
+  (forall x:t [abs2(x)]. (tqtisFinite(x) -> (tqtisFinite(abs2(x)) and
+  ((tqtreal(abs2(x)) = abs1(tqtreal(x))) and is_positive(abs2(x))))))
+
+axiom abs_finite_rev :
+  (forall x:t [abs2(x)]. (tqtisFinite(abs2(x)) -> (tqtisFinite(x) and
+  (tqtreal(abs2(x)) = abs1(tqtreal(x))))))
+
+axiom abs_universal : (forall x:t [abs2(x)]. (not is_negative(abs2(x))))
+
+axiom fma_finite_rev :
+  (forall m:mode. forall x:t. forall y:t. forall z:t [fma(m, x, y, z)].
+  (tqtisFinite(fma(m, x, y, z)) -> (tqtisFinite(x) and (tqtisFinite(y) and
+  tqtisFinite(z)))))
+
+axiom fma_finite_rev_n :
+  (forall m:mode. forall x:t. forall y:t. forall z:t [fma(m, x, y, z)].
+  (to_nearest(m) -> (tqtisFinite(fma(m, x, y, z)) -> (in_range(round(m,
+  ((tqtreal(x) * tqtreal(y)) + tqtreal(z)))) and (tqtreal(fma(m, x, y,
+  z)) = round(m, ((tqtreal(x) * tqtreal(y)) + tqtreal(z))))))))
+
+function sqr(x: real) : real = (x * x)
+
+logic sqrt1 : real -> real
+
+axiom sqrt_finite_rev :
+  (forall m:mode. forall x:t [sqrt(m, x)]. (tqtisFinite(sqrt(m, x)) ->
+  (tqtisFinite(x) and ((0.0 <= tqtreal(x)) and (tqtreal(sqrt(m,
+  x)) = round(m, sqrt1(tqtreal(x))))))))
+
+predicate same_sign_real(x: t, r: real) = ((is_positive(x) and (0.0 <  r)) or
+  (is_negative(x) and (r <  0.0)))
+
+axiom of_int_add_exact :
+  (forall m:mode. forall n:mode. forall i:int. forall j:int.
+  (in_safe_int_range(i) -> (in_safe_int_range(j) ->
+  (in_safe_int_range((i + j)) -> eq(of_int(m, (i + j)), add(n, of_int(m, i),
+  of_int(m, j)))))))
+
+axiom of_int_sub_exact :
+  (forall m:mode. forall n:mode. forall i:int. forall j:int.
+  (in_safe_int_range(i) -> (in_safe_int_range(j) ->
+  (in_safe_int_range((i - j)) -> eq(of_int(m, (i - j)), sub(n, of_int(m, i),
+  of_int(m, j)))))))
+
+axiom of_int_mul_exact :
+  (forall m:mode. forall n:mode. forall i:int. forall j:int.
+  (in_safe_int_range(i) -> (in_safe_int_range(j) ->
+  (in_safe_int_range((i * j)) -> eq(of_int(m, (i * j)), mul(n, of_int(m, i),
+  of_int(m, j)))))))
+
+axiom Min_r : (forall x:t. forall y:t. (le(y, x) -> eq(min(x, y), y)))
+
+axiom Min_l : (forall x:t. forall y:t. (le(x, y) -> eq(min(x, y), x)))
+
+axiom Max_r : (forall x:t. forall y:t. (le(y, x) -> eq(max(x, y), x)))
+
+axiom Max_l : (forall x:t. forall y:t. (le(x, y) -> eq(max(x, y), y)))
+
+logic is_int : t -> prop
+
+axiom zeroF_is_int : is_int(zeroF)
+
+axiom of_int_is_int :
+  (forall m:mode. forall x:int. (in_int_range(x) -> is_int(of_int(m, x))))
+
+axiom big_float_is_int :
+  (forall m:mode. forall i:t. (tqtisFinite(i) -> ((le(i, neg(of_int(m,
+  16777216))) or le(of_int(m, 16777216), i)) -> is_int(i))))
+
+axiom roundToIntegral_is_int :
+  (forall m:mode. forall x:t. (tqtisFinite(x) -> is_int(roundToIntegral(m,
+  x))))
+
+axiom eq_is_int :
+  (forall x:t. forall y:t. (eq(x, y) -> (is_int(x) -> is_int(y))))
+
+axiom add_int :
+  (forall x:t. forall y:t. forall m:mode. (is_int(x) -> (is_int(y) ->
+  (tqtisFinite(add(m, x, y)) -> is_int(add(m, x, y))))))
+
+axiom sub_int :
+  (forall x:t. forall y:t. forall m:mode. (is_int(x) -> (is_int(y) ->
+  (tqtisFinite(sub(m, x, y)) -> is_int(sub(m, x, y))))))
+
+axiom mul_int :
+  (forall x:t. forall y:t. forall m:mode. (is_int(x) -> (is_int(y) ->
+  (tqtisFinite(mul(m, x, y)) -> is_int(mul(m, x, y))))))
+
+axiom fma_int :
+  (forall x:t. forall y:t. forall z:t. forall m:mode. (is_int(x) ->
+  (is_int(y) -> (is_int(z) -> (tqtisFinite(fma(m, x, y, z)) -> is_int(fma(m,
+  x, y, z)))))))
+
+axiom neg_int : (forall x:t. (is_int(x) -> is_int(neg(x))))
+
+axiom abs_int1 : (forall x:t. (is_int(x) -> is_int(abs2(x))))
+
+axiom is_int_of_int :
+  (forall x:t. forall m:mode. forall mqt:mode. (is_int(x) -> eq(x,
+  of_int(mqt, to_int(m, x)))))
+
+axiom is_int_to_int :
+  (forall m:mode. forall x:t. (is_int(x) -> in_int_range(to_int(m, x))))
+
+axiom is_int_is_finite : (forall x:t. (is_int(x) -> tqtisFinite(x)))
+
+axiom int_to_real :
+  (forall m:mode. forall x:t. (is_int(x) -> (tqtreal(x) = from_int(to_int(m,
+  x)))))
+
+axiom truncate_int :
+  (forall m:mode. forall i:t. (is_int(i) -> eq(roundToIntegral(m, i), i)))
+
+axiom truncate_neg :
+  (forall x:t. (tqtisFinite(x) -> (is_negative(x) -> (roundToIntegral(RTZ,
+  x) = roundToIntegral(RTP, x)))))
+
+axiom truncate_pos :
+  (forall x:t. (tqtisFinite(x) -> (is_positive(x) -> (roundToIntegral(RTZ,
+  x) = roundToIntegral(RTN, x)))))
+
+axiom ceil_le :
+  (forall x:t. (tqtisFinite(x) -> le(x, roundToIntegral(RTP, x))))
+
+axiom ceil_lest :
+  (forall x:t. forall y:t. ((le(x, y) and is_int(y)) ->
+  le(roundToIntegral(RTP, x), y)))
+
+axiom ceil_to_real :
+  (forall x:t. (tqtisFinite(x) -> (tqtreal(roundToIntegral(RTP,
+  x)) = from_int(ceil(tqtreal(x))))))
+
+axiom ceil_to_int :
+  (forall m:mode. forall x:t. (tqtisFinite(x) -> (to_int(m,
+  roundToIntegral(RTP, x)) = ceil(tqtreal(x)))))
+
+axiom floor_le :
+  (forall x:t. (tqtisFinite(x) -> le(roundToIntegral(RTN, x), x)))
+
+axiom floor_lest :
+  (forall x:t. forall y:t. ((le(y, x) and is_int(y)) -> le(y,
+  roundToIntegral(RTN, x))))
+
+axiom floor_to_real :
+  (forall x:t. (tqtisFinite(x) -> (tqtreal(roundToIntegral(RTN,
+  x)) = from_int(floor(tqtreal(x))))))
+
+axiom floor_to_int :
+  (forall m:mode. forall x:t. (tqtisFinite(x) -> (to_int(m,
+  roundToIntegral(RTN, x)) = floor(tqtreal(x)))))
+
+axiom RNA_down :
+  (forall x:t. (lt(sub(RNE, x, roundToIntegral(RTN, x)), sub(RNE,
+  roundToIntegral(RTP, x), x)) -> (roundToIntegral(RNA,
+  x) = roundToIntegral(RTN, x))))
+
+axiom RNA_up :
+  (forall x:t. (lt(sub(RNE, roundToIntegral(RTP, x), x), sub(RNE, x,
+  roundToIntegral(RTN, x))) -> (roundToIntegral(RNA,
+  x) = roundToIntegral(RTP, x))))
+
+axiom RNA_down_tie :
+  (forall x:t. (eq(sub(RNE, x, roundToIntegral(RTN, x)), sub(RNE,
+  roundToIntegral(RTP, x), x)) -> (is_negative(x) -> (roundToIntegral(RNA,
+  x) = roundToIntegral(RTN, x)))))
+
+axiom RNA_up_tie :
+  (forall x:t. (eq(sub(RNE, roundToIntegral(RTP, x), x), sub(RNE, x,
+  roundToIntegral(RTN, x))) -> (is_positive(x) -> (roundToIntegral(RNA,
+  x) = roundToIntegral(RTP, x)))))
+
+axiom to_int_roundToIntegral :
+  (forall m:mode. forall x:t. (to_int(m, x) = to_int(m, roundToIntegral(m,
+  x))))
+
+axiom to_int_monotonic :
+  (forall m:mode. forall x:t. forall y:t. (tqtisFinite(x) ->
+  (tqtisFinite(y) -> (le(x, y) -> (to_int(m, x) <= to_int(m, y))))))
+
+axiom to_int_of_int :
+  (forall m:mode. forall i:int. (in_safe_int_range(i) -> (to_int(m, of_int(m,
+  i)) = i)))
+
+axiom eq_to_int :
+  (forall m:mode. forall x:t. forall y:t. (tqtisFinite(x) -> (eq(x, y) ->
+  (to_int(m, x) = to_int(m, y)))))
+
+axiom neg_to_int :
+  (forall m:mode. forall x:t. (is_int(x) -> (to_int(m, neg(x)) = (-to_int(m,
+  x)))))
+
+axiom roundToIntegral_is_finite :
+  (forall m:mode. forall x:t. (tqtisFinite(x) ->
+  tqtisFinite(roundToIntegral(m, x))))
+
+axiom round_bound_ne :
+  (forall x:real [round(RNE, x)]. (in_range(round(RNE, x)) ->
+  ((((x - (0x1.0p-24 * abs1(x))) - 0x1.0p-150) <= round(RNE, x)) and
+  (round(RNE, x) <= ((x + (0x1.0p-24 * abs1(x))) + 0x1.0p-150)))))
+
+predicate neq(x: t, y: t) = (not eq(x, y))
+
+logic bool_lt : t, t -> bool
+
+axiom bool_lt_def :
+  (forall x:t. forall y:t [bool_lt(x, y)]. ((lt(x, y) -> (bool_lt(x,
+  y) = true)) and ((not lt(x, y)) -> (bool_lt(x, y) = false))))
+
+logic bool_le : t, t -> bool
+
+axiom bool_le_def :
+  (forall x:t. forall y:t [bool_le(x, y)]. ((le(x, y) -> (bool_le(x,
+  y) = true)) and ((not le(x, y)) -> (bool_le(x, y) = false))))
+
+logic bool_gt : t, t -> bool
+
+axiom bool_gt_def :
+  (forall x:t. forall y:t [bool_gt(x, y)]. ((lt(y, x) -> (bool_gt(x,
+  y) = true)) and ((not lt(y, x)) -> (bool_gt(x, y) = false))))
+
+logic bool_ge : t, t -> bool
+
+axiom bool_ge_def :
+  (forall x:t. forall y:t [bool_ge(x, y)]. ((le(y, x) -> (bool_ge(x,
+  y) = true)) and ((not le(y, x)) -> (bool_ge(x, y) = false))))
+
+logic bool_eq : t, t -> bool
+
+axiom bool_eq_def :
+  (forall x:t. forall y:t [bool_eq(x, y)]. ((eq(x, y) -> (bool_eq(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq(x, y) = false))))
+
+logic bool_neq : t, t -> bool
+
+axiom bool_neq_def :
+  (forall x:t. forall y:t [bool_neq(x, y)]. (((not eq(x, y)) -> (bool_neq(x,
+  y) = true)) and (eq(x, y) -> (bool_neq(x, y) = false))))
+
+logic rem : t, t -> t
+
+logic fliteral : t
+
+axiom fliteral_axiom : (tqtisFinite(fliteral) and (tqtreal(fliteral) = 1.0))
+
+axiom one_is_int : is_int(fliteral)
+
+axiom one_of_int : (fliteral = of_int(RNA, 1))
+
+type t__ref = { t__content : t
+}
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
+logic to_int1 : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int1(b)]. (((b = true) -> (to_int1(b) = 1)) and
+  ((not (b = true)) -> (to_int1(b) = 0))))
+
+logic of_int1 : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
+  ((not (i = 0)) -> (of_int1(i) = true))))
+
+predicate in_range1(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type integer
+
+predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq2 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt1 : int, int -> bool
+
+logic bool_le1 : int, int -> bool
+
+logic bool_gt1 : int, int -> bool
+
+logic bool_ge1 : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq2(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt1(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le1(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt1(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge1(x, y) = true) <-> (y <= x))))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : integer, integer -> bool
+
+logic dummy : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+type positive
+
+predicate in_range3(x: int) = ((1 <= x) and (x <= 2147483647))
+
+logic bool_eq4 : int, int -> bool
+
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : positive, positive -> bool
+
+logic dummy1 : positive
+
+type positive__ref = { positive__content : positive
+}
+
+function positive__ref___projection(a: positive__ref) : positive =
+  (a).positive__content
+
+type character
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 255))
+
+logic bool_eq5 : int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq2 : character, character -> bool
+
+logic dummy2 : character
+
+type character__ref = { character__content : character
+}
+
+function character__ref___projection(a: character__ref) : character =
+  (a).character__content
+
+logic to_rep : character -> int
+
+logic of_rep : int -> character
+
+axiom inversion_axiom :
+  (forall x:character [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:character [to_rep(x)]. in_range4(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range4(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type map__ref = { map__content : (int,character) farray
+}
+
+logic slide : (int,character) farray, int, int -> (int,character) farray
+
+axiom slide_eq :
+  (forall a:(int,character) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,character) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat : (int,character) farray, int, int, (int,character) farray, int,
+  int -> (int,character) farray
+
+axiom concat_def :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton : character, int -> (int,character) farray
+
+axiom singleton_def :
+  (forall v:character.
+  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
+
+logic bool_eq6 : (int,character) farray, int, int, (int,character) farray,
+  int, int -> bool
+
+axiom bool_eq_def5 :
+  (forall a:(int,character) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,character) farray. forall b__first:int. forall b__last:int
+  [bool_eq6(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
+  (temp___idx_78 <= a__last)) and
+  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
+  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
+  (temp___idx_78 <= a__last)) ->
+  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq6(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
+  (temp___idx_78 <= a__last)) ->
+  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
+
+logic compare : (int,character) farray, int, int, (int,character) farray,
+  int, int -> int
+
+axiom compare_def_eq :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+
+logic to_rep1 : integer -> int
+
+logic of_rep1 : int -> integer
+
+axiom inversion_axiom1 :
+  (forall x:integer [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:integer [to_rep1(x)]. in_range2(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type t1
+
+logic first : t1 -> integer
+
+logic last : t1 -> integer
+
+logic mk : int, int -> t1
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range2(f) -> (in_range2(l) ->
+  ((to_rep1(first(mk(f, l))) = f) and (to_rep1(last(mk(f, l))) = l)))))
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range2(low) and (in_range2(high) and ((low <= high) ->
+  (in_range3(low) and in_range3(high)))))
+
+type us_t = { elts : (int,character) farray; rt : t1
+}
+
+function to_array(a: us_t) : (int,character) farray = (a).elts
+
+function of_array(a: (int,character) farray, f: int, l: int) : us_t = {
+  elts = a; rt = mk(f, l) }
+
+function first1(a: us_t) : int = to_rep1(first((a).rt))
+
+function last1(a: us_t) : int = to_rep1(last((a).rt))
+
+logic length : us_t -> int
+
+axiom length_def :
+  (forall a:us_t [length(a)]. (((first1(a) <= last1(a)) ->
+  (length(a) = ((last1(a) - first1(a)) + 1))) and
+  ((not (first1(a) <= last1(a))) -> (length(a) = 0))))
+
+logic value__size : int
+
+logic object__size : (int,character) farray -> int
+
+logic value__component__size : int
+
+logic object__component__size : (int,character) farray -> int
+
+logic value__alignment : int
+
+logic object__alignment : (int,character) farray -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:(int,character) farray. (0 <= object__size(a)))
+
+axiom value__component__size_axiom : (0 <= value__component__size)
+
+axiom object__component__size_axiom :
+  (forall a:(int,character) farray. (0 <= object__component__size(a)))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:(int,character) farray. (0 <= object__alignment(a)))
+
+function bool_eq7(x: us_t, y: us_t) : bool = bool_eq6((x).elts,
+  to_rep1(first((x).rt)), to_rep1(last((x).rt)), (y).elts,
+  to_rep1(first((y).rt)), to_rep1(last((y).rt)))
+
+logic user_eq3 : us_t, us_t -> bool
+
+logic dummy3 : (int,character) farray
+
+logic dummy4 : t1
+
+logic to_string : us_image -> us_t
+
+logic from_string : us_t -> us_image
+
+type string__ref = { string__content : us_t
+}
+
+function string__ref___projection(a: string__ref) : us_t =
+  (a).string__content
+
+type natural
+
+predicate in_range5(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq8 : int, int -> bool
+
+axiom bool_eq_def6 :
+  (forall x:int. forall y:int [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq4 : natural, natural -> bool
+
+logic dummy5 : natural
+
+type natural__ref = { natural__content : natural
+}
+
+function natural__ref___projection(a: natural__ref) : natural =
+  (a).natural__content
+
+type float1
+
+logic bool_eq9 : t, t -> bool
+
+axiom bool_eq_def7 :
+  (forall x:t. forall y:t [bool_eq9(x, y)]. ((eq(x, y) -> (bool_eq9(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq9(x, y) = false))))
+
+logic user_eq5 : float1, float1 -> bool
+
+logic attr__ATTRIBUTE_IMAGE5 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> t
+
+logic dummy6 : float1
+
+type float__ref = { float__content : float1
+}
+
+function float__ref___projection(a: float__ref) : float1 = (a).float__content
+
+logic to_rep2 : float1 -> t
+
+logic of_rep2 : t -> float1
+
+axiom inversion_axiom2 :
+  (forall x:float1 [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 : (forall x:float1 [to_rep2(x)]. tqtisFinite(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:t [to_rep2(of_rep2(x))]. (tqtisFinite(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+type positive_float
+
+logic fliteral1 : t
+
+axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
+  (tqtreal(fliteral1) = 0.0e-1))
+
+logic fliteral2 : t
+
+axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
+  (tqtreal(fliteral2) = 340282346638528859811704183484516925440.0))
+
+predicate in_range6(x: t) = (tqtisFinite(x) and (le(fliteral1, x) and le(x,
+  fliteral2)))
+
+logic bool_eq10 : t, t -> bool
+
+axiom bool_eq_def8 :
+  (forall x:t. forall y:t [bool_eq10(x, y)]. ((eq(x, y) -> (bool_eq10(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq10(x, y) = false))))
+
+logic user_eq6 : positive_float, positive_float -> bool
+
+logic attr__ATTRIBUTE_IMAGE6 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE6 : us_image -> t
+
+logic dummy7 : positive_float
+
+type positive_float__ref = { positive_float__content : positive_float
+}
+
+function positive_float__ref___projection(a: positive_float__ref) : positive_float =
+  (a).positive_float__content
+
+logic to_rep3 : positive_float -> t
+
+logic of_rep3 : t -> positive_float
+
+axiom inversion_axiom3 :
+  (forall x:positive_float [to_rep3(x)]. (of_rep3(to_rep3(x)) = x))
+
+axiom range_axiom3 :
+  (forall x:positive_float [to_rep3(x)]. in_range6(to_rep3(x)))
+
+axiom coerce_axiom3 :
+  (forall x:t [to_rep3(of_rep3(x))]. (in_range6(x) ->
+  (to_rep3(of_rep3(x)) = x)))
+
+type nonnegative_float
+
+predicate in_range7(x: t) = (tqtisFinite(x) and (le(fliteral1, x) and le(x,
+  fliteral2)))
+
+logic bool_eq11 : t, t -> bool
+
+axiom bool_eq_def9 :
+  (forall x:t. forall y:t [bool_eq11(x, y)]. ((eq(x, y) -> (bool_eq11(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq11(x, y) = false))))
+
+logic user_eq7 : nonnegative_float, nonnegative_float -> bool
+
+logic attr__ATTRIBUTE_IMAGE7 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check7 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE7 : us_image -> t
+
+logic dummy8 : nonnegative_float
+
+type nonnegative_float__ref = { nonnegative_float__content :
+nonnegative_float
+}
+
+function nonnegative_float__ref___projection(a: nonnegative_float__ref) : nonnegative_float =
+  (a).nonnegative_float__content
+
+logic to_rep4 : nonnegative_float -> t
+
+logic of_rep4 : t -> nonnegative_float
+
+axiom inversion_axiom4 :
+  (forall x:nonnegative_float [to_rep4(x)]. (of_rep4(to_rep4(x)) = x))
+
+axiom range_axiom4 :
+  (forall x:nonnegative_float [to_rep4(x)]. in_range7(to_rep4(x)))
+
+axiom coerce_axiom4 :
+  (forall x:t [to_rep4(of_rep4(x))]. (in_range7(x) ->
+  (to_rep4(of_rep4(x)) = x)))
+
+logic sqrt2 : t -> t
+
+logic sqrt__function_guard : t, t -> prop
+
+axiom sqrt__post_axiom :
+  (forall x:t [sqrt2(x)]. ((tqtisFinite(x) and le(fliteral1, x)) ->
+  ((le(fliteral1, sqrt2(x)) and ((eq(x, fliteral1) -> eq(sqrt2(x),
+  fliteral1)) and (eq(x, fliteral) -> eq(sqrt2(x), fliteral)))) and
+  tqtisFinite(sqrt2(x)))))
+
+logic arctan : t, t -> t
+
+logic arctan__function_guard : t, t, t -> prop
+
+axiom arctan__post_axiom :
+  (forall y:t. forall x:t [arctan(y, x)]. (((tqtisFinite(y) and
+  tqtisFinite(x)) and (neq(x, fliteral1) or neq(y, fliteral1))) ->
+  (((lt(fliteral1, x) and eq(y, fliteral1)) -> eq(arctan(y, x),
+  fliteral1)) and tqtisFinite(arctan(y, x)))))
+
+type normalized2pi
+
+logic fliteral3 : t
+
+axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
+  (tqtreal(fliteral3) = 6.283185482025146484375))
+
+predicate in_range8(x: t) = (tqtisFinite(x) and (le(fliteral1, x) and le(x,
+  fliteral3)))
+
+logic bool_eq12 : t, t -> bool
+
+axiom bool_eq_def10 :
+  (forall x:t. forall y:t [bool_eq12(x, y)]. ((eq(x, y) -> (bool_eq12(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq12(x, y) = false))))
+
+logic user_eq8 : normalized2pi, normalized2pi -> bool
+
+logic attr__ATTRIBUTE_IMAGE8 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check8 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE8 : us_image -> t
+
+logic dummy9 : normalized2pi
+
+type normalized2pi__ref = { normalized2pi__content : normalized2pi
+}
+
+function normalized2pi__ref___projection(a: normalized2pi__ref) : normalized2pi =
+  (a).normalized2pi__content
+
+logic to_rep5 : normalized2pi -> t
+
+logic of_rep5 : t -> normalized2pi
+
+axiom inversion_axiom5 :
+  (forall x:normalized2pi [to_rep5(x)]. (of_rep5(to_rep5(x)) = x))
+
+axiom range_axiom5 :
+  (forall x:normalized2pi [to_rep5(x)]. in_range8(to_rep5(x)))
+
+axiom coerce_axiom5 :
+  (forall x:t [to_rep5(of_rep5(x))]. (in_range8(x) ->
+  (to_rep5(of_rep5(x)) = x)))
+
+type us_split_fields = { rec__spaces__angles__angle__theta : normalized2pi
+}
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+function us_rep___projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+logic bool_eq13 : us_rep, us_rep -> bool
+
+axiom bool_eq_def11 :
+  (forall a:us_rep. forall b:us_rep [bool_eq13(a, b)].
+  (((to_rep5(((a).us_split_fields1).rec__spaces__angles__angle__theta) = to_rep5(((b).us_split_fields1).rec__spaces__angles__angle__theta)) ->
+  (bool_eq13(a, b) = true)) and
+  ((not (to_rep5(((a).us_split_fields1).rec__spaces__angles__angle__theta) = to_rep5(((b).us_split_fields1).rec__spaces__angles__angle__theta))) ->
+  (bool_eq13(a, b) = false))))
+
+logic user_eq9 : us_rep, us_rep -> bool
+
+logic value__size1 : int
+
+logic object__size1 : us_rep -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : us_rep -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 :
+  (forall a:normalized2pi. (0 <= object__size1({ us_split_fields1 = {
+  rec__spaces__angles__angle__theta = a } })))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:normalized2pi. (0 <= object__alignment1({ us_split_fields1 = {
+  rec__spaces__angles__angle__theta = a } })))
+
+logic spaces__angles__angle__theta__first__bit : int
+
+logic spaces__angles__angle__theta__last__bit : int
+
+logic spaces__angles__angle__theta__position : int
+
+axiom spaces__angles__angle__theta__first__bit_axiom :
+  (0 <= spaces__angles__angle__theta__first__bit)
+
+axiom spaces__angles__angle__theta__last__bit_axiom :
+  (spaces__angles__angle__theta__first__bit <  spaces__angles__angle__theta__last__bit)
+
+axiom spaces__angles__angle__theta__position_axiom :
+  (0 <= spaces__angles__angle__theta__position)
+
+logic dummy10 : normalized2pi
+
+type angle__ref = { angle__content : us_rep
+}
+
+function angle__ref___projection(a: angle__ref) : us_rep = (a).angle__content
+
+logic create : unit -> us_rep
+
+logic create__function_guard : us_rep, unit -> prop
+
+logic create__2 : t -> us_rep
+
+logic create__2__function_guard : us_rep, t -> prop
+
+logic oadd : us_rep, us_rep -> us_rep
+
+logic oadd__function_guard : us_rep, us_rep, us_rep -> prop
+
+logic osubtract : us_rep, us_rep -> us_rep
+
+logic osubtract__function_guard : us_rep, us_rep, us_rep -> prop
+
+logic dcast : us_rep -> t
+
+logic dcast__function_guard : t, us_rep -> prop
+
+logic dcastpi : us_rep -> t
+
+logic dcastpi__function_guard : t, us_rep -> prop
+
+logic aldiff : us_rep, us_rep -> t
+
+logic aldiff__function_guard : t, us_rep, us_rep -> prop
+
+logic ccwdiff : us_rep, us_rep -> t
+
+logic ccwdiff__function_guard : t, us_rep, us_rep -> prop
+
+logic cwdiff : us_rep, us_rep -> t
+
+logic cwdiff__function_guard : t, us_rep, us_rep -> prop
+
+logic almostequal : us_rep, us_rep, t -> bool
+
+logic almostequal__function_guard : bool, us_rep, us_rep, t -> prop
+
+logic ccwmean : us_rep, us_rep -> us_rep
+
+logic ccwmean__function_guard : us_rep, us_rep, us_rep -> prop
+
+logic cwmean : us_rep, us_rep -> us_rep
+
+logic cwmean__function_guard : us_rep, us_rep, us_rep -> prop
+
+logic print : us_rep -> us_t
+
+logic print__function_guard : us_t, us_rep -> prop
+
+type us_split_fields2 = { rec__spaces__positions__position__x : float1;
+rec__spaces__positions__position__y : float1 }
+
+type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
+}
+
+function us_split_fields__ref_2__projection(a: us_split_fields__ref1) : us_split_fields2 =
+  (a).us_split_fields__content1
+
+type us_rep1 = { us_split_fields3 : us_split_fields2
+}
+
+function us_rep_2__projection(a: us_rep1) : us_split_fields2 =
+  (a).us_split_fields3
+
+logic bool_eq14 : us_rep1, us_rep1 -> bool
+
+axiom bool_eq_def12 :
+  (forall a:us_rep1. forall b:us_rep1 [bool_eq14(a, b)].
+  ((((to_rep2(((a).us_split_fields3).rec__spaces__positions__position__x) = to_rep2(((b).us_split_fields3).rec__spaces__positions__position__x)) and
+  (to_rep2(((a).us_split_fields3).rec__spaces__positions__position__y) = to_rep2(((b).us_split_fields3).rec__spaces__positions__position__y))) ->
+  (bool_eq14(a, b) = true)) and
+  ((not ((to_rep2(((a).us_split_fields3).rec__spaces__positions__position__x) = to_rep2(((b).us_split_fields3).rec__spaces__positions__position__x)) and
+  (to_rep2(((a).us_split_fields3).rec__spaces__positions__position__y) = to_rep2(((b).us_split_fields3).rec__spaces__positions__position__y)))) ->
+  (bool_eq14(a, b) = false))))
+
+logic user_eq10 : us_rep1, us_rep1 -> bool
+
+logic value__size2 : int
+
+logic object__size2 : us_rep1 -> int
+
+logic value__alignment2 : int
+
+logic object__alignment2 : us_rep1 -> int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 :
+  (forall a:float1. forall a1:float1. (0 <= object__size2({
+  us_split_fields3 = { rec__spaces__positions__position__x = a;
+  rec__spaces__positions__position__y = a1 } })))
+
+axiom value__alignment_axiom2 : (0 <= value__alignment2)
+
+axiom object__alignment_axiom2 :
+  (forall a:float1. forall a1:float1. (0 <= object__alignment2({
+  us_split_fields3 = { rec__spaces__positions__position__x = a;
+  rec__spaces__positions__position__y = a1 } })))
+
+logic spaces__positions__position__x__first__bit : int
+
+logic spaces__positions__position__x__last__bit : int
+
+logic spaces__positions__position__x__position : int
+
+axiom spaces__positions__position__x__first__bit_axiom :
+  (0 <= spaces__positions__position__x__first__bit)
+
+axiom spaces__positions__position__x__last__bit_axiom :
+  (spaces__positions__position__x__first__bit <  spaces__positions__position__x__last__bit)
+
+axiom spaces__positions__position__x__position_axiom :
+  (0 <= spaces__positions__position__x__position)
+
+logic spaces__positions__position__y__first__bit : int
+
+logic spaces__positions__position__y__last__bit : int
+
+logic spaces__positions__position__y__position : int
+
+axiom spaces__positions__position__y__first__bit_axiom :
+  (0 <= spaces__positions__position__y__first__bit)
+
+axiom spaces__positions__position__y__last__bit_axiom :
+  (spaces__positions__position__y__first__bit <  spaces__positions__position__y__last__bit)
+
+axiom spaces__positions__position__y__position_axiom :
+  (0 <= spaces__positions__position__y__position)
+
+logic dummy11 : float1
+
+logic dummy12 : float1
+
+type position__ref = { position__content : us_rep1
+}
+
+function position__ref___projection(a: position__ref) : us_rep1 =
+  (a).position__content
+
+logic zero_position : float1
+
+logic zero_position1 : float1
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic oeq : us_rep1, us_rep1 -> bool
+
+logic oeq__function_guard : bool, us_rep1, us_rep1 -> prop
+
+logic create__4 : t, us_rep -> us_rep1
+
+logic create__4__function_guard : us_rep1, t, us_rep -> prop
+
+logic norm : us_rep1 -> t
+
+logic norm__function_guard : t, us_rep1 -> prop
+
+logic bearing : us_rep1 -> us_rep
+
+logic bearing__function_guard : us_rep, us_rep1 -> prop
+
+logic print1 : us_rep1 -> us_t
+
+logic print__function_guard1 : us_t, us_rep1 -> prop
+
+type us_split_fields4 = { rec__spaces__poses__pose__pos : us_rep1;
+rec__spaces__poses__pose__ori : us_rep
+}
+
+function us_split_fields_pos__projection(a: us_split_fields4) : us_rep1 =
+  (a).rec__spaces__poses__pose__pos
+
+function us_split_fields_ori__projection(a: us_split_fields4) : us_rep =
+  (a).rec__spaces__poses__pose__ori
+
+type us_split_fields__ref2 = { us_split_fields__content2 : us_split_fields4
+}
+
+function us_split_fields__ref_3__projection(a: us_split_fields__ref2) : us_split_fields4 =
+  (a).us_split_fields__content2
+
+type us_rep2 = { us_split_fields5 : us_split_fields4
+}
+
+function us_rep_3__projection(a: us_rep2) : us_split_fields4 =
+  (a).us_split_fields5
+
+logic bool_eq15 : us_rep2, us_rep2 -> bool
+
+axiom bool_eq_def13 :
+  (forall a:us_rep2. forall b:us_rep2 [bool_eq15(a, b)].
+  ((((bool_eq14(((a).us_split_fields5).rec__spaces__poses__pose__pos,
+  ((b).us_split_fields5).rec__spaces__poses__pose__pos) = true) and
+  (bool_eq13(((a).us_split_fields5).rec__spaces__poses__pose__ori,
+  ((b).us_split_fields5).rec__spaces__poses__pose__ori) = true)) ->
+  (bool_eq15(a, b) = true)) and
+  ((not ((bool_eq14(((a).us_split_fields5).rec__spaces__poses__pose__pos,
+  ((b).us_split_fields5).rec__spaces__poses__pose__pos) = true) and
+  (bool_eq13(((a).us_split_fields5).rec__spaces__poses__pose__ori,
+  ((b).us_split_fields5).rec__spaces__poses__pose__ori) = true))) ->
+  (bool_eq15(a, b) = false))))
+
+logic user_eq11 : us_rep2, us_rep2 -> bool
+
+logic value__size3 : int
+
+logic object__size3 : us_rep2 -> int
+
+logic value__alignment3 : int
+
+logic object__alignment3 : us_rep2 -> int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 :
+  (forall a:float1. forall a1:float1. forall a2:normalized2pi.
+  (0 <= object__size3({ us_split_fields5 = { rec__spaces__poses__pose__pos =
+  { us_split_fields3 = { rec__spaces__positions__position__x = a;
+  rec__spaces__positions__position__y = a1 } };
+  rec__spaces__poses__pose__ori = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = a2 } } } })))
+
+axiom value__alignment_axiom3 : (0 <= value__alignment3)
+
+axiom object__alignment_axiom3 :
+  (forall a:float1. forall a1:float1. forall a2:normalized2pi.
+  (0 <= object__alignment3({ us_split_fields5 = {
+  rec__spaces__poses__pose__pos = { us_split_fields3 = {
+  rec__spaces__positions__position__x = a;
+  rec__spaces__positions__position__y = a1 } };
+  rec__spaces__poses__pose__ori = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = a2 } } } })))
+
+logic spaces__poses__pose__pos__first__bit : int
+
+logic spaces__poses__pose__pos__last__bit : int
+
+logic spaces__poses__pose__pos__position : int
+
+axiom spaces__poses__pose__pos__first__bit_axiom :
+  (0 <= spaces__poses__pose__pos__first__bit)
+
+axiom spaces__poses__pose__pos__last__bit_axiom :
+  (spaces__poses__pose__pos__first__bit <  spaces__poses__pose__pos__last__bit)
+
+axiom spaces__poses__pose__pos__position_axiom :
+  (0 <= spaces__poses__pose__pos__position)
+
+logic spaces__poses__pose__ori__first__bit : int
+
+logic spaces__poses__pose__ori__last__bit : int
+
+logic spaces__poses__pose__ori__position : int
+
+axiom spaces__poses__pose__ori__first__bit_axiom :
+  (0 <= spaces__poses__pose__ori__first__bit)
+
+axiom spaces__poses__pose__ori__last__bit_axiom :
+  (spaces__poses__pose__ori__first__bit <  spaces__poses__pose__ori__last__bit)
+
+axiom spaces__poses__pose__ori__position_axiom :
+  (0 <= spaces__poses__pose__ori__position)
+
+logic dummy13 : float1
+
+logic dummy14 : float1
+
+logic dummy15 : normalized2pi
+
+type pose__ref = { pose__content : us_rep2
+}
+
+function pose__ref___projection(a: pose__ref) : us_rep2 = (a).pose__content
+
+logic create1 : t, t, us_rep -> us_rep2
+
+logic create__function_guard1 : us_rep2, t, t, us_rep -> prop
+
+logic osubtract1 : us_rep2, us_rep2 -> us_rep2
+
+logic osubtract__function_guard1 : us_rep2, us_rep2, us_rep2 -> prop
+
+logic pos : us_rep2 -> us_rep1
+
+logic pos__function_guard : us_rep1, us_rep2 -> prop
+
+logic ori : us_rep2 -> us_rep
+
+logic ori__function_guard : us_rep, us_rep2 -> prop
+
+logic print2 : us_rep2 -> us_t
+
+logic print__function_guard2 : us_t, us_rep2 -> prop
+
+type laser_scan_id
+
+predicate in_range9(x: int) = ((1 <= x) and (x <= 1000))
+
+logic bool_eq16 : int, int -> bool
+
+axiom bool_eq_def14 :
+  (forall x:int. forall y:int [bool_eq16(x, y)]. (((x = y) -> (bool_eq16(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq16(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE9 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check9 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE9 : us_image -> int
+
+logic user_eq12 : laser_scan_id, laser_scan_id -> bool
+
+logic dummy16 : laser_scan_id
+
+type laser_scan_id__ref = { laser_scan_id__content : laser_scan_id
+}
+
+function laser_scan_id__ref___projection(a: laser_scan_id__ref) : laser_scan_id =
+  (a).laser_scan_id__content
+
+logic to_rep6 : natural -> int
+
+logic of_rep6 : int -> natural
+
+axiom inversion_axiom6 :
+  (forall x:natural [to_rep6(x)]. (of_rep6(to_rep6(x)) = x))
+
+axiom range_axiom6 : (forall x:natural [to_rep6(x)]. in_range5(to_rep6(x)))
+
+axiom coerce_axiom6 :
+  (forall x:int [to_rep6(of_rep6(x))]. (in_range5(x) ->
+  (to_rep6(of_rep6(x)) = x)))
+
+type unbounded_float
+
+logic bool_eq17 : t, t -> bool
+
+axiom bool_eq_def15 :
+  (forall x:t. forall y:t [bool_eq17(x, y)]. ((eq(x, y) -> (bool_eq17(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq17(x, y) = false))))
+
+logic user_eq13 : unbounded_float, unbounded_float -> bool
+
+logic attr__ATTRIBUTE_IMAGE10 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check10 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE10 : us_image -> t
+
+logic dummy17 : unbounded_float
+
+type unbounded_float__ref = { unbounded_float__content : unbounded_float
+}
+
+function unbounded_float__ref___projection(a: unbounded_float__ref) : unbounded_float =
+  (a).unbounded_float__content
+
+logic to_rep7 : unbounded_float -> t
+
+logic of_rep7 : t -> unbounded_float
+
+axiom inversion_axiom7 :
+  (forall x:unbounded_float [to_rep7(x)]. (of_rep7(to_rep7(x)) = x))
+
+axiom range_axiom7 :
+  (forall x:unbounded_float [to_rep7(x)]. tqtisFinite(to_rep7(x)))
+
+axiom coerce_axiom7 :
+  (forall x:t [to_rep7(of_rep7(x))]. (tqtisFinite(x) ->
+  (to_rep7(of_rep7(x)) = x)))
+
+type map__ref1 = { map__content1 : (int,nonnegative_float) farray
+}
+
+logic slide1 : (int,nonnegative_float) farray, int,
+  int -> (int,nonnegative_float) farray
+
+axiom slide_eq1 :
+  (forall a:(int,nonnegative_float) farray.
+  (forall first2:int [slide1(a, first2, first2)]. (slide1(a, first2,
+  first2) = a)))
+
+axiom slide_def1 :
+  (forall a:(int,nonnegative_float) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat1 : (int,nonnegative_float) farray, int, int,
+  (int,nonnegative_float) farray, int, int -> (int,nonnegative_float) farray
+
+axiom concat_def1 :
+  (forall a:(int,nonnegative_float) farray.
+  forall b:(int,nonnegative_float) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton1 : nonnegative_float, int -> (int,nonnegative_float) farray
+
+axiom singleton_def1 :
+  (forall v:nonnegative_float.
+  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
+
+logic bool_eq18 : (int,nonnegative_float) farray, int, int,
+  (int,nonnegative_float) farray, int, int -> bool
+
+axiom bool_eq_def16 :
+  (forall a:(int,nonnegative_float) farray. forall a__first:int.
+  forall a__last:int. forall b:(int,nonnegative_float) farray.
+  forall b__first:int. forall b__last:int [bool_eq18(a, a__first, a__last, b,
+  b__first, b__last)]. ((((((a__first <= a__last) and
+  ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) and
+  (to_rep4((a[temp___idx_132])) = to_rep4((b[((b__first - a__first) + temp___idx_132)])))) or
+  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (bool_eq18(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) ->
+  (to_rep4((a[temp___idx_132])) = to_rep4((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (bool_eq18(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev1 :
+  (forall a:(int,nonnegative_float) farray.
+  forall b:(int,nonnegative_float) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq18(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) ->
+  (to_rep4((a[temp___idx_132])) = to_rep4((b[((b__first - a__first) + temp___idx_132)])))))))))
+
+logic dummy18 : (int,nonnegative_float) farray
+
+logic value__size4 : int
+
+logic object__size4 : (int,nonnegative_float) farray -> int
+
+logic value__component__size1 : int
+
+logic object__component__size1 : (int,nonnegative_float) farray -> int
+
+logic value__alignment4 : int
+
+logic object__alignment4 : (int,nonnegative_float) farray -> int
+
+axiom value__size_axiom4 : (0 <= value__size4)
+
+axiom object__size_axiom4 :
+  (forall a:(int,nonnegative_float) farray. (0 <= object__size4(a)))
+
+axiom value__component__size_axiom1 : (0 <= value__component__size1)
+
+axiom object__component__size_axiom1 :
+  (forall a:(int,nonnegative_float) farray.
+  (0 <= object__component__size1(a)))
+
+axiom value__alignment_axiom4 : (0 <= value__alignment4)
+
+axiom object__alignment_axiom4 :
+  (forall a:(int,nonnegative_float) farray. (0 <= object__alignment4(a)))
+
+logic user_eq14 : (int,nonnegative_float) farray,
+  (int,nonnegative_float) farray -> bool
+
+type option
+
+predicate in_range10(x: int) = ((0 <= x) and (x <= 1))
+
+logic bool_eq19 : int, int -> bool
+
+axiom bool_eq_def17 :
+  (forall x:int. forall y:int [bool_eq19(x, y)]. (((x = y) -> (bool_eq19(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq19(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE11 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check11 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE11 : us_image -> int
+
+logic user_eq15 : option, option -> bool
+
+logic dummy19 : option
+
+type option__ref = { option__content : option
+}
+
+function option__ref___projection(a: option__ref) : option =
+  (a).option__content
+
+logic to_rep8 : option -> int
+
+logic of_rep8 : int -> option
+
+axiom inversion_axiom8 :
+  (forall x:option [to_rep8(x)]. (of_rep8(to_rep8(x)) = x))
+
+axiom range_axiom8 : (forall x:option [to_rep8(x)]. in_range10(to_rep8(x)))
+
+axiom coerce_axiom8 :
+  (forall x:int [to_rep8(of_rep8(x))]. (in_range10(x) ->
+  (to_rep8(of_rep8(x)) = x)))
+
+type us_split_discrs = { rec__robot_iface__speed_option__opt : option
+}
+
+function us_split_discrs___projection(a: us_split_discrs) : option =
+  (a).rec__robot_iface__speed_option__opt
+
+type us_split_discrs__ref = { us_split_discrs__content : us_split_discrs
+}
+
+function us_split_discrs__ref___projection(a: us_split_discrs__ref) : us_split_discrs =
+  (a).us_split_discrs__content
+
+type us_split_fields6 = { rec__robot_iface__speed_option__modulus : float1;
+rec__robot_iface__speed_option__angle : float1 }
+
+type us_split_fields__ref3 = { us_split_fields__content3 : us_split_fields6
+}
+
+function us_split_fields__ref_4__projection(a: us_split_fields__ref3) : us_split_fields6 =
+  (a).us_split_fields__content3
+
+type us_rep3 = { us_split_discrs1 : us_split_discrs; us_split_fields7 :
+us_split_fields6; attr__constrained : bool
+}
+
+function us_rep_4__projection(a: us_rep3) : us_split_discrs =
+  (a).us_split_discrs1
+
+function us_rep_5__projection(a: us_rep3) : us_split_fields6 =
+  (a).us_split_fields7
+
+function us_rep_6__projection(a: us_rep3) : bool = (a).attr__constrained
+
+predicate robot_iface__speed_option__modulus__pred(a: us_rep3) =
+  (to_rep8(((a).us_split_discrs1).rec__robot_iface__speed_option__opt) = 1)
+
+predicate robot_iface__speed_option__angle__pred(a: us_rep3) =
+  (to_rep8(((a).us_split_discrs1).rec__robot_iface__speed_option__opt) = 1)
+
+logic bool_eq20 : us_rep3, us_rep3 -> bool
+
+axiom bool_eq_def18 :
+  (forall a:us_rep3. forall b:us_rep3 [bool_eq20(a, b)].
+  (((((to_rep8(((a).us_split_discrs1).rec__robot_iface__speed_option__opt) = to_rep8(((b).us_split_discrs1).rec__robot_iface__speed_option__opt)) and
+  (robot_iface__speed_option__modulus__pred(a) ->
+  (to_rep2(((a).us_split_fields7).rec__robot_iface__speed_option__modulus) = to_rep2(((b).us_split_fields7).rec__robot_iface__speed_option__modulus)))) and
+  (robot_iface__speed_option__angle__pred(a) ->
+  (to_rep2(((a).us_split_fields7).rec__robot_iface__speed_option__angle) = to_rep2(((b).us_split_fields7).rec__robot_iface__speed_option__angle)))) ->
+  (bool_eq20(a, b) = true)) and
+  ((not (((to_rep8(((a).us_split_discrs1).rec__robot_iface__speed_option__opt) = to_rep8(((b).us_split_discrs1).rec__robot_iface__speed_option__opt)) and
+  (robot_iface__speed_option__modulus__pred(a) ->
+  (to_rep2(((a).us_split_fields7).rec__robot_iface__speed_option__modulus) = to_rep2(((b).us_split_fields7).rec__robot_iface__speed_option__modulus)))) and
+  (robot_iface__speed_option__angle__pred(a) ->
+  (to_rep2(((a).us_split_fields7).rec__robot_iface__speed_option__angle) = to_rep2(((b).us_split_fields7).rec__robot_iface__speed_option__angle))))) ->
+  (bool_eq20(a, b) = false))))
+
+logic user_eq16 : us_rep3, us_rep3 -> bool
+
+logic value__size5 : int
+
+logic object__size5 : us_rep3 -> int
+
+logic value__alignment5 : int
+
+logic object__alignment5 : us_rep3 -> int
+
+axiom value__size_axiom5 : (0 <= value__size5)
+
+axiom object__size_axiom5 :
+  (forall a:option. forall a1:float1. forall a2:float1. forall a3:bool.
+  (0 <= object__size5({ us_split_discrs1 = {
+  rec__robot_iface__speed_option__opt = a }; us_split_fields7 = {
+  rec__robot_iface__speed_option__modulus = a1;
+  rec__robot_iface__speed_option__angle = a2 }; attr__constrained = a3 })))
+
+axiom value__alignment_axiom5 : (0 <= value__alignment5)
+
+axiom object__alignment_axiom5 :
+  (forall a:option. forall a1:float1. forall a2:float1. forall a3:bool.
+  (0 <= object__alignment5({ us_split_discrs1 = {
+  rec__robot_iface__speed_option__opt = a }; us_split_fields7 = {
+  rec__robot_iface__speed_option__modulus = a1;
+  rec__robot_iface__speed_option__angle = a2 }; attr__constrained = a3 })))
+
+logic robot_iface__speed_option__opt__first__bit : int
+
+logic robot_iface__speed_option__opt__last__bit : int
+
+logic robot_iface__speed_option__opt__position : int
+
+axiom robot_iface__speed_option__opt__first__bit_axiom :
+  (0 <= robot_iface__speed_option__opt__first__bit)
+
+axiom robot_iface__speed_option__opt__last__bit_axiom :
+  (robot_iface__speed_option__opt__first__bit <  robot_iface__speed_option__opt__last__bit)
+
+axiom robot_iface__speed_option__opt__position_axiom :
+  (0 <= robot_iface__speed_option__opt__position)
+
+logic robot_iface__speed_option__modulus__first__bit : int
+
+logic robot_iface__speed_option__modulus__last__bit : int
+
+logic robot_iface__speed_option__modulus__position : int
+
+axiom robot_iface__speed_option__modulus__first__bit_axiom :
+  (0 <= robot_iface__speed_option__modulus__first__bit)
+
+axiom robot_iface__speed_option__modulus__last__bit_axiom :
+  (robot_iface__speed_option__modulus__first__bit <  robot_iface__speed_option__modulus__last__bit)
+
+axiom robot_iface__speed_option__modulus__position_axiom :
+  (0 <= robot_iface__speed_option__modulus__position)
+
+logic robot_iface__speed_option__angle__first__bit : int
+
+logic robot_iface__speed_option__angle__last__bit : int
+
+logic robot_iface__speed_option__angle__position : int
+
+axiom robot_iface__speed_option__angle__first__bit_axiom :
+  (0 <= robot_iface__speed_option__angle__first__bit)
+
+axiom robot_iface__speed_option__angle__last__bit_axiom :
+  (robot_iface__speed_option__angle__first__bit <  robot_iface__speed_option__angle__last__bit)
+
+axiom robot_iface__speed_option__angle__position_axiom :
+  (0 <= robot_iface__speed_option__angle__position)
+
+logic dummy20 : option
+
+logic dummy21 : float1
+
+logic dummy22 : float1
+
+logic dummy23 : bool
+
+type speed_option__ref = { speed_option__content : us_rep3
+}
+
+function speed_option__ref___projection(a: speed_option__ref) : us_rep3 =
+  (a).speed_option__content
+
+type us_split_fields8 = { rec__robot_iface__proxy__robot_radius :
+positive_float; rec__robot_iface__proxy__min_gap_width : positive_float;
+rec__robot_iface__proxy__obstacle_avoid_dist : positive_float;
+rec__robot_iface__proxy__max_speed : positive_float;
+rec__robot_iface__proxy__max_turn_rate : positive_float;
+rec__robot_iface__proxy__goal_position_tol : nonnegative_float;
+rec__robot_iface__proxy__goal_angle_tol : nonnegative_float;
+rec__robot_iface__proxy__goalx : float1; rec__robot_iface__proxy__goaly :
+float1; rec__robot_iface__proxy__goala : float1;
+rec__robot_iface__proxy__scan_count : natural;
+rec__robot_iface__proxy__scan_res : positive_float;
+rec__robot_iface__proxy__max_range : positive_float;
+rec__robot_iface__proxy__scans : (int,nonnegative_float) farray;
+rec__robot_iface__proxy__x : unbounded_float; rec__robot_iface__proxy__y :
+unbounded_float; rec__robot_iface__proxy__yaw : unbounded_float;
+rec__robot_iface__proxy__speed : us_rep3;
+rec__robot_iface__proxy__goal_reached : bool
+}
+
+function us_split_fields_scan_Count__projection(a: us_split_fields8) : natural =
+  (a).rec__robot_iface__proxy__scan_count
+
+function us_split_fields_scans__projection(a: us_split_fields8) : (int,nonnegative_float) farray =
+  (a).rec__robot_iface__proxy__scans
+
+function us_split_fields_speed__projection(a: us_split_fields8) : us_rep3 =
+  (a).rec__robot_iface__proxy__speed
+
+function us_split_fields_goal_reached__projection(a: us_split_fields8) : bool =
+  (a).rec__robot_iface__proxy__goal_reached
+
+type us_split_fields__ref4 = { us_split_fields__content4 : us_split_fields8
+}
+
+function us_split_fields__ref_5__projection(a: us_split_fields__ref4) : us_split_fields8 =
+  (a).us_split_fields__content4
+
+type us_rep4 = { us_split_fields9 : us_split_fields8
+}
+
+function us_rep_7__projection(a: us_rep4) : us_split_fields8 =
+  (a).us_split_fields9
+
+logic bool_eq21 : us_rep4, us_rep4 -> bool
+
+axiom bool_eq_def19 :
+  (forall a:us_rep4. forall b:us_rep4 [bool_eq21(a, b)].
+  (((((((((((((((((((((to_rep3(((a).us_split_fields9).rec__robot_iface__proxy__robot_radius) = to_rep3(((b).us_split_fields9).rec__robot_iface__proxy__robot_radius)) and
+  (to_rep3(((a).us_split_fields9).rec__robot_iface__proxy__min_gap_width) = to_rep3(((b).us_split_fields9).rec__robot_iface__proxy__min_gap_width))) and
+  (to_rep3(((a).us_split_fields9).rec__robot_iface__proxy__obstacle_avoid_dist) = to_rep3(((b).us_split_fields9).rec__robot_iface__proxy__obstacle_avoid_dist))) and
+  (to_rep3(((a).us_split_fields9).rec__robot_iface__proxy__max_speed) = to_rep3(((b).us_split_fields9).rec__robot_iface__proxy__max_speed))) and
+  (to_rep3(((a).us_split_fields9).rec__robot_iface__proxy__max_turn_rate) = to_rep3(((b).us_split_fields9).rec__robot_iface__proxy__max_turn_rate))) and
+  (to_rep4(((a).us_split_fields9).rec__robot_iface__proxy__goal_position_tol) = to_rep4(((b).us_split_fields9).rec__robot_iface__proxy__goal_position_tol))) and
+  (to_rep4(((a).us_split_fields9).rec__robot_iface__proxy__goal_angle_tol) = to_rep4(((b).us_split_fields9).rec__robot_iface__proxy__goal_angle_tol))) and
+  (to_rep2(((a).us_split_fields9).rec__robot_iface__proxy__goalx) = to_rep2(((b).us_split_fields9).rec__robot_iface__proxy__goalx))) and
+  (to_rep2(((a).us_split_fields9).rec__robot_iface__proxy__goaly) = to_rep2(((b).us_split_fields9).rec__robot_iface__proxy__goaly))) and
+  (to_rep2(((a).us_split_fields9).rec__robot_iface__proxy__goala) = to_rep2(((b).us_split_fields9).rec__robot_iface__proxy__goala))) and
+  (to_rep6(((a).us_split_fields9).rec__robot_iface__proxy__scan_count) = to_rep6(((b).us_split_fields9).rec__robot_iface__proxy__scan_count))) and
+  (to_rep3(((a).us_split_fields9).rec__robot_iface__proxy__scan_res) = to_rep3(((b).us_split_fields9).rec__robot_iface__proxy__scan_res))) and
+  (to_rep3(((a).us_split_fields9).rec__robot_iface__proxy__max_range) = to_rep3(((b).us_split_fields9).rec__robot_iface__proxy__max_range))) and
+  (bool_eq18(((a).us_split_fields9).rec__robot_iface__proxy__scans, 1, 1000,
+  ((b).us_split_fields9).rec__robot_iface__proxy__scans, 1,
+  1000) = true)) and
+  (to_rep7(((a).us_split_fields9).rec__robot_iface__proxy__x) = to_rep7(((b).us_split_fields9).rec__robot_iface__proxy__x))) and
+  (to_rep7(((a).us_split_fields9).rec__robot_iface__proxy__y) = to_rep7(((b).us_split_fields9).rec__robot_iface__proxy__y))) and
+  (to_rep7(((a).us_split_fields9).rec__robot_iface__proxy__yaw) = to_rep7(((b).us_split_fields9).rec__robot_iface__proxy__yaw))) and
+  (bool_eq20(((a).us_split_fields9).rec__robot_iface__proxy__speed,
+  ((b).us_split_fields9).rec__robot_iface__proxy__speed) = true)) and
+  (((a).us_split_fields9).rec__robot_iface__proxy__goal_reached = ((b).us_split_fields9).rec__robot_iface__proxy__goal_reached)) ->
+  (bool_eq21(a, b) = true)) and
+  ((not (((((((((((((((((((to_rep3(((a).us_split_fields9).rec__robot_iface__proxy__robot_radius) = to_rep3(((b).us_split_fields9).rec__robot_iface__proxy__robot_radius)) and
+  (to_rep3(((a).us_split_fields9).rec__robot_iface__proxy__min_gap_width) = to_rep3(((b).us_split_fields9).rec__robot_iface__proxy__min_gap_width))) and
+  (to_rep3(((a).us_split_fields9).rec__robot_iface__proxy__obstacle_avoid_dist) = to_rep3(((b).us_split_fields9).rec__robot_iface__proxy__obstacle_avoid_dist))) and
+  (to_rep3(((a).us_split_fields9).rec__robot_iface__proxy__max_speed) = to_rep3(((b).us_split_fields9).rec__robot_iface__proxy__max_speed))) and
+  (to_rep3(((a).us_split_fields9).rec__robot_iface__proxy__max_turn_rate) = to_rep3(((b).us_split_fields9).rec__robot_iface__proxy__max_turn_rate))) and
+  (to_rep4(((a).us_split_fields9).rec__robot_iface__proxy__goal_position_tol) = to_rep4(((b).us_split_fields9).rec__robot_iface__proxy__goal_position_tol))) and
+  (to_rep4(((a).us_split_fields9).rec__robot_iface__proxy__goal_angle_tol) = to_rep4(((b).us_split_fields9).rec__robot_iface__proxy__goal_angle_tol))) and
+  (to_rep2(((a).us_split_fields9).rec__robot_iface__proxy__goalx) = to_rep2(((b).us_split_fields9).rec__robot_iface__proxy__goalx))) and
+  (to_rep2(((a).us_split_fields9).rec__robot_iface__proxy__goaly) = to_rep2(((b).us_split_fields9).rec__robot_iface__proxy__goaly))) and
+  (to_rep2(((a).us_split_fields9).rec__robot_iface__proxy__goala) = to_rep2(((b).us_split_fields9).rec__robot_iface__proxy__goala))) and
+  (to_rep6(((a).us_split_fields9).rec__robot_iface__proxy__scan_count) = to_rep6(((b).us_split_fields9).rec__robot_iface__proxy__scan_count))) and
+  (to_rep3(((a).us_split_fields9).rec__robot_iface__proxy__scan_res) = to_rep3(((b).us_split_fields9).rec__robot_iface__proxy__scan_res))) and
+  (to_rep3(((a).us_split_fields9).rec__robot_iface__proxy__max_range) = to_rep3(((b).us_split_fields9).rec__robot_iface__proxy__max_range))) and
+  (bool_eq18(((a).us_split_fields9).rec__robot_iface__proxy__scans, 1, 1000,
+  ((b).us_split_fields9).rec__robot_iface__proxy__scans, 1,
+  1000) = true)) and
+  (to_rep7(((a).us_split_fields9).rec__robot_iface__proxy__x) = to_rep7(((b).us_split_fields9).rec__robot_iface__proxy__x))) and
+  (to_rep7(((a).us_split_fields9).rec__robot_iface__proxy__y) = to_rep7(((b).us_split_fields9).rec__robot_iface__proxy__y))) and
+  (to_rep7(((a).us_split_fields9).rec__robot_iface__proxy__yaw) = to_rep7(((b).us_split_fields9).rec__robot_iface__proxy__yaw))) and
+  (bool_eq20(((a).us_split_fields9).rec__robot_iface__proxy__speed,
+  ((b).us_split_fields9).rec__robot_iface__proxy__speed) = true)) and
+  (((a).us_split_fields9).rec__robot_iface__proxy__goal_reached = ((b).us_split_fields9).rec__robot_iface__proxy__goal_reached))) ->
+  (bool_eq21(a, b) = false))))
+
+logic user_eq17 : us_rep4, us_rep4 -> bool
+
+logic value__size6 : int
+
+logic object__size6 : us_rep4 -> int
+
+logic value__alignment6 : int
+
+logic object__alignment6 : us_rep4 -> int
+
+axiom value__size_axiom6 : (0 <= value__size6)
+
+axiom object__size_axiom6 : (forall a:us_rep4. (0 <= object__size6(a)))
+
+axiom value__alignment_axiom6 : (0 <= value__alignment6)
+
+axiom object__alignment_axiom6 :
+  (forall a:us_rep4. (0 <= object__alignment6(a)))
+
+logic robot_iface__proxy__robot_radius__first__bit : int
+
+logic robot_iface__proxy__robot_radius__last__bit : int
+
+logic robot_iface__proxy__robot_radius__position : int
+
+axiom robot_iface__proxy__robot_radius__first__bit_axiom :
+  (0 <= robot_iface__proxy__robot_radius__first__bit)
+
+axiom robot_iface__proxy__robot_radius__last__bit_axiom :
+  (robot_iface__proxy__robot_radius__first__bit <  robot_iface__proxy__robot_radius__last__bit)
+
+axiom robot_iface__proxy__robot_radius__position_axiom :
+  (0 <= robot_iface__proxy__robot_radius__position)
+
+logic robot_iface__proxy__min_gap_width__first__bit : int
+
+logic robot_iface__proxy__min_gap_width__last__bit : int
+
+logic robot_iface__proxy__min_gap_width__position : int
+
+axiom robot_iface__proxy__min_gap_width__first__bit_axiom :
+  (0 <= robot_iface__proxy__min_gap_width__first__bit)
+
+axiom robot_iface__proxy__min_gap_width__last__bit_axiom :
+  (robot_iface__proxy__min_gap_width__first__bit <  robot_iface__proxy__min_gap_width__last__bit)
+
+axiom robot_iface__proxy__min_gap_width__position_axiom :
+  (0 <= robot_iface__proxy__min_gap_width__position)
+
+logic robot_iface__proxy__obstacle_avoid_dist__first__bit : int
+
+logic robot_iface__proxy__obstacle_avoid_dist__last__bit : int
+
+logic robot_iface__proxy__obstacle_avoid_dist__position : int
+
+axiom robot_iface__proxy__obstacle_avoid_dist__first__bit_axiom :
+  (0 <= robot_iface__proxy__obstacle_avoid_dist__first__bit)
+
+axiom robot_iface__proxy__obstacle_avoid_dist__last__bit_axiom :
+  (robot_iface__proxy__obstacle_avoid_dist__first__bit <  robot_iface__proxy__obstacle_avoid_dist__last__bit)
+
+axiom robot_iface__proxy__obstacle_avoid_dist__position_axiom :
+  (0 <= robot_iface__proxy__obstacle_avoid_dist__position)
+
+logic robot_iface__proxy__max_speed__first__bit : int
+
+logic robot_iface__proxy__max_speed__last__bit : int
+
+logic robot_iface__proxy__max_speed__position : int
+
+axiom robot_iface__proxy__max_speed__first__bit_axiom :
+  (0 <= robot_iface__proxy__max_speed__first__bit)
+
+axiom robot_iface__proxy__max_speed__last__bit_axiom :
+  (robot_iface__proxy__max_speed__first__bit <  robot_iface__proxy__max_speed__last__bit)
+
+axiom robot_iface__proxy__max_speed__position_axiom :
+  (0 <= robot_iface__proxy__max_speed__position)
+
+logic robot_iface__proxy__max_turn_rate__first__bit : int
+
+logic robot_iface__proxy__max_turn_rate__last__bit : int
+
+logic robot_iface__proxy__max_turn_rate__position : int
+
+axiom robot_iface__proxy__max_turn_rate__first__bit_axiom :
+  (0 <= robot_iface__proxy__max_turn_rate__first__bit)
+
+axiom robot_iface__proxy__max_turn_rate__last__bit_axiom :
+  (robot_iface__proxy__max_turn_rate__first__bit <  robot_iface__proxy__max_turn_rate__last__bit)
+
+axiom robot_iface__proxy__max_turn_rate__position_axiom :
+  (0 <= robot_iface__proxy__max_turn_rate__position)
+
+logic robot_iface__proxy__goal_position_tol__first__bit : int
+
+logic robot_iface__proxy__goal_position_tol__last__bit : int
+
+logic robot_iface__proxy__goal_position_tol__position : int
+
+axiom robot_iface__proxy__goal_position_tol__first__bit_axiom :
+  (0 <= robot_iface__proxy__goal_position_tol__first__bit)
+
+axiom robot_iface__proxy__goal_position_tol__last__bit_axiom :
+  (robot_iface__proxy__goal_position_tol__first__bit <  robot_iface__proxy__goal_position_tol__last__bit)
+
+axiom robot_iface__proxy__goal_position_tol__position_axiom :
+  (0 <= robot_iface__proxy__goal_position_tol__position)
+
+logic robot_iface__proxy__goal_angle_tol__first__bit : int
+
+logic robot_iface__proxy__goal_angle_tol__last__bit : int
+
+logic robot_iface__proxy__goal_angle_tol__position : int
+
+axiom robot_iface__proxy__goal_angle_tol__first__bit_axiom :
+  (0 <= robot_iface__proxy__goal_angle_tol__first__bit)
+
+axiom robot_iface__proxy__goal_angle_tol__last__bit_axiom :
+  (robot_iface__proxy__goal_angle_tol__first__bit <  robot_iface__proxy__goal_angle_tol__last__bit)
+
+axiom robot_iface__proxy__goal_angle_tol__position_axiom :
+  (0 <= robot_iface__proxy__goal_angle_tol__position)
+
+logic robot_iface__proxy__goalx__first__bit : int
+
+logic robot_iface__proxy__goalx__last__bit : int
+
+logic robot_iface__proxy__goalx__position : int
+
+axiom robot_iface__proxy__goalx__first__bit_axiom :
+  (0 <= robot_iface__proxy__goalx__first__bit)
+
+axiom robot_iface__proxy__goalx__last__bit_axiom :
+  (robot_iface__proxy__goalx__first__bit <  robot_iface__proxy__goalx__last__bit)
+
+axiom robot_iface__proxy__goalx__position_axiom :
+  (0 <= robot_iface__proxy__goalx__position)
+
+logic robot_iface__proxy__goaly__first__bit : int
+
+logic robot_iface__proxy__goaly__last__bit : int
+
+logic robot_iface__proxy__goaly__position : int
+
+axiom robot_iface__proxy__goaly__first__bit_axiom :
+  (0 <= robot_iface__proxy__goaly__first__bit)
+
+axiom robot_iface__proxy__goaly__last__bit_axiom :
+  (robot_iface__proxy__goaly__first__bit <  robot_iface__proxy__goaly__last__bit)
+
+axiom robot_iface__proxy__goaly__position_axiom :
+  (0 <= robot_iface__proxy__goaly__position)
+
+logic robot_iface__proxy__goala__first__bit : int
+
+logic robot_iface__proxy__goala__last__bit : int
+
+logic robot_iface__proxy__goala__position : int
+
+axiom robot_iface__proxy__goala__first__bit_axiom :
+  (0 <= robot_iface__proxy__goala__first__bit)
+
+axiom robot_iface__proxy__goala__last__bit_axiom :
+  (robot_iface__proxy__goala__first__bit <  robot_iface__proxy__goala__last__bit)
+
+axiom robot_iface__proxy__goala__position_axiom :
+  (0 <= robot_iface__proxy__goala__position)
+
+logic robot_iface__proxy__scan_count__first__bit : int
+
+logic robot_iface__proxy__scan_count__last__bit : int
+
+logic robot_iface__proxy__scan_count__position : int
+
+axiom robot_iface__proxy__scan_count__first__bit_axiom :
+  (0 <= robot_iface__proxy__scan_count__first__bit)
+
+axiom robot_iface__proxy__scan_count__last__bit_axiom :
+  (robot_iface__proxy__scan_count__first__bit <  robot_iface__proxy__scan_count__last__bit)
+
+axiom robot_iface__proxy__scan_count__position_axiom :
+  (0 <= robot_iface__proxy__scan_count__position)
+
+logic robot_iface__proxy__scan_res__first__bit : int
+
+logic robot_iface__proxy__scan_res__last__bit : int
+
+logic robot_iface__proxy__scan_res__position : int
+
+axiom robot_iface__proxy__scan_res__first__bit_axiom :
+  (0 <= robot_iface__proxy__scan_res__first__bit)
+
+axiom robot_iface__proxy__scan_res__last__bit_axiom :
+  (robot_iface__proxy__scan_res__first__bit <  robot_iface__proxy__scan_res__last__bit)
+
+axiom robot_iface__proxy__scan_res__position_axiom :
+  (0 <= robot_iface__proxy__scan_res__position)
+
+logic robot_iface__proxy__max_range__first__bit : int
+
+logic robot_iface__proxy__max_range__last__bit : int
+
+logic robot_iface__proxy__max_range__position : int
+
+axiom robot_iface__proxy__max_range__first__bit_axiom :
+  (0 <= robot_iface__proxy__max_range__first__bit)
+
+axiom robot_iface__proxy__max_range__last__bit_axiom :
+  (robot_iface__proxy__max_range__first__bit <  robot_iface__proxy__max_range__last__bit)
+
+axiom robot_iface__proxy__max_range__position_axiom :
+  (0 <= robot_iface__proxy__max_range__position)
+
+logic robot_iface__proxy__scans__first__bit : int
+
+logic robot_iface__proxy__scans__last__bit : int
+
+logic robot_iface__proxy__scans__position : int
+
+axiom robot_iface__proxy__scans__first__bit_axiom :
+  (0 <= robot_iface__proxy__scans__first__bit)
+
+axiom robot_iface__proxy__scans__last__bit_axiom :
+  (robot_iface__proxy__scans__first__bit <  robot_iface__proxy__scans__last__bit)
+
+axiom robot_iface__proxy__scans__position_axiom :
+  (0 <= robot_iface__proxy__scans__position)
+
+logic robot_iface__proxy__x__first__bit : int
+
+logic robot_iface__proxy__x__last__bit : int
+
+logic robot_iface__proxy__x__position : int
+
+axiom robot_iface__proxy__x__first__bit_axiom :
+  (0 <= robot_iface__proxy__x__first__bit)
+
+axiom robot_iface__proxy__x__last__bit_axiom :
+  (robot_iface__proxy__x__first__bit <  robot_iface__proxy__x__last__bit)
+
+axiom robot_iface__proxy__x__position_axiom :
+  (0 <= robot_iface__proxy__x__position)
+
+logic robot_iface__proxy__y__first__bit : int
+
+logic robot_iface__proxy__y__last__bit : int
+
+logic robot_iface__proxy__y__position : int
+
+axiom robot_iface__proxy__y__first__bit_axiom :
+  (0 <= robot_iface__proxy__y__first__bit)
+
+axiom robot_iface__proxy__y__last__bit_axiom :
+  (robot_iface__proxy__y__first__bit <  robot_iface__proxy__y__last__bit)
+
+axiom robot_iface__proxy__y__position_axiom :
+  (0 <= robot_iface__proxy__y__position)
+
+logic robot_iface__proxy__yaw__first__bit : int
+
+logic robot_iface__proxy__yaw__last__bit : int
+
+logic robot_iface__proxy__yaw__position : int
+
+axiom robot_iface__proxy__yaw__first__bit_axiom :
+  (0 <= robot_iface__proxy__yaw__first__bit)
+
+axiom robot_iface__proxy__yaw__last__bit_axiom :
+  (robot_iface__proxy__yaw__first__bit <  robot_iface__proxy__yaw__last__bit)
+
+axiom robot_iface__proxy__yaw__position_axiom :
+  (0 <= robot_iface__proxy__yaw__position)
+
+logic robot_iface__proxy__speed__first__bit : int
+
+logic robot_iface__proxy__speed__last__bit : int
+
+logic robot_iface__proxy__speed__position : int
+
+axiom robot_iface__proxy__speed__first__bit_axiom :
+  (0 <= robot_iface__proxy__speed__first__bit)
+
+axiom robot_iface__proxy__speed__last__bit_axiom :
+  (robot_iface__proxy__speed__first__bit <  robot_iface__proxy__speed__last__bit)
+
+axiom robot_iface__proxy__speed__position_axiom :
+  (0 <= robot_iface__proxy__speed__position)
+
+logic robot_iface__proxy__goal_reached__first__bit : int
+
+logic robot_iface__proxy__goal_reached__last__bit : int
+
+logic robot_iface__proxy__goal_reached__position : int
+
+axiom robot_iface__proxy__goal_reached__first__bit_axiom :
+  (0 <= robot_iface__proxy__goal_reached__first__bit)
+
+axiom robot_iface__proxy__goal_reached__last__bit_axiom :
+  (robot_iface__proxy__goal_reached__first__bit <  robot_iface__proxy__goal_reached__last__bit)
+
+axiom robot_iface__proxy__goal_reached__position_axiom :
+  (0 <= robot_iface__proxy__goal_reached__position)
+
+logic dummy24 : positive_float
+
+logic dummy25 : positive_float
+
+logic dummy26 : positive_float
+
+logic dummy27 : positive_float
+
+logic dummy28 : positive_float
+
+logic dummy29 : nonnegative_float
+
+logic dummy30 : nonnegative_float
+
+logic dummy31 : float1
+
+logic dummy32 : float1
+
+logic dummy33 : float1
+
+logic dummy34 : natural
+
+logic dummy35 : positive_float
+
+logic dummy36 : positive_float
+
+logic dummy37 : (int,nonnegative_float) farray
+
+logic dummy38 : unbounded_float
+
+logic dummy39 : unbounded_float
+
+logic dummy40 : unbounded_float
+
+logic dummy41 : option
+
+logic dummy42 : float1
+
+logic dummy43 : float1
+
+logic dummy44 : bool
+
+logic dummy45 : bool
+
+type proxy__ref = { proxy__content : us_rep4
+}
+
+function proxy__ref___projection(a: proxy__ref) : us_rep4 =
+  (a).proxy__content
+
+logic getscancount : us_rep4 -> int
+
+logic getscancount__function_guard : int, us_rep4 -> prop
+
+logic getrange : us_rep4, int -> t
+
+logic getrange__function_guard : t, us_rep4, int -> prop
+
+logic getxpos : us_rep4 -> t
+
+logic getxpos__function_guard : t, us_rep4 -> prop
+
+logic getypos : us_rep4 -> t
+
+logic getypos__function_guard : t, us_rep4 -> prop
+
+logic getyaw : us_rep4 -> t
+
+logic getyaw__function_guard : t, us_rep4 -> prop
+
+type idir_t
+
+predicate in_range11(x: int) = (((-1) <= x) and (x <= 1))
+
+logic bool_eq22 : int, int -> bool
+
+axiom bool_eq_def20 :
+  (forall x:int. forall y:int [bool_eq22(x, y)]. (((x = y) -> (bool_eq22(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq22(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE12 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check12 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE12 : us_image -> int
+
+logic user_eq18 : idir_t, idir_t -> bool
+
+logic dummy46 : idir_t
+
+type idir_t__ref = { idir_t__content : idir_t
+}
+
+function idir_t__ref___projection(a: idir_t__ref) : idir_t =
+  (a).idir_t__content
+
+logic to_rep9 : idir_t -> int
+
+logic of_rep9 : int -> idir_t
+
+axiom inversion_axiom9 :
+  (forall x:idir_t [to_rep9(x)]. (of_rep9(to_rep9(x)) = x))
+
+axiom range_axiom9 : (forall x:idir_t [to_rep9(x)]. in_range11(to_rep9(x)))
+
+axiom coerce_axiom9 :
+  (forall x:int [to_rep9(of_rep9(x))]. (in_range11(x) ->
+  (to_rep9(of_rep9(x)) = x)))
+
+type us_split_fields10 = { rec__gaps__gap__bearing : us_rep;
+rec__gaps__gap__distance : float1; rec__gaps__gap__idir : idir_t
+}
+
+function us_split_fields_bearing__projection(a: us_split_fields10) : us_rep =
+  (a).rec__gaps__gap__bearing
+
+function us_split_fields_iDir__projection(a: us_split_fields10) : idir_t =
+  (a).rec__gaps__gap__idir
+
+type us_split_fields__ref5 = { us_split_fields__content5 : us_split_fields10
+}
+
+function us_split_fields__ref_6__projection(a: us_split_fields__ref5) : us_split_fields10 =
+  (a).us_split_fields__content5
+
+type us_rep5 = { us_split_fields11 : us_split_fields10
+}
+
+function us_rep_8__projection(a: us_rep5) : us_split_fields10 =
+  (a).us_split_fields11
+
+logic bool_eq23 : us_rep5, us_rep5 -> bool
+
+axiom bool_eq_def21 :
+  (forall a:us_rep5. forall b:us_rep5 [bool_eq23(a, b)].
+  (((((bool_eq13(((a).us_split_fields11).rec__gaps__gap__bearing,
+  ((b).us_split_fields11).rec__gaps__gap__bearing) = true) and
+  (to_rep2(((a).us_split_fields11).rec__gaps__gap__distance) = to_rep2(((b).us_split_fields11).rec__gaps__gap__distance))) and
+  (to_rep9(((a).us_split_fields11).rec__gaps__gap__idir) = to_rep9(((b).us_split_fields11).rec__gaps__gap__idir))) ->
+  (bool_eq23(a, b) = true)) and
+  ((not (((bool_eq13(((a).us_split_fields11).rec__gaps__gap__bearing,
+  ((b).us_split_fields11).rec__gaps__gap__bearing) = true) and
+  (to_rep2(((a).us_split_fields11).rec__gaps__gap__distance) = to_rep2(((b).us_split_fields11).rec__gaps__gap__distance))) and
+  (to_rep9(((a).us_split_fields11).rec__gaps__gap__idir) = to_rep9(((b).us_split_fields11).rec__gaps__gap__idir)))) ->
+  (bool_eq23(a, b) = false))))
+
+logic user_eq19 : us_rep5, us_rep5 -> bool
+
+logic value__size7 : int
+
+logic object__size7 : us_rep5 -> int
+
+logic value__alignment7 : int
+
+logic object__alignment7 : us_rep5 -> int
+
+axiom value__size_axiom7 : (0 <= value__size7)
+
+axiom object__size_axiom7 :
+  (forall a:normalized2pi. forall a1:float1. forall a2:idir_t.
+  (0 <= object__size7({ us_split_fields11 = { rec__gaps__gap__bearing = {
+  us_split_fields1 = { rec__spaces__angles__angle__theta = a } };
+  rec__gaps__gap__distance = a1; rec__gaps__gap__idir = a2 } })))
+
+axiom value__alignment_axiom7 : (0 <= value__alignment7)
+
+axiom object__alignment_axiom7 :
+  (forall a:normalized2pi. forall a1:float1. forall a2:idir_t.
+  (0 <= object__alignment7({ us_split_fields11 = { rec__gaps__gap__bearing =
+  { us_split_fields1 = { rec__spaces__angles__angle__theta = a } };
+  rec__gaps__gap__distance = a1; rec__gaps__gap__idir = a2 } })))
+
+logic gaps__gap__bearing__first__bit : int
+
+logic gaps__gap__bearing__last__bit : int
+
+logic gaps__gap__bearing__position : int
+
+axiom gaps__gap__bearing__first__bit_axiom :
+  (0 <= gaps__gap__bearing__first__bit)
+
+axiom gaps__gap__bearing__last__bit_axiom :
+  (gaps__gap__bearing__first__bit <  gaps__gap__bearing__last__bit)
+
+axiom gaps__gap__bearing__position_axiom :
+  (0 <= gaps__gap__bearing__position)
+
+logic gaps__gap__distance__first__bit : int
+
+logic gaps__gap__distance__last__bit : int
+
+logic gaps__gap__distance__position : int
+
+axiom gaps__gap__distance__first__bit_axiom :
+  (0 <= gaps__gap__distance__first__bit)
+
+axiom gaps__gap__distance__last__bit_axiom :
+  (gaps__gap__distance__first__bit <  gaps__gap__distance__last__bit)
+
+axiom gaps__gap__distance__position_axiom :
+  (0 <= gaps__gap__distance__position)
+
+logic gaps__gap__idir__first__bit : int
+
+logic gaps__gap__idir__last__bit : int
+
+logic gaps__gap__idir__position : int
+
+axiom gaps__gap__idir__first__bit_axiom : (0 <= gaps__gap__idir__first__bit)
+
+axiom gaps__gap__idir__last__bit_axiom :
+  (gaps__gap__idir__first__bit <  gaps__gap__idir__last__bit)
+
+axiom gaps__gap__idir__position_axiom : (0 <= gaps__gap__idir__position)
+
+logic dummy47 : normalized2pi
+
+logic dummy48 : float1
+
+logic dummy49 : idir_t
+
+type gap__ref = { gap__content : us_rep5
+}
+
+function gap__ref___projection(a: gap__ref) : us_rep5 = (a).gap__content
+
+type us_split_fields12 = { rec__valleys__valley__risinggap : us_rep5;
+rec__valleys__valley__othergap : us_rep5
+}
+
+function us_split_fields_risingGap__projection(a: us_split_fields12) : us_rep5 =
+  (a).rec__valleys__valley__risinggap
+
+function us_split_fields_otherGap__projection(a: us_split_fields12) : us_rep5 =
+  (a).rec__valleys__valley__othergap
+
+type us_split_fields__ref6 = { us_split_fields__content6 : us_split_fields12
+}
+
+function us_split_fields__ref_7__projection(a: us_split_fields__ref6) : us_split_fields12 =
+  (a).us_split_fields__content6
+
+type us_rep6 = { us_split_fields13 : us_split_fields12
+}
+
+function us_rep_9__projection(a: us_rep6) : us_split_fields12 =
+  (a).us_split_fields13
+
+logic bool_eq24 : us_rep6, us_rep6 -> bool
+
+axiom bool_eq_def22 :
+  (forall a:us_rep6. forall b:us_rep6 [bool_eq24(a, b)].
+  ((((bool_eq23(((a).us_split_fields13).rec__valleys__valley__risinggap,
+  ((b).us_split_fields13).rec__valleys__valley__risinggap) = true) and
+  (bool_eq23(((a).us_split_fields13).rec__valleys__valley__othergap,
+  ((b).us_split_fields13).rec__valleys__valley__othergap) = true)) ->
+  (bool_eq24(a, b) = true)) and
+  ((not ((bool_eq23(((a).us_split_fields13).rec__valleys__valley__risinggap,
+  ((b).us_split_fields13).rec__valleys__valley__risinggap) = true) and
+  (bool_eq23(((a).us_split_fields13).rec__valleys__valley__othergap,
+  ((b).us_split_fields13).rec__valleys__valley__othergap) = true))) ->
+  (bool_eq24(a, b) = false))))
+
+logic user_eq20 : us_rep6, us_rep6 -> bool
+
+logic value__size8 : int
+
+logic object__size8 : us_rep6 -> int
+
+logic value__alignment8 : int
+
+logic object__alignment8 : us_rep6 -> int
+
+axiom value__size_axiom8 : (0 <= value__size8)
+
+axiom object__size_axiom8 :
+  (forall a:normalized2pi. forall a1:float1. forall a2:idir_t.
+  forall a3:normalized2pi. forall a4:float1. forall a5:idir_t.
+  (0 <= object__size8({ us_split_fields13 = {
+  rec__valleys__valley__risinggap = { us_split_fields11 = {
+  rec__gaps__gap__bearing = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = a } }; rec__gaps__gap__distance = a1;
+  rec__gaps__gap__idir = a2 } }; rec__valleys__valley__othergap = {
+  us_split_fields11 = { rec__gaps__gap__bearing = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = a3 } }; rec__gaps__gap__distance = a4;
+  rec__gaps__gap__idir = a5 } } } })))
+
+axiom value__alignment_axiom8 : (0 <= value__alignment8)
+
+axiom object__alignment_axiom8 :
+  (forall a:normalized2pi. forall a1:float1. forall a2:idir_t.
+  forall a3:normalized2pi. forall a4:float1. forall a5:idir_t.
+  (0 <= object__alignment8({ us_split_fields13 = {
+  rec__valleys__valley__risinggap = { us_split_fields11 = {
+  rec__gaps__gap__bearing = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = a } }; rec__gaps__gap__distance = a1;
+  rec__gaps__gap__idir = a2 } }; rec__valleys__valley__othergap = {
+  us_split_fields11 = { rec__gaps__gap__bearing = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = a3 } }; rec__gaps__gap__distance = a4;
+  rec__gaps__gap__idir = a5 } } } })))
+
+logic valleys__valley__risinggap__first__bit : int
+
+logic valleys__valley__risinggap__last__bit : int
+
+logic valleys__valley__risinggap__position : int
+
+axiom valleys__valley__risinggap__first__bit_axiom :
+  (0 <= valleys__valley__risinggap__first__bit)
+
+axiom valleys__valley__risinggap__last__bit_axiom :
+  (valleys__valley__risinggap__first__bit <  valleys__valley__risinggap__last__bit)
+
+axiom valleys__valley__risinggap__position_axiom :
+  (0 <= valleys__valley__risinggap__position)
+
+logic valleys__valley__othergap__first__bit : int
+
+logic valleys__valley__othergap__last__bit : int
+
+logic valleys__valley__othergap__position : int
+
+axiom valleys__valley__othergap__first__bit_axiom :
+  (0 <= valleys__valley__othergap__first__bit)
+
+axiom valleys__valley__othergap__last__bit_axiom :
+  (valleys__valley__othergap__first__bit <  valleys__valley__othergap__last__bit)
+
+axiom valleys__valley__othergap__position_axiom :
+  (0 <= valleys__valley__othergap__position)
+
+logic dummy50 : normalized2pi
+
+logic dummy51 : float1
+
+logic dummy52 : idir_t
+
+logic dummy53 : normalized2pi
+
+logic dummy54 : float1
+
+logic dummy55 : idir_t
+
+type valley__ref = { valley__content : us_rep6
+}
+
+function valley__ref___projection(a: valley__ref) : us_rep6 =
+  (a).valley__content
+
+type option1
+
+predicate in_range12(x: int) = ((0 <= x) and (x <= 1))
+
+logic bool_eq25 : int, int -> bool
+
+axiom bool_eq_def23 :
+  (forall x:int. forall y:int [bool_eq25(x, y)]. (((x = y) -> (bool_eq25(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq25(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE13 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check13 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE13 : us_image -> int
+
+logic user_eq21 : option1, option1 -> bool
+
+logic dummy56 : option1
+
+type option__ref1 = { option__content1 : option1
+}
+
+function option__ref_2__projection(a: option__ref1) : option1 =
+  (a).option__content1
+
+logic to_rep10 : option1 -> int
+
+logic of_rep10 : int -> option1
+
+axiom inversion_axiom10 :
+  (forall x:option1 [to_rep10(x)]. (of_rep10(to_rep10(x)) = x))
+
+axiom range_axiom10 :
+  (forall x:option1 [to_rep10(x)]. in_range12(to_rep10(x)))
+
+axiom coerce_axiom10 :
+  (forall x:int [to_rep10(of_rep10(x))]. (in_range12(x) ->
+  (to_rep10(of_rep10(x)) = x)))
+
+type us_split_discrs2 = { rec__algorithm__valley_option__opt : option1
+}
+
+function us_split_discrs_2__projection(a: us_split_discrs2) : option1 =
+  (a).rec__algorithm__valley_option__opt
+
+type us_split_discrs__ref1 = { us_split_discrs__content1 : us_split_discrs2
+}
+
+function us_split_discrs__ref_2__projection(a: us_split_discrs__ref1) : us_split_discrs2 =
+  (a).us_split_discrs__content1
+
+type us_split_fields14 = { rec__algorithm__valley_option__value : us_rep6
+}
+
+function us_split_fields_value__projection(a: us_split_fields14) : us_rep6 =
+  (a).rec__algorithm__valley_option__value
+
+type us_split_fields__ref7 = { us_split_fields__content7 : us_split_fields14
+}
+
+function us_split_fields__ref_8__projection(a: us_split_fields__ref7) : us_split_fields14 =
+  (a).us_split_fields__content7
+
+type us_rep7 = { us_split_discrs3 : us_split_discrs2; us_split_fields15 :
+us_split_fields14; attr__constrained1 : bool
+}
+
+function us_rep_10__projection(a: us_rep7) : us_split_discrs2 =
+  (a).us_split_discrs3
+
+function us_rep_11__projection(a: us_rep7) : us_split_fields14 =
+  (a).us_split_fields15
+
+function us_rep_12__projection(a: us_rep7) : bool = (a).attr__constrained1
+
+predicate algorithm__valley_option__value__pred(a: us_rep7) =
+  (to_rep10(((a).us_split_discrs3).rec__algorithm__valley_option__opt) = 1)
+
+logic bool_eq26 : us_rep7, us_rep7 -> bool
+
+axiom bool_eq_def24 :
+  (forall a:us_rep7. forall b:us_rep7 [bool_eq26(a, b)].
+  ((((to_rep10(((a).us_split_discrs3).rec__algorithm__valley_option__opt) = to_rep10(((b).us_split_discrs3).rec__algorithm__valley_option__opt)) and
+  (algorithm__valley_option__value__pred(a) ->
+  (bool_eq24(((a).us_split_fields15).rec__algorithm__valley_option__value,
+  ((b).us_split_fields15).rec__algorithm__valley_option__value) = true))) ->
+  (bool_eq26(a, b) = true)) and
+  ((not ((to_rep10(((a).us_split_discrs3).rec__algorithm__valley_option__opt) = to_rep10(((b).us_split_discrs3).rec__algorithm__valley_option__opt)) and
+  (algorithm__valley_option__value__pred(a) ->
+  (bool_eq24(((a).us_split_fields15).rec__algorithm__valley_option__value,
+  ((b).us_split_fields15).rec__algorithm__valley_option__value) = true)))) ->
+  (bool_eq26(a, b) = false))))
+
+logic user_eq22 : us_rep7, us_rep7 -> bool
+
+logic value__size9 : int
+
+logic object__size9 : us_rep7 -> int
+
+logic value__alignment9 : int
+
+logic object__alignment9 : us_rep7 -> int
+
+axiom value__size_axiom9 : (0 <= value__size9)
+
+axiom object__size_axiom9 :
+  (forall a:option1. forall a1:normalized2pi. forall a2:float1.
+  forall a3:idir_t. forall a4:normalized2pi. forall a5:float1.
+  forall a6:idir_t. forall a7:bool. (0 <= object__size9({ us_split_discrs3 =
+  { rec__algorithm__valley_option__opt = a }; us_split_fields15 = {
+  rec__algorithm__valley_option__value = { us_split_fields13 = {
+  rec__valleys__valley__risinggap = { us_split_fields11 = {
+  rec__gaps__gap__bearing = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = a1 } }; rec__gaps__gap__distance = a2;
+  rec__gaps__gap__idir = a3 } }; rec__valleys__valley__othergap = {
+  us_split_fields11 = { rec__gaps__gap__bearing = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = a4 } }; rec__gaps__gap__distance = a5;
+  rec__gaps__gap__idir = a6 } } } } }; attr__constrained1 = a7 })))
+
+axiom value__alignment_axiom9 : (0 <= value__alignment9)
+
+axiom object__alignment_axiom9 :
+  (forall a:option1. forall a1:normalized2pi. forall a2:float1.
+  forall a3:idir_t. forall a4:normalized2pi. forall a5:float1.
+  forall a6:idir_t. forall a7:bool. (0 <= object__alignment9({
+  us_split_discrs3 = { rec__algorithm__valley_option__opt = a };
+  us_split_fields15 = { rec__algorithm__valley_option__value = {
+  us_split_fields13 = { rec__valleys__valley__risinggap = {
+  us_split_fields11 = { rec__gaps__gap__bearing = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = a1 } }; rec__gaps__gap__distance = a2;
+  rec__gaps__gap__idir = a3 } }; rec__valleys__valley__othergap = {
+  us_split_fields11 = { rec__gaps__gap__bearing = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = a4 } }; rec__gaps__gap__distance = a5;
+  rec__gaps__gap__idir = a6 } } } } }; attr__constrained1 = a7 })))
+
+logic algorithm__valley_option__opt__first__bit : int
+
+logic algorithm__valley_option__opt__last__bit : int
+
+logic algorithm__valley_option__opt__position : int
+
+axiom algorithm__valley_option__opt__first__bit_axiom :
+  (0 <= algorithm__valley_option__opt__first__bit)
+
+axiom algorithm__valley_option__opt__last__bit_axiom :
+  (algorithm__valley_option__opt__first__bit <  algorithm__valley_option__opt__last__bit)
+
+axiom algorithm__valley_option__opt__position_axiom :
+  (0 <= algorithm__valley_option__opt__position)
+
+logic algorithm__valley_option__value__first__bit : int
+
+logic algorithm__valley_option__value__last__bit : int
+
+logic algorithm__valley_option__value__position : int
+
+axiom algorithm__valley_option__value__first__bit_axiom :
+  (0 <= algorithm__valley_option__value__first__bit)
+
+axiom algorithm__valley_option__value__last__bit_axiom :
+  (algorithm__valley_option__value__first__bit <  algorithm__valley_option__value__last__bit)
+
+axiom algorithm__valley_option__value__position_axiom :
+  (0 <= algorithm__valley_option__value__position)
+
+logic dummy57 : option1
+
+logic dummy58 : normalized2pi
+
+logic dummy59 : float1
+
+logic dummy60 : idir_t
+
+logic dummy61 : normalized2pi
+
+logic dummy62 : float1
+
+logic dummy63 : idir_t
+
+logic dummy64 : bool
+
+type valley_option__ref = { valley_option__content : us_rep7
+}
+
+function valley_option__ref___projection(a: valley_option__ref) : us_rep7 =
+  (a).valley_option__content
+
+type count_type
+
+predicate in_range13(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq27 : int, int -> bool
+
+axiom bool_eq_def25 :
+  (forall x:int. forall y:int [bool_eq27(x, y)]. (((x = y) -> (bool_eq27(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq27(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE14 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check14 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE14 : us_image -> int
+
+logic user_eq23 : count_type, count_type -> bool
+
+logic dummy65 : count_type
+
+type count_type__ref = { count_type__content : count_type
+}
+
+function count_type__ref___projection(a: count_type__ref) : count_type =
+  (a).count_type__content
+
+logic to_rep11 : count_type -> int
+
+logic of_rep11 : int -> count_type
+
+axiom inversion_axiom11 :
+  (forall x:count_type [to_rep11(x)]. (of_rep11(to_rep11(x)) = x))
+
+axiom range_axiom11 :
+  (forall x:count_type [to_rep11(x)]. in_range13(to_rep11(x)))
+
+axiom coerce_axiom11 :
+  (forall x:int [to_rep11(of_rep11(x))]. (in_range13(x) ->
+  (to_rep11(of_rep11(x)) = x)))
+
+type us_main_type
+
+logic us_main_eq : us_main_type, us_main_type -> bool
+
+type us_split_discrs4 = { rec__algorithm__gap_vectors__list__capacity :
+count_type
+}
+
+function us_split_discrs_3__projection(a: us_split_discrs4) : count_type =
+  (a).rec__algorithm__gap_vectors__list__capacity
+
+type us_split_discrs__ref2 = { us_split_discrs__content2 : us_split_discrs4
+}
+
+function us_split_discrs__ref_3__projection(a: us_split_discrs__ref2) : us_split_discrs4 =
+  (a).us_split_discrs__content2
+
+type us_split_fields16 = { rec__algorithm__gap_vectors__list : us_main_type
+}
+
+function us_split_fields_List__projection(a: us_split_fields16) : us_main_type =
+  (a).rec__algorithm__gap_vectors__list
+
+type us_split_fields__ref8 = { us_split_fields__content8 : us_split_fields16
+}
+
+function us_split_fields__ref_9__projection(a: us_split_fields__ref8) : us_split_fields16 =
+  (a).us_split_fields__content8
+
+type us_rep8 = { us_split_discrs5 : us_split_discrs4; us_split_fields17 :
+us_split_fields16
+}
+
+function us_rep_13__projection(a: us_rep8) : us_split_discrs4 =
+  (a).us_split_discrs5
+
+function us_rep_14__projection(a: us_rep8) : us_split_fields16 =
+  (a).us_split_fields17
+
+logic bool_eq28 : us_rep8, us_rep8 -> bool
+
+axiom bool_eq_def26 :
+  (forall a:us_rep8. forall b:us_rep8 [bool_eq28(a, b)].
+  ((((to_rep11(((a).us_split_discrs5).rec__algorithm__gap_vectors__list__capacity) = to_rep11(((b).us_split_discrs5).rec__algorithm__gap_vectors__list__capacity)) and
+  (us_main_eq(((a).us_split_fields17).rec__algorithm__gap_vectors__list,
+  ((b).us_split_fields17).rec__algorithm__gap_vectors__list) = true)) ->
+  (bool_eq28(a, b) = true)) and
+  ((not ((to_rep11(((a).us_split_discrs5).rec__algorithm__gap_vectors__list__capacity) = to_rep11(((b).us_split_discrs5).rec__algorithm__gap_vectors__list__capacity)) and
+  (us_main_eq(((a).us_split_fields17).rec__algorithm__gap_vectors__list,
+  ((b).us_split_fields17).rec__algorithm__gap_vectors__list) = true))) ->
+  (bool_eq28(a, b) = false))))
+
+logic user_eq24 : us_rep8, us_rep8 -> bool
+
+logic value__size10 : int
+
+logic object__size10 : us_rep8 -> int
+
+logic value__alignment10 : int
+
+logic object__alignment10 : us_rep8 -> int
+
+axiom value__size_axiom10 : (0 <= value__size10)
+
+axiom object__size_axiom10 :
+  (forall a:count_type. forall a1:us_main_type. (0 <= object__size10({
+  us_split_discrs5 = { rec__algorithm__gap_vectors__list__capacity = a };
+  us_split_fields17 = { rec__algorithm__gap_vectors__list = a1 } })))
+
+axiom value__alignment_axiom10 : (0 <= value__alignment10)
+
+axiom object__alignment_axiom10 :
+  (forall a:count_type. forall a1:us_main_type. (0 <= object__alignment10({
+  us_split_discrs5 = { rec__algorithm__gap_vectors__list__capacity = a };
+  us_split_fields17 = { rec__algorithm__gap_vectors__list = a1 } })))
+
+logic algorithm__gap_vectors__list__capacity__first__bit : int
+
+logic algorithm__gap_vectors__list__capacity__last__bit : int
+
+logic algorithm__gap_vectors__list__capacity__position : int
+
+axiom algorithm__gap_vectors__list__capacity__first__bit_axiom :
+  (0 <= algorithm__gap_vectors__list__capacity__first__bit)
+
+axiom algorithm__gap_vectors__list__capacity__last__bit_axiom :
+  (algorithm__gap_vectors__list__capacity__first__bit <  algorithm__gap_vectors__list__capacity__last__bit)
+
+axiom algorithm__gap_vectors__list__capacity__position_axiom :
+  (0 <= algorithm__gap_vectors__list__capacity__position)
+
+logic dummy66 : count_type
+
+logic dummy67 : us_main_type
+
+type list__ref = { list__content : us_rep8
+}
+
+function list__ref___projection(a: list__ref) : us_rep8 = (a).list__content
+
+predicate in_range14(rec__algorithm__gap_vectors__list__capacity1: int,
+  a: us_rep8) =
+  (rec__algorithm__gap_vectors__list__capacity1 = to_rep11(((a).us_split_discrs5).rec__algorithm__gap_vectors__list__capacity))
+
+logic value__size11 : int
+
+logic object__size11 : us_rep8 -> int
+
+logic value__alignment11 : int
+
+logic object__alignment11 : us_rep8 -> int
+
+axiom value__size_axiom11 : (0 <= value__size11)
+
+axiom object__size_axiom11 :
+  (forall a:count_type. forall a1:us_main_type. (0 <= object__size11({
+  us_split_discrs5 = { rec__algorithm__gap_vectors__list__capacity = a };
+  us_split_fields17 = { rec__algorithm__gap_vectors__list = a1 } })))
+
+axiom value__alignment_axiom11 : (0 <= value__alignment11)
+
+axiom object__alignment_axiom11 :
+  (forall a:count_type. forall a1:us_main_type. (0 <= object__alignment11({
+  us_split_discrs5 = { rec__algorithm__gap_vectors__list__capacity = a };
+  us_split_fields17 = { rec__algorithm__gap_vectors__list = a1 } })))
+
+logic algorithm__gap_vectors__list__capacity__first__bit1 : int
+
+logic algorithm__gap_vectors__list__capacity__last__bit1 : int
+
+logic algorithm__gap_vectors__list__capacity__position1 : int
+
+axiom algorithm__gap_vectors__list__capacity__first__bit_axiom1 :
+  (0 <= algorithm__gap_vectors__list__capacity__first__bit1)
+
+axiom algorithm__gap_vectors__list__capacity__last__bit_axiom1 :
+  (algorithm__gap_vectors__list__capacity__first__bit1 <  algorithm__gap_vectors__list__capacity__last__bit1)
+
+axiom algorithm__gap_vectors__list__capacity__position_axiom1 :
+  (0 <= algorithm__gap_vectors__list__capacity__position1)
+
+logic dummy68 : count_type
+
+logic dummy69 : us_main_type
+
+type list__ref1 = { list__content1 : us_rep8
+}
+
+function list__ref_2__projection(a: list__ref1) : us_rep8 =
+  (a).list__content1
+
+type us_split_fields18 = { rec__algorithm__laser_scan_data__first :
+nonnegative_float; rec__algorithm__laser_scan_data__second : us_rep
+}
+
+function us_split_fields_second__projection(a: us_split_fields18) : us_rep =
+  (a).rec__algorithm__laser_scan_data__second
+
+type us_split_fields__ref9 = { us_split_fields__content9 : us_split_fields18
+}
+
+function us_split_fields__ref_11__projection(a: us_split_fields__ref9) : us_split_fields18 =
+  (a).us_split_fields__content9
+
+type us_rep9 = { us_split_fields19 : us_split_fields18
+}
+
+function us_rep_16__projection(a: us_rep9) : us_split_fields18 =
+  (a).us_split_fields19
+
+logic bool_eq29 : us_rep9, us_rep9 -> bool
+
+axiom bool_eq_def27 :
+  (forall a:us_rep9. forall b:us_rep9 [bool_eq29(a, b)].
+  ((((to_rep4(((a).us_split_fields19).rec__algorithm__laser_scan_data__first) = to_rep4(((b).us_split_fields19).rec__algorithm__laser_scan_data__first)) and
+  (bool_eq13(((a).us_split_fields19).rec__algorithm__laser_scan_data__second,
+  ((b).us_split_fields19).rec__algorithm__laser_scan_data__second) = true)) ->
+  (bool_eq29(a, b) = true)) and
+  ((not ((to_rep4(((a).us_split_fields19).rec__algorithm__laser_scan_data__first) = to_rep4(((b).us_split_fields19).rec__algorithm__laser_scan_data__first)) and
+  (bool_eq13(((a).us_split_fields19).rec__algorithm__laser_scan_data__second,
+  ((b).us_split_fields19).rec__algorithm__laser_scan_data__second) = true))) ->
+  (bool_eq29(a, b) = false))))
+
+logic user_eq25 : us_rep9, us_rep9 -> bool
+
+logic value__size12 : int
+
+logic object__size12 : us_rep9 -> int
+
+logic value__alignment12 : int
+
+logic object__alignment12 : us_rep9 -> int
+
+axiom value__size_axiom12 : (0 <= value__size12)
+
+axiom object__size_axiom12 :
+  (forall a:nonnegative_float. forall a1:normalized2pi.
+  (0 <= object__size12({ us_split_fields19 = {
+  rec__algorithm__laser_scan_data__first = a;
+  rec__algorithm__laser_scan_data__second = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = a1 } } } })))
+
+axiom value__alignment_axiom12 : (0 <= value__alignment12)
+
+axiom object__alignment_axiom12 :
+  (forall a:nonnegative_float. forall a1:normalized2pi.
+  (0 <= object__alignment12({ us_split_fields19 = {
+  rec__algorithm__laser_scan_data__first = a;
+  rec__algorithm__laser_scan_data__second = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = a1 } } } })))
+
+logic algorithm__laser_scan_data__first__first__bit : int
+
+logic algorithm__laser_scan_data__first__last__bit : int
+
+logic algorithm__laser_scan_data__first__position : int
+
+axiom algorithm__laser_scan_data__first__first__bit_axiom :
+  (0 <= algorithm__laser_scan_data__first__first__bit)
+
+axiom algorithm__laser_scan_data__first__last__bit_axiom :
+  (algorithm__laser_scan_data__first__first__bit <  algorithm__laser_scan_data__first__last__bit)
+
+axiom algorithm__laser_scan_data__first__position_axiom :
+  (0 <= algorithm__laser_scan_data__first__position)
+
+logic algorithm__laser_scan_data__second__first__bit : int
+
+logic algorithm__laser_scan_data__second__last__bit : int
+
+logic algorithm__laser_scan_data__second__position : int
+
+axiom algorithm__laser_scan_data__second__first__bit_axiom :
+  (0 <= algorithm__laser_scan_data__second__first__bit)
+
+axiom algorithm__laser_scan_data__second__last__bit_axiom :
+  (algorithm__laser_scan_data__second__first__bit <  algorithm__laser_scan_data__second__last__bit)
+
+axiom algorithm__laser_scan_data__second__position_axiom :
+  (0 <= algorithm__laser_scan_data__second__position)
+
+logic dummy70 : nonnegative_float
+
+logic dummy71 : normalized2pi
+
+type laser_scan_data__ref = { laser_scan_data__content : us_rep9
+}
+
+function laser_scan_data__ref___projection(a: laser_scan_data__ref) : us_rep9 =
+  (a).laser_scan_data__content
+
+type map__ref2 = { map__content2 : (int,us_rep9) farray
+}
+
+logic slide2 : (int,us_rep9) farray, int, int -> (int,us_rep9) farray
+
+axiom slide_eq2 :
+  (forall a:(int,us_rep9) farray.
+  (forall first2:int [slide2(a, first2, first2)]. (slide2(a, first2,
+  first2) = a)))
+
+axiom slide_def2 :
+  (forall a:(int,us_rep9) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide2(a, old_first, new_first)[i])]. ((slide2(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat2 : (int,us_rep9) farray, int, int, (int,us_rep9) farray, int,
+  int -> (int,us_rep9) farray
+
+axiom concat_def2 :
+  (forall a:(int,us_rep9) farray. forall b:(int,us_rep9) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat2(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat2(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat2(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton2 : us_rep9, int -> (int,us_rep9) farray
+
+axiom singleton_def2 :
+  (forall v:nonnegative_float. forall v1:normalized2pi.
+  (forall i:int [(singleton2({ us_split_fields19 = {
+  rec__algorithm__laser_scan_data__first = v;
+  rec__algorithm__laser_scan_data__second = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = v1 } } } }, i)[i])]. ((singleton2({
+  us_split_fields19 = { rec__algorithm__laser_scan_data__first = v;
+  rec__algorithm__laser_scan_data__second = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = v1 } } } }, i)[i]) = {
+  us_split_fields19 = { rec__algorithm__laser_scan_data__first = v;
+  rec__algorithm__laser_scan_data__second = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = v1 } } } })))
+
+logic bool_eq30 : (int,us_rep9) farray, int, int, (int,us_rep9) farray, int,
+  int -> bool
+
+axiom bool_eq_def28 :
+  (forall a:(int,us_rep9) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,us_rep9) farray. forall b__first:int. forall b__last:int
+  [bool_eq30(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
+  (temp___idx_133 <= a__last)) and (bool_eq29((a[temp___idx_133]),
+  (b[((b__first - a__first) + temp___idx_133)])) = true)) or
+  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (bool_eq30(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
+  (temp___idx_133 <= a__last)) -> (bool_eq29((a[temp___idx_133]),
+  (b[((b__first - a__first) + temp___idx_133)])) = true))))) -> (bool_eq30(a,
+  a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev2 :
+  (forall a:(int,us_rep9) farray. forall b:(int,us_rep9) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq30(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
+  (temp___idx_133 <= a__last)) -> (bool_eq29((a[temp___idx_133]),
+  (b[((b__first - a__first) + temp___idx_133)])) = true)))))))
+
+logic dummy72 : (int,us_rep9) farray
+
+logic value__size13 : int
+
+logic object__size13 : (int,us_rep9) farray -> int
+
+logic value__component__size2 : int
+
+logic object__component__size2 : (int,us_rep9) farray -> int
+
+logic value__alignment13 : int
+
+logic object__alignment13 : (int,us_rep9) farray -> int
+
+axiom value__size_axiom13 : (0 <= value__size13)
+
+axiom object__size_axiom13 :
+  (forall a:(int,us_rep9) farray. (0 <= object__size13(a)))
+
+axiom value__component__size_axiom2 : (0 <= value__component__size2)
+
+axiom object__component__size_axiom2 :
+  (forall a:(int,us_rep9) farray. (0 <= object__component__size2(a)))
+
+axiom value__alignment_axiom13 : (0 <= value__alignment13)
+
+axiom object__alignment_axiom13 :
+  (forall a:(int,us_rep9) farray. (0 <= object__alignment13(a)))
+
+logic user_eq26 : (int,us_rep9) farray, (int,us_rep9) farray -> bool
+
+type us_split_fields20 = { rec__algorithm__controller__robot : us_rep4;
+rec__algorithm__controller__laserscan : (int,us_rep9) farray;
+rec__algorithm__controller__gapvec : us_rep8;
+rec__algorithm__controller__obsavoiddelta : float1;
+rec__algorithm__controller__driveangle : us_rep
+}
+
+function us_split_fields_robot__projection(a: us_split_fields20) : us_rep4 =
+  (a).rec__algorithm__controller__robot
+
+function us_split_fields_laserScan__projection(a: us_split_fields20) : (int,us_rep9) farray =
+  (a).rec__algorithm__controller__laserscan
+
+function us_split_fields_gapVec__projection(a: us_split_fields20) : us_rep8 =
+  (a).rec__algorithm__controller__gapvec
+
+function us_split_fields_driveAngle__projection(a: us_split_fields20) : us_rep =
+  (a).rec__algorithm__controller__driveangle
+
+type us_split_fields__ref10 = { us_split_fields__content10 :
+us_split_fields20
+}
+
+function us_split_fields__ref_12__projection(a: us_split_fields__ref10) : us_split_fields20 =
+  (a).us_split_fields__content10
+
+type us_rep10 = { us_split_fields21 : us_split_fields20
+}
+
+function us_rep_17__projection(a: us_rep10) : us_split_fields20 =
+  (a).us_split_fields21
+
+logic bool_eq31 : us_rep10, us_rep10 -> bool
+
+axiom bool_eq_def29 :
+  (forall a:us_rep10. forall b:us_rep10 [bool_eq31(a, b)].
+  (((((((bool_eq21(((a).us_split_fields21).rec__algorithm__controller__robot,
+  ((b).us_split_fields21).rec__algorithm__controller__robot) = true) and
+  (bool_eq30(((a).us_split_fields21).rec__algorithm__controller__laserscan,
+  1, 1000, ((b).us_split_fields21).rec__algorithm__controller__laserscan, 1,
+  1000) = true)) and
+  (bool_eq28(((a).us_split_fields21).rec__algorithm__controller__gapvec,
+  ((b).us_split_fields21).rec__algorithm__controller__gapvec) = true)) and
+  (to_rep2(((a).us_split_fields21).rec__algorithm__controller__obsavoiddelta) = to_rep2(((b).us_split_fields21).rec__algorithm__controller__obsavoiddelta))) and
+  (bool_eq13(((a).us_split_fields21).rec__algorithm__controller__driveangle,
+  ((b).us_split_fields21).rec__algorithm__controller__driveangle) = true)) ->
+  (bool_eq31(a, b) = true)) and
+  ((not (((((bool_eq21(((a).us_split_fields21).rec__algorithm__controller__robot,
+  ((b).us_split_fields21).rec__algorithm__controller__robot) = true) and
+  (bool_eq30(((a).us_split_fields21).rec__algorithm__controller__laserscan,
+  1, 1000, ((b).us_split_fields21).rec__algorithm__controller__laserscan, 1,
+  1000) = true)) and
+  (bool_eq28(((a).us_split_fields21).rec__algorithm__controller__gapvec,
+  ((b).us_split_fields21).rec__algorithm__controller__gapvec) = true)) and
+  (to_rep2(((a).us_split_fields21).rec__algorithm__controller__obsavoiddelta) = to_rep2(((b).us_split_fields21).rec__algorithm__controller__obsavoiddelta))) and
+  (bool_eq13(((a).us_split_fields21).rec__algorithm__controller__driveangle,
+  ((b).us_split_fields21).rec__algorithm__controller__driveangle) = true))) ->
+  (bool_eq31(a, b) = false))))
+
+logic user_eq27 : us_rep10, us_rep10 -> bool
+
+logic value__size14 : int
+
+logic object__size14 : us_rep10 -> int
+
+logic value__alignment14 : int
+
+logic object__alignment14 : us_rep10 -> int
+
+axiom value__size_axiom14 : (0 <= value__size14)
+
+axiom object__size_axiom14 : (forall a:us_rep10. (0 <= object__size14(a)))
+
+axiom value__alignment_axiom14 : (0 <= value__alignment14)
+
+axiom object__alignment_axiom14 :
+  (forall a:us_rep10. (0 <= object__alignment14(a)))
+
+logic algorithm__controller__robot__first__bit : int
+
+logic algorithm__controller__robot__last__bit : int
+
+logic algorithm__controller__robot__position : int
+
+axiom algorithm__controller__robot__first__bit_axiom :
+  (0 <= algorithm__controller__robot__first__bit)
+
+axiom algorithm__controller__robot__last__bit_axiom :
+  (algorithm__controller__robot__first__bit <  algorithm__controller__robot__last__bit)
+
+axiom algorithm__controller__robot__position_axiom :
+  (0 <= algorithm__controller__robot__position)
+
+logic algorithm__controller__laserscan__first__bit : int
+
+logic algorithm__controller__laserscan__last__bit : int
+
+logic algorithm__controller__laserscan__position : int
+
+axiom algorithm__controller__laserscan__first__bit_axiom :
+  (0 <= algorithm__controller__laserscan__first__bit)
+
+axiom algorithm__controller__laserscan__last__bit_axiom :
+  (algorithm__controller__laserscan__first__bit <  algorithm__controller__laserscan__last__bit)
+
+axiom algorithm__controller__laserscan__position_axiom :
+  (0 <= algorithm__controller__laserscan__position)
+
+logic algorithm__controller__gapvec__first__bit : int
+
+logic algorithm__controller__gapvec__last__bit : int
+
+logic algorithm__controller__gapvec__position : int
+
+axiom algorithm__controller__gapvec__first__bit_axiom :
+  (0 <= algorithm__controller__gapvec__first__bit)
+
+axiom algorithm__controller__gapvec__last__bit_axiom :
+  (algorithm__controller__gapvec__first__bit <  algorithm__controller__gapvec__last__bit)
+
+axiom algorithm__controller__gapvec__position_axiom :
+  (0 <= algorithm__controller__gapvec__position)
+
+logic algorithm__controller__obsavoiddelta__first__bit : int
+
+logic algorithm__controller__obsavoiddelta__last__bit : int
+
+logic algorithm__controller__obsavoiddelta__position : int
+
+axiom algorithm__controller__obsavoiddelta__first__bit_axiom :
+  (0 <= algorithm__controller__obsavoiddelta__first__bit)
+
+axiom algorithm__controller__obsavoiddelta__last__bit_axiom :
+  (algorithm__controller__obsavoiddelta__first__bit <  algorithm__controller__obsavoiddelta__last__bit)
+
+axiom algorithm__controller__obsavoiddelta__position_axiom :
+  (0 <= algorithm__controller__obsavoiddelta__position)
+
+logic algorithm__controller__driveangle__first__bit : int
+
+logic algorithm__controller__driveangle__last__bit : int
+
+logic algorithm__controller__driveangle__position : int
+
+axiom algorithm__controller__driveangle__first__bit_axiom :
+  (0 <= algorithm__controller__driveangle__first__bit)
+
+axiom algorithm__controller__driveangle__last__bit_axiom :
+  (algorithm__controller__driveangle__first__bit <  algorithm__controller__driveangle__last__bit)
+
+axiom algorithm__controller__driveangle__position_axiom :
+  (0 <= algorithm__controller__driveangle__position)
+
+logic dummy73 : positive_float
+
+logic dummy74 : positive_float
+
+logic dummy75 : positive_float
+
+logic dummy76 : positive_float
+
+logic dummy77 : positive_float
+
+logic dummy78 : nonnegative_float
+
+logic dummy79 : nonnegative_float
+
+logic dummy80 : float1
+
+logic dummy81 : float1
+
+logic dummy82 : float1
+
+logic dummy83 : natural
+
+logic dummy84 : positive_float
+
+logic dummy85 : positive_float
+
+logic dummy86 : (int,nonnegative_float) farray
+
+logic dummy87 : unbounded_float
+
+logic dummy88 : unbounded_float
+
+logic dummy89 : unbounded_float
+
+logic dummy90 : option
+
+logic dummy91 : float1
+
+logic dummy92 : float1
+
+logic dummy93 : bool
+
+logic dummy94 : bool
+
+logic dummy95 : (int,us_rep9) farray
+
+logic dummy96 : count_type
+
+logic dummy97 : us_main_type
+
+logic dummy98 : float1
+
+logic dummy99 : normalized2pi
+
+type controller__ref = { controller__content : us_rep10
+}
+
+function controller__ref___projection(a: controller__ref) : us_rep10 =
+  (a).controller__content
+
+logic null_angle : normalized2pi
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic is_empty : us_rep8 -> bool
+
+logic is_empty__function_guard : bool, us_rep8 -> prop
+
+predicate in_range15(rec__robot_iface__speed_option__opt1: int, a: us_rep3) =
+  (rec__robot_iface__speed_option__opt1 = to_rep8(((a).us_split_discrs1).rec__robot_iface__speed_option__opt))
+
+logic value__size15 : int
+
+logic object__size15 : us_rep3 -> int
+
+logic value__alignment15 : int
+
+logic object__alignment15 : us_rep3 -> int
+
+axiom value__size_axiom15 : (0 <= value__size15)
+
+axiom object__size_axiom15 :
+  (forall a:option. forall a1:float1. forall a2:float1. forall a3:bool.
+  (0 <= object__size15({ us_split_discrs1 = {
+  rec__robot_iface__speed_option__opt = a }; us_split_fields7 = {
+  rec__robot_iface__speed_option__modulus = a1;
+  rec__robot_iface__speed_option__angle = a2 }; attr__constrained = a3 })))
+
+axiom value__alignment_axiom15 : (0 <= value__alignment15)
+
+axiom object__alignment_axiom15 :
+  (forall a:option. forall a1:float1. forall a2:float1. forall a3:bool.
+  (0 <= object__alignment15({ us_split_discrs1 = {
+  rec__robot_iface__speed_option__opt = a }; us_split_fields7 = {
+  rec__robot_iface__speed_option__modulus = a1;
+  rec__robot_iface__speed_option__angle = a2 }; attr__constrained = a3 })))
+
+logic robot_iface__speed_option__opt__first__bit1 : int
+
+logic robot_iface__speed_option__opt__last__bit1 : int
+
+logic robot_iface__speed_option__opt__position1 : int
+
+axiom robot_iface__speed_option__opt__first__bit_axiom1 :
+  (0 <= robot_iface__speed_option__opt__first__bit1)
+
+axiom robot_iface__speed_option__opt__last__bit_axiom1 :
+  (robot_iface__speed_option__opt__first__bit1 <  robot_iface__speed_option__opt__last__bit1)
+
+axiom robot_iface__speed_option__opt__position_axiom1 :
+  (0 <= robot_iface__speed_option__opt__position1)
+
+logic robot_iface__speed_option__modulus__first__bit1 : int
+
+logic robot_iface__speed_option__modulus__last__bit1 : int
+
+logic robot_iface__speed_option__modulus__position1 : int
+
+axiom robot_iface__speed_option__modulus__first__bit_axiom1 :
+  (0 <= robot_iface__speed_option__modulus__first__bit1)
+
+axiom robot_iface__speed_option__modulus__last__bit_axiom1 :
+  (robot_iface__speed_option__modulus__first__bit1 <  robot_iface__speed_option__modulus__last__bit1)
+
+axiom robot_iface__speed_option__modulus__position_axiom1 :
+  (0 <= robot_iface__speed_option__modulus__position1)
+
+logic robot_iface__speed_option__angle__first__bit1 : int
+
+logic robot_iface__speed_option__angle__last__bit1 : int
+
+logic robot_iface__speed_option__angle__position1 : int
+
+axiom robot_iface__speed_option__angle__first__bit_axiom1 :
+  (0 <= robot_iface__speed_option__angle__first__bit1)
+
+axiom robot_iface__speed_option__angle__last__bit_axiom1 :
+  (robot_iface__speed_option__angle__first__bit1 <  robot_iface__speed_option__angle__last__bit1)
+
+axiom robot_iface__speed_option__angle__position_axiom1 :
+  (0 <= robot_iface__speed_option__angle__position1)
+
+logic dummy100 : option
+
+logic dummy101 : float1
+
+logic dummy102 : float1
+
+logic dummy103 : bool
+
+type t252s__ref = { t252s__content : us_rep3
+}
+
+function t252s__ref___projection(a: t252s__ref) : us_rep3 =
+  (a).t252s__content
+
+logic temp___614 : t -> (int,nonnegative_float) farray
+
+axiom def_axiom :
+  (forall temp___616:t.
+  (forall temp___617:int.
+  ((temp___614(temp___616)[temp___617]) = of_rep4(temp___616))))
+
+logic temp___618 : us_rep9 -> (int,us_rep9) farray
+
+axiom def_axiom1 :
+  (forall temp___620:nonnegative_float. forall temp___6201:normalized2pi.
+  (forall temp___621:int. ((temp___618({ us_split_fields19 = {
+  rec__algorithm__laser_scan_data__first = temp___620;
+  rec__algorithm__laser_scan_data__second = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = temp___6201 } } } })[temp___621]) = {
+  us_split_fields19 = { rec__algorithm__laser_scan_data__first = temp___620;
+  rec__algorithm__laser_scan_data__second = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = temp___6201 } } } })))
+
+logic isfilterclear : (int,us_rep9) farray, us_rep, t, t, bool -> bool
+
+logic isfilterclear__function_guard : bool, (int,us_rep9) farray, us_rep, t,
+  t, bool -> prop
+
+logic findbestvalley : us_rep10, us_rep1 -> us_rep7
+
+logic findbestvalley__function_guard : us_rep7, us_rep10, us_rep1 -> prop
+
+logic obsavoiddelta : us_rep10, t -> t
+
+logic obsavoiddelta__function_guard : t, us_rep10, t -> prop
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic limit : t, t, t -> t
+
+logic limit__function_guard : t, t, t, t -> prop
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
+logic attr__ATTRIBUTE_ADDRESS6 : int
+
+logic attr__ATTRIBUTE_ADDRESS7 : int
+
+logic attr__ATTRIBUTE_ADDRESS8 : int
+
+logic attr__ATTRIBUTE_ADDRESS9 : int
+
+logic attr__ATTRIBUTE_ADDRESS10 : int
+
+logic attr__ATTRIBUTE_ADDRESS11 : int
+
+logic attr__ATTRIBUTE_ADDRESS12 : int
+
+logic attr__ATTRIBUTE_ADDRESS13 : int
+
+logic pbestvalley__attr__constrained : bool
+
+logic attr__ATTRIBUTE_ADDRESS14 : int
+
+logic attr__ATTRIBUTE_ADDRESS15 : int
+
+logic attr__ATTRIBUTE_ADDRESS16 : int
+
+predicate dynamic_property1(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq32 : int, int -> bool
+
+axiom bool_eq_def30 :
+  (forall x:int. forall y:int [bool_eq32(x, y)]. (((x = y) -> (bool_eq32(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq32(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE15 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check15 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE15 : us_image -> int
+
+logic user_eq28 : integer, integer -> bool
+
+logic dummy104 : integer
+
+type t75b__ref = { t75b__content : integer
+}
+
+function t75b__ref___projection(a: t75b__ref) : integer = (a).t75b__content
+
+logic attr__ATTRIBUTE_ADDRESS17 : int
+
+logic safetydeltaangle : normalized2pi
+
+logic attr__ATTRIBUTE_ADDRESS18 : int
+
+logic temp___String_Literal_910 : unit -> (int,character) farray
+
+axiom temp___String_Literal_910__def_axiom :
+  (((((to_rep((temp___String_Literal_910(void)[1])) = 112) and
+  (to_rep((temp___String_Literal_910(void)[2])) = 111)) and
+  (to_rep((temp___String_Literal_910(void)[3])) = 115)) and
+  (to_rep((temp___String_Literal_910(void)[4])) = 101)) and
+  (to_rep((temp___String_Literal_910(void)[5])) = 32))
+
+logic temp___String_Literal_912 : unit -> (int,character) farray
+
+axiom temp___String_Literal_912__def_axiom :
+  (((((to_rep((temp___String_Literal_912(void)[1])) = 103) and
+  (to_rep((temp___String_Literal_912(void)[2])) = 111)) and
+  (to_rep((temp___String_Literal_912(void)[3])) = 97)) and
+  (to_rep((temp___String_Literal_912(void)[4])) = 108)) and
+  (to_rep((temp___String_Literal_912(void)[5])) = 32))
+
+logic temp___String_Literal_935 : unit -> (int,character) farray
+
+axiom temp___String_Literal_935__def_axiom :
+  ((((((((((((((((to_rep((temp___String_Literal_935(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_935(void)[2])) = 32)) and
+  (to_rep((temp___String_Literal_935(void)[3])) = 82)) and
+  (to_rep((temp___String_Literal_935(void)[4])) = 101)) and
+  (to_rep((temp___String_Literal_935(void)[5])) = 108)) and
+  (to_rep((temp___String_Literal_935(void)[6])) = 32)) and
+  (to_rep((temp___String_Literal_935(void)[7])) = 103)) and
+  (to_rep((temp___String_Literal_935(void)[8])) = 111)) and
+  (to_rep((temp___String_Literal_935(void)[9])) = 97)) and
+  (to_rep((temp___String_Literal_935(void)[10])) = 108)) and
+  (to_rep((temp___String_Literal_935(void)[11])) = 32)) and
+  (to_rep((temp___String_Literal_935(void)[12])) = 112)) and
+  (to_rep((temp___String_Literal_935(void)[13])) = 111)) and
+  (to_rep((temp___String_Literal_935(void)[14])) = 115)) and
+  (to_rep((temp___String_Literal_935(void)[15])) = 101)) and
+  (to_rep((temp___String_Literal_935(void)[16])) = 32))
+
+logic temp___String_Literal_938 : unit -> (int,character) farray
+
+axiom temp___String_Literal_938__def_axiom :
+  ((((((((((((((((((((((to_rep((temp___String_Literal_938(void)[1])) = 82) and
+  (to_rep((temp___String_Literal_938(void)[2])) = 101)) and
+  (to_rep((temp___String_Literal_938(void)[3])) = 97)) and
+  (to_rep((temp___String_Literal_938(void)[4])) = 99)) and
+  (to_rep((temp___String_Literal_938(void)[5])) = 104)) and
+  (to_rep((temp___String_Literal_938(void)[6])) = 101)) and
+  (to_rep((temp___String_Literal_938(void)[7])) = 100)) and
+  (to_rep((temp___String_Literal_938(void)[8])) = 32)) and
+  (to_rep((temp___String_Literal_938(void)[9])) = 103)) and
+  (to_rep((temp___String_Literal_938(void)[10])) = 111)) and
+  (to_rep((temp___String_Literal_938(void)[11])) = 97)) and
+  (to_rep((temp___String_Literal_938(void)[12])) = 108)) and
+  (to_rep((temp___String_Literal_938(void)[13])) = 32)) and
+  (to_rep((temp___String_Literal_938(void)[14])) = 108)) and
+  (to_rep((temp___String_Literal_938(void)[15])) = 111)) and
+  (to_rep((temp___String_Literal_938(void)[16])) = 99)) and
+  (to_rep((temp___String_Literal_938(void)[17])) = 97)) and
+  (to_rep((temp___String_Literal_938(void)[18])) = 116)) and
+  (to_rep((temp___String_Literal_938(void)[19])) = 105)) and
+  (to_rep((temp___String_Literal_938(void)[20])) = 111)) and
+  (to_rep((temp___String_Literal_938(void)[21])) = 110)) and
+  (to_rep((temp___String_Literal_938(void)[22])) = 32))
+
+logic temp___String_Literal_944 : unit -> (int,character) farray
+
+axiom temp___String_Literal_944__def_axiom :
+  (((((((((((((((to_rep((temp___String_Literal_944(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_944(void)[2])) = 32)) and
+  (to_rep((temp___String_Literal_944(void)[3])) = 68)) and
+  (to_rep((temp___String_Literal_944(void)[4])) = 105)) and
+  (to_rep((temp___String_Literal_944(void)[5])) = 115)) and
+  (to_rep((temp___String_Literal_944(void)[6])) = 116)) and
+  (to_rep((temp___String_Literal_944(void)[7])) = 32)) and
+  (to_rep((temp___String_Literal_944(void)[8])) = 116)) and
+  (to_rep((temp___String_Literal_944(void)[9])) = 111)) and
+  (to_rep((temp___String_Literal_944(void)[10])) = 32)) and
+  (to_rep((temp___String_Literal_944(void)[11])) = 103)) and
+  (to_rep((temp___String_Literal_944(void)[12])) = 111)) and
+  (to_rep((temp___String_Literal_944(void)[13])) = 97)) and
+  (to_rep((temp___String_Literal_944(void)[14])) = 108)) and
+  (to_rep((temp___String_Literal_944(void)[15])) = 32))
+
+logic temp___String_Literal_946 : unit -> (int,character) farray
+
+axiom temp___String_Literal_946__def_axiom :
+  (((((((((((((((((((((((((((((((((((((((((((((((to_rep((temp___String_Literal_946(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_946(void)[2])) = 79)) and
+  (to_rep((temp___String_Literal_946(void)[3])) = 98)) and
+  (to_rep((temp___String_Literal_946(void)[4])) = 115)) and
+  (to_rep((temp___String_Literal_946(void)[5])) = 116)) and
+  (to_rep((temp___String_Literal_946(void)[6])) = 97)) and
+  (to_rep((temp___String_Literal_946(void)[7])) = 99)) and
+  (to_rep((temp___String_Literal_946(void)[8])) = 108)) and
+  (to_rep((temp___String_Literal_946(void)[9])) = 101)) and
+  (to_rep((temp___String_Literal_946(void)[10])) = 32)) and
+  (to_rep((temp___String_Literal_946(void)[11])) = 105)) and
+  (to_rep((temp___String_Literal_946(void)[12])) = 110)) and
+  (to_rep((temp___String_Literal_946(void)[13])) = 115)) and
+  (to_rep((temp___String_Literal_946(void)[14])) = 105)) and
+  (to_rep((temp___String_Literal_946(void)[15])) = 100)) and
+  (to_rep((temp___String_Literal_946(void)[16])) = 101)) and
+  (to_rep((temp___String_Literal_946(void)[17])) = 32)) and
+  (to_rep((temp___String_Literal_946(void)[18])) = 111)) and
+  (to_rep((temp___String_Literal_946(void)[19])) = 102)) and
+  (to_rep((temp___String_Literal_946(void)[20])) = 32)) and
+  (to_rep((temp___String_Literal_946(void)[21])) = 114)) and
+  (to_rep((temp___String_Literal_946(void)[22])) = 111)) and
+  (to_rep((temp___String_Literal_946(void)[23])) = 98)) and
+  (to_rep((temp___String_Literal_946(void)[24])) = 111)) and
+  (to_rep((temp___String_Literal_946(void)[25])) = 116)) and
+  (to_rep((temp___String_Literal_946(void)[26])) = 39)) and
+  (to_rep((temp___String_Literal_946(void)[27])) = 115)) and
+  (to_rep((temp___String_Literal_946(void)[28])) = 32)) and
+  (to_rep((temp___String_Literal_946(void)[29])) = 98)) and
+  (to_rep((temp___String_Literal_946(void)[30])) = 111)) and
+  (to_rep((temp___String_Literal_946(void)[31])) = 117)) and
+  (to_rep((temp___String_Literal_946(void)[32])) = 110)) and
+  (to_rep((temp___String_Literal_946(void)[33])) = 100)) and
+  (to_rep((temp___String_Literal_946(void)[34])) = 97)) and
+  (to_rep((temp___String_Literal_946(void)[35])) = 114)) and
+  (to_rep((temp___String_Literal_946(void)[36])) = 121)) and
+  (to_rep((temp___String_Literal_946(void)[37])) = 33)) and
+  (to_rep((temp___String_Literal_946(void)[38])) = 32)) and
+  (to_rep((temp___String_Literal_946(void)[39])) = 32)) and
+  (to_rep((temp___String_Literal_946(void)[40])) = 83)) and
+  (to_rep((temp___String_Literal_946(void)[41])) = 116)) and
+  (to_rep((temp___String_Literal_946(void)[42])) = 111)) and
+  (to_rep((temp___String_Literal_946(void)[43])) = 112)) and
+  (to_rep((temp___String_Literal_946(void)[44])) = 112)) and
+  (to_rep((temp___String_Literal_946(void)[45])) = 105)) and
+  (to_rep((temp___String_Literal_946(void)[46])) = 110)) and
+  (to_rep((temp___String_Literal_946(void)[47])) = 103))
+
+logic temp___String_Literal_963 : unit -> (int,character) farray
+
+axiom temp___String_Literal_963__def_axiom :
+  ((((((((((((((((((((((((((((((to_rep((temp___String_Literal_963(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_963(void)[2])) = 32)) and
+  (to_rep((temp___String_Literal_963(void)[3])) = 32)) and
+  (to_rep((temp___String_Literal_963(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_963(void)[5])) = 66)) and
+  (to_rep((temp___String_Literal_963(void)[6])) = 101)) and
+  (to_rep((temp___String_Literal_963(void)[7])) = 115)) and
+  (to_rep((temp___String_Literal_963(void)[8])) = 116)) and
+  (to_rep((temp___String_Literal_963(void)[9])) = 32)) and
+  (to_rep((temp___String_Literal_963(void)[10])) = 118)) and
+  (to_rep((temp___String_Literal_963(void)[11])) = 97)) and
+  (to_rep((temp___String_Literal_963(void)[12])) = 108)) and
+  (to_rep((temp___String_Literal_963(void)[13])) = 108)) and
+  (to_rep((temp___String_Literal_963(void)[14])) = 101)) and
+  (to_rep((temp___String_Literal_963(void)[15])) = 121)) and
+  (to_rep((temp___String_Literal_963(void)[16])) = 32)) and
+  (to_rep((temp___String_Literal_963(void)[17])) = 104)) and
+  (to_rep((temp___String_Literal_963(void)[18])) = 97)) and
+  (to_rep((temp___String_Literal_963(void)[19])) = 115)) and
+  (to_rep((temp___String_Literal_963(void)[20])) = 32)) and
+  (to_rep((temp___String_Literal_963(void)[21])) = 114)) and
+  (to_rep((temp___String_Literal_963(void)[22])) = 105)) and
+  (to_rep((temp___String_Literal_963(void)[23])) = 115)) and
+  (to_rep((temp___String_Literal_963(void)[24])) = 105)) and
+  (to_rep((temp___String_Literal_963(void)[25])) = 110)) and
+  (to_rep((temp___String_Literal_963(void)[26])) = 103)) and
+  (to_rep((temp___String_Literal_963(void)[27])) = 32)) and
+  (to_rep((temp___String_Literal_963(void)[28])) = 97)) and
+  (to_rep((temp___String_Literal_963(void)[29])) = 116)) and
+  (to_rep((temp___String_Literal_963(void)[30])) = 32))
+
+logic temp___String_Literal_964 : unit -> (int,character) farray
+
+axiom temp___String_Literal_964__def_axiom :
+  (((((((((((((((((((((to_rep((temp___String_Literal_964(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_964(void)[2])) = 32)) and
+  (to_rep((temp___String_Literal_964(void)[3])) = 32)) and
+  (to_rep((temp___String_Literal_964(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_964(void)[5])) = 32)) and
+  (to_rep((temp___String_Literal_964(void)[6])) = 32)) and
+  (to_rep((temp___String_Literal_964(void)[7])) = 115)) and
+  (to_rep((temp___String_Literal_964(void)[8])) = 97)) and
+  (to_rep((temp___String_Literal_964(void)[9])) = 102)) and
+  (to_rep((temp___String_Literal_964(void)[10])) = 101)) and
+  (to_rep((temp___String_Literal_964(void)[11])) = 116)) and
+  (to_rep((temp___String_Literal_964(void)[12])) = 121)) and
+  (to_rep((temp___String_Literal_964(void)[13])) = 32)) and
+  (to_rep((temp___String_Literal_964(void)[14])) = 100)) and
+  (to_rep((temp___String_Literal_964(void)[15])) = 101)) and
+  (to_rep((temp___String_Literal_964(void)[16])) = 108)) and
+  (to_rep((temp___String_Literal_964(void)[17])) = 116)) and
+  (to_rep((temp___String_Literal_964(void)[18])) = 97)) and
+  (to_rep((temp___String_Literal_964(void)[19])) = 32)) and
+  (to_rep((temp___String_Literal_964(void)[20])) = 61)) and
+  (to_rep((temp___String_Literal_964(void)[21])) = 32))
+
+logic temp___String_Literal_972 : unit -> (int,character) farray
+
+axiom temp___String_Literal_972__def_axiom :
+  ((((((((((((((((((((((((((((((((((to_rep((temp___String_Literal_972(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_972(void)[2])) = 32)) and
+  (to_rep((temp___String_Literal_972(void)[3])) = 78)) and
+  (to_rep((temp___String_Literal_972(void)[4])) = 111)) and
+  (to_rep((temp___String_Literal_972(void)[5])) = 32)) and
+  (to_rep((temp___String_Literal_972(void)[6])) = 119)) and
+  (to_rep((temp___String_Literal_972(void)[7])) = 104)) and
+  (to_rep((temp___String_Literal_972(void)[8])) = 101)) and
+  (to_rep((temp___String_Literal_972(void)[9])) = 114)) and
+  (to_rep((temp___String_Literal_972(void)[10])) = 101)) and
+  (to_rep((temp___String_Literal_972(void)[11])) = 32)) and
+  (to_rep((temp___String_Literal_972(void)[12])) = 116)) and
+  (to_rep((temp___String_Literal_972(void)[13])) = 111)) and
+  (to_rep((temp___String_Literal_972(void)[14])) = 32)) and
+  (to_rep((temp___String_Literal_972(void)[15])) = 103)) and
+  (to_rep((temp___String_Literal_972(void)[16])) = 111)) and
+  (to_rep((temp___String_Literal_972(void)[17])) = 44)) and
+  (to_rep((temp___String_Literal_972(void)[18])) = 32)) and
+  (to_rep((temp___String_Literal_972(void)[19])) = 116)) and
+  (to_rep((temp___String_Literal_972(void)[20])) = 117)) and
+  (to_rep((temp___String_Literal_972(void)[21])) = 114)) and
+  (to_rep((temp___String_Literal_972(void)[22])) = 110)) and
+  (to_rep((temp___String_Literal_972(void)[23])) = 105)) and
+  (to_rep((temp___String_Literal_972(void)[24])) = 110)) and
+  (to_rep((temp___String_Literal_972(void)[25])) = 103)) and
+  (to_rep((temp___String_Literal_972(void)[26])) = 32)) and
+  (to_rep((temp___String_Literal_972(void)[27])) = 105)) and
+  (to_rep((temp___String_Literal_972(void)[28])) = 110)) and
+  (to_rep((temp___String_Literal_972(void)[29])) = 32)) and
+  (to_rep((temp___String_Literal_972(void)[30])) = 112)) and
+  (to_rep((temp___String_Literal_972(void)[31])) = 108)) and
+  (to_rep((temp___String_Literal_972(void)[32])) = 97)) and
+  (to_rep((temp___String_Literal_972(void)[33])) = 99)) and
+  (to_rep((temp___String_Literal_972(void)[34])) = 101))
+
+logic temp___String_Literal_977 : unit -> (int,character) farray
+
+axiom temp___String_Literal_977__def_axiom :
+  (((((((((((((((((((((((((((((((((((((((((((to_rep((temp___String_Literal_977(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_977(void)[2])) = 32)) and
+  (to_rep((temp___String_Literal_977(void)[3])) = 72)) and
+  (to_rep((temp___String_Literal_977(void)[4])) = 101)) and
+  (to_rep((temp___String_Literal_977(void)[5])) = 97)) and
+  (to_rep((temp___String_Literal_977(void)[6])) = 100)) and
+  (to_rep((temp___String_Literal_977(void)[7])) = 105)) and
+  (to_rep((temp___String_Literal_977(void)[8])) = 110)) and
+  (to_rep((temp___String_Literal_977(void)[9])) = 103)) and
+  (to_rep((temp___String_Literal_977(void)[10])) = 32)) and
+  (to_rep((temp___String_Literal_977(void)[11])) = 115)) and
+  (to_rep((temp___String_Literal_977(void)[12])) = 116)) and
+  (to_rep((temp___String_Literal_977(void)[13])) = 114)) and
+  (to_rep((temp___String_Literal_977(void)[14])) = 97)) and
+  (to_rep((temp___String_Literal_977(void)[15])) = 105)) and
+  (to_rep((temp___String_Literal_977(void)[16])) = 103)) and
+  (to_rep((temp___String_Literal_977(void)[17])) = 104)) and
+  (to_rep((temp___String_Literal_977(void)[18])) = 116)) and
+  (to_rep((temp___String_Literal_977(void)[19])) = 32)) and
+  (to_rep((temp___String_Literal_977(void)[20])) = 102)) and
+  (to_rep((temp___String_Literal_977(void)[21])) = 111)) and
+  (to_rep((temp___String_Literal_977(void)[22])) = 114)) and
+  (to_rep((temp___String_Literal_977(void)[23])) = 32)) and
+  (to_rep((temp___String_Literal_977(void)[24])) = 103)) and
+  (to_rep((temp___String_Literal_977(void)[25])) = 111)) and
+  (to_rep((temp___String_Literal_977(void)[26])) = 97)) and
+  (to_rep((temp___String_Literal_977(void)[27])) = 108)) and
+  (to_rep((temp___String_Literal_977(void)[28])) = 44)) and
+  (to_rep((temp___String_Literal_977(void)[29])) = 32)) and
+  (to_rep((temp___String_Literal_977(void)[30])) = 112)) and
+  (to_rep((temp___String_Literal_977(void)[31])) = 97)) and
+  (to_rep((temp___String_Literal_977(void)[32])) = 116)) and
+  (to_rep((temp___String_Literal_977(void)[33])) = 104)) and
+  (to_rep((temp___String_Literal_977(void)[34])) = 32)) and
+  (to_rep((temp___String_Literal_977(void)[35])) = 105)) and
+  (to_rep((temp___String_Literal_977(void)[36])) = 115)) and
+  (to_rep((temp___String_Literal_977(void)[37])) = 32)) and
+  (to_rep((temp___String_Literal_977(void)[38])) = 99)) and
+  (to_rep((temp___String_Literal_977(void)[39])) = 108)) and
+  (to_rep((temp___String_Literal_977(void)[40])) = 101)) and
+  (to_rep((temp___String_Literal_977(void)[41])) = 97)) and
+  (to_rep((temp___String_Literal_977(void)[42])) = 114)) and
+  (to_rep((temp___String_Literal_977(void)[43])) = 33))
+
+logic temp___String_Literal_978 : unit -> (int,character) farray
+
+axiom temp___String_Literal_978__def_axiom :
+  ((((((((((((((((to_rep((temp___String_Literal_978(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_978(void)[2])) = 32)) and
+  (to_rep((temp___String_Literal_978(void)[3])) = 32)) and
+  (to_rep((temp___String_Literal_978(void)[4])) = 68)) and
+  (to_rep((temp___String_Literal_978(void)[5])) = 105)) and
+  (to_rep((temp___String_Literal_978(void)[6])) = 115)) and
+  (to_rep((temp___String_Literal_978(void)[7])) = 116)) and
+  (to_rep((temp___String_Literal_978(void)[8])) = 32)) and
+  (to_rep((temp___String_Literal_978(void)[9])) = 116)) and
+  (to_rep((temp___String_Literal_978(void)[10])) = 111)) and
+  (to_rep((temp___String_Literal_978(void)[11])) = 32)) and
+  (to_rep((temp___String_Literal_978(void)[12])) = 103)) and
+  (to_rep((temp___String_Literal_978(void)[13])) = 111)) and
+  (to_rep((temp___String_Literal_978(void)[14])) = 97)) and
+  (to_rep((temp___String_Literal_978(void)[15])) = 108)) and
+  (to_rep((temp___String_Literal_978(void)[16])) = 32))
+
+logic temp___String_Literal_979 : unit -> (int,character) farray
+
+axiom temp___String_Literal_979__def_axiom :
+  (((((((to_rep((temp___String_Literal_979(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_979(void)[2])) = 97)) and
+  (to_rep((temp___String_Literal_979(void)[3])) = 110)) and
+  (to_rep((temp___String_Literal_979(void)[4])) = 103)) and
+  (to_rep((temp___String_Literal_979(void)[5])) = 108)) and
+  (to_rep((temp___String_Literal_979(void)[6])) = 101)) and
+  (to_rep((temp___String_Literal_979(void)[7])) = 32))
+
+logic temp___String_Literal_984 : unit -> (int,character) farray
+
+axiom temp___String_Literal_984__def_axiom :
+  ((((((((((((((((((((((to_rep((temp___String_Literal_984(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_984(void)[2])) = 83)) and
+  (to_rep((temp___String_Literal_984(void)[3])) = 116)) and
+  (to_rep((temp___String_Literal_984(void)[4])) = 97)) and
+  (to_rep((temp___String_Literal_984(void)[5])) = 114)) and
+  (to_rep((temp___String_Literal_984(void)[6])) = 116)) and
+  (to_rep((temp___String_Literal_984(void)[7])) = 105)) and
+  (to_rep((temp___String_Literal_984(void)[8])) = 110)) and
+  (to_rep((temp___String_Literal_984(void)[9])) = 103)) and
+  (to_rep((temp___String_Literal_984(void)[10])) = 32)) and
+  (to_rep((temp___String_Literal_984(void)[11])) = 100)) and
+  (to_rep((temp___String_Literal_984(void)[12])) = 114)) and
+  (to_rep((temp___String_Literal_984(void)[13])) = 105)) and
+  (to_rep((temp___String_Literal_984(void)[14])) = 118)) and
+  (to_rep((temp___String_Literal_984(void)[15])) = 101)) and
+  (to_rep((temp___String_Literal_984(void)[16])) = 32)) and
+  (to_rep((temp___String_Literal_984(void)[17])) = 97)) and
+  (to_rep((temp___String_Literal_984(void)[18])) = 110)) and
+  (to_rep((temp___String_Literal_984(void)[19])) = 103)) and
+  (to_rep((temp___String_Literal_984(void)[20])) = 108)) and
+  (to_rep((temp___String_Literal_984(void)[21])) = 101)) and
+  (to_rep((temp___String_Literal_984(void)[22])) = 32))
+
+logic temp___String_Literal_995 : unit -> (int,character) farray
+
+axiom temp___String_Literal_995__def_axiom :
+  (((((((((((((((to_rep((temp___String_Literal_995(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_995(void)[2])) = 68)) and
+  (to_rep((temp___String_Literal_995(void)[3])) = 114)) and
+  (to_rep((temp___String_Literal_995(void)[4])) = 105)) and
+  (to_rep((temp___String_Literal_995(void)[5])) = 118)) and
+  (to_rep((temp___String_Literal_995(void)[6])) = 101)) and
+  (to_rep((temp___String_Literal_995(void)[7])) = 32)) and
+  (to_rep((temp___String_Literal_995(void)[8])) = 97)) and
+  (to_rep((temp___String_Literal_995(void)[9])) = 110)) and
+  (to_rep((temp___String_Literal_995(void)[10])) = 103)) and
+  (to_rep((temp___String_Literal_995(void)[11])) = 108)) and
+  (to_rep((temp___String_Literal_995(void)[12])) = 101)) and
+  (to_rep((temp___String_Literal_995(void)[13])) = 32)) and
+  (to_rep((temp___String_Literal_995(void)[14])) = 58)) and
+  (to_rep((temp___String_Literal_995(void)[15])) = 32))
+
+logic temp___String_Literal_996 : unit -> (int,character) farray
+
+axiom temp___String_Literal_996__def_axiom :
+  ((((((((((to_rep((temp___String_Literal_996(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_996(void)[2])) = 102)) and
+  (to_rep((temp___String_Literal_996(void)[3])) = 114)) and
+  (to_rep((temp___String_Literal_996(void)[4])) = 111)) and
+  (to_rep((temp___String_Literal_996(void)[5])) = 109)) and
+  (to_rep((temp___String_Literal_996(void)[6])) = 32)) and
+  (to_rep((temp___String_Literal_996(void)[7])) = 109)) and
+  (to_rep((temp___String_Literal_996(void)[8])) = 105)) and
+  (to_rep((temp___String_Literal_996(void)[9])) = 100)) and
+  (to_rep((temp___String_Literal_996(void)[10])) = 32))
+
+logic temp___String_Literal_997 : unit -> (int,character) farray
+
+axiom temp___String_Literal_997__def_axiom :
+  ((((((((((((((to_rep((temp___String_Literal_997(void)[1])) = 44) and
+  (to_rep((temp___String_Literal_997(void)[2])) = 32)) and
+  (to_rep((temp___String_Literal_997(void)[3])) = 115)) and
+  (to_rep((temp___String_Literal_997(void)[4])) = 97)) and
+  (to_rep((temp___String_Literal_997(void)[5])) = 102)) and
+  (to_rep((temp___String_Literal_997(void)[6])) = 101)) and
+  (to_rep((temp___String_Literal_997(void)[7])) = 32)) and
+  (to_rep((temp___String_Literal_997(void)[8])) = 114)) and
+  (to_rep((temp___String_Literal_997(void)[9])) = 105)) and
+  (to_rep((temp___String_Literal_997(void)[10])) = 115)) and
+  (to_rep((temp___String_Literal_997(void)[11])) = 105)) and
+  (to_rep((temp___String_Literal_997(void)[12])) = 110)) and
+  (to_rep((temp___String_Literal_997(void)[13])) = 103)) and
+  (to_rep((temp___String_Literal_997(void)[14])) = 32))
+
+logic temp___String_Literal_998 : unit -> (int,character) farray
+
+axiom temp___String_Literal_998__def_axiom :
+  ((((((to_rep((temp___String_Literal_998(void)[1])) = 44) and
+  (to_rep((temp___String_Literal_998(void)[2])) = 32)) and
+  (to_rep((temp___String_Literal_998(void)[3])) = 97)) and
+  (to_rep((temp___String_Literal_998(void)[4])) = 110)) and
+  (to_rep((temp___String_Literal_998(void)[5])) = 100)) and
+  (to_rep((temp___String_Literal_998(void)[6])) = 32))
+
+logic temp___String_Literal_999 : unit -> (int,character) farray
+
+axiom temp___String_Literal_999__def_axiom :
+  ((((((((((to_rep((temp___String_Literal_999(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_999(void)[2])) = 111)) and
+  (to_rep((temp___String_Literal_999(void)[3])) = 98)) and
+  (to_rep((temp___String_Literal_999(void)[4])) = 115)) and
+  (to_rep((temp___String_Literal_999(void)[5])) = 32)) and
+  (to_rep((temp___String_Literal_999(void)[6])) = 100)) and
+  (to_rep((temp___String_Literal_999(void)[7])) = 101)) and
+  (to_rep((temp___String_Literal_999(void)[8])) = 108)) and
+  (to_rep((temp___String_Literal_999(void)[9])) = 116)) and
+  (to_rep((temp___String_Literal_999(void)[10])) = 97))
+
+logic temp___String_Literal_1000 : unit -> (int,character) farray
+
+axiom temp___String_Literal_1000__def_axiom :
+  (((((((to_rep((temp___String_Literal_1000(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_1000(void)[2])) = 84)) and
+  (to_rep((temp___String_Literal_1000(void)[3])) = 104)) and
+  (to_rep((temp___String_Literal_1000(void)[4])) = 101)) and
+  (to_rep((temp___String_Literal_1000(void)[5])) = 116)) and
+  (to_rep((temp___String_Literal_1000(void)[6])) = 97)) and
+  (to_rep((temp___String_Literal_1000(void)[7])) = 32))
+
+logic temp___String_Literal_1001 : unit -> (int,character) farray
+
+axiom temp___String_Literal_1001__def_axiom :
+  (((to_rep((temp___String_Literal_1001(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_1001(void)[2])) = 44)) and
+  (to_rep((temp___String_Literal_1001(void)[3])) = 32))
+
+logic temp___String_Literal_1004 : unit -> (int,character) farray
+
+axiom temp___String_Literal_1004__def_axiom :
+  (((((((((((((((((to_rep((temp___String_Literal_1004(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_1004(void)[2])) = 68)) and
+  (to_rep((temp___String_Literal_1004(void)[3])) = 114)) and
+  (to_rep((temp___String_Literal_1004(void)[4])) = 105)) and
+  (to_rep((temp___String_Literal_1004(void)[5])) = 118)) and
+  (to_rep((temp___String_Literal_1004(void)[6])) = 101)) and
+  (to_rep((temp___String_Literal_1004(void)[7])) = 32)) and
+  (to_rep((temp___String_Literal_1004(void)[8])) = 99)) and
+  (to_rep((temp___String_Literal_1004(void)[9])) = 111)) and
+  (to_rep((temp___String_Literal_1004(void)[10])) = 109)) and
+  (to_rep((temp___String_Literal_1004(void)[11])) = 109)) and
+  (to_rep((temp___String_Literal_1004(void)[12])) = 97)) and
+  (to_rep((temp___String_Literal_1004(void)[13])) = 110)) and
+  (to_rep((temp___String_Literal_1004(void)[14])) = 100)) and
+  (to_rep((temp___String_Literal_1004(void)[15])) = 115)) and
+  (to_rep((temp___String_Literal_1004(void)[16])) = 58)) and
+  (to_rep((temp___String_Literal_1004(void)[17])) = 32))
+
+logic temp___String_Literal_1005 : unit -> (int,character) farray
+
+axiom temp___String_Literal_1005__def_axiom :
+  ((to_rep((temp___String_Literal_1005(void)[1])) = 44) and
+  (to_rep((temp___String_Literal_1005(void)[2])) = 32))
+
+axiom null_angle__def_axiom : (null_angle = of_rep5(fliteral1))
+
+axiom zero_position__def_axiom : ((zero_position = of_rep2(fliteral1)) and
+  (zero_position1 = of_rep2(fliteral1)))
+
+logic length1 : us_rep8 -> int
+
+logic length__function_guard : int, us_rep8 -> prop
+
+axiom length__post_axiom :
+  (forall container:count_type. forall container1:us_main_type [length1({
+  us_split_discrs5 = { rec__algorithm__gap_vectors__list__capacity =
+  container }; us_split_fields17 = { rec__algorithm__gap_vectors__list =
+  container1 } })]. ((length1({ us_split_discrs5 = {
+  rec__algorithm__gap_vectors__list__capacity = container };
+  us_split_fields17 = { rec__algorithm__gap_vectors__list = container1 }
+  }) <= to_rep11(container)) and in_range13(length1({ us_split_discrs5 = {
+  rec__algorithm__gap_vectors__list__capacity = container };
+  us_split_fields17 = { rec__algorithm__gap_vectors__list = container1 }
+  }))))
+
+axiom is_empty__post_axiom :
+  (forall container:count_type. forall container1:us_main_type [is_empty({
+  us_split_discrs5 = { rec__algorithm__gap_vectors__list__capacity =
+  container }; us_split_fields17 = { rec__algorithm__gap_vectors__list =
+  container1 } })]. ((is_empty({ us_split_discrs5 = {
+  rec__algorithm__gap_vectors__list__capacity = container };
+  us_split_fields17 = { rec__algorithm__gap_vectors__list = container1 }
+  }) = true) <-> (length1({ us_split_discrs5 = {
+  rec__algorithm__gap_vectors__list__capacity = container };
+  us_split_fields17 = { rec__algorithm__gap_vectors__list = container1 }
+  }) = 0)))
+
+logic fliteral4 : t
+
+axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
+  (tqtreal(fliteral4) = 1.57079637050628662109375))
+
+logic fliteral5 : t
+
+axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
+  (tqtreal(fliteral5) = 2.0))
+
+logic fliteral6 : t
+
+axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
+  (tqtreal(fliteral6) = 3.1415927410125732421875))
+
+logic fliteral7 : t
+
+axiom fliteral_axiom7 : (tqtisFinite(fliteral7) and
+  (tqtreal(fliteral7) = 0.20000000298023223876953125))
+
+ (* File "algorithm.ads", line 107, characters 0-0 *)
+goal WP_parameter_def :
+  (forall this__split_fields:us_split_fields__ref10. forall drivespeed:t.
+  forall driveturnrate:t. forall disttoclosestobstacle:t.
+  forall safetydist:t. forall saferisinggapangle__split_fields:normalized2pi.
+  forall midvalleyangle__split_fields:normalized2pi. forall theta:t.
+  forall pbestvalley__split_discrs:option1. forall inumlps:int.
+  forall o:float1. forall o1:float1. forall o2:us_split_fields2.
+  forall temp___1014:us_rep1.
+  forall algorithm__step__saferisinggapangle__assume:us_rep.
+  forall algorithm__step__midvalleyangle__assume:us_rep. forall o3:t.
+  forall o4:t. forall o5:t. forall o6:t. forall o7:t. forall o8:t.
+  forall o9:t. forall o10:t. forall o11:t. forall o12:t. forall o13:t.
+  forall o14:t. forall result:us_split_fields__ref.
+  forall saferisinggapangle__split_fields1:us_split_fields.
+  forall result1:us_split_fields__ref.
+  forall midvalleyangle__split_fields1:us_split_fields.
+  forall disttogoal__split_fields:us_split_fields2.
+  forall disttoclosestobstacle1:t__ref. forall driveturnrate1:t__ref.
+  forall this__split_fields1:us_split_fields__ref10. forall theta1:t__ref.
+  forall result2:t__ref. forall theta2:t. forall result3:t__ref.
+  forall driveturnrate2:t. forall result4:t__ref. forall driveturnrate3:t.
+  (((((to_rep2(o) = fliteral1) and ((to_rep2(o1) = fliteral1) and (o2 = {
+  rec__spaces__positions__position__x = o1;
+  rec__spaces__positions__position__y = o }))) and (temp___1014 = {
+  us_split_fields3 = o2 })) and (temp___1014 = { us_split_fields3 = {
+  rec__spaces__positions__position__x = zero_position;
+  rec__spaces__positions__position__y = zero_position1 } })) ->
+  ((((((((this__split_fields).us_split_fields__content10).rec__algorithm__controller__robot).us_split_fields9).rec__robot_iface__proxy__speed).attr__constrained = false) and
+  (1000 = to_rep11(((((this__split_fields).us_split_fields__content10).rec__algorithm__controller__gapvec).us_split_discrs5).rec__algorithm__gap_vectors__list__capacity))) ->
+  ((le(neg(fliteral2), fliteral2) -> tqtisFinite(drivespeed)) ->
+  ((le(neg(fliteral2), fliteral2) -> tqtisFinite(driveturnrate)) ->
+  ((le(fliteral1, fliteral2) -> in_range7(disttoclosestobstacle)) ->
+  ((le(fliteral1, fliteral2) -> in_range6(safetydist)) ->
+  (((algorithm__step__saferisinggapangle__assume = create(void)) and
+  ((result = { us_split_fields__content = {
+  rec__spaces__angles__angle__theta = saferisinggapangle__split_fields }
+  }) and
+  (saferisinggapangle__split_fields1 = (algorithm__step__saferisinggapangle__assume).us_split_fields1))) ->
+  (((algorithm__step__midvalleyangle__assume = create(void)) and
+  ((result1 = { us_split_fields__content = {
+  rec__spaces__angles__angle__theta = midvalleyangle__split_fields } }) and
+  (midvalleyangle__split_fields1 = (algorithm__step__midvalleyangle__assume).us_split_fields1))) ->
+  ((le(neg(fliteral2), fliteral2) -> tqtisFinite(theta)) ->
+  (((pbestvalley__attr__constrained = false) and
+  (to_rep10(pbestvalley__split_discrs) = 0)) -> (((0 <= 2147483647) ->
+  in_range5(inumlps)) ->
+  (lt(to_rep3(((((this__split_fields1).us_split_fields__content10).rec__algorithm__controller__robot).us_split_fields9).rec__robot_iface__proxy__robot_radius),
+  (disttoclosestobstacle1).t__content) -> ((le(fliteral1, fliteral2) ->
+  in_range7((disttoclosestobstacle1).t__content)) ->
+  ((((((((this__split_fields1).us_split_fields__content10).rec__algorithm__controller__robot).us_split_fields9).rec__robot_iface__proxy__speed).attr__constrained = false) and
+  (1000 = to_rep11(((((this__split_fields1).us_split_fields__content10).rec__algorithm__controller__gapvec).us_split_discrs5).rec__algorithm__gap_vectors__list__capacity))) ->
+  ((((o3 = limit((theta1).t__content, neg(fliteral4), fliteral4)) and
+  (tqtisFinite(o3) and (le(neg(fliteral4), o3) and le(o3, fliteral4)))) and
+  ((result2 = theta1) and (theta2 = o3))) -> (((((((o4 = mul(RNE, fliteral5,
+  theta2)) and tqtisFinite(mul(RNE, fliteral5, theta2))) and (o5 = div(RNE,
+  o4, fliteral6))) and (o6 = mul(RNE,
+  to_rep3(((((this__split_fields1).us_split_fields__content10).rec__algorithm__controller__robot).us_split_fields9).rec__robot_iface__proxy__max_turn_rate),
+  o5))) and ((o7 = o6) and tqtisFinite(o6))) and
+  ((result3 = driveturnrate1) and (driveturnrate2 = o7))) ->
+  ((((((((o8 = norm({ us_split_fields3 = disttogoal__split_fields })) and
+  (tqtisFinite(o8) and (le(fliteral1, o8) and (lt(fliteral1, o8) ->
+  (not (oeq({ us_split_fields3 = disttogoal__split_fields }, {
+  us_split_fields3 = { rec__spaces__positions__position__x = zero_position;
+  rec__spaces__positions__position__y = zero_position1 } }) = true)))))) and
+  ((o9 = sqrt2(o8)) and (tqtisFinite(o9) and (le(fliteral1, o9) and ((eq(o8,
+  fliteral1) -> eq(o9, fliteral1)) and (eq(o8, fliteral) -> eq(o9,
+  fliteral))))))) and ((o10 = limit(o9, fliteral7, fliteral)) and
+  (tqtisFinite(o10) and (le(fliteral7, o10) and le(o10, fliteral))))) and
+  (o11 = mul(RNE, driveturnrate2, o10))) and ((o12 = o11) and
+  tqtisFinite(o11))) and ((result4 = { t__content = driveturnrate2 }) and
+  (driveturnrate3 = o12))) -> (lt(fliteral1, sub(RNE,
+  (disttoclosestobstacle1).t__content,
+  to_rep3(((((this__split_fields1).us_split_fields__content10).rec__algorithm__controller__robot).us_split_fields9).rec__robot_iface__proxy__robot_radius))) ->
+  (lt(fliteral1,
+  to_rep3(((((this__split_fields1).us_split_fields__content10).rec__algorithm__controller__robot).us_split_fields9).rec__robot_iface__proxy__obstacle_avoid_dist)) ->
+  ((lt(fliteral1, sub(RNE, (disttoclosestobstacle1).t__content,
+  to_rep3(((((this__split_fields1).us_split_fields__content10).rec__algorithm__controller__robot).us_split_fields9).rec__robot_iface__proxy__robot_radius))) and
+  lt(fliteral1,
+  to_rep3(((((this__split_fields1).us_split_fields__content10).rec__algorithm__controller__robot).us_split_fields9).rec__robot_iface__proxy__obstacle_avoid_dist))) ->
+  (lt(fliteral1, div(RNE, sub(RNE, (disttoclosestobstacle1).t__content,
+  to_rep3(((((this__split_fields1).us_split_fields__content10).rec__algorithm__controller__robot).us_split_fields9).rec__robot_iface__proxy__robot_radius)),
+  to_rep3(((((this__split_fields1).us_split_fields__content10).rec__algorithm__controller__robot).us_split_fields9).rec__robot_iface__proxy__obstacle_avoid_dist))) ->
+  ((((o13 = sub(RNE, (disttoclosestobstacle1).t__content,
+  to_rep3(((((this__split_fields1).us_split_fields__content10).rec__algorithm__controller__robot).us_split_fields9).rec__robot_iface__proxy__robot_radius))) and
+  tqtisFinite(sub(RNE, (disttoclosestobstacle1).t__content,
+  to_rep3(((((this__split_fields1).us_split_fields__content10).rec__algorithm__controller__robot).us_split_fields9).rec__robot_iface__proxy__robot_radius)))) and
+  (o14 = div(RNE, o13,
+  to_rep3(((((this__split_fields1).us_split_fields__content10).rec__algorithm__controller__robot).us_split_fields9).rec__robot_iface__proxy__obstacle_avoid_dist)))) ->
+  tqtisFinite(o14))))))))))))))))))))))))
