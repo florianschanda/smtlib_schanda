@@ -53,6 +53,8 @@ class Benchmark(object):
                     status = tokens[2].strip(")")
                     assert status in ("unknown", "sat", "unsat")
                     self.expected = status
+                elif "set-info" in line and ":smt-lib-version":
+                    pass
                 elif not keep_logic and "(set-logic" in line:
                     pass
                 else:
