@@ -74,6 +74,8 @@ for item in (e for e in sorted(os.listdir(".")) if is_other_data(e)):
         add_avav(item)
         other_data.append(item)
 
+COMPARISON_CATS = ("solved", "timeout", "error", "unsound")
+
 def mk_progress_slides(fd):
     def mk_shortname(prover_bin):
         return "-".join(prover_bin.split("_")[-2:])
@@ -101,7 +103,7 @@ def mk_progress_slides(fd):
     fd.write("\\end{frame}\n\n")
 
     # Unsound results
-    fd.write("\\begin{frame}{FP progress in CVC4}{Errors and unsoundness}\n")
+    fd.write("\\begin{frame}{FP progress in CVC4}{Issues}\n")
     fd.write("\\begin{center}\n")
     fd.write("\\begin{tabular}{>{\columncolor{Altran2}}rllll}\n")
     fd.write("\\rowcolor{Altran2}\n")
@@ -140,11 +142,6 @@ def mk_progress_slides(fd):
         fd.write( "  y axis={\n")
         fd.write( "      ticks={\n")
         fd.write( "         tick unit=\\%,\n")
-        # fd.write( "         major={also at={%s}},\n" %
-        #           ", ".join(("%.3f as %s" % (b[1], mk_solver_name(b[0]))
-        #                     for b in bench
-        #                     if min(points) <= b[1] <= max(points)))
-        # )
         fd.write( "      },\n")
         fd.write( "      grid={minor={at={%s}}},\n" %
                   ", ".join("%.3f" % b[1]
@@ -178,8 +175,8 @@ def mk_progress_slides(fd):
         fd.write("\\end{center}\n")
 
     # Plot of over various CVC4 versions
-    for cat in ("solved", "timeout", "unsound", "error"):
-        fd.write("\\begin{frame}[fragile]{FP progress in CVC4}{%s over time (average over averages)}\n" % cat.capitalize())
+    for cat in COMPARISON_CATS:
+        fd.write("\\begin{frame}[fragile]{FP progress in CVC4}{%s over time (average of averages)}\n" % cat.capitalize())
         mk_plot(cat, ("AnSecondaryGreen"
                       if cat == "solved"
                       else "AnSecondaryRed"))
@@ -243,8 +240,8 @@ def mk_competition_slides(fd):
         fd.write("\\end{tabular}\n")
 
     # Table comparing all solvers
-    for cat in ("solved", "timeout", "unsound", "error"):
-        fd.write("\\begin{frame}{The competition}{%s}\n" % cat.capitalize())
+    for cat in COMPARISON_CATS:
+        fd.write("\\begin{frame}{Benchmarks}{With status `%s'}\n" % cat.capitalize())
         fd.write("\\begin{center}\n")
         mk_table(cat)
         fd.write("\\end{center}\n")
@@ -265,7 +262,10 @@ def main():
         fd.write(r"\newcommand{\tb}[1]{{\color{AnSecondaryRed}#1}}" + "\n")
         fd.write("\\begin{document}\n\n")
 
+        fd.write("\\section{CVC4 Progress}\n\n")
         mk_progress_slides(fd)
+
+        fd.write("\\section{Comparisons}\n\n")
         mk_competition_slides(fd)
 
         fd.write("\\end{document}\n")
