@@ -192,8 +192,12 @@ def mk_competition_slides(fd):
 
     def mk_table(criteria):
         fd.write("\\small\n")
-        fd.write("\\begin{tabular}{>{\columncolor{Altran2}}r%s}\n" %
-                 ("l" * len(competitors)))
+        fd.write("\\begin{tabular}{>{\columncolor{Altran2}}r")
+        for c in competitors:
+            if c["prover"]["kind"] == "cvc4":
+                fd.write(">{\columncolor{Altran2!10}}")
+            fd.write("l")
+        fd.write("}\n")
         fd.write("\\rowcolor{Altran2}\n")
         fd.write("Benchmark & ")
         fd.write(" & ".join(mk_solver_name(r["prover"]["kind"])
