@@ -71,3 +71,4 @@ for path, dirs, files in os.walk("AUFBVFPDTNIRA"):
     for f in files:
         if f.endswith(".smt2"):
             process(os.path.join(path, f))
+            process(os.path.join(path, f) + "_z3")
