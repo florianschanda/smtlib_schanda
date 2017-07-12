@@ -17,8 +17,8 @@ def mk_solver_name(nam):
             "z3"           : "Z3",
             "colibri"      : "Colibri",
             "mathsat"      : "MathSAT",
-            "mathsat_acdl" : "MS (ACDL)",
-            "altergo"      : "Alt-Ergo",
+            "mathsat_acdl" : "ACDL",
+            "altergo"      : "A-Ergo",
     }.get(nam, nam)
 
 def is_cvc4_data(name):
@@ -274,7 +274,6 @@ def mk_competition_slides(fd):
                 unique_total[solver] += 1
                 unique_cat[cat][solver] += 1
 
-        fd.write("\\small\n")
         fd.write("\\begin{tabular}{>{\columncolor{Altran2}}r")
         for c in competitors:
             if c["prover"]["kind"] == "cvc4":
