@@ -37,7 +37,8 @@ def main():
                                use_dialect="mathsat"))
     provers.append(Prover_Kind("colibri",
                                [],
-                               use_temp=True))
+                               use_temp=True,
+                               use_dialect="colibri"))
     provers.append(Prover_Kind("altergo",
                                [],
                                use_temp=True,
