@@ -1,14 +1,13 @@
 (set-logic QF_FPBV)
-(set-option :produce-models true)
 (set-info :source |Random FP created by PyMPF|)
 (set-info :category random)
-(set-info :status sat)
-;; ubv(= 2147483648) -> float
-(declare-const x (_ BitVec 32))
-(assert (= x #b10000000000000000000000000000000))
-;; x should be 2147483648
-(declare-const r Float64)
-(assert (= r ((_ to_fp_unsigned 11 53) RTZ x)))
-(assert (fp.eq r ((_ to_fp 11 53) #x41E0000000000000)))
+(set-info :status unsat)
+;; fp.from.ubv(BitVec 64)
+(declare-const x (_ BitVec 64))
+(assert (bvsge x #b0000010111110111011110101010000100100111110110000010001111000100))
+;; x should be 429947122013971396
+(declare-const r Float32)
+(assert (= r ((_ to_fp 8 24) RTZ x)))
+(assert (not (fp.geq r ((_ to_fp 8 24) #x5CBEEF54))))
 (check-sat)
 (exit)

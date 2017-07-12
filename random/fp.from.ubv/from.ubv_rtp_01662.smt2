@@ -3,12 +3,12 @@
 (set-info :source |Random FP created by PyMPF|)
 (set-info :category random)
 (set-info :status sat)
-;; ubv(>= 4611686018427387907) -> float
-(declare-const x (_ BitVec 64))
-(assert (bvuge x #b0100000000000000000000000000000000000000000000000000000000000011))
-;; x should be 4611686018427387907
+;; fp.from.ubv(BitVec 128)
+(declare-const x (_ BitVec 128))
+(assert (bvsle x #b00111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110))
+;; x should be 85070591730234615865843651857942052862
 (declare-const r Float32)
-(assert (= r ((_ to_fp_unsigned 8 24) RTP x)))
-(assert (fp.geq r (fp #b0 #b10111101 #b00000000000000000000001)))
+(assert (= r ((_ to_fp 8 24) RTP x)))
+(assert (fp.leq r (fp #b0 #b11111101 #b00000000000000000000000)))
 (check-sat)
 (exit)

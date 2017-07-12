@@ -1,0 +1,13 @@
+(set-logic QF_FPBV)
+(set-info :source |Random FP created by PyMPF|)
+(set-info :category random)
+(set-info :status unsat)
+;; fp.from.ubv(BitVec 128)
+(declare-const x (_ BitVec 128))
+(assert (= x #b01110111011110000000111110110010111101101011001101101100001110100100000101110111111101101011110111011011000011000111101110100011))
+;; x should be 158801525536536371733055872747843648419
+(declare-const r Float64)
+(assert (= r ((_ to_fp 11 53) RNA x)))
+(assert (not (fp.eq r ((_ to_fp 11 53) #x47DDDE03ECBDACDB))))
+(check-sat)
+(exit)

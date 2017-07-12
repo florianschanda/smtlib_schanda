@@ -1,13 +1,14 @@
 (set-logic QF_FPBV)
+(set-option :produce-models true)
 (set-info :source |Random FP created by PyMPF|)
 (set-info :category random)
-(set-info :status unsat)
-;; ubv(<= 89) -> float
+(set-info :status sat)
+;; fp.from.ubv(BitVec 8)
 (declare-const x (_ BitVec 8))
-(assert (bvule x #b01011001))
-;; x should be 89
-(declare-const r Float64)
-(assert (= r ((_ to_fp_unsigned 11 53) RNA x)))
-(assert (not (fp.leq r ((_ to_fp 11 53) #x4056400000000000))))
+(assert (bvsle x #b01101110))
+;; x should be 110
+(declare-const r Float32)
+(assert (= r ((_ to_fp 8 24) RNA x)))
+(assert (fp.leq r (fp #b0 #b10000101 #b10111000000000000000000)))
 (check-sat)
 (exit)
