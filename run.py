@@ -39,7 +39,7 @@ def main():
                                [],
                                use_temp=True))
     provers.append(Prover_Kind("altergo",
-                               [],
+                               ["-max-split", "5"],
                                use_temp=True,
                                use_dialect="altergo"))
 
