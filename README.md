@@ -9,26 +9,16 @@ VCs from the public SPARK 2014 testsuite (compiling SPARK and
 executing the testsuite are non-trivial, so these benchmarks are filed
 here as a service to the community).
 
-All of these are using the CVC4 AUFBVDTNIRA logic, and we really mean
-it. There is no SMTLIB fragment that covers all logics used:
-* Quantifiers
-* Nonlinear real and integer arithmetic
-* Floating point
-* Datatypes
-* Arrays
-* Uninterpreted functions
-* Bitvectors
+There are three variants included here:
+* AUFBVDTNIRA These are all non-trivial benchmarks (generated for CVC4)
+* AUFBVFPDTNIRA These are all benchmarks that use floats, in various dialects for different solvers
+* QF_AUFBVFPNIRA These are quantifier- and datatype-free benchmarks that use floats
 
 Most of these will be unknown (although a large fraction of them
 should be UNSAT). I have only included the ones where CVC4 does not
 immediately issue unsat (when run with --rlimit=2 --preprocess-step=0
 --rewrite-step=0 --parse-step=0), otherwise there would be more than a
 GiB of benchmarks in here.
-
-There is also a second set of benchmarks, using the FloatingPoint
-theory in addition to the above. These are all the benchmarks from the
-SPARK testsuite that contain at least one floating point value or
-operation.
 
 ## Hand-crafted
 Hand-crafted problems produced by Florian during reviewing of papers,
