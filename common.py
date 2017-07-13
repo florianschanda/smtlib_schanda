@@ -12,6 +12,9 @@ class Benchmark(object):
         self.name      = os.path.basename(fn)
         cats = os.path.dirname(fn).split("/")
         self.cat = cats[0]
+        if self.cat == "spark_2014":
+            if "QF" in cats[1]:
+                self.cat += "_qf"
         self.expected  = "unknown"
         self.data      = None
         if dialect is not None and os.path.exists(self.benchmark + "_" +

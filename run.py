@@ -37,8 +37,7 @@ def main():
                                use_dialect="mathsat"))
     provers.append(Prover_Kind("colibri",
                                [],
-                               use_temp=True,
-                               use_dialect="colibri"))
+                               use_temp=True))
     provers.append(Prover_Kind("altergo",
                                [],
                                use_temp=True,
@@ -95,13 +94,11 @@ def main():
         bench_dirs.append("griggio")
         bench_dirs.append("wintersteiger")
         bench_dirs.append("nyxbrain")
+        bench_dirs.append("spark_2014/QF_AUFBVFPNIRA")
     if options.suite == "fp":
         bench_dirs.append("spark_2014/AUFBVFPDTNIRA")
     if options.suite == "debug":
-        #bench_dirs.append("spark_2014/AUFBVFPDTNIRA")
-        bench_dirs.append("crafted/QF_FP")
-        #bench_dirs.append("crafted/QF_FPBV")
-        #bench_dirs.append("crafted/QF_FPLRA")
+        bench_dirs.append("spark_2014/QF_AUFBVFPNIRA")
 
     print "Assembling benchmarks..."
     tasks = []
