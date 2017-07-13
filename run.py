@@ -123,13 +123,19 @@ def main():
                "unsound" : 0}
     unsound = []
     errors = []
-    verdicts = {} # unjudged
+    verdicts = {}           # unjudged
     verdicts_processed = {} # with "unsound" thrown in
+    snowflake = {}          # records if special VCs have been used
 
     def analyze(result, progress, start_time):
         result.print_summary(progress, start_time)
         verdicts[result.task.benchmark.benchmark] = result.prover_status
         verdicts_processed[result.task.benchmark.benchmark] = result.status
+
+        if result.task.benchmark.cat not in snowflake:
+            snowflake[result.task.benchmark.cat] = 0
+        if result.task.benchmark.dialect is not None:
+            snowflake[result.task.benchmark.cat] += 1
 
         if result.task.benchmark.cat not in detail:
             detail[result.task.benchmark.cat] = {"solved"  : 0,
@@ -205,6 +211,7 @@ def main():
                 "elapsed" : elapsed_total_time},
             "summary" : summary,
             "details" : detail,
+            "snowflakes" : snowflake,
             "verdicts" : verdicts,
             "verdicts_processed" : verdicts_processed,
         }
