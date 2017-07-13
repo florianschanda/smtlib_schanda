@@ -164,11 +164,6 @@ class Prover(object):
                 status  = "error"
                 comment = stdout + "\n" + stderr
 
-        # These benchmarks have quantifiers stripped, so a sat is not
-        # really an equivalent solution
-        if status == "sat" and benchmark.dialect == "colibri":
-            status = "unknown"
-
         return status, comment
 
 
