@@ -47,7 +47,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--suite",
                     default="fp",
-                    choices=["qf_fp", "fp", "debug", "schanda"])
+                    choices=["qf_fp", "fp", "debug", "schanda", "spark"])
     ap.add_argument("--single",
                     default=False,
                     action="store_true")
@@ -95,8 +95,9 @@ def main():
         bench_dirs.append("griggio")
         bench_dirs.append("wintersteiger")
         bench_dirs.append("nyxbrain")
+    if options.suite in ("qf_fp", "fp", "spark"):
         bench_dirs.append("spark_2014/QF_AUFBVFPNIRA")
-    if options.suite == "fp":
+    if options.suite in ("fp", "spark"):
         bench_dirs.append("spark_2014/AUFBVFPDTNIRA")
     if options.suite == "debug":
         bench_dirs.append("spark_2014/QF_AUFBVFPNIRA")
