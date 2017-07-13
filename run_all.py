@@ -35,6 +35,8 @@ def main():
 
     for prover in OTHER_PROVERS:
         exists = False
+        prover_bin = {"z3" : "./z3_2017_07_13"}.get(prover, prover)
+
         for p in PATH:
             if os.path.exists(os.path.join(p, prover)):
                 exists = True
@@ -43,12 +45,12 @@ def main():
             os.system("./run.py %s --suite=fp %s %s" %
                       ("--force" if options.force else "",
                        prover,
-                       prover))
+                       prover_bin))
             if prover == "mathsat":
                 os.system("./run.py %s --suite=fp %s_acdl %s" %
                           ("--force" if options.force else "",
                            prover,
-                           prover))
+                           prover_bin))
 
 if __name__ == "__main__":
     main()
