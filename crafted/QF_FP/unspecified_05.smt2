@@ -1,0 +1,18 @@
+(set-logic QF_FP)
+(set-option :produce-models true)
+(set-info :source |Florian Schanda|)
+(set-info :category crafted)
+(set-info :status sat)
+
+;; order of arguments may matter
+
+(declare-const x Float32)
+(declare-const y Float32)
+(assert (and (fp.isZero x)
+             (fp.isZero y)))
+(assert (distinct x y))
+
+(assert (distinct (fp.min x y)
+                  (fp.min y x)))
+(check-sat)
+(exit)
