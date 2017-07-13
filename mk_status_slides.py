@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import sys
 import argparse
 from cPickle import load
 from pprint import pprint
@@ -8,17 +9,21 @@ from pprint import pprint
 NON_ANNOTATED_TESTS = set(["griggio"])
 
 def mk_bench_name(cat):
-    return {"crafted"    : "schanda",
-            "random"     : "PyMPF",
-            "spark_2014" : "{\\sc Spark~2014}"}.get(cat, cat)
+    return {
+        "crafted"       : "schanda",
+        "random"        : "PyMPF",
+        "spark_2014"    : "{\\sc Spark~2014}",
+        "spark_2014_qf" : "{\\sc Spark~QF}",
+    }.get(cat, cat)
 
 def mk_solver_name(nam):
-    return {"cvc4"         : "{\sc cvc4}",
-            "z3"           : "Z3",
-            "colibri"      : "Colibri",
-            "mathsat"      : "MathSAT",
-            "mathsat_acdl" : "ACDL",
-            "altergo"      : "A-Ergo",
+    return {
+        "cvc4"         : "{\sc cvc4}",
+        "z3"           : "Z3",
+        "colibri"      : "Colibri",
+        "mathsat"      : "MathSAT",
+        "mathsat_acdl" : "ACDL",
+        "altergo"      : "A-Ergo",
     }.get(nam, nam)
 
 def is_cvc4_data(name):
@@ -54,26 +59,34 @@ def mk_err_color(before, after):
     else:
         return "n"
 
-def add_avav(item):
+def add_derived_stats(item):
     item["avav"] = {}
+    item["tried"] = {}
+    for suite in item["details"]:
+        item["tried"][suite] = (item["details"][suite]["solved"] > 0 or
+                                item["details"][suite]["timeout"] > 0 or
+                                item["details"][suite]["unknown"] > 0 or
+                                item["details"][suite]["unsound"] > 0)
+
     for subcat in item["details"]["crafted"]:
         averages = [float(item["details"][cat][subcat] * 100) /
                     float(sum(item["details"][cat].itervalues()))
-                    for cat in item["details"]]
+                    for cat in item["details"]
+                    if item["tried"][cat]]
         item["avav"][subcat] = sum(averages) / float(len(averages))
 
 data = []
 for item in (e for e in sorted(os.listdir(".")) if is_cvc4_data(e)):
     with open(item, "rU") as fd_data:
         item = load(fd_data)
-        add_avav(item)
+        add_derived_stats(item)
         data.append(item)
 
 other_data = []
 for item in (e for e in sorted(os.listdir(".")) if is_other_data(e)):
     with open(item, "rU") as fd_data:
         item = load(fd_data)
-        add_avav(item)
+        add_derived_stats(item)
         other_data.append(item)
 
 COMPARISON_CATS = ("solved", "timeout", "error", "unsound")
