@@ -1,0 +1,5 @@
+*.pyc
+data_*.p
+report_*.txt
+cvc4_*
+fp_progress.*
