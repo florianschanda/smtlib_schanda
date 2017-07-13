@@ -12,6 +12,10 @@
 (define-const x Float32 (fp.fma RTN f one g))
 (define-const y Float32 (fp.add RTN f g))
 
+;; we've carefully checked this by hand (using PyMPF, MPFR, and a
+;; compiled C program where we inspected the binary to make sure it is
+;; using an actual FMA instruction).
+
 (assert (distinct x y))
 (check-sat)
 (exit)
