@@ -115,60 +115,59 @@ for item in (e for e in sorted(os.listdir(".")) if is_other_data(e)):
 
 COMPARISON_CATS = ("solved", "timeout", "error", "unsound")
 
+def mk_coloring(criteria):
+    if criteria == "solved":
+        return COL_AWARD_HIGH
+    elif criteria in ("timeout", "unknown"):
+        return COL_AWARD_LOW
+    else:
+        # error, unsound
+        return COL_ERROR
+
+def mk_fmt_function(criteria, bm_count=None):
+    def format_fn(item):
+        if criteria == "solved":
+            perc = float(item * 100) / float(bm_count)
+            if perc == 100.0:
+                return "$\checkmark$"
+            else:
+                return "%.1f\\%%" % (float(item * 100) / float(bm_count))
+        elif criteria in ("error", "unsound") and item == 0:
+            return "$\checkmark$"
+        else:
+            return "%u" % item
+    return format_fn
+
 def mk_progress_slides(fd):
     def mk_shortname(prover_bin):
         return "-".join(prover_bin.split("_")[-2:])
 
-    # Table with Benchmark, (Old) Solved%, (New) Solved%
-    fd.write("\\begin{frame}{FP progress in CVC4}{Solved}\n")
-    fd.write("\\begin{center}\n")
-    fd.write("\\begin{tabular}{>{\columncolor{Altran2}}rll}\n")
-    fd.write("\\rowcolor{Altran2}\n")
-    fd.write(r"Benchmark & %s & %s \\" %
-             (mk_shortname(data[0]["prover"]["bin"]),
-              mk_shortname(data[-1]["prover"]["bin"]))
-             + "\n")
-    for cat in sorted(data[0]["details"]):
-        fd.write(mk_bench_name(cat) + " & ")
-        row = [float(data[i]["details"][cat]["solved"] * 100) /
-               float(sum(data[i]["details"][cat].itervalues()))
-               for i in (0, -1)]
-        s_row = ["%.1f\\%%" % item for item in row]
-        s_row[1] = "\\t%s{%s}" % (mk_perc_color(row[0], row[1]),
-                                  s_row[1])
-        fd.write(" & ".join(s_row) + r"\\" + "\n")
-    fd.write("\\end{tabular}\n")
-    fd.write("\\end{center}\n")
-    fd.write("\\end{frame}\n\n")
+    versions   = [data[0], data[-1]]
+    benchmarks = sorted(versions[-1]["details"])
 
-    # Unsound results
-    fd.write("\\begin{frame}{FP progress in CVC4}{Issues}\n")
-    fd.write("\\begin{center}\n")
-    fd.write("\\begin{tabular}{>{\columncolor{Altran2}}rllll}\n")
-    fd.write("\\rowcolor{Altran2}\n")
-    fd.write(r"Benchmark & %s & & %s & \\" %
-             (mk_shortname(data[0]["prover"]["bin"]),
-              mk_shortname(data[-1]["prover"]["bin"]))
-             + "\n")
-    fd.write("\\rowcolor{Altran2}\n")
-    fd.write(r"& error & unsound & error & unsound \\" + "\n")
-    for cat in sorted(data[0]["details"]):
-        fd.write(mk_bench_name(cat) + " & ")
-        row = [data[0]["details"][cat]["error"],
-               data[0]["details"][cat]["unsound"],
-               data[-1]["details"][cat]["error"],
-               data[-1]["details"][cat]["unsound"]]
-        s_row = ["%u" % item for item in row]
-        if cat in NON_ANNOTATED_TESTS:
-            s_row[1] = ""
-            s_row[3] = ""
-        for i in (2, 3):
-            s_row[i] = "\\t%s{%s}" % (mk_err_color(row[i - 2], row[i]),
-                                      s_row[i])
-        fd.write(" & ".join(s_row) + r"\\" + "\n")
-    fd.write("\\end{tabular}\n")
-    fd.write("\\end{center}\n")
-    fd.write("\\end{frame}\n\n")
+    # Table with Benchmark, (Old) Solved%, (New) Solved%
+    def mk_progress_table(criteria):
+        t = TikzTable(title      = "Benchmark",
+                      columns    = [v["prover"]["bin"] for v in versions],
+                      col_fmt_fn = mk_shortname)
+        for benchmark in benchmarks:
+            if criteria == "unsound" and benchmark in NON_ANNOTATED_TESTS:
+                continue
+
+            count = sum(versions[-1]["details"][benchmark].itervalues())
+            tdata = {}
+            for version in versions:
+                tdata[version["prover"]["bin"]] = version["details"][benchmark][criteria]
+            t.add_row(title     = mk_bench_name(benchmark),
+                      data      = tdata,
+                      format_fn = mk_fmt_function(criteria, count),
+                      coloring  = mk_coloring(criteria))
+
+        fd.write("\\begin{frame}{FP progress in CVC4}{%s}\n" % criteria.capitalize())
+        fd.write("\\begin{center}\n")
+        fd.write(t.emit())
+        fd.write("\\end{center}\n")
+        fd.write("\\end{frame}\n\n")
 
     def mk_plot(avav_key, color):
         fd.write("\\begin{center}\n")
@@ -194,7 +193,7 @@ def mk_progress_slides(fd):
                             (i,
                              mk_shortname(data[i]["prover"]["bin"]))
                             for i in xrange(len(data)))))
-        fd.write( "    length=9cm,\n")
+        fd.write( "    length=8cm,\n")
         fd.write( "  },\n")
         fd.write("  visualize as line/.list={main},\n")
         fd.write("  main={style=%s},\n" % color)
@@ -204,14 +203,18 @@ def mk_progress_slides(fd):
             fd.write("%.3f, %.3f\n" % (x, y))
         fd.write("} info {\n")
         for b in bench:
-            if min(points) <= b[1] <= max(points):
-                fd.write("\\node[anchor=west] at (visualization cs: x=%.3f,y=%.3f) {\scriptsize %s};\n" %
-                         (float(len(data) - 1),
+            if min(points) <= b[1] <= max(points) and b[1] > 0:
+                fd.write("\\node[anchor=west,text width=1.5cm,fill=Altran1!10,rounded corners] at (visualization cs: x=%.3f,y=%.3f) {\\small %s};\n" %
+                         (float(len(data) - 1) + 0.1,
                           b[1],
                           mk_solver_name(b[0])))
         fd.write("};\n")
         fd.write("\\end{tikzpicture}\n")
         fd.write("\\end{center}\n")
+
+    # Progress summary
+    for cat in ("solved", "error", "unsound"):
+        mk_progress_table(cat)
 
     # Plot of over various CVC4 versions
     for cat in COMPARISON_CATS:
@@ -259,15 +262,6 @@ def mk_competition_slides(fd):
 
         return unique_cat, unique_total
 
-    def coloring(criteria):
-        if criteria == "solved":
-            return COL_AWARD_HIGH
-        elif criteria in ("timeout", "unknown"):
-            return COL_AWARD_LOW
-        else:
-            # error, unsound
-            return COL_ERROR
-
     def format_fn_totals(item):
         return "%.0f\\%%" % item
 
@@ -278,7 +272,7 @@ def mk_competition_slides(fd):
 
         # Add result rows
         for benchmark in benchmarks:
-            if benchmark in NON_ANNOTATED_TESTS and criteria == "unsound":
+            if criteria == "unsound" and benchmark in NON_ANNOTATED_TESTS:
                 continue
 
             data = {}
@@ -310,7 +304,7 @@ def mk_competition_slides(fd):
             t.add_row(title     = mk_bench_name(benchmark),
                       data      = data,
                       format_fn = format_fn,
-                      coloring  = coloring(criteria),
+                      coloring  = mk_coloring(criteria),
                       notes     = notes)
 
         # Add summary row
@@ -323,7 +317,7 @@ def mk_competition_slides(fd):
         t.add_row(title     = "Summary",
                   data      = data,
                   format_fn = format_fn_totals,
-                  coloring  = coloring(criteria))
+                  coloring  = mk_coloring(criteria))
 
         fd.write(t.emit())
 
@@ -396,12 +390,8 @@ def main():
     with open("fp_progress.tex", "w") as fd:
         fd.write("\\documentclass{beamer}\n")
         fd.write("\\input{altran-beamer}\n")
-        fd.write("\\usepackage{colortbl}\n")
         fd.write("\\usepackage{tikz}\n")
         fd.write("\\usetikzlibrary{datavisualization}\n")
-        fd.write(r"\newcommand{\tg}[1]{{\color{AnSecondaryGreen}#1}}" + "\n")
-        fd.write(r"\newcommand{\tn}[1]{#1}" + "\n")
-        fd.write(r"\newcommand{\tb}[1]{{\color{AnSecondaryRed}#1}}" + "\n")
         fd.write("\\author{Florian Schanda}\n")
         fd.write("\\title{CVC4 IEEE-754 implementation}\n")
         fd.write("\\subtitle{Current status and benchmarks}\n")

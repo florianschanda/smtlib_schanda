@@ -31,18 +31,19 @@ class TikzTable(object):
 
     def __init__(self, title, columns,
                  col_fmt_fn=None,
-                 col_backdrop="Altran2",
+                 col_rule="Altran2",
                  col_good="AnSecondaryGreen",
                  col_bad="AnSecondaryRed"):
         assert type(title) is str
         assert type(columns) is list
 
-        self.col_backdrop = col_backdrop
-        self.col_good     = col_good
-        self.col_bad      = col_bad
-        self.cat_title    = title
-        self.columns      = columns
-        self.rows         = []
+        self.col_rule  = col_rule
+        self.col_good  = col_good
+        self.col_bad   = col_bad
+        self.cat_title = title
+        self.columns   = columns
+        self.rows      = []
+
         if col_fmt_fn is None:
             self.col_fmt_fn = lambda x: x
         else:
@@ -53,7 +54,8 @@ class TikzTable(object):
         assert type(data) is dict
         assert coloring is None or coloring in TikzTable.COLORING_OPTIONS
 
-        row = {"title" : title,
+        row = {"kind" : "row",
+               "title" : title,
                "data"  : {}}
         for col, item in data.iteritems():
             assert col in self.columns
@@ -76,7 +78,7 @@ class TikzTable(object):
         self.rows.append(row)
 
     def start_footer(self):
-        pass
+        self.rows.append({"kind" : "rule"})
 
     def emit(self):
         def tr_x(x):
@@ -90,7 +92,7 @@ class TikzTable(object):
 
         def emit_box(x, y, txt, title=False):
             n_atr = ["anchor=west"]
-            #n_atr.append("fill=black!10")
+            # n_atr.append("fill=black!10")
             if title:
                 n_atr.append("rotate=45")
             n = r"\node[%s]" % ",".join(n_atr)
@@ -100,21 +102,38 @@ class TikzTable(object):
             if title:
                 final_x += 0.25
 
-            n += " at (%.1f, %.1f)" % (final_x, final_y)
+            n += " at (%.3f, %.3f)" % (final_x, final_y)
 
             n += " {\small %s};" % txt
             rv.append(n)
+
+        def emit_hrule(after_y):
+            r = r"\draw[%s,thick]" % self.col_rule
+
+            y = (tr_y(after_y) + tr_y(after_y + 1)) / 2.0 + 0.05
+            r += " (%.3f, %.3f)" % (tr_x(0), y)
+            r += " -- (%.3f, %.3f)" % (tr_x(len(self.columns) + 1), y)
+            r += ";"
+
+            rv.append(r)
 
         rv = [r"\begin{tikzpicture}"]
         emit_box(0, 0, self.cat_title)
         for col_id, col in enumerate(self.columns):
             emit_box(col_id + 1, 0, self.col_fmt_fn(col), title=True)
+        emit_hrule(0)
 
-        for row_id, row in enumerate(self.rows):
-            emit_box(0, row_id + 1, row["title"])
-            for col, txt in row["data"].iteritems():
-                emit_box(self.columns.index(col) + 1,
-                         row_id + 1,
-                         txt)
+        row_id = 0
+        for row in self.rows:
+            if row["kind"] == "row":
+                row_id += 1
+                emit_box(0, row_id, row["title"])
+                for col, txt in row["data"].iteritems():
+                    emit_box(self.columns.index(col) + 1,
+                             row_id,
+                             txt)
+            elif row["kind"] == "rule":
+                emit_hrule(row_id)
+
         rv.append(r"\end{tikzpicture}")
         return "\n".join(rv)
