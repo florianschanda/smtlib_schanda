@@ -282,6 +282,9 @@ def mk_competition_slides(fd):
         for bench, answers in benchmarks.iteritems():
             if len(answers) == 1:
                 cat    = bench.split("/")[0]
+                if cat == "spark_2014":
+                    if "QF_" in bench.split("/")[1]:
+                        cat += "_qf"
                 solver = list(answers)[0]
 
                 unique_total[solver] += 1
