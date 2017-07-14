@@ -10,14 +10,15 @@
       (fp.isSubnormal f)))
 
 (declare-const x Float32)
-
-(define-fun f1  () Float32 ((_ to_fp 8 24) RNE 1.0))
-(define-fun f10 () Float32 ((_ to_fp 8 24) RNE 10.0))
-
-;; isfinite(x)
 (assert (isFinite x))
 
-;; goal: x * 10.0 /= 1.0
-(assert (not (not (fp.eq (fp.mul RNE x f10) f1))))
+(declare-const y Float32)
+(assert (isFinite y))
+(assert (not (fp.isZero y)))
+
+(define-const a Float32 (fp.div RNE x y))
+(define-const b Float32 (fp.mul RNE a y))
+
+(assert (not (fp.eq x b)))
 (check-sat)
 (exit)

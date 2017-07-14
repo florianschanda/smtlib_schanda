@@ -16,7 +16,7 @@
 ;; isfinite(x)
 (assert (isFinite x))
 
-;; goal: x * x /= 2.0
-(assert (not (not (fp.eq (fp.mul RNE x x) f2))))
+;; goal: E x => x * x = 2.0
+(assert (fp.eq (fp.mul RNE x x) f2))
 (check-sat)
 (exit)
