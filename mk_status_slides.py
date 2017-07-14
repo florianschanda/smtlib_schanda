@@ -28,6 +28,8 @@ import argparse
 from cPickle import load
 from pprint import pprint
 
+from tikztable import *
+
 NON_ANNOTATED_TESTS = set(["griggio"])
 
 def mk_bench_name(cat):
@@ -44,8 +46,8 @@ def mk_solver_name(nam):
         "z3"           : "Z3",
         "colibri"      : "Colibri",
         "mathsat"      : "MathSAT",
-        "mathsat_acdl" : "ACDL",
-        "altergo"      : "A-Ergo",
+        "mathsat_acdl" : "MathSAT (ACDL)",
+        "altergo"      : "Alt-Ergo 1.3",
     }.get(nam, nam)
 
 def is_cvc4_data(name):
@@ -223,74 +225,17 @@ def mk_competition_slides(fd):
     competitors = sorted([data[-1]] + other_data,
                          cmp=lambda a, b: cmp(a["prover"]["kind"],
                                               b["prover"]["kind"]))
+    solvers    = [c["prover"]["kind"] for c in competitors]
+    benchmarks = sorted(competitors[0]["details"])
 
-    def mk_table(criteria):
-        fd.write("\\small\n")
-        fd.write("\\begin{tabular}{>{\columncolor{Altran2}}r")
-        for c in competitors:
-            if c["prover"]["kind"] == "cvc4":
-                fd.write(">{\columncolor{Altran2!10}}")
-            fd.write("l")
-        fd.write("}\n")
-        fd.write("\\rowcolor{Altran2}\n")
-        fd.write("Benchmark & ")
-        fd.write(" & ".join(mk_solver_name(r["prover"]["kind"])
-                            for r in competitors))
-        fd.write(r"\\" + "\n")
-        for cat in sorted(competitors[0]["details"]):
-            if criteria == "unsound" and cat in NON_ANNOTATED_TESTS:
-                continue
-            fd.write(mk_bench_name(cat) + " & ")
-            if criteria == "solved":
-                row = [float(r["details"][cat][criteria] * 100)/
-                       float(sum(r["details"][cat].itervalues()))
-                       for r in competitors]
-                s_row = ["%.1f\\%%" % x if x > 0 else "" for x in row]
-                s_row = ["\\t%s{%s}" % (mk_best_color(max(row), row[i]),
-                                        s_row[i])
-                         for i in xrange(len(row))]
-            elif criteria == "timeout":
-                row = [r["details"][cat][criteria] for r in competitors]
-                s_row = ["%u" % x for x in row]
-                s_row = ["\\t%s{%s}" % (mk_best_color(-min(row), -row[i]),
-                                        s_row[i])
-                         for i in xrange(len(row))]
-            else:
-                row = [r["details"][cat][criteria] for r in competitors]
-                s_row = ["%u" % x for x in row]
-                s_row = ["\\t%s{%s}" % (mk_err_color(0, row[i]),
-                                        s_row[i])
-                         for i in xrange(len(row))]
-            for i, r in enumerate(competitors):
-                if r["prover"]["kind"] in ("z3", "altergo") and cat == "spark_2014":
-                    s_row[i] = "%s$^*$" % s_row[i]
-            fd.write(" & ".join(s_row) + r"\\" + "\n")
-        row = [r["avav"][criteria] for r in competitors]
-        s_row = ["%.1f\\%%" % x for x in row]
-        if criteria == "solved":
-            s_row = ["\\t%s{%s}" % (mk_best_color(max(row), row[i]),
-                                    s_row[i])
-                     for i in xrange(len(row))]
-        elif criteria == "timeout":
-            s_row = ["\\t%s{%s}" % (mk_best_color(-min(row), -row[i]),
-                                    s_row[i])
-                     for i in xrange(len(row))]
-        else:
-            s_row = ["\\t%s{%s}" % (mk_err_color(0, row[i]),
-                                    s_row[i])
-                     for i in xrange(len(row))]
-        fd.write("\\rowcolor{Altran2}\n")
-        fd.write("AVAV & " + " & ".join(s_row) + r"\\" + "\n")
-        fd.write("\\end{tabular}\n")
-
-    def mk_unique_solutions_table():
-        benchmarks = {}
+    def calculate_unique_solutions():
+        verdicts = {}
         for c in competitors:
             for bench, verd in c["verdicts_processed"].iteritems():
-                if bench not in benchmarks:
-                    benchmarks[bench] = set()
+                if bench not in verdicts:
+                    verdicts[bench] = set()
                 if verd in ("sat", "unsat"):
-                    benchmarks[bench].add(c["prover"]["kind"])
+                    verdicts[bench].add(c["prover"]["kind"])
 
         unique_total = {}
         unique_cat   = {}
@@ -301,7 +246,7 @@ def mk_competition_slides(fd):
                     unique_cat[cat] = {}
                 unique_cat[cat][c["prover"]["kind"]] = 0
 
-        for bench, answers in benchmarks.iteritems():
+        for bench, answers in verdicts.iteritems():
             if len(answers) == 1:
                 cat    = bench.split("/")[0]
                 if cat == "spark_2014":
@@ -312,40 +257,117 @@ def mk_competition_slides(fd):
                 unique_total[solver] += 1
                 unique_cat[cat][solver] += 1
 
-        fd.write("\\begin{tabular}{>{\columncolor{Altran2}}r")
+        return unique_cat, unique_total
+
+    def coloring(criteria):
+        if criteria == "solved":
+            return COL_AWARD_HIGH
+        elif criteria in ("timeout", "unknown"):
+            return COL_AWARD_LOW
+        else:
+            # error, unsound
+            return COL_ERROR
+
+    def format_fn_totals(item):
+        return "%.0f\\%%" % item
+
+    def mk_table(criteria):
+        t = TikzTable(title      = "Benchmark",
+                      columns    = solvers,
+                      col_fmt_fn = mk_solver_name)
+
+        # Add result rows
+        for benchmark in benchmarks:
+            data = {}
+            notes = {}
+            bm_count = sum(competitors[0]["details"][benchmark].itervalues())
+
+            for c in competitors:
+                if not c["tried"][benchmark]:
+                    continue
+
+                solver = c["prover"]["kind"]
+
+                data[solver] = c["details"][benchmark][criteria]
+                if c["snowflakes"][benchmark] > 0:
+                    notes[solver] = "*"
+
+            def format_fn(item):
+                if criteria == "solved":
+                    perc = float(item * 100) / float(bm_count)
+                    if perc == 100.0:
+                        return "$\checkmark$"
+                    else:
+                        return "%.1f\\%%" % (float(item * 100) / float(bm_count))
+                elif criteria in ("error", "unsound") and item == 0:
+                    return "$\checkmark$"
+                else:
+                    return "%u" % item
+
+            t.add_row(title     = mk_bench_name(benchmark),
+                      data      = data,
+                      format_fn = format_fn,
+                      coloring  = coloring(criteria),
+                      notes     = notes)
+
+        # Add summary row
+        data = {}
         for c in competitors:
-            if c["prover"]["kind"] == "cvc4":
-                fd.write(">{\columncolor{Altran2!10}}")
-            fd.write("l")
-        fd.write("}\n")
-        fd.write("\\rowcolor{Altran2}\n")
-        fd.write("Benchmark & ")
-        fd.write(" & ".join(mk_solver_name(r["prover"]["kind"])
-                            for r in competitors))
-        fd.write(r"\\" + "\n")
+            solver = c["prover"]["kind"]
+            data[solver] = c["avav"][criteria]
 
-        for cat in sorted(unique_cat):
-            fd.write(mk_bench_name(cat) + " & ")
-            row = [unique_cat[cat][c["prover"]["kind"]]
-                   for c in competitors]
-            s_row = ["%u" % x for x in row]
-            s_row = ["\\t%s{%s}" % (mk_best_color(max(row), row[i]),
-                                    s_row[i])
-                     for i in xrange(len(row))]
-            for i, r in enumerate(competitors):
-                if r["prover"]["kind"] in ("z3", "altergo") and cat == "spark_2014":
-                    s_row[i] = "%s$^*$" % s_row[i]
-            fd.write(" & ".join(s_row) + r"\\" + "\n")
+        t.start_footer()
+        t.add_row(title     = "Summary",
+                  data      = data,
+                  format_fn = format_fn_totals,
+                  coloring  = coloring(criteria))
 
-        row = [unique_total[c["prover"]["kind"]]
-               for c in competitors]
-        s_row = ["%u" % x for x in row]
-        s_row = ["\\t%s{%s}" % (mk_best_color(max(row), row[i]),
-                                s_row[i])
-                 for i in xrange(len(row))]
-        fd.write("\\rowcolor{Altran2}\n")
-        fd.write("Total & " + " & ".join(s_row) + r"\\" + "\n")
-        fd.write("\\end{tabular}\n")
+        fd.write(t.emit())
+
+    def mk_unique_solutions_table():
+        def format_fn(item):
+            return "%u" % item
+
+        t = TikzTable(title      = "Benchmark",
+                      columns    = solvers,
+                      col_fmt_fn = mk_solver_name)
+
+        unique_cat, unique_total = calculate_unique_solutions()
+
+        # Add result rows
+        for benchmark in benchmarks:
+            data = {}
+            notes = {}
+
+            for c in competitors:
+                if not c["tried"][benchmark]:
+                    continue
+
+                solver = c["prover"]["kind"]
+
+                data[solver] = unique_cat[benchmark][solver]
+                if c["snowflakes"][benchmark] > 0:
+                    notes[solver] = "*"
+
+            t.add_row(title     = mk_bench_name(benchmark),
+                      data      = data,
+                      format_fn = format_fn,
+                      coloring  = COL_AWARD_HIGH,
+                      notes     = notes)
+
+        # Add summary row
+        data = {}
+        for c in competitors:
+            solver = c["prover"]["kind"]
+            data[solver] = unique_total[solver]
+
+        t.start_footer()
+        t.add_row(title     = "Total",
+                  data      = data,
+                  format_fn = format_fn,
+                  coloring  = COL_AWARD_HIGH)
+
+        fd.write(t.emit())
 
     # Table comparing all solvers
     for cat in COMPARISON_CATS:
@@ -358,7 +380,6 @@ def mk_competition_slides(fd):
 
         if cat == "solved":
             fd.write("\\begin{frame}{Benchmarks}{Unique solutions}\n")
-            fd.write("Solutions where only a single solver reports sat or unsat.\n")
             fd.write("\\begin{center}\n")
             mk_unique_solutions_table()
             fd.write("\\end{center}\n")
