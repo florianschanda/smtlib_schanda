@@ -30,7 +30,7 @@ from pprint import pprint
 
 from tikztable import *
 
-NON_ANNOTATED_TESTS = set(["griggio"])
+NON_ANNOTATED_TESTS = set(["griggio", "spark_2014_qf"])
 
 def mk_bench_name(cat):
     return {
@@ -278,6 +278,9 @@ def mk_competition_slides(fd):
 
         # Add result rows
         for benchmark in benchmarks:
+            if benchmark in NON_ANNOTATED_TESTS and criteria == "unsound":
+                continue
+
             data = {}
             notes = {}
             bm_count = sum(competitors[0]["details"][benchmark].itervalues())
