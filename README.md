@@ -11,8 +11,10 @@ here as a service to the community).
 
 There are three variants included here:
 * AUFBVDTNIRA These are all non-trivial benchmarks (generated for CVC4)
-* AUFBVFPDTNIRA These are all benchmarks that use floats, in various dialects for different solvers
-* QF_AUFBVFPNIRA These are quantifier- and datatype-free benchmarks that use floats
+* AUFBVFPDTNIRA These are all benchmarks that use floats, in various dialects
+  for different solvers
+* QF_AUFBVFPNIRA These are quantifier- and datatype-free benchmarks that use
+  floats
 
 Most of these will be unknown (although a large fraction of them
 should be UNSAT). I have only included the ones where CVC4 does not
@@ -68,3 +70,5 @@ The following scripts use the results from run.py:
 * mk_status_slides.py (produce nice slides showing status)
 * inconsistency_report.py (report dubious cases such as prover disagreement)
 * need_status.py (show which benchmarks are not annotated with sat/unsat)
+* generate_spark_2014_benchmarks.py (script used to generate the benchmarks
+  filed here)
