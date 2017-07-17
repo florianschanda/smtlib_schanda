@@ -2228,7 +2228,7 @@ goal WP_parameter_def :
   (forall y:t1. forall h:t1. forall o:t1. forall result:t1. forall h1:t1.
   (in_range1(x) -> ((le(fliteral1, fliteral2) -> in_range2(y)) ->
   ((le(neg1(fliteral3), fliteral3) -> tqtisFinite(h)) ->
-  ((not (x = of_int(0))) -> (le(fliteral4, of_ubv16(RNA, x)) ->
-  ((((o = div(RNE, fliteral5, of_ubv16(RNA, x))) and tqtisFinite(div(RNE,
-  fliteral5, of_ubv16(RNA, x)))) and ((result = h) and (h1 = o))) ->
+  ((not (x = of_int(0))) -> (le(fliteral4, of_ubv16(RNE, x)) ->
+  ((((o = div(RNE, fliteral5, of_ubv16(RNE, x))) and tqtisFinite(div(RNE,
+  fliteral5, of_ubv16(RNE, x)))) and ((result = h) and (h1 = o))) ->
   ((not le(fliteral2, h1)) -> le(fliteral6, h1)))))))))

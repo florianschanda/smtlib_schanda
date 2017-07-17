@@ -163,7 +163,7 @@
 ;; WP_parameter_def
  ;; File "interfac.ads", line 66, characters 0-0
   (not
-  (or (fp.isZero      ((_ to_fp_unsigned 8 24) RNA i))
-  (fp.isPositive  ((_ to_fp_unsigned 8 24) RNA i)))))
+  (or (fp.isZero      ((_ to_fp_unsigned 8 24) RNE i))
+  (fp.isPositive  ((_ to_fp_unsigned 8 24) RNE i)))))
 (check-sat)
 (exit)

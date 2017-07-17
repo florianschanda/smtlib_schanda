@@ -129,8 +129,6 @@
 (define-fun bv_max ((x (_ BitVec 32))
   (y (_ BitVec 32))) (_ BitVec 32) (ite (bvule x y) y x))
 
-(define-fun to_nearest ((m RoundingMode)) Bool (or (= m RNE) (= m RNA)))
-
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -462,7 +460,7 @@
 ;; WP_parameter_def
  ;; File "interfac.ads", line 74, characters 0-0
   (not
-  (fp.leq ((_ to_fp_unsigned 8 24) RTP ((_ int2bv 32) 0)) (fp.roundToIntegral RNA (fp.sqrt RNE ((_ to_fp_unsigned 8 24) RNA
+  (fp.leq ((_ to_fp_unsigned 8 24) RTP ((_ int2bv 32) 0)) (fp.roundToIntegral RNA (fp.sqrt RNE ((_ to_fp_unsigned 8 24) RNE
   i))))))
 (check-sat)
 (exit)

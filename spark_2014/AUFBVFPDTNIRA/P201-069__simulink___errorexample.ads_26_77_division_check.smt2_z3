@@ -73,8 +73,6 @@
 (define-fun bv_max ((x (_ BitVec 32))
   (y (_ BitVec 32))) (_ BitVec 32) (ite (bvule x y) y x))
 
-(define-fun to_nearest ((m RoundingMode)) Bool (or (= m RNE) (= m RNA)))
-
 (define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -322,7 +320,7 @@
   (and (= result3 abs_out14)
   (= abs_out11 (bvudiv (bvsub requested_force calculated_force) requested_force)))
   (and
-  (fp.leq ((_ to_fp_unsigned 11 53) RNA abs_out11) (fp #b0 #b01111111000 #b0100011110101110000101000111101011100001010001111011))
+  (fp.leq ((_ to_fp_unsigned 11 53) RNE abs_out11) (fp #b0 #b01111111000 #b0100011110101110000101000111101011100001010001111011))
   (and (= result2 relative_error4) (= relative_error1 abs_out11)))))
   (and (and (= abs_out11 abs_out12) (= relative_error1 relative_error2))
   (and (= abs_out13 abs_out11) (= relative_error3 relative_error1)))))

@@ -165,7 +165,7 @@
 ;; WP_parameter_def
  ;; File "interfac.ads", line 63, characters 0-0
   (not
-  (fp.leq ((_ to_fp_unsigned 8 24) RTP abstr25) (fp.roundToIntegral RNA (fp.sqrt RNE ((_ to_fp_unsigned 8 24) RNA
+  (fp.leq ((_ to_fp_unsigned 8 24) RTP abstr25) (fp.roundToIntegral RNA (fp.sqrt RNE ((_ to_fp_unsigned 8 24) RNE
   i))))))
 (check-sat)
 (exit)

@@ -38,8 +38,6 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun to_nearest ((m RoundingMode)) Bool (or (= m RNE) (= m RNA)))
-
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -130,7 +128,7 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun cos2 (Float32) Float32)
+(declare-fun cos1 (Float32) Float32)
 
 (declare-fun cos__function_guard (Float32 Float32) Bool)
 
@@ -138,7 +136,7 @@
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true)
-     (let ((result (cos2 x)))
+     (let ((result (cos1 x)))
      (and
      (and
      (and
@@ -146,7 +144,7 @@
      (fp.leq result (fp #b0 #b01111111 #b00000000000000000000000)))
      (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
      (fp.eq result (fp #b0 #b01111111 #b00000000000000000000000))))
-     (dynamic_invariant result true false true)))) :pattern ((cos2 x)) )))
+     (dynamic_invariant result true false true)))) :pattern ((cos1 x)) )))
 
 (declare-fun approx_cos (Float32) Float32)
 
@@ -276,7 +274,7 @@
 
 ;; H
   (assert
-  (and (= o (cos2 x))
+  (and (= o (cos1 x))
   (and (not (or (fp.isInfinite o) (fp.isNaN o)))
   (and
   (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))

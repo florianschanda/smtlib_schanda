@@ -72,4 +72,3 @@ for path, dirs, files in os.walk("AUFBVFPDTNIRA"):
         if f.endswith(".smt2"):
             process(os.path.join(path, f))
             process(os.path.join(path, f) + "_z3")
-            process(os.path.join(path, f) + "_colibri")

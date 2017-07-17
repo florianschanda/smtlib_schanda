@@ -168,8 +168,6 @@
                                       (bvule ((_ int2bv 8) 0) ((_ int2bv 8) 49)))
                                       (in_range1 temp___expr_208)))
 
-(define-fun to_nearest ((m RoundingMode)) Bool (or (= m RNE) (= m RNA)))
-
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 

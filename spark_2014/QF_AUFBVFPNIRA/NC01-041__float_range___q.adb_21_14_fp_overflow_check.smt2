@@ -246,7 +246,7 @@
 
 ;; H
   (assert
-  (= x1 (fp.div RNE ((_ to_fp_unsigned 8 24) RNA raw_in) (fp #b0 #b10001010 #b10011001100110011001101))))
+  (= x1 (fp.div RNE ((_ to_fp_unsigned 8 24) RNE raw_in) (fp #b0 #b10001010 #b10011001100110011001101))))
 
 ;; H
   (assert

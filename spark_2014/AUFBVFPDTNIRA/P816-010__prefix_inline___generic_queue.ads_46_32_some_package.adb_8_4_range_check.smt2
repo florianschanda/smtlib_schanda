@@ -285,8 +285,6 @@
   (! (=> (in_range2 x) (= (to_rep3 (of_rep3 x)) x)) :pattern ((to_rep3
                                                               (of_rep3 x))) )))
 
-(define-fun to_nearest ((m RoundingMode)) Bool (or (= m RNE) (= m RNA)))
-
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 

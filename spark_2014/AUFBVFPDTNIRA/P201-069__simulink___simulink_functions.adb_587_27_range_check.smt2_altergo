@@ -2139,4 +2139,4 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
  (* File "interfac.ads", line 66, characters 0-0 *)
 goal WP_parameter_def : le(of_ubv16(RTP, of_int(0)), roundToIntegral(RNA,
-  sqrt(RNE, of_ubv16(RNA, i))))
+  sqrt(RNE, of_ubv16(RNE, i))))

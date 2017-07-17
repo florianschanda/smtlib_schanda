@@ -205,7 +205,7 @@
 ;; H
   (assert
   (and (bvult x abstr25)
-  (fp.leq state (fp.mul RNE ((_ to_fp_unsigned 11 53) RNA x) (fp #b0 #b10000000010 #b0110000000000000000000000000000000000000000000000000)))))
+  (fp.leq state (fp.mul RNE ((_ to_fp_unsigned 11 53) RNE x) (fp #b0 #b10000000010 #b0110000000000000000000000000000000000000000000000000)))))
 
 (assert
 ;; WP_parameter_def

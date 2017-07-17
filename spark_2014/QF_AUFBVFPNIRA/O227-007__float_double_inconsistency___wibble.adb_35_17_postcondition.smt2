@@ -205,7 +205,7 @@
 ;; H
   (assert
   (and (bvult x abstr25)
-  (fp.leq state (fp.mul RNE ((_ to_fp_unsigned 8 24) RNA x) (fp #b0 #b10000010 #b01000000000000000000000)))))
+  (fp.leq state (fp.mul RNE ((_ to_fp_unsigned 8 24) RNE x) (fp #b0 #b10000010 #b01000000000000000000000)))))
 
 ;; H
   (assert
@@ -231,6 +231,6 @@
 ;; WP_parameter_def
  ;; File "wibble.adb", line 25, characters 0-0
   (not
-  (fp.leq state2 (fp.mul RNE ((_ to_fp_unsigned 8 24) RNA (bvadd x abstr27)) (fp #b0 #b10000010 #b01000000000000000000000)))))
+  (fp.leq state2 (fp.mul RNE ((_ to_fp_unsigned 8 24) RNE (bvadd x abstr27)) (fp #b0 #b10000010 #b01000000000000000000000)))))
 (check-sat)
 (exit)

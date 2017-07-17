@@ -73,8 +73,6 @@
 (define-fun bv_max ((x (_ BitVec 32))
   (y (_ BitVec 32))) (_ BitVec 32) (ite (bvule x y) y x))
 
-(define-fun to_nearest ((m RoundingMode)) Bool (or (= m RNE) (= m RNA)))
-
 (define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -320,7 +318,7 @@
   (and
   (fp.leq (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)
   state)
-  (fp.leq state (fp.mul RNE ((_ to_fp_unsigned 11 53) RNA x) (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))))))
+  (fp.leq state (fp.mul RNE ((_ to_fp_unsigned 11 53) RNE x) (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))))))
 
 ;; H
   (assert

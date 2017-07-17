@@ -2189,5 +2189,5 @@ goal WP_parameter_def :
   (in_range1(calculated_force) -> ((not (requested_force = of_int(0))) ->
   ((not (requested_force = of_int(0))) -> ((({ t__content = result } = {
   t__content = abs_out1 }) and (abs_out11 = udiv(sub(requested_force,
-  calculated_force), requested_force))) -> le(of_ubv32(RNA, abs_out11),
+  calculated_force), requested_force))) -> le(of_ubv32(RNE, abs_out11),
   fliteral1))))))

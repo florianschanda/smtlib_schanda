@@ -2136,5 +2136,5 @@ logic i : t
 logic attr__ATTRIBUTE_ADDRESS : int
 
  (* File "interfac.ads", line 63, characters 0-0 *)
-goal WP_parameter_def : (is_zero(of_ubv8(RNA, i)) or is_positive(of_ubv8(RNA,
+goal WP_parameter_def : (is_zero(of_ubv8(RNE, i)) or is_positive(of_ubv8(RNE,
   i)))

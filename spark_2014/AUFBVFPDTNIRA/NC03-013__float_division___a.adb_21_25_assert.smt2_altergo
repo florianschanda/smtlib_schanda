@@ -2217,4 +2217,4 @@ axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
 goal WP_parameter_def :
   (forall y:t1. forall h:t1. (in_range1(x) -> ((le(fliteral1, fliteral2) ->
   in_range2(y)) -> ((le(neg1(fliteral3), fliteral3) -> tqtisFinite(h)) ->
-  ((not (x = of_int(0))) -> le(fliteral4, of_ubv16(RNA, x)))))))
+  ((not (x = of_int(0))) -> le(fliteral4, of_ubv16(RNE, x)))))))

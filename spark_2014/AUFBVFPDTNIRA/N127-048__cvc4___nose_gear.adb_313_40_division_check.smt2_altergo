@@ -2592,13 +2592,13 @@ goal WP_parameter_def :
   (to_uint16_result_1_out11 = o13))) -> (((((o14 = left_2_out11) and
   uint_in_range(left_2_out11)) and (o15 = of_int(o14))) and
   ((result42 = to_uint16_result_2_out1) and
-  (to_uint16_result_2_out11 = o15))) -> ((((o16 = mul1(RNE, of_ubv16(RNA,
+  (to_uint16_result_2_out11 = o15))) -> ((((o16 = mul1(RNE, of_ubv16(RNE,
   to_uint16_result_out11), wheel_circunference_out11)) and
-  tqtisFinite(mul1(RNE, of_ubv16(RNA, to_uint16_result_out11),
+  tqtisFinite(mul1(RNE, of_ubv16(RNE, to_uint16_result_out11),
   wheel_circunference_out11))) and ((result43 = distance_km_out1) and
-  (distance_km_out11 = o16))) -> ((((o17 = div(RNE, of_ubv16(RNA,
+  (distance_km_out11 = o16))) -> ((((o17 = div(RNE, of_ubv16(RNE,
   to_uint16_result_1_out11), ms_in_hour_out11)) and tqtisFinite(div(RNE,
-  of_ubv16(RNA, to_uint16_result_1_out11), ms_in_hour_out11))) and
+  of_ubv16(RNE, to_uint16_result_1_out11), ms_in_hour_out11))) and
   ((result44 = elapsed_time_h_out1) and (elapsed_time_h_out11 = o17))) ->
   (((result45 = relational_operator_out1) and ((ule(to_uint16_result_2_out11,
   sum1_2_out11) and (relational_operator_out11 = true)) or

@@ -2235,7 +2235,7 @@ goal WP_parameter_def :
   (forall state:t1. forall o:t1. forall result:t1. forall state1:t1.
   forall state2:t1. forall state3:t1. ((tqtisFinite(state) and
   (in_range2(x) and ((ult(x, of_int(1000000)) and le(state, mul1(RNE,
-  of_ubv32(RNA, x), fliteral1))) and ((((o = add1(RNE, state, fliteral2)) and
+  of_ubv32(RNE, x), fliteral1))) and ((((o = add1(RNE, state, fliteral2)) and
   tqtisFinite(add1(RNE, state, fliteral2))) and ((result = state) and
   (state1 = o))) and ((state1 = state2) and (state3 = state1)))))) ->
-  le(state2, mul1(RNE, of_ubv32(RNA, add(x, of_int(1))), fliteral1))))
+  le(state2, mul1(RNE, of_ubv32(RNE, add(x, of_int(1))), fliteral1))))

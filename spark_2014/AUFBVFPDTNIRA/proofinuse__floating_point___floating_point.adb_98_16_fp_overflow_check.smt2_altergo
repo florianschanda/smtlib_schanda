@@ -2205,5 +2205,5 @@ axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
  (* File "floating_point.adb", line 77, characters 0-0 *)
 goal WP_parameter_def :
   (forall res:t1. ((le(neg1(fliteral1), fliteral1) -> tqtisFinite(res)) ->
-  ((not (x = of_int(0))) -> (le(fliteral2, of_ubv16(RNA, x)) ->
-  tqtisFinite(div(RNE, fliteral3, of_ubv16(RNA, x)))))))
+  ((not (x = of_int(0))) -> (le(fliteral2, of_ubv16(RNE, x)) ->
+  tqtisFinite(div(RNE, fliteral3, of_ubv16(RNE, x)))))))

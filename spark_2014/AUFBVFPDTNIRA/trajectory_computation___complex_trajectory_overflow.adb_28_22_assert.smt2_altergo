@@ -2449,6 +2449,6 @@ goal WP_parameter_def :
   (({ t__content1 = result } = { t__content1 = speed }) and (speed1 = o))) ->
   ((le(neg1(fliteral2), delta_speed) and le(delta_speed, fliteral2)) ->
   ((in_bounds(high_bound(n)) = true) -> ((in_bounds(low_bound(n)) = true) ->
-  eq(add1(RNE, mul1(RNE, of_ubv16(RNA, n_bv), fliteral2), fliteral2),
-  mul1(RNE, add1(RNE, of_ubv16(RNA, n_bv), fliteral),
+  eq(add1(RNE, mul1(RNE, of_ubv16(RNE, n_bv), fliteral2), fliteral2),
+  mul1(RNE, add1(RNE, of_ubv16(RNE, n_bv), fliteral),
   fliteral2)))))))))))))))))))

@@ -38,8 +38,6 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun to_nearest ((m RoundingMode)) Bool (or (= m RNE) (= m RNA)))
-
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -548,7 +546,7 @@
 
 ;; H
   (assert
-  (= res1 (fp.div RNE ((_ to_fp_unsigned 8 24) RNA x) (fp #b0 #b10001010 #b10011001100110011001101))))
+  (= res1 (fp.div RNE ((_ to_fp_unsigned 8 24) RNE x) (fp #b0 #b10001010 #b10011001100110011001101))))
 
 ;; H
   (assert

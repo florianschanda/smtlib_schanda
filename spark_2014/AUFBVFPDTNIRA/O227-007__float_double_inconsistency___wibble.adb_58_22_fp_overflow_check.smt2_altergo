@@ -2234,5 +2234,5 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
 goal WP_parameter_def :
   (forall state:t1. (tqtisFinite(state) -> (in_range2(x) -> ((ult(x,
   of_int(1000000)) and ((state = fliteral1) or (le(fliteral2, state) and
-  le(state, mul1(RNE, of_ubv32(RNA, x), fliteral2))))) ->
+  le(state, mul1(RNE, of_ubv32(RNE, x), fliteral2))))) ->
   tqtisFinite(add1(RNE, state, fliteral2))))))

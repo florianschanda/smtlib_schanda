@@ -2192,7 +2192,7 @@ goal WP_parameter_def :
   ((not (requested_force = of_int(0))) and
   (((not (requested_force = of_int(0))) and ((({ t__content = result } = {
   t__content = abs_out1 }) and (abs_out11 = udiv(sub(requested_force,
-  calculated_force), requested_force))) and (le(of_ubv32(RNA, abs_out11),
+  calculated_force), requested_force))) and (le(of_ubv32(RNE, abs_out11),
   fliteral1) and (({ t__content = result1 } = { t__content = relative_error
   }) and (relative_error1 = abs_out11))))) and (((abs_out11 = abs_out12) and
   (relative_error1 = relative_error2)) and ((abs_out13 = abs_out11) and

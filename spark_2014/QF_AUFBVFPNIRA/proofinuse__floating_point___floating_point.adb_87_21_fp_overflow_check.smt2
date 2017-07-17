@@ -209,7 +209,7 @@
 
 ;; H
   (assert
-  (= res1 (fp.div RNE ((_ to_fp_unsigned 8 24) RNA x) (fp #b0 #b10001010 #b10011001100110011001101))))
+  (= res1 (fp.div RNE ((_ to_fp_unsigned 8 24) RNE x) (fp #b0 #b10001010 #b10011001100110011001101))))
 
 ;; H
   (assert (fp.leq (fp #b0 #b10000010 #b01000000000000000000000) res1))

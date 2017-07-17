@@ -2458,8 +2458,8 @@ goal WP_parameter_def :
   (({ t__content1 = result } = { t__content1 = speed }) and
   (speed1 = o))) and ((le(neg1(fliteral2), delta_speed) and le(delta_speed,
   fliteral2)) and ((in_bounds(high_bound(n)) = true) and
-  ((in_bounds(low_bound(n)) = true) and (eq(add1(RNE, mul1(RNE, of_ubv16(RNA,
-  n_bv), fliteral2), fliteral2), mul1(RNE, add1(RNE, of_ubv16(RNA, n_bv),
+  ((in_bounds(low_bound(n)) = true) and (eq(add1(RNE, mul1(RNE, of_ubv16(RNE,
+  n_bv), fliteral2), fliteral2), mul1(RNE, add1(RNE, of_ubv16(RNE, n_bv),
   fliteral), fliteral2)) and (eq(add1(RNE, mul1(RNE, of_int1(RNE, n),
   fliteral2), fliteral2), mul1(RNE, add1(RNE, of_int1(RNE, n), fliteral),
   fliteral2)) and (eq(sub1(RNE, mul1(RNE, of_int1(RNE, n), neg1(fliteral2)),

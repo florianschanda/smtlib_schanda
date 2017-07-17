@@ -127,8 +127,6 @@
 (define-fun bv_max ((x (_ BitVec 16))
   (y (_ BitVec 16))) (_ BitVec 16) (ite (bvule x y) y x))
 
-(define-fun to_nearest ((m RoundingMode)) Bool (or (= m RNE) (= m RNA)))
-
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -513,15 +511,15 @@
 
 ;; H
   (assert
-  (fp.leq (fp #b0 #b01111110 #b11001100110011001100110) ((_ to_fp_unsigned 8 24) RNA
+  (fp.leq (fp #b0 #b01111110 #b11001100110011001100110) ((_ to_fp_unsigned 8 24) RNE
   x)))
 
 (assert
 ;; WP_parameter_def
  ;; File "floating_point.adb", line 77, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.div RNE (fp #b0 #b10010101 #b11000000110001000110000) ((_ to_fp_unsigned 8 24) RNA
-  x))) (fp.isNaN (fp.div RNE (fp #b0 #b10010101 #b11000000110001000110000) ((_ to_fp_unsigned 8 24) RNA
+  (not (or (fp.isInfinite (fp.div RNE (fp #b0 #b10010101 #b11000000110001000110000) ((_ to_fp_unsigned 8 24) RNE
+  x))) (fp.isNaN (fp.div RNE (fp #b0 #b10010101 #b11000000110001000110000) ((_ to_fp_unsigned 8 24) RNE
   x)))))))
 (check-sat)
 (exit)

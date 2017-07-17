@@ -127,8 +127,6 @@
 (define-fun bv_max ((x (_ BitVec 16))
   (y (_ BitVec 16))) (_ BitVec 16) (ite (bvule x y) y x))
 
-(define-fun to_nearest ((m RoundingMode)) Bool (or (= m RNE) (= m RNA)))
-
 (define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -1592,13 +1590,13 @@
 ;; H
   (assert
   (and
-  (= o16 (fp.mul RNE ((_ to_fp_unsigned 11 53) RNA (let ((subject to_uint16_result_out1))
+  (= o16 (fp.mul RNE ((_ to_fp_unsigned 11 53) RNE (let ((subject to_uint16_result_out1))
                                                    to_uint16_result_out11))
   wheel_circunference_out11))
-  (not (or (fp.isInfinite (fp.mul RNE ((_ to_fp_unsigned 11 53) RNA (let ((subject
+  (not (or (fp.isInfinite (fp.mul RNE ((_ to_fp_unsigned 11 53) RNE (let ((subject
                                                                     to_uint16_result_out1))
                                                                     to_uint16_result_out11))
-  wheel_circunference_out11)) (fp.isNaN (fp.mul RNE ((_ to_fp_unsigned 11 53) RNA
+  wheel_circunference_out11)) (fp.isNaN (fp.mul RNE ((_ to_fp_unsigned 11 53) RNE
   (let ((subject to_uint16_result_out1)) to_uint16_result_out11)) wheel_circunference_out11))))))
 
 ;; H
@@ -1611,10 +1609,10 @@
 ;; WP_parameter_def
  ;; File "nose_gear.adb", line 24, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.div RNE ((_ to_fp_unsigned 11 53) RNA (let ((subject
+  (not (or (fp.isInfinite (fp.div RNE ((_ to_fp_unsigned 11 53) RNE (let ((subject
                                                                     to_uint16_result_1_out1))
                                                                     to_uint16_result_1_out11))
-  ms_in_hour_out11)) (fp.isNaN (fp.div RNE ((_ to_fp_unsigned 11 53) RNA
+  ms_in_hour_out11)) (fp.isNaN (fp.div RNE ((_ to_fp_unsigned 11 53) RNE
   (let ((subject to_uint16_result_1_out1)) to_uint16_result_1_out11))
   ms_in_hour_out11))))))
 (check-sat)

@@ -73,8 +73,6 @@
 (define-fun bv_max ((x (_ BitVec 8))
   (y (_ BitVec 8))) (_ BitVec 8) (ite (bvule x y) y x))
 
-(define-fun to_nearest ((m RoundingMode)) Bool (or (= m RNE) (= m RNA)))
-
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 

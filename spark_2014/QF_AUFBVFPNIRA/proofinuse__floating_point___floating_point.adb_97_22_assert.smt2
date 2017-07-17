@@ -185,7 +185,7 @@
 ;; WP_parameter_def
  ;; File "floating_point.adb", line 77, characters 0-0
   (not
-  (fp.leq (fp #b0 #b01111110 #b11001100110011001100110) ((_ to_fp_unsigned 8 24) RNA
+  (fp.leq (fp #b0 #b01111110 #b11001100110011001100110) ((_ to_fp_unsigned 8 24) RNE
   x))))
 (check-sat)
 (exit)

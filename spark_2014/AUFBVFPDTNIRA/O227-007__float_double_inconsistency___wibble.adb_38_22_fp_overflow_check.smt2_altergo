@@ -2226,5 +2226,5 @@ axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
  (* File "wibble.adb", line 25, characters 0-0 *)
 goal WP_parameter_def :
   (forall state:t1. (tqtisFinite(state) -> (in_range2(x) -> ((ult(x,
-  of_int(1000000)) and le(state, mul1(RNE, of_ubv32(RNA, x), fliteral1))) ->
+  of_int(1000000)) and le(state, mul1(RNE, of_ubv32(RNE, x), fliteral1))) ->
   tqtisFinite(add1(RNE, state, fliteral1))))))

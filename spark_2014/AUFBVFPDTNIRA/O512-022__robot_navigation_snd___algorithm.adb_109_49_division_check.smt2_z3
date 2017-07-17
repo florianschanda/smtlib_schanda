@@ -39,8 +39,6 @@
 
 (declare-fun pow2 (Int) Int)
 
-(define-fun to_nearest ((m RoundingMode)) Bool (or (= m RNE) (= m RNA)))
-
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -462,7 +460,7 @@
   (! (=> (in_range5 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
                                                               (of_rep2 x))) )))
 
-(declare-fun sin2 (Float32) Float32)
+(declare-fun sin1 (Float32) Float32)
 
 (declare-fun sin__function_guard (Float32 Float32) Bool)
 
@@ -470,7 +468,7 @@
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true)
-     (let ((result (sin2 x)))
+     (let ((result (sin1 x)))
      (and
      (and
      (and
@@ -478,9 +476,9 @@
      (fp.leq result (fp #b0 #b01111111 #b00000000000000000000000)))
      (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
      (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000))))
-     (dynamic_invariant result true false true)))) :pattern ((sin2 x)) )))
+     (dynamic_invariant result true false true)))) :pattern ((sin1 x)) )))
 
-(declare-fun cos2 (Float32) Float32)
+(declare-fun cos1 (Float32) Float32)
 
 (declare-fun cos__function_guard (Float32 Float32) Bool)
 
@@ -488,7 +486,7 @@
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true)
-     (let ((result (cos2 x)))
+     (let ((result (cos1 x)))
      (and
      (and
      (and
@@ -496,7 +494,7 @@
      (fp.leq result (fp #b0 #b01111111 #b00000000000000000000000)))
      (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
      (fp.eq result (fp #b0 #b01111111 #b00000000000000000000000))))
-     (dynamic_invariant result true false true)))) :pattern ((cos2 x)) )))
+     (dynamic_invariant result true false true)))) :pattern ((cos1 x)) )))
 
 (declare-fun arctan (Float32 Float32) Float32)
 
@@ -1171,7 +1169,7 @@
 
 ;; H
   (assert
-  (and (= o1 (cos2 deltaangle))
+  (and (= o1 (cos1 deltaangle))
   (and (not (or (fp.isInfinite o1) (fp.isNaN o1)))
   (and
   (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))

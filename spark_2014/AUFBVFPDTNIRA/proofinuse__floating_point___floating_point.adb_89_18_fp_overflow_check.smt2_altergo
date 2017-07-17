@@ -2245,7 +2245,7 @@ goal WP_parameter_def :
   (forall res:t. forall o:t. forall result:t. forall res1:t.
   forall result1:t. forall res2:t. (tqtisFinite(y) -> ((le(neg(fliteral1),
   fliteral1) -> tqtisFinite(res)) -> ((le(fliteral2, y) and le(y,
-  fliteral)) -> (((result = res) and (res1 = div(RNE, of_ubv16(RNA, x),
+  fliteral)) -> (((result = res) and (res1 = div(RNE, of_ubv16(RNE, x),
   fliteral3))) -> (((le(fliteral4, res1) and (((o = sub(RNE, res1,
   fliteral5)) and tqtisFinite(sub(RNE, res1, fliteral5))) and
   ((result1 = res1) and (res2 = o)))) or ((not le(fliteral4, res1)) and

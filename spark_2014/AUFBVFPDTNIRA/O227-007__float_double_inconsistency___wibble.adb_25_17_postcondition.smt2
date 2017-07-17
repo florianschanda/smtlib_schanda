@@ -129,8 +129,6 @@
 (define-fun bv_max ((x (_ BitVec 32))
   (y (_ BitVec 32))) (_ BitVec 32) (ite (bvule x y) y x))
 
-(define-fun to_nearest ((m RoundingMode)) Bool (or (= m RNE) (= m RNA)))
-
 (define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -541,7 +539,7 @@
 ;; H
   (assert
   (and (bvult x ((_ int2bv 32) 1000000))
-  (fp.leq state (fp.mul RNE ((_ to_fp_unsigned 11 53) RNA x) (fp #b0 #b10000000010 #b0110000000000000000000000000000000000000000000000000)))))
+  (fp.leq state (fp.mul RNE ((_ to_fp_unsigned 11 53) RNE x) (fp #b0 #b10000000010 #b0110000000000000000000000000000000000000000000000000)))))
 
 ;; H
   (assert
@@ -566,6 +564,6 @@
 ;; WP_parameter_def
  ;; File "wibble.adb", line 15, characters 0-0
   (not
-  (fp.leq state2 (fp.mul RNE ((_ to_fp_unsigned 11 53) RNA (bvadd x ((_ int2bv 32) 1))) (fp #b0 #b10000000010 #b0110000000000000000000000000000000000000000000000000)))))
+  (fp.leq state2 (fp.mul RNE ((_ to_fp_unsigned 11 53) RNE (bvadd x ((_ int2bv 32) 1))) (fp #b0 #b10000000010 #b0110000000000000000000000000000000000000000000000000)))))
 (check-sat)
 (exit)

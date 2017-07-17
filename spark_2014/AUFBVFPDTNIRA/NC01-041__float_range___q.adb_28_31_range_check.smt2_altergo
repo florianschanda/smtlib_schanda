@@ -2282,7 +2282,7 @@ goal WP_parameter_def :
   forall x1:t. forall result1:t. forall x2:t. forall result2:t. forall x3:t.
   (in_range2(scale) -> ((le(neg(fliteral2), fliteral2) ->
   in_range3(value)) -> ((le(neg(fliteral3), fliteral3) -> tqtisFinite(x)) ->
-  (((result = x) and (x1 = div(RNE, of_ubv16(RNA, raw_in), fliteral4))) ->
+  (((result = x) and (x1 = div(RNE, of_ubv16(RNE, raw_in), fliteral4))) ->
   (((le(fliteral5, x1) and (((o = sub(RNE, x1, fliteral6)) and
   tqtisFinite(sub(RNE, x1, fliteral6))) and ((result1 = x1) and
   (x2 = o)))) or ((not le(fliteral5, x1)) and (x2 = x1))) ->
