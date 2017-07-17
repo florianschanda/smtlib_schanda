@@ -83,14 +83,31 @@ def mk_err_color(before, after):
     else:
         return "n"
 
+def cat_from_benchmark_name(bench):
+    cat = bench.split("/")[0]
+    if cat == "spark_2014":
+        if "QF_" in bench.split("/")[1]:
+            cat += "_qf"
+    return cat
+
 def add_derived_stats(item):
     item["avav"] = {}
     item["tried"] = {}
+    item["unsoundness"] = {}
     for suite in item["details"]:
         item["tried"][suite] = (item["details"][suite]["solved"] > 0 or
                                 item["details"][suite]["timeout"] > 0 or
                                 item["details"][suite]["unknown"] > 0 or
                                 item["details"][suite]["unsound"] > 0)
+
+        item["unsoundness"][suite] = {"wrong_sat"   : 0,
+                                      "wrong_unsat" : 0}
+
+    for bench, verdict in item["verdicts_processed"].iteritems():
+        if verdict == "unsound":
+            cat = cat_from_benchmark_name(bench)
+            key = "wrong_%s" % item["verdicts"][bench]
+            item["unsoundness"][cat][key] += 1
 
     for subcat in item["details"]["crafted"]:
         averages = [float(item["details"][cat][subcat] * 100) /
@@ -251,10 +268,7 @@ def mk_competition_slides(fd):
 
         for bench, answers in verdicts.iteritems():
             if len(answers) == 1:
-                cat    = bench.split("/")[0]
-                if cat == "spark_2014":
-                    if "QF_" in bench.split("/")[1]:
-                        cat += "_qf"
+                cat    = cat_from_benchmark_name(bench)
                 solver = list(answers)[0]
 
                 unique_total[solver] += 1
@@ -366,6 +380,34 @@ def mk_competition_slides(fd):
 
         fd.write(t.emit())
 
+    def mk_detailed_unsoundness_table(cat):
+        t = TikzTable(title      = "Benchmark",
+                      columns    = solvers,
+                      col_fmt_fn = mk_solver_name)
+
+        # Add result rows
+        for benchmark in benchmarks:
+            data = {}
+            notes = {}
+
+            for c in competitors:
+                if not c["tried"][benchmark]:
+                    continue
+
+                solver = c["prover"]["kind"]
+
+                data[solver] = c["unsoundness"][benchmark]["wrong_%s" % cat]
+                if c["snowflakes"][benchmark] > 0:
+                    notes[solver] = "*"
+
+            t.add_row(title     = mk_bench_name(benchmark),
+                      data      = data,
+                      format_fn = mk_fmt_function("unsound"),
+                      coloring  = COL_ERROR,
+                      notes     = notes)
+
+        fd.write(t.emit())
+
     # Table comparing all solvers
     for cat in COMPARISON_CATS:
         fd.write("\\begin{frame}{Benchmarks}{With status `%s'}\n" % cat)
@@ -382,6 +424,21 @@ def mk_competition_slides(fd):
             fd.write("\\end{center}\n")
             fd.write("$^*$) uses different VCs\n")
             fd.write("\\end{frame}\n\n")
+        elif cat == "unsound":
+            fd.write("\\begin{frame}{Benchmarks}{Incorrect `unsat' results - these would be really bad for \\spark}\n")
+            fd.write("\\begin{center}\n")
+            mk_detailed_unsoundness_table("unsat")
+            fd.write("\\end{center}\n")
+            fd.write("$^*$) uses different VCs\n")
+            fd.write("\\end{frame}\n\n")
+
+            fd.write("\\begin{frame}{Benchmarks}{Incorrect `sat' results}\n")
+            fd.write("\\begin{center}\n")
+            mk_detailed_unsoundness_table("sat")
+            fd.write("\\end{center}\n")
+            fd.write("$^*$) uses different VCs\n")
+            fd.write("\\end{frame}\n\n")
+
 
 def main():
     ap = argparse.ArgumentParser()
