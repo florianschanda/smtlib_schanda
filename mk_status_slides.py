@@ -387,6 +387,9 @@ def mk_competition_slides(fd):
 
         # Add result rows
         for benchmark in benchmarks:
+            if benchmark in NON_ANNOTATED_TESTS:
+                continue
+
             data = {}
             notes = {}
 
