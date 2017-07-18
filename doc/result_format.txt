@@ -1,0 +1,38 @@
+# Overall structure
+results/
+  random/
+  ...
+  nyxbrain/
+    reverse.p
+    benchmarks.p
+    data_<kind>_<bin>.p
+
+# benchmarks.p
+map sha1(bm_name) -> sat (s), unsat (u), and unknown (?)
+
+# reverse.p
+map sha1(bm_name) -> bm_name
+
+# data_<kind>_<bin>.p
+map results -> map sha1(bm_name) -> map status -> sat (s), unsat (u), error (e),
+                                                  timeout (t), unknown (?)
+                                        dialect -> False, True
+                                        time    -> float (seconds)
+
+# Augmentation
+After processing benchmarks.p and data.p we can augment the dictionay
+as follows:
+
+map results -> map sha1(bm_name) ->
+                 map status  -> AS BEFORE
+                     dialect -> AS BEFORE
+                     time    -> AS BEFORE
+                     score   -> solved (s), unsound (u), error (e),
+                                timeout (t), unknown (?)
+    score_summary -> map solved  -> (int, percent)
+                         unknown -> (int, percent)
+                         timeout -> (int, percent)
+                         error   -> (int, percent)
+                         unsound -> (int, percent)
+    dialect_total -> int
+    participated -> False, True
