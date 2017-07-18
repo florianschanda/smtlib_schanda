@@ -5,10 +5,10 @@
 (set-info :status sat)
 ;; fp.from.ubv(BitVec 8)
 (declare-const x (_ BitVec 8))
-(assert (bvsle x #b01001001))
-;; x should be 73
-(declare-const r Float16)
-(assert (= r ((_ to_fp 5 11) RNA x)))
-(assert (fp.leq r ((_ to_fp 5 11) #x5490)))
+(assert (= x #b00111110))
+;; x should be 62
+(declare-const r Float64)
+(assert (= r ((_ to_fp_unsigned 11 53) RNA x)))
+(assert (fp.eq r ((_ to_fp 11 53) #x404F000000000000)))
 (check-sat)
 (exit)

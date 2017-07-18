@@ -4,10 +4,10 @@
 (set-info :status unsat)
 ;; fp.from.ubv(BitVec 8)
 (declare-const x (_ BitVec 8))
-(assert (= x #b11111111))
-;; x should be -1
-(declare-const r Float64)
-(assert (= r ((_ to_fp 11 53) RTP x)))
-(assert (not (fp.eq r (fp #b1 #b01111111111 #b0000000000000000000000000000000000000000000000000000))))
+(assert (bvuge x #b01000110))
+;; x should be 70
+(declare-const r Float16)
+(assert (= r ((_ to_fp_unsigned 5 11) RTP x)))
+(assert (not (fp.geq r (fp #b0 #b10101 #b0001100000))))
 (check-sat)
 (exit)

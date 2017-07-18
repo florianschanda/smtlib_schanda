@@ -1,0 +1,13 @@
+(set-logic QF_FPBV)
+(set-info :source |Random FP created by PyMPF|)
+(set-info :category random)
+(set-info :status unsat)
+;; fp.from.ubv(BitVec 128)
+(declare-const x (_ BitVec 128))
+(assert (bvuge x #b01101111001011001011001110101000001010100000000001011111110101101100001000100110100000000110010110011101100000101010011110111101))
+;; x should be 147776412468550373352298135545943599037
+(declare-const r Float32)
+(assert (= r ((_ to_fp_unsigned 8 24) RTZ x)))
+(assert (not (fp.geq r (fp #b0 #b11111101 #b10111100101100101100111))))
+(check-sat)
+(exit)
