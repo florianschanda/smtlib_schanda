@@ -45,7 +45,7 @@ def err_cmp(a, b):
 def main():
     provers = []
     provers.append(Prover_Kind("cvc4",
-                               ["--lang=smt2"]))
+                               ["--lang=smt2", "--check-models"]))
     provers.append(Prover_Kind("z3",
                                ["-in", "-smt2"],
                                use_logic=False,
