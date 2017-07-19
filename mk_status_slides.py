@@ -83,13 +83,6 @@ def mk_err_color(before, after):
     else:
         return "n"
 
-def cat_from_benchmark_name(bench):
-    cat = bench.split("/")[0]
-    if cat == "spark_2014":
-        if "QF_" in bench.split("/")[1]:
-            cat += "_qf"
-    return cat
-
 def add_derived_stats(item):
     item["avav"] = {}
     item["tried"] = {}

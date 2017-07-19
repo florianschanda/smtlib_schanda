@@ -30,15 +30,18 @@ import resource
 import tempfile
 import datetime
 
+def cat_from_benchmark_name(bench):
+    cat = bench.split("/")[0]
+    if cat == "spark_2014":
+        if "QF_" in bench.split("/")[1]:
+            cat += "_qf"
+    return cat
+
 class Benchmark(object):
     def __init__(self, fn, dialect=None):
         self.benchmark = fn
         self.name      = os.path.basename(fn)
-        cats = os.path.dirname(fn).split("/")
-        self.cat = cats[0]
-        if self.cat == "spark_2014":
-            if "QF" in cats[1]:
-                self.cat += "_qf"
+        self.cat       = cat_from_benchmark_name(fn)
         self.expected  = "unknown"
         self.data      = None
         if dialect is not None and os.path.exists(self.benchmark + "_" +
