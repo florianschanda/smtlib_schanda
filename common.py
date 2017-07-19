@@ -29,6 +29,8 @@ import subprocess
 import resource
 import tempfile
 import datetime
+import hashlib
+from cPickle import load
 
 def cat_from_benchmark_name(bench):
     cat = bench.split("/")[0]
@@ -37,9 +39,23 @@ def cat_from_benchmark_name(bench):
             cat += "_qf"
     return cat
 
+def ensure_dir(dn):
+    components = os.path.normpath(dn).split(os.sep)
+    for i in xrange(len(components)):
+        d = os.path.join(*components[:i+1])
+        if not os.path.exists(d):
+            os.mkdir(d)
+        assert os.path.isdir(d)
+
+def secure_name(bm_name):
+    m = hashlib.sha1()
+    m.update(os.path.normpath(bm_name))
+    return m.hexdigest()
+
 class Benchmark(object):
     def __init__(self, fn, dialect=None):
         self.benchmark = fn
+        self.sha       = secure_name(fn)
         self.name      = os.path.basename(fn)
         self.cat       = cat_from_benchmark_name(fn)
         self.expected  = "unknown"
@@ -191,7 +207,7 @@ class Prover(object):
                 status  = "error"
                 comment = stdout + "\n" + stderr
 
-        return status, comment
+        return status, comment.strip()
 
 
 class Task(object):
@@ -244,3 +260,157 @@ class Result(object):
                                       str(self))
         if self.status in ("error", "unsound"):
             print self.comment.strip()
+
+def mk_run_id(solver_kind, solver_bin):
+    return "%s_%s" % (solver_kind,
+                      os.path.basename(solver_bin).lstrip("./"))
+
+def load_benchmark_status():
+    print "Loading benchmark summaries"
+    # returns a dictionay with benchmark status
+    # bm_name -> {"status" : sat | unsat | unknown,
+    #             "name"   : original name}
+    rv = {}
+
+    if not os.path.isdir("results"):
+        return rv
+
+    # Benchmarks are stored with a hashed name, this allows us to
+    # pretty-print the ones that are in the testsuite here.
+    reverse_map = {}
+    for path, dirs, files in os.walk("."):
+        for f in files:
+            if f.endswith(".smt2"):
+                sha = secure_name(os.path.join(path, f))
+                reverse_map[sha] = os.path.normpath(os.path.join(path, f))
+
+    for group in os.listdir("results"):
+        if not os.path.isdir(os.path.join("results", group)):
+            continue
+        with open(os.path.join("results", group, "benchmarks.p"), "rb") as fd:
+            data = load(fd)
+        assert set(data) == set(["sat", "unsat", "unknown"])
+        for status in data:
+            for bm in data[status]:
+                rv[bm] = {"status" : {"sat"     : "s",
+                                      "unsat"   : "u",
+                                      "unknown" : "?"}[status],
+                          "name"   : reverse_map.get(bm, "sha<%s>" % bm)}
+
+    return rv
+
+def list_results():
+    result_files = set()
+    for path, dirs, files in os.walk("results"):
+        for f in files:
+            if f.startswith("data_") and f.endswith(".p"):
+                result_files.add(f)
+
+    rv = []
+    for fn in result_files:
+        tmp = fn.rsplit(".", 1)[0]
+        tmp = tmp.split("_")[1:]
+        if tmp[0] == "mathsat" and tmp[1] == "acdl":
+            tmp[0:2] = ["mathsat_acdl"]
+        prover_kind = tmp[0]
+        prover_bin  = "_".join(tmp[1:])
+        rv.append((prover_kind, prover_bin))
+
+    return sorted(rv)
+
+def load_results(solver_kind, solver_bin, benchmark_status=None):
+    print "Loading results for %s (%s)" % (solver_kind, solver_bin)
+    # See doc/result_format.txt for more information
+    data_filename = "data_%s.p" % mk_run_id(solver_kind, solver_bin)
+
+    SCORES = ("solved", "unknown", "timeout", "error", "unsound")
+
+    to_long_score = {"s" : "solved",
+                     "?" : "unknown",
+                     "t" : "timeout",
+                     "e" : "error",
+                     "u" : "unsound"}
+
+    rv = {"group_results" : {},
+          "group_summary" : {},
+          "total_summary" : {
+              "score"        : {score: 0 for score in SCORES},
+              "average"      : {score: 0.0 for score in SCORES},
+              "dialect"      : 0},
+          "prover_kind"   : solver_kind,
+          "prover_bin"    : solver_bin,
+      }
+    totals = rv["total_summary"]
+
+    if not os.path.isdir("results"):
+        return rv
+
+    if benchmark_status is None:
+        benchmark_status = load_benchmark_status()
+
+    group_total = 0 # How many groups we have participated in, used for avav
+
+    for group in os.listdir("results"):
+        if not os.path.isdir(os.path.join("results", group)):
+            continue
+        if not os.path.isfile(os.path.join("results", group, data_filename)):
+            continue
+        with open(os.path.join("results", group, data_filename), "rb") as fd:
+            rv["group_results"][group] = load(fd)
+
+        # Augment
+        rv["group_summary"][group] = {
+            "score"        : {score: 0 for score in SCORES},
+            "average"      : {score: 0.0 for score in SCORES},
+            "dialect"      : 0,
+            "participated" : False
+        }
+        summary = rv["group_summary"][group]
+
+        for bm, data in rv["group_results"][group].iteritems():
+            assert bm in benchmark_status
+
+            # Set score (solved, unsound, etc.)
+            if data["status"] in ("s", "u"):
+                if benchmark_status[bm]["status"] in ("s", "u"):
+                    if data["status"] == benchmark_status[bm]["status"]:
+                        data["score"] = "s" # solved
+                    else:
+                        data["score"] = "u" # unsound
+                else:
+                    assert benchmark_status[bm]["status"] == "?"
+                    data["score"] = "s" # solved
+            else:
+                assert data["status"] in ("e", # error
+                                          "t", # timeout
+                                          "?") # unknown
+                data["score"] = data["status"]
+
+            # Contribute to group and overall totals
+            summary["score"][to_long_score[data["score"]]] += 1
+            totals["score"][to_long_score[data["score"]]] += 1
+            if data["dialect"]:
+                summary["dialect"] += 1
+                totals["dialect"] += 1
+
+        # Add aggregated group summary
+        summary["participated"] = (summary["score"]["solved"] > 0 or
+                                   summary["score"]["timeout"] > 0 or
+                                   summary["score"]["unsound"] > 0)
+        group_total += int(summary["participated"])
+
+        bm_total = sum(summary["score"].itervalues())
+        for score in SCORES:
+            summary["average"][score] = (
+                float(summary["score"][score] * 100) /
+                float(bm_total))
+
+    # Add aggregated total summary
+    for score in SCORES:
+        totals["average"][score] = (
+            sum(rv["group_summary"][group]["average"][score]
+                for group in rv["group_summary"]
+                if rv["group_summary"][group]["participated"]) /
+            float(group_total))
+
+    return rv

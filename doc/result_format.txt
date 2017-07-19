@@ -1,4 +1,12 @@
 # Overall structure
+We keep benchmark names hashed for two reasons:
+  1. It is often shorter and with this many benchmarks every byte helps
+  2. It allows us to transfer results from industrial codebases
+
+We produce results in a per-category directory structure, this allows
+results from an industrial codebase to be copied in with minimal
+fuss. Overall it looks like this:
+
 results/
   random/
   ...
@@ -6,49 +14,62 @@ results/
     benchmarks.p
     data_<kind>_<bin>.p
 
-# benchmarks.p
-map sha1(bm_name) -> sat (s), unsat (u), and unknown (?)
+# File format
+## benchmarks.p
+map sat     -> list<sha1(bm_name)>
+    unsat   -> list<sha1(bm_name)>
+    unknown -> list<sha1(bm_name)>
 
-# data_<kind>_<bin>.p
+## data_<kind>_<bin>.p
 map results -> map sha1(bm_name) -> map status -> sat (s), unsat (u), error (e),
                                                   timeout (t), unknown (?)
                                         dialect -> False, True
                                         time    -> float (seconds)
+                                        comment -> string
+
+The comment field specifically will contain prover output in case of
+an error.
 
 # Augmentation
+## Groups
 After processing benchmarks.p and data.p we can augment the dictionay
 as follows:
 
-map results -> map sha1(bm_name) ->
-                 map status  -> AS BEFORE
-                     dialect -> AS BEFORE
-                     time    -> AS BEFORE
-                     score   -> solved (s), unsound (u), error (e),
-                                timeout (t), unknown (?)
-    score_total -> map solved  -> int
-                       unknown -> int
-                       timeout -> int
-                       error   -> int
-                       unsound -> int
-    score_average -> map solved  -> percent
-                         unknown -> percent
-                         timeout -> percent
-                         error   -> percent
-                         unsound -> percent
-    dialect_total -> int
-    participated -> False, True
+map group_results -> map groupname -> map sha1(bm_name) ->
+                                        map status  -> AS BEFORE
+                                            dialect -> AS BEFORE
+                                            time    -> AS BEFORE
+                                            comment -> AS BEFORE
+                                            score   -> solved (s), unsound (u),
+                                                       error (e), timeout (t),
+                                                       unknown (?)
+    group_summary -> map groupname -> map score -> map solved  -> int
+                                                       unknown -> int
+                                                       timeout -> int
+                                                       error   -> int
+                                                       unsound -> int
+                                          average -> map solved  -> percent
+                                                         unknown -> percent
+                                                         timeout -> percent
+                                                         error   -> percent
+                                                         unsound -> percent
+                                          dialect -> int
+                                          participated -> False, True
 
-# Totals
-A final map can be created from all the augmented summaries:
+## Totals
+Once all groups are processed, further summaries can be added. Average
+here is the average of avarages, not counting non-participated groups.
 
-map score_total -> map solved  -> int
-                       unknown -> int
-                       timeout -> int
-                       error   -> int
-                       unsound -> int
-    score_average -> map solved  -> average of averages
-                         unknown -> average of averages
-                         timeout -> average of averages
-                         error   -> average of averages
-                         unsound -> average of averages
-    dialect_total -> int
+map total_summary -> map score -> map solved  -> int
+                                      unknown -> int
+                                      timeout -> int
+                                      error   -> int
+                                      unsound -> int
+                         average -> map solved  -> average of averages
+                                        unknown -> average of averages
+                                        timeout -> average of averages
+                                        error   -> average of averages
+                                        unsound -> average of averages
+                         dialect -> int
+    prover_kind -> str
+    prover_bin -> str

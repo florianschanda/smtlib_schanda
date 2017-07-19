@@ -26,9 +26,12 @@ import argparse
 import multiprocessing
 import os
 import datetime
+import bisect
 from cPickle import dump
+from pprint import pprint
 
 from common import *
+from mk_text_report import create_report
 
 def process(task):
     return task.execute()
@@ -78,6 +81,9 @@ def main():
     ap.add_argument("--force",
                     default=False,
                     action="store_true")
+    ap.add_argument("--report",
+                    default=False,
+                    action="store_true")
     ap.add_argument("prover_kind",
                     choices=[p.name for p in provers],
                     metavar="KIND",
@@ -85,21 +91,9 @@ def main():
     ap.add_argument("prover_bin",
                     help="prover binary",
                     metavar="BINARY")
-
     options = ap.parse_args()
 
-    result_basename = "%s_%s_%s" % \
-                      (options.suite,
-                       options.prover_kind,
-                       os.path.basename(options.prover_bin).lstrip("./"))
-    result_pickle = "data_%s.p" % result_basename
-    result_report = "report_%s.txt" % result_basename
-
-    if not options.force and os.path.exists(result_pickle):
-        print "Results for %s (%s) already exist. Use --force to recreate." %\
-            (options.prover_kind,
-             os.path.basename(options.prover_bin).lstrip("./"))
-        return
+    sane_prover_bin = os.path.basename(options.prover_bin).lstrip("./")
 
     the_prover = None
     for p in provers:
@@ -121,7 +115,21 @@ def main():
     if options.suite in ("fp", "spark"):
         bench_dirs.append("spark_2014/AUFBVFPDTNIRA")
     if options.suite == "debug":
-        bench_dirs.append("spark_2014/QF_AUFBVFPNIRA")
+        bench_dirs.append("crafted/QF_FPBV")
+        bench_dirs.append("random/smtlib.eq")
+
+    data_filename = "data_%s.p" % mk_run_id(options.prover_kind,
+                                            sane_prover_bin)
+
+    # Check for existing results; skip this step in --force mode
+    EXISTING_RESULTS = set()
+    if not options.force:
+        ensure_dir("results")
+        for group in os.listdir("results"):
+            if not os.path.isdir(os.path.join("results", group)):
+                continue
+            if data_filename in os.listdir(os.path.join("results", group)):
+                EXISTING_RESULTS.add(group)
 
     print "Assembling benchmarks..."
     tasks = []
@@ -129,76 +137,55 @@ def main():
         for path, dirs, files in os.walk(d):
             for f in sorted(files):
                 if f.endswith(".smt2"):
-                    tasks.append(Task(Benchmark(os.path.join(path, f),
-                                                dialect = the_prover.dialect),
-                                      the_prover))
+                    t = Task(Benchmark(os.path.join(path, f),
+                                       dialect = the_prover.dialect),
+                             the_prover)
+                    if t.benchmark.cat not in EXISTING_RESULTS:
+                        tasks.append(t)
                 elif ".smt2_" in f:
                     assert os.path.exists(os.path.join(path,
                                                        f.rsplit("_", 1)[0]))
 
-    detail = {}
-    summary = {"solved"  : 0,
-               "unknown" : 0,
-               "timeout" : 0,
-               "error"   : 0,
-               "unsound" : 0}
-    unsound = []
-    errors = []
-    verdicts = {}           # unjudged
-    verdicts_processed = {} # with "unsound" thrown in
-    snowflake = {}          # records if special VCs have been used
+    if len(tasks) == 0:
+        print "Results for %s (%s) already exist. Use --force to recreate." %\
+            (options.prover_kind,
+             sane_prover_bin)
+        return
+
+    BENCHMARK_GROUPS = frozenset(t.benchmark.cat for t in tasks)
+    BENCHMARK_STATUS = {group : {"sat"     : [],
+                                 "unsat"   : [],
+                                 "unknown" : []}
+                        for group in BENCHMARK_GROUPS}
+
+    # See doc/result_format for a description
+    RESULTS = {group : {} for group in BENCHMARK_GROUPS}
 
     def analyze(result, progress, start_time):
+        bm    = result.task.benchmark
+        group = bm.cat
+
         result.print_summary(progress, start_time)
-        verdicts[result.task.benchmark.benchmark] = result.prover_status
-        verdicts_processed[result.task.benchmark.benchmark] = result.status
 
-        if result.task.benchmark.cat not in snowflake:
-            snowflake[result.task.benchmark.cat] = 0
-        if result.task.benchmark.dialect is not None:
-            snowflake[result.task.benchmark.cat] += 1
+        # Record expected benchmark status
+        bisect.insort(BENCHMARK_STATUS[group][bm.expected], bm.sha)
 
-        if result.task.benchmark.cat not in detail:
-            detail[result.task.benchmark.cat] = {"solved"  : 0,
-                                                 "unknown" : 0,
-                                                 "timeout" : 0,
-                                                 "error"   : 0,
-                                                 "unsound" : 0}
-        if result.status in ("unsat", "sat"):
-            key = "solved"
-        else:
-            key = result.status
-            if result.status == "unsound":
-                unsound.append(result.task.benchmark.name)
-            elif result.status == "error":
-                errors.append((result.task.benchmark.name,
-                               result.comment))
+        # Record verdict
+        status_shorthand = {"unsat"   : "u",
+                            "sat"     : "s",
+                            "error"   : "e",
+                            "timeout" : "t",
+                            "unknown" : "?"}[result.prover_status]
 
-        detail[result.task.benchmark.cat][key] += 1
-        summary[key] += 1
+        RESULTS[group][bm.sha] = {
+            "status"  : status_shorthand,
+            "dialect" : bm.dialect is not None,
+            "time"    : None,
+            "comment" : result.comment,
+        }
+        # TODO: Record time
 
-    stat_hdg = "%6s %6s %6s %6s %5s %4s %4s" % ("solved",
-                                                "nonerr",
-                                                " total",
-                                                "solved",
-                                                "t/out",
-                                                " err",
-                                                "usnd")
-    stat_fmt = "%5.1f%% %5.1f%% %6u %6u %5u %4u %4u"
-
-    def stat_str(stats):
-        total = sum(stats.itervalues())
-        return stat_fmt % (float(stats["solved"] * 100) / float(total),
-                           float((stats["solved"] +
-                                  stats["timeout"] +
-                                  stats["unknown"]) * 100) /
-                             float(total),
-                           total,
-                           stats["solved"],
-                           stats["timeout"],
-                           stats["error"],
-                           stats["unsound"])
-
+    # Perform benchmark
     start_time = datetime.datetime.now()
     n = 0
     if options.single:
@@ -208,61 +195,32 @@ def main():
                     float(n * 100) / float(len(tasks)),
                     start_time)
     else:
+        bunch = 1 if options.suite == "debug" else 5
         pool = multiprocessing.Pool()
-        for result in pool.imap_unordered(process, tasks, 5):
+        for result in pool.imap_unordered(process, tasks, bunch):
             n += 1
             analyze(result,
                     float(n * 100) / float(len(tasks)),
                     start_time)
-
     elapsed_total_time = datetime.datetime.now() - start_time
 
-    print "%20s %s" % ("benchmarks", stat_hdg)
-    for cat in sorted(detail):
-        print "%20s %s" % (cat, stat_str(detail[cat]))
-    print "%20s %s" % ("TOTAL", stat_str(summary))
+    # Write group results
+    for group in BENCHMARK_GROUPS:
+        ensure_dir(os.path.join("results", group))
 
-    with open(result_pickle, "w") as fd:
-        report = {
-            "prover" : {
-                "kind" : options.prover_kind,
-                "bin"  : os.path.basename(options.prover_bin).lstrip("./")},
-            "time" : {
-                "start"   : start_time,
-                "elapsed" : elapsed_total_time},
-            "summary" : summary,
-            "details" : detail,
-            "snowflakes" : snowflake,
-            "verdicts" : verdicts,
-            "verdicts_processed" : verdicts_processed,
-        }
-        dump(report, fd, -1)
+        with open(os.path.join("results",
+                               group,
+                               "benchmarks.p"),
+                  "wb") as fd:
+            dump(BENCHMARK_STATUS[group], fd, -1)
+        with open(os.path.join("results",
+                               group,
+                               data_filename),
+                  "wb") as fd:
+            dump(RESULTS[group], fd, -1)
 
-    with open(result_report, "w") as fd:
-        fd.write("# Configuration \n")
-        fd.write("Prover kind     : %s\n" % options.prover_kind)
-        fd.write("Prover binary   : %s\n" %
-                 os.path.basename(options.prover_bin).lstrip("./"))
-        fd.write("Benchmark suite : %s\n" % options.suite)
-        fd.write("Benchmark start : %s\n" % start_time)
-        fd.write("Benchmark time  : %s\n" % elapsed_total_time)
-
-        fd.write("\n# Results\n")
-        fd.write("%15s : %s\n" % ("benchmarks", stat_hdg))
-        for cat in sorted(detail):
-            fd.write("%15s : %s\n" % (cat, stat_str(detail[cat])))
-        fd.write("%15s : %s\n" % ("TOTAL", stat_str(summary)))
-
-        if len(unsound) > 0:
-            fd.write("\n## Unsound\n")
-            for u in sorted(unsound):
-                fd.write("%s\n" % u)
-
-        if len(errors) > 0:
-            fd.write("\n## Errors\n")
-            for b, e in sorted(errors, cmp=err_cmp):
-                fd.write("### %s\n" % b)
-                fd.write("%s\n\n" % e.rstrip())
+    if options.report:
+        create_report(options.prover_kind, sane_prover_bin)
 
 if __name__ == "__main__":
     main()

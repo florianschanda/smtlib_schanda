@@ -37,7 +37,12 @@ def main():
     ap.add_argument("--force",
                     action="store_true",
                     default=False)
+    ap.add_argument("--debug",
+                    action="store_true",
+                    default=False)
     options = ap.parse_args()
+
+    bm_suite = "debug" if options.debug else "fp"
 
     for binary in CVC4_VERSIONS:
         # Fast suite skips most versions
@@ -45,9 +50,13 @@ def main():
             if binary not in (CVC4_VERSIONS[0], CVC4_VERSIONS[-1]):
                 continue
 
-        os.system("./run.py %s --suite=fp cvc4 ./%s" %
+        os.system("./run.py %s --suite=%s cvc4 ./%s" %
                   ("--force" if options.force else "",
+                   bm_suite,
                    binary))
+
+    for binary in CVC4_VERSIONS[-2:]:
+        os.system("./mk_text_report.py cvc4 %s" % binary)
 
     OTHER_PROVERS = ["mathsat", "z3"]
     # Only all includes colibri and alt-ergo
@@ -64,13 +73,15 @@ def main():
                 exists = True
                 break
         if exists:
-            os.system("./run.py %s --suite=fp %s %s" %
+            os.system("./run.py %s --suite=%s %s %s" %
                       ("--force" if options.force else "",
+                       bm_suite,
                        prover,
                        prover_bin))
             if prover == "mathsat":
-                os.system("./run.py %s --suite=fp %s_acdl %s" %
+                os.system("./run.py %s --suite=%s %s_acdl %s" %
                           ("--force" if options.force else "",
+                           bm_suite,
                            prover,
                            prover_bin))
 
