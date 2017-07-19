@@ -3,15 +3,11 @@ results/
   random/
   ...
   nyxbrain/
-    reverse.p
     benchmarks.p
     data_<kind>_<bin>.p
 
 # benchmarks.p
 map sha1(bm_name) -> sat (s), unsat (u), and unknown (?)
-
-# reverse.p
-map sha1(bm_name) -> bm_name
 
 # data_<kind>_<bin>.p
 map results -> map sha1(bm_name) -> map status -> sat (s), unsat (u), error (e),
@@ -29,10 +25,30 @@ map results -> map sha1(bm_name) ->
                      time    -> AS BEFORE
                      score   -> solved (s), unsound (u), error (e),
                                 timeout (t), unknown (?)
-    score_summary -> map solved  -> (int, percent)
-                         unknown -> (int, percent)
-                         timeout -> (int, percent)
-                         error   -> (int, percent)
-                         unsound -> (int, percent)
+    score_total -> map solved  -> int
+                       unknown -> int
+                       timeout -> int
+                       error   -> int
+                       unsound -> int
+    score_average -> map solved  -> percent
+                         unknown -> percent
+                         timeout -> percent
+                         error   -> percent
+                         unsound -> percent
     dialect_total -> int
     participated -> False, True
+
+# Totals
+A final map can be created from all the augmented summaries:
+
+map score_total -> map solved  -> int
+                       unknown -> int
+                       timeout -> int
+                       error   -> int
+                       unsound -> int
+    score_average -> map solved  -> average of averages
+                         unknown -> average of averages
+                         timeout -> average of averages
+                         error   -> average of averages
+                         unsound -> average of averages
+    dialect_total -> int
