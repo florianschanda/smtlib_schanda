@@ -91,5 +91,10 @@ def main():
         else:
             print "Could not find %s on path." % prover_bin
 
+    print "Preparing results tarball"
+    if os.path.isfile("results.tar.xz"):
+        os.unlink("results.tar.xz")
+    os.system("tar cfJ results.tar.xz results")
+
 if __name__ == "__main__":
     main()
