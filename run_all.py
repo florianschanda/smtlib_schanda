@@ -58,7 +58,7 @@ def main():
     for binary in CVC4_VERSIONS[-2:]:
         os.system("./mk_text_report.py cvc4 %s" % binary)
 
-    OTHER_PROVERS = ["mathsat", "z3"]
+    OTHER_PROVERS = ["mathsat", "mathsat_acdl", "z3"]
     # Only all includes colibri and alt-ergo
     if options.suite == "all":
         OTHER_PROVERS.append("altergo")
@@ -66,24 +66,29 @@ def main():
 
     for prover in OTHER_PROVERS:
         exists = False
-        prover_bin = {"z3" : "./z3_2017_07_13"}.get(prover, prover)
+        prover_bin = {
+            "z3"           : "z3_2017_07_13",
+            "mathsat_acdl" : "mathsat"
+        }.get(prover, prover)
 
-        for p in PATH:
-            if os.path.exists(os.path.join(p, prover)):
-                exists = True
-                break
+        # Search current directory, then PATH for prover binary
+        if os.path.exists(prover_bin):
+            prover_bin = "./%s" % prover_bin
+            exists     = True
+        if not exists:
+            for p in PATH:
+                if os.path.exists(os.path.join(p, prover_bin)):
+                    exists = True
+                    break
+
         if exists:
             os.system("./run.py %s --suite=%s %s %s" %
                       ("--force" if options.force else "",
                        bm_suite,
                        prover,
                        prover_bin))
-            if prover == "mathsat":
-                os.system("./run.py %s --suite=%s %s_acdl %s" %
-                          ("--force" if options.force else "",
-                           bm_suite,
-                           prover,
-                           prover_bin))
+        else:
+            print "Could not find %s on path." % prover_bin
 
 if __name__ == "__main__":
     main()
