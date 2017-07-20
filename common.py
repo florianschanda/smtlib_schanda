@@ -363,7 +363,8 @@ def load_results(solver_kind, solver_bin, benchmark_status=None):
             "score"        : {score: 0 for score in SCORES},
             "average"      : {score: 0.0 for score in SCORES},
             "dialect"      : 0,
-            "participated" : False
+            "participated" : False,
+            "annotated"    : False,
         }
         summary = rv["group_summary"][group]
 
@@ -392,6 +393,8 @@ def load_results(solver_kind, solver_bin, benchmark_status=None):
             if data["dialect"]:
                 summary["dialect"] += 1
                 totals["dialect"] += 1
+            if benchmark_status[bm]["status"] in ("s", "u"):
+                summary["annotated"] = True
 
         # Add aggregated group summary
         summary["participated"] = (summary["score"]["solved"] > 0 or

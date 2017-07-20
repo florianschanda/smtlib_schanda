@@ -55,6 +55,7 @@ map group_results -> map groupname -> map sha1(bm_name) ->
                                                          unsound -> percent
                                           dialect -> int
                                           participated -> False, True
+                                          annotated -> False, True
 
 ## Totals
 Once all groups are processed, further summaries can be added. Average

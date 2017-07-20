@@ -31,15 +31,18 @@ from pprint import pprint
 from common import load_benchmark_status, load_results, list_results
 from tikztable import *
 
-NON_ANNOTATED_TESTS = set(["griggio", "spark_2014_qf"])
-
 def mk_bench_name(cat):
-    return {
-        "crafted"       : "schanda",
+    mapping = {
+        "crafted"       : "Schanda",
+        "nyxbrain"      : "NyxBrain",
         "random"        : "PyMPF",
         "spark_2014"    : "{\\sc Spark~2014}",
         "spark_2014_qf" : "{\\sc Spark~QF}",
-    }.get(cat, cat)
+    }
+    if cat in mapping:
+        return mapping[cat]
+    else:
+        return cat.replace("_", "\\_").capitalize()
 
 def mk_solver_name(nam):
     return {
@@ -123,7 +126,8 @@ def mk_progress_slides(fd):
                       columns    = [v["prover_bin"] for v in versions],
                       col_fmt_fn = mk_cvc4_shortname)
         for group in groups:
-            if criteria == "unsound" and group in NON_ANNOTATED_TESTS:
+            if (criteria == "unsound" and
+                not versions[-1]["group_summary"][group]["annotated"]):
                 continue
 
             kind = "average" if criteria == "solved" else "score"
@@ -140,13 +144,22 @@ def mk_progress_slides(fd):
         fd.write("\\end{center}\n")
         fd.write("\\end{frame}\n\n")
 
-    def mk_plot(avav_key, color):
+    def mk_plot(avav_key, color, group=None):
+        if group is None:
+             # Average of averages
+            points = [r["total_summary"]["average"][avav_key] for r in data]
+            bench = [(r["prover_kind"],
+                      r["total_summary"]["average"][avav_key])
+                     for r in other_data]
+        else:
+            # A specific benchmark
+            points = [r["group_summary"][group]["average"][avav_key] for r in data]
+            bench = [(r["prover_kind"],
+                      r["group_summary"][group]["average"][avav_key])
+                     for r in other_data]
+
         fd.write("\\begin{center}\n")
         fd.write("\\begin{tikzpicture}\n")
-        points = [r["total_summary"]["average"][avav_key] for r in data]
-        bench = [(r["prover_kind"],
-                  r["total_summary"]["average"][avav_key])
-                 for r in other_data]
         fd.write(r"\datavisualization [" + "\n")
         fd.write( "  scientific axes=clean,\n")
         fd.write( "  y axis={\n")
@@ -196,6 +209,15 @@ def mk_progress_slides(fd):
                       else "AnSecondaryRed"))
         fd.write("\\end{frame}\n\n")
 
+        if cat == "solved":
+            for group in groups:
+                if not group.startswith("industrial_"):
+                    continue
+                fd.write("\\begin{frame}[fragile]{FP progress in CVC4}{VCs solved on %s}\n" % mk_bench_name(group))
+                mk_plot(cat, "AnSecondaryGreen", group=group)
+                fd.write("\\end{frame}\n\n")
+
+
 def mk_competition_slides(fd):
     competitors = sorted([data[-1]] + other_data,
                          cmp=lambda a, b: cmp(a["prover_kind"],
@@ -241,7 +263,8 @@ def mk_competition_slides(fd):
 
         # Add result rows
         for group in groups:
-            if criteria == "unsound" and group in NON_ANNOTATED_TESTS:
+            if (criteria == "unsound" and
+                not competitors[0]["group_summary"][group]["annotated"]):
                 continue
 
             data  = {}
