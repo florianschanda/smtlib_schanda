@@ -68,7 +68,8 @@ def main():
         exists = False
         prover_bin = {
             "z3"           : "z3_2017_07_13",
-            "mathsat_acdl" : "mathsat"
+            "mathsat_acdl" : "mathsat",
+            "altergo"      : "altergo_spark_2017_07_20",
         }.get(prover, prover)
 
         # Search current directory, then PATH for prover binary
