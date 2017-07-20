@@ -88,7 +88,7 @@ class TikzTable(object):
                 return 2.5 + float(x - 1) * 1.25
 
         def tr_y(y):
-            return float(-y) * 0.5
+            return float(-y) * 0.35
 
         def emit_box(x, y, txt, title=False):
             n_atr = ["anchor=west"]
@@ -104,7 +104,7 @@ class TikzTable(object):
 
             n += " at (%.3f, %.3f)" % (final_x, final_y)
 
-            n += " {\small %s};" % txt
+            n += " {\\tiny %s};" % txt
             rv.append(n)
 
         def emit_hrule(after_y):
