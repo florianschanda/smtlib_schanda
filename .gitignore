@@ -1,7 +1,16 @@
+# Python things
 *.pyc
-data_*.p
-benchmarks.p
-report_*.txt
+
+# Canned solver binaries
 cvc4_*
 z3_*
+altergo_*
+
+# Reports
 fp_progress.*
+report_*.txt
+
+# Results
+data_*.p
+benchmarks.p
+results.tar.xz
