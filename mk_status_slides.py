@@ -31,6 +31,21 @@ from pprint import pprint
 from common import load_benchmark_status, load_results, list_results
 from tikztable import *
 
+CONFIGURATIONS = list_results()
+BENCHMARKS = load_benchmark_status()
+
+data = [load_results(solver_kind, solver_bin, BENCHMARKS)
+        for solver_kind, solver_bin in CONFIGURATIONS
+        if solver_kind == "cvc4"]
+
+other_data = [load_results(solver_kind, solver_bin, BENCHMARKS)
+              for solver_kind, solver_bin in CONFIGURATIONS
+              if solver_kind != "cvc4"]
+
+COMPARISON_CATS = ("solved", "timeout", "error", "unsound")
+
+GROUPS = sorted(data[-1]["group_summary"])
+
 def mk_bench_name(cat):
     mapping = {
         "crafted"       : "Schanda",
@@ -54,41 +69,6 @@ def mk_solver_name(nam):
         "altergo"      : "Alt-Ergo 1.3",
     }.get(nam, nam)
 
-def mk_best_color(best, current):
-    if current == best:
-        return "g"
-    else:
-        return "n"
-
-def mk_perc_color(before, after):
-    if after < before:
-        return "b"
-    elif after > before or after == 100.0:
-        return "g"
-    else:
-        return "n"
-
-def mk_err_color(before, after):
-    if after < before or after == 0:
-        return "g"
-    elif after > before:
-        return "b"
-    else:
-        return "n"
-
-CONFIGURATIONS = list_results()
-BENCHMARKS = load_benchmark_status()
-
-data = [load_results(solver_kind, solver_bin, BENCHMARKS)
-        for solver_kind, solver_bin in CONFIGURATIONS
-        if solver_kind == "cvc4"]
-
-other_data = [load_results(solver_kind, solver_bin, BENCHMARKS)
-              for solver_kind, solver_bin in CONFIGURATIONS
-              if solver_kind != "cvc4"]
-
-COMPARISON_CATS = ("solved", "timeout", "error", "unsound")
-
 def mk_coloring(criteria):
     if criteria == "solved":
         return COL_AWARD_HIGH
@@ -111,12 +91,14 @@ def mk_fmt_function(criteria):
             return "%u" % item
     return format_fn
 
-def mk_progress_slides(fd):
-    def mk_cvc4_shortname(prover_bin):
-        return "-".join(prover_bin.split("_")[-2:])
+def format_fn_totals(item):
+    return "%.0f\\%%" % item
 
+def mk_cvc4_shortname(prover_bin):
+    return "-".join(prover_bin.split("_")[-2:])
+
+def mk_progress_slides(fd):
     versions = [data[0], data[-1]]
-    groups   = sorted(versions[-1]["group_results"])
 
     # Table with Benchmark, (Old) Solved%, (New) Solved%
     def mk_progress_table(criteria):
@@ -125,7 +107,7 @@ def mk_progress_slides(fd):
         t = TikzTable(title      = "Benchmark",
                       columns    = [v["prover_bin"] for v in versions],
                       col_fmt_fn = mk_cvc4_shortname)
-        for group in groups:
+        for group in GROUPS:
             if (criteria == "unsound" and
                 not versions[-1]["group_summary"][group]["annotated"]):
                 continue
@@ -138,7 +120,8 @@ def mk_progress_slides(fd):
                       format_fn = mk_fmt_function(criteria),
                       coloring  = mk_coloring(criteria))
 
-        fd.write("\\begin{frame}{FP progress in CVC4}{%s}\n" % criteria.capitalize())
+        fd.write("\\begin{frame}{FP progress in CVC4}{%s}\n" %
+                 criteria.capitalize())
         fd.write("\\begin{center}\n")
         fd.write(t.emit())
         fd.write("\\end{center}\n")
@@ -147,13 +130,15 @@ def mk_progress_slides(fd):
     def mk_plot(avav_key, color, group=None):
         if group is None:
              # Average of averages
-            points = [r["total_summary"]["average"][avav_key] for r in data]
+            points = [r["total_summary"]["average"][avav_key]
+                      for r in data]
             bench = [(r["prover_kind"],
                       r["total_summary"]["average"][avav_key])
                      for r in other_data]
         else:
             # A specific benchmark
-            points = [r["group_summary"][group]["average"][avav_key] for r in data]
+            points = [r["group_summary"][group]["average"][avav_key]
+                      for r in data]
             bench = [(r["prover_kind"],
                       r["group_summary"][group]["average"][avav_key])
                      for r in other_data]
@@ -189,7 +174,10 @@ def mk_progress_slides(fd):
         fd.write("} info {\n")
         for b in bench:
             if min(points) <= b[1] <= max(points) and b[1] > 0:
-                fd.write("\\node[anchor=west,text width=1.5cm,fill=Altran1!10,rounded corners] at (visualization cs: x=%.3f,y=%.3f) {\\small %s};\n" %
+                fd.write("\\node")
+                fd.write("[anchor=west,text width=1.5cm,fill=Altran1!10,")
+                fd.write("rounded corners] at ")
+                fd.write("(visualization cs: x=%.3f,y=%.3f) {\\small %s};\n" %
                          (float(len(data) - 1) + 0.1,
                           b[1],
                           mk_solver_name(b[0])))
@@ -203,17 +191,19 @@ def mk_progress_slides(fd):
 
     # Plot of over various CVC4 versions
     for cat in COMPARISON_CATS:
-        fd.write("\\begin{frame}[fragile]{FP progress in CVC4}{%s over time (average of averages)}\n" % cat.capitalize())
+        fd.write("\\begin{frame}[fragile]{FP progress in CVC4}")
+        fd.write("{%s over time (average of averages)}\n" % cat.capitalize())
         mk_plot(cat, ("AnSecondaryGreen"
                       if cat == "solved"
                       else "AnSecondaryRed"))
         fd.write("\\end{frame}\n\n")
 
         if cat == "solved":
-            for group in groups:
+            for group in GROUPS:
                 if not group.startswith("industrial_"):
                     continue
-                fd.write("\\begin{frame}[fragile]{FP progress in CVC4}{VCs solved on %s}\n" % mk_bench_name(group))
+                fd.write("\\begin{frame}[fragile]{FP progress in CVC4}")
+                fd.write("{VCs solved on %s}\n" % mk_bench_name(group))
                 mk_plot(cat, "AnSecondaryGreen", group=group)
                 fd.write("\\end{frame}\n\n")
 
@@ -222,8 +212,7 @@ def mk_competition_slides(fd):
     competitors = sorted([data[-1]] + other_data,
                          cmp=lambda a, b: cmp(a["prover_kind"],
                                               b["prover_kind"]))
-    solvers = [c["prover_kind"] for c in competitors]
-    groups  = sorted(competitors[0]["group_results"])
+    solvers = sorted(c["prover_kind"] for c in competitors)
 
     # def calculate_unique_solutions():
     #     verdicts = {}
@@ -253,8 +242,6 @@ def mk_competition_slides(fd):
 
     #     return unique_cat, unique_total
 
-    def format_fn_totals(item):
-        return "%.0f\\%%" % item
 
     def mk_table(criteria):
         t = TikzTable(title      = "Benchmark",
@@ -262,7 +249,7 @@ def mk_competition_slides(fd):
                       col_fmt_fn = mk_solver_name)
 
         # Add result rows
-        for group in groups:
+        for group in GROUPS:
             if (criteria == "unsound" and
                 not competitors[0]["group_summary"][group]["annotated"]):
                 continue
@@ -311,7 +298,7 @@ def mk_competition_slides(fd):
     #     unique_cat, unique_total = calculate_unique_solutions()
 
     #     # Add result rows
-    #     for group in groups:
+    #     for group in GROUPS:
     #         data = {}
     #         notes = {}
 
@@ -353,7 +340,7 @@ def mk_competition_slides(fd):
     #                   col_fmt_fn = mk_solver_name)
 
     #     # Add result rows
-    #     for group in groups:
+    #     for group in GROUPS:
     #         if group in NON_ANNOTATED_TESTS:
     #             continue
 
