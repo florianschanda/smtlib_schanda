@@ -43,19 +43,27 @@ more areas (i.e. we found bugs in Z3, MathSAT, CVC4 with them).
 
 All of these are automatically annotated with SAT or UNSAT.
 
-## wintersteiger
-These are Cristoph's FP benchmarks, downloaded on 2017-07-05 from
-SMTLIB and filed here for convenience.
-
-## griggio
-These are Alberto's FP benchmarks, downloaded on 2017-07-05 from
-SMTLIB and filed here for convenience.
-
 ## nyxbrain
 These are Martin's work-in-progress benchmarks. They are filed here
 for convenience, but they should not be re-distributed or included in
 SMTLIB as they are *not yet finished or necessarily correct*. Please
 contact Martin for additional detail.
+
+## SMTLIB
+
+### wintersteiger
+These are Cristoph's FP benchmarks, downloaded on 2017-07-05 from
+SMTLIB and filed here for convenience.
+
+### griggio
+These are Alberto's FP benchmarks, downloaded on 2017-07-05 from
+SMTLIB and filed here for convenience.
+
+### heizmann
+These are Matthias Heizmann's Ultimate Automizer benchmarks (in a
+variety of logics), downloaded on 2017-07-22 from SMTLIB and filed
+here for convenience.
+
 
 # Scripts
 

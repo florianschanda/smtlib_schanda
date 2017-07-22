@@ -114,6 +114,7 @@ def main():
         bench_dirs.append("spark_2014/QF_AUFBVFPNIRA")
     if options.suite in ("fp", "spark"):
         bench_dirs.append("spark_2014/AUFBVFPDTNIRA")
+        bench_dirs.append("heizmann")
     if options.suite in ("fp", "industrial"):
         for d in os.listdir("."):
             if d.startswith("industrial_") and os.path.isdir(d):
