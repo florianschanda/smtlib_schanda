@@ -398,6 +398,92 @@ def mk_competition_slides(fd):
         #     fd.write("\\end{frame}\n\n")
 
 
+def mk_cactus_slides(fd):
+    competitors = sorted([data[-1]] + other_data,
+                         cmp=lambda a, b: cmp(a["prover_kind"],
+                                              b["prover_kind"]))
+    solvers = sorted(c["prover_kind"] for c in competitors)
+
+    def h(solver):
+        return "sol%u" % solvers.index(solver)
+
+    def mk_plot(group):
+        datasets = []
+
+        for data in competitors:
+            results = []
+            expected = 0
+            for g in GROUPS:
+                if group is not None and group != g:
+                    continue
+                expected += data["group_summary"][g]["score"]["solved"]
+                for b in data["group_results"][g]:
+                    if data["group_results"][g][b]["score"] == "s":
+                        results.append(data["group_results"][g][b]["time"])
+            results.sort()
+            assert len(results) == expected
+
+            points = [[0, 0.0]]  # (count, time)
+            for t in results:
+                if len(points) == 0:
+                    points.append([1, t])
+                elif points[-1][1] == t:
+                    points[-1][0] += 1
+                else:
+                    points.append([points[-1][0] + 1, t])
+            assert len(points) == 0 or points[-1][0] == expected
+
+            if len(points) > 1:
+                datasets.append((data["prover_kind"],
+                                 points))
+
+        if len(datasets) == 0:
+            return
+
+        fd.write("\\begin{frame}[fragile]{Cactus plot}{%s}\n" %
+                 ("Overall" if group is None else mk_bench_name(group)))
+        fd.write("\\begin{center}\n")
+
+        fd.write("\\begin{tikzpicture}\n")
+        fd.write("\\datavisualization [\n")
+        fd.write("  scientific axes=clean,\n")
+        fd.write("  x axis={\n")
+        fd.write("    length=6cm,\n")
+        fd.write("    label={instances solved},\n")
+        fd.write("    },\n")
+        fd.write("  y axis={\n")
+        fd.write("    length=6cm,\n")
+        fd.write("    label={time},\n")
+        fd.write("    ticks={tick unit=s},\n")
+        fd.write("  },\n")
+        fd.write("  visualize as line/.list={%s},\n" %
+                 ",".join(map(h, solvers)))
+        fd.write("  legend={right},\n")
+        for solver, _ in datasets:
+            fd.write("  %s={label in legend={text=%s}},\n" %
+                     (h(solver), mk_solver_name(solver)))
+        fd.write("  style sheet=strong colors\n")
+        fd.write("]\n")
+
+        for solver, points in datasets:
+            fd.write("data [set=%s] {\n" % h(solver))
+            fd.write("  x, y\n")
+            for x, y in points:
+                fd.write("  %u, %.2f\n" % (x, y))
+            fd.write("}\n")
+
+        fd.write(";\n")
+        fd.write("\\end{tikzpicture}\n")
+
+        fd.write("\\end{center}\n")
+        fd.write("\\end{frame}\n\n")
+
+    for group in GROUPS:
+        if group == "wintersteiger":
+            continue
+        mk_plot(group)
+    mk_plot(None)
+
 def main():
     ap = argparse.ArgumentParser()
     options = ap.parse_args()
@@ -421,6 +507,10 @@ def main():
         if len(other_data) >= 1:
             fd.write("\\section{Comparisons}\n\n")
             mk_competition_slides(fd)
+
+        if len(data) >= 1 or len(other_data) >= 1:
+            fd.write("\\section{Cactus plots}\n\n")
+            mk_cactus_slides(fd)
 
         fd.write("\\end{document}\n")
 
