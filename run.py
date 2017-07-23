@@ -76,7 +76,7 @@ def main():
                     default=False,
                     action="store_true")
     ap.add_argument("--timeout",
-                    default=5,
+                    default=60,
                     type=int)
     ap.add_argument("--force",
                     default=False,
