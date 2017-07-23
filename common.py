@@ -143,7 +143,7 @@ class Prover(object):
         benchmark.load(keep_logic = self.logic)
 
         if self.dialect == "altergo" and benchmark.dialect != "altergo":
-            return ("error", "unsupported")
+            return ("error", "unsupported", 0.0)
 
         cmd = ["/usr/bin/time",
                '--format=<<<%E | %U>>>',
