@@ -185,7 +185,7 @@ def main():
         RESULTS[group][bm.sha] = {
             "status"  : status_shorthand,
             "dialect" : bm.dialect is not None,
-            "time"    : None,
+            "time"    : result.cpu_time,
             "comment" : result.comment,
         }
         # TODO: Record time

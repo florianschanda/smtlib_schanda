@@ -145,7 +145,9 @@ class Prover(object):
         if self.dialect == "altergo" and benchmark.dialect != "altergo":
             return ("error", "unsupported")
 
-        cmd = copy(self.cmd)
+        cmd = ["/usr/bin/time",
+               '--format=<<<%E | %U>>>',
+               "--"] + self.cmd
         if self.temp:
             if self.dialect == "altergo":
                 suffix = ".why"
@@ -173,6 +175,9 @@ class Prover(object):
         benchmark.unload()
 
         if len(stdout) == 0 and len(stderr) == 0:
+            status = "timeout"
+            comment = ""
+        elif stderr.startswith("Command terminated by signal 9"):
             status = "timeout"
             comment = ""
         elif len(stdout) == 0:
@@ -207,7 +212,15 @@ class Prover(object):
                 status  = "error"
                 comment = stdout + "\n" + stderr
 
-        return status, comment.strip()
+        timing = stderr.strip().splitlines()[-1].strip()
+        if timing.startswith("<<<") and timing.endswith(">>>"):
+            timing = timing[3:-3]
+            wallclock_time, cpu_time = timing.split(" | ")
+            cpu_time = float(cpu_time)
+        else:
+            cpu_time = float(self.timeout)
+
+        return status, comment.strip(), cpu_time
 
 
 class Task(object):
@@ -216,15 +229,16 @@ class Task(object):
         self.prover    = prover
 
     def execute(self):
-        status, comment = self.prover.get_status(self.benchmark)
-        return Result(self, status, comment)
+        status, comment, cpu_time = self.prover.get_status(self.benchmark)
+        return Result(self, status, comment, cpu_time)
 
 class Result(object):
-    def __init__(self, task, status, comment):
+    def __init__(self, task, status, comment, cpu_time):
         assert status in ("sat", "unsat", "unknown", "timeout", "error")
         self.task          = task
         self.prover_status = status
         self.comment       = comment
+        self.cpu_time      = cpu_time
 
         if (self.prover_status in ("sat", "unsat") and
             self.task.benchmark.expected in ("sat", "unsat") and
