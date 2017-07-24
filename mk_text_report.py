@@ -83,18 +83,33 @@ def create_report(prover_kind, prover_bin):
 
         fd.write(FMT % tuple(row) + "\n")
 
-        fd.write("\n# Unsound results\n")
+        tmp = []
         for group in GROUPS:
             for bm, data in res["group_results"][group].iteritems():
                 if data["score"] == "u":
-                    fd.write(bench[bm]["name"] + "\n")
+                    tmp.append(bench[bm]["name"])
+        if len(tmp) > 0:
+            fd.write("\n# Unsound results\n")
+            for bm in sorted(tmp):
+                fd.write(bm + "\n")
 
-        fd.write("\n# Errors\n")
+        tmp = []
         for group in GROUPS:
             for bm, data in res["group_results"][group].iteritems():
                 if data["score"] == "e":
-                    fd.write("\n## %s\n" % bench[bm]["name"])
-                    fd.write(data["comment"] + "\n")
+                    tmp.append((bench[bm]["name"],
+                                data["comment"]))
+        if len(tmp) > 0:
+            fd.write("\n# Errors\n")
+            def s(a, b):
+                tmp = cmp(a[1], b[1])
+                if tmp == 0:
+                    return cmp(a[0], b[0])
+                else:
+                    return tmp
+            for bm, comment in sorted(tmp, cmp=s):
+                fd.write("## %s\n" % bm)
+                fd.write(comment + "\n")
 
 def main():
     ap = argparse.ArgumentParser()
