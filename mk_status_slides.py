@@ -423,7 +423,7 @@ def mk_cactus_slides(fd):
             results.sort()
             assert len(results) == expected
 
-            points = [[0, 0.0]]  # (count, time)
+            points = []  # (count, time)
             for t in results:
                 if len(points) == 0:
                     points.append([1, t])
@@ -457,7 +457,7 @@ def mk_cactus_slides(fd):
         fd.write("    ticks={tick unit=s},\n")
         fd.write("  },\n")
         fd.write("  visualize as line/.list={%s},\n" %
-                 ",".join(map(h, solvers)))
+                 ",".join(map(h, (d[0] for d in datasets))))
         fd.write("  legend={right},\n")
         for solver, _ in datasets:
             fd.write("  %s={label in legend={text=%s}},\n" %
