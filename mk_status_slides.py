@@ -479,8 +479,6 @@ def mk_cactus_slides(fd):
         fd.write("\\end{frame}\n\n")
 
     for group in GROUPS:
-        if group == "wintersteiger":
-            continue
         mk_plot(group)
     mk_plot(None)
 
