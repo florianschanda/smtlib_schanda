@@ -250,7 +250,7 @@ def extract_benchmark(test):
             dst += test["suffix"]
 
             if f.endswith(".smt2"):
-                interesting = False
+                interesting = not test["filter"]
                 data = ""
                 with open(src, "rU") as fd:
                     for raw_line in fd:
@@ -290,16 +290,30 @@ def main():
     ap.add_argument("--testsuite",
                     default=autodetect_spark_testsuite(),
                     help="root of the spark 2014 testsuite")
+    ap.add_argument("--all",
+                    action="store_true",
+                    default=False,
+                    help="process all benchmarks, not just the canned list")
+    ap.add_argument("--no-filter",
+                    action="store_true",
+                    default=False,
+                    help="do not filter non-float benchmarks")
+    ap.add_argument("--output", default=None)
     options = ap.parse_args()
 
     assert os.path.isdir(options.testsuite)
 
     prover = options.prover
     faker  = "fake_%s" % prover
-    if prover == "colibri":
-        output = "spark_2014/QF_AUFBVFPNIRA"
+    if options.output is None:
+        if prover == "colibri":
+            output = "spark_2014/QF_AUFBVFPNIRA"
+        else:
+            output = "spark_2014/AUFBVFPDTNIRA"
     else:
-        output = "spark_2014/AUFBVFPDTNIRA"
+        output = options.output
+        if not os.path.exists(output):
+            os.mkdir(output)
     suffix = {
         "z3"       : "_z3",
         "alt-ergo" : "_altergo",
@@ -311,10 +325,12 @@ def main():
               "faker"  : faker,
               "driver" : "%s_gnatprove.drv" % prover,
               "output" : output,
-              "suffix" : suffix}
+              "suffix" : suffix,
+              "filter" : not options.no_filter,
+              }
              for d in os.listdir(options.testsuite)
-             if (os.path.isdir(os.path.join(options.testsuite, d)) and
-                 d in FLOAT_ONLY_BENCHMARKS)]
+             if os.path.isdir(os.path.join(options.testsuite, d)) and
+                (options.all or d in FLOAT_ONLY_BENCHMARKS)]
 
     pool = multiprocessing.Pool()
 
