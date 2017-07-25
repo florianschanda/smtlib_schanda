@@ -1,7 +1,8 @@
+(set-info :smt-lib-version 2.6)
+(set-info :license |https://www.gnu.org/licenses/gpl-3.0.html|)
 (set-logic QF_BV)
 (set-option :produce-models true)
 (set-info :source |Verification of Mul_Div of Ada.RealTime by Florian Schanda|)
-(set-info :smt-lib-version 2.5)
 (set-info :category crafted)
 
 (define-const p32 (_ BitVec 64) (bvshl (_ bv1 64) (_ bv32 64)))
