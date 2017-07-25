@@ -108,8 +108,9 @@ def create_report(prover_kind, prover_bin):
                 else:
                     return tmp
             for bm, comment in sorted(tmp, cmp=s):
-                fd.write("## %s\n" % bm)
-                fd.write(comment + "\n")
+                if not bm.startswith("sha<"):
+                    fd.write("## %s\n" % bm)
+                    fd.write(comment + "\n")
 
 def main():
     ap = argparse.ArgumentParser()
