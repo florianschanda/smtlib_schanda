@@ -146,6 +146,12 @@ FLOAT_ONLY_BENCHMARKS = set([
     'trajectory_computation',
 ])
 
+RELEVANT_STUFF = set(["fp.",
+                      "Float32",
+                      "Float64",
+                      "to_fp",
+                      "FloatingPoint"])
+
 def autodetect_spark_testsuite():
     candidate = None
     for p in os.environ["PATH"].split(os.pathsep):
@@ -162,14 +168,12 @@ def autodetect_spark_testsuite():
     else:
         return None
 
-
-
 def extract_benchmark(test):
     if "record_ddos" in test["dir"]:
         return None
     #if "proofinuse" not in test["dir"]:
     #    return None
-    #if "O401-034__float_pred" not in test["dir"]:
+    # if "TU__type_invariant__legal" not in test["dir"]:
     #    return None
 
     ROOT = os.getcwd()
@@ -233,12 +237,6 @@ def extract_benchmark(test):
         stdout, _ = p.communicate()
         #print stdout
 
-    RELEVANT_STUFF = set(["fp.",
-                          "Float32",
-                          "Float64",
-                          "to_fp",
-                          "FloatingPoint"])
-
     for path, dirs, files in os.walk("."):
         for f in files:
             src = os.path.join(path, f)
@@ -247,6 +245,7 @@ def extract_benchmark(test):
                                os.path.basename(test["dir"]) + "___" + f)
             dst = dst.replace(" ", "_")
             dst = dst.replace(".why", ".smt2")
+            dst_root_exists = os.path.isfile(dst)
             dst += test["suffix"]
 
             if f.endswith(".smt2"):
@@ -263,10 +262,11 @@ def extract_benchmark(test):
                 if not data.endswith("(exit)\n"):
                     data += "(exit)\n"
 
-                with open(dst, "w") as fd:
-                    fd.write(data)
+                if interesting:
+                    with open(dst, "w") as fd:
+                        fd.write(data)
 
-            elif f.endswith(".why"):
+            elif f.endswith(".why") and dst_root_exists:
                 os.rename(src, dst)
 
     if DO_CLEANUP:
