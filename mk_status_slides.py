@@ -177,7 +177,7 @@ def mk_progress_slides(fd):
                 fd.write("\\node")
                 fd.write("[anchor=west,text width=1.5cm,fill=Altran1!10,")
                 fd.write("rounded corners] at ")
-                fd.write("(visualization cs: x=%.3f,y=%.3f) {\\small %s};\n" %
+                fd.write("(visualization cs: x=%.3f,y=%.3f) {\\tiny %s};\n" %
                          (float(len(data) - 1) + 0.1,
                           b[1],
                           mk_solver_name(b[0])))
@@ -409,6 +409,9 @@ def mk_cactus_slides(fd):
 
     def mk_plot(group):
         datasets = []
+        total = sum(len(competitors[0]["group_results"][g])
+                    for g in GROUPS
+                    if group is None or g == group)
 
         for data in competitors:
             results = []
@@ -450,6 +453,7 @@ def mk_cactus_slides(fd):
         fd.write("  x axis={\n")
         fd.write("    length=6cm,\n")
         fd.write("    label={instances solved},\n")
+        fd.write("    include value=%u,\n" % total)
         fd.write("    },\n")
         fd.write("  y axis={\n")
         fd.write("    length=6cm,\n")
@@ -462,7 +466,7 @@ def mk_cactus_slides(fd):
         for solver, _ in datasets:
             fd.write("  %s={label in legend={text=%s}},\n" %
                      (h(solver), mk_solver_name(solver)))
-        fd.write("  style sheet=strong colors\n")
+        fd.write("  style sheet=altran\n")
         fd.write("]\n")
 
         for solver, points in datasets:
@@ -479,8 +483,13 @@ def mk_cactus_slides(fd):
         fd.write("\\end{frame}\n\n")
 
     for group in GROUPS:
+        if group in ("random", "wintersteiger", "nyxbrain"):
+            # These are really not very interesting as cactus plots,
+            # since they are correctness benchmarks not performance
+            # benchmarks
+            continue
         mk_plot(group)
-    mk_plot(None)
+    #mk_plot(None)
 
 def main():
     ap = argparse.ArgumentParser()
@@ -491,6 +500,17 @@ def main():
         fd.write("\\input{altran-beamer}\n")
         fd.write("\\usepackage{tikz}\n")
         fd.write("\\usetikzlibrary{datavisualization}\n")
+        fd.write("\\pgfdvdeclarestylesheet{altran}{\n")
+        fd.write("  1/.style={Altran1},\n")
+        fd.write("  2/.style={Altran4},\n")
+        fd.write("  3/.style={Altran6},\n")
+        fd.write("  4/.style={Altran7},\n")
+        fd.write("  5/.style={Altran8},\n")
+        fd.write("  6/.style={Altran9},\n")
+        fd.write("  7/.style={Altran10},\n")
+        fd.write("  8/.style={Altran11},\n")
+        fd.write("  default style/.style={black}\n")
+        fd.write("}\n")
         fd.write("\\author{Florian Schanda}\n")
         fd.write("\\title{CVC4 IEEE-754 implementation}\n")
         fd.write("\\subtitle{Current status and benchmarks}\n")
