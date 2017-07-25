@@ -897,39 +897,11 @@ axiom one_of_int : (fliteral = of_int(RNA, 1))
 type t__ref = { t__content : t
 }
 
-function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
-
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
-logic to_int1 : bool -> int
-
-axiom to_int_def :
-  (forall b:bool [to_int1(b)]. (((b = true) -> (to_int1(b) = 1)) and
-  ((not (b = true)) -> (to_int1(b) = 0))))
-
-logic of_int1 : int -> bool
-
-axiom of_int_def :
-  (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
-  ((not (i = 0)) -> (of_int1(i) = true))))
-
-predicate in_range1(x: int) = ((x = 0) or (x = 1))
-
-logic attr__ATTRIBUTE_IMAGE : bool -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE : us_image -> bool
-
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
 
-logic bool_eq2 : int, int -> bool
+logic bool_eq1 : int, int -> bool
 
 logic bool_ne : int, int -> bool
 
@@ -942,7 +914,7 @@ logic bool_gt1 : int, int -> bool
 logic bool_ge1 : int, int -> bool
 
 axiom bool_eq_axiom :
-  (forall x:int. (forall y:int. ((bool_eq2(x, y) = true) <-> (x = y))))
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
 
 axiom bool_ne_axiom :
   (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
@@ -959,17 +931,17 @@ axiom bool_gt_axiom :
 axiom bool_ge_axiom :
   (forall x:int. (forall y:int. ((bool_ge1(x, y) = true) <-> (y <= x))))
 
-logic bool_eq3 : int, int -> bool
+logic bool_eq2 : int, int -> bool
 
-axiom bool_eq_def2 :
-  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
-logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+logic attr__ATTRIBUTE_IMAGE : int -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+logic attr__ATTRIBUTE_VALUE : us_image -> int
 
 logic user_eq : integer, integer -> bool
 
@@ -983,19 +955,19 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type t1
 
-logic bool_eq4 : t, t -> bool
+logic bool_eq3 : t, t -> bool
 
-axiom bool_eq_def3 :
-  (forall x:t. forall y:t [bool_eq4(x, y)]. ((eq(x, y) -> (bool_eq4(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq4(x, y) = false))))
+axiom bool_eq_def2 :
+  (forall x:t. forall y:t [bool_eq3(x, y)]. ((eq(x, y) -> (bool_eq3(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq3(x, y) = false))))
 
 logic user_eq1 : t1, t1 -> bool
 
-logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
+logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE2 : us_image -> t
+logic attr__ATTRIBUTE_VALUE1 : us_image -> t
 
 logic dummy1 : t1
 
@@ -1008,19 +980,19 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type ttB
 
-logic bool_eq5 : t, t -> bool
+logic bool_eq4 : t, t -> bool
 
-axiom bool_eq_def4 :
-  (forall x:t. forall y:t [bool_eq5(x, y)]. ((eq(x, y) -> (bool_eq5(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq5(x, y) = false))))
+axiom bool_eq_def3 :
+  (forall x:t. forall y:t [bool_eq4(x, y)]. ((eq(x, y) -> (bool_eq4(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq4(x, y) = false))))
 
 logic user_eq2 : ttB, ttB -> bool
 
-logic attr__ATTRIBUTE_IMAGE3 : t -> us_image
+logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE3 : us_image -> t
+logic attr__ATTRIBUTE_VALUE2 : us_image -> t
 
 logic dummy2 : ttB
 
@@ -1050,19 +1022,19 @@ logic eq1 : t, t -> prop
 
 logic is_finite1 : t -> prop
 
-logic bool_eq6 : t, t -> bool
+logic bool_eq5 : t, t -> bool
 
-axiom bool_eq_def5 :
-  (forall x:t. forall y:t [bool_eq6(x, y)]. ((eq1(x, y) -> (bool_eq6(x,
-  y) = true)) and ((not eq1(x, y)) -> (bool_eq6(x, y) = false))))
+axiom bool_eq_def4 :
+  (forall x:t. forall y:t [bool_eq5(x, y)]. ((eq1(x, y) -> (bool_eq5(x,
+  y) = true)) and ((not eq1(x, y)) -> (bool_eq5(x, y) = false))))
 
 logic user_eq3 : ttB, ttB -> bool
 
-logic attr__ATTRIBUTE_IMAGE4 : t -> us_image
+logic attr__ATTRIBUTE_IMAGE3 : t -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE4 : us_image -> t
+logic attr__ATTRIBUTE_VALUE3 : us_image -> t
 
 logic dummy3 : ttB
 
@@ -1089,7 +1061,6 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
 
  (* File "dynamic_float.adb", line 1, characters 0-0 *)
 goal WP_parameter_def :
-  (forall i:int. forall result:int. forall i1:int. forall i2:int.
-  (((result = i) and (i1 = 1)) -> (((1 <= i1) and (i1 <= 10)) ->
-  (((1 <= i2) and (i2 <= 10)) -> (le(fliteral1, of_int(RNE, i2)) ->
-  le(neg(fliteral2), fliteral1))))))
+  (forall i:int. forall result:int. forall i1:int. (((result = i) and
+  (i1 = 1)) -> (le(fliteral1, of_int(RNE, i1)) -> le(neg(fliteral2),
+  fliteral1))))

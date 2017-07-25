@@ -1192,49 +1192,28 @@ axiom def_axiom4 :
  (* File "homothetical.ads", line 5, characters 0-0 *)
 goal WP_parameter_def :
   (forall lambda:(int,float1) farray. forall upsilon:(int,float1) farray.
-  forall kvp:(int,float1) farray. forall i:int. forall o:t. forall o1:t.
-  forall o2:t. forall result:(int,float1) farray.
+  forall kvp:(int,float1) farray. forall i:int. forall j:int. forall o:t.
+  forall o1:t. forall o2:t. forall result:(int,float1) farray.
   forall lambda1:(int,float1) farray. forall result1:(int,float1) farray.
   forall upsilon1:(int,float1) farray. forall result2:(int,float1) farray.
   forall kvp1:(int,float1) farray. forall kvp2:(int,float1) farray.
-  forall kvmax:(int,float1) farray. forall kamax:(int,float1) farray.
-  forall result3:int. forall i1:int. forall kvmax1:(int,float1) farray.
-  forall kamax1:(int,float1) farray. forall lambda2:(int,float1) farray.
-  forall upsilon2:(int,float1) farray. forall i2:int. forall j:int.
-  forall result4:int. forall j1:int. forall lambda3:(int,float1) farray.
-  forall upsilon3:(int,float1) farray. forall j2:int.
-  ((forall j3:int. (((1 <= j3) and (j3 <= 2)) -> ((neq(to_rep((d[j3])),
-   fliteral1) and lt(fliteral1, to_rep((kv[j3])))) and lt(fliteral1,
-   to_rep((ka[j3])))))) ->
+  forall result3:int. forall i1:int. forall result4:int. forall j1:int.
+  ((forall j2:int. (((1 <= j2) and (j2 <= 2)) -> ((neq(to_rep((d[j2])),
+   fliteral1) and lt(fliteral1, to_rep((kv[j2])))) and lt(fliteral1,
+   to_rep((ka[j2])))))) ->
   ((({ map__content = result } = { map__content = lambda }) and
   (lambda1 = homothetical__homothetical__lambda__aggregate_def(fliteral))) ->
   ((({ map__content = result1 } = { map__content = upsilon }) and
   (upsilon1 = homothetical__homothetical__upsilon__aggregate_def(fliteral))) ->
   ((({ map__content = result2 } = { map__content = kvp }) and
   (kvp1 = homothetical__homothetical__kvp__aggregate_def(fliteral1))) ->
-  ((forall i3:int. (((1 <= i3) and (i3 <= 2)) -> ((lt(fliteral1,
-   to_rep((ka[i3]))) and neq(to_rep((kvp2[i3])), fliteral1)) and
-   neq(to_rep((d[i3])), fliteral1)))) ->
-  (((result3 = i) and (i1 = 1)) -> (((1 <= i1) and (i1 <= 2)) ->
-  ((((((forall temp___188:int. (((1 <= temp___188) and (temp___188 <= 2)) ->
-       ((i2 <= temp___188) -> ((kvmax1[temp___188]) = (kvmax[temp___188]))))) and
-  (forall temp___190:int. (((1 <= temp___190) and (temp___190 <= 2)) ->
-  ((i2 <= temp___190) -> ((lambda2[temp___190]) = (lambda1[temp___190])))))) and
-  (forall temp___192:int. (((1 <= temp___192) and (temp___192 <= 2)) ->
-  ((i2 <= temp___192) -> ((kamax1[temp___192]) = (kamax[temp___192])))))) and
-  (forall temp___194:int. (((1 <= temp___194) and (temp___194 <= 2)) ->
-  ((i2 <= temp___194) -> ((upsilon2[temp___194]) = (upsilon1[temp___194])))))) and
-  ((1 <= i2) and (i2 <= 2))) -> (((result4 = j) and (j1 = 1)) ->
-  (((1 <= j1) and (j1 <= 2)) ->
-  ((((forall temp___182:int. (((1 <= temp___182) and (temp___182 <= 2)) ->
-     ((not (i2 = temp___182)) ->
-     ((lambda3[temp___182]) = (lambda2[temp___182]))))) and
-  (forall temp___184:int. (((1 <= temp___184) and (temp___184 <= 2)) ->
-  ((not (i2 = temp___184)) ->
-  ((upsilon3[temp___184]) = (upsilon2[temp___184])))))) and ((1 <= j2) and
-  (j2 <= 2))) -> ((not (i2 = j2)) -> ((((o1 = mul(RNE, to_rep((kvp2[i2])),
-  abs1(to_rep((d[j2]))))) and tqtisFinite(mul(RNE, to_rep((kvp2[i2])),
-  abs1(to_rep((d[j2])))))) and (((o = mul(RNE, to_rep((kvp2[j2])),
-  abs1(to_rep((d[i2]))))) and tqtisFinite(mul(RNE, to_rep((kvp2[j2])),
-  abs1(to_rep((d[i2])))))) and (o2 = div(RNE, o, o1)))) ->
-  tqtisFinite(o2)))))))))))))))
+  ((forall i2:int. (((1 <= i2) and (i2 <= 2)) -> ((lt(fliteral1,
+   to_rep((ka[i2]))) and neq(to_rep((kvp2[i2])), fliteral1)) and
+   neq(to_rep((d[i2])), fliteral1)))) ->
+  (((result3 = i) and (i1 = 1)) -> (((result4 = j) and (j1 = 1)) ->
+  ((not (i1 = j1)) -> ((((o1 = mul(RNE, to_rep((kvp2[i1])),
+  abs1(to_rep((d[j1]))))) and tqtisFinite(mul(RNE, to_rep((kvp2[i1])),
+  abs1(to_rep((d[j1])))))) and (((o = mul(RNE, to_rep((kvp2[j1])),
+  abs1(to_rep((d[i1]))))) and tqtisFinite(mul(RNE, to_rep((kvp2[j1])),
+  abs1(to_rep((d[i1])))))) and (o2 = div(RNE, o, o1)))) ->
+  tqtisFinite(o2)))))))))))

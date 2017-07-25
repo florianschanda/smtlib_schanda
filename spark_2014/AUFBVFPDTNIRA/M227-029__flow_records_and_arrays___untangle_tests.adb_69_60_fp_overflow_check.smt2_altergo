@@ -1515,28 +1515,17 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
  (* File "untangle_tests.adb", line 44, characters 0-0 *)
 goal WP_parameter_def :
-  (forall tl:(int,us_rep1) farray. forall t1:int. forall result:int.
+  (forall tl:(int,us_rep1) farray. forall t1:int. forall result:int__ref.
   forall t2:int. forall tl1:(int,us_rep1) farray. forall t3:int.
-  forall v:int. forall result1:int. forall v1:int.
-  forall tl2:(int,us_rep1) farray. forall v2:int. (((result = t1) and
-  (t2 = 1)) -> (((1 <= t2) and (t2 <= 100)) ->
+  forall v:int. forall result1:int__ref. forall v1:int. (((result = {
+  int__content = t1 }) and (t2 = 1)) -> (((1 <= t2) and (t2 <= 100)) ->
   (((forall temp___252:int. (((1 <= temp___252) and (temp___252 <= 100)) ->
     (((t3 <= temp___252) and ((tl1[temp___252]) = (tl[temp___252]))) or
     ((not (t3 <= temp___252)) and
     ((forall temp___253:int. (((1 <= temp___253) and (temp___253 <= 3)) ->
      (((((((tl1[temp___252])).us_split_fields3).rec__untangle_tests__triangle__vertices[temp___253])).us_split_fields1).rec__untangle_tests__coordinate__w = ((((((tl[temp___252])).us_split_fields3).rec__untangle_tests__triangle__vertices[temp___253])).us_split_fields1).rec__untangle_tests__coordinate__w))) and
     ((((tl1[temp___252])).us_split_fields3).rec__untangle_tests__triangle__normal = (((tl[temp___252])).us_split_fields3).rec__untangle_tests__triangle__normal)))))) and
-  ((1 <= t3) and (t3 <= 100))) -> (((result1 = v) and (v1 = 1)) ->
-  (((1 <= v1) and (v1 <= 3)) ->
-  (((forall temp___247:int. (((1 <= temp___247) and (temp___247 <= 100)) ->
-    (((not (t3 = temp___247)) and ((tl2[temp___247]) = (tl1[temp___247]))) or
-    ((t3 = temp___247) and
-    ((forall temp___248:int. (((1 <= temp___248) and (temp___248 <= 3)) ->
-     (((v2 <= temp___248) and
-     (((((tl2[temp___247])).us_split_fields3).rec__untangle_tests__triangle__vertices[temp___248]) = ((((tl1[temp___247])).us_split_fields3).rec__untangle_tests__triangle__vertices[temp___248]))) or
-     ((not (v2 <= temp___248)) and
-     (((((((tl2[temp___247])).us_split_fields3).rec__untangle_tests__triangle__vertices[temp___248])).us_split_fields1).rec__untangle_tests__coordinate__w = ((((((tl1[temp___247])).us_split_fields3).rec__untangle_tests__triangle__vertices[temp___248])).us_split_fields1).rec__untangle_tests__coordinate__w))))) and
-    ((((tl2[temp___247])).us_split_fields3).rec__untangle_tests__triangle__normal = (((tl1[temp___247])).us_split_fields3).rec__untangle_tests__triangle__normal)))))) and
-  ((1 <= v2) and (v2 <= 3))) -> tqtisFinite(add(RNE,
-  to_rep(((((((tl2[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v2])).us_split_fields1).rec__untangle_tests__coordinate__x),
-  to_rep(o))))))))))
+  ((1 <= t3) and (t3 <= 100))) -> (((result1 = { int__content = v }) and
+  (v1 = 1)) -> tqtisFinite(add(RNE,
+  to_rep(((((((tl1[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1])).us_split_fields1).rec__untangle_tests__coordinate__x),
+  to_rep(o))))))))

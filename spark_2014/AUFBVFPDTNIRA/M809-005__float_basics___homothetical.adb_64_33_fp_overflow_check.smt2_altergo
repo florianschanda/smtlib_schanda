@@ -1192,90 +1192,80 @@ axiom def_axiom4 :
  (* File "homothetical.ads", line 5, characters 0-0 *)
 goal WP_parameter_def :
   (forall lambda:(int,float1) farray. forall upsilon:(int,float1) farray.
-  forall kvp:(int,float1) farray. forall i:int.
-  forall temp___183:(int,float1) farray.
-  forall temp___181:(int,float1) farray. forall o:t. forall o1:t.
-  forall o2:t. forall o3:t. forall o4:t. forall o5:float1.
+  forall kvp:(int,float1) farray. forall i:int. forall j:int. forall o:t.
+  forall o1:t. forall o2:t. forall o3:t. forall o4:t. forall o5:float1.
   forall o6:(int,float1) farray. forall o7:t. forall o8:t. forall o9:t.
   forall o10:t. forall o11:t. forall o12:float1.
-  forall o13:(int,float1) farray. forall result:(int,float1) farray.
+  forall o13:(int,float1) farray. forall o14:t. forall o15:t. forall o16:t.
+  forall o17:t. forall o18:t. forall o19:float1.
+  forall o20:(int,float1) farray. forall o21:t. forall o22:t. forall o23:t.
+  forall o24:t. forall o25:t. forall o26:float1.
+  forall o27:(int,float1) farray. forall result:(int,float1) farray.
   forall lambda1:(int,float1) farray. forall result1:(int,float1) farray.
   forall upsilon1:(int,float1) farray. forall result2:(int,float1) farray.
   forall kvp1:(int,float1) farray. forall kvp2:(int,float1) farray.
-  forall kvmax:(int,float1) farray. forall kamax:(int,float1) farray.
-  forall result3:int. forall i1:int. forall kvmax1:(int,float1) farray.
-  forall kamax1:(int,float1) farray. forall lambda2:(int,float1) farray.
-  forall upsilon2:(int,float1) farray. forall i2:int. forall j:int.
-  forall result4:int. forall j1:int. forall lambda3:(int,float1) farray.
-  forall upsilon3:(int,float1) farray. forall j2:int.
-  forall result5:(int,float1) farray. forall lambda4:(int,float1) farray.
-  forall result6:(int,float1) farray. forall upsilon4:(int,float1) farray.
-  forall lambda5:(int,float1) farray. forall upsilon5:(int,float1) farray.
-  forall lambda6:(int,float1) farray. forall upsilon6:(int,float1) farray.
-  forall lambda7:(int,float1) farray. forall upsilon7:(int,float1) farray.
-  forall j3:int. forall lambda8:(int,float1) farray.
-  forall upsilon8:(int,float1) farray. forall j4:int.
-  forall lambda9:(int,float1) farray. forall upsilon9:(int,float1) farray.
-  forall j5:int. forall lambda10:(int,float1) farray.
-  forall upsilon10:(int,float1) farray. forall j6:int.
-  ((forall j7:int. (((1 <= j7) and (j7 <= 2)) -> ((neq(to_rep((d[j7])),
-   fliteral1) and lt(fliteral1, to_rep((kv[j7])))) and lt(fliteral1,
-   to_rep((ka[j7])))))) ->
+  forall result3:int. forall i1:int. forall result4:int. forall j1:int.
+  forall result5:(int,float1) farray. forall lambda2:(int,float1) farray.
+  forall result6:(int,float1) farray. forall upsilon2:(int,float1) farray.
+  forall lambda3:(int,float1) farray. forall upsilon3:(int,float1) farray.
+  forall lambda4:(int,float1) farray. forall upsilon4:(int,float1) farray.
+  forall result7:int. forall j2:int. forall result8:(int,float1) farray.
+  forall lambda5:(int,float1) farray. forall result9:(int,float1) farray.
+  forall upsilon5:(int,float1) farray. forall lambda6:(int,float1) farray.
+  forall upsilon6:(int,float1) farray. forall lambda7:(int,float1) farray.
+  forall upsilon7:(int,float1) farray.
+  ((forall j3:int. (((1 <= j3) and (j3 <= 2)) -> ((neq(to_rep((d[j3])),
+   fliteral1) and lt(fliteral1, to_rep((kv[j3])))) and lt(fliteral1,
+   to_rep((ka[j3])))))) ->
   ((({ map__content = result } = { map__content = lambda }) and
   (lambda1 = homothetical__homothetical__lambda__aggregate_def(fliteral))) ->
   ((({ map__content = result1 } = { map__content = upsilon }) and
   (upsilon1 = homothetical__homothetical__upsilon__aggregate_def(fliteral))) ->
   ((({ map__content = result2 } = { map__content = kvp }) and
   (kvp1 = homothetical__homothetical__kvp__aggregate_def(fliteral1))) ->
-  ((forall i3:int. (((1 <= i3) and (i3 <= 2)) -> ((lt(fliteral1,
-   to_rep((ka[i3]))) and neq(to_rep((kvp2[i3])), fliteral1)) and
-   neq(to_rep((d[i3])), fliteral1)))) ->
-  (((result3 = i) and (i1 = 1)) -> (((1 <= i1) and (i1 <= 2)) ->
-  ((((((forall temp___188:int. (((1 <= temp___188) and (temp___188 <= 2)) ->
-       ((i2 <= temp___188) -> ((kvmax1[temp___188]) = (kvmax[temp___188]))))) and
-  (forall temp___190:int. (((1 <= temp___190) and (temp___190 <= 2)) ->
-  ((i2 <= temp___190) -> ((lambda2[temp___190]) = (lambda1[temp___190])))))) and
-  (forall temp___192:int. (((1 <= temp___192) and (temp___192 <= 2)) ->
-  ((i2 <= temp___192) -> ((kamax1[temp___192]) = (kamax[temp___192])))))) and
-  (forall temp___194:int. (((1 <= temp___194) and (temp___194 <= 2)) ->
-  ((i2 <= temp___194) -> ((upsilon2[temp___194]) = (upsilon1[temp___194])))))) and
-  ((1 <= i2) and (i2 <= 2))) -> ((((result4 = j) and (j1 = 1)) and
-  ((((1 <= j1) and (j1 <= 2)) and ((((temp___183 = upsilon2) and
-  ((temp___181 = lambda2) and
-  ((((forall temp___182:int. (((1 <= temp___182) and (temp___182 <= 2)) ->
-     ((not (i2 = temp___182)) ->
-     ((lambda3[temp___182]) = (temp___181[temp___182]))))) and
-  (forall temp___184:int. (((1 <= temp___184) and (temp___184 <= 2)) ->
-  ((not (i2 = temp___184)) ->
-  ((upsilon3[temp___184]) = (temp___183[temp___184])))))) and ((1 <= j2) and
-  (j2 <= 2))) and ((((not (i2 = j2)) and ((((((((((o1 = mul(RNE,
-  to_rep((kvp2[i2])), abs1(to_rep((d[j2]))))) and tqtisFinite(mul(RNE,
-  to_rep((kvp2[i2])), abs1(to_rep((d[j2])))))) and (((o = mul(RNE,
-  to_rep((kvp2[j2])), abs1(to_rep((d[i2]))))) and tqtisFinite(mul(RNE,
-  to_rep((kvp2[j2])), abs1(to_rep((d[i2])))))) and (o2 = div(RNE, o,
-  o1)))) and ((o3 = o2) and tqtisFinite(o2))) and
-  (o4 = min(to_rep((lambda3[i2])), o3))) and (to_rep(o5) = o4)) and
-  (o6 = (lambda3[i2 <- o5]))) and ((result5 = lambda3) and
-  (lambda4 = o6))) and ((((((((o8 = mul(RNE, to_rep((ka[i2])),
-  abs1(to_rep((d[j2]))))) and tqtisFinite(mul(RNE, to_rep((ka[i2])),
-  abs1(to_rep((d[j2])))))) and (((o7 = mul(RNE, to_rep((ka[j2])),
-  abs1(to_rep((d[i2]))))) and tqtisFinite(mul(RNE, to_rep((ka[j2])),
-  abs1(to_rep((d[i2])))))) and (o9 = div(RNE, o7, o8)))) and ((o10 = o9) and
-  tqtisFinite(o9))) and (o11 = min(to_rep((upsilon3[i2])), o10))) and
-  (to_rep(o12) = o11)) and (o13 = (upsilon3[i2 <- o12]))) and
-  ((result6 = upsilon3) and (upsilon4 = o13)))) and
-  (((upsilon4 = upsilon5) and (lambda4 = lambda5)) and
-  ((upsilon6 = upsilon4) and (lambda6 = lambda4))))) or ((i2 = j2) and
-  (((upsilon3 = upsilon5) and (lambda3 = lambda5)) and
-  ((upsilon6 = upsilon3) and (lambda6 = lambda3))))) and (j2 = 2))))) and
-  (((j2 = j3) and (({ map__content = upsilon7 } = { map__content = upsilon5
-  }) and ({ map__content = lambda7 } = { map__content = lambda5 }))) and
-  ((j4 = j2) and ((upsilon8 = upsilon6) and (lambda8 = lambda6))))) and ((({
-  int__content = j5 } = { int__content = j3 }) and (({ map__content =
-  upsilon9 } = { map__content = upsilon7 }) and ({ map__content = lambda9
-  } = { map__content = lambda7 }))) and ((j6 = j4) and
-  ((upsilon10 = upsilon8) and (lambda10 = lambda8)))))) or
-  ((not ((1 <= j1) and (j1 <= 2))) and (((j1 = j5) and
-  ((upsilon2 = upsilon9) and (lambda2 = lambda9))) and ((j6 = j1) and
-  ((upsilon10 = upsilon2) and (lambda10 = lambda2))))))) ->
-  tqtisFinite(mul(RNE, to_rep((lambda9[i2])), to_rep((kvp2[i2]))))))))))))))
+  ((forall i2:int. (((1 <= i2) and (i2 <= 2)) -> ((lt(fliteral1,
+   to_rep((ka[i2]))) and neq(to_rep((kvp2[i2])), fliteral1)) and
+   neq(to_rep((d[i2])), fliteral1)))) ->
+  (((result3 = i) and (i1 = 1)) -> ((((result4 = j) and (j1 = 1)) and
+  ((((not (i1 = j1)) and ((((((((((o1 = mul(RNE, to_rep((kvp2[i1])),
+  abs1(to_rep((d[j1]))))) and tqtisFinite(mul(RNE, to_rep((kvp2[i1])),
+  abs1(to_rep((d[j1])))))) and (((o = mul(RNE, to_rep((kvp2[j1])),
+  abs1(to_rep((d[i1]))))) and tqtisFinite(mul(RNE, to_rep((kvp2[j1])),
+  abs1(to_rep((d[i1])))))) and (o2 = div(RNE, o, o1)))) and ((o3 = o2) and
+  tqtisFinite(o2))) and (o4 = min(to_rep((lambda1[i1])), o3))) and
+  (to_rep(o5) = o4)) and (o6 = (lambda1[i1 <- o5]))) and
+  ((result5 = lambda1) and (lambda2 = o6))) and ((((((((o8 = mul(RNE,
+  to_rep((ka[i1])), abs1(to_rep((d[j1]))))) and tqtisFinite(mul(RNE,
+  to_rep((ka[i1])), abs1(to_rep((d[j1])))))) and (((o7 = mul(RNE,
+  to_rep((ka[j1])), abs1(to_rep((d[i1]))))) and tqtisFinite(mul(RNE,
+  to_rep((ka[j1])), abs1(to_rep((d[i1])))))) and (o9 = div(RNE, o7,
+  o8)))) and ((o10 = o9) and tqtisFinite(o9))) and
+  (o11 = min(to_rep((upsilon1[i1])), o10))) and (to_rep(o12) = o11)) and
+  (o13 = (upsilon1[i1 <- o12]))) and ((result6 = upsilon1) and
+  (upsilon2 = o13)))) and (((upsilon2 = upsilon3) and
+  (lambda2 = lambda3)) and ((upsilon4 = upsilon2) and
+  (lambda4 = lambda2))))) or ((i1 = j1) and (((upsilon1 = upsilon3) and
+  (lambda1 = lambda3)) and ((upsilon4 = upsilon1) and
+  (lambda4 = lambda1))))) and (((result7 = j1) and (j2 = 2)) and
+  (((not (i1 = j2)) and ((((((((((o15 = mul(RNE, to_rep((kvp2[i1])),
+  abs1(to_rep((d[j2]))))) and tqtisFinite(mul(RNE, to_rep((kvp2[i1])),
+  abs1(to_rep((d[j2])))))) and (((o14 = mul(RNE, to_rep((kvp2[j2])),
+  abs1(to_rep((d[i1]))))) and tqtisFinite(mul(RNE, to_rep((kvp2[j2])),
+  abs1(to_rep((d[i1])))))) and (o16 = div(RNE, o14, o15)))) and
+  ((o17 = o16) and tqtisFinite(o16))) and (o18 = min(to_rep((lambda3[i1])),
+  o17))) and (to_rep(o19) = o18)) and (o20 = (lambda3[i1 <- o19]))) and
+  ((result8 = lambda3) and (lambda5 = o20))) and ((((((((o22 = mul(RNE,
+  to_rep((ka[i1])), abs1(to_rep((d[j2]))))) and tqtisFinite(mul(RNE,
+  to_rep((ka[i1])), abs1(to_rep((d[j2])))))) and (((o21 = mul(RNE,
+  to_rep((ka[j2])), abs1(to_rep((d[i1]))))) and tqtisFinite(mul(RNE,
+  to_rep((ka[j2])), abs1(to_rep((d[i1])))))) and (o23 = div(RNE, o21,
+  o22)))) and ((o24 = o23) and tqtisFinite(o23))) and
+  (o25 = min(to_rep((upsilon3[i1])), o24))) and (to_rep(o26) = o25)) and
+  (o27 = (upsilon3[i1 <- o26]))) and ((result9 = upsilon3) and
+  (upsilon5 = o27)))) and (((upsilon5 = upsilon6) and
+  (lambda5 = lambda6)) and ((upsilon7 = upsilon5) and
+  (lambda7 = lambda5))))) or ((i1 = j2) and ((({ map__content = upsilon6
+  } = { map__content = upsilon3 }) and ({ map__content = lambda6 } = {
+  map__content = lambda3 })) and ((upsilon7 = upsilon4) and
+  (lambda7 = lambda4)))))))) -> tqtisFinite(mul(RNE, to_rep((lambda6[i1])),
+  to_rep((kvp2[i1]))))))))))))

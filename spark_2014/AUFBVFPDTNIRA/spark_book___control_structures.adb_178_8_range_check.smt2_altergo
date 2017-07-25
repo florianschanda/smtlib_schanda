@@ -1407,17 +1407,17 @@ goal WP_parameter_def :
   forall approx2:t. forall result48:t__ref. forall approx3:t.
   forall result49:bool. forall approx4:t__ref. forall approx5:t.
   forall approx6:t__ref. forall approx7:t. forall result50:int__ref.
-  forall count3:int. forall count4:int. forall count5:int__ref.
-  forall count6:int. forall count7:int__ref. forall count8:int.
-  forall result51:int__ref. forall count9:int. forall count10:int.
-  forall count11:int__ref. forall count12:int. forall count13:int__ref.
-  forall count14:int. forall result52:int__ref. forall a3:int.
-  forall result53:int__ref. forall b3:int. forall result54:int__ref.
-  forall count15:int. forall count16:int. forall count17:int__ref.
-  forall count18:int. forall count19:int__ref. forall count20:int.
-  (in_range4(default_width) -> (in_range5(default_base) ->
-  ((((-2147483648) <= 2147483647) -> in_range2(a)) ->
-  ((((-2147483648) <= 2147483647) -> in_range2(b)) ->
+  forall count3:int. forall result51:int__ref. forall count4:int.
+  forall result52:int__ref. forall count5:int. forall result53:int__ref.
+  forall count6:int. forall result54:int__ref. forall count7:int.
+  forall result55:int__ref. forall count8:int. forall result56:int__ref.
+  forall count9:int. forall result57:int__ref. forall count10:int.
+  forall result58:int__ref. forall a3:int. forall result59:int__ref.
+  forall b3:int. forall result60:int__ref. forall count11:int.
+  forall count12:int. forall count13:int__ref. forall count14:int.
+  forall count15:int__ref. forall count16:int. (in_range4(default_width) ->
+  (in_range5(default_base) -> ((((-2147483648) <= 2147483647) ->
+  in_range2(a)) -> ((((-2147483648) <= 2147483647) -> in_range2(b)) ->
   ((((-2147483648) <= 2147483647) -> in_range2(c)) ->
   ((((-2147483648) <= 2147483647) -> in_range2(d)) ->
   ((((-2147483648) <= 2147483647) -> in_range2(e)) ->
@@ -1557,25 +1557,22 @@ goal WP_parameter_def :
   ((approx6 = approx4) and (approx7 = approx5)))) or
   ((not (result47 = true)) and ((approx6 = { t__content = approx1 }) and
   (approx7 = approx1))))) -> ((((result50 = { int__content = count }) and
-  (count3 = 5)) and ((((5 <= count3) and (count3 <= 8)) and
-  (((((5 <= count4) and (count4 <= 8)) and (count4 = 8)) and ((count5 = {
-  int__content = count4 }) and (count6 = count4))) and ((count7 = count5) and
-  (count8 = count6)))) or ((not ((5 <= count3) and (count3 <= 8))) and
-  ((count7 = { int__content = count3 }) and (count8 = count3))))) ->
-  ((((result51 = { int__content = count1 }) and (count9 = 8)) and
-  ((((5 <= count9) and (count9 <= 8)) and (((((5 <= count10) and
-  (count10 <= 8)) and (count10 = 5)) and ((count11 = { int__content = count10
-  }) and (count12 = count10))) and ((count13 = count11) and
-  (count14 = count12)))) or ((not ((5 <= count9) and (count9 <= 8))) and
-  ((count13 = { int__content = count9 }) and (count14 = count9))))) ->
-  (((result52 = { int__content = a2 }) and (a3 = 9)) -> (((result53 = {
-  int__content = b2 }) and (b3 = 2)) -> (((a3 = r4b) and in_range2(r4b)) ->
-  (((b3 = r5b) and in_range2(r5b)) -> ((((result54 = { int__content = count2
-  }) and (count15 = r4b)) and ((((r4b <= count15) and (count15 <= r5b)) and
-  (((((r4b <= count16) and (count16 <= r5b)) and (count16 = r5b)) and
-  ((count17 = { int__content = count16 }) and (count18 = count16))) and
-  ((count19 = count17) and (count20 = count18)))) or
-  ((not ((r4b <= count15) and (count15 <= r5b))) and ((count19 = {
-  int__content = count15 }) and (count20 = count15))))) -> (((a3 = r7b) and
-  in_range2(r7b)) -> (((b3 = r8b) and in_range2(r8b)) -> ((r7b <= r8b) ->
+  (count3 = 5)) and (((result51 = { int__content = count3 }) and
+  (count4 = 6)) and (((result52 = { int__content = count4 }) and
+  (count5 = 7)) and ((result53 = { int__content = count5 }) and
+  (count6 = 8))))) -> ((((result54 = { int__content = count1 }) and
+  (count7 = 8)) and (((result55 = { int__content = count7 }) and
+  (count8 = 7)) and (((result56 = { int__content = count8 }) and
+  (count9 = 6)) and ((result57 = { int__content = count9 }) and
+  (count10 = 5))))) -> (((result58 = { int__content = a2 }) and (a3 = 9)) ->
+  (((result59 = { int__content = b2 }) and (b3 = 2)) -> (((a3 = r4b) and
+  in_range2(r4b)) -> (((b3 = r5b) and in_range2(r5b)) -> ((((result60 = {
+  int__content = count2 }) and (count11 = r4b)) and ((((r4b <= count11) and
+  (count11 <= r5b)) and (((((r4b <= count12) and (count12 <= r5b)) and
+  (count12 = r5b)) and ((count13 = { int__content = count12 }) and
+  (count14 = count12))) and ((count15 = count13) and
+  (count16 = count14)))) or ((not ((r4b <= count11) and
+  (count11 <= r5b))) and ((count15 = { int__content = count11 }) and
+  (count16 = count11))))) -> (((a3 = r7b) and in_range2(r7b)) ->
+  (((b3 = r8b) and in_range2(r8b)) -> ((r7b <= r8b) ->
   ((-2147483648) <= r7b)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))

@@ -897,49 +897,21 @@ axiom one_of_int : (fliteral = of_int(RNA, 1))
 type t__ref = { t__content : t
 }
 
-function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
-
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
-logic to_int1 : bool -> int
-
-axiom to_int_def :
-  (forall b:bool [to_int1(b)]. (((b = true) -> (to_int1(b) = 1)) and
-  ((not (b = true)) -> (to_int1(b) = 0))))
-
-logic of_int1 : int -> bool
-
-axiom of_int_def :
-  (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
-  ((not (i = 0)) -> (of_int1(i) = true))))
-
-predicate in_range1(x: int) = ((x = 0) or (x = 1))
-
-logic attr__ATTRIBUTE_IMAGE : bool -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE : us_image -> bool
-
 type float1
 
-logic bool_eq2 : t, t -> bool
+logic bool_eq1 : t, t -> bool
 
-axiom bool_eq_def2 :
-  (forall x:t. forall y:t [bool_eq2(x, y)]. ((eq(x, y) -> (bool_eq2(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq2(x, y) = false))))
+axiom bool_eq_def1 :
+  (forall x:t. forall y:t [bool_eq1(x, y)]. ((eq(x, y) -> (bool_eq1(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq1(x, y) = false))))
 
 logic user_eq : float1, float1 -> bool
 
-logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
+logic attr__ATTRIBUTE_IMAGE : t -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE1 : us_image -> t
+logic attr__ATTRIBUTE_VALUE : us_image -> t
 
 logic dummy : float1
 
@@ -963,9 +935,9 @@ axiom coerce_axiom :
 
 type num_delimiters_range
 
-predicate in_range2(x: int) = ((0 <= x) and (x <= 10))
+predicate in_range1(x: int) = ((0 <= x) and (x <= 10))
 
-logic bool_eq3 : int, int -> bool
+logic bool_eq2 : int, int -> bool
 
 logic bool_ne : int, int -> bool
 
@@ -978,7 +950,7 @@ logic bool_gt1 : int, int -> bool
 logic bool_ge1 : int, int -> bool
 
 axiom bool_eq_axiom :
-  (forall x:int. (forall y:int. ((bool_eq3(x, y) = true) <-> (x = y))))
+  (forall x:int. (forall y:int. ((bool_eq2(x, y) = true) <-> (x = y))))
 
 axiom bool_ne_axiom :
   (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
@@ -995,17 +967,17 @@ axiom bool_gt_axiom :
 axiom bool_ge_axiom :
   (forall x:int. (forall y:int. ((bool_ge1(x, y) = true) <-> (y <= x))))
 
-logic bool_eq4 : int, int -> bool
+logic bool_eq3 : int, int -> bool
 
-axiom bool_eq_def3 :
-  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
 
-logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
 
 logic user_eq1 : num_delimiters_range, num_delimiters_range -> bool
 
@@ -1026,27 +998,27 @@ axiom inversion_axiom1 :
   (forall x:num_delimiters_range [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
 
 axiom range_axiom1 :
-  (forall x:num_delimiters_range [to_rep1(x)]. in_range2(to_rep1(x)))
+  (forall x:num_delimiters_range [to_rep1(x)]. in_range1(to_rep1(x)))
 
 axiom coerce_axiom1 :
-  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range1(x) ->
   (to_rep1(of_rep1(x)) = x)))
 
 type function_range
 
-predicate in_range3(x: int) = ((0 <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = ((0 <= x) and (x <= 2147483647))
 
-logic bool_eq5 : int, int -> bool
+logic bool_eq4 : int, int -> bool
 
-axiom bool_eq_def4 :
-  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
-logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
 
 logic user_eq2 : function_range, function_range -> bool
 
@@ -1066,10 +1038,10 @@ axiom inversion_axiom2 :
   (forall x:function_range [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
 
 axiom range_axiom2 :
-  (forall x:function_range [to_rep2(x)]. in_range3(to_rep2(x)))
+  (forall x:function_range [to_rep2(x)]. in_range2(to_rep2(x)))
 
 axiom coerce_axiom2 :
-  (forall x:int [to_rep2(of_rep2(x))]. (in_range3(x) ->
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range2(x) ->
   (to_rep2(of_rep2(x)) = x)))
 
 type us_split_fields = { rec__step_function__delimiter_entry__delimiter :
@@ -1091,16 +1063,16 @@ type us_rep = { us_split_fields1 : us_split_fields
 function us_rep___projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
-logic bool_eq6 : us_rep, us_rep -> bool
+logic bool_eq5 : us_rep, us_rep -> bool
 
-axiom bool_eq_def5 :
-  (forall a:us_rep. forall b:us_rep [bool_eq6(a, b)].
+axiom bool_eq_def4 :
+  (forall a:us_rep. forall b:us_rep [bool_eq5(a, b)].
   ((((to_rep2(((a).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2(((b).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
   (to_rep(((a).us_split_fields1).rec__step_function__delimiter_entry__value) = to_rep(((b).us_split_fields1).rec__step_function__delimiter_entry__value))) ->
-  (bool_eq6(a, b) = true)) and
+  (bool_eq5(a, b) = true)) and
   ((not ((to_rep2(((a).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2(((b).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
   (to_rep(((a).us_split_fields1).rec__step_function__delimiter_entry__value) = to_rep(((b).us_split_fields1).rec__step_function__delimiter_entry__value)))) ->
-  (bool_eq6(a, b) = false))))
+  (bool_eq5(a, b) = false))))
 
 logic user_eq3 : us_rep, us_rep -> bool
 
@@ -1206,38 +1178,38 @@ axiom singleton_def :
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = v;
   rec__step_function__delimiter_entry__value = v1 } })))
 
-logic bool_eq7 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
+logic bool_eq6 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
-axiom bool_eq_def6 :
+axiom bool_eq_def5 :
   (forall a:(int,us_rep) farray. forall a__first:int. forall a__last:int.
   forall b:(int,us_rep) farray. forall b__first:int. forall b__last:int
-  [bool_eq7(a, a__first, a__last, b, b__first, b__last)].
+  [bool_eq6(a, a__first, a__last, b, b__first, b__last)].
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
   (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq6((a[temp___idx_132]),
+  (temp___idx_132 <= a__last)) and (bool_eq5((a[temp___idx_132]),
   (b[((b__first - a__first) + temp___idx_132)])) = true)) or
   (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
-  (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
+  (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
   (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq6((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq7(a,
+  (temp___idx_132 <= a__last)) -> (bool_eq5((a[temp___idx_132]),
+  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq6(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
   (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
   (forall a__first:int. forall a__last:int. forall b__first:int.
-  forall b__last:int. ((bool_eq7(b, b__first, b__last, a, a__first,
+  forall b__last:int. ((bool_eq6(b, b__first, b__last, a, a__first,
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
   (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq6((a[temp___idx_132]),
+  (temp___idx_132 <= a__last)) -> (bool_eq5((a[temp___idx_132]),
   (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
 
 logic dummy5 : (int,us_rep) farray
@@ -1295,18 +1267,18 @@ type us_rep1 = { us_split_fields3 : us_split_fields2
 function us_rep_2__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
-logic bool_eq8 : us_rep1, us_rep1 -> bool
+logic bool_eq7 : us_rep1, us_rep1 -> bool
 
-axiom bool_eq_def7 :
-  (forall a:us_rep1. forall b:us_rep1 [bool_eq8(a, b)].
+axiom bool_eq_def6 :
+  (forall a:us_rep1. forall b:us_rep1 [bool_eq7(a, b)].
   ((((to_rep1(((a).us_split_fields3).rec__step_function__step_function_t__number_of_delimiters) = to_rep1(((b).us_split_fields3).rec__step_function__step_function_t__number_of_delimiters)) and
-  (bool_eq7(((a).us_split_fields3).rec__step_function__step_function_t__step,
+  (bool_eq6(((a).us_split_fields3).rec__step_function__step_function_t__step,
   0, 10, ((b).us_split_fields3).rec__step_function__step_function_t__step, 0,
-  10) = true)) -> (bool_eq8(a, b) = true)) and
+  10) = true)) -> (bool_eq7(a, b) = true)) and
   ((not ((to_rep1(((a).us_split_fields3).rec__step_function__step_function_t__number_of_delimiters) = to_rep1(((b).us_split_fields3).rec__step_function__step_function_t__number_of_delimiters)) and
-  (bool_eq7(((a).us_split_fields3).rec__step_function__step_function_t__step,
+  (bool_eq6(((a).us_split_fields3).rec__step_function__step_function_t__step,
   0, 10, ((b).us_split_fields3).rec__step_function__step_function_t__step, 0,
-  10) = true))) -> (bool_eq8(a, b) = false))))
+  10) = true))) -> (bool_eq7(a, b) = false))))
 
 logic user_eq5 : us_rep1, us_rep1 -> bool
 
@@ -1435,7 +1407,7 @@ axiom get_value__post_axiom :
   (forall x:int [get_value({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters = sfun;
   rec__step_function__step_function_t__step = sfun1 } }, x)].
-  ((in_range3(x) and (is_valid({ us_split_fields3 = {
+  ((in_range2(x) and (is_valid({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters = sfun;
   rec__step_function__step_function_t__step = sfun1 } }) = true)) ->
   (((exists i:int. (((0 <= i) and (i <= (to_rep1(sfun) - 1))) and
@@ -1463,7 +1435,7 @@ axiom minimum_until_point__post_axiom :
   (forall x:int [minimum_until_point({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters = sfun;
   rec__step_function__step_function_t__step = sfun1 } }, x)].
-  ((in_range3(x) and (is_valid({ us_split_fields3 = {
+  ((in_range2(x) and (is_valid({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters = sfun;
   rec__step_function__step_function_t__step = sfun1 } }) = true)) ->
   (((forall i:int. (((0 <= i) and (i <= to_rep1(sfun))) ->
@@ -2005,8 +1977,15 @@ goal WP_parameter_def :
   forall result3:us_split_fields__ref1.
   forall sfun4__split_fields2:us_split_fields2.
   forall sfun_merge__split_fields:us_split_fields2. forall result4:int__ref.
-  forall i1:int. forall i2:int. forall i3:int__ref. forall i4:int.
-  forall i5:int__ref. forall i6:int. ((((((((to_rep(o12) = fliteral1) and
+  forall i1:int. forall result5:int__ref. forall i2:int.
+  forall result6:int__ref. forall i3:int. forall result7:int__ref.
+  forall i4:int. forall result8:int__ref. forall i5:int.
+  forall result9:int__ref. forall i6:int. forall result10:int__ref.
+  forall i7:int. forall result11:int__ref. forall i8:int.
+  forall result12:int__ref. forall i9:int. forall result13:int__ref.
+  forall i10:int. forall result14:int__ref. forall i11:int.
+  forall result15:int__ref. forall i12:int. forall result16:int__ref.
+  forall i13:int. ((((((((to_rep(o12) = fliteral1) and
   ((to_rep2(o13) = 0) and ((o13 = o14) and (o12 = o15)))) and
   ((o16 = o14) and (o17 = o15))) and ((((to_rep(o8) = fliteral2) and
   ((to_rep2(o9) = 5) and ((o9 = o10) and (o8 = o11)))) and ((o18 = o10) and
@@ -2149,32 +2128,74 @@ goal WP_parameter_def :
   sfun1__split_fields2 }, { us_split_fields3 = sfun2__split_fields2
   }) = true) -> (((((is_valid({ us_split_fields3 = sfun_merge__split_fields
   }) = true) and
-  (forall i7:int. (((0 <= i7) and
-  (i7 <= to_rep1((sfun3__split_fields2).rec__step_function__step_function_t__number_of_delimiters))) ->
+  (forall i14:int. (((0 <= i14) and
+  (i14 <= to_rep1((sfun3__split_fields2).rec__step_function__step_function_t__number_of_delimiters))) ->
   (exists j:int. (((0 <= j) and
   (j <= to_rep1((sfun_merge__split_fields).rec__step_function__step_function_t__number_of_delimiters))) and
-  (to_rep2(((((sfun_merge__split_fields).rec__step_function__step_function_t__step[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2(((((sfun3__split_fields2).rec__step_function__step_function_t__step[i7])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))))) and
-  (forall i7:int. (((0 <= i7) and
-  (i7 <= to_rep1((sfun4__split_fields2).rec__step_function__step_function_t__number_of_delimiters))) ->
+  (to_rep2(((((sfun_merge__split_fields).rec__step_function__step_function_t__step[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2(((((sfun3__split_fields2).rec__step_function__step_function_t__step[i14])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))))) and
+  (forall i14:int. (((0 <= i14) and
+  (i14 <= to_rep1((sfun4__split_fields2).rec__step_function__step_function_t__number_of_delimiters))) ->
   (exists j:int. (((0 <= j) and
   (j <= to_rep1((sfun_merge__split_fields).rec__step_function__step_function_t__number_of_delimiters))) and
-  (to_rep2(((((sfun_merge__split_fields).rec__step_function__step_function_t__step[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2(((((sfun4__split_fields2).rec__step_function__step_function_t__step[i7])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))))) and
-  (forall i7:int. (((0 <= i7) and
-  (i7 <= to_rep1((sfun_merge__split_fields).rec__step_function__step_function_t__number_of_delimiters))) ->
-  eq(to_rep(((((sfun_merge__split_fields).rec__step_function__step_function_t__step[i7])).us_split_fields1).rec__step_function__delimiter_entry__value),
+  (to_rep2(((((sfun_merge__split_fields).rec__step_function__step_function_t__step[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2(((((sfun4__split_fields2).rec__step_function__step_function_t__step[i14])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))))) and
+  (forall i14:int. (((0 <= i14) and
+  (i14 <= to_rep1((sfun_merge__split_fields).rec__step_function__step_function_t__number_of_delimiters))) ->
+  eq(to_rep(((((sfun_merge__split_fields).rec__step_function__step_function_t__step[i14])).us_split_fields1).rec__step_function__delimiter_entry__value),
   min1(get_value({ us_split_fields3 = sfun3__split_fields2 },
-  to_rep2(((((sfun_merge__split_fields).rec__step_function__step_function_t__step[i7])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)),
+  to_rep2(((((sfun_merge__split_fields).rec__step_function__step_function_t__step[i14])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)),
   get_value({ us_split_fields3 = sfun4__split_fields2 },
-  to_rep2(((((sfun_merge__split_fields).rec__step_function__step_function_t__step[i7])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))))) ->
-  ((((result4 = { int__content = i }) and (i1 = 0)) and ((((0 <= i1) and
-  (i1 <= 12)) and (((((0 <= i2) and (i2 <= 12)) and (eq(get_value({
-  us_split_fields3 = sfun_merge__split_fields }, i2), min1(get_value({
-  us_split_fields3 = sfun3__split_fields2 }, i2), get_value({
-  us_split_fields3 = sfun4__split_fields2 }, i2))) and (i2 = 12))) and
-  ((i3 = { int__content = i2 }) and (i4 = i2))) and ((i5 = i3) and
-  (i6 = i4)))) or ((not ((0 <= i1) and (i1 <= 12))) and ((i5 = {
-  int__content = i1 }) and (i6 = i1))))) -> (eq(minimum_until_point({
-  us_split_fields3 = sfun4__split_fields2 }, 1), fliteral11) ->
-  (eq(minimum_until_point({ us_split_fields3 = sfun4__split_fields2 }, 5),
-  fliteral9) -> eq(minimum_until_point({ us_split_fields3 =
-  sfun_merge__split_fields }, 11), fliteral7)))))))))))))))))))))
+  to_rep2(((((sfun_merge__split_fields).rec__step_function__step_function_t__step[i14])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))))) ->
+  ((((result4 = { int__content = i }) and (i1 = 0)) and (eq(get_value({
+  us_split_fields3 = sfun_merge__split_fields }, i1), min1(get_value({
+  us_split_fields3 = sfun3__split_fields2 }, i1), get_value({
+  us_split_fields3 = sfun4__split_fields2 }, i1))) and (((result5 = {
+  int__content = i1 }) and (i2 = 1)) and (eq(get_value({ us_split_fields3 =
+  sfun_merge__split_fields }, i2), min1(get_value({ us_split_fields3 =
+  sfun3__split_fields2 }, i2), get_value({ us_split_fields3 =
+  sfun4__split_fields2 }, i2))) and (((result6 = { int__content = i2 }) and
+  (i3 = 2)) and (eq(get_value({ us_split_fields3 = sfun_merge__split_fields
+  }, i3), min1(get_value({ us_split_fields3 = sfun3__split_fields2 }, i3),
+  get_value({ us_split_fields3 = sfun4__split_fields2 }, i3))) and
+  (((result7 = { int__content = i3 }) and (i4 = 3)) and (eq(get_value({
+  us_split_fields3 = sfun_merge__split_fields }, i4), min1(get_value({
+  us_split_fields3 = sfun3__split_fields2 }, i4), get_value({
+  us_split_fields3 = sfun4__split_fields2 }, i4))) and (((result8 = {
+  int__content = i4 }) and (i5 = 4)) and (eq(get_value({ us_split_fields3 =
+  sfun_merge__split_fields }, i5), min1(get_value({ us_split_fields3 =
+  sfun3__split_fields2 }, i5), get_value({ us_split_fields3 =
+  sfun4__split_fields2 }, i5))) and (((result9 = { int__content = i5 }) and
+  (i6 = 5)) and (eq(get_value({ us_split_fields3 = sfun_merge__split_fields
+  }, i6), min1(get_value({ us_split_fields3 = sfun3__split_fields2 }, i6),
+  get_value({ us_split_fields3 = sfun4__split_fields2 }, i6))) and
+  (((result10 = { int__content = i6 }) and (i7 = 6)) and (eq(get_value({
+  us_split_fields3 = sfun_merge__split_fields }, i7), min1(get_value({
+  us_split_fields3 = sfun3__split_fields2 }, i7), get_value({
+  us_split_fields3 = sfun4__split_fields2 }, i7))) and (((result11 = {
+  int__content = i7 }) and (i8 = 7)) and (eq(get_value({ us_split_fields3 =
+  sfun_merge__split_fields }, i8), min1(get_value({ us_split_fields3 =
+  sfun3__split_fields2 }, i8), get_value({ us_split_fields3 =
+  sfun4__split_fields2 }, i8))) and (((result12 = { int__content = i8 }) and
+  (i9 = 8)) and (eq(get_value({ us_split_fields3 = sfun_merge__split_fields
+  }, i9), min1(get_value({ us_split_fields3 = sfun3__split_fields2 }, i9),
+  get_value({ us_split_fields3 = sfun4__split_fields2 }, i9))) and
+  (((result13 = { int__content = i9 }) and (i10 = 9)) and (eq(get_value({
+  us_split_fields3 = sfun_merge__split_fields }, i10), min1(get_value({
+  us_split_fields3 = sfun3__split_fields2 }, i10), get_value({
+  us_split_fields3 = sfun4__split_fields2 }, i10))) and (((result14 = {
+  int__content = i10 }) and (i11 = 10)) and (eq(get_value({
+  us_split_fields3 = sfun_merge__split_fields }, i11), min1(get_value({
+  us_split_fields3 = sfun3__split_fields2 }, i11), get_value({
+  us_split_fields3 = sfun4__split_fields2 }, i11))) and (((result15 = {
+  int__content = i11 }) and (i12 = 11)) and (eq(get_value({
+  us_split_fields3 = sfun_merge__split_fields }, i12), min1(get_value({
+  us_split_fields3 = sfun3__split_fields2 }, i12), get_value({
+  us_split_fields3 = sfun4__split_fields2 }, i12))) and (((result16 = {
+  int__content = i12 }) and (i13 = 12)) and eq(get_value({ us_split_fields3 =
+  sfun_merge__split_fields }, i13), min1(get_value({ us_split_fields3 =
+  sfun3__split_fields2 }, i13), get_value({ us_split_fields3 =
+  sfun4__split_fields2 }, i13)))))))))))))))))))))))))))) ->
+  (eq(minimum_until_point({ us_split_fields3 = sfun4__split_fields2 }, 1),
+  fliteral11) -> (eq(minimum_until_point({ us_split_fields3 =
+  sfun4__split_fields2 }, 5), fliteral9) -> eq(minimum_until_point({
+  us_split_fields3 = sfun_merge__split_fields }, 11),
+  fliteral7)))))))))))))))))))))
