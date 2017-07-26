@@ -62,7 +62,7 @@ for group in GROUPS:
                            if v[1] == BENCHMARKS[bm]["status"]]
                 rebel   = [v[0] for v in verdicts if v[1] == counter]
                 if len(conform) == 0 and len(rebel) == 0:
-                    cat_nobody.append("%s: unsolved" % fn)
+                    cat_nobody.append("%s: unsolved" % bm_name)
                 elif len(conform) == 0 and len(rebel) == 1:
                     cat_disagree_one.append(
                         "%s: minority report from %s" %
