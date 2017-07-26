@@ -1,0 +1,23 @@
+(set-info :smt-lib-version 2.6)
+(set-logic QF_FPBV)
+(set-option :produce-models true)
+(set-info :source |Random FP created by PyMPF|)
+(set-info :license |https://www.gnu.org/licenses/gpl-3.0.html|)
+(set-info :category random)
+(set-info :status sat)
+;; (fp.to.sbv RNE -halfpoint)
+(declare-const x Float32)
+(assert (= x (fp #b1 #b10010011 #b10011111100100110110000)))
+;; x should be Float32(0xC9CFC9B0 [Rational(-1702198), -1702198.000000])
+
+(declare-const y (_ BitVec 64))
+(assert (= y ((_ fp.to_sbv 64) RNE x)))
+;; y should be -1702198
+
+(declare-const z (_ BitVec 64))
+(assert (= z #b1111111111111111111111111111111111111111111001100000011011001010))
+;; z should be -1702198
+
+(assert (= y z))
+(check-sat)
+(exit)
