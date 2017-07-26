@@ -282,7 +282,7 @@ def mk_run_id(solver_kind, solver_bin):
 def load_benchmark_status():
     print "Loading benchmark summaries"
     # returns a dictionay with benchmark status
-    # bm_name -> {"status" : sat | unsat | unknown,
+    # bm_name -> {"status" : s (sat) | u (unsat) | ? (unknown)
     #             "name"   : original name}
     rv = {}
 
