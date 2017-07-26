@@ -24,69 +24,58 @@
 
 import os
 import argparse
-from cPickle import load, dump
 from pprint import pprint
 
-from mk_status_slides import data, other_data
-from common import Benchmark
+from mk_status_slides import data, other_data, GROUPS, BENCHMARKS
 
-# Cache/load expected status of all benchmarks
-if os.path.exists("benchmarks.p"):
-    with open("benchmarks.p", "rb") as fd:
-        benchmarks = load(fd)
-else:
-    benchmarks = {}
-    for fn in data[0]["verdicts"]:
-        b = Benchmark(fn)
-        b.load(keep_logic = True)
-        benchmarks[fn] = b.expected
-    with open("benchmarks.p", "wb") as fd:
-        dump(benchmarks, fd, -1)
+solutions = [data[-1]] + other_data
 
 cat_nobody        = []
 cat_sat_and_unsat = []
 cat_disagree_many = []
 cat_disagree_one  = []
 
-for fn in sorted(benchmarks):
-    cvc4_verdicts = map(lambda i: (i["prover"]["bin"],
-                                   i["verdicts"][fn]),
-                        data)
-    other_verdicts = map(lambda i: (i["prover"]["kind"],
-                                    i["verdicts"][fn]),
-                         other_data)
-    other_verdicts.append(("cvc4", cvc4_verdicts[-1][1]))
+for group in GROUPS:
+    for data in solutions:
+        for bm in data["group_results"][group]:
+            bm_name = BENCHMARKS[bm]["name"]
+            verdicts = [(s["prover_kind"],
+                         s["group_results"][group][bm]["status"])
+                        for s in solutions]
 
-    if benchmarks[fn] == "unknown":
-        # Check if we have different solutions
-        sat   = [v for v in other_verdicts if v[1] == "sat"]
-        unsat = [v for v in other_verdicts if v[1] == "unsat"]
-        if len(sat) >= 1 and len(unsat) >= 1:
-            cat_sat_and_unsat.append(
-                "%s: different opinions: %s SAT; %s UNSAT" % \
-                (fn,
-                 ", ".join(v[0] for v in sat),
-                 ", ".join(v[0] for v in unsat)))
-    elif benchmarks[fn] in ("sat", "unsat"):
-        # Check if all disagree
-        counter = "sat" if benchmarks[fn] == "unsat" else "unsat"
-        conform = [v for v in other_verdicts if v[1] == benchmarks[fn]]
-        rebel   = [v for v in other_verdicts if v[1] == counter]
-        if len(conform) == 0 and len(rebel) == 0:
-            cat_nobody.append("%s: unsolved" % fn)
-        elif len(conform) == 0 and len(rebel) == 1:
-            cat_disagree_one.append(
-                "%s: minority report from %s" %
-                (fn,
-                 rebel[0][0]))
-        elif len(conform) == 0 and len(rebel) >= 1:
-            cat_disagree_many.append(
-                "%s: many (%s) disagree on %s expectation" %
-                (fn,
-                 ", ".join(v[0] for v in rebel),
-                 benchmarks[fn]))
-    else:
-        assert False
+            if BENCHMARKS[bm]["status"] == "?":
+                # Check if we have different solutions
+                sat   = [v[0] for v in verdicts if v[1] == "s"]
+                unsat = [v[0] for v in verdicts if v[1] == "u"]
+                if len(sat) >= 1 and len(unsat) >= 1:
+                    cat_sat_and_unsat.append(
+                        "%s: different opinions: %s SAT; %s UNSAT" % \
+                        (bm_name,
+                         ", ".join(sat),
+                         ", ".join(unsat)))
+            elif BENCHMARKS[bm]["status"] in ("s", "u"):
+                # Check if all disagree
+                counter = {"s" : "u",
+                           "u" : "s"}[BENCHMARKS[bm]["status"]]
+                conform = [v[0]
+                           for v in verdicts
+                           if v[1] == BENCHMARKS[bm]["status"]]
+                rebel   = [v[0] for v in verdicts if v[1] == counter]
+                if len(conform) == 0 and len(rebel) == 0:
+                    cat_nobody.append("%s: unsolved" % fn)
+                elif len(conform) == 0 and len(rebel) == 1:
+                    cat_disagree_one.append(
+                        "%s: minority report from %s" %
+                        (bm_name,
+                         rebel[0]))
+                elif len(conform) == 0 and len(rebel) >= 1:
+                    cat_disagree_many.append(
+                        "%s: many (%s) disagree on %s expectation" %
+                        (bm_name,
+                         ", ".join(rebel),
+                         BENCHMARKS[bm]["status"]))
+            else:
+                assert False
 
 print "# Unsolved"
 for msg in cat_nobody:
