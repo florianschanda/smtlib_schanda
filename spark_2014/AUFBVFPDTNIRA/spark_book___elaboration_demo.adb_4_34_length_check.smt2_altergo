@@ -1041,6 +1041,27 @@ axiom coerce_axiom :
   (forall x:int [to_rep(of_rep(x))]. (in_range3(x) ->
   (to_rep(of_rep(x)) = x)))
 
+logic sqrt2 : t -> t
+
+logic sqrt__function_guard : t, t -> prop
+
+logic fliteral1 : t
+
+axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
+  (tqtreal(fliteral1) = 0.0e-1))
+
+logic fliteral2 : t
+
+axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
+  (tqtreal(fliteral2) = 0.0000000000000000000000000000000000000000000014012984643248170709237295832899161312802619418765157717570682838897910826858606014866381883621215820312500000000000000000000000))
+
+axiom sqrt__post_axiom :
+  (forall x:t [sqrt2(x)]. ((tqtisFinite(x) and le(fliteral1, x)) ->
+  ((le(fliteral1, sqrt2(x)) and ((eq(x, fliteral1) -> eq(sqrt2(x),
+  fliteral1)) and ((eq(x, fliteral) -> eq(sqrt2(x), fliteral)) and
+  (le(fliteral2, x) -> lt(fliteral1, sqrt2(x)))))) and
+  tqtisFinite(sqrt2(x)))))
+
 logic size : int
 
 logic attr__ATTRIBUTE_ADDRESS : int

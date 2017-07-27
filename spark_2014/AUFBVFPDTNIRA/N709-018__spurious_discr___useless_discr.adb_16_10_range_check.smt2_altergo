@@ -1138,8 +1138,6 @@ axiom bool_eq_def5 :
   (to_rep1(((a).us_split_fields1).rec__useless_discr__t__y) = to_rep1(((b).us_split_fields1).rec__useless_discr__t__y))))) ->
   (bool_eq6(a, b) = false))))
 
-logic user_eq3 : us_rep, us_rep -> bool
-
 logic us_dispatch_eq : us_rep, us_rep -> bool
 
 logic us_tag : int
@@ -1229,6 +1227,8 @@ axiom useless_discr__t__y__last__bit_axiom :
 
 axiom useless_discr__t__y__position_axiom :
   (0 <= useless_discr__t__y__position)
+
+logic user_eq3 : us_rep, us_rep -> bool
 
 logic dummy3 : e
 
@@ -1337,6 +1337,8 @@ axiom useless_discr__t__x__last__bit_axiom1 :
 
 axiom useless_discr__t__x__position_axiom1 :
   (0 <= useless_discr__t__x__position1)
+
+logic user_eq4 : us_rep, us_rep -> bool
 
 logic dummy9 : e
 

@@ -1088,8 +1088,6 @@ axiom bool_eq_def4 :
   (to_rep1(((a).us_split_fields1).rec__discriminant_check__rec__y) = to_rep1(((b).us_split_fields1).rec__discriminant_check__rec__y))))) ->
   (bool_eq5(a, b) = false))))
 
-logic user_eq2 : us_rep, us_rep -> bool
-
 logic value__size : int
 
 logic object__size : us_rep -> int
@@ -1159,6 +1157,8 @@ axiom discriminant_check__rec__y__last__bit_axiom :
 
 axiom discriminant_check__rec__y__position_axiom :
   (0 <= discriminant_check__rec__y__position)
+
+logic user_eq2 : us_rep, us_rep -> bool
 
 logic dummy2 : bool
 

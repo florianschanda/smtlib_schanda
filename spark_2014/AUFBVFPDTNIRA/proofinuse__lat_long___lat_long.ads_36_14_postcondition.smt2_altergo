@@ -1057,8 +1057,6 @@ axiom bool_eq_def4 :
   (to_rep1(((a).us_split_fields1).rec__lat_long__coordinates__long) = to_rep1(((b).us_split_fields1).rec__lat_long__coordinates__long)))) ->
   (bool_eq4(a, b) = false))))
 
-logic user_eq3 : us_rep, us_rep -> bool
-
 logic value__size : int
 
 logic object__size : us_rep -> int
@@ -1110,6 +1108,8 @@ axiom lat_long__coordinates__long__last__bit_axiom :
 
 axiom lat_long__coordinates__long__position_axiom :
   (0 <= lat_long__coordinates__long__position)
+
+logic user_eq3 : us_rep, us_rep -> bool
 
 logic dummy3 : latitude
 

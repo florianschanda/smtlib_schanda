@@ -1115,8 +1115,6 @@ axiom bool_eq_def5 :
   (to_rep(((a).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed) = to_rep(((b).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed)))) ->
   (bool_eq6(a, b) = false))))
 
-logic user_eq3 : us_rep, us_rep -> bool
-
 logic value__size : int
 
 logic object__size : us_rep -> int
@@ -1170,6 +1168,8 @@ axiom deceleration_curve__braking_curve_entry__speed__last__bit_axiom :
 
 axiom deceleration_curve__braking_curve_entry__speed__position_axiom :
   (0 <= deceleration_curve__braking_curve_entry__speed__position)
+
+logic user_eq3 : us_rep, us_rep -> bool
 
 logic dummy3 : distance_t
 
@@ -1328,8 +1328,6 @@ axiom bool_eq_def7 :
   (to_rep1(((a).us_split_fields3).rec__deceleration_curve__braking_curve_t__end_point) = to_rep1(((b).us_split_fields3).rec__deceleration_curve__braking_curve_t__end_point)))) ->
   (bool_eq8(a, b) = false))))
 
-logic user_eq5 : us_rep1, us_rep1 -> bool
-
 logic value__size2 : int
 
 logic object__size2 : us_rep1 -> int
@@ -1383,6 +1381,8 @@ axiom deceleration_curve__braking_curve_t__end_point__last__bit_axiom :
 axiom deceleration_curve__braking_curve_t__end_point__position_axiom :
   (0 <= deceleration_curve__braking_curve_t__end_point__position)
 
+logic user_eq5 : us_rep1, us_rep1 -> bool
+
 logic dummy6 : (int,us_rep) farray
 
 logic dummy7 : distance_t
@@ -1428,8 +1428,6 @@ axiom bool_eq_def8 :
   (to_rep1(((a).us_split_fields5).rec__deceleration_curve__target_t__location) = to_rep1(((b).us_split_fields5).rec__deceleration_curve__target_t__location))) and
   (to_rep(((a).us_split_fields5).rec__deceleration_curve__target_t__speed) = to_rep(((b).us_split_fields5).rec__deceleration_curve__target_t__speed)))) ->
   (bool_eq9(a, b) = false))))
-
-logic user_eq6 : us_rep2, us_rep2 -> bool
 
 logic value__size3 : int
 
@@ -1501,6 +1499,8 @@ axiom deceleration_curve__target_t__speed__last__bit_axiom :
 
 axiom deceleration_curve__target_t__speed__position_axiom :
   (0 <= deceleration_curve__target_t__speed__position)
+
+logic user_eq6 : us_rep2, us_rep2 -> bool
 
 logic dummy8 : bool
 

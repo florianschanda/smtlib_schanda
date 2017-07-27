@@ -1102,8 +1102,6 @@ axiom bool_eq_def5 :
   (to_rep1(((a).us_split_fields1).rec__step_function__delimiter_entry__value) = to_rep1(((b).us_split_fields1).rec__step_function__delimiter_entry__value)))) ->
   (bool_eq6(a, b) = false))))
 
-logic user_eq3 : us_rep, us_rep -> bool
-
 logic value__size : int
 
 logic object__size : us_rep -> int
@@ -1155,6 +1153,8 @@ axiom step_function__delimiter_entry__value__last__bit_axiom :
 
 axiom step_function__delimiter_entry__value__position_axiom :
   (0 <= step_function__delimiter_entry__value__position)
+
+logic user_eq3 : us_rep, us_rep -> bool
 
 logic dummy3 : function_range
 
@@ -1308,8 +1308,6 @@ axiom bool_eq_def7 :
   0, 10, ((b).us_split_fields3).rec__step_function__step_function_t__step, 0,
   10) = true))) -> (bool_eq8(a, b) = false))))
 
-logic user_eq5 : us_rep1, us_rep1 -> bool
-
 logic value__size2 : int
 
 logic object__size2 : us_rep1 -> int
@@ -1363,6 +1361,8 @@ axiom step_function__step_function_t__step__last__bit_axiom :
 
 axiom step_function__step_function_t__step__position_axiom :
   (0 <= step_function__step_function_t__step__position)
+
+logic user_eq5 : us_rep1, us_rep1 -> bool
 
 logic dummy6 : num_delimiters_range
 

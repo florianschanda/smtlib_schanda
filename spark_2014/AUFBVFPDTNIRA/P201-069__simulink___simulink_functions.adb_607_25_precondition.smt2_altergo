@@ -897,11 +897,55 @@ axiom one_of_int : (fliteral = of_int(RNA, 1))
 type t__ref = { t__content : t
 }
 
+type float1
+
+logic bool_eq1 : t, t -> bool
+
+axiom bool_eq_def1 :
+  (forall x:t. forall y:t [bool_eq1(x, y)]. ((eq(x, y) -> (bool_eq1(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq1(x, y) = false))))
+
+logic user_eq : float1, float1 -> bool
+
+logic attr__ATTRIBUTE_IMAGE : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> t
+
+logic dummy : float1
+
+type float__ref = { float__content : float1
+}
+
+function float__ref___projection(a: float__ref) : float1 = (a).float__content
+
+logic sqrt2 : t -> t
+
+logic sqrt__function_guard : t, t -> prop
+
+logic fliteral1 : t
+
+axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
+  (tqtreal(fliteral1) = 0.0e-1))
+
+logic fliteral2 : t
+
+axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
+  (tqtreal(fliteral2) = 0.0000000000000000000000000000000000000000000014012984643248170709237295832899161312802619418765157717570682838897910826858606014866381883621215820312500000000000000000000000))
+
+axiom sqrt__post_axiom :
+  (forall x:t [sqrt2(x)]. ((tqtisFinite(x) and le(fliteral1, x)) ->
+  ((le(fliteral1, sqrt2(x)) and ((eq(x, fliteral1) -> eq(sqrt2(x),
+  fliteral1)) and ((eq(x, fliteral) -> eq(sqrt2(x), fliteral)) and
+  (le(fliteral2, x) -> lt(fliteral1, sqrt2(x)))))) and
+  tqtisFinite(sqrt2(x)))))
+
 type integer_8
 
 predicate in_range1(x: int) = (((-128) <= x) and (x <= 127))
 
-logic bool_eq1 : int, int -> bool
+logic bool_eq2 : int, int -> bool
 
 logic bool_ne : int, int -> bool
 
@@ -914,7 +958,7 @@ logic bool_gt1 : int, int -> bool
 logic bool_ge1 : int, int -> bool
 
 axiom bool_eq_axiom :
-  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+  (forall x:int. (forall y:int. ((bool_eq2(x, y) = true) <-> (x = y))))
 
 axiom bool_ne_axiom :
   (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
@@ -931,21 +975,21 @@ axiom bool_gt_axiom :
 axiom bool_ge_axiom :
   (forall x:int. (forall y:int. ((bool_ge1(x, y) = true) <-> (y <= x))))
 
-logic bool_eq2 : int, int -> bool
+logic bool_eq3 : int, int -> bool
 
-axiom bool_eq_def1 :
-  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
 
-logic attr__ATTRIBUTE_IMAGE : int -> us_image
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE : us_image -> int
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
 
-logic user_eq : integer_8, integer_8 -> bool
+logic user_eq1 : integer_8, integer_8 -> bool
 
-logic dummy : integer_8
+logic dummy1 : integer_8
 
 type integer_8__ref = { integer_8__content : integer_8
 }
@@ -958,5 +1002,4 @@ logic i : int
 logic attr__ATTRIBUTE_ADDRESS : int
 
  (* File "interfac.ads", line 46, characters 0-0 *)
-goal WP_parameter_def : (in_range1(i) -> (is_zero(of_int(RNE, i)) or
-  is_positive(of_int(RNE, i))))
+goal WP_parameter_def : (in_range1(i) -> le(fliteral1, of_int(RNE, i)))

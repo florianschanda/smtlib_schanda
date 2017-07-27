@@ -969,8 +969,6 @@ axiom bool_eq_def2 :
   (to_rep(((a).us_split_fields1).rec__foo__double_tests__test_record_1__rec__c) = to_rep(((b).us_split_fields1).rec__foo__double_tests__test_record_1__rec__c)))) ->
   (bool_eq2(a, b) = false))))
 
-logic user_eq1 : us_rep, us_rep -> bool
-
 logic value__size : int
 
 logic object__size : us_rep -> int
@@ -1039,6 +1037,8 @@ axiom foo__double_tests__test_record_1__rec__c__last__bit_axiom :
 
 axiom foo__double_tests__test_record_1__rec__c__position_axiom :
   (0 <= foo__double_tests__test_record_1__rec__c__position)
+
+logic user_eq1 : us_rep, us_rep -> bool
 
 logic dummy1 : ft
 

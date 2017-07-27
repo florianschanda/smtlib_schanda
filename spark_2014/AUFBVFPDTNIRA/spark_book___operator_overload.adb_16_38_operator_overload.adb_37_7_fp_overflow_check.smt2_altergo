@@ -1271,8 +1271,6 @@ axiom bool_eq_def6 :
   (to_rep2(((a).us_split_fields1).rec__operator_overload__point__y_coord) = to_rep2(((b).us_split_fields1).rec__operator_overload__point__y_coord)))) ->
   (bool_eq8(a, b) = false))))
 
-logic user_eq5 : us_rep, us_rep -> bool
-
 logic value__size1 : int
 
 logic object__size1 : us_rep -> int
@@ -1324,6 +1322,8 @@ axiom operator_overload__point__y_coord__last__bit_axiom :
 
 axiom operator_overload__point__y_coord__position_axiom :
   (0 <= operator_overload__point__y_coord__position)
+
+logic user_eq5 : us_rep, us_rep -> bool
 
 logic dummy6 : float1
 

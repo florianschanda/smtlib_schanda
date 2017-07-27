@@ -976,11 +976,15 @@ logic sqrt2 : t -> t
 
 logic sqrt__function_guard : t, t -> prop
 
+logic sqrt3 : t -> t
+
+logic sqrt__function_guard1 : t, t -> prop
+
 axiom sqrt__post_axiom :
   (forall x:t [sqrt2(x)]. (tqtisFinite(x) -> tqtisFinite(sqrt2(x))))
 
 axiom sqrt__def_axiom :
-  (forall x:t [sqrt2(x)]. (tqtisFinite(x) -> (sqrt2(x) = sqrt(RNE, x))))
+  (forall x:t [sqrt2(x)]. (tqtisFinite(x) -> (sqrt2(x) = sqrt3(x))))
 
 type latitude
 
@@ -1097,8 +1101,6 @@ axiom bool_eq_def5 :
   (to_rep1(((a).us_split_fields1).rec__lat_long__coordinates__long) = to_rep1(((b).us_split_fields1).rec__lat_long__coordinates__long)))) ->
   (bool_eq5(a, b) = false))))
 
-logic user_eq4 : us_rep, us_rep -> bool
-
 logic value__size : int
 
 logic object__size : us_rep -> int
@@ -1150,6 +1152,8 @@ axiom lat_long__coordinates__long__last__bit_axiom :
 
 axiom lat_long__coordinates__long__position_axiom :
   (0 <= lat_long__coordinates__long__position)
+
+logic user_eq4 : us_rep, us_rep -> bool
 
 logic dummy4 : latitude
 
@@ -1317,23 +1321,35 @@ logic fliteral10 : t
 axiom fliteral_axiom10 : (tqtisFinite(fliteral10) and
   (tqtreal(fliteral10) = 0.0e-1))
 
+logic fliteral11 : t
+
+axiom fliteral_axiom11 : (tqtisFinite(fliteral11) and
+  (tqtreal(fliteral11) = 0.0000000000000000000000000000000000000000000014012984643248170709237295832899161312802619418765157717570682838897910826858606014866381883621215820312500000000000000000000000))
+
+axiom sqrt__post_axiom1 :
+  (forall x:t [sqrt3(x)]. ((tqtisFinite(x) and le(fliteral10, x)) ->
+  ((le(fliteral10, sqrt3(x)) and ((eq(x, fliteral10) -> eq(sqrt3(x),
+  fliteral10)) and ((eq(x, fliteral) -> eq(sqrt3(x), fliteral)) and
+  (le(fliteral11, x) -> lt(fliteral10, sqrt3(x)))))) and
+  tqtisFinite(sqrt3(x)))))
+
 axiom sin__post_axiom :
   (forall x:t [sin(x)]. (tqtisFinite(x) -> (((le(neg(fliteral), sin(x)) and
   le(sin(x), fliteral)) and (eq(x, fliteral10) -> eq(sin(x),
   fliteral10))) and tqtisFinite(sin(x)))))
 
-logic fliteral11 : t
+logic fliteral12 : t
 
-axiom fliteral_axiom11 : (tqtisFinite(fliteral11) and
-  (tqtreal(fliteral11) = 340282346638528859811704183484516925440.0))
+axiom fliteral_axiom12 : (tqtisFinite(fliteral12) and
+  (tqtreal(fliteral12) = 340282346638528859811704183484516925440.0))
 
  (* File "lat_long.ads", line 6, characters 0-0 *)
 goal WP_parameter_def :
   (forall delta_lat:t. forall delta_long:t. forall o:t. forall o1:t.
   forall o2:t. forall o3:t. forall result:t. forall delta_lat1:t.
-  forall result1:t. forall delta_long1:t. ((le(neg(fliteral11),
-  fliteral11) -> tqtisFinite(delta_lat)) -> ((le(neg(fliteral11),
-  fliteral11) -> tqtisFinite(delta_long)) -> ((({ t__content = result } = {
+  forall result1:t. forall delta_long1:t. ((le(neg(fliteral12),
+  fliteral12) -> tqtisFinite(delta_lat)) -> ((le(neg(fliteral12),
+  fliteral12) -> tqtisFinite(delta_long)) -> ((({ t__content = result } = {
   t__content = delta_lat }) and (delta_lat1 = mul(RNE, mul(RNE, sub(RNE,
   to_rep(destination), to_rep(source)), fliteral6), fliteral7))) ->
   ((((((o = cos(to_rep(source))) and (tqtisFinite(o) and

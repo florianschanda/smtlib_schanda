@@ -1041,6 +1041,27 @@ axiom coerce_axiom :
   (forall x:int [to_rep(of_rep(x))]. (in_range3(x) ->
   (to_rep(of_rep(x)) = x)))
 
+logic sqrt2 : t -> t
+
+logic sqrt__function_guard : t, t -> prop
+
+logic fliteral1 : t
+
+axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
+  (tqtreal(fliteral1) = 0.0e-1))
+
+logic fliteral2 : t
+
+axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
+  (tqtreal(fliteral2) = 0.0000000000000000000000000000000000000000000014012984643248170709237295832899161312802619418765157717570682838897910826858606014866381883621215820312500000000000000000000000))
+
+axiom sqrt__post_axiom :
+  (forall x:t [sqrt2(x)]. ((tqtisFinite(x) and le(fliteral1, x)) ->
+  ((le(fliteral1, sqrt2(x)) and ((eq(x, fliteral1) -> eq(sqrt2(x),
+  fliteral1)) and ((eq(x, fliteral) -> eq(sqrt2(x), fliteral)) and
+  (le(fliteral2, x) -> lt(fliteral1, sqrt2(x)))))) and
+  tqtisFinite(sqrt2(x)))))
+
 logic size : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
@@ -1491,24 +1512,25 @@ axiom def_axiom :
   (((elaboration_demo__line__aggregate_def(temp___148, temp___149,
   temp___150)).elts1[temp___151]) = of_rep1(temp___148)))))
 
-logic fliteral1 : t
+logic fliteral3 : t
 
-axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
-  (tqtreal(fliteral1) = 5.0))
+axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
+  (tqtreal(fliteral3) = 5.0))
 
-logic fliteral2 : t
+logic fliteral4 : t
 
-axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
-  (tqtreal(fliteral2) = 2.0))
+axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
+  (tqtreal(fliteral4) = 2.0))
 
  (* File "elaboration_demo.adb", line 3, characters 0-0 *)
 goal WP_parameter_def :
   (forall count:int. forall line:(int,character) farray.
   forall temp___153:(int,character) farray. forall temp___1531:t2.
   forall elaboration_demo__line__assume:(int,character) farray.
-  forall elaboration_demo__line__assume1:t1. forall o:t.
-  forall result:(int,character) farray. forall line1:(int,character) farray.
-  (in_range2(size) -> (((0 <= 2147483647) -> in_range1(count)) ->
+  forall elaboration_demo__line__assume1:t1. forall o:t. forall o1:t.
+  forall o2:t. forall result:(int,character) farray.
+  forall line1:(int,character) farray. (in_range2(size) ->
+  (((0 <= 2147483647) -> in_range1(count)) ->
   (((((to_rep(first2((elaboration_demo__line__aggregate_def(32, 1,
   size)).rt1)) = 1) and
   ((to_rep(last2((elaboration_demo__line__aggregate_def(32, 1,
@@ -1529,5 +1551,8 @@ goal WP_parameter_def :
   (to_rep(line__last) = to_rep(last(elaboration_demo__line__assume1)))))) ->
   ((dynamic_property1(1, size, to_rep(line__first), to_rep(line__last)) and
   ((to_rep(line__first) = 1) and (to_rep(line__last) = size))) ->
-  (((o = add(RNE, fliteral, sqrt(RNE, fliteral1))) and tqtisFinite(add(RNE,
-  fliteral, sqrt(RNE, fliteral1)))) -> (not is_zero(fliteral2))))))))
+  (((((o = sqrt2(fliteral3)) and (tqtisFinite(o) and (le(fliteral1, o) and
+  ((eq(fliteral3, fliteral1) -> eq(o, fliteral1)) and ((eq(fliteral3,
+  fliteral) -> eq(o, fliteral)) and (le(fliteral2, fliteral3) ->
+  lt(fliteral1, o))))))) and (o1 = add(RNE, fliteral, o))) and ((o2 = o1) and
+  tqtisFinite(o1))) -> (not is_zero(fliteral4))))))))

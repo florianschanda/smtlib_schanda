@@ -959,8 +959,6 @@ axiom bool_eq_def2 :
   (to_rep(((a).us_split_fields1).rec__package_1__record_t__b) = to_rep(((b).us_split_fields1).rec__package_1__record_t__b)))) ->
   (bool_eq2(a, b) = false))))
 
-logic user_eq1 : us_rep, us_rep -> bool
-
 logic value__size : int
 
 logic object__size : us_rep -> int
@@ -1011,6 +1009,8 @@ axiom package_1__record_t__b__last__bit_axiom :
 
 axiom package_1__record_t__b__position_axiom :
   (0 <= package_1__record_t__b__position)
+
+logic user_eq1 : us_rep, us_rep -> bool
 
 logic dummy1 : float1
 

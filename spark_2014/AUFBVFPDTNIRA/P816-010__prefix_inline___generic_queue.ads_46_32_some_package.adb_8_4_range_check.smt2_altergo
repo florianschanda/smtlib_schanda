@@ -1715,8 +1715,6 @@ axiom bool_eq_def8 :
   (to_rep1(((a).us_split_fields1).rec__some_package__float_buffer__buffer_tag__num_overflows) = to_rep1(((b).us_split_fields1).rec__some_package__float_buffer__buffer_tag__num_overflows)))) ->
   (bool_eq9(a, b) = false))))
 
-logic user_eq6 : us_rep, us_rep -> bool
-
 logic us_dispatch_eq : us_rep, us_rep -> bool
 
 logic us_tag : int
@@ -1848,6 +1846,8 @@ axiom some_package__float_buffer__buffer_tag__num_overflows__last__bit_axiom :
 
 axiom some_package__float_buffer__buffer_tag__num_overflows__position_axiom :
   (0 <= some_package__float_buffer__buffer_tag__num_overflows__position)
+
+logic user_eq6 : us_rep, us_rep -> bool
 
 logic dummy6 : mode_type
 

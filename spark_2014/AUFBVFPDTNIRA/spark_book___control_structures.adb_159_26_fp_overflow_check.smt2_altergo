@@ -1232,6 +1232,27 @@ type num__ref = { num__content : num
 
 function num__ref___projection(a: num__ref) : num = (a).num__content
 
+logic sqrt2 : t -> t
+
+logic sqrt__function_guard : t, t -> prop
+
+logic fliteral1 : t
+
+axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
+  (tqtreal(fliteral1) = 0.0e-1))
+
+logic fliteral2 : t
+
+axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
+  (tqtreal(fliteral2) = 0.0000000000000000000000000000000000000000000014012984643248170709237295832899161312802619418765157717570682838897910826858606014866381883621215820312500000000000000000000000))
+
+axiom sqrt__post_axiom :
+  (forall x:t [sqrt2(x)]. ((tqtisFinite(x) and le(fliteral1, x)) ->
+  ((le(fliteral1, sqrt2(x)) and ((eq(x, fliteral1) -> eq(sqrt2(x),
+  fliteral1)) and ((eq(x, fliteral) -> eq(sqrt2(x), fliteral)) and
+  (le(fliteral2, x) -> lt(fliteral1, sqrt2(x)))))) and
+  tqtisFinite(sqrt2(x)))))
+
 type uppercase
 
 predicate in_range7(x: int) = ((65 <= x) and (x <= 90))
@@ -1326,32 +1347,27 @@ logic c10b : int
 
 logic attr__ATTRIBUTE_ADDRESS29 : int
 
-logic fliteral1 : t
-
-axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
-  (tqtreal(fliteral1) = 0.0000999999974737875163555145263671875))
-
-axiom tolerance__def_axiom : (tolerance = fliteral1)
-
-logic fliteral2 : t
-
-axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
-  (tqtreal(fliteral2) = 340282346638528859811704183484516925440.0))
-
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
-  (tqtreal(fliteral3) = 123.45459747314453125))
+  (tqtreal(fliteral3) = 0.0000999999974737875163555145263671875))
+
+axiom tolerance__def_axiom : (tolerance = fliteral3)
 
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
-  (tqtreal(fliteral4) = 0.0e-1))
+  (tqtreal(fliteral4) = 340282346638528859811704183484516925440.0))
 
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
-  (tqtreal(fliteral5) = 2.0))
+  (tqtreal(fliteral5) = 123.45459747314453125))
+
+logic fliteral6 : t
+
+axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
+  (tqtreal(fliteral6) = 2.0))
 
  (* File "control_structures.adb", line 29, characters 0-0 *)
 goal WP_parameter_def :
@@ -1362,8 +1378,8 @@ goal WP_parameter_def :
   forall success:bool. forall approx:t. forall x:t. forall y:t.
   forall letter:int. forall o:int. forall o1:int. forall o2:int.
   forall o3:int. forall o4:int. forall o5:int. forall o6:t. forall o7:t.
-  forall o8:t. forall o9:t. forall o10:t. forall o11:t. forall o12:int.
-  forall o13:int. forall o14:int. forall temp___533:int.
+  forall o8:t. forall o9:t. forall o10:t. forall o11:t. forall o12:t.
+  forall o13:int. forall o14:int. forall o15:int. forall temp___533:int.
   forall temp___532:int. forall g1:int. forall result:int.
   forall letter1:int. forall result1:int. forall a1:int. forall result2:int.
   forall b1:int. forall result3:int. forall c1:int. forall result4:int.
@@ -1408,14 +1424,14 @@ goal WP_parameter_def :
   in_range2(temperature)) -> ((((-2147483648) <= 2147483647) ->
   in_range2(valve_setting)) -> ((((-2147483648) <= 2147483647) ->
   in_range2(value)) -> ((((-2147483648) <= 2147483647) -> in_range2(sum)) ->
-  ((le(neg(fliteral2), fliteral2) -> tqtisFinite(approx)) ->
-  ((le(neg(fliteral2), fliteral2) -> tqtisFinite(x)) -> ((le(neg(fliteral2),
-  fliteral2) -> tqtisFinite(y)) -> (tqtisFinite(tolerance) ->
+  ((le(neg(fliteral4), fliteral4) -> tqtisFinite(approx)) ->
+  ((le(neg(fliteral4), fliteral4) -> tqtisFinite(x)) -> ((le(neg(fliteral4),
+  fliteral4) -> tqtisFinite(y)) -> (tqtisFinite(tolerance) ->
   (((result = letter) and (letter1 = 81)) -> (in_range7(letter1) ->
   (((result1 = a) and (a1 = 1)) -> (((result2 = b) and (b1 = 2)) ->
   (((result3 = c) and (c1 = 3)) -> (((result4 = d) and (d1 = 3)) ->
   (((result5 = e) and (e1 = 4)) -> (((result6 = ch) and (ch1 = 68)) ->
-  (((result7 = x) and (x1 = fliteral3)) -> ((((a1 <  0) and
+  (((result7 = x) and (x1 = fliteral5)) -> ((((a1 <  0) and
   ((((o = (-a1)) and in_range2((-a1))) and ((result8 = a1) and (a2 = o))) and
   ((result9 = d1) and (d2 = 1)))) or ((not (a1 <  0)) and ((d2 = d1) and
   (a2 = a1)))) -> (((((1 <= a2) and (a2 <= 12)) and ((result10 = b1) and
@@ -1462,22 +1478,30 @@ goal WP_parameter_def :
   in_range2((d2 + 5)))) or ((not (b2 <  a2)) and (((a2 = b2) and
   ((o5 = (2 * a2)) and in_range2((2 * a2)))) or ((not (a2 = b2)) and
   (o5 = comp_div(f3,2)))))) and ((result34 = { int__content = c5 }) and
-  (c8 = o5))) -> (((le(fliteral4, x1) and ((result35 = { t__content = y
-  }) and (y1 = sqrt(RNE, x1)))) or ((not le(fliteral4, x1)) and
-  ((((((o6 = mul(RNE, fliteral5, x1)) and tqtisFinite(mul(RNE, fliteral5,
-  x1))) and (o7 = neg(o6))) and (o8 = sqrt(RNE, o7))) and ((result36 = {
-  t__content = y }) and (y2 = o8))) and (y1 = y2)))) -> (((((le(fliteral4,
-  x1) and (o10 = x1)) or ((not le(fliteral4, x1)) and (((o9 = mul(RNE,
-  fliteral5, x1)) and tqtisFinite(mul(RNE, fliteral5, x1))) and
-  (o10 = neg(o9))))) and (o11 = sqrt(RNE, o10))) and ((result37 = {
-  t__content = y1 }) and (y3 = o11))) -> (((((o12 = (c8 - d2)) and
-  in_range2((c8 - d2))) and (((o12 = 0) and (result39 = true)) or
-  ((not (o12 = 0)) and (result39 = false)))) and (((result39 = true) and
+  (c8 = o5))) -> (((le(fliteral1, x1) and (((o6 = sqrt2(x1)) and
+  (tqtisFinite(o6) and (le(fliteral1, o6) and ((eq(x1, fliteral1) -> eq(o6,
+  fliteral1)) and ((eq(x1, fliteral) -> eq(o6, fliteral)) and (le(fliteral2,
+  x1) -> lt(fliteral1, o6))))))) and ((result35 = { t__content = y }) and
+  (y1 = o6)))) or ((not le(fliteral1, x1)) and ((((((o7 = mul(RNE, fliteral6,
+  x1)) and tqtisFinite(mul(RNE, fliteral6, x1))) and (o8 = neg(o7))) and
+  ((o9 = sqrt2(o8)) and (tqtisFinite(o9) and (le(fliteral1, o9) and ((eq(o8,
+  fliteral1) -> eq(o9, fliteral1)) and ((eq(o8, fliteral) -> eq(o9,
+  fliteral)) and (le(fliteral2, o8) -> lt(fliteral1, o9)))))))) and
+  ((result36 = { t__content = y }) and (y2 = o9))) and (y1 = y2)))) ->
+  (((((le(fliteral1, x1) and (o11 = x1)) or ((not le(fliteral1, x1)) and
+  (((o10 = mul(RNE, fliteral6, x1)) and tqtisFinite(mul(RNE, fliteral6,
+  x1))) and (o11 = neg(o10))))) and ((o12 = sqrt2(o11)) and
+  (tqtisFinite(o12) and (le(fliteral1, o12) and ((eq(o11, fliteral1) ->
+  eq(o12, fliteral1)) and ((eq(o11, fliteral) -> eq(o12, fliteral)) and
+  (le(fliteral2, o11) -> lt(fliteral1, o12)))))))) and ((result37 = {
+  t__content = y1 }) and (y3 = o12))) -> (((((o13 = (c8 - d2)) and
+  in_range2((c8 - d2))) and (((o13 = 0) and (result39 = true)) or
+  ((not (o13 = 0)) and (result39 = false)))) and (((result39 = true) and
   (((2 <  e2) and (result38 = true)) or ((not (2 <  e2)) and
   (result38 = false)))) or ((not (result39 = true)) and
-  (result38 = of_int1(1))))) -> (((((o13 = (c8 - d2)) and
-  in_range2((c8 - d2))) and (((o13 = 0) and (result41 = true)) or
-  ((not (o13 = 0)) and (result41 = false)))) and (((result41 = true) and
+  (result38 = of_int1(1))))) -> (((((o14 = (c8 - d2)) and
+  in_range2((c8 - d2))) and (((o14 = 0) and (result41 = true)) or
+  ((not (o14 = 0)) and (result41 = false)))) and (((result41 = true) and
   (((2 <  e2) and (result40 = true)) or ((not (2 <  e2)) and
   (result40 = false)))) or ((not (result41 = true)) and
   (result40 = of_int1(1))))) -> ((((a2 <  0) and (((b2 <  0) and
@@ -1486,25 +1510,25 @@ goal WP_parameter_def :
   ((((((not (letter1 = 65)) -> ((not (letter1 = 69)) ->
   ((not (letter1 = 73)) -> ((not (letter1 = 76)) -> ((not (letter1 = 85)) ->
   ((not (letter1 = 78)) -> ((not (letter1 = 79)) -> ((not (letter1 = 82)) ->
-  ((not (letter1 = 83)) -> (letter1 = 84)))))))))) and (o14 = 1)) or
+  ((not (letter1 = 83)) -> (letter1 = 84)))))))))) and (o15 = 1)) or
   ((not ((not (letter1 = 65)) -> ((not (letter1 = 69)) ->
   ((not (letter1 = 73)) -> ((not (letter1 = 76)) -> ((not (letter1 = 85)) ->
   ((not (letter1 = 78)) -> ((not (letter1 = 79)) -> ((not (letter1 = 82)) ->
   ((not (letter1 = 83)) -> (letter1 = 84))))))))))) and
-  ((((not (letter1 = 68)) -> (letter1 = 71)) and (o14 = 2)) or
+  ((((not (letter1 = 68)) -> (letter1 = 71)) and (o15 = 2)) or
   ((not ((not (letter1 = 68)) -> (letter1 = 71))) and
   ((((not (letter1 = 66)) -> ((not (letter1 = 67)) ->
-  ((not (letter1 = 77)) -> (letter1 = 80)))) and (o14 = 3)) or
+  ((not (letter1 = 77)) -> (letter1 = 80)))) and (o15 = 3)) or
   ((not ((not (letter1 = 66)) -> ((not (letter1 = 67)) ->
   ((not (letter1 = 77)) -> (letter1 = 80))))) and ((((not (letter1 = 70)) ->
   ((not (letter1 = 72)) -> ((not (letter1 = 86)) -> ((not (letter1 = 87)) ->
-  (letter1 = 89))))) and (o14 = 4)) or ((not ((not (letter1 = 70)) ->
+  (letter1 = 89))))) and (o15 = 4)) or ((not ((not (letter1 = 70)) ->
   ((not (letter1 = 72)) -> ((not (letter1 = 86)) -> ((not (letter1 = 87)) ->
-  (letter1 = 89)))))) and (((letter1 = 75) and (o14 = 5)) or
+  (letter1 = 89)))))) and (((letter1 = 75) and (o15 = 5)) or
   ((not (letter1 = 75)) and ((((not (letter1 = 74)) -> (letter1 = 88)) and
-  (o14 = 8)) or ((not ((not (letter1 = 74)) -> (letter1 = 88))) and
-  (o14 = 10))))))))))))) and ((result43 = { int__content = value }) and
-  (value1 = o14))) -> (((result44 = { int__content = sum }) and
+  (o15 = 8)) or ((not ((not (letter1 = 74)) -> (letter1 = 88))) and
+  (o15 = 10))))))))))))) and ((result43 = { int__content = value }) and
+  (value1 = o15))) -> (((result44 = { int__content = sum }) and
   (sum1 = 0)) -> (((((temp___533 = sum1) and ((temp___532 = value1) and
   (((((-2147483648) <= 2147483647) -> in_range2(value2)) and
   (((-2147483648) <= 2147483647) -> in_range2(sum2))) and
@@ -1516,5 +1540,5 @@ goal WP_parameter_def :
   ((sum6 = sum4) and (value5 = value3)))) and (((sum7 = sum5) and
   (value6 = value4)) and ((sum8 = sum6) and (value7 = value5)))) ->
   (((result46 = { t__content = approx }) and (approx1 = div(RNE, x1,
-  fliteral5))) -> tqtisFinite(mul(RNE, approx1,
+  fliteral6))) -> tqtisFinite(mul(RNE, approx1,
   approx1)))))))))))))))))))))))))))))))))))))))))))))))))))

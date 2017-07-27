@@ -948,15 +948,36 @@ type float__ref = { float__content : float1
 
 function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
-type coord
+logic sqrt2 : t -> t
+
+logic sqrt__function_guard : t, t -> prop
 
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
-  (tqtreal(fliteral1) = 4096.0))
+  (tqtreal(fliteral1) = 0.0e-1))
 
-predicate in_range2(x: t) = (tqtisFinite(x) and (le(neg(fliteral1), x) and
-  le(x, fliteral1)))
+logic fliteral2 : t
+
+axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
+  (tqtreal(fliteral2) = 0.0000000000000000000000000000000000000000000014012984643248170709237295832899161312802619418765157717570682838897910826858606014866381883621215820312500000000000000000000000))
+
+axiom sqrt__post_axiom :
+  (forall x:t [sqrt2(x)]. ((tqtisFinite(x) and le(fliteral1, x)) ->
+  ((le(fliteral1, sqrt2(x)) and ((eq(x, fliteral1) -> eq(sqrt2(x),
+  fliteral1)) and ((eq(x, fliteral) -> eq(sqrt2(x), fliteral)) and
+  (le(fliteral2, x) -> lt(fliteral1, sqrt2(x)))))) and
+  tqtisFinite(sqrt2(x)))))
+
+type coord
+
+logic fliteral3 : t
+
+axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
+  (tqtreal(fliteral3) = 4096.0))
+
+predicate in_range2(x: t) = (tqtisFinite(x) and (le(neg(fliteral3), x) and
+  le(x, fliteral3)))
 
 logic bool_eq3 : t, t -> bool
 
@@ -1044,18 +1065,18 @@ axiom vec_bc_y__def_axiom : (vec_bc_y = sub(RNE, c_y, b_y))
 axiom ba_dot_bc__def_axiom : (ba_dot_bc = add(RNE, mul(RNE, vec_ba_x,
   vec_bc_x), mul(RNE, vec_ba_y, vec_bc_y)))
 
-axiom length_ba__def_axiom : (length_ba = sqrt(RNE, add(RNE, mul(RNE,
-  sub(RNE, b_x, a_x), sub(RNE, b_x, a_x)), mul(RNE, sub(RNE, b_y, a_y),
-  sub(RNE, b_y, a_y)))))
+axiom length_ba__def_axiom : (length_ba = sqrt2(add(RNE, mul(RNE, sub(RNE,
+  b_x, a_x), sub(RNE, b_x, a_x)), mul(RNE, sub(RNE, b_y, a_y), sub(RNE, b_y,
+  a_y)))))
 
-axiom length_bc__def_axiom : (length_bc = sqrt(RNE, add(RNE, mul(RNE,
-  sub(RNE, b_x, c_x), sub(RNE, b_x, c_x)), mul(RNE, sub(RNE, b_y, c_y),
-  sub(RNE, b_y, c_y)))))
+axiom length_bc__def_axiom : (length_bc = sqrt2(add(RNE, mul(RNE, sub(RNE,
+  b_x, c_x), sub(RNE, b_x, c_x)), mul(RNE, sub(RNE, b_y, c_y), sub(RNE, b_y,
+  c_y)))))
 
-logic fliteral2 : t
+logic fliteral4 : t
 
-axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
-  (tqtreal(fliteral2) = 340282346638528859811704183484516925440.0))
+axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
+  (tqtreal(fliteral4) = 340282346638528859811704183484516925440.0))
 
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def :
@@ -1064,7 +1085,7 @@ goal WP_parameter_def :
   forall o4:t. forall o5:t. forall o6:t.
   forall floating_point__angle_between__length_ba__assume:t. forall o7:t.
   (in_range2(a_x) -> (in_range2(a_y) -> (in_range2(b_x) -> (in_range2(b_y) ->
-  (in_range2(c_x) -> (in_range2(c_y) -> ((le(neg(fliteral2), fliteral2) ->
+  (in_range2(c_x) -> (in_range2(c_y) -> ((le(neg(fliteral4), fliteral4) ->
   tqtisFinite(res)) -> ((sub(RNE, a_x, b_x) = vec_ba_x) ->
   (tqtisFinite(vec_ba_x) -> ((sub(RNE, a_y, b_y) = vec_ba_y) ->
   (tqtisFinite(vec_ba_y) -> ((sub(RNE, c_x, b_x) = vec_bc_x) ->
@@ -1082,7 +1103,14 @@ goal WP_parameter_def :
   a_x))) and tqtisFinite(mul(RNE, sub(RNE, b_x, a_x), sub(RNE, b_x,
   a_x)))) and (o5 = add(RNE, o4, o3)))) and ((o6 = o5) and
   tqtisFinite(o5))) and
-  (floating_point__angle_between__length_ba__assume = sqrt(RNE, o6))) and
+  ((floating_point__angle_between__length_ba__assume = sqrt2(o6)) and
+  (tqtisFinite(floating_point__angle_between__length_ba__assume) and
+  (le(fliteral1, floating_point__angle_between__length_ba__assume) and
+  ((eq(o6, fliteral1) -> eq(floating_point__angle_between__length_ba__assume,
+  fliteral1)) and ((eq(o6, fliteral) ->
+  eq(floating_point__angle_between__length_ba__assume, fliteral)) and
+  (le(fliteral2, o6) -> lt(fliteral1,
+  floating_point__angle_between__length_ba__assume)))))))) and
   (floating_point__angle_between__length_ba__assume = length_ba)) ->
   (tqtisFinite(length_ba) -> (((o7 = mul(RNE, sub(RNE, b_y, c_y), sub(RNE,
   b_y, c_y))) and tqtisFinite(mul(RNE, sub(RNE, b_y, c_y), sub(RNE, b_y,

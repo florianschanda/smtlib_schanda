@@ -1410,8 +1410,6 @@ axiom bool_eq_def9 :
   ((not (to_rep3(((a).us_split_fields1).rec__spaces__angles__angle__theta) = to_rep3(((b).us_split_fields1).rec__spaces__angles__angle__theta))) ->
   (bool_eq11(a, b) = false))))
 
-logic user_eq7 : us_rep, us_rep -> bool
-
 logic value__size1 : int
 
 logic object__size1 : us_rep -> int
@@ -1446,6 +1444,8 @@ axiom spaces__angles__angle__theta__last__bit_axiom :
 
 axiom spaces__angles__angle__theta__position_axiom :
   (0 <= spaces__angles__angle__theta__position)
+
+logic user_eq7 : us_rep, us_rep -> bool
 
 logic dummy8 : normalized2pi
 
@@ -1493,8 +1493,6 @@ axiom bool_eq_def10 :
   (bool_eq11(((a).us_split_fields3).rec__algorithm__laser_scan_data__second,
   ((b).us_split_fields3).rec__algorithm__laser_scan_data__second) = true))) ->
   (bool_eq12(a, b) = false))))
-
-logic user_eq8 : us_rep1, us_rep1 -> bool
 
 logic value__size2 : int
 
@@ -1550,6 +1548,8 @@ axiom algorithm__laser_scan_data__second__last__bit_axiom :
 
 axiom algorithm__laser_scan_data__second__position_axiom :
   (0 <= algorithm__laser_scan_data__second__position)
+
+logic user_eq8 : us_rep1, us_rep1 -> bool
 
 logic dummy9 : nonnegative_float
 

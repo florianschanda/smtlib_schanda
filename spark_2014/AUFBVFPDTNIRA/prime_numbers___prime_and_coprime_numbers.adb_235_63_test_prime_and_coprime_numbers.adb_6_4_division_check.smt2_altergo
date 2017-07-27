@@ -1103,35 +1103,53 @@ type integer__ref = { integer__content : integer
 function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
-type value_type
+type float1
 
-predicate in_range3(x: int) = ((0 <= x) and (x <= 2147483647))
-
-logic bool_eq4 : int, int -> bool
+logic bool_eq4 : t, t -> bool
 
 axiom bool_eq_def3 :
-  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+  (forall x:t. forall y:t [bool_eq4(x, y)]. ((eq(x, y) -> (bool_eq4(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq4(x, y) = false))))
 
-logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+logic user_eq1 : float1, float1 -> bool
+
+logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
 
 logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+logic attr__ATTRIBUTE_VALUE2 : us_image -> t
 
-logic user_eq1 : value_type, value_type -> bool
+logic dummy1 : float1
 
-logic dummy1 : value_type
-
-type value_type__ref = { value_type__content : value_type
+type float__ref = { float__content : float1
 }
 
-function value_type__ref___projection(a: value_type__ref) : value_type =
-  (a).value_type__content
+function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
-type tnumber_list_typeD1
+logic sqrt2 : t -> t
 
-predicate in_range4(x: int) = ((0 <= x) and (x <= 100000))
+logic sqrt__function_guard : t, t -> prop
+
+logic fliteral1 : t
+
+axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
+  (tqtreal(fliteral1) = 0.0e-1))
+
+logic fliteral2 : t
+
+axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
+  (tqtreal(fliteral2) = 0.0000000000000000000000000000000000000000000014012984643248170709237295832899161312802619418765157717570682838897910826858606014866381883621215820312500000000000000000000000))
+
+axiom sqrt__post_axiom :
+  (forall x:t [sqrt2(x)]. ((tqtisFinite(x) and le(fliteral1, x)) ->
+  ((le(fliteral1, sqrt2(x)) and ((eq(x, fliteral1) -> eq(sqrt2(x),
+  fliteral1)) and ((eq(x, fliteral) -> eq(sqrt2(x), fliteral)) and
+  (le(fliteral2, x) -> lt(fliteral1, sqrt2(x)))))) and
+  tqtisFinite(sqrt2(x)))))
+
+type value_type
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -1145,9 +1163,35 @@ logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE3 : us_image -> int
 
-logic user_eq2 : tnumber_list_typeD1, tnumber_list_typeD1 -> bool
+logic user_eq2 : value_type, value_type -> bool
 
-logic dummy2 : tnumber_list_typeD1
+logic dummy2 : value_type
+
+type value_type__ref = { value_type__content : value_type
+}
+
+function value_type__ref___projection(a: value_type__ref) : value_type =
+  (a).value_type__content
+
+type tnumber_list_typeD1
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 100000))
+
+logic bool_eq6 : int, int -> bool
+
+axiom bool_eq_def5 :
+  (forall x:int. forall y:int [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq3 : tnumber_list_typeD1, tnumber_list_typeD1 -> bool
+
+logic dummy3 : tnumber_list_typeD1
 
 type tnumber_list_typeD1__ref = { tnumber_list_typeD1__content :
 tnumber_list_typeD1
@@ -1190,13 +1234,13 @@ axiom singleton_def :
   (forall v:bool.
   (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
 
-logic bool_eq6 : (int,bool) farray, int, int, (int,bool) farray, int,
+logic bool_eq7 : (int,bool) farray, int, int, (int,bool) farray, int,
   int -> bool
 
-axiom bool_eq_def5 :
+axiom bool_eq_def6 :
   (forall a:(int,bool) farray. forall a__first:int. forall a__last:int.
   forall b:(int,bool) farray. forall b__first:int. forall b__last:int
-  [bool_eq6(a, a__first, a__last, b, b__first, b__last)].
+  [bool_eq7(a, a__first, a__last, b, b__first, b__last)].
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
@@ -1204,19 +1248,19 @@ axiom bool_eq_def5 :
   (temp___idx_132 <= a__last)) and
   ((a[temp___idx_132]) = (b[((b__first - a__first) + temp___idx_132)]))) or
   (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
-  (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
+  (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
   (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
   (temp___idx_132 <= a__last)) ->
   ((a[temp___idx_132]) = (b[((b__first - a__first) + temp___idx_132)])))))) ->
-  (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
+  (bool_eq7(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
   (forall a:(int,bool) farray. forall b:(int,bool) farray.
   (forall a__first:int. forall a__last:int. forall b__first:int.
-  forall b__last:int. ((bool_eq6(b, b__first, b__last, a, a__first,
+  forall b__last:int. ((bool_eq7(b, b__first, b__last, a, a__first,
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
@@ -1231,7 +1275,7 @@ axiom compare_def_eq :
   (forall a:(int,bool) farray. forall b:(int,bool) farray.
   (forall a_first:int. forall a_last:int. forall b_first:int.
   forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a,
+  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq7(a,
   a_first, a_last, b, b_first, b_last) = true))))
 
 axiom compare_def_lt :
@@ -1240,7 +1284,7 @@ axiom compare_def_lt :
   forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
   ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
   (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((bool_eq7(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
   ((i <  a_last) and (to_int1((a[(i + 1)])) <  to_int1((b[(j + 1)]))))))))))))
 
 axiom compare_def_gt :
@@ -1249,7 +1293,7 @@ axiom compare_def_gt :
   forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
   ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
   (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((bool_eq7(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
   ((i <  b_last) and (to_int1((b[(i + 1)])) <  to_int1((a[(j + 1)]))))))))))))
 
 logic xorb1 : (int,bool) farray, int, int, (int,bool) farray, int,
@@ -1348,21 +1392,21 @@ axiom coerce_axiom :
 predicate dynamic_property(first_int: int, last_int: int, x: int) =
   ((first_int <= x) and (x <= last_int))
 
-logic bool_eq7 : int, int -> bool
+logic bool_eq8 : int, int -> bool
 
-axiom bool_eq_def6 :
-  (forall x:int. forall y:int [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
+axiom bool_eq_def7 :
+  (forall x:int. forall y:int [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
 
-logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+logic attr__ATTRIBUTE_VALUE5 : us_image -> int
 
-logic user_eq3 : integer, integer -> bool
+logic user_eq4 : integer, integer -> bool
 
-logic dummy3 : integer
+logic dummy4 : integer
 
 type t82b__ref = { t82b__content : integer
 }
@@ -1378,18 +1422,18 @@ axiom def_axiom :
   (forall temp___253:int.
   ((temp___250(temp___252)[temp___253]) = temp___252)))
 
-logic fliteral1 : t
+logic fliteral3 : t
 
-axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
-  (tqtreal(fliteral1) = 100000.0))
+axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
+  (tqtreal(fliteral3) = 100000.0))
 
  (* File "prime_and_coprime_numbers.ads", line 3, characters 0-0 *)
 goal WP_parameter_def :
   (forall is_prime1:(int,bool) farray. forall index_1:int.
-  forall index_3:int. forall index_2:int.
+  forall index_3:int. forall index_2:int. forall o:t. forall o1:int.
   forall test_prime_and_coprime_numbers__p__eratosthenes__L_5__R81b__assume:int.
-  forall o:int. forall o1:int. forall o2:int. forall o3:(int,bool) farray.
-  forall v:int. forall o4:int. forall o5:bool.
+  forall o2:int. forall o3:int. forall o4:int. forall o5:(int,bool) farray.
+  forall v:int. forall o6:int. forall o7:bool.
   forall result:(int,bool) farray. forall is_prime2:(int,bool) farray.
   forall result1:(int,bool) farray. forall is_prime3:(int,bool) farray.
   forall result2:(int,bool) farray. forall is_prime4:(int,bool) farray.
@@ -1405,9 +1449,12 @@ goal WP_parameter_def :
   is_prime1 }) and (is_prime2 = temp___250(of_int1(1)))) ->
   (((is_prime2 = result1) and (is_prime3 = (is_prime2[0 <- of_int1(0)]))) ->
   (((is_prime3 = result2) and (is_prime4 = (is_prime3[1 <- of_int1(0)]))) ->
-  (((((test_prime_and_coprime_numbers__p__eratosthenes__L_5__R81b__assume = to_int(RNA,
-  sqrt(RNE, fliteral1))) and in_range3(to_int(RNA, sqrt(RNE,
-  fliteral1)))) and
+  (((((((o = sqrt2(fliteral3)) and (tqtisFinite(o) and (le(fliteral1, o) and
+  ((eq(fliteral3, fliteral1) -> eq(o, fliteral1)) and ((eq(fliteral3,
+  fliteral) -> eq(o, fliteral)) and (le(fliteral2, fliteral3) ->
+  lt(fliteral1, o))))))) and (o1 = to_int(RNA, o))) and
+  ((test_prime_and_coprime_numbers__p__eratosthenes__L_5__R81b__assume = o1) and
+  in_range3(o1))) and
   (test_prime_and_coprime_numbers__p__eratosthenes__L_5__R81b__assume = r81b)) and
   in_range3(r81b)) -> ((({ int__content = result3 } = { int__content =
   index_2 }) and (index_21 = 2)) -> (((2 <= index_21) and
@@ -1421,14 +1468,14 @@ goal WP_parameter_def :
   r81b, index_22)) and ((0 <= 2147483647) -> in_range3(index_11))) and
   (((-2147483648) <= 2147483647) -> in_range2(index_31))) and
   ((2 <= index_22) and (index_22 <= r81b))) -> (((((0 <= index_22) and
-  (index_22 <= 100000)) and (o = index_22)) and
-  (result4 = (is_prime5[o]))) -> ((result4 = true) ->
+  (index_22 <= 100000)) and (o2 = index_22)) and
+  (result4 = (is_prime5[o2]))) -> ((result4 = true) ->
   (((index_11 = result5) and (index_12 = index_22)) ->
-  ((((o1 = (2 * index_12)) and in_range2((2 * index_12))) and
-  ((index_31 = result6) and (index_32 = o1))) -> ((index_32 <= 100000) ->
-  ((((((0 <= index_32) and (index_32 <= 100000)) and (o2 = index_32)) and
-  (o3 = (is_prime5[o2 <- of_int1(0)]))) and ((is_prime5 = result7) and
-  (is_prime6 = o3))) ->
+  ((((o3 = (2 * index_12)) and in_range2((2 * index_12))) and
+  ((index_31 = result6) and (index_32 = o3))) -> ((index_32 <= 100000) ->
+  ((((((0 <= index_32) and (index_32 <= 100000)) and (o4 = index_32)) and
+  (o5 = (is_prime5[o4 <- of_int1(0)]))) and ((is_prime5 = result7) and
+  (is_prime6 = o5))) ->
   (((forall v1:int. (((0 <= v1) and (v1 <= index_22)) ->
     (((is_prime7[v1]) = true) <-> (is_prime(v1) = true)))) and
   ((forall v1:int. (((index_22 <= v1) and (v1 <= 100000)) ->
@@ -1440,8 +1487,8 @@ goal WP_parameter_def :
   (((index_22 <= index_33) and (index_33 <= 100000)) and (mod(index_33,
   index_22) = 0)))) -> ((((-2147483648) <= 2147483647) ->
   in_range2(index_33)) -> (((index_22 <= v) and (v <= 100000)) ->
-  (((((o4 = (index_22 + 1)) and in_range2((index_22 + 1))) and
-  (((o4 <= v) and (o5 = true)) or ((not (o4 <= v)) and (o5 = false)))) and
-  (((v <= index_33) and (result8 = match_bool(o5, true, false))) or
-  ((not (v <= index_33)) and (result8 = match_bool(o5, false, false))))) ->
+  (((((o6 = (index_22 + 1)) and in_range2((index_22 + 1))) and
+  (((o6 <= v) and (o7 = true)) or ((not (o6 <= v)) and (o7 = false)))) and
+  (((v <= index_33) and (result8 = match_bool(o7, true, false))) or
+  ((not (v <= index_33)) and (result8 = match_bool(o7, false, false))))) ->
   ((result8 = true) -> (not (index_22 = 0))))))))))))))))))))))))

@@ -1136,8 +1136,6 @@ axiom bool_eq_def5 :
   (to_rep2(((a).us_split_fields1).rec__rec__my_rec__y) = to_rep2(((b).us_split_fields1).rec__rec__my_rec__y))))) ->
   (bool_eq6(a, b) = false))))
 
-logic user_eq4 : us_rep, us_rep -> bool
-
 logic value__size : int
 
 logic object__size : us_rep -> int
@@ -1200,6 +1198,8 @@ axiom rec__my_rec__y__last__bit_axiom :
   (rec__my_rec__y__first__bit <  rec__my_rec__y__last__bit)
 
 axiom rec__my_rec__y__position_axiom : (0 <= rec__my_rec__y__position)
+
+logic user_eq4 : us_rep, us_rep -> bool
 
 logic dummy4 : sub_enum
 
@@ -1279,6 +1279,8 @@ axiom rec__my_rec__y__last__bit_axiom1 :
 
 axiom rec__my_rec__y__position_axiom1 : (0 <= rec__my_rec__y__position1)
 
+logic user_eq5 : us_rep, us_rep -> bool
+
 logic dummy7 : sub_enum
 
 logic dummy8 : integer
@@ -1337,8 +1339,6 @@ axiom bool_eq_def6 :
   ((b).us_split_fields3).rec__rec__sub_rec__plop) = true))) -> (bool_eq7(a,
   b) = false))))
 
-logic user_eq5 : us_rep1, us_rep1 -> bool
-
 logic value__size2 : int
 
 logic object__size2 : us_rep1 -> int
@@ -1392,6 +1392,8 @@ axiom rec__sub_rec__plop__last__bit_axiom :
 
 axiom rec__sub_rec__plop__position_axiom :
   (0 <= rec__sub_rec__plop__position)
+
+logic user_eq6 : us_rep1, us_rep1 -> bool
 
 logic dummy10 : enum
 
@@ -1473,6 +1475,8 @@ axiom rec__my_rec__y__last__bit_axiom2 :
 
 axiom rec__my_rec__y__position_axiom2 : (0 <= rec__my_rec__y__position2)
 
+logic user_eq7 : us_rep, us_rep -> bool
+
 logic dummy14 : sub_enum
 
 logic dummy15 : integer
@@ -1537,8 +1541,6 @@ axiom bool_eq_def7 :
   ((b).us_split_fields5).rec__rec__sub_rec_ok__plop) = true)))) ->
   (bool_eq8(a, b) = false))))
 
-logic user_eq6 : us_rep2, us_rep2 -> bool
-
 logic value__size4 : int
 
 logic object__size4 : us_rep2 -> int
@@ -1595,6 +1597,8 @@ axiom rec__sub_rec_ok__plop__last__bit_axiom :
 axiom rec__sub_rec_ok__plop__position_axiom :
   (0 <= rec__sub_rec_ok__plop__position)
 
+logic user_eq8 : us_rep2, us_rep2 -> bool
+
 logic dummy17 : enum
 
 logic dummy18 : sub_enum
@@ -1625,7 +1629,7 @@ logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE4 : us_image -> int
 
-logic user_eq7 : natural, natural -> bool
+logic user_eq9 : natural, natural -> bool
 
 logic dummy21 : natural
 
@@ -1759,7 +1763,7 @@ logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE5 : us_image -> int
 
-logic user_eq8 : integer, integer -> bool
+logic user_eq10 : integer, integer -> bool
 
 logic dummy22 : integer
 
@@ -1835,7 +1839,7 @@ function bool_eq12(x: us_t, y: us_t) : bool = bool_eq10((x).elts,
   to_rep1(first((x).rt)), to_rep1(last((x).rt)), (y).elts,
   to_rep1(first((y).rt)), to_rep1(last((y).rt)))
 
-logic user_eq9 : us_t, us_t -> bool
+logic user_eq11 : us_t, us_t -> bool
 
 logic dummy23 : (int,natural) farray
 
@@ -1898,8 +1902,6 @@ axiom bool_eq_def11 :
   (bool_eq12(((a).us_split_fields7).rec__rec__sub_arr__content,
   ((b).us_split_fields7).rec__rec__sub_arr__content) = true))) ->
   (bool_eq13(a, b) = false))))
-
-logic user_eq10 : us_rep3, us_rep3 -> bool
 
 logic value__size6 : int
 
@@ -1965,6 +1967,8 @@ axiom rec__sub_arr__content__last__bit_axiom :
 
 axiom rec__sub_arr__content__position_axiom :
   (0 <= rec__sub_arr__content__position)
+
+logic user_eq12 : us_rep3, us_rep3 -> bool
 
 logic dummy25 : natural
 

@@ -1232,6 +1232,27 @@ type num__ref = { num__content : num
 
 function num__ref___projection(a: num__ref) : num = (a).num__content
 
+logic sqrt2 : t -> t
+
+logic sqrt__function_guard : t, t -> prop
+
+logic fliteral1 : t
+
+axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
+  (tqtreal(fliteral1) = 0.0e-1))
+
+logic fliteral2 : t
+
+axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
+  (tqtreal(fliteral2) = 0.0000000000000000000000000000000000000000000014012984643248170709237295832899161312802619418765157717570682838897910826858606014866381883621215820312500000000000000000000000))
+
+axiom sqrt__post_axiom :
+  (forall x:t [sqrt2(x)]. ((tqtisFinite(x) and le(fliteral1, x)) ->
+  ((le(fliteral1, sqrt2(x)) and ((eq(x, fliteral1) -> eq(sqrt2(x),
+  fliteral1)) and ((eq(x, fliteral) -> eq(sqrt2(x), fliteral)) and
+  (le(fliteral2, x) -> lt(fliteral1, sqrt2(x)))))) and
+  tqtisFinite(sqrt2(x)))))
+
 type uppercase
 
 predicate in_range7(x: int) = ((65 <= x) and (x <= 90))
@@ -1326,22 +1347,22 @@ logic c10b : int
 
 logic attr__ATTRIBUTE_ADDRESS29 : int
 
-logic fliteral1 : t
-
-axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
-  (tqtreal(fliteral1) = 0.0000999999974737875163555145263671875))
-
-axiom tolerance__def_axiom : (tolerance = fliteral1)
-
-logic fliteral2 : t
-
-axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
-  (tqtreal(fliteral2) = 340282346638528859811704183484516925440.0))
-
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
-  (tqtreal(fliteral3) = 123.45459747314453125))
+  (tqtreal(fliteral3) = 0.0000999999974737875163555145263671875))
+
+axiom tolerance__def_axiom : (tolerance = fliteral3)
+
+logic fliteral4 : t
+
+axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
+  (tqtreal(fliteral4) = 340282346638528859811704183484516925440.0))
+
+logic fliteral5 : t
+
+axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
+  (tqtreal(fliteral5) = 123.45459747314453125))
 
  (* File "control_structures.adb", line 29, characters 0-0 *)
 goal WP_parameter_def :
@@ -1382,14 +1403,14 @@ goal WP_parameter_def :
   in_range2(temperature)) -> ((((-2147483648) <= 2147483647) ->
   in_range2(valve_setting)) -> ((((-2147483648) <= 2147483647) ->
   in_range2(value)) -> ((((-2147483648) <= 2147483647) -> in_range2(sum)) ->
-  ((le(neg(fliteral2), fliteral2) -> tqtisFinite(approx)) ->
-  ((le(neg(fliteral2), fliteral2) -> tqtisFinite(x)) -> ((le(neg(fliteral2),
-  fliteral2) -> tqtisFinite(y)) -> (tqtisFinite(tolerance) ->
+  ((le(neg(fliteral4), fliteral4) -> tqtisFinite(approx)) ->
+  ((le(neg(fliteral4), fliteral4) -> tqtisFinite(x)) -> ((le(neg(fliteral4),
+  fliteral4) -> tqtisFinite(y)) -> (tqtisFinite(tolerance) ->
   (((result = letter) and (letter1 = 81)) -> (in_range7(letter1) ->
   (((result1 = a) and (a1 = 1)) -> (((result2 = b) and (b1 = 2)) ->
   (((result3 = c) and (c1 = 3)) -> (((result4 = d) and (d1 = 3)) ->
   (((result5 = e) and (e1 = 4)) -> (((result6 = ch) and (ch1 = 68)) ->
-  (((result7 = x) and (x1 = fliteral3)) -> ((((a1 <  0) and
+  (((result7 = x) and (x1 = fliteral5)) -> ((((a1 <  0) and
   ((((o = (-a1)) and in_range2((-a1))) and ((result8 = a1) and (a2 = o))) and
   ((result9 = d1) and (d2 = 1)))) or ((not (a1 <  0)) and ((d2 = d1) and
   (a2 = a1)))) -> (((((1 <= a2) and (a2 <= 12)) and ((result10 = b1) and

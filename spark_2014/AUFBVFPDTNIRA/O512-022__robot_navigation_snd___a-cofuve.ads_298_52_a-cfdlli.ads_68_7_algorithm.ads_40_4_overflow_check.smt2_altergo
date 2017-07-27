@@ -140,8 +140,6 @@ type us_rep
 
 logic bool_eq3 : us_rep, us_rep -> bool
 
-logic user_eq2 : us_rep, us_rep -> bool
-
 logic value__size : int
 
 logic object__size : us_rep -> int
@@ -158,6 +156,8 @@ axiom value__alignment_axiom : (0 <= value__alignment)
 
 axiom object__alignment_axiom :
   (forall a:us_rep. (0 <= object__alignment(a)))
+
+logic user_eq2 : us_rep, us_rep -> bool
 
 logic dummy2 : us_rep
 
@@ -1157,8 +1157,6 @@ axiom bool_eq_def6 :
   ((not (to_rep1(((a).us_split_fields1).rec__spaces__angles__angle__theta) = to_rep1(((b).us_split_fields1).rec__spaces__angles__angle__theta))) ->
   (bool_eq8(a, b) = false))))
 
-logic user_eq5 : us_rep1, us_rep1 -> bool
-
 logic value__size1 : int
 
 logic object__size1 : us_rep1 -> int
@@ -1193,6 +1191,8 @@ axiom spaces__angles__angle__theta__last__bit_axiom :
 
 axiom spaces__angles__angle__theta__position_axiom :
   (0 <= spaces__angles__angle__theta__position)
+
+logic user_eq5 : us_rep1, us_rep1 -> bool
 
 logic dummy5 : normalized2pi
 
@@ -1278,8 +1278,6 @@ axiom bool_eq_def8 :
   (to_rep2(((a).us_split_fields3).rec__gaps__gap__idir) = to_rep2(((b).us_split_fields3).rec__gaps__gap__idir)))) ->
   (bool_eq10(a, b) = false))))
 
-logic user_eq7 : us_rep2, us_rep2 -> bool
-
 logic value__size2 : int
 
 logic object__size2 : us_rep2 -> int
@@ -1346,6 +1344,8 @@ axiom gaps__gap__idir__last__bit_axiom :
   (gaps__gap__idir__first__bit <  gaps__gap__idir__last__bit)
 
 axiom gaps__gap__idir__position_axiom : (0 <= gaps__gap__idir__position)
+
+logic user_eq7 : us_rep2, us_rep2 -> bool
 
 logic dummy7 : normalized2pi
 

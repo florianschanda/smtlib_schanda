@@ -1409,8 +1409,6 @@ axiom bool_eq_def10 :
   (to_rep2(((a).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed) = to_rep2(((b).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed)))) ->
   (bool_eq12(a, b) = false))))
 
-logic user_eq8 : us_rep, us_rep -> bool
-
 logic value__size1 : int
 
 logic object__size1 : us_rep -> int
@@ -1464,6 +1462,8 @@ axiom deceleration_curve__braking_curve_entry__speed__last__bit_axiom :
 
 axiom deceleration_curve__braking_curve_entry__speed__position_axiom :
   (0 <= deceleration_curve__braking_curve_entry__speed__position)
+
+logic user_eq8 : us_rep, us_rep -> bool
 
 logic dummy9 : distance_t
 
@@ -1623,8 +1623,6 @@ axiom bool_eq_def12 :
   (to_rep3(((a).us_split_fields3).rec__deceleration_curve__braking_curve_t__end_point) = to_rep3(((b).us_split_fields3).rec__deceleration_curve__braking_curve_t__end_point)))) ->
   (bool_eq14(a, b) = false))))
 
-logic user_eq10 : us_rep1, us_rep1 -> bool
-
 logic value__size3 : int
 
 logic object__size3 : us_rep1 -> int
@@ -1677,6 +1675,8 @@ axiom deceleration_curve__braking_curve_t__end_point__last__bit_axiom :
 
 axiom deceleration_curve__braking_curve_t__end_point__position_axiom :
   (0 <= deceleration_curve__braking_curve_t__end_point__position)
+
+logic user_eq10 : us_rep1, us_rep1 -> bool
 
 logic dummy12 : (int,us_rep) farray
 

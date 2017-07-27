@@ -959,8 +959,6 @@ axiom bool_eq_def2 :
   (to_rep(((a).us_split_fields1).rec__interval__interval__high) = to_rep(((b).us_split_fields1).rec__interval__interval__high)))) ->
   (bool_eq2(a, b) = false))))
 
-logic user_eq1 : us_rep, us_rep -> bool
-
 logic value__size : int
 
 logic object__size : us_rep -> int
@@ -1012,6 +1010,8 @@ axiom interval__interval__high__last__bit_axiom :
 
 axiom interval__interval__high__position_axiom :
   (0 <= interval__interval__high__position)
+
+logic user_eq1 : us_rep, us_rep -> bool
 
 logic dummy1 : float1
 

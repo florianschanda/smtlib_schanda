@@ -1031,8 +1031,6 @@ axiom bool_eq_def3 :
   (to_rep1(((a).us_split_fields1).rec__p__r__b) = to_rep1(((b).us_split_fields1).rec__p__r__b)))) ->
   (bool_eq4(a, b) = false))))
 
-logic user_eq2 : us_rep, us_rep -> bool
-
 logic value__size : int
 
 logic object__size : us_rep -> int
@@ -1076,6 +1074,8 @@ axiom p__r__b__first__bit_axiom : (0 <= p__r__b__first__bit)
 axiom p__r__b__last__bit_axiom : (p__r__b__first__bit <  p__r__b__last__bit)
 
 axiom p__r__b__position_axiom : (0 <= p__r__b__position)
+
+logic user_eq2 : us_rep, us_rep -> bool
 
 logic dummy2 : integer
 

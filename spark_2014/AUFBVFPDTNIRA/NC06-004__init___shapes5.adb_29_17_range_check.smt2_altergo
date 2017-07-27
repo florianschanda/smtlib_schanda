@@ -1108,8 +1108,6 @@ axiom bool_eq_def5 :
   (to_rep1(((a).us_split_fields1).rec__shapes5__circle__radius) = to_rep1(((b).us_split_fields1).rec__shapes5__circle__radius)))) ->
   (bool_eq6(a, b) = false))))
 
-logic user_eq3 : us_rep, us_rep -> bool
-
 logic value__size : int
 
 logic object__size : us_rep -> int
@@ -1178,6 +1176,8 @@ axiom shapes5__circle__radius__last__bit_axiom :
 
 axiom shapes5__circle__radius__position_axiom :
   (0 <= shapes5__circle__radius__position)
+
+logic user_eq3 : us_rep, us_rep -> bool
 
 logic dummy3 : coordinate_type
 

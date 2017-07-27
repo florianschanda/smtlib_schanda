@@ -1187,8 +1187,6 @@ axiom bool_eq_def4 :
   (to_rep1(((a).us_split_fields1).rec__t__stupid_record__c) = to_rep1(((b).us_split_fields1).rec__t__stupid_record__c)))) ->
   (bool_eq5(a, b) = false))))
 
-logic user_eq2 : us_rep, us_rep -> bool
-
 logic value__size : int
 
 logic object__size : us_rep -> int
@@ -1255,6 +1253,8 @@ axiom t__stupid_record__c__last__bit_axiom :
 
 axiom t__stupid_record__c__position_axiom :
   (0 <= t__stupid_record__c__position)
+
+logic user_eq2 : us_rep, us_rep -> bool
 
 logic dummy2 : integer
 

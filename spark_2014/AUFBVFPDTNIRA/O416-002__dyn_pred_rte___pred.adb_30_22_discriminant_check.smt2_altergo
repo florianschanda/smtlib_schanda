@@ -1269,8 +1269,6 @@ axiom bool_eq_def5 :
   (((a).us_split_fields1).rec__pred__r__c3 = ((b).us_split_fields1).rec__pred__r__c3)))) ->
   (bool_eq6(a, b) = false))))
 
-logic user_eq3 : us_rep, us_rep -> bool
-
 logic value__size : int
 
 logic object__size : us_rep -> int
@@ -1346,6 +1344,8 @@ axiom pred__r__c3__last__bit_axiom :
   (pred__r__c3__first__bit <  pred__r__c3__last__bit)
 
 axiom pred__r__c3__position_axiom : (0 <= pred__r__c3__position)
+
+logic user_eq3 : us_rep, us_rep -> bool
 
 logic dummy3 : positive
 

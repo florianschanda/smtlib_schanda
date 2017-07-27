@@ -1333,8 +1333,6 @@ type us_rep = { us_split_fields1 : us_split_fields
 function us_rep_3__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
-logic user_eq8 : us_rep, us_rep -> bool
-
 logic value__size1 : int
 
 logic object__size1 : us_rep -> int
@@ -1369,6 +1367,8 @@ axiom support__protT__summary__last__bit_axiom :
 
 axiom support__protT__summary__position_axiom :
   (0 <= support__protT__summary__position)
+
+logic user_eq8 : us_rep, us_rep -> bool
 
 type protT__ref = { protT__content : us_rep
 }

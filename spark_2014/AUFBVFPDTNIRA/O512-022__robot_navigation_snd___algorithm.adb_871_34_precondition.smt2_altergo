@@ -1604,8 +1604,6 @@ axiom bool_eq_def11 :
   ((not (to_rep5(((a).us_split_fields1).rec__spaces__angles__angle__theta) = to_rep5(((b).us_split_fields1).rec__spaces__angles__angle__theta))) ->
   (bool_eq13(a, b) = false))))
 
-logic user_eq9 : us_rep, us_rep -> bool
-
 logic value__size1 : int
 
 logic object__size1 : us_rep -> int
@@ -1640,6 +1638,8 @@ axiom spaces__angles__angle__theta__last__bit_axiom :
 
 axiom spaces__angles__angle__theta__position_axiom :
   (0 <= spaces__angles__angle__theta__position)
+
+logic user_eq9 : us_rep, us_rep -> bool
 
 logic dummy10 : normalized2pi
 
@@ -1726,8 +1726,6 @@ axiom bool_eq_def12 :
   (to_rep2(((a).us_split_fields3).rec__spaces__positions__position__y) = to_rep2(((b).us_split_fields3).rec__spaces__positions__position__y)))) ->
   (bool_eq14(a, b) = false))))
 
-logic user_eq10 : us_rep1, us_rep1 -> bool
-
 logic value__size2 : int
 
 logic object__size2 : us_rep1 -> int
@@ -1779,6 +1777,8 @@ axiom spaces__positions__position__y__last__bit_axiom :
 
 axiom spaces__positions__position__y__position_axiom :
   (0 <= spaces__positions__position__y__position)
+
+logic user_eq10 : us_rep1, us_rep1 -> bool
 
 logic dummy11 : float1
 
@@ -1853,8 +1853,6 @@ axiom bool_eq_def13 :
   ((b).us_split_fields5).rec__spaces__poses__pose__ori) = true))) ->
   (bool_eq15(a, b) = false))))
 
-logic user_eq11 : us_rep2, us_rep2 -> bool
-
 logic value__size3 : int
 
 logic object__size3 : us_rep2 -> int
@@ -1913,6 +1911,8 @@ axiom spaces__poses__pose__ori__last__bit_axiom :
 
 axiom spaces__poses__pose__ori__position_axiom :
   (0 <= spaces__poses__pose__ori__position)
+
+logic user_eq11 : us_rep2, us_rep2 -> bool
 
 logic dummy13 : float1
 
@@ -2223,8 +2223,6 @@ axiom bool_eq_def18 :
   (to_rep2(((a).us_split_fields7).rec__robot_iface__speed_option__angle) = to_rep2(((b).us_split_fields7).rec__robot_iface__speed_option__angle))))) ->
   (bool_eq20(a, b) = false))))
 
-logic user_eq16 : us_rep3, us_rep3 -> bool
-
 logic value__size5 : int
 
 logic object__size5 : us_rep3 -> int
@@ -2295,6 +2293,8 @@ axiom robot_iface__speed_option__angle__last__bit_axiom :
 
 axiom robot_iface__speed_option__angle__position_axiom :
   (0 <= robot_iface__speed_option__angle__position)
+
+logic user_eq16 : us_rep3, us_rep3 -> bool
 
 logic dummy20 : option
 
@@ -2403,8 +2403,6 @@ axiom bool_eq_def19 :
   ((b).us_split_fields9).rec__robot_iface__proxy__speed) = true)) and
   (((a).us_split_fields9).rec__robot_iface__proxy__goal_reached = ((b).us_split_fields9).rec__robot_iface__proxy__goal_reached))) ->
   (bool_eq21(a, b) = false))))
-
-logic user_eq17 : us_rep4, us_rep4 -> bool
 
 logic value__size6 : int
 
@@ -2708,6 +2706,8 @@ axiom robot_iface__proxy__goal_reached__last__bit_axiom :
 axiom robot_iface__proxy__goal_reached__position_axiom :
   (0 <= robot_iface__proxy__goal_reached__position)
 
+logic user_eq17 : us_rep4, us_rep4 -> bool
+
 logic dummy24 : positive_float
 
 logic dummy25 : positive_float
@@ -2854,8 +2854,6 @@ axiom bool_eq_def21 :
   (to_rep9(((a).us_split_fields11).rec__gaps__gap__idir) = to_rep9(((b).us_split_fields11).rec__gaps__gap__idir)))) ->
   (bool_eq23(a, b) = false))))
 
-logic user_eq19 : us_rep5, us_rep5 -> bool
-
 logic value__size7 : int
 
 logic object__size7 : us_rep5 -> int
@@ -2923,6 +2921,8 @@ axiom gaps__gap__idir__last__bit_axiom :
 
 axiom gaps__gap__idir__position_axiom : (0 <= gaps__gap__idir__position)
 
+logic user_eq19 : us_rep5, us_rep5 -> bool
+
 logic dummy47 : normalized2pi
 
 logic dummy48 : float1
@@ -2970,8 +2970,6 @@ axiom bool_eq_def22 :
   (bool_eq23(((a).us_split_fields13).rec__valleys__valley__othergap,
   ((b).us_split_fields13).rec__valleys__valley__othergap) = true))) ->
   (bool_eq24(a, b) = false))))
-
-logic user_eq20 : us_rep6, us_rep6 -> bool
 
 logic value__size8 : int
 
@@ -3038,6 +3036,8 @@ axiom valleys__valley__othergap__last__bit_axiom :
 
 axiom valleys__valley__othergap__position_axiom :
   (0 <= valleys__valley__othergap__position)
+
+logic user_eq20 : us_rep6, us_rep6 -> bool
 
 logic dummy50 : normalized2pi
 
@@ -3151,8 +3151,6 @@ axiom bool_eq_def24 :
   ((b).us_split_fields15).rec__algorithm__valley_option__value) = true)))) ->
   (bool_eq26(a, b) = false))))
 
-logic user_eq22 : us_rep7, us_rep7 -> bool
-
 logic value__size9 : int
 
 logic object__size9 : us_rep7 -> int
@@ -3222,6 +3220,8 @@ axiom algorithm__valley_option__value__last__bit_axiom :
 
 axiom algorithm__valley_option__value__position_axiom :
   (0 <= algorithm__valley_option__value__position)
+
+logic user_eq22 : us_rep7, us_rep7 -> bool
 
 logic dummy57 : option1
 
@@ -3337,8 +3337,6 @@ axiom bool_eq_def26 :
   ((b).us_split_fields17).rec__algorithm__gap_vectors__list) = true))) ->
   (bool_eq28(a, b) = false))))
 
-logic user_eq24 : us_rep8, us_rep8 -> bool
-
 logic value__size10 : int
 
 logic object__size10 : us_rep8 -> int
@@ -3375,6 +3373,8 @@ axiom algorithm__gap_vectors__list__capacity__last__bit_axiom :
 
 axiom algorithm__gap_vectors__list__capacity__position_axiom :
   (0 <= algorithm__gap_vectors__list__capacity__position)
+
+logic user_eq24 : us_rep8, us_rep8 -> bool
 
 logic dummy66 : count_type
 
@@ -3426,6 +3426,8 @@ axiom algorithm__gap_vectors__list__capacity__last__bit_axiom1 :
 axiom algorithm__gap_vectors__list__capacity__position_axiom1 :
   (0 <= algorithm__gap_vectors__list__capacity__position1)
 
+logic user_eq25 : us_rep8, us_rep8 -> bool
+
 logic dummy68 : count_type
 
 logic dummy69 : us_main_type
@@ -3467,8 +3469,6 @@ axiom bool_eq_def27 :
   (bool_eq13(((a).us_split_fields19).rec__algorithm__laser_scan_data__second,
   ((b).us_split_fields19).rec__algorithm__laser_scan_data__second) = true))) ->
   (bool_eq29(a, b) = false))))
-
-logic user_eq25 : us_rep9, us_rep9 -> bool
 
 logic value__size12 : int
 
@@ -3525,6 +3525,8 @@ axiom algorithm__laser_scan_data__second__last__bit_axiom :
 
 axiom algorithm__laser_scan_data__second__position_axiom :
   (0 <= algorithm__laser_scan_data__second__position)
+
+logic user_eq26 : us_rep9, us_rep9 -> bool
 
 logic dummy70 : nonnegative_float
 
@@ -3643,7 +3645,7 @@ axiom value__alignment_axiom13 : (0 <= value__alignment13)
 axiom object__alignment_axiom13 :
   (forall a:(int,us_rep9) farray. (0 <= object__alignment13(a)))
 
-logic user_eq26 : (int,us_rep9) farray, (int,us_rep9) farray -> bool
+logic user_eq27 : (int,us_rep9) farray, (int,us_rep9) farray -> bool
 
 type us_split_fields20 = { rec__algorithm__controller__robot : us_rep4;
 rec__algorithm__controller__laserscan : (int,us_rep9) farray;
@@ -3703,8 +3705,6 @@ axiom bool_eq_def29 :
   (bool_eq13(((a).us_split_fields21).rec__algorithm__controller__driveangle,
   ((b).us_split_fields21).rec__algorithm__controller__driveangle) = true))) ->
   (bool_eq31(a, b) = false))))
-
-logic user_eq27 : us_rep10, us_rep10 -> bool
 
 logic value__size14 : int
 
@@ -3797,6 +3797,8 @@ axiom algorithm__controller__driveangle__last__bit_axiom :
 
 axiom algorithm__controller__driveangle__position_axiom :
   (0 <= algorithm__controller__driveangle__position)
+
+logic user_eq28 : us_rep10, us_rep10 -> bool
 
 logic dummy73 : positive_float
 
@@ -3940,6 +3942,8 @@ axiom robot_iface__speed_option__angle__last__bit_axiom1 :
 axiom robot_iface__speed_option__angle__position_axiom1 :
   (0 <= robot_iface__speed_option__angle__position1)
 
+logic user_eq29 : us_rep3, us_rep3 -> bool
+
 logic dummy100 : option
 
 logic dummy101 : float1
@@ -4037,7 +4041,7 @@ logic attr__ATTRIBUTE_VALUE__pre_check15 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE15 : us_image -> int
 
-logic user_eq28 : integer, integer -> bool
+logic user_eq30 : integer, integer -> bool
 
 logic dummy104 : integer
 

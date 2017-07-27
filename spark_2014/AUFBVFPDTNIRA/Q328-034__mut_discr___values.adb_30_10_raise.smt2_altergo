@@ -1285,8 +1285,6 @@ axiom bool_eq_def7 :
   ((not (to_rep(((a).us_split_fields1).rec__types__value__e) = to_rep(((b).us_split_fields1).rec__types__value__e))) ->
   (bool_eq9(a, b) = false))))
 
-logic user_eq6 : us_rep, us_rep -> bool
-
 logic value__size1 : int
 
 logic object__size1 : us_rep -> int
@@ -1319,6 +1317,8 @@ axiom types__value__e__last__bit_axiom :
   (types__value__e__first__bit <  types__value__e__last__bit)
 
 axiom types__value__e__position_axiom : (0 <= types__value__e__position)
+
+logic user_eq6 : us_rep, us_rep -> bool
 
 logic dummy7 : integer
 

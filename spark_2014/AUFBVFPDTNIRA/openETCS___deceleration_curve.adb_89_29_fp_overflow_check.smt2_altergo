@@ -1085,7 +1085,9 @@ logic m_per_s_from_km_per_h : t -> t
 
 logic m_per_s_from_km_per_h__function_guard : t, t -> prop
 
-type deceleration_t
+logic sqrt2 : t -> t
+
+logic sqrt__function_guard : t, t -> prop
 
 logic fliteral1 : t
 
@@ -1095,10 +1097,24 @@ axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
-  (tqtreal(fliteral2) = 340282346638528859811704183484516925440.0))
+  (tqtreal(fliteral2) = 0.0000000000000000000000000000000000000000000014012984643248170709237295832899161312802619418765157717570682838897910826858606014866381883621215820312500000000000000000000000))
+
+axiom sqrt__post_axiom :
+  (forall x:t [sqrt2(x)]. ((tqtisFinite(x) and le(fliteral1, x)) ->
+  ((le(fliteral1, sqrt2(x)) and ((eq(x, fliteral1) -> eq(sqrt2(x),
+  fliteral1)) and ((eq(x, fliteral) -> eq(sqrt2(x), fliteral)) and
+  (le(fliteral2, x) -> lt(fliteral1, sqrt2(x)))))) and
+  tqtisFinite(sqrt2(x)))))
+
+type deceleration_t
+
+logic fliteral3 : t
+
+axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
+  (tqtreal(fliteral3) = 340282346638528859811704183484516925440.0))
 
 predicate in_range4(x: t) = (tqtisFinite(x) and (le(fliteral1, x) and le(x,
-  fliteral2)))
+  fliteral3)))
 
 logic bool_eq7 : t, t -> bool
 
@@ -1206,8 +1222,6 @@ axiom bool_eq_def8 :
   (to_rep(((a).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed) = to_rep(((b).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed)))) ->
   (bool_eq9(a, b) = false))))
 
-logic user_eq6 : us_rep, us_rep -> bool
-
 logic value__size : int
 
 logic object__size : us_rep -> int
@@ -1261,6 +1275,8 @@ axiom deceleration_curve__braking_curve_entry__speed__last__bit_axiom :
 
 axiom deceleration_curve__braking_curve_entry__speed__position_axiom :
   (0 <= deceleration_curve__braking_curve_entry__speed__position)
+
+logic user_eq6 : us_rep, us_rep -> bool
 
 logic dummy6 : distance_t
 
@@ -1419,8 +1435,6 @@ axiom bool_eq_def10 :
   (to_rep1(((a).us_split_fields3).rec__deceleration_curve__braking_curve_t__end_point) = to_rep1(((b).us_split_fields3).rec__deceleration_curve__braking_curve_t__end_point)))) ->
   (bool_eq11(a, b) = false))))
 
-logic user_eq8 : us_rep1, us_rep1 -> bool
-
 logic value__size2 : int
 
 logic object__size2 : us_rep1 -> int
@@ -1474,6 +1488,8 @@ axiom deceleration_curve__braking_curve_t__end_point__last__bit_axiom :
 axiom deceleration_curve__braking_curve_t__end_point__position_axiom :
   (0 <= deceleration_curve__braking_curve_t__end_point__position)
 
+logic user_eq8 : us_rep1, us_rep1 -> bool
+
 logic dummy9 : (int,us_rep) farray
 
 logic dummy10 : distance_t
@@ -1519,8 +1535,6 @@ axiom bool_eq_def11 :
   (to_rep1(((a).us_split_fields5).rec__deceleration_curve__target_t__location) = to_rep1(((b).us_split_fields5).rec__deceleration_curve__target_t__location))) and
   (to_rep(((a).us_split_fields5).rec__deceleration_curve__target_t__speed) = to_rep(((b).us_split_fields5).rec__deceleration_curve__target_t__speed)))) ->
   (bool_eq12(a, b) = false))))
-
-logic user_eq9 : us_rep2, us_rep2 -> bool
 
 logic value__size3 : int
 
@@ -1593,6 +1607,8 @@ axiom deceleration_curve__target_t__speed__last__bit_axiom :
 axiom deceleration_curve__target_t__speed__position_axiom :
   (0 <= deceleration_curve__target_t__speed__position)
 
+logic user_eq9 : us_rep2, us_rep2 -> bool
+
 logic dummy11 : bool
 
 logic dummy12 : distance_t
@@ -1636,13 +1652,13 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 axiom end_point__def_axiom :
   (end_point = curve_index_from_location(to_rep1(target1)))
 
-logic fliteral3 : t
+logic fliteral4 : t
 
-axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
-  (tqtreal(fliteral3) = 500.0))
+axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
+  (tqtreal(fliteral4) = 500.0))
 
 axiom maximum_valid_speed__def_axiom :
-  (maximum_valid_speed = m_per_s_from_km_per_h(fliteral3))
+  (maximum_valid_speed = m_per_s_from_km_per_h(fliteral4))
 
 type speed_km_per_h_t
 
@@ -1677,27 +1693,27 @@ axiom is_valid_speed_km_per_h__post_axiom : true
 axiom is_valid_speed_km_per_h__def_axiom :
   (forall speed:t [is_valid_speed_km_per_h(speed)].
   ((is_valid_speed_km_per_h(speed) = true) <-> (le(fliteral1, speed) and
-  le(speed, fliteral3))))
+  le(speed, fliteral4))))
 
 axiom m_per_s_from_km_per_h__post_axiom :
   (forall speed:t [m_per_s_from_km_per_h(speed)]. ((tqtisFinite(speed) and
   (is_valid_speed_km_per_h(speed) = true)) ->
   tqtisFinite(m_per_s_from_km_per_h(speed))))
 
-logic fliteral4 : t
-
-axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
-  (tqtreal(fliteral4) = 1000.0))
-
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
-  (tqtreal(fliteral5) = 3600.0))
+  (tqtreal(fliteral5) = 1000.0))
+
+logic fliteral6 : t
+
+axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
+  (tqtreal(fliteral6) = 3600.0))
 
 axiom m_per_s_from_km_per_h__def_axiom :
   (forall speed:t [m_per_s_from_km_per_h(speed)]. (tqtisFinite(speed) ->
-  (m_per_s_from_km_per_h(speed) = div(RNE, mul(RNE, speed, fliteral4),
-  fliteral5))))
+  (m_per_s_from_km_per_h(speed) = div(RNE, mul(RNE, speed, fliteral5),
+  fliteral6))))
 
 logic is_valid_speed : t -> bool
 
@@ -1708,7 +1724,7 @@ axiom is_valid_speed__post_axiom : true
 axiom is_valid_speed__def_axiom :
   (forall speed:t [is_valid_speed(speed)].
   ((is_valid_speed(speed) = true) <-> (le(fliteral1, speed) and le(speed,
-  m_per_s_from_km_per_h(fliteral3)))))
+  m_per_s_from_km_per_h(fliteral4)))))
 
 type num_delimiters_range
 
@@ -1834,8 +1850,6 @@ axiom bool_eq_def15 :
   (to_rep3(((a).us_split_fields7).rec__step_function__delimiter_entry__value) = to_rep3(((b).us_split_fields7).rec__step_function__delimiter_entry__value)))) ->
   (bool_eq16(a, b) = false))))
 
-logic user_eq13 : us_rep3, us_rep3 -> bool
-
 logic value__size4 : int
 
 logic object__size4 : us_rep3 -> int
@@ -1887,6 +1901,8 @@ axiom step_function__delimiter_entry__value__last__bit_axiom :
 
 axiom step_function__delimiter_entry__value__position_axiom :
   (0 <= step_function__delimiter_entry__value__position)
+
+logic user_eq13 : us_rep3, us_rep3 -> bool
 
 logic dummy17 : function_range
 
@@ -2041,8 +2057,6 @@ axiom bool_eq_def17 :
   0, 10, ((b).us_split_fields9).rec__step_function__step_function_t__step, 0,
   10) = true))) -> (bool_eq18(a, b) = false))))
 
-logic user_eq15 : us_rep4, us_rep4 -> bool
-
 logic value__size6 : int
 
 logic object__size6 : us_rep4 -> int
@@ -2096,6 +2110,8 @@ axiom step_function__step_function_t__step__last__bit_axiom :
 
 axiom step_function__step_function_t__step__position_axiom :
   (0 <= step_function__step_function_t__step__position)
+
+logic user_eq15 : us_rep4, us_rep4 -> bool
 
 logic dummy20 : num_delimiters_range
 
@@ -2402,10 +2418,10 @@ axiom a_gradient__def_axiom :
   (forall d:int [a_gradient(d)]. (in_range3(d) ->
   (a_gradient(d) = fliteral1)))
 
-logic fliteral6 : t
+logic fliteral7 : t
 
-axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
-  (tqtreal(fliteral6) = 4.0))
+axiom fliteral_axiom7 : (tqtisFinite(fliteral7) and
+  (tqtreal(fliteral7) = 4.0))
 
  (* File "deceleration_curve.ads", line 32, characters 0-0 *)
 goal WP_parameter_def :
@@ -2437,7 +2453,7 @@ goal WP_parameter_def :
   forall i1:int. forall braking_curve__split_fields8:(int,us_rep) farray.
   forall braking_curve__split_fields9:distance_t. forall speed2:t.
   forall location2:int. forall i2:int. (tqtisFinite(maximum_valid_speed) ->
-  ((m_per_s_from_km_per_h(fliteral3) = maximum_valid_speed) ->
+  ((m_per_s_from_km_per_h(fliteral4) = maximum_valid_speed) ->
   ((to_rep1(target1) <= 5000) -> (((result = speed) and
   (speed1 = to_rep(target2))) -> (tqtisFinite(speed1) ->
   (((result1 = location) and (location1 = to_rep1(target1))) ->
@@ -2482,8 +2498,8 @@ goal WP_parameter_def :
    ((temp___397 <= i2) ->
    ((braking_curve__split_fields8[temp___397]) = (braking_curve__split_fields6[temp___397]))))) and
   (braking_curve__split_fields9 = braking_curve__split_fields7))) and
-  (le(neg(fliteral2), fliteral2) -> tqtisFinite(speed2))) and ((0 <= i2) and
+  (le(neg(fliteral3), fliteral3) -> tqtisFinite(speed2))) and ((0 <= i2) and
   (i2 <= (end_point - 1)))) -> ((((o19 = a_safe(speed2, location2)) and
   (in_range4(o19) and (o19 = add(RNE, a_brake_safe(speed2, location2),
-  a_gradient(location2))))) and (o20 = mul(RNE, fliteral6, o19))) ->
+  a_gradient(location2))))) and (o20 = mul(RNE, fliteral7, o19))) ->
   tqtisFinite(o20))))))))))))))))))

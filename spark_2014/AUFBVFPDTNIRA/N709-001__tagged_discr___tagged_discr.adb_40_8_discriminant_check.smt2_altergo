@@ -1138,8 +1138,6 @@ axiom bool_eq_def5 :
   (to_rep1(((a).us_split_fields1).rec__tagged_discr__t__y) = to_rep1(((b).us_split_fields1).rec__tagged_discr__t__y))))) ->
   (bool_eq6(a, b) = false))))
 
-logic user_eq3 : us_rep, us_rep -> bool
-
 logic us_dispatch_eq : us_rep, us_rep -> bool
 
 logic us_tag : int
@@ -1229,6 +1227,8 @@ axiom tagged_discr__t__y__last__bit_axiom :
 
 axiom tagged_discr__t__y__position_axiom :
   (0 <= tagged_discr__t__y__position)
+
+logic user_eq3 : us_rep, us_rep -> bool
 
 logic dummy3 : e
 
@@ -1368,8 +1368,6 @@ axiom bool_eq_def6 :
   (to_rep1(((a).us_split_fields3).rec__tagged_discr__t__y1) = to_rep1(((b).us_split_fields3).rec__tagged_discr__t__y1))))) ->
   (bool_eq7(a, b) = false))))
 
-logic user_eq4 : us_rep1, us_rep1 -> bool
-
 logic us_tag1 : int
 
 logic value__size1 : int
@@ -1508,6 +1506,8 @@ axiom tagged_discr__t__y__last__bit_axiom1 :
 
 axiom tagged_discr__t__y__position_axiom1 :
   (0 <= tagged_discr__t__y__position1)
+
+logic user_eq4 : us_rep1, us_rep1 -> bool
 
 logic dummy9 : e
 
@@ -1689,6 +1689,8 @@ axiom tagged_discr__u2__yy__last__bit_axiom1 :
 
 axiom tagged_discr__u2__yy__position_axiom1 :
   (0 <= tagged_discr__u2__yy__position1)
+
+logic user_eq5 : us_rep1, us_rep1 -> bool
 
 logic dummy18 : e
 
@@ -1883,6 +1885,8 @@ axiom tagged_discr__t__x__last__bit_axiom3 :
 axiom tagged_discr__t__x__position_axiom3 :
   (0 <= tagged_discr__t__x__position3)
 
+logic user_eq6 : us_rep, us_rep -> bool
+
 logic dummy27 : e
 
 logic dummy28 : bool
@@ -2006,8 +2010,6 @@ axiom bool_eq_def7 :
   (to_rep1(((a).us_split_fields5).rec__tagged_discr__t__y2) = to_rep1(((b).us_split_fields5).rec__tagged_discr__t__y2))))) ->
   (bool_eq8(a, b) = false))))
 
-logic user_eq5 : us_rep2, us_rep2 -> bool
-
 logic us_tag4 : int
 
 logic value__size4 : int
@@ -2113,6 +2115,8 @@ axiom tagged_discr__t__y__last__bit_axiom4 :
 
 axiom tagged_discr__t__y__position_axiom4 :
   (0 <= tagged_discr__t__y__position4)
+
+logic user_eq7 : us_rep2, us_rep2 -> bool
 
 logic dummy33 : e
 
@@ -2232,6 +2236,8 @@ axiom tagged_discr__t__x__last__bit_axiom5 :
 axiom tagged_discr__t__x__position_axiom5 :
   (0 <= tagged_discr__t__x__position5)
 
+logic user_eq8 : us_rep, us_rep -> bool
+
 logic dummy40 : e
 
 logic dummy41 : bool
@@ -2339,6 +2345,8 @@ axiom tagged_discr__t__x__last__bit_axiom6 :
 
 axiom tagged_discr__t__x__position_axiom6 :
   (0 <= tagged_discr__t__x__position6)
+
+logic user_eq9 : us_rep, us_rep -> bool
 
 logic dummy46 : e
 
@@ -2465,6 +2473,8 @@ axiom tagged_discr__u1__w__last__bit_axiom1 :
 
 axiom tagged_discr__u1__w__position_axiom1 :
   (0 <= tagged_discr__u1__w__position1)
+
+logic user_eq10 : us_rep2, us_rep2 -> bool
 
 logic dummy52 : e
 

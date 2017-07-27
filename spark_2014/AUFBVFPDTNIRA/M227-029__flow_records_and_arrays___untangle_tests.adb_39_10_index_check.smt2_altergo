@@ -1021,8 +1021,6 @@ axiom bool_eq_def3 :
   (to_rep(((a).us_split_fields1).rec__untangle_tests__coordinate__w) = to_rep(((b).us_split_fields1).rec__untangle_tests__coordinate__w)))) ->
   (bool_eq4(a, b) = false))))
 
-logic user_eq2 : us_rep, us_rep -> bool
-
 logic value__size : int
 
 logic object__size : us_rep -> int
@@ -1110,6 +1108,8 @@ axiom untangle_tests__coordinate__w__last__bit_axiom :
 
 axiom untangle_tests__coordinate__w__position_axiom :
   (0 <= untangle_tests__coordinate__w__position)
+
+logic user_eq2 : us_rep, us_rep -> bool
 
 logic dummy2 : float1
 
@@ -1275,8 +1275,6 @@ axiom bool_eq_def5 :
   ((b).us_split_fields3).rec__untangle_tests__triangle__normal) = true))) ->
   (bool_eq6(a, b) = false))))
 
-logic user_eq4 : us_rep1, us_rep1 -> bool
-
 logic value__size2 : int
 
 logic object__size2 : us_rep1 -> int
@@ -1338,6 +1336,8 @@ axiom untangle_tests__triangle__normal__last__bit_axiom :
 
 axiom untangle_tests__triangle__normal__position_axiom :
   (0 <= untangle_tests__triangle__normal__position)
+
+logic user_eq4 : us_rep1, us_rep1 -> bool
 
 logic dummy7 : (int,us_rep) farray
 

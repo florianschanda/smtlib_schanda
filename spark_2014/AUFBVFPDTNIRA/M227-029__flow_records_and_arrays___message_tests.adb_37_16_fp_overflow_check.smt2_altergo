@@ -966,8 +966,6 @@ axiom bool_eq_def2 :
   (((a).us_split_fields1).rec__message_tests__flags_t__b = ((b).us_split_fields1).rec__message_tests__flags_t__b))) ->
   (bool_eq2(a, b) = false))))
 
-logic user_eq1 : us_rep, us_rep -> bool
-
 logic value__size : int
 
 logic object__size : us_rep -> int
@@ -1020,6 +1018,8 @@ axiom message_tests__flags_t__b__last__bit_axiom :
 axiom message_tests__flags_t__b__position_axiom :
   (0 <= message_tests__flags_t__b__position)
 
+logic user_eq1 : us_rep, us_rep -> bool
+
 logic dummy1 : bool
 
 logic dummy2 : bool
@@ -1066,8 +1066,6 @@ axiom bool_eq_def3 :
   (bool_eq2(((a).us_split_fields3).rec__message_tests__coordinate__flags,
   ((b).us_split_fields3).rec__message_tests__coordinate__flags) = true))) ->
   (bool_eq3(a, b) = false))))
-
-logic user_eq2 : us_rep1, us_rep1 -> bool
 
 logic value__size1 : int
 
@@ -1158,6 +1156,8 @@ axiom message_tests__coordinate__flags__last__bit_axiom :
 
 axiom message_tests__coordinate__flags__position_axiom :
   (0 <= message_tests__coordinate__flags__position)
+
+logic user_eq2 : us_rep1, us_rep1 -> bool
 
 logic dummy3 : float1
 

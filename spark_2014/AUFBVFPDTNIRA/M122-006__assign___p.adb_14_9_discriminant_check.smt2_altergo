@@ -1098,8 +1098,6 @@ axiom bool_eq_def4 :
   (to_rep2(((a).us_split_fields1).rec__types__r__y) = to_rep2(((b).us_split_fields1).rec__types__r__y))))) ->
   (bool_eq5(a, b) = false))))
 
-logic user_eq3 : us_rep, us_rep -> bool
-
 logic value__size : int
 
 logic object__size : us_rep -> int
@@ -1160,6 +1158,8 @@ axiom types__r__y__last__bit_axiom :
   (types__r__y__first__bit <  types__r__y__last__bit)
 
 axiom types__r__y__position_axiom : (0 <= types__r__y__position)
+
+logic user_eq3 : us_rep, us_rep -> bool
 
 logic dummy3 : enum
 
@@ -1235,6 +1235,8 @@ axiom types__r__x__last__bit_axiom1 :
   (types__r__x__first__bit1 <  types__r__x__last__bit1)
 
 axiom types__r__x__position_axiom1 : (0 <= types__r__x__position1)
+
+logic user_eq4 : us_rep, us_rep -> bool
 
 logic dummy6 : enum
 
@@ -1314,6 +1316,8 @@ axiom types__r__x__last__bit_axiom2 :
   (types__r__x__first__bit2 <  types__r__x__last__bit2)
 
 axiom types__r__x__position_axiom2 : (0 <= types__r__x__position2)
+
+logic user_eq5 : us_rep, us_rep -> bool
 
 logic dummy9 : enum
 

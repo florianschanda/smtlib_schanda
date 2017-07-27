@@ -988,8 +988,6 @@ axiom bool_eq_def3 :
   (to_rep(((a).us_split_fields1).rec__flight_manager__engine_values__y_speed) = to_rep(((b).us_split_fields1).rec__flight_manager__engine_values__y_speed)))) ->
   (bool_eq3(a, b) = false))))
 
-logic user_eq1 : us_rep, us_rep -> bool
-
 logic value__size : int
 
 logic object__size : us_rep -> int
@@ -1041,6 +1039,8 @@ axiom flight_manager__engine_values__y_speed__last__bit_axiom :
 
 axiom flight_manager__engine_values__y_speed__position_axiom :
   (0 <= flight_manager__engine_values__y_speed__position)
+
+logic user_eq1 : us_rep, us_rep -> bool
 
 logic dummy1 : float1
 

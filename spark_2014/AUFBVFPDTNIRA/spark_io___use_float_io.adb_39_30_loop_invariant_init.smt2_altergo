@@ -1268,8 +1268,6 @@ type us_rep
 
 logic bool_eq9 : us_rep, us_rep -> bool
 
-logic user_eq5 : us_rep, us_rep -> bool
-
 logic value__size1 : int
 
 logic object__size1 : us_rep -> int
@@ -1286,6 +1284,8 @@ axiom value__alignment_axiom1 : (0 <= value__alignment1)
 
 axiom object__alignment_axiom1 :
   (forall a:us_rep. (0 <= object__alignment1(a)))
+
+logic user_eq5 : us_rep, us_rep -> bool
 
 logic dummy6 : us_rep
 

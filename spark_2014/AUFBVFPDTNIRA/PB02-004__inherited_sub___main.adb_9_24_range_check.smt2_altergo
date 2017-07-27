@@ -1164,8 +1164,6 @@ axiom bool_eq_def6 :
   (to_rep2(((a).us_split_fields1).rec__rec__my_rec__y) = to_rep2(((b).us_split_fields1).rec__rec__my_rec__y))))) ->
   (bool_eq7(a, b) = false))))
 
-logic user_eq4 : us_rep, us_rep -> bool
-
 logic value__size : int
 
 logic object__size : us_rep -> int
@@ -1228,6 +1226,8 @@ axiom rec__my_rec__y__last__bit_axiom :
   (rec__my_rec__y__first__bit <  rec__my_rec__y__last__bit)
 
 axiom rec__my_rec__y__position_axiom : (0 <= rec__my_rec__y__position)
+
+logic user_eq4 : us_rep, us_rep -> bool
 
 logic dummy4 : sub_enum
 
@@ -1307,6 +1307,8 @@ axiom rec__my_rec__y__last__bit_axiom1 :
 
 axiom rec__my_rec__y__position_axiom1 : (0 <= rec__my_rec__y__position1)
 
+logic user_eq5 : us_rep, us_rep -> bool
+
 logic dummy7 : sub_enum
 
 logic dummy8 : integer
@@ -1365,8 +1367,6 @@ axiom bool_eq_def7 :
   ((b).us_split_fields3).rec__rec__sub_rec__plop) = true))) -> (bool_eq8(a,
   b) = false))))
 
-logic user_eq5 : us_rep1, us_rep1 -> bool
-
 logic value__size2 : int
 
 logic object__size2 : us_rep1 -> int
@@ -1420,6 +1420,8 @@ axiom rec__sub_rec__plop__last__bit_axiom :
 
 axiom rec__sub_rec__plop__position_axiom :
   (0 <= rec__sub_rec__plop__position)
+
+logic user_eq6 : us_rep1, us_rep1 -> bool
 
 logic dummy10 : enum
 
@@ -1505,6 +1507,8 @@ axiom rec__my_rec__y__last__bit_axiom2 :
 
 axiom rec__my_rec__y__position_axiom2 : (0 <= rec__my_rec__y__position2)
 
+logic user_eq7 : us_rep, us_rep -> bool
+
 logic dummy14 : sub_enum
 
 logic dummy15 : integer
@@ -1558,8 +1562,6 @@ axiom bool_eq_def8 :
   (bool_eq7(((a1).us_split_fields5).rec__rec__sub_rec__plop1,
   ((b).us_split_fields5).rec__rec__sub_rec__plop1) = true))) -> (bool_eq9(a1,
   b) = false))))
-
-logic user_eq6 : us_rep2, us_rep2 -> bool
 
 predicate in_range7(rec__rec__sub_rec__z1: int, a1: us_rep1) =
   (rec__rec__sub_rec__z1 = to_rep(((a1).us_split_discrs3).rec__rec__sub_rec__z))
@@ -1618,6 +1620,8 @@ axiom rec__sub_rec__plop__last__bit_axiom1 :
 
 axiom rec__sub_rec__plop__position_axiom1 :
   (0 <= rec__sub_rec__plop__position1)
+
+logic user_eq8 : us_rep2, us_rep2 -> bool
 
 logic dummy17 : enum
 

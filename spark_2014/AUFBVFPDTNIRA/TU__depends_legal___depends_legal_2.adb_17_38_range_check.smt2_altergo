@@ -1116,8 +1116,6 @@ axiom bool_eq_def4 :
   (to_rep1(((a).us_split_fields1).rec__depends_legal_2__dis_rec__z) = to_rep1(((b).us_split_fields1).rec__depends_legal_2__dis_rec__z))))) ->
   (bool_eq5(a, b) = false))))
 
-logic user_eq2 : us_rep, us_rep -> bool
-
 logic value__size : int
 
 logic object__size : us_rep -> int
@@ -1238,6 +1236,8 @@ axiom depends_legal_2__dis_rec__z__last__bit_axiom :
 
 axiom depends_legal_2__dis_rec__z__position_axiom :
   (0 <= depends_legal_2__dis_rec__z__position)
+
+logic user_eq2 : us_rep, us_rep -> bool
 
 logic dummy2 : bool
 
@@ -1411,6 +1411,8 @@ axiom depends_legal_2__dis_rec__b__last__bit_axiom1 :
 axiom depends_legal_2__dis_rec__b__position_axiom1 :
   (0 <= depends_legal_2__dis_rec__b__position1)
 
+logic user_eq3 : us_rep, us_rep -> bool
+
 logic dummy9 : bool
 
 logic dummy10 : integer
@@ -1557,6 +1559,8 @@ axiom depends_legal_2__dis_rec__z__last__bit_axiom2 :
 
 axiom depends_legal_2__dis_rec__z__position_axiom2 :
   (0 <= depends_legal_2__dis_rec__z__position2)
+
+logic user_eq4 : us_rep, us_rep -> bool
 
 logic dummy16 : bool
 

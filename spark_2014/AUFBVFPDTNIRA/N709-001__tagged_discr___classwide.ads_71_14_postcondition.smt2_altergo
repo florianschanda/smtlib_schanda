@@ -1070,8 +1070,6 @@ axiom bool_eq_def4 :
   (to_rep1(((a).us_split_fields1).rec__classwide__t__y) = to_rep1(((b).us_split_fields1).rec__classwide__t__y)))) ->
   (bool_eq5(a, b) = false))))
 
-logic user_eq2 : us_rep, us_rep -> bool
-
 logic us_dispatch_eq : us_rep, us_rep -> bool
 
 logic us_tag : int
@@ -1138,6 +1136,8 @@ axiom classwide__t__y__last__bit_axiom :
   (classwide__t__y__first__bit <  classwide__t__y__last__bit)
 
 axiom classwide__t__y__position_axiom : (0 <= classwide__t__y__position)
+
+logic user_eq2 : us_rep, us_rep -> bool
 
 logic dummy2 : bool
 

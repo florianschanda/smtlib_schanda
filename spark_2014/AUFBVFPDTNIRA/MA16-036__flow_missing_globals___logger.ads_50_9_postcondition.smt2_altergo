@@ -1492,8 +1492,6 @@ axiom bool_eq_def5 :
   (((a).us_split_fields1).rec__logger__log_entry__estimatedgroundvelocityisavailable = ((b).us_split_fields1).rec__logger__log_entry__estimatedgroundvelocityisavailable))) ->
   (bool_eq6(a, b) = false))))
 
-logic user_eq2 : us_rep, us_rep -> bool
-
 logic value__size : int
 
 logic object__size : us_rep -> int
@@ -1598,6 +1596,8 @@ axiom logger__log_entry__estimatedgroundvelocityisavailable__last__bit_axiom :
 
 axiom logger__log_entry__estimatedgroundvelocityisavailable__position_axiom :
   (0 <= logger__log_entry__estimatedgroundvelocityisavailable__position)
+
+logic user_eq2 : us_rep, us_rep -> bool
 
 logic dummy2 : unsigned_16
 
@@ -1932,8 +1932,6 @@ axiom bool_eq_def9 :
   (((a).us_split_fields3).rec__logger__log_database__empty = ((b).us_split_fields3).rec__logger__log_database__empty))) ->
   (bool_eq11(a, b) = false))))
 
-logic user_eq7 : us_rep1, us_rep1 -> bool
-
 logic value__size3 : int
 
 logic object__size3 : us_rep1 -> int
@@ -2019,6 +2017,8 @@ axiom logger__log_database__empty__last__bit_axiom :
 
 axiom logger__log_database__empty__position_axiom :
   (0 <= logger__log_database__empty__position)
+
+logic user_eq7 : us_rep1, us_rep1 -> bool
 
 logic dummy12 : (t,us_rep) farray
 
