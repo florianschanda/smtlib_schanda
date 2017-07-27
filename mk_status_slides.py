@@ -186,10 +186,12 @@ def mk_progress_slides(fd):
         fd.write("\\end{center}\n")
 
     # Progress summary
+    fd.write("\\subsection{Progress from start}\n")
     for cat in ("solved", "error", "unsound"):
         mk_progress_table(cat)
 
     # Plot of over various CVC4 versions
+    fd.write("\\subsection{Progress over time}\n")
     for cat in COMPARISON_CATS:
         fd.write("\\begin{frame}[fragile]{FP progress in CVC4}")
         fd.write("{%s over time (average of averages)}\n" % cat.capitalize())
@@ -206,6 +208,158 @@ def mk_progress_slides(fd):
                 fd.write("{VCs solved on %s}\n" % mk_bench_name(group))
                 mk_plot(cat, "AnSecondaryGreen", group=group)
                 fd.write("\\end{frame}\n\n")
+
+def mk_csf_slides(fd):
+    def get_cat(bm):
+        name = BENCHMARKS[bm]["name"]
+        assert "sha<" not in name
+        assert name.startswith("random/")
+        _, cat, _ = name.split("/")
+        return cat
+
+    # Coverage results will be random benchmark results
+    res = data[-1]["group_results"]["random"]
+    subcats = sorted(set(map(get_cat, res)))
+
+    solved = {cat : sum(1 if res[bm]["score"] == "s" else 0
+                        for bm in res
+                        if get_cat(bm) == cat)
+              for cat in subcats}
+    total = {cat : sum(1
+                       for bm in res
+                       if get_cat(bm) == cat)
+              for cat in subcats}
+    percent = {cat : float(solved[cat] * 100) / float(total[cat])
+               for cat in subcats}
+
+    def mk_coord(x, y):
+        return "(%.3f, %.3f)" % (x / 15.0,
+                                 -y * 0.6)
+
+    ORDER = [
+        "fp.isZero",
+        "fp.isSubnormal",
+        "fp.isNormal",
+        "fp.isInfinite",
+        "fp.isNaN",
+        "fp.isNegative",
+        "fp.isPositive",
+        "fp.eq",
+        "smtlib.eq",
+        "fp.lt",
+        "fp.leq",
+        "fp.gt",
+        "fp.geq",
+        "fp.abs",
+        "fp.neg",
+        "fp.sqrt",
+        "fp.roundToIntegral",
+        "fp.add",
+        "fp.sub",
+        "fp.mul",
+        "fp.div",
+        "fp.rem",
+        "fp.min",
+        "fp.max",
+        "fp.fma",
+        "fp.cast",
+        "fp.from.binary",
+        "fp.from.real",
+        #"fp.to.real",
+        "fp.from.sbv",
+        "fp.to.sbv",
+        "fp.from.ubv",
+        "fp.to.ubv",
+    ]
+    ORDER = [x for x in ORDER if x in subcats] # robustness
+    assert set(ORDER) == set(subcats)
+
+    TXT = {
+        "fp.abs"         : "$abs$",
+        "fp.sqrt"        : "$\\surd$",
+        "fp.neg"         : "unary $-$",
+
+        "fp.add"         : "$+$",
+        "fp.sub"         : "$-$",
+        "fp.div"         : "$\\div$",
+        "fp.mul"         : "$\\times$",
+
+        "fp.eq"          : "$=$",
+        "smtlib.eq"      : "$\equiv$",
+
+        "fp.fma"         : "$fma$",
+        "fp.rem"         : "$remainder$",
+        "fp.roundToIntegral" : "$rti$",
+
+        "fp.lt"          : "$<$",
+        "fp.gt"          : "$>$",
+        "fp.leq"         : "$\ge$",
+        "fp.geq"         : "$\le$",
+
+        "fp.isZero"      : "$isZero$",
+        "fp.isSubnormal" : "$isSubnormal$",
+        "fp.isNormal"    : "$isNormal$",
+        "fp.isInfinite"  : "$isInfinite$",
+        "fp.isNaN"       : "$isNaN$",
+        "fp.isNegative"  : "$isNegative$",
+        "fp.isPositive"  : "$isPositive$",
+
+        "fp.min"         : "$min$",
+        "fp.max"         : "$max$",
+
+        "fp.cast"        : "$\\mathbb{F} \\rightarrow \\mathbb{F}$",
+
+        "fp.from.binary" : "IEEE $\\rightarrow \\mathbb{F}$",
+        "fp.from.sbv"    : "SBV $\\rightarrow \\mathbb{F}$",
+        "fp.from.ubv"    : "UBV $\\rightarrow \\mathbb{F}$",
+        "fp.from.real"   : "$\\mathbb{R} \\rightarrow \\mathbb{F}$",
+
+        "fp.to.real"     : "$\\mathbb{F} \\rightarrow \\mathbb{Q}$",
+        "fp.to.sbv"      : "$\\mathbb{F} \\rightarrow$ SBV",
+        "fp.to.ubv"      : "$\\mathbb{F} \\rightarrow$ UBV",
+    }
+
+    fd.write("\\subsection{Critical Success Factors}\n")
+
+    ITEMS_PER_SLIDE = 11
+    BAR_WIDTH = 0.6
+    for n in xrange(0, len(ORDER), ITEMS_PER_SLIDE):
+        slide_cats = ORDER[n:min(len(subcats), n+ITEMS_PER_SLIDE)]
+
+        fd.write("\\begin{frame}{Critical Success Factors for CVC4}")
+        fd.write("\\begin{center}\n")
+        fd.write("\\begin{tikzpicture}\n")
+
+        for i, cat in enumerate(slide_cats):
+            if percent[cat] == 100.0:
+                col = "AnSecondaryGreen"
+            elif percent[cat] > 90.0:
+                col = "AnSecondaryYellow"
+            else:
+                col = "AnSecondaryRed"
+
+            fd.write("\\draw[fill=%s] %s -- %s -- %s -- %s -- cycle;\n" %
+                     (col,
+                      mk_coord(0, i),
+                      mk_coord(percent[cat], i),
+                      mk_coord(percent[cat], i + BAR_WIDTH),
+                      mk_coord(0, i + BAR_WIDTH)));
+            fd.write("\\node at %s {\\tiny %.1f\\%%};\n" %
+                     (mk_coord(50, i + BAR_WIDTH * 0.5),
+                      percent[cat]))
+            fd.write("\\draw %s -- %s -- %s -- %s -- cycle;\n" %
+                     (mk_coord(0, i),
+                      mk_coord(100, i),
+                      mk_coord(100, i + BAR_WIDTH),
+                      mk_coord(0, i + BAR_WIDTH)));
+            fd.write("\\node[anchor=west,text width=2cm] at %s {\\tiny %s};\n" %
+                     (mk_coord(100, i + BAR_WIDTH * 0.5),
+                      TXT.get(cat, cat)))
+
+        fd.write("\\end{tikzpicture}\n")
+        fd.write("\\end{center}\n")
+        fd.write("\\end{frame}\n\n")
+
 
 
 def mk_competition_slides(fd):
@@ -516,9 +670,11 @@ def main():
 
         fd.write("\\maketitle\n\n")
 
-        if len(data) > 1:
+        if len(data) > 0:
             fd.write("\\section{CVC4 Progress}\n\n")
-            mk_progress_slides(fd)
+            if len(data) > 1:
+                mk_progress_slides(fd)
+            mk_csf_slides(fd)
 
         if len(other_data) >= 1:
             fd.write("\\section{Comparisons}\n\n")
