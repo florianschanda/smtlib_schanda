@@ -228,6 +228,8 @@ def extract_benchmark(test):
                "--no-axiom-guard",
                "--codepeer=off",
                "-d"]
+        if test["ieee"]:
+            cmd.append("--assume-ieee")
         if "O401-034__float_pred" in test["dir"]:
             cmd.append("-u")
             cmd.append("safety_pack.adb")
@@ -327,6 +329,7 @@ def main():
               "output" : output,
               "suffix" : suffix,
               "filter" : not options.no_filter,
+              "ieee"   : prover != "alt-ergo",
               }
              for d in os.listdir(options.testsuite)
              if os.path.isdir(os.path.join(options.testsuite, d)) and
