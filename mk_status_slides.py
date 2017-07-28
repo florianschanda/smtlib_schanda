@@ -202,12 +202,11 @@ def mk_progress_slides(fd):
 
         if cat == "solved":
             for group in GROUPS:
-                if not group.startswith("industrial_"):
-                    continue
-                fd.write("\\begin{frame}[fragile]{FP progress in CVC4}")
-                fd.write("{VCs solved on %s}\n" % mk_bench_name(group))
-                mk_plot(cat, "AnSecondaryGreen", group=group)
-                fd.write("\\end{frame}\n\n")
+                if group.startswith("industrial_") or group.startswith("spark_2014"):
+                    fd.write("\\begin{frame}[fragile]{FP progress in CVC4}")
+                    fd.write("{VCs solved on %s}\n" % mk_bench_name(group))
+                    mk_plot(cat, "AnSecondaryGreen", group=group)
+                    fd.write("\\end{frame}\n\n")
 
 def mk_csf_slides(fd):
     def get_cat(bm):
