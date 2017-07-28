@@ -1,13 +1,21 @@
+(set-info :smt-lib-version 2.6)
 (set-logic QF_FP)
 (set-info :source |Random FP created by PyMPF|)
+(set-info :license |https://www.gnu.org/licenses/gpl-3.0.html|)
 (set-info :category random)
 (set-info :status unsat)
 (declare-const x Float32)
 (assert (= x (fp #b0 #b11111110 #b11111111111111111111111)))
+;; x should be Float32(0x7F7FFFFF [Rational(340282346638528859811704183484516925440), 340282346638528859811704183484516925440.000000])
+
 (declare-const y Float32)
-(assert (= y (fp #b0 #b10010101 #b11000100001110110000011)))
+(assert (= y ((_ to_fp 8 24) #x4A5F0166)))
+;; y should be Float32(0x4A5F0166 [Rational(7307443, 2), 3653721.500000])
+
 (declare-const z Float32)
-(assert (= z ((_ to_fp 8 24) #x394C4E82)))
+(assert (= z (fp #b0 #b11011011 #b11011010111011100100100)))
+;; z should be Float32(0x6DED7724 [Rational(9186497438173288183348854784), 9186497438173288183348854784.000000])
+
 (declare-const result Float32)
 (assert (= result (fp.fma RTZ x y z)))
 (assert (not (= result ((_ to_fp 8 24) #x7F7FFFFF))))
