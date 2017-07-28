@@ -73,7 +73,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--suite",
                     default="fp",
-                    choices=["qf_fp", "fp", "debug", "industrial", "spark"])
+                    choices=["qf_fp", "fp", "debug", "industrial", "spark",
+                             "spark_all"])
     ap.add_argument("--single",
                     default=False,
                     action="store_true")
@@ -124,6 +125,8 @@ def main():
     if options.suite == "debug":
         bench_dirs.append("crafted/QF_FPBV")
         bench_dirs.append("random/smtlib.eq")
+    if options.suite == "spark_all":
+        bench_dirs.append("spark_2014_all/ALL")
 
     data_filename = "data_%s.p" % mk_run_id(options.prover_kind,
                                             sane_prover_bin)
