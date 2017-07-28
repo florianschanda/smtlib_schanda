@@ -48,11 +48,12 @@ GROUPS = sorted(data[-1]["group_summary"])
 
 def mk_bench_name(cat):
     mapping = {
-        "crafted"       : "Schanda",
-        "nyxbrain"      : "NyxBrain",
-        "random"        : "PyMPF",
-        "spark_2014"    : "{\\sc Spark~2014}",
-        "spark_2014_qf" : "{\\sc Spark~QF}",
+        "crafted"        : "Schanda",
+        "nyxbrain"       : "NyxBrain",
+        "random"         : "PyMPF",
+        "spark_2014"     : "{\\sc Spark~FP}",
+        "spark_2014_qf"  : "{\\sc Spark~QF~FP}",
+        "spark_2014_all" : "{\sc Spark~ALL}",
     }
     if cat in mapping:
         return mapping[cat]
