@@ -9,18 +9,42 @@ VCs from the public SPARK 2014 testsuite (compiling SPARK and
 executing the testsuite are non-trivial, so these benchmarks are filed
 here as a service to the community).
 
-There are three variants included here:
-* AUFBVDTNIRA These are all non-trivial benchmarks (generated for CVC4)
-* AUFBVFPDTNIRA These are all benchmarks that use floats, in various dialects
-  for different solvers
-* QF_AUFBVFPNIRA These are quantifier- and datatype-free benchmarks that use
-  floats
+There are two top-level versions of these.
 
-Most of these will be unknown (although a large fraction of them
-should be UNSAT). I have only included the ones where CVC4 does not
-immediately issue unsat (when run with --rlimit=2 --preprocess-step=0
---rewrite-step=0 --parse-step=0), otherwise there would be more than a
-GiB of benchmarks in here.
+### spark_2014
+These focus specifically on floats, it is a subset of all SPARK
+benchmarks. Any benchmark that did not contain at least a floating
+point type or some floating point operator is stripped out. Different
+dialects for different solvers are included (where necessary).
+
+* AUFBVFPDTNIRA These are all benchmarks that use floats. Some are
+  annotated with UNSAT (where we believe that the original Ada code
+  did not contain errors), many are unknown and there are no SAT
+  annotations.
+
+* QF_AUFBVFPNIRA These are the same benchmarks above, but quantifier-
+  and datatype-free. They have been made quantifier-free by simply
+  ripping out all quantifiers, so many of them will likely be SAT, but
+  some remain UNSAT.
+
+### spark_2014_all
+
+These are *all* benchmarks from the SPARK testsuite, many are
+trivial. However, there is almost no annotation as to status. We've
+also included various dialects where appropriate, so that we can
+produce overall cactus plots.
+
+* The basic .smt2 files will be for CVC4, using the floating point theory
+
+* .smt2_oldfp will be for CVC4, but using the *old* floating point
+  encoding (reals + round) that was used by SPARK before we started on
+  this work.
+
+* .smt2_z3 will be for Z3 (main difference is the different bv / int
+  conversions)
+
+* .smt2_altergo are actually not SMT, but instead using alt-ergo's
+  native input format.
 
 ## Hand-crafted
 Hand-crafted problems produced by Florian during reviewing of papers,
@@ -39,7 +63,7 @@ Allmost all of these are carefully annotated with SAT or UNSAT.
 Randomly generated tests from
 [PyMPF](https://github.com/florianschanda/PyMPF). These tests are
 similar to Wintersteiger's SMTLIB benchmarks, but they seem to cover
-more areas (i.e. we found bugs in Z3, MathSAT, CVC4 with them).
+more areas (i.e. we found bugs in Z3, MathSAT, CVC4, and COLIBRI with them).
 
 All of these are automatically annotated with SAT or UNSAT.
 
