@@ -146,11 +146,13 @@ FLOAT_ONLY_BENCHMARKS = set([
     'trajectory_computation',
 ])
 
-RELEVANT_STUFF = set(["fp.",
-                      "Float32",
-                      "Float64",
-                      "to_fp",
-                      "FloatingPoint"])
+RELEVANT_FLOAT_STUFF = set(["fp.",
+                            "Float32",
+                            "Float64",
+                            "to_fp",
+                            "FloatingPoint"])
+
+RELEVANT_BV_STUFF = set(["(bv2int"])
 
 def autodetect_spark_testsuite():
     candidate = None
@@ -251,18 +253,27 @@ def extract_benchmark(test):
             dst += test["suffix"]
 
             if f.endswith(".smt2"):
-                interesting = not test["filter"]
+                interesting_float = False
+                interesting_bv    = False
                 data = ""
                 with open(src, "rU") as fd:
                     for raw_line in fd:
                         line = raw_line.rstrip()
-                        if not interesting:
-                            for stuff in RELEVANT_STUFF:
-                                if stuff in line:
-                                    interesting = True
+                        for stuff in RELEVANT_FLOAT_STUFF:
+                            if stuff in line:
+                                interesting_float = True
+                        for stuff in RELEVANT_BV_STUFF:
+                            if stuff in line:
+                                interesting_bv = True
                         data += line + "\n"
                 if not data.endswith("(exit)\n"):
                     data += "(exit)\n"
+
+                interesting = test["filter"] is None
+                interesting |= (test["filter"] == "float" and
+                                interesting_float)
+                interesting |= (test["filter"] == "z3bitvec" and
+                                interesting_bv)
 
                 if interesting:
                     with open(dst, "w") as fd:
@@ -296,10 +307,10 @@ def main():
                     action="store_true",
                     default=False,
                     help="process all benchmarks, not just the canned list")
-    ap.add_argument("--no-filter",
-                    action="store_true",
-                    default=False,
-                    help="do not filter non-float benchmarks")
+    ap.add_argument("--filter",
+                    choices=[None, "float", "z3bitvec"],
+                    default=None,
+                    help="only file certain benchmarks")
     ap.add_argument("--output", default=None)
     options = ap.parse_args()
 
@@ -308,10 +319,13 @@ def main():
     prover = options.prover
     faker  = "fake_%s" % prover
     if options.output is None:
-        if prover == "colibri":
-            output = "spark_2014/QF_AUFBVFPNIRA"
+        if options.all:
+            output = "spark_2014_all/ALL"
         else:
-            output = "spark_2014/AUFBVFPDTNIRA"
+            if prover == "colibri":
+                output = "spark_2014/QF_AUFBVFPNIRA"
+            else:
+                output = "spark_2014/AUFBVFPDTNIRA"
     else:
         output = options.output
         if not os.path.exists(output):
@@ -328,7 +342,7 @@ def main():
               "driver" : "%s_gnatprove.drv" % prover,
               "output" : output,
               "suffix" : suffix,
-              "filter" : not options.no_filter,
+              "filter" : options.filter,
               "ieee"   : prover != "alt-ergo",
               }
              for d in os.listdir(options.testsuite)
