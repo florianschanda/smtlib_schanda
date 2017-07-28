@@ -152,7 +152,7 @@ RELEVANT_FLOAT_STUFF = set(["fp.",
                             "to_fp",
                             "FloatingPoint"])
 
-RELEVANT_BV_STUFF = set(["(bv2int"])
+RELEVANT_BV_STUFF = set(["bv2nat"])
 
 def autodetect_spark_testsuite():
     candidate = None
@@ -176,6 +176,8 @@ def extract_benchmark(test):
     #if "proofinuse" not in test["dir"]:
     #    return None
     # if "TU__type_invariant__legal" not in test["dir"]:
+    #    return None
+    # if "O318-021__modular" not in test["dir"]:
     #    return None
 
     ROOT = os.getcwd()
@@ -243,6 +245,12 @@ def extract_benchmark(test):
 
     for path, dirs, files in os.walk("."):
         for f in files:
+            if not (f.endswith(".smt2") or f.endswith(".why")):
+                continue
+
+            interesting_float = False
+            interesting_bv    = False
+
             src = os.path.join(path, f)
             dst = os.path.join(ROOT,
                                test["output"],
@@ -250,11 +258,20 @@ def extract_benchmark(test):
             dst = dst.replace(" ", "_")
             dst = dst.replace(".why", ".smt2")
             dst_root_exists = os.path.isfile(dst)
+
+            # Filtering for Z3 requires looking at the reference VC
+            if test["filter"] == "z3bitvec":
+                with open(dst, "rU") as fd:
+                    for raw_line in fd:
+                        for stuff in RELEVANT_BV_STUFF:
+                            if stuff in raw_line:
+                                interesting_bv = True
+                        if interesting_bv:
+                            break
+
             dst += test["suffix"]
 
             if f.endswith(".smt2"):
-                interesting_float = False
-                interesting_bv    = False
                 data = ""
                 with open(src, "rU") as fd:
                     for raw_line in fd:
@@ -262,9 +279,6 @@ def extract_benchmark(test):
                         for stuff in RELEVANT_FLOAT_STUFF:
                             if stuff in line:
                                 interesting_float = True
-                        for stuff in RELEVANT_BV_STUFF:
-                            if stuff in line:
-                                interesting_bv = True
                         data += line + "\n"
                 if not data.endswith("(exit)\n"):
                     data += "(exit)\n"
@@ -311,6 +325,10 @@ def main():
                     choices=[None, "float", "z3bitvec"],
                     default=None,
                     help="only file certain benchmarks")
+    ap.add_argument("--single",
+                    action="store_true",
+                    default=False,
+                    help="disable multithreading (for debugging)")
     ap.add_argument("--output", default=None)
     options = ap.parse_args()
 
@@ -349,10 +367,13 @@ def main():
              if os.path.isdir(os.path.join(options.testsuite, d)) and
                 (options.all or d in FLOAT_ONLY_BENCHMARKS)]
 
-    pool = multiprocessing.Pool()
-
-    for result in pool.imap_unordered(extract_benchmark, tests, 2):
-        pass
+    if options.single:
+        for result in map(extract_benchmark, tests):
+            pass
+    else:
+        pool = multiprocessing.Pool()
+        for result in pool.imap_unordered(extract_benchmark, tests, 2):
+            pass
 
 if __name__ == "__main__":
     main()
