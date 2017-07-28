@@ -341,8 +341,8 @@ def mk_csf_slides(fd):
 
         "fp.lt"          : "$<$",
         "fp.gt"          : "$>$",
-        "fp.leq"         : "$\ge$",
-        "fp.geq"         : "$\le$",
+        "fp.leq"         : "$\le$",
+        "fp.geq"         : "$\ge$",
 
         "fp.isZero"      : "$isZero$",
         "fp.isSubnormal" : "$isSubnormal$",
