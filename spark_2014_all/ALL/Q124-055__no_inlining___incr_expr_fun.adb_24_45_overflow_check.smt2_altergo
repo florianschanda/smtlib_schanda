@@ -1,0 +1,219 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+type integer
+
+predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq1 : int, int -> bool
+
+axiom bool_eq_def :
+  (forall x:int. forall y:int [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> int
+
+logic user_eq : integer, integer -> bool
+
+logic dummy : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+logic incr_pub : int -> int
+
+logic incr_pub__function_guard : int, int -> prop
+
+axiom incr_pub__post_axiom :
+  (forall x:int [incr_pub(x)]. (in_range(x) -> in_range(incr_pub(x))))
+
+axiom incr_pub__def_axiom :
+  (forall x:int [incr_pub(x)]. (in_range(x) -> (incr_pub(x) = (x + 1))))
+
+logic incr_pub_pub : int -> int
+
+logic incr_pub_pub__function_guard : int, int -> prop
+
+axiom incr_pub_pub__post_axiom :
+  (forall x:int [incr_pub_pub(x)]. (in_range(x) ->
+  in_range(incr_pub_pub(x))))
+
+axiom incr_pub_pub__def_axiom :
+  (forall x:int [incr_pub_pub(x)]. (in_range(x) ->
+  (incr_pub_pub(x) = (x + 1))))
+
+logic incr_pub_priv : int -> int
+
+logic incr_pub_priv__function_guard : int, int -> prop
+
+axiom incr_pub_priv__post_axiom :
+  (forall x:int [incr_pub_priv(x)]. (in_range(x) ->
+  in_range(incr_pub_priv(x))))
+
+axiom incr_pub_priv__def_axiom :
+  (forall x:int [incr_pub_priv(x)]. (in_range(x) ->
+  (incr_pub_priv(x) = (x + 1))))
+
+logic incr_pub_body : int -> int
+
+logic incr_pub_body__function_guard : int, int -> prop
+
+axiom incr_pub_body__post_axiom :
+  (forall x:int [incr_pub_body(x)]. (in_range(x) ->
+  in_range(incr_pub_body(x))))
+
+axiom incr_pub_body__def_axiom :
+  (forall x:int [incr_pub_body(x)]. (in_range(x) ->
+  (incr_pub_body(x) = (x + 1))))
+
+logic incr_priv : int -> int
+
+logic incr_priv__function_guard : int, int -> prop
+
+axiom incr_priv__post_axiom :
+  (forall x:int [incr_priv(x)]. (in_range(x) -> in_range(incr_priv(x))))
+
+axiom incr_priv__def_axiom :
+  (forall x:int [incr_priv(x)]. (in_range(x) -> (incr_priv(x) = (x + 1))))
+
+logic incr_priv_priv : int -> int
+
+logic incr_priv_priv__function_guard : int, int -> prop
+
+axiom incr_priv_priv__post_axiom :
+  (forall x:int [incr_priv_priv(x)]. (in_range(x) ->
+  in_range(incr_priv_priv(x))))
+
+axiom incr_priv_priv__def_axiom :
+  (forall x:int [incr_priv_priv(x)]. (in_range(x) ->
+  (incr_priv_priv(x) = (x + 1))))
+
+logic incr_priv_body : int -> int
+
+logic incr_priv_body__function_guard : int, int -> prop
+
+axiom incr_priv_body__post_axiom :
+  (forall x:int [incr_priv_body(x)]. (in_range(x) ->
+  in_range(incr_priv_body(x))))
+
+axiom incr_priv_body__def_axiom :
+  (forall x:int [incr_priv_body(x)]. (in_range(x) ->
+  (incr_priv_body(x) = (x + 1))))
+
+logic incr_body : int -> int
+
+logic incr_body__function_guard : int, int -> prop
+
+axiom incr_body__post_axiom :
+  (forall x:int [incr_body(x)]. (in_range(x) -> in_range(incr_body(x))))
+
+axiom incr_body__def_axiom :
+  (forall x:int [incr_body(x)]. (in_range(x) -> (incr_body(x) = (x + 1))))
+
+logic incr_body_body : int -> int
+
+logic incr_body_body__function_guard : int, int -> prop
+
+axiom incr_body_body__post_axiom :
+  (forall x:int [incr_body_body(x)]. (in_range(x) ->
+  in_range(incr_body_body(x))))
+
+axiom incr_body_body__def_axiom :
+  (forall x:int [incr_body_body(x)]. (in_range(x) ->
+  (incr_body_body(x) = (x + 1))))
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall x:int. forall result:int. forall x1:int. (((result = x) and
+  (x1 = 10)) -> (in_range(x1) -> ((incr_pub(x1) = (x1 + 1)) ->
+  ((incr_pub_pub(x1) = (x1 + 1)) -> ((incr_pub_priv(x1) = (x1 + 1)) ->
+  ((incr_pub_body(x1) = (x1 + 1)) -> ((incr_priv(x1) = (x1 + 1)) ->
+  ((incr_priv_priv(x1) = (x1 + 1)) -> ((incr_priv_body(x1) = (x1 + 1)) ->
+  ((incr_body(x1) = (x1 + 1)) -> in_range((x1 + 1)))))))))))))

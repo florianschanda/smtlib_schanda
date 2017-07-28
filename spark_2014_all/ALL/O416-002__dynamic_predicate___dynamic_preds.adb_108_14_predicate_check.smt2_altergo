@@ -1,0 +1,453 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic comp_div: int, int -> int
+axiom comp_div_def: forall x, y:int. x >= 0 and y > 0 -> comp_div(x,y) = x / y
+logic comp_mod: int, int -> int
+axiom comp_mod_def: forall x, y:int. x >= 0 and y > 0 -> comp_mod(x,y) = x % y
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+logic abs : int -> int
+
+axiom abs_def :
+  (forall x:int [abs(x)]. (((0 <= x) -> (abs(x) = x)) and ((not (0 <= x)) ->
+  (abs(x) = (-x)))))
+
+axiom Abs_le :
+  (forall x:int. forall y:int. ((abs(x) <= y) <-> (((-y) <= x) and
+  (x <= y))))
+
+axiom Abs_pos : (forall x:int. (0 <= abs(x)))
+
+axiom Div_mod :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * comp_div(x,y)) + comp_mod(x,y)))))
+
+axiom Div_bound :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= comp_div(x,y)) and (comp_div(x,y) <= x))))
+
+axiom Mod_bound :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (((-abs(y)) <  comp_mod(x,y)) and (comp_mod(x,y) <  abs(y)))))
+
+axiom Div_sign_pos :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  (0 <= comp_div(x,y))))
+
+axiom Div_sign_neg :
+  (forall x:int. forall y:int. (((x <= 0) and (0 <  y)) ->
+  (comp_div(x,y) <= 0)))
+
+axiom Mod_sign_pos :
+  (forall x:int. forall y:int. (((0 <= x) and (not (y = 0))) ->
+  (0 <= comp_mod(x,y))))
+
+axiom Mod_sign_neg :
+  (forall x:int. forall y:int. (((x <= 0) and (not (y = 0))) ->
+  (comp_mod(x,y) <= 0)))
+
+axiom Rounds_toward_zero :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (abs((comp_div(x,y) * y)) <= abs(x))))
+
+axiom Div_1 : (forall x:int. (comp_div(x,1) = x))
+
+axiom Mod_1 : (forall x:int. (comp_mod(x,1) = 0))
+
+axiom Div_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) ->
+  (comp_div(x,y) = 0)))
+
+axiom Mod_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) ->
+  (comp_mod(x,y) = x)))
+
+axiom Div_mult :
+  (forall x:int. forall y:int. forall z:int [comp_div(((x * y) + z),x)].
+  (((0 <  x) and ((0 <= y) and (0 <= z))) ->
+  (comp_div(((x * y) + z),x) = (y + comp_div(z,x)))))
+
+axiom Mod_mult :
+  (forall x:int. forall y:int. forall z:int [comp_mod(((x * y) + z),x)].
+  (((0 <  x) and ((0 <= y) and (0 <= z))) ->
+  (comp_mod(((x * y) + z),x) = comp_mod(z,x))))
+
+axiom Div_mod1 :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * (x / y)) + (x % y)))))
+
+axiom Mod_bound1 :
+  (forall x:int. forall y:int. ((not (y = 0)) -> ((0 <= (x % y)) and
+  ((x % y) <  abs(y)))))
+
+axiom Div_unique :
+  (forall x:int. forall y:int. forall q:int. ((0 <  y) ->
+  ((((q * y) <= x) and (x <  ((q * y) + y))) -> ((x / y) = q))))
+
+axiom Div_bound1 :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= (x / y)) and ((x / y) <= x))))
+
+axiom Mod_11 : (forall x:int. ((x % 1) = 0))
+
+axiom Div_11 : (forall x:int. ((x / 1) = x))
+
+axiom Div_inf1 :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> ((x / y) = 0)))
+
+axiom Div_inf_neg :
+  (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
+  (((-x) / y) = (-1))))
+
+axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
+
+axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
+
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+
+axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
+
+axiom Mod_minus1_left :
+  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+
+axiom Div_mult1 :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
+  ((0 <  x) -> ((((x * y) + z) / x) = (y + (z / x)))))
+
+axiom Mod_mult1 :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) % x)].
+  ((0 <  x) -> ((((x * y) + z) % x) = (z % x))))
+
+logic mod : int, int -> int
+
+axiom mod_def :
+  (forall x:int. forall y:int [mod(x, y)]. (((0 <  y) -> (mod(x,
+  y) = (x % y))) and ((not (0 <  y)) -> (mod(x, y) = ((x % y) + y)))))
+
+type integer
+
+predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq1 : int, int -> bool
+
+axiom bool_eq_def :
+  (forall x:int. forall y:int [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> int
+
+logic user_eq : integer, integer -> bool
+
+logic dummy : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+type even
+
+predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq1 : even, even -> bool
+
+logic dummy1 : even
+
+type even__ref = { even__content : even
+}
+
+function even__ref___projection(a: even__ref) : even = (a).even__content
+
+logic to_rep : even -> int
+
+logic of_rep : int -> even
+
+axiom inversion_axiom : (forall x:even [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:even [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type us_split_fields = { rec__dynamic_preds__even_pair__a : even;
+rec__dynamic_preds__even_pair__b : even
+}
+
+function us_split_fields_A__projection(a: us_split_fields) : even =
+  (a).rec__dynamic_preds__even_pair__a
+
+function us_split_fields_B__projection(a: us_split_fields) : even =
+  (a).rec__dynamic_preds__even_pair__b
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+function us_rep___projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+logic bool_eq3 : us_rep, us_rep -> bool
+
+axiom bool_eq_def2 :
+  (forall a:us_rep. forall b:us_rep [bool_eq3(a, b)].
+  ((((to_rep(((a).us_split_fields1).rec__dynamic_preds__even_pair__a) = to_rep(((b).us_split_fields1).rec__dynamic_preds__even_pair__a)) and
+  (to_rep(((a).us_split_fields1).rec__dynamic_preds__even_pair__b) = to_rep(((b).us_split_fields1).rec__dynamic_preds__even_pair__b))) ->
+  (bool_eq3(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_fields1).rec__dynamic_preds__even_pair__a) = to_rep(((b).us_split_fields1).rec__dynamic_preds__even_pair__a)) and
+  (to_rep(((a).us_split_fields1).rec__dynamic_preds__even_pair__b) = to_rep(((b).us_split_fields1).rec__dynamic_preds__even_pair__b)))) ->
+  (bool_eq3(a, b) = false))))
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:even. forall a1:even. (0 <= object__size({ us_split_fields1 = {
+  rec__dynamic_preds__even_pair__a = a; rec__dynamic_preds__even_pair__b = a1
+  } })))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:even. forall a1:even. (0 <= object__alignment({
+  us_split_fields1 = { rec__dynamic_preds__even_pair__a = a;
+  rec__dynamic_preds__even_pair__b = a1 } })))
+
+logic dynamic_preds__even_pair__a__first__bit : int
+
+logic dynamic_preds__even_pair__a__last__bit : int
+
+logic dynamic_preds__even_pair__a__position : int
+
+axiom dynamic_preds__even_pair__a__first__bit_axiom :
+  (0 <= dynamic_preds__even_pair__a__first__bit)
+
+axiom dynamic_preds__even_pair__a__last__bit_axiom :
+  (dynamic_preds__even_pair__a__first__bit <  dynamic_preds__even_pair__a__last__bit)
+
+axiom dynamic_preds__even_pair__a__position_axiom :
+  (0 <= dynamic_preds__even_pair__a__position)
+
+logic dynamic_preds__even_pair__b__first__bit : int
+
+logic dynamic_preds__even_pair__b__last__bit : int
+
+logic dynamic_preds__even_pair__b__position : int
+
+axiom dynamic_preds__even_pair__b__first__bit_axiom :
+  (0 <= dynamic_preds__even_pair__b__first__bit)
+
+axiom dynamic_preds__even_pair__b__last__bit_axiom :
+  (dynamic_preds__even_pair__b__first__bit <  dynamic_preds__even_pair__b__last__bit)
+
+axiom dynamic_preds__even_pair__b__position_axiom :
+  (0 <= dynamic_preds__even_pair__b__position)
+
+logic user_eq2 : us_rep, us_rep -> bool
+
+logic dummy2 : even
+
+logic dummy3 : even
+
+type even_pair__ref = { even_pair__content : us_rep
+}
+
+function even_pair__ref___projection(a: even_pair__ref) : us_rep =
+  (a).even_pair__content
+
+type even_close_pair__ref = { even_close_pair__content : us_rep
+}
+
+function even_close_pair__ref___projection(a: even_close_pair__ref) : us_rep =
+  (a).even_close_pair__content
+
+logic get_constant_even_pair : unit -> us_rep
+
+logic get_constant_even_pair__function_guard : us_rep, unit -> prop
+
+axiom get_constant_even_pair__post_axiom :
+  (((to_rep(((get_constant_even_pair(void)).us_split_fields1).rec__dynamic_preds__even_pair__a) = 0) and
+  (to_rep(((get_constant_even_pair(void)).us_split_fields1).rec__dynamic_preds__even_pair__b) = 0)) and
+  ((mod(to_rep(((get_constant_even_pair(void)).us_split_fields1).rec__dynamic_preds__even_pair__a),
+  2) = 0) and
+  (mod(to_rep(((get_constant_even_pair(void)).us_split_fields1).rec__dynamic_preds__even_pair__b),
+  2) = 0)))
+
+logic above : int
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+ (* File "dynamic_preds.ads", line 25, characters 0-0 *)
+goal WP_parameter_def :
+  (forall result____split_fields:even. forall result____split_fields1:even.
+  forall dynamic_preds__get_even_close_pair_error__result__assume:even.
+  forall dynamic_preds__get_even_close_pair_error__result__assume1:even.
+  forall temp___273:int. forall o:int. forall o1:even. forall o2:even.
+  forall o3:even. forall temp___276:even. forall temp___2761:even.
+  forall temp___269:int. forall o4:int. forall o5:even. forall o6:even.
+  forall o7:even. forall temp___272:even. forall temp___2721:even.
+  forall temp___277:int. forall o8:int. forall o9:even. forall o10:even.
+  forall o11:even. forall temp___280:even. forall temp___2801:even.
+  forall result:even. forall result1:even.
+  forall result____split_fields2:even. forall result____split_fields3:even.
+  forall result2:even. forall result3:even.
+  forall result____split_fields4:even. forall result____split_fields5:even.
+  forall result4:even. forall result5:even.
+  forall result____split_fields6:even. forall result____split_fields7:even.
+  forall result6:even. forall result7:even.
+  forall result____split_fields8:even. forall result____split_fields9:even.
+  (in_range(above) -> (((({ us_split_fields1 = {
+  rec__dynamic_preds__even_pair__a =
+  dynamic_preds__get_even_close_pair_error__result__assume;
+  rec__dynamic_preds__even_pair__b =
+  dynamic_preds__get_even_close_pair_error__result__assume1 }
+  } = get_constant_even_pair(void)) and
+  (((mod(to_rep(dynamic_preds__get_even_close_pair_error__result__assume),
+  2) = 0) and
+  (mod(to_rep(dynamic_preds__get_even_close_pair_error__result__assume1),
+  2) = 0)) and
+  ((to_rep(dynamic_preds__get_even_close_pair_error__result__assume) = 0) and
+  (to_rep(dynamic_preds__get_even_close_pair_error__result__assume1) = 0)))) and
+  (((result = result____split_fields) and
+  (result1 = result____split_fields1)) and
+  ((dynamic_preds__get_even_close_pair_error__result__assume = result____split_fields2) and
+  (dynamic_preds__get_even_close_pair_error__result__assume1 = result____split_fields3)))) ->
+  (((mod(to_rep(result____split_fields2), 2) = 0) and
+  (mod(to_rep(result____split_fields3), 2) = 0)) -> ((((mod(above,
+  2) = 0) and (((((((temp___273 = (above + 1)) and in_range((above + 1))) and
+  ((mod(temp___273, 2) = 0) and (o = temp___273))) and (to_rep(o1) = o)) and
+  ((o1 = o2) and (result____split_fields3 = o3))) and ((temp___276 = o2) and
+  (temp___2761 = o3))) and (((result2 = result____split_fields2) and
+  (result3 = result____split_fields3)) and
+  ((temp___276 = result____split_fields4) and
+  (temp___2761 = result____split_fields5))))) or ((not (mod(above,
+  2) = 0)) and ((((((((temp___269 = (above + 1)) and
+  in_range((above + 1))) and ((mod(temp___269, 2) = 0) and
+  (o4 = temp___269))) and (to_rep(o5) = o4)) and ((o5 = o6) and
+  (result____split_fields3 = o7))) and ((temp___272 = o6) and
+  (temp___2721 = o7))) and (((result4 = result____split_fields2) and
+  (result5 = result____split_fields3)) and
+  ((temp___272 = result____split_fields6) and
+  (temp___2721 = result____split_fields7)))) and ({
+  rec__dynamic_preds__even_pair__a = result____split_fields4;
+  rec__dynamic_preds__even_pair__b = result____split_fields5 } = {
+  rec__dynamic_preds__even_pair__a = result____split_fields6;
+  rec__dynamic_preds__even_pair__b = result____split_fields7 })))) ->
+  ((((((((temp___277 = (to_rep(result____split_fields4) + 4)) and
+  in_range((to_rep(result____split_fields4) + 4))) and ((mod(temp___277,
+  2) = 0) and (o8 = temp___277))) and (to_rep(o9) = o8)) and
+  ((result____split_fields4 = o10) and (o9 = o11))) and
+  ((temp___280 = o10) and (temp___2801 = o11))) and
+  (((result6 = result____split_fields4) and
+  (result7 = result____split_fields5)) and
+  ((temp___280 = result____split_fields8) and
+  (temp___2801 = result____split_fields9)))) ->
+  (to_rep(result____split_fields9) = (to_rep(result____split_fields8) + 2))))))))

@@ -1,0 +1,360 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type integer
+
+predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : integer, integer -> bool
+
+logic dummy : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+logic to_rep : integer -> int
+
+logic of_rep : int -> integer
+
+axiom inversion_axiom :
+  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type us_split_discrs = { rec__q__t__b : bool
+}
+
+function us_split_discrs___projection(a: us_split_discrs) : bool =
+  (a).rec__q__t__b
+
+type us_split_discrs__ref = { us_split_discrs__content : us_split_discrs
+}
+
+function us_split_discrs__ref___projection(a: us_split_discrs__ref) : us_split_discrs =
+  (a).us_split_discrs__content
+
+type us_split_fields = { rec__q__t__a : integer; rec__q__t__c : bool
+}
+
+function us_split_fields_A__projection(a: us_split_fields) : integer =
+  (a).rec__q__t__a
+
+function us_split_fields_C__projection(a: us_split_fields) : bool =
+  (a).rec__q__t__c
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_discrs1 : us_split_discrs; us_split_fields1 :
+us_split_fields
+}
+
+function us_rep___projection(a: us_rep) : us_split_discrs =
+  (a).us_split_discrs1
+
+function us_rep_2__projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+predicate q__t__a__pred(a: us_rep) =
+  (to_int(((a).us_split_discrs1).rec__q__t__b) = 1)
+
+predicate q__t__c__pred(a: us_rep) =
+  (to_int(((a).us_split_discrs1).rec__q__t__b) = 0)
+
+logic bool_eq3 : us_rep, us_rep -> bool
+
+axiom bool_eq_def2 :
+  (forall a:us_rep. forall b:us_rep [bool_eq3(a, b)].
+  (((((((a).us_split_discrs1).rec__q__t__b = ((b).us_split_discrs1).rec__q__t__b) and
+  (q__t__a__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__q__t__a) = to_rep(((b).us_split_fields1).rec__q__t__a)))) and
+  (q__t__c__pred(a) ->
+  (((a).us_split_fields1).rec__q__t__c = ((b).us_split_fields1).rec__q__t__c))) ->
+  (bool_eq3(a, b) = true)) and
+  ((not (((((a).us_split_discrs1).rec__q__t__b = ((b).us_split_discrs1).rec__q__t__b) and
+  (q__t__a__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__q__t__a) = to_rep(((b).us_split_fields1).rec__q__t__a)))) and
+  (q__t__c__pred(a) ->
+  (((a).us_split_fields1).rec__q__t__c = ((b).us_split_fields1).rec__q__t__c)))) ->
+  (bool_eq3(a, b) = false))))
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:bool. forall a1:integer. forall a2:bool. (0 <= object__size({
+  us_split_discrs1 = { rec__q__t__b = a }; us_split_fields1 = {
+  rec__q__t__a = a1; rec__q__t__c = a2 } })))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:bool. forall a1:integer. forall a2:bool.
+  (0 <= object__alignment({ us_split_discrs1 = { rec__q__t__b = a };
+  us_split_fields1 = { rec__q__t__a = a1; rec__q__t__c = a2 } })))
+
+logic q__t__b__first__bit : int
+
+logic q__t__b__last__bit : int
+
+logic q__t__b__position : int
+
+axiom q__t__b__first__bit_axiom : (0 <= q__t__b__first__bit)
+
+axiom q__t__b__last__bit_axiom : (q__t__b__first__bit <  q__t__b__last__bit)
+
+axiom q__t__b__position_axiom : (0 <= q__t__b__position)
+
+logic q__t__a__first__bit : int
+
+logic q__t__a__last__bit : int
+
+logic q__t__a__position : int
+
+axiom q__t__a__first__bit_axiom : (0 <= q__t__a__first__bit)
+
+axiom q__t__a__last__bit_axiom : (q__t__a__first__bit <  q__t__a__last__bit)
+
+axiom q__t__a__position_axiom : (0 <= q__t__a__position)
+
+logic q__t__c__first__bit : int
+
+logic q__t__c__last__bit : int
+
+logic q__t__c__position : int
+
+axiom q__t__c__first__bit_axiom : (0 <= q__t__c__first__bit)
+
+axiom q__t__c__last__bit_axiom : (q__t__c__first__bit <  q__t__c__last__bit)
+
+axiom q__t__c__position_axiom : (0 <= q__t__c__position)
+
+logic user_eq1 : us_rep, us_rep -> bool
+
+logic dummy1 : bool
+
+logic dummy2 : integer
+
+logic dummy3 : bool
+
+type t__ref = { t__content : us_rep
+}
+
+function t__ref___projection(a: t__ref) : us_rep = (a).t__content
+
+logic change : us_rep -> us_rep
+
+logic change__function_guard : us_rep, us_rep -> prop
+
+axiom change__post_axiom : true
+
+logic x__split_discrs : bool
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic y__split_discrs : bool
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic r4b : bool
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic r6b : bool
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+ (* File "q.ads", line 2, characters 0-0 *)
+goal WP_parameter_def :
+  (forall x__split_fields:integer. forall x__split_fields1:bool.
+  forall y__split_fields:integer. forall y__split_fields1:bool.
+  forall temp___162:bool. forall temp___1621:integer.
+  forall temp___1622:bool. forall temp___164:bool.
+  forall temp___1641:integer. forall temp___1642:bool.
+  forall temp___165:bool. forall temp___1651:integer.
+  forall temp___1652:bool. forall temp___167:bool.
+  forall temp___1671:integer. forall temp___1672:bool. forall result:integer.
+  forall result1:bool. forall x__split_fields2:integer.
+  forall x__split_fields3:bool. forall result2:integer. forall result3:bool.
+  forall y__split_fields2:integer. forall y__split_fields3:bool.
+  forall x__split_fields4:integer. forall x__split_fields5:bool.
+  forall y__split_fields4:integer. forall y__split_fields5:bool.
+  forall x__split_fields6:integer. forall x__split_fields7:bool.
+  forall y__split_fields6:integer. forall y__split_fields7:bool.
+  (((bool_eq3({ us_split_discrs1 = { rec__q__t__b = x__split_discrs };
+  us_split_fields1 = { rec__q__t__a = x__split_fields; rec__q__t__c =
+  x__split_fields1 } }, { us_split_discrs1 = { rec__q__t__b = y__split_discrs
+  }; us_split_fields1 = { rec__q__t__a = y__split_fields; rec__q__t__c =
+  y__split_fields1 } }) = true) and (((x__split_discrs = r4b) and (((({
+  us_split_discrs1 = { rec__q__t__b = temp___162 }; us_split_fields1 = {
+  rec__q__t__a = temp___1621; rec__q__t__c = temp___1622 } } = change({
+  us_split_discrs1 = { rec__q__t__b = x__split_discrs }; us_split_fields1 = {
+  rec__q__t__a = x__split_fields; rec__q__t__c = x__split_fields1 } })) and
+  ((temp___162 = x__split_discrs) and ({ us_split_discrs1 = { rec__q__t__b =
+  temp___164 }; us_split_fields1 = { rec__q__t__a = temp___1641;
+  rec__q__t__c = temp___1642 } } = { us_split_discrs1 = { rec__q__t__b =
+  temp___162 }; us_split_fields1 = { rec__q__t__a = temp___1621;
+  rec__q__t__c = temp___1622 } }))) and ((({ us_split_fields__content = {
+  rec__q__t__a = result; rec__q__t__c = result1 } } = {
+  us_split_fields__content = { rec__q__t__a = x__split_fields; rec__q__t__c =
+  x__split_fields1 } }) and ((temp___1641 = x__split_fields2) and
+  (temp___1642 = x__split_fields3))) and (x__split_discrs = temp___164))) and
+  ((y__split_discrs = r6b) and ((({ us_split_discrs1 = { rec__q__t__b =
+  temp___165 }; us_split_fields1 = { rec__q__t__a = temp___1651;
+  rec__q__t__c = temp___1652 } } = change({ us_split_discrs1 = {
+  rec__q__t__b = y__split_discrs }; us_split_fields1 = { rec__q__t__a =
+  y__split_fields; rec__q__t__c = y__split_fields1 } })) and
+  ((temp___165 = y__split_discrs) and ((temp___167 = temp___165) and
+  ((temp___1671 = temp___1651) and (temp___1672 = temp___1652))))) and
+  ((((result2 = y__split_fields) and (result3 = y__split_fields1)) and
+  ((temp___1671 = y__split_fields2) and
+  (temp___1672 = y__split_fields3))) and
+  (y__split_discrs = temp___167)))))) and
+  ((((y__split_fields4 = y__split_fields2) and
+  (y__split_fields5 = y__split_fields3)) and
+  ((x__split_fields4 = x__split_fields2) and
+  (x__split_fields5 = x__split_fields3))) and
+  (((y__split_fields6 = y__split_fields2) and
+  (y__split_fields7 = y__split_fields3)) and
+  ((x__split_fields6 = x__split_fields2) and
+  (x__split_fields7 = x__split_fields3)))))) -> (bool_eq3({
+  us_split_discrs1 = { rec__q__t__b = x__split_discrs }; us_split_fields1 = {
+  rec__q__t__a = x__split_fields4; rec__q__t__c = x__split_fields5 } }, {
+  us_split_discrs1 = { rec__q__t__b = y__split_discrs }; us_split_fields1 = {
+  rec__q__t__a = y__split_fields4; rec__q__t__c = y__split_fields5 }
+  }) = true)))

@@ -1,0 +1,322 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+type log_count
+
+predicate in_range(x: int) = ((0 <= x) and (x <= 10000))
+
+logic bool_eq : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq1 : int, int -> bool
+
+axiom bool_eq_def :
+  (forall x:int. forall y:int [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> int
+
+logic user_eq : log_count, log_count -> bool
+
+logic dummy : log_count
+
+type log_count__ref = { log_count__content : log_count
+}
+
+function log_count__ref___projection(a: log_count__ref) : log_count =
+  (a).log_count__content
+
+logic to_rep : log_count -> int
+
+logic of_rep : int -> log_count
+
+axiom inversion_axiom :
+  (forall x:log_count [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:log_count [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type us_split_fields = { rec__logging__log_type_public__tmp : log_count;
+rec__ext__ : us_private
+}
+
+function us_split_fields_Tmp__projection(a: us_split_fields) : log_count =
+  (a).rec__logging__log_type_public__tmp
+
+function us_split_fields_2__projection(a: us_split_fields) : us_private =
+  (a).rec__ext__
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref_2__projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields; attr__tag : int
+}
+
+function us_rep_3__projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+function us_rep_4__projection(a: us_rep) : int = (a).attr__tag
+
+logic bool_eq2 : us_rep, us_rep -> bool
+
+axiom bool_eq_def1 :
+  (forall a:us_rep. forall b:us_rep [bool_eq2(a, b)].
+  (((to_rep(((a).us_split_fields1).rec__logging__log_type_public__tmp) = to_rep(((b).us_split_fields1).rec__logging__log_type_public__tmp)) ->
+  (bool_eq2(a, b) = true)) and
+  ((not (to_rep(((a).us_split_fields1).rec__logging__log_type_public__tmp) = to_rep(((b).us_split_fields1).rec__logging__log_type_public__tmp))) ->
+  (bool_eq2(a, b) = false))))
+
+logic us_dispatch_eq : us_rep, us_rep -> bool
+
+logic us_tag : int
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:log_count. forall a1:us_private. forall a2:int.
+  (0 <= object__size({ us_split_fields1 = {
+  rec__logging__log_type_public__tmp = a; rec__ext__ = a1 }; attr__tag = a2
+  })))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:log_count. forall a1:us_private. forall a2:int.
+  (0 <= object__alignment({ us_split_fields1 = {
+  rec__logging__log_type_public__tmp = a; rec__ext__ = a1 }; attr__tag = a2
+  })))
+
+logic logging__log_type_public__tmp__first__bit : int
+
+logic logging__log_type_public__tmp__last__bit : int
+
+logic logging__log_type_public__tmp__position : int
+
+axiom logging__log_type_public__tmp__first__bit_axiom :
+  (0 <= logging__log_type_public__tmp__first__bit)
+
+axiom logging__log_type_public__tmp__last__bit_axiom :
+  (logging__log_type_public__tmp__first__bit <  logging__log_type_public__tmp__last__bit)
+
+axiom logging__log_type_public__tmp__position_axiom :
+  (0 <= logging__log_type_public__tmp__position)
+
+logic user_eq1 : us_rep, us_rep -> bool
+
+logic dummy1 : log_count
+
+logic dummy2 : us_private
+
+logic dummy3 : int
+
+type log_type_public__ref = { log_type_public__content : us_rep
+}
+
+function log_type_public__ref___projection(a: log_type_public__ref) : us_rep =
+  (a).log_type_public__content
+
+logic log_size__2 : us_rep -> int
+
+logic log_size__2__function_guard : int, us_rep -> prop
+
+logic log_size__21 : int, us_rep -> int
+
+logic log_size__2__function_guard1 : int, int, us_rep -> prop
+
+logic init_log__2__specific_post : int, us_split_fields, int,
+  us_split_fields -> prop
+
+axiom logging__log_type_public__compat_axiom :
+  (forall logging__init_log__2__log__fields:log_count.
+  forall logging__init_log__2__log__fields1:us_private.
+  forall logging__init_log__2__log__old__fields:log_count.
+  forall logging__init_log__2__log__old__fields1:us_private.
+  (forall log__attr__tag:int [init_log__2__specific_post(us_tag, {
+  rec__logging__log_type_public__tmp = logging__init_log__2__log__fields;
+  rec__ext__ = logging__init_log__2__log__fields1 }, log__attr__tag, {
+  rec__logging__log_type_public__tmp =
+  logging__init_log__2__log__old__fields; rec__ext__ =
+  logging__init_log__2__log__old__fields1 })].
+  (init_log__2__specific_post(us_tag, { rec__logging__log_type_public__tmp =
+  logging__init_log__2__log__fields; rec__ext__ =
+  logging__init_log__2__log__fields1 }, log__attr__tag, {
+  rec__logging__log_type_public__tmp =
+  logging__init_log__2__log__old__fields; rec__ext__ =
+  logging__init_log__2__log__old__fields1 }) -> (log_size__2({
+  us_split_fields1 = { rec__logging__log_type_public__tmp =
+  logging__init_log__2__log__fields; rec__ext__ =
+  logging__init_log__2__log__fields1 }; attr__tag = log__attr__tag }) = 0))))
+
+logic append_to_log__2__specific_post : int, us_split_fields, int, int,
+  us_split_fields -> prop
+
+axiom logging__log_type_public__compat_axiom1 :
+  (forall logging__append_to_log__2__log__fields:log_count.
+  forall logging__append_to_log__2__log__fields1:us_private.
+  forall logging__append_to_log__2__log__old__fields:log_count.
+  forall logging__append_to_log__2__log__old__fields1:us_private.
+  (forall log__attr__tag:int. forall incr:int
+  [append_to_log__2__specific_post(us_tag, {
+  rec__logging__log_type_public__tmp =
+  logging__append_to_log__2__log__fields; rec__ext__ =
+  logging__append_to_log__2__log__fields1 }, log__attr__tag, incr, {
+  rec__logging__log_type_public__tmp =
+  logging__append_to_log__2__log__old__fields; rec__ext__ =
+  logging__append_to_log__2__log__old__fields1 })].
+  (append_to_log__2__specific_post(us_tag, {
+  rec__logging__log_type_public__tmp =
+  logging__append_to_log__2__log__fields; rec__ext__ =
+  logging__append_to_log__2__log__fields1 }, log__attr__tag, incr, {
+  rec__logging__log_type_public__tmp =
+  logging__append_to_log__2__log__old__fields; rec__ext__ =
+  logging__append_to_log__2__log__old__fields1 }) -> (log_size__2({
+  us_split_fields1 = { rec__logging__log_type_public__tmp =
+  logging__append_to_log__2__log__fields; rec__ext__ =
+  logging__append_to_log__2__log__fields1 }; attr__tag = log__attr__tag
+  }) = (log_size__2({ us_split_fields1 = {
+  rec__logging__log_type_public__tmp =
+  logging__append_to_log__2__log__old__fields; rec__ext__ =
+  logging__append_to_log__2__log__old__fields1 }; attr__tag = log__attr__tag
+  }) + 1)))))
+
+logic log__attr__tag : int
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+axiom log_size__2__post_axiom :
+  (forall log:log_count. forall log1:us_private. forall log2:int
+  [log_size__2({ us_split_fields1 = { rec__logging__log_type_public__tmp =
+  log; rec__ext__ = log1 }; attr__tag = log2 })]. in_range(log_size__2({
+  us_split_fields1 = { rec__logging__log_type_public__tmp = log; rec__ext__ =
+  log1 }; attr__tag = log2 })))
+
+axiom log_size__2__post__dispatch_axiom :
+  (forall attr__tag1:int.
+  (forall log:log_count. forall log1:us_private. forall log2:int
+  [log_size__21(attr__tag1, { us_split_fields1 = {
+  rec__logging__log_type_public__tmp = log; rec__ext__ = log1 }; attr__tag =
+  log2 })]. in_range(log_size__21(attr__tag1, { us_split_fields1 = {
+  rec__logging__log_type_public__tmp = log; rec__ext__ = log1 }; attr__tag =
+  log2 }))))
+
+axiom logging__log_type_public__compat_axiom2 :
+  (forall log:log_count. forall log1:us_private. forall log2:int
+  [log_size__21(us_tag, { us_split_fields1 = {
+  rec__logging__log_type_public__tmp = log; rec__ext__ = log1 }; attr__tag =
+  log2 })]. (log_size__2({ us_split_fields1 = {
+  rec__logging__log_type_public__tmp = log; rec__ext__ = log1 }; attr__tag =
+  log2 }) = log_size__21(us_tag, { us_split_fields1 = {
+  rec__logging__log_type_public__tmp = log; rec__ext__ = log1 }; attr__tag =
+  log2 })))
+
+ (* File "foo.adb", line 8, characters 0-0 *)
+goal WP_parameter_def :
+  (forall log__split_fields:log_count. forall log__split_fields1:us_private.
+  forall logging__init_log__2__log__fields:log_count.
+  forall logging__init_log__2__log__fields1:us_private.
+  forall result:log_count. forall result1:us_private.
+  forall log__split_fields2:log_count. forall log__split_fields3:us_private.
+  (((log_size__2({ us_split_fields1 = { rec__logging__log_type_public__tmp =
+  logging__init_log__2__log__fields; rec__ext__ =
+  logging__init_log__2__log__fields1 }; attr__tag = log__attr__tag
+  }) = 0) and (((result = log__split_fields) and
+  (result1 = log__split_fields1)) and ({ rec__logging__log_type_public__tmp =
+  log__split_fields2; rec__ext__ = log__split_fields3 } = {
+  rec__logging__log_type_public__tmp = logging__init_log__2__log__fields;
+  rec__ext__ = logging__init_log__2__log__fields1 }))) ->
+  (log_size__21(log__attr__tag, { us_split_fields1 = {
+  rec__logging__log_type_public__tmp = log__split_fields2; rec__ext__ =
+  log__split_fields3 }; attr__tag = log__attr__tag }) <  10000)))

@@ -1,0 +1,471 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+type us_main_type
+
+logic us_main_eq : us_main_type, us_main_type -> bool
+
+type us_split_fields = { rec__private_types__root : us_main_type; rec__ext__
+: us_private
+}
+
+function us_split_fields_Root__projection(a: us_split_fields) : us_main_type =
+  (a).rec__private_types__root
+
+function us_split_fields___projection(a: us_split_fields) : us_private =
+  (a).rec__ext__
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields; attr__tag : int
+}
+
+function us_rep___projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+function us_rep_2__projection(a: us_rep) : int = (a).attr__tag
+
+logic bool_eq : us_rep, us_rep -> bool
+
+axiom bool_eq_def :
+  (forall a:us_rep. forall b:us_rep [bool_eq(a, b)].
+  (((us_main_eq(((a).us_split_fields1).rec__private_types__root,
+  ((b).us_split_fields1).rec__private_types__root) = true) -> (bool_eq(a,
+  b) = true)) and
+  ((not (us_main_eq(((a).us_split_fields1).rec__private_types__root,
+  ((b).us_split_fields1).rec__private_types__root) = true)) -> (bool_eq(a,
+  b) = false))))
+
+logic us_dispatch_eq : us_rep, us_rep -> bool
+
+logic us_tag : int
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:us_main_type. forall a1:us_private. forall a2:int.
+  (0 <= object__size({ us_split_fields1 = { rec__private_types__root = a;
+  rec__ext__ = a1 }; attr__tag = a2 })))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:us_main_type. forall a1:us_private. forall a2:int.
+  (0 <= object__alignment({ us_split_fields1 = { rec__private_types__root =
+  a; rec__ext__ = a1 }; attr__tag = a2 })))
+
+logic user_eq : us_rep, us_rep -> bool
+
+logic dummy : us_main_type
+
+logic dummy1 : us_private
+
+logic dummy2 : int
+
+type root__ref = { root__content : us_rep
+}
+
+function root__ref___projection(a: root__ref) : us_rep = (a).root__content
+
+type natural
+
+predicate in_range(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> int
+
+logic user_eq1 : natural, natural -> bool
+
+logic dummy3 : natural
+
+type natural__ref = { natural__content : natural
+}
+
+function natural__ref___projection(a: natural__ref) : natural =
+  (a).natural__content
+
+logic to_rep : natural -> int
+
+logic of_rep : int -> natural
+
+axiom inversion_axiom :
+  (forall x:natural [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:natural [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type us_main_type1
+
+logic us_main_eq1 : us_main_type1, us_main_type1 -> bool
+
+type us_split_discrs = { rec__private_types__root_d__c : natural
+}
+
+function us_split_discrs___projection(a: us_split_discrs) : natural =
+  (a).rec__private_types__root_d__c
+
+type us_split_discrs__ref = { us_split_discrs__content : us_split_discrs
+}
+
+function us_split_discrs__ref___projection(a: us_split_discrs__ref) : us_split_discrs =
+  (a).us_split_discrs__content
+
+type us_split_fields2 = { rec__private_types__root_d : us_main_type1;
+rec__ext__1 : us_private
+}
+
+function us_split_fields_Root_D__projection(a: us_split_fields2) : us_main_type1 =
+  (a).rec__private_types__root_d
+
+function us_split_fields_2__projection(a: us_split_fields2) : us_private =
+  (a).rec__ext__1
+
+type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
+}
+
+function us_split_fields__ref_2__projection(a: us_split_fields__ref1) : us_split_fields2 =
+  (a).us_split_fields__content1
+
+type us_rep1 = { us_split_discrs1 : us_split_discrs; us_split_fields3 :
+us_split_fields2; attr__tag1 : int
+}
+
+function us_rep_3__projection(a: us_rep1) : us_split_discrs =
+  (a).us_split_discrs1
+
+function us_rep_4__projection(a: us_rep1) : us_split_fields2 =
+  (a).us_split_fields3
+
+function us_rep_5__projection(a: us_rep1) : int = (a).attr__tag1
+
+logic bool_eq3 : us_rep1, us_rep1 -> bool
+
+axiom bool_eq_def2 :
+  (forall a:us_rep1. forall b:us_rep1 [bool_eq3(a, b)].
+  ((((to_rep(((a).us_split_discrs1).rec__private_types__root_d__c) = to_rep(((b).us_split_discrs1).rec__private_types__root_d__c)) and
+  (us_main_eq1(((a).us_split_fields3).rec__private_types__root_d,
+  ((b).us_split_fields3).rec__private_types__root_d) = true)) -> (bool_eq3(a,
+  b) = true)) and
+  ((not ((to_rep(((a).us_split_discrs1).rec__private_types__root_d__c) = to_rep(((b).us_split_discrs1).rec__private_types__root_d__c)) and
+  (us_main_eq1(((a).us_split_fields3).rec__private_types__root_d,
+  ((b).us_split_fields3).rec__private_types__root_d) = true))) ->
+  (bool_eq3(a, b) = false))))
+
+logic us_dispatch_eq1 : us_rep1, us_rep1 -> bool
+
+logic us_tag1 : int
+
+logic value__size1 : int
+
+logic object__size1 : us_rep1 -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : us_rep1 -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 :
+  (forall a:natural. forall a1:us_main_type1. forall a2:us_private.
+  forall a3:int. (0 <= object__size1({ us_split_discrs1 = {
+  rec__private_types__root_d__c = a }; us_split_fields3 = {
+  rec__private_types__root_d = a1; rec__ext__1 = a2 }; attr__tag1 = a3 })))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:natural. forall a1:us_main_type1. forall a2:us_private.
+  forall a3:int. (0 <= object__alignment1({ us_split_discrs1 = {
+  rec__private_types__root_d__c = a }; us_split_fields3 = {
+  rec__private_types__root_d = a1; rec__ext__1 = a2 }; attr__tag1 = a3 })))
+
+logic private_types__root_d__c__first__bit : int
+
+logic private_types__root_d__c__last__bit : int
+
+logic private_types__root_d__c__position : int
+
+axiom private_types__root_d__c__first__bit_axiom :
+  (0 <= private_types__root_d__c__first__bit)
+
+axiom private_types__root_d__c__last__bit_axiom :
+  (private_types__root_d__c__first__bit <  private_types__root_d__c__last__bit)
+
+axiom private_types__root_d__c__position_axiom :
+  (0 <= private_types__root_d__c__position)
+
+logic user_eq2 : us_rep1, us_rep1 -> bool
+
+logic dummy4 : natural
+
+logic dummy5 : us_main_type1
+
+logic dummy6 : us_private
+
+logic dummy7 : int
+
+type root_d__ref = { root_d__content : us_rep1
+}
+
+function root_d__ref___projection(a: root_d__ref) : us_rep1 =
+  (a).root_d__content
+
+logic c : us_main_type
+
+logic c1 : us_private
+
+logic c2 : int
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic c_d : natural
+
+logic c_d1 : us_main_type1
+
+logic c_d2 : us_private
+
+logic c_d3 : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+type us_main_type2
+
+logic us_main_eq2 : us_main_type2, us_main_type2 -> bool
+
+type us_split_discrs2 = { rec__private_types__non_tagged__c : natural
+}
+
+function us_split_discrs_2__projection(a: us_split_discrs2) : natural =
+  (a).rec__private_types__non_tagged__c
+
+type us_split_discrs__ref1 = { us_split_discrs__content1 : us_split_discrs2
+}
+
+function us_split_discrs__ref_2__projection(a: us_split_discrs__ref1) : us_split_discrs2 =
+  (a).us_split_discrs__content1
+
+type us_split_fields4 = { rec__private_types__non_tagged : us_main_type2
+}
+
+function us_split_fields_Non_Tagged__projection(a: us_split_fields4) : us_main_type2 =
+  (a).rec__private_types__non_tagged
+
+type us_split_fields__ref2 = { us_split_fields__content2 : us_split_fields4
+}
+
+function us_split_fields__ref_3__projection(a: us_split_fields__ref2) : us_split_fields4 =
+  (a).us_split_fields__content2
+
+type us_rep2 = { us_split_discrs3 : us_split_discrs2; us_split_fields5 :
+us_split_fields4
+}
+
+function us_rep_6__projection(a: us_rep2) : us_split_discrs2 =
+  (a).us_split_discrs3
+
+function us_rep_7__projection(a: us_rep2) : us_split_fields4 =
+  (a).us_split_fields5
+
+logic bool_eq4 : us_rep2, us_rep2 -> bool
+
+axiom bool_eq_def3 :
+  (forall a:us_rep2. forall b:us_rep2 [bool_eq4(a, b)].
+  ((((to_rep(((a).us_split_discrs3).rec__private_types__non_tagged__c) = to_rep(((b).us_split_discrs3).rec__private_types__non_tagged__c)) and
+  (us_main_eq2(((a).us_split_fields5).rec__private_types__non_tagged,
+  ((b).us_split_fields5).rec__private_types__non_tagged) = true)) ->
+  (bool_eq4(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_discrs3).rec__private_types__non_tagged__c) = to_rep(((b).us_split_discrs3).rec__private_types__non_tagged__c)) and
+  (us_main_eq2(((a).us_split_fields5).rec__private_types__non_tagged,
+  ((b).us_split_fields5).rec__private_types__non_tagged) = true))) ->
+  (bool_eq4(a, b) = false))))
+
+logic value__size2 : int
+
+logic object__size2 : us_rep2 -> int
+
+logic value__alignment2 : int
+
+logic object__alignment2 : us_rep2 -> int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 :
+  (forall a:natural. forall a1:us_main_type2. (0 <= object__size2({
+  us_split_discrs3 = { rec__private_types__non_tagged__c = a };
+  us_split_fields5 = { rec__private_types__non_tagged = a1 } })))
+
+axiom value__alignment_axiom2 : (0 <= value__alignment2)
+
+axiom object__alignment_axiom2 :
+  (forall a:natural. forall a1:us_main_type2. (0 <= object__alignment2({
+  us_split_discrs3 = { rec__private_types__non_tagged__c = a };
+  us_split_fields5 = { rec__private_types__non_tagged = a1 } })))
+
+logic private_types__non_tagged__c__first__bit : int
+
+logic private_types__non_tagged__c__last__bit : int
+
+logic private_types__non_tagged__c__position : int
+
+axiom private_types__non_tagged__c__first__bit_axiom :
+  (0 <= private_types__non_tagged__c__first__bit)
+
+axiom private_types__non_tagged__c__last__bit_axiom :
+  (private_types__non_tagged__c__first__bit <  private_types__non_tagged__c__last__bit)
+
+axiom private_types__non_tagged__c__position_axiom :
+  (0 <= private_types__non_tagged__c__position)
+
+logic user_eq3 : us_rep2, us_rep2 -> bool
+
+logic dummy8 : natural
+
+logic dummy9 : us_main_type2
+
+type non_tagged__ref = { non_tagged__content : us_rep2
+}
+
+function non_tagged__ref___projection(a: non_tagged__ref) : us_rep2 =
+  (a).non_tagged__content
+
+logic c_nt : natural
+
+logic c_nt1 : us_main_type2
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic pr__attr__tag : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic pr_d__split_discrs : natural
+
+logic pr_d__attr__tag : int
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic pr_nt__split_discrs : natural
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
+ (* File "use_private_type.adb", line 3, characters 0-0 *)
+goal WP_parameter_def :
+  (forall pr__split_fields:us_main_type. forall pr__split_fields1:us_private.
+  forall pr_d__split_fields:us_main_type1.
+  forall pr_d__split_fields1:us_private.
+  forall pr_nt__split_fields:us_main_type2. forall result:us_main_type.
+  forall result1:us_private. forall pr__split_fields2:us_main_type.
+  forall pr__split_fields3:us_private. forall result2:us_main_type1.
+  forall result3:us_private. forall pr_d__split_fields2:us_main_type1.
+  forall pr_d__split_fields3:us_private. forall result4:us_main_type2.
+  forall pr_nt__split_fields1:us_main_type2.
+  (((((result = pr__split_fields) and (result1 = pr__split_fields1)) and
+  ((pr__split_fields2 = c) and (pr__split_fields3 = c1))) and
+  (pr__attr__tag = c2)) -> (((((result2 = pr_d__split_fields) and
+  (result3 = pr_d__split_fields1)) and ((pr_d__split_fields2 = c_d1) and
+  (pr_d__split_fields3 = c_d2))) and ((pr_d__split_discrs = c_d) and
+  (pr_d__attr__tag = c_d3))) -> ((((result4 = pr_nt__split_fields) and
+  (pr_nt__split_fields1 = c_nt1)) and (pr_nt__split_discrs = c_nt)) ->
+  ((pr__attr__tag = us_tag) -> (pr_d__attr__tag = us_tag1))))))

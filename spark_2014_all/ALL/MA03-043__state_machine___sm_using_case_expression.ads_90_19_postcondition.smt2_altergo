@@ -1,0 +1,962 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type states_t
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 3))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : states_t, states_t -> bool
+
+logic dummy : states_t
+
+type states_t__ref = { states_t__content : states_t
+}
+
+function states_t__ref___projection(a: states_t__ref) : states_t =
+  (a).states_t__content
+
+logic to_rep : states_t -> int
+
+logic of_rep : int -> states_t
+
+axiom inversion_axiom :
+  (forall x:states_t [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:states_t [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type triggers_t
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 4))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : triggers_t, triggers_t -> bool
+
+logic dummy1 : triggers_t
+
+type triggers_t__ref = { triggers_t__content : triggers_t
+}
+
+function triggers_t__ref___projection(a: triggers_t__ref) : triggers_t =
+  (a).triggers_t__content
+
+logic to_rep1 : triggers_t -> int
+
+logic of_rep1 : int -> triggers_t
+
+axiom inversion_axiom1 :
+  (forall x:triggers_t [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 :
+  (forall x:triggers_t [to_rep1(x)]. in_range2(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic get_state : int -> int
+
+logic get_state__function_guard : int, int -> prop
+
+axiom get_state__post_axiom :
+  (forall sm_using_case_expression__state:int
+  [get_state(sm_using_case_expression__state)].
+  (in_range1(sm_using_case_expression__state) ->
+  in_range1(get_state(sm_using_case_expression__state))))
+
+axiom get_state__def_axiom :
+  (forall sm_using_case_expression__state:int
+  [get_state(sm_using_case_expression__state)].
+  (in_range1(sm_using_case_expression__state) ->
+  (get_state(sm_using_case_expression__state) = sm_using_case_expression__state)))
+
+type us_split_fields = {
+rec__sm_using_case_expression__invalid_transition_record_t__initial_state :
+states_t; rec__sm_using_case_expression__invalid_transition_record_t__trigger
+: triggers_t
+}
+
+function us_split_fields_Initial_State__projection(a: us_split_fields) : states_t =
+  (a).rec__sm_using_case_expression__invalid_transition_record_t__initial_state
+
+function us_split_fields_Trigger__projection(a: us_split_fields) : triggers_t =
+  (a).rec__sm_using_case_expression__invalid_transition_record_t__trigger
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+function us_rep___projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+logic bool_eq4 : us_rep, us_rep -> bool
+
+axiom bool_eq_def3 :
+  (forall a:us_rep. forall b:us_rep [bool_eq4(a, b)].
+  ((((to_rep(((a).us_split_fields1).rec__sm_using_case_expression__invalid_transition_record_t__initial_state) = to_rep(((b).us_split_fields1).rec__sm_using_case_expression__invalid_transition_record_t__initial_state)) and
+  (to_rep1(((a).us_split_fields1).rec__sm_using_case_expression__invalid_transition_record_t__trigger) = to_rep1(((b).us_split_fields1).rec__sm_using_case_expression__invalid_transition_record_t__trigger))) ->
+  (bool_eq4(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_fields1).rec__sm_using_case_expression__invalid_transition_record_t__initial_state) = to_rep(((b).us_split_fields1).rec__sm_using_case_expression__invalid_transition_record_t__initial_state)) and
+  (to_rep1(((a).us_split_fields1).rec__sm_using_case_expression__invalid_transition_record_t__trigger) = to_rep1(((b).us_split_fields1).rec__sm_using_case_expression__invalid_transition_record_t__trigger)))) ->
+  (bool_eq4(a, b) = false))))
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:states_t. forall a1:triggers_t. (0 <= object__size({
+  us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  a; rec__sm_using_case_expression__invalid_transition_record_t__trigger = a1
+  } })))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:states_t. forall a1:triggers_t. (0 <= object__alignment({
+  us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  a; rec__sm_using_case_expression__invalid_transition_record_t__trigger = a1
+  } })))
+
+logic sm_using_case_expression__invalid_transition_record_t__initial_state__first__bit : int
+
+logic sm_using_case_expression__invalid_transition_record_t__initial_state__last__bit : int
+
+logic sm_using_case_expression__invalid_transition_record_t__initial_state__position : int
+
+axiom sm_using_case_expression__invalid_transition_record_t__initial_state__first__bit_axiom :
+  (0 <= sm_using_case_expression__invalid_transition_record_t__initial_state__first__bit)
+
+axiom sm_using_case_expression__invalid_transition_record_t__initial_state__last__bit_axiom :
+  (sm_using_case_expression__invalid_transition_record_t__initial_state__first__bit <  sm_using_case_expression__invalid_transition_record_t__initial_state__last__bit)
+
+axiom sm_using_case_expression__invalid_transition_record_t__initial_state__position_axiom :
+  (0 <= sm_using_case_expression__invalid_transition_record_t__initial_state__position)
+
+logic sm_using_case_expression__invalid_transition_record_t__trigger__first__bit : int
+
+logic sm_using_case_expression__invalid_transition_record_t__trigger__last__bit : int
+
+logic sm_using_case_expression__invalid_transition_record_t__trigger__position : int
+
+axiom sm_using_case_expression__invalid_transition_record_t__trigger__first__bit_axiom :
+  (0 <= sm_using_case_expression__invalid_transition_record_t__trigger__first__bit)
+
+axiom sm_using_case_expression__invalid_transition_record_t__trigger__last__bit_axiom :
+  (sm_using_case_expression__invalid_transition_record_t__trigger__first__bit <  sm_using_case_expression__invalid_transition_record_t__trigger__last__bit)
+
+axiom sm_using_case_expression__invalid_transition_record_t__trigger__position_axiom :
+  (0 <= sm_using_case_expression__invalid_transition_record_t__trigger__position)
+
+logic user_eq2 : us_rep, us_rep -> bool
+
+logic dummy2 : states_t
+
+logic dummy3 : triggers_t
+
+type invalid_transition_record_t__ref = {
+invalid_transition_record_t__content : us_rep
+}
+
+function invalid_transition_record_t__ref___projection(a: invalid_transition_record_t__ref) : us_rep =
+  (a).invalid_transition_record_t__content
+
+type map__ref = { map__content : (int,us_rep) farray
+}
+
+logic slide : (int,us_rep) farray, int, int -> (int,us_rep) farray
+
+axiom slide_eq :
+  (forall a:(int,us_rep) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,us_rep) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
+  int -> (int,us_rep) farray
+
+axiom concat_def :
+  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton : us_rep, int -> (int,us_rep) farray
+
+axiom singleton_def :
+  (forall v:states_t. forall v1:triggers_t.
+  (forall i:int [(singleton({ us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  v; rec__sm_using_case_expression__invalid_transition_record_t__trigger = v1
+  } }, i)[i])]. ((singleton({ us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  v; rec__sm_using_case_expression__invalid_transition_record_t__trigger = v1
+  } }, i)[i]) = { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  v; rec__sm_using_case_expression__invalid_transition_record_t__trigger = v1
+  } })))
+
+logic bool_eq5 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
+  int -> bool
+
+axiom bool_eq_def4 :
+  (forall a:(int,us_rep) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,us_rep) farray. forall b__first:int. forall b__last:int
+  [bool_eq5(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) and (bool_eq4((a[temp___idx_132]),
+  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
+  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) -> (bool_eq4((a[temp___idx_132]),
+  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq5(a,
+  a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev :
+  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq5(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) -> (bool_eq4((a[temp___idx_132]),
+  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+
+logic invalid_transition_array : (int,us_rep) farray
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic sm_using_case_expression__invalid_transition_array__aggregate_def : us_rep,
+  us_rep, us_rep, us_rep, us_rep, us_rep, us_rep, us_rep,
+  us_rep -> (int,us_rep) farray
+
+axiom def_axiom :
+  (forall temp___134:states_t. forall temp___1341:triggers_t.
+  forall temp___135:states_t. forall temp___1351:triggers_t.
+  forall temp___136:states_t. forall temp___1361:triggers_t.
+  forall temp___137:states_t. forall temp___1371:triggers_t.
+  forall temp___138:states_t. forall temp___1381:triggers_t.
+  forall temp___139:states_t. forall temp___1391:triggers_t.
+  forall temp___140:states_t. forall temp___1401:triggers_t.
+  forall temp___141:states_t. forall temp___1411:triggers_t.
+  forall temp___142:states_t. forall temp___1421:triggers_t.
+  (forall temp___143:int. (((temp___143 = 8) ->
+  ((sm_using_case_expression__invalid_transition_array__aggregate_def({
+  us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___134;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1341 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___135;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1351 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___136;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1361 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___137;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1371 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___138;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1381 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___139;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1391 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___140;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1401 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___141;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1411 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___142;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1421 } })[temp___143]) = { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___141;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1411 } })) and ((not (temp___143 = 8)) -> (((temp___143 = 7) ->
+  ((sm_using_case_expression__invalid_transition_array__aggregate_def({
+  us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___134;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1341 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___135;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1351 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___136;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1361 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___137;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1371 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___138;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1381 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___139;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1391 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___140;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1401 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___141;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1411 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___142;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1421 } })[temp___143]) = { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___140;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1401 } })) and ((not (temp___143 = 7)) -> (((temp___143 = 6) ->
+  ((sm_using_case_expression__invalid_transition_array__aggregate_def({
+  us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___134;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1341 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___135;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1351 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___136;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1361 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___137;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1371 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___138;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1381 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___139;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1391 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___140;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1401 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___141;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1411 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___142;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1421 } })[temp___143]) = { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___139;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1391 } })) and ((not (temp___143 = 6)) -> (((temp___143 = 5) ->
+  ((sm_using_case_expression__invalid_transition_array__aggregate_def({
+  us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___134;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1341 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___135;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1351 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___136;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1361 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___137;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1371 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___138;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1381 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___139;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1391 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___140;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1401 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___141;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1411 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___142;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1421 } })[temp___143]) = { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___138;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1381 } })) and ((not (temp___143 = 5)) -> (((temp___143 = 4) ->
+  ((sm_using_case_expression__invalid_transition_array__aggregate_def({
+  us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___134;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1341 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___135;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1351 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___136;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1361 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___137;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1371 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___138;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1381 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___139;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1391 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___140;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1401 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___141;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1411 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___142;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1421 } })[temp___143]) = { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___137;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1371 } })) and ((not (temp___143 = 4)) -> (((temp___143 = 3) ->
+  ((sm_using_case_expression__invalid_transition_array__aggregate_def({
+  us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___134;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1341 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___135;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1351 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___136;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1361 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___137;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1371 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___138;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1381 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___139;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1391 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___140;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1401 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___141;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1411 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___142;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1421 } })[temp___143]) = { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___136;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1361 } })) and ((not (temp___143 = 3)) -> (((temp___143 = 2) ->
+  ((sm_using_case_expression__invalid_transition_array__aggregate_def({
+  us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___134;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1341 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___135;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1351 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___136;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1361 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___137;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1371 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___138;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1381 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___139;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1391 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___140;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1401 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___141;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1411 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___142;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1421 } })[temp___143]) = { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___135;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1351 } })) and ((not (temp___143 = 2)) -> (((temp___143 = 1) ->
+  ((sm_using_case_expression__invalid_transition_array__aggregate_def({
+  us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___134;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1341 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___135;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1351 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___136;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1361 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___137;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1371 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___138;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1381 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___139;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1391 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___140;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1401 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___141;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1411 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___142;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1421 } })[temp___143]) = { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___134;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1341 } })) and ((not (temp___143 = 1)) ->
+  ((sm_using_case_expression__invalid_transition_array__aggregate_def({
+  us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___134;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1341 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___135;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1351 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___136;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1361 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___137;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1371 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___138;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1381 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___139;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1391 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___140;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1401 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___141;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1411 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___142;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1421 } })[temp___143]) = { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  temp___142;
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  temp___1421 } })))))))))))))))))))
+
+logic my_sm : int, int -> int
+
+logic my_sm__function_guard : int, int, int -> prop
+
+axiom my_sm__post_axiom :
+  (forall state:int. forall trigger:int [my_sm(state, trigger)].
+  ((in_range1(state) and in_range2(trigger)) -> in_range1(my_sm(state,
+  trigger))))
+
+axiom my_sm__def_axiom :
+  (forall state:int. forall trigger:int [my_sm(state, trigger)].
+  ((in_range1(state) and in_range2(trigger)) -> (((state = 0) ->
+  (((trigger = 2) -> (my_sm(state, trigger) = 0)) and ((not (trigger = 2)) ->
+  (((trigger = 3) -> (my_sm(state, trigger) = 2)) and ((not (trigger = 3)) ->
+  (((trigger = 0) -> (my_sm(state, trigger) = 1)) and ((not (trigger = 0)) ->
+  (((trigger = 1) -> (my_sm(state, trigger) = 0)) and ((not (trigger = 1)) ->
+  (my_sm(state, trigger) = 3)))))))))) and ((not (state = 0)) ->
+  (((state = 1) -> (((trigger = 2) -> (my_sm(state, trigger) = 0)) and
+  ((not (trigger = 2)) -> (((trigger = 3) -> (my_sm(state, trigger) = 2)) and
+  ((not (trigger = 3)) -> (((trigger = 0) -> (my_sm(state, trigger) = 2)) and
+  ((not (trigger = 0)) -> (((trigger = 1) -> (my_sm(state, trigger) = 1)) and
+  ((not (trigger = 1)) -> (my_sm(state, trigger) = 3)))))))))) and
+  ((not (state = 1)) -> (((state = 2) -> (((trigger = 2) -> (my_sm(state,
+  trigger) = 0)) and ((not (trigger = 2)) -> (((trigger = 3) -> (my_sm(state,
+  trigger) = 2)) and ((not (trigger = 3)) -> (((trigger = 0) -> (my_sm(state,
+  trigger) = 2)) and ((not (trigger = 0)) -> (((trigger = 1) -> (my_sm(state,
+  trigger) = 2)) and ((not (trigger = 1)) -> (my_sm(state,
+  trigger) = 3)))))))))) and ((not (state = 2)) -> (((trigger = 2) ->
+  (my_sm(state, trigger) = 0)) and ((not (trigger = 2)) -> (((trigger = 3) ->
+  (my_sm(state, trigger) = 2)) and ((not (trigger = 3)) -> (my_sm(state,
+  trigger) = 3)))))))))))))
+
+logic trigger : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic old_state : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+axiom invalid_transition_array__def_axiom :
+  (invalid_transition_array = sm_using_case_expression__invalid_transition_array__aggregate_def({
+  us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  of_rep(0);
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  of_rep1(4) } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  of_rep(1);
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  of_rep1(4) } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  of_rep(2);
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  of_rep1(4) } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  of_rep(3);
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  of_rep1(0) } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  of_rep(3);
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  of_rep1(1) } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  of_rep(3);
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  of_rep1(2) } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  of_rep(3);
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  of_rep1(3) } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  of_rep(3);
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  of_rep1(4) } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  of_rep(3);
+  rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  of_rep1(4) } }))
+
+ (* File "sm_types.ads", line 8, characters 0-0 *)
+goal WP_parameter_def :
+  (forall state:int. forall o:triggers_t. forall o1:states_t.
+  forall o2:states_t. forall o3:triggers_t. forall o4:triggers_t.
+  forall o5:states_t. forall o6:states_t. forall o7:triggers_t.
+  forall o8:triggers_t. forall o9:states_t. forall o10:states_t.
+  forall o11:triggers_t. forall o12:triggers_t. forall o13:states_t.
+  forall o14:states_t. forall o15:triggers_t. forall o16:triggers_t.
+  forall o17:states_t. forall o18:states_t. forall o19:triggers_t.
+  forall o20:triggers_t. forall o21:states_t. forall o22:states_t.
+  forall o23:triggers_t. forall o24:triggers_t. forall o25:states_t.
+  forall o26:states_t. forall o27:triggers_t. forall o28:triggers_t.
+  forall o29:states_t. forall o30:states_t. forall o31:triggers_t.
+  forall o32:triggers_t. forall o33:states_t. forall o34:states_t.
+  forall o35:triggers_t. forall o36:states_t. forall o37:triggers_t.
+  forall o38:states_t. forall o39:triggers_t. forall o40:states_t.
+  forall o41:triggers_t. forall o42:states_t. forall o43:triggers_t.
+  forall o44:states_t. forall o45:triggers_t. forall o46:states_t.
+  forall o47:triggers_t. forall o48:states_t. forall o49:triggers_t.
+  forall o50:states_t. forall o51:triggers_t. forall o52:states_t.
+  forall o53:triggers_t. forall temp___182:(int,us_rep) farray.
+  forall state1:int. forall state2:int. forall state3:int. forall state4:int.
+  forall state5:int. forall state6:int. forall state7:int. forall state8:int.
+  forall state9:int. (((((((to_rep1(o32) = 4) and ((to_rep(o33) = 3) and
+  ((o33 = o34) and (o32 = o35)))) and ((o36 = o34) and (o37 = o35))) and
+  ((((to_rep1(o28) = 4) and ((to_rep(o29) = 3) and ((o29 = o30) and
+  (o28 = o31)))) and ((o38 = o30) and (o39 = o31))) and
+  ((((to_rep1(o24) = 3) and ((to_rep(o25) = 3) and ((o25 = o26) and
+  (o24 = o27)))) and ((o40 = o26) and (o41 = o27))) and
+  ((((to_rep1(o20) = 2) and ((to_rep(o21) = 3) and ((o21 = o22) and
+  (o20 = o23)))) and ((o42 = o22) and (o43 = o23))) and
+  ((((to_rep1(o16) = 1) and ((to_rep(o17) = 3) and ((o17 = o18) and
+  (o16 = o19)))) and ((o44 = o18) and (o45 = o19))) and
+  ((((to_rep1(o12) = 0) and ((to_rep(o13) = 3) and ((o13 = o14) and
+  (o12 = o15)))) and ((o46 = o14) and (o47 = o15))) and
+  ((((to_rep1(o8) = 4) and ((to_rep(o9) = 2) and ((o9 = o10) and
+  (o8 = o11)))) and ((o48 = o10) and (o49 = o11))) and
+  ((((to_rep1(o4) = 4) and ((to_rep(o5) = 1) and ((o5 = o6) and
+  (o4 = o7)))) and ((o50 = o6) and (o51 = o7))) and ((((to_rep1(o) = 4) and
+  ((to_rep(o1) = 0) and ((o1 = o2) and (o = o3)))) and ((o52 = o2) and
+  (o53 = o3))) and
+  (temp___182 = sm_using_case_expression__invalid_transition_array__aggregate_def({
+  us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  o52; rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  o53 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  o50; rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  o51 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  o48; rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  o49 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  o46; rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  o47 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  o44; rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  o45 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  o42; rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  o43 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  o40; rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  o41 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  o38; rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  o39 } }, { us_split_fields1 = {
+  rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
+  o36; rec__sm_using_case_expression__invalid_transition_record_t__trigger =
+  o37 } }))))))))))) and (temp___182 = invalid_transition_array)) and
+  (in_range1(state) and (in_range2(trigger) and (((state = old_state) and
+  (in_range1(old_state) and
+  ((forall final_state:int. (((0 <= final_state) and (final_state <= 3)) ->
+   (exists initial_state:int. (((0 <= initial_state) and
+   (initial_state <= 3)) and
+   (exists trigger2:int. (((0 <= trigger2) and (trigger2 <= 4)) and
+   (final_state = my_sm(initial_state, trigger2)))))))) and
+  ((forall state21:int. (((0 <= state21) and (state21 <= 3)) ->
+   (forall trigger1:int. (((0 <= trigger1) and (trigger1 <= 4)) ->
+   ((not (my_sm(state21, trigger1) = 3)) or
+   (exists idx:int. (((1 <= idx) and (idx <= 20)) and
+   ((to_rep((((invalid_transition_array[idx])).us_split_fields1).rec__sm_using_case_expression__invalid_transition_record_t__initial_state) = state21) and
+   (to_rep1((((invalid_transition_array[idx])).us_split_fields1).rec__sm_using_case_expression__invalid_transition_record_t__trigger) = trigger1))))))))) and
+  (((trigger = 0) and (((state = 0) and ((get_state(state2) = 1) and
+  in_range1(state2))) or ((not (state = 0)) and (((((not (state = 1)) ->
+  (state = 2)) and ((get_state(state3) = 2) and in_range1(state3))) or
+  ((not ((not (state = 1)) -> (state = 2))) and (((get_state(state4) = 3) and
+  in_range1(state4)) and (state3 = state4)))) and (state2 = state3))))) or
+  ((not (trigger = 0)) and ((((trigger = 2) and ((get_state(state5) = 0) and
+  in_range1(state5))) or ((not (trigger = 2)) and ((((trigger = 3) and
+  ((get_state(state6) = 2) and in_range1(state6))) or
+  ((not (trigger = 3)) and ((((trigger = 4) and ((get_state(state7) = 3) and
+  in_range1(state7))) or ((not (trigger = 4)) and ((state7 = state) and
+  (state7 = state1)))) and (state6 = state7)))) and (state5 = state6)))) and
+  (state2 = state5)))))))) and ((state2 = state8) and
+  (state9 = state2)))))) -> (get_state(state8) = my_sm(get_state(state),
+  trigger))))

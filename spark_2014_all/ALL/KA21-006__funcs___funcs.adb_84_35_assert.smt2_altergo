@@ -1,0 +1,300 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type integer
+
+predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : integer, integer -> bool
+
+logic dummy : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+logic f1 : int -> bool
+
+logic f1__function_guard : bool, int -> prop
+
+axiom f1__post_axiom : true
+
+axiom f1__def_axiom : (forall x:int [f1(x)]. ((f1(x) = true) <-> (0 <  x)))
+
+logic f2 : int -> bool
+
+logic f2__function_guard : bool, int -> prop
+
+axiom f2__post_axiom : true
+
+axiom f2__def_axiom : (forall x:int [f2(x)]. ((f2(x) = true) <-> (0 <  x)))
+
+logic f5 : int -> bool
+
+logic f5__function_guard : bool, int -> prop
+
+axiom f5__post_axiom : true
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic g1 : int, int -> bool
+
+logic g1__function_guard : bool, int, int -> prop
+
+axiom g1__post_axiom : true
+
+axiom g1__def_axiom :
+  (forall x:int. forall funcs__g:int [g1(x, funcs__g)]. ((g1(x,
+  funcs__g) = true) <-> (0 <  funcs__g)))
+
+logic g2 : int, int -> bool
+
+logic g2__function_guard : bool, int, int -> prop
+
+axiom g2__post_axiom : true
+
+axiom g2__def_axiom :
+  (forall x:int. forall funcs__g:int [g2(x, funcs__g)]. ((g2(x,
+  funcs__g) = true) <-> (0 <  funcs__g)))
+
+logic g5 : int, int -> bool
+
+logic g5__function_guard : bool, int, int -> prop
+
+axiom g5__post_axiom : true
+
+logic p2 : int -> bool
+
+logic p2__function_guard : bool, int -> prop
+
+axiom p2__post_axiom : true
+
+axiom p2__def_axiom : (forall x:int [p2(x)]. ((p2(x) = true) <-> (0 <  x)))
+
+logic p5 : int -> bool
+
+logic p5__function_guard : bool, int -> prop
+
+axiom p5__post_axiom : true
+
+logic q2 : int -> bool
+
+logic q2__function_guard : bool, int -> prop
+
+axiom q2__post_axiom :
+  (forall x:int [q2(x)]. (in_range1(x) -> ((q2(x) = true) <-> (0 <  x))))
+
+axiom q2__def_axiom : (forall x:int [q2(x)]. ((q2(x) = true) <-> (0 <  x)))
+
+logic q5 : int -> bool
+
+logic q5__function_guard : bool, int -> prop
+
+axiom q5__post_axiom :
+  (forall x:int [q5(x)]. (in_range1(x) -> ((q5(x) = true) <-> (0 <  x))))
+
+logic f3 : int -> bool
+
+logic f3__function_guard : bool, int -> prop
+
+axiom f3__post_axiom : true
+
+axiom f3__def_axiom : (forall x:int [f3(x)]. ((f3(x) = true) <-> (0 <  x)))
+
+logic f4 : int -> bool
+
+logic f4__function_guard : bool, int -> prop
+
+axiom f4__post_axiom : true
+
+axiom f4__def_axiom : (forall x:int [f4(x)]. ((f4(x) = true) <-> (0 <  x)))
+
+logic g3 : int, int -> bool
+
+logic g3__function_guard : bool, int, int -> prop
+
+axiom g3__post_axiom : true
+
+axiom g3__def_axiom :
+  (forall x:int. forall funcs__g:int [g3(x, funcs__g)]. ((g3(x,
+  funcs__g) = true) <-> (0 <  funcs__g)))
+
+logic g4 : int, int -> bool
+
+logic g4__function_guard : bool, int, int -> prop
+
+axiom g4__post_axiom : true
+
+axiom g4__def_axiom :
+  (forall x:int. forall funcs__g:int [g4(x, funcs__g)]. ((g4(x,
+  funcs__g) = true) <-> (0 <  funcs__g)))
+
+logic p4 : int -> bool
+
+logic p4__function_guard : bool, int -> prop
+
+axiom p4__post_axiom : true
+
+axiom p4__def_axiom : (forall x:int [p4(x)]. ((p4(x) = true) <-> (0 <  x)))
+
+logic q4 : int -> bool
+
+logic q4__function_guard : bool, int -> prop
+
+axiom q4__post_axiom :
+  (forall x:int [q4(x)]. (in_range1(x) -> ((q4(x) = true) <-> (0 <  x))))
+
+axiom q4__def_axiom : (forall x:int [q4(x)]. ((q4(x) = true) <-> (0 <  x)))
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+ (* File "funcs.adb", line 54, characters 0-0 *)
+goal WP_parameter_def :
+  (forall g:int. forall y:bool. forall o:bool. forall o1:bool.
+  forall o2:bool. forall o3:bool. forall o4:bool. forall o5:bool.
+  forall o6:bool. forall o7:bool. forall o8:bool. forall result:bool.
+  forall y1:bool. forall result1:bool. forall y2:bool. forall result2:bool.
+  forall y3:bool. forall result3:bool. forall y4:bool. forall result4:bool.
+  forall y5:bool. forall result5:int. forall g6:int. forall result6:bool.
+  forall y6:bool. forall result7:bool. forall y7:bool. forall result8:bool.
+  forall y8:bool. forall result9:bool. forall y9:bool. (in_range1(g) ->
+  ((f1(3) = true) -> ((((o = f1(3)) and ((o = true) <-> (0 <  3))) and
+  ((result = y) and (y1 = o))) -> (((y1 = true) <-> (f1(3) = true)) ->
+  ((f2(3) = true) -> ((((o1 = f2(3)) and ((o1 = true) <-> (0 <  3))) and
+  ((result1 = y1) and (y2 = o1))) -> (((y2 = true) <-> (f2(3) = true)) ->
+  ((f3(3) = true) -> ((((o2 = f3(3)) and ((o2 = true) <-> (0 <  3))) and
+  ((result2 = y2) and (y3 = o2))) -> (((y3 = true) <-> (f3(3) = true)) ->
+  ((f4(3) = true) -> ((((o3 = f4(3)) and ((o3 = true) <-> (0 <  3))) and
+  ((result3 = y3) and (y4 = o3))) -> (((y4 = true) <-> (f4(3) = true)) ->
+  (((o4 = f5(3)) and ((result4 = y4) and (y5 = o4))) -> (((y5 = true) <->
+  (f5(3) = true)) -> (((result5 = g) and (g6 = 3)) -> ((g1(3, g6) = true) ->
+  ((((o5 = g1(3, g6)) and ((o5 = true) <-> (0 <  g6))) and
+  ((result6 = y5) and (y6 = o5))) -> (((y6 = true) <-> (g1(3, g6) = true)) ->
+  ((g2(3, g6) = true) -> ((((o6 = g2(3, g6)) and ((o6 = true) <->
+  (0 <  g6))) and ((result7 = y6) and (y7 = o6))) -> (((y7 = true) <-> (g2(3,
+  g6) = true)) -> ((g3(3, g6) = true) -> ((((o7 = g3(3, g6)) and
+  ((o7 = true) <-> (0 <  g6))) and ((result8 = y7) and (y8 = o7))) ->
+  (((y8 = true) <-> (g3(3, g6) = true)) -> ((g4(3, g6) = true) ->
+  ((((o8 = g4(3, g6)) and ((o8 = true) <-> (0 <  g6))) and
+  ((result9 = y8) and (y9 = o8))) -> ((y9 = true) -> (g4(3,
+  g6) = true))))))))))))))))))))))))))))))

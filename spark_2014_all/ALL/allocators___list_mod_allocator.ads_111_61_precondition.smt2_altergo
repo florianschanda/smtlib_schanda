@@ -1,0 +1,1151 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type integer
+
+predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : integer, integer -> bool
+
+logic dummy : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+type resource
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 10000))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : resource, resource -> bool
+
+logic dummy1 : resource
+
+type resource__ref = { resource__content : resource
+}
+
+function resource__ref___projection(a: resource__ref) : resource =
+  (a).resource__content
+
+logic to_rep : resource -> int
+
+logic of_rep : int -> resource
+
+axiom inversion_axiom :
+  (forall x:resource [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:resource [to_rep(x)]. in_range2(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range2(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type valid_resource
+
+predicate in_range3(x: int) = ((1 <= x) and (x <= 10000))
+
+logic bool_eq4 : int, int -> bool
+
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq2 : valid_resource, valid_resource -> bool
+
+logic dummy2 : valid_resource
+
+type valid_resource__ref = { valid_resource__content : valid_resource
+}
+
+function valid_resource__ref___projection(a: valid_resource__ref) : valid_resource =
+  (a).valid_resource__content
+
+type status
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 1))
+
+logic bool_eq5 : int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq3 : status, status -> bool
+
+logic dummy3 : status
+
+type status__ref = { status__content : status
+}
+
+function status__ref___projection(a: status__ref) : status =
+  (a).status__content
+
+logic to_rep1 : status -> int
+
+logic of_rep1 : int -> status
+
+axiom inversion_axiom1 :
+  (forall x:status [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:status [to_rep1(x)]. in_range4(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range4(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type us_split_fields = { rec__list_mod_allocator__cell__stat : status;
+rec__list_mod_allocator__cell__next : resource
+}
+
+function us_split_fields_Stat__projection(a: us_split_fields) : status =
+  (a).rec__list_mod_allocator__cell__stat
+
+function us_split_fields_Next__projection(a: us_split_fields) : resource =
+  (a).rec__list_mod_allocator__cell__next
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref_2__projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+function us_rep_2__projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+logic bool_eq6 : us_rep, us_rep -> bool
+
+axiom bool_eq_def5 :
+  (forall a:us_rep. forall b:us_rep [bool_eq6(a, b)].
+  ((((to_rep1(((a).us_split_fields1).rec__list_mod_allocator__cell__stat) = to_rep1(((b).us_split_fields1).rec__list_mod_allocator__cell__stat)) and
+  (to_rep(((a).us_split_fields1).rec__list_mod_allocator__cell__next) = to_rep(((b).us_split_fields1).rec__list_mod_allocator__cell__next))) ->
+  (bool_eq6(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_fields1).rec__list_mod_allocator__cell__stat) = to_rep1(((b).us_split_fields1).rec__list_mod_allocator__cell__stat)) and
+  (to_rep(((a).us_split_fields1).rec__list_mod_allocator__cell__next) = to_rep(((b).us_split_fields1).rec__list_mod_allocator__cell__next)))) ->
+  (bool_eq6(a, b) = false))))
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:status. forall a1:resource. (0 <= object__size({
+  us_split_fields1 = { rec__list_mod_allocator__cell__stat = a;
+  rec__list_mod_allocator__cell__next = a1 } })))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:status. forall a1:resource. (0 <= object__alignment({
+  us_split_fields1 = { rec__list_mod_allocator__cell__stat = a;
+  rec__list_mod_allocator__cell__next = a1 } })))
+
+logic list_mod_allocator__cell__stat__first__bit : int
+
+logic list_mod_allocator__cell__stat__last__bit : int
+
+logic list_mod_allocator__cell__stat__position : int
+
+axiom list_mod_allocator__cell__stat__first__bit_axiom :
+  (0 <= list_mod_allocator__cell__stat__first__bit)
+
+axiom list_mod_allocator__cell__stat__last__bit_axiom :
+  (list_mod_allocator__cell__stat__first__bit <  list_mod_allocator__cell__stat__last__bit)
+
+axiom list_mod_allocator__cell__stat__position_axiom :
+  (0 <= list_mod_allocator__cell__stat__position)
+
+logic list_mod_allocator__cell__next__first__bit : int
+
+logic list_mod_allocator__cell__next__last__bit : int
+
+logic list_mod_allocator__cell__next__position : int
+
+axiom list_mod_allocator__cell__next__first__bit_axiom :
+  (0 <= list_mod_allocator__cell__next__first__bit)
+
+axiom list_mod_allocator__cell__next__last__bit_axiom :
+  (list_mod_allocator__cell__next__first__bit <  list_mod_allocator__cell__next__last__bit)
+
+axiom list_mod_allocator__cell__next__position_axiom :
+  (0 <= list_mod_allocator__cell__next__position)
+
+logic user_eq4 : us_rep, us_rep -> bool
+
+logic dummy4 : status
+
+logic dummy5 : resource
+
+type cell__ref = { cell__content : us_rep
+}
+
+function cell__ref___projection(a: cell__ref) : us_rep = (a).cell__content
+
+type map__ref = { map__content : (int,us_rep) farray
+}
+
+logic slide : (int,us_rep) farray, int, int -> (int,us_rep) farray
+
+axiom slide_eq :
+  (forall a:(int,us_rep) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,us_rep) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
+  int -> (int,us_rep) farray
+
+axiom concat_def :
+  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton : us_rep, int -> (int,us_rep) farray
+
+axiom singleton_def :
+  (forall v:status. forall v1:resource.
+  (forall i:int [(singleton({ us_split_fields1 = {
+  rec__list_mod_allocator__cell__stat = v;
+  rec__list_mod_allocator__cell__next = v1 } }, i)[i])]. ((singleton({
+  us_split_fields1 = { rec__list_mod_allocator__cell__stat = v;
+  rec__list_mod_allocator__cell__next = v1 } }, i)[i]) = { us_split_fields1 =
+  { rec__list_mod_allocator__cell__stat = v;
+  rec__list_mod_allocator__cell__next = v1 } })))
+
+logic bool_eq7 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
+  int -> bool
+
+axiom bool_eq_def6 :
+  (forall a:(int,us_rep) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,us_rep) farray. forall b__first:int. forall b__last:int
+  [bool_eq7(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) and (bool_eq6((a[temp___idx_132]),
+  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
+  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) -> (bool_eq6((a[temp___idx_132]),
+  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq7(a,
+  a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev :
+  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq7(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) -> (bool_eq6((a[temp___idx_132]),
+  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+type us_main_type
+
+logic us_main_eq : us_main_type, us_main_type -> bool
+
+type us_rep1
+
+logic bool_eq8 : us_rep1, us_rep1 -> bool
+
+logic value__size1 : int
+
+logic object__size1 : us_rep1 -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : us_rep1 -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (forall a:us_rep1. (0 <= object__size1(a)))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:us_rep1. (0 <= object__alignment1(a)))
+
+logic user_eq5 : us_rep1, us_rep1 -> bool
+
+logic dummy6 : us_rep1
+
+type sequence__ref = { sequence__content : us_rep1
+}
+
+function sequence__ref___projection(a: sequence__ref) : us_rep1 =
+  (a).sequence__content
+
+logic length : us_rep1 -> int
+
+logic length__function_guard : int, us_rep1 -> prop
+
+logic last__function_guard : int, us_rep1 -> prop
+
+logic get : us_rep1, int -> int
+
+logic get__function_guard : int, us_rep1, int -> prop
+
+logic oeq__function_guard : bool, us_rep1, us_rep1 -> prop
+
+axiom user_eq__def_axiom :
+  (forall a:us_rep1. forall b:us_rep1 [user_eq5(a, b)].
+  (((forall n:int. (((1 <= n) and (n <= (0 + length(a)))) -> (get(a,
+    n) = get(b, n)))) ->
+  (user_eq5(a, b) = match_bool(bool_eq1(length(a), length(b)), true,
+  false))) and
+  ((not (forall n:int. (((1 <= n) and (n <= (0 + length(a)))) -> (get(a,
+        n) = get(b, n))))) ->
+  (user_eq5(a, b) = match_bool(bool_eq1(length(a), length(b)), false,
+  false)))))
+
+type count_type
+
+predicate in_range5(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq9 : int, int -> bool
+
+axiom bool_eq_def7 :
+  (forall x:int. forall y:int [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> int
+
+logic user_eq6 : count_type, count_type -> bool
+
+logic dummy7 : count_type
+
+type count_type__ref = { count_type__content : count_type
+}
+
+function count_type__ref___projection(a: count_type__ref) : count_type =
+  (a).count_type__content
+
+axiom length__post_axiom :
+  (forall container:us_rep1 [length(container)].
+  (((0 + length(container)) <= 2147483647) and in_range5(length(container))))
+
+type element_type
+
+predicate in_range6(x: int) = ((0 <= x) and (x <= 10000))
+
+logic bool_eq10 : int, int -> bool
+
+axiom bool_eq_def8 :
+  (forall x:int. forall y:int [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE6 : us_image -> int
+
+logic user_eq7 : element_type, element_type -> bool
+
+logic dummy8 : element_type
+
+type element_type__ref = { element_type__content : element_type
+}
+
+function element_type__ref___projection(a: element_type__ref) : element_type =
+  (a).element_type__content
+
+type extended_index
+
+predicate in_range7(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq11 : int, int -> bool
+
+axiom bool_eq_def9 :
+  (forall x:int. forall y:int [bool_eq11(x, y)]. (((x = y) -> (bool_eq11(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq11(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE7 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check7 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE7 : us_image -> int
+
+logic user_eq8 : extended_index, extended_index -> bool
+
+logic dummy9 : extended_index
+
+type extended_index__ref = { extended_index__content : extended_index
+}
+
+function extended_index__ref___projection(a: extended_index__ref) : extended_index =
+  (a).extended_index__content
+
+axiom get__post_axiom :
+  (forall container:us_rep1.
+  (forall position:int [get(container, position)]. ((in_range7(position) and
+  ((1 <= position) and (position <= (0 + length(container))))) ->
+  in_range6(get(container, position)))))
+
+type us_main_type1
+
+logic us_main_eq1 : us_main_type1, us_main_type1 -> bool
+
+type us_rep2
+
+logic bool_eq12 : us_rep2, us_rep2 -> bool
+
+logic value__size2 : int
+
+logic object__size2 : us_rep2 -> int
+
+logic value__alignment2 : int
+
+logic object__alignment2 : us_rep2 -> int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (forall a:us_rep2. (0 <= object__size2(a)))
+
+axiom value__alignment_axiom2 : (0 <= value__alignment2)
+
+axiom object__alignment_axiom2 :
+  (forall a:us_rep2. (0 <= object__alignment2(a)))
+
+logic user_eq9 : us_rep2, us_rep2 -> bool
+
+logic dummy10 : us_rep2
+
+type set__ref = { set__content : us_rep2
+}
+
+function set__ref___projection(a: set__ref) : us_rep2 = (a).set__content
+
+logic contains : us_rep2, int -> bool
+
+logic contains__function_guard : bool, us_rep2, int -> prop
+
+type element_type1
+
+predicate in_range8(x: int) = ((0 <= x) and (x <= 10000))
+
+logic bool_eq13 : int, int -> bool
+
+axiom bool_eq_def10 :
+  (forall x:int. forall y:int [bool_eq13(x, y)]. (((x = y) -> (bool_eq13(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq13(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE8 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check8 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE8 : us_image -> int
+
+logic user_eq10 : element_type1, element_type1 -> bool
+
+logic dummy11 : element_type1
+
+type element_type__ref1 = { element_type__content1 : element_type1
+}
+
+function element_type__ref_2__projection(a: element_type__ref1) : element_type1 =
+  (a).element_type__content1
+
+logic is_empty : us_rep2 -> bool
+
+logic is_empty__function_guard : bool, us_rep2 -> prop
+
+axiom contains__post_axiom :
+  (forall container:us_rep2.
+  (forall item:int [contains(container, item)]. (in_range8(item) ->
+  ((of_int(1) = true) ->
+  ((exists e:int. ((in_range8(e) and (contains(container, e) = true)) and
+   (e = item))) ->
+  (contains(container, item) = true))))))
+
+type us_split_fields2 = { rec__list_mod_allocator__m__t__available : us_rep1;
+rec__list_mod_allocator__m__t__allocated : us_rep2
+}
+
+function us_split_fields_Available__projection(a: us_split_fields2) : us_rep1 =
+  (a).rec__list_mod_allocator__m__t__available
+
+function us_split_fields_Allocated__projection(a: us_split_fields2) : us_rep2 =
+  (a).rec__list_mod_allocator__m__t__allocated
+
+type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
+}
+
+function us_split_fields__ref___projection(a: us_split_fields__ref1) : us_split_fields2 =
+  (a).us_split_fields__content1
+
+type us_rep3 = { us_split_fields3 : us_split_fields2
+}
+
+function us_rep___projection(a: us_rep3) : us_split_fields2 =
+  (a).us_split_fields3
+
+logic bool_eq14 : us_rep3, us_rep3 -> bool
+
+axiom bool_eq_def11 :
+  (forall a:us_rep3. forall b:us_rep3 [bool_eq14(a, b)].
+  ((((user_eq5(((a).us_split_fields3).rec__list_mod_allocator__m__t__available,
+  ((b).us_split_fields3).rec__list_mod_allocator__m__t__available) = true) and
+  (bool_eq12(((a).us_split_fields3).rec__list_mod_allocator__m__t__allocated,
+  ((b).us_split_fields3).rec__list_mod_allocator__m__t__allocated) = true)) ->
+  (bool_eq14(a, b) = true)) and
+  ((not ((user_eq5(((a).us_split_fields3).rec__list_mod_allocator__m__t__available,
+  ((b).us_split_fields3).rec__list_mod_allocator__m__t__available) = true) and
+  (bool_eq12(((a).us_split_fields3).rec__list_mod_allocator__m__t__allocated,
+  ((b).us_split_fields3).rec__list_mod_allocator__m__t__allocated) = true))) ->
+  (bool_eq14(a, b) = false))))
+
+logic value__size3 : int
+
+logic object__size3 : us_rep3 -> int
+
+logic value__alignment3 : int
+
+logic object__alignment3 : us_rep3 -> int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 :
+  (forall a:us_rep1. forall a1:us_rep2. (0 <= object__size3({
+  us_split_fields3 = { rec__list_mod_allocator__m__t__available = a;
+  rec__list_mod_allocator__m__t__allocated = a1 } })))
+
+axiom value__alignment_axiom3 : (0 <= value__alignment3)
+
+axiom object__alignment_axiom3 :
+  (forall a:us_rep1. forall a1:us_rep2. (0 <= object__alignment3({
+  us_split_fields3 = { rec__list_mod_allocator__m__t__available = a;
+  rec__list_mod_allocator__m__t__allocated = a1 } })))
+
+logic list_mod_allocator__m__t__available__first__bit : int
+
+logic list_mod_allocator__m__t__available__last__bit : int
+
+logic list_mod_allocator__m__t__available__position : int
+
+axiom list_mod_allocator__m__t__available__first__bit_axiom :
+  (0 <= list_mod_allocator__m__t__available__first__bit)
+
+axiom list_mod_allocator__m__t__available__last__bit_axiom :
+  (list_mod_allocator__m__t__available__first__bit <  list_mod_allocator__m__t__available__last__bit)
+
+axiom list_mod_allocator__m__t__available__position_axiom :
+  (0 <= list_mod_allocator__m__t__available__position)
+
+logic list_mod_allocator__m__t__allocated__first__bit : int
+
+logic list_mod_allocator__m__t__allocated__last__bit : int
+
+logic list_mod_allocator__m__t__allocated__position : int
+
+axiom list_mod_allocator__m__t__allocated__first__bit_axiom :
+  (0 <= list_mod_allocator__m__t__allocated__first__bit)
+
+axiom list_mod_allocator__m__t__allocated__last__bit_axiom :
+  (list_mod_allocator__m__t__allocated__first__bit <  list_mod_allocator__m__t__allocated__last__bit)
+
+axiom list_mod_allocator__m__t__allocated__position_axiom :
+  (0 <= list_mod_allocator__m__t__allocated__position)
+
+logic user_eq11 : us_rep3, us_rep3 -> bool
+
+logic dummy12 : us_rep1
+
+logic dummy13 : us_rep2
+
+type t__ref = { t__content : us_rep3
+}
+
+function t__ref___projection(a: t__ref) : us_rep3 = (a).t__content
+
+logic is_prepend : us_rep1, int, us_rep1 -> bool
+
+logic is_prepend__function_guard : bool, us_rep1, int, us_rep1 -> prop
+
+logic range_shifted__function_guard : bool, us_rep1, us_rep1, int, int,
+  int -> prop
+
+axiom is_prepend__post_axiom : true
+
+axiom is_prepend__def_axiom :
+  (forall s:us_rep1. forall result__:us_rep1.
+  (forall e:int [is_prepend(s, e, result__)]. ((is_prepend(s, e,
+  result__) = true) <-> ((((length(s) <  2147483647) and
+  (length(result__) = (length(s) + 1))) and (get(result__, 1) = e)) and
+  ((forall i:int. (((1 <= i) and (i <= (0 + length(s)))) -> (get(s,
+   i) = get(result__, (i + 1))))) and
+  (forall i:int. ((((1 + 1) <= i) and (i <= ((0 + length(s)) + 1))) ->
+  (get(s, (i - 1)) = get(result__, i)))))))))
+
+logic is_add : us_rep2, int, us_rep2 -> bool
+
+logic is_add__function_guard : bool, us_rep2, int, us_rep2 -> prop
+
+logic ole : us_rep2, us_rep2 -> bool
+
+logic ole__function_guard : bool, us_rep2, us_rep2 -> prop
+
+logic included_except : us_rep2, us_rep2, int -> bool
+
+logic included_except__function_guard : bool, us_rep2, us_rep2, int -> prop
+
+axiom is_add__post_axiom : true
+
+axiom is_add__def_axiom :
+  (forall s:us_rep2. forall result__:us_rep2.
+  (forall e:int [is_add(s, e, result__)]. ((is_add(s, e,
+  result__) = true) <-> ((((not (contains(s, e) = true)) and
+  (contains(result__, e) = true)) and (included_except(result__, s,
+  e) = true)) and (ole(s, result__) = true)))))
+
+logic oeq : us_rep3, us_rep3 -> bool
+
+logic oeq__function_guard1 : bool, us_rep3, us_rep3 -> prop
+
+logic oeq1 : us_rep2, us_rep2 -> bool
+
+logic oeq__function_guard2 : bool, us_rep2, us_rep2 -> prop
+
+axiom user_eq__def_axiom1 :
+  (forall a:us_rep1. forall a1:us_rep2. forall b:us_rep1. forall b1:us_rep2
+  [user_eq11({ us_split_fields3 = {
+  rec__list_mod_allocator__m__t__available = a;
+  rec__list_mod_allocator__m__t__allocated = a1 } }, { us_split_fields3 = {
+  rec__list_mod_allocator__m__t__available = b;
+  rec__list_mod_allocator__m__t__allocated = b1 } })]. (user_eq11({
+  us_split_fields3 = { rec__list_mod_allocator__m__t__available = a;
+  rec__list_mod_allocator__m__t__allocated = a1 } }, { us_split_fields3 = {
+  rec__list_mod_allocator__m__t__available = b;
+  rec__list_mod_allocator__m__t__allocated = b1 } }) = oeq({
+  us_split_fields3 = { rec__list_mod_allocator__m__t__available = a;
+  rec__list_mod_allocator__m__t__allocated = a1 } }, { us_split_fields3 = {
+  rec__list_mod_allocator__m__t__available = b;
+  rec__list_mod_allocator__m__t__allocated = b1 } })))
+
+axiom oeq__post_axiom : true
+
+axiom oeq__def_axiom :
+  (forall x:us_rep1. forall x1:us_rep2. forall y:us_rep1. forall y1:us_rep2
+  [oeq({ us_split_fields3 = { rec__list_mod_allocator__m__t__available = x;
+  rec__list_mod_allocator__m__t__allocated = x1 } }, { us_split_fields3 = {
+  rec__list_mod_allocator__m__t__available = y;
+  rec__list_mod_allocator__m__t__allocated = y1 } })]. (((oeq({
+  us_split_fields3 = { rec__list_mod_allocator__m__t__available = x;
+  rec__list_mod_allocator__m__t__allocated = x1 } }, { us_split_fields3 = {
+  rec__list_mod_allocator__m__t__available = y;
+  rec__list_mod_allocator__m__t__allocated = y1 } }) = true) ->
+  ((((bool_eq1(length(x), length(y)) = true) ->
+  (forall n:int. (((1 <= n) and (n <= (0 + length(x)))) -> (get(x,
+  n) = get(y, n))))) and (not (bool_eq1(length(x), length(y)) = false))) and
+  (oeq1(x1, y1) = true))) and ((((bool_eq1(length(x), length(y)) = true) and
+  (forall n:int. (((1 <= n) and (n <= (0 + length(x)))) -> (get(x,
+  n) = get(y, n))))) and (oeq1(x1, y1) = true)) -> (oeq({ us_split_fields3 =
+  { rec__list_mod_allocator__m__t__available = x;
+  rec__list_mod_allocator__m__t__allocated = x1 } }, { us_split_fields3 = {
+  rec__list_mod_allocator__m__t__available = y;
+  rec__list_mod_allocator__m__t__allocated = y1 } }) = true))))
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic model__ : (int,us_rep) farray, int -> us_rep3
+
+logic model____function_guard : us_rep3, (int,us_rep) farray, int -> prop
+
+logic is_well_formed : (int,us_rep) farray, int -> bool
+
+logic is_well_formed__function_guard : bool, (int,us_rep) farray, int -> prop
+
+logic model_is_well_formed : us_rep3, (int,us_rep) farray, int -> bool
+
+logic model_is_well_formed__function_guard : bool, us_rep3,
+  (int,us_rep) farray, int -> prop
+
+axiom model____post_axiom :
+  (forall list_mod_allocator__data:(int,us_rep) farray.
+  (forall list_mod_allocator__first_available:int
+  [model__(list_mod_allocator__data, list_mod_allocator__first_available)].
+  ((in_range2(list_mod_allocator__first_available) and
+  (is_well_formed(list_mod_allocator__data,
+  list_mod_allocator__first_available) = true)) ->
+  (model_is_well_formed(model__(list_mod_allocator__data,
+  list_mod_allocator__first_available), list_mod_allocator__data,
+  list_mod_allocator__first_available) = true))))
+
+logic is_valid : (int,us_rep) farray, int -> bool
+
+logic is_valid__function_guard : bool, (int,us_rep) farray, int -> prop
+
+logic contains1 : us_rep1, int -> bool
+
+logic contains__function_guard1 : bool, us_rep1, int -> prop
+
+axiom is_valid__post_axiom : true
+
+axiom is_valid__def_axiom :
+  (forall list_mod_allocator__data:(int,us_rep) farray.
+  (forall list_mod_allocator__first_available:int
+  [is_valid(list_mod_allocator__data, list_mod_allocator__first_available)].
+  ((is_valid(list_mod_allocator__data,
+  list_mod_allocator__first_available) = true) <->
+  (((is_well_formed(list_mod_allocator__data,
+  list_mod_allocator__first_available) = true) and
+  ((not (list_mod_allocator__first_available = 0)) ->
+  (to_rep((((list_mod_allocator__data[get(((model__(list_mod_allocator__data,
+  list_mod_allocator__first_available)).us_split_fields3).rec__list_mod_allocator__m__t__available,
+  length(((model__(list_mod_allocator__data,
+  list_mod_allocator__first_available)).us_split_fields3).rec__list_mod_allocator__m__t__available))])).us_split_fields1).rec__list_mod_allocator__cell__next) = 0))) and
+  (forall r:int. (((1 <= r) and (r <= 10000)) ->
+  ((to_rep1((((list_mod_allocator__data[r])).us_split_fields1).rec__list_mod_allocator__cell__stat) = 0) ->
+  (contains1(((model__(list_mod_allocator__data,
+  list_mod_allocator__first_available)).us_split_fields3).rec__list_mod_allocator__m__t__available,
+  r) = true))))))))
+
+logic res : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic ma : us_rep1
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic c111b : us_rep1
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic c112b : us_rep1
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
+logic r114b : int
+
+logic attr__ATTRIBUTE_ADDRESS6 : int
+
+logic to_rep2 : integer -> int
+
+logic of_rep2 : int -> integer
+
+axiom inversion_axiom2 :
+  (forall x:integer [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 : (forall x:integer [to_rep2(x)]. in_range1(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range1(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+predicate dynamic_property(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq15 : int, int -> bool
+
+axiom bool_eq_def12 :
+  (forall x:int. forall y:int [bool_eq15(x, y)]. (((x = y) -> (bool_eq15(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq15(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE9 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check9 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE9 : us_image -> int
+
+logic user_eq12 : integer, integer -> bool
+
+logic dummy14 : integer
+
+type t115b__ref = { t115b__content : integer
+}
+
+function t115b__ref___projection(a: t115b__ref) : integer =
+  (a).t115b__content
+
+logic attr__ATTRIBUTE_ADDRESS7 : int
+
+axiom contains__post_axiom1 : true
+
+axiom contains__def_axiom :
+  (forall s:us_rep1.
+  (forall e:int [contains1(s, e)]. ((contains1(s, e) = true) <->
+  (exists i:int. (((1 <= i) and (i <= length(s))) and (get(s, i) = e))))))
+
+axiom is_well_formed__post_axiom : true
+
+axiom is_well_formed__def_axiom :
+  (forall list_mod_allocator__data:(int,us_rep) farray.
+  (forall list_mod_allocator__first_available:int
+  [is_well_formed(list_mod_allocator__data,
+  list_mod_allocator__first_available)].
+  ((is_well_formed(list_mod_allocator__data,
+  list_mod_allocator__first_available) = true) <->
+  (((not (list_mod_allocator__first_available = 0)) ->
+  (to_rep1((((list_mod_allocator__data[list_mod_allocator__first_available])).us_split_fields1).rec__list_mod_allocator__cell__stat) = 0)) and
+  (forall r:int. (((1 <= r) and (r <= 10000)) ->
+  (((to_rep1((((list_mod_allocator__data[r])).us_split_fields1).rec__list_mod_allocator__cell__stat) = 0) and
+  (not (to_rep((((list_mod_allocator__data[r])).us_split_fields1).rec__list_mod_allocator__cell__next) = 0))) ->
+  (to_rep1((((list_mod_allocator__data[to_rep((((list_mod_allocator__data[r])).us_split_fields1).rec__list_mod_allocator__cell__next)])).us_split_fields1).rec__list_mod_allocator__cell__stat) = 0))))))))
+
+axiom model_is_well_formed__post_axiom : true
+
+axiom model_is_well_formed__def_axiom :
+  (forall m:us_rep1. forall m1:us_rep2.
+  (forall list_mod_allocator__data:(int,us_rep) farray.
+  (forall list_mod_allocator__first_available:int [model_is_well_formed({
+  us_split_fields3 = { rec__list_mod_allocator__m__t__available = m;
+  rec__list_mod_allocator__m__t__allocated = m1 } },
+  list_mod_allocator__data, list_mod_allocator__first_available)].
+  (((model_is_well_formed({ us_split_fields3 = {
+  rec__list_mod_allocator__m__t__available = m;
+  rec__list_mod_allocator__m__t__allocated = m1 } },
+  list_mod_allocator__data, list_mod_allocator__first_available) = true) ->
+  ((((((((length(m) <= 10000) and
+  (((not (list_mod_allocator__first_available = 0)) -> ((0 <  length(m)) and
+  (get(m, 1) = list_mod_allocator__first_available))) and
+  ((list_mod_allocator__first_available = 0) -> (length(m) = 0)))) and
+  (forall j:int. (((1 <= j) and (j <= length(m))) -> (in_range3(get(m,
+  j)) and ((j <  length(m)) -> (to_rep((((list_mod_allocator__data[get(m,
+  j)])).us_split_fields1).rec__list_mod_allocator__cell__next) = get(m,
+  (j + 1)))))))) and
+  (forall j:int. (((1 <= j) and (j <= length(m))) -> ((1 <  j) ->
+  (in_range3(get(m, (j - 1))) and (get(m,
+  j) = to_rep((((list_mod_allocator__data[get(m,
+  (j - 1))])).us_split_fields1).rec__list_mod_allocator__cell__next))))))) and
+  (forall j:int. (((1 <= j) and (j <= length(m))) ->
+  (forall k:int. (((1 <= k) and (k <= length(m))) -> ((get(m, j) = get(m,
+  k)) -> (j = k))))))) and
+  (((not (list_mod_allocator__first_available = 0)) and
+  in_range3(to_rep((((list_mod_allocator__data[get(m,
+  length(m))])).us_split_fields1).rec__list_mod_allocator__cell__next))) ->
+  (contains1(m, to_rep((((list_mod_allocator__data[get(m,
+  length(m))])).us_split_fields1).rec__list_mod_allocator__cell__next)) = true))) and
+  (forall e:int. ((in_range8(e) and (contains(m1, e) = true)) ->
+  in_range3(e)))) and
+  (forall r:int. (((1 <= r) and (r <= 10000)) ->
+  (((to_rep1((((list_mod_allocator__data[r])).us_split_fields1).rec__list_mod_allocator__cell__stat) = 0) ->
+  (not (contains(m1, r) = true))) and
+  ((not (to_rep1((((list_mod_allocator__data[r])).us_split_fields1).rec__list_mod_allocator__cell__stat) = 0)) ->
+  ((not (contains1(m, r) = true)) and (contains(m1, r) = true)))))))) and
+  (((((((((length(m) <= 10000) and
+  (((not (list_mod_allocator__first_available = 0)) and ((0 <  length(m)) and
+  (get(m, 1) = list_mod_allocator__first_available))) or
+  ((list_mod_allocator__first_available = 0) and (length(m) = 0)))) and
+  (forall j:int. (((1 <= j) and (j <= length(m))) -> (in_range3(get(m,
+  j)) and ((j <  length(m)) -> (to_rep((((list_mod_allocator__data[get(m,
+  j)])).us_split_fields1).rec__list_mod_allocator__cell__next) = get(m,
+  (j + 1)))))))) and
+  (forall j:int. (((1 <= j) and (j <= length(m))) -> ((1 <  j) ->
+  (in_range3(get(m, (j - 1))) and (get(m,
+  j) = to_rep((((list_mod_allocator__data[get(m,
+  (j - 1))])).us_split_fields1).rec__list_mod_allocator__cell__next))))))) and
+  (forall j:int. (((1 <= j) and (j <= length(m))) ->
+  (forall k:int. (((1 <= k) and (k <= length(m))) -> ((get(m, j) = get(m,
+  k)) -> (j = k))))))) and
+  (((not (list_mod_allocator__first_available = 0)) and
+  in_range3(to_rep((((list_mod_allocator__data[get(m,
+  length(m))])).us_split_fields1).rec__list_mod_allocator__cell__next))) ->
+  (contains1(m, to_rep((((list_mod_allocator__data[get(m,
+  length(m))])).us_split_fields1).rec__list_mod_allocator__cell__next)) = true))) and
+  (forall e:int. ((in_range8(e) and (contains(m1, e) = true)) ->
+  in_range3(e)))) and
+  (forall r:int. (((1 <= r) and (r <= 10000)) ->
+  (((to_rep1((((list_mod_allocator__data[r])).us_split_fields1).rec__list_mod_allocator__cell__stat) = 0) and
+  (not (contains(m1, r) = true))) or
+  ((not (to_rep1((((list_mod_allocator__data[r])).us_split_fields1).rec__list_mod_allocator__cell__stat) = 0)) and
+  ((not (contains1(m, r) = true)) and (contains(m1, r) = true))))))) ->
+  (model_is_well_formed({ us_split_fields3 = {
+  rec__list_mod_allocator__m__t__available = m;
+  rec__list_mod_allocator__m__t__allocated = m1 } },
+  list_mod_allocator__data, list_mod_allocator__first_available) = true))))))
+
+logic length1 : us_rep2 -> int
+
+logic length__function_guard1 : int, us_rep2 -> prop
+
+axiom length__post_axiom1 :
+  (forall container:us_rep2 [length1(container)].
+  in_range5(length1(container)))
+
+axiom ole__post_axiom :
+  (forall left:us_rep2. forall right:us_rep2 [ole(left, right)]. ((ole(left,
+  right) = true) <->
+  (forall item:int. ((in_range8(item) and (contains(left, item) = true)) ->
+  (contains(right, item) = true)))))
+
+axiom oeq__post_axiom1 :
+  (forall left:us_rep2. forall right:us_rep2 [oeq1(left, right)].
+  ((oeq1(left, right) = true) <-> ((ole(left, right) = true) and (ole(right,
+  left) = true))))
+
+axiom is_empty__post_axiom :
+  (forall container:us_rep2 [is_empty(container)].
+  (((is_empty(container) = true) <->
+  (forall item:int. (not (in_range8(item) and (contains(container,
+  item) = true))))) and ((is_empty(container) = true) <->
+  (length1(container) = 0))))
+
+axiom included_except__post_axiom :
+  (forall left:us_rep2. forall right:us_rep2.
+  (forall item:int [included_except(left, right, item)]. (in_range8(item) ->
+  ((included_except(left, right, item) = true) <->
+  (forall e:int. ((in_range8(e) and (contains(left, e) = true)) ->
+  ((contains(right, e) = true) or (e = item))))))))
+
+ (* File "list_mod_allocator.ads", line 17, characters 0-0 *)
+goal WP_parameter_def :
+  (forall data:(int,us_rep) farray. forall first_available:int. forall i:int.
+  forall o:us_rep1. forall o1:us_rep2. forall o2:us_rep1. forall o3:us_rep2.
+  forall list_mod_allocator__free__ma__assume:us_rep1. forall o4:int.
+  forall o5:status. forall o6:resource. forall o7:status. forall o8:resource.
+  forall o9:status. forall o10:int. forall o11:resource. forall o12:status.
+  forall o13:status. forall o14:resource. forall o15:status.
+  forall o16:resource. forall o17:int. forall o18:(int,us_rep) farray.
+  forall o19:us_rep1. forall o20:us_rep2. forall o21:us_rep1.
+  forall o22:us_rep2. forall list_mod_allocator__free__C112b__assume:us_rep1.
+  forall list_mod_allocator__free__B113b__L_4__R114b__assume:int.
+  forall temp___318:int. forall data1:(int,us_rep) farray.
+  forall first_available1:int. forall i1:int. forall result:bool.
+  forall result1:(int,us_rep) farray. forall data2:(int,us_rep) farray.
+  forall result2:int. forall first_available2:int. forall result3:int.
+  forall i2:int. forall i3:int. forall i4:int. forall i5:int. forall i6:int.
+  forall i7:int. forall data3:(int,us_rep) farray.
+  forall first_available3:int. forall i8:int.
+  forall data4:(int,us_rep) farray. forall first_available4:int.
+  forall i9:int. forall data5:(int,us_rep) farray.
+  forall first_available5:int__ref. forall i10:int__ref.
+  forall data6:(int,us_rep) farray. forall first_available6:int.
+  forall i11:int. (in_range2(first_available) -> (in_range2(res) ->
+  ((is_valid(data, first_available) = true) -> (((((((({ us_split_fields3 = {
+  rec__list_mod_allocator__m__t__available = o;
+  rec__list_mod_allocator__m__t__allocated = o1 } } = model__(data,
+  first_available)) and (model_is_well_formed({ us_split_fields3 = {
+  rec__list_mod_allocator__m__t__available = o;
+  rec__list_mod_allocator__m__t__allocated = o1 } }, data,
+  first_available) = true)) and ((o = o2) and (o1 = o3))) and
+  (list_mod_allocator__free__ma__assume = o2)) and
+  (list_mod_allocator__free__ma__assume = ma)) and ((((not (res = 0)) and
+  ((((((((1 <= res) and (res <= 10000)) and (o4 = res)) and ({
+  us_split_fields1 = { rec__list_mod_allocator__cell__stat = o5;
+  rec__list_mod_allocator__cell__next = o6 } } = (data[o4]))) and
+  ((o5 = o7) and (o6 = o8))) and (o9 = o7)) and (o10 = to_rep1(o9))) and
+  (((o10 = 1) and (result = true)) or ((not (o10 = 1)) and
+  (result = false))))) or ((res = 0) and (result = false))) and
+  (((result = true) and (((((((to_rep(o11) = first_available) and
+  ((to_rep1(o12) = 0) and ((o12 = o13) and (o11 = o14)))) and
+  ((o15 = o13) and (o16 = o14))) and ((((1 <= res) and (res <= 10000)) and
+  (o17 = res)) and (o18 = (data[o17 <- { us_split_fields1 = {
+  rec__list_mod_allocator__cell__stat = o15;
+  rec__list_mod_allocator__cell__next = o16 } }])))) and
+  ((result1 = data) and (data2 = o18))) and (((result2 = first_available) and
+  (first_available2 = res)) and ((ma = c111b) and (((((({ us_split_fields3 =
+  { rec__list_mod_allocator__m__t__available = o19;
+  rec__list_mod_allocator__m__t__allocated = o20 } } = model__(data2,
+  first_available2)) and (model_is_well_formed({ us_split_fields3 = {
+  rec__list_mod_allocator__m__t__available = o19;
+  rec__list_mod_allocator__m__t__allocated = o20 } }, data2,
+  first_available2) = true)) and ((o19 = o21) and (o20 = o22))) and
+  (list_mod_allocator__free__C112b__assume = o21)) and
+  (list_mod_allocator__free__C112b__assume = c112b)) and
+  (((((list_mod_allocator__free__B113b__L_4__R114b__assume = length(c111b)) and
+  (in_range5(list_mod_allocator__free__B113b__L_4__R114b__assume) and
+  ((0 + list_mod_allocator__free__B113b__L_4__R114b__assume) <= 2147483647))) and
+  (list_mod_allocator__free__B113b__L_4__R114b__assume = r114b)) and
+  in_range1(r114b)) and (((result3 = i) and (i2 = 1)) and ((((1 <= i2) and
+  (i2 <= r114b)) and ((((temp___318 = i2) and
+  ((((i3 + 1) <= length(c112b)) and
+  ((forall j:int. (((1 <= j) and (j <= i3)) -> (get(c111b, j) = get(c112b,
+   (j + 1))))) and
+  (forall j:int. (((2 <= j) and (j <= (i3 + 1))) -> (get(c111b,
+  (j - 1)) = get(c112b, j)))))) and ((((1 <= r114b) -> dynamic_property(1,
+  r114b, i3)) and ((1 <= i3) and (i3 <= r114b))) and
+  ((forall j:int. (((1 <= j) and (j <= (i3 + 1))) -> (not (get(c112b,
+   j) = to_rep((((data2[get(c111b,
+   i3)])).us_split_fields1).rec__list_mod_allocator__cell__next))))) and
+  (i3 = r114b))))) and ((i3 = i4) and (i5 = i3))) and (({ int__content = i6
+  } = { int__content = i4 }) and (i7 = i5)))) or ((not ((1 <= i2) and
+  (i2 <= r114b))) and ((i2 = i6) and (i7 = i2)))))))))) and ((({
+  int__content = i8 } = { int__content = i6 }) and
+  ((first_available2 = first_available3) and (data2 = data3))) and
+  ((i9 = i7) and ((first_available4 = first_available2) and
+  (data4 = data2)))))) or ((not (result = true)) and ((({ int__content = i8
+  } = { int__content = i }) and (({ int__content = first_available3 } = {
+  int__content = first_available }) and ({ map__content = data3 } = {
+  map__content = data }))) and ((i9 = i1) and
+  ((first_available4 = first_available1) and (data4 = data1)))))))) and
+  (((i10 = { int__content = i8 }) and ((first_available5 = { int__content =
+  first_available3 }) and ({ map__content = data5 } = { map__content = data3
+  }))) and ((i11 = i9) and ((first_available6 = first_available4) and
+  (data6 = data4))))) -> ((contains(((model__(data,
+  first_available)).us_split_fields3).rec__list_mod_allocator__m__t__allocated,
+  res) = true) -> (is_well_formed(data5,
+  (first_available5).int__content) = true)))))))

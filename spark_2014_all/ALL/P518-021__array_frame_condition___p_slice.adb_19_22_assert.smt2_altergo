@@ -1,0 +1,1809 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type integer
+
+predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : integer, integer -> bool
+
+logic dummy : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+logic to_rep : integer -> int
+
+logic of_rep : int -> integer
+
+axiom inversion_axiom :
+  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type index
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 3))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : index, index -> bool
+
+logic dummy1 : index
+
+type index__ref = { index__content : index
+}
+
+function index__ref___projection(a: index__ref) : index = (a).index__content
+
+type map__ref = { map__content : (int,integer) farray
+}
+
+logic slide : (int,integer) farray, int, int -> (int,integer) farray
+
+axiom slide_eq :
+  (forall a:(int,integer) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,integer) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat : (int,integer) farray, int, int, (int,integer) farray, int,
+  int -> (int,integer) farray
+
+axiom concat_def :
+  (forall a:(int,integer) farray. forall b:(int,integer) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton : integer, int -> (int,integer) farray
+
+axiom singleton_def :
+  (forall v:integer.
+  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
+
+logic bool_eq4 : (int,integer) farray, int, int, (int,integer) farray, int,
+  int -> bool
+
+axiom bool_eq_def3 :
+  (forall a:(int,integer) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,integer) farray. forall b__first:int. forall b__last:int
+  [bool_eq4(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) and
+  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
+  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) ->
+  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev :
+  (forall a:(int,integer) farray. forall b:(int,integer) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq4(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) ->
+  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
+
+logic compare : (int,integer) farray, int, int, (int,integer) farray, int,
+  int -> int
+
+axiom compare_def_eq :
+  (forall a:(int,integer) farray. forall b:(int,integer) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt :
+  (forall a:(int,integer) farray. forall b:(int,integer) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt :
+  (forall a:(int,integer) farray. forall b:(int,integer) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+
+logic dummy2 : (int,integer) farray
+
+logic value__size : int
+
+logic object__size : (int,integer) farray -> int
+
+logic value__component__size : int
+
+logic object__component__size : (int,integer) farray -> int
+
+logic value__alignment : int
+
+logic object__alignment : (int,integer) farray -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:(int,integer) farray. (0 <= object__size(a)))
+
+axiom value__component__size_axiom : (0 <= value__component__size)
+
+axiom object__component__size_axiom :
+  (forall a:(int,integer) farray. (0 <= object__component__size(a)))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:(int,integer) farray. (0 <= object__alignment(a)))
+
+logic user_eq2 : (int,integer) farray, (int,integer) farray -> bool
+
+type map
+
+type map__ref1 = { map__content1 : map
+}
+
+logic get : map, int, int -> (int,integer) farray
+
+logic set : map, int, int, (int,integer) farray -> map
+
+axiom Select_eq :
+  (forall m:map.
+  (forall i:int.
+  (forall j:int.
+  (forall a:(int,integer) farray [set(m, i, j, a)]. (get(set(m, i, j, a), i,
+  j) = a)))))
+
+axiom Select_neq :
+  (forall m:map.
+  (forall i:int. forall i2:int.
+  (forall j:int. forall j2:int.
+  (forall a:(int,integer) farray [get(set(m, i, j, a), i2, j2)| set(m, i, j,
+  a), get(m, i2, j2)]. ((not ((i = i2) and (j = j2))) -> (get(set(m, i, j,
+  a), i2, j2) = get(m, i2, j2)))))))
+
+logic slide1 : map, int, int, int, int -> map
+
+axiom slide_def1 :
+  (forall a:map.
+  (forall new_first:int. forall old_first:int.
+  (forall new_first_2:int. forall old_first_2:int.
+  (forall i:int.
+  (forall j:int [get(slide1(a, old_first, new_first, old_first_2,
+  new_first_2), i, j)]. (get(slide1(a, old_first, new_first, old_first_2,
+  new_first_2), i, j) = get(a, (i - (new_first - old_first)),
+  (j - (new_first_2 - old_first_2)))))))))
+
+logic bool_eq5 : map, int, int, int, int, map, int, int, int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall a:map. forall a__first:int. forall a__last:int.
+  forall a__first_2:int. forall a__last_2:int. forall b:map.
+  forall b__first:int. forall b__last:int. forall b__first_2:int.
+  forall b__last_2:int [bool_eq5(a, a__first, a__last, a__first_2, a__last_2,
+  b, b__first, b__last, b__first_2, b__last_2)].
+  (((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (((a__first_2 <= a__last_2) and ((b__first_2 <= b__last_2) and
+  ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)))) or
+  ((not (a__first_2 <= a__last_2)) and (b__last_2 <  b__first_2)))) and
+  (forall temp___idx_133:int. forall temp___idx_134:int.
+  (((((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)) and
+  ((a__first_2 <= temp___idx_134) and (temp___idx_134 <= a__last_2))) and
+  (bool_eq4(get(a, temp___idx_133, temp___idx_134), 1, 3, get(b,
+  ((b__first - a__first) + temp___idx_133),
+  ((b__first_2 - a__first_2) + temp___idx_134)), 1, 3) = true)) or
+  (not (((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)) and
+  ((a__first_2 <= temp___idx_134) and (temp___idx_134 <= a__last_2))))))) ->
+  (bool_eq5(a, a__first, a__last, a__first_2, a__last_2, b, b__first,
+  b__last, b__first_2, b__last_2) = true)) and
+  ((not (((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (((a__first_2 <= a__last_2) -> ((b__first_2 <= b__last_2) and
+  ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)))) and
+  ((not (a__first_2 <= a__last_2)) -> (b__last_2 <  b__first_2)))) and
+  (forall temp___idx_133:int. forall temp___idx_134:int.
+  ((((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)) and
+  ((a__first_2 <= temp___idx_134) and (temp___idx_134 <= a__last_2))) ->
+  (bool_eq4(get(a, temp___idx_133, temp___idx_134), 1, 3, get(b,
+  ((b__first - a__first) + temp___idx_133),
+  ((b__first_2 - a__first_2) + temp___idx_134)), 1, 3) = true))))) ->
+  (bool_eq5(a, a__first, a__last, a__first_2, a__last_2, b, b__first,
+  b__last, b__first_2, b__last_2) = false))))
+
+axiom bool_eq_rev1 :
+  (forall a:map. forall b:map.
+  (forall a__first:int. forall a__last:int. forall a__first_2:int.
+  forall a__last_2:int. forall b__first:int. forall b__last:int.
+  forall b__first_2:int. forall b__last_2:int. ((bool_eq5(b, b__first,
+  b__last, b__first_2, b__last_2, a, a__first, a__last, a__first_2,
+  a__last_2) = true) -> (((((a__first <= a__last) ->
+  ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (((a__first_2 <= a__last_2) -> ((b__first_2 <= b__last_2) and
+  ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)))) and
+  ((not (a__first_2 <= a__last_2)) -> (b__last_2 <  b__first_2)))) and
+  (forall temp___idx_133:int. forall temp___idx_134:int.
+  ((((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)) and
+  ((a__first_2 <= temp___idx_134) and (temp___idx_134 <= a__last_2))) ->
+  (bool_eq4(get(a, temp___idx_133, temp___idx_134), 1, 3, get(b,
+  ((b__first - a__first) + temp___idx_133),
+  ((b__first_2 - a__first_2) + temp___idx_134)), 1, 3) = true)))))))
+
+logic dummy3 : map
+
+logic value__size1 : int
+
+logic object__size1 : map -> int
+
+logic value__component__size1 : int
+
+logic object__component__size1 : map -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : map -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (forall a:map. (0 <= object__size1(a)))
+
+axiom value__component__size_axiom1 : (0 <= value__component__size1)
+
+axiom object__component__size_axiom1 :
+  (forall a:map. (0 <= object__component__size1(a)))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 : (forall a:map. (0 <= object__alignment1(a)))
+
+logic user_eq3 : map, map -> bool
+
+type map__ref2 = { map__content2 : (int,map) farray
+}
+
+logic slide2 : (int,map) farray, int, int -> (int,map) farray
+
+axiom slide_eq1 :
+  (forall a:(int,map) farray.
+  (forall first:int [slide2(a, first, first)]. (slide2(a, first, first) = a)))
+
+axiom slide_def2 :
+  (forall a:(int,map) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide2(a, old_first, new_first)[i])]. ((slide2(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat1 : (int,map) farray, int, int, (int,map) farray, int,
+  int -> (int,map) farray
+
+axiom concat_def1 :
+  (forall a:(int,map) farray. forall b:(int,map) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton1 : map, int -> (int,map) farray
+
+axiom singleton_def1 :
+  (forall v:map.
+  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
+
+logic bool_eq6 : (int,map) farray, int, int, (int,map) farray, int,
+  int -> bool
+
+axiom bool_eq_def5 :
+  (forall a:(int,map) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,map) farray. forall b__first:int. forall b__last:int
+  [bool_eq6(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_135:int. ((((a__first <= temp___idx_135) and
+  (temp___idx_135 <= a__last)) and (bool_eq5((a[temp___idx_135]), 1, 3, 1, 3,
+  (b[((b__first - a__first) + temp___idx_135)]), 1, 3, 1, 3) = true)) or
+  (not ((a__first <= temp___idx_135) and (temp___idx_135 <= a__last)))))) ->
+  (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_135:int. (((a__first <= temp___idx_135) and
+  (temp___idx_135 <= a__last)) -> (bool_eq5((a[temp___idx_135]), 1, 3, 1, 3,
+  (b[((b__first - a__first) + temp___idx_135)]), 1, 3, 1, 3) = true))))) ->
+  (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev2 :
+  (forall a:(int,map) farray. forall b:(int,map) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq6(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_135:int. (((a__first <= temp___idx_135) and
+  (temp___idx_135 <= a__last)) -> (bool_eq5((a[temp___idx_135]), 1, 3, 1, 3,
+  (b[((b__first - a__first) + temp___idx_135)]), 1, 3, 1, 3) = true)))))))
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic y : (int,map) farray
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
+predicate dynamic_property(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq7 : int, int -> bool
+
+axiom bool_eq_def6 :
+  (forall x:int. forall y1:int [bool_eq7(x, y1)]. (((x = y1) -> (bool_eq7(x,
+  y1) = true)) and ((not (x = y1)) -> (bool_eq7(x, y1) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq4 : integer, integer -> bool
+
+logic dummy4 : integer
+
+type t12b__ref = { t12b__content : integer
+}
+
+function t12b__ref___projection(a: t12b__ref) : integer = (a).t12b__content
+
+type t
+
+logic first : t -> integer
+
+logic last : t -> integer
+
+logic mk : int, int -> t
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep(first(mk(f, l))) = f) and (to_rep(last(mk(f, l))) = l)))))
+
+predicate dynamic_property1(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property(range_first, range_last, low) and
+  dynamic_property(range_first, range_last, high)))))
+
+type us_t = { elts : (int,integer) farray; rt : t
+}
+
+function to_array(a: us_t) : (int,integer) farray = (a).elts
+
+function of_array(a: (int,integer) farray, f: int, l: int) : us_t = { elts =
+  a; rt = mk(f, l) }
+
+function first1(a: us_t) : int = to_rep(first((a).rt))
+
+function last1(a: us_t) : int = to_rep(last((a).rt))
+
+logic length : us_t -> int
+
+axiom length_def :
+  (forall a:us_t [length(a)]. (((first1(a) <= last1(a)) ->
+  (length(a) = ((last1(a) - first1(a)) + 1))) and
+  ((not (first1(a) <= last1(a))) -> (length(a) = 0))))
+
+logic value__size2 : int
+
+logic object__size2 : (int,integer) farray -> int
+
+logic value__component__size2 : int
+
+logic object__component__size2 : (int,integer) farray -> int
+
+logic value__alignment2 : int
+
+logic object__alignment2 : (int,integer) farray -> int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 :
+  (forall a:(int,integer) farray. (0 <= object__size2(a)))
+
+axiom value__component__size_axiom2 : (0 <= value__component__size2)
+
+axiom object__component__size_axiom2 :
+  (forall a:(int,integer) farray. (0 <= object__component__size2(a)))
+
+axiom value__alignment_axiom2 : (0 <= value__alignment2)
+
+axiom object__alignment_axiom2 :
+  (forall a:(int,integer) farray. (0 <= object__alignment2(a)))
+
+function bool_eq8(x: us_t, y1: us_t) : bool = bool_eq4((x).elts,
+  to_rep(first((x).rt)), to_rep(last((x).rt)), (y1).elts,
+  to_rep(first((y1).rt)), to_rep(last((y1).rt)))
+
+logic user_eq5 : us_t, us_t -> bool
+
+logic dummy5 : (int,integer) farray
+
+logic dummy6 : t
+
+type t13b__ref = { t13b__content : us_t
+}
+
+function t13b__ref___projection(a: t13b__ref) : us_t = (a).t13b__content
+
+predicate dynamic_property2(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq9 : int, int -> bool
+
+axiom bool_eq_def7 :
+  (forall x:int. forall y1:int [bool_eq9(x, y1)]. (((x = y1) -> (bool_eq9(x,
+  y1) = true)) and ((not (x = y1)) -> (bool_eq9(x, y1) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq6 : integer, integer -> bool
+
+logic dummy7 : integer
+
+type t14b__ref = { t14b__content : integer
+}
+
+function t14b__ref___projection(a: t14b__ref) : integer = (a).t14b__content
+
+type t1
+
+logic first2 : t1 -> integer
+
+logic last2 : t1 -> integer
+
+logic mk1 : int, int -> t1
+
+axiom mk_def1 :
+  (forall f:int. forall l:int [mk1(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep(first2(mk1(f, l))) = f) and (to_rep(last2(mk1(f, l))) = l)))))
+
+predicate dynamic_property3(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property2(range_first, range_last, low) and
+  dynamic_property2(range_first, range_last, high)))))
+
+type us_t1 = { elts1 : (int,integer) farray; rt1 : t1
+}
+
+function to_array1(a: us_t1) : (int,integer) farray = (a).elts1
+
+function of_array1(a: (int,integer) farray, f: int, l: int) : us_t1 = {
+  elts1 = a; rt1 = mk1(f, l) }
+
+function first3(a: us_t1) : int = to_rep(first2((a).rt1))
+
+function last3(a: us_t1) : int = to_rep(last2((a).rt1))
+
+logic length1 : us_t1 -> int
+
+axiom length_def1 :
+  (forall a:us_t1 [length1(a)]. (((first3(a) <= last3(a)) ->
+  (length1(a) = ((last3(a) - first3(a)) + 1))) and
+  ((not (first3(a) <= last3(a))) -> (length1(a) = 0))))
+
+logic value__size3 : int
+
+logic object__size3 : (int,integer) farray -> int
+
+logic value__component__size3 : int
+
+logic object__component__size3 : (int,integer) farray -> int
+
+logic value__alignment3 : int
+
+logic object__alignment3 : (int,integer) farray -> int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 :
+  (forall a:(int,integer) farray. (0 <= object__size3(a)))
+
+axiom value__component__size_axiom3 : (0 <= value__component__size3)
+
+axiom object__component__size_axiom3 :
+  (forall a:(int,integer) farray. (0 <= object__component__size3(a)))
+
+axiom value__alignment_axiom3 : (0 <= value__alignment3)
+
+axiom object__alignment_axiom3 :
+  (forall a:(int,integer) farray. (0 <= object__alignment3(a)))
+
+function bool_eq10(x: us_t1, y1: us_t1) : bool = bool_eq4((x).elts1,
+  to_rep(first2((x).rt1)), to_rep(last2((x).rt1)), (y1).elts1,
+  to_rep(first2((y1).rt1)), to_rep(last2((y1).rt1)))
+
+logic user_eq7 : us_t1, us_t1 -> bool
+
+logic dummy8 : (int,integer) farray
+
+logic dummy9 : t1
+
+type t15b__ref = { t15b__content : us_t1
+}
+
+function t15b__ref___projection(a: t15b__ref) : us_t1 = (a).t15b__content
+
+logic p_slice__x__aggregate_def : map -> (int,map) farray
+
+axiom def_axiom :
+  (forall temp___219:map.
+  (forall temp___220:int.
+  ((p_slice__x__aggregate_def(temp___219)[temp___220]) = temp___219)))
+
+logic temp___221 : (int,integer) farray -> map
+
+axiom def_axiom1 :
+  (forall temp___223:(int,integer) farray.
+  (forall temp___224:int. forall temp___225:int. (get(temp___221(temp___223),
+  temp___224, temp___225) = temp___223)))
+
+logic temp___226 : int -> (int,integer) farray
+
+axiom def_axiom2 :
+  (forall temp___228:int.
+  (forall temp___229:int.
+  ((temp___226(temp___228)[temp___229]) = of_rep(temp___228))))
+
+type t2
+
+logic first4 : t2 -> integer
+
+logic last4 : t2 -> integer
+
+logic mk2 : int, int -> t2
+
+axiom mk_def2 :
+  (forall f:int. forall l:int [mk2(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep(first4(mk2(f, l))) = f) and (to_rep(last4(mk2(f, l))) = l)))))
+
+predicate dynamic_property4(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (in_range2(low) and in_range2(high)))))
+
+type us_t2 = { elts2 : (int,integer) farray; rt2 : t2
+}
+
+function to_array2(a: us_t2) : (int,integer) farray = (a).elts2
+
+function of_array2(a: (int,integer) farray, f: int, l: int) : us_t2 = {
+  elts2 = a; rt2 = mk2(f, l) }
+
+function first5(a: us_t2) : int = to_rep(first4((a).rt2))
+
+function last5(a: us_t2) : int = to_rep(last4((a).rt2))
+
+logic length2 : us_t2 -> int
+
+axiom length_def2 :
+  (forall a:us_t2 [length2(a)]. (((first5(a) <= last5(a)) ->
+  (length2(a) = ((last5(a) - first5(a)) + 1))) and
+  ((not (first5(a) <= last5(a))) -> (length2(a) = 0))))
+
+logic value__size4 : int
+
+logic object__size4 : (int,integer) farray -> int
+
+logic value__component__size4 : int
+
+logic object__component__size4 : (int,integer) farray -> int
+
+logic value__alignment4 : int
+
+logic object__alignment4 : (int,integer) farray -> int
+
+axiom value__size_axiom4 : (0 <= value__size4)
+
+axiom object__size_axiom4 :
+  (forall a:(int,integer) farray. (0 <= object__size4(a)))
+
+axiom value__component__size_axiom4 : (0 <= value__component__size4)
+
+axiom object__component__size_axiom4 :
+  (forall a:(int,integer) farray. (0 <= object__component__size4(a)))
+
+axiom value__alignment_axiom4 : (0 <= value__alignment4)
+
+axiom object__alignment_axiom4 :
+  (forall a:(int,integer) farray. (0 <= object__alignment4(a)))
+
+function bool_eq11(x: us_t2, y1: us_t2) : bool = bool_eq4((x).elts2,
+  to_rep(first4((x).rt2)), to_rep(last4((x).rt2)), (y1).elts2,
+  to_rep(first4((y1).rt2)), to_rep(last4((y1).rt2)))
+
+logic user_eq8 : us_t2, us_t2 -> bool
+
+logic dummy10 : (int,integer) farray
+
+logic dummy11 : t2
+
+type tt1B__ref = { tt1B__content : us_t2
+}
+
+function tt1B__ref___projection(a: tt1B__ref) : us_t2 = (a).tt1B__content
+
+logic temp___230 : int, int, int -> us_t1
+
+axiom def_axiom3 :
+  (forall temp___232:int. forall temp___233:int. forall temp___234:int.
+  ((dynamic_property4(1, 3, temp___233, temp___234) ->
+  ((to_rep(first2((temp___230(temp___232, temp___233,
+  temp___234)).rt1)) = temp___233) and (to_rep(last2((temp___230(temp___232,
+  temp___233, temp___234)).rt1)) = temp___234))) and
+  (forall temp___235:int. (((temp___230(temp___232, temp___233,
+  temp___234)).elts1[temp___235]) = of_rep(temp___232)))))
+
+ (* File "p_slice.adb", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall x:(int,map) farray. forall i3:int. forall i21:int. forall i22:int.
+  forall i1:int. forall temp___237:(int,integer) farray.
+  forall temp___2371:t1. forall temp___238:(int,integer) farray.
+  forall temp___2381:t. forall temp___246:(int,integer) farray.
+  forall temp___2461:t. forall o:(int,integer) farray. forall o1:map.
+  forall o2:(int,map) farray. forall temp___2372:(int,integer) farray.
+  forall temp___2373:t1. forall temp___2382:(int,integer) farray.
+  forall temp___2383:t. forall temp___2462:(int,integer) farray.
+  forall temp___2463:t. forall o3:(int,integer) farray. forall o4:map.
+  forall o5:(int,map) farray. forall temp___2374:(int,integer) farray.
+  forall temp___2375:t1. forall temp___2384:(int,integer) farray.
+  forall temp___2385:t. forall temp___2464:(int,integer) farray.
+  forall temp___2465:t. forall o6:(int,integer) farray. forall o7:map.
+  forall o8:(int,map) farray. forall temp___2376:(int,integer) farray.
+  forall temp___2377:t1. forall temp___2386:(int,integer) farray.
+  forall temp___2387:t. forall temp___2466:(int,integer) farray.
+  forall temp___2467:t. forall o9:(int,integer) farray. forall o10:map.
+  forall o11:(int,map) farray. forall temp___2378:(int,integer) farray.
+  forall temp___2379:t1. forall temp___2388:(int,integer) farray.
+  forall temp___2389:t. forall temp___2468:(int,integer) farray.
+  forall temp___2469:t. forall o12:(int,integer) farray. forall o13:map.
+  forall o14:(int,map) farray. forall temp___23710:(int,integer) farray.
+  forall temp___23711:t1. forall temp___23810:(int,integer) farray.
+  forall temp___23811:t. forall temp___24610:(int,integer) farray.
+  forall temp___24611:t. forall o15:(int,integer) farray. forall o16:map.
+  forall o17:(int,map) farray. forall temp___23712:(int,integer) farray.
+  forall temp___23713:t1. forall temp___23812:(int,integer) farray.
+  forall temp___23813:t. forall temp___24612:(int,integer) farray.
+  forall temp___24613:t. forall o18:(int,integer) farray. forall o19:map.
+  forall o20:(int,map) farray. forall temp___23714:(int,integer) farray.
+  forall temp___23715:t1. forall temp___23814:(int,integer) farray.
+  forall temp___23815:t. forall temp___24614:(int,integer) farray.
+  forall temp___24615:t. forall o21:(int,integer) farray. forall o22:map.
+  forall o23:(int,map) farray. forall temp___23716:(int,integer) farray.
+  forall temp___23717:t1. forall temp___23816:(int,integer) farray.
+  forall temp___23817:t. forall temp___24616:(int,integer) farray.
+  forall temp___24617:t. forall o24:(int,integer) farray. forall o25:map.
+  forall o26:(int,map) farray. forall temp___23718:(int,integer) farray.
+  forall temp___23719:t1. forall temp___23818:(int,integer) farray.
+  forall temp___23819:t. forall temp___24618:(int,integer) farray.
+  forall temp___24619:t. forall o27:(int,integer) farray. forall o28:map.
+  forall o29:(int,map) farray. forall temp___23720:(int,integer) farray.
+  forall temp___23721:t1. forall temp___23820:(int,integer) farray.
+  forall temp___23821:t. forall temp___24620:(int,integer) farray.
+  forall temp___24621:t. forall o30:(int,integer) farray. forall o31:map.
+  forall o32:(int,map) farray. forall temp___23722:(int,integer) farray.
+  forall temp___23723:t1. forall temp___23822:(int,integer) farray.
+  forall temp___23823:t. forall temp___24622:(int,integer) farray.
+  forall temp___24623:t. forall o33:(int,integer) farray. forall o34:map.
+  forall o35:(int,map) farray. forall temp___23724:(int,integer) farray.
+  forall temp___23725:t1. forall temp___23824:us_t. forall temp___24624:us_t.
+  forall o36:(int,integer) farray. forall o37:map.
+  forall o38:(int,map) farray. forall temp___23726:us_t1.
+  forall temp___23825:us_t. forall temp___24625:us_t.
+  forall o39:(int,integer) farray. forall o40:map.
+  forall o41:(int,map) farray. forall temp___23727:us_t1.
+  forall temp___23826:us_t. forall temp___24626:us_t.
+  forall o42:(int,integer) farray. forall o43:map.
+  forall o44:(int,map) farray. forall temp___23728:us_t1.
+  forall temp___23827:us_t. forall temp___24627:us_t.
+  forall o45:(int,integer) farray. forall o46:map.
+  forall o47:(int,map) farray. forall temp___23729:us_t1.
+  forall temp___23828:us_t. forall temp___24628:us_t.
+  forall o48:(int,integer) farray. forall o49:map.
+  forall o50:(int,map) farray. forall temp___23730:us_t1.
+  forall temp___23829:us_t. forall temp___24629:us_t.
+  forall o51:(int,integer) farray. forall o52:map.
+  forall o53:(int,map) farray. forall temp___23731:us_t1.
+  forall temp___23830:us_t. forall temp___24630:us_t.
+  forall o54:(int,integer) farray. forall o55:map.
+  forall o56:(int,map) farray. forall temp___23732:us_t1.
+  forall temp___23831:us_t. forall temp___24631:us_t.
+  forall o57:(int,integer) farray. forall o58:map.
+  forall o59:(int,map) farray. forall temp___23733:us_t1.
+  forall temp___23832:us_t. forall temp___24632:us_t.
+  forall o60:(int,integer) farray. forall o61:map.
+  forall o62:(int,map) farray. forall temp___23734:us_t1.
+  forall temp___23833:us_t. forall temp___24633:us_t.
+  forall o63:(int,integer) farray. forall o64:map.
+  forall o65:(int,map) farray. forall temp___23735:us_t1.
+  forall temp___23834:us_t. forall temp___24634:us_t.
+  forall o66:(int,integer) farray. forall o67:map.
+  forall o68:(int,map) farray. forall temp___23736:us_t1.
+  forall temp___23835:us_t. forall temp___24635:us_t.
+  forall o69:(int,integer) farray. forall o70:map.
+  forall o71:(int,map) farray. forall temp___23737:us_t1.
+  forall temp___23836:us_t. forall temp___24636:us_t.
+  forall o72:(int,integer) farray. forall o73:map.
+  forall o74:(int,map) farray. forall temp___23738:us_t1.
+  forall temp___23837:us_t. forall temp___24637:us_t.
+  forall o75:(int,integer) farray. forall o76:map.
+  forall o77:(int,map) farray. forall temp___23739:us_t1.
+  forall temp___23838:us_t. forall temp___24638:us_t.
+  forall o78:(int,integer) farray. forall o79:map.
+  forall o80:(int,map) farray. forall result:map__ref2.
+  forall x1:(int,map) farray. forall result1:int__ref. forall i31:int.
+  forall result2:int__ref. forall i211:int. forall result3:int__ref.
+  forall i221:int. forall result4:int__ref. forall i11:int.
+  forall result5:map__ref2. forall x2:(int,map) farray.
+  forall result6:int__ref. forall i12:int. forall result7:map__ref2.
+  forall x3:(int,map) farray. forall result8:int__ref. forall i13:int.
+  forall result9:map__ref2. forall x4:(int,map) farray.
+  forall result10:int__ref. forall i222:int. forall result11:int__ref.
+  forall i14:int. forall result12:map__ref2. forall x5:(int,map) farray.
+  forall result13:int__ref. forall i15:int. forall result14:map__ref2.
+  forall x6:(int,map) farray. forall result15:int__ref. forall i16:int.
+  forall result16:map__ref2. forall x7:(int,map) farray.
+  forall result17:int__ref. forall i223:int. forall result18:int__ref.
+  forall i17:int. forall result19:map__ref2. forall x8:(int,map) farray.
+  forall result20:int__ref. forall i18:int. forall result21:map__ref2.
+  forall x9:(int,map) farray. forall result22:int__ref. forall i19:int.
+  forall result23:map__ref2. forall x10:(int,map) farray.
+  forall result24:int__ref. forall i212:int. forall result25:int__ref.
+  forall i224:int. forall result26:int__ref. forall i110:int.
+  forall result27:map__ref2. forall x11:(int,map) farray.
+  forall result28:int__ref. forall i111:int. forall result29:map__ref2.
+  forall x12:(int,map) farray. forall result30:int__ref. forall i112:int.
+  forall result31:map__ref2. forall x13:(int,map) farray.
+  forall result32:int__ref. forall i225:int. forall result33:int__ref.
+  forall i113:int. forall result34:map__ref2. forall x14:(int,map) farray.
+  forall result35:int__ref. forall i114:int. forall result36:map__ref2.
+  forall x15:(int,map) farray. forall result37:int__ref. forall i115:int.
+  forall result38:map__ref2. forall x16:(int,map) farray.
+  forall result39:int__ref. forall i226:int. forall result40:int__ref.
+  forall i116:int. forall result41:map__ref2. forall x17:(int,map) farray.
+  forall result42:int__ref. forall i117:int. forall result43:map__ref2.
+  forall x18:(int,map) farray. forall result44:int__ref. forall i118:int.
+  forall result45:map__ref2. forall x19:(int,map) farray.
+  forall result46:int__ref. forall i213:int. forall result47:int__ref.
+  forall i227:int. forall result48:int__ref. forall i119:int.
+  forall result49:map__ref2. forall x20:(int,map) farray.
+  forall result50:int__ref. forall i120:int. forall result51:map__ref2.
+  forall x21:(int,map) farray. forall result52:int__ref. forall i121:int.
+  forall result53:map__ref2. forall x22:(int,map) farray.
+  forall result54:int__ref. forall i228:int. forall result55:int__ref.
+  forall i122:int. forall result56:map__ref2. forall x23:(int,map) farray.
+  forall result57:int__ref. forall i123:int. forall result58:map__ref2.
+  forall x24:(int,map) farray. forall result59:int__ref. forall i124:int.
+  forall result60:map__ref2. forall x25:(int,map) farray.
+  forall result61:int__ref. forall i229:int. forall result62:int__ref.
+  forall i125:int. forall result63:map__ref2. forall x26:(int,map) farray.
+  forall result64:int__ref. forall i126:int. forall result65:map__ref2.
+  forall x27:(int,map) farray. forall result66:int__ref. forall i127:int.
+  forall result67:map__ref2. forall x28:(int,map) farray. (((result = {
+  map__content2 = x }) and
+  (x1 = p_slice__x__aggregate_def(temp___221(temp___226(0))))) ->
+  ((x1 = y) -> (((result1 = { int__content = i3 }) and (i31 = 1)) ->
+  ((((result2 = { int__content = i21 }) and (i211 = 1)) and ((((result3 = {
+  int__content = i22 }) and (i221 = 1)) and ((((result4 = { int__content = i1
+  }) and (i11 = 1)) and (((((((((to_rep(first2((temp___230(1, i11,
+  2)).rt1)) = i11) and ((to_rep(last2((temp___230(1, i11, 2)).rt1)) = 2) and
+  ({ elts1 = temp___237; rt1 = temp___2371 } = temp___230(1, i11, 2)))) and
+  ((((to_rep(first2(temp___2371)) <= to_rep(last2(temp___2371))) and
+  (((i11 <= 2) and
+  (((to_rep(last2(temp___2371)) - to_rep(first2(temp___2371))) + 1) = ((2 - i11) + 1))) or
+  ((not (i11 <= 2)) and
+  (((to_rep(last2(temp___2371)) - to_rep(first2(temp___2371))) + 1) = 0)))) or
+  ((not (to_rep(first2(temp___2371)) <= to_rep(last2(temp___2371)))) and
+  (((i11 <= 2) and (0 = ((2 - i11) + 1))) or (not (i11 <= 2))))) and
+  ((slide(temp___237, to_rep(first2(temp___2371)), i11) = temp___238) and
+  (mk(i11, 2) = temp___2381)))) and
+  ((((to_rep(first(temp___2381)) <= to_rep(last(temp___2381))) and
+  (((to_rep(first(mk(i11, 2))) <= to_rep(last(mk(i11, 2)))) and
+  (((to_rep(last(temp___2381)) - to_rep(first(temp___2381))) + 1) = ((to_rep(last(mk(i11,
+  2))) - to_rep(first(mk(i11, 2)))) + 1))) or ((not (to_rep(first(mk(i11,
+  2))) <= to_rep(last(mk(i11, 2))))) and
+  (((to_rep(last(temp___2381)) - to_rep(first(temp___2381))) + 1) = 0)))) or
+  ((not (to_rep(first(temp___2381)) <= to_rep(last(temp___2381)))) and
+  (((to_rep(first(mk(i11, 2))) <= to_rep(last(mk(i11, 2)))) and
+  (0 = ((to_rep(last(mk(i11, 2))) - to_rep(first(mk(i11, 2)))) + 1))) or
+  (not (to_rep(first(mk(i11, 2))) <= to_rep(last(mk(i11, 2)))))))) and ({
+  elts = temp___246; rt = temp___2461 } = { elts = temp___238; rt =
+  temp___2381 }))) and
+  (forall temp___247:int. ((((i11 <= temp___247) and (temp___247 <= 2)) and
+  ((o[temp___247]) = (temp___246[temp___247]))) or
+  ((not ((i11 <= temp___247) and (temp___247 <= 2))) and
+  ((o[temp___247]) = (get((x1[i31]), i211, i221)[temp___247])))))) and
+  (o1 = set((x1[i31]), i211, i221, o))) and (o2 = (x1[i31 <- o1]))) and
+  ((result5 = { map__content2 = x1 }) and (x2 = o2))) and (((result6 = {
+  int__content = i11 }) and (i12 = 2)) and
+  (((((((((to_rep(first2((temp___230(1, i12, 2)).rt1)) = i12) and
+  ((to_rep(last2((temp___230(1, i12, 2)).rt1)) = 2) and ({ elts1 =
+  temp___2372; rt1 = temp___2373 } = temp___230(1, i12, 2)))) and
+  ((((to_rep(first2(temp___2373)) <= to_rep(last2(temp___2373))) and
+  (((i12 <= 2) and
+  (((to_rep(last2(temp___2373)) - to_rep(first2(temp___2373))) + 1) = ((2 - i12) + 1))) or
+  ((not (i12 <= 2)) and
+  (((to_rep(last2(temp___2373)) - to_rep(first2(temp___2373))) + 1) = 0)))) or
+  ((not (to_rep(first2(temp___2373)) <= to_rep(last2(temp___2373)))) and
+  (((i12 <= 2) and (0 = ((2 - i12) + 1))) or (not (i12 <= 2))))) and
+  ((slide(temp___2372, to_rep(first2(temp___2373)), i12) = temp___2382) and
+  (mk(i12, 2) = temp___2383)))) and
+  ((((to_rep(first(temp___2383)) <= to_rep(last(temp___2383))) and
+  (((to_rep(first(mk(i12, 2))) <= to_rep(last(mk(i12, 2)))) and
+  (((to_rep(last(temp___2383)) - to_rep(first(temp___2383))) + 1) = ((to_rep(last(mk(i12,
+  2))) - to_rep(first(mk(i12, 2)))) + 1))) or ((not (to_rep(first(mk(i12,
+  2))) <= to_rep(last(mk(i12, 2))))) and
+  (((to_rep(last(temp___2383)) - to_rep(first(temp___2383))) + 1) = 0)))) or
+  ((not (to_rep(first(temp___2383)) <= to_rep(last(temp___2383)))) and
+  (((to_rep(first(mk(i12, 2))) <= to_rep(last(mk(i12, 2)))) and
+  (0 = ((to_rep(last(mk(i12, 2))) - to_rep(first(mk(i12, 2)))) + 1))) or
+  (not (to_rep(first(mk(i12, 2))) <= to_rep(last(mk(i12, 2)))))))) and ({
+  elts = temp___2462; rt = temp___2463 } = { elts = temp___2382; rt =
+  temp___2383 }))) and
+  (forall temp___247:int. ((((i12 <= temp___247) and (temp___247 <= 2)) and
+  ((o3[temp___247]) = (temp___2462[temp___247]))) or
+  ((not ((i12 <= temp___247) and (temp___247 <= 2))) and
+  ((o3[temp___247]) = (get((x2[i31]), i211, i221)[temp___247])))))) and
+  (o4 = set((x2[i31]), i211, i221, o3))) and (o5 = (x2[i31 <- o4]))) and
+  ((result7 = { map__content2 = x2 }) and (x3 = o5))) and (((result8 = {
+  int__content = i12 }) and (i13 = 3)) and
+  ((((((((to_rep(first2((temp___230(1, i13, 2)).rt1)) = i13) and
+  ((to_rep(last2((temp___230(1, i13, 2)).rt1)) = 2) and ({ elts1 =
+  temp___2374; rt1 = temp___2375 } = temp___230(1, i13, 2)))) and
+  ((((to_rep(first2(temp___2375)) <= to_rep(last2(temp___2375))) and
+  (((i13 <= 2) and
+  (((to_rep(last2(temp___2375)) - to_rep(first2(temp___2375))) + 1) = ((2 - i13) + 1))) or
+  ((not (i13 <= 2)) and
+  (((to_rep(last2(temp___2375)) - to_rep(first2(temp___2375))) + 1) = 0)))) or
+  ((not (to_rep(first2(temp___2375)) <= to_rep(last2(temp___2375)))) and
+  (((i13 <= 2) and (0 = ((2 - i13) + 1))) or (not (i13 <= 2))))) and
+  ((slide(temp___2374, to_rep(first2(temp___2375)), i13) = temp___2384) and
+  (mk(i13, 2) = temp___2385)))) and
+  ((((to_rep(first(temp___2385)) <= to_rep(last(temp___2385))) and
+  (((to_rep(first(mk(i13, 2))) <= to_rep(last(mk(i13, 2)))) and
+  (((to_rep(last(temp___2385)) - to_rep(first(temp___2385))) + 1) = ((to_rep(last(mk(i13,
+  2))) - to_rep(first(mk(i13, 2)))) + 1))) or ((not (to_rep(first(mk(i13,
+  2))) <= to_rep(last(mk(i13, 2))))) and
+  (((to_rep(last(temp___2385)) - to_rep(first(temp___2385))) + 1) = 0)))) or
+  ((not (to_rep(first(temp___2385)) <= to_rep(last(temp___2385)))) and
+  (((to_rep(first(mk(i13, 2))) <= to_rep(last(mk(i13, 2)))) and
+  (0 = ((to_rep(last(mk(i13, 2))) - to_rep(first(mk(i13, 2)))) + 1))) or
+  (not (to_rep(first(mk(i13, 2))) <= to_rep(last(mk(i13, 2)))))))) and ({
+  elts = temp___2464; rt = temp___2465 } = { elts = temp___2384; rt =
+  temp___2385 }))) and
+  (forall temp___247:int. ((((i13 <= temp___247) and (temp___247 <= 2)) and
+  ((o6[temp___247]) = (temp___2464[temp___247]))) or
+  ((not ((i13 <= temp___247) and (temp___247 <= 2))) and
+  ((o6[temp___247]) = (get((x3[i31]), i211, i221)[temp___247])))))) and
+  (o7 = set((x3[i31]), i211, i221, o6))) and (o8 = (x3[i31 <- o7]))) and
+  ((result9 = { map__content2 = x3 }) and (x4 = o8)))))))) and
+  (((result10 = { int__content = i221 }) and (i222 = 2)) and ((((result11 = {
+  int__content = i13 }) and (i14 = 1)) and
+  (((((((((to_rep(first2((temp___230(1, i14, 2)).rt1)) = i14) and
+  ((to_rep(last2((temp___230(1, i14, 2)).rt1)) = 2) and ({ elts1 =
+  temp___2376; rt1 = temp___2377 } = temp___230(1, i14, 2)))) and
+  ((((to_rep(first2(temp___2377)) <= to_rep(last2(temp___2377))) and
+  (((i14 <= 2) and
+  (((to_rep(last2(temp___2377)) - to_rep(first2(temp___2377))) + 1) = ((2 - i14) + 1))) or
+  ((not (i14 <= 2)) and
+  (((to_rep(last2(temp___2377)) - to_rep(first2(temp___2377))) + 1) = 0)))) or
+  ((not (to_rep(first2(temp___2377)) <= to_rep(last2(temp___2377)))) and
+  (((i14 <= 2) and (0 = ((2 - i14) + 1))) or (not (i14 <= 2))))) and
+  ((slide(temp___2376, to_rep(first2(temp___2377)), i14) = temp___2386) and
+  (mk(i14, 2) = temp___2387)))) and
+  ((((to_rep(first(temp___2387)) <= to_rep(last(temp___2387))) and
+  (((to_rep(first(mk(i14, 2))) <= to_rep(last(mk(i14, 2)))) and
+  (((to_rep(last(temp___2387)) - to_rep(first(temp___2387))) + 1) = ((to_rep(last(mk(i14,
+  2))) - to_rep(first(mk(i14, 2)))) + 1))) or ((not (to_rep(first(mk(i14,
+  2))) <= to_rep(last(mk(i14, 2))))) and
+  (((to_rep(last(temp___2387)) - to_rep(first(temp___2387))) + 1) = 0)))) or
+  ((not (to_rep(first(temp___2387)) <= to_rep(last(temp___2387)))) and
+  (((to_rep(first(mk(i14, 2))) <= to_rep(last(mk(i14, 2)))) and
+  (0 = ((to_rep(last(mk(i14, 2))) - to_rep(first(mk(i14, 2)))) + 1))) or
+  (not (to_rep(first(mk(i14, 2))) <= to_rep(last(mk(i14, 2)))))))) and ({
+  elts = temp___2466; rt = temp___2467 } = { elts = temp___2386; rt =
+  temp___2387 }))) and
+  (forall temp___247:int. ((((i14 <= temp___247) and (temp___247 <= 2)) and
+  ((o9[temp___247]) = (temp___2466[temp___247]))) or
+  ((not ((i14 <= temp___247) and (temp___247 <= 2))) and
+  ((o9[temp___247]) = (get((x4[i31]), i211, i222)[temp___247])))))) and
+  (o10 = set((x4[i31]), i211, i222, o9))) and (o11 = (x4[i31 <- o10]))) and
+  ((result12 = { map__content2 = x4 }) and (x5 = o11))) and (((result13 = {
+  int__content = i14 }) and (i15 = 2)) and
+  (((((((((to_rep(first2((temp___230(1, i15, 2)).rt1)) = i15) and
+  ((to_rep(last2((temp___230(1, i15, 2)).rt1)) = 2) and ({ elts1 =
+  temp___2378; rt1 = temp___2379 } = temp___230(1, i15, 2)))) and
+  ((((to_rep(first2(temp___2379)) <= to_rep(last2(temp___2379))) and
+  (((i15 <= 2) and
+  (((to_rep(last2(temp___2379)) - to_rep(first2(temp___2379))) + 1) = ((2 - i15) + 1))) or
+  ((not (i15 <= 2)) and
+  (((to_rep(last2(temp___2379)) - to_rep(first2(temp___2379))) + 1) = 0)))) or
+  ((not (to_rep(first2(temp___2379)) <= to_rep(last2(temp___2379)))) and
+  (((i15 <= 2) and (0 = ((2 - i15) + 1))) or (not (i15 <= 2))))) and
+  ((slide(temp___2378, to_rep(first2(temp___2379)), i15) = temp___2388) and
+  (mk(i15, 2) = temp___2389)))) and
+  ((((to_rep(first(temp___2389)) <= to_rep(last(temp___2389))) and
+  (((to_rep(first(mk(i15, 2))) <= to_rep(last(mk(i15, 2)))) and
+  (((to_rep(last(temp___2389)) - to_rep(first(temp___2389))) + 1) = ((to_rep(last(mk(i15,
+  2))) - to_rep(first(mk(i15, 2)))) + 1))) or ((not (to_rep(first(mk(i15,
+  2))) <= to_rep(last(mk(i15, 2))))) and
+  (((to_rep(last(temp___2389)) - to_rep(first(temp___2389))) + 1) = 0)))) or
+  ((not (to_rep(first(temp___2389)) <= to_rep(last(temp___2389)))) and
+  (((to_rep(first(mk(i15, 2))) <= to_rep(last(mk(i15, 2)))) and
+  (0 = ((to_rep(last(mk(i15, 2))) - to_rep(first(mk(i15, 2)))) + 1))) or
+  (not (to_rep(first(mk(i15, 2))) <= to_rep(last(mk(i15, 2)))))))) and ({
+  elts = temp___2468; rt = temp___2469 } = { elts = temp___2388; rt =
+  temp___2389 }))) and
+  (forall temp___247:int. ((((i15 <= temp___247) and (temp___247 <= 2)) and
+  ((o12[temp___247]) = (temp___2468[temp___247]))) or
+  ((not ((i15 <= temp___247) and (temp___247 <= 2))) and
+  ((o12[temp___247]) = (get((x5[i31]), i211, i222)[temp___247])))))) and
+  (o13 = set((x5[i31]), i211, i222, o12))) and (o14 = (x5[i31 <- o13]))) and
+  ((result14 = { map__content2 = x5 }) and (x6 = o14))) and (((result15 = {
+  int__content = i15 }) and (i16 = 3)) and
+  ((((((((to_rep(first2((temp___230(1, i16, 2)).rt1)) = i16) and
+  ((to_rep(last2((temp___230(1, i16, 2)).rt1)) = 2) and ({ elts1 =
+  temp___23710; rt1 = temp___23711 } = temp___230(1, i16, 2)))) and
+  ((((to_rep(first2(temp___23711)) <= to_rep(last2(temp___23711))) and
+  (((i16 <= 2) and
+  (((to_rep(last2(temp___23711)) - to_rep(first2(temp___23711))) + 1) = ((2 - i16) + 1))) or
+  ((not (i16 <= 2)) and
+  (((to_rep(last2(temp___23711)) - to_rep(first2(temp___23711))) + 1) = 0)))) or
+  ((not (to_rep(first2(temp___23711)) <= to_rep(last2(temp___23711)))) and
+  (((i16 <= 2) and (0 = ((2 - i16) + 1))) or (not (i16 <= 2))))) and
+  ((slide(temp___23710, to_rep(first2(temp___23711)),
+  i16) = temp___23810) and (mk(i16, 2) = temp___23811)))) and
+  ((((to_rep(first(temp___23811)) <= to_rep(last(temp___23811))) and
+  (((to_rep(first(mk(i16, 2))) <= to_rep(last(mk(i16, 2)))) and
+  (((to_rep(last(temp___23811)) - to_rep(first(temp___23811))) + 1) = ((to_rep(last(mk(i16,
+  2))) - to_rep(first(mk(i16, 2)))) + 1))) or ((not (to_rep(first(mk(i16,
+  2))) <= to_rep(last(mk(i16, 2))))) and
+  (((to_rep(last(temp___23811)) - to_rep(first(temp___23811))) + 1) = 0)))) or
+  ((not (to_rep(first(temp___23811)) <= to_rep(last(temp___23811)))) and
+  (((to_rep(first(mk(i16, 2))) <= to_rep(last(mk(i16, 2)))) and
+  (0 = ((to_rep(last(mk(i16, 2))) - to_rep(first(mk(i16, 2)))) + 1))) or
+  (not (to_rep(first(mk(i16, 2))) <= to_rep(last(mk(i16, 2)))))))) and ({
+  elts = temp___24610; rt = temp___24611 } = { elts = temp___23810; rt =
+  temp___23811 }))) and
+  (forall temp___247:int. ((((i16 <= temp___247) and (temp___247 <= 2)) and
+  ((o15[temp___247]) = (temp___24610[temp___247]))) or
+  ((not ((i16 <= temp___247) and (temp___247 <= 2))) and
+  ((o15[temp___247]) = (get((x6[i31]), i211, i222)[temp___247])))))) and
+  (o16 = set((x6[i31]), i211, i222, o15))) and (o17 = (x6[i31 <- o16]))) and
+  ((result16 = { map__content2 = x6 }) and (x7 = o17)))))))) and
+  (((result17 = { int__content = i222 }) and (i223 = 3)) and (((result18 = {
+  int__content = i16 }) and (i17 = 1)) and
+  (((((((((to_rep(first2((temp___230(1, i17, 2)).rt1)) = i17) and
+  ((to_rep(last2((temp___230(1, i17, 2)).rt1)) = 2) and ({ elts1 =
+  temp___23712; rt1 = temp___23713 } = temp___230(1, i17, 2)))) and
+  ((((to_rep(first2(temp___23713)) <= to_rep(last2(temp___23713))) and
+  (((i17 <= 2) and
+  (((to_rep(last2(temp___23713)) - to_rep(first2(temp___23713))) + 1) = ((2 - i17) + 1))) or
+  ((not (i17 <= 2)) and
+  (((to_rep(last2(temp___23713)) - to_rep(first2(temp___23713))) + 1) = 0)))) or
+  ((not (to_rep(first2(temp___23713)) <= to_rep(last2(temp___23713)))) and
+  (((i17 <= 2) and (0 = ((2 - i17) + 1))) or (not (i17 <= 2))))) and
+  ((slide(temp___23712, to_rep(first2(temp___23713)),
+  i17) = temp___23812) and (mk(i17, 2) = temp___23813)))) and
+  ((((to_rep(first(temp___23813)) <= to_rep(last(temp___23813))) and
+  (((to_rep(first(mk(i17, 2))) <= to_rep(last(mk(i17, 2)))) and
+  (((to_rep(last(temp___23813)) - to_rep(first(temp___23813))) + 1) = ((to_rep(last(mk(i17,
+  2))) - to_rep(first(mk(i17, 2)))) + 1))) or ((not (to_rep(first(mk(i17,
+  2))) <= to_rep(last(mk(i17, 2))))) and
+  (((to_rep(last(temp___23813)) - to_rep(first(temp___23813))) + 1) = 0)))) or
+  ((not (to_rep(first(temp___23813)) <= to_rep(last(temp___23813)))) and
+  (((to_rep(first(mk(i17, 2))) <= to_rep(last(mk(i17, 2)))) and
+  (0 = ((to_rep(last(mk(i17, 2))) - to_rep(first(mk(i17, 2)))) + 1))) or
+  (not (to_rep(first(mk(i17, 2))) <= to_rep(last(mk(i17, 2)))))))) and ({
+  elts = temp___24612; rt = temp___24613 } = { elts = temp___23812; rt =
+  temp___23813 }))) and
+  (forall temp___247:int. ((((i17 <= temp___247) and (temp___247 <= 2)) and
+  ((o18[temp___247]) = (temp___24612[temp___247]))) or
+  ((not ((i17 <= temp___247) and (temp___247 <= 2))) and
+  ((o18[temp___247]) = (get((x7[i31]), i211, i223)[temp___247])))))) and
+  (o19 = set((x7[i31]), i211, i223, o18))) and (o20 = (x7[i31 <- o19]))) and
+  ((result19 = { map__content2 = x7 }) and (x8 = o20))) and (((result20 = {
+  int__content = i17 }) and (i18 = 2)) and
+  (((((((((to_rep(first2((temp___230(1, i18, 2)).rt1)) = i18) and
+  ((to_rep(last2((temp___230(1, i18, 2)).rt1)) = 2) and ({ elts1 =
+  temp___23714; rt1 = temp___23715 } = temp___230(1, i18, 2)))) and
+  ((((to_rep(first2(temp___23715)) <= to_rep(last2(temp___23715))) and
+  (((i18 <= 2) and
+  (((to_rep(last2(temp___23715)) - to_rep(first2(temp___23715))) + 1) = ((2 - i18) + 1))) or
+  ((not (i18 <= 2)) and
+  (((to_rep(last2(temp___23715)) - to_rep(first2(temp___23715))) + 1) = 0)))) or
+  ((not (to_rep(first2(temp___23715)) <= to_rep(last2(temp___23715)))) and
+  (((i18 <= 2) and (0 = ((2 - i18) + 1))) or (not (i18 <= 2))))) and
+  ((slide(temp___23714, to_rep(first2(temp___23715)),
+  i18) = temp___23814) and (mk(i18, 2) = temp___23815)))) and
+  ((((to_rep(first(temp___23815)) <= to_rep(last(temp___23815))) and
+  (((to_rep(first(mk(i18, 2))) <= to_rep(last(mk(i18, 2)))) and
+  (((to_rep(last(temp___23815)) - to_rep(first(temp___23815))) + 1) = ((to_rep(last(mk(i18,
+  2))) - to_rep(first(mk(i18, 2)))) + 1))) or ((not (to_rep(first(mk(i18,
+  2))) <= to_rep(last(mk(i18, 2))))) and
+  (((to_rep(last(temp___23815)) - to_rep(first(temp___23815))) + 1) = 0)))) or
+  ((not (to_rep(first(temp___23815)) <= to_rep(last(temp___23815)))) and
+  (((to_rep(first(mk(i18, 2))) <= to_rep(last(mk(i18, 2)))) and
+  (0 = ((to_rep(last(mk(i18, 2))) - to_rep(first(mk(i18, 2)))) + 1))) or
+  (not (to_rep(first(mk(i18, 2))) <= to_rep(last(mk(i18, 2)))))))) and ({
+  elts = temp___24614; rt = temp___24615 } = { elts = temp___23814; rt =
+  temp___23815 }))) and
+  (forall temp___247:int. ((((i18 <= temp___247) and (temp___247 <= 2)) and
+  ((o21[temp___247]) = (temp___24614[temp___247]))) or
+  ((not ((i18 <= temp___247) and (temp___247 <= 2))) and
+  ((o21[temp___247]) = (get((x8[i31]), i211, i223)[temp___247])))))) and
+  (o22 = set((x8[i31]), i211, i223, o21))) and (o23 = (x8[i31 <- o22]))) and
+  ((result21 = { map__content2 = x8 }) and (x9 = o23))) and (((result22 = {
+  int__content = i18 }) and (i19 = 3)) and
+  ((((((((to_rep(first2((temp___230(1, i19, 2)).rt1)) = i19) and
+  ((to_rep(last2((temp___230(1, i19, 2)).rt1)) = 2) and ({ elts1 =
+  temp___23716; rt1 = temp___23717 } = temp___230(1, i19, 2)))) and
+  ((((to_rep(first2(temp___23717)) <= to_rep(last2(temp___23717))) and
+  (((i19 <= 2) and
+  (((to_rep(last2(temp___23717)) - to_rep(first2(temp___23717))) + 1) = ((2 - i19) + 1))) or
+  ((not (i19 <= 2)) and
+  (((to_rep(last2(temp___23717)) - to_rep(first2(temp___23717))) + 1) = 0)))) or
+  ((not (to_rep(first2(temp___23717)) <= to_rep(last2(temp___23717)))) and
+  (((i19 <= 2) and (0 = ((2 - i19) + 1))) or (not (i19 <= 2))))) and
+  ((slide(temp___23716, to_rep(first2(temp___23717)),
+  i19) = temp___23816) and (mk(i19, 2) = temp___23817)))) and
+  ((((to_rep(first(temp___23817)) <= to_rep(last(temp___23817))) and
+  (((to_rep(first(mk(i19, 2))) <= to_rep(last(mk(i19, 2)))) and
+  (((to_rep(last(temp___23817)) - to_rep(first(temp___23817))) + 1) = ((to_rep(last(mk(i19,
+  2))) - to_rep(first(mk(i19, 2)))) + 1))) or ((not (to_rep(first(mk(i19,
+  2))) <= to_rep(last(mk(i19, 2))))) and
+  (((to_rep(last(temp___23817)) - to_rep(first(temp___23817))) + 1) = 0)))) or
+  ((not (to_rep(first(temp___23817)) <= to_rep(last(temp___23817)))) and
+  (((to_rep(first(mk(i19, 2))) <= to_rep(last(mk(i19, 2)))) and
+  (0 = ((to_rep(last(mk(i19, 2))) - to_rep(first(mk(i19, 2)))) + 1))) or
+  (not (to_rep(first(mk(i19, 2))) <= to_rep(last(mk(i19, 2)))))))) and ({
+  elts = temp___24616; rt = temp___24617 } = { elts = temp___23816; rt =
+  temp___23817 }))) and
+  (forall temp___247:int. ((((i19 <= temp___247) and (temp___247 <= 2)) and
+  ((o24[temp___247]) = (temp___24616[temp___247]))) or
+  ((not ((i19 <= temp___247) and (temp___247 <= 2))) and
+  ((o24[temp___247]) = (get((x9[i31]), i211, i223)[temp___247])))))) and
+  (o25 = set((x9[i31]), i211, i223, o24))) and (o26 = (x9[i31 <- o25]))) and
+  ((result23 = { map__content2 = x9 }) and (x10 = o26))))))))))))) and
+  (((result24 = { int__content = i211 }) and (i212 = 2)) and ((((result25 = {
+  int__content = i223 }) and (i224 = 1)) and ((((result26 = { int__content =
+  i19 }) and (i110 = 1)) and (((((((((to_rep(first2((temp___230(1, i110,
+  2)).rt1)) = i110) and ((to_rep(last2((temp___230(1, i110,
+  2)).rt1)) = 2) and ({ elts1 = temp___23718; rt1 = temp___23719
+  } = temp___230(1, i110, 2)))) and
+  ((((to_rep(first2(temp___23719)) <= to_rep(last2(temp___23719))) and
+  (((i110 <= 2) and
+  (((to_rep(last2(temp___23719)) - to_rep(first2(temp___23719))) + 1) = ((2 - i110) + 1))) or
+  ((not (i110 <= 2)) and
+  (((to_rep(last2(temp___23719)) - to_rep(first2(temp___23719))) + 1) = 0)))) or
+  ((not (to_rep(first2(temp___23719)) <= to_rep(last2(temp___23719)))) and
+  (((i110 <= 2) and (0 = ((2 - i110) + 1))) or (not (i110 <= 2))))) and
+  ((slide(temp___23718, to_rep(first2(temp___23719)),
+  i110) = temp___23818) and (mk(i110, 2) = temp___23819)))) and
+  ((((to_rep(first(temp___23819)) <= to_rep(last(temp___23819))) and
+  (((to_rep(first(mk(i110, 2))) <= to_rep(last(mk(i110, 2)))) and
+  (((to_rep(last(temp___23819)) - to_rep(first(temp___23819))) + 1) = ((to_rep(last(mk(i110,
+  2))) - to_rep(first(mk(i110, 2)))) + 1))) or ((not (to_rep(first(mk(i110,
+  2))) <= to_rep(last(mk(i110, 2))))) and
+  (((to_rep(last(temp___23819)) - to_rep(first(temp___23819))) + 1) = 0)))) or
+  ((not (to_rep(first(temp___23819)) <= to_rep(last(temp___23819)))) and
+  (((to_rep(first(mk(i110, 2))) <= to_rep(last(mk(i110, 2)))) and
+  (0 = ((to_rep(last(mk(i110, 2))) - to_rep(first(mk(i110, 2)))) + 1))) or
+  (not (to_rep(first(mk(i110, 2))) <= to_rep(last(mk(i110, 2)))))))) and ({
+  elts = temp___24618; rt = temp___24619 } = { elts = temp___23818; rt =
+  temp___23819 }))) and
+  (forall temp___247:int. ((((i110 <= temp___247) and (temp___247 <= 2)) and
+  ((o27[temp___247]) = (temp___24618[temp___247]))) or
+  ((not ((i110 <= temp___247) and (temp___247 <= 2))) and
+  ((o27[temp___247]) = (get((x10[i31]), i212, i224)[temp___247])))))) and
+  (o28 = set((x10[i31]), i212, i224, o27))) and
+  (o29 = (x10[i31 <- o28]))) and ((result27 = { map__content2 = x10 }) and
+  (x11 = o29))) and (((result28 = { int__content = i110 }) and
+  (i111 = 2)) and (((((((((to_rep(first2((temp___230(1, i111,
+  2)).rt1)) = i111) and ((to_rep(last2((temp___230(1, i111,
+  2)).rt1)) = 2) and ({ elts1 = temp___23720; rt1 = temp___23721
+  } = temp___230(1, i111, 2)))) and
+  ((((to_rep(first2(temp___23721)) <= to_rep(last2(temp___23721))) and
+  (((i111 <= 2) and
+  (((to_rep(last2(temp___23721)) - to_rep(first2(temp___23721))) + 1) = ((2 - i111) + 1))) or
+  ((not (i111 <= 2)) and
+  (((to_rep(last2(temp___23721)) - to_rep(first2(temp___23721))) + 1) = 0)))) or
+  ((not (to_rep(first2(temp___23721)) <= to_rep(last2(temp___23721)))) and
+  (((i111 <= 2) and (0 = ((2 - i111) + 1))) or (not (i111 <= 2))))) and
+  ((slide(temp___23720, to_rep(first2(temp___23721)),
+  i111) = temp___23820) and (mk(i111, 2) = temp___23821)))) and
+  ((((to_rep(first(temp___23821)) <= to_rep(last(temp___23821))) and
+  (((to_rep(first(mk(i111, 2))) <= to_rep(last(mk(i111, 2)))) and
+  (((to_rep(last(temp___23821)) - to_rep(first(temp___23821))) + 1) = ((to_rep(last(mk(i111,
+  2))) - to_rep(first(mk(i111, 2)))) + 1))) or ((not (to_rep(first(mk(i111,
+  2))) <= to_rep(last(mk(i111, 2))))) and
+  (((to_rep(last(temp___23821)) - to_rep(first(temp___23821))) + 1) = 0)))) or
+  ((not (to_rep(first(temp___23821)) <= to_rep(last(temp___23821)))) and
+  (((to_rep(first(mk(i111, 2))) <= to_rep(last(mk(i111, 2)))) and
+  (0 = ((to_rep(last(mk(i111, 2))) - to_rep(first(mk(i111, 2)))) + 1))) or
+  (not (to_rep(first(mk(i111, 2))) <= to_rep(last(mk(i111, 2)))))))) and ({
+  elts = temp___24620; rt = temp___24621 } = { elts = temp___23820; rt =
+  temp___23821 }))) and
+  (forall temp___247:int. ((((i111 <= temp___247) and (temp___247 <= 2)) and
+  ((o30[temp___247]) = (temp___24620[temp___247]))) or
+  ((not ((i111 <= temp___247) and (temp___247 <= 2))) and
+  ((o30[temp___247]) = (get((x11[i31]), i212, i224)[temp___247])))))) and
+  (o31 = set((x11[i31]), i212, i224, o30))) and
+  (o32 = (x11[i31 <- o31]))) and ((result29 = { map__content2 = x11 }) and
+  (x12 = o32))) and (((result30 = { int__content = i111 }) and
+  (i112 = 3)) and ((((((((to_rep(first2((temp___230(1, i112,
+  2)).rt1)) = i112) and ((to_rep(last2((temp___230(1, i112,
+  2)).rt1)) = 2) and ({ elts1 = temp___23722; rt1 = temp___23723
+  } = temp___230(1, i112, 2)))) and
+  ((((to_rep(first2(temp___23723)) <= to_rep(last2(temp___23723))) and
+  (((i112 <= 2) and
+  (((to_rep(last2(temp___23723)) - to_rep(first2(temp___23723))) + 1) = ((2 - i112) + 1))) or
+  ((not (i112 <= 2)) and
+  (((to_rep(last2(temp___23723)) - to_rep(first2(temp___23723))) + 1) = 0)))) or
+  ((not (to_rep(first2(temp___23723)) <= to_rep(last2(temp___23723)))) and
+  (((i112 <= 2) and (0 = ((2 - i112) + 1))) or (not (i112 <= 2))))) and
+  ((slide(temp___23722, to_rep(first2(temp___23723)),
+  i112) = temp___23822) and (mk(i112, 2) = temp___23823)))) and
+  ((((to_rep(first(temp___23823)) <= to_rep(last(temp___23823))) and
+  (((to_rep(first(mk(i112, 2))) <= to_rep(last(mk(i112, 2)))) and
+  (((to_rep(last(temp___23823)) - to_rep(first(temp___23823))) + 1) = ((to_rep(last(mk(i112,
+  2))) - to_rep(first(mk(i112, 2)))) + 1))) or ((not (to_rep(first(mk(i112,
+  2))) <= to_rep(last(mk(i112, 2))))) and
+  (((to_rep(last(temp___23823)) - to_rep(first(temp___23823))) + 1) = 0)))) or
+  ((not (to_rep(first(temp___23823)) <= to_rep(last(temp___23823)))) and
+  (((to_rep(first(mk(i112, 2))) <= to_rep(last(mk(i112, 2)))) and
+  (0 = ((to_rep(last(mk(i112, 2))) - to_rep(first(mk(i112, 2)))) + 1))) or
+  (not (to_rep(first(mk(i112, 2))) <= to_rep(last(mk(i112, 2)))))))) and ({
+  elts = temp___24622; rt = temp___24623 } = { elts = temp___23822; rt =
+  temp___23823 }))) and
+  (forall temp___247:int. ((((i112 <= temp___247) and (temp___247 <= 2)) and
+  ((o33[temp___247]) = (temp___24622[temp___247]))) or
+  ((not ((i112 <= temp___247) and (temp___247 <= 2))) and
+  ((o33[temp___247]) = (get((x12[i31]), i212, i224)[temp___247])))))) and
+  (o34 = set((x12[i31]), i212, i224, o33))) and
+  (o35 = (x12[i31 <- o34]))) and ((result31 = { map__content2 = x12 }) and
+  (x13 = o35)))))))) and (((result32 = { int__content = i224 }) and
+  (i225 = 2)) and ((((result33 = { int__content = i112 }) and (i113 = 1)) and
+  (((((((((to_rep(first2((temp___230(1, i113, 2)).rt1)) = i113) and
+  ((to_rep(last2((temp___230(1, i113, 2)).rt1)) = 2) and ({ elts1 =
+  temp___23724; rt1 = temp___23725 } = temp___230(1, i113, 2)))) and
+  ((((to_rep(first2(temp___23725)) <= to_rep(last2(temp___23725))) and
+  (((i113 <= 2) and
+  (((to_rep(last2(temp___23725)) - to_rep(first2(temp___23725))) + 1) = ((2 - i113) + 1))) or
+  ((not (i113 <= 2)) and
+  (((to_rep(last2(temp___23725)) - to_rep(first2(temp___23725))) + 1) = 0)))) or
+  ((not (to_rep(first2(temp___23725)) <= to_rep(last2(temp___23725)))) and
+  (((i113 <= 2) and (0 = ((2 - i113) + 1))) or (not (i113 <= 2))))) and
+  (temp___23824 = { elts = slide(temp___23724, to_rep(first2(temp___23725)),
+  i113); rt = mk(i113, 2) }))) and
+  ((((to_rep(first((temp___23824).rt)) <= to_rep(last((temp___23824).rt))) and
+  (((to_rep(first(mk(i113, 2))) <= to_rep(last(mk(i113, 2)))) and
+  (((to_rep(last((temp___23824).rt)) - to_rep(first((temp___23824).rt))) + 1) = ((to_rep(last(mk(i113,
+  2))) - to_rep(first(mk(i113, 2)))) + 1))) or ((not (to_rep(first(mk(i113,
+  2))) <= to_rep(last(mk(i113, 2))))) and
+  (((to_rep(last((temp___23824).rt)) - to_rep(first((temp___23824).rt))) + 1) = 0)))) or
+  ((not (to_rep(first((temp___23824).rt)) <= to_rep(last((temp___23824).rt)))) and
+  (((to_rep(first(mk(i113, 2))) <= to_rep(last(mk(i113, 2)))) and
+  (0 = ((to_rep(last(mk(i113, 2))) - to_rep(first(mk(i113, 2)))) + 1))) or
+  (not (to_rep(first(mk(i113, 2))) <= to_rep(last(mk(i113, 2)))))))) and
+  (temp___24624 = temp___23824))) and
+  (forall temp___247:int. ((((i113 <= temp___247) and (temp___247 <= 2)) and
+  ((o36[temp___247]) = ((temp___24624).elts[temp___247]))) or
+  ((not ((i113 <= temp___247) and (temp___247 <= 2))) and
+  ((o36[temp___247]) = (get((x13[i31]), i212, i225)[temp___247])))))) and
+  (o37 = set((x13[i31]), i212, i225, o36))) and
+  (o38 = (x13[i31 <- o37]))) and ((result34 = { map__content2 = x13 }) and
+  (x14 = o38))) and (((result35 = { int__content = i113 }) and
+  (i114 = 2)) and (((((((((to_rep(first2((temp___230(1, i114,
+  2)).rt1)) = i114) and ((to_rep(last2((temp___230(1, i114,
+  2)).rt1)) = 2) and (temp___23726 = temp___230(1, i114, 2)))) and
+  ((((to_rep(first2((temp___23726).rt1)) <= to_rep(last2((temp___23726).rt1))) and
+  (((i114 <= 2) and
+  (((to_rep(last2((temp___23726).rt1)) - to_rep(first2((temp___23726).rt1))) + 1) = ((2 - i114) + 1))) or
+  ((not (i114 <= 2)) and
+  (((to_rep(last2((temp___23726).rt1)) - to_rep(first2((temp___23726).rt1))) + 1) = 0)))) or
+  ((not (to_rep(first2((temp___23726).rt1)) <= to_rep(last2((temp___23726).rt1)))) and
+  (((i114 <= 2) and (0 = ((2 - i114) + 1))) or (not (i114 <= 2))))) and
+  (temp___23825 = { elts = slide((temp___23726).elts1,
+  to_rep(first2((temp___23726).rt1)), i114); rt = mk(i114, 2) }))) and
+  ((((to_rep(first((temp___23825).rt)) <= to_rep(last((temp___23825).rt))) and
+  (((to_rep(first(mk(i114, 2))) <= to_rep(last(mk(i114, 2)))) and
+  (((to_rep(last((temp___23825).rt)) - to_rep(first((temp___23825).rt))) + 1) = ((to_rep(last(mk(i114,
+  2))) - to_rep(first(mk(i114, 2)))) + 1))) or ((not (to_rep(first(mk(i114,
+  2))) <= to_rep(last(mk(i114, 2))))) and
+  (((to_rep(last((temp___23825).rt)) - to_rep(first((temp___23825).rt))) + 1) = 0)))) or
+  ((not (to_rep(first((temp___23825).rt)) <= to_rep(last((temp___23825).rt)))) and
+  (((to_rep(first(mk(i114, 2))) <= to_rep(last(mk(i114, 2)))) and
+  (0 = ((to_rep(last(mk(i114, 2))) - to_rep(first(mk(i114, 2)))) + 1))) or
+  (not (to_rep(first(mk(i114, 2))) <= to_rep(last(mk(i114, 2)))))))) and
+  (temp___24625 = temp___23825))) and
+  (forall temp___247:int. ((((i114 <= temp___247) and (temp___247 <= 2)) and
+  ((o39[temp___247]) = ((temp___24625).elts[temp___247]))) or
+  ((not ((i114 <= temp___247) and (temp___247 <= 2))) and
+  ((o39[temp___247]) = (get((x14[i31]), i212, i225)[temp___247])))))) and
+  (o40 = set((x14[i31]), i212, i225, o39))) and
+  (o41 = (x14[i31 <- o40]))) and ((result36 = { map__content2 = x14 }) and
+  (x15 = o41))) and (((result37 = { int__content = i114 }) and
+  (i115 = 3)) and ((((((((to_rep(first2((temp___230(1, i115,
+  2)).rt1)) = i115) and ((to_rep(last2((temp___230(1, i115,
+  2)).rt1)) = 2) and (temp___23727 = temp___230(1, i115, 2)))) and
+  ((((to_rep(first2((temp___23727).rt1)) <= to_rep(last2((temp___23727).rt1))) and
+  (((i115 <= 2) and
+  (((to_rep(last2((temp___23727).rt1)) - to_rep(first2((temp___23727).rt1))) + 1) = ((2 - i115) + 1))) or
+  ((not (i115 <= 2)) and
+  (((to_rep(last2((temp___23727).rt1)) - to_rep(first2((temp___23727).rt1))) + 1) = 0)))) or
+  ((not (to_rep(first2((temp___23727).rt1)) <= to_rep(last2((temp___23727).rt1)))) and
+  (((i115 <= 2) and (0 = ((2 - i115) + 1))) or (not (i115 <= 2))))) and
+  (temp___23826 = { elts = slide((temp___23727).elts1,
+  to_rep(first2((temp___23727).rt1)), i115); rt = mk(i115, 2) }))) and
+  ((((to_rep(first((temp___23826).rt)) <= to_rep(last((temp___23826).rt))) and
+  (((to_rep(first(mk(i115, 2))) <= to_rep(last(mk(i115, 2)))) and
+  (((to_rep(last((temp___23826).rt)) - to_rep(first((temp___23826).rt))) + 1) = ((to_rep(last(mk(i115,
+  2))) - to_rep(first(mk(i115, 2)))) + 1))) or ((not (to_rep(first(mk(i115,
+  2))) <= to_rep(last(mk(i115, 2))))) and
+  (((to_rep(last((temp___23826).rt)) - to_rep(first((temp___23826).rt))) + 1) = 0)))) or
+  ((not (to_rep(first((temp___23826).rt)) <= to_rep(last((temp___23826).rt)))) and
+  (((to_rep(first(mk(i115, 2))) <= to_rep(last(mk(i115, 2)))) and
+  (0 = ((to_rep(last(mk(i115, 2))) - to_rep(first(mk(i115, 2)))) + 1))) or
+  (not (to_rep(first(mk(i115, 2))) <= to_rep(last(mk(i115, 2)))))))) and
+  (temp___24626 = temp___23826))) and
+  (forall temp___247:int. ((((i115 <= temp___247) and (temp___247 <= 2)) and
+  ((o42[temp___247]) = ((temp___24626).elts[temp___247]))) or
+  ((not ((i115 <= temp___247) and (temp___247 <= 2))) and
+  ((o42[temp___247]) = (get((x15[i31]), i212, i225)[temp___247])))))) and
+  (o43 = set((x15[i31]), i212, i225, o42))) and
+  (o44 = (x15[i31 <- o43]))) and ((result38 = { map__content2 = x15 }) and
+  (x16 = o44)))))))) and (((result39 = { int__content = i225 }) and
+  (i226 = 3)) and (((result40 = { int__content = i115 }) and (i116 = 1)) and
+  (((((((((to_rep(first2((temp___230(1, i116, 2)).rt1)) = i116) and
+  ((to_rep(last2((temp___230(1, i116, 2)).rt1)) = 2) and
+  (temp___23728 = temp___230(1, i116, 2)))) and
+  ((((to_rep(first2((temp___23728).rt1)) <= to_rep(last2((temp___23728).rt1))) and
+  (((i116 <= 2) and
+  (((to_rep(last2((temp___23728).rt1)) - to_rep(first2((temp___23728).rt1))) + 1) = ((2 - i116) + 1))) or
+  ((not (i116 <= 2)) and
+  (((to_rep(last2((temp___23728).rt1)) - to_rep(first2((temp___23728).rt1))) + 1) = 0)))) or
+  ((not (to_rep(first2((temp___23728).rt1)) <= to_rep(last2((temp___23728).rt1)))) and
+  (((i116 <= 2) and (0 = ((2 - i116) + 1))) or (not (i116 <= 2))))) and
+  (temp___23827 = { elts = slide((temp___23728).elts1,
+  to_rep(first2((temp___23728).rt1)), i116); rt = mk(i116, 2) }))) and
+  ((((to_rep(first((temp___23827).rt)) <= to_rep(last((temp___23827).rt))) and
+  (((to_rep(first(mk(i116, 2))) <= to_rep(last(mk(i116, 2)))) and
+  (((to_rep(last((temp___23827).rt)) - to_rep(first((temp___23827).rt))) + 1) = ((to_rep(last(mk(i116,
+  2))) - to_rep(first(mk(i116, 2)))) + 1))) or ((not (to_rep(first(mk(i116,
+  2))) <= to_rep(last(mk(i116, 2))))) and
+  (((to_rep(last((temp___23827).rt)) - to_rep(first((temp___23827).rt))) + 1) = 0)))) or
+  ((not (to_rep(first((temp___23827).rt)) <= to_rep(last((temp___23827).rt)))) and
+  (((to_rep(first(mk(i116, 2))) <= to_rep(last(mk(i116, 2)))) and
+  (0 = ((to_rep(last(mk(i116, 2))) - to_rep(first(mk(i116, 2)))) + 1))) or
+  (not (to_rep(first(mk(i116, 2))) <= to_rep(last(mk(i116, 2)))))))) and
+  (temp___24627 = temp___23827))) and
+  (forall temp___247:int. ((((i116 <= temp___247) and (temp___247 <= 2)) and
+  ((o45[temp___247]) = ((temp___24627).elts[temp___247]))) or
+  ((not ((i116 <= temp___247) and (temp___247 <= 2))) and
+  ((o45[temp___247]) = (get((x16[i31]), i212, i226)[temp___247])))))) and
+  (o46 = set((x16[i31]), i212, i226, o45))) and
+  (o47 = (x16[i31 <- o46]))) and ((result41 = { map__content2 = x16 }) and
+  (x17 = o47))) and (((result42 = { int__content = i116 }) and
+  (i117 = 2)) and (((((((((to_rep(first2((temp___230(1, i117,
+  2)).rt1)) = i117) and ((to_rep(last2((temp___230(1, i117,
+  2)).rt1)) = 2) and (temp___23729 = temp___230(1, i117, 2)))) and
+  ((((to_rep(first2((temp___23729).rt1)) <= to_rep(last2((temp___23729).rt1))) and
+  (((i117 <= 2) and
+  (((to_rep(last2((temp___23729).rt1)) - to_rep(first2((temp___23729).rt1))) + 1) = ((2 - i117) + 1))) or
+  ((not (i117 <= 2)) and
+  (((to_rep(last2((temp___23729).rt1)) - to_rep(first2((temp___23729).rt1))) + 1) = 0)))) or
+  ((not (to_rep(first2((temp___23729).rt1)) <= to_rep(last2((temp___23729).rt1)))) and
+  (((i117 <= 2) and (0 = ((2 - i117) + 1))) or (not (i117 <= 2))))) and
+  (temp___23828 = { elts = slide((temp___23729).elts1,
+  to_rep(first2((temp___23729).rt1)), i117); rt = mk(i117, 2) }))) and
+  ((((to_rep(first((temp___23828).rt)) <= to_rep(last((temp___23828).rt))) and
+  (((to_rep(first(mk(i117, 2))) <= to_rep(last(mk(i117, 2)))) and
+  (((to_rep(last((temp___23828).rt)) - to_rep(first((temp___23828).rt))) + 1) = ((to_rep(last(mk(i117,
+  2))) - to_rep(first(mk(i117, 2)))) + 1))) or ((not (to_rep(first(mk(i117,
+  2))) <= to_rep(last(mk(i117, 2))))) and
+  (((to_rep(last((temp___23828).rt)) - to_rep(first((temp___23828).rt))) + 1) = 0)))) or
+  ((not (to_rep(first((temp___23828).rt)) <= to_rep(last((temp___23828).rt)))) and
+  (((to_rep(first(mk(i117, 2))) <= to_rep(last(mk(i117, 2)))) and
+  (0 = ((to_rep(last(mk(i117, 2))) - to_rep(first(mk(i117, 2)))) + 1))) or
+  (not (to_rep(first(mk(i117, 2))) <= to_rep(last(mk(i117, 2)))))))) and
+  (temp___24628 = temp___23828))) and
+  (forall temp___247:int. ((((i117 <= temp___247) and (temp___247 <= 2)) and
+  ((o48[temp___247]) = ((temp___24628).elts[temp___247]))) or
+  ((not ((i117 <= temp___247) and (temp___247 <= 2))) and
+  ((o48[temp___247]) = (get((x17[i31]), i212, i226)[temp___247])))))) and
+  (o49 = set((x17[i31]), i212, i226, o48))) and
+  (o50 = (x17[i31 <- o49]))) and ((result43 = { map__content2 = x17 }) and
+  (x18 = o50))) and (((result44 = { int__content = i117 }) and
+  (i118 = 3)) and ((((((((to_rep(first2((temp___230(1, i118,
+  2)).rt1)) = i118) and ((to_rep(last2((temp___230(1, i118,
+  2)).rt1)) = 2) and (temp___23730 = temp___230(1, i118, 2)))) and
+  ((((to_rep(first2((temp___23730).rt1)) <= to_rep(last2((temp___23730).rt1))) and
+  (((i118 <= 2) and
+  (((to_rep(last2((temp___23730).rt1)) - to_rep(first2((temp___23730).rt1))) + 1) = ((2 - i118) + 1))) or
+  ((not (i118 <= 2)) and
+  (((to_rep(last2((temp___23730).rt1)) - to_rep(first2((temp___23730).rt1))) + 1) = 0)))) or
+  ((not (to_rep(first2((temp___23730).rt1)) <= to_rep(last2((temp___23730).rt1)))) and
+  (((i118 <= 2) and (0 = ((2 - i118) + 1))) or (not (i118 <= 2))))) and
+  (temp___23829 = { elts = slide((temp___23730).elts1,
+  to_rep(first2((temp___23730).rt1)), i118); rt = mk(i118, 2) }))) and
+  ((((to_rep(first((temp___23829).rt)) <= to_rep(last((temp___23829).rt))) and
+  (((to_rep(first(mk(i118, 2))) <= to_rep(last(mk(i118, 2)))) and
+  (((to_rep(last((temp___23829).rt)) - to_rep(first((temp___23829).rt))) + 1) = ((to_rep(last(mk(i118,
+  2))) - to_rep(first(mk(i118, 2)))) + 1))) or ((not (to_rep(first(mk(i118,
+  2))) <= to_rep(last(mk(i118, 2))))) and
+  (((to_rep(last((temp___23829).rt)) - to_rep(first((temp___23829).rt))) + 1) = 0)))) or
+  ((not (to_rep(first((temp___23829).rt)) <= to_rep(last((temp___23829).rt)))) and
+  (((to_rep(first(mk(i118, 2))) <= to_rep(last(mk(i118, 2)))) and
+  (0 = ((to_rep(last(mk(i118, 2))) - to_rep(first(mk(i118, 2)))) + 1))) or
+  (not (to_rep(first(mk(i118, 2))) <= to_rep(last(mk(i118, 2)))))))) and
+  (temp___24629 = temp___23829))) and
+  (forall temp___247:int. ((((i118 <= temp___247) and (temp___247 <= 2)) and
+  ((o51[temp___247]) = ((temp___24629).elts[temp___247]))) or
+  ((not ((i118 <= temp___247) and (temp___247 <= 2))) and
+  ((o51[temp___247]) = (get((x18[i31]), i212, i226)[temp___247])))))) and
+  (o52 = set((x18[i31]), i212, i226, o51))) and
+  (o53 = (x18[i31 <- o52]))) and ((result45 = { map__content2 = x18 }) and
+  (x19 = o53))))))))))))) and (((result46 = { int__content = i212 }) and
+  (i213 = 3)) and (((result47 = { int__content = i226 }) and (i227 = 1)) and
+  ((((result48 = { int__content = i118 }) and (i119 = 1)) and
+  (((((((((to_rep(first2((temp___230(1, i119, 2)).rt1)) = i119) and
+  ((to_rep(last2((temp___230(1, i119, 2)).rt1)) = 2) and
+  (temp___23731 = temp___230(1, i119, 2)))) and
+  ((((to_rep(first2((temp___23731).rt1)) <= to_rep(last2((temp___23731).rt1))) and
+  (((i119 <= 2) and
+  (((to_rep(last2((temp___23731).rt1)) - to_rep(first2((temp___23731).rt1))) + 1) = ((2 - i119) + 1))) or
+  ((not (i119 <= 2)) and
+  (((to_rep(last2((temp___23731).rt1)) - to_rep(first2((temp___23731).rt1))) + 1) = 0)))) or
+  ((not (to_rep(first2((temp___23731).rt1)) <= to_rep(last2((temp___23731).rt1)))) and
+  (((i119 <= 2) and (0 = ((2 - i119) + 1))) or (not (i119 <= 2))))) and
+  (temp___23830 = { elts = slide((temp___23731).elts1,
+  to_rep(first2((temp___23731).rt1)), i119); rt = mk(i119, 2) }))) and
+  ((((to_rep(first((temp___23830).rt)) <= to_rep(last((temp___23830).rt))) and
+  (((to_rep(first(mk(i119, 2))) <= to_rep(last(mk(i119, 2)))) and
+  (((to_rep(last((temp___23830).rt)) - to_rep(first((temp___23830).rt))) + 1) = ((to_rep(last(mk(i119,
+  2))) - to_rep(first(mk(i119, 2)))) + 1))) or ((not (to_rep(first(mk(i119,
+  2))) <= to_rep(last(mk(i119, 2))))) and
+  (((to_rep(last((temp___23830).rt)) - to_rep(first((temp___23830).rt))) + 1) = 0)))) or
+  ((not (to_rep(first((temp___23830).rt)) <= to_rep(last((temp___23830).rt)))) and
+  (((to_rep(first(mk(i119, 2))) <= to_rep(last(mk(i119, 2)))) and
+  (0 = ((to_rep(last(mk(i119, 2))) - to_rep(first(mk(i119, 2)))) + 1))) or
+  (not (to_rep(first(mk(i119, 2))) <= to_rep(last(mk(i119, 2)))))))) and
+  (temp___24630 = temp___23830))) and
+  (forall temp___247:int. ((((i119 <= temp___247) and (temp___247 <= 2)) and
+  ((o54[temp___247]) = ((temp___24630).elts[temp___247]))) or
+  ((not ((i119 <= temp___247) and (temp___247 <= 2))) and
+  ((o54[temp___247]) = (get((x19[i31]), i213, i227)[temp___247])))))) and
+  (o55 = set((x19[i31]), i213, i227, o54))) and
+  (o56 = (x19[i31 <- o55]))) and ((result49 = { map__content2 = x19 }) and
+  (x20 = o56))) and (((result50 = { int__content = i119 }) and
+  (i120 = 2)) and (((((((((to_rep(first2((temp___230(1, i120,
+  2)).rt1)) = i120) and ((to_rep(last2((temp___230(1, i120,
+  2)).rt1)) = 2) and (temp___23732 = temp___230(1, i120, 2)))) and
+  ((((to_rep(first2((temp___23732).rt1)) <= to_rep(last2((temp___23732).rt1))) and
+  (((i120 <= 2) and
+  (((to_rep(last2((temp___23732).rt1)) - to_rep(first2((temp___23732).rt1))) + 1) = ((2 - i120) + 1))) or
+  ((not (i120 <= 2)) and
+  (((to_rep(last2((temp___23732).rt1)) - to_rep(first2((temp___23732).rt1))) + 1) = 0)))) or
+  ((not (to_rep(first2((temp___23732).rt1)) <= to_rep(last2((temp___23732).rt1)))) and
+  (((i120 <= 2) and (0 = ((2 - i120) + 1))) or (not (i120 <= 2))))) and
+  (temp___23831 = { elts = slide((temp___23732).elts1,
+  to_rep(first2((temp___23732).rt1)), i120); rt = mk(i120, 2) }))) and
+  ((((to_rep(first((temp___23831).rt)) <= to_rep(last((temp___23831).rt))) and
+  (((to_rep(first(mk(i120, 2))) <= to_rep(last(mk(i120, 2)))) and
+  (((to_rep(last((temp___23831).rt)) - to_rep(first((temp___23831).rt))) + 1) = ((to_rep(last(mk(i120,
+  2))) - to_rep(first(mk(i120, 2)))) + 1))) or ((not (to_rep(first(mk(i120,
+  2))) <= to_rep(last(mk(i120, 2))))) and
+  (((to_rep(last((temp___23831).rt)) - to_rep(first((temp___23831).rt))) + 1) = 0)))) or
+  ((not (to_rep(first((temp___23831).rt)) <= to_rep(last((temp___23831).rt)))) and
+  (((to_rep(first(mk(i120, 2))) <= to_rep(last(mk(i120, 2)))) and
+  (0 = ((to_rep(last(mk(i120, 2))) - to_rep(first(mk(i120, 2)))) + 1))) or
+  (not (to_rep(first(mk(i120, 2))) <= to_rep(last(mk(i120, 2)))))))) and
+  (temp___24631 = temp___23831))) and
+  (forall temp___247:int. ((((i120 <= temp___247) and (temp___247 <= 2)) and
+  ((o57[temp___247]) = ((temp___24631).elts[temp___247]))) or
+  ((not ((i120 <= temp___247) and (temp___247 <= 2))) and
+  ((o57[temp___247]) = (get((x20[i31]), i213, i227)[temp___247])))))) and
+  (o58 = set((x20[i31]), i213, i227, o57))) and
+  (o59 = (x20[i31 <- o58]))) and ((result51 = { map__content2 = x20 }) and
+  (x21 = o59))) and (((result52 = { int__content = i120 }) and
+  (i121 = 3)) and ((((((((to_rep(first2((temp___230(1, i121,
+  2)).rt1)) = i121) and ((to_rep(last2((temp___230(1, i121,
+  2)).rt1)) = 2) and (temp___23733 = temp___230(1, i121, 2)))) and
+  ((((to_rep(first2((temp___23733).rt1)) <= to_rep(last2((temp___23733).rt1))) and
+  (((i121 <= 2) and
+  (((to_rep(last2((temp___23733).rt1)) - to_rep(first2((temp___23733).rt1))) + 1) = ((2 - i121) + 1))) or
+  ((not (i121 <= 2)) and
+  (((to_rep(last2((temp___23733).rt1)) - to_rep(first2((temp___23733).rt1))) + 1) = 0)))) or
+  ((not (to_rep(first2((temp___23733).rt1)) <= to_rep(last2((temp___23733).rt1)))) and
+  (((i121 <= 2) and (0 = ((2 - i121) + 1))) or (not (i121 <= 2))))) and
+  (temp___23832 = { elts = slide((temp___23733).elts1,
+  to_rep(first2((temp___23733).rt1)), i121); rt = mk(i121, 2) }))) and
+  ((((to_rep(first((temp___23832).rt)) <= to_rep(last((temp___23832).rt))) and
+  (((to_rep(first(mk(i121, 2))) <= to_rep(last(mk(i121, 2)))) and
+  (((to_rep(last((temp___23832).rt)) - to_rep(first((temp___23832).rt))) + 1) = ((to_rep(last(mk(i121,
+  2))) - to_rep(first(mk(i121, 2)))) + 1))) or ((not (to_rep(first(mk(i121,
+  2))) <= to_rep(last(mk(i121, 2))))) and
+  (((to_rep(last((temp___23832).rt)) - to_rep(first((temp___23832).rt))) + 1) = 0)))) or
+  ((not (to_rep(first((temp___23832).rt)) <= to_rep(last((temp___23832).rt)))) and
+  (((to_rep(first(mk(i121, 2))) <= to_rep(last(mk(i121, 2)))) and
+  (0 = ((to_rep(last(mk(i121, 2))) - to_rep(first(mk(i121, 2)))) + 1))) or
+  (not (to_rep(first(mk(i121, 2))) <= to_rep(last(mk(i121, 2)))))))) and
+  (temp___24632 = temp___23832))) and
+  (forall temp___247:int. ((((i121 <= temp___247) and (temp___247 <= 2)) and
+  ((o60[temp___247]) = ((temp___24632).elts[temp___247]))) or
+  ((not ((i121 <= temp___247) and (temp___247 <= 2))) and
+  ((o60[temp___247]) = (get((x21[i31]), i213, i227)[temp___247])))))) and
+  (o61 = set((x21[i31]), i213, i227, o60))) and
+  (o62 = (x21[i31 <- o61]))) and ((result53 = { map__content2 = x21 }) and
+  (x22 = o62)))))))) and (((result54 = { int__content = i227 }) and
+  (i228 = 2)) and ((((result55 = { int__content = i121 }) and (i122 = 1)) and
+  (((((((((to_rep(first2((temp___230(1, i122, 2)).rt1)) = i122) and
+  ((to_rep(last2((temp___230(1, i122, 2)).rt1)) = 2) and
+  (temp___23734 = temp___230(1, i122, 2)))) and
+  ((((to_rep(first2((temp___23734).rt1)) <= to_rep(last2((temp___23734).rt1))) and
+  (((i122 <= 2) and
+  (((to_rep(last2((temp___23734).rt1)) - to_rep(first2((temp___23734).rt1))) + 1) = ((2 - i122) + 1))) or
+  ((not (i122 <= 2)) and
+  (((to_rep(last2((temp___23734).rt1)) - to_rep(first2((temp___23734).rt1))) + 1) = 0)))) or
+  ((not (to_rep(first2((temp___23734).rt1)) <= to_rep(last2((temp___23734).rt1)))) and
+  (((i122 <= 2) and (0 = ((2 - i122) + 1))) or (not (i122 <= 2))))) and
+  (temp___23833 = { elts = slide((temp___23734).elts1,
+  to_rep(first2((temp___23734).rt1)), i122); rt = mk(i122, 2) }))) and
+  ((((to_rep(first((temp___23833).rt)) <= to_rep(last((temp___23833).rt))) and
+  (((to_rep(first(mk(i122, 2))) <= to_rep(last(mk(i122, 2)))) and
+  (((to_rep(last((temp___23833).rt)) - to_rep(first((temp___23833).rt))) + 1) = ((to_rep(last(mk(i122,
+  2))) - to_rep(first(mk(i122, 2)))) + 1))) or ((not (to_rep(first(mk(i122,
+  2))) <= to_rep(last(mk(i122, 2))))) and
+  (((to_rep(last((temp___23833).rt)) - to_rep(first((temp___23833).rt))) + 1) = 0)))) or
+  ((not (to_rep(first((temp___23833).rt)) <= to_rep(last((temp___23833).rt)))) and
+  (((to_rep(first(mk(i122, 2))) <= to_rep(last(mk(i122, 2)))) and
+  (0 = ((to_rep(last(mk(i122, 2))) - to_rep(first(mk(i122, 2)))) + 1))) or
+  (not (to_rep(first(mk(i122, 2))) <= to_rep(last(mk(i122, 2)))))))) and
+  (temp___24633 = temp___23833))) and
+  (forall temp___247:int. ((((i122 <= temp___247) and (temp___247 <= 2)) and
+  ((o63[temp___247]) = ((temp___24633).elts[temp___247]))) or
+  ((not ((i122 <= temp___247) and (temp___247 <= 2))) and
+  ((o63[temp___247]) = (get((x22[i31]), i213, i228)[temp___247])))))) and
+  (o64 = set((x22[i31]), i213, i228, o63))) and
+  (o65 = (x22[i31 <- o64]))) and ((result56 = { map__content2 = x22 }) and
+  (x23 = o65))) and (((result57 = { int__content = i122 }) and
+  (i123 = 2)) and (((((((((to_rep(first2((temp___230(1, i123,
+  2)).rt1)) = i123) and ((to_rep(last2((temp___230(1, i123,
+  2)).rt1)) = 2) and (temp___23735 = temp___230(1, i123, 2)))) and
+  ((((to_rep(first2((temp___23735).rt1)) <= to_rep(last2((temp___23735).rt1))) and
+  (((i123 <= 2) and
+  (((to_rep(last2((temp___23735).rt1)) - to_rep(first2((temp___23735).rt1))) + 1) = ((2 - i123) + 1))) or
+  ((not (i123 <= 2)) and
+  (((to_rep(last2((temp___23735).rt1)) - to_rep(first2((temp___23735).rt1))) + 1) = 0)))) or
+  ((not (to_rep(first2((temp___23735).rt1)) <= to_rep(last2((temp___23735).rt1)))) and
+  (((i123 <= 2) and (0 = ((2 - i123) + 1))) or (not (i123 <= 2))))) and
+  (temp___23834 = { elts = slide((temp___23735).elts1,
+  to_rep(first2((temp___23735).rt1)), i123); rt = mk(i123, 2) }))) and
+  ((((to_rep(first((temp___23834).rt)) <= to_rep(last((temp___23834).rt))) and
+  (((to_rep(first(mk(i123, 2))) <= to_rep(last(mk(i123, 2)))) and
+  (((to_rep(last((temp___23834).rt)) - to_rep(first((temp___23834).rt))) + 1) = ((to_rep(last(mk(i123,
+  2))) - to_rep(first(mk(i123, 2)))) + 1))) or ((not (to_rep(first(mk(i123,
+  2))) <= to_rep(last(mk(i123, 2))))) and
+  (((to_rep(last((temp___23834).rt)) - to_rep(first((temp___23834).rt))) + 1) = 0)))) or
+  ((not (to_rep(first((temp___23834).rt)) <= to_rep(last((temp___23834).rt)))) and
+  (((to_rep(first(mk(i123, 2))) <= to_rep(last(mk(i123, 2)))) and
+  (0 = ((to_rep(last(mk(i123, 2))) - to_rep(first(mk(i123, 2)))) + 1))) or
+  (not (to_rep(first(mk(i123, 2))) <= to_rep(last(mk(i123, 2)))))))) and
+  (temp___24634 = temp___23834))) and
+  (forall temp___247:int. ((((i123 <= temp___247) and (temp___247 <= 2)) and
+  ((o66[temp___247]) = ((temp___24634).elts[temp___247]))) or
+  ((not ((i123 <= temp___247) and (temp___247 <= 2))) and
+  ((o66[temp___247]) = (get((x23[i31]), i213, i228)[temp___247])))))) and
+  (o67 = set((x23[i31]), i213, i228, o66))) and
+  (o68 = (x23[i31 <- o67]))) and ((result58 = { map__content2 = x23 }) and
+  (x24 = o68))) and (((result59 = { int__content = i123 }) and
+  (i124 = 3)) and ((((((((to_rep(first2((temp___230(1, i124,
+  2)).rt1)) = i124) and ((to_rep(last2((temp___230(1, i124,
+  2)).rt1)) = 2) and (temp___23736 = temp___230(1, i124, 2)))) and
+  ((((to_rep(first2((temp___23736).rt1)) <= to_rep(last2((temp___23736).rt1))) and
+  (((i124 <= 2) and
+  (((to_rep(last2((temp___23736).rt1)) - to_rep(first2((temp___23736).rt1))) + 1) = ((2 - i124) + 1))) or
+  ((not (i124 <= 2)) and
+  (((to_rep(last2((temp___23736).rt1)) - to_rep(first2((temp___23736).rt1))) + 1) = 0)))) or
+  ((not (to_rep(first2((temp___23736).rt1)) <= to_rep(last2((temp___23736).rt1)))) and
+  (((i124 <= 2) and (0 = ((2 - i124) + 1))) or (not (i124 <= 2))))) and
+  (temp___23835 = { elts = slide((temp___23736).elts1,
+  to_rep(first2((temp___23736).rt1)), i124); rt = mk(i124, 2) }))) and
+  ((((to_rep(first((temp___23835).rt)) <= to_rep(last((temp___23835).rt))) and
+  (((to_rep(first(mk(i124, 2))) <= to_rep(last(mk(i124, 2)))) and
+  (((to_rep(last((temp___23835).rt)) - to_rep(first((temp___23835).rt))) + 1) = ((to_rep(last(mk(i124,
+  2))) - to_rep(first(mk(i124, 2)))) + 1))) or ((not (to_rep(first(mk(i124,
+  2))) <= to_rep(last(mk(i124, 2))))) and
+  (((to_rep(last((temp___23835).rt)) - to_rep(first((temp___23835).rt))) + 1) = 0)))) or
+  ((not (to_rep(first((temp___23835).rt)) <= to_rep(last((temp___23835).rt)))) and
+  (((to_rep(first(mk(i124, 2))) <= to_rep(last(mk(i124, 2)))) and
+  (0 = ((to_rep(last(mk(i124, 2))) - to_rep(first(mk(i124, 2)))) + 1))) or
+  (not (to_rep(first(mk(i124, 2))) <= to_rep(last(mk(i124, 2)))))))) and
+  (temp___24635 = temp___23835))) and
+  (forall temp___247:int. ((((i124 <= temp___247) and (temp___247 <= 2)) and
+  ((o69[temp___247]) = ((temp___24635).elts[temp___247]))) or
+  ((not ((i124 <= temp___247) and (temp___247 <= 2))) and
+  ((o69[temp___247]) = (get((x24[i31]), i213, i228)[temp___247])))))) and
+  (o70 = set((x24[i31]), i213, i228, o69))) and
+  (o71 = (x24[i31 <- o70]))) and ((result60 = { map__content2 = x24 }) and
+  (x25 = o71)))))))) and (((result61 = { int__content = i228 }) and
+  (i229 = 3)) and (((result62 = { int__content = i124 }) and (i125 = 1)) and
+  (((((((((to_rep(first2((temp___230(1, i125, 2)).rt1)) = i125) and
+  ((to_rep(last2((temp___230(1, i125, 2)).rt1)) = 2) and
+  (temp___23737 = temp___230(1, i125, 2)))) and
+  ((((to_rep(first2((temp___23737).rt1)) <= to_rep(last2((temp___23737).rt1))) and
+  (((i125 <= 2) and
+  (((to_rep(last2((temp___23737).rt1)) - to_rep(first2((temp___23737).rt1))) + 1) = ((2 - i125) + 1))) or
+  ((not (i125 <= 2)) and
+  (((to_rep(last2((temp___23737).rt1)) - to_rep(first2((temp___23737).rt1))) + 1) = 0)))) or
+  ((not (to_rep(first2((temp___23737).rt1)) <= to_rep(last2((temp___23737).rt1)))) and
+  (((i125 <= 2) and (0 = ((2 - i125) + 1))) or (not (i125 <= 2))))) and
+  (temp___23836 = { elts = slide((temp___23737).elts1,
+  to_rep(first2((temp___23737).rt1)), i125); rt = mk(i125, 2) }))) and
+  ((((to_rep(first((temp___23836).rt)) <= to_rep(last((temp___23836).rt))) and
+  (((to_rep(first(mk(i125, 2))) <= to_rep(last(mk(i125, 2)))) and
+  (((to_rep(last((temp___23836).rt)) - to_rep(first((temp___23836).rt))) + 1) = ((to_rep(last(mk(i125,
+  2))) - to_rep(first(mk(i125, 2)))) + 1))) or ((not (to_rep(first(mk(i125,
+  2))) <= to_rep(last(mk(i125, 2))))) and
+  (((to_rep(last((temp___23836).rt)) - to_rep(first((temp___23836).rt))) + 1) = 0)))) or
+  ((not (to_rep(first((temp___23836).rt)) <= to_rep(last((temp___23836).rt)))) and
+  (((to_rep(first(mk(i125, 2))) <= to_rep(last(mk(i125, 2)))) and
+  (0 = ((to_rep(last(mk(i125, 2))) - to_rep(first(mk(i125, 2)))) + 1))) or
+  (not (to_rep(first(mk(i125, 2))) <= to_rep(last(mk(i125, 2)))))))) and
+  (temp___24636 = temp___23836))) and
+  (forall temp___247:int. ((((i125 <= temp___247) and (temp___247 <= 2)) and
+  ((o72[temp___247]) = ((temp___24636).elts[temp___247]))) or
+  ((not ((i125 <= temp___247) and (temp___247 <= 2))) and
+  ((o72[temp___247]) = (get((x25[i31]), i213, i229)[temp___247])))))) and
+  (o73 = set((x25[i31]), i213, i229, o72))) and
+  (o74 = (x25[i31 <- o73]))) and ((result63 = { map__content2 = x25 }) and
+  (x26 = o74))) and (((result64 = { int__content = i125 }) and
+  (i126 = 2)) and (((((((((to_rep(first2((temp___230(1, i126,
+  2)).rt1)) = i126) and ((to_rep(last2((temp___230(1, i126,
+  2)).rt1)) = 2) and (temp___23738 = temp___230(1, i126, 2)))) and
+  ((((to_rep(first2((temp___23738).rt1)) <= to_rep(last2((temp___23738).rt1))) and
+  (((i126 <= 2) and
+  (((to_rep(last2((temp___23738).rt1)) - to_rep(first2((temp___23738).rt1))) + 1) = ((2 - i126) + 1))) or
+  ((not (i126 <= 2)) and
+  (((to_rep(last2((temp___23738).rt1)) - to_rep(first2((temp___23738).rt1))) + 1) = 0)))) or
+  ((not (to_rep(first2((temp___23738).rt1)) <= to_rep(last2((temp___23738).rt1)))) and
+  (((i126 <= 2) and (0 = ((2 - i126) + 1))) or (not (i126 <= 2))))) and
+  (temp___23837 = { elts = slide((temp___23738).elts1,
+  to_rep(first2((temp___23738).rt1)), i126); rt = mk(i126, 2) }))) and
+  ((((to_rep(first((temp___23837).rt)) <= to_rep(last((temp___23837).rt))) and
+  (((to_rep(first(mk(i126, 2))) <= to_rep(last(mk(i126, 2)))) and
+  (((to_rep(last((temp___23837).rt)) - to_rep(first((temp___23837).rt))) + 1) = ((to_rep(last(mk(i126,
+  2))) - to_rep(first(mk(i126, 2)))) + 1))) or ((not (to_rep(first(mk(i126,
+  2))) <= to_rep(last(mk(i126, 2))))) and
+  (((to_rep(last((temp___23837).rt)) - to_rep(first((temp___23837).rt))) + 1) = 0)))) or
+  ((not (to_rep(first((temp___23837).rt)) <= to_rep(last((temp___23837).rt)))) and
+  (((to_rep(first(mk(i126, 2))) <= to_rep(last(mk(i126, 2)))) and
+  (0 = ((to_rep(last(mk(i126, 2))) - to_rep(first(mk(i126, 2)))) + 1))) or
+  (not (to_rep(first(mk(i126, 2))) <= to_rep(last(mk(i126, 2)))))))) and
+  (temp___24637 = temp___23837))) and
+  (forall temp___247:int. ((((i126 <= temp___247) and (temp___247 <= 2)) and
+  ((o75[temp___247]) = ((temp___24637).elts[temp___247]))) or
+  ((not ((i126 <= temp___247) and (temp___247 <= 2))) and
+  ((o75[temp___247]) = (get((x26[i31]), i213, i229)[temp___247])))))) and
+  (o76 = set((x26[i31]), i213, i229, o75))) and
+  (o77 = (x26[i31 <- o76]))) and ((result65 = { map__content2 = x26 }) and
+  (x27 = o77))) and (((result66 = { int__content = i126 }) and
+  (i127 = 3)) and ((((((((to_rep(first2((temp___230(1, i127,
+  2)).rt1)) = i127) and ((to_rep(last2((temp___230(1, i127,
+  2)).rt1)) = 2) and (temp___23739 = temp___230(1, i127, 2)))) and
+  ((((to_rep(first2((temp___23739).rt1)) <= to_rep(last2((temp___23739).rt1))) and
+  (((i127 <= 2) and
+  (((to_rep(last2((temp___23739).rt1)) - to_rep(first2((temp___23739).rt1))) + 1) = ((2 - i127) + 1))) or
+  ((not (i127 <= 2)) and
+  (((to_rep(last2((temp___23739).rt1)) - to_rep(first2((temp___23739).rt1))) + 1) = 0)))) or
+  ((not (to_rep(first2((temp___23739).rt1)) <= to_rep(last2((temp___23739).rt1)))) and
+  (((i127 <= 2) and (0 = ((2 - i127) + 1))) or (not (i127 <= 2))))) and
+  (temp___23838 = { elts = slide((temp___23739).elts1,
+  to_rep(first2((temp___23739).rt1)), i127); rt = mk(i127, 2) }))) and
+  ((((to_rep(first((temp___23838).rt)) <= to_rep(last((temp___23838).rt))) and
+  (((to_rep(first(mk(i127, 2))) <= to_rep(last(mk(i127, 2)))) and
+  (((to_rep(last((temp___23838).rt)) - to_rep(first((temp___23838).rt))) + 1) = ((to_rep(last(mk(i127,
+  2))) - to_rep(first(mk(i127, 2)))) + 1))) or ((not (to_rep(first(mk(i127,
+  2))) <= to_rep(last(mk(i127, 2))))) and
+  (((to_rep(last((temp___23838).rt)) - to_rep(first((temp___23838).rt))) + 1) = 0)))) or
+  ((not (to_rep(first((temp___23838).rt)) <= to_rep(last((temp___23838).rt)))) and
+  (((to_rep(first(mk(i127, 2))) <= to_rep(last(mk(i127, 2)))) and
+  (0 = ((to_rep(last(mk(i127, 2))) - to_rep(first(mk(i127, 2)))) + 1))) or
+  (not (to_rep(first(mk(i127, 2))) <= to_rep(last(mk(i127, 2)))))))) and
+  (temp___24638 = temp___23838))) and
+  (forall temp___247:int. ((((i127 <= temp___247) and (temp___247 <= 2)) and
+  ((o78[temp___247]) = ((temp___24638).elts[temp___247]))) or
+  ((not ((i127 <= temp___247) and (temp___247 <= 2))) and
+  ((o78[temp___247]) = (get((x27[i31]), i213, i229)[temp___247])))))) and
+  (o79 = set((x27[i31]), i213, i229, o78))) and
+  (o80 = (x27[i31 <- o79]))) and ((result67 = { map__content2 = x27 }) and
+  (x28 = o80)))))))))))))))))) ->
+  (forall i32:int. (((1 <= i32) and (i32 <= 3)) ->
+  (forall i214:int. (((1 <= i214) and (i214 <= 3)) ->
+  (forall i2210:int. (((1 <= i2210) and (i2210 <= 3)) ->
+  (to_rep((get((x28[i32]), i214, i2210)[3])) = to_rep((get((y[i32]), i214,
+  i2210)[3]))))))))))))))

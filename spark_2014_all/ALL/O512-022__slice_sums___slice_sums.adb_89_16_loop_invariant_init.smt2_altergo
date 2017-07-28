@@ -1,0 +1,759 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic comp_div: int, int -> int
+axiom comp_div_def: forall x, y:int. x >= 0 and y > 0 -> comp_div(x,y) = x / y
+logic comp_mod: int, int -> int
+axiom comp_mod_def: forall x, y:int. x >= 0 and y > 0 -> comp_mod(x,y) = x % y
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type integer
+
+predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : integer, integer -> bool
+
+logic dummy : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+type natural
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : natural, natural -> bool
+
+logic dummy1 : natural
+
+type natural__ref = { natural__content : natural
+}
+
+function natural__ref___projection(a: natural__ref) : natural =
+  (a).natural__content
+
+logic abs : int -> int
+
+axiom abs_def :
+  (forall x:int [abs(x)]. (((0 <= x) -> (abs(x) = x)) and ((not (0 <= x)) ->
+  (abs(x) = (-x)))))
+
+axiom Abs_le :
+  (forall x:int. forall y:int. ((abs(x) <= y) <-> (((-y) <= x) and
+  (x <= y))))
+
+axiom Abs_pos : (forall x:int. (0 <= abs(x)))
+
+axiom Div_mod :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * comp_div(x,y)) + comp_mod(x,y)))))
+
+axiom Div_bound :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= comp_div(x,y)) and (comp_div(x,y) <= x))))
+
+axiom Mod_bound :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (((-abs(y)) <  comp_mod(x,y)) and (comp_mod(x,y) <  abs(y)))))
+
+axiom Div_sign_pos :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  (0 <= comp_div(x,y))))
+
+axiom Div_sign_neg :
+  (forall x:int. forall y:int. (((x <= 0) and (0 <  y)) ->
+  (comp_div(x,y) <= 0)))
+
+axiom Mod_sign_pos :
+  (forall x:int. forall y:int. (((0 <= x) and (not (y = 0))) ->
+  (0 <= comp_mod(x,y))))
+
+axiom Mod_sign_neg :
+  (forall x:int. forall y:int. (((x <= 0) and (not (y = 0))) ->
+  (comp_mod(x,y) <= 0)))
+
+axiom Rounds_toward_zero :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (abs((comp_div(x,y) * y)) <= abs(x))))
+
+axiom Div_1 : (forall x:int. (comp_div(x,1) = x))
+
+axiom Mod_1 : (forall x:int. (comp_mod(x,1) = 0))
+
+axiom Div_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) ->
+  (comp_div(x,y) = 0)))
+
+axiom Mod_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) ->
+  (comp_mod(x,y) = x)))
+
+axiom Div_mult :
+  (forall x:int. forall y:int. forall z:int [comp_div(((x * y) + z),x)].
+  (((0 <  x) and ((0 <= y) and (0 <= z))) ->
+  (comp_div(((x * y) + z),x) = (y + comp_div(z,x)))))
+
+axiom Mod_mult :
+  (forall x:int. forall y:int. forall z:int [comp_mod(((x * y) + z),x)].
+  (((0 <  x) and ((0 <= y) and (0 <= z))) ->
+  (comp_mod(((x * y) + z),x) = comp_mod(z,x))))
+
+axiom Div_mod1 :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * (x / y)) + (x % y)))))
+
+axiom Mod_bound1 :
+  (forall x:int. forall y:int. ((not (y = 0)) -> ((0 <= (x % y)) and
+  ((x % y) <  abs(y)))))
+
+axiom Div_unique :
+  (forall x:int. forall y:int. forall q:int. ((0 <  y) ->
+  ((((q * y) <= x) and (x <  ((q * y) + y))) -> ((x / y) = q))))
+
+axiom Div_bound1 :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= (x / y)) and ((x / y) <= x))))
+
+axiom Mod_11 : (forall x:int. ((x % 1) = 0))
+
+axiom Div_11 : (forall x:int. ((x / 1) = x))
+
+axiom Div_inf1 :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> ((x / y) = 0)))
+
+axiom Div_inf_neg :
+  (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
+  (((-x) / y) = (-1))))
+
+axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
+
+axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
+
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+
+axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
+
+axiom Mod_minus1_left :
+  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+
+axiom Div_mult1 :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
+  ((0 <  x) -> ((((x * y) + z) / x) = (y + (z / x)))))
+
+axiom Mod_mult1 :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) % x)].
+  ((0 <  x) -> ((((x * y) + z) % x) = (z % x))))
+
+logic mod : int, int -> int
+
+axiom mod_def :
+  (forall x:int. forall y:int [mod(x, y)]. (((0 <  y) -> (mod(x,
+  y) = (x % y))) and ((not (0 <  y)) -> (mod(x, y) = ((x % y) + y)))))
+
+type vector_element
+
+predicate in_range3(x: int) = ((comp_div((-2147483648),65536) <= x) and
+  (x <= comp_div(2147483647,65536)))
+
+logic bool_eq4 : int, int -> bool
+
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq2 : vector_element, vector_element -> bool
+
+logic dummy2 : vector_element
+
+type vector_element__ref = { vector_element__content : vector_element
+}
+
+logic to_rep : vector_element -> int
+
+logic of_rep : int -> vector_element
+
+axiom inversion_axiom :
+  (forall x:vector_element [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom :
+  (forall x:vector_element [to_rep(x)]. in_range3(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range3(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type map__ref = { map__content : (int,vector_element) farray
+}
+
+logic slide : (int,vector_element) farray, int,
+  int -> (int,vector_element) farray
+
+axiom slide_eq :
+  (forall a:(int,vector_element) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,vector_element) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat : (int,vector_element) farray, int, int,
+  (int,vector_element) farray, int, int -> (int,vector_element) farray
+
+axiom concat_def :
+  (forall a:(int,vector_element) farray.
+  forall b:(int,vector_element) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton : vector_element, int -> (int,vector_element) farray
+
+axiom singleton_def :
+  (forall v:vector_element.
+  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
+
+logic bool_eq5 : (int,vector_element) farray, int, int,
+  (int,vector_element) farray, int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall a:(int,vector_element) farray. forall af:int. forall al:int.
+  forall b:(int,vector_element) farray. forall bf:int. forall bl:int
+  [bool_eq5(a, af, al, b, bf, bl)]. ((((((af <= al) and
+  ((al - af) = (bl - bf))) or ((not (af <= al)) and (bl <  bf))) and
+  (forall idx:int. (((af <= idx) and (idx <= al)) ->
+  ((a[idx]) = (b[((bf - af) + idx)]))))) -> (bool_eq5(a, af, al, b, bf,
+  bl) = true)) and ((not ((((af <= al) -> ((al - af) = (bl - bf))) and
+  ((not (af <= al)) -> (bl <  bf))) and
+  (forall idx:int. (((af <= idx) and (idx <= al)) ->
+  ((a[idx]) = (b[((bf - af) + idx)])))))) -> (bool_eq5(a, af, al, b, bf,
+  bl) = false))))
+
+logic compare : (int,vector_element) farray, int, int,
+  (int,vector_element) farray, int, int -> int
+
+axiom compare_def_eq :
+  (forall a:(int,vector_element) farray.
+  forall b:(int,vector_element) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt :
+  (forall a:(int,vector_element) farray.
+  forall b:(int,vector_element) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt :
+  (forall a:(int,vector_element) farray.
+  forall b:(int,vector_element) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+
+type t
+
+logic le : t, t -> prop
+
+logic lt : t, t -> prop
+
+logic gt : t, t -> prop
+
+logic add : t, t -> t
+
+logic sub : t, t -> t
+
+logic one : t
+
+type component_type
+
+type map__ref1 = { map__content1 : (t,component_type) farray
+}
+
+logic slide1 : (t,component_type) farray, t, t -> (t,component_type) farray
+
+axiom slide_eq1 :
+  (forall a:(t,component_type) farray.
+  (forall first:t [slide1(a, first, first)]. (slide1(a, first, first) = a)))
+
+axiom slide_def1 :
+  (forall a:(t,component_type) farray.
+  (forall old_first:t.
+  (forall new_first:t.
+  (forall i:t [(slide1(a, old_first, new_first)[i])]. ((slide1(a, old_first,
+  new_first)[i]) = (a[sub(i, sub(new_first, old_first))]))))))
+
+logic concat1 : (t,component_type) farray, t, t, (t,component_type) farray,
+  t, t -> (t,component_type) farray
+
+axiom concat_def1 :
+  (forall a:(t,component_type) farray. forall b:(t,component_type) farray.
+  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
+  (forall i:t [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
+  (((le(a_first, i) and le(i, a_last)) -> ((concat1(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and (gt(i, a_last) -> ((concat1(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[add(sub(i, a_last), sub(b_first,
+  one))])))))))
+
+logic singleton1 : component_type, t -> (t,component_type) farray
+
+axiom singleton_def1 :
+  (forall v:component_type.
+  (forall i:t [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
+
+type index
+
+predicate in_range4(x: int) = ((1 <= x) and (x <= 65536))
+
+logic bool_eq6 : int, int -> bool
+
+axiom bool_eq_def5 :
+  (forall x:int. forall y:int [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq3 : index, index -> bool
+
+logic dummy3 : index
+
+type index__ref = { index__content : index
+}
+
+logic to_rep1 : index -> int
+
+logic of_rep1 : int -> index
+
+axiom inversion_axiom1 :
+  (forall x:index [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:index [to_rep1(x)]. in_range4(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range4(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type extended_index
+
+predicate in_range5(x: int) = ((0 <= x) and (x <= 65536))
+
+logic bool_eq7 : int, int -> bool
+
+axiom bool_eq_def6 :
+  (forall x:int. forall y:int [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> int
+
+logic user_eq4 : extended_index, extended_index -> bool
+
+logic dummy4 : extended_index
+
+type extended_index__ref = { extended_index__content : extended_index
+}
+
+logic to_rep2 : extended_index -> int
+
+logic of_rep2 : int -> extended_index
+
+axiom inversion_axiom2 :
+  (forall x:extended_index [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 :
+  (forall x:extended_index [to_rep2(x)]. in_range5(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range5(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+type us_split_fields = { rec__sums__slice_bounds__lo : index;
+rec__sums__slice_bounds__hi : extended_index }
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+type slice_bounds = { us_split_fields1 : us_split_fields
+}
+
+type slice_bounds__ref = { slice_bounds__content : slice_bounds
+}
+
+logic bool_eq8 : slice_bounds, slice_bounds -> bool
+
+axiom bool_eq_def7 :
+  (forall a:slice_bounds. forall b:slice_bounds [bool_eq8(a, b)].
+  ((((to_rep1(((a).us_split_fields1).rec__sums__slice_bounds__lo) = to_rep1(((b).us_split_fields1).rec__sums__slice_bounds__lo)) and
+  (to_rep2(((a).us_split_fields1).rec__sums__slice_bounds__hi) = to_rep2(((b).us_split_fields1).rec__sums__slice_bounds__hi))) ->
+  (bool_eq8(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_fields1).rec__sums__slice_bounds__lo) = to_rep1(((b).us_split_fields1).rec__sums__slice_bounds__lo)) and
+  (to_rep2(((a).us_split_fields1).rec__sums__slice_bounds__hi) = to_rep2(((b).us_split_fields1).rec__sums__slice_bounds__hi)))) ->
+  (bool_eq8(a, b) = false))))
+
+logic dummy5 : index
+
+logic dummy6 : extended_index
+
+logic to_rep3 : integer -> int
+
+logic of_rep3 : int -> integer
+
+axiom inversion_axiom3 :
+  (forall x:integer [to_rep3(x)]. (of_rep3(to_rep3(x)) = x))
+
+axiom range_axiom3 : (forall x:integer [to_rep3(x)]. in_range1(to_rep3(x)))
+
+axiom coerce_axiom3 :
+  (forall x:int [to_rep3(of_rep3(x))]. (in_range1(x) ->
+  (to_rep3(of_rep3(x)) = x)))
+
+predicate index_dynamic_property(first: int, last: int, x: int) =
+  ((first <= x) and (x <= last))
+
+type t1
+
+logic first : t1 -> integer
+
+logic last : t1 -> integer
+
+logic mk : int, int -> t1
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep3(first(mk(f, l))) = f) and (to_rep3(last(mk(f, l))) = l)))))
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (index_dynamic_property(range_first, range_last, low) and
+  index_dynamic_property(range_first, range_last, high)))))
+
+type us_t = { elts : (int,vector_element) farray; rt : t1
+}
+
+function of_array(a: (int,vector_element) farray, f: int, l: int) : us_t = {
+  elts = a; rt = mk(f, l) }
+
+function first1(a: us_t) : int = to_rep3(first((a).rt))
+
+function last1(a: us_t) : int = to_rep3(last((a).rt))
+
+logic length : us_t -> int
+
+axiom length_def :
+  (forall a:us_t [length(a)]. (((first1(a) <= last1(a)) ->
+  (length(a) = ((last1(a) - first1(a)) + 1))) and
+  ((not (first1(a) <= last1(a))) -> (length(a) = 0))))
+
+logic value__size : int
+
+logic object__size : (int,vector_element) farray -> int
+
+logic value__component__size : int
+
+logic object__component__size : (int,vector_element) farray -> int
+
+logic value__alignment : int
+
+logic object__alignment : (int,vector_element) farray -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:(int,vector_element) farray. (0 <= object__size(a)))
+
+axiom value__component__size_axiom : (0 <= value__component__size)
+
+axiom object__component__size_axiom :
+  (forall a:(int,vector_element) farray. (0 <= object__component__size(a)))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:(int,vector_element) farray. (0 <= object__alignment(a)))
+
+function bool_eq9(x: us_t, y: us_t) : bool = bool_eq5((x).elts,
+  to_rep3(first((x).rt)), to_rep3(last((x).rt)), (y).elts,
+  to_rep3(first((y).rt)), to_rep3(last((y).rt)))
+
+logic user_eq5 : us_t, us_t -> bool
+
+logic dummy7 : (int,vector_element) farray
+
+logic dummy8 : t1
+
+type vector__ref = { vector__content : us_t
+}
+
+predicate dynamic_invariant(expr: us_t, us: bool, skip_bounds: bool,
+  us1: bool) = ((not (skip_bounds = true)) -> dynamic_property(1, 65536,
+  first1(expr), last1(expr)))
+
+logic sum__logic : us_t, slice_bounds -> int
+
+axiom sum_def :
+  (forall v:(int,vector_element) farray. forall v1:t1. forall b:index.
+  forall b1:extended_index [sum__logic({ elts = v; rt = v1 }, {
+  us_split_fields1 = { rec__sums__slice_bounds__lo = b;
+  rec__sums__slice_bounds__hi = b1 } })]. (in_range1(sum__logic({ elts = v;
+  rt = v1 }, { us_split_fields1 = { rec__sums__slice_bounds__lo = b;
+  rec__sums__slice_bounds__hi = b1 } })) and (((to_rep2(b1) <  to_rep1(b)) ->
+  (sum__logic({ elts = v; rt = v1 }, { us_split_fields1 = {
+  rec__sums__slice_bounds__lo = b; rec__sums__slice_bounds__hi = b1 }
+  }) = 0)) and (((to_rep3(first(v1)) <= to_rep1(b)) and
+  ((to_rep1(b) <= to_rep2(b1)) and (to_rep2(b1) <= to_rep3(last(v1))))) ->
+  (((to_rep1(b) = to_rep2(b1)) -> (sum__logic({ elts = v; rt = v1 }, {
+  us_split_fields1 = { rec__sums__slice_bounds__lo = b;
+  rec__sums__slice_bounds__hi = b1 } }) = to_rep((v[to_rep1(b)])))) and
+  (forall b11:index. forall b12:extended_index [sum__logic({ elts = v; rt =
+  v1 }, { us_split_fields1 = { rec__sums__slice_bounds__lo = b11;
+  rec__sums__slice_bounds__hi = b12 } })].
+  ((((to_rep2(b12) = to_rep2(b1)) and ((to_rep1(b) <  to_rep1(b11)) and
+  (to_rep1(b11) <= to_rep2(b1)))) -> (sum__logic({ elts = v; rt = v1 }, {
+  us_split_fields1 = { rec__sums__slice_bounds__lo = b;
+  rec__sums__slice_bounds__hi = b1 } }) = (sum__logic({ elts = v; rt = v1 },
+  { us_split_fields1 = { rec__sums__slice_bounds__lo = b11;
+  rec__sums__slice_bounds__hi = b12 } }) + sum__logic({ elts = v; rt = v1 },
+  { us_split_fields1 = { rec__sums__slice_bounds__lo = b;
+  rec__sums__slice_bounds__hi = of_rep2((to_rep1(b11) - 1)) } })))) and
+  (((to_rep1(b11) = to_rep1(b)) and ((to_rep1(b) <= to_rep2(b12)) and
+  (to_rep2(b12) <  to_rep2(b1)))) -> (sum__logic({ elts = v; rt = v1 }, {
+  us_split_fields1 = { rec__sums__slice_bounds__lo = b;
+  rec__sums__slice_bounds__hi = b1 } }) = (sum__logic({ elts = v; rt = v1 },
+  { us_split_fields1 = { rec__sums__slice_bounds__lo = b11;
+  rec__sums__slice_bounds__hi = b12 } }) + sum__logic({ elts = v; rt = v1 },
+  { us_split_fields1 = { rec__sums__slice_bounds__lo =
+  of_rep1((to_rep2(b12) + 1)); rec__sums__slice_bounds__hi = b1 } })))))))))))
+
+logic x : (int,vector_element) farray
+
+logic x1 : t1
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+predicate dynamic_property1(first_int: int, last_int: int, x2: int) =
+  ((first_int <= x2) and (x2 <= last_int))
+
+logic bool_eq10 : int, int -> bool
+
+axiom bool_eq_def8 :
+  (forall x2:int. forall y:int [bool_eq10(x2, y)]. (((x2 = y) ->
+  (bool_eq10(x2, y) = true)) and ((not (x2 = y)) -> (bool_eq10(x2,
+  y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE6 : us_image -> int
+
+logic user_eq6 : integer, integer -> bool
+
+logic dummy9 : integer
+
+type t26b__ref = { t26b__content : integer
+}
+
+function t26b__ref___projection(a: t26b__ref) : integer = (a).t26b__content
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
+ (* File "sums.ads", line 12, characters 0-0 *)
+goal WP_parameter_def :
+  (forall max_sum:int. forall current_sum:int. forall current_lo:int.
+  forall result____split_fields:index.
+  forall result____split_fields1:extended_index. forall current_hi:int.
+  forall o:int. forall o1:extended_index. forall o2:index. forall o3:index.
+  forall o4:extended_index. forall temp___176:index.
+  forall temp___1761:extended_index. forall result:int. forall max_sum1:int.
+  forall result1:int. forall current_sum1:int.
+  forall result2:us_split_fields__ref.
+  forall result____split_fields2:us_split_fields. forall result3:int__ref.
+  forall current_lo1:int. forall result4:int__ref. forall current_hi1:int.
+  (dynamic_invariant({ elts = x; rt = x1 }, true, false, true) ->
+  (((result = max_sum) and (max_sum1 = 0)) -> (in_range2(max_sum1) ->
+  (((result1 = current_sum) and (current_sum1 = 0)) ->
+  (in_range1(current_sum1) -> (in_range4(current_lo) ->
+  ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((((to_rep2(o1) = 0) and ((((o = to_rep3(first(x1))) and
+  in_range4(to_rep3(first(x1)))) and (to_rep1(o2) = o)) and ((o2 = o3) and
+  (o1 = o4)))) and ((temp___176 = o3) and (temp___1761 = o4))) and
+  ((result2 = { us_split_fields__content = { rec__sums__slice_bounds__lo =
+  result____split_fields; rec__sums__slice_bounds__hi =
+  result____split_fields1 } }) and (result____split_fields2 = {
+  rec__sums__slice_bounds__lo = temp___176; rec__sums__slice_bounds__hi =
+  temp___1761 }))) -> (((result3 = { int__content = current_lo }) and
+  (current_lo1 = to_rep1((result____split_fields2).rec__sums__slice_bounds__lo))) ->
+  (((result4 = { int__content = current_hi }) and
+  (current_hi1 = to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi1) and
+  (current_hi1 <= to_rep3(last(x1)))) ->
+  (forall hi_index:int. (((current_lo1 <= hi_index) and
+  (hi_index <= (current_hi1 - 1))) -> (0 <= sum__logic({ elts = x; rt = x1 },
+  { us_split_fields1 = { rec__sums__slice_bounds__lo = of_rep1(current_lo1);
+  rec__sums__slice_bounds__hi = of_rep2(hi_index) } }))))))))))))))))

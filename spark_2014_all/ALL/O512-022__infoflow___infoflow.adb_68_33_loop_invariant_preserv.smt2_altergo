@@ -1,0 +1,334 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type integer
+
+predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : integer, integer -> bool
+
+logic dummy : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+logic to_rep : integer -> int
+
+logic of_rep : int -> integer
+
+axiom inversion_axiom :
+  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type sensorids
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 10))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : sensorids, sensorids -> bool
+
+logic dummy1 : sensorids
+
+type sensorids__ref = { sensorids__content : sensorids
+}
+
+function sensorids__ref___projection(a: sensorids__ref) : sensorids =
+  (a).sensorids__content
+
+type map__ref = { map__content : (int,integer) farray
+}
+
+logic slide : (int,integer) farray, int, int -> (int,integer) farray
+
+axiom slide_eq :
+  (forall a:(int,integer) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,integer) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat : (int,integer) farray, int, int, (int,integer) farray, int,
+  int -> (int,integer) farray
+
+axiom concat_def :
+  (forall a:(int,integer) farray. forall b:(int,integer) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton : integer, int -> (int,integer) farray
+
+axiom singleton_def :
+  (forall v:integer.
+  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
+
+logic bool_eq4 : (int,integer) farray, int, int, (int,integer) farray, int,
+  int -> bool
+
+axiom bool_eq_def3 :
+  (forall a:(int,integer) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,integer) farray. forall b__first:int. forall b__last:int
+  [bool_eq4(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
+  (temp___idx_133 <= a__last)) and
+  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))) or
+  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
+  (temp___idx_133 <= a__last)) ->
+  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)]))))))) ->
+  (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev :
+  (forall a:(int,integer) farray. forall b:(int,integer) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq4(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
+  (temp___idx_133 <= a__last)) ->
+  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))))))))
+
+logic compare : (int,integer) farray, int, int, (int,integer) farray, int,
+  int -> int
+
+axiom compare_def_eq :
+  (forall a:(int,integer) farray. forall b:(int,integer) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt :
+  (forall a:(int,integer) farray. forall b:(int,integer) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt :
+  (forall a:(int,integer) farray. forall b:(int,integer) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+ (* File "infoflow.ads", line 35, characters 0-0 *)
+goal WP_parameter_def :
+  (forall cache_v1:(int,integer) farray.
+  forall cache_v2:(int,integer) farray. forall i:int. forall i1:int.
+  forall temp___350:(int,integer) farray. forall temp___349:int.
+  forall o:integer. forall o1:(int,integer) farray. forall o2:integer.
+  forall o3:(int,integer) farray. forall o4:integer.
+  forall o5:(int,integer) farray. forall cache_v11:(int,integer) farray.
+  forall result:int. forall i2:int. forall result1:(int,integer) farray.
+  forall cache_v12:(int,integer) farray.
+  forall cache_v13:(int,integer) farray. forall i3:int.
+  forall cache_v14:(int,integer) farray. forall i4:int.
+  forall cache_v15:(int,integer) farray. forall i5:int.
+  forall cache_v16:(int,integer) farray. forall i6:int.
+  forall cache_v17:(int,integer) farray. forall i7:int. forall result2:int.
+  forall i8:int. forall result3:(int,integer) farray.
+  forall cache_v21:(int,integer) farray.
+  forall cache_v22:(int,integer) farray. forall i9:int. forall result4:int.
+  forall i10:int. forall result5:(int,integer) farray.
+  forall cache_v23:(int,integer) farray.
+  forall cache_v24:(int,integer) farray. forall i11:int.
+  forall cache_v25:(int,integer) farray. forall i12:int. (((({ int__content =
+  result } = { int__content = i }) and (i2 = 1)) and ((((1 <= i2) and
+  (i2 <= 10)) and ((((temp___350 = cache_v1) and ((temp___349 = i2) and
+  ((((to_rep(o) = 0) and (o1 = (cache_v1[i2 <- o]))) and (({ map__content =
+  result1 } = { map__content = cache_v1 }) and (cache_v12 = o1))) and
+  ((forall k:int. (((1 <= k) and (k <= 10)) -> ((k <= i3) ->
+   (to_rep((cache_v13[k])) = 0)))) and
+  (((((1 <= 10) -> in_range2(i3)) and
+  (forall temp___351:int. (((1 <= temp___351) and (temp___351 <= 10)) ->
+  ((i3 <  temp___351) ->
+  ((cache_v13[temp___351]) = (temp___350[temp___351])))))) and ((1 <= i3) and
+  (i3 <= 10))) and (i3 = 10)))))) and (((i3 = i4) and
+  (cache_v13 = cache_v14)) and ((i5 = i3) and (cache_v15 = cache_v13)))) and
+  ((({ int__content = i6 } = { int__content = i4 }) and ({ map__content =
+  cache_v16 } = { map__content = cache_v14 })) and ((i7 = i5) and
+  (cache_v17 = cache_v15))))) or ((not ((1 <= i2) and (i2 <= 10))) and
+  (((i2 = i6) and ({ map__content = cache_v16 } = { map__content = cache_v1
+  })) and ((i7 = i2) and (cache_v17 = cache_v11)))))) -> ((({ int__content =
+  result2 } = { int__content = i1 }) and (i8 = 1)) -> (((1 <= i8) and
+  (i8 <= 10)) -> ((((to_rep(o2) = 0) and (o3 = (cache_v2[i8 <- o2]))) and (({
+  map__content = result3 } = { map__content = cache_v2 }) and
+  (cache_v21 = o3))) ->
+  ((forall k:int. (((1 <= k) and (k <= 10)) -> ((k <= i9) ->
+   (to_rep((cache_v22[k])) = 0)))) ->
+  (((((((1 <= 10) -> in_range2(i9)) and
+  (forall temp___356:int. (((1 <= temp___356) and (temp___356 <= 10)) ->
+  ((i9 <  temp___356) ->
+  ((cache_v22[temp___356]) = (cache_v2[temp___356])))))) and ((1 <= i9) and
+  (i9 <= 10))) and ((not (i9 = 10)) and (((result4 = i9) and
+  (i10 = (i9 + 1))) and (((to_rep(o4) = 0) and
+  (o5 = (cache_v22[i10 <- o4]))) and ((result5 = cache_v22) and
+  (cache_v23 = o5)))))) and (((i10 = i11) and (cache_v23 = cache_v24)) and
+  ((i12 = i10) and (cache_v25 = cache_v23)))) ->
+  (forall k:int. (((1 <= k) and (k <= 10)) -> ((k <= i11) ->
+  (to_rep((cache_v24[k])) = 0)))))))))))

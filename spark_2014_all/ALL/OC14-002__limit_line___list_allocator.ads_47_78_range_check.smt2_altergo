@@ -1,0 +1,487 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type natural
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : natural, natural -> bool
+
+logic dummy : natural
+
+type natural__ref = { natural__content : natural
+}
+
+function natural__ref___projection(a: natural__ref) : natural =
+  (a).natural__content
+
+type positive
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : positive, positive -> bool
+
+logic dummy1 : positive
+
+type positive__ref = { positive__content : positive
+}
+
+function positive__ref___projection(a: positive__ref) : positive =
+  (a).positive__content
+
+type resource
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 3))
+
+logic bool_eq4 : int, int -> bool
+
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq2 : resource, resource -> bool
+
+logic dummy2 : resource
+
+type resource__ref = { resource__content : resource
+}
+
+function resource__ref___projection(a: resource__ref) : resource =
+  (a).resource__content
+
+type us_main_type
+
+logic us_main_eq : us_main_type, us_main_type -> bool
+
+type us_rep
+
+logic bool_eq5 : us_rep, us_rep -> bool
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (forall a:us_rep. (0 <= object__size(a)))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:us_rep. (0 <= object__alignment(a)))
+
+logic user_eq3 : us_rep, us_rep -> bool
+
+logic dummy3 : us_rep
+
+type sequence__ref = { sequence__content : us_rep
+}
+
+function sequence__ref___projection(a: sequence__ref) : us_rep =
+  (a).sequence__content
+
+logic length : us_rep -> int
+
+logic length__function_guard : int, us_rep -> prop
+
+logic length1 : int, us_rep -> int
+
+logic length__function_guard1 : int, int, us_rep -> prop
+
+logic oeq : us_rep, us_rep -> bool
+
+logic oeq__function_guard : bool, us_rep, us_rep -> prop
+
+logic oeq1 : int, us_rep, us_rep -> bool
+
+logic oeq__function_guard1 : bool, int, us_rep, us_rep -> prop
+
+axiom user_eq__def_axiom :
+  (forall a:us_rep. forall b:us_rep [user_eq3(a, b)]. (user_eq3(a,
+  b) = oeq(a, b)))
+
+axiom length__post_axiom :
+  (forall s:us_rep [length(s)]. in_range1(length(s)))
+
+axiom length__post__dispatch_axiom :
+  (forall attr__tag:int.
+  (forall s:us_rep [length1(attr__tag, s)]. in_range1(length1(attr__tag, s))))
+
+logic get : us_rep, int -> int
+
+logic get__function_guard : int, us_rep, int -> prop
+
+logic get1 : int, us_rep, int -> int
+
+logic get__function_guard1 : int, int, us_rep, int -> prop
+
+type element_type
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 3))
+
+logic bool_eq6 : int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall x:int. forall y:int [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq4 : element_type, element_type -> bool
+
+logic dummy4 : element_type
+
+type element_type__ref = { element_type__content : element_type
+}
+
+function element_type__ref___projection(a: element_type__ref) : element_type =
+  (a).element_type__content
+
+axiom get__post_axiom :
+  (forall s:us_rep.
+  (forall n:int [get(s, n)]. ((in_range2(n) and ((1 <= n) and
+  (n <= length(s)))) -> in_range4(get(s, n)))))
+
+axiom get__post__dispatch_axiom :
+  (forall attr__tag:int. forall n:int.
+  (forall s:us_rep [get1(attr__tag, s, n)]. (in_range2(n) ->
+  in_range4(get1(attr__tag, s, n)))))
+
+logic mem : us_rep, int -> bool
+
+logic mem__function_guard : bool, us_rep, int -> prop
+
+axiom mem__post_axiom : true
+
+axiom mem__def_axiom :
+  (forall s:us_rep.
+  (forall r:int [mem(s, r)]. ((mem(s, r) = true) <->
+  (exists j:int. (((1 <= j) and (j <= length(s))) and (get(s, j) = r))))))
+
+logic s : us_rep
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic r : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic r29b : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+type integer
+
+predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq7 : int, int -> bool
+
+axiom bool_eq_def5 :
+  (forall x:int. forall y:int [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> int
+
+logic user_eq5 : integer, integer -> bool
+
+logic dummy5 : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+logic to_rep : integer -> int
+
+logic of_rep : int -> integer
+
+axiom inversion_axiom :
+  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range5(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range5(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+predicate dynamic_property(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq8 : int, int -> bool
+
+axiom bool_eq_def6 :
+  (forall x:int. forall y:int [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE6 : us_image -> int
+
+logic user_eq6 : integer, integer -> bool
+
+logic dummy6 : integer
+
+type t30b__ref = { t30b__content : integer
+}
+
+function t30b__ref___projection(a: t30b__ref) : integer = (a).t30b__content
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+axiom oeq__post_axiom :
+  (forall s1:us_rep. forall s2:us_rep [oeq(s1, s2)]. ((oeq(s1,
+  s2) = true) <-> ((length(s1) = length(s2)) and
+  (forall n:int. (((1 <= n) and (n <= length(s1))) -> (get(s1, n) = get(s2,
+  n)))))))
+
+axiom oeq__post__dispatch_axiom : true
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall j:int. forall list_allocator__m__find__result:int.
+  forall list_allocator__m__find__L_1__R29b__assume:int.
+  forall temp___383:int. forall temp___384:int. forall temp___382:int.
+  forall o:int. forall o1:int. forall o2:int. forall o3:bool.
+  forall list_allocator__m__find__result1:int. forall result:int.
+  forall j1:int. forall result1:bool. forall result2:int.
+  forall list_allocator__m__find__result2:int. forall j2:int.
+  forall list_allocator__m__find__result3:int. forall result3:int.
+  forall j3:int. forall result4:bool. forall result5:int.
+  forall list_allocator__m__find__result4:int. forall j4:int.
+  forall list_allocator__m__find__result5:int. forall j5:int.
+  forall list_allocator__m__find__result6:int. forall j6:int.
+  forall list_allocator__m__find__result7:int. forall j7:int.
+  forall list_allocator__m__find__result8:int. forall j8:int.
+  forall list_allocator__m__find__result9:int. forall j9:int.
+  forall list_allocator__m__find__result10:int. forall result6:int.
+  forall list_allocator__m__find__result11:int.
+  forall list_allocator__m__find__result12:int.
+  forall list_allocator__m__find__result13:int. forall j10:int.
+  forall list_allocator__m__find__result14:int. forall j11:int.
+  forall list_allocator__m__find__result15:int. forall j12:int.
+  forall list_allocator__m__find__result16:int. forall j13:int.
+  forall list_allocator__m__find__result17:int. forall result7:bool.
+  (in_range3(r) ->
+  (((((((list_allocator__m__find__L_1__R29b__assume = length(s)) and
+  in_range1(list_allocator__m__find__L_1__R29b__assume)) and
+  (list_allocator__m__find__L_1__R29b__assume = r29b)) and
+  in_range1(r29b)) and
+  (((((list_allocator__m__find__result5 = list_allocator__m__find__result14) and
+  (j4 = j10)) and
+  ((list_allocator__m__find__result15 = list_allocator__m__find__result6) and
+  (j11 = j5))) and ((temp___383 = 1) and ((temp___384 = r29b) and ((({
+  int__content = result } = { int__content = j }) and (j1 = temp___383)) and
+  (((temp___383 <= j1) and (j1 <= temp___384)) and ((temp___382 = j1) and
+  (((((list_allocator__m__find__result2 = list_allocator__m__find__result5) and
+  (j1 = j4)) and
+  ((list_allocator__m__find__result6 = list_allocator__m__find__result2) and
+  (j5 = j1))) and ((((o = get(s, j1)) and in_range4(o)) and (((o = r) and
+  (result1 = true)) or ((not (o = r)) and (result1 = false)))) and
+  ((result1 = true) and ((result2 = list_allocator__m__find__result) and
+  (list_allocator__m__find__result2 = j1))))) or (((((o = get(s, j1)) and
+  in_range4(o)) and (((o = r) and (result1 = true)) or ((not (o = r)) and
+  (result1 = false)))) and ((not (result1 = true)) and
+  ((list_allocator__m__find__result2 = list_allocator__m__find__result) and
+  (list_allocator__m__find__result2 = list_allocator__m__find__result1)))) and
+  ((((list_allocator__m__find__result4 = list_allocator__m__find__result5) and
+  (j3 = j4)) and
+  ((list_allocator__m__find__result6 = list_allocator__m__find__result4) and
+  (j5 = j3))) and
+  ((forall k:int. (((1 <= k) and (k <= j2)) -> (not (get(s, k) = r)))) and
+  ((((1 <= r29b) -> dynamic_property(1, r29b, j2)) and ((1 <= j2) and
+  (j2 <= r29b))) and ((not (j2 = temp___384)) and (((j2 = result3) and
+  (j3 = (j2 + 1))) and ((((o1 = get(s, j3)) and in_range4(o1)) and
+  (((o1 = r) and (result4 = true)) or ((not (o1 = r)) and
+  (result4 = false)))) and ((result4 = true) and
+  ((result5 = list_allocator__m__find__result3) and
+  (list_allocator__m__find__result4 = j3))))))))))))))))) or (((({
+  int__content = result } = { int__content = j }) and (j1 = 1)) and
+  ((((1 <= j1) and (j1 <= r29b)) and ((((temp___382 = j1) and (((((o = get(s,
+  j1)) and in_range4(o)) and (((o = r) and (result1 = true)) or
+  ((not (o = r)) and (result1 = false)))) and ((not (result1 = true)) and
+  ((list_allocator__m__find__result2 = list_allocator__m__find__result) and
+  (list_allocator__m__find__result2 = list_allocator__m__find__result1)))) and
+  ((forall k:int. (((1 <= k) and (k <= j2)) -> (not (get(s, k) = r)))) and
+  ((((1 <= r29b) -> dynamic_property(1, r29b, j2)) and ((1 <= j2) and
+  (j2 <= r29b))) and (j2 = r29b))))) and
+  (((list_allocator__m__find__result3 = list_allocator__m__find__result7) and
+  (j2 = j6)) and
+  ((list_allocator__m__find__result8 = list_allocator__m__find__result3) and
+  (j7 = j2)))) and ((({ int__content = list_allocator__m__find__result9 } = {
+  int__content = list_allocator__m__find__result7 }) and ({ int__content = j8
+  } = { int__content = j6 })) and
+  ((list_allocator__m__find__result10 = list_allocator__m__find__result8) and
+  (j9 = j7))))) or ((not ((1 <= j1) and (j1 <= r29b))) and
+  (((list_allocator__m__find__result = list_allocator__m__find__result9) and
+  (j1 = j8)) and
+  ((list_allocator__m__find__result10 = list_allocator__m__find__result1) and
+  (j9 = j1)))))) and
+  ((((list_allocator__m__find__result12 = list_allocator__m__find__result14) and
+  ({ int__content = j10 } = { int__content = j8 })) and
+  ((list_allocator__m__find__result15 = list_allocator__m__find__result13) and
+  (j11 = j9))) and
+  (((list_allocator__m__find__result11 = list_allocator__m__find__result12) and
+  (list_allocator__m__find__result13 = list_allocator__m__find__result11)) and
+  ((result6 = list_allocator__m__find__result9) and
+  (list_allocator__m__find__result11 = 0))))))) and
+  (((list_allocator__m__find__result16 = list_allocator__m__find__result14) and
+  (j12 = j10)) and
+  ((list_allocator__m__find__result17 = list_allocator__m__find__result15) and
+  (j13 = j11)))) -> ((mem(s, r) = true) -> (((((o2 = length(s)) and
+  in_range1(o2)) and (((list_allocator__m__find__result16 <= o2) and
+  (o3 = true)) or ((not (list_allocator__m__find__result16 <= o2)) and
+  (o3 = false)))) and (((1 <= list_allocator__m__find__result16) and
+  (result7 = o3)) or ((not (1 <= list_allocator__m__find__result16)) and
+  (result7 = false)))) -> ((result7 = true) ->
+  in_range2(list_allocator__m__find__result16)))))))

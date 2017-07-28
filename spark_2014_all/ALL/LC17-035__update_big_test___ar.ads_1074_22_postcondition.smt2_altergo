@@ -1,0 +1,817 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+type et3
+
+predicate in_range(x: int) = ((10 <= x) and (x <= 90))
+
+logic bool_eq : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq1 : int, int -> bool
+
+axiom bool_eq_def :
+  (forall x:int. forall y:int [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> int
+
+logic user_eq : et3, et3 -> bool
+
+logic dummy : et3
+
+type et3__ref = { et3__content : et3
+}
+
+function et3__ref___projection(a: et3__ref) : et3 = (a).et3__content
+
+type enum1t
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 6))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq1 : enum1t, enum1t -> bool
+
+logic dummy1 : enum1t
+
+type enum1t__ref = { enum1t__content : enum1t
+}
+
+function enum1t__ref___projection(a: enum1t__ref) : enum1t =
+  (a).enum1t__content
+
+logic to_rep : enum1t -> int
+
+logic of_rep : int -> enum1t
+
+axiom inversion_axiom :
+  (forall x:enum1t [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:enum1t [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type enum1ta
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 4))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq2 : enum1ta, enum1ta -> bool
+
+logic dummy2 : enum1ta
+
+type enum1ta__ref = { enum1ta__content : enum1ta
+}
+
+function enum1ta__ref___projection(a: enum1ta__ref) : enum1ta =
+  (a).enum1ta__content
+
+logic to_rep1 : enum1ta -> int
+
+logic of_rep1 : int -> enum1ta
+
+axiom inversion_axiom1 :
+  (forall x:enum1ta [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:enum1ta [to_rep1(x)]. in_range2(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type et1
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 99))
+
+logic bool_eq4 : int, int -> bool
+
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq3 : et1, et1 -> bool
+
+logic dummy3 : et1
+
+type et1__ref = { et1__content : et1
+}
+
+function et1__ref___projection(a: et1__ref) : et1 = (a).et1__content
+
+logic to_rep2 : et1 -> int
+
+logic of_rep2 : int -> et1
+
+axiom inversion_axiom2 :
+  (forall x:et1 [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 : (forall x:et1 [to_rep2(x)]. in_range3(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range3(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+type et2
+
+predicate in_range4(x: int) = ((1 <= x) and (x <= 25))
+
+logic bool_eq5 : int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq4 : et2, et2 -> bool
+
+logic dummy4 : et2
+
+type et2__ref = { et2__content : et2
+}
+
+function et2__ref___projection(a: et2__ref) : et2 = (a).et2__content
+
+logic to_rep3 : et2 -> int
+
+logic of_rep3 : int -> et2
+
+axiom inversion_axiom3 :
+  (forall x:et2 [to_rep3(x)]. (of_rep3(to_rep3(x)) = x))
+
+axiom range_axiom3 : (forall x:et2 [to_rep3(x)]. in_range4(to_rep3(x)))
+
+axiom coerce_axiom3 :
+  (forall x:int [to_rep3(of_rep3(x))]. (in_range4(x) ->
+  (to_rep3(of_rep3(x)) = x)))
+
+type us_split_fields = { rec__ar__rec1t__f1 : et1; rec__ar__rec1t__g1 : et2
+}
+
+function us_split_fields_F1__projection(a: us_split_fields) : et1 =
+  (a).rec__ar__rec1t__f1
+
+function us_split_fields_G1__projection(a: us_split_fields) : et2 =
+  (a).rec__ar__rec1t__g1
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+function us_rep___projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+logic bool_eq6 : us_rep, us_rep -> bool
+
+axiom bool_eq_def5 :
+  (forall a:us_rep. forall b:us_rep [bool_eq6(a, b)].
+  ((((to_rep2(((a).us_split_fields1).rec__ar__rec1t__f1) = to_rep2(((b).us_split_fields1).rec__ar__rec1t__f1)) and
+  (to_rep3(((a).us_split_fields1).rec__ar__rec1t__g1) = to_rep3(((b).us_split_fields1).rec__ar__rec1t__g1))) ->
+  (bool_eq6(a, b) = true)) and
+  ((not ((to_rep2(((a).us_split_fields1).rec__ar__rec1t__f1) = to_rep2(((b).us_split_fields1).rec__ar__rec1t__f1)) and
+  (to_rep3(((a).us_split_fields1).rec__ar__rec1t__g1) = to_rep3(((b).us_split_fields1).rec__ar__rec1t__g1)))) ->
+  (bool_eq6(a, b) = false))))
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:et1. forall a1:et2. (0 <= object__size({ us_split_fields1 = {
+  rec__ar__rec1t__f1 = a; rec__ar__rec1t__g1 = a1 } })))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:et1. forall a1:et2. (0 <= object__alignment({ us_split_fields1 =
+  { rec__ar__rec1t__f1 = a; rec__ar__rec1t__g1 = a1 } })))
+
+logic ar__rec1t__f1__first__bit : int
+
+logic ar__rec1t__f1__last__bit : int
+
+logic ar__rec1t__f1__position : int
+
+axiom ar__rec1t__f1__first__bit_axiom : (0 <= ar__rec1t__f1__first__bit)
+
+axiom ar__rec1t__f1__last__bit_axiom :
+  (ar__rec1t__f1__first__bit <  ar__rec1t__f1__last__bit)
+
+axiom ar__rec1t__f1__position_axiom : (0 <= ar__rec1t__f1__position)
+
+logic ar__rec1t__g1__first__bit : int
+
+logic ar__rec1t__g1__last__bit : int
+
+logic ar__rec1t__g1__position : int
+
+axiom ar__rec1t__g1__first__bit_axiom : (0 <= ar__rec1t__g1__first__bit)
+
+axiom ar__rec1t__g1__last__bit_axiom :
+  (ar__rec1t__g1__first__bit <  ar__rec1t__g1__last__bit)
+
+axiom ar__rec1t__g1__position_axiom : (0 <= ar__rec1t__g1__position)
+
+logic user_eq5 : us_rep, us_rep -> bool
+
+logic dummy5 : et1
+
+logic dummy6 : et2
+
+type rec1t__ref = { rec1t__content : us_rep
+}
+
+function rec1t__ref___projection(a: rec1t__ref) : us_rep = (a).rec1t__content
+
+logic to_rep4 : et3 -> int
+
+logic of_rep4 : int -> et3
+
+axiom inversion_axiom4 :
+  (forall x:et3 [to_rep4(x)]. (of_rep4(to_rep4(x)) = x))
+
+axiom range_axiom4 : (forall x:et3 [to_rep4(x)]. in_range(to_rep4(x)))
+
+axiom coerce_axiom4 :
+  (forall x:int [to_rep4(of_rep4(x))]. (in_range(x) ->
+  (to_rep4(of_rep4(x)) = x)))
+
+type us_split_fields2 = { rec__ar__rec2t__f2 : et3; rec__ar__rec2t__g2 :
+us_rep; rec__ar__rec2t__h2 : enum1ta
+}
+
+function us_split_fields_F2__projection(a: us_split_fields2) : et3 =
+  (a).rec__ar__rec2t__f2
+
+function us_split_fields_G2__projection(a: us_split_fields2) : us_rep =
+  (a).rec__ar__rec2t__g2
+
+function us_split_fields_H2__projection(a: us_split_fields2) : enum1ta =
+  (a).rec__ar__rec2t__h2
+
+type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
+}
+
+function us_split_fields__ref_2__projection(a: us_split_fields__ref1) : us_split_fields2 =
+  (a).us_split_fields__content1
+
+type us_rep1 = { us_split_fields3 : us_split_fields2
+}
+
+function us_rep_2__projection(a: us_rep1) : us_split_fields2 =
+  (a).us_split_fields3
+
+logic bool_eq7 : us_rep1, us_rep1 -> bool
+
+axiom bool_eq_def6 :
+  (forall a:us_rep1. forall b:us_rep1 [bool_eq7(a, b)].
+  (((((to_rep4(((a).us_split_fields3).rec__ar__rec2t__f2) = to_rep4(((b).us_split_fields3).rec__ar__rec2t__f2)) and
+  (bool_eq6(((a).us_split_fields3).rec__ar__rec2t__g2,
+  ((b).us_split_fields3).rec__ar__rec2t__g2) = true)) and
+  (to_rep1(((a).us_split_fields3).rec__ar__rec2t__h2) = to_rep1(((b).us_split_fields3).rec__ar__rec2t__h2))) ->
+  (bool_eq7(a, b) = true)) and
+  ((not (((to_rep4(((a).us_split_fields3).rec__ar__rec2t__f2) = to_rep4(((b).us_split_fields3).rec__ar__rec2t__f2)) and
+  (bool_eq6(((a).us_split_fields3).rec__ar__rec2t__g2,
+  ((b).us_split_fields3).rec__ar__rec2t__g2) = true)) and
+  (to_rep1(((a).us_split_fields3).rec__ar__rec2t__h2) = to_rep1(((b).us_split_fields3).rec__ar__rec2t__h2)))) ->
+  (bool_eq7(a, b) = false))))
+
+logic value__size1 : int
+
+logic object__size1 : us_rep1 -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : us_rep1 -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 :
+  (forall a:et3. forall a1:et1. forall a2:et2. forall a3:enum1ta.
+  (0 <= object__size1({ us_split_fields3 = { rec__ar__rec2t__f2 = a;
+  rec__ar__rec2t__g2 = { us_split_fields1 = { rec__ar__rec1t__f1 = a1;
+  rec__ar__rec1t__g1 = a2 } }; rec__ar__rec2t__h2 = a3 } })))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:et3. forall a1:et1. forall a2:et2. forall a3:enum1ta.
+  (0 <= object__alignment1({ us_split_fields3 = { rec__ar__rec2t__f2 = a;
+  rec__ar__rec2t__g2 = { us_split_fields1 = { rec__ar__rec1t__f1 = a1;
+  rec__ar__rec1t__g1 = a2 } }; rec__ar__rec2t__h2 = a3 } })))
+
+logic ar__rec2t__f2__first__bit : int
+
+logic ar__rec2t__f2__last__bit : int
+
+logic ar__rec2t__f2__position : int
+
+axiom ar__rec2t__f2__first__bit_axiom : (0 <= ar__rec2t__f2__first__bit)
+
+axiom ar__rec2t__f2__last__bit_axiom :
+  (ar__rec2t__f2__first__bit <  ar__rec2t__f2__last__bit)
+
+axiom ar__rec2t__f2__position_axiom : (0 <= ar__rec2t__f2__position)
+
+logic ar__rec2t__g2__first__bit : int
+
+logic ar__rec2t__g2__last__bit : int
+
+logic ar__rec2t__g2__position : int
+
+axiom ar__rec2t__g2__first__bit_axiom : (0 <= ar__rec2t__g2__first__bit)
+
+axiom ar__rec2t__g2__last__bit_axiom :
+  (ar__rec2t__g2__first__bit <  ar__rec2t__g2__last__bit)
+
+axiom ar__rec2t__g2__position_axiom : (0 <= ar__rec2t__g2__position)
+
+logic ar__rec2t__h2__first__bit : int
+
+logic ar__rec2t__h2__last__bit : int
+
+logic ar__rec2t__h2__position : int
+
+axiom ar__rec2t__h2__first__bit_axiom : (0 <= ar__rec2t__h2__first__bit)
+
+axiom ar__rec2t__h2__last__bit_axiom :
+  (ar__rec2t__h2__first__bit <  ar__rec2t__h2__last__bit)
+
+axiom ar__rec2t__h2__position_axiom : (0 <= ar__rec2t__h2__position)
+
+logic user_eq6 : us_rep1, us_rep1 -> bool
+
+logic dummy7 : et3
+
+logic dummy8 : et1
+
+logic dummy9 : et2
+
+logic dummy10 : enum1ta
+
+type rec2t__ref = { rec2t__content : us_rep1
+}
+
+function rec2t__ref___projection(a: rec2t__ref) : us_rep1 =
+  (a).rec2t__content
+
+type et4
+
+predicate in_range5(x: int) = ((50 <= x) and (x <= 59))
+
+logic bool_eq8 : int, int -> bool
+
+axiom bool_eq_def7 :
+  (forall x:int. forall y:int [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> int
+
+logic user_eq7 : et4, et4 -> bool
+
+logic dummy11 : et4
+
+type et4__ref = { et4__content : et4
+}
+
+function et4__ref___projection(a: et4__ref) : et4 = (a).et4__content
+
+logic to_rep5 : et4 -> int
+
+logic of_rep5 : int -> et4
+
+axiom inversion_axiom5 :
+  (forall x:et4 [to_rep5(x)]. (of_rep5(to_rep5(x)) = x))
+
+axiom range_axiom5 : (forall x:et4 [to_rep5(x)]. in_range5(to_rep5(x)))
+
+axiom coerce_axiom5 :
+  (forall x:int [to_rep5(of_rep5(x))]. (in_range5(x) ->
+  (to_rep5(of_rep5(x)) = x)))
+
+type us_split_fields4 = { rec__ar__rec3t__f3 : us_rep1; rec__ar__rec3t__g3 :
+et4
+}
+
+function us_split_fields_F3__projection(a: us_split_fields4) : us_rep1 =
+  (a).rec__ar__rec3t__f3
+
+function us_split_fields_G3__projection(a: us_split_fields4) : et4 =
+  (a).rec__ar__rec3t__g3
+
+type us_split_fields__ref2 = { us_split_fields__content2 : us_split_fields4
+}
+
+function us_split_fields__ref_3__projection(a: us_split_fields__ref2) : us_split_fields4 =
+  (a).us_split_fields__content2
+
+type us_rep2 = { us_split_fields5 : us_split_fields4
+}
+
+function us_rep_3__projection(a: us_rep2) : us_split_fields4 =
+  (a).us_split_fields5
+
+logic bool_eq9 : us_rep2, us_rep2 -> bool
+
+axiom bool_eq_def8 :
+  (forall a:us_rep2. forall b:us_rep2 [bool_eq9(a, b)].
+  ((((bool_eq7(((a).us_split_fields5).rec__ar__rec3t__f3,
+  ((b).us_split_fields5).rec__ar__rec3t__f3) = true) and
+  (to_rep5(((a).us_split_fields5).rec__ar__rec3t__g3) = to_rep5(((b).us_split_fields5).rec__ar__rec3t__g3))) ->
+  (bool_eq9(a, b) = true)) and
+  ((not ((bool_eq7(((a).us_split_fields5).rec__ar__rec3t__f3,
+  ((b).us_split_fields5).rec__ar__rec3t__f3) = true) and
+  (to_rep5(((a).us_split_fields5).rec__ar__rec3t__g3) = to_rep5(((b).us_split_fields5).rec__ar__rec3t__g3)))) ->
+  (bool_eq9(a, b) = false))))
+
+logic value__size2 : int
+
+logic object__size2 : us_rep2 -> int
+
+logic value__alignment2 : int
+
+logic object__alignment2 : us_rep2 -> int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 :
+  (forall a:et3. forall a1:et1. forall a2:et2. forall a3:enum1ta.
+  forall a4:et4. (0 <= object__size2({ us_split_fields5 = {
+  rec__ar__rec3t__f3 = { us_split_fields3 = { rec__ar__rec2t__f2 = a;
+  rec__ar__rec2t__g2 = { us_split_fields1 = { rec__ar__rec1t__f1 = a1;
+  rec__ar__rec1t__g1 = a2 } }; rec__ar__rec2t__h2 = a3 } };
+  rec__ar__rec3t__g3 = a4 } })))
+
+axiom value__alignment_axiom2 : (0 <= value__alignment2)
+
+axiom object__alignment_axiom2 :
+  (forall a:et3. forall a1:et1. forall a2:et2. forall a3:enum1ta.
+  forall a4:et4. (0 <= object__alignment2({ us_split_fields5 = {
+  rec__ar__rec3t__f3 = { us_split_fields3 = { rec__ar__rec2t__f2 = a;
+  rec__ar__rec2t__g2 = { us_split_fields1 = { rec__ar__rec1t__f1 = a1;
+  rec__ar__rec1t__g1 = a2 } }; rec__ar__rec2t__h2 = a3 } };
+  rec__ar__rec3t__g3 = a4 } })))
+
+logic ar__rec3t__f3__first__bit : int
+
+logic ar__rec3t__f3__last__bit : int
+
+logic ar__rec3t__f3__position : int
+
+axiom ar__rec3t__f3__first__bit_axiom : (0 <= ar__rec3t__f3__first__bit)
+
+axiom ar__rec3t__f3__last__bit_axiom :
+  (ar__rec3t__f3__first__bit <  ar__rec3t__f3__last__bit)
+
+axiom ar__rec3t__f3__position_axiom : (0 <= ar__rec3t__f3__position)
+
+logic ar__rec3t__g3__first__bit : int
+
+logic ar__rec3t__g3__last__bit : int
+
+logic ar__rec3t__g3__position : int
+
+axiom ar__rec3t__g3__first__bit_axiom : (0 <= ar__rec3t__g3__first__bit)
+
+axiom ar__rec3t__g3__last__bit_axiom :
+  (ar__rec3t__g3__first__bit <  ar__rec3t__g3__last__bit)
+
+axiom ar__rec3t__g3__position_axiom : (0 <= ar__rec3t__g3__position)
+
+logic user_eq8 : us_rep2, us_rep2 -> bool
+
+logic dummy12 : et3
+
+logic dummy13 : et1
+
+logic dummy14 : et2
+
+logic dummy15 : enum1ta
+
+logic dummy16 : et4
+
+type rec3t__ref = { rec3t__content : us_rep2
+}
+
+function rec3t__ref___projection(a: rec3t__ref) : us_rep2 =
+  (a).rec3t__content
+
+type us_split_fields6 = { rec__ar__rec4t__f4 : us_rep2; rec__ar__rec4t__g4 :
+enum1t
+}
+
+function us_split_fields_F4__projection(a: us_split_fields6) : us_rep2 =
+  (a).rec__ar__rec4t__f4
+
+function us_split_fields_G4__projection(a: us_split_fields6) : enum1t =
+  (a).rec__ar__rec4t__g4
+
+type us_split_fields__ref3 = { us_split_fields__content3 : us_split_fields6
+}
+
+function us_split_fields__ref_4__projection(a: us_split_fields__ref3) : us_split_fields6 =
+  (a).us_split_fields__content3
+
+type us_rep3 = { us_split_fields7 : us_split_fields6
+}
+
+function us_rep_4__projection(a: us_rep3) : us_split_fields6 =
+  (a).us_split_fields7
+
+logic bool_eq10 : us_rep3, us_rep3 -> bool
+
+axiom bool_eq_def9 :
+  (forall a:us_rep3. forall b:us_rep3 [bool_eq10(a, b)].
+  ((((bool_eq9(((a).us_split_fields7).rec__ar__rec4t__f4,
+  ((b).us_split_fields7).rec__ar__rec4t__f4) = true) and
+  (to_rep(((a).us_split_fields7).rec__ar__rec4t__g4) = to_rep(((b).us_split_fields7).rec__ar__rec4t__g4))) ->
+  (bool_eq10(a, b) = true)) and
+  ((not ((bool_eq9(((a).us_split_fields7).rec__ar__rec4t__f4,
+  ((b).us_split_fields7).rec__ar__rec4t__f4) = true) and
+  (to_rep(((a).us_split_fields7).rec__ar__rec4t__g4) = to_rep(((b).us_split_fields7).rec__ar__rec4t__g4)))) ->
+  (bool_eq10(a, b) = false))))
+
+logic value__size3 : int
+
+logic object__size3 : us_rep3 -> int
+
+logic value__alignment3 : int
+
+logic object__alignment3 : us_rep3 -> int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 :
+  (forall a:et3. forall a1:et1. forall a2:et2. forall a3:enum1ta.
+  forall a4:et4. forall a5:enum1t. (0 <= object__size3({ us_split_fields7 = {
+  rec__ar__rec4t__f4 = { us_split_fields5 = { rec__ar__rec3t__f3 = {
+  us_split_fields3 = { rec__ar__rec2t__f2 = a; rec__ar__rec2t__g2 = {
+  us_split_fields1 = { rec__ar__rec1t__f1 = a1; rec__ar__rec1t__g1 = a2 } };
+  rec__ar__rec2t__h2 = a3 } }; rec__ar__rec3t__g3 = a4 } };
+  rec__ar__rec4t__g4 = a5 } })))
+
+axiom value__alignment_axiom3 : (0 <= value__alignment3)
+
+axiom object__alignment_axiom3 :
+  (forall a:et3. forall a1:et1. forall a2:et2. forall a3:enum1ta.
+  forall a4:et4. forall a5:enum1t. (0 <= object__alignment3({
+  us_split_fields7 = { rec__ar__rec4t__f4 = { us_split_fields5 = {
+  rec__ar__rec3t__f3 = { us_split_fields3 = { rec__ar__rec2t__f2 = a;
+  rec__ar__rec2t__g2 = { us_split_fields1 = { rec__ar__rec1t__f1 = a1;
+  rec__ar__rec1t__g1 = a2 } }; rec__ar__rec2t__h2 = a3 } };
+  rec__ar__rec3t__g3 = a4 } }; rec__ar__rec4t__g4 = a5 } })))
+
+logic ar__rec4t__f4__first__bit : int
+
+logic ar__rec4t__f4__last__bit : int
+
+logic ar__rec4t__f4__position : int
+
+axiom ar__rec4t__f4__first__bit_axiom : (0 <= ar__rec4t__f4__first__bit)
+
+axiom ar__rec4t__f4__last__bit_axiom :
+  (ar__rec4t__f4__first__bit <  ar__rec4t__f4__last__bit)
+
+axiom ar__rec4t__f4__position_axiom : (0 <= ar__rec4t__f4__position)
+
+logic ar__rec4t__g4__first__bit : int
+
+logic ar__rec4t__g4__last__bit : int
+
+logic ar__rec4t__g4__position : int
+
+axiom ar__rec4t__g4__first__bit_axiom : (0 <= ar__rec4t__g4__first__bit)
+
+axiom ar__rec4t__g4__last__bit_axiom :
+  (ar__rec4t__g4__first__bit <  ar__rec4t__g4__last__bit)
+
+axiom ar__rec4t__g4__position_axiom : (0 <= ar__rec4t__g4__position)
+
+logic user_eq9 : us_rep3, us_rep3 -> bool
+
+logic dummy17 : et3
+
+logic dummy18 : et1
+
+logic dummy19 : et2
+
+logic dummy20 : enum1ta
+
+logic dummy21 : et4
+
+logic dummy22 : enum1t
+
+type rec4t__ref = { rec4t__content : us_rep3
+}
+
+function rec4t__ref___projection(a: rec4t__ref) : us_rep3 =
+  (a).rec4t__content
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+ (* File "ar.ads", line 1065, characters 0-0 *)
+goal WP_parameter_def :
+  (forall r__split_fields:et3. forall r__split_fields1:et1.
+  forall r__split_fields2:et2. forall r__split_fields3:enum1ta.
+  forall r__split_fields4:et4. forall r__split_fields5:enum1t.
+  forall temp:int. forall o:int. forall o1:enum1t. forall o2:et3.
+  forall o3:et1. forall o4:et2. forall o5:enum1ta. forall o6:et4.
+  forall o7:enum1t. forall temp___7210:et3. forall temp___72101:et1.
+  forall temp___72102:et2. forall temp___72103:enum1ta.
+  forall temp___72104:et4. forall temp___72105:enum1t. forall o8:enum1ta.
+  forall o9:et3. forall o10:et1. forall o11:et2. forall o12:enum1ta.
+  forall o13:et3. forall o14:et1. forall o15:et2. forall o16:enum1ta.
+  forall o17:et3. forall o18:et1. forall o19:et2. forall o20:enum1ta.
+  forall o21:et4. forall o22:et3. forall o23:et1. forall o24:et2.
+  forall o25:enum1ta. forall o26:et4. forall o27:et3. forall o28:et1.
+  forall o29:et2. forall o30:enum1ta. forall o31:et4. forall o32:enum1t.
+  forall temp___7214:us_rep3. forall result:int__ref. forall temp1:int.
+  forall result1:us_split_fields__ref3.
+  forall r__split_fields6:us_split_fields6.
+  forall result2:us_split_fields__ref3.
+  forall r__split_fields7:us_split_fields6.
+  forall r__split_fields8:us_split_fields__ref3. forall temp2:int__ref.
+  forall r__split_fields9:us_split_fields6. forall temp3:int.
+  ((in_range2(to_rep(r__split_fields5)) and ((((1 <= 4) ->
+  in_range2(temp)) and ((((o = to_rep(r__split_fields5)) and
+  in_range2(to_rep(r__split_fields5))) and ((result = { int__content = temp
+  }) and (temp1 = o))) and (((((to_rep(o1) = to_rep1(r__split_fields3)) and
+  ((((r__split_fields = o2) and (((r__split_fields1 = o3) and
+  (r__split_fields2 = o4)) and (r__split_fields3 = o5))) and
+  (r__split_fields4 = o6)) and (o1 = o7))) and ((((temp___7210 = o2) and
+  (((temp___72101 = o3) and (temp___72102 = o4)) and
+  (temp___72103 = o5))) and (temp___72104 = o6)) and
+  (temp___72105 = o7))) and ((result1 = { us_split_fields__content3 = {
+  rec__ar__rec4t__f4 = { us_split_fields5 = { rec__ar__rec3t__f3 = {
+  us_split_fields3 = { rec__ar__rec2t__f2 = r__split_fields;
+  rec__ar__rec2t__g2 = { us_split_fields1 = { rec__ar__rec1t__f1 =
+  r__split_fields1; rec__ar__rec1t__g1 = r__split_fields2 } };
+  rec__ar__rec2t__h2 = r__split_fields3 } }; rec__ar__rec3t__g3 =
+  r__split_fields4 } }; rec__ar__rec4t__g4 = r__split_fields5 } }) and
+  (r__split_fields6 = { rec__ar__rec4t__f4 = { us_split_fields5 = {
+  rec__ar__rec3t__f3 = { us_split_fields3 = { rec__ar__rec2t__f2 =
+  temp___7210; rec__ar__rec2t__g2 = { us_split_fields1 = {
+  rec__ar__rec1t__f1 = temp___72101; rec__ar__rec1t__g1 = temp___72102 } };
+  rec__ar__rec2t__h2 = temp___72103 } }; rec__ar__rec3t__g3 = temp___72104 }
+  }; rec__ar__rec4t__g4 = temp___72105 }))) and
+  ((((((((to_rep1(o8) = temp1) and
+  (((((((r__split_fields6).rec__ar__rec4t__f4).us_split_fields5).rec__ar__rec3t__f3).us_split_fields3).rec__ar__rec2t__f2 = o9) and
+  (((((((r__split_fields6).rec__ar__rec4t__f4).us_split_fields5).rec__ar__rec3t__f3).us_split_fields3).rec__ar__rec2t__g2 = {
+  us_split_fields1 = { rec__ar__rec1t__f1 = o10; rec__ar__rec1t__g1 = o11 }
+  }) and (o8 = o12)))) and ((o13 = o9) and (((o14 = o10) and (o15 = o11)) and
+  (o16 = o12)))) and (((o17 = o13) and (((o18 = o14) and (o19 = o15)) and
+  (o20 = o16))) and
+  ((((r__split_fields6).rec__ar__rec4t__f4).us_split_fields5).rec__ar__rec3t__g3 = o21))) and
+  (((o22 = o17) and (((o23 = o18) and (o24 = o19)) and (o25 = o20))) and
+  (o26 = o21))) and ((((o27 = o22) and (((o28 = o23) and (o29 = o24)) and
+  (o30 = o25))) and (o31 = o26)) and
+  ((r__split_fields6).rec__ar__rec4t__g4 = o32))) and (temp___7214 = {
+  us_split_fields7 = { rec__ar__rec4t__f4 = { us_split_fields5 = {
+  rec__ar__rec3t__f3 = { us_split_fields3 = { rec__ar__rec2t__f2 = o27;
+  rec__ar__rec2t__g2 = { us_split_fields1 = { rec__ar__rec1t__f1 = o28;
+  rec__ar__rec1t__g1 = o29 } }; rec__ar__rec2t__h2 = o30 } };
+  rec__ar__rec3t__g3 = o31 } }; rec__ar__rec4t__g4 = o32 } })) and
+  ((result2 = { us_split_fields__content3 = r__split_fields6 }) and
+  (r__split_fields7 = (temp___7214).us_split_fields7)))))) and (((temp2 = {
+  int__content = temp1 }) and (r__split_fields8 = {
+  us_split_fields__content3 = r__split_fields7 })) and ((temp3 = temp1) and
+  (r__split_fields9 = r__split_fields7))))) -> (bool_eq10({
+  us_split_fields7 = (r__split_fields8).us_split_fields__content3 }, {
+  us_split_fields7 = { rec__ar__rec4t__f4 = { us_split_fields5 = {
+  rec__ar__rec3t__f3 = { us_split_fields3 = { rec__ar__rec2t__f2 =
+  r__split_fields; rec__ar__rec2t__g2 = { us_split_fields1 = {
+  rec__ar__rec1t__f1 = r__split_fields1; rec__ar__rec1t__g1 =
+  r__split_fields2 } }; rec__ar__rec2t__h2 =
+  of_rep1(to_rep(r__split_fields5)) } }; rec__ar__rec3t__g3 =
+  r__split_fields4 } }; rec__ar__rec4t__g4 =
+  of_rep(to_rep1(r__split_fields3)) } }) = true)))

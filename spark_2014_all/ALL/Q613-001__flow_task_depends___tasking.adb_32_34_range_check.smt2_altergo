@@ -1,0 +1,526 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type message_type
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 1))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : message_type, message_type -> bool
+
+logic dummy : message_type
+
+type message_type__ref = { message_type__content : message_type
+}
+
+function message_type__ref___projection(a: message_type__ref) : message_type =
+  (a).message_type__content
+
+logic to_rep : message_type -> int
+
+logic of_rep : int -> message_type
+
+axiom inversion_axiom :
+  (forall x:message_type [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:message_type [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type message_index_type
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 64))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : message_index_type, message_index_type -> bool
+
+logic dummy1 : message_index_type
+
+type message_index_type__ref = { message_index_type__content :
+message_index_type
+}
+
+function message_index_type__ref___projection(a: message_index_type__ref) : message_index_type =
+  (a).message_index_type__content
+
+logic to_rep1 : message_index_type -> int
+
+logic of_rep1 : int -> message_index_type
+
+axiom inversion_axiom1 :
+  (forall x:message_index_type [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 :
+  (forall x:message_index_type [to_rep1(x)]. in_range2(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type message_count_type
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 64))
+
+logic bool_eq4 : int, int -> bool
+
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq2 : message_count_type, message_count_type -> bool
+
+logic dummy2 : message_count_type
+
+type message_count_type__ref = { message_count_type__content :
+message_count_type
+}
+
+function message_count_type__ref___projection(a: message_count_type__ref) : message_count_type =
+  (a).message_count_type__content
+
+logic to_rep2 : message_count_type -> int
+
+logic of_rep2 : int -> message_count_type
+
+axiom inversion_axiom2 :
+  (forall x:message_count_type [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 :
+  (forall x:message_count_type [to_rep2(x)]. in_range3(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range3(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+type map__ref = { map__content : (int,message_type) farray
+}
+
+logic slide : (int,message_type) farray, int,
+  int -> (int,message_type) farray
+
+axiom slide_eq :
+  (forall a:(int,message_type) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,message_type) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat : (int,message_type) farray, int, int,
+  (int,message_type) farray, int, int -> (int,message_type) farray
+
+axiom concat_def :
+  (forall a:(int,message_type) farray. forall b:(int,message_type) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton : message_type, int -> (int,message_type) farray
+
+axiom singleton_def :
+  (forall v:message_type.
+  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
+
+logic bool_eq5 : (int,message_type) farray, int, int,
+  (int,message_type) farray, int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall a:(int,message_type) farray. forall a__first:int.
+  forall a__last:int. forall b:(int,message_type) farray.
+  forall b__first:int. forall b__last:int [bool_eq5(a, a__first, a__last, b,
+  b__first, b__last)]. ((((((a__first <= a__last) and
+  ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) and
+  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
+  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) ->
+  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev :
+  (forall a:(int,message_type) farray. forall b:(int,message_type) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq5(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) ->
+  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
+
+logic compare : (int,message_type) farray, int, int,
+  (int,message_type) farray, int, int -> int
+
+axiom compare_def_eq :
+  (forall a:(int,message_type) farray. forall b:(int,message_type) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt :
+  (forall a:(int,message_type) farray. forall b:(int,message_type) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt :
+  (forall a:(int,message_type) farray. forall b:(int,message_type) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+
+type us_split_fields = { rec__tasking__mailboxT__next_in :
+message_index_type; rec__tasking__mailboxT__next_out : message_index_type;
+rec__tasking__mailboxT__count : message_count_type;
+rec__tasking__mailboxT__non_empty : bool;
+rec__tasking__mailboxT__message_array : (int,message_type) farray
+}
+
+function us_split_fields_Next_In__projection(a: us_split_fields) : message_index_type =
+  (a).rec__tasking__mailboxT__next_in
+
+function us_split_fields_Next_Out__projection(a: us_split_fields) : message_index_type =
+  (a).rec__tasking__mailboxT__next_out
+
+function us_split_fields_Count__projection(a: us_split_fields) : message_count_type =
+  (a).rec__tasking__mailboxT__count
+
+function us_split_fields_Non_Empty__projection(a: us_split_fields) : bool =
+  (a).rec__tasking__mailboxT__non_empty
+
+function us_split_fields_Message_Array__projection(a: us_split_fields) : (int,message_type) farray =
+  (a).rec__tasking__mailboxT__message_array
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+function us_rep___projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:message_index_type. forall a1:message_index_type.
+  forall a2:message_count_type. forall a3:bool.
+  forall a4:(int,message_type) farray. (0 <= object__size({
+  us_split_fields1 = { rec__tasking__mailboxT__next_in = a;
+  rec__tasking__mailboxT__next_out = a1; rec__tasking__mailboxT__count = a2;
+  rec__tasking__mailboxT__non_empty = a3;
+  rec__tasking__mailboxT__message_array = a4 } })))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:message_index_type. forall a1:message_index_type.
+  forall a2:message_count_type. forall a3:bool.
+  forall a4:(int,message_type) farray. (0 <= object__alignment({
+  us_split_fields1 = { rec__tasking__mailboxT__next_in = a;
+  rec__tasking__mailboxT__next_out = a1; rec__tasking__mailboxT__count = a2;
+  rec__tasking__mailboxT__non_empty = a3;
+  rec__tasking__mailboxT__message_array = a4 } })))
+
+logic tasking__mailboxT__next_in__first__bit : int
+
+logic tasking__mailboxT__next_in__last__bit : int
+
+logic tasking__mailboxT__next_in__position : int
+
+axiom tasking__mailboxT__next_in__first__bit_axiom :
+  (0 <= tasking__mailboxT__next_in__first__bit)
+
+axiom tasking__mailboxT__next_in__last__bit_axiom :
+  (tasking__mailboxT__next_in__first__bit <  tasking__mailboxT__next_in__last__bit)
+
+axiom tasking__mailboxT__next_in__position_axiom :
+  (0 <= tasking__mailboxT__next_in__position)
+
+logic tasking__mailboxT__next_out__first__bit : int
+
+logic tasking__mailboxT__next_out__last__bit : int
+
+logic tasking__mailboxT__next_out__position : int
+
+axiom tasking__mailboxT__next_out__first__bit_axiom :
+  (0 <= tasking__mailboxT__next_out__first__bit)
+
+axiom tasking__mailboxT__next_out__last__bit_axiom :
+  (tasking__mailboxT__next_out__first__bit <  tasking__mailboxT__next_out__last__bit)
+
+axiom tasking__mailboxT__next_out__position_axiom :
+  (0 <= tasking__mailboxT__next_out__position)
+
+logic tasking__mailboxT__count__first__bit : int
+
+logic tasking__mailboxT__count__last__bit : int
+
+logic tasking__mailboxT__count__position : int
+
+axiom tasking__mailboxT__count__first__bit_axiom :
+  (0 <= tasking__mailboxT__count__first__bit)
+
+axiom tasking__mailboxT__count__last__bit_axiom :
+  (tasking__mailboxT__count__first__bit <  tasking__mailboxT__count__last__bit)
+
+axiom tasking__mailboxT__count__position_axiom :
+  (0 <= tasking__mailboxT__count__position)
+
+logic tasking__mailboxT__non_empty__first__bit : int
+
+logic tasking__mailboxT__non_empty__last__bit : int
+
+logic tasking__mailboxT__non_empty__position : int
+
+axiom tasking__mailboxT__non_empty__first__bit_axiom :
+  (0 <= tasking__mailboxT__non_empty__first__bit)
+
+axiom tasking__mailboxT__non_empty__last__bit_axiom :
+  (tasking__mailboxT__non_empty__first__bit <  tasking__mailboxT__non_empty__last__bit)
+
+axiom tasking__mailboxT__non_empty__position_axiom :
+  (0 <= tasking__mailboxT__non_empty__position)
+
+logic tasking__mailboxT__message_array__first__bit : int
+
+logic tasking__mailboxT__message_array__last__bit : int
+
+logic tasking__mailboxT__message_array__position : int
+
+axiom tasking__mailboxT__message_array__first__bit_axiom :
+  (0 <= tasking__mailboxT__message_array__first__bit)
+
+axiom tasking__mailboxT__message_array__last__bit_axiom :
+  (tasking__mailboxT__message_array__first__bit <  tasking__mailboxT__message_array__last__bit)
+
+axiom tasking__mailboxT__message_array__position_axiom :
+  (0 <= tasking__mailboxT__message_array__position)
+
+logic user_eq3 : us_rep, us_rep -> bool
+
+type mailboxT__ref = { mailboxT__content : us_rep
+}
+
+function mailboxT__ref___projection(a: mailboxT__ref) : us_rep =
+  (a).mailboxT__content
+
+logic temp___203 : int -> (int,message_type) farray
+
+axiom def_axiom :
+  (forall temp___205:int.
+  (forall temp___206:int.
+  ((temp___203(temp___205)[temp___206]) = of_rep(temp___205))))
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+ (* File "tasking.ads", line 11, characters 0-0 *)
+goal WP_parameter_def :
+  (forall m:int. forall self__:message_index_type.
+  forall self__1:message_index_type. forall self__2:message_count_type.
+  forall self__3:bool. forall self__4:(int,message_type) farray.
+  forall o:int. forall o1:message_count_type. forall o2:message_index_type.
+  forall o3:message_index_type. forall o4:message_count_type. forall o5:bool.
+  forall o6:(int,message_type) farray. forall o7:message_index_type.
+  forall o8:message_index_type. forall o9:message_count_type.
+  forall o10:bool. forall o11:(int,message_type) farray. forall result:int.
+  forall m1:int. forall result1:message_index_type.
+  forall result2:message_index_type. forall result3:message_count_type.
+  forall result4:bool. forall result5:(int,message_type) farray.
+  forall self__5:message_index_type. forall self__6:message_index_type.
+  forall self__7:message_count_type. forall self__8:bool.
+  forall self__9:(int,message_type) farray.
+  forall result6:message_index_type. forall result7:message_index_type.
+  forall result8:message_count_type. forall result9:bool.
+  forall result10:(int,message_type) farray.
+  forall self__10:message_index_type. forall self__11:message_index_type.
+  forall self__12:message_count_type. forall self__13:bool.
+  forall self__14:(int,message_type) farray. (((0 <= 1) -> in_range1(m)) ->
+  ((self__3 = true) -> (((result = m) and
+  (m1 = to_rep((self__4[to_rep1(self__1)])))) ->
+  (((((((o = (to_rep2(self__2) - 1)) and
+  in_range3((to_rep2(self__2) - 1))) and (to_rep2(o1) = o)) and
+  ((self__ = o2) and ((self__1 = o3) and ((o1 = o4) and ((self__3 = o5) and
+  (self__4 = o6)))))) and ((o7 = o2) and ((o8 = o3) and ((o9 = o4) and
+  ((o10 = o5) and (o11 = o6)))))) and (((result1 = self__) and
+  ((result2 = self__1) and ((result3 = self__2) and ((result4 = self__3) and
+  (result5 = self__4))))) and ((o7 = self__5) and ((o8 = self__6) and
+  ((o9 = self__7) and ((o10 = self__8) and (o11 = self__9))))))) ->
+  ((((to_rep2(self__7) = 0) and (((result6 = self__5) and
+  ((result7 = self__6) and ((result8 = self__7) and ((result9 = self__8) and
+  (result10 = self__9))))) and ((self__5 = self__10) and
+  ((self__6 = self__11) and ((self__7 = self__12) and
+  ((of_int(0) = self__13) and (self__9 = self__14))))))) or
+  ((not (to_rep2(self__7) = 0)) and ((self__10 = self__5) and
+  ((self__11 = self__6) and ((self__12 = self__7) and
+  ((self__13 = self__8) and (self__14 = self__9))))))) ->
+  ((not (to_rep1(self__11) = 64)) ->
+  in_range2((to_rep1(self__11) + 1)))))))))

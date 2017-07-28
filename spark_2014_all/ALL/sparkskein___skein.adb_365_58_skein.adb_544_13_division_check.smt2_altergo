@@ -1,0 +1,1341 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+type t
+
+logic tqtint : t -> int
+
+axiom tqtaxiom :
+  (forall i:t. ((0 <= tqtint(i)) and (tqtint(i) <= 18446744073709551615)))
+
+logic nth : t, int -> bool
+
+axiom nth_out_of_bound :
+  (forall x:t. forall n:int. (((n <  0) or (64 <= n)) -> (nth(x,
+  n) = false)))
+
+logic zeros : t
+
+axiom Nth_zeros : (forall n:int. (nth(zeros, n) = false))
+
+logic one : t
+
+logic ones : t
+
+axiom Nth_ones :
+  (forall n:int. (((0 <= n) and (n <  64)) -> (nth(ones, n) = true)))
+
+logic bw_and : t, t -> t
+
+axiom Nth_bw_and :
+  (forall v1:t. forall v2:t. forall n:int. (((0 <= n) and (n <  64)) ->
+  (nth(bw_and(v1, v2), n) = match_bool(nth(v1, n), nth(v2, n), false))))
+
+logic bw_or : t, t -> t
+
+axiom Nth_bw_or :
+  (forall v1:t. forall v2:t. forall n:int. (((0 <= n) and (n <  64)) ->
+  (nth(bw_or(v1, v2), n) = match_bool(nth(v1, n), true, nth(v2, n)))))
+
+logic bw_xor : t, t -> t
+
+axiom Nth_bw_xor :
+  (forall v1:t. forall v2:t. forall n:int. (((0 <= n) and (n <  64)) ->
+  (nth(bw_xor(v1, v2), n) = xorb(nth(v1, n), nth(v2, n)))))
+
+logic bw_not : t -> t
+
+axiom Nth_bw_not :
+  (forall v:t. forall n:int. (((0 <= n) and (n <  64)) -> (nth(bw_not(v),
+  n) = match_bool(nth(v, n), false, true))))
+
+logic lsr : t, int -> t
+
+axiom Lsr_nth_low :
+  (forall b:t. forall n:int. forall s:int. ((0 <= s) -> ((0 <= n) ->
+  (((n + s) <  64) -> (nth(lsr(b, s), n) = nth(b, (n + s)))))))
+
+axiom Lsr_nth_high :
+  (forall b:t. forall n:int. forall s:int. ((0 <= s) -> ((0 <= n) ->
+  ((64 <= (n + s)) -> (nth(lsr(b, s), n) = false)))))
+
+axiom lsr_zeros : (forall x:t. (lsr(x, 0) = x))
+
+logic asr : t, int -> t
+
+axiom Asr_nth_low :
+  (forall b:t. forall n:int. forall s:int. ((0 <= s) -> (((0 <= n) and
+  (n <  64)) -> (((n + s) <  64) -> (nth(asr(b, s), n) = nth(b, (n + s)))))))
+
+axiom Asr_nth_high :
+  (forall b:t. forall n:int. forall s:int. ((0 <= s) -> (((0 <= n) and
+  (n <  64)) -> ((64 <= (n + s)) -> (nth(asr(b, s), n) = nth(b,
+  (64 - 1)))))))
+
+axiom asr_zeros : (forall x:t. (asr(x, 0) = x))
+
+logic lsl : t, int -> t
+
+axiom Lsl_nth_high :
+  (forall b:t. forall n:int. forall s:int. (((0 <= s) and ((s <= n) and
+  (n <  64))) -> (nth(lsl(b, s), n) = nth(b, (n - s)))))
+
+axiom Lsl_nth_low :
+  (forall b:t. forall n:int. forall s:int. (((0 <= n) and (n <  s)) ->
+  (nth(lsl(b, s), n) = false)))
+
+axiom lsl_zeros : (forall x:t. (lsl(x, 0) = x))
+
+logic abs : int -> int
+
+axiom abs_def :
+  (forall x:int [abs(x)]. (((0 <= x) -> (abs(x) = x)) and ((not (0 <= x)) ->
+  (abs(x) = (-x)))))
+
+axiom Abs_le :
+  (forall x:int. forall y:int. ((abs(x) <= y) <-> (((-y) <= x) and
+  (x <= y))))
+
+axiom Abs_pos : (forall x:int. (0 <= abs(x)))
+
+axiom Div_mod :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * (x / y)) + (x % y)))))
+
+axiom Mod_bound :
+  (forall x:int. forall y:int. ((not (y = 0)) -> ((0 <= (x % y)) and
+  ((x % y) <  abs(y)))))
+
+axiom Div_unique :
+  (forall x:int. forall y:int. forall q:int. ((0 <  y) ->
+  ((((q * y) <= x) and (x <  ((q * y) + y))) -> ((x / y) = q))))
+
+axiom Div_bound :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= (x / y)) and ((x / y) <= x))))
+
+axiom Mod_1 : (forall x:int. ((x % 1) = 0))
+
+axiom Div_1 : (forall x:int. ((x / 1) = x))
+
+axiom Div_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> ((x / y) = 0)))
+
+axiom Div_inf_neg :
+  (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
+  (((-x) / y) = (-1))))
+
+axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
+
+axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
+
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+
+axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
+
+axiom Mod_minus1_left :
+  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+
+axiom Div_mult :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
+  ((0 <  x) -> ((((x * y) + z) / x) = (y + (z / x)))))
+
+axiom Mod_mult :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) % x)].
+  ((0 <  x) -> ((((x * y) + z) % x) = (z % x))))
+
+logic rotate_right : t, int -> t
+
+axiom Nth_rotate_right :
+  (forall v:t. forall n:int. forall i:int. (((0 <= i) and (i <  64)) ->
+  ((0 <= n) -> (nth(rotate_right(v, n), i) = nth(v, ((i + n) % 64))))))
+
+logic rotate_left : t, int -> t
+
+axiom Nth_rotate_left :
+  (forall v:t. forall n:int. forall i:int. (((0 <= i) and (i <  64)) ->
+  ((0 <= n) -> (nth(rotate_left(v, n), i) = nth(v, ((i - n) % 64))))))
+
+logic pow2 : int -> int
+
+axiom Power_0 : (pow2(0) = 1)
+
+axiom Power_s : (forall n:int. ((0 <= n) -> (pow2((n + 1)) = (2 * pow2(n)))))
+
+axiom Power_1 : (pow2(1) = 2)
+
+axiom Power_sum :
+  (forall n:int. forall m:int. (((0 <= n) and (0 <= m)) ->
+  (pow2((n + m)) = (pow2(n) * pow2(m)))))
+
+axiom pow2pos : (forall i:int. ((0 <= i) -> (0 <  pow2(i))))
+
+axiom pow2_0 : (pow2(0) = 1)
+
+axiom pow2_1 : (pow2(1) = 2)
+
+axiom pow2_2 : (pow2(2) = 4)
+
+axiom pow2_3 : (pow2(3) = 8)
+
+axiom pow2_4 : (pow2(4) = 16)
+
+axiom pow2_5 : (pow2(5) = 32)
+
+axiom pow2_6 : (pow2(6) = 64)
+
+axiom pow2_7 : (pow2(7) = 128)
+
+axiom pow2_8 : (pow2(8) = 256)
+
+axiom pow2_9 : (pow2(9) = 512)
+
+axiom pow2_10 : (pow2(10) = 1024)
+
+axiom pow2_11 : (pow2(11) = 2048)
+
+axiom pow2_12 : (pow2(12) = 4096)
+
+axiom pow2_13 : (pow2(13) = 8192)
+
+axiom pow2_14 : (pow2(14) = 16384)
+
+axiom pow2_15 : (pow2(15) = 32768)
+
+axiom pow2_16 : (pow2(16) = 65536)
+
+axiom pow2_17 : (pow2(17) = 131072)
+
+axiom pow2_18 : (pow2(18) = 262144)
+
+axiom pow2_19 : (pow2(19) = 524288)
+
+axiom pow2_20 : (pow2(20) = 1048576)
+
+axiom pow2_21 : (pow2(21) = 2097152)
+
+axiom pow2_22 : (pow2(22) = 4194304)
+
+axiom pow2_23 : (pow2(23) = 8388608)
+
+axiom pow2_24 : (pow2(24) = 16777216)
+
+axiom pow2_25 : (pow2(25) = 33554432)
+
+axiom pow2_26 : (pow2(26) = 67108864)
+
+axiom pow2_27 : (pow2(27) = 134217728)
+
+axiom pow2_28 : (pow2(28) = 268435456)
+
+axiom pow2_29 : (pow2(29) = 536870912)
+
+axiom pow2_30 : (pow2(30) = 1073741824)
+
+axiom pow2_31 : (pow2(31) = 2147483648)
+
+axiom pow2_32 : (pow2(32) = 4294967296)
+
+axiom pow2_33 : (pow2(33) = 8589934592)
+
+axiom pow2_34 : (pow2(34) = 17179869184)
+
+axiom pow2_35 : (pow2(35) = 34359738368)
+
+axiom pow2_36 : (pow2(36) = 68719476736)
+
+axiom pow2_37 : (pow2(37) = 137438953472)
+
+axiom pow2_38 : (pow2(38) = 274877906944)
+
+axiom pow2_39 : (pow2(39) = 549755813888)
+
+axiom pow2_40 : (pow2(40) = 1099511627776)
+
+axiom pow2_41 : (pow2(41) = 2199023255552)
+
+axiom pow2_42 : (pow2(42) = 4398046511104)
+
+axiom pow2_43 : (pow2(43) = 8796093022208)
+
+axiom pow2_44 : (pow2(44) = 17592186044416)
+
+axiom pow2_45 : (pow2(45) = 35184372088832)
+
+axiom pow2_46 : (pow2(46) = 70368744177664)
+
+axiom pow2_47 : (pow2(47) = 140737488355328)
+
+axiom pow2_48 : (pow2(48) = 281474976710656)
+
+axiom pow2_49 : (pow2(49) = 562949953421312)
+
+axiom pow2_50 : (pow2(50) = 1125899906842624)
+
+axiom pow2_51 : (pow2(51) = 2251799813685248)
+
+axiom pow2_52 : (pow2(52) = 4503599627370496)
+
+axiom pow2_53 : (pow2(53) = 9007199254740992)
+
+axiom pow2_54 : (pow2(54) = 18014398509481984)
+
+axiom pow2_55 : (pow2(55) = 36028797018963968)
+
+axiom pow2_56 : (pow2(56) = 72057594037927936)
+
+axiom pow2_57 : (pow2(57) = 144115188075855872)
+
+axiom pow2_58 : (pow2(58) = 288230376151711744)
+
+axiom pow2_59 : (pow2(59) = 576460752303423488)
+
+axiom pow2_60 : (pow2(60) = 1152921504606846976)
+
+axiom pow2_61 : (pow2(61) = 2305843009213693952)
+
+axiom pow2_62 : (pow2(62) = 4611686018427387904)
+
+axiom pow2_63 : (pow2(63) = 9223372036854775808)
+
+axiom pow2_64 : (pow2(64) = 18446744073709551616)
+
+logic to_int : t -> int
+
+logic of_int : int -> t
+
+axiom to_uint_extensionality :
+  (forall v:t. forall vqt:t. ((tqtint(v) = tqtint(vqt)) -> (v = vqt)))
+
+axiom to_int_extensionality :
+  (forall v:t. forall vqt:t. ((to_int(v) = to_int(vqt)) -> (v = vqt)))
+
+predicate uint_in_range(i: int) = ((0 <= i) and (i <= 18446744073709551615))
+
+axiom to_uint_bounds :
+  (forall v:t. ((0 <= tqtint(v)) and (tqtint(v) <  18446744073709551616)))
+
+axiom to_uint_of_int :
+  (forall i:int. (((0 <= i) and (i <  18446744073709551616)) ->
+  (tqtint(of_int(i)) = i)))
+
+logic size_bv : t
+
+axiom to_uint_size_bv : (tqtint(size_bv) = 64)
+
+axiom to_uint_zeros : (tqtint(zeros) = 0)
+
+axiom to_uint_one : (tqtint(one) = 1)
+
+axiom to_uint_ones : (tqtint(ones) = 18446744073709551615)
+
+predicate ult(x: t, y: t) = (tqtint(x) <  tqtint(y))
+
+predicate ule(x: t, y: t) = (tqtint(x) <= tqtint(y))
+
+predicate ugt(x: t, y: t) = (tqtint(y) <  tqtint(x))
+
+predicate uge(x: t, y: t) = (tqtint(y) <= tqtint(x))
+
+predicate slt(v1: t, v2: t) = (to_int(v1) <  to_int(v2))
+
+predicate sle(v1: t, v2: t) = (to_int(v1) <= to_int(v2))
+
+predicate sgt(v1: t, v2: t) = (to_int(v2) <  to_int(v1))
+
+predicate sge(v1: t, v2: t) = (to_int(v2) <= to_int(v1))
+
+logic add : t, t -> t
+
+axiom to_uint_add_bounded :
+  (forall v1:t. forall v2:t.
+  (((tqtint(v1) + tqtint(v2)) <  18446744073709551616) -> (tqtint(add(v1,
+  v2)) = (tqtint(v1) + tqtint(v2)))))
+
+logic sub : t, t -> t
+
+axiom to_uint_sub_bounded :
+  (forall v1:t. forall v2:t. (((0 <= (tqtint(v1) - tqtint(v2))) and
+  ((tqtint(v1) - tqtint(v2)) <  18446744073709551616)) -> (tqtint(sub(v1,
+  v2)) = (tqtint(v1) - tqtint(v2)))))
+
+logic neg : t -> t
+
+axiom to_uint_neg :
+  (forall v:t. (tqtint(neg(v)) = ((-tqtint(v)) % 18446744073709551616)))
+
+logic mul : t, t -> t
+
+axiom to_uint_mul_bounded :
+  (forall v1:t. forall v2:t.
+  (((tqtint(v1) * tqtint(v2)) <  18446744073709551616) -> (tqtint(mul(v1,
+  v2)) = (tqtint(v1) * tqtint(v2)))))
+
+logic udiv : t, t -> t
+
+axiom to_uint_udiv :
+  (forall v1:t. forall v2:t. (tqtint(udiv(v1,
+  v2)) = (tqtint(v1) / tqtint(v2))))
+
+logic urem : t, t -> t
+
+axiom to_uint_urem :
+  (forall v1:t. forall v2:t. (tqtint(urem(v1,
+  v2)) = (tqtint(v1) % tqtint(v2))))
+
+logic lsr_bv : t, t -> t
+
+axiom lsr_bv_is_lsr :
+  (forall x:t. forall n:t. (lsr_bv(x, n) = lsr(x, tqtint(n))))
+
+axiom to_uint_lsr :
+  (forall v:t. forall n:t. (tqtint(lsr_bv(v,
+  n)) = (tqtint(v) / pow2(tqtint(n)))))
+
+logic asr_bv : t, t -> t
+
+axiom asr_bv_is_asr :
+  (forall x:t. forall n:t. (asr_bv(x, n) = asr(x, tqtint(n))))
+
+logic lsl_bv : t, t -> t
+
+axiom lsl_bv_is_lsl :
+  (forall x:t. forall n:t. (lsl_bv(x, n) = lsl(x, tqtint(n))))
+
+axiom to_uint_lsl :
+  (forall v:t. forall n:t. (tqtint(lsl_bv(v,
+  n)) = ((tqtint(v) * pow2(tqtint(n))) % 18446744073709551616)))
+
+logic rotate_right_bv : t, t -> t
+
+logic rotate_left_bv : t, t -> t
+
+axiom rotate_left_bv_is_rotate_left :
+  (forall v:t. forall n:t. (rotate_left_bv(v, n) = rotate_left(v,
+  tqtint(n))))
+
+axiom rotate_right_bv_is_rotate_right :
+  (forall v:t. forall n:t. (rotate_right_bv(v, n) = rotate_right(v,
+  tqtint(n))))
+
+logic nth_bv : t, t -> bool
+
+axiom Nth_bv_is_nth :
+  (forall x:t. forall i:t. (nth(x, tqtint(i)) = nth_bv(x, i)))
+
+axiom Nth_bv_is_nth2 :
+  (forall x:t. forall i:int. (((0 <= i) and (i <  18446744073709551616)) ->
+  (nth_bv(x, of_int(i)) = nth(x, i))))
+
+logic eq_sub_bv : t, t, t, t -> prop
+
+predicate eq_sub(a: t, b: t, i: int, n: int) =
+  (forall j:int. (((i <= j) and (j <  (i + n))) -> (nth(a, j) = nth(b, j))))
+
+axiom eq_sub_equiv :
+  (forall a:t. forall b:t. forall i:t. forall n:t. (eq_sub(a, b, tqtint(i),
+  tqtint(n)) <-> eq_sub_bv(a, b, i, n)))
+
+axiom Extensionality :
+  (forall x:t. forall y:t [eq_sub(x, y, 0, 64)]. (eq_sub(x, y, 0, 64) ->
+  (x = y)))
+
+type t__ref = { t__content : t
+}
+
+logic bool_eq : t, t -> bool
+
+axiom bool_eq_def :
+  (forall x:t. forall y:t [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic bool_ne : t, t -> bool
+
+axiom bool_ne_def :
+  (forall x:t. forall y:t [bool_ne(x, y)]. (((not (x = y)) -> (bool_ne(x,
+  y) = true)) and ((x = y) -> (bool_ne(x, y) = false))))
+
+logic bool_lt : t, t -> bool
+
+axiom bool_lt_def :
+  (forall x:t. forall y:t [bool_lt(x, y)]. ((ult(x, y) -> (bool_lt(x,
+  y) = true)) and ((not ult(x, y)) -> (bool_lt(x, y) = false))))
+
+logic bool_le : t, t -> bool
+
+axiom bool_le_def :
+  (forall x:t. forall y:t [bool_le(x, y)]. ((ule(x, y) -> (bool_le(x,
+  y) = true)) and ((not ule(x, y)) -> (bool_le(x, y) = false))))
+
+logic bool_gt : t, t -> bool
+
+axiom bool_gt_def :
+  (forall x:t. forall y:t [bool_gt(x, y)]. ((ugt(x, y) -> (bool_gt(x,
+  y) = true)) and ((not ugt(x, y)) -> (bool_gt(x, y) = false))))
+
+logic bool_ge : t, t -> bool
+
+axiom bool_ge_def :
+  (forall x:t. forall y:t [bool_ge(x, y)]. ((uge(x, y) -> (bool_ge(x,
+  y) = true)) and ((not uge(x, y)) -> (bool_ge(x, y) = false))))
+
+logic power : t, int -> t
+
+axiom Power_01 : (forall x:t. (power(x, 0) = one))
+
+axiom Power_11 : (forall x:t. (power(x, 1) = x))
+
+axiom Power_s1 :
+  (forall x:t. forall n:int. ((0 <= n) -> (power(x, (n + 1)) = mul(x,
+  power(x, n)))))
+
+axiom Power_s_alt :
+  (forall x:t. forall n:int. ((0 <  n) -> (power(x, n) = mul(x, power(x,
+  (n - 1))))))
+
+axiom Power_sum1 :
+  (forall x:t. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
+  (power(x, (n + m)) = mul(power(x, n), power(x, m))))))
+
+axiom Power_mult :
+  (forall x:t. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
+  (power(x, (n * m)) = power(power(x, n), m)))))
+
+axiom Power_mult2 :
+  (forall x:t. forall y:t. forall n:int. ((0 <= n) -> (power(mul(x, y),
+  n) = mul(power(x, n), power(y, n)))))
+
+logic bv_min : t, t -> t
+
+axiom bv_min_def :
+  (forall x:t. forall y:t [bv_min(x, y)]. ((ule(x, y) -> (bv_min(x,
+  y) = x)) and ((not ule(x, y)) -> (bv_min(x, y) = y))))
+
+logic bv_max : t, t -> t
+
+axiom bv_max_def :
+  (forall x:t. forall y:t [bv_max(x, y)]. ((ule(x, y) -> (bv_max(x,
+  y) = y)) and ((not ule(x, y)) -> (bv_max(x, y) = x))))
+
+logic min : int, int -> int
+
+axiom min_def :
+  (forall x:int. forall y:int [min(x, y)]. (((x <= y) -> (min(x, y) = x)) and
+  ((not (x <= y)) -> (min(x, y) = y))))
+
+logic max : int, int -> int
+
+axiom max_def :
+  (forall x:int. forall y:int [max(x, y)]. (((x <= y) -> (max(x, y) = y)) and
+  ((not (x <= y)) -> (max(x, y) = x))))
+
+axiom Min_r : (forall x:int. forall y:int. ((y <= x) -> (min(x, y) = y)))
+
+axiom Max_l : (forall x:int. forall y:int. ((y <= x) -> (max(x, y) = x)))
+
+axiom Min_comm : (forall x:int. forall y:int. (min(x, y) = min(y, x)))
+
+axiom Max_comm : (forall x:int. forall y:int. (max(x, y) = max(y, x)))
+
+axiom Min_assoc :
+  (forall x:int. forall y:int. forall z:int. (min(min(x, y), z) = min(x,
+  min(y, z))))
+
+axiom Max_assoc :
+  (forall x:int. forall y:int. forall z:int. (max(max(x, y), z) = max(x,
+  max(y, z))))
+
+axiom bv_min_to_uint :
+  (forall x:t. forall y:t. (tqtint(bv_min(x, y)) = min(tqtint(x),
+  tqtint(y))))
+
+axiom bv_max_to_uint :
+  (forall x:t. forall y:t. (tqtint(bv_max(x, y)) = max(tqtint(x),
+  tqtint(y))))
+
+type u64
+
+logic attr__ATTRIBUTE_MODULUS : t
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne1 : int, int -> bool
+
+logic bool_lt1 : int, int -> bool
+
+logic bool_le1 : int, int -> bool
+
+logic bool_gt1 : int, int -> bool
+
+logic bool_ge1 : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne1(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt1(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le1(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt1(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge1(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : t, t -> bool
+
+axiom bool_eq_def1 :
+  (forall x:t. forall y:t [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> t
+
+logic user_eq : u64, u64 -> bool
+
+logic dummy : u64
+
+type u64__ref = { u64__content : u64
+}
+
+function u64__ref___projection(a: u64__ref) : u64 = (a).u64__content
+
+logic to_rep : u64 -> t
+
+logic of_rep : t -> u64
+
+axiom inversion_axiom : (forall x:u64 [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : true
+
+axiom coerce_axiom :
+  (forall x:t [to_rep(of_rep(x))]. (to_rep(of_rep(x)) = x))
+
+function to_int1(x: u64) : int = tqtint(to_rep(x))
+
+axiom range_int_axiom :
+  (forall x:u64 [to_int1(x)]. uint_in_range(to_int1(x)))
+
+type map__ref = { map__content : (t,u64) farray
+}
+
+logic slide : (t,u64) farray, t, t -> (t,u64) farray
+
+axiom slide_eq :
+  (forall a:(t,u64) farray.
+  (forall first:t [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(t,u64) farray.
+  (forall old_first:t.
+  (forall new_first:t.
+  (forall i:t [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[sub(i, sub(new_first, old_first))]))))))
+
+logic concat : (t,u64) farray, t, t, (t,u64) farray, t, t -> (t,u64) farray
+
+axiom concat_def :
+  (forall a:(t,u64) farray. forall b:(t,u64) farray.
+  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
+  (forall i:t [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  (((ule(a_first, i) and ule(i, a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and (ugt(i, a_last) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[add(sub(i, a_last), sub(b_first,
+  one))])))))))
+
+logic singleton : u64, t -> (t,u64) farray
+
+axiom singleton_def :
+  (forall v:u64.
+  (forall i:t [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
+
+logic bool_eq3 : (t,u64) farray, t, t, (t,u64) farray, t, t -> bool
+
+axiom bool_eq_def2 :
+  (forall a:(t,u64) farray. forall a__first:t. forall a__last:t.
+  forall b:(t,u64) farray. forall b__first:t. forall b__last:t [bool_eq3(a,
+  a__first, a__last, b, b__first, b__last)]. (((((ule(a__first, a__last) and
+  (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
+  b__first)))) or ((not ule(a__first, a__last)) and ugt(b__first,
+  b__last))) and
+  (forall temp___idx_133:t. (((ule(a__first, temp___idx_133) and
+  ule(temp___idx_133, a__last)) and
+  (to_rep((a[temp___idx_133])) = to_rep((b[add(sub(b__first, a__first),
+  temp___idx_133)])))) or (not (ule(a__first, temp___idx_133) and
+  ule(temp___idx_133, a__last)))))) -> (bool_eq3(a, a__first, a__last, b,
+  b__first, b__last) = true)) and ((not (((ule(a__first, a__last) ->
+  (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
+  b__first)))) and ((not ule(a__first, a__last)) -> ugt(b__first,
+  b__last))) and
+  (forall temp___idx_133:t. ((ule(a__first, temp___idx_133) and
+  ule(temp___idx_133, a__last)) ->
+  (to_rep((a[temp___idx_133])) = to_rep((b[add(sub(b__first, a__first),
+  temp___idx_133)]))))))) -> (bool_eq3(a, a__first, a__last, b, b__first,
+  b__last) = false))))
+
+axiom bool_eq_rev :
+  (forall a:(t,u64) farray. forall b:(t,u64) farray.
+  (forall a__first:t. forall a__last:t. forall b__first:t. forall b__last:t.
+  ((bool_eq3(b, b__first, b__last, a, a__first, a__last) = true) ->
+  (((ule(a__first, a__last) -> (ule(b__first, b__last) and (sub(a__last,
+  a__first) = sub(b__last, b__first)))) and ((not ule(a__first, a__last)) ->
+  ugt(b__first, b__last))) and
+  (forall temp___idx_133:t. ((ule(a__first, temp___idx_133) and
+  ule(temp___idx_133, a__last)) ->
+  (to_rep((a[temp___idx_133])) = to_rep((b[add(sub(b__first, a__first),
+  temp___idx_133)])))))))))
+
+logic compare : (t,u64) farray, t, t, (t,u64) farray, t, t -> int
+
+axiom compare_def_eq :
+  (forall a:(t,u64) farray. forall b:(t,u64) farray.
+  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
+  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
+  a_last, b, b_first, b_last) = 0) <-> (bool_eq3(a, a_first, a_last, b,
+  b_first, b_last) = true))))
+
+axiom compare_def_lt :
+  (forall a:(t,u64) farray. forall b:(t,u64) farray.
+  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
+  [compare(a, a_first, a_last, b, b_first, b_last)]. ((compare(a, a_first,
+  a_last, b, b_first, b_last) <  0) <->
+  (exists i:t. exists j:t. (ule(i, a_last) and (ult(j, b_last) and
+  ((bool_eq3(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  (ult(i, a_last) and ult(to_rep((a[add(i, one)])), to_rep((b[add(j,
+  one)]))))))))))))
+
+axiom compare_def_gt :
+  (forall a:(t,u64) farray. forall b:(t,u64) farray.
+  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t
+  [compare(a, a_first, a_last, b, b_first, b_last)]. ((0 <  compare(a,
+  a_first, a_last, b, b_first, b_last)) <->
+  (exists i:t. exists j:t. (ule(i, b_last) and (ult(j, a_last) and
+  ((bool_eq3(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  (ult(i, b_last) and ugt(to_rep((a[add(j, one)])), to_rep((b[add(i,
+  one)]))))))))))))
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
+logic attr__ATTRIBUTE_ADDRESS6 : int
+
+logic attr__ATTRIBUTE_ADDRESS7 : int
+
+ (* File "skein.ads", line 361, characters 0-0 *)
+goal WP_parameter_def :
+  (forall ts:(t,u64) farray. forall ks:(t,u64) farray.
+  forall x:(t,u64) farray. forall r:t. forall c179b:t. forall i:t.
+  forall c190b:t. forall i1:t. forall o:u64. forall o1:(t,u64) farray.
+  forall o2:u64. forall o3:(t,u64) farray. forall o4:u64.
+  forall o5:(t,u64) farray. forall o6:u64. forall o7:(t,u64) farray.
+  forall o8:u64. forall o9:(t,u64) farray. forall o10:u64.
+  forall o11:(t,u64) farray. forall o12:u64. forall o13:(t,u64) farray.
+  forall o14:u64. forall o15:(t,u64) farray. forall o16:u64.
+  forall o17:(t,u64) farray. forall o18:u64. forall o19:(t,u64) farray.
+  forall o20:u64. forall o21:(t,u64) farray. forall o22:u64.
+  forall o23:(t,u64) farray. forall o24:u64. forall o25:(t,u64) farray.
+  forall o26:u64. forall o27:(t,u64) farray. forall o28:u64.
+  forall o29:(t,u64) farray. forall o30:u64. forall o31:(t,u64) farray.
+  forall o32:u64. forall o33:(t,u64) farray. forall o34:u64.
+  forall o35:(t,u64) farray. forall o36:u64. forall o37:(t,u64) farray.
+  forall o38:u64. forall o39:(t,u64) farray. forall o40:u64.
+  forall o41:(t,u64) farray. forall o42:u64. forall o43:(t,u64) farray.
+  forall o44:u64. forall o45:(t,u64) farray. forall o46:u64.
+  forall o47:(t,u64) farray. forall o48:u64. forall o49:(t,u64) farray.
+  forall o50:u64. forall o51:(t,u64) farray. forall o52:u64.
+  forall o53:(t,u64) farray. forall o54:u64. forall o55:(t,u64) farray.
+  forall o56:u64. forall o57:(t,u64) farray. forall o58:u64.
+  forall o59:(t,u64) farray. forall o60:u64. forall o61:(t,u64) farray.
+  forall o62:u64. forall o63:(t,u64) farray. forall o64:u64.
+  forall o65:(t,u64) farray. forall o66:u64. forall o67:(t,u64) farray.
+  forall o68:u64. forall o69:(t,u64) farray. forall o70:u64.
+  forall o71:(t,u64) farray. forall o72:u64. forall o73:(t,u64) farray.
+  forall o74:u64. forall o75:(t,u64) farray. forall o76:u64.
+  forall o77:(t,u64) farray. forall o78:u64. forall o79:(t,u64) farray.
+  forall o80:u64. forall o81:(t,u64) farray. forall o82:u64.
+  forall o83:(t,u64) farray. forall o84:u64. forall o85:(t,u64) farray.
+  forall o86:u64. forall o87:(t,u64) farray. forall o88:u64.
+  forall o89:(t,u64) farray. forall o90:u64. forall o91:(t,u64) farray.
+  forall o92:u64. forall o93:(t,u64) farray. forall o94:u64.
+  forall o95:(t,u64) farray. forall o96:u64. forall o97:(t,u64) farray.
+  forall o98:u64. forall o99:(t,u64) farray. forall o100:u64.
+  forall o101:(t,u64) farray. forall o102:u64. forall o103:(t,u64) farray.
+  forall o104:u64. forall o105:(t,u64) farray. forall o106:u64.
+  forall o107:(t,u64) farray. forall o108:u64. forall o109:(t,u64) farray.
+  forall o110:u64. forall o111:(t,u64) farray. forall o112:u64.
+  forall o113:(t,u64) farray. forall o114:u64. forall o115:(t,u64) farray.
+  forall o116:u64. forall o117:(t,u64) farray. forall o118:u64.
+  forall o119:(t,u64) farray. forall o120:u64. forall o121:(t,u64) farray.
+  forall o122:u64. forall o123:(t,u64) farray. forall o124:u64.
+  forall o125:(t,u64) farray. forall o126:u64. forall o127:(t,u64) farray.
+  forall o128:u64. forall o129:(t,u64) farray. forall o130:u64.
+  forall o131:(t,u64) farray. forall o132:u64. forall o133:(t,u64) farray.
+  forall o134:u64. forall o135:(t,u64) farray. forall o136:u64.
+  forall o137:(t,u64) farray. forall o138:u64. forall o139:(t,u64) farray.
+  forall o140:u64. forall o141:(t,u64) farray. forall o142:u64.
+  forall o143:(t,u64) farray. forall o144:u64. forall o145:(t,u64) farray.
+  forall o146:u64. forall o147:(t,u64) farray. forall o148:u64.
+  forall o149:(t,u64) farray. forall o150:u64. forall o151:(t,u64) farray.
+  forall o152:u64. forall o153:(t,u64) farray. forall o154:u64.
+  forall o155:(t,u64) farray. forall o156:u64. forall o157:(t,u64) farray.
+  forall o158:u64. forall o159:(t,u64) farray. forall o160:u64.
+  forall o161:(t,u64) farray. forall o162:u64. forall o163:(t,u64) farray.
+  forall o164:u64. forall o165:(t,u64) farray. forall o166:u64.
+  forall o167:(t,u64) farray. forall o168:u64. forall o169:(t,u64) farray.
+  forall o170:u64. forall o171:(t,u64) farray. forall o172:u64.
+  forall o173:(t,u64) farray. forall o174:u64. forall o175:(t,u64) farray.
+  forall o176:u64. forall o177:(t,u64) farray. forall o178:u64.
+  forall o179:(t,u64) farray. forall o180:u64. forall o181:(t,u64) farray.
+  forall o182:u64. forall o183:(t,u64) farray. forall o184:u64.
+  forall o185:(t,u64) farray. forall o186:u64. forall o187:(t,u64) farray.
+  forall o188:u64. forall o189:(t,u64) farray. forall o190:u64.
+  forall o191:(t,u64) farray. forall o192:u64. forall o193:(t,u64) farray.
+  forall o194:u64. forall o195:(t,u64) farray. forall o196:u64.
+  forall o197:(t,u64) farray. forall o198:u64. forall o199:(t,u64) farray.
+  forall o200:u64. forall o201:(t,u64) farray. forall o202:u64.
+  forall o203:(t,u64) farray. forall o204:u64. forall o205:(t,u64) farray.
+  forall o206:u64. forall o207:(t,u64) farray. forall o208:u64.
+  forall o209:(t,u64) farray. forall o210:u64. forall o211:(t,u64) farray.
+  forall o212:u64. forall o213:(t,u64) farray. forall o214:u64.
+  forall o215:(t,u64) farray. forall o216:u64. forall o217:(t,u64) farray.
+  forall o218:u64. forall o219:(t,u64) farray. forall o220:u64.
+  forall o221:(t,u64) farray. forall o222:u64. forall o223:(t,u64) farray.
+  forall o224:u64. forall o225:(t,u64) farray. forall o226:u64.
+  forall o227:(t,u64) farray. forall o228:u64. forall o229:(t,u64) farray.
+  forall result:t. forall r1:t. forall result1:(t,u64) farray.
+  forall x1:(t,u64) farray. forall result2:(t,u64) farray.
+  forall x2:(t,u64) farray. forall result3:(t,u64) farray.
+  forall x3:(t,u64) farray. forall result4:(t,u64) farray.
+  forall x4:(t,u64) farray. forall result5:(t,u64) farray.
+  forall x5:(t,u64) farray. forall result6:(t,u64) farray.
+  forall x6:(t,u64) farray. forall result7:(t,u64) farray.
+  forall x7:(t,u64) farray. forall result8:(t,u64) farray.
+  forall x8:(t,u64) farray. forall result9:(t,u64) farray.
+  forall x9:(t,u64) farray. forall result10:(t,u64) farray.
+  forall x10:(t,u64) farray. forall result11:(t,u64) farray.
+  forall x11:(t,u64) farray. forall result12:(t,u64) farray.
+  forall x12:(t,u64) farray. forall result13:(t,u64) farray.
+  forall x13:(t,u64) farray. forall result14:(t,u64) farray.
+  forall x14:(t,u64) farray. forall result15:(t,u64) farray.
+  forall x15:(t,u64) farray. forall result16:(t,u64) farray.
+  forall x16:(t,u64) farray. forall result17:(t,u64) farray.
+  forall x17:(t,u64) farray. forall result18:(t,u64) farray.
+  forall x18:(t,u64) farray. forall result19:(t,u64) farray.
+  forall x19:(t,u64) farray. forall result20:(t,u64) farray.
+  forall x20:(t,u64) farray. forall result21:(t,u64) farray.
+  forall x21:(t,u64) farray. forall result22:(t,u64) farray.
+  forall x22:(t,u64) farray. forall result23:(t,u64) farray.
+  forall x23:(t,u64) farray. forall result24:(t,u64) farray.
+  forall x24:(t,u64) farray. forall result25:(t,u64) farray.
+  forall x25:(t,u64) farray. forall result26:(t,u64) farray.
+  forall x26:(t,u64) farray. forall result27:(t,u64) farray.
+  forall x27:(t,u64) farray. forall result28:(t,u64) farray.
+  forall x28:(t,u64) farray. forall result29:(t,u64) farray.
+  forall x29:(t,u64) farray. forall result30:(t,u64) farray.
+  forall x30:(t,u64) farray. forall result31:(t,u64) farray.
+  forall x31:(t,u64) farray. forall result32:(t,u64) farray.
+  forall x32:(t,u64) farray. forall result33:(t,u64) farray.
+  forall x33:(t,u64) farray. forall result34:map__ref.
+  forall x34:(t,u64) farray. forall result35:map__ref.
+  forall x35:(t,u64) farray. forall result36:map__ref.
+  forall x36:(t,u64) farray. forall result37:map__ref.
+  forall x37:(t,u64) farray. forall result38:map__ref.
+  forall x38:(t,u64) farray. forall result39:map__ref.
+  forall x39:(t,u64) farray. forall result40:map__ref.
+  forall x40:(t,u64) farray. forall result41:map__ref.
+  forall x41:(t,u64) farray. forall result42:map__ref.
+  forall x42:(t,u64) farray. forall result43:map__ref.
+  forall x43:(t,u64) farray. forall result44:map__ref.
+  forall x44:(t,u64) farray. forall result45:map__ref.
+  forall x45:(t,u64) farray. forall result46:map__ref.
+  forall x46:(t,u64) farray. forall result47:map__ref.
+  forall x47:(t,u64) farray. forall result48:map__ref.
+  forall x48:(t,u64) farray. forall result49:t__ref. forall c179b1:t.
+  forall result50:t__ref. forall i2:t. forall result51:map__ref.
+  forall x49:(t,u64) farray. forall result52:t__ref. forall i3:t.
+  forall result53:map__ref. forall x50:(t,u64) farray.
+  forall result54:t__ref. forall i4:t. forall result55:map__ref.
+  forall x51:(t,u64) farray. forall result56:t__ref. forall i5:t.
+  forall result57:map__ref. forall x52:(t,u64) farray.
+  forall result58:t__ref. forall i6:t. forall result59:map__ref.
+  forall x53:(t,u64) farray. forall result60:t__ref. forall i7:t.
+  forall result61:map__ref. forall x54:(t,u64) farray.
+  forall result62:t__ref. forall i8:t. forall result63:map__ref.
+  forall x55:(t,u64) farray. forall result64:t__ref. forall i9:t.
+  forall result65:map__ref. forall x56:(t,u64) farray.
+  forall result66:map__ref. forall x57:(t,u64) farray.
+  forall result67:map__ref. forall x58:(t,u64) farray.
+  forall result68:map__ref. forall x59:(t,u64) farray.
+  forall result69:map__ref. forall x60:(t,u64) farray.
+  forall result70:map__ref. forall x61:(t,u64) farray.
+  forall result71:map__ref. forall x62:(t,u64) farray.
+  forall result72:map__ref. forall x63:(t,u64) farray.
+  forall result73:map__ref. forall x64:(t,u64) farray.
+  forall result74:map__ref. forall x65:(t,u64) farray.
+  forall result75:map__ref. forall x66:(t,u64) farray.
+  forall result76:map__ref. forall x67:(t,u64) farray.
+  forall result77:map__ref. forall x68:(t,u64) farray.
+  forall result78:map__ref. forall x69:(t,u64) farray.
+  forall result79:map__ref. forall x70:(t,u64) farray.
+  forall result80:map__ref. forall x71:(t,u64) farray.
+  forall result81:map__ref. forall x72:(t,u64) farray.
+  forall result82:map__ref. forall x73:(t,u64) farray.
+  forall result83:map__ref. forall x74:(t,u64) farray.
+  forall result84:map__ref. forall x75:(t,u64) farray.
+  forall result85:map__ref. forall x76:(t,u64) farray.
+  forall result86:map__ref. forall x77:(t,u64) farray.
+  forall result87:map__ref. forall x78:(t,u64) farray.
+  forall result88:map__ref. forall x79:(t,u64) farray.
+  forall result89:map__ref. forall x80:(t,u64) farray.
+  forall result90:map__ref. forall x81:(t,u64) farray.
+  forall result91:map__ref. forall x82:(t,u64) farray.
+  forall result92:map__ref. forall x83:(t,u64) farray.
+  forall result93:map__ref. forall x84:(t,u64) farray.
+  forall result94:map__ref. forall x85:(t,u64) farray.
+  forall result95:map__ref. forall x86:(t,u64) farray.
+  forall result96:map__ref. forall x87:(t,u64) farray.
+  forall result97:map__ref. forall x88:(t,u64) farray.
+  forall result98:map__ref. forall x89:(t,u64) farray.
+  forall result99:map__ref. forall x90:(t,u64) farray.
+  forall result100:map__ref. forall x91:(t,u64) farray.
+  forall result101:map__ref. forall x92:(t,u64) farray.
+  forall result102:map__ref. forall x93:(t,u64) farray.
+  forall result103:map__ref. forall x94:(t,u64) farray.
+  forall result104:map__ref. forall x95:(t,u64) farray.
+  forall result105:map__ref. forall x96:(t,u64) farray.
+  forall result106:map__ref. forall x97:(t,u64) farray.
+  forall result107:map__ref. forall x98:(t,u64) farray.
+  forall result108:map__ref. forall x99:(t,u64) farray.
+  forall result109:map__ref. forall x100:(t,u64) farray.
+  forall result110:map__ref. forall x101:(t,u64) farray.
+  forall result111:map__ref. forall x102:(t,u64) farray.
+  forall result112:map__ref. forall x103:(t,u64) farray.
+  forall result113:map__ref. forall x104:(t,u64) farray.
+  forall result114:map__ref. forall x105:(t,u64) farray.
+  forall result115:map__ref. forall x106:(t,u64) farray.
+  forall result116:map__ref. forall x107:(t,u64) farray.
+  forall result117:t__ref. forall c190b1:t. forall result118:t__ref.
+  forall i10:t. forall result119:map__ref. forall x108:(t,u64) farray.
+  forall result120:t__ref. forall i11:t. forall result121:map__ref.
+  forall x109:(t,u64) farray. forall result122:t__ref. forall i12:t.
+  forall result123:map__ref. forall x110:(t,u64) farray.
+  forall result124:t__ref. forall i13:t. forall result125:map__ref.
+  forall x111:(t,u64) farray. forall result126:t__ref. forall i14:t.
+  forall result127:map__ref. forall x112:(t,u64) farray.
+  forall result128:t__ref. forall i15:t. forall result129:map__ref.
+  forall x113:(t,u64) farray. forall result130:t__ref. forall i16:t.
+  forall result131:map__ref. forall x114:(t,u64) farray.
+  forall result132:t__ref. forall i17:t. forall result133:map__ref.
+  forall x115:(t,u64) farray. (((result = r) and (r1 = of_int(1))) ->
+  ((((to_rep(o) = add(to_rep((x[of_int(0)])), to_rep((x[of_int(1)])))) and
+  (o1 = (x[of_int(0) <- o]))) and ((result1 = x) and (x1 = o1))) ->
+  ((((to_rep(o2) = rotate_left_bv(to_rep((x1[of_int(1)])), of_int(46))) and
+  (o3 = (x1[of_int(1) <- o2]))) and ((result2 = x1) and (x2 = o3))) ->
+  ((((to_rep(o4) = bw_xor(to_rep((x2[of_int(1)])),
+  to_rep((x2[of_int(0)])))) and (o5 = (x2[of_int(1) <- o4]))) and
+  ((result3 = x2) and (x3 = o5))) ->
+  ((((to_rep(o6) = add(to_rep((x3[of_int(2)])), to_rep((x3[of_int(3)])))) and
+  (o7 = (x3[of_int(2) <- o6]))) and ((result4 = x3) and (x4 = o7))) ->
+  ((((to_rep(o8) = rotate_left_bv(to_rep((x4[of_int(3)])), of_int(36))) and
+  (o9 = (x4[of_int(3) <- o8]))) and ((result5 = x4) and (x5 = o9))) ->
+  ((((to_rep(o10) = bw_xor(to_rep((x5[of_int(3)])),
+  to_rep((x5[of_int(2)])))) and (o11 = (x5[of_int(3) <- o10]))) and
+  ((result6 = x5) and (x6 = o11))) ->
+  ((((to_rep(o12) = add(to_rep((x6[of_int(4)])),
+  to_rep((x6[of_int(5)])))) and (o13 = (x6[of_int(4) <- o12]))) and
+  ((result7 = x6) and (x7 = o13))) ->
+  ((((to_rep(o14) = rotate_left_bv(to_rep((x7[of_int(5)])), of_int(19))) and
+  (o15 = (x7[of_int(5) <- o14]))) and ((result8 = x7) and (x8 = o15))) ->
+  ((((to_rep(o16) = bw_xor(to_rep((x8[of_int(5)])),
+  to_rep((x8[of_int(4)])))) and (o17 = (x8[of_int(5) <- o16]))) and
+  ((result9 = x8) and (x9 = o17))) ->
+  ((((to_rep(o18) = add(to_rep((x9[of_int(6)])),
+  to_rep((x9[of_int(7)])))) and (o19 = (x9[of_int(6) <- o18]))) and
+  ((result10 = x9) and (x10 = o19))) ->
+  ((((to_rep(o20) = rotate_left_bv(to_rep((x10[of_int(7)])), of_int(37))) and
+  (o21 = (x10[of_int(7) <- o20]))) and ((result11 = x10) and (x11 = o21))) ->
+  ((((to_rep(o22) = bw_xor(to_rep((x11[of_int(7)])),
+  to_rep((x11[of_int(6)])))) and (o23 = (x11[of_int(7) <- o22]))) and
+  ((result12 = x11) and (x12 = o23))) ->
+  ((((to_rep(o24) = add(to_rep((x12[of_int(2)])),
+  to_rep((x12[of_int(1)])))) and (o25 = (x12[of_int(2) <- o24]))) and
+  ((result13 = x12) and (x13 = o25))) ->
+  ((((to_rep(o26) = rotate_left_bv(to_rep((x13[of_int(1)])), of_int(33))) and
+  (o27 = (x13[of_int(1) <- o26]))) and ((result14 = x13) and (x14 = o27))) ->
+  ((((to_rep(o28) = bw_xor(to_rep((x14[of_int(1)])),
+  to_rep((x14[of_int(2)])))) and (o29 = (x14[of_int(1) <- o28]))) and
+  ((result15 = x14) and (x15 = o29))) ->
+  ((((to_rep(o30) = add(to_rep((x15[of_int(4)])),
+  to_rep((x15[of_int(7)])))) and (o31 = (x15[of_int(4) <- o30]))) and
+  ((result16 = x15) and (x16 = o31))) ->
+  ((((to_rep(o32) = rotate_left_bv(to_rep((x16[of_int(7)])), of_int(27))) and
+  (o33 = (x16[of_int(7) <- o32]))) and ((result17 = x16) and (x17 = o33))) ->
+  ((((to_rep(o34) = bw_xor(to_rep((x17[of_int(7)])),
+  to_rep((x17[of_int(4)])))) and (o35 = (x17[of_int(7) <- o34]))) and
+  ((result18 = x17) and (x18 = o35))) ->
+  ((((to_rep(o36) = add(to_rep((x18[of_int(6)])),
+  to_rep((x18[of_int(5)])))) and (o37 = (x18[of_int(6) <- o36]))) and
+  ((result19 = x18) and (x19 = o37))) ->
+  ((((to_rep(o38) = rotate_left_bv(to_rep((x19[of_int(5)])), of_int(14))) and
+  (o39 = (x19[of_int(5) <- o38]))) and ((result20 = x19) and (x20 = o39))) ->
+  ((((to_rep(o40) = bw_xor(to_rep((x20[of_int(5)])),
+  to_rep((x20[of_int(6)])))) and (o41 = (x20[of_int(5) <- o40]))) and
+  ((result21 = x20) and (x21 = o41))) ->
+  ((((to_rep(o42) = add(to_rep((x21[of_int(0)])),
+  to_rep((x21[of_int(3)])))) and (o43 = (x21[of_int(0) <- o42]))) and
+  ((result22 = x21) and (x22 = o43))) ->
+  ((((to_rep(o44) = rotate_left_bv(to_rep((x22[of_int(3)])), of_int(42))) and
+  (o45 = (x22[of_int(3) <- o44]))) and ((result23 = x22) and (x23 = o45))) ->
+  ((((to_rep(o46) = bw_xor(to_rep((x23[of_int(3)])),
+  to_rep((x23[of_int(0)])))) and (o47 = (x23[of_int(3) <- o46]))) and
+  ((result24 = x23) and (x24 = o47))) ->
+  ((((to_rep(o48) = add(to_rep((x24[of_int(4)])),
+  to_rep((x24[of_int(1)])))) and (o49 = (x24[of_int(4) <- o48]))) and
+  ((result25 = x24) and (x25 = o49))) ->
+  ((((to_rep(o50) = rotate_left_bv(to_rep((x25[of_int(1)])), of_int(17))) and
+  (o51 = (x25[of_int(1) <- o50]))) and ((result26 = x25) and (x26 = o51))) ->
+  ((((to_rep(o52) = bw_xor(to_rep((x26[of_int(1)])),
+  to_rep((x26[of_int(4)])))) and (o53 = (x26[of_int(1) <- o52]))) and
+  ((result27 = x26) and (x27 = o53))) ->
+  ((((to_rep(o54) = add(to_rep((x27[of_int(6)])),
+  to_rep((x27[of_int(3)])))) and (o55 = (x27[of_int(6) <- o54]))) and
+  ((result28 = x27) and (x28 = o55))) ->
+  ((((to_rep(o56) = rotate_left_bv(to_rep((x28[of_int(3)])), of_int(49))) and
+  (o57 = (x28[of_int(3) <- o56]))) and ((result29 = x28) and (x29 = o57))) ->
+  ((((to_rep(o58) = bw_xor(to_rep((x29[of_int(3)])),
+  to_rep((x29[of_int(6)])))) and (o59 = (x29[of_int(3) <- o58]))) and
+  ((result30 = x29) and (x30 = o59))) ->
+  ((((to_rep(o60) = add(to_rep((x30[of_int(0)])),
+  to_rep((x30[of_int(5)])))) and (o61 = (x30[of_int(0) <- o60]))) and
+  ((result31 = x30) and (x31 = o61))) ->
+  ((((to_rep(o62) = rotate_left_bv(to_rep((x31[of_int(5)])), of_int(36))) and
+  (o63 = (x31[of_int(5) <- o62]))) and ((result32 = x31) and (x32 = o63))) ->
+  ((((to_rep(o64) = bw_xor(to_rep((x32[of_int(5)])),
+  to_rep((x32[of_int(0)])))) and (o65 = (x32[of_int(5) <- o64]))) and
+  ((result33 = x32) and (x33 = o65))) ->
+  ((((to_rep(o66) = add(to_rep((x33[of_int(2)])),
+  to_rep((x33[of_int(7)])))) and (o67 = (x33[of_int(2) <- o66]))) and
+  ((result34 = { map__content = x33 }) and (x34 = o67))) ->
+  ((((to_rep(o68) = rotate_left_bv(to_rep((x34[of_int(7)])), of_int(39))) and
+  (o69 = (x34[of_int(7) <- o68]))) and ((result35 = { map__content = x34
+  }) and (x35 = o69))) -> ((((to_rep(o70) = bw_xor(to_rep((x35[of_int(7)])),
+  to_rep((x35[of_int(2)])))) and (o71 = (x35[of_int(7) <- o70]))) and
+  ((result36 = { map__content = x35 }) and (x36 = o71))) ->
+  ((((to_rep(o72) = add(to_rep((x36[of_int(6)])),
+  to_rep((x36[of_int(1)])))) and (o73 = (x36[of_int(6) <- o72]))) and
+  ((result37 = { map__content = x36 }) and (x37 = o73))) ->
+  ((((to_rep(o74) = rotate_left_bv(to_rep((x37[of_int(1)])), of_int(44))) and
+  (o75 = (x37[of_int(1) <- o74]))) and ((result38 = { map__content = x37
+  }) and (x38 = o75))) -> ((((to_rep(o76) = bw_xor(to_rep((x38[of_int(1)])),
+  to_rep((x38[of_int(6)])))) and (o77 = (x38[of_int(1) <- o76]))) and
+  ((result39 = { map__content = x38 }) and (x39 = o77))) ->
+  ((((to_rep(o78) = add(to_rep((x39[of_int(0)])),
+  to_rep((x39[of_int(7)])))) and (o79 = (x39[of_int(0) <- o78]))) and
+  ((result40 = { map__content = x39 }) and (x40 = o79))) ->
+  ((((to_rep(o80) = rotate_left_bv(to_rep((x40[of_int(7)])), of_int(9))) and
+  (o81 = (x40[of_int(7) <- o80]))) and ((result41 = { map__content = x40
+  }) and (x41 = o81))) -> ((((to_rep(o82) = bw_xor(to_rep((x41[of_int(7)])),
+  to_rep((x41[of_int(0)])))) and (o83 = (x41[of_int(7) <- o82]))) and
+  ((result42 = { map__content = x41 }) and (x42 = o83))) ->
+  ((((to_rep(o84) = add(to_rep((x42[of_int(2)])),
+  to_rep((x42[of_int(5)])))) and (o85 = (x42[of_int(2) <- o84]))) and
+  ((result43 = { map__content = x42 }) and (x43 = o85))) ->
+  ((((to_rep(o86) = rotate_left_bv(to_rep((x43[of_int(5)])), of_int(54))) and
+  (o87 = (x43[of_int(5) <- o86]))) and ((result44 = { map__content = x43
+  }) and (x44 = o87))) -> ((((to_rep(o88) = bw_xor(to_rep((x44[of_int(5)])),
+  to_rep((x44[of_int(2)])))) and (o89 = (x44[of_int(5) <- o88]))) and
+  ((result45 = { map__content = x44 }) and (x45 = o89))) ->
+  ((((to_rep(o90) = add(to_rep((x45[of_int(4)])),
+  to_rep((x45[of_int(3)])))) and (o91 = (x45[of_int(4) <- o90]))) and
+  ((result46 = { map__content = x45 }) and (x46 = o91))) ->
+  ((((to_rep(o92) = rotate_left_bv(to_rep((x46[of_int(3)])), of_int(56))) and
+  (o93 = (x46[of_int(3) <- o92]))) and ((result47 = { map__content = x46
+  }) and (x47 = o93))) -> ((((to_rep(o94) = bw_xor(to_rep((x47[of_int(3)])),
+  to_rep((x47[of_int(4)])))) and (o95 = (x47[of_int(3) <- o94]))) and
+  ((result48 = { map__content = x47 }) and (x48 = o95))) -> (((result49 = {
+  t__content = c179b }) and (c179b1 = sub(mul(r1, of_int(2)), of_int(1)))) ->
+  ((((result50 = { t__content = i }) and (i2 = of_int(0))) and
+  ((((to_rep(o96) = add(to_rep((x48[i2])), to_rep((ks[urem(add(c179b1, i2),
+  of_int(9))])))) and (o97 = (x48[i2 <- o96]))) and ((result51 = {
+  map__content = x48 }) and (x49 = o97))) and (((result52 = { t__content = i2
+  }) and (i3 = of_int(1))) and ((((to_rep(o98) = add(to_rep((x49[i3])),
+  to_rep((ks[urem(add(c179b1, i3), of_int(9))])))) and
+  (o99 = (x49[i3 <- o98]))) and ((result53 = { map__content = x49 }) and
+  (x50 = o99))) and (((result54 = { t__content = i3 }) and
+  (i4 = of_int(2))) and ((((to_rep(o100) = add(to_rep((x50[i4])),
+  to_rep((ks[urem(add(c179b1, i4), of_int(9))])))) and
+  (o101 = (x50[i4 <- o100]))) and ((result55 = { map__content = x50 }) and
+  (x51 = o101))) and (((result56 = { t__content = i4 }) and
+  (i5 = of_int(3))) and ((((to_rep(o102) = add(to_rep((x51[i5])),
+  to_rep((ks[urem(add(c179b1, i5), of_int(9))])))) and
+  (o103 = (x51[i5 <- o102]))) and ((result57 = { map__content = x51 }) and
+  (x52 = o103))) and (((result58 = { t__content = i5 }) and
+  (i6 = of_int(4))) and ((((to_rep(o104) = add(to_rep((x52[i6])),
+  to_rep((ks[urem(add(c179b1, i6), of_int(9))])))) and
+  (o105 = (x52[i6 <- o104]))) and ((result59 = { map__content = x52 }) and
+  (x53 = o105))) and (((result60 = { t__content = i6 }) and
+  (i7 = of_int(5))) and ((((to_rep(o106) = add(to_rep((x53[i7])),
+  to_rep((ks[urem(add(c179b1, i7), of_int(9))])))) and
+  (o107 = (x53[i7 <- o106]))) and ((result61 = { map__content = x53 }) and
+  (x54 = o107))) and (((result62 = { t__content = i7 }) and
+  (i8 = of_int(6))) and ((((to_rep(o108) = add(to_rep((x54[i8])),
+  to_rep((ks[urem(add(c179b1, i8), of_int(9))])))) and
+  (o109 = (x54[i8 <- o108]))) and ((result63 = { map__content = x54 }) and
+  (x55 = o109))) and (((result64 = { t__content = i8 }) and
+  (i9 = of_int(7))) and (((to_rep(o110) = add(to_rep((x55[i9])),
+  to_rep((ks[urem(add(c179b1, i9), of_int(9))])))) and
+  (o111 = (x55[i9 <- o110]))) and ((result65 = { map__content = x55 }) and
+  (x56 = o111)))))))))))))))))) ->
+  ((((to_rep(o112) = add(to_rep((x56[of_int(5)])), to_rep((ts[urem(c179b1,
+  of_int(3))])))) and (o113 = (x56[of_int(5) <- o112]))) and ((result66 = {
+  map__content = x56 }) and (x57 = o113))) ->
+  ((((to_rep(o114) = add(to_rep((x57[of_int(6)])),
+  to_rep((ts[urem(add(c179b1, of_int(1)), of_int(3))])))) and
+  (o115 = (x57[of_int(6) <- o114]))) and ((result67 = { map__content = x57
+  }) and (x58 = o115))) -> ((((to_rep(o116) = add(to_rep((x58[of_int(7)])),
+  c179b1)) and (o117 = (x58[of_int(7) <- o116]))) and ((result68 = {
+  map__content = x58 }) and (x59 = o117))) ->
+  ((((to_rep(o118) = add(to_rep((x59[of_int(0)])),
+  to_rep((x59[of_int(1)])))) and (o119 = (x59[of_int(0) <- o118]))) and
+  ((result69 = { map__content = x59 }) and (x60 = o119))) ->
+  ((((to_rep(o120) = rotate_left_bv(to_rep((x60[of_int(1)])),
+  of_int(39))) and (o121 = (x60[of_int(1) <- o120]))) and ((result70 = {
+  map__content = x60 }) and (x61 = o121))) ->
+  ((((to_rep(o122) = bw_xor(to_rep((x61[of_int(1)])),
+  to_rep((x61[of_int(0)])))) and (o123 = (x61[of_int(1) <- o122]))) and
+  ((result71 = { map__content = x61 }) and (x62 = o123))) ->
+  ((((to_rep(o124) = add(to_rep((x62[of_int(2)])),
+  to_rep((x62[of_int(3)])))) and (o125 = (x62[of_int(2) <- o124]))) and
+  ((result72 = { map__content = x62 }) and (x63 = o125))) ->
+  ((((to_rep(o126) = rotate_left_bv(to_rep((x63[of_int(3)])),
+  of_int(30))) and (o127 = (x63[of_int(3) <- o126]))) and ((result73 = {
+  map__content = x63 }) and (x64 = o127))) ->
+  ((((to_rep(o128) = bw_xor(to_rep((x64[of_int(3)])),
+  to_rep((x64[of_int(2)])))) and (o129 = (x64[of_int(3) <- o128]))) and
+  ((result74 = { map__content = x64 }) and (x65 = o129))) ->
+  ((((to_rep(o130) = add(to_rep((x65[of_int(4)])),
+  to_rep((x65[of_int(5)])))) and (o131 = (x65[of_int(4) <- o130]))) and
+  ((result75 = { map__content = x65 }) and (x66 = o131))) ->
+  ((((to_rep(o132) = rotate_left_bv(to_rep((x66[of_int(5)])),
+  of_int(34))) and (o133 = (x66[of_int(5) <- o132]))) and ((result76 = {
+  map__content = x66 }) and (x67 = o133))) ->
+  ((((to_rep(o134) = bw_xor(to_rep((x67[of_int(5)])),
+  to_rep((x67[of_int(4)])))) and (o135 = (x67[of_int(5) <- o134]))) and
+  ((result77 = { map__content = x67 }) and (x68 = o135))) ->
+  ((((to_rep(o136) = add(to_rep((x68[of_int(6)])),
+  to_rep((x68[of_int(7)])))) and (o137 = (x68[of_int(6) <- o136]))) and
+  ((result78 = { map__content = x68 }) and (x69 = o137))) ->
+  ((((to_rep(o138) = rotate_left_bv(to_rep((x69[of_int(7)])),
+  of_int(24))) and (o139 = (x69[of_int(7) <- o138]))) and ((result79 = {
+  map__content = x69 }) and (x70 = o139))) ->
+  ((((to_rep(o140) = bw_xor(to_rep((x70[of_int(7)])),
+  to_rep((x70[of_int(6)])))) and (o141 = (x70[of_int(7) <- o140]))) and
+  ((result80 = { map__content = x70 }) and (x71 = o141))) ->
+  ((((to_rep(o142) = add(to_rep((x71[of_int(2)])),
+  to_rep((x71[of_int(1)])))) and (o143 = (x71[of_int(2) <- o142]))) and
+  ((result81 = { map__content = x71 }) and (x72 = o143))) ->
+  ((((to_rep(o144) = rotate_left_bv(to_rep((x72[of_int(1)])),
+  of_int(13))) and (o145 = (x72[of_int(1) <- o144]))) and ((result82 = {
+  map__content = x72 }) and (x73 = o145))) ->
+  ((((to_rep(o146) = bw_xor(to_rep((x73[of_int(1)])),
+  to_rep((x73[of_int(2)])))) and (o147 = (x73[of_int(1) <- o146]))) and
+  ((result83 = { map__content = x73 }) and (x74 = o147))) ->
+  ((((to_rep(o148) = add(to_rep((x74[of_int(4)])),
+  to_rep((x74[of_int(7)])))) and (o149 = (x74[of_int(4) <- o148]))) and
+  ((result84 = { map__content = x74 }) and (x75 = o149))) ->
+  ((((to_rep(o150) = rotate_left_bv(to_rep((x75[of_int(7)])),
+  of_int(50))) and (o151 = (x75[of_int(7) <- o150]))) and ((result85 = {
+  map__content = x75 }) and (x76 = o151))) ->
+  ((((to_rep(o152) = bw_xor(to_rep((x76[of_int(7)])),
+  to_rep((x76[of_int(4)])))) and (o153 = (x76[of_int(7) <- o152]))) and
+  ((result86 = { map__content = x76 }) and (x77 = o153))) ->
+  ((((to_rep(o154) = add(to_rep((x77[of_int(6)])),
+  to_rep((x77[of_int(5)])))) and (o155 = (x77[of_int(6) <- o154]))) and
+  ((result87 = { map__content = x77 }) and (x78 = o155))) ->
+  ((((to_rep(o156) = rotate_left_bv(to_rep((x78[of_int(5)])),
+  of_int(10))) and (o157 = (x78[of_int(5) <- o156]))) and ((result88 = {
+  map__content = x78 }) and (x79 = o157))) ->
+  ((((to_rep(o158) = bw_xor(to_rep((x79[of_int(5)])),
+  to_rep((x79[of_int(6)])))) and (o159 = (x79[of_int(5) <- o158]))) and
+  ((result89 = { map__content = x79 }) and (x80 = o159))) ->
+  ((((to_rep(o160) = add(to_rep((x80[of_int(0)])),
+  to_rep((x80[of_int(3)])))) and (o161 = (x80[of_int(0) <- o160]))) and
+  ((result90 = { map__content = x80 }) and (x81 = o161))) ->
+  ((((to_rep(o162) = rotate_left_bv(to_rep((x81[of_int(3)])),
+  of_int(17))) and (o163 = (x81[of_int(3) <- o162]))) and ((result91 = {
+  map__content = x81 }) and (x82 = o163))) ->
+  ((((to_rep(o164) = bw_xor(to_rep((x82[of_int(3)])),
+  to_rep((x82[of_int(0)])))) and (o165 = (x82[of_int(3) <- o164]))) and
+  ((result92 = { map__content = x82 }) and (x83 = o165))) ->
+  ((((to_rep(o166) = add(to_rep((x83[of_int(4)])),
+  to_rep((x83[of_int(1)])))) and (o167 = (x83[of_int(4) <- o166]))) and
+  ((result93 = { map__content = x83 }) and (x84 = o167))) ->
+  ((((to_rep(o168) = rotate_left_bv(to_rep((x84[of_int(1)])),
+  of_int(25))) and (o169 = (x84[of_int(1) <- o168]))) and ((result94 = {
+  map__content = x84 }) and (x85 = o169))) ->
+  ((((to_rep(o170) = bw_xor(to_rep((x85[of_int(1)])),
+  to_rep((x85[of_int(4)])))) and (o171 = (x85[of_int(1) <- o170]))) and
+  ((result95 = { map__content = x85 }) and (x86 = o171))) ->
+  ((((to_rep(o172) = add(to_rep((x86[of_int(6)])),
+  to_rep((x86[of_int(3)])))) and (o173 = (x86[of_int(6) <- o172]))) and
+  ((result96 = { map__content = x86 }) and (x87 = o173))) ->
+  ((((to_rep(o174) = rotate_left_bv(to_rep((x87[of_int(3)])),
+  of_int(29))) and (o175 = (x87[of_int(3) <- o174]))) and ((result97 = {
+  map__content = x87 }) and (x88 = o175))) ->
+  ((((to_rep(o176) = bw_xor(to_rep((x88[of_int(3)])),
+  to_rep((x88[of_int(6)])))) and (o177 = (x88[of_int(3) <- o176]))) and
+  ((result98 = { map__content = x88 }) and (x89 = o177))) ->
+  ((((to_rep(o178) = add(to_rep((x89[of_int(0)])),
+  to_rep((x89[of_int(5)])))) and (o179 = (x89[of_int(0) <- o178]))) and
+  ((result99 = { map__content = x89 }) and (x90 = o179))) ->
+  ((((to_rep(o180) = rotate_left_bv(to_rep((x90[of_int(5)])),
+  of_int(39))) and (o181 = (x90[of_int(5) <- o180]))) and ((result100 = {
+  map__content = x90 }) and (x91 = o181))) ->
+  ((((to_rep(o182) = bw_xor(to_rep((x91[of_int(5)])),
+  to_rep((x91[of_int(0)])))) and (o183 = (x91[of_int(5) <- o182]))) and
+  ((result101 = { map__content = x91 }) and (x92 = o183))) ->
+  ((((to_rep(o184) = add(to_rep((x92[of_int(2)])),
+  to_rep((x92[of_int(7)])))) and (o185 = (x92[of_int(2) <- o184]))) and
+  ((result102 = { map__content = x92 }) and (x93 = o185))) ->
+  ((((to_rep(o186) = rotate_left_bv(to_rep((x93[of_int(7)])),
+  of_int(43))) and (o187 = (x93[of_int(7) <- o186]))) and ((result103 = {
+  map__content = x93 }) and (x94 = o187))) ->
+  ((((to_rep(o188) = bw_xor(to_rep((x94[of_int(7)])),
+  to_rep((x94[of_int(2)])))) and (o189 = (x94[of_int(7) <- o188]))) and
+  ((result104 = { map__content = x94 }) and (x95 = o189))) ->
+  ((((to_rep(o190) = add(to_rep((x95[of_int(6)])),
+  to_rep((x95[of_int(1)])))) and (o191 = (x95[of_int(6) <- o190]))) and
+  ((result105 = { map__content = x95 }) and (x96 = o191))) ->
+  ((((to_rep(o192) = rotate_left_bv(to_rep((x96[of_int(1)])), of_int(8))) and
+  (o193 = (x96[of_int(1) <- o192]))) and ((result106 = { map__content = x96
+  }) and (x97 = o193))) ->
+  ((((to_rep(o194) = bw_xor(to_rep((x97[of_int(1)])),
+  to_rep((x97[of_int(6)])))) and (o195 = (x97[of_int(1) <- o194]))) and
+  ((result107 = { map__content = x97 }) and (x98 = o195))) ->
+  ((((to_rep(o196) = add(to_rep((x98[of_int(0)])),
+  to_rep((x98[of_int(7)])))) and (o197 = (x98[of_int(0) <- o196]))) and
+  ((result108 = { map__content = x98 }) and (x99 = o197))) ->
+  ((((to_rep(o198) = rotate_left_bv(to_rep((x99[of_int(7)])),
+  of_int(35))) and (o199 = (x99[of_int(7) <- o198]))) and ((result109 = {
+  map__content = x99 }) and (x100 = o199))) ->
+  ((((to_rep(o200) = bw_xor(to_rep((x100[of_int(7)])),
+  to_rep((x100[of_int(0)])))) and (o201 = (x100[of_int(7) <- o200]))) and
+  ((result110 = { map__content = x100 }) and (x101 = o201))) ->
+  ((((to_rep(o202) = add(to_rep((x101[of_int(2)])),
+  to_rep((x101[of_int(5)])))) and (o203 = (x101[of_int(2) <- o202]))) and
+  ((result111 = { map__content = x101 }) and (x102 = o203))) ->
+  ((((to_rep(o204) = rotate_left_bv(to_rep((x102[of_int(5)])),
+  of_int(56))) and (o205 = (x102[of_int(5) <- o204]))) and ((result112 = {
+  map__content = x102 }) and (x103 = o205))) ->
+  ((((to_rep(o206) = bw_xor(to_rep((x103[of_int(5)])),
+  to_rep((x103[of_int(2)])))) and (o207 = (x103[of_int(5) <- o206]))) and
+  ((result113 = { map__content = x103 }) and (x104 = o207))) ->
+  ((((to_rep(o208) = add(to_rep((x104[of_int(4)])),
+  to_rep((x104[of_int(3)])))) and (o209 = (x104[of_int(4) <- o208]))) and
+  ((result114 = { map__content = x104 }) and (x105 = o209))) ->
+  ((((to_rep(o210) = rotate_left_bv(to_rep((x105[of_int(3)])),
+  of_int(22))) and (o211 = (x105[of_int(3) <- o210]))) and ((result115 = {
+  map__content = x105 }) and (x106 = o211))) ->
+  ((((to_rep(o212) = bw_xor(to_rep((x106[of_int(3)])),
+  to_rep((x106[of_int(4)])))) and (o213 = (x106[of_int(3) <- o212]))) and
+  ((result116 = { map__content = x106 }) and (x107 = o213))) ->
+  (((result117 = { t__content = c190b }) and (c190b1 = mul(r1,
+  of_int(2)))) -> ((((result118 = { t__content = i1 }) and
+  (i10 = of_int(0))) and ((((to_rep(o214) = add(to_rep((x107[i10])),
+  to_rep((ks[urem(add(c190b1, i10), of_int(9))])))) and
+  (o215 = (x107[i10 <- o214]))) and ((result119 = { map__content = x107
+  }) and (x108 = o215))) and (((result120 = { t__content = i10 }) and
+  (i11 = of_int(1))) and ((((to_rep(o216) = add(to_rep((x108[i11])),
+  to_rep((ks[urem(add(c190b1, i11), of_int(9))])))) and
+  (o217 = (x108[i11 <- o216]))) and ((result121 = { map__content = x108
+  }) and (x109 = o217))) and (((result122 = { t__content = i11 }) and
+  (i12 = of_int(2))) and ((((to_rep(o218) = add(to_rep((x109[i12])),
+  to_rep((ks[urem(add(c190b1, i12), of_int(9))])))) and
+  (o219 = (x109[i12 <- o218]))) and ((result123 = { map__content = x109
+  }) and (x110 = o219))) and (((result124 = { t__content = i12 }) and
+  (i13 = of_int(3))) and ((((to_rep(o220) = add(to_rep((x110[i13])),
+  to_rep((ks[urem(add(c190b1, i13), of_int(9))])))) and
+  (o221 = (x110[i13 <- o220]))) and ((result125 = { map__content = x110
+  }) and (x111 = o221))) and (((result126 = { t__content = i13 }) and
+  (i14 = of_int(4))) and ((((to_rep(o222) = add(to_rep((x111[i14])),
+  to_rep((ks[urem(add(c190b1, i14), of_int(9))])))) and
+  (o223 = (x111[i14 <- o222]))) and ((result127 = { map__content = x111
+  }) and (x112 = o223))) and (((result128 = { t__content = i14 }) and
+  (i15 = of_int(5))) and ((((to_rep(o224) = add(to_rep((x112[i15])),
+  to_rep((ks[urem(add(c190b1, i15), of_int(9))])))) and
+  (o225 = (x112[i15 <- o224]))) and ((result129 = { map__content = x112
+  }) and (x113 = o225))) and (((result130 = { t__content = i15 }) and
+  (i16 = of_int(6))) and ((((to_rep(o226) = add(to_rep((x113[i16])),
+  to_rep((ks[urem(add(c190b1, i16), of_int(9))])))) and
+  (o227 = (x113[i16 <- o226]))) and ((result131 = { map__content = x113
+  }) and (x114 = o227))) and (((result132 = { t__content = i16 }) and
+  (i17 = of_int(7))) and (((to_rep(o228) = add(to_rep((x114[i17])),
+  to_rep((ks[urem(add(c190b1, i17), of_int(9))])))) and
+  (o229 = (x114[i17 <- o228]))) and ((result133 = { map__content = x114
+  }) and (x115 = o229)))))))))))))))))) ->
+  (not (of_int(3) = zeros)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))

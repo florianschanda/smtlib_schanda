@@ -1,0 +1,505 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type integer
+
+predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : integer, integer -> bool
+
+logic dummy : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+logic x : int
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic y : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic z : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+type t3b
+
+predicate in_range2(x1: int) = ((1 <= x1) and (x1 <= 10))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x1:int. forall y1:int [bool_eq3(x1, y1)]. (((x1 = y1) ->
+  (bool_eq3(x1, y1) = true)) and ((not (x1 = y1)) -> (bool_eq3(x1,
+  y1) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : t3b, t3b -> bool
+
+logic dummy1 : t3b
+
+type t3b__ref = { t3b__content : t3b
+}
+
+function t3b__ref___projection(a: t3b__ref) : t3b = (a).t3b__content
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+type t4b
+
+predicate in_range3(x1: int) = ((1 <= x1) and (x1 <= 10))
+
+logic bool_eq4 : int, int -> bool
+
+axiom bool_eq_def3 :
+  (forall x1:int. forall y1:int [bool_eq4(x1, y1)]. (((x1 = y1) ->
+  (bool_eq4(x1, y1) = true)) and ((not (x1 = y1)) -> (bool_eq4(x1,
+  y1) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq2 : t4b, t4b -> bool
+
+logic dummy2 : t4b
+
+type t4b__ref = { t4b__content : t4b
+}
+
+function t4b__ref___projection(a: t4b__ref) : t4b = (a).t4b__content
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
+type t6b
+
+predicate in_range4(x1: int) = ((1 <= x1) and (x1 <= 10))
+
+logic bool_eq5 : int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall x1:int. forall y1:int [bool_eq5(x1, y1)]. (((x1 = y1) ->
+  (bool_eq5(x1, y1) = true)) and ((not (x1 = y1)) -> (bool_eq5(x1,
+  y1) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq3 : t6b, t6b -> bool
+
+logic dummy3 : t6b
+
+type t6b__ref = { t6b__content : t6b
+}
+
+function t6b__ref___projection(a: t6b__ref) : t6b = (a).t6b__content
+
+logic attr__ATTRIBUTE_ADDRESS6 : int
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall h:int. forall k:int. forall temp___139:int. forall temp___140:int.
+  forall temp___138:int. forall temp___1391:int. forall temp___1401:int.
+  forall temp___1381:int. forall temp___1392:int. forall temp___1402:int.
+  forall temp___1382:int. forall temp___1393:int. forall temp___1403:int.
+  forall temp___1383:int. forall temp___1394:int. forall temp___1404:int.
+  forall temp___1384:int. forall temp___1395:int. forall temp___1405:int.
+  forall temp___1385:int. forall temp___1396:int. forall temp___1406:int.
+  forall temp___1386:int. forall temp___1397:int. forall temp___1407:int.
+  forall temp___1387:int. forall temp___1398:int. forall temp___1408:int.
+  forall temp___1388:int. forall temp___1399:int. forall temp___1409:int.
+  forall temp___1389:int. forall o:int. forall o1:int. forall result:int.
+  forall h1:int. forall result1:int. forall k1:int. forall k2:int.
+  forall k3:int. forall k4:int. forall k5:int. forall k6:int.
+  forall result2:int. forall h2:int. forall result3:int. forall k7:int.
+  forall k8:int. forall k9:int. forall k10:int. forall k11:int.
+  forall k12:int. forall result4:int. forall h3:int. forall result5:int.
+  forall k13:int. forall k14:int. forall k15:int. forall k16:int.
+  forall k17:int. forall k18:int. forall result6:int. forall h4:int.
+  forall result7:int. forall k19:int. forall k20:int. forall k21:int.
+  forall k22:int. forall k23:int__ref. forall k24:int.
+  forall result8:int__ref. forall h5:int. forall result9:int__ref.
+  forall k25:int. forall k26:int. forall k27:int__ref. forall k28:int.
+  forall k29:int__ref. forall k30:int. forall result10:int__ref.
+  forall h6:int. forall result11:int__ref. forall k31:int. forall k32:int.
+  forall k33:int__ref. forall k34:int. forall k35:int__ref. forall k36:int.
+  forall result12:int__ref. forall h7:int. forall result13:int__ref.
+  forall k37:int. forall k38:int. forall k39:int__ref. forall k40:int.
+  forall k41:int__ref. forall k42:int. forall result14:int__ref.
+  forall h8:int. forall result15:int__ref. forall k43:int. forall k44:int.
+  forall k45:int__ref. forall k46:int. forall k47:int__ref. forall k48:int.
+  forall result16:int__ref. forall h9:int. forall result17:int__ref.
+  forall k49:int. forall k50:int. forall k51:int__ref. forall k52:int.
+  forall k53:int__ref. forall k54:int. forall result18:int__ref.
+  forall h10:int. forall result19:int__ref. forall k55:int. forall k56:int.
+  forall k57:int__ref. forall k58:int. forall k59:int__ref. forall k60:int.
+  forall h11:int__ref. forall k61:int__ref. forall h12:int. forall k62:int.
+  forall h13:int__ref. forall k63:int__ref. forall h14:int. forall k64:int.
+  forall h15:int__ref. forall k65:int__ref. forall h16:int. forall k66:int.
+  forall h17:int__ref. forall k67:int__ref. forall h18:int. forall k68:int.
+  forall h19:int__ref. forall k69:int__ref. forall h20:int. forall k70:int.
+  forall h21:int__ref. forall k71:int__ref. forall h22:int. forall k72:int.
+  forall h23:int__ref. forall k73:int__ref. forall h24:int. forall k74:int.
+  forall h25:int__ref. forall k75:int__ref. forall h26:int. forall k76:int.
+  forall h27:int__ref. forall k77:int__ref. forall h28:int. forall k78:int.
+  forall h29:int__ref. forall k79:int__ref. forall h30:int. forall k80:int.
+  (in_range1(x) -> (in_range1(y) -> (in_range1(z) -> ((((((10 <= x) and
+  (x <= 1000)) and (0 <  y)) and (z <  0)) and ((y + z) <= 1000)) -> (((((({
+  int__content = result } = { int__content = h }) and (h1 = 1)) and (((({
+  int__content = result1 } = { int__content = k }) and (k1 = 1)) and
+  ((((1 <= k1) and (k1 <= 10)) and ((((temp___138 = k1) and ((k2 <= x) and
+  ((((1 <= 10) -> in_range4(k2)) and ((1 <= k2) and (k2 <= 10))) and
+  (((k2 <  y) -> ((k2 <  z) -> (not (z <  y)))) and (k2 = 10))))) and
+  ((k2 = k3) and (k4 = k2))) and (({ int__content = k5 } = { int__content =
+  k3 }) and (k6 = k4)))) or ((not ((1 <= k1) and (k1 <= 10))) and
+  ((k1 = k5) and (k6 = k1))))) and (((h1 = result2) and (h2 = 2)) and (((({
+  int__content = result3 } = { int__content = k5 }) and (k7 = 1)) and
+  ((((1 <= k7) and (k7 <= 10)) and ((((temp___1381 = k7) and ((k8 <= x) and
+  ((((1 <= 10) -> in_range4(k8)) and ((1 <= k8) and (k8 <= 10))) and
+  (((k8 <  y) -> ((k8 <  z) -> (not (z <  y)))) and (k8 = 10))))) and
+  ((k8 = k9) and (k10 = k8))) and (({ int__content = k11 } = { int__content =
+  k9 }) and (k12 = k10)))) or ((not ((1 <= k7) and (k7 <= 10))) and
+  ((k7 = k11) and (k12 = k7))))) and (((h2 = result4) and (h3 = 3)) and (((({
+  int__content = result5 } = { int__content = k11 }) and (k13 = 1)) and
+  ((((1 <= k13) and (k13 <= 10)) and ((((temp___1382 = k13) and
+  ((k14 <= x) and ((((1 <= 10) -> in_range4(k14)) and ((1 <= k14) and
+  (k14 <= 10))) and (((k14 <  y) -> ((k14 <  z) -> (not (z <  y)))) and
+  (k14 = 10))))) and ((k14 = k15) and (k16 = k14))) and (({ int__content =
+  k17 } = { int__content = k15 }) and (k18 = k16)))) or ((not ((1 <= k13) and
+  (k13 <= 10))) and ((k13 = k17) and (k18 = k13))))) and (((h3 = result6) and
+  (h4 = 4)) and (((({ int__content = result7 } = { int__content = k17 }) and
+  (k19 = 1)) and ((((1 <= k19) and (k19 <= 10)) and
+  ((((temp___1383 = k19) and ((k20 <= x) and ((((1 <= 10) ->
+  in_range4(k20)) and ((1 <= k20) and (k20 <= 10))) and (((k20 <  y) ->
+  ((k20 <  z) -> (not (z <  y)))) and (k20 = 10))))) and ((k20 = k21) and
+  (k22 = k20))) and ((k23 = { int__content = k21 }) and (k24 = k22)))) or
+  ((not ((1 <= k19) and (k19 <= 10))) and ((k23 = { int__content = k19 }) and
+  (k24 = k19))))) and (((result8 = { int__content = h4 }) and (h5 = 5)) and
+  ((((result9 = k23) and (k25 = 1)) and ((((1 <= k25) and (k25 <= 10)) and
+  ((((temp___1384 = k25) and ((k26 <= x) and ((((1 <= 10) ->
+  in_range4(k26)) and ((1 <= k26) and (k26 <= 10))) and (((k26 <  y) ->
+  ((k26 <  z) -> (not (z <  y)))) and (k26 = 10))))) and ((k27 = {
+  int__content = k26 }) and (k28 = k26))) and ((k29 = k27) and
+  (k30 = k28)))) or ((not ((1 <= k25) and (k25 <= 10))) and ((k29 = {
+  int__content = k25 }) and (k30 = k25))))) and (((result10 = {
+  int__content = h5 }) and (h6 = 6)) and ((((result11 = k29) and
+  (k31 = 1)) and ((((1 <= k31) and (k31 <= 10)) and
+  ((((temp___1385 = k31) and ((k32 <= x) and ((((1 <= 10) ->
+  in_range4(k32)) and ((1 <= k32) and (k32 <= 10))) and (((k32 <  y) ->
+  ((k32 <  z) -> (not (z <  y)))) and (k32 = 10))))) and ((k33 = {
+  int__content = k32 }) and (k34 = k32))) and ((k35 = k33) and
+  (k36 = k34)))) or ((not ((1 <= k31) and (k31 <= 10))) and ((k35 = {
+  int__content = k31 }) and (k36 = k31))))) and (((result12 = {
+  int__content = h6 }) and (h7 = 7)) and ((((result13 = k35) and
+  (k37 = 1)) and ((((1 <= k37) and (k37 <= 10)) and
+  ((((temp___1386 = k37) and ((k38 <= x) and ((((1 <= 10) ->
+  in_range4(k38)) and ((1 <= k38) and (k38 <= 10))) and (((k38 <  y) ->
+  ((k38 <  z) -> (not (z <  y)))) and (k38 = 10))))) and ((k39 = {
+  int__content = k38 }) and (k40 = k38))) and ((k41 = k39) and
+  (k42 = k40)))) or ((not ((1 <= k37) and (k37 <= 10))) and ((k41 = {
+  int__content = k37 }) and (k42 = k37))))) and (((result14 = {
+  int__content = h7 }) and (h8 = 8)) and ((((result15 = k41) and
+  (k43 = 1)) and ((((1 <= k43) and (k43 <= 10)) and
+  ((((temp___1387 = k43) and ((k44 <= x) and ((((1 <= 10) ->
+  in_range4(k44)) and ((1 <= k44) and (k44 <= 10))) and (((k44 <  y) ->
+  ((k44 <  z) -> (not (z <  y)))) and (k44 = 10))))) and ((k45 = {
+  int__content = k44 }) and (k46 = k44))) and ((k47 = k45) and
+  (k48 = k46)))) or ((not ((1 <= k43) and (k43 <= 10))) and ((k47 = {
+  int__content = k43 }) and (k48 = k43))))) and (((result16 = {
+  int__content = h8 }) and (h9 = 9)) and ((((result17 = k47) and
+  (k49 = 1)) and ((((1 <= k49) and (k49 <= 10)) and
+  ((((temp___1388 = k49) and ((k50 <= x) and ((((1 <= 10) ->
+  in_range4(k50)) and ((1 <= k50) and (k50 <= 10))) and (((k50 <  y) ->
+  ((k50 <  z) -> (not (z <  y)))) and (k50 = 10))))) and ((k51 = {
+  int__content = k50 }) and (k52 = k50))) and ((k53 = k51) and
+  (k54 = k52)))) or ((not ((1 <= k49) and (k49 <= 10))) and ((k53 = {
+  int__content = k49 }) and (k54 = k49))))) and (((result18 = {
+  int__content = h9 }) and (h10 = 10)) and (((result19 = k53) and
+  (k55 = 1)) and ((((1 <= k55) and (k55 <= 10)) and
+  ((((temp___1389 = k55) and ((k56 <= x) and ((((1 <= 10) ->
+  in_range4(k56)) and ((1 <= k56) and (k56 <= 10))) and (((k56 <  y) ->
+  ((k56 <  z) -> (not (z <  y)))) and (k56 = 10))))) and ((k57 = {
+  int__content = k56 }) and (k58 = k56))) and ((k59 = k57) and
+  (k60 = k58)))) or ((not ((1 <= k55) and (k55 <= 10))) and ((k59 = {
+  int__content = k55 }) and (k60 = k55)))))))))))))))))))))))) and
+  (((k79 = k59) and (h29 = { int__content = h10 })) and ((k80 = k60) and
+  (h30 = h10)))) or (((({ int__content = result } = { int__content = h }) and
+  (h1 = 1)) and (((((k77 = { int__content = k2 }) and (h27 = { int__content =
+  h1 })) and ((k78 = k2) and (h28 = h1))) and ((temp___139 = 1) and
+  ((temp___140 = 10) and ((({ int__content = result1 } = { int__content = k
+  }) and (k1 = temp___139)) and (((temp___139 <= k1) and
+  (k1 <= temp___140)) and ((temp___138 = k1) and ((k2 <= x) and
+  ((((1 <= 10) -> in_range4(k2)) and ((1 <= k2) and (k2 <= 10))) and
+  ((k2 <  y) and ((k2 <  z) and (z <  y))))))))))) or (((({ int__content =
+  result1 } = { int__content = k }) and (k1 = 1)) and ((((1 <= k1) and
+  (k1 <= 10)) and ((((temp___138 = k1) and ((k2 <= x) and ((((1 <= 10) ->
+  in_range4(k2)) and ((1 <= k2) and (k2 <= 10))) and (((k2 <  y) ->
+  ((k2 <  z) -> (not (z <  y)))) and (k2 = 10))))) and ((k2 = k3) and
+  (k4 = k2))) and (({ int__content = k5 } = { int__content = k3 }) and
+  (k6 = k4)))) or ((not ((1 <= k1) and (k1 <= 10))) and ((k1 = k5) and
+  (k6 = k1))))) and ((((k77 = k75) and (h27 = h25)) and ((k78 = k76) and
+  (h28 = h26))) and (((h1 = result2) and (h2 = 2)) and (((((k75 = {
+  int__content = k8 }) and (h25 = { int__content = h2 })) and ((k76 = k8) and
+  (h26 = h2))) and ((temp___1391 = 1) and ((temp___1401 = 10) and ((({
+  int__content = result3 } = { int__content = k5 }) and
+  (k7 = temp___1391)) and (((temp___1391 <= k7) and (k7 <= temp___1401)) and
+  ((temp___1381 = k7) and ((k8 <= x) and ((((1 <= 10) -> in_range4(k8)) and
+  ((1 <= k8) and (k8 <= 10))) and ((k8 <  y) and ((k8 <  z) and
+  (z <  y))))))))))) or (((({ int__content = result3 } = { int__content = k5
+  }) and (k7 = 1)) and ((((1 <= k7) and (k7 <= 10)) and
+  ((((temp___1381 = k7) and ((k8 <= x) and ((((1 <= 10) -> in_range4(k8)) and
+  ((1 <= k8) and (k8 <= 10))) and (((k8 <  y) -> ((k8 <  z) ->
+  (not (z <  y)))) and (k8 = 10))))) and ((k8 = k9) and (k10 = k8))) and (({
+  int__content = k11 } = { int__content = k9 }) and (k12 = k10)))) or
+  ((not ((1 <= k7) and (k7 <= 10))) and ((k7 = k11) and (k12 = k7))))) and
+  ((((k75 = k73) and (h25 = h23)) and ((k76 = k74) and (h26 = h24))) and
+  (((h2 = result4) and (h3 = 3)) and (((((k73 = { int__content = k14 }) and
+  (h23 = { int__content = h3 })) and ((k74 = k14) and (h24 = h3))) and
+  ((temp___1392 = 1) and ((temp___1402 = 10) and ((({ int__content = result5
+  } = { int__content = k11 }) and (k13 = temp___1392)) and
+  (((temp___1392 <= k13) and (k13 <= temp___1402)) and
+  ((temp___1382 = k13) and ((k14 <= x) and ((((1 <= 10) ->
+  in_range4(k14)) and ((1 <= k14) and (k14 <= 10))) and ((k14 <  y) and
+  ((k14 <  z) and (z <  y))))))))))) or (((({ int__content = result5 } = {
+  int__content = k11 }) and (k13 = 1)) and ((((1 <= k13) and (k13 <= 10)) and
+  ((((temp___1382 = k13) and ((k14 <= x) and ((((1 <= 10) ->
+  in_range4(k14)) and ((1 <= k14) and (k14 <= 10))) and (((k14 <  y) ->
+  ((k14 <  z) -> (not (z <  y)))) and (k14 = 10))))) and ((k14 = k15) and
+  (k16 = k14))) and (({ int__content = k17 } = { int__content = k15 }) and
+  (k18 = k16)))) or ((not ((1 <= k13) and (k13 <= 10))) and ((k13 = k17) and
+  (k18 = k13))))) and ((((k73 = k71) and (h23 = h21)) and ((k74 = k72) and
+  (h24 = h22))) and (((h3 = result6) and (h4 = 4)) and (((((k71 = {
+  int__content = k20 }) and (h21 = { int__content = h4 })) and
+  ((k72 = k20) and (h22 = h4))) and ((temp___1393 = 1) and
+  ((temp___1403 = 10) and ((({ int__content = result7 } = { int__content =
+  k17 }) and (k19 = temp___1393)) and (((temp___1393 <= k19) and
+  (k19 <= temp___1403)) and ((temp___1383 = k19) and ((k20 <= x) and
+  ((((1 <= 10) -> in_range4(k20)) and ((1 <= k20) and (k20 <= 10))) and
+  ((k20 <  y) and ((k20 <  z) and (z <  y))))))))))) or (((({ int__content =
+  result7 } = { int__content = k17 }) and (k19 = 1)) and ((((1 <= k19) and
+  (k19 <= 10)) and ((((temp___1383 = k19) and ((k20 <= x) and ((((1 <= 10) ->
+  in_range4(k20)) and ((1 <= k20) and (k20 <= 10))) and (((k20 <  y) ->
+  ((k20 <  z) -> (not (z <  y)))) and (k20 = 10))))) and ((k20 = k21) and
+  (k22 = k20))) and ((k23 = { int__content = k21 }) and (k24 = k22)))) or
+  ((not ((1 <= k19) and (k19 <= 10))) and ((k23 = { int__content = k19 }) and
+  (k24 = k19))))) and ((((k71 = k69) and (h21 = h19)) and ((k72 = k70) and
+  (h22 = h20))) and (((result8 = { int__content = h4 }) and (h5 = 5)) and
+  (((((k69 = { int__content = k26 }) and (h19 = { int__content = h5 })) and
+  ((k70 = k26) and (h20 = h5))) and ((temp___1394 = 1) and
+  ((temp___1404 = 10) and (((result9 = k23) and (k25 = temp___1394)) and
+  (((temp___1394 <= k25) and (k25 <= temp___1404)) and
+  ((temp___1384 = k25) and ((k26 <= x) and ((((1 <= 10) ->
+  in_range4(k26)) and ((1 <= k26) and (k26 <= 10))) and ((k26 <  y) and
+  ((k26 <  z) and (z <  y))))))))))) or ((((result9 = k23) and (k25 = 1)) and
+  ((((1 <= k25) and (k25 <= 10)) and ((((temp___1384 = k25) and
+  ((k26 <= x) and ((((1 <= 10) -> in_range4(k26)) and ((1 <= k26) and
+  (k26 <= 10))) and (((k26 <  y) -> ((k26 <  z) -> (not (z <  y)))) and
+  (k26 = 10))))) and ((k27 = { int__content = k26 }) and (k28 = k26))) and
+  ((k29 = k27) and (k30 = k28)))) or ((not ((1 <= k25) and (k25 <= 10))) and
+  ((k29 = { int__content = k25 }) and (k30 = k25))))) and ((((k69 = k67) and
+  (h19 = h17)) and ((k70 = k68) and (h20 = h18))) and (((result10 = {
+  int__content = h5 }) and (h6 = 6)) and (((((k67 = { int__content = k32
+  }) and (h17 = { int__content = h6 })) and ((k68 = k32) and (h18 = h6))) and
+  ((temp___1395 = 1) and ((temp___1405 = 10) and (((result11 = k29) and
+  (k31 = temp___1395)) and (((temp___1395 <= k31) and
+  (k31 <= temp___1405)) and ((temp___1385 = k31) and ((k32 <= x) and
+  ((((1 <= 10) -> in_range4(k32)) and ((1 <= k32) and (k32 <= 10))) and
+  ((k32 <  y) and ((k32 <  z) and (z <  y))))))))))) or
+  ((((result11 = k29) and (k31 = 1)) and ((((1 <= k31) and (k31 <= 10)) and
+  ((((temp___1385 = k31) and ((k32 <= x) and ((((1 <= 10) ->
+  in_range4(k32)) and ((1 <= k32) and (k32 <= 10))) and (((k32 <  y) ->
+  ((k32 <  z) -> (not (z <  y)))) and (k32 = 10))))) and ((k33 = {
+  int__content = k32 }) and (k34 = k32))) and ((k35 = k33) and
+  (k36 = k34)))) or ((not ((1 <= k31) and (k31 <= 10))) and ((k35 = {
+  int__content = k31 }) and (k36 = k31))))) and ((((k67 = k65) and
+  (h17 = h15)) and ((k68 = k66) and (h18 = h16))) and (((result12 = {
+  int__content = h6 }) and (h7 = 7)) and (((((k65 = { int__content = k38
+  }) and (h15 = { int__content = h7 })) and ((k66 = k38) and (h16 = h7))) and
+  ((temp___1396 = 1) and ((temp___1406 = 10) and (((result13 = k35) and
+  (k37 = temp___1396)) and (((temp___1396 <= k37) and
+  (k37 <= temp___1406)) and ((temp___1386 = k37) and ((k38 <= x) and
+  ((((1 <= 10) -> in_range4(k38)) and ((1 <= k38) and (k38 <= 10))) and
+  ((k38 <  y) and ((k38 <  z) and (z <  y))))))))))) or
+  ((((result13 = k35) and (k37 = 1)) and ((((1 <= k37) and (k37 <= 10)) and
+  ((((temp___1386 = k37) and ((k38 <= x) and ((((1 <= 10) ->
+  in_range4(k38)) and ((1 <= k38) and (k38 <= 10))) and (((k38 <  y) ->
+  ((k38 <  z) -> (not (z <  y)))) and (k38 = 10))))) and ((k39 = {
+  int__content = k38 }) and (k40 = k38))) and ((k41 = k39) and
+  (k42 = k40)))) or ((not ((1 <= k37) and (k37 <= 10))) and ((k41 = {
+  int__content = k37 }) and (k42 = k37))))) and ((((k65 = k63) and
+  (h15 = h13)) and ((k66 = k64) and (h16 = h14))) and (((result14 = {
+  int__content = h7 }) and (h8 = 8)) and (((((k63 = { int__content = k44
+  }) and (h13 = { int__content = h8 })) and ((k64 = k44) and (h14 = h8))) and
+  ((temp___1397 = 1) and ((temp___1407 = 10) and (((result15 = k41) and
+  (k43 = temp___1397)) and (((temp___1397 <= k43) and
+  (k43 <= temp___1407)) and ((temp___1387 = k43) and ((k44 <= x) and
+  ((((1 <= 10) -> in_range4(k44)) and ((1 <= k44) and (k44 <= 10))) and
+  ((k44 <  y) and ((k44 <  z) and (z <  y))))))))))) or
+  ((((result15 = k41) and (k43 = 1)) and ((((1 <= k43) and (k43 <= 10)) and
+  ((((temp___1387 = k43) and ((k44 <= x) and ((((1 <= 10) ->
+  in_range4(k44)) and ((1 <= k44) and (k44 <= 10))) and (((k44 <  y) ->
+  ((k44 <  z) -> (not (z <  y)))) and (k44 = 10))))) and ((k45 = {
+  int__content = k44 }) and (k46 = k44))) and ((k47 = k45) and
+  (k48 = k46)))) or ((not ((1 <= k43) and (k43 <= 10))) and ((k47 = {
+  int__content = k43 }) and (k48 = k43))))) and ((((k63 = k61) and
+  (h13 = h11)) and ((k64 = k62) and (h14 = h12))) and (((result16 = {
+  int__content = h8 }) and (h9 = 9)) and (((((k61 = { int__content = k50
+  }) and (h11 = { int__content = h9 })) and ((k62 = k50) and (h12 = h9))) and
+  ((temp___1398 = 1) and ((temp___1408 = 10) and (((result17 = k47) and
+  (k49 = temp___1398)) and (((temp___1398 <= k49) and
+  (k49 <= temp___1408)) and ((temp___1388 = k49) and ((k50 <= x) and
+  ((((1 <= 10) -> in_range4(k50)) and ((1 <= k50) and (k50 <= 10))) and
+  ((k50 <  y) and ((k50 <  z) and (z <  y))))))))))) or
+  ((((result17 = k47) and (k49 = 1)) and ((((1 <= k49) and (k49 <= 10)) and
+  ((((temp___1388 = k49) and ((k50 <= x) and ((((1 <= 10) ->
+  in_range4(k50)) and ((1 <= k50) and (k50 <= 10))) and (((k50 <  y) ->
+  ((k50 <  z) -> (not (z <  y)))) and (k50 = 10))))) and ((k51 = {
+  int__content = k50 }) and (k52 = k50))) and ((k53 = k51) and
+  (k54 = k52)))) or ((not ((1 <= k49) and (k49 <= 10))) and ((k53 = {
+  int__content = k49 }) and (k54 = k49))))) and ((((k61 = { int__content =
+  k56 }) and (h11 = { int__content = h10 })) and ((k62 = k56) and
+  (h12 = h10))) and (((result18 = { int__content = h9 }) and (h10 = 10)) and
+  ((temp___1399 = 1) and ((temp___1409 = 10) and (((result19 = k53) and
+  (k55 = temp___1399)) and (((temp___1399 <= k55) and
+  (k55 <= temp___1409)) and ((temp___1389 = k55) and ((k56 <= x) and
+  ((((1 <= 10) -> in_range4(k56)) and ((1 <= k56) and (k56 <= 10))) and
+  ((k56 <  y) and ((k56 <  z) and
+  (z <  y))))))))))))))))))))))))))))))))))))))))))))))) and
+  (((k79 = k77) and (h29 = h27)) and ((k80 = k78) and (h30 = h28))))) ->
+  ((((o = (y + z)) and in_range1((y + z))) and (o1 = (x + o))) ->
+  in_range1(o1))))))))

@@ -1,0 +1,450 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type index
+
+predicate in_range1(x: int) = ((1 <= x) and (x <= 100))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : index, index -> bool
+
+logic dummy : index
+
+type index__ref = { index__content : index
+}
+
+function index__ref___projection(a: index__ref) : index = (a).index__content
+
+logic to_rep : index -> int
+
+logic of_rep : int -> index
+
+axiom inversion_axiom : (forall x:index [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:index [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type us_split_discrs = { rec__lists__cell__is_set : bool
+}
+
+function us_split_discrs___projection(a: us_split_discrs) : bool =
+  (a).rec__lists__cell__is_set
+
+type us_split_discrs__ref = { us_split_discrs__content : us_split_discrs
+}
+
+function us_split_discrs__ref___projection(a: us_split_discrs__ref) : us_split_discrs =
+  (a).us_split_discrs__content
+
+type us_split_fields = { rec__lists__cell__next : index
+}
+
+function us_split_fields_Next__projection(a: us_split_fields) : index =
+  (a).rec__lists__cell__next
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_discrs1 : us_split_discrs; us_split_fields1 :
+us_split_fields; attr__constrained : bool
+}
+
+function us_rep___projection(a: us_rep) : us_split_discrs =
+  (a).us_split_discrs1
+
+function us_rep_2__projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+function us_rep_3__projection(a: us_rep) : bool = (a).attr__constrained
+
+predicate lists__cell__next__pred(a: us_rep) =
+  (to_int(((a).us_split_discrs1).rec__lists__cell__is_set) = 1)
+
+logic bool_eq3 : us_rep, us_rep -> bool
+
+axiom bool_eq_def2 :
+  (forall a:us_rep. forall b:us_rep [bool_eq3(a, b)].
+  ((((((a).us_split_discrs1).rec__lists__cell__is_set = ((b).us_split_discrs1).rec__lists__cell__is_set) and
+  (lists__cell__next__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__lists__cell__next) = to_rep(((b).us_split_fields1).rec__lists__cell__next)))) ->
+  (bool_eq3(a, b) = true)) and
+  ((not ((((a).us_split_discrs1).rec__lists__cell__is_set = ((b).us_split_discrs1).rec__lists__cell__is_set) and
+  (lists__cell__next__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__lists__cell__next) = to_rep(((b).us_split_fields1).rec__lists__cell__next))))) ->
+  (bool_eq3(a, b) = false))))
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:bool. forall a1:index. forall a2:bool. (0 <= object__size({
+  us_split_discrs1 = { rec__lists__cell__is_set = a }; us_split_fields1 = {
+  rec__lists__cell__next = a1 }; attr__constrained = a2 })))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:bool. forall a1:index. forall a2:bool. (0 <= object__alignment({
+  us_split_discrs1 = { rec__lists__cell__is_set = a }; us_split_fields1 = {
+  rec__lists__cell__next = a1 }; attr__constrained = a2 })))
+
+logic lists__cell__is_set__first__bit : int
+
+logic lists__cell__is_set__last__bit : int
+
+logic lists__cell__is_set__position : int
+
+axiom lists__cell__is_set__first__bit_axiom :
+  (0 <= lists__cell__is_set__first__bit)
+
+axiom lists__cell__is_set__last__bit_axiom :
+  (lists__cell__is_set__first__bit <  lists__cell__is_set__last__bit)
+
+axiom lists__cell__is_set__position_axiom :
+  (0 <= lists__cell__is_set__position)
+
+logic lists__cell__next__first__bit : int
+
+logic lists__cell__next__last__bit : int
+
+logic lists__cell__next__position : int
+
+axiom lists__cell__next__first__bit_axiom :
+  (0 <= lists__cell__next__first__bit)
+
+axiom lists__cell__next__last__bit_axiom :
+  (lists__cell__next__first__bit <  lists__cell__next__last__bit)
+
+axiom lists__cell__next__position_axiom : (0 <= lists__cell__next__position)
+
+logic user_eq1 : us_rep, us_rep -> bool
+
+logic dummy1 : bool
+
+logic dummy2 : index
+
+logic dummy3 : bool
+
+type cell__ref = { cell__content : us_rep
+}
+
+function cell__ref___projection(a: cell__ref) : us_rep = (a).cell__content
+
+type map__ref = { map__content : (int,us_rep) farray
+}
+
+logic slide : (int,us_rep) farray, int, int -> (int,us_rep) farray
+
+axiom slide_eq :
+  (forall a:(int,us_rep) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,us_rep) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
+  int -> (int,us_rep) farray
+
+axiom concat_def :
+  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton : us_rep, int -> (int,us_rep) farray
+
+axiom singleton_def :
+  (forall v:bool. forall v1:index. forall v2:bool.
+  (forall i:int [(singleton({ us_split_discrs1 = { rec__lists__cell__is_set =
+  v }; us_split_fields1 = { rec__lists__cell__next = v1 };
+  attr__constrained = v2 }, i)[i])]. ((singleton({ us_split_discrs1 = {
+  rec__lists__cell__is_set = v }; us_split_fields1 = {
+  rec__lists__cell__next = v1 }; attr__constrained = v2 }, i)[i]) = {
+  us_split_discrs1 = { rec__lists__cell__is_set = v }; us_split_fields1 = {
+  rec__lists__cell__next = v1 }; attr__constrained = v2 })))
+
+logic bool_eq4 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
+  int -> bool
+
+axiom bool_eq_def3 :
+  (forall a:(int,us_rep) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,us_rep) farray. forall b__first:int. forall b__last:int
+  [bool_eq4(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) and (bool_eq3((a[temp___idx_132]),
+  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
+  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) -> (bool_eq3((a[temp___idx_132]),
+  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq4(a,
+  a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev :
+  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq4(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) -> (bool_eq3((a[temp___idx_132]),
+  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic goes_to2 : int, int, (int,us_rep) farray -> bool
+
+logic goes_to2__function_guard : bool, int, int, (int,us_rep) farray -> prop
+
+axiom goes_to2__post_axiom : true
+
+axiom goes_to2__def_axiom :
+  (forall i:int. forall j:int.
+  (forall lists__memory1:(int,us_rep) farray [goes_to2(i, j,
+  lists__memory1)]. ((goes_to2(i, j, lists__memory1) = true) <->
+  (((((lists__memory1[i])).us_split_discrs1).rec__lists__cell__is_set = true) and
+  (to_rep((((lists__memory1[i])).us_split_fields1).rec__lists__cell__next) = j)))))
+
+logic i : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic j : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+predicate in_range2(rec__lists__cell__is_set1: bool, a: us_rep) =
+  (rec__lists__cell__is_set1 = ((a).us_split_discrs1).rec__lists__cell__is_set)
+
+logic value__size1 : int
+
+logic object__size1 : us_rep -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : us_rep -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 :
+  (forall a:bool. forall a1:index. forall a2:bool. (0 <= object__size1({
+  us_split_discrs1 = { rec__lists__cell__is_set = a }; us_split_fields1 = {
+  rec__lists__cell__next = a1 }; attr__constrained = a2 })))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:bool. forall a1:index. forall a2:bool. (0 <= object__alignment1({
+  us_split_discrs1 = { rec__lists__cell__is_set = a }; us_split_fields1 = {
+  rec__lists__cell__next = a1 }; attr__constrained = a2 })))
+
+logic lists__cell__is_set__first__bit1 : int
+
+logic lists__cell__is_set__last__bit1 : int
+
+logic lists__cell__is_set__position1 : int
+
+axiom lists__cell__is_set__first__bit_axiom1 :
+  (0 <= lists__cell__is_set__first__bit1)
+
+axiom lists__cell__is_set__last__bit_axiom1 :
+  (lists__cell__is_set__first__bit1 <  lists__cell__is_set__last__bit1)
+
+axiom lists__cell__is_set__position_axiom1 :
+  (0 <= lists__cell__is_set__position1)
+
+logic lists__cell__next__first__bit1 : int
+
+logic lists__cell__next__last__bit1 : int
+
+logic lists__cell__next__position1 : int
+
+axiom lists__cell__next__first__bit_axiom1 :
+  (0 <= lists__cell__next__first__bit1)
+
+axiom lists__cell__next__last__bit_axiom1 :
+  (lists__cell__next__first__bit1 <  lists__cell__next__last__bit1)
+
+axiom lists__cell__next__position_axiom1 :
+  (0 <= lists__cell__next__position1)
+
+logic user_eq2 : us_rep, us_rep -> bool
+
+logic dummy4 : bool
+
+logic dummy5 : index
+
+logic dummy6 : bool
+
+type t3b__ref = { t3b__content : us_rep
+}
+
+function t3b__ref___projection(a: t3b__ref) : us_rep = (a).t3b__content
+
+ (* File "lists.ads", line 25, characters 0-0 *)
+goal WP_parameter_def :
+  (forall memory1:(int,us_rep) farray. forall o:index. forall o1:index.
+  forall temp___179:bool. forall temp___1791:index. forall temp___1792:bool.
+  forall usq_:bool. forall usq_1:index. forall usq_2:bool. forall o2:bool.
+  forall o3:index. forall o4:bool. forall o5:(int,us_rep) farray.
+  forall result:(int,us_rep) farray. forall memory11:(int,us_rep) farray.
+  forall memory12:(int,us_rep) farray. forall memory13:(int,us_rep) farray.
+  ((in_range1(i) and (in_range1(j) and
+  ((forall temp___164:int. (((1 <= temp___164) and (temp___164 <= 100)) ->
+   (((memory1[temp___164])).attr__constrained = false))) and
+  ((((((((to_rep(o) = j) and (o = o1)) and ((of_int(1) = temp___179) and
+  ((temp___1791 = o1) and (true = temp___1792)))) and
+  ((((((memory1[i])).attr__constrained = true) and
+  (temp___179 = (((memory1[i])).us_split_discrs1).rec__lists__cell__is_set)) or
+  (not (((memory1[i])).attr__constrained = true))) and
+  ((usq_ = temp___179) and ((usq_1 = temp___1791) and
+  (usq_2 = temp___1792))))) and ((usq_ = o2) and ((usq_1 = o3) and
+  (((memory1[i])).attr__constrained = o4)))) and (o5 = (memory1[i <- {
+  us_split_discrs1 = { rec__lists__cell__is_set = o2 }; us_split_fields1 = {
+  rec__lists__cell__next = o3 }; attr__constrained = o4 }]))) and
+  ((result = memory1) and (memory11 = o5))) and ((memory11 = memory12) and
+  (memory13 = memory11)))))) -> (goes_to2(i, j, memory12) = true)))

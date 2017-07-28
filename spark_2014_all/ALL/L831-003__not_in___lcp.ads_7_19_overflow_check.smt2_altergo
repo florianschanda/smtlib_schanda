@@ -1,0 +1,534 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type integer
+
+predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : integer, integer -> bool
+
+logic dummy : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+logic to_rep : integer -> int
+
+logic of_rep : int -> integer
+
+axiom inversion_axiom :
+  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type natural
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : natural, natural -> bool
+
+logic dummy1 : natural
+
+type natural__ref = { natural__content : natural
+}
+
+function natural__ref___projection(a: natural__ref) : natural =
+  (a).natural__content
+
+type map__ref = { map__content : (int,integer) farray
+}
+
+logic slide : (int,integer) farray, int, int -> (int,integer) farray
+
+axiom slide_eq :
+  (forall a:(int,integer) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,integer) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat : (int,integer) farray, int, int, (int,integer) farray, int,
+  int -> (int,integer) farray
+
+axiom concat_def :
+  (forall a:(int,integer) farray. forall b:(int,integer) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton : integer, int -> (int,integer) farray
+
+axiom singleton_def :
+  (forall v:integer.
+  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
+
+logic bool_eq4 : (int,integer) farray, int, int, (int,integer) farray, int,
+  int -> bool
+
+axiom bool_eq_def3 :
+  (forall a:(int,integer) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,integer) farray. forall b__first:int. forall b__last:int
+  [bool_eq4(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) and
+  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
+  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) ->
+  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev :
+  (forall a:(int,integer) farray. forall b:(int,integer) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq4(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) ->
+  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
+
+logic compare : (int,integer) farray, int, int, (int,integer) farray, int,
+  int -> int
+
+axiom compare_def_eq :
+  (forall a:(int,integer) farray. forall b:(int,integer) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt :
+  (forall a:(int,integer) farray. forall b:(int,integer) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt :
+  (forall a:(int,integer) farray. forall b:(int,integer) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+
+type index
+
+predicate in_range3(x: int) = ((1 <= x) and (x <= 1000000))
+
+logic bool_eq5 : int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq2 : index, index -> bool
+
+logic dummy2 : index
+
+type index__ref = { index__content : index
+}
+
+function index__ref___projection(a: index__ref) : index = (a).index__content
+
+type t
+
+logic first : t -> integer
+
+logic last : t -> integer
+
+logic mk : int, int -> t
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep(first(mk(f, l))) = f) and (to_rep(last(mk(f, l))) = l)))))
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (in_range3(low) and in_range3(high)))))
+
+type us_t = { elts : (int,integer) farray; rt : t
+}
+
+function to_array(a: us_t) : (int,integer) farray = (a).elts
+
+function of_array(a: (int,integer) farray, f: int, l: int) : us_t = { elts =
+  a; rt = mk(f, l) }
+
+function first1(a: us_t) : int = to_rep(first((a).rt))
+
+function last1(a: us_t) : int = to_rep(last((a).rt))
+
+logic length : us_t -> int
+
+axiom length_def :
+  (forall a:us_t [length(a)]. (((first1(a) <= last1(a)) ->
+  (length(a) = ((last1(a) - first1(a)) + 1))) and
+  ((not (first1(a) <= last1(a))) -> (length(a) = 0))))
+
+logic value__size : int
+
+logic object__size : (int,integer) farray -> int
+
+logic value__component__size : int
+
+logic object__component__size : (int,integer) farray -> int
+
+logic value__alignment : int
+
+logic object__alignment : (int,integer) farray -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:(int,integer) farray. (0 <= object__size(a)))
+
+axiom value__component__size_axiom : (0 <= value__component__size)
+
+axiom object__component__size_axiom :
+  (forall a:(int,integer) farray. (0 <= object__component__size(a)))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:(int,integer) farray. (0 <= object__alignment(a)))
+
+function bool_eq6(x: us_t, y: us_t) : bool = bool_eq4((x).elts,
+  to_rep(first((x).rt)), to_rep(last((x).rt)), (y).elts,
+  to_rep(first((y).rt)), to_rep(last((y).rt)))
+
+logic user_eq3 : us_t, us_t -> bool
+
+logic dummy3 : (int,integer) farray
+
+logic dummy4 : t
+
+type text__ref = { text__content : us_t
+}
+
+function text__ref___projection(a: text__ref) : us_t = (a).text__content
+
+logic a : (int,integer) farray
+
+logic a1 : t
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic x : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic y : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall l:int. forall j:int. forall lcp__result:int. forall temp___158:int.
+  forall temp___159:int. forall temp___157:int. forall o:int. forall o1:int.
+  forall o2:bool. forall o3:bool. forall o4:bool. forall o5:int.
+  forall o6:int. forall o7:bool. forall o8:bool. forall o9:bool.
+  forall temp___155:int. forall o10:int. forall o11:integer.
+  forall temp___156:int. forall o12:int. forall o13:integer. forall o14:int.
+  forall o15:int. forall o16:bool. forall o17:int. forall lcp__result1:int.
+  forall result:int. forall l1:int. forall result1:int. forall j1:int.
+  forall l2:int. forall j2:int. forall lcp__result2:int. forall result2:bool.
+  forall result3:bool. forall result4:int. forall lcp__result3:int.
+  forall result5:bool. forall result6:int. forall lcp__result4:int.
+  forall result7:int. forall l3:int. forall lcp__result5:int.
+  forall lcp__result6:int. forall l4:int. forall j3:int.
+  forall lcp__result7:int. forall l5:int. forall j4:int.
+  forall lcp__result8:int. forall l6:int. forall j5:int.
+  forall lcp__result9:int. forall l7:int. forall j6:int.
+  forall lcp__result10:int. forall result8:int. forall lcp__result11:int.
+  forall lcp__result12:int. forall lcp__result13:int. forall l8:int.
+  forall j7:int. forall lcp__result14:int. forall l9:int. forall j8:int.
+  forall lcp__result15:int. forall l10:int. forall j9:int.
+  forall lcp__result16:int. forall l11:int. forall j10:int.
+  forall lcp__result17:int. forall result9:bool. (dynamic_property(1,
+  1000000, to_rep(first(a1)), to_rep(last(a1))) -> (in_range1(x) ->
+  (in_range1(y) -> ((((to_rep(first(a1)) <= x) and
+  (x <= to_rep(last(a1)))) and ((to_rep(first(a1)) <= y) and
+  (y <= to_rep(last(a1))))) -> ((((({ int__content = result } = {
+  int__content = l }) and (l1 = 0)) and (in_range2(l1) and ((((({
+  int__content = lcp__result14 } = { int__content = lcp__result5 }) and
+  ((j2 = j7) and (l2 = l8))) and ((lcp__result15 = lcp__result6) and
+  ((j8 = j2) and (l9 = l2)))) and ((temp___158 = to_rep(first(a1))) and
+  ((temp___159 = to_rep(last(a1))) and ((({ int__content = result1 } = {
+  int__content = j }) and (j1 = temp___158)) and (((temp___158 <= j1) and
+  (j1 <= temp___159)) and ((temp___157 = l1) and ((((0 <= 2147483647) ->
+  in_range2(l2)) and ((to_rep(first(a1)) <= j2) and
+  (j2 <= to_rep(last(a1))))) and ((((lcp__result3 = lcp__result5) and
+  (lcp__result6 = lcp__result3)) and (((((((o6 = (x + l2)) and
+  in_range1((x + l2))) and (((o6 <= to_rep(last(a1))) and (o7 = true)) or
+  ((not (o6 <= to_rep(last(a1)))) and (o7 = false)))) and
+  ((((o5 = (x + l2)) and in_range1((x + l2))) and
+  (((to_rep(first(a1)) <= o5) and (o8 = true)) or
+  ((not (to_rep(first(a1)) <= o5)) and (o8 = false)))) and
+  (o9 = match_bool(o8, o7, false)))) and (((not (o9 = true)) and
+  (result3 = true)) or ((o9 = true) and (result3 = false)))) and
+  (((result3 = true) and (result2 = true)) or ((not (result3 = true)) and
+  (((((o1 = (y + l2)) and in_range1((y + l2))) and
+  (((o1 <= to_rep(last(a1))) and (o2 = true)) or
+  ((not (o1 <= to_rep(last(a1)))) and (o2 = false)))) and
+  ((((o = (y + l2)) and in_range1((y + l2))) and
+  (((to_rep(first(a1)) <= o) and (o3 = true)) or
+  ((not (to_rep(first(a1)) <= o)) and (o3 = false)))) and
+  (o4 = match_bool(o3, o2, false)))) and (((not (o4 = true)) and
+  (result2 = true)) or ((o4 = true) and (result2 = false))))))) and
+  ((result2 = true) and ((lcp__result2 = result4) and
+  (lcp__result3 = l2))))) or ((((((((o6 = (x + l2)) and
+  in_range1((x + l2))) and (((o6 <= to_rep(last(a1))) and (o7 = true)) or
+  ((not (o6 <= to_rep(last(a1)))) and (o7 = false)))) and
+  ((((o5 = (x + l2)) and in_range1((x + l2))) and
+  (((to_rep(first(a1)) <= o5) and (o8 = true)) or
+  ((not (to_rep(first(a1)) <= o5)) and (o8 = false)))) and
+  (o9 = match_bool(o8, o7, false)))) and (((not (o9 = true)) and
+  (result3 = true)) or ((o9 = true) and (result3 = false)))) and
+  (((result3 = true) and (result2 = true)) or ((not (result3 = true)) and
+  (((((o1 = (y + l2)) and in_range1((y + l2))) and
+  (((o1 <= to_rep(last(a1))) and (o2 = true)) or
+  ((not (o1 <= to_rep(last(a1)))) and (o2 = false)))) and
+  ((((o = (y + l2)) and in_range1((y + l2))) and
+  (((to_rep(first(a1)) <= o) and (o3 = true)) or
+  ((not (to_rep(first(a1)) <= o)) and (o3 = false)))) and
+  (o4 = match_bool(o3, o2, false)))) and (((not (o4 = true)) and
+  (result2 = true)) or ((o4 = true) and (result2 = false))))))) and
+  ((not (result2 = true)) and (lcp__result3 = lcp__result2))) and
+  (((lcp__result4 = lcp__result5) and (lcp__result6 = lcp__result4)) and
+  ((((((((temp___156 = (y + l2)) and in_range1((y + l2))) and
+  (((to_rep(first(a1)) <= temp___156) and
+  (temp___156 <= to_rep(last(a1)))) and (o12 = temp___156))) and
+  (o13 = (a[o12]))) and (o14 = to_rep(o13))) and
+  ((((((temp___155 = (x + l2)) and in_range1((x + l2))) and
+  (((to_rep(first(a1)) <= temp___155) and
+  (temp___155 <= to_rep(last(a1)))) and (o10 = temp___155))) and
+  (o11 = (a[o10]))) and (o15 = to_rep(o11))) and (((o15 = o14) and
+  (o16 = true)) or ((not (o15 = o14)) and (o16 = false))))) and
+  (((not (o16 = true)) and (result5 = true)) or ((o16 = true) and
+  (result5 = false)))) and ((result5 = true) and
+  ((lcp__result3 = result6) and (lcp__result4 = l2)))))))))))))) or (((({
+  int__content = result1 } = { int__content = j }) and
+  (j1 = to_rep(first(a1)))) and ((((to_rep(first(a1)) <= j1) and
+  (j1 <= to_rep(last(a1)))) and ((((temp___157 = l1) and
+  ((((0 <= 2147483647) -> in_range2(l2)) and ((to_rep(first(a1)) <= j2) and
+  (j2 <= to_rep(last(a1))))) and ((((((((o6 = (x + l2)) and
+  in_range1((x + l2))) and (((o6 <= to_rep(last(a1))) and (o7 = true)) or
+  ((not (o6 <= to_rep(last(a1)))) and (o7 = false)))) and
+  ((((o5 = (x + l2)) and in_range1((x + l2))) and
+  (((to_rep(first(a1)) <= o5) and (o8 = true)) or
+  ((not (to_rep(first(a1)) <= o5)) and (o8 = false)))) and
+  (o9 = match_bool(o8, o7, false)))) and (((not (o9 = true)) and
+  (result3 = true)) or ((o9 = true) and (result3 = false)))) and
+  (((result3 = true) and (result2 = true)) or ((not (result3 = true)) and
+  (((((o1 = (y + l2)) and in_range1((y + l2))) and
+  (((o1 <= to_rep(last(a1))) and (o2 = true)) or
+  ((not (o1 <= to_rep(last(a1)))) and (o2 = false)))) and
+  ((((o = (y + l2)) and in_range1((y + l2))) and
+  (((to_rep(first(a1)) <= o) and (o3 = true)) or
+  ((not (to_rep(first(a1)) <= o)) and (o3 = false)))) and
+  (o4 = match_bool(o3, o2, false)))) and (((not (o4 = true)) and
+  (result2 = true)) or ((o4 = true) and (result2 = false))))))) and
+  ((not (result2 = true)) and (lcp__result3 = lcp__result2))) and
+  (((((((((temp___156 = (y + l2)) and in_range1((y + l2))) and
+  (((to_rep(first(a1)) <= temp___156) and
+  (temp___156 <= to_rep(last(a1)))) and (o12 = temp___156))) and
+  (o13 = (a[o12]))) and (o14 = to_rep(o13))) and
+  ((((((temp___155 = (x + l2)) and in_range1((x + l2))) and
+  (((to_rep(first(a1)) <= temp___155) and
+  (temp___155 <= to_rep(last(a1)))) and (o10 = temp___155))) and
+  (o11 = (a[o10]))) and (o15 = to_rep(o11))) and (((o15 = o14) and
+  (o16 = true)) or ((not (o15 = o14)) and (o16 = false))))) and
+  (((not (o16 = true)) and (result5 = true)) or ((o16 = true) and
+  (result5 = false)))) and ((not (result5 = true)) and
+  (lcp__result4 = lcp__result3))) and ((((o17 = (l2 + 1)) and
+  in_range1((l2 + 1))) and ((l2 = result7) and (l3 = o17))) and
+  (j2 = to_rep(last(a1)))))))) and (((lcp__result4 = lcp__result7) and
+  ((j2 = j3) and (l3 = l4))) and ((lcp__result8 = lcp__result4) and
+  ((j4 = j2) and (l5 = l3))))) and ((({ int__content = lcp__result9 } = {
+  int__content = lcp__result7 }) and (({ int__content = j5 } = {
+  int__content = j3 }) and ({ int__content = l6 } = { int__content = l4
+  }))) and ((lcp__result10 = lcp__result8) and ((j6 = j4) and
+  (l7 = l5)))))) or ((not ((to_rep(first(a1)) <= j1) and
+  (j1 <= to_rep(last(a1))))) and ((({ int__content = lcp__result9 } = {
+  int__content = lcp__result }) and ((j1 = j5) and (l1 = l6))) and
+  ((lcp__result10 = lcp__result1) and ((j6 = j1) and (l7 = l1))))))) and
+  (((({ int__content = lcp__result14 } = { int__content = lcp__result12
+  }) and (({ int__content = j7 } = { int__content = j5 }) and ({
+  int__content = l8 } = { int__content = l6 }))) and
+  ((lcp__result15 = lcp__result13) and ((j8 = j6) and (l9 = l7)))) and
+  (((lcp__result11 = lcp__result12) and (lcp__result13 = lcp__result11)) and
+  (({ int__content = result8 } = { int__content = lcp__result9 }) and
+  (lcp__result11 = l6)))))))) and ((({ int__content = lcp__result16 } = {
+  int__content = lcp__result14 }) and ((j9 = j7) and (l10 = l8))) and
+  ((lcp__result17 = lcp__result15) and ((j10 = j8) and (l11 = l9))))) ->
+  (((result9 = true) <->
+  (forall k:int. (((0 <= k) and (k <= lcp__result16)) ->
+  (to_rep((a[(x + k)])) = to_rep((a[(y + k)])))))) -> ((result9 = true) ->
+  in_range1((x + lcp__result16))))))))))

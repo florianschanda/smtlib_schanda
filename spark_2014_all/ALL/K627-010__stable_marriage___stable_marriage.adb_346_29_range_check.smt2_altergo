@@ -1,0 +1,1612 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type group1_id
+
+predicate in_range1(x: int) = ((1 <= x) and (x <= 64))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : group1_id, group1_id -> bool
+
+logic dummy : group1_id
+
+type group1_id__ref = { group1_id__content : group1_id
+}
+
+function group1_id__ref___projection(a: group1_id__ref) : group1_id =
+  (a).group1_id__content
+
+logic to_rep : group1_id -> int
+
+logic of_rep : int -> group1_id
+
+axiom inversion_axiom :
+  (forall x:group1_id [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:group1_id [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type group2_id
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 64))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : group2_id, group2_id -> bool
+
+logic dummy1 : group2_id
+
+type group2_id__ref = { group2_id__content : group2_id
+}
+
+function group2_id__ref___projection(a: group2_id__ref) : group2_id =
+  (a).group2_id__content
+
+logic to_rep1 : group2_id -> int
+
+logic of_rep1 : int -> group2_id
+
+axiom inversion_axiom1 :
+  (forall x:group2_id [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:group2_id [to_rep1(x)]. in_range2(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type ranking
+
+predicate in_range3(x: int) = ((1 <= x) and (x <= 64))
+
+logic bool_eq4 : int, int -> bool
+
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq2 : ranking, ranking -> bool
+
+logic dummy2 : ranking
+
+type ranking__ref = { ranking__content : ranking
+}
+
+function ranking__ref___projection(a: ranking__ref) : ranking =
+  (a).ranking__content
+
+logic to_rep2 : ranking -> int
+
+logic of_rep2 : int -> ranking
+
+axiom inversion_axiom2 :
+  (forall x:ranking [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 : (forall x:ranking [to_rep2(x)]. in_range3(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range3(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+type map__ref = { map__content : (int,group1_id) farray
+}
+
+logic slide : (int,group1_id) farray, int, int -> (int,group1_id) farray
+
+axiom slide_eq :
+  (forall a:(int,group1_id) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,group1_id) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat : (int,group1_id) farray, int, int, (int,group1_id) farray, int,
+  int -> (int,group1_id) farray
+
+axiom concat_def :
+  (forall a:(int,group1_id) farray. forall b:(int,group1_id) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton : group1_id, int -> (int,group1_id) farray
+
+axiom singleton_def :
+  (forall v:group1_id.
+  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
+
+logic bool_eq5 : (int,group1_id) farray, int, int, (int,group1_id) farray,
+  int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall a:(int,group1_id) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,group1_id) farray. forall b__first:int. forall b__last:int
+  [bool_eq5(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) and
+  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
+  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) ->
+  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev :
+  (forall a:(int,group1_id) farray. forall b:(int,group1_id) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq5(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) ->
+  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
+
+logic compare : (int,group1_id) farray, int, int, (int,group1_id) farray,
+  int, int -> int
+
+axiom compare_def_eq :
+  (forall a:(int,group1_id) farray. forall b:(int,group1_id) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt :
+  (forall a:(int,group1_id) farray. forall b:(int,group1_id) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt :
+  (forall a:(int,group1_id) farray. forall b:(int,group1_id) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+
+type map__ref1 = { map__content1 : (int,group2_id) farray
+}
+
+logic slide1 : (int,group2_id) farray, int, int -> (int,group2_id) farray
+
+axiom slide_eq1 :
+  (forall a:(int,group2_id) farray.
+  (forall first:int [slide1(a, first, first)]. (slide1(a, first, first) = a)))
+
+axiom slide_def1 :
+  (forall a:(int,group2_id) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat1 : (int,group2_id) farray, int, int, (int,group2_id) farray,
+  int, int -> (int,group2_id) farray
+
+axiom concat_def1 :
+  (forall a:(int,group2_id) farray. forall b:(int,group2_id) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton1 : group2_id, int -> (int,group2_id) farray
+
+axiom singleton_def1 :
+  (forall v:group2_id.
+  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
+
+logic bool_eq6 : (int,group2_id) farray, int, int, (int,group2_id) farray,
+  int, int -> bool
+
+axiom bool_eq_def5 :
+  (forall a:(int,group2_id) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,group2_id) farray. forall b__first:int. forall b__last:int
+  [bool_eq6(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
+  (temp___idx_133 <= a__last)) and
+  (to_rep1((a[temp___idx_133])) = to_rep1((b[((b__first - a__first) + temp___idx_133)])))) or
+  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
+  (temp___idx_133 <= a__last)) ->
+  (to_rep1((a[temp___idx_133])) = to_rep1((b[((b__first - a__first) + temp___idx_133)]))))))) ->
+  (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev1 :
+  (forall a:(int,group2_id) farray. forall b:(int,group2_id) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq6(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
+  (temp___idx_133 <= a__last)) ->
+  (to_rep1((a[temp___idx_133])) = to_rep1((b[((b__first - a__first) + temp___idx_133)])))))))))
+
+logic compare1 : (int,group2_id) farray, int, int, (int,group2_id) farray,
+  int, int -> int
+
+axiom compare_def_eq1 :
+  (forall a:(int,group2_id) farray. forall b:(int,group2_id) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
+  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt1 :
+  (forall a:(int,group2_id) farray. forall b:(int,group2_id) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
+  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_rep1((a[(i + 1)])) <  to_rep1((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt1 :
+  (forall a:(int,group2_id) farray. forall b:(int,group2_id) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_rep1((b[(i + 1)])) <  to_rep1((a[(j + 1)]))))))))))))
+
+logic dummy3 : (int,group2_id) farray
+
+logic value__size : int
+
+logic object__size : (int,group2_id) farray -> int
+
+logic value__component__size : int
+
+logic object__component__size : (int,group2_id) farray -> int
+
+logic value__alignment : int
+
+logic object__alignment : (int,group2_id) farray -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:(int,group2_id) farray. (0 <= object__size(a)))
+
+axiom value__component__size_axiom : (0 <= value__component__size)
+
+axiom object__component__size_axiom :
+  (forall a:(int,group2_id) farray. (0 <= object__component__size(a)))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:(int,group2_id) farray. (0 <= object__alignment(a)))
+
+logic user_eq3 : (int,group2_id) farray, (int,group2_id) farray -> bool
+
+type map__ref2 = { map__content2 : (int,(int,group2_id) farray) farray
+}
+
+logic slide2 : (int,(int,group2_id) farray) farray, int,
+  int -> (int,(int,group2_id) farray) farray
+
+axiom slide_eq2 :
+  (forall a:(int,(int,group2_id) farray) farray.
+  (forall first:int [slide2(a, first, first)]. (slide2(a, first, first) = a)))
+
+axiom slide_def2 :
+  (forall a:(int,(int,group2_id) farray) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide2(a, old_first, new_first)[i])]. ((slide2(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat2 : (int,(int,group2_id) farray) farray, int, int,
+  (int,(int,group2_id) farray) farray, int,
+  int -> (int,(int,group2_id) farray) farray
+
+axiom concat_def2 :
+  (forall a:(int,(int,group2_id) farray) farray.
+  forall b:(int,(int,group2_id) farray) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat2(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat2(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat2(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton2 : (int,group2_id) farray,
+  int -> (int,(int,group2_id) farray) farray
+
+axiom singleton_def2 :
+  (forall v:(int,group2_id) farray.
+  (forall i:int [(singleton2(v, i)[i])]. ((singleton2(v, i)[i]) = v)))
+
+logic bool_eq7 : (int,(int,group2_id) farray) farray, int, int,
+  (int,(int,group2_id) farray) farray, int, int -> bool
+
+axiom bool_eq_def6 :
+  (forall a:(int,(int,group2_id) farray) farray. forall a__first:int.
+  forall a__last:int. forall b:(int,(int,group2_id) farray) farray.
+  forall b__first:int. forall b__last:int [bool_eq7(a, a__first, a__last, b,
+  b__first, b__last)]. ((((((a__first <= a__last) and
+  ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_134:int. ((((a__first <= temp___idx_134) and
+  (temp___idx_134 <= a__last)) and (bool_eq6((a[temp___idx_134]), 1, 64,
+  (b[((b__first - a__first) + temp___idx_134)]), 1, 64) = true)) or
+  (not ((a__first <= temp___idx_134) and (temp___idx_134 <= a__last)))))) ->
+  (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
+  (temp___idx_134 <= a__last)) -> (bool_eq6((a[temp___idx_134]), 1, 64,
+  (b[((b__first - a__first) + temp___idx_134)]), 1, 64) = true))))) ->
+  (bool_eq7(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev2 :
+  (forall a:(int,(int,group2_id) farray) farray.
+  forall b:(int,(int,group2_id) farray) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq7(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_134:int. (((a__first <= temp___idx_134) and
+  (temp___idx_134 <= a__last)) -> (bool_eq6((a[temp___idx_134]), 1, 64,
+  (b[((b__first - a__first) + temp___idx_134)]), 1, 64) = true)))))))
+
+logic dummy4 : (int,group1_id) farray
+
+logic value__size1 : int
+
+logic object__size1 : (int,group1_id) farray -> int
+
+logic value__component__size1 : int
+
+logic object__component__size1 : (int,group1_id) farray -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : (int,group1_id) farray -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 :
+  (forall a:(int,group1_id) farray. (0 <= object__size1(a)))
+
+axiom value__component__size_axiom1 : (0 <= value__component__size1)
+
+axiom object__component__size_axiom1 :
+  (forall a:(int,group1_id) farray. (0 <= object__component__size1(a)))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:(int,group1_id) farray. (0 <= object__alignment1(a)))
+
+logic user_eq4 : (int,group1_id) farray, (int,group1_id) farray -> bool
+
+type map__ref3 = { map__content3 : (int,(int,group1_id) farray) farray
+}
+
+logic slide3 : (int,(int,group1_id) farray) farray, int,
+  int -> (int,(int,group1_id) farray) farray
+
+axiom slide_eq3 :
+  (forall a:(int,(int,group1_id) farray) farray.
+  (forall first:int [slide3(a, first, first)]. (slide3(a, first, first) = a)))
+
+axiom slide_def3 :
+  (forall a:(int,(int,group1_id) farray) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide3(a, old_first, new_first)[i])]. ((slide3(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat3 : (int,(int,group1_id) farray) farray, int, int,
+  (int,(int,group1_id) farray) farray, int,
+  int -> (int,(int,group1_id) farray) farray
+
+axiom concat_def3 :
+  (forall a:(int,(int,group1_id) farray) farray.
+  forall b:(int,(int,group1_id) farray) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat3(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat3(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat3(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton3 : (int,group1_id) farray,
+  int -> (int,(int,group1_id) farray) farray
+
+axiom singleton_def3 :
+  (forall v:(int,group1_id) farray.
+  (forall i:int [(singleton3(v, i)[i])]. ((singleton3(v, i)[i]) = v)))
+
+logic bool_eq8 : (int,(int,group1_id) farray) farray, int, int,
+  (int,(int,group1_id) farray) farray, int, int -> bool
+
+axiom bool_eq_def7 :
+  (forall a:(int,(int,group1_id) farray) farray. forall a__first:int.
+  forall a__last:int. forall b:(int,(int,group1_id) farray) farray.
+  forall b__first:int. forall b__last:int [bool_eq8(a, a__first, a__last, b,
+  b__first, b__last)]. ((((((a__first <= a__last) and
+  ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_135:int. ((((a__first <= temp___idx_135) and
+  (temp___idx_135 <= a__last)) and (bool_eq5((a[temp___idx_135]), 1, 64,
+  (b[((b__first - a__first) + temp___idx_135)]), 1, 64) = true)) or
+  (not ((a__first <= temp___idx_135) and (temp___idx_135 <= a__last)))))) ->
+  (bool_eq8(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_135:int. (((a__first <= temp___idx_135) and
+  (temp___idx_135 <= a__last)) -> (bool_eq5((a[temp___idx_135]), 1, 64,
+  (b[((b__first - a__first) + temp___idx_135)]), 1, 64) = true))))) ->
+  (bool_eq8(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev3 :
+  (forall a:(int,(int,group1_id) farray) farray.
+  forall b:(int,(int,group1_id) farray) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq8(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_135:int. (((a__first <= temp___idx_135) and
+  (temp___idx_135 <= a__last)) -> (bool_eq5((a[temp___idx_135]), 1, 64,
+  (b[((b__first - a__first) + temp___idx_135)]), 1, 64) = true)))))))
+
+logic is_permutation_1 : (int,group1_id) farray -> bool
+
+logic is_permutation_1__function_guard : bool, (int,group1_id) farray -> prop
+
+axiom is_permutation_1__post_axiom :
+  (forall r1:(int,group1_id) farray [is_permutation_1(r1)].
+  ((is_permutation_1(r1) = true) <->
+  (forall g1:int. (((1 <= g1) and (g1 <= 64)) ->
+  (exists rank:int. (((1 <= rank) and (rank <= 64)) and
+  (to_rep((r1[rank])) = g1)))))))
+
+type map__ref4 = { map__content4 : (int,ranking) farray
+}
+
+logic slide4 : (int,ranking) farray, int, int -> (int,ranking) farray
+
+axiom slide_eq4 :
+  (forall a:(int,ranking) farray.
+  (forall first:int [slide4(a, first, first)]. (slide4(a, first, first) = a)))
+
+axiom slide_def4 :
+  (forall a:(int,ranking) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide4(a, old_first, new_first)[i])]. ((slide4(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat4 : (int,ranking) farray, int, int, (int,ranking) farray, int,
+  int -> (int,ranking) farray
+
+axiom concat_def4 :
+  (forall a:(int,ranking) farray. forall b:(int,ranking) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat4(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat4(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat4(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton4 : ranking, int -> (int,ranking) farray
+
+axiom singleton_def4 :
+  (forall v:ranking.
+  (forall i:int [(singleton4(v, i)[i])]. ((singleton4(v, i)[i]) = v)))
+
+logic bool_eq9 : (int,ranking) farray, int, int, (int,ranking) farray, int,
+  int -> bool
+
+axiom bool_eq_def8 :
+  (forall a:(int,ranking) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,ranking) farray. forall b__first:int. forall b__last:int
+  [bool_eq9(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_136:int. ((((a__first <= temp___idx_136) and
+  (temp___idx_136 <= a__last)) and
+  (to_rep2((a[temp___idx_136])) = to_rep2((b[((b__first - a__first) + temp___idx_136)])))) or
+  (not ((a__first <= temp___idx_136) and (temp___idx_136 <= a__last)))))) ->
+  (bool_eq9(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_136:int. (((a__first <= temp___idx_136) and
+  (temp___idx_136 <= a__last)) ->
+  (to_rep2((a[temp___idx_136])) = to_rep2((b[((b__first - a__first) + temp___idx_136)]))))))) ->
+  (bool_eq9(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev4 :
+  (forall a:(int,ranking) farray. forall b:(int,ranking) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq9(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_136:int. (((a__first <= temp___idx_136) and
+  (temp___idx_136 <= a__last)) ->
+  (to_rep2((a[temp___idx_136])) = to_rep2((b[((b__first - a__first) + temp___idx_136)])))))))))
+
+logic compare2 : (int,ranking) farray, int, int, (int,ranking) farray, int,
+  int -> int
+
+axiom compare_def_eq2 :
+  (forall a:(int,ranking) farray. forall b:(int,ranking) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare2(a, a_first, a_last, b, b_first, b_last)].
+  ((compare2(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq9(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt2 :
+  (forall a:(int,ranking) farray. forall b:(int,ranking) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare2(a, a_first, a_last, b, b_first, b_last)].
+  ((compare2(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq9(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_rep2((a[(i + 1)])) <  to_rep2((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt2 :
+  (forall a:(int,ranking) farray. forall b:(int,ranking) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare2(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare2(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq9(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_rep2((b[(i + 1)])) <  to_rep2((a[(j + 1)]))))))))))))
+
+logic is_preferred_1 : int, int, (int,group1_id) farray -> bool
+
+logic is_preferred_1__function_guard : bool, int, int,
+  (int,group1_id) farray -> prop
+
+logic invert_1 : (int,group1_id) farray -> (int,ranking) farray
+
+logic invert_1__function_guard : (int,ranking) farray,
+  (int,group1_id) farray -> prop
+
+axiom is_preferred_1__post_axiom :
+  (forall g1_a:int. forall g1_b:int.
+  (forall r1:(int,group1_id) farray [is_preferred_1(g1_a, g1_b, r1)].
+  (((in_range1(g1_a) and in_range1(g1_b)) and
+  (is_permutation_1(r1) = true)) -> ((is_preferred_1(g1_a, g1_b,
+  r1) = true) <->
+  (to_rep2((invert_1(r1)[g1_a])) <= to_rep2((invert_1(r1)[g1_b])))))))
+
+logic ranking_1 : (int,(int,group2_id) farray) farray
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic ranking_2 : (int,(int,group1_id) farray) farray
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+type map__ref5 = { map__content5 : (int,bool) farray
+}
+
+logic slide5 : (int,bool) farray, int, int -> (int,bool) farray
+
+axiom slide_eq5 :
+  (forall a:(int,bool) farray.
+  (forall first:int [slide5(a, first, first)]. (slide5(a, first, first) = a)))
+
+axiom slide_def5 :
+  (forall a:(int,bool) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide5(a, old_first, new_first)[i])]. ((slide5(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat5 : (int,bool) farray, int, int, (int,bool) farray, int,
+  int -> (int,bool) farray
+
+axiom concat_def5 :
+  (forall a:(int,bool) farray. forall b:(int,bool) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat5(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat5(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat5(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton5 : bool, int -> (int,bool) farray
+
+axiom singleton_def5 :
+  (forall v:bool.
+  (forall i:int [(singleton5(v, i)[i])]. ((singleton5(v, i)[i]) = v)))
+
+logic bool_eq10 : (int,bool) farray, int, int, (int,bool) farray, int,
+  int -> bool
+
+axiom bool_eq_def9 :
+  (forall a:(int,bool) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,bool) farray. forall b__first:int. forall b__last:int
+  [bool_eq10(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_137:int. ((((a__first <= temp___idx_137) and
+  (temp___idx_137 <= a__last)) and
+  ((a[temp___idx_137]) = (b[((b__first - a__first) + temp___idx_137)]))) or
+  (not ((a__first <= temp___idx_137) and (temp___idx_137 <= a__last)))))) ->
+  (bool_eq10(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_137:int. (((a__first <= temp___idx_137) and
+  (temp___idx_137 <= a__last)) ->
+  ((a[temp___idx_137]) = (b[((b__first - a__first) + temp___idx_137)])))))) ->
+  (bool_eq10(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev5 :
+  (forall a:(int,bool) farray. forall b:(int,bool) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq10(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_137:int. (((a__first <= temp___idx_137) and
+  (temp___idx_137 <= a__last)) ->
+  ((a[temp___idx_137]) = (b[((b__first - a__first) + temp___idx_137)]))))))))
+
+logic compare3 : (int,bool) farray, int, int, (int,bool) farray, int,
+  int -> int
+
+axiom compare_def_eq3 :
+  (forall a:(int,bool) farray. forall b:(int,bool) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare3(a, a_first, a_last, b, b_first, b_last)].
+  ((compare3(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq10(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt3 :
+  (forall a:(int,bool) farray. forall b:(int,bool) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare3(a, a_first, a_last, b, b_first, b_last)].
+  ((compare3(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq10(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_int((a[(i + 1)])) <  to_int((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt3 :
+  (forall a:(int,bool) farray. forall b:(int,bool) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare3(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare3(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq10(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_int((b[(i + 1)])) <  to_int((a[(j + 1)]))))))))))))
+
+logic xorb1 : (int,bool) farray, int, int, (int,bool) farray, int,
+  int -> (int,bool) farray
+
+logic andb1 : (int,bool) farray, int, int, (int,bool) farray, int,
+  int -> (int,bool) farray
+
+logic orb1 : (int,bool) farray, int, int, (int,bool) farray, int,
+  int -> (int,bool) farray
+
+logic notb1 : (int,bool) farray, int, int -> (int,bool) farray
+
+axiom op_def :
+  (forall a:(int,bool) farray. forall b:(int,bool) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(orb1(a, a_first, a_last, b, b_first, b_last)[i])].
+  (((a_first <= i) and (i <= a_last)) -> ((orb1(a, a_first, a_last, b,
+  b_first, b_last)[i]) = match_bool((a[i]), true,
+  (b[((i - a_first) + b_first)])))))))
+
+axiom op_def1 :
+  (forall a:(int,bool) farray. forall b:(int,bool) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(andb1(a, a_first, a_last, b, b_first, b_last)[i])].
+  (((a_first <= i) and (i <= a_last)) -> ((andb1(a, a_first, a_last, b,
+  b_first, b_last)[i]) = match_bool((a[i]), (b[((i - a_first) + b_first)]),
+  false))))))
+
+axiom op_def2 :
+  (forall a:(int,bool) farray. forall b:(int,bool) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(xorb1(a, a_first, a_last, b, b_first, b_last)[i])].
+  (((a_first <= i) and (i <= a_last)) -> ((xorb1(a, a_first, a_last, b,
+  b_first, b_last)[i]) = xorb((a[i]), (b[((i - a_first) + b_first)])))))))
+
+axiom notb_def :
+  (forall a:(int,bool) farray.
+  (forall a_first:int. forall a_last:int.
+  (forall i:int [(notb1(a, a_first, a_last)[i])]. (((a_first <= i) and
+  (i <= a_last)) -> ((notb1(a, a_first, a_last)[i]) = match_bool((a[i]),
+  false, true))))))
+
+logic dummy5 : (int,ranking) farray
+
+logic value__size2 : int
+
+logic object__size2 : (int,ranking) farray -> int
+
+logic value__component__size2 : int
+
+logic object__component__size2 : (int,ranking) farray -> int
+
+logic value__alignment2 : int
+
+logic object__alignment2 : (int,ranking) farray -> int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 :
+  (forall a:(int,ranking) farray. (0 <= object__size2(a)))
+
+axiom value__component__size_axiom2 : (0 <= value__component__size2)
+
+axiom object__component__size_axiom2 :
+  (forall a:(int,ranking) farray. (0 <= object__component__size2(a)))
+
+axiom value__alignment_axiom2 : (0 <= value__alignment2)
+
+axiom object__alignment_axiom2 :
+  (forall a:(int,ranking) farray. (0 <= object__alignment2(a)))
+
+logic user_eq5 : (int,ranking) farray, (int,ranking) farray -> bool
+
+type map__ref6 = { map__content6 : (int,(int,ranking) farray) farray
+}
+
+logic slide6 : (int,(int,ranking) farray) farray, int,
+  int -> (int,(int,ranking) farray) farray
+
+axiom slide_eq6 :
+  (forall a:(int,(int,ranking) farray) farray.
+  (forall first:int [slide6(a, first, first)]. (slide6(a, first, first) = a)))
+
+axiom slide_def6 :
+  (forall a:(int,(int,ranking) farray) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide6(a, old_first, new_first)[i])]. ((slide6(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat6 : (int,(int,ranking) farray) farray, int, int,
+  (int,(int,ranking) farray) farray, int,
+  int -> (int,(int,ranking) farray) farray
+
+axiom concat_def6 :
+  (forall a:(int,(int,ranking) farray) farray.
+  forall b:(int,(int,ranking) farray) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat6(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat6(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat6(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton6 : (int,ranking) farray,
+  int -> (int,(int,ranking) farray) farray
+
+axiom singleton_def6 :
+  (forall v:(int,ranking) farray.
+  (forall i:int [(singleton6(v, i)[i])]. ((singleton6(v, i)[i]) = v)))
+
+logic bool_eq11 : (int,(int,ranking) farray) farray, int, int,
+  (int,(int,ranking) farray) farray, int, int -> bool
+
+axiom bool_eq_def10 :
+  (forall a:(int,(int,ranking) farray) farray. forall a__first:int.
+  forall a__last:int. forall b:(int,(int,ranking) farray) farray.
+  forall b__first:int. forall b__last:int [bool_eq11(a, a__first, a__last, b,
+  b__first, b__last)]. ((((((a__first <= a__last) and
+  ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_138:int. ((((a__first <= temp___idx_138) and
+  (temp___idx_138 <= a__last)) and (bool_eq9((a[temp___idx_138]), 1, 64,
+  (b[((b__first - a__first) + temp___idx_138)]), 1, 64) = true)) or
+  (not ((a__first <= temp___idx_138) and (temp___idx_138 <= a__last)))))) ->
+  (bool_eq11(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_138:int. (((a__first <= temp___idx_138) and
+  (temp___idx_138 <= a__last)) -> (bool_eq9((a[temp___idx_138]), 1, 64,
+  (b[((b__first - a__first) + temp___idx_138)]), 1, 64) = true))))) ->
+  (bool_eq11(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev6 :
+  (forall a:(int,(int,ranking) farray) farray.
+  forall b:(int,(int,ranking) farray) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq11(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_138:int. (((a__first <= temp___idx_138) and
+  (temp___idx_138 <= a__last)) -> (bool_eq9((a[temp___idx_138]), 1, 64,
+  (b[((b__first - a__first) + temp___idx_138)]), 1, 64) = true)))))))
+
+type count
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 64))
+
+logic bool_eq12 : int, int -> bool
+
+axiom bool_eq_def11 :
+  (forall x:int. forall y:int [bool_eq12(x, y)]. (((x = y) -> (bool_eq12(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq12(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq6 : count, count -> bool
+
+logic dummy6 : count
+
+type count__ref = { count__content : count
+}
+
+function count__ref___projection(a: count__ref) : count = (a).count__content
+
+logic to_rep3 : count -> int
+
+logic of_rep3 : int -> count
+
+axiom inversion_axiom3 :
+  (forall x:count [to_rep3(x)]. (of_rep3(to_rep3(x)) = x))
+
+axiom range_axiom3 : (forall x:count [to_rep3(x)]. in_range4(to_rep3(x)))
+
+axiom coerce_axiom3 :
+  (forall x:int [to_rep3(of_rep3(x))]. (in_range4(x) ->
+  (to_rep3(of_rep3(x)) = x)))
+
+type index
+
+predicate in_range5(x: int) = ((1 <= x) and (x <= 64))
+
+logic bool_eq13 : int, int -> bool
+
+axiom bool_eq_def12 :
+  (forall x:int. forall y:int [bool_eq13(x, y)]. (((x = y) -> (bool_eq13(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq13(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> int
+
+logic user_eq7 : index, index -> bool
+
+logic dummy7 : index
+
+type index__ref = { index__content : index
+}
+
+function index__ref___projection(a: index__ref) : index = (a).index__content
+
+type map__ref7 = { map__content7 : (int,count) farray
+}
+
+logic slide7 : (int,count) farray, int, int -> (int,count) farray
+
+axiom slide_eq7 :
+  (forall a:(int,count) farray.
+  (forall first:int [slide7(a, first, first)]. (slide7(a, first, first) = a)))
+
+axiom slide_def7 :
+  (forall a:(int,count) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide7(a, old_first, new_first)[i])]. ((slide7(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat7 : (int,count) farray, int, int, (int,count) farray, int,
+  int -> (int,count) farray
+
+axiom concat_def7 :
+  (forall a:(int,count) farray. forall b:(int,count) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat7(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat7(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat7(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton7 : count, int -> (int,count) farray
+
+axiom singleton_def7 :
+  (forall v:count.
+  (forall i:int [(singleton7(v, i)[i])]. ((singleton7(v, i)[i]) = v)))
+
+logic bool_eq14 : (int,count) farray, int, int, (int,count) farray, int,
+  int -> bool
+
+axiom bool_eq_def13 :
+  (forall a:(int,count) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,count) farray. forall b__first:int. forall b__last:int
+  [bool_eq14(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_139:int. ((((a__first <= temp___idx_139) and
+  (temp___idx_139 <= a__last)) and
+  (to_rep3((a[temp___idx_139])) = to_rep3((b[((b__first - a__first) + temp___idx_139)])))) or
+  (not ((a__first <= temp___idx_139) and (temp___idx_139 <= a__last)))))) ->
+  (bool_eq14(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_139:int. (((a__first <= temp___idx_139) and
+  (temp___idx_139 <= a__last)) ->
+  (to_rep3((a[temp___idx_139])) = to_rep3((b[((b__first - a__first) + temp___idx_139)]))))))) ->
+  (bool_eq14(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev7 :
+  (forall a:(int,count) farray. forall b:(int,count) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq14(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_139:int. (((a__first <= temp___idx_139) and
+  (temp___idx_139 <= a__last)) ->
+  (to_rep3((a[temp___idx_139])) = to_rep3((b[((b__first - a__first) + temp___idx_139)])))))))))
+
+logic compare4 : (int,count) farray, int, int, (int,count) farray, int,
+  int -> int
+
+axiom compare_def_eq4 :
+  (forall a:(int,count) farray. forall b:(int,count) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare4(a, a_first, a_last, b, b_first, b_last)].
+  ((compare4(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq14(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt4 :
+  (forall a:(int,count) farray. forall b:(int,count) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare4(a, a_first, a_last, b, b_first, b_last)].
+  ((compare4(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq14(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_rep3((a[(i + 1)])) <  to_rep3((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt4 :
+  (forall a:(int,count) farray. forall b:(int,count) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare4(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare4(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq14(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_rep3((b[(i + 1)])) <  to_rep3((a[(j + 1)]))))))))))))
+
+logic dummy8 : (int,group1_id) farray
+
+logic value__size3 : int
+
+logic object__size3 : (int,group1_id) farray -> int
+
+logic value__component__size3 : int
+
+logic object__component__size3 : (int,group1_id) farray -> int
+
+logic value__alignment3 : int
+
+logic object__alignment3 : (int,group1_id) farray -> int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 :
+  (forall a:(int,group1_id) farray. (0 <= object__size3(a)))
+
+axiom value__component__size_axiom3 : (0 <= value__component__size3)
+
+axiom object__component__size_axiom3 :
+  (forall a:(int,group1_id) farray. (0 <= object__component__size3(a)))
+
+axiom value__alignment_axiom3 : (0 <= value__alignment3)
+
+axiom object__alignment_axiom3 :
+  (forall a:(int,group1_id) farray. (0 <= object__alignment3(a)))
+
+logic user_eq8 : (int,group1_id) farray, (int,group1_id) farray -> bool
+
+type us_split_fields = { rec__stable_marriage__matching__group1_set__elements
+: (int,group1_id) farray;
+rec__stable_marriage__matching__group1_set__cardinality : count
+}
+
+function us_split_fields_Elements__projection(a: us_split_fields) : (int,group1_id) farray =
+  (a).rec__stable_marriage__matching__group1_set__elements
+
+function us_split_fields_Cardinality__projection(a: us_split_fields) : count =
+  (a).rec__stable_marriage__matching__group1_set__cardinality
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+function us_rep___projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+logic bool_eq15 : us_rep, us_rep -> bool
+
+axiom bool_eq_def14 :
+  (forall a:us_rep. forall b:us_rep [bool_eq15(a, b)].
+  ((((bool_eq5(((a).us_split_fields1).rec__stable_marriage__matching__group1_set__elements,
+  1, 64,
+  ((b).us_split_fields1).rec__stable_marriage__matching__group1_set__elements,
+  1, 64) = true) and
+  (to_rep3(((a).us_split_fields1).rec__stable_marriage__matching__group1_set__cardinality) = to_rep3(((b).us_split_fields1).rec__stable_marriage__matching__group1_set__cardinality))) ->
+  (bool_eq15(a, b) = true)) and
+  ((not ((bool_eq5(((a).us_split_fields1).rec__stable_marriage__matching__group1_set__elements,
+  1, 64,
+  ((b).us_split_fields1).rec__stable_marriage__matching__group1_set__elements,
+  1, 64) = true) and
+  (to_rep3(((a).us_split_fields1).rec__stable_marriage__matching__group1_set__cardinality) = to_rep3(((b).us_split_fields1).rec__stable_marriage__matching__group1_set__cardinality)))) ->
+  (bool_eq15(a, b) = false))))
+
+logic value__size4 : int
+
+logic object__size4 : us_rep -> int
+
+logic value__alignment4 : int
+
+logic object__alignment4 : us_rep -> int
+
+axiom value__size_axiom4 : (0 <= value__size4)
+
+axiom object__size_axiom4 :
+  (forall a:(int,group1_id) farray. forall a1:count. (0 <= object__size4({
+  us_split_fields1 = { rec__stable_marriage__matching__group1_set__elements =
+  a; rec__stable_marriage__matching__group1_set__cardinality = a1 } })))
+
+axiom value__alignment_axiom4 : (0 <= value__alignment4)
+
+axiom object__alignment_axiom4 :
+  (forall a:(int,group1_id) farray. forall a1:count.
+  (0 <= object__alignment4({ us_split_fields1 = {
+  rec__stable_marriage__matching__group1_set__elements = a;
+  rec__stable_marriage__matching__group1_set__cardinality = a1 } })))
+
+logic stable_marriage__matching__group1_set__elements__first__bit : int
+
+logic stable_marriage__matching__group1_set__elements__last__bit : int
+
+logic stable_marriage__matching__group1_set__elements__position : int
+
+axiom stable_marriage__matching__group1_set__elements__first__bit_axiom :
+  (0 <= stable_marriage__matching__group1_set__elements__first__bit)
+
+axiom stable_marriage__matching__group1_set__elements__last__bit_axiom :
+  (stable_marriage__matching__group1_set__elements__first__bit <  stable_marriage__matching__group1_set__elements__last__bit)
+
+axiom stable_marriage__matching__group1_set__elements__position_axiom :
+  (0 <= stable_marriage__matching__group1_set__elements__position)
+
+logic stable_marriage__matching__group1_set__cardinality__first__bit : int
+
+logic stable_marriage__matching__group1_set__cardinality__last__bit : int
+
+logic stable_marriage__matching__group1_set__cardinality__position : int
+
+axiom stable_marriage__matching__group1_set__cardinality__first__bit_axiom :
+  (0 <= stable_marriage__matching__group1_set__cardinality__first__bit)
+
+axiom stable_marriage__matching__group1_set__cardinality__last__bit_axiom :
+  (stable_marriage__matching__group1_set__cardinality__first__bit <  stable_marriage__matching__group1_set__cardinality__last__bit)
+
+axiom stable_marriage__matching__group1_set__cardinality__position_axiom :
+  (0 <= stable_marriage__matching__group1_set__cardinality__position)
+
+logic user_eq9 : us_rep, us_rep -> bool
+
+logic dummy9 : (int,group1_id) farray
+
+logic dummy10 : count
+
+type group1_set__ref = { group1_set__content : us_rep
+}
+
+function group1_set__ref___projection(a: group1_set__ref) : us_rep =
+  (a).group1_set__content
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
+logic attr__ATTRIBUTE_ADDRESS6 : int
+
+logic invert : (int,(int,group1_id) farray) farray -> (int,(int,ranking) farray) farray
+
+logic invert__function_guard : (int,(int,ranking) farray) farray,
+  (int,(int,group1_id) farray) farray -> prop
+
+axiom invert__post_axiom :
+  (forall r2:(int,(int,group1_id) farray) farray [invert(r2)].
+  ((forall g2:int. (((1 <= g2) and (g2 <= 64)) ->
+   (is_permutation_1((r2[g2])) = true))) ->
+  (forall g2:int. (((1 <= g2) and (g2 <= 64)) -> (bool_eq9((invert(r2)[g2]),
+  1, 64, invert_1((r2[g2])), 1, 64) = true)))))
+
+logic all_unmatched_g1_set_elements_distinct : us_split_fields -> bool
+
+logic all_unmatched_g1_set_elements_distinct__function_guard : bool,
+  us_split_fields -> prop
+
+axiom all_unmatched_g1_set_elements_distinct__post_axiom : true
+
+axiom all_unmatched_g1_set_elements_distinct__def_axiom :
+  (forall stable_marriage__matching__unmatched_g1_set__fields:(int,group1_id) farray.
+  forall stable_marriage__matching__unmatched_g1_set__fields1:count
+  [all_unmatched_g1_set_elements_distinct({
+  rec__stable_marriage__matching__group1_set__elements =
+  stable_marriage__matching__unmatched_g1_set__fields;
+  rec__stable_marriage__matching__group1_set__cardinality =
+  stable_marriage__matching__unmatched_g1_set__fields1 })].
+  ((all_unmatched_g1_set_elements_distinct({
+  rec__stable_marriage__matching__group1_set__elements =
+  stable_marriage__matching__unmatched_g1_set__fields;
+  rec__stable_marriage__matching__group1_set__cardinality =
+  stable_marriage__matching__unmatched_g1_set__fields1 }) = true) <->
+  (forall idx_1:int. (((1 <= idx_1) and
+  (idx_1 <= to_rep3(stable_marriage__matching__unmatched_g1_set__fields1))) ->
+  (forall idx_2:int. (((1 <= idx_2) and
+  (idx_2 <= to_rep3(stable_marriage__matching__unmatched_g1_set__fields1))) ->
+  ((not (idx_1 = idx_2)) ->
+  (not (to_rep((stable_marriage__matching__unmatched_g1_set__fields[idx_1])) = to_rep((stable_marriage__matching__unmatched_g1_set__fields[idx_2])))))))))))
+
+logic invariant_holds : us_split_fields, (int,count) farray,
+  (int,group1_id) farray, (int,bool) farray -> bool
+
+logic invariant_holds__function_guard : bool, us_split_fields,
+  (int,count) farray, (int,group1_id) farray, (int,bool) farray -> prop
+
+axiom invariant_holds__post_axiom : true
+
+axiom invariant_holds__def_axiom :
+  (forall stable_marriage__matching__unmatched_g1_set__fields:(int,group1_id) farray.
+  forall stable_marriage__matching__unmatched_g1_set__fields1:count.
+  (forall stable_marriage__matching__proposals_made:(int,count) farray.
+  (forall stable_marriage__matching__result:(int,group1_id) farray.
+  (forall stable_marriage__matching__unmatched_g2_set:(int,bool) farray
+  [invariant_holds({ rec__stable_marriage__matching__group1_set__elements =
+  stable_marriage__matching__unmatched_g1_set__fields;
+  rec__stable_marriage__matching__group1_set__cardinality =
+  stable_marriage__matching__unmatched_g1_set__fields1 },
+  stable_marriage__matching__proposals_made,
+  stable_marriage__matching__result,
+  stable_marriage__matching__unmatched_g2_set)]. ((invariant_holds({
+  rec__stable_marriage__matching__group1_set__elements =
+  stable_marriage__matching__unmatched_g1_set__fields;
+  rec__stable_marriage__matching__group1_set__cardinality =
+  stable_marriage__matching__unmatched_g1_set__fields1 },
+  stable_marriage__matching__proposals_made,
+  stable_marriage__matching__result,
+  stable_marriage__matching__unmatched_g2_set) = true) <->
+  ((forall g2:int. (((1 <= g2) and (g2 <= 64)) ->
+   (is_permutation_1((ranking_2[g2])) = true))) and
+  ((((((all_unmatched_g1_set_elements_distinct({
+  rec__stable_marriage__matching__group1_set__elements =
+  stable_marriage__matching__unmatched_g1_set__fields;
+  rec__stable_marriage__matching__group1_set__cardinality =
+  stable_marriage__matching__unmatched_g1_set__fields1 }) = true) and
+  (forall g2_id:int. (((1 <= g2_id) and (g2_id <= 64)) ->
+  ((not ((stable_marriage__matching__unmatched_g2_set[g2_id]) = true)) ->
+  (forall idx:int. (((1 <= idx) and
+  (idx <= to_rep3(stable_marriage__matching__unmatched_g1_set__fields1))) ->
+  (not (to_rep((stable_marriage__matching__unmatched_g1_set__fields[idx])) = to_rep((stable_marriage__matching__result[g2_id])))))))))) and
+  (forall g21_id:int. (((1 <= g21_id) and (g21_id <= 64)) ->
+  (forall g22_id:int. (((1 <= g22_id) and (g22_id <= 64)) ->
+  ((((not ((stable_marriage__matching__unmatched_g2_set[g21_id]) = true)) and
+  (not ((stable_marriage__matching__unmatched_g2_set[g22_id]) = true))) and
+  (not (g21_id = g22_id))) ->
+  (not (to_rep((stable_marriage__matching__result[g21_id])) = to_rep((stable_marriage__matching__result[g22_id])))))))))) and
+  (forall g1_id:int. (((1 <= g1_id) and (g1_id <= 64)) ->
+  (forall rank:int. (((1 <= rank) and
+  (rank <= to_rep3((stable_marriage__matching__proposals_made[g1_id])))) ->
+  ((not ((stable_marriage__matching__unmatched_g2_set[to_rep1(((ranking_1[g1_id])[rank]))]) = true)) and
+  ((not (to_rep((stable_marriage__matching__result[to_rep1(((ranking_1[g1_id])[rank]))])) = g1_id)) ->
+  (not (is_preferred_1(g1_id,
+  to_rep((stable_marriage__matching__result[to_rep1(((ranking_1[g1_id])[rank]))])),
+  (ranking_2[to_rep1(((ranking_1[g1_id])[rank]))])) = true))))))))) and
+  (forall g1_id:int. (((1 <= g1_id) and (g1_id <= 64)) ->
+  ((to_rep3((stable_marriage__matching__proposals_made[g1_id])) = 0) ->
+  (exists idx:int. (((1 <= idx) and
+  (idx <= to_rep3(stable_marriage__matching__unmatched_g1_set__fields1))) and
+  (to_rep((stable_marriage__matching__unmatched_g1_set__fields[idx])) = g1_id))))))) and
+  (forall g1_id:int. (((1 <= g1_id) and (g1_id <= 64)) ->
+  ((forall idx:int. (((1 <= idx) and
+   (idx <= to_rep3(stable_marriage__matching__unmatched_g1_set__fields1))) ->
+   (not (to_rep((stable_marriage__matching__unmatched_g1_set__fields[idx])) = g1_id)))) ->
+  ((0 <  to_rep3((stable_marriage__matching__proposals_made[g1_id]))) and
+  (to_rep((stable_marriage__matching__result[to_rep1(((ranking_1[g1_id])[to_rep3((stable_marriage__matching__proposals_made[g1_id]))]))])) = g1_id))))))))))))
+
+logic attr__ATTRIBUTE_ADDRESS7 : int
+
+logic attr__ATTRIBUTE_ADDRESS8 : int
+
+logic attr__ATTRIBUTE_ADDRESS9 : int
+
+logic attr__ATTRIBUTE_ADDRESS10 : int
+
+logic attr__ATTRIBUTE_ADDRESS11 : int
+
+logic c132b : int
+
+logic attr__ATTRIBUTE_ADDRESS12 : int
+
+logic c134b : int
+
+logic attr__ATTRIBUTE_ADDRESS13 : int
+
+axiom invert_1__post_axiom :
+  (forall r1:(int,group1_id) farray [invert_1(r1)].
+  ((is_permutation_1(r1) = true) ->
+  ((forall rank:int. (((1 <= rank) and (rank <= 64)) ->
+   (to_rep2((invert_1(r1)[to_rep((r1[rank]))])) = rank))) and
+  (forall g1:int. (((1 <= g1) and (g1 <= 64)) ->
+  (to_rep((r1[to_rep2((invert_1(r1)[g1]))])) = g1))))))
+
+ (* File "stable_marriage.adb", line 194, characters 0-0 *)
+goal WP_parameter_def :
+  (forall ranking_2_inverted:(int,(int,ranking) farray) farray.
+  forall proposals_made:(int,count) farray.
+  forall unmatched_g1_set__split_fields:(int,group1_id) farray.
+  forall unmatched_g1_set__split_fields1:count.
+  forall unmatched_g2_set:(int,bool) farray.
+  forall result__:(int,group1_id) farray. forall g1:int. forall g2:int.
+  forall accepted:bool. forall rank:int. forall already_asked:int.
+  forall o:int. forall o1:group1_id. forall o2:int. forall o3:int.
+  forall o4:count. forall o5:(int,group1_id) farray. forall o6:count.
+  forall temp___586:(int,group1_id) farray. forall temp___5861:count.
+  forall o7:int. forall o8:int. forall o9:int. forall o10:int.
+  forall o11:count. forall o12:(int,count) farray. forall o13:int.
+  forall o14:count. forall o15:(int,group1_id) farray. forall o16:count.
+  forall temp___603:(int,group1_id) farray. forall temp___6031:count.
+  forall o17:group1_id. forall o18:int. forall o19:(int,group1_id) farray.
+  forall o20:(int,group1_id) farray. forall o21:count.
+  forall temp___607:(int,group1_id) farray. forall temp___6071:count.
+  forall o22:int. forall o23:count. forall o24:(int,group1_id) farray.
+  forall o25:count. forall temp___595:(int,group1_id) farray.
+  forall temp___5951:count. forall o26:group1_id. forall o27:int.
+  forall o28:(int,group1_id) farray. forall o29:(int,group1_id) farray.
+  forall o30:count. forall temp___599:(int,group1_id) farray.
+  forall temp___5991:count. forall o31:group1_id.
+  forall o32:(int,group1_id) farray. forall g2_id:int.
+  forall unmatched_g2_set1:(int,bool) farray.
+  forall result__1:(int,group1_id) farray. forall result:int.
+  forall rank1:int. forall result1:int. forall g11:int.
+  forall result2:(int,group1_id) farray. forall result3:count.
+  forall unmatched_g1_set__split_fields2:(int,group1_id) farray.
+  forall unmatched_g1_set__split_fields3:count. forall result4:int.
+  forall already_asked1:int. forall result5:int. forall rank2:int.
+  forall result6:int. forall g21:int. forall result7:(int,count) farray.
+  forall proposals_made1:(int,count) farray. forall result8:bool.
+  forall accepted1:bool. forall result9:(int,bool) farray.
+  forall unmatched_g2_set2:(int,bool) farray. forall result10:bool.
+  forall accepted2:bool. forall result11:(int,group1_id) farray.
+  forall result12:count.
+  forall unmatched_g1_set__split_fields4:(int,group1_id) farray.
+  forall unmatched_g1_set__split_fields5:count.
+  forall result13:(int,group1_id) farray. forall result14:count.
+  forall unmatched_g1_set__split_fields6:us_split_fields.
+  forall result15:bool__ref. forall accepted3:bool.
+  forall result16:us_split_fields__ref.
+  forall unmatched_g1_set__split_fields7:us_split_fields.
+  forall result17:us_split_fields__ref.
+  forall unmatched_g1_set__split_fields8:us_split_fields.
+  forall result18:map__ref. forall result__2:(int,group1_id) farray.
+  (((forall g22:int. (((1 <= g22) and (g22 <= 64)) ->
+    (is_permutation_1((ranking_2[g22])) = true))) and
+  ((bool_eq11(invert(ranking_2), 1, 64, ranking_2_inverted, 1,
+  64) = true) and ((invariant_holds({
+  rec__stable_marriage__matching__group1_set__elements =
+  unmatched_g1_set__split_fields;
+  rec__stable_marriage__matching__group1_set__cardinality =
+  unmatched_g1_set__split_fields1 }, proposals_made, result__,
+  unmatched_g2_set) = true) and
+  (0 <  to_rep3(unmatched_g1_set__split_fields1))))) -> (((1 <= 64) ->
+  in_range1(g1)) -> (((1 <= 64) -> in_range2(g2)) -> (((result = rank) and
+  (rank1 = 1)) -> (in_range3(rank1) -> (((0 <= 64) ->
+  in_range4(already_asked)) ->
+  (((((((1 <= to_rep3(unmatched_g1_set__split_fields1)) and
+  (to_rep3(unmatched_g1_set__split_fields1) <= 64)) and
+  (o = to_rep3(unmatched_g1_set__split_fields1))) and
+  (o1 = (unmatched_g1_set__split_fields[o]))) and (o2 = to_rep(o1))) and
+  ((result1 = g1) and (g11 = o2))) ->
+  (((((((o3 = (to_rep3(unmatched_g1_set__split_fields1) - 1)) and
+  in_range4((to_rep3(unmatched_g1_set__split_fields1) - 1))) and
+  (to_rep3(o4) = o3)) and ((unmatched_g1_set__split_fields = o5) and
+  (o4 = o6))) and ((temp___586 = o5) and (temp___5861 = o6))) and
+  (((result2 = unmatched_g1_set__split_fields) and
+  (result3 = unmatched_g1_set__split_fields1)) and
+  ((temp___586 = unmatched_g1_set__split_fields2) and
+  (temp___5861 = unmatched_g1_set__split_fields3)))) ->
+  ((to_rep3((proposals_made[g11])) <  64) -> (((result4 = already_asked) and
+  (already_asked1 = to_rep3((proposals_made[g11])))) ->
+  ((((not (already_asked1 = 0)) and ((((((o7 = already_asked1) and
+  in_range3(already_asked1)) and (o8 = (o7 + 1))) and ((o9 = o8) and
+  in_range3(o8))) and ((result5 = rank1) and (rank2 = o9))) and
+  (not (is_preferred_1(g11,
+  to_rep((result__[to_rep1(((ranking_1[g11])[(rank2 - 1)]))])),
+  (ranking_2[to_rep1(((ranking_1[g11])[(rank2 - 1)]))])) = true)))) or
+  ((already_asked1 = 0) and (rank2 = rank1))) -> (((result6 = g2) and
+  (g21 = to_rep1(((ranking_1[g11])[rank2])))) ->
+  ((((((o10 = (to_rep3((proposals_made[g11])) + 1)) and
+  in_range4((to_rep3((proposals_made[g11])) + 1))) and
+  (to_rep3(o11) = o10)) and (o12 = (proposals_made[g11 <- o11]))) and
+  ((result7 = proposals_made) and (proposals_made1 = o12))) ->
+  (((((unmatched_g2_set[g21]) = true) and ((((result8 = accepted) and
+  (accepted1 = of_int(1))) and ((result9 = unmatched_g2_set) and
+  (unmatched_g2_set2 = (unmatched_g2_set[g21 <- of_int(0)])))) and
+  (unmatched_g1_set__split_fields6 = {
+  rec__stable_marriage__matching__group1_set__elements =
+  unmatched_g1_set__split_fields2;
+  rec__stable_marriage__matching__group1_set__cardinality =
+  unmatched_g1_set__split_fields3 }))) or
+  ((not ((unmatched_g2_set[g21]) = true)) and
+  ((((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) and
+  (((result10 = accepted) and (accepted2 = of_int(1))) and
+  (((to_rep((result__[g21])) = c132b) and in_range1(c132b)) and
+  (((((((o13 = (to_rep3(unmatched_g1_set__split_fields3) + 1)) and
+  in_range4((to_rep3(unmatched_g1_set__split_fields3) + 1))) and
+  (to_rep3(o14) = o13)) and ((unmatched_g1_set__split_fields2 = o15) and
+  (o14 = o16))) and ((temp___603 = o15) and (temp___6031 = o16))) and
+  (((result11 = unmatched_g1_set__split_fields2) and
+  (result12 = unmatched_g1_set__split_fields3)) and
+  ((temp___603 = unmatched_g1_set__split_fields4) and
+  (temp___6031 = unmatched_g1_set__split_fields5)))) and
+  ((((((to_rep(o17) = c132b) and
+  ((((1 <= to_rep3(unmatched_g1_set__split_fields5)) and
+  (to_rep3(unmatched_g1_set__split_fields5) <= 64)) and
+  (o18 = to_rep3(unmatched_g1_set__split_fields5))) and
+  (o19 = (unmatched_g1_set__split_fields4[o18 <- o17])))) and
+  ((o19 = o20) and (unmatched_g1_set__split_fields5 = o21))) and
+  ((temp___607 = o20) and (temp___6071 = o21))) and
+  (((result13 = unmatched_g1_set__split_fields4) and
+  (result14 = unmatched_g1_set__split_fields5)) and
+  (unmatched_g1_set__split_fields6 = {
+  rec__stable_marriage__matching__group1_set__elements = temp___607;
+  rec__stable_marriage__matching__group1_set__cardinality = temp___6071
+  }))) and (is_preferred_1(g11, to_rep((result__[g21])),
+  (ranking_2[g21])) = true)))))) or
+  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) and
+  ((((result15 = { bool__content = accepted }) and
+  (accepted3 = of_int(0))) and (((g11 = c134b) and in_range1(c134b)) and
+  (((((((o22 = (to_rep3(unmatched_g1_set__split_fields3) + 1)) and
+  in_range4((to_rep3(unmatched_g1_set__split_fields3) + 1))) and
+  (to_rep3(o23) = o22)) and ((unmatched_g1_set__split_fields2 = o24) and
+  (o23 = o25))) and ((temp___595 = o24) and (temp___5951 = o25))) and
+  ((result16 = { us_split_fields__content = {
+  rec__stable_marriage__matching__group1_set__elements =
+  unmatched_g1_set__split_fields2;
+  rec__stable_marriage__matching__group1_set__cardinality =
+  unmatched_g1_set__split_fields3 } }) and
+  (unmatched_g1_set__split_fields7 = {
+  rec__stable_marriage__matching__group1_set__elements = temp___595;
+  rec__stable_marriage__matching__group1_set__cardinality = temp___5951
+  }))) and (((((to_rep(o26) = c134b) and
+  ((((1 <= to_rep3((unmatched_g1_set__split_fields7).rec__stable_marriage__matching__group1_set__cardinality)) and
+  (to_rep3((unmatched_g1_set__split_fields7).rec__stable_marriage__matching__group1_set__cardinality) <= 64)) and
+  (o27 = to_rep3((unmatched_g1_set__split_fields7).rec__stable_marriage__matching__group1_set__cardinality))) and
+  (o28 = ((unmatched_g1_set__split_fields7).rec__stable_marriage__matching__group1_set__elements[o27 <- o26])))) and
+  ((o28 = o29) and
+  ((unmatched_g1_set__split_fields7).rec__stable_marriage__matching__group1_set__cardinality = o30))) and
+  ((temp___599 = o29) and (temp___5991 = o30))) and ((result17 = {
+  us_split_fields__content = unmatched_g1_set__split_fields7 }) and
+  (unmatched_g1_set__split_fields8 = {
+  rec__stable_marriage__matching__group1_set__elements = temp___599;
+  rec__stable_marriage__matching__group1_set__cardinality = temp___5991
+  })))))) and ((accepted2 = accepted3) and
+  (unmatched_g1_set__split_fields6 = unmatched_g1_set__split_fields8))))) and
+  (((accepted1 = accepted2) and (unmatched_g2_set2 = unmatched_g2_set)) and
+  ((accepted1 = accepted2) and
+  (unmatched_g2_set2 = unmatched_g2_set1)))))) -> ((((accepted1 = true) and
+  (((to_rep(o31) = g11) and (o32 = (result__[g21 <- o31]))) and
+  ((result18 = { map__content = result__ }) and (result__2 = o32)))) or
+  ((not (accepted1 = true)) and ((result__2 = result__) and
+  (result__2 = result__1)))) ->
+  ((all_unmatched_g1_set_elements_distinct(unmatched_g1_set__split_fields6) = true) ->
+  ((forall g21_id:int. (((1 <= g21_id) and (g21_id <= 64)) ->
+   (forall g22_id:int. (((1 <= g22_id) and (g22_id <= 64)) ->
+   ((((not ((unmatched_g2_set2[g21_id]) = true)) and
+   (not ((unmatched_g2_set2[g22_id]) = true))) and
+   (not (g21_id = g22_id))) ->
+   (not (to_rep((result__2[g21_id])) = to_rep((result__2[g22_id]))))))))) ->
+  (((1 <= g2_id) and (g2_id <= 64)) ->
+  ((not ((unmatched_g2_set2[g2_id]) = true)) ->
+  ((1 <= to_rep3((unmatched_g1_set__split_fields6).rec__stable_marriage__matching__group1_set__cardinality)) ->
+  (0 <= 1))))))))))))))))))))))

@@ -1,0 +1,167 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+logic bool_eq : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type character
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 255))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : character, character -> bool
+
+logic dummy : character
+
+type character__ref = { character__content : character
+}
+
+function character__ref___projection(a: character__ref) : character =
+  (a).character__content
+
+logic c : int
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+ (* File "aida-characters.ads", line 4, characters 0-0 *)
+goal WP_parameter_def :
+  (forall aida__characters__is_digit__result:bool. forall result:bool.
+  forall aida__characters__is_digit__result1:bool.
+  forall aida__characters__is_digit__result2:bool.
+  forall aida__characters__is_digit__result3:bool.
+  forall aida__characters__is_digit__result4:bool.
+  forall aida__characters__is_digit__result5:bool. (in_range1(c) ->
+  (((((aida__characters__is_digit__result1 = aida__characters__is_digit__result2) and
+  (aida__characters__is_digit__result3 = aida__characters__is_digit__result1)) and
+  ((result = aida__characters__is_digit__result) and (((48 <= c) and
+  (((c <= 57) and (aida__characters__is_digit__result1 = true)) or
+  ((not (c <= 57)) and (aida__characters__is_digit__result1 = false)))) or
+  ((not (48 <= c)) and (aida__characters__is_digit__result1 = false))))) and
+  ((aida__characters__is_digit__result4 = aida__characters__is_digit__result2) and
+  (aida__characters__is_digit__result5 = aida__characters__is_digit__result3))) ->
+  ((((bool_eq(c, 48) = true) and
+  (aida__characters__is_digit__result4 = true)) or (not (bool_eq(c,
+  48) = true))) -> ((((bool_eq(c, 49) = true) and
+  (aida__characters__is_digit__result4 = true)) or (not (bool_eq(c,
+  49) = true))) -> ((((bool_eq(c, 50) = true) and
+  (aida__characters__is_digit__result4 = true)) or (not (bool_eq(c,
+  50) = true))) -> ((((bool_eq(c, 51) = true) and
+  (aida__characters__is_digit__result4 = true)) or (not (bool_eq(c,
+  51) = true))) -> ((((bool_eq(c, 52) = true) and
+  (aida__characters__is_digit__result4 = true)) or (not (bool_eq(c,
+  52) = true))) -> ((bool_eq(c, 53) = true) ->
+  (aida__characters__is_digit__result4 = true))))))))))

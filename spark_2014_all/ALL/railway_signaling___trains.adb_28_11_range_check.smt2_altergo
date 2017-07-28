@@ -1,0 +1,1564 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type track_id
+
+predicate in_range1(x: int) = ((1 <= x) and (x <= 8))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : track_id, track_id -> bool
+
+logic dummy : track_id
+
+type track_id__ref = { track_id__content : track_id
+}
+
+function track_id__ref___projection(a: track_id__ref) : track_id =
+  (a).track_id__content
+
+type train_id
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 10))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : train_id, train_id -> bool
+
+logic dummy1 : train_id
+
+type train_id__ref = { train_id__content : train_id
+}
+
+function train_id__ref___projection(a: train_id__ref) : train_id =
+  (a).train_id__content
+
+type natural
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq4 : int, int -> bool
+
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq2 : natural, natural -> bool
+
+logic dummy2 : natural
+
+type natural__ref = { natural__content : natural
+}
+
+function natural__ref___projection(a: natural__ref) : natural =
+  (a).natural__content
+
+logic to_rep : natural -> int
+
+logic of_rep : int -> natural
+
+axiom inversion_axiom :
+  (forall x:natural [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:natural [to_rep(x)]. in_range3(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range3(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+logic to_rep1 : track_id -> int
+
+logic of_rep1 : int -> track_id
+
+axiom inversion_axiom1 :
+  (forall x:track_id [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:track_id [to_rep1(x)]. in_range1(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range1(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type us_split_fields = { rec__trains__train_position__track_begin : track_id;
+rec__trains__train_position__pos_begin : natural;
+rec__trains__train_position__track_end : track_id
+}
+
+function us_split_fields_Track_Begin__projection(a: us_split_fields) : track_id =
+  (a).rec__trains__train_position__track_begin
+
+function us_split_fields_Pos_Begin__projection(a: us_split_fields) : natural =
+  (a).rec__trains__train_position__pos_begin
+
+function us_split_fields_Track_End__projection(a: us_split_fields) : track_id =
+  (a).rec__trains__train_position__track_end
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref_2__projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+function us_rep_2__projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+logic bool_eq5 : us_rep, us_rep -> bool
+
+axiom bool_eq_def4 :
+  (forall a:us_rep. forall b:us_rep [bool_eq5(a, b)].
+  (((((to_rep1(((a).us_split_fields1).rec__trains__train_position__track_begin) = to_rep1(((b).us_split_fields1).rec__trains__train_position__track_begin)) and
+  (to_rep(((a).us_split_fields1).rec__trains__train_position__pos_begin) = to_rep(((b).us_split_fields1).rec__trains__train_position__pos_begin))) and
+  (to_rep1(((a).us_split_fields1).rec__trains__train_position__track_end) = to_rep1(((b).us_split_fields1).rec__trains__train_position__track_end))) ->
+  (bool_eq5(a, b) = true)) and
+  ((not (((to_rep1(((a).us_split_fields1).rec__trains__train_position__track_begin) = to_rep1(((b).us_split_fields1).rec__trains__train_position__track_begin)) and
+  (to_rep(((a).us_split_fields1).rec__trains__train_position__pos_begin) = to_rep(((b).us_split_fields1).rec__trains__train_position__pos_begin))) and
+  (to_rep1(((a).us_split_fields1).rec__trains__train_position__track_end) = to_rep1(((b).us_split_fields1).rec__trains__train_position__track_end)))) ->
+  (bool_eq5(a, b) = false))))
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:track_id. forall a1:natural. forall a2:track_id.
+  (0 <= object__size({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = a;
+  rec__trains__train_position__pos_begin = a1;
+  rec__trains__train_position__track_end = a2 } })))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:track_id. forall a1:natural. forall a2:track_id.
+  (0 <= object__alignment({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = a;
+  rec__trains__train_position__pos_begin = a1;
+  rec__trains__train_position__track_end = a2 } })))
+
+logic trains__train_position__track_begin__first__bit : int
+
+logic trains__train_position__track_begin__last__bit : int
+
+logic trains__train_position__track_begin__position : int
+
+axiom trains__train_position__track_begin__first__bit_axiom :
+  (0 <= trains__train_position__track_begin__first__bit)
+
+axiom trains__train_position__track_begin__last__bit_axiom :
+  (trains__train_position__track_begin__first__bit <  trains__train_position__track_begin__last__bit)
+
+axiom trains__train_position__track_begin__position_axiom :
+  (0 <= trains__train_position__track_begin__position)
+
+logic trains__train_position__pos_begin__first__bit : int
+
+logic trains__train_position__pos_begin__last__bit : int
+
+logic trains__train_position__pos_begin__position : int
+
+axiom trains__train_position__pos_begin__first__bit_axiom :
+  (0 <= trains__train_position__pos_begin__first__bit)
+
+axiom trains__train_position__pos_begin__last__bit_axiom :
+  (trains__train_position__pos_begin__first__bit <  trains__train_position__pos_begin__last__bit)
+
+axiom trains__train_position__pos_begin__position_axiom :
+  (0 <= trains__train_position__pos_begin__position)
+
+logic trains__train_position__track_end__first__bit : int
+
+logic trains__train_position__track_end__last__bit : int
+
+logic trains__train_position__track_end__position : int
+
+axiom trains__train_position__track_end__first__bit_axiom :
+  (0 <= trains__train_position__track_end__first__bit)
+
+axiom trains__train_position__track_end__last__bit_axiom :
+  (trains__train_position__track_end__first__bit <  trains__train_position__track_end__last__bit)
+
+axiom trains__train_position__track_end__position_axiom :
+  (0 <= trains__train_position__track_end__position)
+
+logic user_eq3 : us_rep, us_rep -> bool
+
+logic dummy3 : track_id
+
+logic dummy4 : natural
+
+logic dummy5 : track_id
+
+type train_position__ref = { train_position__content : us_rep
+}
+
+function train_position__ref___projection(a: train_position__ref) : us_rep =
+  (a).train_position__content
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+type map__ref = { map__content : (int,us_rep) farray
+}
+
+logic slide : (int,us_rep) farray, int, int -> (int,us_rep) farray
+
+axiom slide_eq :
+  (forall a:(int,us_rep) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,us_rep) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
+  int -> (int,us_rep) farray
+
+axiom concat_def :
+  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton : us_rep, int -> (int,us_rep) farray
+
+axiom singleton_def :
+  (forall v:track_id. forall v1:natural. forall v2:track_id.
+  (forall i:int [(singleton({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = v;
+  rec__trains__train_position__pos_begin = v1;
+  rec__trains__train_position__track_end = v2 } }, i)[i])]. ((singleton({
+  us_split_fields1 = { rec__trains__train_position__track_begin = v;
+  rec__trains__train_position__pos_begin = v1;
+  rec__trains__train_position__track_end = v2 } }, i)[i]) = {
+  us_split_fields1 = { rec__trains__train_position__track_begin = v;
+  rec__trains__train_position__pos_begin = v1;
+  rec__trains__train_position__track_end = v2 } })))
+
+logic bool_eq6 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
+  int -> bool
+
+axiom bool_eq_def5 :
+  (forall a:(int,us_rep) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,us_rep) farray. forall b__first:int. forall b__last:int
+  [bool_eq6(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_182:int. ((((a__first <= temp___idx_182) and
+  (temp___idx_182 <= a__last)) and (bool_eq5((a[temp___idx_182]),
+  (b[((b__first - a__first) + temp___idx_182)])) = true)) or
+  (not ((a__first <= temp___idx_182) and (temp___idx_182 <= a__last)))))) ->
+  (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_182:int. (((a__first <= temp___idx_182) and
+  (temp___idx_182 <= a__last)) -> (bool_eq5((a[temp___idx_182]),
+  (b[((b__first - a__first) + temp___idx_182)])) = true))))) -> (bool_eq6(a,
+  a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev :
+  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq6(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_182:int. (((a__first <= temp___idx_182) and
+  (temp___idx_182 <= a__last)) -> (bool_eq5((a[temp___idx_182]),
+  (b[((b__first - a__first) + temp___idx_182)])) = true)))))))
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+type signal
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 2))
+
+logic bool_eq7 : int, int -> bool
+
+axiom bool_eq_def6 :
+  (forall x:int. forall y:int [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq4 : signal, signal -> bool
+
+logic dummy6 : signal
+
+type signal__ref = { signal__content : signal
+}
+
+function signal__ref___projection(a: signal__ref) : signal =
+  (a).signal__content
+
+logic to_rep2 : signal -> int
+
+logic of_rep2 : int -> signal
+
+axiom inversion_axiom2 :
+  (forall x:signal [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 : (forall x:signal [to_rep2(x)]. in_range4(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range4(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+type map__ref1 = { map__content1 : (int,signal) farray
+}
+
+logic slide1 : (int,signal) farray, int, int -> (int,signal) farray
+
+axiom slide_eq1 :
+  (forall a:(int,signal) farray.
+  (forall first:int [slide1(a, first, first)]. (slide1(a, first, first) = a)))
+
+axiom slide_def1 :
+  (forall a:(int,signal) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat1 : (int,signal) farray, int, int, (int,signal) farray, int,
+  int -> (int,signal) farray
+
+axiom concat_def1 :
+  (forall a:(int,signal) farray. forall b:(int,signal) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton1 : signal, int -> (int,signal) farray
+
+axiom singleton_def1 :
+  (forall v:signal.
+  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
+
+logic bool_eq8 : (int,signal) farray, int, int, (int,signal) farray, int,
+  int -> bool
+
+axiom bool_eq_def7 :
+  (forall a:(int,signal) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,signal) farray. forall b__first:int. forall b__last:int
+  [bool_eq8(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_183:int. ((((a__first <= temp___idx_183) and
+  (temp___idx_183 <= a__last)) and
+  (to_rep2((a[temp___idx_183])) = to_rep2((b[((b__first - a__first) + temp___idx_183)])))) or
+  (not ((a__first <= temp___idx_183) and (temp___idx_183 <= a__last)))))) ->
+  (bool_eq8(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_183:int. (((a__first <= temp___idx_183) and
+  (temp___idx_183 <= a__last)) ->
+  (to_rep2((a[temp___idx_183])) = to_rep2((b[((b__first - a__first) + temp___idx_183)]))))))) ->
+  (bool_eq8(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev1 :
+  (forall a:(int,signal) farray. forall b:(int,signal) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq8(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_183:int. (((a__first <= temp___idx_183) and
+  (temp___idx_183 <= a__last)) ->
+  (to_rep2((a[temp___idx_183])) = to_rep2((b[((b__first - a__first) + temp___idx_183)])))))))))
+
+logic compare : (int,signal) farray, int, int, (int,signal) farray, int,
+  int -> int
+
+axiom compare_def_eq :
+  (forall a:(int,signal) farray. forall b:(int,signal) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq8(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt :
+  (forall a:(int,signal) farray. forall b:(int,signal) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq8(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_rep2((a[(i + 1)])) <  to_rep2((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt :
+  (forall a:(int,signal) farray. forall b:(int,signal) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq8(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_rep2((b[(i + 1)])) <  to_rep2((a[(j + 1)]))))))))))))
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic is_previous_track : us_rep, int -> bool
+
+logic is_previous_track__function_guard : bool, us_rep, int -> prop
+
+logic get_previous_track : us_rep, int -> int
+
+logic get_previous_track__function_guard : int, us_rep, int -> prop
+
+logic get_other_previous_track : us_rep, int -> int
+
+logic get_other_previous_track__function_guard : int, us_rep, int -> prop
+
+axiom is_previous_track__post_axiom : true
+
+axiom is_previous_track__def_axiom :
+  (forall position:track_id. forall position1:natural.
+  forall position2:track_id.
+  (forall track:int [is_previous_track({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = position;
+  rec__trains__train_position__pos_begin = position1;
+  rec__trains__train_position__track_end = position2 } }, track)].
+  ((is_previous_track({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = position;
+  rec__trains__train_position__pos_begin = position1;
+  rec__trains__train_position__track_end = position2 } }, track) = true) <->
+  (exists id:int. (((1 <= id) and (id <= 3)) and
+  ((track = get_previous_track({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = position;
+  rec__trains__train_position__pos_begin = position1;
+  rec__trains__train_position__track_end = position2 } }, id)) or
+  (track = get_other_previous_track({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = position;
+  rec__trains__train_position__pos_begin = position1;
+  rec__trains__train_position__track_end = position2 } }, id))))))))
+
+logic track : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic r7b : int
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+type ttrain_idB
+
+predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq9 : int, int -> bool
+
+axiom bool_eq_def8 :
+  (forall x:int. forall y:int [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> int
+
+logic user_eq5 : ttrain_idB, ttrain_idB -> bool
+
+logic dummy7 : ttrain_idB
+
+type ttrain_idB__ref = { ttrain_idB__content : ttrain_idB
+}
+
+function ttrain_idB__ref___projection(a: ttrain_idB__ref) : ttrain_idB =
+  (a).ttrain_idB__content
+
+logic to_rep3 : ttrain_idB -> int
+
+logic of_rep3 : int -> ttrain_idB
+
+axiom inversion_axiom3 :
+  (forall x:ttrain_idB [to_rep3(x)]. (of_rep3(to_rep3(x)) = x))
+
+axiom range_axiom3 :
+  (forall x:ttrain_idB [to_rep3(x)]. in_range5(to_rep3(x)))
+
+axiom coerce_axiom3 :
+  (forall x:int [to_rep3(of_rep3(x))]. (in_range5(x) ->
+  (to_rep3(of_rep3(x)) = x)))
+
+predicate dynamic_property(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq10 : int, int -> bool
+
+axiom bool_eq_def9 :
+  (forall x:int. forall y:int [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE6 : us_image -> int
+
+logic user_eq6 : ttrain_idB, ttrain_idB -> bool
+
+logic dummy8 : ttrain_idB
+
+type t8b__ref = { t8b__content : ttrain_idB
+}
+
+function t8b__ref___projection(a: t8b__ref) : ttrain_idB = (a).t8b__content
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
+type positive
+
+predicate in_range6(x: int) = ((1 <= x) and (x <= 2147483647))
+
+logic bool_eq11 : int, int -> bool
+
+axiom bool_eq_def10 :
+  (forall x:int. forall y:int [bool_eq11(x, y)]. (((x = y) -> (bool_eq11(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq11(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE7 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check7 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE7 : us_image -> int
+
+logic user_eq7 : positive, positive -> bool
+
+logic dummy9 : positive
+
+type positive__ref = { positive__content : positive
+}
+
+function positive__ref___projection(a: positive__ref) : positive =
+  (a).positive__content
+
+type location
+
+predicate in_range7(x: int) = ((1 <= x) and (x <= 5))
+
+logic bool_eq12 : int, int -> bool
+
+axiom bool_eq_def11 :
+  (forall x:int. forall y:int [bool_eq12(x, y)]. (((x = y) -> (bool_eq12(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq12(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE8 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check8 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE8 : us_image -> int
+
+logic user_eq8 : location, location -> bool
+
+logic dummy10 : location
+
+type location__ref = { location__content : location
+}
+
+function location__ref___projection(a: location__ref) : location =
+  (a).location__content
+
+logic to_rep4 : positive -> int
+
+logic of_rep4 : int -> positive
+
+axiom inversion_axiom4 :
+  (forall x:positive [to_rep4(x)]. (of_rep4(to_rep4(x)) = x))
+
+axiom range_axiom4 : (forall x:positive [to_rep4(x)]. in_range6(to_rep4(x)))
+
+axiom coerce_axiom4 :
+  (forall x:int [to_rep4(of_rep4(x))]. (in_range6(x) ->
+  (to_rep4(of_rep4(x)) = x)))
+
+logic to_rep5 : location -> int
+
+logic of_rep5 : int -> location
+
+axiom inversion_axiom5 :
+  (forall x:location [to_rep5(x)]. (of_rep5(to_rep5(x)) = x))
+
+axiom range_axiom5 : (forall x:location [to_rep5(x)]. in_range7(to_rep5(x)))
+
+axiom coerce_axiom5 :
+  (forall x:int [to_rep5(of_rep5(x))]. (in_range7(x) ->
+  (to_rep5(of_rep5(x)) = x)))
+
+type us_split_fields2 = { rec__trains__track__from : location;
+rec__trains__track__to : location; rec__trains__track__length : positive
+}
+
+function us_split_fields_From__projection(a: us_split_fields2) : location =
+  (a).rec__trains__track__from
+
+function us_split_fields_To__projection(a: us_split_fields2) : location =
+  (a).rec__trains__track__to
+
+function us_split_fields_Length__projection(a: us_split_fields2) : positive =
+  (a).rec__trains__track__length
+
+type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
+}
+
+function us_split_fields__ref___projection(a: us_split_fields__ref1) : us_split_fields2 =
+  (a).us_split_fields__content1
+
+type us_rep1 = { us_split_fields3 : us_split_fields2
+}
+
+function us_rep___projection(a: us_rep1) : us_split_fields2 =
+  (a).us_split_fields3
+
+logic bool_eq13 : us_rep1, us_rep1 -> bool
+
+axiom bool_eq_def12 :
+  (forall a:us_rep1. forall b:us_rep1 [bool_eq13(a, b)].
+  (((((to_rep5(((a).us_split_fields3).rec__trains__track__from) = to_rep5(((b).us_split_fields3).rec__trains__track__from)) and
+  (to_rep5(((a).us_split_fields3).rec__trains__track__to) = to_rep5(((b).us_split_fields3).rec__trains__track__to))) and
+  (to_rep4(((a).us_split_fields3).rec__trains__track__length) = to_rep4(((b).us_split_fields3).rec__trains__track__length))) ->
+  (bool_eq13(a, b) = true)) and
+  ((not (((to_rep5(((a).us_split_fields3).rec__trains__track__from) = to_rep5(((b).us_split_fields3).rec__trains__track__from)) and
+  (to_rep5(((a).us_split_fields3).rec__trains__track__to) = to_rep5(((b).us_split_fields3).rec__trains__track__to))) and
+  (to_rep4(((a).us_split_fields3).rec__trains__track__length) = to_rep4(((b).us_split_fields3).rec__trains__track__length)))) ->
+  (bool_eq13(a, b) = false))))
+
+logic value__size1 : int
+
+logic object__size1 : us_rep1 -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : us_rep1 -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 :
+  (forall a:location. forall a1:location. forall a2:positive.
+  (0 <= object__size1({ us_split_fields3 = { rec__trains__track__from = a;
+  rec__trains__track__to = a1; rec__trains__track__length = a2 } })))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:location. forall a1:location. forall a2:positive.
+  (0 <= object__alignment1({ us_split_fields3 = { rec__trains__track__from =
+  a; rec__trains__track__to = a1; rec__trains__track__length = a2 } })))
+
+logic trains__track__from__first__bit : int
+
+logic trains__track__from__last__bit : int
+
+logic trains__track__from__position : int
+
+axiom trains__track__from__first__bit_axiom :
+  (0 <= trains__track__from__first__bit)
+
+axiom trains__track__from__last__bit_axiom :
+  (trains__track__from__first__bit <  trains__track__from__last__bit)
+
+axiom trains__track__from__position_axiom :
+  (0 <= trains__track__from__position)
+
+logic trains__track__to__first__bit : int
+
+logic trains__track__to__last__bit : int
+
+logic trains__track__to__position : int
+
+axiom trains__track__to__first__bit_axiom :
+  (0 <= trains__track__to__first__bit)
+
+axiom trains__track__to__last__bit_axiom :
+  (trains__track__to__first__bit <  trains__track__to__last__bit)
+
+axiom trains__track__to__position_axiom : (0 <= trains__track__to__position)
+
+logic trains__track__length__first__bit : int
+
+logic trains__track__length__last__bit : int
+
+logic trains__track__length__position : int
+
+axiom trains__track__length__first__bit_axiom :
+  (0 <= trains__track__length__first__bit)
+
+axiom trains__track__length__last__bit_axiom :
+  (trains__track__length__first__bit <  trains__track__length__last__bit)
+
+axiom trains__track__length__position_axiom :
+  (0 <= trains__track__length__position)
+
+logic user_eq9 : us_rep1, us_rep1 -> bool
+
+logic dummy11 : location
+
+logic dummy12 : location
+
+logic dummy13 : positive
+
+type track__ref = { track__content : us_rep1
+}
+
+function track__ref___projection(a: track__ref) : us_rep1 =
+  (a).track__content
+
+type track_opt_id
+
+predicate in_range8(x: int) = ((0 <= x) and (x <= 8))
+
+logic bool_eq14 : int, int -> bool
+
+axiom bool_eq_def13 :
+  (forall x:int. forall y:int [bool_eq14(x, y)]. (((x = y) -> (bool_eq14(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq14(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE9 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check9 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE9 : us_image -> int
+
+logic user_eq10 : track_opt_id, track_opt_id -> bool
+
+logic dummy14 : track_opt_id
+
+type track_opt_id__ref = { track_opt_id__content : track_opt_id
+}
+
+function track_opt_id__ref___projection(a: track_opt_id__ref) : track_opt_id =
+  (a).track_opt_id__content
+
+type map__ref2 = { map__content2 : (int,us_rep1) farray
+}
+
+logic slide2 : (int,us_rep1) farray, int, int -> (int,us_rep1) farray
+
+axiom slide_eq2 :
+  (forall a:(int,us_rep1) farray.
+  (forall first:int [slide2(a, first, first)]. (slide2(a, first, first) = a)))
+
+axiom slide_def2 :
+  (forall a:(int,us_rep1) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide2(a, old_first, new_first)[i])]. ((slide2(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat2 : (int,us_rep1) farray, int, int, (int,us_rep1) farray, int,
+  int -> (int,us_rep1) farray
+
+axiom concat_def2 :
+  (forall a:(int,us_rep1) farray. forall b:(int,us_rep1) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat2(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat2(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat2(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton2 : us_rep1, int -> (int,us_rep1) farray
+
+axiom singleton_def2 :
+  (forall v:location. forall v1:location. forall v2:positive.
+  (forall i:int [(singleton2({ us_split_fields3 = {
+  rec__trains__track__from = v; rec__trains__track__to = v1;
+  rec__trains__track__length = v2 } }, i)[i])]. ((singleton2({
+  us_split_fields3 = { rec__trains__track__from = v; rec__trains__track__to =
+  v1; rec__trains__track__length = v2 } }, i)[i]) = { us_split_fields3 = {
+  rec__trains__track__from = v; rec__trains__track__to = v1;
+  rec__trains__track__length = v2 } })))
+
+logic bool_eq15 : (int,us_rep1) farray, int, int, (int,us_rep1) farray, int,
+  int -> bool
+
+axiom bool_eq_def14 :
+  (forall a:(int,us_rep1) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,us_rep1) farray. forall b__first:int. forall b__last:int
+  [bool_eq15(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) and (bool_eq13((a[temp___idx_132]),
+  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
+  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (bool_eq15(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) -> (bool_eq13((a[temp___idx_132]),
+  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq15(a,
+  a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev2 :
+  (forall a:(int,us_rep1) farray. forall b:(int,us_rep1) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq15(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) -> (bool_eq13((a[temp___idx_132]),
+  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+
+logic tracks : (int,us_rep1) farray
+
+logic attr__ATTRIBUTE_ADDRESS6 : int
+
+logic trains__tracks__aggregate_def : us_rep1, us_rep1, us_rep1, us_rep1,
+  us_rep1, us_rep1, us_rep1, us_rep1 -> (int,us_rep1) farray
+
+axiom def_axiom :
+  (forall temp___134:location. forall temp___1341:location.
+  forall temp___1342:positive. forall temp___135:location.
+  forall temp___1351:location. forall temp___1352:positive.
+  forall temp___136:location. forall temp___1361:location.
+  forall temp___1362:positive. forall temp___137:location.
+  forall temp___1371:location. forall temp___1372:positive.
+  forall temp___138:location. forall temp___1381:location.
+  forall temp___1382:positive. forall temp___139:location.
+  forall temp___1391:location. forall temp___1392:positive.
+  forall temp___140:location. forall temp___1401:location.
+  forall temp___1402:positive. forall temp___141:location.
+  forall temp___1411:location. forall temp___1412:positive.
+  (((((((((trains__tracks__aggregate_def({ us_split_fields3 = {
+  rec__trains__track__from = temp___134; rec__trains__track__to =
+  temp___1341; rec__trains__track__length = temp___1342 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___135;
+  rec__trains__track__to = temp___1351; rec__trains__track__length =
+  temp___1352 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___136; rec__trains__track__to = temp___1361;
+  rec__trains__track__length = temp___1362 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___137; rec__trains__track__to =
+  temp___1371; rec__trains__track__length = temp___1372 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___138;
+  rec__trains__track__to = temp___1381; rec__trains__track__length =
+  temp___1382 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___139; rec__trains__track__to = temp___1391;
+  rec__trains__track__length = temp___1392 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___140; rec__trains__track__to =
+  temp___1401; rec__trains__track__length = temp___1402 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___141;
+  rec__trains__track__to = temp___1411; rec__trains__track__length =
+  temp___1412 } })[1]) = { us_split_fields3 = { rec__trains__track__from =
+  temp___134; rec__trains__track__to = temp___1341;
+  rec__trains__track__length = temp___1342 } }) and
+  ((trains__tracks__aggregate_def({ us_split_fields3 = {
+  rec__trains__track__from = temp___134; rec__trains__track__to =
+  temp___1341; rec__trains__track__length = temp___1342 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___135;
+  rec__trains__track__to = temp___1351; rec__trains__track__length =
+  temp___1352 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___136; rec__trains__track__to = temp___1361;
+  rec__trains__track__length = temp___1362 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___137; rec__trains__track__to =
+  temp___1371; rec__trains__track__length = temp___1372 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___138;
+  rec__trains__track__to = temp___1381; rec__trains__track__length =
+  temp___1382 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___139; rec__trains__track__to = temp___1391;
+  rec__trains__track__length = temp___1392 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___140; rec__trains__track__to =
+  temp___1401; rec__trains__track__length = temp___1402 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___141;
+  rec__trains__track__to = temp___1411; rec__trains__track__length =
+  temp___1412 } })[2]) = { us_split_fields3 = { rec__trains__track__from =
+  temp___135; rec__trains__track__to = temp___1351;
+  rec__trains__track__length = temp___1352 } })) and
+  ((trains__tracks__aggregate_def({ us_split_fields3 = {
+  rec__trains__track__from = temp___134; rec__trains__track__to =
+  temp___1341; rec__trains__track__length = temp___1342 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___135;
+  rec__trains__track__to = temp___1351; rec__trains__track__length =
+  temp___1352 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___136; rec__trains__track__to = temp___1361;
+  rec__trains__track__length = temp___1362 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___137; rec__trains__track__to =
+  temp___1371; rec__trains__track__length = temp___1372 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___138;
+  rec__trains__track__to = temp___1381; rec__trains__track__length =
+  temp___1382 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___139; rec__trains__track__to = temp___1391;
+  rec__trains__track__length = temp___1392 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___140; rec__trains__track__to =
+  temp___1401; rec__trains__track__length = temp___1402 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___141;
+  rec__trains__track__to = temp___1411; rec__trains__track__length =
+  temp___1412 } })[3]) = { us_split_fields3 = { rec__trains__track__from =
+  temp___136; rec__trains__track__to = temp___1361;
+  rec__trains__track__length = temp___1362 } })) and
+  ((trains__tracks__aggregate_def({ us_split_fields3 = {
+  rec__trains__track__from = temp___134; rec__trains__track__to =
+  temp___1341; rec__trains__track__length = temp___1342 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___135;
+  rec__trains__track__to = temp___1351; rec__trains__track__length =
+  temp___1352 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___136; rec__trains__track__to = temp___1361;
+  rec__trains__track__length = temp___1362 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___137; rec__trains__track__to =
+  temp___1371; rec__trains__track__length = temp___1372 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___138;
+  rec__trains__track__to = temp___1381; rec__trains__track__length =
+  temp___1382 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___139; rec__trains__track__to = temp___1391;
+  rec__trains__track__length = temp___1392 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___140; rec__trains__track__to =
+  temp___1401; rec__trains__track__length = temp___1402 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___141;
+  rec__trains__track__to = temp___1411; rec__trains__track__length =
+  temp___1412 } })[4]) = { us_split_fields3 = { rec__trains__track__from =
+  temp___137; rec__trains__track__to = temp___1371;
+  rec__trains__track__length = temp___1372 } })) and
+  ((trains__tracks__aggregate_def({ us_split_fields3 = {
+  rec__trains__track__from = temp___134; rec__trains__track__to =
+  temp___1341; rec__trains__track__length = temp___1342 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___135;
+  rec__trains__track__to = temp___1351; rec__trains__track__length =
+  temp___1352 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___136; rec__trains__track__to = temp___1361;
+  rec__trains__track__length = temp___1362 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___137; rec__trains__track__to =
+  temp___1371; rec__trains__track__length = temp___1372 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___138;
+  rec__trains__track__to = temp___1381; rec__trains__track__length =
+  temp___1382 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___139; rec__trains__track__to = temp___1391;
+  rec__trains__track__length = temp___1392 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___140; rec__trains__track__to =
+  temp___1401; rec__trains__track__length = temp___1402 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___141;
+  rec__trains__track__to = temp___1411; rec__trains__track__length =
+  temp___1412 } })[5]) = { us_split_fields3 = { rec__trains__track__from =
+  temp___138; rec__trains__track__to = temp___1381;
+  rec__trains__track__length = temp___1382 } })) and
+  ((trains__tracks__aggregate_def({ us_split_fields3 = {
+  rec__trains__track__from = temp___134; rec__trains__track__to =
+  temp___1341; rec__trains__track__length = temp___1342 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___135;
+  rec__trains__track__to = temp___1351; rec__trains__track__length =
+  temp___1352 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___136; rec__trains__track__to = temp___1361;
+  rec__trains__track__length = temp___1362 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___137; rec__trains__track__to =
+  temp___1371; rec__trains__track__length = temp___1372 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___138;
+  rec__trains__track__to = temp___1381; rec__trains__track__length =
+  temp___1382 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___139; rec__trains__track__to = temp___1391;
+  rec__trains__track__length = temp___1392 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___140; rec__trains__track__to =
+  temp___1401; rec__trains__track__length = temp___1402 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___141;
+  rec__trains__track__to = temp___1411; rec__trains__track__length =
+  temp___1412 } })[6]) = { us_split_fields3 = { rec__trains__track__from =
+  temp___139; rec__trains__track__to = temp___1391;
+  rec__trains__track__length = temp___1392 } })) and
+  ((trains__tracks__aggregate_def({ us_split_fields3 = {
+  rec__trains__track__from = temp___134; rec__trains__track__to =
+  temp___1341; rec__trains__track__length = temp___1342 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___135;
+  rec__trains__track__to = temp___1351; rec__trains__track__length =
+  temp___1352 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___136; rec__trains__track__to = temp___1361;
+  rec__trains__track__length = temp___1362 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___137; rec__trains__track__to =
+  temp___1371; rec__trains__track__length = temp___1372 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___138;
+  rec__trains__track__to = temp___1381; rec__trains__track__length =
+  temp___1382 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___139; rec__trains__track__to = temp___1391;
+  rec__trains__track__length = temp___1392 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___140; rec__trains__track__to =
+  temp___1401; rec__trains__track__length = temp___1402 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___141;
+  rec__trains__track__to = temp___1411; rec__trains__track__length =
+  temp___1412 } })[7]) = { us_split_fields3 = { rec__trains__track__from =
+  temp___140; rec__trains__track__to = temp___1401;
+  rec__trains__track__length = temp___1402 } })) and
+  ((trains__tracks__aggregate_def({ us_split_fields3 = {
+  rec__trains__track__from = temp___134; rec__trains__track__to =
+  temp___1341; rec__trains__track__length = temp___1342 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___135;
+  rec__trains__track__to = temp___1351; rec__trains__track__length =
+  temp___1352 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___136; rec__trains__track__to = temp___1361;
+  rec__trains__track__length = temp___1362 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___137; rec__trains__track__to =
+  temp___1371; rec__trains__track__length = temp___1372 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___138;
+  rec__trains__track__to = temp___1381; rec__trains__track__length =
+  temp___1382 } }, { us_split_fields3 = { rec__trains__track__from =
+  temp___139; rec__trains__track__to = temp___1391;
+  rec__trains__track__length = temp___1392 } }, { us_split_fields3 = {
+  rec__trains__track__from = temp___140; rec__trains__track__to =
+  temp___1401; rec__trains__track__length = temp___1402 } }, {
+  us_split_fields3 = { rec__trains__track__from = temp___141;
+  rec__trains__track__to = temp___1411; rec__trains__track__length =
+  temp___1412 } })[8]) = { us_split_fields3 = { rec__trains__track__from =
+  temp___141; rec__trains__track__to = temp___1411;
+  rec__trains__track__length = temp___1412 } })))
+
+axiom tracks__def_axiom : (tracks = trains__tracks__aggregate_def({
+  us_split_fields3 = { rec__trains__track__from = of_rep5(1);
+  rec__trains__track__to = of_rep5(2); rec__trains__track__length =
+  of_rep4(10) } }, { us_split_fields3 = { rec__trains__track__from =
+  of_rep5(1); rec__trains__track__to = of_rep5(3);
+  rec__trains__track__length = of_rep4(10) } }, { us_split_fields3 = {
+  rec__trains__track__from = of_rep5(2); rec__trains__track__to = of_rep5(3);
+  rec__trains__track__length = of_rep4(10) } }, { us_split_fields3 = {
+  rec__trains__track__from = of_rep5(2); rec__trains__track__to = of_rep5(5);
+  rec__trains__track__length = of_rep4(10) } }, { us_split_fields3 = {
+  rec__trains__track__from = of_rep5(3); rec__trains__track__to = of_rep5(4);
+  rec__trains__track__length = of_rep4(10) } }, { us_split_fields3 = {
+  rec__trains__track__from = of_rep5(3); rec__trains__track__to = of_rep5(5);
+  rec__trains__track__length = of_rep4(10) } }, { us_split_fields3 = {
+  rec__trains__track__from = of_rep5(4); rec__trains__track__to = of_rep5(5);
+  rec__trains__track__length = of_rep4(10) } }, { us_split_fields3 = {
+  rec__trains__track__from = of_rep5(5); rec__trains__track__to = of_rep5(1);
+  rec__trains__track__length = of_rep4(10) } }))
+
+type prev_id
+
+predicate in_range9(x: int) = ((1 <= x) and (x <= 3))
+
+logic bool_eq16 : int, int -> bool
+
+axiom bool_eq_def15 :
+  (forall x:int. forall y:int [bool_eq16(x, y)]. (((x = y) -> (bool_eq16(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq16(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE10 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check10 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE10 : us_image -> int
+
+logic user_eq11 : prev_id, prev_id -> bool
+
+logic dummy15 : prev_id
+
+type prev_id__ref = { prev_id__content : prev_id
+}
+
+function prev_id__ref___projection(a: prev_id__ref) : prev_id =
+  (a).prev_id__content
+
+logic to_rep6 : track_opt_id -> int
+
+logic of_rep6 : int -> track_opt_id
+
+axiom inversion_axiom6 :
+  (forall x:track_opt_id [to_rep6(x)]. (of_rep6(to_rep6(x)) = x))
+
+axiom range_axiom6 :
+  (forall x:track_opt_id [to_rep6(x)]. in_range8(to_rep6(x)))
+
+axiom coerce_axiom6 :
+  (forall x:int [to_rep6(of_rep6(x))]. (in_range8(x) ->
+  (to_rep6(of_rep6(x)) = x)))
+
+type map__ref3 = { map__content3 : (int,track_opt_id) farray
+}
+
+logic slide3 : (int,track_opt_id) farray, int,
+  int -> (int,track_opt_id) farray
+
+axiom slide_eq3 :
+  (forall a:(int,track_opt_id) farray.
+  (forall first:int [slide3(a, first, first)]. (slide3(a, first, first) = a)))
+
+axiom slide_def3 :
+  (forall a:(int,track_opt_id) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide3(a, old_first, new_first)[i])]. ((slide3(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat3 : (int,track_opt_id) farray, int, int,
+  (int,track_opt_id) farray, int, int -> (int,track_opt_id) farray
+
+axiom concat_def3 :
+  (forall a:(int,track_opt_id) farray. forall b:(int,track_opt_id) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat3(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat3(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat3(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton3 : track_opt_id, int -> (int,track_opt_id) farray
+
+axiom singleton_def3 :
+  (forall v:track_opt_id.
+  (forall i:int [(singleton3(v, i)[i])]. ((singleton3(v, i)[i]) = v)))
+
+logic bool_eq17 : (int,track_opt_id) farray, int, int,
+  (int,track_opt_id) farray, int, int -> bool
+
+axiom bool_eq_def16 :
+  (forall a:(int,track_opt_id) farray. forall a__first:int.
+  forall a__last:int. forall b:(int,track_opt_id) farray.
+  forall b__first:int. forall b__last:int [bool_eq17(a, a__first, a__last, b,
+  b__first, b__last)]. ((((((a__first <= a__last) and
+  ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_143:int. ((((a__first <= temp___idx_143) and
+  (temp___idx_143 <= a__last)) and
+  (to_rep6((a[temp___idx_143])) = to_rep6((b[((b__first - a__first) + temp___idx_143)])))) or
+  (not ((a__first <= temp___idx_143) and (temp___idx_143 <= a__last)))))) ->
+  (bool_eq17(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_143:int. (((a__first <= temp___idx_143) and
+  (temp___idx_143 <= a__last)) ->
+  (to_rep6((a[temp___idx_143])) = to_rep6((b[((b__first - a__first) + temp___idx_143)]))))))) ->
+  (bool_eq17(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev3 :
+  (forall a:(int,track_opt_id) farray. forall b:(int,track_opt_id) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq17(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_143:int. (((a__first <= temp___idx_143) and
+  (temp___idx_143 <= a__last)) ->
+  (to_rep6((a[temp___idx_143])) = to_rep6((b[((b__first - a__first) + temp___idx_143)])))))))))
+
+logic compare1 : (int,track_opt_id) farray, int, int,
+  (int,track_opt_id) farray, int, int -> int
+
+axiom compare_def_eq1 :
+  (forall a:(int,track_opt_id) farray. forall b:(int,track_opt_id) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
+  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq17(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt1 :
+  (forall a:(int,track_opt_id) farray. forall b:(int,track_opt_id) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
+  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq17(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_rep6((a[(i + 1)])) <  to_rep6((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt1 :
+  (forall a:(int,track_opt_id) farray. forall b:(int,track_opt_id) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq17(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_rep6((b[(i + 1)])) <  to_rep6((a[(j + 1)]))))))))))))
+
+logic dummy16 : (int,track_opt_id) farray
+
+logic value__size2 : int
+
+logic object__size2 : (int,track_opt_id) farray -> int
+
+logic value__component__size : int
+
+logic object__component__size : (int,track_opt_id) farray -> int
+
+logic value__alignment2 : int
+
+logic object__alignment2 : (int,track_opt_id) farray -> int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 :
+  (forall a:(int,track_opt_id) farray. (0 <= object__size2(a)))
+
+axiom value__component__size_axiom : (0 <= value__component__size)
+
+axiom object__component__size_axiom :
+  (forall a:(int,track_opt_id) farray. (0 <= object__component__size(a)))
+
+axiom value__alignment_axiom2 : (0 <= value__alignment2)
+
+axiom object__alignment_axiom2 :
+  (forall a:(int,track_opt_id) farray. (0 <= object__alignment2(a)))
+
+logic user_eq12 : (int,track_opt_id) farray,
+  (int,track_opt_id) farray -> bool
+
+type map__ref4 = { map__content4 : (int,(int,track_opt_id) farray) farray
+}
+
+logic slide4 : (int,(int,track_opt_id) farray) farray, int,
+  int -> (int,(int,track_opt_id) farray) farray
+
+axiom slide_eq4 :
+  (forall a:(int,(int,track_opt_id) farray) farray.
+  (forall first:int [slide4(a, first, first)]. (slide4(a, first, first) = a)))
+
+axiom slide_def4 :
+  (forall a:(int,(int,track_opt_id) farray) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide4(a, old_first, new_first)[i])]. ((slide4(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat4 : (int,(int,track_opt_id) farray) farray, int, int,
+  (int,(int,track_opt_id) farray) farray, int,
+  int -> (int,(int,track_opt_id) farray) farray
+
+axiom concat_def4 :
+  (forall a:(int,(int,track_opt_id) farray) farray.
+  forall b:(int,(int,track_opt_id) farray) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat4(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat4(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat4(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton4 : (int,track_opt_id) farray,
+  int -> (int,(int,track_opt_id) farray) farray
+
+axiom singleton_def4 :
+  (forall v:(int,track_opt_id) farray.
+  (forall i:int [(singleton4(v, i)[i])]. ((singleton4(v, i)[i]) = v)))
+
+logic bool_eq18 : (int,(int,track_opt_id) farray) farray, int, int,
+  (int,(int,track_opt_id) farray) farray, int, int -> bool
+
+axiom bool_eq_def17 :
+  (forall a:(int,(int,track_opt_id) farray) farray. forall a__first:int.
+  forall a__last:int. forall b:(int,(int,track_opt_id) farray) farray.
+  forall b__first:int. forall b__last:int [bool_eq18(a, a__first, a__last, b,
+  b__first, b__last)]. ((((((a__first <= a__last) and
+  ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_144:int. ((((a__first <= temp___idx_144) and
+  (temp___idx_144 <= a__last)) and (bool_eq17((a[temp___idx_144]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_144)]), 1, 3) = true)) or
+  (not ((a__first <= temp___idx_144) and (temp___idx_144 <= a__last)))))) ->
+  (bool_eq18(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_144:int. (((a__first <= temp___idx_144) and
+  (temp___idx_144 <= a__last)) -> (bool_eq17((a[temp___idx_144]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_144)]), 1, 3) = true))))) ->
+  (bool_eq18(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev4 :
+  (forall a:(int,(int,track_opt_id) farray) farray.
+  forall b:(int,(int,track_opt_id) farray) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq18(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_144:int. (((a__first <= temp___idx_144) and
+  (temp___idx_144 <= a__last)) -> (bool_eq17((a[temp___idx_144]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_144)]), 1, 3) = true)))))))
+
+logic previous_tracks : (int,(int,track_opt_id) farray) farray
+
+logic attr__ATTRIBUTE_ADDRESS7 : int
+
+logic trains__previous_tracks__aggregate_def : (int,track_opt_id) farray,
+  (int,track_opt_id) farray, (int,track_opt_id) farray,
+  (int,track_opt_id) farray,
+  (int,track_opt_id) farray -> (int,(int,track_opt_id) farray) farray
+
+axiom def_axiom1 :
+  (forall temp___146:(int,track_opt_id) farray.
+  forall temp___147:(int,track_opt_id) farray.
+  forall temp___148:(int,track_opt_id) farray.
+  forall temp___149:(int,track_opt_id) farray.
+  forall temp___150:(int,track_opt_id) farray.
+  ((((((trains__previous_tracks__aggregate_def(temp___146, temp___147,
+  temp___148, temp___149, temp___150)[1]) = temp___146) and
+  ((trains__previous_tracks__aggregate_def(temp___146, temp___147,
+  temp___148, temp___149, temp___150)[2]) = temp___147)) and
+  ((trains__previous_tracks__aggregate_def(temp___146, temp___147,
+  temp___148, temp___149, temp___150)[3]) = temp___148)) and
+  ((trains__previous_tracks__aggregate_def(temp___146, temp___147,
+  temp___148, temp___149, temp___150)[4]) = temp___149)) and
+  ((trains__previous_tracks__aggregate_def(temp___146, temp___147,
+  temp___148, temp___149, temp___150)[5]) = temp___150)))
+
+logic temp___152 : int, int, int -> (int,track_opt_id) farray
+
+axiom def_axiom2 :
+  (forall temp___154:int. forall temp___155:int. forall temp___156:int.
+  ((((temp___152(temp___154, temp___155,
+  temp___156)[1]) = of_rep6(temp___154)) and ((temp___152(temp___154,
+  temp___155, temp___156)[2]) = of_rep6(temp___155))) and
+  ((temp___152(temp___154, temp___155,
+  temp___156)[3]) = of_rep6(temp___156))))
+
+logic temp___158 : int, int, int -> (int,track_opt_id) farray
+
+axiom def_axiom3 :
+  (forall temp___160:int. forall temp___161:int. forall temp___162:int.
+  ((((temp___158(temp___160, temp___161,
+  temp___162)[1]) = of_rep6(temp___160)) and ((temp___158(temp___160,
+  temp___161, temp___162)[2]) = of_rep6(temp___161))) and
+  ((temp___158(temp___160, temp___161,
+  temp___162)[3]) = of_rep6(temp___162))))
+
+logic temp___164 : int, int, int -> (int,track_opt_id) farray
+
+axiom def_axiom4 :
+  (forall temp___166:int. forall temp___167:int. forall temp___168:int.
+  ((((temp___164(temp___166, temp___167,
+  temp___168)[1]) = of_rep6(temp___166)) and ((temp___164(temp___166,
+  temp___167, temp___168)[2]) = of_rep6(temp___167))) and
+  ((temp___164(temp___166, temp___167,
+  temp___168)[3]) = of_rep6(temp___168))))
+
+logic temp___170 : int, int, int -> (int,track_opt_id) farray
+
+axiom def_axiom5 :
+  (forall temp___172:int. forall temp___173:int. forall temp___174:int.
+  ((((temp___170(temp___172, temp___173,
+  temp___174)[1]) = of_rep6(temp___172)) and ((temp___170(temp___172,
+  temp___173, temp___174)[2]) = of_rep6(temp___173))) and
+  ((temp___170(temp___172, temp___173,
+  temp___174)[3]) = of_rep6(temp___174))))
+
+logic temp___176 : int, int, int -> (int,track_opt_id) farray
+
+axiom def_axiom6 :
+  (forall temp___178:int. forall temp___179:int. forall temp___180:int.
+  ((((temp___176(temp___178, temp___179,
+  temp___180)[1]) = of_rep6(temp___178)) and ((temp___176(temp___178,
+  temp___179, temp___180)[2]) = of_rep6(temp___179))) and
+  ((temp___176(temp___178, temp___179,
+  temp___180)[3]) = of_rep6(temp___180))))
+
+axiom previous_tracks__def_axiom :
+  (previous_tracks = trains__previous_tracks__aggregate_def(temp___152(8, 0,
+  0), temp___158(1, 0, 0), temp___164(2, 3, 0), temp___170(5, 0, 0),
+  temp___176(4, 6, 7)))
+
+axiom get_previous_track__post_axiom :
+  (forall position:track_id. forall position1:natural.
+  forall position2:track_id.
+  (forall id:int [get_previous_track({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = position;
+  rec__trains__train_position__pos_begin = position1;
+  rec__trains__train_position__track_end = position2 } }, id)].
+  (in_range9(id) -> in_range8(get_previous_track({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = position;
+  rec__trains__train_position__pos_begin = position1;
+  rec__trains__train_position__track_end = position2 } }, id)))))
+
+axiom get_previous_track__def_axiom :
+  (forall position:track_id. forall position1:natural.
+  forall position2:track_id.
+  (forall id:int [get_previous_track({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = position;
+  rec__trains__train_position__pos_begin = position1;
+  rec__trains__train_position__track_end = position2 } }, id)].
+  (in_range9(id) -> (get_previous_track({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = position;
+  rec__trains__train_position__pos_begin = position1;
+  rec__trains__train_position__track_end = position2 } },
+  id) = to_rep6(((previous_tracks[to_rep5((((tracks[to_rep1(position2)])).us_split_fields3).rec__trains__track__from)])[id]))))))
+
+axiom get_other_previous_track__post_axiom :
+  (forall position:track_id. forall position1:natural.
+  forall position2:track_id.
+  (forall id:int [get_other_previous_track({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = position;
+  rec__trains__train_position__pos_begin = position1;
+  rec__trains__train_position__track_end = position2 } }, id)].
+  (in_range9(id) -> in_range8(get_other_previous_track({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = position;
+  rec__trains__train_position__pos_begin = position1;
+  rec__trains__train_position__track_end = position2 } }, id)))))
+
+axiom get_other_previous_track__def_axiom :
+  (forall position:track_id. forall position1:natural.
+  forall position2:track_id.
+  (forall id:int [get_other_previous_track({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = position;
+  rec__trains__train_position__pos_begin = position1;
+  rec__trains__train_position__track_end = position2 } }, id)].
+  (in_range9(id) ->
+  (((to_rep6(((previous_tracks[to_rep5((((tracks[to_rep1(position)])).us_split_fields3).rec__trains__track__from)])[id])) = to_rep1(position2)) ->
+  (get_other_previous_track({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = position;
+  rec__trains__train_position__pos_begin = position1;
+  rec__trains__train_position__track_end = position2 } }, id) = 0)) and
+  ((not (to_rep6(((previous_tracks[to_rep5((((tracks[to_rep1(position)])).us_split_fields3).rec__trains__track__from)])[id])) = to_rep1(position2))) ->
+  (get_other_previous_track({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = position;
+  rec__trains__train_position__pos_begin = position1;
+  rec__trains__train_position__track_end = position2 } },
+  id) = to_rep6(((previous_tracks[to_rep5((((tracks[to_rep1(position)])).us_split_fields3).rec__trains__track__from)])[id]))))))))
+
+ (* File "trains.ads", line 155, characters 0-0 *)
+goal WP_parameter_def :
+  (forall cur_num_trains:int. forall track_signals:(int,signal) farray.
+  (in_range1(track) -> (in_range2(cur_num_trains) ->
+  ((to_rep2((track_signals[track])) = 1) -> (((cur_num_trains = r7b) and
+  in_range2(r7b)) -> ((1 <= r7b) -> (1 <= 1)))))))

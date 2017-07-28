@@ -1,0 +1,442 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type enum_t
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 2))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : enum_t, enum_t -> bool
+
+logic dummy : enum_t
+
+type enum_t__ref = { enum_t__content : enum_t
+}
+
+function enum_t__ref___projection(a: enum_t__ref) : enum_t =
+  (a).enum_t__content
+
+logic to_rep : enum_t -> int
+
+logic of_rep : int -> enum_t
+
+axiom inversion_axiom :
+  (forall x:enum_t [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:enum_t [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type small_index_t
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 1000))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : small_index_t, small_index_t -> bool
+
+logic dummy1 : small_index_t
+
+type small_index_t__ref = { small_index_t__content : small_index_t
+}
+
+function small_index_t__ref___projection(a: small_index_t__ref) : small_index_t =
+  (a).small_index_t__content
+
+logic to_rep1 : small_index_t -> int
+
+logic of_rep1 : int -> small_index_t
+
+axiom inversion_axiom1 :
+  (forall x:small_index_t [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 :
+  (forall x:small_index_t [to_rep1(x)]. in_range2(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type us_split_fields = { rec__array_aggregates__basic_record__a :
+small_index_t; rec__array_aggregates__basic_record__b : bool;
+rec__array_aggregates__basic_record__c : enum_t
+}
+
+function us_split_fields_A2__projection(a: us_split_fields) : small_index_t =
+  (a).rec__array_aggregates__basic_record__a
+
+function us_split_fields_B2__projection(a: us_split_fields) : bool =
+  (a).rec__array_aggregates__basic_record__b
+
+function us_split_fields_C__projection(a: us_split_fields) : enum_t =
+  (a).rec__array_aggregates__basic_record__c
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref_5__projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+function us_rep_5__projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+logic bool_eq4 : us_rep, us_rep -> bool
+
+axiom bool_eq_def3 :
+  (forall a:us_rep. forall b:us_rep [bool_eq4(a, b)].
+  (((((to_rep1(((a).us_split_fields1).rec__array_aggregates__basic_record__a) = to_rep1(((b).us_split_fields1).rec__array_aggregates__basic_record__a)) and
+  (((a).us_split_fields1).rec__array_aggregates__basic_record__b = ((b).us_split_fields1).rec__array_aggregates__basic_record__b)) and
+  (to_rep(((a).us_split_fields1).rec__array_aggregates__basic_record__c) = to_rep(((b).us_split_fields1).rec__array_aggregates__basic_record__c))) ->
+  (bool_eq4(a, b) = true)) and
+  ((not (((to_rep1(((a).us_split_fields1).rec__array_aggregates__basic_record__a) = to_rep1(((b).us_split_fields1).rec__array_aggregates__basic_record__a)) and
+  (((a).us_split_fields1).rec__array_aggregates__basic_record__b = ((b).us_split_fields1).rec__array_aggregates__basic_record__b)) and
+  (to_rep(((a).us_split_fields1).rec__array_aggregates__basic_record__c) = to_rep(((b).us_split_fields1).rec__array_aggregates__basic_record__c)))) ->
+  (bool_eq4(a, b) = false))))
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:small_index_t. forall a1:bool. forall a2:enum_t.
+  (0 <= object__size({ us_split_fields1 = {
+  rec__array_aggregates__basic_record__a = a;
+  rec__array_aggregates__basic_record__b = a1;
+  rec__array_aggregates__basic_record__c = a2 } })))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:small_index_t. forall a1:bool. forall a2:enum_t.
+  (0 <= object__alignment({ us_split_fields1 = {
+  rec__array_aggregates__basic_record__a = a;
+  rec__array_aggregates__basic_record__b = a1;
+  rec__array_aggregates__basic_record__c = a2 } })))
+
+logic array_aggregates__basic_record__a__first__bit : int
+
+logic array_aggregates__basic_record__a__last__bit : int
+
+logic array_aggregates__basic_record__a__position : int
+
+axiom array_aggregates__basic_record__a__first__bit_axiom :
+  (0 <= array_aggregates__basic_record__a__first__bit)
+
+axiom array_aggregates__basic_record__a__last__bit_axiom :
+  (array_aggregates__basic_record__a__first__bit <  array_aggregates__basic_record__a__last__bit)
+
+axiom array_aggregates__basic_record__a__position_axiom :
+  (0 <= array_aggregates__basic_record__a__position)
+
+logic array_aggregates__basic_record__b__first__bit : int
+
+logic array_aggregates__basic_record__b__last__bit : int
+
+logic array_aggregates__basic_record__b__position : int
+
+axiom array_aggregates__basic_record__b__first__bit_axiom :
+  (0 <= array_aggregates__basic_record__b__first__bit)
+
+axiom array_aggregates__basic_record__b__last__bit_axiom :
+  (array_aggregates__basic_record__b__first__bit <  array_aggregates__basic_record__b__last__bit)
+
+axiom array_aggregates__basic_record__b__position_axiom :
+  (0 <= array_aggregates__basic_record__b__position)
+
+logic array_aggregates__basic_record__c__first__bit : int
+
+logic array_aggregates__basic_record__c__last__bit : int
+
+logic array_aggregates__basic_record__c__position : int
+
+axiom array_aggregates__basic_record__c__first__bit_axiom :
+  (0 <= array_aggregates__basic_record__c__first__bit)
+
+axiom array_aggregates__basic_record__c__last__bit_axiom :
+  (array_aggregates__basic_record__c__first__bit <  array_aggregates__basic_record__c__last__bit)
+
+axiom array_aggregates__basic_record__c__position_axiom :
+  (0 <= array_aggregates__basic_record__c__position)
+
+logic user_eq2 : us_rep, us_rep -> bool
+
+logic dummy2 : small_index_t
+
+logic dummy3 : bool
+
+logic dummy4 : enum_t
+
+type basic_record__ref = { basic_record__content : us_rep
+}
+
+function basic_record__ref___projection(a: basic_record__ref) : us_rep =
+  (a).basic_record__content
+
+type map__ref = { map__content : (int,us_rep) farray
+}
+
+logic slide : (int,us_rep) farray, int, int -> (int,us_rep) farray
+
+axiom slide_eq :
+  (forall a:(int,us_rep) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,us_rep) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
+  int -> (int,us_rep) farray
+
+axiom concat_def :
+  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton : us_rep, int -> (int,us_rep) farray
+
+axiom singleton_def :
+  (forall v:small_index_t. forall v1:bool. forall v2:enum_t.
+  (forall i:int [(singleton({ us_split_fields1 = {
+  rec__array_aggregates__basic_record__a = v;
+  rec__array_aggregates__basic_record__b = v1;
+  rec__array_aggregates__basic_record__c = v2 } }, i)[i])]. ((singleton({
+  us_split_fields1 = { rec__array_aggregates__basic_record__a = v;
+  rec__array_aggregates__basic_record__b = v1;
+  rec__array_aggregates__basic_record__c = v2 } }, i)[i]) = {
+  us_split_fields1 = { rec__array_aggregates__basic_record__a = v;
+  rec__array_aggregates__basic_record__b = v1;
+  rec__array_aggregates__basic_record__c = v2 } })))
+
+logic bool_eq5 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
+  int -> bool
+
+axiom bool_eq_def4 :
+  (forall a:(int,us_rep) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,us_rep) farray. forall b__first:int. forall b__last:int
+  [bool_eq5(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_146:int. ((((a__first <= temp___idx_146) and
+  (temp___idx_146 <= a__last)) and (bool_eq4((a[temp___idx_146]),
+  (b[((b__first - a__first) + temp___idx_146)])) = true)) or
+  (not ((a__first <= temp___idx_146) and (temp___idx_146 <= a__last)))))) ->
+  (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_146:int. (((a__first <= temp___idx_146) and
+  (temp___idx_146 <= a__last)) -> (bool_eq4((a[temp___idx_146]),
+  (b[((b__first - a__first) + temp___idx_146)])) = true))))) -> (bool_eq5(a,
+  a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev :
+  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq5(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_146:int. (((a__first <= temp___idx_146) and
+  (temp___idx_146 <= a__last)) -> (bool_eq4((a[temp___idx_146]),
+  (b[((b__first - a__first) + temp___idx_146)])) = true)))))))
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic temp___466 : us_rep, us_rep -> (int,us_rep) farray
+
+axiom def_axiom :
+  (forall temp___468:small_index_t. forall temp___4681:bool.
+  forall temp___4682:enum_t. forall temp___469:small_index_t.
+  forall temp___4691:bool. forall temp___4692:enum_t.
+  (forall temp___470:int. ((((temp___470 = 2) or ((4 <= temp___470) and
+  (temp___470 <= 6))) -> ((temp___466({ us_split_fields1 = {
+  rec__array_aggregates__basic_record__a = temp___468;
+  rec__array_aggregates__basic_record__b = temp___4681;
+  rec__array_aggregates__basic_record__c = temp___4682 } }, {
+  us_split_fields1 = { rec__array_aggregates__basic_record__a = temp___469;
+  rec__array_aggregates__basic_record__b = temp___4691;
+  rec__array_aggregates__basic_record__c = temp___4692 } })[temp___470]) = {
+  us_split_fields1 = { rec__array_aggregates__basic_record__a = temp___468;
+  rec__array_aggregates__basic_record__b = temp___4681;
+  rec__array_aggregates__basic_record__c = temp___4682 } })) and
+  ((not ((temp___470 = 2) or ((4 <= temp___470) and (temp___470 <= 6)))) ->
+  ((temp___466({ us_split_fields1 = {
+  rec__array_aggregates__basic_record__a = temp___468;
+  rec__array_aggregates__basic_record__b = temp___4681;
+  rec__array_aggregates__basic_record__c = temp___4682 } }, {
+  us_split_fields1 = { rec__array_aggregates__basic_record__a = temp___469;
+  rec__array_aggregates__basic_record__b = temp___4691;
+  rec__array_aggregates__basic_record__c = temp___4692 } })[temp___470]) = {
+  us_split_fields1 = { rec__array_aggregates__basic_record__a = temp___469;
+  rec__array_aggregates__basic_record__b = temp___4691;
+  rec__array_aggregates__basic_record__c = temp___4692 } })))))
+
+ (* File "array_aggregates.adb", line 176, characters 0-0 *)
+goal WP_parameter_def :
+  (forall x:(int,us_rep) farray. forall o:enum_t. forall o1:small_index_t.
+  forall o2:small_index_t. forall o3:bool. forall o4:enum_t.
+  forall o5:enum_t. forall o6:small_index_t. forall o7:small_index_t.
+  forall o8:bool. forall o9:enum_t. forall o10:small_index_t.
+  forall o11:bool. forall o12:enum_t. forall o13:small_index_t.
+  forall o14:bool. forall o15:enum_t. forall o16:(int,us_rep) farray.
+  forall result:(int,us_rep) farray. forall x1:(int,us_rep) farray.
+  ((((((to_rep(o5) = 1) and ((to_rep1(o6) = 10) and ((o6 = o7) and
+  ((of_int(1) = o8) and (o5 = o9))))) and ((o10 = o7) and ((o11 = o8) and
+  (o12 = o9)))) and ((((to_rep(o) = 0) and ((to_rep1(o1) = 5) and
+  ((o1 = o2) and ((of_int(0) = o3) and (o = o4))))) and ((o13 = o2) and
+  ((o14 = o3) and (o15 = o4)))) and (o16 = temp___466({ us_split_fields1 = {
+  rec__array_aggregates__basic_record__a = o13;
+  rec__array_aggregates__basic_record__b = o14;
+  rec__array_aggregates__basic_record__c = o15 } }, { us_split_fields1 = {
+  rec__array_aggregates__basic_record__a = o10;
+  rec__array_aggregates__basic_record__b = o11;
+  rec__array_aggregates__basic_record__c = o12 } })))) and ((result = x) and
+  (x1 = o16))) ->
+  (to_rep((((x1[3])).us_split_fields1).rec__array_aggregates__basic_record__c) = 1)))

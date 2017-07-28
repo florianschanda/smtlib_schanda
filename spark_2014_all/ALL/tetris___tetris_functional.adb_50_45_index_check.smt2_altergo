@@ -1,0 +1,2313 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type cell
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 7))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : cell, cell -> bool
+
+logic dummy : cell
+
+type cell__ref = { cell__content : cell
+}
+
+function cell__ref___projection(a: cell__ref) : cell = (a).cell__content
+
+logic to_rep : cell -> int
+
+logic of_rep : int -> cell
+
+axiom inversion_axiom : (forall x:cell [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:cell [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type shape
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 7))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : shape, shape -> bool
+
+logic dummy1 : shape
+
+type shape__ref = { shape__content : shape
+}
+
+function shape__ref___projection(a: shape__ref) : shape = (a).shape__content
+
+logic to_rep1 : shape -> int
+
+logic of_rep1 : int -> shape
+
+axiom inversion_axiom1 :
+  (forall x:shape [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:shape [to_rep1(x)]. in_range2(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type three_shape
+
+predicate in_range3(x: int) = ((3 <= x) and (x <= 7))
+
+logic bool_eq4 : int, int -> bool
+
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq2 : three_shape, three_shape -> bool
+
+logic dummy2 : three_shape
+
+type three_shape__ref = { three_shape__content : three_shape
+}
+
+function three_shape__ref___projection(a: three_shape__ref) : three_shape =
+  (a).three_shape__content
+
+type x_coord
+
+predicate in_range4(x: int) = ((1 <= x) and (x <= 10))
+
+logic bool_eq5 : int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq3 : x_coord, x_coord -> bool
+
+logic dummy3 : x_coord
+
+type x_coord__ref = { x_coord__content : x_coord
+}
+
+function x_coord__ref___projection(a: x_coord__ref) : x_coord =
+  (a).x_coord__content
+
+type y_coord
+
+predicate in_range5(x: int) = ((1 <= x) and (x <= 50))
+
+logic bool_eq6 : int, int -> bool
+
+axiom bool_eq_def5 :
+  (forall x:int. forall y:int [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> int
+
+logic user_eq4 : y_coord, y_coord -> bool
+
+logic dummy4 : y_coord
+
+type y_coord__ref = { y_coord__content : y_coord
+}
+
+function y_coord__ref___projection(a: y_coord__ref) : y_coord =
+  (a).y_coord__content
+
+type map__ref = { map__content : (int,cell) farray
+}
+
+logic slide : (int,cell) farray, int, int -> (int,cell) farray
+
+axiom slide_eq :
+  (forall a:(int,cell) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,cell) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat : (int,cell) farray, int, int, (int,cell) farray, int,
+  int -> (int,cell) farray
+
+axiom concat_def :
+  (forall a:(int,cell) farray. forall b:(int,cell) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton : cell, int -> (int,cell) farray
+
+axiom singleton_def :
+  (forall v:cell.
+  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
+
+logic bool_eq7 : (int,cell) farray, int, int, (int,cell) farray, int,
+  int -> bool
+
+axiom bool_eq_def6 :
+  (forall a:(int,cell) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,cell) farray. forall b__first:int. forall b__last:int
+  [bool_eq7(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) and
+  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
+  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) ->
+  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (bool_eq7(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev :
+  (forall a:(int,cell) farray. forall b:(int,cell) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq7(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) ->
+  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
+
+logic compare : (int,cell) farray, int, int, (int,cell) farray, int,
+  int -> int
+
+axiom compare_def_eq :
+  (forall a:(int,cell) farray. forall b:(int,cell) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq7(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt :
+  (forall a:(int,cell) farray. forall b:(int,cell) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq7(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt :
+  (forall a:(int,cell) farray. forall b:(int,cell) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq7(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+
+logic dummy5 : (int,cell) farray
+
+logic value__size : int
+
+logic object__size : (int,cell) farray -> int
+
+logic value__component__size : int
+
+logic object__component__size : (int,cell) farray -> int
+
+logic value__alignment : int
+
+logic object__alignment : (int,cell) farray -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:(int,cell) farray. (0 <= object__size(a)))
+
+axiom value__component__size_axiom : (0 <= value__component__size)
+
+axiom object__component__size_axiom :
+  (forall a:(int,cell) farray. (0 <= object__component__size(a)))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:(int,cell) farray. (0 <= object__alignment(a)))
+
+logic user_eq5 : (int,cell) farray, (int,cell) farray -> bool
+
+type map__ref1 = { map__content1 : (int,(int,cell) farray) farray
+}
+
+logic slide1 : (int,(int,cell) farray) farray, int,
+  int -> (int,(int,cell) farray) farray
+
+axiom slide_eq1 :
+  (forall a:(int,(int,cell) farray) farray.
+  (forall first:int [slide1(a, first, first)]. (slide1(a, first, first) = a)))
+
+axiom slide_def1 :
+  (forall a:(int,(int,cell) farray) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat1 : (int,(int,cell) farray) farray, int, int,
+  (int,(int,cell) farray) farray, int, int -> (int,(int,cell) farray) farray
+
+axiom concat_def1 :
+  (forall a:(int,(int,cell) farray) farray.
+  forall b:(int,(int,cell) farray) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton1 : (int,cell) farray, int -> (int,(int,cell) farray) farray
+
+axiom singleton_def1 :
+  (forall v:(int,cell) farray.
+  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
+
+logic bool_eq8 : (int,(int,cell) farray) farray, int, int,
+  (int,(int,cell) farray) farray, int, int -> bool
+
+axiom bool_eq_def7 :
+  (forall a:(int,(int,cell) farray) farray. forall a__first:int.
+  forall a__last:int. forall b:(int,(int,cell) farray) farray.
+  forall b__first:int. forall b__last:int [bool_eq8(a, a__first, a__last, b,
+  b__first, b__last)]. ((((((a__first <= a__last) and
+  ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
+  (temp___idx_133 <= a__last)) and (bool_eq7((a[temp___idx_133]), 1, 10,
+  (b[((b__first - a__first) + temp___idx_133)]), 1, 10) = true)) or
+  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (bool_eq8(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
+  (temp___idx_133 <= a__last)) -> (bool_eq7((a[temp___idx_133]), 1, 10,
+  (b[((b__first - a__first) + temp___idx_133)]), 1, 10) = true))))) ->
+  (bool_eq8(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev1 :
+  (forall a:(int,(int,cell) farray) farray.
+  forall b:(int,(int,cell) farray) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq8(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
+  (temp___idx_133 <= a__last)) -> (bool_eq7((a[temp___idx_133]), 1, 10,
+  (b[((b__first - a__first) + temp___idx_133)]), 1, 10) = true)))))))
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+type px_coord
+
+predicate in_range6(x: int) = (((-1) <= x) and (x <= 9))
+
+logic bool_eq9 : int, int -> bool
+
+axiom bool_eq_def8 :
+  (forall x:int. forall y:int [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE6 : us_image -> int
+
+logic user_eq6 : px_coord, px_coord -> bool
+
+logic dummy6 : px_coord
+
+type px_coord__ref = { px_coord__content : px_coord
+}
+
+function px_coord__ref___projection(a: px_coord__ref) : px_coord =
+  (a).px_coord__content
+
+logic to_rep2 : px_coord -> int
+
+logic of_rep2 : int -> px_coord
+
+axiom inversion_axiom2 :
+  (forall x:px_coord [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 : (forall x:px_coord [to_rep2(x)]. in_range6(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range6(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+type py_coord
+
+predicate in_range7(x: int) = (((-1) <= x) and (x <= 49))
+
+logic bool_eq10 : int, int -> bool
+
+axiom bool_eq_def9 :
+  (forall x:int. forall y:int [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE7 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check7 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE7 : us_image -> int
+
+logic user_eq7 : py_coord, py_coord -> bool
+
+logic dummy7 : py_coord
+
+type py_coord__ref = { py_coord__content : py_coord
+}
+
+function py_coord__ref___projection(a: py_coord__ref) : py_coord =
+  (a).py_coord__content
+
+logic to_rep3 : py_coord -> int
+
+logic of_rep3 : int -> py_coord
+
+axiom inversion_axiom3 :
+  (forall x:py_coord [to_rep3(x)]. (of_rep3(to_rep3(x)) = x))
+
+axiom range_axiom3 : (forall x:py_coord [to_rep3(x)]. in_range7(to_rep3(x)))
+
+axiom coerce_axiom3 :
+  (forall x:int [to_rep3(of_rep3(x))]. (in_range7(x) ->
+  (to_rep3(of_rep3(x)) = x)))
+
+type direction
+
+predicate in_range8(x: int) = ((0 <= x) and (x <= 3))
+
+logic bool_eq11 : int, int -> bool
+
+axiom bool_eq_def10 :
+  (forall x:int. forall y:int [bool_eq11(x, y)]. (((x = y) -> (bool_eq11(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq11(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE8 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check8 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE8 : us_image -> int
+
+logic user_eq8 : direction, direction -> bool
+
+logic dummy8 : direction
+
+type direction__ref = { direction__content : direction
+}
+
+function direction__ref___projection(a: direction__ref) : direction =
+  (a).direction__content
+
+logic to_rep4 : direction -> int
+
+logic of_rep4 : int -> direction
+
+axiom inversion_axiom4 :
+  (forall x:direction [to_rep4(x)]. (of_rep4(to_rep4(x)) = x))
+
+axiom range_axiom4 : (forall x:direction [to_rep4(x)]. in_range8(to_rep4(x)))
+
+axiom coerce_axiom4 :
+  (forall x:int [to_rep4(of_rep4(x))]. (in_range8(x) ->
+  (to_rep4(of_rep4(x)) = x)))
+
+type us_split_fields = { rec__tetris_functional__piece__s : shape;
+rec__tetris_functional__piece__d : direction;
+rec__tetris_functional__piece__x : px_coord; rec__tetris_functional__piece__y
+: py_coord
+}
+
+function us_split_fields_S__projection(a: us_split_fields) : shape =
+  (a).rec__tetris_functional__piece__s
+
+function us_split_fields_D__projection(a: us_split_fields) : direction =
+  (a).rec__tetris_functional__piece__d
+
+function us_split_fields_X__projection(a: us_split_fields) : px_coord =
+  (a).rec__tetris_functional__piece__x
+
+function us_split_fields_Y__projection(a: us_split_fields) : py_coord =
+  (a).rec__tetris_functional__piece__y
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+function us_rep___projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+logic bool_eq12 : us_rep, us_rep -> bool
+
+axiom bool_eq_def11 :
+  (forall a:us_rep. forall b:us_rep [bool_eq12(a, b)].
+  ((((((to_rep1(((a).us_split_fields1).rec__tetris_functional__piece__s) = to_rep1(((b).us_split_fields1).rec__tetris_functional__piece__s)) and
+  (to_rep4(((a).us_split_fields1).rec__tetris_functional__piece__d) = to_rep4(((b).us_split_fields1).rec__tetris_functional__piece__d))) and
+  (to_rep2(((a).us_split_fields1).rec__tetris_functional__piece__x) = to_rep2(((b).us_split_fields1).rec__tetris_functional__piece__x))) and
+  (to_rep3(((a).us_split_fields1).rec__tetris_functional__piece__y) = to_rep3(((b).us_split_fields1).rec__tetris_functional__piece__y))) ->
+  (bool_eq12(a, b) = true)) and
+  ((not ((((to_rep1(((a).us_split_fields1).rec__tetris_functional__piece__s) = to_rep1(((b).us_split_fields1).rec__tetris_functional__piece__s)) and
+  (to_rep4(((a).us_split_fields1).rec__tetris_functional__piece__d) = to_rep4(((b).us_split_fields1).rec__tetris_functional__piece__d))) and
+  (to_rep2(((a).us_split_fields1).rec__tetris_functional__piece__x) = to_rep2(((b).us_split_fields1).rec__tetris_functional__piece__x))) and
+  (to_rep3(((a).us_split_fields1).rec__tetris_functional__piece__y) = to_rep3(((b).us_split_fields1).rec__tetris_functional__piece__y)))) ->
+  (bool_eq12(a, b) = false))))
+
+logic value__size1 : int
+
+logic object__size1 : us_rep -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : us_rep -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 :
+  (forall a:shape. forall a1:direction. forall a2:px_coord.
+  forall a3:py_coord. (0 <= object__size1({ us_split_fields1 = {
+  rec__tetris_functional__piece__s = a; rec__tetris_functional__piece__d =
+  a1; rec__tetris_functional__piece__x = a2;
+  rec__tetris_functional__piece__y = a3 } })))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:shape. forall a1:direction. forall a2:px_coord.
+  forall a3:py_coord. (0 <= object__alignment1({ us_split_fields1 = {
+  rec__tetris_functional__piece__s = a; rec__tetris_functional__piece__d =
+  a1; rec__tetris_functional__piece__x = a2;
+  rec__tetris_functional__piece__y = a3 } })))
+
+logic tetris_functional__piece__s__first__bit : int
+
+logic tetris_functional__piece__s__last__bit : int
+
+logic tetris_functional__piece__s__position : int
+
+axiom tetris_functional__piece__s__first__bit_axiom :
+  (0 <= tetris_functional__piece__s__first__bit)
+
+axiom tetris_functional__piece__s__last__bit_axiom :
+  (tetris_functional__piece__s__first__bit <  tetris_functional__piece__s__last__bit)
+
+axiom tetris_functional__piece__s__position_axiom :
+  (0 <= tetris_functional__piece__s__position)
+
+logic tetris_functional__piece__d__first__bit : int
+
+logic tetris_functional__piece__d__last__bit : int
+
+logic tetris_functional__piece__d__position : int
+
+axiom tetris_functional__piece__d__first__bit_axiom :
+  (0 <= tetris_functional__piece__d__first__bit)
+
+axiom tetris_functional__piece__d__last__bit_axiom :
+  (tetris_functional__piece__d__first__bit <  tetris_functional__piece__d__last__bit)
+
+axiom tetris_functional__piece__d__position_axiom :
+  (0 <= tetris_functional__piece__d__position)
+
+logic tetris_functional__piece__x__first__bit : int
+
+logic tetris_functional__piece__x__last__bit : int
+
+logic tetris_functional__piece__x__position : int
+
+axiom tetris_functional__piece__x__first__bit_axiom :
+  (0 <= tetris_functional__piece__x__first__bit)
+
+axiom tetris_functional__piece__x__last__bit_axiom :
+  (tetris_functional__piece__x__first__bit <  tetris_functional__piece__x__last__bit)
+
+axiom tetris_functional__piece__x__position_axiom :
+  (0 <= tetris_functional__piece__x__position)
+
+logic tetris_functional__piece__y__first__bit : int
+
+logic tetris_functional__piece__y__last__bit : int
+
+logic tetris_functional__piece__y__position : int
+
+axiom tetris_functional__piece__y__first__bit_axiom :
+  (0 <= tetris_functional__piece__y__first__bit)
+
+axiom tetris_functional__piece__y__last__bit_axiom :
+  (tetris_functional__piece__y__first__bit <  tetris_functional__piece__y__last__bit)
+
+axiom tetris_functional__piece__y__position_axiom :
+  (0 <= tetris_functional__piece__y__position)
+
+logic user_eq9 : us_rep, us_rep -> bool
+
+logic dummy9 : shape
+
+logic dummy10 : direction
+
+logic dummy11 : px_coord
+
+logic dummy12 : py_coord
+
+type piece__ref = { piece__content : us_rep
+}
+
+function piece__ref___projection(a: piece__ref) : us_rep = (a).piece__content
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+type state
+
+predicate in_range9(x: int) = ((0 <= x) and (x <= 3))
+
+logic bool_eq13 : int, int -> bool
+
+axiom bool_eq_def12 :
+  (forall x:int. forall y:int [bool_eq13(x, y)]. (((x = y) -> (bool_eq13(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq13(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE9 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check9 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE9 : us_image -> int
+
+logic user_eq10 : state, state -> bool
+
+logic dummy13 : state
+
+type state__ref = { state__content : state
+}
+
+function state__ref___projection(a: state__ref) : state = (a).state__content
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+type map
+
+type map__ref2 = { map__content2 : map
+}
+
+logic get : map, int, int -> bool
+
+logic set : map, int, int, bool -> map
+
+axiom Select_eq :
+  (forall m:map.
+  (forall i:int.
+  (forall j:int.
+  (forall a:bool [set(m, i, j, a)]. (get(set(m, i, j, a), i, j) = a)))))
+
+axiom Select_neq :
+  (forall m:map.
+  (forall i:int. forall i2:int.
+  (forall j:int. forall j2:int.
+  (forall a:bool [get(set(m, i, j, a), i2, j2)| set(m, i, j, a), get(m, i2,
+  j2)]. ((not ((i = i2) and (j = j2))) -> (get(set(m, i, j, a), i2,
+  j2) = get(m, i2, j2)))))))
+
+logic slide2 : map, int, int, int, int -> map
+
+axiom slide_def2 :
+  (forall a:map.
+  (forall new_first:int. forall old_first:int.
+  (forall new_first_2:int. forall old_first_2:int.
+  (forall i:int.
+  (forall j:int [get(slide2(a, old_first, new_first, old_first_2,
+  new_first_2), i, j)]. (get(slide2(a, old_first, new_first, old_first_2,
+  new_first_2), i, j) = get(a, (i - (new_first - old_first)),
+  (j - (new_first_2 - old_first_2)))))))))
+
+logic bool_eq14 : map, int, int, int, int, map, int, int, int, int -> bool
+
+axiom bool_eq_def13 :
+  (forall a:map. forall a__first:int. forall a__last:int.
+  forall a__first_2:int. forall a__last_2:int. forall b:map.
+  forall b__first:int. forall b__last:int. forall b__first_2:int.
+  forall b__last_2:int [bool_eq14(a, a__first, a__last, a__first_2,
+  a__last_2, b, b__first, b__last, b__first_2, b__last_2)].
+  (((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (((a__first_2 <= a__last_2) and ((b__first_2 <= b__last_2) and
+  ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)))) or
+  ((not (a__first_2 <= a__last_2)) and (b__last_2 <  b__first_2)))) and
+  (forall temp___idx_134:int. forall temp___idx_135:int.
+  (((((a__first <= temp___idx_134) and (temp___idx_134 <= a__last)) and
+  ((a__first_2 <= temp___idx_135) and (temp___idx_135 <= a__last_2))) and
+  (get(a, temp___idx_134, temp___idx_135) = get(b,
+  ((b__first - a__first) + temp___idx_134),
+  ((b__first_2 - a__first_2) + temp___idx_135)))) or
+  (not (((a__first <= temp___idx_134) and (temp___idx_134 <= a__last)) and
+  ((a__first_2 <= temp___idx_135) and (temp___idx_135 <= a__last_2))))))) ->
+  (bool_eq14(a, a__first, a__last, a__first_2, a__last_2, b, b__first,
+  b__last, b__first_2, b__last_2) = true)) and
+  ((not (((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (((a__first_2 <= a__last_2) -> ((b__first_2 <= b__last_2) and
+  ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)))) and
+  ((not (a__first_2 <= a__last_2)) -> (b__last_2 <  b__first_2)))) and
+  (forall temp___idx_134:int. forall temp___idx_135:int.
+  ((((a__first <= temp___idx_134) and (temp___idx_134 <= a__last)) and
+  ((a__first_2 <= temp___idx_135) and (temp___idx_135 <= a__last_2))) ->
+  (get(a, temp___idx_134, temp___idx_135) = get(b,
+  ((b__first - a__first) + temp___idx_134),
+  ((b__first_2 - a__first_2) + temp___idx_135))))))) -> (bool_eq14(a,
+  a__first, a__last, a__first_2, a__last_2, b, b__first, b__last, b__first_2,
+  b__last_2) = false))))
+
+axiom bool_eq_rev2 :
+  (forall a:map. forall b:map.
+  (forall a__first:int. forall a__last:int. forall a__first_2:int.
+  forall a__last_2:int. forall b__first:int. forall b__last:int.
+  forall b__first_2:int. forall b__last_2:int. ((bool_eq14(b, b__first,
+  b__last, b__first_2, b__last_2, a, a__first, a__last, a__first_2,
+  a__last_2) = true) -> (((((a__first <= a__last) ->
+  ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (((a__first_2 <= a__last_2) -> ((b__first_2 <= b__last_2) and
+  ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)))) and
+  ((not (a__first_2 <= a__last_2)) -> (b__last_2 <  b__first_2)))) and
+  (forall temp___idx_134:int. forall temp___idx_135:int.
+  ((((a__first <= temp___idx_134) and (temp___idx_134 <= a__last)) and
+  ((a__first_2 <= temp___idx_135) and (temp___idx_135 <= a__last_2))) ->
+  (get(a, temp___idx_134, temp___idx_135) = get(b,
+  ((b__first - a__first) + temp___idx_134),
+  ((b__first_2 - a__first_2) + temp___idx_135)))))))))
+
+logic dummy14 : map
+
+logic value__size2 : int
+
+logic object__size2 : map -> int
+
+logic value__component__size1 : int
+
+logic object__component__size1 : map -> int
+
+logic value__alignment2 : int
+
+logic object__alignment2 : map -> int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (forall a:map. (0 <= object__size2(a)))
+
+axiom value__component__size_axiom1 : (0 <= value__component__size1)
+
+axiom object__component__size_axiom1 :
+  (forall a:map. (0 <= object__component__size1(a)))
+
+axiom value__alignment_axiom2 : (0 <= value__alignment2)
+
+axiom object__alignment_axiom2 : (forall a:map. (0 <= object__alignment2(a)))
+
+logic user_eq11 : map, map -> bool
+
+type map__ref3 = { map__content3 : (int,map) farray
+}
+
+logic slide3 : (int,map) farray, int, int -> (int,map) farray
+
+axiom slide_eq2 :
+  (forall a:(int,map) farray.
+  (forall first:int [slide3(a, first, first)]. (slide3(a, first, first) = a)))
+
+axiom slide_def3 :
+  (forall a:(int,map) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide3(a, old_first, new_first)[i])]. ((slide3(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat2 : (int,map) farray, int, int, (int,map) farray, int,
+  int -> (int,map) farray
+
+axiom concat_def2 :
+  (forall a:(int,map) farray. forall b:(int,map) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat2(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat2(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat2(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton2 : map, int -> (int,map) farray
+
+axiom singleton_def2 :
+  (forall v:map.
+  (forall i:int [(singleton2(v, i)[i])]. ((singleton2(v, i)[i]) = v)))
+
+logic bool_eq15 : (int,map) farray, int, int, (int,map) farray, int,
+  int -> bool
+
+axiom bool_eq_def14 :
+  (forall a:(int,map) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,map) farray. forall b__first:int. forall b__last:int
+  [bool_eq15(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_136:int. ((((a__first <= temp___idx_136) and
+  (temp___idx_136 <= a__last)) and (bool_eq14((a[temp___idx_136]), 0, 3, 0,
+  3, (b[((b__first - a__first) + temp___idx_136)]), 0, 3, 0, 3) = true)) or
+  (not ((a__first <= temp___idx_136) and (temp___idx_136 <= a__last)))))) ->
+  (bool_eq15(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_136:int. (((a__first <= temp___idx_136) and
+  (temp___idx_136 <= a__last)) -> (bool_eq14((a[temp___idx_136]), 0, 3, 0, 3,
+  (b[((b__first - a__first) + temp___idx_136)]), 0, 3, 0, 3) = true))))) ->
+  (bool_eq15(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev3 :
+  (forall a:(int,map) farray. forall b:(int,map) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq15(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_136:int. (((a__first <= temp___idx_136) and
+  (temp___idx_136 <= a__last)) -> (bool_eq14((a[temp___idx_136]), 0, 3, 0, 3,
+  (b[((b__first - a__first) + temp___idx_136)]), 0, 3, 0, 3) = true)))))))
+
+logic possible_i_shapes : (int,map) farray
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic tetris_functional__possible_i_shapes__aggregate_def : map, map, map,
+  map -> (int,map) farray
+
+axiom def_axiom :
+  (forall temp___138:map. forall temp___139:map. forall temp___140:map.
+  forall temp___141:map.
+  (((((tetris_functional__possible_i_shapes__aggregate_def(temp___138,
+  temp___139, temp___140, temp___141)[0]) = temp___138) and
+  ((tetris_functional__possible_i_shapes__aggregate_def(temp___138,
+  temp___139, temp___140, temp___141)[1]) = temp___139)) and
+  ((tetris_functional__possible_i_shapes__aggregate_def(temp___138,
+  temp___139, temp___140, temp___141)[2]) = temp___140)) and
+  ((tetris_functional__possible_i_shapes__aggregate_def(temp___138,
+  temp___139, temp___140, temp___141)[3]) = temp___141)))
+
+logic temp___143 : bool, bool, bool, bool, bool, bool, bool, bool, bool,
+  bool, bool, bool, bool, bool, bool, bool -> map
+
+axiom def_axiom1 :
+  (forall temp___145:bool. forall temp___146:bool. forall temp___147:bool.
+  forall temp___148:bool. forall temp___149:bool. forall temp___150:bool.
+  forall temp___151:bool. forall temp___152:bool. forall temp___153:bool.
+  forall temp___154:bool. forall temp___155:bool. forall temp___156:bool.
+  forall temp___157:bool. forall temp___158:bool. forall temp___159:bool.
+  forall temp___160:bool. (((((((get(temp___143(temp___145, temp___146,
+  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
+  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
+  temp___159, temp___160), 0, 0) = temp___145) and
+  (get(temp___143(temp___145, temp___146, temp___147, temp___148, temp___149,
+  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
+  temp___156, temp___157, temp___158, temp___159, temp___160), 0,
+  1) = temp___146)) and (get(temp___143(temp___145, temp___146, temp___147,
+  temp___148, temp___149, temp___150, temp___151, temp___152, temp___153,
+  temp___154, temp___155, temp___156, temp___157, temp___158, temp___159,
+  temp___160), 0, 2) = temp___147)) and (get(temp___143(temp___145,
+  temp___146, temp___147, temp___148, temp___149, temp___150, temp___151,
+  temp___152, temp___153, temp___154, temp___155, temp___156, temp___157,
+  temp___158, temp___159, temp___160), 0, 3) = temp___148)) and
+  ((((get(temp___143(temp___145, temp___146, temp___147, temp___148,
+  temp___149, temp___150, temp___151, temp___152, temp___153, temp___154,
+  temp___155, temp___156, temp___157, temp___158, temp___159, temp___160), 1,
+  0) = temp___149) and (get(temp___143(temp___145, temp___146, temp___147,
+  temp___148, temp___149, temp___150, temp___151, temp___152, temp___153,
+  temp___154, temp___155, temp___156, temp___157, temp___158, temp___159,
+  temp___160), 1, 1) = temp___150)) and (get(temp___143(temp___145,
+  temp___146, temp___147, temp___148, temp___149, temp___150, temp___151,
+  temp___152, temp___153, temp___154, temp___155, temp___156, temp___157,
+  temp___158, temp___159, temp___160), 1, 2) = temp___151)) and
+  (get(temp___143(temp___145, temp___146, temp___147, temp___148, temp___149,
+  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
+  temp___156, temp___157, temp___158, temp___159, temp___160), 1,
+  3) = temp___152))) and ((((get(temp___143(temp___145, temp___146,
+  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
+  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
+  temp___159, temp___160), 2, 0) = temp___153) and
+  (get(temp___143(temp___145, temp___146, temp___147, temp___148, temp___149,
+  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
+  temp___156, temp___157, temp___158, temp___159, temp___160), 2,
+  1) = temp___154)) and (get(temp___143(temp___145, temp___146, temp___147,
+  temp___148, temp___149, temp___150, temp___151, temp___152, temp___153,
+  temp___154, temp___155, temp___156, temp___157, temp___158, temp___159,
+  temp___160), 2, 2) = temp___155)) and (get(temp___143(temp___145,
+  temp___146, temp___147, temp___148, temp___149, temp___150, temp___151,
+  temp___152, temp___153, temp___154, temp___155, temp___156, temp___157,
+  temp___158, temp___159, temp___160), 2, 3) = temp___156))) and
+  ((((get(temp___143(temp___145, temp___146, temp___147, temp___148,
+  temp___149, temp___150, temp___151, temp___152, temp___153, temp___154,
+  temp___155, temp___156, temp___157, temp___158, temp___159, temp___160), 3,
+  0) = temp___157) and (get(temp___143(temp___145, temp___146, temp___147,
+  temp___148, temp___149, temp___150, temp___151, temp___152, temp___153,
+  temp___154, temp___155, temp___156, temp___157, temp___158, temp___159,
+  temp___160), 3, 1) = temp___158)) and (get(temp___143(temp___145,
+  temp___146, temp___147, temp___148, temp___149, temp___150, temp___151,
+  temp___152, temp___153, temp___154, temp___155, temp___156, temp___157,
+  temp___158, temp___159, temp___160), 3, 2) = temp___159)) and
+  (get(temp___143(temp___145, temp___146, temp___147, temp___148, temp___149,
+  temp___150, temp___151, temp___152, temp___153, temp___154, temp___155,
+  temp___156, temp___157, temp___158, temp___159, temp___160), 3,
+  3) = temp___160))))
+
+logic temp___163 : bool, bool, bool, bool, bool, bool, bool, bool, bool,
+  bool, bool, bool, bool, bool, bool, bool -> map
+
+axiom def_axiom2 :
+  (forall temp___165:bool. forall temp___166:bool. forall temp___167:bool.
+  forall temp___168:bool. forall temp___169:bool. forall temp___170:bool.
+  forall temp___171:bool. forall temp___172:bool. forall temp___173:bool.
+  forall temp___174:bool. forall temp___175:bool. forall temp___176:bool.
+  forall temp___177:bool. forall temp___178:bool. forall temp___179:bool.
+  forall temp___180:bool. (((((((get(temp___163(temp___165, temp___166,
+  temp___167, temp___168, temp___169, temp___170, temp___171, temp___172,
+  temp___173, temp___174, temp___175, temp___176, temp___177, temp___178,
+  temp___179, temp___180), 0, 0) = temp___165) and
+  (get(temp___163(temp___165, temp___166, temp___167, temp___168, temp___169,
+  temp___170, temp___171, temp___172, temp___173, temp___174, temp___175,
+  temp___176, temp___177, temp___178, temp___179, temp___180), 0,
+  1) = temp___166)) and (get(temp___163(temp___165, temp___166, temp___167,
+  temp___168, temp___169, temp___170, temp___171, temp___172, temp___173,
+  temp___174, temp___175, temp___176, temp___177, temp___178, temp___179,
+  temp___180), 0, 2) = temp___167)) and (get(temp___163(temp___165,
+  temp___166, temp___167, temp___168, temp___169, temp___170, temp___171,
+  temp___172, temp___173, temp___174, temp___175, temp___176, temp___177,
+  temp___178, temp___179, temp___180), 0, 3) = temp___168)) and
+  ((((get(temp___163(temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180), 1,
+  0) = temp___169) and (get(temp___163(temp___165, temp___166, temp___167,
+  temp___168, temp___169, temp___170, temp___171, temp___172, temp___173,
+  temp___174, temp___175, temp___176, temp___177, temp___178, temp___179,
+  temp___180), 1, 1) = temp___170)) and (get(temp___163(temp___165,
+  temp___166, temp___167, temp___168, temp___169, temp___170, temp___171,
+  temp___172, temp___173, temp___174, temp___175, temp___176, temp___177,
+  temp___178, temp___179, temp___180), 1, 2) = temp___171)) and
+  (get(temp___163(temp___165, temp___166, temp___167, temp___168, temp___169,
+  temp___170, temp___171, temp___172, temp___173, temp___174, temp___175,
+  temp___176, temp___177, temp___178, temp___179, temp___180), 1,
+  3) = temp___172))) and ((((get(temp___163(temp___165, temp___166,
+  temp___167, temp___168, temp___169, temp___170, temp___171, temp___172,
+  temp___173, temp___174, temp___175, temp___176, temp___177, temp___178,
+  temp___179, temp___180), 2, 0) = temp___173) and
+  (get(temp___163(temp___165, temp___166, temp___167, temp___168, temp___169,
+  temp___170, temp___171, temp___172, temp___173, temp___174, temp___175,
+  temp___176, temp___177, temp___178, temp___179, temp___180), 2,
+  1) = temp___174)) and (get(temp___163(temp___165, temp___166, temp___167,
+  temp___168, temp___169, temp___170, temp___171, temp___172, temp___173,
+  temp___174, temp___175, temp___176, temp___177, temp___178, temp___179,
+  temp___180), 2, 2) = temp___175)) and (get(temp___163(temp___165,
+  temp___166, temp___167, temp___168, temp___169, temp___170, temp___171,
+  temp___172, temp___173, temp___174, temp___175, temp___176, temp___177,
+  temp___178, temp___179, temp___180), 2, 3) = temp___176))) and
+  ((((get(temp___163(temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180), 3,
+  0) = temp___177) and (get(temp___163(temp___165, temp___166, temp___167,
+  temp___168, temp___169, temp___170, temp___171, temp___172, temp___173,
+  temp___174, temp___175, temp___176, temp___177, temp___178, temp___179,
+  temp___180), 3, 1) = temp___178)) and (get(temp___163(temp___165,
+  temp___166, temp___167, temp___168, temp___169, temp___170, temp___171,
+  temp___172, temp___173, temp___174, temp___175, temp___176, temp___177,
+  temp___178, temp___179, temp___180), 3, 2) = temp___179)) and
+  (get(temp___163(temp___165, temp___166, temp___167, temp___168, temp___169,
+  temp___170, temp___171, temp___172, temp___173, temp___174, temp___175,
+  temp___176, temp___177, temp___178, temp___179, temp___180), 3,
+  3) = temp___180))))
+
+logic temp___183 : bool, bool, bool, bool, bool, bool, bool, bool, bool,
+  bool, bool, bool, bool, bool, bool, bool -> map
+
+axiom def_axiom3 :
+  (forall temp___185:bool. forall temp___186:bool. forall temp___187:bool.
+  forall temp___188:bool. forall temp___189:bool. forall temp___190:bool.
+  forall temp___191:bool. forall temp___192:bool. forall temp___193:bool.
+  forall temp___194:bool. forall temp___195:bool. forall temp___196:bool.
+  forall temp___197:bool. forall temp___198:bool. forall temp___199:bool.
+  forall temp___200:bool. (((((((get(temp___183(temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200), 0, 0) = temp___185) and
+  (get(temp___183(temp___185, temp___186, temp___187, temp___188, temp___189,
+  temp___190, temp___191, temp___192, temp___193, temp___194, temp___195,
+  temp___196, temp___197, temp___198, temp___199, temp___200), 0,
+  1) = temp___186)) and (get(temp___183(temp___185, temp___186, temp___187,
+  temp___188, temp___189, temp___190, temp___191, temp___192, temp___193,
+  temp___194, temp___195, temp___196, temp___197, temp___198, temp___199,
+  temp___200), 0, 2) = temp___187)) and (get(temp___183(temp___185,
+  temp___186, temp___187, temp___188, temp___189, temp___190, temp___191,
+  temp___192, temp___193, temp___194, temp___195, temp___196, temp___197,
+  temp___198, temp___199, temp___200), 0, 3) = temp___188)) and
+  ((((get(temp___183(temp___185, temp___186, temp___187, temp___188,
+  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
+  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200), 1,
+  0) = temp___189) and (get(temp___183(temp___185, temp___186, temp___187,
+  temp___188, temp___189, temp___190, temp___191, temp___192, temp___193,
+  temp___194, temp___195, temp___196, temp___197, temp___198, temp___199,
+  temp___200), 1, 1) = temp___190)) and (get(temp___183(temp___185,
+  temp___186, temp___187, temp___188, temp___189, temp___190, temp___191,
+  temp___192, temp___193, temp___194, temp___195, temp___196, temp___197,
+  temp___198, temp___199, temp___200), 1, 2) = temp___191)) and
+  (get(temp___183(temp___185, temp___186, temp___187, temp___188, temp___189,
+  temp___190, temp___191, temp___192, temp___193, temp___194, temp___195,
+  temp___196, temp___197, temp___198, temp___199, temp___200), 1,
+  3) = temp___192))) and ((((get(temp___183(temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200), 2, 0) = temp___193) and
+  (get(temp___183(temp___185, temp___186, temp___187, temp___188, temp___189,
+  temp___190, temp___191, temp___192, temp___193, temp___194, temp___195,
+  temp___196, temp___197, temp___198, temp___199, temp___200), 2,
+  1) = temp___194)) and (get(temp___183(temp___185, temp___186, temp___187,
+  temp___188, temp___189, temp___190, temp___191, temp___192, temp___193,
+  temp___194, temp___195, temp___196, temp___197, temp___198, temp___199,
+  temp___200), 2, 2) = temp___195)) and (get(temp___183(temp___185,
+  temp___186, temp___187, temp___188, temp___189, temp___190, temp___191,
+  temp___192, temp___193, temp___194, temp___195, temp___196, temp___197,
+  temp___198, temp___199, temp___200), 2, 3) = temp___196))) and
+  ((((get(temp___183(temp___185, temp___186, temp___187, temp___188,
+  temp___189, temp___190, temp___191, temp___192, temp___193, temp___194,
+  temp___195, temp___196, temp___197, temp___198, temp___199, temp___200), 3,
+  0) = temp___197) and (get(temp___183(temp___185, temp___186, temp___187,
+  temp___188, temp___189, temp___190, temp___191, temp___192, temp___193,
+  temp___194, temp___195, temp___196, temp___197, temp___198, temp___199,
+  temp___200), 3, 1) = temp___198)) and (get(temp___183(temp___185,
+  temp___186, temp___187, temp___188, temp___189, temp___190, temp___191,
+  temp___192, temp___193, temp___194, temp___195, temp___196, temp___197,
+  temp___198, temp___199, temp___200), 3, 2) = temp___199)) and
+  (get(temp___183(temp___185, temp___186, temp___187, temp___188, temp___189,
+  temp___190, temp___191, temp___192, temp___193, temp___194, temp___195,
+  temp___196, temp___197, temp___198, temp___199, temp___200), 3,
+  3) = temp___200))))
+
+logic temp___203 : bool, bool, bool, bool, bool, bool, bool, bool, bool,
+  bool, bool, bool, bool, bool, bool, bool -> map
+
+axiom def_axiom4 :
+  (forall temp___205:bool. forall temp___206:bool. forall temp___207:bool.
+  forall temp___208:bool. forall temp___209:bool. forall temp___210:bool.
+  forall temp___211:bool. forall temp___212:bool. forall temp___213:bool.
+  forall temp___214:bool. forall temp___215:bool. forall temp___216:bool.
+  forall temp___217:bool. forall temp___218:bool. forall temp___219:bool.
+  forall temp___220:bool. (((((((get(temp___203(temp___205, temp___206,
+  temp___207, temp___208, temp___209, temp___210, temp___211, temp___212,
+  temp___213, temp___214, temp___215, temp___216, temp___217, temp___218,
+  temp___219, temp___220), 0, 0) = temp___205) and
+  (get(temp___203(temp___205, temp___206, temp___207, temp___208, temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220), 0,
+  1) = temp___206)) and (get(temp___203(temp___205, temp___206, temp___207,
+  temp___208, temp___209, temp___210, temp___211, temp___212, temp___213,
+  temp___214, temp___215, temp___216, temp___217, temp___218, temp___219,
+  temp___220), 0, 2) = temp___207)) and (get(temp___203(temp___205,
+  temp___206, temp___207, temp___208, temp___209, temp___210, temp___211,
+  temp___212, temp___213, temp___214, temp___215, temp___216, temp___217,
+  temp___218, temp___219, temp___220), 0, 3) = temp___208)) and
+  ((((get(temp___203(temp___205, temp___206, temp___207, temp___208,
+  temp___209, temp___210, temp___211, temp___212, temp___213, temp___214,
+  temp___215, temp___216, temp___217, temp___218, temp___219, temp___220), 1,
+  0) = temp___209) and (get(temp___203(temp___205, temp___206, temp___207,
+  temp___208, temp___209, temp___210, temp___211, temp___212, temp___213,
+  temp___214, temp___215, temp___216, temp___217, temp___218, temp___219,
+  temp___220), 1, 1) = temp___210)) and (get(temp___203(temp___205,
+  temp___206, temp___207, temp___208, temp___209, temp___210, temp___211,
+  temp___212, temp___213, temp___214, temp___215, temp___216, temp___217,
+  temp___218, temp___219, temp___220), 1, 2) = temp___211)) and
+  (get(temp___203(temp___205, temp___206, temp___207, temp___208, temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220), 1,
+  3) = temp___212))) and ((((get(temp___203(temp___205, temp___206,
+  temp___207, temp___208, temp___209, temp___210, temp___211, temp___212,
+  temp___213, temp___214, temp___215, temp___216, temp___217, temp___218,
+  temp___219, temp___220), 2, 0) = temp___213) and
+  (get(temp___203(temp___205, temp___206, temp___207, temp___208, temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220), 2,
+  1) = temp___214)) and (get(temp___203(temp___205, temp___206, temp___207,
+  temp___208, temp___209, temp___210, temp___211, temp___212, temp___213,
+  temp___214, temp___215, temp___216, temp___217, temp___218, temp___219,
+  temp___220), 2, 2) = temp___215)) and (get(temp___203(temp___205,
+  temp___206, temp___207, temp___208, temp___209, temp___210, temp___211,
+  temp___212, temp___213, temp___214, temp___215, temp___216, temp___217,
+  temp___218, temp___219, temp___220), 2, 3) = temp___216))) and
+  ((((get(temp___203(temp___205, temp___206, temp___207, temp___208,
+  temp___209, temp___210, temp___211, temp___212, temp___213, temp___214,
+  temp___215, temp___216, temp___217, temp___218, temp___219, temp___220), 3,
+  0) = temp___217) and (get(temp___203(temp___205, temp___206, temp___207,
+  temp___208, temp___209, temp___210, temp___211, temp___212, temp___213,
+  temp___214, temp___215, temp___216, temp___217, temp___218, temp___219,
+  temp___220), 3, 1) = temp___218)) and (get(temp___203(temp___205,
+  temp___206, temp___207, temp___208, temp___209, temp___210, temp___211,
+  temp___212, temp___213, temp___214, temp___215, temp___216, temp___217,
+  temp___218, temp___219, temp___220), 3, 2) = temp___219)) and
+  (get(temp___203(temp___205, temp___206, temp___207, temp___208, temp___209,
+  temp___210, temp___211, temp___212, temp___213, temp___214, temp___215,
+  temp___216, temp___217, temp___218, temp___219, temp___220), 3,
+  3) = temp___220))))
+
+logic dummy15 : map
+
+logic value__size3 : int
+
+logic object__size3 : map -> int
+
+logic value__component__size2 : int
+
+logic object__component__size2 : map -> int
+
+logic value__alignment3 : int
+
+logic object__alignment3 : map -> int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 : (forall a:map. (0 <= object__size3(a)))
+
+axiom value__component__size_axiom2 : (0 <= value__component__size2)
+
+axiom object__component__size_axiom2 :
+  (forall a:map. (0 <= object__component__size2(a)))
+
+axiom value__alignment_axiom3 : (0 <= value__alignment3)
+
+axiom object__alignment_axiom3 : (forall a:map. (0 <= object__alignment3(a)))
+
+logic user_eq12 : map, map -> bool
+
+type map1
+
+type map__ref4 = { map__content4 : map1
+}
+
+logic get1 : map1, int, int -> map
+
+logic set1 : map1, int, int, map -> map1
+
+axiom Select_eq1 :
+  (forall m:map1.
+  (forall i:int.
+  (forall j:int.
+  (forall a:map [set1(m, i, j, a)]. (get1(set1(m, i, j, a), i, j) = a)))))
+
+axiom Select_neq1 :
+  (forall m:map1.
+  (forall i:int. forall i2:int.
+  (forall j:int. forall j2:int.
+  (forall a:map [get1(set1(m, i, j, a), i2, j2)| set1(m, i, j, a), get1(m,
+  i2, j2)]. ((not ((i = i2) and (j = j2))) -> (get1(set1(m, i, j, a), i2,
+  j2) = get1(m, i2, j2)))))))
+
+logic slide4 : map1, int, int, int, int -> map1
+
+axiom slide_def4 :
+  (forall a:map1.
+  (forall new_first:int. forall old_first:int.
+  (forall new_first_2:int. forall old_first_2:int.
+  (forall i:int.
+  (forall j:int [get1(slide4(a, old_first, new_first, old_first_2,
+  new_first_2), i, j)]. (get1(slide4(a, old_first, new_first, old_first_2,
+  new_first_2), i, j) = get1(a, (i - (new_first - old_first)),
+  (j - (new_first_2 - old_first_2)))))))))
+
+logic bool_eq16 : map1, int, int, int, int, map1, int, int, int, int -> bool
+
+axiom bool_eq_def15 :
+  (forall a:map1. forall a__first:int. forall a__last:int.
+  forall a__first_2:int. forall a__last_2:int. forall b:map1.
+  forall b__first:int. forall b__last:int. forall b__first_2:int.
+  forall b__last_2:int [bool_eq16(a, a__first, a__last, a__first_2,
+  a__last_2, b, b__first, b__last, b__first_2, b__last_2)].
+  (((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (((a__first_2 <= a__last_2) and ((b__first_2 <= b__last_2) and
+  ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)))) or
+  ((not (a__first_2 <= a__last_2)) and (b__last_2 <  b__first_2)))) and
+  (forall temp___idx_223:int. forall temp___idx_224:int.
+  (((((a__first <= temp___idx_223) and (temp___idx_223 <= a__last)) and
+  ((a__first_2 <= temp___idx_224) and (temp___idx_224 <= a__last_2))) and
+  (bool_eq14(get1(a, temp___idx_223, temp___idx_224), 0, 2, 0, 2, get1(b,
+  ((b__first - a__first) + temp___idx_223),
+  ((b__first_2 - a__first_2) + temp___idx_224)), 0, 2, 0, 2) = true)) or
+  (not (((a__first <= temp___idx_223) and (temp___idx_223 <= a__last)) and
+  ((a__first_2 <= temp___idx_224) and (temp___idx_224 <= a__last_2))))))) ->
+  (bool_eq16(a, a__first, a__last, a__first_2, a__last_2, b, b__first,
+  b__last, b__first_2, b__last_2) = true)) and
+  ((not (((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (((a__first_2 <= a__last_2) -> ((b__first_2 <= b__last_2) and
+  ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)))) and
+  ((not (a__first_2 <= a__last_2)) -> (b__last_2 <  b__first_2)))) and
+  (forall temp___idx_223:int. forall temp___idx_224:int.
+  ((((a__first <= temp___idx_223) and (temp___idx_223 <= a__last)) and
+  ((a__first_2 <= temp___idx_224) and (temp___idx_224 <= a__last_2))) ->
+  (bool_eq14(get1(a, temp___idx_223, temp___idx_224), 0, 2, 0, 2, get1(b,
+  ((b__first - a__first) + temp___idx_223),
+  ((b__first_2 - a__first_2) + temp___idx_224)), 0, 2, 0, 2) = true))))) ->
+  (bool_eq16(a, a__first, a__last, a__first_2, a__last_2, b, b__first,
+  b__last, b__first_2, b__last_2) = false))))
+
+axiom bool_eq_rev4 :
+  (forall a:map1. forall b:map1.
+  (forall a__first:int. forall a__last:int. forall a__first_2:int.
+  forall a__last_2:int. forall b__first:int. forall b__last:int.
+  forall b__first_2:int. forall b__last_2:int. ((bool_eq16(b, b__first,
+  b__last, b__first_2, b__last_2, a, a__first, a__last, a__first_2,
+  a__last_2) = true) -> (((((a__first <= a__last) ->
+  ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (((a__first_2 <= a__last_2) -> ((b__first_2 <= b__last_2) and
+  ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)))) and
+  ((not (a__first_2 <= a__last_2)) -> (b__last_2 <  b__first_2)))) and
+  (forall temp___idx_223:int. forall temp___idx_224:int.
+  ((((a__first <= temp___idx_223) and (temp___idx_223 <= a__last)) and
+  ((a__first_2 <= temp___idx_224) and (temp___idx_224 <= a__last_2))) ->
+  (bool_eq14(get1(a, temp___idx_223, temp___idx_224), 0, 2, 0, 2, get1(b,
+  ((b__first - a__first) + temp___idx_223),
+  ((b__first_2 - a__first_2) + temp___idx_224)), 0, 2, 0, 2) = true)))))))
+
+logic possible_three_shapes : map1
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic tetris_functional__possible_three_shapes__aggregate_def : map, map,
+  map, map, map, map, map, map, map, map, map, map, map, map, map, map, map,
+  map, map, map -> map1
+
+axiom def_axiom5 :
+  (forall temp___226:map. forall temp___227:map. forall temp___228:map.
+  forall temp___229:map. forall temp___230:map. forall temp___231:map.
+  forall temp___232:map. forall temp___233:map. forall temp___234:map.
+  forall temp___235:map. forall temp___236:map. forall temp___237:map.
+  forall temp___238:map. forall temp___239:map. forall temp___240:map.
+  forall temp___241:map. forall temp___242:map. forall temp___243:map.
+  forall temp___244:map. forall temp___245:map.
+  ((((((((get1(tetris_functional__possible_three_shapes__aggregate_def(temp___226,
+  temp___227, temp___228, temp___229, temp___230, temp___231, temp___232,
+  temp___233, temp___234, temp___235, temp___236, temp___237, temp___238,
+  temp___239, temp___240, temp___241, temp___242, temp___243, temp___244,
+  temp___245), 3, 0) = temp___226) and
+  (get1(tetris_functional__possible_three_shapes__aggregate_def(temp___226,
+  temp___227, temp___228, temp___229, temp___230, temp___231, temp___232,
+  temp___233, temp___234, temp___235, temp___236, temp___237, temp___238,
+  temp___239, temp___240, temp___241, temp___242, temp___243, temp___244,
+  temp___245), 3, 1) = temp___227)) and
+  (get1(tetris_functional__possible_three_shapes__aggregate_def(temp___226,
+  temp___227, temp___228, temp___229, temp___230, temp___231, temp___232,
+  temp___233, temp___234, temp___235, temp___236, temp___237, temp___238,
+  temp___239, temp___240, temp___241, temp___242, temp___243, temp___244,
+  temp___245), 3, 2) = temp___228)) and
+  (get1(tetris_functional__possible_three_shapes__aggregate_def(temp___226,
+  temp___227, temp___228, temp___229, temp___230, temp___231, temp___232,
+  temp___233, temp___234, temp___235, temp___236, temp___237, temp___238,
+  temp___239, temp___240, temp___241, temp___242, temp___243, temp___244,
+  temp___245), 3, 3) = temp___229)) and
+  ((((get1(tetris_functional__possible_three_shapes__aggregate_def(temp___226,
+  temp___227, temp___228, temp___229, temp___230, temp___231, temp___232,
+  temp___233, temp___234, temp___235, temp___236, temp___237, temp___238,
+  temp___239, temp___240, temp___241, temp___242, temp___243, temp___244,
+  temp___245), 4, 0) = temp___230) and
+  (get1(tetris_functional__possible_three_shapes__aggregate_def(temp___226,
+  temp___227, temp___228, temp___229, temp___230, temp___231, temp___232,
+  temp___233, temp___234, temp___235, temp___236, temp___237, temp___238,
+  temp___239, temp___240, temp___241, temp___242, temp___243, temp___244,
+  temp___245), 4, 1) = temp___231)) and
+  (get1(tetris_functional__possible_three_shapes__aggregate_def(temp___226,
+  temp___227, temp___228, temp___229, temp___230, temp___231, temp___232,
+  temp___233, temp___234, temp___235, temp___236, temp___237, temp___238,
+  temp___239, temp___240, temp___241, temp___242, temp___243, temp___244,
+  temp___245), 4, 2) = temp___232)) and
+  (get1(tetris_functional__possible_three_shapes__aggregate_def(temp___226,
+  temp___227, temp___228, temp___229, temp___230, temp___231, temp___232,
+  temp___233, temp___234, temp___235, temp___236, temp___237, temp___238,
+  temp___239, temp___240, temp___241, temp___242, temp___243, temp___244,
+  temp___245), 4, 3) = temp___233))) and
+  ((((get1(tetris_functional__possible_three_shapes__aggregate_def(temp___226,
+  temp___227, temp___228, temp___229, temp___230, temp___231, temp___232,
+  temp___233, temp___234, temp___235, temp___236, temp___237, temp___238,
+  temp___239, temp___240, temp___241, temp___242, temp___243, temp___244,
+  temp___245), 5, 0) = temp___234) and
+  (get1(tetris_functional__possible_three_shapes__aggregate_def(temp___226,
+  temp___227, temp___228, temp___229, temp___230, temp___231, temp___232,
+  temp___233, temp___234, temp___235, temp___236, temp___237, temp___238,
+  temp___239, temp___240, temp___241, temp___242, temp___243, temp___244,
+  temp___245), 5, 1) = temp___235)) and
+  (get1(tetris_functional__possible_three_shapes__aggregate_def(temp___226,
+  temp___227, temp___228, temp___229, temp___230, temp___231, temp___232,
+  temp___233, temp___234, temp___235, temp___236, temp___237, temp___238,
+  temp___239, temp___240, temp___241, temp___242, temp___243, temp___244,
+  temp___245), 5, 2) = temp___236)) and
+  (get1(tetris_functional__possible_three_shapes__aggregate_def(temp___226,
+  temp___227, temp___228, temp___229, temp___230, temp___231, temp___232,
+  temp___233, temp___234, temp___235, temp___236, temp___237, temp___238,
+  temp___239, temp___240, temp___241, temp___242, temp___243, temp___244,
+  temp___245), 5, 3) = temp___237))) and
+  ((((get1(tetris_functional__possible_three_shapes__aggregate_def(temp___226,
+  temp___227, temp___228, temp___229, temp___230, temp___231, temp___232,
+  temp___233, temp___234, temp___235, temp___236, temp___237, temp___238,
+  temp___239, temp___240, temp___241, temp___242, temp___243, temp___244,
+  temp___245), 6, 0) = temp___238) and
+  (get1(tetris_functional__possible_three_shapes__aggregate_def(temp___226,
+  temp___227, temp___228, temp___229, temp___230, temp___231, temp___232,
+  temp___233, temp___234, temp___235, temp___236, temp___237, temp___238,
+  temp___239, temp___240, temp___241, temp___242, temp___243, temp___244,
+  temp___245), 6, 1) = temp___239)) and
+  (get1(tetris_functional__possible_three_shapes__aggregate_def(temp___226,
+  temp___227, temp___228, temp___229, temp___230, temp___231, temp___232,
+  temp___233, temp___234, temp___235, temp___236, temp___237, temp___238,
+  temp___239, temp___240, temp___241, temp___242, temp___243, temp___244,
+  temp___245), 6, 2) = temp___240)) and
+  (get1(tetris_functional__possible_three_shapes__aggregate_def(temp___226,
+  temp___227, temp___228, temp___229, temp___230, temp___231, temp___232,
+  temp___233, temp___234, temp___235, temp___236, temp___237, temp___238,
+  temp___239, temp___240, temp___241, temp___242, temp___243, temp___244,
+  temp___245), 6, 3) = temp___241))) and
+  ((((get1(tetris_functional__possible_three_shapes__aggregate_def(temp___226,
+  temp___227, temp___228, temp___229, temp___230, temp___231, temp___232,
+  temp___233, temp___234, temp___235, temp___236, temp___237, temp___238,
+  temp___239, temp___240, temp___241, temp___242, temp___243, temp___244,
+  temp___245), 7, 0) = temp___242) and
+  (get1(tetris_functional__possible_three_shapes__aggregate_def(temp___226,
+  temp___227, temp___228, temp___229, temp___230, temp___231, temp___232,
+  temp___233, temp___234, temp___235, temp___236, temp___237, temp___238,
+  temp___239, temp___240, temp___241, temp___242, temp___243, temp___244,
+  temp___245), 7, 1) = temp___243)) and
+  (get1(tetris_functional__possible_three_shapes__aggregate_def(temp___226,
+  temp___227, temp___228, temp___229, temp___230, temp___231, temp___232,
+  temp___233, temp___234, temp___235, temp___236, temp___237, temp___238,
+  temp___239, temp___240, temp___241, temp___242, temp___243, temp___244,
+  temp___245), 7, 2) = temp___244)) and
+  (get1(tetris_functional__possible_three_shapes__aggregate_def(temp___226,
+  temp___227, temp___228, temp___229, temp___230, temp___231, temp___232,
+  temp___233, temp___234, temp___235, temp___236, temp___237, temp___238,
+  temp___239, temp___240, temp___241, temp___242, temp___243, temp___244,
+  temp___245), 7, 3) = temp___245))))
+
+logic temp___248 : bool, bool, bool, bool, bool, bool, bool, bool,
+  bool -> map
+
+axiom def_axiom6 :
+  (forall temp___250:bool. forall temp___251:bool. forall temp___252:bool.
+  forall temp___253:bool. forall temp___254:bool. forall temp___255:bool.
+  forall temp___256:bool. forall temp___257:bool. forall temp___258:bool.
+  (((((get(temp___248(temp___250, temp___251, temp___252, temp___253,
+  temp___254, temp___255, temp___256, temp___257, temp___258), 0,
+  0) = temp___250) and (get(temp___248(temp___250, temp___251, temp___252,
+  temp___253, temp___254, temp___255, temp___256, temp___257, temp___258), 0,
+  1) = temp___251)) and (get(temp___248(temp___250, temp___251, temp___252,
+  temp___253, temp___254, temp___255, temp___256, temp___257, temp___258), 0,
+  2) = temp___252)) and (((get(temp___248(temp___250, temp___251, temp___252,
+  temp___253, temp___254, temp___255, temp___256, temp___257, temp___258), 1,
+  0) = temp___253) and (get(temp___248(temp___250, temp___251, temp___252,
+  temp___253, temp___254, temp___255, temp___256, temp___257, temp___258), 1,
+  1) = temp___254)) and (get(temp___248(temp___250, temp___251, temp___252,
+  temp___253, temp___254, temp___255, temp___256, temp___257, temp___258), 1,
+  2) = temp___255))) and (((get(temp___248(temp___250, temp___251,
+  temp___252, temp___253, temp___254, temp___255, temp___256, temp___257,
+  temp___258), 2, 0) = temp___256) and (get(temp___248(temp___250,
+  temp___251, temp___252, temp___253, temp___254, temp___255, temp___256,
+  temp___257, temp___258), 2, 1) = temp___257)) and
+  (get(temp___248(temp___250, temp___251, temp___252, temp___253, temp___254,
+  temp___255, temp___256, temp___257, temp___258), 2, 2) = temp___258))))
+
+logic temp___261 : bool, bool, bool, bool, bool, bool, bool, bool,
+  bool -> map
+
+axiom def_axiom7 :
+  (forall temp___263:bool. forall temp___264:bool. forall temp___265:bool.
+  forall temp___266:bool. forall temp___267:bool. forall temp___268:bool.
+  forall temp___269:bool. forall temp___270:bool. forall temp___271:bool.
+  (((((get(temp___261(temp___263, temp___264, temp___265, temp___266,
+  temp___267, temp___268, temp___269, temp___270, temp___271), 0,
+  0) = temp___263) and (get(temp___261(temp___263, temp___264, temp___265,
+  temp___266, temp___267, temp___268, temp___269, temp___270, temp___271), 0,
+  1) = temp___264)) and (get(temp___261(temp___263, temp___264, temp___265,
+  temp___266, temp___267, temp___268, temp___269, temp___270, temp___271), 0,
+  2) = temp___265)) and (((get(temp___261(temp___263, temp___264, temp___265,
+  temp___266, temp___267, temp___268, temp___269, temp___270, temp___271), 1,
+  0) = temp___266) and (get(temp___261(temp___263, temp___264, temp___265,
+  temp___266, temp___267, temp___268, temp___269, temp___270, temp___271), 1,
+  1) = temp___267)) and (get(temp___261(temp___263, temp___264, temp___265,
+  temp___266, temp___267, temp___268, temp___269, temp___270, temp___271), 1,
+  2) = temp___268))) and (((get(temp___261(temp___263, temp___264,
+  temp___265, temp___266, temp___267, temp___268, temp___269, temp___270,
+  temp___271), 2, 0) = temp___269) and (get(temp___261(temp___263,
+  temp___264, temp___265, temp___266, temp___267, temp___268, temp___269,
+  temp___270, temp___271), 2, 1) = temp___270)) and
+  (get(temp___261(temp___263, temp___264, temp___265, temp___266, temp___267,
+  temp___268, temp___269, temp___270, temp___271), 2, 2) = temp___271))))
+
+logic temp___274 : bool, bool, bool, bool, bool, bool, bool, bool,
+  bool -> map
+
+axiom def_axiom8 :
+  (forall temp___276:bool. forall temp___277:bool. forall temp___278:bool.
+  forall temp___279:bool. forall temp___280:bool. forall temp___281:bool.
+  forall temp___282:bool. forall temp___283:bool. forall temp___284:bool.
+  (((((get(temp___274(temp___276, temp___277, temp___278, temp___279,
+  temp___280, temp___281, temp___282, temp___283, temp___284), 0,
+  0) = temp___276) and (get(temp___274(temp___276, temp___277, temp___278,
+  temp___279, temp___280, temp___281, temp___282, temp___283, temp___284), 0,
+  1) = temp___277)) and (get(temp___274(temp___276, temp___277, temp___278,
+  temp___279, temp___280, temp___281, temp___282, temp___283, temp___284), 0,
+  2) = temp___278)) and (((get(temp___274(temp___276, temp___277, temp___278,
+  temp___279, temp___280, temp___281, temp___282, temp___283, temp___284), 1,
+  0) = temp___279) and (get(temp___274(temp___276, temp___277, temp___278,
+  temp___279, temp___280, temp___281, temp___282, temp___283, temp___284), 1,
+  1) = temp___280)) and (get(temp___274(temp___276, temp___277, temp___278,
+  temp___279, temp___280, temp___281, temp___282, temp___283, temp___284), 1,
+  2) = temp___281))) and (((get(temp___274(temp___276, temp___277,
+  temp___278, temp___279, temp___280, temp___281, temp___282, temp___283,
+  temp___284), 2, 0) = temp___282) and (get(temp___274(temp___276,
+  temp___277, temp___278, temp___279, temp___280, temp___281, temp___282,
+  temp___283, temp___284), 2, 1) = temp___283)) and
+  (get(temp___274(temp___276, temp___277, temp___278, temp___279, temp___280,
+  temp___281, temp___282, temp___283, temp___284), 2, 2) = temp___284))))
+
+logic temp___287 : bool, bool, bool, bool, bool, bool, bool, bool,
+  bool -> map
+
+axiom def_axiom9 :
+  (forall temp___289:bool. forall temp___290:bool. forall temp___291:bool.
+  forall temp___292:bool. forall temp___293:bool. forall temp___294:bool.
+  forall temp___295:bool. forall temp___296:bool. forall temp___297:bool.
+  (((((get(temp___287(temp___289, temp___290, temp___291, temp___292,
+  temp___293, temp___294, temp___295, temp___296, temp___297), 0,
+  0) = temp___289) and (get(temp___287(temp___289, temp___290, temp___291,
+  temp___292, temp___293, temp___294, temp___295, temp___296, temp___297), 0,
+  1) = temp___290)) and (get(temp___287(temp___289, temp___290, temp___291,
+  temp___292, temp___293, temp___294, temp___295, temp___296, temp___297), 0,
+  2) = temp___291)) and (((get(temp___287(temp___289, temp___290, temp___291,
+  temp___292, temp___293, temp___294, temp___295, temp___296, temp___297), 1,
+  0) = temp___292) and (get(temp___287(temp___289, temp___290, temp___291,
+  temp___292, temp___293, temp___294, temp___295, temp___296, temp___297), 1,
+  1) = temp___293)) and (get(temp___287(temp___289, temp___290, temp___291,
+  temp___292, temp___293, temp___294, temp___295, temp___296, temp___297), 1,
+  2) = temp___294))) and (((get(temp___287(temp___289, temp___290,
+  temp___291, temp___292, temp___293, temp___294, temp___295, temp___296,
+  temp___297), 2, 0) = temp___295) and (get(temp___287(temp___289,
+  temp___290, temp___291, temp___292, temp___293, temp___294, temp___295,
+  temp___296, temp___297), 2, 1) = temp___296)) and
+  (get(temp___287(temp___289, temp___290, temp___291, temp___292, temp___293,
+  temp___294, temp___295, temp___296, temp___297), 2, 2) = temp___297))))
+
+logic temp___300 : bool, bool, bool, bool, bool, bool, bool, bool,
+  bool -> map
+
+axiom def_axiom10 :
+  (forall temp___302:bool. forall temp___303:bool. forall temp___304:bool.
+  forall temp___305:bool. forall temp___306:bool. forall temp___307:bool.
+  forall temp___308:bool. forall temp___309:bool. forall temp___310:bool.
+  (((((get(temp___300(temp___302, temp___303, temp___304, temp___305,
+  temp___306, temp___307, temp___308, temp___309, temp___310), 0,
+  0) = temp___302) and (get(temp___300(temp___302, temp___303, temp___304,
+  temp___305, temp___306, temp___307, temp___308, temp___309, temp___310), 0,
+  1) = temp___303)) and (get(temp___300(temp___302, temp___303, temp___304,
+  temp___305, temp___306, temp___307, temp___308, temp___309, temp___310), 0,
+  2) = temp___304)) and (((get(temp___300(temp___302, temp___303, temp___304,
+  temp___305, temp___306, temp___307, temp___308, temp___309, temp___310), 1,
+  0) = temp___305) and (get(temp___300(temp___302, temp___303, temp___304,
+  temp___305, temp___306, temp___307, temp___308, temp___309, temp___310), 1,
+  1) = temp___306)) and (get(temp___300(temp___302, temp___303, temp___304,
+  temp___305, temp___306, temp___307, temp___308, temp___309, temp___310), 1,
+  2) = temp___307))) and (((get(temp___300(temp___302, temp___303,
+  temp___304, temp___305, temp___306, temp___307, temp___308, temp___309,
+  temp___310), 2, 0) = temp___308) and (get(temp___300(temp___302,
+  temp___303, temp___304, temp___305, temp___306, temp___307, temp___308,
+  temp___309, temp___310), 2, 1) = temp___309)) and
+  (get(temp___300(temp___302, temp___303, temp___304, temp___305, temp___306,
+  temp___307, temp___308, temp___309, temp___310), 2, 2) = temp___310))))
+
+logic temp___313 : bool, bool, bool, bool, bool, bool, bool, bool,
+  bool -> map
+
+axiom def_axiom11 :
+  (forall temp___315:bool. forall temp___316:bool. forall temp___317:bool.
+  forall temp___318:bool. forall temp___319:bool. forall temp___320:bool.
+  forall temp___321:bool. forall temp___322:bool. forall temp___323:bool.
+  (((((get(temp___313(temp___315, temp___316, temp___317, temp___318,
+  temp___319, temp___320, temp___321, temp___322, temp___323), 0,
+  0) = temp___315) and (get(temp___313(temp___315, temp___316, temp___317,
+  temp___318, temp___319, temp___320, temp___321, temp___322, temp___323), 0,
+  1) = temp___316)) and (get(temp___313(temp___315, temp___316, temp___317,
+  temp___318, temp___319, temp___320, temp___321, temp___322, temp___323), 0,
+  2) = temp___317)) and (((get(temp___313(temp___315, temp___316, temp___317,
+  temp___318, temp___319, temp___320, temp___321, temp___322, temp___323), 1,
+  0) = temp___318) and (get(temp___313(temp___315, temp___316, temp___317,
+  temp___318, temp___319, temp___320, temp___321, temp___322, temp___323), 1,
+  1) = temp___319)) and (get(temp___313(temp___315, temp___316, temp___317,
+  temp___318, temp___319, temp___320, temp___321, temp___322, temp___323), 1,
+  2) = temp___320))) and (((get(temp___313(temp___315, temp___316,
+  temp___317, temp___318, temp___319, temp___320, temp___321, temp___322,
+  temp___323), 2, 0) = temp___321) and (get(temp___313(temp___315,
+  temp___316, temp___317, temp___318, temp___319, temp___320, temp___321,
+  temp___322, temp___323), 2, 1) = temp___322)) and
+  (get(temp___313(temp___315, temp___316, temp___317, temp___318, temp___319,
+  temp___320, temp___321, temp___322, temp___323), 2, 2) = temp___323))))
+
+logic temp___326 : bool, bool, bool, bool, bool, bool, bool, bool,
+  bool -> map
+
+axiom def_axiom12 :
+  (forall temp___328:bool. forall temp___329:bool. forall temp___330:bool.
+  forall temp___331:bool. forall temp___332:bool. forall temp___333:bool.
+  forall temp___334:bool. forall temp___335:bool. forall temp___336:bool.
+  (((((get(temp___326(temp___328, temp___329, temp___330, temp___331,
+  temp___332, temp___333, temp___334, temp___335, temp___336), 0,
+  0) = temp___328) and (get(temp___326(temp___328, temp___329, temp___330,
+  temp___331, temp___332, temp___333, temp___334, temp___335, temp___336), 0,
+  1) = temp___329)) and (get(temp___326(temp___328, temp___329, temp___330,
+  temp___331, temp___332, temp___333, temp___334, temp___335, temp___336), 0,
+  2) = temp___330)) and (((get(temp___326(temp___328, temp___329, temp___330,
+  temp___331, temp___332, temp___333, temp___334, temp___335, temp___336), 1,
+  0) = temp___331) and (get(temp___326(temp___328, temp___329, temp___330,
+  temp___331, temp___332, temp___333, temp___334, temp___335, temp___336), 1,
+  1) = temp___332)) and (get(temp___326(temp___328, temp___329, temp___330,
+  temp___331, temp___332, temp___333, temp___334, temp___335, temp___336), 1,
+  2) = temp___333))) and (((get(temp___326(temp___328, temp___329,
+  temp___330, temp___331, temp___332, temp___333, temp___334, temp___335,
+  temp___336), 2, 0) = temp___334) and (get(temp___326(temp___328,
+  temp___329, temp___330, temp___331, temp___332, temp___333, temp___334,
+  temp___335, temp___336), 2, 1) = temp___335)) and
+  (get(temp___326(temp___328, temp___329, temp___330, temp___331, temp___332,
+  temp___333, temp___334, temp___335, temp___336), 2, 2) = temp___336))))
+
+logic temp___339 : bool, bool, bool, bool, bool, bool, bool, bool,
+  bool -> map
+
+axiom def_axiom13 :
+  (forall temp___341:bool. forall temp___342:bool. forall temp___343:bool.
+  forall temp___344:bool. forall temp___345:bool. forall temp___346:bool.
+  forall temp___347:bool. forall temp___348:bool. forall temp___349:bool.
+  (((((get(temp___339(temp___341, temp___342, temp___343, temp___344,
+  temp___345, temp___346, temp___347, temp___348, temp___349), 0,
+  0) = temp___341) and (get(temp___339(temp___341, temp___342, temp___343,
+  temp___344, temp___345, temp___346, temp___347, temp___348, temp___349), 0,
+  1) = temp___342)) and (get(temp___339(temp___341, temp___342, temp___343,
+  temp___344, temp___345, temp___346, temp___347, temp___348, temp___349), 0,
+  2) = temp___343)) and (((get(temp___339(temp___341, temp___342, temp___343,
+  temp___344, temp___345, temp___346, temp___347, temp___348, temp___349), 1,
+  0) = temp___344) and (get(temp___339(temp___341, temp___342, temp___343,
+  temp___344, temp___345, temp___346, temp___347, temp___348, temp___349), 1,
+  1) = temp___345)) and (get(temp___339(temp___341, temp___342, temp___343,
+  temp___344, temp___345, temp___346, temp___347, temp___348, temp___349), 1,
+  2) = temp___346))) and (((get(temp___339(temp___341, temp___342,
+  temp___343, temp___344, temp___345, temp___346, temp___347, temp___348,
+  temp___349), 2, 0) = temp___347) and (get(temp___339(temp___341,
+  temp___342, temp___343, temp___344, temp___345, temp___346, temp___347,
+  temp___348, temp___349), 2, 1) = temp___348)) and
+  (get(temp___339(temp___341, temp___342, temp___343, temp___344, temp___345,
+  temp___346, temp___347, temp___348, temp___349), 2, 2) = temp___349))))
+
+logic temp___352 : bool, bool, bool, bool, bool, bool, bool, bool,
+  bool -> map
+
+axiom def_axiom14 :
+  (forall temp___354:bool. forall temp___355:bool. forall temp___356:bool.
+  forall temp___357:bool. forall temp___358:bool. forall temp___359:bool.
+  forall temp___360:bool. forall temp___361:bool. forall temp___362:bool.
+  (((((get(temp___352(temp___354, temp___355, temp___356, temp___357,
+  temp___358, temp___359, temp___360, temp___361, temp___362), 0,
+  0) = temp___354) and (get(temp___352(temp___354, temp___355, temp___356,
+  temp___357, temp___358, temp___359, temp___360, temp___361, temp___362), 0,
+  1) = temp___355)) and (get(temp___352(temp___354, temp___355, temp___356,
+  temp___357, temp___358, temp___359, temp___360, temp___361, temp___362), 0,
+  2) = temp___356)) and (((get(temp___352(temp___354, temp___355, temp___356,
+  temp___357, temp___358, temp___359, temp___360, temp___361, temp___362), 1,
+  0) = temp___357) and (get(temp___352(temp___354, temp___355, temp___356,
+  temp___357, temp___358, temp___359, temp___360, temp___361, temp___362), 1,
+  1) = temp___358)) and (get(temp___352(temp___354, temp___355, temp___356,
+  temp___357, temp___358, temp___359, temp___360, temp___361, temp___362), 1,
+  2) = temp___359))) and (((get(temp___352(temp___354, temp___355,
+  temp___356, temp___357, temp___358, temp___359, temp___360, temp___361,
+  temp___362), 2, 0) = temp___360) and (get(temp___352(temp___354,
+  temp___355, temp___356, temp___357, temp___358, temp___359, temp___360,
+  temp___361, temp___362), 2, 1) = temp___361)) and
+  (get(temp___352(temp___354, temp___355, temp___356, temp___357, temp___358,
+  temp___359, temp___360, temp___361, temp___362), 2, 2) = temp___362))))
+
+logic temp___365 : bool, bool, bool, bool, bool, bool, bool, bool,
+  bool -> map
+
+axiom def_axiom15 :
+  (forall temp___367:bool. forall temp___368:bool. forall temp___369:bool.
+  forall temp___370:bool. forall temp___371:bool. forall temp___372:bool.
+  forall temp___373:bool. forall temp___374:bool. forall temp___375:bool.
+  (((((get(temp___365(temp___367, temp___368, temp___369, temp___370,
+  temp___371, temp___372, temp___373, temp___374, temp___375), 0,
+  0) = temp___367) and (get(temp___365(temp___367, temp___368, temp___369,
+  temp___370, temp___371, temp___372, temp___373, temp___374, temp___375), 0,
+  1) = temp___368)) and (get(temp___365(temp___367, temp___368, temp___369,
+  temp___370, temp___371, temp___372, temp___373, temp___374, temp___375), 0,
+  2) = temp___369)) and (((get(temp___365(temp___367, temp___368, temp___369,
+  temp___370, temp___371, temp___372, temp___373, temp___374, temp___375), 1,
+  0) = temp___370) and (get(temp___365(temp___367, temp___368, temp___369,
+  temp___370, temp___371, temp___372, temp___373, temp___374, temp___375), 1,
+  1) = temp___371)) and (get(temp___365(temp___367, temp___368, temp___369,
+  temp___370, temp___371, temp___372, temp___373, temp___374, temp___375), 1,
+  2) = temp___372))) and (((get(temp___365(temp___367, temp___368,
+  temp___369, temp___370, temp___371, temp___372, temp___373, temp___374,
+  temp___375), 2, 0) = temp___373) and (get(temp___365(temp___367,
+  temp___368, temp___369, temp___370, temp___371, temp___372, temp___373,
+  temp___374, temp___375), 2, 1) = temp___374)) and
+  (get(temp___365(temp___367, temp___368, temp___369, temp___370, temp___371,
+  temp___372, temp___373, temp___374, temp___375), 2, 2) = temp___375))))
+
+logic temp___378 : bool, bool, bool, bool, bool, bool, bool, bool,
+  bool -> map
+
+axiom def_axiom16 :
+  (forall temp___380:bool. forall temp___381:bool. forall temp___382:bool.
+  forall temp___383:bool. forall temp___384:bool. forall temp___385:bool.
+  forall temp___386:bool. forall temp___387:bool. forall temp___388:bool.
+  (((((get(temp___378(temp___380, temp___381, temp___382, temp___383,
+  temp___384, temp___385, temp___386, temp___387, temp___388), 0,
+  0) = temp___380) and (get(temp___378(temp___380, temp___381, temp___382,
+  temp___383, temp___384, temp___385, temp___386, temp___387, temp___388), 0,
+  1) = temp___381)) and (get(temp___378(temp___380, temp___381, temp___382,
+  temp___383, temp___384, temp___385, temp___386, temp___387, temp___388), 0,
+  2) = temp___382)) and (((get(temp___378(temp___380, temp___381, temp___382,
+  temp___383, temp___384, temp___385, temp___386, temp___387, temp___388), 1,
+  0) = temp___383) and (get(temp___378(temp___380, temp___381, temp___382,
+  temp___383, temp___384, temp___385, temp___386, temp___387, temp___388), 1,
+  1) = temp___384)) and (get(temp___378(temp___380, temp___381, temp___382,
+  temp___383, temp___384, temp___385, temp___386, temp___387, temp___388), 1,
+  2) = temp___385))) and (((get(temp___378(temp___380, temp___381,
+  temp___382, temp___383, temp___384, temp___385, temp___386, temp___387,
+  temp___388), 2, 0) = temp___386) and (get(temp___378(temp___380,
+  temp___381, temp___382, temp___383, temp___384, temp___385, temp___386,
+  temp___387, temp___388), 2, 1) = temp___387)) and
+  (get(temp___378(temp___380, temp___381, temp___382, temp___383, temp___384,
+  temp___385, temp___386, temp___387, temp___388), 2, 2) = temp___388))))
+
+logic temp___391 : bool, bool, bool, bool, bool, bool, bool, bool,
+  bool -> map
+
+axiom def_axiom17 :
+  (forall temp___393:bool. forall temp___394:bool. forall temp___395:bool.
+  forall temp___396:bool. forall temp___397:bool. forall temp___398:bool.
+  forall temp___399:bool. forall temp___400:bool. forall temp___401:bool.
+  (((((get(temp___391(temp___393, temp___394, temp___395, temp___396,
+  temp___397, temp___398, temp___399, temp___400, temp___401), 0,
+  0) = temp___393) and (get(temp___391(temp___393, temp___394, temp___395,
+  temp___396, temp___397, temp___398, temp___399, temp___400, temp___401), 0,
+  1) = temp___394)) and (get(temp___391(temp___393, temp___394, temp___395,
+  temp___396, temp___397, temp___398, temp___399, temp___400, temp___401), 0,
+  2) = temp___395)) and (((get(temp___391(temp___393, temp___394, temp___395,
+  temp___396, temp___397, temp___398, temp___399, temp___400, temp___401), 1,
+  0) = temp___396) and (get(temp___391(temp___393, temp___394, temp___395,
+  temp___396, temp___397, temp___398, temp___399, temp___400, temp___401), 1,
+  1) = temp___397)) and (get(temp___391(temp___393, temp___394, temp___395,
+  temp___396, temp___397, temp___398, temp___399, temp___400, temp___401), 1,
+  2) = temp___398))) and (((get(temp___391(temp___393, temp___394,
+  temp___395, temp___396, temp___397, temp___398, temp___399, temp___400,
+  temp___401), 2, 0) = temp___399) and (get(temp___391(temp___393,
+  temp___394, temp___395, temp___396, temp___397, temp___398, temp___399,
+  temp___400, temp___401), 2, 1) = temp___400)) and
+  (get(temp___391(temp___393, temp___394, temp___395, temp___396, temp___397,
+  temp___398, temp___399, temp___400, temp___401), 2, 2) = temp___401))))
+
+logic temp___404 : bool, bool, bool, bool, bool, bool, bool, bool,
+  bool -> map
+
+axiom def_axiom18 :
+  (forall temp___406:bool. forall temp___407:bool. forall temp___408:bool.
+  forall temp___409:bool. forall temp___410:bool. forall temp___411:bool.
+  forall temp___412:bool. forall temp___413:bool. forall temp___414:bool.
+  (((((get(temp___404(temp___406, temp___407, temp___408, temp___409,
+  temp___410, temp___411, temp___412, temp___413, temp___414), 0,
+  0) = temp___406) and (get(temp___404(temp___406, temp___407, temp___408,
+  temp___409, temp___410, temp___411, temp___412, temp___413, temp___414), 0,
+  1) = temp___407)) and (get(temp___404(temp___406, temp___407, temp___408,
+  temp___409, temp___410, temp___411, temp___412, temp___413, temp___414), 0,
+  2) = temp___408)) and (((get(temp___404(temp___406, temp___407, temp___408,
+  temp___409, temp___410, temp___411, temp___412, temp___413, temp___414), 1,
+  0) = temp___409) and (get(temp___404(temp___406, temp___407, temp___408,
+  temp___409, temp___410, temp___411, temp___412, temp___413, temp___414), 1,
+  1) = temp___410)) and (get(temp___404(temp___406, temp___407, temp___408,
+  temp___409, temp___410, temp___411, temp___412, temp___413, temp___414), 1,
+  2) = temp___411))) and (((get(temp___404(temp___406, temp___407,
+  temp___408, temp___409, temp___410, temp___411, temp___412, temp___413,
+  temp___414), 2, 0) = temp___412) and (get(temp___404(temp___406,
+  temp___407, temp___408, temp___409, temp___410, temp___411, temp___412,
+  temp___413, temp___414), 2, 1) = temp___413)) and
+  (get(temp___404(temp___406, temp___407, temp___408, temp___409, temp___410,
+  temp___411, temp___412, temp___413, temp___414), 2, 2) = temp___414))))
+
+logic temp___417 : bool, bool, bool, bool, bool, bool, bool, bool,
+  bool -> map
+
+axiom def_axiom19 :
+  (forall temp___419:bool. forall temp___420:bool. forall temp___421:bool.
+  forall temp___422:bool. forall temp___423:bool. forall temp___424:bool.
+  forall temp___425:bool. forall temp___426:bool. forall temp___427:bool.
+  (((((get(temp___417(temp___419, temp___420, temp___421, temp___422,
+  temp___423, temp___424, temp___425, temp___426, temp___427), 0,
+  0) = temp___419) and (get(temp___417(temp___419, temp___420, temp___421,
+  temp___422, temp___423, temp___424, temp___425, temp___426, temp___427), 0,
+  1) = temp___420)) and (get(temp___417(temp___419, temp___420, temp___421,
+  temp___422, temp___423, temp___424, temp___425, temp___426, temp___427), 0,
+  2) = temp___421)) and (((get(temp___417(temp___419, temp___420, temp___421,
+  temp___422, temp___423, temp___424, temp___425, temp___426, temp___427), 1,
+  0) = temp___422) and (get(temp___417(temp___419, temp___420, temp___421,
+  temp___422, temp___423, temp___424, temp___425, temp___426, temp___427), 1,
+  1) = temp___423)) and (get(temp___417(temp___419, temp___420, temp___421,
+  temp___422, temp___423, temp___424, temp___425, temp___426, temp___427), 1,
+  2) = temp___424))) and (((get(temp___417(temp___419, temp___420,
+  temp___421, temp___422, temp___423, temp___424, temp___425, temp___426,
+  temp___427), 2, 0) = temp___425) and (get(temp___417(temp___419,
+  temp___420, temp___421, temp___422, temp___423, temp___424, temp___425,
+  temp___426, temp___427), 2, 1) = temp___426)) and
+  (get(temp___417(temp___419, temp___420, temp___421, temp___422, temp___423,
+  temp___424, temp___425, temp___426, temp___427), 2, 2) = temp___427))))
+
+logic temp___430 : bool, bool, bool, bool, bool, bool, bool, bool,
+  bool -> map
+
+axiom def_axiom20 :
+  (forall temp___432:bool. forall temp___433:bool. forall temp___434:bool.
+  forall temp___435:bool. forall temp___436:bool. forall temp___437:bool.
+  forall temp___438:bool. forall temp___439:bool. forall temp___440:bool.
+  (((((get(temp___430(temp___432, temp___433, temp___434, temp___435,
+  temp___436, temp___437, temp___438, temp___439, temp___440), 0,
+  0) = temp___432) and (get(temp___430(temp___432, temp___433, temp___434,
+  temp___435, temp___436, temp___437, temp___438, temp___439, temp___440), 0,
+  1) = temp___433)) and (get(temp___430(temp___432, temp___433, temp___434,
+  temp___435, temp___436, temp___437, temp___438, temp___439, temp___440), 0,
+  2) = temp___434)) and (((get(temp___430(temp___432, temp___433, temp___434,
+  temp___435, temp___436, temp___437, temp___438, temp___439, temp___440), 1,
+  0) = temp___435) and (get(temp___430(temp___432, temp___433, temp___434,
+  temp___435, temp___436, temp___437, temp___438, temp___439, temp___440), 1,
+  1) = temp___436)) and (get(temp___430(temp___432, temp___433, temp___434,
+  temp___435, temp___436, temp___437, temp___438, temp___439, temp___440), 1,
+  2) = temp___437))) and (((get(temp___430(temp___432, temp___433,
+  temp___434, temp___435, temp___436, temp___437, temp___438, temp___439,
+  temp___440), 2, 0) = temp___438) and (get(temp___430(temp___432,
+  temp___433, temp___434, temp___435, temp___436, temp___437, temp___438,
+  temp___439, temp___440), 2, 1) = temp___439)) and
+  (get(temp___430(temp___432, temp___433, temp___434, temp___435, temp___436,
+  temp___437, temp___438, temp___439, temp___440), 2, 2) = temp___440))))
+
+logic temp___443 : bool, bool, bool, bool, bool, bool, bool, bool,
+  bool -> map
+
+axiom def_axiom21 :
+  (forall temp___445:bool. forall temp___446:bool. forall temp___447:bool.
+  forall temp___448:bool. forall temp___449:bool. forall temp___450:bool.
+  forall temp___451:bool. forall temp___452:bool. forall temp___453:bool.
+  (((((get(temp___443(temp___445, temp___446, temp___447, temp___448,
+  temp___449, temp___450, temp___451, temp___452, temp___453), 0,
+  0) = temp___445) and (get(temp___443(temp___445, temp___446, temp___447,
+  temp___448, temp___449, temp___450, temp___451, temp___452, temp___453), 0,
+  1) = temp___446)) and (get(temp___443(temp___445, temp___446, temp___447,
+  temp___448, temp___449, temp___450, temp___451, temp___452, temp___453), 0,
+  2) = temp___447)) and (((get(temp___443(temp___445, temp___446, temp___447,
+  temp___448, temp___449, temp___450, temp___451, temp___452, temp___453), 1,
+  0) = temp___448) and (get(temp___443(temp___445, temp___446, temp___447,
+  temp___448, temp___449, temp___450, temp___451, temp___452, temp___453), 1,
+  1) = temp___449)) and (get(temp___443(temp___445, temp___446, temp___447,
+  temp___448, temp___449, temp___450, temp___451, temp___452, temp___453), 1,
+  2) = temp___450))) and (((get(temp___443(temp___445, temp___446,
+  temp___447, temp___448, temp___449, temp___450, temp___451, temp___452,
+  temp___453), 2, 0) = temp___451) and (get(temp___443(temp___445,
+  temp___446, temp___447, temp___448, temp___449, temp___450, temp___451,
+  temp___452, temp___453), 2, 1) = temp___452)) and
+  (get(temp___443(temp___445, temp___446, temp___447, temp___448, temp___449,
+  temp___450, temp___451, temp___452, temp___453), 2, 2) = temp___453))))
+
+logic temp___456 : bool, bool, bool, bool, bool, bool, bool, bool,
+  bool -> map
+
+axiom def_axiom22 :
+  (forall temp___458:bool. forall temp___459:bool. forall temp___460:bool.
+  forall temp___461:bool. forall temp___462:bool. forall temp___463:bool.
+  forall temp___464:bool. forall temp___465:bool. forall temp___466:bool.
+  (((((get(temp___456(temp___458, temp___459, temp___460, temp___461,
+  temp___462, temp___463, temp___464, temp___465, temp___466), 0,
+  0) = temp___458) and (get(temp___456(temp___458, temp___459, temp___460,
+  temp___461, temp___462, temp___463, temp___464, temp___465, temp___466), 0,
+  1) = temp___459)) and (get(temp___456(temp___458, temp___459, temp___460,
+  temp___461, temp___462, temp___463, temp___464, temp___465, temp___466), 0,
+  2) = temp___460)) and (((get(temp___456(temp___458, temp___459, temp___460,
+  temp___461, temp___462, temp___463, temp___464, temp___465, temp___466), 1,
+  0) = temp___461) and (get(temp___456(temp___458, temp___459, temp___460,
+  temp___461, temp___462, temp___463, temp___464, temp___465, temp___466), 1,
+  1) = temp___462)) and (get(temp___456(temp___458, temp___459, temp___460,
+  temp___461, temp___462, temp___463, temp___464, temp___465, temp___466), 1,
+  2) = temp___463))) and (((get(temp___456(temp___458, temp___459,
+  temp___460, temp___461, temp___462, temp___463, temp___464, temp___465,
+  temp___466), 2, 0) = temp___464) and (get(temp___456(temp___458,
+  temp___459, temp___460, temp___461, temp___462, temp___463, temp___464,
+  temp___465, temp___466), 2, 1) = temp___465)) and
+  (get(temp___456(temp___458, temp___459, temp___460, temp___461, temp___462,
+  temp___463, temp___464, temp___465, temp___466), 2, 2) = temp___466))))
+
+logic temp___469 : bool, bool, bool, bool, bool, bool, bool, bool,
+  bool -> map
+
+axiom def_axiom23 :
+  (forall temp___471:bool. forall temp___472:bool. forall temp___473:bool.
+  forall temp___474:bool. forall temp___475:bool. forall temp___476:bool.
+  forall temp___477:bool. forall temp___478:bool. forall temp___479:bool.
+  (((((get(temp___469(temp___471, temp___472, temp___473, temp___474,
+  temp___475, temp___476, temp___477, temp___478, temp___479), 0,
+  0) = temp___471) and (get(temp___469(temp___471, temp___472, temp___473,
+  temp___474, temp___475, temp___476, temp___477, temp___478, temp___479), 0,
+  1) = temp___472)) and (get(temp___469(temp___471, temp___472, temp___473,
+  temp___474, temp___475, temp___476, temp___477, temp___478, temp___479), 0,
+  2) = temp___473)) and (((get(temp___469(temp___471, temp___472, temp___473,
+  temp___474, temp___475, temp___476, temp___477, temp___478, temp___479), 1,
+  0) = temp___474) and (get(temp___469(temp___471, temp___472, temp___473,
+  temp___474, temp___475, temp___476, temp___477, temp___478, temp___479), 1,
+  1) = temp___475)) and (get(temp___469(temp___471, temp___472, temp___473,
+  temp___474, temp___475, temp___476, temp___477, temp___478, temp___479), 1,
+  2) = temp___476))) and (((get(temp___469(temp___471, temp___472,
+  temp___473, temp___474, temp___475, temp___476, temp___477, temp___478,
+  temp___479), 2, 0) = temp___477) and (get(temp___469(temp___471,
+  temp___472, temp___473, temp___474, temp___475, temp___476, temp___477,
+  temp___478, temp___479), 2, 1) = temp___478)) and
+  (get(temp___469(temp___471, temp___472, temp___473, temp___474, temp___475,
+  temp___476, temp___477, temp___478, temp___479), 2, 2) = temp___479))))
+
+logic temp___482 : bool, bool, bool, bool, bool, bool, bool, bool,
+  bool -> map
+
+axiom def_axiom24 :
+  (forall temp___484:bool. forall temp___485:bool. forall temp___486:bool.
+  forall temp___487:bool. forall temp___488:bool. forall temp___489:bool.
+  forall temp___490:bool. forall temp___491:bool. forall temp___492:bool.
+  (((((get(temp___482(temp___484, temp___485, temp___486, temp___487,
+  temp___488, temp___489, temp___490, temp___491, temp___492), 0,
+  0) = temp___484) and (get(temp___482(temp___484, temp___485, temp___486,
+  temp___487, temp___488, temp___489, temp___490, temp___491, temp___492), 0,
+  1) = temp___485)) and (get(temp___482(temp___484, temp___485, temp___486,
+  temp___487, temp___488, temp___489, temp___490, temp___491, temp___492), 0,
+  2) = temp___486)) and (((get(temp___482(temp___484, temp___485, temp___486,
+  temp___487, temp___488, temp___489, temp___490, temp___491, temp___492), 1,
+  0) = temp___487) and (get(temp___482(temp___484, temp___485, temp___486,
+  temp___487, temp___488, temp___489, temp___490, temp___491, temp___492), 1,
+  1) = temp___488)) and (get(temp___482(temp___484, temp___485, temp___486,
+  temp___487, temp___488, temp___489, temp___490, temp___491, temp___492), 1,
+  2) = temp___489))) and (((get(temp___482(temp___484, temp___485,
+  temp___486, temp___487, temp___488, temp___489, temp___490, temp___491,
+  temp___492), 2, 0) = temp___490) and (get(temp___482(temp___484,
+  temp___485, temp___486, temp___487, temp___488, temp___489, temp___490,
+  temp___491, temp___492), 2, 1) = temp___491)) and
+  (get(temp___482(temp___484, temp___485, temp___486, temp___487, temp___488,
+  temp___489, temp___490, temp___491, temp___492), 2, 2) = temp___492))))
+
+logic temp___495 : bool, bool, bool, bool, bool, bool, bool, bool,
+  bool -> map
+
+axiom def_axiom25 :
+  (forall temp___497:bool. forall temp___498:bool. forall temp___499:bool.
+  forall temp___500:bool. forall temp___501:bool. forall temp___502:bool.
+  forall temp___503:bool. forall temp___504:bool. forall temp___505:bool.
+  (((((get(temp___495(temp___497, temp___498, temp___499, temp___500,
+  temp___501, temp___502, temp___503, temp___504, temp___505), 0,
+  0) = temp___497) and (get(temp___495(temp___497, temp___498, temp___499,
+  temp___500, temp___501, temp___502, temp___503, temp___504, temp___505), 0,
+  1) = temp___498)) and (get(temp___495(temp___497, temp___498, temp___499,
+  temp___500, temp___501, temp___502, temp___503, temp___504, temp___505), 0,
+  2) = temp___499)) and (((get(temp___495(temp___497, temp___498, temp___499,
+  temp___500, temp___501, temp___502, temp___503, temp___504, temp___505), 1,
+  0) = temp___500) and (get(temp___495(temp___497, temp___498, temp___499,
+  temp___500, temp___501, temp___502, temp___503, temp___504, temp___505), 1,
+  1) = temp___501)) and (get(temp___495(temp___497, temp___498, temp___499,
+  temp___500, temp___501, temp___502, temp___503, temp___504, temp___505), 1,
+  2) = temp___502))) and (((get(temp___495(temp___497, temp___498,
+  temp___499, temp___500, temp___501, temp___502, temp___503, temp___504,
+  temp___505), 2, 0) = temp___503) and (get(temp___495(temp___497,
+  temp___498, temp___499, temp___500, temp___501, temp___502, temp___503,
+  temp___504, temp___505), 2, 1) = temp___504)) and
+  (get(temp___495(temp___497, temp___498, temp___499, temp___500, temp___501,
+  temp___502, temp___503, temp___504, temp___505), 2, 2) = temp___505))))
+
+logic valid_configuration : (int,(int,cell) farray) farray, us_split_fields,
+  int -> bool
+
+logic valid_configuration__function_guard : bool,
+  (int,(int,cell) farray) farray, us_split_fields, int -> prop
+
+logic no_complete_lines : (int,(int,cell) farray) farray -> bool
+
+logic no_complete_lines__function_guard : bool,
+  (int,(int,cell) farray) farray -> prop
+
+logic no_overlap : (int,(int,cell) farray) farray, us_rep -> bool
+
+logic no_overlap__function_guard : bool, (int,(int,cell) farray) farray,
+  us_rep -> prop
+
+axiom valid_configuration__post_axiom : true
+
+axiom valid_configuration__def_axiom :
+  (forall tetris_functional__cur_board:(int,(int,cell) farray) farray.
+  (forall tetris_functional__cur_piece__fields:shape.
+  forall tetris_functional__cur_piece__fields1:direction.
+  forall tetris_functional__cur_piece__fields2:px_coord.
+  forall tetris_functional__cur_piece__fields3:py_coord.
+  (forall tetris_functional__cur_state:int
+  [valid_configuration(tetris_functional__cur_board, {
+  rec__tetris_functional__piece__s = tetris_functional__cur_piece__fields;
+  rec__tetris_functional__piece__d = tetris_functional__cur_piece__fields1;
+  rec__tetris_functional__piece__x = tetris_functional__cur_piece__fields2;
+  rec__tetris_functional__piece__y = tetris_functional__cur_piece__fields3 },
+  tetris_functional__cur_state)].
+  (((valid_configuration(tetris_functional__cur_board, {
+  rec__tetris_functional__piece__s = tetris_functional__cur_piece__fields;
+  rec__tetris_functional__piece__d = tetris_functional__cur_piece__fields1;
+  rec__tetris_functional__piece__x = tetris_functional__cur_piece__fields2;
+  rec__tetris_functional__piece__y = tetris_functional__cur_piece__fields3 },
+  tetris_functional__cur_state) = true) ->
+  ((((tetris_functional__cur_state = 0) or
+  (tetris_functional__cur_state = 1)) ->
+  (no_overlap(tetris_functional__cur_board, { us_split_fields1 = {
+  rec__tetris_functional__piece__s = tetris_functional__cur_piece__fields;
+  rec__tetris_functional__piece__d = tetris_functional__cur_piece__fields1;
+  rec__tetris_functional__piece__x = tetris_functional__cur_piece__fields2;
+  rec__tetris_functional__piece__y = tetris_functional__cur_piece__fields3 }
+  }) = true)) and ((not ((tetris_functional__cur_state = 0) or
+  (tetris_functional__cur_state = 1))) ->
+  ((not (tetris_functional__cur_state = 2)) ->
+  (no_complete_lines(tetris_functional__cur_board) = true))))) and
+  (((((tetris_functional__cur_state = 0) or
+  (tetris_functional__cur_state = 1)) and
+  (no_overlap(tetris_functional__cur_board, { us_split_fields1 = {
+  rec__tetris_functional__piece__s = tetris_functional__cur_piece__fields;
+  rec__tetris_functional__piece__d = tetris_functional__cur_piece__fields1;
+  rec__tetris_functional__piece__x = tetris_functional__cur_piece__fields2;
+  rec__tetris_functional__piece__y = tetris_functional__cur_piece__fields3 }
+  }) = true)) or ((not ((tetris_functional__cur_state = 0) or
+  (tetris_functional__cur_state = 1))) and
+  ((not (tetris_functional__cur_state = 2)) ->
+  (no_complete_lines(tetris_functional__cur_board) = true)))) ->
+  (valid_configuration(tetris_functional__cur_board, {
+  rec__tetris_functional__piece__s = tetris_functional__cur_piece__fields;
+  rec__tetris_functional__piece__d = tetris_functional__cur_piece__fields1;
+  rec__tetris_functional__piece__x = tetris_functional__cur_piece__fields2;
+  rec__tetris_functional__piece__y = tetris_functional__cur_piece__fields3 },
+  tetris_functional__cur_state) = true))))))
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
+logic attr__ATTRIBUTE_ADDRESS6 : int
+
+logic attr__ATTRIBUTE_ADDRESS7 : int
+
+logic attr__ATTRIBUTE_ADDRESS8 : int
+
+type integer
+
+predicate in_range10(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq17 : int, int -> bool
+
+axiom bool_eq_def16 :
+  (forall x:int. forall y:int [bool_eq17(x, y)]. (((x = y) -> (bool_eq17(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq17(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE10 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check10 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE10 : us_image -> int
+
+logic user_eq13 : integer, integer -> bool
+
+logic dummy16 : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+axiom possible_i_shapes__def_axiom :
+  (possible_i_shapes = tetris_functional__possible_i_shapes__aggregate_def(temp___143(of_int(0),
+  of_int(0), of_int(0), of_int(0), of_int(1), of_int(1), of_int(1),
+  of_int(1), of_int(0), of_int(0), of_int(0), of_int(0), of_int(0),
+  of_int(0), of_int(0), of_int(0)), temp___163(of_int(0), of_int(0),
+  of_int(1), of_int(0), of_int(0), of_int(0), of_int(1), of_int(0),
+  of_int(0), of_int(0), of_int(1), of_int(0), of_int(0), of_int(0),
+  of_int(1), of_int(0)), temp___183(of_int(0), of_int(0), of_int(0),
+  of_int(0), of_int(0), of_int(0), of_int(0), of_int(0), of_int(1),
+  of_int(1), of_int(1), of_int(1), of_int(0), of_int(0), of_int(0),
+  of_int(0)), temp___203(of_int(0), of_int(1), of_int(0), of_int(0),
+  of_int(0), of_int(1), of_int(0), of_int(0), of_int(0), of_int(1),
+  of_int(0), of_int(0), of_int(0), of_int(1), of_int(0), of_int(0))))
+
+axiom possible_three_shapes__def_axiom :
+  (possible_three_shapes = tetris_functional__possible_three_shapes__aggregate_def(temp___248(of_int(1),
+  of_int(0), of_int(0), of_int(1), of_int(1), of_int(1), of_int(0),
+  of_int(0), of_int(0)), temp___261(of_int(0), of_int(1), of_int(1),
+  of_int(0), of_int(1), of_int(0), of_int(0), of_int(1), of_int(0)),
+  temp___274(of_int(0), of_int(0), of_int(0), of_int(1), of_int(1),
+  of_int(1), of_int(0), of_int(0), of_int(1)), temp___287(of_int(0),
+  of_int(1), of_int(0), of_int(0), of_int(1), of_int(0), of_int(1),
+  of_int(1), of_int(0)), temp___300(of_int(0), of_int(0), of_int(1),
+  of_int(1), of_int(1), of_int(1), of_int(0), of_int(0), of_int(0)),
+  temp___313(of_int(0), of_int(1), of_int(0), of_int(0), of_int(1),
+  of_int(0), of_int(0), of_int(1), of_int(1)), temp___326(of_int(0),
+  of_int(0), of_int(0), of_int(1), of_int(1), of_int(1), of_int(1),
+  of_int(0), of_int(0)), temp___339(of_int(1), of_int(1), of_int(0),
+  of_int(0), of_int(1), of_int(0), of_int(0), of_int(1), of_int(0)),
+  temp___352(of_int(0), of_int(1), of_int(1), of_int(1), of_int(1),
+  of_int(0), of_int(0), of_int(0), of_int(0)), temp___365(of_int(0),
+  of_int(1), of_int(0), of_int(0), of_int(1), of_int(1), of_int(0),
+  of_int(0), of_int(1)), temp___378(of_int(0), of_int(0), of_int(0),
+  of_int(0), of_int(1), of_int(1), of_int(1), of_int(1), of_int(0)),
+  temp___391(of_int(1), of_int(0), of_int(0), of_int(1), of_int(1),
+  of_int(0), of_int(0), of_int(1), of_int(0)), temp___404(of_int(0),
+  of_int(1), of_int(0), of_int(1), of_int(1), of_int(1), of_int(0),
+  of_int(0), of_int(0)), temp___417(of_int(0), of_int(1), of_int(0),
+  of_int(0), of_int(1), of_int(1), of_int(0), of_int(1), of_int(0)),
+  temp___430(of_int(0), of_int(0), of_int(0), of_int(1), of_int(1),
+  of_int(1), of_int(0), of_int(1), of_int(0)), temp___443(of_int(0),
+  of_int(1), of_int(0), of_int(1), of_int(1), of_int(0), of_int(0),
+  of_int(1), of_int(0)), temp___456(of_int(1), of_int(1), of_int(0),
+  of_int(0), of_int(1), of_int(1), of_int(0), of_int(0), of_int(0)),
+  temp___469(of_int(0), of_int(0), of_int(1), of_int(0), of_int(1),
+  of_int(1), of_int(0), of_int(1), of_int(0)), temp___482(of_int(0),
+  of_int(0), of_int(0), of_int(1), of_int(1), of_int(0), of_int(0),
+  of_int(1), of_int(1)), temp___495(of_int(0), of_int(1), of_int(0),
+  of_int(1), of_int(1), of_int(0), of_int(1), of_int(0), of_int(0))))
+
+logic is_empty : (int,(int,cell) farray) farray, int, int -> bool
+
+logic is_empty__function_guard : bool, (int,(int,cell) farray) farray, int,
+  int -> prop
+
+axiom is_empty__post_axiom : true
+
+axiom is_empty__def_axiom :
+  (forall b:(int,(int,cell) farray) farray.
+  (forall y:int. forall x:int [is_empty(b, y, x)]. ((is_empty(b, y,
+  x) = true) <-> ((in_range4(x) and in_range5(y)) and
+  (to_rep(((b[y])[x])) = 0)))))
+
+logic is_complete_line : (int,cell) farray -> bool
+
+logic is_complete_line__function_guard : bool, (int,cell) farray -> prop
+
+axiom is_complete_line__post_axiom : true
+
+axiom is_complete_line__def_axiom :
+  (forall l:(int,cell) farray [is_complete_line(l)].
+  ((is_complete_line(l) = true) <->
+  (forall x:int. (((1 <= x) and (x <= 10)) -> (not (to_rep((l[x])) = 0))))))
+
+axiom no_complete_lines__post_axiom : true
+
+axiom no_complete_lines__def_axiom :
+  (forall b:(int,(int,cell) farray) farray [no_complete_lines(b)].
+  ((no_complete_lines(b) = true) <->
+  (forall y:int. (((1 <= y) and (y <= 50)) ->
+  (not (is_complete_line((b[y])) = true))))))
+
+axiom no_overlap__post_axiom : true
+
+axiom no_overlap__def_axiom :
+  (forall b:(int,(int,cell) farray) farray.
+  (forall p:shape. forall p1:direction. forall p2:px_coord.
+  forall p3:py_coord [no_overlap(b, { us_split_fields1 = {
+  rec__tetris_functional__piece__s = p; rec__tetris_functional__piece__d =
+  p1; rec__tetris_functional__piece__x = p2;
+  rec__tetris_functional__piece__y = p3 } })]. (((no_overlap(b, {
+  us_split_fields1 = { rec__tetris_functional__piece__s = p;
+  rec__tetris_functional__piece__d = p1; rec__tetris_functional__piece__x =
+  p2; rec__tetris_functional__piece__y = p3 } }) = true) ->
+  (((to_rep1(p) = 2) -> ((((is_empty(b, to_rep3(p3), to_rep2(p2)) = true) and
+  (is_empty(b, to_rep3(p3), (to_rep2(p2) + 1)) = true)) and (is_empty(b,
+  (to_rep3(p3) + 1), to_rep2(p2)) = true)) and (is_empty(b,
+  (to_rep3(p3) + 1), (to_rep2(p2) + 1)) = true))) and
+  ((not (to_rep1(p) = 2)) -> (((to_rep1(p) = 1) ->
+  (forall y:int. (((0 <= y) and (y <= 3)) ->
+  (forall x:int. (((0 <= x) and (x <= 3)) ->
+  ((get((possible_i_shapes[to_rep4(p1)]), y, x) = true) -> (is_empty(b,
+  (to_rep3(p3) + y), (to_rep2(p2) + x)) = true))))))) and
+  ((not (to_rep1(p) = 1)) ->
+  (forall y:int. (((0 <= y) and (y <= 2)) ->
+  (forall x:int. (((0 <= x) and (x <= 2)) ->
+  ((get(get1(possible_three_shapes, to_rep1(p), to_rep4(p1)), y,
+  x) = true) -> (is_empty(b, (to_rep3(p3) + y), (to_rep2(p2) + x)) = true))))))))))) and
+  ((((to_rep1(p) = 2) and ((((is_empty(b, to_rep3(p3),
+  to_rep2(p2)) = true) and (is_empty(b, to_rep3(p3),
+  (to_rep2(p2) + 1)) = true)) and (is_empty(b, (to_rep3(p3) + 1),
+  to_rep2(p2)) = true)) and (is_empty(b, (to_rep3(p3) + 1),
+  (to_rep2(p2) + 1)) = true))) or ((not (to_rep1(p) = 2)) and
+  (((to_rep1(p) = 1) and
+  (forall y:int. (((0 <= y) and (y <= 3)) ->
+  (forall x:int. (((0 <= x) and (x <= 3)) ->
+  ((get((possible_i_shapes[to_rep4(p1)]), y, x) = true) -> (is_empty(b,
+  (to_rep3(p3) + y), (to_rep2(p2) + x)) = true))))))) or
+  ((not (to_rep1(p) = 1)) and
+  (forall y:int. (((0 <= y) and (y <= 2)) ->
+  (forall x:int. (((0 <= x) and (x <= 2)) ->
+  ((get(get1(possible_three_shapes, to_rep1(p), to_rep4(p1)), y,
+  x) = true) -> (is_empty(b, (to_rep3(p3) + y), (to_rep2(p2) + x)) = true)))))))))) ->
+  (no_overlap(b, { us_split_fields1 = { rec__tetris_functional__piece__s = p;
+  rec__tetris_functional__piece__d = p1; rec__tetris_functional__piece__x =
+  p2; rec__tetris_functional__piece__y = p3 } }) = true)))))
+
+ (* File "tetris_functional.ads", line 170, characters 0-0 *)
+goal WP_parameter_def :
+  (forall cur_board:(int,(int,cell) farray) farray.
+  forall cur_piece__split_fields:shape.
+  forall cur_piece__split_fields1:direction.
+  forall cur_piece__split_fields2:px_coord.
+  forall cur_piece__split_fields3:py_coord. forall cur_state:int.
+  forall y:int. forall o:cell. forall o1:int. forall o2:(int,cell) farray.
+  forall result:int. forall y1:int.
+  forall cur_board1:(int,(int,cell) farray) farray. forall y2:int.
+  forall x:int. forall result1:int. forall x1:int.
+  forall cur_board2:(int,(int,cell) farray) farray. forall x2:int.
+  ((tetris_functional__possible_i_shapes__aggregate_def(temp___143(of_int(0),
+  of_int(0), of_int(0), of_int(0), of_int(1), of_int(1), of_int(1),
+  of_int(1), of_int(0), of_int(0), of_int(0), of_int(0), of_int(0),
+  of_int(0), of_int(0), of_int(0)), temp___163(of_int(0), of_int(0),
+  of_int(1), of_int(0), of_int(0), of_int(0), of_int(1), of_int(0),
+  of_int(0), of_int(0), of_int(1), of_int(0), of_int(0), of_int(0),
+  of_int(1), of_int(0)), temp___183(of_int(0), of_int(0), of_int(0),
+  of_int(0), of_int(0), of_int(0), of_int(0), of_int(0), of_int(1),
+  of_int(1), of_int(1), of_int(1), of_int(0), of_int(0), of_int(0),
+  of_int(0)), temp___203(of_int(0), of_int(1), of_int(0), of_int(0),
+  of_int(0), of_int(1), of_int(0), of_int(0), of_int(0), of_int(1),
+  of_int(0), of_int(0), of_int(0), of_int(1), of_int(0),
+  of_int(0))) = possible_i_shapes) ->
+  ((tetris_functional__possible_three_shapes__aggregate_def(temp___248(of_int(1),
+  of_int(0), of_int(0), of_int(1), of_int(1), of_int(1), of_int(0),
+  of_int(0), of_int(0)), temp___261(of_int(0), of_int(1), of_int(1),
+  of_int(0), of_int(1), of_int(0), of_int(0), of_int(1), of_int(0)),
+  temp___274(of_int(0), of_int(0), of_int(0), of_int(1), of_int(1),
+  of_int(1), of_int(0), of_int(0), of_int(1)), temp___287(of_int(0),
+  of_int(1), of_int(0), of_int(0), of_int(1), of_int(0), of_int(1),
+  of_int(1), of_int(0)), temp___300(of_int(0), of_int(0), of_int(1),
+  of_int(1), of_int(1), of_int(1), of_int(0), of_int(0), of_int(0)),
+  temp___313(of_int(0), of_int(1), of_int(0), of_int(0), of_int(1),
+  of_int(0), of_int(0), of_int(1), of_int(1)), temp___326(of_int(0),
+  of_int(0), of_int(0), of_int(1), of_int(1), of_int(1), of_int(1),
+  of_int(0), of_int(0)), temp___339(of_int(1), of_int(1), of_int(0),
+  of_int(0), of_int(1), of_int(0), of_int(0), of_int(1), of_int(0)),
+  temp___352(of_int(0), of_int(1), of_int(1), of_int(1), of_int(1),
+  of_int(0), of_int(0), of_int(0), of_int(0)), temp___365(of_int(0),
+  of_int(1), of_int(0), of_int(0), of_int(1), of_int(1), of_int(0),
+  of_int(0), of_int(1)), temp___378(of_int(0), of_int(0), of_int(0),
+  of_int(0), of_int(1), of_int(1), of_int(1), of_int(1), of_int(0)),
+  temp___391(of_int(1), of_int(0), of_int(0), of_int(1), of_int(1),
+  of_int(0), of_int(0), of_int(1), of_int(0)), temp___404(of_int(0),
+  of_int(1), of_int(0), of_int(1), of_int(1), of_int(1), of_int(0),
+  of_int(0), of_int(0)), temp___417(of_int(0), of_int(1), of_int(0),
+  of_int(0), of_int(1), of_int(1), of_int(0), of_int(1), of_int(0)),
+  temp___430(of_int(0), of_int(0), of_int(0), of_int(1), of_int(1),
+  of_int(1), of_int(0), of_int(1), of_int(0)), temp___443(of_int(0),
+  of_int(1), of_int(0), of_int(1), of_int(1), of_int(0), of_int(0),
+  of_int(1), of_int(0)), temp___456(of_int(1), of_int(1), of_int(0),
+  of_int(0), of_int(1), of_int(1), of_int(0), of_int(0), of_int(0)),
+  temp___469(of_int(0), of_int(0), of_int(1), of_int(0), of_int(1),
+  of_int(1), of_int(0), of_int(1), of_int(0)), temp___482(of_int(0),
+  of_int(0), of_int(0), of_int(1), of_int(1), of_int(0), of_int(0),
+  of_int(1), of_int(1)), temp___495(of_int(0), of_int(1), of_int(0),
+  of_int(1), of_int(1), of_int(0), of_int(1), of_int(0),
+  of_int(0))) = possible_three_shapes) -> (in_range9(cur_state) ->
+  (((cur_state = 1) and (valid_configuration(cur_board, {
+  rec__tetris_functional__piece__s = cur_piece__split_fields;
+  rec__tetris_functional__piece__d = cur_piece__split_fields1;
+  rec__tetris_functional__piece__x = cur_piece__split_fields2;
+  rec__tetris_functional__piece__y = cur_piece__split_fields3 },
+  cur_state) = true)) -> ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> ((({ int__content = result } = {
+  int__content = y }) and (y1 = 0)) -> (((0 <= y1) and (y1 <= 3)) ->
+  (((0 <= y2) and (y2 <= 3)) -> (((x = result1) and (x1 = 0)) ->
+  (((0 <= x1) and (x1 <= 3)) ->
+  (((forall temp___735:int. (((1 <= temp___735) and (temp___735 <= 50)) ->
+    ((not ((to_rep3(cur_piece__split_fields3) + y2) = temp___735)) ->
+    ((cur_board2[temp___735]) = (cur_board1[temp___735]))))) and
+  ((0 <= x2) and (x2 <= 3))) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y2,
+  x2) = true) -> (((to_rep(o) = to_rep1(cur_piece__split_fields)) and
+  ((((1 <= (to_rep2(cur_piece__split_fields2) + x2)) and
+  ((to_rep2(cur_piece__split_fields2) + x2) <= 10)) and
+  (o1 = (to_rep2(cur_piece__split_fields2) + x2))) and
+  (o2 = ((cur_board2[(to_rep3(cur_piece__split_fields3) + y2)])[o1 <- o])))) ->
+  (1 <= (to_rep3(cur_piece__split_fields3) + y2)))))))))))))))))

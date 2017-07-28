@@ -1,0 +1,149 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+type integer
+
+predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq1 : int, int -> bool
+
+axiom bool_eq_def :
+  (forall x:int. forall y:int [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> int
+
+logic user_eq : integer, integer -> bool
+
+logic dummy : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic sum_state : int, us_private -> int
+
+logic sum_state__function_guard : int, int, us_private -> prop
+
+axiom sum_state__post_axiom :
+  (forall init__b:int.
+  (forall init__state:us_private [sum_state(init__b, init__state)].
+  (in_range(init__b) -> in_range(sum_state(init__b, init__state)))))
+
+logic sum_all : int, us_private, int -> int
+
+logic sum_all__function_guard : int, int, us_private, int -> prop
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+axiom sum_all__post_axiom :
+  (forall init__b:int. forall init__a:int.
+  (forall init__state:us_private [sum_all(init__b, init__state, init__a)].
+  ((in_range(init__b) and in_range(init__a)) -> in_range(sum_all(init__b,
+  init__state, init__a)))))
+
+ (* File "init.ads", line 7, characters 0-0 *)
+goal WP_parameter_def :
+  (forall state:us_private. forall a:int. forall b:int. forall x:int.
+  forall y:int. forall z:int. forall o:int. forall o1:int. forall result:int.
+  forall x1:int. forall result1:int. forall y1:int.
+  (forall result2:bool. ((in_range(a) and (in_range(b) and ((sum_all(b,
+  state, a) = 0) and ((({ int__content = result } = { int__content = x }) and
+  (x1 = a)) and (in_range(x1) and ((((o = sum_state(b, state)) and
+  in_range(o)) and (({ int__content = result1 } = { int__content = y }) and
+  (y1 = o))) and (in_range(y1) and ((((-2147483648) <= 2147483647) ->
+  in_range(z)) and (((o1 = (x1 + y1)) and in_range((x1 + y1))) and
+  (((o1 = 0) and (result2 = true)) or ((not (o1 = 0)) and
+  (result2 = false)))))))))))) -> ((x1 + y1) = 0))))
