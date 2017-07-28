@@ -212,8 +212,22 @@ def mk_csf_slides(fd):
     def get_cat(bm):
         name = BENCHMARKS[bm]["name"]
         assert "sha<" not in name
-        assert name.startswith("random/") or name.startswith("wintersteiger")
-        _, cat, _ = name.split("/")
+        assert (name.startswith("random/") or
+                name.startswith("wintersteiger/") or
+                name.startswith("nyxbrain/"))
+
+        _, cat, fn = name.split("/")
+
+        if name.startswith("nyxbrain"):
+            if cat != "executable-tests":
+                return None
+            comp = fn.split("-")
+            assert comp[0] == "testSMT"
+            if comp[1] == "SMT":
+                cat = comp[1] + "-" + comp[2]
+            else:
+                cat = comp[1]
+
         if name.startswith("wintersteiger"):
             cat = {"abs"        : "fp.abs",
                    "add"        : "fp.add",
@@ -229,16 +243,36 @@ def mk_csf_slides(fd):
                    "sqrt"       : "fp.sqrt",
                    "sub"        : "fp.sub",
                    "toIntegral" : "fp.roundToIntegral"}[cat]
+        elif name.startswith("nyxbrain"):
+            cat = {'IEE754_equal'       : "fp.eq",
+                   'SMT-LIB_equal'      : "smtlib.eq",
+                   'absolute'           : "fp.abs",
+                   'add'                : "fp.add",
+                   'isInfinite'         : "fp.isInfinite",
+                   'isNaN'              : "fp.isNaN",
+                   'isNegative'         : "fp.isNegative",
+                   'isNormal'           : "fp.isNormal",
+                   'isPositive'         : "fp.isPositive",
+                   'isSubnormal'        : "fp.isSubnormal",
+                   'isZero'             : "fp.isZero",
+                   'less_than'          : "fp.lt",
+                   'less_than_or_equal' : "fp.leq",
+                   'multiply'           : "fp.mul",
+                   'negate'             : "fp.neg",
+                   'subtract'           : "fp.sub",
+                   'unpackPack'         : None}[cat]
         return cat
 
     # Coverage results will be random benchmark results
     solved = {}
     total  = {}
-    for group in ("random", "wintersteiger"):
+    for group in ("random", "wintersteiger", "nyxbrain"):
         if group not in data[-1]["group_results"]:
             continue
         for bm, res in data[-1]["group_results"][group].iteritems():
             cat = get_cat(bm)
+            if cat is None:
+                continue
             total[cat] = total.get(cat, 0) + 1
             solved[cat] = solved.get(cat, 0) + (1 if res["score"] == "s" else 0)
     subcats = set(total)
@@ -341,6 +375,7 @@ def mk_csf_slides(fd):
         slide_cats = ORDER[n:min(len(ORDER), n+ITEMS_PER_SLIDE)]
 
         fd.write("\\begin{frame}{Critical Success Factors for CVC4}")
+        fd.write("{Aggregating results from PyMPF, NyxBrain, and Wintersteiger}\n")
         fd.write("\\begin{center}\n")
         fd.write("\\begin{tikzpicture}\n")
 
@@ -373,6 +408,13 @@ def mk_csf_slides(fd):
             fd.write("\\node[anchor=west,text width=2cm] at %s {\\tiny %s};\n" %
                      (mk_coord(100, i + BAR_WIDTH * 0.5),
                       TXT.get(cat, cat)))
+            if total[cat] <= 1000:
+                testcount = "%u tests" % total[cat]
+            else:
+                testcount = "%.1fk tests" % (float(total[cat]) / 1000.0)
+            fd.write("\\node[anchor=east,text width=2cm,align=right] at %s {\\tiny %s};\n" %
+                     (mk_coord(0, i + BAR_WIDTH * 0.5),
+                      testcount))
 
         fd.write("\\end{tikzpicture}\n")
         fd.write("\\end{center}\n")
