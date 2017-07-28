@@ -212,22 +212,37 @@ def mk_csf_slides(fd):
     def get_cat(bm):
         name = BENCHMARKS[bm]["name"]
         assert "sha<" not in name
-        assert name.startswith("random/")
+        assert name.startswith("random/") or name.startswith("wintersteiger")
         _, cat, _ = name.split("/")
+        if name.startswith("wintersteiger"):
+            cat = {"abs"        : "fp.abs",
+                   "add"        : "fp.add",
+                   "div"        : "fp.div",
+                   "eq"         : "fp.eq",
+                   "fma"        : "fp.fma",
+                   "gt"         : "fp.gt",
+                   "lt"         : "fp.lt",
+                   "max"        : "fp.max",
+                   "min"        : "fp.min",
+                   "mul"        : "fp.mul",
+                   "rem"        : "fp.rem",
+                   "sqrt"       : "fp.sqrt",
+                   "sub"        : "fp.sub",
+                   "toIntegral" : "fp.roundToIntegral"}[cat]
         return cat
 
     # Coverage results will be random benchmark results
-    res = data[-1]["group_results"]["random"]
-    subcats = sorted(set(map(get_cat, res)))
+    solved = {}
+    total  = {}
+    for group in ("random", "wintersteiger"):
+        if group not in data[-1]["group_results"]:
+            continue
+        for bm, res in data[-1]["group_results"][group].iteritems():
+            cat = get_cat(bm)
+            total[cat] = total.get(cat, 0) + 1
+            solved[cat] = solved.get(cat, 0) + (1 if res["score"] == "s" else 0)
+    subcats = set(total)
 
-    solved = {cat : sum(1 if res[bm]["score"] == "s" else 0
-                        for bm in res
-                        if get_cat(bm) == cat)
-              for cat in subcats}
-    total = {cat : sum(1
-                       for bm in res
-                       if get_cat(bm) == cat)
-              for cat in subcats}
     percent = {cat : float(solved[cat] * 100) / float(total[cat])
                for cat in subcats}
 
@@ -323,7 +338,7 @@ def mk_csf_slides(fd):
     ITEMS_PER_SLIDE = 11
     BAR_WIDTH = 0.6
     for n in xrange(0, len(ORDER), ITEMS_PER_SLIDE):
-        slide_cats = ORDER[n:min(len(subcats), n+ITEMS_PER_SLIDE)]
+        slide_cats = ORDER[n:min(len(ORDER), n+ITEMS_PER_SLIDE)]
 
         fd.write("\\begin{frame}{Critical Success Factors for CVC4}")
         fd.write("\\begin{center}\n")
@@ -343,9 +358,13 @@ def mk_csf_slides(fd):
                       mk_coord(percent[cat], i),
                       mk_coord(percent[cat], i + BAR_WIDTH),
                       mk_coord(0, i + BAR_WIDTH)));
-            fd.write("\\node at %s {\\tiny %.1f\\%%};\n" %
+            if percent[cat] < 100.0:
+                score = "%.2f\\%%" % percent[cat]
+            else:
+                score = "$\checkmark$"
+            fd.write("\\node at %s {\\tiny %s};\n" %
                      (mk_coord(50, i + BAR_WIDTH * 0.5),
-                      percent[cat]))
+                      score))
             fd.write("\\draw %s -- %s -- %s -- %s -- cycle;\n" %
                      (mk_coord(0, i),
                       mk_coord(100, i),
