@@ -73,8 +73,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--suite",
                     default="fp",
-                    choices=["qf_fp", "fp", "debug", "industrial", "spark",
-                             "spark_all"])
+                    choices=["all",
+                             "qf_fp", "fp", "industrial", "spark",
+                             "spark_all",
+                             "debug"])
     ap.add_argument("--single",
                     default=False,
                     action="store_true")
@@ -104,29 +106,29 @@ def main():
             the_prover = Prover(p, options.prover_bin, options.timeout)
 
     bench_dirs = []
-    if options.suite in ("schanda", "fp_fp", "fp"):
+    if options.suite in ("all", "schanda", "fp_fp", "fp"):
         bench_dirs.append("crafted/QF_FP")
         bench_dirs.append("crafted/QF_FPBV")
         bench_dirs.append("crafted/QF_FPLRA")
         bench_dirs.append("random")
-    if options.suite in ("qf_fp", "fp"):
+    if options.suite in ("all", "qf_fp", "fp"):
         bench_dirs.append("griggio")
         bench_dirs.append("wintersteiger")
         bench_dirs.append("nyxbrain")
-    if options.suite in ("qf_fp", "fp", "spark"):
+    if options.suite in ("all"< "qf_fp", "fp", "spark"):
         bench_dirs.append("spark_2014/QF_AUFBVFPNIRA")
-    if options.suite in ("fp", "spark"):
+    if options.suite in ("all", "fp", "spark"):
         bench_dirs.append("spark_2014/AUFBVFPDTNIRA")
         bench_dirs.append("heizmann")
-    if options.suite in ("fp", "industrial"):
+    if options.suite in ("all", "fp", "industrial"):
         for d in os.listdir("."):
             if d.startswith("industrial_") and os.path.isdir(d):
                 bench_dirs.append(d)
+    if options.suite in ("all", "spark_all"):
+        bench_dirs.append("spark_2014_all/ALL")
     if options.suite == "debug":
         bench_dirs.append("crafted/QF_FPBV")
         bench_dirs.append("random/smtlib.eq")
-    if options.suite == "spark_all":
-        bench_dirs.append("spark_2014_all/ALL")
 
     data_filename = "data_%s.p" % mk_run_id(options.prover_kind,
                                             sane_prover_bin)

@@ -42,7 +42,7 @@ def main():
                     default=False)
     options = ap.parse_args()
 
-    bm_suite = "debug" if options.debug else "fp"
+    bm_suite = "debug" if options.debug else "all"
 
     for binary in CVC4_VERSIONS:
         # Fast suite skips most versions
