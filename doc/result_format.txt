@@ -15,12 +15,16 @@ results/
     data_<kind>_<bin>.p
 
 # File format
-## benchmarks.p
+## benchmarks.p (on disk)
 map sat     -> list<sha1(bm_name)>
     unsat   -> list<sha1(bm_name)>
     unknown -> list<sha1(bm_name)>
 
-## data_<kind>_<bin>.p
+## benchmarks (in memory)
+map bm_name -> map status -> sat (s), unsat (u), unknown (?)
+                   name   -> original benchmark name or "sha<...>"
+
+## data_<kind>_<bin>.p (on disk)
 map results -> map sha1(bm_name) -> map status -> sat (s), unsat (u), error (e),
                                                   timeout (t), unknown (?)
                                         dialect -> False, True
