@@ -22,7 +22,7 @@
 ##                                                                          ##
 ##############################################################################
 
-from copy import copy
+from copy import copy, deepcopy
 
 import os
 import subprocess
@@ -332,29 +332,94 @@ def list_results():
 
     return sorted(rv)
 
+SCORES = ("solved", "unknown", "timeout", "error", "unsound")
+
+to_long_score = {"s" : "solved",
+                 "?" : "unknown",
+                 "t" : "timeout",
+                 "e" : "error",
+                 "u" : "unsound"}
+
+BLANK_SOLVER_DATA = {
+    "group_results" : {},
+    "group_summary" : {},
+    "total_summary" : {
+        "score"        : {score: 0 for score in SCORES},
+        "average"      : {score: 0.0 for score in SCORES},
+        "dialect"      : 0},
+    "prover_kind"   : None,
+    "prover_bin"    : None,
+}
+
+def augment_group_result(rv, group, benchmark_status):
+    rv["group_summary"][group] = {
+        "score"        : {score: 0 for score in SCORES},
+        "average"      : {score: 0.0 for score in SCORES},
+        "dialect"      : 0,
+        "participated" : False,
+        "annotated"    : False,
+    }
+    summary = rv["group_summary"][group]
+    totals = rv["total_summary"]
+
+    for bm, data in rv["group_results"][group].iteritems():
+        assert bm in benchmark_status
+
+        # Set score (solved, unsound, etc.)
+        if data["status"] in ("s", "u"):
+            if benchmark_status[bm]["status"] in ("s", "u"):
+                if data["status"] == benchmark_status[bm]["status"]:
+                    data["score"] = "s" # solved
+                else:
+                    data["score"] = "u" # unsound
+            else:
+                assert benchmark_status[bm]["status"] == "?"
+                data["score"] = "s" # solved
+        else:
+            assert data["status"] in ("e", # error
+                                      "t", # timeout
+                                      "?") # unknown
+            data["score"] = data["status"]
+
+        # Contribute to group and overall totals
+        summary["score"][to_long_score[data["score"]]] += 1
+        totals["score"][to_long_score[data["score"]]] += 1
+        if data["dialect"]:
+            summary["dialect"] += 1
+            totals["dialect"] += 1
+        if benchmark_status[bm]["status"] in ("s", "u"):
+            summary["annotated"] = True
+
+    # Add aggregated group summary
+    summary["participated"] = (summary["score"]["solved"] > 0 or
+                               summary["score"]["timeout"] > 0 or
+                               summary["score"]["unsound"] > 0)
+
+    bm_total = sum(summary["score"].itervalues())
+    for score in SCORES:
+        summary["average"][score] = (
+            float(summary["score"][score] * 100) /
+            float(bm_total))
+
+    return int(summary["participated"])
+
+def augment_final_result(rv, group_total):
+    totals = rv["total_summary"]
+    for score in SCORES:
+        totals["average"][score] = (
+            sum(rv["group_summary"][group]["average"][score]
+                for group in rv["group_summary"]
+                if rv["group_summary"][group]["participated"]) /
+            float(group_total))
+
 def load_results(solver_kind, solver_bin, benchmark_status=None):
     print "Loading results for %s (%s)" % (solver_kind, solver_bin)
     # See doc/result_format.txt for more information
     data_filename = "data_%s.p" % mk_run_id(solver_kind, solver_bin)
 
-    SCORES = ("solved", "unknown", "timeout", "error", "unsound")
-
-    to_long_score = {"s" : "solved",
-                     "?" : "unknown",
-                     "t" : "timeout",
-                     "e" : "error",
-                     "u" : "unsound"}
-
-    rv = {"group_results" : {},
-          "group_summary" : {},
-          "total_summary" : {
-              "score"        : {score: 0 for score in SCORES},
-              "average"      : {score: 0.0 for score in SCORES},
-              "dialect"      : 0},
-          "prover_kind"   : solver_kind,
-          "prover_bin"    : solver_bin,
-      }
-    totals = rv["total_summary"]
+    rv = deepcopy(BLANK_SOLVER_DATA)
+    rv["prover_kind"] = solver_kind
+    rv["prover_bin"]  = solver_bin
 
     if not os.path.isdir("results"):
         return rv
@@ -373,61 +438,48 @@ def load_results(solver_kind, solver_bin, benchmark_status=None):
             rv["group_results"][group] = load(fd)
 
         # Augment
-        rv["group_summary"][group] = {
-            "score"        : {score: 0 for score in SCORES},
-            "average"      : {score: 0.0 for score in SCORES},
-            "dialect"      : 0,
-            "participated" : False,
-            "annotated"    : False,
-        }
-        summary = rv["group_summary"][group]
-
-        for bm, data in rv["group_results"][group].iteritems():
-            assert bm in benchmark_status
-
-            # Set score (solved, unsound, etc.)
-            if data["status"] in ("s", "u"):
-                if benchmark_status[bm]["status"] in ("s", "u"):
-                    if data["status"] == benchmark_status[bm]["status"]:
-                        data["score"] = "s" # solved
-                    else:
-                        data["score"] = "u" # unsound
-                else:
-                    assert benchmark_status[bm]["status"] == "?"
-                    data["score"] = "s" # solved
-            else:
-                assert data["status"] in ("e", # error
-                                          "t", # timeout
-                                          "?") # unknown
-                data["score"] = data["status"]
-
-            # Contribute to group and overall totals
-            summary["score"][to_long_score[data["score"]]] += 1
-            totals["score"][to_long_score[data["score"]]] += 1
-            if data["dialect"]:
-                summary["dialect"] += 1
-                totals["dialect"] += 1
-            if benchmark_status[bm]["status"] in ("s", "u"):
-                summary["annotated"] = True
-
-        # Add aggregated group summary
-        summary["participated"] = (summary["score"]["solved"] > 0 or
-                                   summary["score"]["timeout"] > 0 or
-                                   summary["score"]["unsound"] > 0)
-        group_total += int(summary["participated"])
-
-        bm_total = sum(summary["score"].itervalues())
-        for score in SCORES:
-            summary["average"][score] = (
-                float(summary["score"][score] * 100) /
-                float(bm_total))
+        group_total += augment_group_result(rv, group, benchmark_status)
 
     # Add aggregated total summary
-    for score in SCORES:
-        totals["average"][score] = (
-            sum(rv["group_summary"][group]["average"][score]
-                for group in rv["group_summary"]
-                if rv["group_summary"][group]["participated"]) /
-            float(group_total))
+    augment_final_result(rv, group_total)
+
+    return rv
+
+def mk_virtual_best_solver(solvers, benchmark_status):
+    rv = deepcopy(BLANK_SOLVER_DATA)
+    rv["prover_kind"] = "vbs"
+
+    GROUPS = solvers[0]["group_results"]
+    SCORE_ORDER = ["s", "?", "t", "e", "u"]
+
+    def solution_preference(a, b):
+        if a["score"] == b["score"]:
+            return cmp(a["time"], b["time"])
+        else:
+            return cmp(SCORE_ORDER.index(a["score"]),
+                       SCORE_ORDER.index(b["score"]))
+
+    group_total = 0 # How many groups we have participated in, used for avav
+
+    # Go through group results and pick the best one available.
+    for group in GROUPS:
+        rv["group_results"][group] = {}
+        for bm in solvers[0]["group_results"][group]:
+            candidates = sorted((s["group_results"][group][bm]
+                                 for s in solvers),
+                                cmp = solution_preference)
+
+            rv["group_results"][group][bm] = {
+                "status"  : candidates[0]["status"],
+                "dialect" : candidates[0]["dialect"],
+                "time"    : candidates[0]["time"],
+                "comment" : "VBS"
+            }
+
+        # Augment
+        group_total += augment_group_result(rv, group, benchmark_status)
+
+    # Add aggregated total summary
+    augment_final_result(rv, group_total)
 
     return rv
