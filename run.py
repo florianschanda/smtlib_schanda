@@ -115,7 +115,7 @@ def main():
         bench_dirs.append("griggio")
         bench_dirs.append("wintersteiger")
         bench_dirs.append("nyxbrain")
-    if options.suite in ("all"< "qf_fp", "fp", "spark"):
+    if options.suite in ("all", "qf_fp", "fp", "spark"):
         bench_dirs.append("spark_2014/QF_AUFBVFPNIRA")
     if options.suite in ("all", "fp", "spark"):
         bench_dirs.append("spark_2014/AUFBVFPDTNIRA")
