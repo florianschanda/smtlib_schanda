@@ -30,6 +30,7 @@ class TikzTable(object):
     COLORING_OPTIONS = (COL_AWARD_HIGH, COL_AWARD_LOW, COL_ERROR)
 
     def __init__(self, title, columns,
+                 noncomp=[],
                  col_fmt_fn=None,
                  col_rule="Altran2",
                  col_good="AnSecondaryGreen",
@@ -43,6 +44,8 @@ class TikzTable(object):
         self.cat_title = title
         self.columns   = columns
         self.rows      = []
+        self.competing = {c: c not in noncomp
+                          for c in columns}
 
         if col_fmt_fn is None:
             self.col_fmt_fn = lambda x: x
@@ -54,23 +57,29 @@ class TikzTable(object):
         assert type(data) is dict
         assert coloring is None or coloring in TikzTable.COLORING_OPTIONS
 
+        competing_data = {col : item
+                          for col, item in data.iteritems()
+                          if self.competing[col]}
+
         row = {"kind" : "row",
                "title" : title,
                "data"  : {}}
         for col, item in data.iteritems():
             assert col in self.columns
             txt = format_fn(item)
-            if coloring == COL_AWARD_HIGH:
-                if item == max(data.itervalues()):
-                    txt = "{\color{%s}%s}" % (self.col_good, txt)
-            elif coloring == COL_AWARD_LOW:
-                if item == min(data.itervalues()):
-                    txt = "{\color{%s}%s}" % (self.col_good, txt)
-            elif coloring == COL_ERROR:
+            if coloring == COL_ERROR:
                 if item == 0.0:
                     txt = "{\color{%s}%s}" % (self.col_good, txt)
                 else:
                     txt = "{\color{%s}%s}" % (self.col_bad, txt)
+            elif not self.competing[col]:
+                pass
+            elif coloring == COL_AWARD_HIGH:
+                if item == max(competing_data.itervalues()):
+                    txt = "{\color{%s}%s}" % (self.col_good, txt)
+            elif coloring == COL_AWARD_LOW:
+                if item == min(competing_data.itervalues()):
+                    txt = "{\color{%s}%s}" % (self.col_good, txt)
             if col in notes:
                 txt += "$^%s$" % notes[col]
             row["data"][col] = txt

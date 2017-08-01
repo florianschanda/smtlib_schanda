@@ -28,7 +28,7 @@ import argparse
 from cPickle import load
 from pprint import pprint
 
-from common import load_benchmark_status, load_results, list_results
+from common import load_benchmark_status, load_results, list_results, mk_virtual_best_solver
 from tikztable import *
 
 CONFIGURATIONS = list_results()
@@ -41,6 +41,9 @@ data = [load_results(solver_kind, solver_bin, BENCHMARKS)
 other_data = [load_results(solver_kind, solver_bin, BENCHMARKS)
               for solver_kind, solver_bin in CONFIGURATIONS
               if solver_kind != "cvc4"]
+
+other_data.append(mk_virtual_best_solver(other_data + [data[-1]],
+                                         BENCHMARKS))
 
 COMPARISON_CATS = ("solved", "timeout", "error", "unsound")
 
@@ -62,6 +65,7 @@ def mk_bench_name(cat):
 
 def mk_solver_name(nam):
     return {
+        "vbs"          : "Virtual best",
         "cvc4"         : "{\sc cvc4}",
         "z3"           : "Z3",
         "colibri"      : "Colibri",
@@ -461,7 +465,8 @@ def mk_competition_slides(fd):
     def mk_table(criteria):
         t = TikzTable(title      = "Benchmark",
                       columns    = solvers,
-                      col_fmt_fn = mk_solver_name)
+                      col_fmt_fn = mk_solver_name,
+                      noncomp    = "vbs")
 
         # Add result rows
         for group in GROUPS:
@@ -614,9 +619,16 @@ def mk_competition_slides(fd):
 
 
 def mk_cactus_slides(fd):
+    def sort_competition(a, b):
+        if a["prover_kind"] == "vbs":
+            return -1
+        elif b["prover_kind"] == "vbs":
+            return 1
+        else:
+            return cmp(a["prover_kind"], b["prover_kind"])
+
     competitors = sorted([data[-1]] + other_data,
-                         cmp=lambda a, b: cmp(a["prover_kind"],
-                                              b["prover_kind"]))
+                         cmp=sort_competition)
     solvers = sorted(c["prover_kind"] for c in competitors)
 
     def h(solver):
@@ -627,6 +639,12 @@ def mk_cactus_slides(fd):
         total = sum(len(competitors[0]["group_results"][g])
                     for g in GROUPS
                     if group is None or g == group)
+
+        def scale_inst(n):
+            if total > 5000:
+                return n / 1000.0
+            else:
+                return n
 
         for data in competitors:
             results = []
@@ -668,19 +686,25 @@ def mk_cactus_slides(fd):
         fd.write("  x axis={\n")
         fd.write("    length=6cm,\n")
         fd.write("    label={instances solved},\n")
-        fd.write("    include value=%u,\n" % total)
+        fd.write("    include value=%.2f,\n" % scale_inst(total))
+        if total > 5000:
+            fd.write("    ticks={tick unit=k},\n")
         fd.write("    },\n")
         fd.write("  y axis={\n")
         fd.write("    length=6cm,\n")
         fd.write("    label={time},\n")
         fd.write("    ticks={tick unit=s},\n")
         fd.write("  },\n")
-        fd.write("  visualize as line/.list={%s},\n" %
-                 ",".join(map(h, (d[0] for d in datasets))))
+        for solver, _ in datasets:
+            fd.write("  visualize as %s=%s,\n" %
+                     ("smooth line" if solver == "vbs" else "line",
+                      h(solver)))
         fd.write("  legend={right},\n")
         for solver, _ in datasets:
-            fd.write("  %s={label in legend={text=%s}},\n" %
-                     (h(solver), mk_solver_name(solver)))
+            atr = ["label in legend={text=%s}" % mk_solver_name(solver)]
+            if solver == "vbs":
+                atr.append("style={dashed}")
+            fd.write("  %s={%s},\n" % (h(solver), ",".join(atr)))
         fd.write("  style sheet=altran\n")
         fd.write("]\n")
 
@@ -688,7 +712,7 @@ def mk_cactus_slides(fd):
             fd.write("data [set=%s] {\n" % h(solver))
             fd.write("  x, y\n")
             for x, y in points:
-                fd.write("  %u, %.2f\n" % (x, y))
+                fd.write("  %.2f, %.2f\n" % (scale_inst(x), y))
             fd.write("}\n")
 
         fd.write(";\n")
@@ -716,12 +740,12 @@ def main():
         fd.write("\\usepackage{tikz}\n")
         fd.write("\\usetikzlibrary{datavisualization}\n")
         fd.write("\\pgfdvdeclarestylesheet{altran}{\n")
-        fd.write("  1/.style={Altran2},\n")
+        fd.write("  1/.style={Altran1},\n")
         fd.write("  2/.style={Altran4},\n")
         fd.write("  3/.style={Altran6},\n")
-        fd.write("  4/.style={Altran10},\n")
-        fd.write("  5/.style={Altran7},\n")
-        fd.write("  6/.style={Altran11},\n")
+        fd.write("  4/.style={Altran7},\n")
+        fd.write("  5/.style={Altran8},\n")
+        fd.write("  6/.style={Altran12},\n")
         fd.write("  default style/.style={black}\n")
         fd.write("}\n")
         fd.write("\\author{Florian Schanda}\n")
