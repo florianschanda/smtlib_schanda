@@ -67,7 +67,7 @@ def main():
     for prover in OTHER_PROVERS:
         exists = False
         prover_bin = {
-            "z3"           : "z3_2017_07_30",
+            "z3"           : "z3_2017_08_01",
             "mathsat_acdl" : "mathsat",
             "altergo"      : "altergo_spark_2017_07_20",
         }.get(prover, prover)
