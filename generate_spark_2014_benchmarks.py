@@ -260,7 +260,7 @@ def extract_benchmark(test):
             dst_root_exists = os.path.isfile(dst)
 
             # Filtering for Z3 requires looking at the reference VC
-            if test["filter"] == "z3bitvec":
+            if test["filter"] == "z3bitvec" and dst_root_exists:
                 with open(dst, "rU") as fd:
                     for raw_line in fd:
                         for stuff in RELEVANT_BV_STUFF:
@@ -289,7 +289,7 @@ def extract_benchmark(test):
                 interesting |= (test["filter"] == "z3bitvec" and
                                 interesting_bv)
 
-                if interesting:
+                if interesting and (dst_root_exists or test["prover"] == "cvc4"):
                     with open(dst, "w") as fd:
                         fd.write(data)
 
