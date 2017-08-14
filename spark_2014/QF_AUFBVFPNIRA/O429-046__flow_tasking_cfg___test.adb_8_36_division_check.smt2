@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -66,11 +66,11 @@
                    (and (in_range1 high)
                    (=> (<= low high) (and (in_range2 low) (in_range2 high))))))
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__component__size () Int)
+(declare-const value__component__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -108,15 +108,15 @@
                                       (<= 0 255)) (in_range6
                                       temp___expr_473)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun value__size1 () Int)
+(declare-const value__size1 Int)
 
-(declare-fun value__alignment1 () Int)
+(declare-const value__alignment1 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size1))
@@ -124,11 +124,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment1))
 
-(declare-fun support__protT__summary__first__bit () Int)
+(declare-const support__protT__summary__first__bit Int)
 
-(declare-fun support__protT__summary__last__bit () Int)
+(declare-const support__protT__summary__last__bit Int)
 
-(declare-fun support__protT__summary__position () Int)
+(declare-const support__protT__summary__position Int)
 
 ;; support__protT__summary__first__bit_axiom
   (assert (<= 0 support__protT__summary__first__bit))
@@ -140,15 +140,15 @@
 ;; support__protT__summary__position_axiom
   (assert (<= 0 support__protT__summary__position))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun g () Int)
+(declare-const g Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun f () Float32)
+(declare-const f Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
 (define-fun dynamic_invariant3 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -180,13 +180,13 @@
                                       (or (= temp___is_init_214 true)
                                       (<= 0 97)) (in_range5 temp___expr_217)))
 
-(declare-fun default_fore () Int)
+(declare-const default_fore Int)
 
-(declare-fun default_aft () Int)
+(declare-const default_aft Int)
 
-(declare-fun default_exp () Int)
+(declare-const default_exp Int)
 
-(declare-fun test__g__assume () Int)
+(declare-const test__g__assume Int)
 
 ;; H
   (assert (in_range6 default_fore))

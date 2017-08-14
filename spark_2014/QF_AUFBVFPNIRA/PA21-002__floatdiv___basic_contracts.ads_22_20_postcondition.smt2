@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -77,43 +77,43 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun numerator () Int)
+(declare-const numerator Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun denominator () Int)
+(declare-const denominator Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun res () Float32)
+(declare-const res Float32)
 
-(declare-fun basic_contracts__average_orig__result () Float32)
+(declare-const basic_contracts__average_orig__result Float32)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun result () Float32)
+(declare-const result Float32)
 
-(declare-fun res1 () Float32)
+(declare-const res1 Float32)
 
-(declare-fun result1 () Float32)
+(declare-const result1 Float32)
 
-(declare-fun basic_contracts__average_orig__result1 () Float32)
+(declare-const basic_contracts__average_orig__result1 Float32)
 
-(declare-fun basic_contracts__average_orig__result2 () Float32)
+(declare-const basic_contracts__average_orig__result2 Float32)
 
-(declare-fun basic_contracts__average_orig__result3 () Float32)
+(declare-const basic_contracts__average_orig__result3 Float32)
 
-(declare-fun res2 () Float32)
+(declare-const res2 Float32)
 
-(declare-fun basic_contracts__average_orig__result4 () Float32)
+(declare-const basic_contracts__average_orig__result4 Float32)
 
-(declare-fun res3 () Float32)
+(declare-const res3 Float32)
 
-(declare-fun basic_contracts__average_orig__result5 () Float32)
+(declare-const basic_contracts__average_orig__result5 Float32)
 
-(declare-fun result2 () Float32)
+(declare-const result2 Float32)
 
 ;; H
   (assert (in_range2 numerator))

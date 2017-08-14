@@ -23,7 +23,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -32,7 +32,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -66,9 +66,9 @@
 (define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -76,11 +76,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(declare-fun t__stupid_record__a__first__bit () Int)
+(declare-const t__stupid_record__a__first__bit Int)
 
-(declare-fun t__stupid_record__a__last__bit () Int)
+(declare-const t__stupid_record__a__last__bit Int)
 
-(declare-fun t__stupid_record__a__position () Int)
+(declare-const t__stupid_record__a__position Int)
 
 ;; t__stupid_record__a__first__bit_axiom
   (assert (<= 0 t__stupid_record__a__first__bit))
@@ -91,11 +91,11 @@
 ;; t__stupid_record__a__position_axiom
   (assert (<= 0 t__stupid_record__a__position))
 
-(declare-fun t__stupid_record__b__first__bit () Int)
+(declare-const t__stupid_record__b__first__bit Int)
 
-(declare-fun t__stupid_record__b__last__bit () Int)
+(declare-const t__stupid_record__b__last__bit Int)
 
-(declare-fun t__stupid_record__b__position () Int)
+(declare-const t__stupid_record__b__position Int)
 
 ;; t__stupid_record__b__first__bit_axiom
   (assert (<= 0 t__stupid_record__b__first__bit))
@@ -106,11 +106,11 @@
 ;; t__stupid_record__b__position_axiom
   (assert (<= 0 t__stupid_record__b__position))
 
-(declare-fun t__stupid_record__c__first__bit () Int)
+(declare-const t__stupid_record__c__first__bit Int)
 
-(declare-fun t__stupid_record__c__last__bit () Int)
+(declare-const t__stupid_record__c__last__bit Int)
 
-(declare-fun t__stupid_record__c__position () Int)
+(declare-const t__stupid_record__c__position Int)
 
 ;; t__stupid_record__c__first__bit_axiom
   (assert (<= 0 t__stupid_record__c__first__bit))
@@ -131,11 +131,11 @@
                    (and (dynamic_property range_first range_last low)
                    (dynamic_property range_first range_last high))))))
 
-(declare-fun value__size1 () Int)
+(declare-const value__size1 Int)
 
-(declare-fun value__component__size () Int)
+(declare-const value__component__size Int)
 
-(declare-fun value__alignment1 () Int)
+(declare-const value__alignment1 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size1))
@@ -156,11 +156,11 @@
                    (and (dynamic_property2 range_first range_last low)
                    (dynamic_property2 range_first range_last high))))))
 
-(declare-fun value__size2 () Int)
+(declare-const value__size2 Int)
 
-(declare-fun value__component__size1 () Int)
+(declare-const value__component__size1 Int)
 
-(declare-fun value__alignment2 () Int)
+(declare-const value__alignment2 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size2))
@@ -171,18 +171,18 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment2))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (define-fun dynamic_property4 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range2 low)
                    (and (in_range2 high)
                    (=> (<= low high) (and (in_range2 low) (in_range2 high))))))
 
-(declare-fun value__size3 () Int)
+(declare-const value__size3 Int)
 
-(declare-fun value__component__size2 () Int)
+(declare-const value__component__size2 Int)
 
-(declare-fun value__alignment3 () Int)
+(declare-const value__alignment3 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size3))
@@ -207,13 +207,13 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun o () Int)
+(declare-const o Int)
 
-(declare-fun us () Int)
+(declare-const us Int)
 
-(declare-fun o1 () Bool)
+(declare-const o1 Bool)
 
-(declare-fun o2 () Bool)
+(declare-const o2 Bool)
 
 ;; H
   (assert (= (of_int 1) o1))

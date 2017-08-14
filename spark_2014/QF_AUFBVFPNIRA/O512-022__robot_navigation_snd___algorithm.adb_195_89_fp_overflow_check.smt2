@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -92,9 +92,9 @@
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -102,11 +102,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(declare-fun spaces__angles__angle__theta__first__bit () Int)
+(declare-const spaces__angles__angle__theta__first__bit Int)
 
-(declare-fun spaces__angles__angle__theta__last__bit () Int)
+(declare-const spaces__angles__angle__theta__last__bit Int)
 
-(declare-fun spaces__angles__angle__theta__position () Int)
+(declare-const spaces__angles__angle__theta__position Int)
 
 ;; spaces__angles__angle__theta__first__bit_axiom
   (assert (<= 0 spaces__angles__angle__theta__first__bit))
@@ -120,9 +120,9 @@
 
 (define-fun in_range5 ((x Int)) Bool (and (<= (- 1) x) (<= x 1)))
 
-(declare-fun value__size1 () Int)
+(declare-const value__size1 Int)
 
-(declare-fun value__alignment1 () Int)
+(declare-const value__alignment1 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size1))
@@ -130,11 +130,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment1))
 
-(declare-fun gaps__gap__bearing__first__bit () Int)
+(declare-const gaps__gap__bearing__first__bit Int)
 
-(declare-fun gaps__gap__bearing__last__bit () Int)
+(declare-const gaps__gap__bearing__last__bit Int)
 
-(declare-fun gaps__gap__bearing__position () Int)
+(declare-const gaps__gap__bearing__position Int)
 
 ;; gaps__gap__bearing__first__bit_axiom
   (assert (<= 0 gaps__gap__bearing__first__bit))
@@ -145,11 +145,11 @@
 ;; gaps__gap__bearing__position_axiom
   (assert (<= 0 gaps__gap__bearing__position))
 
-(declare-fun gaps__gap__distance__first__bit () Int)
+(declare-const gaps__gap__distance__first__bit Int)
 
-(declare-fun gaps__gap__distance__last__bit () Int)
+(declare-const gaps__gap__distance__last__bit Int)
 
-(declare-fun gaps__gap__distance__position () Int)
+(declare-const gaps__gap__distance__position Int)
 
 ;; gaps__gap__distance__first__bit_axiom
   (assert (<= 0 gaps__gap__distance__first__bit))
@@ -160,11 +160,11 @@
 ;; gaps__gap__distance__position_axiom
   (assert (<= 0 gaps__gap__distance__position))
 
-(declare-fun gaps__gap__idir__first__bit () Int)
+(declare-const gaps__gap__idir__first__bit Int)
 
-(declare-fun gaps__gap__idir__last__bit () Int)
+(declare-const gaps__gap__idir__last__bit Int)
 
-(declare-fun gaps__gap__idir__position () Int)
+(declare-const gaps__gap__idir__position Int)
 
 ;; gaps__gap__idir__first__bit_axiom
   (assert (<= 0 gaps__gap__idir__first__bit))
@@ -177,9 +177,9 @@
 
 (define-fun in_range6 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(declare-fun value__size2 () Int)
+(declare-const value__size2 Int)
 
-(declare-fun value__alignment2 () Int)
+(declare-const value__alignment2 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size2))
@@ -187,11 +187,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment2))
 
-(declare-fun algorithm__gap_vectors__list__capacity__first__bit () Int)
+(declare-const algorithm__gap_vectors__list__capacity__first__bit Int)
 
-(declare-fun algorithm__gap_vectors__list__capacity__last__bit () Int)
+(declare-const algorithm__gap_vectors__list__capacity__last__bit Int)
 
-(declare-fun algorithm__gap_vectors__list__capacity__position () Int)
+(declare-const algorithm__gap_vectors__list__capacity__position Int)
 
 ;; algorithm__gap_vectors__list__capacity__first__bit_axiom
   (assert (<= 0 algorithm__gap_vectors__list__capacity__first__bit))
@@ -210,9 +210,9 @@
                                       (<= 0 2147483647)) (in_range6
                                       temp___expr_324)))
 
-(declare-fun value__size3 () Int)
+(declare-const value__size3 Int)
 
-(declare-fun value__alignment3 () Int)
+(declare-const value__alignment3 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size3))
@@ -220,11 +220,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment3))
 
-(declare-fun algorithm__gap_vectors__cursor__node__first__bit () Int)
+(declare-const algorithm__gap_vectors__cursor__node__first__bit Int)
 
-(declare-fun algorithm__gap_vectors__cursor__node__last__bit () Int)
+(declare-const algorithm__gap_vectors__cursor__node__last__bit Int)
 
-(declare-fun algorithm__gap_vectors__cursor__node__position () Int)
+(declare-const algorithm__gap_vectors__cursor__node__position Int)
 
 ;; algorithm__gap_vectors__cursor__node__first__bit_axiom
   (assert (<= 0 algorithm__gap_vectors__cursor__node__first__bit))
@@ -236,9 +236,9 @@
 ;; algorithm__gap_vectors__cursor__node__position_axiom
   (assert (<= 0 algorithm__gap_vectors__cursor__node__position))
 
-(declare-fun value__size4 () Int)
+(declare-const value__size4 Int)
 
-(declare-fun value__alignment4 () Int)
+(declare-const value__alignment4 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size4))
@@ -246,9 +246,9 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment4))
 
-(declare-fun value__size5 () Int)
+(declare-const value__size5 Int)
 
-(declare-fun value__alignment5 () Int)
+(declare-const value__alignment5 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size5))
@@ -256,9 +256,9 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment5))
 
-(declare-fun value__size6 () Int)
+(declare-const value__size6 Int)
 
-(declare-fun value__alignment6 () Int)
+(declare-const value__alignment6 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size6))
@@ -266,11 +266,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment6))
 
-(declare-fun algorithm__gap_vectors__list__capacity__first__bit1 () Int)
+(declare-const algorithm__gap_vectors__list__capacity__first__bit1 Int)
 
-(declare-fun algorithm__gap_vectors__list__capacity__last__bit1 () Int)
+(declare-const algorithm__gap_vectors__list__capacity__last__bit1 Int)
 
-(declare-fun algorithm__gap_vectors__list__capacity__position1 () Int)
+(declare-const algorithm__gap_vectors__list__capacity__position1 Int)
 
 ;; algorithm__gap_vectors__list__capacity__first__bit_axiom
   (assert (<= 0 algorithm__gap_vectors__list__capacity__first__bit1))
@@ -282,9 +282,9 @@
 ;; algorithm__gap_vectors__list__capacity__position_axiom
   (assert (<= 0 algorithm__gap_vectors__list__capacity__position1))
 
-(declare-fun value__size7 () Int)
+(declare-const value__size7 Int)
 
-(declare-fun value__alignment7 () Int)
+(declare-const value__alignment7 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size7))
@@ -292,11 +292,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment7))
 
-(declare-fun algorithm__laser_scan_data__first__first__bit () Int)
+(declare-const algorithm__laser_scan_data__first__first__bit Int)
 
-(declare-fun algorithm__laser_scan_data__first__last__bit () Int)
+(declare-const algorithm__laser_scan_data__first__last__bit Int)
 
-(declare-fun algorithm__laser_scan_data__first__position () Int)
+(declare-const algorithm__laser_scan_data__first__position Int)
 
 ;; algorithm__laser_scan_data__first__first__bit_axiom
   (assert (<= 0 algorithm__laser_scan_data__first__first__bit))
@@ -308,11 +308,11 @@
 ;; algorithm__laser_scan_data__first__position_axiom
   (assert (<= 0 algorithm__laser_scan_data__first__position))
 
-(declare-fun algorithm__laser_scan_data__second__first__bit () Int)
+(declare-const algorithm__laser_scan_data__second__first__bit Int)
 
-(declare-fun algorithm__laser_scan_data__second__last__bit () Int)
+(declare-const algorithm__laser_scan_data__second__last__bit Int)
 
-(declare-fun algorithm__laser_scan_data__second__position () Int)
+(declare-const algorithm__laser_scan_data__second__position Int)
 
 ;; algorithm__laser_scan_data__second__first__bit_axiom
   (assert (<= 0 algorithm__laser_scan_data__second__first__bit))
@@ -324,41 +324,41 @@
 ;; algorithm__laser_scan_data__second__position_axiom
   (assert (<= 0 algorithm__laser_scan_data__second__position))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun robotradius () Float32)
+(declare-const robotradius Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun mingapwidth () Float32)
+(declare-const mingapwidth Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun fmaxrange () Float32)
+(declare-const fmaxrange Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
-(declare-fun dist () Float32)
+(declare-const dist Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
 (define-fun in_range7 ((x Int)) Bool (and (<= 2 x) (<= x 999)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS8 Int)
 
-(declare-fun dist1 () Float32)
+(declare-const dist1 Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS9 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS9 Int)
 
-(declare-fun dist2 () Float32)
+(declare-const dist2 Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS10 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS10 Int)
 
 (define-fun dynamic_invariant3 ((temp___expr_146 Float32)
   (temp___is_init_143 Bool) (temp___skip_constant_144 Bool)
@@ -381,7 +381,7 @@
                                       (<= (- 1) 1)) (in_range5
                                       temp___expr_286)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS11 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS11 Int)
 
 (define-fun in_range8 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
@@ -401,75 +401,75 @@
                                       (<= 1 2147483647)) (in_range9
                                       temp___expr_461)))
 
-(declare-fun i () Int)
+(declare-const i Int)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
-(declare-fun o3 () Float32)
+(declare-const o3 Float32)
 
-(declare-fun o4 () Float32)
+(declare-const o4 Float32)
 
-(declare-fun o5 () Float32)
+(declare-const o5 Float32)
 
-(declare-fun o6 () Float32)
+(declare-const o6 Float32)
 
-(declare-fun o7 () Float32)
+(declare-const o7 Float32)
 
-(declare-fun o8 () Float32)
+(declare-const o8 Float32)
 
-(declare-fun o9 () Float32)
+(declare-const o9 Float32)
 
-(declare-fun o10 () Float32)
+(declare-const o10 Float32)
 
-(declare-fun o11 () Float32)
+(declare-const o11 Float32)
 
-(declare-fun algorithm__buildgapvector__B_7__dist__assume () Float32)
+(declare-const algorithm__buildgapvector__B_7__dist__assume Float32)
 
-(declare-fun temp___817 () Int)
+(declare-const temp___817 Int)
 
-(declare-fun algorithm__buildgapvector__B_9__dist__assume () Float32)
+(declare-const algorithm__buildgapvector__B_9__dist__assume Float32)
 
-(declare-fun o12 () Float32)
+(declare-const o12 Float32)
 
-(declare-fun o13 () Float32)
+(declare-const o13 Float32)
 
-(declare-fun o14 () Float32)
+(declare-const o14 Float32)
 
-(declare-fun o15 () Float32)
+(declare-const o15 Float32)
 
-(declare-fun o16 () Float32)
+(declare-const o16 Float32)
 
-(declare-fun o17 () Float32)
+(declare-const o17 Float32)
 
-(declare-fun o18 () Float32)
+(declare-const o18 Float32)
 
-(declare-fun o19 () Float32)
+(declare-const o19 Float32)
 
-(declare-fun o20 () Float32)
+(declare-const o20 Float32)
 
-(declare-fun o21 () Float32)
+(declare-const o21 Float32)
 
-(declare-fun o22 () Float32)
+(declare-const o22 Float32)
 
-(declare-fun o23 () Float32)
+(declare-const o23 Float32)
 
-(declare-fun algorithm__buildgapvector__B_10__dist__assume () Float32)
+(declare-const algorithm__buildgapvector__B_10__dist__assume Float32)
 
-(declare-fun i1 () Int)
+(declare-const i1 Int)
 
-(declare-fun i2 () Int)
+(declare-const i2 Int)
 
-(declare-fun i3 () Int)
+(declare-const i3 Int)
 
-(declare-fun i4 () Int)
+(declare-const i4 Int)
 
-(declare-fun i5 () Int)
+(declare-const i5 Int)
 
-(declare-fun i6 () Int)
+(declare-const i6 Int)
 
 ;; H
   (assert (in_range2 robotradius))
@@ -480,7 +480,7 @@
 ;; H
   (assert (in_range2 fmaxrange))
 
-(declare-fun abstr1 () Float32)
+(declare-const abstr1 Float32)
 
 ;; H
   (assert

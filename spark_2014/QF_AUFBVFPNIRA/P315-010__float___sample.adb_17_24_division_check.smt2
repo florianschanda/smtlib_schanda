@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -102,21 +102,21 @@
                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b01111111 #b00000000000000000000000)))
                                       (in_range4 temp___expr_147)))
 
-(declare-fun nb_of_fp () Int)
+(declare-const nb_of_fp Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun nb_of_pp () Int)
+(declare-const nb_of_pp Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun delta_time () Float32)
+(declare-const delta_time Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
 (define-fun in_range5 ((x Float32)) Bool (and
                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
@@ -131,9 +131,9 @@
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111110)))
                                       (in_range5 temp___expr_159)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
 (define-fun in_range6 ((x Float32)) Bool (and
                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
@@ -148,7 +148,7 @@
                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000110 #b10010000000000000000000)))
                                       (in_range6 temp___expr_165)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
 (define-fun in_range7 ((x Float32)) Bool (and
                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
@@ -163,75 +163,75 @@
                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000100 #b10010000000000000000000)))
                                       (in_range7 temp___expr_171)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS8 Int)
 
-(declare-fun time () Float32)
+(declare-const time Float32)
 
-(declare-fun d () Float32)
+(declare-const d Float32)
 
-(declare-fun t_fp () Float32)
+(declare-const t_fp Float32)
 
-(declare-fun t_pp () Float32)
+(declare-const t_pp Float32)
 
-(declare-fun tmp1 () Float32)
+(declare-const tmp1 Float32)
 
-(declare-fun tmp2 () Float32)
+(declare-const tmp2 Float32)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
-(declare-fun o3 () Float32)
+(declare-const o3 Float32)
 
-(declare-fun result () Float32)
+(declare-const result Float32)
 
-(declare-fun d1 () Float32)
+(declare-const d1 Float32)
 
-(declare-fun result1 () Float32)
+(declare-const result1 Float32)
 
-(declare-fun t_fp1 () Float32)
+(declare-const t_fp1 Float32)
 
-(declare-fun result2 () Float32)
+(declare-const result2 Float32)
 
-(declare-fun tmp11 () Float32)
+(declare-const tmp11 Float32)
 
-(declare-fun result3 () Float32)
+(declare-const result3 Float32)
 
-(declare-fun t_pp1 () Float32)
+(declare-const t_pp1 Float32)
 
-(declare-fun result4 () Float32)
+(declare-const result4 Float32)
 
-(declare-fun tmp21 () Float32)
+(declare-const tmp21 Float32)
 
-(declare-fun result5 () Float32)
+(declare-const result5 Float32)
 
-(declare-fun time1 () Float32)
+(declare-const time1 Float32)
 
-(declare-fun time2 () Float32)
+(declare-const time2 Float32)
 
-(declare-fun d2 () Float32)
+(declare-const d2 Float32)
 
-(declare-fun t_fp2 () Float32)
+(declare-const t_fp2 Float32)
 
-(declare-fun t_pp2 () Float32)
+(declare-const t_pp2 Float32)
 
-(declare-fun tmp12 () Float32)
+(declare-const tmp12 Float32)
 
-(declare-fun tmp22 () Float32)
+(declare-const tmp22 Float32)
 
-(declare-fun time3 () Float32)
+(declare-const time3 Float32)
 
-(declare-fun d3 () Float32)
+(declare-const d3 Float32)
 
-(declare-fun t_fp3 () Float32)
+(declare-const t_fp3 Float32)
 
-(declare-fun t_pp3 () Float32)
+(declare-const t_pp3 Float32)
 
-(declare-fun tmp13 () Float32)
+(declare-const tmp13 Float32)
 
-(declare-fun tmp23 () Float32)
+(declare-const tmp23 Float32)
 
 ;; H
   (assert (in_range2 nb_of_fp))

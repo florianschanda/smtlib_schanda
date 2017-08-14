@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -80,23 +80,23 @@
                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000011 #b00000000000000000000000)))
                                       (in_range2 temp___expr_153)))
 
-(declare-fun nb () Float32)
+(declare-const nb Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun time () Float32)
+(declare-const time Float32)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun result () Float32)
+(declare-const result Float32)
 
-(declare-fun time1 () Float32)
+(declare-const time1 Float32)
 
-(declare-fun time2 () Float32)
+(declare-const time2 Float32)
 
-(declare-fun time3 () Float32)
+(declare-const time3 Float32)
 
 ;; H
   (assert (in_range2 nb))

@@ -10,21 +10,21 @@
 ;;; SMT-LIB2: real arithmetic
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 65535)))
 
-(declare-fun abstr () (_ BitVec 16))
+(declare-const abstr (_ BitVec 16))
 
-(declare-fun abstr1 () (_ BitVec 16))
+(declare-const abstr1 (_ BitVec 16))
 
-(declare-fun abstr2 () (_ BitVec 16))
+(declare-const abstr2 (_ BitVec 16))
 
-(declare-fun abstr3 () (_ BitVec 16))
+(declare-const abstr3 (_ BitVec 16))
 
-(declare-fun abstr4 () (_ BitVec 16))
+(declare-const abstr4 (_ BitVec 16))
 
 (define-fun nth_bv ((x (_ BitVec 16))
   (i (_ BitVec 16))) Bool (ite (not (= (bvand (bvlshr x i) #x0001) #x0000))
                           true false))
 
-(declare-fun abstr5 () Bool)
+(declare-const abstr5 Bool)
 
 (define-fun eq_sub ((a (_ BitVec 16)) (b (_ BitVec 16)) (i Int)
   (n Int)) Bool abstr5)
@@ -47,7 +47,7 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 9007199254740991.0 19958403095347198116563727130368385660674512604354575415025472424372118918689640657849579654926357010893424468441924952439724379883935936607391717982848314203200056729510856765175377214443629871826533567445439239933308104551208703888888552684480441575071209068757560416423584952303440099278848.0)) x)
@@ -56,7 +56,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr6 () Real)
+(declare-const abstr6 Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr6))
 
@@ -83,43 +83,43 @@
 
 (define-fun uint_in_range1 ((i Int)) Bool (and (<= 0 i) (<= i 255)))
 
-(declare-fun abstr7 () (_ BitVec 8))
+(declare-const abstr7 (_ BitVec 8))
 
-(declare-fun abstr8 () (_ BitVec 8))
+(declare-const abstr8 (_ BitVec 8))
 
-(declare-fun abstr9 () (_ BitVec 8))
+(declare-const abstr9 (_ BitVec 8))
 
-(declare-fun abstr10 () (_ BitVec 8))
+(declare-const abstr10 (_ BitVec 8))
 
-(declare-fun abstr11 () (_ BitVec 8))
+(declare-const abstr11 (_ BitVec 8))
 
 (define-fun nth_bv1 ((x (_ BitVec 8))
   (i (_ BitVec 8))) Bool (ite (not (= (bvand (bvlshr x i) #x01) #x00)) true
                          false))
 
-(declare-fun abstr12 () Bool)
+(declare-const abstr12 Bool)
 
 (define-fun eq_sub1 ((a (_ BitVec 8)) (b (_ BitVec 8)) (i Int)
   (n Int)) Bool abstr12)
 
 (define-fun uint_in_range2 ((i Int)) Bool (and (<= 0 i) (<= i 4294967295)))
 
-(declare-fun abstr13 () (_ BitVec 32))
+(declare-const abstr13 (_ BitVec 32))
 
-(declare-fun abstr14 () (_ BitVec 32))
+(declare-const abstr14 (_ BitVec 32))
 
-(declare-fun abstr15 () (_ BitVec 32))
+(declare-const abstr15 (_ BitVec 32))
 
-(declare-fun abstr16 () (_ BitVec 32))
+(declare-const abstr16 (_ BitVec 32))
 
-(declare-fun abstr17 () (_ BitVec 32))
+(declare-const abstr17 (_ BitVec 32))
 
 (define-fun nth_bv2 ((x (_ BitVec 32))
   (i (_ BitVec 32))) Bool (ite (not
                                (= (bvand (bvlshr x i) #x00000001) #x00000000))
                           true false))
 
-(declare-fun abstr18 () Bool)
+(declare-const abstr18 Bool)
 
 (define-fun eq_sub2 ((a (_ BitVec 32)) (b (_ BitVec 32)) (i Int)
   (n Int)) Bool abstr18)
@@ -127,22 +127,22 @@
 (define-fun uint_in_range3 ((i Int)) Bool (and (<= 0 i)
                                           (<= i 18446744073709551615)))
 
-(declare-fun abstr19 () (_ BitVec 64))
+(declare-const abstr19 (_ BitVec 64))
 
-(declare-fun abstr20 () (_ BitVec 64))
+(declare-const abstr20 (_ BitVec 64))
 
-(declare-fun abstr21 () (_ BitVec 64))
+(declare-const abstr21 (_ BitVec 64))
 
-(declare-fun abstr22 () (_ BitVec 64))
+(declare-const abstr22 (_ BitVec 64))
 
-(declare-fun abstr23 () (_ BitVec 64))
+(declare-const abstr23 (_ BitVec 64))
 
 (define-fun nth_bv3 ((x (_ BitVec 64))
   (i (_ BitVec 64))) Bool (ite (not
                                (= (bvand (bvlshr x i) #x0000000000000001) #x0000000000000000))
                           true false))
 
-(declare-fun abstr24 () Bool)
+(declare-const abstr24 Bool)
 
 (define-fun eq_sub3 ((a (_ BitVec 64)) (b (_ BitVec 64)) (i Int)
   (n Int)) Bool abstr24)
@@ -173,307 +173,307 @@
                                       (<= (- 2147483648) 2147483647))
                                       (in_range3 temp___expr_147)))
 
-(declare-fun attr__ATTRIBUTE_MODULUS () (_ BitVec 16))
+(declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 16))
 
 (define-fun dynamic_invariant2 ((temp___expr_165 (_ BitVec 16))
   (temp___is_init_162 Bool) (temp___skip_constant_163 Bool)
   (temp___do_toplevel_164 Bool)) Bool true)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun ngrotations () (_ BitVec 16))
+(declare-const ngrotations (_ BitVec 16))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun ngclicktime () (_ BitVec 16))
+(declare-const ngclicktime (_ BitVec 16))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun millisecs () (_ BitVec 16))
+(declare-const millisecs (_ BitVec 16))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS8 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS9 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS9 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS10 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS10 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS11 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS11 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS12 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS12 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS13 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS13 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS14 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS14 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS15 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS15 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS16 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS16 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS17 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS17 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS18 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS18 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS19 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS19 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS20 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS20 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS21 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS21 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS22 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS22 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS23 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS23 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS24 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS24 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS25 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS25 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS26 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS26 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS27 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS27 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS28 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS28 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS29 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS29 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS30 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS30 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS31 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS31 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS32 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS32 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS33 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS33 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS34 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS34 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS35 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS35 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS36 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS36 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS37 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS37 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS38 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS38 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS39 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS39 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS40 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS40 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS41 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS41 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS42 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS42 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS43 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS43 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS44 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS44 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS45 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS45 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS46 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS46 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS47 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS47 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS48 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS48 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS49 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS49 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS50 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS50 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS51 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS51 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS52 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS52 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS53 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS53 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS54 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS54 Int)
 
-(declare-fun estimatedgroundvelocity () Float64)
+(declare-const estimatedgroundvelocity Float64)
 
-(declare-fun estimatedgroundvelocityisavailable () Bool)
+(declare-const estimatedgroundvelocityisavailable Bool)
 
-(declare-fun old_ngclicktime_memory () (_ BitVec 16))
+(declare-const old_ngclicktime_memory (_ BitVec 16))
 
-(declare-fun old_ngrotations_memory () (_ BitVec 16))
+(declare-const old_ngrotations_memory (_ BitVec 16))
 
-(declare-fun old_estimatedgroundvelocity_memory () Float64)
+(declare-const old_estimatedgroundvelocity_memory Float64)
 
-(declare-fun old_ngclicktime_out1 () (_ BitVec 16))
+(declare-const old_ngclicktime_out1 (_ BitVec 16))
 
-(declare-fun old_ngrotations_out1 () (_ BitVec 16))
+(declare-const old_ngrotations_out1 (_ BitVec 16))
 
-(declare-fun old_estimatedgroundvelocity_out1 () Float64)
+(declare-const old_estimatedgroundvelocity_out1 Float64)
 
-(declare-fun max_uint16_out1 () Int)
+(declare-const max_uint16_out1 Int)
 
-(declare-fun max_uint16_1_out1 () Int)
+(declare-const max_uint16_1_out1 Int)
 
-(declare-fun max_uint16_2_out1 () Int)
+(declare-const max_uint16_2_out1 Int)
 
-(declare-fun millisecs_out1 () (_ BitVec 16))
+(declare-const millisecs_out1 (_ BitVec 16))
 
-(declare-fun ngclicktime_out1 () (_ BitVec 16))
+(declare-const ngclicktime_out1 (_ BitVec 16))
 
-(declare-fun ngrotations_out1 () (_ BitVec 16))
+(declare-const ngrotations_out1 (_ BitVec 16))
 
-(declare-fun wheel_circunference_out1 () Float64)
+(declare-const wheel_circunference_out1 Float64)
 
-(declare-fun ms_in_hour_out1 () Float64)
+(declare-const ms_in_hour_out1 Float64)
 
-(declare-fun ms_in_our1_out1 () Float64)
+(declare-const ms_in_our1_out1 Float64)
 
-(declare-fun update_period_os_interrupt_out1 () (_ BitVec 16))
+(declare-const update_period_os_interrupt_out1 (_ BitVec 16))
 
-(declare-fun validity_period_out1 () (_ BitVec 16))
+(declare-const validity_period_out1 (_ BitVec 16))
 
-(declare-fun to_int32_left_out1 () Int)
+(declare-const to_int32_left_out1 Int)
 
-(declare-fun to_int32_left_1_out1 () Int)
+(declare-const to_int32_left_1_out1 Int)
 
-(declare-fun o () Int)
+(declare-const o Int)
 
-(declare-fun o1 () Int)
+(declare-const o1 Int)
 
-(declare-fun o2 () Int)
+(declare-const o2 Int)
 
-(declare-fun o3 () Int)
+(declare-const o3 Int)
 
-(declare-fun o4 () Int)
+(declare-const o4 Int)
 
-(declare-fun o5 () Int)
+(declare-const o5 Int)
 
-(declare-fun o6 () Int)
+(declare-const o6 Int)
 
-(declare-fun o7 () Int)
+(declare-const o7 Int)
 
-(declare-fun o8 () Int)
+(declare-const o8 Int)
 
-(declare-fun o9 () Int)
+(declare-const o9 Int)
 
-(declare-fun o10 () Int)
+(declare-const o10 Int)
 
-(declare-fun o11 () (_ BitVec 16))
+(declare-const o11 (_ BitVec 16))
 
-(declare-fun o12 () Int)
+(declare-const o12 Int)
 
-(declare-fun o13 () (_ BitVec 16))
+(declare-const o13 (_ BitVec 16))
 
-(declare-fun o14 () Int)
+(declare-const o14 Int)
 
-(declare-fun o15 () (_ BitVec 16))
+(declare-const o15 (_ BitVec 16))
 
-(declare-fun o16 () Float64)
+(declare-const o16 Float64)
 
-(declare-fun o17 () Float64)
+(declare-const o17 Float64)
 
-(declare-fun o18 () Float64)
+(declare-const o18 Float64)
 
-(declare-fun old_ngclicktime_out11 () (_ BitVec 16))
+(declare-const old_ngclicktime_out11 (_ BitVec 16))
 
-(declare-fun old_ngrotations_out11 () (_ BitVec 16))
+(declare-const old_ngrotations_out11 (_ BitVec 16))
 
-(declare-fun old_estimatedgroundvelocity_out11 () Float64)
+(declare-const old_estimatedgroundvelocity_out11 Float64)
 
-(declare-fun max_uint16_out11 () Int)
+(declare-const max_uint16_out11 Int)
 
-(declare-fun max_uint16_1_out11 () Int)
+(declare-const max_uint16_1_out11 Int)
 
-(declare-fun max_uint16_2_out11 () Int)
+(declare-const max_uint16_2_out11 Int)
 
-(declare-fun millisecs_out11 () (_ BitVec 16))
+(declare-const millisecs_out11 (_ BitVec 16))
 
-(declare-fun ngclicktime_out11 () (_ BitVec 16))
+(declare-const ngclicktime_out11 (_ BitVec 16))
 
-(declare-fun ngrotations_out11 () (_ BitVec 16))
+(declare-const ngrotations_out11 (_ BitVec 16))
 
-(declare-fun wheel_circunference_out11 () Float64)
+(declare-const wheel_circunference_out11 Float64)
 
-(declare-fun ms_in_hour_out11 () Float64)
+(declare-const ms_in_hour_out11 Float64)
 
-(declare-fun ms_in_our1_out11 () Float64)
+(declare-const ms_in_our1_out11 Float64)
 
-(declare-fun update_period_os_interrupt_out11 () (_ BitVec 16))
+(declare-const update_period_os_interrupt_out11 (_ BitVec 16))
 
-(declare-fun validity_period_out11 () (_ BitVec 16))
+(declare-const validity_period_out11 (_ BitVec 16))
 
-(declare-fun to_int32_left_out11 () Int)
+(declare-const to_int32_left_out11 Int)
 
-(declare-fun to_int32_left_1_out11 () Int)
+(declare-const to_int32_left_1_out11 Int)
 
-(declare-fun to_int32_left_2_out1 () Int)
+(declare-const to_int32_left_2_out1 Int)
 
-(declare-fun to_int32_right_out1 () Int)
+(declare-const to_int32_right_out1 Int)
 
-(declare-fun to_int32_right_1_out1 () Int)
+(declare-const to_int32_right_1_out1 Int)
 
-(declare-fun to_int32_right_2_out1 () Int)
+(declare-const to_int32_right_2_out1 Int)
 
-(declare-fun data_type_conversion1_out1 () Int)
+(declare-const data_type_conversion1_out1 Int)
 
-(declare-fun data_type_conversion_out1 () Int)
+(declare-const data_type_conversion_out1 Int)
 
-(declare-fun sum1_2_out1 () (_ BitVec 16))
+(declare-const sum1_2_out1 (_ BitVec 16))
 
-(declare-fun sum1_out1 () Int)
+(declare-const sum1_out1 Int)
 
-(declare-fun sum1_1_out1 () Int)
+(declare-const sum1_1_out1 Int)
 
-(declare-fun sum2_out1 () Int)
+(declare-const sum2_out1 Int)
 
-(declare-fun sum2_1_out1 () Int)
+(declare-const sum2_1_out1 Int)
 
-(declare-fun sum1_1_1_out1 () Int)
+(declare-const sum1_1_1_out1 Int)
 
-(declare-fun sum_out1 () Int)
+(declare-const sum_out1 Int)
 
-(declare-fun sum2_2_out1 () Int)
+(declare-const sum2_2_out1 Int)
 
-(declare-fun compare_to_constant_out1 () Bool)
+(declare-const compare_to_constant_out1 Bool)
 
-(declare-fun sum_1_out1 () Int)
+(declare-const sum_1_out1 Int)
 
-(declare-fun sum_2_out1 () Int)
+(declare-const sum_2_out1 Int)
 
-(declare-fun sum_3_out1 () Int)
+(declare-const sum_3_out1 Int)
 
-(declare-fun left_out1 () Int)
+(declare-const left_out1 Int)
 
-(declare-fun left_out11 () Int)
+(declare-const left_out11 Int)
 
-(declare-fun left_1_out1 () Int)
+(declare-const left_1_out1 Int)
 
-(declare-fun left_1_out11 () Int)
+(declare-const left_1_out11 Int)
 
-(declare-fun left_2_out1 () Int)
+(declare-const left_2_out1 Int)
 
-(declare-fun left_2_out11 () Int)
+(declare-const left_2_out11 Int)
 
-(declare-fun to_uint16_result_out1 () (_ BitVec 16))
+(declare-const to_uint16_result_out1 (_ BitVec 16))
 
-(declare-fun to_uint16_result_1_out1 () (_ BitVec 16))
+(declare-const to_uint16_result_1_out1 (_ BitVec 16))
 
-(declare-fun to_uint16_result_2_out1 () (_ BitVec 16))
+(declare-const to_uint16_result_2_out1 (_ BitVec 16))
 
-(declare-fun distance_km_out1 () Float64)
+(declare-const distance_km_out1 Float64)
 
-(declare-fun elapsed_time_h_out1 () Float64)
+(declare-const elapsed_time_h_out1 Float64)
 
-(declare-fun relational_operator_out1 () Bool)
+(declare-const relational_operator_out1 Bool)
 
-(declare-fun avoid_div_by_zero_out1 () Float64)
+(declare-const avoid_div_by_zero_out1 Float64)
 
-(declare-fun avoid_div_by_zero_out11 () Float64)
+(declare-const avoid_div_by_zero_out11 Float64)
 
-(declare-fun estimatedgroundvelocityisavailable1 () Bool)
+(declare-const estimatedgroundvelocityisavailable1 Bool)
 
-(declare-fun relational_operator_out1_1 () Bool)
+(declare-const relational_operator_out1_1 Bool)
 
 ;; H
   (assert
@@ -567,32 +567,32 @@
   (assert
   (= ms_in_our1_out11 (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
 
-(declare-fun abstr25 () (_ BitVec 16))
+(declare-const abstr25 (_ BitVec 16))
 
 ;; H
   (assert (= update_period_os_interrupt_out11 abstr25))
 
-(declare-fun abstr26 () (_ BitVec 16))
+(declare-const abstr26 (_ BitVec 16))
 
 ;; H
   (assert (= validity_period_out11 abstr26))
 
-(declare-fun abstr27 () Int)
+(declare-const abstr27 Int)
 
 ;; H
   (assert (= to_int32_left_out11 abstr27))
 
-(declare-fun abstr28 () Int)
+(declare-const abstr28 Int)
 
 ;; H
   (assert (= to_int32_left_1_out11 abstr28))
 
-(declare-fun abstr29 () (_ BitVec 16))
+(declare-const abstr29 (_ BitVec 16))
 
 ;; H
   (assert (= o11 abstr29))
 
-(declare-fun abstr30 () (_ BitVec 16))
+(declare-const abstr30 (_ BitVec 16))
 
 ;; H
   (assert (= o13 abstr30))

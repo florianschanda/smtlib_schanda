@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -66,7 +66,7 @@
 (define-fun is_minus_zero1 ((x Float64)) Bool (and (fp.isZero      x)
                                               (fp.isNegative  x)))
 
-(declare-fun max_int1 () Int)
+(declare-const max_int1 Int)
 
 (define-fun in_range1 ((x Real)) Bool (and
                                       (<= (- (* 9007199254740991.0 19958403095347198116563727130368385660674512604354575415025472424372118918689640657849579654926357010893424468441924952439724379883935936607391717982848314203200056729510856765175377214443629871826533567445439239933308104551208703888888552684480441575071209068757560416423584952303440099278848.0)) x)
@@ -75,7 +75,7 @@
 (define-fun in_int_range1 ((i Int)) Bool (and (<= (- max_int1) i)
                                          (<= i max_int1)))
 
-(declare-fun abstr1 () Real)
+(declare-const abstr1 Real)
 
 (define-fun no_overflow1 ((m RoundingMode) (x Real)) Bool (in_range1 abstr1))
 
@@ -119,21 +119,21 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
 
-(declare-fun max_float () Float32)
+(declare-const max_float Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun max_double () Float64)
+(declare-const max_double Float64)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
 ;; max_float__def_axiom
   (assert (= max_float (fp #b0 #b11111110 #b11111111111111111111111)))
@@ -142,33 +142,33 @@
   (assert
   (= max_double (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
 
-(declare-fun x () Float32)
+(declare-const x Float32)
 
-(declare-fun y () Float32)
+(declare-const y Float32)
 
-(declare-fun z () Float32)
+(declare-const z Float32)
 
-(declare-fun t () Float32)
+(declare-const t Float32)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun result () Float32)
+(declare-const result Float32)
 
-(declare-fun x1 () Float32)
+(declare-const x1 Float32)
 
-(declare-fun result1 () Float32)
+(declare-const result1 Float32)
 
-(declare-fun y1 () Float32)
+(declare-const y1 Float32)
 
-(declare-fun result2 () Float32)
+(declare-const result2 Float32)
 
-(declare-fun z1 () Float32)
+(declare-const z1 Float32)
 
-(declare-fun result3 () Float32)
+(declare-const result3 Float32)
 
-(declare-fun t1 () Float32)
+(declare-const t1 Float32)
 
 ;; H
   (assert (not (or (fp.isInfinite max_float) (fp.isNaN max_float))))

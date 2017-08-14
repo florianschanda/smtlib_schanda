@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -100,89 +100,89 @@
                                        (fp.leq (fp.neg (fp #b0 #b10000001 #b10010010000111111011011)) (fp #b0 #b10000001 #b10010010000111111011011)))
                                        (in_range3 temp___expr_1342)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS8 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS9 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS9 Int)
 
-(declare-fun euler_roll_actual () Float32)
+(declare-const euler_roll_actual Float32)
 
-(declare-fun euler_pitch_actual () Float32)
+(declare-const euler_pitch_actual Float32)
 
-(declare-fun euler_yaw_actual () Float32)
+(declare-const euler_yaw_actual Float32)
 
-(declare-fun q0 () Float32)
+(declare-const q0 Float32)
 
-(declare-fun q1 () Float32)
+(declare-const q1 Float32)
 
-(declare-fun q2 () Float32)
+(declare-const q2 Float32)
 
-(declare-fun q3 () Float32)
+(declare-const q3 Float32)
 
-(declare-fun grav_x () Float32)
+(declare-const grav_x Float32)
 
-(declare-fun grav_y () Float32)
+(declare-const grav_y Float32)
 
-(declare-fun grav_z () Float32)
+(declare-const grav_z Float32)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
-(declare-fun o3 () Float32)
+(declare-const o3 Float32)
 
-(declare-fun o4 () Float32)
+(declare-const o4 Float32)
 
-(declare-fun o5 () Float32)
+(declare-const o5 Float32)
 
-(declare-fun o6 () Float32)
+(declare-const o6 Float32)
 
-(declare-fun o7 () Float32)
+(declare-const o7 Float32)
 
-(declare-fun o8 () Float32)
+(declare-const o8 Float32)
 
-(declare-fun o9 () Float32)
+(declare-const o9 Float32)
 
-(declare-fun result () Float32)
+(declare-const result Float32)
 
-(declare-fun grav_x1 () Float32)
+(declare-const grav_x1 Float32)
 
-(declare-fun result1 () Float32)
+(declare-const result1 Float32)
 
-(declare-fun grav_y1 () Float32)
+(declare-const grav_y1 Float32)
 
-(declare-fun result2 () Float32)
+(declare-const result2 Float32)
 
-(declare-fun grav_z1 () Float32)
+(declare-const grav_z1 Float32)
 
-(declare-fun result3 () Float32)
+(declare-const result3 Float32)
 
-(declare-fun grav_x2 () Float32)
+(declare-const grav_x2 Float32)
 
-(declare-fun result4 () Float32)
+(declare-const result4 Float32)
 
-(declare-fun euler_yaw_actual1 () Float32)
+(declare-const euler_yaw_actual1 Float32)
 
-(declare-fun result5 () Float32)
+(declare-const result5 Float32)
 
-(declare-fun euler_pitch_actual1 () Float32)
+(declare-const euler_pitch_actual1 Float32)
 
 ;; H
   (assert
@@ -256,7 +256,7 @@
   (= grav_z1 (fp.add RNE (fp.sub RNE (fp.sub RNE (fp.mul RNE q0 q0) (fp.mul RNE
   q1 q1)) (fp.mul RNE q2 q2)) (fp.mul RNE q3 q3))))
 
-(declare-fun abstr1 () Float32)
+(declare-const abstr1 Float32)
 
 ;; H
   (assert
@@ -273,7 +273,7 @@
 ;; H
   (assert (= grav_x2 o))
 
-(declare-fun abstr2 () Float32)
+(declare-const abstr2 Float32)
 
 ;; H
   (assert (and (= o1 abstr2) (in_range3 o1)))
@@ -292,7 +292,7 @@
 ;; H
   (assert (= euler_yaw_actual1 o3))
 
-(declare-fun abstr3 () Float32)
+(declare-const abstr3 Float32)
 
 ;; H
   (assert (and (= o4 abstr3) (in_range3 o4)))

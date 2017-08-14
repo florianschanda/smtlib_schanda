@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -86,27 +86,27 @@
                                       (<= 0 2147483647)) (in_range3
                                       temp___expr_176)))
 
-(declare-fun maximum_valid_speed () Float32)
+(declare-const maximum_valid_speed Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun initial_speed () Float32)
+(declare-const initial_speed Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun final_speed () Float32)
+(declare-const final_speed Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun acceleration () Float32)
+(declare-const acceleration Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
 (define-fun dynamic_invariant3 ((temp___expr_51 Float32)
   (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
@@ -115,7 +115,7 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun abstr1 () Float32)
+(declare-const abstr1 Float32)
 
 ;; maximum_valid_speed__def_axiom
   (assert (= maximum_valid_speed abstr1))
@@ -127,67 +127,67 @@
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                       (not (or (fp.isInfinite temp___expr_158) (fp.isNaN temp___expr_158)))))
 
-(declare-fun speed () Float32)
+(declare-const speed Float32)
 
-(declare-fun delta_speed () Float32)
+(declare-const delta_speed Float32)
 
-(declare-fun distance () Int)
+(declare-const distance Int)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Bool)
+(declare-const o2 Bool)
 
-(declare-fun o3 () Float32)
+(declare-const o3 Float32)
 
-(declare-fun o4 () Float32)
+(declare-const o4 Float32)
 
-(declare-fun o5 () Float32)
+(declare-const o5 Float32)
 
-(declare-fun o6 () Float32)
+(declare-const o6 Float32)
 
-(declare-fun o7 () Float32)
+(declare-const o7 Float32)
 
-(declare-fun o8 () Float32)
+(declare-const o8 Float32)
 
-(declare-fun o9 () Float32)
+(declare-const o9 Float32)
 
-(declare-fun o10 () Float32)
+(declare-const o10 Float32)
 
-(declare-fun o11 () Int)
+(declare-const o11 Int)
 
-(declare-fun result () Float32)
+(declare-const result Float32)
 
-(declare-fun speed1 () Float32)
+(declare-const speed1 Float32)
 
-(declare-fun result1 () Int)
+(declare-const result1 Int)
 
-(declare-fun distance1 () Int)
+(declare-const distance1 Int)
 
-(declare-fun speed2 () Float32)
+(declare-const speed2 Float32)
 
-(declare-fun delta_speed1 () Float32)
+(declare-const delta_speed1 Float32)
 
-(declare-fun distance2 () Int)
+(declare-const distance2 Int)
 
-(declare-fun result2 () Float32)
+(declare-const result2 Float32)
 
-(declare-fun delta_speed2 () Float32)
+(declare-const delta_speed2 Float32)
 
-(declare-fun result3 () Float32)
+(declare-const result3 Float32)
 
-(declare-fun speed3 () Float32)
+(declare-const speed3 Float32)
 
-(declare-fun result4 () Int)
+(declare-const result4 Int)
 
-(declare-fun distance3 () Int)
+(declare-const distance3 Int)
 
 ;; H
   (assert
   (not (or (fp.isInfinite maximum_valid_speed) (fp.isNaN maximum_valid_speed))))
 
-(declare-fun abstr2 () Float32)
+(declare-const abstr2 Float32)
 
 ;; H
   (assert (= abstr2 maximum_valid_speed))

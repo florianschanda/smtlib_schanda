@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -66,7 +66,7 @@
 (define-fun is_minus_zero1 ((x Float64)) Bool (and (fp.isZero      x)
                                               (fp.isNegative  x)))
 
-(declare-fun max_int1 () Int)
+(declare-const max_int1 Int)
 
 (define-fun in_range1 ((x Real)) Bool (and
                                       (<= (- (* 9007199254740991.0 19958403095347198116563727130368385660674512604354575415025472424372118918689640657849579654926357010893424468441924952439724379883935936607391717982848314203200056729510856765175377214443629871826533567445439239933308104551208703888888552684480441575071209068757560416423584952303440099278848.0)) x)
@@ -75,7 +75,7 @@
 (define-fun in_int_range1 ((i Int)) Bool (and (<= (- max_int1) i)
                                          (<= i max_int1)))
 
-(declare-fun abstr1 () Real)
+(declare-const abstr1 Real)
 
 (define-fun no_overflow1 ((m RoundingMode) (x Real)) Bool (in_range1 abstr1))
 
@@ -105,9 +105,9 @@
 
 (define-fun in_range2 ((x Int)) Bool (or (= x 0) (= x 1)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (define-fun dynamic_invariant ((temp___expr_51 Float32)
   (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
@@ -123,7 +123,7 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
 
-(declare-fun i () Int)
+(declare-const i Int)
 
 ;; H
   (assert (<= 1 i))

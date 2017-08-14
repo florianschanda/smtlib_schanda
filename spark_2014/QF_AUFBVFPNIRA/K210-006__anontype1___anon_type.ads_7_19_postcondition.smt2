@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -64,13 +64,13 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(declare-fun var_in () Int)
+(declare-const var_in Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun limit () Int)
+(declare-const limit Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
@@ -80,7 +80,7 @@
                                       (or (= temp___is_init_139 true)
                                       (<= 0 10)) (in_range2 temp___expr_142)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (define-fun in_range3 ((x Int)) Bool (and (<= (- 10000) x) (<= x 10000)))
 
@@ -91,7 +91,7 @@
                                       (<= (- 10000) 10000)) (in_range3
                                       temp___expr_148)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (define-fun in_range4 ((x Int)) Bool (and (<= (- 10000) x) (<= x 10000)))
 
@@ -102,21 +102,21 @@
                                       (<= (- 10000) 10000)) (in_range4
                                       temp___expr_154)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
 (define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 255)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
 (define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
 (define-fun in_range7 ((x Int)) Bool (and (<= 1 x) (<= x 20)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS8 Int)
 
 (define-fun dynamic_invariant4 ((temp___expr_51 Float32)
   (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
@@ -134,45 +134,45 @@
 ;; limit__def_axiom
   (assert (= limit 10000))
 
-(declare-fun var_out () Int)
+(declare-const var_out Int)
 
-(declare-fun a () Int)
+(declare-const a Int)
 
-(declare-fun b () Int)
+(declare-const b Int)
 
-(declare-fun anon_type__increment__result () Int)
+(declare-const anon_type__increment__result Int)
 
-(declare-fun o () Int)
+(declare-const o Int)
 
-(declare-fun o1 () Int)
+(declare-const o1 Int)
 
-(declare-fun o2 () Int)
+(declare-const o2 Int)
 
-(declare-fun result () Int)
+(declare-const result Int)
 
-(declare-fun var_out1 () Int)
+(declare-const var_out1 Int)
 
-(declare-fun result1 () Int)
+(declare-const result1 Int)
 
-(declare-fun var_out2 () Int)
+(declare-const var_out2 Int)
 
-(declare-fun result2 () Int)
+(declare-const result2 Int)
 
-(declare-fun anon_type__increment__result1 () Int)
+(declare-const anon_type__increment__result1 Int)
 
-(declare-fun anon_type__increment__result2 () Int)
+(declare-const anon_type__increment__result2 Int)
 
-(declare-fun anon_type__increment__result3 () Int)
+(declare-const anon_type__increment__result3 Int)
 
-(declare-fun var_out3 () Int)
+(declare-const var_out3 Int)
 
-(declare-fun anon_type__increment__result4 () Int)
+(declare-const anon_type__increment__result4 Int)
 
-(declare-fun var_out4 () Int)
+(declare-const var_out4 Int)
 
-(declare-fun anon_type__increment__result5 () Int)
+(declare-const anon_type__increment__result5 Int)
 
-(declare-fun result3 () Int)
+(declare-const result3 Int)
 
 ;; H
   (assert (in_range1 var_in))

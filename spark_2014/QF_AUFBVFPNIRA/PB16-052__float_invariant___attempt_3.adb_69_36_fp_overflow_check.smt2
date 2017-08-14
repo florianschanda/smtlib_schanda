@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 9007199254740991.0 19958403095347198116563727130368385660674512604354575415025472424372118918689640657849579654926357010893424468441924952439724379883935936607391717982848314203200056729510856765175377214443629871826533567445439239933308104551208703888888552684480441575071209068757560416423584952303440099278848.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -91,35 +91,35 @@
                                       (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
                                       (in_range4 temp___expr_147)))
 
-(declare-fun n () Int)
+(declare-const n Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun factor () Float64)
+(declare-const factor Float64)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun old_speed () Float64)
+(declare-const old_speed Float64)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-fun delta_speed () Float64)
+(declare-const delta_speed Float64)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
-(declare-fun fnt65 () Float64)
+(declare-const fnt65 Float64)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
-(declare-fun fnp1t65 () Float64)
+(declare-const fnp1t65 Float64)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS8 Int)
 
 ;; delta_speed__def_axiom
   (assert
@@ -133,133 +133,133 @@
   (assert
   (= fnp1t65 (fp.mul RNE ((_ to_fp 11 53) RNE (to_real (+ n 1))) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))
 
-(declare-fun new_speed () Float64)
+(declare-const new_speed Float64)
 
-(declare-fun average () Float64)
+(declare-const average Float64)
 
-(declare-fun distance () Float64)
+(declare-const distance Float64)
 
-(declare-fun o () Float64)
+(declare-const o Float64)
 
-(declare-fun o1 () Float64)
+(declare-const o1 Float64)
 
-(declare-fun o2 () Float64)
+(declare-const o2 Float64)
 
-(declare-fun o3 () Float64)
+(declare-const o3 Float64)
 
-(declare-fun o4 () Float64)
+(declare-const o4 Float64)
 
-(declare-fun o5 () Float64)
+(declare-const o5 Float64)
 
-(declare-fun o6 () Float64)
+(declare-const o6 Float64)
 
-(declare-fun o7 () Float64)
+(declare-const o7 Float64)
 
-(declare-fun o8 () Float64)
+(declare-const o8 Float64)
 
-(declare-fun o9 () Int)
+(declare-const o9 Int)
 
-(declare-fun o10 () Int)
+(declare-const o10 Int)
 
-(declare-fun o11 () Int)
+(declare-const o11 Int)
 
-(declare-fun o12 () Int)
+(declare-const o12 Int)
 
-(declare-fun o13 () Int)
+(declare-const o13 Int)
 
-(declare-fun o14 () Int)
+(declare-const o14 Int)
 
-(declare-fun o15 () Int)
+(declare-const o15 Int)
 
-(declare-fun o16 () Int)
+(declare-const o16 Int)
 
-(declare-fun o17 () Float64)
+(declare-const o17 Float64)
 
-(declare-fun o18 () Int)
+(declare-const o18 Int)
 
-(declare-fun o19 () Int)
+(declare-const o19 Int)
 
-(declare-fun o20 () Int)
+(declare-const o20 Int)
 
-(declare-fun o21 () Float64)
+(declare-const o21 Float64)
 
-(declare-fun o22 () Float64)
+(declare-const o22 Float64)
 
-(declare-fun o23 () Int)
+(declare-const o23 Int)
 
-(declare-fun o24 () Float64)
+(declare-const o24 Float64)
 
-(declare-fun o25 () Float64)
+(declare-const o25 Float64)
 
-(declare-fun o26 () Float64)
+(declare-const o26 Float64)
 
-(declare-fun o27 () Int)
+(declare-const o27 Int)
 
-(declare-fun o28 () Float64)
+(declare-const o28 Float64)
 
-(declare-fun o29 () Float64)
+(declare-const o29 Float64)
 
-(declare-fun o30 () Int)
+(declare-const o30 Int)
 
-(declare-fun o31 () Float64)
+(declare-const o31 Float64)
 
-(declare-fun o32 () Float64)
+(declare-const o32 Float64)
 
-(declare-fun o33 () Float64)
+(declare-const o33 Float64)
 
-(declare-fun o34 () Float64)
+(declare-const o34 Float64)
 
-(declare-fun o35 () Float64)
+(declare-const o35 Float64)
 
-(declare-fun o36 () Float64)
+(declare-const o36 Float64)
 
-(declare-fun o37 () Float64)
+(declare-const o37 Float64)
 
-(declare-fun o38 () Float64)
+(declare-const o38 Float64)
 
-(declare-fun o39 () Float64)
+(declare-const o39 Float64)
 
-(declare-fun o40 () Float64)
+(declare-const o40 Float64)
 
-(declare-fun o41 () Int)
+(declare-const o41 Int)
 
-(declare-fun o42 () Float64)
+(declare-const o42 Float64)
 
-(declare-fun o43 () Float64)
+(declare-const o43 Float64)
 
-(declare-fun o44 () Int)
+(declare-const o44 Int)
 
-(declare-fun o45 () Float64)
+(declare-const o45 Float64)
 
-(declare-fun o46 () Float64)
+(declare-const o46 Float64)
 
-(declare-fun o47 () Float64)
+(declare-const o47 Float64)
 
-(declare-fun o48 () Int)
+(declare-const o48 Int)
 
-(declare-fun result () Float64)
+(declare-const result Float64)
 
-(declare-fun new_speed1 () Float64)
+(declare-const new_speed1 Float64)
 
-(declare-fun result1 () Float64)
+(declare-const result1 Float64)
 
-(declare-fun average1 () Float64)
+(declare-const average1 Float64)
 
-(declare-fun result2 () Float64)
+(declare-const result2 Float64)
 
-(declare-fun distance1 () Float64)
+(declare-const distance1 Float64)
 
-(declare-fun new_speed2 () Float64)
+(declare-const new_speed2 Float64)
 
-(declare-fun average2 () Float64)
+(declare-const average2 Float64)
 
-(declare-fun distance2 () Float64)
+(declare-const distance2 Float64)
 
-(declare-fun new_speed3 () Float64)
+(declare-const new_speed3 Float64)
 
-(declare-fun average3 () Float64)
+(declare-const average3 Float64)
 
-(declare-fun distance3 () Float64)
+(declare-const distance3 Float64)
 
 ;; H
   (assert (in_range3 n))
@@ -285,7 +285,7 @@
 ;; H
   (assert (not (or (fp.isInfinite distance) (fp.isNaN distance))))
 
-(declare-fun abstr1 () Bool)
+(declare-const abstr1 Bool)
 
 ;; H
   (assert (and (< n 25000) (= abstr1 true)))
@@ -314,17 +314,17 @@
   delta_speed)
   (fp.leq delta_speed (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))))
 
-(declare-fun abstr2 () Bool)
+(declare-const abstr2 Bool)
 
 ;; H
   (assert (= abstr2 true))
 
-(declare-fun abstr3 () Bool)
+(declare-const abstr3 Bool)
 
 ;; H
   (assert (= abstr3 true))
 
-(declare-fun abstr4 () Bool)
+(declare-const abstr4 Bool)
 
 ;; H
   (assert (= abstr4 true))
@@ -333,7 +333,7 @@
   (assert
   (fp.leq new_speed1 (fp.add RNE old_speed (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))))
 
-(declare-fun abstr5 () Float64)
+(declare-const abstr5 Float64)
 
 ;; H
   (assert (fp.leq old_speed abstr5))
@@ -387,7 +387,7 @@
 ;; H
   (assert (and (= o27 (+ n 1)) (in_range3 (+ n 1))))
 
-(declare-fun abstr6 () Float64)
+(declare-const abstr6 Float64)
 
 ;; H
   (assert

@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -107,9 +107,9 @@
 
 (define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -117,11 +117,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(declare-fun step_function__delimiter_entry__delimiter__first__bit () Int)
+(declare-const step_function__delimiter_entry__delimiter__first__bit Int)
 
-(declare-fun step_function__delimiter_entry__delimiter__last__bit () Int)
+(declare-const step_function__delimiter_entry__delimiter__last__bit Int)
 
-(declare-fun step_function__delimiter_entry__delimiter__position () Int)
+(declare-const step_function__delimiter_entry__delimiter__position Int)
 
 ;; step_function__delimiter_entry__delimiter__first__bit_axiom
   (assert (<= 0 step_function__delimiter_entry__delimiter__first__bit))
@@ -133,11 +133,11 @@
 ;; step_function__delimiter_entry__delimiter__position_axiom
   (assert (<= 0 step_function__delimiter_entry__delimiter__position))
 
-(declare-fun step_function__delimiter_entry__value__first__bit () Int)
+(declare-const step_function__delimiter_entry__value__first__bit Int)
 
-(declare-fun step_function__delimiter_entry__value__last__bit () Int)
+(declare-const step_function__delimiter_entry__value__last__bit Int)
 
-(declare-fun step_function__delimiter_entry__value__position () Int)
+(declare-const step_function__delimiter_entry__value__position Int)
 
 ;; step_function__delimiter_entry__value__first__bit_axiom
   (assert (<= 0 step_function__delimiter_entry__value__first__bit))
@@ -149,11 +149,11 @@
 ;; step_function__delimiter_entry__value__position_axiom
   (assert (<= 0 step_function__delimiter_entry__value__position))
 
-(declare-fun value__size1 () Int)
+(declare-const value__size1 Int)
 
-(declare-fun value__component__size () Int)
+(declare-const value__component__size Int)
 
-(declare-fun value__alignment1 () Int)
+(declare-const value__alignment1 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size1))
@@ -164,9 +164,9 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment1))
 
-(declare-fun value__size2 () Int)
+(declare-const value__size2 Int)
 
-(declare-fun value__alignment2 () Int)
+(declare-const value__alignment2 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size2))
@@ -174,11 +174,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment2))
 
-(declare-fun step_function__step_function_t__number_of_delimiters__first__bit () Int)
+(declare-const step_function__step_function_t__number_of_delimiters__first__bit Int)
 
-(declare-fun step_function__step_function_t__number_of_delimiters__last__bit () Int)
+(declare-const step_function__step_function_t__number_of_delimiters__last__bit Int)
 
-(declare-fun step_function__step_function_t__number_of_delimiters__position () Int)
+(declare-const step_function__step_function_t__number_of_delimiters__position Int)
 
 ;; step_function__step_function_t__number_of_delimiters__first__bit_axiom
   (assert
@@ -193,11 +193,11 @@
   (assert
   (<= 0 step_function__step_function_t__number_of_delimiters__position))
 
-(declare-fun step_function__step_function_t__step__first__bit () Int)
+(declare-const step_function__step_function_t__step__first__bit Int)
 
-(declare-fun step_function__step_function_t__step__last__bit () Int)
+(declare-const step_function__step_function_t__step__last__bit Int)
 
-(declare-fun step_function__step_function_t__step__position () Int)
+(declare-const step_function__step_function_t__step__position Int)
 
 ;; step_function__step_function_t__step__first__bit_axiom
   (assert (<= 0 step_function__step_function_t__step__first__bit))
@@ -217,79 +217,79 @@
                                       (or (= temp___is_init_277 true)
                                       (<= 0 1)) (in_range6 temp___expr_280)))
 
-(declare-fun breaking_model () Int)
+(declare-const breaking_model Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun t_traction_cut_off () Float32)
+(declare-const t_traction_cut_off Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun a_sb01 () Float32)
+(declare-const a_sb01 Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-fun a_sb02 () Float32)
+(declare-const a_sb02 Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
-(declare-fun t_brake_react () Float32)
+(declare-const t_brake_react Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
-(declare-fun t_brake_increase () Float32)
+(declare-const t_brake_increase Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS8 Int)
 
-(declare-fun t_brake_build_up () Float32)
+(declare-const t_brake_build_up Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS9 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS9 Int)
 
-(declare-fun t_brake_emergency_react () Float32)
+(declare-const t_brake_emergency_react Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS10 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS10 Int)
 
-(declare-fun t_brake_emergency_increase () Float32)
+(declare-const t_brake_emergency_increase Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS11 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS11 Int)
 
-(declare-fun t_brake_emergency () Float32)
+(declare-const t_brake_emergency Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS12 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS12 Int)
 
-(declare-fun t_brake_service_react () Float32)
+(declare-const t_brake_service_react Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS13 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS13 Int)
 
-(declare-fun t_brake_service_increase () Float32)
+(declare-const t_brake_service_increase Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS14 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS14 Int)
 
-(declare-fun t_brake_service () Float32)
+(declare-const t_brake_service Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS15 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS15 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS16 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS16 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS17 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS17 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS18 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS18 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS19 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS19 Int)
 
-(declare-fun train_length () Int)
+(declare-const train_length Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS20 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS20 Int)
 
-(declare-fun maximum_train_speed () Float32)
+(declare-const maximum_train_speed Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS21 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS21 Int)
 
 (define-fun dynamic_invariant6 ((temp___expr_51 Float32)
   (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
@@ -346,7 +346,7 @@
 ;; train_length__def_axiom
   (assert (= train_length 900))
 
-(declare-fun abstr1 () Float32)
+(declare-const abstr1 Float32)
 
 ;; maximum_train_speed__def_axiom
   (assert (= maximum_train_speed abstr1))
@@ -364,7 +364,7 @@
                                       (<= 0 2147483647)) (in_range5
                                       temp___expr_193)))
 
-(declare-fun sec_3_13_2_monitoring_inputs__maximum_train_speed__assume () Float32)
+(declare-const sec_3_13_2_monitoring_inputs__maximum_train_speed__assume Float32)
 
 ;; H
   (assert (in_range6 breaking_model))
@@ -417,7 +417,7 @@
 ;; H
   (assert (in_range3 train_length))
 
-(declare-fun abstr2 () Bool)
+(declare-const abstr2 Bool)
 
 (assert
 ;; WP_parameter_def

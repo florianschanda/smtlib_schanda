@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -67,23 +67,23 @@
                                          (fp.leq (fp.neg (fp #b0 #b10111110 #b11111111111111111111111)) x)
                                          (fp.leq x (fp #b0 #b10111110 #b11111111111111111111111)))))
 
-(declare-fun a () Float32)
+(declare-const a Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun b () Float32)
+(declare-const b Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun c () Float32)
+(declare-const c Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun d () Float32)
+(declare-const d Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
 (define-fun dynamic_invariant1 ((temp___expr_217 Float32)
   (temp___is_init_214 Bool) (temp___skip_constant_215 Bool)
@@ -92,29 +92,29 @@
                                       (fp.leq (fp.neg (fp #b0 #b10111110 #b11111111111111111111111)) (fp #b0 #b10111110 #b11111111111111111111111)))
                                       (in_range1 temp___expr_217)))
 
-(declare-fun res () Bool)
+(declare-const res Bool)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
-(declare-fun o3 () Float32)
+(declare-const o3 Float32)
 
-(declare-fun o4 () Float32)
+(declare-const o4 Float32)
 
-(declare-fun o5 () Float32)
+(declare-const o5 Float32)
 
-(declare-fun o6 () Float32)
+(declare-const o6 Float32)
 
-(declare-fun o7 () Float32)
+(declare-const o7 Float32)
 
-(declare-fun o8 () Bool)
+(declare-const o8 Bool)
 
-(declare-fun result () Bool)
+(declare-const result Bool)
 
-(declare-fun res1 () Bool)
+(declare-const res1 Bool)
 
 ;; H
   (assert (not (or (fp.isInfinite a) (fp.isNaN a))))

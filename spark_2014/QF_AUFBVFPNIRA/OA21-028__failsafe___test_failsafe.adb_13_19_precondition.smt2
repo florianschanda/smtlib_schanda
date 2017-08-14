@@ -10,21 +10,21 @@
 ;;; SMT-LIB2: real arithmetic
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 255)))
 
-(declare-fun abstr () (_ BitVec 8))
+(declare-const abstr (_ BitVec 8))
 
-(declare-fun abstr1 () (_ BitVec 8))
+(declare-const abstr1 (_ BitVec 8))
 
-(declare-fun abstr2 () (_ BitVec 8))
+(declare-const abstr2 (_ BitVec 8))
 
-(declare-fun abstr3 () (_ BitVec 8))
+(declare-const abstr3 (_ BitVec 8))
 
-(declare-fun abstr4 () (_ BitVec 8))
+(declare-const abstr4 (_ BitVec 8))
 
 (define-fun nth_bv ((x (_ BitVec 8))
   (i (_ BitVec 8))) Bool (ite (not (= (bvand (bvlshr x i) #x01) #x00)) true
                          false))
 
-(declare-fun abstr5 () Bool)
+(declare-const abstr5 Bool)
 
 (define-fun eq_sub ((a (_ BitVec 8)) (b (_ BitVec 8)) (i Int)
   (n Int)) Bool abstr5)
@@ -47,7 +47,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -56,7 +56,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr6 () Real)
+(declare-const abstr6 Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr6))
 
@@ -87,9 +87,9 @@
 
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
-(declare-fun abstr7 () (_ BitVec 8))
+(declare-const abstr7 (_ BitVec 8))
 
-(declare-fun abstr8 () (_ BitVec 8))
+(declare-const abstr8 (_ BitVec 8))
 
 (define-fun in_range2 ((x (_ BitVec 8))) Bool (and (bvule abstr8 x)
                                               (bvule x abstr7)))
@@ -103,11 +103,11 @@
                                       (bvule abstr8 abstr7)) (in_range2
                                       temp___expr_208)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (define-fun dynamic_invariant1 ((temp___expr_202 Float32)
   (temp___is_init_199 Bool) (temp___skip_constant_200 Bool)
@@ -116,9 +116,9 @@
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                       (not (or (fp.isInfinite temp___expr_202) (fp.isNaN temp___expr_202)))))
 
-(declare-fun attr__ATTRIBUTE_MODULUS () (_ BitVec 8))
+(declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 8))
 
-(declare-fun abstr9 () (_ BitVec 8))
+(declare-const abstr9 (_ BitVec 8))
 
 (define-fun in_range3 ((x (_ BitVec 8))) Bool (and (bvule abstr8 x)
                                               (bvule x abstr9)))
@@ -132,53 +132,53 @@
                                       (bvule abstr8 abstr9)) (in_range3
                                       temp___expr_214)))
 
-(declare-fun current_time () (_ BitVec 8))
+(declare-const current_time (_ BitVec 8))
 
-(declare-fun j () Int)
+(declare-const j Int)
 
-(declare-fun temp___280 () (_ BitVec 8))
+(declare-const temp___280 (_ BitVec 8))
 
-(declare-fun o () Bool)
+(declare-const o Bool)
 
-(declare-fun us () Bool)
+(declare-const us Bool)
 
-(declare-fun us1 () Bool)
+(declare-const us1 Bool)
 
-(declare-fun o1 () Bool)
+(declare-const o1 Bool)
 
-(declare-fun current_time1 () (_ BitVec 8))
+(declare-const current_time1 (_ BitVec 8))
 
-(declare-fun result () Int)
+(declare-const result Int)
 
-(declare-fun j1 () Int)
+(declare-const j1 Int)
 
-(declare-fun current_time2 () (_ BitVec 8))
+(declare-const current_time2 (_ BitVec 8))
 
-(declare-fun j2 () Int)
+(declare-const j2 Int)
 
-(declare-fun current_time3 () (_ BitVec 8))
+(declare-const current_time3 (_ BitVec 8))
 
-(declare-fun current_time4 () (_ BitVec 8))
+(declare-const current_time4 (_ BitVec 8))
 
-(declare-fun j3 () Int)
+(declare-const j3 Int)
 
-(declare-fun current_time5 () (_ BitVec 8))
+(declare-const current_time5 (_ BitVec 8))
 
-(declare-fun j4 () Int)
+(declare-const j4 Int)
 
-(declare-fun current_time6 () (_ BitVec 8))
+(declare-const current_time6 (_ BitVec 8))
 
-(declare-fun j5 () Int)
+(declare-const j5 Int)
 
-(declare-fun current_time7 () (_ BitVec 8))
+(declare-const current_time7 (_ BitVec 8))
 
-(declare-fun j6 () Int)
+(declare-const j6 Int)
 
-(declare-fun current_time8 () (_ BitVec 8))
+(declare-const current_time8 (_ BitVec 8))
 
-(declare-fun current_time9 () (_ BitVec 8))
+(declare-const current_time9 (_ BitVec 8))
 
-(declare-fun current_time10 () (_ BitVec 8))
+(declare-const current_time10 (_ BitVec 8))
 
 ;; H
   (assert (in_range2 current_time))

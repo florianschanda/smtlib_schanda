@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -73,9 +73,9 @@
                                          (fp.leq (fp.neg (fp #b0 #b10000110 #b01100111111111111111111)) x)
                                          (fp.leq x (fp #b0 #b10000110 #b01101000000000000000000)))))
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -83,11 +83,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(declare-fun lat_long__coordinates__lat__first__bit () Int)
+(declare-const lat_long__coordinates__lat__first__bit Int)
 
-(declare-fun lat_long__coordinates__lat__last__bit () Int)
+(declare-const lat_long__coordinates__lat__last__bit Int)
 
-(declare-fun lat_long__coordinates__lat__position () Int)
+(declare-const lat_long__coordinates__lat__position Int)
 
 ;; lat_long__coordinates__lat__first__bit_axiom
   (assert (<= 0 lat_long__coordinates__lat__first__bit))
@@ -99,11 +99,11 @@
 ;; lat_long__coordinates__lat__position_axiom
   (assert (<= 0 lat_long__coordinates__lat__position))
 
-(declare-fun lat_long__coordinates__long__first__bit () Int)
+(declare-const lat_long__coordinates__long__first__bit Int)
 
-(declare-fun lat_long__coordinates__long__last__bit () Int)
+(declare-const lat_long__coordinates__long__last__bit Int)
 
-(declare-fun lat_long__coordinates__long__position () Int)
+(declare-const lat_long__coordinates__long__position Int)
 
 ;; lat_long__coordinates__long__first__bit_axiom
   (assert (<= 0 lat_long__coordinates__long__first__bit))
@@ -115,13 +115,13 @@
 ;; lat_long__coordinates__long__position_axiom
   (assert (<= 0 lat_long__coordinates__long__position))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (define-fun dynamic_invariant1 ((temp___expr_51 Float32)
   (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
@@ -144,75 +144,75 @@
                                       (fp.leq (fp.neg (fp #b0 #b10000110 #b01100111111111111111111)) (fp #b0 #b10000110 #b01101000000000000000000)))
                                       (in_range2 temp___expr_153)))
 
-(declare-fun delta_lat () Float32)
+(declare-const delta_lat Float32)
 
-(declare-fun delta_long () Float32)
+(declare-const delta_long Float32)
 
-(declare-fun lat_long__distance__result () Float32)
+(declare-const lat_long__distance__result Float32)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
-(declare-fun o3 () Float32)
+(declare-const o3 Float32)
 
-(declare-fun o4 () Float32)
+(declare-const o4 Float32)
 
-(declare-fun o5 () Float32)
+(declare-const o5 Float32)
 
-(declare-fun o6 () Float32)
+(declare-const o6 Float32)
 
-(declare-fun o7 () Float32)
+(declare-const o7 Float32)
 
-(declare-fun o8 () Float32)
+(declare-const o8 Float32)
 
-(declare-fun o9 () Float32)
+(declare-const o9 Float32)
 
-(declare-fun o10 () Float32)
+(declare-const o10 Float32)
 
-(declare-fun o11 () Float32)
+(declare-const o11 Float32)
 
-(declare-fun o12 () Float32)
+(declare-const o12 Float32)
 
-(declare-fun o13 () Float32)
+(declare-const o13 Float32)
 
-(declare-fun o14 () Float32)
+(declare-const o14 Float32)
 
-(declare-fun o15 () Float32)
+(declare-const o15 Float32)
 
-(declare-fun o16 () Float32)
+(declare-const o16 Float32)
 
-(declare-fun o17 () Float32)
+(declare-const o17 Float32)
 
-(declare-fun result () Float32)
+(declare-const result Float32)
 
-(declare-fun delta_lat1 () Float32)
+(declare-const delta_lat1 Float32)
 
-(declare-fun result1 () Float32)
+(declare-const result1 Float32)
 
-(declare-fun delta_long1 () Float32)
+(declare-const delta_long1 Float32)
 
-(declare-fun result2 () Float32)
+(declare-const result2 Float32)
 
-(declare-fun lat_long__distance__result1 () Float32)
+(declare-const lat_long__distance__result1 Float32)
 
-(declare-fun lat_long__distance__result2 () Float32)
+(declare-const lat_long__distance__result2 Float32)
 
-(declare-fun lat_long__distance__result3 () Float32)
+(declare-const lat_long__distance__result3 Float32)
 
-(declare-fun delta_lat2 () Float32)
+(declare-const delta_lat2 Float32)
 
-(declare-fun delta_long2 () Float32)
+(declare-const delta_long2 Float32)
 
-(declare-fun lat_long__distance__result4 () Float32)
+(declare-const lat_long__distance__result4 Float32)
 
-(declare-fun delta_lat3 () Float32)
+(declare-const delta_lat3 Float32)
 
-(declare-fun delta_long3 () Float32)
+(declare-const delta_long3 Float32)
 
-(declare-fun lat_long__distance__result5 () Float32)
+(declare-const lat_long__distance__result5 Float32)
 
 ;; H
   (assert

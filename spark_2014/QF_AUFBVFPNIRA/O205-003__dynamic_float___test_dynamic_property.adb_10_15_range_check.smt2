@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -61,9 +61,9 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun d () Float32)
+(declare-const d Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (define-fun in_range1 ((x Float32)) Bool (and
                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
@@ -78,11 +78,11 @@
                                       (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000)))
                                       (in_range1 temp___expr_135)))
 
-(declare-fun c () Float32)
+(declare-const c Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun last () Float32)
+(declare-const last Float32)
 
 (define-fun dynamic_property ((first_int Float32) (last_int Float32)
   (x Float32)) Bool (and (not (or (fp.isInfinite x) (fp.isNaN x)))
@@ -100,9 +100,9 @@
 ;; last__def_axiom
   (assert (= last c))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun last1 () Float32)
+(declare-const last1 Float32)
 
 (define-fun dynamic_property1 ((first_int Float32) (last_int Float32)
   (x Float32)) Bool (and (not (or (fp.isInfinite x) (fp.isNaN x)))
@@ -120,14 +120,14 @@
 ;; last__def_axiom
   (assert (= last1 c))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 ;; c__def_axiom
   (assert (= c d))
 
-(declare-fun x () Float32)
+(declare-const x Float32)
 
-(declare-fun us () Float32)
+(declare-const us Float32)
 
 ;; H
   (assert (not (or (fp.isInfinite d) (fp.isNaN d))))

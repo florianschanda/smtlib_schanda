@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -65,11 +65,11 @@
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 3)))
 
-(declare-fun us_tag () Int)
+(declare-const us_tag Int)
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -77,11 +77,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(declare-fun tagged_discr__t__discr__first__bit () Int)
+(declare-const tagged_discr__t__discr__first__bit Int)
 
-(declare-fun tagged_discr__t__discr__last__bit () Int)
+(declare-const tagged_discr__t__discr__last__bit Int)
 
-(declare-fun tagged_discr__t__discr__position () Int)
+(declare-const tagged_discr__t__discr__position Int)
 
 ;; tagged_discr__t__discr__first__bit_axiom
   (assert (<= 0 tagged_discr__t__discr__first__bit))
@@ -93,11 +93,11 @@
 ;; tagged_discr__t__discr__position_axiom
   (assert (<= 0 tagged_discr__t__discr__position))
 
-(declare-fun tagged_discr__t__z__first__bit () Int)
+(declare-const tagged_discr__t__z__first__bit Int)
 
-(declare-fun tagged_discr__t__z__last__bit () Int)
+(declare-const tagged_discr__t__z__last__bit Int)
 
-(declare-fun tagged_discr__t__z__position () Int)
+(declare-const tagged_discr__t__z__position Int)
 
 ;; tagged_discr__t__z__first__bit_axiom
   (assert (<= 0 tagged_discr__t__z__first__bit))
@@ -108,11 +108,11 @@
 ;; tagged_discr__t__z__position_axiom
   (assert (<= 0 tagged_discr__t__z__position))
 
-(declare-fun tagged_discr__t__x__first__bit () Int)
+(declare-const tagged_discr__t__x__first__bit Int)
 
-(declare-fun tagged_discr__t__x__last__bit () Int)
+(declare-const tagged_discr__t__x__last__bit Int)
 
-(declare-fun tagged_discr__t__x__position () Int)
+(declare-const tagged_discr__t__x__position Int)
 
 ;; tagged_discr__t__x__first__bit_axiom
   (assert (<= 0 tagged_discr__t__x__first__bit))
@@ -123,11 +123,11 @@
 ;; tagged_discr__t__x__position_axiom
   (assert (<= 0 tagged_discr__t__x__position))
 
-(declare-fun tagged_discr__t__y__first__bit () Int)
+(declare-const tagged_discr__t__y__first__bit Int)
 
-(declare-fun tagged_discr__t__y__last__bit () Int)
+(declare-const tagged_discr__t__y__last__bit Int)
 
-(declare-fun tagged_discr__t__y__position () Int)
+(declare-const tagged_discr__t__y__position Int)
 
 ;; tagged_discr__t__y__first__bit_axiom
   (assert (<= 0 tagged_discr__t__y__first__bit))
@@ -138,7 +138,7 @@
 ;; tagged_discr__t__y__position_axiom
   (assert (<= 0 tagged_discr__t__y__position))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)

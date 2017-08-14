@@ -10,22 +10,22 @@
 ;;; SMT-LIB2: real arithmetic
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 4294967295)))
 
-(declare-fun abstr () (_ BitVec 32))
+(declare-const abstr (_ BitVec 32))
 
-(declare-fun abstr1 () (_ BitVec 32))
+(declare-const abstr1 (_ BitVec 32))
 
-(declare-fun abstr2 () (_ BitVec 32))
+(declare-const abstr2 (_ BitVec 32))
 
-(declare-fun abstr3 () (_ BitVec 32))
+(declare-const abstr3 (_ BitVec 32))
 
-(declare-fun abstr4 () (_ BitVec 32))
+(declare-const abstr4 (_ BitVec 32))
 
 (define-fun nth_bv ((x (_ BitVec 32))
   (i (_ BitVec 32))) Bool (ite (not
                                (= (bvand (bvlshr x i) #x00000001) #x00000000))
                           true false))
 
-(declare-fun abstr5 () Bool)
+(declare-const abstr5 Bool)
 
 (define-fun eq_sub ((a (_ BitVec 32)) (b (_ BitVec 32)) (i Int)
   (n Int)) Bool abstr5)
@@ -48,7 +48,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -57,7 +57,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr6 () Real)
+(declare-const abstr6 Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr6))
 
@@ -84,42 +84,42 @@
 
 (define-fun uint_in_range1 ((i Int)) Bool (and (<= 0 i) (<= i 255)))
 
-(declare-fun abstr7 () (_ BitVec 8))
+(declare-const abstr7 (_ BitVec 8))
 
-(declare-fun abstr8 () (_ BitVec 8))
+(declare-const abstr8 (_ BitVec 8))
 
-(declare-fun abstr9 () (_ BitVec 8))
+(declare-const abstr9 (_ BitVec 8))
 
-(declare-fun abstr10 () (_ BitVec 8))
+(declare-const abstr10 (_ BitVec 8))
 
-(declare-fun abstr11 () (_ BitVec 8))
+(declare-const abstr11 (_ BitVec 8))
 
 (define-fun nth_bv1 ((x (_ BitVec 8))
   (i (_ BitVec 8))) Bool (ite (not (= (bvand (bvlshr x i) #x01) #x00)) true
                          false))
 
-(declare-fun abstr12 () Bool)
+(declare-const abstr12 Bool)
 
 (define-fun eq_sub1 ((a (_ BitVec 8)) (b (_ BitVec 8)) (i Int)
   (n Int)) Bool abstr12)
 
 (define-fun uint_in_range2 ((i Int)) Bool (and (<= 0 i) (<= i 65535)))
 
-(declare-fun abstr13 () (_ BitVec 16))
+(declare-const abstr13 (_ BitVec 16))
 
-(declare-fun abstr14 () (_ BitVec 16))
+(declare-const abstr14 (_ BitVec 16))
 
-(declare-fun abstr15 () (_ BitVec 16))
+(declare-const abstr15 (_ BitVec 16))
 
-(declare-fun abstr16 () (_ BitVec 16))
+(declare-const abstr16 (_ BitVec 16))
 
-(declare-fun abstr17 () (_ BitVec 16))
+(declare-const abstr17 (_ BitVec 16))
 
 (define-fun nth_bv2 ((x (_ BitVec 16))
   (i (_ BitVec 16))) Bool (ite (not (= (bvand (bvlshr x i) #x0001) #x0000))
                           true false))
 
-(declare-fun abstr18 () Bool)
+(declare-const abstr18 Bool)
 
 (define-fun eq_sub2 ((a (_ BitVec 16)) (b (_ BitVec 16)) (i Int)
   (n Int)) Bool abstr18)
@@ -127,37 +127,37 @@
 (define-fun uint_in_range3 ((i Int)) Bool (and (<= 0 i)
                                           (<= i 18446744073709551615)))
 
-(declare-fun abstr19 () (_ BitVec 64))
+(declare-const abstr19 (_ BitVec 64))
 
-(declare-fun abstr20 () (_ BitVec 64))
+(declare-const abstr20 (_ BitVec 64))
 
-(declare-fun abstr21 () (_ BitVec 64))
+(declare-const abstr21 (_ BitVec 64))
 
-(declare-fun abstr22 () (_ BitVec 64))
+(declare-const abstr22 (_ BitVec 64))
 
-(declare-fun abstr23 () (_ BitVec 64))
+(declare-const abstr23 (_ BitVec 64))
 
 (define-fun nth_bv3 ((x (_ BitVec 64))
   (i (_ BitVec 64))) Bool (ite (not
                                (= (bvand (bvlshr x i) #x0000000000000001) #x0000000000000000))
                           true false))
 
-(declare-fun abstr24 () Bool)
+(declare-const abstr24 Bool)
 
 (define-fun eq_sub3 ((a (_ BitVec 64)) (b (_ BitVec 64)) (i Int)
   (n Int)) Bool abstr24)
 
-(declare-fun attr__ATTRIBUTE_MODULUS () (_ BitVec 32))
+(declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 32))
 
 (define-fun dynamic_invariant ((temp___expr_189 (_ BitVec 32))
   (temp___is_init_186 Bool) (temp___skip_constant_187 Bool)
   (temp___do_toplevel_188 Bool)) Bool true)
 
-(declare-fun i () (_ BitVec 32))
+(declare-const i (_ BitVec 32))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
 (assert
 ;; WP_parameter_def

@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -67,73 +67,73 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS8 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS9 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS9 Int)
 
-(declare-fun temperature () Float32)
+(declare-const temperature Float32)
 
-(declare-fun pressure () Float32)
+(declare-const pressure Float32)
 
-(declare-fun asl () Float32)
+(declare-const asl Float32)
 
-(declare-fun asl_raw () Float32)
+(declare-const asl_raw Float32)
 
-(declare-fun asl_long () Float32)
+(declare-const asl_long Float32)
 
-(declare-fun asl_err_deadband () Float32)
+(declare-const asl_err_deadband Float32)
 
-(declare-fun asl_alpha () Float32)
+(declare-const asl_alpha Float32)
 
-(declare-fun asl_alpha_long () Float32)
+(declare-const asl_alpha_long Float32)
 
-(declare-fun asl_tmp () Float32)
+(declare-const asl_tmp Float32)
 
-(declare-fun asl_long_tmp () Float32)
+(declare-const asl_long_tmp Float32)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
-(declare-fun o3 () Float32)
+(declare-const o3 Float32)
 
-(declare-fun o4 () Float32)
+(declare-const o4 Float32)
 
-(declare-fun o5 () Float32)
+(declare-const o5 Float32)
 
-(declare-fun o6 () Float32)
+(declare-const o6 Float32)
 
-(declare-fun o7 () Float32)
+(declare-const o7 Float32)
 
-(declare-fun o8 () Float32)
+(declare-const o8 Float32)
 
-(declare-fun o9 () Float32)
+(declare-const o9 Float32)
 
-(declare-fun o10 () Float32)
+(declare-const o10 Float32)
 
-(declare-fun o11 () Float32)
+(declare-const o11 Float32)
 
-(declare-fun result () Float32)
+(declare-const result Float32)
 
-(declare-fun asl_tmp1 () Float32)
+(declare-const asl_tmp1 Float32)
 
 ;; H
   (assert (not (or (fp.isInfinite temperature) (fp.isNaN temperature))))

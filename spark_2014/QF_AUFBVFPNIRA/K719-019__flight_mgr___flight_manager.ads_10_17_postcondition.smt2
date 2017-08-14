@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -67,9 +67,9 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -77,11 +77,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(declare-fun flight_manager__engine_values__x_speed__first__bit () Int)
+(declare-const flight_manager__engine_values__x_speed__first__bit Int)
 
-(declare-fun flight_manager__engine_values__x_speed__last__bit () Int)
+(declare-const flight_manager__engine_values__x_speed__last__bit Int)
 
-(declare-fun flight_manager__engine_values__x_speed__position () Int)
+(declare-const flight_manager__engine_values__x_speed__position Int)
 
 ;; flight_manager__engine_values__x_speed__first__bit_axiom
   (assert (<= 0 flight_manager__engine_values__x_speed__first__bit))
@@ -93,11 +93,11 @@
 ;; flight_manager__engine_values__x_speed__position_axiom
   (assert (<= 0 flight_manager__engine_values__x_speed__position))
 
-(declare-fun flight_manager__engine_values__y_speed__first__bit () Int)
+(declare-const flight_manager__engine_values__y_speed__first__bit Int)
 
-(declare-fun flight_manager__engine_values__y_speed__last__bit () Int)
+(declare-const flight_manager__engine_values__y_speed__last__bit Int)
 
-(declare-fun flight_manager__engine_values__y_speed__position () Int)
+(declare-const flight_manager__engine_values__y_speed__position Int)
 
 ;; flight_manager__engine_values__y_speed__first__bit_axiom
   (assert (<= 0 flight_manager__engine_values__y_speed__first__bit))
@@ -109,53 +109,53 @@
 ;; flight_manager__engine_values__y_speed__position_axiom
   (assert (<= 0 flight_manager__engine_values__y_speed__position))
 
-(declare-fun position_x () Float32)
+(declare-const position_x Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun position_y () Float32)
+(declare-const position_y Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun target_x () Float32)
+(declare-const target_x Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun target_y () Float32)
+(declare-const target_y Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
-(declare-fun o3 () Float32)
+(declare-const o3 Float32)
 
-(declare-fun o4 () Float32)
+(declare-const o4 Float32)
 
-(declare-fun o5 () Float32)
+(declare-const o5 Float32)
 
-(declare-fun o6 () Float32)
+(declare-const o6 Float32)
 
-(declare-fun o7 () Float32)
+(declare-const o7 Float32)
 
-(declare-fun o8 () Float32)
+(declare-const o8 Float32)
 
-(declare-fun o9 () Float32)
+(declare-const o9 Float32)
 
-(declare-fun o10 () Float32)
+(declare-const o10 Float32)
 
-(declare-fun o11 () Float32)
+(declare-const o11 Float32)
 
-(declare-fun o12 () Bool)
+(declare-const o12 Bool)
 
-(declare-fun flight_manager__set_engine_speed__adjust_speed__f () Float32)
+(declare-const flight_manager__set_engine_speed__adjust_speed__f Float32)
 
-(declare-fun flight_manager__set_engine_speed__adjust_speed__f1 () Float32)
+(declare-const flight_manager__set_engine_speed__adjust_speed__f1 Float32)
 
 ;; H
   (assert (not (or (fp.isInfinite position_x) (fp.isNaN position_x))))

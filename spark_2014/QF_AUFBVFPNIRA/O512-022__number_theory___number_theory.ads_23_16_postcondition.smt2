@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -71,9 +71,9 @@
                                       (or (= temp___is_init_182 true)
                                       (<= 0 46)) (in_range3 temp___expr_185)))
 
-(declare-fun n () Int)
+(declare-const n Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
@@ -98,39 +98,39 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range2 temp___expr_15)))
 
-(declare-fun number_theory__fib__result () Int)
+(declare-const number_theory__fib__result Int)
 
-(declare-fun o () Int)
+(declare-const o Int)
 
-(declare-fun o1 () Int)
+(declare-const o1 Int)
 
-(declare-fun o2 () Int)
+(declare-const o2 Int)
 
-(declare-fun o3 () Int)
+(declare-const o3 Int)
 
-(declare-fun o4 () Int)
+(declare-const o4 Int)
 
-(declare-fun o5 () Int)
+(declare-const o5 Int)
 
-(declare-fun o6 () Float32)
+(declare-const o6 Float32)
 
-(declare-fun o7 () Float32)
+(declare-const o7 Float32)
 
-(declare-fun o8 () Float32)
+(declare-const o8 Float32)
 
-(declare-fun result () Int)
+(declare-const result Int)
 
-(declare-fun number_theory__fib__result1 () Int)
+(declare-const number_theory__fib__result1 Int)
 
-(declare-fun number_theory__fib__result2 () Int)
+(declare-const number_theory__fib__result2 Int)
 
-(declare-fun number_theory__fib__result3 () Int)
+(declare-const number_theory__fib__result3 Int)
 
-(declare-fun number_theory__fib__result4 () Int)
+(declare-const number_theory__fib__result4 Int)
 
-(declare-fun number_theory__fib__result5 () Int)
+(declare-const number_theory__fib__result5 Int)
 
-(declare-fun result1 () Int)
+(declare-const result1 Int)
 
 ;; H
   (assert (in_range3 n))
@@ -149,13 +149,13 @@
   (=> (not (=> (not (= n 0)) (= n 1)))
   (and (= o1 (- n 2)) (in_range3 (- n 2)))))
 
-(declare-fun abstr1 () Float32)
+(declare-const abstr1 Float32)
 
-(declare-fun abstr2 () Int)
+(declare-const abstr2 Int)
 
-(declare-fun abstr3 () Int)
+(declare-const abstr3 Int)
 
-(declare-fun abstr4 () Int)
+(declare-const abstr4 Int)
 
 ;; H
   (assert
@@ -170,13 +170,13 @@
   (=> (not (=> (not (= n 0)) (= n 1)))
   (and (= o (- n 1)) (in_range3 (- n 1)))))
 
-(declare-fun abstr5 () Float32)
+(declare-const abstr5 Float32)
 
-(declare-fun abstr6 () Int)
+(declare-const abstr6 Int)
 
-(declare-fun abstr7 () Int)
+(declare-const abstr7 Int)
 
-(declare-fun abstr8 () Int)
+(declare-const abstr8 Int)
 
 ;; H
   (assert
@@ -202,7 +202,7 @@
 ;; H
   (assert (= result1 number_theory__fib__result4))
 
-(declare-fun abstr9 () Float32)
+(declare-const abstr9 Float32)
 
 (assert
 ;; WP_parameter_def

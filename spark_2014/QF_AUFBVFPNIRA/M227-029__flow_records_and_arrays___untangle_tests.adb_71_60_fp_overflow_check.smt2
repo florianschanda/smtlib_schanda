@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -60,9 +60,9 @@
 
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -70,11 +70,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(declare-fun untangle_tests__coordinate__x__first__bit () Int)
+(declare-const untangle_tests__coordinate__x__first__bit Int)
 
-(declare-fun untangle_tests__coordinate__x__last__bit () Int)
+(declare-const untangle_tests__coordinate__x__last__bit Int)
 
-(declare-fun untangle_tests__coordinate__x__position () Int)
+(declare-const untangle_tests__coordinate__x__position Int)
 
 ;; untangle_tests__coordinate__x__first__bit_axiom
   (assert (<= 0 untangle_tests__coordinate__x__first__bit))
@@ -86,11 +86,11 @@
 ;; untangle_tests__coordinate__x__position_axiom
   (assert (<= 0 untangle_tests__coordinate__x__position))
 
-(declare-fun untangle_tests__coordinate__y__first__bit () Int)
+(declare-const untangle_tests__coordinate__y__first__bit Int)
 
-(declare-fun untangle_tests__coordinate__y__last__bit () Int)
+(declare-const untangle_tests__coordinate__y__last__bit Int)
 
-(declare-fun untangle_tests__coordinate__y__position () Int)
+(declare-const untangle_tests__coordinate__y__position Int)
 
 ;; untangle_tests__coordinate__y__first__bit_axiom
   (assert (<= 0 untangle_tests__coordinate__y__first__bit))
@@ -102,11 +102,11 @@
 ;; untangle_tests__coordinate__y__position_axiom
   (assert (<= 0 untangle_tests__coordinate__y__position))
 
-(declare-fun untangle_tests__coordinate__z__first__bit () Int)
+(declare-const untangle_tests__coordinate__z__first__bit Int)
 
-(declare-fun untangle_tests__coordinate__z__last__bit () Int)
+(declare-const untangle_tests__coordinate__z__last__bit Int)
 
-(declare-fun untangle_tests__coordinate__z__position () Int)
+(declare-const untangle_tests__coordinate__z__position Int)
 
 ;; untangle_tests__coordinate__z__first__bit_axiom
   (assert (<= 0 untangle_tests__coordinate__z__first__bit))
@@ -118,11 +118,11 @@
 ;; untangle_tests__coordinate__z__position_axiom
   (assert (<= 0 untangle_tests__coordinate__z__position))
 
-(declare-fun untangle_tests__coordinate__w__first__bit () Int)
+(declare-const untangle_tests__coordinate__w__first__bit Int)
 
-(declare-fun untangle_tests__coordinate__w__last__bit () Int)
+(declare-const untangle_tests__coordinate__w__last__bit Int)
 
-(declare-fun untangle_tests__coordinate__w__position () Int)
+(declare-const untangle_tests__coordinate__w__position Int)
 
 ;; untangle_tests__coordinate__w__first__bit_axiom
   (assert (<= 0 untangle_tests__coordinate__w__first__bit))
@@ -136,11 +136,11 @@
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 3)))
 
-(declare-fun value__size1 () Int)
+(declare-const value__size1 Int)
 
-(declare-fun value__component__size () Int)
+(declare-const value__component__size Int)
 
-(declare-fun value__alignment1 () Int)
+(declare-const value__alignment1 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size1))
@@ -151,9 +151,9 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment1))
 
-(declare-fun value__size2 () Int)
+(declare-const value__size2 Int)
 
-(declare-fun value__alignment2 () Int)
+(declare-const value__alignment2 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size2))
@@ -161,11 +161,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment2))
 
-(declare-fun untangle_tests__triangle__vertices__first__bit () Int)
+(declare-const untangle_tests__triangle__vertices__first__bit Int)
 
-(declare-fun untangle_tests__triangle__vertices__last__bit () Int)
+(declare-const untangle_tests__triangle__vertices__last__bit Int)
 
-(declare-fun untangle_tests__triangle__vertices__position () Int)
+(declare-const untangle_tests__triangle__vertices__position Int)
 
 ;; untangle_tests__triangle__vertices__first__bit_axiom
   (assert (<= 0 untangle_tests__triangle__vertices__first__bit))
@@ -177,11 +177,11 @@
 ;; untangle_tests__triangle__vertices__position_axiom
   (assert (<= 0 untangle_tests__triangle__vertices__position))
 
-(declare-fun untangle_tests__triangle__normal__first__bit () Int)
+(declare-const untangle_tests__triangle__normal__first__bit Int)
 
-(declare-fun untangle_tests__triangle__normal__last__bit () Int)
+(declare-const untangle_tests__triangle__normal__last__bit Int)
 
-(declare-fun untangle_tests__triangle__normal__position () Int)
+(declare-const untangle_tests__triangle__normal__position Int)
 
 ;; untangle_tests__triangle__normal__first__bit_axiom
   (assert (<= 0 untangle_tests__triangle__normal__first__bit))
@@ -195,13 +195,13 @@
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 100)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (define-fun dynamic_invariant ((temp___expr_51 Float32)
   (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
@@ -210,37 +210,37 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun t () Int)
+(declare-const t Int)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
-(declare-fun o3 () Float32)
+(declare-const o3 Float32)
 
-(declare-fun o4 () Float32)
+(declare-const o4 Float32)
 
-(declare-fun o5 () Float32)
+(declare-const o5 Float32)
 
-(declare-fun o6 () Float32)
+(declare-const o6 Float32)
 
-(declare-fun o7 () Float32)
+(declare-const o7 Float32)
 
-(declare-fun o8 () Float32)
+(declare-const o8 Float32)
 
-(declare-fun t1 () Int)
+(declare-const t1 Int)
 
-(declare-fun t2 () Int)
+(declare-const t2 Int)
 
-(declare-fun v () Int)
+(declare-const v Int)
 
-(declare-fun v1 () Int)
+(declare-const v1 Int)
 
-(declare-fun v2 () Int)
+(declare-const v2 Int)
 
-(declare-fun v3 () Int)
+(declare-const v3 Int)
 
 ;; H
   (assert (= t1 1))

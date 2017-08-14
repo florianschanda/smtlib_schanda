@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -63,11 +63,11 @@
 (define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
-(declare-fun us_tag () Int)
+(declare-const us_tag Int)
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -75,11 +75,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(declare-fun classwide__t__z__first__bit () Int)
+(declare-const classwide__t__z__first__bit Int)
 
-(declare-fun classwide__t__z__last__bit () Int)
+(declare-const classwide__t__z__last__bit Int)
 
-(declare-fun classwide__t__z__position () Int)
+(declare-const classwide__t__z__position Int)
 
 ;; classwide__t__z__first__bit_axiom
   (assert (<= 0 classwide__t__z__first__bit))
@@ -90,11 +90,11 @@
 ;; classwide__t__z__position_axiom
   (assert (<= 0 classwide__t__z__position))
 
-(declare-fun classwide__t__x__first__bit () Int)
+(declare-const classwide__t__x__first__bit Int)
 
-(declare-fun classwide__t__x__last__bit () Int)
+(declare-const classwide__t__x__last__bit Int)
 
-(declare-fun classwide__t__x__position () Int)
+(declare-const classwide__t__x__position Int)
 
 ;; classwide__t__x__first__bit_axiom
   (assert (<= 0 classwide__t__x__first__bit))
@@ -105,11 +105,11 @@
 ;; classwide__t__x__position_axiom
   (assert (<= 0 classwide__t__x__position))
 
-(declare-fun classwide__t__y__first__bit () Int)
+(declare-const classwide__t__y__first__bit Int)
 
-(declare-fun classwide__t__y__last__bit () Int)
+(declare-const classwide__t__y__last__bit Int)
 
-(declare-fun classwide__t__y__position () Int)
+(declare-const classwide__t__y__position Int)
 
 ;; classwide__t__y__first__bit_axiom
   (assert (<= 0 classwide__t__y__first__bit))
@@ -120,9 +120,9 @@
 ;; classwide__t__y__position_axiom
   (assert (<= 0 classwide__t__y__position))
 
-(declare-fun v__attr__tag () Int)
+(declare-const v__attr__tag Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)
@@ -138,35 +138,35 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun v__split_fields () Bool)
+(declare-const v__split_fields Bool)
 
-(declare-fun o () Bool)
+(declare-const o Bool)
 
-(declare-fun temp___209 () Bool)
+(declare-const temp___209 Bool)
 
-(declare-fun temp___2091 () Int)
+(declare-const temp___2091 Int)
 
-(declare-fun o1 () Bool)
+(declare-const o1 Bool)
 
-(declare-fun temp___211 () Bool)
+(declare-const temp___211 Bool)
 
-(declare-fun temp___2111 () Int)
+(declare-const temp___2111 Int)
 
-(declare-fun result () Bool)
+(declare-const result Bool)
 
-(declare-fun v__split_fields1 () Bool)
+(declare-const v__split_fields1 Bool)
 
-(declare-fun result1 () Bool)
+(declare-const result1 Bool)
 
-(declare-fun v__split_fields2 () Bool)
+(declare-const v__split_fields2 Bool)
 
-(declare-fun result2 () Bool)
+(declare-const result2 Bool)
 
-(declare-fun v__split_fields3 () Bool)
+(declare-const v__split_fields3 Bool)
 
-(declare-fun v__split_fields4 () Bool)
+(declare-const v__split_fields4 Bool)
 
-(declare-fun v__split_fields5 () Bool)
+(declare-const v__split_fields5 Bool)
 
 ;; H
   (assert (= result v__split_fields))

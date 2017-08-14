@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -70,25 +70,25 @@
 (define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun c13b () Float32)
+(declare-const c13b Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
-(declare-fun tolerance () Float32)
+(declare-const tolerance Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
 (define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)
@@ -97,77 +97,77 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range2 temp___expr_15)))
 
-(declare-fun a () Float32)
+(declare-const a Float32)
 
-(declare-fun b () Float32)
+(declare-const b Float32)
 
-(declare-fun c14b () Float32)
+(declare-const c14b Float32)
 
-(declare-fun approx () Float32)
+(declare-const approx Float32)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
-(declare-fun o3 () Float32)
+(declare-const o3 Float32)
 
-(declare-fun temp___235 () Float32)
+(declare-const temp___235 Float32)
 
-(declare-fun o4 () Float32)
+(declare-const o4 Float32)
 
-(declare-fun o5 () Float32)
+(declare-const o5 Float32)
 
-(declare-fun o6 () Float32)
+(declare-const o6 Float32)
 
-(declare-fun o7 () Float32)
+(declare-const o7 Float32)
 
-(declare-fun o8 () Float32)
+(declare-const o8 Float32)
 
-(declare-fun o9 () Float32)
+(declare-const o9 Float32)
 
-(declare-fun o10 () Float32)
+(declare-const o10 Float32)
 
-(declare-fun o11 () Float32)
+(declare-const o11 Float32)
 
-(declare-fun o12 () Bool)
+(declare-const o12 Bool)
 
-(declare-fun o13 () Float32)
+(declare-const o13 Float32)
 
-(declare-fun result () Float32)
+(declare-const result Float32)
 
-(declare-fun a1 () Float32)
+(declare-const a1 Float32)
 
-(declare-fun result1 () Float32)
+(declare-const result1 Float32)
 
-(declare-fun b1 () Float32)
+(declare-const b1 Float32)
 
-(declare-fun result2 () Float32)
+(declare-const result2 Float32)
 
-(declare-fun approx1 () Float32)
+(declare-const approx1 Float32)
 
-(declare-fun result3 () Bool)
+(declare-const result3 Bool)
 
-(declare-fun approx2 () Float32)
+(declare-const approx2 Float32)
 
-(declare-fun result4 () Float32)
+(declare-const result4 Float32)
 
-(declare-fun approx3 () Float32)
+(declare-const approx3 Float32)
 
-(declare-fun result5 () Bool)
+(declare-const result5 Bool)
 
-(declare-fun approx4 () Float32)
+(declare-const approx4 Float32)
 
-(declare-fun approx5 () Float32)
+(declare-const approx5 Float32)
 
-(declare-fun approx6 () Float32)
+(declare-const approx6 Float32)
 
-(declare-fun approx7 () Float32)
+(declare-const approx7 Float32)
 
-(declare-fun result6 () Float32)
+(declare-const result6 Float32)
 
-(declare-fun c14b1 () Float32)
+(declare-const c14b1 Float32)
 
 ;; H
   (assert (= result a))

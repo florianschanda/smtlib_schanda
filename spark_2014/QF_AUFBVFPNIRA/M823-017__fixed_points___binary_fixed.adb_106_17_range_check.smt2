@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -72,7 +72,7 @@
 (define-fun is_minus_zero1 ((x Float64)) Bool (and (fp.isZero      x)
                                               (fp.isNegative  x)))
 
-(declare-fun max_int1 () Int)
+(declare-const max_int1 Int)
 
 (define-fun in_range2 ((x Real)) Bool (and
                                       (<= (- (* 9007199254740991.0 19958403095347198116563727130368385660674512604354575415025472424372118918689640657849579654926357010893424468441924952439724379883935936607391717982848314203200056729510856765175377214443629871826533567445439239933308104551208703888888552684480441575071209068757560416423584952303440099278848.0)) x)
@@ -81,7 +81,7 @@
 (define-fun in_int_range1 ((i Int)) Bool (and (<= (- max_int1) i)
                                          (<= i max_int1)))
 
-(declare-fun abstr1 () Real)
+(declare-const abstr1 Real)
 
 (define-fun no_overflow1 ((m RoundingMode) (x Real)) Bool (in_range2 abstr1))
 
@@ -127,7 +127,7 @@
 (define-fun mod1 ((x Int)
   (y Int)) Int (ite (< 0 y) (mod x y) (+ (mod x y) y)))
 
-(declare-fun abstr2 () Int)
+(declare-const abstr2 Int)
 
 (define-fun pos_div_relation ((res Int) (num Int)
   (den Int)) Bool (let ((exact abstr2))
@@ -135,7 +135,7 @@
                   (ite (= num (* exact den)) (= res exact)
                   (and (<= exact res) (<= res (+ exact 1)))))))
 
-(declare-fun abstr3 () Int)
+(declare-const abstr3 Int)
 
 (define-fun pos_div_relation_rna ((res Int) (num Int)
   (den Int)) Bool (let ((exact abstr3))
@@ -146,7 +146,7 @@
 
 (define-fun in_range5 ((x Int)) Bool (and (<= (- 2560) x) (<= x 2560)))
 
-(declare-fun abstr4 () Int)
+(declare-const abstr4 Int)
 
 (define-fun pos_div_relation1 ((res Int) (num Int)
   (den Int)) Bool (let ((exact abstr4))
@@ -154,7 +154,7 @@
                   (ite (= num (* exact den)) (= res exact)
                   (and (<= exact res) (<= res (+ exact 1)))))))
 
-(declare-fun abstr5 () Int)
+(declare-const abstr5 Int)
 
 (define-fun pos_div_relation_rna1 ((res Int) (num Int)
   (den Int)) Bool (let ((exact abstr5))
@@ -163,9 +163,9 @@
                   (ite (< (- num (* exact den)) (- (* (+ exact 1) den) num))
                   (= res exact) (= res (+ exact 1)))))))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (define-fun in_range6 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
@@ -175,7 +175,7 @@
                                       (or (= temp___is_init_138 true)
                                       (<= 0 10)) (in_range6 temp___expr_141)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (define-fun in_range7 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
@@ -185,9 +185,9 @@
                                       (or (= temp___is_init_144 true)
                                       (<= 0 10)) (in_range7 temp___expr_147)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
 (define-fun in_range8 ((x Float32)) Bool (and
                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
@@ -202,7 +202,7 @@
                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000010 #b01000000000000000000000)))
                                       (in_range8 temp___expr_153)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
 (define-fun in_range9 ((x Float32)) Bool (and
                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
@@ -217,61 +217,61 @@
                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000010 #b01000000000000000000000)))
                                       (in_range9 temp___expr_159)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
-(declare-fun y1 () Int)
+(declare-const y1 Int)
 
-(declare-fun y2 () Int)
+(declare-const y2 Int)
 
-(declare-fun y3 () Int)
+(declare-const y3 Int)
 
-(declare-fun z1 () Float32)
+(declare-const z1 Float32)
 
-(declare-fun z2 () Float32)
+(declare-const z2 Float32)
 
-(declare-fun z3 () Float32)
+(declare-const z3 Float32)
 
-(declare-fun o () Int)
+(declare-const o Int)
 
-(declare-fun o1 () Int)
+(declare-const o1 Int)
 
-(declare-fun o2 () Int)
+(declare-const o2 Int)
 
-(declare-fun o3 () Int)
+(declare-const o3 Int)
 
-(declare-fun o4 () Int)
+(declare-const o4 Int)
 
-(declare-fun o5 () Int)
+(declare-const o5 Int)
 
-(declare-fun result () Float32)
+(declare-const result Float32)
 
-(declare-fun z11 () Float32)
+(declare-const z11 Float32)
 
-(declare-fun result1 () Float32)
+(declare-const result1 Float32)
 
-(declare-fun z21 () Float32)
+(declare-const z21 Float32)
 
-(declare-fun result2 () Float32)
+(declare-const result2 Float32)
 
-(declare-fun z31 () Float32)
+(declare-const z31 Float32)
 
-(declare-fun result3 () Int)
+(declare-const result3 Int)
 
-(declare-fun y11 () Int)
+(declare-const y11 Int)
 
-(declare-fun result4 () Int)
+(declare-const result4 Int)
 
-(declare-fun y21 () Int)
+(declare-const y21 Int)
 
-(declare-fun result5 () Int)
+(declare-const result5 Int)
 
-(declare-fun y31 () Int)
+(declare-const y31 Int)
 
-(declare-fun result6 () Int)
+(declare-const result6 Int)
 
-(declare-fun y32 () Int)
+(declare-const y32 Int)
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range3 y1)))
@@ -339,7 +339,7 @@
 ;; H
   (assert (= y32 o5))
 
-(declare-fun abstr6 () Int)
+(declare-const abstr6 Int)
 
 (assert
 ;; WP_parameter_def

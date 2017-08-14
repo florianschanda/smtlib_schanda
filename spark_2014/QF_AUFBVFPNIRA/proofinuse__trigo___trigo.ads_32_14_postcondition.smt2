@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -67,33 +67,33 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun x () Float32)
+(declare-const x Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun trigo__tan__result () Float32)
+(declare-const trigo__tan__result Float32)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
-(declare-fun o3 () Float32)
+(declare-const o3 Float32)
 
-(declare-fun result () Float32)
+(declare-const result Float32)
 
-(declare-fun trigo__tan__result1 () Float32)
+(declare-const trigo__tan__result1 Float32)
 
-(declare-fun trigo__tan__result2 () Float32)
+(declare-const trigo__tan__result2 Float32)
 
-(declare-fun trigo__tan__result3 () Float32)
+(declare-const trigo__tan__result3 Float32)
 
-(declare-fun trigo__tan__result4 () Float32)
+(declare-const trigo__tan__result4 Float32)
 
-(declare-fun trigo__tan__result5 () Float32)
+(declare-const trigo__tan__result5 Float32)
 
-(declare-fun result1 () Float32)
+(declare-const result1 Float32)
 
 ;; H
   (assert (not (or (fp.isInfinite x) (fp.isNaN x))))
@@ -109,7 +109,7 @@
 ;; H
   (assert (= trigo__tan__result3 trigo__tan__result1))
 
-(declare-fun abstr1 () Float32)
+(declare-const abstr1 Float32)
 
 ;; H
   (assert
@@ -127,7 +127,7 @@
 ;; H
   (assert (= result1 trigo__tan__result4))
 
-(declare-fun abstr2 () Float32)
+(declare-const abstr2 Float32)
 
 (assert
 ;; WP_parameter_def

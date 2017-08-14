@@ -16,9 +16,9 @@
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -26,11 +26,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(declare-fun algorithm__gap_vectors__list__capacity__first__bit () Int)
+(declare-const algorithm__gap_vectors__list__capacity__first__bit Int)
 
-(declare-fun algorithm__gap_vectors__list__capacity__last__bit () Int)
+(declare-const algorithm__gap_vectors__list__capacity__last__bit Int)
 
-(declare-fun algorithm__gap_vectors__list__capacity__position () Int)
+(declare-const algorithm__gap_vectors__list__capacity__position Int)
 
 ;; algorithm__gap_vectors__list__capacity__first__bit_axiom
   (assert (<= 0 algorithm__gap_vectors__list__capacity__first__bit))
@@ -42,9 +42,9 @@
 ;; algorithm__gap_vectors__list__capacity__position_axiom
   (assert (<= 0 algorithm__gap_vectors__list__capacity__position))
 
-(declare-fun value__size1 () Int)
+(declare-const value__size1 Int)
 
-(declare-fun value__alignment1 () Int)
+(declare-const value__alignment1 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size1))
@@ -52,11 +52,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment1))
 
-(declare-fun algorithm__gap_vectors__cursor__node__first__bit () Int)
+(declare-const algorithm__gap_vectors__cursor__node__first__bit Int)
 
-(declare-fun algorithm__gap_vectors__cursor__node__last__bit () Int)
+(declare-const algorithm__gap_vectors__cursor__node__last__bit Int)
 
-(declare-fun algorithm__gap_vectors__cursor__node__position () Int)
+(declare-const algorithm__gap_vectors__cursor__node__position Int)
 
 ;; algorithm__gap_vectors__cursor__node__first__bit_axiom
   (assert (<= 0 algorithm__gap_vectors__cursor__node__first__bit))
@@ -68,7 +68,7 @@
 ;; algorithm__gap_vectors__cursor__node__position_axiom
   (assert (<= 0 algorithm__gap_vectors__cursor__node__position))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (define-fun dynamic_invariant ((temp___expr_324 Int)
   (temp___is_init_321 Bool) (temp___skip_constant_322 Bool)
@@ -77,9 +77,9 @@
                                       (<= 0 2147483647)) (in_range1
                                       temp___expr_324)))
 
-(declare-fun value__size2 () Int)
+(declare-const value__size2 Int)
 
-(declare-fun value__alignment2 () Int)
+(declare-const value__alignment2 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size2))
@@ -99,7 +99,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range2 ((x Real)) Bool (and
                                       (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -108,7 +108,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range2 abstr))
 
@@ -139,9 +139,9 @@
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
 
-(declare-fun value__size3 () Int)
+(declare-const value__size3 Int)
 
-(declare-fun value__alignment3 () Int)
+(declare-const value__alignment3 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size3))
@@ -149,11 +149,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment3))
 
-(declare-fun spaces__angles__angle__theta__first__bit () Int)
+(declare-const spaces__angles__angle__theta__first__bit Int)
 
-(declare-fun spaces__angles__angle__theta__last__bit () Int)
+(declare-const spaces__angles__angle__theta__last__bit Int)
 
-(declare-fun spaces__angles__angle__theta__position () Int)
+(declare-const spaces__angles__angle__theta__position Int)
 
 ;; spaces__angles__angle__theta__first__bit_axiom
   (assert (<= 0 spaces__angles__angle__theta__first__bit))
@@ -167,9 +167,9 @@
 
 (define-fun in_range4 ((x Int)) Bool (and (<= (- 1) x) (<= x 1)))
 
-(declare-fun value__size4 () Int)
+(declare-const value__size4 Int)
 
-(declare-fun value__alignment4 () Int)
+(declare-const value__alignment4 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size4))
@@ -177,11 +177,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment4))
 
-(declare-fun gaps__gap__bearing__first__bit () Int)
+(declare-const gaps__gap__bearing__first__bit Int)
 
-(declare-fun gaps__gap__bearing__last__bit () Int)
+(declare-const gaps__gap__bearing__last__bit Int)
 
-(declare-fun gaps__gap__bearing__position () Int)
+(declare-const gaps__gap__bearing__position Int)
 
 ;; gaps__gap__bearing__first__bit_axiom
   (assert (<= 0 gaps__gap__bearing__first__bit))
@@ -192,11 +192,11 @@
 ;; gaps__gap__bearing__position_axiom
   (assert (<= 0 gaps__gap__bearing__position))
 
-(declare-fun gaps__gap__distance__first__bit () Int)
+(declare-const gaps__gap__distance__first__bit Int)
 
-(declare-fun gaps__gap__distance__last__bit () Int)
+(declare-const gaps__gap__distance__last__bit Int)
 
-(declare-fun gaps__gap__distance__position () Int)
+(declare-const gaps__gap__distance__position Int)
 
 ;; gaps__gap__distance__first__bit_axiom
   (assert (<= 0 gaps__gap__distance__first__bit))
@@ -207,11 +207,11 @@
 ;; gaps__gap__distance__position_axiom
   (assert (<= 0 gaps__gap__distance__position))
 
-(declare-fun gaps__gap__idir__first__bit () Int)
+(declare-const gaps__gap__idir__first__bit Int)
 
-(declare-fun gaps__gap__idir__last__bit () Int)
+(declare-const gaps__gap__idir__last__bit Int)
 
-(declare-fun gaps__gap__idir__position () Int)
+(declare-const gaps__gap__idir__position Int)
 
 ;; gaps__gap__idir__first__bit_axiom
   (assert (<= 0 gaps__gap__idir__first__bit))
@@ -222,9 +222,9 @@
 ;; gaps__gap__idir__position_axiom
   (assert (<= 0 gaps__gap__idir__position))
 
-(declare-fun value__size5 () Int)
+(declare-const value__size5 Int)
 
-(declare-fun value__alignment5 () Int)
+(declare-const value__alignment5 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size5))
@@ -241,11 +241,11 @@
                                       (<= 1 2147483647)) (in_range5
                                       temp___expr_461)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (define-fun dynamic_invariant2 ((temp___expr_51 Float32)
   (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
@@ -277,9 +277,9 @@
                                       (<= 0 2147483647)) (in_range6
                                       temp___expr_442)))
 
-(declare-fun o () Int)
+(declare-const o Int)
 
-(declare-fun o1 () Bool)
+(declare-const o1 Bool)
 
 (assert
 ;; WP_parameter_def

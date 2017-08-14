@@ -34,7 +34,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range2 ((x Real)) Bool (and
                                       (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -43,7 +43,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range2 abstr))
 
@@ -70,9 +70,9 @@
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -80,11 +80,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(declare-fun step_function__delimiter_entry__delimiter__first__bit () Int)
+(declare-const step_function__delimiter_entry__delimiter__first__bit Int)
 
-(declare-fun step_function__delimiter_entry__delimiter__last__bit () Int)
+(declare-const step_function__delimiter_entry__delimiter__last__bit Int)
 
-(declare-fun step_function__delimiter_entry__delimiter__position () Int)
+(declare-const step_function__delimiter_entry__delimiter__position Int)
 
 ;; step_function__delimiter_entry__delimiter__first__bit_axiom
   (assert (<= 0 step_function__delimiter_entry__delimiter__first__bit))
@@ -96,11 +96,11 @@
 ;; step_function__delimiter_entry__delimiter__position_axiom
   (assert (<= 0 step_function__delimiter_entry__delimiter__position))
 
-(declare-fun step_function__delimiter_entry__value__first__bit () Int)
+(declare-const step_function__delimiter_entry__value__first__bit Int)
 
-(declare-fun step_function__delimiter_entry__value__last__bit () Int)
+(declare-const step_function__delimiter_entry__value__last__bit Int)
 
-(declare-fun step_function__delimiter_entry__value__position () Int)
+(declare-const step_function__delimiter_entry__value__position Int)
 
 ;; step_function__delimiter_entry__value__first__bit_axiom
   (assert (<= 0 step_function__delimiter_entry__value__first__bit))
@@ -112,11 +112,11 @@
 ;; step_function__delimiter_entry__value__position_axiom
   (assert (<= 0 step_function__delimiter_entry__value__position))
 
-(declare-fun value__size1 () Int)
+(declare-const value__size1 Int)
 
-(declare-fun value__component__size () Int)
+(declare-const value__component__size Int)
 
-(declare-fun value__alignment1 () Int)
+(declare-const value__alignment1 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size1))
@@ -127,9 +127,9 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment1))
 
-(declare-fun value__size2 () Int)
+(declare-const value__size2 Int)
 
-(declare-fun value__alignment2 () Int)
+(declare-const value__alignment2 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size2))
@@ -137,11 +137,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment2))
 
-(declare-fun step_function__step_function_t__number_of_delimiters__first__bit () Int)
+(declare-const step_function__step_function_t__number_of_delimiters__first__bit Int)
 
-(declare-fun step_function__step_function_t__number_of_delimiters__last__bit () Int)
+(declare-const step_function__step_function_t__number_of_delimiters__last__bit Int)
 
-(declare-fun step_function__step_function_t__number_of_delimiters__position () Int)
+(declare-const step_function__step_function_t__number_of_delimiters__position Int)
 
 ;; step_function__step_function_t__number_of_delimiters__first__bit_axiom
   (assert
@@ -156,11 +156,11 @@
   (assert
   (<= 0 step_function__step_function_t__number_of_delimiters__position))
 
-(declare-fun step_function__step_function_t__step__first__bit () Int)
+(declare-const step_function__step_function_t__step__first__bit Int)
 
-(declare-fun step_function__step_function_t__step__last__bit () Int)
+(declare-const step_function__step_function_t__step__last__bit Int)
 
-(declare-fun step_function__step_function_t__step__position () Int)
+(declare-const step_function__step_function_t__step__position Int)
 
 ;; step_function__step_function_t__step__first__bit_axiom
   (assert (<= 0 step_function__step_function_t__step__first__bit))
@@ -172,11 +172,11 @@
 ;; step_function__step_function_t__step__position_axiom
   (assert (<= 0 step_function__step_function_t__step__position))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (define-fun dynamic_invariant1 ((temp___expr_51 Float32)
   (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
@@ -192,31 +192,31 @@
                                       (<= 0 2147483647)) (in_range3
                                       temp___expr_142)))
 
-(declare-fun i () Int)
+(declare-const i Int)
 
-(declare-fun scan () Bool)
+(declare-const scan Bool)
 
-(declare-fun o () Int)
+(declare-const o Int)
 
-(declare-fun i1 () Int)
+(declare-const i1 Int)
 
-(declare-fun scan1 () Bool)
+(declare-const scan1 Bool)
 
-(declare-fun result () Int)
+(declare-const result Int)
 
-(declare-fun i2 () Int)
+(declare-const i2 Int)
 
-(declare-fun result1 () Bool)
+(declare-const result1 Bool)
 
-(declare-fun scan2 () Bool)
+(declare-const scan2 Bool)
 
-(declare-fun i3 () Int)
+(declare-const i3 Int)
 
-(declare-fun scan3 () Bool)
+(declare-const scan3 Bool)
 
-(declare-fun i4 () Int)
+(declare-const i4 Int)
 
-(declare-fun scan4 () Bool)
+(declare-const scan4 Bool)
 
 ;; H
   (assert (in_range1 i))

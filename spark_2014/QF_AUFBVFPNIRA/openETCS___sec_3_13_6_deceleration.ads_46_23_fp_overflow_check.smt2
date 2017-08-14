@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -87,9 +87,9 @@
 
 (define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -97,11 +97,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(declare-fun step_function__delimiter_entry__delimiter__first__bit () Int)
+(declare-const step_function__delimiter_entry__delimiter__first__bit Int)
 
-(declare-fun step_function__delimiter_entry__delimiter__last__bit () Int)
+(declare-const step_function__delimiter_entry__delimiter__last__bit Int)
 
-(declare-fun step_function__delimiter_entry__delimiter__position () Int)
+(declare-const step_function__delimiter_entry__delimiter__position Int)
 
 ;; step_function__delimiter_entry__delimiter__first__bit_axiom
   (assert (<= 0 step_function__delimiter_entry__delimiter__first__bit))
@@ -113,11 +113,11 @@
 ;; step_function__delimiter_entry__delimiter__position_axiom
   (assert (<= 0 step_function__delimiter_entry__delimiter__position))
 
-(declare-fun step_function__delimiter_entry__value__first__bit () Int)
+(declare-const step_function__delimiter_entry__value__first__bit Int)
 
-(declare-fun step_function__delimiter_entry__value__last__bit () Int)
+(declare-const step_function__delimiter_entry__value__last__bit Int)
 
-(declare-fun step_function__delimiter_entry__value__position () Int)
+(declare-const step_function__delimiter_entry__value__position Int)
 
 ;; step_function__delimiter_entry__value__first__bit_axiom
   (assert (<= 0 step_function__delimiter_entry__value__first__bit))
@@ -129,11 +129,11 @@
 ;; step_function__delimiter_entry__value__position_axiom
   (assert (<= 0 step_function__delimiter_entry__value__position))
 
-(declare-fun value__size1 () Int)
+(declare-const value__size1 Int)
 
-(declare-fun value__component__size () Int)
+(declare-const value__component__size Int)
 
-(declare-fun value__alignment1 () Int)
+(declare-const value__alignment1 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size1))
@@ -144,9 +144,9 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment1))
 
-(declare-fun value__size2 () Int)
+(declare-const value__size2 Int)
 
-(declare-fun value__alignment2 () Int)
+(declare-const value__alignment2 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size2))
@@ -154,11 +154,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment2))
 
-(declare-fun step_function__step_function_t__number_of_delimiters__first__bit () Int)
+(declare-const step_function__step_function_t__number_of_delimiters__first__bit Int)
 
-(declare-fun step_function__step_function_t__number_of_delimiters__last__bit () Int)
+(declare-const step_function__step_function_t__number_of_delimiters__last__bit Int)
 
-(declare-fun step_function__step_function_t__number_of_delimiters__position () Int)
+(declare-const step_function__step_function_t__number_of_delimiters__position Int)
 
 ;; step_function__step_function_t__number_of_delimiters__first__bit_axiom
   (assert
@@ -173,11 +173,11 @@
   (assert
   (<= 0 step_function__step_function_t__number_of_delimiters__position))
 
-(declare-fun step_function__step_function_t__step__first__bit () Int)
+(declare-const step_function__step_function_t__step__first__bit Int)
 
-(declare-fun step_function__step_function_t__step__last__bit () Int)
+(declare-const step_function__step_function_t__step__last__bit Int)
 
-(declare-fun step_function__step_function_t__step__position () Int)
+(declare-const step_function__step_function_t__step__position Int)
 
 ;; step_function__step_function_t__step__first__bit_axiom
   (assert (<= 0 step_function__step_function_t__step__first__bit))
@@ -189,9 +189,9 @@
 ;; step_function__step_function_t__step__position_axiom
   (assert (<= 0 step_function__step_function_t__step__position))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (define-fun dynamic_invariant3 ((temp___expr_169 Float32)
   (temp___is_init_166 Bool) (temp___skip_constant_167 Bool)
@@ -200,15 +200,15 @@
                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
                                       (in_range1 temp___expr_169)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun v () Float32)
+(declare-const v Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun d () Int)
+(declare-const d Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
 (define-fun dynamic_invariant4 ((temp___expr_157 Float32)
   (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
@@ -230,33 +230,33 @@
                                       (<= 0 2147483647)) (in_range4
                                       temp___expr_193)))
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
-(declare-fun o3 () Float32)
+(declare-const o3 Float32)
 
-(declare-fun o4 () Float32)
+(declare-const o4 Float32)
 
-(declare-fun o5 () Float32)
+(declare-const o5 Float32)
 
-(declare-fun o6 () Float32)
+(declare-const o6 Float32)
 
-(declare-fun o7 () Float32)
+(declare-const o7 Float32)
 
-(declare-fun o8 () Float32)
+(declare-const o8 Float32)
 
-(declare-fun o9 () Float32)
+(declare-const o9 Float32)
 
-(declare-fun o10 () Float32)
+(declare-const o10 Float32)
 
-(declare-fun o11 () Float32)
+(declare-const o11 Float32)
 
-(declare-fun o12 () Float32)
+(declare-const o12 Float32)
 
-(declare-fun o13 () Float32)
+(declare-const o13 Float32)
 
 ;; H
   (assert (not (or (fp.isInfinite v) (fp.isNaN v))))

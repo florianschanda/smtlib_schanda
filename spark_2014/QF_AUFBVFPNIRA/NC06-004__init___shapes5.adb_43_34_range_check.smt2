@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 9007199254740991.0 19958403095347198116563727130368385660674512604354575415025472424372118918689640657849579654926357010893424468441924952439724379883935936607391717982848314203200056729510856765175377214443629871826533567445439239933308104551208703888888552684480441575071209068757560416423584952303440099278848.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -83,9 +83,9 @@
                                          (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))))
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -93,11 +93,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(declare-fun shapes5__circle__center_x__first__bit () Int)
+(declare-const shapes5__circle__center_x__first__bit Int)
 
-(declare-fun shapes5__circle__center_x__last__bit () Int)
+(declare-const shapes5__circle__center_x__last__bit Int)
 
-(declare-fun shapes5__circle__center_x__position () Int)
+(declare-const shapes5__circle__center_x__position Int)
 
 ;; shapes5__circle__center_x__first__bit_axiom
   (assert (<= 0 shapes5__circle__center_x__first__bit))
@@ -109,11 +109,11 @@
 ;; shapes5__circle__center_x__position_axiom
   (assert (<= 0 shapes5__circle__center_x__position))
 
-(declare-fun shapes5__circle__center_y__first__bit () Int)
+(declare-const shapes5__circle__center_y__first__bit Int)
 
-(declare-fun shapes5__circle__center_y__last__bit () Int)
+(declare-const shapes5__circle__center_y__last__bit Int)
 
-(declare-fun shapes5__circle__center_y__position () Int)
+(declare-const shapes5__circle__center_y__position Int)
 
 ;; shapes5__circle__center_y__first__bit_axiom
   (assert (<= 0 shapes5__circle__center_y__first__bit))
@@ -125,11 +125,11 @@
 ;; shapes5__circle__center_y__position_axiom
   (assert (<= 0 shapes5__circle__center_y__position))
 
-(declare-fun shapes5__circle__radius__first__bit () Int)
+(declare-const shapes5__circle__radius__first__bit Int)
 
-(declare-fun shapes5__circle__radius__last__bit () Int)
+(declare-const shapes5__circle__radius__last__bit Int)
 
-(declare-fun shapes5__circle__radius__position () Int)
+(declare-const shapes5__circle__radius__position Int)
 
 ;; shapes5__circle__radius__first__bit_axiom
   (assert (<= 0 shapes5__circle__radius__first__bit))
@@ -141,17 +141,17 @@
 ;; shapes5__circle__radius__position_axiom
   (assert (<= 0 shapes5__circle__radius__position))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun x () Float64)
+(declare-const x Float64)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun y () Float64)
+(declare-const y Float64)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (define-fun in_range4 ((x1 Float64)) Bool (and
                                           (not (or (fp.isInfinite x1) (fp.isNaN x1)))
@@ -166,9 +166,9 @@
                                       (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) (fp #b0 #b10000000110 #b1001000000000000000000000000000000000000000000000000)))
                                       (in_range4 temp___expr_156)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
 (define-fun dynamic_invariant3 ((temp___expr_141 Float64)
   (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
@@ -177,19 +177,19 @@
                                       (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))
                                       (in_range3 temp___expr_141)))
 
-(declare-fun wild_man () Int)
+(declare-const wild_man Int)
 
-(declare-fun delta_x () Float64)
+(declare-const delta_x Float64)
 
-(declare-fun delta_y () Float64)
+(declare-const delta_y Float64)
 
-(declare-fun o () Float64)
+(declare-const o Float64)
 
-(declare-fun o1 () Float64)
+(declare-const o1 Float64)
 
-(declare-fun result () Float64)
+(declare-const result Float64)
 
-(declare-fun delta_x1 () Float64)
+(declare-const delta_x1 Float64)
 
 ;; H
   (assert (in_range2 x))

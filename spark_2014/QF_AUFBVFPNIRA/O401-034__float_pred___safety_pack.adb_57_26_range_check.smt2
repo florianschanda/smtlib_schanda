@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -70,15 +70,15 @@
                                        (<= (- 32768) 32767)) (in_range1
                                        temp___expr_1267)))
 
-(declare-fun value () Float32)
+(declare-const value Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun res () Int)
+(declare-const res Int)
 
-(declare-fun o () Int)
+(declare-const o Int)
 
 ;; H
   (assert (not (or (fp.isInfinite value) (fp.isNaN value))))
@@ -93,7 +93,7 @@
   (assert
   (not (fp.lt value (fp.neg (fp #b0 #b10001110 #b00000000000000000000000)))))
 
-(declare-fun abstr1 () Int)
+(declare-const abstr1 Int)
 
 (assert
 ;; WP_parameter_def

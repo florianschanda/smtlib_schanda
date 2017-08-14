@@ -10,22 +10,22 @@
 ;;; SMT-LIB2: real arithmetic
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 4294967295)))
 
-(declare-fun abstr () (_ BitVec 32))
+(declare-const abstr (_ BitVec 32))
 
-(declare-fun abstr1 () (_ BitVec 32))
+(declare-const abstr1 (_ BitVec 32))
 
-(declare-fun abstr2 () (_ BitVec 32))
+(declare-const abstr2 (_ BitVec 32))
 
-(declare-fun abstr3 () (_ BitVec 32))
+(declare-const abstr3 (_ BitVec 32))
 
-(declare-fun abstr4 () (_ BitVec 32))
+(declare-const abstr4 (_ BitVec 32))
 
 (define-fun nth_bv ((x (_ BitVec 32))
   (i (_ BitVec 32))) Bool (ite (not
                                (= (bvand (bvlshr x i) #x00000001) #x00000000))
                           true false))
 
-(declare-fun abstr5 () Bool)
+(declare-const abstr5 Bool)
 
 (define-fun eq_sub ((a (_ BitVec 32)) (b (_ BitVec 32)) (i Int)
   (n Int)) Bool abstr5)
@@ -48,7 +48,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -57,7 +57,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr6 () Real)
+(declare-const abstr6 Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr6))
 
@@ -82,9 +82,9 @@
   (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
                  (and (fp.isNegative  x) (< r 0.0))))
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -92,11 +92,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(declare-fun test_pack__pid_obj__desired__first__bit () Int)
+(declare-const test_pack__pid_obj__desired__first__bit Int)
 
-(declare-fun test_pack__pid_obj__desired__last__bit () Int)
+(declare-const test_pack__pid_obj__desired__last__bit Int)
 
-(declare-fun test_pack__pid_obj__desired__position () Int)
+(declare-const test_pack__pid_obj__desired__position Int)
 
 ;; test_pack__pid_obj__desired__first__bit_axiom
   (assert (<= 0 test_pack__pid_obj__desired__first__bit))
@@ -108,11 +108,11 @@
 ;; test_pack__pid_obj__desired__position_axiom
   (assert (<= 0 test_pack__pid_obj__desired__position))
 
-(declare-fun test_pack__pid_obj__error__first__bit () Int)
+(declare-const test_pack__pid_obj__error__first__bit Int)
 
-(declare-fun test_pack__pid_obj__error__last__bit () Int)
+(declare-const test_pack__pid_obj__error__last__bit Int)
 
-(declare-fun test_pack__pid_obj__error__position () Int)
+(declare-const test_pack__pid_obj__error__position Int)
 
 ;; test_pack__pid_obj__error__first__bit_axiom
   (assert (<= 0 test_pack__pid_obj__error__first__bit))
@@ -124,7 +124,7 @@
 ;; test_pack__pid_obj__error__position_axiom
   (assert (<= 0 test_pack__pid_obj__error__position))
 
-(declare-fun attr__ATTRIBUTE_MODULUS () (_ BitVec 32))
+(declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 32))
 
 (define-fun dynamic_invariant ((temp___expr_183 (_ BitVec 32))
   (temp___is_init_180 Bool) (temp___skip_constant_181 Bool)
@@ -137,7 +137,7 @@
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                       (not (or (fp.isInfinite temp___expr_189) (fp.isNaN temp___expr_189)))))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (define-fun dynamic_invariant2 ((temp___expr_51 Float32)
   (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
@@ -146,16 +146,16 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun abstr7 () Float32)
+(declare-const abstr7 Float32)
 
 ;; H
   (assert (and (= o abstr7) (not (or (fp.isInfinite o) (fp.isNaN o)))))
 
-(declare-fun abstr8 () Float32)
+(declare-const abstr8 Float32)
 
 ;; H
   (assert (and (= o1 abstr8) (not (or (fp.isInfinite o1) (fp.isNaN o1)))))

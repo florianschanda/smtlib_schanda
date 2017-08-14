@@ -10,21 +10,21 @@
 ;;; SMT-LIB2: real arithmetic
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 65535)))
 
-(declare-fun abstr () (_ BitVec 16))
+(declare-const abstr (_ BitVec 16))
 
-(declare-fun abstr1 () (_ BitVec 16))
+(declare-const abstr1 (_ BitVec 16))
 
-(declare-fun abstr2 () (_ BitVec 16))
+(declare-const abstr2 (_ BitVec 16))
 
-(declare-fun abstr3 () (_ BitVec 16))
+(declare-const abstr3 (_ BitVec 16))
 
-(declare-fun abstr4 () (_ BitVec 16))
+(declare-const abstr4 (_ BitVec 16))
 
 (define-fun nth_bv ((x (_ BitVec 16))
   (i (_ BitVec 16))) Bool (ite (not (= (bvand (bvlshr x i) #x0001) #x0000))
                           true false))
 
-(declare-fun abstr5 () Bool)
+(declare-const abstr5 Bool)
 
 (define-fun eq_sub ((a (_ BitVec 16)) (b (_ BitVec 16)) (i Int)
   (n Int)) Bool abstr5)
@@ -47,7 +47,7 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 9007199254740991.0 19958403095347198116563727130368385660674512604354575415025472424372118918689640657849579654926357010893424468441924952439724379883935936607391717982848314203200056729510856765175377214443629871826533567445439239933308104551208703888888552684480441575071209068757560416423584952303440099278848.0)) x)
@@ -56,7 +56,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr6 () Real)
+(declare-const abstr6 Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr6))
 
@@ -83,43 +83,43 @@
 
 (define-fun uint_in_range1 ((i Int)) Bool (and (<= 0 i) (<= i 255)))
 
-(declare-fun abstr7 () (_ BitVec 8))
+(declare-const abstr7 (_ BitVec 8))
 
-(declare-fun abstr8 () (_ BitVec 8))
+(declare-const abstr8 (_ BitVec 8))
 
-(declare-fun abstr9 () (_ BitVec 8))
+(declare-const abstr9 (_ BitVec 8))
 
-(declare-fun abstr10 () (_ BitVec 8))
+(declare-const abstr10 (_ BitVec 8))
 
-(declare-fun abstr11 () (_ BitVec 8))
+(declare-const abstr11 (_ BitVec 8))
 
 (define-fun nth_bv1 ((x (_ BitVec 8))
   (i (_ BitVec 8))) Bool (ite (not (= (bvand (bvlshr x i) #x01) #x00)) true
                          false))
 
-(declare-fun abstr12 () Bool)
+(declare-const abstr12 Bool)
 
 (define-fun eq_sub1 ((a (_ BitVec 8)) (b (_ BitVec 8)) (i Int)
   (n Int)) Bool abstr12)
 
 (define-fun uint_in_range2 ((i Int)) Bool (and (<= 0 i) (<= i 4294967295)))
 
-(declare-fun abstr13 () (_ BitVec 32))
+(declare-const abstr13 (_ BitVec 32))
 
-(declare-fun abstr14 () (_ BitVec 32))
+(declare-const abstr14 (_ BitVec 32))
 
-(declare-fun abstr15 () (_ BitVec 32))
+(declare-const abstr15 (_ BitVec 32))
 
-(declare-fun abstr16 () (_ BitVec 32))
+(declare-const abstr16 (_ BitVec 32))
 
-(declare-fun abstr17 () (_ BitVec 32))
+(declare-const abstr17 (_ BitVec 32))
 
 (define-fun nth_bv2 ((x (_ BitVec 32))
   (i (_ BitVec 32))) Bool (ite (not
                                (= (bvand (bvlshr x i) #x00000001) #x00000000))
                           true false))
 
-(declare-fun abstr18 () Bool)
+(declare-const abstr18 Bool)
 
 (define-fun eq_sub2 ((a (_ BitVec 32)) (b (_ BitVec 32)) (i Int)
   (n Int)) Bool abstr18)
@@ -127,22 +127,22 @@
 (define-fun uint_in_range3 ((i Int)) Bool (and (<= 0 i)
                                           (<= i 18446744073709551615)))
 
-(declare-fun abstr19 () (_ BitVec 64))
+(declare-const abstr19 (_ BitVec 64))
 
-(declare-fun abstr20 () (_ BitVec 64))
+(declare-const abstr20 (_ BitVec 64))
 
-(declare-fun abstr21 () (_ BitVec 64))
+(declare-const abstr21 (_ BitVec 64))
 
-(declare-fun abstr22 () (_ BitVec 64))
+(declare-const abstr22 (_ BitVec 64))
 
-(declare-fun abstr23 () (_ BitVec 64))
+(declare-const abstr23 (_ BitVec 64))
 
 (define-fun nth_bv3 ((x (_ BitVec 64))
   (i (_ BitVec 64))) Bool (ite (not
                                (= (bvand (bvlshr x i) #x0000000000000001) #x0000000000000000))
                           true false))
 
-(declare-fun abstr24 () Bool)
+(declare-const abstr24 Bool)
 
 (define-fun eq_sub3 ((a (_ BitVec 64)) (b (_ BitVec 64)) (i Int)
   (n Int)) Bool abstr24)
@@ -153,7 +153,7 @@
 
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
-(declare-fun attr__ATTRIBUTE_MODULUS () (_ BitVec 16))
+(declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 16))
 
 (define-fun dynamic_invariant ((temp___expr_165 (_ BitVec 16))
   (temp___is_init_162 Bool) (temp___skip_constant_163 Bool)
@@ -201,27 +201,27 @@
                                       (fp.leq (fp.neg (fp #b0 #b10000000101 #b0000000000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b0000000000000000000000000000000000000000000000000000)))
                                       (in_range4 temp___expr_219)))
 
-(declare-fun n () Int)
+(declare-const n Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun factor () Float64)
+(declare-const factor Float64)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun drag () Float64)
+(declare-const drag Float64)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun old_speed () Float64)
+(declare-const old_speed Float64)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun delta_speed () Float64)
+(declare-const delta_speed Float64)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
 (define-fun in_range5 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -233,32 +233,32 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range5 temp___expr_15)))
 
-(declare-fun n_bv () (_ BitVec 16))
+(declare-const n_bv (_ BitVec 16))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
 ;; delta_speed__def_axiom
   (assert
   (= delta_speed (fp.add RNE drag (fp.mul RNE (fp.mul RNE factor (fp #b0 #b10000000010 #b0011100111010010111100011010100111111011111001110111)) (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001)))))
 
-(declare-fun abstr25 () (_ BitVec 16))
+(declare-const abstr25 (_ BitVec 16))
 
 ;; n_bv__def_axiom
   (assert (= n_bv abstr25))
 
-(declare-fun new_speed () Float64)
+(declare-const new_speed Float64)
 
-(declare-fun o () Float64)
+(declare-const o Float64)
 
-(declare-fun o1 () Int)
+(declare-const o1 Int)
 
-(declare-fun result () Float64)
+(declare-const result Float64)
 
-(declare-fun new_speed1 () Float64)
+(declare-const new_speed1 Float64)
 
-(declare-fun new_speed2 () Float64)
+(declare-const new_speed2 Float64)
 
-(declare-fun new_speed3 () Float64)
+(declare-const new_speed3 Float64)
 
 ;; H
   (assert (in_range2 n))
@@ -278,7 +278,7 @@
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
   (not (or (fp.isInfinite new_speed) (fp.isNaN new_speed)))))
 
-(declare-fun abstr26 () Bool)
+(declare-const abstr26 Bool)
 
 ;; H
   (assert (and (< n 25000) (= abstr26 true)))
@@ -310,12 +310,12 @@
   delta_speed)
   (fp.leq delta_speed (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))
 
-(declare-fun abstr27 () Bool)
+(declare-const abstr27 Bool)
 
 ;; H
   (assert (= abstr27 true))
 
-(declare-fun abstr28 () Bool)
+(declare-const abstr28 Bool)
 
 ;; H
   (assert (= abstr28 true))
@@ -335,7 +335,7 @@
   (fp.eq (fp.sub RNE (fp.mul RNE ((_ to_fp 11 53) RNE (to_real n)) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp.mul RNE (fp.add RNE ((_ to_fp 11 53) RNE (to_real
   n)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)))))
 
-(declare-fun abstr29 () Float64)
+(declare-const abstr29 Float64)
 
 (assert
 ;; WP_parameter_def

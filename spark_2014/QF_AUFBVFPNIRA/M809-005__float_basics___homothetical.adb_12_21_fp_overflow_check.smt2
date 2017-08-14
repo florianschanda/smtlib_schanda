@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -67,51 +67,51 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun d () Float32)
+(declare-const d Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun kv () Float32)
+(declare-const kv Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun ka () Float32)
+(declare-const ka Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun homothetical__adjust2triangle__result () Float32)
+(declare-const homothetical__adjust2triangle__result Float32)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
-(declare-fun o3 () Float32)
+(declare-const o3 Float32)
 
-(declare-fun o4 () Float32)
+(declare-const o4 Float32)
 
-(declare-fun result () Bool)
+(declare-const result Bool)
 
-(declare-fun result1 () Float32)
+(declare-const result1 Float32)
 
-(declare-fun homothetical__adjust2triangle__result1 () Float32)
+(declare-const homothetical__adjust2triangle__result1 Float32)
 
-(declare-fun result2 () Float32)
+(declare-const result2 Float32)
 
-(declare-fun homothetical__adjust2triangle__result2 () Float32)
+(declare-const homothetical__adjust2triangle__result2 Float32)
 
-(declare-fun homothetical__adjust2triangle__result3 () Float32)
+(declare-const homothetical__adjust2triangle__result3 Float32)
 
-(declare-fun homothetical__adjust2triangle__result4 () Float32)
+(declare-const homothetical__adjust2triangle__result4 Float32)
 
-(declare-fun homothetical__adjust2triangle__result5 () Float32)
+(declare-const homothetical__adjust2triangle__result5 Float32)
 
-(declare-fun homothetical__adjust2triangle__result6 () Float32)
+(declare-const homothetical__adjust2triangle__result6 Float32)
 
-(declare-fun homothetical__adjust2triangle__result7 () Float32)
+(declare-const homothetical__adjust2triangle__result7 Float32)
 
-(declare-fun homothetical__adjust2triangle__result8 () Float32)
+(declare-const homothetical__adjust2triangle__result8 Float32)
 
 ;; H
   (assert (not (or (fp.isInfinite d) (fp.isNaN d))))

@@ -10,21 +10,21 @@
 ;;; SMT-LIB2: real arithmetic
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 65535)))
 
-(declare-fun abstr () (_ BitVec 16))
+(declare-const abstr (_ BitVec 16))
 
-(declare-fun abstr1 () (_ BitVec 16))
+(declare-const abstr1 (_ BitVec 16))
 
-(declare-fun abstr2 () (_ BitVec 16))
+(declare-const abstr2 (_ BitVec 16))
 
-(declare-fun abstr3 () (_ BitVec 16))
+(declare-const abstr3 (_ BitVec 16))
 
-(declare-fun abstr4 () (_ BitVec 16))
+(declare-const abstr4 (_ BitVec 16))
 
 (define-fun nth_bv ((x (_ BitVec 16))
   (i (_ BitVec 16))) Bool (ite (not (= (bvand (bvlshr x i) #x0001) #x0000))
                           true false))
 
-(declare-fun abstr5 () Bool)
+(declare-const abstr5 Bool)
 
 (define-fun eq_sub ((a (_ BitVec 16)) (b (_ BitVec 16)) (i Int)
   (n Int)) Bool abstr5)
@@ -47,7 +47,7 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 9007199254740991.0 19958403095347198116563727130368385660674512604354575415025472424372118918689640657849579654926357010893424468441924952439724379883935936607391717982848314203200056729510856765175377214443629871826533567445439239933308104551208703888888552684480441575071209068757560416423584952303440099278848.0)) x)
@@ -56,7 +56,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr6 () Real)
+(declare-const abstr6 Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr6))
 
@@ -87,11 +87,11 @@
 
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
-(declare-fun attr__ATTRIBUTE_MODULUS () (_ BitVec 16))
+(declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 16))
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -99,11 +99,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(declare-fun logger__log_entry__ngrotations__first__bit () Int)
+(declare-const logger__log_entry__ngrotations__first__bit Int)
 
-(declare-fun logger__log_entry__ngrotations__last__bit () Int)
+(declare-const logger__log_entry__ngrotations__last__bit Int)
 
-(declare-fun logger__log_entry__ngrotations__position () Int)
+(declare-const logger__log_entry__ngrotations__position Int)
 
 ;; logger__log_entry__ngrotations__first__bit_axiom
   (assert (<= 0 logger__log_entry__ngrotations__first__bit))
@@ -115,11 +115,11 @@
 ;; logger__log_entry__ngrotations__position_axiom
   (assert (<= 0 logger__log_entry__ngrotations__position))
 
-(declare-fun logger__log_entry__ngclicktime__first__bit () Int)
+(declare-const logger__log_entry__ngclicktime__first__bit Int)
 
-(declare-fun logger__log_entry__ngclicktime__last__bit () Int)
+(declare-const logger__log_entry__ngclicktime__last__bit Int)
 
-(declare-fun logger__log_entry__ngclicktime__position () Int)
+(declare-const logger__log_entry__ngclicktime__position Int)
 
 ;; logger__log_entry__ngclicktime__first__bit_axiom
   (assert (<= 0 logger__log_entry__ngclicktime__first__bit))
@@ -131,11 +131,11 @@
 ;; logger__log_entry__ngclicktime__position_axiom
   (assert (<= 0 logger__log_entry__ngclicktime__position))
 
-(declare-fun logger__log_entry__millisecs__first__bit () Int)
+(declare-const logger__log_entry__millisecs__first__bit Int)
 
-(declare-fun logger__log_entry__millisecs__last__bit () Int)
+(declare-const logger__log_entry__millisecs__last__bit Int)
 
-(declare-fun logger__log_entry__millisecs__position () Int)
+(declare-const logger__log_entry__millisecs__position Int)
 
 ;; logger__log_entry__millisecs__first__bit_axiom
   (assert (<= 0 logger__log_entry__millisecs__first__bit))
@@ -147,11 +147,11 @@
 ;; logger__log_entry__millisecs__position_axiom
   (assert (<= 0 logger__log_entry__millisecs__position))
 
-(declare-fun logger__log_entry__estimatedgroundvelocity__first__bit () Int)
+(declare-const logger__log_entry__estimatedgroundvelocity__first__bit Int)
 
-(declare-fun logger__log_entry__estimatedgroundvelocity__last__bit () Int)
+(declare-const logger__log_entry__estimatedgroundvelocity__last__bit Int)
 
-(declare-fun logger__log_entry__estimatedgroundvelocity__position () Int)
+(declare-const logger__log_entry__estimatedgroundvelocity__position Int)
 
 ;; logger__log_entry__estimatedgroundvelocity__first__bit_axiom
   (assert (<= 0 logger__log_entry__estimatedgroundvelocity__first__bit))
@@ -163,11 +163,11 @@
 ;; logger__log_entry__estimatedgroundvelocity__position_axiom
   (assert (<= 0 logger__log_entry__estimatedgroundvelocity__position))
 
-(declare-fun logger__log_entry__estimatedgroundvelocityisavailable__first__bit () Int)
+(declare-const logger__log_entry__estimatedgroundvelocityisavailable__first__bit Int)
 
-(declare-fun logger__log_entry__estimatedgroundvelocityisavailable__last__bit () Int)
+(declare-const logger__log_entry__estimatedgroundvelocityisavailable__last__bit Int)
 
-(declare-fun logger__log_entry__estimatedgroundvelocityisavailable__position () Int)
+(declare-const logger__log_entry__estimatedgroundvelocityisavailable__position Int)
 
 ;; logger__log_entry__estimatedgroundvelocityisavailable__first__bit_axiom
   (assert
@@ -182,9 +182,9 @@
   (assert
   (<= 0 logger__log_entry__estimatedgroundvelocityisavailable__position))
 
-(declare-fun abstr7 () (_ BitVec 16))
+(declare-const abstr7 (_ BitVec 16))
 
-(declare-fun abstr8 () (_ BitVec 16))
+(declare-const abstr8 (_ BitVec 16))
 
 (define-fun in_range2 ((x (_ BitVec 16))) Bool (and (bvule abstr8 x)
                                                (bvule x abstr7)))
@@ -205,11 +205,11 @@
                              (=> (bvule low high)
                              (and (in_range2 low) (in_range2 high))))))
 
-(declare-fun value__size1 () Int)
+(declare-const value__size1 Int)
 
-(declare-fun value__component__size () Int)
+(declare-const value__component__size Int)
 
-(declare-fun value__alignment1 () Int)
+(declare-const value__alignment1 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size1))
@@ -225,11 +225,11 @@
 
 (define-fun in_range_int1 ((x Int)) Bool (and (<= 0 x) (<= x 599)))
 
-(declare-fun value__size2 () Int)
+(declare-const value__size2 Int)
 
-(declare-fun value__component__size1 () Int)
+(declare-const value__component__size1 Int)
 
-(declare-fun value__alignment2 () Int)
+(declare-const value__alignment2 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size2))
@@ -240,9 +240,9 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment2))
 
-(declare-fun value__size3 () Int)
+(declare-const value__size3 Int)
 
-(declare-fun value__alignment3 () Int)
+(declare-const value__alignment3 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size3))
@@ -250,11 +250,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment3))
 
-(declare-fun logger__log_database__data__first__bit () Int)
+(declare-const logger__log_database__data__first__bit Int)
 
-(declare-fun logger__log_database__data__last__bit () Int)
+(declare-const logger__log_database__data__last__bit Int)
 
-(declare-fun logger__log_database__data__position () Int)
+(declare-const logger__log_database__data__position Int)
 
 ;; logger__log_database__data__first__bit_axiom
   (assert (<= 0 logger__log_database__data__first__bit))
@@ -266,11 +266,11 @@
 ;; logger__log_database__data__position_axiom
   (assert (<= 0 logger__log_database__data__position))
 
-(declare-fun logger__log_database__first__first__bit () Int)
+(declare-const logger__log_database__first__first__bit Int)
 
-(declare-fun logger__log_database__first__last__bit () Int)
+(declare-const logger__log_database__first__last__bit Int)
 
-(declare-fun logger__log_database__first__position () Int)
+(declare-const logger__log_database__first__position Int)
 
 ;; logger__log_database__first__first__bit_axiom
   (assert (<= 0 logger__log_database__first__first__bit))
@@ -282,11 +282,11 @@
 ;; logger__log_database__first__position_axiom
   (assert (<= 0 logger__log_database__first__position))
 
-(declare-fun logger__log_database__last__first__bit () Int)
+(declare-const logger__log_database__last__first__bit Int)
 
-(declare-fun logger__log_database__last__last__bit () Int)
+(declare-const logger__log_database__last__last__bit Int)
 
-(declare-fun logger__log_database__last__position () Int)
+(declare-const logger__log_database__last__position Int)
 
 ;; logger__log_database__last__first__bit_axiom
   (assert (<= 0 logger__log_database__last__first__bit))
@@ -298,11 +298,11 @@
 ;; logger__log_database__last__position_axiom
   (assert (<= 0 logger__log_database__last__position))
 
-(declare-fun logger__log_database__empty__first__bit () Int)
+(declare-const logger__log_database__empty__first__bit Int)
 
-(declare-fun logger__log_database__empty__last__bit () Int)
+(declare-const logger__log_database__empty__last__bit Int)
 
-(declare-fun logger__log_database__empty__position () Int)
+(declare-const logger__log_database__empty__position Int)
 
 ;; logger__log_database__empty__first__bit_axiom
   (assert (<= 0 logger__log_database__empty__first__bit))
@@ -314,7 +314,7 @@
 ;; logger__log_database__empty__position_axiom
   (assert (<= 0 logger__log_database__empty__position))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
@@ -336,9 +336,9 @@
   (temp___is_init_163 Bool) (temp___skip_constant_164 Bool)
   (temp___do_toplevel_165 Bool)) Bool true)
 
-(declare-fun tmp () (_ BitVec 16))
+(declare-const tmp (_ BitVec 16))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (define-fun dynamic_property1 ((first_int (_ BitVec 16))
   (last_int (_ BitVec 16))
@@ -356,11 +356,11 @@
                              low) (dynamic_property1 range_first range_last
                              high))))))
 
-(declare-fun value__size4 () Int)
+(declare-const value__size4 Int)
 
-(declare-fun value__component__size2 () Int)
+(declare-const value__component__size2 Int)
 
-(declare-fun value__alignment4 () Int)
+(declare-const value__alignment4 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size4))
@@ -371,15 +371,15 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment4))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun r4b () (_ BitVec 16))
+(declare-const r4b (_ BitVec 16))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun r5b () (_ BitVec 16))
+(declare-const r5b (_ BitVec 16))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
 (define-fun dynamic_property3 ((first_int (_ BitVec 16))
   (last_int (_ BitVec 16))
@@ -397,11 +397,11 @@
                              low) (dynamic_property3 range_first range_last
                              high))))))
 
-(declare-fun value__size5 () Int)
+(declare-const value__size5 Int)
 
-(declare-fun value__component__size3 () Int)
+(declare-const value__component__size3 Int)
 
-(declare-fun value__alignment5 () Int)
+(declare-const value__alignment5 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size5))
@@ -412,13 +412,13 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment5))
 
-(declare-fun r8b () (_ BitVec 16))
+(declare-const r8b (_ BitVec 16))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-fun r11b () (_ BitVec 16))
+(declare-const r11b (_ BitVec 16))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
 (define-fun dynamic_property5 ((first_int (_ BitVec 16))
   (last_int (_ BitVec 16))
@@ -436,11 +436,11 @@
                              low) (dynamic_property5 range_first range_last
                              high))))))
 
-(declare-fun value__size6 () Int)
+(declare-const value__size6 Int)
 
-(declare-fun value__component__size4 () Int)
+(declare-const value__component__size4 Int)
 
-(declare-fun value__alignment6 () Int)
+(declare-const value__alignment6 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size6))
@@ -467,11 +467,11 @@
                              low) (dynamic_property7 range_first range_last
                              high))))))
 
-(declare-fun value__size7 () Int)
+(declare-const value__size7 Int)
 
-(declare-fun value__component__size5 () Int)
+(declare-const value__component__size5 Int)
 
-(declare-fun value__alignment7 () Int)
+(declare-const value__alignment7 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size7))
@@ -482,37 +482,37 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment7))
 
-(declare-fun event_log__split_fields () Bool)
+(declare-const event_log__split_fields Bool)
 
-(declare-fun o () Bool)
+(declare-const o Bool)
 
-(declare-fun o1 () Int)
+(declare-const o1 Int)
 
-(declare-fun o2 () Int)
+(declare-const o2 Int)
 
-(declare-fun o3 () Int)
+(declare-const o3 Int)
 
-(declare-fun logger__log_content__B_1__tmp__assume () (_ BitVec 16))
+(declare-const logger__log_content__B_1__tmp__assume (_ BitVec 16))
 
-(declare-fun o4 () Int)
+(declare-const o4 Int)
 
-(declare-fun o5 () Int)
+(declare-const o5 Int)
 
-(declare-fun o6 () Int)
+(declare-const o6 Int)
 
-(declare-fun o7 () Int)
+(declare-const o7 Int)
 
-(declare-fun o8 () Int)
+(declare-const o8 Int)
 
-(declare-fun o9 () Int)
+(declare-const o9 Int)
 
-(declare-fun o10 () (_ BitVec 16))
+(declare-const o10 (_ BitVec 16))
 
-(declare-fun o11 () Int)
+(declare-const o11 Int)
 
-(declare-fun o12 () Int)
+(declare-const o12 Int)
 
-(declare-fun o13 () Int)
+(declare-const o13 Int)
 
 ;; H
   (assert (not (= event_log__split_fields true)))
@@ -523,7 +523,7 @@
 ;; H
   (assert (and (= o3 o2) (in_range_int o2)))
 
-(declare-fun abstr9 () (_ BitVec 16))
+(declare-const abstr9 (_ BitVec 16))
 
 ;; H
   (assert (= logger__log_content__B_1__tmp__assume abstr9))

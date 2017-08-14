@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -70,9 +70,9 @@
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -80,11 +80,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(declare-fun step_function__delimiter_entry__delimiter__first__bit () Int)
+(declare-const step_function__delimiter_entry__delimiter__first__bit Int)
 
-(declare-fun step_function__delimiter_entry__delimiter__last__bit () Int)
+(declare-const step_function__delimiter_entry__delimiter__last__bit Int)
 
-(declare-fun step_function__delimiter_entry__delimiter__position () Int)
+(declare-const step_function__delimiter_entry__delimiter__position Int)
 
 ;; step_function__delimiter_entry__delimiter__first__bit_axiom
   (assert (<= 0 step_function__delimiter_entry__delimiter__first__bit))
@@ -96,11 +96,11 @@
 ;; step_function__delimiter_entry__delimiter__position_axiom
   (assert (<= 0 step_function__delimiter_entry__delimiter__position))
 
-(declare-fun step_function__delimiter_entry__value__first__bit () Int)
+(declare-const step_function__delimiter_entry__value__first__bit Int)
 
-(declare-fun step_function__delimiter_entry__value__last__bit () Int)
+(declare-const step_function__delimiter_entry__value__last__bit Int)
 
-(declare-fun step_function__delimiter_entry__value__position () Int)
+(declare-const step_function__delimiter_entry__value__position Int)
 
 ;; step_function__delimiter_entry__value__first__bit_axiom
   (assert (<= 0 step_function__delimiter_entry__value__first__bit))
@@ -112,11 +112,11 @@
 ;; step_function__delimiter_entry__value__position_axiom
   (assert (<= 0 step_function__delimiter_entry__value__position))
 
-(declare-fun value__size1 () Int)
+(declare-const value__size1 Int)
 
-(declare-fun value__component__size () Int)
+(declare-const value__component__size Int)
 
-(declare-fun value__alignment1 () Int)
+(declare-const value__alignment1 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size1))
@@ -127,9 +127,9 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment1))
 
-(declare-fun value__size2 () Int)
+(declare-const value__size2 Int)
 
-(declare-fun value__alignment2 () Int)
+(declare-const value__alignment2 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size2))
@@ -137,11 +137,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment2))
 
-(declare-fun step_function__step_function_t__number_of_delimiters__first__bit () Int)
+(declare-const step_function__step_function_t__number_of_delimiters__first__bit Int)
 
-(declare-fun step_function__step_function_t__number_of_delimiters__last__bit () Int)
+(declare-const step_function__step_function_t__number_of_delimiters__last__bit Int)
 
-(declare-fun step_function__step_function_t__number_of_delimiters__position () Int)
+(declare-const step_function__step_function_t__number_of_delimiters__position Int)
 
 ;; step_function__step_function_t__number_of_delimiters__first__bit_axiom
   (assert
@@ -156,11 +156,11 @@
   (assert
   (<= 0 step_function__step_function_t__number_of_delimiters__position))
 
-(declare-fun step_function__step_function_t__step__first__bit () Int)
+(declare-const step_function__step_function_t__step__first__bit Int)
 
-(declare-fun step_function__step_function_t__step__last__bit () Int)
+(declare-const step_function__step_function_t__step__last__bit Int)
 
-(declare-fun step_function__step_function_t__step__position () Int)
+(declare-const step_function__step_function_t__step__position Int)
 
 ;; step_function__step_function_t__step__first__bit_axiom
   (assert (<= 0 step_function__step_function_t__step__first__bit))
@@ -186,241 +186,241 @@
                                       (<= 0 2147483647)) (in_range3
                                       temp___expr_142)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
-(declare-fun i1 () Int)
+(declare-const i1 Int)
 
-(declare-fun i2 () Int)
+(declare-const i2 Int)
 
-(declare-fun im () Int)
+(declare-const im Int)
 
-(declare-fun scan_sfun1 () Bool)
+(declare-const scan_sfun1 Bool)
 
-(declare-fun scan_sfun2 () Bool)
+(declare-const scan_sfun2 Bool)
 
-(declare-fun temp___389 () Bool)
+(declare-const temp___389 Bool)
 
-(declare-fun temp___386 () Bool)
+(declare-const temp___386 Bool)
 
-(declare-fun temp___385 () Int)
+(declare-const temp___385 Int)
 
-(declare-fun temp___384 () Int)
+(declare-const temp___384 Int)
 
-(declare-fun temp___383 () Int)
+(declare-const temp___383 Int)
 
-(declare-fun i () Int)
+(declare-const i Int)
 
-(declare-fun o () Int)
+(declare-const o Int)
 
-(declare-fun o1 () Int)
+(declare-const o1 Int)
 
-(declare-fun i3 () Int)
+(declare-const i3 Int)
 
-(declare-fun j () Int)
+(declare-const j Int)
 
-(declare-fun o2 () Int)
+(declare-const o2 Int)
 
-(declare-fun o3 () Int)
+(declare-const o3 Int)
 
-(declare-fun i4 () Int)
+(declare-const i4 Int)
 
-(declare-fun j1 () Int)
+(declare-const j1 Int)
 
-(declare-fun o4 () Int)
+(declare-const o4 Int)
 
-(declare-fun o5 () Int)
+(declare-const o5 Int)
 
-(declare-fun i5 () Int)
+(declare-const i5 Int)
 
-(declare-fun j2 () Int)
+(declare-const j2 Int)
 
-(declare-fun o6 () Int)
+(declare-const o6 Int)
 
-(declare-fun o7 () Int)
+(declare-const o7 Int)
 
-(declare-fun i6 () Int)
+(declare-const i6 Int)
 
-(declare-fun j3 () Int)
+(declare-const j3 Int)
 
-(declare-fun o8 () Int)
+(declare-const o8 Int)
 
-(declare-fun o9 () Int)
+(declare-const o9 Int)
 
-(declare-fun i7 () Int)
+(declare-const i7 Int)
 
-(declare-fun o10 () Int)
+(declare-const o10 Int)
 
-(declare-fun o11 () Int)
+(declare-const o11 Int)
 
-(declare-fun o12 () Float32)
+(declare-const o12 Float32)
 
-(declare-fun o13 () Int)
+(declare-const o13 Int)
 
-(declare-fun o14 () Int)
+(declare-const o14 Int)
 
-(declare-fun o15 () Float32)
+(declare-const o15 Float32)
 
-(declare-fun o16 () Float32)
+(declare-const o16 Float32)
 
-(declare-fun o17 () Float32)
+(declare-const o17 Float32)
 
-(declare-fun o18 () Float32)
+(declare-const o18 Float32)
 
-(declare-fun o19 () Float32)
+(declare-const o19 Float32)
 
-(declare-fun o20 () Float32)
+(declare-const o20 Float32)
 
-(declare-fun o21 () Float32)
+(declare-const o21 Float32)
 
-(declare-fun o22 () Float32)
+(declare-const o22 Float32)
 
-(declare-fun o23 () Float32)
+(declare-const o23 Float32)
 
-(declare-fun o24 () Float32)
+(declare-const o24 Float32)
 
-(declare-fun o25 () Float32)
+(declare-const o25 Float32)
 
-(declare-fun o26 () Float32)
+(declare-const o26 Float32)
 
-(declare-fun o27 () Float32)
+(declare-const o27 Float32)
 
-(declare-fun o28 () Float32)
+(declare-const o28 Float32)
 
-(declare-fun o29 () Float32)
+(declare-const o29 Float32)
 
-(declare-fun o30 () Float32)
+(declare-const o30 Float32)
 
-(declare-fun o31 () Float32)
+(declare-const o31 Float32)
 
-(declare-fun o32 () Int)
+(declare-const o32 Int)
 
-(declare-fun i8 () Int)
+(declare-const i8 Int)
 
-(declare-fun j4 () Int)
+(declare-const j4 Int)
 
-(declare-fun o33 () Int)
+(declare-const o33 Int)
 
-(declare-fun o34 () Int)
+(declare-const o34 Int)
 
-(declare-fun i9 () Int)
+(declare-const i9 Int)
 
-(declare-fun j5 () Int)
+(declare-const j5 Int)
 
-(declare-fun o35 () Int)
+(declare-const o35 Int)
 
-(declare-fun o36 () Int)
+(declare-const o36 Int)
 
-(declare-fun o37 () Bool)
+(declare-const o37 Bool)
 
-(declare-fun i10 () Int)
+(declare-const i10 Int)
 
-(declare-fun o38 () Int)
+(declare-const o38 Int)
 
-(declare-fun o39 () Int)
+(declare-const o39 Int)
 
-(declare-fun o40 () Float32)
+(declare-const o40 Float32)
 
-(declare-fun o41 () Int)
+(declare-const o41 Int)
 
-(declare-fun o42 () Int)
+(declare-const o42 Int)
 
-(declare-fun o43 () Float32)
+(declare-const o43 Float32)
 
-(declare-fun o44 () Float32)
+(declare-const o44 Float32)
 
-(declare-fun o45 () Bool)
+(declare-const o45 Bool)
 
-(declare-fun i11 () Int)
+(declare-const i11 Int)
 
-(declare-fun i21 () Int)
+(declare-const i21 Int)
 
-(declare-fun im1 () Int)
+(declare-const im1 Int)
 
-(declare-fun scan_sfun11 () Bool)
+(declare-const scan_sfun11 Bool)
 
-(declare-fun scan_sfun21 () Bool)
+(declare-const scan_sfun21 Bool)
 
-(declare-fun i12 () Int)
+(declare-const i12 Int)
 
-(declare-fun i22 () Int)
+(declare-const i22 Int)
 
-(declare-fun im2 () Int)
+(declare-const im2 Int)
 
-(declare-fun scan_sfun12 () Bool)
+(declare-const scan_sfun12 Bool)
 
-(declare-fun scan_sfun22 () Bool)
+(declare-const scan_sfun22 Bool)
 
-(declare-fun i13 () Int)
+(declare-const i13 Int)
 
-(declare-fun scan_sfun13 () Bool)
+(declare-const scan_sfun13 Bool)
 
-(declare-fun i23 () Int)
+(declare-const i23 Int)
 
-(declare-fun scan_sfun23 () Bool)
+(declare-const scan_sfun23 Bool)
 
-(declare-fun i14 () Int)
+(declare-const i14 Int)
 
-(declare-fun scan_sfun14 () Bool)
+(declare-const scan_sfun14 Bool)
 
-(declare-fun i24 () Int)
+(declare-const i24 Int)
 
-(declare-fun scan_sfun24 () Bool)
+(declare-const scan_sfun24 Bool)
 
-(declare-fun i15 () Int)
+(declare-const i15 Int)
 
-(declare-fun scan_sfun15 () Bool)
+(declare-const scan_sfun15 Bool)
 
-(declare-fun i25 () Int)
+(declare-const i25 Int)
 
-(declare-fun scan_sfun25 () Bool)
+(declare-const scan_sfun25 Bool)
 
-(declare-fun im3 () Int)
+(declare-const im3 Int)
 
-(declare-fun im4 () Int)
+(declare-const im4 Int)
 
-(declare-fun i16 () Int)
+(declare-const i16 Int)
 
-(declare-fun i26 () Int)
+(declare-const i26 Int)
 
-(declare-fun im5 () Int)
+(declare-const im5 Int)
 
-(declare-fun scan_sfun16 () Bool)
+(declare-const scan_sfun16 Bool)
 
-(declare-fun scan_sfun26 () Bool)
+(declare-const scan_sfun26 Bool)
 
-(declare-fun i17 () Int)
+(declare-const i17 Int)
 
-(declare-fun i27 () Int)
+(declare-const i27 Int)
 
-(declare-fun im6 () Int)
+(declare-const im6 Int)
 
-(declare-fun scan_sfun17 () Bool)
+(declare-const scan_sfun17 Bool)
 
-(declare-fun scan_sfun27 () Bool)
+(declare-const scan_sfun27 Bool)
 
-(declare-fun i18 () Int)
+(declare-const i18 Int)
 
-(declare-fun i28 () Int)
+(declare-const i28 Int)
 
-(declare-fun im7 () Int)
+(declare-const im7 Int)
 
-(declare-fun scan_sfun18 () Bool)
+(declare-const scan_sfun18 Bool)
 
-(declare-fun scan_sfun28 () Bool)
+(declare-const scan_sfun28 Bool)
 
 ;; H
   (assert (= i11 0))
@@ -473,7 +473,7 @@
   (ite (and (and (< 0 im2) (= scan_sfun12 true)) (= scan_sfun22 true))
   (< im2 (+ i12 i22)) (<= im2 (+ i12 i22))))
 
-(declare-fun abstr1 () Float32)
+(declare-const abstr1 Float32)
 
 ;; H
   (assert
@@ -493,7 +493,7 @@
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (= scan_sfun12 true) (= i25 i22))))
 
-(declare-fun abstr2 () Float32)
+(declare-const abstr2 Float32)
 
 ;; H
   (assert
@@ -531,7 +531,7 @@
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true))) (= i13 i15)))
 
-(declare-fun abstr3 () Bool)
+(declare-const abstr3 Bool)
 
 ;; H
   (assert (= abstr3 true))

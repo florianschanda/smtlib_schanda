@@ -23,7 +23,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -32,7 +32,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -105,9 +105,9 @@
                                       (or (= temp___is_init_475 true)
                                       (<= 2 16)) (in_range5 temp___expr_478)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (define-fun in_range6 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -128,350 +128,350 @@
                                       (<= 65 90)) (in_range7
                                       temp___expr_529)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS8 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS9 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS9 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS10 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS10 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS11 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS11 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS12 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS12 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS13 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS13 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS14 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS14 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS15 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS15 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS16 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS16 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS17 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS17 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS18 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS18 Int)
 
-(declare-fun tolerance () Float32)
+(declare-const tolerance Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS19 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS19 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS20 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS20 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS21 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS21 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS22 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS22 Int)
 
-(declare-fun r4b () Int)
+(declare-const r4b Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS23 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS23 Int)
 
-(declare-fun r5b () Int)
+(declare-const r5b Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS24 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS24 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS25 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS25 Int)
 
-(declare-fun r7b () Int)
+(declare-const r7b Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS26 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS26 Int)
 
-(declare-fun r8b () Int)
+(declare-const r8b Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS27 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS27 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS28 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS28 Int)
 
-(declare-fun c10b () Int)
+(declare-const c10b Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS29 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS29 Int)
 
 ;; tolerance__def_axiom
   (assert (= tolerance (fp #b0 #b01110001 #b10100011011011100010111)))
 
-(declare-fun default_width () Int)
+(declare-const default_width Int)
 
-(declare-fun default_base () Int)
+(declare-const default_base Int)
 
-(declare-fun a () Int)
+(declare-const a Int)
 
-(declare-fun b () Int)
+(declare-const b Int)
 
-(declare-fun c () Int)
+(declare-const c Int)
 
-(declare-fun d () Int)
+(declare-const d Int)
 
-(declare-fun e () Int)
+(declare-const e Int)
 
-(declare-fun f () Int)
+(declare-const f Int)
 
-(declare-fun g () Int)
+(declare-const g Int)
 
-(declare-fun h () Int)
+(declare-const h Int)
 
-(declare-fun ch () Int)
+(declare-const ch Int)
 
-(declare-fun temperature () Int)
+(declare-const temperature Int)
 
-(declare-fun valve_setting () Int)
+(declare-const valve_setting Int)
 
-(declare-fun value () Int)
+(declare-const value Int)
 
-(declare-fun sum () Int)
+(declare-const sum Int)
 
-(declare-fun success () Bool)
+(declare-const success Bool)
 
-(declare-fun approx () Float32)
+(declare-const approx Float32)
 
-(declare-fun x () Float32)
+(declare-const x Float32)
 
-(declare-fun y () Float32)
+(declare-const y Float32)
 
-(declare-fun letter () Int)
+(declare-const letter Int)
 
-(declare-fun count () Int)
+(declare-const count Int)
 
-(declare-fun o () Int)
+(declare-const o Int)
 
-(declare-fun o1 () Int)
+(declare-const o1 Int)
 
-(declare-fun o2 () Int)
+(declare-const o2 Int)
 
-(declare-fun o3 () Int)
+(declare-const o3 Int)
 
-(declare-fun o4 () Int)
+(declare-const o4 Int)
 
-(declare-fun o5 () Int)
+(declare-const o5 Int)
 
-(declare-fun o6 () Float32)
+(declare-const o6 Float32)
 
-(declare-fun o7 () Float32)
+(declare-const o7 Float32)
 
-(declare-fun o8 () Float32)
+(declare-const o8 Float32)
 
-(declare-fun o9 () Float32)
+(declare-const o9 Float32)
 
-(declare-fun o10 () Float32)
+(declare-const o10 Float32)
 
-(declare-fun o11 () Float32)
+(declare-const o11 Float32)
 
-(declare-fun o12 () Int)
+(declare-const o12 Int)
 
-(declare-fun o13 () Int)
+(declare-const o13 Int)
 
-(declare-fun o14 () Int)
+(declare-const o14 Int)
 
-(declare-fun temp___533 () Int)
+(declare-const temp___533 Int)
 
-(declare-fun temp___532 () Int)
+(declare-const temp___532 Int)
 
-(declare-fun o15 () Int)
+(declare-const o15 Int)
 
-(declare-fun o16 () Float32)
+(declare-const o16 Float32)
 
-(declare-fun o17 () Float32)
+(declare-const o17 Float32)
 
-(declare-fun o18 () Float32)
+(declare-const o18 Float32)
 
-(declare-fun o19 () Float32)
+(declare-const o19 Float32)
 
-(declare-fun temp___534 () Float32)
+(declare-const temp___534 Float32)
 
-(declare-fun o20 () Float32)
+(declare-const o20 Float32)
 
-(declare-fun o21 () Float32)
+(declare-const o21 Float32)
 
-(declare-fun o22 () Float32)
+(declare-const o22 Float32)
 
-(declare-fun o23 () Float32)
+(declare-const o23 Float32)
 
-(declare-fun o24 () Float32)
+(declare-const o24 Float32)
 
-(declare-fun o25 () Float32)
+(declare-const o25 Float32)
 
-(declare-fun o26 () Float32)
+(declare-const o26 Float32)
 
-(declare-fun o27 () Float32)
+(declare-const o27 Float32)
 
-(declare-fun o28 () Bool)
+(declare-const o28 Bool)
 
-(declare-fun o29 () Int)
+(declare-const o29 Int)
 
-(declare-fun g1 () Int)
+(declare-const g1 Int)
 
-(declare-fun letter1 () Int)
+(declare-const letter1 Int)
 
-(declare-fun a1 () Int)
+(declare-const a1 Int)
 
-(declare-fun b1 () Int)
+(declare-const b1 Int)
 
-(declare-fun c1 () Int)
+(declare-const c1 Int)
 
-(declare-fun d1 () Int)
+(declare-const d1 Int)
 
-(declare-fun e1 () Int)
+(declare-const e1 Int)
 
-(declare-fun ch1 () Int)
+(declare-const ch1 Int)
 
-(declare-fun x1 () Float32)
+(declare-const x1 Float32)
 
-(declare-fun a2 () Int)
+(declare-const a2 Int)
 
-(declare-fun d2 () Int)
+(declare-const d2 Int)
 
-(declare-fun b2 () Int)
+(declare-const b2 Int)
 
-(declare-fun e2 () Int)
+(declare-const e2 Int)
 
-(declare-fun f1 () Int)
+(declare-const f1 Int)
 
-(declare-fun e3 () Int)
+(declare-const e3 Int)
 
-(declare-fun f2 () Int)
+(declare-const f2 Int)
 
-(declare-fun f3 () Int)
+(declare-const f3 Int)
 
-(declare-fun f4 () Int)
+(declare-const f4 Int)
 
-(declare-fun f5 () Int)
+(declare-const f5 Int)
 
-(declare-fun g2 () Int)
+(declare-const g2 Int)
 
-(declare-fun g3 () Int)
+(declare-const g3 Int)
 
-(declare-fun g4 () Int)
+(declare-const g4 Int)
 
-(declare-fun success1 () Bool)
+(declare-const success1 Bool)
 
-(declare-fun h1 () Int)
+(declare-const h1 Int)
 
-(declare-fun h2 () Int)
+(declare-const h2 Int)
 
-(declare-fun h3 () Int)
+(declare-const h3 Int)
 
-(declare-fun h4 () Int)
+(declare-const h4 Int)
 
-(declare-fun h5 () Int)
+(declare-const h5 Int)
 
-(declare-fun success2 () Bool)
+(declare-const success2 Bool)
 
-(declare-fun c2 () Int)
+(declare-const c2 Int)
 
-(declare-fun c3 () Int)
+(declare-const c3 Int)
 
-(declare-fun c4 () Int)
+(declare-const c4 Int)
 
-(declare-fun c5 () Int)
+(declare-const c5 Int)
 
-(declare-fun c6 () Int)
+(declare-const c6 Int)
 
-(declare-fun c7 () Int)
+(declare-const c7 Int)
 
-(declare-fun c8 () Int)
+(declare-const c8 Int)
 
-(declare-fun y1 () Float32)
+(declare-const y1 Float32)
 
-(declare-fun y2 () Float32)
+(declare-const y2 Float32)
 
-(declare-fun y3 () Float32)
+(declare-const y3 Float32)
 
-(declare-fun result () Bool)
+(declare-const result Bool)
 
-(declare-fun result1 () Bool)
+(declare-const result1 Bool)
 
-(declare-fun result2 () Bool)
+(declare-const result2 Bool)
 
-(declare-fun result3 () Bool)
+(declare-const result3 Bool)
 
-(declare-fun result4 () Bool)
+(declare-const result4 Bool)
 
-(declare-fun value1 () Int)
+(declare-const value1 Int)
 
-(declare-fun sum1 () Int)
+(declare-const sum1 Int)
 
-(declare-fun value2 () Int)
+(declare-const value2 Int)
 
-(declare-fun sum2 () Int)
+(declare-const sum2 Int)
 
-(declare-fun ada__integer_text_io__get__2__item () Int)
+(declare-const ada__integer_text_io__get__2__item Int)
 
-(declare-fun value3 () Int)
+(declare-const value3 Int)
 
-(declare-fun sum3 () Int)
+(declare-const sum3 Int)
 
-(declare-fun value4 () Int)
+(declare-const value4 Int)
 
-(declare-fun sum4 () Int)
+(declare-const sum4 Int)
 
-(declare-fun value5 () Int)
+(declare-const value5 Int)
 
-(declare-fun sum5 () Int)
+(declare-const sum5 Int)
 
-(declare-fun approx1 () Float32)
+(declare-const approx1 Float32)
 
-(declare-fun result5 () Bool)
+(declare-const result5 Bool)
 
-(declare-fun approx2 () Float32)
+(declare-const approx2 Float32)
 
-(declare-fun approx3 () Float32)
+(declare-const approx3 Float32)
 
-(declare-fun result6 () Bool)
+(declare-const result6 Bool)
 
-(declare-fun approx4 () Float32)
+(declare-const approx4 Float32)
 
-(declare-fun approx5 () Float32)
+(declare-const approx5 Float32)
 
-(declare-fun count1 () Int)
+(declare-const count1 Int)
 
-(declare-fun count2 () Int)
+(declare-const count2 Int)
 
-(declare-fun count3 () Int)
+(declare-const count3 Int)
 
-(declare-fun count4 () Int)
+(declare-const count4 Int)
 
-(declare-fun count5 () Int)
+(declare-const count5 Int)
 
-(declare-fun count6 () Int)
+(declare-const count6 Int)
 
-(declare-fun count7 () Int)
+(declare-const count7 Int)
 
-(declare-fun count8 () Int)
+(declare-const count8 Int)
 
-(declare-fun a3 () Int)
+(declare-const a3 Int)
 
-(declare-fun b3 () Int)
+(declare-const b3 Int)
 
-(declare-fun count9 () Int)
+(declare-const count9 Int)
 
-(declare-fun count10 () Int)
+(declare-const count10 Int)
 
-(declare-fun count11 () Int)
+(declare-const count11 Int)
 
-(declare-fun count12 () Int)
+(declare-const count12 Int)
 
-(declare-fun count13 () Int)
+(declare-const count13 Int)
 
-(declare-fun count14 () Int)
+(declare-const count14 Int)
 
-(declare-fun count15 () Int)
+(declare-const count15 Int)
 
-(declare-fun count16 () Int)
+(declare-const count16 Int)
 
-(declare-fun temperature1 () Int)
+(declare-const temperature1 Int)
 
-(declare-fun valve_setting1 () Int)
+(declare-const valve_setting1 Int)
 
-(declare-fun temperature2 () Int)
+(declare-const temperature2 Int)
 
 ;; H
   (assert (in_range4 default_width))
@@ -742,7 +742,7 @@
 ;; H
   (assert (=> (< b2 a2) (= c2 o1)))
 
-(declare-fun abstr1 () Int)
+(declare-const abstr1 Int)
 
 ;; H
   (assert (=> (not (< b2 a2)) (= c3 abstr1)))

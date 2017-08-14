@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -67,31 +67,31 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun pack__associativity_test__result () Bool)
+(declare-const pack__associativity_test__result Bool)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
-(declare-fun o3 () Float32)
+(declare-const o3 Float32)
 
-(declare-fun o4 () Bool)
+(declare-const o4 Bool)
 
-(declare-fun result () Bool)
+(declare-const result Bool)
 
-(declare-fun pack__associativity_test__result1 () Bool)
+(declare-const pack__associativity_test__result1 Bool)
 
-(declare-fun pack__associativity_test__result2 () Bool)
+(declare-const pack__associativity_test__result2 Bool)
 
-(declare-fun pack__associativity_test__result3 () Bool)
+(declare-const pack__associativity_test__result3 Bool)
 
-(declare-fun pack__associativity_test__result4 () Bool)
+(declare-const pack__associativity_test__result4 Bool)
 
-(declare-fun pack__associativity_test__result5 () Bool)
+(declare-const pack__associativity_test__result5 Bool)
 
-(declare-fun abstr1 () Float32)
+(declare-const abstr1 Float32)
 
 ;; H
   (assert
@@ -99,7 +99,7 @@
   (and (not (or (fp.isInfinite o1) (fp.isNaN o1)))
   (fp.eq o1 (fp.add RNE (fp #b0 #b01111100 #b10011001100110011001101) (fp #b0 #b01111101 #b00110011001100110011010))))))
 
-(declare-fun abstr2 () Float32)
+(declare-const abstr2 Float32)
 
 ;; H
   (assert
@@ -108,7 +108,7 @@
   (fp.eq o2 (fp.add RNE (fp #b0 #b01111011 #b10011001100110011001101)
   o1)))))
 
-(declare-fun abstr3 () Float32)
+(declare-const abstr3 Float32)
 
 ;; H
   (assert

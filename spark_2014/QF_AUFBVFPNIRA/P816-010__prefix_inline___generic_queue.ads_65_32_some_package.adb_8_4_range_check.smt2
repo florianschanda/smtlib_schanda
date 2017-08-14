@@ -13,21 +13,21 @@
 
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 255)))
 
-(declare-fun abstr () (_ BitVec 8))
+(declare-const abstr (_ BitVec 8))
 
-(declare-fun abstr1 () (_ BitVec 8))
+(declare-const abstr1 (_ BitVec 8))
 
-(declare-fun abstr2 () (_ BitVec 8))
+(declare-const abstr2 (_ BitVec 8))
 
-(declare-fun abstr3 () (_ BitVec 8))
+(declare-const abstr3 (_ BitVec 8))
 
-(declare-fun abstr4 () (_ BitVec 8))
+(declare-const abstr4 (_ BitVec 8))
 
 (define-fun nth_bv ((x (_ BitVec 8))
   (i (_ BitVec 8))) Bool (ite (not (= (bvand (bvlshr x i) #x01) #x00)) true
                          false))
 
-(declare-fun abstr5 () Bool)
+(declare-const abstr5 Bool)
 
 (define-fun eq_sub ((a (_ BitVec 8)) (b (_ BitVec 8)) (i Int)
   (n Int)) Bool abstr5)
@@ -50,7 +50,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range1 ((x Real)) Bool (and
                                       (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -59,7 +59,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr6 () Real)
+(declare-const abstr6 Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range1 abstr6))
 
@@ -92,7 +92,7 @@
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(declare-fun attr__ATTRIBUTE_MODULUS () (_ BitVec 8))
+(declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 8))
 
 (define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
 
@@ -102,11 +102,11 @@
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000010 #b01000000000000000000000)))))
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__component__size () Int)
+(declare-const value__component__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -117,11 +117,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(declare-fun us_tag () Int)
+(declare-const us_tag Int)
 
-(declare-fun value__size1 () Int)
+(declare-const value__size1 Int)
 
-(declare-fun value__alignment1 () Int)
+(declare-const value__alignment1 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size1))
@@ -129,11 +129,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment1))
 
-(declare-fun some_package__float_buffer__buffer_tag__mode__first__bit () Int)
+(declare-const some_package__float_buffer__buffer_tag__mode__first__bit Int)
 
-(declare-fun some_package__float_buffer__buffer_tag__mode__last__bit () Int)
+(declare-const some_package__float_buffer__buffer_tag__mode__last__bit Int)
 
-(declare-fun some_package__float_buffer__buffer_tag__mode__position () Int)
+(declare-const some_package__float_buffer__buffer_tag__mode__position Int)
 
 ;; some_package__float_buffer__buffer_tag__mode__first__bit_axiom
   (assert (<= 0 some_package__float_buffer__buffer_tag__mode__first__bit))
@@ -145,11 +145,11 @@
 ;; some_package__float_buffer__buffer_tag__mode__position_axiom
   (assert (<= 0 some_package__float_buffer__buffer_tag__mode__position))
 
-(declare-fun some_package__float_buffer__buffer_tag__buffer__first__bit () Int)
+(declare-const some_package__float_buffer__buffer_tag__buffer__first__bit Int)
 
-(declare-fun some_package__float_buffer__buffer_tag__buffer__last__bit () Int)
+(declare-const some_package__float_buffer__buffer_tag__buffer__last__bit Int)
 
-(declare-fun some_package__float_buffer__buffer_tag__buffer__position () Int)
+(declare-const some_package__float_buffer__buffer_tag__buffer__position Int)
 
 ;; some_package__float_buffer__buffer_tag__buffer__first__bit_axiom
   (assert (<= 0 some_package__float_buffer__buffer_tag__buffer__first__bit))
@@ -161,11 +161,11 @@
 ;; some_package__float_buffer__buffer_tag__buffer__position_axiom
   (assert (<= 0 some_package__float_buffer__buffer_tag__buffer__position))
 
-(declare-fun some_package__float_buffer__buffer_tag__index_head__first__bit () Int)
+(declare-const some_package__float_buffer__buffer_tag__index_head__first__bit Int)
 
-(declare-fun some_package__float_buffer__buffer_tag__index_head__last__bit () Int)
+(declare-const some_package__float_buffer__buffer_tag__index_head__last__bit Int)
 
-(declare-fun some_package__float_buffer__buffer_tag__index_head__position () Int)
+(declare-const some_package__float_buffer__buffer_tag__index_head__position Int)
 
 ;; some_package__float_buffer__buffer_tag__index_head__first__bit_axiom
   (assert
@@ -179,11 +179,11 @@
   (assert
   (<= 0 some_package__float_buffer__buffer_tag__index_head__position))
 
-(declare-fun some_package__float_buffer__buffer_tag__index_tail__first__bit () Int)
+(declare-const some_package__float_buffer__buffer_tag__index_tail__first__bit Int)
 
-(declare-fun some_package__float_buffer__buffer_tag__index_tail__last__bit () Int)
+(declare-const some_package__float_buffer__buffer_tag__index_tail__last__bit Int)
 
-(declare-fun some_package__float_buffer__buffer_tag__index_tail__position () Int)
+(declare-const some_package__float_buffer__buffer_tag__index_tail__position Int)
 
 ;; some_package__float_buffer__buffer_tag__index_tail__first__bit_axiom
   (assert
@@ -197,11 +197,11 @@
   (assert
   (<= 0 some_package__float_buffer__buffer_tag__index_tail__position))
 
-(declare-fun some_package__float_buffer__buffer_tag__haselements__first__bit () Int)
+(declare-const some_package__float_buffer__buffer_tag__haselements__first__bit Int)
 
-(declare-fun some_package__float_buffer__buffer_tag__haselements__last__bit () Int)
+(declare-const some_package__float_buffer__buffer_tag__haselements__last__bit Int)
 
-(declare-fun some_package__float_buffer__buffer_tag__haselements__position () Int)
+(declare-const some_package__float_buffer__buffer_tag__haselements__position Int)
 
 ;; some_package__float_buffer__buffer_tag__haselements__first__bit_axiom
   (assert
@@ -216,11 +216,11 @@
   (assert
   (<= 0 some_package__float_buffer__buffer_tag__haselements__position))
 
-(declare-fun some_package__float_buffer__buffer_tag__num_overflows__first__bit () Int)
+(declare-const some_package__float_buffer__buffer_tag__num_overflows__first__bit Int)
 
-(declare-fun some_package__float_buffer__buffer_tag__num_overflows__last__bit () Int)
+(declare-const some_package__float_buffer__buffer_tag__num_overflows__last__bit Int)
 
-(declare-fun some_package__float_buffer__buffer_tag__num_overflows__position () Int)
+(declare-const some_package__float_buffer__buffer_tag__num_overflows__position Int)
 
 ;; some_package__float_buffer__buffer_tag__num_overflows__first__bit_axiom
   (assert
@@ -242,11 +242,11 @@
                    (and (in_range high)
                    (=> (<= low high) (and (in_range6 low) (in_range6 high))))))
 
-(declare-fun value__size2 () Int)
+(declare-const value__size2 Int)
 
-(declare-fun value__component__size1 () Int)
+(declare-const value__component__size1 Int)
 
-(declare-fun value__alignment2 () Int)
+(declare-const value__alignment2 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size2))
@@ -264,9 +264,9 @@
                                       (<= 0 256)) (in_range6
                                       temp___expr_223)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (define-fun dynamic_invariant1 ((temp___expr_33 Int) (temp___is_init_30 Bool)
   (temp___skip_constant_31 Bool)
@@ -299,11 +299,11 @@
                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000010 #b01000000000000000000000)))
                                       (in_range5 temp___expr_217)))
 
-(declare-fun o () Int)
+(declare-const o Int)
 
-(declare-fun o1 () Int)
+(declare-const o1 Int)
 
-(declare-fun o2 () Int)
+(declare-const o2 Int)
 
 (assert
 ;; WP_parameter_def

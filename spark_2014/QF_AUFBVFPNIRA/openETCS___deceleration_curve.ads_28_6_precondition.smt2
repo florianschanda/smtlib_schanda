@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -84,25 +84,25 @@
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                       (not (or (fp.isInfinite temp___expr_158) (fp.isNaN temp___expr_158)))))
 
-(declare-fun distance_resolution () Int)
+(declare-const distance_resolution Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun maximum_valid_speed () Float32)
+(declare-const maximum_valid_speed Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun minimum_valid_acceleration () Float32)
+(declare-const minimum_valid_acceleration Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun braking_curve_maximum_end_point () Int)
+(declare-const braking_curve_maximum_end_point Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun minimum_valid_speed () Float32)
+(declare-const minimum_valid_speed Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
 ;; minimum_valid_speed__def_axiom
   (assert
@@ -111,7 +111,7 @@
 ;; distance_resolution__def_axiom
   (assert (= distance_resolution 5))
 
-(declare-fun abstr1 () Float32)
+(declare-const abstr1 Float32)
 
 ;; maximum_valid_speed__def_axiom
   (assert (= maximum_valid_speed abstr1))
@@ -123,12 +123,12 @@
 ;; braking_curve_maximum_end_point__def_axiom
   (assert (= braking_curve_maximum_end_point 5000))
 
-(declare-fun deceleration_curve__maximum_valid_speed__assume () Float32)
+(declare-const deceleration_curve__maximum_valid_speed__assume Float32)
 
 ;; H
   (assert (in_range1 distance_resolution))
 
-(declare-fun abstr2 () Bool)
+(declare-const abstr2 Bool)
 
 (assert
 ;; WP_parameter_def

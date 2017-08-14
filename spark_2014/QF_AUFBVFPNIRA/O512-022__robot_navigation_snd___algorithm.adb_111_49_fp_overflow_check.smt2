@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -72,11 +72,11 @@
                    (and (in_range2 high)
                    (=> (<= low high) (and (in_range3 low) (in_range3 high))))))
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__component__size () Int)
+(declare-const value__component__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -106,9 +106,9 @@
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
 
-(declare-fun value__size1 () Int)
+(declare-const value__size1 Int)
 
-(declare-fun value__alignment1 () Int)
+(declare-const value__alignment1 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size1))
@@ -116,11 +116,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment1))
 
-(declare-fun spaces__angles__angle__theta__first__bit () Int)
+(declare-const spaces__angles__angle__theta__first__bit Int)
 
-(declare-fun spaces__angles__angle__theta__last__bit () Int)
+(declare-const spaces__angles__angle__theta__last__bit Int)
 
-(declare-fun spaces__angles__angle__theta__position () Int)
+(declare-const spaces__angles__angle__theta__position Int)
 
 ;; spaces__angles__angle__theta__first__bit_axiom
   (assert (<= 0 spaces__angles__angle__theta__first__bit))
@@ -132,9 +132,9 @@
 ;; spaces__angles__angle__theta__position_axiom
   (assert (<= 0 spaces__angles__angle__theta__position))
 
-(declare-fun value__size2 () Int)
+(declare-const value__size2 Int)
 
-(declare-fun value__alignment2 () Int)
+(declare-const value__alignment2 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size2))
@@ -142,11 +142,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment2))
 
-(declare-fun algorithm__laser_scan_data__first__first__bit () Int)
+(declare-const algorithm__laser_scan_data__first__first__bit Int)
 
-(declare-fun algorithm__laser_scan_data__first__last__bit () Int)
+(declare-const algorithm__laser_scan_data__first__last__bit Int)
 
-(declare-fun algorithm__laser_scan_data__first__position () Int)
+(declare-const algorithm__laser_scan_data__first__position Int)
 
 ;; algorithm__laser_scan_data__first__first__bit_axiom
   (assert (<= 0 algorithm__laser_scan_data__first__first__bit))
@@ -158,11 +158,11 @@
 ;; algorithm__laser_scan_data__first__position_axiom
   (assert (<= 0 algorithm__laser_scan_data__first__position))
 
-(declare-fun algorithm__laser_scan_data__second__first__bit () Int)
+(declare-const algorithm__laser_scan_data__second__first__bit Int)
 
-(declare-fun algorithm__laser_scan_data__second__last__bit () Int)
+(declare-const algorithm__laser_scan_data__second__last__bit Int)
 
-(declare-fun algorithm__laser_scan_data__second__position () Int)
+(declare-const algorithm__laser_scan_data__second__position Int)
 
 ;; algorithm__laser_scan_data__second__first__bit_axiom
   (assert (<= 0 algorithm__laser_scan_data__second__first__bit))
@@ -174,29 +174,29 @@
 ;; algorithm__laser_scan_data__second__position_axiom
   (assert (<= 0 algorithm__laser_scan_data__second__position))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun width () Float32)
+(declare-const width Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun forwardlength () Float32)
+(declare-const forwardlength Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun bdorearcheck () Bool)
+(declare-const bdorearcheck Bool)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-fun deltaangle () Float32)
+(declare-const deltaangle Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
 (define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -232,33 +232,33 @@
                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000001 #b10010010000111111011011)))
                                       (in_range6 temp___expr_170)))
 
-(declare-fun i () Int)
+(declare-const i Int)
 
-(declare-fun algorithm__isfilterclear__B_2__deltaangle__assume () Float32)
+(declare-const algorithm__isfilterclear__B_2__deltaangle__assume Float32)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
-(declare-fun o3 () Float32)
+(declare-const o3 Float32)
 
-(declare-fun o4 () Float32)
+(declare-const o4 Float32)
 
-(declare-fun o5 () Float32)
+(declare-const o5 Float32)
 
-(declare-fun o6 () Float32)
+(declare-const o6 Float32)
 
-(declare-fun result () Int)
+(declare-const result Int)
 
-(declare-fun i1 () Int)
+(declare-const i1 Int)
 
-(declare-fun i2 () Int)
+(declare-const i2 Int)
 
-(declare-fun d () Float32)
+(declare-const d Float32)
 
-(declare-fun result1 () Bool)
+(declare-const result1 Bool)
 
 ;; H
   (assert (not (or (fp.isInfinite width) (fp.isNaN width))))
@@ -303,7 +303,7 @@
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
   (not (or (fp.isInfinite d) (fp.isNaN d)))))
 
-(declare-fun abstr1 () Float32)
+(declare-const abstr1 Float32)
 
 ;; H
   (assert
@@ -321,7 +321,7 @@
 ;; H
   (assert (not (= result1 true)))
 
-(declare-fun abstr2 () Float32)
+(declare-const abstr2 Float32)
 
 ;; H
   (assert

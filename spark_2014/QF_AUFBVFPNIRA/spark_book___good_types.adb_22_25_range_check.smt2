@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -89,11 +89,11 @@
                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000010 #b10000000000000000000000)))
                                       (in_range3 temp___expr_521)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (define-fun in_range4 ((x Float32)) Bool (and
                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
@@ -108,11 +108,11 @@
                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000)))
                                       (in_range4 temp___expr_527)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
 (define-fun in_range5 ((x Float32)) Bool (and
                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
@@ -127,47 +127,47 @@
                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000010 #b10000000000000000000000)))
                                       (in_range5 temp___expr_536)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS8 Int)
 
-(declare-fun c3b () Float32)
+(declare-const c3b Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS9 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS9 Int)
 
-(declare-fun default_fore () Int)
+(declare-const default_fore Int)
 
-(declare-fun default_aft () Int)
+(declare-const default_aft Int)
 
-(declare-fun default_exp () Int)
+(declare-const default_exp Int)
 
-(declare-fun default_fore1 () Int)
+(declare-const default_fore1 Int)
 
-(declare-fun default_aft1 () Int)
+(declare-const default_aft1 Int)
 
-(declare-fun default_exp1 () Int)
+(declare-const default_exp1 Int)
 
-(declare-fun room_length () Float32)
+(declare-const room_length Float32)
 
-(declare-fun wall_thickness () Float32)
+(declare-const wall_thickness Float32)
 
-(declare-fun total () Float32)
+(declare-const total Float32)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun good_types__feet_io__get__2__item () Float32)
+(declare-const good_types__feet_io__get__2__item Float32)
 
-(declare-fun result () Float32)
+(declare-const result Float32)
 
-(declare-fun room_length1 () Float32)
+(declare-const room_length1 Float32)
 
-(declare-fun good_types__inch_io__get__2__item () Float32)
+(declare-const good_types__inch_io__get__2__item Float32)
 
-(declare-fun result1 () Float32)
+(declare-const result1 Float32)
 
-(declare-fun wall_thickness1 () Float32)
+(declare-const wall_thickness1 Float32)
 
 ;; H
   (assert (in_range1 default_exp))

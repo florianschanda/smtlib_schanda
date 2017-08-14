@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -76,9 +76,9 @@
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                       (not (or (fp.isInfinite temp___expr_154) (fp.isNaN temp___expr_154)))))
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -86,11 +86,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(declare-fun deceleration_curve__braking_curve_entry__location__first__bit () Int)
+(declare-const deceleration_curve__braking_curve_entry__location__first__bit Int)
 
-(declare-fun deceleration_curve__braking_curve_entry__location__last__bit () Int)
+(declare-const deceleration_curve__braking_curve_entry__location__last__bit Int)
 
-(declare-fun deceleration_curve__braking_curve_entry__location__position () Int)
+(declare-const deceleration_curve__braking_curve_entry__location__position Int)
 
 ;; deceleration_curve__braking_curve_entry__location__first__bit_axiom
   (assert
@@ -103,11 +103,11 @@
 ;; deceleration_curve__braking_curve_entry__location__position_axiom
   (assert (<= 0 deceleration_curve__braking_curve_entry__location__position))
 
-(declare-fun deceleration_curve__braking_curve_entry__speed__first__bit () Int)
+(declare-const deceleration_curve__braking_curve_entry__speed__first__bit Int)
 
-(declare-fun deceleration_curve__braking_curve_entry__speed__last__bit () Int)
+(declare-const deceleration_curve__braking_curve_entry__speed__last__bit Int)
 
-(declare-fun deceleration_curve__braking_curve_entry__speed__position () Int)
+(declare-const deceleration_curve__braking_curve_entry__speed__position Int)
 
 ;; deceleration_curve__braking_curve_entry__speed__first__bit_axiom
   (assert (<= 0 deceleration_curve__braking_curve_entry__speed__first__bit))
@@ -119,11 +119,11 @@
 ;; deceleration_curve__braking_curve_entry__speed__position_axiom
   (assert (<= 0 deceleration_curve__braking_curve_entry__speed__position))
 
-(declare-fun value__size1 () Int)
+(declare-const value__size1 Int)
 
-(declare-fun value__component__size () Int)
+(declare-const value__component__size Int)
 
-(declare-fun value__alignment1 () Int)
+(declare-const value__alignment1 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size1))
@@ -134,9 +134,9 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment1))
 
-(declare-fun value__size2 () Int)
+(declare-const value__size2 Int)
 
-(declare-fun value__alignment2 () Int)
+(declare-const value__alignment2 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size2))
@@ -144,11 +144,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment2))
 
-(declare-fun deceleration_curve__braking_curve_t__curve__first__bit () Int)
+(declare-const deceleration_curve__braking_curve_t__curve__first__bit Int)
 
-(declare-fun deceleration_curve__braking_curve_t__curve__last__bit () Int)
+(declare-const deceleration_curve__braking_curve_t__curve__last__bit Int)
 
-(declare-fun deceleration_curve__braking_curve_t__curve__position () Int)
+(declare-const deceleration_curve__braking_curve_t__curve__position Int)
 
 ;; deceleration_curve__braking_curve_t__curve__first__bit_axiom
   (assert (<= 0 deceleration_curve__braking_curve_t__curve__first__bit))
@@ -160,11 +160,11 @@
 ;; deceleration_curve__braking_curve_t__curve__position_axiom
   (assert (<= 0 deceleration_curve__braking_curve_t__curve__position))
 
-(declare-fun deceleration_curve__braking_curve_t__end_point__first__bit () Int)
+(declare-const deceleration_curve__braking_curve_t__end_point__first__bit Int)
 
-(declare-fun deceleration_curve__braking_curve_t__end_point__last__bit () Int)
+(declare-const deceleration_curve__braking_curve_t__end_point__last__bit Int)
 
-(declare-fun deceleration_curve__braking_curve_t__end_point__position () Int)
+(declare-const deceleration_curve__braking_curve_t__end_point__position Int)
 
 ;; deceleration_curve__braking_curve_t__end_point__first__bit_axiom
   (assert (<= 0 deceleration_curve__braking_curve_t__end_point__first__bit))
@@ -176,9 +176,9 @@
 ;; deceleration_curve__braking_curve_t__end_point__position_axiom
   (assert (<= 0 deceleration_curve__braking_curve_t__end_point__position))
 
-(declare-fun value__size3 () Int)
+(declare-const value__size3 Int)
 
-(declare-fun value__alignment3 () Int)
+(declare-const value__alignment3 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size3))
@@ -186,11 +186,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment3))
 
-(declare-fun deceleration_curve__target_t__supervise__first__bit () Int)
+(declare-const deceleration_curve__target_t__supervise__first__bit Int)
 
-(declare-fun deceleration_curve__target_t__supervise__last__bit () Int)
+(declare-const deceleration_curve__target_t__supervise__last__bit Int)
 
-(declare-fun deceleration_curve__target_t__supervise__position () Int)
+(declare-const deceleration_curve__target_t__supervise__position Int)
 
 ;; deceleration_curve__target_t__supervise__first__bit_axiom
   (assert (<= 0 deceleration_curve__target_t__supervise__first__bit))
@@ -202,11 +202,11 @@
 ;; deceleration_curve__target_t__supervise__position_axiom
   (assert (<= 0 deceleration_curve__target_t__supervise__position))
 
-(declare-fun deceleration_curve__target_t__location__first__bit () Int)
+(declare-const deceleration_curve__target_t__location__first__bit Int)
 
-(declare-fun deceleration_curve__target_t__location__last__bit () Int)
+(declare-const deceleration_curve__target_t__location__last__bit Int)
 
-(declare-fun deceleration_curve__target_t__location__position () Int)
+(declare-const deceleration_curve__target_t__location__position Int)
 
 ;; deceleration_curve__target_t__location__first__bit_axiom
   (assert (<= 0 deceleration_curve__target_t__location__first__bit))
@@ -218,11 +218,11 @@
 ;; deceleration_curve__target_t__location__position_axiom
   (assert (<= 0 deceleration_curve__target_t__location__position))
 
-(declare-fun deceleration_curve__target_t__speed__first__bit () Int)
+(declare-const deceleration_curve__target_t__speed__first__bit Int)
 
-(declare-fun deceleration_curve__target_t__speed__last__bit () Int)
+(declare-const deceleration_curve__target_t__speed__last__bit Int)
 
-(declare-fun deceleration_curve__target_t__speed__position () Int)
+(declare-const deceleration_curve__target_t__speed__position Int)
 
 ;; deceleration_curve__target_t__speed__first__bit_axiom
   (assert (<= 0 deceleration_curve__target_t__speed__first__bit))
@@ -241,42 +241,42 @@
                                       (<= 0 2147483647)) (in_range2
                                       temp___expr_172)))
 
-(declare-fun maximum_valid_speed () Float32)
+(declare-const maximum_valid_speed Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun abstr1 () Float32)
+(declare-const abstr1 Float32)
 
 ;; maximum_valid_speed__def_axiom
   (assert (= maximum_valid_speed abstr1))
 
-(declare-fun initial_speed () Float32)
+(declare-const initial_speed Float32)
 
-(declare-fun target__split_fields () Bool)
+(declare-const target__split_fields Bool)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Bool)
+(declare-const o1 Bool)
 
-(declare-fun deceleration_curve_test__target__assume () Bool)
+(declare-const deceleration_curve_test__target__assume Bool)
 
-(declare-fun o2 () Int)
+(declare-const o2 Int)
 
-(declare-fun result () Float32)
+(declare-const result Float32)
 
-(declare-fun initial_speed1 () Float32)
+(declare-const initial_speed1 Float32)
 
-(declare-fun result1 () Bool)
+(declare-const result1 Bool)
 
-(declare-fun target__split_fields1 () Bool)
+(declare-const target__split_fields1 Bool)
 
-(declare-fun abstr2 () Float32)
+(declare-const abstr2 Float32)
 
 ;; H
   (assert
@@ -306,7 +306,7 @@
 ;; H
   (assert (= deceleration_curve_test__target__assume target__split_fields1))
 
-(declare-fun abstr3 () Int)
+(declare-const abstr3 Int)
 
 (assert
 ;; WP_parameter_def

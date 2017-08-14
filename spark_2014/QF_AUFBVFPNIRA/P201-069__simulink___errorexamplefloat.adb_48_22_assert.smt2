@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 9007199254740991.0 19958403095347198116563727130368385660674512604354575415025472424372118918689640657849579654926357010893424468441924952439724379883935936607391717982848314203200056729510856765175377214443629871826533567445439239933308104551208703888888552684480441575071209068757560416423584952303440099278848.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -87,33 +87,33 @@
                                       (fp.leq (fp #b0 #b01111001011 #b0000000000000000000000000000000000000000000000000000) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
                                       (in_range2 temp___expr_141)))
 
-(declare-fun requested_force () Float64)
+(declare-const requested_force Float64)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun calculated_force () Float64)
+(declare-const calculated_force Float64)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun relative_error () Float64)
+(declare-const relative_error Float64)
 
-(declare-fun abs_out1 () Float64)
+(declare-const abs_out1 Float64)
 
-(declare-fun o () Float64)
+(declare-const o Float64)
 
-(declare-fun o1 () Float64)
+(declare-const o1 Float64)
 
-(declare-fun o2 () Float64)
+(declare-const o2 Float64)
 
-(declare-fun o3 () Float64)
+(declare-const o3 Float64)
 
-(declare-fun result () Float64)
+(declare-const result Float64)
 
-(declare-fun abs_out11 () Float64)
+(declare-const abs_out11 Float64)
 
 ;; H
   (assert (in_range2 requested_force))

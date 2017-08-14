@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 9007199254740991.0 19958403095347198116563727130368385660674512604354575415025472424372118918689640657849579654926357010893424468441924952439724379883935936607391717982848314203200056729510856765175377214443629871826533567445439239933308104551208703888888552684480441575071209068757560416423584952303440099278848.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -61,31 +61,31 @@
                                       (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
                                       (not (or (fp.isInfinite temp___expr_135) (fp.isNaN temp___expr_135)))))
 
-(declare-fun a () Float64)
+(declare-const a Float64)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun b () Float64)
+(declare-const b Float64)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun float_example__minus_i__result () Float64)
+(declare-const float_example__minus_i__result Float64)
 
-(declare-fun o () Float64)
+(declare-const o Float64)
 
-(declare-fun o1 () Float64)
+(declare-const o1 Float64)
 
-(declare-fun result () Float64)
+(declare-const result Float64)
 
-(declare-fun float_example__minus_i__result1 () Float64)
+(declare-const float_example__minus_i__result1 Float64)
 
-(declare-fun float_example__minus_i__result2 () Float64)
+(declare-const float_example__minus_i__result2 Float64)
 
-(declare-fun float_example__minus_i__result3 () Float64)
+(declare-const float_example__minus_i__result3 Float64)
 
-(declare-fun float_example__minus_i__result4 () Float64)
+(declare-const float_example__minus_i__result4 Float64)
 
-(declare-fun float_example__minus_i__result5 () Float64)
+(declare-const float_example__minus_i__result5 Float64)
 
 ;; H
   (assert (not (or (fp.isInfinite a) (fp.isNaN a))))

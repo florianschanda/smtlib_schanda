@@ -29,7 +29,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range2 ((x Real)) Bool (and
                                       (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -38,7 +38,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range2 abstr))
 
@@ -63,9 +63,9 @@
   (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
                  (and (fp.isNegative  x) (< r 0.0))))
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -73,11 +73,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(declare-fun discriminant_check__rec__b__first__bit () Int)
+(declare-const discriminant_check__rec__b__first__bit Int)
 
-(declare-fun discriminant_check__rec__b__last__bit () Int)
+(declare-const discriminant_check__rec__b__last__bit Int)
 
-(declare-fun discriminant_check__rec__b__position () Int)
+(declare-const discriminant_check__rec__b__position Int)
 
 ;; discriminant_check__rec__b__first__bit_axiom
   (assert (<= 0 discriminant_check__rec__b__first__bit))
@@ -89,11 +89,11 @@
 ;; discriminant_check__rec__b__position_axiom
   (assert (<= 0 discriminant_check__rec__b__position))
 
-(declare-fun discriminant_check__rec__x__first__bit () Int)
+(declare-const discriminant_check__rec__x__first__bit Int)
 
-(declare-fun discriminant_check__rec__x__last__bit () Int)
+(declare-const discriminant_check__rec__x__last__bit Int)
 
-(declare-fun discriminant_check__rec__x__position () Int)
+(declare-const discriminant_check__rec__x__position Int)
 
 ;; discriminant_check__rec__x__first__bit_axiom
   (assert (<= 0 discriminant_check__rec__x__first__bit))
@@ -105,11 +105,11 @@
 ;; discriminant_check__rec__x__position_axiom
   (assert (<= 0 discriminant_check__rec__x__position))
 
-(declare-fun discriminant_check__rec__y__first__bit () Int)
+(declare-const discriminant_check__rec__y__first__bit Int)
 
-(declare-fun discriminant_check__rec__y__last__bit () Int)
+(declare-const discriminant_check__rec__y__last__bit Int)
 
-(declare-fun discriminant_check__rec__y__position () Int)
+(declare-const discriminant_check__rec__y__position Int)
 
 ;; discriminant_check__rec__y__first__bit_axiom
   (assert (<= 0 discriminant_check__rec__y__first__bit))
@@ -121,7 +121,7 @@
 ;; discriminant_check__rec__y__position_axiom
   (assert (<= 0 discriminant_check__rec__y__position))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)

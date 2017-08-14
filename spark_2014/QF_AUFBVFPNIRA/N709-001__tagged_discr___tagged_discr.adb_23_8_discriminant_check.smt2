@@ -29,7 +29,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range2 ((x Real)) Bool (and
                                       (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -38,7 +38,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range2 abstr))
 
@@ -71,11 +71,11 @@
                                       (or (= temp___is_init_132 true)
                                       (<= 0 3)) (in_range3 temp___expr_135)))
 
-(declare-fun us_tag () Int)
+(declare-const us_tag Int)
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -83,11 +83,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(declare-fun tagged_discr__t__discr__first__bit () Int)
+(declare-const tagged_discr__t__discr__first__bit Int)
 
-(declare-fun tagged_discr__t__discr__last__bit () Int)
+(declare-const tagged_discr__t__discr__last__bit Int)
 
-(declare-fun tagged_discr__t__discr__position () Int)
+(declare-const tagged_discr__t__discr__position Int)
 
 ;; tagged_discr__t__discr__first__bit_axiom
   (assert (<= 0 tagged_discr__t__discr__first__bit))
@@ -99,11 +99,11 @@
 ;; tagged_discr__t__discr__position_axiom
   (assert (<= 0 tagged_discr__t__discr__position))
 
-(declare-fun tagged_discr__t__z__first__bit () Int)
+(declare-const tagged_discr__t__z__first__bit Int)
 
-(declare-fun tagged_discr__t__z__last__bit () Int)
+(declare-const tagged_discr__t__z__last__bit Int)
 
-(declare-fun tagged_discr__t__z__position () Int)
+(declare-const tagged_discr__t__z__position Int)
 
 ;; tagged_discr__t__z__first__bit_axiom
   (assert (<= 0 tagged_discr__t__z__first__bit))
@@ -114,11 +114,11 @@
 ;; tagged_discr__t__z__position_axiom
   (assert (<= 0 tagged_discr__t__z__position))
 
-(declare-fun tagged_discr__t__x__first__bit () Int)
+(declare-const tagged_discr__t__x__first__bit Int)
 
-(declare-fun tagged_discr__t__x__last__bit () Int)
+(declare-const tagged_discr__t__x__last__bit Int)
 
-(declare-fun tagged_discr__t__x__position () Int)
+(declare-const tagged_discr__t__x__position Int)
 
 ;; tagged_discr__t__x__first__bit_axiom
   (assert (<= 0 tagged_discr__t__x__first__bit))
@@ -129,11 +129,11 @@
 ;; tagged_discr__t__x__position_axiom
   (assert (<= 0 tagged_discr__t__x__position))
 
-(declare-fun tagged_discr__t__y__first__bit () Int)
+(declare-const tagged_discr__t__y__first__bit Int)
 
-(declare-fun tagged_discr__t__y__last__bit () Int)
+(declare-const tagged_discr__t__y__last__bit Int)
 
-(declare-fun tagged_discr__t__y__position () Int)
+(declare-const tagged_discr__t__y__position Int)
 
 ;; tagged_discr__t__y__first__bit_axiom
   (assert (<= 0 tagged_discr__t__y__first__bit))
@@ -144,11 +144,11 @@
 ;; tagged_discr__t__y__position_axiom
   (assert (<= 0 tagged_discr__t__y__position))
 
-(declare-fun us_tag1 () Int)
+(declare-const us_tag1 Int)
 
-(declare-fun value__size1 () Int)
+(declare-const value__size1 Int)
 
-(declare-fun value__alignment1 () Int)
+(declare-const value__alignment1 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size1))
@@ -156,11 +156,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment1))
 
-(declare-fun tagged_discr__t__discr__first__bit1 () Int)
+(declare-const tagged_discr__t__discr__first__bit1 Int)
 
-(declare-fun tagged_discr__t__discr__last__bit1 () Int)
+(declare-const tagged_discr__t__discr__last__bit1 Int)
 
-(declare-fun tagged_discr__t__discr__position1 () Int)
+(declare-const tagged_discr__t__discr__position1 Int)
 
 ;; tagged_discr__t__discr__first__bit_axiom
   (assert (<= 0 tagged_discr__t__discr__first__bit1))
@@ -172,11 +172,11 @@
 ;; tagged_discr__t__discr__position_axiom
   (assert (<= 0 tagged_discr__t__discr__position1))
 
-(declare-fun tagged_discr__u1__w__first__bit () Int)
+(declare-const tagged_discr__u1__w__first__bit Int)
 
-(declare-fun tagged_discr__u1__w__last__bit () Int)
+(declare-const tagged_discr__u1__w__last__bit Int)
 
-(declare-fun tagged_discr__u1__w__position () Int)
+(declare-const tagged_discr__u1__w__position Int)
 
 ;; tagged_discr__u1__w__first__bit_axiom
   (assert (<= 0 tagged_discr__u1__w__first__bit))
@@ -187,11 +187,11 @@
 ;; tagged_discr__u1__w__position_axiom
   (assert (<= 0 tagged_discr__u1__w__position))
 
-(declare-fun tagged_discr__t__z__first__bit1 () Int)
+(declare-const tagged_discr__t__z__first__bit1 Int)
 
-(declare-fun tagged_discr__t__z__last__bit1 () Int)
+(declare-const tagged_discr__t__z__last__bit1 Int)
 
-(declare-fun tagged_discr__t__z__position1 () Int)
+(declare-const tagged_discr__t__z__position1 Int)
 
 ;; tagged_discr__t__z__first__bit_axiom
   (assert (<= 0 tagged_discr__t__z__first__bit1))
@@ -202,11 +202,11 @@
 ;; tagged_discr__t__z__position_axiom
   (assert (<= 0 tagged_discr__t__z__position1))
 
-(declare-fun tagged_discr__t__x__first__bit1 () Int)
+(declare-const tagged_discr__t__x__first__bit1 Int)
 
-(declare-fun tagged_discr__t__x__last__bit1 () Int)
+(declare-const tagged_discr__t__x__last__bit1 Int)
 
-(declare-fun tagged_discr__t__x__position1 () Int)
+(declare-const tagged_discr__t__x__position1 Int)
 
 ;; tagged_discr__t__x__first__bit_axiom
   (assert (<= 0 tagged_discr__t__x__first__bit1))
@@ -217,11 +217,11 @@
 ;; tagged_discr__t__x__position_axiom
   (assert (<= 0 tagged_discr__t__x__position1))
 
-(declare-fun tagged_discr__t__y__first__bit1 () Int)
+(declare-const tagged_discr__t__y__first__bit1 Int)
 
-(declare-fun tagged_discr__t__y__last__bit1 () Int)
+(declare-const tagged_discr__t__y__last__bit1 Int)
 
-(declare-fun tagged_discr__t__y__position1 () Int)
+(declare-const tagged_discr__t__y__position1 Int)
 
 ;; tagged_discr__t__y__first__bit_axiom
   (assert (<= 0 tagged_discr__t__y__first__bit1))
@@ -232,11 +232,11 @@
 ;; tagged_discr__t__y__position_axiom
   (assert (<= 0 tagged_discr__t__y__position1))
 
-(declare-fun us_tag2 () Int)
+(declare-const us_tag2 Int)
 
-(declare-fun value__size2 () Int)
+(declare-const value__size2 Int)
 
-(declare-fun value__alignment2 () Int)
+(declare-const value__alignment2 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size2))
@@ -244,11 +244,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment2))
 
-(declare-fun tagged_discr__t__discr__first__bit2 () Int)
+(declare-const tagged_discr__t__discr__first__bit2 Int)
 
-(declare-fun tagged_discr__t__discr__last__bit2 () Int)
+(declare-const tagged_discr__t__discr__last__bit2 Int)
 
-(declare-fun tagged_discr__t__discr__position2 () Int)
+(declare-const tagged_discr__t__discr__position2 Int)
 
 ;; tagged_discr__t__discr__first__bit_axiom
   (assert (<= 0 tagged_discr__t__discr__first__bit2))
@@ -260,11 +260,11 @@
 ;; tagged_discr__t__discr__position_axiom
   (assert (<= 0 tagged_discr__t__discr__position2))
 
-(declare-fun tagged_discr__t__z__first__bit2 () Int)
+(declare-const tagged_discr__t__z__first__bit2 Int)
 
-(declare-fun tagged_discr__t__z__last__bit2 () Int)
+(declare-const tagged_discr__t__z__last__bit2 Int)
 
-(declare-fun tagged_discr__t__z__position2 () Int)
+(declare-const tagged_discr__t__z__position2 Int)
 
 ;; tagged_discr__t__z__first__bit_axiom
   (assert (<= 0 tagged_discr__t__z__first__bit2))
@@ -275,11 +275,11 @@
 ;; tagged_discr__t__z__position_axiom
   (assert (<= 0 tagged_discr__t__z__position2))
 
-(declare-fun tagged_discr__t__x__first__bit2 () Int)
+(declare-const tagged_discr__t__x__first__bit2 Int)
 
-(declare-fun tagged_discr__t__x__last__bit2 () Int)
+(declare-const tagged_discr__t__x__last__bit2 Int)
 
-(declare-fun tagged_discr__t__x__position2 () Int)
+(declare-const tagged_discr__t__x__position2 Int)
 
 ;; tagged_discr__t__x__first__bit_axiom
   (assert (<= 0 tagged_discr__t__x__first__bit2))
@@ -290,11 +290,11 @@
 ;; tagged_discr__t__x__position_axiom
   (assert (<= 0 tagged_discr__t__x__position2))
 
-(declare-fun tagged_discr__t__y__first__bit2 () Int)
+(declare-const tagged_discr__t__y__first__bit2 Int)
 
-(declare-fun tagged_discr__t__y__last__bit2 () Int)
+(declare-const tagged_discr__t__y__last__bit2 Int)
 
-(declare-fun tagged_discr__t__y__position2 () Int)
+(declare-const tagged_discr__t__y__position2 Int)
 
 ;; tagged_discr__t__y__first__bit_axiom
   (assert (<= 0 tagged_discr__t__y__first__bit2))
@@ -305,11 +305,11 @@
 ;; tagged_discr__t__y__position_axiom
   (assert (<= 0 tagged_discr__t__y__position2))
 
-(declare-fun tagged_discr__u1__w__first__bit1 () Int)
+(declare-const tagged_discr__u1__w__first__bit1 Int)
 
-(declare-fun tagged_discr__u1__w__last__bit1 () Int)
+(declare-const tagged_discr__u1__w__last__bit1 Int)
 
-(declare-fun tagged_discr__u1__w__position1 () Int)
+(declare-const tagged_discr__u1__w__position1 Int)
 
 ;; tagged_discr__u1__w__first__bit_axiom
   (assert (<= 0 tagged_discr__u1__w__first__bit1))
@@ -321,19 +321,19 @@
 ;; tagged_discr__u1__w__position_axiom
   (assert (<= 0 tagged_discr__u1__w__position1))
 
-(declare-fun v__attr__tag () Int)
+(declare-const v__attr__tag Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun r5b () Int)
+(declare-const r5b Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun us_tag3 () Int)
+(declare-const us_tag3 Int)
 
-(declare-fun value__size3 () Int)
+(declare-const value__size3 Int)
 
-(declare-fun value__alignment3 () Int)
+(declare-const value__alignment3 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size3))
@@ -341,11 +341,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment3))
 
-(declare-fun tagged_discr__t__discr__first__bit3 () Int)
+(declare-const tagged_discr__t__discr__first__bit3 Int)
 
-(declare-fun tagged_discr__t__discr__last__bit3 () Int)
+(declare-const tagged_discr__t__discr__last__bit3 Int)
 
-(declare-fun tagged_discr__t__discr__position3 () Int)
+(declare-const tagged_discr__t__discr__position3 Int)
 
 ;; tagged_discr__t__discr__first__bit_axiom
   (assert (<= 0 tagged_discr__t__discr__first__bit3))
@@ -357,11 +357,11 @@
 ;; tagged_discr__t__discr__position_axiom
   (assert (<= 0 tagged_discr__t__discr__position3))
 
-(declare-fun tagged_discr__t__y__first__bit3 () Int)
+(declare-const tagged_discr__t__y__first__bit3 Int)
 
-(declare-fun tagged_discr__t__y__last__bit3 () Int)
+(declare-const tagged_discr__t__y__last__bit3 Int)
 
-(declare-fun tagged_discr__t__y__position3 () Int)
+(declare-const tagged_discr__t__y__position3 Int)
 
 ;; tagged_discr__t__y__first__bit_axiom
   (assert (<= 0 tagged_discr__t__y__first__bit3))
@@ -372,11 +372,11 @@
 ;; tagged_discr__t__y__position_axiom
   (assert (<= 0 tagged_discr__t__y__position3))
 
-(declare-fun tagged_discr__t__z__first__bit3 () Int)
+(declare-const tagged_discr__t__z__first__bit3 Int)
 
-(declare-fun tagged_discr__t__z__last__bit3 () Int)
+(declare-const tagged_discr__t__z__last__bit3 Int)
 
-(declare-fun tagged_discr__t__z__position3 () Int)
+(declare-const tagged_discr__t__z__position3 Int)
 
 ;; tagged_discr__t__z__first__bit_axiom
   (assert (<= 0 tagged_discr__t__z__first__bit3))
@@ -387,11 +387,11 @@
 ;; tagged_discr__t__z__position_axiom
   (assert (<= 0 tagged_discr__t__z__position3))
 
-(declare-fun tagged_discr__t__x__first__bit3 () Int)
+(declare-const tagged_discr__t__x__first__bit3 Int)
 
-(declare-fun tagged_discr__t__x__last__bit3 () Int)
+(declare-const tagged_discr__t__x__last__bit3 Int)
 
-(declare-fun tagged_discr__t__x__position3 () Int)
+(declare-const tagged_discr__t__x__position3 Int)
 
 ;; tagged_discr__t__x__first__bit_axiom
   (assert (<= 0 tagged_discr__t__x__first__bit3))
@@ -402,7 +402,7 @@
 ;; tagged_discr__t__x__position_axiom
   (assert (<= 0 tagged_discr__t__x__position3))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)
@@ -418,33 +418,33 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun v__split_fields () Bool)
+(declare-const v__split_fields Bool)
 
-(declare-fun o () Bool)
+(declare-const o Bool)
 
-(declare-fun tagged_discr__init__2__R7b__assume () Bool)
+(declare-const tagged_discr__init__2__R7b__assume Bool)
 
-(declare-fun tagged_discr__init__2__R7b__assume1 () Int)
+(declare-const tagged_discr__init__2__R7b__assume1 Int)
 
-(declare-fun o1 () Bool)
+(declare-const o1 Bool)
 
-(declare-fun temp___211 () Bool)
+(declare-const temp___211 Bool)
 
-(declare-fun temp___2111 () Int)
+(declare-const temp___2111 Int)
 
-(declare-fun usq_ () Bool)
+(declare-const usq_ Bool)
 
-(declare-fun usq_1 () Int)
+(declare-const usq_1 Int)
 
-(declare-fun temp___213 () Bool)
+(declare-const temp___213 Bool)
 
-(declare-fun temp___2131 () Int)
+(declare-const temp___2131 Int)
 
-(declare-fun result () Bool)
+(declare-const result Bool)
 
-(declare-fun v__split_fields1 () Bool)
+(declare-const v__split_fields1 Bool)
 
-(declare-fun v__split_fields2 () Bool)
+(declare-const v__split_fields2 Bool)
 
 ;; H
   (assert (in_range3 r5b))

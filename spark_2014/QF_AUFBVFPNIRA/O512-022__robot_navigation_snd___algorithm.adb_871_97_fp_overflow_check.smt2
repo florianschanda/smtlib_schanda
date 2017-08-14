@@ -23,7 +23,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -32,7 +32,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -75,11 +75,11 @@
                    (and (in_range2 high)
                    (=> (<= low high) (and (in_range3 low) (in_range3 high))))))
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__component__size () Int)
+(declare-const value__component__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -138,9 +138,9 @@
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
 
-(declare-fun value__size1 () Int)
+(declare-const value__size1 Int)
 
-(declare-fun value__alignment1 () Int)
+(declare-const value__alignment1 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size1))
@@ -148,11 +148,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment1))
 
-(declare-fun spaces__angles__angle__theta__first__bit () Int)
+(declare-const spaces__angles__angle__theta__first__bit Int)
 
-(declare-fun spaces__angles__angle__theta__last__bit () Int)
+(declare-const spaces__angles__angle__theta__last__bit Int)
 
-(declare-fun spaces__angles__angle__theta__position () Int)
+(declare-const spaces__angles__angle__theta__position Int)
 
 ;; spaces__angles__angle__theta__first__bit_axiom
   (assert (<= 0 spaces__angles__angle__theta__first__bit))
@@ -164,9 +164,9 @@
 ;; spaces__angles__angle__theta__position_axiom
   (assert (<= 0 spaces__angles__angle__theta__position))
 
-(declare-fun value__size2 () Int)
+(declare-const value__size2 Int)
 
-(declare-fun value__alignment2 () Int)
+(declare-const value__alignment2 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size2))
@@ -174,11 +174,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment2))
 
-(declare-fun spaces__positions__position__x__first__bit () Int)
+(declare-const spaces__positions__position__x__first__bit Int)
 
-(declare-fun spaces__positions__position__x__last__bit () Int)
+(declare-const spaces__positions__position__x__last__bit Int)
 
-(declare-fun spaces__positions__position__x__position () Int)
+(declare-const spaces__positions__position__x__position Int)
 
 ;; spaces__positions__position__x__first__bit_axiom
   (assert (<= 0 spaces__positions__position__x__first__bit))
@@ -190,11 +190,11 @@
 ;; spaces__positions__position__x__position_axiom
   (assert (<= 0 spaces__positions__position__x__position))
 
-(declare-fun spaces__positions__position__y__first__bit () Int)
+(declare-const spaces__positions__position__y__first__bit Int)
 
-(declare-fun spaces__positions__position__y__last__bit () Int)
+(declare-const spaces__positions__position__y__last__bit Int)
 
-(declare-fun spaces__positions__position__y__position () Int)
+(declare-const spaces__positions__position__y__position Int)
 
 ;; spaces__positions__position__y__first__bit_axiom
   (assert (<= 0 spaces__positions__position__y__first__bit))
@@ -206,11 +206,11 @@
 ;; spaces__positions__position__y__position_axiom
   (assert (<= 0 spaces__positions__position__y__position))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun value__size3 () Int)
+(declare-const value__size3 Int)
 
-(declare-fun value__alignment3 () Int)
+(declare-const value__alignment3 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size3))
@@ -218,11 +218,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment3))
 
-(declare-fun spaces__poses__pose__pos__first__bit () Int)
+(declare-const spaces__poses__pose__pos__first__bit Int)
 
-(declare-fun spaces__poses__pose__pos__last__bit () Int)
+(declare-const spaces__poses__pose__pos__last__bit Int)
 
-(declare-fun spaces__poses__pose__pos__position () Int)
+(declare-const spaces__poses__pose__pos__position Int)
 
 ;; spaces__poses__pose__pos__first__bit_axiom
   (assert (<= 0 spaces__poses__pose__pos__first__bit))
@@ -234,11 +234,11 @@
 ;; spaces__poses__pose__pos__position_axiom
   (assert (<= 0 spaces__poses__pose__pos__position))
 
-(declare-fun spaces__poses__pose__ori__first__bit () Int)
+(declare-const spaces__poses__pose__ori__first__bit Int)
 
-(declare-fun spaces__poses__pose__ori__last__bit () Int)
+(declare-const spaces__poses__pose__ori__last__bit Int)
 
-(declare-fun spaces__poses__pose__ori__position () Int)
+(declare-const spaces__poses__pose__ori__position Int)
 
 ;; spaces__poses__pose__ori__first__bit_axiom
   (assert (<= 0 spaces__poses__pose__ori__first__bit))
@@ -252,11 +252,11 @@
 
 (define-fun in_range9 ((x Int)) Bool (and (<= 1 x) (<= x 1000)))
 
-(declare-fun value__size4 () Int)
+(declare-const value__size4 Int)
 
-(declare-fun value__component__size1 () Int)
+(declare-const value__component__size1 Int)
 
-(declare-fun value__alignment4 () Int)
+(declare-const value__alignment4 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size4))
@@ -269,9 +269,9 @@
 
 (define-fun in_range10 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
 
-(declare-fun value__size5 () Int)
+(declare-const value__size5 Int)
 
-(declare-fun value__alignment5 () Int)
+(declare-const value__alignment5 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size5))
@@ -279,11 +279,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment5))
 
-(declare-fun robot_iface__speed_option__opt__first__bit () Int)
+(declare-const robot_iface__speed_option__opt__first__bit Int)
 
-(declare-fun robot_iface__speed_option__opt__last__bit () Int)
+(declare-const robot_iface__speed_option__opt__last__bit Int)
 
-(declare-fun robot_iface__speed_option__opt__position () Int)
+(declare-const robot_iface__speed_option__opt__position Int)
 
 ;; robot_iface__speed_option__opt__first__bit_axiom
   (assert (<= 0 robot_iface__speed_option__opt__first__bit))
@@ -295,11 +295,11 @@
 ;; robot_iface__speed_option__opt__position_axiom
   (assert (<= 0 robot_iface__speed_option__opt__position))
 
-(declare-fun robot_iface__speed_option__modulus__first__bit () Int)
+(declare-const robot_iface__speed_option__modulus__first__bit Int)
 
-(declare-fun robot_iface__speed_option__modulus__last__bit () Int)
+(declare-const robot_iface__speed_option__modulus__last__bit Int)
 
-(declare-fun robot_iface__speed_option__modulus__position () Int)
+(declare-const robot_iface__speed_option__modulus__position Int)
 
 ;; robot_iface__speed_option__modulus__first__bit_axiom
   (assert (<= 0 robot_iface__speed_option__modulus__first__bit))
@@ -311,11 +311,11 @@
 ;; robot_iface__speed_option__modulus__position_axiom
   (assert (<= 0 robot_iface__speed_option__modulus__position))
 
-(declare-fun robot_iface__speed_option__angle__first__bit () Int)
+(declare-const robot_iface__speed_option__angle__first__bit Int)
 
-(declare-fun robot_iface__speed_option__angle__last__bit () Int)
+(declare-const robot_iface__speed_option__angle__last__bit Int)
 
-(declare-fun robot_iface__speed_option__angle__position () Int)
+(declare-const robot_iface__speed_option__angle__position Int)
 
 ;; robot_iface__speed_option__angle__first__bit_axiom
   (assert (<= 0 robot_iface__speed_option__angle__first__bit))
@@ -327,9 +327,9 @@
 ;; robot_iface__speed_option__angle__position_axiom
   (assert (<= 0 robot_iface__speed_option__angle__position))
 
-(declare-fun value__size6 () Int)
+(declare-const value__size6 Int)
 
-(declare-fun value__alignment6 () Int)
+(declare-const value__alignment6 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size6))
@@ -337,11 +337,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment6))
 
-(declare-fun robot_iface__proxy__robot_radius__first__bit () Int)
+(declare-const robot_iface__proxy__robot_radius__first__bit Int)
 
-(declare-fun robot_iface__proxy__robot_radius__last__bit () Int)
+(declare-const robot_iface__proxy__robot_radius__last__bit Int)
 
-(declare-fun robot_iface__proxy__robot_radius__position () Int)
+(declare-const robot_iface__proxy__robot_radius__position Int)
 
 ;; robot_iface__proxy__robot_radius__first__bit_axiom
   (assert (<= 0 robot_iface__proxy__robot_radius__first__bit))
@@ -353,11 +353,11 @@
 ;; robot_iface__proxy__robot_radius__position_axiom
   (assert (<= 0 robot_iface__proxy__robot_radius__position))
 
-(declare-fun robot_iface__proxy__min_gap_width__first__bit () Int)
+(declare-const robot_iface__proxy__min_gap_width__first__bit Int)
 
-(declare-fun robot_iface__proxy__min_gap_width__last__bit () Int)
+(declare-const robot_iface__proxy__min_gap_width__last__bit Int)
 
-(declare-fun robot_iface__proxy__min_gap_width__position () Int)
+(declare-const robot_iface__proxy__min_gap_width__position Int)
 
 ;; robot_iface__proxy__min_gap_width__first__bit_axiom
   (assert (<= 0 robot_iface__proxy__min_gap_width__first__bit))
@@ -369,11 +369,11 @@
 ;; robot_iface__proxy__min_gap_width__position_axiom
   (assert (<= 0 robot_iface__proxy__min_gap_width__position))
 
-(declare-fun robot_iface__proxy__obstacle_avoid_dist__first__bit () Int)
+(declare-const robot_iface__proxy__obstacle_avoid_dist__first__bit Int)
 
-(declare-fun robot_iface__proxy__obstacle_avoid_dist__last__bit () Int)
+(declare-const robot_iface__proxy__obstacle_avoid_dist__last__bit Int)
 
-(declare-fun robot_iface__proxy__obstacle_avoid_dist__position () Int)
+(declare-const robot_iface__proxy__obstacle_avoid_dist__position Int)
 
 ;; robot_iface__proxy__obstacle_avoid_dist__first__bit_axiom
   (assert (<= 0 robot_iface__proxy__obstacle_avoid_dist__first__bit))
@@ -385,11 +385,11 @@
 ;; robot_iface__proxy__obstacle_avoid_dist__position_axiom
   (assert (<= 0 robot_iface__proxy__obstacle_avoid_dist__position))
 
-(declare-fun robot_iface__proxy__max_speed__first__bit () Int)
+(declare-const robot_iface__proxy__max_speed__first__bit Int)
 
-(declare-fun robot_iface__proxy__max_speed__last__bit () Int)
+(declare-const robot_iface__proxy__max_speed__last__bit Int)
 
-(declare-fun robot_iface__proxy__max_speed__position () Int)
+(declare-const robot_iface__proxy__max_speed__position Int)
 
 ;; robot_iface__proxy__max_speed__first__bit_axiom
   (assert (<= 0 robot_iface__proxy__max_speed__first__bit))
@@ -401,11 +401,11 @@
 ;; robot_iface__proxy__max_speed__position_axiom
   (assert (<= 0 robot_iface__proxy__max_speed__position))
 
-(declare-fun robot_iface__proxy__max_turn_rate__first__bit () Int)
+(declare-const robot_iface__proxy__max_turn_rate__first__bit Int)
 
-(declare-fun robot_iface__proxy__max_turn_rate__last__bit () Int)
+(declare-const robot_iface__proxy__max_turn_rate__last__bit Int)
 
-(declare-fun robot_iface__proxy__max_turn_rate__position () Int)
+(declare-const robot_iface__proxy__max_turn_rate__position Int)
 
 ;; robot_iface__proxy__max_turn_rate__first__bit_axiom
   (assert (<= 0 robot_iface__proxy__max_turn_rate__first__bit))
@@ -417,11 +417,11 @@
 ;; robot_iface__proxy__max_turn_rate__position_axiom
   (assert (<= 0 robot_iface__proxy__max_turn_rate__position))
 
-(declare-fun robot_iface__proxy__goal_position_tol__first__bit () Int)
+(declare-const robot_iface__proxy__goal_position_tol__first__bit Int)
 
-(declare-fun robot_iface__proxy__goal_position_tol__last__bit () Int)
+(declare-const robot_iface__proxy__goal_position_tol__last__bit Int)
 
-(declare-fun robot_iface__proxy__goal_position_tol__position () Int)
+(declare-const robot_iface__proxy__goal_position_tol__position Int)
 
 ;; robot_iface__proxy__goal_position_tol__first__bit_axiom
   (assert (<= 0 robot_iface__proxy__goal_position_tol__first__bit))
@@ -433,11 +433,11 @@
 ;; robot_iface__proxy__goal_position_tol__position_axiom
   (assert (<= 0 robot_iface__proxy__goal_position_tol__position))
 
-(declare-fun robot_iface__proxy__goal_angle_tol__first__bit () Int)
+(declare-const robot_iface__proxy__goal_angle_tol__first__bit Int)
 
-(declare-fun robot_iface__proxy__goal_angle_tol__last__bit () Int)
+(declare-const robot_iface__proxy__goal_angle_tol__last__bit Int)
 
-(declare-fun robot_iface__proxy__goal_angle_tol__position () Int)
+(declare-const robot_iface__proxy__goal_angle_tol__position Int)
 
 ;; robot_iface__proxy__goal_angle_tol__first__bit_axiom
   (assert (<= 0 robot_iface__proxy__goal_angle_tol__first__bit))
@@ -449,11 +449,11 @@
 ;; robot_iface__proxy__goal_angle_tol__position_axiom
   (assert (<= 0 robot_iface__proxy__goal_angle_tol__position))
 
-(declare-fun robot_iface__proxy__goalx__first__bit () Int)
+(declare-const robot_iface__proxy__goalx__first__bit Int)
 
-(declare-fun robot_iface__proxy__goalx__last__bit () Int)
+(declare-const robot_iface__proxy__goalx__last__bit Int)
 
-(declare-fun robot_iface__proxy__goalx__position () Int)
+(declare-const robot_iface__proxy__goalx__position Int)
 
 ;; robot_iface__proxy__goalx__first__bit_axiom
   (assert (<= 0 robot_iface__proxy__goalx__first__bit))
@@ -465,11 +465,11 @@
 ;; robot_iface__proxy__goalx__position_axiom
   (assert (<= 0 robot_iface__proxy__goalx__position))
 
-(declare-fun robot_iface__proxy__goaly__first__bit () Int)
+(declare-const robot_iface__proxy__goaly__first__bit Int)
 
-(declare-fun robot_iface__proxy__goaly__last__bit () Int)
+(declare-const robot_iface__proxy__goaly__last__bit Int)
 
-(declare-fun robot_iface__proxy__goaly__position () Int)
+(declare-const robot_iface__proxy__goaly__position Int)
 
 ;; robot_iface__proxy__goaly__first__bit_axiom
   (assert (<= 0 robot_iface__proxy__goaly__first__bit))
@@ -481,11 +481,11 @@
 ;; robot_iface__proxy__goaly__position_axiom
   (assert (<= 0 robot_iface__proxy__goaly__position))
 
-(declare-fun robot_iface__proxy__goala__first__bit () Int)
+(declare-const robot_iface__proxy__goala__first__bit Int)
 
-(declare-fun robot_iface__proxy__goala__last__bit () Int)
+(declare-const robot_iface__proxy__goala__last__bit Int)
 
-(declare-fun robot_iface__proxy__goala__position () Int)
+(declare-const robot_iface__proxy__goala__position Int)
 
 ;; robot_iface__proxy__goala__first__bit_axiom
   (assert (<= 0 robot_iface__proxy__goala__first__bit))
@@ -497,11 +497,11 @@
 ;; robot_iface__proxy__goala__position_axiom
   (assert (<= 0 robot_iface__proxy__goala__position))
 
-(declare-fun robot_iface__proxy__scan_count__first__bit () Int)
+(declare-const robot_iface__proxy__scan_count__first__bit Int)
 
-(declare-fun robot_iface__proxy__scan_count__last__bit () Int)
+(declare-const robot_iface__proxy__scan_count__last__bit Int)
 
-(declare-fun robot_iface__proxy__scan_count__position () Int)
+(declare-const robot_iface__proxy__scan_count__position Int)
 
 ;; robot_iface__proxy__scan_count__first__bit_axiom
   (assert (<= 0 robot_iface__proxy__scan_count__first__bit))
@@ -513,11 +513,11 @@
 ;; robot_iface__proxy__scan_count__position_axiom
   (assert (<= 0 robot_iface__proxy__scan_count__position))
 
-(declare-fun robot_iface__proxy__scan_res__first__bit () Int)
+(declare-const robot_iface__proxy__scan_res__first__bit Int)
 
-(declare-fun robot_iface__proxy__scan_res__last__bit () Int)
+(declare-const robot_iface__proxy__scan_res__last__bit Int)
 
-(declare-fun robot_iface__proxy__scan_res__position () Int)
+(declare-const robot_iface__proxy__scan_res__position Int)
 
 ;; robot_iface__proxy__scan_res__first__bit_axiom
   (assert (<= 0 robot_iface__proxy__scan_res__first__bit))
@@ -529,11 +529,11 @@
 ;; robot_iface__proxy__scan_res__position_axiom
   (assert (<= 0 robot_iface__proxy__scan_res__position))
 
-(declare-fun robot_iface__proxy__max_range__first__bit () Int)
+(declare-const robot_iface__proxy__max_range__first__bit Int)
 
-(declare-fun robot_iface__proxy__max_range__last__bit () Int)
+(declare-const robot_iface__proxy__max_range__last__bit Int)
 
-(declare-fun robot_iface__proxy__max_range__position () Int)
+(declare-const robot_iface__proxy__max_range__position Int)
 
 ;; robot_iface__proxy__max_range__first__bit_axiom
   (assert (<= 0 robot_iface__proxy__max_range__first__bit))
@@ -545,11 +545,11 @@
 ;; robot_iface__proxy__max_range__position_axiom
   (assert (<= 0 robot_iface__proxy__max_range__position))
 
-(declare-fun robot_iface__proxy__scans__first__bit () Int)
+(declare-const robot_iface__proxy__scans__first__bit Int)
 
-(declare-fun robot_iface__proxy__scans__last__bit () Int)
+(declare-const robot_iface__proxy__scans__last__bit Int)
 
-(declare-fun robot_iface__proxy__scans__position () Int)
+(declare-const robot_iface__proxy__scans__position Int)
 
 ;; robot_iface__proxy__scans__first__bit_axiom
   (assert (<= 0 robot_iface__proxy__scans__first__bit))
@@ -561,11 +561,11 @@
 ;; robot_iface__proxy__scans__position_axiom
   (assert (<= 0 robot_iface__proxy__scans__position))
 
-(declare-fun robot_iface__proxy__x__first__bit () Int)
+(declare-const robot_iface__proxy__x__first__bit Int)
 
-(declare-fun robot_iface__proxy__x__last__bit () Int)
+(declare-const robot_iface__proxy__x__last__bit Int)
 
-(declare-fun robot_iface__proxy__x__position () Int)
+(declare-const robot_iface__proxy__x__position Int)
 
 ;; robot_iface__proxy__x__first__bit_axiom
   (assert (<= 0 robot_iface__proxy__x__first__bit))
@@ -577,11 +577,11 @@
 ;; robot_iface__proxy__x__position_axiom
   (assert (<= 0 robot_iface__proxy__x__position))
 
-(declare-fun robot_iface__proxy__y__first__bit () Int)
+(declare-const robot_iface__proxy__y__first__bit Int)
 
-(declare-fun robot_iface__proxy__y__last__bit () Int)
+(declare-const robot_iface__proxy__y__last__bit Int)
 
-(declare-fun robot_iface__proxy__y__position () Int)
+(declare-const robot_iface__proxy__y__position Int)
 
 ;; robot_iface__proxy__y__first__bit_axiom
   (assert (<= 0 robot_iface__proxy__y__first__bit))
@@ -593,11 +593,11 @@
 ;; robot_iface__proxy__y__position_axiom
   (assert (<= 0 robot_iface__proxy__y__position))
 
-(declare-fun robot_iface__proxy__yaw__first__bit () Int)
+(declare-const robot_iface__proxy__yaw__first__bit Int)
 
-(declare-fun robot_iface__proxy__yaw__last__bit () Int)
+(declare-const robot_iface__proxy__yaw__last__bit Int)
 
-(declare-fun robot_iface__proxy__yaw__position () Int)
+(declare-const robot_iface__proxy__yaw__position Int)
 
 ;; robot_iface__proxy__yaw__first__bit_axiom
   (assert (<= 0 robot_iface__proxy__yaw__first__bit))
@@ -609,11 +609,11 @@
 ;; robot_iface__proxy__yaw__position_axiom
   (assert (<= 0 robot_iface__proxy__yaw__position))
 
-(declare-fun robot_iface__proxy__speed__first__bit () Int)
+(declare-const robot_iface__proxy__speed__first__bit Int)
 
-(declare-fun robot_iface__proxy__speed__last__bit () Int)
+(declare-const robot_iface__proxy__speed__last__bit Int)
 
-(declare-fun robot_iface__proxy__speed__position () Int)
+(declare-const robot_iface__proxy__speed__position Int)
 
 ;; robot_iface__proxy__speed__first__bit_axiom
   (assert (<= 0 robot_iface__proxy__speed__first__bit))
@@ -625,11 +625,11 @@
 ;; robot_iface__proxy__speed__position_axiom
   (assert (<= 0 robot_iface__proxy__speed__position))
 
-(declare-fun robot_iface__proxy__goal_reached__first__bit () Int)
+(declare-const robot_iface__proxy__goal_reached__first__bit Int)
 
-(declare-fun robot_iface__proxy__goal_reached__last__bit () Int)
+(declare-const robot_iface__proxy__goal_reached__last__bit Int)
 
-(declare-fun robot_iface__proxy__goal_reached__position () Int)
+(declare-const robot_iface__proxy__goal_reached__position Int)
 
 ;; robot_iface__proxy__goal_reached__first__bit_axiom
   (assert (<= 0 robot_iface__proxy__goal_reached__first__bit))
@@ -643,9 +643,9 @@
 
 (define-fun in_range11 ((x Int)) Bool (and (<= (- 1) x) (<= x 1)))
 
-(declare-fun value__size7 () Int)
+(declare-const value__size7 Int)
 
-(declare-fun value__alignment7 () Int)
+(declare-const value__alignment7 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size7))
@@ -653,11 +653,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment7))
 
-(declare-fun gaps__gap__bearing__first__bit () Int)
+(declare-const gaps__gap__bearing__first__bit Int)
 
-(declare-fun gaps__gap__bearing__last__bit () Int)
+(declare-const gaps__gap__bearing__last__bit Int)
 
-(declare-fun gaps__gap__bearing__position () Int)
+(declare-const gaps__gap__bearing__position Int)
 
 ;; gaps__gap__bearing__first__bit_axiom
   (assert (<= 0 gaps__gap__bearing__first__bit))
@@ -668,11 +668,11 @@
 ;; gaps__gap__bearing__position_axiom
   (assert (<= 0 gaps__gap__bearing__position))
 
-(declare-fun gaps__gap__distance__first__bit () Int)
+(declare-const gaps__gap__distance__first__bit Int)
 
-(declare-fun gaps__gap__distance__last__bit () Int)
+(declare-const gaps__gap__distance__last__bit Int)
 
-(declare-fun gaps__gap__distance__position () Int)
+(declare-const gaps__gap__distance__position Int)
 
 ;; gaps__gap__distance__first__bit_axiom
   (assert (<= 0 gaps__gap__distance__first__bit))
@@ -683,11 +683,11 @@
 ;; gaps__gap__distance__position_axiom
   (assert (<= 0 gaps__gap__distance__position))
 
-(declare-fun gaps__gap__idir__first__bit () Int)
+(declare-const gaps__gap__idir__first__bit Int)
 
-(declare-fun gaps__gap__idir__last__bit () Int)
+(declare-const gaps__gap__idir__last__bit Int)
 
-(declare-fun gaps__gap__idir__position () Int)
+(declare-const gaps__gap__idir__position Int)
 
 ;; gaps__gap__idir__first__bit_axiom
   (assert (<= 0 gaps__gap__idir__first__bit))
@@ -698,9 +698,9 @@
 ;; gaps__gap__idir__position_axiom
   (assert (<= 0 gaps__gap__idir__position))
 
-(declare-fun value__size8 () Int)
+(declare-const value__size8 Int)
 
-(declare-fun value__alignment8 () Int)
+(declare-const value__alignment8 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size8))
@@ -708,11 +708,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment8))
 
-(declare-fun valleys__valley__risinggap__first__bit () Int)
+(declare-const valleys__valley__risinggap__first__bit Int)
 
-(declare-fun valleys__valley__risinggap__last__bit () Int)
+(declare-const valleys__valley__risinggap__last__bit Int)
 
-(declare-fun valleys__valley__risinggap__position () Int)
+(declare-const valleys__valley__risinggap__position Int)
 
 ;; valleys__valley__risinggap__first__bit_axiom
   (assert (<= 0 valleys__valley__risinggap__first__bit))
@@ -724,11 +724,11 @@
 ;; valleys__valley__risinggap__position_axiom
   (assert (<= 0 valleys__valley__risinggap__position))
 
-(declare-fun valleys__valley__othergap__first__bit () Int)
+(declare-const valleys__valley__othergap__first__bit Int)
 
-(declare-fun valleys__valley__othergap__last__bit () Int)
+(declare-const valleys__valley__othergap__last__bit Int)
 
-(declare-fun valleys__valley__othergap__position () Int)
+(declare-const valleys__valley__othergap__position Int)
 
 ;; valleys__valley__othergap__first__bit_axiom
   (assert (<= 0 valleys__valley__othergap__first__bit))
@@ -742,9 +742,9 @@
 
 (define-fun in_range12 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
 
-(declare-fun value__size9 () Int)
+(declare-const value__size9 Int)
 
-(declare-fun value__alignment9 () Int)
+(declare-const value__alignment9 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size9))
@@ -752,11 +752,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment9))
 
-(declare-fun algorithm__valley_option__opt__first__bit () Int)
+(declare-const algorithm__valley_option__opt__first__bit Int)
 
-(declare-fun algorithm__valley_option__opt__last__bit () Int)
+(declare-const algorithm__valley_option__opt__last__bit Int)
 
-(declare-fun algorithm__valley_option__opt__position () Int)
+(declare-const algorithm__valley_option__opt__position Int)
 
 ;; algorithm__valley_option__opt__first__bit_axiom
   (assert (<= 0 algorithm__valley_option__opt__first__bit))
@@ -768,11 +768,11 @@
 ;; algorithm__valley_option__opt__position_axiom
   (assert (<= 0 algorithm__valley_option__opt__position))
 
-(declare-fun algorithm__valley_option__value__first__bit () Int)
+(declare-const algorithm__valley_option__value__first__bit Int)
 
-(declare-fun algorithm__valley_option__value__last__bit () Int)
+(declare-const algorithm__valley_option__value__last__bit Int)
 
-(declare-fun algorithm__valley_option__value__position () Int)
+(declare-const algorithm__valley_option__value__position Int)
 
 ;; algorithm__valley_option__value__first__bit_axiom
   (assert (<= 0 algorithm__valley_option__value__first__bit))
@@ -786,9 +786,9 @@
 
 (define-fun in_range13 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(declare-fun value__size10 () Int)
+(declare-const value__size10 Int)
 
-(declare-fun value__alignment10 () Int)
+(declare-const value__alignment10 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size10))
@@ -796,11 +796,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment10))
 
-(declare-fun algorithm__gap_vectors__list__capacity__first__bit () Int)
+(declare-const algorithm__gap_vectors__list__capacity__first__bit Int)
 
-(declare-fun algorithm__gap_vectors__list__capacity__last__bit () Int)
+(declare-const algorithm__gap_vectors__list__capacity__last__bit Int)
 
-(declare-fun algorithm__gap_vectors__list__capacity__position () Int)
+(declare-const algorithm__gap_vectors__list__capacity__position Int)
 
 ;; algorithm__gap_vectors__list__capacity__first__bit_axiom
   (assert (<= 0 algorithm__gap_vectors__list__capacity__first__bit))
@@ -812,9 +812,9 @@
 ;; algorithm__gap_vectors__list__capacity__position_axiom
   (assert (<= 0 algorithm__gap_vectors__list__capacity__position))
 
-(declare-fun value__size11 () Int)
+(declare-const value__size11 Int)
 
-(declare-fun value__alignment11 () Int)
+(declare-const value__alignment11 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size11))
@@ -822,11 +822,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment11))
 
-(declare-fun algorithm__gap_vectors__list__capacity__first__bit1 () Int)
+(declare-const algorithm__gap_vectors__list__capacity__first__bit1 Int)
 
-(declare-fun algorithm__gap_vectors__list__capacity__last__bit1 () Int)
+(declare-const algorithm__gap_vectors__list__capacity__last__bit1 Int)
 
-(declare-fun algorithm__gap_vectors__list__capacity__position1 () Int)
+(declare-const algorithm__gap_vectors__list__capacity__position1 Int)
 
 ;; algorithm__gap_vectors__list__capacity__first__bit_axiom
   (assert (<= 0 algorithm__gap_vectors__list__capacity__first__bit1))
@@ -838,9 +838,9 @@
 ;; algorithm__gap_vectors__list__capacity__position_axiom
   (assert (<= 0 algorithm__gap_vectors__list__capacity__position1))
 
-(declare-fun value__size12 () Int)
+(declare-const value__size12 Int)
 
-(declare-fun value__alignment12 () Int)
+(declare-const value__alignment12 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size12))
@@ -848,11 +848,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment12))
 
-(declare-fun algorithm__laser_scan_data__first__first__bit () Int)
+(declare-const algorithm__laser_scan_data__first__first__bit Int)
 
-(declare-fun algorithm__laser_scan_data__first__last__bit () Int)
+(declare-const algorithm__laser_scan_data__first__last__bit Int)
 
-(declare-fun algorithm__laser_scan_data__first__position () Int)
+(declare-const algorithm__laser_scan_data__first__position Int)
 
 ;; algorithm__laser_scan_data__first__first__bit_axiom
   (assert (<= 0 algorithm__laser_scan_data__first__first__bit))
@@ -864,11 +864,11 @@
 ;; algorithm__laser_scan_data__first__position_axiom
   (assert (<= 0 algorithm__laser_scan_data__first__position))
 
-(declare-fun algorithm__laser_scan_data__second__first__bit () Int)
+(declare-const algorithm__laser_scan_data__second__first__bit Int)
 
-(declare-fun algorithm__laser_scan_data__second__last__bit () Int)
+(declare-const algorithm__laser_scan_data__second__last__bit Int)
 
-(declare-fun algorithm__laser_scan_data__second__position () Int)
+(declare-const algorithm__laser_scan_data__second__position Int)
 
 ;; algorithm__laser_scan_data__second__first__bit_axiom
   (assert (<= 0 algorithm__laser_scan_data__second__first__bit))
@@ -880,11 +880,11 @@
 ;; algorithm__laser_scan_data__second__position_axiom
   (assert (<= 0 algorithm__laser_scan_data__second__position))
 
-(declare-fun value__size13 () Int)
+(declare-const value__size13 Int)
 
-(declare-fun value__component__size2 () Int)
+(declare-const value__component__size2 Int)
 
-(declare-fun value__alignment13 () Int)
+(declare-const value__alignment13 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size13))
@@ -895,9 +895,9 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment13))
 
-(declare-fun value__size14 () Int)
+(declare-const value__size14 Int)
 
-(declare-fun value__alignment14 () Int)
+(declare-const value__alignment14 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size14))
@@ -905,11 +905,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment14))
 
-(declare-fun algorithm__controller__robot__first__bit () Int)
+(declare-const algorithm__controller__robot__first__bit Int)
 
-(declare-fun algorithm__controller__robot__last__bit () Int)
+(declare-const algorithm__controller__robot__last__bit Int)
 
-(declare-fun algorithm__controller__robot__position () Int)
+(declare-const algorithm__controller__robot__position Int)
 
 ;; algorithm__controller__robot__first__bit_axiom
   (assert (<= 0 algorithm__controller__robot__first__bit))
@@ -921,11 +921,11 @@
 ;; algorithm__controller__robot__position_axiom
   (assert (<= 0 algorithm__controller__robot__position))
 
-(declare-fun algorithm__controller__laserscan__first__bit () Int)
+(declare-const algorithm__controller__laserscan__first__bit Int)
 
-(declare-fun algorithm__controller__laserscan__last__bit () Int)
+(declare-const algorithm__controller__laserscan__last__bit Int)
 
-(declare-fun algorithm__controller__laserscan__position () Int)
+(declare-const algorithm__controller__laserscan__position Int)
 
 ;; algorithm__controller__laserscan__first__bit_axiom
   (assert (<= 0 algorithm__controller__laserscan__first__bit))
@@ -937,11 +937,11 @@
 ;; algorithm__controller__laserscan__position_axiom
   (assert (<= 0 algorithm__controller__laserscan__position))
 
-(declare-fun algorithm__controller__gapvec__first__bit () Int)
+(declare-const algorithm__controller__gapvec__first__bit Int)
 
-(declare-fun algorithm__controller__gapvec__last__bit () Int)
+(declare-const algorithm__controller__gapvec__last__bit Int)
 
-(declare-fun algorithm__controller__gapvec__position () Int)
+(declare-const algorithm__controller__gapvec__position Int)
 
 ;; algorithm__controller__gapvec__first__bit_axiom
   (assert (<= 0 algorithm__controller__gapvec__first__bit))
@@ -953,11 +953,11 @@
 ;; algorithm__controller__gapvec__position_axiom
   (assert (<= 0 algorithm__controller__gapvec__position))
 
-(declare-fun algorithm__controller__obsavoiddelta__first__bit () Int)
+(declare-const algorithm__controller__obsavoiddelta__first__bit Int)
 
-(declare-fun algorithm__controller__obsavoiddelta__last__bit () Int)
+(declare-const algorithm__controller__obsavoiddelta__last__bit Int)
 
-(declare-fun algorithm__controller__obsavoiddelta__position () Int)
+(declare-const algorithm__controller__obsavoiddelta__position Int)
 
 ;; algorithm__controller__obsavoiddelta__first__bit_axiom
   (assert (<= 0 algorithm__controller__obsavoiddelta__first__bit))
@@ -969,11 +969,11 @@
 ;; algorithm__controller__obsavoiddelta__position_axiom
   (assert (<= 0 algorithm__controller__obsavoiddelta__position))
 
-(declare-fun algorithm__controller__driveangle__first__bit () Int)
+(declare-const algorithm__controller__driveangle__first__bit Int)
 
-(declare-fun algorithm__controller__driveangle__last__bit () Int)
+(declare-const algorithm__controller__driveangle__last__bit Int)
 
-(declare-fun algorithm__controller__driveangle__position () Int)
+(declare-const algorithm__controller__driveangle__position Int)
 
 ;; algorithm__controller__driveangle__first__bit_axiom
   (assert (<= 0 algorithm__controller__driveangle__first__bit))
@@ -985,11 +985,11 @@
 ;; algorithm__controller__driveangle__position_axiom
   (assert (<= 0 algorithm__controller__driveangle__position))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun value__size15 () Int)
+(declare-const value__size15 Int)
 
-(declare-fun value__alignment15 () Int)
+(declare-const value__alignment15 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size15))
@@ -997,11 +997,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment15))
 
-(declare-fun robot_iface__speed_option__opt__first__bit1 () Int)
+(declare-const robot_iface__speed_option__opt__first__bit1 Int)
 
-(declare-fun robot_iface__speed_option__opt__last__bit1 () Int)
+(declare-const robot_iface__speed_option__opt__last__bit1 Int)
 
-(declare-fun robot_iface__speed_option__opt__position1 () Int)
+(declare-const robot_iface__speed_option__opt__position1 Int)
 
 ;; robot_iface__speed_option__opt__first__bit_axiom
   (assert (<= 0 robot_iface__speed_option__opt__first__bit1))
@@ -1013,11 +1013,11 @@
 ;; robot_iface__speed_option__opt__position_axiom
   (assert (<= 0 robot_iface__speed_option__opt__position1))
 
-(declare-fun robot_iface__speed_option__modulus__first__bit1 () Int)
+(declare-const robot_iface__speed_option__modulus__first__bit1 Int)
 
-(declare-fun robot_iface__speed_option__modulus__last__bit1 () Int)
+(declare-const robot_iface__speed_option__modulus__last__bit1 Int)
 
-(declare-fun robot_iface__speed_option__modulus__position1 () Int)
+(declare-const robot_iface__speed_option__modulus__position1 Int)
 
 ;; robot_iface__speed_option__modulus__first__bit_axiom
   (assert (<= 0 robot_iface__speed_option__modulus__first__bit1))
@@ -1029,11 +1029,11 @@
 ;; robot_iface__speed_option__modulus__position_axiom
   (assert (<= 0 robot_iface__speed_option__modulus__position1))
 
-(declare-fun robot_iface__speed_option__angle__first__bit1 () Int)
+(declare-const robot_iface__speed_option__angle__first__bit1 Int)
 
-(declare-fun robot_iface__speed_option__angle__last__bit1 () Int)
+(declare-const robot_iface__speed_option__angle__last__bit1 Int)
 
-(declare-fun robot_iface__speed_option__angle__position1 () Int)
+(declare-const robot_iface__speed_option__angle__position1 Int)
 
 ;; robot_iface__speed_option__angle__first__bit_axiom
   (assert (<= 0 robot_iface__speed_option__angle__first__bit1))
@@ -1045,44 +1045,44 @@
 ;; robot_iface__speed_option__angle__position_axiom
   (assert (<= 0 robot_iface__speed_option__angle__position1))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS8 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS9 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS9 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS10 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS10 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS11 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS11 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS12 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS12 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS13 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS13 Int)
 
-(declare-fun pbestvalley__attr__constrained () Bool)
+(declare-const pbestvalley__attr__constrained Bool)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS14 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS14 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS15 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS15 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS16 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS16 Int)
 
 (define-fun dynamic_property1 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS17 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS17 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS18 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS18 Int)
 
 (define-fun dynamic_invariant4 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -1151,283 +1151,283 @@
                                       (<= 0 2147483647)) (in_range13
                                       temp___expr_324)))
 
-(declare-fun drivespeed () Float32)
+(declare-const drivespeed Float32)
 
-(declare-fun driveturnrate () Float32)
+(declare-const driveturnrate Float32)
 
-(declare-fun disttoclosestobstacle () Float32)
+(declare-const disttoclosestobstacle Float32)
 
-(declare-fun safetydist () Float32)
+(declare-const safetydist Float32)
 
-(declare-fun theta () Float32)
+(declare-const theta Float32)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
-(declare-fun o3 () Float32)
+(declare-const o3 Float32)
 
-(declare-fun o4 () Float32)
+(declare-const o4 Float32)
 
-(declare-fun o5 () Float32)
+(declare-const o5 Float32)
 
-(declare-fun o6 () Float32)
+(declare-const o6 Float32)
 
-(declare-fun o7 () Float32)
+(declare-const o7 Float32)
 
-(declare-fun o8 () Float32)
+(declare-const o8 Float32)
 
-(declare-fun temp___954 () Float32)
+(declare-const temp___954 Float32)
 
-(declare-fun temp___953 () Int)
+(declare-const temp___953 Int)
 
-(declare-fun o9 () Float32)
+(declare-const o9 Float32)
 
-(declare-fun o10 () Float32)
+(declare-const o10 Float32)
 
-(declare-fun o11 () Float32)
+(declare-const o11 Float32)
 
-(declare-fun o12 () Float32)
+(declare-const o12 Float32)
 
-(declare-fun o13 () Float32)
+(declare-const o13 Float32)
 
-(declare-fun o14 () Float32)
+(declare-const o14 Float32)
 
-(declare-fun o15 () Float32)
+(declare-const o15 Float32)
 
-(declare-fun o16 () Float32)
+(declare-const o16 Float32)
 
-(declare-fun o17 () Float32)
+(declare-const o17 Float32)
 
-(declare-fun o18 () Float32)
+(declare-const o18 Float32)
 
-(declare-fun o19 () Float32)
+(declare-const o19 Float32)
 
-(declare-fun o20 () Float32)
+(declare-const o20 Float32)
 
-(declare-fun o21 () Float32)
+(declare-const o21 Float32)
 
-(declare-fun o22 () Float32)
+(declare-const o22 Float32)
 
-(declare-fun o23 () Float32)
+(declare-const o23 Float32)
 
-(declare-fun o24 () Float32)
+(declare-const o24 Float32)
 
-(declare-fun o25 () Float32)
+(declare-const o25 Float32)
 
-(declare-fun o26 () Float32)
+(declare-const o26 Float32)
 
-(declare-fun o27 () Float32)
+(declare-const o27 Float32)
 
-(declare-fun o28 () Float32)
+(declare-const o28 Float32)
 
-(declare-fun o29 () Float32)
+(declare-const o29 Float32)
 
-(declare-fun o30 () Float32)
+(declare-const o30 Float32)
 
-(declare-fun o31 () Float32)
+(declare-const o31 Float32)
 
-(declare-fun o32 () Float32)
+(declare-const o32 Float32)
 
-(declare-fun o33 () Float32)
+(declare-const o33 Float32)
 
-(declare-fun o34 () Float32)
+(declare-const o34 Float32)
 
-(declare-fun o35 () Float32)
+(declare-const o35 Float32)
 
-(declare-fun o36 () Float32)
+(declare-const o36 Float32)
 
-(declare-fun o37 () Float32)
+(declare-const o37 Float32)
 
-(declare-fun o38 () Float32)
+(declare-const o38 Float32)
 
-(declare-fun o39 () Float32)
+(declare-const o39 Float32)
 
-(declare-fun o40 () Float32)
+(declare-const o40 Float32)
 
-(declare-fun o41 () Float32)
+(declare-const o41 Float32)
 
-(declare-fun o42 () Float32)
+(declare-const o42 Float32)
 
-(declare-fun o43 () Float32)
+(declare-const o43 Float32)
 
-(declare-fun o44 () Float32)
+(declare-const o44 Float32)
 
-(declare-fun o45 () Float32)
+(declare-const o45 Float32)
 
-(declare-fun o46 () Float32)
+(declare-const o46 Float32)
 
-(declare-fun o47 () Float32)
+(declare-const o47 Float32)
 
-(declare-fun o48 () Float32)
+(declare-const o48 Float32)
 
-(declare-fun o49 () Float32)
+(declare-const o49 Float32)
 
-(declare-fun o50 () Float32)
+(declare-const o50 Float32)
 
-(declare-fun o51 () Float32)
+(declare-const o51 Float32)
 
-(declare-fun o52 () Float32)
+(declare-const o52 Float32)
 
-(declare-fun o53 () Float32)
+(declare-const o53 Float32)
 
-(declare-fun o54 () Float32)
+(declare-const o54 Float32)
 
-(declare-fun o55 () Float32)
+(declare-const o55 Float32)
 
-(declare-fun o56 () Float32)
+(declare-const o56 Float32)
 
-(declare-fun o57 () Float32)
+(declare-const o57 Float32)
 
-(declare-fun o58 () Float32)
+(declare-const o58 Float32)
 
-(declare-fun o59 () Float32)
+(declare-const o59 Float32)
 
-(declare-fun o60 () Float32)
+(declare-const o60 Float32)
 
-(declare-fun o61 () Float32)
+(declare-const o61 Float32)
 
-(declare-fun o62 () Float32)
+(declare-const o62 Float32)
 
-(declare-fun o63 () Float32)
+(declare-const o63 Float32)
 
-(declare-fun o64 () Float32)
+(declare-const o64 Float32)
 
-(declare-fun o65 () Float32)
+(declare-const o65 Float32)
 
-(declare-fun o66 () Float32)
+(declare-const o66 Float32)
 
-(declare-fun o67 () Float32)
+(declare-const o67 Float32)
 
-(declare-fun o68 () Float32)
+(declare-const o68 Float32)
 
-(declare-fun o69 () Float32)
+(declare-const o69 Float32)
 
-(declare-fun o70 () Float32)
+(declare-const o70 Float32)
 
-(declare-fun o71 () Float32)
+(declare-const o71 Float32)
 
-(declare-fun o72 () Float32)
+(declare-const o72 Float32)
 
-(declare-fun o73 () Float32)
+(declare-const o73 Float32)
 
-(declare-fun o74 () Float32)
+(declare-const o74 Float32)
 
-(declare-fun o75 () Float32)
+(declare-const o75 Float32)
 
-(declare-fun o76 () Float32)
+(declare-const o76 Float32)
 
-(declare-fun o77 () Float32)
+(declare-const o77 Float32)
 
-(declare-fun o78 () Float32)
+(declare-const o78 Float32)
 
-(declare-fun o79 () Float32)
+(declare-const o79 Float32)
 
-(declare-fun o80 () Float32)
+(declare-const o80 Float32)
 
-(declare-fun o81 () Float32)
+(declare-const o81 Float32)
 
-(declare-fun o82 () Float32)
+(declare-const o82 Float32)
 
-(declare-fun o83 () Float32)
+(declare-const o83 Float32)
 
-(declare-fun o84 () Float32)
+(declare-const o84 Float32)
 
-(declare-fun o85 () Float32)
+(declare-const o85 Float32)
 
-(declare-fun driveturnrate1 () Float32)
+(declare-const driveturnrate1 Float32)
 
-(declare-fun inumlps () Int)
+(declare-const inumlps Int)
 
-(declare-fun i () Int)
+(declare-const i Int)
 
-(declare-fun i1 () Int)
+(declare-const i1 Int)
 
-(declare-fun result () Bool)
+(declare-const result Bool)
 
-(declare-fun result1 () Bool)
+(declare-const result1 Bool)
 
-(declare-fun result2 () Bool)
+(declare-const result2 Bool)
 
-(declare-fun driveturnrate2 () Float32)
+(declare-const driveturnrate2 Float32)
 
-(declare-fun driveturnrate3 () Float32)
+(declare-const driveturnrate3 Float32)
 
-(declare-fun disttoclosestobstacle1 () Float32)
+(declare-const disttoclosestobstacle1 Float32)
 
-(declare-fun i2 () Int)
+(declare-const i2 Int)
 
-(declare-fun disttoclosestobstacle2 () Float32)
+(declare-const disttoclosestobstacle2 Float32)
 
-(declare-fun i3 () Int)
+(declare-const i3 Int)
 
-(declare-fun result3 () Bool)
+(declare-const result3 Bool)
 
-(declare-fun disttoclosestobstacle3 () Float32)
+(declare-const disttoclosestobstacle3 Float32)
 
-(declare-fun disttoclosestobstacle4 () Float32)
+(declare-const disttoclosestobstacle4 Float32)
 
-(declare-fun i4 () Int)
+(declare-const i4 Int)
 
-(declare-fun disttoclosestobstacle5 () Float32)
+(declare-const disttoclosestobstacle5 Float32)
 
-(declare-fun i5 () Int)
+(declare-const i5 Int)
 
-(declare-fun disttoclosestobstacle6 () Float32)
+(declare-const disttoclosestobstacle6 Float32)
 
-(declare-fun i6 () Int)
+(declare-const i6 Int)
 
-(declare-fun disttoclosestobstacle7 () Float32)
+(declare-const disttoclosestobstacle7 Float32)
 
-(declare-fun i7 () Int)
+(declare-const i7 Int)
 
-(declare-fun disttoclosestobstacle8 () Float32)
+(declare-const disttoclosestobstacle8 Float32)
 
-(declare-fun i8 () Int)
+(declare-const i8 Int)
 
-(declare-fun safetydist1 () Float32)
+(declare-const safetydist1 Float32)
 
-(declare-fun result4 () Bool)
+(declare-const result4 Bool)
 
-(declare-fun result5 () Bool)
+(declare-const result5 Bool)
 
-(declare-fun driveturnrate4 () Float32)
+(declare-const driveturnrate4 Float32)
 
-(declare-fun driveturnrate5 () Float32)
+(declare-const driveturnrate5 Float32)
 
-(declare-fun result6 () Bool)
+(declare-const result6 Bool)
 
-(declare-fun result7 () Bool)
+(declare-const result7 Bool)
 
-(declare-fun result8 () Bool)
+(declare-const result8 Bool)
 
-(declare-fun result9 () Bool)
+(declare-const result9 Bool)
 
-(declare-fun result10 () Bool)
+(declare-const result10 Bool)
 
-(declare-fun theta1 () Float32)
+(declare-const theta1 Float32)
 
-(declare-fun theta2 () Float32)
+(declare-const theta2 Float32)
 
-(declare-fun theta3 () Float32)
+(declare-const theta3 Float32)
 
-(declare-fun theta4 () Float32)
+(declare-const theta4 Float32)
 
-(declare-fun driveturnrate6 () Float32)
+(declare-const driveturnrate6 Float32)
 
-(declare-fun driveturnrate7 () Float32)
+(declare-const driveturnrate7 Float32)
 
-(declare-fun driveturnrate8 () Float32)
+(declare-const driveturnrate8 Float32)
 
-(declare-fun theta5 () Float32)
+(declare-const theta5 Float32)
 
-(declare-fun drivespeed1 () Float32)
+(declare-const drivespeed1 Float32)
 
-(declare-fun drivespeed2 () Float32)
+(declare-const drivespeed2 Float32)
 
-(declare-fun drivespeed3 () Float32)
+(declare-const drivespeed3 Float32)
 
 ;; H
   (assert
@@ -1480,7 +1480,7 @@
 ;; H
   (assert (= driveturnrate6 o46))
 
-(declare-fun abstr1 () Float32)
+(declare-const abstr1 Float32)
 
 ;; H
   (assert
@@ -1493,7 +1493,7 @@
   (=> (fp.eq o47 (fp #b0 #b01111111 #b00000000000000000000000))
   (fp.eq o48 (fp #b0 #b01111111 #b00000000000000000000000))))))))
 
-(declare-fun abstr2 () Float32)
+(declare-const abstr2 Float32)
 
 ;; H
   (assert
@@ -1514,7 +1514,7 @@
 ;; H
   (assert (and (= o62 o61) (not (or (fp.isInfinite o61) (fp.isNaN o61)))))
 
-(declare-fun abstr3 () Float32)
+(declare-const abstr3 Float32)
 
 ;; H
   (assert
@@ -1527,7 +1527,7 @@
   (=> (fp.eq o62 (fp #b0 #b01111111 #b00000000000000000000000))
   (fp.eq o63 (fp #b0 #b01111111 #b00000000000000000000000))))))))
 
-(declare-fun abstr4 () Float32)
+(declare-const abstr4 Float32)
 
 ;; H
   (assert
@@ -1545,7 +1545,7 @@
 ;; H
   (assert (= driveturnrate8 o66))
 
-(declare-fun abstr5 () Float32)
+(declare-const abstr5 Float32)
 
 ;; H
   (assert
@@ -1557,7 +1557,7 @@
 ;; H
   (assert (= theta5 o67))
 
-(declare-fun abstr6 () Float32)
+(declare-const abstr6 Float32)
 
 ;; H
   (assert
@@ -1570,7 +1570,7 @@
   (=> (fp.eq o68 (fp #b0 #b01111111 #b00000000000000000000000))
   (fp.eq o69 (fp #b0 #b01111111 #b00000000000000000000000))))))))
 
-(declare-fun abstr7 () Float32)
+(declare-const abstr7 Float32)
 
 ;; H
   (assert

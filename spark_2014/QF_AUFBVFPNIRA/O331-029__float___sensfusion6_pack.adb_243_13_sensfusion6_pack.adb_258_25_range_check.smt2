@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -158,573 +158,573 @@
                                        (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) (fp #b0 #b01111111 #b00000000000000000000000)))
                                        (in_range8 temp___expr_1336)))
 
-(declare-fun gx () Float32)
+(declare-const gx Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun gy () Float32)
+(declare-const gy Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun gz () Float32)
+(declare-const gz Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun ax () Float32)
+(declare-const ax Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun ay () Float32)
+(declare-const ay Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun az () Float32)
+(declare-const az Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-fun dt () Float32)
+(declare-const dt Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS8 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS9 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS9 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS10 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS10 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS11 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS11 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS12 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS12 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS13 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS13 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS14 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS14 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS15 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS15 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS16 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS16 Int)
 
-(declare-fun c3b () Float32)
+(declare-const c3b Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS17 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS17 Int)
 
-(declare-fun c4b () Float32)
+(declare-const c4b Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS18 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS18 Int)
 
-(declare-fun c5b () Float32)
+(declare-const c5b Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS19 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS19 Int)
 
-(declare-fun c6b () Float32)
+(declare-const c6b Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS20 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS20 Int)
 
-(declare-fun c7b () Float32)
+(declare-const c7b Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS21 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS21 Int)
 
-(declare-fun c8b () Float32)
+(declare-const c8b Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS22 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS22 Int)
 
-(declare-fun c9b () Float32)
+(declare-const c9b Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS23 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS23 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS24 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS24 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS25 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS25 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS26 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS26 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS27 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS27 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS28 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS28 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS29 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS29 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS30 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS30 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS31 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS31 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS32 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS32 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS33 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS33 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS34 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS34 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS35 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS35 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS36 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS36 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS37 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS37 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS38 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS38 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS39 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS39 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS40 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS40 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS41 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS41 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS42 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS42 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS43 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS43 Int)
 
-(declare-fun c11b () Float32)
+(declare-const c11b Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS44 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS44 Int)
 
-(declare-fun c12b () Float32)
+(declare-const c12b Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS45 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS45 Int)
 
-(declare-fun c13b () Float32)
+(declare-const c13b Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS46 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS46 Int)
 
-(declare-fun c14b () Float32)
+(declare-const c14b Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS47 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS47 Int)
 
-(declare-fun c15b () Float32)
+(declare-const c15b Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS48 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS48 Int)
 
-(declare-fun c16b () Float32)
+(declare-const c16b Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS49 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS49 Int)
 
-(declare-fun c17b () Float32)
+(declare-const c17b Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS50 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS50 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS51 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS51 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS52 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS52 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS53 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS53 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS54 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS54 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS55 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS55 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS56 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS56 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS57 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS57 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS58 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS58 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS59 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS59 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS60 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS60 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS61 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS61 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS62 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS62 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS63 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS63 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS64 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS64 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS65 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS65 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS66 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS66 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS67 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS67 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS68 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS68 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS69 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS69 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS70 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS70 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS71 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS71 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS72 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS72 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS73 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS73 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS74 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS74 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS75 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS75 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS76 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS76 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS77 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS77 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS78 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS78 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS79 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS79 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS80 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS80 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS81 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS81 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS82 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS82 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS83 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS83 Int)
 
-(declare-fun q0 () Float32)
+(declare-const q0 Float32)
 
-(declare-fun q1 () Float32)
+(declare-const q1 Float32)
 
-(declare-fun q2 () Float32)
+(declare-const q2 Float32)
 
-(declare-fun q3 () Float32)
+(declare-const q3 Float32)
 
-(declare-fun two_kp () Float32)
+(declare-const two_kp Float32)
 
-(declare-fun two_ki () Float32)
+(declare-const two_ki Float32)
 
-(declare-fun integral_fbx () Float32)
+(declare-const integral_fbx Float32)
 
-(declare-fun integral_fby () Float32)
+(declare-const integral_fby Float32)
 
-(declare-fun integral_fbz () Float32)
+(declare-const integral_fbz Float32)
 
-(declare-fun beta () Float32)
+(declare-const beta Float32)
 
-(declare-fun recip_norm () Float32)
+(declare-const recip_norm Float32)
 
-(declare-fun norm_ax () Float32)
+(declare-const norm_ax Float32)
 
-(declare-fun norm_ay () Float32)
+(declare-const norm_ay Float32)
 
-(declare-fun norm_az () Float32)
+(declare-const norm_az Float32)
 
-(declare-fun rad_gx () Float32)
+(declare-const rad_gx Float32)
 
-(declare-fun rad_gy () Float32)
+(declare-const rad_gy Float32)
 
-(declare-fun rad_gz () Float32)
+(declare-const rad_gz Float32)
 
-(declare-fun half_vx () Float32)
+(declare-const half_vx Float32)
 
-(declare-fun half_vy () Float32)
+(declare-const half_vy Float32)
 
-(declare-fun half_vz () Float32)
+(declare-const half_vz Float32)
 
-(declare-fun half_ex () Float32)
+(declare-const half_ex Float32)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
-(declare-fun o3 () Float32)
+(declare-const o3 Float32)
 
-(declare-fun o4 () Float32)
+(declare-const o4 Float32)
 
-(declare-fun o5 () Float32)
+(declare-const o5 Float32)
 
-(declare-fun o6 () Float32)
+(declare-const o6 Float32)
 
-(declare-fun o7 () Float32)
+(declare-const o7 Float32)
 
-(declare-fun o8 () Float32)
+(declare-const o8 Float32)
 
-(declare-fun o9 () Float32)
+(declare-const o9 Float32)
 
-(declare-fun o10 () Float32)
+(declare-const o10 Float32)
 
-(declare-fun o11 () Float32)
+(declare-const o11 Float32)
 
-(declare-fun o12 () Float32)
+(declare-const o12 Float32)
 
-(declare-fun o13 () Float32)
+(declare-const o13 Float32)
 
-(declare-fun o14 () Float32)
+(declare-const o14 Float32)
 
-(declare-fun o15 () Float32)
+(declare-const o15 Float32)
 
-(declare-fun o16 () Float32)
+(declare-const o16 Float32)
 
-(declare-fun o17 () Float32)
+(declare-const o17 Float32)
 
-(declare-fun o18 () Float32)
+(declare-const o18 Float32)
 
-(declare-fun o19 () Float32)
+(declare-const o19 Float32)
 
-(declare-fun o20 () Float32)
+(declare-const o20 Float32)
 
-(declare-fun o21 () Float32)
+(declare-const o21 Float32)
 
-(declare-fun o22 () Float32)
+(declare-const o22 Float32)
 
-(declare-fun o23 () Float32)
+(declare-const o23 Float32)
 
-(declare-fun o24 () Float32)
+(declare-const o24 Float32)
 
-(declare-fun o25 () Float32)
+(declare-const o25 Float32)
 
-(declare-fun o26 () Float32)
+(declare-const o26 Float32)
 
-(declare-fun o27 () Float32)
+(declare-const o27 Float32)
 
-(declare-fun o28 () Float32)
+(declare-const o28 Float32)
 
-(declare-fun o29 () Float32)
+(declare-const o29 Float32)
 
-(declare-fun o30 () Float32)
+(declare-const o30 Float32)
 
-(declare-fun o31 () Float32)
+(declare-const o31 Float32)
 
-(declare-fun o32 () Float32)
+(declare-const o32 Float32)
 
-(declare-fun o33 () Float32)
+(declare-const o33 Float32)
 
-(declare-fun o34 () Float32)
+(declare-const o34 Float32)
 
-(declare-fun o35 () Float32)
+(declare-const o35 Float32)
 
-(declare-fun o36 () Float32)
+(declare-const o36 Float32)
 
-(declare-fun o37 () Float32)
+(declare-const o37 Float32)
 
-(declare-fun o38 () Float32)
+(declare-const o38 Float32)
 
-(declare-fun o39 () Float32)
+(declare-const o39 Float32)
 
-(declare-fun o40 () Float32)
+(declare-const o40 Float32)
 
-(declare-fun o41 () Float32)
+(declare-const o41 Float32)
 
-(declare-fun o42 () Float32)
+(declare-const o42 Float32)
 
-(declare-fun o43 () Float32)
+(declare-const o43 Float32)
 
-(declare-fun o44 () Float32)
+(declare-const o44 Float32)
 
-(declare-fun o45 () Float32)
+(declare-const o45 Float32)
 
-(declare-fun o46 () Float32)
+(declare-const o46 Float32)
 
-(declare-fun o47 () Float32)
+(declare-const o47 Float32)
 
-(declare-fun o48 () Float32)
+(declare-const o48 Float32)
 
-(declare-fun o49 () Float32)
+(declare-const o49 Float32)
 
-(declare-fun o50 () Float32)
+(declare-const o50 Float32)
 
-(declare-fun o51 () Float32)
+(declare-const o51 Float32)
 
-(declare-fun o52 () Float32)
+(declare-const o52 Float32)
 
-(declare-fun o53 () Float32)
+(declare-const o53 Float32)
 
-(declare-fun o54 () Float32)
+(declare-const o54 Float32)
 
-(declare-fun o55 () Float32)
+(declare-const o55 Float32)
 
-(declare-fun o56 () Float32)
+(declare-const o56 Float32)
 
-(declare-fun o57 () Float32)
+(declare-const o57 Float32)
 
-(declare-fun o58 () Float32)
+(declare-const o58 Float32)
 
-(declare-fun o59 () Float32)
+(declare-const o59 Float32)
 
-(declare-fun o60 () Float32)
+(declare-const o60 Float32)
 
-(declare-fun o61 () Float32)
+(declare-const o61 Float32)
 
-(declare-fun o62 () Float32)
+(declare-const o62 Float32)
 
-(declare-fun o63 () Float32)
+(declare-const o63 Float32)
 
-(declare-fun o64 () Float32)
+(declare-const o64 Float32)
 
-(declare-fun o65 () Float32)
+(declare-const o65 Float32)
 
-(declare-fun o66 () Float32)
+(declare-const o66 Float32)
 
-(declare-fun o67 () Float32)
+(declare-const o67 Float32)
 
-(declare-fun o68 () Float32)
+(declare-const o68 Float32)
 
-(declare-fun o69 () Float32)
+(declare-const o69 Float32)
 
-(declare-fun o70 () Float32)
+(declare-const o70 Float32)
 
-(declare-fun o71 () Float32)
+(declare-const o71 Float32)
 
-(declare-fun o72 () Float32)
+(declare-const o72 Float32)
 
-(declare-fun o73 () Float32)
+(declare-const o73 Float32)
 
-(declare-fun o74 () Float32)
+(declare-const o74 Float32)
 
-(declare-fun o75 () Float32)
+(declare-const o75 Float32)
 
-(declare-fun o76 () Float32)
+(declare-const o76 Float32)
 
-(declare-fun o77 () Float32)
+(declare-const o77 Float32)
 
-(declare-fun o78 () Float32)
+(declare-const o78 Float32)
 
-(declare-fun o79 () Float32)
+(declare-const o79 Float32)
 
-(declare-fun o80 () Float32)
+(declare-const o80 Float32)
 
-(declare-fun o81 () Float32)
+(declare-const o81 Float32)
 
-(declare-fun o82 () Float32)
+(declare-const o82 Float32)
 
-(declare-fun o83 () Float32)
+(declare-const o83 Float32)
 
-(declare-fun o84 () Float32)
+(declare-const o84 Float32)
 
-(declare-fun o85 () Float32)
+(declare-const o85 Float32)
 
-(declare-fun o86 () Float32)
+(declare-const o86 Float32)
 
-(declare-fun o87 () Float32)
+(declare-const o87 Float32)
 
-(declare-fun o88 () Float32)
+(declare-const o88 Float32)
 
-(declare-fun o89 () Float32)
+(declare-const o89 Float32)
 
-(declare-fun o90 () Float32)
+(declare-const o90 Float32)
 
-(declare-fun o91 () Float32)
+(declare-const o91 Float32)
 
-(declare-fun o92 () Float32)
+(declare-const o92 Float32)
 
-(declare-fun o93 () Float32)
+(declare-const o93 Float32)
 
-(declare-fun o94 () Float32)
+(declare-const o94 Float32)
 
-(declare-fun o95 () Float32)
+(declare-const o95 Float32)
 
-(declare-fun o96 () Float32)
+(declare-const o96 Float32)
 
-(declare-fun o97 () Float32)
+(declare-const o97 Float32)
 
-(declare-fun o98 () Float32)
+(declare-const o98 Float32)
 
-(declare-fun o99 () Float32)
+(declare-const o99 Float32)
 
-(declare-fun o100 () Float32)
+(declare-const o100 Float32)
 
-(declare-fun o101 () Float32)
+(declare-const o101 Float32)
 
-(declare-fun o102 () Float32)
+(declare-const o102 Float32)
 
-(declare-fun o103 () Float32)
+(declare-const o103 Float32)
 
-(declare-fun o104 () Float32)
+(declare-const o104 Float32)
 
-(declare-fun o105 () Float32)
+(declare-const o105 Float32)
 
-(declare-fun o106 () Float32)
+(declare-const o106 Float32)
 
-(declare-fun o107 () Float32)
+(declare-const o107 Float32)
 
-(declare-fun o108 () Float32)
+(declare-const o108 Float32)
 
-(declare-fun integral_fbx1 () Float32)
+(declare-const integral_fbx1 Float32)
 
-(declare-fun integral_fby1 () Float32)
+(declare-const integral_fby1 Float32)
 
-(declare-fun integral_fbz1 () Float32)
+(declare-const integral_fbz1 Float32)
 
-(declare-fun recip_norm1 () Float32)
+(declare-const recip_norm1 Float32)
 
-(declare-fun norm_ax1 () Float32)
+(declare-const norm_ax1 Float32)
 
-(declare-fun norm_ay1 () Float32)
+(declare-const norm_ay1 Float32)
 
-(declare-fun norm_az1 () Float32)
+(declare-const norm_az1 Float32)
 
-(declare-fun half_ex1 () Float32)
+(declare-const half_ex1 Float32)
 
-(declare-fun half_ey () Float32)
+(declare-const half_ey Float32)
 
-(declare-fun half_ez () Float32)
+(declare-const half_ez Float32)
 
-(declare-fun rad_gx1 () Float32)
+(declare-const rad_gx1 Float32)
 
-(declare-fun rad_gy1 () Float32)
+(declare-const rad_gy1 Float32)
 
-(declare-fun rad_gz1 () Float32)
+(declare-const rad_gz1 Float32)
 
-(declare-fun half_vx1 () Float32)
+(declare-const half_vx1 Float32)
 
-(declare-fun half_vy1 () Float32)
+(declare-const half_vy1 Float32)
 
-(declare-fun half_vz1 () Float32)
+(declare-const half_vz1 Float32)
 
-(declare-fun qa () Float32)
+(declare-const qa Float32)
 
-(declare-fun qb () Float32)
+(declare-const qb Float32)
 
-(declare-fun qc () Float32)
+(declare-const qc Float32)
 
-(declare-fun recip_norm2 () Float32)
+(declare-const recip_norm2 Float32)
 
-(declare-fun norm_ax2 () Float32)
+(declare-const norm_ax2 Float32)
 
-(declare-fun norm_ay2 () Float32)
+(declare-const norm_ay2 Float32)
 
-(declare-fun norm_az2 () Float32)
+(declare-const norm_az2 Float32)
 
-(declare-fun half_ex2 () Float32)
+(declare-const half_ex2 Float32)
 
-(declare-fun half_ey1 () Float32)
+(declare-const half_ey1 Float32)
 
-(declare-fun half_ez1 () Float32)
+(declare-const half_ez1 Float32)
 
-(declare-fun integral_fbx2 () Float32)
+(declare-const integral_fbx2 Float32)
 
-(declare-fun integral_fby2 () Float32)
+(declare-const integral_fby2 Float32)
 
-(declare-fun integral_fbz2 () Float32)
+(declare-const integral_fbz2 Float32)
 
-(declare-fun rad_gx2 () Float32)
+(declare-const rad_gx2 Float32)
 
-(declare-fun rad_gy2 () Float32)
+(declare-const rad_gy2 Float32)
 
-(declare-fun rad_gz2 () Float32)
+(declare-const rad_gz2 Float32)
 
-(declare-fun integral_fbx3 () Float32)
+(declare-const integral_fbx3 Float32)
 
-(declare-fun integral_fby3 () Float32)
+(declare-const integral_fby3 Float32)
 
-(declare-fun integral_fbz3 () Float32)
+(declare-const integral_fbz3 Float32)
 
-(declare-fun rad_gx3 () Float32)
+(declare-const rad_gx3 Float32)
 
-(declare-fun rad_gy3 () Float32)
+(declare-const rad_gy3 Float32)
 
-(declare-fun rad_gz3 () Float32)
+(declare-const rad_gz3 Float32)
 
-(declare-fun rad_gx4 () Float32)
+(declare-const rad_gx4 Float32)
 
-(declare-fun rad_gy4 () Float32)
+(declare-const rad_gy4 Float32)
 
-(declare-fun rad_gz4 () Float32)
+(declare-const rad_gz4 Float32)
 
-(declare-fun q0_tmp () Float32)
+(declare-const q0_tmp Float32)
 
-(declare-fun q1_tmp () Float32)
+(declare-const q1_tmp Float32)
 
-(declare-fun q2_tmp () Float32)
+(declare-const q2_tmp Float32)
 
-(declare-fun q3_tmp () Float32)
+(declare-const q3_tmp Float32)
 
-(declare-fun recip_norm3 () Float32)
+(declare-const recip_norm3 Float32)
 
-(declare-fun q01 () Float32)
+(declare-const q01 Float32)
 
-(declare-fun q11 () Float32)
+(declare-const q11 Float32)
 
-(declare-fun q21 () Float32)
+(declare-const q21 Float32)
 
 ;; H
   (assert (in_range2 gx))
@@ -890,7 +890,7 @@
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
   (not (or (fp.isInfinite half_ex) (fp.isNaN half_ex)))))
 
-(declare-fun abstr1 () Float32)
+(declare-const abstr1 Float32)
 
 ;; H
   (assert
@@ -924,7 +924,7 @@
   (not (or (fp.isInfinite (fp.mul RNE c6b recip_norm2)) (fp.isNaN (fp.mul RNE
   c6b recip_norm2)))))))
 
-(declare-fun abstr2 () Float32)
+(declare-const abstr2 Float32)
 
 ;; H
   (assert
@@ -970,7 +970,7 @@
   (not (or (fp.isInfinite (fp.mul RNE c7b recip_norm2)) (fp.isNaN (fp.mul RNE
   c7b recip_norm2)))))))
 
-(declare-fun abstr3 () Float32)
+(declare-const abstr3 Float32)
 
 ;; H
   (assert
@@ -1016,7 +1016,7 @@
   (not (or (fp.isInfinite (fp.mul RNE c8b recip_norm2)) (fp.isNaN (fp.mul RNE
   c8b recip_norm2)))))))
 
-(declare-fun abstr4 () Float32)
+(declare-const abstr4 Float32)
 
 ;; H
   (assert
@@ -1908,7 +1908,7 @@
 ;; H
   (assert (and (= o95 o94) (not (or (fp.isInfinite o94) (fp.isNaN o94)))))
 
-(declare-fun abstr5 () Float32)
+(declare-const abstr5 Float32)
 
 ;; H
   (assert
@@ -1920,7 +1920,7 @@
 ;; H
   (assert (= recip_norm3 o96))
 
-(declare-fun abstr6 () Float32)
+(declare-const abstr6 Float32)
 
 ;; H
   (assert
@@ -1938,7 +1938,7 @@
 ;; H
   (assert (= q01 o99))
 
-(declare-fun abstr7 () Float32)
+(declare-const abstr7 Float32)
 
 ;; H
   (assert
@@ -1957,7 +1957,7 @@
 ;; H
   (assert (= q11 o102))
 
-(declare-fun abstr8 () Float32)
+(declare-const abstr8 Float32)
 
 ;; H
   (assert
@@ -1976,7 +1976,7 @@
 ;; H
   (assert (= q21 o105))
 
-(declare-fun abstr9 () Float32)
+(declare-const abstr9 Float32)
 
 ;; H
   (assert

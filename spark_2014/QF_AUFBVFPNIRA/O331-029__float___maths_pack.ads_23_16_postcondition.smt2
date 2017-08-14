@@ -10,22 +10,22 @@
 ;;; SMT-LIB2: real arithmetic
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 4294967295)))
 
-(declare-fun abstr () (_ BitVec 32))
+(declare-const abstr (_ BitVec 32))
 
-(declare-fun abstr1 () (_ BitVec 32))
+(declare-const abstr1 (_ BitVec 32))
 
-(declare-fun abstr2 () (_ BitVec 32))
+(declare-const abstr2 (_ BitVec 32))
 
-(declare-fun abstr3 () (_ BitVec 32))
+(declare-const abstr3 (_ BitVec 32))
 
-(declare-fun abstr4 () (_ BitVec 32))
+(declare-const abstr4 (_ BitVec 32))
 
 (define-fun nth_bv ((x (_ BitVec 32))
   (i (_ BitVec 32))) Bool (ite (not
                                (= (bvand (bvlshr x i) #x00000001) #x00000000))
                           true false))
 
-(declare-fun abstr5 () Bool)
+(declare-const abstr5 Bool)
 
 (define-fun eq_sub ((a (_ BitVec 32)) (b (_ BitVec 32)) (i Int)
   (n Int)) Bool abstr5)
@@ -48,7 +48,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -57,7 +57,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr6 () Real)
+(declare-const abstr6 Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr6))
 
@@ -95,23 +95,23 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun attr__ATTRIBUTE_MODULUS () (_ BitVec 32))
+(declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 32))
 
 (define-fun dynamic_invariant1 ((temp___expr_182 (_ BitVec 32))
   (temp___is_init_179 Bool) (temp___skip_constant_180 Bool)
   (temp___do_toplevel_181 Bool)) Bool true)
 
-(declare-fun x () Float32)
+(declare-const x Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
 (define-fun dynamic_invariant2 ((temp___expr_1348 Float32)
   (temp___is_init_1345 Bool) (temp___skip_constant_1346 Bool)
@@ -120,13 +120,13 @@
                                        (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                        (not (or (fp.isInfinite temp___expr_1348) (fp.isNaN temp___expr_1348)))))
 
-(declare-fun attr__ATTRIBUTE_MODULUS1 () (_ BitVec 32))
+(declare-const attr__ATTRIBUTE_MODULUS1 (_ BitVec 32))
 
 (define-fun dynamic_invariant3 ((temp___expr_1354 (_ BitVec 32))
   (temp___is_init_1351 Bool) (temp___skip_constant_1352 Bool)
   (temp___do_toplevel_1353 Bool)) Bool true)
 
-(declare-fun attr__ATTRIBUTE_MODULUS2 () (_ BitVec 32))
+(declare-const attr__ATTRIBUTE_MODULUS2 (_ BitVec 32))
 
 (define-fun dynamic_invariant4 ((temp___expr_1360 (_ BitVec 32))
   (temp___is_init_1357 Bool) (temp___skip_constant_1358 Bool)
@@ -139,91 +139,91 @@
                                        (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                        (not (or (fp.isInfinite temp___expr_1366) (fp.isNaN temp___expr_1366)))))
 
-(declare-fun half_x () Float32)
+(declare-const half_x Float32)
 
-(declare-fun y () Float32)
+(declare-const y Float32)
 
-(declare-fun magic_num () (_ BitVec 32))
+(declare-const magic_num (_ BitVec 32))
 
-(declare-fun i () (_ BitVec 32))
+(declare-const i (_ BitVec 32))
 
-(declare-fun maths_pack__inv_sqrt__result () Float32)
+(declare-const maths_pack__inv_sqrt__result Float32)
 
-(declare-fun o () (_ BitVec 32))
+(declare-const o (_ BitVec 32))
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
-(declare-fun o3 () Float32)
+(declare-const o3 Float32)
 
-(declare-fun o4 () Float32)
+(declare-const o4 Float32)
 
-(declare-fun o5 () Float32)
+(declare-const o5 Float32)
 
-(declare-fun o6 () Float32)
+(declare-const o6 Float32)
 
-(declare-fun o7 () Float32)
+(declare-const o7 Float32)
 
-(declare-fun o8 () Float32)
+(declare-const o8 Float32)
 
-(declare-fun result () Float32)
+(declare-const result Float32)
 
-(declare-fun half_x1 () Float32)
+(declare-const half_x1 Float32)
 
-(declare-fun result1 () Float32)
+(declare-const result1 Float32)
 
-(declare-fun y1 () Float32)
+(declare-const y1 Float32)
 
-(declare-fun result2 () (_ BitVec 32))
+(declare-const result2 (_ BitVec 32))
 
-(declare-fun magic_num1 () (_ BitVec 32))
+(declare-const magic_num1 (_ BitVec 32))
 
-(declare-fun result3 () (_ BitVec 32))
+(declare-const result3 (_ BitVec 32))
 
-(declare-fun i1 () (_ BitVec 32))
+(declare-const i1 (_ BitVec 32))
 
-(declare-fun result4 () (_ BitVec 32))
+(declare-const result4 (_ BitVec 32))
 
-(declare-fun i2 () (_ BitVec 32))
+(declare-const i2 (_ BitVec 32))
 
-(declare-fun result5 () Float32)
+(declare-const result5 Float32)
 
-(declare-fun y2 () Float32)
+(declare-const y2 Float32)
 
-(declare-fun result6 () Float32)
+(declare-const result6 Float32)
 
-(declare-fun y3 () Float32)
+(declare-const y3 Float32)
 
-(declare-fun result7 () Float32)
+(declare-const result7 Float32)
 
-(declare-fun maths_pack__inv_sqrt__result1 () Float32)
+(declare-const maths_pack__inv_sqrt__result1 Float32)
 
-(declare-fun maths_pack__inv_sqrt__result2 () Float32)
+(declare-const maths_pack__inv_sqrt__result2 Float32)
 
-(declare-fun maths_pack__inv_sqrt__result3 () Float32)
+(declare-const maths_pack__inv_sqrt__result3 Float32)
 
-(declare-fun half_x2 () Float32)
+(declare-const half_x2 Float32)
 
-(declare-fun y4 () Float32)
+(declare-const y4 Float32)
 
-(declare-fun magic_num2 () (_ BitVec 32))
+(declare-const magic_num2 (_ BitVec 32))
 
-(declare-fun i3 () (_ BitVec 32))
+(declare-const i3 (_ BitVec 32))
 
-(declare-fun maths_pack__inv_sqrt__result4 () Float32)
+(declare-const maths_pack__inv_sqrt__result4 Float32)
 
-(declare-fun half_x3 () Float32)
+(declare-const half_x3 Float32)
 
-(declare-fun y5 () Float32)
+(declare-const y5 Float32)
 
-(declare-fun magic_num3 () (_ BitVec 32))
+(declare-const magic_num3 (_ BitVec 32))
 
-(declare-fun i4 () (_ BitVec 32))
+(declare-const i4 (_ BitVec 32))
 
-(declare-fun maths_pack__inv_sqrt__result5 () Float32)
+(declare-const maths_pack__inv_sqrt__result5 Float32)
 
-(declare-fun result8 () Float32)
+(declare-const result8 Float32)
 
 ;; H
   (assert (not (or (fp.isInfinite x) (fp.isNaN x))))
@@ -245,12 +245,12 @@
 ;; H
   (assert (not (or (fp.isInfinite y1) (fp.isNaN y1))))
 
-(declare-fun abstr7 () (_ BitVec 32))
+(declare-const abstr7 (_ BitVec 32))
 
 ;; H
   (assert (= magic_num1 abstr7))
 
-(declare-fun abstr8 () (_ BitVec 32))
+(declare-const abstr8 (_ BitVec 32))
 
 ;; H
   (assert (= o abstr8))
@@ -261,12 +261,12 @@
 ;; H
   (assert (= i1 result4))
 
-(declare-fun abstr9 () (_ BitVec 32))
+(declare-const abstr9 (_ BitVec 32))
 
 ;; H
   (assert (= i2 (bvsub magic_num1 (bvlshr i1 abstr9))))
 
-(declare-fun abstr10 () Float32)
+(declare-const abstr10 Float32)
 
 ;; H
   (assert (and (= o1 abstr10) (not (or (fp.isInfinite o1) (fp.isNaN o1)))))

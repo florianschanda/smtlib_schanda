@@ -10,22 +10,22 @@
 ;;; SMT-LIB2: real arithmetic
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 4294967295)))
 
-(declare-fun abstr () (_ BitVec 32))
+(declare-const abstr (_ BitVec 32))
 
-(declare-fun abstr1 () (_ BitVec 32))
+(declare-const abstr1 (_ BitVec 32))
 
-(declare-fun abstr2 () (_ BitVec 32))
+(declare-const abstr2 (_ BitVec 32))
 
-(declare-fun abstr3 () (_ BitVec 32))
+(declare-const abstr3 (_ BitVec 32))
 
-(declare-fun abstr4 () (_ BitVec 32))
+(declare-const abstr4 (_ BitVec 32))
 
 (define-fun nth_bv ((x (_ BitVec 32))
   (i (_ BitVec 32))) Bool (ite (not
                                (= (bvand (bvlshr x i) #x00000001) #x00000000))
                           true false))
 
-(declare-fun abstr5 () Bool)
+(declare-const abstr5 Bool)
 
 (define-fun eq_sub ((a (_ BitVec 32)) (b (_ BitVec 32)) (i Int)
   (n Int)) Bool abstr5)
@@ -48,7 +48,7 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 9007199254740991.0 19958403095347198116563727130368385660674512604354575415025472424372118918689640657849579654926357010893424468441924952439724379883935936607391717982848314203200056729510856765175377214443629871826533567445439239933308104551208703888888552684480441575071209068757560416423584952303440099278848.0)) x)
@@ -57,7 +57,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr6 () Real)
+(declare-const abstr6 Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr6))
 
@@ -84,42 +84,42 @@
 
 (define-fun uint_in_range1 ((i Int)) Bool (and (<= 0 i) (<= i 255)))
 
-(declare-fun abstr7 () (_ BitVec 8))
+(declare-const abstr7 (_ BitVec 8))
 
-(declare-fun abstr8 () (_ BitVec 8))
+(declare-const abstr8 (_ BitVec 8))
 
-(declare-fun abstr9 () (_ BitVec 8))
+(declare-const abstr9 (_ BitVec 8))
 
-(declare-fun abstr10 () (_ BitVec 8))
+(declare-const abstr10 (_ BitVec 8))
 
-(declare-fun abstr11 () (_ BitVec 8))
+(declare-const abstr11 (_ BitVec 8))
 
 (define-fun nth_bv1 ((x (_ BitVec 8))
   (i (_ BitVec 8))) Bool (ite (not (= (bvand (bvlshr x i) #x01) #x00)) true
                          false))
 
-(declare-fun abstr12 () Bool)
+(declare-const abstr12 Bool)
 
 (define-fun eq_sub1 ((a (_ BitVec 8)) (b (_ BitVec 8)) (i Int)
   (n Int)) Bool abstr12)
 
 (define-fun uint_in_range2 ((i Int)) Bool (and (<= 0 i) (<= i 65535)))
 
-(declare-fun abstr13 () (_ BitVec 16))
+(declare-const abstr13 (_ BitVec 16))
 
-(declare-fun abstr14 () (_ BitVec 16))
+(declare-const abstr14 (_ BitVec 16))
 
-(declare-fun abstr15 () (_ BitVec 16))
+(declare-const abstr15 (_ BitVec 16))
 
-(declare-fun abstr16 () (_ BitVec 16))
+(declare-const abstr16 (_ BitVec 16))
 
-(declare-fun abstr17 () (_ BitVec 16))
+(declare-const abstr17 (_ BitVec 16))
 
 (define-fun nth_bv2 ((x (_ BitVec 16))
   (i (_ BitVec 16))) Bool (ite (not (= (bvand (bvlshr x i) #x0001) #x0000))
                           true false))
 
-(declare-fun abstr18 () Bool)
+(declare-const abstr18 Bool)
 
 (define-fun eq_sub2 ((a (_ BitVec 16)) (b (_ BitVec 16)) (i Int)
   (n Int)) Bool abstr18)
@@ -127,37 +127,37 @@
 (define-fun uint_in_range3 ((i Int)) Bool (and (<= 0 i)
                                           (<= i 18446744073709551615)))
 
-(declare-fun abstr19 () (_ BitVec 64))
+(declare-const abstr19 (_ BitVec 64))
 
-(declare-fun abstr20 () (_ BitVec 64))
+(declare-const abstr20 (_ BitVec 64))
 
-(declare-fun abstr21 () (_ BitVec 64))
+(declare-const abstr21 (_ BitVec 64))
 
-(declare-fun abstr22 () (_ BitVec 64))
+(declare-const abstr22 (_ BitVec 64))
 
-(declare-fun abstr23 () (_ BitVec 64))
+(declare-const abstr23 (_ BitVec 64))
 
 (define-fun nth_bv3 ((x (_ BitVec 64))
   (i (_ BitVec 64))) Bool (ite (not
                                (= (bvand (bvlshr x i) #x0000000000000001) #x0000000000000000))
                           true false))
 
-(declare-fun abstr24 () Bool)
+(declare-const abstr24 Bool)
 
 (define-fun eq_sub3 ((a (_ BitVec 64)) (b (_ BitVec 64)) (i Int)
   (n Int)) Bool abstr24)
 
-(declare-fun attr__ATTRIBUTE_MODULUS () (_ BitVec 32))
+(declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 32))
 
 (define-fun dynamic_invariant ((temp___expr_177 (_ BitVec 32))
   (temp___is_init_174 Bool) (temp___skip_constant_175 Bool)
   (temp___do_toplevel_176 Bool)) Bool true)
 
-(declare-fun attr__ATTRIBUTE_MODULUS1 () (_ BitVec 32))
+(declare-const attr__ATTRIBUTE_MODULUS1 (_ BitVec 32))
 
-(declare-fun abstr25 () (_ BitVec 32))
+(declare-const abstr25 (_ BitVec 32))
 
-(declare-fun abstr26 () (_ BitVec 32))
+(declare-const abstr26 (_ BitVec 32))
 
 (define-fun in_range1 ((x (_ BitVec 32))) Bool (and (bvule abstr26 x)
                                                (bvule x abstr25)))
@@ -171,42 +171,42 @@
                                       (bvule abstr26 abstr25)) (in_range1
                                       temp___expr_201)))
 
-(declare-fun requested_force () (_ BitVec 32))
+(declare-const requested_force (_ BitVec 32))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun calculated_force () (_ BitVec 32))
+(declare-const calculated_force (_ BitVec 32))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun relative_error () (_ BitVec 32))
+(declare-const relative_error (_ BitVec 32))
 
-(declare-fun abs_out1 () (_ BitVec 32))
+(declare-const abs_out1 (_ BitVec 32))
 
-(declare-fun result () (_ BitVec 32))
+(declare-const result (_ BitVec 32))
 
-(declare-fun abs_out11 () (_ BitVec 32))
+(declare-const abs_out11 (_ BitVec 32))
 
-(declare-fun result1 () (_ BitVec 32))
+(declare-const result1 (_ BitVec 32))
 
-(declare-fun relative_error1 () (_ BitVec 32))
+(declare-const relative_error1 (_ BitVec 32))
 
-(declare-fun relative_error2 () (_ BitVec 32))
+(declare-const relative_error2 (_ BitVec 32))
 
-(declare-fun abs_out12 () (_ BitVec 32))
+(declare-const abs_out12 (_ BitVec 32))
 
-(declare-fun relative_error3 () (_ BitVec 32))
+(declare-const relative_error3 (_ BitVec 32))
 
-(declare-fun abs_out13 () (_ BitVec 32))
+(declare-const abs_out13 (_ BitVec 32))
 
 ;; H
   (assert (in_range1 calculated_force))
 
-(declare-fun abstr27 () (_ BitVec 32))
+(declare-const abstr27 (_ BitVec 32))
 
 ;; H
   (assert (not (= requested_force abstr27)))

@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -66,11 +66,11 @@
                    (and (in_range1 high)
                    (=> (<= low high) (and (in_range2 low) (in_range2 high))))))
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__component__size () Int)
+(declare-const value__component__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -105,11 +105,11 @@
                                       (<= (- 2147483648) 2147483647))
                                       (in_range4 temp___expr_514)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (define-fun dynamic_invariant3 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -124,29 +124,29 @@
                                      (or (= temp___is_init_60 true)
                                      (<= 0 255)) (in_range3 temp___expr_63)))
 
-(declare-fun a () Int)
+(declare-const a Int)
 
-(declare-fun b () Int)
+(declare-const b Int)
 
-(declare-fun m () Float32)
+(declare-const m Float32)
 
-(declare-fun o () Int)
+(declare-const o Int)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
-(declare-fun ada__integer_text_io__get__2__item () Int)
+(declare-const ada__integer_text_io__get__2__item Int)
 
-(declare-fun result () Int)
+(declare-const result Int)
 
-(declare-fun a1 () Int)
+(declare-const a1 Int)
 
-(declare-fun ada__integer_text_io__get__2__item1 () Int)
+(declare-const ada__integer_text_io__get__2__item1 Int)
 
-(declare-fun result1 () Int)
+(declare-const result1 Int)
 
-(declare-fun b1 () Int)
+(declare-const b1 Int)
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range1 a)))

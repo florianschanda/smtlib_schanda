@@ -55,7 +55,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range5 ((x Real)) Bool (and
                                       (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -64,7 +64,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range5 abstr))
 
@@ -89,22 +89,22 @@
   (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
                  (and (fp.isNegative  x) (< r 0.0))))
 
-(declare-fun n () Int)
+(declare-const n Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
 (define-fun dynamic_invariant3 ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)
@@ -113,149 +113,149 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(declare-fun result__ () Int)
+(declare-const result__ Int)
 
-(declare-fun old__ () Int)
+(declare-const old__ Int)
 
-(declare-fun oldest () Int)
+(declare-const oldest Int)
 
-(declare-fun temp () Int)
+(declare-const temp Int)
 
-(declare-fun i () Int)
+(declare-const i Int)
 
-(declare-fun number_theory__fibonacci__result () Int)
+(declare-const number_theory__fibonacci__result Int)
 
-(declare-fun temp___194 () Int)
+(declare-const temp___194 Int)
 
-(declare-fun temp___193 () Int)
+(declare-const temp___193 Int)
 
-(declare-fun temp___192 () Int)
+(declare-const temp___192 Int)
 
-(declare-fun temp___191 () Int)
+(declare-const temp___191 Int)
 
-(declare-fun o () Int)
+(declare-const o Int)
 
-(declare-fun o1 () Int)
+(declare-const o1 Int)
 
-(declare-fun o2 () Int)
+(declare-const o2 Int)
 
-(declare-fun o3 () Bool)
+(declare-const o3 Bool)
 
-(declare-fun o4 () Int)
+(declare-const o4 Int)
 
-(declare-fun old__1 () Int)
+(declare-const old__1 Int)
 
-(declare-fun oldest1 () Int)
+(declare-const oldest1 Int)
 
-(declare-fun temp1 () Int)
+(declare-const temp1 Int)
 
-(declare-fun i1 () Int)
+(declare-const i1 Int)
 
-(declare-fun result () Int)
+(declare-const result Int)
 
-(declare-fun result__1 () Int)
+(declare-const result__1 Int)
 
-(declare-fun result1 () Int)
+(declare-const result1 Int)
 
-(declare-fun oldest2 () Int)
+(declare-const oldest2 Int)
 
-(declare-fun result2 () Int)
+(declare-const result2 Int)
 
-(declare-fun old__2 () Int)
+(declare-const old__2 Int)
 
-(declare-fun result3 () Int)
+(declare-const result3 Int)
 
-(declare-fun i2 () Int)
+(declare-const i2 Int)
 
-(declare-fun old__3 () Int)
+(declare-const old__3 Int)
 
-(declare-fun oldest3 () Int)
+(declare-const oldest3 Int)
 
-(declare-fun temp2 () Int)
+(declare-const temp2 Int)
 
-(declare-fun i3 () Int)
+(declare-const i3 Int)
 
-(declare-fun result4 () Int)
+(declare-const result4 Int)
 
-(declare-fun temp3 () Int)
+(declare-const temp3 Int)
 
-(declare-fun result5 () Int)
+(declare-const result5 Int)
 
-(declare-fun oldest4 () Int)
+(declare-const oldest4 Int)
 
-(declare-fun result6 () Int)
+(declare-const result6 Int)
 
-(declare-fun old__4 () Int)
+(declare-const old__4 Int)
 
-(declare-fun result7 () Int)
+(declare-const result7 Int)
 
-(declare-fun i4 () Int)
+(declare-const i4 Int)
 
-(declare-fun old__5 () Int)
+(declare-const old__5 Int)
 
-(declare-fun oldest5 () Int)
+(declare-const oldest5 Int)
 
-(declare-fun temp4 () Int)
+(declare-const temp4 Int)
 
-(declare-fun i5 () Int)
+(declare-const i5 Int)
 
-(declare-fun old__6 () Int)
+(declare-const old__6 Int)
 
-(declare-fun oldest6 () Int)
+(declare-const oldest6 Int)
 
-(declare-fun temp5 () Int)
+(declare-const temp5 Int)
 
-(declare-fun i6 () Int)
+(declare-const i6 Int)
 
-(declare-fun old__7 () Int)
+(declare-const old__7 Int)
 
-(declare-fun oldest7 () Int)
+(declare-const oldest7 Int)
 
-(declare-fun temp6 () Int)
+(declare-const temp6 Int)
 
-(declare-fun old__8 () Int)
+(declare-const old__8 Int)
 
-(declare-fun oldest8 () Int)
+(declare-const oldest8 Int)
 
-(declare-fun temp7 () Int)
+(declare-const temp7 Int)
 
-(declare-fun i7 () Int)
+(declare-const i7 Int)
 
-(declare-fun old__9 () Int)
+(declare-const old__9 Int)
 
-(declare-fun oldest9 () Int)
+(declare-const oldest9 Int)
 
-(declare-fun temp8 () Int)
+(declare-const temp8 Int)
 
-(declare-fun i8 () Int)
+(declare-const i8 Int)
 
-(declare-fun result__2 () Int)
+(declare-const result__2 Int)
 
-(declare-fun result__3 () Int)
+(declare-const result__3 Int)
 
-(declare-fun old__10 () Int)
+(declare-const old__10 Int)
 
-(declare-fun oldest10 () Int)
+(declare-const oldest10 Int)
 
-(declare-fun temp9 () Int)
+(declare-const temp9 Int)
 
-(declare-fun i9 () Int)
+(declare-const i9 Int)
 
-(declare-fun number_theory__fibonacci__result1 () Int)
+(declare-const number_theory__fibonacci__result1 Int)
 
-(declare-fun number_theory__fibonacci__result2 () Int)
+(declare-const number_theory__fibonacci__result2 Int)
 
-(declare-fun result__4 () Int)
+(declare-const result__4 Int)
 
-(declare-fun old__11 () Int)
+(declare-const old__11 Int)
 
-(declare-fun oldest11 () Int)
+(declare-const oldest11 Int)
 
-(declare-fun temp10 () Int)
+(declare-const temp10 Int)
 
-(declare-fun i10 () Int)
+(declare-const i10 Int)
 
-(declare-fun number_theory__fibonacci__result3 () Int)
+(declare-const number_theory__fibonacci__result3 Int)
 
 ;; H
   (assert (in_range4 n))

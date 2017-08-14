@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -71,9 +71,9 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -81,11 +81,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(declare-fun p__r__a__first__bit () Int)
+(declare-const p__r__a__first__bit Int)
 
-(declare-fun p__r__a__last__bit () Int)
+(declare-const p__r__a__last__bit Int)
 
-(declare-fun p__r__a__position () Int)
+(declare-const p__r__a__position Int)
 
 ;; p__r__a__first__bit_axiom
   (assert (<= 0 p__r__a__first__bit))
@@ -96,11 +96,11 @@
 ;; p__r__a__position_axiom
   (assert (<= 0 p__r__a__position))
 
-(declare-fun p__r__b__first__bit () Int)
+(declare-const p__r__b__first__bit Int)
 
-(declare-fun p__r__b__last__bit () Int)
+(declare-const p__r__b__last__bit Int)
 
-(declare-fun p__r__b__position () Int)
+(declare-const p__r__b__position Int)
 
 ;; p__r__b__first__bit_axiom
   (assert (<= 0 p__r__b__first__bit))
@@ -113,21 +113,21 @@
 
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 255)))
 
-(declare-fun abstr1 () (_ BitVec 8))
+(declare-const abstr1 (_ BitVec 8))
 
-(declare-fun abstr2 () (_ BitVec 8))
+(declare-const abstr2 (_ BitVec 8))
 
-(declare-fun abstr3 () (_ BitVec 8))
+(declare-const abstr3 (_ BitVec 8))
 
-(declare-fun abstr4 () (_ BitVec 8))
+(declare-const abstr4 (_ BitVec 8))
 
-(declare-fun abstr5 () (_ BitVec 8))
+(declare-const abstr5 (_ BitVec 8))
 
 (define-fun nth_bv ((x (_ BitVec 8))
   (i (_ BitVec 8))) Bool (ite (not (= (bvand (bvlshr x i) #x01) #x00)) true
                          false))
 
-(declare-fun abstr6 () Bool)
+(declare-const abstr6 Bool)
 
 (define-fun eq_sub ((a (_ BitVec 8)) (b (_ BitVec 8)) (i Int)
   (n Int)) Bool abstr6)
@@ -138,27 +138,27 @@
 (define-fun bv_max ((x (_ BitVec 8))
   (y (_ BitVec 8))) (_ BitVec 8) (ite (bvule x y) y x))
 
-(declare-fun attr__ATTRIBUTE_MODULUS () (_ BitVec 8))
+(declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 8))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun x () Int)
+(declare-const x Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun y () Float32)
+(declare-const y Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (define-fun dynamic_invariant2 ((temp___expr_163 (_ BitVec 8))
   (temp___is_init_160 Bool) (temp___skip_constant_161 Bool)
   (temp___do_toplevel_162 Bool)) Bool true)
 
-(declare-fun o () Int)
+(declare-const o Int)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
 ;; H
   (assert (in_range1 x))

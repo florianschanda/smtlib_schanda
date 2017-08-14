@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -61,17 +61,17 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun t_FIRST () Float32)
+(declare-const t_FIRST Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun t_LAST () Float32)
+(declare-const t_LAST Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun first () Float32)
+(declare-const first Float32)
 
-(declare-fun last () Float32)
+(declare-const last Float32)
 
 (define-fun dynamic_property ((first_int Float32) (last_int Float32)
   (x Float32)) Bool (and (not (or (fp.isInfinite x) (fp.isNaN x)))
@@ -90,15 +90,15 @@
 ;; last__def_axiom
   (assert (= last t_LAST))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun p__t_FIRST__assume () Float32)
+(declare-const p__t_FIRST__assume Float32)
 
-(declare-fun p__t_LAST__assume () Float32)
+(declare-const p__t_LAST__assume Float32)
 
-(declare-fun us () Float32)
+(declare-const us Float32)
 
-(declare-fun abstr1 () Float32)
+(declare-const abstr1 Float32)
 
 ;; H
   (assert
@@ -113,7 +113,7 @@
 ;; H
   (assert (not (or (fp.isInfinite t_FIRST) (fp.isNaN t_FIRST))))
 
-(declare-fun abstr2 () Float32)
+(declare-const abstr2 Float32)
 
 ;; H
   (assert

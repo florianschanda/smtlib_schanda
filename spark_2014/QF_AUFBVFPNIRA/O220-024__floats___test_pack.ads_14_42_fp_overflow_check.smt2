@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -61,9 +61,9 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun value__size () Int)
+(declare-const value__size Int)
 
-(declare-fun value__alignment () Int)
+(declare-const value__alignment Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size))
@@ -71,11 +71,11 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(declare-fun test_pack__pid_obj__desired__first__bit () Int)
+(declare-const test_pack__pid_obj__desired__first__bit Int)
 
-(declare-fun test_pack__pid_obj__desired__last__bit () Int)
+(declare-const test_pack__pid_obj__desired__last__bit Int)
 
-(declare-fun test_pack__pid_obj__desired__position () Int)
+(declare-const test_pack__pid_obj__desired__position Int)
 
 ;; test_pack__pid_obj__desired__first__bit_axiom
   (assert (<= 0 test_pack__pid_obj__desired__first__bit))
@@ -87,11 +87,11 @@
 ;; test_pack__pid_obj__desired__position_axiom
   (assert (<= 0 test_pack__pid_obj__desired__position))
 
-(declare-fun test_pack__pid_obj__error__first__bit () Int)
+(declare-const test_pack__pid_obj__error__first__bit Int)
 
-(declare-fun test_pack__pid_obj__error__last__bit () Int)
+(declare-const test_pack__pid_obj__error__last__bit Int)
 
-(declare-fun test_pack__pid_obj__error__position () Int)
+(declare-const test_pack__pid_obj__error__position Int)
 
 ;; test_pack__pid_obj__error__first__bit_axiom
   (assert (<= 0 test_pack__pid_obj__error__first__bit))
@@ -103,17 +103,17 @@
 ;; test_pack__pid_obj__error__position_axiom
   (assert (<= 0 test_pack__pid_obj__error__position))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun measured () Float32)
+(declare-const measured Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
 ;; H
   (assert (not (or (fp.isInfinite measured) (fp.isNaN measured))))

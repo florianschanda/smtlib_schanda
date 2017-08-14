@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -82,25 +82,25 @@
                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000010 #b11000000000000000000000)))
                                       (in_range2 temp___expr_147)))
 
-(declare-fun x1 () Int)
+(declare-const x1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun x2 () Int)
+(declare-const x2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun x3 () Int)
+(declare-const x3 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun x4 () Int)
+(declare-const x4 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
 (define-fun in_range3 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -112,23 +112,23 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range3 temp___expr_15)))
 
-(declare-fun r1 () Float32)
+(declare-const r1 Float32)
 
-(declare-fun r2 () Float32)
+(declare-const r2 Float32)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
-(declare-fun result () Float32)
+(declare-const result Float32)
 
-(declare-fun r11 () Float32)
+(declare-const r11 Float32)
 
-(declare-fun result1 () Float32)
+(declare-const result1 Float32)
 
-(declare-fun r21 () Float32)
+(declare-const r21 Float32)
 
 ;; H
   (assert (in_range1 x1))
@@ -154,7 +154,7 @@
   (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000010 #b11000000000000000000000))
   (in_range2 r2)))
 
-(declare-fun abstr1 () Float32)
+(declare-const abstr1 Float32)
 
 ;; H
   (assert (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) abstr1))
@@ -162,7 +162,7 @@
 ;; H
   (assert (fp.leq abstr1 (fp #b0 #b10000010 #b11000000000000000000000)))
 
-(declare-fun abstr2 () Float32)
+(declare-const abstr2 Float32)
 
 ;; H
   (assert (fp.leq abstr2 (fp #b0 #b10000010 #b11000000000000000000000)))
@@ -170,7 +170,7 @@
 ;; H
   (assert (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) abstr2))
 
-(declare-fun abstr3 () Float32)
+(declare-const abstr3 Float32)
 
 (assert
 ;; WP_parameter_def

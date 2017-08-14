@@ -10,21 +10,21 @@
 ;;; SMT-LIB2: real arithmetic
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 255)))
 
-(declare-fun abstr () (_ BitVec 8))
+(declare-const abstr (_ BitVec 8))
 
-(declare-fun abstr1 () (_ BitVec 8))
+(declare-const abstr1 (_ BitVec 8))
 
-(declare-fun abstr2 () (_ BitVec 8))
+(declare-const abstr2 (_ BitVec 8))
 
-(declare-fun abstr3 () (_ BitVec 8))
+(declare-const abstr3 (_ BitVec 8))
 
-(declare-fun abstr4 () (_ BitVec 8))
+(declare-const abstr4 (_ BitVec 8))
 
 (define-fun nth_bv ((x (_ BitVec 8))
   (i (_ BitVec 8))) Bool (ite (not (= (bvand (bvlshr x i) #x01) #x00)) true
                          false))
 
-(declare-fun abstr5 () Bool)
+(declare-const abstr5 Bool)
 
 (define-fun eq_sub ((a (_ BitVec 8)) (b (_ BitVec 8)) (i Int)
   (n Int)) Bool abstr5)
@@ -47,7 +47,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -56,7 +56,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr6 () Real)
+(declare-const abstr6 Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr6))
 
@@ -87,7 +87,7 @@
 
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
-(declare-fun attr__ATTRIBUTE_MODULUS () (_ BitVec 8))
+(declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 8))
 
 (define-fun dynamic_invariant ((temp___expr_160 (_ BitVec 8))
   (temp___is_init_157 Bool) (temp___skip_constant_158 Bool)
@@ -100,9 +100,9 @@
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                       (not (or (fp.isInfinite temp___expr_202) (fp.isNaN temp___expr_202)))))
 
-(declare-fun abstr7 () (_ BitVec 8))
+(declare-const abstr7 (_ BitVec 8))
 
-(declare-fun abstr8 () (_ BitVec 8))
+(declare-const abstr8 (_ BitVec 8))
 
 (define-fun in_range2 ((x (_ BitVec 8))) Bool (and (bvule abstr8 x)
                                               (bvule x abstr7)))
@@ -116,13 +116,13 @@
                                       (bvule abstr8 abstr7)) (in_range2
                                       temp___expr_208)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_MODULUS1 () (_ BitVec 8))
+(declare-const attr__ATTRIBUTE_MODULUS1 (_ BitVec 8))
 
-(declare-fun abstr9 () (_ BitVec 8))
+(declare-const abstr9 (_ BitVec 8))
 
 (define-fun in_range3 ((x (_ BitVec 8))) Bool (and (bvule abstr8 x)
                                               (bvule x abstr9)))
@@ -136,9 +136,9 @@
                                       (bvule abstr8 abstr9)) (in_range3
                                       temp___expr_214)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_MODULUS2 () (_ BitVec 8))
+(declare-const attr__ATTRIBUTE_MODULUS2 (_ BitVec 8))
 
 (define-fun in_range4 ((x (_ BitVec 8))) Bool (and (bvule abstr8 x)
                                               (bvule x abstr9)))
@@ -152,79 +152,79 @@
                                       (bvule abstr8 abstr9)) (in_range4
                                       temp___expr_244)))
 
-(declare-fun battery_level () Float32)
+(declare-const battery_level Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun c () (_ BitVec 8))
+(declare-const c (_ BitVec 8))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun current_time () (_ BitVec 8))
+(declare-const current_time (_ BitVec 8))
 
-(declare-fun counter () (_ BitVec 8))
+(declare-const counter (_ BitVec 8))
 
-(declare-fun o () (_ BitVec 8))
+(declare-const o (_ BitVec 8))
 
-(declare-fun o1 () (_ BitVec 8))
+(declare-const o1 (_ BitVec 8))
 
-(declare-fun o2 () Bool)
+(declare-const o2 Bool)
 
-(declare-fun o3 () Bool)
+(declare-const o3 Bool)
 
-(declare-fun o4 () (_ BitVec 8))
+(declare-const o4 (_ BitVec 8))
 
-(declare-fun o5 () (_ BitVec 8))
+(declare-const o5 (_ BitVec 8))
 
-(declare-fun temp___280 () (_ BitVec 8))
+(declare-const temp___280 (_ BitVec 8))
 
-(declare-fun o6 () (_ BitVec 8))
+(declare-const o6 (_ BitVec 8))
 
-(declare-fun o7 () (_ BitVec 8))
+(declare-const o7 (_ BitVec 8))
 
-(declare-fun temp___282 () (_ BitVec 8))
+(declare-const temp___282 (_ BitVec 8))
 
-(declare-fun o8 () (_ BitVec 8))
+(declare-const o8 (_ BitVec 8))
 
-(declare-fun o9 () (_ BitVec 8))
+(declare-const o9 (_ BitVec 8))
 
-(declare-fun temp___279 () (_ BitVec 8))
+(declare-const temp___279 (_ BitVec 8))
 
-(declare-fun o10 () (_ BitVec 8))
+(declare-const o10 (_ BitVec 8))
 
-(declare-fun o11 () (_ BitVec 8))
+(declare-const o11 (_ BitVec 8))
 
-(declare-fun o12 () Float32)
+(declare-const o12 Float32)
 
-(declare-fun result () (_ BitVec 8))
+(declare-const result (_ BitVec 8))
 
-(declare-fun current_time1 () (_ BitVec 8))
+(declare-const current_time1 (_ BitVec 8))
 
-(declare-fun result1 () (_ BitVec 8))
+(declare-const result1 (_ BitVec 8))
 
-(declare-fun counter1 () (_ BitVec 8))
+(declare-const counter1 (_ BitVec 8))
 
-(declare-fun result2 () Bool)
+(declare-const result2 Bool)
 
-(declare-fun result3 () Bool)
+(declare-const result3 Bool)
 
-(declare-fun result4 () Bool)
+(declare-const result4 Bool)
 
-(declare-fun result5 () Bool)
+(declare-const result5 Bool)
 
-(declare-fun result6 () Bool)
+(declare-const result6 Bool)
 
-(declare-fun result7 () (_ BitVec 8))
+(declare-const result7 (_ BitVec 8))
 
-(declare-fun counter2 () (_ BitVec 8))
+(declare-const counter2 (_ BitVec 8))
 
-(declare-fun current_time2 () (_ BitVec 8))
+(declare-const current_time2 (_ BitVec 8))
 
-(declare-fun counter3 () (_ BitVec 8))
+(declare-const counter3 (_ BitVec 8))
 
-(declare-fun current_time3 () (_ BitVec 8))
+(declare-const current_time3 (_ BitVec 8))
 
-(declare-fun counter4 () (_ BitVec 8))
+(declare-const counter4 (_ BitVec 8))
 
 ;; H
   (assert (in_range4 counter))

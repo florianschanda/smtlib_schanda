@@ -13,22 +13,22 @@
 
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 4294967295)))
 
-(declare-fun abstr () (_ BitVec 32))
+(declare-const abstr (_ BitVec 32))
 
-(declare-fun abstr1 () (_ BitVec 32))
+(declare-const abstr1 (_ BitVec 32))
 
-(declare-fun abstr2 () (_ BitVec 32))
+(declare-const abstr2 (_ BitVec 32))
 
-(declare-fun abstr3 () (_ BitVec 32))
+(declare-const abstr3 (_ BitVec 32))
 
-(declare-fun abstr4 () (_ BitVec 32))
+(declare-const abstr4 (_ BitVec 32))
 
 (define-fun nth_bv ((x (_ BitVec 32))
   (i (_ BitVec 32))) Bool (ite (not
                                (= (bvand (bvlshr x i) #x00000001) #x00000000))
                           true false))
 
-(declare-fun abstr5 () Bool)
+(declare-const abstr5 Bool)
 
 (define-fun eq_sub ((a (_ BitVec 32)) (b (_ BitVec 32)) (i Int)
   (n Int)) Bool abstr5)
@@ -51,7 +51,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -60,7 +60,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr6 () Real)
+(declare-const abstr6 Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr6))
 
@@ -102,7 +102,7 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun attr__ATTRIBUTE_MODULUS () (_ BitVec 32))
+(declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 32))
 
 (define-fun dynamic_invariant2 ((temp___expr_189 (_ BitVec 32))
   (temp___is_init_186 Bool) (temp___skip_constant_187 Bool)
@@ -115,21 +115,21 @@
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                       (not (or (fp.isInfinite temp___expr_195) (fp.isNaN temp___expr_195)))))
 
-(declare-fun zero_plus () Float32)
+(declare-const zero_plus Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun zero_neg () Float32)
+(declare-const zero_neg Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun c1b () Float32)
+(declare-const c1b Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun c2b () Float32)
+(declare-const c2b Float32)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (define-fun dynamic_invariant4 ((temp___expr_201 Float32)
   (temp___is_init_198 Bool) (temp___skip_constant_199 Bool)
@@ -148,33 +148,33 @@
                                       (<= (- 2147483648) 2147483647))
                                       (in_range2 temp___expr_207)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun abstr7 () Float32)
+(declare-const abstr7 Float32)
 
 ;; zero_plus__def_axiom
   (assert (= zero_plus abstr7))
 
-(declare-fun abstr8 () Float32)
+(declare-const abstr8 Float32)
 
 ;; zero_neg__def_axiom
   (assert (= zero_neg abstr8))
 
-(declare-fun x () Int)
+(declare-const x Int)
 
-(declare-fun zero_and_unchecked__zero_plus__assume () Float32)
+(declare-const zero_and_unchecked__zero_plus__assume Float32)
 
-(declare-fun zero_and_unchecked__zero_neg__assume () Float32)
+(declare-const zero_and_unchecked__zero_neg__assume Float32)
 
-(declare-fun o () Int)
+(declare-const o Int)
 
-(declare-fun o1 () Bool)
+(declare-const o1 Bool)
 
-(declare-fun o2 () Int)
+(declare-const o2 Int)
 
-(declare-fun o3 () Int)
+(declare-const o3 Int)
 
-(declare-fun result () Bool)
+(declare-const result Bool)
 
 ;; H
   (assert
@@ -218,7 +218,7 @@
 ;; H
   (assert (fp.eq c1b c2b))
 
-(declare-fun abstr9 () Int)
+(declare-const abstr9 Int)
 
 ;; H
   (assert (and (= o abstr9) (in_range2 o)))
@@ -232,7 +232,7 @@
 ;; H
   (assert (= result true))
 
-(declare-fun abstr10 () Int)
+(declare-const abstr10 Int)
 
 ;; H
   (assert (and (= o2 abstr10) (in_range2 o2)))

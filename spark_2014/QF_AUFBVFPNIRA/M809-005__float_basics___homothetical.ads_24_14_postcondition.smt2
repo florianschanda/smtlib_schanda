@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -62,15 +62,15 @@
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
 (define-fun dynamic_invariant ((temp___expr_51 Float32)
   (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
@@ -79,19 +79,19 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS8 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS9 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS9 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS10 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS10 Int)
 
 (define-fun dynamic_invariant1 ((temp___expr_142 Int)
   (temp___is_init_139 Bool) (temp___skip_constant_140 Bool)
@@ -99,147 +99,147 @@
                                       (or (= temp___is_init_139 true)
                                       (<= 1 2)) (in_range2 temp___expr_142)))
 
-(declare-fun i () Int)
+(declare-const i Int)
 
-(declare-fun i1 () Int)
+(declare-const i1 Int)
 
-(declare-fun j () Int)
+(declare-const j Int)
 
-(declare-fun temp___168 () Int)
+(declare-const temp___168 Int)
 
-(declare-fun j1 () Int)
+(declare-const j1 Int)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
-(declare-fun o3 () Float32)
+(declare-const o3 Float32)
 
-(declare-fun o4 () Float32)
+(declare-const o4 Float32)
 
-(declare-fun o5 () Float32)
+(declare-const o5 Float32)
 
-(declare-fun o6 () Float32)
+(declare-const o6 Float32)
 
-(declare-fun o7 () Float32)
+(declare-const o7 Float32)
 
-(declare-fun o8 () Float32)
+(declare-const o8 Float32)
 
-(declare-fun o9 () Float32)
+(declare-const o9 Float32)
 
-(declare-fun o10 () Float32)
+(declare-const o10 Float32)
 
-(declare-fun o11 () Float32)
+(declare-const o11 Float32)
 
-(declare-fun o12 () Float32)
+(declare-const o12 Float32)
 
-(declare-fun o13 () Float32)
+(declare-const o13 Float32)
 
-(declare-fun o14 () Float32)
+(declare-const o14 Float32)
 
-(declare-fun o15 () Float32)
+(declare-const o15 Float32)
 
-(declare-fun o16 () Float32)
+(declare-const o16 Float32)
 
-(declare-fun o17 () Float32)
+(declare-const o17 Float32)
 
-(declare-fun o18 () Float32)
+(declare-const o18 Float32)
 
-(declare-fun o19 () Float32)
+(declare-const o19 Float32)
 
-(declare-fun o20 () Float32)
+(declare-const o20 Float32)
 
-(declare-fun o21 () Float32)
+(declare-const o21 Float32)
 
-(declare-fun o22 () Float32)
+(declare-const o22 Float32)
 
-(declare-fun o23 () Float32)
+(declare-const o23 Float32)
 
-(declare-fun o24 () Float32)
+(declare-const o24 Float32)
 
-(declare-fun o25 () Float32)
+(declare-const o25 Float32)
 
-(declare-fun o26 () Float32)
+(declare-const o26 Float32)
 
-(declare-fun o27 () Float32)
+(declare-const o27 Float32)
 
-(declare-fun o28 () Float32)
+(declare-const o28 Float32)
 
-(declare-fun o29 () Float32)
+(declare-const o29 Float32)
 
-(declare-fun o30 () Float32)
+(declare-const o30 Float32)
 
-(declare-fun o31 () Float32)
+(declare-const o31 Float32)
 
-(declare-fun o32 () Float32)
+(declare-const o32 Float32)
 
-(declare-fun o33 () Float32)
+(declare-const o33 Float32)
 
-(declare-fun o34 () Float32)
+(declare-const o34 Float32)
 
-(declare-fun o35 () Float32)
+(declare-const o35 Float32)
 
-(declare-fun o36 () Float32)
+(declare-const o36 Float32)
 
-(declare-fun o37 () Float32)
+(declare-const o37 Float32)
 
-(declare-fun o38 () Float32)
+(declare-const o38 Float32)
 
-(declare-fun o39 () Float32)
+(declare-const o39 Float32)
 
-(declare-fun o40 () Float32)
+(declare-const o40 Float32)
 
-(declare-fun o41 () Float32)
+(declare-const o41 Float32)
 
-(declare-fun o42 () Float32)
+(declare-const o42 Float32)
 
-(declare-fun o43 () Float32)
+(declare-const o43 Float32)
 
-(declare-fun o44 () Float32)
+(declare-const o44 Float32)
 
-(declare-fun result () Int)
+(declare-const result Int)
 
-(declare-fun i2 () Int)
+(declare-const i2 Int)
 
-(declare-fun i3 () Int)
+(declare-const i3 Int)
 
-(declare-fun result1 () Int)
+(declare-const result1 Int)
 
-(declare-fun i4 () Int)
+(declare-const i4 Int)
 
-(declare-fun i5 () Int)
+(declare-const i5 Int)
 
-(declare-fun i6 () Int)
+(declare-const i6 Int)
 
-(declare-fun i7 () Int)
+(declare-const i7 Int)
 
-(declare-fun i8 () Int)
+(declare-const i8 Int)
 
-(declare-fun i9 () Int)
+(declare-const i9 Int)
 
-(declare-fun i10 () Int)
+(declare-const i10 Int)
 
-(declare-fun i11 () Int)
+(declare-const i11 Int)
 
-(declare-fun j2 () Int)
+(declare-const j2 Int)
 
-(declare-fun j3 () Int)
+(declare-const j3 Int)
 
-(declare-fun i12 () Int)
+(declare-const i12 Int)
 
-(declare-fun j4 () Int)
+(declare-const j4 Int)
 
-(declare-fun j5 () Int)
+(declare-const j5 Int)
 
-(declare-fun i13 () Int)
+(declare-const i13 Int)
 
-(declare-fun i14 () Int)
+(declare-const i14 Int)
 
-(declare-fun j6 () Int)
+(declare-const j6 Int)
 
-(declare-fun j7 () Int)
+(declare-const j7 Int)
 
 ;; H
   (assert (<= 1 j7))

@@ -10,21 +10,21 @@
 ;;; SMT-LIB2: real arithmetic
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 65535)))
 
-(declare-fun abstr () (_ BitVec 16))
+(declare-const abstr (_ BitVec 16))
 
-(declare-fun abstr1 () (_ BitVec 16))
+(declare-const abstr1 (_ BitVec 16))
 
-(declare-fun abstr2 () (_ BitVec 16))
+(declare-const abstr2 (_ BitVec 16))
 
-(declare-fun abstr3 () (_ BitVec 16))
+(declare-const abstr3 (_ BitVec 16))
 
-(declare-fun abstr4 () (_ BitVec 16))
+(declare-const abstr4 (_ BitVec 16))
 
 (define-fun nth_bv ((x (_ BitVec 16))
   (i (_ BitVec 16))) Bool (ite (not (= (bvand (bvlshr x i) #x0001) #x0000))
                           true false))
 
-(declare-fun abstr5 () Bool)
+(declare-const abstr5 Bool)
 
 (define-fun eq_sub ((a (_ BitVec 16)) (b (_ BitVec 16)) (i Int)
   (n Int)) Bool abstr5)
@@ -47,7 +47,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -56,7 +56,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr6 () Real)
+(declare-const abstr6 Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr6))
 
@@ -100,15 +100,15 @@
                                       (fp.leq (fp.neg (fp #b0 #b10000100 #b00000000000000000000000)) (fp #b0 #b10000100 #b00000000000000000000000)))
                                       (in_range2 temp___expr_147)))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun value () Float32)
+(declare-const value Float32)
 
-(declare-fun value1 () Float32)
+(declare-const value1 Float32)
 
-(declare-fun value2 () Float32)
+(declare-const value2 Float32)
 
-(declare-fun value3 () Float32)
+(declare-const value3 Float32)
 
 ;; H
   (assert

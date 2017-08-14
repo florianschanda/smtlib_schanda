@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -83,7 +83,7 @@
 (define-fun mod1 ((x Int)
   (y Int)) Int (ite (< 0 y) (mod x y) (+ (mod x y) y)))
 
-(declare-fun abstr1 () Int)
+(declare-const abstr1 Int)
 
 (define-fun pos_div_relation ((res Int) (num Int)
   (den Int)) Bool (let ((exact abstr1))
@@ -91,7 +91,7 @@
                   (ite (= num (* exact den)) (= res exact)
                   (and (<= exact res) (<= res (+ exact 1)))))))
 
-(declare-fun abstr2 () Int)
+(declare-const abstr2 Int)
 
 (define-fun pos_div_relation_rna ((res Int) (num Int)
   (den Int)) Bool (let ((exact abstr2))
@@ -103,7 +103,7 @@
 (define-fun in_range4 ((x Int)) Bool (and (<= (- 999999999999999) x)
                                      (<= x 999999999999999)))
 
-(declare-fun abstr3 () Int)
+(declare-const abstr3 Int)
 
 (define-fun pos_div_relation1 ((res Int) (num Int)
   (den Int)) Bool (let ((exact abstr3))
@@ -111,7 +111,7 @@
                   (ite (= num (* exact den)) (= res exact)
                   (and (<= exact res) (<= res (+ exact 1)))))))
 
-(declare-fun abstr4 () Int)
+(declare-const abstr4 Int)
 
 (define-fun pos_div_relation_rna1 ((res Int) (num Int)
   (den Int)) Bool (let ((exact abstr4))
@@ -120,33 +120,33 @@
                   (ite (< (- num (* exact den)) (- (* (+ exact 1) den) num))
                   (= res exact) (= res (+ exact 1)))))))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun n () Int)
+(declare-const n Int)
 
-(declare-fun c () Int)
+(declare-const c Int)
 
-(declare-fun o () Int)
+(declare-const o Int)
 
-(declare-fun o1 () Int)
+(declare-const o1 Int)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
-(declare-fun result () Int)
+(declare-const result Int)
 
-(declare-fun n1 () Int)
+(declare-const n1 Int)
 
-(declare-fun result1 () Int)
+(declare-const result1 Int)
 
-(declare-fun c1 () Int)
+(declare-const c1 Int)
 
 (assert
 ;; WP_parameter_def

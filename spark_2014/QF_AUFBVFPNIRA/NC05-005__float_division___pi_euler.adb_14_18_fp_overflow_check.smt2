@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 9007199254740991.0 19958403095347198116563727130368385660674512604354575415025472424372118918689640657849579654926357010893424468441924952439724379883935936607391717982848314203200056729510856765175377214443629871826533567445439239933308104551208703888888552684480441575071209068757560416423584952303440099278848.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -79,11 +79,11 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (define-fun dynamic_invariant2 ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)
@@ -92,45 +92,45 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range2 temp___expr_15)))
 
-(declare-fun index () Int)
+(declare-const index Int)
 
-(declare-fun pi1 () Float64)
+(declare-const pi1 Float64)
 
-(declare-fun erreur () Float64)
+(declare-const erreur Float64)
 
-(declare-fun o () Float64)
+(declare-const o Float64)
 
-(declare-fun o1 () Int)
+(declare-const o1 Int)
 
-(declare-fun result () Float64)
+(declare-const result Float64)
 
-(declare-fun pi2 () Float64)
+(declare-const pi2 Float64)
 
-(declare-fun result1 () Int)
+(declare-const result1 Int)
 
-(declare-fun index1 () Int)
+(declare-const index1 Int)
 
-(declare-fun result2 () Float64)
+(declare-const result2 Float64)
 
-(declare-fun erreur1 () Float64)
+(declare-const erreur1 Float64)
 
-(declare-fun index2 () Int)
+(declare-const index2 Int)
 
-(declare-fun pi3 () Float64)
+(declare-const pi3 Float64)
 
-(declare-fun erreur2 () Float64)
+(declare-const erreur2 Float64)
 
-(declare-fun result3 () Float64)
+(declare-const result3 Float64)
 
-(declare-fun erreur3 () Float64)
+(declare-const erreur3 Float64)
 
-(declare-fun result4 () Float64)
+(declare-const result4 Float64)
 
-(declare-fun pi4 () Float64)
+(declare-const pi4 Float64)
 
-(declare-fun result5 () Int)
+(declare-const result5 Int)
 
-(declare-fun index3 () Int)
+(declare-const index3 Int)
 
 ;; H
   (assert (=> (<= 1 2147483647) (in_range3 index)))

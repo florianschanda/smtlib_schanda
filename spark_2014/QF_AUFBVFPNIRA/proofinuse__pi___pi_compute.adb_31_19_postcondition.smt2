@@ -20,7 +20,7 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero      x)
                                              (fp.isNegative  x)))
 
-(declare-fun max_int () Int)
+(declare-const max_int Int)
 
 (define-fun in_range ((x Real)) Bool (and
                                      (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
@@ -29,7 +29,7 @@
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
                                         (<= i max_int)))
 
-(declare-fun abstr () Real)
+(declare-const abstr Real)
 
 (define-fun no_overflow ((m RoundingMode) (x Real)) Bool (in_range abstr))
 
@@ -61,159 +61,159 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
 
-(declare-fun attr__ATTRIBUTE_ADDRESS () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS1 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS2 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS3 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS4 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS5 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS6 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS7 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS8 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS8 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS9 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS9 Int)
 
-(declare-fun attr__ATTRIBUTE_ADDRESS10 () Int)
+(declare-const attr__ATTRIBUTE_ADDRESS10 Int)
 
-(declare-fun t1 () Float32)
+(declare-const t1 Float32)
 
-(declare-fun t2 () Float32)
+(declare-const t2 Float32)
 
-(declare-fun t3 () Float32)
+(declare-const t3 Float32)
 
-(declare-fun t4 () Float32)
+(declare-const t4 Float32)
 
-(declare-fun t5 () Float32)
+(declare-const t5 Float32)
 
-(declare-fun t6 () Float32)
+(declare-const t6 Float32)
 
-(declare-fun t7 () Float32)
+(declare-const t7 Float32)
 
-(declare-fun t8 () Float32)
+(declare-const t8 Float32)
 
-(declare-fun t9 () Float32)
+(declare-const t9 Float32)
 
-(declare-fun t10 () Float32)
+(declare-const t10 Float32)
 
-(declare-fun res () Float32)
+(declare-const res Float32)
 
-(declare-fun pi_compute__leibniz_float__result () Float32)
+(declare-const pi_compute__leibniz_float__result Float32)
 
-(declare-fun o () Float32)
+(declare-const o Float32)
 
-(declare-fun o1 () Float32)
+(declare-const o1 Float32)
 
-(declare-fun o2 () Float32)
+(declare-const o2 Float32)
 
-(declare-fun o3 () Float32)
+(declare-const o3 Float32)
 
-(declare-fun o4 () Float32)
+(declare-const o4 Float32)
 
-(declare-fun o5 () Float32)
+(declare-const o5 Float32)
 
-(declare-fun o6 () Float32)
+(declare-const o6 Float32)
 
-(declare-fun o7 () Float32)
+(declare-const o7 Float32)
 
-(declare-fun o8 () Float32)
+(declare-const o8 Float32)
 
-(declare-fun o9 () Float32)
+(declare-const o9 Float32)
 
-(declare-fun o10 () Float32)
+(declare-const o10 Float32)
 
-(declare-fun o11 () Float32)
+(declare-const o11 Float32)
 
-(declare-fun o12 () Float32)
+(declare-const o12 Float32)
 
-(declare-fun o13 () Float32)
+(declare-const o13 Float32)
 
-(declare-fun o14 () Float32)
+(declare-const o14 Float32)
 
-(declare-fun o15 () Float32)
+(declare-const o15 Float32)
 
-(declare-fun o16 () Float32)
+(declare-const o16 Float32)
 
-(declare-fun o17 () Float32)
+(declare-const o17 Float32)
 
-(declare-fun o18 () Float32)
+(declare-const o18 Float32)
 
-(declare-fun result () Float32)
+(declare-const result Float32)
 
-(declare-fun t11 () Float32)
+(declare-const t11 Float32)
 
-(declare-fun result1 () Float32)
+(declare-const result1 Float32)
 
-(declare-fun t21 () Float32)
+(declare-const t21 Float32)
 
-(declare-fun result2 () Float32)
+(declare-const result2 Float32)
 
-(declare-fun t31 () Float32)
+(declare-const t31 Float32)
 
-(declare-fun result3 () Float32)
+(declare-const result3 Float32)
 
-(declare-fun t41 () Float32)
+(declare-const t41 Float32)
 
-(declare-fun result4 () Float32)
+(declare-const result4 Float32)
 
-(declare-fun t51 () Float32)
+(declare-const t51 Float32)
 
-(declare-fun result5 () Float32)
+(declare-const result5 Float32)
 
-(declare-fun t61 () Float32)
+(declare-const t61 Float32)
 
-(declare-fun result6 () Float32)
+(declare-const result6 Float32)
 
-(declare-fun t71 () Float32)
+(declare-const t71 Float32)
 
-(declare-fun result7 () Float32)
+(declare-const result7 Float32)
 
-(declare-fun t81 () Float32)
+(declare-const t81 Float32)
 
-(declare-fun result8 () Float32)
+(declare-const result8 Float32)
 
-(declare-fun t91 () Float32)
+(declare-const t91 Float32)
 
-(declare-fun t101 () Float32)
+(declare-const t101 Float32)
 
-(declare-fun res1 () Float32)
+(declare-const res1 Float32)
 
-(declare-fun pi_compute__leibniz_float__result1 () Float32)
+(declare-const pi_compute__leibniz_float__result1 Float32)
 
-(declare-fun pi_compute__leibniz_float__result2 () Float32)
+(declare-const pi_compute__leibniz_float__result2 Float32)
 
-(declare-fun t12 () Float32)
+(declare-const t12 Float32)
 
-(declare-fun t22 () Float32)
+(declare-const t22 Float32)
 
-(declare-fun t32 () Float32)
+(declare-const t32 Float32)
 
-(declare-fun t42 () Float32)
+(declare-const t42 Float32)
 
-(declare-fun t52 () Float32)
+(declare-const t52 Float32)
 
-(declare-fun t62 () Float32)
+(declare-const t62 Float32)
 
-(declare-fun t72 () Float32)
+(declare-const t72 Float32)
 
-(declare-fun t82 () Float32)
+(declare-const t82 Float32)
 
-(declare-fun t92 () Float32)
+(declare-const t92 Float32)
 
-(declare-fun t102 () Float32)
+(declare-const t102 Float32)
 
-(declare-fun res2 () Float32)
+(declare-const res2 Float32)
 
-(declare-fun pi_compute__leibniz_float__result3 () Float32)
+(declare-const pi_compute__leibniz_float__result3 Float32)
 
-(declare-fun result9 () Float32)
+(declare-const result9 Float32)
 
 (assert
 ;; WP_parameter_def
