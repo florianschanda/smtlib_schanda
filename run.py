@@ -69,6 +69,10 @@ def main():
                                ["-max-split", "5"],
                                use_temp=True,
                                use_dialect="altergo"))
+    provers.append(Prover_Kind("yices",
+                               ["--mcsat"],
+                               use_logic=False,
+                               use_temp=True))
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--suite",
