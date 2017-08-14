@@ -1372,7 +1372,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic r81b : int
+logic r87b : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
@@ -1408,10 +1408,10 @@ logic user_eq4 : integer, integer -> bool
 
 logic dummy4 : integer
 
-type t82b__ref = { t82b__content : integer
+type t88b__ref = { t88b__content : integer
 }
 
-function t82b__ref___projection(a: t82b__ref) : integer = (a).t82b__content
+function t88b__ref___projection(a: t88b__ref) : integer = (a).t88b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
@@ -1431,7 +1431,7 @@ axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
 goal WP_parameter_def :
   (forall is_prime1:(int,bool) farray. forall index_1:int.
   forall index_3:int. forall index_2:int. forall o:t. forall o1:int.
-  forall test_prime_and_coprime_numbers__p__eratosthenes__L_5__R81b__assume:int.
+  forall test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume:int.
   forall result:(int,bool) farray. forall is_prime2:(int,bool) farray.
   forall result1:(int,bool) farray. forall is_prime3:(int,bool) farray.
   forall result2:(int,bool) farray. forall is_prime4:(int,bool) farray.
@@ -1445,12 +1445,12 @@ goal WP_parameter_def :
   ((eq(fliteral3, fliteral1) -> eq(o, fliteral1)) and ((eq(fliteral3,
   fliteral) -> eq(o, fliteral)) and (le(fliteral2, fliteral3) ->
   lt(fliteral1, o))))))) and (o1 = to_int(RNA, o))) and
-  ((test_prime_and_coprime_numbers__p__eratosthenes__L_5__R81b__assume = o1) and
+  ((test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume = o1) and
   in_range3(o1))) and
-  (test_prime_and_coprime_numbers__p__eratosthenes__L_5__R81b__assume = r81b)) and
-  in_range3(r81b)) -> ((({ int__content = result3 } = { int__content =
+  (test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume = r87b)) and
+  in_range3(r87b)) -> ((({ int__content = result3 } = { int__content =
   index_2 }) and (index_21 = 2)) -> (((2 <= index_21) and
-  (index_21 <= r81b)) ->
+  (index_21 <= r87b)) ->
   (forall v:int. (((index_21 <= v) and (v <= 100000)) ->
   (((is_prime4[v]) = true) ->
   (forall div1:int. (((2 <= div1) and (div1 <= (index_21 - 1))) ->

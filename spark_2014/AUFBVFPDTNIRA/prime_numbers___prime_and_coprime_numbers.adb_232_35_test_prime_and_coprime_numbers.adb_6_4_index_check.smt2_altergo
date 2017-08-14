@@ -1372,7 +1372,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic r81b : int
+logic r87b : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
@@ -1408,10 +1408,10 @@ logic user_eq4 : integer, integer -> bool
 
 logic dummy4 : integer
 
-type t82b__ref = { t82b__content : integer
+type t88b__ref = { t88b__content : integer
 }
 
-function t82b__ref___projection(a: t82b__ref) : integer = (a).t82b__content
+function t88b__ref___projection(a: t88b__ref) : integer = (a).t88b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
@@ -1431,7 +1431,7 @@ axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
 goal WP_parameter_def :
   (forall is_prime1:(int,bool) farray. forall index_1:int.
   forall index_3:int. forall index_2:int. forall o:t. forall o1:int.
-  forall test_prime_and_coprime_numbers__p__eratosthenes__L_5__R81b__assume:int.
+  forall test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume:int.
   forall o2:int. forall o3:int. forall o4:int. forall o5:(int,bool) farray.
   forall v:int. forall o6:int. forall o7:bool. forall o8:bool.
   forall o9:bool. forall o10:bool. forall o11:int.
@@ -1454,21 +1454,21 @@ goal WP_parameter_def :
   ((eq(fliteral3, fliteral1) -> eq(o, fliteral1)) and ((eq(fliteral3,
   fliteral) -> eq(o, fliteral)) and (le(fliteral2, fliteral3) ->
   lt(fliteral1, o))))))) and (o1 = to_int(RNA, o))) and
-  ((test_prime_and_coprime_numbers__p__eratosthenes__L_5__R81b__assume = o1) and
+  ((test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume = o1) and
   in_range3(o1))) and
-  (test_prime_and_coprime_numbers__p__eratosthenes__L_5__R81b__assume = r81b)) and
-  in_range3(r81b)) -> ((({ int__content = result3 } = { int__content =
+  (test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume = r87b)) and
+  in_range3(r87b)) -> ((({ int__content = result3 } = { int__content =
   index_2 }) and (index_21 = 2)) -> (((2 <= index_21) and
-  (index_21 <= r81b)) -> ((((2 <= index_22) and (index_22 <= 100000)) and
+  (index_21 <= r87b)) -> ((((2 <= index_22) and (index_22 <= 100000)) and
   ((forall v1:int. (((0 <= v1) and (v1 <= index_22)) ->
    (((is_prime5[v1]) = true) <-> (is_prime(v1) = true)))) and
   (forall v1:int. (((index_22 <= v1) and (v1 <= 100000)) ->
   (((is_prime5[v1]) = true) <->
   (forall div1:int. (((2 <= div1) and (div1 <= (index_22 - 1))) ->
-  (not (mod(v1, div1) = 0))))))))) -> ((((((2 <= r81b) -> dynamic_property(2,
-  r81b, index_22)) and ((0 <= 2147483647) -> in_range3(index_11))) and
+  (not (mod(v1, div1) = 0))))))))) -> ((((((2 <= r87b) -> dynamic_property(2,
+  r87b, index_22)) and ((0 <= 2147483647) -> in_range3(index_11))) and
   (((-2147483648) <= 2147483647) -> in_range2(index_31))) and
-  ((2 <= index_22) and (index_22 <= r81b))) -> (((((0 <= index_22) and
+  ((2 <= index_22) and (index_22 <= r87b))) -> (((((0 <= index_22) and
   (index_22 <= 100000)) and (o2 = index_22)) and
   (result4 = (is_prime5[o2]))) -> ((result4 = true) ->
   (((index_11 = result5) and (index_12 = index_22)) ->
