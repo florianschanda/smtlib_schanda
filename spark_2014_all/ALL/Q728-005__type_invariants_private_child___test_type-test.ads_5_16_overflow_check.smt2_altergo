@@ -218,5 +218,5 @@ logic x : integer
 logic attr__ATTRIBUTE_ADDRESS : int
 
  (* File "test_type.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (in_range1(to_rep(x)) ->
-  (((-2147483648) <  to_rep(x)) -> in_range((to_rep(x) - 1))))
+goal WP_parameter_def : (((-2147483648) <  to_rep(x)) ->
+  in_range((to_rep(x) - 1)))

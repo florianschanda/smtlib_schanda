@@ -1793,7 +1793,7 @@ axiom lemma6__def_axiom : ((lemma61(void) = true) <->
 goal WP_parameter_def :
   (forall result__:int. forall i:int.
   forall bits_manipulation_unsigned__unsigned_8__functions__msb_index_slow_inline_always__result:int.
-  forall temp___384:int. forall temp___383:int. forall o:t. forall o1:t.
+  forall temp___395:int. forall temp___394:int. forall o:t. forall o1:t.
   forall result__1:int. forall result:int. forall i1:int. forall result1:int.
   forall result__2:int. forall result2:bool. forall result__3:int.
   forall i2:int. forall result3:int. forall i3:int. forall result4:int.
@@ -1812,7 +1812,7 @@ goal WP_parameter_def :
   (forall result7:int. (((not (value = of_int(0))) and (((((0 <= 7) ->
   in_range1(result__)) and ((lemma6(void) = true) and (((({ int__content =
   result } = { int__content = i }) and (i1 = 0)) and ((((0 <= i1) and
-  (i1 <= 7)) and ((((temp___384 = result__) and ((temp___383 = i1) and ((({
+  (i1 <= 7)) and ((((temp___395 = result__) and ((temp___394 = i1) and ((({
   int__content = result1 } = { int__content = result__ }) and
   (result__2 = i1)) and (((((i1 = i6) and (result__2 = result__7)) and
   ((i7 = i1) and (result__8 = result__2))) and ((((o = shift_right(value,

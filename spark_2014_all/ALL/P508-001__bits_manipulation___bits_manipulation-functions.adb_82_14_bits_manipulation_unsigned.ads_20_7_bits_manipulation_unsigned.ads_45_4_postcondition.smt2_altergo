@@ -1843,8 +1843,8 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 goal WP_parameter_def :
   (forall shift_amount:int. forall result__:int. forall v:t. forall new_v:t.
   forall bits_manipulation_unsigned__unsigned_64__functions__msb_index_fast_inline_always__result:int.
-  forall temp___460:t. forall temp___459:t. forall temp___458:int.
-  forall temp___457:int. forall o:t. forall o1:int. forall o2:int.
+  forall temp___480:int. forall temp___479:t. forall temp___478:t.
+  forall temp___477:int. forall o:t. forall o1:int. forall o2:int.
   forall new_v1:t. forall result:int. forall shift_amount1:int.
   forall result1:int. forall result__1:int. forall result2:t. forall v1:t.
   forall shift_amount2:int. forall result__2:int. forall v2:t.
@@ -1871,22 +1871,21 @@ goal WP_parameter_def :
   int__content = result__ }) and (result__1 = 0)) and
   (in_range1(result__1) and ((({ t__content = result2 } = { t__content = v
   }) and (v1 = value)) and (((((not (shift_amount1 = 0)) and
-  (not (v1 = of_int(0)))) and ((((temp___460 = new_v) and
-  ((temp___459 = v1) and ((temp___458 = result__1) and
-  ((temp___457 = shift_amount1) and (((((0 <= 63) ->
-  in_range1(shift_amount2)) and ((0 <= 63) -> in_range1(result__2))) and
-  ((not (shift_amount2 = 0)) and (not (v2 = of_int(0))))) and
-  ((((o = shift_right(v2, shift_amount2)) and ((((1 <= 64) and (64 <= 8)) and
-  (((shift_amount2 <  8) and (o = toBig2(lsr_bv1(toSmall2(v2),
-  of_int2(shift_amount2))))) or ((not (shift_amount2 <  8)) and
-  (o = toBig2(of_int2(0)))))) or ((not ((1 <= 64) and (64 <= 8))) and
-  ((((9 <= 64) and (64 <= 16)) and (((shift_amount2 <  16) and
-  (o = toBig1(lsr_bv2(toSmall1(v2), of_int3(shift_amount2))))) or
-  ((not (shift_amount2 <  16)) and (o = toBig1(of_int3(0)))))) or
-  ((not ((9 <= 64) and (64 <= 16))) and ((((17 <= 64) and (64 <= 32)) and
-  (o = toBig(lsr_bv3(toSmall(v2), of_int4(shift_amount2))))) or
-  ((not ((17 <= 64) and (64 <= 32))) and (o = lsr_bv(v2,
-  of_int(shift_amount2)))))))))) and ((new_v2 = result3) and
+  (not (v1 = of_int(0)))) and ((((temp___480 = shift_amount1) and
+  ((temp___479 = new_v) and ((temp___478 = v1) and
+  ((temp___477 = result__1) and (((((0 <= 63) -> in_range1(result__2)) and
+  ((0 <= 63) -> in_range1(shift_amount2))) and ((not (shift_amount2 = 0)) and
+  (not (v2 = of_int(0))))) and ((((o = shift_right(v2, shift_amount2)) and
+  ((((1 <= 64) and (64 <= 8)) and (((shift_amount2 <  8) and
+  (o = toBig2(lsr_bv1(toSmall2(v2), of_int2(shift_amount2))))) or
+  ((not (shift_amount2 <  8)) and (o = toBig2(of_int2(0)))))) or
+  ((not ((1 <= 64) and (64 <= 8))) and ((((9 <= 64) and (64 <= 16)) and
+  (((shift_amount2 <  16) and (o = toBig1(lsr_bv2(toSmall1(v2),
+  of_int3(shift_amount2))))) or ((not (shift_amount2 <  16)) and
+  (o = toBig1(of_int3(0)))))) or ((not ((9 <= 64) and (64 <= 16))) and
+  ((((17 <= 64) and (64 <= 32)) and (o = toBig(lsr_bv3(toSmall(v2),
+  of_int4(shift_amount2))))) or ((not ((17 <= 64) and (64 <= 32))) and
+  (o = lsr_bv(v2, of_int(shift_amount2)))))))))) and ((new_v2 = result3) and
   (new_v3 = o))) and ((((not (new_v3 = of_int(0))) and
   (in_range1((result__2 + shift_amount2)) and
   ((((o1 = (result__2 + shift_amount2)) and

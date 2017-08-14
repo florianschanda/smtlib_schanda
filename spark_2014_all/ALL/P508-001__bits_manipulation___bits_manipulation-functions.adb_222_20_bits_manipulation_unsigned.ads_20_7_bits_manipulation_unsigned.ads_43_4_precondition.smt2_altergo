@@ -751,7 +751,7 @@ logic lemma2_goal__function_guard : bool, unit -> prop
 
 axiom lemma2_goal__post_axiom : true
 
-type t519s
+type t647s
 
 predicate in_range2(x: int) = ((2 <= x) and (x <= 15))
 
@@ -767,14 +767,14 @@ logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE3 : us_image -> int
 
-logic user_eq2 : t519s, t519s -> bool
+logic user_eq2 : t647s, t647s -> bool
 
-logic dummy2 : t519s
+logic dummy2 : t647s
 
-type t519s__ref = { t519s__content : t519s
+type t647s__ref = { t647s__content : t647s
 }
 
-function t519s__ref___projection(a: t519s__ref) : t519s = (a).t519s__content
+function t647s__ref___projection(a: t647s__ref) : t647s = (a).t647s__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -1843,11 +1843,11 @@ axiom lemma8__def_axiom : (((lemma81(void) = true) ->
 
  (* File "bits_manipulation-functions.ads", line 302, characters 0-0 *)
 goal WP_parameter_def :
-  (forall i:int. forall temp___402:int. forall result:int. forall i1:int.
+  (forall i:int. forall temp___416:int. forall result:int. forall i1:int.
   forall i2:int. forall i3:int. forall i4:int. forall i5:int. forall i6:int.
   ((lemma8(void) = true) -> ((make_mask(1) = of_int(1)) -> (((({
   int__content = result } = { int__content = i }) and (i1 = 2)) and
-  ((((2 <= i1) and (i1 <= 15)) and ((((temp___402 = i1) and
+  ((((2 <= i1) and (i1 <= 15)) and ((((temp___416 = i1) and
   ((((i1 <  65536) and (make_mask(i1) = sub(lsl_bv(of_int(1), of_int(i1)),
   of_int(1)))) or ((not (i1 <  65536)) and (make_mask(i1) = sub(of_int(0),
   of_int(1))))) and

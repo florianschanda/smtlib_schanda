@@ -795,11 +795,11 @@ logic user_eq3 : integer, integer -> bool
 
 logic dummy3 : integer
 
-type t517s__ref = { t517s__content : integer
+type t645s__ref = { t645s__content : integer
 }
 
-function t517s__ref___projection(a: t517s__ref) : integer =
-  (a).t517s__content
+function t645s__ref___projection(a: t645s__ref) : integer =
+  (a).t645s__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
@@ -807,7 +807,7 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 goal WP_parameter_def :
   (forall result__:t. forall i:int.
   forall bits_manipulation_unsigned__unsigned_16__functions__proofs__make_mask__lemma2__ones__result:t.
-  forall temp___415:int. forall temp___414:t. forall o:t. forall o1:t.
+  forall temp___429:int. forall temp___428:t. forall o:t. forall o1:t.
   forall result:t. forall result__1:t. forall result1:int. forall i1:int.
   forall result2:t. forall result__2:t. forall result__3:t. forall i2:int.
   forall result__4:t. forall i3:int. forall result__5:t. forall i4:int.
@@ -824,7 +824,7 @@ goal WP_parameter_def :
   t__content = result__ }) and (result__1 = of_int(0))) and
   ((axiom__(void) = true) and (((({ int__content = result1 } = {
   int__content = i }) and (i1 = 1)) and ((((1 <= i1) and (i1 <= amount)) and
-  ((((temp___415 = i1) and ((temp___414 = result__1) and
+  ((((temp___429 = i1) and ((temp___428 = result__1) and
   (((((((i1 - 1) <  65536) and (o = lsl_bv(of_int(1), of_int((i1 - 1))))) or
   ((not ((i1 - 1) <  65536)) and (o = of_int(0)))) and (o1 = add(result__1,
   o))) and ((result__1 = result2) and (result__2 = o1))) and

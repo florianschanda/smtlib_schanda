@@ -761,7 +761,7 @@ logic lemma2_goal__function_guard : bool, unit -> prop
 
 axiom lemma2_goal__post_axiom : true
 
-type t645s
+type t773s
 
 predicate in_range2(x: int) = ((2 <= x) and (x <= 63))
 
@@ -777,14 +777,14 @@ logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE3 : us_image -> int
 
-logic user_eq2 : t645s, t645s -> bool
+logic user_eq2 : t773s, t773s -> bool
 
-logic dummy2 : t645s
+logic dummy2 : t773s
 
-type t645s__ref = { t645s__content : t645s
+type t773s__ref = { t773s__content : t773s
 }
 
-function t645s__ref___projection(a: t645s__ref) : t645s = (a).t645s__content
+function t773s__ref___projection(a: t773s__ref) : t773s = (a).t773s__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -1857,7 +1857,7 @@ axiom lemma8__def_axiom : (((lemma81(void) = true) ->
 goal WP_parameter_def :
   (forall i:int.
   forall bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma2__result:bool.
-  forall temp___454:int. forall o:bool. forall result:int. forall i1:int.
+  forall temp___474:int. forall o:bool. forall result:int. forall i1:int.
   forall i2:int. forall i3:int. forall i4:int. forall i5:int. forall i6:int.
   forall result1:bool.
   forall bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma2__result1:bool.
@@ -1870,7 +1870,7 @@ goal WP_parameter_def :
   (forall result2:bool. (((((lemma8(void) = true) and
   ((make_mask(1) = of_int(1)) and (((({ int__content = result } = {
   int__content = i }) and (i1 = 2)) and ((((2 <= i1) and (i1 <= 63)) and
-  ((((temp___454 = i1) and ((((i1 <  18446744073709551616) and
+  ((((temp___474 = i1) and ((((i1 <  18446744073709551616) and
   (make_mask(i1) = sub(lsl_bv(of_int(1), of_int(i1)), of_int(1)))) or
   ((not (i1 <  18446744073709551616)) and (make_mask(i1) = sub(of_int(0),
   of_int(1))))) and

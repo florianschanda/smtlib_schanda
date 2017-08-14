@@ -217,11 +217,7 @@ logic decr_int : us_rep -> us_rep
 
 logic decr_int__function_guard : us_rep, us_rep -> prop
 
-axiom decr_int__post_axiom :
-  (forall x:integer [decr_int({ us_split_fields1 = { rec__test_type__t__f = x
-  } })]. ((in_range1(to_rep(x)) and ((-2147483648) <  to_rep(x))) ->
-  in_range1(to_rep(((decr_int({ us_split_fields1 = { rec__test_type__t__f = x
-  } })).us_split_fields1).rec__test_type__t__f))))
+axiom decr_int__post_axiom : true
 
 axiom decr_int__def_axiom :
   (forall x:integer [decr_int({ us_split_fields1 = { rec__test_type__t__f = x
@@ -247,12 +243,10 @@ goal WP_parameter_def :
   forall test_type__test__x__assume:integer.
   forall test_type__test__y__assume:integer. (((((to_rep(o) = 0) and
   (o = o1)) and (test_type__test__x__assume = o1)) and
-  (test_type__test__x__assume = x)) -> (in_range1(to_rep(x)) ->
-  (((in_range1(to_rep(x)) and (({ us_split_fields1 = { rec__test_type__t__f =
-  test_type__test__y__assume } } = decr_int({ us_split_fields1 = {
-  rec__test_type__t__f = x } })) and
-  (in_range1(to_rep(test_type__test__y__assume)) and
-  (of_rep((to_rep(x) - 1)) = test_type__test__y__assume)))) and
-  (y = test_type__test__y__assume)) -> (in_range1(to_rep(y)) -> (bool_eq2({
-  us_split_fields1 = { rec__test_type__t__f = x } }, { us_split_fields1 = {
-  rec__test_type__t__f = y } }) = true))))))
+  (test_type__test__x__assume = x)) -> (((({ us_split_fields1 = {
+  rec__test_type__t__f = test_type__test__y__assume } } = decr_int({
+  us_split_fields1 = { rec__test_type__t__f = x } })) and
+  (of_rep((to_rep(x) - 1)) = test_type__test__y__assume)) and
+  (y = test_type__test__y__assume)) -> (bool_eq2({ us_split_fields1 = {
+  rec__test_type__t__f = x } }, { us_split_fields1 = { rec__test_type__t__f =
+  y } }) = true))))

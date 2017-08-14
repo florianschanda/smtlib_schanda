@@ -1798,7 +1798,7 @@ axiom lemma6__def_axiom : ((lemma61(void) = true) <->
 goal WP_parameter_def :
   (forall result__:int. forall i:int.
   forall bits_manipulation_unsigned__unsigned_64__functions__msb_index_slow_inline_always__result:int.
-  forall temp___462:int. forall temp___461:int. forall o:t. forall o1:t.
+  forall temp___482:int. forall temp___481:int. forall o:t. forall o1:t.
   forall result__1:int. forall result:int. forall i1:int. forall result1:int.
   forall result__2:int. forall result2:bool. forall result__3:int.
   forall i2:int. forall result3:int. forall i3:int. forall result4:int.
@@ -1817,7 +1817,7 @@ goal WP_parameter_def :
   (forall result7:int. (((not (value = of_int(0))) and (((((0 <= 63) ->
   in_range1(result__)) and ((lemma6(void) = true) and (((({ int__content =
   result } = { int__content = i }) and (i1 = 0)) and ((((0 <= i1) and
-  (i1 <= 63)) and ((((temp___462 = i1) and ((temp___461 = result__) and ((({
+  (i1 <= 63)) and ((((temp___482 = result__) and ((temp___481 = i1) and ((({
   int__content = result1 } = { int__content = result__ }) and
   (result__2 = i1)) and (((((i1 = i6) and (result__2 = result__7)) and
   ((i7 = i1) and (result__8 = result__2))) and ((((o = shift_right(value,
@@ -1846,17 +1846,18 @@ goal WP_parameter_def :
   (result__5 = result__7)) and ((i7 = i5) and (result__8 = result__6))) and
   ((forall j:int. (((0 <= j) and (j <= i2)) -> ugt(shift_right(value, j),
    of_int(1)))) and
-  (((((0 <= 63) -> in_range1(result__3)) and ((0 <= 63) ->
-  in_range1(i2))) and ((0 <= i2) and (i2 <= 63))) and (((((i2 = i4) and
-  (result__3 = result__5)) and ((i5 = i2) and (result__6 = result__3))) and
-  (i2 = 63)) or ((not (i2 = 63)) and ((((i3 = i4) and
-  (result__4 = result__5)) and ((i5 = i3) and (result__6 = result__4))) and
-  (((i2 = result3) and (i3 = (i2 + 1))) and (((result__3 = result4) and
-  (result__4 = i3)) and ((((o1 = shift_right(value, i3)) and ((((1 <= 64) and
-  (64 <= 8)) and (((i3 <  8) and (o1 = toBig2(lsr_bv1(toSmall2(value),
-  of_int2(i3))))) or ((not (i3 <  8)) and (o1 = toBig2(of_int2(0)))))) or
-  ((not ((1 <= 64) and (64 <= 8))) and ((((9 <= 64) and (64 <= 16)) and
-  (((i3 <  16) and (o1 = toBig1(lsr_bv2(toSmall1(value), of_int3(i3))))) or
+  (((((0 <= 63) -> in_range1(i2)) and ((0 <= 63) ->
+  in_range1(result__3))) and ((0 <= i2) and (i2 <= 63))) and
+  (((((i2 = i4) and (result__3 = result__5)) and ((i5 = i2) and
+  (result__6 = result__3))) and (i2 = 63)) or ((not (i2 = 63)) and
+  ((((i3 = i4) and (result__4 = result__5)) and ((i5 = i3) and
+  (result__6 = result__4))) and (((i2 = result3) and (i3 = (i2 + 1))) and
+  (((result__3 = result4) and (result__4 = i3)) and
+  ((((o1 = shift_right(value, i3)) and ((((1 <= 64) and (64 <= 8)) and
+  (((i3 <  8) and (o1 = toBig2(lsr_bv1(toSmall2(value), of_int2(i3))))) or
+  ((not (i3 <  8)) and (o1 = toBig2(of_int2(0)))))) or ((not ((1 <= 64) and
+  (64 <= 8))) and ((((9 <= 64) and (64 <= 16)) and (((i3 <  16) and
+  (o1 = toBig1(lsr_bv2(toSmall1(value), of_int3(i3))))) or
   ((not (i3 <  16)) and (o1 = toBig1(of_int3(0)))))) or ((not ((9 <= 64) and
   (64 <= 16))) and ((((17 <= 64) and (64 <= 32)) and
   (o1 = toBig(lsr_bv3(toSmall(value), of_int4(i3))))) or

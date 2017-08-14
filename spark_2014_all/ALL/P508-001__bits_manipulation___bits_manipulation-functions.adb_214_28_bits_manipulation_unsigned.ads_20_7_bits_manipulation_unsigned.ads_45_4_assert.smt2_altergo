@@ -761,7 +761,7 @@ logic lemma2_goal__function_guard : bool, unit -> prop
 
 axiom lemma2_goal__post_axiom : true
 
-type t645s
+type t773s
 
 predicate in_range2(x: int) = ((2 <= x) and (x <= 63))
 
@@ -777,14 +777,14 @@ logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE3 : us_image -> int
 
-logic user_eq2 : t645s, t645s -> bool
+logic user_eq2 : t773s, t773s -> bool
 
-logic dummy2 : t645s
+logic dummy2 : t773s
 
-type t645s__ref = { t645s__content : t645s
+type t773s__ref = { t773s__content : t773s
 }
 
-function t645s__ref___projection(a: t645s__ref) : t645s = (a).t645s__content
+function t773s__ref___projection(a: t773s__ref) : t773s = (a).t773s__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 

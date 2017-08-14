@@ -1372,7 +1372,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic r81b : int
+logic r87b : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
@@ -1408,10 +1408,10 @@ logic user_eq4 : integer, integer -> bool
 
 logic dummy4 : integer
 
-type t82b__ref = { t82b__content : integer
+type t88b__ref = { t88b__content : integer
 }
 
-function t82b__ref___projection(a: t82b__ref) : integer = (a).t82b__content
+function t88b__ref___projection(a: t88b__ref) : integer = (a).t88b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 

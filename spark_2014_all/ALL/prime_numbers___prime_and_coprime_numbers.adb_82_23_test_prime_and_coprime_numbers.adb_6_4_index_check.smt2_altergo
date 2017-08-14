@@ -472,7 +472,7 @@ logic euclid : int, int -> int
 
 logic euclid__function_guard : int, int, int -> prop
 
-type t56b
+type t62b
 
 predicate in_range3(x: int) = ((0 <= x) and (x <= 100000))
 
@@ -488,14 +488,14 @@ logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE3 : us_image -> int
 
-logic user_eq2 : t56b, t56b -> bool
+logic user_eq2 : t62b, t62b -> bool
 
-logic dummy2 : t56b
+logic dummy2 : t62b
 
-type t56b__ref = { t56b__content : t56b
+type t62b__ref = { t62b__content : t62b
 }
 
-function t56b__ref___projection(a: t56b__ref) : t56b = (a).t56b__content
+function t62b__ref___projection(a: t62b__ref) : t62b = (a).t62b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 

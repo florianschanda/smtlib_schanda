@@ -49,6 +49,40 @@ function real__ref___projection(a: real__ref) : real = (a).real__content
 function us_private__ref___projection(a: us_private__ref) : us_private =
   (a).us_private__content
 
+logic power : int, int -> int
+
+axiom Power_0 : (forall x:int. (power(x, 0) = 1))
+
+axiom Power_s :
+  (forall x:int. forall n:int. ((0 <= n) -> (power(x,
+  (n + 1)) = (x * power(x, n)))))
+
+axiom Power_s_alt :
+  (forall x:int. forall n:int. ((0 <  n) -> (power(x, n) = (x * power(x,
+  (n - 1))))))
+
+axiom Power_1 : (forall x:int. (power(x, 1) = x))
+
+axiom Power_sum :
+  (forall x:int. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
+  (power(x, (n + m)) = (power(x, n) * power(x, m))))))
+
+axiom Power_mult :
+  (forall x:int. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
+  (power(x, (n * m)) = power(power(x, n), m)))))
+
+axiom Power_mult2 :
+  (forall x:int. forall y:int. forall n:int. ((0 <= n) -> (power((x * y),
+  n) = (power(x, n) * power(y, n)))))
+
+axiom Power_non_neg :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <= y)) -> (0 <= power(x,
+  y))))
+
+axiom Power_monotonic :
+  (forall x:int. forall n:int. forall m:int. (((0 <  x) and ((0 <= n) and
+  (n <= m))) -> (power(x, n) <= power(x, m))))
+
 type t
 
 logic tqtint : t -> int
@@ -206,13 +240,14 @@ axiom Nth_rotate_left :
 
 logic pow2 : int -> int
 
-axiom Power_0 : (pow2(0) = 1)
+axiom Power_01 : (pow2(0) = 1)
 
-axiom Power_s : (forall n:int. ((0 <= n) -> (pow2((n + 1)) = (2 * pow2(n)))))
+axiom Power_s1 :
+  (forall n:int. ((0 <= n) -> (pow2((n + 1)) = (2 * pow2(n)))))
 
-axiom Power_1 : (pow2(1) = 2)
+axiom Power_11 : (pow2(1) = 2)
 
-axiom Power_sum :
+axiom Power_sum1 :
   (forall n:int. forall m:int. (((0 <= n) and (0 <= m)) ->
   (pow2((n + m)) = (pow2(n) * pow2(m)))))
 
@@ -525,31 +560,31 @@ axiom bool_ge_def :
   (forall x:t. forall y:t [bool_ge(x, y)]. ((uge(x, y) -> (bool_ge(x,
   y) = true)) and ((not uge(x, y)) -> (bool_ge(x, y) = false))))
 
-logic power : t, int -> t
+logic power1 : t, int -> t
 
-axiom Power_01 : (forall x:t. (power(x, 0) = one))
+axiom Power_02 : (forall x:t. (power1(x, 0) = one))
 
-axiom Power_11 : (forall x:t. (power(x, 1) = x))
+axiom Power_12 : (forall x:t. (power1(x, 1) = x))
 
-axiom Power_s1 :
-  (forall x:t. forall n:int. ((0 <= n) -> (power(x, (n + 1)) = mul(x,
-  power(x, n)))))
+axiom Power_s2 :
+  (forall x:t. forall n:int. ((0 <= n) -> (power1(x, (n + 1)) = mul(x,
+  power1(x, n)))))
 
-axiom Power_s_alt :
-  (forall x:t. forall n:int. ((0 <  n) -> (power(x, n) = mul(x, power(x,
+axiom Power_s_alt1 :
+  (forall x:t. forall n:int. ((0 <  n) -> (power1(x, n) = mul(x, power1(x,
   (n - 1))))))
 
-axiom Power_sum1 :
+axiom Power_sum2 :
   (forall x:t. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
-  (power(x, (n + m)) = mul(power(x, n), power(x, m))))))
+  (power1(x, (n + m)) = mul(power1(x, n), power1(x, m))))))
 
-axiom Power_mult :
+axiom Power_mult1 :
   (forall x:t. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
-  (power(x, (n * m)) = power(power(x, n), m)))))
+  (power1(x, (n * m)) = power1(power1(x, n), m)))))
 
-axiom Power_mult2 :
-  (forall x:t. forall y:t. forall n:int. ((0 <= n) -> (power(mul(x, y),
-  n) = mul(power(x, n), power(y, n)))))
+axiom Power_mult21 :
+  (forall x:t. forall y:t. forall n:int. ((0 <= n) -> (power1(mul(x, y),
+  n) = mul(power1(x, n), power1(y, n)))))
 
 logic bv_min : t, t -> t
 
@@ -626,6 +661,64 @@ logic attr__ATTRIBUTE_IMAGE : bool -> us_image
 logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type universal_integer
+
+predicate in_range1(x: int) = (((-9223372036854775808) <= x) and
+  (x <= 9223372036854775807))
+
+logic bool_eq2 : int, int -> bool
+
+logic bool_ne1 : int, int -> bool
+
+logic bool_lt1 : int, int -> bool
+
+logic bool_le1 : int, int -> bool
+
+logic bool_gt1 : int, int -> bool
+
+logic bool_ge1 : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq2(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne1(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt1(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le1(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt1(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge1(x, y) = true) <-> (y <= x))))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : universal_integer, universal_integer -> bool
+
+logic dummy : universal_integer
+
+type universal_integer__ref = { universal_integer__content :
+universal_integer
+}
+
+function universal_integer__ref___projection(a: universal_integer__ref) : universal_integer =
+  (a).universal_integer__content
 
 logic shift_right : t, int -> t
 
@@ -869,67 +962,67 @@ axiom Extensionality1 :
 type t__ref1 = { t__content1 : t1
 }
 
-logic bool_eq2 : t1, t1 -> bool
+logic bool_eq4 : t1, t1 -> bool
 
-axiom bool_eq_def2 :
-  (forall x:t1. forall y:t1 [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+axiom bool_eq_def3 :
+  (forall x:t1. forall y:t1 [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
-logic bool_ne1 : t1, t1 -> bool
+logic bool_ne2 : t1, t1 -> bool
 
 axiom bool_ne_def1 :
-  (forall x:t1. forall y:t1 [bool_ne1(x, y)]. (((not (x = y)) -> (bool_ne1(x,
-  y) = true)) and ((x = y) -> (bool_ne1(x, y) = false))))
+  (forall x:t1. forall y:t1 [bool_ne2(x, y)]. (((not (x = y)) -> (bool_ne2(x,
+  y) = true)) and ((x = y) -> (bool_ne2(x, y) = false))))
 
-logic bool_lt1 : t1, t1 -> bool
+logic bool_lt2 : t1, t1 -> bool
 
 axiom bool_lt_def1 :
-  (forall x:t1. forall y:t1 [bool_lt1(x, y)]. ((ult1(x, y) -> (bool_lt1(x,
-  y) = true)) and ((not ult1(x, y)) -> (bool_lt1(x, y) = false))))
+  (forall x:t1. forall y:t1 [bool_lt2(x, y)]. ((ult1(x, y) -> (bool_lt2(x,
+  y) = true)) and ((not ult1(x, y)) -> (bool_lt2(x, y) = false))))
 
-logic bool_le1 : t1, t1 -> bool
+logic bool_le2 : t1, t1 -> bool
 
 axiom bool_le_def1 :
-  (forall x:t1. forall y:t1 [bool_le1(x, y)]. ((ule1(x, y) -> (bool_le1(x,
-  y) = true)) and ((not ule1(x, y)) -> (bool_le1(x, y) = false))))
+  (forall x:t1. forall y:t1 [bool_le2(x, y)]. ((ule1(x, y) -> (bool_le2(x,
+  y) = true)) and ((not ule1(x, y)) -> (bool_le2(x, y) = false))))
 
-logic bool_gt1 : t1, t1 -> bool
+logic bool_gt2 : t1, t1 -> bool
 
 axiom bool_gt_def1 :
-  (forall x:t1. forall y:t1 [bool_gt1(x, y)]. ((ugt1(x, y) -> (bool_gt1(x,
-  y) = true)) and ((not ugt1(x, y)) -> (bool_gt1(x, y) = false))))
+  (forall x:t1. forall y:t1 [bool_gt2(x, y)]. ((ugt1(x, y) -> (bool_gt2(x,
+  y) = true)) and ((not ugt1(x, y)) -> (bool_gt2(x, y) = false))))
 
-logic bool_ge1 : t1, t1 -> bool
+logic bool_ge2 : t1, t1 -> bool
 
 axiom bool_ge_def1 :
-  (forall x:t1. forall y:t1 [bool_ge1(x, y)]. ((uge1(x, y) -> (bool_ge1(x,
-  y) = true)) and ((not uge1(x, y)) -> (bool_ge1(x, y) = false))))
+  (forall x:t1. forall y:t1 [bool_ge2(x, y)]. ((uge1(x, y) -> (bool_ge2(x,
+  y) = true)) and ((not uge1(x, y)) -> (bool_ge2(x, y) = false))))
 
-logic power1 : t1, int -> t1
+logic power2 : t1, int -> t1
 
-axiom Power_02 : (forall x:t1. (power1(x, 0) = one1))
+axiom Power_03 : (forall x:t1. (power2(x, 0) = one1))
 
-axiom Power_12 : (forall x:t1. (power1(x, 1) = x))
+axiom Power_13 : (forall x:t1. (power2(x, 1) = x))
 
-axiom Power_s2 :
-  (forall x:t1. forall n:int. ((0 <= n) -> (power1(x, (n + 1)) = mul1(x,
-  power1(x, n)))))
+axiom Power_s3 :
+  (forall x:t1. forall n:int. ((0 <= n) -> (power2(x, (n + 1)) = mul1(x,
+  power2(x, n)))))
 
-axiom Power_s_alt1 :
-  (forall x:t1. forall n:int. ((0 <  n) -> (power1(x, n) = mul1(x, power1(x,
+axiom Power_s_alt2 :
+  (forall x:t1. forall n:int. ((0 <  n) -> (power2(x, n) = mul1(x, power2(x,
   (n - 1))))))
 
-axiom Power_sum2 :
+axiom Power_sum3 :
   (forall x:t1. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
-  (power1(x, (n + m)) = mul1(power1(x, n), power1(x, m))))))
+  (power2(x, (n + m)) = mul1(power2(x, n), power2(x, m))))))
 
-axiom Power_mult1 :
+axiom Power_mult3 :
   (forall x:t1. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
-  (power1(x, (n * m)) = power1(power1(x, n), m)))))
+  (power2(x, (n * m)) = power2(power2(x, n), m)))))
 
-axiom Power_mult21 :
-  (forall x:t1. forall y:t1. forall n:int. ((0 <= n) -> (power1(mul1(x, y),
-  n) = mul1(power1(x, n), power1(y, n)))))
+axiom Power_mult22 :
+  (forall x:t1. forall y:t1. forall n:int. ((0 <= n) -> (power2(mul1(x, y),
+  n) = mul1(power2(x, n), power2(y, n)))))
 
 logic bv_min1 : t1, t1 -> t1
 
@@ -1190,67 +1283,67 @@ axiom Extensionality2 :
 type t__ref2 = { t__content2 : t2
 }
 
-logic bool_eq3 : t2, t2 -> bool
+logic bool_eq5 : t2, t2 -> bool
 
-axiom bool_eq_def3 :
-  (forall x:t2. forall y:t2 [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+axiom bool_eq_def4 :
+  (forall x:t2. forall y:t2 [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
 
-logic bool_ne2 : t2, t2 -> bool
+logic bool_ne3 : t2, t2 -> bool
 
 axiom bool_ne_def2 :
-  (forall x:t2. forall y:t2 [bool_ne2(x, y)]. (((not (x = y)) -> (bool_ne2(x,
-  y) = true)) and ((x = y) -> (bool_ne2(x, y) = false))))
+  (forall x:t2. forall y:t2 [bool_ne3(x, y)]. (((not (x = y)) -> (bool_ne3(x,
+  y) = true)) and ((x = y) -> (bool_ne3(x, y) = false))))
 
-logic bool_lt2 : t2, t2 -> bool
+logic bool_lt3 : t2, t2 -> bool
 
 axiom bool_lt_def2 :
-  (forall x:t2. forall y:t2 [bool_lt2(x, y)]. ((ult2(x, y) -> (bool_lt2(x,
-  y) = true)) and ((not ult2(x, y)) -> (bool_lt2(x, y) = false))))
+  (forall x:t2. forall y:t2 [bool_lt3(x, y)]. ((ult2(x, y) -> (bool_lt3(x,
+  y) = true)) and ((not ult2(x, y)) -> (bool_lt3(x, y) = false))))
 
-logic bool_le2 : t2, t2 -> bool
+logic bool_le3 : t2, t2 -> bool
 
 axiom bool_le_def2 :
-  (forall x:t2. forall y:t2 [bool_le2(x, y)]. ((ule2(x, y) -> (bool_le2(x,
-  y) = true)) and ((not ule2(x, y)) -> (bool_le2(x, y) = false))))
+  (forall x:t2. forall y:t2 [bool_le3(x, y)]. ((ule2(x, y) -> (bool_le3(x,
+  y) = true)) and ((not ule2(x, y)) -> (bool_le3(x, y) = false))))
 
-logic bool_gt2 : t2, t2 -> bool
+logic bool_gt3 : t2, t2 -> bool
 
 axiom bool_gt_def2 :
-  (forall x:t2. forall y:t2 [bool_gt2(x, y)]. ((ugt2(x, y) -> (bool_gt2(x,
-  y) = true)) and ((not ugt2(x, y)) -> (bool_gt2(x, y) = false))))
+  (forall x:t2. forall y:t2 [bool_gt3(x, y)]. ((ugt2(x, y) -> (bool_gt3(x,
+  y) = true)) and ((not ugt2(x, y)) -> (bool_gt3(x, y) = false))))
 
-logic bool_ge2 : t2, t2 -> bool
+logic bool_ge3 : t2, t2 -> bool
 
 axiom bool_ge_def2 :
-  (forall x:t2. forall y:t2 [bool_ge2(x, y)]. ((uge2(x, y) -> (bool_ge2(x,
-  y) = true)) and ((not uge2(x, y)) -> (bool_ge2(x, y) = false))))
+  (forall x:t2. forall y:t2 [bool_ge3(x, y)]. ((uge2(x, y) -> (bool_ge3(x,
+  y) = true)) and ((not uge2(x, y)) -> (bool_ge3(x, y) = false))))
 
-logic power2 : t2, int -> t2
+logic power3 : t2, int -> t2
 
-axiom Power_03 : (forall x:t2. (power2(x, 0) = one2))
+axiom Power_04 : (forall x:t2. (power3(x, 0) = one2))
 
-axiom Power_13 : (forall x:t2. (power2(x, 1) = x))
+axiom Power_14 : (forall x:t2. (power3(x, 1) = x))
 
-axiom Power_s3 :
-  (forall x:t2. forall n:int. ((0 <= n) -> (power2(x, (n + 1)) = mul2(x,
-  power2(x, n)))))
+axiom Power_s4 :
+  (forall x:t2. forall n:int. ((0 <= n) -> (power3(x, (n + 1)) = mul2(x,
+  power3(x, n)))))
 
-axiom Power_s_alt2 :
-  (forall x:t2. forall n:int. ((0 <  n) -> (power2(x, n) = mul2(x, power2(x,
+axiom Power_s_alt3 :
+  (forall x:t2. forall n:int. ((0 <  n) -> (power3(x, n) = mul2(x, power3(x,
   (n - 1))))))
 
-axiom Power_sum3 :
+axiom Power_sum4 :
   (forall x:t2. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
-  (power2(x, (n + m)) = mul2(power2(x, n), power2(x, m))))))
+  (power3(x, (n + m)) = mul2(power3(x, n), power3(x, m))))))
 
-axiom Power_mult3 :
+axiom Power_mult4 :
   (forall x:t2. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
-  (power2(x, (n * m)) = power2(power2(x, n), m)))))
+  (power3(x, (n * m)) = power3(power3(x, n), m)))))
 
-axiom Power_mult22 :
-  (forall x:t2. forall y:t2. forall n:int. ((0 <= n) -> (power2(mul2(x, y),
-  n) = mul2(power2(x, n), power2(y, n)))))
+axiom Power_mult23 :
+  (forall x:t2. forall y:t2. forall n:int. ((0 <= n) -> (power3(mul2(x, y),
+  n) = mul2(power3(x, n), power3(y, n)))))
 
 logic bv_min2 : t2, t2 -> t2
 
@@ -1514,67 +1607,67 @@ axiom Extensionality3 :
 type t__ref3 = { t__content3 : t3
 }
 
-logic bool_eq4 : t3, t3 -> bool
+logic bool_eq6 : t3, t3 -> bool
 
-axiom bool_eq_def4 :
-  (forall x:t3. forall y:t3 [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+axiom bool_eq_def5 :
+  (forall x:t3. forall y:t3 [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
 
-logic bool_ne3 : t3, t3 -> bool
+logic bool_ne4 : t3, t3 -> bool
 
 axiom bool_ne_def3 :
-  (forall x:t3. forall y:t3 [bool_ne3(x, y)]. (((not (x = y)) -> (bool_ne3(x,
-  y) = true)) and ((x = y) -> (bool_ne3(x, y) = false))))
+  (forall x:t3. forall y:t3 [bool_ne4(x, y)]. (((not (x = y)) -> (bool_ne4(x,
+  y) = true)) and ((x = y) -> (bool_ne4(x, y) = false))))
 
-logic bool_lt3 : t3, t3 -> bool
+logic bool_lt4 : t3, t3 -> bool
 
 axiom bool_lt_def3 :
-  (forall x:t3. forall y:t3 [bool_lt3(x, y)]. ((ult3(x, y) -> (bool_lt3(x,
-  y) = true)) and ((not ult3(x, y)) -> (bool_lt3(x, y) = false))))
+  (forall x:t3. forall y:t3 [bool_lt4(x, y)]. ((ult3(x, y) -> (bool_lt4(x,
+  y) = true)) and ((not ult3(x, y)) -> (bool_lt4(x, y) = false))))
 
-logic bool_le3 : t3, t3 -> bool
+logic bool_le4 : t3, t3 -> bool
 
 axiom bool_le_def3 :
-  (forall x:t3. forall y:t3 [bool_le3(x, y)]. ((ule3(x, y) -> (bool_le3(x,
-  y) = true)) and ((not ule3(x, y)) -> (bool_le3(x, y) = false))))
+  (forall x:t3. forall y:t3 [bool_le4(x, y)]. ((ule3(x, y) -> (bool_le4(x,
+  y) = true)) and ((not ule3(x, y)) -> (bool_le4(x, y) = false))))
 
-logic bool_gt3 : t3, t3 -> bool
+logic bool_gt4 : t3, t3 -> bool
 
 axiom bool_gt_def3 :
-  (forall x:t3. forall y:t3 [bool_gt3(x, y)]. ((ugt3(x, y) -> (bool_gt3(x,
-  y) = true)) and ((not ugt3(x, y)) -> (bool_gt3(x, y) = false))))
+  (forall x:t3. forall y:t3 [bool_gt4(x, y)]. ((ugt3(x, y) -> (bool_gt4(x,
+  y) = true)) and ((not ugt3(x, y)) -> (bool_gt4(x, y) = false))))
 
-logic bool_ge3 : t3, t3 -> bool
+logic bool_ge4 : t3, t3 -> bool
 
 axiom bool_ge_def3 :
-  (forall x:t3. forall y:t3 [bool_ge3(x, y)]. ((uge3(x, y) -> (bool_ge3(x,
-  y) = true)) and ((not uge3(x, y)) -> (bool_ge3(x, y) = false))))
+  (forall x:t3. forall y:t3 [bool_ge4(x, y)]. ((uge3(x, y) -> (bool_ge4(x,
+  y) = true)) and ((not uge3(x, y)) -> (bool_ge4(x, y) = false))))
 
-logic power3 : t3, int -> t3
+logic power4 : t3, int -> t3
 
-axiom Power_04 : (forall x:t3. (power3(x, 0) = one3))
+axiom Power_05 : (forall x:t3. (power4(x, 0) = one3))
 
-axiom Power_14 : (forall x:t3. (power3(x, 1) = x))
+axiom Power_15 : (forall x:t3. (power4(x, 1) = x))
 
-axiom Power_s4 :
-  (forall x:t3. forall n:int. ((0 <= n) -> (power3(x, (n + 1)) = mul3(x,
-  power3(x, n)))))
+axiom Power_s5 :
+  (forall x:t3. forall n:int. ((0 <= n) -> (power4(x, (n + 1)) = mul3(x,
+  power4(x, n)))))
 
-axiom Power_s_alt3 :
-  (forall x:t3. forall n:int. ((0 <  n) -> (power3(x, n) = mul3(x, power3(x,
+axiom Power_s_alt4 :
+  (forall x:t3. forall n:int. ((0 <  n) -> (power4(x, n) = mul3(x, power4(x,
   (n - 1))))))
 
-axiom Power_sum4 :
+axiom Power_sum5 :
   (forall x:t3. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
-  (power3(x, (n + m)) = mul3(power3(x, n), power3(x, m))))))
+  (power4(x, (n + m)) = mul3(power4(x, n), power4(x, m))))))
 
-axiom Power_mult4 :
+axiom Power_mult5 :
   (forall x:t3. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
-  (power3(x, (n * m)) = power3(power3(x, n), m)))))
+  (power4(x, (n * m)) = power4(power4(x, n), m)))))
 
-axiom Power_mult23 :
-  (forall x:t3. forall y:t3. forall n:int. ((0 <= n) -> (power3(mul3(x, y),
-  n) = mul3(power3(x, n), power3(y, n)))))
+axiom Power_mult24 :
+  (forall x:t3. forall y:t3. forall n:int. ((0 <= n) -> (power4(mul3(x, y),
+  n) = mul3(power4(x, n), power4(y, n)))))
 
 logic bv_min3 : t3, t3 -> t3
 
@@ -1637,53 +1730,23 @@ axiom toBig_to_uint2 : (forall x:t1. (tqtint1(x) = tqtint(toBig2(x))))
 
 type natural
 
-predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = ((0 <= x) and (x <= 2147483647))
 
-logic bool_eq5 : int, int -> bool
+logic bool_eq7 : int, int -> bool
 
-logic bool_ne4 : int, int -> bool
+axiom bool_eq_def6 :
+  (forall x:int. forall y:int [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
 
-logic bool_lt4 : int, int -> bool
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
 
-logic bool_le4 : int, int -> bool
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
 
-logic bool_gt4 : int, int -> bool
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
 
-logic bool_ge4 : int, int -> bool
+logic user_eq1 : natural, natural -> bool
 
-axiom bool_eq_axiom :
-  (forall x:int. (forall y:int. ((bool_eq5(x, y) = true) <-> (x = y))))
-
-axiom bool_ne_axiom :
-  (forall x:int. (forall y:int. ((bool_ne4(x, y) = true) <-> (not (x = y)))))
-
-axiom bool_lt_axiom :
-  (forall x:int. (forall y:int. ((bool_lt4(x, y) = true) <-> (x <  y))))
-
-axiom bool_int__le_axiom :
-  (forall x:int. (forall y:int. ((bool_le4(x, y) = true) <-> (x <= y))))
-
-axiom bool_gt_axiom :
-  (forall x:int. (forall y:int. ((bool_gt4(x, y) = true) <-> (y <  x))))
-
-axiom bool_ge_axiom :
-  (forall x:int. (forall y:int. ((bool_ge4(x, y) = true) <-> (y <= x))))
-
-logic bool_eq6 : int, int -> bool
-
-axiom bool_eq_def5 :
-  (forall x:int. forall y:int [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE1 : us_image -> int
-
-logic user_eq : natural, natural -> bool
-
-logic dummy : natural
+logic dummy1 : natural
 
 type natural__ref = { natural__content : natural
 }
@@ -1695,21 +1758,21 @@ type modular
 
 logic attr__ATTRIBUTE_MODULUS : t
 
-logic bool_eq7 : t, t -> bool
+logic bool_eq8 : t, t -> bool
 
-axiom bool_eq_def6 :
-  (forall x:t. forall y:t [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
+axiom bool_eq_def7 :
+  (forall x:t. forall y:t [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
 
-logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
+logic attr__ATTRIBUTE_IMAGE3 : t -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE2 : us_image -> t
+logic attr__ATTRIBUTE_VALUE3 : us_image -> t
 
-logic user_eq1 : modular, modular -> bool
+logic user_eq2 : modular, modular -> bool
 
-logic dummy1 : modular
+logic dummy2 : modular
 
 type modular__ref = { modular__content : modular
 }
@@ -1721,7 +1784,7 @@ axiom shift_right__post_axiom : true
 
 axiom shift_right__def_axiom :
   (forall v:t.
-  (forall amount:int [shift_right(v, amount)]. (in_range1(amount) ->
+  (forall amount:int [shift_right(v, amount)]. (in_range2(amount) ->
   ((((1 <= 32) and (32 <= 8)) -> (((amount <  8) -> (shift_right(v,
   amount) = toBig2(lsr_bv1(toSmall2(v), of_int2(amount))))) and
   ((not (amount <  8)) -> (shift_right(v,
@@ -1736,13 +1799,12 @@ axiom shift_right__def_axiom :
 
  (* File "bits_manipulation-functions.ads", line 35, characters 0-0 *)
 goal WP_parameter_def :
-  (forall val__:t. forall n:int. forall o:t. forall o1:t. forall o2:bool.
+  (forall val__:t. forall n:int. forall o:t. forall o1:int. forall o2:bool.
   forall result:bool. ((ule(of_int(0), val__) and ule(val__,
-  of_int(4294967295))) -> (((0 <= n) and (n <= 31)) ->
-  ((((((n <  4294967296) and (o1 = lsl_bv(of_int(1), of_int(n)))) or
-  ((not (n <  4294967296)) and (o1 = of_int(0)))) and (((o1 = of_int(0)) and
-  (o2 = true)) or ((not (o1 = of_int(0))) and (o2 = false)))) and
-  (((not (o2 = true)) and (result = true)) or ((o2 = true) and
-  (result = false)))) -> ((result = true) -> ((((n <  4294967296) and
-  (o = lsl_bv(of_int(1), of_int(n)))) or ((not (n <  4294967296)) and
-  (o = of_int(0)))) -> (not (o = zeros))))))))
+  of_int(4294967295))) -> (((0 <= n) and (n <= 31)) -> (((((o1 = power(2,
+  n)) and in_range1(power(2, n))) and (((o1 = 0) and (o2 = true)) or
+  ((not (o1 = 0)) and (o2 = false)))) and (((not (o2 = true)) and
+  (result = true)) or ((o2 = true) and (result = false)))) ->
+  ((result = true) -> ((((n <  4294967296) and (o = lsl_bv(of_int(1),
+  of_int(n)))) or ((not (n <  4294967296)) and (o = of_int(0)))) ->
+  (not (o = zeros))))))))

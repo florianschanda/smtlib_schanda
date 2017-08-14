@@ -795,11 +795,11 @@ logic user_eq3 : integer, integer -> bool
 
 logic dummy3 : integer
 
-type t517s__ref = { t517s__content : integer
+type t645s__ref = { t645s__content : integer
 }
 
-function t517s__ref___projection(a: t517s__ref) : integer =
-  (a).t517s__content
+function t645s__ref___projection(a: t645s__ref) : integer =
+  (a).t645s__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 

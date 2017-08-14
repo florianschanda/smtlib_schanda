@@ -217,11 +217,7 @@ logic decr_int : us_rep -> us_rep
 
 logic decr_int__function_guard : us_rep, us_rep -> prop
 
-axiom decr_int__post_axiom :
-  (forall x:integer [decr_int({ us_split_fields1 = { rec__test_type__t__f = x
-  } })]. ((in_range1(to_rep(x)) and ((-2147483648) <  to_rep(x))) ->
-  in_range1(to_rep(((decr_int({ us_split_fields1 = { rec__test_type__t__f = x
-  } })).us_split_fields1).rec__test_type__t__f))))
+axiom decr_int__post_axiom : true
 
 axiom decr_int__def_axiom :
   (forall x:integer [decr_int({ us_split_fields1 = { rec__test_type__t__f = x
@@ -246,5 +242,4 @@ goal WP_parameter_def :
   (forall o:integer. forall o1:integer.
   forall test_type__test__x__assume:integer. (((((to_rep(o) = 0) and
   (o = o1)) and (test_type__test__x__assume = o1)) and
-  (test_type__test__x__assume = x)) -> (in_range1(to_rep(x)) ->
-  (in_range1(to_rep(x)) -> ((-2147483648) <  to_rep(x))))))
+  (test_type__test__x__assume = x)) -> ((-2147483648) <  to_rep(x))))

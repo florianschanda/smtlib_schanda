@@ -806,11 +806,11 @@ logic user_eq3 : integer, integer -> bool
 
 logic dummy3 : integer
 
-type t643s__ref = { t643s__content : integer
+type t771s__ref = { t771s__content : integer
 }
 
-function t643s__ref___projection(a: t643s__ref) : integer =
-  (a).t643s__content
+function t771s__ref___projection(a: t771s__ref) : integer =
+  (a).t771s__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 

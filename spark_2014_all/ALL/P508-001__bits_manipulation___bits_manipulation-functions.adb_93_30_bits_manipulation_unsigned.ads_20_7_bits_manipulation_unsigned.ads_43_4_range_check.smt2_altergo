@@ -1849,7 +1849,7 @@ goal WP_parameter_def :
   int__content = result__ }) and (result__1 = 0)) -> (in_range1(result__1) ->
   ((({ t__content = result2 } = { t__content = v }) and (v1 = value)) ->
   (((not (shift_amount1 = 0)) and (not (v1 = of_int(0)))) -> (((((0 <= 15) ->
-  in_range1(result__2)) and ((0 <= 15) -> in_range1(shift_amount2))) and
+  in_range1(shift_amount2)) and ((0 <= 15) -> in_range1(result__2))) and
   ((not (shift_amount2 = 0)) and (not (v2 = of_int(0))))) ->
   ((((o = shift_right(v2, shift_amount2)) and ((((1 <= 16) and (16 <= 8)) and
   (((shift_amount2 <  8) and (o = toBig2(lsr_bv1(toSmall2(v2),
