@@ -557,6 +557,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1001,8 +1021,37 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 8388608.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 713623846352979940529142984724747568191373312.0))))) :pattern (
   (round m x)) )))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
 (declare-sort tt_float32B 0)
+
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq (tt_float32B tt_float32B) Bool)
 
@@ -1021,16 +1070,18 @@
 
 (declare-sort t_float32 0)
 
-(declare-const fliteral t)
+(declare-const fliteral1 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral)
-  (= (tqtreal fliteral) 340282001837565597733306976381245063168.0)))
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 340282001837565597733306976381245063168.0)))
 
 (define-fun in_range1 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le (neg fliteral) x) (le x
-                                   fliteral))))
+                                   (and (le (neg fliteral1) x) (le x
+                                   fliteral1))))
+
+(define-fun bool_eq2 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq1 (t_float32 t_float32) Bool)
 
@@ -1051,7 +1102,7 @@
   (temp___skip_constant_170 Bool)
   (temp___do_toplevel_171 Bool)) Bool (=>
                                       (or (= temp___is_init_169 true) (le
-                                      (neg fliteral) fliteral)) (in_range1
+                                      (neg fliteral1) fliteral1)) (in_range1
                                       temp___expr_172)))
 
 (declare-const c_2pi_in_degrees t)
@@ -1060,18 +1111,20 @@
 
 (declare-sort t_angle_360 0)
 
-(declare-const fliteral1 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) (/ 0.0 10.0))))
-
 (declare-const fliteral2 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 360.0)))
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 360.0)))
 
 (define-fun in_range2 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le fliteral1 x) (le x fliteral2))))
+                                   (and (le fliteral2 x) (le x fliteral3))))
+
+(define-fun bool_eq3 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq2 (t_angle_360 t_angle_360) Bool)
 
@@ -1150,8 +1203,8 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq ((a (Array Int t_angle_360)) (a__first Int) (a__last Int)
-  (b (Array Int t_angle_360)) (b__first Int)
+(define-fun bool_eq4 ((a (Array Int t_angle_360)) (a__first Int)
+  (a__last Int) (b (Array Int t_angle_360)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
                            (and (<= b__first b__last)
@@ -1169,7 +1222,7 @@
   (assert
   (forall ((a (Array Int t_angle_360)) (b (Array Int t_angle_360)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq4 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -1195,13 +1248,13 @@
   (of_rep temp___197)))))
 
 ;; c_2pi_in_degrees__def_axiom
-  (assert (= c_2pi_in_degrees fliteral2))
+  (assert (= c_2pi_in_degrees fliteral3))
 
 (define-fun dynamic_invariant1 ((temp___expr_178 t) (temp___is_init_175 Bool)
   (temp___skip_constant_176 Bool)
   (temp___do_toplevel_177 Bool)) Bool (=>
                                       (or (= temp___is_init_175 true) (le
-                                      fliteral1 fliteral2)) (in_range2
+                                      fliteral2 fliteral3)) (in_range2
                                       temp___expr_178)))
 
 (declare-const angle (Array Int t_angle_360))
@@ -1217,7 +1270,7 @@
   (assert (= result angle))
 
 ;; H
-  (assert (= angle1 (access_inline__angle__aggregate_def fliteral1)))
+  (assert (= angle1 (access_inline__angle__aggregate_def fliteral2)))
 
 ;; H
   (assert (= (to_rep (select angle1 3)) c6b))

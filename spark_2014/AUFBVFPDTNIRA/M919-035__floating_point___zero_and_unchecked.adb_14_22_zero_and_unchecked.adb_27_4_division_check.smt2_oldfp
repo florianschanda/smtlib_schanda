@@ -720,6 +720,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1164,6 +1184,33 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 8388608.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 713623846352979940529142984724747568191373312.0))))) :pattern (
   (round m x)) )))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref1 0)) (((mk_t__ref1 (t__content1 t)))))
 (declare-sort integer 0)
 
@@ -1194,6 +1241,8 @@
 
 (declare-sort float 0)
 
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
+
 (declare-fun user_eq1 (float float) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE1 (t) us_image)
@@ -1208,18 +1257,18 @@
 (((mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(declare-const fliteral t)
+(declare-const fliteral1 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral)
-  (= (tqtreal fliteral) 340282346638528859811704183484516925440.0)))
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
 (define-fun dynamic_invariant1 ((temp___expr_51 t) (temp___is_init_48 Bool)
   (temp___skip_constant_49 Bool)
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true) (le
-                                     (neg fliteral) fliteral)) (tqtisFinite
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_51)))
 
 (declare-sort source 0)
@@ -1247,6 +1296,8 @@
 
 (declare-sort target 0)
 
+(define-fun bool_eq2 ((x t) (y t)) Bool (ite (eq x y) true false))
+
 (declare-fun user_eq3 (target target) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 (t) us_image)
@@ -1266,8 +1317,8 @@
   (temp___skip_constant_193 Bool)
   (temp___do_toplevel_194 Bool)) Bool (=>
                                       (or (= temp___is_init_192 true) (le
-                                      (neg fliteral) fliteral)) (tqtisFinite
-                                      temp___expr_195)))
+                                      (neg fliteral1) fliteral1))
+                                      (tqtisFinite temp___expr_195)))
 
 (declare-fun convert ((_ BitVec 32)) t)
 
@@ -1297,6 +1348,8 @@
 
 (declare-sort source1 0)
 
+(define-fun bool_eq3 ((x t) (y t)) Bool (ite (eq x y) true false))
+
 (declare-fun user_eq4 (source1 source1) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE4 (t) us_image)
@@ -1316,8 +1369,8 @@
   (temp___skip_constant_199 Bool)
   (temp___do_toplevel_200 Bool)) Bool (=>
                                       (or (= temp___is_init_198 true) (le
-                                      (neg fliteral) fliteral)) (tqtisFinite
-                                      temp___expr_201)))
+                                      (neg fliteral1) fliteral1))
+                                      (tqtisFinite temp___expr_201)))
 
 (declare-sort target1 0)
 

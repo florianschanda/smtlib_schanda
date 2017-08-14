@@ -646,6 +646,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1090,6 +1110,33 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 8388608.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 713623846352979940529142984724747568191373312.0))))) :pattern (
   (round m x)) )))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref1 0)) (((mk_t__ref1 (t__content1 t)))))
 (define-fun to_int3 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -1128,6 +1175,8 @@
 
 (declare-sort battery_level_type 0)
 
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
+
 (declare-fun user_eq1 (battery_level_type battery_level_type) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE2 (t) us_image)
@@ -1144,19 +1193,19 @@
 (define-fun battery_level_type__ref___projection ((a battery_level_type__ref)) battery_level_type
   (battery_level_type__content a))
 
-(declare-const fliteral t)
+(declare-const fliteral1 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral)
-  (= (tqtreal fliteral) 340282346638528859811704183484516925440.0)))
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
 (define-fun dynamic_invariant1 ((temp___expr_202 t) (temp___is_init_199 Bool)
   (temp___skip_constant_200 Bool)
   (temp___do_toplevel_201 Bool)) Bool (=>
                                       (or (= temp___is_init_199 true) (le
-                                      (neg fliteral) fliteral)) (tqtisFinite
-                                      temp___expr_202)))
+                                      (neg fliteral1) fliteral1))
+                                      (tqtisFinite temp___expr_202)))
 
 (declare-fun to_rep (battery_level_type) t)
 
@@ -1254,7 +1303,7 @@
   (forall ((i (_ BitVec 8)))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq ((a (Array (_ BitVec 8) battery_level_type))
+(define-fun bool_eq2 ((a (Array (_ BitVec 8) battery_level_type))
   (a__first (_ BitVec 8)) (a__last (_ BitVec 8))
   (b (Array (_ BitVec 8) battery_level_type)) (b__first (_ BitVec 8))
   (b__last (_ BitVec 8))) Bool (ite (and
@@ -1277,7 +1326,7 @@
   (b (Array (_ BitVec 8) battery_level_type)))
   (forall ((a__first (_ BitVec 8)) (a__last (_ BitVec 8))
   (b__first (_ BitVec 8)) (b__last (_ BitVec 8)))
-  (=> (= (bool_eq b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq2 b b__first b__last a a__first a__last) true)
   (and
   (ite (bvule a__first a__last)
   (and (bvule b__first b__last)
@@ -1329,12 +1378,12 @@
                                       (bvule ((_ int2bv 8) 0) ((_ int2bv 8) 50)))
                                       (in_range3 temp___expr_214)))
 
-(declare-const fliteral1 t)
+(declare-const fliteral2 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral1)
-  (= (tqtreal fliteral1) (/ 20000000298023223876953125.0 100000000000000000000000000.0))))
+  (and (tqtisFinite fliteral2)
+  (= (tqtreal fliteral2) (/ 20000000298023223876953125.0 100000000000000000000000000.0))))
 
 ;; time_below_threshold__post_axiom
   (assert
@@ -1345,17 +1394,17 @@
      (let ((result (time_below_threshold failsafe__model__battery_level_at
                    failsafe__model__current_time)))
      (and
-     (ite (le fliteral1
+     (ite (le fliteral2
      (to_rep
      (select failsafe__model__battery_level_at failsafe__model__current_time)))
      (= result ((_ int2bv 8) 0))
      (ite (forall ((s (_ BitVec 8)))
           (=> (and (bvule ((_ int2bv 8) 0) s) (bvule s ((_ int2bv 8) 49)))
           (lt (to_rep (select failsafe__model__battery_level_at s))
-          fliteral1)))
+          fliteral2)))
      (= result ((_ int2bv 8) 50))
      (and
-     (and (bvult result ((_ int2bv 8) 50)) (le fliteral1
+     (and (bvult result ((_ int2bv 8) 50)) (le fliteral2
      (to_rep
      (select failsafe__model__battery_level_at (let ((temp___230 (bvsub failsafe__model__current_time result)))
                                                (ite (bvult failsafe__model__current_time result)
@@ -1369,12 +1418,12 @@
             (ite (bvult failsafe__model__current_time (bvsub result ((_ int2bv 8) 1)))
             (bvadd temp___231 ((_ int2bv 8) 50)) temp___231)) s)
      (bvule s failsafe__model__current_time)) (lt
-     (to_rep (select failsafe__model__battery_level_at s)) fliteral1)))
+     (to_rep (select failsafe__model__battery_level_at s)) fliteral2)))
      (and
      (forall ((s (_ BitVec 8)))
      (=>
      (and (bvule ((_ int2bv 8) 0) s) (bvule s failsafe__model__current_time))
-     (lt (to_rep (select failsafe__model__battery_level_at s)) fliteral1)))
+     (lt (to_rep (select failsafe__model__battery_level_at s)) fliteral2)))
      (forall ((s (_ BitVec 8)))
      (=>
      (and
@@ -1382,7 +1431,7 @@
             (ite (bvult failsafe__model__current_time (bvsub result ((_ int2bv 8) 1)))
             (bvadd temp___232 ((_ int2bv 8) 50)) temp___232)) s)
      (bvule s ((_ int2bv 8) 49))) (lt
-     (to_rep (select failsafe__model__battery_level_at s)) fliteral1))))))))
+     (to_rep (select failsafe__model__battery_level_at s)) fliteral2))))))))
      (dynamic_invariant3 result true false true)))) :pattern ((time_below_threshold
                                                               failsafe__model__battery_level_at
                                                               failsafe__model__current_time)) ))))
@@ -1501,7 +1550,7 @@
   (=>
   (forall ((s (_ BitVec 8)))
   (=> (and (bvule ((_ int2bv 8) 0) s) (bvule s ((_ int2bv 8) 49))) (lt
-  (to_rep (select battery_level_at s)) fliteral1)))
+  (to_rep (select battery_level_at s)) fliteral2)))
   (= counter ((_ int2bv 8) 50))))
 
 ;; H
@@ -1514,7 +1563,7 @@
   (= s (let ((temp___277 (bvadd current_time ((_ int2bv 8) 1))))
        (ite (bvule (bvsub ((_ int2bv 8) 50) current_time) ((_ int2bv 8) 1))
        (bvsub temp___277 ((_ int2bv 8) 50)) temp___277))))
-  (lt (to_rep (select battery_level_at s)) fliteral1))))
+  (lt (to_rep (select battery_level_at s)) fliteral2))))
   (bvuge counter ((_ int2bv 8) 49))))
 
 ;; H
@@ -1546,7 +1595,7 @@
   (assert (= battery_level_at1 o2))
 
 ;; H
-  (assert (lt battery_level fliteral1))
+  (assert (lt battery_level fliteral2))
 
 ;; H
   (assert
@@ -1560,7 +1609,7 @@
   (assert (= counter1 o3))
 
 ;; H
-  (assert (le fliteral1 (to_rep (select battery_level_at1 current_time1))))
+  (assert (le fliteral2 (to_rep (select battery_level_at1 current_time1))))
 
 (assert
 ;; WP_parameter_def

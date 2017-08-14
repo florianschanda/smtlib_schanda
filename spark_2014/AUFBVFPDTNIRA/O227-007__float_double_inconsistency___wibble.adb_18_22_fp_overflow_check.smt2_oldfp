@@ -648,6 +648,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1404,6 +1424,33 @@
   (forall ((m mode) (x (_ BitVec 32)))
   (= (tqtreal (of_ubv32 m x)) (round m (to_real (bv2nat x))))))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref1 0)) (((mk_t__ref1 (t__content1 t)))))
 (define-fun to_int6 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -1418,6 +1465,8 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort tfloat32B 0)
+
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq (tfloat32B tfloat32B) Bool)
 
@@ -1436,6 +1485,8 @@
 
 (declare-sort float32 0)
 
+(define-fun bool_eq2 ((x t) (y t)) Bool (ite (eq x y) true false))
+
 (declare-fun user_eq1 (float32 float32) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE2 (t) us_image)
@@ -1451,19 +1502,19 @@
 (define-fun float32__ref___projection ((a float32__ref)) float32 (float32__content
                                                                  a))
 
-(declare-const fliteral t)
+(declare-const fliteral1 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral)
-  (= (tqtreal fliteral) 340282346638528859811704183484516925440.0)))
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
 (define-fun dynamic_invariant ((temp___expr_135 t) (temp___is_init_132 Bool)
   (temp___skip_constant_133 Bool)
   (temp___do_toplevel_134 Bool)) Bool (=>
                                       (or (= temp___is_init_132 true) (le
-                                      (neg fliteral) fliteral)) (tqtisFinite
-                                      temp___expr_135)))
+                                      (neg fliteral1) fliteral1))
+                                      (tqtisFinite temp___expr_135)))
 
 (declare-sort t1 0)
 
@@ -1501,15 +1552,15 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const fliteral1 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) 11.0)))
-
 (declare-const fliteral2 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 10.0)))
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 11.0)))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 10.0)))
 
 (declare-const state t)
 
@@ -1522,11 +1573,11 @@
 ;; H
   (assert
   (and (bvult x ((_ int2bv 32) 1000000)) (le state
-  (mul RNE1 (of_ubv32 RNE1 x) fliteral1))))
+  (mul RNE1 (of_ubv32 RNE1 x) fliteral2))))
 
 (assert
 ;; WP_parameter_def
  ;; File "wibble.adb", line 51, characters 0-0
-  (not (tqtisFinite (add RNE1 state fliteral2))))
+  (not (tqtisFinite (add RNE1 state fliteral3))))
 (check-sat)
 (exit)

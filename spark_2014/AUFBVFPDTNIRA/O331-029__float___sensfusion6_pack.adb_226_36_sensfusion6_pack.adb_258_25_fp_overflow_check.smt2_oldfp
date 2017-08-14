@@ -557,6 +557,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1001,6 +1021,33 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 8388608.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 713623846352979940529142984724747568191373312.0))))) :pattern (
   (round m x)) )))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -1016,6 +1063,8 @@
 
 (declare-sort float 0)
 
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
+
 (declare-fun user_eq (float float) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE1 (t) us_image)
@@ -1030,30 +1079,32 @@
 (((mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(declare-const fliteral t)
+(declare-const fliteral1 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral)
-  (= (tqtreal fliteral) 340282346638528859811704183484516925440.0)))
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
 (define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
   (temp___skip_constant_49 Bool)
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true) (le
-                                     (neg fliteral) fliteral)) (tqtisFinite
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_51)))
 
 (declare-sort t_rate 0)
 
-(declare-const fliteral1 t)
+(declare-const fliteral2 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) 3000.0)))
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 3000.0)))
 
 (define-fun in_range2 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le (neg fliteral1) x) (le x
-                                   fliteral1))))
+                                   (and (le (neg fliteral2) x) (le x
+                                   fliteral2))))
+
+(define-fun bool_eq2 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq1 (t_rate t_rate) Bool)
 
@@ -1074,19 +1125,21 @@
   (temp___skip_constant_138 Bool)
   (temp___do_toplevel_139 Bool)) Bool (=>
                                       (or (= temp___is_init_137 true) (le
-                                      (neg fliteral1) fliteral1)) (in_range2
+                                      (neg fliteral2) fliteral2)) (in_range2
                                       temp___expr_140)))
 
 (declare-sort t_acc 0)
 
-(declare-const fliteral2 t)
+(declare-const fliteral3 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 16.0)))
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 16.0)))
 
 (define-fun in_range3 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le (neg fliteral2) x) (le x
-                                   fliteral2))))
+                                   (and (le (neg fliteral3) x) (le x
+                                   fliteral3))))
+
+(define-fun bool_eq3 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq2 (t_acc t_acc) Bool)
 
@@ -1106,14 +1159,16 @@
   (temp___skip_constant_144 Bool)
   (temp___do_toplevel_145 Bool)) Bool (=>
                                       (or (= temp___is_init_143 true) (le
-                                      (neg fliteral2) fliteral2)) (in_range3
+                                      (neg fliteral3) fliteral3)) (in_range3
                                       temp___expr_146)))
 
 (declare-sort t_acc_lifted 0)
 
 (define-fun in_range4 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le (neg fliteral2) x) (le x
-                                   fliteral2))))
+                                   (and (le (neg fliteral3) x) (le x
+                                   fliteral3))))
+
+(define-fun bool_eq4 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq3 (t_acc_lifted t_acc_lifted) Bool)
 
@@ -1134,18 +1189,20 @@
   (temp___skip_constant_156 Bool)
   (temp___do_toplevel_157 Bool)) Bool (=>
                                       (or (= temp___is_init_155 true) (le
-                                      (neg fliteral2) fliteral2)) (in_range4
+                                      (neg fliteral3) fliteral3)) (in_range4
                                       temp___expr_158)))
 
 (declare-sort positive_float 0)
 
-(declare-const fliteral3 t)
+(declare-const fliteral4 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) (/ 0.0 10.0))))
 
 (define-fun in_range5 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le fliteral3 x) (le x fliteral))))
+                                   (and (le fliteral4 x) (le x fliteral1))))
+
+(define-fun bool_eq5 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq4 (positive_float positive_float) Bool)
 
@@ -1166,25 +1223,22 @@
   (temp___is_init_1291 Bool) (temp___skip_constant_1292 Bool)
   (temp___do_toplevel_1293 Bool)) Bool (=>
                                        (or (= temp___is_init_1291 true) (le
-                                       fliteral3 fliteral)) (in_range5
+                                       fliteral4 fliteral1)) (in_range5
                                        temp___expr_1294)))
 
 (declare-sort t_delta_time 0)
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 1000000047497451305389404296875.0 1000000000000000000000000000000000.0))))
-
 (declare-const fliteral5 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 1.0)))
+  (assert
+  (and (tqtisFinite fliteral5)
+  (= (tqtreal fliteral5) (/ 1000000047497451305389404296875.0 1000000000000000000000000000000000.0))))
 
 (define-fun in_range6 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le fliteral4 x) (le x fliteral5))))
+                                   (and (le fliteral5 x) (le x fliteral))))
+
+(define-fun bool_eq6 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq5 (t_delta_time t_delta_time) Bool)
 
@@ -1205,13 +1259,15 @@
   (temp___is_init_1297 Bool) (temp___skip_constant_1298 Bool)
   (temp___do_toplevel_1299 Bool)) Bool (=>
                                        (or (= temp___is_init_1297 true) (le
-                                       fliteral4 fliteral5)) (in_range6
+                                       fliteral5 fliteral)) (in_range6
                                        temp___expr_1300)))
 
 (declare-sort t_alpha 0)
 
 (define-fun in_range7 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le fliteral3 x) (le x fliteral5))))
+                                   (and (le fliteral4 x) (le x fliteral))))
+
+(define-fun bool_eq7 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq6 (t_alpha t_alpha) Bool)
 
@@ -1232,14 +1288,16 @@
   (temp___is_init_1303 Bool) (temp___skip_constant_1304 Bool)
   (temp___do_toplevel_1305 Bool)) Bool (=>
                                        (or (= temp___is_init_1303 true) (le
-                                       fliteral3 fliteral5)) (in_range7
+                                       fliteral4 fliteral)) (in_range7
                                        temp___expr_1306)))
 
 (declare-sort t_quaternion 0)
 
 (define-fun in_range8 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le (neg fliteral5) x) (le x
-                                   fliteral5))))
+                                   (and (le (neg fliteral) x) (le x
+                                   fliteral))))
+
+(define-fun bool_eq8 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq7 (t_quaternion t_quaternion) Bool)
 
@@ -1260,7 +1318,7 @@
   (temp___is_init_1333 Bool) (temp___skip_constant_1334 Bool)
   (temp___do_toplevel_1335 Bool)) Bool (=>
                                        (or (= temp___is_init_1333 true) (le
-                                       (neg fliteral5) fliteral5)) (in_range8
+                                       (neg fliteral) fliteral)) (in_range8
                                        temp___expr_1336)))
 
 (declare-fun inv_sqrt (t) t)
@@ -1286,7 +1344,7 @@
   (forall ((x t))
   (! (=> (and (dynamic_invariant x true true true) (le fliteral6 x))
      (let ((result (inv_sqrt x)))
-     (and (and (lt fliteral3 result) (lt result fliteral7))
+     (and (and (lt fliteral4 result) (lt result fliteral7))
      (dynamic_invariant result true false true)))) :pattern ((inv_sqrt x)) )))
 
 (declare-fun saturate (t t t) t)
@@ -1318,10 +1376,9 @@
   (! (=> (dynamic_invariant2 x true true true)
      (let ((result (lift_away_from_zero x)))
      (and
-     (ite (eq x fliteral3) (eq result fliteral3)
-     (=> (not (fp.eq x fliteral3)) (not (fp.eq result fliteral3))))
-     (dynamic_invariant3 result true false true)))) :pattern ((lift_away_from_zero
-                                                              x)) )))
+     (ite (eq x fliteral4) (eq result fliteral4)
+     (=> (neq x fliteral4) (neq result fliteral4))) (dynamic_invariant3
+     result true false true)))) :pattern ((lift_away_from_zero x)) )))
 
 (declare-const gx t)
 
@@ -1964,16 +2021,16 @@
   (assert (in_range6 c9b))
 
 ;; H
-  (assert (=> (le (neg fliteral) fliteral) (tqtisFinite recip_norm)))
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite recip_norm)))
 
 ;; H
-  (assert (=> (le (neg fliteral2) fliteral2) (in_range3 norm_ax)))
+  (assert (=> (le (neg fliteral3) fliteral3) (in_range3 norm_ax)))
 
 ;; H
-  (assert (=> (le (neg fliteral2) fliteral2) (in_range3 norm_ay)))
+  (assert (=> (le (neg fliteral3) fliteral3) (in_range3 norm_ay)))
 
 ;; H
-  (assert (=> (le (neg fliteral2) fliteral2) (in_range3 norm_az)))
+  (assert (=> (le (neg fliteral3) fliteral3) (in_range3 norm_az)))
 
 ;; H
   (assert (= result (mk_t__ref rad_gx)))
@@ -2032,31 +2089,31 @@
   (assert (tqtisFinite half_vz1))
 
 ;; H
-  (assert (=> (le (neg fliteral) fliteral) (tqtisFinite half_ex)))
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite half_ex)))
 
 ;; H
   (assert
-  (=> (le (neg fliteral) fliteral) (tqtisFinite (t__content half_ey))))
+  (=> (le (neg fliteral1) fliteral1) (tqtisFinite (t__content half_ey))))
 
 ;; H
   (assert
-  (=> (le (neg fliteral) fliteral) (tqtisFinite (t__content half_ez))))
+  (=> (le (neg fliteral1) fliteral1) (tqtisFinite (t__content half_ez))))
 
 ;; H
   (assert
-  (=> (le (neg fliteral) fliteral) (tqtisFinite (t__content q0_tmp))))
+  (=> (le (neg fliteral1) fliteral1) (tqtisFinite (t__content q0_tmp))))
 
 ;; H
   (assert
-  (=> (le (neg fliteral) fliteral) (tqtisFinite (t__content q1_tmp))))
+  (=> (le (neg fliteral1) fliteral1) (tqtisFinite (t__content q1_tmp))))
 
 ;; H
   (assert
-  (=> (le (neg fliteral) fliteral) (tqtisFinite (t__content q2_tmp))))
+  (=> (le (neg fliteral1) fliteral1) (tqtisFinite (t__content q2_tmp))))
 
 ;; H
   (assert
-  (=> (le (neg fliteral) fliteral) (tqtisFinite (t__content q3_tmp))))
+  (=> (le (neg fliteral1) fliteral1) (tqtisFinite (t__content q3_tmp))))
 
 ;; H
   (assert (= result6 qa))
@@ -2088,778 +2145,778 @@
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (and
   (= o (inv_sqrt
        (add RNE1 (add RNE1 (mul RNE1 c6b c6b) (mul RNE1 c7b c7b))
        (mul RNE1 c8b c8b))))
-  (and (tqtisFinite o) (and (lt fliteral3 o) (lt o fliteral7))))))
+  (and (tqtisFinite o) (and (lt fliteral4 o) (lt o fliteral7))))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= result9 (mk_t__ref recip_norm))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= recip_norm2 o)))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (and (= o1 (mul RNE1 c6b recip_norm2)) (tqtisFinite
   (mul RNE1 c6b recip_norm2)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (and (= o2 (saturate o1 (neg fliteral5) fliteral5))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (and (= o2 (saturate o1 (neg fliteral) fliteral))
   (and (tqtisFinite o2)
-  (ite (lt o1 (neg fliteral5)) (eq o2 (neg fliteral5))
-  (ite (lt fliteral5 o1) (eq o2 fliteral5) (eq o2 o1)))))))
+  (ite (lt o1 (neg fliteral)) (eq o2 (neg fliteral))
+  (ite (lt fliteral o1) (eq o2 fliteral) (eq o2 o1)))))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (and (= o3 o2) (tqtisFinite o2))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= result10 (mk_t__ref norm_ax))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= norm_ax2 o3)))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (and (= o4 (mul RNE1 c7b recip_norm2)) (tqtisFinite
   (mul RNE1 c7b recip_norm2)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (and (= o5 (saturate o4 (neg fliteral5) fliteral5))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (and (= o5 (saturate o4 (neg fliteral) fliteral))
   (and (tqtisFinite o5)
-  (ite (lt o4 (neg fliteral5)) (eq o5 (neg fliteral5))
-  (ite (lt fliteral5 o4) (eq o5 fliteral5) (eq o5 o4)))))))
+  (ite (lt o4 (neg fliteral)) (eq o5 (neg fliteral))
+  (ite (lt fliteral o4) (eq o5 fliteral) (eq o5 o4)))))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (and (= o6 o5) (tqtisFinite o5))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= result11 (mk_t__ref norm_ay))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= norm_ay2 o6)))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (and (= o7 (mul RNE1 c8b recip_norm2)) (tqtisFinite
   (mul RNE1 c8b recip_norm2)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (and (= o8 (saturate o7 (neg fliteral5) fliteral5))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (and (= o8 (saturate o7 (neg fliteral) fliteral))
   (and (tqtisFinite o8)
-  (ite (lt o7 (neg fliteral5)) (eq o8 (neg fliteral5))
-  (ite (lt fliteral5 o7) (eq o8 fliteral5) (eq o8 o7)))))))
+  (ite (lt o7 (neg fliteral)) (eq o8 (neg fliteral))
+  (ite (lt fliteral o7) (eq o8 fliteral) (eq o8 o7)))))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (and (= o9 o8) (tqtisFinite o8))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= result12 (mk_t__ref norm_az))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= norm_az2 o9)))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (and (= o10 (mul RNE1 norm_az2 half_vy1)) (tqtisFinite
   (mul RNE1 norm_az2 half_vy1)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (and (= o11 (mul RNE1 norm_ay2 half_vz1)) (tqtisFinite
   (mul RNE1 norm_ay2 half_vz1)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= o12 (sub RNE1 o11 o10))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (and (= o13 o12) (tqtisFinite o12))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= result13 (mk_t__ref half_ex))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= half_ex2 o13)))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (and (= o14 (mul RNE1 norm_ax2 half_vz1)) (tqtisFinite
   (mul RNE1 norm_ax2 half_vz1)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (and (= o15 (mul RNE1 norm_az2 half_vx1)) (tqtisFinite
   (mul RNE1 norm_az2 half_vx1)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= o16 (sub RNE1 o15 o14))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (and (= o17 o16) (tqtisFinite o16))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= result14 half_ey)))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= (let ((subject half_ey)) half_ey2) o17)))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (and (= o18 (mul RNE1 norm_ay2 half_vx1)) (tqtisFinite
   (mul RNE1 norm_ay2 half_vx1)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (and (= o19 (mul RNE1 norm_ax2 half_vy1)) (tqtisFinite
   (mul RNE1 norm_ax2 half_vy1)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= o20 (sub RNE1 o19 o18))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (and (= o21 o20) (tqtisFinite o20))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= result15 half_ez)))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= (let ((subject half_ez)) half_ez2) o21)))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki)
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki)
   (and (= o22 (mul RNE1 two_ki half_ex2)) (tqtisFinite
   (mul RNE1 two_ki half_ex2))))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (= o23 (mul RNE1 o22 c9b)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (= o23 (mul RNE1 o22 c9b)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (and (= o24 o23) (tqtisFinite o23)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (and (= o24 o23) (tqtisFinite o23)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (= o25 (add RNE1 integral_fbx o24)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (= o25 (add RNE1 integral_fbx o24)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (and (= o26 o25) (tqtisFinite o25)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (and (= o26 o25) (tqtisFinite o25)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (= result16 integral_fbx4))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (= result16 integral_fbx4))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (= integral_fbx2 o26))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (= integral_fbx2 o26))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki)
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki)
   (and (= o27 (mul RNE1 two_ki (let ((subject half_ey)) half_ey2)))
   (tqtisFinite (mul RNE1 two_ki (let ((subject half_ey)) half_ey2)))))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (= o28 (mul RNE1 o27 c9b)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (= o28 (mul RNE1 o27 c9b)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (and (= o29 o28) (tqtisFinite o28)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (and (= o29 o28) (tqtisFinite o28)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (= o30 (add RNE1 integral_fby o29)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (= o30 (add RNE1 integral_fby o29)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (and (= o31 o30) (tqtisFinite o30)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (and (= o31 o30) (tqtisFinite o30)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (= result17 integral_fby4))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (= result17 integral_fby4))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (= integral_fby2 o31))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (= integral_fby2 o31))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki)
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki)
   (and (= o32 (mul RNE1 two_ki (let ((subject half_ez)) half_ez2)))
   (tqtisFinite (mul RNE1 two_ki (let ((subject half_ez)) half_ez2)))))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (= o33 (mul RNE1 o32 c9b)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (= o33 (mul RNE1 o32 c9b)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (and (= o34 o33) (tqtisFinite o33)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (and (= o34 o33) (tqtisFinite o33)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (= o35 (add RNE1 integral_fbz o34)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (= o35 (add RNE1 integral_fbz o34)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (and (= o36 o35) (tqtisFinite o35)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (and (= o36 o35) (tqtisFinite o35)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (= result18 integral_fbz4))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (= result18 integral_fbz4))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (= integral_fbz2 o36))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (= integral_fbz2 o36))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki)
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki)
   (and (= o37 (add RNE1 rad_gx1 integral_fbx2)) (tqtisFinite
   (add RNE1 rad_gx1 integral_fbx2))))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (= result19 (mk_t__ref rad_gx1)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (= result19 (mk_t__ref rad_gx1)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (= rad_gx2 o37))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (= rad_gx2 o37))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki)
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki)
   (and (= o38 (add RNE1 rad_gy1 integral_fby2)) (tqtisFinite
   (add RNE1 rad_gy1 integral_fby2))))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (= result20 (mk_t__ref rad_gy1)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (= result20 (mk_t__ref rad_gy1)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (= rad_gy2 o38))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (= rad_gy2 o38))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki)
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki)
   (and (= o39 (add RNE1 rad_gz1 integral_fbz2)) (tqtisFinite
   (add RNE1 rad_gz1 integral_fbz2))))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (= result21 (mk_t__ref rad_gz1)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (= result21 (mk_t__ref rad_gz1)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (lt fliteral3 two_ki) (= rad_gz2 o39))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (lt fliteral4 two_ki) (= rad_gz2 o39))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (not (lt fliteral3 two_ki)) (= result22 integral_fbx4))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (not (lt fliteral4 two_ki)) (= result22 integral_fbx4))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (not (lt fliteral3 two_ki)) (= integral_fbx3 fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (not (lt fliteral4 two_ki)) (= integral_fbx3 fliteral4))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (not (lt fliteral3 two_ki)) (= result23 integral_fby4))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (not (lt fliteral4 two_ki)) (= result23 integral_fby4))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (not (lt fliteral3 two_ki)) (= integral_fby3 fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (not (lt fliteral4 two_ki)) (= integral_fby3 fliteral4))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (not (lt fliteral3 two_ki)) (= result24 integral_fbz4))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (not (lt fliteral4 two_ki)) (= result24 integral_fbz4))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (not (lt fliteral3 two_ki)) (= integral_fbz3 fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (not (lt fliteral4 two_ki)) (= integral_fbz3 fliteral4))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (not (lt fliteral3 two_ki)) (= rad_gz2 rad_gz1))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (not (lt fliteral4 two_ki)) (= rad_gz2 rad_gz1))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (not (lt fliteral3 two_ki)) (= rad_gy2 rad_gy1))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (not (lt fliteral4 two_ki)) (= rad_gy2 rad_gy1))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (not (lt fliteral3 two_ki)) (= rad_gx2 rad_gx1))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (not (lt fliteral4 two_ki)) (= rad_gx2 rad_gx1))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (not (lt fliteral3 two_ki)) (= integral_fbz2 integral_fbz3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (not (lt fliteral4 two_ki)) (= integral_fbz2 integral_fbz3))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (not (lt fliteral3 two_ki)) (= integral_fby2 integral_fby3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (not (lt fliteral4 two_ki)) (= integral_fby2 integral_fby3))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
-  (=> (not (lt fliteral3 two_ki)) (= integral_fbx2 integral_fbx3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
+  (=> (not (lt fliteral4 two_ki)) (= integral_fbx2 integral_fbx3))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (and (= o40 (mul RNE1 two_kp half_ex2)) (tqtisFinite
   (mul RNE1 two_kp half_ex2)))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= o41 (add RNE1 rad_gx2 o40))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (and (= o42 o41) (tqtisFinite o41))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= result25 (mk_t__ref rad_gx2))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= rad_gx3 o42)))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (and (= o43 (mul RNE1 two_kp (let ((subject half_ey)) half_ey2)))
   (tqtisFinite (mul RNE1 two_kp (let ((subject half_ey)) half_ey2))))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= o44 (add RNE1 rad_gy2 o43))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (and (= o45 o44) (tqtisFinite o44))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= result26 (mk_t__ref rad_gy2))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= rad_gy3 o45)))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (and (= o46 (mul RNE1 two_kp (let ((subject half_ez)) half_ez2)))
   (tqtisFinite (mul RNE1 two_kp (let ((subject half_ez)) half_ez2))))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= o47 (add RNE1 rad_gz2 o46))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (and (= o48 o47) (tqtisFinite o47))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= result27 (mk_t__ref rad_gz2))))
 
 ;; H
   (assert
   (=>
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
   (= rad_gz3 o48)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= (let ((subject half_ez)) (mk_t__ref half_ez2)) half_ez)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= (let ((subject half_ey)) (mk_t__ref half_ey2)) half_ey)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= half_ex2 half_ex)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= rad_gz3 rad_gz1)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= rad_gy3 rad_gy1)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= rad_gx3 rad_gx1)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= norm_az2 norm_az)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= norm_ay2 norm_ay)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= norm_ax2 norm_ax)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= recip_norm2 recip_norm)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= integral_fbz2 integral_fbz)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= integral_fby2 integral_fby)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= integral_fbx2 integral_fbx)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= half_ez2 half_ez1)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= half_ey2 half_ey1)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= half_ex2 half_ex1)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= rad_gz3 rad_gz1)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= rad_gy3 rad_gy1)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= rad_gx3 rad_gx1)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= norm_az2 norm_az1)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= norm_ay2 norm_ay1)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= norm_ax2 norm_ax1)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= recip_norm2 recip_norm1)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= integral_fbz2 integral_fbz1)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= integral_fby2 integral_fby1)))
 
 ;; H
   (assert
   (=>
   (not
-  (not (and (eq c6b fliteral3) (and (eq c7b fliteral3) (eq c8b fliteral3)))))
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= integral_fbx2 integral_fbx1)))
 
 ;; H

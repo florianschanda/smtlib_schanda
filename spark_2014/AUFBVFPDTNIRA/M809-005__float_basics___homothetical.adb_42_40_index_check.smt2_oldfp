@@ -557,6 +557,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1001,6 +1021,33 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 8388608.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 713623846352979940529142984724747568191373312.0))))) :pattern (
   (round m x)) )))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -1015,6 +1062,8 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort float 0)
+
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq (float float) Bool)
 
@@ -1109,7 +1158,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq ((a (Array Int float)) (a__first Int) (a__last Int)
+(define-fun bool_eq2 ((a (Array Int float)) (a__first Int) (a__last Int)
   (b (Array Int float)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -1128,7 +1177,7 @@
   (assert
   (forall ((a (Array Int float)) (b (Array Int float)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq2 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -1154,28 +1203,28 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-const fliteral t)
+(declare-const fliteral1 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral)
-  (= (tqtreal fliteral) 340282346638528859811704183484516925440.0)))
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
 (define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
   (temp___skip_constant_49 Bool)
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true) (le
-                                     (neg fliteral) fliteral)) (tqtisFinite
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_51)))
 
 (declare-fun adjust2triangle (t t t) t)
 
 (declare-fun adjust2triangle__function_guard (t t t t) Bool)
 
-(declare-const fliteral1 t)
+(declare-const fliteral2 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) (/ 0.0 10.0))))
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
 
 ;; adjust2triangle__post_axiom
   (assert
@@ -1185,10 +1234,9 @@
      (and
      (and (dynamic_invariant d1 true true true) (dynamic_invariant kv1 true
      true true)) (dynamic_invariant ka1 true true true))
-     (and (and (not (fp.eq d1 fliteral1)) (lt fliteral1 kv1)) (lt fliteral1
-     ka1)))
+     (and (and (neq d1 fliteral2) (lt fliteral2 kv1)) (lt fliteral2 ka1)))
      (let ((result (adjust2triangle d1 kv1 ka1)))
-     (and (and (lt fliteral1 result) (le result kv1)) (dynamic_invariant
+     (and (and (lt fliteral2 result) (le result kv1)) (dynamic_invariant
      result true false true)))) :pattern ((adjust2triangle d1 kv1 ka1)) )))
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
@@ -1269,11 +1317,6 @@
                                       (or (= temp___is_init_139 true)
                                       (<= 1 2)) (in_range2 temp___expr_142)))
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 1.0)))
-
 (declare-const lambda (Array Int float))
 
 (declare-const upsilon (Array Int float))
@@ -1309,29 +1352,29 @@
   (forall ((j1 Int))
   (=> (and (<= 1 j1) (<= j1 2))
   (and
-  (and (not (fp.eq (to_rep (select d j1)) fliteral1)) (lt fliteral1
-  (to_rep (select kv j1)))) (lt fliteral1 (to_rep (select ka j1)))))))
+  (and (neq (to_rep (select d j1)) fliteral2) (lt fliteral2
+  (to_rep (select kv j1)))) (lt fliteral2 (to_rep (select ka j1)))))))
 
 ;; H
   (assert (= (mk_map__ref result) (mk_map__ref lambda)))
 
 ;; H
   (assert
-  (= lambda1 (homothetical__homothetical__lambda__aggregate_def fliteral2)))
+  (= lambda1 (homothetical__homothetical__lambda__aggregate_def fliteral)))
 
 ;; H
   (assert (= (mk_map__ref result1) (mk_map__ref upsilon)))
 
 ;; H
   (assert
-  (= upsilon1 (homothetical__homothetical__upsilon__aggregate_def fliteral2)))
+  (= upsilon1 (homothetical__homothetical__upsilon__aggregate_def fliteral)))
 
 ;; H
   (assert (= (mk_map__ref result2) (mk_map__ref kvp)))
 
 ;; H
   (assert
-  (= kvp1 (homothetical__homothetical__kvp__aggregate_def fliteral1)))
+  (= kvp1 (homothetical__homothetical__kvp__aggregate_def fliteral2)))
 
 ;; H
   (assert (= (mk_int__ref result3) (mk_int__ref i)))
@@ -1348,7 +1391,7 @@
 ;; H
   (assert
   (forall ((j1 Int))
-  (=> (and (<= 1 j1) (<= j1 (- i2 1))) (lt fliteral1
+  (=> (and (<= 1 j1) (<= j1 (- i2 1))) (lt fliteral2
   (to_rep (select kvp2 j1))))))
 
 ;; H

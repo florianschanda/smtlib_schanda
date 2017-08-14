@@ -557,6 +557,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1001,6 +1021,33 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 8388608.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 713623846352979940529142984724747568191373312.0))))) :pattern (
   (round m x)) )))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
 (declare-sort field 0)
 
@@ -1029,18 +1076,20 @@
 
 (declare-sort feet 0)
 
-(declare-const fliteral t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 0.0)))
-
 (declare-const fliteral1 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) 100.0)))
+  (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) 0.0)))
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 100.0)))
 
 (define-fun in_range2 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le fliteral x) (le x fliteral1))))
+                                   (and (le fliteral1 x) (le x fliteral2))))
+
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq1 (feet feet) Bool)
 
@@ -1059,18 +1108,20 @@
   (temp___skip_constant_513 Bool)
   (temp___do_toplevel_514 Bool)) Bool (=>
                                       (or (= temp___is_init_512 true) (le
-                                      fliteral fliteral1)) (in_range2
+                                      fliteral1 fliteral2)) (in_range2
                                       temp___expr_515)))
 
 (declare-sort inches 0)
 
-(declare-const fliteral2 t)
+(declare-const fliteral3 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 12.0)))
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 12.0)))
 
 (define-fun in_range3 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le fliteral x) (le x fliteral2))))
+                                   (and (le fliteral1 x) (le x fliteral3))))
+
+(define-fun bool_eq2 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq2 (inches inches) Bool)
 
@@ -1091,7 +1142,7 @@
   (temp___skip_constant_519 Bool)
   (temp___do_toplevel_520 Bool)) Bool (=>
                                       (or (= temp___is_init_518 true) (le
-                                      fliteral fliteral2)) (in_range3
+                                      fliteral1 fliteral3)) (in_range3
                                       temp___expr_521)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
@@ -1103,7 +1154,9 @@
 (declare-sort num 0)
 
 (define-fun in_range4 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le fliteral x) (le x fliteral1))))
+                                   (and (le fliteral1 x) (le x fliteral2))))
+
+(define-fun bool_eq3 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq3 (num num) Bool)
 
@@ -1122,7 +1175,7 @@
   (temp___skip_constant_525 Bool)
   (temp___do_toplevel_526 Bool)) Bool (=>
                                       (or (= temp___is_init_524 true) (le
-                                      fliteral fliteral1)) (in_range4
+                                      fliteral1 fliteral2)) (in_range4
                                       temp___expr_527)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
@@ -1134,7 +1187,9 @@
 (declare-sort num1 0)
 
 (define-fun in_range5 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le fliteral x) (le x fliteral2))))
+                                   (and (le fliteral1 x) (le x fliteral3))))
+
+(define-fun bool_eq4 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq4 (num1 num1) Bool)
 
@@ -1153,7 +1208,7 @@
   (temp___skip_constant_534 Bool)
   (temp___do_toplevel_535 Bool)) Bool (=>
                                       (or (= temp___is_init_533 true) (le
-                                      fliteral fliteral2)) (in_range5
+                                      fliteral1 fliteral3)) (in_range5
                                       temp___expr_536)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS6 Int)
@@ -1215,13 +1270,13 @@
   (assert (in_range1 default_aft1))
 
 ;; H
-  (assert (=> (le fliteral fliteral1) (in_range2 room_length)))
+  (assert (=> (le fliteral1 fliteral2) (in_range2 room_length)))
 
 ;; H
-  (assert (=> (le fliteral fliteral2) (in_range3 wall_thickness)))
+  (assert (=> (le fliteral1 fliteral3) (in_range3 wall_thickness)))
 
 ;; H
-  (assert (=> (le fliteral fliteral1) (in_range2 total)))
+  (assert (=> (le fliteral1 fliteral2) (in_range2 total)))
 
 ;; H
   (assert (in_range4 good_types__feet_io__get__2__item))
@@ -1250,6 +1305,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "a-tiflio.ads", line 80, characters 0-0
-  (not (not (is_zero fliteral2))))
+  (not (not (is_zero fliteral3))))
 (check-sat)
 (exit)

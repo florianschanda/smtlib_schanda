@@ -557,6 +557,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1001,6 +1021,33 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 8388608.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 713623846352979940529142984724747568191373312.0))))) :pattern (
   (round m x)) )))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -1133,7 +1180,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq ((a (Array Int character)) (a__first Int) (a__last Int)
+(define-fun bool_eq1 ((a (Array Int character)) (a__first Int) (a__last Int)
   (b (Array Int character)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -1152,7 +1199,7 @@
   (assert
   (forall ((a (Array Int character)) (b (Array Int character)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq1 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -1170,7 +1217,7 @@
   (forall ((a (Array Int character)) (b (Array Int character)))
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq1 a a_first a_last b b_first b_last) true)) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -1181,7 +1228,7 @@
      (exists ((i Int) (j Int))
      (and (<= i a_last)
      (and (< j b_last)
-     (and (= (bool_eq a a_first i b b_first j) true)
+     (and (= (bool_eq1 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
      (< (to_rep (select a (+ i 1))) (to_rep (select b (+ j 1))))))))))) :pattern (
@@ -1195,7 +1242,7 @@
      (exists ((i Int) (j Int))
      (and (<= i b_last)
      (and (< j a_last)
-     (and (= (bool_eq a a_first j b b_first i) true)
+     (and (= (bool_eq1 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
      (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
@@ -1286,8 +1333,8 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment a))))
 
-(define-fun bool_eq1 ((x us_t)
-  (y us_t)) Bool (bool_eq (elts x) (to_rep1 (first (rt x)))
+(define-fun bool_eq2 ((x us_t)
+  (y us_t)) Bool (bool_eq1 (elts x) (to_rep1 (first (rt x)))
                  (to_rep1 (last (rt x))) (elts y) (to_rep1 (first (rt y)))
                  (to_rep1 (last (rt y)))))
 
@@ -1306,6 +1353,8 @@
 
 (declare-sort float 0)
 
+(define-fun bool_eq3 ((x t) (y t)) Bool (ite (eq x y) true false))
+
 (declare-fun user_eq4 (float float) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE4 (t) us_image)
@@ -1320,18 +1369,18 @@
 (((mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(declare-const fliteral t)
+(declare-const fliteral1 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral)
-  (= (tqtreal fliteral) 340282346638528859811704183484516925440.0)))
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
 (define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
   (temp___skip_constant_49 Bool)
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true) (le
-                                     (neg fliteral) fliteral)) (tqtisFinite
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_51)))
 
 (declare-sort us_main_type 0)
@@ -1340,7 +1389,7 @@
 
 (declare-sort us_rep 0)
 
-(declare-fun bool_eq2 (us_rep us_rep) Bool)
+(declare-fun bool_eq4 (us_rep us_rep) Bool)
 
 (declare-const value__size1 Int)
 
@@ -1776,12 +1825,12 @@
      (and (= (is_open file) true) (= (mode__2 file) 0))) :pattern ((is_readable
                                                                    file)) )))
 
-(declare-const fliteral1 t)
+(declare-const fliteral2 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral1)
-  (= (tqtreal fliteral1) (/ 150000000000000000000000.0 100000000000000000000000.0))))
+  (and (tqtisFinite fliteral2)
+  (= (tqtreal fliteral2) (/ 150000000000000000000000.0 100000000000000000000000.0))))
 
 (declare-const standard_input us_rep)
 
@@ -1863,7 +1912,7 @@
   (and (= (is_writable standard_error) true) (= (status standard_error) 1)))
 
 ;; H
-  (assert (=> (le (neg fliteral) fliteral) (tqtisFinite f)))
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite f)))
 
 ;; H
   (assert (= result i))
@@ -1881,7 +1930,7 @@
   (assert (= result1 f))
 
 ;; H
-  (assert (= f1 (mul RNE1 (of_int RNE1 i1) fliteral1)))
+  (assert (= f1 (mul RNE1 (of_int RNE1 i1) fliteral2)))
 
 ;; H
   (assert
@@ -1890,7 +1939,7 @@
 ;; H
   (assert
   (and
-  (and (=> (le (neg fliteral) fliteral) (tqtisFinite f2))
+  (and (=> (le (neg fliteral1) fliteral1) (tqtisFinite f2))
   (=> (<= 1 10) (in_range6 i2))) (and (<= 1 i2) (<= i2 10))))
 
 ;; H
@@ -1918,12 +1967,12 @@
   (and (= (is_open standard_output2) true) (= (mode__2 standard_output2) 1))
   (= (let ((temp___782 (name standard_output1)))
      (let ((temp___781 (name standard_output2)))
-     (bool_eq (elts temp___781) (to_rep1 (first (rt temp___781)))
+     (bool_eq1 (elts temp___781) (to_rep1 (first (rt temp___781)))
      (to_rep1 (last (rt temp___781))) (elts temp___782)
      (to_rep1 (first (rt temp___782))) (to_rep1 (last (rt temp___782)))))) true))
   (= (let ((temp___784 (form standard_output1)))
      (let ((temp___783 (form standard_output2)))
-     (bool_eq (elts temp___783) (to_rep1 (first (rt temp___783)))
+     (bool_eq1 (elts temp___783) (to_rep1 (first (rt temp___783)))
      (to_rep1 (last (rt temp___783))) (elts temp___784)
      (to_rep1 (first (rt temp___784))) (to_rep1 (last (rt temp___784)))))) true))
   (= (line_length__2 standard_output2) (line_length__2 standard_output1)))
@@ -1955,12 +2004,12 @@
   (and (= (is_open standard_output3) true) (= (mode__2 standard_output3) 1))
   (= (let ((temp___838 (name standard_output2)))
      (let ((temp___837 (name standard_output3)))
-     (bool_eq (elts temp___837) (to_rep1 (first (rt temp___837)))
+     (bool_eq1 (elts temp___837) (to_rep1 (first (rt temp___837)))
      (to_rep1 (last (rt temp___837))) (elts temp___838)
      (to_rep1 (first (rt temp___838))) (to_rep1 (last (rt temp___838)))))) true))
   (= (let ((temp___840 (form standard_output2)))
      (let ((temp___839 (form standard_output3)))
-     (bool_eq (elts temp___839) (to_rep1 (first (rt temp___839)))
+     (bool_eq1 (elts temp___839) (to_rep1 (first (rt temp___839)))
      (to_rep1 (last (rt temp___839))) (elts temp___840)
      (to_rep1 (first (rt temp___840))) (to_rep1 (last (rt temp___840)))))) true))
   (= (line_length__2 standard_output3) (line_length__2 standard_output2)))
@@ -1992,12 +2041,12 @@
   (and (= (is_open standard_output4) true) (= (mode__2 standard_output4) 1))
   (= (let ((temp___665 (name standard_output3)))
      (let ((temp___664 (name standard_output4)))
-     (bool_eq (elts temp___664) (to_rep1 (first (rt temp___664)))
+     (bool_eq1 (elts temp___664) (to_rep1 (first (rt temp___664)))
      (to_rep1 (last (rt temp___664))) (elts temp___665)
      (to_rep1 (first (rt temp___665))) (to_rep1 (last (rt temp___665)))))) true))
   (= (let ((temp___667 (form standard_output3)))
      (let ((temp___666 (form standard_output4)))
-     (bool_eq (elts temp___666) (to_rep1 (first (rt temp___666)))
+     (bool_eq1 (elts temp___666) (to_rep1 (first (rt temp___666)))
      (to_rep1 (last (rt temp___666))) (elts temp___667)
      (to_rep1 (first (rt temp___667))) (to_rep1 (last (rt temp___667)))))) true))
   (= (line_length__2 standard_output4) (line_length__2 standard_output3)))
@@ -2017,7 +2066,7 @@
   (assert (= result6 f2))
 
 ;; H
-  (assert (= f3 (mul RNE1 (of_int RNE1 i3) fliteral1)))
+  (assert (= f3 (mul RNE1 (of_int RNE1 i3) fliteral2)))
 
 (assert
 ;; WP_parameter_def

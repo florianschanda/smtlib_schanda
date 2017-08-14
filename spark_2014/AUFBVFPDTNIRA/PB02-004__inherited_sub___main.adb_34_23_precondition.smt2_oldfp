@@ -592,6 +592,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1036,6 +1056,33 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 8388608.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 713623846352979940529142984724747568191373312.0))))) :pattern (
   (round m x)) )))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
 (declare-sort integer 0)
 
@@ -1077,6 +1124,8 @@
                                                               (of_rep1 x))) )))
 
 (declare-sort float 0)
+
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq2 (float float) Bool)
 
@@ -1187,7 +1236,7 @@
                                                       (rec__rec__my_rec__e
                                                       (us_split_discrs1 a))) 1))
 
-(define-fun bool_eq ((a us_rep)
+(define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (and
                         (= (to_rep3
@@ -1383,12 +1432,12 @@
 (define-fun us_rep_4__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
                                                                 a))
 
-(define-fun bool_eq1 ((a us_rep1)
+(define-fun bool_eq3 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
                          (= (to_rep
                             (rec__rec__sub_rec__z (us_split_discrs3 a)))
                          (to_rep (rec__rec__sub_rec__z (us_split_discrs3 b))))
-                         (= (bool_eq
+                         (= (bool_eq2
                             (rec__rec__sub_rec__plop (us_split_fields3 a))
                             (rec__rec__sub_rec__plop (us_split_fields3 b))) true))
                     true false))
@@ -1574,14 +1623,14 @@
                                                                (us_split_discrs5
                                                                a))) 1)))
 
-(define-fun bool_eq2 ((a us_rep2)
+(define-fun bool_eq4 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
                          (= (to_rep
                             (rec__rec__sub_rec_ok__z (us_split_discrs5 a)))
                          (to_rep
                          (rec__rec__sub_rec_ok__z (us_split_discrs5 b))))
                          (=> (rec__sub_rec_ok__plop__pred a)
-                         (= (bool_eq
+                         (= (bool_eq2
                             (rec__rec__sub_rec_ok__plop (us_split_fields5 a))
                             (rec__rec__sub_rec_ok__plop (us_split_fields5 b))) true)))
                     true false))
@@ -1736,7 +1785,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq3 ((a (Array Int natural)) (a__first Int) (a__last Int)
+(define-fun bool_eq5 ((a (Array Int natural)) (a__first Int) (a__last Int)
   (b (Array Int natural)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -1755,7 +1804,7 @@
   (assert
   (forall ((a (Array Int natural)) (b (Array Int natural)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq3 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq5 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -1773,7 +1822,7 @@
   (forall ((a (Array Int natural)) (b (Array Int natural)))
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq3 a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq5 a a_first a_last b b_first b_last) true)) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -1784,7 +1833,7 @@
      (exists ((i Int) (j Int))
      (and (<= i a_last)
      (and (< j b_last)
-     (and (= (bool_eq3 a a_first i b b_first j) true)
+     (and (= (bool_eq5 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
      (< (to_rep4 (select a (+ i 1))) (to_rep4 (select b (+ j 1))))))))))) :pattern (
@@ -1798,7 +1847,7 @@
      (exists ((i Int) (j Int))
      (and (<= i b_last)
      (and (< j a_last)
-     (and (= (bool_eq3 a a_first j b b_first i) true)
+     (and (= (bool_eq5 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
      (< (to_rep4 (select b (+ i 1))) (to_rep4 (select a (+ j 1))))))))))) :pattern (
@@ -1887,8 +1936,8 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int natural))) (<= 0 (object__alignment5 a))))
 
-(define-fun bool_eq4 ((x us_t)
-  (y us_t)) Bool (bool_eq3 (elts x) (to_rep1 (first (rt x)))
+(define-fun bool_eq6 ((x us_t)
+  (y us_t)) Bool (bool_eq5 (elts x) (to_rep1 (first (rt x)))
                  (to_rep1 (last (rt x))) (elts y) (to_rep1 (first (rt y)))
                  (to_rep1 (last (rt y)))))
 
@@ -1932,7 +1981,7 @@
 (define-fun us_rep_8__projection ((a us_rep3)) us_split_fields6 (us_split_fields7
                                                                 a))
 
-(define-fun bool_eq5 ((a us_rep3)
+(define-fun bool_eq7 ((a us_rep3)
   (b us_rep3)) Bool (ite (and
                          (and
                          (= (to_rep4
@@ -1943,7 +1992,7 @@
                             (rec__rec__sub_arr__l (us_split_discrs7 a)))
                          (to_rep4
                          (rec__rec__sub_arr__l (us_split_discrs7 b)))))
-                         (= (bool_eq4
+                         (= (bool_eq6
                             (rec__rec__sub_arr__content (us_split_fields7 a))
                             (rec__rec__sub_arr__content (us_split_fields7 b))) true))
                     true false))
@@ -2114,18 +2163,18 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range2 temp___expr_15)))
 
-(declare-const fliteral t)
+(declare-const fliteral1 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral)
-  (= (tqtreal fliteral) 340282346638528859811704183484516925440.0)))
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
 (define-fun dynamic_invariant6 ((temp___expr_51 t) (temp___is_init_48 Bool)
   (temp___skip_constant_49 Bool)
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true) (le
-                                     (neg fliteral) fliteral)) (tqtisFinite
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_51)))
 
 (define-fun dynamic_invariant7 ((temp___expr_144 Int)

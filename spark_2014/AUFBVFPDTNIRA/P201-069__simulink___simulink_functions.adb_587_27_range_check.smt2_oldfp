@@ -646,6 +646,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1403,27 +1423,114 @@
   (forall ((m mode) (x (_ BitVec 32)))
   (= (tqtreal (of_ubv32 m x)) (round m (to_real (bv2nat x))))))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref1 0)) (((mk_t__ref1 (t__content1 t)))))
+(declare-sort float 0)
+
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(declare-fun user_eq (float float) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE (t) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE (us_image) t)
+
+(declare-const dummy float)
+
+(declare-datatypes ((float__ref 0))
+(((mk_float__ref (float__content float)))))
+(define-fun float__ref___projection ((a float__ref)) float (float__content a))
+
+(declare-const fliteral1 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
+
+(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
+  (temp___skip_constant_49 Bool)
+  (temp___do_toplevel_50 Bool)) Bool (=>
+                                     (or (= temp___is_init_48 true) (le
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
+                                     temp___expr_51)))
+
+(declare-fun sqrt2 (t) t)
+
+(declare-fun sqrt__function_guard (t t) Bool)
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 14012984643248170709237295832899161312802619418765157717570682838897910826858606014866381883621215820312500000000000000000000000.0 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.0))))
+
+;; sqrt__post_axiom
+  (assert
+  (forall ((x t))
+  (! (=> (and (dynamic_invariant x true true true) (le fliteral2 x))
+     (let ((result (sqrt2 x)))
+     (and
+     (and (le fliteral2 result)
+     (and (=> (eq x fliteral2) (eq result fliteral2))
+     (and (=> (eq x fliteral) (eq result fliteral))
+     (=> (le fliteral3 x) (lt fliteral2 result))))) (dynamic_invariant result
+     true false true)))) :pattern ((sqrt2 x)) )))
+
 (declare-sort unsigned_16 0)
 
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 16))
 
-(declare-fun attr__ATTRIBUTE_IMAGE ((_ BitVec 16)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE1 ((_ BitVec 16)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE (us_image) (_ BitVec 16))
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) (_ BitVec 16))
 
-(declare-fun user_eq (unsigned_16 unsigned_16) Bool)
+(declare-fun user_eq1 (unsigned_16 unsigned_16) Bool)
 
-(declare-const dummy unsigned_16)
+(declare-const dummy1 unsigned_16)
 
 (declare-datatypes ((unsigned_16__ref 0))
 (((mk_unsigned_16__ref (unsigned_16__content unsigned_16)))))
 (define-fun unsigned_16__ref___projection ((a unsigned_16__ref)) unsigned_16
   (unsigned_16__content a))
 
-(define-fun dynamic_invariant ((temp___expr_177 (_ BitVec 16))
+(define-fun dynamic_invariant1 ((temp___expr_177 (_ BitVec 16))
   (temp___is_init_174 Bool) (temp___skip_constant_175 Bool)
   (temp___do_toplevel_176 Bool)) Bool true)
 
@@ -1431,10 +1538,25 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
+(declare-const o t)
+
+(declare-const o1 t)
+
+;; H
+  (assert
+  (and (= o (sqrt2 (of_ubv16 RNE1 i)))
+  (and (tqtisFinite o)
+  (and (le fliteral2 o)
+  (and (=> (eq (of_ubv16 RNE1 i) fliteral2) (eq o fliteral2))
+  (and (=> (eq (of_ubv16 RNE1 i) fliteral) (eq o fliteral))
+  (=> (le fliteral3 (of_ubv16 RNE1 i)) (lt fliteral2 o))))))))
+
+;; H
+  (assert (= o1 (roundToIntegral RNA1 o)))
+
 (assert
 ;; WP_parameter_def
  ;; File "interfac.ads", line 66, characters 0-0
-  (not (le (of_ubv16 RTP1 ((_ int2bv 16) 0))
-  (roundToIntegral RNA1 (sqrt RNE1 (of_ubv16 RNE1 i))))))
+  (not (le (of_ubv16 RTP1 ((_ int2bv 16) 0)) o1)))
 (check-sat)
 (exit)

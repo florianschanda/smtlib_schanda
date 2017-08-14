@@ -629,6 +629,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1073,6 +1093,33 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 8388608.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 713623846352979940529142984724747568191373312.0))))) :pattern (
   (round m x)) )))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -1115,6 +1162,8 @@
 
 (declare-sort float 0)
 
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
+
 (declare-fun user_eq1 (float float) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE2 (t) us_image)
@@ -1129,18 +1178,18 @@
 (((mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(declare-const fliteral t)
+(declare-const fliteral1 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral)
-  (= (tqtreal fliteral) 340282346638528859811704183484516925440.0)))
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
 (define-fun dynamic_invariant1 ((temp___expr_51 t) (temp___is_init_48 Bool)
   (temp___skip_constant_49 Bool)
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true) (le
-                                     (neg fliteral) fliteral)) (tqtisFinite
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_51)))
 
 (declare-sort character 0)
@@ -1247,6 +1296,34 @@
                                       (<= (- 2147483648) 2147483647))
                                       (in_range6 temp___expr_514)))
 
+(declare-fun sqrt2 (t) t)
+
+(declare-fun sqrt__function_guard (t t) Bool)
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 14012984643248170709237295832899161312802619418765157717570682838897910826858606014866381883621215820312500000000000000000000000.0 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.0))))
+
+;; sqrt__post_axiom
+  (assert
+  (forall ((x t))
+  (! (=> (and (dynamic_invariant1 x true true true) (le fliteral2 x))
+     (let ((result (sqrt2 x)))
+     (and
+     (and (le fliteral2 result)
+     (and (=> (eq x fliteral2) (eq result fliteral2))
+     (and (=> (eq x fliteral) (eq result fliteral))
+     (=> (le fliteral3 x) (lt fliteral2 result))))) (dynamic_invariant1
+     result true false true)))) :pattern ((sqrt2 x)) )))
+
 (declare-sort uppercase 0)
 
 (define-fun in_range7 ((x Int)) Bool (and (<= 65 x) (<= x 90)))
@@ -1341,32 +1418,27 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS29 Int)
 
-(declare-const fliteral1 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral1)
-  (= (tqtreal fliteral1) (/ 999999974737875163555145263671875.0 10000000000000000000000000000000000000.0))))
-
-;; tolerance__def_axiom
-  (assert (= tolerance fliteral1))
-
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral2)
-  (= (tqtreal fliteral2) (/ 12345459747314453125.0 100000000000000000.0))))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
-
 (declare-const fliteral4 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 2.0)))
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 999999974737875163555145263671875.0 10000000000000000000000000000000000000.0))))
+
+;; tolerance__def_axiom
+  (assert (= tolerance fliteral4))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral5)
+  (= (tqtreal fliteral5) (/ 12345459747314453125.0 100000000000000000.0))))
+
+(declare-const fliteral6 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 2.0)))
 
 (declare-const default_width Int)
 
@@ -1432,23 +1504,25 @@
 
 (declare-const o11 t)
 
-(declare-const o12 Int)
+(declare-const o12 t)
 
 (declare-const o13 Int)
 
 (declare-const o14 Int)
 
+(declare-const o15 Int)
+
 (declare-const temp___533 Int)
 
 (declare-const temp___532 Int)
-
-(declare-const o15 t)
 
 (declare-const o16 t)
 
 (declare-const o17 t)
 
 (declare-const o18 t)
+
+(declare-const o19 t)
 
 (declare-const g1 Int)
 
@@ -1714,13 +1788,13 @@
   (assert (=> (<= (- 2147483648) 2147483647) (in_range2 sum)))
 
 ;; H
-  (assert (=> (le (neg fliteral) fliteral) (tqtisFinite approx)))
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite approx)))
 
 ;; H
-  (assert (=> (le (neg fliteral) fliteral) (tqtisFinite x)))
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite x)))
 
 ;; H
-  (assert (=> (le (neg fliteral) fliteral) (tqtisFinite y)))
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite y)))
 
 ;; H
   (assert (tqtisFinite tolerance))
@@ -1774,7 +1848,7 @@
   (assert (= result7 (mk_t__ref x)))
 
 ;; H
-  (assert (= x1 fliteral2))
+  (assert (= x1 fliteral5))
 
 ;; H
   (assert (=> (< a1 0) (and (= o (- a1)) (in_range2 (- a1)))))
@@ -2112,56 +2186,79 @@
   (assert (= c8 o5))
 
 ;; H
-  (assert (=> (le fliteral3 x1) (= result35 y4)))
+  (assert
+  (=> (le fliteral2 x1)
+  (and (= o6 (sqrt2 x1))
+  (and (tqtisFinite o6)
+  (and (le fliteral2 o6)
+  (and (=> (eq x1 fliteral2) (eq o6 fliteral2))
+  (and (=> (eq x1 fliteral) (eq o6 fliteral))
+  (=> (le fliteral3 x1) (lt fliteral2 o6)))))))))
 
 ;; H
-  (assert (=> (le fliteral3 x1) (= y1 (sqrt RNE1 x1))))
+  (assert (=> (le fliteral2 x1) (= result35 y4)))
+
+;; H
+  (assert (=> (le fliteral2 x1) (= y1 o6)))
 
 ;; H
   (assert
-  (=> (not (le fliteral3 x1))
-  (and (= o6 (mul RNE1 fliteral4 x1)) (tqtisFinite (mul RNE1 fliteral4 x1)))))
+  (=> (not (le fliteral2 x1))
+  (and (= o7 (mul RNE1 fliteral6 x1)) (tqtisFinite (mul RNE1 fliteral6 x1)))))
 
 ;; H
-  (assert (=> (not (le fliteral3 x1)) (= o7 (neg o6))))
-
-;; H
-  (assert (=> (not (le fliteral3 x1)) (= o8 (sqrt RNE1 o7))))
-
-;; H
-  (assert (=> (not (le fliteral3 x1)) (= result36 y4)))
-
-;; H
-  (assert (=> (not (le fliteral3 x1)) (= y2 o8)))
-
-;; H
-  (assert (=> (not (le fliteral3 x1)) (= y1 y2)))
-
-;; H
-  (assert (=> (le fliteral3 x1) (= o10 x1)))
+  (assert (=> (not (le fliteral2 x1)) (= o8 (neg o7))))
 
 ;; H
   (assert
-  (=> (not (le fliteral3 x1))
-  (and (= o9 (mul RNE1 fliteral4 x1)) (tqtisFinite (mul RNE1 fliteral4 x1)))))
+  (=> (not (le fliteral2 x1))
+  (and (= o9 (sqrt2 o8))
+  (and (tqtisFinite o9)
+  (and (le fliteral2 o9)
+  (and (=> (eq o8 fliteral2) (eq o9 fliteral2))
+  (and (=> (eq o8 fliteral) (eq o9 fliteral))
+  (=> (le fliteral3 o8) (lt fliteral2 o9)))))))))
 
 ;; H
-  (assert (=> (not (le fliteral3 x1)) (= o10 (neg o9))))
+  (assert (=> (not (le fliteral2 x1)) (= result36 y4)))
 
 ;; H
-  (assert (= o11 (sqrt RNE1 o10)))
+  (assert (=> (not (le fliteral2 x1)) (= y2 o9)))
+
+;; H
+  (assert (=> (not (le fliteral2 x1)) (= y1 y2)))
+
+;; H
+  (assert (=> (le fliteral2 x1) (= o11 x1)))
+
+;; H
+  (assert
+  (=> (not (le fliteral2 x1))
+  (and (= o10 (mul RNE1 fliteral6 x1)) (tqtisFinite (mul RNE1 fliteral6 x1)))))
+
+;; H
+  (assert (=> (not (le fliteral2 x1)) (= o11 (neg o10))))
+
+;; H
+  (assert
+  (and (= o12 (sqrt2 o11))
+  (and (tqtisFinite o12)
+  (and (le fliteral2 o12)
+  (and (=> (eq o11 fliteral2) (eq o12 fliteral2))
+  (and (=> (eq o11 fliteral) (eq o12 fliteral))
+  (=> (le fliteral3 o11) (lt fliteral2 o12))))))))
 
 ;; H
   (assert (= result37 (mk_t__ref y1)))
 
 ;; H
-  (assert (= y3 o11))
+  (assert (= y3 o12))
 
 ;; H
-  (assert (and (= o12 (- c8 d2)) (in_range2 (- c8 d2))))
+  (assert (and (= o13 (- c8 d2)) (in_range2 (- c8 d2))))
 
 ;; H
-  (assert (= result39 (ite (= o12 0) true false)))
+  (assert (= result39 (ite (= o13 0) true false)))
 
 ;; H
   (assert (=> (= result39 true) (= result38 (ite (< 2 e2) true false))))
@@ -2170,10 +2267,10 @@
   (assert (=> (not (= result39 true)) (= result38 (of_int1 1))))
 
 ;; H
-  (assert (and (= o13 (- c8 d2)) (in_range2 (- c8 d2))))
+  (assert (and (= o14 (- c8 d2)) (in_range2 (- c8 d2))))
 
 ;; H
-  (assert (= result41 (ite (= o13 0) true false)))
+  (assert (= result41 (ite (= o14 0) true false)))
 
 ;; H
   (assert (=> (= result41 true) (= result40 (ite (< 2 e2) true false))))
@@ -2198,7 +2295,7 @@
   (=> (not (= letter1 78))
   (=> (not (= letter1 79))
   (=> (not (= letter1 82)) (=> (not (= letter1 83)) (= letter1 84))))))))))
-  (= o14 1)))
+  (= o15 1)))
 
 ;; H
   (assert
@@ -2212,7 +2309,7 @@
   (=> (not (= letter1 78))
   (=> (not (= letter1 79))
   (=> (not (= letter1 82)) (=> (not (= letter1 83)) (= letter1 84)))))))))))
-  (=> (=> (not (= letter1 68)) (= letter1 71)) (= o14 2))))
+  (=> (=> (not (= letter1 68)) (= letter1 71)) (= o15 2))))
 
 ;; H
   (assert
@@ -2230,7 +2327,7 @@
   (=>
   (=> (not (= letter1 66))
   (=> (not (= letter1 67)) (=> (not (= letter1 77)) (= letter1 80))))
-  (= o14 3)))))
+  (= o15 3)))))
 
 ;; H
   (assert
@@ -2253,7 +2350,7 @@
   (=> (not (= letter1 70))
   (=> (not (= letter1 72))
   (=> (not (= letter1 86)) (=> (not (= letter1 87)) (= letter1 89)))))
-  (= o14 4))))))
+  (= o15 4))))))
 
 ;; H
   (assert
@@ -2277,32 +2374,7 @@
   (=> (not (= letter1 70))
   (=> (not (= letter1 72))
   (=> (not (= letter1 86)) (=> (not (= letter1 87)) (= letter1 89))))))
-  (=> (= letter1 75) (= o14 5)))))))
-
-;; H
-  (assert
-  (=>
-  (not
-  (=> (not (= letter1 65))
-  (=> (not (= letter1 69))
-  (=> (not (= letter1 73))
-  (=> (not (= letter1 76))
-  (=> (not (= letter1 85))
-  (=> (not (= letter1 78))
-  (=> (not (= letter1 79))
-  (=> (not (= letter1 82)) (=> (not (= letter1 83)) (= letter1 84)))))))))))
-  (=> (not (=> (not (= letter1 68)) (= letter1 71)))
-  (=>
-  (not
-  (=> (not (= letter1 66))
-  (=> (not (= letter1 67)) (=> (not (= letter1 77)) (= letter1 80)))))
-  (=>
-  (not
-  (=> (not (= letter1 70))
-  (=> (not (= letter1 72))
-  (=> (not (= letter1 86)) (=> (not (= letter1 87)) (= letter1 89))))))
-  (=> (not (= letter1 75))
-  (=> (=> (not (= letter1 74)) (= letter1 88)) (= o14 8))))))))
+  (=> (= letter1 75) (= o15 5)))))))
 
 ;; H
   (assert
@@ -2327,13 +2399,38 @@
   (=> (not (= letter1 72))
   (=> (not (= letter1 86)) (=> (not (= letter1 87)) (= letter1 89))))))
   (=> (not (= letter1 75))
-  (=> (not (=> (not (= letter1 74)) (= letter1 88))) (= o14 10))))))))
+  (=> (=> (not (= letter1 74)) (= letter1 88)) (= o15 8))))))))
+
+;; H
+  (assert
+  (=>
+  (not
+  (=> (not (= letter1 65))
+  (=> (not (= letter1 69))
+  (=> (not (= letter1 73))
+  (=> (not (= letter1 76))
+  (=> (not (= letter1 85))
+  (=> (not (= letter1 78))
+  (=> (not (= letter1 79))
+  (=> (not (= letter1 82)) (=> (not (= letter1 83)) (= letter1 84)))))))))))
+  (=> (not (=> (not (= letter1 68)) (= letter1 71)))
+  (=>
+  (not
+  (=> (not (= letter1 66))
+  (=> (not (= letter1 67)) (=> (not (= letter1 77)) (= letter1 80)))))
+  (=>
+  (not
+  (=> (not (= letter1 70))
+  (=> (not (= letter1 72))
+  (=> (not (= letter1 86)) (=> (not (= letter1 87)) (= letter1 89))))))
+  (=> (not (= letter1 75))
+  (=> (not (=> (not (= letter1 74)) (= letter1 88))) (= o15 10))))))))
 
 ;; H
   (assert (= result43 (mk_int__ref value)))
 
 ;; H
-  (assert (= value1 o14))
+  (assert (= value1 o15))
 
 ;; H
   (assert (= result44 (mk_int__ref sum)))
@@ -2398,32 +2495,32 @@
   (assert (= result46 (mk_t__ref approx)))
 
 ;; H
-  (assert (= approx1 (div2 RNE1 x1 fliteral4)))
+  (assert (= approx1 (div2 RNE1 x1 fliteral6)))
 
 ;; H
   (assert
-  (and (= o15 (mul RNE1 approx1 approx1)) (tqtisFinite
+  (and (= o16 (mul RNE1 approx1 approx1)) (tqtisFinite
   (mul RNE1 approx1 approx1))))
 
 ;; H
-  (assert (= o16 (sub RNE1 x1 o15)))
+  (assert (= o17 (sub RNE1 x1 o16)))
 
 ;; H
-  (assert (and (= o17 o16) (tqtisFinite o16)))
+  (assert (and (= o18 o17) (tqtisFinite o17)))
 
 ;; H
-  (assert (= o18 (abs1 o17)))
+  (assert (= o19 (abs1 o18)))
 
 ;; H
-  (assert (= result47 (ite (lt fliteral1 o18) true false)))
+  (assert (= result47 (ite (lt fliteral4 o19) true false)))
 
 ;; H
   (assert (= result47 true))
 
 ;; H
   (assert
-  (and (=> (le (neg fliteral) fliteral) (tqtisFinite approx2)) (lt fliteral1
-  (abs1 (sub RNE1 x1 (mul RNE1 approx2 approx2))))))
+  (and (=> (le (neg fliteral1) fliteral1) (tqtisFinite approx2)) (lt
+  fliteral4 (abs1 (sub RNE1 x1 (mul RNE1 approx2 approx2))))))
 
 (assert
 ;; WP_parameter_def

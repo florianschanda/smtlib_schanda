@@ -560,6 +560,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1005,8 +1025,37 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 4503599627370496.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 202402253307310618352495346718917307049556649764142118356901358027430339567995346891960383701437124495187077864316811911389808737385793476867013399940738509921517424276566361364466907742093216341239767678472745068562007483424692698618103355649159556340810056512358769552333414615230502532186327508646006263307707741093494784.0))))) :pattern (
   (round m x)) )))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
 (declare-sort long_float 0)
+
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq (long_float long_float) Bool)
 
@@ -1023,18 +1072,18 @@
 (define-fun long_float__ref___projection ((a long_float__ref)) long_float
   (long_float__content a))
 
-(declare-const fliteral t)
+(declare-const fliteral1 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral)
-  (= (tqtreal fliteral) 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0)))
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0)))
 
 (define-fun dynamic_invariant ((temp___expr_57 t) (temp___is_init_54 Bool)
   (temp___skip_constant_55 Bool)
   (temp___do_toplevel_56 Bool)) Bool (=>
                                      (or (= temp___is_init_54 true) (le
-                                     (neg fliteral) fliteral)) (tqtisFinite
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_57)))
 
 (declare-fun boolean_to_long_float (Bool) t)
@@ -1064,22 +1113,17 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
-(declare-const fliteral1 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral1)
-  (= (tqtreal fliteral1) (/ 222040000000000004884367994748360925217823587255253081629291500576073303818702697753906250.0 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.0))))
-
 (declare-const fliteral2 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
+  (assert
+  (and (tqtisFinite fliteral2)
+  (= (tqtreal fliteral2) (/ 222040000000000004884367994748360925217823587255253081629291500576073303818702697753906250.0 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.0))))
 
 (declare-const fliteral3 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 1.0)))
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
 
 (declare-const fliteral4 t)
 
@@ -1141,47 +1185,44 @@
   (assert (tqtisFinite vehicle_speed))
 
 ;; H
-  (assert (=> (le (neg fliteral) fliteral) (tqtisFinite apply_brakes)))
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite apply_brakes)))
 
 ;; H
-  (assert (le fliteral1 wheel_speed))
+  (assert (le fliteral2 wheel_speed))
 
 ;; H
-  (assert (=> (le (neg fliteral) fliteral) (tqtisFinite epsifzero_out1)))
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite epsifzero_out1)))
 
 ;; H
-  (assert (=> (le (neg fliteral) fliteral) (tqtisFinite diff_out1)))
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite diff_out1)))
 
 ;; H
-  (assert (=> (le (neg fliteral) fliteral) (tqtisFinite difference_out1)))
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite difference_out1)))
 
 ;; H
-  (assert (=> (le (neg fliteral) fliteral) (tqtisFinite sum_out1)))
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite sum_out1)))
 
 ;; H
-  (assert (le fliteral1 wheel_speed))
+  (assert (le fliteral2 wheel_speed))
 
 ;; H
-  (assert
-  (=> (not (fp.eq vehicle_speed fliteral2)) (= result epsifzero_out1)))
-
-;; H
-  (assert
-  (=> (not (fp.eq vehicle_speed fliteral2))
-  (= epsifzero_out11 vehicle_speed)))
+  (assert (=> (neq vehicle_speed fliteral3) (= result epsifzero_out1)))
 
 ;; H
   (assert
-  (=> (not (not (fp.eq vehicle_speed fliteral2))) (= result1 epsifzero_out1)))
+  (=> (neq vehicle_speed fliteral3) (= epsifzero_out11 vehicle_speed)))
 
 ;; H
   (assert
-  (=> (not (not (fp.eq vehicle_speed fliteral2)))
-  (= epsifzero_out12 fliteral1)))
+  (=> (not (neq vehicle_speed fliteral3)) (= result1 epsifzero_out1)))
 
 ;; H
   (assert
-  (=> (not (not (fp.eq vehicle_speed fliteral2)))
+  (=> (not (neq vehicle_speed fliteral3)) (= epsifzero_out12 fliteral2)))
+
+;; H
+  (assert
+  (=> (not (neq vehicle_speed fliteral3))
   (= epsifzero_out11 epsifzero_out12)))
 
 ;; H
@@ -1190,7 +1231,7 @@
   (div1 RNE1 wheel_speed epsifzero_out11))))
 
 ;; H
-  (assert (= o1 (sub RNE1 fliteral3 o)))
+  (assert (= o1 (sub RNE1 fliteral o)))
 
 ;; H
   (assert (and (= o2 o1) (tqtisFinite o1)))
@@ -1216,14 +1257,14 @@
   (assert
   (and
   (= o4 (boolean_to_long_float
-        (ite (lt difference_out11 fliteral2) true false)))
+        (ite (lt difference_out11 fliteral3) true false)))
   (tqtisFinite o4)))
 
 ;; H
   (assert
   (and
   (= o5 (boolean_to_long_float
-        (ite (lt fliteral2 difference_out11) true false)))
+        (ite (lt fliteral3 difference_out11) true false)))
   (tqtisFinite o5)))
 
 ;; H
@@ -1241,6 +1282,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "abs_controller_oem_with_property.ads", line 20, characters 0-0
-  (not (or (not (eq vehicle_speed fliteral2)) (eq sum_out11 fliteral3))))
+  (not (or (not (eq vehicle_speed fliteral3)) (eq sum_out11 fliteral))))
 (check-sat)
 (exit)

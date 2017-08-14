@@ -557,6 +557,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1001,6 +1021,33 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 8388608.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 713623846352979940529142984724747568191373312.0))))) :pattern (
   (round m x)) )))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -1133,7 +1180,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq ((a (Array Int character)) (a__first Int) (a__last Int)
+(define-fun bool_eq1 ((a (Array Int character)) (a__first Int) (a__last Int)
   (b (Array Int character)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -1152,7 +1199,7 @@
   (assert
   (forall ((a (Array Int character)) (b (Array Int character)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq1 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -1170,7 +1217,7 @@
   (forall ((a (Array Int character)) (b (Array Int character)))
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq1 a a_first a_last b b_first b_last) true)) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -1181,7 +1228,7 @@
      (exists ((i Int) (j Int))
      (and (<= i a_last)
      (and (< j b_last)
-     (and (= (bool_eq a a_first i b b_first j) true)
+     (and (= (bool_eq1 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
      (< (to_rep (select a (+ i 1))) (to_rep (select b (+ j 1))))))))))) :pattern (
@@ -1195,7 +1242,7 @@
      (exists ((i Int) (j Int))
      (and (<= i b_last)
      (and (< j a_last)
-     (and (= (bool_eq a a_first j b b_first i) true)
+     (and (= (bool_eq1 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
      (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
@@ -1286,8 +1333,8 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment a))))
 
-(define-fun bool_eq1 ((x us_t)
-  (y us_t)) Bool (bool_eq (elts x) (to_rep1 (first (rt x)))
+(define-fun bool_eq2 ((x us_t)
+  (y us_t)) Bool (bool_eq1 (elts x) (to_rep1 (first (rt x)))
                  (to_rep1 (last (rt x))) (elts y) (to_rep1 (first (rt y)))
                  (to_rep1 (last (rt y)))))
 
@@ -1306,6 +1353,8 @@
 
 (declare-sort float 0)
 
+(define-fun bool_eq3 ((x t) (y t)) Bool (ite (eq x y) true false))
+
 (declare-fun user_eq4 (float float) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE4 (t) us_image)
@@ -1320,18 +1369,18 @@
 (((mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(declare-const fliteral t)
+(declare-const fliteral1 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral)
-  (= (tqtreal fliteral) 340282346638528859811704183484516925440.0)))
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
 (define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
   (temp___skip_constant_49 Bool)
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true) (le
-                                     (neg fliteral) fliteral)) (tqtisFinite
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_51)))
 
 (declare-fun to_rep2 (float) t)
@@ -1355,13 +1404,15 @@
 
 (declare-sort positive_float 0)
 
-(declare-const fliteral1 t)
+(declare-const fliteral2 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) (/ 0.0 10.0))))
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
 
 (define-fun in_range5 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le fliteral1 x) (le x fliteral))))
+                                   (and (le fliteral2 x) (le x fliteral1))))
+
+(define-fun bool_eq4 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq5 (positive_float positive_float) Bool)
 
@@ -1401,7 +1452,9 @@
 (declare-sort nonnegative_float 0)
 
 (define-fun in_range6 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le fliteral1 x) (le x fliteral))))
+                                   (and (le fliteral2 x) (le x fliteral1))))
+
+(define-fun bool_eq5 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq6 (nonnegative_float nonnegative_float) Bool)
 
@@ -1440,15 +1493,17 @@
 
 (declare-sort normalized2pi 0)
 
-(declare-const fliteral2 t)
+(declare-const fliteral3 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral2)
-  (= (tqtreal fliteral2) (/ 6283185482025146484375.0 1000000000000000000000.0))))
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 6283185482025146484375.0 1000000000000000000000.0))))
 
 (define-fun in_range7 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le fliteral1 x) (le x fliteral2))))
+                                   (and (le fliteral2 x) (le x fliteral3))))
+
+(define-fun bool_eq6 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq7 (normalized2pi normalized2pi) Bool)
 
@@ -1497,7 +1552,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_fields (us_split_fields1
                                                              a))
 
-(define-fun bool_eq2 ((a us_rep)
+(define-fun bool_eq7 ((a us_rep)
   (b us_rep)) Bool (ite (= (to_rep5
                            (rec__spaces__angles__angle__theta
                            (us_split_fields1 a))) (to_rep5
@@ -1579,7 +1634,7 @@
 (define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
                                                                 a))
 
-(define-fun bool_eq3 ((a us_rep1)
+(define-fun bool_eq8 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
                          (= (to_rep2
                             (rec__spaces__positions__position__x
@@ -1710,6 +1765,8 @@
 
 (declare-sort unbounded_float 0)
 
+(define-fun bool_eq9 ((x t) (y t)) Bool (ite (eq x y) true false))
+
 (declare-fun user_eq11 (unbounded_float unbounded_float) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE9 (t) us_image)
@@ -1790,7 +1847,7 @@
   (forall ((i Int))
   (! (= (select (singleton2 v i) i) v) :pattern ((select (singleton2 v i) i)) ))))
 
-(define-fun bool_eq4 ((a (Array Int nonnegative_float)) (a__first Int)
+(define-fun bool_eq10 ((a (Array Int nonnegative_float)) (a__first Int)
   (a__last Int) (b (Array Int nonnegative_float)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -1810,7 +1867,7 @@
   (forall ((a (Array Int nonnegative_float))
   (b (Array Int nonnegative_float)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq4 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq10 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -1932,7 +1989,7 @@
 (define-fun robot_iface__speed_option__angle__pred ((a us_rep2)) Bool (=
   (to_rep8 (rec__robot_iface__speed_option__opt (us_split_discrs1 a))) 1))
 
-(define-fun bool_eq5 ((a us_rep2)
+(define-fun bool_eq11 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
                          (and
                          (= (to_rep8
@@ -2056,7 +2113,7 @@
 (define-fun us_rep_7__projection ((a us_rep3)) us_split_fields6 (us_split_fields7
                                                                 a))
 
-(define-fun bool_eq6 ((a us_rep3)
+(define-fun bool_eq12 ((a us_rep3)
   (b us_rep3)) Bool (ite (and
                          (and
                          (and
@@ -2140,7 +2197,7 @@
                             (us_split_fields7 a))) (to_rep3
                                                    (rec__robot_iface__proxy__max_range
                                                    (us_split_fields7 b)))))
-                         (= (bool_eq4
+                         (= (bool_eq10
                             (rec__robot_iface__proxy__scans
                             (us_split_fields7 a)) 1 1000
                             (rec__robot_iface__proxy__scans
@@ -2158,7 +2215,7 @@
                             (us_split_fields7 a))) (to_rep7
                                                    (rec__robot_iface__proxy__yaw
                                                    (us_split_fields7 b)))))
-                         (= (bool_eq5
+                         (= (bool_eq11
                             (rec__robot_iface__proxy__speed
                             (us_split_fields7 a))
                             (rec__robot_iface__proxy__speed
@@ -2558,10 +2615,10 @@
 (define-fun us_rep_8__projection ((a us_rep4)) us_split_fields8 (us_split_fields9
                                                                 a))
 
-(define-fun bool_eq7 ((a us_rep4)
+(define-fun bool_eq13 ((a us_rep4)
   (b us_rep4)) Bool (ite (and
                          (and
-                         (= (bool_eq2
+                         (= (bool_eq7
                             (rec__gaps__gap__bearing (us_split_fields9 a))
                             (rec__gaps__gap__bearing (us_split_fields9 b))) true)
                          (= (to_rep2
@@ -2662,14 +2719,14 @@
 (define-fun us_rep_16__projection ((a us_rep5)) us_split_fields10 (us_split_fields11
                                                                   a))
 
-(define-fun bool_eq8 ((a us_rep5)
+(define-fun bool_eq14 ((a us_rep5)
   (b us_rep5)) Bool (ite (and
                          (= (to_rep4
                             (rec__algorithm__laser_scan_data__first
                             (us_split_fields11 a))) (to_rep4
                                                     (rec__algorithm__laser_scan_data__first
                                                     (us_split_fields11 b))))
-                         (= (bool_eq2
+                         (= (bool_eq7
                             (rec__algorithm__laser_scan_data__second
                             (us_split_fields11 a))
                             (rec__algorithm__laser_scan_data__second
@@ -2779,7 +2836,7 @@
   (forall ((i Int))
   (! (= (select (singleton3 v i) i) v) :pattern ((select (singleton3 v i) i)) ))))
 
-(define-fun bool_eq9 ((a (Array Int us_rep5)) (a__first Int) (a__last Int)
+(define-fun bool_eq15 ((a (Array Int us_rep5)) (a__first Int) (a__last Int)
   (b (Array Int us_rep5)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -2790,7 +2847,7 @@
                            (=>
                            (and (<= a__first temp___idx_133)
                            (<= temp___idx_133 a__last))
-                           (= (bool_eq8 (select a temp___idx_133)
+                           (= (bool_eq14 (select a temp___idx_133)
                               (select b (+ (- b__first a__first) temp___idx_133))) true))))
                       true false))
 
@@ -2798,14 +2855,14 @@
   (assert
   (forall ((a (Array Int us_rep5)) (b (Array Int us_rep5)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq9 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq15 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
   (forall ((temp___idx_133 Int))
   (=> (and (<= a__first temp___idx_133) (<= temp___idx_133 a__last))
-  (= (bool_eq8 (select a temp___idx_133)
+  (= (bool_eq14 (select a temp___idx_133)
      (select b (+ (- b__first a__first) temp___idx_133))) true))))))))
 
 (declare-sort count_type 0)
@@ -2881,7 +2938,7 @@
 (define-fun us_rep_14__projection ((a us_rep6)) us_split_fields12 (us_split_fields13
                                                                   a))
 
-(define-fun bool_eq10 ((a us_rep6)
+(define-fun bool_eq16 ((a us_rep6)
   (b us_rep6)) Bool (ite (and
                          (= (to_rep10
                             (rec__algorithm__gap_vectors__list__capacity
@@ -3050,22 +3107,22 @@
 (define-fun us_rep_17__projection ((a us_rep7)) us_split_fields14 (us_split_fields15
                                                                   a))
 
-(define-fun bool_eq11 ((a us_rep7)
+(define-fun bool_eq17 ((a us_rep7)
   (b us_rep7)) Bool (ite (and
                          (and
                          (and
                          (and
-                         (= (bool_eq6
+                         (= (bool_eq12
                             (rec__algorithm__controller__robot
                             (us_split_fields15 a))
                             (rec__algorithm__controller__robot
                             (us_split_fields15 b))) true)
-                         (= (bool_eq9
+                         (= (bool_eq15
                             (rec__algorithm__controller__laserscan
                             (us_split_fields15 a)) 1 1000
                             (rec__algorithm__controller__laserscan
                             (us_split_fields15 b)) 1 1000) true))
-                         (= (bool_eq10
+                         (= (bool_eq16
                             (rec__algorithm__controller__gapvec
                             (us_split_fields15 a))
                             (rec__algorithm__controller__gapvec
@@ -3075,7 +3132,7 @@
                             (us_split_fields15 a))) (to_rep2
                                                     (rec__algorithm__controller__obsavoiddelta
                                                     (us_split_fields15 b)))))
-                         (= (bool_eq2
+                         (= (bool_eq7
                             (rec__algorithm__controller__driveangle
                             (us_split_fields15 a))
                             (rec__algorithm__controller__driveangle
@@ -3320,38 +3377,38 @@
                                             temp___expr_612)) (mk___rep3
                                                               (mk___split_fields3
                                                               (of_rep3
-                                                              fliteral1)
+                                                              fliteral2)
                                                               (of_rep3
-                                                              fliteral1)
+                                                              fliteral2)
                                                               (of_rep3
-                                                              fliteral1)
+                                                              fliteral2)
                                                               (of_rep3
-                                                              fliteral1)
+                                                              fliteral2)
                                                               (of_rep3
-                                                              fliteral1)
+                                                              fliteral2)
                                                               (of_rep4
-                                                              fliteral1)
+                                                              fliteral2)
                                                               (of_rep4
-                                                              fliteral1)
+                                                              fliteral2)
                                                               (of_rep2
-                                                              fliteral1)
+                                                              fliteral2)
                                                               (of_rep2
-                                                              fliteral1)
+                                                              fliteral2)
                                                               (of_rep2
-                                                              fliteral1)
+                                                              fliteral2)
                                                               (of_rep6 0)
                                                               (of_rep3
-                                                              fliteral1)
+                                                              fliteral2)
                                                               (of_rep3
-                                                              fliteral1)
+                                                              fliteral2)
                                                               (temp___614
-                                                              fliteral1)
+                                                              fliteral2)
                                                               (of_rep7
-                                                              fliteral1)
+                                                              fliteral2)
                                                               (of_rep7
-                                                              fliteral1)
+                                                              fliteral2)
                                                               (of_rep7
-                                                              fliteral1)
+                                                              fliteral2)
                                                               (let ((usq_
                                                               (mk___rep2
                                                               (mk___split_discrs
@@ -3371,7 +3428,7 @@
                                                               (mk___rep5
                                                               (mk___split_fields5
                                                               (of_rep4
-                                                              fliteral1)
+                                                              fliteral2)
                                                               null_angle)))))
                                          (and
                                          (= (to_rep10
@@ -3387,7 +3444,7 @@
                                          (= (to_rep2
                                             (rec__algorithm__controller__obsavoiddelta
                                             (us_split_fields15
-                                            temp___expr_612))) fliteral1))
+                                            temp___expr_612))) fliteral2))
                                          (= (rec__algorithm__controller__driveangle
                                             (us_split_fields15
                                             temp___expr_612)) null_angle)))
@@ -3591,38 +3648,38 @@
   (temp___is_init_137 Bool) (temp___skip_constant_138 Bool)
   (temp___do_toplevel_139 Bool)) Bool (=>
                                       (or (= temp___is_init_137 true) (le
-                                      fliteral1 fliteral)) (in_range5
+                                      fliteral2 fliteral1)) (in_range5
                                       temp___expr_140)))
 
 (define-fun dynamic_invariant11 ((temp___expr_146 t)
   (temp___is_init_143 Bool) (temp___skip_constant_144 Bool)
   (temp___do_toplevel_145 Bool)) Bool (=>
                                       (or (= temp___is_init_143 true) (le
-                                      fliteral1 fliteral)) (in_range6
+                                      fliteral2 fliteral1)) (in_range6
                                       temp___expr_146)))
 
 (define-fun dynamic_invariant12 ((temp___expr_158 t)
   (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
   (temp___do_toplevel_157 Bool)) Bool (=>
                                       (or (= temp___is_init_155 true) (le
-                                      (neg fliteral) fliteral)) (tqtisFinite
-                                      temp___expr_158)))
+                                      (neg fliteral1) fliteral1))
+                                      (tqtisFinite temp___expr_158)))
 
 ;; null_angle__def_axiom
-  (assert (= null_angle (mk___rep (mk___split_fields (of_rep5 fliteral1)))))
+  (assert (= null_angle (mk___rep (mk___split_fields (of_rep5 fliteral2)))))
 
 (define-fun dynamic_invariant13 ((temp___expr_170 t)
   (temp___is_init_167 Bool) (temp___skip_constant_168 Bool)
   (temp___do_toplevel_169 Bool)) Bool (=>
                                       (or (= temp___is_init_167 true) (le
-                                      fliteral1 fliteral2)) (in_range7
+                                      fliteral2 fliteral3)) (in_range7
                                       temp___expr_170)))
 
 ;; zero_position__def_axiom
   (assert
   (= zero_position (mk___rep1
-                   (mk___split_fields1 (of_rep2 fliteral1)
-                   (of_rep2 fliteral1)))))
+                   (mk___split_fields1 (of_rep2 fliteral2)
+                   (of_rep2 fliteral2)))))
 
 (define-fun dynamic_invariant14 ((temp___expr_286 Int)
   (temp___is_init_283 Bool) (temp___skip_constant_284 Bool)
@@ -3659,12 +3716,12 @@
   (! (= (= (is_empty container) true) (= (length1 container) 0)) :pattern (
   (is_empty container)) )))
 
-(declare-const fliteral3 t)
+(declare-const fliteral4 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral3)
-  (= (tqtreal fliteral3) (/ 31415927410125732421875.0 10000000000000000000000.0))))
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 31415927410125732421875.0 10000000000000000000000.0))))
 
 (declare-const i Int)
 
@@ -3710,10 +3767,8 @@
                                                             (rec__gaps__gap__bearing
                                                             (us_split_fields9
                                                             risinggap))))
-  (=>
-  (not (fp.eq (to_rep2
-              (rec__gaps__gap__distance (us_split_fields9 risinggap)))
-  fliteral1))
+  (=> (neq (to_rep2 (rec__gaps__gap__distance (us_split_fields9 risinggap)))
+  fliteral2)
   (not
   (= (oeq algorithm__isrisinggapsafe__B_4__posgapcorner__assume2
      zero_position) true)))))
@@ -3746,7 +3801,7 @@
        (select (rec__algorithm__controller__laserscan
                (us_split_fields15 this)) i2)))
        (rec__gaps__gap__bearing (us_split_fields9 risinggap))))
-  (and (tqtisFinite o) (and (lt (neg fliteral3) o) (le o fliteral3)))))
+  (and (tqtisFinite o) (and (lt (neg fliteral4) o) (le o fliteral4)))))
 
 ;; H
   (assert

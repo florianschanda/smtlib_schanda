@@ -557,6 +557,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1001,6 +1021,33 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 8388608.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 713623846352979940529142984724747568191373312.0))))) :pattern (
   (round m x)) )))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -1015,6 +1062,8 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort speed_t 0)
+
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq (speed_t speed_t) Bool)
 
@@ -1031,19 +1080,19 @@
 (define-fun speed_t__ref___projection ((a speed_t__ref)) speed_t (speed_t__content
                                                                  a))
 
-(declare-const fliteral t)
+(declare-const fliteral1 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral)
-  (= (tqtreal fliteral) 340282346638528859811704183484516925440.0)))
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
 (define-fun dynamic_invariant ((temp___expr_148 t) (temp___is_init_145 Bool)
   (temp___skip_constant_146 Bool)
   (temp___do_toplevel_147 Bool)) Bool (=>
                                       (or (= temp___is_init_145 true) (le
-                                      (neg fliteral) fliteral)) (tqtisFinite
-                                      temp___expr_148)))
+                                      (neg fliteral1) fliteral1))
+                                      (tqtisFinite temp___expr_148)))
 
 (declare-fun to_rep (speed_t) t)
 
@@ -1104,6 +1153,8 @@
 
 (declare-sort speed_km_per_h_t 0)
 
+(define-fun bool_eq2 ((x t) (y t)) Bool (ite (eq x y) true false))
+
 (declare-fun user_eq2 (speed_km_per_h_t speed_km_per_h_t) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 (t) us_image)
@@ -1123,8 +1174,8 @@
   (temp___skip_constant_152 Bool)
   (temp___do_toplevel_153 Bool)) Bool (=>
                                       (or (= temp___is_init_151 true) (le
-                                      (neg fliteral) fliteral)) (tqtisFinite
-                                      temp___expr_154)))
+                                      (neg fliteral1) fliteral1))
+                                      (tqtisFinite temp___expr_154)))
 
 (declare-fun is_valid_speed_km_per_h (t) Bool)
 
@@ -1143,22 +1194,22 @@
      (m_per_s_from_km_per_h speed) true false true)) :pattern ((m_per_s_from_km_per_h
                                                                speed)) )))
 
-(declare-const fliteral1 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) 1000.0)))
-
 (declare-const fliteral2 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 3600.0)))
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 1000.0)))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 3600.0)))
 
 ;; m_per_s_from_km_per_h__def_axiom
   (assert
   (forall ((speed t))
   (! (=> (dynamic_invariant1 speed true true true)
-     (= (m_per_s_from_km_per_h speed) (div1 RNE1 (mul RNE1 speed fliteral1)
-                                      fliteral2))) :pattern ((m_per_s_from_km_per_h
+     (= (m_per_s_from_km_per_h speed) (div1 RNE1 (mul RNE1 speed fliteral2)
+                                      fliteral3))) :pattern ((m_per_s_from_km_per_h
                                                              speed)) )))
 
 (declare-datatypes ((us_split_fields 0))
@@ -1177,7 +1228,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_fields (us_split_fields1
                                                              a))
 
-(define-fun bool_eq ((a us_rep)
+(define-fun bool_eq3 ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (= (to_rep1
                            (rec__deceleration_curve__braking_curve_entry__location
@@ -1295,7 +1346,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq1 ((a (Array Int us_rep)) (a__first Int) (a__last Int)
+(define-fun bool_eq4 ((a (Array Int us_rep)) (a__first Int) (a__last Int)
   (b (Array Int us_rep)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -1306,7 +1357,7 @@
                            (=>
                            (and (<= a__first temp___idx_132)
                            (<= temp___idx_132 a__last))
-                           (= (bool_eq (select a temp___idx_132)
+                           (= (bool_eq3 (select a temp___idx_132)
                               (select b (+ (- b__first a__first) temp___idx_132))) true))))
                       true false))
 
@@ -1314,14 +1365,14 @@
   (assert
   (forall ((a (Array Int us_rep)) (b (Array Int us_rep)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq1 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq4 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
   (forall ((temp___idx_132 Int))
   (=> (and (<= a__first temp___idx_132) (<= temp___idx_132 a__last))
-  (= (bool_eq (select a temp___idx_132)
+  (= (bool_eq3 (select a temp___idx_132)
      (select b (+ (- b__first a__first) temp___idx_132))) true))))))))
 
 (declare-const dummy4 (Array Int us_rep))
@@ -1378,9 +1429,9 @@
 (define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
                                                                 a))
 
-(define-fun bool_eq2 ((a us_rep1)
+(define-fun bool_eq5 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
-                         (= (bool_eq1
+                         (= (bool_eq4
                             (rec__deceleration_curve__braking_curve_t__curve
                             (us_split_fields3 a)) 0 1000
                             (rec__deceleration_curve__braking_curve_t__curve
@@ -1472,7 +1523,7 @@
 (define-fun us_rep_3__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
                                                                 a))
 
-(define-fun bool_eq3 ((a us_rep2)
+(define-fun bool_eq6 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
                          (and
                          (= (rec__deceleration_curve__target_t__supervise
@@ -1591,35 +1642,30 @@
 ;; is_valid_speed_km_per_h__post_axiom
   (assert true)
 
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
-
 (declare-const fliteral4 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 500.0)))
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) (/ 0.0 10.0))))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 500.0)))
 
 ;; is_valid_speed_km_per_h__def_axiom
   (assert
   (forall ((speed t))
   (! (= (= (is_valid_speed_km_per_h speed) true)
-     (and (le fliteral3 speed) (le speed fliteral4))) :pattern ((is_valid_speed_km_per_h
+     (and (le fliteral4 speed) (le speed fliteral5))) :pattern ((is_valid_speed_km_per_h
                                                                 speed)) )))
 
 ;; maximum_valid_speed__def_axiom
-  (assert (= maximum_valid_speed (m_per_s_from_km_per_h fliteral4)))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 160.0)))
+  (assert (= maximum_valid_speed (m_per_s_from_km_per_h fliteral5)))
 
 (declare-const fliteral6 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 1.0)))
+  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 160.0)))
 
 (declare-const initial_speed t)
 
@@ -1665,9 +1711,9 @@
 
 ;; H
   (assert
-  (and (= o (m_per_s_from_km_per_h fliteral5))
+  (and (= o (m_per_s_from_km_per_h fliteral6))
   (and (tqtisFinite o)
-  (= o (div1 RNE1 (mul RNE1 fliteral5 fliteral1) fliteral2)))))
+  (= o (div1 RNE1 (mul RNE1 fliteral6 fliteral2) fliteral3)))))
 
 ;; H
   (assert (= result initial_speed))
@@ -1679,7 +1725,7 @@
   (assert (tqtisFinite initial_speed1))
 
 ;; H
-  (assert (= (to_rep o1) fliteral3))
+  (assert (= (to_rep o1) fliteral4))
 
 ;; H
   (assert (= (to_rep1 o2) 2500))
@@ -1722,7 +1768,7 @@
 
 ;; H
   (assert
-  (= (distance_to_speed initial_speed1 fliteral3 (neg fliteral6)) 1000))
+  (= (distance_to_speed initial_speed1 fliteral4 (neg fliteral)) 1000))
 
 (assert
 ;; WP_parameter_def

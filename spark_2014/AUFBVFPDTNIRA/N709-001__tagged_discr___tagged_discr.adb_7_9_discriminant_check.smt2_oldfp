@@ -607,6 +607,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1051,8 +1071,37 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 8388608.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 713623846352979940529142984724747568191373312.0))))) :pattern (
   (round m x)) )))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int1 RNA1 1)))
+
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
 (declare-sort float 0)
+
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq1 (float float) Bool)
 
@@ -1187,7 +1236,7 @@
                                                           (us_split_discrs1
                                                           a))) 2))))
 
-(define-fun bool_eq ((a us_rep)
+(define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (and
                         (and
@@ -1401,7 +1450,7 @@
                                                             (us_split_discrs2
                                                             a))) 2))))
 
-(define-fun bool_eq1 ((a us_rep1)
+(define-fun bool_eq3 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
                          (and
                          (and
@@ -1664,7 +1713,7 @@
                                                             (us_split_discrs3
                                                             a))) 2))))
 
-(define-fun bool_eq2 ((a us_rep2)
+(define-fun bool_eq4 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
                          (and
                          (and
@@ -2441,10 +2490,10 @@
   (! (= (to_int1 (is_zero__3 (of_base1 v))) (to_int1 (is_zero2 us_tag7 v))) :pattern (
   (is_zero2 us_tag7 v)) )))
 
-(declare-const fliteral t)
+(declare-const fliteral1 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) (/ 0.0 10.0))))
+  (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) (/ 0.0 10.0))))
 
 ;; is_zero__def_axiom
   (assert
@@ -2455,7 +2504,7 @@
           (= (to_rep1 (rec__tagged_discr__t__discr (us_split_discrs1 v))) 0)
           (= (to_rep1 (rec__tagged_discr__t__discr (us_split_discrs1 v))) 2))
      (= (to_rep (rec__tagged_discr__t__x (us_split_fields1 v))) 0) (eq
-     (to_rep2 (rec__tagged_discr__t__y (us_split_fields1 v))) fliteral)))) :pattern (
+     (to_rep2 (rec__tagged_discr__t__y (us_split_fields1 v))) fliteral1)))) :pattern (
   (is_zero1 v)) )))
 
 (declare-const v__split_discrs us_split_discrs)
@@ -2475,18 +2524,18 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(declare-const fliteral1 t)
+(declare-const fliteral2 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral1)
-  (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
+  (and (tqtisFinite fliteral2)
+  (= (tqtreal fliteral2) 340282346638528859811704183484516925440.0)))
 
 (define-fun dynamic_invariant2 ((temp___expr_51 t) (temp___is_init_48 Bool)
   (temp___skip_constant_49 Bool)
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
+                                     (neg fliteral2) fliteral2)) (tqtisFinite
                                      temp___expr_51)))
 
 ;; is_zero__2__post_axiom
@@ -2517,7 +2566,7 @@
           (= (to_rep1 (rec__tagged_discr__t__discr (us_split_discrs2 v))) 0)
           (= (to_rep1 (rec__tagged_discr__t__discr (us_split_discrs2 v))) 2))
      (= (to_rep (rec__tagged_discr__t__x1 (us_split_fields3 v))) 0) (eq
-     (to_rep2 (rec__tagged_discr__t__y1 (us_split_fields3 v))) fliteral)))
+     (to_rep2 (rec__tagged_discr__t__y1 (us_split_fields3 v))) fliteral1)))
      (= (to_rep (rec__tagged_discr__u1__w (us_split_fields3 v))) 0))) :pattern (
   (is_zero__2 v)) )))
 
@@ -2548,7 +2597,7 @@
      (and (= (is_zero1 (to_base1 v)) true)
      (= (to_rep (rec__tagged_discr__u2__w (us_split_fields5 v))) 0))
      (= (to_rep (rec__tagged_discr__u2__xx (us_split_fields5 v))) 0)) (eq
-     (to_rep2 (rec__tagged_discr__u2__yy (us_split_fields5 v))) fliteral))) :pattern (
+     (to_rep2 (rec__tagged_discr__u2__yy (us_split_fields5 v))) fliteral1))) :pattern (
   (is_zero__3 v)) )))
 
 (declare-const o e)

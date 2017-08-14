@@ -649,6 +649,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1407,6 +1427,33 @@
   (forall ((m mode) (x (_ BitVec 32)))
   (= (tqtreal (of_ubv32 m x)) (to_real (bv2nat x)))))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref1 0)) (((mk_t__ref1 (t__content1 t)))))
 (define-fun to_int6 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -1445,6 +1492,8 @@
 
 (declare-sort tfloat64B 0)
 
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
+
 (declare-fun user_eq1 (tfloat64B tfloat64B) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE2 (t) us_image)
@@ -1462,6 +1511,8 @@
 
 (declare-sort float64 0)
 
+(define-fun bool_eq2 ((x t) (y t)) Bool (ite (eq x y) true false))
+
 (declare-fun user_eq2 (float64 float64) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 (t) us_image)
@@ -1477,19 +1528,19 @@
 (define-fun float64__ref___projection ((a float64__ref)) float64 (float64__content
                                                                  a))
 
-(declare-const fliteral t)
+(declare-const fliteral1 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral)
-  (= (tqtreal fliteral) 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0)))
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0)))
 
 (define-fun dynamic_invariant1 ((temp___expr_201 t) (temp___is_init_198 Bool)
   (temp___skip_constant_199 Bool)
   (temp___do_toplevel_200 Bool)) Bool (=>
                                       (or (= temp___is_init_198 true) (le
-                                      (neg fliteral) fliteral)) (tqtisFinite
-                                      temp___expr_201)))
+                                      (neg fliteral1) fliteral1))
+                                      (tqtisFinite temp___expr_201)))
 
 (declare-sort frame 0)
 
@@ -1518,14 +1569,11 @@
 
 (declare-sort ratio_t 0)
 
-(declare-const fliteral1 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) 1.0)))
-
 (define-fun in_range3 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le (neg fliteral1) x) (le x
-                                   fliteral1))))
+                                   (and (le (neg fliteral) x) (le x
+                                   fliteral))))
+
+(define-fun bool_eq3 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq4 (ratio_t ratio_t) Bool)
 
@@ -1546,7 +1594,7 @@
   (temp___skip_constant_211 Bool)
   (temp___do_toplevel_212 Bool)) Bool (=>
                                       (or (= temp___is_init_210 true) (le
-                                      (neg fliteral1) fliteral1)) (in_range3
+                                      (neg fliteral) fliteral)) (in_range3
                                       temp___expr_213)))
 
 (declare-sort drag_t 0)
@@ -1559,6 +1607,8 @@
 (define-fun in_range4 ((x t)) Bool (and (tqtisFinite x)
                                    (and (le (neg fliteral2) x) (le x
                                    fliteral2))))
+
+(define-fun bool_eq4 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq5 (drag_t drag_t) Bool)
 
@@ -1821,7 +1871,7 @@
   (assert (tqtisFinite distance))
 
 ;; H
-  (assert (=> (le (neg fliteral) fliteral) (tqtisFinite average)))
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite average)))
 
 ;; H
   (assert (and (< n 25000) (= (invariant__ n speed distance) true)))
@@ -1865,21 +1915,21 @@
 
 ;; H
   (assert (eq (add RNE1 (mul RNE1 (of_ubv16 RNE1 n_bv) fliteral3) fliteral3)
-  (mul RNE1 (add RNE1 (of_ubv16 RNE1 n_bv) fliteral1) fliteral3)))
+  (mul RNE1 (add RNE1 (of_ubv16 RNE1 n_bv) fliteral) fliteral3)))
 
 ;; H
   (assert (eq (add RNE1 (mul RNE1 (of_int RNE1 n) fliteral3) fliteral3)
-  (mul RNE1 (add RNE1 (of_int RNE1 n) fliteral1) fliteral3)))
+  (mul RNE1 (add RNE1 (of_int RNE1 n) fliteral) fliteral3)))
 
 ;; H
   (assert (eq (sub RNE1 (mul RNE1 (of_int RNE1 n) (neg fliteral3)) fliteral3)
-  (mul RNE1 (add RNE1 (of_int RNE1 n) fliteral1) (neg fliteral3))))
+  (mul RNE1 (add RNE1 (of_int RNE1 n) fliteral) (neg fliteral3))))
 
 ;; H
-  (assert (eq (t1 1) fliteral1))
+  (assert (eq (t1 1) fliteral))
 
 ;; H
-  (assert (eq (add RNE1 (of_int RNE1 n) fliteral1) (of_int RNE1 (+ n 1))))
+  (assert (eq (add RNE1 (of_int RNE1 n) fliteral) (of_int RNE1 (+ n 1))))
 
 ;; H
   (assert (le (sub RNE1 (mul RNE1 (of_int RNE1 n) (neg fliteral3)) fliteral3)

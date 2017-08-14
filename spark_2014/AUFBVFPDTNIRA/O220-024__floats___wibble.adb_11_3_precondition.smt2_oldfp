@@ -648,6 +648,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1092,8 +1112,37 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 8388608.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 713623846352979940529142984724747568191373312.0))))) :pattern (
   (round m x)) )))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref1 0)) (((mk_t__ref1 (t__content1 t)))))
 (declare-sort float 0)
+
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq (float float) Bool)
 
@@ -1140,7 +1189,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_fields (us_split_fields1
                                                              a))
 
-(define-fun bool_eq ((a us_rep)
+(define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (= (to_rep
                            (rec__test_pack__pid_obj__desired
@@ -1215,21 +1264,21 @@
 (define-fun pid_obj__ref___projection ((a pid_obj__ref)) us_rep (pid_obj__content
                                                                 a))
 
-(declare-const fliteral t)
+(declare-const fliteral1 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) (/ 0.0 10.0))))
+  (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) (/ 0.0 10.0))))
 
 (define-fun default_initial_assumption ((temp___expr_136 us_rep)
   (temp___skip_top_level_137 Bool)) Bool (and
                                          (= (to_rep
                                             (rec__test_pack__pid_obj__desired
                                             (us_split_fields1
-                                            temp___expr_136))) fliteral)
+                                            temp___expr_136))) fliteral1)
                                          (= (to_rep
                                             (rec__test_pack__pid_obj__error
                                             (us_split_fields1
-                                            temp___expr_136))) fliteral)))
+                                            temp___expr_136))) fliteral1)))
 
 (declare-sort source 0)
 
@@ -1256,6 +1305,8 @@
 
 (declare-sort target 0)
 
+(define-fun bool_eq3 ((x t) (y t)) Bool (ite (eq x y) true false))
+
 (declare-fun user_eq3 (target target) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE2 (t) us_image)
@@ -1271,18 +1322,18 @@
 (define-fun target__ref___projection ((a target__ref)) target (target__content
                                                               a))
 
-(declare-const fliteral1 t)
+(declare-const fliteral2 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral1)
-  (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
+  (and (tqtisFinite fliteral2)
+  (= (tqtreal fliteral2) 340282346638528859811704183484516925440.0)))
 
 (define-fun dynamic_invariant1 ((temp___expr_189 t) (temp___is_init_186 Bool)
   (temp___skip_constant_187 Bool)
   (temp___do_toplevel_188 Bool)) Bool (=>
                                       (or (= temp___is_init_186 true) (le
-                                      (neg fliteral1) fliteral1))
+                                      (neg fliteral2) fliteral2))
                                       (tqtisFinite temp___expr_189)))
 
 (declare-fun to_fp1 ((_ BitVec 32)) t)
@@ -1301,7 +1352,7 @@
   (temp___skip_constant_49 Bool)
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
+                                     (neg fliteral2) fliteral2)) (tqtisFinite
                                      temp___expr_51)))
 
 (declare-const x__split_fields float)
@@ -1333,7 +1384,7 @@
 (declare-const x__split_fields3 float)
 
 ;; H
-  (assert (= (to_rep o1) fliteral))
+  (assert (= (to_rep o1) fliteral1))
 
 ;; H
   (assert (and (= o (to_fp1 ((_ int2bv 32) 2139094902))) (tqtisFinite o)))
@@ -1369,11 +1420,11 @@
   (assert (and (= o5 (to_fp1 ((_ int2bv 32) 4144594944))) (tqtisFinite o5)))
 
 ;; H
-  (assert (lt fliteral o5))
+  (assert (lt fliteral1 o5))
 
 (assert
 ;; WP_parameter_def
  ;; File "a-unccon.ads", line 20, characters 0-0
-  (not (le (add RNE1 (neg fliteral1) o5) (to_rep x__split_fields2))))
+  (not (le (add RNE1 (neg fliteral2) o5) (to_rep x__split_fields2))))
 (check-sat)
 (exit)

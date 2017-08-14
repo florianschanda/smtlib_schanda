@@ -557,6 +557,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1001,17 +1021,46 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 8388608.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 713623846352979940529142984724747568191373312.0))))) :pattern (
   (round m x)) )))
 
-(declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
-(declare-sort t1 0)
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
 
 (declare-const fliteral t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 10.0)))
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
+(declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
+(declare-sort t1 0)
+
+(declare-const fliteral1 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) 10.0)))
 
 (define-fun in_range1 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le (neg fliteral) x) (le x
-                                   fliteral))))
+                                   (and (le (neg fliteral1) x) (le x
+                                   fliteral1))))
+
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq (t1 t1) Bool)
 
@@ -1030,14 +1079,16 @@
   (temp___skip_constant_169 Bool)
   (temp___do_toplevel_170 Bool)) Bool (=>
                                       (or (= temp___is_init_168 true) (le
-                                      (neg fliteral) fliteral)) (in_range1
+                                      (neg fliteral1) fliteral1)) (in_range1
                                       temp___expr_171)))
 
 (declare-sort t2 0)
 
 (define-fun in_range2 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le (neg fliteral) x) (le x
-                                   fliteral))))
+                                   (and (le (neg fliteral1) x) (le x
+                                   fliteral1))))
+
+(define-fun bool_eq2 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq1 (t2 t2) Bool)
 
@@ -1052,27 +1103,22 @@
 (declare-datatypes ((t2__ref 0)) (((mk_t2__ref (t2__content t2)))))
 (define-fun t2__ref___projection ((a t2__ref)) t2 (t2__content a))
 
-(declare-const fliteral1 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) 1.0)))
-
 (define-fun dynamic_invariant1 ((temp___expr_177 t) (temp___is_init_174 Bool)
   (temp___skip_constant_175 Bool)
   (temp___do_toplevel_176 Bool)) Bool (and
                                       (=>
                                       (or (= temp___is_init_174 true) (le
-                                      (neg fliteral) fliteral)) (in_range2
+                                      (neg fliteral1) fliteral1)) (in_range2
                                       temp___expr_177))
                                       (=> (= temp___do_toplevel_176 true)
                                       (=> (= temp___is_init_174 true)
-                                      (and (le (neg fliteral1)
+                                      (and (le (neg fliteral)
                                       temp___expr_177) (le temp___expr_177
-                                      fliteral1))))))
+                                      fliteral))))))
 
-(define-fun dynamic_predicate ((temp___181 t)) Bool (and (le (neg fliteral1)
+(define-fun dynamic_predicate ((temp___181 t)) Bool (and (le (neg fliteral)
                                                     temp___181) (le
-                                                    temp___181 fliteral1)))
+                                                    temp___181 fliteral)))
 
 (declare-fun convert (t) t)
 
@@ -1083,7 +1129,7 @@
   (forall ((x t))
   (! (=>
      (and (dynamic_invariant x true true true)
-     (and (in_range2 x) (and (le (neg fliteral1) x) (le x fliteral1))))
+     (and (in_range2 x) (and (le (neg fliteral) x) (le x fliteral))))
      (dynamic_invariant1 (convert x) true false true)) :pattern ((convert x)) )))
 
 ;; convert__def_axiom

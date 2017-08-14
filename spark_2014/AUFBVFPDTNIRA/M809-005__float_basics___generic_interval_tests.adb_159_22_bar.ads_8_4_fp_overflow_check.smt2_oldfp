@@ -557,6 +557,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1001,6 +1021,33 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 8388608.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 713623846352979940529142984724747568191373312.0))))) :pattern (
   (round m x)) )))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -1015,6 +1062,8 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort float 0)
+
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq (float float) Bool)
 
@@ -1032,6 +1081,8 @@
 
 (declare-sort ft 0)
 
+(define-fun bool_eq2 ((x t) (y t)) Bool (ite (eq x y) true false))
+
 (declare-fun user_eq1 (ft ft) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE2 (t) us_image)
@@ -1045,19 +1096,19 @@
 (declare-datatypes ((ft__ref 0)) (((mk_ft__ref (ft__content ft)))))
 (define-fun ft__ref___projection ((a ft__ref)) ft (ft__content a))
 
-(declare-const fliteral t)
+(declare-const fliteral1 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral)
-  (= (tqtreal fliteral) 340282346638528859811704183484516925440.0)))
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
 (define-fun dynamic_invariant ((temp___expr_135 t) (temp___is_init_132 Bool)
   (temp___skip_constant_133 Bool)
   (temp___do_toplevel_134 Bool)) Bool (=>
                                       (or (= temp___is_init_132 true) (le
-                                      (neg fliteral) fliteral)) (tqtisFinite
-                                      temp___expr_135)))
+                                      (neg fliteral1) fliteral1))
+                                      (tqtisFinite temp___expr_135)))
 
 (declare-const x t)
 
@@ -1069,33 +1120,33 @@
   (temp___skip_constant_49 Bool)
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true) (le
-                                     (neg fliteral) fliteral)) (tqtisFinite
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_51)))
-
-(declare-const fliteral1 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) (/ 0.0 10.0))))
 
 (declare-const fliteral2 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 10.0)))
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
 
 (declare-const fliteral3 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 5.0)))
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 10.0)))
 
 (declare-const fliteral4 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 20.0)))
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 5.0)))
 
 (declare-const fliteral5 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 2.0)))
+  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 20.0)))
+
+(declare-const fliteral6 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 2.0)))
 
 (declare-const z t)
 
@@ -1107,19 +1158,19 @@
   (assert (tqtisFinite x))
 
 ;; H
-  (assert (=> (le (neg fliteral) fliteral) (tqtisFinite z)))
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite z)))
 
 ;; H
   (assert
-  (and (and (le fliteral1 x) (le x fliteral2))
-  (and (le fliteral3 x) (le x fliteral4))))
+  (and (and (le fliteral2 x) (le x fliteral3))
+  (and (le fliteral4 x) (le x fliteral5))))
 
 ;; H
   (assert
-  (and (= o (mul RNE1 x fliteral5)) (tqtisFinite (mul RNE1 x fliteral5))))
+  (and (= o (mul RNE1 x fliteral6)) (tqtisFinite (mul RNE1 x fliteral6))))
 
 ;; H
-  (assert (= o1 (sub RNE1 o fliteral3)))
+  (assert (= o1 (sub RNE1 o fliteral4)))
 
 (assert
 ;; WP_parameter_def

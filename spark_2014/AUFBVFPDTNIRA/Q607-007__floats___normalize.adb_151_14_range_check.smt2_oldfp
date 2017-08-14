@@ -557,6 +557,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1001,19 +1021,48 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 8388608.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 713623846352979940529142984724747568191373312.0))))) :pattern (
   (round m x)) )))
 
-(declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
-(declare-sort t_float32 0)
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
 
 (declare-const fliteral t)
 
 ;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
+(declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
+(declare-sort t_float32 0)
+
+(declare-const fliteral1 t)
+
+;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral)
-  (= (tqtreal fliteral) 340282001837565597733306976381245063168.0)))
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 340282001837565597733306976381245063168.0)))
 
 (define-fun in_range1 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le (neg fliteral) x) (le x
-                                   fliteral))))
+                                   (and (le (neg fliteral1) x) (le x
+                                   fliteral1))))
+
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq (t_float32 t_float32) Bool)
 
@@ -1034,19 +1083,21 @@
   (temp___skip_constant_133 Bool)
   (temp___do_toplevel_134 Bool)) Bool (=>
                                       (or (= temp___is_init_132 true) (le
-                                      (neg fliteral) fliteral)) (in_range1
+                                      (neg fliteral1) fliteral1)) (in_range1
                                       temp___expr_135)))
 
 (declare-sort t1 0)
 
-(declare-const fliteral1 t)
+(declare-const fliteral2 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) 720.0)))
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 720.0)))
 
 (define-fun in_range2 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le (neg fliteral1) x) (le x
-                                   fliteral1))))
+                                   (and (le (neg fliteral2) x) (le x
+                                   fliteral2))))
+
+(define-fun bool_eq2 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq1 (t1 t1) Bool)
 
@@ -1065,24 +1116,26 @@
   (temp___skip_constant_139 Bool)
   (temp___do_toplevel_140 Bool)) Bool (=>
                                       (or (= temp___is_init_138 true) (le
-                                      (neg fliteral1) fliteral1)) (in_range2
+                                      (neg fliteral2) fliteral2)) (in_range2
                                       temp___expr_141)))
 
 (declare-sort t2 0)
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 3.0)))
-
 (declare-const fliteral3 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 2.0)))
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 3.0)))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 2.0)))
 
 (define-fun in_range3 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le (neg fliteral2) x) (le x
-                                   fliteral3))))
+                                   (and (le (neg fliteral3) x) (le x
+                                   fliteral4))))
+
+(define-fun bool_eq3 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq2 (t2 t2) Bool)
 
@@ -1108,7 +1161,7 @@
 ;; r4__post_axiom
   (assert
   (forall ((x1 t))
-  (! (=> (and (dynamic_invariant x1 true true true) (le (neg fliteral) x1))
+  (! (=> (and (dynamic_invariant x1 true true true) (le (neg fliteral1) x1))
      (let ((result (r4 x1)))
      (and (eq result (roundToIntegral RTN1 x1)) (dynamic_invariant result
      true false true)))) :pattern ((r4 x1)) )))
@@ -1127,13 +1180,13 @@
   (temp___skip_constant_145 Bool)
   (temp___do_toplevel_146 Bool)) Bool (=>
                                       (or (= temp___is_init_144 true) (le
-                                      (neg fliteral2) fliteral3)) (in_range3
+                                      (neg fliteral3) fliteral4)) (in_range3
                                       temp___expr_147)))
 
-(declare-const fliteral4 t)
+(declare-const fliteral5 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 360.0)))
+  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 360.0)))
 
 (declare-const v1 t)
 
@@ -1153,16 +1206,16 @@
   (assert (in_range2 x))
 
 ;; H
-  (assert (=> (le (neg fliteral) fliteral) (in_range1 v1)))
+  (assert (=> (le (neg fliteral1) fliteral1) (in_range1 v1)))
 
 ;; H
-  (assert (=> (le (neg fliteral) fliteral) (in_range1 v2)))
+  (assert (=> (le (neg fliteral1) fliteral1) (in_range1 v2)))
 
 ;; H
   (assert (= result v1))
 
 ;; H
-  (assert (= v11 (div1 RNE1 x fliteral4)))
+  (assert (= v11 (div1 RNE1 x fliteral5)))
 
 ;; H
   (assert

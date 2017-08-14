@@ -557,6 +557,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1001,8 +1021,37 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 8388608.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 713623846352979940529142984724747568191373312.0))))) :pattern (
   (round m x)) )))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
 (declare-sort float 0)
+
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq (float float) Bool)
 
@@ -1018,18 +1067,18 @@
 (((mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(declare-const fliteral t)
+(declare-const fliteral1 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral)
-  (= (tqtreal fliteral) 340282346638528859811704183484516925440.0)))
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
 (define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
   (temp___skip_constant_49 Bool)
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true) (le
-                                     (neg fliteral) fliteral)) (tqtisFinite
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_51)))
 
 (declare-const x t)
@@ -1046,14 +1095,16 @@
 
 (declare-sort t_rate 0)
 
-(declare-const fliteral1 t)
+(declare-const fliteral2 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) 3000.0)))
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 3000.0)))
 
 (define-fun in_range1 ((x1 t)) Bool (and (tqtisFinite x1)
-                                    (and (le (neg fliteral1) x1) (le x1
-                                    fliteral1))))
+                                    (and (le (neg fliteral2) x1) (le x1
+                                    fliteral2))))
+
+(define-fun bool_eq2 ((x1 t) (y1 t)) Bool (ite (eq x1 y1) true false))
 
 (declare-fun user_eq1 (t_rate t_rate) Bool)
 
@@ -1074,7 +1125,7 @@
   (temp___skip_constant_133 Bool)
   (temp___do_toplevel_134 Bool)) Bool (=>
                                       (or (= temp___is_init_132 true) (le
-                                      (neg fliteral1) fliteral1)) (in_range1
+                                      (neg fliteral2) fliteral2)) (in_range1
                                       temp___expr_135)))
 
 (declare-fun to_rep (t_rate) t)
@@ -1102,10 +1153,10 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-const fliteral2 t)
+(declare-const fliteral3 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
 
 (declare-const roll_rate_desired t)
 
@@ -1154,7 +1205,7 @@
   (assert (= result roll_rate_desired))
 
 ;; H
-  (assert (= roll_rate_desired1 fliteral2))
+  (assert (= roll_rate_desired1 fliteral3))
 
 ;; H
   (assert (in_range1 roll_rate_desired1))
@@ -1163,7 +1214,7 @@
   (assert (= result1 pitch_rate_desired))
 
 ;; H
-  (assert (= pitch_rate_desired1 fliteral2))
+  (assert (= pitch_rate_desired1 fliteral3))
 
 ;; H
   (assert (in_range1 pitch_rate_desired1))
@@ -1172,7 +1223,7 @@
   (assert (= result2 yaw_rate_desired))
 
 ;; H
-  (assert (= yaw_rate_desired1 fliteral2))
+  (assert (= yaw_rate_desired1 fliteral3))
 
 ;; H
   (assert (in_range1 yaw_rate_desired1))

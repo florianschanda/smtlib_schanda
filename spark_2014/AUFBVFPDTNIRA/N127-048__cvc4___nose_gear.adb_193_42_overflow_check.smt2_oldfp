@@ -649,6 +649,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1407,6 +1427,33 @@
   (forall ((m mode) (x (_ BitVec 32)))
   (= (tqtreal (of_ubv32 m x)) (to_real (bv2nat x)))))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref1 0)) (((mk_t__ref1 (t__content1 t)))))
 (define-fun to_int6 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -1421,6 +1468,8 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort long_float 0)
+
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq (long_float long_float) Bool)
 
@@ -1437,18 +1486,18 @@
 (define-fun long_float__ref___projection ((a long_float__ref)) long_float
   (long_float__content a))
 
-(declare-const fliteral t)
+(declare-const fliteral1 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral)
-  (= (tqtreal fliteral) 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0)))
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0)))
 
 (define-fun dynamic_invariant ((temp___expr_57 t) (temp___is_init_54 Bool)
   (temp___skip_constant_55 Bool)
   (temp___do_toplevel_56 Bool)) Bool (=>
                                      (or (= temp___is_init_54 true) (le
-                                     (neg fliteral) fliteral)) (tqtisFinite
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_57)))
 
 (declare-sort tinteger_32B 0)
@@ -1637,22 +1686,17 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS54 Int)
 
-(declare-const fliteral1 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral1)
-  (= (tqtreal fliteral1) (/ 175463200000000010998768562586747066234238445758819580078125.0 100000000000000000000000000000000000000000000000000000000000000.0))))
-
 (declare-const fliteral2 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 3600000.0)))
+  (assert
+  (and (tqtisFinite fliteral2)
+  (= (tqtreal fliteral2) (/ 175463200000000010998768562586747066234238445758819580078125.0 100000000000000000000000000000000000000000000000000000000000000.0))))
 
 (declare-const fliteral3 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 1.0)))
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 3600000.0)))
 
 (declare-const estimatedgroundvelocity t)
 
@@ -1841,11 +1885,11 @@
 
 ;; H
   (assert
-  (=> (le (neg fliteral) fliteral) (tqtisFinite estimatedgroundvelocity)))
+  (=> (le (neg fliteral1) fliteral1) (tqtisFinite estimatedgroundvelocity)))
 
 ;; H
   (assert
-  (=> (le (neg fliteral) fliteral) (tqtisFinite
+  (=> (le (neg fliteral1) fliteral1) (tqtisFinite
   old_estimatedgroundvelocity_out1)))
 
 ;; H
@@ -1859,13 +1903,13 @@
 
 ;; H
   (assert
-  (=> (le (neg fliteral) fliteral) (tqtisFinite wheel_circunference_out1)))
+  (=> (le (neg fliteral1) fliteral1) (tqtisFinite wheel_circunference_out1)))
 
 ;; H
-  (assert (=> (le (neg fliteral) fliteral) (tqtisFinite ms_in_hour_out1)))
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite ms_in_hour_out1)))
 
 ;; H
-  (assert (=> (le (neg fliteral) fliteral) (tqtisFinite ms_in_our1_out1)))
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite ms_in_our1_out1)))
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range3 to_int32_left_out1)))
@@ -1959,26 +2003,26 @@
 
 ;; H
   (assert
-  (=> (le (neg fliteral) fliteral) (tqtisFinite
+  (=> (le (neg fliteral1) fliteral1) (tqtisFinite
   (t__content1 distance_km_out1))))
 
 ;; H
   (assert
-  (=> (le (neg fliteral) fliteral) (tqtisFinite
+  (=> (le (neg fliteral1) fliteral1) (tqtisFinite
   (t__content1 elapsed_time_h_out1))))
 
 ;; H
   (assert
-  (=> (le (neg fliteral) fliteral) (tqtisFinite
+  (=> (le (neg fliteral1) fliteral1) (tqtisFinite
   (t__content1 avoid_div_by_zero_out1))))
 
 ;; H
   (assert
-  (=> (le (neg fliteral) fliteral) (tqtisFinite (t__content1 speed_out1))))
+  (=> (le (neg fliteral1) fliteral1) (tqtisFinite (t__content1 speed_out1))))
 
 ;; H
   (assert
-  (=> (le (neg fliteral) fliteral) (tqtisFinite
+  (=> (le (neg fliteral1) fliteral1) (tqtisFinite
   (t__content1 old_output_if_new_invalid_out1))))
 
 ;; H
@@ -2040,19 +2084,19 @@
   (assert (= result9 (mk_t__ref1 wheel_circunference_out1)))
 
 ;; H
-  (assert (= wheel_circunference_out11 fliteral1))
+  (assert (= wheel_circunference_out11 fliteral2))
 
 ;; H
   (assert (= result10 (mk_t__ref1 ms_in_hour_out1)))
 
 ;; H
-  (assert (= ms_in_hour_out11 fliteral2))
+  (assert (= ms_in_hour_out11 fliteral3))
 
 ;; H
   (assert (= result11 (mk_t__ref1 ms_in_our1_out1)))
 
 ;; H
-  (assert (= ms_in_our1_out11 fliteral3))
+  (assert (= ms_in_our1_out11 fliteral))
 
 ;; H
   (assert (= result12 (mk_t__ref update_period_os_interrupt_out1)))

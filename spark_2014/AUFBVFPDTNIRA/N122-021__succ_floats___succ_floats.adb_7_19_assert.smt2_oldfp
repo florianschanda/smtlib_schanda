@@ -557,6 +557,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1001,12 +1021,79 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 8388608.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 713623846352979940529142984724747568191373312.0))))) :pattern (
   (round m x)) )))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
+(declare-const max_value t)
+
+;; max_value
+  (assert
+  (= (* 33554430.0 10141204801825835211973625643008.0) (tqtreal max_value)))
+
 (declare-fun next_representable (t) t)
 
 (declare-fun prev_representable (t) t)
 
+;; next_representable_def
+  (assert
+  (forall ((x t))
+  (! (=> (tqtisFinite x) (lt x (next_representable x))) :pattern ((next_representable
+                                                                  x)) )))
+
+;; prev_representable_def
+  (assert
+  (forall ((x t))
+  (! (=> (tqtisFinite x) (lt (prev_representable x) x)) :pattern ((prev_representable
+                                                                  x)) )))
+
+;; next_representable_def2
+  (assert (forall ((x t) (y t)) (=> (lt x y) (le (next_representable x) y))))
+
+;; prev_representable_def2
+  (assert (forall ((x t) (y t)) (=> (lt y x) (le y (prev_representable x)))))
+
+;; next_representable_finite
+  (assert
+  (forall ((x t))
+  (! (=> (tqtisFinite x)
+     (=> (not (eq x max_value)) (tqtisFinite (next_representable x)))) :pattern ((tqtisFinite
+  (next_representable x))) )))
+
+;; prev_representable_finite
+  (assert
+  (forall ((x t))
+  (! (=> (tqtisFinite x)
+     (=> (not (eq x (neg max_value))) (tqtisFinite (prev_representable x)))) :pattern ((tqtisFinite
+  (prev_representable x))) )))
+
 (declare-sort float 0)
+
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq (float float) Bool)
 
@@ -1022,18 +1109,18 @@
 (((mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(declare-const fliteral t)
+(declare-const fliteral1 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral)
-  (= (tqtreal fliteral) 340282346638528859811704183484516925440.0)))
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
 (define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
   (temp___skip_constant_49 Bool)
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true) (le
-                                     (neg fliteral) fliteral)) (tqtisFinite
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_51)))
 
 (declare-const a Bool)
@@ -1046,15 +1133,10 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-const fliteral1 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) (/ 0.0 10.0))))
-
 (declare-const fliteral2 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 1.0)))
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
 
 (declare-const x t)
 
@@ -1063,23 +1145,23 @@
 (declare-const x1 t)
 
 ;; H
-  (assert (=> (le (neg fliteral) fliteral) (tqtisFinite x)))
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite x)))
 
 ;; H
   (assert (= result x))
 
 ;; H
-  (assert (= x1 fliteral1))
+  (assert (= x1 fliteral2))
 
 ;; H
-  (assert (lt fliteral1 (next_representable x1)))
+  (assert (lt fliteral2 (next_representable x1)))
 
 ;; H
-  (assert (lt (next_representable x1) fliteral2))
+  (assert (lt (next_representable x1) fliteral))
 
 (assert
 ;; WP_parameter_def
  ;; File "succ_floats.adb", line 1, characters 0-0
-  (not (lt (prev_representable x1) fliteral1)))
+  (not (lt (prev_representable x1) fliteral2)))
 (check-sat)
 (exit)

@@ -557,6 +557,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1001,10 +1021,75 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 8388608.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 713623846352979940529142984724747568191373312.0))))) :pattern (
   (round m x)) )))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
+(declare-const max_value t)
+
+;; max_value
+  (assert
+  (= (* 33554430.0 10141204801825835211973625643008.0) (tqtreal max_value)))
+
 (declare-fun next_representable (t) t)
 
 (declare-fun prev_representable (t) t)
+
+;; next_representable_def
+  (assert
+  (forall ((x t))
+  (! (=> (tqtisFinite x) (lt x (next_representable x))) :pattern ((next_representable
+                                                                  x)) )))
+
+;; prev_representable_def
+  (assert
+  (forall ((x t))
+  (! (=> (tqtisFinite x) (lt (prev_representable x) x)) :pattern ((prev_representable
+                                                                  x)) )))
+
+;; next_representable_def2
+  (assert (forall ((x t) (y t)) (=> (lt x y) (le (next_representable x) y))))
+
+;; prev_representable_def2
+  (assert (forall ((x t) (y t)) (=> (lt y x) (le y (prev_representable x)))))
+
+;; next_representable_finite
+  (assert
+  (forall ((x t))
+  (! (=> (tqtisFinite x)
+     (=> (not (eq x max_value)) (tqtisFinite (next_representable x)))) :pattern ((tqtisFinite
+  (next_representable x))) )))
+
+;; prev_representable_finite
+  (assert
+  (forall ((x t))
+  (! (=> (tqtisFinite x)
+     (=> (not (eq x (neg max_value))) (tqtisFinite (prev_representable x)))) :pattern ((tqtisFinite
+  (prev_representable x))) )))
 
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -1137,7 +1222,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq ((a (Array Int character)) (a__first Int) (a__last Int)
+(define-fun bool_eq1 ((a (Array Int character)) (a__first Int) (a__last Int)
   (b (Array Int character)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -1156,7 +1241,7 @@
   (assert
   (forall ((a (Array Int character)) (b (Array Int character)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq1 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -1174,7 +1259,7 @@
   (forall ((a (Array Int character)) (b (Array Int character)))
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq1 a a_first a_last b b_first b_last) true)) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -1185,7 +1270,7 @@
      (exists ((i Int) (j Int))
      (and (<= i a_last)
      (and (< j b_last)
-     (and (= (bool_eq a a_first i b b_first j) true)
+     (and (= (bool_eq1 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
      (< (to_rep (select a (+ i 1))) (to_rep (select b (+ j 1))))))))))) :pattern (
@@ -1199,7 +1284,7 @@
      (exists ((i Int) (j Int))
      (and (<= i b_last)
      (and (< j a_last)
-     (and (= (bool_eq a a_first j b b_first i) true)
+     (and (= (bool_eq1 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
      (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
@@ -1290,8 +1375,8 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int character))) (<= 0 (object__alignment a))))
 
-(define-fun bool_eq1 ((x us_t)
-  (y us_t)) Bool (bool_eq (elts x) (to_rep1 (first (rt x)))
+(define-fun bool_eq2 ((x us_t)
+  (y us_t)) Bool (bool_eq1 (elts x) (to_rep1 (first (rt x)))
                  (to_rep1 (last (rt x))) (elts y) (to_rep1 (first (rt y)))
                  (to_rep1 (last (rt y)))))
 
@@ -1310,6 +1395,8 @@
 
 (declare-sort float 0)
 
+(define-fun bool_eq3 ((x t) (y t)) Bool (ite (eq x y) true false))
+
 (declare-fun user_eq4 (float float) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE4 (t) us_image)
@@ -1324,18 +1411,18 @@
 (((mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(declare-const fliteral t)
+(declare-const fliteral1 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral)
-  (= (tqtreal fliteral) 340282346638528859811704183484516925440.0)))
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
 (define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
   (temp___skip_constant_49 Bool)
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true) (le
-                                     (neg fliteral) fliteral)) (tqtisFinite
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_51)))
 
 (declare-fun sin1 (t) t)
@@ -1345,11 +1432,6 @@
 (declare-fun approx_sin (t) t)
 
 (declare-fun approx_sin__function_guard (t t) Bool)
-
-(declare-const fliteral1 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) 1.0)))
 
 (declare-const fliteral2 t)
 
@@ -1363,7 +1445,7 @@
   (forall ((x t))
   (! (=>
      (and (dynamic_invariant x true true true)
-     (and (le (neg fliteral1) x) (le x fliteral1)))
+     (and (le (neg fliteral) x) (le x fliteral)))
      (let ((result (sin1 x)))
      (and (lt (abs1 (sub RNE1 result (approx_sin x))) fliteral2)
      (dynamic_invariant result true false true)))) :pattern ((sin1 x)) )))
@@ -1381,7 +1463,7 @@
   (forall ((x t))
   (! (=>
      (and (dynamic_invariant x true true true)
-     (and (le (neg fliteral1) x) (le x fliteral1)))
+     (and (le (neg fliteral) x) (le x fliteral)))
      (let ((result (cos1 x)))
      (and (lt (abs1 (sub RNE1 result (approx_cos x))) fliteral2)
      (dynamic_invariant result true false true)))) :pattern ((cos1 x)) )))
@@ -1906,7 +1988,7 @@
      (= (approx_cos x) (add RNE1
                        (sub RNE1
                        (add RNE1
-                       (sub RNE1 fliteral1 (div1 RNE1 (pow21 x) fliteral8))
+                       (sub RNE1 fliteral (div1 RNE1 (pow21 x) fliteral8))
                        (div1 RNE1 (pow4 x) fliteral9))
                        (div1 RNE1 (pow6 x) fliteral10))
                        (div1 RNE1 (pow8 x) fliteral11)))) :pattern ((approx_cos
@@ -2055,162 +2137,163 @@
 (define-fun dummy21 () t__ref (mk_t__ref dummy11))
 
 ;; H
-  (assert (=> (le (neg fliteral) fliteral) (tqtisFinite f)))
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite f)))
 
 ;; H
-  (assert (=> (le (neg fliteral) fliteral) (tqtisFinite dummy5)))
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite dummy5)))
 
 ;; H
   (assert (= result f))
 
 ;; H
-  (assert (= f1 (neg fliteral1)))
+  (assert (= f1 (neg fliteral)))
 
 ;; H
-  (assert (=> (le f1 fliteral1) (= temp___519 dummy5)))
+  (assert (=> (le f1 fliteral) (= temp___519 dummy5)))
 
 ;; H
-  (assert (=> (le f1 fliteral1) (= temp___518 f1)))
+  (assert (=> (le f1 fliteral) (= temp___518 f1)))
 
 ;; H
   (assert
-  (=> (le f1 fliteral1)
+  (=> (le f1 fliteral)
   (and
-  (and (=> (le (neg fliteral) fliteral) (tqtisFinite f2))
-  (=> (le (neg fliteral) fliteral) (tqtisFinite dummy7))) (le f2 fliteral1))))
+  (and (=> (le (neg fliteral1) fliteral1) (tqtisFinite f2))
+  (=> (le (neg fliteral1) fliteral1) (tqtisFinite dummy7))) (le f2 fliteral))))
 
 ;; H
   (assert
-  (=> (le f1 fliteral1)
+  (=> (le f1 fliteral)
   (and (= o (sin1 f2))
   (and (tqtisFinite o) (lt (abs1 (sub RNE1 o (approx_sin f2))) fliteral2)))))
 
 ;; H
-  (assert (=> (le f1 fliteral1) (= dummy7 result1)))
+  (assert (=> (le f1 fliteral) (= dummy7 result1)))
 
 ;; H
-  (assert (=> (le f1 fliteral1) (= dummy8 o)))
+  (assert (=> (le f1 fliteral) (= dummy8 o)))
 
 ;; H
-  (assert (=> (le f1 fliteral1) (= result2 f2)))
+  (assert (=> (le f1 fliteral) (= result2 f2)))
 
 ;; H
-  (assert (=> (le f1 fliteral1) (= f3 (next_representable f2))))
+  (assert (=> (le f1 fliteral) (= f3 (next_representable f2))))
 
 ;; H
-  (assert (=> (le f1 fliteral1) (not (le f3 fliteral1))))
+  (assert (=> (le f1 fliteral) (not (le f3 fliteral))))
 
 ;; H
-  (assert (=> (le f1 fliteral1) (= dummy8 dummy9)))
+  (assert (=> (le f1 fliteral) (= dummy8 dummy9)))
 
 ;; H
-  (assert (=> (le f1 fliteral1) (= f3 f4)))
+  (assert (=> (le f1 fliteral) (= f3 f4)))
 
 ;; H
-  (assert (=> (le f1 fliteral1) (= dummy10 dummy8)))
+  (assert (=> (le f1 fliteral) (= dummy10 dummy8)))
 
 ;; H
-  (assert (=> (le f1 fliteral1) (= f5 f3)))
+  (assert (=> (le f1 fliteral) (= f5 f3)))
 
 ;; H
-  (assert (=> (le f1 fliteral1) (= dummy21 (mk_t__ref dummy9))))
+  (assert (=> (le f1 fliteral) (= dummy21 (mk_t__ref dummy9))))
 
 ;; H
-  (assert (=> (le f1 fliteral1) (= (mk_t__ref f6) (mk_t__ref f4))))
+  (assert (=> (le f1 fliteral) (= (mk_t__ref f6) (mk_t__ref f4))))
 
 ;; H
-  (assert (=> (le f1 fliteral1) (= dummy12 dummy10)))
+  (assert (=> (le f1 fliteral) (= dummy12 dummy10)))
 
 ;; H
-  (assert (=> (le f1 fliteral1) (= f7 f5)))
+  (assert (=> (le f1 fliteral) (= f7 f5)))
 
 ;; H
-  (assert (=> (not (le f1 fliteral1)) (= dummy21 (mk_t__ref dummy5))))
+  (assert (=> (not (le f1 fliteral)) (= dummy21 (mk_t__ref dummy5))))
 
 ;; H
-  (assert (=> (not (le f1 fliteral1)) (= f1 f6)))
+  (assert (=> (not (le f1 fliteral)) (= f1 f6)))
 
 ;; H
-  (assert (=> (not (le f1 fliteral1)) (= dummy12 dummy6)))
+  (assert (=> (not (le f1 fliteral)) (= dummy12 dummy6)))
 
 ;; H
-  (assert (=> (not (le f1 fliteral1)) (= f7 f1)))
+  (assert (=> (not (le f1 fliteral)) (= f7 f1)))
 
 ;; H
   (assert (= result3 f6))
 
 ;; H
-  (assert (= f8 (neg fliteral1)))
+  (assert (= f8 (neg fliteral)))
 
 ;; H
-  (assert (=> (le f8 fliteral1) (= temp___523 dummy11)))
+  (assert (=> (le f8 fliteral) (= temp___523 dummy11)))
 
 ;; H
-  (assert (=> (le f8 fliteral1) (= temp___522 f8)))
+  (assert (=> (le f8 fliteral) (= temp___522 f8)))
 
 ;; H
   (assert
-  (=> (le f8 fliteral1)
+  (=> (le f8 fliteral)
   (and
-  (and (=> (le (neg fliteral) fliteral) (tqtisFinite f9))
-  (=> (le (neg fliteral) fliteral) (tqtisFinite dummy13))) (le f9 fliteral1))))
+  (and (=> (le (neg fliteral1) fliteral1) (tqtisFinite f9))
+  (=> (le (neg fliteral1) fliteral1) (tqtisFinite dummy13))) (le f9
+  fliteral))))
 
 ;; H
   (assert
-  (=> (le f8 fliteral1)
+  (=> (le f8 fliteral)
   (and (= o1 (cos1 f9))
   (and (tqtisFinite o1) (lt (abs1 (sub RNE1 o1 (approx_cos f9))) fliteral2)))))
 
 ;; H
-  (assert (=> (le f8 fliteral1) (= dummy13 result4)))
+  (assert (=> (le f8 fliteral) (= dummy13 result4)))
 
 ;; H
-  (assert (=> (le f8 fliteral1) (= dummy14 o1)))
+  (assert (=> (le f8 fliteral) (= dummy14 o1)))
 
 ;; H
-  (assert (=> (le f8 fliteral1) (= result5 f9)))
+  (assert (=> (le f8 fliteral) (= result5 f9)))
 
 ;; H
-  (assert (=> (le f8 fliteral1) (= f10 (next_representable f9))))
+  (assert (=> (le f8 fliteral) (= f10 (next_representable f9))))
 
 ;; H
-  (assert (=> (le f8 fliteral1) (not (le f10 fliteral1))))
+  (assert (=> (le f8 fliteral) (not (le f10 fliteral))))
 
 ;; H
-  (assert (=> (le f8 fliteral1) (= dummy14 dummy15)))
+  (assert (=> (le f8 fliteral) (= dummy14 dummy15)))
 
 ;; H
-  (assert (=> (le f8 fliteral1) (= f10 f11)))
+  (assert (=> (le f8 fliteral) (= f10 f11)))
 
 ;; H
-  (assert (=> (le f8 fliteral1) (= dummy16 dummy14)))
+  (assert (=> (le f8 fliteral) (= dummy16 dummy14)))
 
 ;; H
-  (assert (=> (le f8 fliteral1) (= f12 f10)))
+  (assert (=> (le f8 fliteral) (= f12 f10)))
 
 ;; H
-  (assert (=> (le f8 fliteral1) (= dummy20 (mk_t__ref dummy15))))
+  (assert (=> (le f8 fliteral) (= dummy20 (mk_t__ref dummy15))))
 
 ;; H
-  (assert (=> (le f8 fliteral1) (= (mk_t__ref f13) (mk_t__ref f11))))
+  (assert (=> (le f8 fliteral) (= (mk_t__ref f13) (mk_t__ref f11))))
 
 ;; H
-  (assert (=> (le f8 fliteral1) (= dummy18 dummy16)))
+  (assert (=> (le f8 fliteral) (= dummy18 dummy16)))
 
 ;; H
-  (assert (=> (le f8 fliteral1) (= f14 f12)))
+  (assert (=> (le f8 fliteral) (= f14 f12)))
 
 ;; H
-  (assert (=> (not (le f8 fliteral1)) (= dummy20 dummy21)))
+  (assert (=> (not (le f8 fliteral)) (= dummy20 dummy21)))
 
 ;; H
-  (assert (=> (not (le f8 fliteral1)) (= f8 f13)))
+  (assert (=> (not (le f8 fliteral)) (= f8 f13)))
 
 ;; H
-  (assert (=> (not (le f8 fliteral1)) (= dummy18 dummy12)))
+  (assert (=> (not (le f8 fliteral)) (= dummy18 dummy12)))
 
 ;; H
-  (assert (=> (not (le f8 fliteral1)) (= f14 f8)))
+  (assert (=> (not (le f8 fliteral)) (= f14 f8)))
 
 ;; H
   (assert (= result6 f13))
@@ -2224,8 +2307,8 @@
 ;; H
   (assert
   (and
-  (and (=> (le (neg fliteral) fliteral) (tqtisFinite f16))
-  (=> (le (neg fliteral) fliteral) (tqtisFinite dummy19))) (le f16
+  (and (=> (le (neg fliteral1) fliteral1) (tqtisFinite f16))
+  (=> (le (neg fliteral1) fliteral1) (tqtisFinite dummy19))) (le f16
   fliteral3)))
 
 (assert

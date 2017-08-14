@@ -557,6 +557,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1001,6 +1021,33 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 8388608.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 713623846352979940529142984724747568191373312.0))))) :pattern (
   (round m x)) )))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -1016,6 +1063,8 @@
 
 (declare-sort float 0)
 
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
+
 (declare-fun user_eq (float float) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE1 (t) us_image)
@@ -1030,35 +1079,35 @@
 (((mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(declare-const fliteral t)
+(declare-const fliteral1 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral)
-  (= (tqtreal fliteral) 340282346638528859811704183484516925440.0)))
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
 (define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
   (temp___skip_constant_49 Bool)
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true) (le
-                                     (neg fliteral) fliteral)) (tqtisFinite
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_51)))
 
 (declare-fun tan1 (t) t)
 
 (declare-fun tan__function_guard (t t) Bool)
 
-(declare-const fliteral1 t)
+(declare-const fliteral2 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) (/ 0.0 10.0))))
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
 
 ;; tan__post_axiom
   (assert
   (forall ((x t))
   (! (=> (dynamic_invariant x true true true)
      (let ((result (tan1 x)))
-     (and (=> (eq x fliteral1) (eq result fliteral1)) (dynamic_invariant
+     (and (=> (eq x fliteral2) (eq result fliteral2)) (dynamic_invariant
      result true false true)))) :pattern ((tan1 x)) )))
 
 (declare-fun approx_tan (t) t)
@@ -1087,40 +1136,40 @@
   (! (=> (dynamic_invariant x true true true) (dynamic_invariant
      (approx_tan x) true false true)) :pattern ((approx_tan x)) )))
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 3.0)))
-
 (declare-const fliteral3 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 2.0)))
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 3.0)))
 
 (declare-const fliteral4 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 15.0)))
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 2.0)))
 
 (declare-const fliteral5 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 17.0)))
+  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 15.0)))
 
 (declare-const fliteral6 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 315.0)))
+  (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 17.0)))
 
 (declare-const fliteral7 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral7) (= (tqtreal fliteral7) 62.0)))
+  (assert (and (tqtisFinite fliteral7) (= (tqtreal fliteral7) 315.0)))
 
 (declare-const fliteral8 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral8) (= (tqtreal fliteral8) 2835.0)))
+  (assert (and (tqtisFinite fliteral8) (= (tqtreal fliteral8) 62.0)))
+
+(declare-const fliteral9 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral9) (= (tqtreal fliteral9) 2835.0)))
 
 ;; approx_tan__def_axiom
   (assert
@@ -1128,10 +1177,10 @@
   (! (=> (dynamic_invariant x true true true)
      (= (approx_tan x) (add RNE1
                        (add RNE1
-                       (add RNE1 (add RNE1 x (div1 RNE1 (pow3 x) fliteral2))
-                       (div1 RNE1 (mul RNE1 fliteral3 (pow5 x)) fliteral4))
-                       (div1 RNE1 (mul RNE1 fliteral5 (pow7 x)) fliteral6))
-                       (div1 RNE1 (mul RNE1 fliteral7 (pow9 x)) fliteral8)))) :pattern (
+                       (add RNE1 (add RNE1 x (div1 RNE1 (pow3 x) fliteral3))
+                       (div1 RNE1 (mul RNE1 fliteral4 (pow5 x)) fliteral5))
+                       (div1 RNE1 (mul RNE1 fliteral6 (pow7 x)) fliteral7))
+                       (div1 RNE1 (mul RNE1 fliteral8 (pow9 x)) fliteral9)))) :pattern (
   (approx_tan x)) )))
 
 (declare-const x t)
@@ -1195,12 +1244,12 @@
                   (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 x1 x1) x1) x1) x1)
                   x1) x1) x1) x1))) :pattern ((pow9 x1)) )))
 
-(declare-const fliteral9 t)
+(declare-const fliteral10 t)
 
 ;; fliteral_axiom
   (assert
-  (and (tqtisFinite fliteral9)
-  (= (tqtreal fliteral9) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
+  (and (tqtisFinite fliteral10)
+  (= (tqtreal fliteral10) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
 
 (declare-const trigo__tan__result t)
 
@@ -1226,7 +1275,7 @@
   (assert (tqtisFinite x))
 
 ;; H
-  (assert (and (le (neg fliteral9) x) (le x fliteral9)))
+  (assert (and (le (neg fliteral10) x) (le x fliteral10)))
 
 ;; H
   (assert (= trigo__tan__result1 trigo__tan__result2))
@@ -1237,7 +1286,7 @@
 ;; H
   (assert
   (and (= o (tan1 x))
-  (and (tqtisFinite o) (=> (eq x fliteral1) (eq o fliteral1)))))
+  (and (tqtisFinite o) (=> (eq x fliteral2) (eq o fliteral2)))))
 
 ;; H
   (assert (= (mk_t__ref result) (mk_t__ref trigo__tan__result)))
@@ -1258,10 +1307,10 @@
   (and (tqtisFinite o1)
   (= o1 (add RNE1
         (add RNE1
-        (add RNE1 (add RNE1 x (div1 RNE1 (pow3 x) fliteral2))
-        (div1 RNE1 (mul RNE1 fliteral3 (pow5 x)) fliteral4))
-        (div1 RNE1 (mul RNE1 fliteral5 (pow7 x)) fliteral6))
-        (div1 RNE1 (mul RNE1 fliteral7 (pow9 x)) fliteral8))))))
+        (add RNE1 (add RNE1 x (div1 RNE1 (pow3 x) fliteral3))
+        (div1 RNE1 (mul RNE1 fliteral4 (pow5 x)) fliteral5))
+        (div1 RNE1 (mul RNE1 fliteral6 (pow7 x)) fliteral7))
+        (div1 RNE1 (mul RNE1 fliteral8 (pow9 x)) fliteral9))))))
 
 ;; H
   (assert (= o2 (sub RNE1 trigo__tan__result4 o1)))

@@ -629,6 +629,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1073,6 +1093,33 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 8388608.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 713623846352979940529142984724747568191373312.0))))) :pattern (
   (round m x)) )))
 
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
+
+(declare-const fliteral t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -1113,26 +1160,86 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range2 temp___expr_15)))
 
+(declare-sort float 0)
+
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(declare-fun user_eq1 (float float) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE2 (t) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) t)
+
+(declare-const dummy1 float)
+
+(declare-datatypes ((float__ref 0))
+(((mk_float__ref (float__content float)))))
+(define-fun float__ref___projection ((a float__ref)) float (float__content a))
+
+(declare-const fliteral1 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
+
+(define-fun dynamic_invariant1 ((temp___expr_51 t) (temp___is_init_48 Bool)
+  (temp___skip_constant_49 Bool)
+  (temp___do_toplevel_50 Bool)) Bool (=>
+                                     (or (= temp___is_init_48 true) (le
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
+                                     temp___expr_51)))
+
+(declare-fun sqrt2 (t) t)
+
+(declare-fun sqrt__function_guard (t t) Bool)
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 14012984643248170709237295832899161312802619418765157717570682838897910826858606014866381883621215820312500000000000000000000000.0 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.0))))
+
+;; sqrt__post_axiom
+  (assert
+  (forall ((x t))
+  (! (=> (and (dynamic_invariant1 x true true true) (le fliteral2 x))
+     (let ((result (sqrt2 x)))
+     (and
+     (and (le fliteral2 result)
+     (and (=> (eq x fliteral2) (eq result fliteral2))
+     (and (=> (eq x fliteral) (eq result fliteral))
+     (=> (le fliteral3 x) (lt fliteral2 result))))) (dynamic_invariant1
+     result true false true)))) :pattern ((sqrt2 x)) )))
+
 (declare-sort value_type 0)
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
 
-(declare-fun user_eq1 (value_type value_type) Bool)
+(declare-fun user_eq2 (value_type value_type) Bool)
 
-(declare-const dummy1 value_type)
+(declare-const dummy2 value_type)
 
 (declare-datatypes ((value_type__ref 0))
 (((mk_value_type__ref (value_type__content value_type)))))
 (define-fun value_type__ref___projection ((a value_type__ref)) value_type
   (value_type__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_178 Int)
+(define-fun dynamic_invariant2 ((temp___expr_178 Int)
   (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
   (temp___do_toplevel_177 Bool)) Bool (=>
                                       (or (= temp___is_init_175 true)
@@ -1143,15 +1250,15 @@
 
 (define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 100000)))
 
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
 
-(declare-fun user_eq2 (tnumber_list_typeD1 tnumber_list_typeD1) Bool)
+(declare-fun user_eq3 (tnumber_list_typeD1 tnumber_list_typeD1) Bool)
 
-(declare-const dummy2 tnumber_list_typeD1)
+(declare-const dummy3 tnumber_list_typeD1)
 
 (declare-datatypes ((tnumber_list_typeD1__ref 0))
 (((mk_tnumber_list_typeD1__ref
@@ -1201,7 +1308,7 @@
   (forall ((i Int))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq ((a (Array Int Bool)) (a__first Int) (a__last Int)
+(define-fun bool_eq2 ((a (Array Int Bool)) (a__first Int) (a__last Int)
   (b (Array Int Bool)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -1219,7 +1326,7 @@
   (assert
   (forall ((a (Array Int Bool)) (b (Array Int Bool)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq2 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -1235,7 +1342,7 @@
   (forall ((a (Array Int Bool)) (b (Array Int Bool)))
   (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
   (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq a a_first a_last b b_first b_last) true)) :pattern (
+     (= (bool_eq2 a a_first a_last b b_first b_last) true)) :pattern (
   (compare a a_first a_last b b_first b_last)) ))))
 
 ;; compare_def_lt
@@ -1246,7 +1353,7 @@
      (exists ((i Int) (j Int))
      (and (<= i a_last)
      (and (< j b_last)
-     (and (= (bool_eq a a_first i b b_first j) true)
+     (and (= (bool_eq2 a a_first i b b_first j) true)
      (or (= i a_last)
      (and (< i a_last)
      (< (to_int2 (select a (+ i 1))) (to_int2 (select b (+ j 1))))))))))) :pattern (
@@ -1260,7 +1367,7 @@
      (exists ((i Int) (j Int))
      (and (<= i b_last)
      (and (< j a_last)
-     (and (= (bool_eq a a_first j b b_first i) true)
+     (and (= (bool_eq2 a a_first j b b_first i) true)
      (or (= i b_last)
      (and (< i b_last)
      (< (to_int2 (select b (+ i 1))) (to_int2 (select a (+ j 1))))))))))) :pattern (
@@ -1379,15 +1486,15 @@
 (define-fun dynamic_property ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))
 
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
 
-(declare-fun user_eq3 (integer integer) Bool)
+(declare-fun user_eq4 (integer integer) Bool)
 
-(declare-const dummy3 integer)
+(declare-const dummy4 integer)
 
 (declare-datatypes ((t88b__ref 0))
 (((mk_t88b__ref (t88b__content integer)))))
@@ -1403,10 +1510,10 @@
   (forall ((temp___253 Int))
   (= (select (temp___250 temp___252) temp___253) temp___252))))
 
-(declare-const fliteral t)
+(declare-const fliteral4 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 100000.0)))
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 100000.0)))
 
 (declare-const is_prime1 (Array Int Bool))
 
@@ -1416,25 +1523,29 @@
 
 (declare-const index_2 Int)
 
-(declare-const test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume Int)
-
-(declare-const o Int)
+(declare-const o t)
 
 (declare-const o1 Int)
 
+(declare-const test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume Int)
+
 (declare-const o2 Int)
 
-(declare-const o3 (Array Int Bool))
+(declare-const o3 Int)
+
+(declare-const o4 Int)
+
+(declare-const o5 (Array Int Bool))
 
 (declare-const v Int)
 
 (declare-const div3 Int)
 
-(declare-const o4 Int)
+(declare-const o6 Int)
 
-(declare-const o5 Bool)
+(declare-const o7 Bool)
 
-(declare-const o6 Bool)
+(declare-const o8 Bool)
 
 (declare-const result (Array Int Bool))
 
@@ -1506,10 +1617,21 @@
 
 ;; H
   (assert
+  (and (= o (sqrt2 fliteral4))
+  (and (tqtisFinite o)
+  (and (le fliteral2 o)
+  (and (=> (eq fliteral4 fliteral2) (eq o fliteral2))
+  (and (=> (eq fliteral4 fliteral) (eq o fliteral))
+  (=> (le fliteral3 fliteral4) (lt fliteral2 o))))))))
+
+;; H
+  (assert (= o1 (to_int1 RNA1 o)))
+
+;; H
+  (assert
   (and
   (= test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume
-  (to_int1 RNA1 (sqrt RNE1 fliteral))) (in_range3
-  (to_int1 RNA1 (sqrt RNE1 fliteral)))))
+  o1) (in_range3 o1)))
 
 ;; H
   (assert
@@ -1561,10 +1683,10 @@
   (assert (and (<= 0 index_22) (<= index_22 100000)))
 
 ;; H
-  (assert (= o index_22))
+  (assert (= o2 index_22))
 
 ;; H
-  (assert (= result4 (select is_prime5 o)))
+  (assert (= result4 (select is_prime5 o2)))
 
 ;; H
   (assert (= result4 true))
@@ -1576,13 +1698,13 @@
   (assert (= index_12 index_22))
 
 ;; H
-  (assert (and (= o1 (* 2 index_12)) (in_range2 (* 2 index_12))))
+  (assert (and (= o3 (* 2 index_12)) (in_range2 (* 2 index_12))))
 
 ;; H
   (assert (= index_31 result6))
 
 ;; H
-  (assert (= index_32 o1))
+  (assert (= index_32 o3))
 
 ;; H
   (assert (<= index_32 100000))
@@ -1591,16 +1713,16 @@
   (assert (and (<= 0 index_32) (<= index_32 100000)))
 
 ;; H
-  (assert (= o2 index_32))
+  (assert (= o4 index_32))
 
 ;; H
-  (assert (= o3 (store is_prime5 o2 (of_int1 0))))
+  (assert (= o5 (store is_prime5 o4 (of_int1 0))))
 
 ;; H
   (assert (= is_prime5 result7))
 
 ;; H
-  (assert (= is_prime6 o3))
+  (assert (= is_prime6 o5))
 
 ;; H
   (assert
@@ -1635,21 +1757,21 @@
   (assert (<= v 100000))
 
 ;; H
-  (assert (and (= o4 (+ index_22 1)) (in_range2 (+ index_22 1))))
+  (assert (and (= o6 (+ index_22 1)) (in_range2 (+ index_22 1))))
 
 ;; H
-  (assert (= o5 (ite (<= o4 v) true false)))
-
-;; H
-  (assert
-  (= result8 (ite (= o5 true) (ite (<= v index_33) true false) false)))
+  (assert (= o7 (ite (<= o6 v) true false)))
 
 ;; H
   (assert
-  (=> (= result8 true) (= o6 (ite (not (= (mod2 v index_22) 0)) true false))))
+  (= result8 (ite (= o7 true) (ite (<= v index_33) true false) false)))
 
 ;; H
-  (assert (=> (not (= result8 true)) (= o6 (of_int1 1))))
+  (assert
+  (=> (= result8 true) (= o8 (ite (not (= (mod2 v index_22) 0)) true false))))
+
+;; H
+  (assert (=> (not (= result8 true)) (= o8 (of_int1 1))))
 
 ;; H
   (assert (<= 2 div3))

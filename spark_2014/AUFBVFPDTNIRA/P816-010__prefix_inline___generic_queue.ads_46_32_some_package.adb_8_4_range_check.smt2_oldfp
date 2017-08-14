@@ -804,6 +804,26 @@
 
 (declare-fun sqrt1 (Real) Real)
 
+;; Sqrt_positive
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+
+;; Sqrt_square
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+
+;; Square_sqrt
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+
+;; Sqrt_mul
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= 0.0 y))
+  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+
+;; Sqrt_le
+  (assert
+  (forall ((x Real) (y Real))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
@@ -1248,21 +1268,50 @@
      (<= (round m x) (+ (+ x (* (/ 1.0 8388608.0) (ite (>= x 0.0) x (- x)))) (/ 1.0 713623846352979940529142984724747568191373312.0))))) :pattern (
   (round m x)) )))
 
-(declare-datatypes ((t__ref1 0)) (((mk_t__ref1 (t__content1 t)))))
-(declare-sort element_type 0)
+(define-fun neq ((x t) (y t)) Bool (not (eq x y)))
+
+(define-fun bool_lt ((x t) (y t)) Bool (ite (lt x y) true false))
+
+(define-fun bool_le ((x t) (y t)) Bool (ite (le x y) true false))
+
+(define-fun bool_gt ((x t) (y t)) Bool (ite (lt y x) true false))
+
+(define-fun bool_ge ((x t) (y t)) Bool (ite (le y x) true false))
+
+(define-fun bool_eq ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(define-fun bool_neq ((x t) (y t)) Bool (ite (not (eq x y)) true false))
+
+(declare-fun rem (t t) t)
 
 (declare-const fliteral t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) (/ 0.0 10.0))))
+  (assert (and (tqtisFinite fliteral) (= (tqtreal fliteral) 1.0)))
+
+;; one_is_int
+  (assert (is_int1 fliteral))
+
+;; one_of_int
+  (assert (= fliteral (of_int RNA1 1)))
+
+(declare-datatypes ((t__ref1 0)) (((mk_t__ref1 (t__content1 t)))))
+(declare-sort element_type 0)
 
 (declare-const fliteral1 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) 10.0)))
+  (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) (/ 0.0 10.0))))
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 10.0)))
 
 (define-fun in_range4 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le fliteral x) (le x fliteral1))))
+                                   (and (le fliteral1 x) (le x fliteral2))))
+
+(define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq4 (element_type element_type) Bool)
 
@@ -1346,7 +1395,7 @@
   (forall ((i (_ BitVec 8)))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(define-fun bool_eq ((a (Array (_ BitVec 8) element_type))
+(define-fun bool_eq2 ((a (Array (_ BitVec 8) element_type))
   (a__first (_ BitVec 8)) (a__last (_ BitVec 8))
   (b (Array (_ BitVec 8) element_type)) (b__first (_ BitVec 8))
   (b__last (_ BitVec 8))) Bool (ite (and
@@ -1369,7 +1418,7 @@
   (b (Array (_ BitVec 8) element_type)))
   (forall ((a__first (_ BitVec 8)) (a__last (_ BitVec 8))
   (b__first (_ BitVec 8)) (b__last (_ BitVec 8)))
-  (=> (= (bool_eq b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq2 b b__first b__last a a__first a__last) true)
   (and
   (ite (bvule a__first a__last)
   (and (bvule b__first b__last)
@@ -1456,7 +1505,7 @@
 
 (define-fun us_rep_2__projection ((a us_rep)) Int (attr__tag a))
 
-(define-fun bool_eq1 ((a us_rep)
+(define-fun bool_eq3 ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (and
                         (and
@@ -1467,7 +1516,7 @@
                            (us_split_fields1 a))) (to_rep3
                                                   (rec__some_package__float_buffer__buffer_tag__mode
                                                   (us_split_fields1 b))))
-                        (= (bool_eq
+                        (= (bool_eq2
                            (rec__some_package__float_buffer__buffer_tag__buffer
                            (us_split_fields1 a)) ((_ int2bv 8) 0)
                            ((_ int2bv 8) 255)
@@ -1668,7 +1717,7 @@
                                          (select (rec__some_package__float_buffer__buffer_tag__buffer
                                                  (us_split_fields1
                                                  temp___expr_251)) temp___254))
-                                         fliteral))))
+                                         fliteral1))))
                                          (= (to_rep2
                                             (rec__some_package__float_buffer__buffer_tag__index_head
                                             (us_split_fields1
@@ -1747,7 +1796,7 @@
   (forall ((i Int))
   (! (= (select (singleton2 v i) i) v) :pattern ((select (singleton2 v i) i)) ))))
 
-(define-fun bool_eq2 ((a (Array Int element_type)) (a__first Int)
+(define-fun bool_eq4 ((a (Array Int element_type)) (a__first Int)
   (a__last Int) (b (Array Int element_type)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -1766,7 +1815,7 @@
   (assert
   (forall ((a (Array Int element_type)) (b (Array Int element_type)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq2 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq4 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
@@ -1843,8 +1892,8 @@
   (assert
   (forall ((a (Array Int element_type))) (<= 0 (object__alignment2 a))))
 
-(define-fun bool_eq3 ((x us_t)
-  (y us_t)) Bool (bool_eq2 (elts x) (to_rep (first (rt x)))
+(define-fun bool_eq5 ((x us_t)
+  (y us_t)) Bool (bool_eq4 (elts x) (to_rep (first (rt x)))
                  (to_rep (last (rt x))) (elts y) (to_rep (first (rt y)))
                  (to_rep (last (rt y)))))
 
@@ -1924,7 +1973,7 @@
                                          (eq
                                          (to_rep4
                                          (select temp___expr_242 temp___244))
-                                         fliteral))))
+                                         fliteral1))))
 
 (define-fun dynamic_invariant5 ((temp___expr_211 (_ BitVec 8))
   (temp___is_init_208 Bool) (temp___skip_constant_209 Bool)
@@ -1934,7 +1983,7 @@
   (temp___skip_constant_215 Bool)
   (temp___do_toplevel_216 Bool)) Bool (=>
                                       (or (= temp___is_init_214 true) (le
-                                      fliteral fliteral1)) (in_range4
+                                      fliteral1 fliteral2)) (in_range4
                                       temp___expr_217)))
 
 (declare-const self__split_fields mode_type)
