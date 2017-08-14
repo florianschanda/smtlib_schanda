@@ -1,0 +1,1121 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+(* this is a prelude for Alt-Ergo real arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+axiom add_div :
+  (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
+  (((x + y) / z) = ((x / z) + (y / z)))))
+
+axiom sub_div :
+  (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
+  (((x - y) / z) = ((x / z) - (y / z)))))
+
+axiom neg_div :
+  (forall x:real. forall y:real. ((not (y = 0.0)) ->
+  (((-x) / y) = (-(x / y)))))
+
+axiom assoc_mul_div :
+  (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
+  (((x * y) / z) = (x * (y / z)))))
+
+axiom assoc_div_mul :
+  (forall x:real. forall y:real. forall z:real. (((not (y = 0.0)) and
+  (not (z = 0.0))) -> (((x / y) / z) = (x / (y * z)))))
+
+axiom assoc_div_div :
+  (forall x:real. forall y:real. forall z:real. (((not (y = 0.0)) and
+  (not (z = 0.0))) -> ((x / (y / z)) = ((x * z) / y))))
+
+type t
+
+logic tqtreal : t -> real
+
+logic tqtisFinite : t -> prop
+
+axiom tqtaxiom :
+  (forall x:t. (tqtisFinite(x) ->
+  (((-0x1FFFFFFFFFFFFF.0p971) <= tqtreal(x)) and
+  (tqtreal(x) <= 0x1FFFFFFFFFFFFF.0p971))))
+
+logic pow2 : int -> int
+
+axiom Power_0 : (pow2(0) = 1)
+
+axiom Power_s : (forall n:int. ((0 <= n) -> (pow2((n + 1)) = (2 * pow2(n)))))
+
+axiom Power_1 : (pow2(1) = 2)
+
+axiom Power_sum :
+  (forall n:int. forall m:int. (((0 <= n) and (0 <= m)) ->
+  (pow2((n + m)) = (pow2(n) * pow2(m)))))
+
+axiom pow2pos : (forall i:int. ((0 <= i) -> (0 <  pow2(i))))
+
+axiom pow2_0 : (pow2(0) = 1)
+
+axiom pow2_1 : (pow2(1) = 2)
+
+axiom pow2_2 : (pow2(2) = 4)
+
+axiom pow2_3 : (pow2(3) = 8)
+
+axiom pow2_4 : (pow2(4) = 16)
+
+axiom pow2_5 : (pow2(5) = 32)
+
+axiom pow2_6 : (pow2(6) = 64)
+
+axiom pow2_7 : (pow2(7) = 128)
+
+axiom pow2_8 : (pow2(8) = 256)
+
+axiom pow2_9 : (pow2(9) = 512)
+
+axiom pow2_10 : (pow2(10) = 1024)
+
+axiom pow2_11 : (pow2(11) = 2048)
+
+axiom pow2_12 : (pow2(12) = 4096)
+
+axiom pow2_13 : (pow2(13) = 8192)
+
+axiom pow2_14 : (pow2(14) = 16384)
+
+axiom pow2_15 : (pow2(15) = 32768)
+
+axiom pow2_16 : (pow2(16) = 65536)
+
+axiom pow2_17 : (pow2(17) = 131072)
+
+axiom pow2_18 : (pow2(18) = 262144)
+
+axiom pow2_19 : (pow2(19) = 524288)
+
+axiom pow2_20 : (pow2(20) = 1048576)
+
+axiom pow2_21 : (pow2(21) = 2097152)
+
+axiom pow2_22 : (pow2(22) = 4194304)
+
+axiom pow2_23 : (pow2(23) = 8388608)
+
+axiom pow2_24 : (pow2(24) = 16777216)
+
+axiom pow2_25 : (pow2(25) = 33554432)
+
+axiom pow2_26 : (pow2(26) = 67108864)
+
+axiom pow2_27 : (pow2(27) = 134217728)
+
+axiom pow2_28 : (pow2(28) = 268435456)
+
+axiom pow2_29 : (pow2(29) = 536870912)
+
+axiom pow2_30 : (pow2(30) = 1073741824)
+
+axiom pow2_31 : (pow2(31) = 2147483648)
+
+axiom pow2_32 : (pow2(32) = 4294967296)
+
+axiom pow2_33 : (pow2(33) = 8589934592)
+
+axiom pow2_34 : (pow2(34) = 17179869184)
+
+axiom pow2_35 : (pow2(35) = 34359738368)
+
+axiom pow2_36 : (pow2(36) = 68719476736)
+
+axiom pow2_37 : (pow2(37) = 137438953472)
+
+axiom pow2_38 : (pow2(38) = 274877906944)
+
+axiom pow2_39 : (pow2(39) = 549755813888)
+
+axiom pow2_40 : (pow2(40) = 1099511627776)
+
+axiom pow2_41 : (pow2(41) = 2199023255552)
+
+axiom pow2_42 : (pow2(42) = 4398046511104)
+
+axiom pow2_43 : (pow2(43) = 8796093022208)
+
+axiom pow2_44 : (pow2(44) = 17592186044416)
+
+axiom pow2_45 : (pow2(45) = 35184372088832)
+
+axiom pow2_46 : (pow2(46) = 70368744177664)
+
+axiom pow2_47 : (pow2(47) = 140737488355328)
+
+axiom pow2_48 : (pow2(48) = 281474976710656)
+
+axiom pow2_49 : (pow2(49) = 562949953421312)
+
+axiom pow2_50 : (pow2(50) = 1125899906842624)
+
+axiom pow2_51 : (pow2(51) = 2251799813685248)
+
+axiom pow2_52 : (pow2(52) = 4503599627370496)
+
+axiom pow2_53 : (pow2(53) = 9007199254740992)
+
+axiom pow2_54 : (pow2(54) = 18014398509481984)
+
+axiom pow2_55 : (pow2(55) = 36028797018963968)
+
+axiom pow2_56 : (pow2(56) = 72057594037927936)
+
+axiom pow2_57 : (pow2(57) = 144115188075855872)
+
+axiom pow2_58 : (pow2(58) = 288230376151711744)
+
+axiom pow2_59 : (pow2(59) = 576460752303423488)
+
+axiom pow2_60 : (pow2(60) = 1152921504606846976)
+
+axiom pow2_61 : (pow2(61) = 2305843009213693952)
+
+axiom pow2_62 : (pow2(62) = 4611686018427387904)
+
+axiom pow2_63 : (pow2(63) = 9223372036854775808)
+
+axiom pow2_64 : (pow2(64) = 18446744073709551616)
+
+axiom Abs_le :
+  (forall x:real. forall y:real. ((abs_real(x) <= y) <-> (((-y) <= x) and
+  (x <= y))))
+
+axiom Abs_pos : (forall x:real. (0.0 <= abs_real(x)))
+
+axiom Abs_sum :
+  (forall x:real. forall y:real.
+  (abs_real((x + y)) <= (abs_real(x) + abs_real(y))))
+
+axiom Abs_prod :
+  (forall x:real. forall y:real.
+  (abs_real((x * y)) = (abs_real(x) * abs_real(y))))
+
+axiom triangular_inequality :
+  (forall x:real. forall y:real. forall z:real.
+  (abs_real((x - z)) <= (abs_real((x - y)) + abs_real((y - z)))))
+
+axiom Monotonic :
+  (forall x:int. forall y:int. ((x <= y) ->
+  (real_of_int(x) <= real_of_int(y))))
+
+logic truncate : real -> int
+
+axiom Truncate_int : (forall i:int. (truncate(real_of_int(i)) = i))
+
+axiom Truncate_down_pos :
+  (forall x:real. ((0.0 <= x) -> ((real_of_int(truncate(x)) <= x) and
+  (x <  real_of_int((truncate(x) + 1))))))
+
+axiom Truncate_up_neg :
+  (forall x:real. ((x <= 0.0) -> ((real_of_int((truncate(x) - 1)) <  x) and
+  (x <= real_of_int(truncate(x))))))
+
+axiom Real_of_truncate :
+  (forall x:real. (((x - 1.0) <= real_of_int(truncate(x))) and
+  (real_of_int(truncate(x)) <= (x + 1.0))))
+
+axiom Truncate_monotonic :
+  (forall x:real. forall y:real. ((x <= y) -> (truncate(x) <= truncate(y))))
+
+axiom Truncate_monotonic_int1 :
+  (forall x:real. forall i:int. ((x <= real_of_int(i)) ->
+  (truncate(x) <= i)))
+
+axiom Truncate_monotonic_int2 :
+  (forall x:real. forall i:int. ((real_of_int(i) <= x) ->
+  (i <= truncate(x))))
+
+logic floor : real -> int
+
+logic ceil : real -> int
+
+axiom Floor_int : (forall i:int. (floor(real_of_int(i)) = i))
+
+axiom Ceil_int : (forall i:int. (ceil(real_of_int(i)) = i))
+
+axiom Floor_down :
+  (forall x:real. ((real_of_int(floor(x)) <= x) and
+  (x <  real_of_int((floor(x) + 1)))))
+
+axiom Ceil_up :
+  (forall x:real. ((real_of_int((ceil(x) - 1)) <  x) and
+  (x <= real_of_int(ceil(x)))))
+
+axiom Floor_monotonic :
+  (forall x:real. forall y:real. ((x <= y) -> (floor(x) <= floor(y))))
+
+axiom Ceil_monotonic :
+  (forall x:real. forall y:real. ((x <= y) -> (ceil(x) <= ceil(y))))
+
+logic match_mode : fpa_rounding_mode, 'a, 'a, 'a, 'a, 'a -> 'a
+
+axiom match_mode_RNE :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(NearestTiesToEven, z, z1, z2, z3, z4) = z))
+
+axiom match_mode_RNA :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(NearestTiesToAway, z, z1, z2, z3, z4) = z1))
+
+axiom match_mode_RTP :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(Up, z, z1, z2, z3, z4) = z2))
+
+axiom match_mode_RTN :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(Down, z, z1, z2, z3, z4) = z3))
+
+axiom match_mode_RTZ :
+  (forall z:'a. forall z1:'a. forall z2:'a. forall z3:'a. forall z4:'a.
+  (match_mode(ToZero, z, z1, z2, z3, z4) = z4))
+
+predicate to_nearest(m: fpa_rounding_mode) = ((m = NearestTiesToEven) or
+  (m = NearestTiesToAway))
+
+logic zeroF : t
+
+logic add : fpa_rounding_mode, t, t -> t
+
+logic sub : fpa_rounding_mode, t, t -> t
+
+logic mul : fpa_rounding_mode, t, t -> t
+
+logic div : fpa_rounding_mode, t, t -> t
+
+logic abs : t -> t
+
+logic neg : t -> t
+
+logic fma : fpa_rounding_mode, t, t, t -> t
+
+logic sqrt : fpa_rounding_mode, t -> t
+
+logic roundToIntegral : fpa_rounding_mode, t -> t
+
+logic min : t, t -> t
+
+logic max : t, t -> t
+
+logic le : t, t -> prop
+
+logic lt : t, t -> prop
+
+logic eq : t, t -> prop
+
+logic is_normal : t -> prop
+
+logic is_subnormal : t -> prop
+
+logic is_zero : t -> prop
+
+logic is_infinite : t -> prop
+
+logic is_nan : t -> prop
+
+logic is_positive : t -> prop
+
+logic is_negative : t -> prop
+
+predicate is_plus_infinity(x: t) = (is_infinite(x) and is_positive(x))
+
+predicate is_minus_infinity(x: t) = (is_infinite(x) and is_negative(x))
+
+predicate is_plus_zero(x: t) = (is_zero(x) and is_positive(x))
+
+predicate is_minus_zero(x: t) = (is_zero(x) and is_negative(x))
+
+predicate is_not_nan(x: t) = (tqtisFinite(x) or is_infinite(x))
+
+axiom is_not_nan1 : (forall x:t. (is_not_nan(x) <-> (not is_nan(x))))
+
+axiom is_not_finite :
+  (forall x:t. ((not tqtisFinite(x)) <-> (is_infinite(x) or is_nan(x))))
+
+axiom zeroF_is_positive : is_positive(zeroF)
+
+axiom zeroF_is_zero : is_zero(zeroF)
+
+axiom zero_to_real :
+  (forall x:t [is_zero(x)]. (is_zero(x) <-> (tqtisFinite(x) and
+  (tqtreal(x) = 0.0))))
+
+logic of_int : fpa_rounding_mode, int -> t
+
+logic to_int : fpa_rounding_mode, t -> int
+
+axiom zero_of_int : (forall m:fpa_rounding_mode. (zeroF = of_int(m, 0)))
+
+logic max_int1 : int
+
+axiom max_real_int : (0x1.FFFFFFFFFFFFFp1023 = real_of_int(max_int1))
+
+predicate in_range(x: real) = (((-0x1.FFFFFFFFFFFFFp1023) <= x) and
+  (x <= 0x1.FFFFFFFFFFFFFp1023))
+
+predicate in_int_range(i: int) = (((-max_int1) <= i) and (i <= max_int1))
+
+axiom is_finite : (forall x:t. (tqtisFinite(x) -> in_range(tqtreal(x))))
+
+predicate no_overflow(m: fpa_rounding_mode, x: real) = in_range(float64(m,x))
+
+axiom Bounded_real_no_overflow :
+  (forall m:fpa_rounding_mode. forall x:real. (in_range(x) ->
+  in_range(float64(m,x))))
+
+axiom Round_to_real :
+  (forall m:fpa_rounding_mode. forall x:t. (tqtisFinite(x) ->
+  (float64(m,tqtreal(x)) = tqtreal(x))))
+
+axiom Round_down_le : (forall x:real. (float64(Down,x) <= x))
+
+axiom Round_up_ge : (forall x:real. (x <= float64(Up,x)))
+
+axiom Round_down_neg :
+  (forall x:real. (float64(Down,(-x)) = (-float64(Up,x))))
+
+axiom Round_up_neg : (forall x:real. (float64(Up,(-x)) = (-float64(Down,x))))
+
+predicate in_safe_int_range(i: int) = (((-9007199254740992) <= i) and
+  (i <= 9007199254740992))
+
+axiom Exact_rounding_for_integers :
+  (forall m:fpa_rounding_mode. forall i:int. (in_safe_int_range(i) ->
+  (float64(m,real_of_int(i)) = real_of_int(i))))
+
+predicate same_sign(x: t, y: t) = ((is_positive(x) and is_positive(y)) or
+  (is_negative(x) and is_negative(y)))
+
+predicate diff_sign(x: t, y: t) = ((is_positive(x) and is_negative(y)) or
+  (is_negative(x) and is_positive(y)))
+
+axiom feq_eq :
+  (forall x:t. forall y:t. (tqtisFinite(x) -> (tqtisFinite(y) ->
+  ((not is_zero(x)) -> (eq(x, y) -> (x = y))))))
+
+axiom eq_feq :
+  (forall x:t. forall y:t. (tqtisFinite(x) -> (tqtisFinite(y) -> ((x = y) ->
+  eq(x, y)))))
+
+axiom eq_refl : (forall x:t. (tqtisFinite(x) -> eq(x, x)))
+
+axiom eq_sym : (forall x:t. forall y:t. (eq(x, y) -> eq(y, x)))
+
+axiom eq_trans :
+  (forall x:t. forall y:t. forall z:t. (eq(x, y) -> (eq(y, z) -> eq(x, z))))
+
+axiom eq_zero : eq(zeroF, neg(zeroF))
+
+axiom eq_to_real_finite :
+  (forall x:t. forall y:t. ((tqtisFinite(x) and tqtisFinite(y)) -> (eq(x,
+  y) <-> (tqtreal(x) = tqtreal(y)))))
+
+axiom eq_special :
+  (forall x:t. forall y:t. (eq(x, y) -> (is_not_nan(x) and (is_not_nan(y) and
+  ((tqtisFinite(x) and tqtisFinite(y)) or (is_infinite(x) and
+  (is_infinite(y) and same_sign(x, y))))))))
+
+axiom lt_finite :
+  (forall x:t. forall y:t [lt(x, y)]. ((tqtisFinite(x) and tqtisFinite(y)) ->
+  (lt(x, y) <-> (tqtreal(x) <  tqtreal(y)))))
+
+axiom le_finite :
+  (forall x:t. forall y:t [le(x, y)]. ((tqtisFinite(x) and tqtisFinite(y)) ->
+  (le(x, y) <-> (tqtreal(x) <= tqtreal(y)))))
+
+axiom le_lt_trans :
+  (forall x:t. forall y:t. forall z:t. ((le(x, y) and lt(y, z)) -> lt(x, z)))
+
+axiom lt_le_trans :
+  (forall x:t. forall y:t. forall z:t. ((lt(x, y) and le(y, z)) -> lt(x, z)))
+
+axiom le_ge_asym :
+  (forall x:t. forall y:t. ((le(x, y) and le(y, x)) -> eq(x, y)))
+
+axiom not_lt_ge :
+  (forall x:t. forall y:t. (((not lt(x, y)) and (is_not_nan(x) and
+  is_not_nan(y))) -> le(y, x)))
+
+axiom not_gt_le :
+  (forall x:t. forall y:t. (((not lt(y, x)) and (is_not_nan(x) and
+  is_not_nan(y))) -> le(x, y)))
+
+axiom le_special :
+  (forall x:t. forall y:t [le(x, y)]. (le(x, y) -> ((tqtisFinite(x) and
+  tqtisFinite(y)) or ((is_minus_infinity(x) and is_not_nan(y)) or
+  (is_not_nan(x) and is_plus_infinity(y))))))
+
+axiom lt_special :
+  (forall x:t. forall y:t [lt(x, y)]. (lt(x, y) -> ((tqtisFinite(x) and
+  tqtisFinite(y)) or ((is_minus_infinity(x) and (is_not_nan(y) and
+  (not is_minus_infinity(y)))) or (is_not_nan(x) and
+  ((not is_plus_infinity(x)) and is_plus_infinity(y)))))))
+
+axiom lt_lt_finite :
+  (forall x:t. forall y:t. forall z:t. (lt(x, y) -> (lt(y, z) ->
+  tqtisFinite(y))))
+
+axiom positive_to_real :
+  (forall x:t [is_positive(x)]. (tqtisFinite(x) -> (is_positive(x) ->
+  (0.0 <= tqtreal(x)))))
+
+axiom to_real_positive :
+  (forall x:t [is_positive(x)]. (tqtisFinite(x) -> ((0.0 <  tqtreal(x)) ->
+  is_positive(x))))
+
+axiom negative_to_real :
+  (forall x:t [is_negative(x)]. (tqtisFinite(x) -> (is_negative(x) ->
+  (tqtreal(x) <= 0.0))))
+
+axiom to_real_negative :
+  (forall x:t [is_negative(x)]. (tqtisFinite(x) -> ((tqtreal(x) <  0.0) ->
+  is_negative(x))))
+
+axiom negative_xor_positive :
+  (forall x:t. (not (is_positive(x) and is_negative(x))))
+
+axiom negative_or_positive :
+  (forall x:t. (is_not_nan(x) -> (is_positive(x) or is_negative(x))))
+
+axiom diff_sign_trans :
+  (forall x:t. forall y:t. forall z:t. ((diff_sign(x, y) and diff_sign(y,
+  z)) -> same_sign(x, z)))
+
+axiom diff_sign_product :
+  (forall x:t. forall y:t. ((tqtisFinite(x) and (tqtisFinite(y) and
+  ((tqtreal(x) * tqtreal(y)) <  0.0))) -> diff_sign(x, y)))
+
+axiom same_sign_product :
+  (forall x:t. forall y:t. ((tqtisFinite(x) and (tqtisFinite(y) and
+  same_sign(x, y))) -> (0.0 <= (tqtreal(x) * tqtreal(y)))))
+
+predicate product_sign(z: t, x: t, y: t) = ((same_sign(x, y) ->
+  is_positive(z)) and (diff_sign(x, y) -> is_negative(z)))
+
+predicate overflow_value(m: fpa_rounding_mode, x: t) =
+  ((((((m = NearestTiesToEven) -> is_infinite(x)) and
+  ((m = NearestTiesToAway) -> is_infinite(x))) and ((m = Up) ->
+  ((is_positive(x) -> is_infinite(x)) and ((not is_positive(x)) ->
+  (tqtisFinite(x) and (tqtreal(x) = (-0x1.FFFFFFFFFFFFFp1023))))))) and
+  ((m = Down) -> ((is_positive(x) -> (tqtisFinite(x) and
+  (tqtreal(x) = 0x1.FFFFFFFFFFFFFp1023))) and ((not is_positive(x)) ->
+  is_infinite(x))))) and ((m = ToZero) -> ((is_positive(x) ->
+  (tqtisFinite(x) and (tqtreal(x) = 0x1.FFFFFFFFFFFFFp1023))) and
+  ((not is_positive(x)) -> (tqtisFinite(x) and
+  (tqtreal(x) = (-0x1.FFFFFFFFFFFFFp1023)))))))
+
+predicate sign_zero_result(m: fpa_rounding_mode, x: t) = (is_zero(x) ->
+  ((((((m = NearestTiesToEven) -> is_positive(x)) and
+  ((m = NearestTiesToAway) -> is_positive(x))) and ((m = Up) ->
+  is_positive(x))) and ((m = Down) -> is_negative(x))) and ((m = ToZero) ->
+  is_positive(x))))
+
+axiom add_finite :
+  (forall m:fpa_rounding_mode. forall x:t. forall y:t [add(m, x, y)].
+  (tqtisFinite(x) -> (tqtisFinite(y) ->
+  (in_range(float64(m,(tqtreal(x) + tqtreal(y)))) -> (tqtisFinite(add(m, x,
+  y)) and (tqtreal(add(m, x, y)) = float64(m,(tqtreal(x) + tqtreal(y)))))))))
+
+axiom add_finite_rev :
+  (forall m:fpa_rounding_mode. forall x:t. forall y:t [add(m, x, y)].
+  (tqtisFinite(add(m, x, y)) -> (tqtisFinite(x) and tqtisFinite(y))))
+
+axiom add_finite_rev_n :
+  (forall m:fpa_rounding_mode. forall x:t. forall y:t [add(m, x, y)].
+  (to_nearest(m) -> (tqtisFinite(add(m, x, y)) ->
+  (in_range(float64(m,(tqtreal(x) + tqtreal(y)))) and (tqtreal(add(m, x,
+  y)) = float64(m,(tqtreal(x) + tqtreal(y))))))))
+
+axiom sub_finite :
+  (forall m:fpa_rounding_mode. forall x:t. forall y:t [sub(m, x, y)].
+  (tqtisFinite(x) -> (tqtisFinite(y) ->
+  (in_range(float64(m,(tqtreal(x) - tqtreal(y)))) -> (tqtisFinite(sub(m, x,
+  y)) and (tqtreal(sub(m, x, y)) = float64(m,(tqtreal(x) - tqtreal(y)))))))))
+
+axiom sub_finite_rev :
+  (forall m:fpa_rounding_mode. forall x:t. forall y:t [sub(m, x, y)].
+  (tqtisFinite(sub(m, x, y)) -> (tqtisFinite(x) and tqtisFinite(y))))
+
+axiom sub_finite_rev_n :
+  (forall m:fpa_rounding_mode. forall x:t. forall y:t [sub(m, x, y)].
+  (to_nearest(m) -> (tqtisFinite(sub(m, x, y)) ->
+  (in_range(float64(m,(tqtreal(x) - tqtreal(y)))) and (tqtreal(sub(m, x,
+  y)) = float64(m,(tqtreal(x) - tqtreal(y))))))))
+
+axiom mul_finite :
+  (forall m:fpa_rounding_mode. forall x:t. forall y:t [mul(m, x, y)].
+  (tqtisFinite(x) -> (tqtisFinite(y) ->
+  (in_range(float64(m,(tqtreal(x) * tqtreal(y)))) -> (tqtisFinite(mul(m, x,
+  y)) and (tqtreal(mul(m, x, y)) = float64(m,(tqtreal(x) * tqtreal(y)))))))))
+
+axiom mul_finite_rev :
+  (forall m:fpa_rounding_mode. forall x:t. forall y:t [mul(m, x, y)].
+  (tqtisFinite(mul(m, x, y)) -> (tqtisFinite(x) and tqtisFinite(y))))
+
+axiom mul_finite_rev_n :
+  (forall m:fpa_rounding_mode. forall x:t. forall y:t [mul(m, x, y)].
+  (to_nearest(m) -> (tqtisFinite(mul(m, x, y)) ->
+  (in_range(float64(m,(tqtreal(x) * tqtreal(y)))) and (tqtreal(mul(m, x,
+  y)) = float64(m,(tqtreal(x) * tqtreal(y))))))))
+
+axiom div_finite :
+  (forall m:fpa_rounding_mode. forall x:t. forall y:t [div(m, x, y)].
+  (tqtisFinite(x) -> (tqtisFinite(y) -> ((not is_zero(y)) ->
+  (in_range(float64(m,(tqtreal(x) / tqtreal(y)))) -> (tqtisFinite(div(m, x,
+  y)) and (tqtreal(div(m, x,
+  y)) = float64(m,(tqtreal(x) / tqtreal(y))))))))))
+
+axiom div_finite_rev :
+  (forall m:fpa_rounding_mode. forall x:t. forall y:t [div(m, x, y)].
+  (tqtisFinite(div(m, x, y)) -> ((tqtisFinite(x) and (tqtisFinite(y) and
+  (not is_zero(y)))) or (tqtisFinite(x) and (is_infinite(y) and
+  (tqtreal(div(m, x, y)) = 0.0))))))
+
+axiom div_finite_rev_n :
+  (forall m:fpa_rounding_mode. forall x:t. forall y:t [div(m, x, y)].
+  (to_nearest(m) -> (tqtisFinite(div(m, x, y)) -> (tqtisFinite(y) ->
+  (in_range(float64(m,(tqtreal(x) / tqtreal(y)))) and (tqtreal(div(m, x,
+  y)) = float64(m,(tqtreal(x) / tqtreal(y)))))))))
+
+axiom neg_finite :
+  (forall x:t [neg(x)]. (tqtisFinite(x) -> (tqtisFinite(neg(x)) and
+  (tqtreal(neg(x)) = (-tqtreal(x))))))
+
+axiom neg_finite_rev :
+  (forall x:t [neg(x)]. (tqtisFinite(neg(x)) -> (tqtisFinite(x) and
+  (tqtreal(neg(x)) = (-tqtreal(x))))))
+
+axiom abs_finite :
+  (forall x:t [abs(x)]. (tqtisFinite(x) -> (tqtisFinite(abs(x)) and
+  ((tqtreal(abs(x)) = abs_real(tqtreal(x))) and is_positive(abs(x))))))
+
+axiom abs_finite_rev :
+  (forall x:t [abs(x)]. (tqtisFinite(abs(x)) -> (tqtisFinite(x) and
+  (tqtreal(abs(x)) = abs_real(tqtreal(x))))))
+
+axiom abs_universal : (forall x:t [abs(x)]. (not is_negative(abs(x))))
+
+axiom fma_finite :
+  (forall m:fpa_rounding_mode. forall x:t. forall y:t. forall z:t [fma(m, x,
+  y, z)]. (tqtisFinite(x) -> (tqtisFinite(y) -> (tqtisFinite(z) ->
+  (in_range(float64(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))) ->
+  (tqtisFinite(fma(m, x, y, z)) and (tqtreal(fma(m, x, y,
+  z)) = float64(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z))))))))))
+
+axiom fma_finite_rev :
+  (forall m:fpa_rounding_mode. forall x:t. forall y:t. forall z:t [fma(m, x,
+  y, z)]. (tqtisFinite(fma(m, x, y, z)) -> (tqtisFinite(x) and
+  (tqtisFinite(y) and tqtisFinite(z)))))
+
+axiom fma_finite_rev_n :
+  (forall m:fpa_rounding_mode. forall x:t. forall y:t. forall z:t [fma(m, x,
+  y, z)]. (to_nearest(m) -> (tqtisFinite(fma(m, x, y, z)) ->
+  (in_range(float64(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))) and
+  (tqtreal(fma(m, x, y,
+  z)) = float64(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z))))))))
+
+function sqr(x: real) : real = (x * x)
+
+axiom Sqrt_positive : (forall x:real. ((0.0 <= x) -> (0.0 <= sqrt_real(x))))
+
+axiom Sqrt_square : (forall x:real. ((0.0 <= x) -> (sqr(sqrt_real(x)) = x)))
+
+axiom Square_sqrt : (forall x:real. ((0.0 <= x) -> (sqrt_real((x * x)) = x)))
+
+axiom Sqrt_mul :
+  (forall x:real. forall y:real. (((0.0 <= x) and (0.0 <= y)) ->
+  (sqrt_real((x * y)) = (sqrt_real(x) * sqrt_real(y)))))
+
+axiom Sqrt_le :
+  (forall x:real. forall y:real. (((0.0 <= x) and (x <= y)) ->
+  (sqrt_real(x) <= sqrt_real(y))))
+
+axiom sqrt_finite :
+  (forall m:fpa_rounding_mode. forall x:t [sqrt(m, x)]. (tqtisFinite(x) ->
+  ((0.0 <= tqtreal(x)) -> (tqtisFinite(sqrt(m, x)) and (tqtreal(sqrt(m,
+  x)) = float64(m,sqrt_real(tqtreal(x))))))))
+
+axiom sqrt_finite_rev :
+  (forall m:fpa_rounding_mode. forall x:t [sqrt(m, x)]. (tqtisFinite(sqrt(m,
+  x)) -> (tqtisFinite(x) and ((0.0 <= tqtreal(x)) and (tqtreal(sqrt(m,
+  x)) = float64(m,sqrt_real(tqtreal(x))))))))
+
+predicate same_sign_real(x: t, r: real) = ((is_positive(x) and (0.0 <  r)) or
+  (is_negative(x) and (r <  0.0)))
+
+axiom add_special :
+  (forall m:fpa_rounding_mode. forall x:t. forall y:t [add(m, x, y)].
+  (((is_nan(x) or is_nan(y)) -> is_nan(add(m, x, y))) and
+  (((tqtisFinite(x) and is_infinite(y)) -> (is_infinite(add(m, x, y)) and
+  same_sign(add(m, x, y), y))) and (((is_infinite(x) and tqtisFinite(y)) ->
+  (is_infinite(add(m, x, y)) and same_sign(add(m, x, y), x))) and
+  (((is_infinite(x) and (is_infinite(y) and same_sign(x, y))) ->
+  (is_infinite(add(m, x, y)) and same_sign(add(m, x, y), x))) and
+  (((is_infinite(x) and (is_infinite(y) and diff_sign(x, y))) ->
+  is_nan(add(m, x, y))) and (((tqtisFinite(x) and (tqtisFinite(y) and
+  (not in_range(float64(m,(tqtreal(x) + tqtreal(y))))))) ->
+  (same_sign_real(add(m, x, y), (tqtreal(x) + tqtreal(y))) and
+  overflow_value(m, add(m, x, y)))) and ((tqtisFinite(x) and
+  tqtisFinite(y)) -> ((same_sign(x, y) -> same_sign(add(m, x, y), x)) and
+  ((not same_sign(x, y)) -> sign_zero_result(m, add(m, x, y))))))))))))
+
+axiom sub_special :
+  (forall m:fpa_rounding_mode. forall x:t. forall y:t [sub(m, x, y)].
+  (((is_nan(x) or is_nan(y)) -> is_nan(sub(m, x, y))) and
+  (((tqtisFinite(x) and is_infinite(y)) -> (is_infinite(sub(m, x, y)) and
+  diff_sign(sub(m, x, y), y))) and (((is_infinite(x) and tqtisFinite(y)) ->
+  (is_infinite(sub(m, x, y)) and same_sign(sub(m, x, y), x))) and
+  (((is_infinite(x) and (is_infinite(y) and same_sign(x, y))) ->
+  is_nan(sub(m, x, y))) and (((is_infinite(x) and (is_infinite(y) and
+  diff_sign(x, y))) -> (is_infinite(sub(m, x, y)) and same_sign(sub(m, x, y),
+  x))) and (((tqtisFinite(x) and (tqtisFinite(y) and
+  (not in_range(float64(m,(tqtreal(x) - tqtreal(y))))))) ->
+  (same_sign_real(sub(m, x, y), (tqtreal(x) - tqtreal(y))) and
+  overflow_value(m, sub(m, x, y)))) and ((tqtisFinite(x) and
+  tqtisFinite(y)) -> ((diff_sign(x, y) -> same_sign(sub(m, x, y), x)) and
+  ((not diff_sign(x, y)) -> sign_zero_result(m, sub(m, x, y))))))))))))
+
+axiom mul_special :
+  (forall m:fpa_rounding_mode. forall x:t. forall y:t [mul(m, x, y)].
+  (((is_nan(x) or is_nan(y)) -> is_nan(mul(m, x, y))) and (((is_zero(x) and
+  is_infinite(y)) -> is_nan(mul(m, x, y))) and (((tqtisFinite(x) and
+  (is_infinite(y) and (not is_zero(x)))) -> is_infinite(mul(m, x, y))) and
+  (((is_infinite(x) and is_zero(y)) -> is_nan(mul(m, x, y))) and
+  (((is_infinite(x) and (tqtisFinite(y) and (not is_zero(y)))) ->
+  is_infinite(mul(m, x, y))) and (((is_infinite(x) and is_infinite(y)) ->
+  is_infinite(mul(m, x, y))) and (((tqtisFinite(x) and (tqtisFinite(y) and
+  (not in_range(float64(m,(tqtreal(x) * tqtreal(y))))))) -> overflow_value(m,
+  mul(m, x, y))) and ((not is_nan(mul(m, x, y))) -> product_sign(mul(m, x,
+  y), x, y))))))))))
+
+axiom div_special :
+  (forall m:fpa_rounding_mode. forall x:t. forall y:t [div(m, x, y)].
+  (((is_nan(x) or is_nan(y)) -> is_nan(div(m, x, y))) and
+  (((tqtisFinite(x) and is_infinite(y)) -> is_zero(div(m, x, y))) and
+  (((is_infinite(x) and tqtisFinite(y)) -> is_infinite(div(m, x, y))) and
+  (((is_infinite(x) and is_infinite(y)) -> is_nan(div(m, x, y))) and
+  (((tqtisFinite(x) and (tqtisFinite(y) and ((not is_zero(y)) and
+  (not in_range(float64(m,(tqtreal(x) / tqtreal(y)))))))) ->
+  overflow_value(m, div(m, x, y))) and (((tqtisFinite(x) and (is_zero(y) and
+  (not is_zero(x)))) -> is_infinite(div(m, x, y))) and (((is_zero(x) and
+  is_zero(y)) -> is_nan(div(m, x, y))) and ((not is_nan(div(m, x, y))) ->
+  product_sign(div(m, x, y), x, y))))))))))
+
+axiom neg_special :
+  (forall x:t [neg(x)]. ((is_nan(x) -> is_nan(neg(x))) and
+  ((is_infinite(x) -> is_infinite(neg(x))) and ((not is_nan(x)) ->
+  diff_sign(x, neg(x))))))
+
+axiom abs_special :
+  (forall x:t [abs(x)]. ((is_nan(x) -> is_nan(abs(x))) and
+  ((is_infinite(x) -> is_infinite(abs(x))) and ((not is_nan(x)) ->
+  is_positive(abs(x))))))
+
+axiom fma_special :
+  (forall m:fpa_rounding_mode. forall x:t. forall y:t. forall z:t [fma(m, x,
+  y, z)]. (((is_nan(x) or (is_nan(y) or is_nan(z))) -> is_nan(fma(m, x, y,
+  z))) and (((is_zero(x) and is_infinite(y)) -> is_nan(fma(m, x, y, z))) and
+  (((is_infinite(x) and is_zero(y)) -> is_nan(fma(m, x, y, z))) and
+  (((tqtisFinite(x) and ((not is_zero(x)) and (is_infinite(y) and
+  tqtisFinite(z)))) -> (is_infinite(fma(m, x, y, z)) and product_sign(fma(m,
+  x, y, z), x, y))) and (((tqtisFinite(x) and ((not is_zero(x)) and
+  (is_infinite(y) and is_infinite(z)))) -> ((product_sign(z, x, y) ->
+  (is_infinite(fma(m, x, y, z)) and same_sign(fma(m, x, y, z), z))) and
+  ((not product_sign(z, x, y)) -> is_nan(fma(m, x, y, z))))) and
+  (((is_infinite(x) and (tqtisFinite(y) and ((not is_zero(y)) and
+  tqtisFinite(z)))) -> (is_infinite(fma(m, x, y, z)) and product_sign(fma(m,
+  x, y, z), x, y))) and (((is_infinite(x) and (tqtisFinite(y) and
+  ((not is_zero(y)) and is_infinite(z)))) -> ((product_sign(z, x, y) ->
+  (is_infinite(fma(m, x, y, z)) and same_sign(fma(m, x, y, z), z))) and
+  ((not product_sign(z, x, y)) -> is_nan(fma(m, x, y, z))))) and
+  (((is_infinite(x) and (is_infinite(y) and tqtisFinite(z))) ->
+  (is_infinite(fma(m, x, y, z)) and product_sign(fma(m, x, y, z), x, y))) and
+  (((tqtisFinite(x) and (tqtisFinite(y) and is_infinite(z))) ->
+  (is_infinite(fma(m, x, y, z)) and same_sign(fma(m, x, y, z), z))) and
+  (((is_infinite(x) and (is_infinite(y) and is_infinite(z))) ->
+  ((product_sign(z, x, y) -> (is_infinite(fma(m, x, y, z)) and
+  same_sign(fma(m, x, y, z), z))) and ((not product_sign(z, x, y)) ->
+  is_nan(fma(m, x, y, z))))) and (((tqtisFinite(x) and (tqtisFinite(y) and
+  (tqtisFinite(z) and
+  (not in_range(float64(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))))))) ->
+  (same_sign_real(fma(m, x, y, z),
+  ((tqtreal(x) * tqtreal(y)) + tqtreal(z))) and overflow_value(m, fma(m, x,
+  y, z)))) and ((tqtisFinite(x) and (tqtisFinite(y) and tqtisFinite(z))) ->
+  ((product_sign(z, x, y) -> same_sign(fma(m, x, y, z), z)) and
+  ((not product_sign(z, x, y)) ->
+  ((((tqtreal(x) * tqtreal(y)) + tqtreal(z)) = 0.0) -> (((m = Down) ->
+  is_negative(fma(m, x, y, z))) and ((not (m = Down)) -> is_positive(fma(m,
+  x, y, z))))))))))))))))))))
+
+axiom sqrt_special :
+  (forall m:fpa_rounding_mode. forall x:t [sqrt(m, x)]. ((is_nan(x) ->
+  is_nan(sqrt(m, x))) and ((is_plus_infinity(x) -> is_plus_infinity(sqrt(m,
+  x))) and ((is_minus_infinity(x) -> is_nan(sqrt(m, x))) and
+  (((tqtisFinite(x) and (tqtreal(x) <  0.0)) -> is_nan(sqrt(m, x))) and
+  ((is_zero(x) -> same_sign(sqrt(m, x), x)) and ((tqtisFinite(x) and
+  (0.0 <  tqtreal(x))) -> is_positive(sqrt(m, x)))))))))
+
+axiom of_int_add_exact :
+  (forall m:fpa_rounding_mode. forall n:fpa_rounding_mode. forall i:int.
+  forall j:int. (in_safe_int_range(i) -> (in_safe_int_range(j) ->
+  (in_safe_int_range((i + j)) -> eq(of_int(m, (i + j)), add(n, of_int(m, i),
+  of_int(m, j)))))))
+
+axiom of_int_sub_exact :
+  (forall m:fpa_rounding_mode. forall n:fpa_rounding_mode. forall i:int.
+  forall j:int. (in_safe_int_range(i) -> (in_safe_int_range(j) ->
+  (in_safe_int_range((i - j)) -> eq(of_int(m, (i - j)), sub(n, of_int(m, i),
+  of_int(m, j)))))))
+
+axiom of_int_mul_exact :
+  (forall m:fpa_rounding_mode. forall n:fpa_rounding_mode. forall i:int.
+  forall j:int. (in_safe_int_range(i) -> (in_safe_int_range(j) ->
+  (in_safe_int_range((i * j)) -> eq(of_int(m, (i * j)), mul(n, of_int(m, i),
+  of_int(m, j)))))))
+
+axiom Min_r : (forall x:t. forall y:t. (le(y, x) -> eq(min(x, y), y)))
+
+axiom Min_l : (forall x:t. forall y:t. (le(x, y) -> eq(min(x, y), x)))
+
+axiom Max_r : (forall x:t. forall y:t. (le(y, x) -> eq(max(x, y), x)))
+
+axiom Max_l : (forall x:t. forall y:t. (le(x, y) -> eq(max(x, y), y)))
+
+logic is_int : t -> prop
+
+axiom zeroF_is_int : is_int(zeroF)
+
+axiom of_int_is_int :
+  (forall m:fpa_rounding_mode. forall x:int. (in_int_range(x) ->
+  is_int(of_int(m, x))))
+
+axiom big_float_is_int :
+  (forall m:fpa_rounding_mode. forall i:t. (tqtisFinite(i) -> ((le(i,
+  neg(of_int(m, 9007199254740992))) or le(of_int(m, 9007199254740992), i)) ->
+  is_int(i))))
+
+axiom roundToIntegral_is_int :
+  (forall m:fpa_rounding_mode. forall x:t. (tqtisFinite(x) ->
+  is_int(roundToIntegral(m, x))))
+
+axiom eq_is_int :
+  (forall x:t. forall y:t. (eq(x, y) -> (is_int(x) -> is_int(y))))
+
+axiom add_int :
+  (forall x:t. forall y:t. forall m:fpa_rounding_mode. (is_int(x) ->
+  (is_int(y) -> (tqtisFinite(add(m, x, y)) -> is_int(add(m, x, y))))))
+
+axiom sub_int :
+  (forall x:t. forall y:t. forall m:fpa_rounding_mode. (is_int(x) ->
+  (is_int(y) -> (tqtisFinite(sub(m, x, y)) -> is_int(sub(m, x, y))))))
+
+axiom mul_int :
+  (forall x:t. forall y:t. forall m:fpa_rounding_mode. (is_int(x) ->
+  (is_int(y) -> (tqtisFinite(mul(m, x, y)) -> is_int(mul(m, x, y))))))
+
+axiom fma_int :
+  (forall x:t. forall y:t. forall z:t. forall m:fpa_rounding_mode.
+  (is_int(x) -> (is_int(y) -> (is_int(z) -> (tqtisFinite(fma(m, x, y, z)) ->
+  is_int(fma(m, x, y, z)))))))
+
+axiom neg_int : (forall x:t. (is_int(x) -> is_int(neg(x))))
+
+axiom abs_int1 : (forall x:t. (is_int(x) -> is_int(abs(x))))
+
+axiom is_int_of_int :
+  (forall x:t. forall m:fpa_rounding_mode. forall mqt:fpa_rounding_mode.
+  (is_int(x) -> eq(x, of_int(mqt, to_int(m, x)))))
+
+axiom is_int_to_int :
+  (forall m:fpa_rounding_mode. forall x:t. (is_int(x) ->
+  in_int_range(to_int(m, x))))
+
+axiom is_int_is_finite : (forall x:t. (is_int(x) -> tqtisFinite(x)))
+
+axiom int_to_real :
+  (forall m:fpa_rounding_mode. forall x:t. (is_int(x) ->
+  (tqtreal(x) = real_of_int(to_int(m, x)))))
+
+axiom truncate_int :
+  (forall m:fpa_rounding_mode. forall i:t. (is_int(i) ->
+  eq(roundToIntegral(m, i), i)))
+
+axiom truncate_neg :
+  (forall x:t. (tqtisFinite(x) -> (is_negative(x) -> (roundToIntegral(ToZero,
+  x) = roundToIntegral(Up, x)))))
+
+axiom truncate_pos :
+  (forall x:t. (tqtisFinite(x) -> (is_positive(x) -> (roundToIntegral(ToZero,
+  x) = roundToIntegral(Down, x)))))
+
+axiom ceil_le :
+  (forall x:t. (tqtisFinite(x) -> le(x, roundToIntegral(Up, x))))
+
+axiom ceil_lest :
+  (forall x:t. forall y:t. ((le(x, y) and is_int(y)) ->
+  le(roundToIntegral(Up, x), y)))
+
+axiom ceil_to_real :
+  (forall x:t. (tqtisFinite(x) -> (tqtreal(roundToIntegral(Up,
+  x)) = real_of_int(ceil(tqtreal(x))))))
+
+axiom ceil_to_int :
+  (forall m:fpa_rounding_mode. forall x:t. (tqtisFinite(x) -> (to_int(m,
+  roundToIntegral(Up, x)) = ceil(tqtreal(x)))))
+
+axiom floor_le :
+  (forall x:t. (tqtisFinite(x) -> le(roundToIntegral(Down, x), x)))
+
+axiom floor_lest :
+  (forall x:t. forall y:t. ((le(y, x) and is_int(y)) -> le(y,
+  roundToIntegral(Down, x))))
+
+axiom floor_to_real :
+  (forall x:t. (tqtisFinite(x) -> (tqtreal(roundToIntegral(Down,
+  x)) = real_of_int(floor(tqtreal(x))))))
+
+axiom floor_to_int :
+  (forall m:fpa_rounding_mode. forall x:t. (tqtisFinite(x) -> (to_int(m,
+  roundToIntegral(Down, x)) = floor(tqtreal(x)))))
+
+axiom RNA_down :
+  (forall x:t. (lt(sub(NearestTiesToEven, x, roundToIntegral(Down, x)),
+  sub(NearestTiesToEven, roundToIntegral(Up, x), x)) ->
+  (roundToIntegral(NearestTiesToAway, x) = roundToIntegral(Down, x))))
+
+axiom RNA_up :
+  (forall x:t. (lt(sub(NearestTiesToEven, roundToIntegral(Up, x), x),
+  sub(NearestTiesToEven, x, roundToIntegral(Down, x))) ->
+  (roundToIntegral(NearestTiesToAway, x) = roundToIntegral(Up, x))))
+
+axiom RNA_down_tie :
+  (forall x:t. (eq(sub(NearestTiesToEven, x, roundToIntegral(Down, x)),
+  sub(NearestTiesToEven, roundToIntegral(Up, x), x)) -> (is_negative(x) ->
+  (roundToIntegral(NearestTiesToAway, x) = roundToIntegral(Down, x)))))
+
+axiom RNA_up_tie :
+  (forall x:t. (eq(sub(NearestTiesToEven, roundToIntegral(Up, x), x),
+  sub(NearestTiesToEven, x, roundToIntegral(Down, x))) -> (is_positive(x) ->
+  (roundToIntegral(NearestTiesToAway, x) = roundToIntegral(Up, x)))))
+
+axiom to_int_roundToIntegral :
+  (forall m:fpa_rounding_mode. forall x:t. (to_int(m, x) = to_int(m,
+  roundToIntegral(m, x))))
+
+axiom to_int_monotonic :
+  (forall m:fpa_rounding_mode. forall x:t. forall y:t. (tqtisFinite(x) ->
+  (tqtisFinite(y) -> (le(x, y) -> (to_int(m, x) <= to_int(m, y))))))
+
+axiom to_int_of_int :
+  (forall m:fpa_rounding_mode. forall i:int. (in_safe_int_range(i) ->
+  (to_int(m, of_int(m, i)) = i)))
+
+axiom eq_to_int :
+  (forall m:fpa_rounding_mode. forall x:t. forall y:t. (tqtisFinite(x) ->
+  (eq(x, y) -> (to_int(m, x) = to_int(m, y)))))
+
+axiom neg_to_int :
+  (forall m:fpa_rounding_mode. forall x:t. (is_int(x) -> (to_int(m,
+  neg(x)) = (-to_int(m, x)))))
+
+axiom roundToIntegral_is_finite :
+  (forall m:fpa_rounding_mode. forall x:t. (tqtisFinite(x) ->
+  tqtisFinite(roundToIntegral(m, x))))
+
+axiom round_bound_ne :
+  (forall x:real [float64(NearestTiesToEven,x)].
+  (in_range(float64(NearestTiesToEven,x)) ->
+  ((((x - (0x1.0p-53 * abs_real(x))) - 0x1.0p-1075) <= float64(NearestTiesToEven,x)) and
+  (float64(NearestTiesToEven,x) <= ((x + (0x1.0p-53 * abs_real(x))) + 0x1.0p-1075)))))
+
+axiom round_bound :
+  (forall m:fpa_rounding_mode. forall x:real [float64(m,x)].
+  (in_range(float64(m,x)) ->
+  ((((x - (0x1.0p-52 * abs_real(x))) - 0x1.0p-1074) <= float64(m,x)) and
+  (float64(m,x) <= ((x + (0x1.0p-52 * abs_real(x))) + 0x1.0p-1074)))))
+
+predicate neq(x: t, y: t) = (not eq(x, y))
+
+logic bool_lt : t, t -> bool
+
+axiom bool_lt_def :
+  (forall x:t. forall y:t [bool_lt(x, y)]. ((lt(x, y) -> (bool_lt(x,
+  y) = true)) and ((not lt(x, y)) -> (bool_lt(x, y) = false))))
+
+logic bool_le : t, t -> bool
+
+axiom bool_le_def :
+  (forall x:t. forall y:t [bool_le(x, y)]. ((le(x, y) -> (bool_le(x,
+  y) = true)) and ((not le(x, y)) -> (bool_le(x, y) = false))))
+
+logic bool_gt : t, t -> bool
+
+axiom bool_gt_def :
+  (forall x:t. forall y:t [bool_gt(x, y)]. ((lt(y, x) -> (bool_gt(x,
+  y) = true)) and ((not lt(y, x)) -> (bool_gt(x, y) = false))))
+
+logic bool_ge : t, t -> bool
+
+axiom bool_ge_def :
+  (forall x:t. forall y:t [bool_ge(x, y)]. ((le(y, x) -> (bool_ge(x,
+  y) = true)) and ((not le(y, x)) -> (bool_ge(x, y) = false))))
+
+logic bool_eq : t, t -> bool
+
+axiom bool_eq_def :
+  (forall x:t. forall y:t [bool_eq(x, y)]. ((eq(x, y) -> (bool_eq(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq(x, y) = false))))
+
+logic bool_neq : t, t -> bool
+
+axiom bool_neq_def :
+  (forall x:t. forall y:t [bool_neq(x, y)]. (((not eq(x, y)) -> (bool_neq(x,
+  y) = true)) and (eq(x, y) -> (bool_neq(x, y) = false))))
+
+logic rem : t, t -> t
+
+logic fliteral : t
+
+axiom fliteral_axiom : (tqtisFinite(fliteral) and (tqtreal(fliteral) = 1.0))
+
+axiom one_is_int : is_int(fliteral)
+
+axiom one_of_int : (fliteral = of_int(NearestTiesToAway, 1))
+
+type t__ref = { t__content : t
+}
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
+logic to_int1 : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int1(b)]. (((b = true) -> (to_int1(b) = 1)) and
+  ((not (b = true)) -> (to_int1(b) = 0))))
+
+logic of_int1 : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
+  ((not (i = 0)) -> (of_int1(i) = true))))
+
+predicate in_range1(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type long_float
+
+logic bool_eq2 : t, t -> bool
+
+axiom bool_eq_def2 :
+  (forall x:t. forall y:t [bool_eq2(x, y)]. ((eq(x, y) -> (bool_eq2(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq2(x, y) = false))))
+
+logic user_eq : long_float, long_float -> bool
+
+logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> t
+
+logic dummy : long_float
+
+type long_float__ref = { long_float__content : long_float
+}
+
+function long_float__ref___projection(a: long_float__ref) : long_float =
+  (a).long_float__content
+
+type ft
+
+logic bool_eq3 : t, t -> bool
+
+axiom bool_eq_def3 :
+  (forall x:t. forall y:t [bool_eq3(x, y)]. ((eq(x, y) -> (bool_eq3(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq3(x, y) = false))))
+
+logic user_eq1 : ft, ft -> bool
+
+logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> t
+
+logic dummy1 : ft
+
+type ft__ref = { ft__content : ft
+}
+
+function ft__ref_2__projection(a: ft__ref) : ft = (a).ft__content
+
+logic x : t
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+ (* File "generic_interval_tests.adb", line 18, characters 0-0 *)
+goal WP_parameter_def : (tqtisFinite(x) -> tqtisFinite(mul(NearestTiesToEven,
+  x, x)))

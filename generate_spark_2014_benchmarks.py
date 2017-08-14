@@ -315,7 +315,9 @@ def extract_benchmark(test):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("prover", choices=["cvc4", "cvc4_oldfp",
-                                       "z3", "alt-ergo", "colibri"])
+                                       "z3",
+                                       "alt-ergo", "alt-ergo-fp",
+                                       "colibri"])
     ap.add_argument("--testsuite",
                     default=autodetect_spark_testsuite(),
                     help="root of the spark 2014 testsuite")
@@ -339,7 +341,11 @@ def main():
     if options.prover == "cvc4_oldfp":
         prover = "oldfp"
         driver = "cvc4_gnatprove_oldfloat.drv"
-        faker = "fake_cvc4"
+        faker  = "fake_cvc4"
+    elif options.prover == "alt-ergo-fp":
+        prover = options.prover
+        driver = "alt_ergo_fp.drv"
+        faker  = "fake_alt-ergo"
     else:
         prover = options.prover
         driver = "%s_gnatprove.drv" % prover
@@ -357,9 +363,10 @@ def main():
         if not os.path.exists(output):
             os.mkdir(output)
     suffix = {
-        "z3"       : "_z3",
-        "alt-ergo" : "_altergo",
-        "oldfp"    : "_oldfp",
+        "z3"          : "_z3",
+        "alt-ergo"    : "_altergo",
+        "oldfp"       : "_oldfp",
+        "alt-ergo-fp" : "_altergo_fp"
     }.get(prover, "")
 
     tests = [{"dir"    : os.path.normpath(os.path.join(options.testsuite,
