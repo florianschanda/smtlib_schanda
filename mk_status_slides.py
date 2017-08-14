@@ -66,12 +66,14 @@ def mk_bench_name(cat):
 def mk_solver_name(nam):
     return {
         "vbs"          : "Virtual best",
-        "cvc4"         : "{\sc cvc4}",
+        "cvc4"         : "{\\sc cvc4} (${\\mathbb F}$)",
         "z3"           : "Z3",
         "colibri"      : "Colibri",
         "mathsat"      : "MathSAT",
         "mathsat_acdl" : "MathSAT (ACDL)",
         "altergo"      : "Alt-Ergo 1.3",
+        "altergo-fp"   : "Alt-Ergo FPA",
+        "oldfp"        : "{\\sc cvc4} (${\\mathbb R}$ + round)"
     }.get(nam, nam)
 
 def mk_coloring(criteria):
@@ -652,6 +654,9 @@ def mk_cactus_slides(fd):
             for g in GROUPS:
                 if group is not None and group != g:
                     continue
+                if not data["group_summary"][g]["participated"]:
+                    continue
+
                 expected += data["group_summary"][g]["score"]["solved"]
                 for b in data["group_results"][g]:
                     if data["group_results"][g][b]["score"] == "s":

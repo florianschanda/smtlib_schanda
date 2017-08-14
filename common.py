@@ -396,6 +396,11 @@ def augment_group_result(rv, group, benchmark_status):
                                summary["score"]["timeout"] > 0 or
                                summary["score"]["unsound"] > 0)
 
+    # Special case for the "previous encoding" solver
+    if rv["prover_kind"] == "oldfp":
+        if summary["dialect"] == 0:
+            summary["participated"] = False
+
     bm_total = sum(summary["score"].itervalues())
     for score in SCORES:
         summary["average"][score] = (
