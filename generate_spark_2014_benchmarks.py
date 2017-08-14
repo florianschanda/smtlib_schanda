@@ -370,7 +370,7 @@ def main():
               "output" : output,
               "suffix" : suffix,
               "filter" : options.filter,
-              "ieee"   : prover != "alt-ergo",
+              "ieee"   : prover not in ("alt-ergo", "oldfp"),
               }
              for d in os.listdir(options.testsuite)
              if os.path.isdir(os.path.join(options.testsuite, d)) and
