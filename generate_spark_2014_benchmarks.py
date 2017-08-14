@@ -289,7 +289,8 @@ def extract_benchmark(test):
                 interesting |= (test["filter"] == "z3bitvec" and
                                 interesting_bv)
 
-                if interesting and (dst_root_exists or test["prover"] == "cvc4"):
+                if interesting and (dst_root_exists or
+                                    test["prover"] in ("cvc4", "colibri")):
                     with open(dst, "w") as fd:
                         fd.write(data)
 
