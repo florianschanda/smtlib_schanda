@@ -68,7 +68,7 @@ class Benchmark(object):
 
     def load(self, keep_logic):
         self.data = ""
-        if self.dialect is not None and self.dialect != "altergo":
+        if self.dialect is not None and "altergo" not in self.dialect:
             fn = self.benchmark + "_" + self.dialect
         else:
             fn = self.benchmark
@@ -111,7 +111,7 @@ class Benchmark(object):
         if not self.data.endswith("(exit)\n"):
             self.data += "(exit)\n"
 
-        if self.dialect == "altergo":
+        if self.dialect is not None and "altergo" in self.dialect:
             with open(self.benchmark + "_" + self.dialect, "rU") as fd:
                 self.data = fd.read()
 
@@ -142,14 +142,15 @@ class Prover(object):
 
         benchmark.load(keep_logic = self.logic)
 
-        if self.dialect == "altergo" and benchmark.dialect != "altergo":
-            return ("error", "unsupported", 0.0)
+        if self.dialect is not None and "altergo" in self.dialect:
+            if self.dialect != benchmark.dialect:
+                return ("error", "unsupported", 0.0)
 
         cmd = ["/usr/bin/time",
                '--format=<<<%E | %U>>>',
                "--"] + self.cmd
         if self.temp:
-            if self.dialect == "altergo":
+            if self.dialect is not None and "altergo" in self.dialect:
                 suffix = ".why"
             else:
                 suffix = ".smt2"
@@ -183,7 +184,7 @@ class Prover(object):
         elif len(stdout) == 0:
             status = "error"
             comment = stderr.strip()
-        elif self.dialect == "altergo":
+        elif self.dialect is not None and "altergo" in self.dialect:
             tmp = stdout.strip().splitlines()
             if (len(tmp) == 1 and tmp[0].startswith("File ")):
                 if ":Valid " in tmp[0]:

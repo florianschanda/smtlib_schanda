@@ -75,6 +75,14 @@ def main():
                                ["-max-split", "5"],
                                use_temp=True,
                                use_dialect="altergo"))
+    provers.append(
+        Prover_Kind("altergo-fp",
+                    ["-max-split", "5",
+                     "-use-fpa",
+                     "-prelude",
+                     os.path.abspath("altergo_fp_axioms_2017_08_14.why")],
+                    use_temp=True,
+                    use_dialect="altergo_fp"))
     provers.append(Prover_Kind("yices",
                                ["--mcsat"],
                                use_logic=False,

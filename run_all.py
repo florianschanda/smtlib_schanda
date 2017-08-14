@@ -44,10 +44,12 @@ def main():
 
     bm_suite = "debug" if options.debug else "all"
 
-    for binary in CVC4_VERSIONS:
+    # We skip the very first build now since it doesn't support 2.6 style
+    # datatypes.
+    for binary in CVC4_VERSIONS[1:]:
         # Fast suite skips most versions
         if options.suite == "fast":
-            if binary not in (CVC4_VERSIONS[0], CVC4_VERSIONS[-1]):
+            if binary not in (CVC4_VERSIONS[1], CVC4_VERSIONS[-1]):
                 continue
 
         os.system("./run.py %s --suite=%s cvc4 ./%s" %
@@ -62,6 +64,7 @@ def main():
     # Only all includes colibri and alt-ergo
     if options.suite == "all":
         OTHER_PROVERS.append("altergo")
+        OTHER_PROVERS.append("altergo-fp")
         OTHER_PROVERS.append("colibri")
 
     for prover in OTHER_PROVERS:
@@ -70,6 +73,7 @@ def main():
             "z3"           : "z3_2017_08_02",
             "mathsat_acdl" : "mathsat",
             "altergo"      : "altergo_spark_2017_07_20",
+            "altergo-fp"   : "altergo_fp_2017_08_14",
         }.get(prover, prover)
 
         # Search current directory, then PATH for prover binary
