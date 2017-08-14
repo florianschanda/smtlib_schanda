@@ -1,0 +1,18 @@
+(set-info :smt-lib-version 2.6)
+(set-logic QF_FP)
+(set-info :source |Random FP created by PyMPF|)
+(set-info :license |https://www.gnu.org/licenses/gpl-3.0.html|)
+(set-info :category random)
+(set-info :status unsat)
+;; on high bound (exclusive)
+(declare-const x Float32)
+(assert (= x (fp #b1 #b10011111 #b10111010110101101100011)))
+;; x should be Float32(0xCFDD6B63 [Rational(-7429604864), -7429604864.000000])
+
+(declare-const w Float32)
+(assert (= w ((_ to_fp 8 24) RNE (- 7429604608.0))))
+;; w should be Float32(0xCFDD6B62 [Rational(-7429604352), -7429604352.000000])
+
+(assert (not (distinct x w)))
+(check-sat)
+(exit)

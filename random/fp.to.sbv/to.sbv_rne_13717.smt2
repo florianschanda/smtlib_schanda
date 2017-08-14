@@ -1,0 +1,22 @@
+(set-info :smt-lib-version 2.6)
+(set-logic QF_FPBV)
+(set-info :source |Random FP created by PyMPF|)
+(set-info :license |https://www.gnu.org/licenses/gpl-3.0.html|)
+(set-info :category random)
+(set-info :status unsat)
+;; (fp.to.sbv RNE -halfpoint)
+(declare-const x Float32)
+(assert (= x (fp #b1 #b10010101 #b01110010001010111011011)))
+;; x should be Float32(0xCAB915DB [Rational(-12129755, 2), -6064877.500000])
+
+(declare-const y (_ BitVec 32))
+(assert (= y ((_ fp.to_sbv 32) RNE x)))
+;; y should be -6064878
+
+(declare-const z (_ BitVec 32))
+(assert (= z #b11111111101000110111010100010010))
+;; z should be -6064878
+
+(assert (not (= y z)))
+(check-sat)
+(exit)

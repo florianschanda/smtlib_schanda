@@ -1,0 +1,24 @@
+(set-info :smt-lib-version 2.6)
+(set-logic QF_FPBV)
+(set-option :produce-models true)
+(set-info :source |Random FP created by PyMPF|)
+(set-info :license |https://www.gnu.org/licenses/gpl-3.0.html|)
+(set-info :category random)
+(set-info :status sat)
+;; (fp.to.ubv RTZ -normal)
+;; This benchmark relies on partial functions.
+(declare-const x Float32)
+(assert (= x (fp #b1 #b10001000 #b10011011001110010001001)))
+;; x should be Float32(0xC44D9C89 [Rational(-13474953, 16384), -822.445862])
+
+(declare-const y (_ BitVec 32))
+(assert (= y ((_ fp.to_ubv 32) RTZ x)))
+;; y should be unspecified
+
+(declare-const z (_ BitVec 32))
+(assert (= z #b10100110010100101001101000101011))
+;; z should be 2790431275
+
+(assert (not (= y z)))
+(check-sat)
+(exit)

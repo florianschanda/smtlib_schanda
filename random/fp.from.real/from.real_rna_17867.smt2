@@ -1,0 +1,18 @@
+(set-info :smt-lib-version 2.6)
+(set-logic QF_FP)
+(set-info :source |Random FP created by PyMPF|)
+(set-info :license |https://www.gnu.org/licenses/gpl-3.0.html|)
+(set-info :category random)
+(set-info :status unsat)
+;; on high bound (exclusive)
+(declare-const x Float32)
+(assert (= x ((_ to_fp 8 24) #x094DE542)))
+;; x should be Float32(0x094DE542 [Rational(6746785, 2722258935367507707706996859454145691648), 0.000000])
+
+(declare-const w Float32)
+(assert (= w ((_ to_fp 8 24) RNA (/ 26987141.0 10889035741470030830827987437816582766592.0))))
+;; w should be Float32(0x094DE543 [Rational(13493571, 5444517870735015415413993718908291383296), 0.000000])
+
+(assert (not (distinct x w)))
+(check-sat)
+(exit)

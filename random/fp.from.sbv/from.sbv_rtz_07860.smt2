@@ -1,13 +1,17 @@
+(set-info :smt-lib-version 2.6)
 (set-logic QF_FPBV)
+(set-option :produce-models true)
 (set-info :source |Random FP created by PyMPF|)
+(set-info :license |https://www.gnu.org/licenses/gpl-3.0.html|)
 (set-info :category random)
-(set-info :status unsat)
+(set-info :status sat)
 ;; fp.from.sbv(BitVec 64)
 (declare-const x (_ BitVec 64))
-(assert (bvsle x #b0001011100001111110000010101110101000001110011100111110111101010))
-;; x should be 1661759393803173354
-(declare-const r Float64)
-(assert (= r ((_ to_fp 11 53) RTZ x)))
-(assert (not (fp.leq r (fp #b0 #b10000111011 #b0111000011111100000101011101010000011100111001111101))))
+(assert (bvsle x #b0011100111110000010010001010111000100001001000101100111011000010))
+;; x should be 4174916767289888450
+
+(declare-const r Float32)
+(assert (= r ((_ to_fp 8 24) RTZ x)))
+(assert (fp.leq r (fp #b0 #b10111100 #b11001111100000100100010)))
 (check-sat)
 (exit)

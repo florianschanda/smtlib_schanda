@@ -1,0 +1,18 @@
+(set-info :smt-lib-version 2.6)
+(set-logic QF_FPLRA)
+(set-info :source |Random FP created by PyMPF|)
+(set-info :license |https://www.gnu.org/licenses/gpl-3.0.html|)
+(set-info :category random)
+(set-info :status unsat)
+;; hard: non-literal interval check
+(declare-const x Float32)
+(assert (= x (fp #b0 #b01101010 #b00100110001000111101011)))
+;; x should be Float32(0x351311EB [Rational(9638379, 17592186044416), 0.000001])
+
+(declare-const r Real)
+(assert (and (>= r (/ 19276757.0 35184372088832.0)) (< r (/ 19276759.0 35184372088832.0))))
+(declare-const w Float32)
+(assert (= w ((_ to_fp 8 24) RNA r)))
+(assert (not (= x w)))
+(check-sat)
+(exit)
