@@ -93,6 +93,7 @@ def main():
                     default="fp",
                     choices=["all",
                              "qf_fp", "fp", "industrial", "spark",
+                             "schanda",
                              "spark_all",
                              "debug"])
     ap.add_argument("--single",
