@@ -70,7 +70,7 @@ class Benchmark(object):
         altergo_mode = self.dialect is not None and "altergo" in self.dialect
 
         self.data = ""
-        if altergo_mode:
+        if not altergo_mode and self.dialect is not None:
             fn = self.benchmark + "_" + self.dialect
         else:
             fn = self.benchmark
