@@ -28,7 +28,7 @@ from pprint import pprint
 
 from mk_status_slides import data, other_data, GROUPS, BENCHMARKS
 
-solutions = [data[-1]] + other_data
+solutions = [data[-1]] + other_data[:-1] # don't include the vbs
 
 cat_nobody        = []
 cat_sat_and_unsat = []
