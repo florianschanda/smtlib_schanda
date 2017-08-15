@@ -3,13 +3,11 @@
 (set-logic QF_FPBV)
 (set-info :source |SPARK inspired floating point problems by Florian Schanda|)
 (set-info :category crafted)
-(set-info :status sat)
+(set-info :status unsat)
 
 ;; float -> sbv
-;; is not the same as
+;; is the same as
 ;; rti(float) -> sbv
-
-;; for example -.5 goes to 0 and -1 respectively
 
 (declare-const x Float32)
 (assert (fp.leq ((_ to_fp 8 24) RNE (- 128.0))
