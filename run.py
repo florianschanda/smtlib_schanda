@@ -56,7 +56,8 @@ def main():
                                ["--lang=smt2",
                                 "--no-cond-rewrite-quant",
                                 "--check-models"],
-                               use_dialect="oldfp"))
+                               use_dialect="oldfp",
+                               strict_dialect=True))
     provers.append(Prover_Kind("z3",
                                ["-in", "-smt2"],
                                use_logic=False,
@@ -74,7 +75,8 @@ def main():
     provers.append(Prover_Kind("altergo",
                                ["-max-split", "5"],
                                use_temp=True,
-                               use_dialect="altergo"))
+                               use_dialect="altergo",
+                               strict_dialect=True))
     provers.append(
         Prover_Kind("altergo-fp",
                     ["-max-split", "5",
@@ -82,7 +84,8 @@ def main():
                      "-prelude",
                      os.path.abspath("altergo_fp_axioms_2017_08_14.why")],
                     use_temp=True,
-                    use_dialect="altergo_fp"))
+                    use_dialect="altergo_fp",
+                    strict_dialect=True))
     provers.append(Prover_Kind("yices",
                                ["--mcsat"],
                                use_logic=False,

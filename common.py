@@ -67,8 +67,10 @@ class Benchmark(object):
             self.dialect = None
 
     def load(self, keep_logic):
+        altergo_mode = self.dialect is not None and "altergo" in self.dialect
+
         self.data = ""
-        if self.dialect is not None and "altergo" not in self.dialect:
+        if altergo_mode:
             fn = self.benchmark + "_" + self.dialect
         else:
             fn = self.benchmark
@@ -111,7 +113,7 @@ class Benchmark(object):
         if not self.data.endswith("(exit)\n"):
             self.data += "(exit)\n"
 
-        if self.dialect is not None and "altergo" in self.dialect:
+        if altergo_mode:
             with open(self.benchmark + "_" + self.dialect, "rU") as fd:
                 self.data = fd.read()
 
@@ -120,12 +122,17 @@ class Benchmark(object):
         self.data = None
 
 class Prover_Kind(object):
-    def __init__(self, name, base_cmd, use_logic=True, use_temp=False, use_dialect=None):
+    def __init__(self, name, base_cmd,
+                 use_logic=True,
+                 use_temp=False,
+                 use_dialect=None,
+                 strict_dialect=False):
         self.name    = name
         self.cmd     = base_cmd
         self.logic   = use_logic
         self.temp    = use_temp
         self.dialect = use_dialect
+        self.strict  = strict_dialect  # if true, only run on special encoding
 
 class Prover(object):
     def __init__(self, kind, binary, timeout):
@@ -134,6 +141,7 @@ class Prover(object):
         self.logic   = kind.logic
         self.temp    = kind.temp
         self.dialect = kind.dialect
+        self.strict  = kind.strict
 
     def get_status(self, benchmark):
         def set_limit():
@@ -142,15 +150,16 @@ class Prover(object):
 
         benchmark.load(keep_logic = self.logic)
 
-        if self.dialect is not None and "altergo" in self.dialect:
-            if self.dialect != benchmark.dialect:
-                return ("error", "unsupported", 0.0)
+        if self.strict and self.dialect != benchmark.dialect:
+            return ("error", "unsupported", 0.0)
+
+        altergo_mode = self.dialect is not None and "altergo" in self.dialect
 
         cmd = ["/usr/bin/time",
                '--format=<<<%E | %U>>>',
                "--"] + self.cmd
         if self.temp:
-            if self.dialect is not None and "altergo" in self.dialect:
+            if altergo_mode:
                 suffix = ".why"
             else:
                 suffix = ".smt2"
@@ -184,7 +193,7 @@ class Prover(object):
         elif len(stdout) == 0:
             status = "error"
             comment = stderr.strip()
-        elif self.dialect is not None and "altergo" in self.dialect:
+        elif altergo_mode:
             tmp = stdout.strip().splitlines()
             if (len(tmp) == 1 and tmp[0].startswith("File ")):
                 if ":Valid " in tmp[0]:
