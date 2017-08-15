@@ -93,9 +93,54 @@
 (declare-fun is_int1 (Float32) Bool)
 
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content Float32)))))
+;; max_value
+  (assert
+  (= (* 33554430.0 10141204801825835211973625643008.0) (fp.to_real (fp #b0 #b11111110 #b11111111111111111111111))))
+
 (declare-fun next_representable (Float32) Float32)
 
 (declare-fun prev_representable (Float32) Float32)
+
+;; next_representable_def
+  (assert
+  (forall ((x Float32))
+  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
+     (fp.lt x (next_representable x))) :pattern ((next_representable x)) )))
+
+;; prev_representable_def
+  (assert
+  (forall ((x Float32))
+  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
+     (fp.lt (prev_representable x) x)) :pattern ((prev_representable x)) )))
+
+;; next_representable_def2
+  (assert
+  (forall ((x Float32) (y Float32))
+  (=> (fp.lt x y) (fp.leq (next_representable x) y))))
+
+;; prev_representable_def2
+  (assert
+  (forall ((x Float32) (y Float32))
+  (=> (fp.lt y x) (fp.leq y (prev_representable x)))))
+
+;; next_representable_finite
+  (assert
+  (forall ((x Float32))
+  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
+     (=> (not (fp.eq x (fp #b0 #b11111110 #b11111111111111111111111)))
+     (not (or (fp.isInfinite (next_representable x)) (fp.isNaN (next_representable
+                                                               x)))))) :pattern ((not (or (fp.isInfinite
+  (next_representable x)) (fp.isNaN (next_representable x))))) )))
+
+;; prev_representable_finite
+  (assert
+  (forall ((x Float32))
+  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
+     (=>
+     (not (fp.eq x (fp.neg (fp #b0 #b11111110 #b11111111111111111111111))))
+     (not (or (fp.isInfinite (prev_representable x)) (fp.isNaN (prev_representable
+                                                               x)))))) :pattern ((not (or (fp.isInfinite
+  (prev_representable x)) (fp.isNaN (prev_representable x))))) )))
 
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 

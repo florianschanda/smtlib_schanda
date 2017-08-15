@@ -54,6 +54,10 @@
   (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
                  (and (fp.isNegative  x) (< r 0.0))))
 
+;; max_value
+  (assert
+  (= (* 33554430.0 10141204801825835211973625643008.0) (fp.to_real (fp #b0 #b11111110 #b11111111111111111111111))))
+
 (define-fun dynamic_invariant ((temp___expr_51 Float32)
   (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
   (temp___do_toplevel_50 Bool)) Bool (=>

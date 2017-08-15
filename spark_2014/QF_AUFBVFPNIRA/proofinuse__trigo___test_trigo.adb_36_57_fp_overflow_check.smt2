@@ -54,6 +54,10 @@
   (r Real)) Bool (or (and (fp.isPositive  x) (< 0.0 r))
                  (and (fp.isNegative  x) (< r 0.0))))
 
+;; max_value
+  (assert
+  (= (* 33554430.0 10141204801825835211973625643008.0) (fp.to_real (fp #b0 #b11111110 #b11111111111111111111111))))
+
 (define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
 
 (define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
