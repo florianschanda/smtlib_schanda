@@ -320,7 +320,7 @@ def mk_csf_slides(fd):
         "fp.cast",
         "fp.from.binary",
         "fp.from.real",
-        #"fp.to.real",
+        "fp.to.real",
         "fp.from.sbv",
         "fp.to.sbv",
         "fp.from.ubv",
