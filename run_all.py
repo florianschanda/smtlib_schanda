@@ -61,7 +61,7 @@ def main():
         cvc4_used_versions = CVC4_VERSIONS
         all_provers = True
     elif options.suite == "fast":
-        bm_suites = ["schanda", "spark"]
+        bm_suites = ["schanda", "spark", "industrial"]
         cvc4_used_versions = CVC4_VERSIONS[-3:]
         all_provers = False
     else:
