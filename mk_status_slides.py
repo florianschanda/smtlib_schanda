@@ -73,7 +73,7 @@ def mk_solver_name(nam):
         "mathsat_acdl" : "MathSAT (ACDL)",
         "altergo"      : "Alt-Ergo 1.3",
         "altergo-fp"   : "Alt-Ergo FPA",
-        "oldfp"        : "{\\sc cvc4} (${\\mathbb R}$ + round)"
+        "oldfp"        : "{\\sc cvc4} (${\\mathbb R}$)"
     }.get(nam, nam)
 
 def mk_coloring(criteria):
@@ -130,7 +130,7 @@ def mk_progress_slides(fd):
         fd.write("\\begin{frame}{FP progress in CVC4}{%s}\n" %
                  criteria.capitalize())
         fd.write("\\begin{center}\n")
-        fd.write(t.emit())
+        fd.write(t.emit() + "\n")
         fd.write("\\end{center}\n")
         fd.write("\\end{frame}\n\n")
 
@@ -507,7 +507,7 @@ def mk_competition_slides(fd):
                   format_fn = format_fn_totals,
                   coloring  = mk_coloring(criteria))
 
-        fd.write(t.emit())
+        fd.write(t.emit() + "\n")
 
     # def mk_unique_solutions_table():
     #     def format_fn(item):
@@ -552,7 +552,7 @@ def mk_competition_slides(fd):
     #               format_fn = format_fn,
     #               coloring  = COL_AWARD_HIGH)
 
-    #     fd.write(t.emit())
+    #     fd.write(t.emit() + "\n")
 
     ##########################################################################
 
@@ -585,7 +585,7 @@ def mk_competition_slides(fd):
     #                   coloring  = COL_ERROR,
     #                   notes     = notes)
 
-    #     fd.write(t.emit())
+    #     fd.write(t.emit() + "\n")
 
     # Table comparing all solvers
     for cat in COMPARISON_CATS:
