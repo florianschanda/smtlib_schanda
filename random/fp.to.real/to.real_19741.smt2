@@ -1,0 +1,17 @@
+(set-info :smt-lib-version 2.6)
+(set-logic QF_FPLRA)
+(set-info :source |Random FP created by PyMPF|)
+(set-info :license |https://www.gnu.org/licenses/gpl-3.0.html|)
+(set-info :category random)
+(set-info :status unsat)
+(declare-const x Float32)
+(assert (= x ((_ to_fp 8 24) #xCA114DF2)))
+;; x should be Float32(0xCA114DF2 [Rational(-4761337, 2), -2380668.500000])
+
+(declare-const y Real)
+(assert (= y (fp.to_real x)))
+;; y should be Rational(-4761337, 2)
+
+(assert (not (= y (- (/ 4761337.0 2.0)))))
+(check-sat)
+(exit)
