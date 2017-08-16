@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 4294967295)))
 
 (declare-const abstr (_ BitVec 32))
@@ -135,7 +136,7 @@
   (temp___do_toplevel_188 Bool)) Bool (=>
                                       (or (= temp___is_init_186 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_189) (fp.isNaN temp___expr_189)))))
+                                      (fp.isFinite32 temp___expr_189)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -144,7 +145,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const o Float32)
 
@@ -153,12 +154,12 @@
 (declare-const abstr7 Float32)
 
 ;; H
-  (assert (and (= o abstr7) (not (or (fp.isInfinite o) (fp.isNaN o)))))
+  (assert (and (= o abstr7) (fp.isFinite32 o)))
 
 (declare-const abstr8 Float32)
 
 ;; H
-  (assert (and (= o1 abstr8) (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (assert (and (= o1 abstr8) (fp.isFinite32 o1)))
 
 ;; H
   (assert (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) o1))

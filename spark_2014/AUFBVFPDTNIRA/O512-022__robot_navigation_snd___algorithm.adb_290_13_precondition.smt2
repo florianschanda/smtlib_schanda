@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -413,8 +414,7 @@
 
 (declare-sort positive_float 0)
 
-(define-fun in_range5 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range5 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -456,8 +456,7 @@
 
 (declare-sort normalized2pi 0)
 
-(define-fun in_range6 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range6 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
@@ -567,7 +566,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-fun ccwdiff (us_rep us_rep) Float32)
 
@@ -635,19 +634,17 @@
 ;; range_axiom
   (assert
   (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep5 x)) (fp.isNaN (to_rep5 x)))) :pattern (
-  (to_rep5 x)) )))
+  (! (fp.isFinite32 (to_rep5 x)) :pattern ((to_rep5 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep5 (of_rep5 x)) x)) :pattern ((to_rep5 (of_rep5 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep5 (of_rep5 x)) x)) :pattern ((to_rep5
+                                                                  (of_rep5 x))) )))
 
 (declare-sort nonnegative_float 0)
 
-(define-fun in_range8 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range8 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -716,14 +713,13 @@
 ;; range_axiom
   (assert
   (forall ((x unbounded_float))
-  (! (not (or (fp.isInfinite (to_rep7 x)) (fp.isNaN (to_rep7 x)))) :pattern (
-  (to_rep7 x)) )))
+  (! (fp.isFinite32 (to_rep7 x)) :pattern ((to_rep7 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep7 (of_rep7 x)) x)) :pattern ((to_rep7 (of_rep7 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep7 (of_rep7 x)) x)) :pattern ((to_rep7
+                                                                  (of_rep7 x))) )))
 
 (declare-datatypes ((map__ref1 0))
 (((mk_map__ref1 (map__content1 (Array Int nonnegative_float))))))
@@ -2905,7 +2901,7 @@
   (temp___do_toplevel_157 Bool)) Bool (=>
                                       (or (= temp___is_init_155 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_158) (fp.isNaN temp___expr_158)))))
+                                      (fp.isFinite32 temp___expr_158)))
 
 ;; null_angle__def_axiom
   (assert
@@ -3559,17 +3555,12 @@
                                                                    (let ((subject
                                                                    this__split_fields))
                                                                    this__split_fields1)))))))
-  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
+  (fp.isFinite32 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
   (to_rep2
   (rec__robot_iface__proxy__scan_res
   (us_split_fields5
   (rec__algorithm__controller__robot
-  (let ((subject this__split_fields)) this__split_fields1))))))) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
-  (to_rep2
-  (rec__robot_iface__proxy__scan_res
-  (us_split_fields5
-  (rec__algorithm__controller__robot
-  (let ((subject this__split_fields)) this__split_fields1)))))))))))
+  (let ((subject this__split_fields)) this__split_fields1)))))))))
 
 ;; H
   (assert
@@ -3620,9 +3611,7 @@
   (assert (= o17 (rec__gaps__gap__bearing o16)))
 
 ;; H
-  (assert
-  (and (= o22 (ccwdiff o17 o20))
-  (not (or (fp.isInfinite o22) (fp.isNaN o22)))))
+  (assert (and (= o22 (ccwdiff o17 o20)) (fp.isFinite32 o22)))
 
 ;; H
   (assert (= result5 (ite (fp.lt o22 o21) true false)))

@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -126,7 +127,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-fun to_rep (float) Float32)
 
@@ -138,15 +139,13 @@
 
 ;; range_axiom
   (assert
-  (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep x)) (fp.isNaN (to_rep x)))) :pattern (
-  (to_rep x)) )))
+  (forall ((x float)) (! (fp.isFinite32 (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x))) (= (to_rep (of_rep x)) x)) :pattern (
-  (to_rep (of_rep x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                                (of_rep x))) )))
 
 (declare-sort num_delimiters_range 0)
 
@@ -679,7 +678,7 @@
                   (us_split_fields3 sfun)) 0))))))
 
 ;; H
-  (assert (not (or (fp.isInfinite min1) (fp.isNaN min1))))
+  (assert (fp.isFinite32 min1))
 
 ;; H
   (assert
@@ -740,8 +739,7 @@
   (and (=> (<= 0 r10b) (dynamic_property 0 r10b i2))
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite min2) (fp.isNaN min2)))))
-  (and (<= 0 i2) (<= i2 r10b))))
+  (fp.isFinite32 min2))) (and (<= 0 i2) (<= i2 r10b))))
 
 ;; H
   (assert

@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -65,10 +66,9 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
-(define-fun in_range2 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b10001011 #b00000000000000000000000)) x)
                                          (fp.leq x (fp #b0 #b10001011 #b00000000000000000000000)))))
@@ -223,37 +223,35 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite res) (fp.isNaN res)))))
+  (fp.isFinite32 res)))
 
 ;; H
   (assert (= (fp.sub RNE a_x b_x) vec_ba_x))
 
 ;; H
-  (assert (not (or (fp.isInfinite vec_ba_x) (fp.isNaN vec_ba_x))))
+  (assert (fp.isFinite32 vec_ba_x))
 
 ;; H
   (assert (= (fp.sub RNE a_y b_y) vec_ba_y))
 
 ;; H
-  (assert (not (or (fp.isInfinite vec_ba_y) (fp.isNaN vec_ba_y))))
+  (assert (fp.isFinite32 vec_ba_y))
 
 ;; H
   (assert (= (fp.sub RNE c_x b_x) vec_bc_x))
 
 ;; H
-  (assert (not (or (fp.isInfinite vec_bc_x) (fp.isNaN vec_bc_x))))
+  (assert (fp.isFinite32 vec_bc_x))
 
 ;; H
   (assert (= (fp.sub RNE c_y b_y) vec_bc_y))
 
 ;; H
-  (assert (not (or (fp.isInfinite vec_bc_y) (fp.isNaN vec_bc_y))))
+  (assert (fp.isFinite32 vec_bc_y))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not
-  (not (or (fp.isInfinite (fp.mul RNE vec_ba_y vec_bc_y)) (fp.isNaN (fp.mul RNE
-  vec_ba_y vec_bc_y))))))
+  (not (fp.isFinite32 (fp.mul RNE vec_ba_y vec_bc_y))))
 (check-sat)
 (exit)

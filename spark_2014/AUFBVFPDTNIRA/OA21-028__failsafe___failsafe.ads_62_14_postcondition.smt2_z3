@@ -9,6 +9,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -197,14 +198,13 @@
 ;; range_axiom
   (assert
   (forall ((x battery_level_type))
-  (! (not (or (fp.isInfinite (to_rep x)) (fp.isNaN (to_rep x)))) :pattern (
-  (to_rep x)) )))
+  (! (fp.isFinite32 (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x))) (= (to_rep (of_rep x)) x)) :pattern (
-  (to_rep (of_rep x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                                (of_rep x))) )))
 
 (declare-datatypes ((map__ref 0))
 (((mk_map__ref (map__content (Array (_ BitVec 8) battery_level_type))))))
@@ -440,7 +440,7 @@
   (temp___do_toplevel_201 Bool)) Bool (=>
                                       (or (= temp___is_init_199 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_202) (fp.isNaN temp___expr_202)))))
+                                      (fp.isFinite32 temp___expr_202)))
 
 (declare-const battery_level_at (Array (_ BitVec 8) battery_level_type))
 

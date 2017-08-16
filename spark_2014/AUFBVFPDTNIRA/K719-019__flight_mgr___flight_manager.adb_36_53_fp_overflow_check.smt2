@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -126,7 +127,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-fun to_rep (float) Float32)
 
@@ -138,15 +139,13 @@
 
 ;; range_axiom
   (assert
-  (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep x)) (fp.isNaN (to_rep x)))) :pattern (
-  (to_rep x)) )))
+  (forall ((x float)) (! (fp.isFinite32 (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x))) (= (to_rep (of_rep x)) x)) :pattern (
-  (to_rep (of_rep x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                                (of_rep x))) )))
 
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields
@@ -322,16 +321,16 @@
                                                             result____split_fields1)))
 
 ;; H
-  (assert (not (or (fp.isInfinite position_x) (fp.isNaN position_x))))
+  (assert (fp.isFinite32 position_x))
 
 ;; H
-  (assert (not (or (fp.isInfinite position_y) (fp.isNaN position_y))))
+  (assert (fp.isFinite32 position_y))
 
 ;; H
-  (assert (not (or (fp.isInfinite target_x) (fp.isNaN target_x))))
+  (assert (fp.isFinite32 target_x))
 
 ;; H
-  (assert (not (or (fp.isInfinite target_y) (fp.isNaN target_y))))
+  (assert (fp.isFinite32 target_y))
 
 ;; H
   (assert
@@ -498,8 +497,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "flight_manager.ads", line 3, characters 0-0
-  (not
-  (not (or (fp.isInfinite (fp.sub RNE position_x target_x)) (fp.isNaN (fp.sub RNE
-  position_x target_x))))))
+  (not (fp.isFinite32 (fp.sub RNE position_x target_x))))
 (check-sat)
 (exit)

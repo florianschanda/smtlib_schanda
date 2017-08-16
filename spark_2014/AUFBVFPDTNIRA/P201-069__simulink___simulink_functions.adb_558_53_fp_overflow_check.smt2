@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -114,7 +115,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const left Float32)
 
@@ -131,16 +132,14 @@
 (declare-const o2 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite left) (fp.isNaN left))))
+  (assert (fp.isFinite32 left))
 
 ;; H
-  (assert (not (or (fp.isInfinite right) (fp.isNaN right))))
+  (assert (fp.isFinite32 right))
 
 ;; H
   (assert
-  (and (= o (fp.div RNE left right))
-  (not (or (fp.isInfinite (fp.div RNE left right)) (fp.isNaN (fp.div RNE
-  left right))))))
+  (and (= o (fp.div RNE left right)) (fp.isFinite32 (fp.div RNE left right))))
 
 ;; H
   (assert (= o1 (fp.roundToIntegral RTZ o)))
@@ -151,6 +150,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (not (or (fp.isInfinite o2) (fp.isNaN o2)))))
+  (not (fp.isFinite32 o2)))
 (check-sat)
 (exit)

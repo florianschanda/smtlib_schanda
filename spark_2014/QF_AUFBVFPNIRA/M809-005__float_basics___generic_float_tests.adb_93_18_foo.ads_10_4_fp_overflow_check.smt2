@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -59,7 +60,7 @@
   (temp___do_toplevel_136 Bool)) Bool (=>
                                       (or (= temp___is_init_134 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_137) (fp.isNaN temp___expr_137)))))
+                                      (fp.isFinite32 temp___expr_137)))
 
 (declare-const a Float32)
 
@@ -70,7 +71,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const foo__float_tests__inverse_reciprocal__result Float32)
 
@@ -93,7 +94,7 @@
 (declare-const foo__float_tests__inverse_reciprocal__result5 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite a) (fp.isNaN a))))
+  (assert (fp.isFinite32 a))
 
 ;; H
   (assert (fp.lt (fp #b0 #b01111111 #b00000000000000000000000) a))
@@ -102,9 +103,8 @@
   (assert
   (and (= o (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000)
   a))
-  (not (or (fp.isInfinite (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000)
-  a)) (fp.isNaN (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000)
-  a))))))
+  (fp.isFinite32 (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000)
+  a))))
 
 ;; H
   (assert
@@ -113,6 +113,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "generic_float_tests.ads", line 2, characters 0-0
-  (not (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (not (fp.isFinite32 o1)))
 (check-sat)
 (exit)

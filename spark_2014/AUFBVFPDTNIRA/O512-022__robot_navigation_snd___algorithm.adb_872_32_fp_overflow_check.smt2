@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -514,7 +515,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-fun to_rep2 (float) Float32)
 
@@ -528,19 +529,17 @@
 ;; range_axiom
   (assert
   (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep2 x)) (fp.isNaN (to_rep2 x)))) :pattern (
-  (to_rep2 x)) )))
+  (! (fp.isFinite32 (to_rep2 x)) :pattern ((to_rep2 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2 (of_rep2 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
+                                                                  (of_rep2 x))) )))
 
 (declare-sort positive_float 0)
 
-(define-fun in_range6 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range6 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -589,8 +588,7 @@
 
 (declare-sort nonnegative_float 0)
 
-(define-fun in_range7 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range7 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -680,8 +678,7 @@
 
 (declare-sort normalized2pi 0)
 
-(define-fun in_range8 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range8 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
@@ -1138,14 +1135,13 @@
 ;; range_axiom
   (assert
   (forall ((x unbounded_float))
-  (! (not (or (fp.isInfinite (to_rep7 x)) (fp.isNaN (to_rep7 x)))) :pattern (
-  (to_rep7 x)) )))
+  (! (fp.isFinite32 (to_rep7 x)) :pattern ((to_rep7 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep7 (of_rep7 x)) x)) :pattern ((to_rep7 (of_rep7 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep7 (of_rep7 x)) x)) :pattern ((to_rep7
+                                                                  (of_rep7 x))) )))
 
 (declare-datatypes ((map__ref1 0))
 (((mk_map__ref1 (map__content1 (Array Int nonnegative_float))))))
@@ -4094,7 +4090,7 @@
   (temp___do_toplevel_157 Bool)) Bool (=>
                                       (or (= temp___is_init_155 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_158) (fp.isNaN temp___expr_158)))))
+                                      (fp.isFinite32 temp___expr_158)))
 
 ;; null_angle__def_axiom
   (assert
@@ -4336,13 +4332,13 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite drivespeed) (fp.isNaN drivespeed)))))
+  (fp.isFinite32 drivespeed)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite driveturnrate) (fp.isNaN driveturnrate)))))
+  (fp.isFinite32 driveturnrate)))
 
 ;; H
   (assert
@@ -4386,7 +4382,7 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite theta) (fp.isNaN theta)))))
+  (fp.isFinite32 theta)))
 
 ;; H
   (assert
@@ -4433,7 +4429,7 @@
   (= o3 (limit (t__content theta1)
         (fp.neg (fp #b0 #b01111111 #b10010010000111111011011))
         (fp #b0 #b01111111 #b10010010000111111011011)))
-  (and (not (or (fp.isInfinite o3) (fp.isNaN o3)))
+  (and (fp.isFinite32 o3)
   (and (fp.leq (fp.neg (fp #b0 #b01111111 #b10010010000111111011011))
   o3) (fp.leq o3 (fp #b0 #b01111111 #b10010010000111111011011))))))
 
@@ -4447,9 +4443,8 @@
   (assert
   (and
   (= o4 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) theta2))
-  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
-  theta2)) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
-  theta2))))))
+  (fp.isFinite32 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
+  theta2))))
 
 ;; H
   (assert
@@ -4465,7 +4460,7 @@
   o5)))
 
 ;; H
-  (assert (and (= o7 o6) (not (or (fp.isInfinite o6) (fp.isNaN o6)))))
+  (assert (and (= o7 o6) (fp.isFinite32 o6)))
 
 ;; H
   (assert (= result3 driveturnrate1))
@@ -4476,7 +4471,7 @@
 ;; H
   (assert
   (and (= o8 (norm (mk___rep1 disttogoal__split_fields)))
-  (and (not (or (fp.isInfinite o8) (fp.isNaN o8)))
+  (and (fp.isFinite32 o8)
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o8)
   (=> (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) o8)
   (not (= (oeq (mk___rep1 disttogoal__split_fields) zero_position) true)))))))
@@ -4484,7 +4479,7 @@
 ;; H
   (assert
   (and (= o9 (sqrt1 o8))
-  (and (not (or (fp.isInfinite o9) (fp.isNaN o9)))
+  (and (fp.isFinite32 o9)
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o9)
   (and
   (=> (fp.eq o8 (fp #b0 #b00000000 #b00000000000000000000000))
@@ -4497,7 +4492,7 @@
   (and
   (= o10 (limit o9 (fp #b0 #b01111100 #b10011001100110011001101)
          (fp #b0 #b01111111 #b00000000000000000000000)))
-  (and (not (or (fp.isInfinite o10) (fp.isNaN o10)))
+  (and (fp.isFinite32 o10)
   (and (fp.leq (fp #b0 #b01111100 #b10011001100110011001101) o10)
   (fp.leq o10 (fp #b0 #b01111111 #b00000000000000000000000))))))
 
@@ -4505,7 +4500,7 @@
   (assert (= o11 (fp.mul RNE driveturnrate2 o10)))
 
 ;; H
-  (assert (and (= o12 o11) (not (or (fp.isInfinite o11) (fp.isNaN o11)))))
+  (assert (and (= o12 o11) (fp.isFinite32 o11)))
 
 ;; H
   (assert (= result4 (mk_t__ref driveturnrate2)))
@@ -4588,18 +4583,12 @@
                                                          (rec__algorithm__controller__robot
                                                          (us_split_fields__content10
                                                          this__split_fields1)))))))
-  (not (or (fp.isInfinite (fp.sub RNE (t__content disttoclosestobstacle1)
-  (to_rep3
-  (rec__robot_iface__proxy__robot_radius
-  (us_split_fields9
-  (rec__algorithm__controller__robot
-  (us_split_fields__content10 this__split_fields1))))))) (fp.isNaN (fp.sub RNE
-  (t__content disttoclosestobstacle1) (to_rep3
-                                      (rec__robot_iface__proxy__robot_radius
-                                      (us_split_fields9
-                                      (rec__algorithm__controller__robot
-                                      (us_split_fields__content10
-                                      this__split_fields1)))))))))))
+  (fp.isFinite32 (fp.sub RNE (t__content disttoclosestobstacle1) (to_rep3
+                                                                 (rec__robot_iface__proxy__robot_radius
+                                                                 (us_split_fields9
+                                                                 (rec__algorithm__controller__robot
+                                                                 (us_split_fields__content10
+                                                                 this__split_fields1)))))))))
 
 ;; H
   (assert
@@ -4610,12 +4599,12 @@
                          (us_split_fields__content10 this__split_fields1))))))))
 
 ;; H
-  (assert (and (= o15 o14) (not (or (fp.isInfinite o14) (fp.isNaN o14)))))
+  (assert (and (= o15 o14) (fp.isFinite32 o14)))
 
 ;; H
   (assert
   (and (= o16 (sqrt1 o15))
-  (and (not (or (fp.isInfinite o16) (fp.isNaN o16)))
+  (and (fp.isFinite32 o16)
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o16)
   (and
   (=> (fp.eq o15 (fp #b0 #b00000000 #b00000000000000000000000))
@@ -4628,7 +4617,7 @@
   (and
   (= o17 (limit o16 (fp #b0 #b01111110 #b00000000000000000000000)
          (fp #b0 #b01111111 #b00000000000000000000000)))
-  (and (not (or (fp.isInfinite o17) (fp.isNaN o17)))
+  (and (fp.isFinite32 o17)
   (and (fp.leq (fp #b0 #b01111110 #b00000000000000000000000) o17)
   (fp.leq o17 (fp #b0 #b01111111 #b00000000000000000000000))))))
 
@@ -4636,7 +4625,7 @@
   (assert (= o18 (fp.mul RNE driveturnrate3 o17)))
 
 ;; H
-  (assert (and (= o19 o18) (not (or (fp.isInfinite o18) (fp.isNaN o18)))))
+  (assert (and (= o19 o18) (fp.isFinite32 o18)))
 
 ;; H
   (assert (= result5 (mk_t__ref driveturnrate3)))
@@ -4649,7 +4638,7 @@
   (and
   (= o20 (limit theta2 (fp.neg (fp #b0 #b01111110 #b10010010000111111011011))
          (fp #b0 #b01111110 #b10010010000111111011011)))
-  (and (not (or (fp.isInfinite o20) (fp.isNaN o20)))
+  (and (fp.isFinite32 o20)
   (and (fp.leq (fp.neg (fp #b0 #b01111110 #b10010010000111111011011))
   o20) (fp.leq o20 (fp #b0 #b01111110 #b10010010000111111011011))))))
 
@@ -4673,7 +4662,7 @@
 ;; H
   (assert
   (and (= o21 (norm (mk___rep1 disttogoal__split_fields)))
-  (and (not (or (fp.isInfinite o21) (fp.isNaN o21)))
+  (and (fp.isFinite32 o21)
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o21)
   (=> (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) o21)
   (not (= (oeq (mk___rep1 disttogoal__split_fields) zero_position) true)))))))
@@ -4681,7 +4670,7 @@
 ;; H
   (assert
   (and (= o22 (sqrt1 o21))
-  (and (not (or (fp.isInfinite o22) (fp.isNaN o22)))
+  (and (fp.isFinite32 o22)
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o22)
   (and
   (=> (fp.eq o21 (fp #b0 #b00000000 #b00000000000000000000000))
@@ -4694,7 +4683,7 @@
   (and
   (= o23 (limit o22 (fp #b0 #b00000000 #b00000000000000000000000)
          (fp #b0 #b01111111 #b00000000000000000000000)))
-  (and (not (or (fp.isInfinite o23) (fp.isNaN o23)))
+  (and (fp.isFinite32 o23)
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o23)
   (fp.leq o23 (fp #b0 #b01111111 #b00000000000000000000000))))))
 
@@ -4702,7 +4691,7 @@
   (assert (= o24 (fp.mul RNE drivespeed1 o23)))
 
 ;; H
-  (assert (and (= o25 o24) (not (or (fp.isInfinite o24) (fp.isNaN o24)))))
+  (assert (and (= o25 o24) (fp.isFinite32 o24)))
 
 ;; H
   (assert (= result8 (mk_t__ref drivespeed1)))
@@ -4719,18 +4708,12 @@
                                                          (rec__algorithm__controller__robot
                                                          (us_split_fields__content10
                                                          this__split_fields1)))))))
-  (not (or (fp.isInfinite (fp.sub RNE (t__content disttoclosestobstacle1)
-  (to_rep3
-  (rec__robot_iface__proxy__robot_radius
-  (us_split_fields9
-  (rec__algorithm__controller__robot
-  (us_split_fields__content10 this__split_fields1))))))) (fp.isNaN (fp.sub RNE
-  (t__content disttoclosestobstacle1) (to_rep3
-                                      (rec__robot_iface__proxy__robot_radius
-                                      (us_split_fields9
-                                      (rec__algorithm__controller__robot
-                                      (us_split_fields__content10
-                                      this__split_fields1)))))))))))
+  (fp.isFinite32 (fp.sub RNE (t__content disttoclosestobstacle1) (to_rep3
+                                                                 (rec__robot_iface__proxy__robot_radius
+                                                                 (us_split_fields9
+                                                                 (rec__algorithm__controller__robot
+                                                                 (us_split_fields__content10
+                                                                 this__split_fields1)))))))))
 
 ;; H
   (assert
@@ -4741,12 +4724,12 @@
                          (us_split_fields__content10 this__split_fields1))))))))
 
 ;; H
-  (assert (and (= o28 o27) (not (or (fp.isInfinite o27) (fp.isNaN o27)))))
+  (assert (and (= o28 o27) (fp.isFinite32 o27)))
 
 ;; H
   (assert
   (and (= o29 (sqrt1 o28))
-  (and (not (or (fp.isInfinite o29) (fp.isNaN o29)))
+  (and (fp.isFinite32 o29)
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o29)
   (and
   (=> (fp.eq o28 (fp #b0 #b00000000 #b00000000000000000000000))
@@ -4759,7 +4742,7 @@
   (and
   (= o30 (limit o29 (fp #b0 #b00000000 #b00000000000000000000000)
          (fp #b0 #b01111111 #b00000000000000000000000)))
-  (and (not (or (fp.isInfinite o30) (fp.isNaN o30)))
+  (and (fp.isFinite32 o30)
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o30)
   (fp.leq o30 (fp #b0 #b01111111 #b00000000000000000000000))))))
 
@@ -4767,7 +4750,7 @@
   (assert (= o31 (fp.mul RNE drivespeed2 o30)))
 
 ;; H
-  (assert (and (= o32 o31) (not (or (fp.isInfinite o31) (fp.isNaN o31)))))
+  (assert (and (= o32 o31) (fp.isFinite32 o31)))
 
 ;; H
   (assert (= result9 (mk_t__ref drivespeed2)))
@@ -4780,23 +4763,22 @@
   (and
   (= o33 (fp.sub RNE (fp #b0 #b01111110 #b00001100000101010010010) (fp.abs
   theta3)))
-  (not (or (fp.isInfinite (fp.sub RNE (fp #b0 #b01111110 #b00001100000101010010010) (fp.abs
-  theta3))) (fp.isNaN (fp.sub RNE (fp #b0 #b01111110 #b00001100000101010010010) (fp.abs
-  theta3)))))))
+  (fp.isFinite32 (fp.sub RNE (fp #b0 #b01111110 #b00001100000101010010010) (fp.abs
+  theta3)))))
 
 ;; H
   (assert
   (= o34 (fp.div RNE o33 (fp #b0 #b01111110 #b00001100000101010010010))))
 
 ;; H
-  (assert (and (= o35 o34) (not (or (fp.isInfinite o34) (fp.isNaN o34)))))
+  (assert (and (= o35 o34) (fp.isFinite32 o34)))
 
 ;; H
   (assert
   (and
   (= o36 (limit o35 (fp #b0 #b00000000 #b00000000000000000000000)
          (fp #b0 #b01111111 #b00000000000000000000000)))
-  (and (not (or (fp.isInfinite o36) (fp.isNaN o36)))
+  (and (fp.isFinite32 o36)
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o36)
   (fp.leq o36 (fp #b0 #b01111111 #b00000000000000000000000))))))
 
@@ -4806,6 +4788,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "algorithm.ads", line 107, characters 0-0
-  (not (not (or (fp.isInfinite o37) (fp.isNaN o37)))))
+  (not (fp.isFinite32 o37)))
 (check-sat)
 (exit)

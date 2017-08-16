@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -115,7 +116,7 @@
   (temp___do_toplevel_140 Bool)) Bool (=>
                                       (or (= temp___is_init_138 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_141) (fp.isNaN temp___expr_141)))))
+                                      (fp.isFinite32 temp___expr_141)))
 
 (declare-fun odivide__function_guard (Float32 Float32 Float32) Bool)
 
@@ -132,16 +133,16 @@
 (declare-const y Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite x1) (fp.isNaN x1))))
+  (assert (fp.isFinite32 x1))
 
 ;; H
-  (assert (not (or (fp.isInfinite x2) (fp.isNaN x2))))
+  (assert (fp.isFinite32 x2))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite y) (fp.isNaN y)))))
+  (fp.isFinite32 y)))
 
 (assert
 ;; WP_parameter_def

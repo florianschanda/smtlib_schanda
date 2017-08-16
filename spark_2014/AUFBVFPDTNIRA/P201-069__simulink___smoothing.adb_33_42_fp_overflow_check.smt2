@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite64 ((x Float64)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -115,7 +116,7 @@
   (temp___do_toplevel_56 Bool)) Bool (=>
                                      (or (= temp___is_init_54 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
+                                     (fp.isFinite64 temp___expr_57)))
 
 (declare-const new_value Float64)
 
@@ -148,20 +149,19 @@
 (declare-const abs_new_delta_out1 Float64)
 
 ;; H
-  (assert (not (or (fp.isInfinite new_value) (fp.isNaN new_value))))
+  (assert (fp.isFinite64 new_value))
 
 ;; H
-  (assert (not (or (fp.isInfinite prior_value) (fp.isNaN prior_value))))
+  (assert (fp.isFinite64 prior_value))
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite smoothing_factor) (fp.isNaN smoothing_factor))))
+  (assert (fp.isFinite64 smoothing_factor))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite smoothed_value) (fp.isNaN smoothed_value)))))
+  (fp.isFinite64 smoothed_value)))
 
 ;; H
   (assert
@@ -178,25 +178,23 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite abs_delta_out1) (fp.isNaN abs_delta_out1)))))
+  (fp.isFinite64 abs_delta_out1)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite smoother_value_out1) (fp.isNaN smoother_value_out1)))))
+  (fp.isFinite64 smoother_value_out1)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite abs_new_delta_out1) (fp.isNaN abs_new_delta_out1)))))
+  (fp.isFinite64 abs_new_delta_out1)))
 
 (assert
 ;; WP_parameter_def
  ;; File "smoothing.ads", line 20, characters 0-0
-  (not
-  (not (or (fp.isInfinite (fp.sub RNE new_value prior_value)) (fp.isNaN (fp.sub RNE
-  new_value prior_value))))))
+  (not (fp.isFinite64 (fp.sub RNE new_value prior_value))))
 (check-sat)
 (exit)

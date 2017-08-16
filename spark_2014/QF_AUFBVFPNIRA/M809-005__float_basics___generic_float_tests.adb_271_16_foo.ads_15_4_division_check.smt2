@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite64 ((x Float64)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -59,7 +60,7 @@
   (temp___do_toplevel_166 Bool)) Bool (=>
                                       (or (= temp___is_init_164 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_167) (fp.isNaN temp___expr_167)))))
+                                      (fp.isFinite64 temp___expr_167)))
 
 (declare-const x Float64)
 
@@ -76,7 +77,7 @@
   (temp___do_toplevel_56 Bool)) Bool (=>
                                      (or (= temp___is_init_54 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
+                                     (fp.isFinite64 temp___expr_57)))
 
 (declare-const a Float64)
 
@@ -103,25 +104,25 @@
 (declare-const c1 Float64)
 
 ;; H
-  (assert (not (or (fp.isInfinite x) (fp.isNaN x))))
+  (assert (fp.isFinite64 x))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite a) (fp.isNaN a)))))
+  (fp.isFinite64 a)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite b) (fp.isNaN b)))))
+  (fp.isFinite64 b)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite c) (fp.isNaN c)))))
+  (fp.isFinite64 c)))
 
 (assert
 ;; WP_parameter_def

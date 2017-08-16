@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 4294967295)))
 
 (declare-const abstr (_ BitVec 32))
@@ -93,7 +94,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 32))
 
@@ -118,7 +119,7 @@
   (temp___do_toplevel_1347 Bool)) Bool (=>
                                        (or (= temp___is_init_1345 true)
                                        (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                       (not (or (fp.isInfinite temp___expr_1348) (fp.isNaN temp___expr_1348)))))
+                                       (fp.isFinite32 temp___expr_1348)))
 
 (declare-const attr__ATTRIBUTE_MODULUS1 (_ BitVec 32))
 
@@ -137,7 +138,7 @@
   (temp___do_toplevel_1365 Bool)) Bool (=>
                                        (or (= temp___is_init_1363 true)
                                        (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                       (not (or (fp.isInfinite temp___expr_1366) (fp.isNaN temp___expr_1366)))))
+                                       (fp.isFinite32 temp___expr_1366)))
 
 (declare-const half_x Float32)
 
@@ -224,7 +225,7 @@
 (declare-const maths_pack__inv_sqrt__result5 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite x) (fp.isNaN x))))
+  (assert (fp.isFinite32 x))
 
 ;; H
   (assert (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) x))
@@ -235,13 +236,13 @@
   x)))
 
 ;; H
-  (assert (not (or (fp.isInfinite half_x1) (fp.isNaN half_x1))))
+  (assert (fp.isFinite32 half_x1))
 
 ;; H
   (assert (= y1 x))
 
 ;; H
-  (assert (not (or (fp.isInfinite y1) (fp.isNaN y1))))
+  (assert (fp.isFinite32 y1))
 
 (declare-const abstr7 (_ BitVec 32))
 
@@ -267,7 +268,7 @@
 (declare-const abstr10 Float32)
 
 ;; H
-  (assert (and (= o1 abstr10) (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (assert (and (= o1 abstr10) (fp.isFinite32 o1)))
 
 ;; H
   (assert (= y1 result5))
@@ -278,8 +279,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not
-  (not (or (fp.isInfinite (fp.mul RNE half_x1 y2)) (fp.isNaN (fp.mul RNE
-  half_x1 y2))))))
+  (not (fp.isFinite32 (fp.mul RNE half_x1 y2))))
 (check-sat)
 (exit)

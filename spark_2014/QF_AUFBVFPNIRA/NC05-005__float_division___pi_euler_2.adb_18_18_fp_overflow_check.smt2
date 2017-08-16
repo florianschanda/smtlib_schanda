@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite64 ((x Float64)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -68,7 +69,7 @@
   (temp___do_toplevel_56 Bool)) Bool (=>
                                      (or (= temp___is_init_54 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
+                                     (fp.isFinite64 temp___expr_57)))
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 1 x)
                                      (<= x 9223372036854775807)))
@@ -86,8 +87,7 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(define-fun in_range4 ((x Float64)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range4 ((x Float64)) Bool (and (fp.isFinite64 x)
                                          (and
                                          (fp.leq (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))))
@@ -169,13 +169,13 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite pi1) (fp.isNaN pi1)))))
+  (fp.isFinite64 pi1)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite erreur) (fp.isNaN erreur)))))
+  (fp.isFinite64 erreur)))
 
 ;; H
   (assert
@@ -228,14 +228,14 @@
   (and
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite erreur2) (fp.isNaN erreur2))))
+  (fp.isFinite64 erreur2))
   (=>
   (fp.leq (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
   (in_range4 index_float2)))
   (=> (<= 1 9223372036854775807) (in_range3 index2)))
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite pi3) (fp.isNaN pi3)))))
+  (fp.isFinite64 pi3)))
   (not
   (fp.lt erreur2 (fp #b0 #b01111100111 #b0101011110011000111011100010001100001000110000111010)))))
 
@@ -255,8 +255,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not
-  (not (or (fp.isInfinite (fp.add RNE pi3 erreur3)) (fp.isNaN (fp.add RNE
-  pi3 erreur3))))))
+  (not (fp.isFinite64 (fp.add RNE pi3 erreur3))))
 (check-sat)
 (exit)

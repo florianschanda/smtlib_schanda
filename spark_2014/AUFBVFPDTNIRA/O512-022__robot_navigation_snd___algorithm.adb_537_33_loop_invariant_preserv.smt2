@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -126,12 +127,11 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-sort positive_float 0)
 
-(define-fun in_range2 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -173,8 +173,7 @@
 
 (declare-sort nonnegative_float 0)
 
-(define-fun in_range3 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -223,8 +222,7 @@
 
 (declare-sort normalized2pi 0)
 
-(define-fun in_range4 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
@@ -391,14 +389,13 @@
 ;; range_axiom
   (assert
   (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep4 x)) (fp.isNaN (to_rep4 x)))) :pattern (
-  (to_rep4 x)) )))
+  (! (fp.isFinite32 (to_rep4 x)) :pattern ((to_rep4 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep4 (of_rep4 x)) x)) :pattern ((to_rep4 (of_rep4 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep4 (of_rep4 x)) x)) :pattern ((to_rep4
+                                                                  (of_rep4 x))) )))
 
 (declare-sort unbounded_float 0)
 
@@ -429,14 +426,13 @@
 ;; range_axiom
   (assert
   (forall ((x unbounded_float))
-  (! (not (or (fp.isInfinite (to_rep5 x)) (fp.isNaN (to_rep5 x)))) :pattern (
-  (to_rep5 x)) )))
+  (! (fp.isFinite32 (to_rep5 x)) :pattern ((to_rep5 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep5 (of_rep5 x)) x)) :pattern ((to_rep5 (of_rep5 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep5 (of_rep5 x)) x)) :pattern ((to_rep5
+                                                                  (of_rep5 x))) )))
 
 (declare-datatypes ((map__ref 0))
 (((mk_map__ref (map__content (Array Int nonnegative_float))))))
@@ -1954,8 +1950,7 @@
 
 (declare-sort zero_to_one 0)
 
-(define-fun in_range10 ((x Float32)) Bool (and
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range10 ((x Float32)) Bool (and (fp.isFinite32 x)
                                           (and
                                           (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                           (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000)))))
@@ -2125,7 +2120,7 @@
   (temp___do_toplevel_157 Bool)) Bool (=>
                                       (or (= temp___is_init_155 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_158) (fp.isNaN temp___expr_158)))))
+                                      (fp.isFinite32 temp___expr_158)))
 
 ;; null_angle__def_axiom
   (assert
@@ -2269,7 +2264,7 @@
           (rec__algorithm__controller__gapvec (us_split_fields11 this))))))))
 
 ;; H
-  (assert (not (or (fp.isInfinite safetydist) (fp.isNaN safetydist))))
+  (assert (fp.isFinite32 safetydist))
 
 ;; H
   (assert
@@ -2285,7 +2280,7 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite deltaangle) (fp.isNaN deltaangle)))))
+  (fp.isFinite32 deltaangle)))
 
 ;; H
   (assert (= result deltaareasum))
@@ -2304,8 +2299,7 @@
   (= obstacleavoiddelta1 (fp #b0 #b00000000 #b00000000000000000000000)))
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite obstacleavoiddelta1) (fp.isNaN obstacleavoiddelta1))))
+  (assert (fp.isFinite32 obstacleavoiddelta1))
 
 ;; H
   (assert (= (mk_int__ref result2) (mk_int__ref i)))
@@ -2339,14 +2333,14 @@
   (and
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite obstacleavoiddelta2) (fp.isNaN obstacleavoiddelta2))))
+  (fp.isFinite32 obstacleavoiddelta2))
   (=> (<= 1 1000) (dynamic_property 1 1000 i2)))
   (=>
   (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b01111111 #b00000000000000000000000))
   (in_range10 deltamag1)))
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite deltaangle1) (fp.isNaN deltaangle1)))))
+  (fp.isFinite32 deltaangle1)))
   (=>
   (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111))
   (in_range3 deltaareasum2))) (and (<= 1 i2) (<= i2 1000))))
@@ -2359,15 +2353,11 @@
                               (us_split_fields5
                               (rec__algorithm__controller__robot
                               (us_split_fields11 this)))))))
-  (not (or (fp.isInfinite (fp.add RNE safetydist (to_rep
-                                                 (rec__robot_iface__proxy__robot_radius
-                                                 (us_split_fields5
-                                                 (rec__algorithm__controller__robot
-                                                 (us_split_fields11 this))))))) (fp.isNaN (fp.add RNE
-  safetydist (to_rep
-             (rec__robot_iface__proxy__robot_radius
-             (us_split_fields5
-             (rec__algorithm__controller__robot (us_split_fields11 this)))))))))))
+  (fp.isFinite32 (fp.add RNE safetydist (to_rep
+                                        (rec__robot_iface__proxy__robot_radius
+                                        (us_split_fields5
+                                        (rec__algorithm__controller__robot
+                                        (us_split_fields11 this)))))))))
 
 ;; H
   (assert
@@ -2387,15 +2377,11 @@
                                (us_split_fields5
                                (rec__algorithm__controller__robot
                                (us_split_fields11 this)))))))
-  (not (or (fp.isInfinite (fp.add RNE safetydist (to_rep
-                                                 (rec__robot_iface__proxy__robot_radius
-                                                 (us_split_fields5
-                                                 (rec__algorithm__controller__robot
-                                                 (us_split_fields11 this))))))) (fp.isNaN (fp.add RNE
-  safetydist (to_rep
-             (rec__robot_iface__proxy__robot_radius
-             (us_split_fields5
-             (rec__algorithm__controller__robot (us_split_fields11 this))))))))))))
+  (fp.isFinite32 (fp.add RNE safetydist (to_rep
+                                        (rec__robot_iface__proxy__robot_radius
+                                        (us_split_fields5
+                                        (rec__algorithm__controller__robot
+                                        (us_split_fields11 this))))))))))
 
 ;; H
   (assert
@@ -2407,17 +2393,13 @@
                                (us_split_fields11 this)) i2))))))))
 
 ;; H
-  (assert
-  (=> (= result3 true)
-  (and (= o3 o2) (not (or (fp.isInfinite o2) (fp.isNaN o2))))))
+  (assert (=> (= result3 true) (and (= o3 o2) (fp.isFinite32 o2))))
 
 ;; H
   (assert (=> (= result3 true) (= o4 (fp.div RNE o3 safetydist))))
 
 ;; H
-  (assert
-  (=> (= result3 true)
-  (and (= o5 o4) (not (or (fp.isInfinite o4) (fp.isNaN o4))))))
+  (assert (=> (= result3 true) (and (= o5 o4) (fp.isFinite32 o4))))
 
 ;; H
   (assert
@@ -2425,14 +2407,12 @@
   (and
   (= o6 (limit o5 (fp #b0 #b00000000 #b00000000000000000000000)
         (fp #b0 #b01111111 #b00000000000000000000000)))
-  (and (not (or (fp.isInfinite o6) (fp.isNaN o6)))
+  (and (fp.isFinite32 o6)
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o6)
   (fp.leq o6 (fp #b0 #b01111111 #b00000000000000000000000)))))))
 
 ;; H
-  (assert
-  (=> (= result3 true)
-  (and (= o7 o6) (not (or (fp.isInfinite o6) (fp.isNaN o6))))))
+  (assert (=> (= result3 true) (and (= o7 o6) (fp.isFinite32 o6))))
 
 ;; H
   (assert (=> (= result3 true) (= deltamag1 result4)))
@@ -2462,7 +2442,7 @@
   (= o10 (aldiff
          (rec__algorithm__controller__driveangle (us_split_fields11 this))
          o15))
-  (and (not (or (fp.isInfinite o10) (fp.isNaN o10)))
+  (and (fp.isFinite32 o10)
   (and (fp.lt (fp.neg (fp #b0 #b10000000 #b10010010000111111011011))
   o10) (fp.leq o10 (fp #b0 #b10000000 #b10010010000111111011011)))))))
 
@@ -2476,9 +2456,7 @@
   (assert
   (=> (= result3 true)
   (and (= o11 (fp.add RNE deltaareasum2 (fp.mul RNE deltamag2 deltamag2)))
-  (not (or (fp.isInfinite (fp.add RNE deltaareasum2 (fp.mul RNE deltamag2
-  deltamag2))) (fp.isNaN (fp.add RNE deltaareasum2 (fp.mul RNE deltamag2
-  deltamag2))))))))
+  (fp.isFinite32 (fp.add RNE deltaareasum2 (fp.mul RNE deltamag2 deltamag2))))))
 
 ;; H
   (assert (=> (= result3 true) (= deltaareasum2 result6)))
@@ -2492,17 +2470,14 @@
   (and
   (= o12 (fp.mul RNE (fp.mul RNE (fp.mul RNE deltamag2 deltamag2) deltamag2)
   deltaangle2))
-  (not (or (fp.isInfinite (fp.mul RNE (fp.mul RNE (fp.mul RNE deltamag2
-  deltamag2) deltamag2) deltaangle2)) (fp.isNaN (fp.mul RNE (fp.mul RNE (fp.mul RNE
-  deltamag2 deltamag2) deltamag2) deltaangle2)))))))
+  (fp.isFinite32 (fp.mul RNE (fp.mul RNE (fp.mul RNE deltamag2 deltamag2)
+  deltamag2) deltaangle2)))))
 
 ;; H
   (assert (=> (= result3 true) (= o13 (fp.add RNE obstacleavoiddelta2 o12))))
 
 ;; H
-  (assert
-  (=> (= result3 true)
-  (and (= o14 o13) (not (or (fp.isInfinite o13) (fp.isNaN o13))))))
+  (assert (=> (= result3 true) (and (= o14 o13) (fp.isFinite32 o13))))
 
 ;; H
   (assert (=> (= result3 true) (= obstacleavoiddelta2 result7)))

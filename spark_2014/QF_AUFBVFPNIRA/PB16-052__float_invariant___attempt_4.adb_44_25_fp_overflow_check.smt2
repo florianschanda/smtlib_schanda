@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite64 ((x Float64)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -59,7 +60,7 @@
   (temp___do_toplevel_134 Bool)) Bool (=>
                                       (or (= temp___is_init_132 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_135) (fp.isNaN temp___expr_135)))))
+                                      (fp.isFinite64 temp___expr_135)))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 25000)))
 
@@ -70,8 +71,7 @@
                                       (<= 0 25000)) (in_range1
                                       temp___expr_141)))
 
-(define-fun in_range2 ((x Float64)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range2 ((x Float64)) Bool (and (fp.isFinite64 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) x)
                                          (fp.leq x (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))))
@@ -148,16 +148,16 @@
   (assert (in_range2 factor))
 
 ;; H
-  (assert (not (or (fp.isInfinite speed) (fp.isNaN speed))))
+  (assert (fp.isFinite64 speed))
 
 ;; H
-  (assert (not (or (fp.isInfinite distance) (fp.isNaN distance))))
+  (assert (fp.isFinite64 distance))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite average) (fp.isNaN average)))))
+  (fp.isFinite64 average)))
 
 (declare-const abstr1 Bool)
 
@@ -168,13 +168,12 @@
   (assert (= speed old_speed))
 
 ;; H
-  (assert (not (or (fp.isInfinite old_speed) (fp.isNaN old_speed))))
+  (assert (fp.isFinite64 old_speed))
 
 (assert
 ;; WP_parameter_def
  ;; File "attempt_4.adb", line 22, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.add RNE speed (fp.mul RNE (fp.mul RNE factor (fp #b0 #b10000000010 #b0011100111010000000100111010100100101010001100000101)) (fp #b0 #b01111111000 #b0100011110101110000101000111101011100001010001111011)))) (fp.isNaN (fp.add RNE
-  speed (fp.mul RNE (fp.mul RNE factor (fp #b0 #b10000000010 #b0011100111010000000100111010100100101010001100000101)) (fp #b0 #b01111111000 #b0100011110101110000101000111101011100001010001111011))))))))
+  (fp.isFinite64 (fp.add RNE speed (fp.mul RNE (fp.mul RNE factor (fp #b0 #b10000000010 #b0011100111010000000100111010100100101010001100000101)) (fp #b0 #b01111111000 #b0100011110101110000101000111101011100001010001111011))))))
 (check-sat)
 (exit)

@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -126,12 +127,11 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-sort positive_float 0)
 
-(define-fun in_range2 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -160,8 +160,7 @@
 
 (declare-sort nonnegative_float 0)
 
-(define-fun in_range3 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -221,8 +220,7 @@
 
 (declare-sort normalized2pi 0)
 
-(define-fun in_range4 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
@@ -343,14 +341,13 @@
 ;; range_axiom
   (assert
   (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep2 x)) (fp.isNaN (to_rep2 x)))) :pattern (
-  (to_rep2 x)) )))
+  (! (fp.isFinite32 (to_rep2 x)) :pattern ((to_rep2 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2 (of_rep2 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
+                                                                  (of_rep2 x))) )))
 
 (declare-sort idir_t 0)
 
@@ -1649,13 +1646,11 @@
                                                               (rec__algorithm__laser_scan_data__first
                                                               rayl__split_fields2))
   (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields2))))
-  (not (or (fp.isInfinite (fp.sub RNE (to_rep
-                                      (rec__algorithm__laser_scan_data__first
-                                      rayl__split_fields2)) (to_rep
-                                                            (rec__algorithm__laser_scan_data__first
-                                                            rayr__split_fields2)))) (fp.isNaN (fp.sub RNE
-  (to_rep (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields2)))))))))
+  (fp.isFinite32 (fp.sub RNE (to_rep
+                             (rec__algorithm__laser_scan_data__first
+                             rayl__split_fields2)) (to_rep
+                                                   (rec__algorithm__laser_scan_data__first
+                                                   rayr__split_fields2)))))))
 
 ;; H
   (assert
@@ -1663,9 +1658,7 @@
   (= algorithm__buildgapvector__B_9__dist__assume dist1)))
 
 ;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (not (or (fp.isInfinite dist1) (fp.isNaN dist1)))))
+  (assert (=> (and (<= 2 i1) (<= i1 999)) (fp.isFinite32 dist1)))
 
 ;; H
   (assert
@@ -2170,12 +2163,12 @@
   (= o7 (ccwdiff
         (rec__algorithm__laser_scan_data__second rayr__split_fields7)
         (rec__algorithm__laser_scan_data__second rayl__split_fields7)))
-  (not (or (fp.isInfinite o7) (fp.isNaN o7)))))
+  (fp.isFinite32 o7)))
 
 ;; H
   (assert
   (and (= o8 (cos1 o7))
-  (and (not (or (fp.isInfinite o8) (fp.isNaN o8)))
+  (and (fp.isFinite32 o8)
   (and
   (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))
   o8) (fp.leq o8 (fp #b0 #b01111111 #b00000000000000000000000)))
@@ -2188,9 +2181,8 @@
   (= o5 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) (to_rep
                                                                   (rec__algorithm__laser_scan_data__first
                                                                   rayr__split_fields7))))
-  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
-  (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields7)))) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
-  (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields7))))))))
+  (fp.isFinite32 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
+  (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields7))))))
 
 ;; H
   (assert
@@ -2199,13 +2191,13 @@
                        rayl__split_fields7)))))
 
 ;; H
-  (assert (and (= o9 o6) (not (or (fp.isInfinite o6) (fp.isNaN o6)))))
+  (assert (and (= o9 o6) (fp.isFinite32 o6)))
 
 ;; H
   (assert (= o10 (fp.mul RNE o9 o8)))
 
 ;; H
-  (assert (and (= o11 o10) (not (or (fp.isInfinite o10) (fp.isNaN o10)))))
+  (assert (and (= o11 o10) (fp.isFinite32 o10)))
 
 ;; H
   (assert
@@ -2215,13 +2207,11 @@
                     rayl__split_fields7)) (to_rep
                                           (rec__algorithm__laser_scan_data__first
                                           rayl__split_fields7))))
-  (not (or (fp.isInfinite (fp.mul RNE (to_rep
-                                      (rec__algorithm__laser_scan_data__first
-                                      rayl__split_fields7)) (to_rep
-                                                            (rec__algorithm__laser_scan_data__first
-                                                            rayl__split_fields7)))) (fp.isNaN (fp.mul RNE
-  (to_rep (rec__algorithm__laser_scan_data__first rayl__split_fields7))
-  (to_rep (rec__algorithm__laser_scan_data__first rayl__split_fields7))))))))
+  (fp.isFinite32 (fp.mul RNE (to_rep
+                             (rec__algorithm__laser_scan_data__first
+                             rayl__split_fields7)) (to_rep
+                                                   (rec__algorithm__laser_scan_data__first
+                                                   rayl__split_fields7))))))
 
 ;; H
   (assert
@@ -2231,19 +2221,17 @@
                     rayr__split_fields7)) (to_rep
                                           (rec__algorithm__laser_scan_data__first
                                           rayr__split_fields7))))
-  (not (or (fp.isInfinite (fp.mul RNE (to_rep
-                                      (rec__algorithm__laser_scan_data__first
-                                      rayr__split_fields7)) (to_rep
-                                                            (rec__algorithm__laser_scan_data__first
-                                                            rayr__split_fields7)))) (fp.isNaN (fp.mul RNE
-  (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields7))
-  (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields7))))))))
+  (fp.isFinite32 (fp.mul RNE (to_rep
+                             (rec__algorithm__laser_scan_data__first
+                             rayr__split_fields7)) (to_rep
+                                                   (rec__algorithm__laser_scan_data__first
+                                                   rayr__split_fields7))))))
 
 ;; H
   (assert (= o4 (fp.add RNE o3 o2)))
 
 ;; H
-  (assert (and (= o12 o4) (not (or (fp.isInfinite o4) (fp.isNaN o4)))))
+  (assert (and (= o12 o4) (fp.isFinite32 o4)))
 
 ;; H
   (assert (= o13 (fp.sub RNE o12 o11)))
@@ -2251,6 +2239,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "algorithm.adb", line 132, characters 0-0
-  (not (not (or (fp.isInfinite o13) (fp.isNaN o13)))))
+  (not (fp.isFinite32 o13)))
 (check-sat)
 (exit)

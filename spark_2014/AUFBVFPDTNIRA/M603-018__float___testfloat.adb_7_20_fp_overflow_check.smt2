@@ -8,6 +8,8 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
+(define-fun fp.isFinite64 ((x Float64)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -179,7 +181,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-sort long_float 0)
 
@@ -203,7 +205,7 @@
   (temp___do_toplevel_56 Bool)) Bool (=>
                                      (or (= temp___is_init_54 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
+                                     (fp.isFinite64 temp___expr_57)))
 
 (declare-const max_float Float32)
 
@@ -247,10 +249,10 @@
 (declare-const z1 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite max_float) (fp.isNaN max_float))))
+  (assert (fp.isFinite32 max_float))
 
 ;; H
-  (assert (not (or (fp.isInfinite max_double) (fp.isNaN max_double))))
+  (assert (fp.isFinite64 max_double))
 
 ;; H
   (assert (= result x))
@@ -259,7 +261,7 @@
   (assert (= x1 (fp #b0 #b00000000 #b00000000000000000000000)))
 
 ;; H
-  (assert (not (or (fp.isInfinite x1) (fp.isNaN x1))))
+  (assert (fp.isFinite32 x1))
 
 ;; H
   (assert (= result1 y))
@@ -268,7 +270,7 @@
   (assert (= y1 (fp #b0 #b01111111 #b00000000000000000000000)))
 
 ;; H
-  (assert (not (or (fp.isInfinite y1) (fp.isNaN y1))))
+  (assert (fp.isFinite32 y1))
 
 ;; H
   (assert (= result2 z))
@@ -277,13 +279,11 @@
   (assert (= z1 (fp #b0 #b01111110 #b00000000000000000000000)))
 
 ;; H
-  (assert (not (or (fp.isInfinite z1) (fp.isNaN z1))))
+  (assert (fp.isFinite32 z1))
 
 (assert
 ;; WP_parameter_def
  ;; File "testfloat.adb", line 11, characters 0-0
-  (not
-  (not (or (fp.isInfinite (fp.add RNE x1 y1)) (fp.isNaN (fp.add RNE x1
-  y1))))))
+  (not (fp.isFinite32 (fp.add RNE x1 y1))))
 (check-sat)
 (exit)

@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -86,7 +87,7 @@
   (temp___do_toplevel_519 Bool)) Bool (=>
                                       (or (= temp___is_init_517 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_520) (fp.isNaN temp___expr_520)))))
+                                      (fp.isFinite32 temp___expr_520)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -202,42 +203,38 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite x21) (fp.isNaN x21)))))
+  (fp.isFinite32 x21)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite x22) (fp.isNaN x22)))))
+  (fp.isFinite32 x22)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite x23) (fp.isNaN x23)))))
+  (fp.isFinite32 x23)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite x24) (fp.isNaN x24)))))
+  (fp.isFinite32 x24)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite x25) (fp.isNaN x25)))))
+  (fp.isFinite32 x25)))
 
 ;; H
   (assert
   (and
   (and
-  (and
-  (and (not (or (fp.isInfinite x211) (fp.isNaN x211)))
-  (not (or (fp.isInfinite x221) (fp.isNaN x221))))
-  (not (or (fp.isInfinite x231) (fp.isNaN x231))))
-  (not (or (fp.isInfinite x241) (fp.isNaN x241))))
-  (not (or (fp.isInfinite x251) (fp.isNaN x251)))))
+  (and (and (fp.isFinite32 x211) (fp.isFinite32 x221)) (fp.isFinite32 x231))
+  (fp.isFinite32 x241)) (fp.isFinite32 x251)))
 
 ;; H
   (assert (=> (<= 1 6) (= o1 (+ (- 6 1) 1))))

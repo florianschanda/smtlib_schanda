@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -59,7 +60,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const value Float32)
 
@@ -110,13 +111,13 @@
 (declare-const result4 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite value) (fp.isNaN value))))
+  (assert (fp.isFinite32 value))
 
 ;; H
-  (assert (not (or (fp.isInfinite min_value) (fp.isNaN min_value))))
+  (assert (fp.isFinite32 min_value))
 
 ;; H
-  (assert (not (or (fp.isInfinite max_value) (fp.isNaN max_value))))
+  (assert (fp.isFinite32 max_value))
 
 ;; H
   (assert (= result res))
@@ -125,7 +126,7 @@
   (assert (= res1 value))
 
 ;; H
-  (assert (not (or (fp.isInfinite res1) (fp.isNaN res1))))
+  (assert (fp.isFinite32 res1))
 
 ;; H
   (assert (=> (fp.lt value min_value) (= result1 res1)))

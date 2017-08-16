@@ -8,6 +8,8 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
+(define-fun fp.isFinite64 ((x Float64)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -120,7 +122,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (define-fun in_range4 ((x Int)) Bool (and (<= (- 32768) x) (<= x 32767)))
 
@@ -189,8 +191,7 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(define-fun in_range8 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range8 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000010 #b01000000000000000000000)))))
@@ -204,8 +205,7 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(define-fun in_range9 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range9 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000010 #b01000000000000000000000)))))
@@ -289,7 +289,7 @@
   (assert (= z11 (fp #b0 #b01111111 #b00000000000000000000000)))
 
 ;; H
-  (assert (not (or (fp.isInfinite z11) (fp.isNaN z11))))
+  (assert (fp.isFinite32 z11))
 
 ;; H
   (assert (= result1 z2))

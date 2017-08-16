@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -126,7 +127,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const d Float32)
 
@@ -180,13 +181,13 @@
 (declare-const result3 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite d) (fp.isNaN d))))
+  (assert (fp.isFinite32 d))
 
 ;; H
-  (assert (not (or (fp.isInfinite kv) (fp.isNaN kv))))
+  (assert (fp.isFinite32 kv))
 
 ;; H
-  (assert (not (or (fp.isInfinite ka) (fp.isNaN ka))))
+  (assert (fp.isFinite32 ka))
 
 ;; H
   (assert
@@ -205,16 +206,13 @@
   (= homothetical__adjust2triangle__result6 homothetical__adjust2triangle__result4))
 
 ;; H
-  (assert
-  (and (= o (fp.mul RNE kv kv))
-  (not (or (fp.isInfinite (fp.mul RNE kv kv)) (fp.isNaN (fp.mul RNE kv
-  kv))))))
+  (assert (and (= o (fp.mul RNE kv kv)) (fp.isFinite32 (fp.mul RNE kv kv))))
 
 ;; H
   (assert (= o1 (fp.div RNE o ka)))
 
 ;; H
-  (assert (and (= o2 o1) (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (assert (and (= o2 o1) (fp.isFinite32 o1)))
 
 ;; H
   (assert (= result (ite (fp.lt (fp.abs d) o2) true false)))
@@ -233,8 +231,7 @@
   (assert
   (=> (= result true)
   (and (= o3 (fp.mul RNE (fp.abs d) ka))
-  (not (or (fp.isInfinite (fp.mul RNE (fp.abs d) ka)) (fp.isNaN (fp.mul RNE (fp.abs
-  d) ka)))))))
+  (fp.isFinite32 (fp.mul RNE (fp.abs d) ka)))))
 
 ;; H
   (assert (=> (= result true) (= o4 (fp.sqrt RNE o3))))

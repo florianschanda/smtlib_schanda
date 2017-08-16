@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -59,7 +60,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const x Float32)
 
@@ -73,8 +74,7 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(define-fun in_range1 ((x1 Float32)) Bool (and
-                                          (not (or (fp.isInfinite x1) (fp.isNaN x1)))
+(define-fun in_range1 ((x1 Float32)) Bool (and (fp.isFinite32 x1)
                                           (and
                                           (fp.leq (fp.neg (fp #b0 #b10001010 #b01110111000000000000000)) x1)
                                           (fp.leq x1 (fp #b0 #b10001010 #b01110111000000000000000)))))
@@ -137,13 +137,13 @@
 (declare-const pitch_rate_desired2 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite x) (fp.isNaN x))))
+  (assert (fp.isFinite32 x))
 
 ;; H
-  (assert (not (or (fp.isInfinite y) (fp.isNaN y))))
+  (assert (fp.isFinite32 y))
 
 ;; H
-  (assert (not (or (fp.isInfinite z) (fp.isNaN z))))
+  (assert (fp.isFinite32 z))
 
 ;; H
   (assert (= result roll_rate_desired))
@@ -178,7 +178,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "get_out_subtype.adb", line 7, characters 0-0
-  (not
-  (not (or (fp.isInfinite pitch_rate_desired1) (fp.isNaN pitch_rate_desired1)))))
+  (not (fp.isFinite32 pitch_rate_desired1)))
 (check-sat)
 (exit)

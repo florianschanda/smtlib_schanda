@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -65,16 +66,14 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
-(define-fun in_range2 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
 
-(define-fun in_range3 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -86,8 +85,7 @@
                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
                                       (in_range3 temp___expr_146)))
 
-(define-fun in_range4 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
@@ -776,8 +774,7 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(define-fun in_range8 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range8 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000)))))
@@ -837,7 +834,7 @@
   (temp___do_toplevel_157 Bool)) Bool (=>
                                       (or (= temp___is_init_155 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_158) (fp.isNaN temp___expr_158)))))
+                                      (fp.isFinite32 temp___expr_158)))
 
 (define-fun dynamic_invariant8 ((temp___expr_170 Float32)
   (temp___is_init_167 Bool) (temp___skip_constant_168 Bool)
@@ -988,7 +985,7 @@
 (declare-const i6 Int)
 
 ;; H
-  (assert (not (or (fp.isInfinite safetydist) (fp.isNaN safetydist))))
+  (assert (fp.isFinite32 safetydist))
 
 ;; H
   (assert
@@ -1004,7 +1001,7 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite deltaangle) (fp.isNaN deltaangle)))))
+  (fp.isFinite32 deltaangle)))
 
 ;; H
   (assert (= result deltaareasum))
@@ -1023,8 +1020,7 @@
   (= obstacleavoiddelta1 (fp #b0 #b00000000 #b00000000000000000000000)))
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite obstacleavoiddelta1) (fp.isNaN obstacleavoiddelta1))))
+  (assert (fp.isFinite32 obstacleavoiddelta1))
 
 ;; H
   (assert (= i1 1))
@@ -1044,14 +1040,14 @@
   (and
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite obstacleavoiddelta2) (fp.isNaN obstacleavoiddelta2))))
+  (fp.isFinite32 obstacleavoiddelta2))
   (=> (<= 1 1000) (dynamic_property 1 1000 i2)))
   (=>
   (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b01111111 #b00000000000000000000000))
   (in_range8 deltamag2)))
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite deltaangle2) (fp.isNaN deltaangle2)))))
+  (fp.isFinite32 deltaangle2)))
   (=>
   (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111))
   (in_range3 deltaareasum2))) (and (<= 1 i2) (<= i2 1000))))
@@ -1060,25 +1056,25 @@
   (assert (= result3 true))
 
 ;; H
-  (assert (and (= o3 o2) (not (or (fp.isInfinite o2) (fp.isNaN o2)))))
+  (assert (and (= o3 o2) (fp.isFinite32 o2)))
 
 ;; H
   (assert (= o4 (fp.div RNE o3 safetydist)))
 
 ;; H
-  (assert (and (= o5 o4) (not (or (fp.isInfinite o4) (fp.isNaN o4)))))
+  (assert (and (= o5 o4) (fp.isFinite32 o4)))
 
 (declare-const abstr1 Float32)
 
 ;; H
   (assert
   (and (= o6 abstr1)
-  (and (not (or (fp.isInfinite o6) (fp.isNaN o6)))
+  (and (fp.isFinite32 o6)
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o6)
   (fp.leq o6 (fp #b0 #b01111111 #b00000000000000000000000))))))
 
 ;; H
-  (assert (and (= o7 o6) (not (or (fp.isInfinite o6) (fp.isNaN o6)))))
+  (assert (and (= o7 o6) (fp.isFinite32 o6)))
 
 ;; H
   (assert (= deltamag2 result4))
@@ -1096,8 +1092,6 @@
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.add RNE deltaareasum2 (fp.mul RNE deltamag3
-  deltamag3))) (fp.isNaN (fp.add RNE deltaareasum2 (fp.mul RNE deltamag3
-  deltamag3)))))))
+  (fp.isFinite32 (fp.add RNE deltaareasum2 (fp.mul RNE deltamag3 deltamag3)))))
 (check-sat)
 (exit)

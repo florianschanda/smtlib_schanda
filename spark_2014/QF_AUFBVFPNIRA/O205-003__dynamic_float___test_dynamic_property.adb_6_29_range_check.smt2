@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -65,14 +66,13 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const d Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(define-fun in_range2 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000101 #b10010000000000000000000)))))
@@ -91,7 +91,7 @@
 (declare-const last Float32)
 
 (define-fun dynamic_property ((first_int Float32) (last_int Float32)
-  (x Float32)) Bool (and (not (or (fp.isInfinite x) (fp.isNaN x)))
+  (x Float32)) Bool (and (fp.isFinite32 x)
                     (and (fp.leq first_int x) (fp.leq x last_int))))
 
 (define-fun dynamic_invariant2 ((temp___expr_141 Float32)
@@ -111,7 +111,7 @@
 (declare-const last1 Float32)
 
 (define-fun dynamic_property1 ((first_int Float32) (last_int Float32)
-  (x Float32)) Bool (and (not (or (fp.isInfinite x) (fp.isNaN x)))
+  (x Float32)) Bool (and (fp.isFinite32 x)
                     (and (fp.leq first_int x) (fp.leq x last_int))))
 
 (define-fun dynamic_invariant3 ((temp___expr_147 Float32)
@@ -190,7 +190,7 @@
 (declare-const x4 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite d) (fp.isNaN d))))
+  (assert (fp.isFinite32 d))
 
 ;; H
   (assert
@@ -198,9 +198,7 @@
   (fp.leq d (fp #b0 #b10000101 #b10010000000000000000000))))
 
 ;; H
-  (assert
-  (and (= test_dynamic_property__c__assume d)
-  (not (or (fp.isInfinite d) (fp.isNaN d)))))
+  (assert (and (= test_dynamic_property__c__assume d) (fp.isFinite32 d)))
 
 ;; H
   (assert (= test_dynamic_property__c__assume c))

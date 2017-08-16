@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -114,7 +115,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-sort num 0)
 
@@ -136,7 +137,7 @@
   (temp___do_toplevel_513 Bool)) Bool (=>
                                       (or (= temp___is_init_511 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_514) (fp.isNaN temp___expr_514)))))
+                                      (fp.isFinite32 temp___expr_514)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -170,24 +171,22 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite room_length) (fp.isNaN room_length)))))
+  (fp.isFinite32 room_length)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite wall_thickness) (fp.isNaN wall_thickness)))))
+  (fp.isFinite32 wall_thickness)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite total) (fp.isNaN total)))))
+  (fp.isFinite32 total)))
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite ada__float_text_io__get__2__item) (fp.isNaN
-  ada__float_text_io__get__2__item))))
+  (assert (fp.isFinite32 ada__float_text_io__get__2__item))
 
 ;; H
   (assert (= result room_length))
@@ -196,9 +195,7 @@
   (assert (= room_length1 ada__float_text_io__get__2__item))
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite ada__float_text_io__get__2__item1) (fp.isNaN
-  ada__float_text_io__get__2__item1))))
+  (assert (fp.isFinite32 ada__float_text_io__get__2__item1))
 
 ;; H
   (assert (= result1 wall_thickness))
@@ -210,9 +207,8 @@
   (assert
   (and
   (= o (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) wall_thickness1))
-  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
-  wall_thickness1)) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
-  wall_thickness1))))))
+  (fp.isFinite32 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
+  wall_thickness1))))
 
 ;; H
   (assert (= o1 (fp.add RNE room_length1 o)))
@@ -220,6 +216,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "bad_types.adb", line 2, characters 0-0
-  (not (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (not (fp.isFinite32 o1)))
 (check-sat)
 (exit)

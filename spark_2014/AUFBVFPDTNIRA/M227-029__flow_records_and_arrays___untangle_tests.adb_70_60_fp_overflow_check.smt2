@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -131,15 +132,13 @@
 
 ;; range_axiom
   (assert
-  (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep x)) (fp.isNaN (to_rep x)))) :pattern (
-  (to_rep x)) )))
+  (forall ((x float)) (! (fp.isFinite32 (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x))) (= (to_rep (of_rep x)) x)) :pattern (
-  (to_rep (of_rep x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                                (of_rep x))) )))
 
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields
@@ -598,7 +597,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const tl (Array Int us_rep1))
 
@@ -716,20 +715,14 @@
                     (select (rec__untangle_tests__triangle__vertices
                             (us_split_fields3 (select tl1 t2))) v1))))
   (to_rep (rec__untangle_tests__coordinate__x (us_split_fields1 o)))))
-  (not (or (fp.isInfinite (fp.add RNE (to_rep
-                                      (rec__untangle_tests__coordinate__x
-                                      (us_split_fields1
-                                      (select (rec__untangle_tests__triangle__vertices
-                                              (us_split_fields3
-                                              (select tl1 t2))) v1))))
-  (to_rep (rec__untangle_tests__coordinate__x (us_split_fields1 o))))) (fp.isNaN (fp.add RNE
-  (to_rep
-  (rec__untangle_tests__coordinate__x
-  (us_split_fields1
-  (select (rec__untangle_tests__triangle__vertices
-          (us_split_fields3 (select tl1 t2))) v1)))) (to_rep
-                                                     (rec__untangle_tests__coordinate__x
-                                                     (us_split_fields1 o)))))))))
+  (fp.isFinite32 (fp.add RNE (to_rep
+                             (rec__untangle_tests__coordinate__x
+                             (us_split_fields1
+                             (select (rec__untangle_tests__triangle__vertices
+                                     (us_split_fields3 (select tl1 t2)))
+                             v1)))) (to_rep
+                                    (rec__untangle_tests__coordinate__x
+                                    (us_split_fields1 o)))))))
 
 ;; H
   (assert (= (to_rep o2) o1))
@@ -817,19 +810,13 @@
 ;; WP_parameter_def
  ;; File "untangle_tests.adb", line 44, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.add RNE (to_rep
-                                      (rec__untangle_tests__coordinate__y
-                                      (us_split_fields1
-                                      (select (rec__untangle_tests__triangle__vertices
-                                              (us_split_fields3
-                                              (select tl2 t2))) v1))))
-  (to_rep (rec__untangle_tests__coordinate__y (us_split_fields1 o))))) (fp.isNaN (fp.add RNE
-  (to_rep
-  (rec__untangle_tests__coordinate__y
-  (us_split_fields1
-  (select (rec__untangle_tests__triangle__vertices
-          (us_split_fields3 (select tl2 t2))) v1)))) (to_rep
-                                                     (rec__untangle_tests__coordinate__y
-                                                     (us_split_fields1 o)))))))))
+  (fp.isFinite32 (fp.add RNE (to_rep
+                             (rec__untangle_tests__coordinate__y
+                             (us_split_fields1
+                             (select (rec__untangle_tests__triangle__vertices
+                                     (us_split_fields3 (select tl2 t2)))
+                             v1)))) (to_rep
+                                    (rec__untangle_tests__coordinate__y
+                                    (us_split_fields1 o)))))))
 (check-sat)
 (exit)

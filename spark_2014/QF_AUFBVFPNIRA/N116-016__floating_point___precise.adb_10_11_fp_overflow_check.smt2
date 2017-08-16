@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -65,7 +66,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -118,7 +119,7 @@
   (assert (= x1 (fp #b0 #b10000010 #b01000000000000000000000)))
 
 ;; H
-  (assert (not (or (fp.isInfinite x1) (fp.isNaN x1))))
+  (assert (fp.isFinite32 x1))
 
 ;; H
   (assert (= result1 y))
@@ -127,19 +128,16 @@
   (assert (= y1 (fp #b0 #b01111101 #b10011001100110011001101)))
 
 ;; H
-  (assert (not (or (fp.isInfinite y1) (fp.isNaN y1))))
+  (assert (fp.isFinite32 y1))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite z) (fp.isNaN z)))))
+  (fp.isFinite32 z)))
 
 ;; H
-  (assert
-  (and (= o (fp.add RNE x1 y1))
-  (not (or (fp.isInfinite (fp.add RNE x1 y1)) (fp.isNaN (fp.add RNE x1
-  y1))))))
+  (assert (and (= o (fp.add RNE x1 y1)) (fp.isFinite32 (fp.add RNE x1 y1))))
 
 ;; H
   (assert (= result2 z))
@@ -153,10 +151,7 @@
   (fp.leq z1 (fp #b0 #b10000010 #b01001100110011001110001))))
 
 ;; H
-  (assert
-  (and (= o1 (fp.sub RNE x1 y1))
-  (not (or (fp.isInfinite (fp.sub RNE x1 y1)) (fp.isNaN (fp.sub RNE x1
-  y1))))))
+  (assert (and (= o1 (fp.sub RNE x1 y1)) (fp.isFinite32 (fp.sub RNE x1 y1))))
 
 ;; H
   (assert (= result3 z1))
@@ -172,8 +167,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "precise.adb", line 1, characters 0-0
-  (not
-  (not (or (fp.isInfinite (fp.mul RNE x1 y1)) (fp.isNaN (fp.mul RNE x1
-  y1))))))
+  (not (fp.isFinite32 (fp.mul RNE x1 y1))))
 (check-sat)
 (exit)

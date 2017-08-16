@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -65,7 +66,7 @@
   (temp___do_toplevel_140 Bool)) Bool (=>
                                       (or (= temp___is_init_138 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_141) (fp.isNaN temp___expr_141)))))
+                                      (fp.isFinite32 temp___expr_141)))
 
 (declare-const left Float32)
 
@@ -94,10 +95,10 @@
 (declare-const numerics__Osubtract__result5 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite left) (fp.isNaN left))))
+  (assert (fp.isFinite32 left))
 
 ;; H
-  (assert (not (or (fp.isInfinite right) (fp.isNaN right))))
+  (assert (fp.isFinite32 right))
 
 ;; H
   (assert (= numerics__Osubtract__result1 numerics__Osubtract__result2))
@@ -107,9 +108,7 @@
 
 ;; H
   (assert
-  (and (= o (fp.sub RNE left right))
-  (not (or (fp.isInfinite (fp.sub RNE left right)) (fp.isNaN (fp.sub RNE
-  left right))))))
+  (and (= o (fp.sub RNE left right)) (fp.isFinite32 (fp.sub RNE left right))))
 
 ;; H
   (assert (= numerics__Osubtract__result1 o))
@@ -120,8 +119,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "numerics.ads", line 7, characters 0-0
-  (not
-  (not (or (fp.isInfinite (fp.sub RNE left right)) (fp.isNaN (fp.sub RNE
-  left right))))))
+  (not (fp.isFinite32 (fp.sub RNE left right))))
 (check-sat)
 (exit)

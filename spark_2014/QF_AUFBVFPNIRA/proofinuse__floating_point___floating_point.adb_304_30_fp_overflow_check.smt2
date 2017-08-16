@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -65,7 +66,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const d0 Float32)
 
@@ -100,13 +101,13 @@
 (declare-const res1 Bool)
 
 ;; H
-  (assert (not (or (fp.isInfinite d0) (fp.isNaN d0))))
+  (assert (fp.isFinite32 d0))
 
 ;; H
-  (assert (not (or (fp.isInfinite d1) (fp.isNaN d1))))
+  (assert (fp.isFinite32 d1))
 
 ;; H
-  (assert (not (or (fp.isInfinite r) (fp.isNaN r))))
+  (assert (fp.isFinite32 r))
 
 ;; H
   (assert (fp.lt d0 d1))
@@ -120,10 +121,7 @@
   (assert (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) d0))
 
 ;; H
-  (assert
-  (and (= o (fp.sub RNE d1 d0))
-  (not (or (fp.isInfinite (fp.sub RNE d1 d0)) (fp.isNaN (fp.sub RNE d1
-  d0))))))
+  (assert (and (= o (fp.sub RNE d1 d0)) (fp.isFinite32 (fp.sub RNE d1 d0))))
 
 ;; H
   (assert (= o1 (fp.mul RNE o r)))
@@ -131,6 +129,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "floating_point.adb", line 284, characters 0-0
-  (not (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (not (fp.isFinite32 o1)))
 (check-sat)
 (exit)

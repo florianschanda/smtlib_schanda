@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -143,7 +144,7 @@
   (temp___do_toplevel_151 Bool)) Bool (=>
                                       (or (= temp___is_init_149 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_152) (fp.isNaN temp___expr_152)))))
+                                      (fp.isFinite32 temp___expr_152)))
 
 (declare-fun to_rep (speed_t) Float32)
 
@@ -156,14 +157,13 @@
 ;; range_axiom
   (assert
   (forall ((x speed_t))
-  (! (not (or (fp.isInfinite (to_rep x)) (fp.isNaN (to_rep x)))) :pattern (
-  (to_rep x)) )))
+  (! (fp.isFinite32 (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x))) (= (to_rep (of_rep x)) x)) :pattern (
-  (to_rep (of_rep x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                                (of_rep x))) )))
 
 (declare-sort tdistance_tB 0)
 
@@ -237,8 +237,7 @@
 
 (declare-sort deceleration_t 0)
 
-(define-fun in_range4 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -765,7 +764,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 ;; end_point__def_axiom
   (assert
@@ -801,7 +800,7 @@
   (temp___do_toplevel_157 Bool)) Bool (=>
                                       (or (= temp___is_init_155 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_158) (fp.isNaN temp___expr_158)))))
+                                      (fp.isFinite32 temp___expr_158)))
 
 (declare-fun is_valid_speed_km_per_h (Float32) Bool)
 
@@ -902,14 +901,13 @@
 ;; range_axiom
   (assert
   (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep3 x)) (fp.isNaN (to_rep3 x)))) :pattern (
-  (to_rep3 x)) )))
+  (! (fp.isFinite32 (to_rep3 x)) :pattern ((to_rep3 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep3 (of_rep3 x)) x)) :pattern ((to_rep3 (of_rep3 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep3 (of_rep3 x)) x)) :pattern ((to_rep3
+                                                                  (of_rep3 x))) )))
 
 (declare-sort function_range 0)
 
@@ -1698,8 +1696,7 @@
 (declare-const i2 Int)
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite maximum_valid_speed) (fp.isNaN maximum_valid_speed))))
+  (assert (fp.isFinite32 maximum_valid_speed))
 
 ;; H
   (assert
@@ -1721,7 +1718,7 @@
             (us_split_fields5 target)))))
 
 ;; H
-  (assert (not (or (fp.isInfinite speed1) (fp.isNaN speed1))))
+  (assert (fp.isFinite32 speed1))
 
 ;; H
   (assert (= result1 (mk_int__ref location)))
@@ -1903,8 +1900,7 @@
                                    braking_curve__split_fields4))))
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite speed2) (fp.isNaN speed2)))))
-  (and (<= 0 i2) (<= i2 (- end_point 1)))))
+  (fp.isFinite32 speed2))) (and (<= 0 i2) (<= i2 (- end_point 1)))))
 
 ;; H
   (assert
@@ -1917,7 +1913,7 @@
   (= o20 (fp.mul RNE (fp #b0 #b10000001 #b00000000000000000000000) o19)))
 
 ;; H
-  (assert (and (= o21 o20) (not (or (fp.isInfinite o20) (fp.isNaN o20)))))
+  (assert (and (= o21 o20) (fp.isFinite32 o20)))
 
 ;; H
   (assert
@@ -1926,6 +1922,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "deceleration_curve.ads", line 32, characters 0-0
-  (not (not (or (fp.isInfinite o22) (fp.isNaN o22)))))
+  (not (fp.isFinite32 o22)))
 (check-sat)
 (exit)

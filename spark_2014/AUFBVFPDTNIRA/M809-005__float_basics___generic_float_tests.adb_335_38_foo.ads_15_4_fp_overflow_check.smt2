@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite64 ((x Float64)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -142,7 +143,7 @@
   (temp___do_toplevel_166 Bool)) Bool (=>
                                       (or (= temp___is_init_164 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_167) (fp.isNaN temp___expr_167)))))
+                                      (fp.isFinite64 temp___expr_167)))
 
 (declare-const x Float64)
 
@@ -153,10 +154,10 @@
   (temp___do_toplevel_56 Bool)) Bool (=>
                                      (or (= temp___is_init_54 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
+                                     (fp.isFinite64 temp___expr_57)))
 
 ;; H
-  (assert (not (or (fp.isInfinite x) (fp.isNaN x))))
+  (assert (fp.isFinite64 x))
 
 ;; H
   (assert
@@ -169,7 +170,6 @@
 ;; WP_parameter_def
  ;; File "generic_float_tests.adb", line 324, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.add RNE x (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))) (fp.isNaN (fp.add RNE
-  x (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))))))
+  (fp.isFinite64 (fp.add RNE x (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))))
 (check-sat)
 (exit)

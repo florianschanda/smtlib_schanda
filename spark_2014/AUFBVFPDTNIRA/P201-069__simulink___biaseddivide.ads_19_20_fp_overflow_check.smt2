@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite64 ((x Float64)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -115,7 +116,7 @@
   (temp___do_toplevel_56 Bool)) Bool (=>
                                      (or (= temp___is_init_54 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
+                                     (fp.isFinite64 temp___expr_57)))
 
 (declare-const y Float64)
 
@@ -148,16 +149,16 @@
 (declare-const r3 Float64)
 
 ;; H
-  (assert (not (or (fp.isInfinite y) (fp.isNaN y))))
+  (assert (fp.isFinite64 y))
 
 ;; H
-  (assert (not (or (fp.isInfinite z) (fp.isNaN z))))
+  (assert (fp.isFinite64 z))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite r) (fp.isNaN r)))))
+  (fp.isFinite64 r)))
 
 ;; H
   (assert
@@ -167,14 +168,13 @@
   (assert
   (and
   (= o (fp.add RNE z (fp.neg (fp #b0 #b10000000001 #b0000000000000000000000000000000000000000000000000000))))
-  (not (or (fp.isInfinite (fp.add RNE z (fp.neg (fp #b0 #b10000000001 #b0000000000000000000000000000000000000000000000000000)))) (fp.isNaN (fp.add RNE
-  z (fp.neg (fp #b0 #b10000000001 #b0000000000000000000000000000000000000000000000000000))))))))
+  (fp.isFinite64 (fp.add RNE z (fp.neg (fp #b0 #b10000000001 #b0000000000000000000000000000000000000000000000000000))))))
 
 ;; H
   (assert (= o1 (fp.div RNE y o)))
 
 ;; H
-  (assert (and (= o2 o1) (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (assert (and (= o2 o1) (fp.isFinite64 o1)))
 
 ;; H
   (assert (= (mk_t__ref result) (mk_t__ref r)))
@@ -192,8 +192,7 @@
   (assert
   (and
   (= o3 (fp.sub RNE z (fp #b0 #b10000000001 #b0000000000000000000000000000000000000000000000000000)))
-  (not (or (fp.isInfinite (fp.sub RNE z (fp #b0 #b10000000001 #b0000000000000000000000000000000000000000000000000000))) (fp.isNaN (fp.sub RNE
-  z (fp #b0 #b10000000001 #b0000000000000000000000000000000000000000000000000000)))))))
+  (fp.isFinite64 (fp.sub RNE z (fp #b0 #b10000000001 #b0000000000000000000000000000000000000000000000000000)))))
 
 ;; H
   (assert (= o4 (fp.div RNE y o3)))
@@ -201,6 +200,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "biaseddivide.ads", line 16, characters 0-0
-  (not (not (or (fp.isInfinite o4) (fp.isNaN o4)))))
+  (not (fp.isFinite64 o4)))
 (check-sat)
 (exit)

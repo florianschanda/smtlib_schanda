@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -126,12 +127,11 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-sort positive_float 0)
 
-(define-fun in_range2 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -175,7 +175,7 @@
 (declare-const res1 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite value) (fp.isNaN value))))
+  (assert (fp.isFinite32 value))
 
 ;; H
   (assert (in_range2 threshold))
@@ -187,7 +187,7 @@
   (assert (= res1 value))
 
 ;; H
-  (assert (not (or (fp.isInfinite res1) (fp.isNaN res1))))
+  (assert (fp.isFinite32 res1))
 
 ;; H
   (assert
@@ -199,8 +199,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not
-  (not (or (fp.isInfinite (fp.sub RNE res1 threshold)) (fp.isNaN (fp.sub RNE
-  res1 threshold))))))
+  (not (fp.isFinite32 (fp.sub RNE res1 threshold))))
 (check-sat)
 (exit)

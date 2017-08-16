@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -92,16 +93,14 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
-(define-fun in_range5 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range5 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
 
-(define-fun in_range6 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range6 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
@@ -261,10 +260,10 @@
 (declare-const result1 Bool)
 
 ;; H
-  (assert (not (or (fp.isInfinite width) (fp.isNaN width))))
+  (assert (fp.isFinite32 width))
 
 ;; H
-  (assert (not (or (fp.isInfinite forwardlength) (fp.isNaN forwardlength))))
+  (assert (fp.isFinite32 forwardlength))
 
 ;; H
   (assert (= result i))
@@ -285,7 +284,7 @@
   (assert (= algorithm__isfilterclear__B_2__deltaangle__assume deltaangle))
 
 ;; H
-  (assert (not (or (fp.isInfinite deltaangle) (fp.isNaN deltaangle))))
+  (assert (fp.isFinite32 deltaangle))
 
 ;; H
   (assert
@@ -301,14 +300,14 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite d) (fp.isNaN d)))))
+  (fp.isFinite32 d)))
 
 (declare-const abstr1 Float32)
 
 ;; H
   (assert
   (and (= o abstr1)
-  (and (not (or (fp.isInfinite o) (fp.isNaN o)))
+  (and (fp.isFinite32 o)
   (=>
   (and
   (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) (fp.abs forwardlength))
@@ -326,7 +325,7 @@
 ;; H
   (assert
   (and (= o4 abstr2)
-  (and (not (or (fp.isInfinite o4) (fp.isNaN o4)))
+  (and (fp.isFinite32 o4)
   (and
   (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))
   o4) (fp.leq o4 (fp #b0 #b01111111 #b00000000000000000000000)))

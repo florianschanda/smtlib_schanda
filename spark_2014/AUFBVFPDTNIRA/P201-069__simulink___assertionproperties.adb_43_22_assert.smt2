@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite64 ((x Float64)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -115,7 +116,7 @@
   (temp___do_toplevel_56 Bool)) Bool (=>
                                      (or (= temp___is_init_54 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
+                                     (fp.isFinite64 temp___expr_57)))
 
 (declare-fun pow__2 (Float64 Float64) Float64)
 
@@ -131,8 +132,7 @@
 
 (declare-sort long_float_m0_0_minf 0)
 
-(define-fun in_range1 ((x Float64)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range1 ((x Float64)) Bool (and (fp.isFinite64 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))))
@@ -189,7 +189,7 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite y) (fp.isNaN y)))))
+  (fp.isFinite64 y)))
 
 ;; H
   (assert
@@ -199,14 +199,14 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite sqrt_out1) (fp.isNaN sqrt_out1)))))
+  (fp.isFinite64 sqrt_out1)))
 
 ;; H
   (assert
   (and
   (= o (pow__2 x
        (fp #b0 #b01111111110 #b0000000000000000000000000000000000000000000000000000)))
-  (not (or (fp.isInfinite o) (fp.isNaN o)))))
+  (fp.isFinite64 o)))
 
 ;; H
   (assert (= result sqrt_out1))

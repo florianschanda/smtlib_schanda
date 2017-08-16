@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -65,7 +66,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const x Float32)
 
@@ -118,7 +119,7 @@
 (declare-const o22 Bool)
 
 ;; H
-  (assert (not (or (fp.isInfinite x) (fp.isNaN x))))
+  (assert (fp.isFinite32 x))
 
 ;; H
   (assert
@@ -128,28 +129,27 @@
 ;; H
   (assert
   (and (= o11 (fp.add RNE x (fp #b0 #b10000000 #b00000000000000000000000)))
-  (not (or (fp.isInfinite (fp.add RNE x (fp #b0 #b10000000 #b00000000000000000000000))) (fp.isNaN (fp.add RNE
-  x (fp #b0 #b10000000 #b00000000000000000000000)))))))
+  (fp.isFinite32 (fp.add RNE x (fp #b0 #b10000000 #b00000000000000000000000)))))
 
 ;; H
   (assert (= o12 (fp.mul RNE o11 x)))
 
 ;; H
-  (assert (and (= o13 o12) (not (or (fp.isInfinite o12) (fp.isNaN o12)))))
+  (assert (and (= o13 o12) (fp.isFinite32 o12)))
 
 ;; H
   (assert
   (= o14 (fp.add RNE o13 (fp #b0 #b10000000 #b10000000000000000000000))))
 
 ;; H
-  (assert (and (= o15 o14) (not (or (fp.isInfinite o14) (fp.isNaN o14)))))
+  (assert (and (= o15 o14) (fp.isFinite32 o14)))
 
 ;; H
   (assert
   (= o16 (fp.add RNE o15 (fp #b0 #b10000001 #b00000000000000000000000))))
 
 ;; H
-  (assert (and (= o17 o16) (not (or (fp.isInfinite o16) (fp.isNaN o16)))))
+  (assert (and (= o17 o16) (fp.isFinite32 o16)))
 
 ;; H
   (assert (= o18 (fp.mul RNE o17 x)))
@@ -157,6 +157,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "a-unccon.ads", line 20, characters 0-0
-  (not (not (or (fp.isInfinite o18) (fp.isNaN o18)))))
+  (not (fp.isFinite32 o18)))
 (check-sat)
 (exit)

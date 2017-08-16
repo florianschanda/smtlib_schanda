@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite64 ((x Float64)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float64)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -64,8 +65,7 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_15)))
 
-(define-fun in_range2 ((x Float64)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range2 ((x Float64)) Bool (and (fp.isFinite64 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)) x)
                                          (fp.leq x (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)))))
@@ -77,8 +77,7 @@
                                       (fp.leq (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)))
                                       (in_range2 temp___expr_135)))
 
-(define-fun in_range3 ((x Float64)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range3 ((x Float64)) Bool (and (fp.isFinite64 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))))
@@ -153,8 +152,7 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(define-fun in_range4 ((x1 Float64)) Bool (and
-                                          (not (or (fp.isInfinite x1) (fp.isNaN x1)))
+(define-fun in_range4 ((x1 Float64)) Bool (and (fp.isFinite64 x1)
                                           (and
                                           (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) x1)
                                           (fp.leq x1 (fp #b0 #b10000000110 #b1001000000000000000000000000000000000000000000000000)))))

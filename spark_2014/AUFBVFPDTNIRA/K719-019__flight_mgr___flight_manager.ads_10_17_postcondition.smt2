@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -126,7 +127,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-fun to_rep (float) Float32)
 
@@ -138,15 +139,13 @@
 
 ;; range_axiom
   (assert
-  (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep x)) (fp.isNaN (to_rep x)))) :pattern (
-  (to_rep x)) )))
+  (forall ((x float)) (! (fp.isFinite32 (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x))) (= (to_rep (of_rep x)) x)) :pattern (
-  (to_rep (of_rep x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                                (of_rep x))) )))
 
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields
@@ -384,16 +383,16 @@
 (declare-const result8 float)
 
 ;; H
-  (assert (not (or (fp.isInfinite position_x) (fp.isNaN position_x))))
+  (assert (fp.isFinite32 position_x))
 
 ;; H
-  (assert (not (or (fp.isInfinite position_y) (fp.isNaN position_y))))
+  (assert (fp.isFinite32 position_y))
 
 ;; H
-  (assert (not (or (fp.isInfinite target_x) (fp.isNaN target_x))))
+  (assert (fp.isFinite32 target_x))
 
 ;; H
-  (assert (not (or (fp.isInfinite target_y) (fp.isNaN target_y))))
+  (assert (fp.isFinite32 target_y))
 
 ;; H
   (assert
@@ -560,8 +559,7 @@
 ;; H
   (assert
   (and (= o12 (fp.sub RNE position_x target_x))
-  (not (or (fp.isInfinite (fp.sub RNE position_x target_x)) (fp.isNaN (fp.sub RNE
-  position_x target_x))))))
+  (fp.isFinite32 (fp.sub RNE position_x target_x))))
 
 ;; H
   (assert (= o13 (fp.abs o12)))
@@ -574,8 +572,7 @@
   (to_rep
   (rec__flight_manager__engine_values__x_speed result____split_fields5))
   o13) (fp #b0 #b10000010 #b01000000000000000000000))))
-  (not (or (fp.isInfinite flight_manager__set_engine_speed__adjust_speed__f) (fp.isNaN
-  flight_manager__set_engine_speed__adjust_speed__f)))))
+  (fp.isFinite32 flight_manager__set_engine_speed__adjust_speed__f)))
 
 ;; H
   (assert (= (to_rep o14) flight_manager__set_engine_speed__adjust_speed__f))
@@ -604,8 +601,7 @@
 ;; H
   (assert
   (and (= o17 (fp.sub RNE position_y target_y))
-  (not (or (fp.isInfinite (fp.sub RNE position_y target_y)) (fp.isNaN (fp.sub RNE
-  position_y target_y))))))
+  (fp.isFinite32 (fp.sub RNE position_y target_y))))
 
 ;; H
   (assert (= o18 (fp.abs o17)))
@@ -618,8 +614,7 @@
   (to_rep
   (rec__flight_manager__engine_values__y_speed result____split_fields7))
   o18) (fp #b0 #b10000010 #b01000000000000000000000))))
-  (not (or (fp.isInfinite flight_manager__set_engine_speed__adjust_speed__f1) (fp.isNaN
-  flight_manager__set_engine_speed__adjust_speed__f1)))))
+  (fp.isFinite32 flight_manager__set_engine_speed__adjust_speed__f1)))
 
 ;; H
   (assert

@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun mod1 ((x Int)
   (y Int)) Int (ite (< 0 y) (mod x y) (+ (mod x y) y)))
 
@@ -104,10 +105,9 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
-(define-fun in_range6 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range6 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -119,8 +119,7 @@
                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
                                       (in_range6 temp___expr_140)))
 
-(define-fun in_range7 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range7 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -132,8 +131,7 @@
                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
                                       (in_range7 temp___expr_146)))
 
-(define-fun in_range8 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range8 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
@@ -1128,7 +1126,7 @@
   (temp___do_toplevel_157 Bool)) Bool (=>
                                       (or (= temp___is_init_155 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_158) (fp.isNaN temp___expr_158)))))
+                                      (fp.isFinite32 temp___expr_158)))
 
 (define-fun dynamic_invariant11 ((temp___expr_170 Float32)
   (temp___is_init_167 Bool) (temp___skip_constant_168 Bool)
@@ -1433,13 +1431,13 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite drivespeed) (fp.isNaN drivespeed)))))
+  (fp.isFinite32 drivespeed)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite driveturnrate) (fp.isNaN driveturnrate)))))
+  (fp.isFinite32 driveturnrate)))
 
 ;; H
   (assert
@@ -1457,7 +1455,7 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite theta) (fp.isNaN theta)))))
+  (fp.isFinite32 theta)))
 
 ;; H
   (assert (= theta4 o42))
@@ -1466,16 +1464,15 @@
   (assert
   (and
   (= o43 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) theta4))
-  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
-  theta4)) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
-  theta4))))))
+  (fp.isFinite32 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
+  theta4))))
 
 ;; H
   (assert
   (= o44 (fp.div RNE o43 (fp #b0 #b10000000 #b10010010000111111011011))))
 
 ;; H
-  (assert (and (= o46 o45) (not (or (fp.isInfinite o45) (fp.isNaN o45)))))
+  (assert (and (= o46 o45) (fp.isFinite32 o45)))
 
 ;; H
   (assert (= driveturnrate6 o46))
@@ -1485,7 +1482,7 @@
 ;; H
   (assert
   (and (= o48 abstr1)
-  (and (not (or (fp.isInfinite o48) (fp.isNaN o48)))
+  (and (fp.isFinite32 o48)
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o48)
   (and
   (=> (fp.eq o47 (fp #b0 #b00000000 #b00000000000000000000000))
@@ -1498,7 +1495,7 @@
 ;; H
   (assert
   (and (= o49 abstr2)
-  (and (not (or (fp.isInfinite o49) (fp.isNaN o49)))
+  (and (fp.isFinite32 o49)
   (and (fp.leq (fp #b0 #b01111100 #b10011001100110011001101) o49)
   (fp.leq o49 (fp #b0 #b01111111 #b00000000000000000000000))))))
 
@@ -1506,20 +1503,20 @@
   (assert (= o50 (fp.mul RNE driveturnrate6 o49)))
 
 ;; H
-  (assert (and (= o51 o50) (not (or (fp.isInfinite o50) (fp.isNaN o50)))))
+  (assert (and (= o51 o50) (fp.isFinite32 o50)))
 
 ;; H
   (assert (= driveturnrate7 o51))
 
 ;; H
-  (assert (and (= o62 o61) (not (or (fp.isInfinite o61) (fp.isNaN o61)))))
+  (assert (and (= o62 o61) (fp.isFinite32 o61)))
 
 (declare-const abstr3 Float32)
 
 ;; H
   (assert
   (and (= o63 abstr3)
-  (and (not (or (fp.isInfinite o63) (fp.isNaN o63)))
+  (and (fp.isFinite32 o63)
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o63)
   (and
   (=> (fp.eq o62 (fp #b0 #b00000000 #b00000000000000000000000))
@@ -1532,7 +1529,7 @@
 ;; H
   (assert
   (and (= o64 abstr4)
-  (and (not (or (fp.isInfinite o64) (fp.isNaN o64)))
+  (and (fp.isFinite32 o64)
   (and (fp.leq (fp #b0 #b01111110 #b00000000000000000000000) o64)
   (fp.leq o64 (fp #b0 #b01111111 #b00000000000000000000000))))))
 
@@ -1540,7 +1537,7 @@
   (assert (= o65 (fp.mul RNE driveturnrate7 o64)))
 
 ;; H
-  (assert (and (= o66 o65) (not (or (fp.isInfinite o65) (fp.isNaN o65)))))
+  (assert (and (= o66 o65) (fp.isFinite32 o65)))
 
 ;; H
   (assert (= driveturnrate8 o66))
@@ -1550,7 +1547,7 @@
 ;; H
   (assert
   (and (= o67 abstr5)
-  (and (not (or (fp.isInfinite o67) (fp.isNaN o67)))
+  (and (fp.isFinite32 o67)
   (and (fp.leq (fp.neg (fp #b0 #b01111110 #b10010010000111111011011))
   o67) (fp.leq o67 (fp #b0 #b01111110 #b10010010000111111011011))))))
 
@@ -1562,7 +1559,7 @@
 ;; H
   (assert
   (and (= o69 abstr6)
-  (and (not (or (fp.isInfinite o69) (fp.isNaN o69)))
+  (and (fp.isFinite32 o69)
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o69)
   (and
   (=> (fp.eq o68 (fp #b0 #b00000000 #b00000000000000000000000))
@@ -1575,7 +1572,7 @@
 ;; H
   (assert
   (and (= o70 abstr7)
-  (and (not (or (fp.isInfinite o70) (fp.isNaN o70)))
+  (and (fp.isFinite32 o70)
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o70)
   (fp.leq o70 (fp #b0 #b01111111 #b00000000000000000000000))))))
 
@@ -1583,20 +1580,20 @@
   (assert (= o71 (fp.mul RNE drivespeed1 o70)))
 
 ;; H
-  (assert (and (= o72 o71) (not (or (fp.isInfinite o71) (fp.isNaN o71)))))
+  (assert (and (= o72 o71) (fp.isFinite32 o71)))
 
 ;; H
   (assert (= drivespeed2 o72))
 
 ;; H
-  (assert (and (= o75 o74) (not (or (fp.isInfinite o74) (fp.isNaN o74)))))
+  (assert (and (= o75 o74) (fp.isFinite32 o74)))
 
 (declare-const abstr8 Float32)
 
 ;; H
   (assert
   (and (= o76 abstr8)
-  (and (not (or (fp.isInfinite o76) (fp.isNaN o76)))
+  (and (fp.isFinite32 o76)
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o76)
   (and
   (=> (fp.eq o75 (fp #b0 #b00000000 #b00000000000000000000000))

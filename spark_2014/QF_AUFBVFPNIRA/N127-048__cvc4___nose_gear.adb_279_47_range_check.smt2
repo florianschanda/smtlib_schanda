@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite64 ((x Float64)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 65535)))
 
 (declare-const abstr (_ BitVec 16))
@@ -158,7 +159,7 @@
   (temp___do_toplevel_56 Bool)) Bool (=>
                                      (or (= temp___is_init_54 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
+                                     (fp.isFinite64 temp___expr_57)))
 
 (define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -476,22 +477,19 @@
 (declare-const relational_operator_out1_1 Bool)
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite old_estimatedgroundvelocity_memory) (fp.isNaN
-  old_estimatedgroundvelocity_memory))))
+  (assert (fp.isFinite64 old_estimatedgroundvelocity_memory))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite estimatedgroundvelocity) (fp.isNaN estimatedgroundvelocity)))))
+  (fp.isFinite64 estimatedgroundvelocity)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite old_estimatedgroundvelocity_out1) (fp.isNaN
-  old_estimatedgroundvelocity_out1)))))
+  (fp.isFinite64 old_estimatedgroundvelocity_out1)))
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range3 max_uint16_out1)))
@@ -506,19 +504,19 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite wheel_circunference_out1) (fp.isNaN wheel_circunference_out1)))))
+  (fp.isFinite64 wheel_circunference_out1)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite ms_in_hour_out1) (fp.isNaN ms_in_hour_out1)))))
+  (fp.isFinite64 ms_in_hour_out1)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite ms_in_our1_out1) (fp.isNaN ms_in_our1_out1)))))
+  (fp.isFinite64 ms_in_our1_out1)))
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range3 to_int32_left_out1)))

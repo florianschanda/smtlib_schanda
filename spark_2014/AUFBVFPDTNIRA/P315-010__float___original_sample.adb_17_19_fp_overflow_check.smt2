@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -126,7 +127,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-sort nb_type 0)
 
@@ -156,8 +157,7 @@
 
 (declare-sort d_time_type 0)
 
-(define-fun in_range3 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10001000 #b11110100000000000000000)))))
@@ -186,8 +186,7 @@
 
 (declare-sort delta_time_type 0)
 
-(define-fun in_range4 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000)))))
@@ -268,7 +267,7 @@
   (assert (in_range4 delta_time))
 
 ;; H
-  (assert (not (or (fp.isInfinite time) (fp.isNaN time))))
+  (assert (fp.isFinite32 time))
 
 ;; H
   (assert
@@ -291,13 +290,13 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite t_fp) (fp.isNaN t_fp)))))
+  (fp.isFinite32 t_fp)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite t_pp) (fp.isNaN t_pp)))))
+  (fp.isFinite32 t_pp)))
 
 ;; H
   (assert (= (mk_t__ref result) (mk_t__ref d)))
@@ -309,8 +308,7 @@
   (assert
   (and
   (= o (fp.sub RNE time (fp.div RNE d1 (fp #b0 #b10000000 #b00000000000000000000000))))
-  (not (or (fp.isInfinite (fp.sub RNE time (fp.div RNE d1 (fp #b0 #b10000000 #b00000000000000000000000)))) (fp.isNaN (fp.sub RNE
-  time (fp.div RNE d1 (fp #b0 #b10000000 #b00000000000000000000000))))))))
+  (fp.isFinite32 (fp.sub RNE time (fp.div RNE d1 (fp #b0 #b10000000 #b00000000000000000000000))))))
 
 ;; H
   (assert (= (mk_t__ref result1) (mk_t__ref t_fp)))
@@ -322,9 +320,8 @@
   (assert
   (and
   (= o1 (fp.add RNE t_fp1 (fp.mul RNE (of_int RNE nb_of_fp) delta_time)))
-  (not (or (fp.isInfinite (fp.add RNE t_fp1 (fp.mul RNE (of_int RNE nb_of_fp)
-  delta_time))) (fp.isNaN (fp.add RNE t_fp1 (fp.mul RNE (of_int RNE nb_of_fp)
-  delta_time)))))))
+  (fp.isFinite32 (fp.add RNE t_fp1 (fp.mul RNE (of_int RNE nb_of_fp)
+  delta_time)))))
 
 ;; H
   (assert (= (mk_t__ref result2) (mk_t__ref t_pp)))
@@ -336,8 +333,7 @@
 ;; WP_parameter_def
  ;; File "original_sample.ads", line 15, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.add RNE t_pp1 (fp.mul RNE (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000)
-  (of_int RNE nb_of_fp)) delta_time))) (fp.isNaN (fp.add RNE t_pp1 (fp.mul RNE (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000)
-  (of_int RNE nb_of_fp)) delta_time)))))))
+  (fp.isFinite32 (fp.add RNE t_pp1 (fp.mul RNE (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000)
+  (of_int RNE nb_of_fp)) delta_time)))))
 (check-sat)
 (exit)

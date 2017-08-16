@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -166,7 +167,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const numerator Int)
 
@@ -200,10 +201,10 @@
   (assert (= (of_int RNE numerator) num))
 
 ;; H
-  (assert (not (or (fp.isInfinite num) (fp.isNaN num))))
+  (assert (fp.isFinite32 num))
 
 ;; H
-  (assert (not (or (fp.isInfinite den) (fp.isNaN den))))
+  (assert (fp.isFinite32 den))
 
 ;; H
   (assert

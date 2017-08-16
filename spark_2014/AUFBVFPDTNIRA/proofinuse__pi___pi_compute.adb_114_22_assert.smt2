@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -114,7 +115,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -349,7 +350,7 @@
   (assert (= t11 (fp #b0 #b01111111 #b00000000000000000000000)))
 
 ;; H
-  (assert (not (or (fp.isInfinite t11) (fp.isNaN t11))))
+  (assert (fp.isFinite32 t11))
 
 ;; H
   (assert (= result1 (mk_t__ref t2)))
@@ -358,7 +359,7 @@
   (assert (= t21 (fp #b0 #b01111101 #b01010101010101010101011)))
 
 ;; H
-  (assert (not (or (fp.isInfinite t21) (fp.isNaN t21))))
+  (assert (fp.isFinite32 t21))
 
 ;; H
   (assert (= result2 (mk_t__ref t3)))
@@ -367,7 +368,7 @@
   (assert (= t31 (fp #b0 #b01111100 #b10011001100110011001101)))
 
 ;; H
-  (assert (not (or (fp.isInfinite t31) (fp.isNaN t31))))
+  (assert (fp.isFinite32 t31))
 
 ;; H
   (assert (= result3 (mk_t__ref t4)))
@@ -376,7 +377,7 @@
   (assert (= t41 (fp #b0 #b01111100 #b00100100100100100100101)))
 
 ;; H
-  (assert (not (or (fp.isInfinite t41) (fp.isNaN t41))))
+  (assert (fp.isFinite32 t41))
 
 ;; H
   (assert (= result4 (mk_t__ref t5)))
@@ -385,7 +386,7 @@
   (assert (= t51 (fp #b0 #b01111011 #b11000111000111000111001)))
 
 ;; H
-  (assert (not (or (fp.isInfinite t51) (fp.isNaN t51))))
+  (assert (fp.isFinite32 t51))
 
 ;; H
   (assert (= result5 (mk_t__ref t6)))
@@ -394,7 +395,7 @@
   (assert (= t61 (fp #b0 #b01111011 #b01110100010111010001100)))
 
 ;; H
-  (assert (not (or (fp.isInfinite t61) (fp.isNaN t61))))
+  (assert (fp.isFinite32 t61))
 
 ;; H
   (assert (= result6 (mk_t__ref t7)))
@@ -403,7 +404,7 @@
   (assert (= t71 (fp #b0 #b01111011 #b00111011000100111011001)))
 
 ;; H
-  (assert (not (or (fp.isInfinite t71) (fp.isNaN t71))))
+  (assert (fp.isFinite32 t71))
 
 ;; H
   (assert (= result7 (mk_t__ref t8)))
@@ -412,7 +413,7 @@
   (assert (= t81 (fp #b0 #b01111011 #b00010001000100010001001)))
 
 ;; H
-  (assert (not (or (fp.isInfinite t81) (fp.isNaN t81))))
+  (assert (fp.isFinite32 t81))
 
 ;; H
   (assert (= result8 (mk_t__ref t9)))
@@ -421,7 +422,7 @@
   (assert (= t91 (fp #b0 #b01111010 #b11100001111000011110001)))
 
 ;; H
-  (assert (not (or (fp.isInfinite t91) (fp.isNaN t91))))
+  (assert (fp.isFinite32 t91))
 
 ;; H
   (assert (= result9 (mk_t__ref t10)))
@@ -430,7 +431,7 @@
   (assert (= t101 (fp #b0 #b01111010 #b10101111001010000110110)))
 
 ;; H
-  (assert (not (or (fp.isInfinite t101) (fp.isNaN t101))))
+  (assert (fp.isFinite32 t101))
 
 ;; H
   (assert (= result10 (mk_t__ref a1)))
@@ -439,13 +440,11 @@
   (assert (= a11 t11))
 
 ;; H
-  (assert (not (or (fp.isInfinite a11) (fp.isNaN a11))))
+  (assert (fp.isFinite32 a11))
 
 ;; H
   (assert
-  (and (= o (fp.sub RNE a11 t21))
-  (not (or (fp.isInfinite (fp.sub RNE a11 t21)) (fp.isNaN (fp.sub RNE
-  a11 t21))))))
+  (and (= o (fp.sub RNE a11 t21)) (fp.isFinite32 (fp.sub RNE a11 t21))))
 
 ;; H
   (assert (= result11 (mk_t__ref a2)))
@@ -454,13 +453,11 @@
   (assert (= a21 o))
 
 ;; H
-  (assert (not (or (fp.isInfinite a21) (fp.isNaN a21))))
+  (assert (fp.isFinite32 a21))
 
 ;; H
   (assert
-  (and (= o1 (fp.add RNE a21 t31))
-  (not (or (fp.isInfinite (fp.add RNE a21 t31)) (fp.isNaN (fp.add RNE
-  a21 t31))))))
+  (and (= o1 (fp.add RNE a21 t31)) (fp.isFinite32 (fp.add RNE a21 t31))))
 
 ;; H
   (assert (= result12 (mk_t__ref a3)))
@@ -469,13 +466,11 @@
   (assert (= a31 o1))
 
 ;; H
-  (assert (not (or (fp.isInfinite a31) (fp.isNaN a31))))
+  (assert (fp.isFinite32 a31))
 
 ;; H
   (assert
-  (and (= o2 (fp.sub RNE a31 t41))
-  (not (or (fp.isInfinite (fp.sub RNE a31 t41)) (fp.isNaN (fp.sub RNE
-  a31 t41))))))
+  (and (= o2 (fp.sub RNE a31 t41)) (fp.isFinite32 (fp.sub RNE a31 t41))))
 
 ;; H
   (assert (= result13 (mk_t__ref a4)))
@@ -484,13 +479,11 @@
   (assert (= a41 o2))
 
 ;; H
-  (assert (not (or (fp.isInfinite a41) (fp.isNaN a41))))
+  (assert (fp.isFinite32 a41))
 
 ;; H
   (assert
-  (and (= o3 (fp.add RNE a41 t51))
-  (not (or (fp.isInfinite (fp.add RNE a41 t51)) (fp.isNaN (fp.add RNE
-  a41 t51))))))
+  (and (= o3 (fp.add RNE a41 t51)) (fp.isFinite32 (fp.add RNE a41 t51))))
 
 ;; H
   (assert (= result14 (mk_t__ref a5)))
@@ -499,13 +492,11 @@
   (assert (= a51 o3))
 
 ;; H
-  (assert (not (or (fp.isInfinite a51) (fp.isNaN a51))))
+  (assert (fp.isFinite32 a51))
 
 ;; H
   (assert
-  (and (= o4 (fp.sub RNE a51 t61))
-  (not (or (fp.isInfinite (fp.sub RNE a51 t61)) (fp.isNaN (fp.sub RNE
-  a51 t61))))))
+  (and (= o4 (fp.sub RNE a51 t61)) (fp.isFinite32 (fp.sub RNE a51 t61))))
 
 ;; H
   (assert (= result15 (mk_t__ref a6)))
@@ -514,13 +505,11 @@
   (assert (= a61 o4))
 
 ;; H
-  (assert (not (or (fp.isInfinite a61) (fp.isNaN a61))))
+  (assert (fp.isFinite32 a61))
 
 ;; H
   (assert
-  (and (= o5 (fp.add RNE a61 t71))
-  (not (or (fp.isInfinite (fp.add RNE a61 t71)) (fp.isNaN (fp.add RNE
-  a61 t71))))))
+  (and (= o5 (fp.add RNE a61 t71)) (fp.isFinite32 (fp.add RNE a61 t71))))
 
 ;; H
   (assert (= result16 (mk_t__ref a7)))
@@ -529,13 +518,11 @@
   (assert (= a71 o5))
 
 ;; H
-  (assert (not (or (fp.isInfinite a71) (fp.isNaN a71))))
+  (assert (fp.isFinite32 a71))
 
 ;; H
   (assert
-  (and (= o6 (fp.sub RNE a71 t81))
-  (not (or (fp.isInfinite (fp.sub RNE a71 t81)) (fp.isNaN (fp.sub RNE
-  a71 t81))))))
+  (and (= o6 (fp.sub RNE a71 t81)) (fp.isFinite32 (fp.sub RNE a71 t81))))
 
 ;; H
   (assert (= result17 (mk_t__ref a8)))
@@ -544,13 +531,11 @@
   (assert (= a81 o6))
 
 ;; H
-  (assert (not (or (fp.isInfinite a81) (fp.isNaN a81))))
+  (assert (fp.isFinite32 a81))
 
 ;; H
   (assert
-  (and (= o7 (fp.add RNE a81 t91))
-  (not (or (fp.isInfinite (fp.add RNE a81 t91)) (fp.isNaN (fp.add RNE
-  a81 t91))))))
+  (and (= o7 (fp.add RNE a81 t91)) (fp.isFinite32 (fp.add RNE a81 t91))))
 
 ;; H
   (assert (= result18 (mk_t__ref a9)))
@@ -559,13 +544,11 @@
   (assert (= a91 o7))
 
 ;; H
-  (assert (not (or (fp.isInfinite a91) (fp.isNaN a91))))
+  (assert (fp.isFinite32 a91))
 
 ;; H
   (assert
-  (and (= o8 (fp.sub RNE a91 t101))
-  (not (or (fp.isInfinite (fp.sub RNE a91 t101)) (fp.isNaN (fp.sub RNE
-  a91 t101))))))
+  (and (= o8 (fp.sub RNE a91 t101)) (fp.isFinite32 (fp.sub RNE a91 t101))))
 
 ;; H
   (assert (= result19 (mk_t__ref a10)))
@@ -574,32 +557,28 @@
   (assert (= a101 o8))
 
 ;; H
-  (assert (not (or (fp.isInfinite a101) (fp.isNaN a101))))
+  (assert (fp.isFinite32 a101))
 
 ;; H
   (assert
-  (and (= o9 (fp.mul RNE a91 a91))
-  (not (or (fp.isInfinite (fp.mul RNE a91 a91)) (fp.isNaN (fp.mul RNE
-  a91 a91))))))
+  (and (= o9 (fp.mul RNE a91 a91)) (fp.isFinite32 (fp.mul RNE a91 a91))))
 
 ;; H
   (assert
-  (and (= o10 (fp.mul RNE a101 a81))
-  (not (or (fp.isInfinite (fp.mul RNE a101 a81)) (fp.isNaN (fp.mul RNE
-  a101 a81))))))
+  (and (= o10 (fp.mul RNE a101 a81)) (fp.isFinite32 (fp.mul RNE a101 a81))))
 
 ;; H
   (assert (= o11 (fp.sub RNE o10 o9)))
 
 ;; H
-  (assert (and (= o12 o11) (not (or (fp.isInfinite o11) (fp.isNaN o11)))))
+  (assert (and (= o12 o11) (fp.isFinite32 o11)))
 
 ;; H
   (assert
   (= o13 (fp.mul RNE (fp #b0 #b10000001 #b00000000000000000000000) o12)))
 
 ;; H
-  (assert (and (= o14 o13) (not (or (fp.isInfinite o13) (fp.isNaN o13)))))
+  (assert (and (= o14 o13) (fp.isFinite32 o13)))
 
 ;; H
   (assert (= result20 (mk_t__ref num)))
@@ -608,27 +587,26 @@
   (assert (= num1 o14))
 
 ;; H
-  (assert (not (or (fp.isInfinite num1) (fp.isNaN num1))))
+  (assert (fp.isFinite32 num1))
 
 ;; H
   (assert
   (and (= o15 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
   a91))
-  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
-  a91)) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
-  a91))))))
+  (fp.isFinite32 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
+  a91))))
 
 ;; H
   (assert (= o16 (fp.sub RNE a101 o15)))
 
 ;; H
-  (assert (and (= o17 o16) (not (or (fp.isInfinite o16) (fp.isNaN o16)))))
+  (assert (and (= o17 o16) (fp.isFinite32 o16)))
 
 ;; H
   (assert (= o18 (fp.add RNE o17 a81)))
 
 ;; H
-  (assert (and (= o19 o18) (not (or (fp.isInfinite o18) (fp.isNaN o18)))))
+  (assert (and (= o19 o18) (fp.isFinite32 o18)))
 
 ;; H
   (assert (= result21 den))
@@ -637,22 +615,18 @@
   (assert (= (let ((subject den)) den1) o19))
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite (let ((subject den)) den1)) (fp.isNaN (let ((subject
-                                                                den))
-                                                                den1)))))
+  (assert (fp.isFinite32 (let ((subject den)) den1)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite (t__content res)) (fp.isNaN (t__content res))))))
+  (fp.isFinite32 (t__content res))))
 
 ;; H
   (assert
   (and (= o20 (fp.div RNE num1 (let ((subject den)) den1)))
-  (not (or (fp.isInfinite (fp.div RNE num1 (let ((subject den)) den1))) (fp.isNaN (fp.div RNE
-  num1 (let ((subject den)) den1)))))))
+  (fp.isFinite32 (fp.div RNE num1 (let ((subject den)) den1)))))
 
 ;; H
   (assert (= result22 res))

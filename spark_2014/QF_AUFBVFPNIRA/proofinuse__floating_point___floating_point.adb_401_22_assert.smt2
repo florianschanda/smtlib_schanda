@@ -8,6 +8,8 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
+(define-fun fp.isFinite64 ((x Float64)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -110,14 +112,14 @@
   (temp___do_toplevel_177 Bool)) Bool (=>
                                       (or (= temp___is_init_175 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_178) (fp.isNaN temp___expr_178)))))
+                                      (fp.isFinite32 temp___expr_178)))
 
 (define-fun dynamic_invariant1 ((temp___expr_184 Float64)
   (temp___is_init_181 Bool) (temp___skip_constant_182 Bool)
   (temp___do_toplevel_183 Bool)) Bool (=>
                                       (or (= temp___is_init_181 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_184) (fp.isNaN temp___expr_184)))))
+                                      (fp.isFinite64 temp___expr_184)))
 
 (declare-const x Float32)
 
@@ -132,13 +134,13 @@
 (declare-const res1 Float64)
 
 ;; H
-  (assert (not (or (fp.isInfinite x) (fp.isNaN x))))
+  (assert (fp.isFinite32 x))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite res) (fp.isNaN res)))))
+  (fp.isFinite64 res)))
 
 ;; H
   (assert

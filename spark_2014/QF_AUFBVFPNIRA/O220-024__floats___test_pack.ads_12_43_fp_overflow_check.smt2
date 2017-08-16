@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -59,7 +60,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const value__size Int)
 
@@ -116,7 +117,7 @@
 (declare-const o2 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite measured) (fp.isNaN measured))))
+  (assert (fp.isFinite32 measured))
 
 ;; H
   (assert (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) measured))
@@ -125,8 +126,7 @@
 ;; WP_parameter_def
  ;; File "test_pack.ads", line 9, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.add RNE (fp.neg (fp #b0 #b11111110 #b11111111111111111111111))
-  measured)) (fp.isNaN (fp.add RNE (fp.neg (fp #b0 #b11111110 #b11111111111111111111111))
-  measured))))))
+  (fp.isFinite32 (fp.add RNE (fp.neg (fp #b0 #b11111110 #b11111111111111111111111))
+  measured))))
 (check-sat)
 (exit)

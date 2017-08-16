@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -104,14 +105,14 @@
 ;; next_representable_def
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (fp.lt x (next_representable x))) :pattern ((next_representable x)) )))
+  (! (=> (fp.isFinite32 x) (fp.lt x (next_representable x))) :pattern (
+  (next_representable x)) )))
 
 ;; prev_representable_def
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (fp.lt (prev_representable x) x)) :pattern ((prev_representable x)) )))
+  (! (=> (fp.isFinite32 x) (fp.lt (prev_representable x) x)) :pattern (
+  (prev_representable x)) )))
 
 ;; next_representable_def2
   (assert
@@ -126,21 +127,19 @@
 ;; next_representable_finite
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
+  (! (=> (fp.isFinite32 x)
      (=> (not (fp.eq x (fp #b0 #b11111110 #b11111111111111111111111)))
-     (not (or (fp.isInfinite (next_representable x)) (fp.isNaN (next_representable
-                                                               x)))))) :pattern ((not (or (fp.isInfinite
-  (next_representable x)) (fp.isNaN (next_representable x))))) )))
+     (fp.isFinite32 (next_representable x)))) :pattern ((fp.isFinite32
+  (next_representable x))) )))
 
 ;; prev_representable_finite
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
+  (! (=> (fp.isFinite32 x)
      (=>
      (not (fp.eq x (fp.neg (fp #b0 #b11111110 #b11111111111111111111111))))
-     (not (or (fp.isInfinite (prev_representable x)) (fp.isNaN (prev_representable
-                                                               x)))))) :pattern ((not (or (fp.isInfinite
-  (prev_representable x)) (fp.isNaN (prev_representable x))))) )))
+     (fp.isFinite32 (prev_representable x)))) :pattern ((fp.isFinite32
+  (prev_representable x))) )))
 
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -465,7 +464,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-fun sin1 (Float32) Float32)
 
@@ -1127,13 +1126,13 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite f) (fp.isNaN f)))))
+  (fp.isFinite32 f)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite dummy5) (fp.isNaN dummy5)))))
+  (fp.isFinite32 dummy5)))
 
 ;; H
   (assert (= result f))
@@ -1158,17 +1157,17 @@
   (and
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite f2) (fp.isNaN f2))))
+  (fp.isFinite32 f2))
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite dummy7) (fp.isNaN dummy7)))))
+  (fp.isFinite32 dummy7)))
   (fp.leq f2 (fp #b0 #b01111111 #b00000000000000000000000)))))
 
 ;; H
   (assert
   (=> (fp.leq f1 (fp #b0 #b01111111 #b00000000000000000000000))
   (and (= o (sin1 f2))
-  (and (not (or (fp.isInfinite o) (fp.isNaN o)))
+  (and (fp.isFinite32 o)
   (fp.lt (fp.abs (fp.sub RNE o (approx_sin f2))) (fp #b0 #b01101100 #b10010010101001110011100))))))
 
 ;; H
@@ -1275,17 +1274,17 @@
   (and
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite f9) (fp.isNaN f9))))
+  (fp.isFinite32 f9))
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite dummy13) (fp.isNaN dummy13)))))
+  (fp.isFinite32 dummy13)))
   (fp.leq f9 (fp #b0 #b01111111 #b00000000000000000000000)))))
 
 ;; H
   (assert
   (=> (fp.leq f8 (fp #b0 #b01111111 #b00000000000000000000000))
   (and (= o1 (cos1 f9))
-  (and (not (or (fp.isInfinite o1) (fp.isNaN o1)))
+  (and (fp.isFinite32 o1)
   (fp.lt (fp.abs (fp.sub RNE o1 (approx_cos f9))) (fp #b0 #b01101100 #b10010010101001110011100))))))
 
 ;; H
@@ -1393,17 +1392,17 @@
   (and
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite f16) (fp.isNaN f16))))
+  (fp.isFinite32 f16))
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite dummy19) (fp.isNaN dummy19)))))
+  (fp.isFinite32 dummy19)))
   (fp.leq f16 (fp #b0 #b01111110 #b00000000000000000000000)))))
 
 ;; H
   (assert
   (=> (fp.leq f15 (fp #b0 #b01111110 #b00000000000000000000000))
   (and (= o2 (tan1 f16))
-  (and (not (or (fp.isInfinite o2) (fp.isNaN o2)))
+  (and (fp.isFinite32 o2)
   (fp.lt (fp.abs (fp.sub RNE o2 (approx_tan f16))) (fp #b0 #b01110001 #b10100011011011100010111))))))
 
 ;; H
@@ -1502,13 +1501,13 @@
   (and
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite f23) (fp.isNaN f23))))
+  (fp.isFinite32 f23))
   (fp.leq f23 (fp #b0 #b01111110 #b00000000000000000000000))))
 
 ;; H
   (assert
   (and (= o3 (cos1 f23))
-  (and (not (or (fp.isInfinite o3) (fp.isNaN o3)))
+  (and (fp.isFinite32 o3)
   (fp.lt (fp.abs (fp.sub RNE o3 (approx_cos f23))) (fp #b0 #b01101100 #b10010010101001110011100)))))
 
 (assert

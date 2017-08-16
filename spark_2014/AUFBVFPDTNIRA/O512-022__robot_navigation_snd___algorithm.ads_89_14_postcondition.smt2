@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -95,8 +96,7 @@
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content Float32)))))
 (declare-sort positive_float 0)
 
-(define-fun in_range1 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range1 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -202,19 +202,17 @@
 ;; range_axiom
   (assert
   (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep2 x)) (fp.isNaN (to_rep2 x)))) :pattern (
-  (to_rep2 x)) )))
+  (! (fp.isFinite32 (to_rep2 x)) :pattern ((to_rep2 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2 (of_rep2 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
+                                                                  (of_rep2 x))) )))
 
 (declare-sort nonnegative_float 0)
 
-(define-fun in_range3 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -283,14 +281,13 @@
 ;; range_axiom
   (assert
   (forall ((x unbounded_float))
-  (! (not (or (fp.isInfinite (to_rep4 x)) (fp.isNaN (to_rep4 x)))) :pattern (
-  (to_rep4 x)) )))
+  (! (fp.isFinite32 (to_rep4 x)) :pattern ((to_rep4 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep4 (of_rep4 x)) x)) :pattern ((to_rep4 (of_rep4 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep4 (of_rep4 x)) x)) :pattern ((to_rep4
+                                                                  (of_rep4 x))) )))
 
 (declare-datatypes ((map__ref 0))
 (((mk_map__ref (map__content (Array Int nonnegative_float))))))
@@ -1050,8 +1047,7 @@
 
 (declare-sort normalized2pi 0)
 
-(define-fun in_range5 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range5 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
@@ -1928,7 +1924,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (define-fun dynamic_invariant3 ((temp___expr_577 us_rep3)
   (temp___is_init_574 Bool) (temp___skip_constant_575 Bool)
@@ -2000,7 +1996,7 @@
   (temp___do_toplevel_157 Bool)) Bool (=>
                                       (or (= temp___is_init_155 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_158) (fp.isNaN temp___expr_158)))))
+                                      (fp.isFinite32 temp___expr_158)))
 
 ;; null_angle__def_axiom
   (assert

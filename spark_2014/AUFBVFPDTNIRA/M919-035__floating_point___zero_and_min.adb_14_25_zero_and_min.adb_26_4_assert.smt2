@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -232,7 +233,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-sort source 0)
 
@@ -279,7 +280,7 @@
   (temp___do_toplevel_194 Bool)) Bool (=>
                                       (or (= temp___is_init_192 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_195) (fp.isNaN temp___expr_195)))))
+                                      (fp.isFinite32 temp___expr_195)))
 
 (declare-fun convert ((_ BitVec 32)) Float32)
 
@@ -329,7 +330,7 @@
   (temp___do_toplevel_200 Bool)) Bool (=>
                                       (or (= temp___is_init_198 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_201) (fp.isNaN temp___expr_201)))))
+                                      (fp.isFinite32 temp___expr_201)))
 
 (declare-sort target1 0)
 
@@ -393,38 +394,37 @@
 ;; H
   (assert
   (and (= zero_and_min__zero_plus__assume (convert ((_ int2bv 32) 0)))
-  (not (or (fp.isInfinite zero_and_min__zero_plus__assume) (fp.isNaN
-  zero_and_min__zero_plus__assume)))))
+  (fp.isFinite32 zero_and_min__zero_plus__assume)))
 
 ;; H
   (assert (= zero_and_min__zero_plus__assume zero_plus))
 
 ;; H
-  (assert (not (or (fp.isInfinite zero_plus) (fp.isNaN zero_plus))))
+  (assert (fp.isFinite32 zero_plus))
 
 ;; H
   (assert
   (and
   (= zero_and_min__zero_neg__assume (convert ((_ int2bv 32) 2147483648)))
-  (not (or (fp.isInfinite zero_and_min__zero_neg__assume) (fp.isNaN zero_and_min__zero_neg__assume)))))
+  (fp.isFinite32 zero_and_min__zero_neg__assume)))
 
 ;; H
   (assert (= zero_and_min__zero_neg__assume zero_neg))
 
 ;; H
-  (assert (not (or (fp.isInfinite zero_neg) (fp.isNaN zero_neg))))
+  (assert (fp.isFinite32 zero_neg))
 
 ;; H
   (assert (= zero_plus c1b))
 
 ;; H
-  (assert (not (or (fp.isInfinite c1b) (fp.isNaN c1b))))
+  (assert (fp.isFinite32 c1b))
 
 ;; H
   (assert (= zero_neg c2b))
 
 ;; H
-  (assert (not (or (fp.isInfinite c2b) (fp.isNaN c2b))))
+  (assert (fp.isFinite32 c2b))
 
 ;; H
   (assert

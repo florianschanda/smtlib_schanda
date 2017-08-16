@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -423,19 +424,17 @@
 ;; range_axiom
   (assert
   (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep2 x)) (fp.isNaN (to_rep2 x)))) :pattern (
-  (to_rep2 x)) )))
+  (! (fp.isFinite32 (to_rep2 x)) :pattern ((to_rep2 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2 (of_rep2 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
+                                                                  (of_rep2 x))) )))
 
 (declare-sort normalized2pi 0)
 
-(define-fun in_range5 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range5 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
@@ -545,7 +544,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-fun aldiff (us_rep us_rep) Float32)
 
@@ -1567,8 +1566,7 @@
 
 (declare-sort positive_float 0)
 
-(define-fun in_range12 ((x Float32)) Bool (and
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range12 ((x Float32)) Bool (and (fp.isFinite32 x)
                                           (and
                                           (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                           (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -1610,8 +1608,7 @@
 
 (declare-sort nonnegative_float 0)
 
-(define-fun in_range13 ((x Float32)) Bool (and
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range13 ((x Float32)) Bool (and (fp.isFinite32 x)
                                           (and
                                           (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                           (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -1680,14 +1677,14 @@
 ;; range_axiom
   (assert
   (forall ((x unbounded_float))
-  (! (not (or (fp.isInfinite (to_rep10 x)) (fp.isNaN (to_rep10 x)))) :pattern (
-  (to_rep10 x)) )))
+  (! (fp.isFinite32 (to_rep10 x)) :pattern ((to_rep10 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep10 (of_rep10 x)) x)) :pattern ((to_rep10 (of_rep10 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep10 (of_rep10 x)) x)) :pattern ((to_rep10
+                                                                    (of_rep10
+                                                                    x))) )))
 
 (declare-datatypes ((map__ref2 0))
 (((mk_map__ref2 (map__content2 (Array Int nonnegative_float))))))
@@ -4513,7 +4510,7 @@
   (temp___do_toplevel_157 Bool)) Bool (=>
                                       (or (= temp___is_init_155 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_158) (fp.isNaN temp___expr_158)))))
+                                      (fp.isFinite32 temp___expr_158)))
 
 ;; null_angle__def_axiom
   (assert
@@ -5497,7 +5494,7 @@
      (rec__algorithm__findbestvalley__gap_id_pair__opt
      candidate_valley_ids__split_discrs2)) 1)
   (and (= o35 (aldiff o33 o34))
-  (and (not (or (fp.isInfinite o35) (fp.isNaN o35)))
+  (and (fp.isFinite32 o35)
   (and (fp.lt (fp.neg (fp #b0 #b10000000 #b10010010000111111011011))
   o35) (fp.leq o35 (fp #b0 #b10000000 #b10010010000111111011011)))))))))
 
@@ -5569,7 +5566,7 @@
      (rec__algorithm__findbestvalley__gap_id_pair__opt
      candidate_valley_ids__split_discrs2)) 1)
   (and (= o30 (aldiff o28 o29))
-  (and (not (or (fp.isInfinite o30) (fp.isNaN o30)))
+  (and (fp.isFinite32 o30)
   (and (fp.lt (fp.neg (fp #b0 #b10000000 #b10010010000111111011011))
   o30) (fp.leq o30 (fp #b0 #b10000000 #b10010010000111111011011)))))))))
 

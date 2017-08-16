@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -59,7 +60,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 100)))
 
@@ -70,8 +71,7 @@
                                       (<= 0 100)) (in_range1
                                       temp___expr_135)))
 
-(define-fun in_range2 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000)))))
@@ -92,8 +92,7 @@
                                       (<= 0 100)) (in_range3
                                       temp___expr_159)))
 
-(define-fun in_range4 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000)))))
@@ -193,12 +192,11 @@
   (assert (= time2 (fp #b0 #b00000101 #b11110000000000000000001)))
 
 ;; H
-  (assert (not (or (fp.isInfinite time2) (fp.isNaN time2))))
+  (assert (fp.isFinite32 time2))
 
 ;; H
   (assert
-  (and (=> (< 0 nb_of_fp2) (fp.leq time2 time3))
-  (not (or (fp.isInfinite time3) (fp.isNaN time3)))))
+  (and (=> (< 0 nb_of_fp2) (fp.leq time2 time3)) (fp.isFinite32 time3)))
 
 ;; H
   (assert (= result4 nb_of_fp1))
@@ -234,7 +232,7 @@
   (assert (= time4 (fp #b0 #b00000101 #b11110000000000000000001)))
 
 ;; H
-  (assert (not (or (fp.isInfinite time4) (fp.isNaN time4))))
+  (assert (fp.isFinite32 time4))
 
 (assert
 ;; WP_parameter_def

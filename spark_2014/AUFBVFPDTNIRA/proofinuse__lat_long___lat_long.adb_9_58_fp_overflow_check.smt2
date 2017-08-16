@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -133,7 +134,7 @@
   (temp___do_toplevel_140 Bool)) Bool (=>
                                       (or (= temp___is_init_138 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_141) (fp.isNaN temp___expr_141)))))
+                                      (fp.isFinite32 temp___expr_141)))
 
 (declare-fun sin1 (Float32) Float32)
 
@@ -179,8 +180,7 @@
 
 (declare-sort latitude 0)
 
-(define-fun in_range1 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range1 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b10000101 #b00101100000000000000000)) x)
                                          (fp.leq x (fp #b0 #b10000101 #b00101100000000000000000)))))
@@ -221,8 +221,7 @@
 
 (declare-sort longitude 0)
 
-(define-fun in_range2 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b10000110 #b01100111111111111111111)) x)
                                          (fp.leq x (fp #b0 #b10000110 #b01101000000000000000000)))))
@@ -436,7 +435,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 ;; olt__post_axiom
   (assert true)
@@ -492,13 +491,13 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite delta_lat) (fp.isNaN delta_lat)))))
+  (fp.isFinite32 delta_lat)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite delta_long) (fp.isNaN delta_long)))))
+  (fp.isFinite32 delta_long)))
 
 ;; H
   (assert (= (mk_t__ref result) (mk_t__ref delta_lat)))
@@ -518,7 +517,7 @@
   (and
   (= o (cos1
        (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source)))))
-  (and (not (or (fp.isInfinite o) (fp.isNaN o)))
+  (and (fp.isFinite32 o)
   (and
   (= o (sin1
        (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source)))))
@@ -543,6 +542,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "lat_long.ads", line 6, characters 0-0
-  (not (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (not (fp.isFinite32 o1)))
 (check-sat)
 (exit)

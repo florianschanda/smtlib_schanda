@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -141,7 +142,7 @@
   (temp___do_toplevel_136 Bool)) Bool (=>
                                       (or (= temp___is_init_134 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_137) (fp.isNaN temp___expr_137)))))
+                                      (fp.isFinite32 temp___expr_137)))
 
 (declare-const a Float32)
 
@@ -160,7 +161,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const foo__float_tests__sqrt_comedy_1__result Bool)
 
@@ -179,13 +180,13 @@
 (declare-const result1 Bool)
 
 ;; H
-  (assert (not (or (fp.isInfinite a) (fp.isNaN a))))
+  (assert (fp.isFinite32 a))
 
 ;; H
-  (assert (not (or (fp.isInfinite b) (fp.isNaN b))))
+  (assert (fp.isFinite32 b))
 
 ;; H
-  (assert (not (or (fp.isInfinite c) (fp.isNaN c))))
+  (assert (fp.isFinite32 c))
 
 ;; H
   (assert (and (fp.eq (fp.mul RNE a a) c) (fp.eq (fp.mul RNE b b) c)))

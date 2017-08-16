@@ -9,6 +9,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite64 ((x Float64)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -276,7 +277,7 @@
   (temp___do_toplevel_200 Bool)) Bool (=>
                                       (or (= temp___is_init_198 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_201) (fp.isNaN temp___expr_201)))))
+                                      (fp.isFinite64 temp___expr_201)))
 
 (declare-sort frame 0)
 
@@ -305,8 +306,7 @@
 
 (declare-sort ratio_t 0)
 
-(define-fun in_range3 ((x Float64)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range3 ((x Float64)) Bool (and (fp.isFinite64 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) x)
                                          (fp.leq x (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))))
@@ -335,8 +335,7 @@
 
 (declare-sort drag_t 0)
 
-(define-fun in_range4 ((x Float64)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range4 ((x Float64)) Bool (and (fp.isFinite64 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b10000000101 #b0000000000000000000000000000000000000000000000000000)) x)
                                          (fp.leq x (fp #b0 #b10000000101 #b0000000000000000000000000000000000000000000000000000)))))
@@ -576,16 +575,16 @@
   (assert (in_range4 drag))
 
 ;; H
-  (assert (not (or (fp.isInfinite speed) (fp.isNaN speed))))
+  (assert (fp.isFinite64 speed))
 
 ;; H
-  (assert (not (or (fp.isInfinite distance) (fp.isNaN distance))))
+  (assert (fp.isFinite64 distance))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite average) (fp.isNaN average)))))
+  (fp.isFinite64 average)))
 
 ;; H
   (assert (and (< n 25000) (= (invariant__ n speed) true)))
@@ -594,17 +593,17 @@
   (assert
   (and
   (and (= speed old_speed)
-  (and (not (or (fp.isInfinite old_speed) (fp.isNaN old_speed)))
+  (and (fp.isFinite64 old_speed)
   (and
   (= (fp.add RNE drag (fp.mul RNE (fp.mul RNE factor (fp #b0 #b10000000010 #b0011100111010010111100011010100111111011111001110111)) (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001)))
   delta_speed)
-  (and (not (or (fp.isInfinite delta_speed) (fp.isNaN delta_speed)))
+  (and (fp.isFinite64 delta_speed)
   (and (= ((_ int2bv 16) n) n_bv)
   (and
   (and
   (and (= o (fp.add RNE speed delta_speed))
-  (not (or (fp.isInfinite (fp.add RNE speed delta_speed)) (fp.isNaN (fp.add RNE
-  speed delta_speed))))) (and (= result5 speed4) (= speed1 o)))
+  (fp.isFinite64 (fp.add RNE speed delta_speed)))
+  (and (= result5 speed4) (= speed1 o)))
   (and
   (and
   (fp.leq (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))
@@ -643,15 +642,13 @@
   (and
   (and
   (and (= o4 (fp.add RNE old_speed speed1))
-  (not (or (fp.isInfinite (fp.add RNE old_speed speed1)) (fp.isNaN (fp.add RNE
-  old_speed speed1)))))
+  (fp.isFinite64 (fp.add RNE old_speed speed1)))
   (= o5 (fp.div RNE o4 (fp #b0 #b10000000000 #b0000000000000000000000000000000000000000000000000000))))
   (and (= result4 average4) (= average1 o5)))
   (and
   (and
   (= o6 (fp.add RNE distance (fp.mul RNE average1 (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001))))
-  (not (or (fp.isInfinite (fp.add RNE distance (fp.mul RNE average1 (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001)))) (fp.isNaN (fp.add RNE
-  distance (fp.mul RNE average1 (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001)))))))
+  (fp.isFinite64 (fp.add RNE distance (fp.mul RNE average1 (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001)))))
   (and (= result3 distance4) (= distance1 o6)))))))))))))))))))))))))
   (and
   (and (= average1 average2) (and (= distance1 distance2) (= speed1 speed2)))

@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -126,7 +127,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -191,68 +192,64 @@
 (declare-const asl_tmp1 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite temperature) (fp.isNaN temperature))))
+  (assert (fp.isFinite32 temperature))
 
 ;; H
-  (assert (not (or (fp.isInfinite pressure) (fp.isNaN pressure))))
+  (assert (fp.isFinite32 pressure))
 
 ;; H
-  (assert (not (or (fp.isInfinite asl) (fp.isNaN asl))))
+  (assert (fp.isFinite32 asl))
 
 ;; H
-  (assert (not (or (fp.isInfinite asl_raw) (fp.isNaN asl_raw))))
+  (assert (fp.isFinite32 asl_raw))
 
 ;; H
-  (assert (not (or (fp.isInfinite asl_long) (fp.isNaN asl_long))))
+  (assert (fp.isFinite32 asl_long))
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite asl_err_deadband) (fp.isNaN asl_err_deadband))))
+  (assert (fp.isFinite32 asl_err_deadband))
 
 ;; H
-  (assert (not (or (fp.isInfinite asl_alpha) (fp.isNaN asl_alpha))))
+  (assert (fp.isFinite32 asl_alpha))
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite asl_alpha_long) (fp.isNaN asl_alpha_long))))
-
-;; H
-  (assert
-  (=>
-  (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite asl_tmp) (fp.isNaN asl_tmp)))))
+  (assert (fp.isFinite32 asl_alpha_long))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite asl_long_tmp) (fp.isNaN asl_long_tmp)))))
+  (fp.isFinite32 asl_tmp)))
+
+;; H
+  (assert
+  (=>
+  (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
+  (fp.isFinite32 asl_long_tmp)))
 
 ;; H
   (assert
   (and
   (= o (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000) asl_alpha))
-  (not (or (fp.isInfinite (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000)
-  asl_alpha)) (fp.isNaN (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000)
-  asl_alpha))))))
+  (fp.isFinite32 (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000)
+  asl_alpha))))
 
 ;; H
   (assert (= o1 (fp.mul RNE asl_raw o)))
 
 ;; H
-  (assert (and (= o2 o1) (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (assert (and (= o2 o1) (fp.isFinite32 o1)))
 
 ;; H
   (assert
   (and (= o3 (fp.mul RNE asl asl_alpha))
-  (not (or (fp.isInfinite (fp.mul RNE asl asl_alpha)) (fp.isNaN (fp.mul RNE
-  asl asl_alpha))))))
+  (fp.isFinite32 (fp.mul RNE asl asl_alpha))))
 
 ;; H
   (assert (= o4 (fp.add RNE o3 o2)))
 
 ;; H
-  (assert (and (= o5 o4) (not (or (fp.isInfinite o4) (fp.isNaN o4)))))
+  (assert (and (= o5 o4) (fp.isFinite32 o4)))
 
 ;; H
   (assert (= result asl_tmp))
@@ -264,21 +261,18 @@
   (assert
   (and
   (= o6 (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000) asl_alpha_long))
-  (not (or (fp.isInfinite (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000)
-  asl_alpha_long)) (fp.isNaN (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000)
-  asl_alpha_long))))))
+  (fp.isFinite32 (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000)
+  asl_alpha_long))))
 
 ;; H
   (assert (= o7 (fp.mul RNE asl_raw o6)))
 
 ;; H
-  (assert (and (= o8 o7) (not (or (fp.isInfinite o7) (fp.isNaN o7)))))
+  (assert (and (= o8 o7) (fp.isFinite32 o7)))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not
-  (not (or (fp.isInfinite (fp.mul RNE asl_long asl_alpha_long)) (fp.isNaN (fp.mul RNE
-  asl_long asl_alpha_long))))))
+  (not (fp.isFinite32 (fp.mul RNE asl_long asl_alpha_long))))
 (check-sat)
 (exit)

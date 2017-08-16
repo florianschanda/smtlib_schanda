@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -65,7 +66,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -176,7 +177,7 @@
   (assert (= a1 (fp #b0 #b10000011 #b01110110011001100110011)))
 
 ;; H
-  (assert (not (or (fp.isInfinite a1) (fp.isNaN a1))))
+  (assert (fp.isFinite32 a1))
 
 ;; H
   (assert (= result1 b))
@@ -185,25 +186,25 @@
   (assert (= b1 (fp #b0 #b10000011 #b00111110011001100110011)))
 
 ;; H
-  (assert (not (or (fp.isInfinite b1) (fp.isNaN b1))))
+  (assert (fp.isFinite32 b1))
 
 ;; H
   (assert (= b1 c13b))
 
 ;; H
-  (assert (not (or (fp.isInfinite c13b) (fp.isNaN c13b))))
+  (assert (fp.isFinite32 c13b))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite c14b) (fp.isNaN c14b)))))
+  (fp.isFinite32 c14b)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite approx) (fp.isNaN approx)))))
+  (fp.isFinite32 approx)))
 
 ;; H
   (assert
@@ -211,7 +212,7 @@
   tolerance))
 
 ;; H
-  (assert (not (or (fp.isInfinite tolerance) (fp.isNaN tolerance))))
+  (assert (fp.isFinite32 tolerance))
 
 ;; H
   (assert
@@ -220,8 +221,7 @@
 ;; H
   (assert
   (and (= o (fp.mul RNE approx1 approx1))
-  (not (or (fp.isInfinite (fp.mul RNE approx1 approx1)) (fp.isNaN (fp.mul RNE
-  approx1 approx1))))))
+  (fp.isFinite32 (fp.mul RNE approx1 approx1))))
 
 ;; H
   (assert (= o1 (fp.sub RNE c13b o)))
@@ -229,6 +229,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "aggregates.adb", line 1, characters 0-0
-  (not (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (not (fp.isFinite32 o1)))
 (check-sat)
 (exit)

@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun mod1 ((x Int)
   (y Int)) Int (ite (< 0 y) (mod x y) (+ (mod x y) y)))
 
@@ -78,7 +79,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const x Float32)
 
@@ -99,14 +100,14 @@
   (temp___do_toplevel_228 Bool)) Bool (=>
                                       (or (= temp___is_init_226 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_229) (fp.isNaN temp___expr_229)))))
+                                      (fp.isFinite32 temp___expr_229)))
 
 (define-fun dynamic_invariant4 ((temp___expr_235 Float32)
   (temp___is_init_232 Bool) (temp___skip_constant_233 Bool)
   (temp___do_toplevel_234 Bool)) Bool (=>
                                       (or (= temp___is_init_232 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_235) (fp.isNaN temp___expr_235)))))
+                                      (fp.isFinite32 temp___expr_235)))
 
 (define-fun in_range4 ((x1 Int)) Bool (and (<= (- 2147483648) x1)
                                       (<= x1 2147483647)))
@@ -192,7 +193,7 @@
 (declare-const y2 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite x) (fp.isNaN x))))
+  (assert (fp.isFinite32 x))
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range2 i)))
@@ -201,17 +202,17 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite y) (fp.isNaN y)))))
+  (fp.isFinite32 y)))
 
 ;; H
   (assert
   (= (fp.mul RNE x (fp #b0 #b01111110 #b00000000000000000000000)) x2))
 
 ;; H
-  (assert (not (or (fp.isInfinite x2) (fp.isNaN x2))))
+  (assert (fp.isFinite32 x2))
 
 ;; H
-  (assert (not (or (fp.isInfinite threehalfs) (fp.isNaN threehalfs))))
+  (assert (fp.isFinite32 threehalfs))
 
 ;; H
   (assert (fp.leq (fp #b0 #b01101110 #b01001111100010110101100) x))
@@ -242,7 +243,7 @@
 (declare-const abstr3 Float32)
 
 ;; H
-  (assert (and (= o2 abstr3) (not (or (fp.isInfinite o2) (fp.isNaN o2)))))
+  (assert (and (= o2 abstr3) (fp.isFinite32 o2)))
 
 ;; H
   (assert (= result2 y))
@@ -251,29 +252,26 @@
   (assert (= y1 o2))
 
 ;; H
-  (assert
-  (and (= o3 (fp.mul RNE y1 y1))
-  (not (or (fp.isInfinite (fp.mul RNE y1 y1)) (fp.isNaN (fp.mul RNE y1
-  y1))))))
+  (assert (and (= o3 (fp.mul RNE y1 y1)) (fp.isFinite32 (fp.mul RNE y1 y1))))
 
 ;; H
   (assert (= o4 (fp.mul RNE x2 o3)))
 
 ;; H
-  (assert (and (= o5 o4) (not (or (fp.isInfinite o4) (fp.isNaN o4)))))
+  (assert (and (= o5 o4) (fp.isFinite32 o4)))
 
 ;; H
   (assert
   (= o6 (fp.sub RNE (fp #b0 #b01111111 #b10000000000000000000000) o5)))
 
 ;; H
-  (assert (and (= o7 o6) (not (or (fp.isInfinite o6) (fp.isNaN o6)))))
+  (assert (and (= o7 o6) (fp.isFinite32 o6)))
 
 ;; H
   (assert (= o8 (fp.mul RNE y1 o7)))
 
 ;; H
-  (assert (and (= o9 o8) (not (or (fp.isInfinite o8) (fp.isNaN o8)))))
+  (assert (and (= o9 o8) (fp.isFinite32 o8)))
 
 ;; H
   (assert (= result3 y1))
@@ -284,8 +282,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not
-  (not (or (fp.isInfinite (fp.mul RNE y2 y2)) (fp.isNaN (fp.mul RNE y2
-  y2))))))
+  (not (fp.isFinite32 (fp.mul RNE y2 y2))))
 (check-sat)
 (exit)

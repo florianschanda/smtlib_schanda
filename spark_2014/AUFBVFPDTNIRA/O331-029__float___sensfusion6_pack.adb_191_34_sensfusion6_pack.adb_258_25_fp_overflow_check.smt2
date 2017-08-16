@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -126,12 +127,11 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-sort t_rate 0)
 
-(define-fun in_range2 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b10001010 #b01110111000000000000000)) x)
                                          (fp.leq x (fp #b0 #b10001010 #b01110111000000000000000)))))
@@ -160,8 +160,7 @@
 
 (declare-sort t_acc 0)
 
-(define-fun in_range3 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b10000011 #b00000000000000000000000)) x)
                                          (fp.leq x (fp #b0 #b10000011 #b00000000000000000000000)))))
@@ -189,8 +188,7 @@
 
 (declare-sort t_acc_lifted 0)
 
-(define-fun in_range4 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b10000011 #b00000000000000000000000)) x)
                                          (fp.leq x (fp #b0 #b10000011 #b00000000000000000000000)))))
@@ -219,8 +217,7 @@
 
 (declare-sort positive_float 0)
 
-(define-fun in_range5 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range5 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -249,8 +246,7 @@
 
 (declare-sort t_delta_time 0)
 
-(define-fun in_range6 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range6 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b01110101 #b00000110001001001101111) x)
                                          (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000)))))
@@ -279,8 +275,7 @@
 
 (declare-sort t_alpha 0)
 
-(define-fun in_range7 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range7 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000)))))
@@ -309,8 +304,7 @@
 
 (declare-sort t_quaternion 0)
 
-(define-fun in_range8 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range8 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) x)
                                          (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000)))))
@@ -734,19 +728,19 @@
   (assert (in_range8 q3))
 
 ;; H
-  (assert (not (or (fp.isInfinite two_kp) (fp.isNaN two_kp))))
+  (assert (fp.isFinite32 two_kp))
 
 ;; H
-  (assert (not (or (fp.isInfinite two_ki) (fp.isNaN two_ki))))
+  (assert (fp.isFinite32 two_ki))
 
 ;; H
-  (assert (not (or (fp.isInfinite integral_fbx) (fp.isNaN integral_fbx))))
+  (assert (fp.isFinite32 integral_fbx))
 
 ;; H
-  (assert (not (or (fp.isInfinite integral_fby) (fp.isNaN integral_fby))))
+  (assert (fp.isFinite32 integral_fby))
 
 ;; H
-  (assert (not (or (fp.isInfinite integral_fbz) (fp.isNaN integral_fbz))))
+  (assert (fp.isFinite32 integral_fbz))
 
 ;; H
   (assert (in_range7 beta))
@@ -797,7 +791,7 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite recip_norm) (fp.isNaN recip_norm)))))
+  (fp.isFinite32 recip_norm)))
 
 ;; H
   (assert
@@ -825,7 +819,7 @@
   (= rad_gx1 (fp.div RNE (fp.mul RNE c3b (fp #b0 #b10000000 #b10010010000111111011011)) (fp #b0 #b10000110 #b01101000000000000000000))))
 
 ;; H
-  (assert (not (or (fp.isInfinite rad_gx1) (fp.isNaN rad_gx1))))
+  (assert (fp.isFinite32 rad_gx1))
 
 ;; H
   (assert (= result1 (mk_t__ref rad_gy)))
@@ -835,7 +829,7 @@
   (= rad_gy1 (fp.div RNE (fp.mul RNE c4b (fp #b0 #b10000000 #b10010010000111111011011)) (fp #b0 #b10000110 #b01101000000000000000000))))
 
 ;; H
-  (assert (not (or (fp.isInfinite rad_gy1) (fp.isNaN rad_gy1))))
+  (assert (fp.isFinite32 rad_gy1))
 
 ;; H
   (assert (= result2 (mk_t__ref rad_gz)))
@@ -845,7 +839,7 @@
   (= rad_gz1 (fp.div RNE (fp.mul RNE c5b (fp #b0 #b10000000 #b10010010000111111011011)) (fp #b0 #b10000110 #b01101000000000000000000))))
 
 ;; H
-  (assert (not (or (fp.isInfinite rad_gz1) (fp.isNaN rad_gz1))))
+  (assert (fp.isFinite32 rad_gz1))
 
 ;; H
   (assert (= result3 (mk_t__ref half_vx)))
@@ -854,7 +848,7 @@
   (assert (= half_vx1 (fp.sub RNE (fp.mul RNE q1 q3) (fp.mul RNE q0 q2))))
 
 ;; H
-  (assert (not (or (fp.isInfinite half_vx1) (fp.isNaN half_vx1))))
+  (assert (fp.isFinite32 half_vx1))
 
 ;; H
   (assert (= result4 (mk_t__ref half_vy)))
@@ -863,7 +857,7 @@
   (assert (= half_vy1 (fp.add RNE (fp.mul RNE q0 q1) (fp.mul RNE q2 q3))))
 
 ;; H
-  (assert (not (or (fp.isInfinite half_vy1) (fp.isNaN half_vy1))))
+  (assert (fp.isFinite32 half_vy1))
 
 ;; H
   (assert (= result5 (mk_t__ref half_vz)))
@@ -874,51 +868,49 @@
   q3 q3))))
 
 ;; H
-  (assert (not (or (fp.isInfinite half_vz1) (fp.isNaN half_vz1))))
+  (assert (fp.isFinite32 half_vz1))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite half_ex) (fp.isNaN half_ex)))))
+  (fp.isFinite32 half_ex)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite (t__content half_ey)) (fp.isNaN (t__content
-                                                          half_ey))))))
+  (fp.isFinite32 (t__content half_ey))))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite (t__content half_ez)) (fp.isNaN (t__content
-                                                          half_ez))))))
+  (fp.isFinite32 (t__content half_ez))))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite (t__content q0_tmp)) (fp.isNaN (t__content q0_tmp))))))
+  (fp.isFinite32 (t__content q0_tmp))))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite (t__content q1_tmp)) (fp.isNaN (t__content q1_tmp))))))
+  (fp.isFinite32 (t__content q1_tmp))))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite (t__content q2_tmp)) (fp.isNaN (t__content q2_tmp))))))
+  (fp.isFinite32 (t__content q2_tmp))))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite (t__content q3_tmp)) (fp.isNaN (t__content q3_tmp))))))
+  (fp.isFinite32 (t__content q3_tmp))))
 
 ;; H
   (assert (= result6 qa))
@@ -960,7 +952,7 @@
   (= o (inv_sqrt
        (fp.add RNE (fp.add RNE (fp.mul RNE c6b c6b) (fp.mul RNE c7b c7b)) (fp.mul RNE
        c8b c8b))))
-  (and (not (or (fp.isInfinite o) (fp.isNaN o)))
+  (and (fp.isFinite32 o)
   (and (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) o)
   (fp.lt o (fp #b0 #b11000010 #b01011010111100011101100))))))
 
@@ -973,8 +965,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "i-cexten.ads", line 59, characters 0-0
-  (not
-  (not (or (fp.isInfinite (fp.mul RNE c6b recip_norm1)) (fp.isNaN (fp.mul RNE
-  c6b recip_norm1))))))
+  (not (fp.isFinite32 (fp.mul RNE c6b recip_norm1))))
 (check-sat)
 (exit)

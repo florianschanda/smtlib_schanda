@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -131,15 +132,13 @@
 
 ;; range_axiom
   (assert
-  (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep x)) (fp.isNaN (to_rep x)))) :pattern (
-  (to_rep x)) )))
+  (forall ((x float)) (! (fp.isFinite32 (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x))) (= (to_rep (of_rep x)) x)) :pattern (
-  (to_rep (of_rep x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                                (of_rep x))) )))
 
 (declare-sort speed_t 0)
 
@@ -163,12 +162,11 @@
   (temp___do_toplevel_150 Bool)) Bool (=>
                                       (or (= temp___is_init_148 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_151) (fp.isNaN temp___expr_151)))))
+                                      (fp.isFinite32 temp___expr_151)))
 
 (declare-sort deceleration_t 0)
 
-(define-fun in_range2 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -616,7 +614,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (define-fun dynamic_invariant3 ((temp___expr_193 Int)
   (temp___is_init_190 Bool) (temp___skip_constant_191 Bool)
@@ -744,7 +742,7 @@
   (temp___do_toplevel_156 Bool)) Bool (=>
                                       (or (= temp___is_init_154 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_157) (fp.isNaN temp___expr_157)))))
+                                      (fp.isFinite32 temp___expr_157)))
 
 (define-fun dynamic_invariant5 ((temp___expr_169 Float32)
   (temp___is_init_166 Bool) (temp___skip_constant_167 Bool)
@@ -936,7 +934,7 @@
   (= (mk___rep1 (mk___split_fields1 temp___301 temp___3011)) a_brake_emergency_model))
 
 ;; H
-  (assert (not (or (fp.isInfinite v) (fp.isNaN v))))
+  (assert (fp.isFinite32 v))
 
 ;; H
   (assert (in_range3 d))

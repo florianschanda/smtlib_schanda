@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -98,44 +99,40 @@
 ;; Power_0
   (assert
   (forall ((x Float32))
-  (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-  (fp.eq (power x 0) (of_int RNE 1)))))
+  (=> (fp.isFinite32 x) (fp.eq (power x 0) (of_int RNE 1)))))
 
 ;; Power_1
   (assert
-  (forall ((x Float32))
-  (=> (not (or (fp.isInfinite x) (fp.isNaN x))) (fp.eq (power x 1) x))))
+  (forall ((x Float32)) (=> (fp.isFinite32 x) (fp.eq (power x 1) x))))
 
 ;; Power_2
   (assert
   (forall ((x Float32))
-  (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-  (fp.eq (power x 2) (fp.mul RNE x x)))))
+  (=> (fp.isFinite32 x) (fp.eq (power x 2) (fp.mul RNE x x)))))
 
 ;; Power_3
   (assert
   (forall ((x Float32))
-  (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-  (fp.eq (power x 3) (fp.mul RNE x (fp.mul RNE x x))))))
+  (=> (fp.isFinite32 x) (fp.eq (power x 3) (fp.mul RNE x (fp.mul RNE x x))))))
 
 ;; Power_neg1
   (assert
   (forall ((x Float32))
-  (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
+  (=> (fp.isFinite32 x)
   (=> (not (fp.isZero      x))
   (fp.eq (power x (- 1)) (fp.div RNE (of_int RNE 1) x))))))
 
 ;; Power_neg2
   (assert
   (forall ((x Float32))
-  (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
+  (=> (fp.isFinite32 x)
   (=> (not (fp.isZero      x))
   (fp.eq (power x (- 2)) (fp.div RNE (of_int RNE 1) (power x 2)))))))
 
 ;; Power_neg3
   (assert
   (forall ((x Float32))
-  (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
+  (=> (fp.isFinite32 x)
   (=> (not (fp.isZero      x))
   (fp.eq (power x (- 2)) (fp.div RNE (of_int RNE 1) (power x 3)))))))
 
@@ -187,7 +184,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const x Float32)
 
@@ -204,7 +201,7 @@
 (declare-const o Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite x) (fp.isNaN x))))
+  (assert (fp.isFinite32 x))
 
 ;; H
   (assert (in_range1 y))
@@ -213,7 +210,7 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite u) (fp.isNaN u)))))
+  (fp.isFinite32 u)))
 
 ;; H
   (assert (=> (< y 0) (not (= x ((_ to_fp 8 24) #x00000000)))))
@@ -224,6 +221,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "division_by_zero.adb", line 32, characters 0-0
-  (not (not (or (fp.isInfinite o) (fp.isNaN o)))))
+  (not (fp.isFinite32 o)))
 (check-sat)
 (exit)

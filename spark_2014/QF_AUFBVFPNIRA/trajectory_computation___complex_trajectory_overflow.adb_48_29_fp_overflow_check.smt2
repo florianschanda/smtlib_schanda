@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite64 ((x Float64)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 65535)))
 
 (declare-const abstr (_ BitVec 16))
@@ -164,7 +165,7 @@
   (temp___do_toplevel_200 Bool)) Bool (=>
                                       (or (= temp___is_init_198 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_201) (fp.isNaN temp___expr_201)))))
+                                      (fp.isFinite64 temp___expr_201)))
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 25000)))
 
@@ -175,8 +176,7 @@
                                       (<= 0 25000)) (in_range2
                                       temp___expr_207)))
 
-(define-fun in_range3 ((x Float64)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range3 ((x Float64)) Bool (and (fp.isFinite64 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) x)
                                          (fp.leq x (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))))
@@ -188,8 +188,7 @@
                                       (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
                                       (in_range3 temp___expr_213)))
 
-(define-fun in_range4 ((x Float64)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range4 ((x Float64)) Bool (and (fp.isFinite64 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b10000000101 #b0000000000000000000000000000000000000000000000000000)) x)
                                          (fp.leq x (fp #b0 #b10000000101 #b0000000000000000000000000000000000000000000000000000)))))
@@ -306,16 +305,16 @@
   (assert (in_range4 drag))
 
 ;; H
-  (assert (not (or (fp.isInfinite speed) (fp.isNaN speed))))
+  (assert (fp.isFinite64 speed))
 
 ;; H
-  (assert (not (or (fp.isInfinite distance) (fp.isNaN distance))))
+  (assert (fp.isFinite64 distance))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite average) (fp.isNaN average)))))
+  (fp.isFinite64 average)))
 
 (declare-const abstr26 Bool)
 
@@ -326,7 +325,7 @@
   (assert (= speed old_speed))
 
 ;; H
-  (assert (not (or (fp.isInfinite old_speed) (fp.isNaN old_speed))))
+  (assert (fp.isFinite64 old_speed))
 
 ;; H
   (assert
@@ -334,7 +333,7 @@
   delta_speed))
 
 ;; H
-  (assert (not (or (fp.isInfinite delta_speed) (fp.isNaN delta_speed))))
+  (assert (fp.isFinite64 delta_speed))
 
 ;; H
   (assert (= abstr25 n_bv))
@@ -342,8 +341,7 @@
 ;; H
   (assert
   (and (= o (fp.add RNE speed delta_speed))
-  (not (or (fp.isInfinite (fp.add RNE speed delta_speed)) (fp.isNaN (fp.add RNE
-  speed delta_speed))))))
+  (fp.isFinite64 (fp.add RNE speed delta_speed))))
 
 ;; H
   (assert (= speed1 o))
@@ -428,8 +426,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "complex_trajectory_overflow.ads", line 29, characters 0-0
-  (not
-  (not (or (fp.isInfinite (fp.add RNE old_speed speed1)) (fp.isNaN (fp.add RNE
-  old_speed speed1))))))
+  (not (fp.isFinite64 (fp.add RNE old_speed speed1))))
 (check-sat)
 (exit)

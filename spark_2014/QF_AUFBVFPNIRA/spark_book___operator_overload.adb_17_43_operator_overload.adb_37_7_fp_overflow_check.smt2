@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -86,7 +87,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const value__size1 Int)
 
@@ -228,19 +229,19 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite left_squared) (fp.isNaN left_squared)))))
+  (fp.isFinite32 left_squared)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite right_squared) (fp.isNaN right_squared)))))
+  (fp.isFinite32 right_squared)))
 
 ;; H
   (assert (= o2 (fp.add RNE o1 o)))
 
 ;; H
-  (assert (and (= o3 o2) (not (or (fp.isInfinite o2) (fp.isNaN o2)))))
+  (assert (and (= o3 o2) (fp.isFinite32 o2)))
 
 ;; H
   (assert (= left_squared2 o3))
@@ -249,7 +250,7 @@
   (assert (= o6 (fp.add RNE o5 o4)))
 
 ;; H
-  (assert (and (= o7 o6) (not (or (fp.isInfinite o6) (fp.isNaN o6)))))
+  (assert (and (= o7 o6) (fp.isFinite32 o6)))
 
 ;; H
   (assert (= right_squared2 o7))
@@ -261,19 +262,19 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite left_squared1) (fp.isNaN left_squared1)))))
+  (fp.isFinite32 left_squared1)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite right_squared1) (fp.isNaN right_squared1)))))
+  (fp.isFinite32 right_squared1)))
 
 ;; H
   (assert (= o10 (fp.add RNE o9 o8)))
 
 ;; H
-  (assert (and (= o11 o10) (not (or (fp.isInfinite o10) (fp.isNaN o10)))))
+  (assert (and (= o11 o10) (fp.isFinite32 o10)))
 
 ;; H
   (assert (= left_squared3 o11))
@@ -284,6 +285,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "operator_overload.adb", line 2, characters 0-0
-  (not (not (or (fp.isInfinite o14) (fp.isNaN o14)))))
+  (not (fp.isFinite32 o14)))
 (check-sat)
 (exit)

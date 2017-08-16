@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -127,7 +128,7 @@
   (temp___do_toplevel_147 Bool)) Bool (=>
                                       (or (= temp___is_init_145 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_148) (fp.isNaN temp___expr_148)))))
+                                      (fp.isFinite32 temp___expr_148)))
 
 (declare-fun to_rep (speed_t) Float32)
 
@@ -140,14 +141,13 @@
 ;; range_axiom
   (assert
   (forall ((x speed_t))
-  (! (not (or (fp.isInfinite (to_rep x)) (fp.isNaN (to_rep x)))) :pattern (
-  (to_rep x)) )))
+  (! (fp.isFinite32 (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x))) (= (to_rep (of_rep x)) x)) :pattern (
-  (to_rep (of_rep x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                                (of_rep x))) )))
 
 (declare-sort distance_t 0)
 
@@ -210,7 +210,7 @@
   (temp___do_toplevel_153 Bool)) Bool (=>
                                       (or (= temp___is_init_151 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_154) (fp.isNaN temp___expr_154)))))
+                                      (fp.isFinite32 temp___expr_154)))
 
 (declare-fun is_valid_speed_km_per_h (Float32) Bool)
 

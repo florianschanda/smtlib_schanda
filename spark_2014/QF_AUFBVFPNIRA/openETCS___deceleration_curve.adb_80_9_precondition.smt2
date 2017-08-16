@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -65,7 +66,7 @@
   (temp___do_toplevel_151 Bool)) Bool (=>
                                       (or (= temp___is_init_149 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_152) (fp.isNaN temp___expr_152)))))
+                                      (fp.isFinite32 temp___expr_152)))
 
 (define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -79,8 +80,7 @@
                                       (<= 0 2147483647)) (in_range3
                                       temp___expr_176)))
 
-(define-fun in_range4 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -282,7 +282,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const abstr1 Float32)
 
@@ -294,7 +294,7 @@
   (temp___do_toplevel_157 Bool)) Bool (=>
                                       (or (= temp___is_init_155 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_158) (fp.isNaN temp___expr_158)))))
+                                      (fp.isFinite32 temp___expr_158)))
 
 (define-fun in_range6 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
@@ -476,8 +476,7 @@
 (declare-const speed4 Float32)
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite maximum_valid_speed) (fp.isNaN maximum_valid_speed))))
+  (assert (fp.isFinite32 maximum_valid_speed))
 
 (declare-const abstr2 Float32)
 
@@ -488,7 +487,7 @@
   (assert (= result speed))
 
 ;; H
-  (assert (not (or (fp.isInfinite speed1) (fp.isNaN speed1))))
+  (assert (fp.isFinite32 speed1))
 
 ;; H
   (assert (in_range3 location1))

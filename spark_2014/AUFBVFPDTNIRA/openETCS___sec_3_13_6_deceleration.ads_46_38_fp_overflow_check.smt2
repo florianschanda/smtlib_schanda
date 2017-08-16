@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -131,12 +132,11 @@
   (temp___do_toplevel_150 Bool)) Bool (=>
                                       (or (= temp___is_init_148 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_151) (fp.isNaN temp___expr_151)))))
+                                      (fp.isFinite32 temp___expr_151)))
 
 (declare-sort deceleration_t 0)
 
-(define-fun in_range1 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range1 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -187,7 +187,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-sort num_delimiters_range 0)
 
@@ -241,14 +241,13 @@
 ;; range_axiom
   (assert
   (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep1 x)) (fp.isNaN (to_rep1 x)))) :pattern (
-  (to_rep1 x)) )))
+  (! (fp.isFinite32 (to_rep1 x)) :pattern ((to_rep1 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1 (of_rep1 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
+                                                                  (of_rep1 x))) )))
 
 (declare-sort function_range 0)
 
@@ -699,7 +698,7 @@
   (temp___do_toplevel_156 Bool)) Bool (=>
                                       (or (= temp___is_init_154 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_157) (fp.isNaN temp___expr_157)))))
+                                      (fp.isFinite32 temp___expr_157)))
 
 (declare-fun is_valid_speed_km_per_h (Float32) Bool)
 
@@ -1006,7 +1005,7 @@
 (declare-const o6 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite v) (fp.isNaN v))))
+  (assert (fp.isFinite32 v))
 
 ;; H
   (assert (in_range2 d))
@@ -1020,7 +1019,7 @@
 ;; H
   (assert
   (and (= o (kwet_rst v))
-  (and (not (or (fp.isInfinite o) (fp.isNaN o)))
+  (and (fp.isFinite32 o)
   (fp.eq o (get_value kwet_rst_model (to_int1 RNA v))))))
 
 ;; H
@@ -1028,7 +1027,7 @@
   (= o1 (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000) o)))
 
 ;; H
-  (assert (and (= o2 o1) (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (assert (and (= o2 o1) (fp.isFinite32 o1)))
 
 ;; H
   (assert
@@ -1037,7 +1036,7 @@
 ;; H
   (assert
   (and (= o4 (kwet_rst v))
-  (and (not (or (fp.isInfinite o4) (fp.isNaN o4)))
+  (and (fp.isFinite32 o4)
   (fp.eq o4 (get_value kwet_rst_model (to_int1 RNA v))))))
 
 ;; H
@@ -1046,6 +1045,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "units.ads", line 26, characters 0-0
-  (not (not (or (fp.isInfinite o5) (fp.isNaN o5)))))
+  (not (fp.isFinite32 o5)))
 (check-sat)
 (exit)

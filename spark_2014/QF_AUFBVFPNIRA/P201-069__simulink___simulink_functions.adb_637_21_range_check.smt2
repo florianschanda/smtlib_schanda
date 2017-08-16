@@ -8,6 +8,8 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
+(define-fun fp.isFinite64 ((x Float64)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -104,7 +106,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const f Float32)
 
@@ -113,14 +115,13 @@
 (declare-const o Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite f) (fp.isNaN f))))
+  (assert (fp.isFinite32 f))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
   (not
-  (not (or (fp.isInfinite ((_ to_fp 8 24) RNE (fp.sqrt RNE ((_ to_fp 11 53) RNE
-  f)))) (fp.isNaN ((_ to_fp 8 24) RNE (fp.sqrt RNE ((_ to_fp 11 53) RNE
-  f))))))))
+  (fp.isFinite32 ((_ to_fp 8 24) RNE (fp.sqrt RNE ((_ to_fp 11 53) RNE
+  f))))))
 (check-sat)
 (exit)

@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -59,7 +60,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const t_FIRST Float32)
 
@@ -74,7 +75,7 @@
 (declare-const last Float32)
 
 (define-fun dynamic_property ((first_int Float32) (last_int Float32)
-  (x Float32)) Bool (and (not (or (fp.isInfinite x) (fp.isNaN x)))
+  (x Float32)) Bool (and (fp.isFinite32 x)
                     (and (fp.leq first_int x) (fp.leq x last_int))))
 
 (define-fun dynamic_invariant1 ((temp___expr_171 Float32)
@@ -103,30 +104,28 @@
 ;; H
   (assert
   (and (= p__t_FIRST__assume abstr1)
-  (and
-  (not (or (fp.isInfinite p__t_FIRST__assume) (fp.isNaN p__t_FIRST__assume)))
+  (and (fp.isFinite32 p__t_FIRST__assume)
   (= p__t_FIRST__assume (fp #b0 #b00000000 #b00000000000000000000000)))))
 
 ;; H
   (assert (= p__t_FIRST__assume t_FIRST))
 
 ;; H
-  (assert (not (or (fp.isInfinite t_FIRST) (fp.isNaN t_FIRST))))
+  (assert (fp.isFinite32 t_FIRST))
 
 (declare-const abstr2 Float32)
 
 ;; H
   (assert
   (and (= p__t_LAST__assume abstr2)
-  (and
-  (not (or (fp.isInfinite p__t_LAST__assume) (fp.isNaN p__t_LAST__assume)))
+  (and (fp.isFinite32 p__t_LAST__assume)
   (= p__t_LAST__assume (fp #b0 #b01111111 #b00000000000000000000000)))))
 
 ;; H
   (assert (= p__t_LAST__assume t_LAST))
 
 ;; H
-  (assert (not (or (fp.isInfinite t_LAST) (fp.isNaN t_LAST))))
+  (assert (fp.isFinite32 t_LAST))
 
 (assert
 ;; WP_parameter_def

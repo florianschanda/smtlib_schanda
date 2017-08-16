@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -131,15 +132,13 @@
 
 ;; range_axiom
   (assert
-  (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep x)) (fp.isNaN (to_rep x)))) :pattern (
-  (to_rep x)) )))
+  (forall ((x float)) (! (fp.isFinite32 (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x))) (= (to_rep (of_rep x)) x)) :pattern (
-  (to_rep (of_rep x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                                (of_rep x))) )))
 
 (declare-sort speed_t 0)
 
@@ -163,12 +162,11 @@
   (temp___do_toplevel_150 Bool)) Bool (=>
                                       (or (= temp___is_init_148 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_151) (fp.isNaN temp___expr_151)))))
+                                      (fp.isFinite32 temp___expr_151)))
 
 (declare-sort deceleration_t 0)
 
-(define-fun in_range2 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -243,7 +241,7 @@
   (temp___do_toplevel_180 Bool)) Bool (=>
                                       (or (= temp___is_init_178 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_181) (fp.isNaN temp___expr_181)))))
+                                      (fp.isFinite32 temp___expr_181)))
 
 (declare-sort speed_km_per_h_t 0)
 
@@ -267,7 +265,7 @@
   (temp___do_toplevel_156 Bool)) Bool (=>
                                       (or (= temp___is_init_154 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_157) (fp.isNaN temp___expr_157)))))
+                                      (fp.isFinite32 temp___expr_157)))
 
 (declare-fun is_valid_speed_km_per_h (Float32) Bool)
 
@@ -806,7 +804,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 ;; breaking_model__def_axiom
   (assert (= breaking_model 0))
@@ -1017,8 +1015,7 @@
   (assert (in_range6 breaking_model))
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite t_traction_cut_off) (fp.isNaN t_traction_cut_off))))
+  (assert (fp.isFinite32 t_traction_cut_off))
 
 ;; H
   (assert (= (to_rep o4) (fp #b0 #b00000000 #b00000000000000000000000)))
@@ -1093,39 +1090,31 @@
   (assert (in_range2 a_sb02))
 
 ;; H
-  (assert (not (or (fp.isInfinite t_brake_react) (fp.isNaN t_brake_react))))
+  (assert (fp.isFinite32 t_brake_react))
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite t_brake_increase) (fp.isNaN t_brake_increase))))
+  (assert (fp.isFinite32 t_brake_increase))
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite t_brake_build_up) (fp.isNaN t_brake_build_up))))
+  (assert (fp.isFinite32 t_brake_build_up))
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite t_brake_emergency_react) (fp.isNaN t_brake_emergency_react))))
+  (assert (fp.isFinite32 t_brake_emergency_react))
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite t_brake_emergency_increase) (fp.isNaN t_brake_emergency_increase))))
+  (assert (fp.isFinite32 t_brake_emergency_increase))
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite t_brake_emergency) (fp.isNaN t_brake_emergency))))
+  (assert (fp.isFinite32 t_brake_emergency))
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite t_brake_service_react) (fp.isNaN t_brake_service_react))))
+  (assert (fp.isFinite32 t_brake_service_react))
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite t_brake_service_increase) (fp.isNaN t_brake_service_increase))))
+  (assert (fp.isFinite32 t_brake_service_increase))
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite t_brake_service) (fp.isNaN t_brake_service))))
+  (assert (fp.isFinite32 t_brake_service))
 
 ;; H
   (assert (= (to_rep o20) (fp #b0 #b00000000 #b00000000000000000000000)))

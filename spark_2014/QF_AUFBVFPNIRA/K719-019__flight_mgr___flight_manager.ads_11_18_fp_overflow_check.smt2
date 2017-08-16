@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -65,7 +66,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const value__size Int)
 
@@ -158,22 +159,21 @@
 (declare-const flight_manager__set_engine_speed__adjust_speed__f1 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite position_x) (fp.isNaN position_x))))
+  (assert (fp.isFinite32 position_x))
 
 ;; H
-  (assert (not (or (fp.isInfinite position_y) (fp.isNaN position_y))))
+  (assert (fp.isFinite32 position_y))
 
 ;; H
-  (assert (not (or (fp.isInfinite target_x) (fp.isNaN target_x))))
+  (assert (fp.isFinite32 target_x))
 
 ;; H
-  (assert (not (or (fp.isInfinite target_y) (fp.isNaN target_y))))
+  (assert (fp.isFinite32 target_y))
 
 ;; H
   (assert
   (and (= o (fp.sub RNE position_x target_x))
-  (not (or (fp.isInfinite (fp.sub RNE position_x target_x)) (fp.isNaN (fp.sub RNE
-  position_x target_x))))))
+  (fp.isFinite32 (fp.sub RNE position_x target_x))))
 
 ;; H
   (assert (= o1 (fp.abs o)))
@@ -181,8 +181,7 @@
 ;; H
   (assert
   (and (= o2 (fp.sub RNE position_y target_y))
-  (not (or (fp.isInfinite (fp.sub RNE position_y target_y)) (fp.isNaN (fp.sub RNE
-  position_y target_y))))))
+  (fp.isFinite32 (fp.sub RNE position_y target_y))))
 
 ;; H
   (assert (= o3 (fp.abs o2)))
@@ -191,7 +190,7 @@
   (assert (= o9 (fp.sub RNE o8 target_y)))
 
 ;; H
-  (assert (and (= o11 o9) (not (or (fp.isInfinite o9) (fp.isNaN o9)))))
+  (assert (and (= o11 o9) (fp.isFinite32 o9)))
 
 ;; H
   (assert (= o12 (ite (fp.lt o11 o10) true false)))

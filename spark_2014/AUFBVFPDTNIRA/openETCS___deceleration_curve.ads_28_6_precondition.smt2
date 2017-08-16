@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -115,7 +116,7 @@
   (temp___do_toplevel_151 Bool)) Bool (=>
                                       (or (= temp___is_init_149 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_152) (fp.isNaN temp___expr_152)))))
+                                      (fp.isFinite32 temp___expr_152)))
 
 (declare-sort acceleration_t 0)
 
@@ -139,7 +140,7 @@
   (temp___do_toplevel_163 Bool)) Bool (=>
                                       (or (= temp___is_init_161 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_164) (fp.isNaN temp___expr_164)))))
+                                      (fp.isFinite32 temp___expr_164)))
 
 (declare-sort distance_t 0)
 
@@ -189,7 +190,7 @@
   (temp___do_toplevel_157 Bool)) Bool (=>
                                       (or (= temp___is_init_155 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_158) (fp.isNaN temp___expr_158)))))
+                                      (fp.isFinite32 temp___expr_158)))
 
 (declare-fun is_valid_speed_km_per_h (Float32) Bool)
 

@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -158,8 +159,7 @@
 
 (declare-sort pos_float 0)
 
-(define-fun in_range3 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -188,8 +188,7 @@
 
 (declare-sort non_neg_float 0)
 
-(define-fun in_range4 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -229,7 +228,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 ;; num__def_axiom
   (assert (= num (of_int RNE numerator)))
@@ -271,8 +270,7 @@
 ;; H
   (assert
   (and (= basic_contracts__average__num__assume (of_int RNE numerator))
-  (not (or (fp.isInfinite (of_int RNE numerator)) (fp.isNaN (of_int RNE
-                                                            numerator))))))
+  (fp.isFinite32 (of_int RNE numerator))))
 
 ;; H
   (assert (= basic_contracts__average__num__assume num))
@@ -283,8 +281,7 @@
 ;; H
   (assert
   (and (= basic_contracts__average__den__assume (of_int RNE denominator))
-  (not (or (fp.isInfinite (of_int RNE denominator)) (fp.isNaN (of_int RNE
-                                                              denominator))))))
+  (fp.isFinite32 (of_int RNE denominator))))
 
 ;; H
   (assert (= basic_contracts__average__den__assume den))
@@ -302,9 +299,7 @@
 
 ;; H
   (assert
-  (and (= o (fp.div RNE num den))
-  (not (or (fp.isInfinite (fp.div RNE num den)) (fp.isNaN (fp.div RNE
-  num den))))))
+  (and (= o (fp.div RNE num den)) (fp.isFinite32 (fp.div RNE num den))))
 
 ;; H
   (assert (= result basic_contracts__average__result))

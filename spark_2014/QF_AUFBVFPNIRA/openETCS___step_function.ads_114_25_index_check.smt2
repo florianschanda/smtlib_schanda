@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -177,7 +178,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (define-fun dynamic_invariant2 ((temp___expr_142 Int)
   (temp___is_init_139 Bool) (temp___skip_constant_140 Bool)
@@ -495,7 +496,7 @@
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (= scan_sfun12 true)
   (and (= o28 abstr1)
-  (and (not (or (fp.isInfinite o28) (fp.isNaN o28)))
+  (and (fp.isFinite32 o28)
   (ite (fp.leq o26 o27) (fp.eq o28 o26) (fp.eq o28 o27)))))))
 
 ;; H
@@ -515,7 +516,7 @@
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (not (= scan_sfun12 true))
   (and (= o31 abstr2)
-  (and (not (or (fp.isInfinite o31) (fp.isNaN o31)))
+  (and (fp.isFinite32 o31)
   (ite (fp.leq o29 o30) (fp.eq o31 o29) (fp.eq o31 o30)))))))
 
 ;; H
@@ -619,7 +620,7 @@
 ;; H
   (assert
   (and (= o44 abstr4)
-  (and (not (or (fp.isInfinite o44) (fp.isNaN o44)))
+  (and (fp.isFinite32 o44)
   (ite (fp.leq o40 o43) (fp.eq o44 o40) (fp.eq o44 o43)))))
 
 (assert

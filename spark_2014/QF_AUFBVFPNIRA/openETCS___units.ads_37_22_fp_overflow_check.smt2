@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -59,7 +60,7 @@
   (temp___do_toplevel_140 Bool)) Bool (=>
                                       (or (= temp___is_init_138 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_141) (fp.isNaN temp___expr_141)))))
+                                      (fp.isFinite32 temp___expr_141)))
 
 (declare-const speed Float32)
 
@@ -70,7 +71,7 @@
 (declare-const o1 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite speed) (fp.isNaN speed))))
+  (assert (fp.isFinite32 speed))
 
 (declare-const abstr1 Bool)
 
@@ -81,7 +82,6 @@
 ;; WP_parameter_def
  ;; File "units.ads", line 23, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.mul RNE speed (fp #b0 #b10001000 #b11110100000000000000000))) (fp.isNaN (fp.mul RNE
-  speed (fp #b0 #b10001000 #b11110100000000000000000)))))))
+  (fp.isFinite32 (fp.mul RNE speed (fp #b0 #b10001000 #b11110100000000000000000)))))
 (check-sat)
 (exit)

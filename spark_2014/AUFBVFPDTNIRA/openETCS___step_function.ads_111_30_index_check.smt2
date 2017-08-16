@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -131,15 +132,13 @@
 
 ;; range_axiom
   (assert
-  (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep x)) (fp.isNaN (to_rep x)))) :pattern (
-  (to_rep x)) )))
+  (forall ((x float)) (! (fp.isFinite32 (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x))) (= (to_rep (of_rep x)) x)) :pattern (
-  (to_rep (of_rep x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                                (of_rep x))) )))
 
 (declare-sort num_delimiters_range 0)
 
@@ -529,7 +528,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 ;; min__post_axiom
   (assert
@@ -1526,7 +1525,7 @@
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields4) im2))))))
-  (and (not (or (fp.isInfinite o15) (fp.isNaN o15)))
+  (and (fp.isFinite32 o15)
   (or
   (exists ((i3 Int))
   (and
@@ -1602,7 +1601,7 @@
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields4) im2))))))
-  (and (not (or (fp.isInfinite o14) (fp.isNaN o14)))
+  (and (fp.isFinite32 o14)
   (or
   (exists ((i3 Int))
   (and
@@ -1672,7 +1671,7 @@
                                                        (us_split_fields3
                                                        sfun2)) i22)))))
   (and (= o16 (min o14 o15))
-  (and (not (or (fp.isInfinite o16) (fp.isNaN o16)))
+  (and (fp.isFinite32 o16)
   (ite (fp.leq o14 o15) (fp.eq o16 o14) (fp.eq o16 o15)))))))
 
 ;; H
@@ -2132,7 +2131,7 @@
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields6) im2))))))
-  (and (not (or (fp.isInfinite o28) (fp.isNaN o28)))
+  (and (fp.isFinite32 o28)
   (or
   (exists ((i3 Int))
   (and
@@ -2220,7 +2219,7 @@
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields6) im2))))))
-  (and (not (or (fp.isInfinite o27) (fp.isNaN o27)))
+  (and (fp.isFinite32 o27)
   (or
   (exists ((i3 Int))
   (and
@@ -2302,7 +2301,7 @@
                                                        (us_split_fields3
                                                        sfun1)) i12)))))
   (and (= o29 (min o27 o28))
-  (and (not (or (fp.isInfinite o29) (fp.isNaN o29)))
+  (and (fp.isFinite32 o29)
   (ite (fp.leq o27 o28) (fp.eq o29 o27) (fp.eq o29 o28))))))))
 
 ;; H
@@ -2903,7 +2902,7 @@
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields8) im2))))))
-  (and (not (or (fp.isInfinite o41) (fp.isNaN o41)))
+  (and (fp.isFinite32 o41)
   (or
   (exists ((i3 Int))
   (and
@@ -2992,7 +2991,7 @@
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields8) im2))))))
-  (and (not (or (fp.isInfinite o40) (fp.isNaN o40)))
+  (and (fp.isFinite32 o40)
   (or
   (exists ((i3 Int))
   (and
@@ -3075,7 +3074,7 @@
                                                        (us_split_fields3
                                                        sfun1)) i12))))))
   (and (= o42 (min o40 o41))
-  (and (not (or (fp.isInfinite o42) (fp.isNaN o42)))
+  (and (fp.isFinite32 o42)
   (ite (fp.leq o40 o41) (fp.eq o42 o40) (fp.eq o42 o41))))))))
 
 ;; H
@@ -3592,7 +3591,7 @@
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields10) im2))))))
-  (and (not (or (fp.isInfinite o54) (fp.isNaN o54)))
+  (and (fp.isFinite32 o54)
   (or
   (exists ((i3 Int))
   (and
@@ -3658,7 +3657,7 @@
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields10) im2))))))
-  (and (not (or (fp.isInfinite o53) (fp.isNaN o53)))
+  (and (fp.isFinite32 o53)
   (or
   (exists ((i3 Int))
   (and
@@ -3718,7 +3717,7 @@
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (= scan_sfun12 true)
   (and (= o55 (min o53 o54))
-  (and (not (or (fp.isInfinite o55) (fp.isNaN o55)))
+  (and (fp.isFinite32 o55)
   (ite (fp.leq o53 o54) (fp.eq o55 o53) (fp.eq o55 o54)))))))
 
 ;; H
@@ -3863,7 +3862,7 @@
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields12) im2))))))
-  (and (not (or (fp.isInfinite o67) (fp.isNaN o67)))
+  (and (fp.isFinite32 o67)
   (or
   (exists ((i3 Int))
   (and
@@ -3929,7 +3928,7 @@
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields12) im2))))))
-  (and (not (or (fp.isInfinite o66) (fp.isNaN o66)))
+  (and (fp.isFinite32 o66)
   (or
   (exists ((i3 Int))
   (and
@@ -3989,7 +3988,7 @@
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (not (= scan_sfun12 true))
   (and (= o68 (min o66 o67))
-  (and (not (or (fp.isInfinite o68) (fp.isNaN o68)))
+  (and (fp.isFinite32 o68)
   (ite (fp.leq o66 o67) (fp.eq o68 o66) (fp.eq o68 o67)))))))
 
 ;; H

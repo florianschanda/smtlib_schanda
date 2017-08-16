@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -489,7 +490,7 @@
   (temp___do_toplevel_177 Bool)) Bool (=>
                                       (or (= temp___is_init_175 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_178) (fp.isNaN temp___expr_178)))))
+                                      (fp.isFinite32 temp___expr_178)))
 
 (declare-const x (_ BitVec 16))
 
@@ -503,7 +504,7 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite res) (fp.isNaN res)))))
+  (fp.isFinite32 res)))
 
 ;; H
   (assert (not (= x ((_ int2bv 16) 0))))
@@ -517,8 +518,7 @@
 ;; WP_parameter_def
  ;; File "floating_point.adb", line 77, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.div RNE (fp #b0 #b10010101 #b11000000110001000110000) ((_ to_fp_unsigned 8 24) RNE
-  x))) (fp.isNaN (fp.div RNE (fp #b0 #b10010101 #b11000000110001000110000) ((_ to_fp_unsigned 8 24) RNE
-  x)))))))
+  (fp.isFinite32 (fp.div RNE (fp #b0 #b10010101 #b11000000110001000110000) ((_ to_fp_unsigned 8 24) RNE
+  x)))))
 (check-sat)
 (exit)

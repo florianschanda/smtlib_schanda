@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -212,44 +213,40 @@
 ;; Power_0
   (assert
   (forall ((x Float32))
-  (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-  (fp.eq (power x 0) (of_int1 RNE 1)))))
+  (=> (fp.isFinite32 x) (fp.eq (power x 0) (of_int1 RNE 1)))))
 
 ;; Power_1
   (assert
-  (forall ((x Float32))
-  (=> (not (or (fp.isInfinite x) (fp.isNaN x))) (fp.eq (power x 1) x))))
+  (forall ((x Float32)) (=> (fp.isFinite32 x) (fp.eq (power x 1) x))))
 
 ;; Power_2
   (assert
   (forall ((x Float32))
-  (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-  (fp.eq (power x 2) (fp.mul RNE x x)))))
+  (=> (fp.isFinite32 x) (fp.eq (power x 2) (fp.mul RNE x x)))))
 
 ;; Power_3
   (assert
   (forall ((x Float32))
-  (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-  (fp.eq (power x 3) (fp.mul RNE x (fp.mul RNE x x))))))
+  (=> (fp.isFinite32 x) (fp.eq (power x 3) (fp.mul RNE x (fp.mul RNE x x))))))
 
 ;; Power_neg1
   (assert
   (forall ((x Float32))
-  (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
+  (=> (fp.isFinite32 x)
   (=> (not (fp.isZero      x))
   (fp.eq (power x (- 1)) (fp.div RNE (of_int1 RNE 1) x))))))
 
 ;; Power_neg2
   (assert
   (forall ((x Float32))
-  (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
+  (=> (fp.isFinite32 x)
   (=> (not (fp.isZero      x))
   (fp.eq (power x (- 2)) (fp.div RNE (of_int1 RNE 1) (power x 2)))))))
 
 ;; Power_neg3
   (assert
   (forall ((x Float32))
-  (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
+  (=> (fp.isFinite32 x)
   (=> (not (fp.isZero      x))
   (fp.eq (power x (- 2)) (fp.div RNE (of_int1 RNE 1) (power x 3)))))))
 

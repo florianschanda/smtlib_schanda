@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -131,7 +132,7 @@
   (temp___do_toplevel_134 Bool)) Bool (=>
                                       (or (= temp___is_init_132 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_135) (fp.isNaN temp___expr_135)))))
+                                      (fp.isFinite32 temp___expr_135)))
 
 (declare-fun is_valid_speed (Float32) Bool)
 
@@ -162,7 +163,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-sort speed_km_per_h_t 0)
 
@@ -186,7 +187,7 @@
   (temp___do_toplevel_140 Bool)) Bool (=>
                                       (or (= temp___is_init_138 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_141) (fp.isNaN temp___expr_141)))))
+                                      (fp.isFinite32 temp___expr_141)))
 
 (declare-fun is_valid_speed_km_per_h (Float32) Bool)
 
@@ -222,7 +223,7 @@
 (declare-const o Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite speed) (fp.isNaN speed))))
+  (assert (fp.isFinite32 speed))
 
 ;; H
   (assert (= (is_valid_speed speed) true))
@@ -230,8 +231,7 @@
 ;; H
   (assert
   (and (= o (fp.mul RNE speed (fp #b0 #b10001010 #b11000010000000000000000)))
-  (not (or (fp.isInfinite (fp.mul RNE speed (fp #b0 #b10001010 #b11000010000000000000000))) (fp.isNaN (fp.mul RNE
-  speed (fp #b0 #b10001010 #b11000010000000000000000)))))))
+  (fp.isFinite32 (fp.mul RNE speed (fp #b0 #b10001010 #b11000010000000000000000)))))
 
 (assert
 ;; WP_parameter_def

@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -152,7 +153,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (define-fun bv_min ((x (_ BitVec 16))
   (y (_ BitVec 16))) (_ BitVec 16) (ite (bvule x y) x y))
@@ -166,8 +167,7 @@
   (temp___is_init_132 Bool) (temp___skip_constant_133 Bool)
   (temp___do_toplevel_134 Bool)) Bool true)
 
-(define-fun in_range2 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b01111101 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000)))))
@@ -179,8 +179,7 @@
                                       (fp.leq (fp #b0 #b01111101 #b00000000000000000000000) (fp #b0 #b01111111 #b00000000000000000000000)))
                                       (in_range2 temp___expr_141)))
 
-(define-fun in_range3 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b10000100 #b00000000000000000000000)) x)
                                          (fp.leq x (fp #b0 #b10000100 #b00000000000000000000000)))))
@@ -239,7 +238,7 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite x) (fp.isNaN x)))))
+  (fp.isFinite32 x)))
 
 ;; H
   (assert (= result x))
@@ -252,8 +251,7 @@
   (assert
   (=> (fp.leq (fp #b0 #b10000010 #b01000000000000000000000) x1)
   (and (= o (fp.sub RNE x1 (fp #b0 #b10000011 #b01000000000000000000000)))
-  (not (or (fp.isInfinite (fp.sub RNE x1 (fp #b0 #b10000011 #b01000000000000000000000))) (fp.isNaN (fp.sub RNE
-  x1 (fp #b0 #b10000011 #b01000000000000000000000))))))))
+  (fp.isFinite32 (fp.sub RNE x1 (fp #b0 #b10000011 #b01000000000000000000000))))))
 
 ;; H
   (assert

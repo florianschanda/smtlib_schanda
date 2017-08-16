@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite64 ((x Float64)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -130,7 +131,7 @@
   (temp___do_toplevel_166 Bool)) Bool (=>
                                       (or (= temp___is_init_164 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_167) (fp.isNaN temp___expr_167)))))
+                                      (fp.isFinite64 temp___expr_167)))
 
 (declare-const a Float64)
 
@@ -141,14 +142,14 @@
   (temp___do_toplevel_56 Bool)) Bool (=>
                                      (or (= temp___is_init_54 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
+                                     (fp.isFinite64 temp___expr_57)))
 
 (declare-const o Float64)
 
 (declare-const o1 Float64)
 
 ;; H
-  (assert (not (or (fp.isInfinite a) (fp.isNaN a))))
+  (assert (fp.isFinite64 a))
 
 ;; H
   (assert
@@ -160,9 +161,8 @@
   (and
   (= o (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
   a))
-  (not (or (fp.isInfinite (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
-  a)) (fp.isNaN (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
-  a))))))
+  (fp.isFinite64 (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
+  a))))
 
 ;; H
   (assert
@@ -172,6 +172,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "generic_float_tests.ads", line 2, characters 0-0
-  (not (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (not (fp.isFinite64 o1)))
 (check-sat)
 (exit)

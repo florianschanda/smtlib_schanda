@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -65,7 +66,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 100)))
 
@@ -76,8 +77,7 @@
                                       (<= 0 100)) (in_range2
                                       temp___expr_135)))
 
-(define-fun in_range3 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10001000 #b11110100000000000000000)))))
@@ -89,8 +89,7 @@
                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10001000 #b11110100000000000000000)))
                                       (in_range3 temp___expr_141)))
 
-(define-fun in_range4 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000)))))
@@ -180,7 +179,7 @@
   (assert (in_range4 delta_time))
 
 ;; H
-  (assert (not (or (fp.isInfinite time) (fp.isNaN time))))
+  (assert (fp.isFinite32 time))
 
 ;; H
   (assert
@@ -203,13 +202,13 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite t_fp) (fp.isNaN t_fp)))))
+  (fp.isFinite32 t_fp)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite t_pp) (fp.isNaN t_pp)))))
+  (fp.isFinite32 t_pp)))
 
 ;; H
   (assert
@@ -220,8 +219,7 @@
   (assert
   (and
   (= o1 (fp.sub RNE time (fp.div RNE d1 (fp #b0 #b10000000 #b00000000000000000000000))))
-  (not (or (fp.isInfinite (fp.sub RNE time (fp.div RNE d1 (fp #b0 #b10000000 #b00000000000000000000000)))) (fp.isNaN (fp.sub RNE
-  time (fp.div RNE d1 (fp #b0 #b10000000 #b00000000000000000000000))))))))
+  (fp.isFinite32 (fp.sub RNE time (fp.div RNE d1 (fp #b0 #b10000000 #b00000000000000000000000))))))
 
 ;; H
   (assert (= t_fp1 o1))
@@ -231,9 +229,8 @@
   (and
   (= o2 (fp.add RNE t_fp1 (fp.mul RNE ((_ to_fp 8 24) RNE (to_real nb_of_fp))
   delta_time)))
-  (not (or (fp.isInfinite (fp.add RNE t_fp1 (fp.mul RNE ((_ to_fp 8 24) RNE (to_real
-  nb_of_fp)) delta_time))) (fp.isNaN (fp.add RNE t_fp1 (fp.mul RNE ((_ to_fp 8 24) RNE (to_real
-  nb_of_fp)) delta_time)))))))
+  (fp.isFinite32 (fp.add RNE t_fp1 (fp.mul RNE ((_ to_fp 8 24) RNE (to_real
+  nb_of_fp)) delta_time)))))
 
 ;; H
   (assert (= t_pp1 o2))
@@ -243,9 +240,8 @@
   (and
   (= o3 (fp.add RNE t_pp1 (fp.mul RNE (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000) ((_ to_fp 8 24) RNE (to_real
   nb_of_fp))) delta_time)))
-  (not (or (fp.isInfinite (fp.add RNE t_pp1 (fp.mul RNE (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000) ((_ to_fp 8 24) RNE (to_real
-  nb_of_fp))) delta_time))) (fp.isNaN (fp.add RNE t_pp1 (fp.mul RNE (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000) ((_ to_fp 8 24) RNE (to_real
-  nb_of_fp))) delta_time)))))))
+  (fp.isFinite32 (fp.add RNE t_pp1 (fp.mul RNE (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000) ((_ to_fp 8 24) RNE (to_real
+  nb_of_fp))) delta_time)))))
 
 ;; H
   (assert (= result3 time))

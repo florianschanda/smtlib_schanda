@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite  x)
                                                 (fp.isPositive  x)))
 
@@ -59,10 +60,9 @@
   (temp___do_toplevel_150 Bool)) Bool (=>
                                       (or (= temp___is_init_148 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_151) (fp.isNaN temp___expr_151)))))
+                                      (fp.isFinite32 temp___expr_151)))
 
-(define-fun in_range1 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range1 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -81,7 +81,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
@@ -215,7 +215,7 @@
   (temp___do_toplevel_156 Bool)) Bool (=>
                                       (or (= temp___is_init_154 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_157) (fp.isNaN temp___expr_157)))))
+                                      (fp.isFinite32 temp___expr_157)))
 
 (define-fun dynamic_invariant5 ((temp___expr_187 Int)
   (temp___is_init_184 Bool) (temp___skip_constant_185 Bool)
@@ -259,7 +259,7 @@
 (declare-const o13 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite v) (fp.isNaN v))))
+  (assert (fp.isFinite32 v))
 
 ;; H
   (assert (in_range2 d))
@@ -269,7 +269,7 @@
   (= o1 (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000) o)))
 
 ;; H
-  (assert (and (= o2 o1) (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (assert (and (= o2 o1) (fp.isFinite32 o1)))
 
 ;; H
   (assert
@@ -279,7 +279,7 @@
   (assert (= o5 (fp.add RNE o4 o3)))
 
 ;; H
-  (assert (and (= o6 o5) (not (or (fp.isInfinite o5) (fp.isNaN o5)))))
+  (assert (and (= o6 o5) (fp.isFinite32 o5)))
 
 ;; H
   (assert (= o8 (fp.mul RNE o7 o6)))
@@ -287,6 +287,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "units.ads", line 26, characters 0-0
-  (not (not (or (fp.isInfinite o8) (fp.isNaN o8)))))
+  (not (fp.isFinite32 o8)))
 (check-sat)
 (exit)

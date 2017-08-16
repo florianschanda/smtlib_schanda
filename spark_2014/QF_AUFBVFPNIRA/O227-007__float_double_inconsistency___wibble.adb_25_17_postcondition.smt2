@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite64 ((x Float64)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 4294967295)))
 
 (declare-const abstr (_ BitVec 32))
@@ -158,7 +159,7 @@
   (temp___do_toplevel_140 Bool)) Bool (=>
                                       (or (= temp___is_init_138 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_141) (fp.isNaN temp___expr_141)))))
+                                      (fp.isFinite64 temp___expr_141)))
 
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 32))
 
@@ -197,7 +198,7 @@
 (declare-const state3 Float64)
 
 ;; H
-  (assert (not (or (fp.isInfinite state) (fp.isNaN state))))
+  (assert (fp.isFinite64 state))
 
 ;; H
   (assert (in_range2 x))
@@ -211,8 +212,7 @@
   (assert
   (and
   (= o (fp.add RNE state (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))
-  (not (or (fp.isInfinite (fp.add RNE state (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000))) (fp.isNaN (fp.add RNE
-  state (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))))))
+  (fp.isFinite64 (fp.add RNE state (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))))
 
 ;; H
   (assert (= result state))
