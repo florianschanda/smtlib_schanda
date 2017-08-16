@@ -8,6 +8,11 @@
 (declare-const x Float32)
 (declare-const y Float32)
 
+(assert (fp.isNaN x))
+(assert (fp.isZero y))
+
+;;  nan could map to zero
+
 (assert (= (fp.to_real x) (fp.to_real y)))
 (check-sat)
 (exit)
