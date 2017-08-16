@@ -28,12 +28,22 @@ from glob import glob
 import os
 
 PATH = os.environ["PATH"].split(os.pathsep)
-CVC4_VERSIONS = sorted(glob("cvc4_*"))
+
+# We skip the very first build (04-07) now since it doesn't support 2.6
+# style datatypes.
+CVC4_VERSIONS       = sorted(glob("cvc4_*"))[1:]
+
+Z3_VERSION          = sorted(glob("z3_201*"))[-1]
+
+ALT_ERGO_VERSION    = sorted(glob("altergo_spark_*"))[-1]
+
+ALT_ERGO_FP_VERSION = sorted(glob("altergo_fp_201*"))[-1]
+ALT_ERGO_FP_AXIOMS  = sorted(glob("altergo_fp_*.why"))[-1]
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("suite",
-                    choices=["all", "medium", "fast"])
+                    choices=["all", "fast"])
     ap.add_argument("--force",
                     action="store_true",
                     default=False)
@@ -42,59 +52,44 @@ def main():
                     default=False)
     options = ap.parse_args()
 
-    bm_suite = "debug" if options.debug else "all"
+    if options.debug:
+        bm_suites = ["debug"]
+        cvc4_used_versions = CVC4_VERSIONS[-1:]
+        all_provers = False
+    elif options.suite == "all":
+        bm_suites = ["all"]
+        cvc4_used_versions = CVC4_VERSIONS
+        all_provers = True
+    elif options.suite == "fast":
+        bm_suites = ["schanda", "spark"]
+        cvc4_used_versions = CVC4_VERSIONS[-3:]
+        all_provers = False
+    else:
+        assert False
 
-    # We skip the very first build (04-07) now since it doesn't support 2.6
-    # style datatypes.
-    for binary in CVC4_VERSIONS[1:]:
-        # Fast suite skips most versions
-        if options.suite == "fast":
-            if binary not in (CVC4_VERSIONS[1], CVC4_VERSIONS[-1]):
-                continue
+    invocations = [("cvc4", v) for v in cvc4_used_versions]
+    invocations.append(("z3", Z3_VERSION))
+    if all_provers:
+        invocations.append(("oldfp", CVC4_VERSIONS[-1]))
+        #invocations.append(("altergo", ALT_ERGO_VERSION))
+        invocations.append(("altergo-fp", ALT_ERGO_FP_VERSION))
+        invocations.append(("colibri", "colibri"))
+        invocations.append(("mathsat", "mathsat"))
+        #invocations.append(("mathsat-acdl", "mathsat"))
 
-        os.system("./run.py %s --suite=%s cvc4 ./%s" %
-                  ("--force" if options.force else "",
-                   bm_suite,
-                   binary))
+    for kind, binary in invocations:
+        for suite in bm_suites:
+            if os.path.exists(binary):
+                actual_bin = "./" + binary
+            else:
+                actual_bin = binary
 
-    for binary in CVC4_VERSIONS[-2:]:
-        os.system("./mk_text_report.py cvc4 %s" % binary)
-
-    OTHER_PROVERS = ["mathsat", "mathsat_acdl", "z3", "oldfp"]
-    # Only all includes colibri and alt-ergo
-    if options.suite == "all":
-        OTHER_PROVERS.append("altergo")
-        OTHER_PROVERS.append("altergo-fp")
-        OTHER_PROVERS.append("colibri")
-
-    for prover in OTHER_PROVERS:
-        exists = False
-        prover_bin = {
-            "z3"           : "z3_2017_08_02",
-            "mathsat_acdl" : "mathsat",
-            "altergo"      : "altergo_spark_2017_07_20",
-            "altergo-fp"   : "altergo_fp_2017_08_14",
-            "oldfp"        : "./" + CVC4_VERSIONS[-1],
-        }.get(prover, prover)
-
-        # Search current directory, then PATH for prover binary
-        if os.path.exists(prover_bin):
-            prover_bin = "./%s" % prover_bin
-            exists     = True
-        if not exists:
-            for p in PATH:
-                if os.path.exists(os.path.join(p, prover_bin)):
-                    exists = True
-                    break
-
-        if exists:
-            os.system("./run.py %s --suite=%s %s %s" %
+            os.system("./run.py %s %s --suite=%s %s %s" %
                       ("--force" if options.force else "",
-                       bm_suite,
-                       prover,
-                       prover_bin))
-        else:
-            print "Could not find %s on path." % prover_bin
+                       "--timeout=2" if options.suite == "fast" else "",
+                       suite,
+                       kind,
+                       actual_bin))
 
     print "Preparing results tarball"
     if os.path.isfile("results.tar.xz"):
