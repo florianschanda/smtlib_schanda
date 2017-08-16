@@ -14,3 +14,5 @@ report_*.txt
 data_*.p
 benchmarks.p
 results.tar.xz
+
+industrial_2*
