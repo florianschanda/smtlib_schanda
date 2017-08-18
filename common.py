@@ -330,6 +330,24 @@ def list_results():
             if f.startswith("data_") and f.endswith(".p"):
                 result_files.add(f)
 
+    fatal = False
+    for dir in os.listdir("results"):
+        files = set(os.listdir(os.path.join("results", dir)))
+        assert "benchmarks.p" in files
+        files.remove("benchmarks.p")
+
+        missing = result_files - files
+        extra   = files - result_files
+
+        if len(missing) > 0:
+            print "Missing results in %s: %s" % (dir, ", ".join(missing))
+            fatal = True
+        if len(extra) > 0:
+            print "Unexpected results in %s: %s" % (dir, ", ".join(extra))
+            fatal = True
+    if fatal:
+        raise Exception
+
     rv = []
     for fn in result_files:
         tmp = fn.rsplit(".", 1)[0]
