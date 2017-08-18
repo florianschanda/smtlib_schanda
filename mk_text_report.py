@@ -83,14 +83,28 @@ def create_report(prover_kind, prover_bin):
 
         fd.write(FMT % tuple(row) + "\n")
 
-        tmp = []
+        tmp_w = []
+        tmp_t = []
+        tmp_u = []
         for group in GROUPS:
             for bm, data in res["group_results"][group].iteritems():
                 if data["score"] == "u":
-                    tmp.append(bench[bm]["name"])
-        if len(tmp) > 0:
+                    tmp_w.append(bench[bm]["name"])
+                elif data["score"] == "t":
+                    tmp_t.append(bench[bm]["name"])
+                elif data["score"] == "?":
+                    tmp_u.append(bench[bm]["name"])
+        if len(tmp_w) > 0:
             fd.write("\n# Unsound results\n")
-            for bm in sorted(tmp):
+            for bm in sorted(tmp_w):
+                fd.write(bm + "\n")
+        if len(tmp_t) > 0:
+            fd.write("\n# Timeouts\n")
+            for bm in sorted(tmp_t):
+                fd.write(bm + "\n")
+        if len(tmp_u) > 0:
+            fd.write("\n# Unknown\n")
+            for bm in sorted(tmp_u):
                 fd.write(bm + "\n")
 
         tmp = []
