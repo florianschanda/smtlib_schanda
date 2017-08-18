@@ -354,6 +354,8 @@ def list_results():
         tmp = tmp.split("_")[1:]
         if tmp[0] == "mathsat" and tmp[1] == "acdl":
             tmp[0:2] = ["mathsat_acdl"]
+        elif tmp[0] == "z3" and tmp[1] == "smallfloats":
+            tmp[0:2] = ["z3_smallfloats"]
         prover_kind = tmp[0]
         prover_bin  = "_".join(tmp[1:])
         rv.append((prover_kind, prover_bin))

@@ -65,15 +65,16 @@ def mk_bench_name(cat):
 
 def mk_solver_name(nam):
     return {
-        "vbs"          : "Virtual best",
-        "cvc4"         : "{\\sc cvc4} (${\\mathbb F}$)",
-        "z3"           : "Z3",
-        "colibri"      : "Colibri",
-        "mathsat"      : "MathSAT",
-        "mathsat_acdl" : "MathSAT (ACDL)",
-        "altergo"      : "Alt-Ergo 1.3",
-        "altergo-fp"   : "Alt-Ergo FPA",
-        "oldfp"        : "{\\sc cvc4} (${\\mathbb R}$)"
+        "vbs"            : "Virtual best",
+        "cvc4"           : "{\\sc cvc4} (${\\mathbb F}$)",
+        "z3"             : "Z3",
+        "z3_smallfloats" : "Z3 (SmallFloat)",
+        "colibri"        : "Colibri",
+        "mathsat"        : "MathSAT",
+        "mathsat_acdl"   : "MathSAT (ACDL)",
+        "altergo"        : "Alt-Ergo 1.3",
+        "altergo-fp"     : "Alt-Ergo FPA",
+        "oldfp"          : "{\\sc cvc4} (${\\mathbb R}$)"
     }.get(nam, nam)
 
 def mk_coloring(criteria):
