@@ -34,6 +34,7 @@ PATH = os.environ["PATH"].split(os.pathsep)
 CVC4_VERSIONS       = sorted(glob("cvc4_*"))[1:]
 
 Z3_VERSION          = sorted(glob("z3_201*"))[-1]
+Z3_SF_VERSION       = sorted(glob("z3_smallfloats_201*"))[-1]
 
 ALT_ERGO_VERSION    = sorted(glob("altergo_spark_*"))[-1]
 
@@ -78,6 +79,8 @@ def main():
         invocations.append(("colibri", "colibri"))
         invocations.append(("mathsat", "mathsat"))
         #invocations.append(("mathsat-acdl", "mathsat"))
+
+        invocations.append(("z3_smallfloats", Z3_SF_VERSION))
 
     for kind, binary in invocations:
         for suite in bm_suites:
