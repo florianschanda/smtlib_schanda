@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -503,7 +504,7 @@
   (temp___do_toplevel_177 Bool)) Bool (=>
                                       (or (= temp___is_init_175 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_178) (fp.isNaN temp___expr_178)))))
+                                      (fp.isFinite32 temp___expr_178)))
 
 (declare-const x (_ BitVec 16))
 
@@ -528,13 +529,13 @@
 (declare-const res2 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite y) (fp.isNaN y))))
+  (assert (fp.isFinite32 y))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite res) (fp.isNaN res)))))
+  (fp.isFinite32 res)))
 
 ;; H
   (assert
@@ -552,8 +553,7 @@
   (assert
   (=> (fp.leq (fp #b0 #b10000010 #b01000000000000000000000) res1)
   (and (= o (fp.sub RNE res1 (fp #b0 #b10000011 #b01000000000000000000000)))
-  (not (or (fp.isInfinite (fp.sub RNE res1 (fp #b0 #b10000011 #b01000000000000000000000))) (fp.isNaN (fp.sub RNE
-  res1 (fp #b0 #b10000011 #b01000000000000000000000))))))))
+  (fp.isFinite32 (fp.sub RNE res1 (fp #b0 #b10000011 #b01000000000000000000000))))))
 
 ;; H
   (assert

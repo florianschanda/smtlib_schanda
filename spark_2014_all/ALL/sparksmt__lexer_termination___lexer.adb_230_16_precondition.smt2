@@ -227,19 +227,19 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)(attr__constrained Bool)))))
-(define-fun us_rep_3__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___3__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_4__projection ((a us_rep1)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___4__projection ((a us_rep1)) us_split_fields (us_split_fields1
+                                                                 a))
 
-(define-fun us_rep_5__projection ((a us_rep1)) Bool (attr__constrained a))
+(define-fun us_rep___5__projection ((a us_rep1)) Bool (attr__constrained a))
 
 (define-fun file_io__read_result__c__pred ((a us_rep1)) Bool (= (to_rep1
                                                                 (rec__file_io__read_result__status
@@ -464,17 +464,17 @@
 
 (declare-const next_idx1 Int)
 
-(declare-const temp___867 Int)
+(declare-const temp___955 Int)
 
-(declare-const temp___866 Int)
+(declare-const temp___954 Int)
 
 (declare-const result1 int__ref)
 
-(declare-const temp___8671 Int)
+(declare-const temp___9551 Int)
 
 (declare-const result2 int__ref)
 
-(declare-const temp___8661 Int)
+(declare-const temp___9541 Int)
 
 ;; H
   (assert (= current_read__attr__constrained false))
@@ -534,24 +534,24 @@
   (and
   (= (to_rep1
      (rec__file_io__read_result__status current_read__split_discrs1)) 0)
-  (let ((temp___869 (to_rep
+  (let ((temp___957 (to_rep
                     (rec__file_io__read_result__c
                     current_read__split_fields1))))
-  (or (= temp___869 10)
-  (or (= temp___869 13) (or (= temp___869 32) (= temp___869 9))))))))
+  (or (= temp___957 10)
+  (or (= temp___957 13) (or (= temp___957 32) (= temp___957 9))))))))
 
 ;; H
-  (assert (= result1 (mk_int__ref temp___867)))
+  (assert (= result1 (mk_int__ref temp___955)))
 
 ;; H
-  (assert (= temp___8671 next_idx1))
+  (assert (= temp___9551 next_idx1))
 
 ;; H
-  (assert (= result2 (mk_int__ref temp___866)))
+  (assert (= result2 (mk_int__ref temp___954)))
 
 ;; H
   (assert
-  (= temp___8661 (to_int1
+  (= temp___9541 (to_int1
                  (ite (= (to_rep1
                          (rec__file_io__read_result__status
                          next_read__split_discrs1)) 0)

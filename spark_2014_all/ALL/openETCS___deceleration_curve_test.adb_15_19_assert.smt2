@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -127,7 +128,7 @@
   (temp___do_toplevel_147 Bool)) Bool (=>
                                       (or (= temp___is_init_145 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_148) (fp.isNaN temp___expr_148)))))
+                                      (fp.isFinite32 temp___expr_148)))
 
 (declare-fun to_rep (speed_t) Float32)
 
@@ -140,14 +141,13 @@
 ;; range_axiom
   (assert
   (forall ((x speed_t))
-  (! (not (or (fp.isInfinite (to_rep x)) (fp.isNaN (to_rep x)))) :pattern (
-  (to_rep x)) )))
+  (! (fp.isFinite32 (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x))) (= (to_rep (of_rep x)) x)) :pattern (
-  (to_rep (of_rep x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                                (of_rep x))) )))
 
 (declare-sort distance_t 0)
 
@@ -210,7 +210,7 @@
   (temp___do_toplevel_153 Bool)) Bool (=>
                                       (or (= temp___is_init_151 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_154) (fp.isNaN temp___expr_154)))))
+                                      (fp.isFinite32 temp___expr_154)))
 
 (declare-fun is_valid_speed_km_per_h (Float32) Bool)
 
@@ -445,13 +445,13 @@
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (define-fun bool_eq2 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -534,18 +534,18 @@
 (define-fun us_split_fields_supervise__projection ((a us_split_fields4)) Bool
   (rec__deceleration_curve__target_t__supervise a))
 
-(define-fun us_split_fields_location2__projection ((a us_split_fields4)) distance_t
+(define-fun us_split_fields_location__2__projection ((a us_split_fields4)) distance_t
   (rec__deceleration_curve__target_t__location a))
 
 (declare-datatypes ((us_split_fields__ref2 0))
 (((mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref2)) us_split_fields4
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep2 (us_split_fields5 us_split_fields4)))))
-(define-fun us_rep_3__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
-                                                                a))
+(define-fun us_rep___3__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
+                                                                  a))
 
 (define-fun bool_eq3 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
@@ -726,7 +726,7 @@
   (assert
   (and
   (= o (m_per_s_from_km_per_h (fp #b0 #b10000110 #b01000000000000000000000)))
-  (and (not (or (fp.isInfinite o) (fp.isNaN o)))
+  (and (fp.isFinite32 o)
   (= o (fp.div RNE (fp.mul RNE (fp #b0 #b10000110 #b01000000000000000000000) (fp #b0 #b10001000 #b11110100000000000000000)) (fp #b0 #b10001010 #b11000010000000000000000))))))
 
 ;; H
@@ -736,8 +736,7 @@
   (assert (= initial_speed1 o))
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite initial_speed1) (fp.isNaN initial_speed1))))
+  (assert (fp.isFinite32 initial_speed1))
 
 ;; H
   (assert (= (to_rep o1) (fp #b0 #b00000000 #b00000000000000000000000)))

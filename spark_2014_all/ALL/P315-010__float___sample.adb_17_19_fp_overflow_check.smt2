@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -126,7 +127,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-sort nb_type 0)
 
@@ -156,8 +157,7 @@
 
 (declare-sort d_time_type 0)
 
-(define-fun in_range3 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10001000 #b11110100000000000000000)))))
@@ -186,8 +186,7 @@
 
 (declare-sort delta_time_type 0)
 
-(define-fun in_range4 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000)))))
@@ -232,8 +231,7 @@
 
 (declare-sort tt_fpS 0)
 
-(define-fun in_range5 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range5 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111110)))))
@@ -266,8 +264,7 @@
 
 (declare-sort ttmp1S 0)
 
-(define-fun in_range6 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range6 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000110 #b10010000000000000000000)))))
@@ -298,8 +295,7 @@
 
 (declare-sort ttmp2S 0)
 
-(define-fun in_range7 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range7 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000100 #b10010000000000000000000)))))
@@ -354,7 +350,7 @@
   (assert (in_range4 delta_time))
 
 ;; H
-  (assert (not (or (fp.isInfinite time) (fp.isNaN time))))
+  (assert (fp.isFinite32 time))
 
 ;; H
   (assert
@@ -382,7 +378,7 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite t_pp) (fp.isNaN t_pp)))))
+  (fp.isFinite32 t_pp)))
 
 ;; H
   (assert
@@ -406,7 +402,6 @@
 ;; WP_parameter_def
  ;; File "sample.ads", line 13, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.sub RNE time (fp.div RNE d1 (fp #b0 #b10000000 #b00000000000000000000000)))) (fp.isNaN (fp.sub RNE
-  time (fp.div RNE d1 (fp #b0 #b10000000 #b00000000000000000000000))))))))
+  (fp.isFinite32 (fp.sub RNE time (fp.div RNE d1 (fp #b0 #b10000000 #b00000000000000000000000))))))
 (check-sat)
 (exit)

@@ -165,7 +165,7 @@
 (declare-const dummy1 ttB)
 
 (declare-datatypes ((ttB__ref 0)) (((mk_ttB__ref (ttB__content ttB)))))
-(define-fun ttB__ref_2__projection ((a ttB__ref)) ttB (ttB__content a))
+(define-fun ttB__ref___2__projection ((a ttB__ref)) ttB (ttB__content a))
 
 (declare-const o Int)
 

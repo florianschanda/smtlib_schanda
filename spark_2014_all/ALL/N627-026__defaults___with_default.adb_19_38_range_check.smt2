@@ -81,7 +81,7 @@
 (declare-datatypes ((scalar_with_default__ref 0))
 (((mk_scalar_with_default__ref
   (scalar_with_default__content scalar_with_default)))))
-(define-fun scalar_with_default__ref_2__projection ((a scalar_with_default__ref)) scalar_with_default
+(define-fun scalar_with_default__ref___2__projection ((a scalar_with_default__ref)) scalar_with_default
   (scalar_with_default__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_157 Int)
@@ -109,7 +109,7 @@
 (declare-datatypes ((tscalar_with_defaultB__ref 0))
 (((mk_tscalar_with_defaultB__ref
   (tscalar_with_defaultB__content tscalar_with_defaultB)))))
-(define-fun tscalar_with_defaultB__ref_2__projection ((a tscalar_with_defaultB__ref)) tscalar_with_defaultB
+(define-fun tscalar_with_defaultB__ref___2__projection ((a tscalar_with_defaultB__ref)) tscalar_with_defaultB
   (tscalar_with_defaultB__content a))
 
 (declare-fun to_rep (tscalar_with_defaultB) Int)
@@ -150,7 +150,7 @@
 (declare-datatypes ((scalar_bad_default__ref 0))
 (((mk_scalar_bad_default__ref
   (scalar_bad_default__content tscalar_with_defaultB)))))
-(define-fun scalar_bad_default__ref_2__projection ((a scalar_bad_default__ref)) tscalar_with_defaultB
+(define-fun scalar_bad_default__ref___2__projection ((a scalar_bad_default__ref)) tscalar_with_defaultB
   (scalar_bad_default__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_163 Int)

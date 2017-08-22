@@ -102,8 +102,8 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_discrs (us_split_discrs1
                                                              a))
 
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -383,7 +383,7 @@
 
 (declare-datatypes ((element_type__ref1 0))
 (((mk_element_type__ref1 (element_type__content1 element_type1)))))
-(define-fun element_type__ref_2__projection ((a element_type__ref1)) element_type1
+(define-fun element_type__ref___2__projection ((a element_type__ref1)) element_type1
   (element_type__content1 a))
 
 (define-fun dynamic_invariant3 ((temp___expr_220 Int)

@@ -511,7 +511,7 @@
 (declare-const dummy5 us_rep)
 
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content us_rep)))))
-(define-fun t__ref_2__projection ((a t__ref)) us_rep (t__content a))
+(define-fun t__ref___2__projection ((a t__ref)) us_rep (t__content a))
 
 (declare-fun valid_numberlogentries (us_private) Bool)
 
@@ -544,8 +544,8 @@
 
 (declare-datatypes ((statust__ref 0))
 (((mk_statust__ref (statust__content statust)))))
-(define-fun statust__ref_2__projection ((a statust__ref)) statust (statust__content
-                                                                  a))
+(define-fun statust__ref___2__projection ((a statust__ref)) statust (statust__content
+                                                                    a))
 
 (define-fun dynamic_invariant ((temp___expr_1792 Int)
   (temp___is_init_1789 Bool) (temp___skip_constant_1790 Bool)

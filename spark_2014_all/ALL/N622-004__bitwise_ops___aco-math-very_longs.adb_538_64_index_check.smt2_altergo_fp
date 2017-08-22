@@ -1,0 +1,2913 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+type t
+
+logic tqtint : t -> int
+
+axiom tqtaxiom : (forall i:t. ((0 <= tqtint(i)) and (tqtint(i) <= 255)))
+
+logic nth : t, int -> bool
+
+axiom nth_out_of_bound :
+  (forall x:t. forall n:int. (((n <  0) or (8 <= n)) -> (nth(x, n) = false)))
+
+logic zeros : t
+
+axiom Nth_zeros : (forall n:int. (nth(zeros, n) = false))
+
+logic one : t
+
+logic ones : t
+
+axiom Nth_ones :
+  (forall n:int. (((0 <= n) and (n <  8)) -> (nth(ones, n) = true)))
+
+logic bw_and : t, t -> t
+
+axiom Nth_bw_and :
+  (forall v1:t. forall v2:t. forall n:int. (((0 <= n) and (n <  8)) ->
+  (nth(bw_and(v1, v2), n) = match_bool(nth(v1, n), nth(v2, n), false))))
+
+logic bw_or : t, t -> t
+
+axiom Nth_bw_or :
+  (forall v1:t. forall v2:t. forall n:int. (((0 <= n) and (n <  8)) ->
+  (nth(bw_or(v1, v2), n) = match_bool(nth(v1, n), true, nth(v2, n)))))
+
+logic bw_xor : t, t -> t
+
+axiom Nth_bw_xor :
+  (forall v1:t. forall v2:t. forall n:int. (((0 <= n) and (n <  8)) ->
+  (nth(bw_xor(v1, v2), n) = xorb(nth(v1, n), nth(v2, n)))))
+
+logic bw_not : t -> t
+
+axiom Nth_bw_not :
+  (forall v:t. forall n:int. (((0 <= n) and (n <  8)) -> (nth(bw_not(v),
+  n) = match_bool(nth(v, n), false, true))))
+
+logic lsr : t, int -> t
+
+axiom Lsr_nth_low :
+  (forall b:t. forall n:int. forall s:int. ((0 <= s) -> ((0 <= n) ->
+  (((n + s) <  8) -> (nth(lsr(b, s), n) = nth(b, (n + s)))))))
+
+axiom Lsr_nth_high :
+  (forall b:t. forall n:int. forall s:int. ((0 <= s) -> ((0 <= n) ->
+  ((8 <= (n + s)) -> (nth(lsr(b, s), n) = false)))))
+
+axiom lsr_zeros : (forall x:t. (lsr(x, 0) = x))
+
+logic asr : t, int -> t
+
+axiom Asr_nth_low :
+  (forall b:t. forall n:int. forall s:int. ((0 <= s) -> (((0 <= n) and
+  (n <  8)) -> (((n + s) <  8) -> (nth(asr(b, s), n) = nth(b, (n + s)))))))
+
+axiom Asr_nth_high :
+  (forall b:t. forall n:int. forall s:int. ((0 <= s) -> (((0 <= n) and
+  (n <  8)) -> ((8 <= (n + s)) -> (nth(asr(b, s), n) = nth(b, (8 - 1)))))))
+
+axiom asr_zeros : (forall x:t. (asr(x, 0) = x))
+
+logic lsl : t, int -> t
+
+axiom Lsl_nth_high :
+  (forall b:t. forall n:int. forall s:int. (((0 <= s) and ((s <= n) and
+  (n <  8))) -> (nth(lsl(b, s), n) = nth(b, (n - s)))))
+
+axiom Lsl_nth_low :
+  (forall b:t. forall n:int. forall s:int. (((0 <= n) and (n <  s)) ->
+  (nth(lsl(b, s), n) = false)))
+
+axiom lsl_zeros : (forall x:t. (lsl(x, 0) = x))
+
+axiom Div_mod :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * (x / y)) + (x % y)))))
+
+axiom Mod_bound :
+  (forall x:int. forall y:int. ((not (y = 0)) -> ((0 <= (x % y)) and
+  ((x % y) <  abs_int(y)))))
+
+axiom Div_unique :
+  (forall x:int. forall y:int. forall q:int. ((0 <  y) ->
+  ((((q * y) <= x) and (x <  ((q * y) + y))) -> ((x / y) = q))))
+
+axiom Div_bound :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= (x / y)) and ((x / y) <= x))))
+
+axiom Mod_1 : (forall x:int. ((x % 1) = 0))
+
+axiom Div_1 : (forall x:int. ((x / 1) = x))
+
+axiom Div_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> ((x / y) = 0)))
+
+axiom Div_inf_neg :
+  (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
+  (((-x) / y) = (-1))))
+
+axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
+
+axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
+
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+
+axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
+
+axiom Mod_minus1_left :
+  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+
+axiom Div_mult :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
+  ((0 <  x) -> ((((x * y) + z) / x) = (y + (z / x)))))
+
+axiom Mod_mult :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) % x)].
+  ((0 <  x) -> ((((x * y) + z) % x) = (z % x))))
+
+logic rotate_right : t, int -> t
+
+axiom Nth_rotate_right :
+  (forall v:t. forall n:int. forall i:int. (((0 <= i) and (i <  8)) ->
+  ((0 <= n) -> (nth(rotate_right(v, n), i) = nth(v, ((i + n) % 8))))))
+
+logic rotate_left : t, int -> t
+
+axiom Nth_rotate_left :
+  (forall v:t. forall n:int. forall i:int. (((0 <= i) and (i <  8)) ->
+  ((0 <= n) -> (nth(rotate_left(v, n), i) = nth(v, ((i - n) % 8))))))
+
+logic pow2 : int -> int
+
+axiom Power_0 : (pow2(0) = 1)
+
+axiom Power_s : (forall n:int. ((0 <= n) -> (pow2((n + 1)) = (2 * pow2(n)))))
+
+axiom Power_1 : (pow2(1) = 2)
+
+axiom Power_sum :
+  (forall n:int. forall m:int. (((0 <= n) and (0 <= m)) ->
+  (pow2((n + m)) = (pow2(n) * pow2(m)))))
+
+axiom pow2pos : (forall i:int. ((0 <= i) -> (0 <  pow2(i))))
+
+axiom pow2_0 : (pow2(0) = 1)
+
+axiom pow2_1 : (pow2(1) = 2)
+
+axiom pow2_2 : (pow2(2) = 4)
+
+axiom pow2_3 : (pow2(3) = 8)
+
+axiom pow2_4 : (pow2(4) = 16)
+
+axiom pow2_5 : (pow2(5) = 32)
+
+axiom pow2_6 : (pow2(6) = 64)
+
+axiom pow2_7 : (pow2(7) = 128)
+
+axiom pow2_8 : (pow2(8) = 256)
+
+axiom pow2_9 : (pow2(9) = 512)
+
+axiom pow2_10 : (pow2(10) = 1024)
+
+axiom pow2_11 : (pow2(11) = 2048)
+
+axiom pow2_12 : (pow2(12) = 4096)
+
+axiom pow2_13 : (pow2(13) = 8192)
+
+axiom pow2_14 : (pow2(14) = 16384)
+
+axiom pow2_15 : (pow2(15) = 32768)
+
+axiom pow2_16 : (pow2(16) = 65536)
+
+axiom pow2_17 : (pow2(17) = 131072)
+
+axiom pow2_18 : (pow2(18) = 262144)
+
+axiom pow2_19 : (pow2(19) = 524288)
+
+axiom pow2_20 : (pow2(20) = 1048576)
+
+axiom pow2_21 : (pow2(21) = 2097152)
+
+axiom pow2_22 : (pow2(22) = 4194304)
+
+axiom pow2_23 : (pow2(23) = 8388608)
+
+axiom pow2_24 : (pow2(24) = 16777216)
+
+axiom pow2_25 : (pow2(25) = 33554432)
+
+axiom pow2_26 : (pow2(26) = 67108864)
+
+axiom pow2_27 : (pow2(27) = 134217728)
+
+axiom pow2_28 : (pow2(28) = 268435456)
+
+axiom pow2_29 : (pow2(29) = 536870912)
+
+axiom pow2_30 : (pow2(30) = 1073741824)
+
+axiom pow2_31 : (pow2(31) = 2147483648)
+
+axiom pow2_32 : (pow2(32) = 4294967296)
+
+axiom pow2_33 : (pow2(33) = 8589934592)
+
+axiom pow2_34 : (pow2(34) = 17179869184)
+
+axiom pow2_35 : (pow2(35) = 34359738368)
+
+axiom pow2_36 : (pow2(36) = 68719476736)
+
+axiom pow2_37 : (pow2(37) = 137438953472)
+
+axiom pow2_38 : (pow2(38) = 274877906944)
+
+axiom pow2_39 : (pow2(39) = 549755813888)
+
+axiom pow2_40 : (pow2(40) = 1099511627776)
+
+axiom pow2_41 : (pow2(41) = 2199023255552)
+
+axiom pow2_42 : (pow2(42) = 4398046511104)
+
+axiom pow2_43 : (pow2(43) = 8796093022208)
+
+axiom pow2_44 : (pow2(44) = 17592186044416)
+
+axiom pow2_45 : (pow2(45) = 35184372088832)
+
+axiom pow2_46 : (pow2(46) = 70368744177664)
+
+axiom pow2_47 : (pow2(47) = 140737488355328)
+
+axiom pow2_48 : (pow2(48) = 281474976710656)
+
+axiom pow2_49 : (pow2(49) = 562949953421312)
+
+axiom pow2_50 : (pow2(50) = 1125899906842624)
+
+axiom pow2_51 : (pow2(51) = 2251799813685248)
+
+axiom pow2_52 : (pow2(52) = 4503599627370496)
+
+axiom pow2_53 : (pow2(53) = 9007199254740992)
+
+axiom pow2_54 : (pow2(54) = 18014398509481984)
+
+axiom pow2_55 : (pow2(55) = 36028797018963968)
+
+axiom pow2_56 : (pow2(56) = 72057594037927936)
+
+axiom pow2_57 : (pow2(57) = 144115188075855872)
+
+axiom pow2_58 : (pow2(58) = 288230376151711744)
+
+axiom pow2_59 : (pow2(59) = 576460752303423488)
+
+axiom pow2_60 : (pow2(60) = 1152921504606846976)
+
+axiom pow2_61 : (pow2(61) = 2305843009213693952)
+
+axiom pow2_62 : (pow2(62) = 4611686018427387904)
+
+axiom pow2_63 : (pow2(63) = 9223372036854775808)
+
+axiom pow2_64 : (pow2(64) = 18446744073709551616)
+
+logic to_int : t -> int
+
+logic of_int : int -> t
+
+axiom to_uint_extensionality :
+  (forall v:t. forall vqt:t. ((tqtint(v) = tqtint(vqt)) -> (v = vqt)))
+
+axiom to_int_extensionality :
+  (forall v:t. forall vqt:t. ((to_int(v) = to_int(vqt)) -> (v = vqt)))
+
+predicate uint_in_range(i: int) = ((0 <= i) and (i <= 255))
+
+axiom to_uint_bounds :
+  (forall v:t. ((0 <= tqtint(v)) and (tqtint(v) <  256)))
+
+axiom to_uint_of_int :
+  (forall i:int. (((0 <= i) and (i <  256)) -> (tqtint(of_int(i)) = i)))
+
+logic size_bv : t
+
+axiom to_uint_size_bv : (tqtint(size_bv) = 8)
+
+axiom to_uint_zeros : (tqtint(zeros) = 0)
+
+axiom to_uint_one : (tqtint(one) = 1)
+
+axiom to_uint_ones : (tqtint(ones) = 255)
+
+predicate ult(x: t, y: t) = (tqtint(x) <  tqtint(y))
+
+predicate ule(x: t, y: t) = (tqtint(x) <= tqtint(y))
+
+predicate ugt(x: t, y: t) = (tqtint(y) <  tqtint(x))
+
+predicate uge(x: t, y: t) = (tqtint(y) <= tqtint(x))
+
+predicate slt(v1: t, v2: t) = (to_int(v1) <  to_int(v2))
+
+predicate sle(v1: t, v2: t) = (to_int(v1) <= to_int(v2))
+
+predicate sgt(v1: t, v2: t) = (to_int(v2) <  to_int(v1))
+
+predicate sge(v1: t, v2: t) = (to_int(v2) <= to_int(v1))
+
+logic add : t, t -> t
+
+axiom to_uint_add_bounded :
+  (forall v1:t. forall v2:t. (((tqtint(v1) + tqtint(v2)) <  256) ->
+  (tqtint(add(v1, v2)) = (tqtint(v1) + tqtint(v2)))))
+
+logic sub : t, t -> t
+
+axiom to_uint_sub_bounded :
+  (forall v1:t. forall v2:t. (((0 <= (tqtint(v1) - tqtint(v2))) and
+  ((tqtint(v1) - tqtint(v2)) <  256)) -> (tqtint(sub(v1,
+  v2)) = (tqtint(v1) - tqtint(v2)))))
+
+logic neg : t -> t
+
+axiom to_uint_neg : (forall v:t. (tqtint(neg(v)) = ((-tqtint(v)) % 256)))
+
+logic mul : t, t -> t
+
+axiom to_uint_mul_bounded :
+  (forall v1:t. forall v2:t. (((tqtint(v1) * tqtint(v2)) <  256) ->
+  (tqtint(mul(v1, v2)) = (tqtint(v1) * tqtint(v2)))))
+
+logic udiv : t, t -> t
+
+axiom to_uint_udiv :
+  (forall v1:t. forall v2:t. (tqtint(udiv(v1,
+  v2)) = (tqtint(v1) / tqtint(v2))))
+
+logic urem : t, t -> t
+
+axiom to_uint_urem :
+  (forall v1:t. forall v2:t. (tqtint(urem(v1,
+  v2)) = (tqtint(v1) % tqtint(v2))))
+
+logic lsr_bv : t, t -> t
+
+axiom lsr_bv_is_lsr :
+  (forall x:t. forall n:t. (lsr_bv(x, n) = lsr(x, tqtint(n))))
+
+axiom to_uint_lsr :
+  (forall v:t. forall n:t. (tqtint(lsr_bv(v,
+  n)) = (tqtint(v) / pow2(tqtint(n)))))
+
+logic asr_bv : t, t -> t
+
+axiom asr_bv_is_asr :
+  (forall x:t. forall n:t. (asr_bv(x, n) = asr(x, tqtint(n))))
+
+logic lsl_bv : t, t -> t
+
+axiom lsl_bv_is_lsl :
+  (forall x:t. forall n:t. (lsl_bv(x, n) = lsl(x, tqtint(n))))
+
+axiom to_uint_lsl :
+  (forall v:t. forall n:t. (tqtint(lsl_bv(v,
+  n)) = ((tqtint(v) * pow2(tqtint(n))) % 256)))
+
+logic rotate_right_bv : t, t -> t
+
+logic rotate_left_bv : t, t -> t
+
+axiom rotate_left_bv_is_rotate_left :
+  (forall v:t. forall n:t. (rotate_left_bv(v, n) = rotate_left(v,
+  tqtint(n))))
+
+axiom rotate_right_bv_is_rotate_right :
+  (forall v:t. forall n:t. (rotate_right_bv(v, n) = rotate_right(v,
+  tqtint(n))))
+
+logic nth_bv : t, t -> bool
+
+axiom Nth_bv_is_nth :
+  (forall x:t. forall i:t. (nth(x, tqtint(i)) = nth_bv(x, i)))
+
+axiom Nth_bv_is_nth2 :
+  (forall x:t. forall i:int. (((0 <= i) and (i <  256)) -> (nth_bv(x,
+  of_int(i)) = nth(x, i))))
+
+logic eq_sub_bv : t, t, t, t -> prop
+
+predicate eq_sub(a: t, b: t, i: int, n: int) =
+  (forall j:int. (((i <= j) and (j <  (i + n))) -> (nth(a, j) = nth(b, j))))
+
+axiom eq_sub_equiv :
+  (forall a:t. forall b:t. forall i:t. forall n:t. (eq_sub(a, b, tqtint(i),
+  tqtint(n)) <-> eq_sub_bv(a, b, i, n)))
+
+axiom Extensionality :
+  (forall x:t. forall y:t [eq_sub(x, y, 0, 8)]. (eq_sub(x, y, 0, 8) ->
+  (x = y)))
+
+type t__ref = { t__content : t
+}
+
+logic bool_eq : t, t -> bool
+
+axiom bool_eq_def :
+  (forall x:t. forall y:t [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic bool_ne : t, t -> bool
+
+axiom bool_ne_def :
+  (forall x:t. forall y:t [bool_ne(x, y)]. (((not (x = y)) -> (bool_ne(x,
+  y) = true)) and ((x = y) -> (bool_ne(x, y) = false))))
+
+logic bool_lt : t, t -> bool
+
+axiom bool_lt_def :
+  (forall x:t. forall y:t [bool_lt(x, y)]. ((ult(x, y) -> (bool_lt(x,
+  y) = true)) and ((not ult(x, y)) -> (bool_lt(x, y) = false))))
+
+logic bool_le : t, t -> bool
+
+axiom bool_le_def :
+  (forall x:t. forall y:t [bool_le(x, y)]. ((ule(x, y) -> (bool_le(x,
+  y) = true)) and ((not ule(x, y)) -> (bool_le(x, y) = false))))
+
+logic bool_gt : t, t -> bool
+
+axiom bool_gt_def :
+  (forall x:t. forall y:t [bool_gt(x, y)]. ((ugt(x, y) -> (bool_gt(x,
+  y) = true)) and ((not ugt(x, y)) -> (bool_gt(x, y) = false))))
+
+logic bool_ge : t, t -> bool
+
+axiom bool_ge_def :
+  (forall x:t. forall y:t [bool_ge(x, y)]. ((uge(x, y) -> (bool_ge(x,
+  y) = true)) and ((not uge(x, y)) -> (bool_ge(x, y) = false))))
+
+logic power : t, int -> t
+
+axiom Power_01 : (forall x:t. (power(x, 0) = one))
+
+axiom Power_11 : (forall x:t. (power(x, 1) = x))
+
+axiom Power_s1 :
+  (forall x:t. forall n:int. ((0 <= n) -> (power(x, (n + 1)) = mul(x,
+  power(x, n)))))
+
+axiom Power_s_alt :
+  (forall x:t. forall n:int. ((0 <  n) -> (power(x, n) = mul(x, power(x,
+  (n - 1))))))
+
+axiom Power_sum1 :
+  (forall x:t. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
+  (power(x, (n + m)) = mul(power(x, n), power(x, m))))))
+
+axiom Power_mult :
+  (forall x:t. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
+  (power(x, (n * m)) = power(power(x, n), m)))))
+
+axiom Power_mult2 :
+  (forall x:t. forall y:t. forall n:int. ((0 <= n) -> (power(mul(x, y),
+  n) = mul(power(x, n), power(y, n)))))
+
+logic bv_min : t, t -> t
+
+axiom bv_min_def :
+  (forall x:t. forall y:t [bv_min(x, y)]. ((ule(x, y) -> (bv_min(x,
+  y) = x)) and ((not ule(x, y)) -> (bv_min(x, y) = y))))
+
+logic bv_max : t, t -> t
+
+axiom bv_max_def :
+  (forall x:t. forall y:t [bv_max(x, y)]. ((ule(x, y) -> (bv_max(x,
+  y) = y)) and ((not ule(x, y)) -> (bv_max(x, y) = x))))
+
+logic min : int, int -> int
+
+axiom min_def :
+  (forall x:int. forall y:int [min(x, y)]. (((x <= y) -> (min(x, y) = x)) and
+  ((not (x <= y)) -> (min(x, y) = y))))
+
+logic max : int, int -> int
+
+axiom max_def :
+  (forall x:int. forall y:int [max(x, y)]. (((x <= y) -> (max(x, y) = y)) and
+  ((not (x <= y)) -> (max(x, y) = x))))
+
+axiom Min_r : (forall x:int. forall y:int. ((y <= x) -> (min(x, y) = y)))
+
+axiom Max_l : (forall x:int. forall y:int. ((y <= x) -> (max(x, y) = x)))
+
+axiom Min_comm : (forall x:int. forall y:int. (min(x, y) = min(y, x)))
+
+axiom Max_comm : (forall x:int. forall y:int. (max(x, y) = max(y, x)))
+
+axiom Min_assoc :
+  (forall x:int. forall y:int. forall z:int. (min(min(x, y), z) = min(x,
+  min(y, z))))
+
+axiom Max_assoc :
+  (forall x:int. forall y:int. forall z:int. (max(max(x, y), z) = max(x,
+  max(y, z))))
+
+axiom bv_min_to_uint :
+  (forall x:t. forall y:t. (tqtint(bv_min(x, y)) = min(tqtint(x),
+  tqtint(y))))
+
+axiom bv_max_to_uint :
+  (forall x:t. forall y:t. (tqtint(bv_max(x, y)) = max(tqtint(x),
+  tqtint(y))))
+
+type t1
+
+logic tqtint1 : t1 -> int
+
+axiom tqtaxiom1 :
+  (forall i:t1. ((0 <= tqtint1(i)) and (tqtint1(i) <= 65535)))
+
+logic nth1 : t1, int -> bool
+
+axiom nth_out_of_bound1 :
+  (forall x:t1. forall n:int. (((n <  0) or (16 <= n)) -> (nth1(x,
+  n) = false)))
+
+logic zeros1 : t1
+
+axiom Nth_zeros1 : (forall n:int. (nth1(zeros1, n) = false))
+
+logic one1 : t1
+
+logic ones1 : t1
+
+axiom Nth_ones1 :
+  (forall n:int. (((0 <= n) and (n <  16)) -> (nth1(ones1, n) = true)))
+
+logic bw_and1 : t1, t1 -> t1
+
+axiom Nth_bw_and1 :
+  (forall v1:t1. forall v2:t1. forall n:int. (((0 <= n) and (n <  16)) ->
+  (nth1(bw_and1(v1, v2), n) = match_bool(nth1(v1, n), nth1(v2, n), false))))
+
+logic bw_or1 : t1, t1 -> t1
+
+axiom Nth_bw_or1 :
+  (forall v1:t1. forall v2:t1. forall n:int. (((0 <= n) and (n <  16)) ->
+  (nth1(bw_or1(v1, v2), n) = match_bool(nth1(v1, n), true, nth1(v2, n)))))
+
+logic bw_xor1 : t1, t1 -> t1
+
+axiom Nth_bw_xor1 :
+  (forall v1:t1. forall v2:t1. forall n:int. (((0 <= n) and (n <  16)) ->
+  (nth1(bw_xor1(v1, v2), n) = xorb(nth1(v1, n), nth1(v2, n)))))
+
+logic bw_not1 : t1 -> t1
+
+axiom Nth_bw_not1 :
+  (forall v:t1. forall n:int. (((0 <= n) and (n <  16)) -> (nth1(bw_not1(v),
+  n) = match_bool(nth1(v, n), false, true))))
+
+logic lsr1 : t1, int -> t1
+
+axiom Lsr_nth_low1 :
+  (forall b:t1. forall n:int. forall s:int. ((0 <= s) -> ((0 <= n) ->
+  (((n + s) <  16) -> (nth1(lsr1(b, s), n) = nth1(b, (n + s)))))))
+
+axiom Lsr_nth_high1 :
+  (forall b:t1. forall n:int. forall s:int. ((0 <= s) -> ((0 <= n) ->
+  ((16 <= (n + s)) -> (nth1(lsr1(b, s), n) = false)))))
+
+axiom lsr_zeros1 : (forall x:t1. (lsr1(x, 0) = x))
+
+logic asr1 : t1, int -> t1
+
+axiom Asr_nth_low1 :
+  (forall b:t1. forall n:int. forall s:int. ((0 <= s) -> (((0 <= n) and
+  (n <  16)) -> (((n + s) <  16) -> (nth1(asr1(b, s), n) = nth1(b,
+  (n + s)))))))
+
+axiom Asr_nth_high1 :
+  (forall b:t1. forall n:int. forall s:int. ((0 <= s) -> (((0 <= n) and
+  (n <  16)) -> ((16 <= (n + s)) -> (nth1(asr1(b, s), n) = nth1(b,
+  (16 - 1)))))))
+
+axiom asr_zeros1 : (forall x:t1. (asr1(x, 0) = x))
+
+logic lsl1 : t1, int -> t1
+
+axiom Lsl_nth_high1 :
+  (forall b:t1. forall n:int. forall s:int. (((0 <= s) and ((s <= n) and
+  (n <  16))) -> (nth1(lsl1(b, s), n) = nth1(b, (n - s)))))
+
+axiom Lsl_nth_low1 :
+  (forall b:t1. forall n:int. forall s:int. (((0 <= n) and (n <  s)) ->
+  (nth1(lsl1(b, s), n) = false)))
+
+axiom lsl_zeros1 : (forall x:t1. (lsl1(x, 0) = x))
+
+logic rotate_right1 : t1, int -> t1
+
+axiom Nth_rotate_right1 :
+  (forall v:t1. forall n:int. forall i:int. (((0 <= i) and (i <  16)) ->
+  ((0 <= n) -> (nth1(rotate_right1(v, n), i) = nth1(v, ((i + n) % 16))))))
+
+logic rotate_left1 : t1, int -> t1
+
+axiom Nth_rotate_left1 :
+  (forall v:t1. forall n:int. forall i:int. (((0 <= i) and (i <  16)) ->
+  ((0 <= n) -> (nth1(rotate_left1(v, n), i) = nth1(v, ((i - n) % 16))))))
+
+logic to_int1 : t1 -> int
+
+logic of_int1 : int -> t1
+
+axiom to_uint_extensionality1 :
+  (forall v:t1. forall vqt:t1. ((tqtint1(v) = tqtint1(vqt)) -> (v = vqt)))
+
+axiom to_int_extensionality1 :
+  (forall v:t1. forall vqt:t1. ((to_int1(v) = to_int1(vqt)) -> (v = vqt)))
+
+predicate uint_in_range1(i: int) = ((0 <= i) and (i <= 65535))
+
+axiom to_uint_bounds1 :
+  (forall v:t1. ((0 <= tqtint1(v)) and (tqtint1(v) <  65536)))
+
+axiom to_uint_of_int1 :
+  (forall i:int. (((0 <= i) and (i <  65536)) -> (tqtint1(of_int1(i)) = i)))
+
+logic size_bv1 : t1
+
+axiom to_uint_size_bv1 : (tqtint1(size_bv1) = 16)
+
+axiom to_uint_zeros1 : (tqtint1(zeros1) = 0)
+
+axiom to_uint_one1 : (tqtint1(one1) = 1)
+
+axiom to_uint_ones1 : (tqtint1(ones1) = 65535)
+
+predicate ult1(x: t1, y: t1) = (tqtint1(x) <  tqtint1(y))
+
+predicate ule1(x: t1, y: t1) = (tqtint1(x) <= tqtint1(y))
+
+predicate ugt1(x: t1, y: t1) = (tqtint1(y) <  tqtint1(x))
+
+predicate uge1(x: t1, y: t1) = (tqtint1(y) <= tqtint1(x))
+
+predicate slt1(v1: t1, v2: t1) = (to_int1(v1) <  to_int1(v2))
+
+predicate sle1(v1: t1, v2: t1) = (to_int1(v1) <= to_int1(v2))
+
+predicate sgt1(v1: t1, v2: t1) = (to_int1(v2) <  to_int1(v1))
+
+predicate sge1(v1: t1, v2: t1) = (to_int1(v2) <= to_int1(v1))
+
+logic add1 : t1, t1 -> t1
+
+axiom to_uint_add_bounded1 :
+  (forall v1:t1. forall v2:t1. (((tqtint1(v1) + tqtint1(v2)) <  65536) ->
+  (tqtint1(add1(v1, v2)) = (tqtint1(v1) + tqtint1(v2)))))
+
+logic sub1 : t1, t1 -> t1
+
+axiom to_uint_sub_bounded1 :
+  (forall v1:t1. forall v2:t1. (((0 <= (tqtint1(v1) - tqtint1(v2))) and
+  ((tqtint1(v1) - tqtint1(v2)) <  65536)) -> (tqtint1(sub1(v1,
+  v2)) = (tqtint1(v1) - tqtint1(v2)))))
+
+logic neg1 : t1 -> t1
+
+axiom to_uint_neg1 :
+  (forall v:t1. (tqtint1(neg1(v)) = ((-tqtint1(v)) % 65536)))
+
+logic mul1 : t1, t1 -> t1
+
+axiom to_uint_mul_bounded1 :
+  (forall v1:t1. forall v2:t1. (((tqtint1(v1) * tqtint1(v2)) <  65536) ->
+  (tqtint1(mul1(v1, v2)) = (tqtint1(v1) * tqtint1(v2)))))
+
+logic udiv1 : t1, t1 -> t1
+
+axiom to_uint_udiv1 :
+  (forall v1:t1. forall v2:t1. (tqtint1(udiv1(v1,
+  v2)) = (tqtint1(v1) / tqtint1(v2))))
+
+logic urem1 : t1, t1 -> t1
+
+axiom to_uint_urem1 :
+  (forall v1:t1. forall v2:t1. (tqtint1(urem1(v1,
+  v2)) = (tqtint1(v1) % tqtint1(v2))))
+
+logic lsr_bv1 : t1, t1 -> t1
+
+axiom lsr_bv_is_lsr1 :
+  (forall x:t1. forall n:t1. (lsr_bv1(x, n) = lsr1(x, tqtint1(n))))
+
+axiom to_uint_lsr1 :
+  (forall v:t1. forall n:t1. (tqtint1(lsr_bv1(v,
+  n)) = (tqtint1(v) / pow2(tqtint1(n)))))
+
+logic asr_bv1 : t1, t1 -> t1
+
+axiom asr_bv_is_asr1 :
+  (forall x:t1. forall n:t1. (asr_bv1(x, n) = asr1(x, tqtint1(n))))
+
+logic lsl_bv1 : t1, t1 -> t1
+
+axiom lsl_bv_is_lsl1 :
+  (forall x:t1. forall n:t1. (lsl_bv1(x, n) = lsl1(x, tqtint1(n))))
+
+axiom to_uint_lsl1 :
+  (forall v:t1. forall n:t1. (tqtint1(lsl_bv1(v,
+  n)) = ((tqtint1(v) * pow2(tqtint1(n))) % 65536)))
+
+logic rotate_right_bv1 : t1, t1 -> t1
+
+logic rotate_left_bv1 : t1, t1 -> t1
+
+axiom rotate_left_bv_is_rotate_left1 :
+  (forall v:t1. forall n:t1. (rotate_left_bv1(v, n) = rotate_left1(v,
+  tqtint1(n))))
+
+axiom rotate_right_bv_is_rotate_right1 :
+  (forall v:t1. forall n:t1. (rotate_right_bv1(v, n) = rotate_right1(v,
+  tqtint1(n))))
+
+logic nth_bv1 : t1, t1 -> bool
+
+axiom Nth_bv_is_nth1 :
+  (forall x:t1. forall i:t1. (nth1(x, tqtint1(i)) = nth_bv1(x, i)))
+
+axiom Nth_bv_is_nth21 :
+  (forall x:t1. forall i:int. (((0 <= i) and (i <  65536)) -> (nth_bv1(x,
+  of_int1(i)) = nth1(x, i))))
+
+logic eq_sub_bv1 : t1, t1, t1, t1 -> prop
+
+predicate eq_sub1(a: t1, b: t1, i: int, n: int) =
+  (forall j:int. (((i <= j) and (j <  (i + n))) -> (nth1(a, j) = nth1(b,
+  j))))
+
+axiom eq_sub_equiv1 :
+  (forall a:t1. forall b:t1. forall i:t1. forall n:t1. (eq_sub1(a, b,
+  tqtint1(i), tqtint1(n)) <-> eq_sub_bv1(a, b, i, n)))
+
+axiom Extensionality1 :
+  (forall x:t1. forall y:t1 [eq_sub1(x, y, 0, 16)]. (eq_sub1(x, y, 0, 16) ->
+  (x = y)))
+
+type t__ref1 = { t__content1 : t1
+}
+
+logic bool_eq1 : t1, t1 -> bool
+
+axiom bool_eq_def1 :
+  (forall x:t1. forall y:t1 [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
+logic bool_ne1 : t1, t1 -> bool
+
+axiom bool_ne_def1 :
+  (forall x:t1. forall y:t1 [bool_ne1(x, y)]. (((not (x = y)) -> (bool_ne1(x,
+  y) = true)) and ((x = y) -> (bool_ne1(x, y) = false))))
+
+logic bool_lt1 : t1, t1 -> bool
+
+axiom bool_lt_def1 :
+  (forall x:t1. forall y:t1 [bool_lt1(x, y)]. ((ult1(x, y) -> (bool_lt1(x,
+  y) = true)) and ((not ult1(x, y)) -> (bool_lt1(x, y) = false))))
+
+logic bool_le1 : t1, t1 -> bool
+
+axiom bool_le_def1 :
+  (forall x:t1. forall y:t1 [bool_le1(x, y)]. ((ule1(x, y) -> (bool_le1(x,
+  y) = true)) and ((not ule1(x, y)) -> (bool_le1(x, y) = false))))
+
+logic bool_gt1 : t1, t1 -> bool
+
+axiom bool_gt_def1 :
+  (forall x:t1. forall y:t1 [bool_gt1(x, y)]. ((ugt1(x, y) -> (bool_gt1(x,
+  y) = true)) and ((not ugt1(x, y)) -> (bool_gt1(x, y) = false))))
+
+logic bool_ge1 : t1, t1 -> bool
+
+axiom bool_ge_def1 :
+  (forall x:t1. forall y:t1 [bool_ge1(x, y)]. ((uge1(x, y) -> (bool_ge1(x,
+  y) = true)) and ((not uge1(x, y)) -> (bool_ge1(x, y) = false))))
+
+logic power1 : t1, int -> t1
+
+axiom Power_02 : (forall x:t1. (power1(x, 0) = one1))
+
+axiom Power_12 : (forall x:t1. (power1(x, 1) = x))
+
+axiom Power_s2 :
+  (forall x:t1. forall n:int. ((0 <= n) -> (power1(x, (n + 1)) = mul1(x,
+  power1(x, n)))))
+
+axiom Power_s_alt1 :
+  (forall x:t1. forall n:int. ((0 <  n) -> (power1(x, n) = mul1(x, power1(x,
+  (n - 1))))))
+
+axiom Power_sum2 :
+  (forall x:t1. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
+  (power1(x, (n + m)) = mul1(power1(x, n), power1(x, m))))))
+
+axiom Power_mult1 :
+  (forall x:t1. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
+  (power1(x, (n * m)) = power1(power1(x, n), m)))))
+
+axiom Power_mult21 :
+  (forall x:t1. forall y:t1. forall n:int. ((0 <= n) -> (power1(mul1(x, y),
+  n) = mul1(power1(x, n), power1(y, n)))))
+
+logic bv_min1 : t1, t1 -> t1
+
+axiom bv_min_def1 :
+  (forall x:t1. forall y:t1 [bv_min1(x, y)]. ((ule1(x, y) -> (bv_min1(x,
+  y) = x)) and ((not ule1(x, y)) -> (bv_min1(x, y) = y))))
+
+logic bv_max1 : t1, t1 -> t1
+
+axiom bv_max_def1 :
+  (forall x:t1. forall y:t1 [bv_max1(x, y)]. ((ule1(x, y) -> (bv_max1(x,
+  y) = y)) and ((not ule1(x, y)) -> (bv_max1(x, y) = x))))
+
+axiom bv_min_to_uint1 :
+  (forall x:t1. forall y:t1. (tqtint1(bv_min1(x, y)) = min(tqtint1(x),
+  tqtint1(y))))
+
+axiom bv_max_to_uint1 :
+  (forall x:t1. forall y:t1. (tqtint1(bv_max1(x, y)) = max(tqtint1(x),
+  tqtint1(y))))
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic to_int2 : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int2(b)]. (((b = true) -> (to_int2(b) = 1)) and
+  ((not (b = true)) -> (to_int2(b) = 0))))
+
+logic of_int2 : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
+  ((not (i = 0)) -> (of_int2(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type octet
+
+logic attr__ATTRIBUTE_MODULUS : t
+
+logic bool_eq3 : int, int -> bool
+
+logic bool_ne2 : int, int -> bool
+
+logic bool_lt2 : int, int -> bool
+
+logic bool_le2 : int, int -> bool
+
+logic bool_gt2 : int, int -> bool
+
+logic bool_ge2 : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq3(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne2(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt2(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le2(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt2(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge2(x, y) = true) <-> (y <= x))))
+
+logic bool_eq4 : t, t -> bool
+
+axiom bool_eq_def3 :
+  (forall x:t. forall y:t [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> t
+
+logic user_eq : octet, octet -> bool
+
+logic dummy : octet
+
+type octet__ref = { octet__content : octet
+}
+
+function octet__ref___projection(a: octet__ref) : octet = (a).octet__content
+
+logic to_rep : octet -> t
+
+logic of_rep : t -> octet
+
+axiom inversion_axiom : (forall x:octet [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : true
+
+axiom coerce_axiom :
+  (forall x:t [to_rep(of_rep(x))]. (to_rep(of_rep(x)) = x))
+
+function to_int3(x: octet) : int = tqtint(to_rep(x))
+
+axiom range_int_axiom :
+  (forall x:octet [to_int3(x)]. uint_in_range(to_int3(x)))
+
+type double_octet
+
+logic attr__ATTRIBUTE_MODULUS1 : t1
+
+logic bool_eq5 : t1, t1 -> bool
+
+axiom bool_eq_def4 :
+  (forall x:t1. forall y:t1 [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : t1 -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> t1
+
+logic user_eq1 : double_octet, double_octet -> bool
+
+logic dummy1 : double_octet
+
+type double_octet__ref = { double_octet__content : double_octet
+}
+
+function double_octet__ref___projection(a: double_octet__ref) : double_octet =
+  (a).double_octet__content
+
+type map__ref = { map__content : (int,octet) farray
+}
+
+logic slide : (int,octet) farray, int, int -> (int,octet) farray
+
+axiom slide_eq :
+  (forall a:(int,octet) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,octet) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat : (int,octet) farray, int, int, (int,octet) farray, int,
+  int -> (int,octet) farray
+
+axiom concat_def :
+  (forall a:(int,octet) farray. forall b:(int,octet) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton : octet, int -> (int,octet) farray
+
+axiom singleton_def :
+  (forall v:octet.
+  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
+
+logic bool_eq6 : (int,octet) farray, int, int, (int,octet) farray, int,
+  int -> bool
+
+axiom bool_eq_def5 :
+  (forall a:(int,octet) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,octet) farray. forall b__first:int. forall b__last:int
+  [bool_eq6(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) and
+  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
+  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) ->
+  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev :
+  (forall a:(int,octet) farray. forall b:(int,octet) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq6(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
+  (temp___idx_132 <= a__last)) ->
+  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
+
+logic compare : (int,octet) farray, int, int, (int,octet) farray, int,
+  int -> int
+
+axiom compare_def_eq :
+  (forall a:(int,octet) farray. forall b:(int,octet) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq6(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt :
+  (forall a:(int,octet) farray. forall b:(int,octet) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq6(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and ult(to_rep((a[(i + 1)])), to_rep((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt :
+  (forall a:(int,octet) farray. forall b:(int,octet) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq6(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and ugt(to_rep((a[(j + 1)])), to_rep((b[(i + 1)]))))))))))))
+
+type tdigit_index_typeB
+
+predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq7 : int, int -> bool
+
+axiom bool_eq_def6 :
+  (forall x:int. forall y:int [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq2 : tdigit_index_typeB, tdigit_index_typeB -> bool
+
+logic dummy2 : tdigit_index_typeB
+
+type tdigit_index_typeB__ref = { tdigit_index_typeB__content :
+tdigit_index_typeB
+}
+
+function tdigit_index_typeB__ref___projection(a: tdigit_index_typeB__ref) : tdigit_index_typeB =
+  (a).tdigit_index_typeB__content
+
+type digit_index_type
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
+
+logic bool_eq8 : int, int -> bool
+
+axiom bool_eq_def7 :
+  (forall x:int. forall y:int [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq3 : digit_index_type, digit_index_type -> bool
+
+logic dummy3 : digit_index_type
+
+type digit_index_type__ref = { digit_index_type__content : digit_index_type
+}
+
+function digit_index_type__ref___projection(a: digit_index_type__ref) : digit_index_type =
+  (a).digit_index_type__content
+
+logic to_rep1 : digit_index_type -> int
+
+logic of_rep1 : int -> digit_index_type
+
+axiom inversion_axiom1 :
+  (forall x:digit_index_type [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 :
+  (forall x:digit_index_type [to_rep1(x)]. in_range2(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+logic to_rep2 : tdigit_index_typeB -> int
+
+logic of_rep2 : int -> tdigit_index_typeB
+
+axiom inversion_axiom2 :
+  (forall x:tdigit_index_typeB [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 :
+  (forall x:tdigit_index_typeB [to_rep2(x)]. in_range1(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range1(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+predicate dynamic_property(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq9 : int, int -> bool
+
+axiom bool_eq_def8 :
+  (forall x:int. forall y:int [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> int
+
+logic user_eq4 : tdigit_index_typeB, tdigit_index_typeB -> bool
+
+logic dummy4 : tdigit_index_typeB
+
+type t21s__ref = { t21s__content : tdigit_index_typeB
+}
+
+function t21s__ref___projection(a: t21s__ref) : tdigit_index_typeB =
+  (a).t21s__content
+
+type t2
+
+logic first : t2 -> tdigit_index_typeB
+
+logic last : t2 -> tdigit_index_typeB
+
+logic mk : int, int -> t2
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep2(first(mk(f, l))) = f) and (to_rep2(last(mk(f, l))) = l)))))
+
+predicate dynamic_property1(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property(range_first, range_last, low) and
+  dynamic_property(range_first, range_last, high)))))
+
+type us_t = { elts : (int,octet) farray; rt : t2
+}
+
+function to_array(a: us_t) : (int,octet) farray = (a).elts
+
+function of_array(a: (int,octet) farray, f: int, l: int) : us_t = { elts = a;
+  rt = mk(f, l) }
+
+function first1(a: us_t) : int = to_rep2(first((a).rt))
+
+function last1(a: us_t) : int = to_rep2(last((a).rt))
+
+logic length : us_t -> int
+
+axiom length_def :
+  (forall a:us_t [length(a)]. (((first1(a) <= last1(a)) ->
+  (length(a) = ((last1(a) - first1(a)) + 1))) and
+  ((not (first1(a) <= last1(a))) -> (length(a) = 0))))
+
+logic value__size : int
+
+logic object__size : (int,octet) farray -> int
+
+logic value__component__size : int
+
+logic object__component__size : (int,octet) farray -> int
+
+logic value__alignment : int
+
+logic object__alignment : (int,octet) farray -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:(int,octet) farray. (0 <= object__size(a)))
+
+axiom value__component__size_axiom : (0 <= value__component__size)
+
+axiom object__component__size_axiom :
+  (forall a:(int,octet) farray. (0 <= object__component__size(a)))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:(int,octet) farray. (0 <= object__alignment(a)))
+
+function bool_eq10(x: us_t, y: us_t) : bool = bool_eq6((x).elts,
+  to_rep2(first((x).rt)), to_rep2(last((x).rt)), (y).elts,
+  to_rep2(first((y).rt)), to_rep2(last((y).rt)))
+
+logic user_eq5 : us_t, us_t -> bool
+
+logic dummy5 : (int,octet) farray
+
+logic dummy6 : t2
+
+type t22s__ref = { t22s__content : us_t
+}
+
+function t22s__ref___projection(a: t22s__ref) : us_t = (a).t22s__content
+
+type us_split_discrs = { rec__aco__math__very_longs__very_long__octet_length
+: digit_index_type
+}
+
+function us_split_discrs___projection(a: us_split_discrs) : digit_index_type =
+  (a).rec__aco__math__very_longs__very_long__octet_length
+
+type us_split_discrs__ref = { us_split_discrs__content : us_split_discrs
+}
+
+function us_split_discrs__ref___projection(a: us_split_discrs__ref) : us_split_discrs =
+  (a).us_split_discrs__content
+
+type us_split_fields = { rec__aco__math__very_longs__very_long__long_digits :
+us_t
+}
+
+function us_split_fields_Long_Digits__projection(a: us_split_fields) : us_t =
+  (a).rec__aco__math__very_longs__very_long__long_digits
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_discrs1 : us_split_discrs; us_split_fields1 :
+us_split_fields
+}
+
+function us_rep___projection(a: us_rep) : us_split_discrs =
+  (a).us_split_discrs1
+
+function us_rep___2__projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+logic bool_eq11 : us_rep, us_rep -> bool
+
+axiom bool_eq_def9 :
+  (forall a:us_rep. forall b:us_rep [bool_eq11(a, b)].
+  ((((to_rep1(((a).us_split_discrs1).rec__aco__math__very_longs__very_long__octet_length) = to_rep1(((b).us_split_discrs1).rec__aco__math__very_longs__very_long__octet_length)) and
+  (bool_eq10(((a).us_split_fields1).rec__aco__math__very_longs__very_long__long_digits,
+  ((b).us_split_fields1).rec__aco__math__very_longs__very_long__long_digits) = true)) ->
+  (bool_eq11(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__aco__math__very_longs__very_long__octet_length) = to_rep1(((b).us_split_discrs1).rec__aco__math__very_longs__very_long__octet_length)) and
+  (bool_eq10(((a).us_split_fields1).rec__aco__math__very_longs__very_long__long_digits,
+  ((b).us_split_fields1).rec__aco__math__very_longs__very_long__long_digits) = true))) ->
+  (bool_eq11(a, b) = false))))
+
+logic value__size1 : int
+
+logic object__size1 : us_rep -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : us_rep -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 :
+  (forall a:digit_index_type. forall a1:(int,octet) farray. forall a2:t2.
+  (0 <= object__size1({ us_split_discrs1 = {
+  rec__aco__math__very_longs__very_long__octet_length = a };
+  us_split_fields1 = { rec__aco__math__very_longs__very_long__long_digits = {
+  elts = a1; rt = a2 } } })))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:digit_index_type. forall a1:(int,octet) farray. forall a2:t2.
+  (0 <= object__alignment1({ us_split_discrs1 = {
+  rec__aco__math__very_longs__very_long__octet_length = a };
+  us_split_fields1 = { rec__aco__math__very_longs__very_long__long_digits = {
+  elts = a1; rt = a2 } } })))
+
+logic aco__math__very_longs__very_long__octet_length__first__bit : int
+
+logic aco__math__very_longs__very_long__octet_length__last__bit : int
+
+logic aco__math__very_longs__very_long__octet_length__position : int
+
+axiom aco__math__very_longs__very_long__octet_length__first__bit_axiom :
+  (0 <= aco__math__very_longs__very_long__octet_length__first__bit)
+
+axiom aco__math__very_longs__very_long__octet_length__last__bit_axiom :
+  (aco__math__very_longs__very_long__octet_length__first__bit <  aco__math__very_longs__very_long__octet_length__last__bit)
+
+axiom aco__math__very_longs__very_long__octet_length__position_axiom :
+  (0 <= aco__math__very_longs__very_long__octet_length__position)
+
+logic aco__math__very_longs__very_long__long_digits__first__bit : int
+
+logic aco__math__very_longs__very_long__long_digits__last__bit : int
+
+logic aco__math__very_longs__very_long__long_digits__position : int
+
+axiom aco__math__very_longs__very_long__long_digits__first__bit_axiom :
+  (0 <= aco__math__very_longs__very_long__long_digits__first__bit)
+
+axiom aco__math__very_longs__very_long__long_digits__last__bit_axiom :
+  (aco__math__very_longs__very_long__long_digits__first__bit <  aco__math__very_longs__very_long__long_digits__last__bit)
+
+axiom aco__math__very_longs__very_long__long_digits__position_axiom :
+  (0 <= aco__math__very_longs__very_long__long_digits__position)
+
+logic user_eq6 : us_rep, us_rep -> bool
+
+logic dummy7 : digit_index_type
+
+logic dummy8 : (int,octet) farray
+
+logic dummy9 : t2
+
+type very_long__ref = { very_long__content : us_rep
+}
+
+function very_long__ref___projection(a: very_long__ref) : us_rep =
+  (a).very_long__content
+
+logic is_zero : us_rep -> bool
+
+logic is_zero__function_guard : bool, us_rep -> prop
+
+axiom is_zero__post_axiom : true
+
+axiom is_zero__def_axiom :
+  (forall number:digit_index_type. forall number1:(int,octet) farray.
+  forall number2:t2 [is_zero({ us_split_discrs1 = {
+  rec__aco__math__very_longs__very_long__octet_length = number };
+  us_split_fields1 = { rec__aco__math__very_longs__very_long__long_digits = {
+  elts = number1; rt = number2 } } })]. ((is_zero({ us_split_discrs1 = {
+  rec__aco__math__very_longs__very_long__octet_length = number };
+  us_split_fields1 = { rec__aco__math__very_longs__very_long__long_digits = {
+  elts = number1; rt = number2 } } }) = true) <->
+  (forall i:int. (((1 <= i) and (i <= to_rep2(last(number2)))) ->
+  (to_rep((number1[i])) = of_int(0))))))
+
+logic dividend : digit_index_type
+
+logic dividend1 : (int,octet) farray
+
+logic dividend2 : t2
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic divisor : digit_index_type
+
+logic divisor1 : (int,octet) farray
+
+logic divisor2 : t2
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic quotient__split_discrs : digit_index_type
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic remainder__split_discrs : digit_index_type
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic last2 : int
+
+predicate dynamic_property2(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq12 : int, int -> bool
+
+axiom bool_eq_def10 :
+  (forall x:int. forall y:int [bool_eq12(x, y)]. (((x = y) -> (bool_eq12(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq12(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE6 : us_image -> int
+
+logic user_eq7 : tdigit_index_typeB, tdigit_index_typeB -> bool
+
+logic dummy10 : tdigit_index_typeB
+
+type divisor_digits_count_type__ref = { divisor_digits_count_type__content :
+tdigit_index_typeB
+}
+
+function divisor_digits_count_type__ref___projection(a: divisor_digits_count_type__ref) : tdigit_index_typeB =
+  (a).divisor_digits_count_type__content
+
+axiom last__def_axiom : (last2 = to_rep1(divisor))
+
+logic first2 : int
+
+logic last3 : int
+
+predicate dynamic_property3(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq13 : int, int -> bool
+
+axiom bool_eq_def11 :
+  (forall x:int. forall y:int [bool_eq13(x, y)]. (((x = y) -> (bool_eq13(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq13(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE7 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check7 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE7 : us_image -> int
+
+logic user_eq8 : tdigit_index_typeB, tdigit_index_typeB -> bool
+
+logic dummy11 : tdigit_index_typeB
+
+type quotient_digits_count_type__ref = { quotient_digits_count_type__content
+: tdigit_index_typeB
+}
+
+function quotient_digits_count_type__ref___projection(a: quotient_digits_count_type__ref) : tdigit_index_typeB =
+  (a).quotient_digits_count_type__content
+
+axiom first__def_axiom : (first2 = to_rep1(divisor))
+
+axiom last__def_axiom1 : (last3 = ((2 * to_rep1(divisor)) - 1))
+
+type shift_type
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 7))
+
+logic bool_eq14 : int, int -> bool
+
+axiom bool_eq_def12 :
+  (forall x:int. forall y:int [bool_eq14(x, y)]. (((x = y) -> (bool_eq14(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq14(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE8 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check8 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE8 : us_image -> int
+
+logic user_eq9 : shift_type, shift_type -> bool
+
+logic dummy12 : shift_type
+
+type shift_type__ref = { shift_type__content : shift_type
+}
+
+function shift_type__ref___projection(a: shift_type__ref) : shift_type =
+  (a).shift_type__content
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
+logic attr__ATTRIBUTE_ADDRESS6 : int
+
+predicate dynamic_property4(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq15 : int, int -> bool
+
+axiom bool_eq_def13 :
+  (forall x:int. forall y:int [bool_eq15(x, y)]. (((x = y) -> (bool_eq15(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq15(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE9 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check9 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE9 : us_image -> int
+
+logic user_eq10 : tdigit_index_typeB, tdigit_index_typeB -> bool
+
+logic dummy13 : tdigit_index_typeB
+
+type tT98bP1__ref = { tT98bP1__content : tdigit_index_typeB
+}
+
+function tT98bP1__ref___projection(a: tT98bP1__ref) : tdigit_index_typeB =
+  (a).tT98bP1__content
+
+type t3
+
+logic first3 : t3 -> tdigit_index_typeB
+
+logic last4 : t3 -> tdigit_index_typeB
+
+logic mk1 : int, int -> t3
+
+axiom mk_def1 :
+  (forall f:int. forall l:int [mk1(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep2(first3(mk1(f, l))) = f) and (to_rep2(last4(mk1(f, l))) = l)))))
+
+predicate dynamic_property5(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property4(range_first, range_last, low) and
+  dynamic_property4(range_first, range_last, high)))))
+
+type us_t1 = { elts1 : (int,octet) farray; rt1 : t3
+}
+
+function to_array1(a: us_t1) : (int,octet) farray = (a).elts1
+
+function of_array1(a: (int,octet) farray, f: int, l: int) : us_t1 = { elts1 =
+  a; rt1 = mk1(f, l) }
+
+function first4(a: us_t1) : int = to_rep2(first3((a).rt1))
+
+function last5(a: us_t1) : int = to_rep2(last4((a).rt1))
+
+logic length1 : us_t1 -> int
+
+axiom length_def1 :
+  (forall a:us_t1 [length1(a)]. (((first4(a) <= last5(a)) ->
+  (length1(a) = ((last5(a) - first4(a)) + 1))) and
+  ((not (first4(a) <= last5(a))) -> (length1(a) = 0))))
+
+logic value__size2 : int
+
+logic object__size2 : (int,octet) farray -> int
+
+logic value__component__size1 : int
+
+logic object__component__size1 : (int,octet) farray -> int
+
+logic value__alignment2 : int
+
+logic object__alignment2 : (int,octet) farray -> int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 :
+  (forall a:(int,octet) farray. (0 <= object__size2(a)))
+
+axiom value__component__size_axiom1 : (0 <= value__component__size1)
+
+axiom object__component__size_axiom1 :
+  (forall a:(int,octet) farray. (0 <= object__component__size1(a)))
+
+axiom value__alignment_axiom2 : (0 <= value__alignment2)
+
+axiom object__alignment_axiom2 :
+  (forall a:(int,octet) farray. (0 <= object__alignment2(a)))
+
+function bool_eq16(x: us_t1, y: us_t1) : bool = bool_eq6((x).elts1,
+  to_rep2(first3((x).rt1)), to_rep2(last4((x).rt1)), (y).elts1,
+  to_rep2(first3((y).rt1)), to_rep2(last4((y).rt1)))
+
+logic user_eq11 : us_t1, us_t1 -> bool
+
+logic dummy14 : (int,octet) farray
+
+logic dummy15 : t3
+
+type t98b__ref = { t98b__content : us_t1
+}
+
+function t98b__ref___projection(a: t98b__ref) : us_t1 = (a).t98b__content
+
+type us_split_fields2 = { rec__aco__math__very_longs__very_long__long_digits1
+: us_t1
+}
+
+function us_split_fields_Long_Digits__29__projection(a: us_split_fields2) : us_t1 =
+  (a).rec__aco__math__very_longs__very_long__long_digits1
+
+type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
+}
+
+function us_split_fields__ref___29__projection(a: us_split_fields__ref1) : us_split_fields2 =
+  (a).us_split_fields__content1
+
+type us_rep1 = { us_split_discrs2 : us_split_discrs; us_split_fields3 :
+us_split_fields2
+}
+
+function us_rep___57__projection(a: us_rep1) : us_split_discrs =
+  (a).us_split_discrs2
+
+function us_rep___58__projection(a: us_rep1) : us_split_fields2 =
+  (a).us_split_fields3
+
+function to_base(a: us_rep1) : us_rep = { us_split_discrs1 =
+  (a).us_split_discrs2; us_split_fields1 = {
+  rec__aco__math__very_longs__very_long__long_digits =
+  of_array(to_array1(((a).us_split_fields3).rec__aco__math__very_longs__very_long__long_digits1),
+  first4(((a).us_split_fields3).rec__aco__math__very_longs__very_long__long_digits1),
+  last5(((a).us_split_fields3).rec__aco__math__very_longs__very_long__long_digits1))
+  } }
+
+function of_base(r: us_rep) : us_rep1 = { us_split_discrs2 =
+  (r).us_split_discrs1; us_split_fields3 = {
+  rec__aco__math__very_longs__very_long__long_digits1 =
+  of_array1(to_array(((r).us_split_fields1).rec__aco__math__very_longs__very_long__long_digits),
+  first1(((r).us_split_fields1).rec__aco__math__very_longs__very_long__long_digits),
+  last1(((r).us_split_fields1).rec__aco__math__very_longs__very_long__long_digits))
+  } }
+
+logic bool_eq17 : us_rep1, us_rep1 -> bool
+
+axiom bool_eq_def14 :
+  (forall a:us_rep1. forall b:us_rep1 [bool_eq17(a, b)].
+  ((((to_rep1(((a).us_split_discrs2).rec__aco__math__very_longs__very_long__octet_length) = to_rep1(((b).us_split_discrs2).rec__aco__math__very_longs__very_long__octet_length)) and
+  (bool_eq16(((a).us_split_fields3).rec__aco__math__very_longs__very_long__long_digits1,
+  ((b).us_split_fields3).rec__aco__math__very_longs__very_long__long_digits1) = true)) ->
+  (bool_eq17(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs2).rec__aco__math__very_longs__very_long__octet_length) = to_rep1(((b).us_split_discrs2).rec__aco__math__very_longs__very_long__octet_length)) and
+  (bool_eq16(((a).us_split_fields3).rec__aco__math__very_longs__very_long__long_digits1,
+  ((b).us_split_fields3).rec__aco__math__very_longs__very_long__long_digits1) = true))) ->
+  (bool_eq17(a, b) = false))))
+
+predicate in_range4(rec__aco__math__very_longs__very_long__octet_length1: int,
+  a: us_rep) =
+  (rec__aco__math__very_longs__very_long__octet_length1 = to_rep1(((a).us_split_discrs1).rec__aco__math__very_longs__very_long__octet_length))
+
+logic value__size3 : int
+
+logic object__size3 : us_rep1 -> int
+
+logic value__alignment3 : int
+
+logic object__alignment3 : us_rep1 -> int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 :
+  (forall a:digit_index_type. forall a1:(int,octet) farray. forall a2:t3.
+  (0 <= object__size3({ us_split_discrs2 = {
+  rec__aco__math__very_longs__very_long__octet_length = a };
+  us_split_fields3 = { rec__aco__math__very_longs__very_long__long_digits1 =
+  { elts1 = a1; rt1 = a2 } } })))
+
+axiom value__alignment_axiom3 : (0 <= value__alignment3)
+
+axiom object__alignment_axiom3 :
+  (forall a:digit_index_type. forall a1:(int,octet) farray. forall a2:t3.
+  (0 <= object__alignment3({ us_split_discrs2 = {
+  rec__aco__math__very_longs__very_long__octet_length = a };
+  us_split_fields3 = { rec__aco__math__very_longs__very_long__long_digits1 =
+  { elts1 = a1; rt1 = a2 } } })))
+
+logic aco__math__very_longs__very_long__octet_length__first__bit1 : int
+
+logic aco__math__very_longs__very_long__octet_length__last__bit1 : int
+
+logic aco__math__very_longs__very_long__octet_length__position1 : int
+
+axiom aco__math__very_longs__very_long__octet_length__first__bit_axiom1 :
+  (0 <= aco__math__very_longs__very_long__octet_length__first__bit1)
+
+axiom aco__math__very_longs__very_long__octet_length__last__bit_axiom1 :
+  (aco__math__very_longs__very_long__octet_length__first__bit1 <  aco__math__very_longs__very_long__octet_length__last__bit1)
+
+axiom aco__math__very_longs__very_long__octet_length__position_axiom1 :
+  (0 <= aco__math__very_longs__very_long__octet_length__position1)
+
+logic aco__math__very_longs__very_long__long_digits__first__bit1 : int
+
+logic aco__math__very_longs__very_long__long_digits__last__bit1 : int
+
+logic aco__math__very_longs__very_long__long_digits__position1 : int
+
+axiom aco__math__very_longs__very_long__long_digits__first__bit_axiom1 :
+  (0 <= aco__math__very_longs__very_long__long_digits__first__bit1)
+
+axiom aco__math__very_longs__very_long__long_digits__last__bit_axiom1 :
+  (aco__math__very_longs__very_long__long_digits__first__bit1 <  aco__math__very_longs__very_long__long_digits__last__bit1)
+
+axiom aco__math__very_longs__very_long__long_digits__position_axiom1 :
+  (0 <= aco__math__very_longs__very_long__long_digits__position1)
+
+logic user_eq12 : us_rep1, us_rep1 -> bool
+
+logic dummy16 : digit_index_type
+
+logic dummy17 : (int,octet) farray
+
+logic dummy18 : t3
+
+type tuS__ref = { tuS__content : us_rep1
+}
+
+function tuS__ref___projection(a: tuS__ref) : us_rep1 = (a).tuS__content
+
+logic u__split_discrs : digit_index_type
+
+logic attr__ATTRIBUTE_ADDRESS7 : int
+
+predicate dynamic_property6(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq18 : int, int -> bool
+
+axiom bool_eq_def15 :
+  (forall x:int. forall y:int [bool_eq18(x, y)]. (((x = y) -> (bool_eq18(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq18(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE10 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check10 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE10 : us_image -> int
+
+logic user_eq13 : tdigit_index_typeB, tdigit_index_typeB -> bool
+
+logic dummy19 : tdigit_index_typeB
+
+type tT99bP1__ref = { tT99bP1__content : tdigit_index_typeB
+}
+
+function tT99bP1__ref___projection(a: tT99bP1__ref) : tdigit_index_typeB =
+  (a).tT99bP1__content
+
+type t4
+
+logic first5 : t4 -> tdigit_index_typeB
+
+logic last6 : t4 -> tdigit_index_typeB
+
+logic mk2 : int, int -> t4
+
+axiom mk_def2 :
+  (forall f:int. forall l:int [mk2(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep2(first5(mk2(f, l))) = f) and (to_rep2(last6(mk2(f, l))) = l)))))
+
+predicate dynamic_property7(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property6(range_first, range_last, low) and
+  dynamic_property6(range_first, range_last, high)))))
+
+type us_t2 = { elts2 : (int,octet) farray; rt2 : t4
+}
+
+function to_array2(a: us_t2) : (int,octet) farray = (a).elts2
+
+function of_array2(a: (int,octet) farray, f: int, l: int) : us_t2 = { elts2 =
+  a; rt2 = mk2(f, l) }
+
+function first6(a: us_t2) : int = to_rep2(first5((a).rt2))
+
+function last7(a: us_t2) : int = to_rep2(last6((a).rt2))
+
+logic length2 : us_t2 -> int
+
+axiom length_def2 :
+  (forall a:us_t2 [length2(a)]. (((first6(a) <= last7(a)) ->
+  (length2(a) = ((last7(a) - first6(a)) + 1))) and
+  ((not (first6(a) <= last7(a))) -> (length2(a) = 0))))
+
+logic value__size4 : int
+
+logic object__size4 : (int,octet) farray -> int
+
+logic value__component__size2 : int
+
+logic object__component__size2 : (int,octet) farray -> int
+
+logic value__alignment4 : int
+
+logic object__alignment4 : (int,octet) farray -> int
+
+axiom value__size_axiom4 : (0 <= value__size4)
+
+axiom object__size_axiom4 :
+  (forall a:(int,octet) farray. (0 <= object__size4(a)))
+
+axiom value__component__size_axiom2 : (0 <= value__component__size2)
+
+axiom object__component__size_axiom2 :
+  (forall a:(int,octet) farray. (0 <= object__component__size2(a)))
+
+axiom value__alignment_axiom4 : (0 <= value__alignment4)
+
+axiom object__alignment_axiom4 :
+  (forall a:(int,octet) farray. (0 <= object__alignment4(a)))
+
+function bool_eq19(x: us_t2, y: us_t2) : bool = bool_eq6((x).elts2,
+  to_rep2(first5((x).rt2)), to_rep2(last6((x).rt2)), (y).elts2,
+  to_rep2(first5((y).rt2)), to_rep2(last6((y).rt2)))
+
+logic user_eq14 : us_t2, us_t2 -> bool
+
+logic dummy20 : (int,octet) farray
+
+logic dummy21 : t4
+
+type t99b__ref = { t99b__content : us_t2
+}
+
+function t99b__ref___projection(a: t99b__ref) : us_t2 = (a).t99b__content
+
+type us_split_fields4 = { rec__aco__math__very_longs__very_long__long_digits2
+: us_t2
+}
+
+function us_split_fields_Long_Digits__30__projection(a: us_split_fields4) : us_t2 =
+  (a).rec__aco__math__very_longs__very_long__long_digits2
+
+type us_split_fields__ref2 = { us_split_fields__content2 : us_split_fields4
+}
+
+function us_split_fields__ref___30__projection(a: us_split_fields__ref2) : us_split_fields4 =
+  (a).us_split_fields__content2
+
+type us_rep2 = { us_split_discrs3 : us_split_discrs; us_split_fields5 :
+us_split_fields4
+}
+
+function us_rep___59__projection(a: us_rep2) : us_split_discrs =
+  (a).us_split_discrs3
+
+function us_rep___60__projection(a: us_rep2) : us_split_fields4 =
+  (a).us_split_fields5
+
+function to_base1(a: us_rep2) : us_rep = { us_split_discrs1 =
+  (a).us_split_discrs3; us_split_fields1 = {
+  rec__aco__math__very_longs__very_long__long_digits =
+  of_array(to_array2(((a).us_split_fields5).rec__aco__math__very_longs__very_long__long_digits2),
+  first6(((a).us_split_fields5).rec__aco__math__very_longs__very_long__long_digits2),
+  last7(((a).us_split_fields5).rec__aco__math__very_longs__very_long__long_digits2))
+  } }
+
+function of_base1(r: us_rep) : us_rep2 = { us_split_discrs3 =
+  (r).us_split_discrs1; us_split_fields5 = {
+  rec__aco__math__very_longs__very_long__long_digits2 =
+  of_array2(to_array(((r).us_split_fields1).rec__aco__math__very_longs__very_long__long_digits),
+  first1(((r).us_split_fields1).rec__aco__math__very_longs__very_long__long_digits),
+  last1(((r).us_split_fields1).rec__aco__math__very_longs__very_long__long_digits))
+  } }
+
+logic bool_eq20 : us_rep2, us_rep2 -> bool
+
+axiom bool_eq_def16 :
+  (forall a:us_rep2. forall b:us_rep2 [bool_eq20(a, b)].
+  ((((to_rep1(((a).us_split_discrs3).rec__aco__math__very_longs__very_long__octet_length) = to_rep1(((b).us_split_discrs3).rec__aco__math__very_longs__very_long__octet_length)) and
+  (bool_eq19(((a).us_split_fields5).rec__aco__math__very_longs__very_long__long_digits2,
+  ((b).us_split_fields5).rec__aco__math__very_longs__very_long__long_digits2) = true)) ->
+  (bool_eq20(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs3).rec__aco__math__very_longs__very_long__octet_length) = to_rep1(((b).us_split_discrs3).rec__aco__math__very_longs__very_long__octet_length)) and
+  (bool_eq19(((a).us_split_fields5).rec__aco__math__very_longs__very_long__long_digits2,
+  ((b).us_split_fields5).rec__aco__math__very_longs__very_long__long_digits2) = true))) ->
+  (bool_eq20(a, b) = false))))
+
+predicate in_range5(rec__aco__math__very_longs__very_long__octet_length1: int,
+  a: us_rep) =
+  (rec__aco__math__very_longs__very_long__octet_length1 = to_rep1(((a).us_split_discrs1).rec__aco__math__very_longs__very_long__octet_length))
+
+logic value__size5 : int
+
+logic object__size5 : us_rep2 -> int
+
+logic value__alignment5 : int
+
+logic object__alignment5 : us_rep2 -> int
+
+axiom value__size_axiom5 : (0 <= value__size5)
+
+axiom object__size_axiom5 :
+  (forall a:digit_index_type. forall a1:(int,octet) farray. forall a2:t4.
+  (0 <= object__size5({ us_split_discrs3 = {
+  rec__aco__math__very_longs__very_long__octet_length = a };
+  us_split_fields5 = { rec__aco__math__very_longs__very_long__long_digits2 =
+  { elts2 = a1; rt2 = a2 } } })))
+
+axiom value__alignment_axiom5 : (0 <= value__alignment5)
+
+axiom object__alignment_axiom5 :
+  (forall a:digit_index_type. forall a1:(int,octet) farray. forall a2:t4.
+  (0 <= object__alignment5({ us_split_discrs3 = {
+  rec__aco__math__very_longs__very_long__octet_length = a };
+  us_split_fields5 = { rec__aco__math__very_longs__very_long__long_digits2 =
+  { elts2 = a1; rt2 = a2 } } })))
+
+logic aco__math__very_longs__very_long__octet_length__first__bit2 : int
+
+logic aco__math__very_longs__very_long__octet_length__last__bit2 : int
+
+logic aco__math__very_longs__very_long__octet_length__position2 : int
+
+axiom aco__math__very_longs__very_long__octet_length__first__bit_axiom2 :
+  (0 <= aco__math__very_longs__very_long__octet_length__first__bit2)
+
+axiom aco__math__very_longs__very_long__octet_length__last__bit_axiom2 :
+  (aco__math__very_longs__very_long__octet_length__first__bit2 <  aco__math__very_longs__very_long__octet_length__last__bit2)
+
+axiom aco__math__very_longs__very_long__octet_length__position_axiom2 :
+  (0 <= aco__math__very_longs__very_long__octet_length__position2)
+
+logic aco__math__very_longs__very_long__long_digits__first__bit2 : int
+
+logic aco__math__very_longs__very_long__long_digits__last__bit2 : int
+
+logic aco__math__very_longs__very_long__long_digits__position2 : int
+
+axiom aco__math__very_longs__very_long__long_digits__first__bit_axiom2 :
+  (0 <= aco__math__very_longs__very_long__long_digits__first__bit2)
+
+axiom aco__math__very_longs__very_long__long_digits__last__bit_axiom2 :
+  (aco__math__very_longs__very_long__long_digits__first__bit2 <  aco__math__very_longs__very_long__long_digits__last__bit2)
+
+axiom aco__math__very_longs__very_long__long_digits__position_axiom2 :
+  (0 <= aco__math__very_longs__very_long__long_digits__position2)
+
+logic user_eq15 : us_rep2, us_rep2 -> bool
+
+logic dummy22 : digit_index_type
+
+logic dummy23 : (int,octet) farray
+
+logic dummy24 : t4
+
+type tvS__ref = { tvS__content : us_rep2
+}
+
+function tvS__ref___projection(a: tvS__ref) : us_rep2 = (a).tvS__content
+
+logic v__split_discrs : digit_index_type
+
+logic attr__ATTRIBUTE_ADDRESS8 : int
+
+logic attr__ATTRIBUTE_ADDRESS9 : int
+
+logic attr__ATTRIBUTE_ADDRESS10 : int
+
+logic attr__ATTRIBUTE_ADDRESS11 : int
+
+logic get_msd : us_rep -> int
+
+logic get_msd__function_guard : int, us_rep -> prop
+
+axiom get_msd__post_axiom :
+  (forall number:digit_index_type. forall number1:(int,octet) farray.
+  forall number2:t2 [get_msd({ us_split_discrs1 = {
+  rec__aco__math__very_longs__very_long__octet_length = number };
+  us_split_fields1 = { rec__aco__math__very_longs__very_long__long_digits = {
+  elts = number1; rt = number2 } } })]. (((dynamic_property1(1,
+  to_rep1(number), to_rep2(first(number2)), to_rep2(last(number2))) and
+  ((to_rep2(first(number2)) = 1) and
+  (to_rep2(last(number2)) = to_rep1(number)))) and (not (is_zero({
+  us_split_discrs1 = { rec__aco__math__very_longs__very_long__octet_length =
+  number }; us_split_fields1 = {
+  rec__aco__math__very_longs__very_long__long_digits = { elts = number1; rt =
+  number2 } } }) = true))) -> (((not (to_rep((number1[get_msd({
+  us_split_discrs1 = { rec__aco__math__very_longs__very_long__octet_length =
+  number }; us_split_fields1 = {
+  rec__aco__math__very_longs__very_long__long_digits = { elts = number1; rt =
+  number2 } } })])) = of_int(0))) and
+  (forall i:int. ((((get_msd({ us_split_discrs1 = {
+  rec__aco__math__very_longs__very_long__octet_length = number };
+  us_split_fields1 = { rec__aco__math__very_longs__very_long__long_digits = {
+  elts = number1; rt = number2 } } }) + 1) <= i) and
+  (i <= to_rep2(last(number2)))) -> (to_rep((number1[i])) = of_int(0))))) and
+  in_range2(get_msd({ us_split_discrs1 = {
+  rec__aco__math__very_longs__very_long__octet_length = number };
+  us_split_fields1 = { rec__aco__math__very_longs__very_long__long_digits = {
+  elts = number1; rt = number2 } } })))))
+
+logic get_shift_distance : t -> int
+
+logic get_shift_distance__function_guard : int, t -> prop
+
+axiom get_shift_distance__post_axiom :
+  (forall digit:t [get_shift_distance(digit)]. ((not (digit = of_int(0))) ->
+  in_range3(get_shift_distance(digit))))
+
+logic r135b : int
+
+logic attr__ATTRIBUTE_ADDRESS12 : int
+
+predicate dynamic_property8(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq21 : int, int -> bool
+
+axiom bool_eq_def17 :
+  (forall x:int. forall y:int [bool_eq21(x, y)]. (((x = y) -> (bool_eq21(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq21(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE11 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check11 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE11 : us_image -> int
+
+logic user_eq16 : tdigit_index_typeB, tdigit_index_typeB -> bool
+
+logic dummy25 : tdigit_index_typeB
+
+type tS134bP1__ref = { tS134bP1__content : tdigit_index_typeB
+}
+
+function tS134bP1__ref___projection(a: tS134bP1__ref) : tdigit_index_typeB =
+  (a).tS134bP1__content
+
+type t5
+
+logic first7 : t5 -> tdigit_index_typeB
+
+logic last8 : t5 -> tdigit_index_typeB
+
+logic mk3 : int, int -> t5
+
+axiom mk_def3 :
+  (forall f:int. forall l:int [mk3(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep2(first7(mk3(f, l))) = f) and (to_rep2(last8(mk3(f, l))) = l)))))
+
+predicate dynamic_property9(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property8(range_first, range_last, low) and
+  dynamic_property8(range_first, range_last, high)))))
+
+type us_t3 = { elts3 : (int,octet) farray; rt3 : t5
+}
+
+function to_array3(a: us_t3) : (int,octet) farray = (a).elts3
+
+function of_array3(a: (int,octet) farray, f: int, l: int) : us_t3 = { elts3 =
+  a; rt3 = mk3(f, l) }
+
+function first8(a: us_t3) : int = to_rep2(first7((a).rt3))
+
+function last9(a: us_t3) : int = to_rep2(last8((a).rt3))
+
+logic length3 : us_t3 -> int
+
+axiom length_def3 :
+  (forall a:us_t3 [length3(a)]. (((first8(a) <= last9(a)) ->
+  (length3(a) = ((last9(a) - first8(a)) + 1))) and
+  ((not (first8(a) <= last9(a))) -> (length3(a) = 0))))
+
+logic value__size6 : int
+
+logic object__size6 : (int,octet) farray -> int
+
+logic value__component__size3 : int
+
+logic object__component__size3 : (int,octet) farray -> int
+
+logic value__alignment6 : int
+
+logic object__alignment6 : (int,octet) farray -> int
+
+axiom value__size_axiom6 : (0 <= value__size6)
+
+axiom object__size_axiom6 :
+  (forall a:(int,octet) farray. (0 <= object__size6(a)))
+
+axiom value__component__size_axiom3 : (0 <= value__component__size3)
+
+axiom object__component__size_axiom3 :
+  (forall a:(int,octet) farray. (0 <= object__component__size3(a)))
+
+axiom value__alignment_axiom6 : (0 <= value__alignment6)
+
+axiom object__alignment_axiom6 :
+  (forall a:(int,octet) farray. (0 <= object__alignment6(a)))
+
+function bool_eq22(x: us_t3, y: us_t3) : bool = bool_eq6((x).elts3,
+  to_rep2(first7((x).rt3)), to_rep2(last8((x).rt3)), (y).elts3,
+  to_rep2(first7((y).rt3)), to_rep2(last8((y).rt3)))
+
+logic user_eq17 : us_t3, us_t3 -> bool
+
+logic dummy26 : (int,octet) farray
+
+logic dummy27 : t5
+
+type s134b__ref = { s134b__content : us_t3
+}
+
+function s134b__ref___projection(a: s134b__ref) : us_t3 = (a).s134b__content
+
+predicate dynamic_property10(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq23 : int, int -> bool
+
+axiom bool_eq_def18 :
+  (forall x:int. forall y:int [bool_eq23(x, y)]. (((x = y) -> (bool_eq23(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq23(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE12 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check12 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE12 : us_image -> int
+
+logic user_eq18 : tdigit_index_typeB, tdigit_index_typeB -> bool
+
+logic dummy28 : tdigit_index_typeB
+
+type t136b__ref = { t136b__content : tdigit_index_typeB
+}
+
+function t136b__ref___projection(a: t136b__ref) : tdigit_index_typeB =
+  (a).t136b__content
+
+type t6
+
+logic first9 : t6 -> tdigit_index_typeB
+
+logic last10 : t6 -> tdigit_index_typeB
+
+logic mk4 : int, int -> t6
+
+axiom mk_def4 :
+  (forall f:int. forall l:int [mk4(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep2(first9(mk4(f, l))) = f) and (to_rep2(last10(mk4(f, l))) = l)))))
+
+predicate dynamic_property11(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property10(range_first, range_last, low) and
+  dynamic_property10(range_first, range_last, high)))))
+
+type us_t4 = { elts4 : (int,octet) farray; rt4 : t6
+}
+
+function to_array4(a: us_t4) : (int,octet) farray = (a).elts4
+
+function of_array4(a: (int,octet) farray, f: int, l: int) : us_t4 = { elts4 =
+  a; rt4 = mk4(f, l) }
+
+function first10(a: us_t4) : int = to_rep2(first9((a).rt4))
+
+function last11(a: us_t4) : int = to_rep2(last10((a).rt4))
+
+logic length4 : us_t4 -> int
+
+axiom length_def4 :
+  (forall a:us_t4 [length4(a)]. (((first10(a) <= last11(a)) ->
+  (length4(a) = ((last11(a) - first10(a)) + 1))) and
+  ((not (first10(a) <= last11(a))) -> (length4(a) = 0))))
+
+logic value__size7 : int
+
+logic object__size7 : (int,octet) farray -> int
+
+logic value__component__size4 : int
+
+logic object__component__size4 : (int,octet) farray -> int
+
+logic value__alignment7 : int
+
+logic object__alignment7 : (int,octet) farray -> int
+
+axiom value__size_axiom7 : (0 <= value__size7)
+
+axiom object__size_axiom7 :
+  (forall a:(int,octet) farray. (0 <= object__size7(a)))
+
+axiom value__component__size_axiom4 : (0 <= value__component__size4)
+
+axiom object__component__size_axiom4 :
+  (forall a:(int,octet) farray. (0 <= object__component__size4(a)))
+
+axiom value__alignment_axiom7 : (0 <= value__alignment7)
+
+axiom object__alignment_axiom7 :
+  (forall a:(int,octet) farray. (0 <= object__alignment7(a)))
+
+function bool_eq24(x: us_t4, y: us_t4) : bool = bool_eq6((x).elts4,
+  to_rep2(first9((x).rt4)), to_rep2(last10((x).rt4)), (y).elts4,
+  to_rep2(first9((y).rt4)), to_rep2(last10((y).rt4)))
+
+logic user_eq19 : us_t4, us_t4 -> bool
+
+logic dummy29 : (int,octet) farray
+
+logic dummy30 : t6
+
+type t137b__ref = { t137b__content : us_t4
+}
+
+function t137b__ref___projection(a: t137b__ref) : us_t4 = (a).t137b__content
+
+logic r139b : int
+
+logic attr__ATTRIBUTE_ADDRESS13 : int
+
+predicate dynamic_property12(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq25 : int, int -> bool
+
+axiom bool_eq_def19 :
+  (forall x:int. forall y:int [bool_eq25(x, y)]. (((x = y) -> (bool_eq25(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq25(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE13 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check13 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE13 : us_image -> int
+
+logic user_eq20 : tdigit_index_typeB, tdigit_index_typeB -> bool
+
+logic dummy31 : tdigit_index_typeB
+
+type tS138bP1__ref = { tS138bP1__content : tdigit_index_typeB
+}
+
+function tS138bP1__ref___projection(a: tS138bP1__ref) : tdigit_index_typeB =
+  (a).tS138bP1__content
+
+type t7
+
+logic first11 : t7 -> tdigit_index_typeB
+
+logic last12 : t7 -> tdigit_index_typeB
+
+logic mk5 : int, int -> t7
+
+axiom mk_def5 :
+  (forall f:int. forall l:int [mk5(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep2(first11(mk5(f, l))) = f) and (to_rep2(last12(mk5(f, l))) = l)))))
+
+predicate dynamic_property13(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property12(range_first, range_last, low) and
+  dynamic_property12(range_first, range_last, high)))))
+
+type us_t5 = { elts5 : (int,octet) farray; rt5 : t7
+}
+
+function to_array5(a: us_t5) : (int,octet) farray = (a).elts5
+
+function of_array5(a: (int,octet) farray, f: int, l: int) : us_t5 = { elts5 =
+  a; rt5 = mk5(f, l) }
+
+function first12(a: us_t5) : int = to_rep2(first11((a).rt5))
+
+function last13(a: us_t5) : int = to_rep2(last12((a).rt5))
+
+logic length5 : us_t5 -> int
+
+axiom length_def5 :
+  (forall a:us_t5 [length5(a)]. (((first12(a) <= last13(a)) ->
+  (length5(a) = ((last13(a) - first12(a)) + 1))) and
+  ((not (first12(a) <= last13(a))) -> (length5(a) = 0))))
+
+logic value__size8 : int
+
+logic object__size8 : (int,octet) farray -> int
+
+logic value__component__size5 : int
+
+logic object__component__size5 : (int,octet) farray -> int
+
+logic value__alignment8 : int
+
+logic object__alignment8 : (int,octet) farray -> int
+
+axiom value__size_axiom8 : (0 <= value__size8)
+
+axiom object__size_axiom8 :
+  (forall a:(int,octet) farray. (0 <= object__size8(a)))
+
+axiom value__component__size_axiom5 : (0 <= value__component__size5)
+
+axiom object__component__size_axiom5 :
+  (forall a:(int,octet) farray. (0 <= object__component__size5(a)))
+
+axiom value__alignment_axiom8 : (0 <= value__alignment8)
+
+axiom object__alignment_axiom8 :
+  (forall a:(int,octet) farray. (0 <= object__alignment8(a)))
+
+function bool_eq26(x: us_t5, y: us_t5) : bool = bool_eq6((x).elts5,
+  to_rep2(first11((x).rt5)), to_rep2(last12((x).rt5)), (y).elts5,
+  to_rep2(first11((y).rt5)), to_rep2(last12((y).rt5)))
+
+logic user_eq21 : us_t5, us_t5 -> bool
+
+logic dummy32 : (int,octet) farray
+
+logic dummy33 : t7
+
+type s138b__ref = { s138b__content : us_t5
+}
+
+function s138b__ref___projection(a: s138b__ref) : us_t5 = (a).s138b__content
+
+predicate dynamic_property14(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq27 : int, int -> bool
+
+axiom bool_eq_def20 :
+  (forall x:int. forall y:int [bool_eq27(x, y)]. (((x = y) -> (bool_eq27(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq27(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE14 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check14 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE14 : us_image -> int
+
+logic user_eq22 : tdigit_index_typeB, tdigit_index_typeB -> bool
+
+logic dummy34 : tdigit_index_typeB
+
+type t140b__ref = { t140b__content : tdigit_index_typeB
+}
+
+function t140b__ref___projection(a: t140b__ref) : tdigit_index_typeB =
+  (a).t140b__content
+
+type t8
+
+logic first13 : t8 -> tdigit_index_typeB
+
+logic last14 : t8 -> tdigit_index_typeB
+
+logic mk6 : int, int -> t8
+
+axiom mk_def6 :
+  (forall f:int. forall l:int [mk6(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep2(first13(mk6(f, l))) = f) and (to_rep2(last14(mk6(f, l))) = l)))))
+
+predicate dynamic_property15(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property14(range_first, range_last, low) and
+  dynamic_property14(range_first, range_last, high)))))
+
+type us_t6 = { elts6 : (int,octet) farray; rt6 : t8
+}
+
+function to_array6(a: us_t6) : (int,octet) farray = (a).elts6
+
+function of_array6(a: (int,octet) farray, f: int, l: int) : us_t6 = { elts6 =
+  a; rt6 = mk6(f, l) }
+
+function first14(a: us_t6) : int = to_rep2(first13((a).rt6))
+
+function last15(a: us_t6) : int = to_rep2(last14((a).rt6))
+
+logic length6 : us_t6 -> int
+
+axiom length_def6 :
+  (forall a:us_t6 [length6(a)]. (((first14(a) <= last15(a)) ->
+  (length6(a) = ((last15(a) - first14(a)) + 1))) and
+  ((not (first14(a) <= last15(a))) -> (length6(a) = 0))))
+
+logic value__size9 : int
+
+logic object__size9 : (int,octet) farray -> int
+
+logic value__component__size6 : int
+
+logic object__component__size6 : (int,octet) farray -> int
+
+logic value__alignment9 : int
+
+logic object__alignment9 : (int,octet) farray -> int
+
+axiom value__size_axiom9 : (0 <= value__size9)
+
+axiom object__size_axiom9 :
+  (forall a:(int,octet) farray. (0 <= object__size9(a)))
+
+axiom value__component__size_axiom6 : (0 <= value__component__size6)
+
+axiom object__component__size_axiom6 :
+  (forall a:(int,octet) farray. (0 <= object__component__size6(a)))
+
+axiom value__alignment_axiom9 : (0 <= value__alignment9)
+
+axiom object__alignment_axiom9 :
+  (forall a:(int,octet) farray. (0 <= object__alignment9(a)))
+
+function bool_eq28(x: us_t6, y: us_t6) : bool = bool_eq6((x).elts6,
+  to_rep2(first13((x).rt6)), to_rep2(last14((x).rt6)), (y).elts6,
+  to_rep2(first13((y).rt6)), to_rep2(last14((y).rt6)))
+
+logic user_eq23 : us_t6, us_t6 -> bool
+
+logic dummy35 : (int,octet) farray
+
+logic dummy36 : t8
+
+type t141b__ref = { t141b__content : us_t6
+}
+
+function t141b__ref___projection(a: t141b__ref) : us_t6 = (a).t141b__content
+
+logic r142b : int
+
+logic attr__ATTRIBUTE_ADDRESS14 : int
+
+logic attr__ATTRIBUTE_ADDRESS15 : int
+
+type t9
+
+logic first15 : t9 -> tdigit_index_typeB
+
+logic last16 : t9 -> tdigit_index_typeB
+
+logic mk7 : int, int -> t9
+
+axiom mk_def7 :
+  (forall f:int. forall l:int [mk7(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep2(first15(mk7(f, l))) = f) and (to_rep2(last16(mk7(f, l))) = l)))))
+
+predicate dynamic_property16(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (in_range2(low) and in_range2(high)))))
+
+type us_t7 = { elts7 : (int,octet) farray; rt7 : t9
+}
+
+function to_array7(a: us_t7) : (int,octet) farray = (a).elts7
+
+function of_array7(a: (int,octet) farray, f: int, l: int) : us_t7 = { elts7 =
+  a; rt7 = mk7(f, l) }
+
+function first16(a: us_t7) : int = to_rep2(first15((a).rt7))
+
+function last17(a: us_t7) : int = to_rep2(last16((a).rt7))
+
+logic length7 : us_t7 -> int
+
+axiom length_def7 :
+  (forall a:us_t7 [length7(a)]. (((first16(a) <= last17(a)) ->
+  (length7(a) = ((last17(a) - first16(a)) + 1))) and
+  ((not (first16(a) <= last17(a))) -> (length7(a) = 0))))
+
+logic value__size10 : int
+
+logic object__size10 : (int,octet) farray -> int
+
+logic value__component__size7 : int
+
+logic object__component__size7 : (int,octet) farray -> int
+
+logic value__alignment10 : int
+
+logic object__alignment10 : (int,octet) farray -> int
+
+axiom value__size_axiom10 : (0 <= value__size10)
+
+axiom object__size_axiom10 :
+  (forall a:(int,octet) farray. (0 <= object__size10(a)))
+
+axiom value__component__size_axiom7 : (0 <= value__component__size7)
+
+axiom object__component__size_axiom7 :
+  (forall a:(int,octet) farray. (0 <= object__component__size7(a)))
+
+axiom value__alignment_axiom10 : (0 <= value__alignment10)
+
+axiom object__alignment_axiom10 :
+  (forall a:(int,octet) farray. (0 <= object__alignment10(a)))
+
+function bool_eq29(x: us_t7, y: us_t7) : bool = bool_eq6((x).elts7,
+  to_rep2(first15((x).rt7)), to_rep2(last16((x).rt7)), (y).elts7,
+  to_rep2(first15((y).rt7)), to_rep2(last16((y).rt7)))
+
+logic user_eq24 : us_t7, us_t7 -> bool
+
+logic dummy37 : (int,octet) farray
+
+logic dummy38 : t9
+
+type digits_array_type__ref = { digits_array_type__content : us_t7
+}
+
+function digits_array_type__ref___projection(a: digits_array_type__ref) : us_t7 =
+  (a).digits_array_type__content
+
+logic temp___1287 : t, int, int -> us_t4
+
+axiom def_axiom :
+  (forall temp___1289:t.
+  (forall temp___1290:int. forall temp___1291:int. ((dynamic_property16(1,
+  2147483647, temp___1290, temp___1291) ->
+  ((to_rep2(first9((temp___1287(temp___1289, temp___1290,
+  temp___1291)).rt4)) = temp___1290) and
+  (to_rep2(last10((temp___1287(temp___1289, temp___1290,
+  temp___1291)).rt4)) = temp___1291))) and
+  (forall temp___1292:int. (((temp___1287(temp___1289, temp___1290,
+  temp___1291)).elts4[temp___1292]) = of_rep(temp___1289))))))
+
+logic temp___1300 : t, int, int -> us_t6
+
+axiom def_axiom1 :
+  (forall temp___1302:t.
+  (forall temp___1303:int. forall temp___1304:int. ((dynamic_property16(1,
+  2147483647, temp___1303, temp___1304) ->
+  ((to_rep2(first13((temp___1300(temp___1302, temp___1303,
+  temp___1304)).rt6)) = temp___1303) and
+  (to_rep2(last14((temp___1300(temp___1302, temp___1303,
+  temp___1304)).rt6)) = temp___1304))) and
+  (forall temp___1305:int. (((temp___1300(temp___1302, temp___1303,
+  temp___1304)).elts6[temp___1305]) = of_rep(temp___1302))))))
+
+ (* File "aco-math-very_longs.ads", line 108, characters 0-0 *)
+goal WP_parameter_def :
+  (forall quotient__split_fields:(int,octet) farray.
+  forall quotient__split_fields1:t2.
+  forall remainder__split_fields:(int,octet) farray.
+  forall remainder__split_fields1:t2. forall n:int. forall m:int.
+  forall shift_distance:int. forall u__split_fields:(int,octet) farray.
+  forall u__split_fields1:t3. forall v__split_fields:(int,octet) farray.
+  forall v__split_fields1:t4. forall j:int. forall q_hat:t1.
+  forall current_borrow:t1. forall divisor_index:int. forall us:int.
+  forall us1:int. forall o:int. forall o1:int. forall o2:int. forall us2:int.
+  forall us3:int. forall temp___1294:(int,octet) farray.
+  forall temp___12941:t6. forall temp___1295:(int,octet) farray.
+  forall temp___12951:t5. forall temp___1297:(int,octet) farray.
+  forall temp___12971:t5. forall o3:(int,octet) farray. forall o4:t2.
+  forall o5:(int,octet) farray. forall o6:t2.
+  forall temp___1299:digit_index_type.
+  forall temp___12991:(int,octet) farray. forall temp___12992:t2.
+  forall temp___1307:(int,octet) farray. forall temp___13071:t8.
+  forall temp___1308:(int,octet) farray. forall temp___13081:t7.
+  forall temp___1310:(int,octet) farray. forall temp___13101:t7.
+  forall o7:(int,octet) farray. forall o8:t2. forall o9:(int,octet) farray.
+  forall o10:t2. forall temp___1312:digit_index_type.
+  forall temp___13121:(int,octet) farray. forall temp___13122:t2.
+  forall o11:int. forall o12:int. forall temp___1313:int. forall us4:int.
+  forall o13:int. forall us5:int. forall o14:int. forall o15:int.
+  forall o16:octet. forall o17:t. forall o18:int.
+  forall temp___1324:digit_index_type.
+  forall temp___13241:(int,octet) farray. forall temp___13242:t3.
+  forall temp___1323:t1. forall temp___1322:us_rep. forall temp___1321:t1.
+  forall temp___1320:int. forall result:us_split_fields__ref.
+  forall quotient__split_fields2:us_split_fields.
+  forall result1:us_split_fields__ref.
+  forall remainder__split_fields2:us_split_fields. forall result2:int__ref.
+  forall n1:int. forall result3:int__ref. forall m1:int.
+  forall result4:int__ref. forall shift_distance1:int.
+  forall aco__math__very_longs__divide__full_left_shift__result__fields:us_split_fields.
+  forall result5:us_split_fields__ref1.
+  forall u__split_fields2:us_split_fields2.
+  forall result6:us_split_fields__ref2.
+  forall v__split_fields2:us_split_fields4.
+  forall aco__math__very_longs__divide__left_shift__number__fields:us_split_fields.
+  forall result7:us_split_fields__ref2.
+  forall v__split_fields3:us_split_fields4. forall result8:int__ref.
+  forall j1:int. forall quotient__split_fields3:us_split_fields.
+  forall u__split_fields3:us_split_fields2. forall j2:int. forall q_hat1:t1.
+  forall u__split_fields4:us_split_fields2. forall current_borrow1:t1.
+  forall quotient__split_fields4:us_split_fields.
+  forall u__split_fields5:us_split_fields2. forall j3:int__ref.
+  forall j4:int. forall quotient__split_fields5:us_split_fields__ref.
+  forall u__split_fields6:us_split_fields__ref1. forall j5:int__ref.
+  forall q_hat2:t__ref1. forall current_borrow2:t__ref1.
+  forall quotient__split_fields6:us_split_fields.
+  forall u__split_fields7:us_split_fields2. forall j6:int. forall q_hat3:t1.
+  forall current_borrow3:t1.
+  forall quotient__split_fields7:us_split_fields__ref.
+  forall u__split_fields8:us_split_fields__ref1. forall j7:int__ref.
+  forall q_hat4:t__ref1. forall current_borrow4:t__ref1.
+  forall quotient__split_fields8:us_split_fields.
+  forall u__split_fields9:us_split_fields2. forall j8:int. forall q_hat5:t1.
+  forall current_borrow5:t1. forall result9:int__ref.
+  forall divisor_index1:int. forall remainder__split_fields3:us_split_fields.
+  forall divisor_index2:int. ((dynamic_property1(1, to_rep1(dividend),
+  to_rep2(first(dividend2)), to_rep2(last(dividend2))) and
+  ((to_rep2(first(dividend2)) = 1) and
+  (to_rep2(last(dividend2)) = to_rep1(dividend)))) -> ((dynamic_property1(1,
+  to_rep1(divisor), to_rep2(first(divisor2)), to_rep2(last(divisor2))) and
+  ((to_rep2(first(divisor2)) = 1) and
+  (to_rep2(last(divisor2)) = to_rep1(divisor)))) -> ((dynamic_property1(1,
+  to_rep1(quotient__split_discrs), to_rep2(first(quotient__split_fields1)),
+  to_rep2(last(quotient__split_fields1))) and
+  ((to_rep2(first(quotient__split_fields1)) = 1) and
+  (to_rep2(last(quotient__split_fields1)) = to_rep1(quotient__split_discrs)))) ->
+  ((dynamic_property1(1, to_rep1(remainder__split_discrs),
+  to_rep2(first(remainder__split_fields1)),
+  to_rep2(last(remainder__split_fields1))) and
+  ((to_rep2(first(remainder__split_fields1)) = 1) and
+  (to_rep2(last(remainder__split_fields1)) = to_rep1(remainder__split_discrs)))) ->
+  (((((not (is_zero({ us_split_discrs1 = {
+  rec__aco__math__very_longs__very_long__octet_length = divisor };
+  us_split_fields1 = { rec__aco__math__very_longs__very_long__long_digits = {
+  elts = divisor1; rt = divisor2 } } }) = true)) and
+  (to_rep1(divisor) = to_rep1(remainder__split_discrs))) and
+  (to_rep1(dividend) = to_rep1(quotient__split_discrs))) and
+  (to_rep1(dividend) = (2 * to_rep1(divisor)))) ->
+  (((us = to_rep1(divisor)) and in_range2(to_rep1(divisor))) ->
+  (((us1 = to_rep1(dividend)) and in_range2(to_rep1(dividend))) ->
+  (((1 <= last2) -> dynamic_property2(1, last2, n)) -> (((first2 <= last3) ->
+  dynamic_property3(first2, last3, m)) -> (((0 <= 7) ->
+  in_range3(shift_distance)) -> ((((((o = (2 * to_rep1(divisor))) and
+  in_range1((2 * to_rep1(divisor)))) and (o1 = (o + 1))) and ((o2 = o1) and
+  in_range1(o1))) and ((us2 = o2) and in_range2(o2))) ->
+  ((to_rep1(u__split_discrs) = ((2 * to_rep1(divisor)) + 1)) ->
+  (((((2 * to_rep1(divisor)) + 1) = to_rep1(((to_base({ us_split_discrs2 = {
+  rec__aco__math__very_longs__very_long__octet_length = u__split_discrs };
+  us_split_fields3 = { rec__aco__math__very_longs__very_long__long_digits1 =
+  { elts1 = u__split_fields; rt1 = u__split_fields1 } }
+  })).us_split_discrs1).rec__aco__math__very_longs__very_long__octet_length)) and
+  (dynamic_property5(1, ((2 * to_rep1(divisor)) + 1),
+  to_rep2(first3(u__split_fields1)), to_rep2(last4(u__split_fields1))) and
+  ((to_rep2(first3(u__split_fields1)) = 1) and
+  (to_rep2(last4(u__split_fields1)) = ((2 * to_rep1(divisor)) + 1))))) ->
+  (((us3 = to_rep1(divisor)) and in_range2(to_rep1(divisor))) ->
+  ((to_rep1(v__split_discrs) = to_rep1(divisor)) ->
+  (((to_rep1(divisor) = to_rep1(((to_base1({ us_split_discrs3 = {
+  rec__aco__math__very_longs__very_long__octet_length = v__split_discrs };
+  us_split_fields5 = { rec__aco__math__very_longs__very_long__long_digits2 =
+  { elts2 = v__split_fields; rt2 = v__split_fields1 } }
+  })).us_split_discrs1).rec__aco__math__very_longs__very_long__octet_length)) and
+  (dynamic_property7(1, to_rep1(divisor), to_rep2(first5(v__split_fields1)),
+  to_rep2(last6(v__split_fields1))) and
+  ((to_rep2(first5(v__split_fields1)) = 1) and
+  (to_rep2(last6(v__split_fields1)) = to_rep1(divisor))))) ->
+  (((1 <= 2147483647) -> in_range2(j)) ->
+  (((to_rep1(quotient__split_discrs) = r135b) and in_range2(r135b)) ->
+  (((((((((to_rep2(first9((temp___1287(of_int(0), 1, r135b)).rt4)) = 1) and
+  ((to_rep2(last10((temp___1287(of_int(0), 1, r135b)).rt4)) = r135b) and ({
+  elts4 = temp___1294; rt4 = temp___12941 } = temp___1287(of_int(0), 1,
+  r135b)))) and
+  ((((to_rep2(first9(temp___12941)) <= to_rep2(last10(temp___12941))) and
+  (((1 <= r135b) and
+  (((to_rep2(last10(temp___12941)) - to_rep2(first9(temp___12941))) + 1) = ((r135b - 1) + 1))) or
+  ((not (1 <= r135b)) and
+  (((to_rep2(last10(temp___12941)) - to_rep2(first9(temp___12941))) + 1) = 0)))) or
+  ((not (to_rep2(first9(temp___12941)) <= to_rep2(last10(temp___12941)))) and
+  (((1 <= r135b) and (0 = ((r135b - 1) + 1))) or (not (1 <= r135b))))) and
+  ((temp___1294 = temp___1295) and (mk3(to_rep2(first9(temp___12941)),
+  to_rep2(last10(temp___12941))) = temp___12951)))) and
+  ((((to_rep2(first7(temp___12951)) <= to_rep2(last8(temp___12951))) and
+  (((to_rep2(first(quotient__split_fields1)) <= to_rep2(last(quotient__split_fields1))) and
+  (((to_rep2(last8(temp___12951)) - to_rep2(first7(temp___12951))) + 1) = ((to_rep2(last(quotient__split_fields1)) - to_rep2(first(quotient__split_fields1))) + 1))) or
+  ((not (to_rep2(first(quotient__split_fields1)) <= to_rep2(last(quotient__split_fields1)))) and
+  (((to_rep2(last8(temp___12951)) - to_rep2(first7(temp___12951))) + 1) = 0)))) or
+  ((not (to_rep2(first7(temp___12951)) <= to_rep2(last8(temp___12951)))) and
+  (((to_rep2(first(quotient__split_fields1)) <= to_rep2(last(quotient__split_fields1))) and
+  (0 = ((to_rep2(last(quotient__split_fields1)) - to_rep2(first(quotient__split_fields1))) + 1))) or
+  (not (to_rep2(first(quotient__split_fields1)) <= to_rep2(last(quotient__split_fields1))))))) and
+  ((temp___1295 = temp___1297) and (temp___12951 = temp___12971)))) and
+  ((temp___1297 = o3) and (mk(to_rep2(first7(temp___12971)),
+  to_rep2(last8(temp___12971))) = o4))) and ((o5 = o3) and (o6 = o4))) and
+  ((quotient__split_discrs = temp___1299) and ((temp___12991 = o5) and
+  (temp___12992 = o6)))) and (((result = { us_split_fields__content = {
+  rec__aco__math__very_longs__very_long__long_digits = { elts =
+  quotient__split_fields; rt = quotient__split_fields1 } } }) and
+  (quotient__split_fields2 = {
+  rec__aco__math__very_longs__very_long__long_digits = { elts = temp___12991;
+  rt = temp___12992 } })) and (quotient__split_discrs = temp___1299))) ->
+  (((to_rep1(remainder__split_discrs) = r139b) and in_range2(r139b)) ->
+  (((((((((to_rep2(first13((temp___1300(of_int(0), 1, r139b)).rt6)) = 1) and
+  ((to_rep2(last14((temp___1300(of_int(0), 1, r139b)).rt6)) = r139b) and ({
+  elts6 = temp___1307; rt6 = temp___13071 } = temp___1300(of_int(0), 1,
+  r139b)))) and
+  ((((to_rep2(first13(temp___13071)) <= to_rep2(last14(temp___13071))) and
+  (((1 <= r139b) and
+  (((to_rep2(last14(temp___13071)) - to_rep2(first13(temp___13071))) + 1) = ((r139b - 1) + 1))) or
+  ((not (1 <= r139b)) and
+  (((to_rep2(last14(temp___13071)) - to_rep2(first13(temp___13071))) + 1) = 0)))) or
+  ((not (to_rep2(first13(temp___13071)) <= to_rep2(last14(temp___13071)))) and
+  (((1 <= r139b) and (0 = ((r139b - 1) + 1))) or (not (1 <= r139b))))) and
+  ((temp___1307 = temp___1308) and (mk5(to_rep2(first13(temp___13071)),
+  to_rep2(last14(temp___13071))) = temp___13081)))) and
+  ((((to_rep2(first11(temp___13081)) <= to_rep2(last12(temp___13081))) and
+  (((to_rep2(first(remainder__split_fields1)) <= to_rep2(last(remainder__split_fields1))) and
+  (((to_rep2(last12(temp___13081)) - to_rep2(first11(temp___13081))) + 1) = ((to_rep2(last(remainder__split_fields1)) - to_rep2(first(remainder__split_fields1))) + 1))) or
+  ((not (to_rep2(first(remainder__split_fields1)) <= to_rep2(last(remainder__split_fields1)))) and
+  (((to_rep2(last12(temp___13081)) - to_rep2(first11(temp___13081))) + 1) = 0)))) or
+  ((not (to_rep2(first11(temp___13081)) <= to_rep2(last12(temp___13081)))) and
+  (((to_rep2(first(remainder__split_fields1)) <= to_rep2(last(remainder__split_fields1))) and
+  (0 = ((to_rep2(last(remainder__split_fields1)) - to_rep2(first(remainder__split_fields1))) + 1))) or
+  (not (to_rep2(first(remainder__split_fields1)) <= to_rep2(last(remainder__split_fields1))))))) and
+  ({ elts5 = temp___1310; rt5 = temp___13101 } = { elts5 = temp___1308; rt5 =
+  temp___13081 }))) and ((temp___1310 = o7) and
+  (mk(to_rep2(first11(temp___13101)),
+  to_rep2(last12(temp___13101))) = o8))) and ((o9 = o7) and (o10 = o8))) and
+  ((remainder__split_discrs = temp___1312) and ((temp___13121 = o9) and
+  (temp___13122 = o10)))) and (((result1 = { us_split_fields__content = {
+  rec__aco__math__very_longs__very_long__long_digits = { elts =
+  remainder__split_fields; rt = remainder__split_fields1 } } }) and
+  (remainder__split_fields2 = {
+  rec__aco__math__very_longs__very_long__long_digits = { elts = temp___13121;
+  rt = temp___13122 } })) and (remainder__split_discrs = temp___1312))) ->
+  (((((((o11 = get_msd({ us_split_discrs1 = {
+  rec__aco__math__very_longs__very_long__octet_length = divisor };
+  us_split_fields1 = { rec__aco__math__very_longs__very_long__long_digits = {
+  elts = divisor1; rt = divisor2 } } })) and (in_range2(o11) and
+  ((not (to_rep((divisor1[o11])) = of_int(0))) and
+  (forall i:int. ((((o11 + 1) <= i) and (i <= to_rep2(last(divisor2)))) ->
+  (to_rep((divisor1[i])) = of_int(0))))))) and (o12 = (o11 + 1))) and
+  ((temp___1313 = o12) and in_range1(o12))) and (((us4 = temp___1313) and
+  dynamic_property2(1, last2, temp___1313)) and (o13 = temp___1313))) and
+  ((result2 = { int__content = n }) and (n1 = o13))) ->
+  (((((us5 = (48 - n1)) and dynamic_property3(first2, last3, (48 - n1))) and
+  (o14 = (48 - n1))) and ((result3 = { int__content = m }) and
+  (m1 = o14))) -> ((((((((to_rep2(first(divisor2)) <= (n1 - 1)) and
+  ((n1 - 1) <= to_rep2(last(divisor2)))) and (o15 = (n1 - 1))) and
+  (o16 = (divisor1[o15]))) and (o17 = to_rep(o16))) and
+  ((o18 = get_shift_distance(o17)) and in_range3(o18))) and ((result4 = {
+  int__content = shift_distance }) and (shift_distance1 = o18))) ->
+  (((dynamic_property1(1, to_rep1(u__split_discrs),
+  to_rep2(first(((aco__math__very_longs__divide__full_left_shift__result__fields).rec__aco__math__very_longs__very_long__long_digits).rt)),
+  to_rep2(last(((aco__math__very_longs__divide__full_left_shift__result__fields).rec__aco__math__very_longs__very_long__long_digits).rt))) and
+  ((to_rep2(first(((aco__math__very_longs__divide__full_left_shift__result__fields).rec__aco__math__very_longs__very_long__long_digits).rt)) = 1) and
+  (to_rep2(last(((aco__math__very_longs__divide__full_left_shift__result__fields).rec__aco__math__very_longs__very_long__long_digits).rt)) = to_rep1(u__split_discrs)))) and
+  (((result5 = { us_split_fields__content1 = {
+  rec__aco__math__very_longs__very_long__long_digits1 = { elts1 =
+  u__split_fields; rt1 = u__split_fields1 } } }) and
+  (u__split_fields2 = (of_base({ us_split_discrs1 = {
+  rec__aco__math__very_longs__very_long__octet_length = u__split_discrs };
+  us_split_fields1 =
+  aco__math__very_longs__divide__full_left_shift__result__fields
+  })).us_split_fields3)) and ({
+  rec__aco__math__very_longs__very_long__octet_length = u__split_discrs
+  } = (of_base({ us_split_discrs1 = {
+  rec__aco__math__very_longs__very_long__octet_length = u__split_discrs };
+  us_split_fields1 =
+  aco__math__very_longs__divide__full_left_shift__result__fields
+  })).us_split_discrs2))) -> ((((result6 = { us_split_fields__content2 = {
+  rec__aco__math__very_longs__very_long__long_digits2 = { elts2 =
+  v__split_fields; rt2 = v__split_fields1 } } }) and
+  (v__split_fields2 = (of_base1({ us_split_discrs1 = {
+  rec__aco__math__very_longs__very_long__octet_length = divisor };
+  us_split_fields1 = { rec__aco__math__very_longs__very_long__long_digits = {
+  elts = divisor1; rt = divisor2 } } })).us_split_fields5)) and ({
+  rec__aco__math__very_longs__very_long__octet_length = v__split_discrs
+  } = (of_base1({ us_split_discrs1 = {
+  rec__aco__math__very_longs__very_long__octet_length = divisor };
+  us_split_fields1 = { rec__aco__math__very_longs__very_long__long_digits = {
+  elts = divisor1; rt = divisor2 } } })).us_split_discrs3)) ->
+  (((dynamic_property1(1, to_rep1(v__split_discrs),
+  to_rep2(first(((aco__math__very_longs__divide__left_shift__number__fields).rec__aco__math__very_longs__very_long__long_digits).rt)),
+  to_rep2(last(((aco__math__very_longs__divide__left_shift__number__fields).rec__aco__math__very_longs__very_long__long_digits).rt))) and
+  ((to_rep2(first(((aco__math__very_longs__divide__left_shift__number__fields).rec__aco__math__very_longs__very_long__long_digits).rt)) = 1) and
+  (to_rep2(last(((aco__math__very_longs__divide__left_shift__number__fields).rec__aco__math__very_longs__very_long__long_digits).rt)) = to_rep1(v__split_discrs)))) and
+  (((result7 = { us_split_fields__content2 = v__split_fields2 }) and
+  (v__split_fields3 = (of_base1({ us_split_discrs1 = {
+  rec__aco__math__very_longs__very_long__octet_length = v__split_discrs };
+  us_split_fields1 =
+  aco__math__very_longs__divide__left_shift__number__fields
+  })).us_split_fields5)) and ({
+  rec__aco__math__very_longs__very_long__octet_length = v__split_discrs
+  } = (of_base1({ us_split_discrs1 = {
+  rec__aco__math__very_longs__very_long__octet_length = v__split_discrs };
+  us_split_fields1 =
+  aco__math__very_longs__divide__left_shift__number__fields
+  })).us_split_discrs3))) -> (((result8 = { int__content = j }) and
+  (j1 = m1)) -> ((((((temp___1324 = u__split_discrs) and ({
+  rec__aco__math__very_longs__very_long__long_digits1 = { elts1 =
+  temp___13241; rt1 = temp___13242 } } = u__split_fields2)) and
+  ((temp___1323 = current_borrow) and ((temp___1322 = { us_split_discrs1 = {
+  rec__aco__math__very_longs__very_long__octet_length =
+  quotient__split_discrs }; us_split_fields1 = quotient__split_fields2 }) and
+  ((temp___1321 = q_hat) and ((temp___1320 = j1) and (((((1 <= 2147483647) ->
+  in_range2(j2)) and (dynamic_property1(1, to_rep1(quotient__split_discrs),
+  to_rep2(first(((quotient__split_fields3).rec__aco__math__very_longs__very_long__long_digits).rt)),
+  to_rep2(last(((quotient__split_fields3).rec__aco__math__very_longs__very_long__long_digits).rt))) and
+  ((to_rep2(first(((quotient__split_fields3).rec__aco__math__very_longs__very_long__long_digits).rt)) = 1) and
+  (to_rep2(last(((quotient__split_fields3).rec__aco__math__very_longs__very_long__long_digits).rt)) = to_rep1(quotient__split_discrs))))) and
+  (dynamic_property5(1, ((2 * to_rep1(divisor)) + 1),
+  to_rep2(first3(((u__split_fields3).rec__aco__math__very_longs__very_long__long_digits1).rt1)),
+  to_rep2(last4(((u__split_fields3).rec__aco__math__very_longs__very_long__long_digits1).rt1))) and
+  ((to_rep2(first3(((u__split_fields3).rec__aco__math__very_longs__very_long__long_digits1).rt1)) = 1) and
+  (to_rep2(last4(((u__split_fields3).rec__aco__math__very_longs__very_long__long_digits1).rt1)) = ((2 * to_rep1(divisor)) + 1))))) and
+  ((dynamic_property5(1, ((2 * to_rep1(divisor)) + 1),
+  to_rep2(first3(((u__split_fields4).rec__aco__math__very_longs__very_long__long_digits1).rt1)),
+  to_rep2(last4(((u__split_fields4).rec__aco__math__very_longs__very_long__long_digits1).rt1))) and
+  ((to_rep2(first3(((u__split_fields4).rec__aco__math__very_longs__very_long__long_digits1).rt1)) = 1) and
+  (to_rep2(last4(((u__split_fields4).rec__aco__math__very_longs__very_long__long_digits1).rt1)) = ((2 * to_rep1(divisor)) + 1)))) and
+  (((dynamic_property5(1, ((2 * to_rep1(divisor)) + 1),
+  to_rep2(first3(((u__split_fields5).rec__aco__math__very_longs__very_long__long_digits1).rt1)),
+  to_rep2(last4(((u__split_fields5).rec__aco__math__very_longs__very_long__long_digits1).rt1))) and
+  ((to_rep2(first3(((u__split_fields5).rec__aco__math__very_longs__very_long__long_digits1).rt1)) = 1) and
+  (to_rep2(last4(((u__split_fields5).rec__aco__math__very_longs__very_long__long_digits1).rt1)) = ((2 * to_rep1(divisor)) + 1)))) and
+  (dynamic_property1(1, to_rep1(quotient__split_discrs),
+  to_rep2(first(((quotient__split_fields4).rec__aco__math__very_longs__very_long__long_digits).rt)),
+  to_rep2(last(((quotient__split_fields4).rec__aco__math__very_longs__very_long__long_digits).rt))) and
+  ((to_rep2(first(((quotient__split_fields4).rec__aco__math__very_longs__very_long__long_digits).rt)) = 1) and
+  (to_rep2(last(((quotient__split_fields4).rec__aco__math__very_longs__very_long__long_digits).rt)) = to_rep1(quotient__split_discrs))))) and
+  (((j3 = { int__content = j2 }) and (j4 = j2)) and (j2 = 1)))))))))) and
+  (((current_borrow2 = { t__content1 = current_borrow1 }) and ((q_hat2 = {
+  t__content1 = q_hat1 }) and ((j5 = j3) and ((u__split_fields6 = {
+  us_split_fields__content1 = u__split_fields5 }) and
+  (quotient__split_fields5 = { us_split_fields__content =
+  quotient__split_fields4 }))))) and ((current_borrow3 = current_borrow1) and
+  ((q_hat3 = q_hat1) and ((j6 = j4) and
+  ((u__split_fields7 = u__split_fields5) and
+  (quotient__split_fields6 = quotient__split_fields4))))))) and
+  (((current_borrow4 = current_borrow2) and ((q_hat4 = q_hat2) and
+  ((j7 = j5) and ((u__split_fields8 = u__split_fields6) and
+  (quotient__split_fields7 = quotient__split_fields5))))) and
+  ((current_borrow5 = current_borrow3) and ((q_hat5 = q_hat3) and
+  ((j8 = j6) and ((u__split_fields9 = u__split_fields7) and
+  (quotient__split_fields8 = quotient__split_fields6))))))) ->
+  (((n1 = r142b) and dynamic_property2(1, last2, r142b)) -> (((result9 = {
+  int__content = divisor_index }) and (divisor_index1 = 1)) ->
+  (((1 <= divisor_index1) and (divisor_index1 <= r142b)) ->
+  ((((dynamic_property1(1, to_rep1(remainder__split_discrs),
+  to_rep2(first(((remainder__split_fields3).rec__aco__math__very_longs__very_long__long_digits).rt)),
+  to_rep2(last(((remainder__split_fields3).rec__aco__math__very_longs__very_long__long_digits).rt))) and
+  ((to_rep2(first(((remainder__split_fields3).rec__aco__math__very_longs__very_long__long_digits).rt)) = 1) and
+  (to_rep2(last(((remainder__split_fields3).rec__aco__math__very_longs__very_long__long_digits).rt)) = to_rep1(remainder__split_discrs)))) and
+  (forall temp___1331:int.
+  (((to_rep2(first(((remainder__split_fields3).rec__aco__math__very_longs__very_long__long_digits).rt)) <= temp___1331) and
+  (temp___1331 <= to_rep2(last(((remainder__split_fields3).rec__aco__math__very_longs__very_long__long_digits).rt)))) ->
+  ((divisor_index2 <= temp___1331) ->
+  ((((remainder__split_fields3).rec__aco__math__very_longs__very_long__long_digits).elts[temp___1331]) = (((remainder__split_fields2).rec__aco__math__very_longs__very_long__long_digits).elts[temp___1331])))))) and
+  ((1 <= divisor_index2) and (divisor_index2 <= r142b))) ->
+  (to_rep2(first3((((u__split_fields8).us_split_fields__content1).rec__aco__math__very_longs__very_long__long_digits1).rt1)) <= divisor_index2)))))))))))))))))))))))))))))))))))

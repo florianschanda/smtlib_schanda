@@ -80,18 +80,18 @@
 
 (declare-datatypes ((us_split_fields2 0))
 (((mk___split_fields1 (rec__p__tt1 us_main_type)))))
-(define-fun us_split_fields_TT2__projection ((a us_split_fields2)) us_main_type
+(define-fun us_split_fields_TT__2__projection ((a us_split_fields2)) us_main_type
   (rec__p__tt1 a))
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (define-fun to_base ((a us_rep1)) us_rep (mk___rep
                                          (mk___split_fields

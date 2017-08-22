@@ -70,20 +70,20 @@
 (define-fun us_split_fields_T__projection ((a us_split_fields)) us_main_type
   (rec__vk__tag__fs__name__t a))
 
-(define-fun us_split_fields_4__projection ((a us_split_fields)) us_private
+(define-fun us_split_fields___4__projection ((a us_split_fields)) us_private
   (rec__ext__ a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_13__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___13__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)(attr__tag Int)))))
-(define-fun us_rep_22__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___22__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                 a))
 
-(define-fun us_rep_23__projection ((a us_rep)) Int (attr__tag a))
+(define-fun us_rep___23__projection ((a us_rep)) Int (attr__tag a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (= (us_main_eq

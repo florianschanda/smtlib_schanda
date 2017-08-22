@@ -88,35 +88,35 @@
 (declare-datatypes ((us_split_discrs 0))
 (((mk___split_discrs
   (rec__tests__test_14__record_with_mutable_discrs__present Bool)))))
-(define-fun us_split_discrs_2__projection ((a us_split_discrs)) Bool
+(define-fun us_split_discrs___2__projection ((a us_split_discrs)) Bool
   (rec__tests__test_14__record_with_mutable_discrs__present a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
 (((mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref_2__projection ((a us_split_discrs__ref)) us_split_discrs
+(define-fun us_split_discrs__ref___2__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields
   (rec__tests__test_14__record_with_mutable_discrs__field natural)))))
-(define-fun us_split_fields_Field2__projection ((a us_split_fields)) natural
+(define-fun us_split_fields_Field__2__projection ((a us_split_fields)) natural
   (rec__tests__test_14__record_with_mutable_discrs__field a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_7__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___7__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)(attr__constrained Bool)))))
-(define-fun us_rep_12__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___12__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_13__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___13__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                 a))
 
-(define-fun us_rep_14__projection ((a us_rep)) Bool (attr__constrained a))
+(define-fun us_rep___14__projection ((a us_rep)) Bool (attr__constrained a))
 
 (define-fun tests__test_14__record_with_mutable_discrs__field__pred ((a us_rep)) Bool (=
   (to_int1

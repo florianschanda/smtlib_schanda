@@ -569,13 +569,13 @@
 (define-fun us_split_fields_ONW_LLD__projection ((a us_split_fields)) bits_1
   (rec__dw1000__register_types__aon_wcfg_type__onw_lld a))
 
-(define-fun us_split_fields_Reserved_112__projection ((a us_split_fields)) bits_1
+(define-fun us_split_fields_Reserved_1__12__projection ((a us_split_fields)) bits_1
   (rec__dw1000__register_types__aon_wcfg_type__reserved_1 a))
 
-(define-fun us_split_fields_Reserved_212__projection ((a us_split_fields)) bits_2
+(define-fun us_split_fields_Reserved_2__12__projection ((a us_split_fields)) bits_2
   (rec__dw1000__register_types__aon_wcfg_type__reserved_2 a))
 
-(define-fun us_split_fields_Reserved_33__projection ((a us_split_fields)) bits_2
+(define-fun us_split_fields_Reserved_3__3__projection ((a us_split_fields)) bits_2
   (rec__dw1000__register_types__aon_wcfg_type__reserved_3 a))
 
 (define-fun us_split_fields_Reserved_4__projection ((a us_split_fields)) bits_3
@@ -583,13 +583,13 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_67__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___67__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_67__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___67__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                 a))
 
 (define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -893,7 +893,7 @@
 
 (declare-datatypes ((register_type__ref 0))
 (((mk_register_type__ref (register_type__content us_rep)))))
-(define-fun register_type__ref_159__projection ((a register_type__ref)) us_rep
+(define-fun register_type__ref___159__projection ((a register_type__ref)) us_rep
   (register_type__content a))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
@@ -913,7 +913,7 @@
 
 (declare-datatypes ((tregister_byte_arrayP1__ref 0))
 (((mk_tregister_byte_arrayP1__ref (tregister_byte_arrayP1__content integer)))))
-(define-fun tregister_byte_arrayP1__ref_112__projection ((a tregister_byte_arrayP1__ref)) integer
+(define-fun tregister_byte_arrayP1__ref___112__projection ((a tregister_byte_arrayP1__ref)) integer
   (tregister_byte_arrayP1__content a))
 
 (declare-sort t1 0)
@@ -995,19 +995,19 @@
 
 (declare-datatypes ((register_byte_array__ref 0))
 (((mk_register_byte_array__ref (register_byte_array__content us_t1)))))
-(define-fun register_byte_array__ref_112__projection ((a register_byte_array__ref)) us_t1
+(define-fun register_byte_array__ref___112__projection ((a register_byte_array__ref)) us_t1
   (register_byte_array__content a))
 
-(define-fun dynamic_invariant ((temp___expr_5742 us_t1)
-  (temp___is_init_5739 Bool) (temp___skip_constant_5740 Bool)
-  (temp___do_toplevel_5741 Bool)) Bool (=>
+(define-fun dynamic_invariant ((temp___expr_5842 us_t1)
+  (temp___is_init_5839 Bool) (temp___skip_constant_5840 Bool)
+  (temp___do_toplevel_5841 Bool)) Bool (=>
                                        (not
-                                       (= temp___skip_constant_5740 true))
+                                       (= temp___skip_constant_5840 true))
                                        (and (dynamic_property2 1 2
-                                       (first3 temp___expr_5742)
-                                       (last3 temp___expr_5742))
-                                       (and (= (first3 temp___expr_5742) 1)
-                                       (= (last3 temp___expr_5742) 2)))))
+                                       (first3 temp___expr_5842)
+                                       (last3 temp___expr_5842))
+                                       (and (= (first3 temp___expr_5842) 1)
+                                       (= (last3 temp___expr_5842) 2)))))
 
 (declare-const reg_bytes__first integer)
 

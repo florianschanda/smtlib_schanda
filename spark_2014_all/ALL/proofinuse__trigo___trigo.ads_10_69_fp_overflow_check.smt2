@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -114,7 +115,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const x Float32)
 
@@ -141,36 +142,34 @@
 (declare-const o9 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite x) (fp.isNaN x))))
+  (assert (fp.isFinite32 x))
 
 ;; H
-  (assert
-  (and (= o (fp.mul RNE x x))
-  (not (or (fp.isInfinite (fp.mul RNE x x)) (fp.isNaN (fp.mul RNE x x))))))
+  (assert (and (= o (fp.mul RNE x x)) (fp.isFinite32 (fp.mul RNE x x))))
 
 ;; H
   (assert (= o1 (fp.mul RNE o x)))
 
 ;; H
-  (assert (and (= o2 o1) (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (assert (and (= o2 o1) (fp.isFinite32 o1)))
 
 ;; H
   (assert (= o3 (fp.mul RNE o2 x)))
 
 ;; H
-  (assert (and (= o4 o3) (not (or (fp.isInfinite o3) (fp.isNaN o3)))))
+  (assert (and (= o4 o3) (fp.isFinite32 o3)))
 
 ;; H
   (assert (= o5 (fp.mul RNE o4 x)))
 
 ;; H
-  (assert (and (= o6 o5) (not (or (fp.isInfinite o5) (fp.isNaN o5)))))
+  (assert (and (= o6 o5) (fp.isFinite32 o5)))
 
 ;; H
   (assert (= o7 (fp.mul RNE o6 x)))
 
 ;; H
-  (assert (and (= o8 o7) (not (or (fp.isInfinite o7) (fp.isNaN o7)))))
+  (assert (and (= o8 o7) (fp.isFinite32 o7)))
 
 ;; H
   (assert (= o9 (fp.mul RNE o8 x)))
@@ -178,6 +177,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (not (or (fp.isInfinite o9) (fp.isNaN o9)))))
+  (not (fp.isFinite32 o9)))
 (check-sat)
 (exit)

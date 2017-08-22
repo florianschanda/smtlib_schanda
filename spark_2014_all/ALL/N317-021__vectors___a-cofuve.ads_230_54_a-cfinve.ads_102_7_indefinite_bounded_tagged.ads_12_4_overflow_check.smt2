@@ -82,7 +82,7 @@
 
 (declare-datatypes ((index_type__ref 0))
 (((mk_index_type__ref (index_type__content index_type)))))
-(define-fun index_type__ref_2__projection ((a index_type__ref)) index_type
+(define-fun index_type__ref___2__projection ((a index_type__ref)) index_type
   (index_type__content a))
 
 (define-fun dynamic_invariant ((temp___expr_263 Int)
@@ -108,7 +108,7 @@
 
 (declare-datatypes ((extended_index__ref 0))
 (((mk_extended_index__ref (extended_index__content extended_index)))))
-(define-fun extended_index__ref_2__projection ((a extended_index__ref)) extended_index
+(define-fun extended_index__ref___2__projection ((a extended_index__ref)) extended_index
   (extended_index__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_273 Int)
@@ -216,7 +216,7 @@
 (define-fun us_rep___projection ((a us_rep1)) us_split_fields (us_split_fields1
                                                               a))
 
-(define-fun us_rep_2__projection ((a us_rep1)) Int (attr__tag a))
+(define-fun us_rep___2__projection ((a us_rep1)) Int (attr__tag a))
 
 (define-fun bool_eq1 ((a us_rep1)
   (b us_rep1)) Bool (ite (= (to_rep

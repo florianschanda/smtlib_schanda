@@ -103,7 +103,7 @@
 (declare-const dummy1 integer)
 
 (declare-datatypes ((tmp__ref 0)) (((mk_tmp__ref (tmp__content integer)))))
-(define-fun tmp__ref_2__projection ((a tmp__ref)) integer (tmp__content a))
+(define-fun tmp__ref___2__projection ((a tmp__ref)) integer (tmp__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_221 Int)
   (temp___is_init_218 Bool) (temp___skip_constant_219 Bool)

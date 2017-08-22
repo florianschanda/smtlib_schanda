@@ -123,7 +123,7 @@
 
 (declare-datatypes ((index_type__ref 0))
 (((mk_index_type__ref (index_type__content integer)))))
-(define-fun index_type__ref_3__projection ((a index_type__ref)) integer
+(define-fun index_type__ref___3__projection ((a index_type__ref)) integer
   (index_type__content a))
 
 (declare-const fst Int)
@@ -166,7 +166,7 @@
 
 (declare-datatypes ((extended_index__ref 0))
 (((mk_extended_index__ref (extended_index__content integer)))))
-(define-fun extended_index__ref_2__projection ((a extended_index__ref)) integer
+(define-fun extended_index__ref___2__projection ((a extended_index__ref)) integer
   (extended_index__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_252 Int)
@@ -359,7 +359,7 @@
 
 (declare-datatypes ((element_type__ref 0))
 (((mk_element_type__ref (element_type__content element_type)))))
-(define-fun element_type__ref_3__projection ((a element_type__ref)) element_type
+(define-fun element_type__ref___3__projection ((a element_type__ref)) element_type
   (element_type__content a))
 
 (define-fun dynamic_invariant4 ((temp___expr_246 Int)

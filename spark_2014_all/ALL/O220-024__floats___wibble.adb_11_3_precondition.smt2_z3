@@ -9,6 +9,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -152,15 +153,13 @@
 
 ;; range_axiom
   (assert
-  (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep x)) (fp.isNaN (to_rep x)))) :pattern (
-  (to_rep x)) )))
+  (forall ((x float)) (! (fp.isFinite32 (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x))) (= (to_rep (of_rep x)) x)) :pattern (
-  (to_rep (of_rep x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                                (of_rep x))) )))
 
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields
@@ -306,7 +305,7 @@
   (temp___do_toplevel_188 Bool)) Bool (=>
                                       (or (= temp___is_init_186 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_189) (fp.isNaN temp___expr_189)))))
+                                      (fp.isFinite32 temp___expr_189)))
 
 (declare-fun to_fp1 ((_ BitVec 32)) Float32)
 
@@ -325,7 +324,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const x__split_fields float)
 
@@ -359,9 +358,7 @@
   (assert (= (to_rep o1) (fp #b0 #b00000000 #b00000000000000000000000)))
 
 ;; H
-  (assert
-  (and (= o (to_fp1 ((_ int2bv 32) 2139094902)))
-  (not (or (fp.isInfinite o) (fp.isNaN o)))))
+  (assert (and (= o (to_fp1 ((_ int2bv 32) 2139094902))) (fp.isFinite32 o)))
 
 ;; H
   (assert (= (to_rep o2) o))
@@ -392,8 +389,7 @@
 
 ;; H
   (assert
-  (and (= o5 (to_fp1 ((_ int2bv 32) 4144594944)))
-  (not (or (fp.isInfinite o5) (fp.isNaN o5)))))
+  (and (= o5 (to_fp1 ((_ int2bv 32) 4144594944))) (fp.isFinite32 o5)))
 
 ;; H
   (assert (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) o5))

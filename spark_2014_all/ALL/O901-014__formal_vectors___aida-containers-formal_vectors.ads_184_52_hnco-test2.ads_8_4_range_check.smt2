@@ -118,7 +118,7 @@
 
 (declare-datatypes ((capacity_range__ref1 0))
 (((mk_capacity_range__ref1 (capacity_range__content1 capacity_range1)))))
-(define-fun capacity_range__ref_2__projection ((a capacity_range__ref1)) capacity_range1
+(define-fun capacity_range__ref___2__projection ((a capacity_range__ref1)) capacity_range1
   (capacity_range__content1 a))
 
 ;; no_index__def_axiom
@@ -131,17 +131,17 @@
                                       (<= 0 2147483647)) (in_range3
                                       temp___expr_219)))
 
-(declare-const temp___capacity_856 Int)
+(declare-const temp___capacity_944 Int)
 
 ;; H
   (assert (in_range1 no_index))
 
 ;; H
-  (assert (in_range2 temp___capacity_856))
+  (assert (in_range2 temp___capacity_944))
 
 (assert
 ;; WP_parameter_def
  ;; File "hnco-test2.ads", line 11, characters 0-0
-  (not (in_range3 temp___capacity_856)))
+  (not (in_range3 temp___capacity_944)))
 (check-sat)
 (exit)

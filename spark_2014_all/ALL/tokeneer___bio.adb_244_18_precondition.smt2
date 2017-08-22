@@ -682,7 +682,7 @@
 (define-fun us_split_fields_RequiredMaxFAR__projection ((a us_split_fields)) fart
   (rec__iandatypes__templatet__requiredmaxfar a))
 
-(define-fun us_split_fields_ID2__projection ((a us_split_fields)) (Array Int character)
+(define-fun us_split_fields_ID__2__projection ((a us_split_fields)) (Array Int character)
   (rec__iandatypes__templatet__id a))
 
 (define-fun us_split_fields_Pad__projection ((a us_split_fields)) (Array Int bytet)
@@ -690,13 +690,13 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_3__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___3__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq3 ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -1027,8 +1027,8 @@
 
 (declare-datatypes ((source__ref 0))
 (((mk_source__ref (source__content source)))))
-(define-fun source__ref_4__projection ((a source__ref)) source (source__content
-                                                               a))
+(define-fun source__ref___4__projection ((a source__ref)) source (source__content
+                                                                 a))
 
 (define-fun dynamic_invariant5 ((temp___expr_886 Int)
   (temp___is_init_883 Bool) (temp___skip_constant_884 Bool)
@@ -1053,8 +1053,8 @@
 
 (declare-datatypes ((target__ref 0))
 (((mk_target__ref (target__content target)))))
-(define-fun target__ref_4__projection ((a target__ref)) target (target__content
-                                                               a))
+(define-fun target__ref___4__projection ((a target__ref)) target (target__content
+                                                                 a))
 
 (define-fun dynamic_invariant6 ((temp___expr_892 Int)
   (temp___is_init_889 Bool) (temp___skip_constant_890 Bool)

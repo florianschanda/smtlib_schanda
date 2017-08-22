@@ -147,7 +147,7 @@
 (declare-const dummy2 t3)
 
 (declare-datatypes ((t3__ref 0)) (((mk_t3__ref (t3__content t3)))))
-(define-fun t3__ref_2__projection ((a t3__ref)) t3 (t3__content a))
+(define-fun t3__ref___2__projection ((a t3__ref)) t3 (t3__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_163 Int)
   (temp___is_init_160 Bool) (temp___skip_constant_161 Bool)
@@ -177,27 +177,27 @@
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields
   (rec__q__p2__r__a Bool)(rec__q__p2__r__b t2)(rec__q__p2__r__c t3)(rec__q__p2__r__d integer)))))
-(define-fun us_split_fields_A2__projection ((a us_split_fields)) Bool
+(define-fun us_split_fields_A__2__projection ((a us_split_fields)) Bool
   (rec__q__p2__r__a a))
 
-(define-fun us_split_fields_B2__projection ((a us_split_fields)) t2 (rec__q__p2__r__b
-                                                                    a))
+(define-fun us_split_fields_B__2__projection ((a us_split_fields)) t2
+  (rec__q__p2__r__b a))
 
-(define-fun us_split_fields_C2__projection ((a us_split_fields)) t3 (rec__q__p2__r__c
-                                                                    a))
+(define-fun us_split_fields_C__2__projection ((a us_split_fields)) t3
+  (rec__q__p2__r__c a))
 
-(define-fun us_split_fields_D2__projection ((a us_split_fields)) integer
+(define-fun us_split_fields_D__2__projection ((a us_split_fields)) integer
   (rec__q__p2__r__d a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -299,7 +299,7 @@
 (declare-const dummy3 us_rep)
 
 (declare-datatypes ((r__ref 0)) (((mk_r__ref (r__content us_rep)))))
-(define-fun r__ref_2__projection ((a r__ref)) us_rep (r__content a))
+(define-fun r__ref___2__projection ((a r__ref)) us_rep (r__content a))
 
 (declare-const a Bool)
 

@@ -156,8 +156,8 @@
 
 (declare-datatypes ((modular__ref 0))
 (((mk_modular__ref (modular__content modular)))))
-(define-fun modular__ref_8__projection ((a modular__ref)) modular (modular__content
-                                                                  a))
+(define-fun modular__ref___8__projection ((a modular__ref)) modular (modular__content
+                                                                    a))
 
 (define-fun dynamic_invariant ((temp___expr_351 (_ BitVec 64))
   (temp___is_init_348 Bool) (temp___skip_constant_349 Bool)
@@ -179,7 +179,7 @@
 
 (declare-datatypes ((mask_size__ref 0))
 (((mk_mask_size__ref (mask_size__content mask_size)))))
-(define-fun mask_size__ref_7__projection ((a mask_size__ref)) mask_size
+(define-fun mask_size__ref___7__projection ((a mask_size__ref)) mask_size
   (mask_size__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_363 Int)

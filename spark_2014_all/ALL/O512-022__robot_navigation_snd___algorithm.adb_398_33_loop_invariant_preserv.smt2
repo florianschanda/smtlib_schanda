@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -423,19 +424,17 @@
 ;; range_axiom
   (assert
   (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep2 x)) (fp.isNaN (to_rep2 x)))) :pattern (
-  (to_rep2 x)) )))
+  (! (fp.isFinite32 (to_rep2 x)) :pattern ((to_rep2 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2 (of_rep2 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
+                                                                  (of_rep2 x))) )))
 
 (declare-sort normalized2pi 0)
 
-(define-fun in_range5 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range5 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
@@ -545,7 +544,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-fun aldiff (us_rep us_rep) Float32)
 
@@ -568,13 +567,13 @@
   (rec__spaces__positions__position__x float)(rec__spaces__positions__position__y float)))))
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (define-fun bool_eq3 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -712,13 +711,13 @@
 
 (declare-datatypes ((us_split_fields__ref2 0))
 (((mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_6__projection ((a us_split_fields__ref2)) us_split_fields4
+(define-fun us_split_fields__ref___6__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep2 (us_split_fields5 us_split_fields4)))))
-(define-fun us_rep_8__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
-                                                                a))
+(define-fun us_rep___8__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
+                                                                  a))
 
 (define-fun bool_eq4 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
@@ -819,13 +818,13 @@
 
 (declare-datatypes ((us_split_fields__ref3 0))
 (((mk___split_fields__ref3 (us_split_fields__content3 us_split_fields6)))))
-(define-fun us_split_fields__ref_7__projection ((a us_split_fields__ref3)) us_split_fields6
+(define-fun us_split_fields__ref___7__projection ((a us_split_fields__ref3)) us_split_fields6
   (us_split_fields__content3 a))
 
 (declare-datatypes ((us_rep3 0))
 (((mk___rep3 (us_split_fields7 us_split_fields6)))))
-(define-fun us_rep_9__projection ((a us_rep3)) us_split_fields6 (us_split_fields7
-                                                                a))
+(define-fun us_rep___9__projection ((a us_rep3)) us_split_fields6 (us_split_fields7
+                                                                  a))
 
 (define-fun bool_eq5 ((a us_rep3)
   (b us_rep3)) Bool (ite (and
@@ -961,8 +960,8 @@
 
 (declare-datatypes ((option__ref 0))
 (((mk_option__ref (option__content option)))))
-(define-fun option__ref_2__projection ((a option__ref)) option (option__content
-                                                               a))
+(define-fun option__ref___2__projection ((a option__ref)) option (option__content
+                                                                 a))
 
 (declare-fun to_rep6 (option) Int)
 
@@ -985,12 +984,12 @@
 
 (declare-datatypes ((us_split_discrs 0))
 (((mk___split_discrs (rec__algorithm__valley_option__opt option)))))
-(define-fun us_split_discrs_2__projection ((a us_split_discrs)) option
+(define-fun us_split_discrs___2__projection ((a us_split_discrs)) option
   (rec__algorithm__valley_option__opt a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
 (((mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref_2__projection ((a us_split_discrs__ref)) us_split_discrs
+(define-fun us_split_discrs__ref___2__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ((us_split_fields8 0))
@@ -1000,19 +999,19 @@
 
 (declare-datatypes ((us_split_fields__ref4 0))
 (((mk___split_fields__ref4 (us_split_fields__content4 us_split_fields8)))))
-(define-fun us_split_fields__ref_8__projection ((a us_split_fields__ref4)) us_split_fields8
+(define-fun us_split_fields__ref___8__projection ((a us_split_fields__ref4)) us_split_fields8
   (us_split_fields__content4 a))
 
 (declare-datatypes ((us_rep4 0))
 (((mk___rep4
   (us_split_discrs1 us_split_discrs)(us_split_fields9 us_split_fields8)(attr__constrained Bool)))))
-(define-fun us_rep_10__projection ((a us_rep4)) us_split_discrs (us_split_discrs1
-                                                                a))
+(define-fun us_rep___10__projection ((a us_rep4)) us_split_discrs (us_split_discrs1
+                                                                  a))
 
-(define-fun us_rep_11__projection ((a us_rep4)) us_split_fields8 (us_split_fields9
-                                                                 a))
+(define-fun us_rep___11__projection ((a us_rep4)) us_split_fields8 (us_split_fields9
+                                                                   a))
 
-(define-fun us_rep_12__projection ((a us_rep4)) Bool (attr__constrained a))
+(define-fun us_rep___12__projection ((a us_rep4)) Bool (attr__constrained a))
 
 (define-fun algorithm__valley_option__value__pred ((a us_rep4)) Bool (=
   (to_rep6 (rec__algorithm__valley_option__opt (us_split_discrs1 a))) 1))
@@ -1131,12 +1130,12 @@
 (declare-datatypes ((us_split_discrs2 0))
 (((mk___split_discrs1
   (rec__algorithm__gap_vectors__list__capacity count_type)))))
-(define-fun us_split_discrs_3__projection ((a us_split_discrs2)) count_type
+(define-fun us_split_discrs___3__projection ((a us_split_discrs2)) count_type
   (rec__algorithm__gap_vectors__list__capacity a))
 
 (declare-datatypes ((us_split_discrs__ref1 0))
 (((mk___split_discrs__ref1 (us_split_discrs__content1 us_split_discrs2)))))
-(define-fun us_split_discrs__ref_3__projection ((a us_split_discrs__ref1)) us_split_discrs2
+(define-fun us_split_discrs__ref___3__projection ((a us_split_discrs__ref1)) us_split_discrs2
   (us_split_discrs__content1 a))
 
 (declare-datatypes ((us_split_fields10 0))
@@ -1146,17 +1145,17 @@
 
 (declare-datatypes ((us_split_fields__ref5 0))
 (((mk___split_fields__ref5 (us_split_fields__content5 us_split_fields10)))))
-(define-fun us_split_fields__ref_9__projection ((a us_split_fields__ref5)) us_split_fields10
+(define-fun us_split_fields__ref___9__projection ((a us_split_fields__ref5)) us_split_fields10
   (us_split_fields__content5 a))
 
 (declare-datatypes ((us_rep5 0))
 (((mk___rep5
   (us_split_discrs3 us_split_discrs2)(us_split_fields11 us_split_fields10)))))
-(define-fun us_rep_13__projection ((a us_rep5)) us_split_discrs2 (us_split_discrs3
-                                                                 a))
+(define-fun us_rep___13__projection ((a us_rep5)) us_split_discrs2 (us_split_discrs3
+                                                                   a))
 
-(define-fun us_rep_14__projection ((a us_rep5)) us_split_fields10 (us_split_fields11
-                                                                  a))
+(define-fun us_rep___14__projection ((a us_rep5)) us_split_fields10 (us_split_fields11
+                                                                    a))
 
 (define-fun bool_eq7 ((a us_rep5)
   (b us_rep5)) Bool (ite (and
@@ -1223,13 +1222,13 @@
 
 (declare-datatypes ((us_split_fields__ref6 0))
 (((mk___split_fields__ref6 (us_split_fields__content6 us_split_fields12)))))
-(define-fun us_split_fields__ref_10__projection ((a us_split_fields__ref6)) us_split_fields12
+(define-fun us_split_fields__ref___10__projection ((a us_split_fields__ref6)) us_split_fields12
   (us_split_fields__content6 a))
 
 (declare-datatypes ((us_rep6 0))
 (((mk___rep6 (us_split_fields13 us_split_fields12)))))
-(define-fun us_rep_15__projection ((a us_rep6)) us_split_fields12 (us_split_fields13
-                                                                  a))
+(define-fun us_rep___15__projection ((a us_rep6)) us_split_fields12 (us_split_fields13
+                                                                    a))
 
 (define-fun bool_eq8 ((a us_rep6)
   (b us_rep6)) Bool (ite (= (to_rep5
@@ -1368,7 +1367,7 @@
 
 (declare-datatypes ((element_type__ref1 0))
 (((mk_element_type__ref1 (element_type__content1 us_rep2)))))
-(define-fun element_type__ref_2__projection ((a element_type__ref1)) us_rep2
+(define-fun element_type__ref___2__projection ((a element_type__ref1)) us_rep2
   (element_type__content1 a))
 
 (declare-sort us_main_type2 0)
@@ -1524,8 +1523,8 @@
 
 (declare-datatypes ((list__ref1 0))
 (((mk_list__ref1 (list__content1 us_rep5)))))
-(define-fun list__ref_2__projection ((a list__ref1)) us_rep5 (list__content1
-                                                             a))
+(define-fun list__ref___2__projection ((a list__ref1)) us_rep5 (list__content1
+                                                               a))
 
 (declare-sort natural 0)
 
@@ -1567,8 +1566,7 @@
 
 (declare-sort positive_float 0)
 
-(define-fun in_range12 ((x Float32)) Bool (and
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range12 ((x Float32)) Bool (and (fp.isFinite32 x)
                                           (and
                                           (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                           (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -1610,8 +1608,7 @@
 
 (declare-sort nonnegative_float 0)
 
-(define-fun in_range13 ((x Float32)) Bool (and
-                                          (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range13 ((x Float32)) Bool (and (fp.isFinite32 x)
                                           (and
                                           (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                           (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -1680,14 +1677,14 @@
 ;; range_axiom
   (assert
   (forall ((x unbounded_float))
-  (! (not (or (fp.isInfinite (to_rep10 x)) (fp.isNaN (to_rep10 x)))) :pattern (
-  (to_rep10 x)) )))
+  (! (fp.isFinite32 (to_rep10 x)) :pattern ((to_rep10 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep10 (of_rep10 x)) x)) :pattern ((to_rep10 (of_rep10 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep10 (of_rep10 x)) x)) :pattern ((to_rep10
+                                                                    (of_rep10
+                                                                    x))) )))
 
 (declare-datatypes ((map__ref2 0))
 (((mk_map__ref2 (map__content2 (Array Int nonnegative_float))))))
@@ -1857,19 +1854,19 @@
   (rec__robot_iface__speed_option__modulus float)(rec__robot_iface__speed_option__angle float)))))
 (declare-datatypes ((us_split_fields__ref7 0))
 (((mk___split_fields__ref7 (us_split_fields__content7 us_split_fields14)))))
-(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref7)) us_split_fields14
+(define-fun us_split_fields__ref___4__projection ((a us_split_fields__ref7)) us_split_fields14
   (us_split_fields__content7 a))
 
 (declare-datatypes ((us_rep9 0))
 (((mk___rep7
   (us_split_discrs5 us_split_discrs4)(us_split_fields15 us_split_fields14)(attr__constrained1 Bool)))))
-(define-fun us_rep_4__projection ((a us_rep9)) us_split_discrs4 (us_split_discrs5
-                                                                a))
+(define-fun us_rep___4__projection ((a us_rep9)) us_split_discrs4 (us_split_discrs5
+                                                                  a))
 
-(define-fun us_rep_5__projection ((a us_rep9)) us_split_fields14 (us_split_fields15
-                                                                 a))
+(define-fun us_rep___5__projection ((a us_rep9)) us_split_fields14 (us_split_fields15
+                                                                   a))
 
-(define-fun us_rep_6__projection ((a us_rep9)) Bool (attr__constrained1 a))
+(define-fun us_rep___6__projection ((a us_rep9)) Bool (attr__constrained1 a))
 
 (define-fun robot_iface__speed_option__modulus__pred ((a us_rep9)) Bool (=
   (to_rep11 (rec__robot_iface__speed_option__opt (us_split_discrs5 a))) 1))
@@ -1993,13 +1990,13 @@
 
 (declare-datatypes ((us_split_fields__ref8 0))
 (((mk___split_fields__ref8 (us_split_fields__content8 us_split_fields16)))))
-(define-fun us_split_fields__ref_5__projection ((a us_split_fields__ref8)) us_split_fields16
+(define-fun us_split_fields__ref___5__projection ((a us_split_fields__ref8)) us_split_fields16
   (us_split_fields__content8 a))
 
 (declare-datatypes ((us_rep10 0))
 (((mk___rep8 (us_split_fields17 us_split_fields16)))))
-(define-fun us_rep_7__projection ((a us_rep10)) us_split_fields16 (us_split_fields17
-                                                                  a))
+(define-fun us_rep___7__projection ((a us_rep10)) us_split_fields16 (us_split_fields17
+                                                                    a))
 
 (define-fun bool_eq13 ((a us_rep10)
   (b us_rep10)) Bool (ite (and
@@ -2456,13 +2453,13 @@
 
 (declare-datatypes ((us_split_fields__ref9 0))
 (((mk___split_fields__ref9 (us_split_fields__content9 us_split_fields18)))))
-(define-fun us_split_fields__ref_11__projection ((a us_split_fields__ref9)) us_split_fields18
+(define-fun us_split_fields__ref___11__projection ((a us_split_fields__ref9)) us_split_fields18
   (us_split_fields__content9 a))
 
 (declare-datatypes ((us_rep11 0))
 (((mk___rep9 (us_split_fields19 us_split_fields18)))))
-(define-fun us_rep_16__projection ((a us_rep11)) us_split_fields18 (us_split_fields19
-                                                                   a))
+(define-fun us_rep___16__projection ((a us_rep11)) us_split_fields18
+  (us_split_fields19 a))
 
 (define-fun bool_eq14 ((a us_rep11)
   (b us_rep11)) Bool (ite (and
@@ -2662,13 +2659,13 @@
 
 (declare-datatypes ((us_split_fields__ref10 0))
 (((mk___split_fields__ref10 (us_split_fields__content10 us_split_fields20)))))
-(define-fun us_split_fields__ref_12__projection ((a us_split_fields__ref10)) us_split_fields20
+(define-fun us_split_fields__ref___12__projection ((a us_split_fields__ref10)) us_split_fields20
   (us_split_fields__content10 a))
 
 (declare-datatypes ((us_rep12 0))
 (((mk___rep10 (us_split_fields21 us_split_fields20)))))
-(define-fun us_rep_17__projection ((a us_rep12)) us_split_fields20 (us_split_fields21
-                                                                   a))
+(define-fun us_rep___17__projection ((a us_rep12)) us_split_fields20
+  (us_split_fields21 a))
 
 (define-fun bool_eq16 ((a us_rep12)
   (b us_rep12)) Bool (ite (and
@@ -3031,12 +3028,12 @@
 (declare-datatypes ((us_split_discrs6 0))
 (((mk___split_discrs3
   (rec__algorithm__findbestvalley__gap_id_pair__opt option)))))
-(define-fun us_split_discrs_4__projection ((a us_split_discrs6)) option
+(define-fun us_split_discrs___4__projection ((a us_split_discrs6)) option
   (rec__algorithm__findbestvalley__gap_id_pair__opt a))
 
 (declare-datatypes ((us_split_discrs__ref3 0))
 (((mk___split_discrs__ref3 (us_split_discrs__content3 us_split_discrs6)))))
-(define-fun us_split_discrs__ref_4__projection ((a us_split_discrs__ref3)) us_split_discrs6
+(define-fun us_split_discrs__ref___4__projection ((a us_split_discrs__ref3)) us_split_discrs6
   (us_split_discrs__content3 a))
 
 (declare-datatypes ((us_split_fields22 0))
@@ -3050,19 +3047,20 @@
 
 (declare-datatypes ((us_split_fields__ref11 0))
 (((mk___split_fields__ref11 (us_split_fields__content11 us_split_fields22)))))
-(define-fun us_split_fields__ref_13__projection ((a us_split_fields__ref11)) us_split_fields22
+(define-fun us_split_fields__ref___13__projection ((a us_split_fields__ref11)) us_split_fields22
   (us_split_fields__content11 a))
 
 (declare-datatypes ((us_rep13 0))
 (((mk___rep11
   (us_split_discrs7 us_split_discrs6)(us_split_fields23 us_split_fields22)(attr__constrained2 Bool)))))
-(define-fun us_rep_18__projection ((a us_rep13)) us_split_discrs6 (us_split_discrs7
-                                                                  a))
+(define-fun us_rep___18__projection ((a us_rep13)) us_split_discrs6 (us_split_discrs7
+                                                                    a))
 
-(define-fun us_rep_19__projection ((a us_rep13)) us_split_fields22 (us_split_fields23
-                                                                   a))
+(define-fun us_rep___19__projection ((a us_rep13)) us_split_fields22
+  (us_split_fields23 a))
 
-(define-fun us_rep_20__projection ((a us_rep13)) Bool (attr__constrained2 a))
+(define-fun us_rep___20__projection ((a us_rep13)) Bool (attr__constrained2
+                                                        a))
 
 (define-fun algorithm__findbestvalley__gap_id_pair__rising__pred ((a us_rep13)) Bool (=
   (to_rep6
@@ -4513,7 +4511,7 @@
   (temp___do_toplevel_157 Bool)) Bool (=>
                                       (or (= temp___is_init_155 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_158) (fp.isNaN temp___expr_158)))))
+                                      (fp.isFinite32 temp___expr_158)))
 
 ;; null_angle__def_axiom
   (assert
@@ -4691,7 +4689,7 @@
 
 (declare-datatypes ((element_type__ref2 0))
 (((mk_element_type__ref2 (element_type__content2 element_type)))))
-(define-fun element_type__ref_3__projection ((a element_type__ref2)) element_type
+(define-fun element_type__ref___3__projection ((a element_type__ref2)) element_type
   (element_type__content2 a))
 
 (define-fun dynamic_invariant19 ((temp___expr_461 Int)
@@ -5607,7 +5605,7 @@
      (rec__algorithm__findbestvalley__gap_id_pair__opt
      candidate_valley_ids__split_discrs2)) 1)
   (and (= o35 (aldiff o33 o34))
-  (and (not (or (fp.isInfinite o35) (fp.isNaN o35)))
+  (and (fp.isFinite32 o35)
   (and (fp.lt (fp.neg (fp #b0 #b10000000 #b10010010000111111011011))
   o35) (fp.leq o35 (fp #b0 #b10000000 #b10010010000111111011011)))))))))
 
@@ -5679,7 +5677,7 @@
      (rec__algorithm__findbestvalley__gap_id_pair__opt
      candidate_valley_ids__split_discrs2)) 1)
   (and (= o30 (aldiff o28 o29))
-  (and (not (or (fp.isInfinite o30) (fp.isNaN o30)))
+  (and (fp.isFinite32 o30)
   (and (fp.lt (fp.neg (fp #b0 #b10000000 #b10010010000111111011011))
   o30) (fp.leq o30 (fp #b0 #b10000000 #b10010010000111111011011)))))))))
 
@@ -6193,7 +6191,7 @@
      best_valley_ids__split_discrs2)) 1)
   (=> (= (of_int1 0) true)
   (and (= o56 (aldiff o54 o55))
-  (and (not (or (fp.isInfinite o56) (fp.isNaN o56)))
+  (and (fp.isFinite32 o56)
   (and (fp.lt (fp.neg (fp #b0 #b10000000 #b10010010000111111011011))
   o56) (fp.leq o56 (fp #b0 #b10000000 #b10010010000111111011011)))))))))
 
@@ -6368,7 +6366,7 @@
      best_valley_ids__split_discrs2)) 1)
   (=> (= (of_int1 0) true)
   (and (= o68 (aldiff o66 o67))
-  (and (not (or (fp.isInfinite o68) (fp.isNaN o68)))
+  (and (fp.isFinite32 o68)
   (and (fp.lt (fp.neg (fp #b0 #b10000000 #b10010010000111111011011))
   o68) (fp.leq o68 (fp #b0 #b10000000 #b10010010000111111011011)))))))))
 
@@ -6479,7 +6477,7 @@
      (rec__algorithm__findbestvalley__gap_id_pair__opt
      best_valley_ids__split_discrs2)) 1)
   (and (= o81 (aldiff o79 o80))
-  (and (not (or (fp.isInfinite o81) (fp.isNaN o81)))
+  (and (fp.isFinite32 o81)
   (and (fp.lt (fp.neg (fp #b0 #b10000000 #b10010010000111111011011))
   o81) (fp.leq o81 (fp #b0 #b10000000 #b10010010000111111011011))))))))
 
@@ -6566,7 +6564,7 @@
      (rec__algorithm__findbestvalley__gap_id_pair__opt
      best_valley_ids__split_discrs2)) 1)
   (and (= o76 (aldiff o74 o75))
-  (and (not (or (fp.isInfinite o76) (fp.isNaN o76)))
+  (and (fp.isFinite32 o76)
   (and (fp.lt (fp.neg (fp #b0 #b10000000 #b10010010000111111011011))
   o76) (fp.leq o76 (fp #b0 #b10000000 #b10010010000111111011011))))))))
 

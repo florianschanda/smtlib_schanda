@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -126,7 +127,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-sort nb_type 0)
 
@@ -156,8 +157,7 @@
 
 (declare-sort d_time_type 0)
 
-(define-fun in_range3 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10001000 #b11110100000000000000000)))))
@@ -186,8 +186,7 @@
 
 (declare-sort delta_time_type 0)
 
-(define-fun in_range4 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000)))))
@@ -246,14 +245,13 @@
   (assert (in_range4 delta_time))
 
 ;; H
-  (assert (not (or (fp.isInfinite time) (fp.isNaN time))))
+  (assert (fp.isFinite32 time))
 
 (assert
 ;; WP_parameter_def
  ;; File "original_sample.ads", line 15, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.sub RNE (fp #b0 #b11111110 #b11111111111111111111111) (fp.mul RNE
-  (of_int RNE (+ nb_of_fp nb_of_pp)) delta_time))) (fp.isNaN (fp.sub RNE (fp #b0 #b11111110 #b11111111111111111111111) (fp.mul RNE
-  (of_int RNE (+ nb_of_fp nb_of_pp)) delta_time)))))))
+  (fp.isFinite32 (fp.sub RNE (fp #b0 #b11111110 #b11111111111111111111111) (fp.mul RNE
+  (of_int RNE (+ nb_of_fp nb_of_pp)) delta_time)))))
 (check-sat)
 (exit)

@@ -303,8 +303,8 @@
 
 (declare-datatypes ((int____ref 0))
 (((mk_int____ref (int____content int__)))))
-(define-fun int____ref_2__projection ((a int____ref)) int__ (int____content
-                                                            a))
+(define-fun int____ref___2__projection ((a int____ref)) int__ (int____content
+                                                              a))
 
 (define-fun dynamic_invariant2 ((temp___expr_338 Int)
   (temp___is_init_335 Bool) (temp___skip_constant_336 Bool)

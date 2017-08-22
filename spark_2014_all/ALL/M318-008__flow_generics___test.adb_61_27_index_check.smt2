@@ -511,7 +511,7 @@
 
 (declare-const o8 Int)
 
-(declare-const temp___406 Int)
+(declare-const temp___425 Int)
 
 (declare-const o9 Int)
 
@@ -529,7 +529,7 @@
 
 (declare-const o16 Int)
 
-(declare-const temp___407 Int)
+(declare-const temp___426 Int)
 
 (declare-const o17 integer)
 
@@ -630,14 +630,14 @@
   (assert (= o8 (+ o7 (to_rep c__first))))
 
 ;; H
-  (assert (and (= temp___406 o8) (in_range1 o8)))
+  (assert (and (= temp___425 o8) (in_range1 o8)))
 
 ;; H
   (assert
-  (and (<= (to_rep c__first) temp___406) (<= temp___406 (to_rep c__last))))
+  (and (<= (to_rep c__first) temp___425) (<= temp___425 (to_rep c__last))))
 
 ;; H
-  (assert (= o9 temp___406))
+  (assert (= o9 temp___425))
 
 ;; H
   (assert (= o10 (select c o9)))
@@ -674,11 +674,11 @@
   (assert (= o16 (+ o15 (to_rep c__first))))
 
 ;; H
-  (assert (and (= temp___407 o16) (in_range1 o16)))
+  (assert (and (= temp___426 o16) (in_range1 o16)))
 
 (assert
 ;; WP_parameter_def
  ;; File "test.adb", line 31, characters 0-0
-  (not (<= (to_rep c__first) temp___407)))
+  (not (<= (to_rep c__first) temp___426)))
 (check-sat)
 (exit)

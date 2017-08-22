@@ -227,19 +227,19 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)(attr__constrained Bool)))))
-(define-fun us_rep_3__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___3__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_4__projection ((a us_rep1)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___4__projection ((a us_rep1)) us_split_fields (us_split_fields1
+                                                                 a))
 
-(define-fun us_rep_5__projection ((a us_rep1)) Bool (attr__constrained a))
+(define-fun us_rep___5__projection ((a us_rep1)) Bool (attr__constrained a))
 
 (define-fun file_io__read_result__c__pred ((a us_rep1)) Bool (= (to_rep1
                                                                 (rec__file_io__read_result__status
@@ -500,11 +500,11 @@
   (and
   (= (to_rep1
      (rec__file_io__read_result__status current_read__split_discrs2)) 0)
-  (let ((temp___828 (to_rep
+  (let ((temp___916 (to_rep
                     (rec__file_io__read_result__c
                     current_read__split_fields2))))
-  (or (= temp___828 10)
-  (or (= temp___828 13) (or (= temp___828 32) (= temp___828 9))))))))
+  (or (= temp___916 10)
+  (or (= temp___916 13) (or (= temp___916 32) (= temp___916 9))))))))
 
 (assert
 ;; WP_parameter_def

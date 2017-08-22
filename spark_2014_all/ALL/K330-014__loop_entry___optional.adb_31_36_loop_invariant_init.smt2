@@ -644,8 +644,8 @@
 
 (declare-datatypes ((tTtaSP1__ref1 0))
 (((mk_tTtaSP1__ref1 (tTtaSP1__content1 tTtaSP11)))))
-(define-fun tTtaSP1__ref_2__projection ((a tTtaSP1__ref1)) tTtaSP11 (tTtaSP1__content1
-                                                                    a))
+(define-fun tTtaSP1__ref___2__projection ((a tTtaSP1__ref1)) tTtaSP11
+  (tTtaSP1__content1 a))
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 

@@ -139,17 +139,17 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)))))
-(define-fun us_rep_2__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                a))
 
-(define-fun us_rep_3__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___3__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (declare-const value__size Int)
 
@@ -475,7 +475,7 @@
 
 (declare-datatypes ((element_type__ref 0))
 (((mk_element_type__ref (element_type__content us_rep2)))))
-(define-fun element_type__ref_2__projection ((a element_type__ref)) us_rep2
+(define-fun element_type__ref___2__projection ((a element_type__ref)) us_rep2
   (element_type__content a))
 
 (declare-fun get (us_rep1 Int) us_rep2)
@@ -532,7 +532,7 @@
 
 (declare-datatypes ((extended_index__ref1 0))
 (((mk_extended_index__ref1 (extended_index__content1 extended_index1)))))
-(define-fun extended_index__ref_2__projection ((a extended_index__ref1)) extended_index1
+(define-fun extended_index__ref___2__projection ((a extended_index__ref1)) extended_index1
   (extended_index__content1 a))
 
 (define-fun dynamic_invariant5 ((temp___expr_258 Int)

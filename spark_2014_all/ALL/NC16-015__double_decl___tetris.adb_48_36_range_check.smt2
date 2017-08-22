@@ -200,7 +200,7 @@
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields
   (rec__tetris__piece__kind piece_type)(rec__tetris__piece__y y_coord)(rec__tetris__piece__x x_coord)))))
-(define-fun us_split_fields_Kind2__projection ((a us_split_fields)) piece_type
+(define-fun us_split_fields_Kind__2__projection ((a us_split_fields)) piece_type
   (rec__tetris__piece__kind a))
 
 (define-fun us_split_fields_Y__projection ((a us_split_fields)) y_coord
@@ -211,13 +211,13 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and

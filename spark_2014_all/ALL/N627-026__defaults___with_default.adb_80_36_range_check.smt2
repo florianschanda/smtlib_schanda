@@ -81,7 +81,7 @@
 (declare-datatypes ((scalar_with_default__ref 0))
 (((mk_scalar_with_default__ref
   (scalar_with_default__content scalar_with_default)))))
-(define-fun scalar_with_default__ref_5__projection ((a scalar_with_default__ref)) scalar_with_default
+(define-fun scalar_with_default__ref___5__projection ((a scalar_with_default__ref)) scalar_with_default
   (scalar_with_default__content a))
 
 (declare-sort integer 0)
@@ -139,7 +139,7 @@
 
 (declare-datatypes ((scalar_no_default__ref 0))
 (((mk_scalar_no_default__ref (scalar_no_default__content integer)))))
-(define-fun scalar_no_default__ref_4__projection ((a scalar_no_default__ref)) integer
+(define-fun scalar_no_default__ref___4__projection ((a scalar_no_default__ref)) integer
   (scalar_no_default__content a))
 
 (declare-fun to_rep1 (scalar_with_default) Int)

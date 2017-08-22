@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -171,14 +172,13 @@
 ;; range_axiom
   (assert
   (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep1 x)) (fp.isNaN (to_rep1 x)))) :pattern (
-  (to_rep1 x)) )))
+  (! (fp.isFinite32 (to_rep1 x)) :pattern ((to_rep1 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1 (of_rep1 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
+                                                                  (of_rep1 x))) )))
 
 (declare-datatypes ((us_split_discrs 0))
 (((mk___split_discrs (rec__depends_legal_2__dis_rec__d Bool)))))
@@ -210,10 +210,10 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_discrs (us_split_discrs1
                                                              a))
 
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
-(define-fun us_rep_3__projection ((a us_rep)) Bool (attr__constrained a))
+(define-fun us_rep___3__projection ((a us_rep)) Bool (attr__constrained a))
 
 (define-fun depends_legal_2__dis_rec__a__pred ((a us_rep)) Bool (= (to_int2
                                                                    (rec__depends_legal_2__dis_rec__d
@@ -700,7 +700,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 ;; H
   (assert (= rec1__attr__constrained false))

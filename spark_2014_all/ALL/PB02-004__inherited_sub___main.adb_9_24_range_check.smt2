@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -213,14 +214,13 @@
 ;; range_axiom
   (assert
   (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep2 x)) (fp.isNaN (to_rep2 x)))) :pattern (
-  (to_rep2 x)) )))
+  (! (fp.isFinite32 (to_rep2 x)) :pattern ((to_rep2 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2 (of_rep2 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
+                                                                  (of_rep2 x))) )))
 
 (declare-sort sub_enum 0)
 
@@ -287,8 +287,8 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_discrs (us_split_discrs1
                                                              a))
 
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun rec__my_rec__x__pred ((a us_rep)) Bool (= (to_rep3
                                                       (rec__rec__my_rec__e
@@ -467,12 +467,12 @@
 
 (declare-datatypes ((us_split_discrs2 0))
 (((mk___split_discrs1 (rec__rec__sub_rec__z enum)))))
-(define-fun us_split_discrs_2__projection ((a us_split_discrs2)) enum
+(define-fun us_split_discrs___2__projection ((a us_split_discrs2)) enum
   (rec__rec__sub_rec__z a))
 
 (declare-datatypes ((us_split_discrs__ref1 0))
 (((mk___split_discrs__ref1 (us_split_discrs__content1 us_split_discrs2)))))
-(define-fun us_split_discrs__ref_2__projection ((a us_split_discrs__ref1)) us_split_discrs2
+(define-fun us_split_discrs__ref___2__projection ((a us_split_discrs__ref1)) us_split_discrs2
   (us_split_discrs__content1 a))
 
 (declare-datatypes ((us_split_fields2 0))
@@ -482,17 +482,17 @@
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1
   (us_split_discrs3 us_split_discrs2)(us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_3__projection ((a us_rep1)) us_split_discrs2 (us_split_discrs3
-                                                                a))
+(define-fun us_rep___3__projection ((a us_rep1)) us_split_discrs2 (us_split_discrs3
+                                                                  a))
 
-(define-fun us_rep_4__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___4__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (define-fun bool_eq1 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -646,22 +646,22 @@
 
 (declare-datatypes ((us_split_fields4 0))
 (((mk___split_fields2 (rec__rec__sub_rec__plop1 us_rep)))))
-(define-fun us_split_fields_Plop3__projection ((a1 us_split_fields4)) us_rep
+(define-fun us_split_fields_Plop__3__projection ((a1 us_split_fields4)) us_rep
   (rec__rec__sub_rec__plop1 a1))
 
 (declare-datatypes ((us_split_fields__ref2 0))
 (((mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_6__projection ((a1 us_split_fields__ref2)) us_split_fields4
+(define-fun us_split_fields__ref___6__projection ((a1 us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a1))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep2
   (us_split_discrs4 us_split_discrs2)(us_split_fields5 us_split_fields4)))))
-(define-fun us_rep_11__projection ((a1 us_rep2)) us_split_discrs2 (us_split_discrs4
-                                                                  a1))
+(define-fun us_rep___11__projection ((a1 us_rep2)) us_split_discrs2 (us_split_discrs4
+                                                                    a1))
 
-(define-fun us_rep_12__projection ((a1 us_rep2)) us_split_fields4 (us_split_fields5
-                                                                  a1))
+(define-fun us_rep___12__projection ((a1 us_rep2)) us_split_fields4 (us_split_fields5
+                                                                    a1))
 
 (define-fun to_base ((a1 us_rep2)) us_rep1 (mk___rep1 (us_split_discrs4 a1)
                                            (mk___split_fields1
@@ -785,7 +785,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (define-fun dynamic_invariant4 ((temp___expr_144 Int)
   (temp___is_init_141 Bool) (temp___skip_constant_142 Bool)

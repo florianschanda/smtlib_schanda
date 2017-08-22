@@ -8,6 +8,8 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
+(define-fun fp.isFinite64 ((x Float64)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -167,7 +169,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const left Float32)
 
@@ -199,7 +201,7 @@
   (temp___do_toplevel_56 Bool)) Bool (=>
                                      (or (= temp___is_init_54 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
+                                     (fp.isFinite64 temp___expr_57)))
 
 (declare-fun atan2__2 (Float64 Float64) Float64)
 
@@ -218,16 +220,16 @@
 (declare-const o1 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite left) (fp.isNaN left))))
+  (assert (fp.isFinite32 left))
 
 ;; H
-  (assert (not (or (fp.isInfinite right) (fp.isNaN right))))
+  (assert (fp.isFinite32 right))
 
 ;; H
   (assert
   (and
   (= o (atan2__2 ((_ to_fp 11 53) RNE left) ((_ to_fp 11 53) RNE right)))
-  (not (or (fp.isInfinite o) (fp.isNaN o)))))
+  (fp.isFinite64 o)))
 
 ;; H
   (assert (= o1 ((_ to_fp 8 24) RNE o)))
@@ -235,6 +237,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (not (fp.isFinite32 o1)))
 (check-sat)
 (exit)

@@ -570,19 +570,19 @@
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1
   (us_split_discrs1 us_split_discrs)(us_split_fields3 us_split_fields2)(attr__constrained Bool)))))
-(define-fun us_rep_2__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___2__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_3__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___3__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
-(define-fun us_rep_4__projection ((a us_rep1)) Bool (attr__constrained a))
+(define-fun us_rep___4__projection ((a us_rep1)) Bool (attr__constrained a))
 
 (define-fun tokens__token__val__pred ((a us_rep1)) Bool (= (to_rep4
                                                            (rec__tokens__token__kind

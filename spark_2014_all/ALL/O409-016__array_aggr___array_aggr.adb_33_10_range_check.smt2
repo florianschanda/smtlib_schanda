@@ -101,7 +101,7 @@
 
 (declare-datatypes ((my_positive__ref 0))
 (((mk_my_positive__ref (my_positive__content integer)))))
-(define-fun my_positive__ref_2__projection ((a my_positive__ref)) integer
+(define-fun my_positive__ref___2__projection ((a my_positive__ref)) integer
   (my_positive__content a))
 
 (define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)

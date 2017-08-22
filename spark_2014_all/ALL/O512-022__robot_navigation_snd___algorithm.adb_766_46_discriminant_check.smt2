@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -514,7 +515,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-fun to_rep2 (float) Float32)
 
@@ -528,19 +529,17 @@
 ;; range_axiom
   (assert
   (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep2 x)) (fp.isNaN (to_rep2 x)))) :pattern (
-  (to_rep2 x)) )))
+  (! (fp.isFinite32 (to_rep2 x)) :pattern ((to_rep2 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2 (of_rep2 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
+                                                                  (of_rep2 x))) )))
 
 (declare-sort positive_float 0)
 
-(define-fun in_range6 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range6 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -589,8 +588,7 @@
 
 (declare-sort nonnegative_float 0)
 
-(define-fun in_range7 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range7 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -680,8 +678,7 @@
 
 (declare-sort normalized2pi 0)
 
-(define-fun in_range8 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range8 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
@@ -851,13 +848,13 @@
   (rec__spaces__positions__position__x float)(rec__spaces__positions__position__y float)))))
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (define-fun bool_eq3 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -969,13 +966,13 @@
 
 (declare-datatypes ((us_split_fields__ref2 0))
 (((mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref2)) us_split_fields4
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep2 (us_split_fields5 us_split_fields4)))))
-(define-fun us_rep_3__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
-                                                                a))
+(define-fun us_rep___3__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
+                                                                  a))
 
 (define-fun bool_eq4 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
@@ -1138,14 +1135,13 @@
 ;; range_axiom
   (assert
   (forall ((x unbounded_float))
-  (! (not (or (fp.isInfinite (to_rep7 x)) (fp.isNaN (to_rep7 x)))) :pattern (
-  (to_rep7 x)) )))
+  (! (fp.isFinite32 (to_rep7 x)) :pattern ((to_rep7 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep7 (of_rep7 x)) x)) :pattern ((to_rep7 (of_rep7 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep7 (of_rep7 x)) x)) :pattern ((to_rep7
+                                                                  (of_rep7 x))) )))
 
 (declare-datatypes ((map__ref1 0))
 (((mk_map__ref1 (map__content1 (Array Int nonnegative_float))))))
@@ -1314,19 +1310,19 @@
   (rec__robot_iface__speed_option__modulus float)(rec__robot_iface__speed_option__angle float)))))
 (declare-datatypes ((us_split_fields__ref3 0))
 (((mk___split_fields__ref3 (us_split_fields__content3 us_split_fields6)))))
-(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref3)) us_split_fields6
+(define-fun us_split_fields__ref___4__projection ((a us_split_fields__ref3)) us_split_fields6
   (us_split_fields__content3 a))
 
 (declare-datatypes ((us_rep3 0))
 (((mk___rep3
   (us_split_discrs1 us_split_discrs)(us_split_fields7 us_split_fields6)(attr__constrained Bool)))))
-(define-fun us_rep_4__projection ((a us_rep3)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___4__projection ((a us_rep3)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_5__projection ((a us_rep3)) us_split_fields6 (us_split_fields7
-                                                                a))
+(define-fun us_rep___5__projection ((a us_rep3)) us_split_fields6 (us_split_fields7
+                                                                  a))
 
-(define-fun us_rep_6__projection ((a us_rep3)) Bool (attr__constrained a))
+(define-fun us_rep___6__projection ((a us_rep3)) Bool (attr__constrained a))
 
 (define-fun robot_iface__speed_option__modulus__pred ((a us_rep3)) Bool (=
   (to_rep8 (rec__robot_iface__speed_option__opt (us_split_discrs1 a))) 1))
@@ -1450,13 +1446,13 @@
 
 (declare-datatypes ((us_split_fields__ref4 0))
 (((mk___split_fields__ref4 (us_split_fields__content4 us_split_fields8)))))
-(define-fun us_split_fields__ref_5__projection ((a us_split_fields__ref4)) us_split_fields8
+(define-fun us_split_fields__ref___5__projection ((a us_split_fields__ref4)) us_split_fields8
   (us_split_fields__content4 a))
 
 (declare-datatypes ((us_rep4 0))
 (((mk___rep4 (us_split_fields9 us_split_fields8)))))
-(define-fun us_rep_7__projection ((a us_rep4)) us_split_fields8 (us_split_fields9
-                                                                a))
+(define-fun us_rep___7__projection ((a us_rep4)) us_split_fields8 (us_split_fields9
+                                                                  a))
 
 (define-fun bool_eq7 ((a us_rep4)
   (b us_rep4)) Bool (ite (and
@@ -1991,13 +1987,13 @@
 
 (declare-datatypes ((us_split_fields__ref5 0))
 (((mk___split_fields__ref5 (us_split_fields__content5 us_split_fields10)))))
-(define-fun us_split_fields__ref_6__projection ((a us_split_fields__ref5)) us_split_fields10
+(define-fun us_split_fields__ref___6__projection ((a us_split_fields__ref5)) us_split_fields10
   (us_split_fields__content5 a))
 
 (declare-datatypes ((us_rep5 0))
 (((mk___rep5 (us_split_fields11 us_split_fields10)))))
-(define-fun us_rep_8__projection ((a us_rep5)) us_split_fields10 (us_split_fields11
-                                                                 a))
+(define-fun us_rep___8__projection ((a us_rep5)) us_split_fields10 (us_split_fields11
+                                                                   a))
 
 (define-fun bool_eq8 ((a us_rep5)
   (b us_rep5)) Bool (ite (and
@@ -2098,13 +2094,13 @@
 
 (declare-datatypes ((us_split_fields__ref6 0))
 (((mk___split_fields__ref6 (us_split_fields__content6 us_split_fields12)))))
-(define-fun us_split_fields__ref_7__projection ((a us_split_fields__ref6)) us_split_fields12
+(define-fun us_split_fields__ref___7__projection ((a us_split_fields__ref6)) us_split_fields12
   (us_split_fields__content6 a))
 
 (declare-datatypes ((us_rep6 0))
 (((mk___rep6 (us_split_fields13 us_split_fields12)))))
-(define-fun us_rep_9__projection ((a us_rep6)) us_split_fields12 (us_split_fields13
-                                                                 a))
+(define-fun us_rep___9__projection ((a us_rep6)) us_split_fields12 (us_split_fields13
+                                                                   a))
 
 (define-fun bool_eq9 ((a us_rep6)
   (b us_rep6)) Bool (ite (and
@@ -2197,8 +2193,8 @@
 
 (declare-datatypes ((option__ref1 0))
 (((mk_option__ref1 (option__content1 option1)))))
-(define-fun option__ref_2__projection ((a option__ref1)) option1 (option__content1
-                                                                 a))
+(define-fun option__ref___2__projection ((a option__ref1)) option1 (option__content1
+                                                                   a))
 
 (declare-fun to_rep10 (option1) Int)
 
@@ -2222,12 +2218,12 @@
 
 (declare-datatypes ((us_split_discrs2 0))
 (((mk___split_discrs1 (rec__algorithm__valley_option__opt option1)))))
-(define-fun us_split_discrs_2__projection ((a us_split_discrs2)) option1
+(define-fun us_split_discrs___2__projection ((a us_split_discrs2)) option1
   (rec__algorithm__valley_option__opt a))
 
 (declare-datatypes ((us_split_discrs__ref1 0))
 (((mk___split_discrs__ref1 (us_split_discrs__content1 us_split_discrs2)))))
-(define-fun us_split_discrs__ref_2__projection ((a us_split_discrs__ref1)) us_split_discrs2
+(define-fun us_split_discrs__ref___2__projection ((a us_split_discrs__ref1)) us_split_discrs2
   (us_split_discrs__content1 a))
 
 (declare-datatypes ((us_split_fields14 0))
@@ -2237,19 +2233,19 @@
 
 (declare-datatypes ((us_split_fields__ref7 0))
 (((mk___split_fields__ref7 (us_split_fields__content7 us_split_fields14)))))
-(define-fun us_split_fields__ref_8__projection ((a us_split_fields__ref7)) us_split_fields14
+(define-fun us_split_fields__ref___8__projection ((a us_split_fields__ref7)) us_split_fields14
   (us_split_fields__content7 a))
 
 (declare-datatypes ((us_rep7 0))
 (((mk___rep7
   (us_split_discrs3 us_split_discrs2)(us_split_fields15 us_split_fields14)(attr__constrained1 Bool)))))
-(define-fun us_rep_10__projection ((a us_rep7)) us_split_discrs2 (us_split_discrs3
-                                                                 a))
+(define-fun us_rep___10__projection ((a us_rep7)) us_split_discrs2 (us_split_discrs3
+                                                                   a))
 
-(define-fun us_rep_11__projection ((a us_rep7)) us_split_fields14 (us_split_fields15
-                                                                  a))
+(define-fun us_rep___11__projection ((a us_rep7)) us_split_fields14 (us_split_fields15
+                                                                    a))
 
-(define-fun us_rep_12__projection ((a us_rep7)) Bool (attr__constrained1 a))
+(define-fun us_rep___12__projection ((a us_rep7)) Bool (attr__constrained1 a))
 
 (define-fun algorithm__valley_option__value__pred ((a us_rep7)) Bool (=
   (to_rep10 (rec__algorithm__valley_option__opt (us_split_discrs3 a))) 1))
@@ -2385,12 +2381,12 @@
 (declare-datatypes ((us_split_discrs4 0))
 (((mk___split_discrs2
   (rec__algorithm__gap_vectors__list__capacity count_type)))))
-(define-fun us_split_discrs_3__projection ((a us_split_discrs4)) count_type
+(define-fun us_split_discrs___3__projection ((a us_split_discrs4)) count_type
   (rec__algorithm__gap_vectors__list__capacity a))
 
 (declare-datatypes ((us_split_discrs__ref2 0))
 (((mk___split_discrs__ref2 (us_split_discrs__content2 us_split_discrs4)))))
-(define-fun us_split_discrs__ref_3__projection ((a us_split_discrs__ref2)) us_split_discrs4
+(define-fun us_split_discrs__ref___3__projection ((a us_split_discrs__ref2)) us_split_discrs4
   (us_split_discrs__content2 a))
 
 (declare-datatypes ((us_split_fields16 0))
@@ -2400,17 +2396,17 @@
 
 (declare-datatypes ((us_split_fields__ref8 0))
 (((mk___split_fields__ref8 (us_split_fields__content8 us_split_fields16)))))
-(define-fun us_split_fields__ref_9__projection ((a us_split_fields__ref8)) us_split_fields16
+(define-fun us_split_fields__ref___9__projection ((a us_split_fields__ref8)) us_split_fields16
   (us_split_fields__content8 a))
 
 (declare-datatypes ((us_rep8 0))
 (((mk___rep8
   (us_split_discrs5 us_split_discrs4)(us_split_fields17 us_split_fields16)))))
-(define-fun us_rep_13__projection ((a us_rep8)) us_split_discrs4 (us_split_discrs5
-                                                                 a))
+(define-fun us_rep___13__projection ((a us_rep8)) us_split_discrs4 (us_split_discrs5
+                                                                   a))
 
-(define-fun us_rep_14__projection ((a us_rep8)) us_split_fields16 (us_split_fields17
-                                                                  a))
+(define-fun us_rep___14__projection ((a us_rep8)) us_split_fields16 (us_split_fields17
+                                                                    a))
 
 (define-fun bool_eq11 ((a us_rep8)
   (b us_rep8)) Bool (ite (and
@@ -2518,8 +2514,8 @@
 
 (declare-datatypes ((list__ref1 0))
 (((mk_list__ref1 (list__content1 us_rep8)))))
-(define-fun list__ref_2__projection ((a list__ref1)) us_rep8 (list__content1
-                                                             a))
+(define-fun list__ref___2__projection ((a list__ref1)) us_rep8 (list__content1
+                                                               a))
 
 (declare-datatypes ((us_split_fields18 0))
 (((mk___split_fields9
@@ -2529,13 +2525,13 @@
 
 (declare-datatypes ((us_split_fields__ref9 0))
 (((mk___split_fields__ref9 (us_split_fields__content9 us_split_fields18)))))
-(define-fun us_split_fields__ref_11__projection ((a us_split_fields__ref9)) us_split_fields18
+(define-fun us_split_fields__ref___11__projection ((a us_split_fields__ref9)) us_split_fields18
   (us_split_fields__content9 a))
 
 (declare-datatypes ((us_rep9 0))
 (((mk___rep9 (us_split_fields19 us_split_fields18)))))
-(define-fun us_rep_16__projection ((a us_rep9)) us_split_fields18 (us_split_fields19
-                                                                  a))
+(define-fun us_rep___16__projection ((a us_rep9)) us_split_fields18 (us_split_fields19
+                                                                    a))
 
 (define-fun bool_eq12 ((a us_rep9)
   (b us_rep9)) Bool (ite (and
@@ -2735,13 +2731,13 @@
 
 (declare-datatypes ((us_split_fields__ref10 0))
 (((mk___split_fields__ref10 (us_split_fields__content10 us_split_fields20)))))
-(define-fun us_split_fields__ref_12__projection ((a us_split_fields__ref10)) us_split_fields20
+(define-fun us_split_fields__ref___12__projection ((a us_split_fields__ref10)) us_split_fields20
   (us_split_fields__content10 a))
 
 (declare-datatypes ((us_rep10 0))
 (((mk___rep10 (us_split_fields21 us_split_fields20)))))
-(define-fun us_rep_17__projection ((a us_rep10)) us_split_fields20 (us_split_fields21
-                                                                   a))
+(define-fun us_rep___17__projection ((a us_rep10)) us_split_fields20
+  (us_split_fields21 a))
 
 (define-fun bool_eq14 ((a us_rep10)
   (b us_rep10)) Bool (ite (and
@@ -4094,7 +4090,7 @@
   (temp___do_toplevel_157 Bool)) Bool (=>
                                       (or (= temp___is_init_155 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_158) (fp.isNaN temp___expr_158)))))
+                                      (fp.isFinite32 temp___expr_158)))
 
 ;; null_angle__def_axiom
   (assert
@@ -4260,13 +4256,13 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite drivespeed) (fp.isNaN drivespeed)))))
+  (fp.isFinite32 drivespeed)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite driveturnrate) (fp.isNaN driveturnrate)))))
+  (fp.isFinite32 driveturnrate)))
 
 ;; H
   (assert
@@ -4310,7 +4306,7 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite theta) (fp.isNaN theta)))))
+  (fp.isFinite32 theta)))
 
 ;; H
   (assert
@@ -4356,7 +4352,7 @@
 ;; H
   (assert
   (and (= o4 (norm (mk___rep1 disttogoal__split_fields)))
-  (and (not (or (fp.isInfinite o4) (fp.isNaN o4)))
+  (and (fp.isFinite32 o4)
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o4)
   (=> (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) o4)
   (not (= (oeq (mk___rep1 disttogoal__split_fields) zero_position) true)))))))
@@ -4374,29 +4370,18 @@
   (us_split_fields9
   (rec__algorithm__controller__robot
   (let ((subject this__split_fields)) this__split_fields1)))))))
-  (not (or (fp.isInfinite (fp.sub RNE (to_rep3
-                                      (rec__robot_iface__proxy__max_range
-                                      (us_split_fields9
-                                      (rec__algorithm__controller__robot
-                                      (let ((subject this__split_fields))
-                                      this__split_fields1))))) (to_rep3
-                                                               (rec__robot_iface__proxy__robot_radius
-                                                               (us_split_fields9
-                                                               (rec__algorithm__controller__robot
-                                                               (let ((subject
-                                                               this__split_fields))
-                                                               this__split_fields1))))))) (fp.isNaN (fp.sub RNE
-  (to_rep3
-  (rec__robot_iface__proxy__max_range
-  (us_split_fields9
-  (rec__algorithm__controller__robot
-  (let ((subject this__split_fields)) this__split_fields1))))) (to_rep3
-                                                               (rec__robot_iface__proxy__robot_radius
-                                                               (us_split_fields9
-                                                               (rec__algorithm__controller__robot
-                                                               (let ((subject
-                                                               this__split_fields))
-                                                               this__split_fields1)))))))))))
+  (fp.isFinite32 (fp.sub RNE (to_rep3
+                             (rec__robot_iface__proxy__max_range
+                             (us_split_fields9
+                             (rec__algorithm__controller__robot
+                             (let ((subject this__split_fields))
+                             this__split_fields1))))) (to_rep3
+                                                      (rec__robot_iface__proxy__robot_radius
+                                                      (us_split_fields9
+                                                      (rec__algorithm__controller__robot
+                                                      (let ((subject
+                                                      this__split_fields))
+                                                      this__split_fields1)))))))))
 
 ;; H
   (assert (= o6 (fp.min o5 o4)))
@@ -4440,29 +4425,18 @@
   (us_split_fields9
   (rec__algorithm__controller__robot
   (let ((subject this__split_fields)) this__split_fields1)))))))
-  (not (or (fp.isInfinite (fp.add RNE (to_rep3
-                                      (rec__robot_iface__proxy__obstacle_avoid_dist
-                                      (us_split_fields9
-                                      (rec__algorithm__controller__robot
-                                      (let ((subject this__split_fields))
-                                      this__split_fields1))))) (to_rep3
-                                                               (rec__robot_iface__proxy__robot_radius
-                                                               (us_split_fields9
-                                                               (rec__algorithm__controller__robot
-                                                               (let ((subject
-                                                               this__split_fields))
-                                                               this__split_fields1))))))) (fp.isNaN (fp.add RNE
-  (to_rep3
-  (rec__robot_iface__proxy__obstacle_avoid_dist
-  (us_split_fields9
-  (rec__algorithm__controller__robot
-  (let ((subject this__split_fields)) this__split_fields1))))) (to_rep3
-                                                               (rec__robot_iface__proxy__robot_radius
-                                                               (us_split_fields9
-                                                               (rec__algorithm__controller__robot
-                                                               (let ((subject
-                                                               this__split_fields))
-                                                               this__split_fields1)))))))))))
+  (fp.isFinite32 (fp.add RNE (to_rep3
+                             (rec__robot_iface__proxy__obstacle_avoid_dist
+                             (us_split_fields9
+                             (rec__algorithm__controller__robot
+                             (let ((subject this__split_fields))
+                             this__split_fields1))))) (to_rep3
+                                                      (rec__robot_iface__proxy__robot_radius
+                                                      (us_split_fields9
+                                                      (rec__algorithm__controller__robot
+                                                      (let ((subject
+                                                      this__split_fields))
+                                                      this__split_fields1)))))))))
 
 ;; H
   (assert
@@ -4481,7 +4455,7 @@
         (rec__algorithm__valley_option__value
         (let ((subject pbestvalley__split_fields))
         pbestvalley__split_fields1))))))))))
-  (and (not (or (fp.isInfinite o8) (fp.isNaN o8)))
+  (and (fp.isFinite32 o8)
   (=>
   (and
   (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) (fp.max (to_rep3
@@ -4542,9 +4516,7 @@
           (let ((subject this__split_fields)) this__split_fields1))))))))
 
 ;; H
-  (assert
-  (and (= o9 (dcast safetydeltaangle))
-  (not (or (fp.isInfinite o9) (fp.isNaN o9)))))
+  (assert (and (= o9 (dcast safetydeltaangle)) (fp.isFinite32 o9)))
 
 ;; H
   (assert
@@ -4559,7 +4531,7 @@
                      pbestvalley__split_fields1)))))))) o9)))
 
 ;; H
-  (assert (and (= o11 o10) (not (or (fp.isInfinite o10) (fp.isNaN o10)))))
+  (assert (and (= o11 o10) (fp.isFinite32 o10)))
 
 ;; H
   (assert (= o12 (create__2 o11)))

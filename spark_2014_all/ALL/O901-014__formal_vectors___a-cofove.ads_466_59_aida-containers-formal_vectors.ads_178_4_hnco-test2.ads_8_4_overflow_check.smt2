@@ -96,7 +96,7 @@
 
 (declare-datatypes ((capacity_range__ref 0))
 (((mk_capacity_range__ref (capacity_range__content capacity_range)))))
-(define-fun capacity_range__ref_2__projection ((a capacity_range__ref)) capacity_range
+(define-fun capacity_range__ref___2__projection ((a capacity_range__ref)) capacity_range
   (capacity_range__content a))
 
 (declare-sort us_main_type 0)
@@ -131,8 +131,8 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_discrs (us_split_discrs1
                                                              a))
 
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (declare-const value__size Int)
 
@@ -199,7 +199,7 @@
 
 (declare-datatypes ((element_type__ref 0))
 (((mk_element_type__ref (element_type__content element_type)))))
-(define-fun element_type__ref_2__projection ((a element_type__ref)) element_type
+(define-fun element_type__ref___2__projection ((a element_type__ref)) element_type
   (element_type__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_371 Int)

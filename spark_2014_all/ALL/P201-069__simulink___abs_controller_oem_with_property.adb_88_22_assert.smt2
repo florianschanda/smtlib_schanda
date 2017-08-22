@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite64 ((x Float64)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -115,7 +116,7 @@
   (temp___do_toplevel_56 Bool)) Bool (=>
                                      (or (= temp___is_init_54 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
+                                     (fp.isFinite64 temp___expr_57)))
 
 (declare-fun boolean_to_long_float (Bool) Float64)
 
@@ -191,16 +192,16 @@
 (declare-const sum_out11 Float64)
 
 ;; H
-  (assert (not (or (fp.isInfinite wheel_speed) (fp.isNaN wheel_speed))))
+  (assert (fp.isFinite64 wheel_speed))
 
 ;; H
-  (assert (not (or (fp.isInfinite vehicle_speed) (fp.isNaN vehicle_speed))))
+  (assert (fp.isFinite64 vehicle_speed))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite apply_brakes) (fp.isNaN apply_brakes)))))
+  (fp.isFinite64 apply_brakes)))
 
 ;; H
   (assert
@@ -211,25 +212,25 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite epsifzero_out1) (fp.isNaN epsifzero_out1)))))
+  (fp.isFinite64 epsifzero_out1)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite diff_out1) (fp.isNaN diff_out1)))))
+  (fp.isFinite64 diff_out1)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite difference_out1) (fp.isNaN difference_out1)))))
+  (fp.isFinite64 difference_out1)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite sum_out1) (fp.isNaN sum_out1)))))
+  (fp.isFinite64 sum_out1)))
 
 ;; H
   (assert
@@ -272,8 +273,7 @@
 ;; H
   (assert
   (and (= o (fp.div RNE wheel_speed epsifzero_out11))
-  (not (or (fp.isInfinite (fp.div RNE wheel_speed epsifzero_out11)) (fp.isNaN (fp.div RNE
-  wheel_speed epsifzero_out11))))))
+  (fp.isFinite64 (fp.div RNE wheel_speed epsifzero_out11))))
 
 ;; H
   (assert
@@ -281,7 +281,7 @@
   o)))
 
 ;; H
-  (assert (and (= o2 o1) (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (assert (and (= o2 o1) (fp.isFinite64 o1)))
 
 ;; H
   (assert (= result2 diff_out1))
@@ -294,9 +294,8 @@
   (and
   (= o3 (fp.sub RNE (fp #b0 #b01111111100 #b1001100110011001100110011001100110011001100110011010)
   diff_out11))
-  (not (or (fp.isInfinite (fp.sub RNE (fp #b0 #b01111111100 #b1001100110011001100110011001100110011001100110011010)
-  diff_out11)) (fp.isNaN (fp.sub RNE (fp #b0 #b01111111100 #b1001100110011001100110011001100110011001100110011010)
-  diff_out11))))))
+  (fp.isFinite64 (fp.sub RNE (fp #b0 #b01111111100 #b1001100110011001100110011001100110011001100110011010)
+  diff_out11))))
 
 ;; H
   (assert (= result3 difference_out1))
@@ -310,7 +309,7 @@
   (= o4 (boolean_to_long_float
         (ite (fp.lt difference_out11 (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))
         true false)))
-  (not (or (fp.isInfinite o4) (fp.isNaN o4)))))
+  (fp.isFinite64 o4)))
 
 ;; H
   (assert
@@ -318,13 +317,13 @@
   (= o5 (boolean_to_long_float
         (ite (fp.lt (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
         difference_out11) true false)))
-  (not (or (fp.isInfinite o5) (fp.isNaN o5)))))
+  (fp.isFinite64 o5)))
 
 ;; H
   (assert (= o6 (fp.sub RNE o5 o4)))
 
 ;; H
-  (assert (and (= o7 o6) (not (or (fp.isInfinite o6) (fp.isNaN o6)))))
+  (assert (and (= o7 o6) (fp.isFinite64 o6)))
 
 ;; H
   (assert (= result4 sum_out1))

@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -212,14 +213,13 @@
 ;; range_axiom
   (assert
   (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep2 x)) (fp.isNaN (to_rep2 x)))) :pattern (
-  (to_rep2 x)) )))
+  (! (fp.isFinite32 (to_rep2 x)) :pattern ((to_rep2 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2 (of_rep2 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
+                                                                  (of_rep2 x))) )))
 
 (declare-datatypes ((us_split_discrs 0))
 (((mk___split_discrs (rec__tagged_discr__t__discr e)))))
@@ -254,10 +254,10 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_discrs (us_split_discrs1
                                                              a))
 
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
-(define-fun us_rep_3__projection ((a us_rep)) Int (attr__tag a))
+(define-fun us_rep___3__projection ((a us_rep)) Int (attr__tag a))
 
 (define-fun tagged_discr__t__x__pred ((a us_rep)) Bool (or
                                                        (= (to_rep1
@@ -400,30 +400,30 @@
 (define-fun us_split_fields_W__projection ((a us_split_fields2)) integer
   (rec__tagged_discr__u1__w a))
 
-(define-fun us_split_fields_Z2__projection ((a us_split_fields2)) Bool
+(define-fun us_split_fields_Z__2__projection ((a us_split_fields2)) Bool
   (rec__tagged_discr__t__z1 a))
 
-(define-fun us_split_fields_X2__projection ((a us_split_fields2)) integer
+(define-fun us_split_fields_X__2__projection ((a us_split_fields2)) integer
   (rec__tagged_discr__t__x1 a))
 
-(define-fun us_split_fields_2__projection ((a us_split_fields2)) us_private
+(define-fun us_split_fields___2__projection ((a us_split_fields2)) us_private
   (rec__ext__1 a))
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1
   (us_split_discrs2 us_split_discrs)(us_split_fields3 us_split_fields2)(attr__tag1 Int)))))
-(define-fun us_rep_4__projection ((a us_rep1)) us_split_discrs (us_split_discrs2
-                                                               a))
+(define-fun us_rep___4__projection ((a us_rep1)) us_split_discrs (us_split_discrs2
+                                                                 a))
 
-(define-fun us_rep_5__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___5__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
-(define-fun us_rep_6__projection ((a us_rep1)) Int (attr__tag1 a))
+(define-fun us_rep___6__projection ((a us_rep1)) Int (attr__tag1 a))
 
 (declare-fun hide_ext__ (integer us_private) us_private)
 
@@ -891,7 +891,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const o e)
 

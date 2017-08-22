@@ -1616,13 +1616,13 @@
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (define-fun bool_eq5 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -1811,13 +1811,13 @@
 
 (declare-datatypes ((us_split_fields__ref2 0))
 (((mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref2)) us_split_fields4
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep2 (us_split_fields5 us_split_fields4)))))
-(define-fun us_rep_3__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
-                                                                a))
+(define-fun us_rep___3__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
+                                                                  a))
 
 (define-fun bool_eq6 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
@@ -2031,74 +2031,74 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS17 Int)
 
-(declare-fun temp___1516 ((_ BitVec 64) (_ BitVec 64)
+(declare-fun temp___1523 ((_ BitVec 64) (_ BitVec 64)
   (_ BitVec 64)) (Array (_ BitVec 64) u64))
 
 ;; def_axiom
   (assert
-  (forall ((temp___1518 (_ BitVec 64)) (temp___1519 (_ BitVec 64))
-  (temp___1520 (_ BitVec 64)))
-  (let ((temp___1517 (temp___1516 temp___1518 temp___1519 temp___1520)))
+  (forall ((temp___1525 (_ BitVec 64)) (temp___1526 (_ BitVec 64))
+  (temp___1527 (_ BitVec 64)))
+  (let ((temp___1524 (temp___1523 temp___1525 temp___1526 temp___1527)))
   (and
-  (and (= (select temp___1517 ((_ int2bv 64) 0)) (of_rep1 temp___1518))
-  (= (select temp___1517 ((_ int2bv 64) 1)) (of_rep1 temp___1519)))
-  (= (select temp___1517 ((_ int2bv 64) 2)) (of_rep1 temp___1520))))))
+  (and (= (select temp___1524 ((_ int2bv 64) 0)) (of_rep1 temp___1525))
+  (= (select temp___1524 ((_ int2bv 64) 1)) (of_rep1 temp___1526)))
+  (= (select temp___1524 ((_ int2bv 64) 2)) (of_rep1 temp___1527))))))
 
-(declare-fun temp___1533 ((_ BitVec 64) (_ BitVec 64) (_ BitVec 64)
+(declare-fun temp___1540 ((_ BitVec 64) (_ BitVec 64) (_ BitVec 64)
   (_ BitVec 64) (_ BitVec 64) (_ BitVec 64) (_ BitVec 64)
   (_ BitVec 64)) (Array (_ BitVec 64) u64))
 
 ;; def_axiom
   (assert
-  (forall ((temp___1535 (_ BitVec 64)) (temp___1536 (_ BitVec 64))
-  (temp___1537 (_ BitVec 64)) (temp___1538 (_ BitVec 64))
-  (temp___1539 (_ BitVec 64)) (temp___1540 (_ BitVec 64))
-  (temp___1541 (_ BitVec 64)) (temp___1542 (_ BitVec 64)))
-  (let ((temp___1534 (temp___1533 temp___1535 temp___1536 temp___1537
-                     temp___1538 temp___1539 temp___1540 temp___1541
-                     temp___1542)))
+  (forall ((temp___1542 (_ BitVec 64)) (temp___1543 (_ BitVec 64))
+  (temp___1544 (_ BitVec 64)) (temp___1545 (_ BitVec 64))
+  (temp___1546 (_ BitVec 64)) (temp___1547 (_ BitVec 64))
+  (temp___1548 (_ BitVec 64)) (temp___1549 (_ BitVec 64)))
+  (let ((temp___1541 (temp___1540 temp___1542 temp___1543 temp___1544
+                     temp___1545 temp___1546 temp___1547 temp___1548
+                     temp___1549)))
   (and
   (and
   (and
   (and
   (and
   (and
-  (and (= (select temp___1534 ((_ int2bv 64) 0)) (of_rep1 temp___1535))
-  (= (select temp___1534 ((_ int2bv 64) 1)) (of_rep1 temp___1536)))
-  (= (select temp___1534 ((_ int2bv 64) 2)) (of_rep1 temp___1537)))
-  (= (select temp___1534 ((_ int2bv 64) 3)) (of_rep1 temp___1538)))
-  (= (select temp___1534 ((_ int2bv 64) 4)) (of_rep1 temp___1539)))
-  (= (select temp___1534 ((_ int2bv 64) 5)) (of_rep1 temp___1540)))
-  (= (select temp___1534 ((_ int2bv 64) 6)) (of_rep1 temp___1541)))
-  (= (select temp___1534 ((_ int2bv 64) 7)) (of_rep1 temp___1542))))))
+  (and (= (select temp___1541 ((_ int2bv 64) 0)) (of_rep1 temp___1542))
+  (= (select temp___1541 ((_ int2bv 64) 1)) (of_rep1 temp___1543)))
+  (= (select temp___1541 ((_ int2bv 64) 2)) (of_rep1 temp___1544)))
+  (= (select temp___1541 ((_ int2bv 64) 3)) (of_rep1 temp___1545)))
+  (= (select temp___1541 ((_ int2bv 64) 4)) (of_rep1 temp___1546)))
+  (= (select temp___1541 ((_ int2bv 64) 5)) (of_rep1 temp___1547)))
+  (= (select temp___1541 ((_ int2bv 64) 6)) (of_rep1 temp___1548)))
+  (= (select temp___1541 ((_ int2bv 64) 7)) (of_rep1 temp___1549))))))
 
-(declare-fun temp___1544 ((_ BitVec 64) (_ BitVec 64) (_ BitVec 64)
+(declare-fun temp___1551 ((_ BitVec 64) (_ BitVec 64) (_ BitVec 64)
   (_ BitVec 64) (_ BitVec 64) (_ BitVec 64) (_ BitVec 64)
   (_ BitVec 64)) (Array (_ BitVec 64) u64))
 
 ;; def_axiom
   (assert
-  (forall ((temp___1546 (_ BitVec 64)) (temp___1547 (_ BitVec 64))
-  (temp___1548 (_ BitVec 64)) (temp___1549 (_ BitVec 64))
-  (temp___1550 (_ BitVec 64)) (temp___1551 (_ BitVec 64))
-  (temp___1552 (_ BitVec 64)) (temp___1553 (_ BitVec 64)))
-  (let ((temp___1545 (temp___1544 temp___1546 temp___1547 temp___1548
-                     temp___1549 temp___1550 temp___1551 temp___1552
-                     temp___1553)))
+  (forall ((temp___1553 (_ BitVec 64)) (temp___1554 (_ BitVec 64))
+  (temp___1555 (_ BitVec 64)) (temp___1556 (_ BitVec 64))
+  (temp___1557 (_ BitVec 64)) (temp___1558 (_ BitVec 64))
+  (temp___1559 (_ BitVec 64)) (temp___1560 (_ BitVec 64)))
+  (let ((temp___1552 (temp___1551 temp___1553 temp___1554 temp___1555
+                     temp___1556 temp___1557 temp___1558 temp___1559
+                     temp___1560)))
   (and
   (and
   (and
   (and
   (and
   (and
-  (and (= (select temp___1545 ((_ int2bv 64) 0)) (of_rep1 temp___1546))
-  (= (select temp___1545 ((_ int2bv 64) 1)) (of_rep1 temp___1547)))
-  (= (select temp___1545 ((_ int2bv 64) 2)) (of_rep1 temp___1548)))
-  (= (select temp___1545 ((_ int2bv 64) 3)) (of_rep1 temp___1549)))
-  (= (select temp___1545 ((_ int2bv 64) 4)) (of_rep1 temp___1550)))
-  (= (select temp___1545 ((_ int2bv 64) 5)) (of_rep1 temp___1551)))
-  (= (select temp___1545 ((_ int2bv 64) 6)) (of_rep1 temp___1552)))
-  (= (select temp___1545 ((_ int2bv 64) 7)) (of_rep1 temp___1553))))))
+  (and (= (select temp___1552 ((_ int2bv 64) 0)) (of_rep1 temp___1553))
+  (= (select temp___1552 ((_ int2bv 64) 1)) (of_rep1 temp___1554)))
+  (= (select temp___1552 ((_ int2bv 64) 2)) (of_rep1 temp___1555)))
+  (= (select temp___1552 ((_ int2bv 64) 3)) (of_rep1 temp___1556)))
+  (= (select temp___1552 ((_ int2bv 64) 4)) (of_rep1 temp___1557)))
+  (= (select temp___1552 ((_ int2bv 64) 5)) (of_rep1 temp___1558)))
+  (= (select temp___1552 ((_ int2bv 64) 6)) (of_rep1 temp___1559)))
+  (= (select temp___1552 ((_ int2bv 64) 7)) (of_rep1 temp___1560))))))
 
 (define-fun dynamic_invariant5 ((temp___expr_290 (_ BitVec 8))
   (temp___is_init_287 Bool) (temp___skip_constant_288 Bool)

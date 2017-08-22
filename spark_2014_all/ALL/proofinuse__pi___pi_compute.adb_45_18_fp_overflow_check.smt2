@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -114,7 +115,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -243,7 +244,7 @@
   (assert (= t11 (fp #b0 #b01111111 #b00000000000000000000000)))
 
 ;; H
-  (assert (not (or (fp.isInfinite t11) (fp.isNaN t11))))
+  (assert (fp.isFinite32 t11))
 
 ;; H
   (assert (= (mk_t__ref result1) (mk_t__ref t2)))
@@ -252,7 +253,7 @@
   (assert (= t21 (fp #b0 #b01111101 #b01010101010101010101011)))
 
 ;; H
-  (assert (not (or (fp.isInfinite t21) (fp.isNaN t21))))
+  (assert (fp.isFinite32 t21))
 
 ;; H
   (assert (= (mk_t__ref result2) (mk_t__ref t3)))
@@ -261,7 +262,7 @@
   (assert (= t31 (fp #b0 #b01111100 #b10011001100110011001101)))
 
 ;; H
-  (assert (not (or (fp.isInfinite t31) (fp.isNaN t31))))
+  (assert (fp.isFinite32 t31))
 
 ;; H
   (assert (= (mk_t__ref result3) (mk_t__ref t4)))
@@ -270,7 +271,7 @@
   (assert (= t41 (fp #b0 #b01111100 #b00100100100100100100101)))
 
 ;; H
-  (assert (not (or (fp.isInfinite t41) (fp.isNaN t41))))
+  (assert (fp.isFinite32 t41))
 
 ;; H
   (assert (= (mk_t__ref result4) (mk_t__ref t5)))
@@ -279,7 +280,7 @@
   (assert (= t51 (fp #b0 #b01111011 #b11000111000111000111001)))
 
 ;; H
-  (assert (not (or (fp.isInfinite t51) (fp.isNaN t51))))
+  (assert (fp.isFinite32 t51))
 
 ;; H
   (assert (= (mk_t__ref result5) (mk_t__ref t6)))
@@ -288,7 +289,7 @@
   (assert (= t61 (fp #b0 #b01111011 #b01110100010111010001100)))
 
 ;; H
-  (assert (not (or (fp.isInfinite t61) (fp.isNaN t61))))
+  (assert (fp.isFinite32 t61))
 
 ;; H
   (assert (= (mk_t__ref result6) (mk_t__ref t7)))
@@ -297,7 +298,7 @@
   (assert (= t71 (fp #b0 #b01111011 #b00111011000100111011001)))
 
 ;; H
-  (assert (not (or (fp.isInfinite t71) (fp.isNaN t71))))
+  (assert (fp.isFinite32 t71))
 
 ;; H
   (assert (= (mk_t__ref result7) (mk_t__ref t8)))
@@ -306,7 +307,7 @@
   (assert (= t81 (fp #b0 #b01111011 #b00010001000100010001001)))
 
 ;; H
-  (assert (not (or (fp.isInfinite t81) (fp.isNaN t81))))
+  (assert (fp.isFinite32 t81))
 
 ;; H
   (assert (= (mk_t__ref result8) (mk_t__ref t9)))
@@ -315,7 +316,7 @@
   (assert (= t91 (fp #b0 #b01111010 #b11100001111000011110001)))
 
 ;; H
-  (assert (not (or (fp.isInfinite t91) (fp.isNaN t91))))
+  (assert (fp.isFinite32 t91))
 
 ;; H
   (assert (= result9 (mk_t__ref t10)))
@@ -324,67 +325,65 @@
   (assert (= t101 (fp #b0 #b01111010 #b10101111001010000110110)))
 
 ;; H
-  (assert (not (or (fp.isInfinite t101) (fp.isNaN t101))))
+  (assert (fp.isFinite32 t101))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite res) (fp.isNaN res)))))
+  (fp.isFinite32 res)))
 
 ;; H
   (assert
-  (and (= o (fp.sub RNE t11 t21))
-  (not (or (fp.isInfinite (fp.sub RNE t11 t21)) (fp.isNaN (fp.sub RNE
-  t11 t21))))))
+  (and (= o (fp.sub RNE t11 t21)) (fp.isFinite32 (fp.sub RNE t11 t21))))
 
 ;; H
   (assert (= o1 (fp.add RNE o t31)))
 
 ;; H
-  (assert (and (= o2 o1) (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (assert (and (= o2 o1) (fp.isFinite32 o1)))
 
 ;; H
   (assert (= o3 (fp.sub RNE o2 t41)))
 
 ;; H
-  (assert (and (= o4 o3) (not (or (fp.isInfinite o3) (fp.isNaN o3)))))
+  (assert (and (= o4 o3) (fp.isFinite32 o3)))
 
 ;; H
   (assert (= o5 (fp.add RNE o4 t51)))
 
 ;; H
-  (assert (and (= o6 o5) (not (or (fp.isInfinite o5) (fp.isNaN o5)))))
+  (assert (and (= o6 o5) (fp.isFinite32 o5)))
 
 ;; H
   (assert (= o7 (fp.sub RNE o6 t61)))
 
 ;; H
-  (assert (and (= o8 o7) (not (or (fp.isInfinite o7) (fp.isNaN o7)))))
+  (assert (and (= o8 o7) (fp.isFinite32 o7)))
 
 ;; H
   (assert (= o9 (fp.add RNE o8 t71)))
 
 ;; H
-  (assert (and (= o10 o9) (not (or (fp.isInfinite o9) (fp.isNaN o9)))))
+  (assert (and (= o10 o9) (fp.isFinite32 o9)))
 
 ;; H
   (assert (= o11 (fp.sub RNE o10 t81)))
 
 ;; H
-  (assert (and (= o12 o11) (not (or (fp.isInfinite o11) (fp.isNaN o11)))))
+  (assert (and (= o12 o11) (fp.isFinite32 o11)))
 
 ;; H
   (assert (= o13 (fp.add RNE o12 t91)))
 
 ;; H
-  (assert (and (= o14 o13) (not (or (fp.isInfinite o13) (fp.isNaN o13)))))
+  (assert (and (= o14 o13) (fp.isFinite32 o13)))
 
 ;; H
   (assert (= o15 (fp.sub RNE o14 t101)))
 
 ;; H
-  (assert (and (= o16 o15) (not (or (fp.isInfinite o15) (fp.isNaN o15)))))
+  (assert (and (= o16 o15) (fp.isFinite32 o15)))
 
 ;; H
   (assert
@@ -393,6 +392,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (not (or (fp.isInfinite o17) (fp.isNaN o17)))))
+  (not (fp.isFinite32 o17)))
 (check-sat)
 (exit)

@@ -227,19 +227,19 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)(attr__constrained Bool)))))
-(define-fun us_rep_3__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___3__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_4__projection ((a us_rep1)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___4__projection ((a us_rep1)) us_split_fields (us_split_fields1
+                                                                 a))
 
-(define-fun us_rep_5__projection ((a us_rep1)) Bool (attr__constrained a))
+(define-fun us_rep___5__projection ((a us_rep1)) Bool (attr__constrained a))
 
 (define-fun file_io__read_result__c__pred ((a us_rep1)) Bool (= (to_rep1
                                                                 (rec__file_io__read_result__status
@@ -444,33 +444,33 @@
 
 (declare-const next_idx Int)
 
-(declare-const temp___881 Int)
+(declare-const temp___969 Int)
 
-(declare-const temp___880 us_rep)
+(declare-const temp___968 us_rep)
 
-(declare-const temp___882 Int)
+(declare-const temp___970 Int)
 
-(declare-const temp___879 read_status)
+(declare-const temp___967 read_status)
 
-(declare-const temp___8791 character)
+(declare-const temp___9671 character)
 
-(declare-const temp___8792 Bool)
+(declare-const temp___9672 Bool)
 
-(declare-const temp___878 Int)
+(declare-const temp___966 Int)
 
-(declare-const temp___877 Int)
+(declare-const temp___965 Int)
 
-(declare-const temp___876 Int)
+(declare-const temp___964 Int)
 
-(declare-const temp___875 read_status)
+(declare-const temp___963 read_status)
 
-(declare-const temp___8751 character)
+(declare-const temp___9631 character)
 
-(declare-const temp___8752 Bool)
+(declare-const temp___9632 Bool)
 
-(declare-const temp___884 Int)
+(declare-const temp___972 Int)
 
-(declare-const temp___883 Int)
+(declare-const temp___971 Int)
 
 (declare-const o Bool)
 
@@ -512,17 +512,17 @@
 
 (declare-const next_idx2 Int)
 
-(declare-const temp___8841 Int)
+(declare-const temp___9721 Int)
 
-(declare-const temp___8831 Int)
+(declare-const temp___9711 Int)
 
 (declare-const result1 int__ref)
 
-(declare-const temp___8842 Int)
+(declare-const temp___9722 Int)
 
 (declare-const result2 int__ref)
 
-(declare-const temp___8832 Int)
+(declare-const temp___9712 Int)
 
 (declare-const the_file3 us_rep)
 
@@ -720,42 +720,42 @@
   (= result false)))
 
 ;; H
-  (assert (=> (= result true) (= temp___881 next_idx1)))
+  (assert (=> (= result true) (= temp___969 next_idx1)))
 
 ;; H
-  (assert (=> (= result true) (= temp___880 the_file1)))
+  (assert (=> (= result true) (= temp___968 the_file1)))
 
 ;; H
-  (assert (=> (= result true) (= temp___882 current_idx1)))
-
-;; H
-  (assert
-  (=> (= result true)
-  (and (= (mk___split_discrs temp___879) next_read__split_discrs1)
-  (and (= (mk___split_fields temp___8791) next_read__split_fields1)
-  (= temp___8792 next_read__attr__constrained)))))
-
-;; H
-  (assert (=> (= result true) (= temp___878 current_idx1)))
-
-;; H
-  (assert (=> (= result true) (= temp___877 current_col1)))
-
-;; H
-  (assert (=> (= result true) (= temp___876 current_line1)))
+  (assert (=> (= result true) (= temp___970 current_idx1)))
 
 ;; H
   (assert
   (=> (= result true)
-  (and (= (mk___split_discrs temp___875) current_read__split_discrs1)
-  (and (= (mk___split_fields temp___8751) current_read__split_fields1)
-  (= temp___8752 current_read__attr__constrained)))))
+  (and (= (mk___split_discrs temp___967) next_read__split_discrs1)
+  (and (= (mk___split_fields temp___9671) next_read__split_fields1)
+  (= temp___9672 next_read__attr__constrained)))))
 
 ;; H
-  (assert (=> (= result true) (= 0 temp___884)))
+  (assert (=> (= result true) (= temp___966 current_idx1)))
 
 ;; H
-  (assert (=> (= result true) (= 0 temp___883)))
+  (assert (=> (= result true) (= temp___965 current_col1)))
+
+;; H
+  (assert (=> (= result true) (= temp___964 current_line1)))
+
+;; H
+  (assert
+  (=> (= result true)
+  (and (= (mk___split_discrs temp___963) current_read__split_discrs1)
+  (and (= (mk___split_fields temp___9631) current_read__split_fields1)
+  (= temp___9632 current_read__attr__constrained)))))
+
+;; H
+  (assert (=> (= result true) (= 0 temp___972)))
+
+;; H
+  (assert (=> (= result true) (= 0 temp___971)))
 
 ;; H
   (assert
@@ -764,7 +764,7 @@
   (= (local_invariant the_file2 current_read__split_fields2
      current_read__split_discrs2 current_idx2 next_read__split_fields2
      next_read__split_discrs2 next_idx2) true)
-  (<= temp___882 current_idx2))))
+  (<= temp___970 current_idx2))))
 
 ;; H
   (assert
@@ -780,18 +780,18 @@
   (= (to_rep (rec__file_io__read_result__c current_read__split_fields2)) 10))))))
 
 ;; H
-  (assert (=> (= result true) (= result1 (mk_int__ref temp___8841))))
+  (assert (=> (= result true) (= result1 (mk_int__ref temp___9721))))
 
 ;; H
-  (assert (=> (= result true) (= temp___8842 next_idx2)))
+  (assert (=> (= result true) (= temp___9722 next_idx2)))
 
 ;; H
-  (assert (=> (= result true) (= result2 (mk_int__ref temp___8831))))
+  (assert (=> (= result true) (= result2 (mk_int__ref temp___9711))))
 
 ;; H
   (assert
   (=> (= result true)
-  (= temp___8832 (to_int1
+  (= temp___9712 (to_int1
                  (ite (= (to_rep1
                          (rec__file_io__read_result__status
                          next_read__split_discrs2)) 0)

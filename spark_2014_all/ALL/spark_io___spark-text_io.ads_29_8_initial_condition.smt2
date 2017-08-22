@@ -80,7 +80,7 @@
 
 (declare-datatypes ((file_type__ref 0))
 (((mk_file_type__ref (file_type__content us_rep)))))
-(define-fun file_type__ref_2__projection ((a file_type__ref)) us_rep
+(define-fun file_type__ref___2__projection ((a file_type__ref)) us_rep
   (file_type__content a))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
@@ -109,7 +109,7 @@
 
 (declare-datatypes ((file_status__ref 0))
 (((mk_file_status__ref (file_status__content file_status)))))
-(define-fun file_status__ref_2__projection ((a file_status__ref)) file_status
+(define-fun file_status__ref___2__projection ((a file_status__ref)) file_status
   (file_status__content a))
 
 (define-fun dynamic_invariant ((temp___expr_643 Int)
@@ -165,7 +165,7 @@
 
 (declare-datatypes ((file_mode__ref 0))
 (((mk_file_mode__ref (file_mode__content file_mode)))))
-(define-fun file_mode__ref_3__projection ((a file_mode__ref)) file_mode
+(define-fun file_mode__ref___3__projection ((a file_mode__ref)) file_mode
   (file_mode__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_655 Int)

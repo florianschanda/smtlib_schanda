@@ -75,23 +75,23 @@
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields
   (rec__check_lsp__p_inherited__root__f integer)(rec__ext__ us_private)))))
-(define-fun us_split_fields_F4__projection ((a us_split_fields)) integer
+(define-fun us_split_fields_F__4__projection ((a us_split_fields)) integer
   (rec__check_lsp__p_inherited__root__f a))
 
-(define-fun us_split_fields_4__projection ((a us_split_fields)) us_private
+(define-fun us_split_fields___4__projection ((a us_split_fields)) us_private
   (rec__ext__ a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___4__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)(attr__tag Int)))))
-(define-fun us_rep_7__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___7__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
-(define-fun us_rep_8__projection ((a us_rep)) Int (attr__tag a))
+(define-fun us_rep___8__projection ((a us_rep)) Int (attr__tag a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (= (to_rep
@@ -146,31 +146,32 @@
 (declare-const dummy1 us_rep)
 
 (declare-datatypes ((root__ref 0)) (((mk_root__ref (root__content us_rep)))))
-(define-fun root__ref_2__projection ((a root__ref)) us_rep (root__content a))
+(define-fun root__ref___2__projection ((a root__ref)) us_rep (root__content
+                                                             a))
 
 (declare-datatypes ((us_split_fields2 0))
 (((mk___split_fields1
   (rec__check_lsp__p_inherited__child__g integer)(rec__check_lsp__p_inherited__root__f1 integer)(rec__ext__1 us_private)))))
-(define-fun us_split_fields_G3__projection ((a us_split_fields2)) integer
+(define-fun us_split_fields_G__3__projection ((a us_split_fields2)) integer
   (rec__check_lsp__p_inherited__child__g a))
 
-(define-fun us_split_fields_F5__projection ((a us_split_fields2)) integer
+(define-fun us_split_fields_F__5__projection ((a us_split_fields2)) integer
   (rec__check_lsp__p_inherited__root__f1 a))
 
-(define-fun us_split_fields_5__projection ((a us_split_fields2)) us_private
+(define-fun us_split_fields___5__projection ((a us_split_fields2)) us_private
   (rec__ext__1 a))
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_5__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___5__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)(attr__tag1 Int)))))
-(define-fun us_rep_9__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___9__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
-(define-fun us_rep_10__projection ((a us_rep1)) Int (attr__tag1 a))
+(define-fun us_rep___10__projection ((a us_rep1)) Int (attr__tag1 a))
 
 (declare-fun hide_ext__ (integer us_private) us_private)
 
@@ -278,35 +279,35 @@
 
 (declare-datatypes ((child__ref 0))
 (((mk_child__ref (child__content us_rep1)))))
-(define-fun child__ref_2__projection ((a child__ref)) us_rep1 (child__content
-                                                              a))
+(define-fun child__ref___2__projection ((a child__ref)) us_rep1 (child__content
+                                                                a))
 
 (declare-datatypes ((us_split_fields4 0))
 (((mk___split_fields2
   (rec__check_lsp__p_inherited__grand_child__h integer)(rec__check_lsp__p_inherited__root__f2 integer)(rec__check_lsp__p_inherited__child__g1 integer)(rec__ext__2 us_private)))))
-(define-fun us_split_fields_H2__projection ((a us_split_fields4)) integer
+(define-fun us_split_fields_H__2__projection ((a us_split_fields4)) integer
   (rec__check_lsp__p_inherited__grand_child__h a))
 
-(define-fun us_split_fields_F6__projection ((a us_split_fields4)) integer
+(define-fun us_split_fields_F__6__projection ((a us_split_fields4)) integer
   (rec__check_lsp__p_inherited__root__f2 a))
 
-(define-fun us_split_fields_G4__projection ((a us_split_fields4)) integer
+(define-fun us_split_fields_G__4__projection ((a us_split_fields4)) integer
   (rec__check_lsp__p_inherited__child__g1 a))
 
-(define-fun us_split_fields_6__projection ((a us_split_fields4)) us_private
+(define-fun us_split_fields___6__projection ((a us_split_fields4)) us_private
   (rec__ext__2 a))
 
 (declare-datatypes ((us_split_fields__ref2 0))
 (((mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_6__projection ((a us_split_fields__ref2)) us_split_fields4
+(define-fun us_split_fields__ref___6__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep2 (us_split_fields5 us_split_fields4)(attr__tag2 Int)))))
-(define-fun us_rep_11__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
-                                                                 a))
+(define-fun us_rep___11__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
+                                                                   a))
 
-(define-fun us_rep_12__projection ((a us_rep2)) Int (attr__tag2 a))
+(define-fun us_rep___12__projection ((a us_rep2)) Int (attr__tag2 a))
 
 (declare-fun hide_ext__1 (integer integer us_private) us_private)
 
@@ -446,7 +447,7 @@
 
 (declare-datatypes ((grand_child__ref 0))
 (((mk_grand_child__ref (grand_child__content us_rep2)))))
-(define-fun grand_child__ref_2__projection ((a grand_child__ref)) us_rep2
+(define-fun grand_child__ref___2__projection ((a grand_child__ref)) us_rep2
   (grand_child__content a))
 
 (define-fun default_initial_assumption ((temp___expr_195 us_rep2)

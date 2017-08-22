@@ -416,13 +416,13 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_13__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___13__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_14__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___14__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                 a))
 
 (define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -533,7 +533,7 @@
 (declare-const dummy6 us_rep)
 
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content us_rep)))))
-(define-fun t__ref_4__projection ((a t__ref)) us_rep (t__content a))
+(define-fun t__ref___4__projection ((a t__ref)) us_rep (t__content a))
 
 (declare-fun extractuser (us_private) (Array Int character))
 
@@ -561,8 +561,8 @@
 
 (declare-datatypes ((statust__ref 0))
 (((mk_statust__ref (statust__content statust)))))
-(define-fun statust__ref_2__projection ((a statust__ref)) statust (statust__content
-                                                                  a))
+(define-fun statust__ref___2__projection ((a statust__ref)) statust (statust__content
+                                                                    a))
 
 (define-fun dynamic_invariant ((temp___expr_1683 Int)
   (temp___is_init_1680 Bool) (temp___skip_constant_1681 Bool)

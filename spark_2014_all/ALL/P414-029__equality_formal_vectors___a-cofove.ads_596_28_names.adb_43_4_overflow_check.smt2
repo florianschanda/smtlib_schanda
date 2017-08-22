@@ -108,7 +108,7 @@
 
 (declare-datatypes ((capacity_range__ref 0))
 (((mk_capacity_range__ref (capacity_range__content capacity_range)))))
-(define-fun capacity_range__ref_2__projection ((a capacity_range__ref)) capacity_range
+(define-fun capacity_range__ref___2__projection ((a capacity_range__ref)) capacity_range
   (capacity_range__content a))
 
 (declare-sort us_main_type 0)
@@ -118,32 +118,32 @@
 (declare-datatypes ((us_split_discrs 0))
 (((mk___split_discrs
   (rec__names__entry_tables__vector__capacity capacity_range)))))
-(define-fun us_split_discrs_2__projection ((a us_split_discrs)) capacity_range
+(define-fun us_split_discrs___2__projection ((a us_split_discrs)) capacity_range
   (rec__names__entry_tables__vector__capacity a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
 (((mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref_2__projection ((a us_split_discrs__ref)) us_split_discrs
+(define-fun us_split_discrs__ref___2__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields (rec__names__entry_tables__vector us_main_type)))))
-(define-fun us_split_fields_Vector2__projection ((a us_split_fields)) us_main_type
+(define-fun us_split_fields_Vector__2__projection ((a us_split_fields)) us_main_type
   (rec__names__entry_tables__vector a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)))))
-(define-fun us_rep_4__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                              a))
+(define-fun us_rep___4__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                a))
 
-(define-fun us_rep_5__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___5__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (declare-const value__size Int)
 
@@ -187,8 +187,8 @@
 
 (declare-datatypes ((vector__ref 0))
 (((mk_vector__ref (vector__content us_rep)))))
-(define-fun vector__ref_2__projection ((a vector__ref)) us_rep (vector__content
-                                                               a))
+(define-fun vector__ref___2__projection ((a vector__ref)) us_rep (vector__content
+                                                                 a))
 
 (declare-sort extended_index 0)
 
@@ -206,26 +206,26 @@
 
 (declare-datatypes ((extended_index__ref 0))
 (((mk_extended_index__ref (extended_index__content extended_index)))))
-(define-fun extended_index__ref_3__projection ((a extended_index__ref)) extended_index
+(define-fun extended_index__ref___3__projection ((a extended_index__ref)) extended_index
   (extended_index__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_349 Int)
-  (temp___is_init_346 Bool) (temp___skip_constant_347 Bool)
-  (temp___do_toplevel_348 Bool)) Bool (=>
-                                      (or (= temp___is_init_346 true)
+(define-fun dynamic_invariant1 ((temp___expr_437 Int)
+  (temp___is_init_434 Bool) (temp___skip_constant_435 Bool)
+  (temp___do_toplevel_436 Bool)) Bool (=>
+                                      (or (= temp___is_init_434 true)
                                       (<= 0 2147483647)) (in_range4
-                                      temp___expr_349)))
+                                      temp___expr_437)))
 
 (declare-fun length (us_rep) Int)
 
 (declare-fun length__function_guard (Int us_rep) Bool)
 
-(define-fun dynamic_invariant2 ((temp___expr_355 Int)
-  (temp___is_init_352 Bool) (temp___skip_constant_353 Bool)
-  (temp___do_toplevel_354 Bool)) Bool (=>
-                                      (or (= temp___is_init_352 true)
+(define-fun dynamic_invariant2 ((temp___expr_443 Int)
+  (temp___is_init_440 Bool) (temp___skip_constant_441 Bool)
+  (temp___do_toplevel_442 Bool)) Bool (=>
+                                      (or (= temp___is_init_440 true)
                                       (<= 0 2147483647)) (in_range3
-                                      temp___expr_355)))
+                                      temp___expr_443)))
 
 (declare-fun to_rep (capacity_range) Int)
 
@@ -296,8 +296,8 @@
 
 (declare-datatypes ((sequence__ref 0))
 (((mk_sequence__ref (sequence__content us_rep1)))))
-(define-fun sequence__ref_2__projection ((a sequence__ref)) us_rep1 (sequence__content
-                                                                    a))
+(define-fun sequence__ref___2__projection ((a sequence__ref)) us_rep1
+  (sequence__content a))
 
 (declare-fun length1 (us_rep1) Int)
 
@@ -333,15 +333,15 @@
 
 (declare-datatypes ((index_type__ref 0))
 (((mk_index_type__ref (index_type__content index_type)))))
-(define-fun index_type__ref_3__projection ((a index_type__ref)) index_type
+(define-fun index_type__ref___3__projection ((a index_type__ref)) index_type
   (index_type__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_334 Int)
-  (temp___is_init_331 Bool) (temp___skip_constant_332 Bool)
-  (temp___do_toplevel_333 Bool)) Bool (=>
-                                      (or (= temp___is_init_331 true)
+(define-fun dynamic_invariant3 ((temp___expr_422 Int)
+  (temp___is_init_419 Bool) (temp___skip_constant_420 Bool)
+  (temp___do_toplevel_421 Bool)) Bool (=>
+                                      (or (= temp___is_init_419 true)
                                       (<= 1 2147483647)) (in_range5
-                                      temp___expr_334)))
+                                      temp___expr_422)))
 
 (declare-const container__split_discrs us_split_discrs)
 
@@ -498,13 +498,13 @@
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_3__projection ((a us_rep2)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___3__projection ((a us_rep2)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (define-fun bool_eq1 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
@@ -612,7 +612,7 @@
 
 (declare-datatypes ((element_type__ref 0))
 (((mk_element_type__ref (element_type__content us_rep2)))))
-(define-fun element_type__ref_4__projection ((a element_type__ref)) us_rep2
+(define-fun element_type__ref___4__projection ((a element_type__ref)) us_rep2
   (element_type__content a))
 
 (declare-fun get (us_rep1 Int) us_rep2)
@@ -641,11 +641,11 @@
   (forall ((a us_rep1) (b us_rep1))
   (! (= (user_eq5 a b) (oeq a b)) :pattern ((user_eq5 a b)) )))
 
-(define-fun default_initial_assumption ((temp___expr_388 us_rep1)
-  (temp___skip_top_level_389 Bool)) Bool (=>
+(define-fun default_initial_assumption ((temp___expr_480 us_rep1)
+  (temp___skip_top_level_481 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_389 true))
-                                         (= (length1 temp___expr_388) 0)))
+                                         (= temp___skip_top_level_481 true))
+                                         (= (length1 temp___expr_480) 0)))
 
 ;; model____post_axiom
   (assert
@@ -669,15 +669,15 @@
 
 (declare-datatypes ((extended_index__ref1 0))
 (((mk_extended_index__ref1 (extended_index__content1 extended_index1)))))
-(define-fun extended_index__ref_4__projection ((a extended_index__ref1)) extended_index1
+(define-fun extended_index__ref___4__projection ((a extended_index__ref1)) extended_index1
   (extended_index__content1 a))
 
-(define-fun dynamic_invariant7 ((temp___expr_381 Int)
-  (temp___is_init_378 Bool) (temp___skip_constant_379 Bool)
-  (temp___do_toplevel_380 Bool)) Bool (=>
-                                      (or (= temp___is_init_378 true)
+(define-fun dynamic_invariant7 ((temp___expr_473 Int)
+  (temp___is_init_470 Bool) (temp___skip_constant_471 Bool)
+  (temp___do_toplevel_472 Bool)) Bool (=>
+                                      (or (= temp___is_init_470 true)
                                       (<= 0 2147483647)) (in_range9
-                                      temp___expr_381)))
+                                      temp___expr_473)))
 
 ;; length__post_axiom
   (assert

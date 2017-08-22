@@ -63,7 +63,7 @@
 
 (declare-datatypes ((integer_32__ref 0))
 (((mk_integer_32__ref (integer_32__content integer_32)))))
-(define-fun integer_32__ref_2__projection ((a integer_32__ref)) integer_32
+(define-fun integer_32__ref___2__projection ((a integer_32__ref)) integer_32
   (integer_32__content a))
 
 (declare-fun to_rep (integer_32) Int)

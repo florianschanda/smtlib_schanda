@@ -162,7 +162,7 @@
 
 (declare-datatypes ((integer_8__ref 0))
 (((mk_integer_8__ref (integer_8__content integer_8)))))
-(define-fun integer_8__ref_2__projection ((a integer_8__ref)) integer_8
+(define-fun integer_8__ref___2__projection ((a integer_8__ref)) integer_8
   (integer_8__content a))
 
 (define-fun dynamic_invariant ((temp___expr_147 Int)
@@ -209,7 +209,7 @@
 
 (declare-datatypes ((integer_32__ref 0))
 (((mk_integer_32__ref (integer_32__content integer_32)))))
-(define-fun integer_32__ref_2__projection ((a integer_32__ref)) integer_32
+(define-fun integer_32__ref___2__projection ((a integer_32__ref)) integer_32
   (integer_32__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_159 Int)

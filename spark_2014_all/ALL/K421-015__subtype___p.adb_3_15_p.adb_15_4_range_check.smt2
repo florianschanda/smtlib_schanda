@@ -103,7 +103,7 @@
 (declare-const dummy1 integer)
 
 (declare-datatypes ((s1__ref 0)) (((mk_s1__ref (s1__content integer)))))
-(define-fun s1__ref_7__projection ((a s1__ref)) integer (s1__content a))
+(define-fun s1__ref___7__projection ((a s1__ref)) integer (s1__content a))
 
 ;; one__def_axiom
   (assert (= one 1))

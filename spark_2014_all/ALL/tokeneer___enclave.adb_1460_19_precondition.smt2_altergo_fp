@@ -1,0 +1,1163 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type privileget
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 3))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : privileget, privileget -> bool
+
+logic dummy : privileget
+
+type privileget__ref = { privileget__content : privileget
+}
+
+function privileget__ref___projection(a: privileget__ref) : privileget =
+  (a).privileget__content
+
+logic to_rep : privileget -> int
+
+logic of_rep : int -> privileget
+
+axiom inversion_axiom :
+  (forall x:privileget [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:privileget [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type opandnullt
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 4))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : opandnullt, opandnullt -> bool
+
+logic dummy1 : opandnullt
+
+type opandnullt__ref = { opandnullt__content : opandnullt
+}
+
+function opandnullt__ref___projection(a: opandnullt__ref) : opandnullt =
+  (a).opandnullt__content
+
+logic to_rep1 : opandnullt -> int
+
+logic of_rep1 : int -> opandnullt
+
+axiom inversion_axiom1 :
+  (forall x:opandnullt [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 :
+  (forall x:opandnullt [to_rep1(x)]. in_range2(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type us_split_fields = { rec__admin__t__rolepresent : privileget;
+rec__admin__t__currentop : opandnullt
+}
+
+function us_split_fields_RolePresent__projection(a: us_split_fields) : privileget =
+  (a).rec__admin__t__rolepresent
+
+function us_split_fields_CurrentOp__projection(a: us_split_fields) : opandnullt =
+  (a).rec__admin__t__currentop
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___3__projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+function us_rep___3__projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+logic bool_eq4 : us_rep, us_rep -> bool
+
+axiom bool_eq_def3 :
+  (forall a:us_rep. forall b:us_rep [bool_eq4(a, b)].
+  ((((to_rep(((a).us_split_fields1).rec__admin__t__rolepresent) = to_rep(((b).us_split_fields1).rec__admin__t__rolepresent)) and
+  (to_rep1(((a).us_split_fields1).rec__admin__t__currentop) = to_rep1(((b).us_split_fields1).rec__admin__t__currentop))) ->
+  (bool_eq4(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_fields1).rec__admin__t__rolepresent) = to_rep(((b).us_split_fields1).rec__admin__t__rolepresent)) and
+  (to_rep1(((a).us_split_fields1).rec__admin__t__currentop) = to_rep1(((b).us_split_fields1).rec__admin__t__currentop)))) ->
+  (bool_eq4(a, b) = false))))
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:privileget. forall a1:opandnullt. (0 <= object__size({
+  us_split_fields1 = { rec__admin__t__rolepresent = a;
+  rec__admin__t__currentop = a1 } })))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:privileget. forall a1:opandnullt. (0 <= object__alignment({
+  us_split_fields1 = { rec__admin__t__rolepresent = a;
+  rec__admin__t__currentop = a1 } })))
+
+logic admin__t__rolepresent__first__bit : int
+
+logic admin__t__rolepresent__last__bit : int
+
+logic admin__t__rolepresent__position : int
+
+axiom admin__t__rolepresent__first__bit_axiom :
+  (0 <= admin__t__rolepresent__first__bit)
+
+axiom admin__t__rolepresent__last__bit_axiom :
+  (admin__t__rolepresent__first__bit <  admin__t__rolepresent__last__bit)
+
+axiom admin__t__rolepresent__position_axiom :
+  (0 <= admin__t__rolepresent__position)
+
+logic admin__t__currentop__first__bit : int
+
+logic admin__t__currentop__last__bit : int
+
+logic admin__t__currentop__position : int
+
+axiom admin__t__currentop__first__bit_axiom :
+  (0 <= admin__t__currentop__first__bit)
+
+axiom admin__t__currentop__last__bit_axiom :
+  (admin__t__currentop__first__bit <  admin__t__currentop__last__bit)
+
+axiom admin__t__currentop__position_axiom :
+  (0 <= admin__t__currentop__position)
+
+logic user_eq2 : us_rep, us_rep -> bool
+
+logic dummy2 : privileget
+
+logic dummy3 : opandnullt
+
+type t__ref = { t__content : us_rep
+}
+
+function t__ref___projection(a: t__ref) : us_rep = (a).t__content
+
+logic rolepresent : us_rep -> int
+
+logic rolepresent__function_guard : int, us_rep -> prop
+
+axiom rolepresent__post_axiom :
+  (forall theadmin:privileget. forall theadmin1:opandnullt [rolepresent({
+  us_split_fields1 = { rec__admin__t__rolepresent = theadmin;
+  rec__admin__t__currentop = theadmin1 } })]. in_range1(rolepresent({
+  us_split_fields1 = { rec__admin__t__rolepresent = theadmin;
+  rec__admin__t__currentop = theadmin1 } })))
+
+logic isdoingop : us_rep -> bool
+
+logic isdoingop__function_guard : bool, us_rep -> prop
+
+axiom isdoingop__post_axiom : true
+
+logic thecurrentop : us_rep -> int
+
+logic thecurrentop__function_guard : int, us_rep -> prop
+
+type opt
+
+predicate in_range3(x: int) = ((1 <= x) and (x <= 4))
+
+logic bool_eq5 : int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq3 : opt, opt -> bool
+
+logic dummy4 : opt
+
+type opt__ref = { opt__content : opt
+}
+
+function opt__ref___projection(a: opt__ref) : opt = (a).opt__content
+
+axiom thecurrentop__post_axiom :
+  (forall theadmin:privileget. forall theadmin1:opandnullt [thecurrentop({
+  us_split_fields1 = { rec__admin__t__rolepresent = theadmin;
+  rec__admin__t__currentop = theadmin1 } })]. ((isdoingop({
+  us_split_fields1 = { rec__admin__t__rolepresent = theadmin;
+  rec__admin__t__currentop = theadmin1 } }) = true) ->
+  in_range3(thecurrentop({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin; rec__admin__t__currentop = theadmin1 } }))))
+
+logic ispresent : us_rep -> bool
+
+logic ispresent__function_guard : bool, us_rep -> prop
+
+axiom ispresent__post_axiom : true
+
+type yearst
+
+predicate in_range4(x: int) = ((1901 <= x) and (x <= 2099))
+
+logic bool_eq6 : int, int -> bool
+
+axiom bool_eq_def5 :
+  (forall x:int. forall y:int [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq4 : yearst, yearst -> bool
+
+logic dummy5 : yearst
+
+type yearst__ref = { yearst__content : yearst
+}
+
+function yearst__ref___projection(a: yearst__ref) : yearst =
+  (a).yearst__content
+
+logic to_rep2 : yearst -> int
+
+logic of_rep2 : int -> yearst
+
+axiom inversion_axiom2 :
+  (forall x:yearst [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 : (forall x:yearst [to_rep2(x)]. in_range4(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range4(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+type monthst
+
+predicate in_range5(x: int) = ((1 <= x) and (x <= 12))
+
+logic bool_eq7 : int, int -> bool
+
+axiom bool_eq_def6 :
+  (forall x:int. forall y:int [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> int
+
+logic user_eq5 : monthst, monthst -> bool
+
+logic dummy6 : monthst
+
+type monthst__ref = { monthst__content : monthst
+}
+
+function monthst__ref___projection(a: monthst__ref) : monthst =
+  (a).monthst__content
+
+logic to_rep3 : monthst -> int
+
+logic of_rep3 : int -> monthst
+
+axiom inversion_axiom3 :
+  (forall x:monthst [to_rep3(x)]. (of_rep3(to_rep3(x)) = x))
+
+axiom range_axiom3 : (forall x:monthst [to_rep3(x)]. in_range5(to_rep3(x)))
+
+axiom coerce_axiom3 :
+  (forall x:int [to_rep3(of_rep3(x))]. (in_range5(x) ->
+  (to_rep3(of_rep3(x)) = x)))
+
+type dayst
+
+predicate in_range6(x: int) = ((1 <= x) and (x <= 31))
+
+logic bool_eq8 : int, int -> bool
+
+axiom bool_eq_def7 :
+  (forall x:int. forall y:int [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE6 : us_image -> int
+
+logic user_eq6 : dayst, dayst -> bool
+
+logic dummy7 : dayst
+
+type dayst__ref = { dayst__content : dayst
+}
+
+function dayst__ref___projection(a: dayst__ref) : dayst = (a).dayst__content
+
+logic to_rep4 : dayst -> int
+
+logic of_rep4 : int -> dayst
+
+axiom inversion_axiom4 :
+  (forall x:dayst [to_rep4(x)]. (of_rep4(to_rep4(x)) = x))
+
+axiom range_axiom4 : (forall x:dayst [to_rep4(x)]. in_range6(to_rep4(x)))
+
+axiom coerce_axiom4 :
+  (forall x:int [to_rep4(of_rep4(x))]. (in_range6(x) ->
+  (to_rep4(of_rep4(x)) = x)))
+
+type millisecst
+
+predicate in_range7(x: int) = ((0 <= x) and (x <= 86399999))
+
+logic bool_eq9 : int, int -> bool
+
+axiom bool_eq_def8 :
+  (forall x:int. forall y:int [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE7 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check7 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE7 : us_image -> int
+
+logic user_eq7 : millisecst, millisecst -> bool
+
+logic dummy8 : millisecst
+
+type millisecst__ref = { millisecst__content : millisecst
+}
+
+function millisecst__ref___projection(a: millisecst__ref) : millisecst =
+  (a).millisecst__content
+
+logic to_rep5 : millisecst -> int
+
+logic of_rep5 : int -> millisecst
+
+axiom inversion_axiom5 :
+  (forall x:millisecst [to_rep5(x)]. (of_rep5(to_rep5(x)) = x))
+
+axiom range_axiom5 :
+  (forall x:millisecst [to_rep5(x)]. in_range7(to_rep5(x)))
+
+axiom coerce_axiom5 :
+  (forall x:int [to_rep5(of_rep5(x))]. (in_range7(x) ->
+  (to_rep5(of_rep5(x)) = x)))
+
+type us_split_fields2 = { rec__clock__timet__year : yearst;
+rec__clock__timet__month : monthst; rec__clock__timet__day : dayst;
+rec__clock__timet__millisec : millisecst
+}
+
+function us_split_fields_Year__projection(a: us_split_fields2) : yearst =
+  (a).rec__clock__timet__year
+
+function us_split_fields_Month__projection(a: us_split_fields2) : monthst =
+  (a).rec__clock__timet__month
+
+function us_split_fields_Day__projection(a: us_split_fields2) : dayst =
+  (a).rec__clock__timet__day
+
+function us_split_fields_MilliSec__projection(a: us_split_fields2) : millisecst =
+  (a).rec__clock__timet__millisec
+
+type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
+}
+
+function us_split_fields__ref___4__projection(a: us_split_fields__ref1) : us_split_fields2 =
+  (a).us_split_fields__content1
+
+type us_rep1 = { us_split_fields3 : us_split_fields2
+}
+
+function us_rep___4__projection(a: us_rep1) : us_split_fields2 =
+  (a).us_split_fields3
+
+logic bool_eq10 : us_rep1, us_rep1 -> bool
+
+axiom bool_eq_def9 :
+  (forall a:us_rep1. forall b:us_rep1 [bool_eq10(a, b)].
+  ((((((to_rep2(((a).us_split_fields3).rec__clock__timet__year) = to_rep2(((b).us_split_fields3).rec__clock__timet__year)) and
+  (to_rep3(((a).us_split_fields3).rec__clock__timet__month) = to_rep3(((b).us_split_fields3).rec__clock__timet__month))) and
+  (to_rep4(((a).us_split_fields3).rec__clock__timet__day) = to_rep4(((b).us_split_fields3).rec__clock__timet__day))) and
+  (to_rep5(((a).us_split_fields3).rec__clock__timet__millisec) = to_rep5(((b).us_split_fields3).rec__clock__timet__millisec))) ->
+  (bool_eq10(a, b) = true)) and
+  ((not ((((to_rep2(((a).us_split_fields3).rec__clock__timet__year) = to_rep2(((b).us_split_fields3).rec__clock__timet__year)) and
+  (to_rep3(((a).us_split_fields3).rec__clock__timet__month) = to_rep3(((b).us_split_fields3).rec__clock__timet__month))) and
+  (to_rep4(((a).us_split_fields3).rec__clock__timet__day) = to_rep4(((b).us_split_fields3).rec__clock__timet__day))) and
+  (to_rep5(((a).us_split_fields3).rec__clock__timet__millisec) = to_rep5(((b).us_split_fields3).rec__clock__timet__millisec)))) ->
+  (bool_eq10(a, b) = false))))
+
+logic value__size1 : int
+
+logic object__size1 : us_rep1 -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : us_rep1 -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 :
+  (forall a:yearst. forall a1:monthst. forall a2:dayst. forall a3:millisecst.
+  (0 <= object__size1({ us_split_fields3 = { rec__clock__timet__year = a;
+  rec__clock__timet__month = a1; rec__clock__timet__day = a2;
+  rec__clock__timet__millisec = a3 } })))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:yearst. forall a1:monthst. forall a2:dayst. forall a3:millisecst.
+  (0 <= object__alignment1({ us_split_fields3 = { rec__clock__timet__year =
+  a; rec__clock__timet__month = a1; rec__clock__timet__day = a2;
+  rec__clock__timet__millisec = a3 } })))
+
+logic clock__timet__year__first__bit : int
+
+logic clock__timet__year__last__bit : int
+
+logic clock__timet__year__position : int
+
+axiom clock__timet__year__first__bit_axiom :
+  (0 <= clock__timet__year__first__bit)
+
+axiom clock__timet__year__last__bit_axiom :
+  (clock__timet__year__first__bit <  clock__timet__year__last__bit)
+
+axiom clock__timet__year__position_axiom :
+  (0 <= clock__timet__year__position)
+
+logic clock__timet__month__first__bit : int
+
+logic clock__timet__month__last__bit : int
+
+logic clock__timet__month__position : int
+
+axiom clock__timet__month__first__bit_axiom :
+  (0 <= clock__timet__month__first__bit)
+
+axiom clock__timet__month__last__bit_axiom :
+  (clock__timet__month__first__bit <  clock__timet__month__last__bit)
+
+axiom clock__timet__month__position_axiom :
+  (0 <= clock__timet__month__position)
+
+logic clock__timet__day__first__bit : int
+
+logic clock__timet__day__last__bit : int
+
+logic clock__timet__day__position : int
+
+axiom clock__timet__day__first__bit_axiom :
+  (0 <= clock__timet__day__first__bit)
+
+axiom clock__timet__day__last__bit_axiom :
+  (clock__timet__day__first__bit <  clock__timet__day__last__bit)
+
+axiom clock__timet__day__position_axiom : (0 <= clock__timet__day__position)
+
+logic clock__timet__millisec__first__bit : int
+
+logic clock__timet__millisec__last__bit : int
+
+logic clock__timet__millisec__position : int
+
+axiom clock__timet__millisec__first__bit_axiom :
+  (0 <= clock__timet__millisec__first__bit)
+
+axiom clock__timet__millisec__last__bit_axiom :
+  (clock__timet__millisec__first__bit <  clock__timet__millisec__last__bit)
+
+axiom clock__timet__millisec__position_axiom :
+  (0 <= clock__timet__millisec__position)
+
+logic user_eq8 : us_rep1, us_rep1 -> bool
+
+logic dummy9 : yearst
+
+logic dummy10 : monthst
+
+logic dummy11 : dayst
+
+logic dummy12 : millisecst
+
+type timet__ref = { timet__content : us_rep1
+}
+
+function timet__ref___projection(a: timet__ref) : us_rep1 =
+  (a).timet__content
+
+logic thecurrenttime : us_private -> us_rep1
+
+logic thecurrenttime__function_guard : us_rep1, us_private -> prop
+
+axiom thecurrenttime__post_axiom : true
+
+logic greaterthanorequal : us_rep1, us_rep1 -> bool
+
+logic greaterthanorequal__function_guard : bool, us_rep1, us_rep1 -> prop
+
+axiom greaterthanorequal__post_axiom : true
+
+logic theauthcertrole : us_private -> int
+
+logic theauthcertrole__function_guard : int, us_private -> prop
+
+axiom theauthcertrole__post_axiom :
+  (forall admintoken__state:us_private [theauthcertrole(admintoken__state)].
+  in_range1(theauthcertrole(admintoken__state)))
+
+logic isgood : us_private -> bool
+
+logic isgood__function_guard : bool, us_private -> prop
+
+axiom isgood__post_axiom : true
+
+logic authcertvalid : us_private -> bool
+
+logic authcertvalid__function_guard : bool, us_private -> prop
+
+axiom authcertvalid__post_axiom : true
+
+logic islocked : us_private -> bool
+
+logic islocked__function_guard : bool, us_private -> prop
+
+axiom islocked__post_axiom : true
+
+logic alarm_timeout : us_private -> us_rep1
+
+logic alarm_timeout__function_guard : us_rep1, us_private -> prop
+
+axiom alarm_timeout__post_axiom : true
+
+logic thecurrentdoor : us_private -> int
+
+logic thecurrentdoor__function_guard : int, us_private -> prop
+
+type t
+
+predicate in_range8(x: int) = ((0 <= x) and (x <= 1))
+
+logic bool_eq11 : int, int -> bool
+
+axiom bool_eq_def10 :
+  (forall x:int. forall y:int [bool_eq11(x, y)]. (((x = y) -> (bool_eq11(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq11(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE8 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check8 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE8 : us_image -> int
+
+logic user_eq9 : t, t -> bool
+
+logic dummy13 : t
+
+type t__ref1 = { t__content1 : t
+}
+
+function t__ref___4__projection(a: t__ref1) : t = (a).t__content1
+
+axiom thecurrentdoor__post_axiom :
+  (forall door__state:us_private [thecurrentdoor(door__state)].
+  in_range8(thecurrentdoor(door__state)))
+
+logic thedooralarm : us_private -> int
+
+logic thedooralarm__function_guard : int, us_private -> prop
+
+type statust
+
+predicate in_range9(x: int) = ((0 <= x) and (x <= 1))
+
+logic bool_eq12 : int, int -> bool
+
+axiom bool_eq_def11 :
+  (forall x:int. forall y:int [bool_eq12(x, y)]. (((x = y) -> (bool_eq12(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq12(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE9 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check9 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE9 : us_image -> int
+
+logic user_eq10 : statust, statust -> bool
+
+logic dummy14 : statust
+
+type statust__ref = { statust__content : statust
+}
+
+function statust__ref___projection(a: statust__ref) : statust =
+  (a).statust__content
+
+axiom thedooralarm__post_axiom :
+  (forall door__state:us_private [thedooralarm(door__state)].
+  in_range9(thedooralarm(door__state)))
+
+type statust1
+
+predicate in_range10(x: int) = ((0 <= x) and (x <= 8))
+
+logic bool_eq13 : int, int -> bool
+
+axiom bool_eq_def12 :
+  (forall x:int. forall y:int [bool_eq13(x, y)]. (((x = y) -> (bool_eq13(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq13(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE10 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check10 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE10 : us_image -> int
+
+logic user_eq11 : statust1, statust1 -> bool
+
+logic dummy15 : statust1
+
+type statust__ref1 = { statust__content1 : statust1
+}
+
+function statust__ref___2__projection(a: statust__ref1) : statust1 =
+  (a).statust__content1
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic current_latch : us_private -> int
+
+logic current_latch__function_guard : int, us_private -> prop
+
+logic latch_timeout : us_private -> us_rep1
+
+logic latch_timeout__function_guard : us_rep1, us_private -> prop
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+type t1
+
+predicate in_range11(x: int) = ((0 <= x) and (x <= 1))
+
+logic bool_eq14 : int, int -> bool
+
+axiom bool_eq_def13 :
+  (forall x:int. forall y:int [bool_eq14(x, y)]. (((x = y) -> (bool_eq14(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq14(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE11 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check11 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE11 : us_image -> int
+
+logic user_eq12 : t1, t1 -> bool
+
+logic dummy16 : t1
+
+type t__ref2 = { t__content2 : t1
+}
+
+function t__ref___3__projection(a: t__ref2) : t1 = (a).t__content2
+
+axiom current_latch__post_axiom :
+  (forall latch__state:us_private [current_latch(latch__state)].
+  in_range11(current_latch(latch__state)))
+
+axiom latch_timeout__post_axiom : true
+
+ (* File "enclave.adb", line 1247, characters 0-0 *)
+goal WP_parameter_def :
+  (forall currenttime:us_private. forall filestate:us_private.
+  forall state:us_private. forall state1:us_private.
+  forall state2:us_private. forall state3:us_private.
+  forall state4:us_private. forall state5:us_private.
+  forall writtenstate:us_private. forall output:us_private.
+  forall state6:us_private. forall status:int.
+  forall theadmin__split_fields:privileget.
+  forall theadmin__split_fields1:opandnullt. forall o:int. forall o1:int.
+  forall o2:int. forall o3:int. forall o4:bool. forall o5:bool.
+  forall o6:bool. forall o7:bool. forall o8:int. forall o9:bool.
+  forall o10:bool. forall o11:bool. forall filestate1:us_private.
+  forall state7:us_private. forall state8:us_private.
+  forall state9:us_private. forall state10:us_private.
+  forall state11:us_private. forall state12:us_private.
+  forall writtenstate1:us_private. forall output1:us_private.
+  forall state13:us_private. forall result:bool.
+  forall filestate2:us_private. forall state14:us_private.
+  forall state15:us_private. forall writtenstate2:us_private.
+  forall output2:us_private. forall state16:us_private. forall status1:int.
+  forall theadmin__split_fields2:privileget.
+  forall theadmin__split_fields3:opandnullt. forall result1:bool.
+  forall filestate3:us_private. forall state17:us_private.
+  forall filestate4:us_private. forall state18:us_private.
+  forall state19:us_private. forall state20:us_private. forall status2:int.
+  forall theadmin__split_fields4:privileget.
+  forall theadmin__split_fields5:opandnullt. forall result2:bool.
+  forall filestate5:us_private. forall state21:us_private.
+  forall state22:us_private. forall state23:us_private.
+  forall state24:us_private. forall state25:us_private. forall status3:int.
+  forall theadmin__split_fields6:privileget.
+  forall theadmin__split_fields7:opandnullt. forall filestate6:us_private.
+  forall state26:us_private. forall state27:us_private.
+  forall state28:us_private. forall state29:us_private.
+  forall state30:us_private. forall state31:us_private.
+  forall state32:us_private. forall status4:int.
+  forall theadmin__split_fields8:privileget.
+  forall theadmin__split_fields9:opandnullt. forall filestate7:us_private.
+  forall state33:us_private. forall filestate8:us_private.
+  forall state34:us_private. forall state35:us_private.
+  forall state36:us_private. forall state37:us_private.
+  forall state38:us_private. forall state39:us_private.
+  forall writtenstate3:us_private. forall output3:us_private.
+  forall state40:us_private. forall state41:us_private.
+  forall status5:int__ref.
+  forall theadmin__split_fields10:us_split_fields__ref.
+  forall filestate9:us_private. forall state42:us_private.
+  forall filestate10:us_private. forall state43:us_private.
+  forall state44:us_private. forall state45:us_private.
+  forall state46:us_private. forall state47:us_private.
+  forall state48:us_private. forall writtenstate4:us_private.
+  forall output4:us_private. forall state49:us_private.
+  forall state50:us_private. forall status6:int.
+  forall theadmin__split_fields11:us_split_fields. forall result3:bool.
+  forall result4:bool. (in_range10(status) -> ((((((((((status = 6) or
+  (status = 7)) and (((isdoingop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields;
+  rec__admin__t__currentop = theadmin__split_fields1 } }) = true) and
+  (thecurrentop({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields; rec__admin__t__currentop = theadmin__split_fields1
+  } }) = 4)) -> (status = 6))) and (ispresent({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields;
+  rec__admin__t__currentop = theadmin__split_fields1 } }) = true)) and
+  (isdoingop({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields; rec__admin__t__currentop = theadmin__split_fields1
+  } }) = true)) and ((((islocked(state2) = true) and
+  (thecurrentdoor(state3) = 0)) and
+  (greaterthanorequal(thecurrenttime(currenttime),
+  alarm_timeout(state3)) = true)) <-> (thedooralarm(state3) = 0))) and
+  ((rolepresent({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields; rec__admin__t__currentop = theadmin__split_fields1
+  } }) = 1) -> (((isgood(state1) = true) and
+  (authcertvalid(state1) = true)) and (theauthcertrole(state1) = 1)))) and
+  (((isdoingop({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields; rec__admin__t__currentop = theadmin__split_fields1
+  } }) = true) and (thecurrentop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields;
+  rec__admin__t__currentop = theadmin__split_fields1 } }) = 3)) ->
+  (rolepresent({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields; rec__admin__t__currentop = theadmin__split_fields1
+  } }) = 1))) and ((rolepresent({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields;
+  rec__admin__t__currentop = theadmin__split_fields1 } }) = 1) ->
+  (((isdoingop({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields; rec__admin__t__currentop = theadmin__split_fields1
+  } }) = true) and (thecurrentop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields;
+  rec__admin__t__currentop = theadmin__split_fields1 } }) = 3)) or
+  (not (isdoingop({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields; rec__admin__t__currentop = theadmin__split_fields1
+  } }) = true))))) -> ((((((o = thecurrentop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields;
+  rec__admin__t__currentop = theadmin__split_fields1 } })) and
+  in_range3(o)) and (((o = 1) and (result = true)) or ((not (o = 1)) and
+  (result = false)))) and (((result = true) and ((((((((((((status1 = 6) or
+  (status1 = 7)) or (status1 = 3)) and (ispresent({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields2;
+  rec__admin__t__currentop = theadmin__split_fields3 } }) = true)) and
+  (((status1 = 6) or (status1 = 7)) -> (((isdoingop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields2;
+  rec__admin__t__currentop = theadmin__split_fields3 } }) = true) and
+  (ispresent({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields2; rec__admin__t__currentop = theadmin__split_fields3
+  } }) = true)) and (thecurrentop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields2;
+  rec__admin__t__currentop = theadmin__split_fields3 } }) = 1)))) and
+  ((status1 = 3) -> (not (isdoingop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields2;
+  rec__admin__t__currentop = theadmin__split_fields3 } }) = true)))) and
+  ((rolepresent({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields2; rec__admin__t__currentop = theadmin__split_fields3
+  } }) = 1) -> (((isgood(state1) = true) and
+  (authcertvalid(state1) = true)) and (theauthcertrole(state1) = 1)))) and
+  (((isdoingop({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields2; rec__admin__t__currentop = theadmin__split_fields3
+  } }) = true) and (thecurrentop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields2;
+  rec__admin__t__currentop = theadmin__split_fields3 } }) = 3)) ->
+  (rolepresent({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields2; rec__admin__t__currentop = theadmin__split_fields3
+  } }) = 1))) and ((rolepresent({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields2;
+  rec__admin__t__currentop = theadmin__split_fields3 } }) = 1) ->
+  (((isdoingop({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields2; rec__admin__t__currentop = theadmin__split_fields3
+  } }) = true) and (thecurrentop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields2;
+  rec__admin__t__currentop = theadmin__split_fields3 } }) = 3)) or
+  (not (isdoingop({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields2; rec__admin__t__currentop = theadmin__split_fields3
+  } }) = true))))) and (rolepresent({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields2;
+  rec__admin__t__currentop = theadmin__split_fields3 } }) = rolepresent({
+  us_split_fields1 = { rec__admin__t__rolepresent = theadmin__split_fields;
+  rec__admin__t__currentop = theadmin__split_fields1 } }))) and
+  in_range10(status1)) and (((state32 = state6) and ((state24 = state4) and
+  ((state23 = state3) and ((state22 = state2) and ((state27 = state1) and
+  ((state17 = state) and (filestate3 = filestate))))))) and
+  ((state32 = state13) and ((state24 = state11) and ((state23 = state10) and
+  ((state22 = state9) and ((state27 = state8) and ((state17 = state7) and
+  (filestate3 = filestate1)))))))))) or ((not (result = true)) and
+  (((((o1 = thecurrentop({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields; rec__admin__t__currentop = theadmin__split_fields1
+  } })) and in_range3(o1)) and (((o1 = 2) and (result1 = true)) or
+  ((not (o1 = 2)) and (result1 = false)))) and (((result1 = true) and
+  (((((((((status2 = 6) or (status2 = 7)) or (status2 = 3)) and (ispresent({
+  us_split_fields1 = { rec__admin__t__rolepresent = theadmin__split_fields4;
+  rec__admin__t__currentop = theadmin__split_fields5 } }) = true)) and
+  (((status2 = 6) or (status2 = 7)) -> (((isdoingop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields4;
+  rec__admin__t__currentop = theadmin__split_fields5 } }) = true) and
+  (ispresent({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields4; rec__admin__t__currentop = theadmin__split_fields5
+  } }) = true)) and (thecurrentop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields4;
+  rec__admin__t__currentop = theadmin__split_fields5 } }) = 2)))) and
+  ((status2 = 3) -> (not (isdoingop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields4;
+  rec__admin__t__currentop = theadmin__split_fields5 } }) = true)))) and
+  (rolepresent({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields4; rec__admin__t__currentop = theadmin__split_fields5
+  } }) = rolepresent({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields; rec__admin__t__currentop = theadmin__split_fields1
+  } }))) and in_range10(status2)) and (((state32 = state6) and
+  ((state24 = state4) and ((state23 = state3) and ((state22 = state2) and
+  (state27 = state1))))) and ((state32 = state13) and
+  ((state24 = state11) and ((state23 = state10) and ((state22 = state9) and
+  (state27 = state8)))))))) or ((not (result1 = true)) and
+  (((((o2 = thecurrentop({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields; rec__admin__t__currentop = theadmin__split_fields1
+  } })) and in_range3(o2)) and (((o2 = 3) and (result2 = true)) or
+  ((not (o2 = 3)) and (result2 = false)))) and (((result2 = true) and
+  (((((((((((status3 = 3) and ((((islocked(state22) = true) and
+  (thecurrentdoor(state23) = 0)) and
+  (greaterthanorequal(thecurrenttime(currenttime),
+  alarm_timeout(state23)) = true)) <-> (thedooralarm(state23) = 0))) and
+  (rolepresent({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields6; rec__admin__t__currentop = theadmin__split_fields7
+  } }) = rolepresent({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields; rec__admin__t__currentop = theadmin__split_fields1
+  } }))) and (not (isdoingop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields6;
+  rec__admin__t__currentop = theadmin__split_fields7 } }) = true))) and
+  ((rolepresent({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields6; rec__admin__t__currentop = theadmin__split_fields7
+  } }) = 1) -> (((isgood(state1) = true) and
+  (authcertvalid(state1) = true)) and (theauthcertrole(state1) = 1)))) and
+  (((not (islocked(state22) = true)) and (islocked(state2) = true)) ->
+  (((isgood(state1) = true) and (authcertvalid(state1) = true)) and
+  (theauthcertrole(state1) = 1)))) and (((isdoingop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields6;
+  rec__admin__t__currentop = theadmin__split_fields7 } }) = true) and
+  (thecurrentop({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields6; rec__admin__t__currentop = theadmin__split_fields7
+  } }) = 3)) -> (rolepresent({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields6;
+  rec__admin__t__currentop = theadmin__split_fields7 } }) = 1))) and
+  ((rolepresent({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields6; rec__admin__t__currentop = theadmin__split_fields7
+  } }) = 1) -> (((isdoingop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields6;
+  rec__admin__t__currentop = theadmin__split_fields7 } }) = true) and
+  (thecurrentop({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields6; rec__admin__t__currentop = theadmin__split_fields7
+  } }) = 3)) or (not (isdoingop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields6;
+  rec__admin__t__currentop = theadmin__split_fields7 } }) = true))))) and
+  (((not (islocked(state22) = true)) and (islocked(state2) = true)) ->
+  ((isdoingop({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields; rec__admin__t__currentop = theadmin__split_fields1
+  } }) = true) and (thecurrentop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields;
+  rec__admin__t__currentop = theadmin__split_fields1 } }) = 3)))) and
+  in_range10(status3)) and (((state32 = state6) and (state27 = state1)) and
+  ((state32 = state13) and (state27 = state8))))) or
+  ((not (result2 = true)) and ((((((((((((status4 = 8) or (status4 = 6)) and
+  ((not (status4 = 6)) or ((((((rolepresent({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields8;
+  rec__admin__t__currentop = theadmin__split_fields9 } }) = rolepresent({
+  us_split_fields1 = { rec__admin__t__rolepresent = theadmin__split_fields;
+  rec__admin__t__currentop = theadmin__split_fields1 } })) and (ispresent({
+  us_split_fields1 = { rec__admin__t__rolepresent = theadmin__split_fields8;
+  rec__admin__t__currentop = theadmin__split_fields9 } }) = true)) and
+  (isdoingop({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields8; rec__admin__t__currentop = theadmin__split_fields9
+  } }) = true)) and (current_latch(state28) = current_latch(state2))) and
+  (bool_eq10(latch_timeout(state28), latch_timeout(state2)) = true)) and
+  (thecurrentop({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields8; rec__admin__t__currentop = theadmin__split_fields9
+  } }) = 4)))) and ((status4 = 8) -> (((rolepresent({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields8;
+  rec__admin__t__currentop = theadmin__split_fields9 } }) = 0) and
+  (islocked(state28) = true)) and (not (isdoingop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields8;
+  rec__admin__t__currentop = theadmin__split_fields9 } }) = true))))) and
+  (((isdoingop({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields8; rec__admin__t__currentop = theadmin__split_fields9
+  } }) = true) and (thecurrentop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields8;
+  rec__admin__t__currentop = theadmin__split_fields9 } }) = 4)) <->
+  (status4 = 6))) and ((((islocked(state28) = true) and
+  (thecurrentdoor(state29) = 0)) and
+  (greaterthanorequal(thecurrenttime(currenttime),
+  alarm_timeout(state29)) = true)) <-> (thedooralarm(state29) = 0))) and
+  ((rolepresent({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields8; rec__admin__t__currentop = theadmin__split_fields9
+  } }) = 1) -> (((isgood(state27) = true) and
+  (authcertvalid(state27) = true)) and (theauthcertrole(state27) = 1)))) and
+  (((not (islocked(state28) = true)) and (islocked(state2) = true)) ->
+  (((isgood(state27) = true) and (authcertvalid(state27) = true)) and
+  (theauthcertrole(state27) = 1)))) and (((isdoingop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields8;
+  rec__admin__t__currentop = theadmin__split_fields9 } }) = true) and
+  (thecurrentop({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields8; rec__admin__t__currentop = theadmin__split_fields9
+  } }) = 3)) -> (rolepresent({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields8;
+  rec__admin__t__currentop = theadmin__split_fields9 } }) = 1))) and
+  ((rolepresent({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields8; rec__admin__t__currentop = theadmin__split_fields9
+  } }) = 1) -> (((isdoingop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields8;
+  rec__admin__t__currentop = theadmin__split_fields9 } }) = true) and
+  (thecurrentop({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields8; rec__admin__t__currentop = theadmin__split_fields9
+  } }) = 3)) or (not (isdoingop({ us_split_fields1 = {
+  rec__admin__t__rolepresent = theadmin__split_fields8;
+  rec__admin__t__currentop = theadmin__split_fields9 } }) = true))))) and
+  in_range10(status4)) and (({ rec__admin__t__rolepresent =
+  theadmin__split_fields6; rec__admin__t__currentop = theadmin__split_fields7
+  } = { rec__admin__t__rolepresent = theadmin__split_fields8;
+  rec__admin__t__currentop = theadmin__split_fields9 }) and
+  ((status3 = status4) and ((state25 = state31) and ((state24 = state30) and
+  ((state23 = state29) and ((state22 = state28) and ((state21 = state26) and
+  (filestate5 = filestate6)))))))))))) and ((({ rec__admin__t__rolepresent =
+  theadmin__split_fields4; rec__admin__t__currentop = theadmin__split_fields5
+  } = { rec__admin__t__rolepresent = theadmin__split_fields6;
+  rec__admin__t__currentop = theadmin__split_fields7 }) and
+  ((status2 = status3) and ((state20 = state25) and ((state19 = state5) and
+  ((state18 = state21) and ((filestate4 = filestate5) and
+  ((state17 = state) and (filestate3 = filestate)))))))) and (({
+  rec__admin__t__rolepresent = theadmin__split_fields4;
+  rec__admin__t__currentop = theadmin__split_fields5 } = {
+  rec__admin__t__rolepresent = theadmin__split_fields6;
+  rec__admin__t__currentop = theadmin__split_fields7 }) and
+  ((status2 = status3) and ((state20 = state25) and ((state19 = state12) and
+  ((state18 = state21) and ((filestate4 = filestate5) and
+  ((state17 = state7) and (filestate3 = filestate1))))))))))))) and ((({
+  rec__admin__t__rolepresent = theadmin__split_fields2;
+  rec__admin__t__currentop = theadmin__split_fields3 } = {
+  rec__admin__t__rolepresent = theadmin__split_fields4;
+  rec__admin__t__currentop = theadmin__split_fields5 }) and
+  ((status1 = status2) and ((state16 = state20) and ((output2 = output) and
+  ((writtenstate2 = writtenstate) and ((state15 = state19) and
+  ((state14 = state18) and (filestate2 = filestate4)))))))) and (({
+  rec__admin__t__rolepresent = theadmin__split_fields2;
+  rec__admin__t__currentop = theadmin__split_fields3 } = {
+  rec__admin__t__rolepresent = theadmin__split_fields4;
+  rec__admin__t__currentop = theadmin__split_fields5 }) and
+  ((status1 = status2) and ((state16 = state20) and ((output2 = output1) and
+  ((writtenstate2 = writtenstate1) and ((state15 = state19) and
+  ((state14 = state18) and (filestate2 = filestate4))))))))))))) and
+  (((theadmin__split_fields10 = { us_split_fields__content = {
+  rec__admin__t__rolepresent = theadmin__split_fields2;
+  rec__admin__t__currentop = theadmin__split_fields3 } }) and ((status5 = {
+  int__content = status1 }) and ((state41 = state32) and
+  ((state40 = state16) and ((output3 = output2) and
+  ((writtenstate3 = writtenstate2) and ((state39 = state15) and
+  ((state38 = state24) and ((state37 = state23) and ((state22 = state36) and
+  ((state35 = state27) and ((state34 = state14) and
+  ((filestate8 = filestate2) and ((state33 = state17) and
+  (filestate7 = filestate3))))))))))))))) and ((theadmin__split_fields11 = {
+  rec__admin__t__rolepresent = theadmin__split_fields2;
+  rec__admin__t__currentop = theadmin__split_fields3 }) and
+  ((status6 = status1) and ((state50 = state32) and ((state49 = state16) and
+  ((output4 = output2) and ((writtenstate4 = writtenstate2) and
+  ((state48 = state15) and ((state47 = state24) and ((state46 = state23) and
+  ((state45 = state22) and ((state44 = state27) and ((state43 = state14) and
+  ((filestate10 = filestate2) and ((state42 = state17) and
+  (filestate9 = filestate3))))))))))))))))) ->
+  (((((o6 = islocked(state36)) and (((not (o6 = true)) and (o7 = true)) or
+  ((o6 = true) and (o7 = false)))) and (result3 = match_bool(o7,
+  islocked(state2), false))) and (((result3 = true) and
+  ((((o8 = thecurrentop({ us_split_fields1 = { rec__admin__t__rolepresent =
+  theadmin__split_fields; rec__admin__t__currentop = theadmin__split_fields1
+  } })) and in_range3(o8)) and (((o8 = 3) and (o9 = true)) or
+  ((not (o8 = 3)) and (o9 = false)))) and ((o10 = isdoingop({
+  us_split_fields1 = { rec__admin__t__rolepresent = theadmin__split_fields;
+  rec__admin__t__currentop = theadmin__split_fields1 } })) and
+  (o11 = match_bool(o10, o9, false))))) or ((not (result3 = true)) and
+  (o11 = of_int(1))))) -> ((((o3 = rolepresent({ us_split_fields1 =
+  (theadmin__split_fields10).us_split_fields__content })) and
+  in_range1(o3)) and (((o3 = 1) and (result4 = true)) or ((not (o3 = 1)) and
+  (result4 = false)))) -> ((result4 = true) -> (((o4 = isdoingop({
+  us_split_fields1 = (theadmin__split_fields10).us_split_fields__content
+  })) and (((not (o4 = true)) and (o5 = true)) or ((o4 = true) and
+  (o5 = false)))) -> (isdoingop({ us_split_fields1 =
+  (theadmin__split_fields10).us_split_fields__content }) = true)))))))))

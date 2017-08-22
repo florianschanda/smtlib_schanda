@@ -169,7 +169,7 @@
 (declare-datatypes ((scalar_with_default__ref 0))
 (((mk_scalar_with_default__ref
   (scalar_with_default__content scalar_with_default)))))
-(define-fun scalar_with_default__ref_4__projection ((a scalar_with_default__ref)) scalar_with_default
+(define-fun scalar_with_default__ref___4__projection ((a scalar_with_default__ref)) scalar_with_default
   (scalar_with_default__content a))
 
 (declare-fun to_rep2 (scalar_with_default) Int)
@@ -210,7 +210,7 @@
 (declare-datatypes ((tscalar_with_defaultB__ref 0))
 (((mk_tscalar_with_defaultB__ref
   (tscalar_with_defaultB__content tscalar_with_defaultB)))))
-(define-fun tscalar_with_defaultB__ref_4__projection ((a tscalar_with_defaultB__ref)) tscalar_with_defaultB
+(define-fun tscalar_with_defaultB__ref___4__projection ((a tscalar_with_defaultB__ref)) tscalar_with_defaultB
   (tscalar_with_defaultB__content a))
 
 (declare-fun to_rep3 (tscalar_with_defaultB) Int)
@@ -251,7 +251,7 @@
 (declare-datatypes ((scalar_bad_default__ref 0))
 (((mk_scalar_bad_default__ref
   (scalar_bad_default__content tscalar_with_defaultB)))))
-(define-fun scalar_bad_default__ref_4__projection ((a scalar_bad_default__ref)) tscalar_with_defaultB
+(define-fun scalar_bad_default__ref___4__projection ((a scalar_bad_default__ref)) tscalar_with_defaultB
   (scalar_bad_default__content a))
 
 (declare-const first1 Int)
@@ -271,7 +271,7 @@
 
 (declare-datatypes ((scalar_no_default__ref 0))
 (((mk_scalar_no_default__ref (scalar_no_default__content integer)))))
-(define-fun scalar_no_default__ref_3__projection ((a scalar_no_default__ref)) integer
+(define-fun scalar_no_default__ref___3__projection ((a scalar_no_default__ref)) integer
   (scalar_no_default__content a))
 
 (declare-datatypes ((map__ref 0))
@@ -805,7 +805,7 @@
 
 (declare-datatypes ((array_bad_default2__ref 0))
 (((mk_array_bad_default2__ref (array_bad_default2__content us_t)))))
-(define-fun array_bad_default2__ref_2__projection ((a array_bad_default2__ref)) us_t
+(define-fun array_bad_default2__ref___2__projection ((a array_bad_default2__ref)) us_t
   (array_bad_default2__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_268 (Array Int tscalar_with_defaultB))

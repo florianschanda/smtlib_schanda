@@ -601,21 +601,21 @@
 (define-fun us_split_fields_EDV2__projection ((a us_split_fields)) bits_9
   (rec__dw1000__register_types__agc_stat1_type__edv2 a))
 
-(define-fun us_split_fields_Reserved_17__projection ((a us_split_fields)) bits_6
+(define-fun us_split_fields_Reserved_1__7__projection ((a us_split_fields)) bits_6
   (rec__dw1000__register_types__agc_stat1_type__reserved_1 a))
 
-(define-fun us_split_fields_Reserved_27__projection ((a us_split_fields)) bits_4
+(define-fun us_split_fields_Reserved_2__7__projection ((a us_split_fields)) bits_4
   (rec__dw1000__register_types__agc_stat1_type__reserved_2 a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_30__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___30__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_30__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___30__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                 a))
 
 (define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -742,7 +742,7 @@
 
 (declare-datatypes ((register_type__ref 0))
 (((mk_register_type__ref (register_type__content us_rep)))))
-(define-fun register_type__ref_68__projection ((a register_type__ref)) us_rep
+(define-fun register_type__ref___68__projection ((a register_type__ref)) us_rep
   (register_type__content a))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
@@ -762,7 +762,7 @@
 
 (declare-datatypes ((tregister_byte_arrayP1__ref 0))
 (((mk_tregister_byte_arrayP1__ref (tregister_byte_arrayP1__content integer)))))
-(define-fun tregister_byte_arrayP1__ref_49__projection ((a tregister_byte_arrayP1__ref)) integer
+(define-fun tregister_byte_arrayP1__ref___49__projection ((a tregister_byte_arrayP1__ref)) integer
   (tregister_byte_arrayP1__content a))
 
 (declare-sort t1 0)
@@ -844,19 +844,19 @@
 
 (declare-datatypes ((register_byte_array__ref 0))
 (((mk_register_byte_array__ref (register_byte_array__content us_t1)))))
-(define-fun register_byte_array__ref_49__projection ((a register_byte_array__ref)) us_t1
+(define-fun register_byte_array__ref___49__projection ((a register_byte_array__ref)) us_t1
   (register_byte_array__content a))
 
-(define-fun dynamic_invariant ((temp___expr_3605 us_t1)
-  (temp___is_init_3602 Bool) (temp___skip_constant_3603 Bool)
-  (temp___do_toplevel_3604 Bool)) Bool (=>
+(define-fun dynamic_invariant ((temp___expr_3651 us_t1)
+  (temp___is_init_3648 Bool) (temp___skip_constant_3649 Bool)
+  (temp___do_toplevel_3650 Bool)) Bool (=>
                                        (not
-                                       (= temp___skip_constant_3603 true))
+                                       (= temp___skip_constant_3649 true))
                                        (and (dynamic_property2 1 3
-                                       (first3 temp___expr_3605)
-                                       (last3 temp___expr_3605))
-                                       (and (= (first3 temp___expr_3605) 1)
-                                       (= (last3 temp___expr_3605) 3)))))
+                                       (first3 temp___expr_3651)
+                                       (last3 temp___expr_3651))
+                                       (and (= (first3 temp___expr_3651) 1)
+                                       (= (last3 temp___expr_3651) 3)))))
 
 (declare-const reg_bytes__first integer)
 

@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -143,7 +144,7 @@
   (temp___do_toplevel_151 Bool)) Bool (=>
                                       (or (= temp___is_init_149 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_152) (fp.isNaN temp___expr_152)))))
+                                      (fp.isFinite32 temp___expr_152)))
 
 (declare-fun to_rep (speed_t) Float32)
 
@@ -156,14 +157,13 @@
 ;; range_axiom
   (assert
   (forall ((x speed_t))
-  (! (not (or (fp.isInfinite (to_rep x)) (fp.isNaN (to_rep x)))) :pattern (
-  (to_rep x)) )))
+  (! (fp.isFinite32 (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x))) (= (to_rep (of_rep x)) x)) :pattern (
-  (to_rep (of_rep x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                                (of_rep x))) )))
 
 (declare-sort tdistance_tB 0)
 
@@ -237,8 +237,7 @@
 
 (declare-sort deceleration_t 0)
 
-(define-fun in_range4 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -335,13 +334,13 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_3__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___3__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -536,13 +535,13 @@
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___4__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_4__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___4__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (define-fun bool_eq2 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -625,18 +624,18 @@
 (define-fun us_split_fields_supervise__projection ((a us_split_fields4)) Bool
   (rec__deceleration_curve__target_t__supervise a))
 
-(define-fun us_split_fields_location2__projection ((a us_split_fields4)) distance_t
+(define-fun us_split_fields_location__2__projection ((a us_split_fields4)) distance_t
   (rec__deceleration_curve__target_t__location a))
 
 (declare-datatypes ((us_split_fields__ref2 0))
 (((mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_5__projection ((a us_split_fields__ref2)) us_split_fields4
+(define-fun us_split_fields__ref___5__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep2 (us_split_fields5 us_split_fields4)))))
-(define-fun us_rep_5__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
-                                                                a))
+(define-fun us_rep___5__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
+                                                                  a))
 
 (define-fun bool_eq3 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
@@ -765,7 +764,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 ;; end_point__def_axiom
   (assert
@@ -801,7 +800,7 @@
   (temp___do_toplevel_157 Bool)) Bool (=>
                                       (or (= temp___is_init_155 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_158) (fp.isNaN temp___expr_158)))))
+                                      (fp.isFinite32 temp___expr_158)))
 
 (declare-fun is_valid_speed_km_per_h (Float32) Bool)
 
@@ -902,14 +901,13 @@
 ;; range_axiom
   (assert
   (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep3 x)) (fp.isNaN (to_rep3 x)))) :pattern (
-  (to_rep3 x)) )))
+  (! (fp.isFinite32 (to_rep3 x)) :pattern ((to_rep3 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep3 (of_rep3 x)) x)) :pattern ((to_rep3 (of_rep3 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep3 (of_rep3 x)) x)) :pattern ((to_rep3
+                                                                  (of_rep3 x))) )))
 
 (declare-sort function_range 0)
 
@@ -1158,13 +1156,13 @@
 
 (declare-datatypes ((us_split_fields__ref4 0))
 (((mk___split_fields__ref4 (us_split_fields__content4 us_split_fields8)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref4)) us_split_fields8
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref4)) us_split_fields8
   (us_split_fields__content4 a))
 
 (declare-datatypes ((us_rep4 0))
 (((mk___rep4 (us_split_fields9 us_split_fields8)))))
-(define-fun us_rep_2__projection ((a us_rep4)) us_split_fields8 (us_split_fields9
-                                                                a))
+(define-fun us_rep___2__projection ((a us_rep4)) us_split_fields8 (us_split_fields9
+                                                                  a))
 
 (define-fun bool_eq6 ((a us_rep4)
   (b us_rep4)) Bool (ite (and
@@ -1608,8 +1606,7 @@
 (declare-const location1 Int)
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite maximum_valid_speed) (fp.isNaN maximum_valid_speed))))
+  (assert (fp.isFinite32 maximum_valid_speed))
 
 ;; H
   (assert
@@ -1631,7 +1628,7 @@
             (us_split_fields5 target)))))
 
 ;; H
-  (assert (not (or (fp.isInfinite speed1) (fp.isNaN speed1))))
+  (assert (fp.isFinite32 speed1))
 
 ;; H
   (assert (= result1 (mk_int__ref location)))

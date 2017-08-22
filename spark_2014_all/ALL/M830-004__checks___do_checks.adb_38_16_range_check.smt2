@@ -340,7 +340,8 @@
 
 (declare-datatypes ((taS__ref1 0))
 (((mk_taS__ref1 (taS__content1 integer)))))
-(define-fun taS__ref_2__projection ((a taS__ref1)) integer (taS__content1 a))
+(define-fun taS__ref___2__projection ((a taS__ref1)) integer (taS__content1
+                                                             a))
 
 (define-fun dynamic_invariant3 ((temp___expr_224 Int)
   (temp___is_init_221 Bool) (temp___skip_constant_222 Bool)

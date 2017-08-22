@@ -91,13 +91,13 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_3__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___3__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (= (to_rep
@@ -154,12 +154,12 @@
 
 (declare-datatypes ((us_split_discrs 0))
 (((mk___split_discrs (rec__cursors__r__b Bool)))))
-(define-fun us_split_discrs_2__projection ((a us_split_discrs)) Bool
+(define-fun us_split_discrs___2__projection ((a us_split_discrs)) Bool
   (rec__cursors__r__b a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
 (((mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref_2__projection ((a us_split_discrs__ref)) us_split_discrs
+(define-fun us_split_discrs__ref___2__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ((us_split_fields2 0))
@@ -169,17 +169,17 @@
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1
   (us_split_discrs1 us_split_discrs)(us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_4__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___4__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_5__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___5__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (define-fun cursors__r__c__pred ((a us_rep1)) Bool (= (to_int1
                                                       (rec__cursors__r__b

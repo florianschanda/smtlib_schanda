@@ -404,7 +404,7 @@
 
 (declare-datatypes ((file_type__ref 0))
 (((mk_file_type__ref (file_type__content us_rep)))))
-(define-fun file_type__ref_2__projection ((a file_type__ref)) us_rep
+(define-fun file_type__ref___2__projection ((a file_type__ref)) us_rep
   (file_type__content a))
 
 (declare-sort file_status 0)
@@ -423,7 +423,7 @@
 
 (declare-datatypes ((file_status__ref 0))
 (((mk_file_status__ref (file_status__content file_status)))))
-(define-fun file_status__ref_2__projection ((a file_status__ref)) file_status
+(define-fun file_status__ref___2__projection ((a file_status__ref)) file_status
   (file_status__content a))
 
 (declare-fun to_rep2 (file_status) Int)
@@ -449,12 +449,12 @@
 (declare-datatypes ((us_split_discrs 0))
 (((mk___split_discrs
   (rec__spark__text_io__character_result__status file_status)))))
-(define-fun us_split_discrs_2__projection ((a us_split_discrs)) file_status
+(define-fun us_split_discrs___2__projection ((a us_split_discrs)) file_status
   (rec__spark__text_io__character_result__status a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
 (((mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref_2__projection ((a us_split_discrs__ref)) us_split_discrs
+(define-fun us_split_discrs__ref___2__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ((us_split_fields 0))
@@ -464,19 +464,19 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)(attr__constrained Bool)))))
-(define-fun us_rep_6__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___6__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_7__projection ((a us_rep1)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___7__projection ((a us_rep1)) us_split_fields (us_split_fields1
+                                                                 a))
 
-(define-fun us_rep_8__projection ((a us_rep1)) Bool (attr__constrained a))
+(define-fun us_rep___8__projection ((a us_rep1)) Bool (attr__constrained a))
 
 (define-fun spark__text_io__character_result__item__pred ((a us_rep1)) Bool (=
   (to_rep2
@@ -4733,7 +4733,7 @@
 
 (declare-datatypes ((file_mode__ref 0))
 (((mk_file_mode__ref (file_mode__content file_mode)))))
-(define-fun file_mode__ref_3__projection ((a file_mode__ref)) file_mode
+(define-fun file_mode__ref___3__projection ((a file_mode__ref)) file_mode
   (file_mode__content a))
 
 (define-fun dynamic_invariant7 ((temp___expr_552 Int)
@@ -4758,8 +4758,8 @@
 
 (declare-datatypes ((count__ref 0))
 (((mk_count__ref (count__content count)))))
-(define-fun count__ref_2__projection ((a count__ref)) count (count__content
-                                                            a))
+(define-fun count__ref___2__projection ((a count__ref)) count (count__content
+                                                              a))
 
 (define-fun dynamic_invariant8 ((temp___expr_558 Int)
   (temp___is_init_555 Bool) (temp___skip_constant_556 Bool)

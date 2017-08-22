@@ -81,7 +81,7 @@
 (declare-datatypes ((scalar_with_default__ref 0))
 (((mk_scalar_with_default__ref
   (scalar_with_default__content scalar_with_default)))))
-(define-fun scalar_with_default__ref_3__projection ((a scalar_with_default__ref)) scalar_with_default
+(define-fun scalar_with_default__ref___3__projection ((a scalar_with_default__ref)) scalar_with_default
   (scalar_with_default__content a))
 
 (declare-sort tscalar_with_defaultB 0)
@@ -102,7 +102,7 @@
 (declare-datatypes ((tscalar_with_defaultB__ref 0))
 (((mk_tscalar_with_defaultB__ref
   (tscalar_with_defaultB__content tscalar_with_defaultB)))))
-(define-fun tscalar_with_defaultB__ref_3__projection ((a tscalar_with_defaultB__ref)) tscalar_with_defaultB
+(define-fun tscalar_with_defaultB__ref___3__projection ((a tscalar_with_defaultB__ref)) tscalar_with_defaultB
   (tscalar_with_defaultB__content a))
 
 (declare-fun to_rep (tscalar_with_defaultB) Int)
@@ -143,7 +143,7 @@
 (declare-datatypes ((scalar_bad_default__ref 0))
 (((mk_scalar_bad_default__ref
   (scalar_bad_default__content tscalar_with_defaultB)))))
-(define-fun scalar_bad_default__ref_3__projection ((a scalar_bad_default__ref)) tscalar_with_defaultB
+(define-fun scalar_bad_default__ref___3__projection ((a scalar_bad_default__ref)) tscalar_with_defaultB
   (scalar_bad_default__content a))
 
 (declare-sort tTbadSP1 0)

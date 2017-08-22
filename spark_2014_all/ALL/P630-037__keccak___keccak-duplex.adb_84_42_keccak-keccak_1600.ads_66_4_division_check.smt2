@@ -766,7 +766,7 @@
 
 (declare-datatypes ((rate_number__ref 0))
 (((mk_rate_number__ref (rate_number__content rate_number)))))
-(define-fun rate_number__ref_2__projection ((a rate_number__ref)) rate_number
+(define-fun rate_number__ref___2__projection ((a rate_number__ref)) rate_number
   (rate_number__content a))
 
 (declare-fun to_rep3 (rate_number) Int)
@@ -826,21 +826,21 @@
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields
   (rec__keccak__keccak_1600__duplex__context__state map1)(rec__keccak__keccak_1600__duplex__context__rate rate_number)))))
-(define-fun us_split_fields_State2__projection ((a us_split_fields)) map1
+(define-fun us_split_fields_State__2__projection ((a us_split_fields)) map1
   (rec__keccak__keccak_1600__duplex__context__state a))
 
-(define-fun us_split_fields_Rate2__projection ((a us_split_fields)) rate_number
+(define-fun us_split_fields_Rate__2__projection ((a us_split_fields)) rate_number
   (rec__keccak__keccak_1600__duplex__context__rate a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq3 ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -917,8 +917,8 @@
 
 (declare-datatypes ((context__ref 0))
 (((mk_context__ref (context__content us_rep)))))
-(define-fun context__ref_2__projection ((a context__ref)) us_rep (context__content
-                                                                 a))
+(define-fun context__ref___2__projection ((a context__ref)) us_rep (context__content
+                                                                   a))
 
 (declare-fun rate_of (us_rep) Int)
 
@@ -971,7 +971,7 @@
 
 (declare-datatypes ((tTblockSP1__ref 0))
 (((mk_tTblockSP1__ref (tTblockSP1__content tTblockSP1)))))
-(define-fun tTblockSP1__ref_2__projection ((a tTblockSP1__ref)) tTblockSP1
+(define-fun tTblockSP1__ref___2__projection ((a tTblockSP1__ref)) tTblockSP1
   (tTblockSP1__content a))
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)

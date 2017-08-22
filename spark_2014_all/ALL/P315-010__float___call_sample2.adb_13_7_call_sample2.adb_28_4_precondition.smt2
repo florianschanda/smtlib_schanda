@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -114,7 +115,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-sort nb_type 0)
 
@@ -144,8 +145,7 @@
 
 (declare-sort delta_time_type 0)
 
-(define-fun in_range2 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000)))))
@@ -188,8 +188,8 @@
 
 (declare-datatypes ((nb_type__ref1 0))
 (((mk_nb_type__ref1 (nb_type__content1 nb_type1)))))
-(define-fun nb_type__ref_2__projection ((a nb_type__ref1)) nb_type1 (nb_type__content1
-                                                                    a))
+(define-fun nb_type__ref___2__projection ((a nb_type__ref1)) nb_type1
+  (nb_type__content1 a))
 
 (define-fun dynamic_invariant3 ((temp___expr_159 Int)
   (temp___is_init_156 Bool) (temp___skip_constant_157 Bool)
@@ -200,8 +200,7 @@
 
 (declare-sort delta_time_type1 0)
 
-(define-fun in_range4 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000)))))
@@ -218,7 +217,7 @@
 
 (declare-datatypes ((delta_time_type__ref1 0))
 (((mk_delta_time_type__ref1 (delta_time_type__content1 delta_time_type1)))))
-(define-fun delta_time_type__ref_2__projection ((a delta_time_type__ref1)) delta_time_type1
+(define-fun delta_time_type__ref___2__projection ((a delta_time_type__ref1)) delta_time_type1
   (delta_time_type__content1 a))
 
 (define-fun dynamic_invariant4 ((temp___expr_171 Float32)
@@ -328,12 +327,11 @@
   (assert (= time2 (fp #b0 #b00000101 #b11110000000000000000001)))
 
 ;; H
-  (assert (not (or (fp.isInfinite time2) (fp.isNaN time2))))
+  (assert (fp.isFinite32 time2))
 
 ;; H
   (assert
-  (and (=> (< 0 nb_of_fp2) (fp.leq time2 time3))
-  (not (or (fp.isInfinite time3) (fp.isNaN time3)))))
+  (and (=> (< 0 nb_of_fp2) (fp.leq time2 time3)) (fp.isFinite32 time3)))
 
 ;; H
   (assert (= result4 nb_of_fp1))
@@ -369,7 +367,7 @@
   (assert (= time4 (fp #b0 #b00000101 #b11110000000000000000001)))
 
 ;; H
-  (assert (not (or (fp.isInfinite time4) (fp.isNaN time4))))
+  (assert (fp.isFinite32 time4))
 
 (assert
 ;; WP_parameter_def

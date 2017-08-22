@@ -227,19 +227,19 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)(attr__constrained Bool)))))
-(define-fun us_rep_3__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___3__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_4__projection ((a us_rep1)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___4__projection ((a us_rep1)) us_split_fields (us_split_fields1
+                                                                 a))
 
-(define-fun us_rep_5__projection ((a us_rep1)) Bool (attr__constrained a))
+(define-fun us_rep___5__projection ((a us_rep1)) Bool (attr__constrained a))
 
 (define-fun file_io__read_result__c__pred ((a us_rep1)) Bool (= (to_rep1
                                                                 (rec__file_io__read_result__status
@@ -444,33 +444,33 @@
 
 (declare-const next_idx Int)
 
-(declare-const temp___864 Int)
+(declare-const temp___952 Int)
 
-(declare-const temp___863 us_rep)
+(declare-const temp___951 us_rep)
 
-(declare-const temp___862 read_status)
+(declare-const temp___950 read_status)
 
-(declare-const temp___8621 character)
+(declare-const temp___9501 character)
 
-(declare-const temp___8622 Bool)
+(declare-const temp___9502 Bool)
 
-(declare-const temp___861 Int)
+(declare-const temp___949 Int)
 
-(declare-const temp___860 Int)
+(declare-const temp___948 Int)
 
-(declare-const temp___859 Int)
+(declare-const temp___947 Int)
 
-(declare-const temp___865 Int)
+(declare-const temp___953 Int)
 
-(declare-const temp___858 read_status)
+(declare-const temp___946 read_status)
 
-(declare-const temp___8581 character)
+(declare-const temp___9461 character)
 
-(declare-const temp___8582 Bool)
+(declare-const temp___9462 Bool)
 
-(declare-const temp___867 Int)
+(declare-const temp___955 Int)
 
-(declare-const temp___866 Int)
+(declare-const temp___954 Int)
 
 (declare-const o Bool)
 
@@ -512,17 +512,17 @@
 
 (declare-const next_idx2 Int)
 
-(declare-const temp___8671 Int)
+(declare-const temp___9551 Int)
 
-(declare-const temp___8661 Int)
+(declare-const temp___9541 Int)
 
 (declare-const result1 int__ref)
 
-(declare-const temp___8672 Int)
+(declare-const temp___9552 Int)
 
 (declare-const result2 int__ref)
 
-(declare-const temp___8662 Int)
+(declare-const temp___9542 Int)
 
 (declare-const the_file3 us_rep)
 
@@ -691,42 +691,42 @@
   (=> (not (= (to_rep1 current_read__split_discrs) 0)) (= result false)))
 
 ;; H
-  (assert (=> (= result true) (= temp___864 next_idx)))
+  (assert (=> (= result true) (= temp___952 next_idx)))
 
 ;; H
-  (assert (=> (= result true) (= temp___863 the_file)))
-
-;; H
-  (assert
-  (=> (= result true)
-  (and (= temp___862 next_read__split_discrs)
-  (and (= temp___8621 next_read__split_fields)
-  (= temp___8622 next_read__attr__constrained)))))
-
-;; H
-  (assert (=> (= result true) (= temp___861 current_idx)))
-
-;; H
-  (assert (=> (= result true) (= temp___860 current_col)))
-
-;; H
-  (assert (=> (= result true) (= temp___859 current_line)))
-
-;; H
-  (assert (=> (= result true) (= temp___865 current_idx)))
+  (assert (=> (= result true) (= temp___951 the_file)))
 
 ;; H
   (assert
   (=> (= result true)
-  (and (= temp___858 current_read__split_discrs)
-  (and (= temp___8581 current_read__split_fields)
-  (= temp___8582 current_read__attr__constrained)))))
+  (and (= temp___950 next_read__split_discrs)
+  (and (= temp___9501 next_read__split_fields)
+  (= temp___9502 next_read__attr__constrained)))))
 
 ;; H
-  (assert (=> (= result true) (= 0 temp___867)))
+  (assert (=> (= result true) (= temp___949 current_idx)))
 
 ;; H
-  (assert (=> (= result true) (= 0 temp___866)))
+  (assert (=> (= result true) (= temp___948 current_col)))
+
+;; H
+  (assert (=> (= result true) (= temp___947 current_line)))
+
+;; H
+  (assert (=> (= result true) (= temp___953 current_idx)))
+
+;; H
+  (assert
+  (=> (= result true)
+  (and (= temp___946 current_read__split_discrs)
+  (and (= temp___9461 current_read__split_fields)
+  (= temp___9462 current_read__attr__constrained)))))
+
+;; H
+  (assert (=> (= result true) (= 0 temp___955)))
+
+;; H
+  (assert (=> (= result true) (= 0 temp___954)))
 
 ;; H
   (assert
@@ -735,7 +735,7 @@
   (= (local_invariant the_file2 current_read__split_fields2
      current_read__split_discrs2 current_idx2 next_read__split_fields2
      next_read__split_discrs2 next_idx2) true)
-  (<= temp___865 current_idx2))))
+  (<= temp___953 current_idx2))))
 
 ;; H
   (assert
@@ -747,25 +747,25 @@
   (and
   (= (to_rep1
      (rec__file_io__read_result__status current_read__split_discrs2)) 0)
-  (let ((temp___869 (to_rep
+  (let ((temp___957 (to_rep
                     (rec__file_io__read_result__c
                     current_read__split_fields2))))
-  (or (= temp___869 10)
-  (or (= temp___869 13) (or (= temp___869 32) (= temp___869 9)))))))))
+  (or (= temp___957 10)
+  (or (= temp___957 13) (or (= temp___957 32) (= temp___957 9)))))))))
 
 ;; H
-  (assert (=> (= result true) (= result1 (mk_int__ref temp___8671))))
+  (assert (=> (= result true) (= result1 (mk_int__ref temp___9551))))
 
 ;; H
-  (assert (=> (= result true) (= temp___8672 next_idx2)))
+  (assert (=> (= result true) (= temp___9552 next_idx2)))
 
 ;; H
-  (assert (=> (= result true) (= result2 (mk_int__ref temp___8661))))
+  (assert (=> (= result true) (= result2 (mk_int__ref temp___9541))))
 
 ;; H
   (assert
   (=> (= result true)
-  (= temp___8662 (to_int1
+  (= temp___9542 (to_int1
                  (ite (= (to_rep1
                          (rec__file_io__read_result__status
                          next_read__split_discrs2)) 0)

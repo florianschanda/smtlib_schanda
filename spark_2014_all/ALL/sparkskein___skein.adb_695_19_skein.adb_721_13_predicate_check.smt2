@@ -1371,13 +1371,13 @@
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (define-fun bool_eq3 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -1688,13 +1688,13 @@
 
 (declare-datatypes ((us_split_fields__ref2 0))
 (((mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref2)) us_split_fields4
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep2 (us_split_fields5 us_split_fields4)))))
-(define-fun us_rep_3__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
-                                                                a))
+(define-fun us_rep___3__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
+                                                                  a))
 
 (define-fun bool_eq5 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
@@ -2020,7 +2020,7 @@
 
 (declare-const o6 byte)
 
-(declare-const temp___1368 (Array (_ BitVec 64) byte))
+(declare-const temp___1374 (Array (_ BitVec 64) byte))
 
 (declare-const result t__ref1)
 
@@ -2200,11 +2200,11 @@
   (assert (= (to_rep o6) o5))
 
 ;; H
-  (assert (= temp___1368 (store ctx__split_fields11 dst1 o6)))
+  (assert (= temp___1374 (store ctx__split_fields11 dst1 o6)))
 
 (assert
 ;; WP_parameter_def
  ;; File "skein.ads", line 361, characters 0-0
-  (not (dynamic_predicate1 temp___1368)))
+  (not (dynamic_predicate1 temp___1374)))
 (check-sat)
 (exit)

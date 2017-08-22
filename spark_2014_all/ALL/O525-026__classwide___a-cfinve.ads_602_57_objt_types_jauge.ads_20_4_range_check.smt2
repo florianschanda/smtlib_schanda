@@ -139,17 +139,17 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)))))
-(define-fun us_rep_3__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                              a))
+(define-fun us_rep___3__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                a))
 
-(define-fun us_rep_4__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___4__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (declare-const value__size Int)
 
@@ -351,7 +351,7 @@
 (define-fun us_rep___projection ((a us_rep2)) us_split_fields2 (us_split_fields3
                                                                a))
 
-(define-fun us_rep_2__projection ((a us_rep2)) Int (attr__tag a))
+(define-fun us_rep___2__projection ((a us_rep2)) Int (attr__tag a))
 
 (define-fun bool_eq1 ((a us_rep2) (b us_rep2)) Bool (ite true true false))
 
@@ -458,7 +458,7 @@
 
 (declare-datatypes ((extended_index__ref1 0))
 (((mk_extended_index__ref1 (extended_index__content1 extended_index1)))))
-(define-fun extended_index__ref_2__projection ((a extended_index__ref1)) extended_index1
+(define-fun extended_index__ref___2__projection ((a extended_index__ref1)) extended_index1
   (extended_index__content1 a))
 
 (define-fun dynamic_invariant4 ((temp___expr_272 Int)

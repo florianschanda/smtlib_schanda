@@ -335,7 +335,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_fields (us_split_fields1
                                                              a))
 
-(define-fun us_rep_2__projection ((a us_rep)) Int (attr__tag a))
+(define-fun us_rep___2__projection ((a us_rep)) Int (attr__tag a))
 
 (define-fun bool_eq1 ((a us_rep)
   (b us_rep)) Bool (ite (= (bool_eq
@@ -482,23 +482,23 @@
 (define-fun us_split_fields_Hours__projection ((a us_split_fields2)) twenty_four
   (rec__instr__clock__hours a))
 
-(define-fun us_split_fields_Name5__projection ((a us_split_fields2)) (Array Int character)
+(define-fun us_split_fields_Name__5__projection ((a us_split_fields2)) (Array Int character)
   (rec__instr__instrument__name1 a))
 
-(define-fun us_split_fields_5__projection ((a us_split_fields2)) us_private
+(define-fun us_split_fields___5__projection ((a us_split_fields2)) us_private
   (rec__ext__1 a))
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_5__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___5__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)(attr__tag1 Int)))))
-(define-fun us_rep_9__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___9__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
-(define-fun us_rep_10__projection ((a us_rep1)) Int (attr__tag1 a))
+(define-fun us_rep___10__projection ((a us_rep1)) Int (attr__tag1 a))
 
 (declare-fun hide_ext__ (sixty sixty twenty_four us_private) us_private)
 
@@ -873,32 +873,32 @@
 (define-fun us_split_fields_MilliSec__projection ((a us_split_fields4)) thousand
   (rec__instr__child__accurate_clock__millisec a))
 
-(define-fun us_split_fields_Name6__projection ((a us_split_fields4)) (Array Int character)
+(define-fun us_split_fields_Name__6__projection ((a us_split_fields4)) (Array Int character)
   (rec__instr__instrument__name2 a))
 
-(define-fun us_split_fields_Seconds2__projection ((a us_split_fields4)) sixty
+(define-fun us_split_fields_Seconds__2__projection ((a us_split_fields4)) sixty
   (rec__instr__clock__seconds1 a))
 
-(define-fun us_split_fields_Minutes2__projection ((a us_split_fields4)) sixty
+(define-fun us_split_fields_Minutes__2__projection ((a us_split_fields4)) sixty
   (rec__instr__clock__minutes1 a))
 
-(define-fun us_split_fields_Hours2__projection ((a us_split_fields4)) twenty_four
+(define-fun us_split_fields_Hours__2__projection ((a us_split_fields4)) twenty_four
   (rec__instr__clock__hours1 a))
 
-(define-fun us_split_fields_6__projection ((a us_split_fields4)) us_private
+(define-fun us_split_fields___6__projection ((a us_split_fields4)) us_private
   (rec__ext__2 a))
 
 (declare-datatypes ((us_split_fields__ref2 0))
 (((mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_6__projection ((a us_split_fields__ref2)) us_split_fields4
+(define-fun us_split_fields__ref___6__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep2 (us_split_fields5 us_split_fields4)(attr__tag2 Int)))))
-(define-fun us_rep_11__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
-                                                                 a))
+(define-fun us_rep___11__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
+                                                                   a))
 
-(define-fun us_rep_12__projection ((a us_rep2)) Int (attr__tag2 a))
+(define-fun us_rep___12__projection ((a us_rep2)) Int (attr__tag2 a))
 
 (declare-fun hide_ext__1 (thousand sixty sixty twenty_four
   us_private) us_private)

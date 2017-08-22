@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -143,7 +144,7 @@
   (temp___do_toplevel_151 Bool)) Bool (=>
                                       (or (= temp___is_init_149 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_152) (fp.isNaN temp___expr_152)))))
+                                      (fp.isFinite32 temp___expr_152)))
 
 (declare-sort acceleration_t 0)
 
@@ -167,7 +168,7 @@
   (temp___do_toplevel_163 Bool)) Bool (=>
                                       (or (= temp___is_init_161 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_164) (fp.isNaN temp___expr_164)))))
+                                      (fp.isFinite32 temp___expr_164)))
 
 (declare-sort tdistance_tB 0)
 
@@ -246,7 +247,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 ;; maximum_valid_speed__def_axiom
   (assert
@@ -275,7 +276,7 @@
   (temp___do_toplevel_157 Bool)) Bool (=>
                                       (or (= temp___is_init_155 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_158) (fp.isNaN temp___expr_158)))))
+                                      (fp.isFinite32 temp___expr_158)))
 
 (declare-fun is_valid_speed_km_per_h (Float32) Bool)
 
@@ -329,8 +330,7 @@
 (declare-const distance2 Int)
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite maximum_valid_speed) (fp.isNaN maximum_valid_speed))))
+  (assert (fp.isFinite32 maximum_valid_speed))
 
 ;; H
   (assert
@@ -338,13 +338,13 @@
   maximum_valid_speed))
 
 ;; H
-  (assert (not (or (fp.isInfinite initial_speed) (fp.isNaN initial_speed))))
+  (assert (fp.isFinite32 initial_speed))
 
 ;; H
-  (assert (not (or (fp.isInfinite final_speed) (fp.isNaN final_speed))))
+  (assert (fp.isFinite32 final_speed))
 
 ;; H
-  (assert (not (or (fp.isInfinite acceleration) (fp.isNaN acceleration))))
+  (assert (fp.isFinite32 acceleration))
 
 ;; H
   (assert
@@ -366,13 +366,13 @@
   (assert (= speed1 initial_speed))
 
 ;; H
-  (assert (not (or (fp.isInfinite speed1) (fp.isNaN speed1))))
+  (assert (fp.isFinite32 speed1))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite delta_speed) (fp.isNaN delta_speed)))))
+  (fp.isFinite32 delta_speed)))
 
 ;; H
   (assert (= result1 distance))
@@ -406,11 +406,10 @@
   (and
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite delta_speed1) (fp.isNaN delta_speed1))))
-  (=> (<= 0 2147483647) (in_range3 distance2)))
+  (fp.isFinite32 delta_speed1)) (=> (<= 0 2147483647) (in_range3 distance2)))
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite speed2) (fp.isNaN speed2))))))
+  (fp.isFinite32 speed2))))
 
 ;; H
   (assert
@@ -427,8 +426,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "units.ads", line 27, characters 0-0
-  (not
-  (not (or (fp.isInfinite (fp.div RNE acceleration speed2)) (fp.isNaN (fp.div RNE
-  acceleration speed2))))))
+  (not (fp.isFinite32 (fp.div RNE acceleration speed2))))
 (check-sat)
 (exit)

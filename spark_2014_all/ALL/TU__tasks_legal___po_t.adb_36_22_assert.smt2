@@ -190,7 +190,7 @@
 (declare-datatypes ((us_split_fields2 0))
 (((mk___split_fields1
   (rec__po_t__hidden_poT__the_protected_int integer)(rec__po_t__hidden_poT__switch Bool)))))
-(define-fun us_split_fields_The_Protected_Int2__projection ((a us_split_fields2)) integer
+(define-fun us_split_fields_The_Protected_Int__2__projection ((a us_split_fields2)) integer
   (rec__po_t__hidden_poT__the_protected_int a))
 
 (define-fun us_split_fields_Switch__projection ((a us_split_fields2)) Bool
@@ -198,13 +198,13 @@
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (declare-const value__size1 Int)
 

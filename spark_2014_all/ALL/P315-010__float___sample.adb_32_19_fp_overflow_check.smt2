@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -126,12 +127,11 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-sort nb_float_type 0)
 
-(define-fun in_range2 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000011 #b00000000000000000000000)))))
@@ -166,8 +166,7 @@
 
 (declare-sort ttmpS 0)
 
-(define-fun in_range3 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000010 #b00000000000000000000000)))))
@@ -207,7 +206,7 @@
   (assert (in_range2 nb))
 
 ;; H
-  (assert (not (or (fp.isInfinite time) (fp.isNaN time))))
+  (assert (fp.isFinite32 time))
 
 ;; H
   (assert
@@ -227,8 +226,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "sample.ads", line 37, characters 0-0
-  (not
-  (not (or (fp.isInfinite (fp.add RNE time tmp1)) (fp.isNaN (fp.add RNE
-  time tmp1))))))
+  (not (fp.isFinite32 (fp.add RNE time tmp1))))
 (check-sat)
 (exit)

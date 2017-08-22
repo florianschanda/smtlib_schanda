@@ -443,13 +443,13 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_13__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___13__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_22__projection ((a us_rep1)) us_split_fields (us_split_fields1
-                                                                a))
+(define-fun us_rep___22__projection ((a us_rep1)) us_split_fields (us_split_fields1
+                                                                  a))
 
 (declare-const value__size3 Int)
 
@@ -491,7 +491,7 @@
 (declare-const dummy7 us_rep1)
 
 (declare-datatypes ((t__ref1 0)) (((mk_t__ref1 (t__content1 us_rep1)))))
-(define-fun t__ref_2__projection ((a t__ref1)) us_rep1 (t__content1 a))
+(define-fun t__ref___2__projection ((a t__ref1)) us_rep1 (t__content1 a))
 
 (define-fun default_initial_assumption1 ((temp___expr_829 us_rep1)
   (temp___skip_top_level_830 Bool)) Bool (= (length1
@@ -538,46 +538,46 @@
 
 (declare-datatypes ((mutable_t__ref1 0))
 (((mk_mutable_t__ref1 (mutable_t__content1 us_rep)))))
-(define-fun mutable_t__ref_2__projection ((a mutable_t__ref1)) us_rep
+(define-fun mutable_t__ref___2__projection ((a mutable_t__ref1)) us_rep
   (mutable_t__content1 a))
 
-(define-fun default_initial_assumption2 ((temp___expr_838 us_rep)
-  (temp___skip_top_level_839 Bool)) Bool (=>
+(define-fun default_initial_assumption2 ((temp___expr_840 us_rep)
+  (temp___skip_top_level_841 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_839 true))
-                                         (= (length1 temp___expr_838) 0)))
+                                         (= temp___skip_top_level_841 true))
+                                         (= (length1 temp___expr_840) 0)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun temp___String_Literal_846 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_848 (tuple0) (Array Int character))
 
-;; temp___String_Literal_846__def_axiom
+;; temp___String_Literal_848__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_846 us_void_param) 1)) 72)
-     (= (to_rep (select (temp___String_Literal_846 us_void_param) 2)) 101))
-     (= (to_rep (select (temp___String_Literal_846 us_void_param) 3)) 108))
-     (= (to_rep (select (temp___String_Literal_846 us_void_param) 4)) 108))
-     (= (to_rep (select (temp___String_Literal_846 us_void_param) 5)) 111)) :pattern (
-  (temp___String_Literal_846 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_848 us_void_param) 1)) 72)
+     (= (to_rep (select (temp___String_Literal_848 us_void_param) 2)) 101))
+     (= (to_rep (select (temp___String_Literal_848 us_void_param) 3)) 108))
+     (= (to_rep (select (temp___String_Literal_848 us_void_param) 4)) 108))
+     (= (to_rep (select (temp___String_Literal_848 us_void_param) 5)) 111)) :pattern (
+  (temp___String_Literal_848 us_void_param)) )))
 
-(declare-fun temp___String_Literal_847 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_849 (tuple0) (Array Int character))
 
-;; temp___String_Literal_847__def_axiom
+;; temp___String_Literal_849__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
      (and
-     (= (to_rep (select (temp___String_Literal_847 us_void_param) 1)) 66)
-     (= (to_rep (select (temp___String_Literal_847 us_void_param) 2)) 121))
-     (= (to_rep (select (temp___String_Literal_847 us_void_param) 3)) 101)) :pattern (
-  (temp___String_Literal_847 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_849 us_void_param) 1)) 66)
+     (= (to_rep (select (temp___String_Literal_849 us_void_param) 2)) 121))
+     (= (to_rep (select (temp___String_Literal_849 us_void_param) 3)) 101)) :pattern (
+  (temp___String_Literal_849 us_void_param)) )))
 
 (define-fun dynamic_invariant2 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -638,6 +638,6 @@
 ;; WP_parameter_def
  ;; File "main.adb", line 9, characters 0-0
   (not
-  (<= (length (mk___t (temp___String_Literal_847 Tuple0) (mk 1 3))) 2147483647)))
+  (<= (length (mk___t (temp___String_Literal_849 Tuple0) (mk 1 3))) 2147483647)))
 (check-sat)
 (exit)

@@ -356,21 +356,21 @@
 (declare-datatypes ((us_split_fields2 0))
 (((mk___split_fields1
   (rec__use_unchecked_union__big_record__field1 integer)(rec__use_unchecked_union__big_record__field2 (Array Int integer))))))
-(define-fun us_split_fields_field12__projection ((a us_split_fields2)) integer
+(define-fun us_split_fields_field1__2__projection ((a us_split_fields2)) integer
   (rec__use_unchecked_union__big_record__field1 a))
 
-(define-fun us_split_fields_field22__projection ((a us_split_fields2)) (Array Int integer)
+(define-fun us_split_fields_field2__2__projection ((a us_split_fields2)) (Array Int integer)
   (rec__use_unchecked_union__big_record__field2 a))
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (define-fun bool_eq2 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -468,19 +468,19 @@
 
 (declare-datatypes ((us_split_fields__ref2 0))
 (((mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref2)) us_split_fields4
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep2
   (us_split_discrs1 us_split_discrs)(us_split_fields5 us_split_fields4)(attr__constrained Bool)))))
-(define-fun us_rep_3__projection ((a us_rep2)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___3__projection ((a us_rep2)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_4__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
-                                                                a))
+(define-fun us_rep___4__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
+                                                                  a))
 
-(define-fun us_rep_5__projection ((a us_rep2)) Bool (attr__constrained a))
+(define-fun us_rep___5__projection ((a us_rep2)) Bool (attr__constrained a))
 
 (define-fun use_unchecked_union__myunion__record1__pred ((a us_rep2)) Bool (=
   (to_rep (rec__use_unchecked_union__myunion__discr (us_split_discrs1 a))) 0))

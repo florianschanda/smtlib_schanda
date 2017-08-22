@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite64 ((x Float64)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -115,7 +116,7 @@
   (temp___do_toplevel_56 Bool)) Bool (=>
                                      (or (= temp___is_init_54 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
+                                     (fp.isFinite64 temp___expr_57)))
 
 (declare-fun atan__2 (Float64) Float64)
 
@@ -166,22 +167,22 @@
 (declare-const result__1 Float64)
 
 ;; H
-  (assert (not (or (fp.isInfinite left) (fp.isNaN left))))
+  (assert (fp.isFinite64 left))
 
 ;; H
-  (assert (not (or (fp.isInfinite right) (fp.isNaN right))))
+  (assert (fp.isFinite64 right))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite result__) (fp.isNaN result__)))))
+  (fp.isFinite64 result__)))
 
 ;; H
-  (assert (not (or (fp.isInfinite pi1) (fp.isNaN pi1))))
+  (assert (fp.isFinite64 pi1))
 
 ;; H
-  (assert (not (or (fp.isInfinite pi_over_two) (fp.isNaN pi_over_two))))
+  (assert (fp.isFinite64 pi_over_two))
 
 ;; H
   (assert
@@ -195,16 +196,13 @@
 
 ;; H
   (assert
-  (and (= o (fp.div RNE right left))
-  (not (or (fp.isInfinite (fp.div RNE right left)) (fp.isNaN (fp.div RNE
-  right left))))))
+  (and (= o (fp.div RNE right left)) (fp.isFinite64 (fp.div RNE right left))))
 
 ;; H
   (assert (= o1 (fp.neg o)))
 
 ;; H
-  (assert
-  (and (= o2 (atan__2 o1)) (not (or (fp.isInfinite o2) (fp.isNaN o2)))))
+  (assert (and (= o2 (atan__2 o1)) (fp.isFinite64 o2)))
 
 ;; H
   (assert (= result result__))
@@ -220,7 +218,6 @@
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.sub RNE result__1 (fp #b0 #b01111111111 #b1001001000011111101101010100010001000010110100011000))) (fp.isNaN (fp.sub RNE
-  result__1 (fp #b0 #b01111111111 #b1001001000011111101101010100010001000010110100011000)))))))
+  (fp.isFinite64 (fp.sub RNE result__1 (fp #b0 #b01111111111 #b1001001000011111101101010100010001000010110100011000)))))
 (check-sat)
 (exit)

@@ -368,8 +368,8 @@
 
 (declare-datatypes ((tTrSP1__ref 0))
 (((mk_tTrSP1__ref (tTrSP1__content integer)))))
-(define-fun tTrSP1__ref_2__projection ((a1 tTrSP1__ref)) integer (tTrSP1__content
-                                                                 a1))
+(define-fun tTrSP1__ref___2__projection ((a1 tTrSP1__ref)) integer (tTrSP1__content
+                                                                   a1))
 
 (declare-sort t1 0)
 
@@ -449,7 +449,7 @@
 (declare-const dummy5 us_t1)
 
 (declare-datatypes ((trS__ref 0)) (((mk_trS__ref (trS__content us_t1)))))
-(define-fun trS__ref_2__projection ((a1 trS__ref)) us_t1 (trS__content a1))
+(define-fun trS__ref___2__projection ((a1 trS__ref)) us_t1 (trS__content a1))
 
 (define-fun dynamic_property3 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))

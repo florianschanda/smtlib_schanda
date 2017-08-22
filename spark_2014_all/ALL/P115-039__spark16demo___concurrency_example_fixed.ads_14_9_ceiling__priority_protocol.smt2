@@ -335,18 +335,18 @@
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields
   (rec__concurrency_example_fixed__dataT__value (Array Int integer))))))
-(define-fun us_split_fields_Value2__projection ((a us_split_fields)) (Array Int integer)
+(define-fun us_split_fields_Value__2__projection ((a us_split_fields)) (Array Int integer)
   (rec__concurrency_example_fixed__dataT__value a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_28__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___28__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_29__projection ((a us_rep2)) us_split_fields (us_split_fields1
-                                                                a))
+(define-fun us_rep___29__projection ((a us_rep2)) us_split_fields (us_split_fields1
+                                                                  a))
 
 (declare-const value__size2 Int)
 

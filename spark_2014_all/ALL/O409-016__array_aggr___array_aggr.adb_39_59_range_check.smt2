@@ -232,7 +232,7 @@
 
 (declare-datatypes ((my_positive__ref 0))
 (((mk_my_positive__ref (my_positive__content integer)))))
-(define-fun my_positive__ref_2__projection ((a my_positive__ref)) integer
+(define-fun my_positive__ref___2__projection ((a my_positive__ref)) integer
   (my_positive__content a))
 
 (declare-sort tTaSP2 0)
@@ -251,8 +251,8 @@
 
 (declare-datatypes ((tTaSP2__ref 0))
 (((mk_tTaSP2__ref (tTaSP2__content tTaSP2)))))
-(define-fun tTaSP2__ref_2__projection ((a tTaSP2__ref)) tTaSP2 (tTaSP2__content
-                                                               a))
+(define-fun tTaSP2__ref___2__projection ((a tTaSP2__ref)) tTaSP2 (tTaSP2__content
+                                                                 a))
 
 (declare-sort t24b 0)
 

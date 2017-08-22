@@ -137,8 +137,8 @@
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_discrs2 us_split_discrs)))))
-(define-fun us_rep_2__projection ((a us_rep1)) us_split_discrs (us_split_discrs2
-                                                               a))
+(define-fun us_rep___2__projection ((a us_rep1)) us_split_discrs (us_split_discrs2
+                                                                 a))
 
 (define-fun to_base ((a us_rep1)) us_rep (mk___rep (us_split_discrs2 a)))
 

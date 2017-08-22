@@ -112,17 +112,17 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_28__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___28__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)))))
-(define-fun us_rep_29__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___29__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_30__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___30__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                 a))
 
 (declare-const value__size Int)
 

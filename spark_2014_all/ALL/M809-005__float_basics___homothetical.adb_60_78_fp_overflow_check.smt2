@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -131,15 +132,13 @@
 
 ;; range_axiom
   (assert
-  (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep x)) (fp.isNaN (to_rep x)))) :pattern (
-  (to_rep x)) )))
+  (forall ((x float)) (! (fp.isFinite32 (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x))) (= (to_rep (of_rep x)) x)) :pattern (
-  (to_rep (of_rep x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                                (of_rep x))) )))
 
 (declare-sort joint_index 0)
 
@@ -252,7 +251,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-fun adjust2triangle (Float32 Float32 Float32) Float32)
 
@@ -471,23 +470,23 @@
   (assert
   (and
   (= o1 (fp.mul RNE (to_rep (select kvp2 i1)) (fp.abs (to_rep (select d j1)))))
-  (not (or (fp.isInfinite (fp.mul RNE (to_rep (select kvp2 i1)) (fp.abs
-  (to_rep (select d j1))))) (fp.isNaN (fp.mul RNE (to_rep (select kvp2 i1)) (fp.abs
-  (to_rep (select d j1)))))))))
+  (fp.isFinite32 (fp.mul RNE (to_rep (select kvp2 i1)) (fp.abs (to_rep
+                                                               (select
+                                                               d j1)))))))
 
 ;; H
   (assert
   (and
   (= o (fp.mul RNE (to_rep (select kvp2 j1)) (fp.abs (to_rep (select d i1)))))
-  (not (or (fp.isInfinite (fp.mul RNE (to_rep (select kvp2 j1)) (fp.abs
-  (to_rep (select d i1))))) (fp.isNaN (fp.mul RNE (to_rep (select kvp2 j1)) (fp.abs
-  (to_rep (select d i1)))))))))
+  (fp.isFinite32 (fp.mul RNE (to_rep (select kvp2 j1)) (fp.abs (to_rep
+                                                               (select
+                                                               d i1)))))))
 
 ;; H
   (assert (= o2 (fp.div RNE o o1)))
 
 ;; H
-  (assert (and (= o3 o2) (not (or (fp.isInfinite o2) (fp.isNaN o2)))))
+  (assert (and (= o3 o2) (fp.isFinite32 o2)))
 
 ;; H
   (assert (= o4 (fp.min (to_rep (select lambda1 i1)) o3)))
@@ -508,8 +507,8 @@
 ;; WP_parameter_def
  ;; File "homothetical.ads", line 5, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.mul RNE (to_rep (select ka i1)) (fp.abs
-  (to_rep (select d j1))))) (fp.isNaN (fp.mul RNE (to_rep (select ka i1)) (fp.abs
-  (to_rep (select d j1)))))))))
+  (fp.isFinite32 (fp.mul RNE (to_rep (select ka i1)) (fp.abs (to_rep
+                                                             (select
+                                                             d j1)))))))
 (check-sat)
 (exit)

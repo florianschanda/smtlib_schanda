@@ -96,7 +96,7 @@
 
 (declare-datatypes ((capacity_range__ref1 0))
 (((mk_capacity_range__ref1 (capacity_range__content1 capacity_range1)))))
-(define-fun capacity_range__ref_2__projection ((a capacity_range__ref1)) capacity_range1
+(define-fun capacity_range__ref___2__projection ((a capacity_range__ref1)) capacity_range1
   (capacity_range__content1 a))
 
 (declare-fun to_rep1 (capacity_range1) Int)
@@ -151,8 +151,8 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_discrs (us_split_discrs1
                                                              a))
 
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (declare-const value__size Int)
 
@@ -259,12 +259,12 @@
 (declare-datatypes ((us_split_discrs2 0))
 (((mk___split_discrs1
   (rec__hnco__test2__v_type_owner__vector_type__capacity capacity_range)))))
-(define-fun us_split_discrs_2__projection ((a us_split_discrs2)) capacity_range
+(define-fun us_split_discrs___2__projection ((a us_split_discrs2)) capacity_range
   (rec__hnco__test2__v_type_owner__vector_type__capacity a))
 
 (declare-datatypes ((us_split_discrs__ref1 0))
 (((mk___split_discrs__ref1 (us_split_discrs__content1 us_split_discrs2)))))
-(define-fun us_split_discrs__ref_2__projection ((a us_split_discrs__ref1)) us_split_discrs2
+(define-fun us_split_discrs__ref___2__projection ((a us_split_discrs__ref1)) us_split_discrs2
   (us_split_discrs__content1 a))
 
 (declare-datatypes ((us_split_fields2 0))
@@ -278,19 +278,19 @@
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1
   (us_split_discrs3 us_split_discrs2)(us_split_fields3 us_split_fields2)(attr__tag Int)))))
-(define-fun us_rep_3__projection ((a us_rep1)) us_split_discrs2 (us_split_discrs3
-                                                                a))
+(define-fun us_rep___3__projection ((a us_rep1)) us_split_discrs2 (us_split_discrs3
+                                                                  a))
 
-(define-fun us_rep_4__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___4__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
-(define-fun us_rep_5__projection ((a us_rep1)) Int (attr__tag a))
+(define-fun us_rep___5__projection ((a us_rep1)) Int (attr__tag a))
 
 (declare-fun us_dispatch_eq (us_rep1 us_rep1) Bool)
 
@@ -425,38 +425,38 @@
   (! (= (= (is_empty1 container) true) (= (length container) 0)) :pattern (
   (is_empty1 container)) )))
 
-(declare-const temp___860 Int)
+(declare-const temp___948 Int)
 
-(declare-const temp___863 capacity_range)
+(declare-const temp___951 capacity_range)
 
-(declare-const temp___8631 capacity_range1)
+(declare-const temp___9511 capacity_range1)
 
-(declare-const temp___8632 us_main_type)
+(declare-const temp___9512 us_main_type)
 
-(declare-const temp___8633 us_private)
+(declare-const temp___9513 us_private)
 
-(declare-const temp___8634 Int)
+(declare-const temp___9514 Int)
 
 ;; H
-  (assert (in_range temp___860))
+  (assert (in_range temp___948))
 
 ;; H
   (assert
-  (and (= (to_rep temp___863) (to_rep1 temp___8631))
-  (and (= temp___8634 us_tag)
-  (and (= (to_rep1 temp___8631) (to_rep temp___863))
+  (and (= (to_rep temp___951) (to_rep1 temp___9511))
+  (and (= temp___9514 us_tag)
+  (and (= (to_rep1 temp___9511) (to_rep temp___951))
   (= (is_empty1
-     (mk___rep (mk___split_discrs temp___8631)
-     (mk___split_fields temp___8632))) true)))))
+     (mk___rep (mk___split_discrs temp___9511)
+     (mk___split_fields temp___9512))) true)))))
 
 (assert
 ;; WP_parameter_def
  ;; File "a-cofove.ads", line 74, characters 0-0
   (not
   (= (is_empty
-     (mk___rep1 (mk___split_discrs1 temp___863)
+     (mk___rep1 (mk___split_discrs1 temp___951)
      (mk___split_fields1
-     (mk___rep (mk___split_discrs temp___8631)
-     (mk___split_fields temp___8632)) temp___8633) temp___8634)) true)))
+     (mk___rep (mk___split_discrs temp___9511)
+     (mk___split_fields temp___9512)) temp___9513) temp___9514)) true)))
 (check-sat)
 (exit)

@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite64 ((x Float64)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -501,7 +502,7 @@
   (temp___do_toplevel_200 Bool)) Bool (=>
                                       (or (= temp___is_init_198 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_201) (fp.isNaN temp___expr_201)))))
+                                      (fp.isFinite64 temp___expr_201)))
 
 (declare-sort frame 0)
 
@@ -530,8 +531,7 @@
 
 (declare-sort ratio_t 0)
 
-(define-fun in_range3 ((x Float64)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range3 ((x Float64)) Bool (and (fp.isFinite64 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) x)
                                          (fp.leq x (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))))
@@ -560,8 +560,7 @@
 
 (declare-sort drag_t 0)
 
-(define-fun in_range4 ((x Float64)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range4 ((x Float64)) Bool (and (fp.isFinite64 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b10000000101 #b0000000000000000000000000000000000000000000000000000)) x)
                                          (fp.leq x (fp #b0 #b10000000101 #b0000000000000000000000000000000000000000000000000000)))))
@@ -741,13 +740,13 @@
   (assert (in_range4 drag))
 
 ;; H
-  (assert (not (or (fp.isInfinite old_speed) (fp.isNaN old_speed))))
+  (assert (fp.isFinite64 old_speed))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite new_speed) (fp.isNaN new_speed)))))
+  (fp.isFinite64 new_speed)))
 
 ;; H
   (assert (and (< n 25000) (= (invariant__ n old_speed) true)))
@@ -758,7 +757,7 @@
   delta_speed))
 
 ;; H
-  (assert (not (or (fp.isInfinite delta_speed) (fp.isNaN delta_speed))))
+  (assert (fp.isFinite64 delta_speed))
 
 ;; H
   (assert (= ((_ int2bv 16) n) n_bv))
@@ -766,8 +765,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "simple_trajectory.ads", line 29, characters 0-0
-  (not
-  (not (or (fp.isInfinite (fp.add RNE old_speed delta_speed)) (fp.isNaN (fp.add RNE
-  old_speed delta_speed))))))
+  (not (fp.isFinite64 (fp.add RNE old_speed delta_speed))))
 (check-sat)
 (exit)

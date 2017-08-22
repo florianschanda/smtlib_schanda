@@ -81,21 +81,21 @@
 
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields (rec__p__t10__f1 integer)(rec__p__t10__f2 integer)))))
-(define-fun us_split_fields_F110__projection ((a us_split_fields)) integer
+(define-fun us_split_fields_F1__10__projection ((a us_split_fields)) integer
   (rec__p__t10__f1 a))
 
-(define-fun us_split_fields_F210__projection ((a us_split_fields)) integer
+(define-fun us_split_fields_F2__10__projection ((a us_split_fields)) integer
   (rec__p__t10__f2 a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_10__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___10__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_10__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___10__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                 a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and

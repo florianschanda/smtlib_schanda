@@ -62,7 +62,7 @@
 
 (declare-datatypes ((length_t__ref 0))
 (((mk_length_t__ref (length_t__content length_t)))))
-(define-fun length_t__ref_2__projection ((a length_t__ref)) length_t
+(define-fun length_t__ref___2__projection ((a length_t__ref)) length_t
   (length_t__content a))
 
 (declare-fun to_rep (length_t) Int)
@@ -271,7 +271,7 @@
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields
   (rec__array_aggregates__string_t__len length_t)(rec__array_aggregates__string_t__elem (Array Int character))))))
-(define-fun us_split_fields_Len2__projection ((a us_split_fields)) length_t
+(define-fun us_split_fields_Len__2__projection ((a us_split_fields)) length_t
   (rec__array_aggregates__string_t__len a))
 
 (define-fun us_split_fields_Elem__projection ((a us_split_fields)) (Array Int character)
@@ -279,13 +279,13 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___4__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_4__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___4__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq1 ((a us_rep)
   (b us_rep)) Bool (ite (and

@@ -426,19 +426,19 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)(attr__constrained Bool)))))
-(define-fun us_rep_3__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                              a))
+(define-fun us_rep___3__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                a))
 
-(define-fun us_rep_4__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___4__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
-(define-fun us_rep_5__projection ((a us_rep)) Bool (attr__constrained a))
+(define-fun us_rep___5__projection ((a us_rep)) Bool (attr__constrained a))
 
 (define-fun file_io__read_result__c__pred ((a us_rep)) Bool (= (to_rep3
                                                                (rec__file_io__read_result__status
@@ -549,12 +549,12 @@
 (define-fun name_id__ref___projection ((a name_id__ref)) name_id (name_id__content
                                                                  a))
 
-(define-fun dynamic_invariant1 ((temp___expr_563 Int)
-  (temp___is_init_560 Bool) (temp___skip_constant_561 Bool)
-  (temp___do_toplevel_562 Bool)) Bool (=>
-                                      (or (= temp___is_init_560 true)
+(define-fun dynamic_invariant1 ((temp___expr_651 Int)
+  (temp___is_init_648 Bool) (temp___skip_constant_649 Bool)
+  (temp___do_toplevel_650 Bool)) Bool (=>
+                                      (or (= temp___is_init_648 true)
                                       (<= 0 2147483647)) (in_range5
-                                      temp___expr_563)))
+                                      temp___expr_651)))
 
 (declare-fun invariant__ (us_private) Bool)
 
@@ -638,12 +638,12 @@
 
 (declare-datatypes ((us_split_discrs2 0))
 (((mk___split_discrs1 (rec__lexer__token__kind token_kind)))))
-(define-fun us_split_discrs_3__projection ((a us_split_discrs2)) token_kind
+(define-fun us_split_discrs___3__projection ((a us_split_discrs2)) token_kind
   (rec__lexer__token__kind a))
 
 (declare-datatypes ((us_split_discrs__ref1 0))
 (((mk___split_discrs__ref1 (us_split_discrs__content1 us_split_discrs2)))))
-(define-fun us_split_discrs__ref_3__projection ((a us_split_discrs__ref1)) us_split_discrs2
+(define-fun us_split_discrs__ref___3__projection ((a us_split_discrs__ref1)) us_split_discrs2
   (us_split_discrs__content1 a))
 
 (declare-datatypes ((us_split_fields2 0))
@@ -663,19 +663,19 @@
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___4__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1
   (us_split_discrs3 us_split_discrs2)(us_split_fields3 us_split_fields2)(attr__constrained1 Bool)))))
-(define-fun us_rep_8__projection ((a us_rep1)) us_split_discrs2 (us_split_discrs3
-                                                                a))
+(define-fun us_rep___8__projection ((a us_rep1)) us_split_discrs2 (us_split_discrs3
+                                                                  a))
 
-(define-fun us_rep_9__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___9__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
-(define-fun us_rep_10__projection ((a us_rep1)) Bool (attr__constrained1 a))
+(define-fun us_rep___10__projection ((a us_rep1)) Bool (attr__constrained1 a))
 
 (define-fun lexer__token__value__pred ((a us_rep1)) Bool (and
                                                          (<= 3 (to_rep4
@@ -820,14 +820,14 @@
 (define-fun token__ref___projection ((a token__ref)) us_rep1 (token__content
                                                              a))
 
-(define-fun default_initial_assumption1 ((temp___expr_586 us_rep1)
-  (temp___skip_top_level_587 Bool)) Bool (and
+(define-fun default_initial_assumption1 ((temp___expr_674 us_rep1)
+  (temp___skip_top_level_675 Bool)) Bool (and
                                          (= (attr__constrained1
-                                            temp___expr_586) false)
+                                            temp___expr_674) false)
                                          (= (to_rep4
                                             (rec__lexer__token__kind
                                             (us_split_discrs3
-                                            temp___expr_586))) 0)))
+                                            temp___expr_674))) 0)))
 
 (declare-const current_read__attr__constrained Bool)
 
@@ -847,31 +847,31 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun temp___String_Literal_814 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_902 (tuple0) (Array Int character))
 
-;; temp___String_Literal_814__def_axiom
+;; temp___String_Literal_902__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (= (to_rep (select (temp___String_Literal_814 us_void_param) 1)) 58) :pattern (
-  (temp___String_Literal_814 us_void_param)) )))
+  (! (= (to_rep (select (temp___String_Literal_902 us_void_param) 1)) 58) :pattern (
+  (temp___String_Literal_902 us_void_param)) )))
 
-(declare-fun temp___String_Literal_815 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_903 (tuple0) (Array Int character))
 
-;; temp___String_Literal_815__def_axiom
+;; temp___String_Literal_903__def_axiom
   (assert
   (forall ((us_void_param tuple0))
-  (! (= (to_rep (select (temp___String_Literal_815 us_void_param) 1)) 58) :pattern (
-  (temp___String_Literal_815 us_void_param)) )))
+  (! (= (to_rep (select (temp___String_Literal_903 us_void_param) 1)) 58) :pattern (
+  (temp___String_Literal_903 us_void_param)) )))
 
-(declare-fun temp___String_Literal_816 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_904 (tuple0) (Array Int character))
 
-;; temp___String_Literal_816__def_axiom
+;; temp___String_Literal_904__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
-     (= (to_rep (select (temp___String_Literal_816 us_void_param) 1)) 58)
-     (= (to_rep (select (temp___String_Literal_816 us_void_param) 2)) 32)) :pattern (
-  (temp___String_Literal_816 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_904 us_void_param) 1)) 58)
+     (= (to_rep (select (temp___String_Literal_904 us_void_param) 2)) 32)) :pattern (
+  (temp___String_Literal_904 us_void_param)) )))
 
 (define-fun dynamic_invariant2 ((temp___expr_33 Int) (temp___is_init_30 Bool)
   (temp___skip_constant_31 Bool)
@@ -900,11 +900,11 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range temp___expr_15)))
 
-(define-fun dynamic_invariant6 ((temp___expr_572 Int)
-  (temp___is_init_569 Bool) (temp___skip_constant_570 Bool)
-  (temp___do_toplevel_571 Bool)) Bool (=>
-                                      (or (= temp___is_init_569 true)
-                                      (<= 0 8)) (in_range6 temp___expr_572)))
+(define-fun dynamic_invariant6 ((temp___expr_660 Int)
+  (temp___is_init_657 Bool) (temp___skip_constant_658 Bool)
+  (temp___do_toplevel_659 Bool)) Bool (=>
+                                      (or (= temp___is_init_657 true)
+                                      (<= 0 8)) (in_range6 temp___expr_660)))
 
 (define-fun dynamic_invariant7 ((temp___expr_461 Int)
   (temp___is_init_458 Bool) (temp___skip_constant_459 Bool)

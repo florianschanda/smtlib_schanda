@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite64 ((x Float64)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -123,14 +124,14 @@
 (declare-const dummy1 ft)
 
 (declare-datatypes ((ft__ref 0)) (((mk_ft__ref (ft__content ft)))))
-(define-fun ft__ref_2__projection ((a ft__ref)) ft (ft__content a))
+(define-fun ft__ref___2__projection ((a ft__ref)) ft (ft__content a))
 
 (define-fun dynamic_invariant ((temp___expr_167 Float64)
   (temp___is_init_164 Bool) (temp___skip_constant_165 Bool)
   (temp___do_toplevel_166 Bool)) Bool (=>
                                       (or (= temp___is_init_164 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_167) (fp.isNaN temp___expr_167)))))
+                                      (fp.isFinite64 temp___expr_167)))
 
 (declare-const a Float64)
 
@@ -149,21 +150,20 @@
   (temp___do_toplevel_56 Bool)) Bool (=>
                                      (or (= temp___is_init_54 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
+                                     (fp.isFinite64 temp___expr_57)))
 
 ;; H
-  (assert (not (or (fp.isInfinite a) (fp.isNaN a))))
+  (assert (fp.isFinite64 a))
 
 ;; H
-  (assert (not (or (fp.isInfinite b) (fp.isNaN b))))
+  (assert (fp.isFinite64 b))
 
 ;; H
-  (assert (not (or (fp.isInfinite c) (fp.isNaN c))))
+  (assert (fp.isFinite64 c))
 
 (assert
 ;; WP_parameter_def
  ;; File "generic_float_tests.adb", line 155, characters 0-0
-  (not
-  (not (or (fp.isInfinite (fp.add RNE b c)) (fp.isNaN (fp.add RNE b c))))))
+  (not (fp.isFinite64 (fp.add RNE b c))))
 (check-sat)
 (exit)

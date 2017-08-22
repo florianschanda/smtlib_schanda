@@ -571,7 +571,7 @@
 
 (declare-datatypes ((durationt__ref1 0))
 (((mk_durationt__ref1 (durationt__content1 durationt1)))))
-(define-fun durationt__ref_2__projection ((a durationt__ref1)) durationt1
+(define-fun durationt__ref___2__projection ((a durationt__ref1)) durationt1
   (durationt__content1 a))
 
 (define-fun dynamic_invariant4 ((temp___expr_820 Int)

@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -126,12 +127,11 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-sort positive_float 0)
 
-(define-fun in_range2 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -160,8 +160,7 @@
 
 (declare-sort nonnegative_float 0)
 
-(define-fun in_range3 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
@@ -221,8 +220,7 @@
 
 (declare-sort normalized2pi 0)
 
-(define-fun in_range4 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
@@ -343,14 +341,13 @@
 ;; range_axiom
   (assert
   (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep2 x)) (fp.isNaN (to_rep2 x)))) :pattern (
-  (to_rep2 x)) )))
+  (! (fp.isFinite32 (to_rep2 x)) :pattern ((to_rep2 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2 (of_rep2 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
+                                                                  (of_rep2 x))) )))
 
 (declare-sort idir_t 0)
 
@@ -401,13 +398,13 @@
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_6__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___6__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_8__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___8__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (define-fun bool_eq1 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -547,12 +544,12 @@
 (declare-datatypes ((us_split_discrs 0))
 (((mk___split_discrs
   (rec__algorithm__gap_vectors__list__capacity count_type)))))
-(define-fun us_split_discrs_3__projection ((a us_split_discrs)) count_type
+(define-fun us_split_discrs___3__projection ((a us_split_discrs)) count_type
   (rec__algorithm__gap_vectors__list__capacity a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
 (((mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref_3__projection ((a us_split_discrs__ref)) us_split_discrs
+(define-fun us_split_discrs__ref___3__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ((us_split_fields4 0))
@@ -562,17 +559,17 @@
 
 (declare-datatypes ((us_split_fields__ref2 0))
 (((mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_9__projection ((a us_split_fields__ref2)) us_split_fields4
+(define-fun us_split_fields__ref___9__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep2
   (us_split_discrs1 us_split_discrs)(us_split_fields5 us_split_fields4)))))
-(define-fun us_rep_13__projection ((a us_rep2)) us_split_discrs (us_split_discrs1
-                                                                a))
+(define-fun us_rep___13__projection ((a us_rep2)) us_split_discrs (us_split_discrs1
+                                                                  a))
 
-(define-fun us_rep_14__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
-                                                                 a))
+(define-fun us_rep___14__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
+                                                                   a))
 
 (define-fun bool_eq2 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
@@ -666,13 +663,13 @@
 
 (declare-datatypes ((us_split_fields__ref3 0))
 (((mk___split_fields__ref3 (us_split_fields__content3 us_split_fields6)))))
-(define-fun us_split_fields__ref_10__projection ((a us_split_fields__ref3)) us_split_fields6
+(define-fun us_split_fields__ref___10__projection ((a us_split_fields__ref3)) us_split_fields6
   (us_split_fields__content3 a))
 
 (declare-datatypes ((us_rep3 0))
 (((mk___rep3 (us_split_fields7 us_split_fields6)))))
-(define-fun us_rep_15__projection ((a us_rep3)) us_split_fields6 (us_split_fields7
-                                                                 a))
+(define-fun us_rep___15__projection ((a us_rep3)) us_split_fields6 (us_split_fields7
+                                                                   a))
 
 (define-fun bool_eq3 ((a us_rep3)
   (b us_rep3)) Bool (ite (= (to_rep4
@@ -729,7 +726,7 @@
 
 (declare-datatypes ((element_type__ref1 0))
 (((mk_element_type__ref1 (element_type__content1 us_rep1)))))
-(define-fun element_type__ref_2__projection ((a element_type__ref1)) us_rep1
+(define-fun element_type__ref___2__projection ((a element_type__ref1)) us_rep1
   (element_type__content1 a))
 
 (declare-sort us_main_type1 0)
@@ -912,8 +909,8 @@
 
 (declare-datatypes ((list__ref1 0))
 (((mk_list__ref1 (list__content1 us_rep2)))))
-(define-fun list__ref_2__projection ((a list__ref1)) us_rep2 (list__content1
-                                                             a))
+(define-fun list__ref___2__projection ((a list__ref1)) us_rep2 (list__content1
+                                                               a))
 
 (declare-fun is_empty (us_rep2) Bool)
 
@@ -944,13 +941,13 @@
 
 (declare-datatypes ((us_split_fields__ref4 0))
 (((mk___split_fields__ref4 (us_split_fields__content4 us_split_fields8)))))
-(define-fun us_split_fields__ref_11__projection ((a us_split_fields__ref4)) us_split_fields8
+(define-fun us_split_fields__ref___11__projection ((a us_split_fields__ref4)) us_split_fields8
   (us_split_fields__content4 a))
 
 (declare-datatypes ((us_rep6 0))
 (((mk___rep4 (us_split_fields9 us_split_fields8)))))
-(define-fun us_rep_16__projection ((a us_rep6)) us_split_fields8 (us_split_fields9
-                                                                 a))
+(define-fun us_rep___16__projection ((a us_rep6)) us_split_fields8 (us_split_fields9
+                                                                   a))
 
 (define-fun bool_eq6 ((a us_rep6)
   (b us_rep6)) Bool (ite (and
@@ -1343,7 +1340,7 @@
 
 (declare-datatypes ((element_type__ref2 0))
 (((mk_element_type__ref2 (element_type__content2 element_type)))))
-(define-fun element_type__ref_3__projection ((a element_type__ref2)) element_type
+(define-fun element_type__ref___3__projection ((a element_type__ref2)) element_type
   (element_type__content2 a))
 
 (define-fun dynamic_invariant8 ((temp___expr_461 Int)
@@ -1653,13 +1650,11 @@
                                                               (rec__algorithm__laser_scan_data__first
                                                               rayl__split_fields2))
   (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields2))))
-  (not (or (fp.isInfinite (fp.sub RNE (to_rep
-                                      (rec__algorithm__laser_scan_data__first
-                                      rayl__split_fields2)) (to_rep
-                                                            (rec__algorithm__laser_scan_data__first
-                                                            rayr__split_fields2)))) (fp.isNaN (fp.sub RNE
-  (to_rep (rec__algorithm__laser_scan_data__first rayl__split_fields2))
-  (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields2)))))))))
+  (fp.isFinite32 (fp.sub RNE (to_rep
+                             (rec__algorithm__laser_scan_data__first
+                             rayl__split_fields2)) (to_rep
+                                                   (rec__algorithm__laser_scan_data__first
+                                                   rayr__split_fields2)))))))
 
 ;; H
   (assert
@@ -1667,9 +1662,7 @@
   (= algorithm__buildgapvector__B_9__dist__assume dist1)))
 
 ;; H
-  (assert
-  (=> (and (<= 2 i1) (<= i1 999))
-  (not (or (fp.isInfinite dist1) (fp.isNaN dist1)))))
+  (assert (=> (and (<= 2 i1) (<= i1 999)) (fp.isFinite32 dist1)))
 
 ;; H
   (assert
@@ -2174,12 +2167,12 @@
   (= o7 (ccwdiff
         (rec__algorithm__laser_scan_data__second rayr__split_fields7)
         (rec__algorithm__laser_scan_data__second rayl__split_fields7)))
-  (not (or (fp.isInfinite o7) (fp.isNaN o7)))))
+  (fp.isFinite32 o7)))
 
 ;; H
   (assert
   (and (= o8 (cos1 o7))
-  (and (not (or (fp.isInfinite o8) (fp.isNaN o8)))
+  (and (fp.isFinite32 o8)
   (and
   (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))
   o8) (fp.leq o8 (fp #b0 #b01111111 #b00000000000000000000000)))
@@ -2192,9 +2185,8 @@
   (= o5 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) (to_rep
                                                                   (rec__algorithm__laser_scan_data__first
                                                                   rayr__split_fields7))))
-  (not (or (fp.isInfinite (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
-  (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields7)))) (fp.isNaN (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
-  (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields7))))))))
+  (fp.isFinite32 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
+  (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields7))))))
 
 ;; H
   (assert
@@ -2203,13 +2195,13 @@
                        rayl__split_fields7)))))
 
 ;; H
-  (assert (and (= o9 o6) (not (or (fp.isInfinite o6) (fp.isNaN o6)))))
+  (assert (and (= o9 o6) (fp.isFinite32 o6)))
 
 ;; H
   (assert (= o10 (fp.mul RNE o9 o8)))
 
 ;; H
-  (assert (and (= o11 o10) (not (or (fp.isInfinite o10) (fp.isNaN o10)))))
+  (assert (and (= o11 o10) (fp.isFinite32 o10)))
 
 ;; H
   (assert
@@ -2219,13 +2211,11 @@
                     rayl__split_fields7)) (to_rep
                                           (rec__algorithm__laser_scan_data__first
                                           rayl__split_fields7))))
-  (not (or (fp.isInfinite (fp.mul RNE (to_rep
-                                      (rec__algorithm__laser_scan_data__first
-                                      rayl__split_fields7)) (to_rep
-                                                            (rec__algorithm__laser_scan_data__first
-                                                            rayl__split_fields7)))) (fp.isNaN (fp.mul RNE
-  (to_rep (rec__algorithm__laser_scan_data__first rayl__split_fields7))
-  (to_rep (rec__algorithm__laser_scan_data__first rayl__split_fields7))))))))
+  (fp.isFinite32 (fp.mul RNE (to_rep
+                             (rec__algorithm__laser_scan_data__first
+                             rayl__split_fields7)) (to_rep
+                                                   (rec__algorithm__laser_scan_data__first
+                                                   rayl__split_fields7))))))
 
 ;; H
   (assert
@@ -2235,19 +2225,17 @@
                     rayr__split_fields7)) (to_rep
                                           (rec__algorithm__laser_scan_data__first
                                           rayr__split_fields7))))
-  (not (or (fp.isInfinite (fp.mul RNE (to_rep
-                                      (rec__algorithm__laser_scan_data__first
-                                      rayr__split_fields7)) (to_rep
-                                                            (rec__algorithm__laser_scan_data__first
-                                                            rayr__split_fields7)))) (fp.isNaN (fp.mul RNE
-  (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields7))
-  (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields7))))))))
+  (fp.isFinite32 (fp.mul RNE (to_rep
+                             (rec__algorithm__laser_scan_data__first
+                             rayr__split_fields7)) (to_rep
+                                                   (rec__algorithm__laser_scan_data__first
+                                                   rayr__split_fields7))))))
 
 ;; H
   (assert (= o4 (fp.add RNE o3 o2)))
 
 ;; H
-  (assert (and (= o12 o4) (not (or (fp.isInfinite o4) (fp.isNaN o4)))))
+  (assert (and (= o12 o4) (fp.isFinite32 o4)))
 
 ;; H
   (assert (= o13 (fp.sub RNE o12 o11)))
@@ -2255,13 +2243,13 @@
 ;; H
   (assert
   (and (= algorithm__buildgapvector__B_10__dist__assume o13)
-  (not (or (fp.isInfinite o13) (fp.isNaN o13)))))
+  (fp.isFinite32 o13)))
 
 ;; H
   (assert (= algorithm__buildgapvector__B_10__dist__assume dist2))
 
 ;; H
-  (assert (not (or (fp.isInfinite dist2) (fp.isNaN dist2))))
+  (assert (fp.isFinite32 dist2))
 
 ;; H
   (assert (fp.leq mingapwidth dist2))

@@ -60,10 +60,10 @@
 (define-fun us_split_discrs___projection ((a us_split_discrs)) integer
   (rec__p__pt__x a))
 
-(define-fun us_split_discrs_2__projection ((a us_split_discrs)) integer
+(define-fun us_split_discrs___2__projection ((a us_split_discrs)) integer
   (rec__p__pt__y a))
 
-(define-fun us_split_discrs_3__projection ((a us_split_discrs)) integer
+(define-fun us_split_discrs___3__projection ((a us_split_discrs)) integer
   (rec__p__pt__z a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
@@ -73,8 +73,8 @@
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_discrs1 us_split_discrs)))))
-(define-fun us_rep_29__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___29__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
 (declare-const value__size Int)
 
@@ -148,8 +148,8 @@
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_discrs2 us_split_discrs)))))
-(define-fun us_rep_30__projection ((a us_rep1)) us_split_discrs (us_split_discrs2
-                                                                a))
+(define-fun us_rep___30__projection ((a us_rep1)) us_split_discrs (us_split_discrs2
+                                                                  a))
 
 (define-fun to_base ((a us_rep1)) us_rep (mk___rep (us_split_discrs2 a)))
 

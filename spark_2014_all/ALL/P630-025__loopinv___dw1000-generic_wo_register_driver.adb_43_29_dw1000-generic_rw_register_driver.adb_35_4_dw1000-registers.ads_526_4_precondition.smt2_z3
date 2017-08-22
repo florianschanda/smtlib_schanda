@@ -500,18 +500,18 @@
 (define-fun us_split_fields_OTP_ADDR__projection ((a us_split_fields)) bits_11
   (rec__dw1000__register_types__otp_addr_type__otp_addr a))
 
-(define-fun us_split_fields_Reserved20__projection ((a us_split_fields)) bits_5
+(define-fun us_split_fields_Reserved__20__projection ((a us_split_fields)) bits_5
   (rec__dw1000__register_types__otp_addr_type__reserved a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_74__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___74__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_74__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___74__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                 a))
 
 (define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -590,7 +590,7 @@
 
 (declare-datatypes ((register_type__ref 0))
 (((mk_register_type__ref (register_type__content us_rep)))))
-(define-fun register_type__ref_181__projection ((a register_type__ref)) us_rep
+(define-fun register_type__ref___181__projection ((a register_type__ref)) us_rep
   (register_type__content a))
 
 (declare-const reg us_rep)
@@ -612,7 +612,7 @@
 
 (declare-datatypes ((tregister_byte_arrayP1__ref 0))
 (((mk_tregister_byte_arrayP1__ref (tregister_byte_arrayP1__content integer)))))
-(define-fun tregister_byte_arrayP1__ref_127__projection ((a tregister_byte_arrayP1__ref)) integer
+(define-fun tregister_byte_arrayP1__ref___127__projection ((a tregister_byte_arrayP1__ref)) integer
   (tregister_byte_arrayP1__content a))
 
 (declare-sort t1 0)
@@ -694,19 +694,19 @@
 
 (declare-datatypes ((register_byte_array__ref 0))
 (((mk_register_byte_array__ref (register_byte_array__content us_t1)))))
-(define-fun register_byte_array__ref_127__projection ((a register_byte_array__ref)) us_t1
+(define-fun register_byte_array__ref___127__projection ((a register_byte_array__ref)) us_t1
   (register_byte_array__content a))
 
-(define-fun dynamic_invariant ((temp___expr_6224 us_t1)
-  (temp___is_init_6221 Bool) (temp___skip_constant_6222 Bool)
-  (temp___do_toplevel_6223 Bool)) Bool (=>
+(define-fun dynamic_invariant ((temp___expr_6338 us_t1)
+  (temp___is_init_6335 Bool) (temp___skip_constant_6336 Bool)
+  (temp___do_toplevel_6337 Bool)) Bool (=>
                                        (not
-                                       (= temp___skip_constant_6222 true))
+                                       (= temp___skip_constant_6336 true))
                                        (and (dynamic_property2 1 2
-                                       (first3 temp___expr_6224)
-                                       (last3 temp___expr_6224))
-                                       (and (= (first3 temp___expr_6224) 1)
-                                       (= (last3 temp___expr_6224) 2)))))
+                                       (first3 temp___expr_6338)
+                                       (last3 temp___expr_6338))
+                                       (and (= (first3 temp___expr_6338) 1)
+                                       (= (last3 temp___expr_6338) 2)))))
 
 (declare-sort t2 0)
 
@@ -787,24 +787,24 @@
 
 (declare-datatypes ((target__ref 0))
 (((mk_target__ref (target__content us_t2)))))
-(define-fun target__ref_55__projection ((a target__ref)) us_t2 (target__content
-                                                               a))
+(define-fun target__ref___55__projection ((a target__ref)) us_t2 (target__content
+                                                                 a))
 
 (declare-datatypes ((source__ref 0))
 (((mk_source__ref (source__content us_rep)))))
-(define-fun source__ref_55__projection ((a source__ref)) us_rep (source__content
-                                                                a))
+(define-fun source__ref___55__projection ((a source__ref)) us_rep (source__content
+                                                                  a))
 
-(define-fun dynamic_invariant1 ((temp___expr_6241 us_t2)
-  (temp___is_init_6238 Bool) (temp___skip_constant_6239 Bool)
-  (temp___do_toplevel_6240 Bool)) Bool (=>
+(define-fun dynamic_invariant1 ((temp___expr_6355 us_t2)
+  (temp___is_init_6352 Bool) (temp___skip_constant_6353 Bool)
+  (temp___do_toplevel_6354 Bool)) Bool (=>
                                        (not
-                                       (= temp___skip_constant_6239 true))
+                                       (= temp___skip_constant_6353 true))
                                        (and (dynamic_property3 1 2
-                                       (first5 temp___expr_6241)
-                                       (last5 temp___expr_6241))
-                                       (and (= (first5 temp___expr_6241) 1)
-                                       (= (last5 temp___expr_6241) 2)))))
+                                       (first5 temp___expr_6355)
+                                       (last5 temp___expr_6355))
+                                       (and (= (first5 temp___expr_6355) 1)
+                                       (= (last5 temp___expr_6355) 2)))))
 
 (declare-fun register_to_bytes (us_rep) us_t2)
 
@@ -849,13 +849,13 @@
 
 (declare-const reg_bytes (Array Int bits_8))
 
-(declare-const temp___7961 (Array Int bits_8))
+(declare-const temp___8111 (Array Int bits_8))
 
-(declare-const temp___79611 t2)
+(declare-const temp___81111 t2)
 
-(declare-const temp___7962 (Array Int bits_8))
+(declare-const temp___8112 (Array Int bits_8))
 
-(declare-const temp___79621 t1)
+(declare-const temp___81121 t1)
 
 (declare-const o (Array Int bits_8))
 
@@ -867,7 +867,7 @@
 
 (declare-const reg_bytes1 (Array Int bits_8))
 
-(define-fun temp___79612 () us_t2 (mk___t2 temp___7961 temp___79611))
+(define-fun temp___81112 () us_t2 (mk___t2 temp___8111 temp___81111))
 
 ;; H
   (assert
@@ -877,32 +877,32 @@
 
 ;; H
   (assert
-  (and (= temp___79612 (register_to_bytes reg)) (dynamic_invariant1
-  temp___79612 true false true)))
+  (and (= temp___81112 (register_to_bytes reg)) (dynamic_invariant1
+  temp___81112 true false true)))
 
 ;; H
   (assert
-  (= (ite (<= (to_rep (first4 temp___79611)) (to_rep (last4 temp___79611)))
-     (+ (- (to_rep (last4 temp___79611)) (to_rep (first4 temp___79611))) 1)
+  (= (ite (<= (to_rep (first4 temp___81111)) (to_rep (last4 temp___81111)))
+     (+ (- (to_rep (last4 temp___81111)) (to_rep (first4 temp___81111))) 1)
      0) (ite (<= 1 2) (+ (- 2 1) 1) 0)))
 
 ;; H
-  (assert (= temp___7961 temp___7962))
+  (assert (= temp___8111 temp___8112))
 
 ;; H
   (assert
-  (= (mk1 (to_rep (first4 temp___79611)) (to_rep (last4 temp___79611)))
-  temp___79621))
+  (= (mk1 (to_rep (first4 temp___81111)) (to_rep (last4 temp___81111)))
+  temp___81121))
 
 ;; H
   (assert
-  (= (ite (<= (to_rep (first2 temp___79621)) (to_rep (last2 temp___79621)))
-     (+ (- (to_rep (last2 temp___79621)) (to_rep (first2 temp___79621))) 1)
+  (= (ite (<= (to_rep (first2 temp___81121)) (to_rep (last2 temp___81121)))
+     (+ (- (to_rep (last2 temp___81121)) (to_rep (first2 temp___81121))) 1)
      0) (ite (<= (to_rep reg_bytes__first) (to_rep reg_bytes__last))
         (+ (- (to_rep reg_bytes__last) (to_rep reg_bytes__first)) 1) 0)))
 
 ;; H
-  (assert (= (mk___t1 o o1) (mk___t1 temp___7962 temp___79621)))
+  (assert (= (mk___t1 o o1) (mk___t1 temp___8112 temp___81121)))
 
 ;; H
   (assert (= o2 o))

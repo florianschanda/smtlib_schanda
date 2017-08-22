@@ -254,18 +254,18 @@
 (declare-datatypes ((us_split_fields2 0))
 (((mk___split_fields1
   (rec__dic_and_predicate_checks__nested_2__r__f integer)))))
-(define-fun us_split_fields_F2__projection ((a us_split_fields2)) integer
+(define-fun us_split_fields_F__2__projection ((a us_split_fields2)) integer
   (rec__dic_and_predicate_checks__nested_2__r__f a))
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (define-fun bool_eq1 ((a us_rep1)
   (b us_rep1)) Bool (ite (= (to_rep
@@ -316,7 +316,7 @@
 (declare-const dummy3 us_rep1)
 
 (declare-datatypes ((t__ref1 0)) (((mk_t__ref1 (t__content1 us_rep1)))))
-(define-fun t__ref_2__projection ((a t__ref1)) us_rep1 (t__content1 a))
+(define-fun t__ref___2__projection ((a t__ref1)) us_rep1 (t__content1 a))
 
 (declare-const value__size3 Int)
 
@@ -359,7 +359,7 @@
 (declare-const dummy4 us_rep1)
 
 (declare-datatypes ((r__ref1 0)) (((mk_r__ref1 (r__content1 us_rep1)))))
-(define-fun r__ref_2__projection ((a r__ref1)) us_rep1 (r__content1 a))
+(define-fun r__ref___2__projection ((a r__ref1)) us_rep1 (r__content1 a))
 
 (declare-fun is_valid2 (us_rep1) Bool)
 
@@ -561,7 +561,7 @@
 (declare-const dummy7 us_rep2)
 
 (declare-datatypes ((t__ref2 0)) (((mk_t__ref2 (t__content2 us_rep2)))))
-(define-fun t__ref_3__projection ((a t__ref2)) us_rep2 (t__content2 a))
+(define-fun t__ref___3__projection ((a t__ref2)) us_rep2 (t__content2 a))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 

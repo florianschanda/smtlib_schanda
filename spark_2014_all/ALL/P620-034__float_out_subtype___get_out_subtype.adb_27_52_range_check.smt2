@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -114,7 +115,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const x Float32)
 
@@ -130,8 +131,7 @@
 
 (declare-sort t_rate 0)
 
-(define-fun in_range1 ((x1 Float32)) Bool (and
-                                          (not (or (fp.isInfinite x1) (fp.isNaN x1)))
+(define-fun in_range1 ((x1 Float32)) Bool (and (fp.isFinite32 x1)
                                           (and
                                           (fp.leq (fp.neg (fp #b0 #b10001010 #b01110111000000000000000)) x1)
                                           (fp.leq x1 (fp #b0 #b10001010 #b01110111000000000000000)))))
@@ -218,13 +218,13 @@
 (declare-const roll_rate_desired2 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite x) (fp.isNaN x))))
+  (assert (fp.isFinite32 x))
 
 ;; H
-  (assert (not (or (fp.isInfinite y) (fp.isNaN y))))
+  (assert (fp.isFinite32 y))
 
 ;; H
-  (assert (not (or (fp.isInfinite z) (fp.isNaN z))))
+  (assert (fp.isFinite32 z))
 
 ;; H
   (assert (= result roll_rate_desired))
@@ -258,8 +258,7 @@
 
 ;; H
   (assert
-  (and (= o pitch_rate_desired1)
-  (not (or (fp.isInfinite pitch_rate_desired1) (fp.isNaN pitch_rate_desired1)))))
+  (and (= o pitch_rate_desired1) (fp.isFinite32 pitch_rate_desired1)))
 
 ;; H
   (assert
@@ -269,18 +268,14 @@
   (assert
   (and
   (and
-  (not (or (fp.isInfinite get_out_subtype__controller_get_desired_rate__roll_rate_desired) (fp.isNaN
-  get_out_subtype__controller_get_desired_rate__roll_rate_desired)))
-  (not (or (fp.isInfinite get_out_subtype__controller_get_desired_rate__pitch_rate_desired1) (fp.isNaN
-  get_out_subtype__controller_get_desired_rate__pitch_rate_desired1))))
-  (not (or (fp.isInfinite get_out_subtype__controller_get_desired_rate__yaw_rate_desired) (fp.isNaN
-  get_out_subtype__controller_get_desired_rate__yaw_rate_desired)))))
+  (fp.isFinite32 get_out_subtype__controller_get_desired_rate__roll_rate_desired)
+  (fp.isFinite32 get_out_subtype__controller_get_desired_rate__pitch_rate_desired1))
+  (fp.isFinite32 get_out_subtype__controller_get_desired_rate__yaw_rate_desired)))
 
 ;; H
   (assert
   (and (= o1 get_out_subtype__controller_get_desired_rate__roll_rate_desired)
-  (not (or (fp.isInfinite get_out_subtype__controller_get_desired_rate__roll_rate_desired) (fp.isNaN
-  get_out_subtype__controller_get_desired_rate__roll_rate_desired)))))
+  (fp.isFinite32 get_out_subtype__controller_get_desired_rate__roll_rate_desired)))
 
 ;; H
   (assert (= result3 roll_rate_desired1))

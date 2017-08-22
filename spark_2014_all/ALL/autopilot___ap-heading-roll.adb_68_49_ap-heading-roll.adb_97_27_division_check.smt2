@@ -339,7 +339,7 @@
 
 (declare-datatypes ((degreespersec__ref1 0))
 (((mk_degreespersec__ref1 (degreespersec__content1 degreespersec1)))))
-(define-fun degreespersec__ref_2__projection ((a degreespersec__ref1)) degreespersec1
+(define-fun degreespersec__ref___2__projection ((a degreespersec__ref1)) degreespersec1
   (degreespersec__content1 a))
 
 (define-fun dynamic_invariant6 ((temp___expr_201 Int)

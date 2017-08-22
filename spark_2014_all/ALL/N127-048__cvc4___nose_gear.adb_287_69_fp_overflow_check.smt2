@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite64 ((x Float64)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -461,7 +462,7 @@
   (temp___do_toplevel_56 Bool)) Bool (=>
                                      (or (= temp___is_init_54 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
+                                     (fp.isFinite64 temp___expr_57)))
 
 (declare-sort tinteger_32B 0)
 
@@ -500,7 +501,7 @@
 
 (declare-datatypes ((integer_32__ref 0))
 (((mk_integer_32__ref (integer_32__content integer_32)))))
-(define-fun integer_32__ref_2__projection ((a integer_32__ref)) integer_32
+(define-fun integer_32__ref___2__projection ((a integer_32__ref)) integer_32
   (integer_32__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_147 Int)
@@ -958,22 +959,19 @@
 (declare-const distance_km_out11 Float64)
 
 ;; H
-  (assert
-  (not (or (fp.isInfinite old_estimatedgroundvelocity_memory) (fp.isNaN
-  old_estimatedgroundvelocity_memory))))
+  (assert (fp.isFinite64 old_estimatedgroundvelocity_memory))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite estimatedgroundvelocity) (fp.isNaN estimatedgroundvelocity)))))
+  (fp.isFinite64 estimatedgroundvelocity)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite old_estimatedgroundvelocity_out1) (fp.isNaN
-  old_estimatedgroundvelocity_out1)))))
+  (fp.isFinite64 old_estimatedgroundvelocity_out1)))
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range3 max_uint16_out1)))
@@ -988,19 +986,19 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite wheel_circunference_out1) (fp.isNaN wheel_circunference_out1)))))
+  (fp.isFinite64 wheel_circunference_out1)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite ms_in_hour_out1) (fp.isNaN ms_in_hour_out1)))))
+  (fp.isFinite64 ms_in_hour_out1)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite ms_in_our1_out1) (fp.isNaN ms_in_our1_out1)))))
+  (fp.isFinite64 ms_in_our1_out1)))
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range3 to_int32_left_out1)))
@@ -1096,36 +1094,31 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite (t__content1 distance_km_out1)) (fp.isNaN (t__content1
-                                                                    distance_km_out1))))))
+  (fp.isFinite64 (t__content1 distance_km_out1))))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite (t__content1 elapsed_time_h_out1)) (fp.isNaN
-  (t__content1 elapsed_time_h_out1))))))
+  (fp.isFinite64 (t__content1 elapsed_time_h_out1))))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite (t__content1 avoid_div_by_zero_out1)) (fp.isNaN
-  (t__content1 avoid_div_by_zero_out1))))))
+  (fp.isFinite64 (t__content1 avoid_div_by_zero_out1))))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite (t__content1 speed_out1)) (fp.isNaN (t__content1
-                                                              speed_out1))))))
+  (fp.isFinite64 (t__content1 speed_out1))))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite (t__content1 old_output_if_new_invalid_out1)) (fp.isNaN
-  (t__content1 old_output_if_new_invalid_out1))))))
+  (fp.isFinite64 (t__content1 old_output_if_new_invalid_out1))))
 
 ;; H
   (assert (= result (mk_t__ref old_ngclicktime_out1)))
@@ -1591,11 +1584,10 @@
   (= o16 (fp.mul RNE ((_ to_fp_unsigned 11 53) RNE (let ((subject to_uint16_result_out1))
                                                    to_uint16_result_out11))
   wheel_circunference_out11))
-  (not (or (fp.isInfinite (fp.mul RNE ((_ to_fp_unsigned 11 53) RNE (let ((subject
-                                                                    to_uint16_result_out1))
-                                                                    to_uint16_result_out11))
-  wheel_circunference_out11)) (fp.isNaN (fp.mul RNE ((_ to_fp_unsigned 11 53) RNE
-  (let ((subject to_uint16_result_out1)) to_uint16_result_out11)) wheel_circunference_out11))))))
+  (fp.isFinite64 (fp.mul RNE ((_ to_fp_unsigned 11 53) RNE (let ((subject
+                                                           to_uint16_result_out1))
+                                                           to_uint16_result_out11))
+  wheel_circunference_out11))))
 
 ;; H
   (assert (= result43 distance_km_out1))
@@ -1607,11 +1599,9 @@
 ;; WP_parameter_def
  ;; File "nose_gear.adb", line 24, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.div RNE ((_ to_fp_unsigned 11 53) RNE (let ((subject
-                                                                    to_uint16_result_1_out1))
-                                                                    to_uint16_result_1_out11))
-  ms_in_hour_out11)) (fp.isNaN (fp.div RNE ((_ to_fp_unsigned 11 53) RNE
-  (let ((subject to_uint16_result_1_out1)) to_uint16_result_1_out11))
-  ms_in_hour_out11))))))
+  (fp.isFinite64 (fp.div RNE ((_ to_fp_unsigned 11 53) RNE (let ((subject
+                                                           to_uint16_result_1_out1))
+                                                           to_uint16_result_1_out11))
+  ms_in_hour_out11))))
 (check-sat)
 (exit)

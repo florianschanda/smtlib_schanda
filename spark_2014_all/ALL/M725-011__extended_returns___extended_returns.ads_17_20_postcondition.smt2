@@ -160,10 +160,10 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_discrs (us_split_discrs1
                                                              a))
 
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
-(define-fun us_rep_3__projection ((a us_rep)) Bool (attr__constrained a))
+(define-fun us_rep___3__projection ((a us_rep)) Bool (attr__constrained a))
 
 (define-fun extended_returns__record_t__b__pred ((a us_rep)) Bool (=
   (to_rep1 (rec__extended_returns__record_t__discr (us_split_discrs1 a))) 0))

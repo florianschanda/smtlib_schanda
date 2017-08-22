@@ -224,7 +224,7 @@
 
 (declare-datatypes ((index_type__ref1 0))
 (((mk_index_type__ref1 (index_type__content1 integer)))))
-(define-fun index_type__ref_2__projection ((a index_type__ref1)) integer
+(define-fun index_type__ref___2__projection ((a index_type__ref1)) integer
   (index_type__content1 a))
 
 (declare-fun to_rep1 (tcount_typeB) Int)
@@ -298,8 +298,8 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_discrs (us_split_discrs1
                                                              a))
 
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (declare-const value__size Int)
 
@@ -406,7 +406,7 @@
 
 (declare-datatypes ((extended_index__ref 0))
 (((mk_extended_index__ref (extended_index__content integer)))))
-(define-fun extended_index__ref_2__projection ((a extended_index__ref)) integer
+(define-fun extended_index__ref___2__projection ((a extended_index__ref)) integer
   (extended_index__content a))
 
 (declare-sort us_main_type1 0)
@@ -469,7 +469,7 @@
 
 (declare-datatypes ((index_type__ref2 0))
 (((mk_index_type__ref2 (index_type__content2 integer)))))
-(define-fun index_type__ref_3__projection ((a index_type__ref2)) integer
+(define-fun index_type__ref___3__projection ((a index_type__ref2)) integer
   (index_type__content2 a))
 
 (declare-sort element_type 0)
@@ -489,7 +489,7 @@
 
 (declare-datatypes ((element_type__ref 0))
 (((mk_element_type__ref (element_type__content element_type)))))
-(define-fun element_type__ref_3__projection ((a element_type__ref)) element_type
+(define-fun element_type__ref___3__projection ((a element_type__ref)) element_type
   (element_type__content a))
 
 (define-fun dynamic_invariant3 ((temp___expr_246 Int)
@@ -630,7 +630,7 @@
 
 (declare-datatypes ((element_type__ref1 0))
 (((mk_element_type__ref1 (element_type__content1 element_type1)))))
-(define-fun element_type__ref_2__projection ((a element_type__ref1)) element_type1
+(define-fun element_type__ref___2__projection ((a element_type__ref1)) element_type1
   (element_type__content1 a))
 
 (define-fun dynamic_invariant6 ((temp___expr_213 Int)

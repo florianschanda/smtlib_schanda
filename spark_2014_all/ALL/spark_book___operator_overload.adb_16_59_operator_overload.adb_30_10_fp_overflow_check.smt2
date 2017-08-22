@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -404,7 +405,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-fun to_rep2 (float) Float32)
 
@@ -418,27 +419,26 @@
 ;; range_axiom
   (assert
   (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep2 x)) (fp.isNaN (to_rep2 x)))) :pattern (
-  (to_rep2 x)) )))
+  (! (fp.isFinite32 (to_rep2 x)) :pattern ((to_rep2 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2 (of_rep2 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
+                                                                  (of_rep2 x))) )))
 
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields
   (rec__operator_overload__point__x_coord float)(rec__operator_overload__point__y_coord float)))))
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_3__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___3__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -1037,25 +1037,22 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite left_squared) (fp.isNaN left_squared)))))
+  (fp.isFinite32 left_squared)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite right_squared) (fp.isNaN right_squared)))))
+  (fp.isFinite32 right_squared)))
 
 (assert
 ;; WP_parameter_def
  ;; File "operator_overload.adb", line 2, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.mul RNE (to_rep2
-                                      (rec__operator_overload__point__y_coord
-                                      (us_split_fields1 c3b))) (to_rep2
-                                                               (rec__operator_overload__point__y_coord
-                                                               (us_split_fields1
-                                                               c3b))))) (fp.isNaN (fp.mul RNE
-  (to_rep2 (rec__operator_overload__point__y_coord (us_split_fields1 c3b)))
-  (to_rep2 (rec__operator_overload__point__y_coord (us_split_fields1 c3b)))))))))
+  (fp.isFinite32 (fp.mul RNE (to_rep2
+                             (rec__operator_overload__point__y_coord
+                             (us_split_fields1 c3b))) (to_rep2
+                                                      (rec__operator_overload__point__y_coord
+                                                      (us_split_fields1 c3b)))))))
 (check-sat)
 (exit)

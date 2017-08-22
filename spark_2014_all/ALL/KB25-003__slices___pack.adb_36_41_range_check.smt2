@@ -346,7 +346,7 @@
 
 (declare-datatypes ((tTmy_s2SP1__ref 0))
 (((mk_tTmy_s2SP1__ref (tTmy_s2SP1__content tTmy_s2SP1)))))
-(define-fun tTmy_s2SP1__ref_2__projection ((a tTmy_s2SP1__ref)) tTmy_s2SP1
+(define-fun tTmy_s2SP1__ref___2__projection ((a tTmy_s2SP1__ref)) tTmy_s2SP1
   (tTmy_s2SP1__content a))
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
@@ -367,7 +367,7 @@
 
 (declare-datatypes ((tTmy_aSP1__ref 0))
 (((mk_tTmy_aSP1__ref (tTmy_aSP1__content tTmy_aSP1)))))
-(define-fun tTmy_aSP1__ref_3__projection ((a tTmy_aSP1__ref)) tTmy_aSP1
+(define-fun tTmy_aSP1__ref___3__projection ((a tTmy_aSP1__ref)) tTmy_aSP1
   (tTmy_aSP1__content a))
 
 (declare-datatypes ((map__ref1 0))

@@ -41,20 +41,20 @@
 
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields (rec__ext__ us_private)))))
-(define-fun us_split_fields_6__projection ((a us_split_fields)) us_private
+(define-fun us_split_fields___6__projection ((a us_split_fields)) us_private
   (rec__ext__ a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_15__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___15__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)(attr__tag Int)))))
-(define-fun us_rep_29__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___29__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                 a))
 
-(define-fun us_rep_30__projection ((a us_rep)) Int (attr__tag a))
+(define-fun us_rep___30__projection ((a us_rep)) Int (attr__tag a))
 
 (define-fun bool_eq ((a us_rep) (b us_rep)) Bool (ite true true false))
 
@@ -87,7 +87,7 @@
 (declare-const dummy us_rep)
 
 (declare-datatypes ((t1__ref 0)) (((mk_t1__ref (t1__content us_rep)))))
-(define-fun t1__ref_2__projection ((a t1__ref)) us_rep (t1__content a))
+(define-fun t1__ref___2__projection ((a t1__ref)) us_rep (t1__content a))
 
 (define-fun default_initial_assumption ((temp___expr_337 us_rep)
   (temp___skip_top_level_338 Bool)) Bool (= (attr__tag temp___expr_337)

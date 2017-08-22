@@ -80,12 +80,12 @@
 (declare-datatypes ((us_split_discrs 0))
 (((mk___split_discrs
   (rec__dic_of_cont__my_fove__vector__capacity capacity_range)))))
-(define-fun us_split_discrs_8__projection ((a us_split_discrs)) capacity_range
+(define-fun us_split_discrs___8__projection ((a us_split_discrs)) capacity_range
   (rec__dic_of_cont__my_fove__vector__capacity a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
 (((mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref_6__projection ((a us_split_discrs__ref)) us_split_discrs
+(define-fun us_split_discrs__ref___6__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ((us_split_fields 0))
@@ -95,17 +95,17 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_15__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___15__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)))))
-(define-fun us_rep_22__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___22__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_23__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___23__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                 a))
 
 (declare-const value__size Int)
 

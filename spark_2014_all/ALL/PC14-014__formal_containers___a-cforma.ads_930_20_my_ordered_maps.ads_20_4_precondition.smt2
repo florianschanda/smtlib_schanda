@@ -90,32 +90,32 @@
 
 (declare-datatypes ((us_split_discrs 0))
 (((mk___split_discrs (rec__my_ordered_maps__n__map__capacity count_type)))))
-(define-fun us_split_discrs_2__projection ((a us_split_discrs)) count_type
+(define-fun us_split_discrs___2__projection ((a us_split_discrs)) count_type
   (rec__my_ordered_maps__n__map__capacity a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
 (((mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref_2__projection ((a us_split_discrs__ref)) us_split_discrs
+(define-fun us_split_discrs__ref___2__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields (rec__my_ordered_maps__n__map us_main_type)))))
-(define-fun us_split_fields_Map2__projection ((a us_split_fields)) us_main_type
+(define-fun us_split_fields_Map__2__projection ((a us_split_fields)) us_main_type
   (rec__my_ordered_maps__n__map a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_8__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___8__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)))))
-(define-fun us_rep_11__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___11__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_12__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___12__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                 a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -172,7 +172,7 @@
 (declare-const dummy1 us_rep)
 
 (declare-datatypes ((map__ref 0)) (((mk_map__ref (map__content us_rep)))))
-(define-fun map__ref_4__projection ((a map__ref)) us_rep (map__content a))
+(define-fun map__ref___4__projection ((a map__ref)) us_rep (map__content a))
 
 (declare-fun oeq (us_rep us_rep) Bool)
 
@@ -189,18 +189,18 @@
 
 (declare-datatypes ((us_split_fields2 0))
 (((mk___split_fields1 (rec__my_ordered_maps__n__cursor__node count_type)))))
-(define-fun us_split_fields_Node2__projection ((a us_split_fields2)) count_type
+(define-fun us_split_fields_Node__2__projection ((a us_split_fields2)) count_type
   (rec__my_ordered_maps__n__cursor__node a))
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_9__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___9__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_13__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                 a))
+(define-fun us_rep___13__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                   a))
 
 (define-fun bool_eq1 ((a us_rep1)
   (b us_rep1)) Bool (ite (= (to_rep
@@ -252,8 +252,8 @@
 
 (declare-datatypes ((cursor__ref 0))
 (((mk_cursor__ref (cursor__content us_rep1)))))
-(define-fun cursor__ref_2__projection ((a cursor__ref)) us_rep1 (cursor__content
-                                                                a))
+(define-fun cursor__ref___2__projection ((a cursor__ref)) us_rep1 (cursor__content
+                                                                  a))
 
 (declare-const no_element us_rep1)
 
@@ -293,12 +293,13 @@
 
 (declare-datatypes ((map__ref1 0))
 (((mk_map__ref1 (map__content1 us_rep2)))))
-(define-fun map__ref_6__projection ((a map__ref1)) us_rep2 (map__content1 a))
+(define-fun map__ref___6__projection ((a map__ref1)) us_rep2 (map__content1
+                                                             a))
 
 (declare-datatypes ((key_type__ref 0))
 (((mk_key_type__ref (key_type__content us_rep1)))))
-(define-fun key_type__ref_6__projection ((a key_type__ref)) us_rep1 (key_type__content
-                                                                    a))
+(define-fun key_type__ref___6__projection ((a key_type__ref)) us_rep1
+  (key_type__content a))
 
 (declare-fun get (us_rep2 us_rep1) Int)
 
@@ -320,7 +321,7 @@
 
 (declare-datatypes ((element_type__ref 0))
 (((mk_element_type__ref (element_type__content element_type)))))
-(define-fun element_type__ref_8__projection ((a element_type__ref)) element_type
+(define-fun element_type__ref___8__projection ((a element_type__ref)) element_type
   (element_type__content a))
 
 (define-fun dynamic_invariant ((temp___expr_587 Int)
@@ -476,13 +477,13 @@
 
 (declare-datatypes ((us_split_fields__ref2 0))
 (((mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_7__projection ((a us_split_fields__ref2)) us_split_fields4
+(define-fun us_split_fields__ref___7__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ((us_rep3 0))
 (((mk___rep2 (us_split_fields5 us_split_fields4)))))
-(define-fun us_rep_10__projection ((a us_rep3)) us_split_fields4 (us_split_fields5
-                                                                 a))
+(define-fun us_rep___10__projection ((a us_rep3)) us_split_fields4 (us_split_fields5
+                                                                   a))
 
 (define-fun bool_eq3 ((a us_rep3)
   (b us_rep3)) Bool (ite (and
@@ -575,7 +576,7 @@
 
 (declare-datatypes ((key_type__ref1 0))
 (((mk_key_type__ref1 (key_type__content1 us_rep3)))))
-(define-fun key_type__ref_4__projection ((a key_type__ref1)) us_rep3
+(define-fun key_type__ref___4__projection ((a key_type__ref1)) us_rep3
   (key_type__content1 a))
 
 (define-fun equivalent_keys ((left us_rep3)
@@ -638,7 +639,8 @@
 
 (declare-datatypes ((map__ref2 0))
 (((mk_map__ref2 (map__content2 us_rep4)))))
-(define-fun map__ref_5__projection ((a map__ref2)) us_rep4 (map__content2 a))
+(define-fun map__ref___5__projection ((a map__ref2)) us_rep4 (map__content2
+                                                             a))
 
 (declare-fun length3 (us_rep4) Int)
 
@@ -679,7 +681,7 @@
 
 (declare-datatypes ((key_type__ref2 0))
 (((mk_key_type__ref2 (key_type__content2 us_rep3)))))
-(define-fun key_type__ref_5__projection ((a key_type__ref2)) us_rep3
+(define-fun key_type__ref___5__projection ((a key_type__ref2)) us_rep3
   (key_type__content2 a))
 
 (declare-fun has_key1 (us_rep4 us_rep3) Bool)
@@ -713,7 +715,7 @@
 
 (declare-datatypes ((element_type__ref1 0))
 (((mk_element_type__ref1 (element_type__content1 element_type1)))))
-(define-fun element_type__ref_6__projection ((a element_type__ref1)) element_type1
+(define-fun element_type__ref___6__projection ((a element_type__ref1)) element_type1
   (element_type__content1 a))
 
 (define-fun dynamic_invariant3 ((temp___expr_534 Int)

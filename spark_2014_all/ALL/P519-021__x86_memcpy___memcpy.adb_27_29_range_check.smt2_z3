@@ -611,7 +611,7 @@
 
 (declare-datatypes ((unsigned64__ref1 0))
 (((mk_unsigned64__ref1 (unsigned64__content1 unsigned641)))))
-(define-fun unsigned64__ref_2__projection ((a unsigned64__ref1)) unsigned641
+(define-fun unsigned64__ref___2__projection ((a unsigned64__ref1)) unsigned641
   (unsigned64__content1 a))
 
 (define-fun dynamic_invariant4 ((temp___expr_274 (_ BitVec 64))
@@ -634,7 +634,7 @@
 
 (declare-datatypes ((unsigned8__ref1 0))
 (((mk_unsigned8__ref1 (unsigned8__content1 unsigned81)))))
-(define-fun unsigned8__ref_2__projection ((a unsigned8__ref1)) unsigned81
+(define-fun unsigned8__ref___2__projection ((a unsigned8__ref1)) unsigned81
   (unsigned8__content1 a))
 
 (define-fun dynamic_invariant5 ((temp___expr_292 (_ BitVec 8))

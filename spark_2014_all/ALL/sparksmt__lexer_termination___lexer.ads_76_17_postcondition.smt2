@@ -468,19 +468,19 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)(attr__constrained Bool)))))
-(define-fun us_rep_3__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___3__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_4__projection ((a us_rep1)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___4__projection ((a us_rep1)) us_split_fields (us_split_fields1
+                                                                 a))
 
-(define-fun us_rep_5__projection ((a us_rep1)) Bool (attr__constrained a))
+(define-fun us_rep___5__projection ((a us_rep1)) Bool (attr__constrained a))
 
 (define-fun file_io__read_result__c__pred ((a us_rep1)) Bool (= (to_rep2
                                                                 (rec__file_io__read_result__status
@@ -599,12 +599,12 @@
 (define-fun name_id__ref___projection ((a name_id__ref)) name_id (name_id__content
                                                                  a))
 
-(define-fun dynamic_invariant3 ((temp___expr_563 Int)
-  (temp___is_init_560 Bool) (temp___skip_constant_561 Bool)
-  (temp___do_toplevel_562 Bool)) Bool (=>
-                                      (or (= temp___is_init_560 true)
+(define-fun dynamic_invariant3 ((temp___expr_651 Int)
+  (temp___is_init_648 Bool) (temp___skip_constant_649 Bool)
+  (temp___do_toplevel_650 Bool)) Bool (=>
+                                      (or (= temp___is_init_648 true)
                                       (<= 0 2147483647)) (in_range6
-                                      temp___expr_563)))
+                                      temp___expr_651)))
 
 (declare-fun invariant__ (us_private) Bool)
 
@@ -768,11 +768,11 @@
 
 (declare-const usq_2 Bool)
 
-(declare-const temp___750 read_status)
+(declare-const temp___838 read_status)
 
-(declare-const temp___7501 character)
+(declare-const temp___8381 character)
 
-(declare-const temp___7502 Bool)
+(declare-const temp___8382 Bool)
 
 (declare-const name_table1 us_private)
 
@@ -1016,21 +1016,21 @@
   (=>
   (not
   (= (to_rep2 (rec__file_io__read_result__status current_read__split_discrs)) 0))
-  (= usq_ temp___750)))
+  (= usq_ temp___838)))
 
 ;; H
   (assert
   (=>
   (not
   (= (to_rep2 (rec__file_io__read_result__status current_read__split_discrs)) 0))
-  (= usq_1 temp___7501)))
+  (= usq_1 temp___8381)))
 
 ;; H
   (assert
   (=>
   (not
   (= (to_rep2 (rec__file_io__read_result__status current_read__split_discrs)) 0))
-  (= next_read__attr__constrained temp___7502)))
+  (= next_read__attr__constrained temp___8382)))
 
 ;; H
   (assert
@@ -1045,7 +1045,7 @@
   (=>
   (not
   (= (to_rep2 (rec__file_io__read_result__status current_read__split_discrs)) 0))
-  (= next_read__split_fields2 (mk___split_fields temp___7501))))
+  (= next_read__split_fields2 (mk___split_fields temp___8381))))
 
 ;; H
   (assert
@@ -1060,7 +1060,7 @@
   (=>
   (not
   (= (to_rep2 (rec__file_io__read_result__status current_read__split_discrs)) 0))
-  (= next_read__split_discrs2 (mk___split_discrs temp___750))))
+  (= next_read__split_discrs2 (mk___split_discrs temp___838))))
 
 ;; H
   (assert

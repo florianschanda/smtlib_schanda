@@ -66,7 +66,7 @@
 
 (declare-datatypes ((suspension_object__ref 0))
 (((mk_suspension_object__ref (suspension_object__content us_rep)))))
-(define-fun suspension_object__ref_2__projection ((a suspension_object__ref)) us_rep
+(define-fun suspension_object__ref___2__projection ((a suspension_object__ref)) us_rep
   (suspension_object__content a))
 
 (declare-fun suspend_until_true__specific_post (Int us_rep us_rep) Bool)
@@ -87,8 +87,8 @@
 
 (declare-datatypes ((task_id__ref 0))
 (((mk_task_id__ref (task_id__content task_id)))))
-(define-fun task_id__ref_2__projection ((a task_id__ref)) task_id (task_id__content
-                                                                  a))
+(define-fun task_id__ref___2__projection ((a task_id__ref)) task_id (task_id__content
+                                                                    a))
 
 (define-fun dynamic_invariant ((temp___expr_1483 Int)
   (temp___is_init_1480 Bool) (temp___skip_constant_1481 Bool)

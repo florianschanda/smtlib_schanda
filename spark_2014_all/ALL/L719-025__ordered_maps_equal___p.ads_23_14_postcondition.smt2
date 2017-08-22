@@ -157,17 +157,17 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_5__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___5__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)))))
-(define-fun us_rep_7__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                              a))
+(define-fun us_rep___7__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                a))
 
-(define-fun us_rep_8__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___8__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -244,13 +244,13 @@
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_6__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___6__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_9__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___9__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (define-fun bool_eq1 ((a us_rep1)
   (b us_rep1)) Bool (ite (= (to_rep
@@ -339,7 +339,8 @@
 
 (declare-datatypes ((map__ref1 0))
 (((mk_map__ref1 (map__content1 us_rep2)))))
-(define-fun map__ref_2__projection ((a map__ref1)) us_rep2 (map__content1 a))
+(define-fun map__ref___2__projection ((a map__ref1)) us_rep2 (map__content1
+                                                             a))
 
 (declare-fun oeq2 (us_rep2 us_rep2) Bool)
 
@@ -361,7 +362,7 @@
 
 (declare-datatypes ((key_type__ref1 0))
 (((mk_key_type__ref1 (key_type__content1 key_type1)))))
-(define-fun key_type__ref_3__projection ((a key_type__ref1)) key_type1
+(define-fun key_type__ref___3__projection ((a key_type__ref1)) key_type1
   (key_type__content1 a))
 
 (declare-fun length (us_rep2) Int)
@@ -499,7 +500,8 @@
 
 (declare-datatypes ((map__ref2 0))
 (((mk_map__ref2 (map__content2 us_rep4)))))
-(define-fun map__ref_3__projection ((a map__ref2)) us_rep4 (map__content2 a))
+(define-fun map__ref___3__projection ((a map__ref2)) us_rep4 (map__content2
+                                                             a))
 
 (declare-fun oeq4 (us_rep4 us_rep4) Bool)
 
@@ -507,7 +509,7 @@
 
 (declare-datatypes ((key_type__ref2 0))
 (((mk_key_type__ref2 (key_type__content2 us_rep1)))))
-(define-fun key_type__ref_4__projection ((a key_type__ref2)) us_rep1
+(define-fun key_type__ref___4__projection ((a key_type__ref2)) us_rep1
   (key_type__content2 a))
 
 (declare-fun length2 (us_rep4) Int)
@@ -710,7 +712,7 @@
 
 (declare-datatypes ((key_type__ref3 0))
 (((mk_key_type__ref3 (key_type__content3 key_type2)))))
-(define-fun key_type__ref_2__projection ((a key_type__ref3)) key_type2
+(define-fun key_type__ref___2__projection ((a key_type__ref3)) key_type2
   (key_type__content3 a))
 
 (define-fun dynamic_invariant2 ((temp___expr_301 Int)
@@ -779,7 +781,7 @@
 
 (declare-datatypes ((element_type__ref1 0))
 (((mk_element_type__ref1 (element_type__content1 element_type1)))))
-(define-fun element_type__ref_2__projection ((a element_type__ref1)) element_type1
+(define-fun element_type__ref___2__projection ((a element_type__ref1)) element_type1
   (element_type__content1 a))
 
 (define-fun dynamic_invariant3 ((temp___expr_307 Int)
@@ -1013,7 +1015,7 @@
 
 (declare-datatypes ((element_type__ref2 0))
 (((mk_element_type__ref2 (element_type__content2 element_type2)))))
-(define-fun element_type__ref_3__projection ((a element_type__ref2)) element_type2
+(define-fun element_type__ref___3__projection ((a element_type__ref2)) element_type2
   (element_type__content2 a))
 
 (define-fun dynamic_invariant7 ((temp___expr_339 Int)
@@ -1141,7 +1143,7 @@
 
 (declare-datatypes ((element_type__ref3 0))
 (((mk_element_type__ref3 (element_type__content3 element_type3)))))
-(define-fun element_type__ref_4__projection ((a element_type__ref3)) element_type3
+(define-fun element_type__ref___4__projection ((a element_type__ref3)) element_type3
   (element_type__content3 a))
 
 (define-fun dynamic_invariant9 ((temp___expr_364 Int)
@@ -1187,7 +1189,7 @@
 
 (declare-datatypes ((element_type__ref4 0))
 (((mk_element_type__ref4 (element_type__content4 element_type4)))))
-(define-fun element_type__ref_5__projection ((a element_type__ref4)) element_type4
+(define-fun element_type__ref___5__projection ((a element_type__ref4)) element_type4
   (element_type__content4 a))
 
 (define-fun dynamic_invariant10 ((temp___expr_390 Int)

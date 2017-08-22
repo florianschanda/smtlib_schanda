@@ -515,7 +515,7 @@
 
 (declare-datatypes ((index_type__ref1 0))
 (((mk_index_type__ref1 (index_type__content1 index_type1)))))
-(define-fun index_type__ref_2__projection ((a index_type__ref1)) index_type1
+(define-fun index_type__ref___2__projection ((a index_type__ref1)) index_type1
   (index_type__content1 a))
 
 (define-fun dynamic_invariant1 ((temp___expr_535 Int)

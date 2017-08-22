@@ -227,19 +227,19 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)(attr__constrained Bool)))))
-(define-fun us_rep_3__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___3__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_4__projection ((a us_rep1)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___4__projection ((a us_rep1)) us_split_fields (us_split_fields1
+                                                                 a))
 
-(define-fun us_rep_5__projection ((a us_rep1)) Bool (attr__constrained a))
+(define-fun us_rep___5__projection ((a us_rep1)) Bool (attr__constrained a))
 
 (define-fun file_io__read_result__c__pred ((a us_rep1)) Bool (= (to_rep1
                                                                 (rec__file_io__read_result__status
@@ -484,17 +484,17 @@
 
 (declare-const next_idx2 Int)
 
-(declare-const temp___884 Int)
+(declare-const temp___972 Int)
 
-(declare-const temp___883 Int)
+(declare-const temp___971 Int)
 
 (declare-const result1 int__ref)
 
-(declare-const temp___8841 Int)
+(declare-const temp___9721 Int)
 
 (declare-const result2 int__ref)
 
-(declare-const temp___8831 Int)
+(declare-const temp___9711 Int)
 
 (declare-const the_file3 us_rep)
 
@@ -607,17 +607,17 @@
   (= (to_rep (rec__file_io__read_result__c current_read__split_fields2)) 10)))))
 
 ;; H
-  (assert (= result1 (mk_int__ref temp___884)))
+  (assert (= result1 (mk_int__ref temp___972)))
 
 ;; H
-  (assert (= temp___8841 next_idx2))
+  (assert (= temp___9721 next_idx2))
 
 ;; H
-  (assert (= result2 (mk_int__ref temp___883)))
+  (assert (= result2 (mk_int__ref temp___971)))
 
 ;; H
   (assert
-  (= temp___8831 (to_int1
+  (= temp___9711 (to_int1
                  (ite (= (to_rep1
                          (rec__file_io__read_result__status
                          next_read__split_discrs2)) 0)
@@ -670,11 +670,11 @@
 ;; WP_parameter_def
  ;; File "lexer.adb", line 48, characters 0-0
   (not
-  (or (< temp___8841 next_idx3)
-  (and (= next_idx3 temp___8841)
+  (or (< temp___9721 next_idx3)
+  (and (= next_idx3 temp___9721)
   (< (to_int1
      (= (to_rep1
         (rec__file_io__read_result__status next_read__split_discrs3)) 0))
-  temp___8831)))))
+  temp___9711)))))
 (check-sat)
 (exit)

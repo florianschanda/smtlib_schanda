@@ -123,20 +123,20 @@
 (declare-datatypes ((us_split_discrs 0))
 (((mk___split_discrs
   (rec__with_default__bad_nested_defaults1__empty_rec__d positive)))))
-(define-fun us_split_discrs_9__projection ((a us_split_discrs)) positive
+(define-fun us_split_discrs___9__projection ((a us_split_discrs)) positive
   (rec__with_default__bad_nested_defaults1__empty_rec__d a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
 (((mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref_9__projection ((a us_split_discrs__ref)) us_split_discrs
+(define-fun us_split_discrs__ref___9__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_discrs1 us_split_discrs)(attr__constrained Bool)))))
-(define-fun us_rep_25__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___25__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_26__projection ((a us_rep)) Bool (attr__constrained a))
+(define-fun us_rep___26__projection ((a us_rep)) Bool (attr__constrained a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (= (to_rep1
@@ -203,13 +203,13 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_11__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___11__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_27__projection ((a us_rep1)) us_split_fields (us_split_fields1
-                                                                a))
+(define-fun us_rep___27__projection ((a us_rep1)) us_split_fields (us_split_fields1
+                                                                  a))
 
 (define-fun bool_eq1 ((a us_rep1)
   (b us_rep1)) Bool (ite (and

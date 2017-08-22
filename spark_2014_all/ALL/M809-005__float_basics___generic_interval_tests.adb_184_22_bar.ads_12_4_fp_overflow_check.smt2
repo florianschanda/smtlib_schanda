@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite64 ((x Float64)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -135,14 +136,14 @@
 (declare-const dummy1 ft)
 
 (declare-datatypes ((ft__ref 0)) (((mk_ft__ref (ft__content ft)))))
-(define-fun ft__ref_2__projection ((a ft__ref)) ft (ft__content a))
+(define-fun ft__ref___2__projection ((a ft__ref)) ft (ft__content a))
 
 (define-fun dynamic_invariant ((temp___expr_141 Float64)
   (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
   (temp___do_toplevel_140 Bool)) Bool (=>
                                       (or (= temp___is_init_138 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_141) (fp.isNaN temp___expr_141)))))
+                                      (fp.isFinite64 temp___expr_141)))
 
 (declare-const a Float64)
 
@@ -167,7 +168,7 @@
   (temp___do_toplevel_56 Bool)) Bool (=>
                                      (or (= temp___is_init_54 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
+                                     (fp.isFinite64 temp___expr_57)))
 
 (declare-const z Float64)
 
@@ -180,22 +181,22 @@
 (declare-const o3 Float64)
 
 ;; H
-  (assert (not (or (fp.isInfinite a) (fp.isNaN a))))
+  (assert (fp.isFinite64 a))
 
 ;; H
-  (assert (not (or (fp.isInfinite b) (fp.isNaN b))))
+  (assert (fp.isFinite64 b))
 
 ;; H
-  (assert (not (or (fp.isInfinite c) (fp.isNaN c))))
+  (assert (fp.isFinite64 c))
 
 ;; H
-  (assert (not (or (fp.isInfinite d) (fp.isNaN d))))
+  (assert (fp.isFinite64 d))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite z) (fp.isNaN z)))))
+  (fp.isFinite64 z)))
 
 ;; H
   (assert
@@ -234,15 +235,13 @@
   (fp.leq d (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000))))
 
 ;; H
-  (assert
-  (and (= o (fp.add RNE a b))
-  (not (or (fp.isInfinite (fp.add RNE a b)) (fp.isNaN (fp.add RNE a b))))))
+  (assert (and (= o (fp.add RNE a b)) (fp.isFinite64 (fp.add RNE a b))))
 
 ;; H
   (assert (= o1 (fp.add RNE o c)))
 
 ;; H
-  (assert (and (= o2 o1) (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (assert (and (= o2 o1) (fp.isFinite64 o1)))
 
 ;; H
   (assert (= o3 (fp.add RNE o2 d)))
@@ -250,6 +249,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "generic_interval_tests.adb", line 162, characters 0-0
-  (not (not (or (fp.isInfinite o3) (fp.isNaN o3)))))
+  (not (fp.isFinite64 o3)))
 (check-sat)
 (exit)

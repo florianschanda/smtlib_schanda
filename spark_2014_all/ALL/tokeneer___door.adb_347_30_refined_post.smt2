@@ -399,7 +399,7 @@
 (declare-const dummy6 t)
 
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
-(define-fun t__ref_3__projection ((a t__ref)) t (t__content a))
+(define-fun t__ref___3__projection ((a t__ref)) t (t__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_839 Int)
   (temp___is_init_836 Bool) (temp___skip_constant_837 Bool)

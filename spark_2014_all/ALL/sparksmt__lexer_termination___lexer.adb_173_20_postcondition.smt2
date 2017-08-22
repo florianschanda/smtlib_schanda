@@ -227,19 +227,19 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)(attr__constrained Bool)))))
-(define-fun us_rep_3__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___3__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_4__projection ((a us_rep1)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___4__projection ((a us_rep1)) us_split_fields (us_split_fields1
+                                                                 a))
 
-(define-fun us_rep_5__projection ((a us_rep1)) Bool (attr__constrained a))
+(define-fun us_rep___5__projection ((a us_rep1)) Bool (attr__constrained a))
 
 (define-fun file_io__read_result__c__pred ((a us_rep1)) Bool (= (to_rep1
                                                                 (rec__file_io__read_result__status
@@ -444,33 +444,33 @@
 
 (declare-const next_idx Int)
 
-(declare-const temp___838 Int)
+(declare-const temp___926 Int)
 
-(declare-const temp___837 us_rep)
+(declare-const temp___925 us_rep)
 
-(declare-const temp___839 Int)
+(declare-const temp___927 Int)
 
-(declare-const temp___836 read_status)
+(declare-const temp___924 read_status)
 
-(declare-const temp___8361 character)
+(declare-const temp___9241 character)
 
-(declare-const temp___8362 Bool)
+(declare-const temp___9242 Bool)
 
-(declare-const temp___835 Int)
+(declare-const temp___923 Int)
 
-(declare-const temp___834 Int)
+(declare-const temp___922 Int)
 
-(declare-const temp___833 Int)
+(declare-const temp___921 Int)
 
-(declare-const temp___832 read_status)
+(declare-const temp___920 read_status)
 
-(declare-const temp___8321 character)
+(declare-const temp___9201 character)
 
-(declare-const temp___8322 Bool)
+(declare-const temp___9202 Bool)
 
-(declare-const temp___840 Int)
+(declare-const temp___928 Int)
 
-(declare-const temp___8401 Int)
+(declare-const temp___9281 Int)
 
 (declare-const the_file1 us_rep)
 
@@ -526,11 +526,11 @@
 
 (declare-const next_idx3 Int)
 
-(declare-const temp___8402 Int)
+(declare-const temp___9282 Int)
 
 (declare-const result int__ref)
 
-(declare-const temp___8403 Int)
+(declare-const temp___9283 Int)
 
 (declare-const the_file4 us_rep)
 
@@ -694,7 +694,7 @@
 
 (declare-const next_idx12 int__ref)
 
-(declare-const temp___8404 int__ref)
+(declare-const temp___9284 int__ref)
 
 (declare-const the_file13 us_rep)
 
@@ -714,7 +714,7 @@
 
 (declare-const next_idx13 Int)
 
-(declare-const temp___8405 Int)
+(declare-const temp___9285 Int)
 
 (declare-const the_file14 file__ref)
 
@@ -734,7 +734,7 @@
 
 (declare-const next_idx14 int__ref)
 
-(declare-const temp___8406 int__ref)
+(declare-const temp___9286 int__ref)
 
 (declare-const the_file15 us_rep)
 
@@ -754,7 +754,7 @@
 
 (declare-const next_idx15 Int)
 
-(declare-const temp___8407 Int)
+(declare-const temp___9287 Int)
 
 (declare-const the_file16 file__ref)
 
@@ -774,7 +774,7 @@
 
 (declare-const next_idx16 int__ref)
 
-(declare-const temp___8408 int__ref)
+(declare-const temp___9288 int__ref)
 
 (declare-const the_file17 us_rep)
 
@@ -794,7 +794,7 @@
 
 (declare-const next_idx17 Int)
 
-(declare-const temp___8409 Int)
+(declare-const temp___9289 Int)
 
 (declare-const the_file18 file__ref)
 
@@ -904,7 +904,7 @@
 
 (declare-const next_idx23 Int)
 
-(define-fun temp___84010 () int__ref (mk_int__ref temp___840))
+(define-fun temp___92810 () int__ref (mk_int__ref temp___928))
 
 ;; H
   (assert (= current_read__attr__constrained false))
@@ -932,37 +932,37 @@
      (mk___split_discrs next_read__split_discrs) next_idx) true))
 
 ;; H
-  (assert (= temp___838 next_idx))
+  (assert (= temp___926 next_idx))
 
 ;; H
-  (assert (= temp___837 the_file))
+  (assert (= temp___925 the_file))
 
 ;; H
-  (assert (= temp___839 current_idx))
-
-;; H
-  (assert
-  (and (= temp___836 next_read__split_discrs)
-  (and (= temp___8361 next_read__split_fields)
-  (= temp___8362 next_read__attr__constrained))))
-
-;; H
-  (assert (= temp___835 current_idx))
-
-;; H
-  (assert (= temp___834 current_col))
-
-;; H
-  (assert (= temp___833 current_line))
+  (assert (= temp___927 current_idx))
 
 ;; H
   (assert
-  (and (= temp___832 current_read__split_discrs)
-  (and (= temp___8321 current_read__split_fields)
-  (= temp___8322 current_read__attr__constrained))))
+  (and (= temp___924 next_read__split_discrs)
+  (and (= temp___9241 next_read__split_fields)
+  (= temp___9242 next_read__attr__constrained))))
 
 ;; H
-  (assert (= 0 temp___840))
+  (assert (= temp___923 current_idx))
+
+;; H
+  (assert (= temp___922 current_col))
+
+;; H
+  (assert (= temp___921 current_line))
+
+;; H
+  (assert
+  (and (= temp___920 current_read__split_discrs)
+  (and (= temp___9201 current_read__split_fields)
+  (= temp___9202 current_read__attr__constrained))))
+
+;; H
+  (assert (= 0 temp___928))
 
 ;; H
   (assert
@@ -981,7 +981,7 @@
   (or
   (and
   (and
-  (and (= temp___8408 temp___84010)
+  (and (= temp___9288 temp___92810)
   (and (= next_idx16 (mk_int__ref next_idx1))
   (and
   (= next_read__split_discrs16 (mk___split_discrs__ref
@@ -999,7 +999,7 @@
   (= current_read__split_fields16 (mk___split_fields__ref
                                   current_read__split_fields1))
   (= the_file16 (mk_file__ref the_file1)))))))))))
-  (and (= temp___8409 temp___8401)
+  (and (= temp___9289 temp___9281)
   (and (= next_idx17 next_idx1)
   (and (= next_read__split_discrs17 next_read__split_discrs1)
   (and (= next_read__split_fields17 next_read__split_fields1)
@@ -1017,7 +1017,7 @@
      (rec__file_io__read_result__status current_read__split_discrs1)) 0)
   (and
   (and
-  (and (= temp___8408 temp___8406)
+  (and (= temp___9288 temp___9286)
   (and (= next_idx16 next_idx14)
   (and (= next_read__split_discrs16 next_read__split_discrs14)
   (and (= next_read__split_fields16 next_read__split_fields14)
@@ -1027,7 +1027,7 @@
   (and (= current_read__split_discrs16 current_read__split_discrs14)
   (and (= current_read__split_fields16 current_read__split_fields14)
   (= the_file16 the_file14))))))))))
-  (and (= temp___8409 temp___8407)
+  (and (= temp___9289 temp___9287)
   (and (= next_idx17 next_idx15)
   (and (= next_read__split_discrs17 next_read__split_discrs15)
   (and (= next_read__split_fields17 next_read__split_fields15)
@@ -1040,7 +1040,7 @@
   (or
   (and
   (and
-  (and (= temp___8406 temp___84010)
+  (and (= temp___9286 temp___92810)
   (and (= next_idx14 (mk_int__ref next_idx1))
   (and
   (= next_read__split_discrs14 (mk___split_discrs__ref
@@ -1058,7 +1058,7 @@
   (= current_read__split_fields14 (mk___split_fields__ref
                                   current_read__split_fields1))
   (= the_file14 (mk_file__ref the_file1)))))))))))
-  (and (= temp___8407 temp___8401)
+  (and (= temp___9287 temp___9281)
   (and (= next_idx15 next_idx1)
   (and (= next_read__split_discrs15 next_read__split_discrs1)
   (and (= next_read__split_fields15 next_read__split_fields1)
@@ -1074,7 +1074,7 @@
   (= (to_rep (rec__file_io__read_result__c current_read__split_fields1)) 59)
   (and
   (and
-  (and (= temp___8406 temp___8404)
+  (and (= temp___9286 temp___9284)
   (and (= next_idx14 next_idx12)
   (and (= next_read__split_discrs14 next_read__split_discrs12)
   (and (= next_read__split_fields14 next_read__split_fields12)
@@ -1084,7 +1084,7 @@
   (and (= current_read__split_discrs14 current_read__split_discrs12)
   (and (= current_read__split_fields14 current_read__split_fields12)
   (= the_file14 the_file12))))))))))
-  (and (= temp___8407 temp___8405)
+  (and (= temp___9287 temp___9285)
   (and (= next_idx15 next_idx13)
   (and (= next_read__split_discrs15 next_read__split_discrs13)
   (and (= next_read__split_fields15 next_read__split_fields13)
@@ -1109,7 +1109,7 @@
   (or
   (and
   (and
-  (and (= temp___8404 temp___84010)
+  (and (= temp___9284 temp___92810)
   (and (= next_idx12 (mk_int__ref next_idx2))
   (and
   (= next_read__split_discrs12 (mk___split_discrs__ref
@@ -1127,7 +1127,7 @@
   (= current_read__split_fields12 (mk___split_fields__ref
                                   current_read__split_fields2))
   (= the_file12 (mk_file__ref the_file2)))))))))))
-  (and (= temp___8405 temp___8401)
+  (and (= temp___9285 temp___9281)
   (and (= next_idx13 next_idx2)
   (and (= next_read__split_discrs13 next_read__split_discrs2)
   (and (= next_read__split_fields13 next_read__split_fields2)
@@ -1145,7 +1145,7 @@
      (rec__file_io__read_result__status current_read__split_discrs2)) 0)
   (and
   (and
-  (and (= temp___8404 (mk_int__ref temp___8403))
+  (and (= temp___9284 (mk_int__ref temp___9283))
   (and (= next_idx12 next_idx10)
   (and (= next_read__split_discrs12 next_read__split_discrs10)
   (and (= next_read__split_fields12 next_read__split_fields10)
@@ -1155,7 +1155,7 @@
   (and (= current_read__split_discrs12 current_read__split_discrs10)
   (and (= current_read__split_fields12 current_read__split_fields10)
   (= the_file12 the_file10))))))))))
-  (and (= temp___8405 temp___8403)
+  (and (= temp___9285 temp___9283)
   (and (= next_idx13 next_idx11)
   (and (= next_read__split_discrs13 next_read__split_discrs11)
   (and (= next_read__split_fields13 next_read__split_fields11)
@@ -1170,13 +1170,13 @@
   (= (local_invariant the_file3 current_read__split_fields3
      current_read__split_discrs3 current_idx3 next_read__split_fields3
      next_read__split_discrs3 next_idx3) true)
-  (< temp___839 current_idx3))
+  (< temp___927 current_idx3))
   (and
   (and
   (and (and (in_range2 current_line3) (in_range1 current_col3)) (in_range1
   current_idx3)) (in_range1 next_idx3))
   (and
-  (and (= result (mk_int__ref temp___8402)) (= temp___8403 current_idx3))
+  (and (= result (mk_int__ref temp___9282)) (= temp___9283 current_idx3))
   (and
   (and
   (and (= next_idx10 next_idx8)

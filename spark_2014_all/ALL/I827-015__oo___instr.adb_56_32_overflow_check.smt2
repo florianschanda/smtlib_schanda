@@ -457,7 +457,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_fields (us_split_fields1
                                                              a))
 
-(define-fun us_rep_2__projection ((a us_rep)) Int (attr__tag a))
+(define-fun us_rep___2__projection ((a us_rep)) Int (attr__tag a))
 
 (define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (= (bool_eq
@@ -559,23 +559,23 @@
 (define-fun us_split_fields_Value__projection ((a us_split_fields2)) speed
   (rec__instr__speedometer__value a))
 
-(define-fun us_split_fields_Name2__projection ((a us_split_fields2)) (Array Int character)
+(define-fun us_split_fields_Name__2__projection ((a us_split_fields2)) (Array Int character)
   (rec__instr__instrument__name1 a))
 
-(define-fun us_split_fields_2__projection ((a us_split_fields2)) us_private
+(define-fun us_split_fields___2__projection ((a us_split_fields2)) us_private
   (rec__ext__1 a))
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)(attr__tag1 Int)))))
-(define-fun us_rep_3__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___3__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
-(define-fun us_rep_4__projection ((a us_rep1)) Int (attr__tag1 a))
+(define-fun us_rep___4__projection ((a us_rep1)) Int (attr__tag1 a))
 
 (declare-fun hide_ext__ (speed us_private) us_private)
 
@@ -727,26 +727,26 @@
 (declare-datatypes ((us_split_fields4 0))
 (((mk___split_fields2
   (rec__instr__gauge__value percent)(rec__instr__instrument__name2 (Array Int character))(rec__ext__2 us_private)))))
-(define-fun us_split_fields_Value2__projection ((a us_split_fields4)) percent
+(define-fun us_split_fields_Value__2__projection ((a us_split_fields4)) percent
   (rec__instr__gauge__value a))
 
-(define-fun us_split_fields_Name3__projection ((a us_split_fields4)) (Array Int character)
+(define-fun us_split_fields_Name__3__projection ((a us_split_fields4)) (Array Int character)
   (rec__instr__instrument__name2 a))
 
-(define-fun us_split_fields_3__projection ((a us_split_fields4)) us_private
+(define-fun us_split_fields___3__projection ((a us_split_fields4)) us_private
   (rec__ext__2 a))
 
 (declare-datatypes ((us_split_fields__ref2 0))
 (((mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref2)) us_split_fields4
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep2 (us_split_fields5 us_split_fields4)(attr__tag2 Int)))))
-(define-fun us_rep_5__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
-                                                                a))
+(define-fun us_rep___5__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
+                                                                  a))
 
-(define-fun us_rep_6__projection ((a us_rep2)) Int (attr__tag2 a))
+(define-fun us_rep___6__projection ((a us_rep2)) Int (attr__tag2 a))
 
 (declare-fun hide_ext__1 (percent us_private) us_private)
 
@@ -867,26 +867,26 @@
 (define-fun us_split_fields_Empty__projection ((a us_split_fields6)) character
   (rec__instr__graphic_gauge__empty a))
 
-(define-fun us_split_fields_Name4__projection ((a us_split_fields6)) (Array Int character)
+(define-fun us_split_fields_Name__4__projection ((a us_split_fields6)) (Array Int character)
   (rec__instr__instrument__name3 a))
 
-(define-fun us_split_fields_Value3__projection ((a us_split_fields6)) percent
+(define-fun us_split_fields_Value__3__projection ((a us_split_fields6)) percent
   (rec__instr__gauge__value1 a))
 
-(define-fun us_split_fields_4__projection ((a us_split_fields6)) us_private
+(define-fun us_split_fields___4__projection ((a us_split_fields6)) us_private
   (rec__ext__3 a))
 
 (declare-datatypes ((us_split_fields__ref3 0))
 (((mk___split_fields__ref3 (us_split_fields__content3 us_split_fields6)))))
-(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref3)) us_split_fields6
+(define-fun us_split_fields__ref___4__projection ((a us_split_fields__ref3)) us_split_fields6
   (us_split_fields__content3 a))
 
 (declare-datatypes ((us_rep3 0))
 (((mk___rep3 (us_split_fields7 us_split_fields6)(attr__tag3 Int)))))
-(define-fun us_rep_7__projection ((a us_rep3)) us_split_fields6 (us_split_fields7
-                                                                a))
+(define-fun us_rep___7__projection ((a us_rep3)) us_split_fields6 (us_split_fields7
+                                                                  a))
 
-(define-fun us_rep_8__projection ((a us_rep3)) Int (attr__tag3 a))
+(define-fun us_rep___8__projection ((a us_rep3)) Int (attr__tag3 a))
 
 (declare-fun hide_ext__2 (integer character character percent
   us_private) us_private)
@@ -1193,23 +1193,23 @@
 (define-fun us_split_fields_Hours__projection ((a us_split_fields8)) twenty_four
   (rec__instr__clock__hours a))
 
-(define-fun us_split_fields_Name5__projection ((a us_split_fields8)) (Array Int character)
+(define-fun us_split_fields_Name__5__projection ((a us_split_fields8)) (Array Int character)
   (rec__instr__instrument__name4 a))
 
-(define-fun us_split_fields_5__projection ((a us_split_fields8)) us_private
+(define-fun us_split_fields___5__projection ((a us_split_fields8)) us_private
   (rec__ext__4 a))
 
 (declare-datatypes ((us_split_fields__ref4 0))
 (((mk___split_fields__ref4 (us_split_fields__content4 us_split_fields8)))))
-(define-fun us_split_fields__ref_5__projection ((a us_split_fields__ref4)) us_split_fields8
+(define-fun us_split_fields__ref___5__projection ((a us_split_fields__ref4)) us_split_fields8
   (us_split_fields__content4 a))
 
 (declare-datatypes ((us_rep4 0))
 (((mk___rep4 (us_split_fields9 us_split_fields8)(attr__tag4 Int)))))
-(define-fun us_rep_9__projection ((a us_rep4)) us_split_fields8 (us_split_fields9
-                                                                a))
+(define-fun us_rep___9__projection ((a us_rep4)) us_split_fields8 (us_split_fields9
+                                                                  a))
 
-(define-fun us_rep_10__projection ((a us_rep4)) Int (attr__tag4 a))
+(define-fun us_rep___10__projection ((a us_rep4)) Int (attr__tag4 a))
 
 (declare-fun hide_ext__3 (sixty sixty twenty_four us_private) us_private)
 

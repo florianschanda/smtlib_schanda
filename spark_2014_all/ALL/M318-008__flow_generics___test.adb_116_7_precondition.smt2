@@ -99,8 +99,8 @@
 
 (declare-datatypes ((item_t__ref 0))
 (((mk_item_t__ref (item_t__content item_t)))))
-(define-fun item_t__ref_4__projection ((a item_t__ref)) item_t (item_t__content
-                                                               a))
+(define-fun item_t__ref___4__projection ((a item_t__ref)) item_t (item_t__content
+                                                                 a))
 
 (declare-fun to_rep1 (item_t) Int)
 
@@ -302,10 +302,10 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_discrs (us_split_discrs1
                                                              a))
 
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
-(define-fun us_rep_3__projection ((a us_rep)) Bool (attr__constrained a))
+(define-fun us_rep___3__projection ((a us_rep)) Bool (attr__constrained a))
 
 (define-fun test__fruit_rec__record_t__single_item__pred ((a us_rep)) Bool (=
   (to_rep (rec__test__fruit_rec__record_t__d (us_split_discrs1 a))) 1))
@@ -479,14 +479,14 @@
 (define-fun record_t__ref___projection ((a record_t__ref)) us_rep (record_t__content
                                                                   a))
 
-(define-fun default_initial_assumption ((temp___expr_253 us_rep)
-  (temp___skip_top_level_254 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_257 us_rep)
+  (temp___skip_top_level_258 Bool)) Bool (and
                                          (= (attr__constrained
-                                            temp___expr_253) false)
+                                            temp___expr_257) false)
                                          (= (to_rep
                                             (rec__test__fruit_rec__record_t__d
                                             (us_split_discrs1
-                                            temp___expr_253))) 0)))
+                                            temp___expr_257))) 0)))
 
 (define-fun in_range3 ((rec__test__fruit_rec__record_t__d1 Int)
   (a us_rep)) Bool (= rec__test__fruit_rec__record_t__d1 (to_rep
@@ -602,22 +602,22 @@
 (define-fun tapple_basketS__ref___projection ((a tapple_basketS__ref)) us_rep
   (tapple_basketS__content a))
 
-(define-fun dynamic_invariant ((temp___expr_280 us_rep)
-  (temp___is_init_277 Bool) (temp___skip_constant_278 Bool)
-  (temp___do_toplevel_279 Bool)) Bool (and
+(define-fun dynamic_invariant ((temp___expr_290 us_rep)
+  (temp___is_init_287 Bool) (temp___skip_constant_288 Bool)
+  (temp___do_toplevel_289 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_278 true))
-                                      (in_range3 0 temp___expr_280))
-                                      (= (attr__constrained temp___expr_280) true)))
+                                      (not (= temp___skip_constant_288 true))
+                                      (in_range3 0 temp___expr_290))
+                                      (= (attr__constrained temp___expr_290) true)))
 
-(define-fun default_initial_assumption1 ((temp___expr_283 us_rep)
-  (temp___skip_top_level_284 Bool)) Bool (and
+(define-fun default_initial_assumption1 ((temp___expr_293 us_rep)
+  (temp___skip_top_level_294 Bool)) Bool (and
                                          (= (attr__constrained
-                                            temp___expr_283) true)
+                                            temp___expr_293) true)
                                          (= (to_rep
                                             (rec__test__fruit_rec__record_t__d
                                             (us_split_discrs1
-                                            temp___expr_283))) 0)))
+                                            temp___expr_293))) 0)))
 
 (declare-const apple_basket__split_discrs us_split_discrs)
 
@@ -640,11 +640,11 @@
                                      (<= 0 2147483647)) (in_range1
                                      temp___expr_33)))
 
-(define-fun dynamic_invariant2 ((temp___expr_235 Int)
-  (temp___is_init_232 Bool) (temp___skip_constant_233 Bool)
-  (temp___do_toplevel_234 Bool)) Bool (=>
-                                      (or (= temp___is_init_232 true)
-                                      (<= 0 9)) (in_range2 temp___expr_235)))
+(define-fun dynamic_invariant2 ((temp___expr_239 Int)
+  (temp___is_init_236 Bool) (temp___skip_constant_237 Bool)
+  (temp___do_toplevel_238 Bool)) Bool (=>
+                                      (or (= temp___is_init_236 true)
+                                      (<= 0 9)) (in_range2 temp___expr_239)))
 
 (declare-const mixed_basket__split_discrs natural)
 

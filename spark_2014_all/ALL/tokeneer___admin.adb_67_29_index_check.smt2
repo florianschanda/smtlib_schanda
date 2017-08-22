@@ -297,13 +297,13 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq1 ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -427,7 +427,7 @@
 
 (declare-datatypes ((datalengtht__ref1 0))
 (((mk_datalengtht__ref1 (datalengtht__content1 datalengtht1)))))
-(define-fun datalengtht__ref_2__projection ((a datalengtht__ref1)) datalengtht1
+(define-fun datalengtht__ref___2__projection ((a datalengtht__ref1)) datalengtht1
   (datalengtht__content1 a))
 
 (declare-fun to_rep2 (datalengtht1) Int)
@@ -466,8 +466,8 @@
 
 (declare-datatypes ((datai__ref1 0))
 (((mk_datai__ref1 (datai__content1 datai1)))))
-(define-fun datai__ref_2__projection ((a datai__ref1)) datai1 (datai__content1
-                                                              a))
+(define-fun datai__ref___2__projection ((a datai__ref1)) datai1 (datai__content1
+                                                                a))
 
 (declare-fun to_rep3 (datai1) Int)
 
@@ -526,24 +526,24 @@
 (declare-datatypes ((us_split_fields2 0))
 (((mk___split_fields1
   (rec__admin__datat__length datalengtht1)(rec__admin__datat__minmatchlength datai1)(rec__admin__datat__text (Array Int character))))))
-(define-fun us_split_fields_Length2__projection ((a us_split_fields2)) datalengtht1
+(define-fun us_split_fields_Length__2__projection ((a us_split_fields2)) datalengtht1
   (rec__admin__datat__length a))
 
 (define-fun us_split_fields_MinMatchLength__projection ((a us_split_fields2)) datai1
   (rec__admin__datat__minmatchlength a))
 
-(define-fun us_split_fields_Text2__projection ((a us_split_fields2)) (Array Int character)
+(define-fun us_split_fields_Text__2__projection ((a us_split_fields2)) (Array Int character)
   (rec__admin__datat__text a))
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___4__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_4__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___4__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (define-fun bool_eq2 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -636,8 +636,8 @@
 
 (declare-datatypes ((datat__ref1 0))
 (((mk_datat__ref1 (datat__content1 us_rep1)))))
-(define-fun datat__ref_2__projection ((a datat__ref1)) us_rep1 (datat__content1
-                                                               a))
+(define-fun datat__ref___2__projection ((a datat__ref1)) us_rep1 (datat__content1
+                                                                 a))
 
 (declare-datatypes ((map__ref1 0))
 (((mk_map__ref1 (map__content1 (Array Int us_rep1))))))

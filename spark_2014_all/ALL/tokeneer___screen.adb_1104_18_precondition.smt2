@@ -721,13 +721,13 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_7__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___7__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_8__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___8__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -838,7 +838,7 @@
 (declare-const dummy11 us_rep)
 
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content us_rep)))))
-(define-fun t__ref_4__projection ((a t__ref)) us_rep (t__content a))
+(define-fun t__ref___4__projection ((a t__ref)) us_rep (t__content a))
 
 (declare-sort msgtextt 0)
 
@@ -881,13 +881,13 @@
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_11__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___11__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_12__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                 a))
+(define-fun us_rep___12__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                   a))
 
 (define-fun bool_eq3 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -1008,13 +1008,13 @@
 
 (declare-datatypes ((us_split_fields__ref2 0))
 (((mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_12__projection ((a us_split_fields__ref2)) us_split_fields4
+(define-fun us_split_fields__ref___12__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep2 (us_split_fields5 us_split_fields4)))))
-(define-fun us_rep_13__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
-                                                                 a))
+(define-fun us_rep___13__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
+                                                                   a))
 
 (define-fun bool_eq4 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
@@ -1336,21 +1336,21 @@
 (declare-datatypes ((us_split_fields6 0))
 (((mk___split_fields3
   (rec__screen__screenconfigt__isdisplayed Bool)(rec__screen__screenconfigt__data us_rep2)))))
-(define-fun us_split_fields_IsDisplayed2__projection ((a us_split_fields6)) Bool
+(define-fun us_split_fields_IsDisplayed__2__projection ((a us_split_fields6)) Bool
   (rec__screen__screenconfigt__isdisplayed a))
 
-(define-fun us_split_fields_Data2__projection ((a us_split_fields6)) us_rep2
+(define-fun us_split_fields_Data__2__projection ((a us_split_fields6)) us_rep2
   (rec__screen__screenconfigt__data a))
 
 (declare-datatypes ((us_split_fields__ref3 0))
 (((mk___split_fields__ref3 (us_split_fields__content3 us_split_fields6)))))
-(define-fun us_split_fields__ref_13__projection ((a us_split_fields__ref3)) us_split_fields6
+(define-fun us_split_fields__ref___13__projection ((a us_split_fields__ref3)) us_split_fields6
   (us_split_fields__content3 a))
 
 (declare-datatypes ((us_rep3 0))
 (((mk___rep3 (us_split_fields7 us_split_fields6)))))
-(define-fun us_rep_14__projection ((a us_rep3)) us_split_fields6 (us_split_fields7
-                                                                 a))
+(define-fun us_rep___14__projection ((a us_rep3)) us_split_fields6 (us_split_fields7
+                                                                   a))
 
 (define-fun bool_eq5 ((a us_rep3)
   (b us_rep3)) Bool (ite (and

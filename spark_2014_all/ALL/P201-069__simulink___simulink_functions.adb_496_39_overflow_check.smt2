@@ -141,7 +141,7 @@
 
 (declare-datatypes ((integer_16__ref 0))
 (((mk_integer_16__ref (integer_16__content integer_16)))))
-(define-fun integer_16__ref_2__projection ((a integer_16__ref)) integer_16
+(define-fun integer_16__ref___2__projection ((a integer_16__ref)) integer_16
   (integer_16__content a))
 
 (define-fun dynamic_invariant ((temp___expr_153 Int)

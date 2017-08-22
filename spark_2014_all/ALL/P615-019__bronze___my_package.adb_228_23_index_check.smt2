@@ -242,13 +242,13 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq1 ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -341,8 +341,8 @@
 
 (declare-datatypes ((tTaSP1__ref 0))
 (((mk_tTaSP1__ref (tTaSP1__content tTaSP1)))))
-(define-fun tTaSP1__ref_2__projection ((a tTaSP1__ref)) tTaSP1 (tTaSP1__content
-                                                               a))
+(define-fun tTaSP1__ref___2__projection ((a tTaSP1__ref)) tTaSP1 (tTaSP1__content
+                                                                 a))
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 

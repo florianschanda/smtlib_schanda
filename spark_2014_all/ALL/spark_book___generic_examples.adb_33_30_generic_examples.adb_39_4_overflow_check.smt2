@@ -259,12 +259,12 @@
 (define-fun component_type__ref___projection ((a component_type__ref)) component_type
   (component_type__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_535 Int)
-  (temp___is_init_532 Bool) (temp___skip_constant_533 Bool)
-  (temp___do_toplevel_534 Bool)) Bool (=>
-                                      (or (= temp___is_init_532 true)
+(define-fun dynamic_invariant1 ((temp___expr_533 Int)
+  (temp___is_init_530 Bool) (temp___skip_constant_531 Bool)
+  (temp___do_toplevel_532 Bool)) Bool (=>
+                                      (or (= temp___is_init_530 true)
                                       (<= 0 255)) (in_range4
-                                      temp___expr_535)))
+                                      temp___expr_533)))
 
 (declare-sort positive 0)
 
@@ -384,13 +384,13 @@
 (define-fun array_type__ref___projection ((a array_type__ref)) us_t (array_type__content
                                                                     a))
 
-(define-fun dynamic_invariant2 ((temp___expr_547 us_t)
-  (temp___is_init_544 Bool) (temp___skip_constant_545 Bool)
-  (temp___do_toplevel_546 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_545 true))
+(define-fun dynamic_invariant2 ((temp___expr_545 us_t)
+  (temp___is_init_542 Bool) (temp___skip_constant_543 Bool)
+  (temp___do_toplevel_544 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_543 true))
                                       (dynamic_property 1 2147483647
-                                      (first1 temp___expr_547)
-                                      (last1 temp___expr_547))))
+                                      (first1 temp___expr_545)
+                                      (last1 temp___expr_545))))
 
 (declare-const source us_t)
 

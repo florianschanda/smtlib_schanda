@@ -1,0 +1,421 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+type unsigned_byte
+
+predicate in_range(x: int) = ((0 <= x) and (x <= 255))
+
+logic bool_eq : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq1 : int, int -> bool
+
+axiom bool_eq_def :
+  (forall x:int. forall y:int [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> int
+
+logic user_eq : unsigned_byte, unsigned_byte -> bool
+
+logic dummy : unsigned_byte
+
+type unsigned_byte__ref = { unsigned_byte__content : unsigned_byte
+}
+
+function unsigned_byte__ref___projection(a: unsigned_byte__ref) : unsigned_byte =
+  (a).unsigned_byte__content
+
+logic to_rep : unsigned_byte -> int
+
+logic of_rep : int -> unsigned_byte
+
+axiom inversion_axiom :
+  (forall x:unsigned_byte [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:unsigned_byte [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type us_split_fields = { rec__records_prooffuncs__pair__a : unsigned_byte;
+rec__records_prooffuncs__pair__b : unsigned_byte
+}
+
+function us_split_fields_A__projection(a: us_split_fields) : unsigned_byte =
+  (a).rec__records_prooffuncs__pair__a
+
+function us_split_fields_B__projection(a: us_split_fields) : unsigned_byte =
+  (a).rec__records_prooffuncs__pair__b
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___2__projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+function us_rep___2__projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+logic bool_eq2 : us_rep, us_rep -> bool
+
+axiom bool_eq_def1 :
+  (forall a:us_rep. forall b:us_rep [bool_eq2(a, b)].
+  ((((to_rep(((a).us_split_fields1).rec__records_prooffuncs__pair__a) = to_rep(((b).us_split_fields1).rec__records_prooffuncs__pair__a)) and
+  (to_rep(((a).us_split_fields1).rec__records_prooffuncs__pair__b) = to_rep(((b).us_split_fields1).rec__records_prooffuncs__pair__b))) ->
+  (bool_eq2(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_fields1).rec__records_prooffuncs__pair__a) = to_rep(((b).us_split_fields1).rec__records_prooffuncs__pair__a)) and
+  (to_rep(((a).us_split_fields1).rec__records_prooffuncs__pair__b) = to_rep(((b).us_split_fields1).rec__records_prooffuncs__pair__b)))) ->
+  (bool_eq2(a, b) = false))))
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:unsigned_byte. forall a1:unsigned_byte. (0 <= object__size({
+  us_split_fields1 = { rec__records_prooffuncs__pair__a = a;
+  rec__records_prooffuncs__pair__b = a1 } })))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:unsigned_byte. forall a1:unsigned_byte. (0 <= object__alignment({
+  us_split_fields1 = { rec__records_prooffuncs__pair__a = a;
+  rec__records_prooffuncs__pair__b = a1 } })))
+
+logic records_prooffuncs__pair__a__first__bit : int
+
+logic records_prooffuncs__pair__a__last__bit : int
+
+logic records_prooffuncs__pair__a__position : int
+
+axiom records_prooffuncs__pair__a__first__bit_axiom :
+  (0 <= records_prooffuncs__pair__a__first__bit)
+
+axiom records_prooffuncs__pair__a__last__bit_axiom :
+  (records_prooffuncs__pair__a__first__bit <  records_prooffuncs__pair__a__last__bit)
+
+axiom records_prooffuncs__pair__a__position_axiom :
+  (0 <= records_prooffuncs__pair__a__position)
+
+logic records_prooffuncs__pair__b__first__bit : int
+
+logic records_prooffuncs__pair__b__last__bit : int
+
+logic records_prooffuncs__pair__b__position : int
+
+axiom records_prooffuncs__pair__b__first__bit_axiom :
+  (0 <= records_prooffuncs__pair__b__first__bit)
+
+axiom records_prooffuncs__pair__b__last__bit_axiom :
+  (records_prooffuncs__pair__b__first__bit <  records_prooffuncs__pair__b__last__bit)
+
+axiom records_prooffuncs__pair__b__position_axiom :
+  (0 <= records_prooffuncs__pair__b__position)
+
+logic user_eq1 : us_rep, us_rep -> bool
+
+logic dummy1 : unsigned_byte
+
+logic dummy2 : unsigned_byte
+
+type pair__ref = { pair__content : us_rep
+}
+
+function pair__ref___projection(a: pair__ref) : us_rep = (a).pair__content
+
+type us_split_fields2 = { rec__records_prooffuncs__optional_pair__exists :
+bool; rec__records_prooffuncs__optional_pair__the_pair : us_rep
+}
+
+function us_split_fields_Exists__projection(a: us_split_fields2) : bool =
+  (a).rec__records_prooffuncs__optional_pair__exists
+
+function us_split_fields_The_Pair__projection(a: us_split_fields2) : us_rep =
+  (a).rec__records_prooffuncs__optional_pair__the_pair
+
+type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
+}
+
+function us_split_fields__ref___3__projection(a: us_split_fields__ref1) : us_split_fields2 =
+  (a).us_split_fields__content1
+
+type us_rep1 = { us_split_fields3 : us_split_fields2
+}
+
+function us_rep___3__projection(a: us_rep1) : us_split_fields2 =
+  (a).us_split_fields3
+
+logic bool_eq3 : us_rep1, us_rep1 -> bool
+
+axiom bool_eq_def2 :
+  (forall a:us_rep1. forall b:us_rep1 [bool_eq3(a, b)].
+  ((((((a).us_split_fields3).rec__records_prooffuncs__optional_pair__exists = ((b).us_split_fields3).rec__records_prooffuncs__optional_pair__exists) and
+  (bool_eq2(((a).us_split_fields3).rec__records_prooffuncs__optional_pair__the_pair,
+  ((b).us_split_fields3).rec__records_prooffuncs__optional_pair__the_pair) = true)) ->
+  (bool_eq3(a, b) = true)) and
+  ((not ((((a).us_split_fields3).rec__records_prooffuncs__optional_pair__exists = ((b).us_split_fields3).rec__records_prooffuncs__optional_pair__exists) and
+  (bool_eq2(((a).us_split_fields3).rec__records_prooffuncs__optional_pair__the_pair,
+  ((b).us_split_fields3).rec__records_prooffuncs__optional_pair__the_pair) = true))) ->
+  (bool_eq3(a, b) = false))))
+
+logic value__size1 : int
+
+logic object__size1 : us_rep1 -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : us_rep1 -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 :
+  (forall a:bool. forall a1:unsigned_byte. forall a2:unsigned_byte.
+  (0 <= object__size1({ us_split_fields3 = {
+  rec__records_prooffuncs__optional_pair__exists = a;
+  rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = a1; rec__records_prooffuncs__pair__b =
+  a2 } } } })))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:bool. forall a1:unsigned_byte. forall a2:unsigned_byte.
+  (0 <= object__alignment1({ us_split_fields3 = {
+  rec__records_prooffuncs__optional_pair__exists = a;
+  rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = a1; rec__records_prooffuncs__pair__b =
+  a2 } } } })))
+
+logic records_prooffuncs__optional_pair__exists__first__bit : int
+
+logic records_prooffuncs__optional_pair__exists__last__bit : int
+
+logic records_prooffuncs__optional_pair__exists__position : int
+
+axiom records_prooffuncs__optional_pair__exists__first__bit_axiom :
+  (0 <= records_prooffuncs__optional_pair__exists__first__bit)
+
+axiom records_prooffuncs__optional_pair__exists__last__bit_axiom :
+  (records_prooffuncs__optional_pair__exists__first__bit <  records_prooffuncs__optional_pair__exists__last__bit)
+
+axiom records_prooffuncs__optional_pair__exists__position_axiom :
+  (0 <= records_prooffuncs__optional_pair__exists__position)
+
+logic records_prooffuncs__optional_pair__the_pair__first__bit : int
+
+logic records_prooffuncs__optional_pair__the_pair__last__bit : int
+
+logic records_prooffuncs__optional_pair__the_pair__position : int
+
+axiom records_prooffuncs__optional_pair__the_pair__first__bit_axiom :
+  (0 <= records_prooffuncs__optional_pair__the_pair__first__bit)
+
+axiom records_prooffuncs__optional_pair__the_pair__last__bit_axiom :
+  (records_prooffuncs__optional_pair__the_pair__first__bit <  records_prooffuncs__optional_pair__the_pair__last__bit)
+
+axiom records_prooffuncs__optional_pair__the_pair__position_axiom :
+  (0 <= records_prooffuncs__optional_pair__the_pair__position)
+
+logic user_eq2 : us_rep1, us_rep1 -> bool
+
+logic dummy3 : bool
+
+logic dummy4 : unsigned_byte
+
+logic dummy5 : unsigned_byte
+
+type optional_pair__ref = { optional_pair__content : us_rep1
+}
+
+function optional_pair__ref___projection(a: optional_pair__ref) : us_rep1 =
+  (a).optional_pair__content
+
+logic x : bool
+
+logic x1 : unsigned_byte
+
+logic x2 : unsigned_byte
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic n : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+ (* File "records_prooffuncs.ads", line 19, characters 0-0 *)
+goal WP_parameter_def :
+  (forall tmp__split_fields:bool. forall tmp__split_fields1:unsigned_byte.
+  forall tmp__split_fields2:unsigned_byte.
+  forall records__update_a__result:bool.
+  forall records__update_a__result1:unsigned_byte.
+  forall records__update_a__result2:unsigned_byte. forall o:unsigned_byte.
+  forall o1:unsigned_byte. forall o2:unsigned_byte. forall o3:unsigned_byte.
+  forall o4:unsigned_byte. forall o5:bool. forall o6:unsigned_byte.
+  forall o7:unsigned_byte. forall temp___381:bool.
+  forall temp___3811:unsigned_byte. forall temp___3812:unsigned_byte.
+  forall result:bool. forall result1:unsigned_byte.
+  forall result2:unsigned_byte. forall tmp__split_fields3:bool.
+  forall tmp__split_fields4:unsigned_byte.
+  forall tmp__split_fields5:unsigned_byte. forall result3:bool.
+  forall result4:unsigned_byte. forall result5:unsigned_byte.
+  forall tmp__split_fields6:bool. forall tmp__split_fields7:unsigned_byte.
+  forall tmp__split_fields8:unsigned_byte. forall result6:bool.
+  forall result7:unsigned_byte. forall result8:unsigned_byte.
+  forall records__update_a__result3:bool.
+  forall records__update_a__result4:unsigned_byte.
+  forall records__update_a__result5:unsigned_byte.
+  forall records__update_a__result6:bool.
+  forall records__update_a__result7:unsigned_byte.
+  forall records__update_a__result8:unsigned_byte.
+  forall records__update_a__result9:us_rep1.
+  forall tmp__split_fields9:us_split_fields__ref1.
+  forall records__update_a__result10:optional_pair__ref.
+  forall tmp__split_fields10:us_split_fields2.
+  forall records__update_a__result11:us_rep1.
+  (forall result9:bool. forall result10:unsigned_byte.
+  forall result11:unsigned_byte. ((in_range(n) and
+  ((((((result = tmp__split_fields) and ((result1 = tmp__split_fields1) and
+  (result2 = tmp__split_fields2))) and ((x = tmp__split_fields3) and
+  ((x1 = tmp__split_fields4) and (x2 = tmp__split_fields5)))) and
+  (((((((to_rep(o) = n) and ((o = o1) and (tmp__split_fields5 = o2))) and
+  ((o3 = o1) and (o4 = o2))) and ((tmp__split_fields3 = o5) and
+  ((o6 = o3) and (o7 = o4)))) and ((temp___381 = o5) and
+  ((temp___3811 = o6) and (temp___3812 = o7)))) and
+  (((result3 = tmp__split_fields3) and ((result4 = tmp__split_fields4) and
+  (result5 = tmp__split_fields5))) and ((temp___381 = tmp__split_fields6) and
+  ((temp___3811 = tmp__split_fields7) and
+  (temp___3812 = tmp__split_fields8))))) and
+  ((((records__update_a__result6 = records__update_a__result3) and
+  ((records__update_a__result7 = records__update_a__result4) and
+  (records__update_a__result8 = records__update_a__result5))) and
+  (records__update_a__result9 = { us_split_fields3 = {
+  rec__records_prooffuncs__optional_pair__exists =
+  records__update_a__result3;
+  rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = records__update_a__result4;
+  rec__records_prooffuncs__pair__b = records__update_a__result5 } } } })) and
+  (((result6 = records__update_a__result) and
+  ((result7 = records__update_a__result1) and
+  (result8 = records__update_a__result2))) and
+  ((records__update_a__result3 = tmp__split_fields6) and
+  ((records__update_a__result4 = tmp__split_fields7) and
+  (records__update_a__result5 = tmp__split_fields8))))))) and
+  (((records__update_a__result10 = { optional_pair__content = {
+  us_split_fields3 = { rec__records_prooffuncs__optional_pair__exists =
+  records__update_a__result6;
+  rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = records__update_a__result7;
+  rec__records_prooffuncs__pair__b = records__update_a__result8 } } } }
+  }) and (tmp__split_fields9 = { us_split_fields__content1 = {
+  rec__records_prooffuncs__optional_pair__exists = tmp__split_fields6;
+  rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = tmp__split_fields7;
+  rec__records_prooffuncs__pair__b = tmp__split_fields8 } } } })) and
+  ((records__update_a__result11 = records__update_a__result9) and
+  (tmp__split_fields10 = { rec__records_prooffuncs__optional_pair__exists =
+  tmp__split_fields6; rec__records_prooffuncs__optional_pair__the_pair = {
+  us_split_fields1 = { rec__records_prooffuncs__pair__a = tmp__split_fields7;
+  rec__records_prooffuncs__pair__b = tmp__split_fields8 } } })))) and ({
+  us_split_fields3 = { rec__records_prooffuncs__optional_pair__exists =
+  result9; rec__records_prooffuncs__optional_pair__the_pair = {
+  us_split_fields1 = { rec__records_prooffuncs__pair__a = result10;
+  rec__records_prooffuncs__pair__b = result11 } } }
+  } = (records__update_a__result10).optional_pair__content))) ->
+  (bool_eq3((records__update_a__result10).optional_pair__content, {
+  us_split_fields3 = { rec__records_prooffuncs__optional_pair__exists = x;
+  rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = of_rep(n);
+  rec__records_prooffuncs__pair__b = x2 } } } }) = true))))

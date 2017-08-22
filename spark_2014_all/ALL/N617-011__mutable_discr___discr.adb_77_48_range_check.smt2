@@ -104,20 +104,20 @@
 
 (declare-datatypes ((us_split_discrs 0))
 (((mk___split_discrs (rec__discr__r6__with_bad_default1__d natural)))))
-(define-fun us_split_discrs_5__projection ((a us_split_discrs)) natural
+(define-fun us_split_discrs___5__projection ((a us_split_discrs)) natural
   (rec__discr__r6__with_bad_default1__d a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
 (((mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref_5__projection ((a us_split_discrs__ref)) us_split_discrs
+(define-fun us_split_discrs__ref___5__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_discrs1 us_split_discrs)(attr__constrained Bool)))))
-(define-fun us_rep_11__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___11__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_12__projection ((a us_rep)) Bool (attr__constrained a))
+(define-fun us_rep___12__projection ((a us_rep)) Bool (attr__constrained a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (= (to_rep
@@ -203,20 +203,20 @@
 
 (declare-datatypes ((us_split_discrs2 0))
 (((mk___split_discrs1 (rec__discr__r6__with_bad_default2__d natural)))))
-(define-fun us_split_discrs_6__projection ((a us_split_discrs2)) natural
+(define-fun us_split_discrs___6__projection ((a us_split_discrs2)) natural
   (rec__discr__r6__with_bad_default2__d a))
 
 (declare-datatypes ((us_split_discrs__ref1 0))
 (((mk___split_discrs__ref1 (us_split_discrs__content1 us_split_discrs2)))))
-(define-fun us_split_discrs__ref_6__projection ((a us_split_discrs__ref1)) us_split_discrs2
+(define-fun us_split_discrs__ref___6__projection ((a us_split_discrs__ref1)) us_split_discrs2
   (us_split_discrs__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_discrs3 us_split_discrs2)(attr__constrained1 Bool)))))
-(define-fun us_rep_13__projection ((a us_rep1)) us_split_discrs2 (us_split_discrs3
-                                                                 a))
+(define-fun us_rep___13__projection ((a us_rep1)) us_split_discrs2 (us_split_discrs3
+                                                                   a))
 
-(define-fun us_rep_14__projection ((a us_rep1)) Bool (attr__constrained1 a))
+(define-fun us_rep___14__projection ((a us_rep1)) Bool (attr__constrained1 a))
 
 (define-fun bool_eq1 ((a us_rep1)
   (b us_rep1)) Bool (ite (= (to_rep

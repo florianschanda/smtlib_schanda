@@ -729,7 +729,7 @@
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields
   (rec__tokenreader__readerinfot__name (Array Int character))(rec__tokenreader__readerinfot__tokentry tryt)(rec__tokenreader__readerinfot__tokenid tokenidt)(rec__tokenreader__readerinfot__tokenconnected Bool)(rec__tokenreader__readerinfot__tokenhandle cardhandlet)(rec__tokenreader__readerinfot__currentstatus validreaderstatet)(rec__tokenreader__readerinfot__lastfault unsigned32t)))))
-(define-fun us_split_fields_Name2__projection ((a us_split_fields)) (Array Int character)
+(define-fun us_split_fields_Name__2__projection ((a us_split_fields)) (Array Int character)
   (rec__tokenreader__readerinfot__name a))
 
 (define-fun us_split_fields_TokenTry__projection ((a us_split_fields)) tryt
@@ -752,13 +752,13 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_10__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___10__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_11__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___11__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                 a))
 
 (define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (and

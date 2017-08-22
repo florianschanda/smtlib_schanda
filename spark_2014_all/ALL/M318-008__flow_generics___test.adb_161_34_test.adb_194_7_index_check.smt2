@@ -181,11 +181,11 @@
   (! (=> (in_range4 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
                                                               (of_rep2 x))) )))
 
-(define-fun dynamic_invariant ((temp___expr_229 Int)
-  (temp___is_init_226 Bool) (temp___skip_constant_227 Bool)
-  (temp___do_toplevel_228 Bool)) Bool (=>
-                                      (or (= temp___is_init_226 true)
-                                      (<= 0 9)) (in_range4 temp___expr_229)))
+(define-fun dynamic_invariant ((temp___expr_233 Int)
+  (temp___is_init_230 Bool) (temp___skip_constant_231 Bool)
+  (temp___do_toplevel_232 Bool)) Bool (=>
+                                      (or (= temp___is_init_230 true)
+                                      (<= 0 9)) (in_range4 temp___expr_233)))
 
 (declare-fun found_none (Int) Bool)
 
@@ -199,11 +199,11 @@
   (forall ((fruit Int))
   (! (= (= (found_none fruit) true) (= fruit 0)) :pattern ((found_none fruit)) )))
 
-(define-fun dynamic_invariant1 ((temp___expr_223 Int)
-  (temp___is_init_220 Bool) (temp___skip_constant_221 Bool)
-  (temp___do_toplevel_222 Bool)) Bool (=>
-                                      (or (= temp___is_init_220 true)
-                                      (<= 0 12)) (in_range3 temp___expr_223)))
+(define-fun dynamic_invariant1 ((temp___expr_227 Int)
+  (temp___is_init_224 Bool) (temp___skip_constant_225 Bool)
+  (temp___do_toplevel_226 Bool)) Bool (=>
+                                      (or (= temp___is_init_224 true)
+                                      (<= 0 12)) (in_range3 temp___expr_227)))
 
 (declare-fun fruits_to_fruits_and_weapons (Int) Int)
 
@@ -529,13 +529,13 @@
 (define-fun inventory_t__ref___projection ((a inventory_t__ref)) us_t
   (inventory_t__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_317 us_t)
-  (temp___is_init_314 Bool) (temp___skip_constant_315 Bool)
-  (temp___do_toplevel_316 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_315 true))
+(define-fun dynamic_invariant2 ((temp___expr_327 us_t)
+  (temp___is_init_324 Bool) (temp___skip_constant_325 Bool)
+  (temp___do_toplevel_326 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_325 true))
                                       (dynamic_property 1 2147483647
-                                      (first1 temp___expr_317)
-                                      (last1 temp___expr_317))))
+                                      (first1 temp___expr_327)
+                                      (last1 temp___expr_327))))
 
 (declare-sort new_item_t 0)
 
@@ -556,11 +556,11 @@
 (define-fun new_item_t__ref___projection ((a new_item_t__ref)) new_item_t
   (new_item_t__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_352 Int)
-  (temp___is_init_349 Bool) (temp___skip_constant_350 Bool)
-  (temp___do_toplevel_351 Bool)) Bool (=>
-                                      (or (= temp___is_init_349 true)
-                                      (<= 0 12)) (in_range5 temp___expr_352)))
+(define-fun dynamic_invariant3 ((temp___expr_364 Int)
+  (temp___is_init_361 Bool) (temp___skip_constant_362 Bool)
+  (temp___do_toplevel_363 Bool)) Bool (=>
+                                      (or (= temp___is_init_361 true)
+                                      (<= 0 12)) (in_range5 temp___expr_364)))
 
 (declare-sort t1 0)
 
@@ -675,13 +675,13 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range2 temp___expr_15)))
 
-(define-fun dynamic_invariant6 ((temp___expr_358 us_t1)
-  (temp___is_init_355 Bool) (temp___skip_constant_356 Bool)
-  (temp___do_toplevel_357 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_356 true))
+(define-fun dynamic_invariant6 ((temp___expr_370 us_t1)
+  (temp___is_init_367 Bool) (temp___skip_constant_368 Bool)
+  (temp___do_toplevel_369 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_368 true))
                                       (dynamic_property1 1 2147483647
-                                      (first3 temp___expr_358)
-                                      (last3 temp___expr_358))))
+                                      (first3 temp___expr_370)
+                                      (last3 temp___expr_370))))
 
 (declare-const new_inventory (Array Int fruits_and_weapons))
 
@@ -729,12 +729,12 @@
 ;; H
   (assert
   (and
-  (forall ((temp___443 Int))
+  (forall ((temp___470 Int))
   (=>
-  (and (<= (to_rep new_inventory__first) temp___443)
-  (<= temp___443 (to_rep new_inventory__last)))
-  (=> (<= i2 temp___443)
-  (= (select new_inventory1 temp___443) (select new_inventory temp___443)))))
+  (and (<= (to_rep new_inventory__first) temp___470)
+  (<= temp___470 (to_rep new_inventory__last)))
+  (=> (<= i2 temp___470)
+  (= (select new_inventory1 temp___470) (select new_inventory temp___470)))))
   (and (<= (to_rep (first (rt old_inventory))) i2)
   (<= i2 (to_rep (last (rt old_inventory)))))))
 

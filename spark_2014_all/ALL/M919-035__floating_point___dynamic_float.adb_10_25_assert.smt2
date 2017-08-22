@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -155,20 +156,18 @@
 
 ;; range_axiom
   (assert
-  (forall ((x ttB))
-  (! (not (or (fp.isInfinite (to_rep x)) (fp.isNaN (to_rep x)))) :pattern (
-  (to_rep x)) )))
+  (forall ((x ttB)) (! (fp.isFinite32 (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x))) (= (to_rep (of_rep x)) x)) :pattern (
-  (to_rep (of_rep x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                                (of_rep x))) )))
 
 (declare-fun last (Int) Float32)
 
 (define-fun dynamic_property ((first_int Float32) (last_int Float32)
-  (x Float32)) Bool (and (not (or (fp.isInfinite x) (fp.isNaN x)))
+  (x Float32)) Bool (and (fp.isFinite32 x)
                     (and (fp.leq first_int x) (fp.leq x last_int))))
 
 (declare-fun eq (Float32 Float32) Bool)
@@ -220,7 +219,7 @@
   (temp___do_toplevel_170 Bool)) Bool (=>
                                       (or (= temp___is_init_168 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_171) (fp.isNaN temp___expr_171)))))
+                                      (fp.isFinite32 temp___expr_171)))
 
 (declare-const i Int)
 

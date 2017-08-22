@@ -362,8 +362,8 @@
 
 (declare-datatypes ((tTsSP1__ref 0))
 (((mk_tTsSP1__ref (tTsSP1__content integer)))))
-(define-fun tTsSP1__ref_2__projection ((a tTsSP1__ref)) integer (tTsSP1__content
-                                                                a))
+(define-fun tTsSP1__ref___2__projection ((a tTsSP1__ref)) integer (tTsSP1__content
+                                                                  a))
 
 (declare-sort t1 0)
 

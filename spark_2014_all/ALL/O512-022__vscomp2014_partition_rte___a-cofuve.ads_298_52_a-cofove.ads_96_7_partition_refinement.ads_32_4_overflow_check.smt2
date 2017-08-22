@@ -69,7 +69,7 @@
 
 (declare-datatypes ((index_type__ref 0))
 (((mk_index_type__ref (index_type__content index_type)))))
-(define-fun index_type__ref_4__projection ((a index_type__ref)) index_type
+(define-fun index_type__ref___4__projection ((a index_type__ref)) index_type
   (index_type__content a))
 
 (define-fun dynamic_invariant ((temp___expr_748 Int)
@@ -113,8 +113,8 @@
 
 (declare-datatypes ((sequence__ref 0))
 (((mk_sequence__ref (sequence__content us_rep)))))
-(define-fun sequence__ref_3__projection ((a sequence__ref)) us_rep (sequence__content
-                                                                   a))
+(define-fun sequence__ref___3__projection ((a sequence__ref)) us_rep
+  (sequence__content a))
 
 (declare-fun length (us_rep) Int)
 
@@ -222,13 +222,13 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_9__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___9__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_13__projection ((a us_rep1)) us_split_fields (us_split_fields1
-                                                                a))
+(define-fun us_rep___13__projection ((a us_rep1)) us_split_fields (us_split_fields1
+                                                                  a))
 
 (define-fun bool_eq1 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -329,7 +329,7 @@
 
 (declare-datatypes ((element_type__ref 0))
 (((mk_element_type__ref (element_type__content us_rep1)))))
-(define-fun element_type__ref_9__projection ((a element_type__ref)) us_rep1
+(define-fun element_type__ref___9__projection ((a element_type__ref)) us_rep1
   (element_type__content a))
 
 (define-fun last ((container us_rep)) Int (+ (- 1) (length container)))
@@ -418,7 +418,7 @@
 
 (declare-datatypes ((extended_index__ref 0))
 (((mk_extended_index__ref (extended_index__content extended_index)))))
-(define-fun extended_index__ref_4__projection ((a extended_index__ref)) extended_index
+(define-fun extended_index__ref___4__projection ((a extended_index__ref)) extended_index
   (extended_index__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_763 Int)

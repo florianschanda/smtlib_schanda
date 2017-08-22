@@ -140,10 +140,10 @@
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields
   (rec__skp__subjects__event_entry_type__dst_subject dst_subject_type)(rec__skp__subjects__event_entry_type__dst_vector dst_vector_range)(rec__skp__subjects__event_entry_type__handover Bool)(rec__skp__subjects__event_entry_type__send_ipi Bool)))))
-(define-fun us_split_fields_Dst_Subject2__projection ((a us_split_fields)) dst_subject_type
+(define-fun us_split_fields_Dst_Subject__2__projection ((a us_split_fields)) dst_subject_type
   (rec__skp__subjects__event_entry_type__dst_subject a))
 
-(define-fun us_split_fields_Dst_Vector2__projection ((a us_split_fields)) dst_vector_range
+(define-fun us_split_fields_Dst_Vector__2__projection ((a us_split_fields)) dst_vector_range
   (rec__skp__subjects__event_entry_type__dst_vector a))
 
 (define-fun us_split_fields_Handover__projection ((a us_split_fields)) Bool
@@ -154,13 +154,13 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -751,13 +751,13 @@
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_3__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___3__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (define-fun bool_eq2 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -1200,13 +1200,13 @@
 
 (declare-datatypes ((us_split_fields__ref3 0))
 (((mk___split_fields__ref3 (us_split_fields__content3 us_split_fields6)))))
-(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref3)) us_split_fields6
+(define-fun us_split_fields__ref___4__projection ((a us_split_fields__ref3)) us_split_fields6
   (us_split_fields__content3 a))
 
 (declare-datatypes ((us_rep3 0))
 (((mk___rep3 (us_split_fields7 us_split_fields6)))))
-(define-fun us_rep_4__projection ((a us_rep3)) us_split_fields6 (us_split_fields7
-                                                                a))
+(define-fun us_rep___4__projection ((a us_rep3)) us_split_fields6 (us_split_fields7
+                                                                  a))
 
 (define-fun bool_eq5 ((a us_rep3)
   (b us_rep3)) Bool (ite (and

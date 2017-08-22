@@ -564,7 +564,7 @@
 
 (declare-datatypes ((durationt__ref1 0))
 (((mk_durationt__ref1 (durationt__content1 durationt1)))))
-(define-fun durationt__ref_2__projection ((a durationt__ref1)) durationt1
+(define-fun durationt__ref___2__projection ((a durationt__ref1)) durationt1
   (durationt__content1 a))
 
 (define-fun dynamic_invariant4 ((temp___expr_846 Int)
@@ -1569,18 +1569,18 @@
 (define-fun us_split_fields_Text__projection ((a us_split_fields)) (Array Int character)
   (rec__configdata__classstringt__text a))
 
-(define-fun us_split_fields_Length2__projection ((a us_split_fields)) classtexti
+(define-fun us_split_fields_Length__2__projection ((a us_split_fields)) classtexti
   (rec__configdata__classstringt__length a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_7__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___7__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_8__projection ((a us_rep1)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___8__projection ((a us_rep1)) us_split_fields (us_split_fields1
+                                                                 a))
 
 (define-fun bool_eq3 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -2007,21 +2007,21 @@
 (declare-datatypes ((us_split_fields2 0))
 (((mk___split_fields1
   (rec__configdata__accessstringt__text (Array Int character))(rec__configdata__accessstringt__length accesstexti)))))
-(define-fun us_split_fields_Text2__projection ((a us_split_fields2)) (Array Int character)
+(define-fun us_split_fields_Text__2__projection ((a us_split_fields2)) (Array Int character)
   (rec__configdata__accessstringt__text a))
 
-(define-fun us_split_fields_Length3__projection ((a us_split_fields2)) accesstexti
+(define-fun us_split_fields_Length__3__projection ((a us_split_fields2)) accesstexti
   (rec__configdata__accessstringt__length a))
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_8__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___8__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_9__projection ((a us_rep2)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___9__projection ((a us_rep2)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (define-fun bool_eq5 ((a us_rep2)
   (b us_rep2)) Bool (ite (and

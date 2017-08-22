@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite64 ((x Float64)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -106,14 +107,14 @@
 (declare-const dummy ft)
 
 (declare-datatypes ((ft__ref 0)) (((mk_ft__ref (ft__content ft)))))
-(define-fun ft__ref_2__projection ((a ft__ref)) ft (ft__content a))
+(define-fun ft__ref___2__projection ((a ft__ref)) ft (ft__content a))
 
 (define-fun dynamic_invariant ((temp___expr_167 Float64)
   (temp___is_init_164 Bool) (temp___skip_constant_165 Bool)
   (temp___do_toplevel_166 Bool)) Bool (=>
                                       (or (= temp___is_init_164 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_167) (fp.isNaN temp___expr_167)))))
+                                      (fp.isFinite64 temp___expr_167)))
 
 (declare-fun to_rep (ft) Float64)
 
@@ -125,15 +126,13 @@
 
 ;; range_axiom
   (assert
-  (forall ((x ft))
-  (! (not (or (fp.isInfinite (to_rep x)) (fp.isNaN (to_rep x)))) :pattern (
-  (to_rep x)) )))
+  (forall ((x ft)) (! (fp.isFinite64 (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float64))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x))) (= (to_rep (of_rep x)) x)) :pattern (
-  (to_rep (of_rep x))) )))
+  (! (=> (fp.isFinite64 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                                (of_rep x))) )))
 
 (declare-const x Float64)
 
@@ -146,13 +145,13 @@
   (rec__foo__double_tests__test_record_1__rec__a ft)(rec__foo__double_tests__test_record_1__rec__b ft)(rec__foo__double_tests__test_record_1__rec__c ft)))))
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -248,8 +247,8 @@
 
 (declare-datatypes ((rec____ref 0))
 (((mk_rec____ref (rec____content us_rep)))))
-(define-fun rec____ref_2__projection ((a rec____ref)) us_rep (rec____content
-                                                             a))
+(define-fun rec____ref___2__projection ((a rec____ref)) us_rep (rec____content
+                                                               a))
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
@@ -338,13 +337,13 @@
 (declare-const r__split_fields14 ft)
 
 ;; H
-  (assert (not (or (fp.isInfinite x) (fp.isNaN x))))
+  (assert (fp.isFinite64 x))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite y) (fp.isNaN y)))))
+  (fp.isFinite64 y)))
 
 ;; H
   (assert

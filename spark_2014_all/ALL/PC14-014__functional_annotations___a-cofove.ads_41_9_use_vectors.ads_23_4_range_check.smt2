@@ -241,7 +241,7 @@
 
 (declare-datatypes ((index_type__ref1 0))
 (((mk_index_type__ref1 (index_type__content1 integer)))))
-(define-fun index_type__ref_2__projection ((a index_type__ref1)) integer
+(define-fun index_type__ref___2__projection ((a index_type__ref1)) integer
   (index_type__content1 a))
 
 (declare-const first3 Int)

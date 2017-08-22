@@ -80,20 +80,20 @@
 
 (declare-datatypes ((us_split_discrs 0))
 (((mk___split_discrs (rec__discr__with_default__c natural)))))
-(define-fun us_split_discrs_4__projection ((a us_split_discrs)) natural
+(define-fun us_split_discrs___4__projection ((a us_split_discrs)) natural
   (rec__discr__with_default__c a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
 (((mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref_4__projection ((a us_split_discrs__ref)) us_split_discrs
+(define-fun us_split_discrs__ref___4__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_discrs1 us_split_discrs)(attr__constrained Bool)))))
-(define-fun us_rep_8__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                              a))
+(define-fun us_rep___8__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                a))
 
-(define-fun us_rep_9__projection ((a us_rep)) Bool (attr__constrained a))
+(define-fun us_rep___9__projection ((a us_rep)) Bool (attr__constrained a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (= (to_rep

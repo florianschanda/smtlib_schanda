@@ -751,7 +751,7 @@
 
 (declare-datatypes ((unsigned64__ref1 0))
 (((mk_unsigned64__ref1 (unsigned64__content1 unsigned641)))))
-(define-fun unsigned64__ref_2__projection ((a unsigned64__ref1)) unsigned641
+(define-fun unsigned64__ref___2__projection ((a unsigned64__ref1)) unsigned641
   (unsigned64__content1 a))
 
 (define-fun dynamic_invariant2 ((temp___expr_257 (_ BitVec 64))

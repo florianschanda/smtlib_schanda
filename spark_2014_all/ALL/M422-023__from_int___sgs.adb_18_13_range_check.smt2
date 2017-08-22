@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -107,15 +108,15 @@
 
 (declare-datatypes ((float__ref 0))
 (((mk_float__ref (float__content float)))))
-(define-fun float__ref_2__projection ((a float__ref)) float (float__content
-                                                            a))
+(define-fun float__ref___2__projection ((a float__ref)) float (float__content
+                                                              a))
 
 (define-fun dynamic_invariant ((temp___expr_135 Float32)
   (temp___is_init_132 Bool) (temp___skip_constant_133 Bool)
   (temp___do_toplevel_134 Bool)) Bool (=>
                                       (or (= temp___is_init_132 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_135) (fp.isNaN temp___expr_135)))))
+                                      (fp.isFinite32 temp___expr_135)))
 
 (declare-sort t 0)
 
@@ -142,8 +143,7 @@
 
 (declare-sort u 0)
 
-(define-fun in_range2 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000010 #b11000000000000000000000)))))
@@ -279,7 +279,7 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite r1) (fp.isNaN r1)))))
+  (fp.isFinite32 r1)))
 
 ;; H
   (assert
@@ -307,7 +307,7 @@
 ;; H
   (assert
   (and (= o (a x4))
-  (and (not (or (fp.isInfinite o) (fp.isNaN o)))
+  (and (fp.isFinite32 o)
   (and (= o (c x4))
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o)
   (fp.leq o (fp #b0 #b10000010 #b11000000000000000000000)))))))
@@ -321,7 +321,7 @@
 ;; H
   (assert
   (and (= o1 (a x4))
-  (and (not (or (fp.isInfinite o1) (fp.isNaN o1)))
+  (and (fp.isFinite32 o1)
   (and (= o1 (c x4))
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) o1)
   (fp.leq o1 (fp #b0 #b10000010 #b11000000000000000000000)))))))

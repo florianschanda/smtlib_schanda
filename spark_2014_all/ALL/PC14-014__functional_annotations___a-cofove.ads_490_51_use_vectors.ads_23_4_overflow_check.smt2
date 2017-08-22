@@ -125,8 +125,8 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_discrs (us_split_discrs1
                                                              a))
 
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (declare-const value__size Int)
 
@@ -328,7 +328,7 @@
 
 (declare-datatypes ((index_type__ref 0))
 (((mk_index_type__ref (index_type__content integer)))))
-(define-fun index_type__ref_2__projection ((a index_type__ref)) integer
+(define-fun index_type__ref___2__projection ((a index_type__ref)) integer
   (index_type__content a))
 
 ;; last_count__def_axiom

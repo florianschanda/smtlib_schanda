@@ -83,8 +83,8 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_discrs (us_split_discrs1
                                                              a))
 
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (declare-const value__size Int)
 
@@ -704,22 +704,22 @@
 (declare-datatypes ((tvS__ref 0)) (((mk_tvS__ref (tvS__content us_rep)))))
 (define-fun tvS__ref___projection ((a tvS__ref)) us_rep (tvS__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_325 us_rep)
-  (temp___is_init_322 Bool) (temp___skip_constant_323 Bool)
-  (temp___do_toplevel_324 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_323 true))
-                                      (in_range5 5 temp___expr_325)))
+(define-fun dynamic_invariant4 ((temp___expr_333 us_rep)
+  (temp___is_init_330 Bool) (temp___skip_constant_331 Bool)
+  (temp___do_toplevel_332 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_331 true))
+                                      (in_range5 5 temp___expr_333)))
 
-(define-fun default_initial_assumption ((temp___expr_327 us_rep)
-  (temp___skip_top_level_328 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_335 us_rep)
+  (temp___skip_top_level_336 Bool)) Bool (and
                                          (= (to_rep
                                             (rec__bounded__vect__vector__capacity
                                             (us_split_discrs1
-                                            temp___expr_327))) 5)
+                                            temp___expr_335))) 5)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_328 true))
-                                         (= (is_empty temp___expr_327) true))))
+                                         (= temp___skip_top_level_336 true))
+                                         (= (is_empty temp___expr_335) true))))
 
 (declare-const v__split_discrs us_split_discrs)
 
@@ -823,7 +823,7 @@
 
 (declare-datatypes ((extended_index__ref1 0))
 (((mk_extended_index__ref1 (extended_index__content1 extended_index1)))))
-(define-fun extended_index__ref_2__projection ((a extended_index__ref1)) extended_index1
+(define-fun extended_index__ref___2__projection ((a extended_index__ref1)) extended_index1
   (extended_index__content1 a))
 
 (define-fun dynamic_invariant7 ((temp___expr_228 Int)
@@ -857,7 +857,7 @@
 
 (declare-datatypes ((element_type__ref1 0))
 (((mk_element_type__ref1 (element_type__content1 element_type1)))))
-(define-fun element_type__ref_2__projection ((a element_type__ref1)) element_type1
+(define-fun element_type__ref___2__projection ((a element_type__ref1)) element_type1
   (element_type__content1 a))
 
 (define-fun dynamic_invariant8 ((temp___expr_222 Int)

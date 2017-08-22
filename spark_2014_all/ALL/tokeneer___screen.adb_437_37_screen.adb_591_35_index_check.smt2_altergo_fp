@@ -1,0 +1,3906 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic comp_div: int, int -> int
+axiom comp_div_def: forall x, y:int. x >= 0 and y > 0 -> comp_div(x,y) = x / y
+logic comp_mod: int, int -> int
+axiom comp_mod_def: forall x, y:int. x >= 0 and y > 0 -> comp_mod(x,y) = x % y
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+axiom Div_mod :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * comp_div(x,y)) + comp_mod(x,y)))))
+
+axiom Div_bound :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= comp_div(x,y)) and (comp_div(x,y) <= x))))
+
+axiom Mod_bound :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (((-abs_int(y)) <  comp_mod(x,y)) and (comp_mod(x,y) <  abs_int(y)))))
+
+axiom Div_sign_pos :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  (0 <= comp_div(x,y))))
+
+axiom Div_sign_neg :
+  (forall x:int. forall y:int. (((x <= 0) and (0 <  y)) ->
+  (comp_div(x,y) <= 0)))
+
+axiom Mod_sign_pos :
+  (forall x:int. forall y:int. (((0 <= x) and (not (y = 0))) ->
+  (0 <= comp_mod(x,y))))
+
+axiom Mod_sign_neg :
+  (forall x:int. forall y:int. (((x <= 0) and (not (y = 0))) ->
+  (comp_mod(x,y) <= 0)))
+
+axiom Rounds_toward_zero :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (abs_int((comp_div(x,y) * y)) <= abs_int(x))))
+
+axiom Div_1 : (forall x:int. (comp_div(x,1) = x))
+
+axiom Mod_1 : (forall x:int. (comp_mod(x,1) = 0))
+
+axiom Div_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) ->
+  (comp_div(x,y) = 0)))
+
+axiom Mod_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) ->
+  (comp_mod(x,y) = x)))
+
+axiom Div_mult :
+  (forall x:int. forall y:int. forall z:int [comp_div(((x * y) + z),x)].
+  (((0 <  x) and ((0 <= y) and (0 <= z))) ->
+  (comp_div(((x * y) + z),x) = (y + comp_div(z,x)))))
+
+axiom Mod_mult :
+  (forall x:int. forall y:int. forall z:int [comp_mod(((x * y) + z),x)].
+  (((0 <  x) and ((0 <= y) and (0 <= z))) ->
+  (comp_mod(((x * y) + z),x) = comp_mod(z,x))))
+
+axiom Div_mod1 :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * (x / y)) + (x % y)))))
+
+axiom Mod_bound1 :
+  (forall x:int. forall y:int. ((not (y = 0)) -> ((0 <= (x % y)) and
+  ((x % y) <  abs_int(y)))))
+
+axiom Div_unique :
+  (forall x:int. forall y:int. forall q:int. ((0 <  y) ->
+  ((((q * y) <= x) and (x <  ((q * y) + y))) -> ((x / y) = q))))
+
+axiom Div_bound1 :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= (x / y)) and ((x / y) <= x))))
+
+axiom Mod_11 : (forall x:int. ((x % 1) = 0))
+
+axiom Div_11 : (forall x:int. ((x / 1) = x))
+
+axiom Div_inf1 :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> ((x / y) = 0)))
+
+axiom Div_inf_neg :
+  (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
+  (((-x) / y) = (-1))))
+
+axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
+
+axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
+
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+
+axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
+
+axiom Mod_minus1_left :
+  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+
+axiom Div_mult1 :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
+  ((0 <  x) -> ((((x * y) + z) / x) = (y + (z / x)))))
+
+axiom Mod_mult1 :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) % x)].
+  ((0 <  x) -> ((((x * y) + z) % x) = (z % x))))
+
+logic mod : int, int -> int
+
+axiom mod_def :
+  (forall x:int. forall y:int [mod(x, y)]. (((0 <  y) -> (mod(x,
+  y) = (x % y))) and ((not (0 <  y)) -> (mod(x, y) = ((x % y) + y)))))
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type integer
+
+predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : integer, integer -> bool
+
+logic dummy : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+type positive
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : positive, positive -> bool
+
+logic dummy1 : positive
+
+type positive__ref = { positive__content : positive
+}
+
+function positive__ref___projection(a: positive__ref) : positive =
+  (a).positive__content
+
+type character
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 255))
+
+logic bool_eq4 : int, int -> bool
+
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq2 : character, character -> bool
+
+logic dummy2 : character
+
+type character__ref = { character__content : character
+}
+
+function character__ref___projection(a: character__ref) : character =
+  (a).character__content
+
+logic to_rep : character -> int
+
+logic of_rep : int -> character
+
+axiom inversion_axiom :
+  (forall x:character [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:character [to_rep(x)]. in_range3(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range3(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type map__ref = { map__content : (int,character) farray
+}
+
+logic slide : (int,character) farray, int, int -> (int,character) farray
+
+axiom slide_eq :
+  (forall a:(int,character) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,character) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat : (int,character) farray, int, int, (int,character) farray, int,
+  int -> (int,character) farray
+
+axiom concat_def :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton : character, int -> (int,character) farray
+
+axiom singleton_def :
+  (forall v:character.
+  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
+
+logic bool_eq5 : (int,character) farray, int, int, (int,character) farray,
+  int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall a:(int,character) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,character) farray. forall b__first:int. forall b__last:int
+  [bool_eq5(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
+  (temp___idx_78 <= a__last)) and
+  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
+  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
+  (temp___idx_78 <= a__last)) ->
+  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq5(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
+  (temp___idx_78 <= a__last)) ->
+  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
+
+logic compare : (int,character) farray, int, int, (int,character) farray,
+  int, int -> int
+
+axiom compare_def_eq :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+
+logic to_rep1 : integer -> int
+
+logic of_rep1 : int -> integer
+
+axiom inversion_axiom1 :
+  (forall x:integer [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:integer [to_rep1(x)]. in_range1(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range1(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type t
+
+logic first : t -> integer
+
+logic last : t -> integer
+
+logic mk : int, int -> t
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep1(first(mk(f, l))) = f) and (to_rep1(last(mk(f, l))) = l)))))
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (in_range2(low) and in_range2(high)))))
+
+type us_t = { elts : (int,character) farray; rt : t
+}
+
+function to_array(a: us_t) : (int,character) farray = (a).elts
+
+function of_array(a: (int,character) farray, f: int, l: int) : us_t = {
+  elts = a; rt = mk(f, l) }
+
+function first1(a: us_t) : int = to_rep1(first((a).rt))
+
+function last1(a: us_t) : int = to_rep1(last((a).rt))
+
+logic length : us_t -> int
+
+axiom length_def :
+  (forall a:us_t [length(a)]. (((first1(a) <= last1(a)) ->
+  (length(a) = ((last1(a) - first1(a)) + 1))) and
+  ((not (first1(a) <= last1(a))) -> (length(a) = 0))))
+
+logic value__size : int
+
+logic object__size : (int,character) farray -> int
+
+logic value__component__size : int
+
+logic object__component__size : (int,character) farray -> int
+
+logic value__alignment : int
+
+logic object__alignment : (int,character) farray -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:(int,character) farray. (0 <= object__size(a)))
+
+axiom value__component__size_axiom : (0 <= value__component__size)
+
+axiom object__component__size_axiom :
+  (forall a:(int,character) farray. (0 <= object__component__size(a)))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:(int,character) farray. (0 <= object__alignment(a)))
+
+function bool_eq6(x: us_t, y: us_t) : bool = bool_eq5((x).elts,
+  to_rep1(first((x).rt)), to_rep1(last((x).rt)), (y).elts,
+  to_rep1(first((y).rt)), to_rep1(last((y).rt)))
+
+logic user_eq3 : us_t, us_t -> bool
+
+logic dummy3 : (int,character) farray
+
+logic dummy4 : t
+
+logic to_string : us_image -> us_t
+
+logic from_string : us_t -> us_image
+
+type string__ref = { string__content : us_t
+}
+
+function string__ref___projection(a: string__ref) : us_t =
+  (a).string__content
+
+type filesizet
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 4194304))
+
+logic bool_eq7 : int, int -> bool
+
+axiom bool_eq_def5 :
+  (forall x:int. forall y:int [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq4 : filesizet, filesizet -> bool
+
+logic dummy5 : filesizet
+
+type filesizet__ref = { filesizet__content : filesizet
+}
+
+function filesizet__ref___projection(a: filesizet__ref) : filesizet =
+  (a).filesizet__content
+
+logic to_rep2 : filesizet -> int
+
+logic of_rep2 : int -> filesizet
+
+axiom inversion_axiom2 :
+  (forall x:filesizet [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 : (forall x:filesizet [to_rep2(x)]. in_range4(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range4(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+type durationt
+
+predicate in_range5(x: int) = ((0 <= x) and (x <= 864000))
+
+logic bool_eq8 : int, int -> bool
+
+axiom bool_eq_def6 :
+  (forall x:int. forall y:int [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> int
+
+logic user_eq5 : durationt, durationt -> bool
+
+logic dummy6 : durationt
+
+type durationt__ref = { durationt__content : durationt
+}
+
+function durationt__ref___projection(a: durationt__ref) : durationt =
+  (a).durationt__content
+
+logic to_rep3 : durationt -> int
+
+logic of_rep3 : int -> durationt
+
+axiom inversion_axiom3 :
+  (forall x:durationt [to_rep3(x)]. (of_rep3(to_rep3(x)) = x))
+
+axiom range_axiom3 : (forall x:durationt [to_rep3(x)]. in_range5(to_rep3(x)))
+
+axiom coerce_axiom3 :
+  (forall x:int [to_rep3(of_rep3(x))]. (in_range5(x) ->
+  (to_rep3(of_rep3(x)) = x)))
+
+type durationtexti
+
+predicate in_range6(x: int) = ((1 <= x) and (x <= 10))
+
+logic bool_eq9 : int, int -> bool
+
+axiom bool_eq_def7 :
+  (forall x:int. forall y:int [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE6 : us_image -> int
+
+logic user_eq6 : durationtexti, durationtexti -> bool
+
+logic dummy7 : durationtexti
+
+type durationtexti__ref = { durationtexti__content : durationtexti
+}
+
+function durationtexti__ref___projection(a: durationtexti__ref) : durationtexti =
+  (a).durationtexti__content
+
+logic printduration : int -> (int,character) farray
+
+logic printduration__function_guard : (int,character) farray, int -> prop
+
+axiom printduration__post_axiom : true
+
+type fart
+
+predicate in_range7(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq10 : int, int -> bool
+
+axiom bool_eq_def8 :
+  (forall x:int. forall y:int [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE7 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check7 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE7 : us_image -> int
+
+logic user_eq7 : fart, fart -> bool
+
+logic dummy8 : fart
+
+type fart__ref = { fart__content : fart
+}
+
+function fart__ref___projection(a: fart__ref) : fart = (a).fart__content
+
+logic to_rep4 : fart -> int
+
+logic of_rep4 : int -> fart
+
+axiom inversion_axiom4 :
+  (forall x:fart [to_rep4(x)]. (of_rep4(to_rep4(x)) = x))
+
+axiom range_axiom4 : (forall x:fart [to_rep4(x)]. in_range7(to_rep4(x)))
+
+axiom coerce_axiom4 :
+  (forall x:int [to_rep4(of_rep4(x))]. (in_range7(x) ->
+  (to_rep4(of_rep4(x)) = x)))
+
+type classt
+
+predicate in_range8(x: int) = ((0 <= x) and (x <= 5))
+
+logic bool_eq11 : int, int -> bool
+
+axiom bool_eq_def9 :
+  (forall x:int. forall y:int [bool_eq11(x, y)]. (((x = y) -> (bool_eq11(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq11(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE8 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check8 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE8 : us_image -> int
+
+logic user_eq8 : classt, classt -> bool
+
+logic dummy9 : classt
+
+type classt__ref = { classt__content : classt
+}
+
+function classt__ref___projection(a: classt__ref) : classt =
+  (a).classt__content
+
+logic to_rep5 : classt -> int
+
+logic of_rep5 : int -> classt
+
+axiom inversion_axiom5 :
+  (forall x:classt [to_rep5(x)]. (of_rep5(to_rep5(x)) = x))
+
+axiom range_axiom5 : (forall x:classt [to_rep5(x)]. in_range8(to_rep5(x)))
+
+axiom coerce_axiom5 :
+  (forall x:int [to_rep5(of_rep5(x))]. (in_range8(x) ->
+  (to_rep5(of_rep5(x)) = x)))
+
+type durationt1
+
+predicate in_range9(x: int) = ((0 <= x) and (x <= 2000))
+
+logic bool_eq12 : int, int -> bool
+
+axiom bool_eq_def10 :
+  (forall x:int. forall y:int [bool_eq12(x, y)]. (((x = y) -> (bool_eq12(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq12(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE9 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check9 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE9 : us_image -> int
+
+logic user_eq9 : durationt1, durationt1 -> bool
+
+logic dummy10 : durationt1
+
+type durationt__ref1 = { durationt__content1 : durationt1
+}
+
+function durationt__ref___2__projection(a: durationt__ref1) : durationt1 =
+  (a).durationt__content1
+
+type accesspolicyt
+
+predicate in_range10(x: int) = ((0 <= x) and (x <= 1))
+
+logic bool_eq13 : int, int -> bool
+
+axiom bool_eq_def11 :
+  (forall x:int. forall y:int [bool_eq13(x, y)]. (((x = y) -> (bool_eq13(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq13(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE10 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check10 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE10 : us_image -> int
+
+logic user_eq10 : accesspolicyt, accesspolicyt -> bool
+
+logic dummy11 : accesspolicyt
+
+type accesspolicyt__ref = { accesspolicyt__content : accesspolicyt
+}
+
+function accesspolicyt__ref___projection(a: accesspolicyt__ref) : accesspolicyt =
+  (a).accesspolicyt__content
+
+logic to_rep6 : accesspolicyt -> int
+
+logic of_rep6 : int -> accesspolicyt
+
+axiom inversion_axiom6 :
+  (forall x:accesspolicyt [to_rep6(x)]. (of_rep6(to_rep6(x)) = x))
+
+axiom range_axiom6 :
+  (forall x:accesspolicyt [to_rep6(x)]. in_range10(to_rep6(x)))
+
+axiom coerce_axiom6 :
+  (forall x:int [to_rep6(of_rep6(x))]. (in_range10(x) ->
+  (to_rep6(of_rep6(x)) = x)))
+
+type us_split_fields = { rec__screen__displayedconfigt__latchunlock :
+durationt; rec__screen__displayedconfigt__alarmsilent : durationt;
+rec__screen__displayedconfigt__fingerwait : durationt;
+rec__screen__displayedconfigt__tokenremove : durationt;
+rec__screen__displayedconfigt__workstart : durationt;
+rec__screen__displayedconfigt__workend : durationt;
+rec__screen__displayedconfigt__authduration : durationt;
+rec__screen__displayedconfigt__policy : accesspolicyt;
+rec__screen__displayedconfigt__minpreservedlog : filesizet;
+rec__screen__displayedconfigt__alarmthreshold : filesizet;
+rec__screen__displayedconfigt__minentry : classt;
+rec__screen__displayedconfigt__clearance : classt;
+rec__screen__displayedconfigt__maxfar : fart
+}
+
+function us_split_fields_LatchUnlock__projection(a: us_split_fields) : durationt =
+  (a).rec__screen__displayedconfigt__latchunlock
+
+function us_split_fields_AlarmSilent__projection(a: us_split_fields) : durationt =
+  (a).rec__screen__displayedconfigt__alarmsilent
+
+function us_split_fields_FingerWait__projection(a: us_split_fields) : durationt =
+  (a).rec__screen__displayedconfigt__fingerwait
+
+function us_split_fields_TokenRemove__projection(a: us_split_fields) : durationt =
+  (a).rec__screen__displayedconfigt__tokenremove
+
+function us_split_fields_WorkStart__projection(a: us_split_fields) : durationt =
+  (a).rec__screen__displayedconfigt__workstart
+
+function us_split_fields_WorkEnd__projection(a: us_split_fields) : durationt =
+  (a).rec__screen__displayedconfigt__workend
+
+function us_split_fields_AuthDuration__projection(a: us_split_fields) : durationt =
+  (a).rec__screen__displayedconfigt__authduration
+
+function us_split_fields_Policy__projection(a: us_split_fields) : accesspolicyt =
+  (a).rec__screen__displayedconfigt__policy
+
+function us_split_fields_MinPreservedLog__projection(a: us_split_fields) : filesizet =
+  (a).rec__screen__displayedconfigt__minpreservedlog
+
+function us_split_fields_AlarmThreshold__projection(a: us_split_fields) : filesizet =
+  (a).rec__screen__displayedconfigt__alarmthreshold
+
+function us_split_fields_MinEntry__projection(a: us_split_fields) : classt =
+  (a).rec__screen__displayedconfigt__minentry
+
+function us_split_fields_Clearance__projection(a: us_split_fields) : classt =
+  (a).rec__screen__displayedconfigt__clearance
+
+function us_split_fields_MaxFAR__projection(a: us_split_fields) : fart =
+  (a).rec__screen__displayedconfigt__maxfar
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___12__projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+function us_rep___13__projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+logic bool_eq14 : us_rep, us_rep -> bool
+
+axiom bool_eq_def12 :
+  (forall a:us_rep. forall b:us_rep [bool_eq14(a, b)].
+  (((((((((((((((to_rep3(((a).us_split_fields1).rec__screen__displayedconfigt__latchunlock) = to_rep3(((b).us_split_fields1).rec__screen__displayedconfigt__latchunlock)) and
+  (to_rep3(((a).us_split_fields1).rec__screen__displayedconfigt__alarmsilent) = to_rep3(((b).us_split_fields1).rec__screen__displayedconfigt__alarmsilent))) and
+  (to_rep3(((a).us_split_fields1).rec__screen__displayedconfigt__fingerwait) = to_rep3(((b).us_split_fields1).rec__screen__displayedconfigt__fingerwait))) and
+  (to_rep3(((a).us_split_fields1).rec__screen__displayedconfigt__tokenremove) = to_rep3(((b).us_split_fields1).rec__screen__displayedconfigt__tokenremove))) and
+  (to_rep3(((a).us_split_fields1).rec__screen__displayedconfigt__workstart) = to_rep3(((b).us_split_fields1).rec__screen__displayedconfigt__workstart))) and
+  (to_rep3(((a).us_split_fields1).rec__screen__displayedconfigt__workend) = to_rep3(((b).us_split_fields1).rec__screen__displayedconfigt__workend))) and
+  (to_rep3(((a).us_split_fields1).rec__screen__displayedconfigt__authduration) = to_rep3(((b).us_split_fields1).rec__screen__displayedconfigt__authduration))) and
+  (to_rep6(((a).us_split_fields1).rec__screen__displayedconfigt__policy) = to_rep6(((b).us_split_fields1).rec__screen__displayedconfigt__policy))) and
+  (to_rep2(((a).us_split_fields1).rec__screen__displayedconfigt__minpreservedlog) = to_rep2(((b).us_split_fields1).rec__screen__displayedconfigt__minpreservedlog))) and
+  (to_rep2(((a).us_split_fields1).rec__screen__displayedconfigt__alarmthreshold) = to_rep2(((b).us_split_fields1).rec__screen__displayedconfigt__alarmthreshold))) and
+  (to_rep5(((a).us_split_fields1).rec__screen__displayedconfigt__minentry) = to_rep5(((b).us_split_fields1).rec__screen__displayedconfigt__minentry))) and
+  (to_rep5(((a).us_split_fields1).rec__screen__displayedconfigt__clearance) = to_rep5(((b).us_split_fields1).rec__screen__displayedconfigt__clearance))) and
+  (to_rep4(((a).us_split_fields1).rec__screen__displayedconfigt__maxfar) = to_rep4(((b).us_split_fields1).rec__screen__displayedconfigt__maxfar))) ->
+  (bool_eq14(a, b) = true)) and
+  ((not (((((((((((((to_rep3(((a).us_split_fields1).rec__screen__displayedconfigt__latchunlock) = to_rep3(((b).us_split_fields1).rec__screen__displayedconfigt__latchunlock)) and
+  (to_rep3(((a).us_split_fields1).rec__screen__displayedconfigt__alarmsilent) = to_rep3(((b).us_split_fields1).rec__screen__displayedconfigt__alarmsilent))) and
+  (to_rep3(((a).us_split_fields1).rec__screen__displayedconfigt__fingerwait) = to_rep3(((b).us_split_fields1).rec__screen__displayedconfigt__fingerwait))) and
+  (to_rep3(((a).us_split_fields1).rec__screen__displayedconfigt__tokenremove) = to_rep3(((b).us_split_fields1).rec__screen__displayedconfigt__tokenremove))) and
+  (to_rep3(((a).us_split_fields1).rec__screen__displayedconfigt__workstart) = to_rep3(((b).us_split_fields1).rec__screen__displayedconfigt__workstart))) and
+  (to_rep3(((a).us_split_fields1).rec__screen__displayedconfigt__workend) = to_rep3(((b).us_split_fields1).rec__screen__displayedconfigt__workend))) and
+  (to_rep3(((a).us_split_fields1).rec__screen__displayedconfigt__authduration) = to_rep3(((b).us_split_fields1).rec__screen__displayedconfigt__authduration))) and
+  (to_rep6(((a).us_split_fields1).rec__screen__displayedconfigt__policy) = to_rep6(((b).us_split_fields1).rec__screen__displayedconfigt__policy))) and
+  (to_rep2(((a).us_split_fields1).rec__screen__displayedconfigt__minpreservedlog) = to_rep2(((b).us_split_fields1).rec__screen__displayedconfigt__minpreservedlog))) and
+  (to_rep2(((a).us_split_fields1).rec__screen__displayedconfigt__alarmthreshold) = to_rep2(((b).us_split_fields1).rec__screen__displayedconfigt__alarmthreshold))) and
+  (to_rep5(((a).us_split_fields1).rec__screen__displayedconfigt__minentry) = to_rep5(((b).us_split_fields1).rec__screen__displayedconfigt__minentry))) and
+  (to_rep5(((a).us_split_fields1).rec__screen__displayedconfigt__clearance) = to_rep5(((b).us_split_fields1).rec__screen__displayedconfigt__clearance))) and
+  (to_rep4(((a).us_split_fields1).rec__screen__displayedconfigt__maxfar) = to_rep4(((b).us_split_fields1).rec__screen__displayedconfigt__maxfar)))) ->
+  (bool_eq14(a, b) = false))))
+
+logic value__size1 : int
+
+logic object__size1 : us_rep -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : us_rep -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 :
+  (forall a:durationt. forall a1:durationt. forall a2:durationt.
+  forall a3:durationt. forall a4:durationt. forall a5:durationt.
+  forall a6:durationt. forall a7:accesspolicyt. forall a8:filesizet.
+  forall a9:filesizet. forall a10:classt. forall a11:classt. forall a12:fart.
+  (0 <= object__size1({ us_split_fields1 = {
+  rec__screen__displayedconfigt__latchunlock = a;
+  rec__screen__displayedconfigt__alarmsilent = a1;
+  rec__screen__displayedconfigt__fingerwait = a2;
+  rec__screen__displayedconfigt__tokenremove = a3;
+  rec__screen__displayedconfigt__workstart = a4;
+  rec__screen__displayedconfigt__workend = a5;
+  rec__screen__displayedconfigt__authduration = a6;
+  rec__screen__displayedconfigt__policy = a7;
+  rec__screen__displayedconfigt__minpreservedlog = a8;
+  rec__screen__displayedconfigt__alarmthreshold = a9;
+  rec__screen__displayedconfigt__minentry = a10;
+  rec__screen__displayedconfigt__clearance = a11;
+  rec__screen__displayedconfigt__maxfar = a12 } })))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:durationt. forall a1:durationt. forall a2:durationt.
+  forall a3:durationt. forall a4:durationt. forall a5:durationt.
+  forall a6:durationt. forall a7:accesspolicyt. forall a8:filesizet.
+  forall a9:filesizet. forall a10:classt. forall a11:classt. forall a12:fart.
+  (0 <= object__alignment1({ us_split_fields1 = {
+  rec__screen__displayedconfigt__latchunlock = a;
+  rec__screen__displayedconfigt__alarmsilent = a1;
+  rec__screen__displayedconfigt__fingerwait = a2;
+  rec__screen__displayedconfigt__tokenremove = a3;
+  rec__screen__displayedconfigt__workstart = a4;
+  rec__screen__displayedconfigt__workend = a5;
+  rec__screen__displayedconfigt__authduration = a6;
+  rec__screen__displayedconfigt__policy = a7;
+  rec__screen__displayedconfigt__minpreservedlog = a8;
+  rec__screen__displayedconfigt__alarmthreshold = a9;
+  rec__screen__displayedconfigt__minentry = a10;
+  rec__screen__displayedconfigt__clearance = a11;
+  rec__screen__displayedconfigt__maxfar = a12 } })))
+
+logic screen__displayedconfigt__latchunlock__first__bit : int
+
+logic screen__displayedconfigt__latchunlock__last__bit : int
+
+logic screen__displayedconfigt__latchunlock__position : int
+
+axiom screen__displayedconfigt__latchunlock__first__bit_axiom :
+  (0 <= screen__displayedconfigt__latchunlock__first__bit)
+
+axiom screen__displayedconfigt__latchunlock__last__bit_axiom :
+  (screen__displayedconfigt__latchunlock__first__bit <  screen__displayedconfigt__latchunlock__last__bit)
+
+axiom screen__displayedconfigt__latchunlock__position_axiom :
+  (0 <= screen__displayedconfigt__latchunlock__position)
+
+logic screen__displayedconfigt__alarmsilent__first__bit : int
+
+logic screen__displayedconfigt__alarmsilent__last__bit : int
+
+logic screen__displayedconfigt__alarmsilent__position : int
+
+axiom screen__displayedconfigt__alarmsilent__first__bit_axiom :
+  (0 <= screen__displayedconfigt__alarmsilent__first__bit)
+
+axiom screen__displayedconfigt__alarmsilent__last__bit_axiom :
+  (screen__displayedconfigt__alarmsilent__first__bit <  screen__displayedconfigt__alarmsilent__last__bit)
+
+axiom screen__displayedconfigt__alarmsilent__position_axiom :
+  (0 <= screen__displayedconfigt__alarmsilent__position)
+
+logic screen__displayedconfigt__fingerwait__first__bit : int
+
+logic screen__displayedconfigt__fingerwait__last__bit : int
+
+logic screen__displayedconfigt__fingerwait__position : int
+
+axiom screen__displayedconfigt__fingerwait__first__bit_axiom :
+  (0 <= screen__displayedconfigt__fingerwait__first__bit)
+
+axiom screen__displayedconfigt__fingerwait__last__bit_axiom :
+  (screen__displayedconfigt__fingerwait__first__bit <  screen__displayedconfigt__fingerwait__last__bit)
+
+axiom screen__displayedconfigt__fingerwait__position_axiom :
+  (0 <= screen__displayedconfigt__fingerwait__position)
+
+logic screen__displayedconfigt__tokenremove__first__bit : int
+
+logic screen__displayedconfigt__tokenremove__last__bit : int
+
+logic screen__displayedconfigt__tokenremove__position : int
+
+axiom screen__displayedconfigt__tokenremove__first__bit_axiom :
+  (0 <= screen__displayedconfigt__tokenremove__first__bit)
+
+axiom screen__displayedconfigt__tokenremove__last__bit_axiom :
+  (screen__displayedconfigt__tokenremove__first__bit <  screen__displayedconfigt__tokenremove__last__bit)
+
+axiom screen__displayedconfigt__tokenremove__position_axiom :
+  (0 <= screen__displayedconfigt__tokenremove__position)
+
+logic screen__displayedconfigt__workstart__first__bit : int
+
+logic screen__displayedconfigt__workstart__last__bit : int
+
+logic screen__displayedconfigt__workstart__position : int
+
+axiom screen__displayedconfigt__workstart__first__bit_axiom :
+  (0 <= screen__displayedconfigt__workstart__first__bit)
+
+axiom screen__displayedconfigt__workstart__last__bit_axiom :
+  (screen__displayedconfigt__workstart__first__bit <  screen__displayedconfigt__workstart__last__bit)
+
+axiom screen__displayedconfigt__workstart__position_axiom :
+  (0 <= screen__displayedconfigt__workstart__position)
+
+logic screen__displayedconfigt__workend__first__bit : int
+
+logic screen__displayedconfigt__workend__last__bit : int
+
+logic screen__displayedconfigt__workend__position : int
+
+axiom screen__displayedconfigt__workend__first__bit_axiom :
+  (0 <= screen__displayedconfigt__workend__first__bit)
+
+axiom screen__displayedconfigt__workend__last__bit_axiom :
+  (screen__displayedconfigt__workend__first__bit <  screen__displayedconfigt__workend__last__bit)
+
+axiom screen__displayedconfigt__workend__position_axiom :
+  (0 <= screen__displayedconfigt__workend__position)
+
+logic screen__displayedconfigt__authduration__first__bit : int
+
+logic screen__displayedconfigt__authduration__last__bit : int
+
+logic screen__displayedconfigt__authduration__position : int
+
+axiom screen__displayedconfigt__authduration__first__bit_axiom :
+  (0 <= screen__displayedconfigt__authduration__first__bit)
+
+axiom screen__displayedconfigt__authduration__last__bit_axiom :
+  (screen__displayedconfigt__authduration__first__bit <  screen__displayedconfigt__authduration__last__bit)
+
+axiom screen__displayedconfigt__authduration__position_axiom :
+  (0 <= screen__displayedconfigt__authduration__position)
+
+logic screen__displayedconfigt__policy__first__bit : int
+
+logic screen__displayedconfigt__policy__last__bit : int
+
+logic screen__displayedconfigt__policy__position : int
+
+axiom screen__displayedconfigt__policy__first__bit_axiom :
+  (0 <= screen__displayedconfigt__policy__first__bit)
+
+axiom screen__displayedconfigt__policy__last__bit_axiom :
+  (screen__displayedconfigt__policy__first__bit <  screen__displayedconfigt__policy__last__bit)
+
+axiom screen__displayedconfigt__policy__position_axiom :
+  (0 <= screen__displayedconfigt__policy__position)
+
+logic screen__displayedconfigt__minpreservedlog__first__bit : int
+
+logic screen__displayedconfigt__minpreservedlog__last__bit : int
+
+logic screen__displayedconfigt__minpreservedlog__position : int
+
+axiom screen__displayedconfigt__minpreservedlog__first__bit_axiom :
+  (0 <= screen__displayedconfigt__minpreservedlog__first__bit)
+
+axiom screen__displayedconfigt__minpreservedlog__last__bit_axiom :
+  (screen__displayedconfigt__minpreservedlog__first__bit <  screen__displayedconfigt__minpreservedlog__last__bit)
+
+axiom screen__displayedconfigt__minpreservedlog__position_axiom :
+  (0 <= screen__displayedconfigt__minpreservedlog__position)
+
+logic screen__displayedconfigt__alarmthreshold__first__bit : int
+
+logic screen__displayedconfigt__alarmthreshold__last__bit : int
+
+logic screen__displayedconfigt__alarmthreshold__position : int
+
+axiom screen__displayedconfigt__alarmthreshold__first__bit_axiom :
+  (0 <= screen__displayedconfigt__alarmthreshold__first__bit)
+
+axiom screen__displayedconfigt__alarmthreshold__last__bit_axiom :
+  (screen__displayedconfigt__alarmthreshold__first__bit <  screen__displayedconfigt__alarmthreshold__last__bit)
+
+axiom screen__displayedconfigt__alarmthreshold__position_axiom :
+  (0 <= screen__displayedconfigt__alarmthreshold__position)
+
+logic screen__displayedconfigt__minentry__first__bit : int
+
+logic screen__displayedconfigt__minentry__last__bit : int
+
+logic screen__displayedconfigt__minentry__position : int
+
+axiom screen__displayedconfigt__minentry__first__bit_axiom :
+  (0 <= screen__displayedconfigt__minentry__first__bit)
+
+axiom screen__displayedconfigt__minentry__last__bit_axiom :
+  (screen__displayedconfigt__minentry__first__bit <  screen__displayedconfigt__minentry__last__bit)
+
+axiom screen__displayedconfigt__minentry__position_axiom :
+  (0 <= screen__displayedconfigt__minentry__position)
+
+logic screen__displayedconfigt__clearance__first__bit : int
+
+logic screen__displayedconfigt__clearance__last__bit : int
+
+logic screen__displayedconfigt__clearance__position : int
+
+axiom screen__displayedconfigt__clearance__first__bit_axiom :
+  (0 <= screen__displayedconfigt__clearance__first__bit)
+
+axiom screen__displayedconfigt__clearance__last__bit_axiom :
+  (screen__displayedconfigt__clearance__first__bit <  screen__displayedconfigt__clearance__last__bit)
+
+axiom screen__displayedconfigt__clearance__position_axiom :
+  (0 <= screen__displayedconfigt__clearance__position)
+
+logic screen__displayedconfigt__maxfar__first__bit : int
+
+logic screen__displayedconfigt__maxfar__last__bit : int
+
+logic screen__displayedconfigt__maxfar__position : int
+
+axiom screen__displayedconfigt__maxfar__first__bit_axiom :
+  (0 <= screen__displayedconfigt__maxfar__first__bit)
+
+axiom screen__displayedconfigt__maxfar__last__bit_axiom :
+  (screen__displayedconfigt__maxfar__first__bit <  screen__displayedconfigt__maxfar__last__bit)
+
+axiom screen__displayedconfigt__maxfar__position_axiom :
+  (0 <= screen__displayedconfigt__maxfar__position)
+
+logic user_eq11 : us_rep, us_rep -> bool
+
+logic dummy12 : durationt
+
+logic dummy13 : durationt
+
+logic dummy14 : durationt
+
+logic dummy15 : durationt
+
+logic dummy16 : durationt
+
+logic dummy17 : durationt
+
+logic dummy18 : durationt
+
+logic dummy19 : accesspolicyt
+
+logic dummy20 : filesizet
+
+logic dummy21 : filesizet
+
+logic dummy22 : classt
+
+logic dummy23 : classt
+
+logic dummy24 : fart
+
+type displayedconfigt__ref = { displayedconfigt__content : us_rep
+}
+
+function displayedconfigt__ref___projection(a: displayedconfigt__ref) : us_rep =
+  (a).displayedconfigt__content
+
+type us_split_fields2 = { rec__screen__screenconfigt__isdisplayed : bool;
+rec__screen__screenconfigt__data : us_rep
+}
+
+function us_split_fields_IsDisplayed__2__projection(a: us_split_fields2) : bool =
+  (a).rec__screen__screenconfigt__isdisplayed
+
+function us_split_fields_Data__2__projection(a: us_split_fields2) : us_rep =
+  (a).rec__screen__screenconfigt__data
+
+type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
+}
+
+function us_split_fields__ref___13__projection(a: us_split_fields__ref1) : us_split_fields2 =
+  (a).us_split_fields__content1
+
+type us_rep1 = { us_split_fields3 : us_split_fields2
+}
+
+function us_rep___14__projection(a: us_rep1) : us_split_fields2 =
+  (a).us_split_fields3
+
+logic bool_eq15 : us_rep1, us_rep1 -> bool
+
+axiom bool_eq_def13 :
+  (forall a:us_rep1. forall b:us_rep1 [bool_eq15(a, b)].
+  ((((((a).us_split_fields3).rec__screen__screenconfigt__isdisplayed = ((b).us_split_fields3).rec__screen__screenconfigt__isdisplayed) and
+  (bool_eq14(((a).us_split_fields3).rec__screen__screenconfigt__data,
+  ((b).us_split_fields3).rec__screen__screenconfigt__data) = true)) ->
+  (bool_eq15(a, b) = true)) and
+  ((not ((((a).us_split_fields3).rec__screen__screenconfigt__isdisplayed = ((b).us_split_fields3).rec__screen__screenconfigt__isdisplayed) and
+  (bool_eq14(((a).us_split_fields3).rec__screen__screenconfigt__data,
+  ((b).us_split_fields3).rec__screen__screenconfigt__data) = true))) ->
+  (bool_eq15(a, b) = false))))
+
+logic value__size2 : int
+
+logic object__size2 : us_rep1 -> int
+
+logic value__alignment2 : int
+
+logic object__alignment2 : us_rep1 -> int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 :
+  (forall a:bool. forall a1:durationt. forall a2:durationt.
+  forall a3:durationt. forall a4:durationt. forall a5:durationt.
+  forall a6:durationt. forall a7:durationt. forall a8:accesspolicyt.
+  forall a9:filesizet. forall a10:filesizet. forall a11:classt.
+  forall a12:classt. forall a13:fart. (0 <= object__size2({
+  us_split_fields3 = { rec__screen__screenconfigt__isdisplayed = a;
+  rec__screen__screenconfigt__data = { us_split_fields1 = {
+  rec__screen__displayedconfigt__latchunlock = a1;
+  rec__screen__displayedconfigt__alarmsilent = a2;
+  rec__screen__displayedconfigt__fingerwait = a3;
+  rec__screen__displayedconfigt__tokenremove = a4;
+  rec__screen__displayedconfigt__workstart = a5;
+  rec__screen__displayedconfigt__workend = a6;
+  rec__screen__displayedconfigt__authduration = a7;
+  rec__screen__displayedconfigt__policy = a8;
+  rec__screen__displayedconfigt__minpreservedlog = a9;
+  rec__screen__displayedconfigt__alarmthreshold = a10;
+  rec__screen__displayedconfigt__minentry = a11;
+  rec__screen__displayedconfigt__clearance = a12;
+  rec__screen__displayedconfigt__maxfar = a13 } } } })))
+
+axiom value__alignment_axiom2 : (0 <= value__alignment2)
+
+axiom object__alignment_axiom2 :
+  (forall a:bool. forall a1:durationt. forall a2:durationt.
+  forall a3:durationt. forall a4:durationt. forall a5:durationt.
+  forall a6:durationt. forall a7:durationt. forall a8:accesspolicyt.
+  forall a9:filesizet. forall a10:filesizet. forall a11:classt.
+  forall a12:classt. forall a13:fart. (0 <= object__alignment2({
+  us_split_fields3 = { rec__screen__screenconfigt__isdisplayed = a;
+  rec__screen__screenconfigt__data = { us_split_fields1 = {
+  rec__screen__displayedconfigt__latchunlock = a1;
+  rec__screen__displayedconfigt__alarmsilent = a2;
+  rec__screen__displayedconfigt__fingerwait = a3;
+  rec__screen__displayedconfigt__tokenremove = a4;
+  rec__screen__displayedconfigt__workstart = a5;
+  rec__screen__displayedconfigt__workend = a6;
+  rec__screen__displayedconfigt__authduration = a7;
+  rec__screen__displayedconfigt__policy = a8;
+  rec__screen__displayedconfigt__minpreservedlog = a9;
+  rec__screen__displayedconfigt__alarmthreshold = a10;
+  rec__screen__displayedconfigt__minentry = a11;
+  rec__screen__displayedconfigt__clearance = a12;
+  rec__screen__displayedconfigt__maxfar = a13 } } } })))
+
+logic screen__screenconfigt__isdisplayed__first__bit : int
+
+logic screen__screenconfigt__isdisplayed__last__bit : int
+
+logic screen__screenconfigt__isdisplayed__position : int
+
+axiom screen__screenconfigt__isdisplayed__first__bit_axiom :
+  (0 <= screen__screenconfigt__isdisplayed__first__bit)
+
+axiom screen__screenconfigt__isdisplayed__last__bit_axiom :
+  (screen__screenconfigt__isdisplayed__first__bit <  screen__screenconfigt__isdisplayed__last__bit)
+
+axiom screen__screenconfigt__isdisplayed__position_axiom :
+  (0 <= screen__screenconfigt__isdisplayed__position)
+
+logic screen__screenconfigt__data__first__bit : int
+
+logic screen__screenconfigt__data__last__bit : int
+
+logic screen__screenconfigt__data__position : int
+
+axiom screen__screenconfigt__data__first__bit_axiom :
+  (0 <= screen__screenconfigt__data__first__bit)
+
+axiom screen__screenconfigt__data__last__bit_axiom :
+  (screen__screenconfigt__data__first__bit <  screen__screenconfigt__data__last__bit)
+
+axiom screen__screenconfigt__data__position_axiom :
+  (0 <= screen__screenconfigt__data__position)
+
+logic user_eq12 : us_rep1, us_rep1 -> bool
+
+logic dummy25 : bool
+
+logic dummy26 : durationt
+
+logic dummy27 : durationt
+
+logic dummy28 : durationt
+
+logic dummy29 : durationt
+
+logic dummy30 : durationt
+
+logic dummy31 : durationt
+
+logic dummy32 : durationt
+
+logic dummy33 : accesspolicyt
+
+logic dummy34 : filesizet
+
+logic dummy35 : filesizet
+
+logic dummy36 : classt
+
+logic dummy37 : classt
+
+logic dummy38 : fart
+
+type screenconfigt__ref = { screenconfigt__content : us_rep1
+}
+
+function screenconfigt__ref___projection(a: screenconfigt__ref) : us_rep1 =
+  (a).screenconfigt__content
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+type screenxcoordt
+
+predicate in_range11(x: int) = ((0 <= x) and (x <= 79))
+
+logic bool_eq16 : int, int -> bool
+
+axiom bool_eq_def14 :
+  (forall x:int. forall y:int [bool_eq16(x, y)]. (((x = y) -> (bool_eq16(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq16(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE11 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check11 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE11 : us_image -> int
+
+logic user_eq13 : screenxcoordt, screenxcoordt -> bool
+
+logic dummy39 : screenxcoordt
+
+type screenxcoordt__ref = { screenxcoordt__content : screenxcoordt
+}
+
+function screenxcoordt__ref___projection(a: screenxcoordt__ref) : screenxcoordt =
+  (a).screenxcoordt__content
+
+logic to_rep7 : screenxcoordt -> int
+
+logic of_rep7 : int -> screenxcoordt
+
+axiom inversion_axiom7 :
+  (forall x:screenxcoordt [to_rep7(x)]. (of_rep7(to_rep7(x)) = x))
+
+axiom range_axiom7 :
+  (forall x:screenxcoordt [to_rep7(x)]. in_range11(to_rep7(x)))
+
+axiom coerce_axiom7 :
+  (forall x:int [to_rep7(of_rep7(x))]. (in_range11(x) ->
+  (to_rep7(of_rep7(x)) = x)))
+
+type screenycoordt
+
+predicate in_range12(x: int) = ((0 <= x) and (x <= 29))
+
+logic bool_eq17 : int, int -> bool
+
+axiom bool_eq_def15 :
+  (forall x:int. forall y:int [bool_eq17(x, y)]. (((x = y) -> (bool_eq17(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq17(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE12 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check12 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE12 : us_image -> int
+
+logic user_eq14 : screenycoordt, screenycoordt -> bool
+
+logic dummy40 : screenycoordt
+
+type screenycoordt__ref = { screenycoordt__content : screenycoordt
+}
+
+function screenycoordt__ref___projection(a: screenycoordt__ref) : screenycoordt =
+  (a).screenycoordt__content
+
+logic to_rep8 : screenycoordt -> int
+
+logic of_rep8 : int -> screenycoordt
+
+axiom inversion_axiom8 :
+  (forall x:screenycoordt [to_rep8(x)]. (of_rep8(to_rep8(x)) = x))
+
+axiom range_axiom8 :
+  (forall x:screenycoordt [to_rep8(x)]. in_range12(to_rep8(x)))
+
+axiom coerce_axiom8 :
+  (forall x:int [to_rep8(of_rep8(x))]. (in_range12(x) ->
+  (to_rep8(of_rep8(x)) = x)))
+
+type us_split_fields4 = { rec__screen__interfac__xycoordt__x : screenxcoordt;
+rec__screen__interfac__xycoordt__y : screenycoordt
+}
+
+function us_split_fields_X__projection(a: us_split_fields4) : screenxcoordt =
+  (a).rec__screen__interfac__xycoordt__x
+
+function us_split_fields_Y__projection(a: us_split_fields4) : screenycoordt =
+  (a).rec__screen__interfac__xycoordt__y
+
+type us_split_fields__ref2 = { us_split_fields__content2 : us_split_fields4
+}
+
+function us_split_fields__ref___10__projection(a: us_split_fields__ref2) : us_split_fields4 =
+  (a).us_split_fields__content2
+
+type us_rep2 = { us_split_fields5 : us_split_fields4
+}
+
+function us_rep___11__projection(a: us_rep2) : us_split_fields4 =
+  (a).us_split_fields5
+
+logic bool_eq18 : us_rep2, us_rep2 -> bool
+
+axiom bool_eq_def16 :
+  (forall a:us_rep2. forall b:us_rep2 [bool_eq18(a, b)].
+  ((((to_rep7(((a).us_split_fields5).rec__screen__interfac__xycoordt__x) = to_rep7(((b).us_split_fields5).rec__screen__interfac__xycoordt__x)) and
+  (to_rep8(((a).us_split_fields5).rec__screen__interfac__xycoordt__y) = to_rep8(((b).us_split_fields5).rec__screen__interfac__xycoordt__y))) ->
+  (bool_eq18(a, b) = true)) and
+  ((not ((to_rep7(((a).us_split_fields5).rec__screen__interfac__xycoordt__x) = to_rep7(((b).us_split_fields5).rec__screen__interfac__xycoordt__x)) and
+  (to_rep8(((a).us_split_fields5).rec__screen__interfac__xycoordt__y) = to_rep8(((b).us_split_fields5).rec__screen__interfac__xycoordt__y)))) ->
+  (bool_eq18(a, b) = false))))
+
+logic value__size3 : int
+
+logic object__size3 : us_rep2 -> int
+
+logic value__alignment3 : int
+
+logic object__alignment3 : us_rep2 -> int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 :
+  (forall a:screenxcoordt. forall a1:screenycoordt. (0 <= object__size3({
+  us_split_fields5 = { rec__screen__interfac__xycoordt__x = a;
+  rec__screen__interfac__xycoordt__y = a1 } })))
+
+axiom value__alignment_axiom3 : (0 <= value__alignment3)
+
+axiom object__alignment_axiom3 :
+  (forall a:screenxcoordt. forall a1:screenycoordt.
+  (0 <= object__alignment3({ us_split_fields5 = {
+  rec__screen__interfac__xycoordt__x = a;
+  rec__screen__interfac__xycoordt__y = a1 } })))
+
+logic screen__interfac__xycoordt__x__first__bit : int
+
+logic screen__interfac__xycoordt__x__last__bit : int
+
+logic screen__interfac__xycoordt__x__position : int
+
+axiom screen__interfac__xycoordt__x__first__bit_axiom :
+  (0 <= screen__interfac__xycoordt__x__first__bit)
+
+axiom screen__interfac__xycoordt__x__last__bit_axiom :
+  (screen__interfac__xycoordt__x__first__bit <  screen__interfac__xycoordt__x__last__bit)
+
+axiom screen__interfac__xycoordt__x__position_axiom :
+  (0 <= screen__interfac__xycoordt__x__position)
+
+logic screen__interfac__xycoordt__y__first__bit : int
+
+logic screen__interfac__xycoordt__y__last__bit : int
+
+logic screen__interfac__xycoordt__y__position : int
+
+axiom screen__interfac__xycoordt__y__first__bit_axiom :
+  (0 <= screen__interfac__xycoordt__y__first__bit)
+
+axiom screen__interfac__xycoordt__y__last__bit_axiom :
+  (screen__interfac__xycoordt__y__first__bit <  screen__interfac__xycoordt__y__last__bit)
+
+axiom screen__interfac__xycoordt__y__position_axiom :
+  (0 <= screen__interfac__xycoordt__y__position)
+
+logic user_eq15 : us_rep2, us_rep2 -> bool
+
+logic dummy41 : screenxcoordt
+
+logic dummy42 : screenycoordt
+
+type xycoordt__ref = { xycoordt__content : us_rep2
+}
+
+function xycoordt__ref___projection(a: xycoordt__ref) : us_rep2 =
+  (a).xycoordt__content
+
+type secondsstringi
+
+predicate in_range13(x: int) = ((1 <= x) and (x <= 7))
+
+logic bool_eq19 : int, int -> bool
+
+axiom bool_eq_def17 :
+  (forall x:int. forall y:int [bool_eq19(x, y)]. (((x = y) -> (bool_eq19(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq19(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE13 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check13 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE13 : us_image -> int
+
+logic user_eq16 : secondsstringi, secondsstringi -> bool
+
+logic dummy43 : secondsstringi
+
+type secondsstringi__ref = { secondsstringi__content : secondsstringi
+}
+
+function secondsstringi__ref___projection(a: secondsstringi__ref) : secondsstringi =
+  (a).secondsstringi__content
+
+type classstringi
+
+predicate in_range14(x: int) = ((1 <= x) and (x <= 12))
+
+logic bool_eq20 : int, int -> bool
+
+axiom bool_eq_def18 :
+  (forall x:int. forall y:int [bool_eq20(x, y)]. (((x = y) -> (bool_eq20(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq20(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE14 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check14 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE14 : us_image -> int
+
+logic user_eq17 : classstringi, classstringi -> bool
+
+logic dummy44 : classstringi
+
+type classstringi__ref = { classstringi__content : classstringi
+}
+
+function classstringi__ref___projection(a: classstringi__ref) : classstringi =
+  (a).classstringi__content
+
+type filesizestringi
+
+predicate in_range15(x: int) = ((1 <= x) and (x <= 15))
+
+logic bool_eq21 : int, int -> bool
+
+axiom bool_eq_def19 :
+  (forall x:int. forall y:int [bool_eq21(x, y)]. (((x = y) -> (bool_eq21(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq21(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE15 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check15 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE15 : us_image -> int
+
+logic user_eq18 : filesizestringi, filesizestringi -> bool
+
+logic dummy45 : filesizestringi
+
+type filesizestringi__ref = { filesizestringi__content : filesizestringi
+}
+
+function filesizestringi__ref___projection(a: filesizestringi__ref) : filesizestringi =
+  (a).filesizestringi__content
+
+type accesspolicystringi
+
+predicate in_range16(x: int) = ((1 <= x) and (x <= 12))
+
+logic bool_eq22 : int, int -> bool
+
+axiom bool_eq_def20 :
+  (forall x:int. forall y:int [bool_eq22(x, y)]. (((x = y) -> (bool_eq22(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq22(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE16 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check16 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE16 : us_image -> int
+
+logic user_eq19 : accesspolicystringi, accesspolicystringi -> bool
+
+logic dummy46 : accesspolicystringi
+
+type accesspolicystringi__ref = { accesspolicystringi__content :
+accesspolicystringi
+}
+
+function accesspolicystringi__ref___projection(a: accesspolicystringi__ref) : accesspolicystringi =
+  (a).accesspolicystringi__content
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
+logic attr__ATTRIBUTE_ADDRESS6 : int
+
+logic attr__ATTRIBUTE_ADDRESS7 : int
+
+logic attr__ATTRIBUTE_ADDRESS8 : int
+
+logic attr__ATTRIBUTE_ADDRESS9 : int
+
+logic attr__ATTRIBUTE_ADDRESS10 : int
+
+logic attr__ATTRIBUTE_ADDRESS11 : int
+
+logic attr__ATTRIBUTE_ADDRESS12 : int
+
+logic attr__ATTRIBUTE_ADDRESS13 : int
+
+logic attr__ATTRIBUTE_ADDRESS14 : int
+
+logic attr__ATTRIBUTE_ADDRESS15 : int
+
+logic attr__ATTRIBUTE_ADDRESS16 : int
+
+logic column1 : int
+
+logic attr__ATTRIBUTE_ADDRESS17 : int
+
+logic column2 : int
+
+logic attr__ATTRIBUTE_ADDRESS18 : int
+
+logic row1 : int
+
+logic attr__ATTRIBUTE_ADDRESS19 : int
+
+logic row2 : int
+
+logic attr__ATTRIBUTE_ADDRESS20 : int
+
+logic row3 : int
+
+logic attr__ATTRIBUTE_ADDRESS21 : int
+
+logic row4 : int
+
+logic attr__ATTRIBUTE_ADDRESS22 : int
+
+logic row5 : int
+
+logic attr__ATTRIBUTE_ADDRESS23 : int
+
+logic row6 : int
+
+logic attr__ATTRIBUTE_ADDRESS24 : int
+
+logic row7 : int
+
+logic attr__ATTRIBUTE_ADDRESS25 : int
+
+logic c111b : int
+
+logic attr__ATTRIBUTE_ADDRESS26 : int
+
+logic attr__ATTRIBUTE_ADDRESS27 : int
+
+logic attr__ATTRIBUTE_ADDRESS28 : int
+
+logic valuestr__first : integer
+
+logic valuestr__last : integer
+
+logic attr__ATTRIBUTE_ADDRESS29 : int
+
+predicate dynamic_property1(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq23 : int, int -> bool
+
+axiom bool_eq_def21 :
+  (forall x:int. forall y:int [bool_eq23(x, y)]. (((x = y) -> (bool_eq23(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq23(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE17 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check17 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE17 : us_image -> int
+
+logic user_eq20 : integer, integer -> bool
+
+logic dummy47 : integer
+
+type t116b__ref = { t116b__content : integer
+}
+
+function t116b__ref___projection(a: t116b__ref) : integer =
+  (a).t116b__content
+
+type t1
+
+logic first2 : t1 -> integer
+
+logic last2 : t1 -> integer
+
+logic mk1 : int, int -> t1
+
+axiom mk_def1 :
+  (forall f:int. forall l:int [mk1(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep1(first2(mk1(f, l))) = f) and (to_rep1(last2(mk1(f, l))) = l)))))
+
+predicate dynamic_property2(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property1(range_first, range_last, low) and
+  dynamic_property1(range_first, range_last, high)))))
+
+type us_t1 = { elts1 : (int,character) farray; rt1 : t1
+}
+
+function to_array1(a: us_t1) : (int,character) farray = (a).elts1
+
+function of_array1(a: (int,character) farray, f: int, l: int) : us_t1 = {
+  elts1 = a; rt1 = mk1(f, l) }
+
+function first3(a: us_t1) : int = to_rep1(first2((a).rt1))
+
+function last3(a: us_t1) : int = to_rep1(last2((a).rt1))
+
+logic length1 : us_t1 -> int
+
+axiom length_def1 :
+  (forall a:us_t1 [length1(a)]. (((first3(a) <= last3(a)) ->
+  (length1(a) = ((last3(a) - first3(a)) + 1))) and
+  ((not (first3(a) <= last3(a))) -> (length1(a) = 0))))
+
+logic value__size4 : int
+
+logic object__size4 : (int,character) farray -> int
+
+logic value__component__size1 : int
+
+logic object__component__size1 : (int,character) farray -> int
+
+logic value__alignment4 : int
+
+logic object__alignment4 : (int,character) farray -> int
+
+axiom value__size_axiom4 : (0 <= value__size4)
+
+axiom object__size_axiom4 :
+  (forall a:(int,character) farray. (0 <= object__size4(a)))
+
+axiom value__component__size_axiom1 : (0 <= value__component__size1)
+
+axiom object__component__size_axiom1 :
+  (forall a:(int,character) farray. (0 <= object__component__size1(a)))
+
+axiom value__alignment_axiom4 : (0 <= value__alignment4)
+
+axiom object__alignment_axiom4 :
+  (forall a:(int,character) farray. (0 <= object__alignment4(a)))
+
+function bool_eq24(x: us_t1, y: us_t1) : bool = bool_eq5((x).elts1,
+  to_rep1(first2((x).rt1)), to_rep1(last2((x).rt1)), (y).elts1,
+  to_rep1(first2((y).rt1)), to_rep1(last2((y).rt1)))
+
+logic user_eq21 : us_t1, us_t1 -> bool
+
+logic dummy48 : (int,character) farray
+
+logic dummy49 : t1
+
+type t117b__ref = { t117b__content : us_t1
+}
+
+function t117b__ref___projection(a: t117b__ref) : us_t1 = (a).t117b__content
+
+predicate dynamic_property3(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq25 : int, int -> bool
+
+axiom bool_eq_def22 :
+  (forall x:int. forall y:int [bool_eq25(x, y)]. (((x = y) -> (bool_eq25(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq25(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE18 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check18 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE18 : us_image -> int
+
+logic user_eq22 : integer, integer -> bool
+
+logic dummy50 : integer
+
+type t119b__ref = { t119b__content : integer
+}
+
+function t119b__ref___projection(a: t119b__ref) : integer =
+  (a).t119b__content
+
+type t2
+
+logic first4 : t2 -> integer
+
+logic last4 : t2 -> integer
+
+logic mk2 : int, int -> t2
+
+axiom mk_def2 :
+  (forall f:int. forall l:int [mk2(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep1(first4(mk2(f, l))) = f) and (to_rep1(last4(mk2(f, l))) = l)))))
+
+predicate dynamic_property4(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property3(range_first, range_last, low) and
+  dynamic_property3(range_first, range_last, high)))))
+
+type us_t2 = { elts2 : (int,character) farray; rt2 : t2
+}
+
+function to_array2(a: us_t2) : (int,character) farray = (a).elts2
+
+function of_array2(a: (int,character) farray, f: int, l: int) : us_t2 = {
+  elts2 = a; rt2 = mk2(f, l) }
+
+function first5(a: us_t2) : int = to_rep1(first4((a).rt2))
+
+function last5(a: us_t2) : int = to_rep1(last4((a).rt2))
+
+logic length2 : us_t2 -> int
+
+axiom length_def2 :
+  (forall a:us_t2 [length2(a)]. (((first5(a) <= last5(a)) ->
+  (length2(a) = ((last5(a) - first5(a)) + 1))) and
+  ((not (first5(a) <= last5(a))) -> (length2(a) = 0))))
+
+logic value__size5 : int
+
+logic object__size5 : (int,character) farray -> int
+
+logic value__component__size2 : int
+
+logic object__component__size2 : (int,character) farray -> int
+
+logic value__alignment5 : int
+
+logic object__alignment5 : (int,character) farray -> int
+
+axiom value__size_axiom5 : (0 <= value__size5)
+
+axiom object__size_axiom5 :
+  (forall a:(int,character) farray. (0 <= object__size5(a)))
+
+axiom value__component__size_axiom2 : (0 <= value__component__size2)
+
+axiom object__component__size_axiom2 :
+  (forall a:(int,character) farray. (0 <= object__component__size2(a)))
+
+axiom value__alignment_axiom5 : (0 <= value__alignment5)
+
+axiom object__alignment_axiom5 :
+  (forall a:(int,character) farray. (0 <= object__alignment5(a)))
+
+function bool_eq26(x: us_t2, y: us_t2) : bool = bool_eq5((x).elts2,
+  to_rep1(first4((x).rt2)), to_rep1(last4((x).rt2)), (y).elts2,
+  to_rep1(first4((y).rt2)), to_rep1(last4((y).rt2)))
+
+logic user_eq23 : us_t2, us_t2 -> bool
+
+logic dummy51 : (int,character) farray
+
+logic dummy52 : t2
+
+type t120b__ref = { t120b__content : us_t2
+}
+
+function t120b__ref___projection(a: t120b__ref) : us_t2 = (a).t120b__content
+
+logic c121b : int
+
+logic attr__ATTRIBUTE_ADDRESS30 : int
+
+logic attr__ATTRIBUTE_ADDRESS31 : int
+
+logic attr__ATTRIBUTE_ADDRESS32 : int
+
+logic valuestr__first1 : integer
+
+logic valuestr__last1 : integer
+
+logic attr__ATTRIBUTE_ADDRESS33 : int
+
+predicate dynamic_property5(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq27 : int, int -> bool
+
+axiom bool_eq_def23 :
+  (forall x:int. forall y:int [bool_eq27(x, y)]. (((x = y) -> (bool_eq27(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq27(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE19 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check19 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE19 : us_image -> int
+
+logic user_eq24 : integer, integer -> bool
+
+logic dummy53 : integer
+
+type t126b__ref = { t126b__content : integer
+}
+
+function t126b__ref___projection(a: t126b__ref) : integer =
+  (a).t126b__content
+
+type t3
+
+logic first6 : t3 -> integer
+
+logic last6 : t3 -> integer
+
+logic mk3 : int, int -> t3
+
+axiom mk_def3 :
+  (forall f:int. forall l:int [mk3(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep1(first6(mk3(f, l))) = f) and (to_rep1(last6(mk3(f, l))) = l)))))
+
+predicate dynamic_property6(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property5(range_first, range_last, low) and
+  dynamic_property5(range_first, range_last, high)))))
+
+type us_t3 = { elts3 : (int,character) farray; rt3 : t3
+}
+
+function to_array3(a: us_t3) : (int,character) farray = (a).elts3
+
+function of_array3(a: (int,character) farray, f: int, l: int) : us_t3 = {
+  elts3 = a; rt3 = mk3(f, l) }
+
+function first7(a: us_t3) : int = to_rep1(first6((a).rt3))
+
+function last7(a: us_t3) : int = to_rep1(last6((a).rt3))
+
+logic length3 : us_t3 -> int
+
+axiom length_def3 :
+  (forall a:us_t3 [length3(a)]. (((first7(a) <= last7(a)) ->
+  (length3(a) = ((last7(a) - first7(a)) + 1))) and
+  ((not (first7(a) <= last7(a))) -> (length3(a) = 0))))
+
+logic value__size6 : int
+
+logic object__size6 : (int,character) farray -> int
+
+logic value__component__size3 : int
+
+logic object__component__size3 : (int,character) farray -> int
+
+logic value__alignment6 : int
+
+logic object__alignment6 : (int,character) farray -> int
+
+axiom value__size_axiom6 : (0 <= value__size6)
+
+axiom object__size_axiom6 :
+  (forall a:(int,character) farray. (0 <= object__size6(a)))
+
+axiom value__component__size_axiom3 : (0 <= value__component__size3)
+
+axiom object__component__size_axiom3 :
+  (forall a:(int,character) farray. (0 <= object__component__size3(a)))
+
+axiom value__alignment_axiom6 : (0 <= value__alignment6)
+
+axiom object__alignment_axiom6 :
+  (forall a:(int,character) farray. (0 <= object__alignment6(a)))
+
+function bool_eq28(x: us_t3, y: us_t3) : bool = bool_eq5((x).elts3,
+  to_rep1(first6((x).rt3)), to_rep1(last6((x).rt3)), (y).elts3,
+  to_rep1(first6((y).rt3)), to_rep1(last6((y).rt3)))
+
+logic user_eq25 : us_t3, us_t3 -> bool
+
+logic dummy54 : (int,character) farray
+
+logic dummy55 : t3
+
+type t127b__ref = { t127b__content : us_t3
+}
+
+function t127b__ref___projection(a: t127b__ref) : us_t3 = (a).t127b__content
+
+predicate dynamic_property7(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq29 : int, int -> bool
+
+axiom bool_eq_def24 :
+  (forall x:int. forall y:int [bool_eq29(x, y)]. (((x = y) -> (bool_eq29(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq29(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE20 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check20 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE20 : us_image -> int
+
+logic user_eq26 : integer, integer -> bool
+
+logic dummy56 : integer
+
+type t129b__ref = { t129b__content : integer
+}
+
+function t129b__ref___projection(a: t129b__ref) : integer =
+  (a).t129b__content
+
+type t4
+
+logic first8 : t4 -> integer
+
+logic last8 : t4 -> integer
+
+logic mk4 : int, int -> t4
+
+axiom mk_def4 :
+  (forall f:int. forall l:int [mk4(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep1(first8(mk4(f, l))) = f) and (to_rep1(last8(mk4(f, l))) = l)))))
+
+predicate dynamic_property8(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property7(range_first, range_last, low) and
+  dynamic_property7(range_first, range_last, high)))))
+
+type us_t4 = { elts4 : (int,character) farray; rt4 : t4
+}
+
+function to_array4(a: us_t4) : (int,character) farray = (a).elts4
+
+function of_array4(a: (int,character) farray, f: int, l: int) : us_t4 = {
+  elts4 = a; rt4 = mk4(f, l) }
+
+function first9(a: us_t4) : int = to_rep1(first8((a).rt4))
+
+function last9(a: us_t4) : int = to_rep1(last8((a).rt4))
+
+logic length4 : us_t4 -> int
+
+axiom length_def4 :
+  (forall a:us_t4 [length4(a)]. (((first9(a) <= last9(a)) ->
+  (length4(a) = ((last9(a) - first9(a)) + 1))) and
+  ((not (first9(a) <= last9(a))) -> (length4(a) = 0))))
+
+logic value__size7 : int
+
+logic object__size7 : (int,character) farray -> int
+
+logic value__component__size4 : int
+
+logic object__component__size4 : (int,character) farray -> int
+
+logic value__alignment7 : int
+
+logic object__alignment7 : (int,character) farray -> int
+
+axiom value__size_axiom7 : (0 <= value__size7)
+
+axiom object__size_axiom7 :
+  (forall a:(int,character) farray. (0 <= object__size7(a)))
+
+axiom value__component__size_axiom4 : (0 <= value__component__size4)
+
+axiom object__component__size_axiom4 :
+  (forall a:(int,character) farray. (0 <= object__component__size4(a)))
+
+axiom value__alignment_axiom7 : (0 <= value__alignment7)
+
+axiom object__alignment_axiom7 :
+  (forall a:(int,character) farray. (0 <= object__alignment7(a)))
+
+function bool_eq30(x: us_t4, y: us_t4) : bool = bool_eq5((x).elts4,
+  to_rep1(first8((x).rt4)), to_rep1(last8((x).rt4)), (y).elts4,
+  to_rep1(first8((y).rt4)), to_rep1(last8((y).rt4)))
+
+logic user_eq27 : us_t4, us_t4 -> bool
+
+logic dummy57 : (int,character) farray
+
+logic dummy58 : t4
+
+type t130b__ref = { t130b__content : us_t4
+}
+
+function t130b__ref___projection(a: t130b__ref) : us_t4 = (a).t130b__content
+
+logic c131b : int
+
+logic attr__ATTRIBUTE_ADDRESS34 : int
+
+logic attr__ATTRIBUTE_ADDRESS35 : int
+
+logic attr__ATTRIBUTE_ADDRESS36 : int
+
+logic valuestr__first2 : integer
+
+logic valuestr__last2 : integer
+
+logic attr__ATTRIBUTE_ADDRESS37 : int
+
+predicate dynamic_property9(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq31 : int, int -> bool
+
+axiom bool_eq_def25 :
+  (forall x:int. forall y:int [bool_eq31(x, y)]. (((x = y) -> (bool_eq31(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq31(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE21 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check21 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE21 : us_image -> int
+
+logic user_eq28 : integer, integer -> bool
+
+logic dummy59 : integer
+
+type t136b__ref = { t136b__content : integer
+}
+
+function t136b__ref___projection(a: t136b__ref) : integer =
+  (a).t136b__content
+
+type t5
+
+logic first10 : t5 -> integer
+
+logic last10 : t5 -> integer
+
+logic mk5 : int, int -> t5
+
+axiom mk_def5 :
+  (forall f:int. forall l:int [mk5(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep1(first10(mk5(f, l))) = f) and (to_rep1(last10(mk5(f, l))) = l)))))
+
+predicate dynamic_property10(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property9(range_first, range_last, low) and
+  dynamic_property9(range_first, range_last, high)))))
+
+type us_t5 = { elts5 : (int,character) farray; rt5 : t5
+}
+
+function to_array5(a: us_t5) : (int,character) farray = (a).elts5
+
+function of_array5(a: (int,character) farray, f: int, l: int) : us_t5 = {
+  elts5 = a; rt5 = mk5(f, l) }
+
+function first11(a: us_t5) : int = to_rep1(first10((a).rt5))
+
+function last11(a: us_t5) : int = to_rep1(last10((a).rt5))
+
+logic length5 : us_t5 -> int
+
+axiom length_def5 :
+  (forall a:us_t5 [length5(a)]. (((first11(a) <= last11(a)) ->
+  (length5(a) = ((last11(a) - first11(a)) + 1))) and
+  ((not (first11(a) <= last11(a))) -> (length5(a) = 0))))
+
+logic value__size8 : int
+
+logic object__size8 : (int,character) farray -> int
+
+logic value__component__size5 : int
+
+logic object__component__size5 : (int,character) farray -> int
+
+logic value__alignment8 : int
+
+logic object__alignment8 : (int,character) farray -> int
+
+axiom value__size_axiom8 : (0 <= value__size8)
+
+axiom object__size_axiom8 :
+  (forall a:(int,character) farray. (0 <= object__size8(a)))
+
+axiom value__component__size_axiom5 : (0 <= value__component__size5)
+
+axiom object__component__size_axiom5 :
+  (forall a:(int,character) farray. (0 <= object__component__size5(a)))
+
+axiom value__alignment_axiom8 : (0 <= value__alignment8)
+
+axiom object__alignment_axiom8 :
+  (forall a:(int,character) farray. (0 <= object__alignment8(a)))
+
+function bool_eq32(x: us_t5, y: us_t5) : bool = bool_eq5((x).elts5,
+  to_rep1(first10((x).rt5)), to_rep1(last10((x).rt5)), (y).elts5,
+  to_rep1(first10((y).rt5)), to_rep1(last10((y).rt5)))
+
+logic user_eq29 : us_t5, us_t5 -> bool
+
+logic dummy60 : (int,character) farray
+
+logic dummy61 : t5
+
+type t137b__ref = { t137b__content : us_t5
+}
+
+function t137b__ref___projection(a: t137b__ref) : us_t5 = (a).t137b__content
+
+predicate dynamic_property11(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq33 : int, int -> bool
+
+axiom bool_eq_def26 :
+  (forall x:int. forall y:int [bool_eq33(x, y)]. (((x = y) -> (bool_eq33(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq33(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE22 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check22 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE22 : us_image -> int
+
+logic user_eq30 : integer, integer -> bool
+
+logic dummy62 : integer
+
+type t139b__ref = { t139b__content : integer
+}
+
+function t139b__ref___projection(a: t139b__ref) : integer =
+  (a).t139b__content
+
+type t6
+
+logic first12 : t6 -> integer
+
+logic last12 : t6 -> integer
+
+logic mk6 : int, int -> t6
+
+axiom mk_def6 :
+  (forall f:int. forall l:int [mk6(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep1(first12(mk6(f, l))) = f) and (to_rep1(last12(mk6(f, l))) = l)))))
+
+predicate dynamic_property12(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property11(range_first, range_last, low) and
+  dynamic_property11(range_first, range_last, high)))))
+
+type us_t6 = { elts6 : (int,character) farray; rt6 : t6
+}
+
+function to_array6(a: us_t6) : (int,character) farray = (a).elts6
+
+function of_array6(a: (int,character) farray, f: int, l: int) : us_t6 = {
+  elts6 = a; rt6 = mk6(f, l) }
+
+function first13(a: us_t6) : int = to_rep1(first12((a).rt6))
+
+function last13(a: us_t6) : int = to_rep1(last12((a).rt6))
+
+logic length6 : us_t6 -> int
+
+axiom length_def6 :
+  (forall a:us_t6 [length6(a)]. (((first13(a) <= last13(a)) ->
+  (length6(a) = ((last13(a) - first13(a)) + 1))) and
+  ((not (first13(a) <= last13(a))) -> (length6(a) = 0))))
+
+logic value__size9 : int
+
+logic object__size9 : (int,character) farray -> int
+
+logic value__component__size6 : int
+
+logic object__component__size6 : (int,character) farray -> int
+
+logic value__alignment9 : int
+
+logic object__alignment9 : (int,character) farray -> int
+
+axiom value__size_axiom9 : (0 <= value__size9)
+
+axiom object__size_axiom9 :
+  (forall a:(int,character) farray. (0 <= object__size9(a)))
+
+axiom value__component__size_axiom6 : (0 <= value__component__size6)
+
+axiom object__component__size_axiom6 :
+  (forall a:(int,character) farray. (0 <= object__component__size6(a)))
+
+axiom value__alignment_axiom9 : (0 <= value__alignment9)
+
+axiom object__alignment_axiom9 :
+  (forall a:(int,character) farray. (0 <= object__alignment9(a)))
+
+function bool_eq34(x: us_t6, y: us_t6) : bool = bool_eq5((x).elts6,
+  to_rep1(first12((x).rt6)), to_rep1(last12((x).rt6)), (y).elts6,
+  to_rep1(first12((y).rt6)), to_rep1(last12((y).rt6)))
+
+logic user_eq31 : us_t6, us_t6 -> bool
+
+logic dummy63 : (int,character) farray
+
+logic dummy64 : t6
+
+type t140b__ref = { t140b__content : us_t6
+}
+
+function t140b__ref___projection(a: t140b__ref) : us_t6 = (a).t140b__content
+
+logic c141b : int
+
+logic attr__ATTRIBUTE_ADDRESS38 : int
+
+logic attr__ATTRIBUTE_ADDRESS39 : int
+
+logic attr__ATTRIBUTE_ADDRESS40 : int
+
+logic valuestr__first3 : integer
+
+logic valuestr__last3 : integer
+
+logic attr__ATTRIBUTE_ADDRESS41 : int
+
+predicate dynamic_property13(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq35 : int, int -> bool
+
+axiom bool_eq_def27 :
+  (forall x:int. forall y:int [bool_eq35(x, y)]. (((x = y) -> (bool_eq35(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq35(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE23 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check23 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE23 : us_image -> int
+
+logic user_eq32 : integer, integer -> bool
+
+logic dummy65 : integer
+
+type t146b__ref = { t146b__content : integer
+}
+
+function t146b__ref___projection(a: t146b__ref) : integer =
+  (a).t146b__content
+
+type t7
+
+logic first14 : t7 -> integer
+
+logic last14 : t7 -> integer
+
+logic mk7 : int, int -> t7
+
+axiom mk_def7 :
+  (forall f:int. forall l:int [mk7(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep1(first14(mk7(f, l))) = f) and (to_rep1(last14(mk7(f, l))) = l)))))
+
+predicate dynamic_property14(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property13(range_first, range_last, low) and
+  dynamic_property13(range_first, range_last, high)))))
+
+type us_t7 = { elts7 : (int,character) farray; rt7 : t7
+}
+
+function to_array7(a: us_t7) : (int,character) farray = (a).elts7
+
+function of_array7(a: (int,character) farray, f: int, l: int) : us_t7 = {
+  elts7 = a; rt7 = mk7(f, l) }
+
+function first15(a: us_t7) : int = to_rep1(first14((a).rt7))
+
+function last15(a: us_t7) : int = to_rep1(last14((a).rt7))
+
+logic length7 : us_t7 -> int
+
+axiom length_def7 :
+  (forall a:us_t7 [length7(a)]. (((first15(a) <= last15(a)) ->
+  (length7(a) = ((last15(a) - first15(a)) + 1))) and
+  ((not (first15(a) <= last15(a))) -> (length7(a) = 0))))
+
+logic value__size10 : int
+
+logic object__size10 : (int,character) farray -> int
+
+logic value__component__size7 : int
+
+logic object__component__size7 : (int,character) farray -> int
+
+logic value__alignment10 : int
+
+logic object__alignment10 : (int,character) farray -> int
+
+axiom value__size_axiom10 : (0 <= value__size10)
+
+axiom object__size_axiom10 :
+  (forall a:(int,character) farray. (0 <= object__size10(a)))
+
+axiom value__component__size_axiom7 : (0 <= value__component__size7)
+
+axiom object__component__size_axiom7 :
+  (forall a:(int,character) farray. (0 <= object__component__size7(a)))
+
+axiom value__alignment_axiom10 : (0 <= value__alignment10)
+
+axiom object__alignment_axiom10 :
+  (forall a:(int,character) farray. (0 <= object__alignment10(a)))
+
+function bool_eq36(x: us_t7, y: us_t7) : bool = bool_eq5((x).elts7,
+  to_rep1(first14((x).rt7)), to_rep1(last14((x).rt7)), (y).elts7,
+  to_rep1(first14((y).rt7)), to_rep1(last14((y).rt7)))
+
+logic user_eq33 : us_t7, us_t7 -> bool
+
+logic dummy66 : (int,character) farray
+
+logic dummy67 : t7
+
+type t147b__ref = { t147b__content : us_t7
+}
+
+function t147b__ref___projection(a: t147b__ref) : us_t7 = (a).t147b__content
+
+predicate dynamic_property15(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq37 : int, int -> bool
+
+axiom bool_eq_def28 :
+  (forall x:int. forall y:int [bool_eq37(x, y)]. (((x = y) -> (bool_eq37(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq37(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE24 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check24 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE24 : us_image -> int
+
+logic user_eq34 : integer, integer -> bool
+
+logic dummy68 : integer
+
+type t149b__ref = { t149b__content : integer
+}
+
+function t149b__ref___projection(a: t149b__ref) : integer =
+  (a).t149b__content
+
+type t8
+
+logic first16 : t8 -> integer
+
+logic last16 : t8 -> integer
+
+logic mk8 : int, int -> t8
+
+axiom mk_def8 :
+  (forall f:int. forall l:int [mk8(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep1(first16(mk8(f, l))) = f) and (to_rep1(last16(mk8(f, l))) = l)))))
+
+predicate dynamic_property16(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property15(range_first, range_last, low) and
+  dynamic_property15(range_first, range_last, high)))))
+
+type us_t8 = { elts8 : (int,character) farray; rt8 : t8
+}
+
+function to_array8(a: us_t8) : (int,character) farray = (a).elts8
+
+function of_array8(a: (int,character) farray, f: int, l: int) : us_t8 = {
+  elts8 = a; rt8 = mk8(f, l) }
+
+function first17(a: us_t8) : int = to_rep1(first16((a).rt8))
+
+function last17(a: us_t8) : int = to_rep1(last16((a).rt8))
+
+logic length8 : us_t8 -> int
+
+axiom length_def8 :
+  (forall a:us_t8 [length8(a)]. (((first17(a) <= last17(a)) ->
+  (length8(a) = ((last17(a) - first17(a)) + 1))) and
+  ((not (first17(a) <= last17(a))) -> (length8(a) = 0))))
+
+logic value__size11 : int
+
+logic object__size11 : (int,character) farray -> int
+
+logic value__component__size8 : int
+
+logic object__component__size8 : (int,character) farray -> int
+
+logic value__alignment11 : int
+
+logic object__alignment11 : (int,character) farray -> int
+
+axiom value__size_axiom11 : (0 <= value__size11)
+
+axiom object__size_axiom11 :
+  (forall a:(int,character) farray. (0 <= object__size11(a)))
+
+axiom value__component__size_axiom8 : (0 <= value__component__size8)
+
+axiom object__component__size_axiom8 :
+  (forall a:(int,character) farray. (0 <= object__component__size8(a)))
+
+axiom value__alignment_axiom11 : (0 <= value__alignment11)
+
+axiom object__alignment_axiom11 :
+  (forall a:(int,character) farray. (0 <= object__alignment11(a)))
+
+function bool_eq38(x: us_t8, y: us_t8) : bool = bool_eq5((x).elts8,
+  to_rep1(first16((x).rt8)), to_rep1(last16((x).rt8)), (y).elts8,
+  to_rep1(first16((y).rt8)), to_rep1(last16((y).rt8)))
+
+logic user_eq35 : us_t8, us_t8 -> bool
+
+logic dummy69 : (int,character) farray
+
+logic dummy70 : t8
+
+type t150b__ref = { t150b__content : us_t8
+}
+
+function t150b__ref___projection(a: t150b__ref) : us_t8 = (a).t150b__content
+
+logic c151b : int
+
+logic attr__ATTRIBUTE_ADDRESS42 : int
+
+logic attr__ATTRIBUTE_ADDRESS43 : int
+
+logic data__first : integer
+
+logic data__last : integer
+
+logic attr__ATTRIBUTE_ADDRESS44 : int
+
+logic attr__ATTRIBUTE_ADDRESS45 : int
+
+predicate dynamic_property17(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq39 : int, int -> bool
+
+axiom bool_eq_def29 :
+  (forall x:int. forall y:int [bool_eq39(x, y)]. (((x = y) -> (bool_eq39(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq39(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE25 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check25 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE25 : us_image -> int
+
+logic user_eq36 : integer, integer -> bool
+
+logic dummy71 : integer
+
+type t157b__ref = { t157b__content : integer
+}
+
+function t157b__ref___projection(a: t157b__ref) : integer =
+  (a).t157b__content
+
+type t9
+
+logic first18 : t9 -> integer
+
+logic last18 : t9 -> integer
+
+logic mk9 : int, int -> t9
+
+axiom mk_def9 :
+  (forall f:int. forall l:int [mk9(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep1(first18(mk9(f, l))) = f) and (to_rep1(last18(mk9(f, l))) = l)))))
+
+predicate dynamic_property18(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property17(range_first, range_last, low) and
+  dynamic_property17(range_first, range_last, high)))))
+
+type us_t9 = { elts9 : (int,character) farray; rt9 : t9
+}
+
+function to_array9(a: us_t9) : (int,character) farray = (a).elts9
+
+function of_array9(a: (int,character) farray, f: int, l: int) : us_t9 = {
+  elts9 = a; rt9 = mk9(f, l) }
+
+function first19(a: us_t9) : int = to_rep1(first18((a).rt9))
+
+function last19(a: us_t9) : int = to_rep1(last18((a).rt9))
+
+logic length9 : us_t9 -> int
+
+axiom length_def9 :
+  (forall a:us_t9 [length9(a)]. (((first19(a) <= last19(a)) ->
+  (length9(a) = ((last19(a) - first19(a)) + 1))) and
+  ((not (first19(a) <= last19(a))) -> (length9(a) = 0))))
+
+logic value__size12 : int
+
+logic object__size12 : (int,character) farray -> int
+
+logic value__component__size9 : int
+
+logic object__component__size9 : (int,character) farray -> int
+
+logic value__alignment12 : int
+
+logic object__alignment12 : (int,character) farray -> int
+
+axiom value__size_axiom12 : (0 <= value__size12)
+
+axiom object__size_axiom12 :
+  (forall a:(int,character) farray. (0 <= object__size12(a)))
+
+axiom value__component__size_axiom9 : (0 <= value__component__size9)
+
+axiom object__component__size_axiom9 :
+  (forall a:(int,character) farray. (0 <= object__component__size9(a)))
+
+axiom value__alignment_axiom12 : (0 <= value__alignment12)
+
+axiom object__alignment_axiom12 :
+  (forall a:(int,character) farray. (0 <= object__alignment12(a)))
+
+function bool_eq40(x: us_t9, y: us_t9) : bool = bool_eq5((x).elts9,
+  to_rep1(first18((x).rt9)), to_rep1(last18((x).rt9)), (y).elts9,
+  to_rep1(first18((y).rt9)), to_rep1(last18((y).rt9)))
+
+logic user_eq37 : us_t9, us_t9 -> bool
+
+logic dummy72 : (int,character) farray
+
+logic dummy73 : t9
+
+type t158b__ref = { t158b__content : us_t9
+}
+
+function t158b__ref___projection(a: t158b__ref) : us_t9 = (a).t158b__content
+
+logic c159b : int
+
+logic attr__ATTRIBUTE_ADDRESS46 : int
+
+type t163b
+
+predicate in_range17(x: int) = ((1 <= x) and (x <= 5))
+
+logic bool_eq41 : int, int -> bool
+
+axiom bool_eq_def30 :
+  (forall x:int. forall y:int [bool_eq41(x, y)]. (((x = y) -> (bool_eq41(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq41(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE26 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check26 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE26 : us_image -> int
+
+logic user_eq38 : t163b, t163b -> bool
+
+logic dummy74 : t163b
+
+type t163b__ref = { t163b__content : t163b
+}
+
+function t163b__ref___projection(a: t163b__ref) : t163b = (a).t163b__content
+
+logic c165b : int
+
+logic attr__ATTRIBUTE_ADDRESS47 : int
+
+type t169b
+
+predicate in_range18(x: int) = ((1 <= x) and (x <= 5))
+
+logic bool_eq42 : int, int -> bool
+
+axiom bool_eq_def31 :
+  (forall x:int. forall y:int [bool_eq42(x, y)]. (((x = y) -> (bool_eq42(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq42(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE27 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check27 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE27 : us_image -> int
+
+logic user_eq39 : t169b, t169b -> bool
+
+logic dummy75 : t169b
+
+type t169b__ref = { t169b__content : t169b
+}
+
+function t169b__ref___projection(a: t169b__ref) : t169b = (a).t169b__content
+
+logic c171b : int
+
+logic attr__ATTRIBUTE_ADDRESS48 : int
+
+type t175b
+
+predicate in_range19(x: int) = ((1 <= x) and (x <= 5))
+
+logic bool_eq43 : int, int -> bool
+
+axiom bool_eq_def32 :
+  (forall x:int. forall y:int [bool_eq43(x, y)]. (((x = y) -> (bool_eq43(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq43(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE28 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check28 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE28 : us_image -> int
+
+logic user_eq40 : t175b, t175b -> bool
+
+logic dummy76 : t175b
+
+type t175b__ref = { t175b__content : t175b
+}
+
+function t175b__ref___projection(a: t175b__ref) : t175b = (a).t175b__content
+
+logic c177b : int
+
+logic attr__ATTRIBUTE_ADDRESS49 : int
+
+logic attr__ATTRIBUTE_ADDRESS50 : int
+
+logic data__first1 : integer
+
+logic data__last1 : integer
+
+logic attr__ATTRIBUTE_ADDRESS51 : int
+
+logic attr__ATTRIBUTE_ADDRESS52 : int
+
+predicate dynamic_property19(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq44 : int, int -> bool
+
+axiom bool_eq_def33 :
+  (forall x:int. forall y:int [bool_eq44(x, y)]. (((x = y) -> (bool_eq44(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq44(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE29 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check29 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE29 : us_image -> int
+
+logic user_eq41 : integer, integer -> bool
+
+logic dummy77 : integer
+
+type t183b__ref = { t183b__content : integer
+}
+
+function t183b__ref___projection(a: t183b__ref) : integer =
+  (a).t183b__content
+
+type t10
+
+logic first20 : t10 -> integer
+
+logic last20 : t10 -> integer
+
+logic mk10 : int, int -> t10
+
+axiom mk_def10 :
+  (forall f:int. forall l:int [mk10(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep1(first20(mk10(f, l))) = f) and (to_rep1(last20(mk10(f,
+  l))) = l)))))
+
+predicate dynamic_property20(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property19(range_first, range_last, low) and
+  dynamic_property19(range_first, range_last, high)))))
+
+type us_t10 = { elts10 : (int,character) farray; rt10 : t10
+}
+
+function to_array10(a: us_t10) : (int,character) farray = (a).elts10
+
+function of_array10(a: (int,character) farray, f: int, l: int) : us_t10 = {
+  elts10 = a; rt10 = mk10(f, l) }
+
+function first21(a: us_t10) : int = to_rep1(first20((a).rt10))
+
+function last21(a: us_t10) : int = to_rep1(last20((a).rt10))
+
+logic length10 : us_t10 -> int
+
+axiom length_def10 :
+  (forall a:us_t10 [length10(a)]. (((first21(a) <= last21(a)) ->
+  (length10(a) = ((last21(a) - first21(a)) + 1))) and
+  ((not (first21(a) <= last21(a))) -> (length10(a) = 0))))
+
+logic value__size13 : int
+
+logic object__size13 : (int,character) farray -> int
+
+logic value__component__size10 : int
+
+logic object__component__size10 : (int,character) farray -> int
+
+logic value__alignment13 : int
+
+logic object__alignment13 : (int,character) farray -> int
+
+axiom value__size_axiom13 : (0 <= value__size13)
+
+axiom object__size_axiom13 :
+  (forall a:(int,character) farray. (0 <= object__size13(a)))
+
+axiom value__component__size_axiom10 : (0 <= value__component__size10)
+
+axiom object__component__size_axiom10 :
+  (forall a:(int,character) farray. (0 <= object__component__size10(a)))
+
+axiom value__alignment_axiom13 : (0 <= value__alignment13)
+
+axiom object__alignment_axiom13 :
+  (forall a:(int,character) farray. (0 <= object__alignment13(a)))
+
+function bool_eq45(x: us_t10, y: us_t10) : bool = bool_eq5((x).elts10,
+  to_rep1(first20((x).rt10)), to_rep1(last20((x).rt10)), (y).elts10,
+  to_rep1(first20((y).rt10)), to_rep1(last20((y).rt10)))
+
+logic user_eq42 : us_t10, us_t10 -> bool
+
+logic dummy78 : (int,character) farray
+
+logic dummy79 : t10
+
+type t184b__ref = { t184b__content : us_t10
+}
+
+function t184b__ref___projection(a: t184b__ref) : us_t10 = (a).t184b__content
+
+logic c185b : int
+
+logic attr__ATTRIBUTE_ADDRESS53 : int
+
+logic attr__ATTRIBUTE_ADDRESS54 : int
+
+logic data__first2 : integer
+
+logic data__last2 : integer
+
+logic attr__ATTRIBUTE_ADDRESS55 : int
+
+logic attr__ATTRIBUTE_ADDRESS56 : int
+
+predicate dynamic_property21(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq46 : int, int -> bool
+
+axiom bool_eq_def34 :
+  (forall x:int. forall y:int [bool_eq46(x, y)]. (((x = y) -> (bool_eq46(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq46(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE30 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check30 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE30 : us_image -> int
+
+logic user_eq43 : integer, integer -> bool
+
+logic dummy80 : integer
+
+type t191b__ref = { t191b__content : integer
+}
+
+function t191b__ref___projection(a: t191b__ref) : integer =
+  (a).t191b__content
+
+type t11
+
+logic first22 : t11 -> integer
+
+logic last22 : t11 -> integer
+
+logic mk11 : int, int -> t11
+
+axiom mk_def11 :
+  (forall f:int. forall l:int [mk11(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep1(first22(mk11(f, l))) = f) and (to_rep1(last22(mk11(f,
+  l))) = l)))))
+
+predicate dynamic_property22(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property21(range_first, range_last, low) and
+  dynamic_property21(range_first, range_last, high)))))
+
+type us_t11 = { elts11 : (int,character) farray; rt11 : t11
+}
+
+function to_array11(a: us_t11) : (int,character) farray = (a).elts11
+
+function of_array11(a: (int,character) farray, f: int, l: int) : us_t11 = {
+  elts11 = a; rt11 = mk11(f, l) }
+
+function first23(a: us_t11) : int = to_rep1(first22((a).rt11))
+
+function last23(a: us_t11) : int = to_rep1(last22((a).rt11))
+
+logic length11 : us_t11 -> int
+
+axiom length_def11 :
+  (forall a:us_t11 [length11(a)]. (((first23(a) <= last23(a)) ->
+  (length11(a) = ((last23(a) - first23(a)) + 1))) and
+  ((not (first23(a) <= last23(a))) -> (length11(a) = 0))))
+
+logic value__size14 : int
+
+logic object__size14 : (int,character) farray -> int
+
+logic value__component__size11 : int
+
+logic object__component__size11 : (int,character) farray -> int
+
+logic value__alignment14 : int
+
+logic object__alignment14 : (int,character) farray -> int
+
+axiom value__size_axiom14 : (0 <= value__size14)
+
+axiom object__size_axiom14 :
+  (forall a:(int,character) farray. (0 <= object__size14(a)))
+
+axiom value__component__size_axiom11 : (0 <= value__component__size11)
+
+axiom object__component__size_axiom11 :
+  (forall a:(int,character) farray. (0 <= object__component__size11(a)))
+
+axiom value__alignment_axiom14 : (0 <= value__alignment14)
+
+axiom object__alignment_axiom14 :
+  (forall a:(int,character) farray. (0 <= object__alignment14(a)))
+
+function bool_eq47(x: us_t11, y: us_t11) : bool = bool_eq5((x).elts11,
+  to_rep1(first22((x).rt11)), to_rep1(last22((x).rt11)), (y).elts11,
+  to_rep1(first22((y).rt11)), to_rep1(last22((y).rt11)))
+
+logic user_eq44 : us_t11, us_t11 -> bool
+
+logic dummy81 : (int,character) farray
+
+logic dummy82 : t11
+
+type t192b__ref = { t192b__content : us_t11
+}
+
+function t192b__ref___projection(a: t192b__ref) : us_t11 = (a).t192b__content
+
+logic c193b : int
+
+logic attr__ATTRIBUTE_ADDRESS57 : int
+
+logic attr__ATTRIBUTE_ADDRESS58 : int
+
+logic data__first3 : integer
+
+logic data__last3 : integer
+
+logic attr__ATTRIBUTE_ADDRESS59 : int
+
+logic attr__ATTRIBUTE_ADDRESS60 : int
+
+predicate dynamic_property23(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq48 : int, int -> bool
+
+axiom bool_eq_def35 :
+  (forall x:int. forall y:int [bool_eq48(x, y)]. (((x = y) -> (bool_eq48(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq48(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE31 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check31 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE31 : us_image -> int
+
+logic user_eq45 : integer, integer -> bool
+
+logic dummy83 : integer
+
+type t200b__ref = { t200b__content : integer
+}
+
+function t200b__ref___projection(a: t200b__ref) : integer =
+  (a).t200b__content
+
+type t12
+
+logic first24 : t12 -> integer
+
+logic last24 : t12 -> integer
+
+logic mk12 : int, int -> t12
+
+axiom mk_def12 :
+  (forall f:int. forall l:int [mk12(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep1(first24(mk12(f, l))) = f) and (to_rep1(last24(mk12(f,
+  l))) = l)))))
+
+predicate dynamic_property24(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property23(range_first, range_last, low) and
+  dynamic_property23(range_first, range_last, high)))))
+
+type us_t12 = { elts12 : (int,character) farray; rt12 : t12
+}
+
+function to_array12(a: us_t12) : (int,character) farray = (a).elts12
+
+function of_array12(a: (int,character) farray, f: int, l: int) : us_t12 = {
+  elts12 = a; rt12 = mk12(f, l) }
+
+function first25(a: us_t12) : int = to_rep1(first24((a).rt12))
+
+function last25(a: us_t12) : int = to_rep1(last24((a).rt12))
+
+logic length12 : us_t12 -> int
+
+axiom length_def12 :
+  (forall a:us_t12 [length12(a)]. (((first25(a) <= last25(a)) ->
+  (length12(a) = ((last25(a) - first25(a)) + 1))) and
+  ((not (first25(a) <= last25(a))) -> (length12(a) = 0))))
+
+logic value__size15 : int
+
+logic object__size15 : (int,character) farray -> int
+
+logic value__component__size12 : int
+
+logic object__component__size12 : (int,character) farray -> int
+
+logic value__alignment15 : int
+
+logic object__alignment15 : (int,character) farray -> int
+
+axiom value__size_axiom15 : (0 <= value__size15)
+
+axiom object__size_axiom15 :
+  (forall a:(int,character) farray. (0 <= object__size15(a)))
+
+axiom value__component__size_axiom12 : (0 <= value__component__size12)
+
+axiom object__component__size_axiom12 :
+  (forall a:(int,character) farray. (0 <= object__component__size12(a)))
+
+axiom value__alignment_axiom15 : (0 <= value__alignment15)
+
+axiom object__alignment_axiom15 :
+  (forall a:(int,character) farray. (0 <= object__alignment15(a)))
+
+function bool_eq49(x: us_t12, y: us_t12) : bool = bool_eq5((x).elts12,
+  to_rep1(first24((x).rt12)), to_rep1(last24((x).rt12)), (y).elts12,
+  to_rep1(first24((y).rt12)), to_rep1(last24((y).rt12)))
+
+logic user_eq46 : us_t12, us_t12 -> bool
+
+logic dummy84 : (int,character) farray
+
+logic dummy85 : t12
+
+type t201b__ref = { t201b__content : us_t12
+}
+
+function t201b__ref___projection(a: t201b__ref) : us_t12 = (a).t201b__content
+
+predicate dynamic_property25(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq50 : int, int -> bool
+
+axiom bool_eq_def36 :
+  (forall x:int. forall y:int [bool_eq50(x, y)]. (((x = y) -> (bool_eq50(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq50(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE32 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check32 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE32 : us_image -> int
+
+logic user_eq47 : integer, integer -> bool
+
+logic dummy86 : integer
+
+type t203b__ref = { t203b__content : integer
+}
+
+function t203b__ref___projection(a: t203b__ref) : integer =
+  (a).t203b__content
+
+type t13
+
+logic first26 : t13 -> integer
+
+logic last26 : t13 -> integer
+
+logic mk13 : int, int -> t13
+
+axiom mk_def13 :
+  (forall f:int. forall l:int [mk13(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep1(first26(mk13(f, l))) = f) and (to_rep1(last26(mk13(f,
+  l))) = l)))))
+
+predicate dynamic_property26(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property25(range_first, range_last, low) and
+  dynamic_property25(range_first, range_last, high)))))
+
+type us_t13 = { elts13 : (int,character) farray; rt13 : t13
+}
+
+function to_array13(a: us_t13) : (int,character) farray = (a).elts13
+
+function of_array13(a: (int,character) farray, f: int, l: int) : us_t13 = {
+  elts13 = a; rt13 = mk13(f, l) }
+
+function first27(a: us_t13) : int = to_rep1(first26((a).rt13))
+
+function last27(a: us_t13) : int = to_rep1(last26((a).rt13))
+
+logic length13 : us_t13 -> int
+
+axiom length_def13 :
+  (forall a:us_t13 [length13(a)]. (((first27(a) <= last27(a)) ->
+  (length13(a) = ((last27(a) - first27(a)) + 1))) and
+  ((not (first27(a) <= last27(a))) -> (length13(a) = 0))))
+
+logic value__size16 : int
+
+logic object__size16 : (int,character) farray -> int
+
+logic value__component__size13 : int
+
+logic object__component__size13 : (int,character) farray -> int
+
+logic value__alignment16 : int
+
+logic object__alignment16 : (int,character) farray -> int
+
+axiom value__size_axiom16 : (0 <= value__size16)
+
+axiom object__size_axiom16 :
+  (forall a:(int,character) farray. (0 <= object__size16(a)))
+
+axiom value__component__size_axiom13 : (0 <= value__component__size13)
+
+axiom object__component__size_axiom13 :
+  (forall a:(int,character) farray. (0 <= object__component__size13(a)))
+
+axiom value__alignment_axiom16 : (0 <= value__alignment16)
+
+axiom object__alignment_axiom16 :
+  (forall a:(int,character) farray. (0 <= object__alignment16(a)))
+
+function bool_eq51(x: us_t13, y: us_t13) : bool = bool_eq5((x).elts13,
+  to_rep1(first26((x).rt13)), to_rep1(last26((x).rt13)), (y).elts13,
+  to_rep1(first26((y).rt13)), to_rep1(last26((y).rt13)))
+
+logic user_eq48 : us_t13, us_t13 -> bool
+
+logic dummy87 : (int,character) farray
+
+logic dummy88 : t13
+
+type t204b__ref = { t204b__content : us_t13
+}
+
+function t204b__ref___projection(a: t204b__ref) : us_t13 = (a).t204b__content
+
+logic c205b : int
+
+logic attr__ATTRIBUTE_ADDRESS61 : int
+
+logic attr__ATTRIBUTE_ADDRESS62 : int
+
+logic data__first4 : integer
+
+logic data__last4 : integer
+
+logic attr__ATTRIBUTE_ADDRESS63 : int
+
+logic attr__ATTRIBUTE_ADDRESS64 : int
+
+predicate dynamic_property27(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq52 : int, int -> bool
+
+axiom bool_eq_def37 :
+  (forall x:int. forall y:int [bool_eq52(x, y)]. (((x = y) -> (bool_eq52(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq52(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE33 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check33 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE33 : us_image -> int
+
+logic user_eq49 : integer, integer -> bool
+
+logic dummy89 : integer
+
+type t212b__ref = { t212b__content : integer
+}
+
+function t212b__ref___projection(a: t212b__ref) : integer =
+  (a).t212b__content
+
+type t14
+
+logic first28 : t14 -> integer
+
+logic last28 : t14 -> integer
+
+logic mk14 : int, int -> t14
+
+axiom mk_def14 :
+  (forall f:int. forall l:int [mk14(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep1(first28(mk14(f, l))) = f) and (to_rep1(last28(mk14(f,
+  l))) = l)))))
+
+predicate dynamic_property28(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property27(range_first, range_last, low) and
+  dynamic_property27(range_first, range_last, high)))))
+
+type us_t14 = { elts14 : (int,character) farray; rt14 : t14
+}
+
+function to_array14(a: us_t14) : (int,character) farray = (a).elts14
+
+function of_array14(a: (int,character) farray, f: int, l: int) : us_t14 = {
+  elts14 = a; rt14 = mk14(f, l) }
+
+function first29(a: us_t14) : int = to_rep1(first28((a).rt14))
+
+function last29(a: us_t14) : int = to_rep1(last28((a).rt14))
+
+logic length14 : us_t14 -> int
+
+axiom length_def14 :
+  (forall a:us_t14 [length14(a)]. (((first29(a) <= last29(a)) ->
+  (length14(a) = ((last29(a) - first29(a)) + 1))) and
+  ((not (first29(a) <= last29(a))) -> (length14(a) = 0))))
+
+logic value__size17 : int
+
+logic object__size17 : (int,character) farray -> int
+
+logic value__component__size14 : int
+
+logic object__component__size14 : (int,character) farray -> int
+
+logic value__alignment17 : int
+
+logic object__alignment17 : (int,character) farray -> int
+
+axiom value__size_axiom17 : (0 <= value__size17)
+
+axiom object__size_axiom17 :
+  (forall a:(int,character) farray. (0 <= object__size17(a)))
+
+axiom value__component__size_axiom14 : (0 <= value__component__size14)
+
+axiom object__component__size_axiom14 :
+  (forall a:(int,character) farray. (0 <= object__component__size14(a)))
+
+axiom value__alignment_axiom17 : (0 <= value__alignment17)
+
+axiom object__alignment_axiom17 :
+  (forall a:(int,character) farray. (0 <= object__alignment17(a)))
+
+function bool_eq53(x: us_t14, y: us_t14) : bool = bool_eq5((x).elts14,
+  to_rep1(first28((x).rt14)), to_rep1(last28((x).rt14)), (y).elts14,
+  to_rep1(first28((y).rt14)), to_rep1(last28((y).rt14)))
+
+logic user_eq50 : us_t14, us_t14 -> bool
+
+logic dummy90 : (int,character) farray
+
+logic dummy91 : t14
+
+type t213b__ref = { t213b__content : us_t14
+}
+
+function t213b__ref___projection(a: t213b__ref) : us_t14 = (a).t213b__content
+
+predicate dynamic_property29(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq54 : int, int -> bool
+
+axiom bool_eq_def38 :
+  (forall x:int. forall y:int [bool_eq54(x, y)]. (((x = y) -> (bool_eq54(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq54(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE34 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check34 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE34 : us_image -> int
+
+logic user_eq51 : integer, integer -> bool
+
+logic dummy92 : integer
+
+type t215b__ref = { t215b__content : integer
+}
+
+function t215b__ref___projection(a: t215b__ref) : integer =
+  (a).t215b__content
+
+type t15
+
+logic first30 : t15 -> integer
+
+logic last30 : t15 -> integer
+
+logic mk15 : int, int -> t15
+
+axiom mk_def15 :
+  (forall f:int. forall l:int [mk15(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep1(first30(mk15(f, l))) = f) and (to_rep1(last30(mk15(f,
+  l))) = l)))))
+
+predicate dynamic_property30(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property29(range_first, range_last, low) and
+  dynamic_property29(range_first, range_last, high)))))
+
+type us_t15 = { elts15 : (int,character) farray; rt15 : t15
+}
+
+function to_array15(a: us_t15) : (int,character) farray = (a).elts15
+
+function of_array15(a: (int,character) farray, f: int, l: int) : us_t15 = {
+  elts15 = a; rt15 = mk15(f, l) }
+
+function first31(a: us_t15) : int = to_rep1(first30((a).rt15))
+
+function last31(a: us_t15) : int = to_rep1(last30((a).rt15))
+
+logic length15 : us_t15 -> int
+
+axiom length_def15 :
+  (forall a:us_t15 [length15(a)]. (((first31(a) <= last31(a)) ->
+  (length15(a) = ((last31(a) - first31(a)) + 1))) and
+  ((not (first31(a) <= last31(a))) -> (length15(a) = 0))))
+
+logic value__size18 : int
+
+logic object__size18 : (int,character) farray -> int
+
+logic value__component__size15 : int
+
+logic object__component__size15 : (int,character) farray -> int
+
+logic value__alignment18 : int
+
+logic object__alignment18 : (int,character) farray -> int
+
+axiom value__size_axiom18 : (0 <= value__size18)
+
+axiom object__size_axiom18 :
+  (forall a:(int,character) farray. (0 <= object__size18(a)))
+
+axiom value__component__size_axiom15 : (0 <= value__component__size15)
+
+axiom object__component__size_axiom15 :
+  (forall a:(int,character) farray. (0 <= object__component__size15(a)))
+
+axiom value__alignment_axiom18 : (0 <= value__alignment18)
+
+axiom object__alignment_axiom18 :
+  (forall a:(int,character) farray. (0 <= object__alignment18(a)))
+
+function bool_eq55(x: us_t15, y: us_t15) : bool = bool_eq5((x).elts15,
+  to_rep1(first30((x).rt15)), to_rep1(last30((x).rt15)), (y).elts15,
+  to_rep1(first30((y).rt15)), to_rep1(last30((y).rt15)))
+
+logic user_eq52 : us_t15, us_t15 -> bool
+
+logic dummy93 : (int,character) farray
+
+logic dummy94 : t15
+
+type t216b__ref = { t216b__content : us_t15
+}
+
+function t216b__ref___projection(a: t216b__ref) : us_t15 = (a).t216b__content
+
+logic c217b : int
+
+logic attr__ATTRIBUTE_ADDRESS65 : int
+
+logic attr__ATTRIBUTE_ADDRESS66 : int
+
+logic data__first5 : integer
+
+logic data__last5 : integer
+
+logic attr__ATTRIBUTE_ADDRESS67 : int
+
+logic attr__ATTRIBUTE_ADDRESS68 : int
+
+predicate dynamic_property31(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq56 : int, int -> bool
+
+axiom bool_eq_def39 :
+  (forall x:int. forall y:int [bool_eq56(x, y)]. (((x = y) -> (bool_eq56(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq56(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE35 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check35 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE35 : us_image -> int
+
+logic user_eq53 : integer, integer -> bool
+
+logic dummy95 : integer
+
+type t223b__ref = { t223b__content : integer
+}
+
+function t223b__ref___projection(a: t223b__ref) : integer =
+  (a).t223b__content
+
+type t16
+
+logic first32 : t16 -> integer
+
+logic last32 : t16 -> integer
+
+logic mk16 : int, int -> t16
+
+axiom mk_def16 :
+  (forall f:int. forall l:int [mk16(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep1(first32(mk16(f, l))) = f) and (to_rep1(last32(mk16(f,
+  l))) = l)))))
+
+predicate dynamic_property32(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property31(range_first, range_last, low) and
+  dynamic_property31(range_first, range_last, high)))))
+
+type us_t16 = { elts16 : (int,character) farray; rt16 : t16
+}
+
+function to_array16(a: us_t16) : (int,character) farray = (a).elts16
+
+function of_array16(a: (int,character) farray, f: int, l: int) : us_t16 = {
+  elts16 = a; rt16 = mk16(f, l) }
+
+function first33(a: us_t16) : int = to_rep1(first32((a).rt16))
+
+function last33(a: us_t16) : int = to_rep1(last32((a).rt16))
+
+logic length16 : us_t16 -> int
+
+axiom length_def16 :
+  (forall a:us_t16 [length16(a)]. (((first33(a) <= last33(a)) ->
+  (length16(a) = ((last33(a) - first33(a)) + 1))) and
+  ((not (first33(a) <= last33(a))) -> (length16(a) = 0))))
+
+logic value__size19 : int
+
+logic object__size19 : (int,character) farray -> int
+
+logic value__component__size16 : int
+
+logic object__component__size16 : (int,character) farray -> int
+
+logic value__alignment19 : int
+
+logic object__alignment19 : (int,character) farray -> int
+
+axiom value__size_axiom19 : (0 <= value__size19)
+
+axiom object__size_axiom19 :
+  (forall a:(int,character) farray. (0 <= object__size19(a)))
+
+axiom value__component__size_axiom16 : (0 <= value__component__size16)
+
+axiom object__component__size_axiom16 :
+  (forall a:(int,character) farray. (0 <= object__component__size16(a)))
+
+axiom value__alignment_axiom19 : (0 <= value__alignment19)
+
+axiom object__alignment_axiom19 :
+  (forall a:(int,character) farray. (0 <= object__alignment19(a)))
+
+function bool_eq57(x: us_t16, y: us_t16) : bool = bool_eq5((x).elts16,
+  to_rep1(first32((x).rt16)), to_rep1(last32((x).rt16)), (y).elts16,
+  to_rep1(first32((y).rt16)), to_rep1(last32((y).rt16)))
+
+logic user_eq54 : us_t16, us_t16 -> bool
+
+logic dummy96 : (int,character) farray
+
+logic dummy97 : t16
+
+type t224b__ref = { t224b__content : us_t16
+}
+
+function t224b__ref___projection(a: t224b__ref) : us_t16 = (a).t224b__content
+
+predicate dynamic_property33(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq58 : int, int -> bool
+
+axiom bool_eq_def40 :
+  (forall x:int. forall y:int [bool_eq58(x, y)]. (((x = y) -> (bool_eq58(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq58(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE36 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check36 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE36 : us_image -> int
+
+logic user_eq55 : integer, integer -> bool
+
+logic dummy98 : integer
+
+type t226b__ref = { t226b__content : integer
+}
+
+function t226b__ref___projection(a: t226b__ref) : integer =
+  (a).t226b__content
+
+type t17
+
+logic first34 : t17 -> integer
+
+logic last34 : t17 -> integer
+
+logic mk17 : int, int -> t17
+
+axiom mk_def17 :
+  (forall f:int. forall l:int [mk17(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep1(first34(mk17(f, l))) = f) and (to_rep1(last34(mk17(f,
+  l))) = l)))))
+
+predicate dynamic_property34(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (dynamic_property33(range_first, range_last, low) and
+  dynamic_property33(range_first, range_last, high)))))
+
+type us_t17 = { elts17 : (int,character) farray; rt17 : t17
+}
+
+function to_array17(a: us_t17) : (int,character) farray = (a).elts17
+
+function of_array17(a: (int,character) farray, f: int, l: int) : us_t17 = {
+  elts17 = a; rt17 = mk17(f, l) }
+
+function first35(a: us_t17) : int = to_rep1(first34((a).rt17))
+
+function last35(a: us_t17) : int = to_rep1(last34((a).rt17))
+
+logic length17 : us_t17 -> int
+
+axiom length_def17 :
+  (forall a:us_t17 [length17(a)]. (((first35(a) <= last35(a)) ->
+  (length17(a) = ((last35(a) - first35(a)) + 1))) and
+  ((not (first35(a) <= last35(a))) -> (length17(a) = 0))))
+
+logic value__size20 : int
+
+logic object__size20 : (int,character) farray -> int
+
+logic value__component__size17 : int
+
+logic object__component__size17 : (int,character) farray -> int
+
+logic value__alignment20 : int
+
+logic object__alignment20 : (int,character) farray -> int
+
+axiom value__size_axiom20 : (0 <= value__size20)
+
+axiom object__size_axiom20 :
+  (forall a:(int,character) farray. (0 <= object__size20(a)))
+
+axiom value__component__size_axiom17 : (0 <= value__component__size17)
+
+axiom object__component__size_axiom17 :
+  (forall a:(int,character) farray. (0 <= object__component__size17(a)))
+
+axiom value__alignment_axiom20 : (0 <= value__alignment20)
+
+axiom object__alignment_axiom20 :
+  (forall a:(int,character) farray. (0 <= object__alignment20(a)))
+
+function bool_eq59(x: us_t17, y: us_t17) : bool = bool_eq5((x).elts17,
+  to_rep1(first34((x).rt17)), to_rep1(last34((x).rt17)), (y).elts17,
+  to_rep1(first34((y).rt17)), to_rep1(last34((y).rt17)))
+
+logic user_eq56 : us_t17, us_t17 -> bool
+
+logic dummy99 : (int,character) farray
+
+logic dummy100 : t17
+
+type t227b__ref = { t227b__content : us_t17
+}
+
+function t227b__ref___projection(a: t227b__ref) : us_t17 = (a).t227b__content
+
+logic temp___String_Literal_1272 : unit -> (int,character) farray
+
+axiom temp___String_Literal_1272__def_axiom :
+  (((((((to_rep((temp___String_Literal_1272(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_1272(void)[2])) = 32)) and
+  (to_rep((temp___String_Literal_1272(void)[3])) = 48)) and
+  (to_rep((temp___String_Literal_1272(void)[4])) = 46)) and
+  (to_rep((temp___String_Literal_1272(void)[5])) = 48)) and
+  (to_rep((temp___String_Literal_1272(void)[6])) = 32)) and
+  (to_rep((temp___String_Literal_1272(void)[7])) = 115))
+
+logic temp___String_Literal_1284 : unit -> (int,character) farray
+
+axiom temp___String_Literal_1284__def_axiom :
+  (((((((to_rep((temp___String_Literal_1284(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_1284(void)[2])) = 32)) and
+  (to_rep((temp___String_Literal_1284(void)[3])) = 48)) and
+  (to_rep((temp___String_Literal_1284(void)[4])) = 46)) and
+  (to_rep((temp___String_Literal_1284(void)[5])) = 48)) and
+  (to_rep((temp___String_Literal_1284(void)[6])) = 32)) and
+  (to_rep((temp___String_Literal_1284(void)[7])) = 115))
+
+logic temp___String_Literal_1296 : unit -> (int,character) farray
+
+axiom temp___String_Literal_1296__def_axiom :
+  (((((((to_rep((temp___String_Literal_1296(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_1296(void)[2])) = 32)) and
+  (to_rep((temp___String_Literal_1296(void)[3])) = 48)) and
+  (to_rep((temp___String_Literal_1296(void)[4])) = 46)) and
+  (to_rep((temp___String_Literal_1296(void)[5])) = 48)) and
+  (to_rep((temp___String_Literal_1296(void)[6])) = 32)) and
+  (to_rep((temp___String_Literal_1296(void)[7])) = 115))
+
+logic temp___String_Literal_1308 : unit -> (int,character) farray
+
+axiom temp___String_Literal_1308__def_axiom :
+  (((((((to_rep((temp___String_Literal_1308(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_1308(void)[2])) = 32)) and
+  (to_rep((temp___String_Literal_1308(void)[3])) = 48)) and
+  (to_rep((temp___String_Literal_1308(void)[4])) = 46)) and
+  (to_rep((temp___String_Literal_1308(void)[5])) = 48)) and
+  (to_rep((temp___String_Literal_1308(void)[6])) = 32)) and
+  (to_rep((temp___String_Literal_1308(void)[7])) = 115))
+
+logic screen__writeconfigdata__B154b__result__aggregate_def : int -> (int,character) farray
+
+axiom def_axiom :
+  (forall temp___1316:int.
+  (forall temp___1317:int.
+  ((screen__writeconfigdata__B154b__result__aggregate_def(temp___1316)[temp___1317]) = of_rep(temp___1316))))
+
+logic screen__writeconfigdata__B180b__result__aggregate_def : int -> (int,character) farray
+
+axiom def_axiom1 :
+  (forall temp___1335:int.
+  (forall temp___1336:int.
+  ((screen__writeconfigdata__B180b__result__aggregate_def(temp___1335)[temp___1336]) = of_rep(temp___1335))))
+
+logic screen__writeconfigdata__B188b__result__aggregate_def : int -> (int,character) farray
+
+axiom def_axiom2 :
+  (forall temp___1345:int.
+  (forall temp___1346:int.
+  ((screen__writeconfigdata__B188b__result__aggregate_def(temp___1345)[temp___1346]) = of_rep(temp___1345))))
+
+logic screen__writeconfigdata__B196b__result__aggregate_def : int -> (int,character) farray
+
+axiom def_axiom3 :
+  (forall temp___1358:int.
+  (forall temp___1359:int.
+  ((screen__writeconfigdata__B196b__result__aggregate_def(temp___1358)[temp___1359]) = of_rep(temp___1358))))
+
+logic temp___String_Literal_1360 : unit -> (int,character) farray
+
+axiom temp___String_Literal_1360__def_axiom :
+  (((((((to_rep((temp___String_Literal_1360(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_1360(void)[2])) = 107)) and
+  (to_rep((temp___String_Literal_1360(void)[3])) = 66)) and
+  (to_rep((temp___String_Literal_1360(void)[4])) = 121)) and
+  (to_rep((temp___String_Literal_1360(void)[5])) = 116)) and
+  (to_rep((temp___String_Literal_1360(void)[6])) = 101)) and
+  (to_rep((temp___String_Literal_1360(void)[7])) = 115))
+
+logic screen__writeconfigdata__B208b__result__aggregate_def : int -> (int,character) farray
+
+axiom def_axiom4 :
+  (forall temp___1374:int.
+  (forall temp___1375:int.
+  ((screen__writeconfigdata__B208b__result__aggregate_def(temp___1374)[temp___1375]) = of_rep(temp___1374))))
+
+logic temp___String_Literal_1376 : unit -> (int,character) farray
+
+axiom temp___String_Literal_1376__def_axiom :
+  (((((((to_rep((temp___String_Literal_1376(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_1376(void)[2])) = 107)) and
+  (to_rep((temp___String_Literal_1376(void)[3])) = 66)) and
+  (to_rep((temp___String_Literal_1376(void)[4])) = 121)) and
+  (to_rep((temp___String_Literal_1376(void)[5])) = 116)) and
+  (to_rep((temp___String_Literal_1376(void)[6])) = 101)) and
+  (to_rep((temp___String_Literal_1376(void)[7])) = 115))
+
+logic screen__writeconfigdata__B220b__result__aggregate_def : int -> (int,character) farray
+
+axiom def_axiom5 :
+  (forall temp___1390:int.
+  (forall temp___1391:int.
+  ((screen__writeconfigdata__B220b__result__aggregate_def(temp___1390)[temp___1391]) = of_rep(temp___1390))))
+
+axiom column1__def_axiom : (column1 = 25)
+
+axiom column2__def_axiom : (column2 = 63)
+
+axiom row1__def_axiom : (row1 = 9)
+
+axiom row2__def_axiom : (row2 = 10)
+
+axiom row3__def_axiom : (row3 = 12)
+
+axiom row4__def_axiom : (row4 = 13)
+
+axiom row5__def_axiom : (row5 = 15)
+
+axiom row6__def_axiom : (row6 = 16)
+
+axiom row7__def_axiom : (row7 = 18)
+
+ (* File "screen.adb", line 276, characters 0-0 *)
+goal WP_parameter_def :
+  (forall currentconfig__split_fields:bool.
+  forall currentconfig__split_fields1:durationt.
+  forall currentconfig__split_fields2:durationt.
+  forall currentconfig__split_fields3:durationt.
+  forall currentconfig__split_fields4:durationt.
+  forall currentconfig__split_fields5:durationt.
+  forall currentconfig__split_fields6:durationt.
+  forall currentconfig__split_fields7:durationt.
+  forall currentconfig__split_fields8:accesspolicyt.
+  forall currentconfig__split_fields9:filesizet.
+  forall currentconfig__split_fields10:filesizet.
+  forall currentconfig__split_fields11:classt.
+  forall currentconfig__split_fields12:classt.
+  forall currentconfig__split_fields13:fart. forall latchunlock:int.
+  forall alarmsilent:int. forall fingerwait:int. forall tokenremove:int.
+  forall workstart:int. forall workend:int. forall authduration:int.
+  forall policy:int. forall minpreservedlog:int. forall alarmthreshold:int.
+  forall minentry:int. forall clearance:int. forall maxfar:int.
+  forall newconfig__split_fields:durationt.
+  forall newconfig__split_fields1:durationt.
+  forall newconfig__split_fields2:durationt.
+  forall newconfig__split_fields3:durationt.
+  forall newconfig__split_fields4:durationt.
+  forall newconfig__split_fields5:durationt.
+  forall newconfig__split_fields6:durationt.
+  forall newconfig__split_fields7:accesspolicyt.
+  forall newconfig__split_fields8:filesizet.
+  forall newconfig__split_fields9:filesizet.
+  forall newconfig__split_fields10:classt.
+  forall newconfig__split_fields11:classt.
+  forall newconfig__split_fields12:fart. forall str:(int,character) farray.
+  forall valuestr:(int,character) farray. forall o:fart. forall o1:classt.
+  forall o2:classt. forall o3:filesizet. forall o4:filesizet.
+  forall o5:accesspolicyt. forall o6:durationt. forall o7:durationt.
+  forall o8:durationt. forall o9:durationt. forall o10:durationt.
+  forall o11:durationt. forall o12:durationt. forall o13:us_split_fields.
+  forall temp___1260:us_rep.
+  forall screen__writeconfigdata__C111b__assume:int. forall workstart1:int.
+  forall workend1:int. forall authduration1:int. forall policy1:int.
+  forall minpreservedlog1:int. forall alarmthreshold1:int.
+  forall minentry1:int. forall clearance1:int. forall maxfar1:int.
+  forall configdata__thedisplayfields__thetokenremovalduration:int.
+  forall configdata__thedisplayfields__thefingerwaitduration:int.
+  forall configdata__thedisplayfields__thealarmsilentduration:int.
+  forall configdata__thedisplayfields__thelatchunlockduration:int.
+  forall result:int__ref. forall latchunlock1:int. forall result1:int__ref.
+  forall alarmsilent1:int. forall result2:int__ref. forall fingerwait1:int.
+  forall result3:int__ref. forall tokenremove1:int.
+  forall result4:us_split_fields__ref.
+  forall newconfig__split_fields13:us_split_fields. forall ok:bool.
+  forall consoleok:bool. forall result5:bool__ref. forall ok1:bool.
+  forall result6:map__ref. forall str1:(int,character) farray.
+  forall result7:map__ref. forall valuestr1:(int,character) farray.
+  (((0 <= 864000) -> in_range5(latchunlock)) -> (((0 <= 864000) ->
+  in_range5(alarmsilent)) -> (((0 <= 864000) -> in_range5(fingerwait)) ->
+  (((0 <= 864000) -> in_range5(tokenremove)) -> (((0 <= 864000) ->
+  in_range5(workstart)) -> (((0 <= 864000) -> in_range5(workend)) ->
+  (((0 <= 864000) -> in_range5(authduration)) -> (((0 <= 1) ->
+  in_range10(policy)) -> (((0 <= 4194304) -> in_range4(minpreservedlog)) ->
+  (((0 <= 4194304) -> in_range4(alarmthreshold)) -> (((0 <= 5) ->
+  in_range8(minentry)) -> (((0 <= 5) -> in_range8(clearance)) ->
+  (((0 <= 2147483647) -> in_range7(maxfar)) -> (in_range11(column1) ->
+  (in_range11(column2) -> (in_range12(row1) -> (in_range12(row2) ->
+  (in_range12(row3) -> (in_range12(row4) -> (in_range12(row5) ->
+  (in_range12(row6) -> (in_range12(row7) ->
+  ((((((((((((((in_range9(configdata__thedisplayfields__thelatchunlockduration) and
+  in_range9(configdata__thedisplayfields__thealarmsilentduration)) and
+  in_range9(configdata__thedisplayfields__thefingerwaitduration)) and
+  in_range9(configdata__thedisplayfields__thetokenremovalduration)) and
+  in_range8(clearance1)) and in_range5(workstart1)) and
+  in_range5(workend1)) and in_range5(authduration1)) and
+  in_range10(policy1)) and in_range8(minentry1)) and
+  in_range4(minpreservedlog1)) and in_range4(alarmthreshold1)) and
+  in_range7(maxfar1)) and (((result = { int__content = latchunlock }) and
+  (latchunlock1 = configdata__thedisplayfields__thelatchunlockduration)) and
+  (((result1 = { int__content = alarmsilent }) and
+  (alarmsilent1 = configdata__thedisplayfields__thealarmsilentduration)) and
+  (((result2 = { int__content = fingerwait }) and
+  (fingerwait1 = configdata__thedisplayfields__thefingerwaitduration)) and
+  ((result3 = { int__content = tokenremove }) and
+  (tokenremove1 = configdata__thedisplayfields__thetokenremovalduration)))))) ->
+  (((((to_rep4(o) = maxfar1) and ((to_rep5(o1) = clearance1) and
+  ((to_rep5(o2) = minentry1) and ((to_rep2(o3) = alarmthreshold1) and
+  ((to_rep2(o4) = minpreservedlog1) and ((to_rep6(o5) = policy1) and
+  ((to_rep3(o6) = authduration1) and ((to_rep3(o7) = workend1) and
+  ((to_rep3(o8) = workstart1) and ((to_rep3(o9) = tokenremove1) and
+  ((to_rep3(o10) = fingerwait1) and ((to_rep3(o11) = alarmsilent1) and
+  ((to_rep3(o12) = latchunlock1) and (o13 = {
+  rec__screen__displayedconfigt__latchunlock = o12;
+  rec__screen__displayedconfigt__alarmsilent = o11;
+  rec__screen__displayedconfigt__fingerwait = o10;
+  rec__screen__displayedconfigt__tokenremove = o9;
+  rec__screen__displayedconfigt__workstart = o8;
+  rec__screen__displayedconfigt__workend = o7;
+  rec__screen__displayedconfigt__authduration = o6;
+  rec__screen__displayedconfigt__policy = o5;
+  rec__screen__displayedconfigt__minpreservedlog = o4;
+  rec__screen__displayedconfigt__alarmthreshold = o3;
+  rec__screen__displayedconfigt__minentry = o2;
+  rec__screen__displayedconfigt__clearance = o1;
+  rec__screen__displayedconfigt__maxfar = o })))))))))))))) and
+  (temp___1260 = { us_split_fields1 = o13 })) and ((result4 = {
+  us_split_fields__content = { rec__screen__displayedconfigt__latchunlock =
+  newconfig__split_fields; rec__screen__displayedconfigt__alarmsilent =
+  newconfig__split_fields1; rec__screen__displayedconfigt__fingerwait =
+  newconfig__split_fields2; rec__screen__displayedconfigt__tokenremove =
+  newconfig__split_fields3; rec__screen__displayedconfigt__workstart =
+  newconfig__split_fields4; rec__screen__displayedconfigt__workend =
+  newconfig__split_fields5; rec__screen__displayedconfigt__authduration =
+  newconfig__split_fields6; rec__screen__displayedconfigt__policy =
+  newconfig__split_fields7; rec__screen__displayedconfigt__minpreservedlog =
+  newconfig__split_fields8; rec__screen__displayedconfigt__alarmthreshold =
+  newconfig__split_fields9; rec__screen__displayedconfigt__minentry =
+  newconfig__split_fields10; rec__screen__displayedconfigt__clearance =
+  newconfig__split_fields11; rec__screen__displayedconfigt__maxfar =
+  newconfig__split_fields12 } }) and
+  (newconfig__split_fields13 = (temp___1260).us_split_fields1))) ->
+  (((currentconfig__split_fields = true) -> (not (bool_eq14({
+  us_split_fields1 = { rec__screen__displayedconfigt__latchunlock =
+  currentconfig__split_fields1; rec__screen__displayedconfigt__alarmsilent =
+  currentconfig__split_fields2; rec__screen__displayedconfigt__fingerwait =
+  currentconfig__split_fields3; rec__screen__displayedconfigt__tokenremove =
+  currentconfig__split_fields4; rec__screen__displayedconfigt__workstart =
+  currentconfig__split_fields5; rec__screen__displayedconfigt__workend =
+  currentconfig__split_fields6; rec__screen__displayedconfigt__authduration =
+  currentconfig__split_fields7; rec__screen__displayedconfigt__policy =
+  currentconfig__split_fields8;
+  rec__screen__displayedconfigt__minpreservedlog =
+  currentconfig__split_fields9;
+  rec__screen__displayedconfigt__alarmthreshold =
+  currentconfig__split_fields10; rec__screen__displayedconfigt__minentry =
+  currentconfig__split_fields11; rec__screen__displayedconfigt__clearance =
+  currentconfig__split_fields12; rec__screen__displayedconfigt__maxfar =
+  currentconfig__split_fields13 } }, { us_split_fields1 =
+  newconfig__split_fields13 }) = true))) -> (((result5 = { bool__content = ok
+  }) and (ok1 = match_bool(ok, consoleok, false))) ->
+  (((((screen__writeconfigdata__C111b__assume = latchunlock1) and
+  in_range9(latchunlock1)) and
+  (screen__writeconfigdata__C111b__assume = c111b)) and in_range9(c111b)) ->
+  (((result6 = { map__content = str }) and
+  (str1 = temp___String_Literal_1272(void))) -> ((((result7 = {
+  map__content = valuestr }) and
+  (valuestr1 = (to_string(attr__ATTRIBUTE_IMAGE9(c111b))).elts)) and
+  ((to_rep1(valuestr__first) = to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE9(c111b))).rt))) and
+  (to_rep1(valuestr__last) = to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE9(c111b))).rt))))) ->
+  (dynamic_property(1, 2147483647, to_rep1(valuestr__first),
+  to_rep1(valuestr__last)) ->
+  (to_rep1(valuestr__first) <= to_rep1(valuestr__last)))))))))))))))))))))))))))))))))

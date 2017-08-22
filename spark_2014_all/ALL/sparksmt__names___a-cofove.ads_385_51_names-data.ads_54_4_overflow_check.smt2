@@ -194,8 +194,8 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_discrs (us_split_discrs1
                                                              a))
 
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (declare-const value__size Int)
 
@@ -381,11 +381,11 @@
   (forall ((a us_rep1) (b us_rep1))
   (! (= (user_eq6 a b) (oeq a b)) :pattern ((user_eq6 a b)) )))
 
-(define-fun default_initial_assumption ((temp___expr_268 us_rep1)
-  (temp___skip_top_level_269 Bool)) Bool (=>
+(define-fun default_initial_assumption ((temp___expr_272 us_rep1)
+  (temp___skip_top_level_273 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_269 true))
-                                         (= (length1 temp___expr_268) 0)))
+                                         (= temp___skip_top_level_273 true))
+                                         (= (length1 temp___expr_272) 0)))
 
 ;; model____post_axiom
   (assert
@@ -409,15 +409,15 @@
 
 (declare-datatypes ((extended_index__ref1 0))
 (((mk_extended_index__ref1 (extended_index__content1 extended_index1)))))
-(define-fun extended_index__ref_2__projection ((a extended_index__ref1)) extended_index1
+(define-fun extended_index__ref___2__projection ((a extended_index__ref1)) extended_index1
   (extended_index__content1 a))
 
-(define-fun dynamic_invariant4 ((temp___expr_261 Int)
-  (temp___is_init_258 Bool) (temp___skip_constant_259 Bool)
-  (temp___do_toplevel_260 Bool)) Bool (=>
-                                      (or (= temp___is_init_258 true)
+(define-fun dynamic_invariant4 ((temp___expr_265 Int)
+  (temp___is_init_262 Bool) (temp___skip_constant_263 Bool)
+  (temp___do_toplevel_264 Bool)) Bool (=>
+                                      (or (= temp___is_init_262 true)
                                       (<= (- 1) 2147483646)) (in_range6
-                                      temp___expr_261)))
+                                      temp___expr_265)))
 
 ;; length__post_axiom
   (assert
@@ -442,15 +442,15 @@
 
 (declare-datatypes ((element_type__ref1 0))
 (((mk_element_type__ref1 (element_type__content1 element_type1)))))
-(define-fun element_type__ref_2__projection ((a element_type__ref1)) element_type1
+(define-fun element_type__ref___2__projection ((a element_type__ref1)) element_type1
   (element_type__content1 a))
 
-(define-fun dynamic_invariant5 ((temp___expr_255 Int)
-  (temp___is_init_252 Bool) (temp___skip_constant_253 Bool)
-  (temp___do_toplevel_254 Bool)) Bool (=>
-                                      (or (= temp___is_init_252 true)
+(define-fun dynamic_invariant5 ((temp___expr_259 Int)
+  (temp___is_init_256 Bool) (temp___skip_constant_257 Bool)
+  (temp___do_toplevel_258 Bool)) Bool (=>
+                                      (or (= temp___is_init_256 true)
                                       (<= 0 255)) (in_range7
-                                      temp___expr_255)))
+                                      temp___expr_259)))
 
 ;; get__post_axiom
   (assert

@@ -1,0 +1,469 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+type tcount_typeB
+
+predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq1 : int, int -> bool
+
+axiom bool_eq_def :
+  (forall x:int. forall y:int [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> int
+
+logic user_eq : tcount_typeB, tcount_typeB -> bool
+
+logic dummy : tcount_typeB
+
+type tcount_typeB__ref = { tcount_typeB__content : tcount_typeB
+}
+
+function tcount_typeB__ref___projection(a: tcount_typeB__ref) : tcount_typeB =
+  (a).tcount_typeB__content
+
+type count_type
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq1 : count_type, count_type -> bool
+
+logic dummy1 : count_type
+
+type count_type__ref = { count_type__content : count_type
+}
+
+function count_type__ref___projection(a: count_type__ref) : count_type =
+  (a).count_type__content
+
+type integer
+
+predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq2 : integer, integer -> bool
+
+logic dummy2 : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+logic to_rep : integer -> int
+
+logic of_rep : int -> integer
+
+axiom inversion_axiom :
+  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range2(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range2(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type us_split_fields = { rec__indefinite_bounded_tagged__t__c : integer;
+rec__ext__ : us_private
+}
+
+function us_split_fields_C__projection(a: us_split_fields) : integer =
+  (a).rec__indefinite_bounded_tagged__t__c
+
+function us_split_fields___projection(a: us_split_fields) : us_private =
+  (a).rec__ext__
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields; attr__tag : int
+}
+
+function us_rep___projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+function us_rep___2__projection(a: us_rep) : int = (a).attr__tag
+
+logic bool_eq4 : us_rep, us_rep -> bool
+
+axiom bool_eq_def3 :
+  (forall a:us_rep. forall b:us_rep [bool_eq4(a, b)].
+  (((to_rep(((a).us_split_fields1).rec__indefinite_bounded_tagged__t__c) = to_rep(((b).us_split_fields1).rec__indefinite_bounded_tagged__t__c)) ->
+  (bool_eq4(a, b) = true)) and
+  ((not (to_rep(((a).us_split_fields1).rec__indefinite_bounded_tagged__t__c) = to_rep(((b).us_split_fields1).rec__indefinite_bounded_tagged__t__c))) ->
+  (bool_eq4(a, b) = false))))
+
+logic us_dispatch_eq : us_rep, us_rep -> bool
+
+logic us_tag : int
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:integer. forall a1:us_private. forall a2:int.
+  (0 <= object__size({ us_split_fields1 = {
+  rec__indefinite_bounded_tagged__t__c = a; rec__ext__ = a1 }; attr__tag = a2
+  })))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:integer. forall a1:us_private. forall a2:int.
+  (0 <= object__alignment({ us_split_fields1 = {
+  rec__indefinite_bounded_tagged__t__c = a; rec__ext__ = a1 }; attr__tag = a2
+  })))
+
+logic indefinite_bounded_tagged__t__c__first__bit : int
+
+logic indefinite_bounded_tagged__t__c__last__bit : int
+
+logic indefinite_bounded_tagged__t__c__position : int
+
+axiom indefinite_bounded_tagged__t__c__first__bit_axiom :
+  (0 <= indefinite_bounded_tagged__t__c__first__bit)
+
+axiom indefinite_bounded_tagged__t__c__last__bit_axiom :
+  (indefinite_bounded_tagged__t__c__first__bit <  indefinite_bounded_tagged__t__c__last__bit)
+
+axiom indefinite_bounded_tagged__t__c__position_axiom :
+  (0 <= indefinite_bounded_tagged__t__c__position)
+
+logic user_eq3 : us_rep, us_rep -> bool
+
+logic dummy3 : integer
+
+logic dummy4 : us_private
+
+logic dummy5 : int
+
+type t__ref = { t__content : us_rep
+}
+
+function t__ref___projection(a: t__ref) : us_rep = (a).t__content
+
+type capacity_range
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq5 : int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq4 : capacity_range, capacity_range -> bool
+
+logic dummy6 : capacity_range
+
+type capacity_range__ref = { capacity_range__content : capacity_range
+}
+
+function capacity_range__ref___projection(a: capacity_range__ref) : capacity_range =
+  (a).capacity_range__content
+
+type us_main_type
+
+logic us_main_eq : us_main_type, us_main_type -> bool
+
+type us_split_discrs = {
+rec__indefinite_bounded_tagged__vect__vector__capacity : capacity_range
+}
+
+function us_split_discrs___projection(a: us_split_discrs) : capacity_range =
+  (a).rec__indefinite_bounded_tagged__vect__vector__capacity
+
+type us_split_discrs__ref = { us_split_discrs__content : us_split_discrs
+}
+
+function us_split_discrs__ref___projection(a: us_split_discrs__ref) : us_split_discrs =
+  (a).us_split_discrs__content
+
+type us_split_fields2 = { rec__indefinite_bounded_tagged__vect__vector :
+us_main_type
+}
+
+function us_split_fields_Vector__projection(a: us_split_fields2) : us_main_type =
+  (a).rec__indefinite_bounded_tagged__vect__vector
+
+type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
+}
+
+function us_split_fields__ref___2__projection(a: us_split_fields__ref1) : us_split_fields2 =
+  (a).us_split_fields__content1
+
+type us_rep1 = { us_split_discrs1 : us_split_discrs; us_split_fields3 :
+us_split_fields2
+}
+
+function us_rep___3__projection(a: us_rep1) : us_split_discrs =
+  (a).us_split_discrs1
+
+function us_rep___4__projection(a: us_rep1) : us_split_fields2 =
+  (a).us_split_fields3
+
+logic value__size1 : int
+
+logic object__size1 : us_rep1 -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : us_rep1 -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 :
+  (forall a:capacity_range. forall a1:us_main_type. (0 <= object__size1({
+  us_split_discrs1 = {
+  rec__indefinite_bounded_tagged__vect__vector__capacity = a };
+  us_split_fields3 = { rec__indefinite_bounded_tagged__vect__vector = a1 }
+  })))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:capacity_range. forall a1:us_main_type.
+  (0 <= object__alignment1({ us_split_discrs1 = {
+  rec__indefinite_bounded_tagged__vect__vector__capacity = a };
+  us_split_fields3 = { rec__indefinite_bounded_tagged__vect__vector = a1 }
+  })))
+
+logic indefinite_bounded_tagged__vect__vector__capacity__first__bit : int
+
+logic indefinite_bounded_tagged__vect__vector__capacity__last__bit : int
+
+logic indefinite_bounded_tagged__vect__vector__capacity__position : int
+
+axiom indefinite_bounded_tagged__vect__vector__capacity__first__bit_axiom :
+  (0 <= indefinite_bounded_tagged__vect__vector__capacity__first__bit)
+
+axiom indefinite_bounded_tagged__vect__vector__capacity__last__bit_axiom :
+  (indefinite_bounded_tagged__vect__vector__capacity__first__bit <  indefinite_bounded_tagged__vect__vector__capacity__last__bit)
+
+axiom indefinite_bounded_tagged__vect__vector__capacity__position_axiom :
+  (0 <= indefinite_bounded_tagged__vect__vector__capacity__position)
+
+logic user_eq5 : us_rep1, us_rep1 -> bool
+
+logic dummy7 : capacity_range
+
+logic dummy8 : us_main_type
+
+type vector__ref = { vector__content : us_rep1
+}
+
+function vector__ref___projection(a: vector__ref) : us_rep1 =
+  (a).vector__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq6 : bool, bool -> bool
+
+axiom bool_eq_def5 :
+  (forall x:bool. forall y:bool [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range4(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE4 : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> bool
+
+logic to_rep1 : capacity_range -> int
+
+logic of_rep1 : int -> capacity_range
+
+axiom inversion_axiom1 :
+  (forall x:capacity_range [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 :
+  (forall x:capacity_range [to_rep1(x)]. in_range3(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range3(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+logic capacity__function_guard : int, us_rep1 -> prop
+
+logic length : us_rep1 -> int
+
+logic length__function_guard : int, us_rep1 -> prop
+
+axiom length__post_axiom :
+  (forall container:capacity_range. forall container1:us_main_type [length({
+  us_split_discrs1 = {
+  rec__indefinite_bounded_tagged__vect__vector__capacity = container };
+  us_split_fields3 = { rec__indefinite_bounded_tagged__vect__vector =
+  container1 } })]. ((((of_int(1) = true) -> (length({ us_split_discrs1 = {
+  rec__indefinite_bounded_tagged__vect__vector__capacity = container };
+  us_split_fields3 = { rec__indefinite_bounded_tagged__vect__vector =
+  container1 } }) <= to_rep1(container))) and ((not (of_int(1) = true)) ->
+  (length({ us_split_discrs1 = {
+  rec__indefinite_bounded_tagged__vect__vector__capacity = container };
+  us_split_fields3 = { rec__indefinite_bounded_tagged__vect__vector =
+  container1 } }) <= 2147483647))) and in_range3(length({ us_split_discrs1 =
+  { rec__indefinite_bounded_tagged__vect__vector__capacity = container };
+  us_split_fields3 = { rec__indefinite_bounded_tagged__vect__vector =
+  container1 } }))))
+
+logic container__split_discrs : capacity_range
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic new_item : integer
+
+logic new_item1 : us_private
+
+logic new_item2 : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic count : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+ (* File "a-cfinve.ads", line 516, characters 0-0 *)
+goal WP_parameter_def :
+  (forall o:int. forall o1:int. (in_range1(count) ->
+  ((((((of_int(1) = true) and (o = to_rep1(container__split_discrs))) or
+  ((not (of_int(1) = true)) and (o = 2147483647))) and (in_range3(o) and
+  (((of_int(1) = true) and (o = to_rep1(container__split_discrs))) or
+  ((not (of_int(1) = true)) and (o = 2147483647))))) and
+  (o1 = (o - count))) -> in_range(o1))))

@@ -708,13 +708,13 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___4__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_4__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___4__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -1386,24 +1386,24 @@
 (define-fun us_split_fields_MAFFREJ__projection ((a us_split_fields2)) bits_1
   (rec__dw1000__register_types__sys_mask_type__maffrej a))
 
-(define-fun us_split_fields_Reserved_13__projection ((a us_split_fields2)) bits_1
+(define-fun us_split_fields_Reserved_1__3__projection ((a us_split_fields2)) bits_1
   (rec__dw1000__register_types__sys_mask_type__reserved_1 a))
 
-(define-fun us_split_fields_Reserved_23__projection ((a us_split_fields2)) bits_1
+(define-fun us_split_fields_Reserved_2__3__projection ((a us_split_fields2)) bits_1
   (rec__dw1000__register_types__sys_mask_type__reserved_2 a))
 
-(define-fun us_split_fields_Reserved_32__projection ((a us_split_fields2)) bits_2
+(define-fun us_split_fields_Reserved_3__2__projection ((a us_split_fields2)) bits_2
   (rec__dw1000__register_types__sys_mask_type__reserved_3 a))
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_11__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___11__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_11__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                 a))
+(define-fun us_rep___11__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                   a))
 
 (define-fun bool_eq1 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -2244,27 +2244,27 @@
 (define-fun us_split_fields_KHZCLKDIV__projection ((a us_split_fields4)) bits_6
   (rec__dw1000__register_types__pmsc_ctrl1_type__khzclkdiv a))
 
-(define-fun us_split_fields_Reserved_117__projection ((a us_split_fields4)) bits_1
+(define-fun us_split_fields_Reserved_1__17__projection ((a us_split_fields4)) bits_1
   (rec__dw1000__register_types__pmsc_ctrl1_type__reserved_1 a))
 
-(define-fun us_split_fields_Reserved_217__projection ((a us_split_fields4)) bits_1
+(define-fun us_split_fields_Reserved_2__17__projection ((a us_split_fields4)) bits_1
   (rec__dw1000__register_types__pmsc_ctrl1_type__reserved_2 a))
 
-(define-fun us_split_fields_Reserved_36__projection ((a us_split_fields4)) bits_1
+(define-fun us_split_fields_Reserved_3__6__projection ((a us_split_fields4)) bits_1
   (rec__dw1000__register_types__pmsc_ctrl1_type__reserved_3 a))
 
-(define-fun us_split_fields_Reserved_43__projection ((a us_split_fields4)) bits_8
+(define-fun us_split_fields_Reserved_4__3__projection ((a us_split_fields4)) bits_8
   (rec__dw1000__register_types__pmsc_ctrl1_type__reserved_4 a))
 
 (declare-datatypes ((us_split_fields__ref2 0))
 (((mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_102__projection ((a us_split_fields__ref2)) us_split_fields4
+(define-fun us_split_fields__ref___102__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep2 (us_split_fields5 us_split_fields4)))))
-(define-fun us_rep_102__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
-                                                                  a))
+(define-fun us_rep___102__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
+                                                                    a))
 
 (define-fun bool_eq2 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
@@ -2601,17 +2601,17 @@
 
 (declare-datatypes ((register_type__ref 0))
 (((mk_register_type__ref (register_type__content us_rep)))))
-(define-fun register_type__ref_4__projection ((a register_type__ref)) us_rep
+(define-fun register_type__ref___4__projection ((a register_type__ref)) us_rep
   (register_type__content a))
 
 (declare-datatypes ((register_type__ref1 0))
 (((mk_register_type__ref1 (register_type__content1 us_rep1)))))
-(define-fun register_type__ref_11__projection ((a register_type__ref1)) us_rep1
+(define-fun register_type__ref___11__projection ((a register_type__ref1)) us_rep1
   (register_type__content1 a))
 
 (declare-datatypes ((register_type__ref2 0))
 (((mk_register_type__ref2 (register_type__content2 us_rep2)))))
-(define-fun register_type__ref_101__projection ((a register_type__ref2)) us_rep2
+(define-fun register_type__ref___101__projection ((a register_type__ref2)) us_rep2
   (register_type__content2 a))
 
 (declare-datatypes ((map__ref 0))
@@ -2774,13 +2774,13 @@
 
 (declare-datatypes ((us_split_fields__ref3 0))
 (((mk___split_fields__ref3 (us_split_fields__content3 us_split_fields6)))))
-(define-fun us_split_fields__ref_140__projection ((a us_split_fields__ref3)) us_split_fields6
+(define-fun us_split_fields__ref___140__projection ((a us_split_fields__ref3)) us_split_fields6
   (us_split_fields__content3 a))
 
 (declare-datatypes ((us_rep3 0))
 (((mk___rep3 (us_split_fields7 us_split_fields6)))))
-(define-fun us_rep_141__projection ((a us_rep3)) us_split_fields6 (us_split_fields7
-                                                                  a))
+(define-fun us_rep___141__projection ((a us_rep3)) us_split_fields6 (us_split_fields7
+                                                                    a))
 
 (declare-const value__size3 Int)
 

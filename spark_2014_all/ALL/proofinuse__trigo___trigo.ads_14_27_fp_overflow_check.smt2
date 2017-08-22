@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -114,7 +115,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-fun pow3 (Float32) Float32)
 
@@ -189,12 +190,12 @@
 (declare-const o8 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite x) (fp.isNaN x))))
+  (assert (fp.isFinite32 x))
 
 ;; H
   (assert
   (and (= o7 (pow7 x))
-  (and (not (or (fp.isInfinite o7) (fp.isNaN o7)))
+  (and (fp.isFinite32 o7)
   (= o7 (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE
   x x) x) x) x) x) x)))))
 
@@ -205,7 +206,7 @@
 ;; H
   (assert
   (and (= o3 (pow5 x))
-  (and (not (or (fp.isInfinite o3) (fp.isNaN o3)))
+  (and (fp.isFinite32 o3)
   (= o3 (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE x x) x) x) x)))))
 
 ;; H
@@ -215,8 +216,7 @@
 ;; H
   (assert
   (and (= o (pow3 x))
-  (and (not (or (fp.isInfinite o) (fp.isNaN o)))
-  (= o (fp.mul RNE (fp.mul RNE x x) x)))))
+  (and (fp.isFinite32 o) (= o (fp.mul RNE (fp.mul RNE x x) x)))))
 
 ;; H
   (assert
@@ -226,7 +226,7 @@
   (assert (= o2 (fp.sub RNE x o1)))
 
 ;; H
-  (assert (and (= o5 o2) (not (or (fp.isInfinite o2) (fp.isNaN o2)))))
+  (assert (and (= o5 o2) (fp.isFinite32 o2)))
 
 ;; H
   (assert (= o6 (fp.add RNE o5 o4)))
@@ -234,6 +234,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (not (or (fp.isInfinite o6) (fp.isNaN o6)))))
+  (not (fp.isFinite32 o6)))
 (check-sat)
 (exit)

@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -232,7 +233,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-sort source 0)
 
@@ -250,8 +251,8 @@
 
 (declare-datatypes ((source__ref 0))
 (((mk_source__ref (source__content source)))))
-(define-fun source__ref_2__projection ((a source__ref)) source (source__content
-                                                               a))
+(define-fun source__ref___2__projection ((a source__ref)) source (source__content
+                                                                 a))
 
 (define-fun dynamic_invariant2 ((temp___expr_189 (_ BitVec 32))
   (temp___is_init_186 Bool) (temp___skip_constant_187 Bool)
@@ -271,15 +272,15 @@
 
 (declare-datatypes ((target__ref 0))
 (((mk_target__ref (target__content target)))))
-(define-fun target__ref_2__projection ((a target__ref)) target (target__content
-                                                               a))
+(define-fun target__ref___2__projection ((a target__ref)) target (target__content
+                                                                 a))
 
 (define-fun dynamic_invariant3 ((temp___expr_195 Float32)
   (temp___is_init_192 Bool) (temp___skip_constant_193 Bool)
   (temp___do_toplevel_194 Bool)) Bool (=>
                                       (or (= temp___is_init_192 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_195) (fp.isNaN temp___expr_195)))))
+                                      (fp.isFinite32 temp___expr_195)))
 
 (declare-fun convert ((_ BitVec 32)) Float32)
 
@@ -321,15 +322,15 @@
 
 (declare-datatypes ((source__ref1 0))
 (((mk_source__ref1 (source__content1 source1)))))
-(define-fun source__ref_3__projection ((a source__ref1)) source1 (source__content1
-                                                                 a))
+(define-fun source__ref___3__projection ((a source__ref1)) source1 (source__content1
+                                                                   a))
 
 (define-fun dynamic_invariant4 ((temp___expr_201 Float32)
   (temp___is_init_198 Bool) (temp___skip_constant_199 Bool)
   (temp___do_toplevel_200 Bool)) Bool (=>
                                       (or (= temp___is_init_198 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_201) (fp.isNaN temp___expr_201)))))
+                                      (fp.isFinite32 temp___expr_201)))
 
 (declare-sort target1 0)
 
@@ -348,8 +349,8 @@
 
 (declare-datatypes ((target__ref1 0))
 (((mk_target__ref1 (target__content1 target1)))))
-(define-fun target__ref_3__projection ((a target__ref1)) target1 (target__content1
-                                                                 a))
+(define-fun target__ref___3__projection ((a target__ref1)) target1 (target__content1
+                                                                   a))
 
 (define-fun dynamic_invariant5 ((temp___expr_207 Int)
   (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
@@ -393,38 +394,37 @@
 ;; H
   (assert
   (and (= zero_and_min__zero_plus__assume (convert ((_ int2bv 32) 0)))
-  (not (or (fp.isInfinite zero_and_min__zero_plus__assume) (fp.isNaN
-  zero_and_min__zero_plus__assume)))))
+  (fp.isFinite32 zero_and_min__zero_plus__assume)))
 
 ;; H
   (assert (= zero_and_min__zero_plus__assume zero_plus))
 
 ;; H
-  (assert (not (or (fp.isInfinite zero_plus) (fp.isNaN zero_plus))))
+  (assert (fp.isFinite32 zero_plus))
 
 ;; H
   (assert
   (and
   (= zero_and_min__zero_neg__assume (convert ((_ int2bv 32) 2147483648)))
-  (not (or (fp.isInfinite zero_and_min__zero_neg__assume) (fp.isNaN zero_and_min__zero_neg__assume)))))
+  (fp.isFinite32 zero_and_min__zero_neg__assume)))
 
 ;; H
   (assert (= zero_and_min__zero_neg__assume zero_neg))
 
 ;; H
-  (assert (not (or (fp.isInfinite zero_neg) (fp.isNaN zero_neg))))
+  (assert (fp.isFinite32 zero_neg))
 
 ;; H
   (assert (= zero_plus c1b))
 
 ;; H
-  (assert (not (or (fp.isInfinite c1b) (fp.isNaN c1b))))
+  (assert (fp.isFinite32 c1b))
 
 ;; H
   (assert (= zero_neg c2b))
 
 ;; H
-  (assert (not (or (fp.isInfinite c2b) (fp.isNaN c2b))))
+  (assert (fp.isFinite32 c2b))
 
 ;; H
   (assert

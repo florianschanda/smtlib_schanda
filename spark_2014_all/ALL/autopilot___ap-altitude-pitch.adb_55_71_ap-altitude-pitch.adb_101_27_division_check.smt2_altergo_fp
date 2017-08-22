@@ -1,0 +1,557 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic comp_div: int, int -> int
+axiom comp_div_def: forall x, y:int. x >= 0 and y > 0 -> comp_div(x,y) = x / y
+logic comp_mod: int, int -> int
+axiom comp_mod_def: forall x, y:int. x >= 0 and y > 0 -> comp_mod(x,y) = x % y
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+axiom Div_mod :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * comp_div(x,y)) + comp_mod(x,y)))))
+
+axiom Div_bound :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= comp_div(x,y)) and (comp_div(x,y) <= x))))
+
+axiom Mod_bound :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (((-abs_int(y)) <  comp_mod(x,y)) and (comp_mod(x,y) <  abs_int(y)))))
+
+axiom Div_sign_pos :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  (0 <= comp_div(x,y))))
+
+axiom Div_sign_neg :
+  (forall x:int. forall y:int. (((x <= 0) and (0 <  y)) ->
+  (comp_div(x,y) <= 0)))
+
+axiom Mod_sign_pos :
+  (forall x:int. forall y:int. (((0 <= x) and (not (y = 0))) ->
+  (0 <= comp_mod(x,y))))
+
+axiom Mod_sign_neg :
+  (forall x:int. forall y:int. (((x <= 0) and (not (y = 0))) ->
+  (comp_mod(x,y) <= 0)))
+
+axiom Rounds_toward_zero :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (abs_int((comp_div(x,y) * y)) <= abs_int(x))))
+
+axiom Div_1 : (forall x:int. (comp_div(x,1) = x))
+
+axiom Mod_1 : (forall x:int. (comp_mod(x,1) = 0))
+
+axiom Div_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) ->
+  (comp_div(x,y) = 0)))
+
+axiom Mod_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) ->
+  (comp_mod(x,y) = x)))
+
+axiom Div_mult :
+  (forall x:int. forall y:int. forall z:int [comp_div(((x * y) + z),x)].
+  (((0 <  x) and ((0 <= y) and (0 <= z))) ->
+  (comp_div(((x * y) + z),x) = (y + comp_div(z,x)))))
+
+axiom Mod_mult :
+  (forall x:int. forall y:int. forall z:int [comp_mod(((x * y) + z),x)].
+  (((0 <  x) and ((0 <= y) and (0 <= z))) ->
+  (comp_mod(((x * y) + z),x) = comp_mod(z,x))))
+
+axiom Div_mod1 :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * (x / y)) + (x % y)))))
+
+axiom Mod_bound1 :
+  (forall x:int. forall y:int. ((not (y = 0)) -> ((0 <= (x % y)) and
+  ((x % y) <  abs_int(y)))))
+
+axiom Div_unique :
+  (forall x:int. forall y:int. forall q:int. ((0 <  y) ->
+  ((((q * y) <= x) and (x <  ((q * y) + y))) -> ((x / y) = q))))
+
+axiom Div_bound1 :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= (x / y)) and ((x / y) <= x))))
+
+axiom Mod_11 : (forall x:int. ((x % 1) = 0))
+
+axiom Div_11 : (forall x:int. ((x / 1) = x))
+
+axiom Div_inf1 :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> ((x / y) = 0)))
+
+axiom Div_inf_neg :
+  (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
+  (((-x) / y) = (-1))))
+
+axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
+
+axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
+
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+
+axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
+
+axiom Mod_minus1_left :
+  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+
+axiom Div_mult1 :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
+  ((0 <  x) -> ((((x * y) + z) / x) = (y + (z / x)))))
+
+axiom Mod_mult1 :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) % x)].
+  ((0 <  x) -> ((((x * y) + z) % x) = (z % x))))
+
+logic mod : int, int -> int
+
+axiom mod_def :
+  (forall x:int. forall y:int [mod(x, y)]. (((0 <  y) -> (mod(x,
+  y) = (x % y))) and ((not (0 <  y)) -> (mod(x, y) = ((x % y) + y)))))
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type feet
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 50000))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : feet, feet -> bool
+
+logic dummy : feet
+
+type feet__ref = { feet__content : feet
+}
+
+function feet__ref___projection(a: feet__ref) : feet = (a).feet__content
+
+type feetpermin
+
+predicate in_range2(x: int) = (((-6000) <= x) and (x <= 6000))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : feetpermin, feetpermin -> bool
+
+logic dummy1 : feetpermin
+
+type feetpermin__ref = { feetpermin__content : feetpermin
+}
+
+function feetpermin__ref___projection(a: feetpermin__ref) : feetpermin =
+  (a).feetpermin__content
+
+type machnumber
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 100))
+
+logic bool_eq4 : int, int -> bool
+
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq2 : machnumber, machnumber -> bool
+
+logic dummy2 : machnumber
+
+type machnumber__ref = { machnumber__content : machnumber
+}
+
+function machnumber__ref___projection(a: machnumber__ref) : machnumber =
+  (a).machnumber__content
+
+type pitchangle
+
+predicate in_range4(x: int) = (((-10) <= x) and (x <= 20))
+
+logic bool_eq5 : int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq3 : pitchangle, pitchangle -> bool
+
+logic dummy3 : pitchangle
+
+type pitchangle__ref = { pitchangle__content : pitchangle
+}
+
+function pitchangle__ref___projection(a: pitchangle__ref) : pitchangle =
+  (a).pitchangle__content
+
+type controlangle
+
+predicate in_range5(x: int) = (((-45) <= x) and (x <= 45))
+
+logic bool_eq6 : int, int -> bool
+
+axiom bool_eq_def5 :
+  (forall x:int. forall y:int [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> int
+
+logic user_eq4 : controlangle, controlangle -> bool
+
+logic dummy4 : controlangle
+
+type controlangle__ref = { controlangle__content : controlangle
+}
+
+function controlangle__ref___projection(a: controlangle__ref) : controlangle =
+  (a).controlangle__content
+
+type scaledata
+
+predicate in_range6(x: int) = (((-100) <= x) and (x <= 100))
+
+logic bool_eq7 : int, int -> bool
+
+axiom bool_eq_def6 :
+  (forall x:int. forall y:int [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE6 : us_image -> int
+
+logic user_eq5 : scaledata, scaledata -> bool
+
+logic dummy5 : scaledata
+
+type scaledata__ref = { scaledata__content : scaledata
+}
+
+function scaledata__ref___projection(a: scaledata__ref) : scaledata =
+  (a).scaledata__content
+
+logic scale_movement : int, int, int, int -> int
+
+logic scale_movement__function_guard : int, int, int, int, int -> prop
+
+axiom scale_movement__post_axiom :
+  (forall mach:int. forall present:int. forall target:int. forall max:int
+  [scale_movement(mach, present, target, max)]. (((((in_range3(mach) and
+  in_range6(present)) and in_range6(target)) and in_range5(max)) and
+  (0 <  max)) -> ((((-max) <= scale_movement(mach, present, target, max)) and
+  (scale_movement(mach, present, target, max) <= max)) and
+  in_range5(scale_movement(mach, present, target, max)))))
+
+logic present_altitude : int
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic target_altitude : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic mach : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic climb_rate : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic the_pitch : int
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+type degreespersec
+
+predicate in_range7(x: int) = (((-180) <= x) and (x <= 180))
+
+logic bool_eq8 : int, int -> bool
+
+axiom bool_eq_def7 :
+  (forall x:int. forall y:int [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE7 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check7 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE7 : us_image -> int
+
+logic user_eq6 : degreespersec, degreespersec -> bool
+
+logic dummy6 : degreespersec
+
+type degreespersec__ref = { degreespersec__content : degreespersec
+}
+
+function degreespersec__ref___projection(a: degreespersec__ref) : degreespersec =
+  (a).degreespersec__content
+
+type floorfpm
+
+predicate in_range8(x: int) = (((-1000) <= x) and (x <= 1000))
+
+logic bool_eq9 : int, int -> bool
+
+axiom bool_eq_def8 :
+  (forall x:int. forall y:int [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE8 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check8 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE8 : us_image -> int
+
+logic user_eq7 : floorfpm, floorfpm -> bool
+
+logic dummy7 : floorfpm
+
+type floorfpm__ref = { floorfpm__content : floorfpm
+}
+
+function floorfpm__ref___projection(a: floorfpm__ref) : floorfpm =
+  (a).floorfpm__content
+
+type degreespersec1
+
+predicate in_range9(x: int) = (((-180) <= x) and (x <= 180))
+
+logic bool_eq10 : int, int -> bool
+
+axiom bool_eq_def9 :
+  (forall x:int. forall y:int [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE9 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check9 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE9 : us_image -> int
+
+logic user_eq8 : degreespersec1, degreespersec1 -> bool
+
+logic dummy8 : degreespersec1
+
+type degreespersec__ref1 = { degreespersec__content1 : degreespersec1
+}
+
+function degreespersec__ref___2__projection(a: degreespersec__ref1) : degreespersec1 =
+  (a).degreespersec__content1
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
+logic attr__ATTRIBUTE_ADDRESS6 : int
+
+logic attr__ATTRIBUTE_ADDRESS7 : int
+
+logic c11b : int
+
+logic attr__ATTRIBUTE_ADDRESS8 : int
+
+logic c12b : int
+
+logic attr__ATTRIBUTE_ADDRESS9 : int
+
+logic c13b : int
+
+logic attr__ATTRIBUTE_ADDRESS10 : int
+
+logic attr__ATTRIBUTE_ADDRESS11 : int
+
+logic attr__ATTRIBUTE_ADDRESS12 : int
+
+logic attr__ATTRIBUTE_ADDRESS13 : int
+
+logic c16b : int
+
+logic attr__ATTRIBUTE_ADDRESS14 : int
+
+logic c17b : int
+
+logic attr__ATTRIBUTE_ADDRESS15 : int
+
+logic attr__ATTRIBUTE_ADDRESS16 : int
+
+logic c20b : int
+
+logic attr__ATTRIBUTE_ADDRESS17 : int
+
+logic c21b : int
+
+logic attr__ATTRIBUTE_ADDRESS18 : int
+
+logic c22b : int
+
+logic attr__ATTRIBUTE_ADDRESS19 : int
+
+logic attr__ATTRIBUTE_ADDRESS20 : int
+
+ (* File "ap-altitude-pitch-rate.ads", line 9, characters 0-0 *)
+goal WP_parameter_def :
+  (forall present_pitchrate:int. forall target_pitchrate:int.
+  forall elevator_movement:int. forall target_climb_rate:int.
+  forall floor_climb_rate:int. forall result__:int.
+  forall ap__altitude__pitch__rate__calc_pitchrate__present_pitchrate:int.
+  forall result:int. forall present_pitchrate1:int.
+  forall target_climb_rate1:int. forall floor_climb_rate1:int.
+  (in_range1(present_altitude) -> (in_range1(target_altitude) ->
+  (in_range3(mach) -> (in_range2(climb_rate) -> (in_range4(the_pitch) ->
+  ((((-180) <= 180) -> in_range9(present_pitchrate)) -> ((((-180) <= 180) ->
+  in_range9(target_pitchrate)) -> ((((-45) <= 45) ->
+  in_range5(elevator_movement)) ->
+  ((in_range7(ap__altitude__pitch__rate__calc_pitchrate__present_pitchrate) and
+  ((result = present_pitchrate) and
+  (present_pitchrate1 = ap__altitude__pitch__rate__calc_pitchrate__present_pitchrate))) ->
+  (((present_altitude = c11b) and in_range1(c11b)) ->
+  (((target_altitude = c12b) and in_range1(c12b)) ->
+  (((climb_rate = c13b) and in_range2(c13b)) -> ((((-1000) <= 1000) ->
+  in_range8(target_climb_rate)) -> ((((-1000) <= 1000) ->
+  in_range8(floor_climb_rate)) -> ((((-180) <= 180) ->
+  in_range9(result__)) -> ((in_range8(floor_climb_rate1) and
+  in_range8(target_climb_rate1)) -> ((((-1000) <= 1000) ->
+  in_range8(target_climb_rate1)) -> ((((-1000) <= 1000) ->
+  in_range8(floor_climb_rate1)) -> (not (12 = 0)))))))))))))))))))))

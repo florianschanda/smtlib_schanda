@@ -562,8 +562,8 @@
 
 (declare-datatypes ((hours__ref 0))
 (((mk_hours__ref (hours__content hours)))))
-(define-fun hours__ref_3__projection ((a hours__ref)) hours (hours__content
-                                                            a))
+(define-fun hours__ref___3__projection ((a hours__ref)) hours (hours__content
+                                                              a))
 
 (define-fun dynamic_invariant3 ((temp___expr_259 Int)
   (temp___is_init_256 Bool) (temp___skip_constant_257 Bool)
@@ -587,8 +587,8 @@
 
 (declare-datatypes ((minutes__ref 0))
 (((mk_minutes__ref (minutes__content minutes)))))
-(define-fun minutes__ref_3__projection ((a minutes__ref)) minutes (minutes__content
-                                                                  a))
+(define-fun minutes__ref___3__projection ((a minutes__ref)) minutes (minutes__content
+                                                                    a))
 
 (define-fun dynamic_invariant4 ((temp___expr_265 Int)
   (temp___is_init_262 Bool) (temp___skip_constant_263 Bool)

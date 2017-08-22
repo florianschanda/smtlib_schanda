@@ -49,7 +49,7 @@
 (declare-const dummy t)
 
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t)))))
-(define-fun t__ref_4__projection ((a t__ref)) t (t__content a))
+(define-fun t__ref___4__projection ((a t__ref)) t (t__content a))
 
 (define-fun dynamic_invariant ((temp___expr_195 Int)
   (temp___is_init_192 Bool) (temp___skip_constant_193 Bool)

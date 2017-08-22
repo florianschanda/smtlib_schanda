@@ -108,7 +108,7 @@
 
 (declare-datatypes ((capacity_range__ref1 0))
 (((mk_capacity_range__ref1 (capacity_range__content1 capacity_range1)))))
-(define-fun capacity_range__ref_2__projection ((a capacity_range__ref1)) capacity_range1
+(define-fun capacity_range__ref___2__projection ((a capacity_range__ref1)) capacity_range1
   (capacity_range__content1 a))
 
 (declare-sort us_main_type 0)
@@ -143,8 +143,8 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_discrs (us_split_discrs1
                                                              a))
 
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (declare-const value__size Int)
 
@@ -271,12 +271,12 @@
 (declare-datatypes ((us_split_discrs2 0))
 (((mk___split_discrs1
   (rec__hnco__test2__v_type_owner__vector_type__capacity capacity_range)))))
-(define-fun us_split_discrs_2__projection ((a us_split_discrs2)) capacity_range
+(define-fun us_split_discrs___2__projection ((a us_split_discrs2)) capacity_range
   (rec__hnco__test2__v_type_owner__vector_type__capacity a))
 
 (declare-datatypes ((us_split_discrs__ref1 0))
 (((mk___split_discrs__ref1 (us_split_discrs__content1 us_split_discrs2)))))
-(define-fun us_split_discrs__ref_2__projection ((a us_split_discrs__ref1)) us_split_discrs2
+(define-fun us_split_discrs__ref___2__projection ((a us_split_discrs__ref1)) us_split_discrs2
   (us_split_discrs__content1 a))
 
 (declare-datatypes ((us_split_fields2 0))
@@ -290,19 +290,19 @@
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1
   (us_split_discrs3 us_split_discrs2)(us_split_fields3 us_split_fields2)(attr__tag Int)))))
-(define-fun us_rep_3__projection ((a us_rep1)) us_split_discrs2 (us_split_discrs3
-                                                                a))
+(define-fun us_rep___3__projection ((a us_rep1)) us_split_discrs2 (us_split_discrs3
+                                                                  a))
 
-(define-fun us_rep_4__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___4__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
-(define-fun us_rep_5__projection ((a us_rep1)) Int (attr__tag a))
+(define-fun us_rep___5__projection ((a us_rep1)) Int (attr__tag a))
 
 (declare-fun us_dispatch_eq (us_rep1 us_rep1) Bool)
 
@@ -588,27 +588,27 @@
 (declare-datatypes ((us_split_fields4 0))
 (((mk___split_fields2
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector1 us_rep)(rec__ext__1 us_private)))))
-(define-fun us_split_fields_Hidden_Vector2__projection ((a us_split_fields4)) us_rep
+(define-fun us_split_fields_Hidden_Vector__2__projection ((a us_split_fields4)) us_rep
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector1 a))
 
-(define-fun us_split_fields_2__projection ((a us_split_fields4)) us_private
+(define-fun us_split_fields___2__projection ((a us_split_fields4)) us_private
   (rec__ext__1 a))
 
 (declare-datatypes ((us_split_fields__ref2 0))
 (((mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref2)) us_split_fields4
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ((us_rep3 0))
 (((mk___rep2
   (us_split_discrs4 us_split_discrs2)(us_split_fields5 us_split_fields4)(attr__tag1 Int)))))
-(define-fun us_rep_6__projection ((a us_rep3)) us_split_discrs2 (us_split_discrs4
-                                                                a))
+(define-fun us_rep___6__projection ((a us_rep3)) us_split_discrs2 (us_split_discrs4
+                                                                  a))
 
-(define-fun us_rep_7__projection ((a us_rep3)) us_split_fields4 (us_split_fields5
-                                                                a))
+(define-fun us_rep___7__projection ((a us_rep3)) us_split_fields4 (us_split_fields5
+                                                                  a))
 
-(define-fun us_rep_8__projection ((a us_rep3)) Int (attr__tag1 a))
+(define-fun us_rep___8__projection ((a us_rep3)) Int (attr__tag1 a))
 
 (declare-fun hide_ext__ (us_private) us_private)
 
@@ -760,27 +760,27 @@
 (declare-datatypes ((us_split_fields6 0))
 (((mk___split_fields3
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector2 us_rep)(rec__ext__2 us_private)))))
-(define-fun us_split_fields_Hidden_Vector3__projection ((a us_split_fields6)) us_rep
+(define-fun us_split_fields_Hidden_Vector__3__projection ((a us_split_fields6)) us_rep
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector2 a))
 
-(define-fun us_split_fields_3__projection ((a us_split_fields6)) us_private
+(define-fun us_split_fields___3__projection ((a us_split_fields6)) us_private
   (rec__ext__2 a))
 
 (declare-datatypes ((us_split_fields__ref3 0))
 (((mk___split_fields__ref3 (us_split_fields__content3 us_split_fields6)))))
-(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref3)) us_split_fields6
+(define-fun us_split_fields__ref___4__projection ((a us_split_fields__ref3)) us_split_fields6
   (us_split_fields__content3 a))
 
 (declare-datatypes ((us_rep4 0))
 (((mk___rep3
   (us_split_discrs5 us_split_discrs2)(us_split_fields7 us_split_fields6)(attr__tag2 Int)))))
-(define-fun us_rep_9__projection ((a us_rep4)) us_split_discrs2 (us_split_discrs5
-                                                                a))
+(define-fun us_rep___9__projection ((a us_rep4)) us_split_discrs2 (us_split_discrs5
+                                                                  a))
 
-(define-fun us_rep_10__projection ((a us_rep4)) us_split_fields6 (us_split_fields7
-                                                                 a))
+(define-fun us_rep___10__projection ((a us_rep4)) us_split_fields6 (us_split_fields7
+                                                                   a))
 
-(define-fun us_rep_11__projection ((a us_rep4)) Int (attr__tag2 a))
+(define-fun us_rep___11__projection ((a us_rep4)) Int (attr__tag2 a))
 
 (declare-fun hide_ext__1 (us_private) us_private)
 
@@ -932,27 +932,27 @@
 (declare-datatypes ((us_split_fields8 0))
 (((mk___split_fields4
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector3 us_rep)(rec__ext__3 us_private)))))
-(define-fun us_split_fields_Hidden_Vector4__projection ((a us_split_fields8)) us_rep
+(define-fun us_split_fields_Hidden_Vector__4__projection ((a us_split_fields8)) us_rep
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector3 a))
 
-(define-fun us_split_fields_4__projection ((a us_split_fields8)) us_private
+(define-fun us_split_fields___4__projection ((a us_split_fields8)) us_private
   (rec__ext__3 a))
 
 (declare-datatypes ((us_split_fields__ref4 0))
 (((mk___split_fields__ref4 (us_split_fields__content4 us_split_fields8)))))
-(define-fun us_split_fields__ref_5__projection ((a us_split_fields__ref4)) us_split_fields8
+(define-fun us_split_fields__ref___5__projection ((a us_split_fields__ref4)) us_split_fields8
   (us_split_fields__content4 a))
 
 (declare-datatypes ((us_rep5 0))
 (((mk___rep4
   (us_split_discrs6 us_split_discrs2)(us_split_fields9 us_split_fields8)(attr__tag3 Int)))))
-(define-fun us_rep_12__projection ((a us_rep5)) us_split_discrs2 (us_split_discrs6
-                                                                 a))
+(define-fun us_rep___12__projection ((a us_rep5)) us_split_discrs2 (us_split_discrs6
+                                                                   a))
 
-(define-fun us_rep_13__projection ((a us_rep5)) us_split_fields8 (us_split_fields9
-                                                                 a))
+(define-fun us_rep___13__projection ((a us_rep5)) us_split_fields8 (us_split_fields9
+                                                                   a))
 
-(define-fun us_rep_14__projection ((a us_rep5)) Int (attr__tag3 a))
+(define-fun us_rep___14__projection ((a us_rep5)) Int (attr__tag3 a))
 
 (declare-fun hide_ext__2 (us_private) us_private)
 
@@ -1104,27 +1104,27 @@
 (declare-datatypes ((us_split_fields10 0))
 (((mk___split_fields5
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector4 us_rep)(rec__ext__4 us_private)))))
-(define-fun us_split_fields_Hidden_Vector5__projection ((a us_split_fields10)) us_rep
+(define-fun us_split_fields_Hidden_Vector__5__projection ((a us_split_fields10)) us_rep
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector4 a))
 
-(define-fun us_split_fields_5__projection ((a us_split_fields10)) us_private
+(define-fun us_split_fields___5__projection ((a us_split_fields10)) us_private
   (rec__ext__4 a))
 
 (declare-datatypes ((us_split_fields__ref5 0))
 (((mk___split_fields__ref5 (us_split_fields__content5 us_split_fields10)))))
-(define-fun us_split_fields__ref_6__projection ((a us_split_fields__ref5)) us_split_fields10
+(define-fun us_split_fields__ref___6__projection ((a us_split_fields__ref5)) us_split_fields10
   (us_split_fields__content5 a))
 
 (declare-datatypes ((us_rep6 0))
 (((mk___rep5
   (us_split_discrs7 us_split_discrs2)(us_split_fields11 us_split_fields10)(attr__tag4 Int)))))
-(define-fun us_rep_15__projection ((a us_rep6)) us_split_discrs2 (us_split_discrs7
-                                                                 a))
+(define-fun us_rep___15__projection ((a us_rep6)) us_split_discrs2 (us_split_discrs7
+                                                                   a))
 
-(define-fun us_rep_16__projection ((a us_rep6)) us_split_fields10 (us_split_fields11
-                                                                  a))
+(define-fun us_rep___16__projection ((a us_rep6)) us_split_fields10 (us_split_fields11
+                                                                    a))
 
-(define-fun us_rep_17__projection ((a us_rep6)) Int (attr__tag4 a))
+(define-fun us_rep___17__projection ((a us_rep6)) Int (attr__tag4 a))
 
 (declare-fun hide_ext__3 (us_private) us_private)
 
@@ -1277,27 +1277,27 @@
 (declare-datatypes ((us_split_fields12 0))
 (((mk___split_fields6
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector5 us_rep)(rec__ext__5 us_private)))))
-(define-fun us_split_fields_Hidden_Vector6__projection ((a us_split_fields12)) us_rep
+(define-fun us_split_fields_Hidden_Vector__6__projection ((a us_split_fields12)) us_rep
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector5 a))
 
-(define-fun us_split_fields_6__projection ((a us_split_fields12)) us_private
+(define-fun us_split_fields___6__projection ((a us_split_fields12)) us_private
   (rec__ext__5 a))
 
 (declare-datatypes ((us_split_fields__ref6 0))
 (((mk___split_fields__ref6 (us_split_fields__content6 us_split_fields12)))))
-(define-fun us_split_fields__ref_7__projection ((a us_split_fields__ref6)) us_split_fields12
+(define-fun us_split_fields__ref___7__projection ((a us_split_fields__ref6)) us_split_fields12
   (us_split_fields__content6 a))
 
 (declare-datatypes ((us_rep7 0))
 (((mk___rep6
   (us_split_discrs8 us_split_discrs2)(us_split_fields13 us_split_fields12)(attr__tag5 Int)))))
-(define-fun us_rep_18__projection ((a us_rep7)) us_split_discrs2 (us_split_discrs8
-                                                                 a))
+(define-fun us_rep___18__projection ((a us_rep7)) us_split_discrs2 (us_split_discrs8
+                                                                   a))
 
-(define-fun us_rep_19__projection ((a us_rep7)) us_split_fields12 (us_split_fields13
-                                                                  a))
+(define-fun us_rep___19__projection ((a us_rep7)) us_split_fields12 (us_split_fields13
+                                                                    a))
 
-(define-fun us_rep_20__projection ((a us_rep7)) Int (attr__tag5 a))
+(define-fun us_rep___20__projection ((a us_rep7)) Int (attr__tag5 a))
 
 (declare-fun hide_ext__4 (us_private) us_private)
 
@@ -1450,27 +1450,27 @@
 (declare-datatypes ((us_split_fields14 0))
 (((mk___split_fields7
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector6 us_rep)(rec__ext__6 us_private)))))
-(define-fun us_split_fields_Hidden_Vector7__projection ((a us_split_fields14)) us_rep
+(define-fun us_split_fields_Hidden_Vector__7__projection ((a us_split_fields14)) us_rep
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector6 a))
 
-(define-fun us_split_fields_7__projection ((a us_split_fields14)) us_private
+(define-fun us_split_fields___7__projection ((a us_split_fields14)) us_private
   (rec__ext__6 a))
 
 (declare-datatypes ((us_split_fields__ref7 0))
 (((mk___split_fields__ref7 (us_split_fields__content7 us_split_fields14)))))
-(define-fun us_split_fields__ref_8__projection ((a us_split_fields__ref7)) us_split_fields14
+(define-fun us_split_fields__ref___8__projection ((a us_split_fields__ref7)) us_split_fields14
   (us_split_fields__content7 a))
 
 (declare-datatypes ((us_rep8 0))
 (((mk___rep7
   (us_split_discrs9 us_split_discrs2)(us_split_fields15 us_split_fields14)(attr__tag6 Int)))))
-(define-fun us_rep_21__projection ((a us_rep8)) us_split_discrs2 (us_split_discrs9
-                                                                 a))
+(define-fun us_rep___21__projection ((a us_rep8)) us_split_discrs2 (us_split_discrs9
+                                                                   a))
 
-(define-fun us_rep_22__projection ((a us_rep8)) us_split_fields14 (us_split_fields15
-                                                                  a))
+(define-fun us_rep___22__projection ((a us_rep8)) us_split_fields14 (us_split_fields15
+                                                                    a))
 
-(define-fun us_rep_23__projection ((a us_rep8)) Int (attr__tag6 a))
+(define-fun us_rep___23__projection ((a us_rep8)) Int (attr__tag6 a))
 
 (declare-fun hide_ext__5 (us_private) us_private)
 
@@ -1623,27 +1623,27 @@
 (declare-datatypes ((us_split_fields16 0))
 (((mk___split_fields8
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector7 us_rep)(rec__ext__7 us_private)))))
-(define-fun us_split_fields_Hidden_Vector8__projection ((a us_split_fields16)) us_rep
+(define-fun us_split_fields_Hidden_Vector__8__projection ((a us_split_fields16)) us_rep
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector7 a))
 
-(define-fun us_split_fields_8__projection ((a us_split_fields16)) us_private
+(define-fun us_split_fields___8__projection ((a us_split_fields16)) us_private
   (rec__ext__7 a))
 
 (declare-datatypes ((us_split_fields__ref8 0))
 (((mk___split_fields__ref8 (us_split_fields__content8 us_split_fields16)))))
-(define-fun us_split_fields__ref_9__projection ((a us_split_fields__ref8)) us_split_fields16
+(define-fun us_split_fields__ref___9__projection ((a us_split_fields__ref8)) us_split_fields16
   (us_split_fields__content8 a))
 
 (declare-datatypes ((us_rep9 0))
 (((mk___rep8
   (us_split_discrs10 us_split_discrs2)(us_split_fields17 us_split_fields16)(attr__tag7 Int)))))
-(define-fun us_rep_24__projection ((a us_rep9)) us_split_discrs2 (us_split_discrs10
-                                                                 a))
+(define-fun us_rep___24__projection ((a us_rep9)) us_split_discrs2 (us_split_discrs10
+                                                                   a))
 
-(define-fun us_rep_25__projection ((a us_rep9)) us_split_fields16 (us_split_fields17
-                                                                  a))
+(define-fun us_rep___25__projection ((a us_rep9)) us_split_fields16 (us_split_fields17
+                                                                    a))
 
-(define-fun us_rep_26__projection ((a us_rep9)) Int (attr__tag7 a))
+(define-fun us_rep___26__projection ((a us_rep9)) Int (attr__tag7 a))
 
 (declare-fun hide_ext__6 (us_private) us_private)
 
@@ -1796,27 +1796,27 @@
 (declare-datatypes ((us_split_fields18 0))
 (((mk___split_fields9
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector8 us_rep)(rec__ext__8 us_private)))))
-(define-fun us_split_fields_Hidden_Vector9__projection ((a us_split_fields18)) us_rep
+(define-fun us_split_fields_Hidden_Vector__9__projection ((a us_split_fields18)) us_rep
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector8 a))
 
-(define-fun us_split_fields_9__projection ((a us_split_fields18)) us_private
+(define-fun us_split_fields___9__projection ((a us_split_fields18)) us_private
   (rec__ext__8 a))
 
 (declare-datatypes ((us_split_fields__ref9 0))
 (((mk___split_fields__ref9 (us_split_fields__content9 us_split_fields18)))))
-(define-fun us_split_fields__ref_10__projection ((a us_split_fields__ref9)) us_split_fields18
+(define-fun us_split_fields__ref___10__projection ((a us_split_fields__ref9)) us_split_fields18
   (us_split_fields__content9 a))
 
 (declare-datatypes ((us_rep10 0))
 (((mk___rep9
   (us_split_discrs11 us_split_discrs2)(us_split_fields19 us_split_fields18)(attr__tag8 Int)))))
-(define-fun us_rep_27__projection ((a us_rep10)) us_split_discrs2 (us_split_discrs11
-                                                                  a))
+(define-fun us_rep___27__projection ((a us_rep10)) us_split_discrs2 (us_split_discrs11
+                                                                    a))
 
-(define-fun us_rep_28__projection ((a us_rep10)) us_split_fields18 (us_split_fields19
-                                                                   a))
+(define-fun us_rep___28__projection ((a us_rep10)) us_split_fields18
+  (us_split_fields19 a))
 
-(define-fun us_rep_29__projection ((a us_rep10)) Int (attr__tag8 a))
+(define-fun us_rep___29__projection ((a us_rep10)) Int (attr__tag8 a))
 
 (declare-fun hide_ext__7 (us_private) us_private)
 
@@ -1969,27 +1969,27 @@
 (declare-datatypes ((us_split_fields20 0))
 (((mk___split_fields10
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector9 us_rep)(rec__ext__9 us_private)))))
-(define-fun us_split_fields_Hidden_Vector10__projection ((a us_split_fields20)) us_rep
+(define-fun us_split_fields_Hidden_Vector__10__projection ((a us_split_fields20)) us_rep
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector9 a))
 
-(define-fun us_split_fields_10__projection ((a us_split_fields20)) us_private
+(define-fun us_split_fields___10__projection ((a us_split_fields20)) us_private
   (rec__ext__9 a))
 
 (declare-datatypes ((us_split_fields__ref10 0))
 (((mk___split_fields__ref10 (us_split_fields__content10 us_split_fields20)))))
-(define-fun us_split_fields__ref_11__projection ((a us_split_fields__ref10)) us_split_fields20
+(define-fun us_split_fields__ref___11__projection ((a us_split_fields__ref10)) us_split_fields20
   (us_split_fields__content10 a))
 
 (declare-datatypes ((us_rep11 0))
 (((mk___rep10
   (us_split_discrs12 us_split_discrs2)(us_split_fields21 us_split_fields20)(attr__tag9 Int)))))
-(define-fun us_rep_30__projection ((a us_rep11)) us_split_discrs2 (us_split_discrs12
-                                                                  a))
+(define-fun us_rep___30__projection ((a us_rep11)) us_split_discrs2 (us_split_discrs12
+                                                                    a))
 
-(define-fun us_rep_31__projection ((a us_rep11)) us_split_fields20 (us_split_fields21
-                                                                   a))
+(define-fun us_rep___31__projection ((a us_rep11)) us_split_fields20
+  (us_split_fields21 a))
 
-(define-fun us_rep_32__projection ((a us_rep11)) Int (attr__tag9 a))
+(define-fun us_rep___32__projection ((a us_rep11)) Int (attr__tag9 a))
 
 (declare-fun hide_ext__8 (us_private) us_private)
 
@@ -2142,27 +2142,27 @@
 (declare-datatypes ((us_split_fields22 0))
 (((mk___split_fields11
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector10 us_rep)(rec__ext__10 us_private)))))
-(define-fun us_split_fields_Hidden_Vector11__projection ((a us_split_fields22)) us_rep
+(define-fun us_split_fields_Hidden_Vector__11__projection ((a us_split_fields22)) us_rep
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector10 a))
 
-(define-fun us_split_fields_11__projection ((a us_split_fields22)) us_private
+(define-fun us_split_fields___11__projection ((a us_split_fields22)) us_private
   (rec__ext__10 a))
 
 (declare-datatypes ((us_split_fields__ref11 0))
 (((mk___split_fields__ref11 (us_split_fields__content11 us_split_fields22)))))
-(define-fun us_split_fields__ref_12__projection ((a us_split_fields__ref11)) us_split_fields22
+(define-fun us_split_fields__ref___12__projection ((a us_split_fields__ref11)) us_split_fields22
   (us_split_fields__content11 a))
 
 (declare-datatypes ((us_rep12 0))
 (((mk___rep11
   (us_split_discrs13 us_split_discrs2)(us_split_fields23 us_split_fields22)(attr__tag10 Int)))))
-(define-fun us_rep_33__projection ((a us_rep12)) us_split_discrs2 (us_split_discrs13
-                                                                  a))
+(define-fun us_rep___33__projection ((a us_rep12)) us_split_discrs2 (us_split_discrs13
+                                                                    a))
 
-(define-fun us_rep_34__projection ((a us_rep12)) us_split_fields22 (us_split_fields23
-                                                                   a))
+(define-fun us_rep___34__projection ((a us_rep12)) us_split_fields22
+  (us_split_fields23 a))
 
-(define-fun us_rep_35__projection ((a us_rep12)) Int (attr__tag10 a))
+(define-fun us_rep___35__projection ((a us_rep12)) Int (attr__tag10 a))
 
 (declare-fun hide_ext__9 (us_private) us_private)
 
@@ -2316,27 +2316,27 @@
 (declare-datatypes ((us_split_fields24 0))
 (((mk___split_fields12
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector11 us_rep)(rec__ext__11 us_private)))))
-(define-fun us_split_fields_Hidden_Vector12__projection ((a us_split_fields24)) us_rep
+(define-fun us_split_fields_Hidden_Vector__12__projection ((a us_split_fields24)) us_rep
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector11 a))
 
-(define-fun us_split_fields_12__projection ((a us_split_fields24)) us_private
+(define-fun us_split_fields___12__projection ((a us_split_fields24)) us_private
   (rec__ext__11 a))
 
 (declare-datatypes ((us_split_fields__ref12 0))
 (((mk___split_fields__ref12 (us_split_fields__content12 us_split_fields24)))))
-(define-fun us_split_fields__ref_13__projection ((a us_split_fields__ref12)) us_split_fields24
+(define-fun us_split_fields__ref___13__projection ((a us_split_fields__ref12)) us_split_fields24
   (us_split_fields__content12 a))
 
 (declare-datatypes ((us_rep13 0))
 (((mk___rep12
   (us_split_discrs14 us_split_discrs2)(us_split_fields25 us_split_fields24)(attr__tag11 Int)))))
-(define-fun us_rep_36__projection ((a us_rep13)) us_split_discrs2 (us_split_discrs14
-                                                                  a))
+(define-fun us_rep___36__projection ((a us_rep13)) us_split_discrs2 (us_split_discrs14
+                                                                    a))
 
-(define-fun us_rep_37__projection ((a us_rep13)) us_split_fields24 (us_split_fields25
-                                                                   a))
+(define-fun us_rep___37__projection ((a us_rep13)) us_split_fields24
+  (us_split_fields25 a))
 
-(define-fun us_rep_38__projection ((a us_rep13)) Int (attr__tag11 a))
+(define-fun us_rep___38__projection ((a us_rep13)) Int (attr__tag11 a))
 
 (declare-fun hide_ext__10 (us_private) us_private)
 
@@ -2491,27 +2491,27 @@
 (declare-datatypes ((us_split_fields26 0))
 (((mk___split_fields13
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector12 us_rep)(rec__ext__12 us_private)))))
-(define-fun us_split_fields_Hidden_Vector13__projection ((a us_split_fields26)) us_rep
+(define-fun us_split_fields_Hidden_Vector__13__projection ((a us_split_fields26)) us_rep
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector12 a))
 
-(define-fun us_split_fields_13__projection ((a us_split_fields26)) us_private
+(define-fun us_split_fields___13__projection ((a us_split_fields26)) us_private
   (rec__ext__12 a))
 
 (declare-datatypes ((us_split_fields__ref13 0))
 (((mk___split_fields__ref13 (us_split_fields__content13 us_split_fields26)))))
-(define-fun us_split_fields__ref_14__projection ((a us_split_fields__ref13)) us_split_fields26
+(define-fun us_split_fields__ref___14__projection ((a us_split_fields__ref13)) us_split_fields26
   (us_split_fields__content13 a))
 
 (declare-datatypes ((us_rep14 0))
 (((mk___rep13
   (us_split_discrs15 us_split_discrs2)(us_split_fields27 us_split_fields26)(attr__tag12 Int)))))
-(define-fun us_rep_39__projection ((a us_rep14)) us_split_discrs2 (us_split_discrs15
-                                                                  a))
+(define-fun us_rep___39__projection ((a us_rep14)) us_split_discrs2 (us_split_discrs15
+                                                                    a))
 
-(define-fun us_rep_40__projection ((a us_rep14)) us_split_fields26 (us_split_fields27
-                                                                   a))
+(define-fun us_rep___40__projection ((a us_rep14)) us_split_fields26
+  (us_split_fields27 a))
 
-(define-fun us_rep_41__projection ((a us_rep14)) Int (attr__tag12 a))
+(define-fun us_rep___41__projection ((a us_rep14)) Int (attr__tag12 a))
 
 (declare-fun hide_ext__11 (us_private) us_private)
 
@@ -2666,27 +2666,27 @@
 (declare-datatypes ((us_split_fields28 0))
 (((mk___split_fields14
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector13 us_rep)(rec__ext__13 us_private)))))
-(define-fun us_split_fields_Hidden_Vector14__projection ((a us_split_fields28)) us_rep
+(define-fun us_split_fields_Hidden_Vector__14__projection ((a us_split_fields28)) us_rep
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector13 a))
 
-(define-fun us_split_fields_14__projection ((a us_split_fields28)) us_private
+(define-fun us_split_fields___14__projection ((a us_split_fields28)) us_private
   (rec__ext__13 a))
 
 (declare-datatypes ((us_split_fields__ref14 0))
 (((mk___split_fields__ref14 (us_split_fields__content14 us_split_fields28)))))
-(define-fun us_split_fields__ref_15__projection ((a us_split_fields__ref14)) us_split_fields28
+(define-fun us_split_fields__ref___15__projection ((a us_split_fields__ref14)) us_split_fields28
   (us_split_fields__content14 a))
 
 (declare-datatypes ((us_rep15 0))
 (((mk___rep14
   (us_split_discrs16 us_split_discrs2)(us_split_fields29 us_split_fields28)(attr__tag13 Int)))))
-(define-fun us_rep_42__projection ((a us_rep15)) us_split_discrs2 (us_split_discrs16
-                                                                  a))
+(define-fun us_rep___42__projection ((a us_rep15)) us_split_discrs2 (us_split_discrs16
+                                                                    a))
 
-(define-fun us_rep_43__projection ((a us_rep15)) us_split_fields28 (us_split_fields29
-                                                                   a))
+(define-fun us_rep___43__projection ((a us_rep15)) us_split_fields28
+  (us_split_fields29 a))
 
-(define-fun us_rep_44__projection ((a us_rep15)) Int (attr__tag13 a))
+(define-fun us_rep___44__projection ((a us_rep15)) Int (attr__tag13 a))
 
 (declare-fun hide_ext__12 (us_private) us_private)
 
@@ -2841,27 +2841,27 @@
 (declare-datatypes ((us_split_fields30 0))
 (((mk___split_fields15
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector14 us_rep)(rec__ext__14 us_private)))))
-(define-fun us_split_fields_Hidden_Vector15__projection ((a us_split_fields30)) us_rep
+(define-fun us_split_fields_Hidden_Vector__15__projection ((a us_split_fields30)) us_rep
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector14 a))
 
-(define-fun us_split_fields_15__projection ((a us_split_fields30)) us_private
+(define-fun us_split_fields___15__projection ((a us_split_fields30)) us_private
   (rec__ext__14 a))
 
 (declare-datatypes ((us_split_fields__ref15 0))
 (((mk___split_fields__ref15 (us_split_fields__content15 us_split_fields30)))))
-(define-fun us_split_fields__ref_16__projection ((a us_split_fields__ref15)) us_split_fields30
+(define-fun us_split_fields__ref___16__projection ((a us_split_fields__ref15)) us_split_fields30
   (us_split_fields__content15 a))
 
 (declare-datatypes ((us_rep16 0))
 (((mk___rep15
   (us_split_discrs17 us_split_discrs2)(us_split_fields31 us_split_fields30)(attr__tag14 Int)))))
-(define-fun us_rep_45__projection ((a us_rep16)) us_split_discrs2 (us_split_discrs17
-                                                                  a))
+(define-fun us_rep___45__projection ((a us_rep16)) us_split_discrs2 (us_split_discrs17
+                                                                    a))
 
-(define-fun us_rep_46__projection ((a us_rep16)) us_split_fields30 (us_split_fields31
-                                                                   a))
+(define-fun us_rep___46__projection ((a us_rep16)) us_split_fields30
+  (us_split_fields31 a))
 
-(define-fun us_rep_47__projection ((a us_rep16)) Int (attr__tag14 a))
+(define-fun us_rep___47__projection ((a us_rep16)) Int (attr__tag14 a))
 
 (declare-fun hide_ext__13 (us_private) us_private)
 
@@ -3016,27 +3016,27 @@
 (declare-datatypes ((us_split_fields32 0))
 (((mk___split_fields16
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector15 us_rep)(rec__ext__15 us_private)))))
-(define-fun us_split_fields_Hidden_Vector16__projection ((a us_split_fields32)) us_rep
+(define-fun us_split_fields_Hidden_Vector__16__projection ((a us_split_fields32)) us_rep
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector15 a))
 
-(define-fun us_split_fields_16__projection ((a us_split_fields32)) us_private
+(define-fun us_split_fields___16__projection ((a us_split_fields32)) us_private
   (rec__ext__15 a))
 
 (declare-datatypes ((us_split_fields__ref16 0))
 (((mk___split_fields__ref16 (us_split_fields__content16 us_split_fields32)))))
-(define-fun us_split_fields__ref_17__projection ((a us_split_fields__ref16)) us_split_fields32
+(define-fun us_split_fields__ref___17__projection ((a us_split_fields__ref16)) us_split_fields32
   (us_split_fields__content16 a))
 
 (declare-datatypes ((us_rep17 0))
 (((mk___rep16
   (us_split_discrs18 us_split_discrs2)(us_split_fields33 us_split_fields32)(attr__tag15 Int)))))
-(define-fun us_rep_48__projection ((a us_rep17)) us_split_discrs2 (us_split_discrs18
-                                                                  a))
+(define-fun us_rep___48__projection ((a us_rep17)) us_split_discrs2 (us_split_discrs18
+                                                                    a))
 
-(define-fun us_rep_49__projection ((a us_rep17)) us_split_fields32 (us_split_fields33
-                                                                   a))
+(define-fun us_rep___49__projection ((a us_rep17)) us_split_fields32
+  (us_split_fields33 a))
 
-(define-fun us_rep_50__projection ((a us_rep17)) Int (attr__tag15 a))
+(define-fun us_rep___50__projection ((a us_rep17)) Int (attr__tag15 a))
 
 (declare-fun hide_ext__14 (us_private) us_private)
 
@@ -3191,27 +3191,27 @@
 (declare-datatypes ((us_split_fields34 0))
 (((mk___split_fields17
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector16 us_rep)(rec__ext__16 us_private)))))
-(define-fun us_split_fields_Hidden_Vector17__projection ((a us_split_fields34)) us_rep
+(define-fun us_split_fields_Hidden_Vector__17__projection ((a us_split_fields34)) us_rep
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector16 a))
 
-(define-fun us_split_fields_17__projection ((a us_split_fields34)) us_private
+(define-fun us_split_fields___17__projection ((a us_split_fields34)) us_private
   (rec__ext__16 a))
 
 (declare-datatypes ((us_split_fields__ref17 0))
 (((mk___split_fields__ref17 (us_split_fields__content17 us_split_fields34)))))
-(define-fun us_split_fields__ref_18__projection ((a us_split_fields__ref17)) us_split_fields34
+(define-fun us_split_fields__ref___18__projection ((a us_split_fields__ref17)) us_split_fields34
   (us_split_fields__content17 a))
 
 (declare-datatypes ((us_rep18 0))
 (((mk___rep17
   (us_split_discrs19 us_split_discrs2)(us_split_fields35 us_split_fields34)(attr__tag16 Int)))))
-(define-fun us_rep_51__projection ((a us_rep18)) us_split_discrs2 (us_split_discrs19
-                                                                  a))
+(define-fun us_rep___51__projection ((a us_rep18)) us_split_discrs2 (us_split_discrs19
+                                                                    a))
 
-(define-fun us_rep_52__projection ((a us_rep18)) us_split_fields34 (us_split_fields35
-                                                                   a))
+(define-fun us_rep___52__projection ((a us_rep18)) us_split_fields34
+  (us_split_fields35 a))
 
-(define-fun us_rep_53__projection ((a us_rep18)) Int (attr__tag16 a))
+(define-fun us_rep___53__projection ((a us_rep18)) Int (attr__tag16 a))
 
 (declare-fun hide_ext__15 (us_private) us_private)
 
@@ -3366,27 +3366,27 @@
 (declare-datatypes ((us_split_fields36 0))
 (((mk___split_fields18
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector17 us_rep)(rec__ext__17 us_private)))))
-(define-fun us_split_fields_Hidden_Vector18__projection ((a us_split_fields36)) us_rep
+(define-fun us_split_fields_Hidden_Vector__18__projection ((a us_split_fields36)) us_rep
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector17 a))
 
-(define-fun us_split_fields_18__projection ((a us_split_fields36)) us_private
+(define-fun us_split_fields___18__projection ((a us_split_fields36)) us_private
   (rec__ext__17 a))
 
 (declare-datatypes ((us_split_fields__ref18 0))
 (((mk___split_fields__ref18 (us_split_fields__content18 us_split_fields36)))))
-(define-fun us_split_fields__ref_19__projection ((a us_split_fields__ref18)) us_split_fields36
+(define-fun us_split_fields__ref___19__projection ((a us_split_fields__ref18)) us_split_fields36
   (us_split_fields__content18 a))
 
 (declare-datatypes ((us_rep19 0))
 (((mk___rep18
   (us_split_discrs20 us_split_discrs2)(us_split_fields37 us_split_fields36)(attr__tag17 Int)))))
-(define-fun us_rep_54__projection ((a us_rep19)) us_split_discrs2 (us_split_discrs20
-                                                                  a))
+(define-fun us_rep___54__projection ((a us_rep19)) us_split_discrs2 (us_split_discrs20
+                                                                    a))
 
-(define-fun us_rep_55__projection ((a us_rep19)) us_split_fields36 (us_split_fields37
-                                                                   a))
+(define-fun us_rep___55__projection ((a us_rep19)) us_split_fields36
+  (us_split_fields37 a))
 
-(define-fun us_rep_56__projection ((a us_rep19)) Int (attr__tag17 a))
+(define-fun us_rep___56__projection ((a us_rep19)) Int (attr__tag17 a))
 
 (declare-fun hide_ext__16 (us_private) us_private)
 
@@ -3541,27 +3541,27 @@
 (declare-datatypes ((us_split_fields38 0))
 (((mk___split_fields19
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector18 us_rep)(rec__ext__18 us_private)))))
-(define-fun us_split_fields_Hidden_Vector19__projection ((a us_split_fields38)) us_rep
+(define-fun us_split_fields_Hidden_Vector__19__projection ((a us_split_fields38)) us_rep
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector18 a))
 
-(define-fun us_split_fields_19__projection ((a us_split_fields38)) us_private
+(define-fun us_split_fields___19__projection ((a us_split_fields38)) us_private
   (rec__ext__18 a))
 
 (declare-datatypes ((us_split_fields__ref19 0))
 (((mk___split_fields__ref19 (us_split_fields__content19 us_split_fields38)))))
-(define-fun us_split_fields__ref_20__projection ((a us_split_fields__ref19)) us_split_fields38
+(define-fun us_split_fields__ref___20__projection ((a us_split_fields__ref19)) us_split_fields38
   (us_split_fields__content19 a))
 
 (declare-datatypes ((us_rep20 0))
 (((mk___rep19
   (us_split_discrs21 us_split_discrs2)(us_split_fields39 us_split_fields38)(attr__tag18 Int)))))
-(define-fun us_rep_57__projection ((a us_rep20)) us_split_discrs2 (us_split_discrs21
-                                                                  a))
+(define-fun us_rep___57__projection ((a us_rep20)) us_split_discrs2 (us_split_discrs21
+                                                                    a))
 
-(define-fun us_rep_58__projection ((a us_rep20)) us_split_fields38 (us_split_fields39
-                                                                   a))
+(define-fun us_rep___58__projection ((a us_rep20)) us_split_fields38
+  (us_split_fields39 a))
 
-(define-fun us_rep_59__projection ((a us_rep20)) Int (attr__tag18 a))
+(define-fun us_rep___59__projection ((a us_rep20)) Int (attr__tag18 a))
 
 (declare-fun hide_ext__17 (us_private) us_private)
 
@@ -3716,27 +3716,27 @@
 (declare-datatypes ((us_split_fields40 0))
 (((mk___split_fields20
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector19 us_rep)(rec__ext__19 us_private)))))
-(define-fun us_split_fields_Hidden_Vector20__projection ((a us_split_fields40)) us_rep
+(define-fun us_split_fields_Hidden_Vector__20__projection ((a us_split_fields40)) us_rep
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector19 a))
 
-(define-fun us_split_fields_20__projection ((a us_split_fields40)) us_private
+(define-fun us_split_fields___20__projection ((a us_split_fields40)) us_private
   (rec__ext__19 a))
 
 (declare-datatypes ((us_split_fields__ref20 0))
 (((mk___split_fields__ref20 (us_split_fields__content20 us_split_fields40)))))
-(define-fun us_split_fields__ref_21__projection ((a us_split_fields__ref20)) us_split_fields40
+(define-fun us_split_fields__ref___21__projection ((a us_split_fields__ref20)) us_split_fields40
   (us_split_fields__content20 a))
 
 (declare-datatypes ((us_rep21 0))
 (((mk___rep20
   (us_split_discrs22 us_split_discrs2)(us_split_fields41 us_split_fields40)(attr__tag19 Int)))))
-(define-fun us_rep_60__projection ((a us_rep21)) us_split_discrs2 (us_split_discrs22
-                                                                  a))
+(define-fun us_rep___60__projection ((a us_rep21)) us_split_discrs2 (us_split_discrs22
+                                                                    a))
 
-(define-fun us_rep_61__projection ((a us_rep21)) us_split_fields40 (us_split_fields41
-                                                                   a))
+(define-fun us_rep___61__projection ((a us_rep21)) us_split_fields40
+  (us_split_fields41 a))
 
-(define-fun us_rep_62__projection ((a us_rep21)) Int (attr__tag19 a))
+(define-fun us_rep___62__projection ((a us_rep21)) Int (attr__tag19 a))
 
 (declare-fun hide_ext__18 (us_private) us_private)
 
@@ -3891,27 +3891,27 @@
 (declare-datatypes ((us_split_fields42 0))
 (((mk___split_fields21
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector20 us_rep)(rec__ext__20 us_private)))))
-(define-fun us_split_fields_Hidden_Vector21__projection ((a us_split_fields42)) us_rep
+(define-fun us_split_fields_Hidden_Vector__21__projection ((a us_split_fields42)) us_rep
   (rec__hnco__test2__v_type_owner__vector_type__hidden_vector20 a))
 
-(define-fun us_split_fields_21__projection ((a us_split_fields42)) us_private
+(define-fun us_split_fields___21__projection ((a us_split_fields42)) us_private
   (rec__ext__20 a))
 
 (declare-datatypes ((us_split_fields__ref21 0))
 (((mk___split_fields__ref21 (us_split_fields__content21 us_split_fields42)))))
-(define-fun us_split_fields__ref_22__projection ((a us_split_fields__ref21)) us_split_fields42
+(define-fun us_split_fields__ref___22__projection ((a us_split_fields__ref21)) us_split_fields42
   (us_split_fields__content21 a))
 
 (declare-datatypes ((us_rep22 0))
 (((mk___rep21
   (us_split_discrs23 us_split_discrs2)(us_split_fields43 us_split_fields42)(attr__tag20 Int)))))
-(define-fun us_rep_63__projection ((a us_rep22)) us_split_discrs2 (us_split_discrs23
-                                                                  a))
+(define-fun us_rep___63__projection ((a us_rep22)) us_split_discrs2 (us_split_discrs23
+                                                                    a))
 
-(define-fun us_rep_64__projection ((a us_rep22)) us_split_fields42 (us_split_fields43
-                                                                   a))
+(define-fun us_rep___64__projection ((a us_rep22)) us_split_fields42
+  (us_split_fields43 a))
 
-(define-fun us_rep_65__projection ((a us_rep22)) Int (attr__tag20 a))
+(define-fun us_rep___65__projection ((a us_rep22)) Int (attr__tag20 a))
 
 (declare-fun hide_ext__19 (us_private) us_private)
 
@@ -4192,7 +4192,7 @@
 
 (declare-datatypes ((extended_index__ref 0))
 (((mk_extended_index__ref (extended_index__content extended_index)))))
-(define-fun extended_index__ref_2__projection ((a extended_index__ref)) extended_index
+(define-fun extended_index__ref___2__projection ((a extended_index__ref)) extended_index
   (extended_index__content a))
 
 (define-fun dynamic_invariant3 ((temp___expr_377 Int)
@@ -4236,11 +4236,11 @@
   (forall ((a us_rep2) (b us_rep2))
   (! (= (user_eq5 a b) (oeq a b)) :pattern ((user_eq5 a b)) )))
 
-(define-fun default_initial_assumption ((temp___expr_402 us_rep2)
-  (temp___skip_top_level_403 Bool)) Bool (=>
+(define-fun default_initial_assumption ((temp___expr_406 us_rep2)
+  (temp___skip_top_level_407 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_403 true))
-                                         (= (length3 temp___expr_402) 0)))
+                                         (= temp___skip_top_level_407 true))
+                                         (= (length3 temp___expr_406) 0)))
 
 ;; model____post_axiom
   (assert
@@ -4274,15 +4274,15 @@
 
 (declare-datatypes ((extended_index__ref1 0))
 (((mk_extended_index__ref1 (extended_index__content1 extended_index1)))))
-(define-fun extended_index__ref_3__projection ((a extended_index__ref1)) extended_index1
+(define-fun extended_index__ref___3__projection ((a extended_index__ref1)) extended_index1
   (extended_index__content1 a))
 
-(define-fun dynamic_invariant5 ((temp___expr_395 Int)
-  (temp___is_init_392 Bool) (temp___skip_constant_393 Bool)
-  (temp___do_toplevel_394 Bool)) Bool (=>
-                                      (or (= temp___is_init_392 true)
+(define-fun dynamic_invariant5 ((temp___expr_399 Int)
+  (temp___is_init_396 Bool) (temp___skip_constant_397 Bool)
+  (temp___do_toplevel_398 Bool)) Bool (=>
+                                      (or (= temp___is_init_396 true)
                                       (<= 0 2147483647)) (in_range46
-                                      temp___expr_395)))
+                                      temp___expr_399)))
 
 ;; length__post_axiom
   (assert
@@ -4308,15 +4308,15 @@
 
 (declare-datatypes ((element_type__ref 0))
 (((mk_element_type__ref (element_type__content element_type)))))
-(define-fun element_type__ref_3__projection ((a element_type__ref)) element_type
+(define-fun element_type__ref___3__projection ((a element_type__ref)) element_type
   (element_type__content a))
 
-(define-fun dynamic_invariant6 ((temp___expr_389 Int)
-  (temp___is_init_386 Bool) (temp___skip_constant_387 Bool)
-  (temp___do_toplevel_388 Bool)) Bool (=>
-                                      (or (= temp___is_init_386 true)
+(define-fun dynamic_invariant6 ((temp___expr_393 Int)
+  (temp___is_init_390 Bool) (temp___skip_constant_391 Bool)
+  (temp___do_toplevel_392 Bool)) Bool (=>
+                                      (or (= temp___is_init_390 true)
                                       (<= (- 2147483648) 2147483647))
-                                      (in_range47 temp___expr_389)))
+                                      (in_range47 temp___expr_393)))
 
 ;; get__post_axiom
   (assert
@@ -4332,32 +4332,32 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(define-fun dynamic_invariant7 ((temp___expr_421 us_rep5)
-  (temp___is_init_418 Bool) (temp___skip_constant_419 Bool)
-  (temp___do_toplevel_420 Bool)) Bool (and
+(define-fun dynamic_invariant7 ((temp___expr_509 us_rep5)
+  (temp___is_init_506 Bool) (temp___skip_constant_507 Bool)
+  (temp___do_toplevel_508 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_419 true))
+                                      (not (= temp___skip_constant_507 true))
                                       (in_range10
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 left)))
-                                      (to_base2 temp___expr_421))) (in_range9
+                                      (to_base2 temp___expr_509))) (in_range9
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 left)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector3
-                                      (us_split_fields9 temp___expr_421)))))
+                                      (us_split_fields9 temp___expr_509)))))
 
-(define-fun default_initial_assumption1 ((temp___expr_424 us_rep5)
-  (temp___skip_top_level_425 Bool)) Bool (and
+(define-fun default_initial_assumption1 ((temp___expr_512 us_rep5)
+  (temp___skip_top_level_513 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag3 temp___expr_424)
+                                         (= (attr__tag3 temp___expr_512)
                                          us_tag3)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs6
-                                            temp___expr_424))) (to_rep
+                                            temp___expr_512))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                left))))
@@ -4367,50 +4367,50 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector3
                                             (us_split_fields9
-                                            temp___expr_424))))) (to_rep
+                                            temp___expr_512))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  left))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector3
                                             (us_split_fields9
-                                            temp___expr_424))) true))))
+                                            temp___expr_512))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_425 true))
+                                         (= temp___skip_top_level_513 true))
                                          (= (is_empty
-                                            (to_base2 temp___expr_424)) true))))
+                                            (to_base2 temp___expr_512)) true))))
 
 (declare-const right us_rep1)
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(define-fun dynamic_invariant8 ((temp___expr_408 us_rep4)
-  (temp___is_init_405 Bool) (temp___skip_constant_406 Bool)
-  (temp___do_toplevel_407 Bool)) Bool (and
+(define-fun dynamic_invariant8 ((temp___expr_496 us_rep4)
+  (temp___is_init_493 Bool) (temp___skip_constant_494 Bool)
+  (temp___do_toplevel_495 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_406 true))
+                                      (not (= temp___skip_constant_494 true))
                                       (in_range8
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 right)))
-                                      (to_base1 temp___expr_408))) (in_range7
+                                      (to_base1 temp___expr_496))) (in_range7
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 right)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector2
-                                      (us_split_fields7 temp___expr_408)))))
+                                      (us_split_fields7 temp___expr_496)))))
 
-(define-fun default_initial_assumption2 ((temp___expr_411 us_rep4)
-  (temp___skip_top_level_412 Bool)) Bool (and
+(define-fun default_initial_assumption2 ((temp___expr_499 us_rep4)
+  (temp___skip_top_level_500 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag2 temp___expr_411)
+                                         (= (attr__tag2 temp___expr_499)
                                          us_tag2)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs5
-                                            temp___expr_411))) (to_rep
+                                            temp___expr_499))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                right))))
@@ -4420,51 +4420,51 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector2
                                             (us_split_fields7
-                                            temp___expr_411))))) (to_rep
+                                            temp___expr_499))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  right))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector2
                                             (us_split_fields7
-                                            temp___expr_411))) true))))
+                                            temp___expr_499))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_412 true))
+                                         (= temp___skip_top_level_500 true))
                                          (= (is_empty
-                                            (to_base1 temp___expr_411)) true))))
+                                            (to_base1 temp___expr_499)) true))))
 
 (declare-const container us_rep1)
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(define-fun dynamic_invariant9 ((temp___expr_452 us_rep7)
-  (temp___is_init_449 Bool) (temp___skip_constant_450 Bool)
-  (temp___do_toplevel_451 Bool)) Bool (and
+(define-fun dynamic_invariant9 ((temp___expr_540 us_rep7)
+  (temp___is_init_537 Bool) (temp___skip_constant_538 Bool)
+  (temp___do_toplevel_539 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_450 true))
+                                      (not (= temp___skip_constant_538 true))
                                       (in_range14
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container)))
-                                      (to_base4 temp___expr_452)))
+                                      (to_base4 temp___expr_540)))
                                       (in_range13
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector5
-                                      (us_split_fields13 temp___expr_452)))))
+                                      (us_split_fields13 temp___expr_540)))))
 
-(define-fun default_initial_assumption3 ((temp___expr_455 us_rep7)
-  (temp___skip_top_level_456 Bool)) Bool (and
+(define-fun default_initial_assumption3 ((temp___expr_543 us_rep7)
+  (temp___skip_top_level_544 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag5 temp___expr_455)
+                                         (= (attr__tag5 temp___expr_543)
                                          us_tag5)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs8
-                                            temp___expr_455))) (to_rep
+                                            temp___expr_543))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                container))))
@@ -4474,51 +4474,51 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector5
                                             (us_split_fields13
-                                            temp___expr_455))))) (to_rep
+                                            temp___expr_543))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  container))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector5
                                             (us_split_fields13
-                                            temp___expr_455))) true))))
+                                            temp___expr_543))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_456 true))
+                                         (= temp___skip_top_level_544 true))
                                          (= (is_empty
-                                            (to_base4 temp___expr_455)) true))))
+                                            (to_base4 temp___expr_543)) true))))
 
 (declare-const container1 us_rep1)
 
 (declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
-(define-fun dynamic_invariant10 ((temp___expr_474 us_rep8)
-  (temp___is_init_471 Bool) (temp___skip_constant_472 Bool)
-  (temp___do_toplevel_473 Bool)) Bool (and
+(define-fun dynamic_invariant10 ((temp___expr_562 us_rep8)
+  (temp___is_init_559 Bool) (temp___skip_constant_560 Bool)
+  (temp___do_toplevel_561 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_472 true))
+                                      (not (= temp___skip_constant_560 true))
                                       (in_range16
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container1)))
-                                      (to_base5 temp___expr_474)))
+                                      (to_base5 temp___expr_562)))
                                       (in_range15
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container1)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector6
-                                      (us_split_fields15 temp___expr_474)))))
+                                      (us_split_fields15 temp___expr_562)))))
 
-(define-fun default_initial_assumption4 ((temp___expr_477 us_rep8)
-  (temp___skip_top_level_478 Bool)) Bool (and
+(define-fun default_initial_assumption4 ((temp___expr_565 us_rep8)
+  (temp___skip_top_level_566 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag6 temp___expr_477)
+                                         (= (attr__tag6 temp___expr_565)
                                          us_tag6)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs9
-                                            temp___expr_477))) (to_rep
+                                            temp___expr_565))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                container1))))
@@ -4528,51 +4528,51 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector6
                                             (us_split_fields15
-                                            temp___expr_477))))) (to_rep
+                                            temp___expr_565))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  container1))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector6
                                             (us_split_fields15
-                                            temp___expr_477))) true))))
+                                            temp___expr_565))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_478 true))
+                                         (= temp___skip_top_level_566 true))
                                          (= (is_empty
-                                            (to_base5 temp___expr_477)) true))))
+                                            (to_base5 temp___expr_565)) true))))
 
 (declare-const source us_rep1)
 
 (declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
-(define-fun dynamic_invariant11 ((temp___expr_514 us_rep9)
-  (temp___is_init_511 Bool) (temp___skip_constant_512 Bool)
-  (temp___do_toplevel_513 Bool)) Bool (and
+(define-fun dynamic_invariant11 ((temp___expr_602 us_rep9)
+  (temp___is_init_599 Bool) (temp___skip_constant_600 Bool)
+  (temp___do_toplevel_601 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_512 true))
+                                      (not (= temp___skip_constant_600 true))
                                       (in_range18
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 source)))
-                                      (to_base6 temp___expr_514)))
+                                      (to_base6 temp___expr_602)))
                                       (in_range17
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 source)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector7
-                                      (us_split_fields17 temp___expr_514)))))
+                                      (us_split_fields17 temp___expr_602)))))
 
-(define-fun default_initial_assumption5 ((temp___expr_517 us_rep9)
-  (temp___skip_top_level_518 Bool)) Bool (and
+(define-fun default_initial_assumption5 ((temp___expr_605 us_rep9)
+  (temp___skip_top_level_606 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag7 temp___expr_517)
+                                         (= (attr__tag7 temp___expr_605)
                                          us_tag7)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs10
-                                            temp___expr_517))) (to_rep
+                                            temp___expr_605))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                source))))
@@ -4582,51 +4582,51 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector7
                                             (us_split_fields17
-                                            temp___expr_517))))) (to_rep
+                                            temp___expr_605))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  source))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector7
                                             (us_split_fields17
-                                            temp___expr_517))) true))))
+                                            temp___expr_605))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_518 true))
+                                         (= temp___skip_top_level_606 true))
                                          (= (is_empty
-                                            (to_base6 temp___expr_517)) true))))
+                                            (to_base6 temp___expr_605)) true))))
 
 (declare-const source1 us_rep1)
 
 (declare-const attr__ATTRIBUTE_ADDRESS8 Int)
 
-(define-fun dynamic_invariant12 ((temp___expr_545 us_rep10)
-  (temp___is_init_542 Bool) (temp___skip_constant_543 Bool)
-  (temp___do_toplevel_544 Bool)) Bool (and
+(define-fun dynamic_invariant12 ((temp___expr_633 us_rep10)
+  (temp___is_init_630 Bool) (temp___skip_constant_631 Bool)
+  (temp___do_toplevel_632 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_543 true))
+                                      (not (= temp___skip_constant_631 true))
                                       (in_range20
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 source1)))
-                                      (to_base7 temp___expr_545)))
+                                      (to_base7 temp___expr_633)))
                                       (in_range19
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 source1)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector8
-                                      (us_split_fields19 temp___expr_545)))))
+                                      (us_split_fields19 temp___expr_633)))))
 
-(define-fun default_initial_assumption6 ((temp___expr_548 us_rep10)
-  (temp___skip_top_level_549 Bool)) Bool (and
+(define-fun default_initial_assumption6 ((temp___expr_636 us_rep10)
+  (temp___skip_top_level_637 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag8 temp___expr_548)
+                                         (= (attr__tag8 temp___expr_636)
                                          us_tag8)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs11
-                                            temp___expr_548))) (to_rep
+                                            temp___expr_636))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                source1))))
@@ -4636,51 +4636,51 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector8
                                             (us_split_fields19
-                                            temp___expr_548))))) (to_rep
+                                            temp___expr_636))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  source1))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector8
                                             (us_split_fields19
-                                            temp___expr_548))) true))))
+                                            temp___expr_636))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_549 true))
+                                         (= temp___skip_top_level_637 true))
                                          (= (is_empty
-                                            (to_base7 temp___expr_548)) true))))
+                                            (to_base7 temp___expr_636)) true))))
 
 (declare-const container2 us_rep1)
 
 (declare-const attr__ATTRIBUTE_ADDRESS9 Int)
 
-(define-fun dynamic_invariant13 ((temp___expr_567 us_rep12)
-  (temp___is_init_564 Bool) (temp___skip_constant_565 Bool)
-  (temp___do_toplevel_566 Bool)) Bool (and
+(define-fun dynamic_invariant13 ((temp___expr_655 us_rep12)
+  (temp___is_init_652 Bool) (temp___skip_constant_653 Bool)
+  (temp___do_toplevel_654 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_565 true))
+                                      (not (= temp___skip_constant_653 true))
                                       (in_range24
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container2)))
-                                      (to_base9 temp___expr_567)))
+                                      (to_base9 temp___expr_655)))
                                       (in_range23
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container2)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector10
-                                      (us_split_fields23 temp___expr_567)))))
+                                      (us_split_fields23 temp___expr_655)))))
 
-(define-fun default_initial_assumption7 ((temp___expr_570 us_rep12)
-  (temp___skip_top_level_571 Bool)) Bool (and
+(define-fun default_initial_assumption7 ((temp___expr_658 us_rep12)
+  (temp___skip_top_level_659 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag10 temp___expr_570)
+                                         (= (attr__tag10 temp___expr_658)
                                          us_tag10)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs13
-                                            temp___expr_570))) (to_rep
+                                            temp___expr_658))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                container2))))
@@ -4690,47 +4690,47 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector10
                                             (us_split_fields23
-                                            temp___expr_570))))) (to_rep
+                                            temp___expr_658))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  container2))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector10
                                             (us_split_fields23
-                                            temp___expr_570))) true))))
+                                            temp___expr_658))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_571 true))
+                                         (= temp___skip_top_level_659 true))
                                          (= (is_empty
-                                            (to_base9 temp___expr_570)) true))))
+                                            (to_base9 temp___expr_658)) true))))
 
-(define-fun dynamic_invariant14 ((temp___expr_598 us_rep13)
-  (temp___is_init_595 Bool) (temp___skip_constant_596 Bool)
-  (temp___do_toplevel_597 Bool)) Bool (and
+(define-fun dynamic_invariant14 ((temp___expr_686 us_rep13)
+  (temp___is_init_683 Bool) (temp___skip_constant_684 Bool)
+  (temp___do_toplevel_685 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_596 true))
+                                      (not (= temp___skip_constant_684 true))
                                       (in_range26
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 new_item)))
-                                      (to_base10 temp___expr_598)))
+                                      (to_base10 temp___expr_686)))
                                       (in_range25
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 new_item)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector11
-                                      (us_split_fields25 temp___expr_598)))))
+                                      (us_split_fields25 temp___expr_686)))))
 
-(define-fun default_initial_assumption8 ((temp___expr_601 us_rep13)
-  (temp___skip_top_level_602 Bool)) Bool (and
+(define-fun default_initial_assumption8 ((temp___expr_689 us_rep13)
+  (temp___skip_top_level_690 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag11 temp___expr_601)
+                                         (= (attr__tag11 temp___expr_689)
                                          us_tag11)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs14
-                                            temp___expr_601))) (to_rep
+                                            temp___expr_689))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                new_item))))
@@ -4740,51 +4740,51 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector11
                                             (us_split_fields25
-                                            temp___expr_601))))) (to_rep
+                                            temp___expr_689))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  new_item))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector11
                                             (us_split_fields25
-                                            temp___expr_601))) true))))
+                                            temp___expr_689))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_602 true))
+                                         (= temp___skip_top_level_690 true))
                                          (= (is_empty
-                                            (to_base10 temp___expr_601)) true))))
+                                            (to_base10 temp___expr_689)) true))))
 
 (declare-const container3 us_rep1)
 
 (declare-const attr__ATTRIBUTE_ADDRESS10 Int)
 
-(define-fun dynamic_invariant15 ((temp___expr_665 us_rep14)
-  (temp___is_init_662 Bool) (temp___skip_constant_663 Bool)
-  (temp___do_toplevel_664 Bool)) Bool (and
+(define-fun dynamic_invariant15 ((temp___expr_753 us_rep14)
+  (temp___is_init_750 Bool) (temp___skip_constant_751 Bool)
+  (temp___do_toplevel_752 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_663 true))
+                                      (not (= temp___skip_constant_751 true))
                                       (in_range28
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container3)))
-                                      (to_base11 temp___expr_665)))
+                                      (to_base11 temp___expr_753)))
                                       (in_range27
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container3)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector12
-                                      (us_split_fields27 temp___expr_665)))))
+                                      (us_split_fields27 temp___expr_753)))))
 
-(define-fun default_initial_assumption9 ((temp___expr_668 us_rep14)
-  (temp___skip_top_level_669 Bool)) Bool (and
+(define-fun default_initial_assumption9 ((temp___expr_756 us_rep14)
+  (temp___skip_top_level_757 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag12 temp___expr_668)
+                                         (= (attr__tag12 temp___expr_756)
                                          us_tag12)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs15
-                                            temp___expr_668))) (to_rep
+                                            temp___expr_756))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                container3))))
@@ -4794,51 +4794,51 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector12
                                             (us_split_fields27
-                                            temp___expr_668))))) (to_rep
+                                            temp___expr_756))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  container3))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector12
                                             (us_split_fields27
-                                            temp___expr_668))) true))))
+                                            temp___expr_756))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_669 true))
+                                         (= temp___skip_top_level_757 true))
                                          (= (is_empty
-                                            (to_base11 temp___expr_668)) true))))
+                                            (to_base11 temp___expr_756)) true))))
 
 (declare-const container4 us_rep1)
 
 (declare-const attr__ATTRIBUTE_ADDRESS11 Int)
 
-(define-fun dynamic_invariant16 ((temp___expr_687 us_rep15)
-  (temp___is_init_684 Bool) (temp___skip_constant_685 Bool)
-  (temp___do_toplevel_686 Bool)) Bool (and
+(define-fun dynamic_invariant16 ((temp___expr_775 us_rep15)
+  (temp___is_init_772 Bool) (temp___skip_constant_773 Bool)
+  (temp___do_toplevel_774 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_685 true))
+                                      (not (= temp___skip_constant_773 true))
                                       (in_range30
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container4)))
-                                      (to_base12 temp___expr_687)))
+                                      (to_base12 temp___expr_775)))
                                       (in_range29
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container4)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector13
-                                      (us_split_fields29 temp___expr_687)))))
+                                      (us_split_fields29 temp___expr_775)))))
 
-(define-fun default_initial_assumption10 ((temp___expr_690 us_rep15)
-  (temp___skip_top_level_691 Bool)) Bool (and
+(define-fun default_initial_assumption10 ((temp___expr_778 us_rep15)
+  (temp___skip_top_level_779 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag13 temp___expr_690)
+                                         (= (attr__tag13 temp___expr_778)
                                          us_tag13)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs16
-                                            temp___expr_690))) (to_rep
+                                            temp___expr_778))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                container4))))
@@ -4848,51 +4848,51 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector13
                                             (us_split_fields29
-                                            temp___expr_690))))) (to_rep
+                                            temp___expr_778))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  container4))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector13
                                             (us_split_fields29
-                                            temp___expr_690))) true))))
+                                            temp___expr_778))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_691 true))
+                                         (= temp___skip_top_level_779 true))
                                          (= (is_empty
-                                            (to_base12 temp___expr_690)) true))))
+                                            (to_base12 temp___expr_778)) true))))
 
 (declare-const container5 us_rep1)
 
 (declare-const attr__ATTRIBUTE_ADDRESS12 Int)
 
-(define-fun dynamic_invariant17 ((temp___expr_709 us_rep16)
-  (temp___is_init_706 Bool) (temp___skip_constant_707 Bool)
-  (temp___do_toplevel_708 Bool)) Bool (and
+(define-fun dynamic_invariant17 ((temp___expr_797 us_rep16)
+  (temp___is_init_794 Bool) (temp___skip_constant_795 Bool)
+  (temp___do_toplevel_796 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_707 true))
+                                      (not (= temp___skip_constant_795 true))
                                       (in_range32
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container5)))
-                                      (to_base13 temp___expr_709)))
+                                      (to_base13 temp___expr_797)))
                                       (in_range31
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container5)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector14
-                                      (us_split_fields31 temp___expr_709)))))
+                                      (us_split_fields31 temp___expr_797)))))
 
-(define-fun default_initial_assumption11 ((temp___expr_712 us_rep16)
-  (temp___skip_top_level_713 Bool)) Bool (and
+(define-fun default_initial_assumption11 ((temp___expr_800 us_rep16)
+  (temp___skip_top_level_801 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag14 temp___expr_712)
+                                         (= (attr__tag14 temp___expr_800)
                                          us_tag14)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs17
-                                            temp___expr_712))) (to_rep
+                                            temp___expr_800))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                container5))))
@@ -4902,51 +4902,51 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector14
                                             (us_split_fields31
-                                            temp___expr_712))))) (to_rep
+                                            temp___expr_800))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  container5))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector14
                                             (us_split_fields31
-                                            temp___expr_712))) true))))
+                                            temp___expr_800))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_713 true))
+                                         (= temp___skip_top_level_801 true))
                                          (= (is_empty
-                                            (to_base13 temp___expr_712)) true))))
+                                            (to_base13 temp___expr_800)) true))))
 
 (declare-const container6 us_rep1)
 
 (declare-const attr__ATTRIBUTE_ADDRESS13 Int)
 
-(define-fun dynamic_invariant18 ((temp___expr_731 us_rep17)
-  (temp___is_init_728 Bool) (temp___skip_constant_729 Bool)
-  (temp___do_toplevel_730 Bool)) Bool (and
+(define-fun dynamic_invariant18 ((temp___expr_819 us_rep17)
+  (temp___is_init_816 Bool) (temp___skip_constant_817 Bool)
+  (temp___do_toplevel_818 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_729 true))
+                                      (not (= temp___skip_constant_817 true))
                                       (in_range34
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container6)))
-                                      (to_base14 temp___expr_731)))
+                                      (to_base14 temp___expr_819)))
                                       (in_range33
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container6)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector15
-                                      (us_split_fields33 temp___expr_731)))))
+                                      (us_split_fields33 temp___expr_819)))))
 
-(define-fun default_initial_assumption12 ((temp___expr_734 us_rep17)
-  (temp___skip_top_level_735 Bool)) Bool (and
+(define-fun default_initial_assumption12 ((temp___expr_822 us_rep17)
+  (temp___skip_top_level_823 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag15 temp___expr_734)
+                                         (= (attr__tag15 temp___expr_822)
                                          us_tag15)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs18
-                                            temp___expr_734))) (to_rep
+                                            temp___expr_822))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                container6))))
@@ -4956,51 +4956,51 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector15
                                             (us_split_fields33
-                                            temp___expr_734))))) (to_rep
+                                            temp___expr_822))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  container6))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector15
                                             (us_split_fields33
-                                            temp___expr_734))) true))))
+                                            temp___expr_822))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_735 true))
+                                         (= temp___skip_top_level_823 true))
                                          (= (is_empty
-                                            (to_base14 temp___expr_734)) true))))
+                                            (to_base14 temp___expr_822)) true))))
 
 (declare-const container7 us_rep1)
 
 (declare-const attr__ATTRIBUTE_ADDRESS14 Int)
 
-(define-fun dynamic_invariant19 ((temp___expr_753 us_rep18)
-  (temp___is_init_750 Bool) (temp___skip_constant_751 Bool)
-  (temp___do_toplevel_752 Bool)) Bool (and
+(define-fun dynamic_invariant19 ((temp___expr_841 us_rep18)
+  (temp___is_init_838 Bool) (temp___skip_constant_839 Bool)
+  (temp___do_toplevel_840 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_751 true))
+                                      (not (= temp___skip_constant_839 true))
                                       (in_range36
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container7)))
-                                      (to_base15 temp___expr_753)))
+                                      (to_base15 temp___expr_841)))
                                       (in_range35
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container7)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector16
-                                      (us_split_fields35 temp___expr_753)))))
+                                      (us_split_fields35 temp___expr_841)))))
 
-(define-fun default_initial_assumption13 ((temp___expr_756 us_rep18)
-  (temp___skip_top_level_757 Bool)) Bool (and
+(define-fun default_initial_assumption13 ((temp___expr_844 us_rep18)
+  (temp___skip_top_level_845 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag16 temp___expr_756)
+                                         (= (attr__tag16 temp___expr_844)
                                          us_tag16)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs19
-                                            temp___expr_756))) (to_rep
+                                            temp___expr_844))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                container7))))
@@ -5010,51 +5010,51 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector16
                                             (us_split_fields35
-                                            temp___expr_756))))) (to_rep
+                                            temp___expr_844))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  container7))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector16
                                             (us_split_fields35
-                                            temp___expr_756))) true))))
+                                            temp___expr_844))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_757 true))
+                                         (= temp___skip_top_level_845 true))
                                          (= (is_empty
-                                            (to_base15 temp___expr_756)) true))))
+                                            (to_base15 temp___expr_844)) true))))
 
 (declare-const container8 us_rep1)
 
 (declare-const attr__ATTRIBUTE_ADDRESS15 Int)
 
-(define-fun dynamic_invariant20 ((temp___expr_775 us_rep19)
-  (temp___is_init_772 Bool) (temp___skip_constant_773 Bool)
-  (temp___do_toplevel_774 Bool)) Bool (and
+(define-fun dynamic_invariant20 ((temp___expr_863 us_rep19)
+  (temp___is_init_860 Bool) (temp___skip_constant_861 Bool)
+  (temp___do_toplevel_862 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_773 true))
+                                      (not (= temp___skip_constant_861 true))
                                       (in_range38
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container8)))
-                                      (to_base16 temp___expr_775)))
+                                      (to_base16 temp___expr_863)))
                                       (in_range37
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container8)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector17
-                                      (us_split_fields37 temp___expr_775)))))
+                                      (us_split_fields37 temp___expr_863)))))
 
-(define-fun default_initial_assumption14 ((temp___expr_778 us_rep19)
-  (temp___skip_top_level_779 Bool)) Bool (and
+(define-fun default_initial_assumption14 ((temp___expr_866 us_rep19)
+  (temp___skip_top_level_867 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag17 temp___expr_778)
+                                         (= (attr__tag17 temp___expr_866)
                                          us_tag17)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs20
-                                            temp___expr_778))) (to_rep
+                                            temp___expr_866))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                container8))))
@@ -5064,51 +5064,51 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector17
                                             (us_split_fields37
-                                            temp___expr_778))))) (to_rep
+                                            temp___expr_866))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  container8))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector17
                                             (us_split_fields37
-                                            temp___expr_778))) true))))
+                                            temp___expr_866))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_779 true))
+                                         (= temp___skip_top_level_867 true))
                                          (= (is_empty
-                                            (to_base16 temp___expr_778)) true))))
+                                            (to_base16 temp___expr_866)) true))))
 
 (declare-const container9 us_rep1)
 
 (declare-const attr__ATTRIBUTE_ADDRESS16 Int)
 
-(define-fun dynamic_invariant21 ((temp___expr_797 us_rep20)
-  (temp___is_init_794 Bool) (temp___skip_constant_795 Bool)
-  (temp___do_toplevel_796 Bool)) Bool (and
+(define-fun dynamic_invariant21 ((temp___expr_885 us_rep20)
+  (temp___is_init_882 Bool) (temp___skip_constant_883 Bool)
+  (temp___do_toplevel_884 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_795 true))
+                                      (not (= temp___skip_constant_883 true))
                                       (in_range40
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container9)))
-                                      (to_base17 temp___expr_797)))
+                                      (to_base17 temp___expr_885)))
                                       (in_range39
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container9)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector18
-                                      (us_split_fields39 temp___expr_797)))))
+                                      (us_split_fields39 temp___expr_885)))))
 
-(define-fun default_initial_assumption15 ((temp___expr_800 us_rep20)
-  (temp___skip_top_level_801 Bool)) Bool (and
+(define-fun default_initial_assumption15 ((temp___expr_888 us_rep20)
+  (temp___skip_top_level_889 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag18 temp___expr_800)
+                                         (= (attr__tag18 temp___expr_888)
                                          us_tag18)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs21
-                                            temp___expr_800))) (to_rep
+                                            temp___expr_888))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                container9))))
@@ -5118,51 +5118,51 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector18
                                             (us_split_fields39
-                                            temp___expr_800))))) (to_rep
+                                            temp___expr_888))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  container9))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector18
                                             (us_split_fields39
-                                            temp___expr_800))) true))))
+                                            temp___expr_888))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_801 true))
+                                         (= temp___skip_top_level_889 true))
                                          (= (is_empty
-                                            (to_base17 temp___expr_800)) true))))
+                                            (to_base17 temp___expr_888)) true))))
 
 (declare-const container10 us_rep1)
 
 (declare-const attr__ATTRIBUTE_ADDRESS17 Int)
 
-(define-fun dynamic_invariant22 ((temp___expr_819 us_rep21)
-  (temp___is_init_816 Bool) (temp___skip_constant_817 Bool)
-  (temp___do_toplevel_818 Bool)) Bool (and
+(define-fun dynamic_invariant22 ((temp___expr_907 us_rep21)
+  (temp___is_init_904 Bool) (temp___skip_constant_905 Bool)
+  (temp___do_toplevel_906 Bool)) Bool (and
                                       (=>
-                                      (not (= temp___skip_constant_817 true))
+                                      (not (= temp___skip_constant_905 true))
                                       (in_range42
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container10)))
-                                      (to_base18 temp___expr_819)))
+                                      (to_base18 temp___expr_907)))
                                       (in_range41
                                       (to_rep
                                       (rec__hnco__test2__v_type_owner__vector_type__capacity
                                       (us_split_discrs3 container10)))
                                       (rec__hnco__test2__v_type_owner__vector_type__hidden_vector19
-                                      (us_split_fields41 temp___expr_819)))))
+                                      (us_split_fields41 temp___expr_907)))))
 
-(define-fun default_initial_assumption16 ((temp___expr_822 us_rep21)
-  (temp___skip_top_level_823 Bool)) Bool (and
+(define-fun default_initial_assumption16 ((temp___expr_910 us_rep21)
+  (temp___skip_top_level_911 Bool)) Bool (and
                                          (and
-                                         (= (attr__tag19 temp___expr_822)
+                                         (= (attr__tag19 temp___expr_910)
                                          us_tag19)
                                          (and
                                          (= (to_rep
                                             (rec__hnco__test2__v_type_owner__vector_type__capacity
                                             (us_split_discrs22
-                                            temp___expr_822))) (to_rep
+                                            temp___expr_910))) (to_rep
                                                                (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                (us_split_discrs3
                                                                container10))))
@@ -5172,19 +5172,19 @@
                                             (us_split_discrs1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector19
                                             (us_split_fields41
-                                            temp___expr_822))))) (to_rep
+                                            temp___expr_910))))) (to_rep
                                                                  (rec__hnco__test2__v_type_owner__vector_type__capacity
                                                                  (us_split_discrs3
                                                                  container10))))
                                          (= (is_empty1
                                             (rec__hnco__test2__v_type_owner__vector_type__hidden_vector19
                                             (us_split_fields41
-                                            temp___expr_822))) true))))
+                                            temp___expr_910))) true))))
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_823 true))
+                                         (= temp___skip_top_level_911 true))
                                          (= (is_empty
-                                            (to_base18 temp___expr_822)) true))))
+                                            (to_base18 temp___expr_910)) true))))
 
 (declare-const container__split_fields capacity_range1)
 

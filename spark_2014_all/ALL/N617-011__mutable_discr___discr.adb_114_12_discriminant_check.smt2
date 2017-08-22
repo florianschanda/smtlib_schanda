@@ -84,12 +84,12 @@
 
 (declare-datatypes ((us_split_discrs 0))
 (((mk___split_discrs (rec__private_discr__p_with_default__c natural)))))
-(define-fun us_split_discrs_2__projection ((a us_split_discrs)) natural
+(define-fun us_split_discrs___2__projection ((a us_split_discrs)) natural
   (rec__private_discr__p_with_default__c a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
 (((mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref_2__projection ((a us_split_discrs__ref)) us_split_discrs
+(define-fun us_split_discrs__ref___2__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ((us_split_fields 0))
@@ -99,19 +99,19 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)(attr__constrained Bool)))))
-(define-fun us_rep_3__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                              a))
+(define-fun us_rep___3__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                a))
 
-(define-fun us_rep_4__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___4__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
-(define-fun us_rep_5__projection ((a us_rep)) Bool (attr__constrained a))
+(define-fun us_rep___5__projection ((a us_rep)) Bool (attr__constrained a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -236,7 +236,7 @@
 (declare-const dummy2 us_rep)
 
 (declare-datatypes ((tdS__ref 0)) (((mk_tdS__ref (tdS__content us_rep)))))
-(define-fun tdS__ref_2__projection ((a tdS__ref)) us_rep (tdS__content a))
+(define-fun tdS__ref___2__projection ((a tdS__ref)) us_rep (tdS__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_237 us_rep)
   (temp___is_init_234 Bool) (temp___skip_constant_235 Bool)

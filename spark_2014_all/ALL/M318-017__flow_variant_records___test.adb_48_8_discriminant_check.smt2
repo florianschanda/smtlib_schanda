@@ -162,8 +162,8 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_discrs (us_split_discrs1
                                                              a))
 
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun test__wibble__x__pred ((a us_rep)) Bool (= (to_rep
                                                        (rec__test__wibble__d
@@ -413,7 +413,7 @@
 (declare-const dummy3 us_rep)
 
 (declare-datatypes ((tvS__ref 0)) (((mk_tvS__ref (tvS__content us_rep)))))
-(define-fun tvS__ref_2__projection ((a tvS__ref)) us_rep (tvS__content a))
+(define-fun tvS__ref___2__projection ((a tvS__ref)) us_rep (tvS__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_161 us_rep)
   (temp___is_init_158 Bool) (temp___skip_constant_159 Bool)

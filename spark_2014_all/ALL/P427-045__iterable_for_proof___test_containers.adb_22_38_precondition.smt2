@@ -240,18 +240,18 @@
 
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields (rec__my_container__cursor__index natural)))))
-(define-fun us_split_fields_Index3__projection ((a us_split_fields)) natural
+(define-fun us_split_fields_Index__3__projection ((a us_split_fields)) natural
   (rec__my_container__cursor__index a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_3__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___3__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq1 ((a us_rep)
   (b us_rep)) Bool (ite (= (to_rep
@@ -303,8 +303,8 @@
 
 (declare-datatypes ((cursor__ref 0))
 (((mk_cursor__ref (cursor__content us_rep)))))
-(define-fun cursor__ref_3__projection ((a cursor__ref)) us_rep (cursor__content
-                                                               a))
+(define-fun cursor__ref___3__projection ((a cursor__ref)) us_rep (cursor__content
+                                                                 a))
 
 (declare-fun valid2 (Int) Bool)
 

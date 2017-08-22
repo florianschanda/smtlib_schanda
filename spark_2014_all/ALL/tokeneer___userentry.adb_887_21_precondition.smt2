@@ -537,13 +537,13 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___4__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_4__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___4__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -715,7 +715,7 @@
 (declare-const dummy10 t1)
 
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t1)))))
-(define-fun t__ref_3__projection ((a t__ref)) t1 (t__content a))
+(define-fun t__ref___3__projection ((a t__ref)) t1 (t__content a))
 
 (define-fun dynamic_invariant ((temp___expr_843 Int)
   (temp___is_init_840 Bool) (temp___skip_constant_841 Bool)
@@ -824,13 +824,13 @@
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_13__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___13__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_14__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                 a))
+(define-fun us_rep___14__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                   a))
 
 (define-fun bool_eq3 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -942,7 +942,7 @@
 (declare-const dummy13 us_rep1)
 
 (declare-datatypes ((t__ref1 0)) (((mk_t__ref1 (t__content1 us_rep1)))))
-(define-fun t__ref_4__projection ((a t__ref1)) us_rep1 (t__content1 a))
+(define-fun t__ref___4__projection ((a t__ref1)) us_rep1 (t__content1 a))
 
 (declare-fun extractuser (us_private) (Array Int character))
 
@@ -979,8 +979,8 @@
 
 (declare-datatypes ((statust__ref1 0))
 (((mk_statust__ref1 (statust__content1 statust1)))))
-(define-fun statust__ref_2__projection ((a statust__ref1)) statust1 (statust__content1
-                                                                    a))
+(define-fun statust__ref___2__projection ((a statust__ref1)) statust1
+  (statust__content1 a))
 
 (define-fun dynamic_invariant2 ((temp___expr_1683 Int)
   (temp___is_init_1680 Bool) (temp___skip_constant_1681 Bool)

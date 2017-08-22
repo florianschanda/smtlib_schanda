@@ -133,7 +133,7 @@
 (declare-const dummy3 t1)
 
 (declare-datatypes ((t__ref1 0)) (((mk_t__ref1 (t__content1 t1)))))
-(define-fun t__ref_2__projection ((a t__ref1)) t1 (t__content1 a))
+(define-fun t__ref___2__projection ((a t__ref1)) t1 (t__content1 a))
 
 (define-fun dynamic_invariant2 ((temp___expr_147 Int)
   (temp___is_init_144 Bool) (temp___skip_constant_145 Bool)
@@ -167,7 +167,7 @@
 (declare-const dummy4 t2)
 
 (declare-datatypes ((t__ref2 0)) (((mk_t__ref2 (t__content2 t2)))))
-(define-fun t__ref_3__projection ((a t__ref2)) t2 (t__content2 a))
+(define-fun t__ref___3__projection ((a t__ref2)) t2 (t__content2 a))
 
 (define-fun dynamic_invariant3 ((temp___expr_153 Int)
   (temp___is_init_150 Bool) (temp___skip_constant_151 Bool)
@@ -200,7 +200,7 @@
 (declare-const dummy5 t3)
 
 (declare-datatypes ((t__ref3 0)) (((mk_t__ref3 (t__content3 t3)))))
-(define-fun t__ref_4__projection ((a t__ref3)) t3 (t__content3 a))
+(define-fun t__ref___4__projection ((a t__ref3)) t3 (t__content3 a))
 
 (define-fun dynamic_invariant4 ((temp___expr_159 Int)
   (temp___is_init_156 Bool) (temp___skip_constant_157 Bool)
@@ -238,7 +238,7 @@
 (declare-const dummy6 t4)
 
 (declare-datatypes ((t__ref4 0)) (((mk_t__ref4 (t__content4 t4)))))
-(define-fun t__ref_5__projection ((a t__ref4)) t4 (t__content4 a))
+(define-fun t__ref___5__projection ((a t__ref4)) t4 (t__content4 a))
 
 (define-fun dynamic_invariant5 ((temp___expr_165 Int)
   (temp___is_init_162 Bool) (temp___skip_constant_163 Bool)
@@ -270,7 +270,7 @@
 (declare-const dummy7 t5)
 
 (declare-datatypes ((t__ref5 0)) (((mk_t__ref5 (t__content5 t5)))))
-(define-fun t__ref_6__projection ((a t__ref5)) t5 (t__content5 a))
+(define-fun t__ref___6__projection ((a t__ref5)) t5 (t__content5 a))
 
 (define-fun dynamic_invariant6 ((temp___expr_171 Int)
   (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
@@ -301,7 +301,7 @@
 (declare-const dummy8 t6)
 
 (declare-datatypes ((t__ref6 0)) (((mk_t__ref6 (t__content6 t6)))))
-(define-fun t__ref_7__projection ((a t__ref6)) t6 (t__content6 a))
+(define-fun t__ref___7__projection ((a t__ref6)) t6 (t__content6 a))
 
 (define-fun dynamic_invariant7 ((temp___expr_177 Int)
   (temp___is_init_174 Bool) (temp___skip_constant_175 Bool)
@@ -331,7 +331,7 @@
 (declare-const dummy9 t7)
 
 (declare-datatypes ((t__ref7 0)) (((mk_t__ref7 (t__content7 t7)))))
-(define-fun t__ref_8__projection ((a t__ref7)) t7 (t__content7 a))
+(define-fun t__ref___8__projection ((a t__ref7)) t7 (t__content7 a))
 
 (define-fun dynamic_invariant8 ((temp___expr_183 Int)
   (temp___is_init_180 Bool) (temp___skip_constant_181 Bool)
@@ -362,7 +362,7 @@
 (declare-const dummy10 t8)
 
 (declare-datatypes ((t__ref8 0)) (((mk_t__ref8 (t__content8 t8)))))
-(define-fun t__ref_9__projection ((a t__ref8)) t8 (t__content8 a))
+(define-fun t__ref___9__projection ((a t__ref8)) t8 (t__content8 a))
 
 (define-fun dynamic_invariant9 ((temp___expr_189 Int)
   (temp___is_init_186 Bool) (temp___skip_constant_187 Bool)
@@ -394,7 +394,7 @@
 (declare-const dummy11 t9)
 
 (declare-datatypes ((t__ref9 0)) (((mk_t__ref9 (t__content9 t9)))))
-(define-fun t__ref_10__projection ((a t__ref9)) t9 (t__content9 a))
+(define-fun t__ref___10__projection ((a t__ref9)) t9 (t__content9 a))
 
 (define-fun dynamic_invariant10 ((temp___expr_195 Int)
   (temp___is_init_192 Bool) (temp___skip_constant_193 Bool)
@@ -425,7 +425,7 @@
 (declare-const dummy12 t10)
 
 (declare-datatypes ((t__ref10 0)) (((mk_t__ref10 (t__content10 t10)))))
-(define-fun t__ref_11__projection ((a t__ref10)) t10 (t__content10 a))
+(define-fun t__ref___11__projection ((a t__ref10)) t10 (t__content10 a))
 
 (define-fun dynamic_invariant11 ((temp___expr_201 Int)
   (temp___is_init_198 Bool) (temp___skip_constant_199 Bool)
@@ -456,7 +456,7 @@
 (declare-const dummy13 t11)
 
 (declare-datatypes ((t__ref11 0)) (((mk_t__ref11 (t__content11 t11)))))
-(define-fun t__ref_12__projection ((a t__ref11)) t11 (t__content11 a))
+(define-fun t__ref___12__projection ((a t__ref11)) t11 (t__content11 a))
 
 (define-fun dynamic_invariant12 ((temp___expr_207 Int)
   (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)

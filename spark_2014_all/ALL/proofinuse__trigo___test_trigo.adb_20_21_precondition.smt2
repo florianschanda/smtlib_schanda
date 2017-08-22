@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -93,9 +94,52 @@
 (declare-fun is_int1 (Float32) Bool)
 
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content Float32)))))
+;; max_value
+  (assert
+  (= (* 33554430.0 10141204801825835211973625643008.0) (fp.to_real (fp #b0 #b11111110 #b11111111111111111111111))))
+
 (declare-fun next_representable (Float32) Float32)
 
 (declare-fun prev_representable (Float32) Float32)
+
+;; next_representable_def
+  (assert
+  (forall ((x Float32))
+  (! (=> (fp.isFinite32 x) (fp.lt x (next_representable x))) :pattern (
+  (next_representable x)) )))
+
+;; prev_representable_def
+  (assert
+  (forall ((x Float32))
+  (! (=> (fp.isFinite32 x) (fp.lt (prev_representable x) x)) :pattern (
+  (prev_representable x)) )))
+
+;; next_representable_def2
+  (assert
+  (forall ((x Float32) (y Float32))
+  (=> (fp.lt x y) (fp.leq (next_representable x) y))))
+
+;; prev_representable_def2
+  (assert
+  (forall ((x Float32) (y Float32))
+  (=> (fp.lt y x) (fp.leq y (prev_representable x)))))
+
+;; next_representable_finite
+  (assert
+  (forall ((x Float32))
+  (! (=> (fp.isFinite32 x)
+     (=> (not (fp.eq x (fp #b0 #b11111110 #b11111111111111111111111)))
+     (fp.isFinite32 (next_representable x)))) :pattern ((fp.isFinite32
+  (next_representable x))) )))
+
+;; prev_representable_finite
+  (assert
+  (forall ((x Float32))
+  (! (=> (fp.isFinite32 x)
+     (=>
+     (not (fp.eq x (fp.neg (fp #b0 #b11111110 #b11111111111111111111111))))
+     (fp.isFinite32 (prev_representable x)))) :pattern ((fp.isFinite32
+  (prev_representable x))) )))
 
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 
@@ -420,7 +464,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-fun sin1 (Float32) Float32)
 
@@ -1004,13 +1048,13 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite f) (fp.isNaN f)))))
+  (fp.isFinite32 f)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite dummy5) (fp.isNaN dummy5)))))
+  (fp.isFinite32 dummy5)))
 
 ;; H
   (assert (= result f))
@@ -1035,17 +1079,17 @@
   (and
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite f2) (fp.isNaN f2))))
+  (fp.isFinite32 f2))
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite dummy7) (fp.isNaN dummy7)))))
+  (fp.isFinite32 dummy7)))
   (fp.leq f2 (fp #b0 #b01111111 #b00000000000000000000000)))))
 
 ;; H
   (assert
   (=> (fp.leq f1 (fp #b0 #b01111111 #b00000000000000000000000))
   (and (= o (sin1 f2))
-  (and (not (or (fp.isInfinite o) (fp.isNaN o)))
+  (and (fp.isFinite32 o)
   (fp.lt (fp.abs (fp.sub RNE o (approx_sin f2))) (fp #b0 #b01101100 #b10010010101001110011100))))))
 
 ;; H
@@ -1144,10 +1188,10 @@
   (and
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite f9) (fp.isNaN f9))))
+  (fp.isFinite32 f9))
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite dummy13) (fp.isNaN dummy13)))))
+  (fp.isFinite32 dummy13)))
   (fp.leq f9 (fp #b0 #b01111111 #b00000000000000000000000))))
 
 (assert

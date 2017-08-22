@@ -449,7 +449,7 @@
 
 (declare-datatypes ((status_type__ref1 0))
 (((mk_status_type__ref1 (status_type__content1 status_type1)))))
-(define-fun status_type__ref_2__projection ((a status_type__ref1)) status_type1
+(define-fun status_type__ref___2__projection ((a status_type__ref1)) status_type1
   (status_type__content1 a))
 
 (define-fun dynamic_invariant3 ((temp___expr_237 Int)

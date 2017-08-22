@@ -227,19 +227,19 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)(attr__constrained Bool)))))
-(define-fun us_rep_3__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___3__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_4__projection ((a us_rep1)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___4__projection ((a us_rep1)) us_split_fields (us_split_fields1
+                                                                 a))
 
-(define-fun us_rep_5__projection ((a us_rep1)) Bool (attr__constrained a))
+(define-fun us_rep___5__projection ((a us_rep1)) Bool (attr__constrained a))
 
 (define-fun file_io__read_result__c__pred ((a us_rep1)) Bool (= (to_rep1
                                                                 (rec__file_io__read_result__status
@@ -406,21 +406,21 @@
 
 (declare-const next_read__split_discrs read_status)
 
-(declare-const temp___826 us_rep)
+(declare-const temp___914 us_rep)
 
-(declare-const temp___825 read_status)
+(declare-const temp___913 read_status)
 
-(declare-const temp___8251 character)
+(declare-const temp___9131 character)
 
-(declare-const temp___8252 Bool)
+(declare-const temp___9132 Bool)
 
-(declare-const temp___824 Int)
+(declare-const temp___912 Int)
 
-(declare-const temp___823 Int)
+(declare-const temp___911 Int)
 
-(declare-const temp___822 Int)
+(declare-const temp___910 Int)
 
-(declare-const temp___821 us_rep1)
+(declare-const temp___909 us_rep1)
 
 (declare-const o Bool)
 
@@ -628,28 +628,28 @@
   (= result false)))
 
 ;; H
-  (assert (=> (= result true) (= temp___826 the_file)))
+  (assert (=> (= result true) (= temp___914 the_file)))
 
 ;; H
   (assert
   (=> (= result true)
-  (and (= next_read__split_discrs1 (mk___split_discrs temp___825))
-  (and (= next_read__split_fields1 (mk___split_fields temp___8251))
-  (= next_read__attr__constrained temp___8252)))))
+  (and (= next_read__split_discrs1 (mk___split_discrs temp___913))
+  (and (= next_read__split_fields1 (mk___split_fields temp___9131))
+  (= next_read__attr__constrained temp___9132)))))
 
 ;; H
-  (assert (=> (= result true) (= temp___824 current_pos1)))
+  (assert (=> (= result true) (= temp___912 current_pos1)))
 
 ;; H
-  (assert (=> (= result true) (= temp___823 current_col1)))
+  (assert (=> (= result true) (= temp___911 current_col1)))
 
 ;; H
-  (assert (=> (= result true) (= temp___822 current_line1)))
+  (assert (=> (= result true) (= temp___910 current_line1)))
 
 ;; H
   (assert
   (=> (= result true)
-  (= temp___821 (mk___rep current_read__split_discrs1
+  (= temp___909 (mk___rep current_read__split_discrs1
                 current_read__split_fields1 current_read__attr__constrained))))
 
 ;; H
@@ -661,11 +661,11 @@
   (and
   (= (to_rep1
      (rec__file_io__read_result__status current_read__split_discrs2)) 0)
-  (let ((temp___828 (to_rep
+  (let ((temp___916 (to_rep
                     (rec__file_io__read_result__c
                     current_read__split_fields2))))
-  (or (= temp___828 10)
-  (or (= temp___828 13) (or (= temp___828 32) (= temp___828 9)))))))))
+  (or (= temp___916 10)
+  (or (= temp___916 13) (or (= temp___916 32) (= temp___916 9)))))))))
 
 ;; H
   (assert

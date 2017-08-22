@@ -517,7 +517,7 @@
 
 (declare-datatypes ((tint_arrayD1__ref 0))
 (((mk_tint_arrayD1__ref (tint_arrayD1__content integer)))))
-(define-fun tint_arrayD1__ref_16__projection ((a tint_arrayD1__ref)) integer
+(define-fun tint_arrayD1__ref___16__projection ((a tint_arrayD1__ref)) integer
   (tint_arrayD1__content a))
 
 (declare-sort t1 0)
@@ -599,7 +599,7 @@
 
 (declare-datatypes ((tint_arrayT__ref 0))
 (((mk_tint_arrayT__ref (tint_arrayT__content us_t1)))))
-(define-fun tint_arrayT__ref_16__projection ((a tint_arrayT__ref)) us_t1
+(define-fun tint_arrayT__ref___16__projection ((a tint_arrayT__ref)) us_t1
   (tint_arrayT__content a))
 
 (define-fun dynamic_property3 ((first_int Int) (last_int Int)
@@ -722,7 +722,7 @@
 
 (declare-datatypes ((tnumber_array_typeD1__ref 0))
 (((mk_tnumber_array_typeD1__ref (tnumber_array_typeD1__content integer)))))
-(define-fun tnumber_array_typeD1__ref_25__projection ((a tnumber_array_typeD1__ref)) integer
+(define-fun tnumber_array_typeD1__ref___25__projection ((a tnumber_array_typeD1__ref)) integer
   (tnumber_array_typeD1__content a))
 
 (declare-sort t3 0)
@@ -804,7 +804,7 @@
 
 (declare-datatypes ((number_array_type__ref 0))
 (((mk_number_array_type__ref (number_array_type__content us_t3)))))
-(define-fun number_array_type__ref_25__projection ((a number_array_type__ref)) us_t3
+(define-fun number_array_type__ref___25__projection ((a number_array_type__ref)) us_t3
   (number_array_type__content a))
 
 (define-fun dynamic_property7 ((first_int Int) (last_int Int)
@@ -1011,7 +1011,7 @@
 
 (declare-datatypes ((tint_arrayB__ref 0))
 (((mk_tint_arrayB__ref (tint_arrayB__content us_t5)))))
-(define-fun tint_arrayB__ref_16__projection ((a tint_arrayB__ref)) us_t5
+(define-fun tint_arrayB__ref___16__projection ((a tint_arrayB__ref)) us_t5
   (tint_arrayB__content a))
 
 (declare-fun aida__conversion__calculate_negative_target_for_length_11_case_2_13x_xxx_xxx__int_array__aggregate_def (Int
@@ -1134,7 +1134,7 @@
 
 (declare-datatypes ((tnumber_array_typeB__ref 0))
 (((mk_tnumber_array_typeB__ref (tnumber_array_typeB__content us_t6)))))
-(define-fun tnumber_array_typeB__ref_25__projection ((a tnumber_array_typeB__ref)) us_t6
+(define-fun tnumber_array_typeB__ref___25__projection ((a tnumber_array_typeB__ref)) us_t6
   (tnumber_array_typeB__content a))
 
 (declare-fun aida__conversion__calculate_negative_target_for_length_11_case_2_13x_xxx_xxx__n__aggregate_def (Int

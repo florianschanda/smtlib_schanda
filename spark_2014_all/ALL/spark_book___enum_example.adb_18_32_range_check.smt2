@@ -53,11 +53,11 @@
 (define-fun day_type__ref___projection ((a day_type__ref)) day_type (day_type__content
                                                                     a))
 
-(define-fun dynamic_invariant ((temp___expr_525 Int)
-  (temp___is_init_522 Bool) (temp___skip_constant_523 Bool)
-  (temp___do_toplevel_524 Bool)) Bool (=>
-                                      (or (= temp___is_init_522 true)
-                                      (<= 0 6)) (in_range temp___expr_525)))
+(define-fun dynamic_invariant ((temp___expr_523 Int)
+  (temp___is_init_520 Bool) (temp___skip_constant_521 Bool)
+  (temp___do_toplevel_522 Bool)) Bool (=>
+                                      (or (= temp___is_init_520 true)
+                                      (<= 0 6)) (in_range temp___expr_523)))
 
 (declare-const day Int)
 

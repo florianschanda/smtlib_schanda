@@ -129,34 +129,34 @@
 
 (declare-datatypes ((us_split_discrs 0))
 (((mk___split_discrs (rec__private_types__p3__t__d Bool)))))
-(define-fun us_split_discrs_3__projection ((a us_split_discrs)) Bool
+(define-fun us_split_discrs___3__projection ((a us_split_discrs)) Bool
   (rec__private_types__p3__t__d a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
 (((mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref_3__projection ((a us_split_discrs__ref)) us_split_discrs
+(define-fun us_split_discrs__ref___3__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields (rec__private_types__p3__t__f positive)))))
-(define-fun us_split_fields_F3__projection ((a us_split_fields)) positive
+(define-fun us_split_fields_F__3__projection ((a us_split_fields)) positive
   (rec__private_types__p3__t__f a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)(attr__constrained Bool)))))
-(define-fun us_rep_7__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                              a))
+(define-fun us_rep___7__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                a))
 
-(define-fun us_rep_8__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___8__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
-(define-fun us_rep_9__projection ((a us_rep)) Bool (attr__constrained a))
+(define-fun us_rep___9__projection ((a us_rep)) Bool (attr__constrained a))
 
 (define-fun private_types__p3__t__f__pred ((a us_rep)) Bool (= (to_int1
                                                                (rec__private_types__p3__t__d
@@ -233,7 +233,7 @@
 (declare-const dummy2 us_rep)
 
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content us_rep)))))
-(define-fun t__ref_3__projection ((a t__ref)) us_rep (t__content a))
+(define-fun t__ref___3__projection ((a t__ref)) us_rep (t__content a))
 
 (define-fun in_range3 ((rec__private_types__p3__t__d1 Bool)
   (a us_rep)) Bool (= rec__private_types__p3__t__d1 (rec__private_types__p3__t__d
@@ -296,7 +296,7 @@
 (declare-const dummy3 us_rep)
 
 (declare-datatypes ((txS__ref 0)) (((mk_txS__ref (txS__content us_rep)))))
-(define-fun txS__ref_2__projection ((a txS__ref)) us_rep (txS__content a))
+(define-fun txS__ref___2__projection ((a txS__ref)) us_rep (txS__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_177 us_rep)
   (temp___is_init_174 Bool) (temp___skip_constant_175 Bool)

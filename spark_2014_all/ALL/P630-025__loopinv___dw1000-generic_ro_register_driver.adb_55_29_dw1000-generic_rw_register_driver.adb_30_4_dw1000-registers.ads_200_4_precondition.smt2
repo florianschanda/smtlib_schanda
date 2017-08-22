@@ -559,13 +559,13 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_3__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___3__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -644,7 +644,7 @@
 
 (declare-datatypes ((register_type__ref 0))
 (((mk_register_type__ref (register_type__content us_rep)))))
-(define-fun register_type__ref_6__projection ((a register_type__ref)) us_rep
+(define-fun register_type__ref___6__projection ((a register_type__ref)) us_rep
   (register_type__content a))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
@@ -664,7 +664,7 @@
 
 (declare-datatypes ((tregister_byte_arrayP1__ref 0))
 (((mk_tregister_byte_arrayP1__ref (tregister_byte_arrayP1__content integer)))))
-(define-fun tregister_byte_arrayP1__ref_4__projection ((a tregister_byte_arrayP1__ref)) integer
+(define-fun tregister_byte_arrayP1__ref___4__projection ((a tregister_byte_arrayP1__ref)) integer
   (tregister_byte_arrayP1__content a))
 
 (declare-sort t1 0)
@@ -746,19 +746,19 @@
 
 (declare-datatypes ((register_byte_array__ref 0))
 (((mk_register_byte_array__ref (register_byte_array__content us_t1)))))
-(define-fun register_byte_array__ref_4__projection ((a register_byte_array__ref)) us_t1
+(define-fun register_byte_array__ref___4__projection ((a register_byte_array__ref)) us_t1
   (register_byte_array__content a))
 
-(define-fun dynamic_invariant ((temp___expr_1909 us_t1)
-  (temp___is_init_1906 Bool) (temp___skip_constant_1907 Bool)
-  (temp___do_toplevel_1908 Bool)) Bool (=>
+(define-fun dynamic_invariant ((temp___expr_1911 us_t1)
+  (temp___is_init_1908 Bool) (temp___skip_constant_1909 Bool)
+  (temp___do_toplevel_1910 Bool)) Bool (=>
                                        (not
-                                       (= temp___skip_constant_1907 true))
+                                       (= temp___skip_constant_1909 true))
                                        (and (dynamic_property2 1 4
-                                       (first3 temp___expr_1909)
-                                       (last3 temp___expr_1909))
-                                       (and (= (first3 temp___expr_1909) 1)
-                                       (= (last3 temp___expr_1909) 4)))))
+                                       (first3 temp___expr_1911)
+                                       (last3 temp___expr_1911))
+                                       (and (= (first3 temp___expr_1911) 1)
+                                       (= (last3 temp___expr_1911) 4)))))
 
 (declare-const reg_bytes__first integer)
 

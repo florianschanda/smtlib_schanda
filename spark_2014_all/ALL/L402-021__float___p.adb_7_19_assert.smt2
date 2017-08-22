@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -114,7 +115,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const x Float32)
 
@@ -153,7 +154,7 @@
 (declare-const t1 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite x) (fp.isNaN x))))
+  (assert (fp.isFinite32 x))
 
 ;; H
   (assert (= result c))
@@ -162,7 +163,7 @@
   (assert (= c1 (fp.roundToIntegral RTP x)))
 
 ;; H
-  (assert (not (or (fp.isInfinite c1) (fp.isNaN c1))))
+  (assert (fp.isFinite32 c1))
 
 ;; H
   (assert (= result1 f))
@@ -171,7 +172,7 @@
   (assert (= f1 (fp.roundToIntegral RTN x)))
 
 ;; H
-  (assert (not (or (fp.isInfinite f1) (fp.isNaN f1))))
+  (assert (fp.isFinite32 f1))
 
 ;; H
   (assert (= result2 r))
@@ -180,7 +181,7 @@
   (assert (= r1 (fp.roundToIntegral RNA x)))
 
 ;; H
-  (assert (not (or (fp.isInfinite r1) (fp.isNaN r1))))
+  (assert (fp.isFinite32 r1))
 
 ;; H
   (assert (= result3 t))
@@ -189,7 +190,7 @@
   (assert (= t1 (fp.roundToIntegral RTZ x)))
 
 ;; H
-  (assert (not (or (fp.isInfinite t1) (fp.isNaN t1))))
+  (assert (fp.isFinite32 t1))
 
 (assert
 ;; WP_parameter_def

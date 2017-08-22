@@ -477,7 +477,7 @@
 
 (declare-datatypes ((tTmy_aSP1__ref 0))
 (((mk_tTmy_aSP1__ref (tTmy_aSP1__content tTmy_aSP1)))))
-(define-fun tTmy_aSP1__ref_2__projection ((a tTmy_aSP1__ref)) tTmy_aSP1
+(define-fun tTmy_aSP1__ref___2__projection ((a tTmy_aSP1__ref)) tTmy_aSP1
   (tTmy_aSP1__content a))
 
 (declare-const my_a (Array Int integer))
@@ -509,7 +509,7 @@
 
 (declare-datatypes ((tTmy_bSP1__ref 0))
 (((mk_tTmy_bSP1__ref (tTmy_bSP1__content tTmy_bSP1)))))
-(define-fun tTmy_bSP1__ref_2__projection ((a tTmy_bSP1__ref)) tTmy_bSP1
+(define-fun tTmy_bSP1__ref___2__projection ((a tTmy_bSP1__ref)) tTmy_bSP1
   (tTmy_bSP1__content a))
 
 (declare-const my_b (Array Int integer))

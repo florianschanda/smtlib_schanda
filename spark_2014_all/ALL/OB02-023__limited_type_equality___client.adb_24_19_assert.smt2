@@ -140,18 +140,18 @@
 
 (declare-datatypes ((us_split_fields2 0))
 (((mk___split_fields1 (rec__p2__limited_record__x integer)))))
-(define-fun us_split_fields_X2__projection ((a us_split_fields2)) integer
+(define-fun us_split_fields_X__2__projection ((a us_split_fields2)) integer
   (rec__p2__limited_record__x a))
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (declare-const value__size1 Int)
 
@@ -200,18 +200,18 @@
 
 (declare-datatypes ((us_split_fields4 0))
 (((mk___split_fields2 (rec__p3__limited_record_with_user_eq__x integer)))))
-(define-fun us_split_fields_X3__projection ((a us_split_fields4)) integer
+(define-fun us_split_fields_X__3__projection ((a us_split_fields4)) integer
   (rec__p3__limited_record_with_user_eq__x a))
 
 (declare-datatypes ((us_split_fields__ref2 0))
 (((mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref2)) us_split_fields4
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep2 (us_split_fields5 us_split_fields4)))))
-(define-fun us_rep_3__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
-                                                                a))
+(define-fun us_rep___3__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
+                                                                  a))
 
 (declare-const value__size2 Int)
 

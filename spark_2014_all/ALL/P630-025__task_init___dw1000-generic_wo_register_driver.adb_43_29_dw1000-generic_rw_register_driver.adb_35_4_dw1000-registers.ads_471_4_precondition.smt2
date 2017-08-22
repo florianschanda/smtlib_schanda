@@ -513,13 +513,13 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_63__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___63__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_63__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___63__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                 a))
 
 (define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (= (to_rep1
@@ -577,7 +577,7 @@
 
 (declare-datatypes ((register_type__ref 0))
 (((mk_register_type__ref (register_type__content us_rep)))))
-(define-fun register_type__ref_148__projection ((a register_type__ref)) us_rep
+(define-fun register_type__ref___148__projection ((a register_type__ref)) us_rep
   (register_type__content a))
 
 (declare-const reg us_rep)
@@ -599,7 +599,7 @@
 
 (declare-datatypes ((tregister_byte_arrayP1__ref 0))
 (((mk_tregister_byte_arrayP1__ref (tregister_byte_arrayP1__content integer)))))
-(define-fun tregister_byte_arrayP1__ref_105__projection ((a tregister_byte_arrayP1__ref)) integer
+(define-fun tregister_byte_arrayP1__ref___105__projection ((a tregister_byte_arrayP1__ref)) integer
   (tregister_byte_arrayP1__content a))
 
 (declare-sort t1 0)
@@ -681,19 +681,19 @@
 
 (declare-datatypes ((register_byte_array__ref 0))
 (((mk_register_byte_array__ref (register_byte_array__content us_t1)))))
-(define-fun register_byte_array__ref_105__projection ((a register_byte_array__ref)) us_t1
+(define-fun register_byte_array__ref___105__projection ((a register_byte_array__ref)) us_t1
   (register_byte_array__content a))
 
-(define-fun dynamic_invariant ((temp___expr_5512 us_t1)
-  (temp___is_init_5509 Bool) (temp___skip_constant_5510 Bool)
-  (temp___do_toplevel_5511 Bool)) Bool (=>
+(define-fun dynamic_invariant ((temp___expr_5604 us_t1)
+  (temp___is_init_5601 Bool) (temp___skip_constant_5602 Bool)
+  (temp___do_toplevel_5603 Bool)) Bool (=>
                                        (not
-                                       (= temp___skip_constant_5510 true))
+                                       (= temp___skip_constant_5602 true))
                                        (and (dynamic_property2 1 1
-                                       (first3 temp___expr_5512)
-                                       (last3 temp___expr_5512))
-                                       (and (= (first3 temp___expr_5512) 1)
-                                       (= (last3 temp___expr_5512) 1)))))
+                                       (first3 temp___expr_5604)
+                                       (last3 temp___expr_5604))
+                                       (and (= (first3 temp___expr_5604) 1)
+                                       (= (last3 temp___expr_5604) 1)))))
 
 (declare-sort t2 0)
 
@@ -774,24 +774,24 @@
 
 (declare-datatypes ((target__ref 0))
 (((mk_target__ref (target__content us_t2)))))
-(define-fun target__ref_44__projection ((a target__ref)) us_t2 (target__content
-                                                               a))
+(define-fun target__ref___44__projection ((a target__ref)) us_t2 (target__content
+                                                                 a))
 
 (declare-datatypes ((source__ref 0))
 (((mk_source__ref (source__content us_rep)))))
-(define-fun source__ref_44__projection ((a source__ref)) us_rep (source__content
-                                                                a))
+(define-fun source__ref___44__projection ((a source__ref)) us_rep (source__content
+                                                                  a))
 
-(define-fun dynamic_invariant1 ((temp___expr_5528 us_t2)
-  (temp___is_init_5525 Bool) (temp___skip_constant_5526 Bool)
-  (temp___do_toplevel_5527 Bool)) Bool (=>
+(define-fun dynamic_invariant1 ((temp___expr_5620 us_t2)
+  (temp___is_init_5617 Bool) (temp___skip_constant_5618 Bool)
+  (temp___do_toplevel_5619 Bool)) Bool (=>
                                        (not
-                                       (= temp___skip_constant_5526 true))
+                                       (= temp___skip_constant_5618 true))
                                        (and (dynamic_property3 1 1
-                                       (first5 temp___expr_5528)
-                                       (last5 temp___expr_5528))
-                                       (and (= (first5 temp___expr_5528) 1)
-                                       (= (last5 temp___expr_5528) 1)))))
+                                       (first5 temp___expr_5620)
+                                       (last5 temp___expr_5620))
+                                       (and (= (first5 temp___expr_5620) 1)
+                                       (= (last5 temp___expr_5620) 1)))))
 
 (declare-fun register_to_bytes (us_rep) us_t2)
 
@@ -836,13 +836,13 @@
 
 (declare-const reg_bytes (Array Int bits_8))
 
-(declare-const temp___7884 (Array Int bits_8))
+(declare-const temp___8034 (Array Int bits_8))
 
-(declare-const temp___78841 t2)
+(declare-const temp___80341 t2)
 
-(declare-const temp___7885 (Array Int bits_8))
+(declare-const temp___8035 (Array Int bits_8))
 
-(declare-const temp___78851 t1)
+(declare-const temp___80351 t1)
 
 (declare-const o (Array Int bits_8))
 
@@ -854,7 +854,7 @@
 
 (declare-const reg_bytes1 (Array Int bits_8))
 
-(define-fun temp___78842 () us_t2 (mk___t2 temp___7884 temp___78841))
+(define-fun temp___80342 () us_t2 (mk___t2 temp___8034 temp___80341))
 
 ;; H
   (assert
@@ -864,32 +864,32 @@
 
 ;; H
   (assert
-  (and (= temp___78842 (register_to_bytes reg)) (dynamic_invariant1
-  temp___78842 true false true)))
+  (and (= temp___80342 (register_to_bytes reg)) (dynamic_invariant1
+  temp___80342 true false true)))
 
 ;; H
   (assert
-  (= (ite (<= (to_rep (first4 temp___78841)) (to_rep (last4 temp___78841)))
-     (+ (- (to_rep (last4 temp___78841)) (to_rep (first4 temp___78841))) 1)
+  (= (ite (<= (to_rep (first4 temp___80341)) (to_rep (last4 temp___80341)))
+     (+ (- (to_rep (last4 temp___80341)) (to_rep (first4 temp___80341))) 1)
      0) (ite (<= 1 1) (+ (- 1 1) 1) 0)))
 
 ;; H
-  (assert (= temp___7884 temp___7885))
+  (assert (= temp___8034 temp___8035))
 
 ;; H
   (assert
-  (= (mk1 (to_rep (first4 temp___78841)) (to_rep (last4 temp___78841)))
-  temp___78851))
+  (= (mk1 (to_rep (first4 temp___80341)) (to_rep (last4 temp___80341)))
+  temp___80351))
 
 ;; H
   (assert
-  (= (ite (<= (to_rep (first2 temp___78851)) (to_rep (last2 temp___78851)))
-     (+ (- (to_rep (last2 temp___78851)) (to_rep (first2 temp___78851))) 1)
+  (= (ite (<= (to_rep (first2 temp___80351)) (to_rep (last2 temp___80351)))
+     (+ (- (to_rep (last2 temp___80351)) (to_rep (first2 temp___80351))) 1)
      0) (ite (<= (to_rep reg_bytes__first) (to_rep reg_bytes__last))
         (+ (- (to_rep reg_bytes__last) (to_rep reg_bytes__first)) 1) 0)))
 
 ;; H
-  (assert (= (mk___t1 o o1) (mk___t1 temp___7885 temp___78851)))
+  (assert (= (mk___t1 o o1) (mk___t1 temp___8035 temp___80351)))
 
 ;; H
   (assert (= o2 o))

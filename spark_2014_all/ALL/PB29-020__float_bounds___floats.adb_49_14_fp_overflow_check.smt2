@@ -8,6 +8,8 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
+(define-fun fp.isFinite64 ((x Float64)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -184,15 +186,13 @@
 
 ;; range_axiom
   (assert
-  (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep x)) (fp.isNaN (to_rep x)))) :pattern (
-  (to_rep x)) )))
+  (forall ((x float)) (! (fp.isFinite32 (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x))) (= (to_rep (of_rep x)) x)) :pattern (
-  (to_rep (of_rep x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                                (of_rep x))) )))
 
 (declare-sort long_float 0)
 
@@ -223,14 +223,13 @@
 ;; range_axiom
   (assert
   (forall ((x long_float))
-  (! (not (or (fp.isInfinite (to_rep1 x)) (fp.isNaN (to_rep1 x)))) :pattern (
-  (to_rep1 x)) )))
+  (! (fp.isFinite64 (to_rep1 x)) :pattern ((to_rep1 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float64))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x)))
-     (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1 (of_rep1 x))) )))
+  (! (=> (fp.isFinite64 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
+                                                                  (of_rep1 x))) )))
 
 (declare-datatypes ((map__ref 0))
 (((mk_map__ref (map__content (Array Int float))))))
@@ -439,14 +438,14 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (define-fun dynamic_invariant1 ((temp___expr_57 Float64)
   (temp___is_init_54 Bool) (temp___skip_constant_55 Bool)
   (temp___do_toplevel_56 Bool)) Bool (=>
                                      (or (= temp___is_init_54 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
+                                     (fp.isFinite64 temp___expr_57)))
 
 (declare-const e (Array Int long_float))
 
@@ -911,10 +910,7 @@
 ;; H
   (assert
   (and (= o24 (fp.add RNE (to_rep1 (select c5 1)) (to_rep1 (select b5 1))))
-  (not (or (fp.isInfinite (fp.add RNE (to_rep1 (select c5 1)) (to_rep1
-                                                              (select
-                                                              b5 1)))) (fp.isNaN (fp.add RNE
-  (to_rep1 (select c5 1)) (to_rep1 (select b5 1))))))))
+  (fp.isFinite64 (fp.add RNE (to_rep1 (select c5 1)) (to_rep1 (select b5 1))))))
 
 ;; H
   (assert (= (to_rep1 o25) o24))
@@ -932,9 +928,6 @@
 ;; WP_parameter_def
  ;; File "floats.ads", line 6, characters 0-0
   (not
-  (not (or (fp.isInfinite (fp.add RNE (to_rep1 (select c5 2)) (to_rep1
-                                                              (select
-                                                              b5 2)))) (fp.isNaN (fp.add RNE
-  (to_rep1 (select c5 2)) (to_rep1 (select b5 2))))))))
+  (fp.isFinite64 (fp.add RNE (to_rep1 (select c5 2)) (to_rep1 (select b5 2))))))
 (check-sat)
 (exit)

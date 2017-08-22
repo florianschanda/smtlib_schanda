@@ -389,7 +389,7 @@
 (declare-const dummy6 t31)
 
 (declare-datatypes ((t3__ref1 0)) (((mk_t3__ref1 (t3__content1 t31)))))
-(define-fun t3__ref_2__projection ((a t3__ref1)) t31 (t3__content1 a))
+(define-fun t3__ref___2__projection ((a t3__ref1)) t31 (t3__content1 a))
 
 (declare-fun to_rep4 (t31) Int)
 
@@ -412,27 +412,27 @@
 (declare-datatypes ((us_split_fields2 0))
 (((mk___split_fields1
   (rec__q__p2__r__a Bool)(rec__q__p2__r__b t2)(rec__q__p2__r__c t31)(rec__q__p2__r__d integer)))))
-(define-fun us_split_fields_A2__projection ((a us_split_fields2)) Bool
+(define-fun us_split_fields_A__2__projection ((a us_split_fields2)) Bool
   (rec__q__p2__r__a a))
 
-(define-fun us_split_fields_B2__projection ((a us_split_fields2)) t2
+(define-fun us_split_fields_B__2__projection ((a us_split_fields2)) t2
   (rec__q__p2__r__b a))
 
-(define-fun us_split_fields_C2__projection ((a us_split_fields2)) t31
+(define-fun us_split_fields_C__2__projection ((a us_split_fields2)) t31
   (rec__q__p2__r__c a))
 
-(define-fun us_split_fields_D2__projection ((a us_split_fields2)) integer
+(define-fun us_split_fields_D__2__projection ((a us_split_fields2)) integer
   (rec__q__p2__r__d a))
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (define-fun bool_eq1 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -534,7 +534,7 @@
 (declare-const dummy7 us_rep1)
 
 (declare-datatypes ((r__ref1 0)) (((mk_r__ref1 (r__content1 us_rep1)))))
-(define-fun r__ref_2__projection ((a r__ref1)) us_rep1 (r__content1 a))
+(define-fun r__ref___2__projection ((a r__ref1)) us_rep1 (r__content1 a))
 
 (define-fun dynamic_invariant4 ((temp___expr_157 Int)
   (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)

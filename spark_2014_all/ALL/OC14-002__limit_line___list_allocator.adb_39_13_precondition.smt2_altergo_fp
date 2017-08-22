@@ -1,0 +1,790 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type integer
+
+predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : integer, integer -> bool
+
+logic dummy : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+type positive
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : positive, positive -> bool
+
+logic dummy1 : positive
+
+type positive__ref = { positive__content : positive
+}
+
+function positive__ref___projection(a: positive__ref) : positive =
+  (a).positive__content
+
+type resource
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 3))
+
+logic bool_eq4 : int, int -> bool
+
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq2 : resource, resource -> bool
+
+logic dummy2 : resource
+
+type resource__ref = { resource__content : resource
+}
+
+function resource__ref___projection(a: resource__ref) : resource =
+  (a).resource__content
+
+logic to_rep : resource -> int
+
+logic of_rep : int -> resource
+
+axiom inversion_axiom :
+  (forall x:resource [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:resource [to_rep(x)]. in_range3(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range3(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type valid_resource
+
+predicate in_range4(x: int) = ((1 <= x) and (x <= 3))
+
+logic bool_eq5 : int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq3 : valid_resource, valid_resource -> bool
+
+logic dummy3 : valid_resource
+
+type valid_resource__ref = { valid_resource__content : valid_resource
+}
+
+function valid_resource__ref___projection(a: valid_resource__ref) : valid_resource =
+  (a).valid_resource__content
+
+type status
+
+predicate in_range5(x: int) = ((0 <= x) and (x <= 1))
+
+logic bool_eq6 : int, int -> bool
+
+axiom bool_eq_def5 :
+  (forall x:int. forall y:int [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> int
+
+logic user_eq4 : status, status -> bool
+
+logic dummy4 : status
+
+type status__ref = { status__content : status
+}
+
+function status__ref___projection(a: status__ref) : status =
+  (a).status__content
+
+logic to_rep1 : status -> int
+
+logic of_rep1 : int -> status
+
+axiom inversion_axiom1 :
+  (forall x:status [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:status [to_rep1(x)]. in_range5(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range5(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type us_split_fields = { rec__list_allocator__cell__stat : status;
+rec__list_allocator__cell__prev : resource; rec__list_allocator__cell__next :
+resource
+}
+
+function us_split_fields_Stat__projection(a: us_split_fields) : status =
+  (a).rec__list_allocator__cell__stat
+
+function us_split_fields_Prev__projection(a: us_split_fields) : resource =
+  (a).rec__list_allocator__cell__prev
+
+function us_split_fields_Next__projection(a: us_split_fields) : resource =
+  (a).rec__list_allocator__cell__next
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___6__projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+function us_rep___8__projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+logic bool_eq7 : us_rep, us_rep -> bool
+
+axiom bool_eq_def6 :
+  (forall a:us_rep. forall b:us_rep [bool_eq7(a, b)].
+  (((((to_rep1(((a).us_split_fields1).rec__list_allocator__cell__stat) = to_rep1(((b).us_split_fields1).rec__list_allocator__cell__stat)) and
+  (to_rep(((a).us_split_fields1).rec__list_allocator__cell__prev) = to_rep(((b).us_split_fields1).rec__list_allocator__cell__prev))) and
+  (to_rep(((a).us_split_fields1).rec__list_allocator__cell__next) = to_rep(((b).us_split_fields1).rec__list_allocator__cell__next))) ->
+  (bool_eq7(a, b) = true)) and
+  ((not (((to_rep1(((a).us_split_fields1).rec__list_allocator__cell__stat) = to_rep1(((b).us_split_fields1).rec__list_allocator__cell__stat)) and
+  (to_rep(((a).us_split_fields1).rec__list_allocator__cell__prev) = to_rep(((b).us_split_fields1).rec__list_allocator__cell__prev))) and
+  (to_rep(((a).us_split_fields1).rec__list_allocator__cell__next) = to_rep(((b).us_split_fields1).rec__list_allocator__cell__next)))) ->
+  (bool_eq7(a, b) = false))))
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:status. forall a1:resource. forall a2:resource.
+  (0 <= object__size({ us_split_fields1 = { rec__list_allocator__cell__stat =
+  a; rec__list_allocator__cell__prev = a1; rec__list_allocator__cell__next =
+  a2 } })))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:status. forall a1:resource. forall a2:resource.
+  (0 <= object__alignment({ us_split_fields1 = {
+  rec__list_allocator__cell__stat = a; rec__list_allocator__cell__prev = a1;
+  rec__list_allocator__cell__next = a2 } })))
+
+logic list_allocator__cell__stat__first__bit : int
+
+logic list_allocator__cell__stat__last__bit : int
+
+logic list_allocator__cell__stat__position : int
+
+axiom list_allocator__cell__stat__first__bit_axiom :
+  (0 <= list_allocator__cell__stat__first__bit)
+
+axiom list_allocator__cell__stat__last__bit_axiom :
+  (list_allocator__cell__stat__first__bit <  list_allocator__cell__stat__last__bit)
+
+axiom list_allocator__cell__stat__position_axiom :
+  (0 <= list_allocator__cell__stat__position)
+
+logic list_allocator__cell__prev__first__bit : int
+
+logic list_allocator__cell__prev__last__bit : int
+
+logic list_allocator__cell__prev__position : int
+
+axiom list_allocator__cell__prev__first__bit_axiom :
+  (0 <= list_allocator__cell__prev__first__bit)
+
+axiom list_allocator__cell__prev__last__bit_axiom :
+  (list_allocator__cell__prev__first__bit <  list_allocator__cell__prev__last__bit)
+
+axiom list_allocator__cell__prev__position_axiom :
+  (0 <= list_allocator__cell__prev__position)
+
+logic list_allocator__cell__next__first__bit : int
+
+logic list_allocator__cell__next__last__bit : int
+
+logic list_allocator__cell__next__position : int
+
+axiom list_allocator__cell__next__first__bit_axiom :
+  (0 <= list_allocator__cell__next__first__bit)
+
+axiom list_allocator__cell__next__last__bit_axiom :
+  (list_allocator__cell__next__first__bit <  list_allocator__cell__next__last__bit)
+
+axiom list_allocator__cell__next__position_axiom :
+  (0 <= list_allocator__cell__next__position)
+
+logic user_eq5 : us_rep, us_rep -> bool
+
+logic dummy5 : status
+
+logic dummy6 : resource
+
+logic dummy7 : resource
+
+type cell__ref = { cell__content : us_rep
+}
+
+function cell__ref___projection(a: cell__ref) : us_rep = (a).cell__content
+
+type map__ref = { map__content : (int,us_rep) farray
+}
+
+logic slide : (int,us_rep) farray, int, int -> (int,us_rep) farray
+
+axiom slide_eq :
+  (forall a:(int,us_rep) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,us_rep) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
+  int -> (int,us_rep) farray
+
+axiom concat_def :
+  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton : us_rep, int -> (int,us_rep) farray
+
+axiom singleton_def :
+  (forall v:status. forall v1:resource. forall v2:resource.
+  (forall i:int [(singleton({ us_split_fields1 = {
+  rec__list_allocator__cell__stat = v; rec__list_allocator__cell__prev = v1;
+  rec__list_allocator__cell__next = v2 } }, i)[i])]. ((singleton({
+  us_split_fields1 = { rec__list_allocator__cell__stat = v;
+  rec__list_allocator__cell__prev = v1; rec__list_allocator__cell__next = v2
+  } }, i)[i]) = { us_split_fields1 = { rec__list_allocator__cell__stat = v;
+  rec__list_allocator__cell__prev = v1; rec__list_allocator__cell__next = v2
+  } })))
+
+logic bool_eq8 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
+  int -> bool
+
+axiom bool_eq_def7 :
+  (forall a:(int,us_rep) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,us_rep) farray. forall b__first:int. forall b__last:int
+  [bool_eq8(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
+  (temp___idx_133 <= a__last)) and (bool_eq7((a[temp___idx_133]),
+  (b[((b__first - a__first) + temp___idx_133)])) = true)) or
+  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (bool_eq8(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
+  (temp___idx_133 <= a__last)) -> (bool_eq7((a[temp___idx_133]),
+  (b[((b__first - a__first) + temp___idx_133)])) = true))))) -> (bool_eq8(a,
+  a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev :
+  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq8(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
+  (temp___idx_133 <= a__last)) -> (bool_eq7((a[temp___idx_133]),
+  (b[((b__first - a__first) + temp___idx_133)])) = true)))))))
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+type us_main_type
+
+logic us_main_eq : us_main_type, us_main_type -> bool
+
+type us_rep1
+
+logic bool_eq9 : us_rep1, us_rep1 -> bool
+
+logic value__size1 : int
+
+logic object__size1 : us_rep1 -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : us_rep1 -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (forall a:us_rep1. (0 <= object__size1(a)))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:us_rep1. (0 <= object__alignment1(a)))
+
+logic user_eq6 : us_rep1, us_rep1 -> bool
+
+logic dummy8 : us_rep1
+
+type sequence__ref = { sequence__content : us_rep1
+}
+
+function sequence__ref___projection(a: sequence__ref) : us_rep1 =
+  (a).sequence__content
+
+logic length : us_rep1 -> int
+
+logic length__function_guard : int, us_rep1 -> prop
+
+logic length1 : int, us_rep1 -> int
+
+logic length__function_guard1 : int, int, us_rep1 -> prop
+
+type natural
+
+predicate in_range6(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq10 : int, int -> bool
+
+axiom bool_eq_def8 :
+  (forall x:int. forall y:int [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE6 : us_image -> int
+
+logic user_eq7 : natural, natural -> bool
+
+logic dummy9 : natural
+
+type natural__ref = { natural__content : natural
+}
+
+function natural__ref___projection(a: natural__ref) : natural =
+  (a).natural__content
+
+logic oeq : us_rep1, us_rep1 -> bool
+
+logic oeq__function_guard : bool, us_rep1, us_rep1 -> prop
+
+logic oeq1 : int, us_rep1, us_rep1 -> bool
+
+logic oeq__function_guard1 : bool, int, us_rep1, us_rep1 -> prop
+
+axiom user_eq__def_axiom :
+  (forall a:us_rep1. forall b:us_rep1 [user_eq6(a, b)]. (user_eq6(a,
+  b) = oeq(a, b)))
+
+axiom length__post_axiom :
+  (forall s:us_rep1 [length(s)]. in_range6(length(s)))
+
+axiom length__post__dispatch_axiom :
+  (forall attr__tag:int.
+  (forall s:us_rep1 [length1(attr__tag, s)]. in_range6(length1(attr__tag,
+  s))))
+
+logic get : us_rep1, int -> int
+
+logic get__function_guard : int, us_rep1, int -> prop
+
+logic get1 : int, us_rep1, int -> int
+
+logic get__function_guard1 : int, int, us_rep1, int -> prop
+
+type element_type
+
+predicate in_range7(x: int) = ((0 <= x) and (x <= 3))
+
+logic bool_eq11 : int, int -> bool
+
+axiom bool_eq_def9 :
+  (forall x:int. forall y:int [bool_eq11(x, y)]. (((x = y) -> (bool_eq11(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq11(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE7 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check7 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE7 : us_image -> int
+
+logic user_eq8 : element_type, element_type -> bool
+
+logic dummy10 : element_type
+
+type element_type__ref = { element_type__content : element_type
+}
+
+function element_type__ref___projection(a: element_type__ref) : element_type =
+  (a).element_type__content
+
+axiom get__post_axiom :
+  (forall s:us_rep1.
+  (forall n:int [get(s, n)]. ((in_range2(n) and ((1 <= n) and
+  (n <= length(s)))) -> in_range7(get(s, n)))))
+
+axiom get__post__dispatch_axiom :
+  (forall attr__tag:int. forall n:int.
+  (forall s:us_rep1 [get1(attr__tag, s, n)]. (in_range2(n) ->
+  in_range7(get1(attr__tag, s, n)))))
+
+type us_split_fields2 = { rec__list_allocator__m__t__available : us_rep1;
+rec__list_allocator__m__t__allocated : us_rep1
+}
+
+function us_split_fields_Available__projection(a: us_split_fields2) : us_rep1 =
+  (a).rec__list_allocator__m__t__available
+
+function us_split_fields_Allocated__projection(a: us_split_fields2) : us_rep1 =
+  (a).rec__list_allocator__m__t__allocated
+
+type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
+}
+
+function us_split_fields__ref___5__projection(a: us_split_fields__ref1) : us_split_fields2 =
+  (a).us_split_fields__content1
+
+type us_rep2 = { us_split_fields3 : us_split_fields2
+}
+
+function us_rep___7__projection(a: us_rep2) : us_split_fields2 =
+  (a).us_split_fields3
+
+logic bool_eq12 : us_rep2, us_rep2 -> bool
+
+axiom bool_eq_def10 :
+  (forall a:us_rep2. forall b:us_rep2 [bool_eq12(a, b)].
+  ((((user_eq6(((a).us_split_fields3).rec__list_allocator__m__t__available,
+  ((b).us_split_fields3).rec__list_allocator__m__t__available) = true) and
+  (user_eq6(((a).us_split_fields3).rec__list_allocator__m__t__allocated,
+  ((b).us_split_fields3).rec__list_allocator__m__t__allocated) = true)) ->
+  (bool_eq12(a, b) = true)) and
+  ((not ((user_eq6(((a).us_split_fields3).rec__list_allocator__m__t__available,
+  ((b).us_split_fields3).rec__list_allocator__m__t__available) = true) and
+  (user_eq6(((a).us_split_fields3).rec__list_allocator__m__t__allocated,
+  ((b).us_split_fields3).rec__list_allocator__m__t__allocated) = true))) ->
+  (bool_eq12(a, b) = false))))
+
+logic value__size2 : int
+
+logic object__size2 : us_rep2 -> int
+
+logic value__alignment2 : int
+
+logic object__alignment2 : us_rep2 -> int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 :
+  (forall a:us_rep1. forall a1:us_rep1. (0 <= object__size2({
+  us_split_fields3 = { rec__list_allocator__m__t__available = a;
+  rec__list_allocator__m__t__allocated = a1 } })))
+
+axiom value__alignment_axiom2 : (0 <= value__alignment2)
+
+axiom object__alignment_axiom2 :
+  (forall a:us_rep1. forall a1:us_rep1. (0 <= object__alignment2({
+  us_split_fields3 = { rec__list_allocator__m__t__available = a;
+  rec__list_allocator__m__t__allocated = a1 } })))
+
+logic list_allocator__m__t__available__first__bit : int
+
+logic list_allocator__m__t__available__last__bit : int
+
+logic list_allocator__m__t__available__position : int
+
+axiom list_allocator__m__t__available__first__bit_axiom :
+  (0 <= list_allocator__m__t__available__first__bit)
+
+axiom list_allocator__m__t__available__last__bit_axiom :
+  (list_allocator__m__t__available__first__bit <  list_allocator__m__t__available__last__bit)
+
+axiom list_allocator__m__t__available__position_axiom :
+  (0 <= list_allocator__m__t__available__position)
+
+logic list_allocator__m__t__allocated__first__bit : int
+
+logic list_allocator__m__t__allocated__last__bit : int
+
+logic list_allocator__m__t__allocated__position : int
+
+axiom list_allocator__m__t__allocated__first__bit_axiom :
+  (0 <= list_allocator__m__t__allocated__first__bit)
+
+axiom list_allocator__m__t__allocated__last__bit_axiom :
+  (list_allocator__m__t__allocated__first__bit <  list_allocator__m__t__allocated__last__bit)
+
+axiom list_allocator__m__t__allocated__position_axiom :
+  (0 <= list_allocator__m__t__allocated__position)
+
+logic user_eq9 : us_rep2, us_rep2 -> bool
+
+logic dummy11 : us_rep1
+
+logic dummy12 : us_rep1
+
+type t__ref = { t__content : us_rep2
+}
+
+function t__ref___projection(a: t__ref) : us_rep2 = (a).t__content
+
+logic oeq2 : us_rep2, us_rep2 -> bool
+
+logic oeq__function_guard2 : bool, us_rep2, us_rep2 -> prop
+
+axiom user_eq__def_axiom1 :
+  (forall a:us_rep1. forall a1:us_rep1. forall b:us_rep1. forall b1:us_rep1
+  [user_eq9({ us_split_fields3 = { rec__list_allocator__m__t__available = a;
+  rec__list_allocator__m__t__allocated = a1 } }, { us_split_fields3 = {
+  rec__list_allocator__m__t__available = b;
+  rec__list_allocator__m__t__allocated = b1 } })]. (user_eq9({
+  us_split_fields3 = { rec__list_allocator__m__t__available = a;
+  rec__list_allocator__m__t__allocated = a1 } }, { us_split_fields3 = {
+  rec__list_allocator__m__t__available = b;
+  rec__list_allocator__m__t__allocated = b1 } }) = oeq2({ us_split_fields3 =
+  { rec__list_allocator__m__t__available = a;
+  rec__list_allocator__m__t__allocated = a1 } }, { us_split_fields3 = {
+  rec__list_allocator__m__t__available = b;
+  rec__list_allocator__m__t__allocated = b1 } })))
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic mem : us_rep1, int -> bool
+
+logic mem__function_guard : bool, us_rep1, int -> prop
+
+axiom mem__post_axiom : true
+
+axiom mem__def_axiom :
+  (forall s:us_rep1.
+  (forall r:int [mem(s, r)]. ((mem(s, r) = true) <->
+  (exists j:int. (((1 <= j) and (j <= length(s))) and (get(s, j) = r))))))
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+axiom oeq__post_axiom : true
+
+axiom oeq__def_axiom :
+  (forall x:us_rep1. forall x1:us_rep1. forall y:us_rep1. forall y1:us_rep1
+  [oeq2({ us_split_fields3 = { rec__list_allocator__m__t__available = x;
+  rec__list_allocator__m__t__allocated = x1 } }, { us_split_fields3 = {
+  rec__list_allocator__m__t__available = y;
+  rec__list_allocator__m__t__allocated = y1 } })]. ((oeq2({
+  us_split_fields3 = { rec__list_allocator__m__t__available = x;
+  rec__list_allocator__m__t__allocated = x1 } }, { us_split_fields3 = {
+  rec__list_allocator__m__t__available = y;
+  rec__list_allocator__m__t__allocated = y1 } }) = true) <-> ((oeq(x,
+  y) = true) and (oeq(x1, y1) = true))))
+
+axiom oeq__post_axiom1 :
+  (forall s1:us_rep1. forall s2:us_rep1 [oeq(s1, s2)]. ((oeq(s1,
+  s2) = true) <-> ((length(s1) = length(s2)) and
+  (forall n:int. (((1 <= n) and (n <= length(s1))) -> (get(s1, n) = get(s2,
+  n)))))))
+
+axiom oeq__post__dispatch_axiom : true
+
+ (* File "list_allocator.ads", line 50, characters 0-0 *)
+goal WP_parameter_def :
+  (forall model____split_fields:us_rep1.
+  forall model____split_fields1:us_rep1. forall first_available:int.
+  forall first_allocated:int. forall j:int. forall o:int. forall o1:bool.
+  forall o2:int. forall o3:int. forall o4:int. forall o5:int. forall o6:int.
+  forall o7:int. forall result:bool. forall result1:bool.
+  forall result2:bool. forall result3:bool. forall result4:bool.
+  (in_range3(first_available) -> (in_range3(first_allocated) ->
+  (((((not (first_available = 0)) and
+  ((((o6 = length(model____split_fields)) and in_range6(o6)) and
+  (((0 <  o6) and (result2 = true)) or ((not (0 <  o6)) and
+  (result2 = false)))) and (((result2 = true) and
+  (((o5 = get(model____split_fields, 1)) and in_range7(o5)) and
+  (((o5 = first_available) and (result1 = true)) or
+  ((not (o5 = first_available)) and (result1 = false))))) or
+  ((not (result2 = true)) and (result1 = false))))) or
+  ((first_available = 0) and (((o7 = length(model____split_fields)) and
+  in_range6(o7)) and (((o7 = 0) and (result1 = true)) or ((not (o7 = 0)) and
+  (result1 = false)))))) and (((result1 = true) and
+  (((not (first_allocated = 0)) and
+  ((((o3 = length(model____split_fields1)) and in_range6(o3)) and
+  (((0 <  o3) and (result3 = true)) or ((not (0 <  o3)) and
+  (result3 = false)))) and (((result3 = true) and
+  (((o2 = get(model____split_fields1, 1)) and in_range7(o2)) and
+  (((o2 = first_allocated) and (result = true)) or
+  ((not (o2 = first_allocated)) and (result = false))))) or
+  ((not (result3 = true)) and (result = false))))) or
+  ((first_allocated = 0) and (((o4 = length(model____split_fields1)) and
+  in_range6(o4)) and (((o4 = 0) and (result = true)) or ((not (o4 = 0)) and
+  (result = false))))))) or ((not (result1 = true)) and
+  (result = false)))) -> ((result = true) ->
+  (((((o = length(model____split_fields)) and in_range6(o)) and
+  (((j <= o) and (o1 = true)) or ((not (j <= o)) and (o1 = false)))) and
+  (((1 <= j) and (result4 = o1)) or ((not (1 <= j)) and
+  (result4 = false)))) -> ((result4 = true) -> (1 <= j))))))))

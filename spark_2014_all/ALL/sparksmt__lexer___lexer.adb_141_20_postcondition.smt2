@@ -227,19 +227,19 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)(attr__constrained Bool)))))
-(define-fun us_rep_3__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___3__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_4__projection ((a us_rep1)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___4__projection ((a us_rep1)) us_split_fields (us_split_fields1
+                                                                 a))
 
-(define-fun us_rep_5__projection ((a us_rep1)) Bool (attr__constrained a))
+(define-fun us_rep___5__projection ((a us_rep1)) Bool (attr__constrained a))
 
 (define-fun file_io__read_result__c__pred ((a us_rep1)) Bool (= (to_rep1
                                                                 (rec__file_io__read_result__status
@@ -412,11 +412,11 @@
 
 (declare-const usq_2 Bool)
 
-(declare-const temp___814 read_status)
+(declare-const temp___902 read_status)
 
-(declare-const temp___8141 character)
+(declare-const temp___9021 character)
 
-(declare-const temp___8142 Bool)
+(declare-const temp___9022 Bool)
 
 (declare-const result character)
 
@@ -510,13 +510,13 @@
   (assert (= next_read__attr__constrained usq_2))
 
 ;; H
-  (assert (= usq_ temp___814))
+  (assert (= usq_ temp___902))
 
 ;; H
-  (assert (= usq_1 temp___8141))
+  (assert (= usq_1 temp___9021))
 
 ;; H
-  (assert (= current_read__attr__constrained temp___8142))
+  (assert (= current_read__attr__constrained temp___9022))
 
 ;; H
   (assert
@@ -525,7 +525,7 @@
                                                          current_read__split_fields))))
 
 ;; H
-  (assert (= temp___8141 current_read__split_fields1))
+  (assert (= temp___9021 current_read__split_fields1))
 
 ;; H
   (assert
@@ -533,7 +533,7 @@
              (mk___split_discrs current_read__split_discrs))))
 
 ;; H
-  (assert (= current_read__split_discrs1 (mk___split_discrs temp___814)))
+  (assert (= current_read__split_discrs1 (mk___split_discrs temp___902)))
 
 ;; H
   (assert

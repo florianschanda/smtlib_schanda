@@ -81,18 +81,18 @@
 
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields (rec__dic_and_predicate_checks__nested_2__r__f integer)))))
-(define-fun us_split_fields_F2__projection ((a us_split_fields)) integer
+(define-fun us_split_fields_F__2__projection ((a us_split_fields)) integer
   (rec__dic_and_predicate_checks__nested_2__r__f a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (= (to_rep
@@ -143,7 +143,7 @@
 (declare-const dummy1 us_rep)
 
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content us_rep)))))
-(define-fun t__ref_2__projection ((a t__ref)) us_rep (t__content a))
+(define-fun t__ref___2__projection ((a t__ref)) us_rep (t__content a))
 
 (declare-const value__size1 Int)
 
@@ -186,7 +186,7 @@
 (declare-const dummy2 us_rep)
 
 (declare-datatypes ((r__ref 0)) (((mk_r__ref (r__content us_rep)))))
-(define-fun r__ref_2__projection ((a r__ref)) us_rep (r__content a))
+(define-fun r__ref___2__projection ((a r__ref)) us_rep (r__content a))
 
 (declare-fun is_valid (us_rep) Bool)
 

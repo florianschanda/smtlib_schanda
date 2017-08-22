@@ -1,0 +1,207 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+type rec_int_bad
+
+predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq1 : int, int -> bool
+
+axiom bool_eq_def :
+  (forall x:int. forall y:int [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> int
+
+logic user_eq : rec_int_bad, rec_int_bad -> bool
+
+logic dummy : rec_int_bad
+
+type rec_int_bad__ref = { rec_int_bad__content : rec_int_bad
+}
+
+function rec_int_bad__ref___projection(a: rec_int_bad__ref) : rec_int_bad =
+  (a).rec_int_bad__content
+
+logic to_rep : rec_int_bad -> int
+
+logic of_rep : int -> rec_int_bad
+
+axiom inversion_axiom :
+  (forall x:rec_int_bad [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:rec_int_bad [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+logic i45s : int
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+type us_split_fields = { rec__preds__rec_wrap_bad__x : rec_int_bad
+}
+
+function us_split_fields_X__4__projection(a: us_split_fields) : rec_int_bad =
+  (a).rec__preds__rec_wrap_bad__x
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___4__projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+function us_rep___4__projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+logic bool_eq2 : us_rep, us_rep -> bool
+
+axiom bool_eq_def1 :
+  (forall a:us_rep. forall b:us_rep [bool_eq2(a, b)].
+  (((to_rep(((a).us_split_fields1).rec__preds__rec_wrap_bad__x) = to_rep(((b).us_split_fields1).rec__preds__rec_wrap_bad__x)) ->
+  (bool_eq2(a, b) = true)) and
+  ((not (to_rep(((a).us_split_fields1).rec__preds__rec_wrap_bad__x) = to_rep(((b).us_split_fields1).rec__preds__rec_wrap_bad__x))) ->
+  (bool_eq2(a, b) = false))))
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:rec_int_bad. (0 <= object__size({ us_split_fields1 = {
+  rec__preds__rec_wrap_bad__x = a } })))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:rec_int_bad. (0 <= object__alignment({ us_split_fields1 = {
+  rec__preds__rec_wrap_bad__x = a } })))
+
+logic preds__rec_wrap_bad__x__first__bit : int
+
+logic preds__rec_wrap_bad__x__last__bit : int
+
+logic preds__rec_wrap_bad__x__position : int
+
+axiom preds__rec_wrap_bad__x__first__bit_axiom :
+  (0 <= preds__rec_wrap_bad__x__first__bit)
+
+axiom preds__rec_wrap_bad__x__last__bit_axiom :
+  (preds__rec_wrap_bad__x__first__bit <  preds__rec_wrap_bad__x__last__bit)
+
+axiom preds__rec_wrap_bad__x__position_axiom :
+  (0 <= preds__rec_wrap_bad__x__position)
+
+logic user_eq1 : us_rep, us_rep -> bool
+
+logic dummy1 : rec_int_bad
+
+type rec_wrap_bad__ref = { rec_wrap_bad__content : us_rep
+}
+
+function rec_wrap_bad__ref___projection(a: rec_wrap_bad__ref) : us_rep =
+  (a).rec_wrap_bad__content
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+ (* File "preds.adb", line 63, characters 0-0 *)
+goal WP_parameter_def :
+  (forall temp___387:int. ((in_range(i45s) and ((((-2147483648) <= i45s) and
+  (i45s <= (-1))) or ((1 <= i45s) and (i45s <= 2147483647)))) ->
+  (((temp___387 = 0) and in_range(0)) -> ((((-2147483648) <= temp___387) and
+  (temp___387 <= (-1))) or ((1 <= temp___387) and
+  (temp___387 <= 2147483647))))))

@@ -366,7 +366,7 @@
 
 (declare-datatypes ((mutable_t__ref 0))
 (((mk_mutable_t__ref (mutable_t__content us_rep)))))
-(define-fun mutable_t__ref_2__projection ((a mutable_t__ref)) us_rep
+(define-fun mutable_t__ref___2__projection ((a mutable_t__ref)) us_rep
   (mutable_t__content a))
 
 (declare-const value__size2 Int)
@@ -400,11 +400,11 @@
 
 (declare-fun length__function_guard (Int us_rep) Bool)
 
-(define-fun default_initial_assumption ((temp___expr_823 us_rep)
-  (temp___skip_top_level_824 Bool)) Bool (=>
+(define-fun default_initial_assumption ((temp___expr_825 us_rep)
+  (temp___skip_top_level_826 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_824 true))
-                                         (= (length1 temp___expr_823) 0)))
+                                         (= temp___skip_top_level_826 true))
+                                         (= (length1 temp___expr_825) 0)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 

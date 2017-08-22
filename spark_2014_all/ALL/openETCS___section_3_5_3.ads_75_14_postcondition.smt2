@@ -362,7 +362,7 @@
 (define-fun us_split_discrs___projection ((a us_split_discrs)) count_type
   (rec__com_map__com_to_rbc_map__map__capacity a))
 
-(define-fun us_split_discrs_2__projection ((a us_split_discrs)) hash_type
+(define-fun us_split_discrs___2__projection ((a us_split_discrs)) hash_type
   (rec__com_map__com_to_rbc_map__map__modulus a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
@@ -377,17 +377,17 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___4__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)))))
-(define-fun us_rep_5__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                              a))
+(define-fun us_rep___5__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                a))
 
-(define-fun us_rep_6__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___6__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -519,7 +519,8 @@
 
 (declare-datatypes ((map__ref1 0))
 (((mk_map__ref1 (map__content1 us_rep1)))))
-(define-fun map__ref_2__projection ((a map__ref1)) us_rep1 (map__content1 a))
+(define-fun map__ref___2__projection ((a map__ref1)) us_rep1 (map__content1
+                                                             a))
 
 (declare-fun has_key (us_rep1 Int) Bool)
 
@@ -911,7 +912,7 @@
 
 (declare-datatypes ((key_type__ref1 0))
 (((mk_key_type__ref1 (key_type__content1 key_type1)))))
-(define-fun key_type__ref_2__projection ((a key_type__ref1)) key_type1
+(define-fun key_type__ref___2__projection ((a key_type__ref1)) key_type1
   (key_type__content1 a))
 
 (define-fun dynamic_invariant9 ((temp___expr_303 Int)

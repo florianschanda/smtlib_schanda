@@ -400,8 +400,8 @@
 
 (declare-datatypes ((tTxSP1__ref1 0))
 (((mk_tTxSP1__ref1 (tTxSP1__content1 tTxSP11)))))
-(define-fun tTxSP1__ref_2__projection ((a tTxSP1__ref1)) tTxSP11 (tTxSP1__content1
-                                                                 a))
+(define-fun tTxSP1__ref___2__projection ((a tTxSP1__ref1)) tTxSP11 (tTxSP1__content1
+                                                                   a))
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
@@ -421,8 +421,8 @@
 
 (declare-datatypes ((tTySP1__ref1 0))
 (((mk_tTySP1__ref1 (tTySP1__content1 tTySP11)))))
-(define-fun tTySP1__ref_2__projection ((a tTySP1__ref1)) tTySP11 (tTySP1__content1
-                                                                 a))
+(define-fun tTySP1__ref___2__projection ((a tTySP1__ref1)) tTySP11 (tTySP1__content1
+                                                                   a))
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
@@ -442,8 +442,8 @@
 
 (declare-datatypes ((tTxSP1__ref2 0))
 (((mk_tTxSP1__ref2 (tTxSP1__content2 tTxSP12)))))
-(define-fun tTxSP1__ref_3__projection ((a tTxSP1__ref2)) tTxSP12 (tTxSP1__content2
-                                                                 a))
+(define-fun tTxSP1__ref___3__projection ((a tTxSP1__ref2)) tTxSP12 (tTxSP1__content2
+                                                                   a))
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
@@ -465,8 +465,8 @@
 
 (declare-datatypes ((tTxSP1__ref3 0))
 (((mk_tTxSP1__ref3 (tTxSP1__content3 tTxSP13)))))
-(define-fun tTxSP1__ref_4__projection ((a tTxSP1__ref3)) tTxSP13 (tTxSP1__content3
-                                                                 a))
+(define-fun tTxSP1__ref___4__projection ((a tTxSP1__ref3)) tTxSP13 (tTxSP1__content3
+                                                                   a))
 
 (declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
@@ -488,8 +488,8 @@
 
 (declare-datatypes ((tTxSP1__ref4 0))
 (((mk_tTxSP1__ref4 (tTxSP1__content4 tTxSP14)))))
-(define-fun tTxSP1__ref_5__projection ((a tTxSP1__ref4)) tTxSP14 (tTxSP1__content4
-                                                                 a))
+(define-fun tTxSP1__ref___5__projection ((a tTxSP1__ref4)) tTxSP14 (tTxSP1__content4
+                                                                   a))
 
 (declare-const attr__ATTRIBUTE_ADDRESS9 Int)
 
@@ -509,8 +509,8 @@
 
 (declare-datatypes ((tTxSP1__ref5 0))
 (((mk_tTxSP1__ref5 (tTxSP1__content5 tTxSP15)))))
-(define-fun tTxSP1__ref_6__projection ((a tTxSP1__ref5)) tTxSP15 (tTxSP1__content5
-                                                                 a))
+(define-fun tTxSP1__ref___6__projection ((a tTxSP1__ref5)) tTxSP15 (tTxSP1__content5
+                                                                   a))
 
 (declare-const attr__ATTRIBUTE_ADDRESS10 Int)
 

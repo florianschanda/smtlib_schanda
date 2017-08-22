@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite64 ((x Float64)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -173,7 +174,7 @@
   (temp___do_toplevel_56 Bool)) Bool (=>
                                      (or (= temp___is_init_54 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
+                                     (fp.isFinite64 temp___expr_57)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -223,13 +224,13 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite pi1) (fp.isNaN pi1)))))
+  (fp.isFinite64 pi1)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite erreur) (fp.isNaN erreur)))))
+  (fp.isFinite64 erreur)))
 
 ;; H
   (assert (= result pi1))
@@ -266,10 +267,10 @@
   (and (=> (<= 1 2147483647) (in_range3 index2))
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite pi3) (fp.isNaN pi3)))))
+  (fp.isFinite64 pi3)))
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (not (or (fp.isInfinite erreur2) (fp.isNaN erreur2)))))
+  (fp.isFinite64 erreur2)))
   (not
   (fp.lt erreur2 (fp #b0 #b01111100111 #b0101011110011000111011100010001100001000110000111010)))))
 
@@ -289,8 +290,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not
-  (not (or (fp.isInfinite (fp.add RNE pi3 erreur3)) (fp.isNaN (fp.add RNE
-  pi3 erreur3))))))
+  (not (fp.isFinite64 (fp.add RNE pi3 erreur3))))
 (check-sat)
 (exit)

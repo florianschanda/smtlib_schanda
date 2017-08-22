@@ -457,8 +457,8 @@
 
 (declare-datatypes ((tTrSP1__ref 0))
 (((mk_tTrSP1__ref (tTrSP1__content tindex_aB)))))
-(define-fun tTrSP1__ref_2__projection ((a tTrSP1__ref)) tindex_aB (tTrSP1__content
-                                                                  a))
+(define-fun tTrSP1__ref___2__projection ((a tTrSP1__ref)) tindex_aB (tTrSP1__content
+                                                                    a))
 
 (declare-sort t2 0)
 
@@ -538,7 +538,7 @@
 (declare-const dummy7 us_t2)
 
 (declare-datatypes ((trS__ref 0)) (((mk_trS__ref (trS__content us_t2)))))
-(define-fun trS__ref_2__projection ((a trS__ref)) us_t2 (trS__content a))
+(define-fun trS__ref___2__projection ((a trS__ref)) us_t2 (trS__content a))
 
 (define-fun dynamic_property4 ((first_int Int) (last_int Int)
   (x Int)) Bool (and (<= first_int x) (<= x last_int)))

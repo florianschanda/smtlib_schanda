@@ -68,7 +68,7 @@
 
 (declare-datatypes ((file_type__ref 0))
 (((mk_file_type__ref (file_type__content us_rep)))))
-(define-fun file_type__ref_2__projection ((a file_type__ref)) us_rep
+(define-fun file_type__ref___2__projection ((a file_type__ref)) us_rep
   (file_type__content a))
 
 (declare-fun is_open (us_rep) Bool)
@@ -91,7 +91,7 @@
 
 (declare-datatypes ((file_mode__ref 0))
 (((mk_file_mode__ref (file_mode__content file_mode)))))
-(define-fun file_mode__ref_3__projection ((a file_mode__ref)) file_mode
+(define-fun file_mode__ref___3__projection ((a file_mode__ref)) file_mode
   (file_mode__content a))
 
 (define-fun dynamic_invariant ((temp___expr_655 Int)

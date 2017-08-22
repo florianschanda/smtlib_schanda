@@ -132,7 +132,7 @@
 (declare-const dummy2 integer)
 
 (declare-datatypes ((t1__ref 0)) (((mk_t1__ref (t1__content integer)))))
-(define-fun t1__ref_4__projection ((a1 t1__ref)) integer (t1__content a1))
+(define-fun t1__ref___4__projection ((a1 t1__ref)) integer (t1__content a1))
 
 (declare-sort tt2B 0)
 
@@ -150,7 +150,8 @@
 (declare-const dummy3 tt2B)
 
 (declare-datatypes ((tt2B__ref 0)) (((mk_tt2B__ref (tt2B__content tt2B)))))
-(define-fun tt2B__ref_4__projection ((a1 tt2B__ref)) tt2B (tt2B__content a1))
+(define-fun tt2B__ref___4__projection ((a1 tt2B__ref)) tt2B (tt2B__content
+                                                            a1))
 
 (declare-fun to_rep1 (tt2B) Int)
 
@@ -188,7 +189,7 @@
 (declare-const dummy4 tt2B)
 
 (declare-datatypes ((t2__ref 0)) (((mk_t2__ref (t2__content tt2B)))))
-(define-fun t2__ref_4__projection ((a1 t2__ref)) tt2B (t2__content a1))
+(define-fun t2__ref___4__projection ((a1 t2__ref)) tt2B (t2__content a1))
 
 (declare-const last2 Int)
 

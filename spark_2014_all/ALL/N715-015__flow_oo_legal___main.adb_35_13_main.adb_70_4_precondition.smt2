@@ -395,20 +395,20 @@
 (define-fun us_split_fields_Alive__projection ((a us_split_fields)) Bool
   (rec__people__person__alive a))
 
-(define-fun us_split_fields_2__projection ((a us_split_fields)) us_private
+(define-fun us_split_fields___2__projection ((a us_split_fields)) us_private
   (rec__ext__ a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_6__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___6__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep (us_split_fields1 us_split_fields)(attr__tag Int)))))
-(define-fun us_rep_9__projection ((a us_rep1)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___9__projection ((a us_rep1)) us_split_fields (us_split_fields1
+                                                                 a))
 
-(define-fun us_rep_10__projection ((a us_rep1)) Int (attr__tag a))
+(define-fun us_rep___10__projection ((a us_rep1)) Int (attr__tag a))
 
 (define-fun bool_eq3 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -830,13 +830,13 @@
 (declare-datatypes ((us_split_fields2 0))
 (((mk___split_fields1
   (rec__people__person__name1 us_rep)(rec__people__person__dob1 integer)(rec__people__person__alive1 Bool)(rec__professionals__professional__profession professions)(rec__professionals__professional__skilled_in (Array Int skills))(rec__professionals__professional__number_of_people_killed natural)(rec__ext__1 us_private)))))
-(define-fun us_split_fields_Name2__projection ((a us_split_fields2)) us_rep
+(define-fun us_split_fields_Name__2__projection ((a us_split_fields2)) us_rep
   (rec__people__person__name1 a))
 
-(define-fun us_split_fields_DOB2__projection ((a us_split_fields2)) integer
+(define-fun us_split_fields_DOB__2__projection ((a us_split_fields2)) integer
   (rec__people__person__dob1 a))
 
-(define-fun us_split_fields_Alive2__projection ((a us_split_fields2)) Bool
+(define-fun us_split_fields_Alive__2__projection ((a us_split_fields2)) Bool
   (rec__people__person__alive1 a))
 
 (define-fun us_split_fields_Profession__projection ((a us_split_fields2)) professions
@@ -848,20 +848,20 @@
 (define-fun us_split_fields_Number_Of_People_Killed__projection ((a us_split_fields2)) natural
   (rec__professionals__professional__number_of_people_killed a))
 
-(define-fun us_split_fields_4__projection ((a us_split_fields2)) us_private
+(define-fun us_split_fields___4__projection ((a us_split_fields2)) us_private
   (rec__ext__1 a))
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_8__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___8__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)(attr__tag1 Int)))))
-(define-fun us_rep_13__projection ((a us_rep2)) us_split_fields2 (us_split_fields3
-                                                                 a))
+(define-fun us_rep___13__projection ((a us_rep2)) us_split_fields2 (us_split_fields3
+                                                                   a))
 
-(define-fun us_rep_14__projection ((a us_rep2)) Int (attr__tag1 a))
+(define-fun us_rep___14__projection ((a us_rep2)) Int (attr__tag1 a))
 
 (declare-fun hide_ext__ (professions (Array Int skills) natural
   us_private) us_private)

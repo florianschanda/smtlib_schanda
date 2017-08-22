@@ -538,7 +538,7 @@
 
 (declare-datatypes ((tnumber_array_typeD1__ref 0))
 (((mk_tnumber_array_typeD1__ref (tnumber_array_typeD1__content integer)))))
-(define-fun tnumber_array_typeD1__ref_12__projection ((a tnumber_array_typeD1__ref)) integer
+(define-fun tnumber_array_typeD1__ref___12__projection ((a tnumber_array_typeD1__ref)) integer
   (tnumber_array_typeD1__content a))
 
 (declare-sort t1 0)
@@ -620,7 +620,7 @@
 
 (declare-datatypes ((number_array_type__ref 0))
 (((mk_number_array_type__ref (number_array_type__content us_t1)))))
-(define-fun number_array_type__ref_12__projection ((a number_array_type__ref)) us_t1
+(define-fun number_array_type__ref___12__projection ((a number_array_type__ref)) us_t1
   (number_array_type__content a))
 
 (define-fun dynamic_property3 ((first_int Int) (last_int Int)
@@ -827,7 +827,7 @@
 
 (declare-datatypes ((tnumber_array_typeB__ref 0))
 (((mk_tnumber_array_typeB__ref (tnumber_array_typeB__content us_t3)))))
-(define-fun tnumber_array_typeB__ref_12__projection ((a tnumber_array_typeB__ref)) us_t3
+(define-fun tnumber_array_typeB__ref___12__projection ((a tnumber_array_typeB__ref)) us_t3
   (tnumber_array_typeB__content a))
 
 (declare-fun aida__conversion__calculate_positive_target_length_8__n__aggregate_def (Int

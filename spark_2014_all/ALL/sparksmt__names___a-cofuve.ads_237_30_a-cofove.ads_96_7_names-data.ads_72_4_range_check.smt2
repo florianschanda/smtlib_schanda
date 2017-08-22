@@ -82,15 +82,15 @@
 
 (declare-datatypes ((index_type__ref 0))
 (((mk_index_type__ref (index_type__content index_type)))))
-(define-fun index_type__ref_4__projection ((a index_type__ref)) index_type
+(define-fun index_type__ref___4__projection ((a index_type__ref)) index_type
   (index_type__content a))
 
-(define-fun dynamic_invariant ((temp___expr_315 Int)
-  (temp___is_init_312 Bool) (temp___skip_constant_313 Bool)
-  (temp___do_toplevel_314 Bool)) Bool (=>
-                                      (or (= temp___is_init_312 true)
+(define-fun dynamic_invariant ((temp___expr_407 Int)
+  (temp___is_init_404 Bool) (temp___skip_constant_405 Bool)
+  (temp___do_toplevel_406 Bool)) Bool (=>
+                                      (or (= temp___is_init_404 true)
                                       (<= 1 2147483647)) (in_range2
-                                      temp___expr_315)))
+                                      temp___expr_407)))
 
 (declare-sort extended_index 0)
 
@@ -108,15 +108,15 @@
 
 (declare-datatypes ((extended_index__ref 0))
 (((mk_extended_index__ref (extended_index__content extended_index)))))
-(define-fun extended_index__ref_4__projection ((a extended_index__ref)) extended_index
+(define-fun extended_index__ref___4__projection ((a extended_index__ref)) extended_index
   (extended_index__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_330 Int)
-  (temp___is_init_327 Bool) (temp___skip_constant_328 Bool)
-  (temp___do_toplevel_329 Bool)) Bool (=>
-                                      (or (= temp___is_init_327 true)
+(define-fun dynamic_invariant1 ((temp___expr_422 Int)
+  (temp___is_init_419 Bool) (temp___skip_constant_420 Bool)
+  (temp___do_toplevel_421 Bool)) Bool (=>
+                                      (or (= temp___is_init_419 true)
                                       (<= 0 2147483647)) (in_range3
-                                      temp___expr_330)))
+                                      temp___expr_422)))
 
 (declare-sort us_main_type 0)
 
@@ -152,8 +152,8 @@
 
 (declare-datatypes ((sequence__ref 0))
 (((mk_sequence__ref (sequence__content us_rep)))))
-(define-fun sequence__ref_2__projection ((a sequence__ref)) us_rep (sequence__content
-                                                                   a))
+(define-fun sequence__ref___2__projection ((a sequence__ref)) us_rep
+  (sequence__content a))
 
 (declare-fun length (us_rep) Int)
 
@@ -288,13 +288,13 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_3__projection ((a us_rep1)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___3__projection ((a us_rep1)) us_split_fields (us_split_fields1
+                                                                 a))
 
 (define-fun bool_eq1 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -395,7 +395,7 @@
 
 (declare-datatypes ((element_type__ref 0))
 (((mk_element_type__ref (element_type__content us_rep1)))))
-(define-fun element_type__ref_4__projection ((a element_type__ref)) us_rep1
+(define-fun element_type__ref___4__projection ((a element_type__ref)) us_rep1
   (element_type__content a))
 
 (define-fun last ((container us_rep)) Int (+ 0 (length container)))
@@ -429,11 +429,11 @@
   (forall ((a us_rep) (b us_rep))
   (! (= (user_eq3 a b) (oeq a b)) :pattern ((user_eq3 a b)) )))
 
-(define-fun default_initial_assumption ((temp___expr_337 us_rep)
-  (temp___skip_top_level_338 Bool)) Bool (=>
+(define-fun default_initial_assumption ((temp___expr_429 us_rep)
+  (temp___skip_top_level_430 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_338 true))
-                                         (= (length temp___expr_337) 0)))
+                                         (= temp___skip_top_level_430 true))
+                                         (= (length temp___expr_429) 0)))
 
 (declare-sort count_type 0)
 

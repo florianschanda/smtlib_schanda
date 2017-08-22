@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -144,7 +145,7 @@
 
 (declare-datatypes ((integer_16__ref 0))
 (((mk_integer_16__ref (integer_16__content integer_16)))))
-(define-fun integer_16__ref_2__projection ((a integer_16__ref)) integer_16
+(define-fun integer_16__ref___2__projection ((a integer_16__ref)) integer_16
   (integer_16__content a))
 
 (define-fun dynamic_invariant ((temp___expr_153 Int)
@@ -167,7 +168,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-const o Float32)
 
@@ -187,8 +188,7 @@
 ;; H
   (assert
   (and (= o (fp.div RNE (of_int RNE left) (of_int RNE right)))
-  (not (or (fp.isInfinite (fp.div RNE (of_int RNE left) (of_int RNE right))) (fp.isNaN (fp.div RNE
-  (of_int RNE left) (of_int RNE right)))))))
+  (fp.isFinite32 (fp.div RNE (of_int RNE left) (of_int RNE right)))))
 
 ;; H
   (assert (= o1 (fp.roundToIntegral RTN o)))

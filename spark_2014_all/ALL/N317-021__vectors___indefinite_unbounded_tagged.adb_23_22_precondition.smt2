@@ -103,7 +103,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_fields (us_split_fields1
                                                              a))
 
-(define-fun us_rep_2__projection ((a us_rep)) Int (attr__tag a))
+(define-fun us_rep___2__projection ((a us_rep)) Int (attr__tag a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (= (to_rep
@@ -202,17 +202,17 @@
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1
   (us_split_discrs1 us_split_discrs)(us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_3__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___3__projection ((a us_rep1)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_4__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___4__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (declare-const value__size1 Int)
 
@@ -950,22 +950,22 @@
 (declare-datatypes ((tvS__ref 0)) (((mk_tvS__ref (tvS__content us_rep1)))))
 (define-fun tvS__ref___projection ((a tvS__ref)) us_rep1 (tvS__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_458 us_rep1)
-  (temp___is_init_455 Bool) (temp___skip_constant_456 Bool)
-  (temp___do_toplevel_457 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_456 true))
-                                      (in_range5 2 temp___expr_458)))
+(define-fun dynamic_invariant4 ((temp___expr_466 us_rep1)
+  (temp___is_init_463 Bool) (temp___skip_constant_464 Bool)
+  (temp___do_toplevel_465 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_464 true))
+                                      (in_range5 2 temp___expr_466)))
 
-(define-fun default_initial_assumption1 ((temp___expr_460 us_rep1)
-  (temp___skip_top_level_461 Bool)) Bool (and
+(define-fun default_initial_assumption1 ((temp___expr_468 us_rep1)
+  (temp___skip_top_level_469 Bool)) Bool (and
                                          (= (to_rep1
                                             (rec__indefinite_unbounded_tagged__vect__vector__capacity
                                             (us_split_discrs1
-                                            temp___expr_460))) 2)
+                                            temp___expr_468))) 2)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_461 true))
-                                         (= (is_empty temp___expr_460) true))))
+                                         (= temp___skip_top_level_469 true))
+                                         (= (is_empty temp___expr_468) true))))
 
 (declare-const v__split_discrs us_split_discrs)
 
@@ -1047,7 +1047,7 @@
 
 (declare-datatypes ((extended_index__ref1 0))
 (((mk_extended_index__ref1 (extended_index__content1 extended_index1)))))
-(define-fun extended_index__ref_2__projection ((a extended_index__ref1)) extended_index1
+(define-fun extended_index__ref___2__projection ((a extended_index__ref1)) extended_index1
   (extended_index__content1 a))
 
 (define-fun dynamic_invariant6 ((temp___expr_273 Int)
@@ -1089,11 +1089,11 @@
 
 (declare-const o8 Int)
 
-(declare-const temp___528 integer)
+(declare-const temp___536 integer)
 
-(declare-const temp___5281 us_private)
+(declare-const temp___5361 us_private)
 
-(declare-const temp___5282 Int)
+(declare-const temp___5362 Int)
 
 (declare-const indefinite_unbounded_tagged__vect__clear__container__fields us_split_fields2)
 
@@ -1270,10 +1270,10 @@
 ;; H
   (assert
   (and
-  (= (mk___rep (mk___split_fields temp___528 temp___5281) temp___5282)
+  (= (mk___rep (mk___split_fields temp___536 temp___5361) temp___5362)
   (f 1))
-  (and (and (= (of_rep 1) temp___528) (= us_null_ext__ temp___5281))
-  (= us_tag temp___5282))))
+  (and (and (= (of_rep 1) temp___536) (= us_null_ext__ temp___5361))
+  (= us_tag temp___5362))))
 
 (assert
 ;; WP_parameter_def

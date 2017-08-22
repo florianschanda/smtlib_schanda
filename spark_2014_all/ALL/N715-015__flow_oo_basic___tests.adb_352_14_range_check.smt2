@@ -88,34 +88,34 @@
 
 (declare-datatypes ((us_split_discrs 0))
 (((mk___split_discrs (rec__tests__test_16__t__d Bool)))))
-(define-fun us_split_discrs_5__projection ((a us_split_discrs)) Bool
+(define-fun us_split_discrs___5__projection ((a us_split_discrs)) Bool
   (rec__tests__test_16__t__d a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
 (((mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref_5__projection ((a us_split_discrs__ref)) us_split_discrs
+(define-fun us_split_discrs__ref___5__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields (rec__tests__test_16__t__x integer)))))
-(define-fun us_split_fields_X4__projection ((a us_split_fields)) integer
+(define-fun us_split_fields_X__4__projection ((a us_split_fields)) integer
   (rec__tests__test_16__t__x a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_12__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___12__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)(attr__constrained Bool)))))
-(define-fun us_rep_23__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___23__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_24__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___24__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                 a))
 
-(define-fun us_rep_25__projection ((a us_rep)) Bool (attr__constrained a))
+(define-fun us_rep___25__projection ((a us_rep)) Bool (attr__constrained a))
 
 (define-fun tests__test_16__t__x__pred ((a us_rep)) Bool (= (to_int1
                                                             (rec__tests__test_16__t__d

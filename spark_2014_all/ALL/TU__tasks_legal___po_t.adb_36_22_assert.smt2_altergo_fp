@@ -1,0 +1,401 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+type integer
+
+predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq1 : int, int -> bool
+
+axiom bool_eq_def :
+  (forall x:int. forall y:int [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> int
+
+logic user_eq : integer, integer -> bool
+
+logic dummy : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+type us_split_fields = { rec__po_t__p_intT__condition : bool;
+rec__po_t__the_protected_int : integer
+}
+
+function us_split_fields_Condition__projection(a: us_split_fields) : bool =
+  (a).rec__po_t__p_intT__condition
+
+function us_split_fields_The_Protected_Int__projection(a: us_split_fields) : integer =
+  (a).rec__po_t__the_protected_int
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+function us_rep___projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:bool. forall a1:integer. (0 <= object__size({ us_split_fields1 =
+  { rec__po_t__p_intT__condition = a; rec__po_t__the_protected_int = a1 }
+  })))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:bool. forall a1:integer. (0 <= object__alignment({
+  us_split_fields1 = { rec__po_t__p_intT__condition = a;
+  rec__po_t__the_protected_int = a1 } })))
+
+logic po_t__p_intT__condition__first__bit : int
+
+logic po_t__p_intT__condition__last__bit : int
+
+logic po_t__p_intT__condition__position : int
+
+axiom po_t__p_intT__condition__first__bit_axiom :
+  (0 <= po_t__p_intT__condition__first__bit)
+
+axiom po_t__p_intT__condition__last__bit_axiom :
+  (po_t__p_intT__condition__first__bit <  po_t__p_intT__condition__last__bit)
+
+axiom po_t__p_intT__condition__position_axiom :
+  (0 <= po_t__p_intT__condition__position)
+
+logic user_eq1 : us_rep, us_rep -> bool
+
+type p_intT__ref = { p_intT__content : us_rep
+}
+
+function p_intT__ref___projection(a: p_intT__ref) : us_rep =
+  (a).p_intT__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range1(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE1 : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> bool
+
+logic to_rep : integer -> int
+
+logic of_rep : int -> integer
+
+axiom inversion_axiom :
+  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic get : us_rep -> int
+
+logic get__function_guard : int, us_rep -> prop
+
+axiom get__post_axiom :
+  (forall self__:bool. forall self__1:integer [get({ us_split_fields1 = {
+  rec__po_t__p_intT__condition = self__; rec__po_t__the_protected_int =
+  self__1 } })]. in_range(get({ us_split_fields1 = {
+  rec__po_t__p_intT__condition = self__; rec__po_t__the_protected_int =
+  self__1 } })))
+
+axiom get__def_axiom :
+  (forall self__:bool. forall self__1:integer [get({ us_split_fields1 = {
+  rec__po_t__p_intT__condition = self__; rec__po_t__the_protected_int =
+  self__1 } })]. (((0 <= to_rep(self__1)) -> (get({ us_split_fields1 = {
+  rec__po_t__p_intT__condition = self__; rec__po_t__the_protected_int =
+  self__1 } }) = to_rep(self__1))) and ((not (0 <= to_rep(self__1))) ->
+  (get({ us_split_fields1 = { rec__po_t__p_intT__condition = self__;
+  rec__po_t__the_protected_int = self__1 } }) = (to_rep(self__1) + 10)))))
+
+type us_split_fields2 = { rec__po_t__hidden_poT__the_protected_int : integer;
+rec__po_t__hidden_poT__switch : bool
+}
+
+function us_split_fields_The_Protected_Int__2__projection(a: us_split_fields2) : integer =
+  (a).rec__po_t__hidden_poT__the_protected_int
+
+function us_split_fields_Switch__projection(a: us_split_fields2) : bool =
+  (a).rec__po_t__hidden_poT__switch
+
+type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
+}
+
+function us_split_fields__ref___2__projection(a: us_split_fields__ref1) : us_split_fields2 =
+  (a).us_split_fields__content1
+
+type us_rep1 = { us_split_fields3 : us_split_fields2
+}
+
+function us_rep___2__projection(a: us_rep1) : us_split_fields2 =
+  (a).us_split_fields3
+
+logic value__size1 : int
+
+logic object__size1 : us_rep1 -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : us_rep1 -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 :
+  (forall a:integer. forall a1:bool. (0 <= object__size1({ us_split_fields3 =
+  { rec__po_t__hidden_poT__the_protected_int = a;
+  rec__po_t__hidden_poT__switch = a1 } })))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:integer. forall a1:bool. (0 <= object__alignment1({
+  us_split_fields3 = { rec__po_t__hidden_poT__the_protected_int = a;
+  rec__po_t__hidden_poT__switch = a1 } })))
+
+logic po_t__hidden_poT__the_protected_int__first__bit : int
+
+logic po_t__hidden_poT__the_protected_int__last__bit : int
+
+logic po_t__hidden_poT__the_protected_int__position : int
+
+axiom po_t__hidden_poT__the_protected_int__first__bit_axiom :
+  (0 <= po_t__hidden_poT__the_protected_int__first__bit)
+
+axiom po_t__hidden_poT__the_protected_int__last__bit_axiom :
+  (po_t__hidden_poT__the_protected_int__first__bit <  po_t__hidden_poT__the_protected_int__last__bit)
+
+axiom po_t__hidden_poT__the_protected_int__position_axiom :
+  (0 <= po_t__hidden_poT__the_protected_int__position)
+
+logic po_t__hidden_poT__switch__first__bit : int
+
+logic po_t__hidden_poT__switch__last__bit : int
+
+logic po_t__hidden_poT__switch__position : int
+
+axiom po_t__hidden_poT__switch__first__bit_axiom :
+  (0 <= po_t__hidden_poT__switch__first__bit)
+
+axiom po_t__hidden_poT__switch__last__bit_axiom :
+  (po_t__hidden_poT__switch__first__bit <  po_t__hidden_poT__switch__last__bit)
+
+axiom po_t__hidden_poT__switch__position_axiom :
+  (0 <= po_t__hidden_poT__switch__position)
+
+logic user_eq2 : us_rep1, us_rep1 -> bool
+
+type hidden_poT__ref = { hidden_poT__content : us_rep1
+}
+
+function hidden_poT__ref___projection(a: hidden_poT__ref) : us_rep1 =
+  (a).hidden_poT__content
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic get1 : us_rep1 -> int
+
+logic get__function_guard1 : int, us_rep1 -> prop
+
+axiom get__post_axiom1 :
+  (forall self__:integer. forall self__1:bool [get1({ us_split_fields3 = {
+  rec__po_t__hidden_poT__the_protected_int = self__;
+  rec__po_t__hidden_poT__switch = self__1 } })]. in_range(get1({
+  us_split_fields3 = { rec__po_t__hidden_poT__the_protected_int = self__;
+  rec__po_t__hidden_poT__switch = self__1 } })))
+
+axiom get__def_axiom1 :
+  (forall self__:integer. forall self__1:bool [get1({ us_split_fields3 = {
+  rec__po_t__hidden_poT__the_protected_int = self__;
+  rec__po_t__hidden_poT__switch = self__1 } })]. (((0 <= to_rep(self__)) ->
+  (get1({ us_split_fields3 = { rec__po_t__hidden_poT__the_protected_int =
+  self__; rec__po_t__hidden_poT__switch = self__1 } }) = to_rep(self__))) and
+  ((not (0 <= to_rep(self__))) -> (get1({ us_split_fields3 = {
+  rec__po_t__hidden_poT__the_protected_int = self__;
+  rec__po_t__hidden_poT__switch = self__1 } }) = (to_rep(self__) + 10)))))
+
+logic x : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic y : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+ (* File "po_t.ads", line 56, characters 0-0 *)
+goal WP_parameter_def :
+  (forall p_int__split_fields:bool. forall p_int__split_fields1:integer.
+  forall hidden_po__split_fields:integer.
+  forall hidden_po__split_fields1:bool. forall o:bool. forall o1:integer.
+  forall us_self__compl:bool. forall us_self__compl1:integer.
+  forall o2:integer. forall o3:bool. forall us_self__compl2:integer.
+  forall us_self__compl3:bool. forall o4:bool. forall o5:integer.
+  forall po_t__B_1__x__assume:int. forall o6:integer. forall o7:bool.
+  forall po_t__B_1__y__assume:int. forall p_int__split_fields2:bool.
+  forall p_int__split_fields3:integer. forall us_self__compl4:bool.
+  forall us_self__compl5:integer. forall result:bool. forall result1:integer.
+  forall p_int__split_fields4:bool. forall p_int__split_fields5:integer.
+  forall hidden_po__split_fields2:integer.
+  forall hidden_po__split_fields3:bool. forall us_self__compl6:integer.
+  forall us_self__compl7:bool. forall result2:integer. forall result3:bool.
+  forall hidden_po__split_fields4:integer.
+  forall hidden_po__split_fields5:bool. forall p_int__split_fields6:bool.
+  forall p_int__split_fields7:integer.
+  forall hidden_po__split_fields6:integer.
+  forall hidden_po__split_fields7:bool.
+  (((p_int__split_fields = of_int(1)) and
+  (to_rep(p_int__split_fields1) = 0)) ->
+  (((to_rep(hidden_po__split_fields) = 0) and
+  (hidden_po__split_fields1 = of_int(1))) ->
+  (((((o = p_int__split_fields2) and (o1 = p_int__split_fields3)) and
+  ((us_self__compl = o) and (us_self__compl1 = o1))) and
+  (((result = p_int__split_fields2) and (result1 = p_int__split_fields3)) and
+  ((p_int__split_fields4 = us_self__compl4) and
+  (p_int__split_fields5 = us_self__compl5)))) ->
+  (((((o2 = hidden_po__split_fields2) and
+  (o3 = hidden_po__split_fields3)) and ((us_self__compl2 = o2) and
+  (us_self__compl3 = o3))) and (((result2 = hidden_po__split_fields2) and
+  (result3 = hidden_po__split_fields3)) and
+  ((hidden_po__split_fields4 = us_self__compl6) and
+  (hidden_po__split_fields5 = us_self__compl7)))) ->
+  (((((p_int__split_fields6 = o4) and (p_int__split_fields7 = o5)) and
+  ((po_t__B_1__x__assume = get({ us_split_fields1 = {
+  rec__po_t__p_intT__condition = o4; rec__po_t__the_protected_int = o5 }
+  })) and (in_range(po_t__B_1__x__assume) and (((0 <= to_rep(o5)) and
+  (po_t__B_1__x__assume = to_rep(o5))) or ((not (0 <= to_rep(o5))) and
+  (po_t__B_1__x__assume = (to_rep(o5) + 10))))))) and
+  (po_t__B_1__x__assume = x)) -> (in_range(x) ->
+  (((((hidden_po__split_fields6 = o6) and
+  (hidden_po__split_fields7 = o7)) and ((po_t__B_1__y__assume = get1({
+  us_split_fields3 = { rec__po_t__hidden_poT__the_protected_int = o6;
+  rec__po_t__hidden_poT__switch = o7 } })) and
+  (in_range(po_t__B_1__y__assume) and (((0 <= to_rep(o6)) and
+  (po_t__B_1__y__assume = to_rep(o6))) or ((not (0 <= to_rep(o6))) and
+  (po_t__B_1__y__assume = (to_rep(o6) + 10))))))) and
+  (po_t__B_1__y__assume = y)) -> (in_range(y) -> (x = y))))))))))

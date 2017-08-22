@@ -51,7 +51,7 @@
 
 (declare-datatypes ((capacity_range__ref 0))
 (((mk_capacity_range__ref (capacity_range__content capacity_range)))))
-(define-fun capacity_range__ref_2__projection ((a capacity_range__ref)) capacity_range
+(define-fun capacity_range__ref___2__projection ((a capacity_range__ref)) capacity_range
   (capacity_range__content a))
 
 (declare-sort us_main_type 0)
@@ -61,32 +61,32 @@
 (declare-datatypes ((us_split_discrs 0))
 (((mk___split_discrs
   (rec__names__entry_tables__vector__capacity capacity_range)))))
-(define-fun us_split_discrs_2__projection ((a us_split_discrs)) capacity_range
+(define-fun us_split_discrs___2__projection ((a us_split_discrs)) capacity_range
   (rec__names__entry_tables__vector__capacity a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
 (((mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref_2__projection ((a us_split_discrs__ref)) us_split_discrs
+(define-fun us_split_discrs__ref___2__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields (rec__names__entry_tables__vector us_main_type)))))
-(define-fun us_split_fields_Vector2__projection ((a us_split_fields)) us_main_type
+(define-fun us_split_fields_Vector__2__projection ((a us_split_fields)) us_main_type
   (rec__names__entry_tables__vector a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)))))
-(define-fun us_rep_4__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                              a))
+(define-fun us_rep___4__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                a))
 
-(define-fun us_rep_5__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___5__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (declare-const value__size Int)
 
@@ -130,8 +130,8 @@
 
 (declare-datatypes ((vector__ref 0))
 (((mk_vector__ref (vector__content us_rep)))))
-(define-fun vector__ref_2__projection ((a vector__ref)) us_rep (vector__content
-                                                               a))
+(define-fun vector__ref___2__projection ((a vector__ref)) us_rep (vector__content
+                                                                 a))
 
 (declare-fun to_rep (capacity_range) Int)
 
@@ -212,22 +212,22 @@
 
 (declare-fun is_empty__function_guard (Bool us_rep) Bool)
 
-(define-fun dynamic_invariant ((temp___expr_394 us_rep)
-  (temp___is_init_391 Bool) (temp___skip_constant_392 Bool)
-  (temp___do_toplevel_393 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_392 true))
-                                      (in_range1 128 temp___expr_394)))
+(define-fun dynamic_invariant ((temp___expr_570 us_rep)
+  (temp___is_init_567 Bool) (temp___skip_constant_568 Bool)
+  (temp___do_toplevel_569 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_568 true))
+                                      (in_range1 128 temp___expr_570)))
 
-(define-fun default_initial_assumption ((temp___expr_396 us_rep)
-  (temp___skip_top_level_397 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_572 us_rep)
+  (temp___skip_top_level_573 Bool)) Bool (and
                                          (= (to_rep
                                             (rec__names__entry_tables__vector__capacity
                                             (us_split_discrs1
-                                            temp___expr_396))) 128)
+                                            temp___expr_572))) 128)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_397 true))
-                                         (= (is_empty temp___expr_396) true))))
+                                         (= temp___skip_top_level_573 true))
+                                         (= (is_empty temp___expr_572) true))))
 
 (declare-fun nth ((_ BitVec 32) Int) Bool)
 
@@ -484,8 +484,8 @@
 (define-fun us_rep___projection ((a us_rep1)) us_split_discrs2 (us_split_discrs3
                                                                a))
 
-(define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (declare-const value__size2 Int)
 
@@ -611,31 +611,31 @@
 
 (declare-fun is_empty__function_guard1 (Bool us_rep1) Bool)
 
-(define-fun dynamic_invariant1 ((temp___expr_316 us_rep1)
-  (temp___is_init_313 Bool) (temp___skip_constant_314 Bool)
-  (temp___do_toplevel_315 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_314 true))
-                                      (in_range4 1024 temp___expr_316)))
+(define-fun dynamic_invariant1 ((temp___expr_404 us_rep1)
+  (temp___is_init_401 Bool) (temp___skip_constant_402 Bool)
+  (temp___do_toplevel_403 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_402 true))
+                                      (in_range4 1024 temp___expr_404)))
 
-(define-fun default_initial_assumption1 ((temp___expr_318 us_rep1)
-  (temp___skip_top_level_319 Bool)) Bool (and
+(define-fun default_initial_assumption1 ((temp___expr_406 us_rep1)
+  (temp___skip_top_level_407 Bool)) Bool (and
                                          (= (to_rep2
                                             (rec__names__char_tables__vector__capacity
                                             (us_split_discrs3
-                                            temp___expr_318))) 1024)
+                                            temp___expr_406))) 1024)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_319 true))
-                                         (= (is_empty1 temp___expr_318) true))))
+                                         (= temp___skip_top_level_407 true))
+                                         (= (is_empty1 temp___expr_406) true))))
 
 (declare-fun names__hash_table__aggregate_def (Int) (Array (_ BitVec 32) name_id))
 
 ;; def_axiom
   (assert
-  (forall ((temp___425 Int))
-  (forall ((temp___426 (_ BitVec 32)))
-  (= (select (names__hash_table__aggregate_def temp___425) temp___426)
-  (of_rep1 temp___425)))))
+  (forall ((temp___601 Int))
+  (forall ((temp___602 (_ BitVec 32)))
+  (= (select (names__hash_table__aggregate_def temp___601) temp___602)
+  (of_rep1 temp___601)))))
 
 (define-fun dynamic_invariant2 ((temp___expr_180 Int)
   (temp___is_init_177 Bool) (temp___skip_constant_178 Bool)
@@ -688,12 +688,12 @@
   (! (= (= (is_empty1 container) true) (= (length container) 0)) :pattern (
   (is_empty1 container)) )))
 
-(define-fun dynamic_invariant4 ((temp___expr_355 Int)
-  (temp___is_init_352 Bool) (temp___skip_constant_353 Bool)
-  (temp___do_toplevel_354 Bool)) Bool (=>
-                                      (or (= temp___is_init_352 true)
+(define-fun dynamic_invariant4 ((temp___expr_443 Int)
+  (temp___is_init_440 Bool) (temp___skip_constant_441 Bool)
+  (temp___do_toplevel_442 Bool)) Bool (=>
+                                      (or (= temp___is_init_440 true)
                                       (<= 0 2147483647)) (in_range
-                                      temp___expr_355)))
+                                      temp___expr_443)))
 
 (define-fun capacity1 ((container us_rep)) Int (ite (= (of_int 0) true)
                                                (to_rep

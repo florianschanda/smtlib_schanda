@@ -94,33 +94,33 @@
 (declare-datatypes ((us_split_discrs 0))
 (((mk___split_discrs
   (rec__interrupt_priority__no_interrupt_needed_2__c any_priority)))))
-(define-fun us_split_discrs_3__projection ((a us_split_discrs)) any_priority
+(define-fun us_split_discrs___3__projection ((a us_split_discrs)) any_priority
   (rec__interrupt_priority__no_interrupt_needed_2__c a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
 (((mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref_3__projection ((a us_split_discrs__ref)) us_split_discrs
+(define-fun us_split_discrs__ref___3__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields
   (rec__interrupt_priority__no_interrupt_needed_2__i integer)))))
-(define-fun us_split_fields_I3__projection ((a us_split_fields)) integer
+(define-fun us_split_fields_I__3__projection ((a us_split_fields)) integer
   (rec__interrupt_priority__no_interrupt_needed_2__i a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_30__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___30__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)))))
-(define-fun us_rep_33__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___33__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_34__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___34__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                 a))
 
 (declare-const value__size Int)
 

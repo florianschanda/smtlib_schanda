@@ -1,0 +1,733 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type natural
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : natural, natural -> bool
+
+logic dummy : natural
+
+type natural__ref = { natural__content : natural
+}
+
+function natural__ref___projection(a: natural__ref) : natural =
+  (a).natural__content
+
+type positive
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : positive, positive -> bool
+
+logic dummy1 : positive
+
+type positive__ref = { positive__content : positive
+}
+
+function positive__ref___projection(a: positive__ref) : positive =
+  (a).positive__content
+
+type character
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 255))
+
+logic bool_eq4 : int, int -> bool
+
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq2 : character, character -> bool
+
+logic dummy2 : character
+
+type character__ref = { character__content : character
+}
+
+function character__ref___projection(a: character__ref) : character =
+  (a).character__content
+
+logic to_rep : character -> int
+
+logic of_rep : int -> character
+
+axiom inversion_axiom :
+  (forall x:character [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:character [to_rep(x)]. in_range3(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range3(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type us_main_type
+
+logic us_main_eq : us_main_type, us_main_type -> bool
+
+type us_rep
+
+logic bool_eq5 : us_rep, us_rep -> bool
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (forall a:us_rep. (0 <= object__size(a)))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:us_rep. (0 <= object__alignment(a)))
+
+logic user_eq3 : us_rep, us_rep -> bool
+
+logic dummy3 : us_rep
+
+type file__ref = { file__content : us_rep
+}
+
+function file__ref___projection(a: file__ref) : us_rep = (a).file__content
+
+type read_status
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 2))
+
+logic bool_eq6 : int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall x:int. forall y:int [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq4 : read_status, read_status -> bool
+
+logic dummy4 : read_status
+
+type read_status__ref = { read_status__content : read_status
+}
+
+function read_status__ref___projection(a: read_status__ref) : read_status =
+  (a).read_status__content
+
+logic to_rep1 : read_status -> int
+
+logic of_rep1 : int -> read_status
+
+axiom inversion_axiom1 :
+  (forall x:read_status [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 :
+  (forall x:read_status [to_rep1(x)]. in_range4(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range4(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type us_split_discrs = { rec__file_io__read_result__status : read_status
+}
+
+function us_split_discrs___projection(a: us_split_discrs) : read_status =
+  (a).rec__file_io__read_result__status
+
+type us_split_discrs__ref = { us_split_discrs__content : us_split_discrs
+}
+
+function us_split_discrs__ref___projection(a: us_split_discrs__ref) : us_split_discrs =
+  (a).us_split_discrs__content
+
+type us_split_fields = { rec__file_io__read_result__c : character
+}
+
+function us_split_fields_C__projection(a: us_split_fields) : character =
+  (a).rec__file_io__read_result__c
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___2__projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep1 = { us_split_discrs1 : us_split_discrs; us_split_fields1 :
+us_split_fields; attr__constrained : bool
+}
+
+function us_rep___3__projection(a: us_rep1) : us_split_discrs =
+  (a).us_split_discrs1
+
+function us_rep___4__projection(a: us_rep1) : us_split_fields =
+  (a).us_split_fields1
+
+function us_rep___5__projection(a: us_rep1) : bool = (a).attr__constrained
+
+predicate file_io__read_result__c__pred(a: us_rep1) =
+  (to_rep1(((a).us_split_discrs1).rec__file_io__read_result__status) = 0)
+
+logic bool_eq7 : us_rep1, us_rep1 -> bool
+
+axiom bool_eq_def5 :
+  (forall a:us_rep1. forall b:us_rep1 [bool_eq7(a, b)].
+  ((((to_rep1(((a).us_split_discrs1).rec__file_io__read_result__status) = to_rep1(((b).us_split_discrs1).rec__file_io__read_result__status)) and
+  (file_io__read_result__c__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__file_io__read_result__c) = to_rep(((b).us_split_fields1).rec__file_io__read_result__c)))) ->
+  (bool_eq7(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__file_io__read_result__status) = to_rep1(((b).us_split_discrs1).rec__file_io__read_result__status)) and
+  (file_io__read_result__c__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__file_io__read_result__c) = to_rep(((b).us_split_fields1).rec__file_io__read_result__c))))) ->
+  (bool_eq7(a, b) = false))))
+
+logic value__size1 : int
+
+logic object__size1 : us_rep1 -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : us_rep1 -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 :
+  (forall a:read_status. forall a1:character. forall a2:bool.
+  (0 <= object__size1({ us_split_discrs1 = {
+  rec__file_io__read_result__status = a }; us_split_fields1 = {
+  rec__file_io__read_result__c = a1 }; attr__constrained = a2 })))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:read_status. forall a1:character. forall a2:bool.
+  (0 <= object__alignment1({ us_split_discrs1 = {
+  rec__file_io__read_result__status = a }; us_split_fields1 = {
+  rec__file_io__read_result__c = a1 }; attr__constrained = a2 })))
+
+logic file_io__read_result__status__first__bit : int
+
+logic file_io__read_result__status__last__bit : int
+
+logic file_io__read_result__status__position : int
+
+axiom file_io__read_result__status__first__bit_axiom :
+  (0 <= file_io__read_result__status__first__bit)
+
+axiom file_io__read_result__status__last__bit_axiom :
+  (file_io__read_result__status__first__bit <  file_io__read_result__status__last__bit)
+
+axiom file_io__read_result__status__position_axiom :
+  (0 <= file_io__read_result__status__position)
+
+logic file_io__read_result__c__first__bit : int
+
+logic file_io__read_result__c__last__bit : int
+
+logic file_io__read_result__c__position : int
+
+axiom file_io__read_result__c__first__bit_axiom :
+  (0 <= file_io__read_result__c__first__bit)
+
+axiom file_io__read_result__c__last__bit_axiom :
+  (file_io__read_result__c__first__bit <  file_io__read_result__c__last__bit)
+
+axiom file_io__read_result__c__position_axiom :
+  (0 <= file_io__read_result__c__position)
+
+logic user_eq5 : us_rep1, us_rep1 -> bool
+
+logic dummy5 : read_status
+
+logic dummy6 : character
+
+logic dummy7 : bool
+
+type read_result__ref = { read_result__content : us_rep1
+}
+
+function read_result__ref___projection(a: read_result__ref) : us_rep1 =
+  (a).read_result__content
+
+logic current_read__attr__constrained : bool
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic next_read__attr__constrained : bool
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic local_invariant : us_split_fields, us_split_discrs, us_split_fields,
+  us_split_discrs -> bool
+
+logic local_invariant__function_guard : bool, us_split_fields,
+  us_split_discrs, us_split_fields, us_split_discrs -> prop
+
+axiom local_invariant__post_axiom : true
+
+axiom local_invariant__def_axiom :
+  (forall lexer__current_read__fields:character.
+  forall lexer__next_read__fields:character.
+  (forall lexer__current_read__discrs:read_status.
+  forall lexer__next_read__discrs:read_status [local_invariant({
+  rec__file_io__read_result__c = lexer__current_read__fields }, {
+  rec__file_io__read_result__status = lexer__current_read__discrs }, {
+  rec__file_io__read_result__c = lexer__next_read__fields }, {
+  rec__file_io__read_result__status = lexer__next_read__discrs })].
+  ((local_invariant({ rec__file_io__read_result__c =
+  lexer__current_read__fields }, { rec__file_io__read_result__status =
+  lexer__current_read__discrs }, { rec__file_io__read_result__c =
+  lexer__next_read__fields }, { rec__file_io__read_result__status =
+  lexer__next_read__discrs }) = true) <->
+  ((not (current_read__attr__constrained = true)) and
+  (not (next_read__attr__constrained = true))))))
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
+ (* File "lexer.adb", line 47, characters 0-0 *)
+goal WP_parameter_def :
+  (forall the_file:us_rep. forall current_read__split_fields:character.
+  forall current_read__split_discrs:read_status. forall current_line:int.
+  forall current_col:int. forall current_pos:int.
+  forall next_read__split_fields:character.
+  forall next_read__split_discrs:read_status. forall temp___928:us_rep.
+  forall temp___927:read_status. forall temp___9271:character.
+  forall temp___9272:bool. forall temp___926:int. forall temp___925:int.
+  forall temp___924:int. forall temp___923:read_status.
+  forall temp___9231:character. forall temp___9232:bool.
+  forall temp___914:us_rep. forall temp___913:read_status.
+  forall temp___9131:character. forall temp___9132:bool.
+  forall temp___912:int. forall temp___911:int. forall temp___910:int.
+  forall temp___909:read_status. forall temp___9091:character.
+  forall temp___9092:bool. forall o:bool. forall the_file1:us_rep.
+  forall current_read__split_fields1:character.
+  forall current_read__split_discrs1:read_status. forall current_line1:int.
+  forall current_col1:int. forall current_pos1:int.
+  forall next_read__split_fields1:character.
+  forall next_read__split_discrs1:read_status. forall result:bool.
+  forall current_read__split_fields2:character.
+  forall current_read__split_discrs2:read_status. forall current_line2:int.
+  forall current_col2:int. forall current_pos2:int.
+  forall next_read__split_fields2:character.
+  forall next_read__split_discrs2:read_status. forall the_file2:us_rep.
+  forall current_read__split_fields3:character.
+  forall current_read__split_discrs3:read_status. forall current_line3:int.
+  forall current_col3:int. forall current_pos3:int.
+  forall next_read__split_fields3:character.
+  forall next_read__split_discrs3:read_status. forall result1:bool.
+  forall the_file3:us_rep. forall current_read__split_fields4:character.
+  forall current_read__split_discrs4:read_status. forall current_line4:int.
+  forall current_col4:int__ref. forall current_pos4:int__ref.
+  forall next_read__split_fields4:us_split_fields__ref.
+  forall next_read__split_discrs4:us_split_discrs__ref.
+  forall the_file4:us_rep.
+  forall current_read__split_fields5:us_split_fields.
+  forall current_read__split_discrs5:us_split_discrs.
+  forall current_line5:int. forall current_col5:int. forall current_pos5:int.
+  forall next_read__split_fields5:us_split_fields.
+  forall next_read__split_discrs5:us_split_discrs.
+  forall the_file5:file__ref.
+  forall current_read__split_fields6:us_split_fields__ref.
+  forall current_read__split_discrs6:us_split_discrs__ref.
+  forall current_line6:int__ref. forall current_col6:int__ref.
+  forall current_pos6:int__ref.
+  forall next_read__split_fields6:us_split_fields__ref.
+  forall next_read__split_discrs6:us_split_discrs__ref.
+  forall the_file6:us_rep.
+  forall current_read__split_fields7:us_split_fields.
+  forall current_read__split_discrs7:us_split_discrs.
+  forall current_line7:int. forall current_col7:int. forall current_pos7:int.
+  forall next_read__split_fields7:us_split_fields.
+  forall next_read__split_discrs7:us_split_discrs. forall result2:bool.
+  forall the_file7:file__ref.
+  forall current_read__split_fields8:us_split_fields__ref.
+  forall current_read__split_discrs8:us_split_discrs__ref.
+  forall current_line8:int__ref. forall current_col8:int__ref.
+  forall current_pos8:int__ref.
+  forall next_read__split_fields8:us_split_fields__ref.
+  forall next_read__split_discrs8:us_split_discrs__ref.
+  forall the_file8:us_rep.
+  forall current_read__split_fields9:us_split_fields.
+  forall current_read__split_discrs9:us_split_discrs.
+  forall current_line9:int. forall current_col9:int. forall current_pos9:int.
+  forall next_read__split_fields9:us_split_fields.
+  forall next_read__split_discrs9:us_split_discrs.
+  forall the_file9:file__ref.
+  forall current_read__split_fields10:us_split_fields__ref.
+  forall current_read__split_discrs10:us_split_discrs__ref.
+  forall current_line10:int__ref. forall current_col10:int__ref.
+  forall current_pos10:int__ref.
+  forall next_read__split_fields10:us_split_fields__ref.
+  forall next_read__split_discrs10:us_split_discrs__ref.
+  forall the_file10:us_rep.
+  forall current_read__split_fields11:us_split_fields.
+  forall current_read__split_discrs11:us_split_discrs.
+  forall current_line11:int. forall current_col11:int.
+  forall current_pos11:int. forall next_read__split_fields11:us_split_fields.
+  forall next_read__split_discrs11:us_split_discrs.
+  forall the_file11:file__ref.
+  forall current_read__split_fields12:us_split_fields__ref.
+  forall current_read__split_discrs12:us_split_discrs__ref.
+  forall current_line12:int__ref. forall current_col12:int__ref.
+  forall current_pos12:int__ref.
+  forall next_read__split_fields12:us_split_fields__ref.
+  forall next_read__split_discrs12:us_split_discrs__ref.
+  forall the_file12:us_rep.
+  forall current_read__split_fields13:us_split_fields.
+  forall current_read__split_discrs13:us_split_discrs.
+  forall current_line13:int. forall current_col13:int.
+  forall current_pos13:int. forall next_read__split_fields13:us_split_fields.
+  forall next_read__split_discrs13:us_split_discrs.
+  forall the_file13:file__ref.
+  forall current_read__split_fields14:us_split_fields__ref.
+  forall current_read__split_discrs14:us_split_discrs__ref.
+  forall current_line14:int__ref. forall current_col14:int__ref.
+  forall current_pos14:int__ref.
+  forall next_read__split_fields14:us_split_fields__ref.
+  forall next_read__split_discrs14:us_split_discrs__ref.
+  forall the_file14:us_rep.
+  forall current_read__split_fields15:us_split_fields.
+  forall current_read__split_discrs15:us_split_discrs.
+  forall current_line15:int. forall current_col15:int.
+  forall current_pos15:int. forall next_read__split_fields15:us_split_fields.
+  forall next_read__split_discrs15:us_split_discrs.
+  (((current_read__attr__constrained = false) and
+  (in_range2(current_line) and (in_range1(current_col) and
+  (in_range1(current_pos) and ((next_read__attr__constrained = false) and
+  ((local_invariant({ rec__file_io__read_result__c =
+  current_read__split_fields }, { rec__file_io__read_result__status =
+  current_read__split_discrs }, { rec__file_io__read_result__c =
+  next_read__split_fields }, { rec__file_io__read_result__status =
+  next_read__split_discrs }) = true) and (((((temp___928 = the_file) and
+  (((temp___927 = next_read__split_discrs) and
+  ((temp___9271 = next_read__split_fields) and
+  (temp___9272 = next_read__attr__constrained))) and
+  ((temp___926 = current_pos) and ((temp___925 = current_col) and
+  ((temp___924 = current_line) and
+  (((temp___923 = current_read__split_discrs) and
+  ((temp___9231 = current_read__split_fields) and
+  (temp___9232 = current_read__attr__constrained))) and
+  (((in_range2(current_line1) and in_range1(current_col1)) and
+  in_range1(current_pos1)) and
+  (((((to_rep1(current_read__split_discrs1) = 0) and
+  ((((to_rep(current_read__split_fields1) = 10) or
+  ((to_rep(current_read__split_fields1) = 13) or
+  ((to_rep(current_read__split_fields1) = 32) or
+  (to_rep(current_read__split_fields1) = 9)))) and (result = true)) or
+  ((not ((to_rep(current_read__split_fields1) = 10) or
+  ((to_rep(current_read__split_fields1) = 13) or
+  ((to_rep(current_read__split_fields1) = 32) or
+  (to_rep(current_read__split_fields1) = 9))))) and (result = false)))) or
+  ((not (to_rep1(current_read__split_discrs1) = 0)) and
+  (result = false))) and (((result = true) and
+  ((((temp___914 = the_file1) and
+  (((temp___913 = next_read__split_discrs1) and
+  ((temp___9131 = next_read__split_fields1) and
+  (next_read__attr__constrained = temp___9132))) and
+  ((temp___912 = current_pos1) and ((temp___911 = current_col1) and
+  ((temp___910 = current_line1) and
+  (((temp___909 = current_read__split_discrs1) and
+  ((temp___9091 = current_read__split_fields1) and
+  (temp___9092 = current_read__attr__constrained))) and
+  ((((in_range2(current_line2) and in_range1(current_col2)) and
+  in_range1(current_pos2)) and
+  ((to_rep1(current_read__split_discrs2) = 0) and
+  ((to_rep(current_read__split_fields2) = 10) or
+  ((to_rep(current_read__split_fields2) = 13) or
+  ((to_rep(current_read__split_fields2) = 32) or
+  (to_rep(current_read__split_fields2) = 9)))))) and (((((local_invariant({
+  rec__file_io__read_result__c = current_read__split_fields3 }, {
+  rec__file_io__read_result__status = current_read__split_discrs3 }, {
+  rec__file_io__read_result__c = next_read__split_fields3 }, {
+  rec__file_io__read_result__status = next_read__split_discrs3 }) = true) and
+  (bool_eq7({ us_split_discrs1 = { rec__file_io__read_result__status =
+  current_read__split_discrs3 }; us_split_fields1 = {
+  rec__file_io__read_result__c = current_read__split_fields3 };
+  attr__constrained = current_read__attr__constrained }, { us_split_discrs1 =
+  { rec__file_io__read_result__status = next_read__split_discrs2 };
+  us_split_fields1 = { rec__file_io__read_result__c =
+  next_read__split_fields2 }; attr__constrained =
+  next_read__attr__constrained }) = true)) and
+  (current_pos2 <= current_pos3)) and ((in_range2(current_line3) and
+  in_range1(current_col3)) and in_range1(current_pos3))) and
+  (((((to_rep1(current_read__split_discrs3) = 0) and
+  ((((to_rep(current_read__split_fields3) = 10) or
+  ((to_rep(current_read__split_fields3) = 13) or
+  ((to_rep(current_read__split_fields3) = 32) or
+  (to_rep(current_read__split_fields3) = 9)))) and (o = true)) or
+  ((not ((to_rep(current_read__split_fields3) = 10) or
+  ((to_rep(current_read__split_fields3) = 13) or
+  ((to_rep(current_read__split_fields3) = 32) or
+  (to_rep(current_read__split_fields3) = 9))))) and (o = false)))) or
+  ((not (to_rep1(current_read__split_discrs3) = 0)) and (o = false))) and
+  (((not (o = true)) and (result1 = true)) or ((o = true) and
+  (result1 = false)))) and (result1 = true)))))))))) and
+  (((next_read__split_discrs4 = { us_split_discrs__content = {
+  rec__file_io__read_result__status = next_read__split_discrs3 } }) and
+  ((next_read__split_fields4 = { us_split_fields__content = {
+  rec__file_io__read_result__c = next_read__split_fields3 } }) and
+  ((current_pos4 = { int__content = current_pos3 }) and ((current_col4 = {
+  int__content = current_col3 }) and ((current_line3 = current_line4) and
+  ((current_read__split_discrs4 = current_read__split_discrs3) and
+  ((current_read__split_fields4 = current_read__split_fields3) and
+  (the_file2 = the_file3)))))))) and ((next_read__split_discrs5 = {
+  rec__file_io__read_result__status = next_read__split_discrs3 }) and
+  ((next_read__split_fields5 = { rec__file_io__read_result__c =
+  next_read__split_fields3 }) and ((current_pos5 = current_pos3) and
+  ((current_col5 = current_col3) and ((current_line5 = current_line3) and
+  ((current_read__split_discrs5 = { rec__file_io__read_result__status =
+  current_read__split_discrs3 }) and ((current_read__split_fields5 = {
+  rec__file_io__read_result__c = current_read__split_fields3 }) and
+  (the_file4 = the_file2)))))))))) and
+  (((next_read__split_discrs6 = next_read__split_discrs4) and
+  ((next_read__split_fields6 = next_read__split_fields4) and
+  ((current_pos6 = current_pos4) and ((current_col6 = current_col4) and
+  ((current_line6 = { int__content = current_line4 }) and
+  ((current_read__split_discrs6 = { us_split_discrs__content = {
+  rec__file_io__read_result__status = current_read__split_discrs4 } }) and
+  ((current_read__split_fields6 = { us_split_fields__content = {
+  rec__file_io__read_result__c = current_read__split_fields4 } }) and
+  (the_file5 = { file__content = the_file3 })))))))) and
+  ((next_read__split_discrs7 = next_read__split_discrs5) and
+  ((next_read__split_fields7 = next_read__split_fields5) and
+  ((current_pos7 = current_pos5) and ((current_col7 = current_col5) and
+  ((current_line7 = current_line5) and
+  ((current_read__split_discrs7 = current_read__split_discrs5) and
+  ((current_read__split_fields7 = current_read__split_fields5) and
+  (the_file6 = the_file4))))))))))) or ((not (result = true)) and
+  (((next_read__split_discrs6 = { us_split_discrs__content = {
+  rec__file_io__read_result__status = next_read__split_discrs1 } }) and
+  ((next_read__split_fields6 = { us_split_fields__content = {
+  rec__file_io__read_result__c = next_read__split_fields1 } }) and
+  ((current_pos6 = { int__content = current_pos1 }) and ((current_col6 = {
+  int__content = current_col1 }) and ((current_line6 = { int__content =
+  current_line1 }) and ((current_read__split_discrs6 = {
+  us_split_discrs__content = { rec__file_io__read_result__status =
+  current_read__split_discrs1 } }) and ((current_read__split_fields6 = {
+  us_split_fields__content = { rec__file_io__read_result__c =
+  current_read__split_fields1 } }) and (the_file5 = { file__content =
+  the_file1 })))))))) and ((next_read__split_discrs7 = {
+  rec__file_io__read_result__status = next_read__split_discrs1 }) and
+  ((next_read__split_fields7 = { rec__file_io__read_result__c =
+  next_read__split_fields1 }) and ((current_pos7 = current_pos1) and
+  ((current_col7 = current_col1) and ((current_line7 = current_line1) and
+  ((current_read__split_discrs7 = { rec__file_io__read_result__status =
+  current_read__split_discrs1 }) and ((current_read__split_fields7 = {
+  rec__file_io__read_result__c = current_read__split_fields1 }) and
+  (the_file6 = the_file1)))))))))))) and
+  ((((next_read__split_discrs8 = next_read__split_discrs6) and
+  ((next_read__split_fields8 = next_read__split_fields6) and
+  ((current_pos8 = current_pos6) and ((current_col8 = current_col6) and
+  ((current_line8 = current_line6) and
+  ((current_read__split_discrs8 = current_read__split_discrs6) and
+  ((current_read__split_fields8 = current_read__split_fields6) and
+  (the_file7 = the_file5)))))))) and
+  ((next_read__split_discrs9 = next_read__split_discrs7) and
+  ((next_read__split_fields9 = next_read__split_fields7) and
+  ((current_pos9 = current_pos7) and ((current_col9 = current_col7) and
+  ((current_line9 = current_line7) and
+  ((current_read__split_discrs9 = current_read__split_discrs7) and
+  ((current_read__split_fields9 = current_read__split_fields7) and
+  (the_file8 = the_file6))))))))) and
+  ((((to_rep1(((current_read__split_discrs6).us_split_discrs__content).rec__file_io__read_result__status) = 0) and
+  (((to_rep(((current_read__split_fields6).us_split_fields__content).rec__file_io__read_result__c) = 59) and
+  (result2 = true)) or
+  ((not (to_rep(((current_read__split_fields6).us_split_fields__content).rec__file_io__read_result__c) = 59)) and
+  (result2 = false)))) or
+  ((not (to_rep1(((current_read__split_discrs6).us_split_discrs__content).rec__file_io__read_result__status) = 0)) and
+  (result2 = false))) and (not (result2 = true)))))))))))) and
+  (((next_read__split_discrs10 = next_read__split_discrs8) and
+  ((next_read__split_fields10 = next_read__split_fields8) and
+  ((current_pos10 = current_pos8) and ((current_col10 = current_col8) and
+  ((current_line10 = current_line8) and
+  ((current_read__split_discrs10 = current_read__split_discrs8) and
+  ((current_read__split_fields10 = current_read__split_fields8) and
+  (the_file9 = the_file7)))))))) and
+  ((next_read__split_discrs11 = next_read__split_discrs9) and
+  ((next_read__split_fields11 = next_read__split_fields9) and
+  ((current_pos11 = current_pos9) and ((current_col11 = current_col9) and
+  ((current_line11 = current_line9) and
+  ((current_read__split_discrs11 = current_read__split_discrs9) and
+  ((current_read__split_fields11 = current_read__split_fields9) and
+  (the_file10 = the_file8)))))))))) and
+  (((next_read__split_discrs12 = next_read__split_discrs10) and
+  ((next_read__split_fields12 = next_read__split_fields10) and
+  ((current_pos12 = current_pos10) and ((current_col12 = current_col10) and
+  ((current_line12 = current_line10) and
+  ((current_read__split_discrs12 = current_read__split_discrs10) and
+  ((current_read__split_fields12 = current_read__split_fields10) and
+  (the_file11 = the_file9)))))))) and
+  ((next_read__split_discrs13 = next_read__split_discrs11) and
+  ((next_read__split_fields13 = next_read__split_fields11) and
+  ((current_pos13 = current_pos11) and ((current_col13 = current_col11) and
+  ((current_line13 = current_line11) and
+  ((current_read__split_discrs13 = current_read__split_discrs11) and
+  ((current_read__split_fields13 = current_read__split_fields11) and
+  (the_file12 = the_file10)))))))))) and
+  (((next_read__split_discrs14 = next_read__split_discrs12) and
+  ((next_read__split_fields14 = next_read__split_fields12) and
+  ((current_pos14 = current_pos12) and ((current_col14 = current_col12) and
+  ((current_line14 = current_line12) and
+  ((current_read__split_discrs14 = current_read__split_discrs12) and
+  ((current_read__split_fields14 = current_read__split_fields12) and
+  (the_file13 = the_file11)))))))) and
+  ((next_read__split_discrs15 = next_read__split_discrs13) and
+  ((next_read__split_fields15 = next_read__split_fields13) and
+  ((current_pos15 = current_pos13) and ((current_col15 = current_col13) and
+  ((current_line15 = current_line13) and
+  ((current_read__split_discrs15 = current_read__split_discrs13) and
+  ((current_read__split_fields15 = current_read__split_fields13) and
+  (the_file14 = the_file12)))))))))))))))) ->
+  (local_invariant((current_read__split_fields14).us_split_fields__content,
+  (current_read__split_discrs14).us_split_discrs__content,
+  (next_read__split_fields14).us_split_fields__content,
+  (next_read__split_discrs14).us_split_discrs__content) = true)))

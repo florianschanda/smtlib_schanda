@@ -144,8 +144,8 @@
 
 (declare-datatypes ((modular__ref 0))
 (((mk_modular__ref (modular__content modular)))))
-(define-fun modular__ref_8__projection ((a modular__ref)) modular (modular__content
-                                                                  a))
+(define-fun modular__ref___8__projection ((a modular__ref)) modular (modular__content
+                                                                    a))
 
 (define-fun dynamic_invariant ((temp___expr_351 (_ BitVec 64))
   (temp___is_init_348 Bool) (temp___skip_constant_349 Bool)
@@ -167,7 +167,7 @@
 
 (declare-datatypes ((bit_position__ref 0))
 (((mk_bit_position__ref (bit_position__content bit_position)))))
-(define-fun bit_position__ref_7__projection ((a bit_position__ref)) bit_position
+(define-fun bit_position__ref___7__projection ((a bit_position__ref)) bit_position
   (bit_position__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_357 Int)

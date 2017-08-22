@@ -1,0 +1,563 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+type integer
+
+predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq1 : int, int -> bool
+
+axiom bool_eq_def :
+  (forall x:int. forall y:int [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> int
+
+logic user_eq : integer, integer -> bool
+
+logic dummy : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+logic to_rep : integer -> int
+
+logic of_rep : int -> integer
+
+axiom inversion_axiom :
+  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type us_split_fields = { rec__user_eq__nested__r1__a : integer;
+rec__user_eq__nested__r1__b : integer
+}
+
+function us_split_fields_A__projection(a: us_split_fields) : integer =
+  (a).rec__user_eq__nested__r1__a
+
+function us_split_fields_B__projection(a: us_split_fields) : integer =
+  (a).rec__user_eq__nested__r1__b
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+function us_rep___projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+logic bool_eq2 : us_rep, us_rep -> bool
+
+axiom bool_eq_def1 :
+  (forall a:us_rep. forall b:us_rep [bool_eq2(a, b)].
+  ((((to_rep(((a).us_split_fields1).rec__user_eq__nested__r1__a) = to_rep(((b).us_split_fields1).rec__user_eq__nested__r1__a)) and
+  (to_rep(((a).us_split_fields1).rec__user_eq__nested__r1__b) = to_rep(((b).us_split_fields1).rec__user_eq__nested__r1__b))) ->
+  (bool_eq2(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_fields1).rec__user_eq__nested__r1__a) = to_rep(((b).us_split_fields1).rec__user_eq__nested__r1__a)) and
+  (to_rep(((a).us_split_fields1).rec__user_eq__nested__r1__b) = to_rep(((b).us_split_fields1).rec__user_eq__nested__r1__b)))) ->
+  (bool_eq2(a, b) = false))))
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:integer. forall a1:integer. (0 <= object__size({
+  us_split_fields1 = { rec__user_eq__nested__r1__a = a;
+  rec__user_eq__nested__r1__b = a1 } })))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:integer. forall a1:integer. (0 <= object__alignment({
+  us_split_fields1 = { rec__user_eq__nested__r1__a = a;
+  rec__user_eq__nested__r1__b = a1 } })))
+
+logic user_eq__nested__r1__a__first__bit : int
+
+logic user_eq__nested__r1__a__last__bit : int
+
+logic user_eq__nested__r1__a__position : int
+
+axiom user_eq__nested__r1__a__first__bit_axiom :
+  (0 <= user_eq__nested__r1__a__first__bit)
+
+axiom user_eq__nested__r1__a__last__bit_axiom :
+  (user_eq__nested__r1__a__first__bit <  user_eq__nested__r1__a__last__bit)
+
+axiom user_eq__nested__r1__a__position_axiom :
+  (0 <= user_eq__nested__r1__a__position)
+
+logic user_eq__nested__r1__b__first__bit : int
+
+logic user_eq__nested__r1__b__last__bit : int
+
+logic user_eq__nested__r1__b__position : int
+
+axiom user_eq__nested__r1__b__first__bit_axiom :
+  (0 <= user_eq__nested__r1__b__first__bit)
+
+axiom user_eq__nested__r1__b__last__bit_axiom :
+  (user_eq__nested__r1__b__first__bit <  user_eq__nested__r1__b__last__bit)
+
+axiom user_eq__nested__r1__b__position_axiom :
+  (0 <= user_eq__nested__r1__b__position)
+
+logic user_eq1 : us_rep, us_rep -> bool
+
+logic dummy1 : integer
+
+logic dummy2 : integer
+
+type r1__ref = { r1__content : us_rep
+}
+
+function r1__ref___projection(a: r1__ref) : us_rep = (a).r1__content
+
+logic value__size1 : int
+
+logic object__size1 : us_rep -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : us_rep -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 :
+  (forall a:integer. forall a1:integer. (0 <= object__size1({
+  us_split_fields1 = { rec__user_eq__nested__r1__a = a;
+  rec__user_eq__nested__r1__b = a1 } })))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:integer. forall a1:integer. (0 <= object__alignment1({
+  us_split_fields1 = { rec__user_eq__nested__r1__a = a;
+  rec__user_eq__nested__r1__b = a1 } })))
+
+logic user_eq__nested__r1__a__first__bit1 : int
+
+logic user_eq__nested__r1__a__last__bit1 : int
+
+logic user_eq__nested__r1__a__position1 : int
+
+axiom user_eq__nested__r1__a__first__bit_axiom1 :
+  (0 <= user_eq__nested__r1__a__first__bit1)
+
+axiom user_eq__nested__r1__a__last__bit_axiom1 :
+  (user_eq__nested__r1__a__first__bit1 <  user_eq__nested__r1__a__last__bit1)
+
+axiom user_eq__nested__r1__a__position_axiom1 :
+  (0 <= user_eq__nested__r1__a__position1)
+
+logic user_eq__nested__r1__b__first__bit1 : int
+
+logic user_eq__nested__r1__b__last__bit1 : int
+
+logic user_eq__nested__r1__b__position1 : int
+
+axiom user_eq__nested__r1__b__first__bit_axiom1 :
+  (0 <= user_eq__nested__r1__b__first__bit1)
+
+axiom user_eq__nested__r1__b__last__bit_axiom1 :
+  (user_eq__nested__r1__b__first__bit1 <  user_eq__nested__r1__b__last__bit1)
+
+axiom user_eq__nested__r1__b__position_axiom1 :
+  (0 <= user_eq__nested__r1__b__position1)
+
+logic user_eq2 : us_rep, us_rep -> bool
+
+logic dummy3 : integer
+
+logic dummy4 : integer
+
+type r2__ref = { r2__content : us_rep
+}
+
+function r2__ref___projection(a: r2__ref) : us_rep = (a).r2__content
+
+type us_split_fields2 = { rec__user_eq__rr1__f : us_rep
+}
+
+function us_split_fields_F__projection(a: us_split_fields2) : us_rep =
+  (a).rec__user_eq__rr1__f
+
+type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
+}
+
+function us_split_fields__ref___2__projection(a: us_split_fields__ref1) : us_split_fields2 =
+  (a).us_split_fields__content1
+
+type us_rep1 = { us_split_fields3 : us_split_fields2
+}
+
+function us_rep___2__projection(a: us_rep1) : us_split_fields2 =
+  (a).us_split_fields3
+
+logic bool_eq3 : us_rep1, us_rep1 -> bool
+
+axiom bool_eq_def2 :
+  (forall a:us_rep1. forall b:us_rep1 [bool_eq3(a, b)].
+  (((user_eq1(((a).us_split_fields3).rec__user_eq__rr1__f,
+  ((b).us_split_fields3).rec__user_eq__rr1__f) = true) -> (bool_eq3(a,
+  b) = true)) and
+  ((not (user_eq1(((a).us_split_fields3).rec__user_eq__rr1__f,
+  ((b).us_split_fields3).rec__user_eq__rr1__f) = true)) -> (bool_eq3(a,
+  b) = false))))
+
+logic value__size2 : int
+
+logic object__size2 : us_rep1 -> int
+
+logic value__alignment2 : int
+
+logic object__alignment2 : us_rep1 -> int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 :
+  (forall a:integer. forall a1:integer. (0 <= object__size2({
+  us_split_fields3 = { rec__user_eq__rr1__f = { us_split_fields1 = {
+  rec__user_eq__nested__r1__a = a; rec__user_eq__nested__r1__b = a1 } } }
+  })))
+
+axiom value__alignment_axiom2 : (0 <= value__alignment2)
+
+axiom object__alignment_axiom2 :
+  (forall a:integer. forall a1:integer. (0 <= object__alignment2({
+  us_split_fields3 = { rec__user_eq__rr1__f = { us_split_fields1 = {
+  rec__user_eq__nested__r1__a = a; rec__user_eq__nested__r1__b = a1 } } }
+  })))
+
+logic user_eq__rr1__f__first__bit : int
+
+logic user_eq__rr1__f__last__bit : int
+
+logic user_eq__rr1__f__position : int
+
+axiom user_eq__rr1__f__first__bit_axiom : (0 <= user_eq__rr1__f__first__bit)
+
+axiom user_eq__rr1__f__last__bit_axiom :
+  (user_eq__rr1__f__first__bit <  user_eq__rr1__f__last__bit)
+
+axiom user_eq__rr1__f__position_axiom : (0 <= user_eq__rr1__f__position)
+
+logic user_eq3 : us_rep1, us_rep1 -> bool
+
+logic dummy5 : integer
+
+logic dummy6 : integer
+
+type rr1__ref = { rr1__content : us_rep1
+}
+
+function rr1__ref___projection(a: rr1__ref) : us_rep1 = (a).rr1__content
+
+type us_split_fields4 = { rec__user_eq__rr2__f : us_rep
+}
+
+function us_split_fields_F__2__projection(a: us_split_fields4) : us_rep =
+  (a).rec__user_eq__rr2__f
+
+type us_split_fields__ref2 = { us_split_fields__content2 : us_split_fields4
+}
+
+function us_split_fields__ref___3__projection(a: us_split_fields__ref2) : us_split_fields4 =
+  (a).us_split_fields__content2
+
+type us_rep2 = { us_split_fields5 : us_split_fields4
+}
+
+function us_rep___3__projection(a: us_rep2) : us_split_fields4 =
+  (a).us_split_fields5
+
+logic bool_eq4 : us_rep2, us_rep2 -> bool
+
+axiom bool_eq_def3 :
+  (forall a:us_rep2. forall b:us_rep2 [bool_eq4(a, b)].
+  (((user_eq2(((a).us_split_fields5).rec__user_eq__rr2__f,
+  ((b).us_split_fields5).rec__user_eq__rr2__f) = true) -> (bool_eq4(a,
+  b) = true)) and
+  ((not (user_eq2(((a).us_split_fields5).rec__user_eq__rr2__f,
+  ((b).us_split_fields5).rec__user_eq__rr2__f) = true)) -> (bool_eq4(a,
+  b) = false))))
+
+logic value__size3 : int
+
+logic object__size3 : us_rep2 -> int
+
+logic value__alignment3 : int
+
+logic object__alignment3 : us_rep2 -> int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 :
+  (forall a:integer. forall a1:integer. (0 <= object__size3({
+  us_split_fields5 = { rec__user_eq__rr2__f = { us_split_fields1 = {
+  rec__user_eq__nested__r1__a = a; rec__user_eq__nested__r1__b = a1 } } }
+  })))
+
+axiom value__alignment_axiom3 : (0 <= value__alignment3)
+
+axiom object__alignment_axiom3 :
+  (forall a:integer. forall a1:integer. (0 <= object__alignment3({
+  us_split_fields5 = { rec__user_eq__rr2__f = { us_split_fields1 = {
+  rec__user_eq__nested__r1__a = a; rec__user_eq__nested__r1__b = a1 } } }
+  })))
+
+logic user_eq__rr2__f__first__bit : int
+
+logic user_eq__rr2__f__last__bit : int
+
+logic user_eq__rr2__f__position : int
+
+axiom user_eq__rr2__f__first__bit_axiom : (0 <= user_eq__rr2__f__first__bit)
+
+axiom user_eq__rr2__f__last__bit_axiom :
+  (user_eq__rr2__f__first__bit <  user_eq__rr2__f__last__bit)
+
+axiom user_eq__rr2__f__position_axiom : (0 <= user_eq__rr2__f__position)
+
+logic user_eq4 : us_rep2, us_rep2 -> bool
+
+logic dummy7 : integer
+
+logic dummy8 : integer
+
+type rr2__ref = { rr2__content : us_rep2
+}
+
+function rr2__ref___projection(a: rr2__ref) : us_rep2 = (a).rr2__content
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic oeq : us_rep, us_rep -> bool
+
+logic oeq__function_guard : bool, us_rep, us_rep -> prop
+
+axiom user_eq__def_axiom :
+  (forall a:integer. forall a1:integer. forall b:integer. forall b1:integer
+  [user_eq1({ us_split_fields1 = { rec__user_eq__nested__r1__a = a;
+  rec__user_eq__nested__r1__b = a1 } }, { us_split_fields1 = {
+  rec__user_eq__nested__r1__a = b; rec__user_eq__nested__r1__b = b1 } })].
+  (user_eq1({ us_split_fields1 = { rec__user_eq__nested__r1__a = a;
+  rec__user_eq__nested__r1__b = a1 } }, { us_split_fields1 = {
+  rec__user_eq__nested__r1__a = b; rec__user_eq__nested__r1__b = b1 }
+  }) = oeq({ us_split_fields1 = { rec__user_eq__nested__r1__a = a;
+  rec__user_eq__nested__r1__b = a1 } }, { us_split_fields1 = {
+  rec__user_eq__nested__r1__a = b; rec__user_eq__nested__r1__b = b1 } })))
+
+axiom oeq__post_axiom : true
+
+axiom oeq__def_axiom :
+  (forall x:integer. forall x1:integer. forall y:integer. forall y1:integer
+  [oeq({ us_split_fields1 = { rec__user_eq__nested__r1__a = x;
+  rec__user_eq__nested__r1__b = x1 } }, { us_split_fields1 = {
+  rec__user_eq__nested__r1__a = y; rec__user_eq__nested__r1__b = y1 } })].
+  ((oeq({ us_split_fields1 = { rec__user_eq__nested__r1__a = x;
+  rec__user_eq__nested__r1__b = x1 } }, { us_split_fields1 = {
+  rec__user_eq__nested__r1__a = y; rec__user_eq__nested__r1__b = y1 }
+  }) = true) <-> (to_rep(x) = to_rep(y))))
+
+logic oeq1 : us_rep, us_rep -> bool
+
+logic oeq__function_guard1 : bool, us_rep, us_rep -> prop
+
+axiom user_eq__def_axiom1 :
+  (forall a:integer. forall a1:integer. forall b:integer. forall b1:integer
+  [user_eq2({ us_split_fields1 = { rec__user_eq__nested__r1__a = a;
+  rec__user_eq__nested__r1__b = a1 } }, { us_split_fields1 = {
+  rec__user_eq__nested__r1__a = b; rec__user_eq__nested__r1__b = b1 } })].
+  (user_eq2({ us_split_fields1 = { rec__user_eq__nested__r1__a = a;
+  rec__user_eq__nested__r1__b = a1 } }, { us_split_fields1 = {
+  rec__user_eq__nested__r1__a = b; rec__user_eq__nested__r1__b = b1 }
+  }) = oeq1({ us_split_fields1 = { rec__user_eq__nested__r1__a = a;
+  rec__user_eq__nested__r1__b = a1 } }, { us_split_fields1 = {
+  rec__user_eq__nested__r1__a = b; rec__user_eq__nested__r1__b = b1 } })))
+
+axiom oeq__post_axiom1 : true
+
+axiom oeq__def_axiom1 :
+  (forall x:integer. forall x1:integer. forall y:integer. forall y1:integer
+  [oeq1({ us_split_fields1 = { rec__user_eq__nested__r1__a = x;
+  rec__user_eq__nested__r1__b = x1 } }, { us_split_fields1 = {
+  rec__user_eq__nested__r1__a = y; rec__user_eq__nested__r1__b = y1 } })].
+  ((oeq1({ us_split_fields1 = { rec__user_eq__nested__r1__a = x;
+  rec__user_eq__nested__r1__b = x1 } }, { us_split_fields1 = {
+  rec__user_eq__nested__r1__a = y; rec__user_eq__nested__r1__b = y1 }
+  }) = true) <-> (to_rep(x1) = to_rep(y1))))
+
+ (* File "user_eq.adb", line 12, characters 0-0 *)
+goal WP_parameter_def :
+  (forall x__split_fields:integer. forall x__split_fields1:integer.
+  forall y__split_fields:integer. forall y__split_fields1:integer.
+  forall z__split_fields:integer. forall z__split_fields1:integer.
+  forall w__split_fields:integer. forall w__split_fields1:integer.
+  forall o:integer. forall o1:integer. forall o2:integer. forall o3:integer.
+  forall o4:integer. forall o5:integer. forall o6:integer. forall o7:integer.
+  forall user_eq__x__assume:integer. forall user_eq__x__assume1:integer.
+  forall o8:integer. forall o9:integer. forall o10:integer.
+  forall o11:integer. forall o12:integer. forall o13:integer.
+  forall o14:integer. forall o15:integer. forall user_eq__y__assume:integer.
+  forall user_eq__y__assume1:integer. forall o16:integer. forall o17:integer.
+  forall o18:integer. forall o19:integer. forall o20:integer.
+  forall o21:integer. forall o22:integer. forall o23:integer.
+  forall user_eq__z__assume:integer. forall user_eq__z__assume1:integer.
+  forall o24:integer. forall o25:integer. forall o26:us_split_fields.
+  forall o27:us_rep. forall o28:us_split_fields4.
+  forall user_eq__w__assume:us_rep2. forall result:us_split_fields__ref1.
+  forall x__split_fields2:us_split_fields2.
+  forall result1:us_split_fields__ref1.
+  forall y__split_fields2:us_split_fields2.
+  forall result2:us_split_fields__ref2.
+  forall z__split_fields2:us_split_fields4.
+  forall result3:us_split_fields__ref2.
+  forall w__split_fields2:us_split_fields4. (((((((to_rep(o) = 1) and
+  ((to_rep(o1) = 1) and ((o1 = o2) and (o = o3)))) and ((o4 = o2) and
+  (o5 = o3))) and ((o6 = o4) and (o7 = o5))) and
+  ((o6 = user_eq__x__assume) and (o7 = user_eq__x__assume1))) and
+  ((result = { us_split_fields__content1 = { rec__user_eq__rr1__f = {
+  us_split_fields1 = { rec__user_eq__nested__r1__a = x__split_fields;
+  rec__user_eq__nested__r1__b = x__split_fields1 } } } }) and
+  (x__split_fields2 = { rec__user_eq__rr1__f = { us_split_fields1 = {
+  rec__user_eq__nested__r1__a = user_eq__x__assume;
+  rec__user_eq__nested__r1__b = user_eq__x__assume1 } } }))) ->
+  (((((((to_rep(o8) = 2) and ((to_rep(o9) = 1) and ((o9 = o10) and
+  (o8 = o11)))) and ((o12 = o10) and (o13 = o11))) and ((o14 = o12) and
+  (o15 = o13))) and ((user_eq__y__assume = o14) and
+  (user_eq__y__assume1 = o15))) and ((result1 = { us_split_fields__content1 =
+  { rec__user_eq__rr1__f = { us_split_fields1 = {
+  rec__user_eq__nested__r1__a = y__split_fields;
+  rec__user_eq__nested__r1__b = y__split_fields1 } } } }) and
+  (y__split_fields2 = { rec__user_eq__rr1__f = { us_split_fields1 = {
+  rec__user_eq__nested__r1__a = user_eq__y__assume;
+  rec__user_eq__nested__r1__b = user_eq__y__assume1 } } }))) ->
+  (((((((to_rep(o16) = 1) and ((to_rep(o17) = 1) and ((o17 = o18) and
+  (o16 = o19)))) and ((o20 = o18) and (o21 = o19))) and ((o22 = o20) and
+  (o23 = o21))) and ((user_eq__z__assume = o22) and
+  (user_eq__z__assume1 = o23))) and ((result2 = { us_split_fields__content2 =
+  { rec__user_eq__rr2__f = { us_split_fields1 = {
+  rec__user_eq__nested__r1__a = z__split_fields;
+  rec__user_eq__nested__r1__b = z__split_fields1 } } } }) and
+  (z__split_fields2 = { rec__user_eq__rr2__f = { us_split_fields1 = {
+  rec__user_eq__nested__r1__a = user_eq__z__assume;
+  rec__user_eq__nested__r1__b = user_eq__z__assume1 } } }))) ->
+  (((((((to_rep(o24) = 2) and ((to_rep(o25) = 1) and (o26 = {
+  rec__user_eq__nested__r1__a = o25; rec__user_eq__nested__r1__b = o24
+  }))) and (o27 = { us_split_fields1 = o26 })) and (o28 = {
+  rec__user_eq__rr2__f = o27 })) and (user_eq__w__assume = {
+  us_split_fields5 = o28 })) and ((result3 = { us_split_fields__content2 = {
+  rec__user_eq__rr2__f = { us_split_fields1 = { rec__user_eq__nested__r1__a =
+  w__split_fields; rec__user_eq__nested__r1__b = w__split_fields1 } } }
+  }) and (w__split_fields2 = (user_eq__w__assume).us_split_fields5))) ->
+  ((bool_eq3({ us_split_fields3 = x__split_fields2 }, { us_split_fields3 =
+  y__split_fields2 }) = true) -> (bool_eq4({ us_split_fields5 =
+  z__split_fields2 }, { us_split_fields5 = w__split_fields2 }) = true)))))))

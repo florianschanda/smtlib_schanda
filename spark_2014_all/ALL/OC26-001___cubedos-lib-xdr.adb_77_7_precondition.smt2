@@ -656,8 +656,8 @@
 
 (declare-datatypes ((source__ref 0))
 (((mk_source__ref (source__content source)))))
-(define-fun source__ref_3__projection ((a source__ref)) source (source__content
-                                                               a))
+(define-fun source__ref___3__projection ((a source__ref)) source (source__content
+                                                                 a))
 
 (define-fun dynamic_invariant2 ((temp___expr_253 Int)
   (temp___is_init_250 Bool) (temp___skip_constant_251 Bool)
@@ -682,8 +682,8 @@
 
 (declare-datatypes ((target__ref 0))
 (((mk_target__ref (target__content target)))))
-(define-fun target__ref_3__projection ((a target__ref)) target (target__content
-                                                               a))
+(define-fun target__ref___3__projection ((a target__ref)) target (target__content
+                                                                 a))
 
 (define-fun dynamic_invariant3 ((temp___expr_259 (_ BitVec 64))
   (temp___is_init_256 Bool) (temp___skip_constant_257 Bool)

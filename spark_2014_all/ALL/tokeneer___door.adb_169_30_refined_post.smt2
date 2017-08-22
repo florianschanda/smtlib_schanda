@@ -854,7 +854,7 @@
 (declare-const dummy12 t1)
 
 (declare-datatypes ((t__ref 0)) (((mk_t__ref (t__content t1)))))
-(define-fun t__ref_2__projection ((a t__ref)) t1 (t__content a))
+(define-fun t__ref___2__projection ((a t__ref)) t1 (t__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_833 Int)
   (temp___is_init_830 Bool) (temp___skip_constant_831 Bool)
@@ -897,7 +897,7 @@
 (declare-const dummy13 t2)
 
 (declare-datatypes ((t__ref1 0)) (((mk_t__ref1 (t__content1 t2)))))
-(define-fun t__ref_3__projection ((a t__ref1)) t2 (t__content1 a))
+(define-fun t__ref___3__projection ((a t__ref1)) t2 (t__content1 a))
 
 (define-fun dynamic_invariant3 ((temp___expr_839 Int)
   (temp___is_init_836 Bool) (temp___skip_constant_837 Bool)

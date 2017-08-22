@@ -1,0 +1,1480 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic comp_div: int, int -> int
+axiom comp_div_def: forall x, y:int. x >= 0 and y > 0 -> comp_div(x,y) = x / y
+logic comp_mod: int, int -> int
+axiom comp_mod_def: forall x, y:int. x >= 0 and y > 0 -> comp_mod(x,y) = x % y
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+axiom Div_mod :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * comp_div(x,y)) + comp_mod(x,y)))))
+
+axiom Div_bound :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= comp_div(x,y)) and (comp_div(x,y) <= x))))
+
+axiom Mod_bound :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (((-abs_int(y)) <  comp_mod(x,y)) and (comp_mod(x,y) <  abs_int(y)))))
+
+axiom Div_sign_pos :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  (0 <= comp_div(x,y))))
+
+axiom Div_sign_neg :
+  (forall x:int. forall y:int. (((x <= 0) and (0 <  y)) ->
+  (comp_div(x,y) <= 0)))
+
+axiom Mod_sign_pos :
+  (forall x:int. forall y:int. (((0 <= x) and (not (y = 0))) ->
+  (0 <= comp_mod(x,y))))
+
+axiom Mod_sign_neg :
+  (forall x:int. forall y:int. (((x <= 0) and (not (y = 0))) ->
+  (comp_mod(x,y) <= 0)))
+
+axiom Rounds_toward_zero :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (abs_int((comp_div(x,y) * y)) <= abs_int(x))))
+
+axiom Div_1 : (forall x:int. (comp_div(x,1) = x))
+
+axiom Mod_1 : (forall x:int. (comp_mod(x,1) = 0))
+
+axiom Div_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) ->
+  (comp_div(x,y) = 0)))
+
+axiom Mod_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) ->
+  (comp_mod(x,y) = x)))
+
+axiom Div_mult :
+  (forall x:int. forall y:int. forall z:int [comp_div(((x * y) + z),x)].
+  (((0 <  x) and ((0 <= y) and (0 <= z))) ->
+  (comp_div(((x * y) + z),x) = (y + comp_div(z,x)))))
+
+axiom Mod_mult :
+  (forall x:int. forall y:int. forall z:int [comp_mod(((x * y) + z),x)].
+  (((0 <  x) and ((0 <= y) and (0 <= z))) ->
+  (comp_mod(((x * y) + z),x) = comp_mod(z,x))))
+
+axiom Div_mod1 :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * (x / y)) + (x % y)))))
+
+axiom Mod_bound1 :
+  (forall x:int. forall y:int. ((not (y = 0)) -> ((0 <= (x % y)) and
+  ((x % y) <  abs_int(y)))))
+
+axiom Div_unique :
+  (forall x:int. forall y:int. forall q:int. ((0 <  y) ->
+  ((((q * y) <= x) and (x <  ((q * y) + y))) -> ((x / y) = q))))
+
+axiom Div_bound1 :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= (x / y)) and ((x / y) <= x))))
+
+axiom Mod_11 : (forall x:int. ((x % 1) = 0))
+
+axiom Div_11 : (forall x:int. ((x / 1) = x))
+
+axiom Div_inf1 :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> ((x / y) = 0)))
+
+axiom Div_inf_neg :
+  (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
+  (((-x) / y) = (-1))))
+
+axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
+
+axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
+
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+
+axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
+
+axiom Mod_minus1_left :
+  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+
+axiom Div_mult1 :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
+  ((0 <  x) -> ((((x * y) + z) / x) = (y + (z / x)))))
+
+axiom Mod_mult1 :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) % x)].
+  ((0 <  x) -> ((((x * y) + z) % x) = (z % x))))
+
+logic mod : int, int -> int
+
+axiom mod_def :
+  (forall x:int. forall y:int [mod(x, y)]. (((0 <  y) -> (mod(x,
+  y) = (x % y))) and ((not (0 <  y)) -> (mod(x, y) = ((x % y) + y)))))
+
+type integer
+
+predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq1 : int, int -> bool
+
+axiom bool_eq_def :
+  (forall x:int. forall y:int [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> int
+
+logic user_eq : integer, integer -> bool
+
+logic dummy : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+type positive
+
+predicate in_range1(x: int) = ((1 <= x) and (x <= 2147483647))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq1 : positive, positive -> bool
+
+logic dummy1 : positive
+
+type positive__ref = { positive__content : positive
+}
+
+function positive__ref___projection(a: positive__ref) : positive =
+  (a).positive__content
+
+type character
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 255))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq2 : character, character -> bool
+
+logic dummy2 : character
+
+type character__ref = { character__content : character
+}
+
+function character__ref___projection(a: character__ref) : character =
+  (a).character__content
+
+logic to_rep : character -> int
+
+logic of_rep : int -> character
+
+axiom inversion_axiom :
+  (forall x:character [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:character [to_rep(x)]. in_range2(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range2(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type map__ref = { map__content : (int,character) farray
+}
+
+logic slide : (int,character) farray, int, int -> (int,character) farray
+
+axiom slide_eq :
+  (forall a:(int,character) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,character) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat : (int,character) farray, int, int, (int,character) farray, int,
+  int -> (int,character) farray
+
+axiom concat_def :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton : character, int -> (int,character) farray
+
+axiom singleton_def :
+  (forall v:character.
+  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
+
+logic bool_eq4 : (int,character) farray, int, int, (int,character) farray,
+  int, int -> bool
+
+axiom bool_eq_def3 :
+  (forall a:(int,character) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,character) farray. forall b__first:int. forall b__last:int
+  [bool_eq4(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
+  (temp___idx_78 <= a__last)) and
+  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
+  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
+  (temp___idx_78 <= a__last)) ->
+  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq4(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
+  (temp___idx_78 <= a__last)) ->
+  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
+
+logic compare : (int,character) farray, int, int, (int,character) farray,
+  int, int -> int
+
+axiom compare_def_eq :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+
+logic to_rep1 : integer -> int
+
+logic of_rep1 : int -> integer
+
+axiom inversion_axiom1 :
+  (forall x:integer [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:integer [to_rep1(x)]. in_range(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type t
+
+logic first : t -> integer
+
+logic last : t -> integer
+
+logic mk : int, int -> t
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range(f) -> (in_range(l) ->
+  ((to_rep1(first(mk(f, l))) = f) and (to_rep1(last(mk(f, l))) = l)))))
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range1(low) and in_range1(high)))))
+
+type us_t = { elts : (int,character) farray; rt : t
+}
+
+function to_array(a: us_t) : (int,character) farray = (a).elts
+
+function of_array(a: (int,character) farray, f: int, l: int) : us_t = {
+  elts = a; rt = mk(f, l) }
+
+function first1(a: us_t) : int = to_rep1(first((a).rt))
+
+function last1(a: us_t) : int = to_rep1(last((a).rt))
+
+logic length : us_t -> int
+
+axiom length_def :
+  (forall a:us_t [length(a)]. (((first1(a) <= last1(a)) ->
+  (length(a) = ((last1(a) - first1(a)) + 1))) and
+  ((not (first1(a) <= last1(a))) -> (length(a) = 0))))
+
+logic value__size : int
+
+logic object__size : (int,character) farray -> int
+
+logic value__component__size : int
+
+logic object__component__size : (int,character) farray -> int
+
+logic value__alignment : int
+
+logic object__alignment : (int,character) farray -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:(int,character) farray. (0 <= object__size(a)))
+
+axiom value__component__size_axiom : (0 <= value__component__size)
+
+axiom object__component__size_axiom :
+  (forall a:(int,character) farray. (0 <= object__component__size(a)))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:(int,character) farray. (0 <= object__alignment(a)))
+
+function bool_eq5(x: us_t, y: us_t) : bool = bool_eq4((x).elts,
+  to_rep1(first((x).rt)), to_rep1(last((x).rt)), (y).elts,
+  to_rep1(first((y).rt)), to_rep1(last((y).rt)))
+
+logic user_eq3 : us_t, us_t -> bool
+
+logic dummy3 : (int,character) farray
+
+logic dummy4 : t
+
+logic to_string : us_image -> us_t
+
+logic from_string : us_t -> us_image
+
+type string__ref = { string__content : us_t
+}
+
+function string__ref___projection(a: string__ref) : us_t =
+  (a).string__content
+
+type descriptioni
+
+predicate in_range3(x: int) = ((1 <= x) and (x <= 150))
+
+logic bool_eq6 : int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall x:int. forall y:int [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq4 : descriptioni, descriptioni -> bool
+
+logic dummy5 : descriptioni
+
+type descriptioni__ref = { descriptioni__content : descriptioni
+}
+
+function descriptioni__ref___projection(a: descriptioni__ref) : descriptioni =
+  (a).descriptioni__content
+
+logic nodescription : (int,character) farray
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic audittypes__nodescription__aggregate_def : int -> (int,character) farray
+
+axiom def_axiom :
+  (forall temp___133:int.
+  (forall temp___134:int.
+  ((audittypes__nodescription__aggregate_def(temp___133)[temp___134]) = of_rep(temp___133))))
+
+type filesizet
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 4194304))
+
+logic bool_eq7 : int, int -> bool
+
+axiom bool_eq_def5 :
+  (forall x:int. forall y:int [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq5 : filesizet, filesizet -> bool
+
+logic dummy6 : filesizet
+
+type filesizet__ref = { filesizet__content : filesizet
+}
+
+function filesizet__ref___projection(a: filesizet__ref) : filesizet =
+  (a).filesizet__content
+
+type durationt
+
+predicate in_range5(x: int) = ((0 <= x) and (x <= 864000))
+
+logic bool_eq8 : int, int -> bool
+
+axiom bool_eq_def6 :
+  (forall x:int. forall y:int [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> int
+
+logic user_eq6 : durationt, durationt -> bool
+
+logic dummy7 : durationt
+
+type durationt__ref = { durationt__content : durationt
+}
+
+function durationt__ref___projection(a: durationt__ref) : durationt =
+  (a).durationt__content
+
+type durationtexti
+
+predicate in_range6(x: int) = ((1 <= x) and (x <= 10))
+
+logic bool_eq9 : int, int -> bool
+
+axiom bool_eq_def7 :
+  (forall x:int. forall y:int [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE6 : us_image -> int
+
+logic user_eq7 : durationtexti, durationtexti -> bool
+
+logic dummy8 : durationtexti
+
+type durationtexti__ref = { durationtexti__content : durationtexti
+}
+
+function durationtexti__ref___projection(a: durationtexti__ref) : durationtexti =
+  (a).durationtexti__content
+
+logic printduration : int -> (int,character) farray
+
+logic printduration__function_guard : (int,character) farray, int -> prop
+
+axiom printduration__post_axiom : true
+
+type fart
+
+predicate in_range7(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq10 : int, int -> bool
+
+axiom bool_eq_def8 :
+  (forall x:int. forall y:int [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE7 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check7 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE7 : us_image -> int
+
+logic user_eq8 : fart, fart -> bool
+
+logic dummy9 : fart
+
+type fart__ref = { fart__content : fart
+}
+
+function fart__ref___projection(a: fart__ref) : fart = (a).fart__content
+
+type classt
+
+predicate in_range8(x: int) = ((0 <= x) and (x <= 5))
+
+logic bool_eq11 : int, int -> bool
+
+axiom bool_eq_def9 :
+  (forall x:int. forall y:int [bool_eq11(x, y)]. (((x = y) -> (bool_eq11(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq11(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE8 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check8 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE8 : us_image -> int
+
+logic user_eq9 : classt, classt -> bool
+
+logic dummy10 : classt
+
+type classt__ref = { classt__content : classt
+}
+
+function classt__ref___projection(a: classt__ref) : classt =
+  (a).classt__content
+
+type durationt1
+
+predicate in_range9(x: int) = ((0 <= x) and (x <= 2000))
+
+logic bool_eq12 : int, int -> bool
+
+axiom bool_eq_def10 :
+  (forall x:int. forall y:int [bool_eq12(x, y)]. (((x = y) -> (bool_eq12(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq12(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE9 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check9 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE9 : us_image -> int
+
+logic user_eq10 : durationt1, durationt1 -> bool
+
+logic dummy11 : durationt1
+
+type durationt__ref1 = { durationt__content1 : durationt1
+}
+
+function durationt__ref___2__projection(a: durationt__ref1) : durationt1 =
+  (a).durationt__content1
+
+type accesspolicyt
+
+predicate in_range10(x: int) = ((0 <= x) and (x <= 1))
+
+logic bool_eq13 : int, int -> bool
+
+axiom bool_eq_def11 :
+  (forall x:int. forall y:int [bool_eq13(x, y)]. (((x = y) -> (bool_eq13(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq13(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE10 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check10 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE10 : us_image -> int
+
+logic user_eq11 : accesspolicyt, accesspolicyt -> bool
+
+logic dummy12 : accesspolicyt
+
+type accesspolicyt__ref = { accesspolicyt__content : accesspolicyt
+}
+
+function accesspolicyt__ref___projection(a: accesspolicyt__ref) : accesspolicyt =
+  (a).accesspolicyt__content
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
+logic attr__ATTRIBUTE_ADDRESS6 : int
+
+logic attr__ATTRIBUTE_ADDRESS7 : int
+
+logic attr__ATTRIBUTE_ADDRESS8 : int
+
+logic attr__ATTRIBUTE_ADDRESS9 : int
+
+logic attr__ATTRIBUTE_ADDRESS10 : int
+
+logic attr__ATTRIBUTE_ADDRESS11 : int
+
+logic attr__ATTRIBUTE_ADDRESS12 : int
+
+logic attr__ATTRIBUTE_ADDRESS13 : int
+
+logic attr__ATTRIBUTE_ADDRESS14 : int
+
+type t6b
+
+predicate in_range11(x: int) = ((1 <= x) and (x <= 5))
+
+logic bool_eq14 : int, int -> bool
+
+axiom bool_eq_def12 :
+  (forall x:int. forall y:int [bool_eq14(x, y)]. (((x = y) -> (bool_eq14(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq14(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE11 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check11 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE11 : us_image -> int
+
+logic user_eq12 : t6b, t6b -> bool
+
+logic dummy13 : t6b
+
+type t6b__ref = { t6b__content : t6b
+}
+
+function t6b__ref___projection(a: t6b__ref) : t6b = (a).t6b__content
+
+type t9b
+
+predicate in_range12(x: int) = ((1 <= x) and (x <= 5))
+
+logic bool_eq15 : int, int -> bool
+
+axiom bool_eq_def13 :
+  (forall x:int. forall y:int [bool_eq15(x, y)]. (((x = y) -> (bool_eq15(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq15(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE12 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check12 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE12 : us_image -> int
+
+logic user_eq13 : t9b, t9b -> bool
+
+logic dummy14 : t9b
+
+type t9b__ref = { t9b__content : t9b
+}
+
+function t9b__ref___projection(a: t9b__ref) : t9b = (a).t9b__content
+
+type t12b
+
+predicate in_range13(x: int) = ((1 <= x) and (x <= 5))
+
+logic bool_eq16 : int, int -> bool
+
+axiom bool_eq_def14 :
+  (forall x:int. forall y:int [bool_eq16(x, y)]. (((x = y) -> (bool_eq16(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq16(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE13 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check13 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE13 : us_image -> int
+
+logic user_eq14 : t12b, t12b -> bool
+
+logic dummy15 : t12b
+
+type t12b__ref = { t12b__content : t12b
+}
+
+function t12b__ref___projection(a: t12b__ref) : t12b = (a).t12b__content
+
+logic str__first : integer
+
+logic str__last : integer
+
+logic attr__ATTRIBUTE_ADDRESS15 : int
+
+predicate dynamic_property1(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+logic bool_eq17 : int, int -> bool
+
+axiom bool_eq_def15 :
+  (forall x:int. forall y:int [bool_eq17(x, y)]. (((x = y) -> (bool_eq17(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq17(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE14 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check14 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE14 : us_image -> int
+
+logic user_eq15 : integer, integer -> bool
+
+logic dummy16 : integer
+
+type t22b__ref = { t22b__content : integer
+}
+
+function t22b__ref___projection(a: t22b__ref) : integer = (a).t22b__content
+
+type t1
+
+logic first2 : t1 -> integer
+
+logic last2 : t1 -> integer
+
+logic mk1 : int, int -> t1
+
+axiom mk_def1 :
+  (forall f:int. forall l:int [mk1(f, l)]. (in_range(f) -> (in_range(l) ->
+  ((to_rep1(first2(mk1(f, l))) = f) and (to_rep1(last2(mk1(f, l))) = l)))))
+
+predicate dynamic_property2(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (dynamic_property1(range_first, range_last, low) and
+  dynamic_property1(range_first, range_last, high)))))
+
+type us_t1 = { elts1 : (int,character) farray; rt1 : t1
+}
+
+function to_array1(a: us_t1) : (int,character) farray = (a).elts1
+
+function of_array1(a: (int,character) farray, f: int, l: int) : us_t1 = {
+  elts1 = a; rt1 = mk1(f, l) }
+
+function first3(a: us_t1) : int = to_rep1(first2((a).rt1))
+
+function last3(a: us_t1) : int = to_rep1(last2((a).rt1))
+
+logic length1 : us_t1 -> int
+
+axiom length_def1 :
+  (forall a:us_t1 [length1(a)]. (((first3(a) <= last3(a)) ->
+  (length1(a) = ((last3(a) - first3(a)) + 1))) and
+  ((not (first3(a) <= last3(a))) -> (length1(a) = 0))))
+
+logic value__size1 : int
+
+logic object__size1 : (int,character) farray -> int
+
+logic value__component__size1 : int
+
+logic object__component__size1 : (int,character) farray -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : (int,character) farray -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 :
+  (forall a:(int,character) farray. (0 <= object__size1(a)))
+
+axiom value__component__size_axiom1 : (0 <= value__component__size1)
+
+axiom object__component__size_axiom1 :
+  (forall a:(int,character) farray. (0 <= object__component__size1(a)))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:(int,character) farray. (0 <= object__alignment1(a)))
+
+function bool_eq18(x: us_t1, y: us_t1) : bool = bool_eq4((x).elts1,
+  to_rep1(first2((x).rt1)), to_rep1(last2((x).rt1)), (y).elts1,
+  to_rep1(first2((y).rt1)), to_rep1(last2((y).rt1)))
+
+logic user_eq16 : us_t1, us_t1 -> bool
+
+logic dummy17 : (int,character) farray
+
+logic dummy18 : t1
+
+type t23b__ref = { t23b__content : us_t1
+}
+
+function t23b__ref___projection(a: t23b__ref) : us_t1 = (a).t23b__content
+
+logic temp___String_Literal_928 : unit -> (int,character) farray
+
+axiom temp___String_Literal_928__def_axiom :
+  ((to_rep((temp___String_Literal_928(void)[1])) = 59) and
+  (to_rep((temp___String_Literal_928(void)[2])) = 32))
+
+logic temp___String_Literal_933 : unit -> (int,character) farray
+
+axiom temp___String_Literal_933__def_axiom :
+  ((to_rep((temp___String_Literal_933(void)[1])) = 59) and
+  (to_rep((temp___String_Literal_933(void)[2])) = 32))
+
+logic temp___String_Literal_938 : unit -> (int,character) farray
+
+axiom temp___String_Literal_938__def_axiom :
+  ((to_rep((temp___String_Literal_938(void)[1])) = 59) and
+  (to_rep((temp___String_Literal_938(void)[2])) = 32))
+
+logic temp___String_Literal_943 : unit -> (int,character) farray
+
+axiom temp___String_Literal_943__def_axiom :
+  ((to_rep((temp___String_Literal_943(void)[1])) = 59) and
+  (to_rep((temp___String_Literal_943(void)[2])) = 32))
+
+logic temp___String_Literal_948 : unit -> (int,character) farray
+
+axiom temp___String_Literal_948__def_axiom :
+  ((to_rep((temp___String_Literal_948(void)[1])) = 59) and
+  (to_rep((temp___String_Literal_948(void)[2])) = 32))
+
+logic temp___String_Literal_956 : unit -> (int,character) farray
+
+axiom temp___String_Literal_956__def_axiom :
+  ((to_rep((temp___String_Literal_956(void)[1])) = 59) and
+  (to_rep((temp___String_Literal_956(void)[2])) = 32))
+
+logic temp___String_Literal_964 : unit -> (int,character) farray
+
+axiom temp___String_Literal_964__def_axiom :
+  ((to_rep((temp___String_Literal_964(void)[1])) = 59) and
+  (to_rep((temp___String_Literal_964(void)[2])) = 32))
+
+logic temp___String_Literal_972 : unit -> (int,character) farray
+
+axiom temp___String_Literal_972__def_axiom :
+  ((to_rep((temp___String_Literal_972(void)[1])) = 59) and
+  (to_rep((temp___String_Literal_972(void)[2])) = 32))
+
+logic temp___String_Literal_977 : unit -> (int,character) farray
+
+axiom temp___String_Literal_977__def_axiom :
+  ((to_rep((temp___String_Literal_977(void)[1])) = 59) and
+  (to_rep((temp___String_Literal_977(void)[2])) = 32))
+
+logic temp___String_Literal_982 : unit -> (int,character) farray
+
+axiom temp___String_Literal_982__def_axiom :
+  ((to_rep((temp___String_Literal_982(void)[1])) = 59) and
+  (to_rep((temp___String_Literal_982(void)[2])) = 32))
+
+logic temp___String_Literal_987 : unit -> (int,character) farray
+
+axiom temp___String_Literal_987__def_axiom :
+  ((to_rep((temp___String_Literal_987(void)[1])) = 59) and
+  (to_rep((temp___String_Literal_987(void)[2])) = 32))
+
+logic temp___String_Literal_992 : unit -> (int,character) farray
+
+axiom temp___String_Literal_992__def_axiom :
+  ((to_rep((temp___String_Literal_992(void)[1])) = 59) and
+  (to_rep((temp___String_Literal_992(void)[2])) = 32))
+
+axiom nodescription__def_axiom :
+  (nodescription = audittypes__nodescription__aggregate_def(32))
+
+ (* File "audittypes.ads", line 92, characters 0-0 *)
+goal WP_parameter_def :
+  (forall thelatchunlockduration:int. forall thealarmsilentduration:int.
+  forall thefingerwaitduration:int. forall thetokenremovalduration:int.
+  forall theenclaveclearance:int. forall theworkinghoursstart:int.
+  forall theworkinghoursend:int. forall themaxauthduration:int.
+  forall theaccesspolicy:int. forall theminentryclass:int.
+  forall theminpreservedlogsize:int. forall thealarmthresholdsize:int.
+  forall thesystemmaxfar:int. forall localtext:(int,character) farray.
+  forall str:(int,character) farray.
+  forall temp___969:(int,character) farray.
+  forall temp___971:(int,character) farray.
+  forall temp___961:(int,character) farray.
+  forall temp___963:(int,character) farray.
+  forall temp___953:(int,character) farray.
+  forall temp___955:(int,character) farray. forall o:int. forall o1:int.
+  forall o2:int. forall o3:int. forall o4:int. forall o5:int.
+  forall temp___931:(int,character) farray. forall temp___9311:t.
+  forall o6:int. forall o7:int. forall o8:int. forall o9:int. forall o10:int.
+  forall o11:int. forall temp___934:(int,character) farray.
+  forall temp___9341:t. forall o12:int. forall o13:int. forall o14:int.
+  forall o15:int. forall o16:int. forall o17:int.
+  forall temp___936:(int,character) farray. forall temp___9361:t.
+  forall o18:int. forall o19:int. forall o20:int. forall o21:int.
+  forall o22:int. forall o23:int. forall temp___939:(int,character) farray.
+  forall temp___9391:t. forall o24:int. forall o25:int. forall o26:int.
+  forall o27:int. forall o28:int. forall o29:int.
+  forall temp___941:(int,character) farray. forall temp___9411:t.
+  forall o30:int. forall o31:int. forall o32:int. forall o33:int.
+  forall o34:int. forall o35:int. forall temp___944:(int,character) farray.
+  forall temp___9441:t. forall o36:int. forall o37:int. forall o38:int.
+  forall o39:int. forall o40:int. forall o41:int.
+  forall temp___946:(int,character) farray. forall temp___9461:t.
+  forall o42:int. forall o43:int. forall o44:int. forall o45:int.
+  forall o46:int. forall o47:int. forall temp___949:(int,character) farray.
+  forall temp___9491:t. forall o48:int. forall o49:int. forall o50:int.
+  forall o51:int. forall o52:int. forall o53:int.
+  forall temp___954:(int,character) farray. forall temp___9541:t.
+  forall o54:int. forall o55:int. forall o56:int. forall o57:int.
+  forall o58:int. forall o59:int. forall temp___957:(int,character) farray.
+  forall temp___9571:t. forall o60:int. forall o61:int. forall o62:int.
+  forall o63:int. forall o64:int. forall o65:int.
+  forall temp___962:(int,character) farray. forall temp___9621:t.
+  forall o66:int. forall o67:int. forall o68:int. forall o69:int.
+  forall o70:int. forall o71:int. forall temp___965:(int,character) farray.
+  forall temp___9651:t. forall o72:int. forall o73:int. forall o74:int.
+  forall o75:int. forall o76:int. forall o77:int.
+  forall temp___970:(int,character) farray. forall temp___9701:t.
+  forall o78:int. forall o79:int. forall o80:int. forall o81:int.
+  forall o82:int. forall o83:int. forall temp___973:(int,character) farray.
+  forall temp___9731:t. forall o84:int. forall o85:int. forall o86:int.
+  forall o87:int. forall o88:int. forall o89:int.
+  forall temp___975:(int,character) farray. forall temp___9751:t.
+  forall o90:int. forall o91:int. forall o92:int. forall o93:int.
+  forall o94:int. forall o95:int. forall temp___978:(int,character) farray.
+  forall temp___9781:t. forall o96:int. forall o97:int. forall o98:int.
+  forall o99:int. forall o100:int. forall o101:int.
+  forall temp___980:(int,character) farray. forall temp___9801:t.
+  forall o102:int. forall o103:int. forall o104:int. forall o105:int.
+  forall o106:int. forall o107:int. forall temp___983:(int,character) farray.
+  forall temp___9831:t. forall o108:int. forall o109:int. forall o110:int.
+  forall o111:int. forall o112:int. forall o113:int.
+  forall temp___985:(int,character) farray. forall temp___9851:t.
+  forall o114:int. forall o115:int. forall o116:int. forall o117:int.
+  forall o118:int. forall o119:int. forall temp___988:(int,character) farray.
+  forall temp___9881:t. forall o120:int. forall o121:int. forall o122:int.
+  forall o123:int. forall o124:int. forall o125:int.
+  forall temp___990:(int,character) farray. forall temp___9901:t.
+  forall o126:int. forall o127:int. forall o128:int. forall o129:int.
+  forall o130:int. forall o131:int. forall temp___993:(int,character) farray.
+  forall temp___9931:t. forall o132:int. forall o133:int. forall o134:int.
+  forall o135:int. forall o136:int. forall o137:int.
+  forall temp___995:(int,character) farray. forall temp___9951:t.
+  forall o138:int. forall o139:int. forall o140:int. forall o141:int.
+  forall o142:int. forall o143:int.
+  forall configuration__updatedata__makedescription__str__assume:(int,character) farray.
+  forall configuration__updatedata__makedescription__str__assume1:t.
+  forall result:(int,character) farray.
+  forall localtext1:(int,character) farray.
+  forall result1:(int,character) farray. forall str1:(int,character) farray.
+  ((audittypes__nodescription__aggregate_def(32) = nodescription) ->
+  (in_range9(thelatchunlockduration) -> (in_range9(thealarmsilentduration) ->
+  (in_range9(thefingerwaitduration) -> (in_range9(thetokenremovalduration) ->
+  (in_range8(theenclaveclearance) -> (in_range5(theworkinghoursstart) ->
+  (in_range5(theworkinghoursend) -> (in_range5(themaxauthduration) ->
+  (in_range10(theaccesspolicy) -> (in_range8(theminentryclass) ->
+  (in_range4(theminpreservedlogsize) -> (in_range4(thealarmthresholdsize) ->
+  (in_range7(thesystemmaxfar) -> (((result = localtext) and
+  (localtext1 = nodescription)) ->
+  (((((((((((((((temp___969 = printduration(themaxauthduration)) and
+  (((1 <= 5) -> (((1 <= 1) and (1 <= 10)) and ((1 <= 5) and (5 <= 10)))) and
+  (temp___971 = temp___969))) and
+  (((((temp___961 = printduration(theworkinghoursend)) and (((1 <= 5) ->
+  (((1 <= 1) and (1 <= 10)) and ((1 <= 5) and (5 <= 10)))) and
+  (temp___963 = temp___961))) and
+  (((((temp___953 = printduration(theworkinghoursstart)) and (((1 <= 5) ->
+  (((1 <= 1) and (1 <= 10)) and ((1 <= 5) and (5 <= 10)))) and
+  (temp___955 = temp___953))) and
+  ((((((((((((length(to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thealarmsilentduration,10)))) = 0) and
+  ((temp___String_Literal_928(void) = temp___931) and (mk(1,
+  2) = temp___9311))) or
+  ((not (length(to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thealarmsilentduration,10)))) = 0)) and
+  ((((((((1 <= 2) and (o = ((2 - 1) + 1))) or ((not (1 <= 2)) and
+  (o = 0))) and
+  ((((to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thealarmsilentduration,10)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thealarmsilentduration,10)))).rt))) and
+  (o1 = ((to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thealarmsilentduration,10)))).rt)) - to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thealarmsilentduration,10)))).rt))) + 1))) or
+  ((not (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thealarmsilentduration,10)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thealarmsilentduration,10)))).rt)))) and
+  (o1 = 0))) and (o2 = (o1 + o)))) and
+  (o3 = (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thealarmsilentduration,10)))).rt)) + o2))) and
+  (o4 = (o3 - 1))) and ((o5 = o4) and in_range1(o4))) and
+  ((concat((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thealarmsilentduration,10)))).elts,
+  to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thealarmsilentduration,10)))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thealarmsilentduration,10)))).rt)),
+  temp___String_Literal_928(void), 1, 2) = temp___931) and
+  (mk(to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thealarmsilentduration,10)))).rt)),
+  o5) = temp___9311))))) and (((length({ elts = temp___931; rt = temp___9311
+  }) = 0) and
+  (((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thelatchunlockduration,10)))).elts = temp___934) and
+  (mk(to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thelatchunlockduration,10)))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thelatchunlockduration,10)))).rt))) = temp___9341))) or
+  ((not (length({ elts = temp___931; rt = temp___9311 }) = 0)) and
+  ((((((((to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thelatchunlockduration,10)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thelatchunlockduration,10)))).rt))) and
+  (o6 = ((to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thelatchunlockduration,10)))).rt)) - to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thelatchunlockduration,10)))).rt))) + 1))) or
+  ((not (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thelatchunlockduration,10)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thelatchunlockduration,10)))).rt)))) and
+  (o6 = 0))) and
+  ((((to_rep1(first(temp___9311)) <= to_rep1(last(temp___9311))) and
+  (o7 = ((to_rep1(last(temp___9311)) - to_rep1(first(temp___9311))) + 1))) or
+  ((not (to_rep1(first(temp___9311)) <= to_rep1(last(temp___9311)))) and
+  (o7 = 0))) and (o8 = (o7 + o6)))) and
+  (o9 = (to_rep1(first(temp___9311)) + o8))) and (o10 = (o9 - 1))) and
+  ((o11 = o10) and in_range1(o10))) and ((concat(temp___931,
+  to_rep1(first(temp___9311)), to_rep1(last(temp___9311)),
+  (to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thelatchunlockduration,10)))).elts,
+  to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thelatchunlockduration,10)))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thelatchunlockduration,10)))).rt))) = temp___934) and
+  (mk(to_rep1(first(temp___9311)), o11) = temp___9341)))))) and (((length({
+  elts = temp___934; rt = temp___9341 }) = 0) and
+  ((temp___String_Literal_933(void) = temp___936) and (mk(1,
+  2) = temp___9361))) or ((not (length({ elts = temp___934; rt = temp___9341
+  }) = 0)) and ((((((((1 <= 2) and (o12 = ((2 - 1) + 1))) or
+  ((not (1 <= 2)) and (o12 = 0))) and
+  ((((to_rep1(first(temp___9341)) <= to_rep1(last(temp___9341))) and
+  (o13 = ((to_rep1(last(temp___9341)) - to_rep1(first(temp___9341))) + 1))) or
+  ((not (to_rep1(first(temp___9341)) <= to_rep1(last(temp___9341)))) and
+  (o13 = 0))) and (o14 = (o13 + o12)))) and
+  (o15 = (to_rep1(first(temp___9341)) + o14))) and (o16 = (o15 - 1))) and
+  ((o17 = o16) and in_range1(o16))) and ((concat(temp___934,
+  to_rep1(first(temp___9341)), to_rep1(last(temp___9341)),
+  temp___String_Literal_933(void), 1, 2) = temp___936) and
+  (mk(to_rep1(first(temp___9341)), o17) = temp___9361)))))) and (((length({
+  elts = temp___936; rt = temp___9361 }) = 0) and
+  (((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thetokenremovalduration,10)))).elts = temp___939) and
+  (mk(to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thetokenremovalduration,10)))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thetokenremovalduration,10)))).rt))) = temp___9391))) or
+  ((not (length({ elts = temp___936; rt = temp___9361 }) = 0)) and
+  ((((((((to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thetokenremovalduration,10)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thetokenremovalduration,10)))).rt))) and
+  (o18 = ((to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thetokenremovalduration,10)))).rt)) - to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thetokenremovalduration,10)))).rt))) + 1))) or
+  ((not (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thetokenremovalduration,10)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thetokenremovalduration,10)))).rt)))) and
+  (o18 = 0))) and
+  ((((to_rep1(first(temp___9361)) <= to_rep1(last(temp___9361))) and
+  (o19 = ((to_rep1(last(temp___9361)) - to_rep1(first(temp___9361))) + 1))) or
+  ((not (to_rep1(first(temp___9361)) <= to_rep1(last(temp___9361)))) and
+  (o19 = 0))) and (o20 = (o19 + o18)))) and
+  (o21 = (to_rep1(first(temp___9361)) + o20))) and (o22 = (o21 - 1))) and
+  ((o23 = o22) and in_range1(o22))) and ((concat(temp___936,
+  to_rep1(first(temp___9361)), to_rep1(last(temp___9361)),
+  (to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thetokenremovalduration,10)))).elts,
+  to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thetokenremovalduration,10)))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thetokenremovalduration,10)))).rt))) = temp___939) and
+  (mk(to_rep1(first(temp___9361)), o23) = temp___9391)))))) and (((length({
+  elts = temp___939; rt = temp___9391 }) = 0) and
+  ((temp___String_Literal_938(void) = temp___941) and (mk(1,
+  2) = temp___9411))) or ((not (length({ elts = temp___939; rt = temp___9391
+  }) = 0)) and ((((((((1 <= 2) and (o24 = ((2 - 1) + 1))) or
+  ((not (1 <= 2)) and (o24 = 0))) and
+  ((((to_rep1(first(temp___9391)) <= to_rep1(last(temp___9391))) and
+  (o25 = ((to_rep1(last(temp___9391)) - to_rep1(first(temp___9391))) + 1))) or
+  ((not (to_rep1(first(temp___9391)) <= to_rep1(last(temp___9391)))) and
+  (o25 = 0))) and (o26 = (o25 + o24)))) and
+  (o27 = (to_rep1(first(temp___9391)) + o26))) and (o28 = (o27 - 1))) and
+  ((o29 = o28) and in_range1(o28))) and ((concat(temp___939,
+  to_rep1(first(temp___9391)), to_rep1(last(temp___9391)),
+  temp___String_Literal_938(void), 1, 2) = temp___941) and
+  (mk(to_rep1(first(temp___9391)), o29) = temp___9411)))))) and (((length({
+  elts = temp___941; rt = temp___9411 }) = 0) and
+  (((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thefingerwaitduration,10)))).elts = temp___944) and
+  (mk(to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thefingerwaitduration,10)))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thefingerwaitduration,10)))).rt))) = temp___9441))) or
+  ((not (length({ elts = temp___941; rt = temp___9411 }) = 0)) and
+  ((((((((to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thefingerwaitduration,10)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thefingerwaitduration,10)))).rt))) and
+  (o30 = ((to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thefingerwaitduration,10)))).rt)) - to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thefingerwaitduration,10)))).rt))) + 1))) or
+  ((not (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thefingerwaitduration,10)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thefingerwaitduration,10)))).rt)))) and
+  (o30 = 0))) and
+  ((((to_rep1(first(temp___9411)) <= to_rep1(last(temp___9411))) and
+  (o31 = ((to_rep1(last(temp___9411)) - to_rep1(first(temp___9411))) + 1))) or
+  ((not (to_rep1(first(temp___9411)) <= to_rep1(last(temp___9411)))) and
+  (o31 = 0))) and (o32 = (o31 + o30)))) and
+  (o33 = (to_rep1(first(temp___9411)) + o32))) and (o34 = (o33 - 1))) and
+  ((o35 = o34) and in_range1(o34))) and ((concat(temp___941,
+  to_rep1(first(temp___9411)), to_rep1(last(temp___9411)),
+  (to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thefingerwaitduration,10)))).elts,
+  to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thefingerwaitduration,10)))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE5(comp_div(thefingerwaitduration,10)))).rt))) = temp___944) and
+  (mk(to_rep1(first(temp___9411)), o35) = temp___9441)))))) and (((length({
+  elts = temp___944; rt = temp___9441 }) = 0) and
+  ((temp___String_Literal_943(void) = temp___946) and (mk(1,
+  2) = temp___9461))) or ((not (length({ elts = temp___944; rt = temp___9441
+  }) = 0)) and ((((((((1 <= 2) and (o36 = ((2 - 1) + 1))) or
+  ((not (1 <= 2)) and (o36 = 0))) and
+  ((((to_rep1(first(temp___9441)) <= to_rep1(last(temp___9441))) and
+  (o37 = ((to_rep1(last(temp___9441)) - to_rep1(first(temp___9441))) + 1))) or
+  ((not (to_rep1(first(temp___9441)) <= to_rep1(last(temp___9441)))) and
+  (o37 = 0))) and (o38 = (o37 + o36)))) and
+  (o39 = (to_rep1(first(temp___9441)) + o38))) and (o40 = (o39 - 1))) and
+  ((o41 = o40) and in_range1(o40))) and ((concat(temp___944,
+  to_rep1(first(temp___9441)), to_rep1(last(temp___9441)),
+  temp___String_Literal_943(void), 1, 2) = temp___946) and
+  (mk(to_rep1(first(temp___9441)), o41) = temp___9461)))))) and (((length({
+  elts = temp___946; rt = temp___9461 }) = 0) and
+  (((to_string(attr__ATTRIBUTE_IMAGE8(theenclaveclearance))).elts = temp___949) and
+  (mk(to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE8(theenclaveclearance))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE8(theenclaveclearance))).rt))) = temp___9491))) or
+  ((not (length({ elts = temp___946; rt = temp___9461 }) = 0)) and
+  ((((((((to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE8(theenclaveclearance))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE8(theenclaveclearance))).rt))) and
+  (o42 = ((to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE8(theenclaveclearance))).rt)) - to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE8(theenclaveclearance))).rt))) + 1))) or
+  ((not (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE8(theenclaveclearance))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE8(theenclaveclearance))).rt)))) and
+  (o42 = 0))) and
+  ((((to_rep1(first(temp___9461)) <= to_rep1(last(temp___9461))) and
+  (o43 = ((to_rep1(last(temp___9461)) - to_rep1(first(temp___9461))) + 1))) or
+  ((not (to_rep1(first(temp___9461)) <= to_rep1(last(temp___9461)))) and
+  (o43 = 0))) and (o44 = (o43 + o42)))) and
+  (o45 = (to_rep1(first(temp___9461)) + o44))) and (o46 = (o45 - 1))) and
+  ((o47 = o46) and in_range1(o46))) and ((concat(temp___946,
+  to_rep1(first(temp___9461)), to_rep1(last(temp___9461)),
+  (to_string(attr__ATTRIBUTE_IMAGE8(theenclaveclearance))).elts,
+  to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE8(theenclaveclearance))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE8(theenclaveclearance))).rt))) = temp___949) and
+  (mk(to_rep1(first(temp___9461)), o47) = temp___9491)))))) and (((length({
+  elts = temp___949; rt = temp___9491 }) = 0) and
+  ((temp___String_Literal_948(void) = temp___954) and (mk(1,
+  2) = temp___9541))) or ((not (length({ elts = temp___949; rt = temp___9491
+  }) = 0)) and ((((((((1 <= 2) and (o48 = ((2 - 1) + 1))) or
+  ((not (1 <= 2)) and (o48 = 0))) and
+  ((((to_rep1(first(temp___9491)) <= to_rep1(last(temp___9491))) and
+  (o49 = ((to_rep1(last(temp___9491)) - to_rep1(first(temp___9491))) + 1))) or
+  ((not (to_rep1(first(temp___9491)) <= to_rep1(last(temp___9491)))) and
+  (o49 = 0))) and (o50 = (o49 + o48)))) and
+  (o51 = (to_rep1(first(temp___9491)) + o50))) and (o52 = (o51 - 1))) and
+  ((o53 = o52) and in_range1(o52))) and ((concat(temp___949,
+  to_rep1(first(temp___9491)), to_rep1(last(temp___9491)),
+  temp___String_Literal_948(void), 1, 2) = temp___954) and
+  (mk(to_rep1(first(temp___9491)), o53) = temp___9541)))))) and (((length({
+  elts = temp___954; rt = temp___9541 }) = 0) and
+  ((temp___955 = temp___957) and (mk(1, 5) = temp___9571))) or
+  ((not (length({ elts = temp___954; rt = temp___9541 }) = 0)) and
+  ((((((((1 <= 5) and (o54 = ((5 - 1) + 1))) or ((not (1 <= 5)) and
+  (o54 = 0))) and
+  ((((to_rep1(first(temp___9541)) <= to_rep1(last(temp___9541))) and
+  (o55 = ((to_rep1(last(temp___9541)) - to_rep1(first(temp___9541))) + 1))) or
+  ((not (to_rep1(first(temp___9541)) <= to_rep1(last(temp___9541)))) and
+  (o55 = 0))) and (o56 = (o55 + o54)))) and
+  (o57 = (to_rep1(first(temp___9541)) + o56))) and (o58 = (o57 - 1))) and
+  ((o59 = o58) and in_range1(o58))) and ((concat(temp___954,
+  to_rep1(first(temp___9541)), to_rep1(last(temp___9541)), temp___955, 1,
+  5) = temp___957) and (mk(to_rep1(first(temp___9541)),
+  o59) = temp___9571))))))) and (((length({ elts = temp___957; rt =
+  temp___9571 }) = 0) and ((temp___String_Literal_956(void) = temp___962) and
+  (mk(1, 2) = temp___9621))) or ((not (length({ elts = temp___957; rt =
+  temp___9571 }) = 0)) and ((((((((1 <= 2) and (o60 = ((2 - 1) + 1))) or
+  ((not (1 <= 2)) and (o60 = 0))) and
+  ((((to_rep1(first(temp___9571)) <= to_rep1(last(temp___9571))) and
+  (o61 = ((to_rep1(last(temp___9571)) - to_rep1(first(temp___9571))) + 1))) or
+  ((not (to_rep1(first(temp___9571)) <= to_rep1(last(temp___9571)))) and
+  (o61 = 0))) and (o62 = (o61 + o60)))) and
+  (o63 = (to_rep1(first(temp___9571)) + o62))) and (o64 = (o63 - 1))) and
+  ((o65 = o64) and in_range1(o64))) and ((concat(temp___957,
+  to_rep1(first(temp___9571)), to_rep1(last(temp___9571)),
+  temp___String_Literal_956(void), 1, 2) = temp___962) and
+  (mk(to_rep1(first(temp___9571)), o65) = temp___9621)))))) and (((length({
+  elts = temp___962; rt = temp___9621 }) = 0) and
+  ((temp___963 = temp___965) and (mk(1, 5) = temp___9651))) or
+  ((not (length({ elts = temp___962; rt = temp___9621 }) = 0)) and
+  ((((((((1 <= 5) and (o66 = ((5 - 1) + 1))) or ((not (1 <= 5)) and
+  (o66 = 0))) and
+  ((((to_rep1(first(temp___9621)) <= to_rep1(last(temp___9621))) and
+  (o67 = ((to_rep1(last(temp___9621)) - to_rep1(first(temp___9621))) + 1))) or
+  ((not (to_rep1(first(temp___9621)) <= to_rep1(last(temp___9621)))) and
+  (o67 = 0))) and (o68 = (o67 + o66)))) and
+  (o69 = (to_rep1(first(temp___9621)) + o68))) and (o70 = (o69 - 1))) and
+  ((o71 = o70) and in_range1(o70))) and ((concat(temp___962,
+  to_rep1(first(temp___9621)), to_rep1(last(temp___9621)), temp___963, 1,
+  5) = temp___965) and (mk(to_rep1(first(temp___9621)),
+  o71) = temp___9651))))))) and (((length({ elts = temp___965; rt =
+  temp___9651 }) = 0) and ((temp___String_Literal_964(void) = temp___970) and
+  (mk(1, 2) = temp___9701))) or ((not (length({ elts = temp___965; rt =
+  temp___9651 }) = 0)) and ((((((((1 <= 2) and (o72 = ((2 - 1) + 1))) or
+  ((not (1 <= 2)) and (o72 = 0))) and
+  ((((to_rep1(first(temp___9651)) <= to_rep1(last(temp___9651))) and
+  (o73 = ((to_rep1(last(temp___9651)) - to_rep1(first(temp___9651))) + 1))) or
+  ((not (to_rep1(first(temp___9651)) <= to_rep1(last(temp___9651)))) and
+  (o73 = 0))) and (o74 = (o73 + o72)))) and
+  (o75 = (to_rep1(first(temp___9651)) + o74))) and (o76 = (o75 - 1))) and
+  ((o77 = o76) and in_range1(o76))) and ((concat(temp___965,
+  to_rep1(first(temp___9651)), to_rep1(last(temp___9651)),
+  temp___String_Literal_964(void), 1, 2) = temp___970) and
+  (mk(to_rep1(first(temp___9651)), o77) = temp___9701)))))) and (((length({
+  elts = temp___970; rt = temp___9701 }) = 0) and
+  ((temp___971 = temp___973) and (mk(1, 5) = temp___9731))) or
+  ((not (length({ elts = temp___970; rt = temp___9701 }) = 0)) and
+  ((((((((1 <= 5) and (o78 = ((5 - 1) + 1))) or ((not (1 <= 5)) and
+  (o78 = 0))) and
+  ((((to_rep1(first(temp___9701)) <= to_rep1(last(temp___9701))) and
+  (o79 = ((to_rep1(last(temp___9701)) - to_rep1(first(temp___9701))) + 1))) or
+  ((not (to_rep1(first(temp___9701)) <= to_rep1(last(temp___9701)))) and
+  (o79 = 0))) and (o80 = (o79 + o78)))) and
+  (o81 = (to_rep1(first(temp___9701)) + o80))) and (o82 = (o81 - 1))) and
+  ((o83 = o82) and in_range1(o82))) and ((concat(temp___970,
+  to_rep1(first(temp___9701)), to_rep1(last(temp___9701)), temp___971, 1,
+  5) = temp___973) and (mk(to_rep1(first(temp___9701)),
+  o83) = temp___9731))))))) and (((length({ elts = temp___973; rt =
+  temp___9731 }) = 0) and ((temp___String_Literal_972(void) = temp___975) and
+  (mk(1, 2) = temp___9751))) or ((not (length({ elts = temp___973; rt =
+  temp___9731 }) = 0)) and ((((((((1 <= 2) and (o84 = ((2 - 1) + 1))) or
+  ((not (1 <= 2)) and (o84 = 0))) and
+  ((((to_rep1(first(temp___9731)) <= to_rep1(last(temp___9731))) and
+  (o85 = ((to_rep1(last(temp___9731)) - to_rep1(first(temp___9731))) + 1))) or
+  ((not (to_rep1(first(temp___9731)) <= to_rep1(last(temp___9731)))) and
+  (o85 = 0))) and (o86 = (o85 + o84)))) and
+  (o87 = (to_rep1(first(temp___9731)) + o86))) and (o88 = (o87 - 1))) and
+  ((o89 = o88) and in_range1(o88))) and ((concat(temp___973,
+  to_rep1(first(temp___9731)), to_rep1(last(temp___9731)),
+  temp___String_Literal_972(void), 1, 2) = temp___975) and
+  (mk(to_rep1(first(temp___9731)), o89) = temp___9751)))))) and (((length({
+  elts = temp___975; rt = temp___9751 }) = 0) and
+  (((to_string(attr__ATTRIBUTE_IMAGE10(theaccesspolicy))).elts = temp___978) and
+  (mk(to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE10(theaccesspolicy))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE10(theaccesspolicy))).rt))) = temp___9781))) or
+  ((not (length({ elts = temp___975; rt = temp___9751 }) = 0)) and
+  ((((((((to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE10(theaccesspolicy))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE10(theaccesspolicy))).rt))) and
+  (o90 = ((to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE10(theaccesspolicy))).rt)) - to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE10(theaccesspolicy))).rt))) + 1))) or
+  ((not (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE10(theaccesspolicy))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE10(theaccesspolicy))).rt)))) and
+  (o90 = 0))) and
+  ((((to_rep1(first(temp___9751)) <= to_rep1(last(temp___9751))) and
+  (o91 = ((to_rep1(last(temp___9751)) - to_rep1(first(temp___9751))) + 1))) or
+  ((not (to_rep1(first(temp___9751)) <= to_rep1(last(temp___9751)))) and
+  (o91 = 0))) and (o92 = (o91 + o90)))) and
+  (o93 = (to_rep1(first(temp___9751)) + o92))) and (o94 = (o93 - 1))) and
+  ((o95 = o94) and in_range1(o94))) and ((concat(temp___975,
+  to_rep1(first(temp___9751)), to_rep1(last(temp___9751)),
+  (to_string(attr__ATTRIBUTE_IMAGE10(theaccesspolicy))).elts,
+  to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE10(theaccesspolicy))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE10(theaccesspolicy))).rt))) = temp___978) and
+  (mk(to_rep1(first(temp___9751)), o95) = temp___9781)))))) and (((length({
+  elts = temp___978; rt = temp___9781 }) = 0) and
+  ((temp___String_Literal_977(void) = temp___980) and (mk(1,
+  2) = temp___9801))) or ((not (length({ elts = temp___978; rt = temp___9781
+  }) = 0)) and ((((((((1 <= 2) and (o96 = ((2 - 1) + 1))) or
+  ((not (1 <= 2)) and (o96 = 0))) and
+  ((((to_rep1(first(temp___9781)) <= to_rep1(last(temp___9781))) and
+  (o97 = ((to_rep1(last(temp___9781)) - to_rep1(first(temp___9781))) + 1))) or
+  ((not (to_rep1(first(temp___9781)) <= to_rep1(last(temp___9781)))) and
+  (o97 = 0))) and (o98 = (o97 + o96)))) and
+  (o99 = (to_rep1(first(temp___9781)) + o98))) and (o100 = (o99 - 1))) and
+  ((o101 = o100) and in_range1(o100))) and ((concat(temp___978,
+  to_rep1(first(temp___9781)), to_rep1(last(temp___9781)),
+  temp___String_Literal_977(void), 1, 2) = temp___980) and
+  (mk(to_rep1(first(temp___9781)), o101) = temp___9801)))))) and (((length({
+  elts = temp___980; rt = temp___9801 }) = 0) and
+  (((to_string(attr__ATTRIBUTE_IMAGE8(theminentryclass))).elts = temp___983) and
+  (mk(to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE8(theminentryclass))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE8(theminentryclass))).rt))) = temp___9831))) or
+  ((not (length({ elts = temp___980; rt = temp___9801 }) = 0)) and
+  ((((((((to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE8(theminentryclass))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE8(theminentryclass))).rt))) and
+  (o102 = ((to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE8(theminentryclass))).rt)) - to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE8(theminentryclass))).rt))) + 1))) or
+  ((not (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE8(theminentryclass))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE8(theminentryclass))).rt)))) and
+  (o102 = 0))) and
+  ((((to_rep1(first(temp___9801)) <= to_rep1(last(temp___9801))) and
+  (o103 = ((to_rep1(last(temp___9801)) - to_rep1(first(temp___9801))) + 1))) or
+  ((not (to_rep1(first(temp___9801)) <= to_rep1(last(temp___9801)))) and
+  (o103 = 0))) and (o104 = (o103 + o102)))) and
+  (o105 = (to_rep1(first(temp___9801)) + o104))) and (o106 = (o105 - 1))) and
+  ((o107 = o106) and in_range1(o106))) and ((concat(temp___980,
+  to_rep1(first(temp___9801)), to_rep1(last(temp___9801)),
+  (to_string(attr__ATTRIBUTE_IMAGE8(theminentryclass))).elts,
+  to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE8(theminentryclass))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE8(theminentryclass))).rt))) = temp___983) and
+  (mk(to_rep1(first(temp___9801)), o107) = temp___9831)))))) and (((length({
+  elts = temp___983; rt = temp___9831 }) = 0) and
+  ((temp___String_Literal_982(void) = temp___985) and (mk(1,
+  2) = temp___9851))) or ((not (length({ elts = temp___983; rt = temp___9831
+  }) = 0)) and ((((((((1 <= 2) and (o108 = ((2 - 1) + 1))) or
+  ((not (1 <= 2)) and (o108 = 0))) and
+  ((((to_rep1(first(temp___9831)) <= to_rep1(last(temp___9831))) and
+  (o109 = ((to_rep1(last(temp___9831)) - to_rep1(first(temp___9831))) + 1))) or
+  ((not (to_rep1(first(temp___9831)) <= to_rep1(last(temp___9831)))) and
+  (o109 = 0))) and (o110 = (o109 + o108)))) and
+  (o111 = (to_rep1(first(temp___9831)) + o110))) and (o112 = (o111 - 1))) and
+  ((o113 = o112) and in_range1(o112))) and ((concat(temp___983,
+  to_rep1(first(temp___9831)), to_rep1(last(temp___9831)),
+  temp___String_Literal_982(void), 1, 2) = temp___985) and
+  (mk(to_rep1(first(temp___9831)), o113) = temp___9851)))))) and (((length({
+  elts = temp___985; rt = temp___9851 }) = 0) and
+  (((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(theminpreservedlogsize,1024)))).elts = temp___988) and
+  (mk(to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(theminpreservedlogsize,1024)))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(theminpreservedlogsize,1024)))).rt))) = temp___9881))) or
+  ((not (length({ elts = temp___985; rt = temp___9851 }) = 0)) and
+  ((((((((to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(theminpreservedlogsize,1024)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(theminpreservedlogsize,1024)))).rt))) and
+  (o114 = ((to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(theminpreservedlogsize,1024)))).rt)) - to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(theminpreservedlogsize,1024)))).rt))) + 1))) or
+  ((not (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(theminpreservedlogsize,1024)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(theminpreservedlogsize,1024)))).rt)))) and
+  (o114 = 0))) and
+  ((((to_rep1(first(temp___9851)) <= to_rep1(last(temp___9851))) and
+  (o115 = ((to_rep1(last(temp___9851)) - to_rep1(first(temp___9851))) + 1))) or
+  ((not (to_rep1(first(temp___9851)) <= to_rep1(last(temp___9851)))) and
+  (o115 = 0))) and (o116 = (o115 + o114)))) and
+  (o117 = (to_rep1(first(temp___9851)) + o116))) and (o118 = (o117 - 1))) and
+  ((o119 = o118) and in_range1(o118))) and ((concat(temp___985,
+  to_rep1(first(temp___9851)), to_rep1(last(temp___9851)),
+  (to_string(attr__ATTRIBUTE_IMAGE4(comp_div(theminpreservedlogsize,1024)))).elts,
+  to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(theminpreservedlogsize,1024)))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(theminpreservedlogsize,1024)))).rt))) = temp___988) and
+  (mk(to_rep1(first(temp___9851)), o119) = temp___9881)))))) and (((length({
+  elts = temp___988; rt = temp___9881 }) = 0) and
+  ((temp___String_Literal_987(void) = temp___990) and (mk(1,
+  2) = temp___9901))) or ((not (length({ elts = temp___988; rt = temp___9881
+  }) = 0)) and ((((((((1 <= 2) and (o120 = ((2 - 1) + 1))) or
+  ((not (1 <= 2)) and (o120 = 0))) and
+  ((((to_rep1(first(temp___9881)) <= to_rep1(last(temp___9881))) and
+  (o121 = ((to_rep1(last(temp___9881)) - to_rep1(first(temp___9881))) + 1))) or
+  ((not (to_rep1(first(temp___9881)) <= to_rep1(last(temp___9881)))) and
+  (o121 = 0))) and (o122 = (o121 + o120)))) and
+  (o123 = (to_rep1(first(temp___9881)) + o122))) and (o124 = (o123 - 1))) and
+  ((o125 = o124) and in_range1(o124))) and ((concat(temp___988,
+  to_rep1(first(temp___9881)), to_rep1(last(temp___9881)),
+  temp___String_Literal_987(void), 1, 2) = temp___990) and
+  (mk(to_rep1(first(temp___9881)), o125) = temp___9901)))))) and (((length({
+  elts = temp___990; rt = temp___9901 }) = 0) and
+  (((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(thealarmthresholdsize,1024)))).elts = temp___993) and
+  (mk(to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(thealarmthresholdsize,1024)))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(thealarmthresholdsize,1024)))).rt))) = temp___9931))) or
+  ((not (length({ elts = temp___990; rt = temp___9901 }) = 0)) and
+  ((((((((to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(thealarmthresholdsize,1024)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(thealarmthresholdsize,1024)))).rt))) and
+  (o126 = ((to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(thealarmthresholdsize,1024)))).rt)) - to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(thealarmthresholdsize,1024)))).rt))) + 1))) or
+  ((not (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(thealarmthresholdsize,1024)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(thealarmthresholdsize,1024)))).rt)))) and
+  (o126 = 0))) and
+  ((((to_rep1(first(temp___9901)) <= to_rep1(last(temp___9901))) and
+  (o127 = ((to_rep1(last(temp___9901)) - to_rep1(first(temp___9901))) + 1))) or
+  ((not (to_rep1(first(temp___9901)) <= to_rep1(last(temp___9901)))) and
+  (o127 = 0))) and (o128 = (o127 + o126)))) and
+  (o129 = (to_rep1(first(temp___9901)) + o128))) and (o130 = (o129 - 1))) and
+  ((o131 = o130) and in_range1(o130))) and ((concat(temp___990,
+  to_rep1(first(temp___9901)), to_rep1(last(temp___9901)),
+  (to_string(attr__ATTRIBUTE_IMAGE4(comp_div(thealarmthresholdsize,1024)))).elts,
+  to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(thealarmthresholdsize,1024)))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(thealarmthresholdsize,1024)))).rt))) = temp___993) and
+  (mk(to_rep1(first(temp___9901)), o131) = temp___9931)))))) and (((length({
+  elts = temp___993; rt = temp___9931 }) = 0) and
+  ((temp___String_Literal_992(void) = temp___995) and (mk(1,
+  2) = temp___9951))) or ((not (length({ elts = temp___993; rt = temp___9931
+  }) = 0)) and ((((((((1 <= 2) and (o132 = ((2 - 1) + 1))) or
+  ((not (1 <= 2)) and (o132 = 0))) and
+  ((((to_rep1(first(temp___9931)) <= to_rep1(last(temp___9931))) and
+  (o133 = ((to_rep1(last(temp___9931)) - to_rep1(first(temp___9931))) + 1))) or
+  ((not (to_rep1(first(temp___9931)) <= to_rep1(last(temp___9931)))) and
+  (o133 = 0))) and (o134 = (o133 + o132)))) and
+  (o135 = (to_rep1(first(temp___9931)) + o134))) and (o136 = (o135 - 1))) and
+  ((o137 = o136) and in_range1(o136))) and ((concat(temp___993,
+  to_rep1(first(temp___9931)), to_rep1(last(temp___9931)),
+  temp___String_Literal_992(void), 1, 2) = temp___995) and
+  (mk(to_rep1(first(temp___9931)), o137) = temp___9951)))))) and (((length({
+  elts = temp___995; rt = temp___9951 }) = 0) and
+  (((to_string(attr__ATTRIBUTE_IMAGE7(thesystemmaxfar))).elts = configuration__updatedata__makedescription__str__assume) and
+  (mk(to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE7(thesystemmaxfar))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE7(thesystemmaxfar))).rt))) = configuration__updatedata__makedescription__str__assume1))) or
+  ((not (length({ elts = temp___995; rt = temp___9951 }) = 0)) and
+  ((((((((to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE7(thesystemmaxfar))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE7(thesystemmaxfar))).rt))) and
+  (o138 = ((to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE7(thesystemmaxfar))).rt)) - to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE7(thesystemmaxfar))).rt))) + 1))) or
+  ((not (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE7(thesystemmaxfar))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE7(thesystemmaxfar))).rt)))) and
+  (o138 = 0))) and
+  ((((to_rep1(first(temp___9951)) <= to_rep1(last(temp___9951))) and
+  (o139 = ((to_rep1(last(temp___9951)) - to_rep1(first(temp___9951))) + 1))) or
+  ((not (to_rep1(first(temp___9951)) <= to_rep1(last(temp___9951)))) and
+  (o139 = 0))) and (o140 = (o139 + o138)))) and
+  (o141 = (to_rep1(first(temp___9951)) + o140))) and (o142 = (o141 - 1))) and
+  ((o143 = o142) and in_range1(o142))) and ((concat(temp___995,
+  to_rep1(first(temp___9951)), to_rep1(last(temp___9951)),
+  (to_string(attr__ATTRIBUTE_IMAGE7(thesystemmaxfar))).elts,
+  to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE7(thesystemmaxfar))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE7(thesystemmaxfar))).rt))) = configuration__updatedata__makedescription__str__assume) and
+  (mk(to_rep1(first(temp___9951)),
+  o143) = configuration__updatedata__makedescription__str__assume1)))))) and
+  (((result1 = str) and
+  (str1 = configuration__updatedata__makedescription__str__assume)) and
+  ((to_rep1(str__first) = to_rep1(first(configuration__updatedata__makedescription__str__assume1))) and
+  (to_rep1(str__last) = to_rep1(last(configuration__updatedata__makedescription__str__assume1)))))) ->
+  (dynamic_property(1, 2147483647, to_rep1(str__first),
+  to_rep1(str__last)) -> ((150 <  to_rep1(str__last)) -> ((1 <= 150) ->
+  (to_rep1(str__first) <= 1)))))))))))))))))))))

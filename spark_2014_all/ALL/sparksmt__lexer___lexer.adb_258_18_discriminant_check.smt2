@@ -128,11 +128,11 @@
 (define-fun token_kind__ref___projection ((a token_kind__ref)) token_kind
   (token_kind__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_572 Int)
-  (temp___is_init_569 Bool) (temp___skip_constant_570 Bool)
-  (temp___do_toplevel_571 Bool)) Bool (=>
-                                      (or (= temp___is_init_569 true)
-                                      (<= 0 8)) (in_range3 temp___expr_572)))
+(define-fun dynamic_invariant1 ((temp___expr_660 Int)
+  (temp___is_init_657 Bool) (temp___skip_constant_658 Bool)
+  (temp___do_toplevel_659 Bool)) Bool (=>
+                                      (or (= temp___is_init_657 true)
+                                      (<= 0 8)) (in_range3 temp___expr_660)))
 
 (declare-fun to_rep1 (token_kind) Int)
 
@@ -175,12 +175,12 @@
 
 (declare-datatypes ((us_split_discrs 0))
 (((mk___split_discrs (rec__lexer__token__kind token_kind)))))
-(define-fun us_split_discrs_3__projection ((a us_split_discrs)) token_kind
+(define-fun us_split_discrs___3__projection ((a us_split_discrs)) token_kind
   (rec__lexer__token__kind a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
 (((mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref_3__projection ((a us_split_discrs__ref)) us_split_discrs
+(define-fun us_split_discrs__ref___3__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ((us_split_fields 0))
@@ -200,19 +200,19 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___4__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)(attr__constrained Bool)))))
-(define-fun us_rep_8__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                              a))
+(define-fun us_rep___8__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                a))
 
-(define-fun us_rep_9__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___9__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
-(define-fun us_rep_10__projection ((a us_rep)) Bool (attr__constrained a))
+(define-fun us_rep___10__projection ((a us_rep)) Bool (attr__constrained a))
 
 (define-fun lexer__token__value__pred ((a us_rep)) Bool (and
                                                         (<= 3 (to_rep1
@@ -357,14 +357,14 @@
 (define-fun token__ref___projection ((a token__ref)) us_rep (token__content
                                                             a))
 
-(define-fun default_initial_assumption ((temp___expr_586 us_rep)
-  (temp___skip_top_level_587 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_674 us_rep)
+  (temp___skip_top_level_675 Bool)) Bool (and
                                          (= (attr__constrained
-                                            temp___expr_586) false)
+                                            temp___expr_674) false)
                                          (= (to_rep1
                                             (rec__lexer__token__kind
                                             (us_split_discrs1
-                                            temp___expr_586))) 0)))
+                                            temp___expr_674))) 0)))
 
 (declare-const t__attr__constrained Bool)
 
@@ -604,12 +604,12 @@
 (declare-datatypes ((t23b__ref 0)) (((mk_t23b__ref (t23b__content us_rep)))))
 (define-fun t23b__ref___projection ((a t23b__ref)) us_rep (t23b__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_563 Int)
-  (temp___is_init_560 Bool) (temp___skip_constant_561 Bool)
-  (temp___do_toplevel_562 Bool)) Bool (=>
-                                      (or (= temp___is_init_560 true)
+(define-fun dynamic_invariant2 ((temp___expr_651 Int)
+  (temp___is_init_648 Bool) (temp___skip_constant_649 Bool)
+  (temp___do_toplevel_650 Bool)) Bool (=>
+                                      (or (= temp___is_init_648 true)
                                       (<= 0 2147483647)) (in_range2
-                                      temp___expr_563)))
+                                      temp___expr_651)))
 
 (declare-const t__split_discrs token_kind)
 
@@ -635,17 +635,17 @@
 
 (declare-const o8 token_kind)
 
-(declare-const temp___856 token_kind)
+(declare-const temp___944 token_kind)
 
-(declare-const temp___8561 natural)
+(declare-const temp___9441 natural)
 
-(declare-const temp___8562 natural)
+(declare-const temp___9442 natural)
 
-(declare-const temp___8563 natural)
+(declare-const temp___9443 natural)
 
-(declare-const temp___8564 name_id)
+(declare-const temp___9444 name_id)
 
-(declare-const temp___8565 Bool)
+(declare-const temp___9445 Bool)
 
 ;; H
   (assert (in_range1 first_line))
@@ -697,22 +697,22 @@
   (assert (= o o8))
 
 ;; H
-  (assert (= temp___856 o8))
+  (assert (= temp___944 o8))
 
 ;; H
-  (assert (= temp___8561 o4))
+  (assert (= temp___9441 o4))
 
 ;; H
-  (assert (= temp___8562 o5))
+  (assert (= temp___9442 o5))
 
 ;; H
-  (assert (= temp___8563 o6))
+  (assert (= temp___9443 o6))
 
 ;; H
-  (assert (= temp___8564 o7))
+  (assert (= temp___9444 o7))
 
 ;; H
-  (assert (= true temp___8565))
+  (assert (= true temp___9445))
 
 ;; H
   (assert (= t__attr__constrained true))
@@ -720,6 +720,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "lexer.adb", line 220, characters 0-0
-  (not (= temp___856 t__split_discrs)))
+  (not (= temp___944 t__split_discrs)))
 (check-sat)
 (exit)

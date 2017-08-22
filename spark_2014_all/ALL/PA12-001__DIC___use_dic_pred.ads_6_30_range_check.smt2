@@ -208,18 +208,18 @@
 
 (declare-datatypes ((us_split_fields2 0))
 (((mk___split_fields1 (rec__dic_pred__s__f natural)))))
-(define-fun us_split_fields_F2__projection ((a us_split_fields2)) natural
+(define-fun us_split_fields_F__2__projection ((a us_split_fields2)) natural
   (rec__dic_pred__s__f a))
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (define-fun bool_eq1 ((a us_rep1)
   (b us_rep1)) Bool (ite (= (to_rep
@@ -525,17 +525,17 @@
 
 (declare-datatypes ((us_split_fields__ref2 0))
 (((mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref2)) us_split_fields4
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep2
   (us_split_discrs1 us_split_discrs)(us_split_fields5 us_split_fields4)))))
-(define-fun us_rep_3__projection ((a us_rep2)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___3__projection ((a us_rep2)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_4__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
-                                                                a))
+(define-fun us_rep___4__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
+                                                                  a))
 
 (define-fun bool_eq4 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
@@ -699,25 +699,25 @@
 (declare-datatypes ((us_split_fields6 0))
 (((mk___split_fields3
   (rec__containers__container__l1 natural)(rec__containers__container__v1 (Array Int natural))))))
-(define-fun us_split_fields_L2__projection ((a us_split_fields6)) natural
+(define-fun us_split_fields_L__2__projection ((a us_split_fields6)) natural
   (rec__containers__container__l1 a))
 
-(define-fun us_split_fields_V2__projection ((a us_split_fields6)) (Array Int natural)
+(define-fun us_split_fields_V__2__projection ((a us_split_fields6)) (Array Int natural)
   (rec__containers__container__v1 a))
 
 (declare-datatypes ((us_split_fields__ref3 0))
 (((mk___split_fields__ref3 (us_split_fields__content3 us_split_fields6)))))
-(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref3)) us_split_fields6
+(define-fun us_split_fields__ref___4__projection ((a us_split_fields__ref3)) us_split_fields6
   (us_split_fields__content3 a))
 
 (declare-datatypes ((us_rep3 0))
 (((mk___rep3
   (us_split_discrs2 us_split_discrs)(us_split_fields7 us_split_fields6)))))
-(define-fun us_rep_5__projection ((a us_rep3)) us_split_discrs (us_split_discrs2
-                                                               a))
+(define-fun us_rep___5__projection ((a us_rep3)) us_split_discrs (us_split_discrs2
+                                                                 a))
 
-(define-fun us_rep_6__projection ((a us_rep3)) us_split_fields6 (us_split_fields7
-                                                                a))
+(define-fun us_rep___6__projection ((a us_rep3)) us_split_fields6 (us_split_fields7
+                                                                  a))
 
 (define-fun to_base ((a us_rep3)) us_rep2 (mk___rep2 (us_split_discrs2 a)
                                           (mk___split_fields2

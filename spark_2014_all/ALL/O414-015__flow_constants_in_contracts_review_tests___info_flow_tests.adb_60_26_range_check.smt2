@@ -88,7 +88,7 @@
 (declare-const dummy1 tt1B)
 
 (declare-datatypes ((tt1B__ref 0)) (((mk_tt1B__ref (tt1B__content tt1B)))))
-(define-fun tt1B__ref_3__projection ((a tt1B__ref)) tt1B (tt1B__content a))
+(define-fun tt1B__ref___3__projection ((a tt1B__ref)) tt1B (tt1B__content a))
 
 (declare-fun to_rep (tt1B) Int)
 
@@ -124,7 +124,7 @@
 (declare-const dummy2 tt1B)
 
 (declare-datatypes ((t1__ref 0)) (((mk_t1__ref (t1__content tt1B)))))
-(define-fun t1__ref_3__projection ((a t1__ref)) tt1B (t1__content a))
+(define-fun t1__ref___3__projection ((a t1__ref)) tt1B (t1__content a))
 
 (declare-sort tt2B 0)
 
@@ -142,7 +142,7 @@
 (declare-const dummy3 tt2B)
 
 (declare-datatypes ((tt2B__ref 0)) (((mk_tt2B__ref (tt2B__content tt2B)))))
-(define-fun tt2B__ref_3__projection ((a tt2B__ref)) tt2B (tt2B__content a))
+(define-fun tt2B__ref___3__projection ((a tt2B__ref)) tt2B (tt2B__content a))
 
 (declare-fun to_rep1 (tt2B) Int)
 
@@ -178,7 +178,7 @@
 (declare-const dummy4 tt2B)
 
 (declare-datatypes ((t2__ref 0)) (((mk_t2__ref (t2__content tt2B)))))
-(define-fun t2__ref_3__projection ((a t2__ref)) tt2B (t2__content a))
+(define-fun t2__ref___3__projection ((a t2__ref)) tt2B (t2__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_159 Int)
   (temp___is_init_156 Bool) (temp___skip_constant_157 Bool)

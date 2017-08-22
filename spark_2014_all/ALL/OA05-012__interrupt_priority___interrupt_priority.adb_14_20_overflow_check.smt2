@@ -94,33 +94,33 @@
 (declare-datatypes ((us_split_discrs 0))
 (((mk___split_discrs
   (rec__interrupt_priority__interrupt_needed_1__c any_priority)))))
-(define-fun us_split_discrs_2__projection ((a us_split_discrs)) any_priority
+(define-fun us_split_discrs___2__projection ((a us_split_discrs)) any_priority
   (rec__interrupt_priority__interrupt_needed_1__c a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
 (((mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref_2__projection ((a us_split_discrs__ref)) us_split_discrs
+(define-fun us_split_discrs__ref___2__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields
   (rec__interrupt_priority__interrupt_needed_1__i integer)))))
-(define-fun us_split_fields_I2__projection ((a us_split_fields)) integer
+(define-fun us_split_fields_I__2__projection ((a us_split_fields)) integer
   (rec__interrupt_priority__interrupt_needed_1__i a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_29__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___29__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)))))
-(define-fun us_rep_31__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                               a))
+(define-fun us_rep___31__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                 a))
 
-(define-fun us_rep_32__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___32__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                 a))
 
 (declare-const value__size Int)
 

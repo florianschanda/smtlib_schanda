@@ -506,18 +506,18 @@
 (define-fun us_split_fields_Text__projection ((a us_split_fields)) (Array Int character)
   (rec__configdata__classstringt__text a))
 
-(define-fun us_split_fields_Length2__projection ((a us_split_fields)) classtexti
+(define-fun us_split_fields_Length__2__projection ((a us_split_fields)) classtexti
   (rec__configdata__classstringt__length a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_7__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___7__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_8__projection ((a us_rep1)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___8__projection ((a us_rep1)) us_split_fields (us_split_fields1
+                                                                 a))
 
 (define-fun bool_eq3 ((a us_rep1)
   (b us_rep1)) Bool (ite (and

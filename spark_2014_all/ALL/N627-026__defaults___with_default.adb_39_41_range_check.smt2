@@ -119,7 +119,7 @@
 
 (declare-datatypes ((scalar_no_default__ref 0))
 (((mk_scalar_no_default__ref (scalar_no_default__content integer)))))
-(define-fun scalar_no_default__ref_2__projection ((a scalar_no_default__ref)) integer
+(define-fun scalar_no_default__ref___2__projection ((a scalar_no_default__ref)) integer
   (scalar_no_default__content a))
 
 (declare-sort tTbadSP1 0)
@@ -138,7 +138,7 @@
 
 (declare-datatypes ((tTbadSP1__ref 0))
 (((mk_tTbadSP1__ref (tTbadSP1__content tTbadSP1)))))
-(define-fun tTbadSP1__ref_2__projection ((a tTbadSP1__ref)) tTbadSP1
+(define-fun tTbadSP1__ref___2__projection ((a tTbadSP1__ref)) tTbadSP1
   (tTbadSP1__content a))
 
 (declare-datatypes ((map__ref 0))

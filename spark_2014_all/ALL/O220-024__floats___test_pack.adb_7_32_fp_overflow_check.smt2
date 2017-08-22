@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -114,7 +115,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-fun to_rep (float) Float32)
 
@@ -126,15 +127,13 @@
 
 ;; range_axiom
   (assert
-  (forall ((x float))
-  (! (not (or (fp.isInfinite (to_rep x)) (fp.isNaN (to_rep x)))) :pattern (
-  (to_rep x)) )))
+  (forall ((x float)) (! (fp.isFinite32 (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (not (or (fp.isInfinite x) (fp.isNaN x))) (= (to_rep (of_rep x)) x)) :pattern (
-  (to_rep (of_rep x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                                (of_rep x))) )))
 
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields
@@ -244,7 +243,7 @@
 (declare-const pid__split_fields float)
 
 ;; H
-  (assert (not (or (fp.isInfinite measured) (fp.isNaN measured))))
+  (assert (fp.isFinite32 measured))
 
 ;; H
   (assert
@@ -257,8 +256,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "test_pack.ads", line 9, characters 0-0
-  (not
-  (not (or (fp.isInfinite (fp.sub RNE (to_rep pid__split_fields) measured)) (fp.isNaN (fp.sub RNE
-  (to_rep pid__split_fields) measured))))))
+  (not (fp.isFinite32 (fp.sub RNE (to_rep pid__split_fields) measured))))
 (check-sat)
 (exit)

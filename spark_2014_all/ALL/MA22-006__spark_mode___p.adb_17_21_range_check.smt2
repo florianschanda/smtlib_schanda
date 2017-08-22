@@ -167,7 +167,7 @@
 (declare-const dummy4 integer)
 
 (declare-datatypes ((s1__ref1 0)) (((mk_s1__ref1 (s1__content1 integer)))))
-(define-fun s1__ref_2__projection ((a1 s1__ref1)) integer (s1__content1 a1))
+(define-fun s1__ref___2__projection ((a1 s1__ref1)) integer (s1__content1 a1))
 
 (define-fun dynamic_invariant2 ((temp___expr_15 Int) (temp___is_init_12 Bool)
   (temp___skip_constant_13 Bool)

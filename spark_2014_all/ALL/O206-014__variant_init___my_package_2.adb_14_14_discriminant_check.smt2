@@ -151,8 +151,8 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_discrs (us_split_discrs1
                                                              a))
 
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun my_package_2__variant_type__m_a__pred ((a us_rep)) Bool (=
   (to_rep1 (rec__my_package_2__variant_type__m_v (us_split_discrs1 a))) 0))

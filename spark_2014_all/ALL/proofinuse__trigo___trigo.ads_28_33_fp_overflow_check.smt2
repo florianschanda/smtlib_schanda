@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -114,7 +115,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-fun pow3 (Float32) Float32)
 
@@ -208,12 +209,12 @@
 (declare-const o9 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite x) (fp.isNaN x))))
+  (assert (fp.isFinite32 x))
 
 ;; H
   (assert
   (and (= o6 (pow9 x))
-  (and (not (or (fp.isInfinite o6) (fp.isNaN o6)))
+  (and (fp.isFinite32 o6)
   (= o6 (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE
   x x) x) x) x) x) x) x) x)))))
 
@@ -222,7 +223,7 @@
   (= o7 (fp.mul RNE (fp #b0 #b10000100 #b11110000000000000000000) o6)))
 
 ;; H
-  (assert (and (= o8 o7) (not (or (fp.isInfinite o7) (fp.isNaN o7)))))
+  (assert (and (= o8 o7) (fp.isFinite32 o7)))
 
 ;; H
   (assert
@@ -231,7 +232,7 @@
 ;; H
   (assert
   (and (= o2 (pow7 x))
-  (and (not (or (fp.isInfinite o2) (fp.isNaN o2)))
+  (and (fp.isFinite32 o2)
   (= o2 (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE
   x x) x) x) x) x) x)))))
 
@@ -240,7 +241,7 @@
   (= o3 (fp.mul RNE (fp #b0 #b10000011 #b00010000000000000000000) o2)))
 
 ;; H
-  (assert (and (= o4 o3) (not (or (fp.isInfinite o3) (fp.isNaN o3)))))
+  (assert (and (= o4 o3) (fp.isFinite32 o3)))
 
 ;; H
   (assert
@@ -249,7 +250,7 @@
 ;; H
   (assert
   (and (= o (pow5 x))
-  (and (not (or (fp.isInfinite o) (fp.isNaN o)))
+  (and (fp.isFinite32 o)
   (= o (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE x x) x) x) x)))))
 
 ;; H
@@ -259,6 +260,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (not (fp.isFinite32 o1)))
 (check-sat)
 (exit)

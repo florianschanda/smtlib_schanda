@@ -1371,13 +1371,13 @@
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (define-fun bool_eq3 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -1688,13 +1688,13 @@
 
 (declare-datatypes ((us_split_fields__ref2 0))
 (((mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref2)) us_split_fields4
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep2 (us_split_fields5 us_split_fields4)))))
-(define-fun us_rep_3__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
-                                                                a))
+(define-fun us_rep___3__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
+                                                                  a))
 
 (define-fun bool_eq5 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
@@ -2022,33 +2022,33 @@
 
 (declare-const o2 (_ BitVec 64))
 
-(declare-const temp___1374 (_ BitVec 64))
+(declare-const temp___1380 (_ BitVec 64))
 
-(declare-const temp___1372 u64)
+(declare-const temp___1378 u64)
 
-(declare-const temp___13721 u32)
+(declare-const temp___13781 u32)
 
-(declare-const temp___13722 u16)
+(declare-const temp___13782 u16)
 
-(declare-const temp___13723 u7)
+(declare-const temp___13783 u7)
 
-(declare-const temp___13724 Bool)
+(declare-const temp___13784 Bool)
 
-(declare-const temp___13725 u6)
+(declare-const temp___13785 u6)
 
-(declare-const temp___13726 Bool)
+(declare-const temp___13786 Bool)
 
-(declare-const temp___13727 Bool)
+(declare-const temp___13787 Bool)
 
-(declare-const temp___13728 hash_bit_length)
+(declare-const temp___13788 hash_bit_length)
 
-(declare-const temp___13729 u64)
+(declare-const temp___13789 u64)
 
-(declare-const temp___137210 (Array (_ BitVec 64) u64))
+(declare-const temp___137810 (Array (_ BitVec 64) u64))
 
-(declare-const temp___137211 (Array (_ BitVec 64) byte))
+(declare-const temp___137811 (Array (_ BitVec 64) byte))
 
-(declare-const temp___1371 (_ BitVec 64))
+(declare-const temp___1377 (_ BitVec 64))
 
 (declare-const o3 (_ BitVec 64))
 
@@ -2058,13 +2058,13 @@
 
 (declare-const o6 byte)
 
-(declare-const temp___1368 (Array (_ BitVec 64) byte))
+(declare-const temp___1374 (Array (_ BitVec 64) byte))
 
 (declare-const o7 (Array (_ BitVec 64) byte))
 
 (declare-const o8 us_split_fields4)
 
-(declare-const temp___1370 us_rep2)
+(declare-const temp___1376 us_rep2)
 
 (declare-const o9 u64)
 
@@ -2074,7 +2074,7 @@
 
 (declare-const o12 us_split_fields4)
 
-(declare-const temp___1377 us_rep2)
+(declare-const temp___1383 us_rep2)
 
 (declare-const o13 u64)
 
@@ -2084,7 +2084,7 @@
 
 (declare-const o16 us_split_fields4)
 
-(declare-const temp___1380 us_rep2)
+(declare-const temp___1386 us_rep2)
 
 (declare-const o17 (_ BitVec 64))
 
@@ -2572,7 +2572,7 @@
   (=>
   (bvugt (bvadd msg_byte_count1 (to_rep1 ctx__split_fields9)) ((_ int2bv 64) 64))
   (=> (bvugt (to_rep1 ctx__split_fields9) ((_ int2bv 64) 0))
-  (=> (bvugt c238b ((_ int2bv 64) 0)) (= temp___1374 dst3)))))
+  (=> (bvugt c238b ((_ int2bv 64) 0)) (= temp___1380 dst3)))))
 
 ;; H
   (assert
@@ -2582,25 +2582,25 @@
   (=> (bvugt c238b ((_ int2bv 64) 0))
   (and
   (and
-  (and (= ctx__split_fields temp___1372)
-  (and (= ctx__split_fields1 temp___13721)
-  (and (= ctx__split_fields2 temp___13722)
-  (and (= ctx__split_fields3 temp___13723)
-  (and (= ctx__split_fields4 temp___13724)
-  (and (= ctx__split_fields5 temp___13725)
-  (and (= ctx__split_fields6 temp___13726)
-  (= ctx__split_fields7 temp___13727))))))))
-  (and (= ctx__split_fields8 temp___13728)
-  (= ctx__split_fields9 temp___13729)))
-  (and (= ctx__split_fields10 temp___137210)
-  (= ctx__split_fields11 temp___137211)))))))
+  (and (= ctx__split_fields temp___1378)
+  (and (= ctx__split_fields1 temp___13781)
+  (and (= ctx__split_fields2 temp___13782)
+  (and (= ctx__split_fields3 temp___13783)
+  (and (= ctx__split_fields4 temp___13784)
+  (and (= ctx__split_fields5 temp___13785)
+  (and (= ctx__split_fields6 temp___13786)
+  (= ctx__split_fields7 temp___13787))))))))
+  (and (= ctx__split_fields8 temp___13788)
+  (= ctx__split_fields9 temp___13789)))
+  (and (= ctx__split_fields10 temp___137810)
+  (= ctx__split_fields11 temp___137811)))))))
 
 ;; H
   (assert
   (=>
   (bvugt (bvadd msg_byte_count1 (to_rep1 ctx__split_fields9)) ((_ int2bv 64) 64))
   (=> (bvugt (to_rep1 ctx__split_fields9) ((_ int2bv 64) 0))
-  (=> (bvugt c238b ((_ int2bv 64) 0)) (= temp___1371 src3)))))
+  (=> (bvugt c238b ((_ int2bv 64) 0)) (= temp___1377 src3)))))
 
 ;; H
   (assert
@@ -2645,21 +2645,21 @@
   (bvugt (bvadd msg_byte_count1 (to_rep1 ctx__split_fields9)) ((_ int2bv 64) 64))
   (=> (bvugt (to_rep1 ctx__split_fields9) ((_ int2bv 64) 0))
   (=> (bvugt c238b ((_ int2bv 64) 0))
-  (= temp___1368 (store ctx__split_fields11 dst3 o6))))))
+  (= temp___1374 (store ctx__split_fields11 dst3 o6))))))
 
 ;; H
   (assert
   (=>
   (bvugt (bvadd msg_byte_count1 (to_rep1 ctx__split_fields9)) ((_ int2bv 64) 64))
   (=> (bvugt (to_rep1 ctx__split_fields9) ((_ int2bv 64) 0))
-  (=> (bvugt c238b ((_ int2bv 64) 0)) (dynamic_predicate1 temp___1368)))))
+  (=> (bvugt c238b ((_ int2bv 64) 0)) (dynamic_predicate1 temp___1374)))))
 
 ;; H
   (assert
   (=>
   (bvugt (bvadd msg_byte_count1 (to_rep1 ctx__split_fields9)) ((_ int2bv 64) 64))
   (=> (bvugt (to_rep1 ctx__split_fields9) ((_ int2bv 64) 0))
-  (=> (bvugt c238b ((_ int2bv 64) 0)) (= o7 temp___1368)))))
+  (=> (bvugt c238b ((_ int2bv 64) 0)) (= o7 temp___1374)))))
 
 ;; H
   (assert
@@ -2681,7 +2681,7 @@
   (=>
   (bvugt (bvadd msg_byte_count1 (to_rep1 ctx__split_fields9)) ((_ int2bv 64) 64))
   (=> (bvugt (to_rep1 ctx__split_fields9) ((_ int2bv 64) 0))
-  (=> (bvugt c238b ((_ int2bv 64) 0)) (= temp___1370 (mk___rep2 o8))))))
+  (=> (bvugt c238b ((_ int2bv 64) 0)) (= temp___1376 (mk___rep2 o8))))))
 
 ;; H
   (assert
@@ -2696,7 +2696,7 @@
   (bvugt (bvadd msg_byte_count1 (to_rep1 ctx__split_fields9)) ((_ int2bv 64) 64))
   (=> (bvugt (to_rep1 ctx__split_fields9) ((_ int2bv 64) 0))
   (=> (bvugt c238b ((_ int2bv 64) 0))
-  (= ctx__split_fields13 (us_split_fields5 temp___1370))))))
+  (= ctx__split_fields13 (us_split_fields5 temp___1376))))))
 
 ;; H
   (assert
@@ -2712,17 +2712,17 @@
                                                             (mk___split_fields1
                                                             (mk___rep
                                                             (mk___split_fields
-                                                            temp___1372
-                                                            temp___13721
-                                                            temp___13722
-                                                            temp___13723
-                                                            temp___13724
-                                                            temp___13725
-                                                            temp___13726
-                                                            temp___13727))
-                                                            temp___13728
-                                                            temp___13729)))
-  (= (rec__skein__skein_512_context__x ctx__split_fields14) temp___137210)))
+                                                            temp___1378
+                                                            temp___13781
+                                                            temp___13782
+                                                            temp___13783
+                                                            temp___13784
+                                                            temp___13785
+                                                            temp___13786
+                                                            temp___13787))
+                                                            temp___13788
+                                                            temp___13789)))
+  (= (rec__skein__skein_512_context__x ctx__split_fields14) temp___137810)))
   (=> (bvule ((_ int2bv 64) 0) ((_ int2bv 64) 63)) (in_range3 dst4)))))))
 
 ;; H
@@ -2902,7 +2902,7 @@
   (=>
   (bvugt (bvadd msg_byte_count1 (to_rep1 ctx__split_fields9)) ((_ int2bv 64) 64))
   (=> (bvugt (to_rep1 ctx__split_fields9) ((_ int2bv 64) 0))
-  (=> (bvugt c238b ((_ int2bv 64) 0)) (= temp___1377 (mk___rep2 o12))))))
+  (=> (bvugt c238b ((_ int2bv 64) 0)) (= temp___1383 (mk___rep2 o12))))))
 
 ;; H
   (assert
@@ -2917,7 +2917,7 @@
   (bvugt (bvadd msg_byte_count1 (to_rep1 ctx__split_fields9)) ((_ int2bv 64) 64))
   (=> (bvugt (to_rep1 ctx__split_fields9) ((_ int2bv 64) 0))
   (=> (bvugt c238b ((_ int2bv 64) 0))
-  (= ctx__split_fields19 (us_split_fields5 temp___1377))))))
+  (= ctx__split_fields19 (us_split_fields5 temp___1383))))))
 
 ;; H
   (assert
@@ -3183,7 +3183,7 @@
   (=>
   (bvugt (bvadd msg_byte_count1 (to_rep1 ctx__split_fields9)) ((_ int2bv 64) 64))
   (=> (bvugt (to_rep1 ctx__split_fields9) ((_ int2bv 64) 0))
-  (= temp___1380 (mk___rep2 o16)))))
+  (= temp___1386 (mk___rep2 o16)))))
 
 ;; H
   (assert
@@ -3197,7 +3197,7 @@
   (=>
   (bvugt (bvadd msg_byte_count1 (to_rep1 ctx__split_fields9)) ((_ int2bv 64) 64))
   (=> (bvugt (to_rep1 ctx__split_fields9) ((_ int2bv 64) 0))
-  (= ctx__split_fields23 (us_split_fields5 temp___1380)))))
+  (= ctx__split_fields23 (us_split_fields5 temp___1386)))))
 
 ;; H
   (assert

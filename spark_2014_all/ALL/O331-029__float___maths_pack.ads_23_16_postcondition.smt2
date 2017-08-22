@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -217,7 +218,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-sort unsigned_32 0)
 
@@ -276,7 +277,7 @@
   (temp___do_toplevel_1347 Bool)) Bool (=>
                                        (or (= temp___is_init_1345 true)
                                        (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                       (not (or (fp.isInfinite temp___expr_1348) (fp.isNaN temp___expr_1348)))))
+                                       (fp.isFinite32 temp___expr_1348)))
 
 (declare-sort target 0)
 
@@ -329,8 +330,8 @@
 
 (declare-datatypes ((source__ref1 0))
 (((mk_source__ref1 (source__content1 source1)))))
-(define-fun source__ref_2__projection ((a source__ref1)) source1 (source__content1
-                                                                 a))
+(define-fun source__ref___2__projection ((a source__ref1)) source1 (source__content1
+                                                                   a))
 
 (define-fun dynamic_invariant4 ((temp___expr_1360 (_ BitVec 32))
   (temp___is_init_1357 Bool) (temp___skip_constant_1358 Bool)
@@ -350,15 +351,15 @@
 
 (declare-datatypes ((target__ref1 0))
 (((mk_target__ref1 (target__content1 target1)))))
-(define-fun target__ref_2__projection ((a target__ref1)) target1 (target__content1
-                                                                 a))
+(define-fun target__ref___2__projection ((a target__ref1)) target1 (target__content1
+                                                                   a))
 
 (define-fun dynamic_invariant5 ((temp___expr_1366 Float32)
   (temp___is_init_1363 Bool) (temp___skip_constant_1364 Bool)
   (temp___do_toplevel_1365 Bool)) Bool (=>
                                        (or (= temp___is_init_1363 true)
                                        (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                       (not (or (fp.isInfinite temp___expr_1366) (fp.isNaN temp___expr_1366)))))
+                                       (fp.isFinite32 temp___expr_1366)))
 
 (declare-fun unsigned_32_to_float ((_ BitVec 32)) Float32)
 
@@ -459,7 +460,7 @@
 (declare-const result8 Float32)
 
 ;; H
-  (assert (not (or (fp.isInfinite x) (fp.isNaN x))))
+  (assert (fp.isFinite32 x))
 
 ;; H
   (assert (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) x))
@@ -473,7 +474,7 @@
   x)))
 
 ;; H
-  (assert (not (or (fp.isInfinite half_x1) (fp.isNaN half_x1))))
+  (assert (fp.isFinite32 half_x1))
 
 ;; H
   (assert (= (mk_t__ref1 result1) (mk_t__ref1 y)))
@@ -482,7 +483,7 @@
   (assert (= y1 x))
 
 ;; H
-  (assert (not (or (fp.isInfinite y1) (fp.isNaN y1))))
+  (assert (fp.isFinite32 y1))
 
 ;; H
   (assert (= (mk_t__ref result2) (mk_t__ref magic_num)))
@@ -506,9 +507,7 @@
   (assert (= i2 (bvsub magic_num1 (bvlshr i1 ((_ int2bv 32) 1)))))
 
 ;; H
-  (assert
-  (and (= o1 (unsigned_32_to_float i2))
-  (not (or (fp.isInfinite o1) (fp.isNaN o1)))))
+  (assert (and (= o1 (unsigned_32_to_float i2)) (fp.isFinite32 o1)))
 
 ;; H
   (assert (= y1 result5))
@@ -519,27 +518,26 @@
 ;; H
   (assert
   (and (= o2 (fp.mul RNE half_x1 y2))
-  (not (or (fp.isInfinite (fp.mul RNE half_x1 y2)) (fp.isNaN (fp.mul RNE
-  half_x1 y2))))))
+  (fp.isFinite32 (fp.mul RNE half_x1 y2))))
 
 ;; H
   (assert (= o3 (fp.mul RNE o2 y2)))
 
 ;; H
-  (assert (and (= o4 o3) (not (or (fp.isInfinite o3) (fp.isNaN o3)))))
+  (assert (and (= o4 o3) (fp.isFinite32 o3)))
 
 ;; H
   (assert
   (= o5 (fp.sub RNE (fp #b0 #b01111111 #b10000000000000000000000) o4)))
 
 ;; H
-  (assert (and (= o6 o5) (not (or (fp.isInfinite o5) (fp.isNaN o5)))))
+  (assert (and (= o6 o5) (fp.isFinite32 o5)))
 
 ;; H
   (assert (= o7 (fp.mul RNE y2 o6)))
 
 ;; H
-  (assert (and (= o8 o7) (not (or (fp.isInfinite o7) (fp.isNaN o7)))))
+  (assert (and (= o8 o7) (fp.isFinite32 o7)))
 
 ;; H
   (assert (= result6 y2))

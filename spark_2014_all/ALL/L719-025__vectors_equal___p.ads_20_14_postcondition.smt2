@@ -147,8 +147,8 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_discrs (us_split_discrs1
                                                              a))
 
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (declare-const value__size Int)
 
@@ -335,7 +335,7 @@
 
 (declare-datatypes ((index_type__ref1 0))
 (((mk_index_type__ref1 (index_type__content1 index_type1)))))
-(define-fun index_type__ref_2__projection ((a index_type__ref1)) index_type1
+(define-fun index_type__ref___2__projection ((a index_type__ref1)) index_type1
   (index_type__content1 a))
 
 (define-fun dynamic_invariant3 ((temp___expr_195 Int)
@@ -361,7 +361,7 @@
 
 (declare-datatypes ((element_type__ref1 0))
 (((mk_element_type__ref1 (element_type__content1 element_type1)))))
-(define-fun element_type__ref_2__projection ((a element_type__ref1)) element_type1
+(define-fun element_type__ref___2__projection ((a element_type__ref1)) element_type1
   (element_type__content1 a))
 
 (define-fun dynamic_invariant4 ((temp___expr_201 Int)
@@ -488,7 +488,7 @@
 
 (declare-datatypes ((extended_index__ref1 0))
 (((mk_extended_index__ref1 (extended_index__content1 extended_index1)))))
-(define-fun extended_index__ref_2__projection ((a extended_index__ref1)) extended_index1
+(define-fun extended_index__ref___2__projection ((a extended_index__ref1)) extended_index1
   (extended_index__content1 a))
 
 (define-fun dynamic_invariant7 ((temp___expr_240 Int)
@@ -521,7 +521,7 @@
 
 (declare-datatypes ((element_type__ref2 0))
 (((mk_element_type__ref2 (element_type__content2 element_type2)))))
-(define-fun element_type__ref_3__projection ((a element_type__ref2)) element_type2
+(define-fun element_type__ref___3__projection ((a element_type__ref2)) element_type2
   (element_type__content2 a))
 
 (define-fun dynamic_invariant8 ((temp___expr_234 Int)

@@ -93,7 +93,7 @@
 (declare-datatypes ((scalar_with_default__ref 0))
 (((mk_scalar_with_default__ref
   (scalar_with_default__content scalar_with_default)))))
-(define-fun scalar_with_default__ref_7__projection ((a scalar_with_default__ref)) scalar_with_default
+(define-fun scalar_with_default__ref___7__projection ((a scalar_with_default__ref)) scalar_with_default
   (scalar_with_default__content a))
 
 (declare-sort tscalar_with_defaultB 0)
@@ -114,7 +114,7 @@
 (declare-datatypes ((tscalar_with_defaultB__ref 0))
 (((mk_tscalar_with_defaultB__ref
   (tscalar_with_defaultB__content tscalar_with_defaultB)))))
-(define-fun tscalar_with_defaultB__ref_7__projection ((a tscalar_with_defaultB__ref)) tscalar_with_defaultB
+(define-fun tscalar_with_defaultB__ref___7__projection ((a tscalar_with_defaultB__ref)) tscalar_with_defaultB
   (tscalar_with_defaultB__content a))
 
 (declare-fun to_rep (tscalar_with_defaultB) Int)
@@ -155,7 +155,7 @@
 (declare-datatypes ((scalar_bad_default__ref 0))
 (((mk_scalar_bad_default__ref
   (scalar_bad_default__content tscalar_with_defaultB)))))
-(define-fun scalar_bad_default__ref_6__projection ((a scalar_bad_default__ref)) tscalar_with_defaultB
+(define-fun scalar_bad_default__ref___6__projection ((a scalar_bad_default__ref)) tscalar_with_defaultB
   (scalar_bad_default__content a))
 
 (declare-fun to_rep1 (scalar_with_default) Int)
@@ -181,38 +181,38 @@
 (declare-datatypes ((us_split_discrs 0))
 (((mk___split_discrs
   (rec__with_default__bad_record3__rec_with_bad_discr__b Bool)))))
-(define-fun us_split_discrs_2__projection ((a us_split_discrs)) Bool
+(define-fun us_split_discrs___2__projection ((a us_split_discrs)) Bool
   (rec__with_default__bad_record3__rec_with_bad_discr__b a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
 (((mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref_2__projection ((a us_split_discrs__ref)) us_split_discrs
+(define-fun us_split_discrs__ref___2__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields
   (rec__with_default__bad_record3__rec_with_bad_discr__f1 scalar_with_default)(rec__with_default__bad_record3__rec_with_bad_discr__f2 tscalar_with_defaultB)))))
-(define-fun us_split_fields_F13__projection ((a us_split_fields)) scalar_with_default
+(define-fun us_split_fields_F1__3__projection ((a us_split_fields)) scalar_with_default
   (rec__with_default__bad_record3__rec_with_bad_discr__f1 a))
 
-(define-fun us_split_fields_F23__projection ((a us_split_fields)) tscalar_with_defaultB
+(define-fun us_split_fields_F2__3__projection ((a us_split_fields)) tscalar_with_defaultB
   (rec__with_default__bad_record3__rec_with_bad_discr__f2 a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)(attr__constrained Bool)))))
-(define-fun us_rep_4__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                              a))
+(define-fun us_rep___4__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                a))
 
-(define-fun us_rep_5__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___5__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
-(define-fun us_rep_6__projection ((a us_rep)) Bool (attr__constrained a))
+(define-fun us_rep___6__projection ((a us_rep)) Bool (attr__constrained a))
 
 (define-fun with_default__bad_record3__rec_with_bad_discr__f1__pred ((a us_rep)) Bool (=
   (to_int1

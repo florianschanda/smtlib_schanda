@@ -836,20 +836,20 @@
 (define-fun us_split_fields_Name__projection ((a us_split_fields)) (Array Int character)
   (rec__fixed_string__object__name a))
 
-(define-fun us_split_fields_2__projection ((a us_split_fields)) us_private
+(define-fun us_split_fields___2__projection ((a us_split_fields)) us_private
   (rec__ext__ a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)(attr__tag Int)))))
-(define-fun us_rep_3__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___3__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
-(define-fun us_rep_4__projection ((a us_rep)) Int (attr__tag a))
+(define-fun us_rep___4__projection ((a us_rep)) Int (attr__tag a))
 
 (define-fun bool_eq4 ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -1119,26 +1119,26 @@
 (declare-datatypes ((us_split_fields2 0))
 (((mk___split_fields1
   (rec__fixed_stream__object__width natural)(rec__fixed_stream__object__name (Array Int character))(rec__ext__1 us_private)))))
-(define-fun us_split_fields_Width2__projection ((a us_split_fields2)) natural
+(define-fun us_split_fields_Width__2__projection ((a us_split_fields2)) natural
   (rec__fixed_stream__object__width a))
 
-(define-fun us_split_fields_Name2__projection ((a us_split_fields2)) (Array Int character)
+(define-fun us_split_fields_Name__2__projection ((a us_split_fields2)) (Array Int character)
   (rec__fixed_stream__object__name a))
 
-(define-fun us_split_fields_3__projection ((a us_split_fields2)) us_private
+(define-fun us_split_fields___3__projection ((a us_split_fields2)) us_private
   (rec__ext__1 a))
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)(attr__tag1 Int)))))
-(define-fun us_rep_5__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___5__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
-(define-fun us_rep_6__projection ((a us_rep1)) Int (attr__tag1 a))
+(define-fun us_rep___6__projection ((a us_rep1)) Int (attr__tag1 a))
 
 (define-fun bool_eq5 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -1216,8 +1216,8 @@
 
 (declare-datatypes ((object__ref1 0))
 (((mk_object__ref1 (object__content1 us_rep1)))))
-(define-fun object__ref_2__projection ((a object__ref1)) us_rep1 (object__content1
-                                                                 a))
+(define-fun object__ref___2__projection ((a object__ref1)) us_rep1 (object__content1
+                                                                   a))
 
 (declare-fun temp___211 (Int) (Array Int character))
 

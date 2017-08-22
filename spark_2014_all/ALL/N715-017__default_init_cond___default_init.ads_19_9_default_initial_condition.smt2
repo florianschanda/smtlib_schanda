@@ -102,34 +102,34 @@
 
 (declare-datatypes ((us_split_discrs 0))
 (((mk___split_discrs (rec__default_init__mut_discr__b Bool)))))
-(define-fun us_split_discrs_2__projection ((a us_split_discrs)) Bool
+(define-fun us_split_discrs___2__projection ((a us_split_discrs)) Bool
   (rec__default_init__mut_discr__b a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
 (((mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref_2__projection ((a us_split_discrs__ref)) us_split_discrs
+(define-fun us_split_discrs__ref___2__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields (rec__default_init__mut_discr__f natural)))))
-(define-fun us_split_fields_F5__projection ((a us_split_fields)) natural
+(define-fun us_split_fields_F__5__projection ((a us_split_fields)) natural
   (rec__default_init__mut_discr__f a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_5__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___5__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)(attr__constrained Bool)))))
-(define-fun us_rep_6__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                              a))
+(define-fun us_rep___6__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                a))
 
-(define-fun us_rep_7__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___7__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
-(define-fun us_rep_8__projection ((a us_rep)) Bool (attr__constrained a))
+(define-fun us_rep___8__projection ((a us_rep)) Bool (attr__constrained a))
 
 (define-fun default_init__mut_discr__f__pred ((a us_rep)) Bool (= (to_int1
                                                                   (rec__default_init__mut_discr__b

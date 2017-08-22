@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite64 ((x Float64)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -123,14 +124,14 @@
 (declare-const dummy1 ft)
 
 (declare-datatypes ((ft__ref 0)) (((mk_ft__ref (ft__content ft)))))
-(define-fun ft__ref_2__projection ((a ft__ref)) ft (ft__content a))
+(define-fun ft__ref___2__projection ((a ft__ref)) ft (ft__content a))
 
 (define-fun dynamic_invariant ((temp___expr_167 Float64)
   (temp___is_init_164 Bool) (temp___skip_constant_165 Bool)
   (temp___do_toplevel_166 Bool)) Bool (=>
                                       (or (= temp___is_init_164 true)
                                       (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (not (or (fp.isInfinite temp___expr_167) (fp.isNaN temp___expr_167)))))
+                                      (fp.isFinite64 temp___expr_167)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -139,7 +140,7 @@
   (temp___do_toplevel_56 Bool)) Bool (=>
                                      (or (= temp___is_init_54 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_57) (fp.isNaN temp___expr_57)))))
+                                     (fp.isFinite64 temp___expr_57)))
 
 (declare-const f Float64)
 
@@ -154,14 +155,13 @@
 (declare-const f3 Float64)
 
 ;; H
-  (assert (not (or (fp.isInfinite f) (fp.isNaN f))))
+  (assert (fp.isFinite64 f))
 
 ;; H
   (assert
   (and
   (= o (fp.sub RNE f (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))
-  (not (or (fp.isInfinite (fp.sub RNE f (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))) (fp.isNaN (fp.sub RNE
-  f (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))))))
+  (fp.isFinite64 (fp.sub RNE f (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))))
 
 ;; H
   (assert (= result f))

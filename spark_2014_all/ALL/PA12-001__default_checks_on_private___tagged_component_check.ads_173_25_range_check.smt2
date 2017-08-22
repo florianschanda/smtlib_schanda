@@ -115,23 +115,23 @@
 (declare-datatypes ((us_split_fields 0))
 (((mk___split_fields
   (rec__tagged_component_check__r__p5__c us_main_type)(rec__ext__ us_private)))))
-(define-fun us_split_fields_C6__projection ((a us_split_fields)) us_main_type
+(define-fun us_split_fields_C__6__projection ((a us_split_fields)) us_main_type
   (rec__tagged_component_check__r__p5__c a))
 
-(define-fun us_split_fields_25__projection ((a us_split_fields)) us_private
+(define-fun us_split_fields___25__projection ((a us_split_fields)) us_private
   (rec__ext__ a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_25__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___25__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)(attr__tag Int)))))
-(define-fun us_rep_49__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___49__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                 a))
 
-(define-fun us_rep_50__projection ((a us_rep)) Int (attr__tag a))
+(define-fun us_rep___50__projection ((a us_rep)) Int (attr__tag a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (= (us_main_eq
@@ -170,31 +170,31 @@
 (declare-const dummy2 us_rep)
 
 (declare-datatypes ((c__ref 0)) (((mk_c__ref (c__content us_rep)))))
-(define-fun c__ref_10__projection ((a c__ref)) us_rep (c__content a))
+(define-fun c__ref___10__projection ((a c__ref)) us_rep (c__content a))
 
 (declare-datatypes ((us_split_fields2 0))
 (((mk___split_fields1
   (rec__tagged_component_check__r__p5__c1 us_main_type)(rec__tagged_component_check__r__d5__h natural)(rec__ext__1 us_private)))))
-(define-fun us_split_fields_C8__projection ((a us_split_fields2)) us_main_type
+(define-fun us_split_fields_C__8__projection ((a us_split_fields2)) us_main_type
   (rec__tagged_component_check__r__p5__c1 a))
 
-(define-fun us_split_fields_H10__projection ((a us_split_fields2)) natural
+(define-fun us_split_fields_H__10__projection ((a us_split_fields2)) natural
   (rec__tagged_component_check__r__d5__h a))
 
-(define-fun us_split_fields_30__projection ((a us_split_fields2)) us_private
+(define-fun us_split_fields___30__projection ((a us_split_fields2)) us_private
   (rec__ext__1 a))
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_30__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___30__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)(attr__tag1 Int)))))
-(define-fun us_rep_59__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                 a))
+(define-fun us_rep___59__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                   a))
 
-(define-fun us_rep_60__projection ((a us_rep1)) Int (attr__tag1 a))
+(define-fun us_rep___60__projection ((a us_rep1)) Int (attr__tag1 a))
 
 (declare-fun hide_ext__ (natural us_private) us_private)
 
@@ -285,7 +285,7 @@
 (declare-const dummy3 us_rep1)
 
 (declare-datatypes ((d5__ref 0)) (((mk_d5__ref (d5__content us_rep1)))))
-(define-fun d5__ref_2__projection ((a d5__ref)) us_rep1 (d5__content a))
+(define-fun d5__ref___2__projection ((a d5__ref)) us_rep1 (d5__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_33 Int) (temp___is_init_30 Bool)
   (temp___skip_constant_31 Bool)

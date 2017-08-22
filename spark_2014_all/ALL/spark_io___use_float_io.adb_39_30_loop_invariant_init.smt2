@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -416,7 +417,7 @@
   (temp___do_toplevel_50 Bool)) Bool (=>
                                      (or (= temp___is_init_48 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (not (or (fp.isInfinite temp___expr_51) (fp.isNaN temp___expr_51)))))
+                                     (fp.isFinite32 temp___expr_51)))
 
 (declare-sort us_main_type 0)
 
@@ -452,7 +453,7 @@
 
 (declare-datatypes ((file_type__ref 0))
 (((mk_file_type__ref (file_type__content us_rep)))))
-(define-fun file_type__ref_2__projection ((a file_type__ref)) us_rep
+(define-fun file_type__ref___2__projection ((a file_type__ref)) us_rep
   (file_type__content a))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
@@ -481,7 +482,7 @@
 
 (declare-datatypes ((file_status__ref 0))
 (((mk_file_status__ref (file_status__content file_status)))))
-(define-fun file_status__ref_2__projection ((a file_status__ref)) file_status
+(define-fun file_status__ref___2__projection ((a file_status__ref)) file_status
   (file_status__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_538 Int)
@@ -801,7 +802,7 @@
 
 (declare-datatypes ((file_mode__ref 0))
 (((mk_file_mode__ref (file_mode__content file_mode)))))
-(define-fun file_mode__ref_3__projection ((a file_mode__ref)) file_mode
+(define-fun file_mode__ref___3__projection ((a file_mode__ref)) file_mode
   (file_mode__content a))
 
 (define-fun dynamic_invariant6 ((temp___expr_550 Int)
@@ -826,8 +827,8 @@
 
 (declare-datatypes ((count__ref 0))
 (((mk_count__ref (count__content count)))))
-(define-fun count__ref_2__projection ((a count__ref)) count (count__content
-                                                            a))
+(define-fun count__ref___2__projection ((a count__ref)) count (count__content
+                                                              a))
 
 (define-fun dynamic_invariant7 ((temp___expr_556 Int)
   (temp___is_init_553 Bool) (temp___skip_constant_554 Bool)
@@ -897,7 +898,7 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (not (or (fp.isInfinite f) (fp.isNaN f)))))
+  (fp.isFinite32 f)))
 
 ;; H
   (assert (= result i))

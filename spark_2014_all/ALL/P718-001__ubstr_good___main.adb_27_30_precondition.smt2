@@ -334,20 +334,20 @@
 (define-fun us_split_fields_T__projection ((a us_split_fields)) us_main_type
   (rec__vk__tag__fs__name__t a))
 
-(define-fun us_split_fields_4__projection ((a us_split_fields)) us_private
+(define-fun us_split_fields___4__projection ((a us_split_fields)) us_private
   (rec__ext__ a))
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_13__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___13__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)(attr__tag Int)))))
-(define-fun us_rep_22__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                               a))
+(define-fun us_rep___22__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                 a))
 
-(define-fun us_rep_23__projection ((a us_rep)) Int (attr__tag a))
+(define-fun us_rep___23__projection ((a us_rep)) Int (attr__tag a))
 
 (define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (= (us_main_eq
@@ -488,7 +488,7 @@
 
 (declare-datatypes ((mutable_t__ref1 0))
 (((mk_mutable_t__ref1 (mutable_t__content1 us_rep)))))
-(define-fun mutable_t__ref_2__projection ((a mutable_t__ref1)) us_rep
+(define-fun mutable_t__ref___2__projection ((a mutable_t__ref1)) us_rep
   (mutable_t__content1 a))
 
 ;; vk__tag__fs__name__t__compat_axiom
@@ -549,13 +549,13 @@
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_14__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___14__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_24__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                 a))
+(define-fun us_rep___24__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                   a))
 
 (declare-const value__size4 Int)
 
@@ -597,7 +597,7 @@
 (declare-const dummy8 us_rep1)
 
 (declare-datatypes ((t__ref1 0)) (((mk_t__ref1 (t__content1 us_rep1)))))
-(define-fun t__ref_2__projection ((a t__ref1)) us_rep1 (t__content1 a))
+(define-fun t__ref___2__projection ((a t__ref1)) us_rep1 (t__content1 a))
 
 (define-fun default_initial_assumption1 ((temp___expr_833 us_rep1)
   (temp___skip_top_level_834 Bool)) Bool (let ((temp___835 (rec__vk__tag__t__my_name
@@ -628,21 +628,21 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun temp___String_Literal_863 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_865 (tuple0) (Array Int character))
 
-;; temp___String_Literal_863__def_axiom
+;; temp___String_Literal_865__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_863 us_void_param) 1)) 72)
-     (= (to_rep (select (temp___String_Literal_863 us_void_param) 2)) 101))
-     (= (to_rep (select (temp___String_Literal_863 us_void_param) 3)) 108))
-     (= (to_rep (select (temp___String_Literal_863 us_void_param) 4)) 108))
-     (= (to_rep (select (temp___String_Literal_863 us_void_param) 5)) 111)) :pattern (
-  (temp___String_Literal_863 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_865 us_void_param) 1)) 72)
+     (= (to_rep (select (temp___String_Literal_865 us_void_param) 2)) 101))
+     (= (to_rep (select (temp___String_Literal_865 us_void_param) 3)) 108))
+     (= (to_rep (select (temp___String_Literal_865 us_void_param) 4)) 108))
+     (= (to_rep (select (temp___String_Literal_865 us_void_param) 5)) 111)) :pattern (
+  (temp___String_Literal_865 us_void_param)) )))
 
 (define-fun dynamic_invariant2 ((temp___expr_39 Int) (temp___is_init_36 Bool)
   (temp___skip_constant_37 Bool)
@@ -673,14 +673,14 @@
                                          (= temp___skip_top_level_827 true))
                                          (= (length1 temp___expr_826) 0))))
 
-(define-fun default_initial_assumption3 ((temp___expr_848 us_rep)
-  (temp___skip_top_level_849 Bool)) Bool (and
-                                         (= (attr__tag temp___expr_848)
+(define-fun default_initial_assumption3 ((temp___expr_850 us_rep)
+  (temp___skip_top_level_851 Bool)) Bool (and
+                                         (= (attr__tag temp___expr_850)
                                          us_tag2)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_849 true))
-                                         (= (length1 temp___expr_848) 0))))
+                                         (= temp___skip_top_level_851 true))
+                                         (= (length1 temp___expr_850) 0))))
 
 (declare-const tag_v__split_fields us_main_type)
 
@@ -698,11 +698,11 @@
 
 (declare-const usq_2 Int)
 
-(declare-const temp___864 us_main_type)
+(declare-const temp___866 us_main_type)
 
-(declare-const temp___8641 us_private)
+(declare-const temp___8661 us_private)
 
-(declare-const temp___8642 Int)
+(declare-const temp___8662 Int)
 
 (declare-const o us_main_type)
 
@@ -767,13 +767,13 @@
   (= tag_v__split_fields5 usq_2))))
 
 ;; H
-  (assert (= usq_ temp___864))
+  (assert (= usq_ temp___866))
 
 ;; H
-  (assert (= usq_1 temp___8641))
+  (assert (= usq_1 temp___8661))
 
 ;; H
-  (assert (= n__attr__tag temp___8642))
+  (assert (= n__attr__tag temp___8662))
 
 ;; H
   (assert (= result n__split_fields))
@@ -782,10 +782,10 @@
   (assert (= result1 n__split_fields1))
 
 ;; H
-  (assert (= n__split_fields2 temp___864))
+  (assert (= n__split_fields2 temp___866))
 
 ;; H
-  (assert (= n__split_fields3 temp___8641))
+  (assert (= n__split_fields3 temp___8661))
 
 ;; H
   (assert

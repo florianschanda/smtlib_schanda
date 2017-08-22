@@ -111,7 +111,7 @@
 
 (declare-datatypes ((suspension_object__ref 0))
 (((mk_suspension_object__ref (suspension_object__content us_rep)))))
-(define-fun suspension_object__ref_2__projection ((a suspension_object__ref)) us_rep
+(define-fun suspension_object__ref___2__projection ((a suspension_object__ref)) us_rep
   (suspension_object__content a))
 
 (declare-fun suspend_until_true__specific_post (Int us_rep us_rep) Bool)
@@ -129,13 +129,13 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_30__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___30__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_31__projection ((a us_rep1)) us_split_fields (us_split_fields1
-                                                                a))
+(define-fun us_rep___31__projection ((a us_rep1)) us_split_fields (us_split_fields1
+                                                                  a))
 
 (declare-const value__size1 Int)
 

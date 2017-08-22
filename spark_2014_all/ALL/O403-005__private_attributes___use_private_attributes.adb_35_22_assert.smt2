@@ -109,7 +109,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_fields (us_split_fields1
                                                              a))
 
-(define-fun us_rep_2__projection ((a us_rep)) Int (attr__tag a))
+(define-fun us_rep___2__projection ((a us_rep)) Int (attr__tag a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (= (to_rep
@@ -176,23 +176,23 @@
 (define-fun us_split_fields_Child__projection ((a us_split_fields2)) us_main_type
   (rec__private_with_attributes__child a))
 
-(define-fun us_split_fields_F2__projection ((a us_split_fields2)) natural
+(define-fun us_split_fields_F__2__projection ((a us_split_fields2)) natural
   (rec__private_with_attributes__root__f1 a))
 
-(define-fun us_split_fields_2__projection ((a us_split_fields2)) us_private
+(define-fun us_split_fields___2__projection ((a us_split_fields2)) us_private
   (rec__ext__1 a))
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)(attr__tag1 Int)))))
-(define-fun us_rep_3__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___3__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
-(define-fun us_rep_4__projection ((a us_rep1)) Int (attr__tag1 a))
+(define-fun us_rep___4__projection ((a us_rep1)) Int (attr__tag1 a))
 
 (declare-fun hide_ext__ (us_main_type us_private) us_private)
 
@@ -301,20 +301,20 @@
 (define-fun us_split_fields_Root_Private_Tagged__projection ((a us_split_fields4)) us_main_type1
   (rec__private_with_attributes__root_private_tagged a))
 
-(define-fun us_split_fields_3__projection ((a us_split_fields4)) us_private
+(define-fun us_split_fields___3__projection ((a us_split_fields4)) us_private
   (rec__ext__2 a))
 
 (declare-datatypes ((us_split_fields__ref2 0))
 (((mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref2)) us_split_fields4
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep2 (us_split_fields5 us_split_fields4)(attr__tag2 Int)))))
-(define-fun us_rep_5__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
-                                                                a))
+(define-fun us_rep___5__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
+                                                                  a))
 
-(define-fun us_rep_6__projection ((a us_rep2)) Int (attr__tag2 a))
+(define-fun us_rep___6__projection ((a us_rep2)) Int (attr__tag2 a))
 
 (define-fun bool_eq2 ((a us_rep2)
   (b us_rep2)) Bool (ite (= (us_main_eq1
@@ -368,26 +368,26 @@
 (declare-datatypes ((us_split_fields6 0))
 (((mk___split_fields3
   (rec__private_with_attributes__root_private_tagged1 us_main_type1)(rec__private_with_attributes__child_private_tagged us_main_type2)(rec__ext__3 us_private)))))
-(define-fun us_split_fields_Root_Private_Tagged2__projection ((a us_split_fields6)) us_main_type1
+(define-fun us_split_fields_Root_Private_Tagged__2__projection ((a us_split_fields6)) us_main_type1
   (rec__private_with_attributes__root_private_tagged1 a))
 
 (define-fun us_split_fields_Child_Private_Tagged__projection ((a us_split_fields6)) us_main_type2
   (rec__private_with_attributes__child_private_tagged a))
 
-(define-fun us_split_fields_4__projection ((a us_split_fields6)) us_private
+(define-fun us_split_fields___4__projection ((a us_split_fields6)) us_private
   (rec__ext__3 a))
 
 (declare-datatypes ((us_split_fields__ref3 0))
 (((mk___split_fields__ref3 (us_split_fields__content3 us_split_fields6)))))
-(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref3)) us_split_fields6
+(define-fun us_split_fields__ref___4__projection ((a us_split_fields__ref3)) us_split_fields6
   (us_split_fields__content3 a))
 
 (declare-datatypes ((us_rep3 0))
 (((mk___rep3 (us_split_fields7 us_split_fields6)(attr__tag3 Int)))))
-(define-fun us_rep_7__projection ((a us_rep3)) us_split_fields6 (us_split_fields7
-                                                                a))
+(define-fun us_rep___7__projection ((a us_rep3)) us_split_fields6 (us_split_fields7
+                                                                  a))
 
-(define-fun us_rep_8__projection ((a us_rep3)) Int (attr__tag3 a))
+(define-fun us_rep___8__projection ((a us_rep3)) Int (attr__tag3 a))
 
 (declare-fun hide_ext__1 (us_main_type2 us_private) us_private)
 
@@ -482,29 +482,29 @@
 (declare-datatypes ((us_split_fields8 0))
 (((mk___split_fields4
   (rec__private_with_attributes__root_private_tagged2 us_main_type1)(rec__private_with_attributes__child_private_tagged1 us_main_type2)(rec__public_derives_private__grand_child_private_tagged__f2 natural)(rec__ext__4 us_private)))))
-(define-fun us_split_fields_Root_Private_Tagged3__projection ((a us_split_fields8)) us_main_type1
+(define-fun us_split_fields_Root_Private_Tagged__3__projection ((a us_split_fields8)) us_main_type1
   (rec__private_with_attributes__root_private_tagged2 a))
 
-(define-fun us_split_fields_Child_Private_Tagged2__projection ((a us_split_fields8)) us_main_type2
+(define-fun us_split_fields_Child_Private_Tagged__2__projection ((a us_split_fields8)) us_main_type2
   (rec__private_with_attributes__child_private_tagged1 a))
 
-(define-fun us_split_fields_F2__projection1 ((a us_split_fields8)) natural
+(define-fun us_split_fields_F2__projection ((a us_split_fields8)) natural
   (rec__public_derives_private__grand_child_private_tagged__f2 a))
 
-(define-fun us_split_fields_6__projection ((a us_split_fields8)) us_private
+(define-fun us_split_fields___6__projection ((a us_split_fields8)) us_private
   (rec__ext__4 a))
 
 (declare-datatypes ((us_split_fields__ref4 0))
 (((mk___split_fields__ref4 (us_split_fields__content4 us_split_fields8)))))
-(define-fun us_split_fields__ref_7__projection ((a us_split_fields__ref4)) us_split_fields8
+(define-fun us_split_fields__ref___7__projection ((a us_split_fields__ref4)) us_split_fields8
   (us_split_fields__content4 a))
 
 (declare-datatypes ((us_rep4 0))
 (((mk___rep4 (us_split_fields9 us_split_fields8)(attr__tag4 Int)))))
-(define-fun us_rep_15__projection ((a us_rep4)) us_split_fields8 (us_split_fields9
-                                                                 a))
+(define-fun us_rep___15__projection ((a us_rep4)) us_split_fields8 (us_split_fields9
+                                                                   a))
 
-(define-fun us_rep_16__projection ((a us_rep4)) Int (attr__tag4 a))
+(define-fun us_rep___16__projection ((a us_rep4)) Int (attr__tag4 a))
 
 (declare-fun hide_ext__2 (us_main_type2 natural us_private) us_private)
 
@@ -634,29 +634,29 @@
 (declare-datatypes ((us_split_fields10 0))
 (((mk___split_fields5
   (rec__private_with_attributes__child1 us_main_type)(rec__public_derives_private__grand_child__f2 natural)(rec__private_with_attributes__root__f2 natural)(rec__ext__5 us_private)))))
-(define-fun us_split_fields_Child2__projection ((a us_split_fields10)) us_main_type
+(define-fun us_split_fields_Child__2__projection ((a us_split_fields10)) us_main_type
   (rec__private_with_attributes__child1 a))
 
-(define-fun us_split_fields_F23__projection ((a us_split_fields10)) natural
+(define-fun us_split_fields_F2__3__projection ((a us_split_fields10)) natural
   (rec__public_derives_private__grand_child__f2 a))
 
-(define-fun us_split_fields_F3__projection ((a us_split_fields10)) natural
+(define-fun us_split_fields_F__3__projection ((a us_split_fields10)) natural
   (rec__private_with_attributes__root__f2 a))
 
-(define-fun us_split_fields_8__projection ((a us_split_fields10)) us_private
+(define-fun us_split_fields___8__projection ((a us_split_fields10)) us_private
   (rec__ext__5 a))
 
 (declare-datatypes ((us_split_fields__ref5 0))
 (((mk___split_fields__ref5 (us_split_fields__content5 us_split_fields10)))))
-(define-fun us_split_fields__ref_9__projection ((a us_split_fields__ref5)) us_split_fields10
+(define-fun us_split_fields__ref___9__projection ((a us_split_fields__ref5)) us_split_fields10
   (us_split_fields__content5 a))
 
 (declare-datatypes ((us_rep5 0))
 (((mk___rep5 (us_split_fields11 us_split_fields10)(attr__tag5 Int)))))
-(define-fun us_rep_19__projection ((a us_rep5)) us_split_fields10 (us_split_fields11
-                                                                  a))
+(define-fun us_rep___19__projection ((a us_rep5)) us_split_fields10 (us_split_fields11
+                                                                    a))
 
-(define-fun us_rep_20__projection ((a us_rep5)) Int (attr__tag5 a))
+(define-fun us_rep___20__projection ((a us_rep5)) Int (attr__tag5 a))
 
 (declare-fun hide_ext__3 (us_main_type natural us_private) us_private)
 
@@ -797,29 +797,29 @@
 (declare-datatypes ((us_split_fields12 0))
 (((mk___split_fields6
   (rec__private_with_attributes__root_private_tagged3 us_main_type1)(rec__private_with_attributes__child_private_tagged2 us_main_type2)(rec__public_derives_private__private_grand_child_private_tagged__f2 natural)(rec__ext__6 us_private)))))
-(define-fun us_split_fields_Root_Private_Tagged5__projection ((a us_split_fields12)) us_main_type1
+(define-fun us_split_fields_Root_Private_Tagged__5__projection ((a us_split_fields12)) us_main_type1
   (rec__private_with_attributes__root_private_tagged3 a))
 
-(define-fun us_split_fields_Child_Private_Tagged4__projection ((a us_split_fields12)) us_main_type2
+(define-fun us_split_fields_Child_Private_Tagged__4__projection ((a us_split_fields12)) us_main_type2
   (rec__private_with_attributes__child_private_tagged2 a))
 
-(define-fun us_split_fields_F24__projection ((a us_split_fields12)) natural
+(define-fun us_split_fields_F2__4__projection ((a us_split_fields12)) natural
   (rec__public_derives_private__private_grand_child_private_tagged__f2 a))
 
-(define-fun us_split_fields_10__projection ((a us_split_fields12)) us_private
+(define-fun us_split_fields___10__projection ((a us_split_fields12)) us_private
   (rec__ext__6 a))
 
 (declare-datatypes ((us_split_fields__ref6 0))
 (((mk___split_fields__ref6 (us_split_fields__content6 us_split_fields12)))))
-(define-fun us_split_fields__ref_11__projection ((a us_split_fields__ref6)) us_split_fields12
+(define-fun us_split_fields__ref___11__projection ((a us_split_fields__ref6)) us_split_fields12
   (us_split_fields__content6 a))
 
 (declare-datatypes ((us_rep6 0))
 (((mk___rep6 (us_split_fields13 us_split_fields12)(attr__tag6 Int)))))
-(define-fun us_rep_24__projection ((a us_rep6)) us_split_fields12 (us_split_fields13
-                                                                  a))
+(define-fun us_rep___24__projection ((a us_rep6)) us_split_fields12 (us_split_fields13
+                                                                    a))
 
-(define-fun us_rep_25__projection ((a us_rep6)) Int (attr__tag6 a))
+(define-fun us_rep___25__projection ((a us_rep6)) Int (attr__tag6 a))
 
 (declare-fun hide_ext__4 (us_main_type2 natural us_private) us_private)
 

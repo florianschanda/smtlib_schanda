@@ -231,7 +231,7 @@
 (define-fun us_split_discrs___projection ((a us_split_discrs)) count_type
   (rec__use_maps__my_maps__map__capacity a))
 
-(define-fun us_split_discrs_2__projection ((a us_split_discrs)) hash_type
+(define-fun us_split_discrs___2__projection ((a us_split_discrs)) hash_type
   (rec__use_maps__my_maps__map__modulus a))
 
 (declare-datatypes ((us_split_discrs__ref 0))
@@ -246,17 +246,17 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_5__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___5__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep
   (us_split_discrs1 us_split_discrs)(us_split_fields1 us_split_fields)))))
-(define-fun us_rep_7__projection ((a us_rep)) us_split_discrs (us_split_discrs1
-                                                              a))
+(define-fun us_rep___7__projection ((a us_rep)) us_split_discrs (us_split_discrs1
+                                                                a))
 
-(define-fun us_rep_8__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___8__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -397,7 +397,7 @@
 
 (declare-datatypes ((key_type__ref 0))
 (((mk_key_type__ref (key_type__content key_type)))))
-(define-fun key_type__ref_2__projection ((a key_type__ref)) key_type
+(define-fun key_type__ref___2__projection ((a key_type__ref)) key_type
   (key_type__content a))
 
 (declare-sort us_main_type1 0)
@@ -434,7 +434,8 @@
 
 (declare-datatypes ((map__ref1 0))
 (((mk_map__ref1 (map__content1 us_rep1)))))
-(define-fun map__ref_2__projection ((a map__ref1)) us_rep1 (map__content1 a))
+(define-fun map__ref___2__projection ((a map__ref1)) us_rep1 (map__content1
+                                                             a))
 
 (declare-fun has_key (us_rep1 Int) Bool)
 
@@ -531,7 +532,7 @@
 
 (declare-datatypes ((element_type__ref 0))
 (((mk_element_type__ref (element_type__content element_type)))))
-(define-fun element_type__ref_3__projection ((a element_type__ref)) element_type
+(define-fun element_type__ref___3__projection ((a element_type__ref)) element_type
   (element_type__content a))
 
 (define-fun dynamic_invariant2 ((temp___expr_385 Int)
@@ -830,7 +831,7 @@
 
 (declare-datatypes ((element_type__ref2 0))
 (((mk_element_type__ref2 (element_type__content2 element_type2)))))
-(define-fun element_type__ref_2__projection ((a element_type__ref2)) element_type2
+(define-fun element_type__ref___2__projection ((a element_type__ref2)) element_type2
   (element_type__content2 a))
 
 (define-fun dynamic_invariant8 ((temp___expr_360 Int)

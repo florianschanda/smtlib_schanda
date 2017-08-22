@@ -8,6 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -112,8 +113,7 @@
 
 (declare-sort t_float32 0)
 
-(define-fun in_range1 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range1 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111101110)) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111101110)))))
@@ -146,8 +146,7 @@
 
 (declare-sort t_angle_360 0)
 
-(define-fun in_range2 ((x Float32)) Bool (and
-                                         (not (or (fp.isInfinite x) (fp.isNaN x)))
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000111 #b01101000000000000000000)))))
@@ -312,10 +311,8 @@
   (assert
   (and
   (= o (fp.sub RNE (to_rep (select angle1 3)) (to_rep (select angle1 3))))
-  (not (or (fp.isInfinite (fp.sub RNE (to_rep (select angle1 3)) (to_rep
-                                                                 (select
-                                                                 angle1 3)))) (fp.isNaN (fp.sub RNE
-  (to_rep (select angle1 3)) (to_rep (select angle1 3))))))))
+  (fp.isFinite32 (fp.sub RNE (to_rep (select angle1 3)) (to_rep
+                                                        (select angle1 3))))))
 
 (assert
 ;; WP_parameter_def

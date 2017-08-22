@@ -763,17 +763,17 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range2 temp___expr_15)))
 
-(define-fun dynamic_invariant2 ((temp___expr_223 Int)
-  (temp___is_init_220 Bool) (temp___skip_constant_221 Bool)
-  (temp___do_toplevel_222 Bool)) Bool (=>
-                                      (or (= temp___is_init_220 true)
-                                      (<= 0 12)) (in_range4 temp___expr_223)))
+(define-fun dynamic_invariant2 ((temp___expr_227 Int)
+  (temp___is_init_224 Bool) (temp___skip_constant_225 Bool)
+  (temp___do_toplevel_226 Bool)) Bool (=>
+                                      (or (= temp___is_init_224 true)
+                                      (<= 0 12)) (in_range4 temp___expr_227)))
 
-(define-fun dynamic_invariant3 ((temp___expr_229 Int)
-  (temp___is_init_226 Bool) (temp___skip_constant_227 Bool)
-  (temp___do_toplevel_228 Bool)) Bool (=>
-                                      (or (= temp___is_init_226 true)
-                                      (<= 0 9)) (in_range3 temp___expr_229)))
+(define-fun dynamic_invariant3 ((temp___expr_233 Int)
+  (temp___is_init_230 Bool) (temp___skip_constant_231 Bool)
+  (temp___do_toplevel_232 Bool)) Bool (=>
+                                      (or (= temp___is_init_230 true)
+                                      (<= 0 9)) (in_range3 temp___expr_233)))
 
 ;; found_none__post_axiom
   (assert true)
@@ -783,37 +783,37 @@
   (forall ((fruit Int))
   (! (= (= (found_none fruit) true) (= fruit 0)) :pattern ((found_none fruit)) )))
 
-(define-fun dynamic_invariant4 ((temp___expr_301 us_t)
-  (temp___is_init_298 Bool) (temp___skip_constant_299 Bool)
-  (temp___do_toplevel_300 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_299 true))
+(define-fun dynamic_invariant4 ((temp___expr_311 us_t)
+  (temp___is_init_308 Bool) (temp___skip_constant_309 Bool)
+  (temp___do_toplevel_310 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_309 true))
                                       (dynamic_property 1 2147483647
-                                      (first1 temp___expr_301)
-                                      (last1 temp___expr_301))))
+                                      (first1 temp___expr_311)
+                                      (last1 temp___expr_311))))
 
-(define-fun dynamic_invariant5 ((temp___expr_306 us_t1)
-  (temp___is_init_303 Bool) (temp___skip_constant_304 Bool)
-  (temp___do_toplevel_305 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_304 true))
+(define-fun dynamic_invariant5 ((temp___expr_316 us_t1)
+  (temp___is_init_313 Bool) (temp___skip_constant_314 Bool)
+  (temp___do_toplevel_315 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_314 true))
                                       (dynamic_property1 1 2147483647
-                                      (first3 temp___expr_306)
-                                      (last3 temp___expr_306))))
+                                      (first3 temp___expr_316)
+                                      (last3 temp___expr_316))))
 
-(define-fun dynamic_invariant6 ((temp___expr_317 us_t2)
-  (temp___is_init_314 Bool) (temp___skip_constant_315 Bool)
-  (temp___do_toplevel_316 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_315 true))
+(define-fun dynamic_invariant6 ((temp___expr_327 us_t2)
+  (temp___is_init_324 Bool) (temp___skip_constant_325 Bool)
+  (temp___do_toplevel_326 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_325 true))
                                       (dynamic_property2 1 2147483647
-                                      (first5 temp___expr_317)
-                                      (last5 temp___expr_317))))
+                                      (first5 temp___expr_327)
+                                      (last5 temp___expr_327))))
 
-(define-fun dynamic_invariant7 ((temp___expr_358 us_t3)
-  (temp___is_init_355 Bool) (temp___skip_constant_356 Bool)
-  (temp___do_toplevel_357 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_356 true))
+(define-fun dynamic_invariant7 ((temp___expr_370 us_t3)
+  (temp___is_init_367 Bool) (temp___skip_constant_368 Bool)
+  (temp___do_toplevel_369 Bool)) Bool (=>
+                                      (not (= temp___skip_constant_368 true))
                                       (dynamic_property3 1 2147483647
-                                      (first7 temp___expr_358)
-                                      (last7 temp___expr_358))))
+                                      (first7 temp___expr_370)
+                                      (last7 temp___expr_370))))
 
 (declare-const initial_crate (Array Int fruits))
 

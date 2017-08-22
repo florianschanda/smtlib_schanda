@@ -384,8 +384,8 @@
 
 (declare-datatypes ((statust__ref 0))
 (((mk_statust__ref (statust__content statust)))))
-(define-fun statust__ref_2__projection ((a statust__ref)) statust (statust__content
-                                                                  a))
+(define-fun statust__ref___2__projection ((a statust__ref)) statust (statust__content
+                                                                    a))
 
 (define-fun dynamic_invariant ((temp___expr_1792 Int)
   (temp___is_init_1789 Bool) (temp___skip_constant_1790 Bool)

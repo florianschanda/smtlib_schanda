@@ -349,8 +349,8 @@
 
 (declare-datatypes ((a_range__ref 0))
 (((mk_a_range__ref (a_range__content integer)))))
-(define-fun a_range__ref_2__projection ((a1 a_range__ref)) integer (a_range__content
-                                                                   a1))
+(define-fun a_range__ref___2__projection ((a1 a_range__ref)) integer
+  (a_range__content a1))
 
 (declare-sort twrapper2D1 0)
 

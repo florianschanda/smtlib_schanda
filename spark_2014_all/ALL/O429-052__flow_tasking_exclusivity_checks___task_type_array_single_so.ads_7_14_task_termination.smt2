@@ -66,7 +66,7 @@
 
 (declare-datatypes ((suspension_object__ref 0))
 (((mk_suspension_object__ref (suspension_object__content us_rep)))))
-(define-fun suspension_object__ref_2__projection ((a suspension_object__ref)) us_rep
+(define-fun suspension_object__ref___2__projection ((a suspension_object__ref)) us_rep
   (suspension_object__content a))
 
 (declare-fun suspend_until_true__specific_post (Int us_rep us_rep) Bool)

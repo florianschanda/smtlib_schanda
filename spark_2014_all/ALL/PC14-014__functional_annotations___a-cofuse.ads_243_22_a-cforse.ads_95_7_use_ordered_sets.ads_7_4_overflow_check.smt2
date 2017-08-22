@@ -87,7 +87,7 @@
 (declare-const dummy1 us_rep)
 
 (declare-datatypes ((set__ref 0)) (((mk_set__ref (set__content us_rep)))))
-(define-fun set__ref_2__projection ((a set__ref)) us_rep (set__content a))
+(define-fun set__ref___2__projection ((a set__ref)) us_rep (set__content a))
 
 (declare-fun is_empty (us_rep) Bool)
 
@@ -207,7 +207,7 @@
 
 (declare-datatypes ((element_type__ref 0))
 (((mk_element_type__ref (element_type__content element_type)))))
-(define-fun element_type__ref_3__projection ((a element_type__ref)) element_type
+(define-fun element_type__ref___3__projection ((a element_type__ref)) element_type
   (element_type__content a))
 
 (define-fun dynamic_invariant1 ((temp___expr_321 Int)

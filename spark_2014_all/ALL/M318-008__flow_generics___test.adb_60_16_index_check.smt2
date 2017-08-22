@@ -511,7 +511,7 @@
 
 (declare-const o8 Int)
 
-(declare-const temp___406 Int)
+(declare-const temp___425 Int)
 
 (declare-const o9 Int)
 
@@ -614,14 +614,14 @@
   (assert (= o8 (+ o7 (to_rep c__first))))
 
 ;; H
-  (assert (and (= temp___406 o8) (in_range1 o8)))
+  (assert (and (= temp___425 o8) (in_range1 o8)))
 
 ;; H
   (assert
-  (and (<= (to_rep c__first) temp___406) (<= temp___406 (to_rep c__last))))
+  (and (<= (to_rep c__first) temp___425) (<= temp___425 (to_rep c__last))))
 
 ;; H
-  (assert (= o9 temp___406))
+  (assert (= o9 temp___425))
 
 ;; H
   (assert (= o10 (select c o9)))
