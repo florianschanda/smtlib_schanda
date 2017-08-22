@@ -920,7 +920,7 @@ logic dummy : ft
 type ft__ref = { ft__content : ft
 }
 
-function ft__ref_2__projection(a: ft__ref) : ft = (a).ft__content
+function ft__ref___2__projection(a: ft__ref) : ft = (a).ft__content
 
 logic to_rep : ft -> t
 
@@ -947,13 +947,13 @@ rec__foo__double_tests__test_record_1__rec__c : ft }
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
 
-function us_split_fields__ref_2__projection(a: us_split_fields__ref) : us_split_fields =
+function us_split_fields__ref___2__projection(a: us_split_fields__ref) : us_split_fields =
   (a).us_split_fields__content
 
 type us_rep = { us_split_fields1 : us_split_fields
 }
 
-function us_rep_2__projection(a: us_rep) : us_split_fields =
+function us_rep___2__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
 logic bool_eq2 : us_rep, us_rep -> bool
@@ -1049,7 +1049,7 @@ logic dummy3 : ft
 type rec____ref = { rec____content : us_rep
 }
 
-function rec____ref_2__projection(a: rec____ref) : us_rep =
+function rec____ref___2__projection(a: rec____ref) : us_rep =
   (a).rec____content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int

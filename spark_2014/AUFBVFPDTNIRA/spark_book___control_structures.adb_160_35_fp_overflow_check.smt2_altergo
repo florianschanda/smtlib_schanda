@@ -1379,8 +1379,8 @@ goal WP_parameter_def :
   forall letter:int. forall o:int. forall o1:int. forall o2:int.
   forall o3:int. forall o4:int. forall o5:int. forall o6:t. forall o7:t.
   forall o8:t. forall o9:t. forall o10:t. forall o11:t. forall o12:t.
-  forall o13:int. forall o14:int. forall o15:int. forall temp___533:int.
-  forall temp___532:int. forall o16:t. forall o17:t. forall o18:t.
+  forall o13:int. forall o14:int. forall o15:int. forall temp___531:int.
+  forall temp___530:int. forall o16:t. forall o17:t. forall o18:t.
   forall o19:t. forall g1:int. forall result:int. forall letter1:int.
   forall result1:int. forall a1:int. forall result2:int. forall b1:int.
   forall result3:int. forall c1:int. forall result4:int. forall d1:int.
@@ -1531,7 +1531,7 @@ goal WP_parameter_def :
   (o15 = 8)) or ((not ((not (letter1 = 74)) -> (letter1 = 88))) and
   (o15 = 10))))))))))))) and ((result43 = { int__content = value }) and
   (value1 = o15))) -> (((result44 = { int__content = sum }) and
-  (sum1 = 0)) -> (((((temp___533 = sum1) and ((temp___532 = value1) and
+  (sum1 = 0)) -> (((((temp___531 = sum1) and ((temp___530 = value1) and
   (((((-2147483648) <= 2147483647) -> in_range2(value2)) and
   (((-2147483648) <= 2147483647) -> in_range2(sum2))) and
   ((in_range6(ada__integer_text_io__get__2__item) and ((result45 = {

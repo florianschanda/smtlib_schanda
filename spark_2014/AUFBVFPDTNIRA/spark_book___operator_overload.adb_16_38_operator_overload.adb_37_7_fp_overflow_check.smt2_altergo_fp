@@ -1389,13 +1389,13 @@ rec__operator_overload__point__y_coord : float1 }
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
 
-function us_split_fields__ref_2__projection(a: us_split_fields__ref) : us_split_fields =
+function us_split_fields__ref___2__projection(a: us_split_fields__ref) : us_split_fields =
   (a).us_split_fields__content
 
 type us_rep = { us_split_fields1 : us_split_fields
 }
 
-function us_rep_3__projection(a: us_rep) : us_split_fields =
+function us_rep___3__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
 logic bool_eq8 : us_rep, us_rep -> bool

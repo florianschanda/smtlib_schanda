@@ -1389,13 +1389,13 @@ function us_split_fields_location__projection(a: us_split_fields) : distance_t =
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
 
-function us_split_fields__ref_3__projection(a: us_split_fields__ref) : us_split_fields =
+function us_split_fields__ref___3__projection(a: us_split_fields__ref) : us_split_fields =
   (a).us_split_fields__content
 
 type us_rep = { us_split_fields1 : us_split_fields
 }
 
-function us_rep_3__projection(a: us_rep) : us_split_fields =
+function us_rep___3__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
 logic bool_eq12 : us_rep, us_rep -> bool
@@ -1597,13 +1597,13 @@ function us_split_fields_end_point__projection(a: us_split_fields2) : distance_t
 type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
 }
 
-function us_split_fields__ref_4__projection(a: us_split_fields__ref1) : us_split_fields2 =
+function us_split_fields__ref___4__projection(a: us_split_fields__ref1) : us_split_fields2 =
   (a).us_split_fields__content1
 
 type us_rep1 = { us_split_fields3 : us_split_fields2
 }
 
-function us_rep_4__projection(a: us_rep1) : us_split_fields2 =
+function us_rep___4__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
 logic bool_eq14 : us_rep1, us_rep1 -> bool

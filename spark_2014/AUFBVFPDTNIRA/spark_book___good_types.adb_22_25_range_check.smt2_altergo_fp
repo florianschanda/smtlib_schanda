@@ -1220,7 +1220,7 @@ logic dummy4 : num1
 type num__ref1 = { num__content1 : num1
 }
 
-function num__ref_2__projection(a: num__ref1) : num1 = (a).num__content1
+function num__ref___2__projection(a: num__ref1) : num1 = (a).num__content1
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 

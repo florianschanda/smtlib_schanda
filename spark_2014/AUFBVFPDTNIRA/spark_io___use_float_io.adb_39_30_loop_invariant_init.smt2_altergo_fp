@@ -1430,7 +1430,7 @@ logic dummy6 : us_rep
 type file_type__ref = { file_type__content : us_rep
 }
 
-function file_type__ref_2__projection(a: file_type__ref) : us_rep =
+function file_type__ref___2__projection(a: file_type__ref) : us_rep =
   (a).file_type__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
@@ -1466,7 +1466,7 @@ logic dummy7 : file_status
 type file_status__ref = { file_status__content : file_status
 }
 
-function file_status__ref_2__projection(a: file_status__ref) : file_status =
+function file_status__ref___2__projection(a: file_status__ref) : file_status =
   (a).file_status__content
 
 logic is_readable : us_rep -> bool
@@ -1668,7 +1668,7 @@ logic dummy9 : file_mode
 type file_mode__ref = { file_mode__content : file_mode
 }
 
-function file_mode__ref_3__projection(a: file_mode__ref) : file_mode =
+function file_mode__ref___3__projection(a: file_mode__ref) : file_mode =
   (a).file_mode__content
 
 type count
@@ -1694,7 +1694,8 @@ logic dummy10 : count
 type count__ref = { count__content : count
 }
 
-function count__ref_2__projection(a: count__ref) : count = (a).count__content
+function count__ref___2__projection(a: count__ref) : count =
+  (a).count__content
 
 logic is_standard_input : us_rep -> bool
 

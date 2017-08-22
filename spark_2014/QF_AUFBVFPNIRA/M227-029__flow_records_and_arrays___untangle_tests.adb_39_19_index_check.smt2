@@ -8,7 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
-(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (define-fun in_range ((x Int)) Bool (and (<= 1 x) (<= x 2147483647)))
 
 (define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_36 Bool)

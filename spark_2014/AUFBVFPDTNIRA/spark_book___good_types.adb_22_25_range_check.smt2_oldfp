@@ -1202,14 +1202,14 @@
 (declare-const dummy4 num1)
 
 (declare-datatypes ((num__ref1 0)) (((mk_num__ref1 (num__content1 num1)))))
-(define-fun num__ref_2__projection ((a num__ref1)) num1 (num__content1 a))
+(define-fun num__ref___2__projection ((a num__ref1)) num1 (num__content1 a))
 
-(define-fun dynamic_invariant4 ((temp___expr_536 t) (temp___is_init_533 Bool)
-  (temp___skip_constant_534 Bool)
-  (temp___do_toplevel_535 Bool)) Bool (=>
-                                      (or (= temp___is_init_533 true) (le
+(define-fun dynamic_invariant4 ((temp___expr_534 t) (temp___is_init_531 Bool)
+  (temp___skip_constant_532 Bool)
+  (temp___do_toplevel_533 Bool)) Bool (=>
+                                      (or (= temp___is_init_531 true) (le
                                       fliteral1 fliteral3)) (in_range5
-                                      temp___expr_536)))
+                                      temp___expr_534)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 

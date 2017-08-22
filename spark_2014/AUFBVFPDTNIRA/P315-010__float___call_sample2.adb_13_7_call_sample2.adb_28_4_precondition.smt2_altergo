@@ -1031,7 +1031,7 @@ logic dummy3 : nb_type1
 type nb_type__ref1 = { nb_type__content1 : nb_type1
 }
 
-function nb_type__ref_2__projection(a: nb_type__ref1) : nb_type1 =
+function nb_type__ref___2__projection(a: nb_type__ref1) : nb_type1 =
   (a).nb_type__content1
 
 type delta_time_type1
@@ -1058,7 +1058,7 @@ logic dummy4 : delta_time_type1
 type delta_time_type__ref1 = { delta_time_type__content1 : delta_time_type1
 }
 
-function delta_time_type__ref_2__projection(a: delta_time_type__ref1) : delta_time_type1 =
+function delta_time_type__ref___2__projection(a: delta_time_type__ref1) : delta_time_type1 =
   (a).delta_time_type__content1
 
 logic attr__ATTRIBUTE_ADDRESS : int

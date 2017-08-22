@@ -1072,10 +1072,10 @@ us_split_fields; attr__constrained : bool
 function us_rep___projection(a: us_rep) : us_split_discrs =
   (a).us_split_discrs1
 
-function us_rep_2__projection(a: us_rep) : us_split_fields =
+function us_rep___2__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
-function us_rep_3__projection(a: us_rep) : bool = (a).attr__constrained
+function us_rep___3__projection(a: us_rep) : bool = (a).attr__constrained
 
 predicate types__r__x__pred(a: us_rep) =
   (to_rep1(((a).us_split_discrs1).rec__types__r__i) = 0)

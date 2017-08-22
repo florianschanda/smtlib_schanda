@@ -1181,13 +1181,13 @@ function us_split_fields_location__projection(a: us_split_fields) : distance_t =
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
 
-function us_split_fields__ref_3__projection(a: us_split_fields__ref) : us_split_fields =
+function us_split_fields__ref___3__projection(a: us_split_fields__ref) : us_split_fields =
   (a).us_split_fields__content
 
 type us_rep = { us_split_fields1 : us_split_fields
 }
 
-function us_rep_3__projection(a: us_rep) : us_split_fields =
+function us_rep___3__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
 logic bool_eq5 : us_rep, us_rep -> bool
@@ -1388,13 +1388,13 @@ function us_split_fields_end_point__projection(a: us_split_fields2) : distance_t
 type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
 }
 
-function us_split_fields__ref_4__projection(a: us_split_fields__ref1) : us_split_fields2 =
+function us_split_fields__ref___4__projection(a: us_split_fields__ref1) : us_split_fields2 =
   (a).us_split_fields__content1
 
 type us_rep1 = { us_split_fields3 : us_split_fields2
 }
 
-function us_rep_4__projection(a: us_rep1) : us_split_fields2 =
+function us_rep___4__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
 logic bool_eq7 : us_rep1, us_rep1 -> bool
@@ -1487,19 +1487,19 @@ rec__deceleration_curve__target_t__speed : speed_t
 function us_split_fields_supervise__projection(a: us_split_fields4) : bool =
   (a).rec__deceleration_curve__target_t__supervise
 
-function us_split_fields_location2__projection(a: us_split_fields4) : distance_t =
+function us_split_fields_location__2__projection(a: us_split_fields4) : distance_t =
   (a).rec__deceleration_curve__target_t__location
 
 type us_split_fields__ref2 = { us_split_fields__content2 : us_split_fields4
 }
 
-function us_split_fields__ref_5__projection(a: us_split_fields__ref2) : us_split_fields4 =
+function us_split_fields__ref___5__projection(a: us_split_fields__ref2) : us_split_fields4 =
   (a).us_split_fields__content2
 
 type us_rep2 = { us_split_fields5 : us_split_fields4
 }
 
-function us_rep_5__projection(a: us_rep2) : us_split_fields4 =
+function us_rep___5__projection(a: us_rep2) : us_split_fields4 =
   (a).us_split_fields5
 
 logic bool_eq8 : us_rep2, us_rep2 -> bool

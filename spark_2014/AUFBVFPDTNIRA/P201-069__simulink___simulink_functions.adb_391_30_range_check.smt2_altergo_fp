@@ -1137,7 +1137,7 @@ logic dummy2 : integer_32
 type integer_32__ref = { integer_32__content : integer_32
 }
 
-function integer_32__ref_2__projection(a: integer_32__ref) : integer_32 =
+function integer_32__ref___2__projection(a: integer_32__ref) : integer_32 =
   (a).integer_32__content
 
 logic left : int

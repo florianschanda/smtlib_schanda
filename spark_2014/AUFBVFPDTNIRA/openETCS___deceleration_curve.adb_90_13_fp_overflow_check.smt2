@@ -8,7 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
-(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -334,13 +334,13 @@
 
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_3__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___3__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_3__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___3__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -535,13 +535,13 @@
 
 (declare-datatypes ((us_split_fields__ref1 0))
 (((mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref_4__projection ((a us_split_fields__ref1)) us_split_fields2
+(define-fun us_split_fields__ref___4__projection ((a us_split_fields__ref1)) us_split_fields2
   (us_split_fields__content1 a))
 
 (declare-datatypes ((us_rep1 0))
 (((mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep_4__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                a))
+(define-fun us_rep___4__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
 
 (define-fun bool_eq2 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
@@ -624,18 +624,18 @@
 (define-fun us_split_fields_supervise__projection ((a us_split_fields4)) Bool
   (rec__deceleration_curve__target_t__supervise a))
 
-(define-fun us_split_fields_location2__projection ((a us_split_fields4)) distance_t
+(define-fun us_split_fields_location__2__projection ((a us_split_fields4)) distance_t
   (rec__deceleration_curve__target_t__location a))
 
 (declare-datatypes ((us_split_fields__ref2 0))
 (((mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref_5__projection ((a us_split_fields__ref2)) us_split_fields4
+(define-fun us_split_fields__ref___5__projection ((a us_split_fields__ref2)) us_split_fields4
   (us_split_fields__content2 a))
 
 (declare-datatypes ((us_rep2 0))
 (((mk___rep2 (us_split_fields5 us_split_fields4)))))
-(define-fun us_rep_5__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
-                                                                a))
+(define-fun us_rep___5__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
+                                                                  a))
 
 (define-fun bool_eq3 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
@@ -1156,13 +1156,13 @@
 
 (declare-datatypes ((us_split_fields__ref4 0))
 (((mk___split_fields__ref4 (us_split_fields__content4 us_split_fields8)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref4)) us_split_fields8
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref4)) us_split_fields8
   (us_split_fields__content4 a))
 
 (declare-datatypes ((us_rep4 0))
 (((mk___rep4 (us_split_fields9 us_split_fields8)))))
-(define-fun us_rep_2__projection ((a us_rep4)) us_split_fields8 (us_split_fields9
-                                                                a))
+(define-fun us_rep___2__projection ((a us_rep4)) us_split_fields8 (us_split_fields9
+                                                                  a))
 
 (define-fun bool_eq6 ((a us_rep4)
   (b us_rep4)) Bool (ite (and

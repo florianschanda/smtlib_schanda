@@ -1406,13 +1406,13 @@ rec__spaces__positions__position__y : float1 }
 type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
 }
 
-function us_split_fields__ref_2__projection(a: us_split_fields__ref1) : us_split_fields2 =
+function us_split_fields__ref___2__projection(a: us_split_fields__ref1) : us_split_fields2 =
   (a).us_split_fields__content1
 
 type us_rep1 = { us_split_fields3 : us_split_fields2
 }
 
-function us_rep_2__projection(a: us_rep1) : us_split_fields2 =
+function us_rep___2__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
 logic bool_eq11 : us_rep1, us_rep1 -> bool
@@ -1556,13 +1556,13 @@ function us_split_fields_iDir__projection(a: us_split_fields4) : idir_t =
 type us_split_fields__ref2 = { us_split_fields__content2 : us_split_fields4
 }
 
-function us_split_fields__ref_6__projection(a: us_split_fields__ref2) : us_split_fields4 =
+function us_split_fields__ref___6__projection(a: us_split_fields__ref2) : us_split_fields4 =
   (a).us_split_fields__content2
 
 type us_rep2 = { us_split_fields5 : us_split_fields4
 }
 
-function us_rep_8__projection(a: us_rep2) : us_split_fields4 =
+function us_rep___8__projection(a: us_rep2) : us_split_fields4 =
   (a).us_split_fields5
 
 logic bool_eq13 : us_rep2, us_rep2 -> bool
@@ -1673,13 +1673,13 @@ function us_split_fields_otherGap__projection(a: us_split_fields6) : us_rep2 =
 type us_split_fields__ref3 = { us_split_fields__content3 : us_split_fields6
 }
 
-function us_split_fields__ref_7__projection(a: us_split_fields__ref3) : us_split_fields6 =
+function us_split_fields__ref___7__projection(a: us_split_fields__ref3) : us_split_fields6 =
   (a).us_split_fields__content3
 
 type us_rep3 = { us_split_fields7 : us_split_fields6
 }
 
-function us_rep_9__projection(a: us_rep3) : us_split_fields6 =
+function us_rep___9__projection(a: us_rep3) : us_split_fields6 =
   (a).us_split_fields7
 
 logic bool_eq14 : us_rep3, us_rep3 -> bool
@@ -1850,7 +1850,7 @@ logic dummy21 : option
 type option__ref = { option__content : option
 }
 
-function option__ref_2__projection(a: option__ref) : option =
+function option__ref___2__projection(a: option__ref) : option =
   (a).option__content
 
 logic to_rep6 : option -> int
@@ -1869,13 +1869,13 @@ axiom coerce_axiom6 :
 type us_split_discrs = { rec__algorithm__valley_option__opt : option
 }
 
-function us_split_discrs_2__projection(a: us_split_discrs) : option =
+function us_split_discrs___2__projection(a: us_split_discrs) : option =
   (a).rec__algorithm__valley_option__opt
 
 type us_split_discrs__ref = { us_split_discrs__content : us_split_discrs
 }
 
-function us_split_discrs__ref_2__projection(a: us_split_discrs__ref) : us_split_discrs =
+function us_split_discrs__ref___2__projection(a: us_split_discrs__ref) : us_split_discrs =
   (a).us_split_discrs__content
 
 type us_split_fields8 = { rec__algorithm__valley_option__value : us_rep3
@@ -1887,20 +1887,20 @@ function us_split_fields_value__projection(a: us_split_fields8) : us_rep3 =
 type us_split_fields__ref4 = { us_split_fields__content4 : us_split_fields8
 }
 
-function us_split_fields__ref_8__projection(a: us_split_fields__ref4) : us_split_fields8 =
+function us_split_fields__ref___8__projection(a: us_split_fields__ref4) : us_split_fields8 =
   (a).us_split_fields__content4
 
 type us_rep4 = { us_split_discrs1 : us_split_discrs; us_split_fields9 :
 us_split_fields8; attr__constrained : bool
 }
 
-function us_rep_10__projection(a: us_rep4) : us_split_discrs =
+function us_rep___10__projection(a: us_rep4) : us_split_discrs =
   (a).us_split_discrs1
 
-function us_rep_11__projection(a: us_rep4) : us_split_fields8 =
+function us_rep___11__projection(a: us_rep4) : us_split_fields8 =
   (a).us_split_fields9
 
-function us_rep_12__projection(a: us_rep4) : bool = (a).attr__constrained
+function us_rep___12__projection(a: us_rep4) : bool = (a).attr__constrained
 
 predicate algorithm__valley_option__value__pred(a: us_rep4) =
   (to_rep6(((a).us_split_discrs1).rec__algorithm__valley_option__opt) = 1)
@@ -2054,13 +2054,13 @@ type us_split_discrs2 = { rec__algorithm__gap_vectors__list__capacity :
 count_type
 }
 
-function us_split_discrs_3__projection(a: us_split_discrs2) : count_type =
+function us_split_discrs___3__projection(a: us_split_discrs2) : count_type =
   (a).rec__algorithm__gap_vectors__list__capacity
 
 type us_split_discrs__ref1 = { us_split_discrs__content1 : us_split_discrs2
 }
 
-function us_split_discrs__ref_3__projection(a: us_split_discrs__ref1) : us_split_discrs2 =
+function us_split_discrs__ref___3__projection(a: us_split_discrs__ref1) : us_split_discrs2 =
   (a).us_split_discrs__content1
 
 type us_split_fields10 = { rec__algorithm__gap_vectors__list : us_main_type
@@ -2072,17 +2072,17 @@ function us_split_fields_List__projection(a: us_split_fields10) : us_main_type =
 type us_split_fields__ref5 = { us_split_fields__content5 : us_split_fields10
 }
 
-function us_split_fields__ref_9__projection(a: us_split_fields__ref5) : us_split_fields10 =
+function us_split_fields__ref___9__projection(a: us_split_fields__ref5) : us_split_fields10 =
   (a).us_split_fields__content5
 
 type us_rep5 = { us_split_discrs3 : us_split_discrs2; us_split_fields11 :
 us_split_fields10
 }
 
-function us_rep_13__projection(a: us_rep5) : us_split_discrs2 =
+function us_rep___13__projection(a: us_rep5) : us_split_discrs2 =
   (a).us_split_discrs3
 
-function us_rep_14__projection(a: us_rep5) : us_split_fields10 =
+function us_rep___14__projection(a: us_rep5) : us_split_fields10 =
   (a).us_split_fields11
 
 logic bool_eq19 : us_rep5, us_rep5 -> bool
@@ -2156,13 +2156,13 @@ function us_split_fields_Node__projection(a: us_split_fields12) : count_type =
 type us_split_fields__ref6 = { us_split_fields__content6 : us_split_fields12
 }
 
-function us_split_fields__ref_10__projection(a: us_split_fields__ref6) : us_split_fields12 =
+function us_split_fields__ref___10__projection(a: us_split_fields__ref6) : us_split_fields12 =
   (a).us_split_fields__content6
 
 type us_rep6 = { us_split_fields13 : us_split_fields12
 }
 
-function us_rep_15__projection(a: us_rep6) : us_split_fields12 =
+function us_rep___15__projection(a: us_rep6) : us_split_fields12 =
   (a).us_split_fields13
 
 logic bool_eq20 : us_rep6, us_rep6 -> bool
@@ -2288,7 +2288,7 @@ logic has_element__function_guard : bool, us_rep5, us_rep6 -> prop
 type element_type__ref1 = { element_type__content1 : us_rep2
 }
 
-function element_type__ref_2__projection(a: element_type__ref1) : us_rep2 =
+function element_type__ref___2__projection(a: element_type__ref1) : us_rep2 =
   (a).element_type__content1
 
 type us_main_type2
@@ -2519,7 +2519,7 @@ logic dummy37 : us_main_type
 type list__ref1 = { list__content1 : us_rep5
 }
 
-function list__ref_2__projection(a: list__ref1) : us_rep5 =
+function list__ref___2__projection(a: list__ref1) : us_rep5 =
   (a).list__content1
 
 type natural
@@ -2851,20 +2851,20 @@ rec__robot_iface__speed_option__angle : float1 }
 type us_split_fields__ref7 = { us_split_fields__content7 : us_split_fields14
 }
 
-function us_split_fields__ref_4__projection(a: us_split_fields__ref7) : us_split_fields14 =
+function us_split_fields__ref___4__projection(a: us_split_fields__ref7) : us_split_fields14 =
   (a).us_split_fields__content7
 
 type us_rep9 = { us_split_discrs5 : us_split_discrs4; us_split_fields15 :
 us_split_fields14; attr__constrained1 : bool
 }
 
-function us_rep_4__projection(a: us_rep9) : us_split_discrs4 =
+function us_rep___4__projection(a: us_rep9) : us_split_discrs4 =
   (a).us_split_discrs5
 
-function us_rep_5__projection(a: us_rep9) : us_split_fields14 =
+function us_rep___5__projection(a: us_rep9) : us_split_fields14 =
   (a).us_split_fields15
 
-function us_rep_6__projection(a: us_rep9) : bool = (a).attr__constrained1
+function us_rep___6__projection(a: us_rep9) : bool = (a).attr__constrained1
 
 predicate robot_iface__speed_option__modulus__pred(a: us_rep9) =
   (to_rep11(((a).us_split_discrs5).rec__robot_iface__speed_option__opt) = 1)
@@ -3010,13 +3010,13 @@ function us_split_fields_goal_reached__projection(a: us_split_fields16) : bool =
 type us_split_fields__ref8 = { us_split_fields__content8 : us_split_fields16
 }
 
-function us_split_fields__ref_5__projection(a: us_split_fields__ref8) : us_split_fields16 =
+function us_split_fields__ref___5__projection(a: us_split_fields__ref8) : us_split_fields16 =
   (a).us_split_fields__content8
 
 type us_rep10 = { us_split_fields17 : us_split_fields16
 }
 
-function us_rep_7__projection(a: us_rep10) : us_split_fields16 =
+function us_rep___7__projection(a: us_rep10) : us_split_fields16 =
   (a).us_split_fields17
 
 logic bool_eq30 : us_rep10, us_rep10 -> bool
@@ -3434,13 +3434,13 @@ function us_split_fields_second__projection(a: us_split_fields18) : us_rep =
 type us_split_fields__ref9 = { us_split_fields__content9 : us_split_fields18
 }
 
-function us_split_fields__ref_11__projection(a: us_split_fields__ref9) : us_split_fields18 =
+function us_split_fields__ref___11__projection(a: us_split_fields__ref9) : us_split_fields18 =
   (a).us_split_fields__content9
 
 type us_rep11 = { us_split_fields19 : us_split_fields18
 }
 
-function us_rep_16__projection(a: us_rep11) : us_split_fields18 =
+function us_rep___16__projection(a: us_rep11) : us_split_fields18 =
   (a).us_split_fields19
 
 logic bool_eq31 : us_rep11, us_rep11 -> bool
@@ -3656,13 +3656,13 @@ type us_split_fields__ref10 = { us_split_fields__content10 :
 us_split_fields20
 }
 
-function us_split_fields__ref_12__projection(a: us_split_fields__ref10) : us_split_fields20 =
+function us_split_fields__ref___12__projection(a: us_split_fields__ref10) : us_split_fields20 =
   (a).us_split_fields__content10
 
 type us_rep12 = { us_split_fields21 : us_split_fields20
 }
 
-function us_rep_17__projection(a: us_rep12) : us_split_fields20 =
+function us_rep___17__projection(a: us_rep12) : us_split_fields20 =
   (a).us_split_fields21
 
 logic bool_eq33 : us_rep12, us_rep12 -> bool
@@ -4037,13 +4037,13 @@ type us_split_discrs6 = { rec__algorithm__findbestvalley__gap_id_pair__opt :
 option
 }
 
-function us_split_discrs_4__projection(a: us_split_discrs6) : option =
+function us_split_discrs___4__projection(a: us_split_discrs6) : option =
   (a).rec__algorithm__findbestvalley__gap_id_pair__opt
 
 type us_split_discrs__ref3 = { us_split_discrs__content3 : us_split_discrs6
 }
 
-function us_split_discrs__ref_4__projection(a: us_split_discrs__ref3) : us_split_discrs6 =
+function us_split_discrs__ref___4__projection(a: us_split_discrs__ref3) : us_split_discrs6 =
   (a).us_split_discrs__content3
 
 type us_split_fields22 = {
@@ -4061,20 +4061,20 @@ type us_split_fields__ref11 = { us_split_fields__content11 :
 us_split_fields22
 }
 
-function us_split_fields__ref_13__projection(a: us_split_fields__ref11) : us_split_fields22 =
+function us_split_fields__ref___13__projection(a: us_split_fields__ref11) : us_split_fields22 =
   (a).us_split_fields__content11
 
 type us_rep13 = { us_split_discrs7 : us_split_discrs6; us_split_fields23 :
 us_split_fields22; attr__constrained2 : bool
 }
 
-function us_rep_18__projection(a: us_rep13) : us_split_discrs6 =
+function us_rep___18__projection(a: us_rep13) : us_split_discrs6 =
   (a).us_split_discrs7
 
-function us_rep_19__projection(a: us_rep13) : us_split_fields22 =
+function us_rep___19__projection(a: us_rep13) : us_split_fields22 =
   (a).us_split_fields23
 
-function us_rep_20__projection(a: us_rep13) : bool = (a).attr__constrained2
+function us_rep___20__projection(a: us_rep13) : bool = (a).attr__constrained2
 
 predicate algorithm__findbestvalley__gap_id_pair__rising__pred(a: us_rep13) =
   (to_rep6(((a).us_split_discrs7).rec__algorithm__findbestvalley__gap_id_pair__opt) = 1)
@@ -5385,7 +5385,7 @@ logic dummy145 : element_type
 type element_type__ref2 = { element_type__content2 : element_type
 }
 
-function element_type__ref_3__projection(a: element_type__ref2) : element_type =
+function element_type__ref___3__projection(a: element_type__ref2) : element_type =
   (a).element_type__content2
 
 logic witness : us_rep7, us_rep6 -> int

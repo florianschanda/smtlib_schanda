@@ -1393,13 +1393,13 @@ function us_split_fields_iDir__projection(a: us_split_fields2) : idir_t =
 type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
 }
 
-function us_split_fields__ref_6__projection(a: us_split_fields__ref1) : us_split_fields2 =
+function us_split_fields__ref___6__projection(a: us_split_fields__ref1) : us_split_fields2 =
   (a).us_split_fields__content1
 
 type us_rep2 = { us_split_fields3 : us_split_fields2
 }
 
-function us_rep_8__projection(a: us_rep2) : us_split_fields2 =
+function us_rep___8__projection(a: us_rep2) : us_split_fields2 =
   (a).us_split_fields3
 
 logic bool_eq10 : us_rep2, us_rep2 -> bool
@@ -1500,7 +1500,7 @@ function gap__ref___projection(a: gap__ref) : us_rep2 = (a).gap__content
 type element_type__ref = { element_type__content : us_rep2
 }
 
-function element_type__ref_2__projection(a: element_type__ref) : us_rep2 =
+function element_type__ref___2__projection(a: element_type__ref) : us_rep2 =
   (a).element_type__content
 
 logic last__function_guard : int, us_rep -> prop

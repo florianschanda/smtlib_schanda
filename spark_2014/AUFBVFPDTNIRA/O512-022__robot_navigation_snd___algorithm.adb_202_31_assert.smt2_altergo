@@ -1248,13 +1248,13 @@ function us_split_fields_iDir__projection(a: us_split_fields2) : idir_t =
 type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
 }
 
-function us_split_fields__ref_6__projection(a: us_split_fields__ref1) : us_split_fields2 =
+function us_split_fields__ref___6__projection(a: us_split_fields__ref1) : us_split_fields2 =
   (a).us_split_fields__content1
 
 type us_rep1 = { us_split_fields3 : us_split_fields2
 }
 
-function us_rep_8__projection(a: us_rep1) : us_split_fields2 =
+function us_rep___8__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
 logic bool_eq9 : us_rep1, us_rep1 -> bool
@@ -1404,13 +1404,13 @@ type us_split_discrs = { rec__algorithm__gap_vectors__list__capacity :
 count_type
 }
 
-function us_split_discrs_3__projection(a: us_split_discrs) : count_type =
+function us_split_discrs___3__projection(a: us_split_discrs) : count_type =
   (a).rec__algorithm__gap_vectors__list__capacity
 
 type us_split_discrs__ref = { us_split_discrs__content : us_split_discrs
 }
 
-function us_split_discrs__ref_3__projection(a: us_split_discrs__ref) : us_split_discrs =
+function us_split_discrs__ref___3__projection(a: us_split_discrs__ref) : us_split_discrs =
   (a).us_split_discrs__content
 
 type us_split_fields4 = { rec__algorithm__gap_vectors__list : us_main_type
@@ -1422,17 +1422,17 @@ function us_split_fields_List__projection(a: us_split_fields4) : us_main_type =
 type us_split_fields__ref2 = { us_split_fields__content2 : us_split_fields4
 }
 
-function us_split_fields__ref_9__projection(a: us_split_fields__ref2) : us_split_fields4 =
+function us_split_fields__ref___9__projection(a: us_split_fields__ref2) : us_split_fields4 =
   (a).us_split_fields__content2
 
 type us_rep2 = { us_split_discrs1 : us_split_discrs; us_split_fields5 :
 us_split_fields4
 }
 
-function us_rep_13__projection(a: us_rep2) : us_split_discrs =
+function us_rep___13__projection(a: us_rep2) : us_split_discrs =
   (a).us_split_discrs1
 
-function us_rep_14__projection(a: us_rep2) : us_split_fields4 =
+function us_rep___14__projection(a: us_rep2) : us_split_fields4 =
   (a).us_split_fields5
 
 logic bool_eq11 : us_rep2, us_rep2 -> bool
@@ -1527,13 +1527,13 @@ function us_split_fields_Node__projection(a: us_split_fields6) : count_type =
 type us_split_fields__ref3 = { us_split_fields__content3 : us_split_fields6
 }
 
-function us_split_fields__ref_10__projection(a: us_split_fields__ref3) : us_split_fields6 =
+function us_split_fields__ref___10__projection(a: us_split_fields__ref3) : us_split_fields6 =
   (a).us_split_fields__content3
 
 type us_rep3 = { us_split_fields7 : us_split_fields6
 }
 
-function us_rep_15__projection(a: us_rep3) : us_split_fields6 =
+function us_rep___15__projection(a: us_rep3) : us_split_fields6 =
   (a).us_split_fields7
 
 logic bool_eq12 : us_rep3, us_rep3 -> bool
@@ -1593,7 +1593,7 @@ function cursor__ref___projection(a: cursor__ref) : us_rep3 =
 type element_type__ref1 = { element_type__content1 : us_rep1
 }
 
-function element_type__ref_2__projection(a: element_type__ref1) : us_rep1 =
+function element_type__ref___2__projection(a: element_type__ref1) : us_rep1 =
   (a).element_type__content1
 
 type us_main_type1
@@ -1758,7 +1758,7 @@ logic dummy16 : us_main_type
 type list__ref1 = { list__content1 : us_rep2
 }
 
-function list__ref_2__projection(a: list__ref1) : us_rep2 =
+function list__ref___2__projection(a: list__ref1) : us_rep2 =
   (a).list__content1
 
 logic is_empty : us_rep2 -> bool
@@ -1775,13 +1775,13 @@ function us_split_fields_second__projection(a: us_split_fields8) : us_rep =
 type us_split_fields__ref4 = { us_split_fields__content4 : us_split_fields8
 }
 
-function us_split_fields__ref_11__projection(a: us_split_fields__ref4) : us_split_fields8 =
+function us_split_fields__ref___11__projection(a: us_split_fields__ref4) : us_split_fields8 =
   (a).us_split_fields__content4
 
 type us_rep6 = { us_split_fields9 : us_split_fields8
 }
 
-function us_rep_16__projection(a: us_rep6) : us_split_fields8 =
+function us_rep___16__projection(a: us_rep6) : us_split_fields8 =
   (a).us_split_fields9
 
 logic bool_eq15 : us_rep6, us_rep6 -> bool
@@ -2199,7 +2199,7 @@ logic dummy21 : element_type
 type element_type__ref2 = { element_type__content2 : element_type
 }
 
-function element_type__ref_3__projection(a: element_type__ref2) : element_type =
+function element_type__ref___3__projection(a: element_type__ref2) : element_type =
   (a).element_type__content2
 
 logic witness : us_rep5, us_rep3 -> int

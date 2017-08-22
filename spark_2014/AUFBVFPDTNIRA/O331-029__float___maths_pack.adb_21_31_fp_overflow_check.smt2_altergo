@@ -1505,7 +1505,7 @@ logic dummy4 : source1
 type source__ref1 = { source__content1 : source1
 }
 
-function source__ref_2__projection(a: source__ref1) : source1 =
+function source__ref___2__projection(a: source__ref1) : source1 =
   (a).source__content1
 
 type target1
@@ -1529,7 +1529,7 @@ logic dummy5 : target1
 type target__ref1 = { target__content1 : target1
 }
 
-function target__ref_2__projection(a: target__ref1) : target1 =
+function target__ref___2__projection(a: target__ref1) : target1 =
   (a).target__content1
 
 logic unsigned_32_to_float : t -> t1

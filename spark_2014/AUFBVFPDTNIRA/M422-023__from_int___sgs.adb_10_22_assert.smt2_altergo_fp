@@ -1056,7 +1056,7 @@ logic dummy : float1
 type float__ref = { float__content : float1
 }
 
-function float__ref_2__projection(a: float__ref) : float1 =
+function float__ref___2__projection(a: float__ref) : float1 =
   (a).float__content
 
 type t1

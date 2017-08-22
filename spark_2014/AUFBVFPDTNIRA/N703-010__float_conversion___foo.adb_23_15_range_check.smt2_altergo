@@ -973,7 +973,7 @@ logic dummy1 : t1
 type t__ref1 = { t__content1 : t1
 }
 
-function t__ref_2__projection(a: t__ref1) : t1 = (a).t__content1
+function t__ref___2__projection(a: t__ref1) : t1 = (a).t__content1
 
 logic attr__ATTRIBUTE_ADDRESS : int
 

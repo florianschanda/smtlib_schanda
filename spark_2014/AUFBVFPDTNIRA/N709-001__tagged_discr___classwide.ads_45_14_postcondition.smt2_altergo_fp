@@ -1193,7 +1193,7 @@ type us_rep = { us_split_fields1 : us_split_fields; attr__tag : int
 function us_rep___projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
-function us_rep_2__projection(a: us_rep) : int = (a).attr__tag
+function us_rep___2__projection(a: us_rep) : int = (a).attr__tag
 
 logic bool_eq5 : us_rep, us_rep -> bool
 
@@ -1405,28 +1405,28 @@ function us_split_fields_W__projection(a: us_split_fields2) : integer =
 function us_split_fields_XX__projection(a: us_split_fields2) : integer =
   (a).rec__classwide__u2__xx
 
-function us_split_fields_Z2__projection(a: us_split_fields2) : bool =
+function us_split_fields_Z__2__projection(a: us_split_fields2) : bool =
   (a).rec__classwide__t__z1
 
-function us_split_fields_X2__projection(a: us_split_fields2) : integer =
+function us_split_fields_X__2__projection(a: us_split_fields2) : integer =
   (a).rec__classwide__t__x1
 
-function us_split_fields_2__projection(a: us_split_fields2) : us_private =
+function us_split_fields___2__projection(a: us_split_fields2) : us_private =
   (a).rec__ext__1
 
 type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
 }
 
-function us_split_fields__ref_2__projection(a: us_split_fields__ref1) : us_split_fields2 =
+function us_split_fields__ref___2__projection(a: us_split_fields__ref1) : us_split_fields2 =
   (a).us_split_fields__content1
 
 type us_rep1 = { us_split_fields3 : us_split_fields2; attr__tag1 : int
 }
 
-function us_rep_3__projection(a: us_rep1) : us_split_fields2 =
+function us_rep___3__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
-function us_rep_4__projection(a: us_rep1) : int = (a).attr__tag1
+function us_rep___4__projection(a: us_rep1) : int = (a).attr__tag1
 
 logic hide_ext__ : integer, integer, float1, us_private -> us_private
 

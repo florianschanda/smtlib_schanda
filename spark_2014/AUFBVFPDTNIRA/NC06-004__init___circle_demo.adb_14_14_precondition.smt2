@@ -8,7 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
-(define-fun fp.isFinite64 ((x Float64)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
+(define-fun fp.isFinite64 ((x Float64)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -480,13 +480,13 @@
   (rec__shapes5__circle__center_x coordinate_type)(rec__shapes5__circle__center_y coordinate_type)(rec__shapes5__circle__radius radius_type)))))
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_3__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___3__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (and

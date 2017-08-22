@@ -8,7 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
-(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -351,12 +351,12 @@
 (define-fun uppercase__ref___projection ((a uppercase__ref)) uppercase
   (uppercase__content a))
 
-(define-fun dynamic_invariant6 ((temp___expr_529 Int)
-  (temp___is_init_526 Bool) (temp___skip_constant_527 Bool)
-  (temp___do_toplevel_528 Bool)) Bool (=>
-                                      (or (= temp___is_init_526 true)
+(define-fun dynamic_invariant6 ((temp___expr_527 Int)
+  (temp___is_init_524 Bool) (temp___skip_constant_525 Bool)
+  (temp___do_toplevel_526 Bool)) Bool (=>
+                                      (or (= temp___is_init_524 true)
                                       (<= 65 90)) (in_range7
-                                      temp___expr_529)))
+                                      temp___expr_527)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
@@ -499,9 +499,9 @@
 
 (declare-const o14 Int)
 
-(declare-const temp___533 Int)
+(declare-const temp___531 Int)
 
-(declare-const temp___532 Int)
+(declare-const temp___530 Int)
 
 (declare-const o15 Float32)
 
@@ -1435,10 +1435,10 @@
   (assert (= sum1 0))
 
 ;; H
-  (assert (= temp___533 sum1))
+  (assert (= temp___531 sum1))
 
 ;; H
-  (assert (= temp___532 value1))
+  (assert (= temp___530 value1))
 
 ;; H
   (assert

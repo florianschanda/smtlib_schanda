@@ -1078,10 +1078,10 @@ us_split_fields; attr__tag : int
 function us_rep___projection(a: us_rep) : us_split_discrs =
   (a).us_split_discrs1
 
-function us_rep_2__projection(a: us_rep) : us_split_fields =
+function us_rep___2__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
-function us_rep_3__projection(a: us_rep) : int = (a).attr__tag
+function us_rep___3__projection(a: us_rep) : int = (a).attr__tag
 
 predicate tagged_discr__t__x__pred(a: us_rep) =
   ((to_rep2(((a).us_split_discrs1).rec__tagged_discr__t__discr) = 0) or
@@ -1235,32 +1235,32 @@ rec__tagged_discr__t__y1 : float1; rec__ext__1 : us_private
 function us_split_fields_W__projection(a: us_split_fields2) : integer =
   (a).rec__tagged_discr__u1__w
 
-function us_split_fields_Z2__projection(a: us_split_fields2) : bool =
+function us_split_fields_Z__2__projection(a: us_split_fields2) : bool =
   (a).rec__tagged_discr__t__z1
 
-function us_split_fields_X2__projection(a: us_split_fields2) : integer =
+function us_split_fields_X__2__projection(a: us_split_fields2) : integer =
   (a).rec__tagged_discr__t__x1
 
-function us_split_fields_2__projection(a: us_split_fields2) : us_private =
+function us_split_fields___2__projection(a: us_split_fields2) : us_private =
   (a).rec__ext__1
 
 type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
 }
 
-function us_split_fields__ref_2__projection(a: us_split_fields__ref1) : us_split_fields2 =
+function us_split_fields__ref___2__projection(a: us_split_fields__ref1) : us_split_fields2 =
   (a).us_split_fields__content1
 
 type us_rep1 = { us_split_discrs2 : us_split_discrs; us_split_fields3 :
 us_split_fields2; attr__tag1 : int
 }
 
-function us_rep_4__projection(a: us_rep1) : us_split_discrs =
+function us_rep___4__projection(a: us_rep1) : us_split_discrs =
   (a).us_split_discrs2
 
-function us_rep_5__projection(a: us_rep1) : us_split_fields2 =
+function us_rep___5__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
-function us_rep_6__projection(a: us_rep1) : int = (a).attr__tag1
+function us_rep___6__projection(a: us_rep1) : int = (a).attr__tag1
 
 logic hide_ext__ : integer, us_private -> us_private
 
@@ -1460,38 +1460,38 @@ rec__tagged_discr__t__z2 : bool; rec__tagged_discr__t__x2 : integer;
 rec__tagged_discr__t__y2 : float1; rec__ext__2 : us_private
 }
 
-function us_split_fields_W2__projection(a: us_split_fields4) : integer =
+function us_split_fields_W__2__projection(a: us_split_fields4) : integer =
   (a).rec__tagged_discr__u2__w
 
 function us_split_fields_XX__projection(a: us_split_fields4) : integer =
   (a).rec__tagged_discr__u2__xx
 
-function us_split_fields_Z3__projection(a: us_split_fields4) : bool =
+function us_split_fields_Z__3__projection(a: us_split_fields4) : bool =
   (a).rec__tagged_discr__t__z2
 
-function us_split_fields_X3__projection(a: us_split_fields4) : integer =
+function us_split_fields_X__3__projection(a: us_split_fields4) : integer =
   (a).rec__tagged_discr__t__x2
 
-function us_split_fields_3__projection(a: us_split_fields4) : us_private =
+function us_split_fields___3__projection(a: us_split_fields4) : us_private =
   (a).rec__ext__2
 
 type us_split_fields__ref2 = { us_split_fields__content2 : us_split_fields4
 }
 
-function us_split_fields__ref_3__projection(a: us_split_fields__ref2) : us_split_fields4 =
+function us_split_fields__ref___3__projection(a: us_split_fields__ref2) : us_split_fields4 =
   (a).us_split_fields__content2
 
 type us_rep2 = { us_split_discrs3 : us_split_discrs; us_split_fields5 :
 us_split_fields4; attr__tag2 : int
 }
 
-function us_rep_7__projection(a: us_rep2) : us_split_discrs =
+function us_rep___7__projection(a: us_rep2) : us_split_discrs =
   (a).us_split_discrs3
 
-function us_rep_8__projection(a: us_rep2) : us_split_fields4 =
+function us_rep___8__projection(a: us_rep2) : us_split_fields4 =
   (a).us_split_fields5
 
-function us_rep_9__projection(a: us_rep2) : int = (a).attr__tag2
+function us_rep___9__projection(a: us_rep2) : int = (a).attr__tag2
 
 logic hide_ext__1 : integer, integer, float1, us_private -> us_private
 

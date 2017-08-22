@@ -1138,7 +1138,7 @@ us_split_fields
 function us_rep___projection(a: us_rep) : us_split_discrs =
   (a).us_split_discrs1
 
-function us_rep_2__projection(a: us_rep) : us_split_fields =
+function us_rep___2__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
 predicate rec__my_rec__x__pred(a: us_rep) =
@@ -1323,35 +1323,35 @@ function t2s__ref___projection(a: t2s__ref) : us_rep = (a).t2s__content
 type us_split_discrs2 = { rec__rec__sub_rec_ok__z : enum
 }
 
-function us_split_discrs_3__projection(a: us_split_discrs2) : enum =
+function us_split_discrs___3__projection(a: us_split_discrs2) : enum =
   (a).rec__rec__sub_rec_ok__z
 
 type us_split_discrs__ref1 = { us_split_discrs__content1 : us_split_discrs2
 }
 
-function us_split_discrs__ref_3__projection(a: us_split_discrs__ref1) : us_split_discrs2 =
+function us_split_discrs__ref___3__projection(a: us_split_discrs__ref1) : us_split_discrs2 =
   (a).us_split_discrs__content1
 
 type us_split_fields2 = { rec__rec__sub_rec_ok__plop : us_rep
 }
 
-function us_split_fields_Plop2__projection(a: us_split_fields2) : us_rep =
+function us_split_fields_Plop__2__projection(a: us_split_fields2) : us_rep =
   (a).rec__rec__sub_rec_ok__plop
 
 type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
 }
 
-function us_split_fields__ref_3__projection(a: us_split_fields__ref1) : us_split_fields2 =
+function us_split_fields__ref___3__projection(a: us_split_fields__ref1) : us_split_fields2 =
   (a).us_split_fields__content1
 
 type us_rep1 = { us_split_discrs3 : us_split_discrs2; us_split_fields3 :
 us_split_fields2
 }
 
-function us_rep_5__projection(a: us_rep1) : us_split_discrs2 =
+function us_rep___5__projection(a: us_rep1) : us_split_discrs2 =
   (a).us_split_discrs3
 
-function us_rep_6__projection(a: us_rep1) : us_split_fields2 =
+function us_rep___6__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
 predicate rec__sub_rec_ok__plop__pred(a: us_rep1) =
@@ -1531,23 +1531,23 @@ function t5b__ref___projection(a1: t5b__ref) : us_rep = (a1).t5b__content
 type us_split_fields4 = { rec__rec__sub_rec_ok__plop1 : us_rep
 }
 
-function us_split_fields_Plop4__projection(a1: us_split_fields4) : us_rep =
+function us_split_fields_Plop__4__projection(a1: us_split_fields4) : us_rep =
   (a1).rec__rec__sub_rec_ok__plop1
 
 type us_split_fields__ref2 = { us_split_fields__content2 : us_split_fields4
 }
 
-function us_split_fields__ref_7__projection(a1: us_split_fields__ref2) : us_split_fields4 =
+function us_split_fields__ref___7__projection(a1: us_split_fields__ref2) : us_split_fields4 =
   (a1).us_split_fields__content2
 
 type us_rep2 = { us_split_discrs4 : us_split_discrs2; us_split_fields5 :
 us_split_fields4
 }
 
-function us_rep_13__projection(a1: us_rep2) : us_split_discrs2 =
+function us_rep___13__projection(a1: us_rep2) : us_split_discrs2 =
   (a1).us_split_discrs4
 
-function us_rep_14__projection(a1: us_rep2) : us_split_fields4 =
+function us_rep___14__projection(a1: us_rep2) : us_split_fields4 =
   (a1).us_split_fields5
 
 function to_base(a1: us_rep2) : us_rep1 = { us_split_discrs3 =
@@ -1649,7 +1649,7 @@ logic dummy20 : float1
 type tzS__ref = { tzS__content : us_rep2
 }
 
-function tzS__ref_2__projection(a1: tzS__ref) : us_rep2 = (a1).tzS__content
+function tzS__ref___2__projection(a1: tzS__ref) : us_rep2 = (a1).tzS__content
 
 logic z__split_discrs : enum
 

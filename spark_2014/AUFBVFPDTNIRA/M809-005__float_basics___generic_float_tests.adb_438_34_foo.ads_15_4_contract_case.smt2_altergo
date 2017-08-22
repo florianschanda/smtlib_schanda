@@ -948,7 +948,7 @@ logic dummy : ft
 type ft__ref = { ft__content : ft
 }
 
-function ft__ref_2__projection(a: ft__ref) : ft = (a).ft__content
+function ft__ref___2__projection(a: ft__ref) : ft = (a).ft__content
 
 logic x : t
 

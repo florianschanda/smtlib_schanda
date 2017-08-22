@@ -1080,7 +1080,7 @@
 (declare-const dummy ft)
 
 (declare-datatypes ((ft__ref 0)) (((mk_ft__ref (ft__content ft)))))
-(define-fun ft__ref_2__projection ((a ft__ref)) ft (ft__content a))
+(define-fun ft__ref___2__projection ((a ft__ref)) ft (ft__content a))
 
 (declare-const fliteral1 t)
 

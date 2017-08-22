@@ -1102,7 +1102,7 @@
 
 (declare-datatypes ((integer_8__ref 0))
 (((mk_integer_8__ref (integer_8__content integer_8)))))
-(define-fun integer_8__ref_2__projection ((a integer_8__ref)) integer_8
+(define-fun integer_8__ref___2__projection ((a integer_8__ref)) integer_8
   (integer_8__content a))
 
 (define-fun dynamic_invariant ((temp___expr_147 Int)

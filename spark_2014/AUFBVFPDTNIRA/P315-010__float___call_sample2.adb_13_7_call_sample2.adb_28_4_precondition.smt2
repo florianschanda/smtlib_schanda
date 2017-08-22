@@ -8,7 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
-(define-fun fp.isFinite32 ((x Float32)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
+(define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -188,8 +188,8 @@
 
 (declare-datatypes ((nb_type__ref1 0))
 (((mk_nb_type__ref1 (nb_type__content1 nb_type1)))))
-(define-fun nb_type__ref_2__projection ((a nb_type__ref1)) nb_type1 (nb_type__content1
-                                                                    a))
+(define-fun nb_type__ref___2__projection ((a nb_type__ref1)) nb_type1
+  (nb_type__content1 a))
 
 (define-fun dynamic_invariant3 ((temp___expr_159 Int)
   (temp___is_init_156 Bool) (temp___skip_constant_157 Bool)
@@ -217,7 +217,7 @@
 
 (declare-datatypes ((delta_time_type__ref1 0))
 (((mk_delta_time_type__ref1 (delta_time_type__content1 delta_time_type1)))))
-(define-fun delta_time_type__ref_2__projection ((a delta_time_type__ref1)) delta_time_type1
+(define-fun delta_time_type__ref___2__projection ((a delta_time_type__ref1)) delta_time_type1
   (delta_time_type__content1 a))
 
 (define-fun dynamic_invariant4 ((temp___expr_171 Float32)

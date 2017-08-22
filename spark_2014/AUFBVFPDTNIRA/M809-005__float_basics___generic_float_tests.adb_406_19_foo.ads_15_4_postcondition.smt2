@@ -8,7 +8,7 @@
 ;;; SMT-LIB2 driver: bit-vectors, common part
 ;;; SMT-LIB2: integer arithmetic
 ;;; SMT-LIB2: real arithmetic
-(define-fun fp.isFinite64 ((x Float64)) Bool (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
+(define-fun fp.isFinite64 ((x Float64)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (declare-datatypes ((tuple0 0)) (((Tuple0))))
 (declare-sort us_private 0)
 
@@ -107,7 +107,7 @@
 (declare-const dummy ft)
 
 (declare-datatypes ((ft__ref 0)) (((mk_ft__ref (ft__content ft)))))
-(define-fun ft__ref_2__projection ((a ft__ref)) ft (ft__content a))
+(define-fun ft__ref___2__projection ((a ft__ref)) ft (ft__content a))
 
 (define-fun dynamic_invariant ((temp___expr_167 Float64)
   (temp___is_init_164 Bool) (temp___skip_constant_165 Bool)
@@ -145,13 +145,13 @@
   (rec__foo__double_tests__test_record_1__rec__a ft)(rec__foo__double_tests__test_record_1__rec__b ft)(rec__foo__double_tests__test_record_1__rec__c ft)))))
 (declare-datatypes ((us_split_fields__ref 0))
 (((mk___split_fields__ref (us_split_fields__content us_split_fields)))))
-(define-fun us_split_fields__ref_2__projection ((a us_split_fields__ref)) us_split_fields
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref)) us_split_fields
   (us_split_fields__content a))
 
 (declare-datatypes ((us_rep 0))
 (((mk___rep (us_split_fields1 us_split_fields)))))
-(define-fun us_rep_2__projection ((a us_rep)) us_split_fields (us_split_fields1
-                                                              a))
+(define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1
+                                                                a))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -247,8 +247,8 @@
 
 (declare-datatypes ((rec____ref 0))
 (((mk_rec____ref (rec____content us_rep)))))
-(define-fun rec____ref_2__projection ((a rec____ref)) us_rep (rec____content
-                                                             a))
+(define-fun rec____ref___2__projection ((a rec____ref)) us_rep (rec____content
+                                                               a))
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 

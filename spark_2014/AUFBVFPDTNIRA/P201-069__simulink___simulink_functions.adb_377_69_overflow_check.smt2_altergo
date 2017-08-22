@@ -999,7 +999,7 @@ logic dummy2 : integer_16
 type integer_16__ref = { integer_16__content : integer_16
 }
 
-function integer_16__ref_2__projection(a: integer_16__ref) : integer_16 =
+function integer_16__ref___2__projection(a: integer_16__ref) : integer_16 =
   (a).integer_16__content
 
 logic left : int

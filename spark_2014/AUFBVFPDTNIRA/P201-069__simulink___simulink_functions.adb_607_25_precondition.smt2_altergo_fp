@@ -1088,7 +1088,7 @@ logic dummy : integer_8
 type integer_8__ref = { integer_8__content : integer_8
 }
 
-function integer_8__ref_2__projection(a: integer_8__ref) : integer_8 =
+function integer_8__ref___2__projection(a: integer_8__ref) : integer_8 =
   (a).integer_8__content
 
 logic i : int

@@ -1092,8 +1092,8 @@
 
 (declare-datatypes ((float__ref 0))
 (((mk_float__ref (float__content float)))))
-(define-fun float__ref_2__projection ((a float__ref)) float (float__content
-                                                            a))
+(define-fun float__ref___2__projection ((a float__ref)) float (float__content
+                                                              a))
 
 (declare-const fliteral1 t)
 

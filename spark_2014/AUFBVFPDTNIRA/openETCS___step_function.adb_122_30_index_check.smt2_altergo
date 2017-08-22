@@ -1286,13 +1286,13 @@ function us_split_fields_Step__projection(a: us_split_fields2) : (int,us_rep) fa
 type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
 }
 
-function us_split_fields__ref_2__projection(a: us_split_fields__ref1) : us_split_fields2 =
+function us_split_fields__ref___2__projection(a: us_split_fields__ref1) : us_split_fields2 =
   (a).us_split_fields__content1
 
 type us_rep1 = { us_split_fields3 : us_split_fields2
 }
 
-function us_rep_2__projection(a: us_rep1) : us_split_fields2 =
+function us_rep___2__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
 logic bool_eq8 : us_rep1, us_rep1 -> bool

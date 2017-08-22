@@ -1138,7 +1138,7 @@ us_split_fields
 function us_rep___projection(a: us_rep) : us_split_discrs =
   (a).us_split_discrs1
 
-function us_rep_2__projection(a: us_rep) : us_split_fields =
+function us_rep___2__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
 predicate rec__my_rec__x__pred(a: us_rep) =
@@ -1323,13 +1323,13 @@ function t1s__ref___projection(a: t1s__ref) : us_rep = (a).t1s__content
 type us_split_discrs2 = { rec__rec__sub_rec__z : enum
 }
 
-function us_split_discrs_2__projection(a: us_split_discrs2) : enum =
+function us_split_discrs___2__projection(a: us_split_discrs2) : enum =
   (a).rec__rec__sub_rec__z
 
 type us_split_discrs__ref1 = { us_split_discrs__content1 : us_split_discrs2
 }
 
-function us_split_discrs__ref_2__projection(a: us_split_discrs__ref1) : us_split_discrs2 =
+function us_split_discrs__ref___2__projection(a: us_split_discrs__ref1) : us_split_discrs2 =
   (a).us_split_discrs__content1
 
 type us_split_fields2 = { rec__rec__sub_rec__plop : us_rep
@@ -1341,17 +1341,17 @@ function us_split_fields_Plop__projection(a: us_split_fields2) : us_rep =
 type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
 }
 
-function us_split_fields__ref_2__projection(a: us_split_fields__ref1) : us_split_fields2 =
+function us_split_fields__ref___2__projection(a: us_split_fields__ref1) : us_split_fields2 =
   (a).us_split_fields__content1
 
 type us_rep1 = { us_split_discrs3 : us_split_discrs2; us_split_fields3 :
 us_split_fields2
 }
 
-function us_rep_3__projection(a: us_rep1) : us_split_discrs2 =
+function us_rep___3__projection(a: us_rep1) : us_split_discrs2 =
   (a).us_split_discrs3
 
-function us_rep_4__projection(a: us_rep1) : us_split_fields2 =
+function us_rep___4__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
 logic bool_eq8 : us_rep1, us_rep1 -> bool
@@ -1523,23 +1523,23 @@ function t2b__ref___projection(a1: t2b__ref) : us_rep = (a1).t2b__content
 type us_split_fields4 = { rec__rec__sub_rec__plop1 : us_rep
 }
 
-function us_split_fields_Plop3__projection(a1: us_split_fields4) : us_rep =
+function us_split_fields_Plop__3__projection(a1: us_split_fields4) : us_rep =
   (a1).rec__rec__sub_rec__plop1
 
 type us_split_fields__ref2 = { us_split_fields__content2 : us_split_fields4
 }
 
-function us_split_fields__ref_6__projection(a1: us_split_fields__ref2) : us_split_fields4 =
+function us_split_fields__ref___6__projection(a1: us_split_fields__ref2) : us_split_fields4 =
   (a1).us_split_fields__content2
 
 type us_rep2 = { us_split_discrs4 : us_split_discrs2; us_split_fields5 :
 us_split_fields4
 }
 
-function us_rep_11__projection(a1: us_rep2) : us_split_discrs2 =
+function us_rep___11__projection(a1: us_rep2) : us_split_discrs2 =
   (a1).us_split_discrs4
 
-function us_rep_12__projection(a1: us_rep2) : us_split_fields4 =
+function us_rep___12__projection(a1: us_rep2) : us_split_fields4 =
   (a1).us_split_fields5
 
 function to_base(a1: us_rep2) : us_rep1 = { us_split_discrs3 =

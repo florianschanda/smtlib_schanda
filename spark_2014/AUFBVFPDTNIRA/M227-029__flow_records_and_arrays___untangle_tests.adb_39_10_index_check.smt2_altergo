@@ -1249,13 +1249,13 @@ function us_split_fields_Normal__projection(a: us_split_fields2) : us_rep =
 type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
 }
 
-function us_split_fields__ref_2__projection(a: us_split_fields__ref1) : us_split_fields2 =
+function us_split_fields__ref___2__projection(a: us_split_fields__ref1) : us_split_fields2 =
   (a).us_split_fields__content1
 
 type us_rep1 = { us_split_fields3 : us_split_fields2
 }
 
-function us_rep_2__projection(a: us_rep1) : us_split_fields2 =
+function us_rep___2__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
 logic bool_eq6 : us_rep1, us_rep1 -> bool

@@ -1632,13 +1632,13 @@ rec__spaces__positions__position__y : float1 }
 type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
 }
 
-function us_split_fields__ref_2__projection(a: us_split_fields__ref1) : us_split_fields2 =
+function us_split_fields__ref___2__projection(a: us_split_fields__ref1) : us_split_fields2 =
   (a).us_split_fields__content1
 
 type us_rep1 = { us_split_fields3 : us_split_fields2
 }
 
-function us_rep_2__projection(a: us_rep1) : us_split_fields2 =
+function us_rep___2__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
 logic bool_eq13 : us_rep1, us_rep1 -> bool
@@ -1974,20 +1974,20 @@ rec__robot_iface__speed_option__angle : float1 }
 type us_split_fields__ref2 = { us_split_fields__content2 : us_split_fields4
 }
 
-function us_split_fields__ref_4__projection(a: us_split_fields__ref2) : us_split_fields4 =
+function us_split_fields__ref___4__projection(a: us_split_fields__ref2) : us_split_fields4 =
   (a).us_split_fields__content2
 
 type us_rep2 = { us_split_discrs1 : us_split_discrs; us_split_fields5 :
 us_split_fields4; attr__constrained : bool
 }
 
-function us_rep_4__projection(a: us_rep2) : us_split_discrs =
+function us_rep___4__projection(a: us_rep2) : us_split_discrs =
   (a).us_split_discrs1
 
-function us_rep_5__projection(a: us_rep2) : us_split_fields4 =
+function us_rep___5__projection(a: us_rep2) : us_split_fields4 =
   (a).us_split_fields5
 
-function us_rep_6__projection(a: us_rep2) : bool = (a).attr__constrained
+function us_rep___6__projection(a: us_rep2) : bool = (a).attr__constrained
 
 predicate robot_iface__speed_option__modulus__pred(a: us_rep2) =
   (to_rep8(((a).us_split_discrs1).rec__robot_iface__speed_option__opt) = 1)
@@ -2133,13 +2133,13 @@ function us_split_fields_goal_reached__projection(a: us_split_fields6) : bool =
 type us_split_fields__ref3 = { us_split_fields__content3 : us_split_fields6
 }
 
-function us_split_fields__ref_5__projection(a: us_split_fields__ref3) : us_split_fields6 =
+function us_split_fields__ref___5__projection(a: us_split_fields__ref3) : us_split_fields6 =
   (a).us_split_fields__content3
 
 type us_rep3 = { us_split_fields7 : us_split_fields6
 }
 
-function us_rep_7__projection(a: us_rep3) : us_split_fields6 =
+function us_rep___7__projection(a: us_rep3) : us_split_fields6 =
   (a).us_split_fields7
 
 logic bool_eq19 : us_rep3, us_rep3 -> bool
@@ -2599,13 +2599,13 @@ function us_split_fields_iDir__projection(a: us_split_fields8) : idir_t =
 type us_split_fields__ref4 = { us_split_fields__content4 : us_split_fields8
 }
 
-function us_split_fields__ref_6__projection(a: us_split_fields__ref4) : us_split_fields8 =
+function us_split_fields__ref___6__projection(a: us_split_fields__ref4) : us_split_fields8 =
   (a).us_split_fields__content4
 
 type us_rep4 = { us_split_fields9 : us_split_fields8
 }
 
-function us_rep_8__projection(a: us_rep4) : us_split_fields8 =
+function us_rep___8__projection(a: us_rep4) : us_split_fields8 =
   (a).us_split_fields9
 
 logic bool_eq21 : us_rep4, us_rep4 -> bool
@@ -2713,13 +2713,13 @@ function us_split_fields_second__projection(a: us_split_fields10) : us_rep =
 type us_split_fields__ref5 = { us_split_fields__content5 : us_split_fields10
 }
 
-function us_split_fields__ref_11__projection(a: us_split_fields__ref5) : us_split_fields10 =
+function us_split_fields__ref___11__projection(a: us_split_fields__ref5) : us_split_fields10 =
   (a).us_split_fields__content5
 
 type us_rep5 = { us_split_fields11 : us_split_fields10
 }
 
-function us_rep_16__projection(a: us_rep5) : us_split_fields10 =
+function us_rep___16__projection(a: us_rep5) : us_split_fields10 =
   (a).us_split_fields11
 
 logic bool_eq22 : us_rep5, us_rep5 -> bool
@@ -2928,13 +2928,13 @@ type us_split_discrs2 = { rec__algorithm__gap_vectors__list__capacity :
 count_type
 }
 
-function us_split_discrs_3__projection(a: us_split_discrs2) : count_type =
+function us_split_discrs___3__projection(a: us_split_discrs2) : count_type =
   (a).rec__algorithm__gap_vectors__list__capacity
 
 type us_split_discrs__ref1 = { us_split_discrs__content1 : us_split_discrs2
 }
 
-function us_split_discrs__ref_3__projection(a: us_split_discrs__ref1) : us_split_discrs2 =
+function us_split_discrs__ref___3__projection(a: us_split_discrs__ref1) : us_split_discrs2 =
   (a).us_split_discrs__content1
 
 type us_split_fields12 = { rec__algorithm__gap_vectors__list : us_main_type
@@ -2946,17 +2946,17 @@ function us_split_fields_List__projection(a: us_split_fields12) : us_main_type =
 type us_split_fields__ref6 = { us_split_fields__content6 : us_split_fields12
 }
 
-function us_split_fields__ref_9__projection(a: us_split_fields__ref6) : us_split_fields12 =
+function us_split_fields__ref___9__projection(a: us_split_fields__ref6) : us_split_fields12 =
   (a).us_split_fields__content6
 
 type us_rep6 = { us_split_discrs3 : us_split_discrs2; us_split_fields13 :
 us_split_fields12
 }
 
-function us_rep_13__projection(a: us_rep6) : us_split_discrs2 =
+function us_rep___13__projection(a: us_rep6) : us_split_discrs2 =
   (a).us_split_discrs3
 
-function us_rep_14__projection(a: us_rep6) : us_split_fields12 =
+function us_rep___14__projection(a: us_rep6) : us_split_fields12 =
   (a).us_split_fields13
 
 logic bool_eq25 : us_rep6, us_rep6 -> bool
@@ -3070,7 +3070,7 @@ logic dummy52 : us_main_type
 type list__ref1 = { list__content1 : us_rep6
 }
 
-function list__ref_2__projection(a: list__ref1) : us_rep6 =
+function list__ref___2__projection(a: list__ref1) : us_rep6 =
   (a).list__content1
 
 logic dummy53 : (int,us_rep5) farray
@@ -3126,13 +3126,13 @@ function us_split_fields_driveAngle__projection(a: us_split_fields14) : us_rep =
 type us_split_fields__ref7 = { us_split_fields__content7 : us_split_fields14
 }
 
-function us_split_fields__ref_12__projection(a: us_split_fields__ref7) : us_split_fields14 =
+function us_split_fields__ref___12__projection(a: us_split_fields__ref7) : us_split_fields14 =
   (a).us_split_fields__content7
 
 type us_rep7 = { us_split_fields15 : us_split_fields14
 }
 
-function us_rep_17__projection(a: us_rep7) : us_split_fields14 =
+function us_rep___17__projection(a: us_rep7) : us_split_fields14 =
   (a).us_split_fields15
 
 logic bool_eq26 : us_rep7, us_rep7 -> bool
