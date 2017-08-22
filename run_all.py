@@ -71,8 +71,10 @@ def main():
     invocations = [("cvc4", v) for v in cvc4_used_versions]
     invocations.append(("z3", Z3_VERSION))
     if all_provers:
-        # We pick a random (but consistent) version for the OldFP run for CVC4
+        # We pick a random (but consistent) version for the OldFP and
+        # NoCBQI run for CVC4
         invocations.append(("oldfp", "cvc4_2017_08_17_c"))
+        invocations.append(("nocbqi", "cvc4_2017_08_17_c"))
 
         #invocations.append(("altergo", ALT_ERGO_VERSION))
         invocations.append(("altergo-fp", ALT_ERGO_FP_VERSION))

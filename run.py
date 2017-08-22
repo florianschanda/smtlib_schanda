@@ -51,6 +51,12 @@ def main():
                                ["--lang=smt2",
                                 "--no-cond-rewrite-quant",
                                 "--check-models"]))
+    # Same as CVC4, but using --no-cbqi
+    provers.append(Prover_Kind("nocbqi",
+                               ["--lang=smt2",
+                                "--no-cbqi",
+                                "--no-cond-rewrite-quant",
+                                "--check-models"]))
     # Same as CVC4, but using the old-style VCs
     provers.append(Prover_Kind("oldfp",
                                ["--lang=smt2",
@@ -58,6 +64,7 @@ def main():
                                 "--check-models"],
                                use_dialect="oldfp",
                                strict_dialect=True))
+
     provers.append(Prover_Kind("z3",
                                ["-in", "-smt2"],
                                use_logic=False,
