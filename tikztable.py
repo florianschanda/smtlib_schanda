@@ -94,7 +94,7 @@ class TikzTable(object):
             if x == 0:
                 return 0.0
             else:
-                return 2.5 + float(x - 1) * 1.25
+                return 2.5 + float(x - 1) * 1.0
 
         def tr_y(y):
             return float(-y) * 0.35
@@ -103,7 +103,7 @@ class TikzTable(object):
             n_atr = ["anchor=west"]
             # n_atr.append("fill=black!10")
             if title:
-                n_atr.append("rotate=45")
+                n_atr.append("rotate=65")
             n = r"\node[%s]" % ",".join(n_atr)
 
             final_x = tr_x(x)

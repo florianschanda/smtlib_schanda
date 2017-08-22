@@ -183,9 +183,9 @@ def mk_progress_slides(fd):
         for b in bench:
             if min(points) <= b[1] <= max(points) and b[1] > 0:
                 fd.write("\\node")
-                fd.write("[anchor=west,text width=1.5cm,fill=Altran1!10,")
+                fd.write("[anchor=west,text width=1.75cm,fill=Altran1!10,")
                 fd.write("rounded corners] at ")
-                fd.write("(visualization cs: x=%.3f,y=%.3f) {\\tiny %s};\n" %
+                fd.write("(visualization cs: x=%.3f,y=%.3f) {\\fontsize{5}{5}\\selectfont %s};\n" %
                          (float(len(data) - 1) + 0.1,
                           b[1],
                           mk_solver_name(b[0])))
