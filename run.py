@@ -190,7 +190,8 @@ def main():
                         tasks.append(t)
                 elif ".smt2_" in f:
                     assert os.path.exists(os.path.join(path,
-                                                       f.rsplit("_", 1)[0]))
+                                                       f.split(".smt2_")[0]
+                                                       + ".smt2"))
 
     if len(tasks) == 0:
         print "Results for %s (%s) already exist. Use --force to recreate." %\
