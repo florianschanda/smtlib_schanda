@@ -326,6 +326,12 @@ def mk_csf_slides(fd):
         "fp.to.sbv",
         "fp.from.ubv",
         "fp.to.ubv",
+        "fp.isFinite",
+        "fp.isIntegral",
+        "fp.from.int",
+        "fp.to.int",
+        "fp.nextUp",
+        "fp.nextDown",
     ]
     ORDER = [x for x in ORDER if x in subcats] # robustness
     assert set(ORDER) == set(subcats)
@@ -334,6 +340,8 @@ def mk_csf_slides(fd):
         "fp.abs"         : "$abs$",
         "fp.sqrt"        : "$\\surd$",
         "fp.neg"         : "unary $-$",
+        "fp.nextUp"      : "$nextUp$",
+        "fp.nextDown"    : "$nextDown$",
 
         "fp.add"         : "$+$",
         "fp.sub"         : "$-$",
@@ -359,6 +367,8 @@ def mk_csf_slides(fd):
         "fp.isNaN"       : "$isNaN$",
         "fp.isNegative"  : "$isNegative$",
         "fp.isPositive"  : "$isPositive$",
+        "fp.isFinite"    : "$isFinite$",
+        "fp.isIntegral"  : "$\in \\mathbb{Z}$",
 
         "fp.min"         : "$min$",
         "fp.max"         : "$max$",
@@ -369,10 +379,12 @@ def mk_csf_slides(fd):
         "fp.from.sbv"    : "SBV $\\rightarrow \\mathbb{F}$",
         "fp.from.ubv"    : "UBV $\\rightarrow \\mathbb{F}$",
         "fp.from.real"   : "$\\mathbb{R} \\rightarrow \\mathbb{F}$",
+        "fp.from.int"    : "$\\mathbb{Z} \\rightarrow \\mathbb{F}$",
 
-        "fp.to.real"     : "$\\mathbb{F} \\rightarrow \\mathbb{Q}$",
         "fp.to.sbv"      : "$\\mathbb{F} \\rightarrow$ SBV",
         "fp.to.ubv"      : "$\\mathbb{F} \\rightarrow$ UBV",
+        "fp.to.real"     : "$\\mathbb{F} \\rightarrow \\mathbb{R}$",
+        "fp.to.int"      : "$\\mathbb{F} \\rightarrow \\mathbb{Z}$",
     }
 
     fd.write("\\subsection{Critical Success Factors}\n")
