@@ -116,11 +116,20 @@ def create_report(prover_kind, prover_bin):
         if len(tmp) > 0:
             fd.write("\n# Errors\n")
             def s(a, b):
-                tmp = cmp(a[1], b[1])
-                if tmp == 0:
-                    return cmp(a[0], b[0])
-                else:
+                conv_err_left = ("FLOATINGPOINT_TO_REAL_TOTAL" in a[1] or
+                                 "to_fp" in a[1])
+                conv_err_right = ("FLOATINGPOINT_TO_REAL_TOTAL" in b[1] or
+                                  "to_fp" in b[1])
+                tmp = cmp(conv_err_left, conv_err_right)
+                if tmp != 0:
                     return tmp
+
+                tmp = cmp(a[1], b[1])
+                if tmp != 0:
+                    return tmp
+
+                return cmp(a[0], b[0])
+
             for bm, comment in sorted(tmp, cmp=s):
                 if not bm.startswith("sha<"):
                     fd.write("## %s\n" % bm)
