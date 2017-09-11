@@ -66,6 +66,11 @@ to Wintersteiger's SMTLIB benchmarks, but they seem to cover more areas
 
 All of these are automatically annotated with SAT or UNSAT.
 
+### random_ext
+Same as random, but for the proposed FP extensions: to/from integer
+conversions, nextUp and nextDown, and isFinite and isIntegral
+predicates.
+
 ### industrial_1
 We are happy to release these SMTLIB benchmarks under the GPL v3. They
 should represent the kind of real-world floating point verification
