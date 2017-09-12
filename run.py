@@ -144,6 +144,7 @@ def main():
         bench_dirs.append("crafted/QF_FPBV")
         bench_dirs.append("crafted/QF_FPLRA")
         bench_dirs.append("random")
+        bench_dirs.append("random_ext")
     if options.suite in ("all", "qf_fp", "fp"):
         bench_dirs.append("griggio")
         bench_dirs.append("wintersteiger")
